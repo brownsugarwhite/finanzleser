@@ -52,7 +52,9 @@ export type RechnerTyp = "steuer" | "brutto_netto" | "festgeld" | "tagesgeld";
 export interface RechnerACF {
   rechnerTyp: RechnerTyp;
   rechnerBeschreibung?: string;
+  rechnerKonfiguration?: string; // JSON-String mit Berechnungslogik und Parametern
   rechnerIcon?: { sourceUrl: string };
+  rechnerKategorie?: { name: string; slug: string };
 }
 
 export interface Rechner {

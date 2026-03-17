@@ -155,6 +155,9 @@ GSAP:       gsap.from(".card", { y: 40, opacity: 0, duration: 0.6, stagger: 0.1,
   gsapConfig.ts → Zentrale GSAP-Initialisierung
 ```
 
+> **Hinweis Tailwind v4:** Keine `tailwind.config.ts` – alle Tokens und Utilities
+> direkt in `app/globals.css` via `@theme` und `@utility`.
+
 ---
 
 ## 🗺️ URL-Struktur
@@ -344,8 +347,9 @@ Jede Beitragsseite hat ein automatisches TOC:
 
 ### 🔄 Phase 2: Design & Frontend (AKTUELL)
 Reihenfolge:
-1. Design Tokens in Figma fertigstellen
-2. Navigation/Menü
+1. ✅ Next.js Projekt-Setup (Framework, Dependencies, Ordnerstruktur, GraphQL, Types)
+2. Design Tokens aus Figma → globals.css
+3. Navigation/Menü
 3. Hero Section
 4. Kategorie-Slider (Apple-Style, GSAP)
 5. Beitrags-Cards
