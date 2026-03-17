@@ -1,1 +1,26 @@
 backup/
+
+# Next.js
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Env files
+.env*.local
+
+# Build
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# Vercel / Netlify
+.vercel
+.netlify
