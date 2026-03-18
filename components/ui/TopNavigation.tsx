@@ -68,7 +68,7 @@ const ITEMS_ROW: React.CSSProperties = {
 /* ── Helpers ────────────────────────────────────── */
 
 const Spark = () => (
-  <Image src="/icons/nav-spark.svg" alt="" width={12} height={12} aria-hidden />
+  <Image src="/icons/nav-spark.svg" alt="" width={12} height={12} aria-hidden style={{ pointerEvents: "none" }} />
 );
 
 const blobRadius = (h: number) => `${Math.max(PILL_R, h / 2)}px`;
@@ -86,6 +86,8 @@ export default function TopNavigation() {
   const lensRef = useRef<HTMLDivElement>(null);
   const megaRef = useRef<HTMLDivElement>(null);
   const megaTitleRef = useRef<HTMLHeadingElement>(null);
+  const btnRefs = useRef<HTMLButtonElement[]>([]);
+  const lastHoveredLabel = useRef("");
 
   const pillVisible = useRef(false);
   const menuOpen = useRef(false);
@@ -345,11 +347,47 @@ export default function TopNavigation() {
     waterdropTo(x, w);
   };
 
-  const handleButtonLeave = (e: React.MouseEvent) => {
-    if (!menuOpen.current) return;
-    const related = e.relatedTarget as HTMLElement | null;
-    if (related?.closest("button") && containerRef.current?.contains(related)) return;
-    snapBackToActive();
+  // When mouse is in a gap between buttons, find which side of the spark midpoint we're on
+  const handleContainerMove = (e: React.MouseEvent) => {
+    if (!containerRef.current || !pillVisible.current) return;
+    if ((e.target as HTMLElement).closest("button")) return;
+
+    const mouseX = e.clientX;
+    const btns = btnRefs.current.filter(Boolean);
+    if (btns.length === 0) return;
+
+    // Check if mouse is before first button or after last button → snap back
+    const firstRect = btns[0].getBoundingClientRect();
+    const lastRect = btns[btns.length - 1].getBoundingClientRect();
+    if (mouseX < firstRect.left || mouseX > lastRect.right) {
+      if (menuOpen.current) {
+        if (lastHoveredLabel.current !== activeLabel.current) {
+          lastHoveredLabel.current = activeLabel.current;
+          snapBackToActive();
+        }
+      }
+      return;
+    }
+
+    // Find the button whose zone we're in (split at the midpoint between adjacent buttons)
+    for (let i = 0; i < btns.length; i++) {
+      const rect = btns[i].getBoundingClientRect();
+      let zoneEnd = rect.right;
+
+      if (i < btns.length - 1) {
+        const nextRect = btns[i + 1].getBoundingClientRect();
+        zoneEnd = (rect.right + nextRect.left) / 2;
+      }
+
+      if (mouseX <= zoneEnd || i === btns.length - 1) {
+        const label = btns[i].textContent || "";
+        if (label !== lastHoveredLabel.current) {
+          lastHoveredLabel.current = label;
+          movePillTo(btns[i], label);
+        }
+        return;
+      }
+    }
   };
 
   const hidePill = () => {
@@ -409,6 +447,7 @@ export default function TopNavigation() {
       >
         <div
           ref={containerRef}
+          onMouseMove={handleContainerMove}
           onMouseLeave={hidePill}
           style={{
             position: "relative", width: "100%", maxWidth: "960px",
@@ -452,8 +491,8 @@ export default function TopNavigation() {
             <Fragment key={item.href}>
               <Spark />
               <button
-                onMouseEnter={(e) => movePillTo(e.currentTarget, item.label)}
-                onMouseLeave={handleButtonLeave}
+                ref={(el) => { if (el) btnRefs.current[NAV_ITEMS.indexOf(item)] = el; }}
+                onMouseEnter={(e) => { lastHoveredLabel.current = item.label; movePillTo(e.currentTarget, item.label); }}
                 onClick={(e) => handleClick(item.label, e.currentTarget)}
                 style={NAV_BTN_STYLE}
               >
