@@ -442,4 +442,12 @@ JSON-Datei direkt in acf-json/."
 
 ---
 
+## 📂 Dokumentation
+
+Weitere Dokumente liegen in `/docs/`:
+- `docs/Projektplan_Finanzleser_Relaunch.md` – Vollständiger Projektplan
+- `docs/URL_INVENTAR.md` – URL-Inventar aus Sitemap (547 URLs, Stand März 2026)
+
+---
+
 *Zuletzt aktualisiert: März 2026 – Phase 1 abgeschlossen*
