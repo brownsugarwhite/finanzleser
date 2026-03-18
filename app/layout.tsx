@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
@@ -15,6 +15,10 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: "finanzleser.de – Steuern, Finanzen, Versicherungen",
   description: "Ratgeber, Rechner und Vergleiche zu Steuern, Geldanlage und Versicherungen.",
@@ -27,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
-      <body className="antialiased">
+<body className="antialiased">
         <ProgressiveBlur height={120} color="255,255,255" />
         {children}
       </body>

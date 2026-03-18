@@ -17,14 +17,14 @@ const layers = [
 export default function ProgressiveBlur({ height = 120, color = "255,255,255" }: Props) {
   return (
     <div
+      className="progressive-blur"
       style={{
         position: "fixed",
-        top: 0,
         left: 0,
         right: 0,
-        height: `${height}px`,
         zIndex: 50,
         pointerEvents: "none",
+        ["--blur-height" as string]: `${height}px`,
       }}
     >
       {/* Blur layers – from softest (full height) to sharpest (top only) */}
