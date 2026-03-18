@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 
 const outfit = Outfit({
@@ -34,6 +35,8 @@ export default function RootLayout({
 <body className="antialiased">
         <ProgressiveBlur height={120} color="255,255,255" />
         {children}
+        <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
+        <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />
       </body>
     </html>
   );

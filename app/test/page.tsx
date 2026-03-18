@@ -1,4 +1,6 @@
 import { Merriweather, Open_Sans } from "next/font/google";
+import TopNavigation from "@/components/ui/TopNavigation";
+import Spacer from "@/components/ui/Spacer";
 
 const merriweather = Merriweather({
   weight: ["700"],
@@ -15,6 +17,8 @@ const openSans = Open_Sans({
 export default function TestPage() {
   return (
     <div className={`${merriweather.variable} ${openSans.variable}`} style={{ background: "#fff" }}>
+      <TopNavigation />
+      <Spacer />
       <div style={{
         maxWidth: "960px",
         margin: "0 auto",
