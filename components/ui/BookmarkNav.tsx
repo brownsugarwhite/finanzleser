@@ -17,10 +17,11 @@ const BTN_RADIUS = 15;
 const BOOKMARK_H = 50;
 const BURGER_LINE_W = 20;
 const BURGER_GAP = 5;
-const SEARCH_W = 280;
+const SEARCH_W = 270;
+const CLOSE_BTN = 28;
+const CLOSE_GAP = 10;
 const GLASS_H = 70;
-const GLASS_R = 23;
-const REST_TOP = (BOOKMARK_H - BTN_SIZE) / 2;
+const GLASS_R = 30;
 
 const GLASS_STYLE = {
   background: "rgba(255,255,255,0.01)",
@@ -44,11 +45,13 @@ export default function BookmarkNav() {
   const lupeRef = useRef<HTMLButtonElement>(null);
   const searchPillRef = useRef<HTMLDivElement>(null);
   const searchTextRef = useRef<HTMLSpanElement>(null);
+  const searchInnerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const burgerVisible = useRef(false);
   const searchOpen = useRef(false);
   const bodyDefaultW = useRef(0);
+  const innerStartX = useRef(0);
 
   /* ── Burger reveal on scroll ── */
 
@@ -113,95 +116,100 @@ export default function BookmarkNav() {
     const lupe = lupeRef.current;
     if (!pill || !body || !lupe) return;
 
-    // Calculate lupe position relative to body
+    const FULL_PILL_W = SEARCH_W + CLOSE_GAP + CLOSE_BTN;
+    const X_OFFSET = CLOSE_BTN + CLOSE_GAP; // how far pill extends right to reveal X
+
+    // Calculate pill's starting right from the actual lupe button position
     const bodyRect = body.getBoundingClientRect();
     const lupeRect = lupe.getBoundingClientRect();
-    // Align pill so its inner lupe icon lands exactly on the real lupe icon
-    // Real lupe: icon centered in 36px button → center at lupeRect.right - 18px from body right
-    // Pill lupe: icon centered in 36px button, inside paddingRight:4 → center at pillRight + 4 + 18 from body right
-    // Match centers: pillRight + 22 = bodyRight - lupeCenter → pillRight = bodyRight - lupeCenter - 22
-    const lupeCenterFromRight = bodyRect.right - (lupeRect.left + lupeRect.width / 2);
-    const pillLupeCenterOffset = 4 + BTN_SIZE / 2; // paddingRight + half button
-    const lupeRight = lupeCenterFromRight - pillLupeCenterOffset;
-    const lupeTop = lupeRect.top - bodyRect.top;
-    const PILL_PAD_RIGHT = 25; // space from body right edge (matches paddingRight)
+    // Pill right = distance from body's right edge to lupe button's right edge
+    const PILL_START_RIGHT = bodyRect.right - lupeRect.right;
+    const PILL_END_RIGHT = Math.max(15, PILL_START_RIGHT - X_OFFSET - 10);
 
-    // Store body default width for restore
     bodyDefaultW.current = body.offsetWidth;
 
-    // Start: glass pill at lupe's exact position
     gsap.set(pill, {
-      display: "flex",
-      position: "absolute",
-      right: lupeRight,
-      top: lupeTop,
+      display: "block",
+      right: PILL_START_RIGHT,
+      top: (BOOKMARK_H - BTN_SIZE) / 2,
       width: BTN_SIZE,
       height: BTN_SIZE,
-      borderRadius: `${BTN_RADIUS}px`,
+      borderRadius: BTN_RADIUS,
       ...GLASS_STYLE,
       opacity: 1,
-      zIndex: 3,
     });
-
-    // Hide the real lupe behind the pill
+    // Measure actual inner content width and lupe position
+    let FULL_PILL_W_ACTUAL = FULL_PILL_W;
+    if (searchInnerRef.current) {
+      gsap.set(searchInnerRef.current, { x: 0 }); // reset to measure
+      const inner = searchInnerRef.current;
+      FULL_PILL_W_ACTUAL = inner.offsetWidth;
+      const innerLupe = inner.querySelectorAll("button")[0]; // first button = lupe
+      const lupeLeftInInner = innerLupe.offsetLeft;
+      innerStartX.current = -lupeLeftInInner;
+      gsap.set(inner, { x: innerStartX.current });
+    }
     gsap.set(lupe, { opacity: 0 });
 
     const tl = gsap.timeline();
 
-    // Phase 1: Width grows to 80%
+    // Width + right + inner: smooth and calm
     tl.to(pill, {
-      width: SEARCH_W * 0.8,
-      right: PILL_PAD_RIGHT,
-      borderRadius: `${GLASS_R}px`,
-      duration: 1.8,
-      ease: "power2.in",
+      width: FULL_PILL_W_ACTUAL,
+      right: PILL_END_RIGHT,
+      duration: 0.8,
+      ease: "back.out(1)",
     });
+    tl.to(searchInnerRef.current, {
+      x: 0,
+      duration: 0.8,
+      ease: "back.out(1)",
+    }, "<");
 
-    // Height reaches 70px faster than width
+    // Height: peaks at 70px early, holds, settles gently
     tl.to(pill, {
       height: GLASS_H,
-      top: -(GLASS_H - BOOKMARK_H) / 2,
-      duration: 0.8,
-      ease: "power2.inOut",
+      top: (BOOKMARK_H - GLASS_H) / 2,
+      borderRadius: `${GLASS_R}px`,
+      duration: 0.15,
+      ease: "power2.out",
     }, 0);
-
-    // Phase 2: Settle to 100% width + 36px height with bouncy easeInOut
     tl.to(pill, {
-      width: SEARCH_W,
       height: BTN_SIZE,
-      top: REST_TOP,
+      top: (BOOKMARK_H - BTN_SIZE) / 2,
       borderRadius: `${BTN_RADIUS}px`,
-      duration: 1.2,
-      ease: "back.out(2)",
-    });
+      duration: 0.45,
+      ease: "power3.out",
+    }, 0.35);
 
-    // Body expands across the whole animation
+    // Body expands in sync
     tl.to(body, {
-      width: SEARCH_W + PILL_PAD_RIGHT + 10,
-      duration: 3,
-      ease: "power2.inOut",
+      width: FULL_PILL_W_ACTUAL + PILL_END_RIGHT,
+      duration: 0.8,
+      ease: "back.out(1)",
     }, 0);
 
-    // Glass → green (starts when settle begins)
+    // Glass → green
     tl.to(pill, {
       background: COLORS.primaryLight,
       backdropFilter: "blur(0px)",
       WebkitBackdropFilter: "blur(0px)",
       outline: "1px solid transparent",
       boxShadow: "none",
-      duration: 1,
+      duration: 0.3,
       ease: "power2.out",
       onComplete: () => searchInputRef.current?.focus(),
-    }, 1.8);
+    }, 0.45);
 
-    // Text fades in during glass → green transition
+    // Text fades in
     if (searchTextRef.current) {
       tl.to(searchTextRef.current, {
-        opacity: 1,
-        duration: 0.8,
+        opacity: 0.65,
+        duration: 0.25,
         ease: "power2.out",
-      }, 1.6);
+      }, 0.35);
     }
+
   }, []);
 
   const closeSearch = useCallback(() => {
@@ -215,9 +223,14 @@ export default function BookmarkNav() {
     // Restore buttons at correct sizes (invisible) FIRST so measurements are correct
     if (finanzToolsRef.current) gsap.set(finanzToolsRef.current, { opacity: 0 });
     if (lupeRef.current) gsap.set(lupeRef.current, { opacity: 0 });
-    if (burgerWrapRef.current && burgerVisible.current) {
-      gsap.set(burgerWrapRef.current, { width: BTN_SIZE, opacity: 0 });
-      burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
+    if (burgerWrapRef.current) {
+      if (burgerVisible.current) {
+        gsap.set(burgerWrapRef.current, { width: BTN_SIZE, opacity: 0 });
+        burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
+      } else {
+        gsap.set(burgerWrapRef.current, { width: 0, opacity: 0 });
+        burgerLinesRef.current.forEach((line) => gsap.set(line, { width: 0 }));
+      }
     }
 
     // Measure target body width and lupe position with buttons in place
@@ -226,63 +239,76 @@ export default function BookmarkNav() {
     const targetWidth = body.offsetWidth;
     body.style.width = `${currentWidth}px`;
 
-    const bodyRect = body.getBoundingClientRect();
-    const lupeRect = lupeRef.current?.getBoundingClientRect();
-    const lupeCenterFromRight = lupeRect ? bodyRect.right - (lupeRect.left + lupeRect.width / 2) : 25;
-    const pillLupeCenterOffset = 4 + BTN_SIZE / 2;
-    const lupeRight = lupeCenterFromRight - pillLupeCenterOffset;
+    const ISX = innerStartX.current;
+
+    // Calculate lupe position for collapse target
 
     const tl = gsap.timeline();
 
     // Fade out text
     if (searchTextRef.current) {
-      tl.to(searchTextRef.current, { opacity: 0, duration: 0.6, ease: "power2.in" });
+      tl.to(searchTextRef.current, { opacity: 0, duration: 0.15, ease: "power2.in" }, 0);
     }
 
     // Green → glass
     tl.to(pill, {
       ...GLASS_STYLE,
-      duration: 0.8,
+      duration: 0.2,
       ease: "power2.out",
-    }, 0.3);
+    }, 0.05);
 
-    // Phase 1: Shrink to 80% width + height pulses to 70px
+    // Height pulse during shrink
     tl.to(pill, {
-      width: SEARCH_W * 0.8,
       height: GLASS_H,
-      top: -(GLASS_H - BOOKMARK_H) / 2,
+      top: (BOOKMARK_H - GLASS_H) / 2,
       borderRadius: `${GLASS_R}px`,
-      duration: 1.2,
-      ease: "back.in(2)",
-    }, 0.8);
+      duration: 0.2,
+      ease: "power2.out",
+    }, 0.15);
 
-    // Phase 2: Collapse to lupe position (measured with burger in place)
+    // Collapse to lupe size — right follows lupe position every frame
+    // Collapse to lupe size — gentle easeInOut
+    const bodyRect = body.getBoundingClientRect();
+    const lupeRect = lupeRef.current?.getBoundingClientRect();
+    const pillTargetRight = lupeRect ? bodyRect.right - lupeRect.right : 17;
+
     tl.to(pill, {
       width: BTN_SIZE,
+      right: pillTargetRight,
       height: BTN_SIZE,
-      right: lupeRight,
-      top: REST_TOP,
+      top: (BOOKMARK_H - BTN_SIZE) / 2,
       borderRadius: `${BTN_RADIUS}px`,
-      duration: 1.8,
-      ease: "power2.out",
+      duration: 0.5,
+      ease: "power2.inOut",
       onComplete: () => {
         gsap.set(pill, { display: "none" });
         if (lupeRef.current) gsap.set(lupeRef.current, { opacity: 1 });
       },
-    });
+    }, 0.35);
+    tl.to(searchInnerRef.current, {
+      x: ISX,
+      duration: 0.5,
+      ease: "power2.inOut",
+    }, "<");
 
-    // Body shrinks to natural width across the whole animation
+    // Body shrinks in sync
     tl.to(body, {
       width: targetWidth,
-      duration: 3,
+      duration: 0.6,
       ease: "power2.inOut",
       onComplete: () => { body.style.width = ""; },
-    }, 0);
+    }, 0.1);
 
-    // Fade buttons back in early so they're visible through the glass blur
-    [finanzToolsRef.current, burgerVisible.current ? burgerWrapRef.current : null].filter(Boolean).forEach((el) => {
-      gsap.to(el, { opacity: 1, duration: 1.2, delay: 0.8, ease: "power3.out" });
+    // Fade buttons back in through the glass blur
+    const showBurger = burgerVisible.current;
+    [finanzToolsRef.current, showBurger ? burgerWrapRef.current : null].filter(Boolean).forEach((el) => {
+      gsap.to(el, { opacity: 1, duration: 0.3, delay: 0.2, ease: "power3.out" });
     });
+
+    // Reset burger opacity so showBurger works later even if burger wasn't visible now
+    if (burgerWrapRef.current && !showBurger) {
+      gsap.set(burgerWrapRef.current, { opacity: 1 });
+    }
   }, []);
 
   /* ── Hover helpers ── */
@@ -299,7 +325,7 @@ export default function BookmarkNav() {
       ref={bookmarkRef}
       style={{
         position: "fixed",
-        top: "15px",
+        top: "23px",
         right: 0,
         zIndex: 100,
         display: "flex",
@@ -333,7 +359,7 @@ export default function BookmarkNav() {
           justifyContent: "flex-end",
           gap: "4px",
           paddingLeft: 1,
-          paddingRight: 25,
+          paddingRight: 17,
           marginRight: -1,
         }}
       >
@@ -372,30 +398,28 @@ export default function BookmarkNav() {
           <Image src="/icons/lupe.svg" alt="Suche" width={18} height={18} />
         </button>
 
-        {/* Search pill — absolute, clips fixed-width inner content like a mask */}
+        {/* Search pill — absolute, overflow hidden, starts hidden */}
         <div
           ref={searchPillRef}
           style={{
             display: "none",
             position: "absolute",
-            height: BTN_SIZE,
-            width: BTN_SIZE,
             overflow: "hidden",
-            borderRadius: BTN_RADIUS,
             zIndex: 3,
           }}
         >
-          {/* Fixed-width content — never moves, pill just reveals it */}
+          {/* Inner content — absolutely positioned from left, shifted so lupe is visible */}
           <div
+            ref={searchInnerRef}
             style={{
               position: "absolute",
-              right: 0,
               top: 0,
-              width: SEARCH_W,
-              height: "100%",
+              left: 0,
               display: "flex",
               alignItems: "center",
-              gap: 7,
+              gap: 0,
+              height: "100%",
+              width: "fit-content",
               paddingLeft: 15,
               paddingRight: 4,
               whiteSpace: "nowrap",
@@ -414,19 +438,33 @@ export default function BookmarkNav() {
             >
               Finanzleser durchsuchen
             </span>
-            <div style={{ flex: 1 }} />
             <button
-              onClick={closeSearch}
               onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
               onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
               style={{
                 display: "flex", alignItems: "center", justifyContent: "center",
                 width: BTN_SIZE, height: BTN_SIZE, borderRadius: BTN_RADIUS,
                 border: "none", background: "transparent", cursor: "pointer",
-                flexShrink: 0, padding: 0,
+                flexShrink: 0, padding: 0, marginLeft: 12,
               }}
             >
               <Image src="/icons/lupe.svg" alt="Suchen" width={18} height={18} />
+            </button>
+            <button
+              onClick={closeSearch}
+              onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
+              onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
+              aria-label="Suche schließen"
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: CLOSE_BTN, height: CLOSE_BTN, borderRadius: BTN_RADIUS,
+                border: "none", background: "transparent", cursor: "pointer",
+                flexShrink: 0, padding: 0, marginLeft: 0,
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+                <path d="M1 1L13 13M1 13L13 1" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              </svg>
             </button>
           </div>
           <input
@@ -444,7 +482,7 @@ export default function BookmarkNav() {
         {/* Burger — clipping wrapper */}
         <div
           ref={burgerWrapRef}
-          style={{ width: 0, height: BTN_SIZE, overflow: "hidden", flexShrink: 0 }}
+          style={{ width: 0, height: BTN_SIZE, overflow: "hidden", flexShrink: 0, marginRight: -2 }}
         >
           <div
             ref={burgerRef}

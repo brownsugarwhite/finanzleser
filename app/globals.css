@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* ── Hide native scrollbar, custom overlay replaces it ── */
+html {
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─────────────────────────────────────────────
    Design Tokens – werden später aus Figma befüllt
    ───────────────────────────────────────────── */

@@ -3,6 +3,7 @@ import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
+import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
 <body className="antialiased">
         <ProgressiveBlur height={120} color="255,255,255" />
+        <OverlayScrollbar />
         {children}
         <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
         <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />
