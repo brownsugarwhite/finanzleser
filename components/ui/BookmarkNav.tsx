@@ -18,8 +18,6 @@ const BOOKMARK_H = 50;
 const BURGER_LINE_W = 20;
 const BURGER_GAP = 5;
 const SEARCH_W = 270;
-const CLOSE_BTN = 28;
-const CLOSE_GAP = 10;
 const GLASS_H = 70;
 const GLASS_R = 30;
 
@@ -44,7 +42,6 @@ export default function BookmarkNav() {
   const finanzToolsRef = useRef<HTMLButtonElement>(null);
   const lupeRef = useRef<HTMLButtonElement>(null);
   const searchPillRef = useRef<HTMLDivElement>(null);
-  const searchTextRef = useRef<HTMLSpanElement>(null);
   const searchInnerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -116,15 +113,11 @@ export default function BookmarkNav() {
     const lupe = lupeRef.current;
     if (!pill || !body || !lupe) return;
 
-    const FULL_PILL_W = SEARCH_W + CLOSE_GAP + CLOSE_BTN;
-    const X_OFFSET = CLOSE_BTN + CLOSE_GAP; // how far pill extends right to reveal X
-
     // Calculate pill's starting right from the actual lupe button position
     const bodyRect = body.getBoundingClientRect();
     const lupeRect = lupe.getBoundingClientRect();
-    // Pill right = distance from body's right edge to lupe button's right edge
     const PILL_START_RIGHT = bodyRect.right - lupeRect.right;
-    const PILL_END_RIGHT = Math.max(15, PILL_START_RIGHT - X_OFFSET - 10);
+    const PILL_END_RIGHT = 15;
 
     bodyDefaultW.current = body.offsetWidth;
 
@@ -139,7 +132,7 @@ export default function BookmarkNav() {
       opacity: 1,
     });
     // Measure actual inner content width and lupe position
-    let FULL_PILL_W_ACTUAL = FULL_PILL_W;
+    let FULL_PILL_W_ACTUAL = SEARCH_W;
     if (searchInnerRef.current) {
       gsap.set(searchInnerRef.current, { x: 0 }); // reset to measure
       const inner = searchInnerRef.current;
@@ -201,13 +194,13 @@ export default function BookmarkNav() {
       onComplete: () => searchInputRef.current?.focus(),
     }, 0.45);
 
-    // Text fades in
-    if (searchTextRef.current) {
-      tl.to(searchTextRef.current, {
-        opacity: 0.65,
+    // Input text fades in with color change
+    if (searchInputRef.current) {
+      tl.to(searchInputRef.current, {
+        color: "rgba(255,255,255,1)",
         duration: 0.25,
         ease: "power2.out",
-      }, 0.35);
+      }, 0.55);
     }
 
   }, []);
@@ -246,8 +239,8 @@ export default function BookmarkNav() {
     const tl = gsap.timeline();
 
     // Fade out text
-    if (searchTextRef.current) {
-      tl.to(searchTextRef.current, { opacity: 0, duration: 0.15, ease: "power2.in" }, 0);
+    if (searchInputRef.current) {
+      tl.to(searchInputRef.current, { color: "rgba(255,255,255,0)", duration: 0.15, ease: "power2.in" }, 0);
     }
 
     // Green → glass
@@ -311,6 +304,54 @@ export default function BookmarkNav() {
     }
   }, []);
 
+  /* ── Close search on click outside ── */
+
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!searchOpen.current) return;
+      const target = e.target as HTMLElement;
+      if (searchPillRef.current?.contains(target)) return;
+      if (lupeRef.current?.contains(target)) return;
+      if (bookmarkRef.current?.contains(target)) return;
+      closeSearch();
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [closeSearch]);
+
+  /* ── Burger to X animation ── */
+
+  const burgerIsX = useRef(false);
+
+  const toggleBurgerX = () => {
+    if (!burgerRef.current) return;
+    const lines = burgerLinesRef.current;
+    if (lines.length < 3) return;
+    const [top, mid, bot] = lines;
+
+    if (!burgerIsX.current) {
+      burgerIsX.current = true;
+      const tl = gsap.timeline();
+      // Move top and bottom to center
+      tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
+      tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
+      tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
+      // Rotate to X
+      tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
+      tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
+    } else {
+      burgerIsX.current = false;
+      const tl = gsap.timeline();
+      // Rotate back
+      tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+      tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+      // Move back
+      tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+      tl.to(mid, { opacity: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, 0.15);
+      tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+    }
+  };
+
   /* ── Hover helpers ── */
 
   const onBtnEnter = (el: HTMLElement) => gsap.to(el, { background: COLORS.hoverBg, duration: 0.15 });
@@ -345,6 +386,19 @@ export default function BookmarkNav() {
           style={{ display: "block", width: 40, height: "100%" }}
         />
       </div>
+
+      {/* Blur rectangle behind the gradient body */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        width: "100%",
+        height: "100%",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        pointerEvents: "none",
+        zIndex: -1,
+      }} />
 
       {/* Green gradient body */}
       <div
@@ -425,20 +479,27 @@ export default function BookmarkNav() {
               whiteSpace: "nowrap",
             }}
           >
-            <span
-              ref={searchTextRef}
+            <input
+              ref={searchInputRef}
+              className="search-input"
+              type="text"
+              placeholder="Finanzleser durchsuchen"
+              onKeyDown={(e) => { if (e.key === "Escape") closeSearch(); }}
               style={{
                 fontFamily: "'Open Sans', sans-serif",
                 fontSize: "18px",
                 fontWeight: 400,
-                color: "white",
+                color: "rgba(255,255,255,0)",
                 flexShrink: 0,
-                opacity: 0,
+                border: "none",
+                background: "transparent",
+                outline: "none",
+                width: 230,
+                caretColor: "white",
               }}
-            >
-              Finanzleser durchsuchen
-            </span>
+            />
             <button
+              onClick={closeSearch}
               onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
               onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
               style={{
@@ -450,33 +511,7 @@ export default function BookmarkNav() {
             >
               <Image src="/icons/lupe.svg" alt="Suchen" width={18} height={18} />
             </button>
-            <button
-              onClick={closeSearch}
-              onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
-              onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
-              aria-label="Suche schließen"
-              style={{
-                display: "flex", alignItems: "center", justifyContent: "center",
-                width: CLOSE_BTN, height: CLOSE_BTN, borderRadius: BTN_RADIUS,
-                border: "none", background: "transparent", cursor: "pointer",
-                flexShrink: 0, padding: 0, marginLeft: 0,
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-                <path d="M1 1L13 13M1 13L13 1" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </button>
           </div>
-          <input
-            ref={searchInputRef}
-            type="text"
-            onKeyDown={(e) => { if (e.key === "Escape") closeSearch(); }}
-            style={{
-              position: "absolute",
-              width: 0, height: 0, opacity: 0,
-              border: "none", background: "transparent",
-            }}
-          />
         </div>
 
         {/* Burger — clipping wrapper */}
@@ -492,6 +527,7 @@ export default function BookmarkNav() {
               borderRadius: BTN_RADIUS, cursor: "pointer", background: "transparent",
               gap: BURGER_GAP, paddingRight: (BTN_SIZE - BURGER_LINE_W) / 2,
             }}
+            onClick={toggleBurgerX}
             onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
             onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
             onMouseDown={(e) => onBtnDown(e.currentTarget)}

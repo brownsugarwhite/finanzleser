@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ── Search input placeholder ── */
+.search-input::placeholder {
+  color: currentColor;
+  opacity: 0.6;
+}
+
 /* ── Hide native scrollbar, custom overlay replaces it ── */
 html {
   scrollbar-width: none;
