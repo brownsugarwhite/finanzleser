@@ -147,7 +147,7 @@ export default function TopNavigation() {
     if (!pageWrapper) return;
 
     Array.from(pageWrapper.children).forEach((child) => {
-      if (child instanceof HTMLElement && !child.contains(containerRef.current!) && child !== megaRef.current) {
+      if (child instanceof HTMLElement && !child.contains(containerRef.current!) && child !== megaRef.current && getComputedStyle(child).position !== "fixed") {
         const rect = child.getBoundingClientRect();
         child.style.transformOrigin =
           `${window.innerWidth / 2 - rect.left}px ${window.innerHeight / 2 - rect.top}px`;
