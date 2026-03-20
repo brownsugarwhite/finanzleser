@@ -31,7 +31,7 @@ const COLORS = {
 };
 
 const PILL_SHADOW = "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)";
-const PILL_BORDER = "rgba(255,255,255,0.2)";
+const PILL_BORDER = "rgba(255,255,255,0.5)";
 
 /* ── Styles ─────────────────────────────────────── */
 
@@ -450,7 +450,7 @@ export default function TopNavigation() {
           onMouseMove={handleContainerMove}
           onMouseLeave={hidePill}
           style={{
-            position: "relative", width: "100%",
+            position: "relative", width: "100%", maxWidth: "960px",
             overflow: "visible", ...ITEMS_ROW,
           }}
         >

@@ -23,10 +23,10 @@ const GLASS_R = 30;
 
 const GLASS_STYLE = {
   background: "rgba(255,255,255,0.01)",
-  backdropFilter: "blur(4px) saturate(120%)",
-  WebkitBackdropFilter: "blur(4px) saturate(120%)",
+  backdropFilter: "blur(3px) saturate(150%)",
+  WebkitBackdropFilter: "blur(3px) saturate(150%)",
   border: "none",
-  outline: "1px solid rgba(255,255,255,0.2)",
+  outline: "1px solid rgba(255,255,255,0.5)",
   outlineOffset: "-1px",
   boxShadow: "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)",
 };
@@ -53,40 +53,37 @@ export default function BookmarkNav() {
   /* ── Burger reveal on scroll ── */
 
   useEffect(() => {
-    const topNav = document.querySelector("nav");
-    if (!topNav) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting && !burgerVisible.current) {
-          burgerVisible.current = true;
-          showBurger();
-        } else if (entry.isIntersecting && burgerVisible.current) {
-          burgerVisible.current = false;
-          hideBurger();
-        }
-      },
-      { threshold: 0, rootMargin: "0px" }
-    );
-
-    observer.observe(topNav);
-    return () => observer.disconnect();
+    const onOut = () => {
+      if (!burgerVisible.current) {
+        burgerVisible.current = true;
+        showBurger();
+      }
+    };
+    const onIn = () => {
+      if (burgerVisible.current) {
+        burgerVisible.current = false;
+        hideBurger();
+      }
+    };
+    window.addEventListener("nav-scrolled-out", onOut);
+    window.addEventListener("nav-scrolled-in", onIn);
+    return () => {
+      window.removeEventListener("nav-scrolled-out", onOut);
+      window.removeEventListener("nav-scrolled-in", onIn);
+    };
   }, []);
 
   const showBurger = () => {
     if (!burgerWrapRef.current || searchOpen.current) return;
 
     gsap.set(burgerWrapRef.current, { width: 0 });
-    const tl = gsap.timeline();
-    tl.to(burgerWrapRef.current, {
-      width: BTN_SIZE * 1.15, duration: 0.3, ease: "power2.out",
-    }).to(burgerWrapRef.current, {
-      width: BTN_SIZE, duration: 0.4, ease: "back.out(2.5)",
+    gsap.to(burgerWrapRef.current, {
+      width: BTN_SIZE, duration: 0.5, ease: "power2.out",
     });
 
     burgerLinesRef.current.forEach((line, i) => {
       gsap.fromTo(line, { width: 0 }, {
-        width: BURGER_LINE_W, duration: 0.4, delay: 0.12 + i * 0.1, ease: "back.out(2)",
+        width: BURGER_LINE_W, duration: 0.5, delay: 0.1 + i * 0.08, ease: "power2.out",
       });
     });
   };
@@ -387,12 +384,12 @@ export default function BookmarkNav() {
         />
       </div>
 
-      {/* Blur rectangle behind the gradient body */}
+      {/* Blur rectangle behind the gradient body (not spikes) */}
       <div style={{
         position: "absolute",
         top: 0,
         right: 0,
-        width: "100%",
+        width: "calc(100% - 40px)",
         height: "100%",
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",

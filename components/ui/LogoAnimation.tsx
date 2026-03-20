@@ -47,55 +47,42 @@ export default function LogoAnimation() {
         if (!entry.isIntersecting && !isShrunk.current) {
           isShrunk.current = true;
           playLottie(anim, 0, anim.totalFrames - 1, "none");
+          window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
 
-          // Animate to fixed top-left position
           const wrapper = wrapperRef.current!;
           const rect = wrapper.getBoundingClientRect();
           const parent = wrapper.offsetParent as HTMLElement;
           const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
-          const endTop = TARGET_TOP - parentRect.top;
-          const endLeft = TARGET_LEFT - parentRect.left;
-          const startTop = rect.top - parentRect.top;
-          const startLeft = rect.left - parentRect.left;
 
           gsap.set(wrapper, {
             position: "fixed",
-            top: startTop,
-            left: startLeft,
-            x: 0,
-            y: 0,
-            zIndex: 61,
+            top: rect.top - parentRect.top,
+            left: rect.left - parentRect.left,
+            x: 0, y: 0, zIndex: 61,
           });
           gsap.to(wrapper, {
-            top: endTop,
-            left: endLeft,
+            top: TARGET_TOP - parentRect.top,
+            left: TARGET_LEFT - parentRect.left,
             duration: 0.7,
             ease: "power3.out",
           });
         } else if (entry.isIntersecting && isShrunk.current) {
           isShrunk.current = false;
           playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
+          window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
 
-          // Animate back from fixed to flow position
           const wrapper = wrapperRef.current!;
           const fixedRect = wrapper.getBoundingClientRect();
-
-          // Remove fixed to measure where it would be in flow
           gsap.set(wrapper, { clearProps: "position,top,left,x,y,zIndex" });
           const flowRect = wrapper.getBoundingClientRect();
 
-          // Offset from flow position to current fixed position
-          const offsetX = fixedRect.left - flowRect.left;
-          const offsetY = fixedRect.top - flowRect.top;
-
           gsap.fromTo(wrapper, {
-            x: offsetX,
-            y: offsetY,
+            x: fixedRect.left - flowRect.left,
+            y: fixedRect.top - flowRect.top,
           }, {
-            x: 0,
-            y: 0,
+            x: 0, y: 0,
             duration: 0.7,
-            ease: "power2.out",
+            ease: "power2.inOut",
           });
         }
       },

@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
-<body className="antialiased">
+      <body className="antialiased">
         <ProgressiveBlur height={120} color="255,255,255" />
         <OverlayScrollbar />
         <BookmarkNav />
