@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import lottie, { AnimationItem } from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
 
@@ -10,6 +11,18 @@ export default function LogoAnimation() {
   const lottieRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
   const isShrunk = useRef(false);
+  const frameProxy = useRef({ frame: 0 });
+
+  const playLottie = (anim: AnimationItem, from: number, to: number, ease = "power2.out") => {
+    gsap.killTweensOf(frameProxy.current);
+    frameProxy.current.frame = from;
+    gsap.to(frameProxy.current, {
+      frame: to,
+      duration: 0.7,
+      ease,
+      onUpdate: () => anim.goToAndStop(frameProxy.current.frame, true),
+    });
+  };
 
   useEffect(() => {
     if (!lottieRef.current) return;
@@ -30,12 +43,10 @@ export default function LogoAnimation() {
       ([entry]) => {
         if (!entry.isIntersecting && !isShrunk.current) {
           isShrunk.current = true;
-          anim.setDirection(1);
-          anim.play();
+          playLottie(anim, 0, anim.totalFrames - 1, "none");
         } else if (entry.isIntersecting && isShrunk.current) {
           isShrunk.current = false;
-          anim.setDirection(-1);
-          anim.play();
+          playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
         }
       },
       { threshold: 0, rootMargin: "0px" }
