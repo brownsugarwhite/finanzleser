@@ -19,7 +19,7 @@ export default function Spacer({ variant = "green" }: SpacerProps) {
         zIndex: 60,
         maxWidth: "960px",
         margin: "25px auto 0",
-        padding: "0 clamp(20px, 4vw, 40px)",
+        padding: 0,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>

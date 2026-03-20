@@ -14,6 +14,13 @@ export default function OverlayScrollbar() {
     const thumb = thumbRef.current;
     if (!track || !thumb) return;
 
+    // Hide on touch devices (mobile/tablet)
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      track.style.display = "none";
+      return;
+    }
+
     const TRACK_OFFSET = 85;
     const update = () => {
       const { scrollHeight, clientHeight, scrollTop } = document.documentElement;

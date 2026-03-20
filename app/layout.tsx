@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
+import BookmarkNav from "@/components/ui/BookmarkNav";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -36,6 +37,7 @@ export default function RootLayout({
 <body className="antialiased">
         <ProgressiveBlur height={120} color="255,255,255" />
         <OverlayScrollbar />
+        <BookmarkNav />
         {children}
         <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
         <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />

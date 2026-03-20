@@ -450,8 +450,7 @@ export default function TopNavigation() {
           onMouseMove={handleContainerMove}
           onMouseLeave={hidePill}
           style={{
-            position: "relative", width: "100%", maxWidth: "960px",
-            margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)",
+            position: "relative", width: "100%",
             overflow: "visible", ...ITEMS_ROW,
           }}
         >
@@ -473,7 +472,6 @@ export default function TopNavigation() {
               style={{
                 position: "absolute", top: "50%", left: 0,
                 transform: "translateY(-50%) scale(1.07)",
-                padding: "0 clamp(20px, 4vw, 40px)",
                 ...ITEMS_ROW, pointerEvents: "none",
               }}
             >
