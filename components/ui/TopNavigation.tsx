@@ -143,7 +143,11 @@ export default function TopNavigation() {
 
   const blurPageContent = (blur: boolean) => {
     const nav = containerRef.current?.closest("nav");
-    const pageWrapper = nav?.parentElement;
+    // Find the page wrapper (highest non-body ancestor)
+    let pageWrapper = nav?.parentElement;
+    while (pageWrapper?.parentElement && pageWrapper.parentElement.tagName !== "BODY") {
+      pageWrapper = pageWrapper.parentElement;
+    }
     if (!pageWrapper) return;
 
     Array.from(pageWrapper.children).forEach((child) => {
@@ -365,6 +369,8 @@ export default function TopNavigation() {
           lastHoveredLabel.current = activeLabel.current;
           snapBackToActive();
         }
+      } else {
+        hidePill();
       }
       return;
     }
@@ -433,6 +439,37 @@ export default function TopNavigation() {
       showMega(label);
     }
   };
+
+  // ── Burger menu: slide nav buttons in/out (desktop only) ──
+
+  useEffect(() => {
+    const onBurgerOpen = (e: Event) => {
+      if (window.matchMedia("(max-width: 1024px)").matches) return;
+      const label = (e as CustomEvent).detail?.label || "Finanzen";
+      showMega(label);
+      blurPageContent(true);
+    };
+
+    const onBurgerClose = () => {
+      if (window.matchMedia("(max-width: 1024px)").matches) return;
+      hideMega();
+      blurPageContent(false);
+    };
+
+    const onFixedNavClick = (e: Event) => {
+      const label = (e as CustomEvent).detail?.label;
+      if (label) showMega(label);
+    };
+
+    window.addEventListener("burger-opened", onBurgerOpen);
+    window.addEventListener("burger-closed", onBurgerClose);
+    window.addEventListener("fixed-nav-click", onFixedNavClick);
+    return () => {
+      window.removeEventListener("burger-opened", onBurgerOpen);
+      window.removeEventListener("burger-closed", onBurgerClose);
+      window.removeEventListener("fixed-nav-click", onFixedNavClick);
+    };
+  }, []);
 
   // ── Render ──
 

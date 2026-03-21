@@ -355,21 +355,19 @@ export default function BookmarkNav() {
 
     if (!burgerIsX.current) {
       burgerIsX.current = true;
+      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Finanzen" } }));
       const tl = gsap.timeline();
-      // Move top and bottom to center
       tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
       tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
       tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
-      // Rotate to X
       tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
       tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
     } else {
       burgerIsX.current = false;
+      window.dispatchEvent(new CustomEvent("burger-closed"));
       const tl = gsap.timeline();
-      // Rotate back
       tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
       tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
-      // Move back
       tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
       tl.to(mid, { opacity: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, 0.15);
       tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);

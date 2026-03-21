@@ -5,6 +5,7 @@ import Script from "next/script";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
 import BookmarkNav from "@/components/ui/BookmarkNav";
+import FixedNav from "@/components/ui/FixedNav";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <ProgressiveBlur height={120} color="255,255,255" />
         <OverlayScrollbar />
         <BookmarkNav />
+        <FixedNav />
         {children}
         <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
         <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />
