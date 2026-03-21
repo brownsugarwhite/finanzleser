@@ -23,8 +23,8 @@ const GLASS_R = 30;
 
 const GLASS_STYLE = {
   background: "rgba(255,255,255,0.01)",
-  backdropFilter: "blur(3px) saturate(150%)",
-  WebkitBackdropFilter: "blur(3px) saturate(150%)",
+  backdropFilter: "blur(3px) saturate(130%)",
+  WebkitBackdropFilter: "blur(3px) saturate(130%)",
   border: "none",
   outline: "1px solid rgba(255,255,255,0.5)",
   outlineOffset: "-1px",
@@ -53,6 +53,17 @@ export default function BookmarkNav() {
   /* ── Burger reveal on scroll ── */
 
   useEffect(() => {
+    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+
+    // Show burger immediately on mobile/tablet
+    if (isMobile()) {
+      burgerVisible.current = true;
+      if (burgerWrapRef.current) {
+        gsap.set(burgerWrapRef.current, { width: BTN_SIZE });
+        burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
+      }
+    }
+
     const onOut = () => {
       if (!burgerVisible.current) {
         burgerVisible.current = true;
@@ -60,16 +71,30 @@ export default function BookmarkNav() {
       }
     };
     const onIn = () => {
+      if (isMobile()) return; // keep burger visible on mobile
       if (burgerVisible.current) {
         burgerVisible.current = false;
         hideBurger();
       }
     };
+
+    const onResize = () => {
+      if (isMobile() && !burgerVisible.current) {
+        burgerVisible.current = true;
+        showBurger();
+      } else if (!isMobile() && burgerVisible.current && window.scrollY === 0) {
+        burgerVisible.current = false;
+        hideBurger();
+      }
+    };
+
     window.addEventListener("nav-scrolled-out", onOut);
     window.addEventListener("nav-scrolled-in", onIn);
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("nav-scrolled-out", onOut);
       window.removeEventListener("nav-scrolled-in", onIn);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 

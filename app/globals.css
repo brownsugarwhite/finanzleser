@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* ── Hide top navigation on tablet/mobile ── */
+@media (max-width: 1024px) {
+  .top-nav-wrapper {
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+    max-height: 75px;
+  }
+}
+
 /* ── Search input placeholder ── */
 .search-input::placeholder {
   color: currentColor;

@@ -42,56 +42,80 @@ export default function LogoAnimation() {
     const topNav = document.querySelector("nav");
     if (!topNav) return;
 
+    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+
+    const shrink = () => {
+      if (isShrunk.current) return;
+      isShrunk.current = true;
+      playLottie(anim, 0, anim.totalFrames - 1, "none");
+      window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
+
+      if (!isMobile()) {
+        const wrapper = wrapperRef.current!;
+        const rect = wrapper.getBoundingClientRect();
+        const parent = wrapper.offsetParent as HTMLElement;
+        const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
+
+        gsap.set(wrapper, {
+          position: "fixed",
+          top: rect.top - parentRect.top,
+          left: rect.left - parentRect.left,
+          x: 0, y: 0, zIndex: 61,
+        });
+        gsap.to(wrapper, {
+          top: TARGET_TOP - parentRect.top,
+          left: TARGET_LEFT - parentRect.left,
+          duration: 0.7,
+          ease: "power3.out",
+        });
+      }
+    };
+
+    const grow = () => {
+      if (!isShrunk.current) return;
+      isShrunk.current = false;
+      playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
+      window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
+
+      if (!isMobile()) {
+        const wrapper = wrapperRef.current!;
+        const fixedRect = wrapper.getBoundingClientRect();
+        gsap.set(wrapper, { clearProps: "position,top,left,x,y,zIndex" });
+        const flowRect = wrapper.getBoundingClientRect();
+
+        gsap.fromTo(wrapper, {
+          x: fixedRect.left - flowRect.left,
+          y: fixedRect.top - flowRect.top,
+        }, {
+          x: 0, y: 0,
+          duration: 0.7,
+          ease: "power2.inOut",
+        });
+      }
+    };
+
+    // Desktop: IntersectionObserver on nav
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting && !isShrunk.current) {
-          isShrunk.current = true;
-          playLottie(anim, 0, anim.totalFrames - 1, "none");
-          window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
-
-          const wrapper = wrapperRef.current!;
-          const rect = wrapper.getBoundingClientRect();
-          const parent = wrapper.offsetParent as HTMLElement;
-          const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
-
-          gsap.set(wrapper, {
-            position: "fixed",
-            top: rect.top - parentRect.top,
-            left: rect.left - parentRect.left,
-            x: 0, y: 0, zIndex: 61,
-          });
-          gsap.to(wrapper, {
-            top: TARGET_TOP - parentRect.top,
-            left: TARGET_LEFT - parentRect.left,
-            duration: 0.7,
-            ease: "power3.out",
-          });
-        } else if (entry.isIntersecting && isShrunk.current) {
-          isShrunk.current = false;
-          playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
-          window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
-
-          const wrapper = wrapperRef.current!;
-          const fixedRect = wrapper.getBoundingClientRect();
-          gsap.set(wrapper, { clearProps: "position,top,left,x,y,zIndex" });
-          const flowRect = wrapper.getBoundingClientRect();
-
-          gsap.fromTo(wrapper, {
-            x: fixedRect.left - flowRect.left,
-            y: fixedRect.top - flowRect.top,
-          }, {
-            x: 0, y: 0,
-            duration: 0.7,
-            ease: "power2.inOut",
-          });
-        }
+        if (isMobile()) return;
+        if (!entry.isIntersecting) shrink();
+        else grow();
       },
       { threshold: 0, rootMargin: "0px" }
     );
-
     observer.observe(topNav);
+
+    // Mobile: scroll position
+    const onScroll = () => {
+      if (!isMobile()) return;
+      if (window.scrollY > 10) shrink();
+      else grow();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
       anim.destroy();
     };
   }, []);

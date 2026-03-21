@@ -46,7 +46,7 @@ export default function TestPage() {
       </div>
 
       {/* Top navigation — same 3-column structure so 960px aligns with fixed logo */}
-      <div style={{
+      <div className="top-nav-wrapper" style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
