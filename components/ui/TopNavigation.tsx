@@ -1,7 +1,7 @@
 "use client";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
-import { Fragment, useEffect, useCallback } from "react";
+import { Fragment, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useNavPill } from "@/hooks/useNavPill";
 
@@ -33,7 +33,12 @@ const BTN_STYLE: React.CSSProperties = {
 export default function TopNavigation() {
   // ── Page content blur ──
 
+  const isBlurred = useRef(false);
+
   const blurPageContent = useCallback((blur: boolean) => {
+    if (blur && isBlurred.current) return;
+    if (!blur && !isBlurred.current) return;
+    isBlurred.current = blur;
     const nav = pill.containerRef.current?.closest("nav");
     let pageWrapper = nav?.parentElement;
     while (pageWrapper?.parentElement && pageWrapper.parentElement.tagName !== "BODY") {
@@ -43,9 +48,11 @@ export default function TopNavigation() {
 
     Array.from(pageWrapper.children).forEach((child) => {
       if (child instanceof HTMLElement && !child.contains(pill.containerRef.current!) && getComputedStyle(child).position !== "fixed") {
-        const rect = child.getBoundingClientRect();
-        child.style.transformOrigin =
-          `${window.innerWidth / 2 - rect.left}px ${window.innerHeight / 2 - rect.top}px`;
+        if (blur) {
+          const rect = child.getBoundingClientRect();
+          child.style.transformOrigin =
+            `${window.innerWidth / 2 - rect.left}px ${window.innerHeight / 2 - rect.top}px`;
+        }
         gsap.to(child, {
           scale: blur ? 0.9 : 1,
           filter: blur ? "blur(13px)" : "blur(0px)",
