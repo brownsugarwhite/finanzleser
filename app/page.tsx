@@ -54,17 +54,45 @@ export default function LandingPage() {
     items: NAV_ITEMS,
     hasLens: true,
     onActivate: (label) => {
-      // Scroll nav to top position (same as other pages)
       const navEl = document.querySelector("nav");
-      if (navEl) {
-        const navRect = navEl.getBoundingClientRect();
-        const targetTop = 23;
-        const scrollTarget = window.scrollY + navRect.top - targetTop;
-        gsap.to(window, {
-          scrollTo: { y: scrollTarget },
-          duration: 0.6,
-          ease: "power3.out",
-        });
+      const navContainer = navEl?.querySelector("div") as HTMLElement;
+      if (!navEl || !navContainer) return;
+
+      // Calculate where the nav should end up (left-aligned like other pages)
+      const navRect = navContainer.getBoundingClientRect();
+      const viewportCenter = window.innerWidth / 2;
+      const navCenter = navRect.left + navRect.width / 2;
+      // Target: left edge at clamp(20px, 4vw, 40px) inside the 960px column
+      // The 960px column starts at (viewport - 960) / 2
+      const colLeft = (window.innerWidth - 960) / 2;
+      const targetNavLeft = colLeft + 40; // 40px padding
+      const currentNavLeft = navRect.left;
+      const shiftX = targetNavLeft - currentNavLeft;
+
+      // Hide trailing spark
+      const trailingSpark = navContainer.lastElementChild as HTMLElement;
+
+      const targetTop = 23;
+      const scrollTarget = window.scrollY + navEl.getBoundingClientRect().top - targetTop;
+
+      // First scroll up, then shift left
+      const tl = gsap.timeline();
+      tl.to(window, {
+        scrollTo: { y: scrollTarget },
+        duration: 0.5,
+        ease: "power3.out",
+      }, 0);
+      tl.to(navContainer, {
+        x: shiftX,
+        duration: 0.5,
+        ease: "power3.out",
+      }, 0.15);
+      if (trailingSpark) {
+        tl.to(trailingSpark, {
+          opacity: 0, width: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        }, 0.15);
       }
       window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
       blurContent(true);
@@ -139,6 +167,16 @@ export default function LandingPage() {
     const onMegaClosed = () => {
       pill.closeMenu();
       blurContent(false);
+      // Reset nav position and trailing spark
+      const navEl = document.querySelector("nav");
+      const navContainer = navEl?.querySelector("div") as HTMLElement;
+      if (navContainer) {
+        gsap.to(navContainer, { x: 0, duration: 0.4, ease: "power3.out" });
+        const trailingSpark = navContainer.lastElementChild as HTMLElement;
+        if (trailingSpark) {
+          gsap.to(trailingSpark, { opacity: 1, width: 12, duration: 0.3, ease: "power2.out" });
+        }
+      }
     };
     const onBurgerOpen = () => blurContent(true);
     const onBurgerClose = () => blurContent(false);
