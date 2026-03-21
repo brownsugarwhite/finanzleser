@@ -51,7 +51,7 @@ export default function ProgressiveBlur({ height = 120, color = "255,255,255" }:
         style={{
           position: "absolute",
           inset: 0,
-          background: `linear-gradient(to bottom, rgba(${color},0.7) 0%, rgba(${color},0) 100%)`,
+          background: `linear-gradient(to bottom, rgba(${color},0.9) 0%, rgba(${color},0) 100%)`,
         }}
       />
     </div>

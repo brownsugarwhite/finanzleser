@@ -6,6 +6,7 @@ import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
 import BookmarkNav from "@/components/ui/BookmarkNav";
 import FixedNav from "@/components/ui/FixedNav";
+import MegaMenu from "@/components/ui/MegaMenu";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -36,10 +37,11 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
       <body className="antialiased">
-        <ProgressiveBlur height={120} color="255,255,255" />
+        <ProgressiveBlur height={150} color="255,255,255" />
         <OverlayScrollbar />
         <BookmarkNav />
         <FixedNav />
+        <MegaMenu />
         {children}
         <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
         <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />

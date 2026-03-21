@@ -374,6 +374,26 @@ export default function BookmarkNav() {
     }
   };
 
+  const resetBurger = () => {
+    if (!burgerIsX.current) return;
+    burgerIsX.current = false;
+    const lines = burgerLinesRef.current;
+    if (lines.length < 3) return;
+    const [top, mid, bot] = lines;
+    const tl = gsap.timeline();
+    tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+    tl.to(mid, { opacity: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, 0.15);
+    tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+  };
+
+  useEffect(() => {
+    const onMegaClosed = () => resetBurger();
+    window.addEventListener("mega-closed", onMegaClosed);
+    return () => window.removeEventListener("mega-closed", onMegaClosed);
+  }, []);
+
   /* ── Hover helpers ── */
 
   const onBtnEnter = (el: HTMLElement) => gsap.to(el, { background: COLORS.hoverBg, duration: 0.15 });
