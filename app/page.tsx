@@ -7,6 +7,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 import { useNavPill } from "@/hooks/useNavPill";
+import { NAV_ITEMS } from "@/lib/navItems";
 import Spacer from "@/components/ui/Spacer";
 import lottie from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
@@ -17,14 +18,6 @@ const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-nav",
 });
-
-const NAV_ITEMS = [
-  { label: "Finanzen", href: "/finanzen" },
-  { label: "Versicherungen", href: "/versicherungen" },
-  { label: "Steuern", href: "/steuern" },
-  { label: "Recht", href: "/recht" },
-  { label: "Finanztools", href: "/finanztools" },
-];
 
 const Spark = () => (
   <Image src="/icons/nav-spark.svg" alt="" width={12} height={12} aria-hidden style={{ pointerEvents: "none" }} />

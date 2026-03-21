@@ -4,20 +4,13 @@ import Image from "next/image";
 import { Fragment, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useNavPill } from "@/hooks/useNavPill";
+import { NAV_ITEMS } from "@/lib/navItems";
 
 const merriweather = Merriweather({
   weight: ["700"],
   subsets: ["latin"],
   variable: "--font-nav",
 });
-
-const NAV_ITEMS = [
-  { label: "Finanzen", href: "/finanzen" },
-  { label: "Versicherungen", href: "/versicherungen" },
-  { label: "Steuern", href: "/steuern" },
-  { label: "Recht", href: "/recht" },
-  { label: "Finanztools", href: "/finanztools" },
-];
 
 const Spark = () => (
   <Image src="/icons/nav-spark.svg" alt="" width={12} height={12} aria-hidden style={{ pointerEvents: "none" }} />

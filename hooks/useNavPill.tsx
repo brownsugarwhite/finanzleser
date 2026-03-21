@@ -28,10 +28,7 @@ const pillPos = (container: DOMRect, btn: DOMRect) => ({
 
 /* ── Types ──────────────────────────────────────── */
 
-export type NavItem = {
-  label: string;
-  href: string;
-};
+import type { NavItem } from "@/lib/navItems";
 
 export type NavPillOptions = {
   items: NavItem[];

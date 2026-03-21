@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
 import BookmarkNav from "@/components/ui/BookmarkNav";
@@ -45,8 +44,6 @@ export default function RootLayout({
         <LogoAnimation />
         <MegaMenu />
         {children}
-        <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />
-        <Script src="/scripts/liquidGL.js" strategy="afterInteractive" />
       </body>
     </html>
   );
