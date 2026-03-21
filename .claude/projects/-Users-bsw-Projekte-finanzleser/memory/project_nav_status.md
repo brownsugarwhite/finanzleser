@@ -1,27 +1,35 @@
 ---
-name: TopNavigation current state
-description: Glass pill nav with waterdrop animation, pink active state, mega menu — completed Phase 2 step 3
+name: Navigation system architecture
+description: Full nav system with shared useNavPill hook, MegaMenu, FixedNav, BookmarkNav, LogoAnimation
 type: project
 ---
 
-TopNavigation component is feature-complete for now (2026-03-18).
+Navigation system completed (2026-03-21). Architecture:
 
-**What's built:**
-- Glass pill hover with magnified text clone (7% scale, green text/sparks)
-- Waterdrop animation: stretch slim → release bubbly with back.out bounce
-- Pink active state on click (#D3005E, white text/sparks)
-- Dummy mega menu with animated title swap
-- Page content scales 0.9 + blurs 13px on menu open (viewport-centered transform-origin)
-- Pill shadow from Figma (outer + inset shadow, 17px radius, 44px default height)
-- Seamless hover zones splitting at spark midpoints
-- Close via click outside buttons/mega or ✕ button
-- Subtle grow (+8px) when hovering the active button while it's sitting pink
+**Components:**
+- `TopNavigation` — scrollable nav with glass pill hover, pink active, page blur
+- `FixedNav` — fixed nav that appears on burger click (desktop), same pill behavior
+- `BookmarkNav` — fixed bookmark tab with burger, search, Finanztools button
+- `LogoAnimation` — lottie logo (full → fl) triggered by scroll
+- `MegaMenu` — shared mega menu in layout, controlled via events
+- `ProgressiveBlur` — fixed blur gradient at top (150px)
+- `OverlayScrollbar` — custom scrollbar overlay
 
-**Brand colors confirmed by user:**
-- Primary green: #45A117
-- Secondary pink: #D3005E
-- Text: #334a27
+**Shared hook:**
+- `useNavPill` — all pill behavior (waterdrop, hover zones, glass/pink states, lens sync, bloom, snap-back)
 
-**Why:** This is Phase 2 step 3 (Navigation/Menü) of the relaunch. Next steps likely: Hero Section, then further design implementation.
+**Event system:**
+- `mega-show` / `mega-hide` / `mega-closed` — mega menu control
+- `burger-opened` / `burger-closed` — burger state
+- `nav-scrolled-out` / `nav-scrolled-in` — scroll trigger for logo + burger
+- `search-opened` / `search-closed` — search state
 
-**How to apply:** The nav component is at components/ui/TopNavigation.tsx. The mega menu content is placeholder — real content comes later. The liquidGL scripts in public/scripts/ are no longer used by the nav (we switched to CSS clone approach) but are still committed.
+**Breakpoints:**
+- ≤1024px: hide TopNavigation, burger always visible, logo uses scroll trigger
+- ≤570px: hide Finanztools button, top: 15px, logo blurs on search open
+
+**Brand colors:** Primary #45A117, Secondary #D3005E, Text #334a27
+
+**Why:** This is the global navigation that will be on all pages, connected to WordPress ACF fields later.
+
+**How to apply:** All nav components are in layout.tsx except TopNavigation (in page wrappers with 3-column layout). The mega menu content is placeholder — will be redesigned.

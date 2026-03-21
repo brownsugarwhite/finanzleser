@@ -166,9 +166,11 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     // First appearance: bloom from center
     if (!pillVisible.current) {
       pillVisible.current = true;
+      gsap.killTweensOf(pillRef.current);
       const cx = x + w / 2;
       gsap.set(pillRef.current, {
         left: 0, x: cx - 5, width: 10, height: 10,
+        scaleX: 1, scaleY: 1,
         borderRadius: `${PILL_R}px`, opacity: 1,
       });
       setPillHover(true);
