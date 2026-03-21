@@ -30,7 +30,7 @@ export default function TestPage() {
         zIndex: 61,
         pointerEvents: "none",
       }}>
-        <div style={{
+        <div className="logo-column" style={{
           flex: 1,
           minWidth: 214,
           display: "flex",
@@ -51,7 +51,7 @@ export default function TestPage() {
         alignItems: "center",
         justifyContent: "space-between",
       }}>
-        <div style={{ flex: 1, minWidth: 214, paddingLeft: 24, transform: "translateX(13px)" }} />
+        <div className="logo-column" style={{ flex: 1, minWidth: 214, paddingLeft: 24, transform: "translateX(13px)" }} />
         <div style={{ width: 960, flexShrink: 0, padding: "0 clamp(20px, 4vw, 40px)" }}>
           <TopNavigation />
         </div>

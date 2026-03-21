@@ -442,6 +442,7 @@ export default function BookmarkNav() {
         {/* Finanztools button */}
         <button
           ref={finanzToolsRef}
+          className="finanztools-btn"
           onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
           onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
           onMouseDown={(e) => onBtnDown(e.currentTarget)}
