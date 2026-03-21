@@ -129,6 +129,7 @@ export default function BookmarkNav() {
   const openSearch = useCallback(() => {
     if (searchOpen.current) return;
     searchOpen.current = true;
+    window.dispatchEvent(new CustomEvent("search-opened"));
 
     const pill = searchPillRef.current;
     const body = bodyRef.current;
@@ -230,6 +231,7 @@ export default function BookmarkNav() {
   const closeSearch = useCallback(() => {
     if (!searchOpen.current) return;
     searchOpen.current = false;
+    window.dispatchEvent(new CustomEvent("search-closed"));
 
     const pill = searchPillRef.current;
     const body = bodyRef.current;
@@ -386,6 +388,7 @@ export default function BookmarkNav() {
   return (
     <div
       ref={bookmarkRef}
+      className="bookmark-nav"
       style={{
         position: "fixed",
         top: "23px",

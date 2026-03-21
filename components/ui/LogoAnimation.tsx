@@ -6,7 +6,7 @@ import logoData from "@/assets/lottie/logoShrink.json";
 
 const LOGO_W = 190;
 const LOGO_H = Math.round((195 / 1662) * LOGO_W);
-const TARGET_TOP = 36;
+const TARGET_TOP = 23;
 const TARGET_LEFT = 36;
 
 export default function LogoAnimation() {
@@ -113,15 +113,34 @@ export default function LogoAnimation() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // Hide logo when search opens on small screens
+    const onSearchOpen = () => {
+      if (!window.matchMedia("(max-width: 570px)").matches) return;
+      if (!wrapperRef.current) return;
+      gsap.to(wrapperRef.current, {
+        opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.out",
+      });
+    };
+    const onSearchClose = () => {
+      if (!wrapperRef.current) return;
+      gsap.to(wrapperRef.current, {
+        opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out",
+      });
+    };
+    window.addEventListener("search-opened", onSearchOpen);
+    window.addEventListener("search-closed", onSearchClose);
+
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("search-opened", onSearchOpen);
+      window.removeEventListener("search-closed", onSearchClose);
       anim.destroy();
     };
   }, []);
 
   return (
-    <div ref={wrapperRef} style={{ flexShrink: 0 }}>
+    <div ref={wrapperRef} className="logo-wrapper" style={{ flexShrink: 0, height: 50, display: "flex", alignItems: "center", paddingBottom: 8 }}>
       <div
         ref={lottieRef}
         style={{ width: LOGO_W, height: LOGO_H }}

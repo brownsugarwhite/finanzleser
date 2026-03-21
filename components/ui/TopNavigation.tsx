@@ -442,7 +442,7 @@ export default function TopNavigation() {
         className={merriweather.variable}
         style={{
           position: "relative", zIndex: 60, width: "100%", height: "50px",
-          display: "flex", alignItems: "center", marginTop: "25px", overflow: "visible",
+          display: "flex", alignItems: "center", marginTop: "23px", overflow: "visible",
         }}
       >
         <div

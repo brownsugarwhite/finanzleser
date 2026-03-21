@@ -19,9 +19,9 @@ export default function TestPage() {
   return (
     <div className={`${merriweather.variable} ${openSans.variable}`} style={{ background: "#fff" }}>
       {/* Fixed logo container */}
-      <div style={{
+      <div className="logo-container-fixed" style={{
         position: "fixed",
-        top: 36,
+        top: 23,
         left: 0,
         right: 0,
         display: "flex",
