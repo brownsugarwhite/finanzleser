@@ -45,7 +45,8 @@
 
 /* ── Hide global logo on landing page ── */
 body[data-landing] .logo-wrapper {
-  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* ── Search input placeholder ── */

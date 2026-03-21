@@ -40,6 +40,7 @@ export default function BookmarkNav() {
   const burgerRef = useRef<HTMLDivElement>(null);
   const burgerLinesRef = useRef<HTMLDivElement[]>([]);
   const lupeRef = useRef<HTMLButtonElement>(null);
+  const newsletterRef = useRef<HTMLDivElement>(null);
   const searchPillRef = useRef<HTMLDivElement>(null);
   const searchInnerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -60,6 +61,9 @@ export default function BookmarkNav() {
       if (burgerWrapRef.current) {
         gsap.set(burgerWrapRef.current, { width: BTN_SIZE });
         burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
+      }
+      if (newsletterRef.current) {
+        gsap.set(newsletterRef.current, { width: 0 });
       }
     }
 
@@ -100,14 +104,14 @@ export default function BookmarkNav() {
   const showBurger = () => {
     if (!burgerWrapRef.current || searchOpen.current) return;
 
-    gsap.set(burgerWrapRef.current, { width: 0 });
-    gsap.to(burgerWrapRef.current, {
-      width: BTN_SIZE, duration: 0.5, ease: "power2.out",
-    });
-
+    // Animate newsletter width to 0 and burger width from 0 simultaneously
+    if (newsletterRef.current) {
+      gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
+    }
+    gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
     burgerLinesRef.current.forEach((line, i) => {
       gsap.fromTo(line, { width: 0 }, {
-        width: BURGER_LINE_W, duration: 0.5, delay: 0.1 + i * 0.08, ease: "power2.out",
+        width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out",
       });
     });
   };
@@ -115,12 +119,17 @@ export default function BookmarkNav() {
   const hideBurger = () => {
     if (!burgerWrapRef.current || searchOpen.current) return;
 
+    // Burger collapses, newsletter expands simultaneously
     burgerLinesRef.current.forEach((line, i) => {
-      gsap.to(line, { width: 0, duration: 0.25, delay: (2 - i) * 0.06, ease: "power2.inOut" });
+      gsap.to(line, { width: 0, duration: 0.2, delay: (2 - i) * 0.04, ease: "power2.inOut" });
     });
-
-    const tl = gsap.timeline({ delay: 0.1 });
-    tl.to(burgerWrapRef.current, { width: 0, duration: 0.4, ease: "power2.inOut" });
+    gsap.to(burgerWrapRef.current, { width: 0, duration: 0.4, ease: "power2.out" });
+    if (newsletterRef.current) {
+      const el = newsletterRef.current;
+      gsap.set(el, { clearProps: "width" });
+      const targetW = el.offsetWidth;
+      gsap.fromTo(el, { width: 0, opacity: 0 }, { width: targetW, opacity: 1, duration: 0.4, ease: "power2.out", onComplete: () => { el.style.width = ""; } });
+    }
   };
 
   /* ── Search ── */
@@ -458,6 +467,25 @@ export default function BookmarkNav() {
           marginRight: -1,
         }}
       >
+        {/* Newsletter button — clipping wrapper */}
+        <div ref={newsletterRef} style={{ overflow: "hidden", flexShrink: 0 }}>
+          <button
+            onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
+            onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
+            onMouseDown={(e) => onBtnDown(e.currentTarget)}
+            onMouseUp={(e) => onBtnUp(e.currentTarget)}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center",
+              height: BTN_SIZE, padding: "0 10px", borderRadius: BTN_RADIUS,
+              border: "none", background: "transparent", cursor: "pointer",
+              whiteSpace: "nowrap", fontFamily: "'Open Sans', sans-serif",
+              fontSize: "17px", fontWeight: 400, color: "white",
+            }}
+          >
+            Newsletter
+          </button>
+        </div>
+
         {/* Lupe button */}
         <button
           ref={lupeRef}
