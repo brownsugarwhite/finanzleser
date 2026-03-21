@@ -6,6 +6,7 @@ import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import OverlayScrollbar from "@/components/ui/OverlayScrollbar";
 import BookmarkNav from "@/components/ui/BookmarkNav";
 import FixedNav from "@/components/ui/FixedNav";
+import LogoAnimation from "@/components/ui/LogoAnimation";
 import MegaMenu from "@/components/ui/MegaMenu";
 
 const outfit = Outfit({
@@ -41,6 +42,7 @@ export default function RootLayout({
         <OverlayScrollbar />
         <BookmarkNav />
         <FixedNav />
+        <LogoAnimation />
         <MegaMenu />
         {children}
         <Script src="/scripts/html2canvas.min.js" strategy="beforeInteractive" />

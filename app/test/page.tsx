@@ -1,6 +1,5 @@
 import { Merriweather, Open_Sans } from "next/font/google";
 import TopNavigation from "@/components/ui/TopNavigation";
-import LogoAnimation from "@/components/ui/LogoAnimation";
 import Spacer from "@/components/ui/Spacer";
 
 const merriweather = Merriweather({
@@ -18,44 +17,8 @@ const openSans = Open_Sans({
 export default function TestPage() {
   return (
     <div className={`${merriweather.variable} ${openSans.variable}`} style={{ background: "#fff" }}>
-      {/* Fixed logo container */}
-      <div className="logo-container-fixed" style={{
-        position: "fixed",
-        top: 23,
-        left: 0,
-        right: 0,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        zIndex: 61,
-        pointerEvents: "none",
-      }}>
-        <div className="logo-column" style={{
-          flex: 1,
-          minWidth: 214,
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          paddingLeft: 24,
-          transform: "translateX(13px)",
-        }}>
-          <LogoAnimation />
-        </div>
-        <div style={{ width: 960, flexShrink: 0 }} />
-        <div style={{ flex: 1, minWidth: 1 }} />
-      </div>
-
-      {/* Top navigation — same 3-column structure so 960px aligns with fixed logo */}
-      <div className="top-nav-wrapper" style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}>
-        <div className="logo-column" style={{ flex: 1, minWidth: 214, paddingLeft: 24, transform: "translateX(13px)" }} />
-        <div style={{ width: 960, flexShrink: 0, padding: "0 clamp(20px, 4vw, 40px)" }}>
-          <TopNavigation />
-        </div>
-        <div style={{ flex: 1, minWidth: 1 }} />
+      <div className="top-nav-wrapper">
+        <TopNavigation />
       </div>
       <Spacer />
       <div style={{

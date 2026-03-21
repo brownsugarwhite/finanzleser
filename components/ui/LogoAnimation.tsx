@@ -6,8 +6,6 @@ import logoData from "@/assets/lottie/logoShrink.json";
 
 const LOGO_W = 190;
 const LOGO_H = Math.round((195 / 1662) * LOGO_W);
-const TARGET_TOP = 23;
-const TARGET_LEFT = 36;
 
 export default function LogoAnimation() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -28,7 +26,7 @@ export default function LogoAnimation() {
   };
 
   useEffect(() => {
-    if (!lottieRef.current || !wrapperRef.current) return;
+    if (!lottieRef.current) return;
 
     const anim = lottie.loadAnimation({
       container: lottieRef.current,
@@ -49,26 +47,6 @@ export default function LogoAnimation() {
       isShrunk.current = true;
       playLottie(anim, 0, anim.totalFrames - 1, "none");
       window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
-
-      if (!isMobile()) {
-        const wrapper = wrapperRef.current!;
-        const rect = wrapper.getBoundingClientRect();
-        const parent = wrapper.offsetParent as HTMLElement;
-        const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
-
-        gsap.set(wrapper, {
-          position: "fixed",
-          top: rect.top - parentRect.top,
-          left: rect.left - parentRect.left,
-          x: 0, y: 0, zIndex: 61,
-        });
-        gsap.to(wrapper, {
-          top: TARGET_TOP - parentRect.top,
-          left: TARGET_LEFT - parentRect.left,
-          duration: 0.7,
-          ease: "power3.out",
-        });
-      }
     };
 
     const grow = () => {
@@ -76,22 +54,6 @@ export default function LogoAnimation() {
       isShrunk.current = false;
       playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
       window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
-
-      if (!isMobile()) {
-        const wrapper = wrapperRef.current!;
-        const fixedRect = wrapper.getBoundingClientRect();
-        gsap.set(wrapper, { clearProps: "position,top,left,x,y,zIndex" });
-        const flowRect = wrapper.getBoundingClientRect();
-
-        gsap.fromTo(wrapper, {
-          x: fixedRect.left - flowRect.left,
-          y: fixedRect.top - flowRect.top,
-        }, {
-          x: 0, y: 0,
-          duration: 0.7,
-          ease: "power2.inOut",
-        });
-      }
     };
 
     // Desktop: IntersectionObserver on nav
@@ -140,7 +102,17 @@ export default function LogoAnimation() {
   }, []);
 
   return (
-    <div ref={wrapperRef} className="logo-wrapper" style={{ flexShrink: 0, height: 50, display: "flex", alignItems: "center", paddingBottom: 8 }}>
+    <div ref={wrapperRef} className="logo-wrapper" style={{
+      position: "fixed",
+      top: 23,
+      left: 36,
+      zIndex: 61,
+      height: 50,
+      display: "flex",
+      alignItems: "center",
+      paddingBottom: 8,
+      pointerEvents: "none",
+    }}>
       <div
         ref={lottieRef}
         style={{ width: LOGO_W, height: LOGO_H }}

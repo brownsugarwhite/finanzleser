@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { label: "Versicherungen", href: "/versicherungen" },
   { label: "Steuern", href: "/steuern" },
   { label: "Recht", href: "/recht" },
+  { label: "Finanztools", href: "/finanztools" },
 ];
 
 const Spark = () => (
@@ -120,22 +121,18 @@ export default function FixedNav() {
         left: 0,
         right: 0,
         zIndex: 60,
-        alignItems: "center",
-        justifyContent: "space-between",
         height: 50,
       }}
     >
-      <div className="logo-column" style={{ flex: 1, minWidth: 214, paddingLeft: 24, transform: "translateX(13px)" }} />
-
-      <div style={{ width: 960, flexShrink: 0, padding: "0 clamp(20px, 4vw, 40px)" }}>
-        <div
-          {...pill.containerProps}
-          style={{
-            position: "relative",
-            display: "flex", alignItems: "center", gap: 25,
-            height: 50,
-          }}
-        >
+      <div
+        {...pill.containerProps}
+        style={{
+          position: "relative",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          maxWidth: 840, width: "100%", margin: "0 auto",
+          height: 50,
+        }}
+      >
           {pill.renderPill()}
 
           {NAV_ITEMS.map((item, i) => (
@@ -155,10 +152,8 @@ export default function FixedNav() {
               </button>
             </Fragment>
           ))}
-        </div>
+          <Spark />
       </div>
-
-      <div style={{ flex: 1, minWidth: 1 }} />
     </div>
   );
 }

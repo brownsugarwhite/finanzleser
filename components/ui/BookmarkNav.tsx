@@ -39,7 +39,6 @@ export default function BookmarkNav() {
   const burgerWrapRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);
   const burgerLinesRef = useRef<HTMLDivElement[]>([]);
-  const finanzToolsRef = useRef<HTMLButtonElement>(null);
   const lupeRef = useRef<HTMLButtonElement>(null);
   const searchPillRef = useRef<HTMLDivElement>(null);
   const searchInnerRef = useRef<HTMLDivElement>(null);
@@ -238,7 +237,6 @@ export default function BookmarkNav() {
     if (!pill || !body) return;
 
     // Restore buttons at correct sizes (invisible) FIRST so measurements are correct
-    if (finanzToolsRef.current) gsap.set(finanzToolsRef.current, { opacity: 0 });
     if (lupeRef.current) gsap.set(lupeRef.current, { opacity: 0 });
     if (burgerWrapRef.current) {
       if (burgerVisible.current) {
@@ -318,7 +316,7 @@ export default function BookmarkNav() {
 
     // Fade buttons back in through the glass blur
     const showBurger = burgerVisible.current;
-    [finanzToolsRef.current, showBurger ? burgerWrapRef.current : null].filter(Boolean).forEach((el) => {
+    [showBurger ? burgerWrapRef.current : null].filter(Boolean).forEach((el) => {
       gsap.to(el, { opacity: 1, duration: 0.3, delay: 0.2, ease: "power3.out" });
     });
 
@@ -460,25 +458,6 @@ export default function BookmarkNav() {
           marginRight: -1,
         }}
       >
-        {/* Finanztools button */}
-        <button
-          ref={finanzToolsRef}
-          className="finanztools-btn"
-          onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
-          onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
-          onMouseDown={(e) => onBtnDown(e.currentTarget)}
-          onMouseUp={(e) => onBtnUp(e.currentTarget)}
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center",
-            height: BTN_SIZE, padding: "0 10px", borderRadius: BTN_RADIUS,
-            border: "none", background: "transparent", cursor: "pointer",
-            whiteSpace: "nowrap", fontFamily: "'Open Sans', sans-serif",
-            fontSize: "17px", fontWeight: 400, color: "white",
-          }}
-        >
-          Finanztools
-        </button>
-
         {/* Lupe button */}
         <button
           ref={lupeRef}

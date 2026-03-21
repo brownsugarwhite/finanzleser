@@ -21,10 +21,7 @@
 
 /* ── Small screens ── */
 @media (max-width: 570px) {
-  .finanztools-btn {
-    display: none !important;
-  }
-  .logo-container-fixed {
+.logo-container-fixed {
     top: 15px !important;
   }
   .bookmark-nav {
@@ -44,6 +41,11 @@
     width: 18px !important;
     height: auto !important;
   }
+}
+
+/* ── Hide global logo on landing page ── */
+body[data-landing] .logo-wrapper {
+  display: none !important;
 }
 
 /* ── Search input placeholder ── */

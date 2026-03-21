@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { label: "Versicherungen", href: "/versicherungen" },
   { label: "Steuern", href: "/steuern" },
   { label: "Recht", href: "/recht" },
+  { label: "Finanztools", href: "/finanztools" },
 ];
 
 const Spark = () => (
@@ -137,8 +138,8 @@ export default function TopNavigation() {
       <div
         {...pill.containerProps}
         style={{
-          position: "relative", width: "100%", maxWidth: "960px",
-          overflow: "visible", display: "flex", alignItems: "center", gap: "25px",
+          position: "relative", width: "100%", maxWidth: "840px", margin: "0 auto",
+          overflow: "visible", display: "flex", alignItems: "center", justifyContent: "space-between",
         }}
       >
         {pill.renderPill()}
@@ -151,6 +152,7 @@ export default function TopNavigation() {
             </button>
           </Fragment>
         ))}
+        <Spark />
       </div>
     </nav>
   );

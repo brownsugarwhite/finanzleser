@@ -371,7 +371,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
           }}
           style={{
             position: "absolute", top: "50%", left: 0,
-            display: "flex", alignItems: "center", gap: "25px",
+            display: "flex", alignItems: "center", justifyContent: "space-between", width: "840px",
             pointerEvents: "none",
           }}
         >
@@ -384,6 +384,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
               }}>{item.label}</span>
             </React.Fragment>
           ))}
+          <Image src="/icons/nav-spark-green.svg" alt="" width={12} height={12} aria-hidden />
         </div>
       )}
     </div>
