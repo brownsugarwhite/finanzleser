@@ -1,7 +1,7 @@
 "use client";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
-import { Fragment, useEffect, useCallback } from "react";
+import { Fragment, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useNavPill } from "@/hooks/useNavPill";
 
@@ -32,44 +32,73 @@ export default function FixedNav() {
     },
   });
 
+  const closeTimer = useRef<gsap.core.Tween | null>(null);
+
+  const resetFixedNav = () => {
+    if (!pill.containerRef.current) return;
+    const wrapper = pill.containerRef.current.closest(".fixed-nav-wrapper") as HTMLElement;
+    if (wrapper) wrapper.style.display = "none";
+    const items = pill.containerRef.current.querySelectorAll("button, img[aria-hidden]");
+    // Kill all tweens and reset
+    items.forEach((el) => gsap.killTweensOf(el));
+    gsap.set(items, { clearProps: "y,opacity" });
+    if (pill.pillRef.current) {
+      gsap.killTweensOf(pill.pillRef.current);
+      gsap.set(pill.pillRef.current, { clearProps: "y,opacity,x,width,height,scaleX,scaleY,background,borderColor,boxShadow,borderRadius" });
+      gsap.set(pill.pillRef.current, { yPercent: -50, opacity: 0, width: 1 });
+    }
+    if (pill.lensRef.current) {
+      gsap.killTweensOf(pill.lensRef.current);
+      gsap.set(pill.lensRef.current, { y: "-50%", scale: 1.07 });
+    }
+    // Reset pill internal state
+    pill.menuOpen.current = false;
+    pill.activeLabel.current = "";
+  };
+
   const open = useCallback(() => {
     if (!pill.containerRef.current) return;
+
+    // Kill pending close
+    if (closeTimer.current) { closeTimer.current.kill(); closeTimer.current = null; }
+
+    // Kill all ongoing animations and reset
+    resetFixedNav();
     const wrapper = pill.containerRef.current.closest(".fixed-nav-wrapper") as HTMLElement;
     if (wrapper) wrapper.style.display = "flex";
 
-    // Set items invisible, then stagger in
+    // Pre-select Finanztools first (sets pill position + pink style)
+    pill.activateItem("Finanztools");
+
+    // Hide above viewport, then slide in (no opacity change)
     const items = pill.containerRef.current.querySelectorAll("button, img[aria-hidden]");
-    gsap.set(items, { y: -30, opacity: 0 });
+    gsap.set(items, { y: -30 });
+    if (pill.pillRef.current) gsap.set(pill.pillRef.current, { y: -30 });
 
-    gsap.to(items, {
-      y: 0, opacity: 1,
-      duration: 0.4,
-      stagger: 0.04,
+    gsap.to([...Array.from(items), pill.pillRef.current].filter(Boolean), {
+      y: 0,
+      duration: 0.7,
       ease: "power3.out",
-    });
-
-    // Activate "Finanzen" after items are positioned
-    requestAnimationFrame(() => {
-      pill.activateItem("Finanzen");
     });
   }, [pill]);
 
   const close = useCallback(() => {
     if (!pill.containerRef.current) return;
 
+    // Kill pending close
+    if (closeTimer.current) { closeTimer.current.kill(); closeTimer.current = null; }
+
     const items = pill.containerRef.current.querySelectorAll("button, img[aria-hidden]");
-    gsap.to(items, {
-      y: -30, opacity: 0,
-      duration: 0.3,
-      stagger: 0.03,
-      ease: "power2.in",
+    gsap.to([...Array.from(items), pill.pillRef.current].filter(Boolean), {
+      y: -100, opacity: 1,
+      duration: 0.5,
+      ease: "power2.out",
     });
 
-    pill.closeMenu();
-
-    const wrapper = pill.containerRef.current.closest(".fixed-nav-wrapper") as HTMLElement;
-    gsap.delayedCall(0.5, () => {
-      if (wrapper) wrapper.style.display = "none";
+    closeTimer.current = gsap.delayedCall(0.7, () => {
+      pill.closeMenu();
+      resetFixedNav();
+      closeTimer.current = null;
     });
   }, [pill]);
 

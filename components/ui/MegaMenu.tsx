@@ -14,8 +14,11 @@ export default function MegaMenu() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [shown, setShown] = useState(false);
 
+  const shownRef = useRef(false);
+
   const show = useCallback((label: string) => {
-    if (!shown) {
+    if (!shownRef.current) {
+      shownRef.current = true;
       setShown(true);
       requestAnimationFrame(() => {
         if (megaRef.current)
@@ -44,6 +47,7 @@ export default function MegaMenu() {
   }, [shown]);
 
   const hide = useCallback(() => {
+    shownRef.current = false;
     if (!megaRef.current) { setShown(false); return; }
     gsap.to(megaRef.current, {
       opacity: 0, y: -12, scale: 0.97, duration: 0.25, ease: "power3.in",
@@ -55,6 +59,9 @@ export default function MegaMenu() {
     const onShow = (e: Event) => {
       const label = (e as CustomEvent).detail?.label;
       if (label) {
+        // Kill any ongoing hide animation
+        if (megaRef.current) gsap.killTweensOf(megaRef.current);
+        if (titleRef.current) gsap.killTweensOf(titleRef.current);
         show(label);
         document.body.style.overflow = "hidden";
       }
@@ -87,6 +94,7 @@ export default function MegaMenu() {
       if (target.closest(".top-nav-wrapper")) return;
       if (target.closest(".fixed-nav-wrapper")) return;
       if (target.closest(".bookmark-nav")) return;
+      if (target.closest(".landing-nav")) return;
       window.dispatchEvent(new CustomEvent("mega-hide"));
       window.dispatchEvent(new CustomEvent("mega-closed"));
     };

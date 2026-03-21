@@ -92,11 +92,31 @@ export default function LogoAnimation() {
     window.addEventListener("search-opened", onSearchOpen);
     window.addEventListener("search-closed", onSearchClose);
 
+    // Grow logo when mega opens (if shrunk), shrink back when mega closes (if needed)
+    const onMegaShow = () => {
+      if (isShrunk.current) {
+        isShrunk.current = false;
+        playLottie(anim, anim.totalFrames - 1, 0, "power2.out");
+      }
+    };
+    const onMegaClosed = () => {
+      // Re-shrink if nav is not visible
+      const navVisible = topNav.getBoundingClientRect().bottom > 0;
+      if (!navVisible && !isShrunk.current) {
+        isShrunk.current = true;
+        playLottie(anim, 0, anim.totalFrames - 1, "none");
+      }
+    };
+    window.addEventListener("mega-show", onMegaShow);
+    window.addEventListener("mega-closed", onMegaClosed);
+
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("search-opened", onSearchOpen);
       window.removeEventListener("search-closed", onSearchClose);
+      window.removeEventListener("mega-show", onMegaShow);
+      window.removeEventListener("mega-closed", onMegaClosed);
       anim.destroy();
     };
   }, []);

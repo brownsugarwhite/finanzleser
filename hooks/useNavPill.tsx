@@ -72,18 +72,19 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     }
   }, []);
 
-  const setPillActive = useCallback(() => {
+  const setPillActive = useCallback((instant = false) => {
     if (!pillRef.current) return;
+    const d = instant ? 0 : 0.2;
     gsap.to(pillRef.current, {
       background: COLORS.pink, borderColor: "transparent", boxShadow: "none",
-      duration: 0.15, ease: "power2.in",
+      duration: d, ease: "power2.in",
     });
     if (lensRef.current) {
       lensRef.current.querySelectorAll("span").forEach((s) =>
-        gsap.to(s, { color: COLORS.white, duration: 0.15 })
+        gsap.to(s, { color: COLORS.white, duration: d })
       );
       lensRef.current.querySelectorAll("img").forEach((img) =>
-        gsap.to(img, { filter: "brightness(0) invert(1)", duration: 0.15 })
+        gsap.to(img, { filter: "brightness(0) invert(1)", duration: d })
       );
     }
   }, []);
@@ -329,7 +330,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
 
     const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), btn.getBoundingClientRect());
     gsap.set(pillRef.current, { x, width: w, opacity: 1, height: PILL_H, borderRadius: PILL_R });
-    setPillActive();
+    setPillActive(true);
     onActivate?.(label);
   }, [setPillActive, onActivate]);
 

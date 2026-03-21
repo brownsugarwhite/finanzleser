@@ -107,8 +107,10 @@ export default function TopNavigation() {
   // ── Burger events ──
 
   useEffect(() => {
-    const onBurgerOpen = () => {
+    const onBurgerOpen = (e: Event) => {
       if (window.matchMedia("(max-width: 1024px)").matches) return;
+      const label = (e as CustomEvent).detail?.label || "Newsletter";
+      window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
       blurPageContent(true);
     };
     const onBurgerClose = () => {

@@ -47,6 +47,7 @@ export default function BookmarkNav() {
 
   const burgerVisible = useRef(false);
   const searchOpen = useRef(false);
+  const megaOpen = useRef(false);
   const bodyDefaultW = useRef(0);
   const innerStartX = useRef(0);
 
@@ -104,16 +105,30 @@ export default function BookmarkNav() {
   const showBurger = () => {
     if (!burgerWrapRef.current || searchOpen.current) return;
 
-    // Animate newsletter width to 0 and burger width from 0 simultaneously
-    if (newsletterRef.current) {
+    // Don't collapse newsletter if mega menu is open
+    if (newsletterRef.current && !megaOpen.current) {
       gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
     }
-    gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
-    burgerLinesRef.current.forEach((line, i) => {
-      gsap.fromTo(line, { width: 0 }, {
-        width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out",
+
+    if (megaOpen.current) {
+      // Set X shape, then stagger lines in
+      const [top, mid, bot] = burgerLinesRef.current;
+      burgerIsX.current = true;
+      gsap.set(top, { y: BURGER_GAP + 2, rotation: 45, width: 0 });
+      gsap.set(mid, { opacity: 0, scaleX: 0, width: BURGER_LINE_W });
+      gsap.set(bot, { y: -(BURGER_GAP + 2), rotation: -45, width: 0 });
+      gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
+      [top, bot].forEach((line, i) => {
+        gsap.to(line, { width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out" });
       });
-    });
+    } else {
+      gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
+      burgerLinesRef.current.forEach((line, i) => {
+        gsap.fromTo(line, { width: 0 }, {
+          width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out",
+        });
+      });
+    }
   };
 
   const hideBurger = () => {
@@ -354,34 +369,21 @@ export default function BookmarkNav() {
 
   const burgerIsX = useRef(false);
 
-  const toggleBurgerX = () => {
-    if (!burgerRef.current) return;
+  const animateToX = () => {
+    if (burgerIsX.current) return;
+    burgerIsX.current = true;
     const lines = burgerLinesRef.current;
     if (lines.length < 3) return;
     const [top, mid, bot] = lines;
-
-    if (!burgerIsX.current) {
-      burgerIsX.current = true;
-      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Finanzen" } }));
-      const tl = gsap.timeline();
-      tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
-      tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
-      tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
-      tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
-      tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
-    } else {
-      burgerIsX.current = false;
-      window.dispatchEvent(new CustomEvent("burger-closed"));
-      const tl = gsap.timeline();
-      tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
-      tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
-      tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
-      tl.to(mid, { opacity: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, 0.15);
-      tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
-    }
+    const tl = gsap.timeline();
+    tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
+    tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
+    tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
   };
 
-  const resetBurger = () => {
+  const animateToBurger = () => {
     if (!burgerIsX.current) return;
     burgerIsX.current = false;
     const lines = burgerLinesRef.current;
@@ -391,14 +393,104 @@ export default function BookmarkNav() {
     tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
     tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
     tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
-    tl.to(mid, { opacity: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, 0.15);
+    tl.to(mid, { opacity: 1, scaleX: 1, duration: 0, ease: "power2.out" }, 0.15);
     tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
   };
 
+  const newsletterW = useRef(0);
+
+  const showNewsletter = () => {
+    if (!newsletterRef.current || !burgerVisible.current) return;
+    const el = newsletterRef.current;
+    gsap.killTweensOf(el);
+    // Measure natural width if we haven't yet
+    if (!newsletterW.current) {
+      const cur = el.style.width;
+      el.style.width = "";
+      newsletterW.current = el.offsetWidth;
+      el.style.width = cur || "0px";
+    }
+    gsap.to(el, { width: newsletterW.current, opacity: 1, duration: 0.4, ease: "power2.out" });
+  };
+
+  const hideNewsletter = () => {
+    if (!newsletterRef.current || !burgerVisible.current) return;
+    gsap.killTweensOf(newsletterRef.current);
+    gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
+  };
+
+  // Burger click: toggle mega menu
+  const toggleBurgerX = () => {
+    if (!megaOpen.current) {
+      // Open mega
+      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Finanztools" } }));
+      animateToX();
+    } else {
+      // Close mega
+      window.dispatchEvent(new CustomEvent("mega-hide"));
+      window.dispatchEvent(new CustomEvent("mega-closed"));
+    }
+  };
+
+  // Sync burger visual + newsletter with mega state
   useEffect(() => {
-    const onMegaClosed = () => resetBurger();
+    const onMegaShow = () => {
+      if (megaOpen.current) return; // already open, just switching buttons
+      megaOpen.current = true;
+      if (burgerVisible.current) {
+        animateToX();
+        showNewsletter();
+      } else {
+        // Burger not visible — force show it as X, newsletter is already visible
+        burgerVisible.current = true;
+        if (burgerWrapRef.current) {
+          const [top, mid, bot] = burgerLinesRef.current;
+          burgerIsX.current = true;
+          gsap.set(top, { y: BURGER_GAP + 2, rotation: 45, width: 0 });
+          gsap.set(mid, { opacity: 0, scaleX: 0, width: BURGER_LINE_W });
+          gsap.set(bot, { y: -(BURGER_GAP + 2), rotation: -45, width: 0 });
+          gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
+          [top, bot].forEach((line, i) => {
+            gsap.to(line, { width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out" });
+          });
+        }
+      }
+    };
+    const onMegaClosed = () => {
+      megaOpen.current = false;
+
+      const navEl = document.querySelector("nav");
+      const navOnScreen = navEl && navEl.getBoundingClientRect().bottom > 0;
+
+      if (navOnScreen) {
+        // At top — shrink X lines out, then collapse wrapper
+        burgerIsX.current = false;
+        burgerVisible.current = false;
+        const [top, , bot] = burgerLinesRef.current;
+        if (top) gsap.to(top, { width: 0, duration: 0.25, ease: "power2.inOut" });
+        if (bot) gsap.to(bot, { width: 0, duration: 0.25, delay: 0.06, ease: "power2.inOut" });
+        if (burgerWrapRef.current) {
+          gsap.to(burgerWrapRef.current, { width: 0, duration: 0.3, delay: 0.15, ease: "power2.inOut",
+            onComplete: () => {
+              // Reset line transforms for next time
+              burgerLinesRef.current.forEach((line) => {
+                gsap.set(line, { clearProps: "y,rotation,opacity,scaleX" });
+              });
+            },
+          });
+        }
+      } else {
+        // Scrolled — animate X back to burger, hide newsletter
+        animateToBurger();
+        hideNewsletter();
+      }
+    };
+    window.addEventListener("mega-show", onMegaShow);
     window.addEventListener("mega-closed", onMegaClosed);
-    return () => window.removeEventListener("mega-closed", onMegaClosed);
+    return () => {
+      window.removeEventListener("mega-show", onMegaShow);
+      window.removeEventListener("mega-closed", onMegaClosed);
+    };
   }, []);
 
   /* ── Hover helpers ── */

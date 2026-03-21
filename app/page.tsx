@@ -1,7 +1,7 @@
 "use client";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -51,11 +51,20 @@ export default function LandingPage() {
     });
   };
 
+  const megaIsOpen = useRef(false);
+  const openedViaNav = useRef(false);
+
   const pill = useNavPill({
     items: NAV_ITEMS,
     hasLens: true,
     onActivate: (label) => {
-      // Scroll nav to top position
+      const alreadyOpen = megaIsOpen.current;
+      megaIsOpen.current = true;
+      window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
+
+      // Only scroll and blur on first open
+      if (alreadyOpen) return;
+      openedViaNav.current = true;
       const navEl = document.querySelector("nav");
       if (navEl) {
         const targetTop = 23;
@@ -66,7 +75,6 @@ export default function LandingPage() {
           ease: "power3.out",
         });
       }
-      window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
       blurContent(true);
     },
     onDeactivate: () => {
@@ -109,33 +117,96 @@ export default function LandingPage() {
     });
     // Start at shrunk state (last frame)
     anim.goToAndStop(anim.totalFrames - 1, true);
+    const totalFrames = anim.totalFrames;
+    const frame = { value: totalFrames - 1 };
+    let isShrunk = true;
+
+    const playLandingLottie = (from: number, to: number, ease = "power2.out") => {
+      gsap.killTweensOf(frame);
+      frame.value = from;
+      gsap.to(frame, {
+        value: to, duration: 0.7, ease,
+        onUpdate: () => anim.goToAndStop(frame.value, true),
+      });
+    };
 
     let logoShown = false;
+
+    const showLogo = () => {
+      if (logoShown) return;
+      logoShown = true;
+      const wrapper = document.querySelector(".landing-logo-fixed") as HTMLElement;
+      if (!wrapper) return;
+      window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
+      gsap.fromTo(wrapper,
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }
+      );
+    };
+
+    const hideLogo = () => {
+      if (!logoShown) return;
+      logoShown = false;
+      const wrapper = document.querySelector(".landing-logo-fixed") as HTMLElement;
+      if (!wrapper) return;
+      window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
+      gsap.to(wrapper, {
+        opacity: 0, x: -60, duration: 0.4, ease: "power2.in",
+      });
+    };
+
+    // Scroll: show when nav leaves viewport, hide when it returns
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const wrapper = document.querySelector(".landing-logo-fixed") as HTMLElement;
-        if (!wrapper) return;
-
-        if (!entry.isIntersecting && !logoShown) {
-          logoShown = true;
-          window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
-          gsap.fromTo(wrapper,
-            { opacity: 0, x: -60 },
-            { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }
-          );
-        } else if (entry.isIntersecting && logoShown) {
-          logoShown = false;
-          window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
-          gsap.to(wrapper, {
-            opacity: 0, x: -60, duration: 0.4, ease: "power2.in",
-          });
-        }
+        if (!entry.isIntersecting && !megaIsOpen.current) showLogo();
+        else if (entry.isIntersecting && !megaIsOpen.current) hideLogo();
       },
       { threshold: 0 }
     );
     observer.observe(navEl);
+
+    // After nav-click close, hide logo only when scrolled back to very top
+    let lastScrollY = 0;
+    const onScrollAfterClose = () => {
+      if (megaIsOpen.current || !logoShown) { lastScrollY = window.scrollY; return; }
+      const scrollingUp = window.scrollY < lastScrollY;
+      lastScrollY = window.scrollY;
+      if (scrollingUp && window.scrollY <= 10) {
+        hideLogo();
+      }
+    };
+    window.addEventListener("scroll", onScrollAfterClose, { passive: true });
+
+    // Click: show immediately when mega opens, grow lottie
+    const onMegaShow = () => {
+      showLogo();
+      if (isShrunk) {
+        isShrunk = false;
+        playLandingLottie(totalFrames - 1, 0, "power2.out");
+      }
+    };
+    const onMegaClosed = () => {
+      // Always shrink back
+      if (!isShrunk) {
+        isShrunk = true;
+        playLandingLottie(0, totalFrames - 1, "none");
+      }
+      if (openedViaNav.current) {
+        // Keep logo visible — it was opened via nav click at top
+        openedViaNav.current = false;
+      } else {
+        const navRect = navEl.getBoundingClientRect();
+        if (navRect.bottom > 0) hideLogo();
+      }
+    };
+    window.addEventListener("mega-show", onMegaShow);
+    window.addEventListener("mega-closed", onMegaClosed);
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", onScrollAfterClose);
+      window.removeEventListener("mega-show", onMegaShow);
+      window.removeEventListener("mega-closed", onMegaClosed);
       anim.destroy();
     };
   }, []);
@@ -143,10 +214,15 @@ export default function LandingPage() {
   // Listen for mega-closed, burger-opened/closed
   useEffect(() => {
     const onMegaClosed = () => {
+      megaIsOpen.current = false;
       pill.closeMenu();
       blurContent(false);
     };
-    const onBurgerOpen = () => blurContent(true);
+    const onBurgerOpen = (e: Event) => {
+      const label = (e as CustomEvent).detail?.label || "Newsletter";
+      window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
+      blurContent(true);
+    };
     const onBurgerClose = () => blurContent(false);
 
     window.addEventListener("mega-closed", onMegaClosed);
@@ -213,7 +289,7 @@ export default function LandingPage() {
       </div>
 
         {/* Centered nav with pill — outside landing-content so it doesn't blur */}
-        <nav style={{
+        <nav className="landing-nav" style={{
           position: "relative",
           zIndex: 55,
           display: "flex",
