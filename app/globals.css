@@ -8,6 +8,12 @@
     overflow: hidden;
     max-height: 75px;
   }
+  .landing-hero {
+    display: none !important;
+  }
+  .landing-nav {
+    display: none !important;
+  }
 }
 
 /* ── Align logo with content padding on mobile ── */
@@ -16,6 +22,14 @@
     padding-left: clamp(20px, 4vw, 40px) !important;
     transform: none !important;
     justify-content: flex-start !important;
+  }
+  .logo-wrapper {
+    left: clamp(20px, 4vw, 40px) !important;
+    top: 15px !important;
+  }
+  .landing-logo-fixed {
+    left: clamp(20px, 4vw, 40px) !important;
+    top: 15px !important;
   }
 }
 
@@ -43,10 +57,32 @@
   }
 }
 
-/* ── Hide global logo on landing page ── */
-body[data-landing] .logo-wrapper {
-  visibility: hidden !important;
-  pointer-events: none !important;
+/* ── Hide global logo on landing page (desktop only) ── */
+@media (min-width: 1025px) {
+  body[data-landing] .logo-wrapper {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* ── Hide landing slide-in logo on mobile, align subline ── */
+@media (max-width: 1024px) {
+  .landing-logo-fixed {
+    display: none !important;
+  }
+  .landing-top {
+    padding-top: 0 !important;
+    height: 75px !important;
+  }
+  .landing-subline-desktop {
+    display: none !important;
+  }
+  .landing-subline-mobile {
+    display: block !important;
+  }
+  .newsletter-btn {
+    display: none !important;
+  }
 }
 
 /* ── Search input placeholder ── */

@@ -179,8 +179,8 @@ export default function LandingPage() {
       }
     };
     const onMegaClosed = () => {
-      // Always shrink back
-      if (!isShrunk) {
+      // Shrink back only if it was grown (logo visible)
+      if (!isShrunk && logoShown) {
         isShrunk = true;
         playLandingLottie(0, totalFrames - 1, "none");
       }
@@ -212,7 +212,7 @@ export default function LandingPage() {
       blurContent(false);
     };
     const onBurgerOpen = (e: Event) => {
-      const label = (e as CustomEvent).detail?.label || "Newsletter";
+      const label = (e as CustomEvent).detail?.label || "Menü";
       window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
       blurContent(true);
     };
@@ -234,7 +234,7 @@ export default function LandingPage() {
       <div className="landing-logo-fixed" style={{
         position: "fixed",
         top: 23,
-        left: 36,
+        left: 50,
         zIndex: 61,
         opacity: 0,
         pointerEvents: "none",
@@ -248,7 +248,7 @@ export default function LandingPage() {
 
       <div className="landing-content">
         {/* Big centered logo */}
-        <div style={{
+        <div className="landing-top" style={{
           position: "relative",
           zIndex: 55,
           display: "flex",
@@ -256,7 +256,7 @@ export default function LandingPage() {
           alignItems: "center",
           paddingTop: 80,
         }}>
-          <div style={{ width: 500, height: 58, position: "relative" }}>
+          <div className="landing-hero" style={{ width: 500, height: 58, position: "relative" }}>
             <div style={{ position: "absolute", inset: "1.36% 0 0.4% 19.91%" }}>
               <Image src="/icons/fl-logo-text.svg" alt="finanzleser" fill style={{ objectFit: "contain" }} />
             </div>
@@ -265,8 +265,8 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Subtitle */}
-          <p style={{
+          {/* Subtitle — desktop only (mobile version is after spacer) */}
+          <p className="landing-subline-desktop" style={{
             fontFamily: "var(--font-nav)",
             fontSize: 21,
             fontWeight: 300,
@@ -317,6 +317,22 @@ export default function LandingPage() {
       <div className="landing-below-nav">
         {/* Spacer */}
         <Spacer />
+
+        {/* Subtitle — mobile only (below spacer, full width) */}
+        <p className="landing-subline-mobile" style={{
+          display: "none",
+          fontFamily: "var(--font-nav)",
+          fontSize: 17,
+          fontWeight: 300,
+          fontStyle: "italic",
+          color: "#686c6a",
+          width: "100%",
+          maxWidth: 960,
+          margin: "0 auto",
+          padding: "12px clamp(20px, 4vw, 40px) 0",
+        }}>
+          Das digitale Finanzmagazin
+        </p>
 
         {/* Dummy content for scroll testing */}
         <div style={{

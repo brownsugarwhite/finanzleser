@@ -400,7 +400,7 @@ export default function BookmarkNav() {
   const newsletterW = useRef(0);
 
   const showNewsletter = () => {
-    if (!newsletterRef.current || !burgerVisible.current) return;
+    if (!newsletterRef.current || !burgerVisible.current || window.matchMedia("(max-width: 1024px)").matches) return;
     const el = newsletterRef.current;
     gsap.killTweensOf(el);
     // Measure natural width if we haven't yet
@@ -414,7 +414,7 @@ export default function BookmarkNav() {
   };
 
   const hideNewsletter = () => {
-    if (!newsletterRef.current || !burgerVisible.current) return;
+    if (!newsletterRef.current || !burgerVisible.current || window.matchMedia("(max-width: 1024px)").matches) return;
     gsap.killTweensOf(newsletterRef.current);
     gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
   };
@@ -423,7 +423,11 @@ export default function BookmarkNav() {
   const toggleBurgerX = () => {
     if (!megaOpen.current) {
       // Open mega
-      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Finanztools" } }));
+      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Menü" } }));
+      // On mobile, dispatch mega-show directly (no FixedNav/TopNav to handle it)
+      if (window.matchMedia("(max-width: 1024px)").matches) {
+        window.dispatchEvent(new CustomEvent("mega-show", { detail: { label: "Menü" } }));
+      }
       animateToX();
     } else {
       // Close mega
@@ -462,8 +466,13 @@ export default function BookmarkNav() {
       const navEl = document.querySelector("nav");
       const navOnScreen = navEl && navEl.getBoundingClientRect().bottom > 0;
 
-      if (navOnScreen) {
-        // At top — shrink X lines out, then collapse wrapper
+      const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+
+      if (isMobile) {
+        // Mobile — just animate X back to burger, keep visible
+        animateToBurger();
+      } else if (navOnScreen) {
+        // Desktop at top — shrink X lines out, then collapse wrapper
         burgerIsX.current = false;
         burgerVisible.current = false;
         const [top, , bot] = burgerLinesRef.current;
@@ -560,7 +569,7 @@ export default function BookmarkNav() {
         }}
       >
         {/* Newsletter button — clipping wrapper */}
-        <div ref={newsletterRef} style={{ overflow: "hidden", flexShrink: 0 }}>
+        <div ref={newsletterRef} className="newsletter-btn" style={{ overflow: "hidden", flexShrink: 0 }}>
           <button
             onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
             onMouseLeave={(e) => onBtnLeave(e.currentTarget)}

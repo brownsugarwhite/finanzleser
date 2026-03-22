@@ -125,7 +125,7 @@ export default function LogoAnimation() {
     <div ref={wrapperRef} className="logo-wrapper" style={{
       position: "fixed",
       top: 23,
-      left: 36,
+      left: 50,
       zIndex: 61,
       height: 50,
       display: "flex",
