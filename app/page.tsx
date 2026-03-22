@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollToPlugin);
 import { useNavPill } from "@/hooks/useNavPill";
 import { NAV_ITEMS } from "@/lib/navItems";
 import Spacer from "@/components/ui/Spacer";
+import RouletteSlider from "@/components/sections/RouletteSlider";
 import lottie from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
 
@@ -334,28 +335,33 @@ export default function LandingPage() {
           Das digitale Finanzmagazin
         </p>
 
-        {/* Dummy content for scroll testing */}
-        <div style={{
-          maxWidth: 960,
-          margin: "0 auto",
-          padding: "60px clamp(20px, 4vw, 40px) 200px",
-        }}>
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} style={{ marginBottom: 60 }}>
-              <h2 style={{
-                fontFamily: "var(--font-nav)", fontSize: "28px", fontWeight: 700,
-                color: "#334a27", marginBottom: 16,
-              }}>
-                Abschnitt {i}
-              </h2>
-              <p style={{
-                fontFamily: "'Open Sans', sans-serif", fontSize: 18,
-                color: "#475569", lineHeight: 1.75,
-              }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-          ))}
+        {/* RouletteSlider — sticky container for 200vh height, slider morphs at 100vh */}
+        <div style={{ position: "relative", height: "200vh" }}>
+          <RouletteSlider />
+
+          {/* Dummy content for scroll testing — scrolls behind sticky slider */}
+          <div style={{
+            maxWidth: 960,
+            margin: "0 auto",
+            padding: "60px clamp(20px, 4vw, 40px) 200px",
+          }}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} style={{ marginBottom: 60 }}>
+                <h2 style={{
+                  fontFamily: "var(--font-nav)", fontSize: "28px", fontWeight: 700,
+                  color: "#334a27", marginBottom: 16,
+                }}>
+                  Abschnitt {i}
+                </h2>
+                <p style={{
+                  fontFamily: "'Open Sans', sans-serif", fontSize: 18,
+                  color: "#475569", lineHeight: 1.75,
+                }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
