@@ -258,7 +258,7 @@ export default function LandingPage() {
       // Blend out over first 300px of scroll
       const scrollPercent = Math.min(window.scrollY / 300, 1);
       const opacity = 1 - scrollPercent;
-      const blur = scrollPercent * 8;
+      const blur = scrollPercent * 16;
 
       gsap.set([logo, subline], {
         opacity,
@@ -345,6 +345,9 @@ export default function LandingPage() {
           </p>
         </div>
 
+        {/* Spacer — under blur gradient */}
+        <Spacer />
+
       </div>
 
         {/* Centered nav with pill — outside landing-content so it doesn't blur */}
@@ -381,9 +384,6 @@ export default function LandingPage() {
         </nav>
 
       <div className="landing-below-nav">
-        {/* Spacer */}
-        <Spacer />
-
         {/* Dummy content for scroll testing */}
         <div style={{
           maxWidth: 960,
