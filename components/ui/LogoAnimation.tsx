@@ -96,6 +96,8 @@ export default function LogoAnimation() {
       else grow();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Sync initial state on page load
+    onScroll();
 
     // Hide logo when search opens on small screens
     const onSearchOpen = () => {
