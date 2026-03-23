@@ -213,12 +213,33 @@ export default function LandingPage() {
         if (navRect.bottom > 0) hideLogo();
       }
     };
+
+    // Hide logo when search opens on small screens
+    const logoWrapper = document.querySelector(".landing-logo-fixed") as HTMLElement;
+    const onSearchOpen = () => {
+      if (!window.matchMedia("(max-width: 570px)").matches) return;
+      if (!logoWrapper) return;
+      gsap.to(logoWrapper, {
+        opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.out",
+      });
+    };
+    const onSearchClose = () => {
+      if (!logoWrapper) return;
+      gsap.to(logoWrapper, {
+        opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out",
+      });
+    };
+    window.addEventListener("search-opened", onSearchOpen);
+    window.addEventListener("search-closed", onSearchClose);
+
     window.addEventListener("mega-show", onMegaShow);
     window.addEventListener("mega-closed", onMegaClosed);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScrollAfterClose);
+      window.removeEventListener("search-opened", onSearchOpen);
+      window.removeEventListener("search-closed", onSearchClose);
       window.removeEventListener("mega-show", onMegaShow);
       window.removeEventListener("mega-closed", onMegaClosed);
       anim.destroy();
