@@ -22,11 +22,7 @@
 /* ── Small screens ── */
 @media (max-width: 570px) {
   .logo-wrapper {
-    top: 17px !important;
     padding-bottom: 3px !important;
-  }
-  .bookmark-nav {
-    top: 17px !important;
   }
   .spacer {
     margin-top: 2px !important;
