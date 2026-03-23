@@ -11,7 +11,7 @@ export default function Spacer() {
       style={{
         position: "relative",
         zIndex: 60,
-        maxWidth: "1200px",
+        maxWidth: "1100px",
         margin: "20px auto 0",
         padding: "0 clamp(20px, 4vw, 40px)",
       }}
