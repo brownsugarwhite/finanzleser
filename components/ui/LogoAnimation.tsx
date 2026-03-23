@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import lottie, { AnimationItem } from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
@@ -13,6 +13,7 @@ export default function LogoAnimation() {
   const animRef = useRef<AnimationItem | null>(null);
   const isShrunk = useRef(false);
   const frameProxy = useRef({ frame: 0 });
+  const [isMobileView, setIsMobileView] = useState(false);
 
   const playLottie = (anim: AnimationItem, from: number, to: number, ease = "power2.out") => {
     gsap.killTweensOf(frameProxy.current);
@@ -24,6 +25,15 @@ export default function LogoAnimation() {
       onUpdate: () => anim.goToAndStop(frameProxy.current.frame, true),
     });
   };
+
+  useEffect(() => {
+    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+    setIsMobileView(isMobile());
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    const handleMediaChange = (e: MediaQueryListEvent) => setIsMobileView(e.matches);
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
+  }, []);
 
   useEffect(() => {
     if (!lottieRef.current) return;
@@ -124,15 +134,15 @@ export default function LogoAnimation() {
   return (
     <div ref={wrapperRef} className="logo-wrapper" style={{
       position: "fixed",
-      top: 23,
-      left: 50,
+      top: isMobileView ? 17 : 23,
+      left: isMobileView ? "clamp(20px, 4vw, 40px)" : 50,
       zIndex: 61,
       height: 50,
       display: "flex",
       alignItems: "center",
       paddingBottom: 8,
       pointerEvents: "none",
-    }}>
+    } as React.CSSProperties}>
       <div
         ref={lottieRef}
         style={{ width: LOGO_W, height: LOGO_H }}

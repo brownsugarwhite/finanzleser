@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import gsap from "gsap";
 
 /* ── Constants ──────────────────────────────────── */
@@ -34,6 +34,7 @@ const GLASS_STYLE = {
 /* ── Component ──────────────────────────────────── */
 
 export default function BookmarkNav() {
+  const [isMobileView, setIsMobileView] = useState(false);
   const bookmarkRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const burgerWrapRef = useRef<HTMLDivElement>(null);
@@ -50,6 +51,17 @@ export default function BookmarkNav() {
   const megaOpen = useRef(false);
   const bodyDefaultW = useRef(0);
   const innerStartX = useRef(0);
+
+  /* ── Mobile view detection ── */
+
+  useEffect(() => {
+    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+    setIsMobileView(isMobile());
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    const handleMediaChange = (e: MediaQueryListEvent) => setIsMobileView(e.matches);
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
+  }, []);
 
   /* ── Burger reveal on scroll ── */
 
@@ -517,7 +529,7 @@ export default function BookmarkNav() {
       className="bookmark-nav"
       style={{
         position: "fixed",
-        top: "23px",
+        top: isMobileView ? "17px" : "23px",
         right: 0,
         zIndex: 100,
         display: "flex",

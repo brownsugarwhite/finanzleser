@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollToPlugin);
 import { useNavPill } from "@/hooks/useNavPill";
 import { NAV_ITEMS } from "@/lib/navItems";
 import Spacer from "@/components/ui/Spacer";
-import RouletteSlider from "@/components/sections/RouletteSlider";
 import lottie from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
 
@@ -180,8 +179,8 @@ export default function LandingPage() {
       }
     };
     const onMegaClosed = () => {
-      // Shrink back only if it was grown (logo visible)
-      if (!isShrunk && logoShown) {
+      // Always shrink back
+      if (!isShrunk) {
         isShrunk = true;
         playLandingLottie(0, totalFrames - 1, "none");
       }
@@ -213,7 +212,7 @@ export default function LandingPage() {
       blurContent(false);
     };
     const onBurgerOpen = (e: Event) => {
-      const label = (e as CustomEvent).detail?.label || "Menü";
+      const label = (e as CustomEvent).detail?.label || "Newsletter";
       window.dispatchEvent(new CustomEvent("mega-show", { detail: { label } }));
       blurContent(true);
     };
@@ -234,8 +233,8 @@ export default function LandingPage() {
       {/* Fixed shrunk logo — hidden initially, slides in from left on scroll */}
       <div className="landing-logo-fixed" style={{
         position: "fixed",
-        top: 23,
-        left: 50,
+        top: 17,
+        left: "clamp(20px, 4vw, 40px)",
         zIndex: 61,
         opacity: 0,
         pointerEvents: "none",
@@ -243,13 +242,13 @@ export default function LandingPage() {
         display: "flex",
         alignItems: "center",
         paddingBottom: 8,
-      }}>
+      } as React.CSSProperties}>
         <div className="landing-lottie" style={{ width: 190, height: 22 }} />
       </div>
 
       <div className="landing-content">
         {/* Big centered logo */}
-        <div className="landing-top" style={{
+        <div style={{
           position: "relative",
           zIndex: 55,
           display: "flex",
@@ -257,7 +256,7 @@ export default function LandingPage() {
           alignItems: "center",
           paddingTop: 80,
         }}>
-          <div className="landing-hero" style={{ width: 500, height: 58, position: "relative" }}>
+          <div style={{ width: 500, height: 58, position: "relative" }}>
             <div style={{ position: "absolute", inset: "1.36% 0 0.4% 19.91%" }}>
               <Image src="/icons/fl-logo-text.svg" alt="finanzleser" fill style={{ objectFit: "contain" }} />
             </div>
@@ -266,8 +265,8 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Subtitle — desktop only (mobile version is after spacer) */}
-          <p className="landing-subline-desktop" style={{
+          {/* Subtitle */}
+          <p style={{
             fontFamily: "var(--font-nav)",
             fontSize: 21,
             fontWeight: 300,
@@ -319,49 +318,28 @@ export default function LandingPage() {
         {/* Spacer */}
         <Spacer />
 
-        {/* Subtitle — mobile only (below spacer, full width) */}
-        <p className="landing-subline-mobile" style={{
-          display: "none",
-          fontFamily: "var(--font-nav)",
-          fontSize: 17,
-          fontWeight: 300,
-          fontStyle: "italic",
-          color: "#686c6a",
-          width: "100%",
+        {/* Dummy content for scroll testing */}
+        <div style={{
           maxWidth: 960,
           margin: "0 auto",
-          padding: "12px clamp(20px, 4vw, 40px) 0",
+          padding: "60px clamp(20px, 4vw, 40px) 200px",
         }}>
-          Das digitale Finanzmagazin
-        </p>
-
-        {/* RouletteSlider — sticky container for 200vh height, slider morphs at 100vh */}
-        <div style={{ position: "relative", height: "200vh" }}>
-          <RouletteSlider />
-
-          {/* Dummy content for scroll testing — scrolls behind sticky slider */}
-          <div style={{
-            maxWidth: 960,
-            margin: "0 auto",
-            padding: "60px clamp(20px, 4vw, 40px) 200px",
-          }}>
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} style={{ marginBottom: 60 }}>
-                <h2 style={{
-                  fontFamily: "var(--font-nav)", fontSize: "28px", fontWeight: 700,
-                  color: "#334a27", marginBottom: 16,
-                }}>
-                  Abschnitt {i}
-                </h2>
-                <p style={{
-                  fontFamily: "'Open Sans', sans-serif", fontSize: 18,
-                  color: "#475569", lineHeight: 1.75,
-                }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-              </div>
-            ))}
-          </div>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} style={{ marginBottom: 60 }}>
+              <h2 style={{
+                fontFamily: "var(--font-nav)", fontSize: "28px", fontWeight: 700,
+                color: "#334a27", marginBottom: 16,
+              }}>
+                Abschnitt {i}
+              </h2>
+              <p style={{
+                fontFamily: "'Open Sans', sans-serif", fontSize: 18,
+                color: "#475569", lineHeight: 1.75,
+              }}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
