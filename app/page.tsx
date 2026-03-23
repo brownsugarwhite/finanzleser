@@ -382,7 +382,9 @@ export default function LandingPage() {
 
       <div className="landing-below-nav">
         {/* Spacer — under blur gradient */}
-        <Spacer />
+        <div style={{ position: "relative", zIndex: 30 }}>
+          <Spacer />
+        </div>
 
         {/* Dummy content for scroll testing */}
         <div style={{
