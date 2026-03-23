@@ -96,8 +96,17 @@ export default function LogoAnimation() {
       else grow();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    // Sync initial state on page load
-    onScroll();
+
+    // Sync initial state on page load without animation
+    if (isMobile()) {
+      if (window.scrollY > 10) {
+        isShrunk.current = true;
+        anim.goToAndStop(anim.totalFrames - 1, true);
+      } else {
+        isShrunk.current = false;
+        anim.goToAndStop(0, true);
+      }
+    }
 
     // Hide logo when search opens on small screens
     const onSearchOpen = () => {
