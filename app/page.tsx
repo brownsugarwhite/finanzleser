@@ -4,11 +4,13 @@ import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 import { useNavPill } from "@/hooks/useNavPill";
 import { NAV_ITEMS } from "@/lib/navItems";
 import Spacer from "@/components/ui/Spacer";
+import HeroSection from "@/components/sections/HeroSection";
 import lottie from "lottie-web";
 import logoData from "@/assets/lottie/logoShrink.json";
 
@@ -254,20 +256,26 @@ export default function LandingPage() {
     const subline = document.querySelector(".landing-subline") as HTMLElement;
     if (!logo || !subline) return;
 
-    const onScroll = () => {
-      // Blend out over first 300px of scroll
-      const scrollPercent = Math.min(window.scrollY / 300, 1);
-      const opacity = 1 - scrollPercent;
-      const blur = scrollPercent * 16;
+    gsap.to([logo, subline], {
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "300px top",
+        scrub: true,
+        onUpdate: (self) => {
+          const blur = self.progress * 16;
+          gsap.set([logo, subline], {
+            opacity: 1 - self.progress,
+            filter: `blur(${blur}px)`,
+          });
+        },
+      },
+      duration: 0,
+    });
 
-      gsap.set([logo, subline], {
-        opacity,
-        filter: `blur(${blur}px)`
-      });
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Listen for mega-closed, burger-opened/closed
@@ -320,7 +328,7 @@ export default function LandingPage() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          paddingTop: 80,
+          paddingTop: 90,
         }}>
           <div className="landing-hero" style={{ width: isSmallScreen ? 300 : 500, height: isSmallScreen ? 35 : 58, position: "relative" }}>
             <div style={{ position: "absolute", inset: "1.36% 0 0.4% 19.91%" }}>
@@ -334,7 +342,7 @@ export default function LandingPage() {
           {/* Subtitle */}
           <p className="landing-subline" style={{
             fontFamily: "var(--font-nav)",
-            fontSize: 21,
+            fontSize: isSmallScreen ? 18 : 21,
             fontWeight: 300,
             fontStyle: "italic",
             color: "#686c6a",
@@ -380,10 +388,19 @@ export default function LandingPage() {
           </div>
         </nav>
 
-      <div className="landing-below-nav">
+      <div className="landing-below-nav" style={{ marginTop: 26 }}>
         {/* Spacer — under blur gradient */}
         <div style={{ position: "relative", zIndex: 30 }}>
           <Spacer />
+        </div>
+
+        {/* Hero Section */}
+        <div style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "40px clamp(20px, 4vw, 40px) 100px",
+        }}>
+          <HeroSection />
         </div>
 
         {/* Dummy content for scroll testing */}

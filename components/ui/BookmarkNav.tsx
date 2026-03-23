@@ -76,7 +76,8 @@ export default function BookmarkNav() {
         burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
       }
       if (newsletterRef.current) {
-        gsap.set(newsletterRef.current, { width: 0 });
+        // Newsletter visibility handled in dedicated useEffect below
+        gsap.set(newsletterRef.current, { width: 0, opacity: 0 });
       }
     }
 
@@ -104,12 +105,28 @@ export default function BookmarkNav() {
       }
     };
 
+    const onNavScrolledOut = () => {
+      if (document.body.hasAttribute("data-landing")) {
+        hideNewsletter();
+      }
+    };
+
+    const onNavScrolledIn = () => {
+      if (document.body.hasAttribute("data-landing")) {
+        showNewsletter();
+      }
+    };
+
     window.addEventListener("nav-scrolled-out", onOut);
     window.addEventListener("nav-scrolled-in", onIn);
+    window.addEventListener("nav-scrolled-out", onNavScrolledOut);
+    window.addEventListener("nav-scrolled-in", onNavScrolledIn);
     window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("nav-scrolled-out", onOut);
       window.removeEventListener("nav-scrolled-in", onIn);
+      window.removeEventListener("nav-scrolled-out", onNavScrolledOut);
+      window.removeEventListener("nav-scrolled-in", onNavScrolledIn);
       window.removeEventListener("resize", onResize);
     };
   }, []);
@@ -117,8 +134,9 @@ export default function BookmarkNav() {
   const showBurger = () => {
     if (!burgerWrapRef.current || searchOpen.current) return;
 
-    // Don't collapse newsletter if mega menu is open
-    if (newsletterRef.current && !megaOpen.current) {
+    // Don't collapse newsletter if mega menu is open or on landing page
+    const isLanding = document.body.hasAttribute("data-landing");
+    if (newsletterRef.current && !megaOpen.current && !isLanding) {
       gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
     }
 
@@ -362,6 +380,62 @@ export default function BookmarkNav() {
     }
   }, []);
 
+  /* ── Newsletter visibility on landing page ── */
+
+  useEffect(() => {
+    const setupNewsletter = () => {
+      if (!newsletterRef.current) return;
+
+      const isLanding = document.body.hasAttribute("data-landing");
+      const isMobile = window.matchMedia("(max-width: 800px)").matches;
+
+      if (isLanding && isMobile) {
+        // Force show and measure
+        newsletterRef.current.style.width = "auto";
+        newsletterRef.current.style.opacity = "1";
+
+        requestAnimationFrame(() => {
+          if (newsletterRef.current) {
+            const width = newsletterRef.current.offsetWidth;
+            newsletterW.current = width || 100;
+            gsap.set(newsletterRef.current, { width: newsletterW.current, opacity: 1 });
+          }
+        });
+      }
+    };
+
+    // Try multiple times to catch async data-landing attribute
+    setupNewsletter();
+    const timers = [
+      setTimeout(setupNewsletter, 50),
+      setTimeout(setupNewsletter, 100),
+      setTimeout(setupNewsletter, 200),
+    ];
+
+    // Scroll handler
+    let lastScrollY = 0;
+    const onScroll = () => {
+      if (!newsletterRef.current || searchOpen.current) return;
+      const isLanding = document.body.hasAttribute("data-landing");
+      if (!isLanding) return;
+
+      const scrollingDown = window.scrollY > lastScrollY;
+      lastScrollY = window.scrollY;
+
+      if (scrollingDown && window.scrollY > 50) {
+        gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.3 });
+      } else if (window.scrollY <= 50) {
+        gsap.to(newsletterRef.current, { width: newsletterW.current || 100, opacity: 1, duration: 0.3 });
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      timers.forEach(t => clearTimeout(t));
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   /* ── Close search on click outside ── */
 
   useEffect(() => {
@@ -412,7 +486,10 @@ export default function BookmarkNav() {
   const newsletterW = useRef(0);
 
   const showNewsletter = () => {
-    if (!newsletterRef.current || !burgerVisible.current || window.matchMedia("(max-width: 1024px)").matches) return;
+    if (!newsletterRef.current || !burgerVisible.current) return;
+    const isLanding = document.body.hasAttribute("data-landing");
+    const shouldShow = isLanding ? window.matchMedia("(max-width: 800px)").matches : window.matchMedia("(max-width: 1024px)").matches;
+    if (!shouldShow) return;
     const el = newsletterRef.current;
     gsap.killTweensOf(el);
     // Measure natural width if we haven't yet
@@ -426,7 +503,10 @@ export default function BookmarkNav() {
   };
 
   const hideNewsletter = () => {
-    if (!newsletterRef.current || !burgerVisible.current || window.matchMedia("(max-width: 1024px)").matches) return;
+    if (!newsletterRef.current || !burgerVisible.current) return;
+    const isLanding = document.body.hasAttribute("data-landing");
+    const shouldShow = isLanding ? window.matchMedia("(max-width: 800px)").matches : window.matchMedia("(max-width: 1024px)").matches;
+    if (shouldShow) return;
     gsap.killTweensOf(newsletterRef.current);
     gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
   };
@@ -455,7 +535,14 @@ export default function BookmarkNav() {
       megaOpen.current = true;
       if (burgerVisible.current) {
         animateToX();
-        showNewsletter();
+        // On landing page at top: hide newsletter; otherwise show it
+        const isLanding = document.body.hasAttribute("data-landing");
+        const isAtTop = window.scrollY <= 50;
+        if (isLanding && isAtTop && newsletterRef.current) {
+          gsap.to(newsletterRef.current, { width: 0, opacity: 0, duration: 0.3 });
+        } else if (!isLanding) {
+          showNewsletter();
+        }
       } else {
         // Burger not visible — force show it as X, newsletter is already visible
         burgerVisible.current = true;
@@ -479,10 +566,16 @@ export default function BookmarkNav() {
       const navOnScreen = navEl && navEl.getBoundingClientRect().bottom > 0;
 
       const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+      const isLanding = document.body.hasAttribute("data-landing");
+      const isAtTop = window.scrollY <= 50;
 
       if (isMobile) {
         // Mobile — just animate X back to burger, keep visible
         animateToBurger();
+        // On landing page at top: show newsletter back
+        if (isLanding && isAtTop && newsletterRef.current) {
+          gsap.to(newsletterRef.current, { width: newsletterW.current || 100, opacity: 1, duration: 0.3 });
+        }
       } else if (navOnScreen) {
         // Desktop at top — shrink X lines out, then collapse wrapper
         burgerIsX.current = false;
@@ -581,7 +674,7 @@ export default function BookmarkNav() {
         }}
       >
         {/* Newsletter button — clipping wrapper */}
-        <div ref={newsletterRef} className="newsletter-btn" style={{ overflow: "hidden", flexShrink: 0 }}>
+        <div ref={newsletterRef} className="newsletter-btn" style={{ overflow: "hidden", flexShrink: 0, width: typeof window !== "undefined" && document.body.hasAttribute("data-landing") && window.matchMedia("(max-width: 800px)").matches ? 100 : 0, opacity: typeof window !== "undefined" && document.body.hasAttribute("data-landing") && window.matchMedia("(max-width: 800px)").matches ? 1 : 0 }}>
           <button
             onMouseEnter={(e) => onBtnEnter(e.currentTarget)}
             onMouseLeave={(e) => onBtnLeave(e.currentTarget)}
