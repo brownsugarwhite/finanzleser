@@ -225,6 +225,8 @@ export default function LandingPage() {
     };
     const onSearchClose = () => {
       if (!logoWrapper) return;
+      // Only restore logo if it was actually shown (nav out of view)
+      if (!logoShown) return;
       gsap.to(logoWrapper, {
         opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out",
       });
