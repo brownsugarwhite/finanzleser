@@ -1,7 +1,7 @@
 "use client";
 import { Merriweather } from "next/font/google";
 import Image from "next/image";
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -46,6 +46,16 @@ export default function LandingPage() {
 
   const megaIsOpen = useRef(false);
   const openedViaNav = useRef(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const isSmall = () => window.matchMedia("(max-width: 570px)").matches;
+    setIsSmallScreen(isSmall());
+    const mediaQuery = window.matchMedia("(max-width: 570px)");
+    const handleMediaChange = (e: MediaQueryListEvent) => setIsSmallScreen(e.matches);
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
+  }, []);
 
   const pill = useNavPill({
     items: NAV_ITEMS,
@@ -233,7 +243,7 @@ export default function LandingPage() {
       {/* Fixed shrunk logo — hidden initially, slides in from left on scroll */}
       <div className="landing-logo-fixed" style={{
         position: "fixed",
-        top: 17,
+        top: isSmallScreen ? 17 : 23,
         left: "clamp(20px, 4vw, 40px)",
         zIndex: 61,
         opacity: 0,

@@ -13,7 +13,7 @@ export default function LogoAnimation() {
   const animRef = useRef<AnimationItem | null>(null);
   const isShrunk = useRef(false);
   const frameProxy = useRef({ frame: 0 });
-  const [isMobileView, setIsMobileView] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const playLottie = (anim: AnimationItem, from: number, to: number, ease = "power2.out") => {
     gsap.killTweensOf(frameProxy.current);
@@ -27,12 +27,17 @@ export default function LogoAnimation() {
   };
 
   useEffect(() => {
-    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
-    setIsMobileView(isMobile());
-    const mediaQuery = window.matchMedia("(max-width: 1024px)");
-    const handleMediaChange = (e: MediaQueryListEvent) => setIsMobileView(e.matches);
-    mediaQuery.addEventListener("change", handleMediaChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaChange);
+    const isSmall = () => window.matchMedia("(max-width: 570px)").matches;
+    setIsSmallScreen(isSmall());
+
+    const mediaQuery570 = window.matchMedia("(max-width: 570px)");
+    const handleMediaChange570 = (e: MediaQueryListEvent) => setIsSmallScreen(e.matches);
+
+    mediaQuery570.addEventListener("change", handleMediaChange570);
+
+    return () => {
+      mediaQuery570.removeEventListener("change", handleMediaChange570);
+    };
   }, []);
 
   useEffect(() => {
@@ -134,8 +139,8 @@ export default function LogoAnimation() {
   return (
     <div ref={wrapperRef} className="logo-wrapper" style={{
       position: "fixed",
-      top: isMobileView ? 17 : 23,
-      left: isMobileView ? "clamp(20px, 4vw, 40px)" : 50,
+      top: isSmallScreen ? 17 : 23,
+      left: isSmallScreen ? "clamp(20px, 4vw, 40px)" : 50,
       zIndex: 61,
       height: 50,
       display: "flex",
