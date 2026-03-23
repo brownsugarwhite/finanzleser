@@ -248,6 +248,28 @@ export default function LandingPage() {
     };
   }, []);
 
+  // Logo and subline blur/fade on scroll
+  useEffect(() => {
+    const logo = document.querySelector(".landing-hero") as HTMLElement;
+    const subline = document.querySelector(".landing-subline") as HTMLElement;
+    if (!logo || !subline) return;
+
+    const onScroll = () => {
+      // Blend out over first 300px of scroll
+      const scrollPercent = Math.min(window.scrollY / 300, 1);
+      const opacity = 1 - scrollPercent;
+      const blur = scrollPercent * 8;
+
+      gsap.set([logo, subline], {
+        opacity,
+        filter: `blur(${blur}px)`
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   // Listen for mega-closed, burger-opened/closed
   useEffect(() => {
     const onMegaClosed = () => {
@@ -300,7 +322,7 @@ export default function LandingPage() {
           alignItems: "center",
           paddingTop: 80,
         }}>
-          <div style={{ width: isSmallScreen ? 300 : 500, height: isSmallScreen ? 35 : 58, position: "relative" }}>
+          <div className="landing-hero" style={{ width: isSmallScreen ? 300 : 500, height: isSmallScreen ? 35 : 58, position: "relative" }}>
             <div style={{ position: "absolute", inset: "1.36% 0 0.4% 19.91%" }}>
               <Image src="/icons/fl-logo-text.svg" alt="finanzleser" fill style={{ objectFit: "contain" }} />
             </div>
@@ -310,7 +332,7 @@ export default function LandingPage() {
           </div>
 
           {/* Subtitle */}
-          <p style={{
+          <p className="landing-subline" style={{
             fontFamily: "var(--font-nav)",
             fontSize: 21,
             fontWeight: 300,
