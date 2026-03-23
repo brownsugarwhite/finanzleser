@@ -21,9 +21,6 @@
 
 /* ── Small screens ── */
 @media (max-width: 570px) {
-  .logo-wrapper {
-    padding-bottom: 3px !important;
-  }
   .spacer {
     margin-top: 2px !important;
   }
