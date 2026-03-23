@@ -300,7 +300,7 @@ export default function LandingPage() {
           alignItems: "center",
           paddingTop: 80,
         }}>
-          <div style={{ width: 500, height: 58, position: "relative" }}>
+          <div style={{ width: isSmallScreen ? 300 : 500, height: isSmallScreen ? 35 : 58, position: "relative" }}>
             <div style={{ position: "absolute", inset: "1.36% 0 0.4% 19.91%" }}>
               <Image src="/icons/fl-logo-text.svg" alt="finanzleser" fill style={{ objectFit: "contain" }} />
             </div>
