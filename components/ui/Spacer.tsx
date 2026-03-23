@@ -10,7 +10,7 @@ export default function Spacer() {
       className="spacer"
       style={{
         position: "relative",
-        zIndex: 60,
+        zIndex: 30,
         maxWidth: "960px",
         margin: "20px auto 0",
         padding: 0,

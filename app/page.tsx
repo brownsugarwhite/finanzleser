@@ -248,11 +248,10 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Logo, subline, and spacer blur/fade on scroll
+  // Logo and subline blur/fade on scroll
   useEffect(() => {
     const logo = document.querySelector(".landing-hero") as HTMLElement;
     const subline = document.querySelector(".landing-subline") as HTMLElement;
-    const spacer = document.querySelector(".landing-below-nav > div:first-child") as HTMLElement;
     if (!logo || !subline) return;
 
     const onScroll = () => {
@@ -261,10 +260,7 @@ export default function LandingPage() {
       const opacity = 1 - scrollPercent;
       const blur = scrollPercent * 16;
 
-      const targets = [logo, subline];
-      if (spacer) targets.push(spacer);
-
-      gsap.set(targets, {
+      gsap.set([logo, subline], {
         opacity,
         filter: `blur(${blur}px)`
       });
