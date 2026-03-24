@@ -100,7 +100,9 @@ export default function MegaMenu({
 
         {/* Middle Column: Posts */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">Beliebte Beiträge</h3>
+          <h3 className="text-sm font-bold text-gray-900 mb-4">
+            {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
+          </h3>
           {loading ? (
             <div className="text-sm text-gray-500">Wird geladen...</div>
           ) : posts.length > 0 ? (

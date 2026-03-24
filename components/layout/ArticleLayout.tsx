@@ -1,13 +1,15 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import Link from "next/link";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
   title?: string;
+  category?: { name: string; slug: string };
   sidebar?: React.ReactNode;
 };
 
-export default function ArticleLayout({ children, title, sidebar }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, category, sidebar }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -15,10 +17,18 @@ export default function ArticleLayout({ children, title, sidebar }: ArticleLayou
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex gap-8">
             {/* Sidebar (TOC, etc.) */}
-            {sidebar && <aside className="w-64">{sidebar}</aside>}
+            {sidebar && <aside className="hidden lg:block w-64">{sidebar}</aside>}
 
             {/* Article Content */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
+              {category && (
+                <Link
+                  href={`/${category.slug}`}
+                  className="text-sm text-blue-600 hover:text-blue-800 mb-2 inline-block"
+                >
+                  {category.name}
+                </Link>
+              )}
               {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
               <article>{children}</article>
             </div>

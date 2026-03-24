@@ -383,6 +383,82 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
 }
 
 // ─────────────────────────────────────────────
+// Dynamische Menü-Kategorien (Rechner, Checklisten, Vergleiche)
+// ─────────────────────────────────────────────
+
+export interface ToolCategory {
+  label: string;
+  href: string;
+  count: number;
+}
+
+export async function getToolCategories(): Promise<ToolCategory[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetToolCategories {
+      allRechner(first: 1) {
+        nodes {
+          id
+        }
+      }
+      checklisten(first: 1) {
+        nodes {
+          id
+        }
+      }
+      vergleiche(first: 1) {
+        nodes {
+          id
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      allRechner: { nodes: Array<{ id: string }> };
+      checklisten: { nodes: Array<{ id: string }> };
+      vergleiche: { nodes: Array<{ id: string }> };
+    }>(query);
+
+    const categories: ToolCategory[] = [];
+
+    // Rechner
+    if (data.allRechner.nodes.length > 0) {
+      categories.push({
+        label: "Rechner",
+        href: "/finanztools/rechner",
+        count: data.allRechner.nodes.length,
+      });
+    }
+
+    // Checklisten
+    if (data.checklisten.nodes.length > 0) {
+      categories.push({
+        label: "Checklisten",
+        href: "/finanztools/checklisten",
+        count: data.checklisten.nodes.length,
+      });
+    }
+
+    // Vergleiche
+    if (data.vergleiche.nodes.length > 0) {
+      categories.push({
+        label: "Vergleiche",
+        href: "/finanztools/vergleiche",
+        count: data.vergleiche.nodes.length,
+      });
+    }
+
+    return categories;
+  } catch (error) {
+    console.error("Error fetching tool categories:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Alle Rechner
 // ─────────────────────────────────────────────
 

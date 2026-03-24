@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
 
 interface TOCItem {
@@ -16,63 +16,65 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
-  useEffect(() => {
-    // Extract only H2 headings from HTML content using regex
-    const tocItems: TOCItem[] = [];
-    const h2Pattern = /<h2[^>]*>([^<]+)<\/h2>/gi;
+  const loadTOC = () => {
+    const article = document.querySelector("article");
+    if (!article) return;
 
-    let match;
-    while ((match = h2Pattern.exec(content)) !== null) {
-      const text = match[1].replace(/<[^>]*>/g, "").trim();
-      tocItems.push({
-        id: `heading-${tocItems.length}`,
-        text,
-      });
-    }
+    const headings = Array.from(article.querySelectorAll("h2"));
+    if (headings.length === 0) return;
+
+    const tocItems: TOCItem[] = [];
+
+    headings.forEach((heading, idx) => {
+      const id = `heading-${idx}`;
+      if (!heading.id) {
+        heading.id = id;
+      }
+
+      const text = heading.textContent || "";
+      if (text.trim()) {
+        tocItems.push({
+          id: heading.id,
+          text,
+        });
+      }
+    });
 
     setItems(tocItems);
 
-    // Add IDs to H2 headings in the DOM
-    setTimeout(() => {
-      const article = document.querySelector("article");
-      if (article) {
-        const headings = article.querySelectorAll("h2");
-        headings.forEach((heading, idx) => {
-          if (!heading.id) {
-            heading.id = `heading-${idx}`;
-          }
-        });
-      }
+    const handleScroll = () => {
+      let currentId = "";
+      headings.forEach((heading) => {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= 100) {
+          currentId = heading.id || "";
+        }
+      });
+      setActiveId(currentId);
+    };
 
-      // Handle scroll to track active heading
-      const handleScroll = () => {
-        const article = document.querySelector("article");
-        if (!article) return;
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  };
 
-        const headings = Array.from(article.querySelectorAll("h2"));
-        let currentId = "";
+  useEffect(() => {
+    // Versuche zu mehreren Zeitpunkten zu laden
+    const timers = [
+      100, 200, 300, 500, 700, 1000, 1500, 2000, 3000
+    ].map(ms => setTimeout(loadTOC, ms));
 
-        headings.forEach((heading) => {
-          const rect = heading.getBoundingClientRect();
-          if (rect.top <= 100) {
-            currentId = heading.id || "";
-          }
-        });
-
-        setActiveId(currentId);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, 0);
-  }, [content]);
-
-  if (items.length === 0) return null;
+    return () => timers.forEach(timer => clearTimeout(timer));
+  }, []);
 
   return (
     <nav className="hidden lg:block sticky top-24">
       <div className="text-sm">
         <h3 className="font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h3>
+        {items.length === 0 && (
+          <div className="text-xs text-gray-500 p-2 bg-gray-100 rounded">
+            Keine Überschriften gefunden
+          </div>
+        )}
         <ol className="space-y-2">
           {items.map((item, idx) => (
             <li key={item.id} className="flex gap-2">
