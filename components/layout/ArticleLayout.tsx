@@ -24,7 +24,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
             {sidebar && <aside className="hidden lg:block w-64">{sidebar}</aside>}
 
             {/* Article Content */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 max-w-[960px]">
               {category && mainCategory && (
                 <Link
                   href={`/${mainCategory}/${category.slug}`}
