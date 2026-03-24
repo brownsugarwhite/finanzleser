@@ -30,7 +30,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                   href={`/${mainCategory}/${category.slug}`}
                   className="mb-2 inline-block transition hover:opacity-80"
                   style={{
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-brand-secondary)",
                     fontFamily: "Merriweather, serif",
                     fontSize: "23px",
                     fontStyle: "italic",
