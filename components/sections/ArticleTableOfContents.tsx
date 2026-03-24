@@ -63,54 +63,43 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
         Inhaltsverzeichnis
       </h3>
 
-      <div className="space-y-6">
+      <ol style={{ paddingLeft: "1.5em", lineHeight: "1.6", listStyle: "decimal" }}>
         {/* Headings */}
-        {items.length > 0 && (
-          <ol style={{ paddingLeft: "1.5em", lineHeight: "1.6" }}>
-            {items.map((item, idx) => (
-              <li key={item.id} style={{ marginBottom: "0.5em" }}>
-                <Link
-                  href={`#${item.id}`}
-                  style={{
-                    color: "var(--color-brand)",
-                    textDecoration: "none",
-                    fontSize: "15px",
-                  }}
-                  className="hover:opacity-80 transition"
-                >
-                  {item.text}
-                </Link>
-              </li>
-            ))}
-          </ol>
-        )}
+        {items.map((item, idx) => (
+          <li key={item.id} style={{ marginBottom: "0.5em" }}>
+            <Link
+              href={`#${item.id}`}
+              style={{
+                color: "var(--color-brand)",
+                textDecoration: "none",
+                fontSize: "15px",
+              }}
+              className="hover:opacity-80 transition"
+            >
+              {item.text}
+            </Link>
+          </li>
+        ))}
 
         {/* Tools */}
         {tools && tools.length > 0 && (
-          <div>
-            <h4 style={{ fontSize: "14px", fontWeight: "600", marginBottom: "0.75em", color: "var(--color-text-medium)" }}>
-              Finanztools in diesem Artikel
-            </h4>
-            <ul style={{ paddingLeft: "1.5em", lineHeight: "1.6" }}>
-              {tools.map((tool) => (
-                <li key={tool.id} style={{ marginBottom: "0.5em" }}>
-                  <Link
-                    href={`/finanztools/rechner/${tool.slug}`}
-                    style={{
-                      color: "var(--color-brand)",
-                      textDecoration: "none",
-                      fontSize: "15px",
-                    }}
-                    className="hover:opacity-80 transition"
-                  >
-                    {tool.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          tools.map((tool, idx) => (
+            <li key={tool.id} style={{ marginBottom: "0.5em" }}>
+              <Link
+                href={`/finanztools/rechner/${tool.slug}`}
+                style={{
+                  color: "var(--color-brand)",
+                  textDecoration: "none",
+                  fontSize: "15px",
+                }}
+                className="hover:opacity-80 transition"
+              >
+                {tool.title}
+              </Link>
+            </li>
+          ))
         )}
-      </div>
+      </ol>
     </div>
   );
 }
