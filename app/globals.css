@@ -69,8 +69,8 @@ html {
    ───────────────────────────────────────────── */
 :root {
   /* Fonts (CSS-Vars werden in layout.tsx per next/font gesetzt) */
-  --font-heading: var(--font-outfit, "Outfit", sans-serif);
-  --font-body: var(--font-inter, "Inter", sans-serif);
+  --font-heading: var(--font-heading, "Merriweather", serif);
+  --font-body: var(--font-body, "Open Sans", sans-serif);
 
   /* Brand – Platzhalter, Werte kommen aus Figma */
   --color-brand: #0066cc;

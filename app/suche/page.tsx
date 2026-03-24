@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { searchPosts } from "@/lib/wordpress";
+import type { Post } from "@/lib/types";
 
 type SearchPageProps = {
   searchParams: Promise<{ q?: string }>;
@@ -12,7 +13,7 @@ export default async function SearchPage(props: SearchPageProps) {
   const searchParams = await props.searchParams;
   const query = searchParams.q || "";
 
-  let results = [];
+  let results: Post[] = [];
   if (query) {
     results = await searchPosts(query);
   }
@@ -61,7 +62,7 @@ export default async function SearchPage(props: SearchPageProps) {
           {query && results.length > 0 && (
             <>
               <p className="text-gray-600 mb-8">
-                {results.length} {results.length === 1 ? "Ergebnis" : "Ergebnisse"} für „<strong>{query}</strong>"
+                {results.length} {results.length === 1 ? "Ergebnis" : "Ergebnisse"} für &quot;<strong>{query}</strong>&quot;
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -123,7 +124,7 @@ export default async function SearchPage(props: SearchPageProps) {
           {query && results.length === 0 && (
             <div className="text-center py-12">
               <p className="text-lg text-gray-600">
-                Keine Ergebnisse für „<strong>{query}</strong>" gefunden.
+                Keine Ergebnisse für &quot;<strong>{query}</strong>&quot; gefunden.
               </p>
               <p className="text-sm text-gray-500 mt-2">
                 Versuchen Sie mit anderen Suchbegriffen.

@@ -1,15 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { NAV_ITEMS } from "@/lib/navItems";
+import MegaMenu from "./MegaMenu";
 
 export default function Header() {
   const router = useRouter();
+  const [openMegamenu, setOpenMegamenu] = useState<string | null>(null);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const megamenuRef = useRef<HTMLDivElement>(null);
+
+  // Close megamenu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (megamenuRef.current && !megamenuRef.current.contains(e.target as Node)) {
+        setOpenMegamenu(null);
+      }
+    };
+
+    if (openMegamenu) {
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }
+  }, [openMegamenu]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,54 +39,68 @@ export default function Header() {
 
   return (
     <header className="bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-center relative">
-          {/* Logo */}
-          <div className="absolute left-0 text-2xl font-bold text-gray-900">
-            <Link href="/">finanzleser</Link>
-          </div>
+      <div ref={megamenuRef}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          {/* Desktop Layout */}
+          <div className="hidden md:flex items-center justify-center relative">
+            {/* Logo */}
+            <div className="absolute left-0">
+              <Link href="/">
+                <Image
+                  src="/icons/fl_logo.svg"
+                  alt="finanzleser"
+                  width={190}
+                  height={22}
+                  priority
+                />
+              </Link>
+            </div>
 
-          {/* Desktop Nav */}
-          <nav className="flex gap-8">
-            {NAV_ITEMS.map((item) => (
-              <div
-                key={item.label}
-                className="relative group"
-                onMouseEnter={() => setOpenSubmenu(item.label)}
-                onMouseLeave={() => setOpenSubmenu(null)}
-              >
-                <Link
-                  href={item.href}
-                  className={`text-sm font-medium transition ${
-                    item.featured
-                      ? "text-blue-600 hover:text-blue-800"
-                      : "text-gray-700 hover:text-gray-900"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+            {/* Desktop Nav */}
+            <nav className="flex gap-8">
+              {NAV_ITEMS.map((item) => (
+                <div key={item.label}>
+                  <button
+                    onClick={() =>
+                      item.megamenu
+                        ? setOpenMegamenu(openMegamenu === item.label ? null : item.label)
+                        : null
+                    }
+                    className={`text-sm font-medium transition whitespace-nowrap ${
+                      item.featured
+                        ? "text-blue-600 hover:text-blue-800"
+                        : "text-gray-700 hover:text-gray-900"
+                    }`}
+                  >
+                    <Link href={item.href} onClick={(e) => item.megamenu && e.preventDefault()}>
+                      {item.label}
+                    </Link>
+                  </button>
 
-                {/* Desktop Dropdown */}
-                {item.submenu && (
-                  <div className="absolute top-full left-0 mt-0 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    {item.submenu.map((subitem) => (
-                      <Link
-                        key={subitem.label}
-                        href={subitem.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap first:rounded-t last:rounded-b"
-                      >
-                        {subitem.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+                  {/* Simple Dropdown for non-megamenu items */}
+                  {!item.megamenu && item.submenu && (
+                    <div
+                      onMouseEnter={() => setOpenSubmenu(item.label)}
+                      onMouseLeave={() => setOpenSubmenu(null)}
+                      className="absolute top-full left-0 mt-0 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible hover:opacity-100 hover:visible transition-all duration-200 z-50"
+                    >
+                      {item.submenu.map((subitem) => (
+                        <Link
+                          key={subitem.label}
+                          href={subitem.href}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap first:rounded-t last:rounded-b"
+                        >
+                          {subitem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
 
-          {/* Search Field */}
-          <form onSubmit={handleSearch} className="absolute right-0 flex items-center gap-2">
+            {/* Search Field */}
+            <form onSubmit={handleSearch} className="absolute right-0 flex items-center gap-2">
             <input
               type="text"
               value={searchInput}
@@ -95,13 +127,36 @@ export default function Header() {
                 />
               </svg>
             </button>
-          </form>
+            </form>
+          </div>
+
+          {/* Megamenu - always available, appears when openMegamenu is set */}
+          {openMegamenu && (
+            <div className="border-t border-gray-200 bg-white">
+              {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
+                <MegaMenu
+                  activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
+                  items={NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu || []}
+                  mainCategoryHref={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href || ""}
+                  onClose={() => setOpenMegamenu(null)}
+                />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Mobile Layout */}
         <div className="md:hidden flex items-center justify-between">
-          <div className="text-2xl font-bold text-gray-900">
-            <Link href="/">finanzleser</Link>
+          <div>
+            <Link href="/">
+              <Image
+                src="/icons/fl-logo-icon.svg"
+                alt="finanzleser"
+                width={40}
+                height={40}
+                priority
+              />
+            </Link>
           </div>
 
           <button

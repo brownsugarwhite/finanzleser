@@ -9,12 +9,14 @@ export type NavItem = {
   href: string;
   submenu?: NavSubItem[];
   featured?: boolean; // for Finanztools
+  megamenu?: boolean; // for Finanzen, Versicherungen, Steuern, Recht
 };
 
 export const NAV_ITEMS: NavItem[] = [
   {
     label: "Finanzen",
     href: "/finanzen",
+    megamenu: true,
     submenu: [
       { label: "Geldanlagen", href: "/finanzen/geldanlagen" },
       { label: "Kredite & Bauen", href: "/finanzen/kredite-bauen" },
@@ -25,6 +27,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Versicherungen",
     href: "/versicherungen",
+    megamenu: true,
     submenu: [
       { label: "Altersvorsorge", href: "/versicherungen/altersvorsorge" },
       { label: "Krankenversicherung", href: "/versicherungen/krankenversicherung" },
@@ -38,6 +41,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Steuern",
     href: "/steuern",
+    megamenu: true,
     submenu: [
       { label: "Steuererklärung", href: "/steuern/steuererklaerung" },
       { label: "Steuerarten", href: "/steuern/steuerarten" },
@@ -47,6 +51,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Recht",
     href: "/recht",
+    megamenu: true,
     submenu: [
       { label: "Ehe & Familie", href: "/recht/ehe-familie" },
       { label: "Arbeitsrecht", href: "/recht/arbeitsrecht" },

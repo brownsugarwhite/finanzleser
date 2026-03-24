@@ -6,14 +6,14 @@ import type { Post } from "@/lib/types";
 interface MainCategoryLayoutProps {
   name: string;
   slug: string;
-  children: Array<{ name: string; slug: string; count: number }>;
+  categoryChildren: Array<{ name: string; slug: string; count: number }>;
   posts: Post[];
 }
 
 export default function MainCategoryLayout({
   name,
   slug,
-  children,
+  categoryChildren,
   posts,
 }: MainCategoryLayoutProps) {
   return (
@@ -32,11 +32,11 @@ export default function MainCategoryLayout({
 
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Unterkategorien */}
-          {children.length > 0 && (
+          {categoryChildren.length > 0 && (
             <div className="mb-16">
               <h2 className="text-3xl font-bold mb-8">Kategorien</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {children.map((child) => (
+                {categoryChildren.map((child) => (
                   <Link
                     key={child.slug}
                     href={`/${slug}/${child.slug}/`}

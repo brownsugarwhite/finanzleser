@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Open_Sans, Merriweather } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const openSans = Open_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const merriweather = Merriweather({
+  variable: "--font-heading",
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
       <body className="antialiased">
         {children}
       </body>

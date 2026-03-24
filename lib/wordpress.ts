@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner } from "./types";
+import type { Post, Rechner, PostACF, SEO } from "./types";
 
 function getClient(): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
@@ -222,12 +222,12 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       `;
 
       try {
-        const aclData = await client.request<{ postBy: { beitragFelder?: any; seo?: any } | null }>(aclQuery, { slug });
+        const aclData = await client.request<{ postBy: { beitragFelder?: PostACF; seo?: SEO } | null }>(aclQuery, { slug });
         if (aclData.postBy) {
           post.beitragFelder = aclData.postBy.beitragFelder;
           post.seo = aclData.postBy.seo;
         }
-      } catch (aclError) {
+      } catch {
         // ACF fields not available for this post type - that's ok
         // Custom post types don't have these fields
       }
@@ -384,23 +384,21 @@ export async function getAllRechner(): Promise<Rechner[]> {
 
   const query = gql`
     query GetRechner {
-      rechners {
+      allRechner(first: 100) {
         nodes {
           id
           title
           slug
-          rechnerFelder {
-            rechnerTyp
-            rechnerBeschreibung
-            rechnerIcon {
-              sourceUrl
-            }
-          }
         }
       }
     }
   `;
 
-  const data = await client.request<{ rechners: { nodes: Rechner[] } }>(query);
-  return data.rechners.nodes;
+  try {
+    const data = await client.request<{ allRechner: { nodes: Rechner[] } }>(query);
+    return data.allRechner.nodes;
+  } catch (error) {
+    console.error("Error fetching all Rechner:", error);
+    return [];
+  }
 }
