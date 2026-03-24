@@ -13,30 +13,24 @@ export default function Breadcrumb() {
 
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments = pathname.split("/").filter(Boolean);
-    const breadcrumbs: BreadcrumbItem[] = [{ label: "Home", href: "/" }];
 
-    // For category/sub/slug URLs, only show up to 2 segments (kategorie/sub)
-    // For other URLs, show all but the last segment
-    let maxSegments = 2;
-    if (!pathname.includes("/finanztools") && !pathname.includes("/suche")) {
-      maxSegments = Math.min(2, segments.length - 1);
+    // Only show first segment (main category) if there are multiple segments
+    // For /kategorie/sub/artikel: show only "Home > Kategorie"
+    // For /suche or / : show nothing
+    if (segments.length <= 1) {
+      return [];
     }
 
-    let path = "";
-    segments.slice(0, maxSegments).forEach((segment) => {
-      path += `/${segment}`;
+    const mainCategory = segments[0];
+    const label = mainCategory
+      .split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
 
-      // Format label: convert slug to readable text
-      const label = segment
-        .split("-")
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-      breadcrumbs.push({ label, href: path });
-    });
-
-    // Remove "Home" if it's the only item
-    return breadcrumbs.length === 1 ? [] : breadcrumbs;
+    return [
+      { label: "Home", href: "/" },
+      { label, href: `/${mainCategory}` }
+    ];
   };
 
   const breadcrumbs = generateBreadcrumbs();
