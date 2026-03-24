@@ -11,22 +11,15 @@ export default function Spacer() {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <svg
-          style={{ flex: 1, height: "1px" }}
-          viewBox="0 0 100 1"
-          preserveAspectRatio="none"
-        >
-          <line
-            x1="0"
-            y1="0.5"
-            x2="100"
-            y2="0.5"
-            stroke="rgba(129, 129, 129, 0.3)"
-            strokeWidth="1"
-            strokeDasharray="3,3"
-            strokeLinecap="round"
-          />
-        </svg>
+        <div
+          style={{
+            flex: 1,
+            height: "1px",
+            background: "linear-gradient(to right, rgba(129, 129, 129, 0.3) 3px, transparent 3px)",
+            backgroundSize: "6px 1px",
+            backgroundPosition: "0 center",
+          }}
+        />
         <svg
           width="23"
           height="15"
@@ -41,22 +34,15 @@ export default function Spacer() {
             <path d="M16.6537 3.14844C18.1193 1.66561 19.2285 0 19.2285 0H23V0.766052C23 0.766052 22.2076 2.34584 19.8548 4.72823C18.5155 6.08392 17.2257 7.04307 16.5662 7.5C17.2257 7.95693 18.5155 8.91608 19.8548 10.2718C22.2084 12.6542 23 14.2339 23 14.2339V15H19.2285C19.2285 15 18.1193 13.3344 16.6545 11.8516C15.1573 10.3361 13.6462 9.37699 13.6462 9.37699V8.2438V6.75779V5.6246C13.6462 5.6246 15.1573 4.66545 16.6545 3.15003L16.6537 3.14844Z" fill="var(--color-brand)" />
           </g>
         </svg>
-        <svg
-          style={{ flex: 1, height: "1px" }}
-          viewBox="0 0 100 1"
-          preserveAspectRatio="none"
-        >
-          <line
-            x1="0"
-            y1="0.5"
-            x2="100"
-            y2="0.5"
-            stroke="rgba(129, 129, 129, 0.3)"
-            strokeWidth="1"
-            strokeDasharray="3,3"
-            strokeLinecap="round"
-          />
-        </svg>
+        <div
+          style={{
+            flex: 1,
+            height: "1px",
+            background: "linear-gradient(to right, rgba(129, 129, 129, 0.3) 3px, transparent 3px)",
+            backgroundSize: "6px 1px",
+            backgroundPosition: "0 center",
+          }}
+        />
       </div>
     </div>
   );
