@@ -29,7 +29,7 @@ export default function HeroSection() {
                 fontSize: "54px",
                 fontWeight: 900,
                 lineHeight: "1.05",
-                margin: "0 0 24px 0",
+                margin: "0 0 15px 0",
                 letterSpacing: "-0.5px",
               }}
             >
@@ -45,7 +45,7 @@ export default function HeroSection() {
                 fontWeight: "700",
                 lineHeight: "1.38",
                 color: "var(--color-text-primary)",
-                marginBottom: "32px",
+                marginBottom: "15px",
               }}
             >
               <span>Bleiben Sie mit dem </span>
