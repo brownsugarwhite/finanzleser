@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { NAV_ITEMS } from "@/lib/navItems";
 import MegaMenu from "./MegaMenu";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 export default function Header() {
   const router = useRouter();
@@ -128,7 +127,6 @@ export default function Header() {
                 />
               </svg>
             </button>
-            <DarkModeToggle />
             </form>
           </div>
 
@@ -162,13 +160,11 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2">
-            <DarkModeToggle />
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
-              aria-label="Toggle menu"
-            >
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
+            aria-label="Toggle menu"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -183,7 +179,6 @@ export default function Header() {
               />
             </svg>
           </button>
-        </div>
         </div>
 
         {/* Mobile Search */}

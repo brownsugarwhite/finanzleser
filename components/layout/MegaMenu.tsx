@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { NavSubItem } from "@/lib/navItems";
 import type { Post, Rechner } from "@/lib/types";
+import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 interface MegaMenuProps {
   activeCategory: string;
@@ -91,10 +92,15 @@ export default function MegaMenu({
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8" onClick={(e) => e.stopPropagation()}>
+      {/* Dark Mode Toggle */}
+      <div className="flex justify-end mb-6">
+        <DarkModeToggle />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Column: Subcategories */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">Kategorien</h3>
+          <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-4">Kategorien</h3>
           <nav className="space-y-2">
             {items.map((item) => (
               <button
@@ -102,8 +108,8 @@ export default function MegaMenu({
                 onClick={() => setSelectedSub(item.href)}
                 className={`block w-full text-left px-3 py-2 text-sm rounded transition ${
                   selectedSub === item.href
-                    ? "bg-blue-50 text-blue-600 font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                 }`}
               >
                 {item.label}
@@ -118,7 +124,7 @@ export default function MegaMenu({
             {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
           </h3>
           {loading ? (
-            <div className="text-sm text-gray-500">Wird geladen...</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">Wird geladen...</div>
           ) : posts.length > 0 ? (
             <nav className="space-y-2 max-h-80 overflow-y-auto">
               {posts.map((post) => (
@@ -126,20 +132,20 @@ export default function MegaMenu({
                   key={post.id}
                   href={`/${activeCategory}/${getCategorySlug(selectedSub)}/${post.slug}`}
                   onClick={onClose}
-                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition line-clamp-2"
+                  className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded transition line-clamp-2"
                 >
                   {post.title}
                 </Link>
               ))}
             </nav>
           ) : (
-            <div className="text-sm text-gray-500">Keine Beiträge gefunden</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">Keine Beiträge gefunden</div>
           )}
           {hasMorePosts && (
             <Link
               href={selectedSub}
               onClick={onClose}
-              className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
+              className="block mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
             >
               Alle Beiträge [alle]
             </Link>
@@ -156,14 +162,14 @@ export default function MegaMenu({
                   key={tool.id}
                   href={`/finanztools/rechner/${tool.slug}`}
                   onClick={onClose}
-                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition"
+                  className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded transition"
                 >
                   {tool.title}
                 </Link>
               ))}
             </nav>
           ) : (
-            <div className="text-sm text-gray-500">Keine Tools vorhanden</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">Keine Tools vorhanden</div>
           )}
         </div>
       </div>
