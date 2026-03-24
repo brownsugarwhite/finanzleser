@@ -9,13 +9,14 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   // 1. Zuerst prüfen: ist es eine Kategorie-Seite?
   const categoryPosts = await getPostsByCategory(params.sub).catch(() => []);
   if (categoryPosts.length > 0) {
-    const category = await getCategoryBySlug(params.sub);
+    const category = await getCategoryBySlug(params.sub).catch(() => null);
+    const mainCategory = category?.parent ? category.parent : { name: params.kategorie, slug: params.kategorie };
     return (
       <CategoryLayout
         title={category?.name || params.sub}
         titleSlug={params.sub}
-        mainCategoryName={category?.parent?.name || params.kategorie}
-        mainCategorySlug={category?.parent?.slug || params.kategorie}
+        mainCategoryName={mainCategory?.name}
+        mainCategorySlug={mainCategory?.slug}
         posts={categoryPosts}
       />
     );

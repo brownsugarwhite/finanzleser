@@ -40,7 +40,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     notFound();
   }
 
-  const category = await getCategoryBySlug(params.kategorie);
+  const category = await getCategoryBySlug(params.kategorie).catch(() => null);
   return (
     <CategoryLayout
       title={category?.name || params.kategorie}
