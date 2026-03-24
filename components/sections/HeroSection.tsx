@@ -33,8 +33,8 @@ export default function HeroSection() {
                 letterSpacing: "-0.5px",
               }}
             >
-              <p style={{ margin: "0 0 0 0" }}>Unser</p>
-              <p style={{ margin: "0 0 0 0" }}>Newsletter</p>
+              <p style={{ margin: "0 0 0 0", color: "var(--color-text-primary)" }}>Unser</p>
+              <p style={{ margin: "0 0 0 0", color: "var(--color-text-primary)" }}>Newsletter</p>
             </h2>
 
             {/* p_serif - Merriweather Bold, 21px, line-height 1.38 */}
