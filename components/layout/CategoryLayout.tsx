@@ -23,8 +23,13 @@ export default function CategoryLayout({ title, children, posts }: CategoryLayou
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => {
                 const category = post.categories?.nodes?.[0];
-                const categorySlug = category?.slug || "beitraege";
-                const postLink = `/${categorySlug}/${post.slug}`;
+                // Finde Parent-Kategorie (Hauptkategorie)
+                const mainCategory = post.categories?.nodes?.find(
+                  (cat: any) => cat.parent === null || cat.parent === 0
+                );
+                const mainCategorySlug = mainCategory?.slug || "beitraege";
+                const subCategorySlug = category?.slug || "allgemein";
+                const postLink = `/${mainCategorySlug}/${subCategorySlug}/${post.slug}`;
 
                 return (
                   <article
