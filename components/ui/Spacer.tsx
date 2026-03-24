@@ -14,10 +14,7 @@ export default function Spacer() {
         <div
           style={{
             flex: 1,
-            height: "1px",
-            background: "linear-gradient(to right, rgba(129, 129, 129, 0.3) 3px, transparent 3px)",
-            backgroundSize: "6px 1px",
-            backgroundPosition: "0 center",
+            borderTop: "1px dashed rgba(129, 129, 129, 0.3)",
           }}
         />
         <svg
@@ -37,10 +34,7 @@ export default function Spacer() {
         <div
           style={{
             flex: 1,
-            height: "1px",
-            background: "linear-gradient(to right, rgba(129, 129, 129, 0.3) 3px, transparent 3px)",
-            backgroundSize: "6px 1px",
-            backgroundPosition: "0 center",
+            borderTop: "1px dashed rgba(129, 129, 129, 0.3)",
           }}
         />
       </div>
