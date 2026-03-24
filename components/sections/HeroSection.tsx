@@ -1,6 +1,5 @@
 import Image from "next/image";
-
-const imgButtonSwitchy = "https://www.figma.com/api/mcp/asset/14cc73d8-b8c8-4dbf-b792-e69885b554bd";
+import Button from "@/components/ui/Button";
 
 export default function HeroSection() {
   return (
@@ -55,59 +54,7 @@ export default function HeroSection() {
 
             {/* button_wrapper with button_switchy - 50px height */}
             <div style={{ paddingTop: "5px" }}>
-              <button
-                style={{
-                  backgroundColor: "rgba(198, 200, 204, 0.23)",
-                  borderRadius: "19px",
-                  paddingLeft: "20px",
-                  paddingRight: "5px",
-                  paddingTop: "5px",
-                  paddingBottom: "5px",
-                  border: "none",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "15px",
-                  height: "50px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "Open Sans, sans-serif",
-                    fontSize: "17px",
-                    color: "var(--color-text-primary)",
-                    fontWeight: "400",
-                    lineHeight: "40px",
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    margin: "0",
-                  }}
-                >
-                  <p style={{ margin: "0", padding: "0" }}>Kostenlos abonnieren</p>
-                </div>
-                <div
-                  style={{
-                    position: "relative",
-                    width: "40px",
-                    height: "40px",
-                    flexShrink: 0,
-                  }}
-                >
-                  <img
-                    alt="Arrow"
-                    src={imgButtonSwitchy}
-                    style={{
-                      position: "absolute",
-                      display: "block",
-                      width: "100%",
-                      height: "100%",
-                      maxWidth: "none",
-                    }}
-                  />
-                </div>
-              </button>
+              <Button label="Kostenlos abonnieren" />
             </div>
           </div>
         </div>
