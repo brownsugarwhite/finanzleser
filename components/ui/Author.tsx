@@ -27,7 +27,7 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
     .slice(0, 2);
 
   return (
-    <div className="flex gap-4 items-start">
+    <div className="flex gap-4 items-center">
       {/* Profile Image with Gradient Border */}
       <div
         className="relative shrink-0 rounded-full flex-shrink-0 flex items-center justify-center"
@@ -62,7 +62,7 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
 
       {/* Author Info */}
       <div className="flex flex-col gap-1">
-        <p style={{ fontSize: "14px", lineHeight: "1.4" }}>
+        <p style={{ fontSize: "14px", lineHeight: "1.1em" }}>
           <span style={{ color: "var(--color-text-medium)" }}>von </span>
           <span style={{ color: "var(--color-text-medium)", fontWeight: "600" }}>
             {name}
