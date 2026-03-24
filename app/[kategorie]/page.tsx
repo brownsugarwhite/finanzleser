@@ -23,7 +23,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
 
   // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?
   const categoryWithChildren = await getCategoryWithChildren(params.kategorie).catch(() => null);
-  if (categoryWithChildren) {
+  if (categoryWithChildren && categoryWithChildren.children && categoryWithChildren.children.length > 0) {
     return (
       <MainCategoryLayout
         name={categoryWithChildren.name}
@@ -36,7 +36,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
 
   // 3. Sonst: Subkategorie-Seite mit Post-Liste
   const posts = await getPostsByCategory(params.kategorie).catch(() => []);
-  if (posts.length === 0) {
+  if (!posts || posts.length === 0) {
     notFound();
   }
 
