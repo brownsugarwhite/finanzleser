@@ -4,7 +4,6 @@ import CategorySlider from "@/components/sections/CategorySlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import ToolsTeaser from "@/components/sections/ToolsTeaser";
 import SearchSection from "@/components/sections/SearchSection";
-import NewsletterHero from "@/components/sections/NewsletterHero";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
@@ -26,7 +25,6 @@ export default async function LandingPage() {
       <ToolsTeaser />
       <CategorySlider />
       <FeaturedPosts posts={posts} />
-      <NewsletterHero />
       <SearchSection />
       <Footer />
     </main>
