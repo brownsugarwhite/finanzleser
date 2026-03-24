@@ -24,12 +24,13 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
             {sidebar && <aside className="hidden lg:block w-64">{sidebar}</aside>}
 
             {/* Article Content */}
-            <div className="flex-1 min-w-0 max-w-[960px]">
+            <div className="flex-1 min-w-0 max-w-[860px]">
               {category && mainCategory && (
                 <Link
                   href={`/${mainCategory}/${category.slug}`}
-                  className="mb-2 inline-block text-blue-600 hover:text-blue-800 transition"
+                  className="mb-2 inline-block transition hover:opacity-80"
                   style={{
+                    color: "var(--color-text-secondary)",
                     fontFamily: "Merriweather, serif",
                     fontSize: "23px",
                     fontStyle: "italic",
