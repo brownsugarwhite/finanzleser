@@ -39,7 +39,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                   {category.name}
                 </Link>
               )}
-              {title && <h1 className="font-bold mb-4" style={{ fontSize: "42px" }}>{title}</h1>}
+              {title && <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{title}</h1>}
               {excerpt && (
                 <p
                   className="mb-8 text-gray-600"
