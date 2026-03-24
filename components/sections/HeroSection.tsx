@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -6,29 +5,43 @@ export default function HeroSection() {
     <section className="py-16 md:py-24" style={{ backgroundColor: "var(--color-bg-page)" }}>
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Left: Illustration */}
-          <div className="flex-shrink-0 w-full md:w-1/2">
-            <Image
-              src="/assets/newsletter-illustration.svg"
-              alt="Das digitale Finanzmagazin"
-              width={400}
-              height={350}
-              className="w-full h-auto"
-              priority
-            />
+          {/* Left: Large Button with Arrow */}
+          <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center md:justify-start">
+            <button
+              className="w-64 h-64 rounded-3xl flex items-center justify-center transition hover:opacity-90"
+              style={{ backgroundColor: "var(--color-brand)" }}
+              aria-label="Zum Newsletter anmelden"
+            >
+              {/* Arrow Icon */}
+              <svg
+                className="w-24 h-24"
+                fill="none"
+                stroke="white"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
           </div>
 
           {/* Right: Content */}
           <div className="w-full md:w-1/2">
             <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
+              className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
               style={{ color: "var(--color-text-primary)" }}
             >
-              Das digitale Finanzmagazin
+              Das digitale
+              <br />
+              Finanzmagazin
             </h2>
 
             <p
-              className="text-lg mb-6"
+              className="text-base md:text-lg mb-8 leading-relaxed"
               style={{ color: "var(--color-text-primary)" }}
             >
               Bleiben Sie mit dem{" "}
@@ -39,14 +52,14 @@ export default function HeroSection() {
               Newsletter immer auf dem neusten Stand.
             </p>
 
-            {/* CTA Button */}
+            {/* CTA Text Link */}
             <Link
               href="#newsletter-signup"
-              className="inline-flex items-center gap-3 px-6 py-3 rounded font-semibold transition"
-              style={{ backgroundColor: "#E8E8E8", color: "var(--color-text-primary)" }}
+              className="inline-flex items-center gap-2 font-semibold transition"
+              style={{ color: "var(--color-brand)" }}
             >
               Kostenlos abonnieren
-              {/* Arrow Icon */}
+              {/* Small Arrow */}
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
