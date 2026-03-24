@@ -3,8 +3,6 @@ import HeroSection from "@/components/sections/HeroSection";
 import CategorySlider from "@/components/sections/CategorySlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import ToolsTeaser from "@/components/sections/ToolsTeaser";
-import NewsletterBanner from "@/components/sections/NewsletterBanner";
-import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
 import SearchSection from "@/components/sections/SearchSection";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts } from "@/lib/wordpress";
@@ -27,8 +25,6 @@ export default async function LandingPage() {
       <ToolsTeaser />
       <CategorySlider />
       <FeaturedPosts posts={posts} />
-      <NewsletterBanner />
-      <AIAgentTeaser />
       <SearchSection />
       <Footer />
     </main>
