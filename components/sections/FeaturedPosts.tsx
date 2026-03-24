@@ -31,8 +31,13 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredPosts.map((post) => {
             const category = firstCategory(post);
-            const categorySlug = category?.slug || "beitraege";
-            const postLink = `/${categorySlug}/${post.slug}`;
+            // Finde Parent-Kategorie (Hauptkategorie)
+            const mainCategory = post.categories?.nodes?.find(
+              (cat: any) => cat.parent === null || cat.parent === 0
+            );
+            const mainCategorySlug = mainCategory?.slug || "beitraege";
+            const subCategorySlug = category?.slug || "allgemein";
+            const postLink = `/${mainCategorySlug}/${subCategorySlug}/${post.slug}`;
 
             return (
               <article
