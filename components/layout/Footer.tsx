@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getToolCategories } from "@/lib/wordpress";
+import BottomTeaser from "@/components/sections/BottomTeaser";
 
 export default async function Footer() {
   // Hauptkategorien (hardcoded)
@@ -28,8 +29,10 @@ export default async function Footer() {
   ];
 
   return (
-    <footer className="bg-white border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <>
+      <BottomTeaser />
+      <footer className="bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 
@@ -153,5 +156,6 @@ export default async function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
