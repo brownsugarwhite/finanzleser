@@ -1,13 +1,8 @@
 <svg width="581" height="500" viewBox="0 0 581 500" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
-  path[stroke] { vector-effect: non-scaling-stroke; }
+  path { vector-effect: non-scaling-stroke; }
   @media (prefers-color-scheme: dark) {
-    path { fill-opacity: 0.3; }
-    path[stroke="#000000"],
-    path[stroke="black"] {
-      stroke: white;
-      stroke-opacity: 1 !important;
-    }
+    path { fill-opacity: 0.3; stroke: white; stroke-opacity: 1; }
   }
 </style>
 <g style="mix-blend-mode:darken" clip-path="url(#clip0_49_90)">
