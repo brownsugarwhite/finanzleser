@@ -130,20 +130,21 @@ export default function Header() {
             </form>
           </div>
 
-          {/* Megamenu - always available, appears when openMegamenu is set */}
-          {openMegamenu && (
-            <div className="border-t border-gray-200 bg-white">
-              {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
-                <MegaMenu
-                  activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
-                  items={NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu || []}
-                  mainCategoryHref={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href || ""}
-                  onClose={() => setOpenMegamenu(null)}
-                />
-              )}
-            </div>
-          )}
         </div>
+
+        {/* Megamenu Overlay */}
+        {openMegamenu && (
+          <div className="fixed left-0 right-0 top-16 z-50 bg-white border-t border-gray-200">
+            {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
+              <MegaMenu
+                activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
+                items={NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu || []}
+                mainCategoryHref={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href || ""}
+                onClose={() => setOpenMegamenu(null)}
+              />
+            )}
+          </div>
+        )}
 
         {/* Mobile Layout */}
         <div className="md:hidden flex items-center justify-between">

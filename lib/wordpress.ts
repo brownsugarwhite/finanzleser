@@ -462,6 +462,10 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
 // Alle Rechner
 // ─────────────────────────────────────────────
 
+// ─────────────────────────────────────────────
+// Alle Rechner
+// ─────────────────────────────────────────────
+
 export async function getAllRechner(): Promise<Rechner[]> {
   const client = getClient();
 
