@@ -8,7 +8,7 @@ export default async function BeitragPage(props: {
   params: Promise<{ kategorie: string; sub: string; slug: string }>;
 }) {
   const params = await props.params;
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(params.slug).catch(() => null);
 
   if (!post) {
     notFound();
