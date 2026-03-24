@@ -14,6 +14,7 @@
 
   /* Text */
   --color-text-primary: #334A27;
+  --color-text-medium: #686C6A;
   --color-text-secondary: #475569;
   --color-text-inverse: #ffffff;
   --color-text-link: var(--color-brand);
@@ -75,6 +76,7 @@
 .dark {
   /* Text */
   --color-text-primary: #ffffff;
+  --color-text-medium: #c5c7c4;
   --color-text-secondary: #94a3b8;
   --color-text-inverse: #0f172a;
 
