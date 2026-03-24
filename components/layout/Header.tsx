@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { NAV_ITEMS } from "@/lib/navItems";
 import MegaMenu from "./MegaMenu";
+import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 export default function Header() {
   const router = useRouter();
@@ -215,7 +216,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-gray-200 pt-4">
+          <nav className="md:hidden border-t border-gray-200 pt-4 pb-4">
+            {/* Dark Mode Toggle */}
+            <div className="flex justify-end mb-4 px-0">
+              <DarkModeToggle />
+            </div>
+
             {NAV_ITEMS.map((item) => (
               <div key={item.label}>
                 <button
