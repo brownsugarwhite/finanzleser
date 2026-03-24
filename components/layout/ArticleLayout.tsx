@@ -6,10 +6,11 @@ type ArticleLayoutProps = {
   children: React.ReactNode;
   title?: string;
   category?: { name: string; slug: string };
+  mainCategory?: string; // Hauptkategorie slug
   sidebar?: React.ReactNode;
 };
 
-export default function ArticleLayout({ children, title, category, sidebar }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, category, mainCategory, sidebar }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -21,9 +22,9 @@ export default function ArticleLayout({ children, title, category, sidebar }: Ar
 
             {/* Article Content */}
             <div className="flex-1 min-w-0">
-              {category && (
+              {category && mainCategory && (
                 <Link
-                  href={`/${category.slug}`}
+                  href={`/${mainCategory}/${category.slug}`}
                   className="text-sm text-blue-600 hover:text-blue-800 mb-2 inline-block"
                 >
                   {category.name}

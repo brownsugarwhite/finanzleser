@@ -24,6 +24,7 @@ export default async function BeitragPage(props: {
     <ArticleLayout
       title={post.title}
       category={category}
+      mainCategory={params.kategorie}
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}
     >
       <div className="prose prose-lg max-w-none">
