@@ -33,9 +33,8 @@ export default function HeroSection() {
                 letterSpacing: "-0.5px",
               }}
             >
-              <p style={{ margin: "0 0 0 0" }}>Das</p>
-              <p style={{ margin: "0 0 0 0" }}>digitale</p>
-              <p style={{ margin: "0 0 0 0" }}>Finanzmagazin</p>
+              <p style={{ margin: "0 0 0 0" }}>Unser</p>
+              <p style={{ margin: "0 0 0 0" }}>Newsletter</p>
             </h2>
 
             {/* p_serif - Merriweather Bold, 21px, line-height 1.38 */}
@@ -76,7 +75,7 @@ export default function HeroSection() {
                   style={{
                     fontFamily: "Open Sans, sans-serif",
                     fontSize: "17px",
-                    color: "#636a5f",
+                    color: "var(--color-text-primary)",
                     fontWeight: "400",
                     lineHeight: "40px",
                     whiteSpace: "nowrap",
