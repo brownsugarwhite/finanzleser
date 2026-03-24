@@ -17,6 +17,7 @@ type ArticleLayoutProps = {
     role?: string;
     date?: string;
     imageUrl?: string;
+    colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
 };
 
@@ -119,6 +120,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                     role={author.role}
                     date={author.date}
                     imageUrl={author.imageUrl}
+                    colorVariant={author.colorVariant}
                   />
                 </div>
               )}

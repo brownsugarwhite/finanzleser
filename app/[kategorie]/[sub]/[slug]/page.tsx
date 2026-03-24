@@ -27,6 +27,13 @@ export default async function BeitragPage(props: {
     year: "numeric",
   });
 
+  // Assign color variant to author based on ID (1-6)
+  const getColorVariant = (authorId?: string): 1 | 2 | 3 | 4 | 5 | 6 => {
+    if (!authorId) return 1;
+    const hash = authorId.charCodeAt(0) + authorId.charCodeAt(authorId.length - 1);
+    return ((hash % 6) + 1) as 1 | 2 | 3 | 4 | 5 | 6;
+  };
+
   return (
     <ArticleLayout
       title={post.title}
@@ -41,6 +48,7 @@ export default async function BeitragPage(props: {
               role: "Autorin bei Finanzleser.de",
               date: formattedDate,
               imageUrl: post.author.node.avatar?.url,
+              colorVariant: getColorVariant(post.author.node.id),
             }
           : undefined
       }

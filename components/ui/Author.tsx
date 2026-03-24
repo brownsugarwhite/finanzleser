@@ -18,26 +18,44 @@ const gradients = {
 };
 
 export default function Author({ name, role = "Autorin bei Finanzleser.de", date, imageUrl, colorVariant = 1 }: AuthorProps) {
+  // Get initials from name
+  const initials = name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
   return (
     <div className="flex gap-4 items-start">
       {/* Profile Image with Gradient Border */}
-      {imageUrl && (
-        <div
-          className="relative shrink-0 w-12 h-12 rounded-full p-1 flex-shrink-0"
-          style={{
-            background: gradients[colorVariant],
-          }}
-        >
-          <div className="relative w-full h-full rounded-full overflow-hidden bg-white">
+      <div
+        className="relative shrink-0 w-12 h-12 rounded-full p-1 flex-shrink-0 flex items-center justify-center"
+        style={{
+          background: gradients[colorVariant],
+        }}
+      >
+        <div className="relative w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center">
+          {imageUrl ? (
             <Image
               src={imageUrl}
               alt={name}
               fill
               className="object-cover"
             />
-          </div>
+          ) : (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "600",
+                color: "var(--color-text-medium)",
+              }}
+            >
+              {initials}
+            </span>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Author Info */}
       <div className="flex flex-col gap-1">
