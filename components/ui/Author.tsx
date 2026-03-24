@@ -5,20 +5,37 @@ interface AuthorProps {
   role?: string;
   date?: string;
   imageUrl?: string;
+  colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-export default function Author({ name, role = "Autorin bei Finanzleser.de", date, imageUrl }: AuthorProps) {
+const gradients = {
+  1: "var(--gradient-author-1)", // Instagram
+  2: "var(--gradient-author-2)", // Warm Sunset
+  3: "var(--gradient-author-3)", // Purple
+  4: "var(--gradient-author-4)", // Ocean
+  5: "var(--gradient-author-5)", // Spotify Green
+  6: "var(--gradient-author-6)", // Hot Pink
+};
+
+export default function Author({ name, role = "Autorin bei Finanzleser.de", date, imageUrl, colorVariant = 1 }: AuthorProps) {
   return (
     <div className="flex gap-4 items-start">
-      {/* Profile Image */}
+      {/* Profile Image with Gradient Border */}
       {imageUrl && (
-        <div className="relative shrink-0 w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-          <Image
-            src={imageUrl}
-            alt={name}
-            fill
-            className="object-cover"
-          />
+        <div
+          className="relative shrink-0 w-12 h-12 rounded-full p-1 flex-shrink-0"
+          style={{
+            background: gradients[colorVariant],
+          }}
+        >
+          <div className="relative w-full h-full rounded-full overflow-hidden bg-white">
+            <Image
+              src={imageUrl}
+              alt={name}
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       )}
 

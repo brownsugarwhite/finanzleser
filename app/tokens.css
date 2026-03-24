@@ -70,6 +70,14 @@
 
   /* SVG Effects */
   --svg-dark-filter: none;
+
+  /* Author Avatar Gradients (6 variants) */
+  --gradient-author-1: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram */
+  --gradient-author-2: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); /* Warm Sunset */
+  --gradient-author-3: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple */
+  --gradient-author-4: linear-gradient(135deg, #00D4FF 0%, #0099FF 100%); /* Ocean */
+  --gradient-author-5: linear-gradient(135deg, #1DB954 0%, #1ed760 100%); /* Spotify Green */
+  --gradient-author-6: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%); /* Hot Pink */
 }
 
 /* ─────────────────────────────────────────────
@@ -104,3 +112,18 @@
   /* SVG Effects */
   --svg-dark-filter: brightness(0.5) saturate(0.3);
 }
+
+/* ═══════════════════════════════════════════════
+   Button Styles
+   ═══════════════════════════════════════════════ */
+
+/* Glass Hover Effect – Button Hover State */
+.glass-hover {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.1),
+    inset 0 4px 4px rgba(0, 0, 0, 0.08);
+}
+
