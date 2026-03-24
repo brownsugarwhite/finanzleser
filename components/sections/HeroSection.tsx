@@ -44,7 +44,7 @@ export default function HeroSection() {
                 fontSize: "21px",
                 fontWeight: "700",
                 lineHeight: "1.38",
-                color: "var(--color-text-medium)",
+                color: "var(--color-text-primary)",
                 marginBottom: "15px",
               }}
             >
@@ -75,7 +75,7 @@ export default function HeroSection() {
                   style={{
                     fontFamily: "Open Sans, sans-serif",
                     fontSize: "17px",
-                    color: "var(--color-text-medium)",
+                    color: "var(--color-text-primary)",
                     fontWeight: "400",
                     lineHeight: "40px",
                     whiteSpace: "nowrap",
