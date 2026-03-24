@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
 @import "./components.css";
-@import url("https://fonts.googleapis.com/css2?family=Merryweather:ital@0;1&display=swap");
 
 /* ── Hide top navigation on tablet/mobile ── */
 @media (max-width: 1024px) {

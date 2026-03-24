@@ -27,7 +27,7 @@ export default function ArticleLayout({ children, title, category, mainCategory,
                   href={`/${mainCategory}/${category.slug}`}
                   className="mb-2 inline-block text-blue-600 hover:text-blue-800 transition"
                   style={{
-                    fontFamily: "Merryweather, serif",
+                    fontFamily: "Merriweather, serif",
                     fontSize: "23px",
                     fontStyle: "italic",
                   }}
