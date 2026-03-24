@@ -21,10 +21,10 @@ export default function HeroSection() {
 
           {/* Right: Content - hero_text */}
           <div className="w-full lg:w-1/2" style={{ maxWidth: "442px" }}>
-            {/* H1_big - Merriweather Black, 54px, line-height 1.05 */}
-            <h1
+            {/* H2 - Merriweather Black, 54px, line-height 1.05 */}
+            <h2
               style={{
-                color: "#334a27",
+                color: "var(--color-text-primary)",
                 fontFamily: "'Merriweather', serif",
                 fontSize: "54px",
                 fontWeight: 900,
@@ -36,7 +36,7 @@ export default function HeroSection() {
               <p style={{ margin: "0 0 0 0" }}>Das</p>
               <p style={{ margin: "0 0 0 0" }}>digitale</p>
               <p style={{ margin: "0 0 0 0" }}>Finanzmagazin</p>
-            </h1>
+            </h2>
 
             {/* p_serif - Merriweather Bold, 21px, line-height 1.38 */}
             <div
@@ -45,7 +45,7 @@ export default function HeroSection() {
                 fontSize: "21px",
                 fontWeight: "700",
                 lineHeight: "1.38",
-                color: "#334a27",
+                color: "var(--color-text-primary)",
                 marginBottom: "32px",
               }}
             >
