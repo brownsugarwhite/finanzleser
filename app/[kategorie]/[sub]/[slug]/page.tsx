@@ -27,8 +27,12 @@ export default async function BeitragPage(props: {
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}
     >
       <div className="prose prose-lg max-w-none">
-        {post.content && (
+        {post.content && post.content.trim() ? (
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        ) : (
+          <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
+            <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
+          </div>
         )}
       </div>
     </ArticleLayout>
