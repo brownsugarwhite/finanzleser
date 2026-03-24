@@ -2,6 +2,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
 import Image from "next/image";
+import Author from "@/components/ui/Author";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
@@ -11,9 +12,15 @@ type ArticleLayoutProps = {
   category?: { name: string; slug: string };
   mainCategory?: string; // Hauptkategorie slug
   sidebar?: React.ReactNode;
+  author?: {
+    name: string;
+    role?: string;
+    date?: string;
+    imageUrl?: string;
+  };
 };
 
-export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar, author }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -103,6 +110,16 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                       priority
                     />
                   </div>
+                </div>
+              )}
+              {author && (
+                <div className="mb-8 pt-6 border-t border-gray-200">
+                  <Author
+                    name={author.name}
+                    role={author.role}
+                    date={author.date}
+                    imageUrl={author.imageUrl}
+                  />
                 </div>
               )}
               <article>{children}</article>
