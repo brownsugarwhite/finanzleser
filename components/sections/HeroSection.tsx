@@ -69,10 +69,7 @@ export default function HeroSection() {
                   display: "flex",
                   alignItems: "center",
                   gap: "15px",
-                  transition: "opacity 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
                 <div
                   style={{
