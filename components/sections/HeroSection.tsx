@@ -12,7 +12,7 @@ export default function HeroSection() {
             filter: 'var(--svg-dark-filter, none)'
           }}>
             <Image
-              src="/assets/visuals/animalVisual.svg?v=6"
+              src="/assets/visuals/animalVisual.svg?v=7"
               alt="Unser Newsletter"
               width={600}
               height={500}

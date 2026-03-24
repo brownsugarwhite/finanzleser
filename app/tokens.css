@@ -94,5 +94,5 @@
   --color-overlay-dark: rgba(0, 0, 0, 0.80);
 
   /* SVG Effects */
-  --svg-dark-filter: brightness(0.85) saturate(0.9);
+  --svg-dark-filter: brightness(0.5) saturate(0.3);
 }
