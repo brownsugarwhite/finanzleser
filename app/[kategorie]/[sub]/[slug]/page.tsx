@@ -24,6 +24,7 @@ export default async function BeitragPage(props: {
     <ArticleLayout
       title={post.title}
       excerpt={post.excerpt}
+      featuredImage={post.featuredImage?.node}
       category={category}
       mainCategory={params.kategorie}
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}

@@ -1,17 +1,19 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
+import Image from "next/image";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
   title?: string;
   excerpt?: string;
+  featuredImage?: { sourceUrl: string; altText?: string };
   category?: { name: string; slug: string };
   mainCategory?: string; // Hauptkategorie slug
   sidebar?: React.ReactNode;
 };
 
-export default function ArticleLayout({ children, title, excerpt, category, mainCategory, sidebar }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -49,6 +51,19 @@ export default function ArticleLayout({ children, title, excerpt, category, main
                     __html: excerpt.replace(/<[^>]*>/g, ""),
                   }}
                 />
+              )}
+              {featuredImage?.sourceUrl && (
+                <div className="mb-8 w-full">
+                  <div className="relative w-full h-96">
+                    <Image
+                      src={featuredImage.sourceUrl}
+                      alt={featuredImage.altText || title || "Featured image"}
+                      fill
+                      className="object-cover rounded"
+                      priority
+                    />
+                  </div>
+                </div>
               )}
               <article>{children}</article>
             </div>
