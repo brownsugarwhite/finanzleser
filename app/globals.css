@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./tokens.css";
+@import "./components.css";
 
 /* ── Hide top navigation on tablet/mobile ── */
 @media (max-width: 1024px) {
@@ -60,93 +62,13 @@ body[data-landing] .logo-wrapper {
 html {
   scrollbar-width: none;
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
 
 /* ─────────────────────────────────────────────
-   Design Tokens – werden später aus Figma befüllt
-   ───────────────────────────────────────────── */
-:root {
-  /* Fonts (CSS-Vars werden in layout.tsx per next/font gesetzt) */
-  --font-heading: var(--font-heading, "Merriweather", serif);
-  --font-body: var(--font-body, "Open Sans", sans-serif);
-
-  /* Brand – Platzhalter, Werte kommen aus Figma */
-  --color-brand: #0066cc;
-  --color-brand-hover: #0052a3;
-
-  /* Text */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-inverse: #ffffff;
-  --color-text-link: var(--color-brand);
-
-  /* Backgrounds */
-  --color-bg-page: #ffffff;
-  --color-bg-surface: #f8fafc;
-  --color-bg-subtle: #f1f5f9;
-  --color-bg-inverse: #0f172a;
-
-  /* Borders */
-  --color-border-default: rgba(0, 0, 0, 0.08);
-  --color-border-strong: rgba(0, 0, 0, 0.18);
-  --color-border-inverse: rgba(255, 255, 255, 0.20);
-
-  /* Glass / White */
-  --glass-white-5: rgba(255, 255, 255, 0.05);
-  --glass-white-10: rgba(255, 255, 255, 0.10);
-  --glass-white-20: rgba(255, 255, 255, 0.20);
-  --glass-white-40: rgba(255, 255, 255, 0.40);
-  --glass-white-60: rgba(255, 255, 255, 0.60);
-
-  /* Glass / Dark */
-  --glass-dark-5: rgba(0, 0, 0, 0.05);
-  --glass-dark-10: rgba(0, 0, 0, 0.10);
-  --glass-dark-20: rgba(0, 0, 0, 0.20);
-  --glass-dark-40: rgba(0, 0, 0, 0.40);
-  --glass-dark-60: rgba(0, 0, 0, 0.60);
-
-  /* Glass / Brand */
-  --glass-brand-5: rgba(0, 102, 204, 0.05);
-  --glass-brand-10: rgba(0, 102, 204, 0.10);
-  --glass-brand-20: rgba(0, 102, 204, 0.20);
-  --glass-brand-40: rgba(0, 102, 204, 0.40);
-  --glass-brand-60: rgba(0, 102, 204, 0.60);
-
-  /* Glass / Blur */
-  --glass-blur-sm: 4px;
-  --glass-blur-md: 12px;
-  --glass-blur-lg: 24px;
-  --glass-blur-xl: 40px;
-
-  /* Status */
-  --color-status-success: #16a34a;
-  --color-status-error: #dc2626;
-  --color-status-warning: #d97706;
-
-  /* Overlay */
-  --color-overlay-light: rgba(255, 255, 255, 0.80);
-  --color-overlay-dark: rgba(0, 0, 0, 0.50);
-}
-
-/* ─────────────────────────────────────────────
-   Tailwind Theme Erweiterung
-   ───────────────────────────────────────────── */
-@theme inline {
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-
-  --color-brand: var(--color-brand);
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-bg-page: var(--color-bg-page);
-  --color-bg-surface: var(--color-bg-surface);
-  --color-bg-subtle: var(--color-bg-subtle);
-}
-
-/* ─────────────────────────────────────────────
-   Basis-Stile
+   Base Styles
    ───────────────────────────────────────────── */
 body {
   background-color: var(--color-bg-page);
@@ -157,54 +79,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  line-height: 1.2;
-}
+@theme inline {
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
 
-/* ─────────────────────────────────────────────
-   Glassmorphism Utility Classes
-   Hinweis: Mobile max. 3-4 blur-Elemente gleichzeitig
-   ───────────────────────────────────────────── */
-@utility glass-card {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.20);
-}
-
-@utility glass-dark {
-  background: rgba(0, 0, 0, 0.20);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.30),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-@utility glass-brand {
-  background: var(--glass-brand-10);
-  backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
-  border: 1px solid var(--glass-brand-20);
-  box-shadow:
-    0 8px 32px var(--glass-brand-5),
-    inset 0 1px 0 var(--glass-brand-20);
-}
-
-/* Extends behind iOS status bar when viewport-fit=cover is active */
-.progressive-blur {
-  top: 0;
-  height: var(--blur-height, 120px);
-}
-
-@utility glass-subtle {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  --color-brand: var(--color-brand);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-bg-page: var(--color-bg-page);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-subtle: var(--color-bg-subtle);
 }

@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, PostACF, SEO } from "./types";
+import { decodePostContent } from "./html-utils";
 
 function getClient(): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
@@ -41,7 +42,7 @@ export async function getAllPosts(): Promise<Post[]> {
   `;
 
   const data = await client.request<{ posts: { nodes: Post[] } }>(query);
-  return data.posts.nodes;
+  return data.posts.nodes.map(post => decodePostContent(post));
 }
 
 // ─────────────────────────────────────────────
@@ -85,7 +86,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
     const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
       search: searchQuery,
     });
-    return data.posts.nodes;
+    return data.posts.nodes.map(post => decodePostContent(post));
   } catch (error) {
     console.error(`Error searching posts for "${searchQuery}":`, error);
     return [];
@@ -137,7 +138,8 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
     }>(query, {
       slug: [categorySlug],
     });
-    return data.categories.nodes[0]?.posts.nodes || [];
+    const posts = data.categories.nodes[0]?.posts.nodes || [];
+    return posts.map(post => decodePostContent(post));
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
     return [];
@@ -182,7 +184,12 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
   try {
     const data = await client.request<{ posts: { nodes: Post[] } }>(query, { slug });
-    const post = data.posts.nodes[0] || null;
+    let post = data.posts.nodes[0] || null;
+
+    // Dekodiere HTML-Entities
+    if (post) {
+      post = decodePostContent(post);
+    }
 
     // If it's a regular post, try to fetch ACF fields separately
     if (post) {
@@ -351,10 +358,10 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
     });
 
     // If no direct posts, collect from children
-    let allPosts = category.posts.nodes;
+    let allPosts = category.posts.nodes.map(post => decodePostContent(post));
     if (allPosts.length === 0 && childrenData.categories.nodes.length > 0) {
       childrenData.categories.nodes.forEach((child) => {
-        allPosts = allPosts.concat(child.posts.nodes);
+        allPosts = allPosts.concat(child.posts.nodes.map(post => decodePostContent(post)));
       });
       allPosts = allPosts.slice(0, 6); // limit to 6
     }

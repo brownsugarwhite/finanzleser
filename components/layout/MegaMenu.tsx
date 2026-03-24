@@ -20,6 +20,7 @@ export default function MegaMenu({
 }: MegaMenuProps) {
   const [selectedSub, setSelectedSub] = useState<string>(items[0]?.href || "");
   const [posts, setPosts] = useState<Post[]>([]);
+  const [hasMorePosts, setHasMorePosts] = useState(false);
   const [tools, setTools] = useState<Rechner[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -45,6 +46,11 @@ export default function MegaMenu({
     loadTools();
   }, []);
 
+  // Reset to first subcategory when category changes
+  useEffect(() => {
+    setSelectedSub(items[0]?.href || "");
+  }, [items]);
+
   // Load posts when selectedSub changes
   useEffect(() => {
     const loadPosts = async () => {
@@ -54,7 +60,8 @@ export default function MegaMenu({
         const response = await fetch(`/api/megamenu/posts?category=${slug}`);
         if (response.ok) {
           const data = await response.json();
-          setPosts(data);
+          setPosts(data.posts);
+          setHasMorePosts(data.hasMore);
         }
       } catch (error) {
         console.error("Error loading posts:", error);
@@ -74,7 +81,7 @@ export default function MegaMenu({
         {/* Left Column: Subcategories */}
         <div className="min-h-96">
           <h3 className="text-sm font-bold text-gray-900 mb-4">Kategorien</h3>
-          <nav className="space-y-2 max-h-80 overflow-y-auto">
+          <nav className="space-y-2">
             {items.map((item) => (
               <button
                 key={item.href}
@@ -89,13 +96,6 @@ export default function MegaMenu({
               </button>
             ))}
           </nav>
-          <Link
-            href={mainCategoryHref}
-            onClick={onClose}
-            className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
-          >
-            Alle anzeigen [alle]
-          </Link>
         </div>
 
         {/* Middle Column: Posts */}
@@ -119,13 +119,15 @@ export default function MegaMenu({
           ) : (
             <div className="text-sm text-gray-500">Keine Beiträge gefunden</div>
           )}
-          <Link
-            href={selectedSub}
-            onClick={onClose}
-            className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
-          >
-            Alle Beiträge [alle]
-          </Link>
+          {hasMorePosts && (
+            <Link
+              href={selectedSub}
+              onClick={onClose}
+              className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
+            >
+              Alle Beiträge [alle]
+            </Link>
+          )}
         </div>
 
         {/* Right Column: Tools */}

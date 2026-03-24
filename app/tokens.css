@@ -1,0 +1,67 @@
+/* ─────────────────────────────────────────────
+   Design Tokens
+   Farben, Fonts, Spacing, Glassmorphism
+   ───────────────────────────────────────────── */
+
+:root {
+  /* Fonts */
+  --font-heading: var(--font-heading, "Merriweather", serif);
+  --font-body: var(--font-body, "Open Sans", sans-serif);
+
+  /* Brand */
+  --color-brand: #0066cc;
+  --color-brand-hover: #0052a3;
+
+  /* Text */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-inverse: #ffffff;
+  --color-text-link: var(--color-brand);
+
+  /* Backgrounds */
+  --color-bg-page: #ffffff;
+  --color-bg-surface: #f8fafc;
+  --color-bg-subtle: #f1f5f9;
+  --color-bg-inverse: #0f172a;
+
+  /* Borders */
+  --color-border-default: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.18);
+  --color-border-inverse: rgba(255, 255, 255, 0.20);
+
+  /* Glass / White */
+  --glass-white-5: rgba(255, 255, 255, 0.05);
+  --glass-white-10: rgba(255, 255, 255, 0.10);
+  --glass-white-20: rgba(255, 255, 255, 0.20);
+  --glass-white-40: rgba(255, 255, 255, 0.40);
+  --glass-white-60: rgba(255, 255, 255, 0.60);
+
+  /* Glass / Dark */
+  --glass-dark-5: rgba(0, 0, 0, 0.05);
+  --glass-dark-10: rgba(0, 0, 0, 0.10);
+  --glass-dark-20: rgba(0, 0, 0, 0.20);
+  --glass-dark-40: rgba(0, 0, 0, 0.40);
+  --glass-dark-60: rgba(0, 0, 0, 0.60);
+
+  /* Glass / Brand */
+  --glass-brand-5: rgba(0, 102, 204, 0.05);
+  --glass-brand-10: rgba(0, 102, 204, 0.10);
+  --glass-brand-20: rgba(0, 102, 204, 0.20);
+  --glass-brand-40: rgba(0, 102, 204, 0.40);
+  --glass-brand-60: rgba(0, 102, 204, 0.60);
+
+  /* Glass / Blur */
+  --glass-blur-sm: 4px;
+  --glass-blur-md: 12px;
+  --glass-blur-lg: 24px;
+  --glass-blur-xl: 40px;
+
+  /* Status */
+  --color-status-success: #16a34a;
+  --color-status-error: #dc2626;
+  --color-status-warning: #d97706;
+
+  /* Overlay */
+  --color-overlay-light: rgba(255, 255, 255, 0.80);
+  --color-overlay-dark: rgba(0, 0, 0, 0.50);
+}

@@ -1,0 +1,114 @@
+/* ─────────────────────────────────────────────
+   Component Styles
+   Typography, Glassmorphism, UI Elements
+   ───────────────────────────────────────────── */
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+}
+
+h1 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+h2 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+h3 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+h4 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+h5 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+h6 {
+  font-family: 'Merriweather', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+/* Article Prose Styles */
+.prose {
+  line-height: 1.8;
+}
+
+.prose h2 {
+  margin-top: 2em !important;
+  margin-bottom: 1em !important;
+}
+
+.prose h3 {
+  margin-top: 1.5em !important;
+  margin-bottom: 0.75em !important;
+}
+
+.prose p {
+  margin-bottom: 1.5em !important;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.5em !important;
+  margin-top: 1em !important;
+}
+
+.prose li {
+  margin-bottom: 0.5em !important;
+}
+
+/* Glassmorphism Utilities */
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+@utility glass-dark {
+  background: rgba(0, 0, 0, 0.20);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@utility glass-brand {
+  background: var(--glass-brand-10);
+  backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
+  border: 1px solid var(--glass-brand-20);
+  box-shadow:
+    0 8px 32px var(--glass-brand-5),
+    inset 0 1px 0 var(--glass-brand-20);
+}
+
+@utility glass-subtle {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Progressive blur for iOS status bar */
+.progressive-blur {
+  top: 0;
+  height: var(--blur-height, 120px);
+}
