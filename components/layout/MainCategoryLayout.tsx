@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import type { Post } from "@/lib/types";
 
 interface MainCategoryLayoutProps {
@@ -23,6 +24,7 @@ export default function MainCategoryLayout({
         {/* Hero */}
         <div className="bg-gray-50 border-b border-gray-200 py-16">
           <div className="max-w-7xl mx-auto px-6">
+            <Breadcrumb />
             <h1 className="text-5xl font-bold mb-4">{name}</h1>
             <p className="text-lg text-gray-600">
               Entdecken Sie unsere Inhalte zum Thema {name.toLowerCase()}

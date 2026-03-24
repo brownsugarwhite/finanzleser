@@ -1,9 +1,10 @@
+"use client";
+
 import Image from "next/image";
 
 interface ButtonProps {
   label: string;
   onClick?: () => void;
-  iconSrc?: string;
   variant?: "primary" | "secondary";
   size?: "md" | "lg";
 }
@@ -11,10 +12,10 @@ interface ButtonProps {
 export default function Button({
   label,
   onClick,
-  iconSrc = "https://www.figma.com/api/mcp/asset/14cc73d8-b8c8-4dbf-b792-e69885b554bd",
   variant = "primary",
   size = "md",
 }: ButtonProps) {
+
   const sizeStyles = {
     md: {
       height: "50px",
@@ -68,28 +69,56 @@ export default function Button({
       >
         <p style={{ margin: "0", padding: "0" }}>{label}</p>
       </div>
-      {iconSrc && (
+      <div
+        style={{
+          position: "relative",
+          width: `${currentSize.iconSize}px`,
+          height: `${currentSize.iconSize}px`,
+          flexShrink: 0,
+        }}
+      >
+        {/* Grüner Hintergrund */}
         <div
           style={{
-            position: "relative",
-            width: `${currentSize.iconSize}px`,
-            height: `${currentSize.iconSize}px`,
-            flexShrink: 0,
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "var(--color-brand)",
+            borderRadius: "15px",
+          }}
+        />
+
+        {/* Weißer Pfeil - wird animiert mit scaleY */}
+        <svg
+          width="11"
+          height="15"
+          viewBox="0 0 11 15"
+          fill="none"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            marginLeft: "-5.5px",
+            marginTop: "-7.5px",
           }}
         >
-          <img
-            alt="Arrow"
-            src={iconSrc}
+          <g
             style={{
-              position: "absolute",
-              display: "block",
-              width: "100%",
-              height: "100%",
-              maxWidth: "none",
+              transformOrigin: "5.5px 7.5px",
             }}
-          />
-        </div>
-      )}
+          >
+            <path
+              d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
+              stroke="white"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+          </g>
+        </svg>
+      </div>
     </button>
   );
 }

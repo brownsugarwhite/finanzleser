@@ -32,8 +32,8 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
       <div
         className="relative shrink-0 rounded-full flex-shrink-0 flex items-center justify-center"
         style={{
-          width: "50px",
-          height: "50px",
+          width: "52px",
+          height: "52px",
           padding: "3px",
           background: gradients[colorVariant],
         }}
@@ -62,19 +62,19 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
 
       {/* Author Info */}
       <div className="flex flex-col gap-1">
-        <p style={{ fontSize: "14px", lineHeight: "1.1em" }}>
+        <p style={{ fontSize: "14px", lineHeight: "1.15em" }}>
           <span style={{ color: "var(--color-text-medium)" }}>von </span>
           <span style={{ color: "var(--color-text-medium)", fontWeight: "600" }}>
             {name}
           </span>
         </p>
         {role && (
-          <p style={{ fontSize: "14px", lineHeight: "1.4", color: "var(--color-text-medium)" }}>
+          <p style={{ fontSize: "14px", lineHeight: "1.15em", color: "var(--color-text-medium)" }}>
             {role}
           </p>
         )}
         {date && (
-          <p style={{ fontSize: "14px", lineHeight: "1.4", color: "var(--color-text-medium)" }}>
+          <p style={{ fontSize: "14px", lineHeight: "1.15em", color: "var(--color-text-medium)" }}>
             {date}
           </p>
         )}

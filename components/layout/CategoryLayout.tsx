@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import type { Post } from "@/lib/types";
 
 type CategoryLayoutProps = {
@@ -16,6 +17,7 @@ export default function CategoryLayout({ title, children, posts }: CategoryLayou
       <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
+          <Breadcrumb />
           {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
 
           {/* Posts Grid (wenn Posts vorhanden) */}

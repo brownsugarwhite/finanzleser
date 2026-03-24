@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import { searchPosts } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
 
@@ -23,6 +24,7 @@ export default async function SearchPage(props: SearchPageProps) {
       <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
+          <Breadcrumb />
           {/* Search Hero */}
           <div className="mb-12">
             <h1 className="text-4xl font-bold mb-6">Suche</h1>

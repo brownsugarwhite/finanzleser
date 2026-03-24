@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
@@ -35,6 +36,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
 
             {/* Article Content */}
             <div className="flex-1 min-w-0 max-w-[860px]">
+              <Breadcrumb />
               {category && mainCategory && (
                 <Link
                   href={`/${mainCategory}/${category.slug}`}
