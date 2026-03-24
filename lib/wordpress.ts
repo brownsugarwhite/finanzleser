@@ -582,3 +582,34 @@ export async function getAllRechner(): Promise<Rechner[]> {
     return [];
   }
 }
+
+// ─────────────────────────────────────────────
+// Tools (Rechner/Vergleiche/Checklisten) nach Slugs
+// ─────────────────────────────────────────────
+
+export async function getToolsBySlug(slugs: string[]): Promise<Post[]> {
+  const client = getClient();
+
+  // Query posts and CPTs by slug
+  const query = gql`
+    query GetToolsBySlug($slugs: [String!]!) {
+      posts(where: { name: $slugs }, first: 100) {
+        nodes {
+          id
+          title
+          slug
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
+      slugs,
+    });
+    return data.posts.nodes;
+  } catch (error) {
+    console.error("Error fetching tools by slug:", error);
+    return [];
+  }
+}
