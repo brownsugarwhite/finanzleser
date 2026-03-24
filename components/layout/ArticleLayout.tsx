@@ -12,6 +12,7 @@ type ArticleLayoutProps = {
   category?: { name: string; slug: string };
   mainCategory?: string; // Hauptkategorie slug
   sidebar?: React.ReactNode;
+  contentTableOfContents?: React.ReactNode;
   author?: {
     name: string;
     role?: string;
@@ -21,7 +22,7 @@ type ArticleLayoutProps = {
   };
 };
 
-export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar, author }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar, contentTableOfContents, author }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -137,6 +138,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                   />
                 </div>
               )}
+              {contentTableOfContents}
               <article>{children}</article>
             </div>
           </div>

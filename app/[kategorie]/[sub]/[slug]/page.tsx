@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import TableOfContents from "@/components/sections/TableOfContents";
+import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 
 export default async function BeitragPage(props: {
   params: Promise<{ kategorie: string; sub: string; slug: string }>;
@@ -53,6 +54,11 @@ export default async function BeitragPage(props: {
           : undefined
       }
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}
+      contentTableOfContents={
+        post.content ? (
+          <ArticleTableOfContents content={post.content} tools={post.beitragFelder?.beitragRechner} />
+        ) : undefined
+      }
     >
       <div className="prose prose-lg max-w-none">
         {post.content && post.content.trim() ? (
