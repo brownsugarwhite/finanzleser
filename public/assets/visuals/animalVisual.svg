@@ -1,20 +1,9 @@
 <svg width="581" height="500" viewBox="0 0 581 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <filter id="darkModeFilter">
-    <feComponentTransfer>
-      <feFuncR type="linear" slope="0.5"/>
-      <feFuncG type="linear" slope="0.5"/>
-      <feFuncB type="linear" slope="0.5"/>
-      <feFuncA type="linear" slope="1"/>
-    </feComponentTransfer>
-    <feColorMatrix type="saturate" values="0.3"/>
-  </filter>
-</defs>
 <style>
   path { vector-effect: non-scaling-stroke; }
   g { vector-effect: non-scaling-stroke; }
   @media (prefers-color-scheme: dark) {
-    path { filter: url(#darkModeFilter); stroke: white; stroke-opacity: 1 !important; }
+    path { fill-opacity: 0.3; stroke: white; stroke-opacity: 1 !important; }
   }
 </style>
 <g style="mix-blend-mode:darken" clip-path="url(#clip0_49_90)">
