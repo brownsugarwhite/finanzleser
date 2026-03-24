@@ -23,6 +23,7 @@ export default async function BeitragPage(props: {
   return (
     <ArticleLayout
       title={post.title}
+      excerpt={post.excerpt}
       category={category}
       mainCategory={params.kategorie}
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}

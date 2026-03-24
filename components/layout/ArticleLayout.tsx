@@ -5,12 +5,13 @@ import Link from "next/link";
 type ArticleLayoutProps = {
   children: React.ReactNode;
   title?: string;
+  excerpt?: string;
   category?: { name: string; slug: string };
   mainCategory?: string; // Hauptkategorie slug
   sidebar?: React.ReactNode;
 };
 
-export default function ArticleLayout({ children, title, category, mainCategory, sidebar }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, category, mainCategory, sidebar }: ArticleLayoutProps) {
   return (
     <>
       <Header />
@@ -35,7 +36,20 @@ export default function ArticleLayout({ children, title, category, mainCategory,
                   {category.name}
                 </Link>
               )}
-              {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
+              {title && <h1 className="text-3xl font-bold mb-4">{title}</h1>}
+              {excerpt && (
+                <p
+                  className="mb-8 text-gray-600"
+                  style={{
+                    fontFamily: "Merriweather, serif",
+                    fontSize: "18px",
+                    fontWeight: "400",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: excerpt.replace(/<[^>]*>/g, ""),
+                  }}
+                />
+              )}
               <article>{children}</article>
             </div>
           </div>
