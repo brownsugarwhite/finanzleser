@@ -390,6 +390,8 @@ export interface ToolCategory {
   label: string;
   href: string;
   count: number;
+  cptCount: number;
+  postCount: number;
 }
 
 export async function getToolCategories(): Promise<ToolCategory[]> {
@@ -412,6 +414,21 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
           id
         }
       }
+      rechnerCategory: categories(where: { slug: ["rechner"] }) {
+        nodes {
+          count
+        }
+      }
+      checklistenCategory: categories(where: { slug: ["checkliste"] }) {
+        nodes {
+          count
+        }
+      }
+      vergleichCategory: categories(where: { slug: ["vergleich"] }) {
+        nodes {
+          count
+        }
+      }
     }
   `;
 
@@ -420,34 +437,52 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
       allRechner: { nodes: Array<{ id: string }> };
       checklisten: { nodes: Array<{ id: string }> };
       vergleiche: { nodes: Array<{ id: string }> };
+      rechnerCategory: { nodes: Array<{ count: number }> };
+      checklistenCategory: { nodes: Array<{ count: number }> };
+      vergleichCategory: { nodes: Array<{ count: number }> };
     }>(query);
 
     const categories: ToolCategory[] = [];
 
-    // Rechner
-    if (data.allRechner.nodes.length > 0) {
+    // Rechner (CPT + Posts mit Kategorie)
+    const rechnerCptCount = data.allRechner.nodes.length;
+    const rechnerPostCount = data.rechnerCategory.nodes[0]?.count || 0;
+    const rechnerTotal = rechnerCptCount + rechnerPostCount;
+    if (rechnerTotal > 0) {
       categories.push({
         label: "Rechner",
         href: "/finanztools/rechner",
-        count: data.allRechner.nodes.length,
+        count: rechnerTotal,
+        cptCount: rechnerCptCount,
+        postCount: rechnerPostCount,
       });
     }
 
-    // Checklisten
-    if (data.checklisten.nodes.length > 0) {
+    // Checklisten (CPT + Posts mit Kategorie)
+    const checklistenCptCount = data.checklisten.nodes.length;
+    const checklistenPostCount = data.checklistenCategory.nodes[0]?.count || 0;
+    const checklistenTotal = checklistenCptCount + checklistenPostCount;
+    if (checklistenTotal > 0) {
       categories.push({
         label: "Checklisten",
         href: "/finanztools/checklisten",
-        count: data.checklisten.nodes.length,
+        count: checklistenTotal,
+        cptCount: checklistenCptCount,
+        postCount: checklistenPostCount,
       });
     }
 
-    // Vergleiche
-    if (data.vergleiche.nodes.length > 0) {
+    // Vergleiche (CPT + Posts mit Kategorie)
+    const vergleicheCptCount = data.vergleiche.nodes.length;
+    const vergleichePostCount = data.vergleichCategory.nodes[0]?.count || 0;
+    const vergleicheTotal = vergleicheCptCount + vergleichePostCount;
+    if (vergleicheTotal > 0) {
       categories.push({
         label: "Vergleiche",
         href: "/finanztools/vergleiche",
-        count: data.vergleiche.nodes.length,
+        count: vergleicheTotal,
+        cptCount: vergleicheCptCount,
+        postCount: vergleichePostCount,
       });
     }
 
@@ -461,6 +496,64 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
 // ─────────────────────────────────────────────
 // Alle Rechner
 // ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+// Alle Rechner
+// ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+// Posts & CPTs nach Kategorie (kombiniert)
+// ─────────────────────────────────────────────
+
+export async function getPostsAndCPTsByCategory(categorySlug: string): Promise<Post[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetPostsByCategory($slug: [String!]!) {
+      categories(where: { slug: $slug }) {
+        nodes {
+          posts(first: 100) {
+            nodes {
+              id
+              title
+              slug
+              date
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                  altText
+                }
+              }
+              categories {
+                nodes {
+                  name
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      categories: {
+        nodes: Array<{ posts: { nodes: Post[] } }>;
+      };
+    }>(query, {
+      slug: [categorySlug],
+    });
+
+    const posts = data.categories.nodes[0]?.posts.nodes || [];
+    return posts.map(post => decodePostContent(post));
+  } catch (error) {
+    console.error(`Error fetching posts for category "${categorySlug}":`, error);
+    return [];
+  }
+}
 
 // ─────────────────────────────────────────────
 // Alle Rechner
