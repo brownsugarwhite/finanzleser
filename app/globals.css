@@ -77,6 +77,39 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Global dark mode text colors */
+.text-gray-900,
+.text-gray-700,
+.text-gray-600,
+.text-gray-500,
+.text-gray-400,
+.text-gray-300,
+.text-gray-200,
+.text-gray-100 {
+  color: var(--color-text-primary) !important;
+}
+
+/* Global backgrounds */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100 {
+  background-color: var(--color-bg-page) !important;
+}
+
+.bg-gray-800,
+.bg-gray-900 {
+  background-color: var(--color-bg-surface) !important;
+}
+
+/* Global borders */
+.border-gray-200,
+.border-gray-300,
+.border-gray-700,
+.border-gray-600 {
+  border-color: var(--color-border-default) !important;
 }
 
 @theme inline {

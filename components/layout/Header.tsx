@@ -38,7 +38,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+    <header className="bg-white border-b border-gray-200">
       <div ref={megamenuRef}>
         <div className="max-w-7xl mx-auto px-6 py-4">
           {/* Desktop Layout */}
@@ -68,8 +68,8 @@ export default function Header() {
                     }
                     className={`text-sm font-medium transition whitespace-nowrap ${
                       item.featured
-                        ? "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                        : "text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+                        ? "text-blue-600 hover:text-blue-800"
+                        : "text-gray-700 hover:text-gray-900"
                     }`}
                   >
                     <Link href={item.href} onClick={(e) => item.megamenu && e.preventDefault()}>
@@ -82,13 +82,13 @@ export default function Header() {
                     <div
                       onMouseEnter={() => setOpenSubmenu(item.label)}
                       onMouseLeave={() => setOpenSubmenu(null)}
-                      className="absolute top-full left-0 mt-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg opacity-0 invisible hover:opacity-100 hover:visible transition-all duration-200 z-50"
+                      className="absolute top-full left-0 mt-0 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible hover:opacity-100 hover:visible transition-all duration-200 z-50"
                     >
                       {item.submenu.map((subitem) => (
                         <Link
                           key={subitem.label}
                           href={subitem.href}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap first:rounded-t last:rounded-b"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap first:rounded-t last:rounded-b"
                         >
                           {subitem.label}
                         </Link>
@@ -106,11 +106,11 @@ export default function Header() {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Suchen..."
-              className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"
-              className="p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 transition"
+              className="p-2 text-gray-700 hover:text-gray-900 transition"
               aria-label="Search"
             >
               <svg
@@ -134,7 +134,7 @@ export default function Header() {
 
         {/* Megamenu Overlay */}
         {openMegamenu && (
-          <div className="fixed left-0 right-0 top-16 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+          <div className="fixed left-0 right-0 top-16 z-50 bg-white border-t border-gray-200">
             {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
               <MegaMenu
                 activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
@@ -162,7 +162,7 @@ export default function Header() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
+            className="p-2 text-gray-700 hover:text-gray-900"
             aria-label="Toggle menu"
           >
             <svg
@@ -182,18 +182,18 @@ export default function Header() {
         </div>
 
         {/* Mobile Search */}
-        <div className="md:hidden mt-4 border-t border-gray-200 dark:border-gray-700 pt-4 pb-4">
+        <div className="md:hidden mt-4 border-t border-gray-200 pt-4 pb-4">
           <form onSubmit={handleSearch} className="flex gap-2">
             <input
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Suchen..."
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-3 py-2 text-sm border border-gray-300 bg-white text-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"
-              className="p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 transition"
+              className="p-2 text-gray-700 hover:text-gray-900 transition"
               aria-label="Search"
             >
               <svg
@@ -215,7 +215,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-gray-200 dark:border-gray-700 pt-4">
+          <nav className="md:hidden border-t border-gray-200 pt-4">
             {NAV_ITEMS.map((item) => (
               <div key={item.label}>
                 <button
@@ -224,8 +224,8 @@ export default function Header() {
                   }
                   className={`w-full text-left px-0 py-2 text-sm font-medium transition ${
                     item.featured
-                      ? "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                      : "text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
+                      ? "text-blue-600 hover:text-blue-800"
+                      : "text-gray-700 hover:text-gray-900"
                   }`}
                 >
                   {item.label}
@@ -233,12 +233,12 @@ export default function Header() {
 
                 {/* Mobile Dropdown */}
                 {item.submenu && openSubmenu === item.label && (
-                  <div className="bg-gray-50 dark:bg-gray-800 rounded my-2">
+                  <div className="bg-gray-50 rounded my-2">
                     {item.submenu.map((subitem) => (
                       <Link
                         key={subitem.label}
                         href={subitem.href}
-                        className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {subitem.label}

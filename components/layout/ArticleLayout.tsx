@@ -17,7 +17,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-white dark:bg-gray-900">
+      <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex gap-8">
             {/* Sidebar (TOC, etc.) */}
@@ -28,7 +28,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
               {category && mainCategory && (
                 <Link
                   href={`/${mainCategory}/${category.slug}`}
-                  className="mb-2 inline-block text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition"
+                  className="mb-2 inline-block text-blue-600 hover:text-blue-800 transition"
                   style={{
                     fontFamily: "Merriweather, serif",
                     fontSize: "23px",
@@ -41,7 +41,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
               {title && <h1 className="text-3xl font-bold mb-4">{title}</h1>}
               {excerpt && (
                 <p
-                  className="mb-8 text-gray-600 dark:text-gray-400"
+                  className="mb-8 text-gray-600"
                   style={{
                     fontFamily: "Merriweather, serif",
                     fontSize: "18px",
@@ -55,7 +55,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
               {featuredImage?.sourceUrl && (
                 <div className="mb-8 w-full">
                   {/* Meta Info Bar */}
-                  <div className="flex justify-between items-center mb-4 text-gray-600 dark:text-gray-400">
+                  <div className="flex justify-between items-center mb-4 text-gray-600">
                     {/* Lesedauer */}
                     <div className="flex items-center gap-1 text-sm" style={{ fontSize: "14px" }}>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                         href={`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition"
+                        className="text-gray-600 hover:text-blue-600 transition"
                         title="Auf Facebook teilen"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}&text=${encodeURIComponent(title || "")}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-300 transition"
+                        className="text-gray-600 hover:text-blue-400 transition"
                         title="Auf Twitter teilen"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
