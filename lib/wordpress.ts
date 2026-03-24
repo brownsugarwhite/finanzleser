@@ -45,6 +45,45 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 // ─────────────────────────────────────────────
+// Beiträge nach Kategorie
+// ─────────────────────────────────────────────
+
+export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetPostsByCategory($categoryName: String!) {
+      posts(where: { categoryName: $categoryName }) {
+        nodes {
+          id
+          title
+          slug
+          date
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
+    categoryName: categorySlug,
+  });
+  return data.posts.nodes;
+}
+
+// ─────────────────────────────────────────────
 // Einzelner Beitrag mit ACF-Feldern
 // ─────────────────────────────────────────────
 
