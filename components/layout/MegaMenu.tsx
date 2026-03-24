@@ -35,11 +35,12 @@ export default function MegaMenu({
     const loadTools = async () => {
       setLoading(true);
       try {
-        const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory;
+        // Extract subcategory slug from href (e.g., "/finanzen/geldanlagen" -> "geldanlagen")
+        const subCategorySlug = getCategorySlug(selectedSub);
 
-        if (toolCategory) {
-          // Fetch tools by category
-          const response = await fetch(`/api/megamenu/tools?category=${toolCategory}`);
+        if (subCategorySlug) {
+          // Fetch tools by subcategory
+          const response = await fetch(`/api/megamenu/tools?category=${subCategorySlug}`);
           if (response.ok) {
             const data = await response.json();
             setTools(data);
@@ -57,7 +58,7 @@ export default function MegaMenu({
     if (selectedSub) {
       loadTools();
     }
-  }, [selectedSub, items]);
+  }, [selectedSub]);
 
   // Reset to first subcategory when category changes
   useEffect(() => {

@@ -2,7 +2,6 @@
 export type NavSubItem = {
   label: string;
   href: string;
-  toolCategory?: string; // Category to load tools from (rechner, vergleich, checkliste)
 };
 
 export type NavItem = {
