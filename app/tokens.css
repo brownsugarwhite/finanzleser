@@ -11,6 +11,8 @@
   /* Brand */
   --color-brand: #45A117;
   --color-brand-hover: #2d7a0f;
+  --color-brand-secondary: #D3005E;
+  --color-brand-secondary-hover: #a20046;
 
   /* Text */
   --color-text-primary: #334A27;
@@ -74,6 +76,10 @@
    Dark Mode Overrides
    ───────────────────────────────────────────── */
 .dark {
+  /* Brand */
+  --color-brand-secondary: #D3005E;
+  --color-brand-secondary-hover: #a20046;
+
   /* Text */
   --color-text-primary: #ffffff;
   --color-text-medium: #c5c7c4;
