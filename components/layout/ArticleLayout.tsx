@@ -65,7 +65,8 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                     </div>
 
                     {/* Share */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm" style={{ fontSize: "14px" }}>Teilen</span>
                       <a
                         href={`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "")}`}
                         target="_blank"
