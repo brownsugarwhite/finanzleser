@@ -4,8 +4,14 @@
   g { vector-effect: non-scaling-stroke; }
 
   @media (prefers-color-scheme: dark) {
-    path { stroke: white; }
-    g { stroke: white; }
+    path {
+      stroke: white;
+      mix-blend-mode: multiply;
+    }
+    g {
+      stroke: white;
+      mix-blend-mode: multiply;
+    }
   }
 </style>
 <g style="mix-blend-mode:darken" clip-path="url(#clip0_49_90)">
