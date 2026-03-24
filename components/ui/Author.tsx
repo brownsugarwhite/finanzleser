@@ -30,8 +30,11 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
     <div className="flex gap-4 items-start">
       {/* Profile Image with Gradient Border */}
       <div
-        className="relative shrink-0 w-12 h-12 rounded-full p-1 flex-shrink-0 flex items-center justify-center"
+        className="relative shrink-0 rounded-full flex-shrink-0 flex items-center justify-center"
         style={{
+          width: "50px",
+          height: "50px",
+          padding: "3px",
           background: gradients[colorVariant],
         }}
       >
