@@ -90,61 +90,93 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const client = getClient();
 
+  // Query all post types (standard posts + custom post types like dokumente, nachrichten, etc.)
+  // Note: Custom post types may not have ACF fields, so we query basics for all
   const query = gql`
     query GetPost($slug: String!) {
-      postBy(slug: $slug) {
-        id
-        title
-        slug
-        date
-        content
-        excerpt
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        categories {
-          nodes {
-            name
-            slug
-          }
-        }
-        beitragFelder {
-          beitragUntertitel
-          beitragZusammenfassung
-          beitragPdf {
-            mediaItemUrl
-          }
-          beitragFeaturedTool
-          beitragRechner {
-            ... on Rechner {
-              id
-              title
-              rechnerFelder {
-                rechnerTyp
-                rechnerBeschreibung
-              }
+      posts(where: { name: $slug }) {
+        nodes {
+          id
+          title
+          slug
+          date
+          content
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
             }
           }
-        }
-        seo {
-          title
-          metaDesc
-          canonical
-          opengraphTitle
-          opengraphDescription
-          opengraphImage {
-            sourceUrl
+          categories {
+            nodes {
+              name
+              slug
+            }
           }
         }
       }
     }
   `;
 
-  const data = await client.request<{ postBy: Post | null }>(query, { slug });
-  return data.postBy;
+  try {
+    const data = await client.request<{ posts: { nodes: Post[] } }>(query, { slug });
+    const post = data.posts.nodes[0] || null;
+
+    // If it's a regular post, try to fetch ACF fields separately
+    if (post) {
+      const aclQuery = gql`
+        query GetPostACF($slug: String!) {
+          postBy(slug: $slug) {
+            beitragFelder {
+              beitragUntertitel
+              beitragZusammenfassung
+              beitragPdf {
+                mediaItemUrl
+              }
+              beitragFeaturedTool
+              beitragRechner {
+                ... on Rechner {
+                  id
+                  title
+                  rechnerFelder {
+                    rechnerTyp
+                    rechnerBeschreibung
+                  }
+                }
+              }
+            }
+            seo {
+              title
+              metaDesc
+              canonical
+              opengraphTitle
+              opengraphDescription
+              opengraphImage {
+                sourceUrl
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const aclData = await client.request<{ postBy: { beitragFelder?: any; seo?: any } | null }>(aclQuery, { slug });
+        if (aclData.postBy) {
+          post.beitragFelder = aclData.postBy.beitragFelder;
+          post.seo = aclData.postBy.seo;
+        }
+      } catch (aclError) {
+        // ACF fields not available for this post type - that's ok
+        // Custom post types don't have these fields
+      }
+    }
+
+    return post;
+  } catch (error) {
+    console.error(`Error fetching post with slug "${slug}":`, error);
+    return null;
+  }
 }
 
 // ─────────────────────────────────────────────
