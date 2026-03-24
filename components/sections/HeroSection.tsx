@@ -24,7 +24,7 @@ export default function HeroSection() {
             {/* H2 - Merriweather Black, 54px, line-height 1.05 */}
             <h2
               style={{
-                color: "var(--color-text-primary)",
+                color: "var(--color-text-medium)",
                 fontFamily: "'Merriweather', serif",
                 fontSize: "54px",
                 fontWeight: 900,
