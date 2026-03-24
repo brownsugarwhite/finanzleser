@@ -102,7 +102,13 @@ export default function MegaMenu({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Column: Subcategories */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">{activeCategoryLabel}</h3>
+          <Link
+            href={mainCategoryHref}
+            onClick={onClose}
+            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
+          >
+            {activeCategoryLabel}
+          </Link>
           <nav className="space-y-2">
             {items.map((item) => (
               <button
