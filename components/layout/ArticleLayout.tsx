@@ -102,7 +102,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                   </div>
 
                   {/* Image */}
-                  <div className="relative w-full h-96">
+                  <div className="relative w-full h-96 mb-2">
                     <Image
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
@@ -111,6 +111,19 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                       priority
                     />
                   </div>
+
+                  {/* Image Caption/Alt Text */}
+                  {featuredImage.altText && (
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        color: "var(--color-text-medium)",
+                        marginBottom: "1.5em",
+                      }}
+                    >
+                      {featuredImage.altText}
+                    </p>
+                  )}
                 </div>
               )}
               {author && (
