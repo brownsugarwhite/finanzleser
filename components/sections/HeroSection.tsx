@@ -48,9 +48,9 @@ export default function HeroSection() {
                 marginBottom: "15px",
               }}
             >
-              <span>Bleiben Sie mit dem </span>
+              <span style={{ color: "var(--color-text-primary)" }}>Bleiben Sie mit dem </span>
               <span style={{ color: "#45a117" }}>finanzleser.de</span>
-              <span> Newsletter immer auf dem neusten Stand.</span>
+              <span style={{ color: "var(--color-text-primary)" }}> Newsletter immer auf dem neusten Stand.</span>
             </div>
 
             {/* button_wrapper with button_switchy - 50px height */}
