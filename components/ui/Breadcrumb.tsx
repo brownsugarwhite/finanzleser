@@ -14,23 +14,27 @@ export default function Breadcrumb() {
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments = pathname.split("/").filter(Boolean);
 
-    // Only show first segment (main category) if there are multiple segments
-    // For /kategorie/sub/artikel: show only "Home > Kategorie"
+    // Show up to 2 levels of navigation
+    // For /kategorie/sub/artikel: show "Home > Kategorie > Sub"
     // For /suche or / : show nothing
     if (segments.length <= 1) {
       return [];
     }
 
-    const mainCategory = segments[0];
-    const label = mainCategory
-      .split("-")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+    const breadcrumbs = [{ label: "Home", href: "/" }];
+    let path = "";
 
-    return [
-      { label: "Home", href: "/" },
-      { label, href: `/${mainCategory}` }
-    ];
+    // Add first 2 segments (main category + subcategory)
+    segments.slice(0, Math.min(2, segments.length - 1)).forEach((segment) => {
+      path += `/${segment}`;
+      const label = segment
+        .split("-")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      breadcrumbs.push({ label, href: path });
+    });
+
+    return breadcrumbs;
   };
 
   const breadcrumbs = generateBreadcrumbs();
