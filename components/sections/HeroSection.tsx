@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const imgButtonIcon = "https://www.figma.com/api/mcp/asset/1fd08e07-983b-47fd-9051-123478fe6f83";
+const imgButtonSwitchy = "https://www.figma.com/api/mcp/asset/14cc73d8-b8c8-4dbf-b792-e69885b554bd";
 
 export default function HeroSection() {
   return (
@@ -21,43 +21,42 @@ export default function HeroSection() {
 
           {/* Right: Content - hero_text */}
           <div className="w-full lg:w-1/2" style={{ maxWidth: "442px" }}>
-            {/* H1_big */}
+            {/* H1_big - Merriweather Black, 54px, line-height 1.05 */}
             <h1
-              className="mb-6 font-bold leading-tight"
+              className="mb-6"
               style={{
-                color: "var(--color-text-primary)",
+                color: "#334a27",
                 fontFamily: "Merriweather, serif",
-                fontSize: "48px",
-                lineHeight: "1.2",
+                fontSize: "54px",
+                fontWeight: "900",
+                lineHeight: "1.05",
+                margin: "0 0 24px 0",
               }}
             >
-              Das<br />
-              digitale<br />
-              Finanzmagazin
+              <p style={{ margin: "0 0 0 0" }}>Das</p>
+              <p style={{ margin: "0 0 0 0" }}>digitale</p>
+              <p style={{ margin: "0 0 0 0" }}>Finanzmagazin</p>
             </h1>
 
-            {/* p_serif */}
-            <p
-              className="mb-8 leading-relaxed"
+            {/* p_serif - Merriweather Bold, 21px, line-height 1.38 */}
+            <div
               style={{
-                color: "var(--color-text-primary)",
                 fontFamily: "Merriweather, serif",
-                fontSize: "18px",
-                lineHeight: "1.5",
+                fontSize: "21px",
+                fontWeight: "700",
+                lineHeight: "1.38",
+                color: "#334a27",
+                marginBottom: "32px",
               }}
             >
-              Bleiben Sie mit dem{" "}
-              <span style={{ color: "var(--color-brand)" }} className="font-semibold">
-                finanzleser.de
-              </span>
-              {" "}
-              Newsletter immer auf dem neusten Stand.
-            </p>
+              <span>Bleiben Sie mit dem </span>
+              <span style={{ color: "#45a117" }}>finanzleser.de</span>
+              <span> Newsletter immer auf dem neusten Stand.</span>
+            </div>
 
             {/* button_wrapper with button_switchy */}
             <div style={{ paddingTop: "5px" }}>
               <button
-                className="inline-flex items-center transition hover:opacity-90"
                 style={{
                   backgroundColor: "rgba(129, 129, 129, 0.12)",
                   borderRadius: "20px",
@@ -65,12 +64,17 @@ export default function HeroSection() {
                   paddingRight: "6px",
                   paddingTop: "6px",
                   paddingBottom: "6px",
-                  gap: "15px",
                   border: "none",
                   cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                  transition: "opacity 0.2s",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
-                <span
+                <div
                   style={{
                     fontFamily: "Open Sans, sans-serif",
                     fontSize: "17px",
@@ -78,26 +82,32 @@ export default function HeroSection() {
                     fontWeight: "400",
                     lineHeight: "40px",
                     whiteSpace: "nowrap",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: "0",
                   }}
                 >
-                  Kostenlos abonnieren
-                </span>
+                  <p style={{ margin: "0", padding: "0" }}>Kostenlos abonnieren</p>
+                </div>
                 <div
                   style={{
+                    position: "relative",
                     width: "40px",
                     height: "40px",
                     flexShrink: 0,
-                    backgroundColor: "var(--color-brand)",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                   }}
                 >
                   <img
-                    src={imgButtonIcon}
                     alt="Arrow"
-                    style={{ width: "20px", height: "20px" }}
+                    src={imgButtonSwitchy}
+                    style={{
+                      position: "absolute",
+                      display: "block",
+                      width: "100%",
+                      height: "100%",
+                      maxWidth: "none",
+                    }}
                   />
                 </div>
               </button>
