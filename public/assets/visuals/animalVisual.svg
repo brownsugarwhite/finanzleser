@@ -11,10 +11,10 @@
   </filter>
 </defs>
 <style>
-  path { vector-effect: non-scaling-stroke; stroke: #FFFFFF; stroke-opacity: 1; }
-  g { vector-effect: non-scaling-stroke; stroke: #FFFFFF; stroke-opacity: 1; }
+  path { vector-effect: non-scaling-stroke; }
+  g { vector-effect: non-scaling-stroke; }
   @media (prefers-color-scheme: dark) {
-    g[style*="mix-blend-mode:darken"] { filter: url(#darkModeFilter); }
+    path { filter: url(#darkModeFilter); stroke: white; stroke-opacity: 1 !important; }
   }
 </style>
 <g style="mix-blend-mode:darken" clip-path="url(#clip0_49_90)">

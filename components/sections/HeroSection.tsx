@@ -9,18 +9,14 @@ export default function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center" style={{ gap: "48px" }}>
           {/* Left: Illustration - visual_wrapper */}
           <div className="flex-shrink-0 w-full lg:w-1/2">
-            <div style={{
-              filter: 'var(--svg-dark-filter, none)'
-            }}>
-              <Image
-                src="/assets/visuals/animalVisual.svg?v=8"
-                alt="Unser Newsletter"
-                width={600}
-                height={500}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
+            <Image
+              src="/assets/visuals/animalVisual.svg?v=9"
+              alt="Unser Newsletter"
+              width={600}
+              height={500}
+              className="w-full h-auto"
+              priority
+            />
           </div>
 
           {/* Right: Content - hero_text */}
