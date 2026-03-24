@@ -15,8 +15,15 @@ export default function Breadcrumb() {
     const segments = pathname.split("/").filter(Boolean);
     const breadcrumbs: BreadcrumbItem[] = [{ label: "Home", href: "/" }];
 
+    // For category/sub/slug URLs, only show up to 2 segments (kategorie/sub)
+    // For other URLs, show all but the last segment
+    let maxSegments = 2;
+    if (!pathname.includes("/finanztools") && !pathname.includes("/suche")) {
+      maxSegments = Math.min(2, segments.length - 1);
+    }
+
     let path = "";
-    segments.forEach((segment, index) => {
+    segments.slice(0, maxSegments).forEach((segment) => {
       path += `/${segment}`;
 
       // Format label: convert slug to readable text
@@ -25,42 +32,36 @@ export default function Breadcrumb() {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 
-      // Don't add the last segment (usually the current page slug) if it's too long
-      // or if it's a UUID-like string
-      const isLastSegment = index === segments.length - 1;
-      const isPageSlug = isLastSegment && (segment.length > 20 || segment.includes("-"));
-
-      if (!isPageSlug) {
-        breadcrumbs.push({ label, href: path });
-      }
+      breadcrumbs.push({ label, href: path });
     });
 
-    return breadcrumbs;
+    // Remove "Home" if it's the only item
+    return breadcrumbs.length === 1 ? [] : breadcrumbs;
   };
 
   const breadcrumbs = generateBreadcrumbs();
+
+  if (breadcrumbs.length === 0) {
+    return null;
+  }
 
   return (
     <nav className="mb-6" style={{ fontSize: "14px", color: "var(--color-text-medium)" }}>
       <ul style={{ display: "flex", alignItems: "center", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>
         {breadcrumbs.map((item, index) => (
           <li key={item.href} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {index > 0 && <span style={{ color: "var(--color-text-medium)" }}>&gt;</span>}
-            {index === breadcrumbs.length - 1 ? (
-              <span style={{ color: "var(--color-text-primary)" }}>{item.label}</span>
-            ) : (
-              <Link
-                href={item.href}
-                style={{
-                  color: "var(--color-text-medium)",
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                }}
-                className="hover:opacity-80"
-              >
-                {item.label}
-              </Link>
-            )}
+            <Link
+              href={item.href}
+              style={{
+                color: "var(--color-text-medium)",
+                textDecoration: "none",
+                transition: "opacity 0.2s",
+              }}
+              className="hover:opacity-80"
+            >
+              {item.label}
+            </Link>
+            {index < breadcrumbs.length - 1 && <span style={{ color: "var(--color-text-medium)" }}>&gt;</span>}
           </li>
         ))}
       </ul>
