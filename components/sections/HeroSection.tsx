@@ -1,32 +1,20 @@
-import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
     <section className="py-16 md:py-24" style={{ backgroundColor: "var(--color-bg-page)" }}>
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Left: Large Button with Arrow */}
-          <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center md:justify-start">
-            <button
-              className="w-64 h-64 rounded-3xl flex items-center justify-center transition hover:opacity-90"
-              style={{ backgroundColor: "var(--color-brand)" }}
-              aria-label="Zum Newsletter anmelden"
-            >
-              {/* Arrow Icon */}
-              <svg
-                className="w-24 h-24"
-                fill="none"
-                stroke="white"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+          {/* Left: Illustration */}
+          <div className="flex-shrink-0 w-full md:w-1/2">
+            <Image
+              src="/assets/newsletter-illustration.svg"
+              alt="Das digitale Finanzmagazin"
+              width={400}
+              height={350}
+              className="w-full h-auto"
+              priority
+            />
           </div>
 
           {/* Right: Content */}
@@ -35,7 +23,9 @@ export default function HeroSection() {
               className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
               style={{ color: "var(--color-text-primary)" }}
             >
-              Das digitale
+              Das
+              <br />
+              digitale
               <br />
               Finanzmagazin
             </h2>
@@ -52,15 +42,19 @@ export default function HeroSection() {
               Newsletter immer auf dem neusten Stand.
             </p>
 
-            {/* CTA Text Link */}
-            <Link
-              href="#newsletter-signup"
-              className="inline-flex items-center gap-2 font-semibold transition"
-              style={{ color: "var(--color-brand)" }}
+            {/* CTA Button */}
+            <button
+              className="inline-flex items-center gap-3 px-6 py-3 rounded font-semibold transition hover:opacity-90"
+              style={{ backgroundColor: "var(--color-brand)", color: "white" }}
             >
               Kostenlos abonnieren
-              {/* Small Arrow */}
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Arrow Icon */}
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -68,7 +62,7 @@ export default function HeroSection() {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
