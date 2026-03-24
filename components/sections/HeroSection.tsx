@@ -14,7 +14,7 @@ export default function HeroSection() {
               alt="Unser Newsletter"
               width={600}
               height={500}
-              className="w-full h-auto"
+              className="w-full h-auto dark:opacity-30"
               priority
             />
           </div>
