@@ -10,7 +10,7 @@ export default function HeroSection() {
           {/* Left: Illustration - visual_wrapper */}
           <div className="flex-shrink-0 w-full lg:w-1/2">
             <Image
-              src="/assets/visuals/animalVisual.svg?v=2"
+              src="/assets/visuals/animalVisual.svg?v=3"
               alt="Unser Newsletter"
               width={600}
               height={500}
