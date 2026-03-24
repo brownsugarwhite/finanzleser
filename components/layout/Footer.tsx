@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getToolCategories } from "@/lib/wordpress";
-import BottomTeaser from "@/components/sections/BottomTeaser";
+import NewsletterBanner from "@/components/sections/NewsletterBanner";
+import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
 
 export default async function Footer() {
   // Hauptkategorien (hardcoded)
@@ -30,7 +31,8 @@ export default async function Footer() {
 
   return (
     <>
-      <BottomTeaser />
+      <NewsletterBanner />
+      <AIAgentTeaser />
       <footer className="bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Footer Grid */}
