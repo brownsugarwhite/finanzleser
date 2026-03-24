@@ -9,11 +9,11 @@
   --font-body: var(--font-body, "Open Sans", sans-serif);
 
   /* Brand */
-  --color-brand: #0066cc;
-  --color-brand-hover: #0052a3;
+  --color-brand: #45A117;
+  --color-brand-hover: #2d7a0f;
 
   /* Text */
-  --color-text-primary: #0f172a;
+  --color-text-primary: #334A27;
   --color-text-secondary: #475569;
   --color-text-inverse: #ffffff;
   --color-text-link: var(--color-brand);
@@ -44,11 +44,11 @@
   --glass-dark-60: rgba(0, 0, 0, 0.60);
 
   /* Glass / Brand */
-  --glass-brand-5: rgba(0, 102, 204, 0.05);
-  --glass-brand-10: rgba(0, 102, 204, 0.10);
-  --glass-brand-20: rgba(0, 102, 204, 0.20);
-  --glass-brand-40: rgba(0, 102, 204, 0.40);
-  --glass-brand-60: rgba(0, 102, 204, 0.60);
+  --glass-brand-5: rgba(69, 161, 23, 0.05);
+  --glass-brand-10: rgba(69, 161, 23, 0.10);
+  --glass-brand-20: rgba(69, 161, 23, 0.20);
+  --glass-brand-40: rgba(69, 161, 23, 0.40);
+  --glass-brand-60: rgba(69, 161, 23, 0.60);
 
   /* Glass / Blur */
   --glass-blur-sm: 4px;
@@ -71,7 +71,7 @@
    ───────────────────────────────────────────── */
 .dark {
   /* Text */
-  --color-text-primary: #f1f5f9;
+  --color-text-primary: #ffffff;
   --color-text-secondary: #94a3b8;
   --color-text-inverse: #0f172a;
 
