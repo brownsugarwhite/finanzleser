@@ -635,17 +635,15 @@ export async function getCategoryBySlug(slug: string) {
 
   const query = gql`
     query GetCategory($slug: String!) {
-      categories(where: { name: $slug }, first: 1) {
+      categories(where: { slug: $slug }, first: 1) {
         nodes {
           id
           name
           slug
           parent {
-            node {
-              id
-              name
-              slug
-            }
+            id
+            name
+            slug
           }
         }
       }
@@ -659,7 +657,7 @@ export async function getCategoryBySlug(slug: string) {
           id: string;
           name: string;
           slug: string;
-          parent?: { node?: { id: string; name: string; slug: string } };
+          parent?: { id: string; name: string; slug: string };
         }>;
       };
     }>(query, { slug });

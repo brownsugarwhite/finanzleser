@@ -45,8 +45,8 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     <CategoryLayout
       title={category?.name || params.kategorie}
       titleSlug={params.kategorie}
-      mainCategoryName={category?.parent?.node?.name}
-      mainCategorySlug={category?.parent?.node?.slug}
+      mainCategoryName={category?.parent?.name}
+      mainCategorySlug={category?.parent?.slug}
       posts={posts}
     />
   );
