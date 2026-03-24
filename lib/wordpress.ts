@@ -45,6 +45,54 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 // ─────────────────────────────────────────────
+// Beiträge suchen
+// ─────────────────────────────────────────────
+
+export async function searchPosts(searchQuery: string): Promise<Post[]> {
+  if (!searchQuery || searchQuery.trim().length === 0) {
+    return [];
+  }
+
+  const client = getClient();
+
+  const query = gql`
+    query SearchPosts($search: String!) {
+      posts(where: { search: $search }, first: 50) {
+        nodes {
+          id
+          title
+          slug
+          date
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
+      search: searchQuery,
+    });
+    return data.posts.nodes;
+  } catch (error) {
+    console.error(`Error searching posts for "${searchQuery}":`, error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Beiträge nach Kategorie
 // ─────────────────────────────────────────────
 

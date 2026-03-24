@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/navItems";
 
 export default function Header() {
+  const router = useRouter();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      router.push(`/suche?q=${encodeURIComponent(searchInput)}`);
+      setSearchInput("");
+    }
+  };
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -19,7 +30,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="flex gap-8">
+          <nav className="flex gap-8 flex-1">
             {NAV_ITEMS.map((item) => (
               <div
                 key={item.label}
@@ -55,6 +66,36 @@ export default function Header() {
               </div>
             ))}
           </nav>
+
+          {/* Search Field */}
+          <form onSubmit={handleSearch} className="flex items-center gap-2 ml-auto">
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Suchen..."
+              className="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="p-2 text-gray-700 hover:text-gray-900 transition"
+              aria-label="Search"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </form>
         </div>
 
         {/* Mobile Layout */}
@@ -84,9 +125,41 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Mobile Search */}
+        <div className="md:hidden mt-4 border-t border-gray-200 pt-4 pb-4">
+          <form onSubmit={handleSearch} className="flex gap-2">
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Suchen..."
+              className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="p-2 text-gray-700 hover:text-gray-900 transition"
+              aria-label="Search"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 border-t border-gray-200 pt-4">
+          <nav className="md:hidden border-t border-gray-200 pt-4">
             {NAV_ITEMS.map((item) => (
               <div key={item.label}>
                 <button
