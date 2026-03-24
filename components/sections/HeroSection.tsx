@@ -54,21 +54,22 @@ export default function HeroSection() {
               <span> Newsletter immer auf dem neusten Stand.</span>
             </div>
 
-            {/* button_wrapper with button_switchy */}
+            {/* button_wrapper with button_switchy - 52px height */}
             <div style={{ paddingTop: "5px" }}>
               <button
                 style={{
-                  backgroundColor: "rgba(129, 129, 129, 0.12)",
-                  borderRadius: "20px",
+                  backgroundColor: "rgba(198, 200, 204, 0.23)",
+                  borderRadius: "19px",
                   paddingLeft: "20px",
-                  paddingRight: "6px",
-                  paddingTop: "6px",
-                  paddingBottom: "6px",
+                  paddingRight: "5px",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
                   border: "none",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
                   gap: "15px",
+                  height: "52px",
                 }}
               >
                 <div
