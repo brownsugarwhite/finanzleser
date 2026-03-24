@@ -13,6 +13,7 @@ type ArticleLayoutProps = {
   featuredImage?: { sourceUrl: string; altText?: string };
   category?: { name: string; slug: string };
   mainCategory?: string; // Hauptkategorie slug
+  mainCategoryName?: string; // Hauptkategorie name
   sidebar?: React.ReactNode;
   contentTableOfContents?: React.ReactNode;
   author?: {
@@ -24,7 +25,11 @@ type ArticleLayoutProps = {
   };
 };
 
-export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, sidebar, contentTableOfContents, author }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, mainCategoryName, sidebar, contentTableOfContents, author }: ArticleLayoutProps) {
+  const breadcrumbItems = mainCategory && category ? [
+    { label: mainCategoryName || mainCategory, href: `/${mainCategory}` },
+    { label: category.name, href: `/${mainCategory}/${category.slug}` }
+  ] : undefined;
   return (
     <>
       <Header />
@@ -36,7 +41,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
 
             {/* Article Content */}
             <div className="flex-1 min-w-0 max-w-[860px]">
-              <Breadcrumb />
+              <Breadcrumb items={breadcrumbItems} />
               {category && mainCategory && (
                 <Link
                   href={`/${mainCategory}/${category.slug}`}

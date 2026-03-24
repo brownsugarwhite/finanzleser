@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getPostsByCategory, getCategoryWithChildren } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
@@ -40,5 +40,14 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     notFound();
   }
 
-  return <CategoryLayout title={params.kategorie} posts={posts} />;
+  const category = await getCategoryBySlug(params.kategorie);
+  return (
+    <CategoryLayout
+      title={category?.name || params.kategorie}
+      titleSlug={params.kategorie}
+      mainCategoryName={category?.parent?.node?.name}
+      mainCategorySlug={category?.parent?.node?.slug}
+      posts={posts}
+    />
+  );
 }

@@ -17,6 +17,7 @@ export interface Category {
 }
 
 export interface Author {
+  id?: string;
   name: string;
   firstName?: string;
   lastName?: string;

@@ -625,3 +625,48 @@ export async function getToolsBySlug(slugs: string[]): Promise<Post[]> {
     return [];
   }
 }
+
+// ─────────────────────────────────────────────
+// Kategorie Details mit Parent-Info
+// ─────────────────────────────────────────────
+
+export async function getCategoryBySlug(slug: string) {
+  const client = getClient();
+
+  const query = gql`
+    query GetCategory($slug: String!) {
+      categories(where: { name: $slug }, first: 1) {
+        nodes {
+          id
+          name
+          slug
+          parent {
+            node {
+              id
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      categories: {
+        nodes: Array<{
+          id: string;
+          name: string;
+          slug: string;
+          parent?: { node?: { id: string; name: string; slug: string } };
+        }>;
+      };
+    }>(query, { slug });
+
+    return data.categories.nodes[0] || null;
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    return null;
+  }
+}

@@ -2,6 +2,7 @@
 export type NavSubItem = {
   label: string;
   href: string;
+  toolCategory?: string;
 };
 
 export type NavItem = {

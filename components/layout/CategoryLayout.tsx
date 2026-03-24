@@ -7,17 +7,24 @@ import type { Post } from "@/lib/types";
 
 type CategoryLayoutProps = {
   title?: string;
+  titleSlug?: string;
+  mainCategoryName?: string;
+  mainCategorySlug?: string;
   children?: React.ReactNode;
   posts?: Post[];
 };
 
-export default function CategoryLayout({ title, children, posts }: CategoryLayoutProps) {
+export default function CategoryLayout({ title, titleSlug, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
+  const breadcrumbItems = mainCategorySlug && titleSlug ? [
+    { label: mainCategoryName || mainCategorySlug, href: `/${mainCategorySlug}` },
+    { label: title || titleSlug, href: `/${mainCategorySlug}/${titleSlug}` }
+  ] : undefined;
   return (
     <>
       <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <Breadcrumb />
+          <Breadcrumb items={breadcrumbItems} />
           {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
 
           {/* Posts Grid (wenn Posts vorhanden) */}

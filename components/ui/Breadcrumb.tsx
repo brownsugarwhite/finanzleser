@@ -1,43 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 interface BreadcrumbItem {
   label: string;
   href: string;
 }
 
-export default function Breadcrumb() {
-  const pathname = usePathname();
+interface BreadcrumbProps {
+  items?: BreadcrumbItem[];
+}
 
-  const generateBreadcrumbs = (): BreadcrumbItem[] => {
-    const segments = pathname.split("/").filter(Boolean);
-
-    // Show up to 2 levels of navigation
-    // For /kategorie/sub/artikel: show "Home > Kategorie > Sub"
-    // For /suche or / : show nothing
-    if (segments.length <= 1) {
-      return [];
-    }
-
-    const breadcrumbs = [{ label: "Home", href: "/" }];
-    let path = "";
-
-    // Add first 2 segments (main category + subcategory)
-    segments.slice(0, Math.min(2, segments.length - 1)).forEach((segment) => {
-      path += `/${segment}`;
-      const label = segment
-        .split("-")
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-      breadcrumbs.push({ label, href: path });
-    });
-
-    return breadcrumbs;
-  };
-
-  const breadcrumbs = generateBreadcrumbs();
+export default function Breadcrumb({ items }: BreadcrumbProps) {
+  const breadcrumbs = items || [];
 
   if (breadcrumbs.length === 0) {
     return null;

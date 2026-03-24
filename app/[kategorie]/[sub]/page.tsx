@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getPostsByCategory } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 
@@ -9,7 +9,16 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   // 1. Zuerst prüfen: ist es eine Kategorie-Seite?
   const categoryPosts = await getPostsByCategory(params.sub).catch(() => []);
   if (categoryPosts.length > 0) {
-    return <CategoryLayout title={params.sub} posts={categoryPosts} />;
+    const category = await getCategoryBySlug(params.sub);
+    return (
+      <CategoryLayout
+        title={category?.name || params.sub}
+        titleSlug={params.sub}
+        mainCategoryName={category?.parent?.node?.name || params.kategorie}
+        mainCategorySlug={category?.parent?.node?.slug || params.kategorie}
+        posts={categoryPosts}
+      />
+    );
   }
 
   // 2. Sonst: prüfen ob es ein Post-Slug ist

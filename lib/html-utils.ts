@@ -36,6 +36,7 @@ export function decodeHtmlEntities(text: string): string {
 /**
  * Dekodiert alle relevanten Felder eines Post-Objekts
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function decodePostContent(post: any): any {
   return {
     ...post,

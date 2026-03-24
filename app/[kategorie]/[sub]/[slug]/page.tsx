@@ -16,10 +16,10 @@ export default async function BeitragPage(props: {
 
   const category = post.categories?.nodes[0];
 
-  // Debug
-  console.log("Post slug:", params.slug);
-  console.log("Content length:", post.content?.length);
-  console.log("Has content:", !!post.content);
+  // Find main category (parent: null/0) from post categories
+  const mainCategory = post.categories?.nodes?.find(
+    (cat: any) => cat.parent === null || cat.parent === 0
+  );
 
   // Format date as "02. März 2026"
   const formattedDate = new Date(post.date).toLocaleDateString("de-DE", {
@@ -42,6 +42,7 @@ export default async function BeitragPage(props: {
       featuredImage={post.featuredImage?.node}
       category={category}
       mainCategory={params.kategorie}
+      mainCategoryName={mainCategory?.name}
       author={
         post.author?.node
           ? {

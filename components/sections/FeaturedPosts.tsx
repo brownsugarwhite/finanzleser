@@ -32,6 +32,7 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
           {featuredPosts.map((post) => {
             const category = firstCategory(post);
             // Finde Parent-Kategorie (Hauptkategorie)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mainCategory = post.categories?.nodes?.find(
               (cat: any) => cat.parent === null || cat.parent === 0
             );
