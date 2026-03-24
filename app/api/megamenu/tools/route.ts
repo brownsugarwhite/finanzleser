@@ -1,20 +1,20 @@
-import { getToolsBySlug } from "@/lib/wordpress";
+import { getPostsAndCPTsByCategory } from "@/lib/wordpress";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const slugsParam = searchParams.get("slugs");
+    const category = searchParams.get("category");
 
-    if (!slugsParam) {
-      return NextResponse.json({ error: "slugs parameter required" }, { status: 400 });
+    if (!category) {
+      return NextResponse.json({ error: "category parameter required" }, { status: 400 });
     }
 
-    const slugs = slugsParam.split(",").filter(Boolean);
-    const tools = await getToolsBySlug(slugs);
+    // Fetch tools (posts + CPTs) by category and limit to 3
+    const tools = await getPostsAndCPTsByCategory(category);
 
-    return NextResponse.json(tools);
+    return NextResponse.json(tools.slice(0, 3));
   } catch (error) {
     console.error("Error fetching megamenu tools:", error);
     return NextResponse.json({ error: "Failed to fetch tools" }, { status: 500 });

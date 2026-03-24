@@ -35,11 +35,11 @@ export default function MegaMenu({
     const loadTools = async () => {
       setLoading(true);
       try {
-        const toolSlugs = items.find((item) => item.href === selectedSub)?.tools || [];
+        const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory;
 
-        if (toolSlugs.length > 0) {
-          // Fetch tools by slugs
-          const response = await fetch(`/api/megamenu/tools?slugs=${toolSlugs.join(",")}`);
+        if (toolCategory) {
+          // Fetch tools by category
+          const response = await fetch(`/api/megamenu/tools?category=${toolCategory}`);
           if (response.ok) {
             const data = await response.json();
             setTools(data);
