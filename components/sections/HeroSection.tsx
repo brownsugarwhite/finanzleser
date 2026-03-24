@@ -10,8 +10,8 @@ export default function HeroSection() {
           {/* Left: Illustration - visual_wrapper */}
           <div className="flex-shrink-0 w-full lg:w-1/2">
             <Image
-              src="/assets/newsletter-illustration.svg"
-              alt="Das digitale Finanzmagazin"
+              src="/assets/visuals/animalVisual.svg"
+              alt="Unser Newsletter"
               width={600}
               height={500}
               className="w-full h-auto"
