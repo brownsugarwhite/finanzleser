@@ -8,6 +8,7 @@ import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 interface MegaMenuProps {
   activeCategory: string;
+  activeCategoryLabel: string;
   items: NavSubItem[];
   mainCategoryHref: string;
   onClose: () => void;
@@ -15,6 +16,7 @@ interface MegaMenuProps {
 
 export default function MegaMenu({
   activeCategory,
+  activeCategoryLabel,
   items,
   mainCategoryHref,
   onClose,
@@ -100,7 +102,7 @@ export default function MegaMenu({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Column: Subcategories */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">Kategorien</h3>
+          <h3 className="text-sm font-bold text-gray-900 mb-4">{activeCategoryLabel}</h3>
           <nav className="space-y-2">
             {items.map((item) => (
               <button

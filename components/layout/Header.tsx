@@ -139,6 +139,7 @@ export default function Header() {
             {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
               <MegaMenu
                 activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
+                activeCategoryLabel={openMegamenu || ""}
                 items={NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu || []}
                 mainCategoryHref={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href || ""}
                 onClose={() => setOpenMegamenu(null)}
