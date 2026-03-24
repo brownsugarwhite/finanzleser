@@ -128,9 +128,13 @@ export default function MegaMenu({
 
         {/* Middle Column: Posts */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">
+          <Link
+            href={selectedSub}
+            onClick={onClose}
+            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
+          >
             {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
-          </h3>
+          </Link>
           {loading ? (
             <div className="text-sm text-gray-500">Wird geladen...</div>
           ) : posts.length > 0 ? (
@@ -162,7 +166,13 @@ export default function MegaMenu({
 
         {/* Right Column: Tools */}
         <div className="min-h-96">
-          <h3 className="text-sm font-bold text-gray-900 mb-4">Finanztools</h3>
+          <Link
+            href="/finanztools"
+            onClick={onClose}
+            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
+          >
+            Finanztools
+          </Link>
           {tools.length > 0 ? (
             <nav className="space-y-2 max-h-80 overflow-y-auto">
               {tools.map((tool) => (
