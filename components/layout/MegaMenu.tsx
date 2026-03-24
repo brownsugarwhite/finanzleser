@@ -30,21 +30,34 @@ export default function MegaMenu({
     return parts[parts.length - 1];
   };
 
-  // Load tools on mount
+  // Load tools based on selected subcategory
   useEffect(() => {
     const loadTools = async () => {
+      setLoading(true);
       try {
-        const response = await fetch("/api/megamenu/tools");
-        if (response.ok) {
-          const data = await response.json();
-          setTools(data);
+        const toolSlugs = items.find((item) => item.href === selectedSub)?.tools || [];
+
+        if (toolSlugs.length > 0) {
+          // Fetch tools by slugs
+          const response = await fetch(`/api/megamenu/tools?slugs=${toolSlugs.join(",")}`);
+          if (response.ok) {
+            const data = await response.json();
+            setTools(data);
+          }
+        } else {
+          setTools([]);
         }
       } catch (error) {
         console.error("Error loading tools:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    loadTools();
-  }, []);
+
+    if (selectedSub) {
+      loadTools();
+    }
+  }, [selectedSub, items]);
 
   // Reset to first subcategory when category changes
   useEffect(() => {
