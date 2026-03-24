@@ -26,11 +26,12 @@ export default function HeroSection() {
               className="mb-6"
               style={{
                 color: "#334a27",
-                fontFamily: "Merriweather, serif",
+                fontFamily: "'Merriweather', serif",
                 fontSize: "54px",
                 fontWeight: "900",
                 lineHeight: "1.05",
                 margin: "0 0 24px 0",
+                letterSpacing: "-0.5px",
               }}
             >
               <p style={{ margin: "0 0 0 0" }}>Das</p>
@@ -54,7 +55,7 @@ export default function HeroSection() {
               <span> Newsletter immer auf dem neusten Stand.</span>
             </div>
 
-            {/* button_wrapper with button_switchy - 52px height */}
+            {/* button_wrapper with button_switchy - 50px height */}
             <div style={{ paddingTop: "5px" }}>
               <button
                 style={{
@@ -69,7 +70,7 @@ export default function HeroSection() {
                   display: "flex",
                   alignItems: "center",
                   gap: "15px",
-                  height: "52px",
+                  height: "50px",
                 }}
               >
                 <div
