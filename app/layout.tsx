@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -31,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
+    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
