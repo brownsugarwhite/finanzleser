@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Link from "next/link";
 import Image from "next/image";
 import Author from "@/components/ui/Author";
+import Spacer from "@/components/ui/Spacer";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
@@ -139,6 +140,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                 </div>
               )}
               {contentTableOfContents}
+              <Spacer />
               <article>{children}</article>
             </div>
           </div>
