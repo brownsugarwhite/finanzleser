@@ -100,24 +100,28 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
   const client = getClient();
 
   const query = gql`
-    query GetPostsByCategory($categoryName: String!) {
-      posts(where: { categoryName: $categoryName }) {
+    query GetPostsByCategory($slug: [String!]!) {
+      categories(where: { slug: $slug }) {
         nodes {
-          id
-          title
-          slug
-          date
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          categories {
+          posts {
             nodes {
-              name
+              id
+              title
               slug
+              date
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                  altText
+                }
+              }
+              categories {
+                nodes {
+                  name
+                  slug
+                }
+              }
             }
           }
         }
@@ -125,10 +129,19 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
     }
   `;
 
-  const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
-    categoryName: categorySlug,
-  });
-  return data.posts.nodes;
+  try {
+    const data = await client.request<{
+      categories: {
+        nodes: Array<{ posts: { nodes: Post[] } }>
+      }
+    }>(query, {
+      slug: [categorySlug],
+    });
+    return data.categories.nodes[0]?.posts.nodes || [];
+  } catch (error) {
+    console.error(`Error fetching posts for category "${categorySlug}":`, error);
+    return [];
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -223,6 +236,141 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     return post;
   } catch (error) {
     console.error(`Error fetching post with slug "${slug}":`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Hauptkategorie mit Child-Kategorien
+// ─────────────────────────────────────────────
+
+export async function getCategoryWithChildren(categorySlug: string): Promise<{
+  name: string;
+  slug: string;
+  children: Array<{ name: string; slug: string; count: number }>;
+  posts: Post[];
+} | null> {
+  const client = getClient();
+
+  // First query: get the main category
+  const mainCategoryQuery = gql`
+    query GetMainCategory($slug: [String!]!) {
+      categories(where: { slug: $slug }) {
+        nodes {
+          databaseId
+          name
+          slug
+          posts(first: 6) {
+            nodes {
+              id
+              title
+              slug
+              date
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                  altText
+                }
+              }
+              categories {
+                nodes {
+                  name
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const categoryData = await client.request<{
+      categories: {
+        nodes: Array<{
+          databaseId: number;
+          name: string;
+          slug: string;
+          posts: { nodes: Post[] };
+        }>;
+      };
+    }>(mainCategoryQuery, {
+      slug: [categorySlug],
+    });
+
+    const category = categoryData.categories.nodes[0];
+    if (!category) return null;
+
+    // Second query: get child categories and their posts
+    const childrenQuery = gql`
+      query GetChildCategories($parent: Int!) {
+        categories(where: { parent: $parent }) {
+          nodes {
+            name
+            slug
+            count
+            posts(first: 6) {
+              nodes {
+                id
+                title
+                slug
+                date
+                excerpt
+                featuredImage {
+                  node {
+                    sourceUrl
+                    altText
+                  }
+                }
+                categories {
+                  nodes {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const childrenData = await client.request<{
+      categories: {
+        nodes: Array<{
+          name: string;
+          slug: string;
+          count: number;
+          posts: { nodes: Post[] };
+        }>;
+      };
+    }>(childrenQuery, {
+      parent: category.databaseId,
+    });
+
+    // If no direct posts, collect from children
+    let allPosts = category.posts.nodes;
+    if (allPosts.length === 0 && childrenData.categories.nodes.length > 0) {
+      childrenData.categories.nodes.forEach((child) => {
+        allPosts = allPosts.concat(child.posts.nodes);
+      });
+      allPosts = allPosts.slice(0, 6); // limit to 6
+    }
+
+    return {
+      name: category.name,
+      slug: category.slug,
+      children: childrenData.categories.nodes.map((child) => ({
+        name: child.name,
+        slug: child.slug,
+        count: child.count,
+      })),
+      posts: allPosts,
+    };
+  } catch (error) {
+    console.error(`Error fetching category with children "${categorySlug}":`, error);
     return null;
   }
 }

@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getPostsByCategory } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
+import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;
@@ -20,7 +21,20 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     );
   }
 
-  // 2. Sonst: Kategorie-Seite mit Post-Liste
+  // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?
+  const categoryWithChildren = await getCategoryWithChildren(params.kategorie).catch(() => null);
+  if (categoryWithChildren) {
+    return (
+      <MainCategoryLayout
+        name={categoryWithChildren.name}
+        slug={params.kategorie}
+        children={categoryWithChildren.children}
+        posts={categoryWithChildren.posts}
+      />
+    );
+  }
+
+  // 3. Sonst: Subkategorie-Seite mit Post-Liste
   const posts = await getPostsByCategory(params.kategorie).catch(() => []);
   if (posts.length === 0) {
     notFound();

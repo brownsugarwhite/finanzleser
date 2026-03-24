@@ -23,14 +23,14 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-4">
         {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between">
+        <div className="hidden md:flex items-center justify-center relative">
           {/* Logo */}
-          <div className="text-2xl font-bold text-gray-900">
+          <div className="absolute left-0 text-2xl font-bold text-gray-900">
             <Link href="/">finanzleser</Link>
           </div>
 
           {/* Desktop Nav */}
-          <nav className="flex gap-8 flex-1">
+          <nav className="flex gap-8">
             {NAV_ITEMS.map((item) => (
               <div
                 key={item.label}
@@ -68,7 +68,7 @@ export default function Header() {
           </nav>
 
           {/* Search Field */}
-          <form onSubmit={handleSearch} className="flex items-center gap-2 ml-auto">
+          <form onSubmit={handleSearch} className="absolute right-0 flex items-center gap-2">
             <input
               type="text"
               value={searchInput}
