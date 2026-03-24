@@ -17,24 +17,21 @@ export default function Spacer() {
     >
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
         <div style={dashStyle} />
-        <img
-          src="/icons/spacer-icon-green.svg"
-          alt=""
-          aria-hidden
-          width={23}
-          height={15}
-          className="spacer-icon-green"
-          style={{ display: "block", flexShrink: 0 }}
-        />
-        <img
-          src="/icons/spacer-icon-grey.svg"
-          alt=""
-          aria-hidden
-          width={23}
-          height={15}
-          className="spacer-icon-grey"
-          style={{ display: "none", flexShrink: 0 }}
-        />
+        <svg
+          width="23"
+          height="15"
+          viewBox="0 0 23 15"
+          fill="none"
+          style={{
+            flexShrink: 0,
+            color: "var(--color-brand)",
+          }}
+        >
+          <path
+            d="M11.5 0L13.8 5.5H19.5L14.8 9L17.2 14.5L11.5 11L5.8 14.5L8.2 9L3.5 5.5H9.2L11.5 0Z"
+            fill="currentColor"
+          />
+        </svg>
         <div style={dashStyle} />
       </div>
     </div>
