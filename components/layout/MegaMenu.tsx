@@ -23,7 +23,7 @@ export default function MegaMenu({
   const [tools, setTools] = useState<Rechner[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Extract category slug from href (e.g., "/finanzen/geldanlagen" → "geldanlagen")
+  // Extract category slug from href (e.g., "/finanzen/geldanlagen" -> "geldanlagen")
   const getCategorySlug = (href: string): string => {
     const parts = href.split("/").filter(Boolean);
     return parts[parts.length - 1];
@@ -69,88 +69,84 @@ export default function MegaMenu({
   }, [selectedSub]);
 
   return (
-    <div
-      className="max-w-7xl mx-auto px-6 py-8"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className="max-w-7xl mx-auto px-6 py-8" onClick={(e) => e.stopPropagation()}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Left Column: Subcategories */}
-          <div className="min-h-96">
-            <h3 className="text-sm font-bold text-gray-900 mb-4">Kategorien</h3>
+        {/* Left Column: Subcategories */}
+        <div className="min-h-96">
+          <h3 className="text-sm font-bold text-gray-900 mb-4">Kategorien</h3>
+          <nav className="space-y-2 max-h-80 overflow-y-auto">
+            {items.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => setSelectedSub(item.href)}
+                className={`block w-full text-left px-3 py-2 text-sm rounded transition ${
+                  selectedSub === item.href
+                    ? "bg-blue-50 text-blue-600 font-medium"
+                    : "text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          <Link
+            href={mainCategoryHref}
+            onClick={onClose}
+            className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
+          >
+            Alle anzeigen [alle]
+          </Link>
+        </div>
+
+        {/* Middle Column: Posts */}
+        <div className="min-h-96">
+          <h3 className="text-sm font-bold text-gray-900 mb-4">Beliebte Beiträge</h3>
+          {loading ? (
+            <div className="text-sm text-gray-500">Wird geladen...</div>
+          ) : posts.length > 0 ? (
             <nav className="space-y-2 max-h-80 overflow-y-auto">
-              {items.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => setSelectedSub(item.href)}
-                  className={`block w-full text-left px-3 py-2 text-sm rounded transition ${
-                    selectedSub === item.href
-                      ? "bg-blue-50 text-blue-600 font-medium"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
+              {posts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/${activeCategory}/${getCategorySlug(selectedSub)}/${post.slug}`}
+                  onClick={onClose}
+                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition line-clamp-2"
                 >
-                  {item.label}
-                </button>
+                  {post.title}
+                </Link>
               ))}
             </nav>
-            <Link
-              href={mainCategoryHref}
-              onClick={onClose}
-              className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
-            >
-              Alle anzeigen →
-            </Link>
-          </div>
+          ) : (
+            <div className="text-sm text-gray-500">Keine Beiträge gefunden</div>
+          )}
+          <Link
+            href={selectedSub}
+            onClick={onClose}
+            className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
+          >
+            Alle Beiträge [alle]
+          </Link>
+        </div>
 
-          {/* Middle Column: Posts */}
-          <div className="min-h-96">
-            <h3 className="text-sm font-bold text-gray-900 mb-4">Beliebte Beiträge</h3>
-            {loading ? (
-              <div className="text-sm text-gray-500">Wird geladen...</div>
-            ) : posts.length > 0 ? (
-              <nav className="space-y-2 max-h-80 overflow-y-auto">
-                {posts.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/${activeCategory}/${getCategorySlug(selectedSub)}/${post.slug}`}
-                    onClick={onClose}
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition line-clamp-2"
-                  >
-                    {post.title}
-                  </Link>
-                ))}
-              </nav>
-            ) : (
-              <div className="text-sm text-gray-500">Keine Beiträge gefunden</div>
-            )}
-            <Link
-              href={selectedSub}
-              onClick={onClose}
-              className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
-            >
-              Alle Beiträge →
-            </Link>
-          </div>
-
-          {/* Right Column: Tools */}
-          <div className="min-h-96">
-            <h3 className="text-sm font-bold text-gray-900 mb-4">Finanztools</h3>
-            {tools.length > 0 ? (
-              <nav className="space-y-2 max-h-80 overflow-y-auto">
-                {tools.map((tool) => (
-                  <Link
-                    key={tool.id}
-                    href={`/finanztools/rechner/${tool.slug}`}
-                    onClick={onClose}
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition"
-                  >
-                    {tool.title}
-                  </Link>
-                ))}
-              </nav>
-            ) : (
-              <div className="text-sm text-gray-500">Keine Tools vorhanden</div>
-            )}
-          </div>
+        {/* Right Column: Tools */}
+        <div className="min-h-96">
+          <h3 className="text-sm font-bold text-gray-900 mb-4">Finanztools</h3>
+          {tools.length > 0 ? (
+            <nav className="space-y-2 max-h-80 overflow-y-auto">
+              {tools.map((tool) => (
+                <Link
+                  key={tool.id}
+                  href={`/finanztools/rechner/${tool.slug}`}
+                  onClick={onClose}
+                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition"
+                >
+                  {tool.title}
+                </Link>
+              ))}
+            </nav>
+          ) : (
+            <div className="text-sm text-gray-500">Keine Tools vorhanden</div>
+          )}
         </div>
       </div>
     </div>
