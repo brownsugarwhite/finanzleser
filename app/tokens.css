@@ -64,6 +64,9 @@
   /* Overlay */
   --color-overlay-light: rgba(255, 255, 255, 0.80);
   --color-overlay-dark: rgba(0, 0, 0, 0.50);
+
+  /* SVG Effects */
+  --svg-dark-filter: none;
 }
 
 /* ─────────────────────────────────────────────
@@ -89,4 +92,7 @@
   /* Overlay */
   --color-overlay-light: rgba(255, 255, 255, 0.10);
   --color-overlay-dark: rgba(0, 0, 0, 0.80);
+
+  /* SVG Effects */
+  --svg-dark-filter: brightness(0.85) saturate(0.9);
 }

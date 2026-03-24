@@ -8,9 +8,11 @@ export default function HeroSection() {
       <div className="max-w-[1200px] mx-auto px-6 py-12">
         <div className="flex flex-col lg:flex-row items-center" style={{ gap: "48px" }}>
           {/* Left: Illustration - visual_wrapper */}
-          <div className="flex-shrink-0 w-full lg:w-1/2">
+          <div className="flex-shrink-0 w-full lg:w-1/2" style={{
+            filter: 'var(--svg-dark-filter, none)'
+          }}>
             <Image
-              src="/assets/visuals/animalVisual.svg?v=5"
+              src="/assets/visuals/animalVisual.svg?v=6"
               alt="Unser Newsletter"
               width={600}
               height={500}
