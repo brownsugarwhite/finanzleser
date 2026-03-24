@@ -58,7 +58,7 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
   }
 
   return (
-    <div className="mb-12 pt-8 border-t border-gray-200">
+    <div className="mb-12">
       <h3 style={{ fontSize: "18px", fontWeight: "600", marginBottom: "1em", color: "var(--color-text-primary)" }}>
         Inhaltsverzeichnis
       </h3>

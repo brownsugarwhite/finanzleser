@@ -129,7 +129,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                 </div>
               )}
               {author && (
-                <div className="mb-8 pt-6 border-t border-gray-200">
+                <div className="pt-6 mb-8">
                   <Author
                     name={author.name}
                     role={author.role}
