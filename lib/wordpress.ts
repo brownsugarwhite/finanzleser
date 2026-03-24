@@ -171,6 +171,18 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
               altText
             }
           }
+          author {
+            node {
+              id
+              name
+              firstName
+              lastName
+              description
+              avatar {
+                url
+              }
+            }
+          }
           categories {
             nodes {
               name

@@ -20,6 +20,13 @@ export default async function BeitragPage(props: {
   console.log("Content length:", post.content?.length);
   console.log("Has content:", !!post.content);
 
+  // Format date as "02. März 2026"
+  const formattedDate = new Date(post.date).toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <ArticleLayout
       title={post.title}
@@ -27,6 +34,16 @@ export default async function BeitragPage(props: {
       featuredImage={post.featuredImage?.node}
       category={category}
       mainCategory={params.kategorie}
+      author={
+        post.author?.node
+          ? {
+              name: post.author.node.name || "",
+              role: "Autorin bei Finanzleser.de",
+              date: formattedDate,
+              imageUrl: post.author.node.avatar?.url,
+            }
+          : undefined
+      }
       sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}
     >
       <div className="prose prose-lg max-w-none">

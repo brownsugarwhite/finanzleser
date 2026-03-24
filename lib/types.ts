@@ -16,6 +16,14 @@ export interface Category {
   count?: number;
 }
 
+export interface Author {
+  name: string;
+  firstName?: string;
+  lastName?: string;
+  description?: string;
+  avatar?: { url: string };
+}
+
 // ─────────────────────────────────────────────
 // Post (Standard-Beitrag / Ratgeber-Artikel)
 // ─────────────────────────────────────────────
@@ -39,6 +47,7 @@ export interface Post {
   content?: string;
   featuredImage?: FeaturedImage;
   categories: { nodes: Category[] };
+  author?: { node: Author };
   beitragFelder?: PostACF;
   seo?: SEO;
 }
