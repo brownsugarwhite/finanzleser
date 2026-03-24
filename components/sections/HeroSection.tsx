@@ -23,12 +23,11 @@ export default function HeroSection() {
           <div className="w-full lg:w-1/2" style={{ maxWidth: "442px" }}>
             {/* H1_big - Merriweather Black, 54px, line-height 1.05 */}
             <h1
-              className="mb-6"
               style={{
                 color: "#334a27",
                 fontFamily: "'Merriweather', serif",
                 fontSize: "54px",
-                fontWeight: "900",
+                fontWeight: 900,
                 lineHeight: "1.05",
                 margin: "0 0 24px 0",
                 letterSpacing: "-0.5px",
