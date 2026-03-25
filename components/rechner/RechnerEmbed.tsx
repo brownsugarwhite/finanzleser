@@ -29,6 +29,46 @@ const KindergeldRechner = dynamic(() => import("./KindergeldRechner"), {
   loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
 });
 
+const WohngeldRechner = dynamic(() => import("./WohngeldRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const TilgungRechner = dynamic(() => import("./TilgungRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const EinkommensteuerRechner = dynamic(() => import("./EinkommensteuerRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const RenteRechner = dynamic(() => import("./RenteRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const ErbschaftsteuerRechner = dynamic(() => import("./ErbschaftsteuerRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const UnterhaltRechner = dynamic(() => import("./UnterhaltRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const ElterngeldRechner = dynamic(() => import("./ElterngeldRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const KfzSteuerRechner = dynamic(() => import("./KfzSteuerRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const AbfindungRechner = dynamic(() => import("./AbfindungRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const KurzarbeitssgeldRechner = dynamic(() => import("./KurzarbeitssgeldRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
 interface RechnerEmbedProps {
   slug: string;
 }
@@ -49,18 +89,26 @@ export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
       return <StundenlohnRechner />;
     case "kindergeld":
       return <KindergeldRechner />;
-
-    // More calculators coming soon:
-    // - einkommensteuer
-    // - rente
-    // - erbschaftsteuer
-    // - unterhalt
-    // - elterngeld
-    // - kfz-steuer
-    // - abfindung
-    // - wohngeld
-    // - kurzarbeitsgeld
-    // - tilgung
+    case "wohngeld":
+      return <WohngeldRechner />;
+    case "tilgung":
+      return <TilgungRechner />;
+    case "einkommensteuer":
+      return <EinkommensteuerRechner />;
+    case "rente":
+      return <RenteRechner />;
+    case "erbschaftsteuer":
+      return <ErbschaftsteuerRechner />;
+    case "unterhalt":
+      return <UnterhaltRechner />;
+    case "elterngeld":
+      return <ElterngeldRechner />;
+    case "kfz-steuer":
+      return <KfzSteuerRechner />;
+    case "abfindung":
+      return <AbfindungRechner />;
+    case "kurzarbeitsgeld":
+      return <KurzarbeitssgeldRechner />;
 
     default:
       return null;
