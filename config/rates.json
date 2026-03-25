@@ -1,9 +1,10 @@
 {
   "_lastUpdated": "2026-01-01",
-  "_hinweis": "Zentrale Datei für alle Berechnungsgrundlagen aller Rechner. Bei Änderungen hier aktualisieren UND in WordPress ACF Options speichern.",
+  "_hinweis": "Zentrale Datei für alle Berechnungsgrundlagen aller 13 Rechner. Bei Änderungen hier aktualisieren UND denselben Wert im const RATES-Block der jeweiligen calculators/*/index.js anpassen.",
 
   "sozialversicherung": {
     "_aktualisieren": "jährlich zum 1. Januar",
+    "_rechner": ["brutto-netto"],
     "rentenversicherung": {
       "arbeitnehmer_prozent": 9.3,
       "arbeitgeber_prozent": 9.3
@@ -11,17 +12,20 @@
     "krankenversicherung": {
       "allgemeiner_beitrag_an_prozent": 7.3,
       "allgemeiner_beitrag_ag_prozent": 7.3,
-      "durchschnittlicher_zusatzbeitrag_prozent": 2.9
+      "durchschnittlicher_zusatzbeitrag_prozent": 2.9,
+      "_hinweis": "Zusatzbeitrag wird 50/50 AN/AG geteilt. Nutzer kann eigenen KK-Satz eingeben."
     },
     "pflegeversicherung": {
+      "_aktualisieren": "bei Gesetzesänderung",
+      "_hinweis": "AG-Anteil immer 1,7 % (außer Sachsen: 1,3 %). AN-Anteil je nach Kinderzahl.",
       "arbeitgeber_prozent": 1.7,
       "arbeitnehmer_nach_kindern": {
         "kinderlos_ueber23": 2.5,
         "1_kind": 1.9,
         "2_kinder": 1.65,
-        "3_kinder": 1.4,
+        "3_kinder": 1.40,
         "4_kinder": 1.15,
-        "5_oder_mehr_kinder": 0.9
+        "5_oder_mehr_kinder": 0.90
       }
     },
     "arbeitslosenversicherung": {
@@ -32,8 +36,9 @@
 
   "beitragsbemessungsgrenzen": {
     "_aktualisieren": "jährlich zum 1. Januar",
+    "_rechner": ["brutto-netto", "einkommensteuer"],
     "kranken_pflege": {
-      "monatlich": 5812.5,
+      "monatlich": 5812.50,
       "jaehrlich": 69750
     },
     "renten_arbeitslosen": {
@@ -45,21 +50,36 @@
   "lohnsteuer": {
     "_aktualisieren": "jährlich zum 1. Januar",
     "_grundlage": "§32a EStG",
+    "_rechner": ["brutto-netto", "einkommensteuer", "abfindung"],
     "grundfreibetrag": 12348,
     "arbeitnehmer_pauschbetrag": 1230,
     "sonderausgaben_pauschbetrag": 36,
-    "entlastungsbetrag_alleinerziehend": 4260
+    "entlastungsbetrag_alleinerziehend": 4260,
+    "tarifzonen": {
+      "_hinweis": "Formeln gemäß §32a EStG 2026 (Steuerfortentwicklungsgesetz vom 23.12.2024)",
+      "zone1_start": 12349,
+      "zone1_ende": 17799,
+      "zone1_formel": "(914.51 * y + 1400) * y  — y = (zvE - 12348) / 10000",
+      "zone2_ende": 69878,
+      "zone2_formel": "(173.10 * z + 2397) * z + 1034.87  — z = (zvE - 17799) / 10000",
+      "zone3_ende": 277826,
+      "zone3_formel": "0.42 * zvE - 9690.85",
+      "zone4_formel": "0.45 * zvE - 19470.38"
+    }
   },
 
   "solidaritaetszuschlag": {
     "_aktualisieren": "bei Gesetzesänderung",
+    "_rechner": ["brutto-netto", "einkommensteuer", "abfindung"],
     "satz_prozent": 5.5,
     "freigrenze_einzeln": 20350,
-    "freigrenze_zusammenveranlagt": 40700
+    "freigrenze_zusammenveranlagt": 40700,
+    "milderungszone_faktor_prozent": 11.9
   },
 
   "kirchensteuer": {
     "_aktualisieren": "bei Gesetzesänderung",
+    "_rechner": ["brutto-netto", "einkommensteuer"],
     "satz_8_prozent_bundeslaender": ["Bayern", "Baden-Württemberg"],
     "satz_9_prozent_bundeslaender": [
       "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen",
@@ -71,22 +91,34 @@
 
   "mehrwertsteuer": {
     "_aktualisieren": "bei Gesetzesänderung (sehr selten)",
+    "_rechner": ["mehrwertsteuer"],
     "regelsteuersatz_prozent": 19,
-    "ermaessigter_steuersatz_prozent": 7
+    "ermaessigter_steuersatz_prozent": 7,
+    "_hinweis": "Regelsteuersatz unverändert seit 2007, ermäßigt seit 1983."
   },
 
   "mindestlohn": {
-    "_aktualisieren": "jährlich zum 1. Januar",
-    "stundensatz": 13.9
+    "_aktualisieren": "jährlich zum 1. Januar (Mindestlohnkommission)",
+    "_rechner": ["stundenlohn"],
+    "stundensatz": 13.90,
+    "_naechste_anpassung": "2027-01-01 (voraussichtlich 14,60 €)",
+    "_quelle": "BMAS, 5. Mindestlohnanpassungsverordnung (MiLoV5)"
   },
 
   "elterngeld": {
-    "_aktualisieren": "bei Gesetzesänderung",
+    "_aktualisieren": "bei Gesetzesänderung (BEEG)",
+    "_rechner": ["elterngeld"],
+    "_grundlage": "BEEG – gültig ab 01.04.2025, keine weiteren Änderungen für 2026",
+    "einkommensgrenze_zu_verst_einkommen": 175000,
     "ersatzrate_standard_prozent": 65,
     "ersatzrate_erhoehen_prozent": 67,
+    "netto_grenze_erhoehen_von": 1000,
+    "netto_grenze_erhoehen_bis": 1200,
+    "netto_grenze_uebergang": 1240,
     "basiselterngeld": {
       "min": 300,
-      "max": 1800
+      "max": 1800,
+      "berechnungsgrundlage_max": 2770
     },
     "elterngeldplus": {
       "min": 150,
@@ -95,13 +127,22 @@
   },
 
   "rente": {
-    "_aktualisieren": "jährlich zum 1. Juli + 1. Januar",
+    "_aktualisieren": "jährlich zum 1. Juli (Rentenanpassungsverordnung) + 1. Januar (Durchschnittsentgelt)",
+    "_rechner": ["rente"],
+    "_grundlage": "§§ 64, 68 SGB VI",
+    "rentenwert_bis_30jun_2026": 40.79,
     "rentenwert_ab_01jul_2026": 42.52,
-    "rentenwert_bis_30jun_2026": 40.79
+    "_rentenwert_anpassung_2026": "+4,24 % (Quelle: DRV, März 2026)",
+    "durchschnittsentgelt_2026": 51944,
+    "_quelle_durchschnittsentgelt": "SV-Rechengrößen-Verordnung 2026, BGBl. I Nr. 278",
+    "max_entgeltpunkte_pro_jahr": 1.95,
+    "regelaltersgrenze_ab_jahrgang_1964": 67
   },
 
   "erbschaftsteuer": {
-    "_aktualisieren": "bei Gesetzesänderung",
+    "_aktualisieren": "bei Gesetzesänderung (ErbStG – Freibeträge seit 2009, Sätze seit 2010 unverändert)",
+    "_rechner": ["erbschaftsteuer"],
+    "_grundlage": "§§ 15–19 ErbStG",
     "freibetraege": {
       "ehegatte_lebenspartner": 500000,
       "kinder_stiefkinder": 400000,
@@ -111,85 +152,512 @@
       "steuerklasse_2": 20000,
       "steuerklasse_3": 20000
     },
+    "versorgungsfreibetrag": {
+      "ehegatte": 256000,
+      "kind_bis_5_jahre": 52000,
+      "kind_5_10_jahre": 41000,
+      "kind_10_15_jahre": 30700,
+      "kind_15_20_jahre": 20500,
+      "kind_20_27_jahre": 10300
+    },
     "steuersaetze_prozent": {
+      "_hinweis": "Stufentarif – gilt für den gesamten steuerpflichtigen Erwerb (nicht progressiv wie ESt)",
       "steuerklasse_1": [
-        { "bis": 75000, "satz": 7 },
-        { "bis": 300000, "satz": 11 },
-        { "bis": 600000, "satz": 15 },
-        { "bis": 6000000, "satz": 19 },
-        { "bis": 13000000, "satz": 23 },
-        { "bis": 26000000, "satz": 27 },
-        { "bis": 99999999, "satz": 30 }
+        { "bis":     75000, "satz": 7  },
+        { "bis":    300000, "satz": 11 },
+        { "bis":    600000, "satz": 15 },
+        { "bis":   6000000, "satz": 19 },
+        { "bis":  13000000, "satz": 23 },
+        { "bis":  26000000, "satz": 27 },
+        { "bis":  99999999, "satz": 30 }
       ],
       "steuerklasse_2": [
-        { "bis": 75000, "satz": 15 },
-        { "bis": 300000, "satz": 20 },
-        { "bis": 600000, "satz": 25 },
-        { "bis": 6000000, "satz": 30 },
-        { "bis": 13000000, "satz": 35 },
-        { "bis": 26000000, "satz": 40 },
-        { "bis": 99999999, "satz": 43 }
+        { "bis":     75000, "satz": 15 },
+        { "bis":    300000, "satz": 20 },
+        { "bis":    600000, "satz": 25 },
+        { "bis":   6000000, "satz": 30 },
+        { "bis":  13000000, "satz": 35 },
+        { "bis":  26000000, "satz": 40 },
+        { "bis":  99999999, "satz": 43 }
       ],
       "steuerklasse_3": [
-        { "bis": 6000000, "satz": 30 },
-        { "bis": 99999999, "satz": 50 }
+        { "bis":   6000000, "satz": 30 },
+        { "bis":  99999999, "satz": 50 }
       ]
     }
   },
 
   "unterhalt": {
-    "_aktualisieren": "jährlich zum 1. Januar",
-    "_grundlage": "Düsseldorfer Tabelle 2026",
+    "_aktualisieren": "jährlich zum 1. Januar (OLG Düsseldorf)",
+    "_rechner": ["unterhalt"],
+    "_grundlage": "Düsseldorfer Tabelle 2026, OLG Düsseldorf (gültig ab 01.01.2026)",
+    "_quelle": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/",
     "kindergeld_pro_kind": 259,
+    "kindergeld_abzug_minderjaehrig": 129.50,
+    "bedarf_studierende_eigener_haushalt": 990,
     "selbstbehalt": {
       "erwerbstaetig_minderjaehrige_kinder": 1450,
       "nicht_erwerbstaetig_minderjaehrige_kinder": 1200,
-      "angemessener_eigenbedarf_volljaerige": 1750
+      "angemessener_eigenbedarf_volljaerige": 1750,
+      "elternunterhalt_mindestselbstbehalt": 2650,
+      "ehegatten_selbstbehalt_getrennt_erwerbstaetig": 1600,
+      "ehegatten_selbstbehalt_getrennt_nicht_erwerbstaetig": 1475
     },
     "tabelle": {
+      "_hinweis": "betraege = [0–5 J., 6–11 J., 12–17 J., ab 18 J. Hauskind]. bkb = Bedarfskontrollbetrag.",
       "gruppen": [
-        { "gr": 1, "bisNetto": 2100, "prozent": 100, "betraege": [486, 558, 653, 698], "bkb": 1450 },
-        { "gr": 2, "bisNetto": 2500, "prozent": 105, "betraege": [511, 586, 686, 733], "bkb": 1750 },
-        { "gr": 3, "bisNetto": 2900, "prozent": 110, "betraege": [535, 614, 719, 768], "bkb": 1850 },
-        { "gr": 4, "bisNetto": 3300, "prozent": 115, "betraege": [559, 642, 751, 803], "bkb": 1950 },
-        { "gr": 5, "bisNetto": 3700, "prozent": 120, "betraege": [584, 670, 784, 838], "bkb": 2050 },
-        { "gr": 6, "bisNetto": 4100, "prozent": 128, "betraege": [623, 715, 836, 894], "bkb": 2150 },
-        { "gr": 7, "bisNetto": 4500, "prozent": 136, "betraege": [661, 759, 889, 950], "bkb": 2250 },
-        { "gr": 8, "bisNetto": 4900, "prozent": 144, "betraege": [700, 804, 941, 1006], "bkb": 2350 },
-        { "gr": 9, "bisNetto": 5300, "prozent": 152, "betraege": [739, 849, 993, 1061], "bkb": 2450 },
-        { "gr": 10, "bisNetto": 5700, "prozent": 160, "betraege": [778, 893, 1045, 1117], "bkb": 2550 },
-        { "gr": 11, "bisNetto": 6400, "prozent": 168, "betraege": [817, 938, 1098, 1173], "bkb": 2850 },
-        { "gr": 12, "bisNetto": 7200, "prozent": 176, "betraege": [856, 983, 1150, 1229], "bkb": 3250 },
-        { "gr": 13, "bisNetto": 8200, "prozent": 184, "betraege": [895, 1027, 1202, 1285], "bkb": 3750 },
-        { "gr": 14, "bisNetto": 9700, "prozent": 192, "betraege": [934, 1072, 1254, 1341], "bkb": 4350 },
-        { "gr": 15, "bisNetto": 11200, "prozent": 200, "betraege": [972, 1116, 1306, 1397], "bkb": 5100 }
+        { "gr": 1,  "bisNetto":  2100, "prozent": 100, "betraege": [486,  558,  653,  698],  "bkb": 1450 },
+        { "gr": 2,  "bisNetto":  2500, "prozent": 105, "betraege": [511,  586,  686,  733],  "bkb": 1750 },
+        { "gr": 3,  "bisNetto":  2900, "prozent": 110, "betraege": [535,  614,  719,  768],  "bkb": 1850 },
+        { "gr": 4,  "bisNetto":  3300, "prozent": 115, "betraege": [559,  642,  751,  803],  "bkb": 1950 },
+        { "gr": 5,  "bisNetto":  3700, "prozent": 120, "betraege": [584,  670,  784,  838],  "bkb": 2050 },
+        { "gr": 6,  "bisNetto":  4100, "prozent": 128, "betraege": [623,  715,  836,  894],  "bkb": 2150 },
+        { "gr": 7,  "bisNetto":  4500, "prozent": 136, "betraege": [661,  759,  889,  950],  "bkb": 2250 },
+        { "gr": 8,  "bisNetto":  4900, "prozent": 144, "betraege": [700,  804,  941, 1006],  "bkb": 2350 },
+        { "gr": 9,  "bisNetto":  5300, "prozent": 152, "betraege": [739,  849,  993, 1061],  "bkb": 2450 },
+        { "gr": 10, "bisNetto":  5700, "prozent": 160, "betraege": [778,  893, 1045, 1117],  "bkb": 2550 },
+        { "gr": 11, "bisNetto":  6400, "prozent": 168, "betraege": [817,  938, 1098, 1173],  "bkb": 2850 },
+        { "gr": 12, "bisNetto":  7200, "prozent": 176, "betraege": [856,  983, 1150, 1229],  "bkb": 3250 },
+        { "gr": 13, "bisNetto":  8200, "prozent": 184, "betraege": [895, 1027, 1202, 1285],  "bkb": 3750 },
+        { "gr": 14, "bisNetto":  9700, "prozent": 192, "betraege": [934, 1072, 1254, 1341],  "bkb": 4350 },
+        { "gr": 15, "bisNetto": 11200, "prozent": 200, "betraege": [972, 1116, 1306, 1397],  "bkb": 5100 }
       ]
     }
   },
 
   "kindergeld": {
-    "_aktualisieren": "bei Gesetzesänderung",
-    "monatlich_je_kind": 259
+    "_aktualisieren": "bei Gesetzesänderung (Erhöhungen per Jahressteuergesetz)",
+    "_rechner": ["kindergeld"],
+    "_grundlage": "§ 6 BKGG / § 32 Abs. 6 EStG – gültig ab 01.01.2026",
+    "monatlich_je_kind": 259,
+    "kinderfreibetrag_sachleistungen_je_elternteil": 3306,
+    "kinderfreibetrag_betreuung_je_elternteil": 1464,
+    "kinderfreibetrag_gesamt_je_elternteil": 4770,
+    "kinderfreibetrag_gesamt_beide_eltern": 9540
   },
 
   "kurzarbeitsgeld": {
-    "_aktualisieren": "jährlich zum 1. Januar",
+    "_aktualisieren": "jährlich zum 1. Januar (neue Leistungstabellen der Bundesagentur für Arbeit)",
+    "_rechner": ["kurzarbeitsgeld"],
+    "_grundlage": "§§ 95–111 SGB III, BA-Leistungstabelle KUG 2026",
     "leistungssatz_ohne_kind_prozent": 60,
     "leistungssatz_mit_kind_prozent": 67
   },
 
   "wohngeld": {
-    "_aktualisieren": "alle zwei Jahre zum 1. Januar",
+    "_aktualisieren": "alle zwei Jahre zum 1. Januar (§ 43 WoGG) – nächste Anpassung: 01.01.2027",
+    "_rechner": ["wohngeld"],
+    "_grundlage": "§§ 12, 19 WoGG i.V.m. Anlage 1 und Anlage 2; 2. WoGFV vom 21.10.2024, BGBl. 2024 I Nr. 314",
+    "_formel": "W = 1,15 × (M – (a + b·M + c·Y) × Y); M = anrechenbare Miete (max. Höchstbetrag), Y = monatliches Gesamteinkommen",
     "klima_faktor": 1.15,
-    "mindest_wohngeld": 10
+    "mindest_wohngeld": 10,
+    "zuschlag_weiteres_mitglied_ab_13": 57,
+    "hoechstbetraege_anlage1": {
+      "_hinweis": "Zeilen = Haushaltsmitglieder 1–12; Spalten = Mietenstufen I–VII (in €/Monat); gültig ab 01.01.2025",
+      "1":  [361,  408,  456,  511,  562,  615,  677],
+      "2":  [437,  493,  551,  619,  680,  745,  820],
+      "3":  [521,  587,  657,  737,  809,  887,  975],
+      "4":  [ 608,  686,  766,  858,  946, 1035, 1139],
+      "5":  [ 694,  782,  875,  982, 1080, 1183, 1302],
+      "_mehrbetrag_ab_6": [82, 94, 106, 119, 129, 149, 163],
+      "6":  [ 776,  876,  981, 1101, 1209, 1332, 1465],
+      "7":  [ 858,  970, 1087, 1220, 1338, 1481, 1628],
+      "8":  [ 940, 1064, 1193, 1339, 1467, 1630, 1791],
+      "9":  [1022, 1158, 1299, 1458, 1596, 1779, 1954],
+      "10": [1104, 1252, 1405, 1577, 1725, 1928, 2117],
+      "11": [1186, 1346, 1511, 1696, 1854, 2077, 2280],
+      "12": [1268, 1440, 1617, 1815, 1983, 2226, 2443]
+    },
+    "koeffizienten_anlage2": {
+      "_hinweis": "Koeffizienten variieren nur nach Haushaltsgröße, nicht nach Mietenstufe; gültig ab 01.01.2025",
+      "_quelle": "Anlage 2 WoGG, buzer.de, Stand 01.01.2025 (2. WoGFV, BGBl. 2024 I Nr. 314)",
+      "1":  { "a":  0.04,   "b": 0.0004797,  "c": 0.0000408 },
+      "2":  { "a":  0.03,   "b": 0.0003571,  "c": 0.0000304 },
+      "3":  { "a":  0.02,   "b": 0.0002917,  "c": 0.0000245 },
+      "4":  { "a":  0.01,   "b": 0.0002163,  "c": 0.0000176 },
+      "5":  { "a":  0.0,    "b": 0.0001907,  "c": 0.0000172 },
+      "6":  { "a": -0.01,   "b": 0.0001722,  "c": 0.0000166 },
+      "7":  { "a": -0.02,   "b": 0.0001592,  "c": 0.0000165 },
+      "8":  { "a": -0.03,   "b": 0.0001583,  "c": 0.0000165 },
+      "9":  { "a": -0.04,   "b": 0.0001376,  "c": 0.0000166 },
+      "10": { "a": -0.06,   "b": 0.0001249,  "c": 0.0000166 },
+      "11": { "a": -0.09,   "b": 0.0001141,  "c": 0.0000196 },
+      "12": { "a": -0.12,   "b": 0.0001107,  "c": 0.0000221 }
+    },
+    "mindest_M_anlage3": {
+      "_hinweis": "Anlage 3 WoGG – Mindestwerte für M; Werte unterhalb werden durch diesen Wert ersetzt",
+      "1": 54, "2": 67, "3": 79, "4": 92, "5": 103, "6": 103,
+      "7": 115, "8": 128, "9": 140, "10": 152, "11": 187, "12": 298
+    },
+    "mindest_Y_anlage3": {
+      "_hinweis": "Anlage 3 WoGG – Mindestwerte für Y (monatliches Einkommen)",
+      "1": 396, "2": 679, "3": 906, "4": 1132, "5": 1358, "6": 1585,
+      "7": 1811, "8": 2037, "9": 2264, "10": 2490, "11": 2717, "12": 2943
+    },
+    "heizkosten_pauschale": {
+      "_hinweis": "§ 12 Abs. 4 WoGG – monatliche Heizkostenpauschale nach Haushaltsgröße (in €)",
+      "1": 14.40, "2": 18.40, "3": 22.40, "4": 26.40, "5": 30.40,
+      "6": 34.40, "7": 38.40, "8": 42.40, "9": 46.40, "10": 50.40,
+      "11": 54.40, "12": 58.40
+    }
+  },
+
+  "buergergeld": {
+    "_aktualisieren": "jährlich zum 1. Januar (Regelbedarfsermittlungsgesetz – RBEG)",
+    "_rechner": ["buergergeld"],
+    "_grundlage": "§§ 19–23 SGB II (Regelbedarfe), § 22 SGB II (KdU), § 11b SGB II (Freibeträge)",
+    "regelbedarfe_2026": {
+      "_hinweis": "Regelbedarfsstufen 2025+2026 unverändert gegenüber 2024 (kein Anpassungsbeschluss)",
+      "stufe1_alleinstehende": 563,
+      "stufe2_paare_je_partner": 506,
+      "stufe3_volljaerige_einrichtung": 451,
+      "stufe4_jugendliche_14_17": 471,
+      "stufe5_kinder_6_13": 390,
+      "stufe6_kinder_0_5": 357
+    },
+    "freibetraege": {
+      "_grundlage": "§ 11b Abs. 2+3 SGB II",
+      "grundfreibetrag": 100,
+      "freibetrag_prozent_100_1000": 20,
+      "freibetrag_prozent_1000_1200": 10
+    }
+  },
+
+  "minijob": {
+    "_aktualisieren": "jährlich zum 1. Januar (Minijob-Grenze gekoppelt an Mindestlohn § 8 SGB IV)",
+    "_rechner": ["minijob"],
+    "_grundlage": "§§ 8, 20 SGB IV, § 249b SGB V, DEÜV",
+    "minijob_grenze_monatlich": 603,
+    "gleitzone_untergrenze": 603.01,
+    "gleitzone_obergrenze": 2000,
+    "ag_kv_pauschale_prozent": 13,
+    "ag_rv_pauschale_prozent": 15,
+    "ag_steuerpauschale_prozent": 2,
+    "an_rv_aufstockung_prozent": 3.6,
+    "gleitzonenformel_faktor_F": 0.6667
+  },
+
+  "krankengeld": {
+    "_aktualisieren": "jährlich zum 1. Januar (BBG KV)",
+    "_rechner": ["krankengeld"],
+    "_grundlage": "§ 47 SGB V",
+    "satz_brutto_prozent": 70,
+    "netto_grenze_prozent": 90,
+    "max_bezugsdauer_wochen": 78
+  },
+
+  "kinderkrankengeld": {
+    "_aktualisieren": "jährlich zum 1. Januar (BBG KV; Anspruchstage ggf. per Gesetz)",
+    "_rechner": ["kinderkrankengeld"],
+    "_grundlage": "§ 45 SGB V i.V.m. § 47 SGB V",
+    "satz_brutto_prozent": 70,
+    "netto_grenze_prozent": 90,
+    "anspruchstage_2026": {
+      "je_elternteil_je_kind": 15,
+      "je_elternteil_je_kind_ab3_kindern": 25,
+      "max_je_elternteil": 35,
+      "max_je_elternteil_ab3_kindern": 70,
+      "alleinerziehend_je_kind": 30,
+      "alleinerziehend_max": 70,
+      "kind_alter_grenze_jahre": 12
+    }
+  },
+
+  "kirchensteuer_standalone": {
+    "_aktualisieren": "bei Gesetzesänderung (Sätze seit Jahrzehnten stabil)",
+    "_rechner": ["kirchensteuer"],
+    "satz_8_prozent_bundeslaender": ["Bayern", "Baden-Württemberg"],
+    "satz_9_prozent_bundeslaender": ["Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"]
+  },
+
+  "pendlerpauschale": {
+    "_aktualisieren": "bei Gesetzesänderung (erhöhte Fernpendlerpauschale 0,38 € gilt bis 31.12.2026)",
+    "_rechner": ["pendlerpauschale"],
+    "_grundlage": "§ 9 Abs. 1 Nr. 4 EStG",
+    "pauschale_bis_20km": 0.30,
+    "pauschale_ab_21km": 0.38,
+    "max_pauschale_pkw": 4500
+  },
+
+  "urlaubsanspruch": {
+    "_aktualisieren": "bei Gesetzesänderung (BUrlG-Mindesturlaub seit 1963 stabil)",
+    "_rechner": ["urlaubsanspruch"],
+    "_grundlage": "§ 3 BUrlG, § 208 SGB IX",
+    "gesetzlicher_mindesturlaub_werktage": 24,
+    "zusatzurlaub_schwerbehinderung_tage": 5
+  },
+
+  "rentenbeginn": {
+    "_aktualisieren": "bei Gesetzesänderung (Anhebungsplan abgeschlossen bei Jahrgang 1964)",
+    "_rechner": ["rentenbeginn"],
+    "_grundlage": "§ 35, § 236, § 236b SGB VI"
+  },
+
+  "rentenabschlag": {
+    "_aktualisieren": "bei Gesetzesänderung (0,3 % je Monat seit 1997 unverändert)",
+    "_rechner": ["rentenabschlag"],
+    "_grundlage": "§ 77 Abs. 2 SGB VI",
+    "abschlag_pro_monat_prozent": 0.3,
+    "max_abschlag_prozent": 14.4
+  },
+
+  "alg1": {
+    "_aktualisieren": "jährlich zum 1. Januar (BA-Leistungsentgelttabellen)",
+    "_rechner": ["alg1"],
+    "_grundlage": "§§ 147, 149–153 SGB III",
+    "leistungssatz_ohne_kind_prozent": 60,
+    "leistungssatz_mit_kind_prozent": 67,
+    "bbg_alv_monatlich": 8450,
+    "sv_pauschale_an_prozent": 20.725,
+    "anspruchsdauer": [
+      { "versicherungsmonate": 12, "dauer_monate": 6,  "alter_mind": 0  },
+      { "versicherungsmonate": 16, "dauer_monate": 8,  "alter_mind": 0  },
+      { "versicherungsmonate": 20, "dauer_monate": 10, "alter_mind": 0  },
+      { "versicherungsmonate": 24, "dauer_monate": 12, "alter_mind": 0  },
+      { "versicherungsmonate": 30, "dauer_monate": 15, "alter_mind": 50 },
+      { "versicherungsmonate": 36, "dauer_monate": 18, "alter_mind": 55 },
+      { "versicherungsmonate": 48, "dauer_monate": 24, "alter_mind": 58 }
+    ]
+  },
+
+  "steuerklassen": {
+    "_aktualisieren": "jährlich zum 1. Januar (§ 32a EStG)",
+    "_rechner": ["steuerklassen"],
+    "_grundlage": "§ 38b EStG i.V.m. § 32a EStG 2026"
+  },
+
+  "rentenbesteuerung": {
+    "_aktualisieren": "jährlich (Besteuerungsanteil steigt bis 2058 auf 100 %)",
+    "_rechner": ["rentenbesteuerung"],
+    "_grundlage": "§ 22 Nr. 1 Satz 3 Buchst. a EStG (Alterseinkünftegesetz 2005)",
+    "werbungskosten_pauschbetrag_rente": 102,
+    "besteuerungsanteil_2026": 83,
+    "_hinweis_kohorte": "Rentenbeginn 2005 = 50%; +2% je Jahr bis 2020; +1% je Jahr bis 2058 = 100%"
+  },
+
+  "teilzeit": {
+    "_aktualisieren": "jährlich zum 1. Januar (Mindestlohn, SV-Grenzen)",
+    "_rechner": ["teilzeit"],
+    "_grundlage": "TzBfG, SGB IV",
+    "mindestlohn_stunde": 13.90,
+    "minijob_grenze_monatlich": 603,
+    "gleitzone_obergrenze_monatlich": 2000
+  },
+
+  "elternzeit": {
+    "_aktualisieren": "bei Gesetzesänderung (BEEG)",
+    "_rechner": ["elternzeit"],
+    "_grundlage": "§§ 15–16 BEEG",
+    "max_monate_gesamt": 36,
+    "anmeldung_frist_wochen": 7,
+    "uebertragbare_monate_auf_spaeter": 12,
+    "max_alter_kind_jahre": 8
+  },
+
+  "mutterschutz": {
+    "_aktualisieren": "bei Gesetzesänderung (MuSchG)",
+    "_rechner": ["mutterschutz"],
+    "_grundlage": "§§ 3, 19–20 MuSchG",
+    "schutzfrist_vor_geburt_wochen": 6,
+    "schutzfrist_nach_geburt_wochen": 8,
+    "schutzfrist_nach_geburt_frueh_wochen": 12,
+    "mutterschaftsgeld_max_tag_gkv": 13,
+    "mutterschaftsgeld_pauschal_privat": 210
+  },
+
+  "altersteilzeit": {
+    "_aktualisieren": "bei Gesetzesänderung (AltTZG; gesetzliche Aufstockungspflicht seit 2010 entfallen)",
+    "_rechner": ["altersteilzeit"],
+    "_grundlage": "§ 2 AltTZG",
+    "mindestalter_jahre": 55,
+    "teilzeit_anteil_prozent": 50
+  },
+
+  "steuererstattung": {
+    "_aktualisieren": "jährlich zum 1. Januar (§ 32a EStG, Homeoffice-Pauschale)",
+    "_rechner": ["steuererstattung"],
+    "_grundlage": "§§ 32a, 9, 10, 35a EStG",
+    "homeoffice_pauschale_je_tag": 6,
+    "homeoffice_max_tage": 210,
+    "homeoffice_max_jahr": 1260,
+    "handwerker_ermaessigung_prozent": 20,
+    "handwerker_max_ermaessigung": 1200
+  },
+
+  "verletztengeld": {
+    "_aktualisieren": "jährlich zum 1. Januar (JAV-Höchstbetrag = 2 × BBG RV)",
+    "_rechner": ["verletztengeld"],
+    "_grundlage": "§§ 45–52 SGB VII",
+    "satz_prozent": 80,
+    "netto_grenze_prozent": 100,
+    "jav_hoechst_jahr": 202800,
+    "jav_hoechst_monat": 16900
+  },
+
+  "uebergangsgeld": {
+    "_aktualisieren": "jährlich zum 1. Januar (BBG RV)",
+    "_rechner": ["uebergangsgeld"],
+    "_grundlage": "§§ 20–21 SGB VI | §§ 49–52 SGB IX",
+    "satz_ohne_kind_prozent": 68,
+    "satz_mit_kind_prozent": 75
+  },
+
+  "pfaendung": {
+    "_aktualisieren": "jährlich zum 1. Juli (§ 850c Abs. 4 ZPO – Pfändungsfreigrenzenbekanntmachung)",
+    "_rechner": ["pfaendung"],
+    "_grundlage": "§ 850c ZPO | Pfändungsfreigrenzenbekanntmachung 2025 (gültig 01.07.2025 – 30.06.2026)",
+    "gueltig_ab": "2025-07-01",
+    "gueltig_bis": "2026-06-30",
+    "grundfreibetrag_monat": 1555.00,
+    "erhoehung_erste_person": 585.23,
+    "erhoehung_weitere_person": 326.04,
+    "vollpfaendbar_ab": 4771.39,
+    "pfaendungsquote_zone": 0.7
+  },
+
+  "grundsicherung": {
+    "_aktualisieren": "jährlich zum 1. Januar (RBEG – Regelbedarfsermittlungsgesetz)",
+    "_rechner": ["grundsicherung"],
+    "_grundlage": "§§ 41–46b SGB XII",
+    "regelbedarfe_2026": {
+      "_hinweis": "Unverändert gegenüber 2024",
+      "stufe1_alleinstehende": 563,
+      "stufe2_paare_je_partner": 506
+    },
+    "freibetrag_rente_prozent": 30,
+    "freibetrag_rente_max": 50
+  },
+
+  "bafoeg": {
+    "_aktualisieren": "bei BAföG-Novelle (Bedarfssätze zuletzt ab 01.08.2024, 29. BAföGÄndG)",
+    "_rechner": ["bafoeg"],
+    "_grundlage": "BAföG §§ 11–29",
+    "gueltig_ab": "2024-08-01",
+    "bedarfssaetze": {
+      "extern_grundbetrag": 475,
+      "extern_unterkunft": 380,
+      "elternwohnung": 452,
+      "kv_zuschlag": 109,
+      "pv_zuschlag": 26
+    },
+    "freibetraege": {
+      "eigenes_einkommen_monat": 520,
+      "eltern_verheiratet_monat": 2415,
+      "eltern_alleinstehend_monat": 1605,
+      "geschwister_in_ausbildung_monat": 635
+    },
+    "einkommensanrechnung_eltern_prozent": 50,
+    "darlehens_max_gesamt": 10010
   },
 
   "kfz_steuer": {
-    "_aktualisieren": "bei Gesetzesänderung",
-    "hubraum_benzin_euro_je_100ccm": 2.0,
-    "hubraum_diesel_euro_je_100ccm": 9.5,
+    "_aktualisieren": "bei Gesetzesänderung (Steuersätze unverändert seit 2020; Elektro-Befreiung bis 2035)",
+    "_rechner": ["kfz-steuer"],
+    "_grundlage": "§ 9 KraftStG i.d.F. 22.12.2025 (BGBl. 2025 I Nr. 341); § 3d KraftStG (8. KraftStÄndG, ab 01.01.2026)",
+    "hubraum_benzin_euro_je_100ccm": 2.00,
+    "hubraum_diesel_euro_je_100ccm": 9.50,
     "co2_freibetrag_g_km": 95,
-    "co2_flat_euro_je_g": 2.0,
-    "mindeststeuer": 21.07
+    "co2_flat_euro_je_g": 2.00,
+    "co2_stufen": [
+      { "bis": 115, "euro_je_g": 2.00 },
+      { "bis": 135, "euro_je_g": 2.20 },
+      { "bis": 155, "euro_je_g": 2.50 },
+      { "bis": 175, "euro_je_g": 2.90 },
+      { "bis": 195, "euro_je_g": 3.40 },
+      { "bis": 9999, "euro_je_g": 4.00 }
+    ],
+    "mindeststeuer": 21.07,
+    "elektro_befreiung_neuzulassung_bis_jahr": 2030,
+    "elektro_befreiung_max_bis_jahr": 2035,
+    "elektro_befreiungsjahre": 10
+  },
+
+  "mindestlohn": {
+    "_aktualisieren": "jährlich zum 1. Januar (§ 1 MiLoG)",
+    "_rechner": ["mindestlohn", "stundenlohn", "teilzeit"],
+    "_grundlage": "§ 1 Abs. 2 MiLoG",
+    "stundensatz": 13.90
+  },
+
+  "kalteprogression": {
+    "_aktualisieren": "jährlich zum 1. Januar (§ 32a EStG)",
+    "_rechner": ["kalteprogression"],
+    "_grundlage": "§ 32a EStG – Inflationsausgleichsgesetz (IAG)"
+  },
+
+  "gruendungszuschuss": {
+    "_aktualisieren": "bei Gesetzesänderung (§ 93 SGB III)",
+    "_rechner": ["gruendungszuschuss"],
+    "_grundlage": "§ 93 SGB III",
+    "pauschale_phase1_monat": 300,
+    "pauschale_phase2_monat": 300,
+    "dauer_phase1_monate": 6,
+    "dauer_phase2_monate": 9
+  },
+
+  "witwenrente": {
+    "_aktualisieren": "jährlich zum 1. Juli (Rentenwert) und bei Gesetzesänderung (SGB VI)",
+    "_rechner": ["witwenrente"],
+    "_grundlage": "§§ 46, 65, 67, 97 SGB VI",
+    "rentenwert_west": 39.32,
+    "rentenwert_ost": 39.32,
+    "grosse_wr_faktor": 0.55,
+    "kleine_wr_faktor": 0.25,
+    "freibetrag_faktor": 26.4,
+    "einkommensanrechnung_prozent": 40
+  },
+
+  "hinzuverdienst": {
+    "_aktualisieren": "jährlich zum 1. Januar (BBG) und 1. Juli (Rentenwert); § 34 SGB VI",
+    "_rechner": ["hinzuverdienst"],
+    "_grundlage": "§ 34 SGB VI i.d.F. ab 01.01.2023 (unbegrenzt bei Regelaltersrente)",
+    "bbg_monat": 8450,
+    "jahresgrenze_faktor": 6,
+    "kuerzung_prozent": 40,
+    "hinzuverdienst_grenze_vorzeitig_jahr": 50700
+  },
+
+  "flexrente": {
+    "_aktualisieren": "jährlich zum 1. Juli (Rentenwert, § 68 SGB VI)",
+    "_rechner": ["flexrente"],
+    "_grundlage": "§§ 77, 302 SGB VI (Flexirentengesetz ab 01.01.2017)",
+    "rentenwert_west": 39.32,
+    "abschlag_je_monat_prozent": 0.3,
+    "abschlag_max_prozent": 14.4,
+    "zuschlag_je_monat_prozent": 0.5,
+    "regelaltersgrenze_ab_1964": 67
+  },
+
+  "rentenschaetzer": {
+    "_aktualisieren": "jährlich: Rentenwert zum 1. Juli (§ 68 SGB VI), Durchschnittsentgelt zum 1. Januar (SV-RechengrößenVO)",
+    "_rechner": ["rentenschaetzer"],
+    "_grundlage": "§§ 63–70 SGB VI",
+    "rentenwert_west": 39.32,
+    "durchschnittsentgelt_2025": 47250
+  },
+
+  "paypal": {
+    "_aktualisieren": "bei Gebührenänderung durch PayPal (letzte Änderung: 2023)",
+    "_rechner": ["paypal"],
+    "_grundlage": "PayPal Händler-AGB Deutschland (Stand: 2024)",
+    "haendler_inland_prozent": 2.49,
+    "haendler_inland_fix": 0.35,
+    "haendler_international_prozent": 3.49,
+    "haendler_international_fix": 0.35,
+    "freunde_kreditkarte_prozent": 2.9,
+    "freunde_kreditkarte_fix": 0.35
+  },
+
+  "gerichtskosten": {
+    "_aktualisieren": "bei Gesetzesänderung (GKG, RVG – letzte Änderung: 2021)",
+    "_rechner": ["gerichtskosten"],
+    "_grundlage": "GKG Anlage 2, RVG Anlage 2 (Tabelle B), Stand: 01.01.2021",
+    "rvg_verfahrensgebuehr_faktor": 1.3,
+    "rvg_terminsgebuehr_faktor": 1.2,
+    "rvg_postpauschale": 20,
+    "mwst_prozent": 19,
+    "gericht_faktor_ag_lg": 3.0,
+    "gericht_faktor_olg": 4.0,
+    "gericht_faktor_bgh": 5.0
   }
 }

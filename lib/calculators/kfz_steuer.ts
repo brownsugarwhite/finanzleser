@@ -22,13 +22,20 @@ export function berechne({
   co2_ausstoss,
   anmeldungsjahr,
 }: KfzSteuerParams, rates: typeof RATES = RATES): KfzSteuerResult {
-  // Hubraum-basierte Grundsteuer: 2,00 € pro 100 ccm
-  const grundsteuer = (Math.ceil(hubraum / 100) * 2.0);
+  // Hubraum-basierte Grundsteuer from rates.json
+  const satz_je_100ccm = rates.kfz_steuer.hubraum_benzin_euro_je_100ccm;
+  const grundsteuer = (Math.ceil(hubraum / 100) * satz_je_100ccm);
 
-  // CO2-Zuschlag (ab 2026: 2 € pro g/km über 120 g/km)
+  // CO2-Zuschlag from rates.json
+  const co2_freibetrag = rates.kfz_steuer.co2_freibetrag_g_km;
   let co2_zuschlag = 0;
-  if (co2_ausstoss > 120) {
-    co2_zuschlag = (co2_ausstoss - 120) * 2.0;
+  if (co2_ausstoss > co2_freibetrag) {
+    const co2_ueber_freibetrag = co2_ausstoss - co2_freibetrag;
+    // Find the appropriate rate from co2_stufen
+    const stufe = rates.kfz_steuer.co2_stufen.find(s => co2_ueber_freibetrag <= s.bis);
+    if (stufe) {
+      co2_zuschlag = co2_ueber_freibetrag * stufe.euro_je_g;
+    }
   }
 
   // Reduktion für ältere Fahrzeuge

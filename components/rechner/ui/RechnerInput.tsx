@@ -4,7 +4,7 @@ interface RechnerInputProps {
   value: number | string;
   onChange: (val: number) => void;
   einheit?: string;
-  step?: number;
+  step?: number | string;
   min?: number;
   max?: number;
 }
@@ -15,7 +15,7 @@ export default function RechnerInput({
   value,
   onChange,
   einheit,
-  step = 1,
+  step = "any",
   min = 0,
 }: RechnerInputProps) {
   return (
@@ -28,8 +28,8 @@ export default function RechnerInput({
           id={name}
           type="number"
           name={name}
-          value={value}
-          onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
+          value={typeof value === 'string' ? value.replace(',', '.') : value}
+          onChange={(e) => onChange(parseFloat(e.target.value.replace(',', '.')) || 0)}
           step={step}
           min={min}
           className="rechner-input"

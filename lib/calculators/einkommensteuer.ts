@@ -55,21 +55,11 @@ export function berechne({
 
   lohnsteuer = Math.max(0, rund(lohnsteuer));
 
-  // Solidaritätszuschlag: 5.5% of Lohnsteuer
-  const solidaritaetszuschlag = rund(lohnsteuer * 0.055);
+  // Solidaritätszuschlag from rates.json
+  const solidaritaetszuschlag = rund(lohnsteuer * (rates.solidaritaetszuschlag.satz_prozent / 100));
 
-  // Kirchensteuer (8% or 9% depending on Bundesland)
-  const satz8Bundeslaender = [
-    "Baden-Württemberg",
-    "Bayern",
-    "Bremen",
-    "Hessen",
-    "Hannover",
-    "Mecklenburg-Vorpommern",
-    "Niedersachsen",
-    "Schleswig-Holstein",
-    "Thüringen",
-  ];
+  // Kirchensteuer (8% or 9% depending on Bundesland) from rates.json
+  const satz8Bundeslaender = rates.kirchensteuer.satz_8_prozent_bundeslaender;
   const kirchensteuersatz = satz8Bundeslaender.includes(bundesland) ? 0.08 : 0.09;
   const kirchensteuer = rund(lohnsteuer * kirchensteuersatz);
 

@@ -27,11 +27,12 @@ export function berechne({
   // Ausfallquote berechnen
   const ausfallquote = ausgefallene_stunden / gesamtstunden_pro_woche;
 
-  // Vereinfachte Berechnung: 60% des wegfallenden Nettoentgelts
+  // Berechnung mit Leistungssatz from rates.json
   // Annahme: Netto ca. 80% des Bruttos
   const netto_anteil = 0.8;
   const wegfallender_netto = regelmaessiges_gehalt * netto_anteil * ausfallquote;
-  const kurzarbeitsgeld_monatlich = rund(wegfallender_netto * 0.6);
+  const leistungssatz = rates.kurzarbeitsgeld.leistungssatz_ohne_kind_prozent / 100;
+  const kurzarbeitsgeld_monatlich = rund(wegfallender_netto * leistungssatz);
 
   const kurzarbeitsgeld_gesamt = rund(kurzarbeitsgeld_monatlich * monate);
   const einkommensverlust = rund(wegfallender_netto * monate);

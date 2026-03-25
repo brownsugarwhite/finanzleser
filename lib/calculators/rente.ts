@@ -19,7 +19,8 @@ export function berechne({
   rentenpunkte,
   renteneintrittsalter,
 }: RenteParams, rates: typeof RATES = RATES): RenteResult {
-  const rentenwert = 39.32; // 2026 Wert für alte Bundesländer
+  // Rentenwert (ab 01.07.2026) from rates.json
+  const rentenwert = rates.rente.rentenwert_ab_01jul_2026;
   const accessfaktor = 1.0; // Ohne Zu-/Abschlag (reguläre Altersgrenze)
 
   const monatlicheRente = rund(rentenpunkte * rentenwert * accessfaktor);

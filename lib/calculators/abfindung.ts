@@ -44,8 +44,8 @@ export function berechne({
   // Steuern auf Fünftel anwenden und mit 5 multiplizieren
   const einkommensteuer = rund(fünftel * steuersatz * 5);
 
-  // Solidaritätszuschlag: 5,5% der Einkommensteuer
-  const solidaritaetszuschlag = rund(einkommensteuer * 0.055);
+  // Solidaritätszuschlag from rates.json
+  const solidaritaetszuschlag = rund(einkommensteuer * (rates.solidaritaetszuschlag.satz_prozent / 100));
 
   // Vereinfachte Kirchensteuer: 9% der Einkommensteuer
   const kirchensteuer = rund(einkommensteuer * 0.09);

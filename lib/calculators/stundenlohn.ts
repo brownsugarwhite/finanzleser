@@ -15,7 +15,7 @@ export interface StundenlohnResult {
 }
 
 export function berechne({ stunden, stundenumfang }: StundenlohnParams, rates: typeof RATES = RATES): StundenlohnResult {
-  const mindestlohn = RATES.mindestlohn.stundensatz;
+  const mindestlohn = rates.mindestlohn.stundensatz;
 
   let stundenWoche = 40;
   if (stundenumfang === "teilzeit") stundenWoche = 20;

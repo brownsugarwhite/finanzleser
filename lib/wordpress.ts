@@ -674,70 +674,37 @@ export async function getCategoryBySlug(slug: string) {
 // ─────────────────────────────────────────────
 
 export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null> {
-  const client = getClient();
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return null;
 
-  const query = gql`
-    query GetRechnerConfig {
-      rechnerConfig {
-        rcMindestlohn
-        rcKindergeld
-        rcRentenwert
-        rcRvAn
-        rcKvAn
-        rcKvZusatz
-        rcPvKinderlos
-        rcAlvAn
-        rcGrundfreibetrag
-        rcBbgKv
-        rcBbgRv
-        rcElterngeldMin
-        rcElterngeldMax
-        rcLetzteAktualisierung
-      }
-    }
-  `;
+  // Extract base URL (remove /graphql)
+  const baseUrl = wpUrl.replace('/graphql', '');
 
   try {
-    const data = await client.request<{
-      rechnerConfig: {
-        rcMindestlohn?: number;
-        rcKindergeld?: number;
-        rcRentenwert?: number;
-        rcRvAn?: number;
-        rcKvAn?: number;
-        rcKvZusatz?: number;
-        rcPvKinderlos?: number;
-        rcAlvAn?: number;
-        rcGrundfreibetrag?: number;
-        rcBbgKv?: number;
-        rcBbgRv?: number;
-        rcElterngeldMin?: number;
-        rcElterngeldMax?: number;
-        rcLetzteAktualisierung?: string;
-      };
-    }>(query);
+    // REST API: Holt ACF Options via custom Endpoint
+    const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`);
+    if (!response.ok) return null;
 
-    if (!data.rechnerConfig) return null;
+    const data = await response.json();
 
-    // Convert snake_case to camelCase for ACF keys
+    // Endpoint gibt Werte direkt zurück
     const config: RechnerConfigOverrides = {
-      rc_mindestlohn: data.rechnerConfig.rcMindestlohn,
-      rc_kindergeld: data.rechnerConfig.rcKindergeld,
-      rc_rentenwert: data.rechnerConfig.rcRentenwert,
-      rc_rv_an: data.rechnerConfig.rcRvAn,
-      rc_kv_an: data.rechnerConfig.rcKvAn,
-      rc_kv_zusatz: data.rechnerConfig.rcKvZusatz,
-      rc_pv_kinderlos: data.rechnerConfig.rcPvKinderlos,
-      rc_alv_an: data.rechnerConfig.rcAlvAn,
-      rc_grundfreibetrag: data.rechnerConfig.rcGrundfreibetrag,
-      rc_bbg_kv: data.rechnerConfig.rcBbgKv,
-      rc_bbg_rv: data.rechnerConfig.rcBbgRv,
-      rc_elterngeld_min: data.rechnerConfig.rcElterngeldMin,
-      rc_elterngeld_max: data.rechnerConfig.rcElterngeldMax,
-      rc_letzte_aktualisierung: data.rechnerConfig.rcLetzteAktualisierung,
+      rc_mindestlohn: data.rc_mindestlohn,
+      rc_kindergeld: data.rc_kindergeld,
+      rc_rentenwert: data.rc_rentenwert,
+      rc_rv_an: data.rc_rv_an,
+      rc_kv_an: data.rc_kv_an,
+      rc_kv_zusatz: data.rc_kv_zusatz,
+      rc_pv_kinderlos: data.rc_pv_kinderlos,
+      rc_alv_an: data.rc_alv_an,
+      rc_grundfreibetrag: data.rc_grundfreibetrag,
+      rc_bbg_kv: data.rc_bbg_kv,
+      rc_bbg_rv: data.rc_bbg_rv,
+      rc_elterngeld_min: data.rc_elterngeld_min,
+      rc_elterngeld_max: data.rc_elterngeld_max,
     };
 
-    return config;
+    return Object.keys(config).some(key => config[key as keyof RechnerConfigOverrides] !== undefined) ? config : null;
   } catch (error) {
     console.error("Error fetching rechner config from WordPress:", error);
     return null;

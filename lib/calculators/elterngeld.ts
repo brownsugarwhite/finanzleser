@@ -20,13 +20,12 @@ export function berechne({
   anzahl_kinder,
   basiselterngeld,
 }: ElterngeldParams, rates: typeof RATES = RATES): ElterngeldResult {
-  // Elterngeld: 65% des durchschnittlichen Nettoeinkommens
-  // Minimum: 300 €, Maximum: 1800 € pro Monat
-  const quote = 0.65;
+  // Elterngeld: Ersatzquote und Grenzen from rates.json
+  const quote = rates.elterngeld.ersatzrate_standard_prozent / 100;
   let elterngeld_monatlich = einkommen_vor_geburt * quote;
 
   // Mindest- und Höchstbetrag
-  elterngeld_monatlich = Math.max(300, Math.min(1800, elterngeld_monatlich));
+  elterngeld_monatlich = Math.max(rates.elterngeld.basiselterngeld.min, Math.min(rates.elterngeld.basiselterngeld.max, elterngeld_monatlich));
 
   // Mehrlingszuschlag (25% für jedes weitere Kind)
   if (anzahl_kinder > 1) {

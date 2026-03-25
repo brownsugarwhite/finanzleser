@@ -13,7 +13,7 @@ export interface KindergeldResult {
 }
 
 export function berechne({ kinder }: KindergeldParams, rates: typeof RATES = RATES): KindergeldResult {
-  const kindergeldProKind = RATES.unterhalt.kindergeld_pro_kind;
+  const kindergeldProKind = rates.kindergeld.monatlich_je_kind;
   const gesamtKindergeld = rund(kindergeldProKind * kinder);
   const jaehrlich = rund(gesamtKindergeld * 12);
 

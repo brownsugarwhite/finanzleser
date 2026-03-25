@@ -22,7 +22,7 @@ export default async function RechnerPage() {
               href="/finanztools/rechner-uebersicht"
               className="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 transition font-semibold whitespace-nowrap ml-4"
             >
-              Alle 17 Rechner ansehen →
+              Alle 52 Rechner ansehen →
             </Link>
           </div>
 

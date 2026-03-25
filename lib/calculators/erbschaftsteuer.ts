@@ -20,16 +20,15 @@ export function berechne({
   erbschaft,
   verwandtschaftsgrad,
 }: ErbschaftsteuerParams, rates: typeof RATES = RATES): ErbschaftsteuerResult {
-  // Freibeträge nach Steuerklasse (2026)
-  const freibetraege: Record<number, number> = {
-    1: 400000, // Kinder
-    2: 200000, // Enkel (bei verstorbenem Kind)
-    3: 100000, // Großeltern
-    4: 20000,  // Geschwister
-    5: 20000,  // Sonstige
+  // Freibeträge nach Steuerklasse (2026) from rates.json
+  const freibetraege_map: Record<number, keyof typeof rates.erbschaftsteuer.freibetraege> = {
+    1: "kinder_stiefkinder",
+    2: "enkel_elternteil_vorverstorben",
+    3: "eltern_grosseltern_erbschaft",
+    4: "steuerklasse_2",
+    5: "steuerklasse_3",
   };
-
-  const freibetrag = freibetraege[verwandtschaftsgrad] || 0;
+  const freibetrag = rates.erbschaftsteuer.freibetraege[freibetraege_map[verwandtschaftsgrad]] || 0;
   const steuerpflichtiger_betrag = Math.max(0, erbschaft - freibetrag);
 
   if (steuerpflichtiger_betrag === 0) {
@@ -43,31 +42,49 @@ export function berechne({
     };
   }
 
-  // Vereinfachte Steuersätze nach Steuerklasse (I, II, III)
+  // Steuersätze nach Steuerklasse from rates.json
   let steuersatz = 0;
 
   if (verwandtschaftsgrad === 1) {
-    // Steuerklasse I (Kinder) - progressiv
-    if (steuerpflichtiger_betrag <= 75000) {
-      steuersatz = 0.07;
-    } else if (steuerpflichtiger_betrag <= 300000) {
-      steuersatz = 0.11;
-    } else if (steuerpflichtiger_betrag <= 600000) {
-      steuersatz = 0.15;
-    } else if (steuerpflichtiger_betrag <= 6000000) {
-      steuersatz = 0.19;
-    } else {
-      steuersatz = 0.3;
+    // Steuerklasse I (Kinder)
+    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_1;
+    for (const stufe of tabelle) {
+      if (steuerpflichtiger_betrag <= stufe.bis) {
+        steuersatz = stufe.satz / 100;
+        break;
+      }
     }
+    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
   } else if (verwandtschaftsgrad === 2) {
     // Steuerklasse I (Enkel)
-    steuersatz = verwandtschaftsgrad === 2 ? 0.15 : 0.19;
-  } else if (verwandtschaftsgrad === 3 || verwandtschaftsgrad === 4) {
+    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_1;
+    for (const stufe of tabelle) {
+      if (steuerpflichtiger_betrag <= stufe.bis) {
+        steuersatz = stufe.satz / 100;
+        break;
+      }
+    }
+    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
+  } else if (verwandtschaftsgrad === 3) {
     // Steuerklasse II
-    steuersatz = 0.3;
+    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_2;
+    for (const stufe of tabelle) {
+      if (steuerpflichtiger_betrag <= stufe.bis) {
+        steuersatz = stufe.satz / 100;
+        break;
+      }
+    }
+    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
   } else {
-    // Steuerklasse III (Sonstige)
-    steuersatz = 0.3;
+    // Steuerklasse III (Sonstige und Geschwister)
+    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_3;
+    for (const stufe of tabelle) {
+      if (steuerpflichtiger_betrag <= stufe.bis) {
+        steuersatz = stufe.satz / 100;
+        break;
+      }
+    }
+    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
   }
 
   const erbschaftsteuer = rund(steuerpflichtiger_betrag * steuersatz);

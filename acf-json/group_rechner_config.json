@@ -144,13 +144,13 @@
       "append": "",
       "min": 0,
       "max": "",
-      "step": "1"
+      "step": "0.01"
     },
     {
       "key": "field_rc_bbg_kv",
       "label": "BBG KV/PV monatlich (€)",
       "name": "rc_bbg_kv",
-      "type": "number",
+      "type": "text",
       "instructions": "Beitragssatzbasis Krankenversicherung/Pflegeversicherung monatlich in Euro",
       "required": 0,
       "conditional_logic": 0,
@@ -160,7 +160,7 @@
       "append": "",
       "min": 0,
       "max": "",
-      "step": "1"
+      "step": "0.01"
     },
     {
       "key": "field_rc_bbg_rv",
@@ -176,7 +176,7 @@
       "append": "",
       "min": 0,
       "max": "",
-      "step": "1"
+      "step": "0.01"
     },
     {
       "key": "field_rc_elterngeld_min",
@@ -192,7 +192,7 @@
       "append": "",
       "min": 0,
       "max": "",
-      "step": "1"
+      "step": "0.01"
     },
     {
       "key": "field_rc_elterngeld_max",
@@ -208,7 +208,7 @@
       "append": "",
       "min": 0,
       "max": "",
-      "step": "1"
+      "step": "0.01"
     },
     {
       "key": "field_rc_letzte_aktualisierung",

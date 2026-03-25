@@ -20,11 +20,47 @@ const RECHNER = [
   { slug: "kfz-steuer", title: "KFZ-Steuer-Rechner", beschreibung: "Berechnen Sie die KFZ-Steuer basierend auf Hubraum und CO₂." },
   { slug: "abfindung", title: "Abfindungs-Rechner", beschreibung: "Berechnen Sie die Netto-Abfindung mit Steuern." },
   { slug: "kurzarbeitsgeld", title: "Kurzarbeitsgeld-Rechner", beschreibung: "Berechnen Sie Ihr Kurzarbeitsgeld bei Stundenausfällen." },
+  // Neue Rechner
+  { slug: "alg1", title: "Arbeitslosengeld I Rechner", beschreibung: "Berechnen Sie Ihren ALG1-Anspruch und die tägliche Leistung." },
+  { slug: "mindestlohn", title: "Mindestlohn-Rechner", beschreibung: "Berechnen Sie Ihr Monatseinkommen basierend auf Mindestlohn." },
+  { slug: "kirchensteuer", title: "Kirchensteuer-Rechner", beschreibung: "Berechnen Sie die Kirchensteuer auf Ihr Einkommen nach Bundesland." },
+  { slug: "minijob", title: "Minijob & Midijob Rechner", beschreibung: "Berechnen Sie Netto und Arbeitgeberkosten für Mini- und Midijobs." },
+  { slug: "pendlerpauschale", title: "Pendlerpauschale-Rechner", beschreibung: "Berechnen Sie Ihre Werbungskosten für die Fahrt zur Arbeit." },
+  { slug: "mutterschutz", title: "Mutterschutz-Rechner", beschreibung: "Berechnen Sie Mutterschaftsgeld und Schutzfristen." },
+  { slug: "altersteilzeit", title: "Altersteilzeit-Rechner", beschreibung: "Berechnen Sie Ihr Netto in Altersteilzeit mit Aufstockung." },
+  { slug: "annuitaet", title: "Annuitätenrechner", beschreibung: "Berechnen Sie Monatsrate und Tilgungsplan für Darlehen." },
+  { slug: "bafoeg", title: "BAföG-Rechner", beschreibung: "Ermitteln Sie Ihren monatlichen BAföG-Anspruch." },
+  { slug: "buergergeld", title: "Bürgergeld-Rechner", beschreibung: "Berechnen Sie Ihren Bürgergeldanspruch (Arbeitslosengeld II)." },
+  { slug: "elternzeit", title: "Elternzeit-Rechner", beschreibung: "Planen Sie Ihre Elternzeitdauer bis zum 3. Geburtstag." },
+  { slug: "flexrente", title: "Flexrenten-Rechner", beschreibung: "Berechnen Sie Ihre Rente mit Abschlägen oder Zuschlägen." },
+  { slug: "gerichtskosten", title: "Gerichtskosten-Rechner", beschreibung: "Schätzen Sie die Gerichtsgebühren basierend auf Streitwert." },
+  { slug: "gleitzone", title: "Gleitzone-Rechner", beschreibung: "Prüfen Sie, in welche Kategorie Ihr Einkommen fällt." },
+  { slug: "gruendungszuschuss", title: "Gründungszuschuss-Rechner", beschreibung: "Berechnen Sie Ihren möglichen Gründungszuschuss von der Agentur." },
+  { slug: "grundsicherung", title: "Grundsicherung-Rechner", beschreibung: "Berechnen Sie Ihren Anspruch auf Grundsicherung im Alter." },
+  { slug: "haushaltsrechner", title: "Haushalts-Rechner", beschreibung: "Tracken Sie Ihre monatlichen Einnahmen und Ausgaben." },
+  { slug: "hinzuverdienst", title: "Hinzuverdienst-Rechner", beschreibung: "Berechnen Sie, wie Hinzuverdienst Ihr ALG1 beeinflusst." },
+  { slug: "kalteprogression", title: "Kalte Progression-Rechner", beschreibung: "Sehen Sie den Steuervorteil durch Gehaltserhöhungen." },
+  { slug: "kinderkrankengeld", title: "Kinderkrankengeld-Rechner", beschreibung: "Berechnen Sie Leistungen bei Krankheit Ihrer Kinder." },
+  { slug: "krankengeld", title: "Krankengeld-Rechner", beschreibung: "Berechnen Sie Ihre Leistung bei Arbeitsunfähigkeit." },
+  { slug: "leasing", title: "Leasing-Rechner", beschreibung: "Vergleichen Sie Leasing-Raten mit Kaufpreisen." },
+  { slug: "paypal", title: "PayPal-Gebühren-Rechner", beschreibung: "Berechnen Sie die Gebühren für Ihre PayPal-Transaktionen." },
+  { slug: "pfaendung", title: "Pfändung-Rechner", beschreibung: "Ermitteln Sie den pfändbaren Betrag Ihres Einkommens." },
+  { slug: "rentenabschlag", title: "Rentenabschlag-Rechner", beschreibung: "Berechnen Sie Ihre Rente mit lebenslangem Abschlag." },
+  { slug: "rentenbeginn", title: "Rentenbeginn-Rechner", beschreibung: "Planen Sie Ihren optimalen Renteneintritt." },
+  { slug: "rentenbesteuerung", title: "Rentenbesteuerung-Rechner", beschreibung: "Berechnen Sie die Besteuerung Ihrer Renteneinkünfte." },
+  { slug: "rentenschaetzer", title: "Rentenschätzer", beschreibung: "Schätzen Sie Ihre voraussichtliche monatliche Rente." },
+  { slug: "steuererstattung", title: "Steuererstatung-Rechner", beschreibung: "Schätzen Sie Ihre mögliche Steuererstatung." },
+  { slug: "steuerklassen", title: "Steuerklassen-Rechner", beschreibung: "Vergleichen Sie Ihre Netto-Einkünfte nach Steuerklasse." },
+  { slug: "teilzeit", title: "Teilzeit-Rechner", beschreibung: "Berechnen Sie Ihr neues Einkommen bei Stundenreduzierung." },
+  { slug: "uebergangsgeld", title: "Übergangsgeld-Rechner", beschreibung: "Berechnen Sie Übergangsgeld bei Maßnahmen zur Rehabilitation." },
+  { slug: "urlaubsanspruch", title: "Urlaubsanspruch-Rechner", beschreibung: "Ermitteln Sie Ihren jährlichen Urlaubsanspruch." },
+  { slug: "verletztengeld", title: "Verletztengeld-Rechner", beschreibung: "Berechnen Sie Leistungen bei Arbeitsunfällen." },
+  { slug: "witwenrente", title: "Witwenrente-Rechner", beschreibung: "Berechnen Sie die Witwenrente für Hinterbliebene." },
 ];
 
 export const metadata = {
   title: "Alle Finanzrechner – finanzleser.de",
-  description: "Übersicht aller 17 Finanzrechner: Brutto-Netto, Kredite, Steuern, Versicherungen und mehr.",
+  description: "Übersicht aller 52 Finanzrechner: Brutto-Netto, Kredite, Steuern, Versicherungen, Rentenschätzung und mehr.",
 };
 
 export default function RechnerUebersichtPage() {
@@ -35,7 +71,7 @@ export default function RechnerUebersichtPage() {
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-4">Alle Finanzrechner</h1>
           <p className="text-lg text-gray-600 mb-12">
-            17 praktische Rechner für schnelle finanzielle Berechnungen. Alle Rechner sind Schätzungen
+            52 praktische Rechner für schnelle finanzielle Berechnungen. Alle Rechner sind Schätzungen
             und können keine professionelle Beratung ersetzen.
           </p>
 
