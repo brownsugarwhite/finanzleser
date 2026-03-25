@@ -13,9 +13,17 @@ export default async function RechnerPage() {
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-6">Finanzrechner</h1>
-          <p className="text-lg text-gray-600 mb-12">
-            Unsere Finanzrechner helfen Ihnen bei wichtigen finanziellen Entscheidungen.
-          </p>
+          <div className="flex items-center justify-between mb-12">
+            <p className="text-lg text-gray-600">
+              Unsere Finanzrechner helfen Ihnen bei wichtigen finanziellen Entscheidungen.
+            </p>
+            <Link
+              href="/finanztools/rechner-uebersicht"
+              className="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 transition font-semibold whitespace-nowrap ml-4"
+            >
+              Alle 17 Rechner ansehen →
+            </Link>
+          </div>
 
           {posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
