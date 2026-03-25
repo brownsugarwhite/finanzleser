@@ -134,3 +134,24 @@ export interface SEO {
   opengraphDescription?: string;
   opengraphImage?: { sourceUrl: string };
 }
+
+// ─────────────────────────────────────────────
+// Rechner-Konfiguration (WordPress ACF)
+// ─────────────────────────────────────────────
+
+export interface RechnerConfigOverrides {
+  rc_mindestlohn?: number;
+  rc_kindergeld?: number;
+  rc_rentenwert?: number;
+  rc_rv_an?: number;
+  rc_kv_an?: number;
+  rc_kv_zusatz?: number;
+  rc_pv_kinderlos?: number;
+  rc_alv_an?: number;
+  rc_grundfreibetrag?: number;
+  rc_bbg_kv?: number;
+  rc_bbg_rv?: number;
+  rc_elterngeld_min?: number;
+  rc_elterngeld_max?: number;
+  rc_letzte_aktualisierung?: string;
+}
