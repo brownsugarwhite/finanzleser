@@ -5,6 +5,7 @@ import Image from "next/image";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 
 type ArticleLayoutProps = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ type ArticleLayoutProps = {
   mainCategoryName?: string; // Hauptkategorie name
   sidebar?: React.ReactNode;
   contentTableOfContents?: React.ReactNode;
+  beitragRechner?: Array<{ slug: string; title: string }>;
   author?: {
     name: string;
     role?: string;
@@ -25,7 +27,7 @@ type ArticleLayoutProps = {
   };
 };
 
-export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, mainCategoryName, sidebar, contentTableOfContents, author }: ArticleLayoutProps) {
+export default function ArticleLayout({ children, title, excerpt, featuredImage, category, mainCategory, mainCategoryName, sidebar, contentTableOfContents, beitragRechner, author }: ArticleLayoutProps) {
   const breadcrumbItems = mainCategory && category ? [
     { label: mainCategoryName || mainCategory, href: `/${mainCategory}` },
     { label: category.name, href: `/${mainCategory}/${category.slug}` }
@@ -149,6 +151,15 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
               {contentTableOfContents}
               <Spacer />
               <article>{children}</article>
+              {beitragRechner && beitragRechner.length > 0 && (
+                <div style={{ marginTop: "60px" }}>
+                  {beitragRechner.map((rechner) => (
+                    <div key={rechner.slug}>
+                      <RechnerEmbed slug={rechner.slug} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

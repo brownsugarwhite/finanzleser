@@ -124,3 +124,249 @@ body {
   --color-bg-surface: var(--color-bg-surface);
   --color-bg-subtle: var(--color-bg-subtle);
 }
+
+/* ─────────────────────────────────────────────
+   Rechner Base Styles (Calculator Components)
+   ───────────────────────────────────────────── */
+
+.rechner-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+/* ── RechnerInput ── */
+.rechner-input-wrapper {
+  margin-bottom: 20px;
+}
+
+.rechner-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.rechner-input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rechner-input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(69, 161, 23, 0.1);
+}
+
+.rechner-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.rechner-einheit {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  padding-right: 4px;
+}
+
+/* ── RechnerSelect ── */
+.rechner-select-wrapper {
+  margin-bottom: 20px;
+}
+
+.rechner-select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.rechner-select:focus {
+  outline: none;
+  border-color: var(--color-brand);
+}
+
+.rechner-select option {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+/* ── RechnerCheckbox ── */
+.rechner-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.rechner-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-brand);
+}
+
+.rechner-checkbox-label {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+/* ── RechnerResultBox ── */
+.rechner-result-box {
+  padding: 16px;
+  background-color: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--color-border-default);
+  text-align: center;
+  min-width: 120px;
+}
+
+.rechner-result-box--highlight {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-brand);
+  border-width: 2px;
+}
+
+.rechner-result-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.rechner-result-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 1.2;
+}
+
+.rechner-result-box--highlight .rechner-result-value {
+  font-size: 28px;
+}
+
+/* ── RechnerResultTable ── */
+.rechner-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.rechner-table-label {
+  padding: 12px 0;
+  text-align: left;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.rechner-table-value {
+  padding: 12px 0 12px 20px;
+  text-align: right;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-default);
+  font-weight: 500;
+}
+
+.rechner-table-footer-label {
+  padding: 12px 0;
+  padding-top: 16px;
+  text-align: left;
+  color: var(--color-text-primary);
+  font-weight: 700;
+  border-top: 2px solid var(--color-brand);
+}
+
+.rechner-table-footer-value {
+  padding: 12px 0 12px 20px;
+  padding-top: 16px;
+  text-align: right;
+  color: var(--color-brand);
+  font-weight: 700;
+  border-top: 2px solid var(--color-brand);
+}
+
+/* ── RechnerHinweis ── */
+.rechner-hinweis {
+  padding: 12px 16px;
+  background-color: var(--color-bg-subtle);
+  border-left: 3px solid var(--color-brand);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 20px 0;
+}
+
+/* ── Rechner Container ── */
+.rechner-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+}
+
+.rechner-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 32px;
+  font-family: var(--font-heading);
+}
+
+.rechner-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.rechner-results {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.rechner-result-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .rechner-result-boxes {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rechner-result-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.rechner-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
