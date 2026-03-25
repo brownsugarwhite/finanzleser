@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type ErbschaftsteuerParams, type ErbschaftsteuerResult } from "@/lib/calculators/erbschaftsteuer";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -17,9 +18,11 @@ export default function ErbschaftsteuerRechner() {
 
   const [result, setResult] = useState<ErbschaftsteuerResult | null>(null);
 
+  const rates = useRates();
+
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">

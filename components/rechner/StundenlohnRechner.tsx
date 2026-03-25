@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type StundenlohnParams, type StundenlohnResult } from "@/lib/calculators/stundenlohn";
 import { euro } from "@/lib/calculators/utils";
 import RechnerSelect from "./ui/RechnerSelect";
@@ -17,9 +18,11 @@ export default function StundenlohnRechner() {
 
   const [result, setResult] = useState<StundenlohnResult | null>(null);
 
+  const rates = useRates();
+
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">

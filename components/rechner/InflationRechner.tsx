@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type InflationParams, type InflationResult } from "@/lib/calculators/inflation";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -17,9 +18,11 @@ export default function InflationRechner() {
 
   const [result, setResult] = useState<InflationResult | null>(null);
 
+  const rates = useRates();
+
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">

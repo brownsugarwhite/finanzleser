@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type KreditParams, type KreditResult } from "@/lib/calculators/kredit";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -17,10 +18,12 @@ export default function KreditRechner() {
 
   const [result, setResult] = useState<KreditResult | null>(null);
 
+  const rates = useRates();
+
   // Calculate on params change
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   const handleParamChange = useCallback((key: keyof KreditParams, value: number) => {
     setParams((prev) => ({

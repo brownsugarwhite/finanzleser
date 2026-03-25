@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type EinkommensteuerParams, type EinkommensteuerResult } from "@/lib/calculators/einkommensteuer";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -24,9 +25,11 @@ export default function EinkommensteuerRechner() {
 
   const [result, setResult] = useState<EinkommensteuerResult | null>(null);
 
+  const rates = useRates();
+
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">

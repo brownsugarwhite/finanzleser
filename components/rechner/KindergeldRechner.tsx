@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type KindergeldParams, type KindergeldResult } from "@/lib/calculators/kindergeld";
 import { euro } from "@/lib/calculators/utils";
 import RechnerSelect from "./ui/RechnerSelect";
@@ -15,9 +16,11 @@ export default function KindergeldRechner() {
 
   const [result, setResult] = useState<KindergeldResult | null>(null);
 
+  const rates = useRates();
+
   useEffect(() => {
-    setResult(berechne(params));
-  }, [params]);
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">
