@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { berechne, type BruttoNettoParams, type BruttoNettoResult } from "@/lib/calculators/brutto-netto";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -42,19 +42,20 @@ export default function BruttoNettoRechner() {
 
   const [result, setResult] = useState<BruttoNettoResult | null>(null);
 
+  // Initial calculation and update on params change
+  useEffect(() => {
+    setResult(berechne(params));
+  }, [params]);
+
   const handleParamChange = useCallback(
     (key: keyof BruttoNettoParams, value: number | boolean | string) => {
-      const newParams = { ...params, [key]: value };
-      setParams(newParams as BruttoNettoParams);
-      setResult(berechne(newParams as BruttoNettoParams));
+      setParams((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
     },
-    [params]
+    []
   );
-
-  // Initial calculation
-  if (!result) {
-    setResult(berechne(params));
-  }
 
   return (
     <div className="rechner-container">
