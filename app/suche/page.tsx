@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { searchPosts } from "@/lib/wordpress";
-import type { Post } from "@/lib/types";
+import type { Post, Category } from "@/lib/types";
 
 type SearchPageProps = {
   searchParams: Promise<{ q?: string }>;
@@ -72,7 +72,7 @@ export default async function SearchPage(props: SearchPageProps) {
                   const category = post.categories?.nodes?.[0];
                   // Finde Parent-Kategorie (Hauptkategorie)
                   const mainCategory = post.categories?.nodes?.find(
-                    (cat: any) => cat.parent === null || cat.parent === 0
+                    (cat: Category) => cat.parent === null || cat.parent === 0
                   );
                   const mainCategorySlug = mainCategory?.slug || "beitraege";
                   const subCategorySlug = category?.slug || "allgemein";

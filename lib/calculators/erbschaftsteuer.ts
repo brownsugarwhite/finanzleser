@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface ErbschaftsteuerParams {
@@ -18,7 +19,7 @@ export interface ErbschaftsteuerResult {
 export function berechne({
   erbschaft,
   verwandtschaftsgrad,
-}: ErbschaftsteuerParams): ErbschaftsteuerResult {
+}: ErbschaftsteuerParams, rates: typeof RATES = RATES): ErbschaftsteuerResult {
   // Freibeträge nach Steuerklasse (2026)
   const freibetraege: Record<number, number> = {
     1: 400000, // Kinder

@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface KreditParams {
@@ -23,7 +24,7 @@ export interface KreditResult {
   plan: TilgungsplanMonat[];
 }
 
-export function berechne({ kreditsumme, laufzeitMonate, jahreszins }: KreditParams): KreditResult {
+export function berechne({ kreditsumme, laufzeitMonate, jahreszins }: KreditParams, rates: typeof RATES = RATES): KreditResult {
   const r = jahreszins / 100 / 12; // monatlicher Zinssatz
 
   let monatsrate: number;

@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface ElterngeldParams {
@@ -18,7 +19,7 @@ export function berechne({
   einkommen_vor_geburt,
   anzahl_kinder,
   basiselterngeld,
-}: ElterngeldParams): ElterngeldResult {
+}: ElterngeldParams, rates: typeof RATES = RATES): ElterngeldResult {
   // Elterngeld: 65% des durchschnittlichen Nettoeinkommens
   // Minimum: 300 €, Maximum: 1800 € pro Monat
   const quote = 0.65;

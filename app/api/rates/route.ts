@@ -31,7 +31,7 @@ export async function GET() {
     }
 
     // Merge: WordPress-Werte überschreiben JSON-Defaults
-    const mergedRates = wpConfig ? mergeRates(baseRates, wpConfig) : baseRates;
+    const mergedRates = wpConfig ? mergeRates(baseRates, wpConfig as Record<string, unknown>) : baseRates;
 
     return Response.json(mergedRates, {
       headers: {

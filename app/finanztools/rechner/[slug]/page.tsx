@@ -32,8 +32,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: Props) {
-  const { slug } = params as { slug: string };
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
   const rechner = RECHNER.find((r) => r.slug === slug);
   return {
     title: rechner?.title || "Rechner",
@@ -42,7 +42,7 @@ export function generateMetadata({ params }: Props) {
 }
 
 export default async function RechnerDetailPage({ params }: Props) {
-  const { slug } = params as { slug: string };
+  const { slug } = await params;
   const rechner = RECHNER.find((r) => r.slug === slug);
 
   if (!rechner) {

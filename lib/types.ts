@@ -14,6 +14,7 @@ export interface Category {
   slug: string;
   description?: string;
   count?: number;
+  parent?: null | number | { id?: string; slug?: string };
 }
 
 export interface Author {

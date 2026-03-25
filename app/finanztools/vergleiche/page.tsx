@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getPostsAndCPTsByCategory } from "@/lib/wordpress";
+import type { Category } from "@/lib/types";
 
 export default async function VergleichePage() {
   const posts = await getPostsAndCPTsByCategory("vergleich");
@@ -22,7 +23,7 @@ export default async function VergleichePage() {
               {posts.map((post) => {
                 const category = post.categories?.nodes?.[0];
                 const mainCategory = post.categories?.nodes?.find(
-                  (cat: any) => cat.parent === null || cat.parent === 0
+                  (cat: Category) => cat.parent === null || cat.parent === 0
                 );
                 const mainCategorySlug = mainCategory?.slug || "finanztools";
                 const subCategorySlug = category?.slug || "vergleich";

@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface KurzarbeitssgeldParams {
@@ -22,7 +23,7 @@ export function berechne({
   ausgefallene_stunden,
   gesamtstunden_pro_woche,
   monate,
-}: KurzarbeitssgeldParams): KurzarbeitssgeldResult {
+}: KurzarbeitssgeldParams, rates: typeof RATES = RATES): KurzarbeitssgeldResult {
   // Ausfallquote berechnen
   const ausfallquote = ausgefallene_stunden / gesamtstunden_pro_woche;
 

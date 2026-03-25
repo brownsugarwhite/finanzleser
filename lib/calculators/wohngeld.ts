@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface WohngeldParams {
@@ -13,7 +14,7 @@ export interface WohngeldResult {
   jaehrlich: number;
 }
 
-export function berechne({ miete, haushaltsmitglieder }: WohngeldParams): WohngeldResult {
+export function berechne({ miete, haushaltsmitglieder }: WohngeldParams, rates: typeof RATES = RATES): WohngeldResult {
   // Vereinfachte Berechnung basierend auf Richtwert
   const baseSatz = 150; // Vereinfachter Richtwert
   const satzProPerson = 30;

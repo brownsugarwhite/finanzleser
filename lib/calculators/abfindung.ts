@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface AbfindungParams {
@@ -20,7 +21,7 @@ export interface AbfindungResult {
 export function berechne({
   abfindungssumme,
   regelmaessiges_jahrseinkommen,
-}: AbfindungParams): AbfindungResult {
+}: AbfindungParams, rates: typeof RATES = RATES): AbfindungResult {
   // Fünftelregelung: Steuerlast wird berechnet, als hätte man 1/5 der Abfindung verteilt
   // über 5 Jahre verteilt bekommen
 

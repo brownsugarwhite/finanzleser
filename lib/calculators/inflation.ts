@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface InflationParams {
@@ -15,7 +16,7 @@ export interface InflationResult {
   kaufkraftprozent: number;
 }
 
-export function berechne({ betrag, inflationsrate, jahre }: InflationParams): InflationResult {
+export function berechne({ betrag, inflationsrate, jahre }: InflationParams, rates: typeof RATES = RATES): InflationResult {
   const rate = inflationsrate / 100;
   const endbetrag = rund(betrag * Math.pow(1 + rate, jahre));
   const kaufkraftverlust = rund(betrag - endbetrag);

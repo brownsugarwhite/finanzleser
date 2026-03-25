@@ -14,7 +14,7 @@ export interface StundenlohnResult {
   einkommenMonat: number;
 }
 
-export function berechne({ stunden, stundenumfang }: StundenlohnParams): StundenlohnResult {
+export function berechne({ stunden, stundenumfang }: StundenlohnParams, rates: typeof RATES = RATES): StundenlohnResult {
   const mindestlohn = RATES.mindestlohn.stundensatz;
 
   let stundenWoche = 40;

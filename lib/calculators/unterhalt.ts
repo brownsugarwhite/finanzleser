@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface UnterhaltParams {
@@ -18,7 +19,7 @@ export interface UnterhaltResult {
 export function berechne({
   kinderanzahl,
   nettoeinkommen,
-}: UnterhaltParams): UnterhaltResult {
+}: UnterhaltParams, rates: typeof RATES = RATES): UnterhaltResult {
   // Düsseldorf-Tabelle 2026: Unterhaltsquote ca. 14-16% des Nettoeinkommens
   // Vereinfacht: 15% pro Kind für Einfachheit
   let unterhaltsquote = 0;

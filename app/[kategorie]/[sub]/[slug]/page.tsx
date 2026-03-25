@@ -3,6 +3,7 @@ import { getPostBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import TableOfContents from "@/components/sections/TableOfContents";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
+import type { Category } from "@/lib/types";
 
 export default async function BeitragPage(props: {
   params: Promise<{ kategorie: string; sub: string; slug: string }>;
@@ -18,7 +19,7 @@ export default async function BeitragPage(props: {
 
   // Find main category (parent: null/0) from post categories
   const mainCategory = post.categories?.nodes?.find(
-    (cat: any) => cat.parent === null || cat.parent === 0
+    (cat: Category) => cat.parent === null || cat.parent === 0
   );
 
   // Format date as "02. März 2026"

@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface KfzSteuerParams {
@@ -20,7 +21,7 @@ export function berechne({
   hubraum,
   co2_ausstoss,
   anmeldungsjahr,
-}: KfzSteuerParams): KfzSteuerResult {
+}: KfzSteuerParams, rates: typeof RATES = RATES): KfzSteuerResult {
   // Hubraum-basierte Grundsteuer: 2,00 € pro 100 ccm
   const grundsteuer = (Math.ceil(hubraum / 100) * 2.0);
 

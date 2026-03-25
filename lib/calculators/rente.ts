@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface RenteParams {
@@ -17,7 +18,7 @@ export interface RenteResult {
 export function berechne({
   rentenpunkte,
   renteneintrittsalter,
-}: RenteParams): RenteResult {
+}: RenteParams, rates: typeof RATES = RATES): RenteResult {
   const rentenwert = 39.32; // 2026 Wert für alte Bundesländer
   const accessfaktor = 1.0; // Ohne Zu-/Abschlag (reguläre Altersgrenze)
 

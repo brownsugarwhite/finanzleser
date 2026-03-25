@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface TilgungParams {
@@ -14,7 +15,7 @@ export interface TilgungResult {
   jahreszins: number;
 }
 
-export function berechne({ schuldsumme, laufzeitMonate, jahreszins }: TilgungParams): TilgungResult {
+export function berechne({ schuldsumme, laufzeitMonate, jahreszins }: TilgungParams, rates: typeof RATES = RATES): TilgungResult {
   const r = jahreszins / 100 / 12;
   const monatsrate =
     schuldsumme === 0 || laufzeitMonate === 0

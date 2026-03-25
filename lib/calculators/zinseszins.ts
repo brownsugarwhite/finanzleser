@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface ZinseszinsParams {
@@ -14,7 +15,7 @@ export interface ZinseszinsResult {
   ertrag: number;
 }
 
-export function berechne({ kapital, zinssatz, jahre }: ZinseszinsParams): ZinseszinsResult {
+export function berechne({ kapital, zinssatz, jahre }: ZinseszinsParams, rates: typeof RATES = RATES): ZinseszinsResult {
   const rate = zinssatz / 100;
   const endkapital = rund(kapital * Math.pow(1 + rate, jahre));
   const ertrag = rund(endkapital - kapital);

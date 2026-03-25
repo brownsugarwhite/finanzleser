@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface EinkommensteuerParams {
@@ -19,7 +20,7 @@ export interface EinkommensteuerResult {
 export function berechne({
   einkommen,
   bundesland,
-}: EinkommensteuerParams): EinkommensteuerResult {
+}: EinkommensteuerParams, rates: typeof RATES = RATES): EinkommensteuerResult {
   if (einkommen <= 0) {
     return {
       einkommen,

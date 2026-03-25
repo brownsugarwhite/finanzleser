@@ -1,3 +1,4 @@
+import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface MehrwertsteuerParams {
@@ -17,7 +18,7 @@ export function berechne({
   betrag,
   richtung,
   steuersatz,
-}: MehrwertsteuerParams): MehrwertsteuerResult {
+}: MehrwertsteuerParams, rates: typeof RATES = RATES): MehrwertsteuerResult {
   const satz = steuersatz / 100;
 
   if (richtung === "brutto-netto") {

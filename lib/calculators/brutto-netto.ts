@@ -72,12 +72,10 @@ function berechneJahresLohnsteuer(jahresBrutto: number, steuerklasse: number): n
 }
 
 function berechneSoli(jahresESt: number): number {
-  const { satz_prozent, freigrenze_einzeln, milderungszone_faktor_prozent } = RATES.solidaritaetszuschlag;
+  const { satz_prozent, freigrenze_einzeln } = RATES.solidaritaetszuschlag;
 
   if (jahresESt <= freigrenze_einzeln) return 0;
-  const vollSoli = (satz_prozent / 100) * jahresESt;
-  const milderung = (milderungszone_faktor_prozent / 100) * (jahresESt - freigrenze_einzeln);
-  return Math.min(vollSoli, milderung);
+  return (satz_prozent / 100) * (jahresESt - freigrenze_einzeln);
 }
 
 function getPVRate(kinder: number, kinderlosUeber23: boolean): number {
@@ -105,7 +103,7 @@ export function berechne({
   kinder,
   kinderlosUeber23,
   eigenerKvZusatz = null,
-}: BruttoNettoParams): BruttoNettoResult {
+}: BruttoNettoParams, rates: typeof RATES = RATES): BruttoNettoResult {
   const kvZusatz = eigenerKvZusatz ?? RATES.sozialversicherung.krankenversicherung.durchschnittlicher_zusatzbeitrag_prozent;
 
   // Sozialversicherung

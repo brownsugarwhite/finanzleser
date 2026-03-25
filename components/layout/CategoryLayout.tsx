@@ -3,7 +3,7 @@ import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import type { Post } from "@/lib/types";
+import type { Post, Category } from "@/lib/types";
 
 type CategoryLayoutProps = {
   title?: string;
@@ -34,7 +34,7 @@ export default function CategoryLayout({ title, titleSlug, mainCategoryName, mai
                 const category = post.categories?.nodes?.[0];
                 // Finde Parent-Kategorie (Hauptkategorie)
                 const mainCategory = post.categories?.nodes?.find(
-                  (cat: any) => cat.parent === null || cat.parent === 0
+                  (cat: Category) => cat.parent === null || cat.parent === 0
                 );
                 const mainCategorySlug = mainCategory?.slug || "beitraege";
                 const subCategorySlug = category?.slug || "allgemein";
