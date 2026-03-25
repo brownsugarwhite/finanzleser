@@ -17,6 +17,18 @@ const InflationRechner = dynamic(() => import("./InflationRechner"), {
   loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
 });
 
+const ZinseszinsRechner = dynamic(() => import("./ZinseszinsRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const StundenlohnRechner = dynamic(() => import("./StundenlohnRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
+const KindergeldRechner = dynamic(() => import("./KindergeldRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
 interface RechnerEmbedProps {
   slug: string;
 }
@@ -31,11 +43,24 @@ export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
       return <MehrwertsteuerRechner />;
     case "inflation":
       return <InflationRechner />;
+    case "zinseszins":
+      return <ZinseszinsRechner />;
+    case "stundenlohn":
+      return <StundenlohnRechner />;
+    case "kindergeld":
+      return <KindergeldRechner />;
 
-    // More calculators will be added here
-    // case "einkommensteuer":
-    //   return <EinkommensteuerRechner />;
-    // ... etc
+    // More calculators coming soon:
+    // - einkommensteuer
+    // - rente
+    // - erbschaftsteuer
+    // - unterhalt
+    // - elterngeld
+    // - kfz-steuer
+    // - abfindung
+    // - wohngeld
+    // - kurzarbeitsgeld
+    // - tilgung
 
     default:
       return null;
