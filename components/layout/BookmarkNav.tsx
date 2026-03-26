@@ -68,81 +68,15 @@ export default function BookmarkNav() {
   useEffect(() => {
     const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
 
-    // Show burger immediately on mobile/tablet
-    if (isMobile()) {
-      burgerVisible.current = true;
-      if (burgerWrapRef.current) {
-        gsap.set(burgerWrapRef.current, { width: BTN_SIZE });
-        burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
-      }
+    // Show burger immediately (always visible now)
+    burgerVisible.current = true;
+    if (burgerWrapRef.current) {
+      gsap.set(burgerWrapRef.current, { width: BTN_SIZE });
+      burgerLinesRef.current.forEach((line) => gsap.set(line, { width: BURGER_LINE_W }));
     }
 
-    const onOut = () => {
-      if (!burgerVisible.current) {
-        burgerVisible.current = true;
-        showBurger();
-      }
-    };
-    const onIn = () => {
-      if (isMobile()) return; // keep burger visible on mobile
-      if (burgerVisible.current) {
-        burgerVisible.current = false;
-        hideBurger();
-      }
-    };
-
-    const onResize = () => {
-      if (isMobile() && !burgerVisible.current) {
-        burgerVisible.current = true;
-        showBurger();
-      } else if (!isMobile() && burgerVisible.current && window.scrollY === 0) {
-        burgerVisible.current = false;
-        hideBurger();
-      }
-    };
-
-    window.addEventListener("nav-scrolled-out", onOut);
-    window.addEventListener("nav-scrolled-in", onIn);
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("nav-scrolled-out", onOut);
-      window.removeEventListener("nav-scrolled-in", onIn);
-      window.removeEventListener("resize", onResize);
-    };
   }, []);
 
-  const showBurger = () => {
-    if (!burgerWrapRef.current || searchOpen.current) return;
-
-    if (megaOpen.current) {
-      // Set X shape, then stagger lines in
-      const [top, mid, bot] = burgerLinesRef.current;
-      burgerIsX.current = true;
-      gsap.set(top, { y: BURGER_GAP + 2, rotation: 45, width: 0 });
-      gsap.set(mid, { opacity: 0, scaleX: 0, width: BURGER_LINE_W });
-      gsap.set(bot, { y: -(BURGER_GAP + 2), rotation: -45, width: 0 });
-      gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
-      [top, bot].forEach((line, i) => {
-        gsap.to(line, { width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out" });
-      });
-    } else {
-      gsap.fromTo(burgerWrapRef.current, { width: 0 }, { width: BTN_SIZE, duration: 0.4, ease: "power2.out" });
-      burgerLinesRef.current.forEach((line, i) => {
-        gsap.fromTo(line, { width: 0 }, {
-          width: BURGER_LINE_W, duration: 0.3, delay: 0.15 + i * 0.06, ease: "power2.out",
-        });
-      });
-    }
-  };
-
-  const hideBurger = () => {
-    if (!burgerWrapRef.current || searchOpen.current) return;
-
-    burgerLinesRef.current.forEach((line, i) => {
-      gsap.to(line, { width: 0, duration: 0.2, delay: (2 - i) * 0.04, ease: "power2.inOut" });
-    });
-    gsap.to(burgerWrapRef.current, { width: 0, duration: 0.4, ease: "power2.out" });
-  };
 
   /* ── Search ── */
 
@@ -525,7 +459,7 @@ export default function BookmarkNav() {
         {/* Burger — clipping wrapper */}
         <div
           ref={burgerWrapRef}
-          style={{ width: 0, height: BTN_SIZE, overflow: "hidden", flexShrink: 0, marginRight: -2 }}
+          style={{ height: BTN_SIZE, overflow: "hidden", flexShrink: 0, marginRight: -2 }}
         >
           <div
             ref={burgerRef}
