@@ -16,7 +16,7 @@ export default function BookmarkNav() {
       }}
     >
       {/* Spike */}
-      <div style={{ width: 40, height: 50, flexShrink: 0, marginRight: -1 }}>
+      <div style={{ width: 40, height: 50, marginRight: -1, flexShrink: 0 }}>
         <Image
           src="/icons/lesezeichen-spikes.svg"
           alt=""
@@ -38,15 +38,17 @@ export default function BookmarkNav() {
           paddingLeft: 1,
           paddingRight: 25,
           marginRight: -1,
-          background: `linear-gradient(to right, #168e03, #45A117)`,
-          color: "white",
+          background: "linear-gradient(to left, rgba(22,142,3,0.8), #45a117)",
         }}
       >
         {/* Finanztools Button */}
         <button
           style={{
-            padding: "8px 10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             height: 36,
+            padding: "0 10px",
             borderRadius: 15,
             border: "none",
             background: "transparent",
@@ -61,7 +63,7 @@ export default function BookmarkNav() {
           Finanztools
         </button>
 
-        {/* Search Button */}
+        {/* Lupe Button */}
         <button
           style={{
             display: "flex",
@@ -88,7 +90,8 @@ export default function BookmarkNav() {
         <button
           style={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
+            alignItems: "flex-end",
             justifyContent: "center",
             width: 36,
             height: 36,
@@ -96,13 +99,13 @@ export default function BookmarkNav() {
             border: "none",
             background: "transparent",
             cursor: "pointer",
-            flexDirection: "column",
-            gap: 8,
+            gap: 5,
+            paddingRight: 8,
           }}
         >
-          <div style={{ width: 20, height: 2, background: "white" }} />
-          <div style={{ width: 20, height: 2, background: "white" }} />
-          <div style={{ width: 20, height: 2, background: "white" }} />
+          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
+          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
+          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
         </button>
       </div>
     </div>
