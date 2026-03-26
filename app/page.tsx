@@ -2,7 +2,7 @@ import Header from "@/components/layout/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import CategorySlider from "@/components/sections/CategorySlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
-import ToolsTeaser from "@/components/sections/ToolsTeaser";
+import FinanztoolSection from "@/components/sections/FinanztoolSection";
 import SearchSection from "@/components/sections/SearchSection";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts } from "@/lib/wordpress";
@@ -22,7 +22,7 @@ export default async function LandingPage() {
     <main className="bg-white">
       <Header />
       <HeroSection />
-      <ToolsTeaser />
+      <FinanztoolSection />
       <CategorySlider />
       <FeaturedPosts posts={posts} />
       <SearchSection />

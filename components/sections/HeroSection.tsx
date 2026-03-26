@@ -3,17 +3,17 @@ import Button from "@/components/ui/Button";
 
 export default function HeroSection() {
   return (
-    <section style={{ backgroundColor: "var(--color-bg-page)" }}>
-      <div className="max-w-[1200px] mx-auto px-6 py-12">
+    <section style={{ backgroundColor: "var(--color-bg-page)", minHeight: "100vh", display: "flex", alignItems: "center", marginTop: -100 }}>
+      <div className="max-w-[1200px] mx-auto px-6 py-12 w-full">
         <div className="flex flex-col lg:flex-row items-center" style={{ gap: "48px" }}>
           {/* Left: Illustration - visual_wrapper */}
-          <div className="flex-shrink-0 w-full lg:w-1/2">
+          <div className="flex-shrink-0 w-full lg:w-1/2" style={{ position: "relative", height: "clamp(350px, 80vh, 500px)" }}>
             <Image
               src="/assets/visuals/animalVisual.svg?v=13"
               alt="Unser Newsletter"
-              width={600}
-              height={500}
-              className="w-full h-auto dark:opacity-30"
+              fill
+              className="dark:opacity-30"
+              style={{ objectFit: "contain", objectPosition: "right center" }}
               priority
             />
           </div>
