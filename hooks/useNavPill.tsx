@@ -18,16 +18,9 @@ const COLORS = {
 
 const isDark = () => document.documentElement.classList.contains("dark");
 
-const pillStyle = () => ({
-  background: "var(--color-bg-page)",
-  border: "var(--color-border-inverse)",
-  shadow: isDark()
-    ? "0px 4px 4px rgba(255,255,255,0.1), inset 0px 4px 4px rgba(255,255,255,0.08)"
-    : "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)",
-});
-
-const PILL_SHADOW = "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)";
-const PILL_BORDER = "var(--color-border-inverse)";
+const PILL_BG = "var(--pill-bg)";
+const PILL_BORDER = "var(--pill-border)";
+const PILL_SHADOW = "var(--pill-shadow)";
 
 const blobRadius = (h: number) => `${Math.max(PILL_R, h / 2)}px`;
 
@@ -68,9 +61,8 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
   const setPillHover = useCallback((instant = false) => {
     if (!pillRef.current) return;
     const d = instant ? 0 : 0.2;
-    const ps = pillStyle();
     gsap.to(pillRef.current, {
-      background: ps.background, borderColor: ps.border, boxShadow: ps.shadow,
+      background: PILL_BG, borderColor: PILL_BORDER, boxShadow: PILL_SHADOW,
       duration: d, ease: "power2.out",
     });
     if (lensRef.current) {
@@ -370,7 +362,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
         position: "absolute", top: "50%", left: 0,
         height: `${PILL_H}px`, width: "1px", opacity: 0, borderRadius: `${PILL_R}px`,
         pointerEvents: "none", zIndex: 4, overflow: "hidden",
-        background: COLORS.white,
+        background: PILL_BG,
         border: `1px solid ${PILL_BORDER}`,
         boxShadow: PILL_SHADOW,
       }}

@@ -2,6 +2,11 @@
 @import "./tokens.css";
 @import "./components.css";
 
+/* Space for fixed logo + absolute nav bar */
+body {
+  padding-top: 73px;
+}
+
 /* ── Hide top navigation on tablet/mobile ── */
 @media (max-width: 1024px) {
   .top-nav-wrapper {

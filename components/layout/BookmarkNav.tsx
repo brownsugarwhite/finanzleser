@@ -74,7 +74,7 @@ export default function BookmarkNav() {
         position: "fixed",
         top: 23,
         right: 0,
-        zIndex: 50,
+        zIndex: 52,
         display: "flex",
         alignItems: "center",
         height: 50,

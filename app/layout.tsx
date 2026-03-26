@@ -5,6 +5,7 @@ import { NavProvider } from "@/lib/NavContext";
 import { getNavItems } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBadge from "@/components/layout/LogoBadge";
+import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -42,6 +43,7 @@ export default async function RootLayout({
       <body className="antialiased">
         <NavProvider items={navItems}>
           <Providers>{children}</Providers>
+          <ProgressiveBlur height={150} />
           <LogoBadge />
           <BookmarkNav />
         </NavProvider>

@@ -81,9 +81,9 @@ export default function Header() {
   return (
     <header ref={megamenuRef}>
       {/* Desktop Layout */}
-      <div className="topbar-grid hidden md:flex" style={{ position: "absolute" }}>
+      <div className="topbar-grid hidden md:flex" style={{ position: "absolute", zIndex: 51, pointerEvents: "none" }}>
         <div className="logo-space" />
-        <div className="nav-space">
+        <div className="nav-space" style={{ pointerEvents: "auto" }}>
           <div
             {...pill.containerProps}
             style={{
