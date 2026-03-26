@@ -102,8 +102,8 @@ export default function FinanztoolSection() {
               paddingBottom: 23,
             }}
           >
-            {[1, 2, 3].map((i, idx) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            {["Rechner", "Vergleiche", "Checklisten"].map((label, idx) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 5 }}>
                 {idx > 0 && (
                   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ flexShrink: 0 }}>
                     <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
@@ -114,18 +114,26 @@ export default function FinanztoolSection() {
                     width: 150,
                     flexShrink: 0,
                     height: 90,
-                    borderRadius: 36,
+                    borderRadius: 23,
                     background: "rgba(245, 245, 245, 0.8)",
                     backdropFilter: "blur(8px)",
                     WebkitBackdropFilter: "blur(8px)",
                     display: "flex",
+                    flexDirection: "column" as const,
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "var(--color-text-medium)",
-                    fontSize: 14,
+                    gap: 6,
+                    color: "var(--color-text-primary)",
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontSize: 16,
+                    fontWeight: 600,
                   }}
                 >
-                  Tool {i}
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden style={{ opacity: 0.5 }}>
+                    <rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--color-text-primary)" strokeWidth="1.5" />
+                    <path d="M8 12h8M12 8v8" stroke="var(--color-text-primary)" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  {label}
                 </div>
               </div>
             ))}
