@@ -1,8 +1,54 @@
 "use client";
 
 import Image from "next/image";
+import { useRef, useCallback } from "react";
+import gsap from "gsap";
+
+const BURGER_LINE_W = 20;
+const BURGER_GAP = 5;
 
 export default function BookmarkNav() {
+  const burgerLinesRef = useRef<HTMLDivElement[]>([]);
+  const burgerIsX = useRef(false);
+
+  const animateToX = useCallback(() => {
+    if (burgerIsX.current) return;
+    burgerIsX.current = true;
+    const lines = burgerLinesRef.current;
+    if (lines.length < 3) return;
+    const [top, mid, bot] = lines;
+    const tl = gsap.timeline();
+    tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
+    tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
+    tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
+  }, []);
+
+  const animateToBurger = useCallback(() => {
+    if (!burgerIsX.current) return;
+    burgerIsX.current = false;
+    const lines = burgerLinesRef.current;
+    if (lines.length < 3) return;
+    const [top, mid, bot] = lines;
+    const tl = gsap.timeline();
+    tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
+    tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+    tl.to(mid, { opacity: 1, scaleX: 1, duration: 0, ease: "power2.out" }, 0.15);
+    tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
+  }, []);
+
+  const toggleBurger = useCallback(() => {
+    if (burgerIsX.current) {
+      animateToBurger();
+      window.dispatchEvent(new CustomEvent("burger-closed"));
+    } else {
+      animateToX();
+      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Menü" } }));
+    }
+  }, [animateToX, animateToBurger]);
+
   return (
     <div
       style={{
@@ -88,6 +134,7 @@ export default function BookmarkNav() {
 
         {/* Burger Button */}
         <button
+          onClick={toggleBurger}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -99,13 +146,40 @@ export default function BookmarkNav() {
             border: "none",
             background: "transparent",
             cursor: "pointer",
-            gap: 5,
+            gap: BURGER_GAP,
             paddingRight: 8,
           }}
         >
-          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
-          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
-          <div style={{ width: 20, height: 2, background: "white", borderRadius: 1 }} />
+          <div
+            ref={(el) => { if (el) burgerLinesRef.current[0] = el; }}
+            style={{
+              width: BURGER_LINE_W,
+              height: 2,
+              background: "white",
+              borderRadius: 1,
+              transformOrigin: "center",
+            }}
+          />
+          <div
+            ref={(el) => { if (el) burgerLinesRef.current[1] = el; }}
+            style={{
+              width: BURGER_LINE_W,
+              height: 2,
+              background: "white",
+              borderRadius: 1,
+              transformOrigin: "center",
+            }}
+          />
+          <div
+            ref={(el) => { if (el) burgerLinesRef.current[2] = el; }}
+            style={{
+              width: BURGER_LINE_W,
+              height: 2,
+              background: "white",
+              borderRadius: 1,
+              transformOrigin: "center",
+            }}
+          />
         </button>
       </div>
     </div>
