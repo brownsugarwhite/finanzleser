@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { NAV_ITEMS } from "@/lib/navItems";
 import MegaMenu from "./MegaMenu";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
@@ -44,19 +43,6 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           {/* Desktop Layout */}
           <div className="hidden md:flex items-center justify-center relative">
-            {/* Logo */}
-            <div className="absolute left-0">
-              <Link href="/">
-                <Image
-                  src="/icons/fl_logo.svg"
-                  alt="finanzleser"
-                  width={190}
-                  height={22}
-                  priority
-                />
-              </Link>
-            </div>
-
             {/* Desktop Nav */}
             <nav className="flex gap-8">
               {NAV_ITEMS.map((item) => (
@@ -150,18 +136,6 @@ export default function Header() {
 
         {/* Mobile Layout */}
         <div className="md:hidden flex items-center justify-between">
-          <div>
-            <Link href="/">
-              <Image
-                src="/icons/fl-logo-icon.svg"
-                alt="finanzleser"
-                width={40}
-                height={40}
-                priority
-              />
-            </Link>
-          </div>
-
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-gray-700 hover:text-gray-900"

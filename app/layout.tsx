@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
 import { Providers } from "./providers";
 import BookmarkNav from "@/components/layout/BookmarkNav";
+import LogoBadge from "@/components/layout/LogoBadge";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <Providers>{children}</Providers>
+        <LogoBadge />
         <BookmarkNav />
       </body>
     </html>
