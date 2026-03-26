@@ -383,7 +383,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
             <React.Fragment key={item.href}>
               <Image src="/icons/nav-spark-green.svg" alt="" width={12} height={12} aria-hidden />
               <span style={{
-                fontFamily: "var(--font-heading, 'Merriweather', serif)", fontSize: "18px", fontWeight: 700,
+                fontFamily: "var(--font-heading, 'Merriweather', serif)", fontSize: "18px", fontWeight: 600,
                 color: COLORS.green, whiteSpace: "nowrap",
               }}>{item.label}</span>
             </React.Fragment>
