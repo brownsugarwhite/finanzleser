@@ -130,92 +130,15 @@ body {
   --color-bg-subtle: var(--color-bg-subtle);
 }
 
-/* ─────────────────────────────────────────────
-   Rechner Base Styles (Calculator Components)
-   ───────────────────────────────────────────── */
-
-.rechner-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 8px;
-}
-
-/* ── RechnerInput ── */
-.rechner-input-wrapper {
-  margin-bottom: 20px;
-}
-
-.rechner-input-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-}
-
-.rechner-input {
-  flex: 1;
-  padding: 12px 14px;
-  font-size: 16px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 8px;
-  background-color: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.rechner-input:focus {
-  outline: none;
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 3px rgba(69, 161, 23, 0.1);
-}
+/* Rechner additional styles (base styles in components.css) */
 
 .rechner-input::placeholder {
   color: var(--color-text-secondary);
 }
 
-.rechner-einheit {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  padding-right: 4px;
-}
-
-/* ── RechnerSelect ── */
-.rechner-select-wrapper {
-  margin-bottom: 20px;
-}
-
-.rechner-select {
-  width: 100%;
-  padding: 12px 14px;
-  font-size: 16px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 8px;
-  background-color: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.rechner-select:focus {
-  outline: none;
-  border-color: var(--color-brand);
-}
-
 .rechner-select option {
   background-color: var(--color-bg-surface);
   color: var(--color-text-primary);
-}
-
-/* ── RechnerCheckbox ── */
-.rechner-checkbox-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
 }
 
 .rechner-checkbox {
@@ -229,22 +152,6 @@ body {
   font-size: 14px;
   color: var(--color-text-primary);
   cursor: pointer;
-}
-
-/* ── RechnerResultBox ── */
-.rechner-result-box {
-  padding: 16px;
-  background-color: var(--color-bg-subtle);
-  border-radius: 8px;
-  border: 1px solid var(--color-border-default);
-  text-align: center;
-  min-width: 120px;
-}
-
-.rechner-result-box--highlight {
-  background-color: var(--color-bg-surface);
-  border-color: var(--color-brand);
-  border-width: 2px;
 }
 
 .rechner-result-label {
@@ -264,14 +171,6 @@ body {
 
 .rechner-result-box--highlight .rechner-result-value {
   font-size: 28px;
-}
-
-/* ── RechnerResultTable ── */
-.rechner-result-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 14px;
 }
 
 .rechner-table-label {
@@ -307,19 +206,6 @@ body {
   border-top: 2px solid var(--color-brand);
 }
 
-/* ── RechnerHinweis ── */
-.rechner-hinweis {
-  padding: 12px 16px;
-  background-color: var(--color-bg-subtle);
-  border-left: 3px solid var(--color-brand);
-  border-radius: 4px;
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-  margin: 20px 0;
-}
-
-/* ── Rechner Container ── */
 .rechner-container {
   max-width: 600px;
   margin: 40px auto;
