@@ -383,7 +383,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
           }}
           style={{
             position: "absolute", top: "50%", left: 0,
-            display: "flex", alignItems: "center", justifyContent: "space-between", width: "840px",
+            display: "flex", alignItems: "center", justifyContent: "space-between", width: "600px",
             pointerEvents: "none",
           }}
         >

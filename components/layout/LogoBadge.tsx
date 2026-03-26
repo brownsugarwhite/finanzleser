@@ -5,27 +5,21 @@ import Image from "next/image";
 
 export default function LogoBadge() {
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 23,
-        left: 50,
-        zIndex: 50,
-        display: "flex",
-        alignItems: "center",
-        height: 50,
-      }}
-    >
-      <Link href="/">
-        <Image
-          src="/icons/fl_logo.svg"
-          alt="finanzleser"
-          width={190}
-          height={22}
-          priority
-          style={{ display: "block" }}
-        />
-      </Link>
+    <div className="topbar-grid" style={{ position: "fixed", zIndex: 50, pointerEvents: "none" }}>
+      <div className="logo-space" style={{ pointerEvents: "auto" }}>
+        <Link href="/">
+          <Image
+            src="/icons/fl_logo.svg"
+            alt="finanzleser"
+            width={190}
+            height={22}
+            priority
+            style={{ display: "block" }}
+          />
+        </Link>
+      </div>
+      <div className="nav-space" />
+      <div className="free-space" />
     </div>
   );
 }
