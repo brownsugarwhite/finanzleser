@@ -11,9 +11,15 @@
   /* Brand */
   --color-brand: #45A117;
   --color-brand-dark: #168e03;
+  --color-brand-light: #6dca1c;
   --color-brand-hover: #2d7a0f;
   --color-brand-secondary: #D3005E;
   --color-brand-secondary-hover: #a20046;
+
+  /* Button States */
+  --color-btn-hover: rgba(109, 202, 28, 0.3);
+  --color-btn-active: #6dca1c;
+  --btn-border-radius: 15px;
 
   /* Text */
   --color-text-primary: #334A27;
