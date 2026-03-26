@@ -1,4 +1,36 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function FinanztoolSection() {
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!headingRef.current) return;
+
+    gsap.set(headingRef.current, { opacity: 0, filter: "blur(16px)" });
+
+    gsap.to(headingRef.current, {
+      opacity: 1,
+      filter: "blur(0px)",
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "bottom bottom",
+        end: "bottom 70%",
+        scrub: true,
+      },
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <section
       style={{
@@ -12,7 +44,7 @@ export default function FinanztoolSection() {
         {/* Finanztool Wrapper */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {/* Heading */}
-          <div style={{ marginTop: "100vh" }}>
+          <div ref={headingRef} style={{ marginTop: "100vh" }}>
             <p
               style={{
                 fontFamily: "var(--font-heading, 'Merriweather', serif)",
@@ -71,7 +103,7 @@ export default function FinanztoolSection() {
             }}
           >
             {[1, 2, 3].map((i, idx) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5, flex: 1 }}>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
                 {idx > 0 && (
                   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ flexShrink: 0 }}>
                     <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
@@ -79,11 +111,13 @@ export default function FinanztoolSection() {
                 )}
                 <div
                   style={{
-                    flex: 1,
-                    height: 120,
-                    borderRadius: 12,
-                    background: "var(--color-bg-subtle)",
-                    border: "1px solid var(--color-border-default)",
+                    width: 150,
+                    flexShrink: 0,
+                    height: 90,
+                    borderRadius: 36,
+                    background: "rgba(245, 245, 245, 0.8)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
