@@ -79,6 +79,12 @@
   --color-nav-text: #334A27;
   --fill-0: #334A27;
 
+  /* Tool Cards */
+  --color-tool-card-bg: rgba(245, 245, 245, 0.8);
+  --color-tool-rechner: var(--color-brand-secondary);
+  --color-tool-vergleiche: #06D496;
+  --color-tool-checklisten: #BC38EC;
+
   /* Nav Pill */
   --pill-bg: var(--color-bg-page);
   --pill-border: rgba(255, 255, 255, 0.4);
