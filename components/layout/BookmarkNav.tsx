@@ -99,8 +99,8 @@ export default function BookmarkNav() {
           right: 0,
           width: "calc(100% - 40px)",
           height: "100%",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
           pointerEvents: "none",
           zIndex: -1,
         }}
