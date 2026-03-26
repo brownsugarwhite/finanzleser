@@ -1,4 +1,4 @@
-export default function Spacer() {
+export default function Spacer({ noMargin = false }: { noMargin?: boolean }) {
   return (
     <div
       className="spacer"
@@ -6,7 +6,7 @@ export default function Spacer() {
         position: "relative",
         zIndex: 60,
         maxWidth: "1100px",
-        margin: "40px auto",
+        margin: noMargin ? "0 auto" : "40px auto",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>

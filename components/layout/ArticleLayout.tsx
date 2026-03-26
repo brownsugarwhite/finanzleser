@@ -36,7 +36,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
     <>
       <Header />
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           <div className="flex gap-8">
             {/* Sidebar (TOC, etc.) */}
             {sidebar && <aside className="hidden lg:block w-64">{sidebar}</aside>}

@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/hooks/useNavPill";
 import MegaMenu from "./MegaMenu";
+import Spacer from "@/components/ui/Spacer";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 const Spark = () => (
@@ -106,7 +107,7 @@ export default function Header() {
                   style={{
                     fontFamily: "var(--font-heading, 'Merriweather', serif)",
                     fontSize: "18px",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     color: "var(--color-nav-text)",
                     textDecoration: "none",
                     whiteSpace: "nowrap",
@@ -128,6 +129,8 @@ export default function Header() {
         </div>
         <div className="free-space" />
       </div>
+
+      <Spacer noMargin />
 
       {/* Megamenu Overlay */}
       {openMegamenu && (

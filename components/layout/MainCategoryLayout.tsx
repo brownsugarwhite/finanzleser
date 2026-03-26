@@ -25,7 +25,7 @@ export default function MainCategoryLayout({
       <Header />
       <main className="min-h-screen bg-white">
         {/* Hero */}
-        <div className="bg-gray-50 border-b border-gray-200 py-16">
+        <div className="bg-gray-50 border-b border-gray-200 pb-16" style={{ paddingTop: 23 }}>
           <div className="max-w-7xl mx-auto px-6">
             <Breadcrumb items={breadcrumbItems} />
             <h1 className="text-5xl font-bold mb-4">{name}</h1>
@@ -35,7 +35,7 @@ export default function MainCategoryLayout({
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           {/* Unterkategorien */}
           {categoryChildren.length > 0 && (
             <div className="mb-16">

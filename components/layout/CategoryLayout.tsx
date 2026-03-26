@@ -23,7 +23,7 @@ export default function CategoryLayout({ title, titleSlug, mainCategoryName, mai
     <>
       <Header />
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           <Breadcrumb items={breadcrumbItems} />
           {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
 
