@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
 import { Providers } from "./providers";
+import { NavProvider } from "@/lib/NavContext";
+import { getNavItems } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBadge from "@/components/layout/LogoBadge";
 import "./globals.css";
@@ -28,17 +30,21 @@ export const metadata: Metadata = {
   description: "Ratgeber, Rechner und Vergleiche zu Steuern, Geldanlage und Versicherungen.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navItems = await getNavItems();
+
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <Providers>{children}</Providers>
-        <LogoBadge />
-        <BookmarkNav />
+        <NavProvider items={navItems}>
+          <Providers>{children}</Providers>
+          <LogoBadge />
+          <BookmarkNav />
+        </NavProvider>
       </body>
     </html>
   );

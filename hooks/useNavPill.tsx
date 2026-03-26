@@ -16,8 +16,18 @@ const COLORS = {
   white: "#ffffff",
 };
 
+const isDark = () => document.documentElement.classList.contains("dark");
+
+const pillStyle = () => ({
+  background: "var(--color-bg-page)",
+  border: "var(--color-border-inverse)",
+  shadow: isDark()
+    ? "0px 4px 4px rgba(255,255,255,0.1), inset 0px 4px 4px rgba(255,255,255,0.08)"
+    : "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)",
+});
+
 const PILL_SHADOW = "0px 4px 4px rgba(0,0,0,0.1), inset 0px 4px 4px rgba(0,0,0,0.08)";
-const PILL_BORDER = "rgba(255,255,255,0.5)";
+const PILL_BORDER = "var(--color-border-inverse)";
 
 const blobRadius = (h: number) => `${Math.max(PILL_R, h / 2)}px`;
 
@@ -58,16 +68,18 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
   const setPillHover = useCallback((instant = false) => {
     if (!pillRef.current) return;
     const d = instant ? 0 : 0.2;
+    const ps = pillStyle();
     gsap.to(pillRef.current, {
-      background: COLORS.white, borderColor: PILL_BORDER, boxShadow: PILL_SHADOW,
+      background: ps.background, borderColor: ps.border, boxShadow: ps.shadow,
       duration: d, ease: "power2.out",
     });
     if (lensRef.current) {
+      const lensColor = COLORS.green;
       lensRef.current.querySelectorAll("span").forEach((s) =>
-        gsap.to(s, { color: COLORS.green, duration: d })
+        gsap.to(s, { color: lensColor, duration: d })
       );
       lensRef.current.querySelectorAll("img").forEach((img) =>
-        gsap.to(img, { filter: "none", duration: d })
+        gsap.to(img, { filter: isDark() ? "brightness(0.7)" : "none", duration: d })
       );
     }
   }, []);
@@ -270,7 +282,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
       menuOpen.current = true;
       activeLabel.current = label;
       gsap.killTweensOf(pillRef.current);
-      setPillActive();
+      setPillActive(true);
       if (containerRef.current) {
         const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), btnEl.getBoundingClientRect());
         gsap.to(pillRef.current, {
@@ -282,7 +294,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     } else if (activeLabel.current !== label) {
       activeLabel.current = label;
       gsap.killTweensOf(pillRef.current);
-      setPillActive();
+      setPillActive(true);
       if (containerRef.current) {
         const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), btnEl.getBoundingClientRect());
         gsap.to(pillRef.current, {

@@ -395,6 +395,72 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
 }
 
 // ─────────────────────────────────────────────
+// Navigation: Hauptkategorien + Subkategorien aus WordPress
+// ─────────────────────────────────────────────
+
+const NAV_MAIN_SLUGS = ["finanzen", "versicherungen", "steuern", "recht"];
+
+export async function getNavItems(): Promise<
+  Array<{
+    label: string;
+    href: string;
+    megamenu: boolean;
+    submenu: Array<{ label: string; href: string }>;
+  }>
+> {
+  const client = getClient();
+
+  const query = gql`
+    query GetNavCategories($slugs: [String!]!) {
+      categories(where: { slug: $slugs }, first: 10) {
+        nodes {
+          databaseId
+          name
+          slug
+          children(first: 20) {
+            nodes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      categories: {
+        nodes: Array<{
+          databaseId: number;
+          name: string;
+          slug: string;
+          children: { nodes: Array<{ name: string; slug: string }> };
+        }>;
+      };
+    }>(query, { slugs: NAV_MAIN_SLUGS });
+
+    // Sort by the order defined in NAV_MAIN_SLUGS
+    const sorted = NAV_MAIN_SLUGS.map((slug) =>
+      data.categories.nodes.find((c) => c.slug === slug)
+    ).filter(Boolean) as typeof data.categories.nodes;
+
+    return sorted.map((cat) => ({
+      label: cat.name,
+      href: `/${cat.slug}`,
+      megamenu: true,
+      submenu: cat.children.nodes.map((child) => ({
+        label: child.name,
+        href: `/${cat.slug}/${child.slug}`,
+      })),
+    }));
+  } catch (error) {
+    console.error("Error fetching nav items from WordPress:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Dynamische Menü-Kategorien (Rechner, Checklisten, Vergleiche)
 // ─────────────────────────────────────────────
 
@@ -660,16 +726,18 @@ export async function getCategoryBySlug(slug: string) {
   const client = getClient();
 
   const query = gql`
-    query GetCategory($slug: String!) {
+    query GetCategory($slug: [String]!) {
       categories(where: { slug: $slug }, first: 1) {
         nodes {
           id
           name
           slug
           parent {
-            id
-            name
-            slug
+            node {
+              id
+              name
+              slug
+            }
           }
         }
       }
@@ -683,12 +751,20 @@ export async function getCategoryBySlug(slug: string) {
           id: string;
           name: string;
           slug: string;
-          parent?: { id: string; name: string; slug: string };
+          parent?: { node: { id: string; name: string; slug: string } };
         }>;
       };
     }>(query, { slug });
 
-    return data.categories.nodes[0] || null;
+    const cat = data.categories.nodes[0];
+    if (!cat) return null;
+    // Flatten parent.node to parent for easier access
+    return {
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug,
+      parent: cat.parent?.node || null,
+    };
   } catch (error) {
     console.error("Error fetching category:", error);
     return null;

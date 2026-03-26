@@ -75,6 +75,10 @@
   --color-overlay-light: rgba(255, 255, 255, 0.80);
   --color-overlay-dark: rgba(0, 0, 0, 0.50);
 
+  /* Nav */
+  --color-nav-text: #334A27;
+  --fill-0: #334A27;
+
   /* SVG Effects */
   --svg-dark-filter: none;
 
@@ -118,6 +122,10 @@
 
   /* SVG Effects */
   --svg-dark-filter: brightness(0.5) saturate(0.3);
+
+  /* Nav */
+  --color-nav-text: var(--color-text-medium);
+  --fill-0: var(--color-text-medium);
 }
 
 
