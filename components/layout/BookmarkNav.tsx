@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useCallback, useState } from "react";
 import gsap from "gsap";
 
@@ -121,7 +122,8 @@ export default function BookmarkNav() {
         }}
       >
         {/* Finanztools Button */}
-        <button
+        <Link
+          href="/finanztools"
           onMouseEnter={() => setFinanztoolsState("hover")}
           onMouseLeave={() => setFinanztoolsState("default")}
           onMouseDown={() => setFinanztoolsState("active")}
@@ -141,11 +143,12 @@ export default function BookmarkNav() {
             fontWeight: 400,
             cursor: "pointer",
             whiteSpace: "nowrap",
+            textDecoration: "none",
             ...getButtonStyle(finansToolsState),
           }}
         >
           Finanztools
-        </button>
+        </Link>
 
         {/* Lupe Button */}
         <button

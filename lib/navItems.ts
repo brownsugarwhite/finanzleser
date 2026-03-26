@@ -75,14 +75,4 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Mietrecht", href: "/recht/mietrecht", toolCategory: "checkliste" },
     ],
   },
-  {
-    label: "Finanztools",
-    href: "/finanztools",
-    featured: true,
-    submenu: [
-      { label: "Rechner", href: "/finanztools/rechner" },
-      { label: "Checklisten", href: "/finanztools/checklisten" },
-      { label: "Vergleiche", href: "/finanztools/vergleiche" },
-    ],
-  },
 ];
