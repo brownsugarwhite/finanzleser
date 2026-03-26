@@ -58,7 +58,7 @@ export interface Post {
 // Rechner
 // ─────────────────────────────────────────────
 
-export type RechnerTyp = "steuer" | "brutto_netto" | "festgeld" | "tagesgeld";
+export type RechnerTyp = "steuer" | "soziales" | "rente" | "kredit" | "brutto_netto" | "festgeld" | "tagesgeld";
 
 export interface RechnerACF {
   rechnerTyp: RechnerTyp;
@@ -72,6 +72,14 @@ export interface Rechner {
   id: string;
   title: string;
   slug: string;
+  excerpt?: string;
+  content?: string;
+  featuredImage?: {
+    node: {
+      sourceUrl: string;
+      altText?: string;
+    };
+  };
   rechnerFelder?: RechnerACF;
 }
 

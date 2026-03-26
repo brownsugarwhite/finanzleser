@@ -596,6 +596,32 @@ export async function getAllRechner(): Promise<Rechner[]> {
 }
 
 // ─────────────────────────────────────────────
+// Einzelner Rechner nach Slug
+// ─────────────────────────────────────────────
+
+export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
+  const client = getClient();
+
+  const query = gql`
+    query GetRechnerBySlug($slug: String!) {
+      rechnerBy(slug: $slug) {
+        id
+        title
+        slug
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ rechnerBy: Rechner }>(query, { slug });
+    return data.rechnerBy;
+  } catch (error) {
+    console.error(`Error fetching Rechner with slug "${slug}":`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
 // Tools (Rechner/Vergleiche/Checklisten) nach Slugs
 // ─────────────────────────────────────────────
 
