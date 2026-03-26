@@ -12,12 +12,11 @@ const openSans = Open_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+  axes: ["wdth"],
 });
 
 const merriweather = Merriweather({
   variable: "--font-heading",
-  weight: ["400", "700", "900"],
-  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 });
