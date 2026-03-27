@@ -47,7 +47,6 @@ function getInterpolatedStyle(progress: number) {
     height = lerp(STATES.article.height, STATES.medium.height, t);
     radius = lerp(STATES.article.radius, STATES.medium.radius, t);
     bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t);
-    // Fade starts later — content stays fully visible for first 30% of transition
     contentOpacity = t < 0.3 ? 1 : lerp(1, 0, (t - 0.3) / 0.7);
     contentScale = lerp(1, 0.9, t);
   } else {
@@ -169,21 +168,20 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           opacity: contentOpacity,
           pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
         }}>
-          {/* Info Button */}
+          {/* Info Button — circle with handwritten i */}
           <div style={{
             width: '36px',
             height: '36px',
             borderRadius: '50%',
-            background: 'rgba(129, 129, 129, 0.12)',
+            border: '1px solid var(--color-text-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
+            flexShrink: 0,
           }}>
-            <svg width="9" height="18" viewBox="0 0 9 18" fill="none">
-              <circle cx="4.5" cy="2" r="2" fill="var(--color-text-primary)" />
-              <rect x="2.5" y="6" width="4" height="12" rx="2" fill="var(--color-text-primary)" />
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icons/info_i.svg" alt="Info" style={{ width: '9px', height: '17px' }} />
           </div>
 
           {/* Arrow Button (mini, no label) */}

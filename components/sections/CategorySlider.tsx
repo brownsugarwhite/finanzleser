@@ -13,13 +13,16 @@ interface CategorySliderProps {
   posts: Post[];
 }
 
-const THRESHOLD_FULL = 380;
-const THRESHOLD_SMALL = 780;
+// Thresholds as percentage of viewport width
+const THRESHOLD_FULL_RATIO = 0.2;   // 20% of viewport
+const THRESHOLD_SMALL_RATIO = 0.6;  // 80% of viewport
 
-function calculateProgress(distance: number): number {
-  if (distance <= THRESHOLD_FULL) return 0;
-  if (distance >= THRESHOLD_SMALL) return 1;
-  return (distance - THRESHOLD_FULL) / (THRESHOLD_SMALL - THRESHOLD_FULL);
+function calculateProgress(distance: number, viewportWidth: number): number {
+  const thresholdFull = viewportWidth * THRESHOLD_FULL_RATIO;
+  const thresholdSmall = viewportWidth * THRESHOLD_SMALL_RATIO;
+  if (distance <= thresholdFull) return 0;
+  if (distance >= thresholdSmall) return 1;
+  return (distance - thresholdFull) / (thresholdSmall - thresholdFull);
 }
 
 function lerp(a: number, b: number, t: number) {
@@ -64,7 +67,7 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
     const newProgresses = slideNodes.map((node) => {
       const rect = node.getBoundingClientRect();
       const slideCenter = rect.left - rootRect.left + rect.width / 2;
-      return calculateProgress(Math.abs(slideCenter - viewportCenter));
+      return calculateProgress(Math.abs(slideCenter - viewportCenter), rootRect.width);
     });
 
     setSlideProgresses(newProgresses);
@@ -166,9 +169,11 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
             const nextProgress = slideProgresses[index + 1] ?? 1;
             const isLast = index === posts.length - 1;
 
+            // Spark fades between progress 0.15 → 0.5
+            const sparkP = Math.max(progress, isLast ? 1 : nextProgress);
             const sparkOpacity = isLast
               ? 0
-              : Math.max(0, 1 - Math.max(progress, nextProgress) * 2.5);
+              : sparkP <= 0.15 ? 1 : Math.max(0, 1 - (sparkP - 0.15) / 0.35);
 
             const tx = getTranslateX(index);
 
