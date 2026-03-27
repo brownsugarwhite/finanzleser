@@ -46,8 +46,9 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: false,
-    dragFree: true,
-    duration: 25,
+    dragFree: false,
+    skipSnaps: true,
+    duration: 20,
   });
 
   const [slideProgresses, setSlideProgresses] = useState<number[]>([]);

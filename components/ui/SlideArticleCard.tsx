@@ -48,7 +48,7 @@ function getInterpolatedStyle(progress: number) {
     radius = lerp(STATES.article.radius, STATES.medium.radius, t);
     bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t);
     contentOpacity = t < 0.3 ? 1 : lerp(1, 0, (t - 0.3) / 0.7);
-    contentScale = lerp(1, 0.9, t);
+    contentScale = lerp(1, 0.8, t);
   } else {
     const t = (p - 0.5) / 0.5;
     width = lerp(STATES.medium.width, STATES.small.width, t);
@@ -56,7 +56,7 @@ function getInterpolatedStyle(progress: number) {
     radius = lerp(STATES.medium.radius, STATES.small.radius, t);
     bgAlpha = lerp(STATES.medium.bgAlpha, STATES.small.bgAlpha, t);
     contentOpacity = 0;
-    contentScale = 0.9;
+    contentScale = 0.8;
   }
 
   return { width, height, radius, bgAlpha, contentOpacity, contentScale };
@@ -66,6 +66,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
   const { width, height, radius, bgAlpha, contentOpacity, contentScale } = getInterpolatedStyle(progress);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
+  const [infoHovered, setInfoHovered] = useState(false);
   const titleRef = useRef<HTMLParagraphElement>(null);
   const [descClamp, setDescClamp] = useState(3);
 
@@ -91,6 +92,8 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         gap: '15px',
         flexShrink: 0,
         willChange: 'width, height, border-radius',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
       }}
     >
       {/* Content — fades out as card shrinks, stays centered horizontally */}
@@ -168,20 +171,29 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           opacity: contentOpacity,
           pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
         }}>
-          {/* Info Button — circle with handwritten i */}
-          <div style={{
+          {/* Info Button — circle with handwritten i, inverts on card hover */}
+          <div
+            onMouseEnter={() => setInfoHovered(true)}
+            onMouseLeave={() => setInfoHovered(false)}
+            style={{
             width: '36px',
             height: '36px',
             borderRadius: '50%',
-            border: '1px solid var(--color-text-primary)',
+            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
+            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             flexShrink: 0,
+            transition: 'background 0.1s, border 0.1s',
+            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
           }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icons/info_i.svg" alt="Info" style={{ width: '9px', height: '17px' }} />
+            <InlineSVG
+              src="/icons/info_i.svg"
+              alt="Info"
+              style={{ width: '9px', height: '17px' }}
+            />
           </div>
 
           {/* Arrow Button (mini, no label) */}
@@ -189,7 +201,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             width: '51px',
             height: '42px',
             borderRadius: '18px',
-            background: 'rgba(129, 129, 129, 0.12)',
+            background: 'rgba(198, 200, 204, 0.23)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
@@ -226,7 +238,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         <div style={{
           position: 'absolute',
           top: 0,
-          right: '32px',
+          right: '36px',
           width: '28px',
           opacity: contentOpacity,
         }}>
