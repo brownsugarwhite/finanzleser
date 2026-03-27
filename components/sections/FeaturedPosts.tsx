@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import InlineSVG from "@/components/ui/InlineSVG";
 import type { Post } from "@/lib/types";
 
 type FeaturedPostsProps = {
@@ -45,21 +45,18 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
                 key={post.id}
                 className="flex flex-col border border-gray-200 rounded overflow-hidden hover:shadow-lg transition"
               >
-                {/* Image */}
-                {post.featuredImage?.node?.sourceUrl ? (
-                  <div className="relative h-48 bg-gray-100">
-                    <Image
+                {/* Visual */}
+                <div className="h-48 bg-gray-50 flex items-center justify-center overflow-hidden p-4">
+                  {post.featuredImage?.node?.sourceUrl ? (
+                    <InlineSVG
                       src={post.featuredImage.node.sourceUrl}
                       alt={post.featuredImage.node.altText || post.title}
-                      fill
-                      className="object-cover"
+                      style={{ width: '100%', height: '100%' }}
                     />
-                  </div>
-                ) : (
-                  <div className="h-48 bg-gray-100 flex items-center justify-center">
+                  ) : (
                     <span className="text-gray-400 text-sm">Kein Bild</span>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {/* Content */}
                 <div className="flex flex-col flex-1 p-4">

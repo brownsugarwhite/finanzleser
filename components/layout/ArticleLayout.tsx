@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
-import Image from "next/image";
+import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -112,14 +112,12 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                     </div>
                   </div>
 
-                  {/* Image */}
-                  <div className="relative w-full h-96 mb-2">
-                    <Image
+                  {/* Visual */}
+                  <div className="w-full h-96 mb-2 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                    <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
-                      fill
-                      className="object-cover rounded"
-                      priority
+                      style={{ width: '100%', height: '100%' }}
                     />
                   </div>
 
