@@ -147,7 +147,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         {/* Text Content — description clamp adapts to title height */}
         <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column', gap: '9px' }}>
           <p ref={titleRef} lang="de" style={{
-            fontFamily: 'Merriweather, serif',
+            fontFamily: 'var(--font-heading)',
             fontWeight: 700,
             fontSize: '18px',
             lineHeight: 1.3,
@@ -160,7 +160,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             {post.title}
           </p>
           <p lang="de" style={{
-            fontFamily: 'Open Sans, sans-serif',
+            fontFamily: 'var(--font-body)',
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: 1.3,
@@ -277,7 +277,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               position: 'absolute',
               top: '3px',
               left: '3px',
-              fontFamily: 'Open Sans, sans-serif',
+              fontFamily: 'var(--font-body)',
               fontWeight: 700,
               fontSize: '13px',
               lineHeight: 1.3,

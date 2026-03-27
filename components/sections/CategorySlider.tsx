@@ -77,11 +77,6 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
     if (originalLimitMin.current === null) {
       originalLimitMin.current = engine.limit.min;
     }
-    // Also patch max to account for left padding offset
-    if (engine.limit.max !== 0) {
-      // max should stay at its original value (start position)
-    }
-
     // Calculate cumulative translateX correction
     let cumulativeTx = 0;
     for (let i = 1; i < newProgresses.length; i++) {
