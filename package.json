@@ -11,6 +11,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@use-gesture/react": "^10.3.1",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.38.0",
     "graphql-request": "^7.4.0",
     "gsap": "^3.14.2",
