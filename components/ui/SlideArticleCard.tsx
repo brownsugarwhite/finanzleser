@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useState, useEffect } from 'react';
 import type { Post } from '@/lib/types';
 import InlineSVG from '@/components/ui/InlineSVG';
 
@@ -38,7 +39,7 @@ export function getCardWidth(progress: number): number {
 function getInterpolatedStyle(progress: number) {
   const p = Math.max(0, Math.min(1, progress));
 
-  let width: number, height: number, radius: number, bgAlpha: number, contentOpacity: number;
+  let width: number, height: number, radius: number, bgAlpha: number, contentOpacity: number, contentScale: number;
 
   if (p <= 0.5) {
     const t = p / 0.5;
@@ -46,7 +47,9 @@ function getInterpolatedStyle(progress: number) {
     height = lerp(STATES.article.height, STATES.medium.height, t);
     radius = lerp(STATES.article.radius, STATES.medium.radius, t);
     bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t);
-    contentOpacity = lerp(1, 0, t);
+    // Fade starts later — content stays fully visible for first 30% of transition
+    contentOpacity = t < 0.3 ? 1 : lerp(1, 0, (t - 0.3) / 0.7);
+    contentScale = lerp(1, 0.9, t);
   } else {
     const t = (p - 0.5) / 0.5;
     width = lerp(STATES.medium.width, STATES.small.width, t);
@@ -54,15 +57,25 @@ function getInterpolatedStyle(progress: number) {
     radius = lerp(STATES.medium.radius, STATES.small.radius, t);
     bgAlpha = lerp(STATES.medium.bgAlpha, STATES.small.bgAlpha, t);
     contentOpacity = 0;
+    contentScale = 0.9;
   }
 
-  return { width, height, radius, bgAlpha, contentOpacity };
+  return { width, height, radius, bgAlpha, contentOpacity, contentScale };
 }
 
 export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: SlideArticleCardProps) {
-  const { width, height, radius, bgAlpha, contentOpacity } = getInterpolatedStyle(progress);
+  const { width, height, radius, bgAlpha, contentOpacity, contentScale } = getInterpolatedStyle(progress);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
+  const titleRef = useRef<HTMLParagraphElement>(null);
+  const [descClamp, setDescClamp] = useState(3);
+
+  useEffect(() => {
+    if (!titleRef.current) return;
+    const lineHeight = 18 * 1.3; // fontSize * lineHeight
+    const titleLines = Math.round(titleRef.current.offsetHeight / lineHeight);
+    setDescClamp(titleLines >= 3 ? 2 : 3);
+  }, [post.title]);
 
   return (
     <div
@@ -81,16 +94,20 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         willChange: 'width, height, border-radius',
       }}
     >
-      {/* Content — fades out as card shrinks */}
+      {/* Content — fades out as card shrinks, stays centered horizontally */}
       <div style={{
         opacity: contentOpacity,
         pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
         width: `${STATES.article.width}px`,
+        height: `${STATES.article.height}px`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '15px',
-        flex: 1,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: `translate(-50%, -50%) scale(${contentScale})`,
       }}>
         {/* Visual */}
         <div style={{ width: '100%', height: '160px', overflow: 'hidden' }}>
@@ -103,27 +120,33 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           )}
         </div>
 
-        {/* Text Content */}
-        <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-          <p style={{
+        {/* Text Content — description clamp adapts to title height */}
+        <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column', gap: '9px' }}>
+          <p ref={titleRef} lang="de" style={{
             fontFamily: 'Merriweather, serif',
             fontWeight: 700,
-            fontSize: '19px',
+            fontSize: '18px',
             lineHeight: 1.3,
             color: 'var(--color-text-primary)',
             margin: 0,
+            hyphens: 'auto',
+            WebkitHyphens: 'auto',
+            overflowWrap: 'break-word',
           }}>
             {post.title}
           </p>
-          <p style={{
+          <p lang="de" style={{
             fontFamily: 'Open Sans, sans-serif',
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: 1.3,
             color: 'var(--color-text-medium)',
             margin: 0,
+            hyphens: 'auto',
+            WebkitHyphens: 'auto',
+            overflowWrap: 'break-word',
             display: '-webkit-box',
-            WebkitLineClamp: 3,
+            WebkitLineClamp: descClamp,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
           }}>
@@ -131,7 +154,10 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           </p>
         </div>
 
-        {/* Button Row */}
+      </div>
+
+      {/* Button Row — fixed to card bottom, outside content wrapper */}
+      {contentOpacity > 0.1 && (
         <div style={{
           position: 'absolute',
           bottom: '15px',
@@ -140,6 +166,8 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
+          opacity: contentOpacity,
+          pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
         }}>
           {/* Info Button */}
           <div style={{
@@ -193,7 +221,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Lesezeichen (Bookmark) */}
       {bookmarkColor && contentOpacity > 0.3 && (
@@ -201,19 +229,15 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           position: 'absolute',
           top: 0,
           right: '32px',
-          width: '36px',
+          width: '28px',
           opacity: contentOpacity,
         }}>
-          <div style={{ width: '36px', height: '20px', backgroundColor: bookmarkColor }} />
-          <div style={{
-            width: '36px',
-            height: '29px',
-            overflow: 'hidden',
-            ['--fill-0' as string]: bookmarkColor,
-          }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icons/lesezeichen-spikes.svg" alt="" style={{ width: '100%', height: '100%', display: 'block' }} />
-          </div>
+          {/* Color bar */}
+          <div style={{ width: '33px', height: '16px', backgroundColor: bookmarkColor }} />
+          {/* Spike down */}
+          <svg width="33" height="25" viewBox="0 0 28 23" fill="none" preserveAspectRatio="none" style={{ display: 'block' }}>
+            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={bookmarkColor} />
+          </svg>
           {bookmarkType === 'neu' && (
             <p style={{
               position: 'absolute',
@@ -221,7 +245,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               left: '3px',
               fontFamily: 'Open Sans, sans-serif',
               fontWeight: 700,
-              fontSize: '14px',
+              fontSize: '13px',
               lineHeight: 1.3,
               color: 'white',
               margin: 0,

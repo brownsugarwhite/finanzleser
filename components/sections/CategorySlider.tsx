@@ -102,6 +102,8 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
           alignItems: 'center',
           touchAction: 'pan-y pinch-zoom',
           gap: `${GAP_FULL}px`,
+          paddingLeft: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
+          paddingRight: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
         }}>
           {posts.map((post, index) => {
             const progress = slideProgresses[index] ?? 0;
