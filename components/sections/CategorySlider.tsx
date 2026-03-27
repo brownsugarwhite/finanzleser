@@ -158,7 +158,7 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
 
   return (
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
-      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', height: '380px', visibility: isReady ? 'visible' : 'hidden' }}>
+      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', height: '390px', visibility: isReady ? 'visible' : 'hidden' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',

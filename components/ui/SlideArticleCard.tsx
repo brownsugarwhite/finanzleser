@@ -39,7 +39,7 @@ export function easeProgress(progress: number): { t1: number; t2: number; phase:
 
 // Card states from Figma
 const STATES = {
-  article: { width: 265, height: 380, radius: 36, bgAlpha: 0.10 },
+  article: { width: 265, height: 390, radius: 36, bgAlpha: 0.10 },
   medium:  { width: 200, height: 300, radius: 50, bgAlpha: 0.18 },
   small:   { width: 100, height: 100, radius: 42, bgAlpha: 0.26 },
 };
@@ -145,9 +145,21 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         </div>
 
         {/* Text Content — description clamp adapts to title height */}
-        <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column', gap: '9px' }}>
+        <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column' }}>
+          {category && (
+            <span style={{
+              fontFamily: 'Merriweather, serif',
+              fontSize: '14px',
+              fontWeight: 500,
+              fontStyle: 'italic',
+              color: 'var(--color-brand)',
+              marginBottom: 2,
+            }}>
+              {category.name}
+            </span>
+          )}
           <p ref={titleRef} lang="de" style={{
-            fontFamily: 'var(--font-heading)',
+            fontFamily: 'Merriweather, serif',
             fontWeight: 700,
             fontSize: '18px',
             lineHeight: 1.3,
@@ -160,6 +172,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             {post.title}
           </p>
           <p lang="de" style={{
+            marginTop: '5px',
             fontFamily: 'var(--font-body)',
             fontWeight: 400,
             fontSize: '16px',
