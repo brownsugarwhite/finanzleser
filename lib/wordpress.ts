@@ -104,7 +104,7 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
     query GetPostsByCategory($slug: [String!]!) {
       categories(where: { slug: $slug }) {
         nodes {
-          posts {
+          posts(first: 100) {
             nodes {
               id
               title

@@ -26,21 +26,36 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
+// Mutate Embla's limit object in place so all internal modules see the change
+function patchLimit(limit: any, newMin: number) {
+  limit.min = newMin;
+  limit.length = Math.abs(limit.max - newMin);
+  limit.reachedMin = (n: number) => n < newMin;
+  limit.reachedAny = (n: number) => n < newMin || n > limit.max;
+  limit.constrain = (n: number) => {
+    if (n < newMin) return newMin;
+    if (n > limit.max) return limit.max;
+    return n;
+  };
+}
+
 export default function CategorySlider({ posts }: CategorySliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: false,
     dragFree: true,
-    skipSnaps: true,
-    duration: 30,
+    duration: 25,
   });
 
   const [slideProgresses, setSlideProgresses] = useState<number[]>([]);
   const rafRef = useRef<number>(0);
+  const originalLimitMin = useRef<number | null>(null);
+  const frozenMin = useRef<number | null>(null);
 
   const updateProgress = useCallback(() => {
     if (!emblaApi) return;
 
+    const engine = emblaApi.internalEngine();
     const slideNodes = emblaApi.slideNodes();
     const rootNode = emblaApi.rootNode();
     const rootRect = rootNode.getBoundingClientRect();
@@ -53,6 +68,44 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
     });
 
     setSlideProgresses(newProgresses);
+
+    // Save original limit once (before any patching)
+    if (originalLimitMin.current === null) {
+      originalLimitMin.current = engine.limit.min;
+    }
+    // Also patch max to account for left padding offset
+    if (engine.limit.max !== 0) {
+      // max should stay at its original value (start position)
+    }
+
+    // Calculate cumulative translateX correction
+    let cumulativeTx = 0;
+    for (let i = 1; i < newProgresses.length; i++) {
+      const wPrev = getCardWidth(newProgresses[i - 1] ?? 0);
+      const wCurr = getCardWidth(newProgresses[i] ?? 0);
+      const maxP = Math.max(newProgresses[i - 1] ?? 0, newProgresses[i] ?? 0);
+      const desiredGap = lerp(GAP_FULL, GAP_SHRUNK, maxP);
+      const visualGap = (SLIDE_BASE_WIDTH + GAP_FULL) - (wPrev + wCurr) / 2;
+      cumulativeTx += visualGap - desiredGap;
+    }
+
+    // Patch Embla's limit in place — all internal modules share this object
+    const rightPadding = 500;
+    const adjustedMin = originalLimitMin.current + cumulativeTx - rightPadding;
+    const location = engine.location.get();
+
+    // Freeze the limit when overscrolling so cumulativeTx changes don't amplify the effect
+    if (location < adjustedMin) {
+      // Past the limit — freeze if not already frozen
+      if (frozenMin.current === null) {
+        frozenMin.current = adjustedMin;
+      }
+      patchLimit(engine.limit, frozenMin.current);
+    } else {
+      // Within bounds — unfreeze and use live calculation
+      frozenMin.current = null;
+      patchLimit(engine.limit, adjustedMin);
+    }
   }, [emblaApi]);
 
   useEffect(() => {
@@ -64,12 +117,14 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
     };
 
     emblaApi.on('scroll', onScroll);
-    emblaApi.on('reInit', onScroll);
+    emblaApi.on('reInit', () => {
+      originalLimitMin.current = null;
+      onScroll();
+    });
     updateProgress();
 
     return () => {
       emblaApi.off('scroll', onScroll);
-      emblaApi.off('reInit', onScroll);
       cancelAnimationFrame(rafRef.current);
     };
   }, [emblaApi, updateProgress]);
@@ -96,14 +151,15 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
 
   return (
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
-      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab' }}>
+      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', height: '380px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
+          height: '100%',
           touchAction: 'pan-y pinch-zoom',
           gap: `${GAP_FULL}px`,
           paddingLeft: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
-          paddingRight: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
+          paddingRight: '500px',
         }}>
           {posts.map((post, index) => {
             const progress = slideProgresses[index] ?? 0;
@@ -115,6 +171,11 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
               : Math.max(0, 1 - Math.max(progress, nextProgress) * 2.5);
 
             const tx = getTranslateX(index);
+
+            const cardW = getCardWidth(progress);
+            const maxP = Math.max(progress, nextProgress);
+            const desiredGap = lerp(GAP_FULL, GAP_SHRUNK, maxP);
+            const sparkLeft = (SLIDE_BASE_WIDTH + cardW) / 2 + desiredGap / 2 - 6;
 
             return (
               <div
@@ -145,7 +206,7 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
                     aria-hidden
                     style={{
                       position: 'absolute',
-                      right: `-${GAP_FULL / 2 + 6}px`,
+                      left: `${sparkLeft}px`,
                       top: '50%',
                       transform: 'translateY(-50%)',
                       opacity: sparkOpacity,
