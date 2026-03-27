@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import InlineSVG from '@/components/ui/InlineSVG';
 
@@ -23,6 +24,19 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
+// Easing: article→medium easeIn, medium→small easeOut
+function easeIn(t: number) { return t * t; }
+function easeOut(t: number) { return 1 - (1 - t) * (1 - t); }
+
+// Apply easing to raw progress — shared by card AND slider gap calculations
+export function easeProgress(progress: number): { t1: number; t2: number; phase: 'first' | 'second' } {
+  const p = Math.max(0, Math.min(1, progress));
+  if (p <= 0.5) {
+    return { t1: easeIn(p / 0.5), t2: 0, phase: 'first' };
+  }
+  return { t1: 1, t2: easeOut((p - 0.5) / 0.5), phase: 'second' };
+}
+
 // Card states from Figma
 const STATES = {
   article: { width: 265, height: 380, radius: 36, bgAlpha: 0.10 },
@@ -31,30 +45,30 @@ const STATES = {
 };
 
 export function getCardWidth(progress: number): number {
-  const p = Math.max(0, Math.min(1, progress));
-  if (p <= 0.5) return lerp(STATES.article.width, STATES.medium.width, p / 0.5);
-  return lerp(STATES.medium.width, STATES.small.width, (p - 0.5) / 0.5);
+  const { t1, t2, phase } = easeProgress(progress);
+  if (phase === 'first') return lerp(STATES.article.width, STATES.medium.width, t1);
+  return lerp(STATES.medium.width, STATES.small.width, t2);
 }
 
 function getInterpolatedStyle(progress: number) {
-  const p = Math.max(0, Math.min(1, progress));
+  const { t1, t2, phase } = easeProgress(progress);
+  const rawP = Math.max(0, Math.min(1, progress));
 
   let width: number, height: number, radius: number, bgAlpha: number, contentOpacity: number, contentScale: number;
 
-  if (p <= 0.5) {
-    const t = p / 0.5;
-    width = lerp(STATES.article.width, STATES.medium.width, t);
-    height = lerp(STATES.article.height, STATES.medium.height, t);
-    radius = lerp(STATES.article.radius, STATES.medium.radius, t);
-    bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t);
-    contentOpacity = t < 0.3 ? 1 : lerp(1, 0, (t - 0.3) / 0.7);
-    contentScale = lerp(1, 0.8, t);
+  if (phase === 'first') {
+    width = lerp(STATES.article.width, STATES.medium.width, t1);
+    height = lerp(STATES.article.height, STATES.medium.height, t1);
+    radius = lerp(STATES.article.radius, STATES.medium.radius, t1);
+    bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t1);
+    const rawT = rawP / 0.5;
+    contentOpacity = rawT < 0.3 ? 1 : lerp(1, 0, (rawT - 0.3) / 0.7);
+    contentScale = lerp(1, 0.8, t1);
   } else {
-    const t = (p - 0.5) / 0.5;
-    width = lerp(STATES.medium.width, STATES.small.width, t);
-    height = lerp(STATES.medium.height, STATES.small.height, t);
-    radius = lerp(STATES.medium.radius, STATES.small.radius, t);
-    bgAlpha = lerp(STATES.medium.bgAlpha, STATES.small.bgAlpha, t);
+    width = lerp(STATES.medium.width, STATES.small.width, t2);
+    height = lerp(STATES.medium.height, STATES.small.height, t2);
+    radius = lerp(STATES.medium.radius, STATES.small.radius, t2);
+    bgAlpha = lerp(STATES.medium.bgAlpha, STATES.small.bgAlpha, t2);
     contentOpacity = 0;
     contentScale = 0.8;
   }
@@ -67,6 +81,14 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
+
+  // Build post URL from categories
+  const category = post.categories?.nodes?.[0];
+  const mainCategory = post.categories?.nodes?.find(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (cat: any) => cat.parent === null || cat.parent === 0
+  );
+  const postLink = `/${mainCategory?.slug || 'beitraege'}/${category?.slug || 'allgemein'}/${post.slug}`;
   const titleRef = useRef<HTMLParagraphElement>(null);
   const [descClamp, setDescClamp] = useState(3);
 
@@ -196,8 +218,8 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             />
           </div>
 
-          {/* Arrow Button (mini, no label) */}
-          <div style={{
+          {/* Arrow Button (mini, no label) — links to article */}
+          <Link href={postLink} style={{
             width: '51px',
             height: '42px',
             borderRadius: '18px',
@@ -207,6 +229,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             justifyContent: 'flex-end',
             paddingRight: '5px',
             cursor: 'pointer',
+            textDecoration: 'none',
           }}>
             <div style={{
               width: '32px',
@@ -217,6 +240,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
+              paddingLeft: '1px',
             }}>
               <svg width="11" height="15" viewBox="0 0 11 15" fill="none">
                 <path
@@ -229,7 +253,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
                 />
               </svg>
             </div>
-          </div>
+          </Link>
         </div>
       )}
 

@@ -46,12 +46,12 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: false,
-    dragFree: false,
-    skipSnaps: true,
-    duration: 20,
+    dragFree: true,
+    duration: 25,
   });
 
   const [slideProgresses, setSlideProgresses] = useState<number[]>([]);
+  const [isReady, setIsReady] = useState(false);
   const rafRef = useRef<number>(0);
   const originalLimitMin = useRef<number | null>(null);
   const frozenMin = useRef<number | null>(null);
@@ -125,7 +125,15 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
       originalLimitMin.current = null;
       onScroll();
     });
+    // Triple-pass: each pass sizes change → layout shifts → remeasure
     updateProgress();
+    requestAnimationFrame(() => {
+      updateProgress();
+      requestAnimationFrame(() => {
+        updateProgress();
+        setIsReady(true);
+      });
+    });
 
     return () => {
       emblaApi.off('scroll', onScroll);
@@ -155,7 +163,7 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
 
   return (
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
-      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', height: '380px' }}>
+      <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', height: '380px', visibility: isReady ? 'visible' : 'hidden' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
