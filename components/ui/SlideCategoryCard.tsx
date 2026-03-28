@@ -113,16 +113,6 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
 
         {/* Text Content */}
         <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column' }}>
-          <span style={{
-            fontFamily: 'Merriweather, serif',
-            fontSize: '14px',
-            fontWeight: 500,
-            fontStyle: 'italic',
-            color: 'var(--color-text-medium)',
-            marginBottom: '2px',
-          }}>
-            {category.count} Beiträge
-          </span>
           <p lang="de" style={{
             fontFamily: 'Merriweather, serif',
             fontWeight: 700,

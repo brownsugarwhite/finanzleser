@@ -153,7 +153,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
           height: '100%',
           touchAction: 'pan-y pinch-zoom',
           gap: `${GAP_FULL}px`,
-          paddingLeft: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
+          paddingLeft: '287px',
           paddingRight: '500px',
         }}>
           {categories.map((cat, index) => {
@@ -161,10 +161,11 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
             const nextProgress = slideProgresses[index + 1] ?? 1;
             const isLast = index === categories.length - 1;
 
+            // Spark fades between progress 0.15 → 0.7
             const sparkP = Math.max(progress, isLast ? 1 : nextProgress);
             const sparkOpacity = isLast
               ? 0
-              : sparkP <= 0.15 ? 1 : Math.max(0, 1 - (sparkP - 0.15) / 0.35);
+              : sparkP <= 0.15 ? 1 : Math.max(0, 1 - (sparkP - 0.15) / 0.55);
 
             const tx = getTranslateX(index);
 

@@ -173,11 +173,11 @@ export default function CategorySlider({ posts }: CategorySliderProps) {
             const nextProgress = slideProgresses[index + 1] ?? 1;
             const isLast = index === posts.length - 1;
 
-            // Spark fades between progress 0.15 → 0.5
+            // Spark fades between progress 0.15 → 0.7
             const sparkP = Math.max(progress, isLast ? 1 : nextProgress);
             const sparkOpacity = isLast
               ? 0
-              : sparkP <= 0.15 ? 1 : Math.max(0, 1 - (sparkP - 0.15) / 0.35);
+              : sparkP <= 0.15 ? 1 : Math.max(0, 1 - (sparkP - 0.15) / 0.55);
 
             const tx = getTranslateX(index);
 
