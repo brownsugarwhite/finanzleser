@@ -15,7 +15,7 @@ interface SubcategorySliderProps {
 
 const THRESHOLD_FULL_RATIO = 0.2;
 const THRESHOLD_SMALL_RATIO = 0.6;
-const THRESHOLD_RESET_RATIO = 0.85;
+const THRESHOLD_RESET_RATIO = 0.9;
 
 function calculateProgress(distance: number, viewportWidth: number): number {
   const thresholdFull = viewportWidth * THRESHOLD_FULL_RATIO;
