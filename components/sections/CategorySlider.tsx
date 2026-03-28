@@ -14,15 +14,21 @@ interface CategorySliderProps {
 }
 
 // Thresholds as percentage of viewport width
-const THRESHOLD_FULL_RATIO = 0.2;   // 20% of viewport
-const THRESHOLD_SMALL_RATIO = 0.6;  // 80% of viewport
+const THRESHOLD_FULL_RATIO = 0.2;   // 20% from center: fully visible
+const THRESHOLD_SMALL_RATIO = 0.6;  // 60% from center: fully small
+const THRESHOLD_RESET_RATIO = 0.85; // 85% from center: fully back to full size
 
 function calculateProgress(distance: number, viewportWidth: number): number {
   const thresholdFull = viewportWidth * THRESHOLD_FULL_RATIO;
   const thresholdSmall = viewportWidth * THRESHOLD_SMALL_RATIO;
+  const thresholdReset = viewportWidth * THRESHOLD_RESET_RATIO;
   if (distance <= thresholdFull) return 0;
-  if (distance >= thresholdSmall) return 1;
-  return (distance - thresholdFull) / (thresholdSmall - thresholdFull);
+  if (distance >= thresholdReset) return 0;
+  if (distance <= thresholdSmall) {
+    return (distance - thresholdFull) / (thresholdSmall - thresholdFull);
+  }
+  // Smooth transition back to full between small and reset
+  return 1 - (distance - thresholdSmall) / (thresholdReset - thresholdSmall);
 }
 
 function lerp(a: number, b: number, t: number) {

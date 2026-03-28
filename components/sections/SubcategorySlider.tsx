@@ -15,13 +15,18 @@ interface SubcategorySliderProps {
 
 const THRESHOLD_FULL_RATIO = 0.2;
 const THRESHOLD_SMALL_RATIO = 0.6;
+const THRESHOLD_RESET_RATIO = 0.85;
 
 function calculateProgress(distance: number, viewportWidth: number): number {
   const thresholdFull = viewportWidth * THRESHOLD_FULL_RATIO;
   const thresholdSmall = viewportWidth * THRESHOLD_SMALL_RATIO;
+  const thresholdReset = viewportWidth * THRESHOLD_RESET_RATIO;
   if (distance <= thresholdFull) return 0;
-  if (distance >= thresholdSmall) return 1;
-  return (distance - thresholdFull) / (thresholdSmall - thresholdFull);
+  if (distance >= thresholdReset) return 0;
+  if (distance <= thresholdSmall) {
+    return (distance - thresholdFull) / (thresholdSmall - thresholdFull);
+  }
+  return 1 - (distance - thresholdSmall) / (thresholdReset - thresholdSmall);
 }
 
 function lerp(a: number, b: number, t: number) {
