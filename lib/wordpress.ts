@@ -268,7 +268,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
   slug: string;
   description?: string;
   image?: string;
-  children: Array<{ name: string; slug: string; count: number }>;
+  children: Array<{ name: string; slug: string; count: number; description?: string; image?: string }>;
   posts: Post[];
 } | null> {
   const client = getClient();
@@ -342,6 +342,14 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
             name
             slug
             count
+            description
+            kategorieFelder {
+              kategorieBild {
+                node {
+                  sourceUrl
+                }
+              }
+            }
             posts(first: 6) {
               nodes {
                 id
@@ -374,6 +382,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           name: string;
           slug: string;
           count: number;
+          description?: string;
+          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
           posts: { nodes: Post[] };
         }>;
       };
@@ -399,6 +409,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
         name: child.name,
         slug: child.slug,
         count: child.count,
+        description: child.description || undefined,
+        image: child.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
       })),
       posts: allPosts,
     };
