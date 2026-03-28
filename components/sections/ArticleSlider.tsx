@@ -95,7 +95,7 @@ export default function ArticleSlider({ posts }: ArticleSliderProps) {
     }
 
     // Patch Embla's limit in place — all internal modules share this object
-    const rightPadding = 500;
+    const rightPadding = 250;
     const adjustedMin = originalLimitMin.current + cumulativeTx - rightPadding;
     const location = engine.location.get();
 
@@ -172,7 +172,6 @@ export default function ArticleSlider({ posts }: ArticleSliderProps) {
           touchAction: 'pan-y pinch-zoom',
           gap: `${GAP_FULL}px`,
           paddingLeft: `${SLIDE_BASE_WIDTH + GAP_FULL}px`,
-          paddingRight: '500px',
         }}>
           {posts.map((post, index) => {
             const progress = slideProgresses[index] ?? 0;

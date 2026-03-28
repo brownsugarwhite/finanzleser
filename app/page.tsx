@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
+import CategoryButtonSlider from "@/components/sections/CategoryButtonSlider";
 import ArticleSlider from "@/components/sections/ArticleSlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import FinanztoolSection from "@/components/sections/FinanztoolSection";
@@ -30,10 +31,13 @@ export default async function LandingPage() {
       <HeroSection />
       <FinanztoolSection />
       {insuranceCategory && insuranceCategory.children.length > 0 && (
-        <SubcategorySlider
-          categories={insuranceCategory.children}
-          parentSlug="versicherungen"
-        />
+        <>
+          <CategoryButtonSlider categories={insuranceCategory.children} />
+          <SubcategorySlider
+            categories={insuranceCategory.children}
+            parentSlug="versicherungen"
+          />
+        </>
       )}
       <ArticleSlider posts={sliderPosts} />
       <FeaturedPosts posts={posts} />

@@ -90,7 +90,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
       cumulativeTx += visualGap - desiredGap;
     }
 
-    const rightPadding = 500;
+    const rightPadding = 250;
     const adjustedMin = originalLimitMin.current + cumulativeTx - rightPadding;
     const location = engine.location.get();
 
@@ -159,7 +159,6 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
           touchAction: 'pan-y pinch-zoom',
           gap: `${GAP_FULL}px`,
           paddingLeft: '287px',
-          paddingRight: '500px',
         }}>
           {categories.map((cat, index) => {
             const progress = slideProgresses[index] ?? 0;
