@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
-import CategorySlider from "@/components/sections/CategorySlider";
+import ArticleSlider from "@/components/sections/ArticleSlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import FinanztoolSection from "@/components/sections/FinanztoolSection";
 import SearchSection from "@/components/sections/SearchSection";
@@ -35,7 +35,7 @@ export default async function LandingPage() {
           parentSlug="versicherungen"
         />
       )}
-      <CategorySlider posts={sliderPosts} />
+      <ArticleSlider posts={sliderPosts} />
       <FeaturedPosts posts={posts} />
       <SearchSection />
       <Footer />

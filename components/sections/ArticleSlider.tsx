@@ -9,7 +9,7 @@ const SLIDE_BASE_WIDTH = 265;
 const GAP_FULL = 22;
 const GAP_SHRUNK = 15;
 
-interface CategorySliderProps {
+interface ArticleSliderProps {
   posts: Post[];
 }
 
@@ -48,7 +48,7 @@ function patchLimit(limit: any, newMin: number) {
   };
 }
 
-export default function CategorySlider({ posts }: CategorySliderProps) {
+export default function ArticleSlider({ posts }: ArticleSliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     loop: false,
