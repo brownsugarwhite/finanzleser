@@ -28,6 +28,8 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
       <MainCategoryLayout
         name={categoryWithChildren.name}
         slug={params.kategorie}
+        description={categoryWithChildren.description}
+        image={categoryWithChildren.image}
         categoryChildren={categoryWithChildren.children}
         posts={categoryWithChildren.posts}
       />
@@ -45,6 +47,8 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     <CategoryLayout
       title={category?.name || params.kategorie}
       titleSlug={params.kategorie}
+      description={category?.description}
+      image={category?.image}
       mainCategoryName={category?.parent?.name}
       mainCategorySlug={category?.parent?.slug}
       posts={posts}

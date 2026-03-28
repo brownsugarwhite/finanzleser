@@ -15,6 +15,8 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
       <CategoryLayout
         title={category?.name || params.sub}
         titleSlug={params.sub}
+        description={category?.description}
+        image={category?.image}
         mainCategoryName={mainCategory?.name}
         mainCategorySlug={mainCategory?.slug}
         posts={categoryPosts}

@@ -8,6 +8,8 @@ import type { Post } from "@/lib/types";
 interface MainCategoryLayoutProps {
   name: string;
   slug: string;
+  description?: string;
+  image?: string;
   categoryChildren: Array<{ name: string; slug: string; count: number }>;
   posts: Post[];
 }
@@ -15,6 +17,8 @@ interface MainCategoryLayoutProps {
 export default function MainCategoryLayout({
   name,
   slug,
+  description,
+  image,
   categoryChildren,
   posts,
 }: MainCategoryLayoutProps) {
@@ -25,18 +29,33 @@ export default function MainCategoryLayout({
     <>
       <Header />
       <main className="min-h-screen bg-white">
-        {/* Hero */}
-        <div className="bg-gray-50 border-b border-gray-200 pb-16" style={{ paddingTop: 23 }}>
-          <div className="max-w-7xl mx-auto px-6">
-            <Breadcrumb items={breadcrumbItems} />
-            <h1 className="text-5xl font-bold mb-4">{name}</h1>
-            <p className="text-lg text-gray-600">
-              Entdecken Sie unsere Inhalte zum Thema {name.toLowerCase()}
-            </p>
-          </div>
-        </div>
+        <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
+          <Breadcrumb items={breadcrumbItems} />
 
-        <div className="max-w-7xl mx-auto px-6 pb-12">
+          {/* Titelbild */}
+          {image && (
+            <div style={{ width: '100%', maxHeight: '300px', display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+              <InlineSVG
+                src={image}
+                alt={name}
+                style={{ maxWidth: '400px', width: '100%', height: '100%', maxHeight: '300px' }}
+              />
+            </div>
+          )}
+
+          <h1 className="text-5xl font-bold mb-4">{name}</h1>
+          {description && (
+            <p style={{
+              fontFamily: 'Merriweather, serif',
+              fontSize: '18px',
+              fontStyle: 'italic',
+              color: 'var(--color-text-medium)',
+              marginBottom: '32px',
+            }}>
+              {description}
+            </p>
+          )}
+
           {/* Unterkategorien */}
           {categoryChildren.length > 0 && (
             <div className="mb-16">

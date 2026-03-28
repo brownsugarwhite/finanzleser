@@ -266,6 +266,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getCategoryWithChildren(categorySlug: string): Promise<{
   name: string;
   slug: string;
+  description?: string;
+  image?: string;
   children: Array<{ name: string; slug: string; count: number }>;
   posts: Post[];
 } | null> {
@@ -279,6 +281,14 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           databaseId
           name
           slug
+          description
+          kategorieFelder {
+            kategorieBild {
+              node {
+                sourceUrl
+              }
+            }
+          }
           posts(first: 6) {
             nodes {
               id
@@ -312,6 +322,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           databaseId: number;
           name: string;
           slug: string;
+          description?: string;
+          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
           posts: { nodes: Post[] };
         }>;
       };
@@ -381,6 +393,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
     return {
       name: category.name,
       slug: category.slug,
+      description: category.description || undefined,
+      image: category.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
       children: childrenData.categories.nodes.map((child) => ({
         name: child.name,
         slug: child.slug,
@@ -732,6 +746,14 @@ export async function getCategoryBySlug(slug: string) {
           id
           name
           slug
+          description
+          kategorieFelder {
+            kategorieBild {
+              node {
+                sourceUrl
+              }
+            }
+          }
           parent {
             node {
               id
@@ -751,6 +773,8 @@ export async function getCategoryBySlug(slug: string) {
           id: string;
           name: string;
           slug: string;
+          description?: string;
+          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
           parent?: { node: { id: string; name: string; slug: string } };
         }>;
       };
@@ -758,11 +782,12 @@ export async function getCategoryBySlug(slug: string) {
 
     const cat = data.categories.nodes[0];
     if (!cat) return null;
-    // Flatten parent.node to parent for easier access
     return {
       id: cat.id,
       name: cat.name,
       slug: cat.slug,
+      description: cat.description || undefined,
+      image: cat.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
       parent: cat.parent?.node || null,
     };
   } catch (error) {

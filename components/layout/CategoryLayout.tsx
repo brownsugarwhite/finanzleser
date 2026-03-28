@@ -8,13 +8,15 @@ import type { Post, Category } from "@/lib/types";
 type CategoryLayoutProps = {
   title?: string;
   titleSlug?: string;
+  description?: string;
+  image?: string;
   mainCategoryName?: string;
   mainCategorySlug?: string;
   children?: React.ReactNode;
   posts?: Post[];
 };
 
-export default function CategoryLayout({ title, titleSlug, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
+export default function CategoryLayout({ title, titleSlug, description, image, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
   const breadcrumbItems = mainCategorySlug && titleSlug ? [
     { label: mainCategoryName || mainCategorySlug, href: `/${mainCategorySlug}` },
     { label: title || titleSlug, href: `/${mainCategorySlug}/${titleSlug}` }
@@ -25,7 +27,30 @@ export default function CategoryLayout({ title, titleSlug, mainCategoryName, mai
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           <Breadcrumb items={breadcrumbItems} />
-          {title && <h1 className="text-3xl font-bold mb-8">{title}</h1>}
+
+          {/* Titelbild */}
+          {image && (
+            <div style={{ width: '100%', maxHeight: '300px', display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+              <InlineSVG
+                src={image}
+                alt={title || ''}
+                style={{ maxWidth: '400px', width: '100%', height: '100%', maxHeight: '300px' }}
+              />
+            </div>
+          )}
+
+          {title && <h1 className="text-3xl font-bold mb-4">{title}</h1>}
+          {description && (
+            <p style={{
+              fontFamily: 'Merriweather, serif',
+              fontSize: '18px',
+              fontStyle: 'italic',
+              color: 'var(--color-text-medium)',
+              marginBottom: '32px',
+            }}>
+              {description}
+            </p>
+          )}
 
           {/* Posts Grid (wenn Posts vorhanden) */}
           {posts && posts.length > 0 && (
