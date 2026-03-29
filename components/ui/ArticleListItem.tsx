@@ -18,10 +18,9 @@ interface ArticleListItemProps {
   post: Post;
   href: string;
   bookmarkType?: BookmarkType;
-  variant?: 'light' | 'dark';
 }
 
-export default function ArticleListItem({ post, href, bookmarkType, variant = 'light' }: ArticleListItemProps) {
+export default function ArticleListItem({ post, href, bookmarkType }: ArticleListItemProps) {
   const [infoHovered, setInfoHovered] = useState(false);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const category = post.categories?.nodes?.[0];
@@ -32,7 +31,9 @@ export default function ArticleListItem({ post, href, bookmarkType, variant = 'l
       width: '100%',
       maxWidth: '1100px',
       borderRadius: '36px',
-      background: variant === 'dark' ? 'rgb(255, 255, 255)' : 'rgba(181, 181, 181, 0.10)',
+      background: 'rgba(247, 247, 247, 0.7)',
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
       display: 'flex',
       overflow: 'hidden',
       gap: '24px',

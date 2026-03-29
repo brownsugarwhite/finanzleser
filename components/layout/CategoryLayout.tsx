@@ -63,25 +63,24 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
                 const postLink = mainCategorySlug && category
                   ? `/${mainCategorySlug}/${category.slug}/${post.slug}`
                   : `/${category?.slug || "beitraege"}/${post.slug}`;
-                const isDark = index % 2 === 1;
-
                 return (
                   <div
                     key={post.id}
                     style={{
                       width: '100vw',
                       marginLeft: 'calc(-50vw + 50%)',
-                      backgroundColor: isDark ? 'rgba(181, 181, 181, 0.10)' : 'transparent',
                       display: 'flex',
                       justifyContent: 'center',
                       padding: '16px 24px',
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: index + 1,
                     }}
                   >
                     <ArticleListItem
                       post={post}
                       href={postLink}
                       bookmarkType={index < 2 ? 'neu' : undefined}
-                      variant={isDark ? 'dark' : 'light'}
                     />
                   </div>
                 );
