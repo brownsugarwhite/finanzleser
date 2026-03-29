@@ -1,9 +1,9 @@
-import Link from "next/link";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import type { Post, Category } from "@/lib/types";
+import ArticleListItem from "@/components/ui/ArticleListItem";
+import type { Post } from "@/lib/types";
 
 type CategoryLayoutProps = {
   title?: string;
@@ -52,56 +52,38 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
             </p>
           )}
 
-          {/* Posts Grid (wenn Posts vorhanden) */}
+          {/* Posts Liste */}
           {posts && posts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => {
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              {posts.map((post, index) => {
                 const category = post.categories?.nodes?.[0];
-                // Use the page's main category context for URL building
                 const postLink = mainCategorySlug && category
                   ? `/${mainCategorySlug}/${category.slug}/${post.slug}`
                   : `/${category?.slug || "beitraege"}/${post.slug}`;
+                const isDark = index % 2 === 1;
 
                 return (
-                  <article
+                  <div
                     key={post.id}
-                    className="flex flex-col border border-gray-200 rounded overflow-hidden hover:shadow-lg transition"
+                    style={{
+                      width: '100vw',
+                      marginLeft: 'calc(-50vw + 50%)',
+                      backgroundColor: isDark ? 'rgba(181, 181, 181, 0.10)' : 'transparent',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      padding: '16px 24px',
+                    }}
                   >
-                    {/* Visual */}
-                    <div className="h-48 bg-gray-50 flex items-center justify-center overflow-hidden p-4">
-                      {post.featuredImage?.node?.sourceUrl ? (
-                        <InlineSVG
-                          src={post.featuredImage.node.sourceUrl}
-                          alt={post.featuredImage.node.altText || post.title}
-                          style={{ width: '100%', height: '100%' }}
-                        />
-                      ) : (
-                        <span className="text-gray-400 text-sm">Kein Bild</span>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex flex-col flex-1 p-4">
-                      {category && (
-                        <span className="inline-block text-xs font-semibold text-blue-600 mb-2 w-fit">
-                          {category.name}
-                        </span>
-                      )}
-
-                      <h3 className="text-lg font-bold mb-2 line-clamp-2">{post.title}</h3>
-
-                      <p className="text-sm text-gray-600 mb-4 flex-1 line-clamp-3">
-                        {post.excerpt?.replace(/<[^>]*>/g, "") || ""}
-                      </p>
-
-                      <Link
-                        href={postLink}
-                        className="text-blue-600 text-sm font-semibold hover:text-blue-800 transition"
-                      >
-                        Lesen →
-                      </Link>
-                    </div>
-                  </article>
+                    <ArticleListItem
+                      post={post}
+                      href={postLink}
+                      bookmarkType={index < 2 ? 'neu' : undefined}
+                      variant={isDark ? 'dark' : 'light'}
+                    />
+                  </div>
                 );
               })}
             </div>
