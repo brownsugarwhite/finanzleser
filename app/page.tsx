@@ -38,7 +38,7 @@ export default async function LandingPage() {
       <ArticleSlider posts={sliderPosts} />
       <FeaturedPosts posts={posts} />
       <SearchSection />
-      <Footer />
+      <Footer hideNewsletter />
     </main>
   );
 }

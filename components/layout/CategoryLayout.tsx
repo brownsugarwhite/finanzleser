@@ -2,7 +2,7 @@ import InlineSVG from "@/components/ui/InlineSVG";
 import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import ArticleListItem from "@/components/ui/ArticleListItem";
+import ArticleList from "@/components/sections/ArticleList";
 import type { Post } from "@/lib/types";
 
 type CategoryLayoutProps = {
@@ -54,38 +54,7 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
 
           {/* Posts Liste */}
           {posts && posts.length > 0 && (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}>
-              {posts.map((post, index) => {
-                const category = post.categories?.nodes?.[0];
-                const postLink = mainCategorySlug && category
-                  ? `/${mainCategorySlug}/${category.slug}/${post.slug}`
-                  : `/${category?.slug || "beitraege"}/${post.slug}`;
-                return (
-                  <div
-                    key={post.id}
-                    style={{
-                      width: '100vw',
-                      marginLeft: 'calc(-50vw + 50%)',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      padding: '16px 24px',
-                      position: 'sticky',
-                      top: 0,
-                      zIndex: index + 1,
-                    }}
-                  >
-                    <ArticleListItem
-                      post={post}
-                      href={postLink}
-                      bookmarkType={index < 2 ? 'neu' : undefined}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <ArticleList posts={posts} mainCategorySlug={mainCategorySlug} />
           )}
 
           {/* Children (wenn vorhanden) */}

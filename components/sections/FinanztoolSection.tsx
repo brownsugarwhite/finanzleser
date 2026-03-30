@@ -67,12 +67,12 @@ export default function FinanztoolSection() {
           </div>
 
           {/* Lottie Platzhalter */}
-          <div style={{ minHeight: 600, width: "100%", marginTop: 24, background: "var(--color-bg-subtle)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-medium)", fontSize: 14 }}>
+          <div style={{ minHeight: 450, width: "100%", marginTop: 24, background: "white", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-medium)", fontSize: 14 }}>
             Lottie Animation Platzhalter
           </div>
 
           {/* Finanztool Slider */}
-          <div style={{ position: "sticky", bottom: 0, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
+          <div style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
             {TOOLS.map((tool, idx) => {
               const isActive = activeCard === tool.title;
               return (

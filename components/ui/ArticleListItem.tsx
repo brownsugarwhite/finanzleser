@@ -27,7 +27,7 @@ export default function ArticleListItem({ post, href, bookmarkType }: ArticleLis
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
 
   return (
-    <article style={{
+    <article data-card style={{
       width: '100%',
       maxWidth: '1100px',
       borderRadius: '36px',

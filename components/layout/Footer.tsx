@@ -3,7 +3,7 @@ import { getToolCategories } from "@/lib/wordpress";
 import NewsletterBanner from "@/components/sections/NewsletterBanner";
 import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
 
-export default async function Footer() {
+export default async function Footer({ hideNewsletter = false }: { hideNewsletter?: boolean } = {}) {
   // Hauptkategorien (hardcoded)
   const mainCategories = [
     { name: "Finanzen", slug: "finanzen" },
@@ -31,7 +31,7 @@ export default async function Footer() {
 
   return (
     <>
-      <NewsletterBanner />
+      {!hideNewsletter && <NewsletterBanner />}
       <AIAgentTeaser />
       <footer className="bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-12">
