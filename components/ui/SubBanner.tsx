@@ -13,8 +13,8 @@ export default function SubBanner({ text }: SubBannerProps) {
             {text}
           </span>
         </div>
-        <div style={{ height: "3px", width: "100%", backgroundColor: LINE_COLOR, marginTop: "2px" }} />
-        <div style={{ height: "1px", width: "100%", backgroundColor: LINE_COLOR, marginTop: "2px" }} />
+        <div style={{ height: "4px", width: "100%", backgroundColor: LINE_COLOR, marginTop: "2px" }} />
+        <div style={{ height: "2px", width: "100%", backgroundColor: LINE_COLOR, marginTop: "2px" }} />
       </div>
     </div>
   );

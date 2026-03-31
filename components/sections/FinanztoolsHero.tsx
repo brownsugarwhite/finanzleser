@@ -1,16 +1,11 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import lottie from "lottie-web";
 import type { AnimationItem } from "lottie-web";
 import Button from "@/components/ui/Button";
-import InlineSVG from "@/components/ui/InlineSVG";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
 
-// Reverse the trim path direction of the "baseline" layer
-// Swaps start/end keyframes so the stroke draws in the opposite direction
 function reverseBaselineTrim(animData: any): any {
   const data = JSON.parse(JSON.stringify(animData));
   const baseline = data.layers?.find((l: any) => l.nm === 'baseline');
@@ -27,11 +22,8 @@ function reverseBaselineTrim(animData: any): any {
   const trim = findTrim(baseline.shapes);
   if (!trim) return data;
 
-  // Original: start=0 (static), end=0→100 (animated)
-  // Reversed: start=100→0 (animated), end=100 (static)
   const originalEnd = trim.e;
   trim.e = { a: 0, k: 100, ix: trim.e.ix };
-  // Reverse the keyframe values: 0→100 becomes 100→0
   const reversedKeyframes = JSON.parse(JSON.stringify(originalEnd));
   if (reversedKeyframes.a === 1 && reversedKeyframes.k) {
     for (const kf of reversedKeyframes.k) {
@@ -42,8 +34,6 @@ function reverseBaselineTrim(animData: any): any {
 
   return data;
 }
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const TOOLS = [
   {
@@ -71,128 +61,30 @@ const TOOLS = [
 
 const Spark = () => (
   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ flexShrink: 0 }}>
-    <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
+    <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)" />
   </svg>
 );
 
-function MiniCard({ title, desc }: { title: string; desc: string }) {
-  const [infoHovered, setInfoHovered] = useState(false);
-  return (
-    <div style={{
-      width: '100%',
-      maxWidth: 200,
-      background: 'rgba(181, 181, 181, 0.10)',
-      borderRadius: 30,
-      padding: 15,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 10,
-      overflow: 'hidden',
-    }}>
-      <p lang="de" style={{
-        fontFamily: "var(--font-body, 'Open Sans', sans-serif)",
-        fontWeight: 600,
-        fontSize: 17,
-        lineHeight: 1.3,
-        color: 'var(--color-text-primary)',
-        margin: 0,
-        hyphens: 'auto',
-        WebkitHyphens: 'auto',
-      }}>
-        {title}
-      </p>
-      <p style={{
-        fontFamily: "var(--font-body, 'Open Sans', sans-serif)",
-        fontWeight: 400,
-        fontSize: 15,
-        lineHeight: 1.3,
-        color: 'var(--color-text-medium)',
-        margin: 0,
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-        overflow: 'hidden',
-      }}>
-        {desc}
-      </p>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-      }}>
-        <div
-          onMouseEnter={() => setInfoHovered(true)}
-          onMouseLeave={() => setInfoHovered(false)}
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            flexShrink: 0,
-            transition: 'background 0.1s, border 0.1s',
-            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-          }}>
-          <InlineSVG
-            src="/icons/info_i.svg"
-            alt="Info"
-            style={{ width: 9, height: 17 }}
-          />
-        </div>
-        <div style={{
-          width: 51,
-          height: 42,
-          borderRadius: 18,
-          background: 'rgba(198, 200, 204, 0.23)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          paddingRight: 5,
-          cursor: 'pointer',
-        }}>
-          <div style={{
-            width: 32,
-            height: 32,
-            borderRadius: 14,
-            backgroundColor: 'var(--color-brand)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            paddingLeft: 1,
-          }}>
-            <svg width="11" height="15" viewBox="0 0 11 15" fill="none">
-              <path d="M1.5 1.50009L9.5 7.50009L1.5 13.5001" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function FinanztoolSection() {
-  const headingRef = useRef<HTMLDivElement>(null);
+export default function FinanztoolsHero() {
   const lottieRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
-  // Heading scroll animation
+  // Measure collapsed card bar width + calculate spacer height
   useEffect(() => {
-    if (!headingRef.current) return;
-    gsap.set(headingRef.current, { opacity: 0, filter: "blur(16px)" });
-    gsap.to(headingRef.current, {
-      opacity: 1, filter: "blur(0px)", ease: "power2.out",
-      scrollTrigger: { trigger: headingRef.current, start: "bottom bottom", end: "bottom 70%", scrub: true },
-    });
-    return () => { ScrollTrigger.getAll().forEach((t) => t.kill()); };
-  }, []);
+    const measure = () => {
+      if (cardsRef.current && sectionRef.current) {
+        const w = cardsRef.current.scrollWidth;
+        sectionRef.current.style.setProperty("--tools-bar-width", w + "px");
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [activeCard]);
 
-  // Patch all strokes to 1px non-scaling
   function patchStrokes() {
     if (!lottieRef.current) return;
     lottieRef.current.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect').forEach(el => {
@@ -215,7 +107,7 @@ export default function FinanztoolSection() {
     animRef.current = anim;
   }
 
-  // Lottie animation — lazy load when visible
+  // Lottie — lazy load
   useEffect(() => {
     if (!lottieRef.current) return;
     const el = lottieRef.current;
@@ -243,21 +135,26 @@ export default function FinanztoolSection() {
   }, []);
 
   return (
-    <section style={{ width: "100%", maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
-      <div style={{ display: "flex", gap: 24, marginTop: "-100vh" }}>
+    <section ref={sectionRef} style={{ width: "100%" }}>
+      <div style={{ display: "flex", gap: 24, maxWidth: 1400, padding: "0 clamp(20px, 4vw, 40px)" }}>
+        {/* Left: finanztools_container */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Heading */}
-          <div ref={headingRef} style={{ marginTop: "100vh" }}>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontStyle: "italic", fontWeight: 300, fontSize: 21, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
+
+          {/* 1. Spacer — dynamisch berechnet */}
+          <div style={{ height: "calc(50vh - 220px)", width: "100%" }} />
+
+          {/* 2. Heading — sticky bottom */}
+          <div style={{ width: 460, height: 100, position: "sticky", bottom: 120, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontStyle: "italic", fontWeight: 300, fontSize: 21, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: "nowrap" }}>
+            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: "nowrap", textAlign: "right" }}>
               Alles in eigener Hand
             </p>
           </div>
 
-          {/* Lottie Animation */}
-          <div style={{ width: "100%", marginTop: -76 }}>
+          {/* 3. Lottie */}
+          <div style={{ width: "100%", marginTop: -76, marginBottom: -270 }}>
             <div ref={lottieRef} style={{ width: "100%" }} />
             <div style={{ position: 'relative', top: -300, display: 'flex', gap: 12 }}>
               <button
@@ -293,8 +190,8 @@ export default function FinanztoolSection() {
             </div>
           </div>
 
-          {/* Finanztool Slider */}
-          <div style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
+          {/* 4. Tool Cards — sticky bottom */}
+          <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
             {TOOLS.map((tool, idx) => {
               const isActive = activeCard === tool.title;
               return (
@@ -303,7 +200,7 @@ export default function FinanztoolSection() {
                   <div
                     onClick={() => setActiveCard(isActive ? null : tool.title)}
                     style={{
-                      width: isActive ? 470 : 150,
+                      width: isActive ? 470 : 140,
                       borderRadius: isActive ? 36 : 23,
                       background: "var(--color-tool-card-bg)",
                       backdropFilter: "blur(8px)",
@@ -376,39 +273,8 @@ export default function FinanztoolSection() {
           </div>
         </div>
 
-        {/* Preview Wrapper */}
-        <div style={{ width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', gap: 0, paddingTop: '100vh' }}>
-          {/* Heading */}
-          <p style={{
-            fontFamily: "Merriweather, serif",
-            fontWeight: 700,
-            fontSize: 22,
-            lineHeight: 1.3,
-            color: "var(--color-text-primary)",
-            margin: "0 0 20px 0",
-            textAlign: 'right',
-          }}>
-            Neuste<br />Rechner
-          </p>
-
-          {/* Mini Cards */}
-          {[
-            { title: "Rentenbesteuerung Rechner 2026", desc: "Die Rentenbesteuerung bezieht sich auf die Besteuerung von Einkommen aus..." },
-            { title: "Rentenrechner 2026", desc: "Die mittels dem Rentenrechner ermittelte Rentenversicherung dient grundsätzlich..." },
-            { title: "Altersteilzeitrechner 2026", desc: "Die Altersteilzeit und die Frührente kann nach dem Altersteilzeitrechner und dem..." },
-          ].map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              {idx > 0 && (
-                <div style={{ padding: '10px 0' }}>
-                  <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
-                    <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
-                  </svg>
-                </div>
-              )}
-              <MiniCard title={item.title} desc={item.desc} />
-            </div>
-          ))}
-        </div>
+        {/* Right: preview_container */}
+        <div style={{ width: 300, flexShrink: 0 }} />
       </div>
     </section>
   );

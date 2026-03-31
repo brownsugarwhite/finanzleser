@@ -1,11 +1,10 @@
 import Header from "@/components/layout/Header";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
-import LandingHero from "@/components/sections/LandingHero";
-import HeroSection from "@/components/sections/HeroSection";
+import LandingIntro from "@/components/sections/LandingIntro";
+import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
 import ArticleSlider from "@/components/sections/ArticleSlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
-import FinanztoolSection from "@/components/sections/FinanztoolSection";
 import SearchSection from "@/components/sections/SearchSection";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts, getPostsByCategory, getCategoryWithChildren } from "@/lib/wordpress";
@@ -30,9 +29,8 @@ export default async function LandingPage() {
     <main className="bg-white">
       <LandingBodyAttr />
       <Header />
-      <LandingHero />
-      <HeroSection posts={posts.slice(0, 3)} />
-      <FinanztoolSection />
+      <LandingIntro />
+      <FinanztoolsHero />
       {insuranceCategory && insuranceCategory.children.length > 0 && (
         <SubcategorySlider
           categories={insuranceCategory.children}

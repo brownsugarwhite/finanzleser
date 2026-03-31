@@ -28,13 +28,14 @@ const EASE = "power2.out";
 const GAP = 10;
 const CONTENT_GAP = 20; // Abstand Input ↔ Button
 
-export default function LandingHero() {
+export default function LandingIntro() {
   const [mode, setMode] = useState<"search" | "ki">("search");
   const [searchInput, setSearchInput] = useState("");
   const [kiInput, setKiInput] = useState("");
   const router = useRouter();
   const navItems = useNavItems();
 
+  const heroRef = useRef<HTMLElement>(null);
   const searchPillRef = useRef<HTMLFormElement>(null);
   const kiPillRef = useRef<HTMLDivElement>(null);
   const searchContentRef = useRef<HTMLDivElement>(null);
@@ -60,6 +61,13 @@ export default function LandingHero() {
   useLayoutEffect(() => {
     if (!isFirstRender.current) return;
     isFirstRender.current = false;
+
+    // Pull hero to viewport top
+    if (heroRef.current) {
+      const offset = heroRef.current.offsetTop;
+      heroRef.current.style.marginTop = -offset + "px";
+      heroRef.current.style.paddingTop = offset + "px";
+    }
 
     const searchPill = searchPillRef.current!;
     const kiPill = kiPillRef.current!;
@@ -183,10 +191,13 @@ export default function LandingHero() {
 
   return (
     <section
+      ref={heroRef}
+      className="landing-hero"
       style={{
         backgroundColor: "var(--color-bg-page)",
-        paddingTop: "0px",
-        paddingBottom: "40px",
+        height: "50vh",
+        display: "flex",
+        alignItems: "flex-end",
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>

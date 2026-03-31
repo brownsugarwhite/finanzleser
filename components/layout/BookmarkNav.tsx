@@ -88,21 +88,6 @@ export default function BookmarkNav() {
         />
       </div>
 
-      {/* Blur rectangle behind the gradient body (not spikes) */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "calc(100% - 40px)",
-          height: "100%",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          pointerEvents: "none",
-          zIndex: -1,
-        }}
-      />
-
       {/* Green rectangle with buttons */}
       <div
         style={{
