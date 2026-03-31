@@ -1,8 +1,17 @@
 "use client";
 
-import { useRef, useCallback, useLayoutEffect, useState } from "react";
+import { useRef, useCallback, useLayoutEffect, useState, Fragment } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import gsap from "gsap";
+import { useNavItems } from "@/lib/NavContext";
+import Spacer from "@/components/ui/Spacer";
+
+const Spark = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block" }}>
+    <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)" />
+  </svg>
+);
 
 function SearchIcon() {
   return (
@@ -24,6 +33,7 @@ export default function LandingHero() {
   const [searchInput, setSearchInput] = useState("");
   const [kiInput, setKiInput] = useState("");
   const router = useRouter();
+  const navItems = useNavItems();
 
   const searchPillRef = useRef<HTMLFormElement>(null);
   const kiPillRef = useRef<HTMLDivElement>(null);
@@ -296,6 +306,46 @@ export default function LandingHero() {
               <span style={{ fontWeight: 400, color: "#ffffff" }}>Agent</span>
             </button>
           </div>
+        </div>
+
+        {/* Nav Links */}
+        <nav
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "39px",
+            maxWidth: "600px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Spark />
+          {navItems.map((item, i) => (
+            <Fragment key={item.href}>
+              {i > 0 && <Spark />}
+              <Link
+                href={item.href}
+                style={{
+                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var(--color-nav-text)",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                  padding: "12px 20px",
+                }}
+              >
+                {item.label}
+              </Link>
+            </Fragment>
+          ))}
+          <Spark />
+        </nav>
+
+        {/* Spacer */}
+        <div style={{ marginTop: "20px", maxWidth: "960px", marginLeft: "auto", marginRight: "auto" }}>
+          <Spacer noMargin />
         </div>
       </div>
     </section>

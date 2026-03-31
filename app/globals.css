@@ -47,6 +47,17 @@ body[data-landing] .logo-wrapper {
   pointer-events: none !important;
 }
 
+/* ── Hide topbar + spacer on landing page ── */
+body[data-landing] .topbar-grid {
+  display: none !important;
+}
+body[data-landing] header > .spacer {
+  display: none !important;
+}
+body[data-landing] {
+  padding-top: 50 !important;
+}
+
 /* ── Landing page mobile fixes ── */
 @media (max-width: 1024px) {
   body[data-landing] .landing-nav {

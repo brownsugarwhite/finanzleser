@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import LandingHero from "@/components/sections/LandingHero";
 import HeroSection from "@/components/sections/HeroSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
@@ -27,6 +28,7 @@ export default async function LandingPage() {
 
   return (
     <main className="bg-white">
+      <LandingBodyAttr />
       <Header />
       <LandingHero />
       <HeroSection />

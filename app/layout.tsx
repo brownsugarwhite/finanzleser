@@ -19,8 +19,6 @@ const merriweather = Merriweather({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "700", "900"],
-  style: ["normal", "italic"],
 });
 
 export const viewport: Viewport = {
