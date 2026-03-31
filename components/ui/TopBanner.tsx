@@ -7,7 +7,7 @@ interface TopBannerProps {
   text: string;
 }
 
-const DOT_SIZE = 4;
+const DOT_SIZE = 3;
 const DOT_COLOR = "rgba(104, 108, 106, 0.7)";
 const SPEED = 40;
 const HIT_BUFFER_FRONT = 2;  // vor dem Text (links)
@@ -21,7 +21,7 @@ export default function TopBanner({ text }: TopBannerProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const dotCount = 120;
+  const dotCount = 200;
 
   useLayoutEffect(() => {
     const track = trackRef.current!;
@@ -93,17 +93,17 @@ export default function TopBanner({ text }: TopBannerProps) {
   const textStyle: React.CSSProperties = {
     fontFamily: "var(--font-body)",
     fontSize: "16px",
-    fontWeight: 550,
+    fontWeight: 500,
     lineHeight: "1.5em",
     color: textColor,
-    letterSpacing: "0.2px",
+    letterSpacing: "0.1px",
     whiteSpace: "nowrap",
     flexShrink: 0,
   };
 
   return (
     <div style={{ width: "100%", marginTop: "13px", position: "relative", zIndex: 60 }}>
-      <div className="top-banner" style={{ maxWidth: "1100px", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
+      <div className="top-banner" style={{ maxWidth: "960px", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
         {/* 3px line */}
         <div style={{ height: "3px", backgroundColor: lineColor }} />
         {/* 1px line */}
@@ -115,7 +115,7 @@ export default function TopBanner({ text }: TopBannerProps) {
           style={{
             position: "relative",
             overflow: "hidden",
-            height: "1.5em",
+            height: "1.4em",
             display: "flex",
             alignItems: "center",
             fontSize: "16px",
@@ -131,7 +131,7 @@ export default function TopBanner({ text }: TopBannerProps) {
               bottom: 0,
               display: "flex",
               alignItems: "center",
-              gap: "7px",
+              gap: "6px",
               zIndex: 1,
             }}
           >

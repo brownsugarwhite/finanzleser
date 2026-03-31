@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import gsap from "gsap";
 import { useNavItems } from "@/lib/NavContext";
-import Spacer from "@/components/ui/Spacer";
+import TopBanner from "@/components/ui/TopBanner";
 
 const Spark = () => (
   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block" }}>
@@ -185,7 +185,7 @@ export default function LandingHero() {
     <section
       style={{
         backgroundColor: "var(--color-bg-page)",
-        paddingTop: "60px",
+        paddingTop: "0px",
         paddingBottom: "40px",
       }}
     >
@@ -328,7 +328,7 @@ export default function LandingHero() {
                 href={item.href}
                 style={{
                   fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  fontSize: "18px",
+                  fontSize: "17px",
                   fontWeight: 600,
                   color: "var(--color-nav-text)",
                   textDecoration: "none",
@@ -343,11 +343,12 @@ export default function LandingHero() {
           <Spark />
         </nav>
 
-        {/* Spacer */}
-        <div style={{ marginTop: "20px", maxWidth: "960px", marginLeft: "auto", marginRight: "auto" }}>
-          <Spacer noMargin />
+        {/* Banner */}
+        <div style={{ marginTop: "20px" }}>
+          <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
         </div>
       </div>
+
     </section>
   );
 }
