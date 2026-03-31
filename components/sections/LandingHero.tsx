@@ -15,9 +15,9 @@ const Spark = () => (
 
 function SearchIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-      <circle cx="8.5" cy="8.5" r="6" stroke="var(--color-text-medium)" strokeWidth="2" />
-      <path d="M13 13L18 18" stroke="var(--color-text-medium)" strokeWidth="2" strokeLinecap="round" />
+    <svg width="21" height="22" viewBox="0 0 21 22" fill="none" style={{ flexShrink: 0 }}>
+      <path d="M12.04 16.7812C16.4362 16.7812 20 13.2484 20 8.89059C20 4.53274 16.4362 1 12.04 1C7.64375 1 4.07991 4.53274 4.07991 8.89059C4.07991 13.2484 7.64375 16.7812 12.04 16.7812Z" stroke="var(--color-text-medium)" strokeWidth="2" strokeMiterlimit="10"/>
+      <path d="M0.591998 17.6095C-0.192466 18.3872 -0.198015 19.6535 0.579603 20.4379C1.35722 21.2224 2.62354 21.228 3.408 20.4503L2 19.0299L0.591998 17.6095ZM6.27569 14.7916L4.86769 13.3712L0.591998 17.6095L2 19.0299L3.408 20.4503L7.68369 16.212L6.27569 14.7916Z" fill="var(--color-text-medium)"/>
     </svg>
   );
 }
