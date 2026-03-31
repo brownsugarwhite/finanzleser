@@ -142,17 +142,19 @@ export default function FinanztoolsHero() {
         <div style={{ flex: 1, minWidth: 0 }}>
 
           {/* 1. Spacer — dynamisch berechnet */}
-          <div style={{ height: "calc(50vh - 220px)", width: "100%" }} />
+          <div style={{ height: "60vh", width: "100%" }} />
 
-          {/* 2. Heading — sticky bottom */}
-          <div style={{ width: 460, height: 100, position: "sticky", bottom: 120, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontStyle: "italic", fontWeight: 300, fontSize: 21, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0, textAlign: "right", paddingRight: 3 }}>
+          {/* 2. Subheading — sticky bottom */}
+          <div style={{ width: 430, height: 23, position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: "nowrap", textAlign: "right" }}>
-              Alles in eigener Hand
-            </p>
           </div>
+
+          {/* 3. Heading */}
+          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: "nowrap", textAlign: "right", width: 430 }}>
+            Alles in eigener Hand
+          </p>
 
           {/* 3. Lottie */}
           <div style={{ width: "100%", marginTop: -76, marginBottom: -270 }}>
@@ -201,7 +203,7 @@ export default function FinanztoolsHero() {
                   <div
                     onClick={() => setActiveCard(isActive ? null : tool.title)}
                     style={{
-                      width: isActive ? 470 : 140,
+                      width: isActive ? 470 : 130,
                       borderRadius: isActive ? 36 : 23,
                       background: "var(--color-tool-card-bg)",
                       backdropFilter: "blur(8px)",
@@ -315,7 +317,7 @@ export default function FinanztoolsHero() {
         <div style={{ width: 250, flexShrink: 0, alignSelf: "stretch", paddingTop: 50, paddingLeft: 23 }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
-            fontSize: "19px",
+            fontSize: "18px",
             fontWeight: 700,
             lineHeight: 1.3,
             color: "var(--color-text-primary)",

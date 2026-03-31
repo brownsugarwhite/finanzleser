@@ -214,12 +214,12 @@ export default function LandingIntro() {
         <p
           style={{
             fontFamily: "'Merriweather', serif",
-            fontSize: "19px",
+            fontSize: "18px",
             fontWeight: 300,
             fontStyle: "italic",
             color: "var(--color-text-medium)",
             textAlign: "center",
-            margin: "0 0 27px 0",
+            margin: "0 0 36px 0",
           }}
         >
           Das digitale Finanzmagazin
@@ -354,7 +354,7 @@ export default function LandingIntro() {
           <Spark />
         </nav>
 
-        <div style={{ marginTop: "12px", maxWidth: "1000px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
+        <div style={{ marginTop: "4px", maxWidth: "1000px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <DotSpacer noMargin maxWidth="100%" />
           </div>
