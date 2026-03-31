@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import LandingHero from "@/components/sections/LandingHero";
 import HeroSection from "@/components/sections/HeroSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
 import ArticleSlider from "@/components/sections/ArticleSlider";
@@ -27,6 +28,7 @@ export default async function LandingPage() {
   return (
     <main className="bg-white">
       <Header />
+      <LandingHero />
       <HeroSection />
       <FinanztoolSection />
       {insuranceCategory && insuranceCategory.children.length > 0 && (
