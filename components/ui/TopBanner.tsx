@@ -8,13 +8,13 @@ interface TopBannerProps {
 }
 
 const DOT_SIZE = 3;
-const DOT_COLOR = "rgba(104, 108, 106, 0.7)";
+const DOT_COLOR = "var(--color-dot)";
 const SPEED = 40;
 const HIT_BUFFER_FRONT = 2;  // vor dem Text (links)
 const HIT_BUFFER_BACK = 10;   // hinter dem Text (rechts, negativ = näher)
 
 export default function TopBanner({ text }: TopBannerProps) {
-  const lineColor = "rgba(104, 108, 106, 0.7)";
+  const lineColor = "var(--color-dot)";
   const textColor = "rgba(104, 108, 106, 0.8)";
 
   const rowRef = useRef<HTMLDivElement>(null);

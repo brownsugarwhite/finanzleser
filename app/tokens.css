@@ -85,6 +85,12 @@
   --color-tool-vergleiche: #06D496;
   --color-tool-checklisten: #BC38EC;
 
+  /* Pill / Input Background */
+  --color-pill-bg: rgba(198, 200, 204, 0.23);
+
+  /* Decorative Dots */
+  --color-dot: rgba(104, 108, 106, 0.7);
+
   /* Nav Pill */
   --pill-bg: var(--color-bg-page);
   --pill-border: rgba(255, 255, 255, 0.4);

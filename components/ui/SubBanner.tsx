@@ -1,4 +1,4 @@
-const LINE_COLOR = "rgba(104, 108, 106, 0.7)";
+const LINE_COLOR = "var(--color-dot)";
 
 interface SubBannerProps {
   text: string;

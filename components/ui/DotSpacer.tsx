@@ -1,4 +1,4 @@
-const DOT_COLOR = "rgba(104, 108, 106, 0.7)";
+const DOT_COLOR = "var(--color-dot)";
 
 export default function DotSpacer({ noMargin = false, maxWidth = "860px" }: { noMargin?: boolean; maxWidth?: string }) {
   return (
