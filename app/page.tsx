@@ -7,7 +7,6 @@ import ArticleSlider from "@/components/sections/ArticleSlider";
 import FeaturedPosts from "@/components/sections/FeaturedPosts";
 import FinanztoolSection from "@/components/sections/FinanztoolSection";
 import SearchSection from "@/components/sections/SearchSection";
-import SubBanner from "@/components/ui/SubBanner";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts, getPostsByCategory, getCategoryWithChildren } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
@@ -32,10 +31,7 @@ export default async function LandingPage() {
       <LandingBodyAttr />
       <Header />
       <LandingHero />
-
-      <SubBanner text="Mit neu überarbeiteten Rechnern, Vergleichen und Checklisten haben Sie die volle Kontrolle über Ihre Finanzen!" />
-
-      <HeroSection />
+      <HeroSection posts={posts.slice(0, 3)} />
       <FinanztoolSection />
       {insuranceCategory && insuranceCategory.children.length > 0 && (
         <SubcategorySlider

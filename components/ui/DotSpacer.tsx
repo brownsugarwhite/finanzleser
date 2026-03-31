@@ -1,10 +1,10 @@
 const DOT_COLOR = "rgba(104, 108, 106, 0.7)";
 
-export default function DotSpacer({ noMargin = false }: { noMargin?: boolean }) {
+export default function DotSpacer({ noMargin = false, maxWidth = "860px" }: { noMargin?: boolean; maxWidth?: string }) {
   return (
     <div
       style={{
-        maxWidth: "1100px",
+        maxWidth,
         margin: noMargin ? "0 auto" : "40px auto",
         display: "flex",
         alignItems: "center",

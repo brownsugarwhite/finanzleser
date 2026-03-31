@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import gsap from "gsap";
 import { useNavItems } from "@/lib/NavContext";
-import TopBanner from "@/components/ui/TopBanner";
+import DotSpacer from "@/components/ui/DotSpacer";
 
 const Spark = () => (
   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block" }}>
@@ -15,7 +15,7 @@ const Spark = () => (
 
 function SearchIcon() {
   return (
-    <svg width="21" height="22" viewBox="0 0 21 22" fill="none" style={{ flexShrink: 0 }}>
+    <svg width="16" height="18" viewBox="0 0 21 22" fill="none" style={{ flexShrink: 0 }}>
       <path d="M12.04 16.7812C16.4362 16.7812 20 13.2484 20 8.89059C20 4.53274 16.4362 1 12.04 1C7.64375 1 4.07991 4.53274 4.07991 8.89059C4.07991 13.2484 7.64375 16.7812 12.04 16.7812Z" stroke="var(--color-text-medium)" strokeWidth="2" strokeMiterlimit="10"/>
       <path d="M0.591998 17.6095C-0.192466 18.3872 -0.198015 19.6535 0.579603 20.4379C1.35722 21.2224 2.62354 21.228 3.408 20.4503L2 19.0299L0.591998 17.6095ZM6.27569 14.7916L4.86769 13.3712L0.591998 17.6095L2 19.0299L3.408 20.4503L7.68369 16.212L6.27569 14.7916Z" fill="var(--color-text-medium)"/>
     </svg>
@@ -172,7 +172,7 @@ export default function LandingHero() {
     border: "none",
     cursor: "pointer",
     fontFamily: "var(--font-body)",
-    fontSize: "17px",
+    fontSize: "16px",
     color: "#ffffff",
     lineHeight: "40px",
     whiteSpace: "nowrap",
@@ -195,7 +195,7 @@ export default function LandingHero() {
           <img
             src="/icons/fl_logo.svg"
             alt="finanzleser"
-            style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+            style={{ width: "100%", maxWidth: "460px", height: "auto" }}
           />
         </div>
 
@@ -203,12 +203,12 @@ export default function LandingHero() {
         <p
           style={{
             fontFamily: "'Merriweather', serif",
-            fontSize: "21px",
+            fontSize: "19px",
             fontWeight: 300,
             fontStyle: "italic",
             color: "var(--color-text-medium)",
             textAlign: "center",
-            margin: "0 0 32px 0",
+            margin: "0 0 27px 0",
           }}
         >
           Das digitale Finanzmagazin
@@ -328,7 +328,7 @@ export default function LandingHero() {
                 href={item.href}
                 style={{
                   fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  fontSize: "17px",
+                  fontSize: "16px",
                   fontWeight: 600,
                   color: "var(--color-nav-text)",
                   textDecoration: "none",
@@ -343,12 +343,16 @@ export default function LandingHero() {
           <Spark />
         </nav>
 
-        {/* Banner */}
-        <div style={{ marginTop: "20px" }}>
-          <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
+        <div style={{ marginTop: "12px", maxWidth: "1000px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <DotSpacer noMargin maxWidth="100%" />
+          </div>
+          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "4px", whiteSpace: "nowrap" , paddingBottom: 2 }}>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-text-medium)" }}>powered by</span>
+            <img src="/icons/finconext_logo.svg" alt="Finconext" style={{ width: "80px", height: "auto" }} />
+          </div>
         </div>
       </div>
-
     </section>
   );
 }

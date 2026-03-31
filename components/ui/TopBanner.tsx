@@ -102,8 +102,8 @@ export default function TopBanner({ text }: TopBannerProps) {
   };
 
   return (
-    <div style={{ width: "100%", marginTop: "13px", position: "relative", zIndex: 60 }}>
-      <div className="top-banner" style={{ maxWidth: "960px", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
+    <div style={{ width: "100%", marginTop: "13px", position: "relative", padding: "0 13px", zIndex: 60 }}>
+      <div className="top-banner" style={{ width: "100%", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
         {/* 3px line */}
         <div style={{ height: "3px", backgroundColor: lineColor }} />
         {/* 1px line */}

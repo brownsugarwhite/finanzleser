@@ -71,10 +71,6 @@ export default function BookmarkNav() {
   return (
     <div
       style={{
-        position: "fixed",
-        top: 23,
-        right: 0,
-        zIndex: 52,
         display: "flex",
         alignItems: "center",
         height: 50,
