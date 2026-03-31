@@ -6,6 +6,7 @@ import { getNavItems } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBadge from "@/components/layout/LogoBadge";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
+import TopBanner from "@/components/ui/TopBanner";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -40,6 +41,7 @@ export default async function RootLayout({
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
+        <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
         <NavProvider items={navItems}>
           <Providers>{children}</Providers>
           <ProgressiveBlur height={150} />

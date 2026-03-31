@@ -4,7 +4,7 @@
 
 /* Space for fixed logo + absolute nav bar */
 body {
-  padding-top: 87px;
+  padding-top: 0;
 }
 
 /* ── Hide top navigation on tablet/mobile ── */
@@ -55,8 +55,9 @@ body[data-landing] header > .spacer {
   display: none !important;
 }
 body[data-landing] {
-  padding-top: 50 !important;
+  padding-top: 0 !important;
 }
+
 
 /* ── Landing page mobile fixes ── */
 @media (max-width: 1024px) {
