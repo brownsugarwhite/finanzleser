@@ -72,6 +72,7 @@ export default function FinanztoolsHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
+
   // Measure collapsed card bar width + calculate spacer height
   useEffect(() => {
     const measure = () => {
@@ -136,7 +137,7 @@ export default function FinanztoolsHero() {
 
   return (
     <section ref={sectionRef} style={{ width: "100%" }}>
-      <div style={{ display: "flex", gap: 24, maxWidth: 1400, padding: "0 clamp(20px, 4vw, 40px)" }}>
+      <div style={{ display: "flex", maxWidth: 1400, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
         <div style={{ flex: 1, minWidth: 0 }}>
 
@@ -274,7 +275,55 @@ export default function FinanztoolsHero() {
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 300, flexShrink: 0 }} />
+        {/* Vertical dot spacer */}
+        <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
+          {/* Dots */}
+          <div style={{ position: "relative", flex: 1, overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: 60, bottom: 5, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+              {Array.from({ length: 500 }, (_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    width: "3px",
+                    height: "3px",
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(104, 108, 106, 0.7)",
+                    flexShrink: 0,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+          {/* Fade mask — fixed to viewport bottom */}
+          <div style={{
+            position: "sticky",
+            bottom: 0,
+            height: "33px",
+            marginTop: "-33px",
+            marginBottom: "-33px",
+            background: "var(--color-bg-page)",
+            pointerEvents: "none",
+            zIndex: 2,
+          }} />
+          {/* Arrow */}
+          <div style={{ position: "sticky", bottom: 23, display: "flex", justifyContent: "center", zIndex: 3 }}>
+            <img src="/icons/arrow down.svg" alt="" style={{ width: 12, height: "auto" }} />
+          </div>
+        </div>
+
+        {/* Right: preview_container */}
+        <div style={{ width: 250, flexShrink: 0, alignSelf: "stretch", paddingTop: 50, paddingLeft: 23 }}>
+          <p style={{
+            fontFamily: "'Merriweather', serif",
+            fontSize: "19px",
+            fontWeight: 700,
+            lineHeight: 1.3,
+            color: "var(--color-text-primary)",
+            margin: 0,
+          }}>
+            Neuste Beiträge
+          </p>
+        </div>
       </div>
     </section>
   );
