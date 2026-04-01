@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 interface TOCItem {
@@ -58,41 +58,76 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   };
 
   useEffect(() => {
-    // Versuche zu mehreren Zeitpunkten zu laden
     const timers = [
-      100, 200, 300, 500, 700, 1000, 1500, 2000, 3000
-    ].map(ms => setTimeout(loadTOC, ms));
+      100, 200, 300, 500, 700, 1000, 1500, 2000, 3000,
+    ].map((ms) => setTimeout(loadTOC, ms));
 
-    return () => timers.forEach(timer => clearTimeout(timer));
+    return () => timers.forEach((timer) => clearTimeout(timer));
   }, []);
 
+  const truncate = (text: string, max = 100) =>
+    text.length > max ? text.substring(0, max) + "…" : text;
+
+  if (items.length === 0) return null;
+
   return (
-    <nav className="hidden lg:block sticky top-24">
-      <div className="text-sm">
-        <h3 className="font-bold text-gray-900 mb-4">Inhaltsverzeichnis</h3>
-        {items.length === 0 && (
-          <div className="text-xs text-gray-500 p-2 bg-gray-100 rounded">
-            Keine Überschriften gefunden
-          </div>
-        )}
-        <ol className="space-y-2">
-          {items.map((item, idx) => (
-            <li key={item.id} className="flex gap-2">
-              <span className="flex-shrink-0 text-gray-700">{idx + 1}.</span>
+    <nav>
+      <ol style={{ display: "flex", flexDirection: "column", gap: "14px", listStyle: "none", margin: 0, padding: 0 }}>
+        {items.map((item, idx) => {
+          const isActive = activeId === item.id;
+          return (
+            <li key={item.id}>
               <Link
                 href={`#${item.id}`}
-                className={`transition ${
-                  activeId === item.id
-                    ? "text-blue-600 font-medium"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "13px",
+                  textDecoration: "none",
+                }}
               >
-                {item.text}
+                {/* Nummer-Badge */}
+                <span
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    minWidth: "30px",
+                    borderRadius: "13px",
+                    border: `1px solid ${isActive ? "var(--color-brand)" : "var(--color-text-medium)"}`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "Merriweather, serif",
+                    fontWeight: 300,
+                    fontStyle: "italic",
+                    fontSize: "19px",
+                    lineHeight: 1,
+                    transform: "skewX(-5deg)",
+                    color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
+                    transition: "color 0.2s ease, border-color 0.2s ease",
+                  }}
+                >
+                  {idx + 1}
+                </span>
+                {/* Item-Text */}
+                <span
+                  style={{
+                    fontFamily: "Merriweather, serif",
+                    fontWeight: 300,
+                    fontStyle: "italic",
+                    fontSize: "15px",
+                    color: isActive ? "var(--color-brand)" : "var(--color-text-primary)",
+                    lineHeight: "1.4",
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  {truncate(item.text)}
+                </span>
               </Link>
             </li>
-          ))}
-        </ol>
-      </div>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

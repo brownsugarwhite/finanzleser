@@ -20,7 +20,11 @@ const merriweather = Merriweather({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["opsz", "wdth"],
 });
+
 
 export const viewport: Viewport = {
   viewportFit: "cover",
