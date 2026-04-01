@@ -40,8 +40,8 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
           <div className="flex gap-8">
             {/* Sidebar (TOC) */}
             {sidebar && (
-              <aside className="hidden lg:block w-64 shrink-0">
-                <div className="sticky top-24">
+              <aside className="hidden lg:block shrink-0" style={{ width: "300px" }}>
+                <div className="sticky top-24" style={{ position: "sticky", zIndex: 51 }}>
                   {sidebar}
                 </div>
               </aside>
