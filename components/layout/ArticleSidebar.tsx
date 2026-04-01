@@ -19,7 +19,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         alignSelf: "stretch",
         flexShrink: 1,
         width: "100%",
-        minWidth: "400px",
+        minWidth: collapsed ? "auto" : "400px",
         paddingLeft: "27px",
       }}
     >

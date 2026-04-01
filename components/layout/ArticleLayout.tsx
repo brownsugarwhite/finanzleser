@@ -37,12 +37,12 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
       <Header />
       <main className="min-h-screen bg-white">
         <div className="pb-12" style={{ paddingTop: 23 }}>
-          <div className="flex gap-8">
+          <div className="flex">
             {/* Sidebar Left (TOC + DotLine) */}
             {sidebar}
 
             {/* Article Content */}
-            <div style={{ width: "100%", maxWidth: "860px", flexShrink: 0, margin: "0 auto" }}>
+            <div style={{ width: "100%", maxWidth: "850px", flexShrink: 0, margin: "0 auto" }}>
               <Breadcrumb items={breadcrumbItems} />
               {category && mainCategory && (
                 <Link
@@ -161,7 +161,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
             </div>
 
             {/* Sidebar Right — flexibel, schrumpft */}
-            <div className="hidden lg:block" style={{ width: "100%", flexShrink: 1 }} />
+            <div className="block" style={{ width: "100%", flexShrink: 1 }} />
           </div>
         </div>
       </main>
