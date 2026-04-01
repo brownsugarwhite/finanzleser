@@ -36,13 +36,13 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
     <>
       <Header />
       <main className="min-h-screen bg-white">
-        <div className="pb-12" style={{ paddingTop: 23, paddingLeft: '36px', paddingRight: '50px' }}>
+        <div className="pb-12" style={{ paddingTop: 23 }}>
           <div className="flex gap-8">
             {/* Sidebar Left (TOC + DotLine) */}
             {sidebar}
 
             {/* Article Content */}
-            <div style={{ width: "100%", maxWidth: "760px", flexShrink: 0 }}>
+            <div style={{ width: "100%", maxWidth: "860px", flexShrink: 0, margin: "0 auto" }}>
               <Breadcrumb items={breadcrumbItems} />
               {category && mainCategory && (
                 <Link

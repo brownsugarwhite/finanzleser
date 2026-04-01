@@ -15,15 +15,15 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
       className="block"
       style={{
         display: "flex",
-        gap: collapsed ? "12px" : "36px",
+        gap: collapsed ? "10px" : "23px",
         alignSelf: "stretch",
-        flexShrink: collapsed ? 1 : 0,
-        width: collapsed ? "100%" : "auto",
-        minWidth: "auto",
-        paddingLeft: "36px",
+        flexShrink: 1,
+        width: "100%",
+        minWidth: "400px",
+        paddingLeft: "27px",
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)" }}>
+      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
         <h3
           style={{
             fontFamily: "Merriweather, serif",
@@ -46,7 +46,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         </div>
       </div>
       {/* Toggle + Vertical DotLine */}
-      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 51 }}>
         {/* Toggle Button */}
         <div style={{ position: "sticky", top: "92px", zIndex: 3, marginTop: "-6px" }}>
           <button
