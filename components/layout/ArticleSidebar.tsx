@@ -22,18 +22,59 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         minWidth: collapsed ? 0 : "auto",
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51 }}>
+      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start" }}>
         <TableOfContents
           content={content}
           collapsed={collapsed}
           onToggleCollapsed={() => setCollapsed(!collapsed)}
         />
       </div>
-      {/* Vertical DotLine */}
-      <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
+      {/* Toggle + Vertical DotLine */}
+      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", marginLeft: collapsed ? "-30px" : 23 }}>
+        {/* Toggle Button */}
+        <div style={{ position: "sticky", top: "96px", zIndex: 3 }}>
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              width: "24px",
+              height: "24px",
+              borderRadius: "50%",
+              border: "1px solid var(--color-text-medium)",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 0,
+            }}
+            aria-label={collapsed ? "Inhaltsverzeichnis aufklappen" : "Inhaltsverzeichnis zuklappen"}
+          >
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+              <path
+                d={collapsed ? "M2 4.5L6 8.5L10 4.5" : "M2 7.5L6 3.5L10 7.5"}
+                stroke="var(--color-text-medium)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        {/* Top fade mask */}
+        <div style={{
+          position: "sticky",
+          top: 0,
+          width: "100%",
+          height: "121px",
+          marginTop: "-121px",
+          background: "var(--color-bg-page)",
+          pointerEvents: "none",
+          zIndex: 2,
+        }} />
         <div style={{
           flex: 1,
-          marginTop: 60,
+          width: "3px",
+          marginTop: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat-y",
           backgroundPosition: "center top",
@@ -43,6 +84,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         <div style={{
           position: "sticky",
           bottom: 0,
+          width: "100%",
           height: "33px",
           marginTop: "-33px",
           marginBottom: "-33px",

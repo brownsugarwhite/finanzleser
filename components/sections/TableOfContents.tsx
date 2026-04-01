@@ -145,46 +145,18 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
   return (
     <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
       <style>{tocHoverStyles}</style>
-      <div style={{ display: "flex", alignItems: "center", gap: collapsed ? "10px" : "0px", justifyContent: collapsed ? "center" : "space-between", marginBottom: collapsed ? "12px" : "23px" }}>
-        <h3
-          style={{
-            fontFamily: "Merriweather, serif",
-            fontSize: collapsed ? "14px" : "18px",
-            fontWeight: 600,
-            color: "var(--color-text-primary)",
-            margin: 0,
-          }}
-        >
-          {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
-        </h3>
-        <button
-          onClick={() => onToggleCollapsed?.()}
-          style={{
-            width: "24px",
-            height: "24px",
-            borderRadius: "50%",
-            border: "1px solid var(--color-text-medium)",
-            backgroundColor: "transparent",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 0,
-            flexShrink: 0,
-          }}
-          aria-label={collapsed ? "Inhaltsverzeichnis aufklappen" : "Inhaltsverzeichnis zuklappen"}
-        >
-          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-            <path
-              d={collapsed ? "M2 4.5L6 8.5L10 4.5" : "M2 7.5L6 3.5L10 7.5"}
-              stroke="var(--color-text-medium)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
+      <h3
+        style={{
+          fontFamily: "Merriweather, serif",
+          fontSize: collapsed ? "14px" : "18px",
+          fontWeight: 600,
+          color: "var(--color-text-primary)",
+          margin: "0 0 " + (collapsed ? "12px" : "23px") + " 0",
+          textAlign: collapsed ? "center" : "left",
+        }}
+      >
+        {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
+      </h3>
       <ol style={{ display: "flex", flexDirection: "column", gap: collapsed ? "10px" : "20px", listStyle: "none", margin: 0, padding: 0 }}>
         {merged.map((entry, idx) => {
           if (entry.kind === "tool") {
