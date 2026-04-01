@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
@@ -111,7 +110,6 @@ export default async function RechnerDetailPage({ params }: Props) {
   if (!rechner) {
     return (
       <>
-        <Header />
         <main className="min-h-screen bg-white">
           <div className="max-w-7xl mx-auto px-6 py-12">
             <h1 className="text-4xl font-bold mb-6">Rechner nicht gefunden</h1>
@@ -136,7 +134,6 @@ export default async function RechnerDetailPage({ params }: Props) {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Breadcrumb */}

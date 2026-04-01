@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FinanztoolsGrid from "@/components/sections/FinanztoolsGrid";
 import { getToolCategories } from "@/lib/wordpress";
@@ -14,7 +13,6 @@ export default async function FinanztoolsPage() {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center mb-16">

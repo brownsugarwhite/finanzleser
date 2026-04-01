@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { searchPosts } from "@/lib/wordpress";
@@ -21,7 +20,6 @@ export default async function SearchPage(props: SearchPageProps) {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <Breadcrumb items={[{ label: "Suche", href: "/suche" }]} />

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getPostsAndCPTsByCategory } from "@/lib/wordpress";
 import type { Category } from "@/lib/types";
@@ -10,7 +9,6 @@ export default async function VergleichePage() {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-6">Finanzvergleiche</h1>

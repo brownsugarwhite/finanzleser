@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 import Spacer from "@/components/ui/Spacer";
@@ -9,7 +8,6 @@ import SubBanner from "@/components/ui/SubBanner";
 export default function ComponentsPage() {
   return (
     <>
-      <Header />
       <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "100px 24px 60px" }}>
         <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "36px", fontWeight: 700, marginBottom: "48px", color: "var(--color-text-primary)" }}>
           Komponenten-Bibliothek

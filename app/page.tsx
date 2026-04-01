@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
@@ -28,7 +27,6 @@ export default async function LandingPage() {
   return (
     <main className="bg-white">
       <LandingBodyAttr />
-      <Header />
       <LandingIntro />
       <FinanztoolsHero />
       {insuranceCategory && insuranceCategory.children.length > 0 && (

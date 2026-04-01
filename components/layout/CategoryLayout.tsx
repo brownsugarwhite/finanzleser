@@ -1,5 +1,4 @@
 import InlineSVG from "@/components/ui/InlineSVG";
-import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ArticleList from "@/components/sections/ArticleList";
@@ -23,7 +22,6 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
   ] : undefined;
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           <Breadcrumb items={breadcrumbItems} />

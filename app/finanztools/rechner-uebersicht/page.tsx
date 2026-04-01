@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
@@ -66,7 +65,6 @@ export const metadata = {
 export default function RechnerUebersichtPage() {
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-4">Alle Finanzrechner</h1>

@@ -65,14 +65,9 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
             }}
             aria-label={collapsed ? "Inhaltsverzeichnis aufklappen" : "Inhaltsverzeichnis zuklappen"}
           >
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-              <path
-                d={collapsed ? "M2 4.5L6 8.5L10 4.5" : "M2 7.5L6 3.5L10 7.5"}
-                stroke="var(--color-text-medium)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.45 15.77" width="10" height="10" style={{ transform: collapsed ? "rotate(180deg)" : "none" }}>
+              <polyline points="9.18 15.27 .5 8.11 9.18 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+              <polyline points="16.95 15.27 8.27 8.11 16.95 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>

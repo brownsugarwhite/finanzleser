@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Header from "./Header";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import InlineSVG from "@/components/ui/InlineSVG";
@@ -27,7 +26,6 @@ export default function MainCategoryLayout({
   ];
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           <Breadcrumb items={breadcrumbItems} />

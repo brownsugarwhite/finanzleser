@@ -1,5 +1,4 @@
 import { Merriweather, Open_Sans } from "next/font/google";
-import Header from "@/components/layout/Header";
 
 const merriweather = Merriweather({
   weight: ["700"],
@@ -16,7 +15,6 @@ const openSans = Open_Sans({
 export default function TestPage() {
   return (
     <div className={`${merriweather.variable} ${openSans.variable}`} style={{ background: "#fff" }}>
-      <Header />
       <div style={{
         maxWidth: "960px",
         margin: "0 auto",

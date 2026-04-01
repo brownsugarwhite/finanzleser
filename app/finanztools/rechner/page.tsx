@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 // Alle 52 Rechner mit ihren Kategorien
@@ -68,7 +67,6 @@ const KATEGORIEN = {
 export default function RechnerPage() {
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-bold mb-6">Finanzrechner</h1>

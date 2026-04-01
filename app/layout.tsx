@@ -4,7 +4,6 @@ import { Providers } from "./providers";
 import { NavProvider } from "@/lib/NavContext";
 import { getNavItems } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
-import LogoBadge from "@/components/layout/LogoBadge";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import TopBanner from "@/components/ui/TopBanner";
 import "./globals.css";
@@ -52,7 +51,6 @@ export default async function RootLayout({
         <NavProvider items={navItems}>
           <Providers>{children}</Providers>
           <ProgressiveBlur height={150} />
-          <LogoBadge />
         </NavProvider>
       </body>
     </html>
