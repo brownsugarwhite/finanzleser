@@ -3,25 +3,47 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
+const tocHoverStyles = `
+  .toc-item:not(.toc-active):hover .toc-badge {
+    border-color: var(--color-text-primary) !important;
+    background-color: transparent !important;
+  }
+  .toc-item:not(.toc-active):hover .toc-badge .toc-number {
+    color: var(--color-text-primary) !important;
+  }
+  .toc-item:not(.toc-active):hover .toc-text {
+    color: var(--color-text-primary) !important;
+  }
+`;
+
 interface TOCItem {
   id: string;
   text: string;
+}
+
+interface TOCToolItem {
+  type: "rechner" | "vergleich" | "checkliste";
+  label: string;
+  title: string;
+  color: string;
 }
 
 interface TableOfContentsProps {
   content: string;
 }
 
-const RING_SIZE = 40; // 30px badge + 2×5px gap
+const RING_SIZE = 38;
 const BADGE_SIZE = 30;
-const RING_BORDER_RADIUS = 17;
-// Umfang eines Rounded Rect: 4 Geraden + 4 Viertelkreise
-const RING_RECT_W = RING_SIZE - 2; // 38 (1px inset for stroke)
-const RING_RECT_H = RING_SIZE - 2;
-const RING_CIRCUMFERENCE =
-  2 * (RING_RECT_W - 2 * RING_BORDER_RADIUS) +
-  2 * (RING_RECT_H - 2 * RING_BORDER_RADIUS) +
-  2 * Math.PI * RING_BORDER_RADIUS;
+
+const toolPlaceholders: TOCToolItem[] = [
+  { type: "rechner", label: "Rechner", title: "Steuerrechner 2026", color: "var(--color-tool-rechner)" },
+  { type: "vergleich", label: "Vergleich", title: "Festgeldvergleich", color: "var(--color-tool-vergleiche)" },
+  { type: "checkliste", label: "Checkliste", title: "Steuererklärung Checkliste", color: "var(--color-tool-checklisten)" },
+];
+
+type MergedItem =
+  | { kind: "heading"; item: TOCItem; number: number }
+  | { kind: "tool"; tool: TOCToolItem; number: number };
 
 export default function TableOfContents({ content }: TableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
@@ -67,7 +89,6 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         if (rect.top <= 100) {
           currentId = headings[i].id || "";
 
-          // Calculate progress within this section
           const start = headings[i].getBoundingClientRect().top + window.scrollY;
           const end =
             i < headings.length - 1
@@ -96,23 +117,152 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
   if (items.length === 0) return null;
 
+  // Merge headings + tool placeholders at fixed positions
+  const merged: MergedItem[] = [];
+  let num = 0;
+
+  for (let i = 0; i < items.length; i++) {
+    num++;
+    merged.push({ kind: "heading", item: items[i], number: num });
+
+    // After 3rd heading (index 2) → Rechner
+    if (i === 2) {
+      num++;
+      merged.push({ kind: "tool", tool: toolPlaceholders[0], number: num });
+    }
+    // After 5th heading (index 4) → Vergleich
+    if (i === 4) {
+      num++;
+      merged.push({ kind: "tool", tool: toolPlaceholders[1], number: num });
+    }
+  }
+  // Checkliste always at end
+  num++;
+  merged.push({ kind: "tool", tool: toolPlaceholders[2], number: num });
+
   return (
     <nav>
+      <style>{tocHoverStyles}</style>
+      <h3
+        style={{
+          fontFamily: "Merriweather, serif",
+          fontSize: "18px",
+          fontWeight: 600,
+          color: "var(--color-text-primary)",
+          margin: "0 0 23px 0",
+        }}
+      >
+        Inhaltsverzeichnis
+      </h3>
       <ol style={{ display: "flex", flexDirection: "column", gap: "20px", listStyle: "none", margin: 0, padding: 0 }}>
-        {items.map((item, idx) => {
+        {merged.map((entry, idx) => {
+          if (entry.kind === "tool") {
+            const { tool } = entry;
+            return (
+              <li key={`tool-${tool.type}`}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                >
+                  {/* Badge mit farbigem Dot */}
+                  <span
+                    style={{
+                      position: "relative",
+                      width: `${RING_SIZE}px`,
+                      height: `${RING_SIZE}px`,
+                      minWidth: `${RING_SIZE}px`,
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "4px",
+                        left: "4px",
+                        width: `${BADGE_SIZE}px`,
+                        height: `${BADGE_SIZE}px`,
+                        borderRadius: "13px",
+                        border: "1px solid var(--color-text-medium)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "Merriweather, serif",
+                        fontWeight: 300,
+                        fontStyle: "italic",
+                        fontSize: "17px",
+                        lineHeight: 1,
+                        color: "var(--color-text-medium)",
+                      }}
+                    >
+                      <span style={{ transform: "skewX(-10deg)", display: "inline-block" }}>
+                        {entry.number}
+                      </span>
+                    </span>
+                    {/* Farbiger Dot */}
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "4px",
+                        left: "4px",
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: tool.color,
+                      }}
+                    />
+                  </span>
+                  {/* Label + Titel */}
+                  <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        alignSelf: "flex-start",
+                        backgroundColor: tool.color,
+                        color: "#ffffff",
+                        fontFamily: "var(--font-body), sans-serif",
+                        fontSize: "11px",
+                        fontWeight: 600,
+                        lineHeight: 1,
+                        padding: "3px 8px",
+                        borderRadius: "4px",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {tool.label}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "Merriweather, serif",
+                        fontWeight: 300,
+                        fontStyle: "italic",
+                        fontSize: "15px",
+                        color: "var(--color-text-medium)",
+                        lineHeight: "1.4",
+                      }}
+                    >
+                      {tool.title}
+                    </span>
+                  </span>
+                </div>
+              </li>
+            );
+          }
+
+          // Regular heading item
+          const { item } = entry;
           const isActive = activeId === item.id;
-          const dashOffset = isActive
-            ? RING_CIRCUMFERENCE * (1 - scrollProgress)
-            : RING_CIRCUMFERENCE;
 
           return (
             <li key={item.id}>
               <Link
                 href={`#${item.id}`}
+                className={`toc-item${isActive ? " toc-active" : ""}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "7px",
+                  gap: "6px",
                   textDecoration: "none",
                   color: "inherit",
                 }}
@@ -126,39 +276,33 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                     minWidth: `${RING_SIZE}px`,
                   }}
                 >
-                  {/* SVG Progress Ring */}
-                  <svg
-                    width={RING_SIZE}
-                    height={RING_SIZE}
+                  {/* Progress Ring via CSS */}
+                  <span
                     style={{
                       position: "absolute",
                       top: 0,
                       left: 0,
-                      transform: "rotate(-90deg)",
+                      width: `${RING_SIZE}px`,
+                      height: `${RING_SIZE}px`,
+                      borderRadius: "43.3%",
+                      border: `2px solid ${isActive ? "var(--color-brand)" : "transparent"}`,
+                      maskImage: isActive
+                        ? `conic-gradient(from 6deg, #000 ${scrollProgress * 100}%, transparent ${scrollProgress * 100}%)`
+                        : "none",
+                      WebkitMaskImage: isActive
+                        ? `conic-gradient(from 6deg, #000 ${scrollProgress * 100}%, transparent ${scrollProgress * 100}%)`
+                        : "none",
+                      transition: "border-color 0.2s ease",
+                      boxSizing: "border-box",
                     }}
-                  >
-                    <rect
-                      x="1"
-                      y="1"
-                      width={RING_RECT_W}
-                      height={RING_RECT_H}
-                      rx={RING_BORDER_RADIUS}
-                      ry={RING_BORDER_RADIUS}
-                      fill="none"
-                      stroke={isActive ? "var(--color-brand)" : "transparent"}
-                      strokeWidth="2"
-                      strokeDasharray={RING_CIRCUMFERENCE}
-                      strokeDashoffset={dashOffset}
-                      strokeLinecap="round"
-                      style={{ transition: "stroke-dashoffset 0.15s ease-out, stroke 0.2s ease" }}
-                    />
-                  </svg>
+                  />
                   {/* Badge */}
                   <span
+                    className="toc-badge"
                     style={{
                       position: "absolute",
-                      top: "5px",
-                      left: "5px",
+                      top: "4px",
+                      left: "4px",
                       width: `${BADGE_SIZE}px`,
                       height: `${BADGE_SIZE}px`,
                       borderRadius: "13px",
@@ -173,16 +317,17 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                       fontSize: "17px",
                       lineHeight: 1,
                       color: isActive ? "#ffffff" : "var(--color-text-medium)",
-                      transition: "color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease",
+                      transition: "none",
                     }}
                   >
-                    <span style={{ transform: "skewX(-10deg)", display: "inline-block", color: isActive ? "#ffffff" : "var(--color-text-medium)" }}>
-                      {idx + 1}
+                    <span className="toc-number" style={{ transform: "skewX(-10deg)", display: "inline-block", color: isActive ? "#ffffff" : "var(--color-text-medium)" }}>
+                      {entry.number}
                     </span>
                   </span>
                 </span>
                 {/* Item-Text */}
                 <span
+                  className="toc-text"
                   style={{
                     fontFamily: "Merriweather, serif",
                     fontWeight: isActive ? 700 : 300,
@@ -190,7 +335,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                     fontSize: "15px",
                     color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
                     lineHeight: "1.4",
-                    transition: "color 0.2s ease",
+                    transition: "none",
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: "vertical",
