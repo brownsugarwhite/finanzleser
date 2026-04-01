@@ -204,7 +204,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                     <span
                       style={{
                         position: "absolute",
-                        top: "4px",
+                        top: "3px",
                         left: "4px",
                         width: "8px",
                         height: "8px",
@@ -222,11 +222,11 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                         backgroundColor: tool.color,
                         color: "#ffffff",
                         fontFamily: "var(--font-body), sans-serif",
-                        fontSize: "11px",
+                        fontSize: "12px",
                         fontWeight: 600,
                         lineHeight: 1,
-                        padding: "3px 8px",
-                        borderRadius: "4px",
+                        padding: "5px 8px",
+                        borderRadius: "0px",
                         letterSpacing: "0.02em",
                       }}
                     >
@@ -284,7 +284,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                       left: 0,
                       width: `${RING_SIZE}px`,
                       height: `${RING_SIZE}px`,
-                      borderRadius: "43.3%",
+                      borderRadius: "40%",
                       border: `2px solid ${isActive ? "var(--color-brand)" : "transparent"}`,
                       maskImage: isActive
                         ? `conic-gradient(from 6deg, #000 ${scrollProgress * 100}%, transparent ${scrollProgress * 100}%)`
@@ -305,7 +305,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                       left: "4px",
                       width: `${BADGE_SIZE}px`,
                       height: `${BADGE_SIZE}px`,
-                      borderRadius: "13px",
+                      borderRadius: "12px",
                       border: `1px solid ${isActive ? "var(--color-brand)" : "var(--color-text-medium)"}`,
                       backgroundColor: isActive ? "var(--color-brand)" : "transparent",
                       display: "flex",
