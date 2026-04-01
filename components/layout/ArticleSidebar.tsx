@@ -12,27 +12,43 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
 
   return (
     <aside
-      className="hidden lg:block"
+      className="block"
       style={{
         display: "flex",
-        gap: "12px",
+        gap: collapsed ? "12px" : "36px",
         alignSelf: "stretch",
         flexShrink: collapsed ? 1 : 0,
         width: collapsed ? "100%" : "auto",
-        minWidth: collapsed ? 0 : "auto",
+        minWidth: "auto",
+        paddingLeft: "36px",
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start" }}>
-        <TableOfContents
-          content={content}
-          collapsed={collapsed}
-          onToggleCollapsed={() => setCollapsed(!collapsed)}
-        />
+      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)" }}>
+        <h3
+          style={{
+            fontFamily: "Merriweather, serif",
+            fontSize: collapsed ? "14px" : "18px",
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            margin: "0 0 " + (collapsed ? "12px" : "23px") + " 0",
+            textAlign: collapsed ? "center" : "left",
+            flexShrink: 0,
+          }}
+        >
+          {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
+        </h3>
+        <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
+          <TableOfContents
+            content={content}
+            collapsed={collapsed}
+            onToggleCollapsed={() => setCollapsed(!collapsed)}
+          />
+        </div>
       </div>
       {/* Toggle + Vertical DotLine */}
-      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", marginLeft: collapsed ? "-30px" : 23 }}>
+      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Toggle Button */}
-        <div style={{ position: "sticky", top: "96px", zIndex: 3 }}>
+        <div style={{ position: "sticky", top: "92px", zIndex: 3, marginTop: "-6px" }}>
           <button
             onClick={() => setCollapsed(!collapsed)}
             style={{
@@ -65,8 +81,8 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
           position: "sticky",
           top: 0,
           width: "100%",
-          height: "121px",
-          marginTop: "-121px",
+          height: "116px",
+          marginTop: "-116px",
           background: "var(--color-bg-page)",
           pointerEvents: "none",
           zIndex: 2,
@@ -74,7 +90,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         <div style={{
           flex: 1,
           width: "3px",
-          marginTop: 0,
+          marginTop: 3,
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat-y",
           backgroundPosition: "center top",

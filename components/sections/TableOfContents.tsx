@@ -145,18 +145,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
   return (
     <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
       <style>{tocHoverStyles}</style>
-      <h3
-        style={{
-          fontFamily: "Merriweather, serif",
-          fontSize: collapsed ? "14px" : "18px",
-          fontWeight: 600,
-          color: "var(--color-text-primary)",
-          margin: "0 0 " + (collapsed ? "12px" : "23px") + " 0",
-          textAlign: collapsed ? "center" : "left",
-        }}
-      >
-        {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
-      </h3>
       <ol style={{ display: "flex", flexDirection: "column", gap: collapsed ? "10px" : "20px", listStyle: "none", margin: 0, padding: 0 }}>
         {merged.map((entry, idx) => {
           if (entry.kind === "tool") {
