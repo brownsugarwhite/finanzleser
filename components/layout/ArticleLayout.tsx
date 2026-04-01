@@ -38,46 +38,11 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
       <main className="min-h-screen bg-white">
         <div className="pb-12" style={{ paddingTop: 23, paddingLeft: '36px', paddingRight: '50px' }}>
           <div className="flex gap-8">
-            {/* Sidebar (TOC) */}
-            {sidebar && (
-              <aside className="hidden lg:block shrink-0" style={{ width: "300px" }}>
-                <div className="sticky top-24" style={{ position: "sticky", zIndex: 51 }}>
-                  {sidebar}
-                </div>
-              </aside>
-            )}
-
-            {/* Vertical DotLine */}
-            {sidebar && (
-              <div className="hidden lg:block" style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
-                <div style={{
-                  flex: 1,
-                  marginTop: 60,
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
-                  backgroundRepeat: "repeat-y",
-                  backgroundPosition: "center top",
-                  backgroundSize: "3px 9px",
-                }} />
-                {/* Fade mask */}
-                <div style={{
-                  position: "sticky",
-                  bottom: 0,
-                  height: "33px",
-                  marginTop: "-33px",
-                  marginBottom: "-33px",
-                  background: "var(--color-bg-page)",
-                  pointerEvents: "none",
-                  zIndex: 2,
-                }} />
-                {/* Sticky Arrow */}
-                <div style={{ position: "sticky", bottom: 23, display: "flex", justifyContent: "center", zIndex: 3 }}>
-                  <img src="/icons/arrow down.svg" alt="" style={{ width: 12, height: "auto" }} />
-                </div>
-              </div>
-            )}
+            {/* Sidebar Left (TOC + DotLine) */}
+            {sidebar}
 
             {/* Article Content */}
-            <div className="flex-1 min-w-0 max-w-[860px]">
+            <div style={{ width: "100%", maxWidth: "760px", flexShrink: 0 }}>
               <Breadcrumb items={breadcrumbItems} />
               {category && mainCategory && (
                 <Link
@@ -194,6 +159,9 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
                 </div>
               )}
             </div>
+
+            {/* Sidebar Right — flexibel, schrumpft */}
+            <div className="hidden lg:block" style={{ width: "100%", flexShrink: 1 }} />
           </div>
         </div>
       </main>

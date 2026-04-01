@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
-import TableOfContents from "@/components/sections/TableOfContents";
+import ArticleSidebar from "@/components/layout/ArticleSidebar";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import type { Category } from "@/lib/types";
 
@@ -55,7 +55,7 @@ export default async function BeitragPage(props: {
             }
           : undefined
       }
-      sidebar={post.content ? <TableOfContents content={post.content} /> : undefined}
+      sidebar={post.content ? <ArticleSidebar content={post.content} /> : undefined}
       contentTableOfContents={
         post.content ? (
           <ArticleTableOfContents content={post.content} tools={post.beitragFelder?.beitragRechner} />

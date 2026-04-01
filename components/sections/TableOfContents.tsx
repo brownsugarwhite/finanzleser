@@ -30,6 +30,8 @@ interface TOCToolItem {
 
 interface TableOfContentsProps {
   content: string;
+  collapsed?: boolean;
+  onToggleCollapsed?: () => void;
 }
 
 const RING_SIZE = 38;
@@ -45,7 +47,7 @@ type MergedItem =
   | { kind: "heading"; item: TOCItem; number: number }
   | { kind: "tool"; tool: TOCToolItem; number: number };
 
-export default function TableOfContents({ content }: TableOfContentsProps) {
+export default function TableOfContents({ content, collapsed = false, onToggleCollapsed }: TableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -141,20 +143,49 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   merged.push({ kind: "tool", tool: toolPlaceholders[2], number: num });
 
   return (
-    <nav>
+    <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
       <style>{tocHoverStyles}</style>
-      <h3
-        style={{
-          fontFamily: "Merriweather, serif",
-          fontSize: "18px",
-          fontWeight: 600,
-          color: "var(--color-text-primary)",
-          margin: "0 0 23px 0",
-        }}
-      >
-        Inhaltsverzeichnis
-      </h3>
-      <ol style={{ display: "flex", flexDirection: "column", gap: "20px", listStyle: "none", margin: 0, padding: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: collapsed ? "10px" : "0px", justifyContent: collapsed ? "center" : "space-between", marginBottom: collapsed ? "12px" : "23px" }}>
+        <h3
+          style={{
+            fontFamily: "Merriweather, serif",
+            fontSize: collapsed ? "14px" : "18px",
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            margin: 0,
+          }}
+        >
+          {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
+        </h3>
+        <button
+          onClick={() => onToggleCollapsed?.()}
+          style={{
+            width: "24px",
+            height: "24px",
+            borderRadius: "50%",
+            border: "1px solid var(--color-text-medium)",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 0,
+            flexShrink: 0,
+          }}
+          aria-label={collapsed ? "Inhaltsverzeichnis aufklappen" : "Inhaltsverzeichnis zuklappen"}
+        >
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+            <path
+              d={collapsed ? "M2 4.5L6 8.5L10 4.5" : "M2 7.5L6 3.5L10 7.5"}
+              stroke="var(--color-text-medium)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <ol style={{ display: "flex", flexDirection: "column", gap: collapsed ? "10px" : "20px", listStyle: "none", margin: 0, padding: 0 }}>
         {merged.map((entry, idx) => {
           if (entry.kind === "tool") {
             const { tool } = entry;
@@ -214,7 +245,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                     />
                   </span>
                   {/* Label + Titel */}
-                  <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
+                  <span style={{ display: collapsed ? "none" : "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
                     <span
                       style={{
                         display: "inline-block",
@@ -326,26 +357,28 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                   </span>
                 </span>
                 {/* Item-Text */}
-                <span
-                  className="toc-text"
-                  style={{
-                    fontFamily: "Merriweather, serif",
-                    fontWeight: isActive ? 700 : 300,
-                    fontStyle: isActive ? "normal" : "italic",
-                    fontSize: "15px",
-                    color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
-                    lineHeight: "1.4",
-                    transition: "none",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    flex: 1,
-                    minWidth: 0,
-                  }}
-                >
-                  {item.text}
-                </span>
+                {!collapsed && (
+                  <span
+                    className="toc-text"
+                    style={{
+                      fontFamily: "Merriweather, serif",
+                      fontWeight: isActive ? 700 : 300,
+                      fontStyle: isActive ? "normal" : "italic",
+                      fontSize: "15px",
+                      color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
+                      lineHeight: "1.4",
+                      transition: "none",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      flex: 1,
+                      minWidth: 0,
+                    }}
+                  >
+                    {item.text}
+                  </span>
+                )}
               </Link>
             </li>
           );
