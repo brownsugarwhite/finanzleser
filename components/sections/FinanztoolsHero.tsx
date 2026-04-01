@@ -275,22 +275,14 @@ export default function FinanztoolsHero() {
         {/* Vertical dot spacer */}
         <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
           {/* Dots */}
-          <div style={{ position: "relative", flex: 1, overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: 60, bottom: 5, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-              {Array.from({ length: 500 }, (_, i) => (
-                <span
-                  key={i}
-                  style={{
-                    width: "3px",
-                    height: "3px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--color-dot)",
-                    flexShrink: 0,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+          <div style={{
+            flex: 1,
+            marginTop: 60,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat-y",
+            backgroundPosition: "center top",
+            backgroundSize: "3px 9px",
+          }} />
           {/* Fade mask — fixed to viewport bottom */}
           <div style={{
             position: "sticky",
