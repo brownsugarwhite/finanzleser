@@ -188,10 +188,6 @@ export default function LandingIntro() {
       style={{
         backgroundColor: "var(--color-bg-page)",
         minHeight: "auto",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        alignItems: "center",
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
@@ -316,7 +312,7 @@ export default function LandingIntro() {
       </div>
 
       {/* Nav Links */}
-      <TopNav className="landing-nav" style={{ marginTop: "36px" }} />
+      <TopNav className="landing-nav" style={{ marginTop: "36px", alignItems: "center", paddingLeft: "0" }} />
 
       {/* DotLine + Powered by */}
       <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>
