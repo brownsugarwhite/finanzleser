@@ -38,13 +38,13 @@ export default function ContentScaler() {
       const vh = window.innerHeight;
       const rect = el.getBoundingClientRect();
       el.style.transformOrigin = `${vw / 2 - rect.left}px ${vh / 2 - rect.top}px`;
-      gsap.to(el, { scale: 0.95, filter: "blur(23px)", opacity: 0.5, duration: 0.4, ease: "power2.out" });
+      gsap.to(el, { scale: 0.95, filter: "blur(23px)", opacity: 0.5, duration: 0.5, ease: "power2.inOut" });
 
       // Fade out dotline + claim
       fadeTargets.forEach((t) => {
         const current = savedOpacities.current.get(t) ?? 0;
         if (current > 0) {
-          gsap.to(t, { opacity: 0, duration: 0.3, ease: "power2.out" });
+          gsap.to(t, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
         }
       });
     };
@@ -55,11 +55,11 @@ export default function ContentScaler() {
       const { el, fadeTargets } = getTargets();
       if (!el) return;
 
-      gsap.to(el, { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.4, ease: "power2.out" });
+      gsap.to(el, { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.5, ease: "power2.inOut" });
 
       fadeTargets.forEach((t) => {
         const restoreOpacity = savedOpacities.current.get(t) ?? 1;
-        gsap.to(t, { opacity: restoreOpacity, duration: 0.3, ease: "power2.out" });
+        gsap.to(t, { opacity: restoreOpacity, duration: 0.5, ease: "power2.inOut" });
       });
 
       setTimeout(() => {

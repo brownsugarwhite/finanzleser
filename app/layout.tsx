@@ -57,7 +57,7 @@ export default async function RootLayout({
           <TopNav />
           {/* DotLine + Powered by */}
           <div className="sticky-nav dotline-animated" style={{ position: "sticky", top: 76, zIndex: 52, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
-            <PoweredByLine style={{ minWidth: "1100px", width: "100%", paddingLeft: 280, paddingRight: 350 }} />
+            <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
           </div>
           <ContentScaler />
           <div className="scalable-content" style={{ position: "relative" }}>

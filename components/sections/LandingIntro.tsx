@@ -316,7 +316,7 @@ export default function LandingIntro() {
 
       {/* DotLine + Powered by */}
       <div className="landing-dotline" style={{ position: "relative", zIndex: 51, width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>
-        <PoweredByLine style={{ maxWidth: "960px", width: "100%", paddingLeft: 70 }} />
+        <PoweredByLine style={{ maxWidth: "1060px", width: "100%", paddingLeft: 70 }} />
       </div>
     </section>
   );

@@ -17,7 +17,9 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
     if (!navRef.current) return;
     const rect = navRef.current.getBoundingClientRect();
     const targetY = window.scrollY + rect.top - 33;
-    gsap.to(window, { scrollTo: { y: targetY }, duration: 0.4, ease: "power2.out" });
+    const distance = Math.abs(targetY - window.scrollY);
+    const duration = 0.5;
+    gsap.to(window, { scrollTo: { y: targetY }, duration, ease: "power2.inOut" });
   }, []);
 
   return (
@@ -31,9 +33,9 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
           zIndex: 55,
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
+          alignItems: "center",
           marginTop: "-40px",
-          paddingLeft: "307px",
+          paddingLeft: "0px",
           pointerEvents: "none",
           ...style,
         }}
@@ -44,7 +46,7 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            maxWidth: "600px",
+            maxWidth: "730px",
             width: "100%",
             height: "50px",
             pointerEvents: "auto",
