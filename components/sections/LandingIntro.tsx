@@ -4,7 +4,7 @@ import { useRef, useCallback, useLayoutEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import TopNav from "@/components/layout/TopNav";
-import DotSpacer from "@/components/ui/DotSpacer";
+import PoweredByLine from "@/components/ui/PoweredByLine";
 
 function SearchIcon() {
   return (
@@ -319,16 +319,8 @@ export default function LandingIntro() {
       <TopNav className="landing-nav" style={{ marginTop: "36px" }} />
 
       {/* DotLine + Powered by */}
-      <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "5px" }}>
-        <div style={{ maxWidth: "960px", width: "100%", paddingLeft: 70, display: "flex", alignItems: "center", gap: "4px" }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <DotSpacer noMargin maxWidth="100%" />
-          </div>
-          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "4px", whiteSpace: "nowrap", paddingBottom: 2 }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-text-medium)" }}>powered by</span>
-            <img src="/icons/finconext_logo.svg" alt="Finconext" style={{ width: "80px", height: "auto" }} />
-          </div>
-        </div>
+      <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>
+        <PoweredByLine style={{ maxWidth: "960px", width: "100%", paddingLeft: 70 }} />
       </div>
     </section>
   );

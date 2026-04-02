@@ -18,8 +18,9 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
           zIndex: 55,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          marginTop: "-50px",
+          alignItems: "flex-start",
+          marginTop: "-40px",
+          paddingLeft: "307px",
           ...style,
         }}
       >

@@ -23,7 +23,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         paddingLeft: collapsed ? "23px" : "50px",
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", zIndex: 1, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
+      <div className="sticky top-24" style={{ position: "sticky", top: "164px", zIndex: 1, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
         <h3
           style={{
             fontFamily: "Merriweather, serif",
@@ -48,7 +48,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
       {/* Toggle + Vertical DotLine */}
       <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 1 }}>
         {/* Toggle Button */}
-        <div style={{ position: "sticky", top: "92px", zIndex: 3, marginTop: "-6px" }}>
+        <div style={{ position: "sticky", top: "164px", zIndex: 3, marginTop: "-6px" }}>
           <button
             onClick={() => setCollapsed(!collapsed)}
             style={{
@@ -74,7 +74,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         {/* Top fade mask */}
         <div style={{
           position: "sticky",
-          top: 0,
+          top: 73,
           width: "100%",
           height: "116px",
           marginTop: "-116px",
