@@ -54,11 +54,11 @@ export default async function RootLayout({
           </div>
           <LogoBar />
           <TopNav />
-          {/* DotLine + Powered by */}
-          <div className="sticky-nav" style={{ position: "relative", zIndex: 50, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
-            <PoweredByLine style={{ minWidth: "1400px", width: "100%", paddingLeft: 280, paddingRight: 350 }} />
-          </div>
           <div style={{ position: "relative", zIndex: 1 }}>
+            {/* DotLine + Powered by */}
+            <div className="sticky-nav dotline-animated" style={{ position: "sticky", top: 86, zIndex: 50, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
+              <PoweredByLine style={{ minWidth: "1100px", width: "100%", paddingLeft: 280, paddingRight: 350 }} />
+            </div>
             <Providers>{children}</Providers>
           </div>
           <ProgressiveBlur height={150} />

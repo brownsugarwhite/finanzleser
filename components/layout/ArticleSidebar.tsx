@@ -48,7 +48,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
       {/* Toggle + Vertical DotLine */}
       <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 1 }}>
         {/* Toggle Button */}
-        <div style={{ position: "sticky", top: "100px", zIndex: 3, marginTop: "-6px" }}>
+        <div style={{ position: "sticky", top: "96px", zIndex: 3, marginTop: "-4px" }}>
           <button
             onClick={() => setCollapsed(!collapsed)}
             style={{
@@ -74,7 +74,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         {/* Top fade mask */}
         <div style={{
           position: "sticky",
-          top: 13,
+          top: 6,
           width: "100%",
           height: "116px",
           marginTop: "-116px",

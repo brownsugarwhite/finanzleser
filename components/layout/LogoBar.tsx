@@ -12,17 +12,33 @@ export default function LogoBar() {
   useEffect(() => {
     if (!claimRef.current) return;
 
-    gsap.to(claimRef.current, {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "70px top",
-        scrub: true,
-      },
+    // Delay to ensure dotline is in the DOM
+    const raf = requestAnimationFrame(() => {
+      const dotLine = document.querySelector(".dotline-animated");
+      const targets = [claimRef.current, dotLine].filter(Boolean);
+
+      // Claim fades out
+      gsap.fromTo(claimRef.current!, { opacity: 1 }, {
+        opacity: 0,
+        ease: "easeIn",
+        scrollTrigger: { start: 0, end: 100, scrub: true },
+      });
+
+      // DotLine fades out + shrinks
+      if (dotLine) {
+        const startWidth = (dotLine as HTMLElement).offsetWidth;
+        const tl = gsap.timeline({
+          scrollTrigger: { start: 0, end: 100, scrub: true },
+        });
+        tl.fromTo(dotLine, { opacity: 1 }, {
+          opacity: 0,
+          ease: "easeIn",
+        }, 0);
+      }
     });
 
     return () => {
+      cancelAnimationFrame(raf);
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
