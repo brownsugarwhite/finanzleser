@@ -6,6 +6,7 @@ import { getNavItems } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
+import ContentScaler from "@/components/layout/ContentScaler";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import TopBanner from "@/components/ui/TopBanner";
@@ -49,16 +50,17 @@ export default async function RootLayout({
       <body className="antialiased">
         <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
         <NavProvider items={navItems}>
-          <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end" }}>
-            <BookmarkNav />
+          <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
+            <div style={{ pointerEvents: "auto" }}><BookmarkNav /></div>
           </div>
           <LogoBar />
           <TopNav />
-          <div style={{ position: "relative", zIndex: 1 }}>
-            {/* DotLine + Powered by */}
-            <div className="sticky-nav dotline-animated" style={{ position: "sticky", top: 86, zIndex: 50, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
-              <PoweredByLine style={{ minWidth: "1100px", width: "100%", paddingLeft: 280, paddingRight: 350 }} />
-            </div>
+          {/* DotLine + Powered by */}
+          <div className="sticky-nav dotline-animated" style={{ position: "sticky", top: 76, zIndex: 52, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
+            <PoweredByLine style={{ minWidth: "1100px", width: "100%", paddingLeft: 280, paddingRight: 350 }} />
+          </div>
+          <ContentScaler />
+          <div className="scalable-content" style={{ position: "relative" }}>
             <Providers>{children}</Providers>
           </div>
           <ProgressiveBlur height={150} />

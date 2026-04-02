@@ -1,16 +1,29 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useRef, useCallback } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 import { useNavItems } from "@/lib/NavContext";
 import Spark from "@/components/ui/Spark";
 
 export default function TopNav({ className = "sticky-nav", style }: { className?: string; style?: React.CSSProperties }) {
   const navItems = useNavItems();
+  const navRef = useRef<HTMLDivElement>(null);
+
+  const scrollToNav = useCallback(() => {
+    if (!navRef.current) return;
+    const rect = navRef.current.getBoundingClientRect();
+    const targetY = window.scrollY + rect.top - 33;
+    gsap.to(window, { scrollTo: { y: targetY }, duration: 0.4, ease: "power2.out" });
+  }, []);
 
   return (
     <>
       <div
+        ref={navRef}
         className={className}
         style={{
           width: "100%",
@@ -21,6 +34,7 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
           alignItems: "flex-start",
           marginTop: "-40px",
           paddingLeft: "307px",
+          pointerEvents: "none",
           ...style,
         }}
       >
@@ -33,6 +47,7 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
             maxWidth: "600px",
             width: "100%",
             height: "50px",
+            pointerEvents: "auto",
           }}
         >
           <Spark />
@@ -41,6 +56,11 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
               {i > 0 && <Spark />}
               <Link
                 href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToNav();
+                  window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label: item.label } }));
+                }}
                 style={{
                   fontFamily: "var(--font-heading, 'Merriweather', serif)",
                   fontSize: "16px",

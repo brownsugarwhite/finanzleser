@@ -25,20 +25,22 @@ export default async function LandingPage() {
   }
 
   return (
-    <main className="bg-white">
+    <>
       <LandingBodyAttr />
       <LandingIntro />
-      <FinanztoolsHero />
-      {insuranceCategory && insuranceCategory.children.length > 0 && (
-        <SubcategorySlider
-          categories={insuranceCategory.children}
-          parentSlug="versicherungen"
-        />
-      )}
-      <ArticleSlider posts={sliderPosts} />
-      <FeaturedPosts posts={posts} />
-      <SearchSection />
-      <Footer hideNewsletter />
-    </main>
+      <main className="bg-white scalable-landing">
+        <FinanztoolsHero />
+        {insuranceCategory && insuranceCategory.children.length > 0 && (
+          <SubcategorySlider
+            categories={insuranceCategory.children}
+            parentSlug="versicherungen"
+          />
+        )}
+        <ArticleSlider posts={sliderPosts} />
+        <FeaturedPosts posts={posts} />
+        <SearchSection />
+        <Footer hideNewsletter />
+      </main>
+    </>
   );
 }

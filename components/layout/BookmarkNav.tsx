@@ -51,9 +51,11 @@ export default function BookmarkNav() {
     if (burgerIsX.current) {
       animateToBurger();
       window.dispatchEvent(new CustomEvent("burger-closed"));
+      window.dispatchEvent(new CustomEvent("menu-closed"));
     } else {
       animateToX();
       window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Menü" } }));
+      window.dispatchEvent(new CustomEvent("menu-opened"));
     }
   }, [animateToX, animateToBurger]);
 
