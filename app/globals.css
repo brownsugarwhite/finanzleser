@@ -51,6 +51,9 @@ body[data-landing] .logo-wrapper {
 body[data-landing] .topbar-grid {
   display: none !important;
 }
+body[data-landing] .sticky-nav {
+  display: none !important;
+}
 body[data-landing] header > .spacer {
   display: none !important;
 }

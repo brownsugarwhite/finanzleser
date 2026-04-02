@@ -23,7 +23,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         paddingLeft: "27px",
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
+      <div className="sticky top-24" style={{ position: "sticky", zIndex: 1, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
         <h3
           style={{
             fontFamily: "Merriweather, serif",
@@ -46,7 +46,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         </div>
       </div>
       {/* Toggle + Vertical DotLine */}
-      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 51 }}>
+      <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 1 }}>
         {/* Toggle Button */}
         <div style={{ position: "sticky", top: "92px", zIndex: 3, marginTop: "-6px" }}>
           <button

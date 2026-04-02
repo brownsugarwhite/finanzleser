@@ -349,7 +349,7 @@ export default function LandingIntro() {
           <Spark />
         </nav>
 
-        <div style={{ marginTop: "4px", maxWidth: "1000px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
+        <div style={{ marginTop: "4px", maxWidth: "1100px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <DotSpacer noMargin maxWidth="100%" />
           </div>
