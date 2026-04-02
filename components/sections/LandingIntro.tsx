@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef, useCallback, useLayoutEffect, useState, Fragment } from "react";
+import { useRef, useCallback, useLayoutEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import gsap from "gsap";
-import { useNavItems } from "@/lib/NavContext";
+import TopNav from "@/components/layout/TopNav";
 import DotSpacer from "@/components/ui/DotSpacer";
-import Spark from "@/components/ui/Spark";
 
 function SearchIcon() {
   return (
@@ -28,7 +26,6 @@ export default function LandingIntro() {
   const [searchInput, setSearchInput] = useState("");
   const [kiInput, setKiInput] = useState("");
   const router = useRouter();
-  const navItems = useNavItems();
 
   const heroRef = useRef<HTMLElement>(null);
   const searchPillRef = useRef<HTMLFormElement>(null);
@@ -190,9 +187,11 @@ export default function LandingIntro() {
       className="landing-hero"
       style={{
         backgroundColor: "var(--color-bg-page)",
-        height: "50vh",
+        minHeight: "auto",
         display: "flex",
-        alignItems: "flex-end",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        alignItems: "center",
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
@@ -314,46 +313,18 @@ export default function LandingIntro() {
           </div>
         </div>
 
-        {/* Nav Links */}
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "39px",
-            maxWidth: "600px",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Spark />
-          {navItems.map((item, i) => (
-            <Fragment key={item.href}>
-              {i > 0 && <Spark />}
-              <Link
-                href={item.href}
-                style={{
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  color: "var(--color-nav-text)",
-                  textDecoration: "none",
-                  whiteSpace: "nowrap",
-                  padding: "12px 20px",
-                }}
-              >
-                {item.label}
-              </Link>
-            </Fragment>
-          ))}
-          <Spark />
-        </nav>
+      </div>
 
-        <div style={{ marginTop: "4px", maxWidth: "1100px", paddingLeft: 70, marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: "center", gap: "4px" }}>
+      {/* Nav Links */}
+      <TopNav className="landing-nav" style={{ marginTop: "36px" }} />
+
+      {/* DotLine + Powered by */}
+      <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "5px" }}>
+        <div style={{ maxWidth: "960px", width: "100%", paddingLeft: 70, display: "flex", alignItems: "center", gap: "4px" }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <DotSpacer noMargin maxWidth="100%" />
           </div>
-          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "4px", whiteSpace: "nowrap" , paddingBottom: 2 }}>
+          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "4px", whiteSpace: "nowrap", paddingBottom: 2 }}>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-text-medium)" }}>powered by</span>
             <img src="/icons/finconext_logo.svg" alt="Finconext" style={{ width: "80px", height: "auto" }} />
           </div>

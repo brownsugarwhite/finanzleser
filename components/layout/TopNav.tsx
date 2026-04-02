@@ -5,13 +5,13 @@ import Link from "next/link";
 import { useNavItems } from "@/lib/NavContext";
 import Spark from "@/components/ui/Spark";
 
-export default function TopNav() {
+export default function TopNav({ className = "sticky-nav", style }: { className?: string; style?: React.CSSProperties }) {
   const navItems = useNavItems();
 
   return (
     <>
       <div
-        className="sticky-nav"
+        className={className}
         style={{
           width: "100%",
           position: "relative",
@@ -20,6 +20,7 @@ export default function TopNav() {
           flexDirection: "column",
           alignItems: "center",
           marginTop: "-50px",
+          ...style,
         }}
       >
         {/* Nav-Wrapper */}

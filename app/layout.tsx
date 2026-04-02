@@ -51,10 +51,16 @@ export default async function RootLayout({
           <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end" }}>
             <BookmarkNav />
           </div>
+          {/* Logo Bar */}
+          <div style={{ width: "100%", position: "sticky", top: "23px", zIndex: 156, marginTop: "-50px", pointerEvents: "none" }}>
+            <div className="logo-wrapper" style={{ height: "50px", display: "flex", alignItems: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
+              <a href="/"><img src="/icons/fl_logo.svg" alt="finanzleser" style={{ width: "190px", height: "auto", display: "block" }} /></a>
+            </div>
+          </div>
           <TopNav />
           {/* DotLine + Powered by */}
-          <div className="sticky-nav" style={{ position: "relative", zIndex: 50, width: "100%", display: "flex", justifyContent: "center", marginBottom: "36px" }}>
-            <div style={{ maxWidth: "960px", width: "100%", paddingLeft: 70, display: "flex", alignItems: "center", gap: "4px" }}>
+          <div className="sticky-nav" style={{ position: "relative", zIndex: 50, width: "100%", display: "flex", justifyContent: "center", marginBottom: "36px", marginTop: "13px", pointerEvents: "none" }}>
+            <div style={{ maxWidth: "60%", width: "100%", paddingLeft: 70, display: "flex", alignItems: "center", gap: "4px" }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <DotSpacer noMargin maxWidth="100%" />
               </div>

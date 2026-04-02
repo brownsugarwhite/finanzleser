@@ -40,7 +40,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
             {sidebar}
 
             {/* Article Content */}
-            <div style={{ width: "100%", maxWidth: "850px", flexShrink: 0, margin: "0 auto" }}>
+            <div style={{ width: "100%", maxWidth: "850px", flexShrink: 0, margin: "0 auto", padding: "0 50px" }}>
               <Breadcrumb items={breadcrumbItems} />
               {category && mainCategory && (
                 <Link

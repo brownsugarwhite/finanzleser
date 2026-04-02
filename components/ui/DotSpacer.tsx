@@ -6,7 +6,7 @@ export default function DotSpacer({ noMargin = false, maxWidth = "860px" }: { no
       style={{
         maxWidth,
         margin: noMargin ? "0 auto" : "40px auto",
-        width: "1000px",
+        width: "100%",
         height: "3px",
         backgroundImage: DOT_SVG,
         backgroundRepeat: "repeat-x",
