@@ -405,3 +405,34 @@ h6 {
     padding-right: 32px;
   }
 }
+
+/* ─────────────────────────────────────────────
+   Latest Post Item Hover
+   ───────────────────────────────────────────── */
+.latest-post-item {
+  padding-bottom: 23px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+.latest-post-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.latest-post-category {
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+.latest-post-title {
+  color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+.latest-post-icon {
+  border: 1px solid var(--color-text-secondary);
+  transition: border-color 0.2s ease;
+}
+.latest-post-item:hover .latest-post-category,
+.latest-post-item:hover .latest-post-title {
+  color: var(--color-brand-secondary);
+}
+.latest-post-item:hover .latest-post-icon {
+  border-color: var(--color-brand-secondary);
+}

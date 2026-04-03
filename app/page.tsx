@@ -29,7 +29,7 @@ export default async function LandingPage() {
       <LandingBodyAttr />
       <LandingIntro />
       <main className="bg-white scalable-landing">
-        <FinanztoolsHero />
+        <FinanztoolsHero posts={posts} />
         {insuranceCategory && insuranceCategory.children.length > 0 && (
           <SubcategorySlider
             categories={insuranceCategory.children}

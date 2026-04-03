@@ -136,6 +136,8 @@ export default function LandingIntro() {
     alignItems: "center",
     justifyContent: "flex-end",
     backgroundColor: PILL_BG,
+    backdropFilter: "brightness(1.15)",
+    WebkitBackdropFilter: "brightness(1.15)",
     borderRadius: "19px",
     padding: "6px 6px 6px 20px",
     overflow: "hidden",

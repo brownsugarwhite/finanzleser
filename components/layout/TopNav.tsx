@@ -46,7 +46,7 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            maxWidth: "730px",
+            maxWidth: "650px",
             width: "100%",
             height: "50px",
             pointerEvents: "auto",

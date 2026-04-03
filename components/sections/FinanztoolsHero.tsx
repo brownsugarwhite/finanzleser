@@ -3,9 +3,11 @@
 import { useRef, useEffect, useState } from "react";
 import lottie from "lottie-web";
 import type { AnimationItem } from "lottie-web";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
+import type { Post } from "@/lib/types";
 
 function reverseBaselineTrim(animData: any): any {
   const data = JSON.parse(JSON.stringify(animData));
@@ -60,7 +62,7 @@ const TOOLS = [
   },
 ];
 
-export default function FinanztoolsHero() {
+export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
   const lottieRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -132,12 +134,12 @@ export default function FinanztoolsHero() {
 
   return (
     <section ref={sectionRef} style={{ width: "100%" }}>
-      <div style={{ display: "flex", maxWidth: 1400, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
+      <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
         <div style={{ flex: 1, minWidth: 0 }}>
 
           {/* 1. Spacer — dynamisch berechnet */}
-          <div style={{ height: "60vh", width: "100%" }} />
+          <div style={{ height: "600px", width: "100%" }} />
 
           {/* 2. Subheading — sticky bottom */}
           <div style={{ width: 430, height: 23, position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -162,6 +164,8 @@ export default function FinanztoolsHero() {
                   borderRadius: 19,
                   border: 'none',
                   background: 'var(--color-pill-bg)',
+                  backdropFilter: 'brightness(1.15)',
+                  WebkitBackdropFilter: 'brightness(1.15)',
                   cursor: 'pointer',
                   fontFamily: 'Open Sans, sans-serif',
                   fontSize: 16,
@@ -177,6 +181,8 @@ export default function FinanztoolsHero() {
                   borderRadius: 19,
                   border: 'none',
                   background: 'var(--color-pill-bg)',
+                  backdropFilter: 'brightness(1.15)',
+                  WebkitBackdropFilter: 'brightness(1.15)',
                   cursor: 'pointer',
                   fontFamily: 'Open Sans, sans-serif',
                   fontSize: 16,
@@ -200,9 +206,9 @@ export default function FinanztoolsHero() {
                     style={{
                       width: isActive ? 470 : 130,
                       borderRadius: isActive ? 36 : 23,
-                      background: "var(--color-tool-card-bg)",
-                      backdropFilter: "blur(8px)",
-                      WebkitBackdropFilter: "blur(8px)",
+                      background: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "brightness(1.3) blur(13px)",
+                      WebkitBackdropFilter: "brightness(1.3) blur(13px)",
                       overflow: "hidden",
                       position: "relative",
                       cursor: "pointer",
@@ -301,17 +307,63 @@ export default function FinanztoolsHero() {
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 250, flexShrink: 0, alignSelf: "stretch", paddingTop: 50, paddingLeft: 23 }}>
+        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 50, paddingLeft: 23 }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",
             fontWeight: 700,
             lineHeight: 1.3,
             color: "var(--color-text-primary)",
-            margin: 0,
+            margin: "0 0 20px 0",
           }}>
             Neuste Beiträge
           </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
+            {posts.slice(0, 5).map((post) => {
+              const category = post.categories?.nodes?.[0];
+              const mainCategory = post.categories?.nodes?.find(
+                (cat) => cat.parent === null || cat.parent === 0
+              );
+              const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
+
+              return (
+                <Link key={post.id} href={postLink} className="latest-post-item" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    {category && (
+                      <p className="latest-post-category" style={{
+                        fontSize: 12,
+                        fontFamily: "var(--font-body)",
+                        marginBottom: 3,
+                        lineHeight: 1.3,
+                      }}>
+                        {category.name}
+                      </p>
+                    )}
+                    <p className="latest-post-title" style={{
+                      fontSize: 16,
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                      fontWeight: 600,
+                      margin: 0,
+                      lineHeight: 1.3,
+                      hyphens: "auto",
+                      WebkitHyphens: "auto",
+                      wordBreak: "break-word",
+                    }} lang="de">
+                      {post.title}
+                    </p>
+                  </div>
+                  <div className="latest-post-icon" style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 23,
+                    background: "transparent",
+                    flexShrink: 0,
+                  }} />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

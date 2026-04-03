@@ -29,7 +29,7 @@
   --color-text-link: var(--color-brand);
 
   /* Backgrounds */
-  --color-bg-page: #ffffff;
+  --color-bg-page: #faf9f6;
   --color-bg-surface: #f8fafc;
   --color-bg-subtle: #f1f5f9;
   --color-bg-inverse: #1c2218;
@@ -86,7 +86,7 @@
   --color-tool-checklisten: #BC38EC;
 
   /* Pill / Input Background */
-  --color-pill-bg: rgba(198, 200, 204, 0.23);
+  --color-pill-bg: rgba(255, 255, 255, 0.5);
 
   /* Decorative Dots */
   --color-dot: rgba(104, 108, 106, 0.7);
