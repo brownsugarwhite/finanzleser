@@ -126,7 +126,7 @@ export default function MegaMenu({
                 style={{
                   display: "block",
                   fontSize: 20,
-                  fontWeight: 760,
+                  fontWeight: 700,
                   fontFamily: "var(--font-heading, 'Merriweather', serif)",
                   color: "var(--color-text-primary)",
                   textDecoration: "none",
@@ -380,11 +380,13 @@ export default function MegaMenu({
               key={link.href}
               href={link.href}
               onClick={onClose}
+              className="megamenu-legal-link"
               style={{
                 fontSize: 14,
                 fontFamily: "var(--font-body)",
                 color: "var(--color-text-secondary)",
                 textDecoration: "none",
+                transition: "color 0.2s ease",
               }}
             >
               {link.label}

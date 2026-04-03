@@ -140,6 +140,7 @@ export default function LandingIntro() {
     WebkitBackdropFilter: "brightness(1.15)",
     borderRadius: "19px",
     padding: "6px 6px 6px 20px",
+    boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
     overflow: "hidden",
     minWidth: 0,
     boxSizing: "border-box",

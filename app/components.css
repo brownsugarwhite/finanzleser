@@ -409,6 +409,9 @@ h6 {
 /* ─────────────────────────────────────────────
    MegaMenu Link Hover
    ───────────────────────────────────────────── */
+.megamenu-legal-link:hover {
+  color: var(--color-brand-secondary) !important;
+}
 .megamenu-tool-link,
 .megamenu-tool-link > span:last-child {
   color: var(--color-text-primary) !important;

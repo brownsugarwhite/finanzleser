@@ -7,6 +7,7 @@ import MegaMenu from "./MegaMenu";
 export default function MegaMenuWrapper() {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,6 +56,27 @@ export default function MegaMenuWrapper() {
     };
   }, [openCategory]);
 
+  // Fade in with delay
+  useEffect(() => {
+    if (openCategory) {
+      setVisible(false);
+      const timer = setTimeout(() => setVisible(true), 200);
+      return () => clearTimeout(timer);
+    } else {
+      setVisible(false);
+    }
+  }, [openCategory]);
+
+  // Lock scroll when open
+  useEffect(() => {
+    if (openCategory) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [openCategory]);
+
   // Close on Escape
   useEffect(() => {
     if (!openCategory) return;
@@ -81,7 +103,9 @@ export default function MegaMenuWrapper() {
         left: 0,
         right: 0,
         top: 73,
-        zIndex: 55,
+        zIndex: 57,
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.5s ease",
       }}
     >
       <MegaMenu
