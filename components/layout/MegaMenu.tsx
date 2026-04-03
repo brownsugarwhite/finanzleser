@@ -3,6 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { NavSubItem } from "@/lib/navItems";
+
+function boldYears(text: string) {
+  const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
+  return <span>{parts.map((part, i) =>
+    /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 700 }}>{part}</strong> : part
+  )}</span>;
+}
 import type { Post, Rechner } from "@/lib/types";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
@@ -248,7 +255,7 @@ export default function MegaMenu({
                     }}
                     className="megamenu-link"
                   >
-                    {post.title}
+                    {boldYears(post.title)}
                   </Link>
                 ))}
               </nav>
@@ -338,7 +345,7 @@ export default function MegaMenu({
                     }}>
                       {toolCategory === "rechner" ? "Rechner" : toolCategory === "vergleich" ? "Vergleich" : "Checkliste"}
                     </span>
-                    {tool.title}
+                    {boldYears(tool.title)}
                   </Link>
                 </div>
               ))}
