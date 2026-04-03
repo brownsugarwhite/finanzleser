@@ -113,7 +113,7 @@ export default function MegaMenu({
           padding: "36px 0 36px 0",
           position: "relative",
           boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
-          maxWidth: 760,
+          maxWidth: 860,
           width: "100%",
           minHeight: 300,
         }}>
@@ -156,7 +156,7 @@ export default function MegaMenu({
           </div>
 
           {/* Divider line */}
-          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px 0", width: "100%" }} />
+          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px 0px 0px 0px", width: "100%" }} />
 
           {/* Gray bar — full height behind bookmark */}
           <div style={{
@@ -196,7 +196,7 @@ export default function MegaMenu({
           </div>
 
           {/* Columns */}
-          <div style={{ display: "flex", paddingTop: 8 }}>
+          <div style={{ display: "flex", paddingTop: 0 }}>
           {/* Subcategories */}
           <div style={{ width: "50%", flexShrink: 0 }}>
             <nav style={{ display: "flex", flexDirection: "column" }}>
@@ -211,16 +211,17 @@ export default function MegaMenu({
                     gap: 8,
                     width: "100%",
                     textAlign: "left",
-                    padding: "15px 12px 5px 40px",
+                    padding: "15px 12px 5px 60px",
                     fontSize: 16,
-                    fontFamily: "var(--font-body)",
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontStyle: selectedSub === item.href ? "normal" : "italic",
                     borderRadius: 0,
                     border: "none",
                     cursor: "pointer",
                     transition: "background 0.15s ease, color 0.15s ease",
-                    background: selectedSub === item.href ? "rgba(0, 0, 0, 0.03)" : "transparent",
+                    background: "transparent",
                     color: selectedSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
-                    fontWeight: selectedSub === item.href ? 600 : 400,
+                    fontWeight: selectedSub === item.href ? 700 : 300,
                   }}
                 >
                   {item.label}
