@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 /* ── Constants ──────────────────────────────────── */
 
-const PILL_H = 44;
+const PILL_H = 40;
 const PILL_R = 17;
 const PX = 20;
 
@@ -18,11 +18,8 @@ const COLORS = {
 
 const isDark = () => document.documentElement.classList.contains("dark");
 
-const PILL_BG = "var(--pill-bg)";
-const PILL_BORDER = "var(--pill-border)";
-const PILL_SHADOW = "var(--pill-shadow)";
-
-const blobRadius = (h: number) => `${Math.max(PILL_R, h / 2)}px`;
+const PILL_BG_HOVER = "white";
+const PILL_SHADOW_HOVER = "0 3px 23px rgba(0, 0, 0, 0.02)";
 
 const pillPos = (container: DOMRect, btn: DOMRect) => ({
   x: btn.left - container.left,
@@ -62,7 +59,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     if (!pillRef.current) return;
     const d = instant ? 0 : 0.2;
     gsap.to(pillRef.current, {
-      background: PILL_BG, borderColor: PILL_BORDER, boxShadow: PILL_SHADOW,
+      background: PILL_BG_HOVER, borderColor: "transparent", boxShadow: PILL_SHADOW_HOVER,
       duration: d, ease: "power2.out",
     });
     if (lensRef.current) {
@@ -93,58 +90,15 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     }
   }, []);
 
-  /* ── Waterdrop animation ── */
+  /* ── Simple slide animation ── */
 
-  const waterdropTo = useCallback((targetX: number, targetW: number) => {
+  const slideTo = useCallback((targetX: number, targetW: number) => {
     if (!pillRef.current) return;
-
     gsap.killTweensOf(pillRef.current);
-
-    const curX = gsap.getProperty(pillRef.current, "x") as number;
-    const curW = gsap.getProperty(pillRef.current, "width") as number;
-    const curH = gsap.getProperty(pillRef.current, "height") as number;
-    const right = targetX > curX;
-    const dist = Math.abs((targetX + targetW / 2) - (curX + curW / 2));
-
-    if (dist < 5) {
-      gsap.to(pillRef.current, {
-        x: targetX, width: targetW, height: PILL_H,
-        duration: 0.3, ease: "power2.out",
-      });
-      return;
-    }
-
-    const stretchDur = Math.max(0.1, 0.15 + Math.min(dist / 2500, 0.1)) + Math.random() * 0.03;
-    const settleDur = Math.max(0.25, 0.4 + Math.min(dist / 1500, 0.15)) + Math.random() * 0.08;
-    const frac = 0.25 + Math.random() * 0.1;
-    const stretchH = Math.min(curH, 30 + Math.random() * 3);
-
-    const tl = gsap.timeline();
-
-    if (right) {
-      const sw = curW + (targetX + targetW - curX - curW) * frac;
-      tl.to(pillRef.current, {
-        width: sw, height: stretchH, borderRadius: blobRadius(stretchH),
-        duration: stretchDur, ease: "power2.inOut",
-      });
-    } else {
-      const sx = curX - (curX - targetX) * frac;
-      const sw = (curX + curW) - sx;
-      tl.to(pillRef.current, {
-        x: sx, width: sw, height: stretchH, borderRadius: blobRadius(stretchH),
-        duration: stretchDur, ease: "power2.inOut",
-      });
-    }
-
-    tl.to(pillRef.current, {
-      x: targetX, width: targetW, borderRadius: `${PILL_R}px`,
-      duration: settleDur, ease: "back.out(1.6)",
+    gsap.to(pillRef.current, {
+      x: targetX, width: targetW, height: PILL_H,
+      duration: 0.4, ease: "back.out(1.4)",
     });
-
-    tl.to(pillRef.current, {
-      height: PILL_H,
-      duration: settleDur, ease: "back.out(4)",
-    }, "<");
   }, []);
 
   /* ── Snap back to active ── */
@@ -156,11 +110,14 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     );
     if (!activeBtn) return;
 
-    gsap.killTweensOf(pillRef.current);
     const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), activeBtn.getBoundingClientRect());
-    waterdropTo(x, w);
+    gsap.killTweensOf(pillRef.current);
+    gsap.to(pillRef.current, {
+      x, width: w, height: PILL_H,
+      duration: 0.3, ease: "back.out(1.4)",
+    });
     setPillActive();
-  }, [waterdropTo, setPillActive]);
+  }, [slideTo, setPillActive]);
 
   /* ── Pill hover movement ── */
 
@@ -181,30 +138,24 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
       setPillHover(true);
       gsap.to(pillRef.current, {
         x, width: w, height: PILL_H, borderRadius: `${PILL_R}px`,
-        duration: 0.45, ease: "power3.out",
+        duration: 0.25, ease: "back.out(1.4)",
       });
       return;
     }
 
-    gsap.killTweensOf(pillRef.current);
-
-    // Active button hover while pill is sitting on it: subtle grow
+    // Hover on active pill: shrink slightly
     if (menuOpen.current && activeLabel.current === label) {
-      const curX = gsap.getProperty(pillRef.current, "x") as number;
-      const curW = gsap.getProperty(pillRef.current, "width") as number;
-      const dist = Math.abs((x + w / 2) - (curX + curW / 2));
-      if (dist < 5) {
-        const grow = 8;
-        gsap.to(pillRef.current, {
-          x: x - grow / 2, width: w + grow, height: PILL_H + grow,
-          duration: 0.3, ease: "power2.out",
-        });
-        return;
-      }
+      const shrink = 6;
+      gsap.killTweensOf(pillRef.current);
+      gsap.to(pillRef.current, {
+        x: x + shrink / 2, width: w - shrink, height: PILL_H - 4,
+        duration: 0.2, ease: "power2.out",
+      });
+      return;
     }
 
-    waterdropTo(x, w);
-  }, [setPillHover, waterdropTo]);
+    slideTo(x, w);
+  }, [setPillHover, slideTo]);
 
   /* ── Container mouse move (zone splitting) ── */
 
@@ -362,9 +313,9 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
         position: "absolute", top: "50%", left: 0,
         height: `${PILL_H}px`, width: "1px", opacity: 0, borderRadius: `${PILL_R}px`,
         pointerEvents: "none", zIndex: 4, overflow: "hidden",
-        background: PILL_BG,
-        border: `1px solid ${PILL_BORDER}`,
-        boxShadow: PILL_SHADOW,
+        background: PILL_BG_HOVER,
+        border: "none",
+        boxShadow: PILL_SHADOW_HOVER,
       }}
     >
       {hasLens && (
@@ -375,7 +326,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
           }}
           style={{
             position: "absolute", top: "50%", left: 0,
-            display: "flex", alignItems: "center", justifyContent: "space-between", width: "600px",
+            display: "flex", alignItems: "center", justifyContent: "space-between", width: "650px",
             pointerEvents: "none",
           }}
         >
@@ -383,7 +334,7 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
             <React.Fragment key={item.href}>
               <Image src="/icons/nav-spark-green.svg" alt="" width={12} height={12} aria-hidden />
               <span style={{
-                fontFamily: "var(--font-heading, 'Merriweather', serif)", fontSize: "18px", fontWeight: 600,
+                fontFamily: "var(--font-heading, 'Merriweather', serif)", fontSize: "16px", fontWeight: 600,
                 color: COLORS.green, whiteSpace: "nowrap",
               }}>{item.label}</span>
             </React.Fragment>

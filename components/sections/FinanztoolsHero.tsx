@@ -209,6 +209,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
                       background: "rgba(255, 255, 255, 0.8)",
                       backdropFilter: "brightness(1.3) blur(13px)",
                       WebkitBackdropFilter: "brightness(1.3) blur(13px)",
+                      boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
                       overflow: "hidden",
                       position: "relative",
                       cursor: "pointer",
@@ -227,13 +228,15 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
                         height: isActive ? "auto" : 50,
                       }}
                     >
-                      <svg
-                        viewBox="0 0 24 24" fill="none" aria-hidden
-                        style={{ opacity: 0.5, width: isActive ? 28 : 36, height: isActive ? 28 : 36, flexShrink: 0 }}
-                      >
-                        <rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--color-text-primary)" strokeWidth="1.5" />
-                        <path d="M8 12h8M12 8v8" stroke="var(--color-text-primary)" strokeWidth="1.5" strokeLinecap="round" />
-                      </svg>
+                      <div
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 17,
+                          border: "1px solid var(--color-text-primary)",
+                          flexShrink: 0,
+                        }}
+                      />
                       <span
                         style={{
                           fontFamily: "var(--font-heading, 'Merriweather', serif)",
