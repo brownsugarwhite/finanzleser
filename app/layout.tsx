@@ -7,6 +7,7 @@ import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
 import ContentScaler from "@/components/layout/ContentScaler";
+import MegaMenuWrapper from "@/components/layout/MegaMenuWrapper";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import TopBanner from "@/components/ui/TopBanner";
@@ -49,6 +50,7 @@ export default async function RootLayout({
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
+        <Providers>
         <NavProvider items={navItems}>
           <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
             <div style={{ pointerEvents: "auto" }}><BookmarkNav /></div>
@@ -60,11 +62,13 @@ export default async function RootLayout({
             <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
           </div>
           <ContentScaler />
+          <MegaMenuWrapper />
           <div className="scalable-content" style={{ position: "relative" }}>
-            <Providers>{children}</Providers>
+            {children}
           </div>
           <ProgressiveBlur height={150} />
         </NavProvider>
+        </Providers>
       </body>
     </html>
   );
