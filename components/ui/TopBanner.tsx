@@ -21,7 +21,7 @@ export default function TopBanner({ text }: TopBannerProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const dotCount = Math.ceil((typeof window !== "undefined" ? window.innerWidth : 1920) / (DOT_SIZE + 6)) + 10;
+  const dotCount = 500;
 
   useLayoutEffect(() => {
     const track = trackRef.current!;

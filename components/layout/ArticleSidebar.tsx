@@ -21,6 +21,7 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         width: "100%",
         minWidth: collapsed ? "auto" : "400px",
         paddingLeft: collapsed ? "23px" : "50px",
+        paddingRight: collapsed ? "50px" : "23px",
       }}
     >
       <div className="sticky top-24" style={{ position: "sticky", top: "100px", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
