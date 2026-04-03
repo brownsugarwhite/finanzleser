@@ -110,7 +110,7 @@ export default function MegaMenu({
           flexDirection: "column",
           background: "white",
           borderRadius: 36,
-          padding: "36px 40px",
+          padding: "36px 0 36px 0",
           position: "relative",
           boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
           maxWidth: 760,
@@ -118,7 +118,7 @@ export default function MegaMenu({
           minHeight: 300,
         }}>
           {/* Headings row */}
-          <div style={{ display: "flex", marginBottom: 0 }}>
+          <div style={{ display: "flex", marginBottom: 0, padding: "0 40px" }}>
             <div style={{ flex: 1, paddingRight: 24 }}>
               <Link
                 href={mainCategoryHref}
@@ -156,7 +156,7 @@ export default function MegaMenu({
           </div>
 
           {/* Divider line */}
-          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px -40px", width: "calc(100% + 80px)" }} />
+          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px 0", width: "100%" }} />
 
           {/* Gray bar — full height behind bookmark */}
           <div style={{
@@ -198,38 +198,48 @@ export default function MegaMenu({
           {/* Columns */}
           <div style={{ display: "flex", paddingTop: 8 }}>
           {/* Subcategories */}
-          <div style={{ flex: 1, paddingRight: 24 }}>
-            <nav style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" }}>
+          <div style={{ width: "50%", flexShrink: 0 }}>
+            <nav style={{ display: "flex", flexDirection: "column" }}>
               {items.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => setSelectedSub(item.href)}
+                  className="megamenu-sub-btn"
                   style={{
-                    display: "inline-block",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    width: "100%",
                     textAlign: "left",
-                    padding: "6px 12px",
+                    padding: "15px 12px 5px 40px",
                     fontSize: 16,
                     fontFamily: "var(--font-body)",
-                    borderRadius: 8,
+                    borderRadius: 0,
                     border: "none",
                     cursor: "pointer",
                     transition: "background 0.15s ease, color 0.15s ease",
-                    background: selectedSub === item.href ? "var(--color-bg-subtle)" : "transparent",
+                    background: selectedSub === item.href ? "rgba(0, 0, 0, 0.03)" : "transparent",
                     color: selectedSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
                     fontWeight: selectedSub === item.href ? 600 : 400,
                   }}
                 >
                   {item.label}
+                  <span className="megamenu-sub-line" style={{
+                    height: 0,
+                    borderTop: "1px solid currentColor",
+                    opacity: 1,
+                    flexShrink: 0,
+                  }} />
+                  <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}>                    
+                    <polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" />
+                  </svg>
                 </button>
               ))}
             </nav>
           </div>
 
-          {/* Spacer for bookmark */}
-          <div style={{ width: 10, flexShrink: 0 }} />
-
           {/* Posts */}
-          <div style={{ flex: 1, paddingLeft: 36 }}>
+          <div style={{ width: "50%", flexShrink: 0, paddingLeft: 36, paddingRight: 40 }}>
             {loading ? (
               <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Wird geladen...</div>
             ) : posts.length > 0 ? (
