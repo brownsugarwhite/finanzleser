@@ -82,9 +82,6 @@ export default function MegaMenuWrapper() {
         right: 0,
         top: 73,
         zIndex: 55,
-        background: "white",
-        borderTop: "1px solid var(--color-border-default)",
-        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
       }}
     >
       <MegaMenu

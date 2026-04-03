@@ -27,6 +27,8 @@ export default function MegaMenu({
   const [tools, setTools] = useState<Rechner[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory || "rechner";
+
   // Extract category slug from href (e.g., "/finanzen/geldanlagen" -> "geldanlagen")
   const getCategorySlug = (href: string): string => {
     const parts = href.split("/").filter(Boolean);
@@ -93,101 +95,256 @@ export default function MegaMenu({
   }, [selectedSub]);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8" onClick={(e) => e.stopPropagation()}>
+    <div style={{ width: "100%", padding: "24px 50px 24px 24px" }} onClick={(e) => e.stopPropagation()}>
       {/* Dark Mode Toggle */}
-      <div className="flex justify-end mb-6">
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
         <DarkModeToggle />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Left Column: Subcategories */}
-        <div className="min-h-96">
-          <Link
-            href={mainCategoryHref}
-            onClick={onClose}
-            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
-          >
-            {activeCategoryLabel}
-          </Link>
-          <nav className="space-y-2">
-            {items.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => setSelectedSub(item.href)}
-                className={`block w-full text-left px-3 py-2 text-sm rounded transition ${
-                  selectedSub === item.href
-                    ? "bg-blue-50 text-blue-600 font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
-                }`}
+      <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+        {/* Center Container: Subcategories + Posts */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          background: "white",
+          borderRadius: 36,
+          padding: "36px 40px",
+          position: "relative",
+          maxWidth: 760,
+          width: "100%",
+          minHeight: 300,
+        }}>
+          {/* Headings row */}
+          <div style={{ display: "flex", marginBottom: 0 }}>
+            <div style={{ flex: 1, paddingRight: 24 }}>
+              <Link
+                href={mainCategoryHref}
+                onClick={onClose}
+                style={{
+                  display: "block",
+                  fontSize: 20,
+                  fontWeight: 760,
+                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                  color: "var(--color-text-primary)",
+                  textDecoration: "none",
+                }}
               >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        </div>
+                {activeCategoryLabel}
+              </Link>
+            </div>
+            {/* Spacer for bookmark */}
+            <div style={{ width: 10, flexShrink: 0 }} />
+            <div style={{ flex: 1, paddingLeft: 36 }}>
+              <Link
+                href={selectedSub}
+                onClick={onClose}
+                style={{
+                  display: "block",
+                  fontSize: 20,
+                  fontWeight: 700,
+                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                  color: "var(--color-text-primary)",
+                  textDecoration: "none",
+                }}
+              >
+                {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
+              </Link>
+            </div>
+          </div>
 
-        {/* Middle Column: Posts */}
-        <div className="min-h-96">
-          <Link
-            href={selectedSub}
-            onClick={onClose}
-            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
-          >
-            {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
-          </Link>
-          {loading ? (
-            <div className="text-sm text-gray-500">Wird geladen...</div>
-          ) : posts.length > 0 ? (
-            <nav className="space-y-2 max-h-80 overflow-y-auto">
-              {posts.map((post) => (
-                <Link
-                  key={post.id}
-                  href={`/${activeCategory}/${getCategorySlug(selectedSub)}/${post.slug}`}
-                  onClick={onClose}
-                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition line-clamp-2"
+          {/* Divider line */}
+          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px -40px", width: "calc(100% + 80px)" }} />
+
+          {/* Gray bar — full height behind bookmark */}
+          <div style={{
+            position: "absolute",
+            left: "50%",
+            top: 0,
+            bottom: 0,
+            width: 27,
+            transform: "translateX(-50%)",
+            background: "rgba(0, 0, 0, 0.03)",
+            zIndex: 1,
+          }} />
+
+          {/* Bookmark Divider — absolute, full height */}
+          <div style={{
+            position: "absolute",
+            left: "50%",
+            top: 0,
+            bottom: "-4%",
+            width: 10,
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 2,
+          }}>
+            <div style={{
+              flex: 1,
+              background: "var(--color-brand-secondary)",
+              width: "100%",
+            }} />
+            <img
+              src="/icons/small_spikes_down.svg"
+              alt=""
+              style={{ width: "100%", height: "auto", display: "block" }}
+              aria-hidden
+            />
+          </div>
+
+          {/* Columns */}
+          <div style={{ display: "flex", paddingTop: 8 }}>
+          {/* Subcategories */}
+          <div style={{ flex: 1, paddingRight: 24 }}>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" }}>
+              {items.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => setSelectedSub(item.href)}
+                  style={{
+                    display: "inline-block",
+                    textAlign: "left",
+                    padding: "6px 12px",
+                    fontSize: 16,
+                    fontFamily: "var(--font-body)",
+                    borderRadius: 8,
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "background 0.15s ease, color 0.15s ease",
+                    background: selectedSub === item.href ? "var(--color-bg-subtle)" : "transparent",
+                    color: selectedSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
+                    fontWeight: selectedSub === item.href ? 600 : 400,
+                  }}
                 >
-                  {post.title}
-                </Link>
+                  {item.label}
+                </button>
               ))}
             </nav>
-          ) : (
-            <div className="text-sm text-gray-500">Keine Beiträge gefunden</div>
-          )}
-          {hasMorePosts && (
-            <Link
-              href={selectedSub}
-              onClick={onClose}
-              className="block mt-4 pt-4 border-t border-gray-200 text-xs font-medium text-blue-600 hover:text-blue-800"
-            >
-              Alle Beiträge [alle]
-            </Link>
-          )}
+          </div>
+
+          {/* Spacer for bookmark */}
+          <div style={{ width: 10, flexShrink: 0 }} />
+
+          {/* Posts */}
+          <div style={{ flex: 1, paddingLeft: 36 }}>
+            {loading ? (
+              <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Wird geladen...</div>
+            ) : posts.length > 0 ? (
+              <nav style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 320, overflowY: "auto" }}>
+                {posts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/${activeCategory}/${getCategorySlug(selectedSub)}/${post.slug}`}
+                    onClick={onClose}
+                    style={{
+                      display: "block",
+                      padding: "6px 12px",
+                      fontSize: 14,
+                      fontFamily: "var(--font-body)",
+                      color: "var(--color-text-secondary)",
+                      textDecoration: "none",
+                      borderRadius: 8,
+                      transition: "background 0.15s ease",
+                    }}
+                    className="megamenu-link"
+                  >
+                    {post.title}
+                  </Link>
+                ))}
+              </nav>
+            ) : (
+              <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Keine Beiträge gefunden</div>
+            )}
+            {hasMorePosts && (
+              <Link
+                href={selectedSub}
+                onClick={onClose}
+                style={{
+                  display: "block",
+                  marginTop: 16,
+                  paddingTop: 16,
+                  borderTop: "1px solid rgba(0, 0, 0, 0.07)",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: "var(--color-brand)",
+                  textDecoration: "none",
+                }}
+              >
+                Alle Beiträge ansehen →
+              </Link>
+            )}
+          </div>
+          </div>
         </div>
 
-        {/* Right Column: Tools */}
-        <div className="min-h-96">
+        {/* Right: Finanztools (transparent, absolute) */}
+        <div style={{ position: "absolute", right: 0, top: 0, width: 250, padding: "12px 0", textAlign: "right" }}>
           <Link
             href="/finanztools"
             onClick={onClose}
-            className="block text-sm font-bold text-gray-900 mb-4 hover:text-blue-600 transition"
+            style={{
+              display: "block",
+              fontSize: 20,
+              fontWeight: 700,
+              fontFamily: "var(--font-heading, 'Merriweather', serif)",
+              color: "var(--color-text-primary)",
+              lineHeight: 1.15,
+              marginBottom: 16,
+              paddingRight: 10,
+              textDecoration: "none",
+            }}
           >
-            Finanztools
+            Passende<br />Finanztools
           </Link>
           {tools.length > 0 ? (
-            <nav className="space-y-2 max-h-80 overflow-y-auto">
-              {tools.map((tool) => (
-                <Link
-                  key={tool.id}
-                  href={`/finanztools/rechner/${tool.slug}`}
-                  onClick={onClose}
-                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded transition"
-                >
-                  {tool.title}
-                </Link>
+            <nav style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
+              {tools.map((tool, idx) => (
+                <div key={tool.id}>
+                  {idx > 0 && (
+                    <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "13px 12px" }} />
+                  )}
+                  <Link
+                    href={`/finanztools/rechner/${tool.slug}`}
+                    onClick={onClose}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                      padding: "8px 12px",
+                      fontSize: 14,
+                      fontFamily: "var(--font-body)",
+                      color: "var(--color-text-primary)",
+                      textDecoration: "none",
+                      borderRadius: 8,
+                      textAlign: "right",
+                      transition: "background 0.15s ease",
+                      gap: 3,
+                    }}
+                    className="megamenu-link"
+                  >
+                    <span style={{
+                      fontSize: 10,
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                      color: "white",
+                      padding: "2px 8px",
+                      borderRadius: 0,
+                      background: toolCategory === "rechner"
+                        ? "var(--color-tool-rechner)"
+                        : toolCategory === "vergleich"
+                        ? "var(--color-tool-vergleiche)"
+                        : "var(--color-tool-checklisten)",
+                    }}>
+                      {toolCategory === "rechner" ? "Rechner" : toolCategory === "vergleich" ? "Vergleich" : "Checkliste"}
+                    </span>
+                    {tool.title}
+                  </Link>
+                </div>
               ))}
             </nav>
           ) : (
-            <div className="text-sm text-gray-500">Keine Tools vorhanden</div>
+            <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Keine Tools vorhanden</div>
           )}
         </div>
       </div>
