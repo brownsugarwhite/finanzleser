@@ -7,7 +7,7 @@ import type { NavSubItem } from "@/lib/navItems";
 function boldYears(text: string) {
   const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
   return <span>{parts.map((part, i) =>
-    /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 700 }}>{part}</strong> : part
+    /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 900 }}>{part}</strong> : part
   )}</span>;
 }
 import type { Post, Rechner } from "@/lib/types";
@@ -102,12 +102,7 @@ export default function MegaMenu({
   }, [selectedSub]);
 
   return (
-    <div style={{ width: "100%", padding: "24px 50px 24px 24px" }} onClick={(e) => e.stopPropagation()}>
-      {/* Dark Mode Toggle */}
-      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-        <DarkModeToggle />
-      </div>
-
+    <div style={{ width: "100%", padding: "24px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
       <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Center Container: Subcategories + Posts */}
         <div style={{
@@ -117,6 +112,7 @@ export default function MegaMenu({
           borderRadius: 36,
           padding: "36px 40px",
           position: "relative",
+          boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
           maxWidth: 760,
           width: "100%",
           minHeight: 300,
@@ -285,7 +281,7 @@ export default function MegaMenu({
         </div>
 
         {/* Right: Finanztools (transparent, absolute) */}
-        <div style={{ position: "absolute", right: 0, top: 0, width: 250, padding: "12px 0", textAlign: "right" }}>
+        <div style={{ position: "absolute", right: 0, top: 0, width: 230, padding: "12px 0", textAlign: "right" }}>
           <Link
             href="/finanztools"
             onClick={onClose}
@@ -318,20 +314,27 @@ export default function MegaMenu({
                       flexDirection: "column",
                       alignItems: "flex-end",
                       padding: "8px 12px",
-                      fontSize: 14,
-                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      fontWeight: 500,
+                      lineHeight: 1.2,
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       color: "var(--color-text-primary)",
                       textDecoration: "none",
                       borderRadius: 8,
                       textAlign: "right",
                       transition: "background 0.15s ease",
                       gap: 3,
+                      hyphens: "auto",
+                      WebkitHyphens: "auto",
+                      wordBreak: "break-word",
                     }}
-                    className="megamenu-link"
+                    lang="de"
+                    className="megamenu-link megamenu-tool-link"
                   >
                     <span style={{
                       fontSize: 10,
                       fontWeight: 600,
+                      fontFamily: "var(--font-body)",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                       color: "white",
@@ -353,6 +356,50 @@ export default function MegaMenu({
           ) : (
             <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Keine Tools vorhanden</div>
           )}
+        </div>
+      </div>
+
+      {/* Legal Links + Dark Mode Toggle */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 16,
+        maxWidth: 700,
+        width: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}>
+        <nav style={{ display: "flex", gap: 16, alignItems: "center" }}>
+          {[
+            { label: "Impressum", href: "/impressum" },
+            { label: "Datenschutz", href: "/datenschutz" },
+            { label: "AGB", href: "/agb" },
+            { label: "Kontakt", href: "/kontakt" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onClose}
+              style={{
+                fontSize: 14,
+                fontFamily: "var(--font-body)",
+                color: "var(--color-text-secondary)",
+                textDecoration: "none",
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{
+            fontSize: 14,
+            fontFamily: "var(--font-body)",
+            color: "var(--color-text-secondary)",
+          }}>
+            Modus
+          </span>
+          <DarkModeToggle />
         </div>
       </div>
     </div>

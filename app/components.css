@@ -409,6 +409,10 @@ h6 {
 /* ─────────────────────────────────────────────
    MegaMenu Link Hover
    ───────────────────────────────────────────── */
+.megamenu-tool-link,
+.megamenu-tool-link > span:last-child {
+  color: var(--color-text-primary) !important;
+}
 .megamenu-link:hover {
   background: var(--color-bg-subtle);
 }
