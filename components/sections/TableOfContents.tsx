@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
+import { useEffect, useState, useRef, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const tocHoverStyles = `
   .toc-item:not(.toc-active):hover .toc-badge {
@@ -50,6 +53,16 @@ type MergedItem =
 export default function TableOfContents({ content, collapsed = false, onToggleCollapsed }: TableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
+
+  const scrollToId = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    gsap.to(window, {
+      scrollTo: { y: el, offsetY: 90 },
+      duration: 0.8,
+      ease: "power2.inOut",
+    });
+  }, []);
   const [scrollProgress, setScrollProgress] = useState(0);
   const headingsRef = useRef<HTMLElement[]>([]);
   const articleRef = useRef<HTMLElement | null>(null);
@@ -88,7 +101,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
 
       for (let i = 0; i < headings.length; i++) {
         const rect = headings[i].getBoundingClientRect();
-        if (rect.top <= 100) {
+        if (rect.top <= 91) {
           currentId = headings[i].id || "";
 
           const start = headings[i].getBoundingClientRect().top + window.scrollY;
@@ -96,7 +109,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
             i < headings.length - 1
               ? headings[i + 1].getBoundingClientRect().top + window.scrollY
               : article.getBoundingClientRect().bottom + window.scrollY;
-          const scrollPos = window.scrollY + 100;
+          const scrollPos = window.scrollY + 91;
           progress = Math.min(1, Math.max(0, (scrollPos - start) / (end - start)));
         }
       }
@@ -247,10 +260,11 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
 
           return (
             <li key={item.id}>
-              <Link
-                href={`#${item.id}`}
+              <a
+                onClick={(e) => { e.preventDefault(); scrollToId(item.id); }}
                 className={`toc-item${isActive ? " toc-active" : ""}`}
                 style={{
+                  cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
                   gap: "6px",
@@ -339,7 +353,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                     {item.text}
                   </span>
                 )}
-              </Link>
+              </a>
             </li>
           );
         })}

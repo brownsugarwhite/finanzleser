@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect, useState, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import type { Rechner } from "@/lib/types";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 interface TOCItem {
   id: string;
@@ -35,19 +38,19 @@ function NumberBadge({ number, color }: { number: number; color?: string }) {
   return (
     <span style={{
       position: "relative",
-      width: 36,
-      height: 36,
+      width: 32,
+      height: 32,
       flexShrink: 0,
     }}>
       <span style={{
-        width: 36,
-        height: 36,
-        borderRadius: 15,
+        width: 32,
+        height: 32,
+        borderRadius: 13,
         border: "1px solid var(--color-text-medium)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontSize: 20,
+        fontSize: 19,
         fontFamily: "var(--font-heading, 'Merriweather', serif)",
         fontStyle: "italic",
         fontWeight: 300,
@@ -60,8 +63,8 @@ function NumberBadge({ number, color }: { number: number; color?: string }) {
       {color && (
         <span style={{
           position: "absolute",
-          top: 0,
-          left: 1,
+          top: -1,
+          left: 0,
           width: 8,
           height: 8,
           borderRadius: "50%",
@@ -90,6 +93,16 @@ function ArrowLine() {
 
 export default function ArticleTableOfContents({ content, tools }: ArticleTableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
+
+  const scrollToId = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    gsap.to(window, {
+      scrollTo: { y: el, offsetY: 90 },
+      duration: 0.8,
+      ease: "power2.inOut",
+    });
+  }, []);
 
   const loadTOC = () => {
     const article = document.querySelector("article");
@@ -159,7 +172,7 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
         Inhaltsverzeichnis
       </p>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {merged.map((entry) => {
           if (entry.kind === "tool") {
             const { tool } = entry;
@@ -208,14 +221,15 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
 
           const { item } = entry;
           return (
-            <Link
+            <a
               key={item.id}
-              href={`#${item.id}`}
+              onClick={(e) => { e.preventDefault(); scrollToId(item.id); }}
               style={{
                 display: "flex",
                 alignItems: "flex-start",
                 gap: 6,
                 textDecoration: "none",
+                cursor: "pointer",
               }}
               className="hover:opacity-80 transition"
             >
@@ -232,7 +246,7 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
               }}>
                 {item.text}
               </span>
-            </Link>
+            </a>
           );
         })}
       </div>
