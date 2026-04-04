@@ -34,6 +34,17 @@ export function decodeHtmlEntities(text: string): string {
 }
 
 /**
+ * Entfernt Visual Composer / WPBakery Shortcodes aus dem Content
+ */
+export function stripVCShortcodes(html: string): string {
+  if (!html) return html;
+  return html
+    .replace(/\[\/?(vc_row|vc_column|vc_column_text|vc_row_inner|vc_column_inner)(\s[^\]]*)?\]/g, "")
+    .replace(/\[templatera[^\]]*\]\[\/templatera\]/g, "")
+    .replace(/\[templatera[^\]]*\]/g, "");
+}
+
+/**
  * Dekodiert alle relevanten Felder eines Post-Objekts
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
