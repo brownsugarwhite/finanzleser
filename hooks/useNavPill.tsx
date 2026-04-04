@@ -302,15 +302,9 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
       const prevBtn = btnRefs.current.find((b) => b?.textContent === activeLabel.current);
       if (prevBtn) gsap.to(prevBtn, { color: "var(--color-nav-text)", duration: 0.2 });
       activeLabel.current = label;
-      gsap.killTweensOf(pillRef.current);
-      setPillActive(true);
-      if (containerRef.current) {
-        const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), btnEl.getBoundingClientRect());
-        gsap.to(pillRef.current, {
-          x, width: w, height: PILL_H, borderRadius: `${PILL_R}px`,
-          duration: 0.35, ease: "power3.out",
-        });
-      }
+      // Einfach sliden, keine Bloom-Animation
+      slideTo(btnEl.getBoundingClientRect().left - containerRef.current!.getBoundingClientRect().left, btnEl.getBoundingClientRect().width);
+      setPillActive();
       onActivate?.(label);
     }
   }, [setPillActive, onActivate]);

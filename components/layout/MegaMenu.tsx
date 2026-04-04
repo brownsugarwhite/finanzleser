@@ -102,7 +102,7 @@ export default function MegaMenu({
   }, [selectedSub]);
 
   return (
-    <div style={{ width: "100%", padding: "24px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
+    <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
       <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Center Container: Subcategories + Posts */}
         <div style={{
@@ -211,7 +211,7 @@ export default function MegaMenu({
                     gap: 8,
                     width: "100%",
                     textAlign: "left",
-                    padding: "15px 12px 5px 60px",
+                    padding: "15px 36px 5px 60px",
                     fontSize: 16,
                     fontFamily: "var(--font-heading, 'Merriweather', serif)",
                     fontStyle: selectedSub === item.href ? "normal" : "italic",
@@ -221,11 +221,11 @@ export default function MegaMenu({
                     transition: "background 0.15s ease, color 0.15s ease",
                     background: "transparent",
                     color: selectedSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
-                    fontWeight: selectedSub === item.href ? 700 : 300,
+                    fontWeight: selectedSub === item.href ? 400 : 300,
                   }}
                 >
                   {item.label}
-                  <span className="megamenu-sub-line" style={{
+                  <span className={`megamenu-sub-line ${selectedSub === item.href ? "megamenu-sub-line--active" : ""}`} style={{
                     height: 0,
                     borderTop: "1px solid currentColor",
                     opacity: 1,

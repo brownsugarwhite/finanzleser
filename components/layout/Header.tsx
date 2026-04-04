@@ -36,7 +36,9 @@ export default function Header() {
   // Close megamenu on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (megamenuRef.current && !megamenuRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if ((target as HTMLElement).closest?.("[data-nav-pill]")) return;
+      if (megamenuRef.current && !megamenuRef.current.contains(target)) {
         setOpenMegamenu(null);
         pill.closeMenu();
       }
@@ -84,7 +86,7 @@ export default function Header() {
       {/* Desktop Layout */}
       <div className="topbar-grid hidden md:flex" style={{ position: "absolute", zIndex: 51, pointerEvents: "none" }}>
         <div className="logo-space" />
-        <div className="nav-space" style={{ pointerEvents: "auto" }}>
+        <div className="nav-space" data-nav-pill style={{ pointerEvents: "auto" }}>
           <div
             {...pill.containerProps}
             style={{
@@ -132,23 +134,26 @@ export default function Header() {
 
       <Spacer noMargin />
 
-      {/* Megamenu Overlay */}
-      {openMegamenu && (
-        <div className="fixed left-0 right-0 z-50 bg-white border-t border-gray-200" style={{ top: 73 }}>
-          {NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu && (
-            <MegaMenu
-              activeCategory={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href.substring(1) || ""}
-              activeCategoryLabel={openMegamenu || ""}
-              items={NAV_ITEMS.find((item) => item.label === openMegamenu)?.submenu || []}
-              mainCategoryHref={NAV_ITEMS.find((item) => item.label === openMegamenu)?.href || ""}
-              onClose={() => {
-                setOpenMegamenu(null);
-                pill.closeMenu();
-              }}
-            />
-          )}
-        </div>
-      )}
+      {/* Megamenu Overlay – immer gemounted */}
+      <div
+        className="fixed left-0 right-0 z-50 bg-white border-t border-gray-200"
+        style={{
+          top: 73,
+          visibility: openMegamenu ? "visible" : "hidden",
+          pointerEvents: openMegamenu ? "auto" : "none",
+        }}
+      >
+        <MegaMenu
+          activeCategory={(NAV_ITEMS.find((item) => item.label === openMegamenu) || NAV_ITEMS[0])?.href.substring(1) || ""}
+          activeCategoryLabel={openMegamenu || NAV_ITEMS[0]?.label || ""}
+          items={(NAV_ITEMS.find((item) => item.label === openMegamenu) || NAV_ITEMS[0])?.submenu || []}
+          mainCategoryHref={(NAV_ITEMS.find((item) => item.label === openMegamenu) || NAV_ITEMS[0])?.href || ""}
+          onClose={() => {
+            setOpenMegamenu(null);
+            pill.closeMenu();
+          }}
+        />
+      </div>
 
       {/* Mobile Layout */}
       <div className="md:hidden flex items-center justify-between">

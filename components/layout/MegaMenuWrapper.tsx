@@ -56,12 +56,13 @@ export default function MegaMenuWrapper() {
     };
   }, [openCategory]);
 
-  // Fade in with delay
+  // Fade in only on first open, not on category switch
   useEffect(() => {
     if (openCategory) {
-      setVisible(false);
-      const timer = setTimeout(() => setVisible(true), 200);
-      return () => clearTimeout(timer);
+      if (!visible) {
+        const timer = setTimeout(() => setVisible(true), 200);
+        return () => clearTimeout(timer);
+      }
     } else {
       setVisible(false);
     }
