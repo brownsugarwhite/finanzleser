@@ -85,6 +85,9 @@ h6 {
 }
 
 .prose h2 {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  line-height: 1.35em !important;
   margin-top: 2em !important;
   margin-bottom: 1em !important;
 }
