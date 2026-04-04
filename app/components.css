@@ -434,8 +434,12 @@ h6 {
 .megamenu-tool-link > span:last-child {
   color: var(--color-text-primary) !important;
 }
-.megamenu-link:hover {
-  background: var(--color-bg-subtle);
+a.megamenu-link,
+a.megamenu-link:visited {
+  color: var(--color-text-secondary) !important;
+}
+a.megamenu-link:hover {
+  color: var(--color-brand-secondary) !important;
 }
 
 /* ─────────────────────────────────────────────

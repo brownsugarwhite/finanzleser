@@ -110,7 +110,7 @@ export default function MegaMenu({
           flexDirection: "column",
           background: "white",
           borderRadius: 36,
-          padding: "36px 0 36px 0",
+          padding: "36px 0 50px 0",
           position: "relative",
           boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
           maxWidth: 860,
@@ -240,11 +240,20 @@ export default function MegaMenu({
           </div>
 
           {/* Posts */}
-          <div style={{ width: "50%", flexShrink: 0, paddingLeft: 36, paddingRight: 40 }}>
+          <div style={{ width: "50%", flexShrink: 0, paddingLeft: 36, paddingRight: 40, position: "relative", zIndex: 3 }}>
+            <div style={{
+              fontFamily: "var(--font-heading, 'Merriweather', serif)",
+              fontSize: 15,
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              marginTop: 23,          
+            }}>
+              Neuste Beiträge
+            </div>
             {loading ? (
               <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Wird geladen...</div>
             ) : posts.length > 0 ? (
-              <nav style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 320, overflowY: "auto" }}>
+              <nav style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
                 {posts.map((post) => (
                   <Link
                     key={post.id}
@@ -255,12 +264,12 @@ export default function MegaMenu({
                       padding: "6px 12px",
                       fontSize: 14,
                       fontFamily: "var(--font-body)",
-                      color: "var(--color-text-secondary)",
                       textDecoration: "none",
-                      borderRadius: 8,
-                      transition: "background 0.15s ease",
+                      transition: "color 0.15s ease",
                     }}
                     className="megamenu-link"
+                    onMouseEnter={(e) => { const el = e.currentTarget; el.style.color = "#D3005E"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = "inherit"); }}
+                    onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = ""; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
                   >
                     {boldYears(post.title)}
                   </Link>
@@ -275,7 +284,7 @@ export default function MegaMenu({
                 onClick={onClose}
                 style={{
                   display: "block",
-                  marginTop: 16,
+                  marginTop: 23,
                   paddingTop: 16,
                   borderTop: "1px solid rgba(0, 0, 0, 0.07)",
                   fontSize: 12,
@@ -284,7 +293,7 @@ export default function MegaMenu({
                   textDecoration: "none",
                 }}
               >
-                Alle Beiträge ansehen →
+                Alle Beiträge ansehen <span style={{ display: "inline-block", width: 13, height: 0, borderTop: "1px solid currentColor", verticalAlign: "middle", marginLeft: 4 }} /><svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", display: "inline", verticalAlign: "middle", marginLeft: -4 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
               </Link>
             )}
           </div>
