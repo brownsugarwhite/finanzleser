@@ -1,54 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type RentenbesteuerungParams, type RentenbesteuerungResult } from "@/lib/calculators/rentenbesteuerung";
-import { euro } from "@/lib/calculators/utils";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
-import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
-
-const BUNDESLAENDER = [
-  "Baden-Württemberg",
-  "Bayern",
-  "Berlin",
-  "Brandenburg",
-  "Bremen",
-  "Hamburg",
-  "Hessen",
-  "Mecklenburg-Vorpommern",
-  "Niedersachsen",
-  "Nordrhein-Westfalen",
-  "Rheinland-Pfalz",
-  "Saarland",
-  "Sachsen",
-  "Sachsen-Anhalt",
-  "Schleswig-Holstein",
-  "Thüringen"
-];
+import RechnerButton from "./ui/RechnerButton";
 
 export default function RentenbesteuerungRechner() {
   const [params, setParams] = useState<RentenbesteuerungParams>({
-    rente_monatlich: 1500,
-    sonstiges_einkommen: 500,
-    bundesland: "Nordrhein-Westfalen"
+    monatlicheRente: 1500,
+    rentenBeginnJahr: 2026,
   });
 
   const [result, setResult] = useState<RentenbesteuerungResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
-
-  const handleParamChange = (key: keyof RentenbesteuerungParams, value: number | string) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
 
   return (
     <div className="rechner-container">
@@ -56,66 +29,60 @@ export default function RentenbesteuerungRechner() {
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Rente monatlich"
-          name="rente_monatlich"
-          value={params.rente_monatlich}
-          onChange={(val) => handleParamChange("rente_monatlich", Number(val))}
+          label="Monatliche Rente (brutto)"
+          name="monatlicheRente"
+          value={params.monatlicheRente}
+          onChange={(val) => setParams((p) => ({ ...p, monatlicheRente: val }))}
           einheit="€/Monat"
           min={0}
           step={100}
         />
 
         <RechnerInput
-          label="Sonstiges Einkommen"
-          name="sonstiges_einkommen"
-          value={params.sonstiges_einkommen}
-          onChange={(val) => handleParamChange("sonstiges_einkommen", Number(val))}
-          einheit="€/Jahr"
-          min={0}
-          step={100}
-        />
-
-        <RechnerSelect
-          label="Bundesland"
-          name="bundesland"
-          value={params.bundesland}
-          onChange={(val) => handleParamChange("bundesland", val)}
-          options={BUNDESLAENDER.map((bl) => ({ label: bl, value: bl }))}
+          label="Rentenbeginn (Jahr)"
+          name="rentenBeginnJahr"
+          value={params.rentenBeginnJahr}
+          onChange={(val) => setParams((p) => ({ ...p, rentenBeginnJahr: val }))}
+          min={2005}
+          max={2058}
+          step={1}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Geschätzte Einkommensteuer"
-              value={euro(result.einkommensteuer_geschaetzt)}
+              label="Einkommensteuer auf Rente"
+              value={euro(result.estAufRente)}
               highlight={true}
             />
             <RechnerResultBox
-              label="Effektiver Steuersatz"
-              value={`${result.effektiver_steuersatz}%`}
-              highlight={false}
+              label="Besteuerungsanteil"
+              value={prozent(result.besteuerungsanteilProzent)}
             />
           </div>
 
           <h4 className="rechner-result-section-title">Berechnung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Rente jährlich", value: euro(result.rente_jaehrlich) },
-              { label: "Besteuerungsanteil 2026", value: `${result.besteuerungsanteil}%` },
-              { label: "Zu versteuernde Rente", value: euro(result.zu_versteuerndes_einkommen) },
-              { label: "Sonstiges Einkommen", value: euro(result.sonstiges_einkommen) },
-              { label: "Gesamteinkommen", value: euro(result.gesamteinkommen) }
+              { label: "Rente jaehrlich", value: euro(params.monatlicheRente * 12) },
+              { label: "Besteuerungsanteil", value: prozent(result.besteuerungsanteilProzent) },
+              { label: "Steuerpflichtiger Anteil", value: euro(result.steuerpflichtigAnteil) },
+              { label: "Werbungskosten-Pauschbetrag", value: euro(result.wkPauschbetrag) },
+              { label: "Zu versteuerndes Einkommen", value: euro(result.zvEAusRente) },
             ]}
-            footer={{ label: "Geschätzte Einkommensteuer (vereinfacht)", value: euro(result.einkommensteuer_geschaetzt) }}
+            footer={{ label: "Einkommensteuer auf Rente", value: euro(result.estAufRente) }}
           />
 
           <RechnerHinweis>
-            Dies ist eine vereinfachte Schätzung basierend auf Durchschnittssteuersätzen.
-            Die tatsächliche Steuer hängt von Ihrer Gesamtsituation ab (Kirchensteuer, Soli, Kapitalerträge, etc.).
-            Der Besteuerungsanteil für Renten 2026 beträgt {result.besteuerungsanteil}%.
-            Quelle: § 22 EStG, Rentenbesteuerung nach Alterseinkünfte-Gesetz.
+            Der Besteuerungsanteil fuer Rentenbeginn {params.rentenBeginnJahr} betraegt {prozent(result.besteuerungsanteilProzent)}.
+            Bis 2058 steigt der Besteuerungsanteil auf 100 %. Die Berechnung beruecksichtigt den
+            Werbungskosten-Pauschbetrag von {euro(result.wkPauschbetrag)} und die ESt nach § 32a EStG.
+            Soli und Kirchensteuer sind nicht enthalten.
+            Quelle: § 22 Nr. 1 Satz 3 Buchst. a EStG.
           </RechnerHinweis>
         </div>
       )}

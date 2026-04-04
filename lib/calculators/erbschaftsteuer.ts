@@ -1,101 +1,147 @@
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+export type Verwandtschaft = "ehegatte" | "kind" | "enkel" | "geschwister" | "sonstige";
+
 export interface ErbschaftsteuerParams {
-  erbschaft: number; // Erbsumme in €
-  verwandtschaftsgrad: number; // 1 = Kind, 2 = Enkel, 3 = Großeltern, 4 = Geschwister, 5 = Sonstige
+  erbschaftswert: number;
+  verwandtschaft: Verwandtschaft;
+  alterKind: number; // 0–27, nur relevant bei kind
+  istErbschaft: boolean;
+  bereitsEmpfangen: number;
 }
 
 export interface ErbschaftsteuerResult {
-  erbschaft: number;
-  freibetrag: number;
-  steuerpflichtiger_betrag: number;
-  steuersatz: number;
+  steuerklasse: number;
+  verwandtschaftText: string;
+  persoenlichFreibetrag: number;
+  versorgungsfreibetrag: number;
+  gesamtFreibetrag: number;
+  verfuegbarerFreibetrag: number;
+  steuerpflichtigerErwerb: number;
+  steuersatzProzent: number;
   erbschaftsteuer: number;
-  nettoErbschaft: number;
+  nettowert: number;
+  effektiverSatzProzent: number;
 }
 
-// Vereinfachte Erbschaftsteuerberechnung 2026
-export function berechne({
-  erbschaft,
-  verwandtschaftsgrad,
-}: ErbschaftsteuerParams, rates: typeof RATES = RATES): ErbschaftsteuerResult {
-  // Freibeträge nach Steuerklasse (2026) from rates.json
-  const freibetraege_map: Record<number, keyof typeof rates.erbschaftsteuer.freibetraege> = {
-    1: "kinder_stiefkinder",
-    2: "enkel_elternteil_vorverstorben",
-    3: "eltern_grosseltern_erbschaft",
-    4: "steuerklasse_2",
-    5: "steuerklasse_3",
-  };
-  const freibetrag = rates.erbschaftsteuer.freibetraege[freibetraege_map[verwandtschaftsgrad]] || 0;
-  const steuerpflichtiger_betrag = Math.max(0, erbschaft - freibetrag);
+function getSteuerklasse(verwandtschaft: Verwandtschaft): number {
+  switch (verwandtschaft) {
+    case "ehegatte":
+    case "kind":
+    case "enkel":
+      return 1;
+    case "geschwister":
+      return 2;
+    case "sonstige":
+      return 3;
+  }
+}
 
-  if (steuerpflichtiger_betrag === 0) {
-    return {
-      erbschaft,
-      freibetrag,
-      steuerpflichtiger_betrag: 0,
-      steuersatz: 0,
-      erbschaftsteuer: 0,
-      nettoErbschaft: erbschaft,
-    };
+function getVerwandtschaftText(verwandtschaft: Verwandtschaft): string {
+  switch (verwandtschaft) {
+    case "ehegatte": return "Ehegatte / Lebenspartner";
+    case "kind": return "Kind / Stiefkind";
+    case "enkel": return "Enkel";
+    case "geschwister": return "Geschwister";
+    case "sonstige": return "Sonstige Personen";
+  }
+}
+
+function getFreibetrag(verwandtschaft: Verwandtschaft, rates: typeof RATES): number {
+  const fb = rates.erbschaftsteuer.freibetraege;
+  switch (verwandtschaft) {
+    case "ehegatte": return fb.ehegatte_lebenspartner;
+    case "kind": return fb.kinder_stiefkinder;
+    case "enkel": return fb.enkel_elternteil_lebt;
+    case "geschwister": return fb.steuerklasse_2;
+    case "sonstige": return fb.steuerklasse_3;
+  }
+}
+
+function getVersorgungsfreibetrag(
+  verwandtschaft: Verwandtschaft,
+  alterKind: number,
+  istErbschaft: boolean,
+  rates: typeof RATES
+): number {
+  // Versorgungsfreibetrag gilt nur bei Erbschaft (nicht bei Schenkung)
+  if (!istErbschaft) return 0;
+
+  const vfb = rates.erbschaftsteuer.versorgungsfreibetrag;
+
+  if (verwandtschaft === "ehegatte") return vfb.ehegatte;
+  if (verwandtschaft === "kind") {
+    if (alterKind < 5) return vfb.kind_bis_5_jahre;
+    if (alterKind < 10) return vfb.kind_5_10_jahre;
+    if (alterKind < 15) return vfb.kind_10_15_jahre;
+    if (alterKind < 20) return vfb.kind_15_20_jahre;
+    if (alterKind <= 27) return vfb.kind_20_27_jahre;
+    return 0;
+  }
+  return 0;
+}
+
+function getSteuersatz(
+  steuerpflichtigerErwerb: number,
+  steuerklasse: number,
+  rates: typeof RATES
+): number {
+  const tabellen = rates.erbschaftsteuer.steuersaetze_prozent;
+
+  let tabelle: Array<{ bis: number; satz: number }>;
+  switch (steuerklasse) {
+    case 1: tabelle = tabellen.steuerklasse_1; break;
+    case 2: tabelle = tabellen.steuerklasse_2; break;
+    case 3: tabelle = tabellen.steuerklasse_3; break;
+    default: tabelle = tabellen.steuerklasse_3;
   }
 
-  // Steuersätze nach Steuerklasse from rates.json
-  let steuersatz = 0;
+  for (const stufe of tabelle) {
+    if (steuerpflichtigerErwerb <= stufe.bis) {
+      return stufe.satz;
+    }
+  }
+  return tabelle[tabelle.length - 1].satz;
+}
 
-  if (verwandtschaftsgrad === 1) {
-    // Steuerklasse I (Kinder)
-    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_1;
-    for (const stufe of tabelle) {
-      if (steuerpflichtiger_betrag <= stufe.bis) {
-        steuersatz = stufe.satz / 100;
-        break;
-      }
-    }
-    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
-  } else if (verwandtschaftsgrad === 2) {
-    // Steuerklasse I (Enkel)
-    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_1;
-    for (const stufe of tabelle) {
-      if (steuerpflichtiger_betrag <= stufe.bis) {
-        steuersatz = stufe.satz / 100;
-        break;
-      }
-    }
-    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
-  } else if (verwandtschaftsgrad === 3) {
-    // Steuerklasse II
-    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_2;
-    for (const stufe of tabelle) {
-      if (steuerpflichtiger_betrag <= stufe.bis) {
-        steuersatz = stufe.satz / 100;
-        break;
-      }
-    }
-    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
-  } else {
-    // Steuerklasse III (Sonstige und Geschwister)
-    const tabelle = rates.erbschaftsteuer.steuersaetze_prozent.steuerklasse_3;
-    for (const stufe of tabelle) {
-      if (steuerpflichtiger_betrag <= stufe.bis) {
-        steuersatz = stufe.satz / 100;
-        break;
-      }
-    }
-    if (steuersatz === 0) steuersatz = tabelle[tabelle.length - 1].satz / 100;
+export function berechne(
+  { erbschaftswert, verwandtschaft, alterKind, istErbschaft, bereitsEmpfangen }: ErbschaftsteuerParams,
+  rates: typeof RATES = RATES
+): ErbschaftsteuerResult {
+  const steuerklasse = getSteuerklasse(verwandtschaft);
+  const verwandtschaftText = getVerwandtschaftText(verwandtschaft);
+  const persoenlichFreibetrag = getFreibetrag(verwandtschaft, rates);
+  const versorgungsfreibetrag = getVersorgungsfreibetrag(verwandtschaft, alterKind, istErbschaft, rates);
+  const gesamtFreibetrag = persoenlichFreibetrag + versorgungsfreibetrag;
+  const verfuegbarerFreibetrag = Math.max(0, gesamtFreibetrag - bereitsEmpfangen);
+  const steuerpflichtigerErwerb = Math.max(0, erbschaftswert - verfuegbarerFreibetrag);
+
+  let steuersatzProzent = 0;
+  let erbschaftsteuer = 0;
+
+  if (steuerpflichtigerErwerb > 0) {
+    steuersatzProzent = getSteuersatz(steuerpflichtigerErwerb, steuerklasse, rates);
+    // Stufentarif: der Satz gilt auf den gesamten Betrag
+    erbschaftsteuer = rund(steuerpflichtigerErwerb * steuersatzProzent / 100);
   }
 
-  const erbschaftsteuer = rund(steuerpflichtiger_betrag * steuersatz);
-  const nettoErbschaft = erbschaft - erbschaftsteuer;
+  const nettowert = rund(erbschaftswert - erbschaftsteuer);
+  const effektiverSatzProzent = erbschaftswert > 0
+    ? rund((erbschaftsteuer / erbschaftswert) * 100)
+    : 0;
 
   return {
-    erbschaft,
-    freibetrag,
-    steuerpflichtiger_betrag,
-    steuersatz: rund(steuersatz * 100) / 100,
+    steuerklasse,
+    verwandtschaftText,
+    persoenlichFreibetrag,
+    versorgungsfreibetrag,
+    gesamtFreibetrag,
+    verfuegbarerFreibetrag,
+    steuerpflichtigerErwerb,
+    steuersatzProzent,
     erbschaftsteuer,
-    nettoErbschaft: rund(nettoErbschaft),
+    nettowert,
+    effektiverSatzProzent,
   };
 }

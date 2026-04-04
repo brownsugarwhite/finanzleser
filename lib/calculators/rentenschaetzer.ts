@@ -1,46 +1,44 @@
+/**
+ * Rentenschaetzer 2026
+ * Schaetzt die zu erwartende Rente anhand von monatlichem Einkommen
+ * und Versicherungsjahren.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface RentenschaetzerParams {
-  monatliches_einkommen: number;
+  monatlichesEinkommen: number;
   versicherungsjahre: number;
-  bundesland: "west" | "ost";
 }
 
 export interface RentenschaetzerResult {
-  monatliches_einkommen: number;
-  versicherungsjahre: number;
-  rentenpunkte_schaetzer: number;
-  rente_monatlich_schaetzer: number;
-  hinweis: string;
+  entgeltpunkteGeschaetzt: number;
+  renteMonatlichGeschaetzt: number;
 }
 
 export function berechne(
-  {
-    monatliches_einkommen,
-    versicherungsjahre,
-    bundesland
-  }: RentenschaetzerParams,
-  rates: typeof RATES = RATES
+  params: RentenschaetzerParams,
+  rates: RatesType = RATES
 ): RentenschaetzerResult {
-  // Durchschnittsverdienst from rates.json (annualisiert)
-  const durchschnittsverdienst = rates.rentenschaetzer.durchschnittsentgelt_2025 / 12;
+  const { monatlichesEinkommen, versicherungsjahre } = params;
 
-  // Verdienste als Rentenpunkte
-  const verdienstquote = monatliches_einkommen / durchschnittsverdienst;
-  const rentenpunkte_schaetzer = rund(verdienstquote * versicherungsjahre);
+  // Durchschnittsentgelt (Jahreswert) auf Monatswert umrechnen
+  const durchschnittsentgeltMonatlich = rates.rentenschaetzer.durchschnittsentgelt_2025 / 12;
 
-  // Rentenwert from rates.json
+  // Entgeltpunkte pro Jahr = monatliches Einkommen / durchschnittliches monatliches Einkommen
+  const epProJahr = monatlichesEinkommen / durchschnittsentgeltMonatlich;
+  const entgeltpunkteGeschaetzt = rund(epProJahr * versicherungsjahre);
+
+  // Rente = EP x Rentenwert (Zugangsfaktor 1.0, Rentenartfaktor 1.0)
   const rentenwert = rates.rentenschaetzer.rentenwert_west;
-  const rente_monatlich_schaetzer = rund(rentenpunkte_schaetzer * rentenwert);
-
-  const hinweis = "Dies ist eine unverbindliche Schätzung. Die tatsächliche Rente hängt von den genauen Versicherungszeiten und Einkommen ab.";
+  const renteMonatlichGeschaetzt = rund(entgeltpunkteGeschaetzt * rentenwert);
 
   return {
-    monatliches_einkommen,
-    versicherungsjahre,
-    rentenpunkte_schaetzer,
-    rente_monatlich_schaetzer,
-    hinweis
+    entgeltpunkteGeschaetzt,
+    renteMonatlichGeschaetzt,
   };
 }

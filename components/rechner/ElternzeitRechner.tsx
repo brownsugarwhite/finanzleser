@@ -1,45 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import {
-  berechne,
-  type ElternzeitParams,
-  type ElternzeitResult
-} from "@/lib/calculators/elternzeit";
+import { berechne, type ElternzeitParams, type ElternzeitResult } from "@/lib/calculators/elternzeit";
 import RechnerInput from "./ui/RechnerInput";
+import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function ElternzeitRechner() {
-  const today = new Date();
-  const defaultDate = new Date(today.getFullYear() - 1, today.getMonth(), 15);
-  const defaultDateString = defaultDate.toISOString().split("T")[0];
+  const now = new Date();
 
   const [params, setParams] = useState<ElternzeitParams>({
-    geburtsdatum: defaultDateString,
-    elternteil1_monate: 12,
-    elternteil2_monate: 12
+    geburtYear: now.getFullYear(),
+    geburtMonth: now.getMonth() + 1,
+    partnerMonate: 0,
+    uebertragMonateSpater: 0,
   });
 
   const [result, setResult] = useState<ElternzeitResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
-
-  const handleParamChange = (key: keyof ElternzeitParams, value: any) => {
-    setParams((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const fmt = (d: Date) =>
-    new Intl.DateTimeFormat("de-DE", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    }).format(d);
 
   return (
     <div className="rechner-container">
@@ -47,87 +33,90 @@ export default function ElternzeitRechner() {
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Geburtsdatum des Kindes"
-          name="geburtsdatum"
-          value={params.geburtsdatum}
-          onChange={(val) =>
-            handleParamChange("geburtsdatum", val)
-          }
-
+          label="Geburtsjahr des Kindes"
+          name="geburtYear"
+          value={params.geburtYear}
+          onChange={(val) => setParams((p) => ({ ...p, geburtYear: val }))}
+          min={2020}
+          max={2030}
         />
 
-        <RechnerInput
-          label="Elternteil 1: Elternzeit (Monate)"
-          name="elternteil1_monate"
-          value={params.elternteil1_monate || 0}
-          onChange={(val) =>
-            handleParamChange("elternteil1_monate", Number(val))
-          }
-          einheit="Monate"
-          min={0}
-          max={36}
+        <RechnerSelect
+          label="Geburtsmonat"
+          name="geburtMonth"
+          value={params.geburtMonth.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, geburtMonth: parseInt(val) }))}
+          options={[
+            { value: "1", label: "Januar" },
+            { value: "2", label: "Februar" },
+            { value: "3", label: "Maerz" },
+            { value: "4", label: "April" },
+            { value: "5", label: "Mai" },
+            { value: "6", label: "Juni" },
+            { value: "7", label: "Juli" },
+            { value: "8", label: "August" },
+            { value: "9", label: "September" },
+            { value: "10", label: "Oktober" },
+            { value: "11", label: "November" },
+            { value: "12", label: "Dezember" },
+          ]}
         />
 
-        <RechnerInput
-          label="Elternteil 2: Elternzeit (Monate)"
-          name="elternteil2_monate"
-          value={params.elternteil2_monate || 0}
-          onChange={(val) =>
-            handleParamChange("elternteil2_monate", Number(val))
-          }
-          einheit="Monate"
-          min={0}
-          max={36}
+        <RechnerSelect
+          label="Partnermonate"
+          name="partnerMonate"
+          value={params.partnerMonate.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, partnerMonate: parseInt(val) }))}
+          options={Array.from({ length: 15 }, (_, i) => ({
+            label: `${i} Monate`,
+            value: i.toString(),
+          }))}
+        />
+
+        <RechnerSelect
+          label="Monate auf spaeter uebertragen"
+          name="uebertragMonateSpater"
+          value={params.uebertragMonateSpater.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, uebertragMonateSpater: parseInt(val) }))}
+          options={Array.from({ length: 13 }, (_, i) => ({
+            label: `${i} Monate`,
+            value: i.toString(),
+          }))}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Gesamte Elternzeit"
-              value={`${result.gesamt_monate} Monate`}
-              highlight={!result.ueberschreitung}
+              label="Erster Abschnitt"
+              value={`${result.monateErsterAbschnitt} Monate`}
+              highlight
             />
-            {result.ueberschreitung > 0 && (
-              <RechnerResultBox
-                label="Überschreitung"
-                value={`${result.ueberschreitung} Monate`}
-                highlight={false}
-              />
-            )}
+            <RechnerResultBox
+              label="Spaeter nutzbar"
+              value={`${result.monateSpater} Monate`}
+            />
           </div>
 
-          {result.gueltig && (
-            <>
-              <h4 className="rechner-result-section-title">Zeiträume</h4>
-              <RechnerResultTable
-                rows={[
-                  { label: "Elternzeit beginnt", value: fmt(result.et_beginn) },
-                  {
-                    label: "Elternteil 1 endet",
-                    value: fmt(result.et1_ende)
-                  },
-                  {
-                    label: "Kind max. 8 Jahre alt",
-                    value: fmt(result.max_ende)
-                  }
-                ]}
-              />
+          <RechnerResultTable
+            rows={[
+              { label: "Maximale Elternzeit", value: `${result.maxMonate} Monate` },
+              { label: "Anmeldefrist", value: `${result.anmeldeFristWochen} Wochen vorher` },
+              { label: "Ende Mutterschutz", value: result.schutzEnde },
+              { label: "Elternzeit ab", value: result.elternzeitStart },
+              { label: "Ende erster Abschnitt", value: result.elternzeitEnde },
+              { label: "Partnermonate", value: `${result.partnerMonate} Monate` },
+            ]}
+          />
 
-              <RechnerHinweis>
-                Elternzeit ist auf 36 Monate begrenzt (§ 15 BEEG). Anmeldung
-                mindestens 7 Wochen vorher erforderlich. Grundlage: BEEG 2024.
-              </RechnerHinweis>
-            </>
-          )}
-
-          {result.ueberschreitung > 0 && (
-            <RechnerHinweis >
-              ⚠️ Die Gesamtelternzeit überschreitet die gesetzliche Höchstdauer
-              von 36 Monaten um {result.ueberschreitung} Monate.
-            </RechnerHinweis>
-          )}
+          <RechnerHinweis>
+            Elternzeit betraegt max. 36 Monate pro Kind (beide Elternteile gemeinsam).
+            Bis zu 24 Monate koennen auf den Zeitraum bis zum 8. Geburtstag uebertragen werden.
+            Anmeldung mind. 7 Wochen vor Beginn. Grundlage: BEEG 2026.
+          </RechnerHinweis>
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type MinijobParams, type MinijobResult } from "@/lib/calculators/minijob";
 import { euro } from "@/lib/calculators/utils";
@@ -9,26 +9,26 @@ import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
+
+const typLabels: Record<string, string> = {
+  minijob: "Minijob",
+  midijob: "Midijob (Gleitzone)",
+  regulaer: "Regulaer versicherungspflichtig",
+};
 
 export default function MinijobRechner() {
   const [params, setParams] = useState<MinijobParams>({
-    monatlicher_verdienst: 500,
-    rv_befreiung: false
+    monatsBrutto: 520,
+    rvBefreiung: false,
   });
 
   const [result, setResult] = useState<MinijobResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
-
-  const handleParamChange = (key: keyof MinijobParams, value: number | boolean) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
 
   return (
     <div className="rechner-container">
@@ -37,68 +37,82 @@ export default function MinijobRechner() {
       <div className="rechner-inputs">
         <RechnerInput
           label="Monatlicher Verdienst"
-          name="monatlicher_verdienst"
-          value={params.monatlicher_verdienst}
-          onChange={(val) => handleParamChange("monatlicher_verdienst", Number(val))}
-          einheit="€/Monat"
+          name="monatsBrutto"
+          value={params.monatsBrutto}
+          onChange={(val) => setParams((prev) => ({ ...prev, monatsBrutto: val }))}
+          einheit="€"
+          step={10}
           min={0}
-          step={50}
         />
 
         <RechnerCheckbox
           label="RV-Befreiung (Rentenversicherung befreit)"
-          name="rv_befreiung"
-          checked={params.rv_befreiung}
-          onChange={(val) => handleParamChange("rv_befreiung", val)}
+          name="rvBefreiung"
+          checked={params.rvBefreiung}
+          onChange={(val) => setParams((prev) => ({ ...prev, rvBefreiung: val }))}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Kategorie"
-              value={
-                result.kategorie === "minijob"
-                  ? "Minijob"
-                  : result.kategorie === "midijob"
-                  ? "Midijob"
-                  : "Regulär"
-              }
-              highlight={false}
+              label="Beschaeftigungstyp"
+              value={typLabels[result.typ] || result.typ}
             />
             <RechnerResultBox
               label="Netto Arbeitnehmer"
-              value={euro(result.netto_arbeitnehmer)}
+              value={euro(result.netto)}
               highlight={true}
             />
-            <RechnerResultBox
-              label="Kosten Arbeitgeber"
-              value={euro(result.kosten_arbeitgeber)}
-              highlight={false}
-            />
+            {result.typ === "minijob" && (
+              <RechnerResultBox
+                label="Kosten Arbeitgeber"
+                value={euro(result.agGesamt)}
+              />
+            )}
           </div>
 
-          <h4 className="rechner-result-section-title">Details</h4>
+          <h4 className="rechner-result-section-title">Arbeitnehmer</h4>
           <RechnerResultTable
             rows={[
-              { label: "Kategorie", value: result.kategorie === "minijob" ? "Minijob" : result.kategorie === "midijob" ? "Midijob" : "Regulär" },
-              { label: "KV Pauschale (AG)", value: `${result.pauschale_kv_prozent}%` },
-              { label: "RV Pauschale (AG)", value: `${result.pauschale_rv_prozent}%` },
-              { label: "Steuer Pauschale (AG)", value: `${result.pauschale_steuer_prozent}%` },
-              { label: "Geschätzte Stunden/Monat", value: `${Math.round(result.geschaetzte_stunden_monat)} h` }
+              { label: "Monatsbrutto", value: euro(result.monatsBrutto) },
+              { label: "Typ", value: typLabels[result.typ] || result.typ },
+              ...(result.typ === "minijob"
+                ? [{ label: "RV-Aufstockung AN", value: euro(result.anRVAufstockung) }]
+                : []),
+              ...(result.typ === "midijob"
+                ? [
+                    { label: "SV-Beitrag (reduziert)", value: euro(result.anSVReduziert) },
+                    { label: "SV-Beitrag (normal)", value: euro(result.anSVNormal) },
+                    { label: "Ersparnis", value: euro(result.anErsparnis) },
+                  ]
+                : []),
+              { label: "Netto", value: euro(result.netto) },
+              { label: "Stunden bei Mindestlohn", value: `${result.stundenBeiMindestlohn} h/Monat` },
             ]}
           />
 
-          {result.hinweis && (
-            <RechnerHinweis>
-              ℹ️ {result.hinweis}
-            </RechnerHinweis>
+          {result.typ === "minijob" && (
+            <>
+              <h4 className="rechner-result-section-title">Arbeitgeber-Kosten</h4>
+              <RechnerResultTable
+                rows={[
+                  { label: "KV-Pauschale (AG)", value: euro(result.agKV) },
+                  { label: "RV-Pauschale (AG)", value: euro(result.agRV) },
+                  { label: "Steuerpauschale (AG)", value: euro(result.agSteuer) },
+                ]}
+                footer={{ label: "AG-Kosten gesamt", value: euro(result.agGesamt) }}
+              />
+            </>
           )}
 
           <RechnerHinweis>
-            Bei Minijobs zahlt nur der Arbeitgeber Pauschalabgaben. Der Arbeitnehmer erhält den vollen Verdienst.
-            Die Gleitzone (Midijob) liegt zwischen Minijob und Sozialversicherungspflicht.
+            Bei Minijobs zahlt der Arbeitgeber Pauschalabgaeben. Der Arbeitnehmer kann sich
+            von der RV-Aufstockung (3,6%) befreien lassen, verliert dann aber Rentenansprueche.
+            Midijob-Grenze 2026: 538,01 bis 2.000 EUR.
           </RechnerHinweis>
         </div>
       )}

@@ -1,51 +1,110 @@
+/**
+ * Kalte-Progression-Rechner 2026
+ * Zeigt den Effekt der kalten Progression bei Gehaltserhöhungen.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { berechneESt } from "./shared/estg32a";
+import { berechneSoli } from "./shared/soli";
+
+type RatesType = typeof RATES;
 
 export interface KalteprogressionParams {
-  brutto_vorjahr: number;
-  steigerung_prozent: number;
+  monatsBrutto: number;
+  gehaltssteigerungProzent: number;
+  inflationsrateProzent: number;
 }
 
 export interface KalteprogressionResult {
-  brutto_vorjahr: number;
-  brutto_nachher: number;
-  steigerung_prozent: number;
-  steigerung_absolut: number;
-  kaufkraft_vergleich: number;
-  kalte_progression_prozent: number;
-  hinweis: string;
+  // Vorher
+  bruttoVorher: number;
+  estVorher: number;
+  soliVorher: number;
+  nettoVorher: number;
+  steuerquoteVorher: number;
+  // Nachher (mit Erhöhung)
+  bruttoNachher: number;
+  estNachher: number;
+  soliNachher: number;
+  nettoNachher: number;
+  steuerquoteNachher: number;
+  // Vergleich
+  bruttoAnstiegAbsolut: number;
+  bruttoAnstiegProzent: number;
+  nettoAnstiegAbsolut: number;
+  nettoAnstiegProzent: number;
+  // Realer Verlust
+  realerNettoAnstiegAbsolut: number;
+  realerNettoAnstiegProzent: number;
+  kalteProgressionJahr: number;
+  kalteProgressionMonat: number;
 }
 
 export function berechne(
-  { brutto_vorjahr, steigerung_prozent }: KalteprogressionParams,
-  rates: typeof RATES = RATES
+  params: KalteprogressionParams,
+  rates: RatesType = RATES
 ): KalteprogressionResult {
-  const brutto_nachher = brutto_vorjahr * (1 + steigerung_prozent / 100);
-  const steigerung_absolut = brutto_nachher - brutto_vorjahr;
+  const { monatsBrutto, gehaltssteigerungProzent, inflationsrateProzent } = params;
 
-  // Vereinfachte Steuerberechnung (keine genaue EST)
-  const est_satz_alt = 0.25; // Durchschnittlicher Steuersatz
-  const est_satz_neu = 0.27; // Erhöht durch progressive Staffel
+  const wk = rates.lohnsteuer.arbeitnehmer_pauschbetrag;
+  const sa = rates.lohnsteuer.sonderausgaben_pauschbetrag;
 
-  const kaufkraft_vergleich =
-    (brutto_nachher * (1 - est_satz_neu)) /
-    (brutto_vorjahr * (1 - est_satz_alt));
-  const kalte_progression_prozent = rund(
-    (1 - kaufkraft_vergleich) * 100
-  );
+  // ── Vorher ──
+  const jahresBruttoVorher = monatsBrutto * 12;
+  const zvEVorher = Math.max(0, Math.floor(jahresBruttoVorher - wk - sa));
+  const estVorher = berechneESt(zvEVorher, rates);
+  const soliVorher = berechneSoli(estVorher, false, rates);
+  const steuerVorher = estVorher + soliVorher;
+  const nettoVorher = jahresBruttoVorher - steuerVorher;
+  const steuerquoteVorher = jahresBruttoVorher > 0 ? rund((steuerVorher / jahresBruttoVorher) * 100) : 0;
 
-  const hinweis =
-    kalte_progression_prozent > 0.5
-      ? `Trotz ${steigerung_prozent}% Gehaltserhöhung sinkt die Kaufkraft real um ca. ${kalte_progression_prozent}%`
-      : "Kalte Progression ist minimal";
+  // ── Nachher (mit Gehaltserhöhung) ──
+  const monatsBruttoNeu = rund(monatsBrutto * (1 + gehaltssteigerungProzent / 100));
+  const jahresBruttoNachher = monatsBruttoNeu * 12;
+  const zvENachher = Math.max(0, Math.floor(jahresBruttoNachher - wk - sa));
+  const estNachher = berechneESt(zvENachher, rates);
+  const soliNachher = berechneSoli(estNachher, false, rates);
+  const steuerNachher = estNachher + soliNachher;
+  const nettoNachher = jahresBruttoNachher - steuerNachher;
+  const steuerquoteNachher = jahresBruttoNachher > 0 ? rund((steuerNachher / jahresBruttoNachher) * 100) : 0;
+
+  // ── Vergleich ──
+  const bruttoAnstiegAbsolut = rund(jahresBruttoNachher - jahresBruttoVorher);
+  const bruttoAnstiegProzent = rund(gehaltssteigerungProzent);
+  const nettoAnstiegAbsolut = rund(nettoNachher - nettoVorher);
+  const nettoAnstiegProzent = nettoVorher > 0 ? rund((nettoAnstiegAbsolut / nettoVorher) * 100) : 0;
+
+  // ── Realer Anstieg (inflationsbereinigt) ──
+  const realerNettoSoll = rund(nettoVorher * (1 + inflationsrateProzent / 100));
+  const realerNettoAnstiegAbsolut = rund(nettoNachher - realerNettoSoll);
+  const realerNettoAnstiegProzent = nettoVorher > 0
+    ? rund(((nettoNachher / nettoVorher) - 1 - inflationsrateProzent / 100) * 100)
+    : 0;
+
+  // Kalte Progression = Differenz zwischen nominaler und realer Nettoentwicklung
+  const kalteProgressionJahr = rund(bruttoAnstiegAbsolut - nettoAnstiegAbsolut);
+  const kalteProgressionMonat = rund(kalteProgressionJahr / 12);
 
   return {
-    brutto_vorjahr,
-    brutto_nachher: rund(brutto_nachher),
-    steigerung_prozent,
-    steigerung_absolut: rund(steigerung_absolut),
-    kaufkraft_vergleich: rund(kaufkraft_vergleich * 100),
-    kalte_progression_prozent,
-    hinweis
+    bruttoVorher: rund(jahresBruttoVorher / 12),
+    estVorher: rund(estVorher / 12),
+    soliVorher: rund(soliVorher / 12),
+    nettoVorher: rund(nettoVorher / 12),
+    steuerquoteVorher,
+    bruttoNachher: monatsBruttoNeu,
+    estNachher: rund(estNachher / 12),
+    soliNachher: rund(soliNachher / 12),
+    nettoNachher: rund(nettoNachher / 12),
+    steuerquoteNachher,
+    bruttoAnstiegAbsolut: rund(bruttoAnstiegAbsolut / 12),
+    bruttoAnstiegProzent,
+    nettoAnstiegAbsolut: rund(nettoAnstiegAbsolut / 12),
+    nettoAnstiegProzent,
+    realerNettoAnstiegAbsolut: rund(realerNettoAnstiegAbsolut / 12),
+    realerNettoAnstiegProzent,
+    kalteProgressionJahr,
+    kalteProgressionMonat,
   };
 }

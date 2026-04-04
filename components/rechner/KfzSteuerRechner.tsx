@@ -1,85 +1,122 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type KfzSteuerParams, type KfzSteuerResult } from "@/lib/calculators/kfz_steuer";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
+import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function KfzSteuerRechner() {
   const [params, setParams] = useState<KfzSteuerParams>({
-    hubraum: 1600,
-    co2_ausstoss: 140,
-    anmeldungsjahr: 2024,
+    antriebsart: "benzin",
+    hubraum_ccm: 1600,
+    co2_g_km: 120,
+    erstzulassung_jahr: 2020,
   });
 
   const [result, setResult] = useState<KfzSteuerResult | null>(null);
-
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">KFZ-Steuer-Rechner</h3>
+      <h3 className="rechner-title">Kfz-Steuer-Rechner 2026</h3>
 
       <div className="rechner-inputs">
-        <RechnerInput
-          label="Hubraum"
-          name="hubraum"
-          value={params.hubraum}
-          onChange={(val) => setParams((prev) => ({ ...prev, hubraum: val }))}
-          einheit="ccm"
-          step={100}
-          min={0}
+        <RechnerSelect
+          label="Antriebsart"
+          name="antriebsart"
+          value={params.antriebsart}
+          onChange={(val) =>
+            setParams((p) => ({
+              ...p,
+              antriebsart: val as KfzSteuerParams["antriebsart"],
+            }))
+          }
+          options={[
+            { value: "benzin", label: "Benzin" },
+            { value: "diesel", label: "Diesel" },
+            { value: "elektro", label: "Elektro" },
+          ]}
         />
 
-        <RechnerInput
-          label="CO₂-Ausstoß"
-          name="co2_ausstoss"
-          value={params.co2_ausstoss}
-          onChange={(val) => setParams((prev) => ({ ...prev, co2_ausstoss: val }))}
-          einheit="g/km"
-          step={5}
-          min={0}
-        />
+        {params.antriebsart !== "elektro" && (
+          <>
+            <RechnerInput
+              label="Hubraum"
+              name="hubraum_ccm"
+              value={params.hubraum_ccm}
+              onChange={(val) => setParams((p) => ({ ...p, hubraum_ccm: val }))}
+              einheit="ccm"
+              step={100}
+              min={0}
+            />
+            <RechnerInput
+              label="CO2-Ausstoss"
+              name="co2_g_km"
+              value={params.co2_g_km}
+              onChange={(val) => setParams((p) => ({ ...p, co2_g_km: val }))}
+              einheit="g/km"
+              step={5}
+              min={0}
+            />
+          </>
+        )}
 
         <RechnerInput
           label="Erstzulassungsjahr"
-          name="anmeldungsjahr"
-          value={params.anmeldungsjahr}
-          onChange={(val) => setParams((prev) => ({ ...prev, anmeldungsjahr: val }))}
+          name="erstzulassung_jahr"
+          value={params.erstzulassung_jahr}
+          onChange={(val) => setParams((p) => ({ ...p, erstzulassung_jahr: val }))}
           einheit="Jahr"
-          step={1}
           min={1990}
+          max={2026}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox label="Jahressteuern" value={euro(result.steuer_jaehrlich)} highlight={true} />
-            <RechnerResultBox label="Monatlich" value={euro(result.steuer_monatlich)} />
+            <RechnerResultBox
+              label="Jahressteuer"
+              value={euro(result.jahressteuer)}
+              highlight={true}
+            />
           </div>
 
-          <RechnerResultTable
-            rows={[
-              { label: "Hubraum", value: `${result.hubraum} ccm` },
-              { label: "CO₂-Ausstoß", value: `${result.co2_ausstoss} g/km` },
-              { label: "Erstzulassungsjahr", value: result.anmeldungsjahr.toString() },
-              { label: "Jahressteuern", value: euro(result.steuer_jaehrlich) },
-              { label: "Monatliche Steuer", value: euro(result.steuer_monatlich) },
-            ]}
-          />
+          {result.elektroBefreit && (
+            <RechnerHinweis>
+              Elektrofahrzeug: Steuerbefreiung aktiv (bis zu 10 Jahre ab Erstzulassung).
+            </RechnerHinweis>
+          )}
+
+          {!result.elektroBefreit && (
+            <>
+              <h4 className="rechner-result-section-title">Aufschluesselung</h4>
+              <RechnerResultTable
+                rows={[
+                  { label: "Hubraum-Steuer", value: euro(result.hubraumSteuer) },
+                  { label: "CO2-Steuer", value: euro(result.co2Steuer) },
+                  { label: "Jahressteuer", value: euro(result.jahressteuer) },
+                ]}
+              />
+            </>
+          )}
 
           <RechnerHinweis>
-            Berechnung nach §9 KraftStG: 2,00 € pro 100 ccm Hubraum + CO₂-Zuschlag (2 € pro g/km
-            über 120 g/km). Ältere Fahrzeuge können Reduktionen erhalten.
+            Berechnung nach Paragraph 9 KraftStG. Benzin: 2,00 EUR/100 ccm.
+            Diesel: 9,50 EUR/100 ccm. CO2-Freibetrag: 95 g/km.
+            Elektro-Befreiung bei Neuzulassung bis 2030 (max. 10 Jahre, laengstens bis 2035).
           </RechnerHinweis>
         </div>
       )}

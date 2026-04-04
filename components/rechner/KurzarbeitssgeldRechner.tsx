@@ -1,96 +1,119 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import { berechne, type KurzarbeitssgeldParams, type KurzarbeitssgeldResult } from "@/lib/calculators/kurzarbeitsgeld";
-import { euro } from "@/lib/calculators/utils";
+import { berechne, type KurzarbeitsgeldParams, type KurzarbeitsgeldResult } from "@/lib/calculators/kurzarbeitsgeld";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
+import RechnerSelect from "./ui/RechnerSelect";
+import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function KurzarbeitssgeldRechner() {
-  const [params, setParams] = useState<KurzarbeitssgeldParams>({
-    regelmaessiges_gehalt: 3500,
-    ausgefallene_stunden: 10,
-    gesamtstunden_pro_woche: 40,
-    monate: 6,
+  const [params, setParams] = useState<KurzarbeitsgeldParams>({
+    sollEntgelt: 3000,
+    istEntgelt: 0,
+    steuerklasse: 1,
+    hatKind: false,
+    kinderlosUeber23: false,
   });
 
-  const [result, setResult] = useState<KurzarbeitssgeldResult | null>(null);
-
+  const [result, setResult] = useState<KurzarbeitsgeldResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Kurzarbeitsgeld-Rechner</h3>
+      <h3 className="rechner-title">Kurzarbeitergeld-Rechner 2026</h3>
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Regelm. Monatliches Gehalt"
-          name="regelmaessiges_gehalt"
-          value={params.regelmaessiges_gehalt}
-          onChange={(val) => setParams((prev) => ({ ...prev, regelmaessiges_gehalt: val }))}
+          label="Soll-Entgelt (normales Bruttogehalt)"
+          name="sollEntgelt"
+          value={params.sollEntgelt}
+          onChange={(val) => setParams((prev) => ({ ...prev, sollEntgelt: val }))}
           einheit="€"
           step={100}
           min={0}
         />
 
         <RechnerInput
-          label="Ausgefallene Stunden/Woche"
-          name="ausgefallene_stunden"
-          value={params.ausgefallene_stunden}
-          onChange={(val) => setParams((prev) => ({ ...prev, ausgefallene_stunden: val }))}
-          einheit="h"
-          step={1}
+          label="Ist-Entgelt (reduziertes Bruttogehalt)"
+          name="istEntgelt"
+          value={params.istEntgelt}
+          onChange={(val) => setParams((prev) => ({ ...prev, istEntgelt: val }))}
+          einheit="€"
+          step={100}
           min={0}
         />
 
-        <RechnerInput
-          label="Arbeitszeit pro Woche"
-          name="gesamtstunden_pro_woche"
-          value={params.gesamtstunden_pro_woche}
-          onChange={(val) => setParams((prev) => ({ ...prev, gesamtstunden_pro_woche: val }))}
-          einheit="h"
-          step={1}
-          min={1}
+        <RechnerSelect
+          label="Steuerklasse"
+          name="steuerklasse"
+          value={String(params.steuerklasse)}
+          onChange={(val) => setParams((prev) => ({ ...prev, steuerklasse: parseInt(val) }))}
+          options={[1, 2, 3, 4, 5, 6].map((sk) => ({
+            label: `Klasse ${sk}`,
+            value: String(sk),
+          }))}
         />
 
-        <RechnerInput
-          label="Dauer"
-          name="monate"
-          value={params.monate}
-          onChange={(val) => setParams((prev) => ({ ...prev, monate: val }))}
-          einheit="Monate"
-          step={1}
-          min={1}
+        <RechnerCheckbox
+          label="Hat Kind (Leistungssatz 67%)"
+          name="hatKind"
+          checked={params.hatKind}
+          onChange={(val) => setParams((prev) => ({ ...prev, hatKind: val }))}
+        />
+
+        <RechnerCheckbox
+          label="Kinderlos und ueber 23 Jahre"
+          name="kinderlosUeber23"
+          checked={params.kinderlosUeber23}
+          onChange={(val) => setParams((prev) => ({ ...prev, kinderlosUeber23: val }))}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox label="Kurzarbeitsgeld/Monat" value={euro(result.kurzarbeitsgeld_monatlich)} highlight={true} />
-            <RechnerResultBox label="Gesamt" value={euro(result.kurzarbeitsgeld_gesamt)} />
+            <RechnerResultBox
+              label="Kurzarbeitergeld"
+              value={euro(result.kurzarbeitergeld)}
+              highlight={true}
+            />
+            <RechnerResultBox
+              label="Gesamteinkommen"
+              value={euro(result.gesamtEinkommen)}
+              highlight={true}
+            />
           </div>
 
           <RechnerResultTable
             rows={[
-              { label: "Regelm. Gehalt", value: euro(result.regelmaessiges_gehalt) },
-              { label: "Ausfallquote", value: `${(result.ausfallquote * 100).toFixed(0)}%` },
-              { label: "Kurzarbeitsgeld (monatlich)", value: euro(result.kurzarbeitsgeld_monatlich) },
-              { label: "Kurzarbeitsgeld (gesamt)", value: euro(result.kurzarbeitsgeld_gesamt) },
-              { label: "Einkommensverlust", value: euro(result.einkommensverlust) },
+              { label: "Soll-Brutto", value: euro(result.sollBrutto) },
+              { label: "Ist-Brutto", value: euro(result.istBrutto) },
+              { label: "Netto (Soll)", value: euro(result.nettoSoll) },
+              { label: "Netto (Ist)", value: euro(result.nettoIst) },
+              { label: "Netto-Entgeltdifferenz", value: euro(result.nettoEntgeltDifferenz) },
+              { label: "Leistungssatz", value: prozent(result.leistungssatzProzent) },
+              { label: "Kurzarbeitergeld", value: euro(result.kurzarbeitergeld) },
+              { label: "Ausfallquote", value: prozent(result.ausfallQuoteProzent) },
             ]}
+            footer={{ label: "Gesamteinkommen", value: euro(result.gesamtEinkommen) }}
           />
 
           <RechnerHinweis>
-            Kurzarbeitsgeld ersetzt 60% des wegfallenden Nettoentgelts. Voraussetzung: angemeldete
-            Kurzarbeit bei der Agentur für Arbeit. Dies ist eine vereinfachte Berechnung.
+            Kurzarbeitergeld ersetzt {result.leistungssatzProzent}% der Netto-Entgeltdifferenz.
+            Voraussetzung: angemeldete Kurzarbeit bei der Agentur fuer Arbeit.
+            Rechtsgrundlage: SS 95-111 SGB III.
           </RechnerHinweis>
         </div>
       )}

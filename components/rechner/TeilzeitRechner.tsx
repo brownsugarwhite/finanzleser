@@ -1,34 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type TeilzeitParams, type TeilzeitResult } from "@/lib/calculators/teilzeit";
-import { euro } from "@/lib/calculators/utils";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
+
+const typLabels: Record<string, string> = {
+  minijob: "Minijob",
+  midijob: "Midijob (Gleitzone)",
+  regulaer: "Regulaer versicherungspflichtig",
+};
 
 export default function TeilzeitRechner() {
   const [params, setParams] = useState<TeilzeitParams>({
-    vollzeit_brutto: 3000,
-    stunden_pro_woche_alt: 40,
-    stunden_pro_woche_neu: 30
+    stundenlohn: 15,
+    wochenstunden: 20,
+    vollzeitStundenWoche: 40,
   });
 
   const [result, setResult] = useState<TeilzeitResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
-
-  const handleParamChange = (key: keyof TeilzeitParams, value: number) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
 
   return (
     <div className="rechner-container">
@@ -36,82 +36,77 @@ export default function TeilzeitRechner() {
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Vollzeit Brutto-Verdienst"
-          name="vollzeit_brutto"
-          value={params.vollzeit_brutto}
-          onChange={(val) => handleParamChange("vollzeit_brutto", Number(val))}
-          einheit="€/Monat"
+          label="Stundenlohn"
+          name="stundenlohn"
+          value={params.stundenlohn}
+          onChange={(val) => setParams((prev) => ({ ...prev, stundenlohn: val }))}
+          einheit="€/Std."
+          step={0.50}
           min={0}
-          step={100}
         />
 
         <RechnerInput
-          label="Stunden pro Woche (aktuell)"
-          name="stunden_pro_woche_alt"
-          value={params.stunden_pro_woche_alt}
-          onChange={(val) => handleParamChange("stunden_pro_woche_alt", Number(val))}
-          einheit="Stunden"
+          label="Wochenstunden (Teilzeit)"
+          name="wochenstunden"
+          value={params.wochenstunden}
+          onChange={(val) => setParams((prev) => ({ ...prev, wochenstunden: val }))}
+          einheit="Std./Woche"
+          step={1}
           min={1}
           max={60}
-          step={0.5}
         />
 
         <RechnerInput
-          label="Stunden pro Woche (neu)"
-          name="stunden_pro_woche_neu"
-          value={params.stunden_pro_woche_neu}
-          onChange={(val) => handleParamChange("stunden_pro_woche_neu", Number(val))}
-          einheit="Stunden"
+          label="Vollzeit-Wochenstunden"
+          name="vollzeitStundenWoche"
+          value={params.vollzeitStundenWoche}
+          onChange={(val) => setParams((prev) => ({ ...prev, vollzeitStundenWoche: val }))}
+          einheit="Std./Woche"
+          step={1}
           min={1}
           max={60}
-          step={0.5}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Teilzeit Brutto"
-              value={euro(result.teilzeit_brutto)}
+              label="Brutto monatlich"
+              value={euro(result.bruttoMonatlich)}
               highlight={true}
             />
             <RechnerResultBox
-              label="Brutto-Differenz"
-              value={euro(result.brutto_differenz)}
-              highlight={false}
+              label="Teilzeitquote"
+              value={prozent(result.teilzeitProzent)}
             />
             <RechnerResultBox
-              label="Reduktion"
-              value={`${result.reduktion_prozent}%`}
-              highlight={false}
+              label="Netto-Schaetzung"
+              value={euro(result.nettoSchaetzung)}
             />
           </div>
 
-          <h4 className="rechner-result-section-title">Detaillierte Berechnung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Vollzeit Brutto monatlich", value: euro(result.vollzeit_brutto) },
-              { label: "Stundenreduktion", value: `${result.reduktion_prozent}%` },
-              { label: "Teilzeit Brutto monatlich", value: euro(result.teilzeit_brutto) },
-              { label: "Brutto-Differenz", value: `−${euro(result.brutto_differenz)}` }
-            ]}
-          />
-
-          <h4 className="rechner-result-section-title">Vereinfachte Netto-Schätzung</h4>
-          <RechnerResultTable
-            rows={[
-              { label: "Netto monatlich (Vollzeit)", value: euro(result.netto_monatlich_alt) },
-              { label: "Netto monatlich (Teilzeit)", value: euro(result.netto_monatlich_neu) },
-              { label: "Netto-Differenz", value: `−${euro(result.netto_differenz)}` }
+              { label: "Stundenlohn", value: `${result.stundenlohn.toFixed(2)} €/Std.` },
+              { label: "Wochenstunden (Teilzeit)", value: `${result.wochenstunden} Std.` },
+              { label: "Vollzeit-Wochenstunden", value: `${result.vollzeitStundenWoche} Std.` },
+              { label: "Teilzeitquote", value: prozent(result.teilzeitProzent) },
+              { label: "Monatsstunden (Ø)", value: `${result.monatsStunden.toFixed(1)} Std.` },
+              { label: "Brutto monatlich", value: euro(result.bruttoMonatlich) },
+              { label: "Beschaeftigungstyp", value: typLabels[result.typ] || result.typ },
+              { label: "Netto-Schaetzung", value: euro(result.nettoSchaetzung) },
+              { label: "Mindestlohn konform", value: result.mindestlohnKonform ? "Ja" : "Nein" },
             ]}
           />
 
           <RechnerHinweis>
-            Dies ist eine vereinfachte Berechnung mit pauschal 20% Sozialversicherungsabzug.
-            Die tatsächliche Netto-Differenz hängt von Ihrer persönlichen Steuerkasse ab
-            (Lohnsteuerklasse, Kirchensteuer, Kinderfreibeträge, etc.).
-            Bei Reduktion unter die Midi-Job-Grenze können zusätzliche Effekte entstehen.
+            Die Netto-Schaetzung ist vereinfacht und beruecksichtigt pauschalierte SV-Abzuege.
+            Die tatsaechliche Netto-Differenz haengt von Steuerklasse, Kirchensteuer und
+            Kinderfreibetraegen ab. Bei Einkommen unter der Midijob-Grenze gelten reduzierte
+            SV-Beitraege (SS 20 Abs. 2 SGB IV).
           </RechnerHinweis>
         </div>
       )}

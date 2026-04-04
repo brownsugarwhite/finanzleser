@@ -1,72 +1,106 @@
+/**
+ * Minijob-Rechner 2026
+ * Berechnet AN- und AG-Kosten für Minijobs und Midijobs.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface MinijobParams {
-  monatlicher_verdienst: number;
-  rv_befreiung: boolean;
+  monatsBrutto: number;
+  rvBefreiung: boolean; // Befreiung von RV-Aufstockung
 }
 
+export type MinijobTyp = "minijob" | "midijob" | "regulaer";
+
 export interface MinijobResult {
-  monatlicher_verdienst: number;
-  kategorie: "minijob" | "midijob" | "regulaer";
-  netto_arbeitnehmer: number;
-  kosten_arbeitgeber: number;
-  pauschale_kv_prozent: number;
-  pauschale_rv_prozent: number;
-  pauschale_steuer_prozent: number;
-  geschaetzte_stunden_monat: number;
-  hinweis?: string;
+  monatsBrutto: number;
+  typ: MinijobTyp;
+  // AN
+  anRVAufstockung: number;
+  anSVReduziert: number;
+  anSVNormal: number;
+  anErsparnis: number;
+  netto: number;
+  // AG
+  agKV: number;
+  agRV: number;
+  agSteuer: number;
+  agGesamt: number;
+  // Info
+  stundenBeiMindestlohn: number;
+  bemessungsentgelt: number;
 }
 
 export function berechne(
-  { monatlicher_verdienst, rv_befreiung }: MinijobParams,
-  rates: typeof RATES = RATES
+  params: MinijobParams,
+  rates: RatesType = RATES
 ): MinijobResult {
-  const mindestlohn = rates.mindestlohn?.stundensatz || 13.9;
-  const grenzen = { minijob: rates.minijob.minijob_grenze_monatlich, midijob_max: rates.minijob.gleitzone_obergrenze };
+  const { monatsBrutto, rvBefreiung } = params;
+  const mj = rates.minijob;
+  const svAnGesamt = rates.alg1.sv_pauschale_an_prozent;
+  const mindestlohn = rates.mindestlohn.stundensatz;
 
-  let kategorie: "minijob" | "midijob" | "regulaer";
-  let netto_arbeitnehmer: number;
-  let kosten_arbeitgeber: number;
-  let pauschale_kv = rates.minijob.ag_kv_pauschale_prozent / 100;
-  let pauschale_rv = rv_befreiung ? 0 : (rates.minijob.ag_rv_pauschale_prozent / 100);
-  let pauschale_steuer = rates.minijob.ag_steuerpauschale_prozent / 100;
-
-  if (monatlicher_verdienst <= grenzen.minijob) {
-    kategorie = "minijob";
-    netto_arbeitnehmer = monatlicher_verdienst;
-    kosten_arbeitgeber = rund(monatlicher_verdienst * (1 + pauschale_kv + pauschale_rv + pauschale_steuer));
-  } else if (monatlicher_verdienst <= grenzen.midijob_max) {
-    kategorie = "midijob";
-    const faktor = rates.minijob.gleitzonenformel_faktor_F;
-    const bemessung = monatlicher_verdienst * faktor;
-    const sv_abzug = rund(bemessung * (0.11 + (rv_befreiung ? 0 : 0.093)));
-    netto_arbeitnehmer = rund(monatlicher_verdienst - sv_abzug);
-    kosten_arbeitgeber = rund(monatlicher_verdienst + (monatlicher_verdienst * (pauschale_kv + 0.01)));
+  let typ: MinijobTyp;
+  if (monatsBrutto <= mj.minijob_grenze_monatlich) {
+    typ = "minijob";
+  } else if (monatsBrutto <= mj.gleitzone_obergrenze) {
+    typ = "midijob";
   } else {
-    kategorie = "regulaer";
-    netto_arbeitnehmer = monatlicher_verdienst * 0.8;
-    kosten_arbeitgeber = monatlicher_verdienst * 1.2;
+    typ = "regulaer";
   }
 
-  const geschaetzte_stunden_monat = rund(monatlicher_verdienst / mindestlohn);
+  const stundenBeiMindestlohn = rund(monatsBrutto / mindestlohn);
 
-  let hinweis = undefined;
-  if (kategorie === "minijob") {
-    hinweis = "Minijob: Pauschalversichert, keine Lohnsteuer";
-  } else if (kategorie === "midijob") {
-    hinweis = "Midijob: Gleitzone mit reduziertem SV-Beitrag";
+  // AG-Kosten (nur bei Minijob)
+  let agKV = 0, agRV = 0, agSteuer = 0, agGesamt = 0;
+  if (typ === "minijob") {
+    agKV = rund(monatsBrutto * mj.ag_kv_pauschale_prozent / 100);
+    agRV = rund(monatsBrutto * mj.ag_rv_pauschale_prozent / 100);
+    agSteuer = rund(monatsBrutto * mj.ag_steuerpauschale_prozent / 100);
+    agGesamt = rund(agKV + agRV + agSteuer);
+  }
+
+  // AN-Kosten
+  let anRVAufstockung = 0;
+  let anSVReduziert = 0;
+  let anSVNormal = rund(monatsBrutto * svAnGesamt / 100);
+  let anErsparnis = 0;
+  let netto = monatsBrutto;
+  let bemessungsentgelt = monatsBrutto;
+
+  if (typ === "minijob") {
+    anRVAufstockung = rvBefreiung ? 0 : rund(monatsBrutto * mj.an_rv_aufstockung_prozent / 100);
+    netto = rund(monatsBrutto - anRVAufstockung);
+    anSVNormal = 0;
+    bemessungsentgelt = 0;
+  } else if (typ === "midijob") {
+    // Gleitzone
+    const F = mj.gleitzonenformel_faktor_F;
+    const MJ = mj.minijob_grenze_monatlich;
+    const OG = mj.gleitzone_obergrenze;
+    bemessungsentgelt = rund(F * MJ + ((OG / (OG - MJ)) - (MJ / (OG - MJ)) * F) * (monatsBrutto - MJ));
+    anSVReduziert = rund(bemessungsentgelt * svAnGesamt / 100);
+    anErsparnis = rund(anSVNormal - anSVReduziert);
+    netto = rund(monatsBrutto - anSVReduziert);
+  } else {
+    anSVReduziert = anSVNormal;
+    netto = rund(monatsBrutto - anSVNormal);
   }
 
   return {
-    monatlicher_verdienst,
-    kategorie,
-    netto_arbeitnehmer,
-    kosten_arbeitgeber,
-    pauschale_kv_prozent: Math.round(pauschale_kv * 100),
-    pauschale_rv_prozent: Math.round(pauschale_rv * 100),
-    pauschale_steuer_prozent: Math.round(pauschale_steuer * 100),
-    geschaetzte_stunden_monat,
-    hinweis
+    monatsBrutto,
+    typ,
+    anRVAufstockung,
+    anSVReduziert,
+    anSVNormal,
+    anErsparnis,
+    netto,
+    agKV, agRV, agSteuer, agGesamt,
+    stundenBeiMindestlohn,
+    bemessungsentgelt,
   };
 }

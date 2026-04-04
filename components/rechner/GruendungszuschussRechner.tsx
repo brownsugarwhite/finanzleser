@@ -1,44 +1,79 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type GruendungszuschussParams, type GruendungszuschussResult } from "@/lib/calculators/gruendungszuschuss";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerResultBox from "./ui/RechnerResultBox";
+import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function GruendungszuschussRechner() {
   const [params, setParams] = useState<GruendungszuschussParams>({
-    alg1_anspruchswert: 450,
-    gruendungskapital_vorgesehen: 10000,
-    eigenmittel_vorhanden: 3000
+    algMonatlich: 1200,
   });
 
   const [result, setResult] = useState<GruendungszuschussResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
-    
     <div className="rechner-container">
-      <h3 className="rechner-title">Gründungszuschuss-Rechner 2026</h3>
-      
-    <div className="rechner-inputs">
-        <RechnerInput label="ALG1-Anspruchswert" name="alg1" value={params.alg1_anspruchswert} onChange={(val) => setParams(p => ({ ...p, alg1_anspruchswert: Number(val) }))} einheit="€" />
-        <RechnerInput label="Gründungskapital geplant" name="kapital" value={params.gruendungskapital_vorgesehen} onChange={(val) => setParams(p => ({ ...p, gruendungskapital_vorgesehen: Number(val) }))} einheit="€" />
-        <RechnerInput label="Eigenmittel vorhanden" name="eigenmittel" value={params.eigenmittel_vorhanden} onChange={(val) => setParams(p => ({ ...p, eigenmittel_vorhanden: Number(val) }))} einheit="€" />
+      <h3 className="rechner-title">Gruendungszuschuss-Rechner 2026</h3>
+
+      <div className="rechner-inputs">
+        <RechnerInput
+          label="ALG I monatlich"
+          name="algMonatlich"
+          value={params.algMonatlich}
+          onChange={(val) => setParams({ algMonatlich: val })}
+          einheit="EUR"
+          min={0}
+        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-    <div className="rechner-results">
+        <div className="rechner-results">
           <div className="rechner-result-boxes">
-          <RechnerResultBox label="Gründungszuschuss/Monat" value={euro(result.gruendungszuschuss_regelmaessig)} highlight={true} />
-          <RechnerResultBox label="6 Monate" value={euro(result.gruendungszuschuss_gesamt_6monate)} highlight={false} />
-          <RechnerHinweis>{result.hinweis}</RechnerHinweis>
-        </div>
+            <RechnerResultBox
+              label="Gesamtfoerderung"
+              value={euro(result.gesamtFoerderung)}
+              highlight={true}
+            />
+            <RechnerResultBox
+              label="Phase 1 / Monat"
+              value={euro(result.phase1Monatlich)}
+            />
+          </div>
+
+          <h4 className="rechner-result-section-title">Phase 1 (6 Monate)</h4>
+          <RechnerResultTable
+            rows={[
+              { label: "ALG I + Pauschale (300 EUR)", value: euro(result.phase1Monatlich) },
+              { label: "Phase 1 gesamt", value: euro(result.phase1Gesamt) },
+            ]}
+          />
+
+          <h4 className="rechner-result-section-title">Phase 2 (9 Monate)</h4>
+          <RechnerResultTable
+            rows={[
+              { label: "Pauschale / Monat", value: euro(result.phase2Monatlich) },
+              { label: "Phase 2 gesamt", value: euro(result.phase2Gesamt) },
+            ]}
+          />
+
+          <RechnerHinweis>
+            Phase 1: ALG I + 300 EUR Pauschale fuer 6 Monate.
+            Phase 2: 300 EUR Pauschale fuer weitere 9 Monate (Bewilligung auf Antrag).
+            Grundlage: Paragraph 93 SGB III.
+          </RechnerHinweis>
         </div>
       )}
     </div>

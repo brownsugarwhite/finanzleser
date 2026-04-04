@@ -1,48 +1,47 @@
+/**
+ * Rentenabschlagrechner 2026
+ * Berechnet den Abschlag bei vorzeitigem Rentenbezug.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface RentenabschlagParams {
-  regelaltersgrenze_monate: number;
-  vorzeitiger_beginn_monate: number;
-  rentenpunkte: number;
+  monatlicheRente: number; // Rente ohne Abschlag
+  monate_frueher: number; // Monate vor Regelaltersgrenze (1-60)
 }
 
 export interface RentenabschlagResult {
-  regelaltersgrenze_monate: number;
-  vorzeitiger_beginn_monate: number;
-  monate_vorzeitig: number;
-  abschlag_prozent: number;
-  rente_basis: number;
-  rente_mit_abschlag: number;
-  rentenminderung_absolut: number;
+  abschlagProzent: number;
+  abschlagBetrag: number;
+  renteNachAbschlag: number;
+  verlustJaehrlich: number;
 }
 
 export function berechne(
-  {
-    regelaltersgrenze_monate,
-    vorzeitiger_beginn_monate,
-    rentenpunkte
-  }: RentenabschlagParams,
-  rates: typeof RATES = RATES
+  params: RentenabschlagParams,
+  rates: RatesType = RATES
 ): RentenabschlagResult {
-  const monate_vorzeitig = regelaltersgrenze_monate - vorzeitiger_beginn_monate;
+  const { monatlicheRente, monate_frueher } = params;
 
-  // Abschlag from rates.json
-  const abschlag_prozent = Math.min(monate_vorzeitig * rates.rentenabschlag.abschlag_pro_monat_prozent, rates.rentenabschlag.max_abschlag_prozent);
+  const abschlagProMonat = rates.rentenabschlag.abschlag_pro_monat_prozent;
+  const maxAbschlag = rates.rentenabschlag.max_abschlag_prozent;
 
-  // Rentenwert from rates.json
-  const rentenwert = rates.rente.rentenwert_ab_01jul_2026;
-  const rente_basis = rund(rentenpunkte * rentenwert);
-  const rente_mit_abschlag = rund(rente_basis * (1 - abschlag_prozent / 100));
-  const rentenminderung_absolut = rund(rente_basis - rente_mit_abschlag);
+  // Abschlag berechnen: 0,3% pro Monat, max 14,4%
+  const abschlagProzent = rund(Math.min(monate_frueher * abschlagProMonat, maxAbschlag));
+
+  // Abzug in Euro
+  const abschlagBetrag = rund(monatlicheRente * abschlagProzent / 100);
+  const renteNachAbschlag = rund(monatlicheRente - abschlagBetrag);
+  const verlustJaehrlich = rund(abschlagBetrag * 12);
 
   return {
-    regelaltersgrenze_monate,
-    vorzeitiger_beginn_monate,
-    monate_vorzeitig,
-    abschlag_prozent: rund(abschlag_prozent),
-    rente_basis,
-    rente_mit_abschlag,
-    rentenminderung_absolut
+    abschlagProzent,
+    abschlagBetrag,
+    renteNachAbschlag,
+    verlustJaehrlich,
   };
 }

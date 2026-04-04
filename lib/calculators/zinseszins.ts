@@ -2,29 +2,54 @@ import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface ZinseszinsParams {
+  startkapital: number;
+  monatlicheSparrate: number;
+  zinssatzPa: number;
+  laufzeitJahre: number;
+}
+
+export interface ZinseszinsJahresplan {
+  jahr: number;
   kapital: number;
-  zinssatz: number;
-  jahre: number;
+  einzahlungen: number;
+  zinsertraege: number;
 }
 
 export interface ZinseszinsResult {
-  startkapital: number;
-  zinssatz: number;
-  jahre: number;
   endkapital: number;
-  ertrag: number;
+  gesamtEinzahlungen: number;
+  gesamtZinsertraege: number;
+  jahresplan: ZinseszinsJahresplan[];
 }
 
-export function berechne({ kapital, zinssatz, jahre }: ZinseszinsParams, rates: typeof RATES = RATES): ZinseszinsResult {
-  const rate = zinssatz / 100;
-  const endkapital = rund(kapital * Math.pow(1 + rate, jahre));
-  const ertrag = rund(endkapital - kapital);
+export function berechne(
+  { startkapital, monatlicheSparrate, zinssatzPa, laufzeitJahre }: ZinseszinsParams,
+  rates: typeof RATES = RATES
+): ZinseszinsResult {
+  const jahresplan: ZinseszinsJahresplan[] = [];
+  let kapital = startkapital;
+  let gesamtEinzahlungen = startkapital;
+
+  for (let jahr = 1; jahr <= laufzeitJahre; jahr++) {
+    const sparJahr = monatlicheSparrate * 12;
+    kapital = (kapital + sparJahr) * (1 + zinssatzPa / 100);
+    gesamtEinzahlungen += sparJahr;
+    const zinsertraege = kapital - gesamtEinzahlungen;
+
+    jahresplan.push({
+      jahr,
+      kapital: rund(kapital),
+      einzahlungen: rund(gesamtEinzahlungen),
+      zinsertraege: rund(zinsertraege),
+    });
+  }
+
+  const gesamtZinsertraege = rund(kapital - gesamtEinzahlungen);
 
   return {
-    startkapital: rund(kapital),
-    zinssatz,
-    jahre,
-    endkapital,
-    ertrag,
+    endkapital: rund(kapital),
+    gesamtEinzahlungen: rund(gesamtEinzahlungen),
+    gesamtZinsertraege,
+    jahresplan,
   };
 }

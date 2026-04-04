@@ -1,61 +1,58 @@
+/**
+ * Hinzuverdienstrechner 2026
+ * Berechnet die Kuerzung der Rente bei Hinzuverdienst
+ * vor und nach Erreichen der Regelaltersgrenze.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface HinzuverdienstParams {
-  alg1_anspruchswert: number;
-  hinzuverdienst_monatlich: number;
-  ist_rentnerin: boolean;
+  monatlicheRente: number;
+  monatlichesEinkommen: number;
+  istVorzeitigeRente: boolean;
 }
 
 export interface HinzuverdienstResult {
-  alg1_anspruchswert: number;
-  hinzuverdienst_monatlich: number;
-  hinzuverdienst_freibetrag: number;
-  hinzuverdienst_anrechenbar: number;
-  alg1_gekuerzt: number;
-  alg1_ausgezahlt: number;
-  effektiver_satz: number;
+  hinzuverdienstGrenze: number;
+  kuerzungsBetrag: number;
+  verbleibendeRente: number;
+  gesamtEinkommen: number;
 }
 
 export function berechne(
-  {
-    alg1_anspruchswert,
-    hinzuverdienst_monatlich,
-    ist_rentnerin
-  }: HinzuverdienstParams,
-  rates: typeof RATES = RATES
+  params: HinzuverdienstParams,
+  rates: RatesType = RATES
 ): HinzuverdienstResult {
-  // Freibetrag auf Hinzuverdienst (vereinfacht - tatsächlich komplexer)
-  const hinzuverdienst_freibetrag = ist_rentnerin ? (rates.hinzuverdienst.bbg_monat / 12) : (rates.hinzuverdienst.bbg_monat / 12);
-  const hinzuverdienst_ueber = Math.max(
-    0,
-    hinzuverdienst_monatlich - hinzuverdienst_freibetrag
-  );
+  const { monatlicheRente, monatlichesEinkommen, istVorzeitigeRente } = params;
 
-  // Kürzung % des übersteigenden Betrags wird angerechnet
-  const anrechnung_satz = rates.hinzuverdienst.kuerzung_prozent / 100;
-  const hinzuverdienst_anrechenbar = rund(hinzuverdienst_ueber * anrechnung_satz);
+  // Bei Regelaltersrente: unbegrenzt hinzuverdienen
+  // Bei vorzeitiger Rente: Jahresgrenze (50.700 EUR / Jahr -> monatlich)
+  const hinzuverdienstGrenzeJahr = rates.hinzuverdienst.hinzuverdienst_grenze_vorzeitig_jahr;
+  const hinzuverdienstGrenzeMonat = rund(hinzuverdienstGrenzeJahr / 12);
+  const kuerzungProzent = rates.hinzuverdienst.kuerzung_prozent;
 
-  // ALG1 wird gekürzt
-  const alg1_gekuerzt = Math.max(0, alg1_anspruchswert - hinzuverdienst_anrechenbar);
-  const alg1_ausgezahlt = Math.min(
-    alg1_anspruchswert,
-    alg1_gekuerzt
-  );
+  let kuerzungsBetrag = 0;
 
-  // Effektiver Steuersatz
-  const verdienst_netto = hinzuverdienst_monatlich - hinzuverdienst_anrechenbar;
-  const effektiver_satz = hinzuverdienst_monatlich > 0
-    ? rund((hinzuverdienst_anrechenbar / hinzuverdienst_monatlich) * 100)
-    : 0;
+  if (istVorzeitigeRente && monatlichesEinkommen > hinzuverdienstGrenzeMonat) {
+    // 40% des uebersteigenden Betrags wird von der Rente abgezogen
+    const ueberstieg = monatlichesEinkommen - hinzuverdienstGrenzeMonat;
+    kuerzungsBetrag = rund(ueberstieg * kuerzungProzent / 100);
+    kuerzungsBetrag = Math.min(kuerzungsBetrag, monatlicheRente); // max. Rente wird auf 0 gekuerzt
+  }
+
+  const verbleibendeRente = rund(monatlicheRente - kuerzungsBetrag);
+  const gesamtEinkommen = rund(verbleibendeRente + monatlichesEinkommen);
+
+  const hinzuverdienstGrenze = istVorzeitigeRente ? hinzuverdienstGrenzeMonat : 0; // 0 = unbegrenzt
 
   return {
-    alg1_anspruchswert,
-    hinzuverdienst_monatlich,
-    hinzuverdienst_freibetrag,
-    hinzuverdienst_anrechenbar,
-    alg1_gekuerzt,
-    alg1_ausgezahlt,
-    effektiver_satz
+    hinzuverdienstGrenze,
+    kuerzungsBetrag,
+    verbleibendeRente,
+    gesamtEinkommen,
   };
 }

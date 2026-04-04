@@ -1,47 +1,101 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
+import { berechne, type GerichtskostenParams, type GerichtskostenResult } from "@/lib/calculators/gerichtskosten";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
+import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
+import RechnerResultTable from "./ui/RechnerResultTable";
+import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function GerichtsKostenRechner() {
-  const [streitwert, setStreitwert] = useState(10000);
+  const [params, setParams] = useState<GerichtskostenParams>({
+    streitwert: 5000,
+    instanz: "ag_lg",
+  });
 
-  const calculateGebuehr = (sv: number) => {
-    const table = [
-      { bis: 500, gebuehr: 38 },
-      { bis: 1000, gebuehr: 58 },
-      { bis: 1500, gebuehr: 78 },
-      { bis: 5000, gebuehr: 161 },
-      { bis: 10000, gebuehr: 266 },
-      { bis: 50000, gebuehr: 696 },
-      { bis: 500000, gebuehr: 2896 }
-    ];
+  const [result, setResult] = useState<GerichtskostenResult | null>(null);
+  const rates = useRates();
 
-    for (const s of table) {
-      if (sv <= s.bis) return s.gebuehr;
-    }
-    return 2896;
-  };
-
-  const gebuehr = calculateGebuehr(streitwert);
+  const handleBerechnen = useCallback(() => {
+    setResult(berechne(params, rates));
+  }, [params, rates]);
 
   return (
     <div className="rechner-container">
       <h3 className="rechner-title">Gerichtskosten-Rechner 2026</h3>
 
       <div className="rechner-inputs">
-        <RechnerInput label="Streitwert" name="streitwert" value={streitwert} onChange={(val) => setStreitwert(Number(val))} einheit="€" min={0} />
+        <RechnerInput
+          label="Streitwert"
+          name="streitwert"
+          value={params.streitwert}
+          onChange={(val) => setParams((p) => ({ ...p, streitwert: val }))}
+          einheit="EUR"
+          min={0}
+        />
+        <RechnerSelect
+          label="Instanz"
+          name="instanz"
+          value={params.instanz}
+          onChange={(val) =>
+            setParams((p) => ({
+              ...p,
+              instanz: val as GerichtskostenParams["instanz"],
+            }))
+          }
+          options={[
+            { value: "ag_lg", label: "Amts-/Landgericht" },
+            { value: "olg", label: "Oberlandesgericht" },
+            { value: "bgh", label: "Bundesgerichtshof" },
+          ]}
+        />
       </div>
 
-      <div className="rechner-results">
-        <div className="rechner-result-boxes">
-          <RechnerResultBox label="Gerichtsgebühr" value={euro(gebuehr)} highlight={true} />
-          <RechnerResultBox label="Mit Anwaltskosten (geschätzt)" value={euro(gebuehr * 2)} highlight={false} />
+      <RechnerButton onClick={handleBerechnen} />
+
+      {result && (
+        <div className="rechner-results">
+          <div className="rechner-result-boxes">
+            <RechnerResultBox
+              label="Gesamtkosten"
+              value={euro(result.gesamtKosten)}
+              highlight={true}
+            />
+            <RechnerResultBox
+              label="Gerichtsgebuehr"
+              value={euro(result.gerichtsgebuehr)}
+            />
+            <RechnerResultBox
+              label="Anwaltskosten"
+              value={euro(result.anwaltsGesamt)}
+            />
+          </div>
+
+          <h4 className="rechner-result-section-title">Anwaltskosten (1 Anwalt)</h4>
+          <RechnerResultTable
+            rows={[
+              { label: "Verfahrensgebuehr (1,3-fach)", value: euro(result.anwaltsVerfahren) },
+              { label: "Terminsgebuehr (1,2-fach)", value: euro(result.anwaltsTermin) },
+              { label: "Post-/Telekompauschale", value: euro(result.anwaltsPostpauschale) },
+              { label: "MwSt (19 %)", value: euro(result.anwaltsMwSt) },
+            ]}
+            footer={{
+              label: "Anwalt gesamt (brutto)",
+              value: euro(result.anwaltsGesamt),
+            }}
+          />
+
+          <RechnerHinweis>
+            Berechnung nach GKG Anlage 2 und RVG. Bei 2 Parteien mit je eigenem Anwalt
+            verdoppeln sich die Anwaltskosten. Gerichtsgebuehr je nach Instanz (AG/LG: 3-fach,
+            OLG: 4-fach, BGH: 5-fach).
+          </RechnerHinweis>
         </div>
-      </div>
+      )}
     </div>
   );
 }

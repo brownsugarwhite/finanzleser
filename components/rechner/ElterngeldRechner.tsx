@@ -1,81 +1,96 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type ElterngeldParams, type ElterngeldResult } from "@/lib/calculators/elterngeld";
-import { euro } from "@/lib/calculators/utils";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
-import RechnerSelect from "./ui/RechnerSelect";
-import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function ElterngeldRechner() {
   const [params, setParams] = useState<ElterngeldParams>({
-    einkommen_vor_geburt: 3500,
-    anzahl_kinder: 1,
-    basiselterngeld: true,
+    monatsBrutto: 3000,
+    zvEJahr: 36000,
   });
 
   const [result, setResult] = useState<ElterngeldResult | null>(null);
-
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Elterngeld-Rechner</h3>
+      <h3 className="rechner-title">Elterngeld-Rechner 2026</h3>
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Durchschn. Nettoeinkommen vor Geburt"
-          name="einkommen_vor_geburt"
-          value={params.einkommen_vor_geburt}
-          onChange={(val) => setParams((prev) => ({ ...prev, einkommen_vor_geburt: val }))}
+          label="Durchschnittliches Monatsbrutto"
+          name="monatsBrutto"
+          value={params.monatsBrutto}
+          onChange={(val) => setParams((p) => ({ ...p, monatsBrutto: val }))}
           einheit="€"
           step={100}
           min={0}
         />
 
-        <RechnerSelect
-          label="Anzahl Kinder"
-          name="anzahl_kinder"
-          value={params.anzahl_kinder.toString()}
-          onChange={(val) => setParams((prev) => ({ ...prev, anzahl_kinder: parseInt(val) }))}
-          options={[1, 2, 3, 4, 5].map((n) => ({ label: n.toString(), value: n.toString() }))}
-        />
-
-        <RechnerCheckbox
-          label="Basiselterngeld (statt Elterngeld Plus)"
-          name="basiselterngeld"
-          checked={params.basiselterngeld}
-          onChange={(val) => setParams((prev) => ({ ...prev, basiselterngeld: val }))}
+        <RechnerInput
+          label="Zu versteuerndes Jahreseinkommen"
+          name="zvEJahr"
+          value={params.zvEJahr}
+          onChange={(val) => setParams((p) => ({ ...p, zvEJahr: val }))}
+          einheit="€"
+          step={1000}
+          min={0}
+          tooltip="Relevant fuer Einkommenspruefung (Grenze: 175.000 EUR)"
         />
       </div>
 
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
         <div className="rechner-results">
-          <div className="rechner-result-boxes">
-            <RechnerResultBox label="Monatliches Elterngeld" value={euro(result.elterngeld_monatlich)} highlight={true} />
-            <RechnerResultBox label="Jährlich" value={euro(result.elterngeld_jaehrlich)} />
-          </div>
+          {result.keinAnspruch ? (
+            <RechnerResultBox
+              label="Kein Anspruch"
+              value="Einkommen ueber 175.000 EUR"
+              highlight={false}
+              variant="negative"
+            />
+          ) : (
+            <>
+              <div className="rechner-result-boxes">
+                <RechnerResultBox
+                  label="Basiselterngeld / Monat"
+                  value={euro(result.basisElterngeld)}
+                  highlight
+                />
+                <RechnerResultBox
+                  label="ElterngeldPlus / Monat"
+                  value={euro(result.elterngeldPlus)}
+                />
+              </div>
 
-          <RechnerResultTable
-            rows={[
-              { label: "Nettoeinkommen vor Geburt", value: euro(result.einkommen_vor_geburt) },
-              { label: "Elterngeld (monatlich)", value: euro(result.elterngeld_monatlich) },
-              { label: "Elterngeld (jährlich)", value: euro(result.elterngeld_jaehrlich) },
-              { label: "Bezugsdauer", value: `${result.gesamtdauer_monate} Monate` },
-            ]}
-          />
+              <RechnerResultTable
+                rows={[
+                  { label: "Monatsbrutto", value: euro(result.monatsBrutto) },
+                  { label: "BEEG-Netto", value: euro(result.beegNetto) },
+                  { label: "Ersatzrate", value: prozent(result.ersatzrateProzent) },
+                  { label: "Basiselterngeld (12 Mon.)", value: euro(result.gesamtBasis) },
+                  { label: "ElterngeldPlus (24 Mon.)", value: euro(result.gesamtPlus) },
+                ]}
+              />
+            </>
+          )}
 
           <RechnerHinweis>
-            Elterngeld: 65% des durchschnittlichen Nettoeinkommens, min. 300 €, max. 1.800 € pro Monat.
-            Mehrlingszuschlag: +25% pro Kind. Für genaue Berechnung wenden Sie sich an das zuständige Elterngeldamt.
+            Berechnung nach BEEG 2026. BEEG-Netto = Brutto minus 21,9 % SV-Pauschale
+            minus progressiver Lohnsteuer. Ersatzrate 65-67 % je nach Nettoeinkommen.
+            Min. 300 EUR, max. 1.800 EUR (Basis) bzw. 150-900 EUR (Plus).
           </RechnerHinweis>
         </div>
       )}

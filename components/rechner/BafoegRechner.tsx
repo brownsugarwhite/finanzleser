@@ -1,139 +1,124 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import {
-  berechne,
-  type BafoegParams,
-  type BafoegResult
-} from "@/lib/calculators/bafoeg";
+import { berechne, type BafoegParams, type BafoegResult } from "@/lib/calculators/bafoeg";
 import { euro } from "@/lib/calculators/utils";
-import RechnerInput from "./ui/RechnerInput";
 import RechnerSelect from "./ui/RechnerSelect";
+import RechnerInput from "./ui/RechnerInput";
 import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function BafoegRechner() {
   const [params, setParams] = useState<BafoegParams>({
     wohnform: "extern",
-    eigenes_einkommen: 0,
-    eltern_einkommen: 3000,
-    eltern_alleinstehend: false,
-    geschwister_in_ausbildung: 0,
-    krankenversicherung: "gesetzlich"
+    hatKV: true,
+    elternEinkommen: 3000,
+    elternVerheiratet: true,
+    geschwisterInAusbildung: 0,
   });
 
   const [result, setResult] = useState<BafoegResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
-  const handleParamChange = (key: keyof BafoegParams, value: any) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">BAföG-Rechner 2026</h3>
+      <h3 className="rechner-title">BAfoeg-Rechner 2026</h3>
 
       <div className="rechner-inputs">
         <RechnerSelect
           label="Wohnform"
           name="wohnform"
           value={params.wohnform}
-          onChange={(val) => handleParamChange("wohnform", val as "eltern" | "extern")}
+          onChange={(val) => setParams((p) => ({ ...p, wohnform: val as "extern" | "eltern" }))}
           options={[
-            { value: "eltern", label: "Bei den Eltern wohnhaft" },
-            { value: "extern", label: "Auswärts (Miete)" }
+            { value: "extern", label: "Eigene Wohnung" },
+            { value: "eltern", label: "Bei den Eltern" },
           ]}
         />
 
-        <RechnerInput
-          label="Eigenes monatliches Einkommen"
-          name="eigenes_einkommen"
-          value={params.eigenes_einkommen}
-          onChange={(val) => handleParamChange("eigenes_einkommen", val)}
-          einheit="€"
-          min={0}
+        <RechnerCheckbox
+          label="Kranken-/Pflegeversicherungszuschlag"
+          name="hatKV"
+          checked={params.hatKV}
+          onChange={(val) => setParams((p) => ({ ...p, hatKV: val }))}
         />
 
         <RechnerInput
-          label="Eltern monatliches Nettoeinkommen"
-          name="eltern_einkommen"
-          value={params.eltern_einkommen}
-          onChange={(val) => handleParamChange("eltern_einkommen", val)}
+          label="Monatliches Netto der Eltern"
+          name="elternEinkommen"
+          value={params.elternEinkommen}
+          onChange={(val) => setParams((p) => ({ ...p, elternEinkommen: val }))}
           einheit="€"
+          step={100}
           min={0}
         />
 
         <RechnerCheckbox
-          label="Eltern sind alleinstehend"
-          name="eltern_alleinstehend"
-          checked={params.eltern_alleinstehend}
-          onChange={(val) => handleParamChange("eltern_alleinstehend", val)}
+          label="Eltern verheiratet"
+          name="elternVerheiratet"
+          checked={params.elternVerheiratet}
+          onChange={(val) => setParams((p) => ({ ...p, elternVerheiratet: val }))}
         />
 
         <RechnerSelect
-          label="Krankenversicherung"
-          name="krankenversicherung"
-          value={params.krankenversicherung}
-          onChange={(val) => handleParamChange("krankenversicherung", val as "gesetzlich" | "privat" | "keine")}
-          options={[
-            { value: "gesetzlich", label: "Gesetzlich versichert" },
-            { value: "privat", label: "Privat versichert" },
-            { value: "keine", label: "Keine Krankenversicherung" }
-          ]}
+          label="Geschwister in Ausbildung"
+          name="geschwisterInAusbildung"
+          value={params.geschwisterInAusbildung.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, geschwisterInAusbildung: parseInt(val) }))}
+          options={Array.from({ length: 6 }, (_, i) => ({
+            label: i.toString(),
+            value: i.toString(),
+          }))}
         />
       </div>
 
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
         <div className="rechner-results">
-          <div className="rechner-result-boxes">
-            {result.hat_anspruch ? (
-              <>
-                <RechnerResultBox
-                  label="BAföG-Anspruch / Monat"
-                  value={euro(result.bafoeg)}
-                  highlight={true}
-                />
-                <RechnerResultBox
-                  label="davon Zuschuss"
-                  value={euro(result.zuschuss)}
-                  highlight={false}
-                />
-              </>
-            ) : (
-              <RechnerResultBox
-                label="Kein BAföG-Anspruch"
-                value="Einkommen zu hoch"
-                highlight={false}
-              />
-            )}
-          </div>
-
-          {result.hat_anspruch && (
+          {result.hatAnspruch ? (
             <>
-              <h4 className="rechner-result-section-title">Details</h4>
+              <div className="rechner-result-boxes">
+                <RechnerResultBox
+                  label="BAfoeg-Anspruch / Monat"
+                  value={euro(result.bafoegAnspruch)}
+                  highlight
+                />
+                <RechnerResultBox
+                  label="Max. Darlehen gesamt"
+                  value={euro(result.darlehensMax)}
+                />
+              </div>
+
               <RechnerResultTable
                 rows={[
-                  { label: "Bedarfssatz", value: euro(result.bedarf) },
-                  { label: "Anrechenbares Einkommen", value: `−${euro(result.gesamt_anrechenbar)}` }
+                  { label: "Maximaler Bedarfssatz", value: euro(result.bedarfMax) },
+                  { label: "Eltern-Freibetrag", value: euro(result.elternFreibetrag) },
+                  { label: "Anrechenb. Elterneinkommen", value: euro(result.anrechenbaresElternEinkommen) },
+                  { label: "Elternanrechnung (50 %)", value: `- ${euro(result.elternAnrechnung)}` },
                 ]}
-                footer={{ label: "BAföG-Anspruch", value: euro(result.bafoeg) }}
+                footer={{ label: "BAfoeg-Anspruch", value: euro(result.bafoegAnspruch) }}
               />
             </>
+          ) : (
+            <RechnerResultBox
+              label="Kein BAfoeg-Anspruch"
+              value="Elterneinkommen zu hoch"
+              variant="negative"
+            />
           )}
 
           <RechnerHinweis>
-            BAföG wird zur Hälfte als Zuschuss, zur Hälfte als zinsloses Darlehen gewährt.
-            Grundlage: Bundesausbildungsförderungsgesetz (BAföG).
+            BAfoeg wird zur Haelfte als Zuschuss, zur Haelfte als zinsloses Darlehen
+            gewaehrt (max. 10.010 EUR Rueckzahlung). Grundlage: BAfoeg 2024/2026.
           </RechnerHinweis>
         </div>
       )}

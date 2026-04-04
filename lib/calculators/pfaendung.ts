@@ -1,52 +1,67 @@
+/**
+ * Pfaendungs-Rechner 2026
+ * Berechnet pfaendbares Einkommen nach § 850c ZPO.
+ * Grundfreibetrag + Erhoehung je Unterhaltspflicht.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+/* ── Params & Result ────────��───────────────────────���── */
+
 export interface PfaendungParams {
-  nettoEntgelt: number;
-  schuldenart: "unterhaltsschuld" | "forderung_allgemein";
+  monatsNetto: number;
+  unterhaltspflichten: number; // 0-5
 }
 
 export interface PfaendungResult {
-  nettoEntgelt: number;
-  schuldenart: string;
-  pfaendungsfreier_betrag: number;
-  insolvenzquote_prozent: number;
-  pfaendbar: number;
-  tatsaechliche_pfaendung: number;
-  verbraucherinsolvenz: boolean;
+  grundfreibetrag: number;
+  erhoehung: number;
+  gesamtFreibetrag: number;
+  pfaendbarerBetrag: number;
+  verbleibendesEinkommen: number;
 }
 
+/* ── Berechnung ───────────���──────────────────────────── */
+
 export function berechne(
-  { nettoEntgelt, schuldenart }: PfaendungParams,
-  rates: typeof RATES = RATES
+  { monatsNetto, unterhaltspflichten }: PfaendungParams,
+  rates: RatesType = RATES,
 ): PfaendungResult {
-  // Pfändungsfreigrenzen from rates.json
-  // §§ 850–883 ZPO
-  const grundfreibetrag = rates.pfaendung.grundfreibetrag_monat;
+  const r = rates.pfaendung;
 
-  let pfaendungsfreier_betrag = grundfreibetrag;
-  let insolvenzquote_prozent = 0;
+  // 1. Grundfreibetrag
+  const grundfreibetrag = r.grundfreibetrag_monat;
 
-  if (schuldenart === "unterhaltsschuld") {
-    // Bei Unterhalt: 50 % des pfändbaren Betrags
-    pfaendungsfreier_betrag = 0;
-    insolvenzquote_prozent = 50;
-  } else {
-    // Allgemeine Forderungen: 50 % des über Grundfreibetrag hinausgehenden Betrags
-    insolvenzquote_prozent = 50;
+  // 2. Erhöhung für Unterhaltspflichten
+  //    1. Person: erhoehung_erste_person, weitere: erhoehung_weitere_person
+  let erhoehung = 0;
+  if (unterhaltspflichten >= 1) {
+    erhoehung += r.erhoehung_erste_person;
   }
+  if (unterhaltspflichten >= 2) {
+    erhoehung += (unterhaltspflichten - 1) * r.erhoehung_weitere_person;
+  }
+  erhoehung = rund(erhoehung);
 
-  const pfaendbar = Math.max(0, nettoEntgelt - pfaendungsfreier_betrag);
-  const tatsaechliche_pfaendung = rund(pfaendbar * (insolvenzquote_prozent / 100));
-  const verbraucherinsolvenz = schuldenart === "forderung_allgemein";
+  // 3. Gesamter Freibetrag
+  const gesamtFreibetrag = rund(grundfreibetrag + erhoehung);
+
+  // 4. Pfändbarer Betrag (70 % des Betrags über dem Freibetrag)
+  const ueberFreibetrag = Math.max(0, monatsNetto - gesamtFreibetrag);
+  const pfaendbarerBetrag = rund(ueberFreibetrag * r.pfaendungsquote_zone);
+
+  // 5. Verbleibendes Einkommen
+  const verbleibendesEinkommen = rund(monatsNetto - pfaendbarerBetrag);
 
   return {
-    nettoEntgelt,
-    schuldenart,
-    pfaendungsfreier_betrag,
-    insolvenzquote_prozent,
-    pfaendbar: rund(pfaendbar),
-    tatsaechliche_pfaendung,
-    verbraucherinsolvenz
+    grundfreibetrag,
+    erhoehung,
+    gesamtFreibetrag,
+    pfaendbarerBetrag,
+    verbleibendesEinkommen,
   };
 }

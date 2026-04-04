@@ -1,34 +1,43 @@
+/**
+ * Kirchensteuerrechner 2026
+ * Berechnet Kirchensteuer basierend auf Einkommensteuer und Bundesland.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { getKirchensteuersatz } from "./shared/kirchensteuer";
+
+type RatesType = typeof RATES;
 
 export interface KirchensteuerParams {
-  lohnsteuer_jahr: number;
+  lohnsteuerJahr: number;
   bundesland: string;
 }
 
 export interface KirchensteuerResult {
-  lohnsteuer_jahr: number;
+  lohnsteuerJahr: number;
   bundesland: string;
-  satz_prozent: number;
-  kirchensteuer_jahr: number;
-  kirchensteuer_monat: number;
+  satzProzent: number;
+  kirchensteuerJahr: number;
+  kirchensteuerMonat: number;
 }
 
 export function berechne(
-  { lohnsteuer_jahr, bundesland }: KirchensteuerParams,
-  rates: typeof RATES = RATES
+  params: KirchensteuerParams,
+  rates: RatesType = RATES
 ): KirchensteuerResult {
-  const satz8Bundeslaender = rates.kirchensteuer.satz_8_prozent_bundeslaender;
-  const satz = satz8Bundeslaender.includes(bundesland) ? 0.08 : 0.09;
+  const { lohnsteuerJahr, bundesland } = params;
 
-  const kirchensteuer_jahr = rund(lohnsteuer_jahr * satz);
-  const kirchensteuer_monat = rund(kirchensteuer_jahr / 12);
+  const satz = getKirchensteuersatz(bundesland, rates);
+  const kirchensteuerJahr = rund(lohnsteuerJahr * satz / 100);
+  const kirchensteuerMonat = rund(kirchensteuerJahr / 12);
 
   return {
-    lohnsteuer_jahr,
+    lohnsteuerJahr,
     bundesland,
-    satz_prozent: Math.round(satz * 100),
-    kirchensteuer_jahr,
-    kirchensteuer_monat
+    satzProzent: satz,
+    kirchensteuerJahr,
+    kirchensteuerMonat,
   };
 }

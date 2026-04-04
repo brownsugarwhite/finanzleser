@@ -1,132 +1,109 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import {
-  berechne,
-  type AnnuitaetParams,
-  type AnnuitaetResult
-} from "@/lib/calculators/annuitaet";
-import { euro } from "@/lib/calculators/utils";
+import { berechne, type AnnuitaetParams, type AnnuitaetResult } from "@/lib/calculators/annuitaet";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function AnnuitaetRechner() {
   const [params, setParams] = useState<AnnuitaetParams>({
-    darlehensbetrag: 200000,
-    zinssatz_jahr: 3.5,
-    laufzeit_jahre: 20
+    darlehensbetrag: 250000,
+    zinssatzPa: 3.0,
+    laufzeitJahre: 20,
   });
 
   const [result, setResult] = useState<AnnuitaetResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
-  const handleParamChange = (
-    key: keyof AnnuitaetParams,
-    value: number
-  ) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Annuitätenrechner 2026</h3>
+      <h3 className="rechner-title">Annuitätenrechner</h3>
 
       <div className="rechner-inputs">
         <RechnerInput
           label="Darlehensbetrag"
           name="darlehensbetrag"
           value={params.darlehensbetrag}
-          onChange={(val) => handleParamChange("darlehensbetrag", val)}
+          onChange={(val) => setParams((prev) => ({ ...prev, darlehensbetrag: val }))}
           einheit="€"
-          min={1000}
-          step={1000}
+          step={5000}
+          min={0}
         />
-
         <RechnerInput
           label="Jahreszinssatz"
-          name="zinssatz_jahr"
-          value={params.zinssatz_jahr}
-          onChange={(val) => handleParamChange("zinssatz_jahr", val)}
+          name="zinssatzPa"
+          value={params.zinssatzPa}
+          onChange={(val) => setParams((prev) => ({ ...prev, zinssatzPa: val }))}
           einheit="%"
-          min={0}
           step={0.1}
+          min={0}
         />
-
         <RechnerInput
           label="Laufzeit"
-          name="laufzeit_jahre"
-          value={params.laufzeit_jahre}
-          onChange={(val) => handleParamChange("laufzeit_jahre", val)}
+          name="laufzeitJahre"
+          value={params.laufzeitJahre}
+          onChange={(val) => setParams((prev) => ({ ...prev, laufzeitJahre: val }))}
           einheit="Jahre"
-          min={1}
-          max={40}
           step={1}
+          min={1}
+          max={50}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox
-              label="Monatliche Rate"
-              value={euro(result.annuitaet_monatlich)}
-              highlight={true}
-            />
-            <RechnerResultBox
-              label="Gesamtzinsen"
-              value={euro(result.gesamtzinsen)}
-              highlight={false}
-            />
+            <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
+            <RechnerResultBox label="Gesamtzinsen" value={euro(result.gesamtZinsen)} />
+            <RechnerResultBox label="Gesamtrückzahlung" value={euro(result.gesamtRueckzahlung)} />
           </div>
 
-          <h4 className="rechner-result-section-title">Zusammenfassung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Darlehensbetrag", value: euro(result.darlehensbetrag) },
-              {
-                label: "Jahreszinssatz",
-                value: `${result.zinssatz_jahr} %`
-              },
-              { label: "Laufzeit", value: `${result.laufzeit_jahre} Jahre` },
-              {
-                label: "Monatliche Rate (Annuität)",
-                value: euro(result.annuitaet_monatlich)
-              },
-              {
-                label: "Gesamtbetrag (zahlen)",
-                value: euro(result.gesamtbetrag)
-              },
-              {
-                label: "Gesamtzinsen",
-                value: euro(result.gesamtzinsen)
-              }
+              { label: "Darlehensbetrag", value: euro(params.darlehensbetrag) },
+              { label: "Jahreszinssatz", value: prozent(params.zinssatzPa) },
+              { label: "Laufzeit", value: `${params.laufzeitJahre} Jahre` },
+              { label: "Monatsrate (Annuität)", value: euro(result.monatsrate) },
+              { label: "Gesamtrückzahlung", value: euro(result.gesamtRueckzahlung) },
+              { label: "Gesamtzinsen", value: euro(result.gesamtZinsen) },
+              { label: "Effektivzins", value: prozent(result.effektivZins) },
             ]}
           />
 
-          <h4 className="rechner-result-section-title">Tilgungsplan</h4>
-          <RechnerResultTable
-            rows={result.tilgungsplan.map((row) => ({
-              label: `Monat ${row.monat}`,
-              value: `Zinsen: ${euro(row.zinsen)}, Tilgung: ${euro(row.tilgung)}, Rest: ${euro(row.restschuld)}`
+          <h4 className="rechner-result-section-title">Tilgungsplan (Jahresübersicht)</h4>
+          <RechnerAmortizationTable
+            columns={[
+              { key: "jahr", label: "Jahr" },
+              { key: "rateJahr", label: "Rate (Jahr)" },
+              { key: "zinsen", label: "Zinsen" },
+              { key: "tilgung", label: "Tilgung" },
+              { key: "restschuld", label: "Restschuld" },
+            ]}
+            yearlyRows={result.jahresplan.map((row) => ({
+              jahr: row.jahr,
+              rateJahr: euro(row.rateJahr),
+              zinsen: euro(row.zinsen),
+              tilgung: euro(row.tilgung),
+              restschuld: euro(row.restschuld),
             }))}
           />
 
-          {result.laufzeit_jahre * 12 > 24 && (
-            <RechnerHinweis>
-              Der Tilgungsplan zeigt Monate 1–24 und den letzten Monat. Annuitätenformel:
-              R = K × [i × (1+i)ⁿ] / [(1+i)ⁿ – 1]
-            </RechnerHinweis>
-          )}
+          <RechnerHinweis>
+            Annuitätenformel: R = K x [i x (1+i)^n] / [(1+i)^n - 1].
+            Die Monatsrate bleibt konstant, der Zinsanteil sinkt mit der Zeit.
+          </RechnerHinweis>
         </div>
       )}
     </div>

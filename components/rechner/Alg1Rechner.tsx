@@ -1,38 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type Alg1Params, type Alg1Result } from "@/lib/calculators/alg1";
-import { euro } from "@/lib/calculators/utils";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerSelect from "./ui/RechnerSelect";
 import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function Alg1Rechner() {
   const [params, setParams] = useState<Alg1Params>({
-    brutto_monat: 2500,
+    monatsBrutto: 3500,
     steuerklasse: 1,
-    hat_kinder: false,
-    versicherungsmonate: 12,
-    alter: 35
+    hatKinder: false,
+    versicherungsmonate: 24,
+    alter: 40,
   });
 
   const [result, setResult] = useState<Alg1Result | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
-
-  const handleParamChange = (key: keyof Alg1Params, value: number | boolean) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
 
   return (
     <div className="rechner-container">
@@ -40,38 +34,38 @@ export default function Alg1Rechner() {
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Brutto-Verdienst monatlich"
-          name="brutto_monat"
-          value={params.brutto_monat}
-          onChange={(val) => handleParamChange("brutto_monat", Number(val))}
-          einheit="€/Monat"
-          min={0}
+          label="Monatliches Bruttogehalt"
+          name="monatsBrutto"
+          value={params.monatsBrutto}
+          onChange={(val) => setParams((prev) => ({ ...prev, monatsBrutto: val }))}
+          einheit="€"
           step={100}
+          min={0}
         />
 
         <RechnerSelect
           label="Steuerklasse"
           name="steuerklasse"
           value={String(params.steuerklasse)}
-          onChange={(val) => handleParamChange("steuerklasse", Number(val) as 1 | 2 | 3 | 4 | 5 | 6)}
+          onChange={(val) => setParams((prev) => ({ ...prev, steuerklasse: parseInt(val) }))}
           options={[1, 2, 3, 4, 5, 6].map((sk) => ({
             label: `Klasse ${sk}`,
-            value: String(sk)
+            value: String(sk),
           }))}
         />
 
         <RechnerCheckbox
-          label="Hat Kinder"
-          name="hat_kinder"
-          checked={params.hat_kinder}
-          onChange={(val) => handleParamChange("hat_kinder", val)}
+          label="Hat Kinder (Leistungssatz 67%)"
+          name="hatKinder"
+          checked={params.hatKinder}
+          onChange={(val) => setParams((prev) => ({ ...prev, hatKinder: val }))}
         />
 
         <RechnerInput
           label="Versicherungsmonate (letzte 30 Monate)"
           name="versicherungsmonate"
           value={params.versicherungsmonate}
-          onChange={(val) => handleParamChange("versicherungsmonate", Number(val))}
+          onChange={(val) => setParams((prev) => ({ ...prev, versicherungsmonate: val }))}
           einheit="Monate"
           min={0}
           max={30}
@@ -81,57 +75,55 @@ export default function Alg1Rechner() {
           label="Alter"
           name="alter"
           value={params.alter}
-          onChange={(val) => handleParamChange("alter", Number(val))}
+          onChange={(val) => setParams((prev) => ({ ...prev, alter: val }))}
           einheit="Jahre"
-          min={0}
-          max={70}
+          min={16}
+          max={67}
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="ALG I monatlich"
-              value={euro(result.alg_monatlich)}
+              value={euro(result.algMonatlich)}
               highlight={true}
             />
             <RechnerResultBox
-              label="Anspruchsdauer"
-              value={`${result.bezugsdauer_monate} Monate`}
-              highlight={false}
+              label="Bezugsdauer"
+              value={`${result.bezugsdauerMonate} Monate`}
+              highlight={true}
             />
             <RechnerResultBox
               label="Gesamtbetrag"
               value={euro(result.gesamtbetrag)}
-              highlight={false}
             />
           </div>
 
-          <h4 className="rechner-result-section-title">Berechnung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Bemessungsentgelt", value: euro(result.bemessungsentgelt) },
-              { label: "Leistungssatz", value: `${result.satz_prozent}%` },
-              { label: "Leistungsentgelt täglich", value: euro(result.leistungsentgelt_taegig) },
-              { label: "ALG täglich", value: euro(result.alg_taegig) }
+              { label: "Bemessungsentgelt", value: `${euro(result.bemessungsentgelt)}${result.bemessungsentgeltBegrenzt ? " (gedeckelt)" : ""}` },
+              { label: "SV-Pauschale", value: euro(result.svPauschale) },
+              { label: "LSt-Pauschale", value: euro(result.lstPauschale) },
+              { label: "Leistungsentgelt (täglich)", value: euro(result.leistungsentgeltTaeglich) },
+              { label: "Leistungsentgelt (monatlich)", value: euro(result.leistungsentgeltMonatlich) },
+              { label: "Leistungssatz", value: prozent(result.satzProzent) },
+              { label: "ALG I (täglich)", value: euro(result.algTaeglich) },
+              { label: "ALG I (monatlich)", value: euro(result.algMonatlich) },
+              { label: "Bezugsdauer", value: `${result.bezugsdauerMonate} Monate` },
             ]}
-            footer={{ label: "ALG monatlich", value: euro(result.alg_monatlich) }}
+            footer={{ label: "Gesamtbetrag", value: euro(result.gesamtbetrag) }}
           />
 
-          {result.hinweis && (
-            <RechnerHinweis>
-              ⚠️ {result.hinweis}
-            </RechnerHinweis>
-          )}
-
-          {!result.hinweis && (
-            <RechnerHinweis>
-              Die ALG I-Leistung beträgt {result.satz_prozent}% des Leistungsentgelts
-              ({result.hat_kinder ? "mit Kindern" : "ohne Kinder"}). Anspruch für maximal {result.bezugsdauer_monate} Monate.
-              Quelle: § 150 ff. SGB III.
-            </RechnerHinweis>
-          )}
+          <RechnerHinweis>
+            ALG I betraegt {result.satzProzent}% des Leistungsentgelts
+            ({params.hatKinder ? "mit Kindern" : "ohne Kinder"}).
+            Rechtsgrundlage: SS 149-153 SGB III. Die Berechnung ist vereinfacht
+            und ersetzt keine individuelle Beratung durch die Agentur fuer Arbeit.
+          </RechnerHinweis>
         </div>
       )}
     </div>

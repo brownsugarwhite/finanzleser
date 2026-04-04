@@ -160,6 +160,20 @@ const WitwenrenteRechner = dynamic(() => import("./WitwenrenteRechner"), {
   loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
 });
 
+// 4 additional calculators
+const HeizkostenRechner = dynamic(() => import("./HeizkostenRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+const KfwStudienkreditRechner = dynamic(() => import("./KfwStudienkreditRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+const PvFoerderungRechner = dynamic(() => import("./PvFoerderungRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+const ScheidungskostenRechner = dynamic(() => import("./ScheidungskostenRechner"), {
+  loading: () => <div className="rechner-loading">Rechner wird geladen...</div>,
+});
+
 interface RechnerEmbedProps {
   slug: string;
 }
@@ -273,6 +287,16 @@ export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
       return <VerletztensgeldRechner />;
     case "witwenrente":
       return <WitwenrenteRechner />;
+
+    // 4 additional calculators
+    case "heizkosten":
+      return <HeizkostenRechner />;
+    case "kfw-studienkredit":
+      return <KfwStudienkreditRechner />;
+    case "pv-foerderung":
+      return <PvFoerderungRechner />;
+    case "scheidungskosten":
+      return <ScheidungskostenRechner />;
 
     default:
       return null;

@@ -1,69 +1,77 @@
+/**
+ * Abfindungsrechner 2026
+ * Berechnet Abfindung mit Vergleich: Normale Besteuerung vs. Fünftelregelung (§34 EStG).
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { berechneESt } from "./shared/estg32a";
+
+type RatesType = typeof RATES;
 
 export interface AbfindungParams {
-  abfindungssumme: number; // Abfindung in €
-  regelmaessiges_jahrseinkommen: number; // Durchschnittliches Jahreseinkommen vor Abfindung
+  monatsBrutto: number;
+  beschaeftigungsjahre: number;
+  faktor: number; // z.B. 0.5
+  jahresBruttoEinkommen: number; // Jahresbrutto OHNE Abfindung
 }
 
 export interface AbfindungResult {
-  abfindungssumme: number;
-  regelmaessiges_jahrseinkommen: number;
-  zu_versteuerndes_einkommen: number;
-  einkommensteuer: number;
-  solidaritaetszuschlag: number;
-  kirchensteuer: number;
-  sozialversicherung: number;
-  netto_abfindung: number;
+  abfindungBrutto: number;
+  jahresBruttoEinkommen: number;
+  // Normale Besteuerung
+  estNormal: number;
+  nettoNormal: number;
+  // Fünftelregelung §34 EStG
+  estFuenftel: number;
+  nettoFuenftel: number;
+  // Ersparnis
+  steuerersparnis: number;
 }
 
-// Vereinfachte Abfindungsbesteuerung mit Fünftelregelung (§34 EStG)
-export function berechne({
-  abfindungssumme,
-  regelmaessiges_jahrseinkommen,
-}: AbfindungParams, rates: typeof RATES = RATES): AbfindungResult {
-  // Fünftelregelung: Steuerlast wird berechnet, als hätte man 1/5 der Abfindung verteilt
-  // über 5 Jahre verteilt bekommen
+export function berechne(
+  params: AbfindungParams,
+  rates: RatesType = RATES
+): AbfindungResult {
+  const { monatsBrutto, beschaeftigungsjahre, faktor, jahresBruttoEinkommen } = params;
 
-  // Vereinfachte Berechnung
-  const fünftel = abfindungssumme / 5;
-  const einkommen_mit_fünftel = regelmaessiges_jahrseinkommen + fünftel;
+  // Abfindung nach Faustformel
+  const abfindung = rund(monatsBrutto * beschaeftigungsjahre * faktor);
 
-  // Vereinfachte progressive Steuerberechnung
-  let steuersatz = 0.25; // Durchschnittlicher Satz
-  if (einkommen_mit_fünftel <= 20000) {
-    steuersatz = 0.1;
-  } else if (einkommen_mit_fünftel <= 50000) {
-    steuersatz = 0.2;
-  } else if (einkommen_mit_fünftel <= 100000) {
-    steuersatz = 0.32;
-  } else {
-    steuersatz = 0.42;
-  }
+  // Abzüge für zvE
+  const wk = rates.lohnsteuer.arbeitnehmer_pauschbetrag;
+  const sa = rates.lohnsteuer.sonderausgaben_pauschbetrag;
 
-  // Steuern auf Fünftel anwenden und mit 5 multiplizieren
-  const einkommensteuer = rund(fünftel * steuersatz * 5);
+  // zvE ohne Abfindung
+  const zvEOhne = Math.max(0, Math.floor(jahresBruttoEinkommen - wk - sa));
+  const estOhne = berechneESt(zvEOhne, rates);
 
-  // Solidaritätszuschlag from rates.json
-  const solidaritaetszuschlag = rund(einkommensteuer * (rates.solidaritaetszuschlag.satz_prozent / 100));
+  // ── Variante 1: Normale Besteuerung ──
+  const zvEMitAbfindung = Math.max(0, Math.floor(jahresBruttoEinkommen + abfindung - wk - sa));
+  const estMitAbfindung = berechneESt(zvEMitAbfindung, rates);
+  const estNormal = estMitAbfindung - estOhne;
 
-  // Vereinfachte Kirchensteuer: 9% der Einkommensteuer
-  const kirchensteuer = rund(einkommensteuer * 0.09);
+  // ── Variante 2: Fünftelregelung §34 EStG ──
+  const einFuenftel = Math.floor(abfindung / 5);
+  const zvEMitFuenftel = Math.max(0, Math.floor(jahresBruttoEinkommen + einFuenftel - wk - sa));
+  const estMitFuenftel = berechneESt(zvEMitFuenftel, rates);
+  const estFuenftel = (estMitFuenftel - estOhne) * 5;
 
-  // Sozialversicherung: ca. 21% für Kranken-, Pflege-, Renten-, Arbeitslosenversicherung
-  const sozialversicherung = rund(abfindungssumme * 0.21);
+  // Netto
+  const nettoNormal = rund(abfindung - estNormal);
+  const nettoFuenftel = rund(abfindung - estFuenftel);
 
-  const gesamtabgaben = einkommensteuer + solidaritaetszuschlag + kirchensteuer + sozialversicherung;
-  const netto_abfindung = rund(abfindungssumme - gesamtabgaben);
+  // Ersparnis
+  const steuerersparnis = rund(Math.max(0, estNormal - estFuenftel));
 
   return {
-    abfindungssumme,
-    regelmaessiges_jahrseinkommen,
-    zu_versteuerndes_einkommen: rund(abfindungssumme),
-    einkommensteuer,
-    solidaritaetszuschlag,
-    kirchensteuer,
-    sozialversicherung,
-    netto_abfindung,
+    abfindungBrutto: abfindung,
+    jahresBruttoEinkommen,
+    estNormal,
+    nettoNormal,
+    estFuenftel,
+    nettoFuenftel,
+    steuerersparnis,
   };
 }

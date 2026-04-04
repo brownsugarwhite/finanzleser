@@ -3,70 +3,79 @@ import { rund } from "./utils";
 
 export interface AnnuitaetParams {
   darlehensbetrag: number;
-  zinssatz_jahr: number;
-  laufzeit_jahre: number;
+  zinssatzPa: number;
+  laufzeitJahre: number;
 }
 
-export interface TilgungsplanRow {
-  monat: number;
+export interface AnnuitaetJahresplan {
+  jahr: number;
+  rateJahr: number;
   zinsen: number;
   tilgung: number;
   restschuld: number;
 }
 
 export interface AnnuitaetResult {
-  darlehensbetrag: number;
-  zinssatz_jahr: number;
-  laufzeit_jahre: number;
-  annuitaet_monatlich: number;
-  gesamtbetrag: number;
-  gesamtzinsen: number;
-  tilgungsplan: TilgungsplanRow[];
+  monatsrate: number;
+  gesamtZinsen: number;
+  gesamtRueckzahlung: number;
+  effektivZins: number;
+  jahresplan: AnnuitaetJahresplan[];
 }
 
 export function berechne(
-  { darlehensbetrag, zinssatz_jahr, laufzeit_jahre }: AnnuitaetParams,
+  { darlehensbetrag, zinssatzPa, laufzeitJahre }: AnnuitaetParams,
   rates: typeof RATES = RATES
 ): AnnuitaetResult {
-  const r = zinssatz_jahr / 100 / 12; // monatlicher Zinssatz
-  const n = laufzeit_jahre * 12; // Anzahl Monate
+  const z = zinssatzPa / 12 / 100;
+  const n = laufzeitJahre * 12;
 
-  let annuitaet_monatlich;
-  if (r === 0) {
-    annuitaet_monatlich = darlehensbetrag / n;
+  let monatsrate: number;
+  if (z === 0) {
+    monatsrate = darlehensbetrag / n;
   } else {
-    annuitaet_monatlich =
-      (darlehensbetrag * (r * Math.pow(1 + r, n))) /
-      (Math.pow(1 + r, n) - 1);
+    monatsrate = darlehensbetrag * (z * Math.pow(1 + z, n)) / (Math.pow(1 + z, n) - 1);
   }
 
-  const gesamtbetrag = annuitaet_monatlich * n;
-  const gesamtzinsen = gesamtbetrag - darlehensbetrag;
+  const gesamtRueckzahlung = monatsrate * n;
+  const gesamtZinsen = gesamtRueckzahlung - darlehensbetrag;
 
-  // Tilgungsplan (erste 24 Monate + letzte Zeile)
-  const tilgungsplan: TilgungsplanRow[] = [];
+  // Effektivzins (bei monatlicher Zahlung gleich Nominalzins)
+  const effektivZins = rund(zinssatzPa);
+
+  // Jahresplan
+  const jahresplan: AnnuitaetJahresplan[] = [];
   let restschuld = darlehensbetrag;
-  for (let m = 1; m <= n; m++) {
-    const zinsen = restschuld * r;
-    const tilgung = annuitaet_monatlich - zinsen;
-    restschuld -= tilgung;
-    if (m <= 24 || m === n) {
-      tilgungsplan.push({
-        monat: m,
-        zinsen: rund(zinsen),
-        tilgung: rund(tilgung),
-        restschuld: Math.max(0, rund(restschuld))
-      });
+
+  for (let jahr = 1; jahr <= laufzeitJahre; jahr++) {
+    let zinsenJahr = 0;
+    let tilgungJahr = 0;
+    let rateJahr = 0;
+
+    for (let m = 0; m < 12 && restschuld > 0.01; m++) {
+      const zinsen = restschuld * z;
+      const rate = Math.min(monatsrate, restschuld + zinsen);
+      const tilgung = rate - zinsen;
+      restschuld -= tilgung;
+      zinsenJahr += zinsen;
+      tilgungJahr += tilgung;
+      rateJahr += rate;
     }
+
+    jahresplan.push({
+      jahr,
+      rateJahr: rund(rateJahr),
+      zinsen: rund(zinsenJahr),
+      tilgung: rund(tilgungJahr),
+      restschuld: rund(Math.max(0, restschuld)),
+    });
   }
 
   return {
-    darlehensbetrag,
-    zinssatz_jahr,
-    laufzeit_jahre,
-    annuitaet_monatlich: rund(annuitaet_monatlich),
-    gesamtbetrag: rund(gesamtbetrag),
-    gesamtzinsen: rund(gesamtzinsen),
-    tilgungsplan
+    monatsrate: rund(monatsrate),
+    gesamtZinsen: rund(gesamtZinsen),
+    gesamtRueckzahlung: rund(gesamtRueckzahlung),
+    effektivZins,
+    jahresplan,
   };
 }

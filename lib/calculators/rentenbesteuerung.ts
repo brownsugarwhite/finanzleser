@@ -1,62 +1,66 @@
+/**
+ * Rentenbesteuerungsrechner 2026
+ * Berechnet die Steuer auf Renteneinkuenfte basierend auf Rentenbeginn-Jahr.
+ * Nutzt den Besteuerungsanteil nach § 22 EStG und die ESt-Berechnung nach § 32a.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { berechneESt } from "./shared/estg32a";
+
+type RatesType = typeof RATES;
 
 export interface RentenbesteuerungParams {
-  rente_monatlich: number;
-  sonstiges_einkommen: number;
-  bundesland: string;
+  monatlicheRente: number;
+  rentenBeginnJahr: number; // 2005-2058
 }
 
 export interface RentenbesteuerungResult {
-  rente_monatlich: number;
-  rente_jaehrlich: number;
-  sonstiges_einkommen: number;
-  gesamteinkommen: number;
-  besteuerungsanteil: number;
-  zu_versteuerndes_einkommen: number;
-  einkommensteuer_geschaetzt: number;
-  effektiver_steuersatz: number;
+  besteuerungsanteilProzent: number;
+  steuerpflichtigAnteil: number;
+  wkPauschbetrag: number;
+  zvEAusRente: number;
+  estAufRente: number;
+}
+
+/**
+ * Besteuerungsanteil nach Rentenbeginn-Jahr (§ 22 Nr. 1 Satz 3 EStG)
+ * 2005: 50%, +2% pro Jahr bis 2020 (=80%), +1% pro Jahr bis 2058 (=100%)
+ */
+function getBesteuerungsanteil(beginn: number): number {
+  if (beginn <= 2005) return 50;
+  if (beginn <= 2020) return 50 + (beginn - 2005) * 2;
+  if (beginn <= 2058) return 80 + (beginn - 2020);
+  return 100;
 }
 
 export function berechne(
-  {
-    rente_monatlich,
-    sonstiges_einkommen,
-    bundesland
-  }: RentenbesteuerungParams,
-  rates: typeof RATES = RATES
+  params: RentenbesteuerungParams,
+  rates: RatesType = RATES
 ): RentenbesteuerungResult {
-  const rente_jaehrlich = rente_monatlich * 12;
+  const { monatlicheRente, rentenBeginnJahr } = params;
 
-  // Besteuerungsanteil from rates.json
-  const besteuerungsanteil = rates.rentenbesteuerung.besteuerungsanteil_2026 / 100;
-  const zu_versteuernde_rente = rund(rente_jaehrlich * besteuerungsanteil);
+  const renteJaehrlich = monatlicheRente * 12;
+  const besteuerungsanteilProzent = getBesteuerungsanteil(rentenBeginnJahr);
 
-  const grundfreibetrag = rates.lohnsteuer.grundfreibetrag;
-  const gesamteinkommen = zu_versteuernde_rente + sonstiges_einkommen;
-  const zu_versteuerndes_einkommen = Math.max(
-    0,
-    gesamteinkommen - grundfreibetrag
-  );
+  // Steuerpflichtiger Anteil der Rente
+  const steuerpflichtigAnteil = rund(renteJaehrlich * besteuerungsanteilProzent / 100);
 
-  // Vereinfachte Steuerberechnung
-  let steuersatz = 0.19;
-  if (zu_versteuerndes_einkommen > 50000) steuersatz = 0.25;
-  if (zu_versteuerndes_einkommen > 100000) steuersatz = 0.35;
+  // Werbungskosten-Pauschbetrag fuer Rentner
+  const wkPauschbetrag = rates.rentenbesteuerung.werbungskosten_pauschbetrag_rente;
 
-  const einkommensteuer_geschaetzt = rund(zu_versteuerndes_einkommen * steuersatz);
-  const effektiver_steuersatz = gesamteinkommen > 0
-    ? rund((einkommensteuer_geschaetzt / gesamteinkommen) * 100)
-    : 0;
+  // Zu versteuerndes Einkommen aus Rente
+  const zvEAusRente = Math.max(0, rund(steuerpflichtigAnteil - wkPauschbetrag));
+
+  // Einkommensteuer nach § 32a EStG
+  const estAufRente = berechneESt(zvEAusRente, rates);
 
   return {
-    rente_monatlich,
-    rente_jaehrlich,
-    sonstiges_einkommen,
-    gesamteinkommen: rund(gesamteinkommen),
-    besteuerungsanteil: rund(besteuerungsanteil * 100),
-    zu_versteuerndes_einkommen: rund(zu_versteuerndes_einkommen),
-    einkommensteuer_geschaetzt,
-    effektiver_steuersatz
+    besteuerungsanteilProzent,
+    steuerpflichtigAnteil,
+    wkPauschbetrag,
+    zvEAusRente,
+    estAufRente,
   };
 }

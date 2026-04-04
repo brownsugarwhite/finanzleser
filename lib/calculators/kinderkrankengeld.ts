@@ -1,50 +1,60 @@
+/**
+ * Kinderkrankengeld-Rechner 2026
+ * Berechnet Kinderkrankengeld nach §45 SGB V.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
-export interface KinderkrankentagParams {
-  nettolohn_tag: number;
-  krankheitstage: number;
-  mehrere_kinder: boolean;
+type RatesType = typeof RATES;
+
+export interface KinderkrankengeldParams {
+  monatsBrutto: number;
+  monatsNetto: number;
+  anzahlKinder: number;
+  alleinerziehend: boolean;
+  bereitsGenutzteTage: number;
 }
 
-export interface KinderkrankentagResult {
-  nettolohn_tag: number;
-  krankheitstage: number;
-  kinderkrankengeld_pro_tag: number;
-  kinderkrankengeld_gesamt: number;
-  jahresanspruch: number;
-  mehrere_kinder: boolean;
+export interface KinderkrankengeldResult {
+  kgTaeglich: number;
+  kgBruttoTaeglich: number;
+  kgNettoGrenze: number;
+  jahresanspruchTage: number;
+  verbleibendeTage: number;
+  gesamtbetrag: number;
+  bruttoBegrenzt: number;
+  istBegrenzt: boolean;
 }
 
 export function berechne(
-  {
-    nettolohn_tag,
-    krankheitstage,
-    mehrere_kinder
-  }: KinderkrankentagParams,
-  rates: typeof RATES = RATES
-): KinderkrankentagResult {
-  // KV zahlt max. netto_grenze_prozent % des Nettoeinkommens pro Tag
-  const netto_grenze_prozent = rates.kinderkrankengeld.netto_grenze_prozent / 100;
-  const kinderkrankengeld_pro_tag = rund(nettolohn_tag * netto_grenze_prozent);
-  const kinderkrankengeld_gesamt = rund(kinderkrankengeld_pro_tag * krankheitstage);
+  params: KinderkrankengeldParams,
+  rates: RatesType = RATES
+): KinderkrankengeldResult {
+  const { monatsBrutto, monatsNetto, anzahlKinder, alleinerziehend, bereitsGenutzteTage } = params;
+  const r = rates.kinderkrankengeld;
+  const bbgKV = rates.beitragsbemessungsgrenzen.kranken_pflege.monatlich;
 
-  // Jahresanspruch pro Kind from rates.kinderkrankengeld.anspruchstage_2026
-  const anspruchstage = rates.kinderkrankengeld.anspruchstage_2026;
-  const jahresanspruch_arbeitnehmer = mehrere_kinder
-    ? anspruchstage.je_elternteil_je_kind_ab3_kindern
-    : anspruchstage.je_elternteil_je_kind; // Tage
-  const jahresanspruch_alleinerziehend = mehrere_kinder
-    ? anspruchstage.alleinerziehend_max
-    : anspruchstage.alleinerziehend_je_kind; // Tage
-  const jahresanspruch = jahresanspruch_arbeitnehmer; // Default
+  const bruttoBegrenzt = Math.min(monatsBrutto, bbgKV);
+  const istBegrenzt = monatsBrutto > bbgKV;
+  const regelentgeltTaeglich = rund(bruttoBegrenzt / 30);
+  const kgBruttoTaeglich = rund(regelentgeltTaeglich * r.satz_brutto_prozent / 100);
+  const kgNettoGrenze = rund((monatsNetto / 30) * r.netto_grenze_prozent / 100);
+  const kgTaeglich = rund(Math.min(kgBruttoTaeglich, kgNettoGrenze));
 
-  return {
-    nettolohn_tag,
-    krankheitstage,
-    kinderkrankengeld_pro_tag,
-    kinderkrankengeld_gesamt,
-    jahresanspruch,
-    mehrere_kinder
-  };
+  const at = r.anspruchstage_2026;
+  let jahresanspruchTage: number;
+  if (alleinerziehend) {
+    jahresanspruchTage = Math.min(at.alleinerziehend_je_kind * anzahlKinder, at.alleinerziehend_max);
+  } else if (anzahlKinder >= 3) {
+    jahresanspruchTage = Math.min(at.je_elternteil_je_kind_ab3_kindern * anzahlKinder, at.max_je_elternteil_ab3_kindern);
+  } else {
+    jahresanspruchTage = Math.min(at.je_elternteil_je_kind * anzahlKinder, at.max_je_elternteil);
+  }
+
+  const verbleibendeTage = Math.max(0, jahresanspruchTage - bereitsGenutzteTage);
+  const gesamtbetrag = rund(kgTaeglich * verbleibendeTage);
+
+  return { kgTaeglich, kgBruttoTaeglich, kgNettoGrenze, jahresanspruchTage, verbleibendeTage, gesamtbetrag, bruttoBegrenzt, istBegrenzt };
 }

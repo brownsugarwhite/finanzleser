@@ -1,84 +1,93 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import {
-  berechne,
-  type GleitzoneParams,
-  type GleitzoneResult
-} from "@/lib/calculators/gleitzone";
-import { euro } from "@/lib/calculators/utils";
+import { berechne, type GleitzoneParams, type GleitzoneResult } from "@/lib/calculators/gleitzone";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
+
+const typLabels: Record<string, string> = {
+  minijob: "Minijob",
+  gleitzone: "Gleitzone (Midijob)",
+  regulaer: "Regulaer versicherungspflichtig",
+};
 
 export default function GleitzoneRechner() {
   const [params, setParams] = useState<GleitzoneParams>({
-    monatlicher_verdienst: 800,
-    ist_ab_2024: true
+    monatsBrutto: 1200,
   });
 
   const [result, setResult] = useState<GleitzoneResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
-    
     <div className="rechner-container">
-      <h3 className="rechner-title">Gleitzone-Rechner 2026</h3>
+      <h3 className="rechner-title">Gleitzone/Midijob-Rechner 2026</h3>
 
-      
-    <div className="rechner-inputs">
+      <div className="rechner-inputs">
         <RechnerInput
-          label="Monatlicher Verdienst"
-          name="monatlicher_verdienst"
-          value={params.monatlicher_verdienst}
-          onChange={(val) => {
-            setParams((p) => ({ ...p, monatlicher_verdienst: Number(val) }));
-          }}
+          label="Monatliches Bruttogehalt"
+          name="monatsBrutto"
+          value={params.monatsBrutto}
+          onChange={(val) => setParams({ monatsBrutto: val })}
           einheit="€"
+          step={50}
           min={0}
-          max={2500}
+          max={3000}
         />
       </div>
 
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-        
-    <div className="rechner-results">
+        <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Kategorie"
-              value={result.kategorie.charAt(0).toUpperCase() + result.kategorie.slice(1)}
-              highlight={false}
+              label="Beschaeftigungstyp"
+              value={typLabels[result.typ] || result.typ}
             />
-            {result.sv_freibetrag && (
+            <RechnerResultBox
+              label="Netto nach SV"
+              value={euro(result.nettoNachSV)}
+              highlight={true}
+            />
+            {result.typ === "gleitzone" && (
               <RechnerResultBox
-                label="SV-Freibetrag (ca.)"
-                value={euro(result.sv_freibetrag)}
-                highlight={false}
+                label="SV-Ersparnis"
+                value={euro(result.ersparnisAbsolut)}
+                variant="positive"
               />
             )}
           </div>
 
-          <h4 className="rechner-result-section-title">Grenzen 2026</h4>
           <RechnerResultTable
             rows={[
-              {
-                label: "Minijob-Grenze",
-                value: `bis ${euro(result.grenzen.grenze_unten)}`
-              },
-              {
-                label: "Gleitzone",
-                value: `${euro(result.grenzen.grenze_unten)} – ${euro(result.grenzen.grenze_oben)}`
-              }
+              { label: "Monatsbrutto", value: euro(result.monatsBrutto) },
+              { label: "Beschaeftigungstyp", value: typLabels[result.typ] || result.typ },
+              { label: "Beitragspflichtiges Entgelt", value: euro(result.beitragsAE) },
+              { label: "SV-Beitrag AN (Gleitzone)", value: euro(result.svANGleitzone) },
+              { label: "SV-Beitrag AN (normal)", value: euro(result.svANNormal) },
+              { label: "Ersparnis", value: euro(result.ersparnisAbsolut) },
+              { label: "Ersparnis (%)", value: prozent(result.ersparnisProzent) },
+              { label: "Netto nach SV", value: euro(result.nettoNachSV) },
+              ...(result.typ === "minijob"
+                ? [{ label: "RV-Aufstockung AN", value: euro(result.rvAufstockung) }]
+                : []),
             ]}
           />
 
-          <RechnerHinweis>{result.hinweis}</RechnerHinweis>
+          <RechnerHinweis>
+            In der Gleitzone (538,01-2.000 EUR) zahlen Arbeitnehmer reduzierte SV-Beitraege
+            (SS 20 Abs. 2 SGB IV). Die Ersparnis ist bei niedrigem Einkommen am groessten.
+          </RechnerHinweis>
         </div>
       )}
     </div>

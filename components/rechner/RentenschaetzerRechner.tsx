@@ -1,46 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type RentenschaetzerParams, type RentenschaetzerResult } from "@/lib/calculators/rentenschaetzer";
-import { euro } from "@/lib/calculators/utils";
+import { euro, punkte } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
-import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function RentenschaetzerRechner() {
   const [params, setParams] = useState<RentenschaetzerParams>({
-    monatliches_einkommen: 2500,
-    versicherungsjahre: 40,
-    bundesland: "west"
+    monatlichesEinkommen: 3500,
+    versicherungsjahre: 35,
   });
 
   const [result, setResult] = useState<RentenschaetzerResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
-  const handleParamChange = (key: keyof RentenschaetzerParams, value: number | string) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Rentenschätzer 2026</h3>
+      <h3 className="rechner-title">Rentenschaetzer 2026</h3>
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Durchschnittliches monatliches Einkommen"
-          name="monatliches_einkommen"
-          value={params.monatliches_einkommen}
-          onChange={(val) => handleParamChange("monatliches_einkommen", Number(val))}
+          label="Durchschnittliches monatliches Bruttoeinkommen"
+          name="monatlichesEinkommen"
+          value={params.monatlichesEinkommen}
+          onChange={(val) => setParams((p) => ({ ...p, monatlichesEinkommen: val }))}
           einheit="€/Monat"
           min={0}
           step={100}
@@ -50,58 +42,45 @@ export default function RentenschaetzerRechner() {
           label="Versicherungsjahre"
           name="versicherungsjahre"
           value={params.versicherungsjahre}
-          onChange={(val) => handleParamChange("versicherungsjahre", Number(val))}
+          onChange={(val) => setParams((p) => ({ ...p, versicherungsjahre: val }))}
           einheit="Jahre"
           min={1}
-          max={67}
+          max={50}
           step={1}
         />
-
-        <RechnerSelect
-          label="Rentenwert Region"
-          name="bundesland"
-          value={params.bundesland}
-          onChange={(val) => handleParamChange("bundesland", val as "west" | "ost")}
-          options={[
-            { label: "West", value: "west" },
-            { label: "Ost", value: "ost" }
-          ]}
-        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Geschätzte monatliche Rente"
-              value={euro(result.rente_monatlich_schaetzer)}
+              label="Geschaetzte monatliche Rente"
+              value={euro(result.renteMonatlichGeschaetzt)}
               highlight={true}
             />
             <RechnerResultBox
-              label="Rentenpunkte"
-              value={String(result.rentenpunkte_schaetzer)}
-              highlight={false}
+              label="Entgeltpunkte (geschaetzt)"
+              value={punkte(result.entgeltpunkteGeschaetzt)}
             />
           </div>
 
           <h4 className="rechner-result-section-title">Berechnung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Monatliches Einkommen", value: euro(result.monatliches_einkommen) },
-              { label: "Versicherungsjahre", value: `${result.versicherungsjahre} Jahre` },
-              { label: "Rentenpunkte (geschätzt)", value: String(result.rentenpunkte_schaetzer) }
+              { label: "Monatliches Bruttoeinkommen", value: euro(params.monatlichesEinkommen) },
+              { label: "Versicherungsjahre", value: `${params.versicherungsjahre} Jahre` },
+              { label: "Entgeltpunkte (geschaetzt)", value: punkte(result.entgeltpunkteGeschaetzt) },
             ]}
-            footer={{ label: "Monatliche Rente (geschätzt)", value: euro(result.rente_monatlich_schaetzer) }}
+            footer={{ label: "Monatliche Rente (geschaetzt)", value: euro(result.renteMonatlichGeschaetzt) }}
           />
 
           <RechnerHinweis>
-            ℹ️ {result.hinweis}
-          </RechnerHinweis>
-
-          <RechnerHinweis>
-            Diese Schätzung basiert auf Durchschnittseinkommen und konstanten Versicherungszeiten.
-            Lücken oder unterdurchschnittliche Einkommen reduzieren die Rente. Nutze die offizielle
-            Rentenauskunft der Deutsche Rentenversicherung für präzise Werte.
+            Dies ist eine unverbindliche Schaetzung. Die tatsaechliche Rente haengt von den genauen
+            Versicherungszeiten und Einkommen ab. Luecken oder unterdurchschnittliche Einkommen
+            reduzieren die Rente. Nutzen Sie die offizielle Rentenauskunft der Deutschen
+            Rentenversicherung fuer praezise Werte.
           </RechnerHinweis>
         </div>
       )}

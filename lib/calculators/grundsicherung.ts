@@ -1,65 +1,68 @@
+/**
+ * Grundsicherung-Rechner 2026
+ * Grundsicherung im Alter und bei Erwerbsminderung (§§ 41-46b SGB XII).
+ * Regelbedarfe, Freibetrag auf Rente.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+/* ── Params & Result ─────────────────────────────────── */
+
 export interface GrundsicherungParams {
-  alterstyp: "under65" | "ueber65" | "erwerbsunfaehig";
-  haushaltstyp: "allein" | "paar";
-  miete: number;
-  vermogen: number;
-  einkommen: number;
+  alleinstehend: boolean;
+  monatlicheRente: number;
+  sonstigesEinkommen: number;
 }
 
 export interface GrundsicherungResult {
-  alterstyp: string;
   regelbedarf: number;
-  miete: number;
-  gesamtbedarf: number;
-  vermogen: number;
-  vermogensfreibetrag: number;
-  einkommen: number;
-  grundsicherung: number;
+  freibetragRente: number;
+  anrechenbareRente: number;
+  anrechenbaresSonstiges: number;
+  anspruch: number;
 }
 
+/* ── Berechnung ──────────────────────────────────────── */
+
 export function berechne(
-  {
-    alterstyp,
-    haushaltstyp,
-    miete,
-    vermogen,
-    einkommen
-  }: GrundsicherungParams,
-  rates: typeof RATES = RATES
+  { alleinstehend, monatlicheRente, sonstigesEinkommen }: GrundsicherungParams,
+  rates: RatesType = RATES,
 ): GrundsicherungResult {
-  // Regelbedarfsstufen (2026) from rates.json
-  const stufe1 = rates.grundsicherung.regelbedarfe_2026.stufe1_alleinstehende;
-  const stufe2 = rates.grundsicherung.regelbedarfe_2026.stufe2_paare_je_partner;
+  const rb = rates.grundsicherung.regelbedarfe_2026;
 
-  const regelbedarf = haushaltstyp === "paar"
-    ? stufe2 * 2
-    : stufe1;
+  // 1. Regelbedarf
+  const regelbedarf = alleinstehend
+    ? rb.stufe1_alleinstehende
+    : rb.stufe2_paare_je_partner * 2;
 
-  // Vermögensfreibetrag (§ 12 SGB XII)
-  let vermogensfreibetrag = 5000;
-  if (alterstyp === "ueber65") vermogensfreibetrag = 8100;
+  // 2. Freibetrag auf Rente (§ 82 Abs. 4 SGB XII)
+  //    30 % der Rente, maximal 50 % des Eckregelsatzes (Stufe 1)
+  const freibetragMax = rund(rb.stufe1_alleinstehende * (rates.grundsicherung.freibetrag_rente_max / 100));
+  const freibetragRente = rund(
+    Math.min(
+      monatlicheRente * (rates.grundsicherung.freibetrag_rente_prozent / 100),
+      freibetragMax,
+    ),
+  );
 
-  const gesamtbedarf = regelbedarf + miete;
-  const vermogen_anrechenbar = Math.max(0, vermogen - vermogensfreibetrag);
-  const monatlicher_vermogensabbau = rund(vermogen_anrechenbar / 120); // Über 10 Jahre
+  // 3. Anrechenbares Einkommen
+  const anrechenbareRente = rund(Math.max(0, monatlicheRente - freibetragRente));
+  const anrechenbaresSonstiges = rund(Math.max(0, sonstigesEinkommen)); // Voll angerechnet
 
-  const einkommen_anrechenbar = Math.max(0, einkommen - 100); // 100 € Freibetrag
-  const grundsicherung = Math.max(
-    0,
-    gesamtbedarf - einkommen_anrechenbar - monatlicher_vermogensabbau
+  // 4. Anspruch
+  const anspruch = rund(
+    Math.max(0, regelbedarf - anrechenbareRente - anrechenbaresSonstiges),
   );
 
   return {
-    alterstyp,
-    regelbedarf: rund(regelbedarf),
-    miete,
-    gesamtbedarf: rund(gesamtbedarf),
-    vermogen,
-    vermogensfreibetrag,
-    einkommen,
-    grundsicherung: rund(grundsicherung)
+    regelbedarf,
+    freibetragRente,
+    anrechenbareRente,
+    anrechenbaresSonstiges,
+    anspruch,
   };
 }

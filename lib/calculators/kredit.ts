@@ -7,7 +7,7 @@ export interface KreditParams {
   jahreszins: number;
 }
 
-export interface TilgungsplanMonat {
+export interface KreditTilgungsplanRow {
   monat: number;
   zinsen: number;
   tilgung: number;
@@ -15,17 +15,18 @@ export interface TilgungsplanMonat {
 }
 
 export interface KreditResult {
-  kreditsumme: number;
   monatsrate: number;
   gesamtbetrag: number;
   gesamtzinsen: number;
-  laufzeitMonate: number;
-  jahreszins: number;
-  plan: TilgungsplanMonat[];
+  effektivzins: number;
+  tilgungsplan: KreditTilgungsplanRow[];
 }
 
-export function berechne({ kreditsumme, laufzeitMonate, jahreszins }: KreditParams, rates: typeof RATES = RATES): KreditResult {
-  const r = jahreszins / 100 / 12; // monatlicher Zinssatz
+export function berechne(
+  { kreditsumme, laufzeitMonate, jahreszins }: KreditParams,
+  rates: typeof RATES = RATES
+): KreditResult {
+  const r = jahreszins / 100 / 12;
 
   let monatsrate: number;
   if (r === 0) {
@@ -38,26 +39,24 @@ export function berechne({ kreditsumme, laufzeitMonate, jahreszins }: KreditPara
 
   const gesamtbetrag = rund(monatsrate * laufzeitMonate);
   const gesamtzinsen = rund(gesamtbetrag - kreditsumme);
+  const effektivzins = rund(jahreszins); // Vereinfacht: gleich Nominalzins
 
   // Tilgungsplan
-  const plan: TilgungsplanMonat[] = [];
+  const tilgungsplan: KreditTilgungsplanRow[] = [];
   let restschuld = kreditsumme;
 
   for (let monat = 1; monat <= laufzeitMonate; monat++) {
     const zinsen = rund(restschuld * r);
     const tilgung = rund(Math.min(monatsrate - zinsen, restschuld));
     restschuld = rund(Math.max(0, restschuld - tilgung));
-
-    plan.push({ monat, zinsen, tilgung, restschuld });
+    tilgungsplan.push({ monat, zinsen, tilgung, restschuld });
   }
 
   return {
-    kreditsumme: rund(kreditsumme),
     monatsrate: rund(monatsrate),
     gesamtbetrag,
     gesamtzinsen,
-    laufzeitMonate,
-    jahreszins,
-    plan,
+    effektivzins,
+    tilgungsplan,
   };
 }

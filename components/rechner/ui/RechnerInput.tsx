@@ -7,6 +7,8 @@ interface RechnerInputProps {
   step?: number | string;
   min?: number;
   max?: number;
+  tooltip?: string;
+  disabled?: boolean;
 }
 
 export default function RechnerInput({
@@ -17,11 +19,15 @@ export default function RechnerInput({
   einheit,
   step = "any",
   min = 0,
+  max,
+  tooltip,
+  disabled = false,
 }: RechnerInputProps) {
   return (
     <div className="rechner-input-wrapper">
       <label htmlFor={name} className="rechner-label">
         {label}
+        {tooltip && <span className="rechner-tooltip" title={tooltip}> ⓘ</span>}
       </label>
       <div className="rechner-input-container">
         <input
@@ -32,7 +38,9 @@ export default function RechnerInput({
           onChange={(e) => onChange(parseFloat(e.target.value.replace(',', '.')) || 0)}
           step={step}
           min={min}
-          className="rechner-input"
+          max={max}
+          disabled={disabled}
+          className={`rechner-input ${disabled ? "rechner-input--disabled" : ""}`}
         />
         {einheit && <span className="rechner-einheit">{einheit}</span>}
       </div>

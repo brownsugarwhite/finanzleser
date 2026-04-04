@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import {
   berechne,
-  type BuergergeldelParams,
-  type BuergergeldelResult
+  type BuergergeldParams,
+  type BuergergeldResult,
+  type HaushaltTyp,
 } from "@/lib/calculators/buergergeld";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
@@ -13,99 +14,114 @@ import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function BuergergelRechner() {
-  const [params, setParams] = useState<BuergergeldelParams>({
-    haushaltstyp: "allein",
-    kinder: {},
-    warmmiete: 800,
-    anrechenbares_einkommen: 0
+  const [params, setParams] = useState<BuergergeldParams>({
+    haushaltTyp: "alleinstehend",
+    anzahlKinder06: 0,
+    anzahlKinder713: 0,
+    anzahlKinder1417: 0,
+    eigenesEinkommen: 0,
   });
 
-  const [result, setResult] = useState<BuergergeldelResult | null>(null);
+  const [result, setResult] = useState<BuergergeldResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
-  const handleParamChange = (key: string, value: any) => {
-    setParams((prev) => {
-      if (key === "haushaltstyp" || key === "warmmiete" || key === "anrechenbares_einkommen") {
-        return { ...prev, [key]: value };
-      }
-      return prev;
-    });
-  };
-
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Bürgergeld-Rechner 2026</h3>
+      <h3 className="rechner-title">Buergergeld-Rechner 2026</h3>
 
       <div className="rechner-inputs">
         <RechnerSelect
           label="Haushaltstyp"
-          name="haushaltstyp"
-          value={params.haushaltstyp}
-          onChange={(val) => handleParamChange("haushaltstyp", val)}
+          name="haushaltTyp"
+          value={params.haushaltTyp}
+          onChange={(val) => setParams((p) => ({ ...p, haushaltTyp: val as HaushaltTyp }))}
           options={[
-            { value: "allein", label: "Alleinstehend" },
-            { value: "paar", label: "Ehepaar" },
-            { value: "allein_elternteil", label: "Alleinerziehend" },
-            { value: "paar_eltern", label: "Ehepaar mit Kind" }
+            { value: "alleinstehend", label: "Alleinstehend" },
+            { value: "paar", label: "Paar ohne Kinder" },
+            { value: "alleinerziehend_kinder", label: "Alleinerziehend mit Kindern" },
+            { value: "paar_kinder", label: "Paar mit Kindern" },
           ]}
         />
 
-        <RechnerInput
-          label="Warmmiete (Unterkunftskosten)"
-          name="warmmiete"
-          value={params.warmmiete}
-          onChange={(val) => handleParamChange("warmmiete", val)}
-          einheit="€"
-          min={0}
+        <RechnerSelect
+          label="Kinder 0-6 Jahre"
+          name="anzahlKinder06"
+          value={params.anzahlKinder06.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, anzahlKinder06: parseInt(val) }))}
+          options={Array.from({ length: 6 }, (_, i) => ({
+            label: i.toString(),
+            value: i.toString(),
+          }))}
+        />
+
+        <RechnerSelect
+          label="Kinder 7-13 Jahre"
+          name="anzahlKinder713"
+          value={params.anzahlKinder713.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, anzahlKinder713: parseInt(val) }))}
+          options={Array.from({ length: 6 }, (_, i) => ({
+            label: i.toString(),
+            value: i.toString(),
+          }))}
+        />
+
+        <RechnerSelect
+          label="Kinder 14-17 Jahre"
+          name="anzahlKinder1417"
+          value={params.anzahlKinder1417.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, anzahlKinder1417: parseInt(val) }))}
+          options={Array.from({ length: 6 }, (_, i) => ({
+            label: i.toString(),
+            value: i.toString(),
+          }))}
         />
 
         <RechnerInput
-          label="Anrechenbares Einkommen (monatlich)"
-          name="anrechenbares_einkommen"
-          value={params.anrechenbares_einkommen || 0}
-          onChange={(val) => handleParamChange("anrechenbares_einkommen", val)}
+          label="Eigenes Erwerbseinkommen"
+          name="eigenesEinkommen"
+          value={params.eigenesEinkommen}
+          onChange={(val) => setParams((p) => ({ ...p, eigenesEinkommen: val }))}
           einheit="€"
+          step={100}
           min={0}
-          
         />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Bürgergeld (monatlich)"
-              value={euro(result.buergergeld)}
-              highlight={true}
+              label="Buergergeld-Anspruch"
+              value={euro(result.buergergeldAnspruch)}
+              highlight
             />
           </div>
 
           <h4 className="rechner-result-section-title">Berechnung</h4>
           <RechnerResultTable
             rows={[
-              { label: "Regelbedarf", value: euro(result.regelbedarf) },
-              { label: "Kosten der Unterkunft", value: euro(result.warmmiete) },
-              {
-                label: "Gesamtbedarf",
-                value: euro(result.gesamtBedarf)
-              },
-              {
-                label: "Anrechenbares Einkommen",
-                value: `−${euro(result.einkommenAnrechenbar)}`
-              }
+              { label: "Regelbedarf (Erwachsene)", value: euro(result.regelbedarf) },
+              { label: "Kinderbedarf", value: euro(result.kinderBedarf) },
+              { label: "Gesamtbedarf", value: euro(result.gesamtBedarf) },
+              { label: "Freibetrag auf Einkommen", value: euro(result.freibetrag) },
+              { label: "Anrechenbares Einkommen", value: `- ${euro(result.anrechenbaresEinkommen)}` },
             ]}
-            footer={{ label: "Bürgergeld", value: euro(result.buergergeld) }}
+            footer={{ label: "Buergergeld", value: euro(result.buergergeldAnspruch) }}
           />
 
           <RechnerHinweis>
-            Richtwert. Die tatsächliche Bewilligung erfolgt durch das Jobcenter unter Berücksichtigung
-            aller Einkommens- und Vermögensverhältnisse. Grundlage: §§ 19–23 SGB II.
+            Richtwert ohne Kosten der Unterkunft (KdU). Die tatsaechliche Bewilligung
+            erfolgt durch das Jobcenter unter Beruecksichtigung aller Vermoegensverhaeltnisse.
+            Grundlage: SGB II.
           </RechnerHinweis>
         </div>
       )}

@@ -2,58 +2,77 @@ import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface KfzSteuerParams {
-  hubraum: number; // in ccm
-  co2_ausstoss: number; // in g/km
-  anmeldungsjahr: number; // Erstzulassung Jahr
+  antriebsart: "benzin" | "diesel" | "elektro";
+  hubraum_ccm: number;
+  co2_g_km: number;
+  erstzulassung_jahr: number;
 }
 
 export interface KfzSteuerResult {
-  hubraum: number;
-  co2_ausstoss: number;
-  anmeldungsjahr: number;
-  steuer_monatlich: number;
-  steuer_jaehrlich: number;
+  hubraumSteuer: number;
+  co2Steuer: number;
+  jahressteuer: number;
+  elektroBefreit: boolean;
 }
 
-// Vereinfachte KFZ-Steuer 2026
-// Nach §9 KraftStG: 2 € pro 100 ccm + CO2-basierter Zuschlag
-export function berechne({
-  hubraum,
-  co2_ausstoss,
-  anmeldungsjahr,
-}: KfzSteuerParams, rates: typeof RATES = RATES): KfzSteuerResult {
-  // Hubraum-basierte Grundsteuer from rates.json
-  const satz_je_100ccm = rates.kfz_steuer.hubraum_benzin_euro_je_100ccm;
-  const grundsteuer = (Math.ceil(hubraum / 100) * satz_je_100ccm);
+export function berechne(
+  { antriebsart, hubraum_ccm, co2_g_km, erstzulassung_jahr }: KfzSteuerParams,
+  rates = RATES
+): KfzSteuerResult {
+  const r = rates.kfz_steuer;
 
-  // CO2-Zuschlag from rates.json
-  const co2_freibetrag = rates.kfz_steuer.co2_freibetrag_g_km;
-  let co2_zuschlag = 0;
-  if (co2_ausstoss > co2_freibetrag) {
-    const co2_ueber_freibetrag = co2_ausstoss - co2_freibetrag;
-    // Find the appropriate rate from co2_stufen
-    const stufe = rates.kfz_steuer.co2_stufen.find(s => co2_ueber_freibetrag <= s.bis);
-    if (stufe) {
-      co2_zuschlag = co2_ueber_freibetrag * stufe.euro_je_g;
+  // Elektro: Befreiung pruefen
+  if (antriebsart === "elektro") {
+    const befreitBis =
+      erstzulassung_jahr <= r.elektro_befreiung_neuzulassung_bis_jahr
+        ? erstzulassung_jahr + r.elektro_befreiungsjahre
+        : 0;
+    const aktuellesJahr = new Date().getFullYear();
+    const elektroBefreit =
+      befreitBis > aktuellesJahr && befreitBis <= r.elektro_befreiung_max_bis_jahr;
+
+    return {
+      hubraumSteuer: 0,
+      co2Steuer: 0,
+      jahressteuer: elektroBefreit ? 0 : r.mindeststeuer,
+      elektroBefreit,
+    };
+  }
+
+  // Hubraum-Steuer nach Antriebsart
+  const satzJe100ccm =
+    antriebsart === "diesel"
+      ? r.hubraum_diesel_euro_je_100ccm
+      : r.hubraum_benzin_euro_je_100ccm;
+  const hubraumSteuer = rund(Math.ceil(hubraum_ccm / 100) * satzJe100ccm);
+
+  // CO2-Steuer: gestuft nach Ueberschreitung des Freibetrags
+  let co2Steuer = 0;
+  const co2Ueber = co2_g_km - r.co2_freibetrag_g_km;
+  if (co2Ueber > 0) {
+    // Stufenweise Berechnung
+    let verbleibend = co2Ueber;
+    let vorherigeBis = 0;
+    for (const stufe of r.co2_stufen) {
+      const stufenBreite = stufe.bis - vorherigeBis;
+      const inStufe = Math.min(verbleibend, stufenBreite);
+      co2Steuer += inStufe * stufe.euro_je_g;
+      verbleibend -= inStufe;
+      vorherigeBis = stufe.bis;
+      if (verbleibend <= 0) break;
     }
+    co2Steuer = rund(co2Steuer);
   }
 
-  // Reduktion für ältere Fahrzeuge
-  const fahrzeugalter = new Date().getFullYear() - anmeldungsjahr;
-  let reduktion = 1.0;
-
-  if (fahrzeugalter > 15) {
-    reduktion = 0.85; // 15% Reduktion nach 15 Jahren
-  }
-
-  const steuer_jaehrlich = rund((grundsteuer + co2_zuschlag) * reduktion);
-  const steuer_monatlich = rund(steuer_jaehrlich / 12);
+  // Jahressteuer: mindestens Mindeststeuer
+  const jahressteuer = rund(
+    Math.max(hubraumSteuer + co2Steuer, r.mindeststeuer)
+  );
 
   return {
-    hubraum,
-    co2_ausstoss,
-    anmeldungsjahr,
-    steuer_monatlich,
-    steuer_jaehrlich,
+    hubraumSteuer,
+    co2Steuer,
+    jahressteuer,
+    elektroBefreit: false,
   };
 }

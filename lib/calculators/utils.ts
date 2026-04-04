@@ -18,6 +18,48 @@ export function euro(n: number): string {
 }
 
 /**
+ * Formatieren als Prozent
+ * z.B. prozent(42.5) → "42,50 %"
+ */
+export function prozent(n: number): string {
+  return n.toLocaleString("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }) + " %";
+}
+
+/**
+ * Formatieren als Monate
+ * z.B. monate(24) → "24 Monate"
+ */
+export function monate(n: number): string {
+  return `${n} ${n === 1 ? "Monat" : "Monate"}`;
+}
+
+/**
+ * Formatieren als Entgeltpunkte
+ * z.B. punkte(45.12) → "45,12 EP"
+ */
+export function punkte(n: number): string {
+  return n.toLocaleString("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }) + " EP";
+}
+
+/**
+ * Formatieren als deutsches Datum
+ * z.B. datum(new Date(2026, 6, 1)) → "01.07.2026"
+ */
+export function datum(d: Date): string {
+  return d.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+/**
  * Merge WordPress ACF Overrides into base rates
  * WordPress-Werte (wenn definiert) überschreiben JSON-Defaults
  *

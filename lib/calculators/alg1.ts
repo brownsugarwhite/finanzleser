@@ -1,118 +1,88 @@
+/**
+ * ALG I Rechner 2026
+ * Berechnet Arbeitslosengeld I nach §§147, 149–153 SGB III.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface Alg1Params {
-  brutto_monat: number;
-  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6;
-  hat_kinder: boolean;
+  monatsBrutto: number;
+  steuerklasse: number;
+  hatKinder: boolean;
   versicherungsmonate: number;
   alter: number;
 }
 
 export interface Alg1Result {
-  brutto_monat: number;
   bemessungsentgelt: number;
-  steuerklasse: number;
-  hat_kinder: boolean;
-  versicherungsmonate: number;
-  alter: number;
-  satz_prozent: number;
-  leistungsentgelt_taegig: number;
-  leistungsentgelt_monatlich: number;
-  alg_taegig: number;
-  alg_monatlich: number;
-  bezugsdauer_monate: number;
+  bemessungsentgeltBegrenzt: boolean;
+  svPauschale: number;
+  lstPauschale: number;
+  leistungsentgeltTaeglich: number;
+  leistungsentgeltMonatlich: number;
+  satzProzent: number;
+  algTaeglich: number;
+  algMonatlich: number;
+  bezugsdauerMonate: number;
   gesamtbetrag: number;
-  bbg_erreicht: boolean;
-  hinweis?: string;
 }
 
-// Note: ANSPRUCHSDAUER is now loaded from rates.alg1.anspruchsdauer
-// Building it here for compatibility - will be moved to use rates directly
-const buildAnspruchsdauer = (ratesData: typeof RATES) => {
-  return ratesData.alg1.anspruchsdauer.map((item: any) => ({
-    monate: item.versicherungsmonate,
-    dauer: item.dauer_monate,
-    alter_mind: item.alter_mind
-  }));
-};
-
-const LST_PAUSCHALE: Record<number, number> = {
-  1: 0.14,
-  2: 0.12,
-  3: 0.08,
-  4: 0.14,
-  5: 0.22,
-  6: 0.25
-};
+function getLstPauschale(sk: number): number {
+  if (sk === 3) return 0.08;
+  if (sk === 5 || sk === 6) return 0.25;
+  if (sk === 2) return 0.12;
+  return 0.14;
+}
 
 export function berechne(
-  {
-    brutto_monat,
-    steuerklasse,
-    hat_kinder,
-    versicherungsmonate,
-    alter
-  }: Alg1Params,
-  rates: typeof RATES = RATES
+  params: Alg1Params,
+  rates: RatesType = RATES
 ): Alg1Result {
-  // Konstanten from rates.json
-  const LEISTUNGSSATZ_OHNE_KIND = rates.alg1.leistungssatz_ohne_kind_prozent / 100;
-  const LEISTUNGSSATZ_MIT_KIND = rates.alg1.leistungssatz_mit_kind_prozent / 100;
-  const BBG_ALV_MONATLICH = rates.alg1.bbg_alv_monatlich;
-  const TAGE_JE_MONAT = 30;
-  const SV_PAUSCHALE = rates.alg1.sv_pauschale_an_prozent / 100;
+  const { monatsBrutto, steuerklasse, hatKinder, versicherungsmonate, alter } = params;
+  const r = rates.alg1;
 
-  // Bemessungsentgelt auf BBG begrenzen
-  const bemessungsentgelt = Math.min(brutto_monat, BBG_ALV_MONATLICH);
+  const bbg = r.bbg_alv_monatlich;
+  const bemessungsentgelt = Math.min(monatsBrutto, bbg);
+  const bemessungsentgeltBegrenzt = monatsBrutto > bbg;
 
-  // Lohnsteuer-Pauschale für Steuerklasse
-  const lst = LST_PAUSCHALE[steuerklasse] || LST_PAUSCHALE[1];
-  const abzug_gesamt = SV_PAUSCHALE + lst;
+  const svProzent = r.sv_pauschale_an_prozent;
+  const svAbzug = rund(bemessungsentgelt * svProzent / 100);
 
-  // Leistungsentgelt berechnen
-  const leistungsentgelt_monatlich = rund(bemessungsentgelt * (1 - abzug_gesamt));
-  const leistungsentgelt_taegig = rund(leistungsentgelt_monatlich / TAGE_JE_MONAT);
+  const lstProzent = getLstPauschale(steuerklasse);
+  const lstAbzug = rund(bemessungsentgelt * lstProzent);
 
-  // Leistungssatz (mit/ohne Kinder)
-  const satz = hat_kinder ? LEISTUNGSSATZ_MIT_KIND : LEISTUNGSSATZ_OHNE_KIND;
+  const leistungsentgeltMonatlich = rund(bemessungsentgelt - svAbzug - lstAbzug);
+  const leistungsentgeltTaeglich = rund(leistungsentgeltMonatlich / 30);
 
-  // ALG berechnen
-  const alg_taegig = rund(leistungsentgelt_taegig * satz);
-  const alg_monatlich = rund(alg_taegig * TAGE_JE_MONAT);
+  const satzProzent = hatKinder ? r.leistungssatz_mit_kind_prozent : r.leistungssatz_ohne_kind_prozent;
 
-  // Anspruchsdauer bestimmen
-  const ANSPRUCHSDAUER = buildAnspruchsdauer(rates);
-  let anspruch = null;
-  for (const stufe of ANSPRUCHSDAUER) {
-    if (versicherungsmonate >= stufe.monate && alter >= stufe.alter_mind) {
-      anspruch = stufe;
+  const algTaeglich = rund(leistungsentgeltTaeglich * satzProzent / 100);
+  const algMonatlich = rund(algTaeglich * 30);
+
+  let bezugsdauerMonate = 0;
+  for (const stufe of r.anspruchsdauer) {
+    if (versicherungsmonate >= stufe.versicherungsmonate && alter >= stufe.alter_mind) {
+      bezugsdauerMonate = stufe.dauer_monate;
     }
   }
 
-  const bezugsdauer_monate = anspruch ? anspruch.dauer : 0;
-  const gesamtbetrag = rund(alg_monatlich * bezugsdauer_monate);
-
-  let hinweis = undefined;
-  if (bezugsdauer_monate === 0) {
-    hinweis = "Kein Anspruch: Für ALG I sind mindestens 12 Monate versicherungspflichtige Beschäftigung innerhalb der letzten 30 Monate erforderlich (Rahmenfrist, § 143 SGB III).";
-  }
+  const gesamtbetrag = rund(algMonatlich * bezugsdauerMonate);
 
   return {
-    brutto_monat,
     bemessungsentgelt,
-    steuerklasse,
-    hat_kinder,
-    versicherungsmonate,
-    alter,
-    satz_prozent: Math.round(satz * 100),
-    leistungsentgelt_taegig,
-    leistungsentgelt_monatlich,
-    alg_taegig,
-    alg_monatlich,
-    bezugsdauer_monate,
+    bemessungsentgeltBegrenzt,
+    svPauschale: svAbzug,
+    lstPauschale: lstAbzug,
+    leistungsentgeltTaeglich,
+    leistungsentgeltMonatlich,
+    satzProzent,
+    algTaeglich,
+    algMonatlich,
+    bezugsdauerMonate,
     gesamtbetrag,
-    bbg_erreicht: brutto_monat >= BBG_ALV_MONATLICH,
-    hinweis
   };
 }

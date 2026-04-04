@@ -1,41 +1,53 @@
+/**
+ * Mindestlohn-Rechner 2026
+ * Prüft Mindestlohn-Einhaltung und berechnet Monats-/Jahresgehalt.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+const WOCHEN_PRO_MONAT = 4.348;
+
 export interface MindestlohnParams {
   stundenlohn: number;
-  stunden_woche: number;
+  wochenstunden: number;
 }
 
 export interface MindestlohnResult {
   stundenlohn: number;
-  stunden_woche: number;
-  stunden_monat: number;
-  brutto_monat: number;
-  mindest_monat: number;
+  mindestlohn: number;
+  wochenstunden: number;
+  monatsStunden: number;
+  bruttoMonatlich: number;
+  mindestlohnMonatlich: number;
   differenz: number;
-  eingehalten: boolean;
+  istKonform: boolean;
 }
 
 export function berechne(
-  { stundenlohn, stunden_woche }: MindestlohnParams,
-  rates: typeof RATES = RATES
+  params: MindestlohnParams,
+  rates: RatesType = RATES
 ): MindestlohnResult {
-  const mindestlohn_stunde = rates.mindestlohn?.stundensatz || 13.9;
-  const wochen_monat = 4.348;
+  const { stundenlohn, wochenstunden } = params;
+  const mindestlohn = rates.mindestlohn.stundensatz;
 
-  const stunden_monat = rund(stunden_woche * wochen_monat);
-  const brutto_monat = rund(stundenlohn * stunden_woche * wochen_monat);
-  const mindest_monat = rund(mindestlohn_stunde * stunden_woche * wochen_monat);
-  const differenz = rund(brutto_monat - mindest_monat);
-  const eingehalten = stundenlohn >= mindestlohn_stunde;
+  const monatsStunden = rund(wochenstunden * WOCHEN_PRO_MONAT);
+  const bruttoMonatlich = rund(stundenlohn * monatsStunden);
+  const mindestlohnMonatlich = rund(mindestlohn * monatsStunden);
+  const differenz = rund(bruttoMonatlich - mindestlohnMonatlich);
+  const istKonform = stundenlohn >= mindestlohn;
 
   return {
     stundenlohn,
-    stunden_woche,
-    stunden_monat,
-    brutto_monat,
-    mindest_monat,
+    mindestlohn,
+    wochenstunden,
+    monatsStunden,
+    bruttoMonatlich,
+    mindestlohnMonatlich,
     differenz,
-    eingehalten
+    istKonform,
   };
 }

@@ -1,114 +1,128 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type MutterschutzParams, type MutterschutzResult } from "@/lib/calculators/mutterschutz";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
+import RechnerSelect from "./ui/RechnerSelect";
 import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function MutterschutzRechner() {
-  const today = new Date();
-  const defaultDate = new Date(today.getFullYear(), today.getMonth() + 2, 15);
-  const defaultDateString = defaultDate.toISOString().split("T")[0];
+  const now = new Date();
+  const defaultMonth = now.getMonth() + 3 > 12 ? (now.getMonth() + 3) - 12 : now.getMonth() + 3;
+  const defaultYear = now.getMonth() + 3 > 12 ? now.getFullYear() + 1 : now.getFullYear();
 
   const [params, setParams] = useState<MutterschutzParams>({
-    geburtstermin: defaultDateString,
-    fruegeburt_oder_mehrlinge: false,
-    nettolohn_tag: 50
+    entbindungYear: defaultYear,
+    entbindungMonth: defaultMonth,
+    entbindungDay: 15,
+    monatsNetto: 2500,
+    istGKV: true,
   });
 
   const [result, setResult] = useState<MutterschutzResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
-  const handleParamChange = (key: keyof MutterschutzParams, value: string | number | boolean) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
   return (
-    
     <div className="rechner-container">
       <h3 className="rechner-title">Mutterschutz-Rechner 2026</h3>
 
-      
-    <div className="rechner-inputs">
+      <div className="rechner-inputs">
         <RechnerInput
-          label="Errechneter Geburtstermin"
-          name="geburtstermin"
-          value={params.geburtstermin}
-          onChange={(val) => handleParamChange("geburtstermin", val)}
+          label="Entbindungstermin: Jahr"
+          name="entbindungYear"
+          value={params.entbindungYear}
+          onChange={(val) => setParams((p) => ({ ...p, entbindungYear: val }))}
+          min={2024}
+          max={2030}
+        />
 
+        <RechnerSelect
+          label="Monat"
+          name="entbindungMonth"
+          value={params.entbindungMonth.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, entbindungMonth: parseInt(val) }))}
+          options={Array.from({ length: 12 }, (_, i) => ({
+            label: `${i + 1}`,
+            value: `${i + 1}`,
+          }))}
+        />
+
+        <RechnerInput
+          label="Tag"
+          name="entbindungDay"
+          value={params.entbindungDay}
+          onChange={(val) => setParams((p) => ({ ...p, entbindungDay: val }))}
+          min={1}
+          max={31}
+        />
+
+        <RechnerInput
+          label="Monatliches Nettoeinkommen"
+          name="monatsNetto"
+          value={params.monatsNetto}
+          onChange={(val) => setParams((p) => ({ ...p, monatsNetto: val }))}
+          einheit="€"
+          step={100}
+          min={0}
         />
 
         <RechnerCheckbox
-          label="Frühgeburt / Mehrlinge / Behinderung (→ 12 Wochen nach statt 8)"
-          name="fruegeburt_oder_mehrlinge"
-          checked={params.fruegeburt_oder_mehrlinge}
-          onChange={(val) => handleParamChange("fruegeburt_oder_mehrlinge", val)}
-        />
-
-        <RechnerInput
-          label="Durchschnittlicher Nettolohn täglich"
-          name="nettolohn_tag"
-          value={params.nettolohn_tag || 0}
-          onChange={(val) => handleParamChange("nettolohn_tag", val)}
-          einheit="€/Tag"
-          min={0}
-          
+          label="Gesetzlich krankenversichert (GKV)"
+          name="istGKV"
+          checked={params.istGKV}
+          onChange={(val) => setParams((p) => ({ ...p, istGKV: val }))}
         />
       </div>
 
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-        
-    <div className="rechner-results">
+        <div className="rechner-results">
           <div className="rechner-result-boxes">
             <RechnerResultBox
-              label="Schutzfrist"
-              value={`${result.wochen_vor} + ${result.wochen_nach} Wochen`}
-              highlight={false}
+              label="Gesamtleistung"
+              value={euro(result.gesamtLeistung)}
+              highlight
             />
             <RechnerResultBox
-              label="Mutterschaftsgeld gesamt"
-              value={euro(result.mutterschaftsgeld_gesamt)}
-              highlight={true}
+              label="Tagessatz gesamt"
+              value={euro(result.gesamtTagessatz)}
             />
           </div>
 
           <h4 className="rechner-result-section-title">Schutzfristen</h4>
           <RechnerResultTable
             rows={[
-              { label: "Schutzfrist beginnt", value: result.schutz_beginn },
-              { label: "Schutzfrist endet", value: result.schutz_ende },
-              { label: "Gesamte Schutzfrist", value: `${result.schutz_tage} Tage` },
-              { label: "Wochen vor Geburt", value: `${result.wochen_vor} Wochen` },
-              { label: "Wochen nach Geburt", value: `${result.wochen_nach} Wochen` }
+              { label: "Schutzfrist von", value: result.schutzfristVon },
+              { label: "Schutzfrist bis", value: result.schutzfristBis },
+              { label: "Schutztage gesamt", value: `${result.schutzTageGesamt} Tage` },
             ]}
           />
 
           <h4 className="rechner-result-section-title">Mutterschaftsgeld</h4>
           <RechnerResultTable
             rows={[
-              { label: "Krankenkasse pro Tag (max.)", value: `${result.mutterschaftsgeld_kk_tag} €` },
-              { label: "Krankenkasse gesamt", value: euro(result.mutterschaftsgeld_gesamt_kk) },
-              { label: "Arbeitgeber-Zuschuss pro Tag", value: euro(result.arbeitgeber_zuschuss_tag) },
-              { label: "Arbeitgeber-Zuschuss gesamt", value: euro(result.mutterschaftsgeld_gesamt_ag) }
+              { label: "Krankenkasse pro Tag", value: euro(result.mutterschaftsgeldTag) },
+              { label: "Arbeitgeberzuschuss pro Tag", value: euro(result.arbeitgeberZuschussTag) },
+              { label: "Krankenkasse gesamt", value: euro(result.gesamtMutterschaftsgeld) },
+              { label: "Arbeitgeberzuschuss gesamt", value: euro(result.gesamtArbeitgeberzuschuss) },
             ]}
-            footer={{ label: "Mutterschaftsgeld insgesamt", value: euro(result.mutterschaftsgeld_gesamt) }}
+            footer={{ label: "Gesamtleistung", value: euro(result.gesamtLeistung) }}
           />
 
           <RechnerHinweis>
-            Die Krankenkasse zahlt max. 13 €/Tag. Der Arbeitgeber stockt auf den durchschnittlichen
-            Nettolohn auf. Grundlage: §§ 3, 19–20 MuSchG.
+            Die Krankenkasse zahlt max. 13 EUR/Tag. Der Arbeitgeber stockt die Differenz
+            zum durchschnittlichen Nettolohn auf. Grundlage: MuSchG 2026.
           </RechnerHinweis>
         </div>
       )}

@@ -1,36 +1,59 @@
+/**
+ * Übergangsgeld-Rechner 2026
+ * Berechnet Übergangsgeld nach §§20–21 SGB VI / §§49–52 SGB IX.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
-export interface UebergangssgeldParams {
-  nettolohn_tag: number;
-  leistungstage: number;
+type RatesType = typeof RATES;
+
+export interface UebergangsgeldParams {
+  monatsBrutto: number;
+  hatKind: boolean;
 }
 
-export interface UebergangssgeldResult {
-  nettolohn_tag: number;
-  leistungstage: number;
-  uebergangsgeld_pro_tag: number;
-  uebergangsgeld_gesamt: number;
-  hinweis: string;
+export interface UebergangsgeldResult {
+  monatsBrutto: number;
+  bruttoBegrenzt: number;
+  istBegrenzt: boolean;
+  nettoStandardisiert: number;
+  nettoTaeglich: number;
+  satzProzent: number;
+  uebergangsgeldTaeglich: number;
+  uebergangsgeldMonatlich: number;
 }
 
 export function berechne(
-  { nettolohn_tag, leistungstage }: UebergangssgeldParams,
-  rates: typeof RATES = RATES
-): UebergangssgeldResult {
-  // Übergangsgeld from rates.json (ohne Kind: 68%, mit Kind: 75%)
-  const satz_prozent = rates.uebergangsgeld.satz_ohne_kind_prozent / 100;
-  const uebergangsgeld_pro_tag = rund(nettolohn_tag * satz_prozent);
-  const uebergangsgeld_gesamt = rund(uebergangsgeld_pro_tag * leistungstage);
+  params: UebergangsgeldParams,
+  rates: RatesType = RATES
+): UebergangsgeldResult {
+  const { monatsBrutto, hatKind } = params;
+  const r = rates.uebergangsgeld;
+  const bbgRV = rates.beitragsbemessungsgrenzen.renten_arbeitslosen.monatlich;
+  const svPauschale = rates.alg1.sv_pauschale_an_prozent;
 
-  const hinweis =
-    "Das Übergangsgeld wird während einer Maßnahme der Rehabilitation oder beruflichen Anpassung gezahlt. Satz: 60 % oder 75 % des Netto, je nach Vorbildung.";
+  const bruttoBegrenzt = Math.min(monatsBrutto, bbgRV);
+  const istBegrenzt = monatsBrutto > bbgRV;
+
+  // Netto standardisiert (SV-Pauschale abziehen)
+  const nettoStandardisiert = rund(bruttoBegrenzt * (1 - svPauschale / 100));
+  const nettoTaeglich = rund(nettoStandardisiert / 30);
+
+  const satzProzent = hatKind ? r.satz_mit_kind_prozent : r.satz_ohne_kind_prozent;
+
+  const uebergangsgeldTaeglich = rund(nettoTaeglich * satzProzent / 100);
+  const uebergangsgeldMonatlich = rund(uebergangsgeldTaeglich * 30);
 
   return {
-    nettolohn_tag,
-    leistungstage,
-    uebergangsgeld_pro_tag,
-    uebergangsgeld_gesamt,
-    hinweis
+    monatsBrutto,
+    bruttoBegrenzt,
+    istBegrenzt,
+    nettoStandardisiert,
+    nettoTaeglich,
+    satzProzent,
+    uebergangsgeldTaeglich,
+    uebergangsgeldMonatlich,
   };
 }

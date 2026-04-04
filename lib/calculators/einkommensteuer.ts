@@ -1,77 +1,110 @@
+/**
+ * Einkommensteuerrechner 2026
+ * Vollständige Berechnung nach §32a EStG inkl. Soli, Kirchensteuer.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { berechneESt, berechneEStSplitting, berechneGrenzsteuersatz } from "./shared/estg32a";
+import { berechneSoli } from "./shared/soli";
+import { berechneKirchensteuer } from "./shared/kirchensteuer";
+
+type RatesType = typeof RATES;
 
 export interface EinkommensteuerParams {
-  einkommen: number; // Zu versteuerndes Einkommen in €
-  steuerklasse: number; // 1-6
-  bundesland: string; // für Kirchensteuer
+  jahresBrutto: number;
+  steuerklasse: number; // 1–6
+  bundesland: string;
+  kirchenmitglied: boolean;
+  werbungskosten?: number;
+  sonderausgaben?: number;
+  aussergewoehnlicheBelastungen?: number;
 }
 
 export interface EinkommensteuerResult {
-  einkommen: number;
-  lohnsteuer: number;
+  jahresBrutto: number;
+  zvE: number;
+  einkommensteuer: number;
+  einkommensteuerMonatlich: number;
   solidaritaetszuschlag: number;
+  solidaritaetszuschlagMonatlich: number;
   kirchensteuer: number;
+  kirchensteuerMonatlich: number;
   gesamtsteuer: number;
+  gesamtsteuerMonatlich: number;
   nettoEinkommen: number;
+  nettoEinkommenMonatlich: number;
+  effektiverSteuersatz: number;
+  grenzsteuersatz: number;
 }
 
-// Simplified §32a EStG 2026 for additional income
-export function berechne({
-  einkommen,
-  bundesland,
-}: EinkommensteuerParams, rates: typeof RATES = RATES): EinkommensteuerResult {
-  if (einkommen <= 0) {
-    return {
-      einkommen,
-      lohnsteuer: 0,
-      solidaritaetszuschlag: 0,
-      kirchensteuer: 0,
-      gesamtsteuer: 0,
-      nettoEinkommen: einkommen,
-    };
+export function berechne(
+  params: EinkommensteuerParams,
+  rates: RatesType = RATES
+): EinkommensteuerResult {
+  const {
+    jahresBrutto,
+    steuerklasse,
+    bundesland,
+    kirchenmitglied,
+  } = params;
+
+  // Abzüge bestimmen
+  const wk = Math.max(params.werbungskosten ?? 0, rates.lohnsteuer.arbeitnehmer_pauschbetrag);
+  const sa = Math.max(params.sonderausgaben ?? 0, rates.lohnsteuer.sonderausgaben_pauschbetrag);
+  const agb = params.aussergewoehnlicheBelastungen ?? 0;
+
+  // Zu versteuerndes Einkommen
+  let zvE = Math.max(0, Math.floor(jahresBrutto - wk - sa - agb));
+
+  // Entlastungsbetrag Alleinerziehend (SK II)
+  if (steuerklasse === 2) {
+    zvE = Math.max(0, zvE - rates.lohnsteuer.entlastungsbetrag_alleinerziehend);
   }
 
-  // Simplified progressive tax calculation (§32a EStG)
-  let lohnsteuer = 0;
+  // Einkommensteuer berechnen
+  const isSplitting = steuerklasse === 3;
+  let est: number;
 
-  if (einkommen <= 11600) {
-    // Tax-free allowance equivalent
-    lohnsteuer = 0;
-  } else if (einkommen <= 17005) {
-    // Zone 1: Linear increase from 0% to 24%
-    lohnsteuer = ((einkommen - 11600) * 0.14) / 100;
-  } else if (einkommen <= 66260) {
-    // Zone 2: Progressive from 24% to 42%
-    const y = (einkommen - 17005) / 100;
-    lohnsteuer = ((929.73 * y + 1400) * y + 972) / 100;
-  } else if (einkommen <= 277825) {
-    // Zone 3: Fixed 42% with solarity compensation
-    lohnsteuer = einkommen * 0.42 - 9136.63;
+  if (isSplitting) {
+    est = berechneEStSplitting(zvE, rates);
   } else {
-    // Zone 4: 45% top rate
-    lohnsteuer = einkommen * 0.45 - 17374.99;
+    est = berechneESt(zvE, rates);
   }
 
-  lohnsteuer = Math.max(0, rund(lohnsteuer));
+  // Soli
+  const soli = berechneSoli(est, isSplitting, rates);
 
-  // Solidaritätszuschlag from rates.json
-  const solidaritaetszuschlag = rund(lohnsteuer * (rates.solidaritaetszuschlag.satz_prozent / 100));
+  // Kirchensteuer
+  const kist = berechneKirchensteuer(est, bundesland, kirchenmitglied, rates);
 
-  // Kirchensteuer (8% or 9% depending on Bundesland) from rates.json
-  const satz8Bundeslaender = rates.kirchensteuer.satz_8_prozent_bundeslaender;
-  const kirchensteuersatz = satz8Bundeslaender.includes(bundesland) ? 0.08 : 0.09;
-  const kirchensteuer = rund(lohnsteuer * kirchensteuersatz);
+  // Gesamtsteuer
+  const gesamt = rund(est + soli + kist);
 
-  const gesamtsteuer = lohnsteuer + solidaritaetszuschlag + kirchensteuer;
-  const nettoEinkommen = einkommen - gesamtsteuer;
+  // Netto
+  const netto = rund(jahresBrutto - gesamt);
+
+  // Effektiver Steuersatz
+  const effektiv = jahresBrutto > 0 ? rund((gesamt / jahresBrutto) * 100) : 0;
+
+  // Grenzsteuersatz
+  const grenz = berechneGrenzsteuersatz(zvE, rates);
 
   return {
-    einkommen: rund(einkommen),
-    lohnsteuer,
-    solidaritaetszuschlag,
-    kirchensteuer,
-    gesamtsteuer: rund(gesamtsteuer),
-    nettoEinkommen: rund(nettoEinkommen),
+    jahresBrutto,
+    zvE,
+    einkommensteuer: est,
+    einkommensteuerMonatlich: rund(est / 12),
+    solidaritaetszuschlag: soli,
+    solidaritaetszuschlagMonatlich: rund(soli / 12),
+    kirchensteuer: kist,
+    kirchensteuerMonatlich: rund(kist / 12),
+    gesamtsteuer: gesamt,
+    gesamtsteuerMonatlich: rund(gesamt / 12),
+    nettoEinkommen: netto,
+    nettoEinkommenMonatlich: rund(netto / 12),
+    effektiverSteuersatz: effektiv,
+    grenzsteuersatz: grenz,
   };
 }

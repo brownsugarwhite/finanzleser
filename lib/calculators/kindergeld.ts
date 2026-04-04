@@ -1,26 +1,47 @@
+/**
+ * Kindergeld-Rechner 2026
+ * Berechnet Kindergeld und Kinderfreibetrag-Vergleich.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+/* ── Params & Result ─────────────────────────────────── */
+
 export interface KindergeldParams {
-  kinder: number;
+  anzahlKinder: number; // 1-10
 }
 
 export interface KindergeldResult {
   kindergeldProKind: number;
-  kinder: number;
-  gesamtKindergeld: number;
-  jaehrlich: number;
+  kindergeldMonatlich: number;
+  kindergeldJaehrlich: number;
+  kinderfreibetragJeElternteil: number;
+  kinderfreibetragBeideEltern: number;
+  anzahlKinder: number;
 }
 
-export function berechne({ kinder }: KindergeldParams, rates: typeof RATES = RATES): KindergeldResult {
-  const kindergeldProKind = rates.kindergeld.monatlich_je_kind;
-  const gesamtKindergeld = rund(kindergeldProKind * kinder);
-  const jaehrlich = rund(gesamtKindergeld * 12);
+/* ── Berechnung ──────────────────────────────────────── */
+
+export function berechne(
+  { anzahlKinder }: KindergeldParams,
+  rates: RatesType = RATES,
+): KindergeldResult {
+  const r = rates.kindergeld;
+
+  const kindergeldProKind = r.monatlich_je_kind;
+  const kindergeldMonatlich = rund(kindergeldProKind * anzahlKinder);
+  const kindergeldJaehrlich = rund(kindergeldMonatlich * 12);
 
   return {
     kindergeldProKind,
-    kinder,
-    gesamtKindergeld,
-    jaehrlich,
+    kindergeldMonatlich,
+    kindergeldJaehrlich,
+    kinderfreibetragJeElternteil: r.kinderfreibetrag_gesamt_je_elternteil,
+    kinderfreibetragBeideEltern: r.kinderfreibetrag_gesamt_beide_eltern,
+    anzahlKinder,
   };
 }

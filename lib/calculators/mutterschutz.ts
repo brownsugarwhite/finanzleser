@@ -1,64 +1,93 @@
+/**
+ * Mutterschutz-Rechner 2026
+ * Berechnet Schutzfristen, Mutterschaftsgeld und Arbeitgeberzuschuss.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+/* ── Params & Result ─────────────────────────────────── */
+
 export interface MutterschutzParams {
-  geburtstermin: string; // YYYY-MM-DD
-  fruegeburt_oder_mehrlinge: boolean;
-  nettolohn_tag?: number;
+  entbindungYear: number;
+  entbindungMonth: number; // 1-12
+  entbindungDay: number;   // 1-31
+  monatsNetto: number;     // Netto-Monatslohn
+  istGKV: boolean;         // Gesetzlich krankenversichert?
 }
 
 export interface MutterschutzResult {
-  geburtstermin: string;
-  schutz_beginn: string;
-  schutz_ende: string;
-  schutz_tage: number;
-  wochen_vor: number;
-  wochen_nach: number;
-  mutterschaftsgeld_kk_tag: number;
-  arbeitgeber_zuschuss_tag: number;
-  mutterschaftsgeld_gesamt_kk: number;
-  mutterschaftsgeld_gesamt_ag: number;
-  mutterschaftsgeld_gesamt: number;
+  schutzfristVon: string;       // Beginn Mutterschutz (6 Wochen vor ET)
+  schutzfristBis: string;       // Ende Mutterschutz (8 Wochen nach ET)
+  schutzTageGesamt: number;
+  mutterschaftsgeldTag: number; // KK-Tagessatz (max. 13 €)
+  arbeitgeberZuschussTag: number;
+  gesamtTagessatz: number;
+  gesamtMutterschaftsgeld: number;
+  gesamtArbeitgeberzuschuss: number;
+  gesamtLeistung: number;
 }
 
+/* ── Hilfsfunktion ───────────────────────────────────── */
+
+function fmtDate(d: Date): string {
+  return d.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+/* ── Berechnung ──────────────────────────────────────── */
+
 export function berechne(
-  { geburtstermin, fruegeburt_oder_mehrlinge, nettolohn_tag }: MutterschutzParams,
-  rates: typeof RATES = RATES
+  { entbindungYear, entbindungMonth, entbindungDay, monatsNetto, istGKV }: MutterschutzParams,
+  rates: RatesType = RATES,
 ): MutterschutzResult {
-  const geburt = new Date(geburtstermin);
+  const r = rates.mutterschutz;
 
-  // Schutzfrist from rates.json
-  const wochen_vor = rates.mutterschutz.schutzfrist_vor_geburt_wochen;
-  const wochen_nach = fruegeburt_oder_mehrlinge ? rates.mutterschutz.schutzfrist_nach_geburt_frueh_wochen : rates.mutterschutz.schutzfrist_nach_geburt_wochen;
+  const et = new Date(entbindungYear, entbindungMonth - 1, entbindungDay);
 
-  // Daten berechnen
-  const schutz_beginn = new Date(geburt.getTime() - wochen_vor * 7 * 24 * 60 * 60 * 1000);
-  const schutz_ende = new Date(geburt.getTime() + wochen_nach * 7 * 24 * 60 * 60 * 1000);
+  // Schutzfristen
+  const wochenVor = r.schutzfrist_vor_geburt_wochen;
+  const wochenNach = r.schutzfrist_nach_geburt_wochen;
 
-  const schutz_tage = Math.ceil((schutz_ende.getTime() - schutz_beginn.getTime()) / (1000 * 60 * 60 * 24));
+  const schutzVon = new Date(et);
+  schutzVon.setDate(schutzVon.getDate() - wochenVor * 7);
 
-  // Mutterschaftsgeld von der Krankenkasse from rates.json
-  const mutterschaftsgeld_kk_tag = rates.mutterschutz.mutterschaftsgeld_max_tag_gkv;
-  const mutterschaftsgeld_gesamt_kk = schutz_tage * mutterschaftsgeld_kk_tag;
+  const schutzBis = new Date(et);
+  schutzBis.setDate(schutzBis.getDate() + wochenNach * 7);
 
-  // Arbeitgeber-Zuschuss (Differenz zum Nettolohn)
-  const netto_tag = nettolohn_tag || 0;
-  const arbeitgeber_zuschuss_tag = Math.max(0, netto_tag - mutterschaftsgeld_kk_tag);
-  const mutterschaftsgeld_gesamt_ag = rund(schutz_tage * arbeitgeber_zuschuss_tag);
+  const schutzTageGesamt = Math.ceil(
+    (schutzBis.getTime() - schutzVon.getTime()) / (1000 * 60 * 60 * 24),
+  );
 
-  const mutterschaftsgeld_gesamt = mutterschaftsgeld_gesamt_kk + mutterschaftsgeld_gesamt_ag;
+  // Mutterschaftsgeld (GKV: max. 13 €/Tag, PKV: Einmalzahlung 210 €)
+  const nettoTag = rund(monatsNetto / 30);
+  let mutterschaftsgeldTag: number;
+  if (istGKV) {
+    mutterschaftsgeldTag = Math.min(r.mutterschaftsgeld_max_tag_gkv, nettoTag);
+  } else {
+    // PKV: Einmalzahlung 210 €, auf Tage umgelegt zum Vergleich
+    mutterschaftsgeldTag = rund(r.mutterschaftsgeld_pauschal_privat / schutzTageGesamt);
+  }
+
+  // Arbeitgeberzuschuss: Differenz zwischen Netto-Tageslohn und KK-Tagessatz
+  const arbeitgeberZuschussTag = Math.max(0, rund(nettoTag - mutterschaftsgeldTag));
+  const gesamtTagessatz = rund(mutterschaftsgeldTag + arbeitgeberZuschussTag);
 
   return {
-    geburtstermin,
-    schutz_beginn: schutz_beginn.toISOString().split("T")[0],
-    schutz_ende: schutz_ende.toISOString().split("T")[0],
-    schutz_tage,
-    wochen_vor,
-    wochen_nach,
-    mutterschaftsgeld_kk_tag,
-    arbeitgeber_zuschuss_tag: rund(arbeitgeber_zuschuss_tag),
-    mutterschaftsgeld_gesamt_kk,
-    mutterschaftsgeld_gesamt_ag,
-    mutterschaftsgeld_gesamt
+    schutzfristVon: fmtDate(schutzVon),
+    schutzfristBis: fmtDate(schutzBis),
+    schutzTageGesamt,
+    mutterschaftsgeldTag: rund(mutterschaftsgeldTag),
+    arbeitgeberZuschussTag,
+    gesamtTagessatz,
+    gesamtMutterschaftsgeld: rund(mutterschaftsgeldTag * schutzTageGesamt),
+    gesamtArbeitgeberzuschuss: rund(arbeitgeberZuschussTag * schutzTageGesamt),
+    gesamtLeistung: rund(gesamtTagessatz * schutzTageGesamt),
   };
 }

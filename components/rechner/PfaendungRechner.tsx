@@ -1,41 +1,88 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type PfaendungParams, type PfaendungResult } from "@/lib/calculators/pfaendung";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
+import RechnerResultTable from "./ui/RechnerResultTable";
+import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function PfaendungRechner() {
   const [params, setParams] = useState<PfaendungParams>({
-    nettoEntgelt: 2000,
-    schuldenart: "forderung_allgemein"
+    monatsNetto: 2500,
+    unterhaltspflichten: 1,
   });
 
   const [result, setResult] = useState<PfaendungResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
-    
     <div className="rechner-container">
-      <h3 className="rechner-title">Pfändung-Rechner 2026</h3>
-      
-    <div className="rechner-inputs">
-        <RechnerInput label="Nettoeinkommen monatlich" name="netto" value={params.nettoEntgelt} onChange={(val) => setParams(p => ({ ...p, nettoEntgelt: Number(val) }))} einheit="€" />
-        <RechnerSelect label="Schuldenart" name="schuldenart" value={params.schuldenart} onChange={(val) => setParams(p => ({ ...p, schuldenart: val as any }))} options={[{value: "unterhaltsschuld", label: "Unterhaltsschuld"}, {value: "forderung_allgemein", label: "Allgemeine Forderung"}]} />
+      <h3 className="rechner-title">Pfaendungsrechner 2026</h3>
+
+      <div className="rechner-inputs">
+        <RechnerInput
+          label="Monatliches Nettoeinkommen"
+          name="monatsNetto"
+          value={params.monatsNetto}
+          onChange={(val) => setParams((p) => ({ ...p, monatsNetto: val }))}
+          einheit="€"
+          step={100}
+          min={0}
+        />
+
+        <RechnerSelect
+          label="Unterhaltspflichten"
+          name="unterhaltspflichten"
+          value={params.unterhaltspflichten.toString()}
+          onChange={(val) => setParams((p) => ({ ...p, unterhaltspflichten: parseInt(val) }))}
+          options={Array.from({ length: 6 }, (_, i) => ({
+            label: `${i} ${i === 1 ? "Person" : "Personen"}`,
+            value: i.toString(),
+          }))}
+        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-    <div className="rechner-results">
+        <div className="rechner-results">
           <div className="rechner-result-boxes">
-          <RechnerResultBox label="Pfandbar" value={euro(result.pfaendbar)} highlight={true} />
-          <RechnerResultBox label="Tatsächliche Pfändung" value={euro(result.tatsaechliche_pfaendung)} highlight={false} />
-        </div>
+            <RechnerResultBox
+              label="Pfaendbarer Betrag"
+              value={euro(result.pfaendbarerBetrag)}
+              highlight
+            />
+            <RechnerResultBox
+              label="Verbleibendes Einkommen"
+              value={euro(result.verbleibendesEinkommen)}
+              variant="positive"
+            />
+          </div>
+
+          <RechnerResultTable
+            rows={[
+              { label: "Grundfreibetrag", value: euro(result.grundfreibetrag) },
+              { label: "Erhoehung (Unterhaltspfl.)", value: euro(result.erhoehung) },
+              { label: "Gesamter Freibetrag", value: euro(result.gesamtFreibetrag) },
+              { label: "Pfaendbarer Betrag (70 %)", value: euro(result.pfaendbarerBetrag) },
+            ]}
+            footer={{ label: "Verbleibt", value: euro(result.verbleibendesEinkommen) }}
+          />
+
+          <RechnerHinweis>
+            Pfaendungsfreigrenzen gueltig 01.07.2025 - 30.06.2026. Erste
+            Unterhaltspflicht: +585,23 EUR, weitere: +326,04 EUR. 70 % des
+            ueberschuessigen Betrags sind pfaendbar. Grundlage: 850c ZPO.
+          </RechnerHinweis>
         </div>
       )}
     </div>

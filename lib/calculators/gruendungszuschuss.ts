@@ -2,54 +2,38 @@ import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface GruendungszuschussParams {
-  alg1_anspruchswert: number;
-  gruendungskapital_vorgesehen: number;
-  eigenmittel_vorhanden: number;
+  algMonatlich: number;
 }
 
 export interface GruendungszuschussResult {
-  alg1_anspruchswert: number;
-  gruendungszuschuss_regelmaessig: number;
-  gruendungszuschuss_gesamt_6monate: number;
-  gruendungszuschuss_gesamt_9monate: number;
-  eigenmittel_erforderlich: number;
-  hinweis: string;
+  phase1Monatlich: number;
+  phase1Gesamt: number;
+  phase2Monatlich: number;
+  phase2Gesamt: number;
+  gesamtFoerderung: number;
 }
 
 export function berechne(
-  {
-    alg1_anspruchswert,
-    gruendungskapital_vorgesehen,
-    eigenmittel_vorhanden
-  }: GruendungszuschussParams,
-  rates: typeof RATES = RATES
+  { algMonatlich }: GruendungszuschussParams,
+  rates = RATES
 ): GruendungszuschussResult {
-  // Gründungszuschuss from rates.json
-  const gruendungszuschuss_regelmaessig = rates.gruendungszuschuss.pauschale_phase1_monat;
-  const versicherungszuschlag = Math.min(alg1_anspruchswert * 0.2, 300);
+  const r = rates.gruendungszuschuss;
 
-  // Laufzeitvarianten from rates.json
-  const gruendungszuschuss_gesamt_6monate = rund(
-    (gruendungszuschuss_regelmaessig + versicherungszuschlag) * rates.gruendungszuschuss.dauer_phase1_monate
-  );
-  const gruendungszuschuss_gesamt_9monate = rund(
-    gruendungszuschuss_regelmaessig * 3 + versicherungszuschlag * rates.gruendungszuschuss.dauer_phase2_monate
-  );
+  // Phase 1: ALG + Pauschale (300 EUR) fuer 6 Monate
+  const phase1Monatlich = rund(algMonatlich + r.pauschale_phase1_monat);
+  const phase1Gesamt = rund(phase1Monatlich * r.dauer_phase1_monate);
 
-  // Mindest-Eigenmittel
-  const eigenmittel_erforderlich = rund(gruendungskapital_vorgesehen * 0.3);
-  const eigenmittel_ausreichend = eigenmittel_vorhanden >= eigenmittel_erforderlich;
+  // Phase 2: Nur Pauschale (300 EUR) fuer 9 Monate
+  const phase2Monatlich = r.pauschale_phase2_monat;
+  const phase2Gesamt = rund(phase2Monatlich * r.dauer_phase2_monate);
 
-  const hinweis = eigenmittel_ausreichend
-    ? "Eigenmittel erfüllen Anforderung. Anspruch auf Gründungszuschuss ist gegeben."
-    : `Eigenmittel unzureichend. Erforderlich: ${rund(eigenmittel_erforderlich)}€. Vorhanden: ${eigenmittel_vorhanden}€.`;
+  const gesamtFoerderung = rund(phase1Gesamt + phase2Gesamt);
 
   return {
-    alg1_anspruchswert,
-    gruendungszuschuss_regelmaessig,
-    gruendungszuschuss_gesamt_6monate,
-    gruendungszuschuss_gesamt_9monate,
-    eigenmittel_erforderlich,
-    hinweis
+    phase1Monatlich,
+    phase1Gesamt,
+    phase2Monatlich,
+    phase2Gesamt,
+    gesamtFoerderung,
   };
 }

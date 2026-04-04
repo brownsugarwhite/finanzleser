@@ -1,36 +1,59 @@
+/**
+ * Krankengeld-Rechner 2026
+ * Berechnet Krankengeld nach §47 SGB V.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
-export interface Krankengeldarams {
-  nettolohn_tag: number;
-  krankheitstage: number;
+type RatesType = typeof RATES;
+
+export interface KrankengeldParams {
+  monatsBrutto: number;
+  monatsNetto: number;
 }
 
-export interface KrangeldResult {
-  nettolohn_tag: number;
-  krankheitstage: number;
-  krankengeld_pro_tag: number;
-  krankengeld_gesamt: number;
-  krankengeld_jahresanspruch: number;
+export interface KrankengeldResult {
+  monatsBrutto: number;
+  bruttoBegrenzt: number;
+  istBegrenzt: boolean;
+  regelentgeltTaeglich: number;
+  kgBruttoTaeglich: number;
+  kgNettoGrenze: number;
+  kgTaeglich: number;
+  kgWoechentlich: number;
+  kgMonatlich: number;
+  maxBezugsdauerWochen: number;
 }
 
 export function berechne(
-  { nettolohn_tag, krankheitstage }: Krankengeldarams,
-  rates: typeof RATES = RATES
-): KrangeldResult {
-  // KV zahlt Prozentsatz des Bruttoverdienstes / Nettos from rates.json
-  const satz = rates.krankengeld.satz_brutto_prozent / 100;
-  const krankengeld_pro_tag = Math.min(rund(nettolohn_tag * satz), 90);
-  const krankengeld_gesamt = rund(krankengeld_pro_tag * krankheitstage);
+  params: KrankengeldParams,
+  rates: RatesType = RATES
+): KrankengeldResult {
+  const { monatsBrutto, monatsNetto } = params;
+  const r = rates.krankengeld;
+  const bbgKV = rates.beitragsbemessungsgrenzen.kranken_pflege.monatlich;
 
-  // Jahresanspruch: unbegrenzt (aber 78 Wochen in 3 Jahren für gleiche Krankheit)
-  const krankengeld_jahresanspruch = 365; // Tage
+  const bruttoBegrenzt = Math.min(monatsBrutto, bbgKV);
+  const istBegrenzt = monatsBrutto > bbgKV;
+  const regelentgeltTaeglich = rund(bruttoBegrenzt / 30);
+  const kgBruttoTaeglich = rund(regelentgeltTaeglich * r.satz_brutto_prozent / 100);
+  const kgNettoGrenze = rund((monatsNetto / 30) * r.netto_grenze_prozent / 100);
+  const kgTaeglich = rund(Math.min(kgBruttoTaeglich, kgNettoGrenze));
+  const kgWoechentlich = rund(kgTaeglich * 7);
+  const kgMonatlich = rund(kgTaeglich * 30);
 
   return {
-    nettolohn_tag,
-    krankheitstage,
-    krankengeld_pro_tag,
-    krankengeld_gesamt,
-    krankengeld_jahresanspruch
+    monatsBrutto,
+    bruttoBegrenzt,
+    istBegrenzt,
+    regelentgeltTaeglich,
+    kgBruttoTaeglich,
+    kgNettoGrenze,
+    kgTaeglich,
+    kgWoechentlich,
+    kgMonatlich,
+    maxBezugsdauerWochen: r.max_bezugsdauer_wochen,
   };
 }

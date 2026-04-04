@@ -1,46 +1,94 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type GrundsicherungParams, type GrundsicherungResult } from "@/lib/calculators/grundsicherung";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
-import RechnerSelect from "./ui/RechnerSelect";
+import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
+import RechnerResultTable from "./ui/RechnerResultTable";
+import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function GrundsicherungRechner() {
   const [params, setParams] = useState<GrundsicherungParams>({
-    alterstyp: "ueber65",
-    haushaltstyp: "allein",
-    miete: 800,
-    vermogen: 5000,
-    einkommen: 0
+    alleinstehend: true,
+    monatlicheRente: 800,
+    sonstigesEinkommen: 0,
   });
 
   const [result, setResult] = useState<GrundsicherungResult | null>(null);
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
-    
     <div className="rechner-container">
       <h3 className="rechner-title">Grundsicherung-Rechner 2026</h3>
 
       <div className="rechner-inputs">
-        <RechnerSelect label="Alterstyp" name="alterstyp" value={params.alterstyp} onChange={(val) => setParams(p => ({ ...p, alterstyp: val as any }))} options={[{value: "under65", label: "Erwerbstätig"}, {value: "ueber65", label: "Über 65 Jahre"}, {value: "erwerbsunfaehig", label: "Erwerbsunfähig"}]} />
-        <RechnerInput label="Miete (monatlich)" name="miete" value={params.miete} onChange={(val) => setParams(p => ({ ...p, miete: Number(val) }))} einheit="€" />
-        <RechnerInput label="Vermögen" name="vermogen" value={params.vermogen} onChange={(val) => setParams(p => ({ ...p, vermogen: Number(val) }))} einheit="€" />
-        <RechnerInput label="Einkommen (monatlich)" name="einkommen" value={params.einkommen} onChange={(val) => setParams(p => ({ ...p, einkommen: Number(val) }))} einheit="€" />
+        <RechnerCheckbox
+          label="Alleinstehend"
+          name="alleinstehend"
+          checked={params.alleinstehend}
+          onChange={(val) => setParams((p) => ({ ...p, alleinstehend: val }))}
+        />
+
+        <RechnerInput
+          label="Monatliche Rente"
+          name="monatlicheRente"
+          value={params.monatlicheRente}
+          onChange={(val) => setParams((p) => ({ ...p, monatlicheRente: val }))}
+          einheit="€"
+          step={50}
+          min={0}
+        />
+
+        <RechnerInput
+          label="Sonstiges Einkommen"
+          name="sonstigesEinkommen"
+          value={params.sonstigesEinkommen}
+          onChange={(val) => setParams((p) => ({ ...p, sonstigesEinkommen: val }))}
+          einheit="€"
+          step={50}
+          min={0}
+        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-    <div className="rechner-results">
+        <div className="rechner-results">
           <div className="rechner-result-boxes">
-          <RechnerResultBox label="Grundsicherung/Monat" value={euro(result.grundsicherung)} highlight={true} />
-          <RechnerResultBox label="Regelbedarf" value={euro(result.regelbedarf)} highlight={false} />
-        </div>
+            <RechnerResultBox
+              label="Grundsicherung / Monat"
+              value={euro(result.anspruch)}
+              highlight
+            />
+            <RechnerResultBox
+              label="Regelbedarf"
+              value={euro(result.regelbedarf)}
+            />
+          </div>
+
+          <RechnerResultTable
+            rows={[
+              { label: "Regelbedarf", value: euro(result.regelbedarf) },
+              { label: "Freibetrag auf Rente", value: euro(result.freibetragRente) },
+              { label: "Anrechenbare Rente", value: `- ${euro(result.anrechenbareRente)}` },
+              { label: "Sonstiges anrechenbar", value: `- ${euro(result.anrechenbaresSonstiges)}` },
+            ]}
+            footer={{ label: "Grundsicherung", value: euro(result.anspruch) }}
+          />
+
+          <RechnerHinweis>
+            Grundsicherung im Alter (ab Regelaltersgrenze) und bei voller
+            Erwerbsminderung. Freibetrag auf Rente: 30 %, max. Haelfte des Regelsatzes.
+            Grundlage: SGB XII.
+          </RechnerHinweis>
         </div>
       )}
     </div>

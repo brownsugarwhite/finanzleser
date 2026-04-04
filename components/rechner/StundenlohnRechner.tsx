@@ -1,82 +1,102 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type StundenlohnParams, type StundenlohnResult } from "@/lib/calculators/stundenlohn";
-import { euro } from "@/lib/calculators/utils";
-import RechnerSelect from "./ui/RechnerSelect";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function StundenlohnRechner() {
   const [params, setParams] = useState<StundenlohnParams>({
-    stunden: 40,
-    stundenumfang: "vollzeit",
+    jahresgehalt: 42000,
+    wochenstunden: 40,
+    urlaubstage: 30,
+    feiertage: 10,
   });
 
   const [result, setResult] = useState<StundenlohnResult | null>(null);
-
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Stundenlohn-Rechner</h3>
+      <h3 className="rechner-title">Stundenlohnrechner</h3>
 
       <div className="rechner-inputs">
-        <RechnerSelect
-          label="Beschäftigungsumfang"
-          name="stundenumfang"
-          value={params.stundenumfang}
-          onChange={(val) =>
-            setParams((prev) => ({ ...prev, stundenumfang: val as "vollzeit" | "teilzeit" | "custom" }))
-          }
-          options={[
-            { label: "Vollzeit (40h/Woche)", value: "vollzeit" },
-            { label: "Teilzeit (20h/Woche)", value: "teilzeit" },
-            { label: "Benutzerdefiniert", value: "custom" },
-          ]}
+        <RechnerInput
+          label="Jahresgehalt (brutto)"
+          name="jahresgehalt"
+          value={params.jahresgehalt}
+          onChange={(val) => setParams((prev) => ({ ...prev, jahresgehalt: val }))}
+          einheit="€"
+          step={1000}
+          min={0}
         />
-
-        {params.stundenumfang === "custom" && (
-          <RechnerInput
-            label="Stunden pro Woche"
-            name="stunden"
-            value={params.stunden}
-            onChange={(val) => setParams((prev) => ({ ...prev, stunden: val }))}
-            einheit="h/Woche"
-            step={1}
-            min={1}
-          />
-        )}
+        <RechnerInput
+          label="Wochenstunden"
+          name="wochenstunden"
+          value={params.wochenstunden}
+          onChange={(val) => setParams((prev) => ({ ...prev, wochenstunden: val }))}
+          einheit="h"
+          step={1}
+          min={1}
+        />
+        <RechnerInput
+          label="Urlaubstage"
+          name="urlaubstage"
+          value={params.urlaubstage}
+          onChange={(val) => setParams((prev) => ({ ...prev, urlaubstage: val }))}
+          einheit="Tage"
+          step={1}
+          min={0}
+        />
+        <RechnerInput
+          label="Feiertage"
+          name="feiertage"
+          value={params.feiertage}
+          onChange={(val) => setParams((prev) => ({ ...prev, feiertage: val }))}
+          einheit="Tage"
+          step={1}
+          min={0}
+        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox label="Mindestlohn" value={`${result.mindestlohn}€/h`} />
-            <RechnerResultBox label="Wocheneinkommen" value={euro(result.einkommenWoche)} />
-            <RechnerResultBox label="Monatseinkommen" value={euro(result.einkommenMonat)} highlight={true} />
+            <RechnerResultBox label="Stundenlohn" value={euro(result.stundenlohn)} highlight />
+            <RechnerResultBox label="Monatsgehalt" value={euro(result.monatsgehalt)} />
+            <RechnerResultBox
+              label={result.ueberMindestlohn ? "Über Mindestlohn" : "Unter Mindestlohn"}
+              value={euro(Math.abs(result.differenzZuMindestlohn))}
+              variant={result.ueberMindestlohn ? "positive" : "negative"}
+            />
           </div>
 
           <RechnerResultTable
             rows={[
-              { label: "Mindestlohn", value: `${result.mindestlohn}€ pro Stunde` },
-              { label: "Stunden pro Woche", value: `${result.stundenWoche}h` },
-              { label: "Stunden pro Monat (Ø)", value: `${result.stundenMonat}h` },
-              { label: "Wocheneinkommen", value: euro(result.einkommenWoche) },
-              { label: "Monatseinkommen", value: euro(result.einkommenMonat) },
+              { label: "Jahresgehalt", value: euro(params.jahresgehalt) },
+              { label: "Monatsgehalt", value: euro(result.monatsgehalt) },
+              { label: "Arbeitstage / Jahr", value: `${result.arbeitstageJahr} Tage` },
+              { label: "Arbeitsstunden / Jahr", value: `${result.arbeitsstundenJahr} Stunden` },
+              { label: "Stundenlohn", value: euro(result.stundenlohn) },
+              { label: "Mindestlohn (2026)", value: euro(rates.mindestlohn.stundensatz) },
+              { label: "Differenz zum Mindestlohn", value: euro(result.differenzZuMindestlohn) },
             ]}
           />
 
           <RechnerHinweis>
-            Berechnung basiert auf dem bundesweiten Mindestlohn 2026 ({result.mindestlohn}€/h).
-            Actual income may vary based on specific agreements.
+            Berechnung basiert auf dem gesetzlichen Mindestlohn 2026 ({euro(rates.mindestlohn.stundensatz)}/h).
+            Wochenenden (104 Tage) werden automatisch abgezogen.
           </RechnerHinweis>
         </div>
       )}

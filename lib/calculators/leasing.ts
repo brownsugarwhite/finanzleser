@@ -2,61 +2,46 @@ import { RATES } from "./rates";
 import { rund } from "./utils";
 
 export interface LeasingParams {
-  fahrzeugpreis: number;
-  laufzeit_monate: number;
-  zinssatz_prozent: number;
-  restwert_prozent: number;
+  kaufpreis: number;
+  laufzeitMonate: number;
+  restwertProzent: number;
+  zinssatzPa: number;
+  anzahlung: number;
 }
 
 export interface LeasingResult {
-  fahrzeugpreis: number;
-  laufzeit_monate: number;
-  zinssatz_prozent: number;
+  leasingrate: number;
+  gesamtKosten: number;
   restwert: number;
-  leasingrate_monatlich: number;
-  gesamtkosten: number;
-  vergleich_kauf_rate: number;
+  zinskosten: number;
 }
 
 export function berechne(
-  {
-    fahrzeugpreis,
-    laufzeit_monate,
-    zinssatz_prozent,
-    restwert_prozent
-  }: LeasingParams,
+  { kaufpreis, laufzeitMonate, restwertProzent, zinssatzPa, anzahlung }: LeasingParams,
   rates: typeof RATES = RATES
 ): LeasingResult {
-  // Restwert am Ende der Laufzeit
-  const restwert = rund(fahrzeugpreis * (restwert_prozent / 100));
+  const restwert = rund(kaufpreis * restwertProzent / 100);
+  const finanzierungsbetrag = kaufpreis - anzahlung - restwert;
 
-  // Leasingfähiger Betrag
-  const leasingfaehig = fahrzeugpreis - restwert;
+  const zinsMonat = zinssatzPa / 100 / 12;
+  const n = laufzeitMonate;
 
-  // Leasing-Rate (vereinfachte Annuitätenmethode)
-  const zinssatz_monatlich = zinssatz_prozent / 100 / 12;
-  const n = laufzeit_monate;
-
-  let leasingrate_monatlich;
-  if (zinssatz_monatlich === 0) {
-    leasingrate_monatlich = leasingfaehig / n;
+  let leasingrate: number;
+  if (zinsMonat === 0) {
+    leasingrate = finanzierungsbetrag / n;
   } else {
-    leasingrate_monatlich =
-      (leasingfaehig *
-        (zinssatz_monatlich * Math.pow(1 + zinssatz_monatlich, n))) /
-      (Math.pow(1 + zinssatz_monatlich, n) - 1);
+    leasingrate =
+      (finanzierungsbetrag * (zinsMonat * Math.pow(1 + zinsMonat, n))) /
+      (Math.pow(1 + zinsMonat, n) - 1);
   }
 
-  const gesamtkosten = rund(leasingrate_monatlich * laufzeit_monate);
-  const vergleich_kauf_rate = rund(fahrzeugpreis / laufzeit_monate);
+  const gesamtKosten = rund(leasingrate * laufzeitMonate + anzahlung);
+  const zinskosten = rund(gesamtKosten - finanzierungsbetrag - anzahlung);
 
   return {
-    fahrzeugpreis,
-    laufzeit_monate,
-    zinssatz_prozent,
+    leasingrate: rund(leasingrate),
+    gesamtKosten,
     restwert,
-    leasingrate_monatlich: rund(leasingrate_monatlich),
-    gesamtkosten,
-    vergleich_kauf_rate
+    zinskosten,
   };
 }

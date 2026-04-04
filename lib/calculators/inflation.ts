@@ -3,31 +3,56 @@ import { rund } from "./utils";
 
 export interface InflationParams {
   betrag: number;
-  inflationsrate: number;
+  inflationsrateProzent: number;
   jahre: number;
+}
+
+export interface InflationJahresplan {
+  jahr: number;
+  reellerWert: number;
+  kaufkraftVerlust: number;
+  benoetigt: number;
 }
 
 export interface InflationResult {
-  startbetrag: number;
-  inflationsrate: number;
-  jahre: number;
-  endbetrag: number;
-  kaufkraftverlust: number;
-  kaufkraftprozent: number;
+  reellerWert: number;
+  kaufkraftVerlust: number;
+  benoetigt: number;
+  verlustProzent: number;
+  jahresplan: InflationJahresplan[];
 }
 
-export function berechne({ betrag, inflationsrate, jahre }: InflationParams, rates: typeof RATES = RATES): InflationResult {
-  const rate = inflationsrate / 100;
-  const endbetrag = rund(betrag * Math.pow(1 + rate, jahre));
-  const kaufkraftverlust = rund(betrag - endbetrag);
-  const kaufkraftprozent = rund((kaufkraftverlust / betrag) * 100);
+export function berechne(
+  { betrag, inflationsrateProzent, jahre }: InflationParams,
+  rates: typeof RATES = RATES
+): InflationResult {
+  const rate = inflationsrateProzent / 100;
+  const jahresplan: InflationJahresplan[] = [];
+
+  for (let j = 1; j <= jahre; j++) {
+    const reellerWert = betrag / Math.pow(1 + rate, j);
+    const kaufkraftVerlust = betrag - reellerWert;
+    const benoetigt = betrag * Math.pow(1 + rate, j);
+
+    jahresplan.push({
+      jahr: j,
+      reellerWert: rund(reellerWert),
+      kaufkraftVerlust: rund(kaufkraftVerlust),
+      benoetigt: rund(benoetigt),
+    });
+  }
+
+  const letztes = jahresplan[jahresplan.length - 1];
+  const reellerWert = letztes.reellerWert;
+  const kaufkraftVerlust = letztes.kaufkraftVerlust;
+  const benoetigt = letztes.benoetigt;
+  const verlustProzent = rund((kaufkraftVerlust / betrag) * 100);
 
   return {
-    startbetrag: rund(betrag),
-    inflationsrate,
-    jahre,
-    endbetrag,
-    kaufkraftverlust,
-    kaufkraftprozent,
+    reellerWert,
+    kaufkraftVerlust,
+    benoetigt,
+    verlustProzent,
+    jahresplan,
   };
 }

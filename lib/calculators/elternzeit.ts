@@ -1,86 +1,87 @@
+/**
+ * Elternzeit-Rechner 2026
+ * Berechnet Elternzeit-Zeiträume basierend auf Geburtsdatum,
+ * Partnermonate und Übertragung auf später.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 
+type RatesType = typeof RATES;
+
+/* ── Params & Result ─────────────────────────────────── */
+
 export interface ElternzeitParams {
-  geburtsdatum: string; // YYYY-MM-DD
-  elternteil1_monate: number;
-  elternteil2_monate?: number;
-  beginn_verschiebung_monate?: number;
+  geburtYear: number;
+  geburtMonth: number;       // 1-12
+  partnerMonate: number;     // 0-14 Monate (Partnermonate vom Gesamtkontingent)
+  uebertragMonateSpater: number; // 0-12 Monate, die auf später (bis 8. Geburtstag) übertragen werden
 }
 
 export interface ElternzeitResult {
-  geburtsdatum: string;
-  geburt: Date;
-  et_beginn: Date;
-  et1_ende: Date;
-  max_ende: Date;
-  anmeldung_bis: Date;
-  elternteil1_monate: number;
-  elternteil2_monate: number;
-  gesamt_monate: number;
-  verbleibend_partner: number;
-  ueberschreitung: number;
-  gueltig: boolean;
-  max_monate: number;
-  kind_alter_heute_monate: number;
+  maxMonate: number;
+  anmeldeFristWochen: number;
+  schutzEnde: string;          // Datum: Ende Mutterschutz (8 Wochen nach Geburt)
+  elternzeitStart: string;     // Datum: Beginn Elternzeit
+  elternzeitEnde: string;      // Datum: Ende der durchgehenden Elternzeit
+  monateErsterAbschnitt: number;
+  monateSpater: number;
+  partnerMonate: number;
 }
 
+/* ── Hilfsfunktion ───────────────────────────────────── */
+
+function fmtDate(d: Date): string {
+  return d.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+/* ── Berechnung ──────────────────────────────────────── */
+
 export function berechne(
-  {
-    geburtsdatum,
-    elternteil1_monate,
-    elternteil2_monate = 0,
-    beginn_verschiebung_monate = 0
-  }: ElternzeitParams,
-  rates: typeof RATES = RATES
+  { geburtYear, geburtMonth, partnerMonate, uebertragMonateSpater }: ElternzeitParams,
+  rates: RatesType = RATES,
 ): ElternzeitResult {
-  const max_monate_gesamt = rates.elternzeit.max_monate_gesamt;
-  const anmeldung_frist_wochen = rates.elternzeit.anmeldung_frist_wochen;
-  const max_alter_kind_jahre = rates.elternzeit.max_alter_kind_jahre;
+  const r = rates.elternzeit;
+  const maxMonate = r.max_monate_gesamt;
+  const anmeldeFristWochen = r.anmeldung_frist_wochen;
 
-  const geburt = new Date(geburtsdatum);
-  const heute = new Date();
+  // Geburt am 1. des Monats (Vereinfachung)
+  const geburt = new Date(geburtYear, geburtMonth - 1, 1);
 
-  // Elternzeit-Beginn
-  const et_beginn = new Date(geburt);
-  et_beginn.setMonth(et_beginn.getMonth() + beginn_verschiebung_monate);
+  // Mutterschutz-Ende: 8 Wochen nach Geburt
+  const schutzEnde = new Date(geburt);
+  schutzEnde.setDate(schutzEnde.getDate() + 8 * 7);
 
-  // Elternzeit-Ende Elternteil 1
-  const et1_ende = new Date(et_beginn);
-  et1_ende.setMonth(et1_ende.getMonth() + elternteil1_monate);
+  // Elternzeit startet nach Mutterschutz
+  const elternzeitStart = new Date(schutzEnde);
 
-  // Maximales Ende: 8. Geburtstag
-  const max_ende = new Date(geburt);
-  max_ende.setFullYear(max_ende.getFullYear() + max_alter_kind_jahre);
-
-  // Anmeldefrist für Elternteil 1
-  const anmeldung_bis = new Date(et_beginn);
-  anmeldung_bis.setDate(anmeldung_bis.getDate() - anmeldung_frist_wochen * 7);
-
-  // Gesamtmonate beider Elternteile
-  const gesamt_monate = elternteil1_monate + elternteil2_monate;
-  const ueberschreitung = Math.max(0, gesamt_monate - max_monate_gesamt);
-
-  // Verbleibende Monate für Partner
-  const verbleibend_partner = Math.max(0, max_monate_gesamt - elternteil1_monate);
-
-  const kind_alter_heute_monate = Math.floor(
-    (heute.getTime() - geburt.getTime()) / (1000 * 60 * 60 * 24 * 30.44)
+  // Clamp Partner-Monate und Übertrag
+  const clampedPartner = Math.min(Math.max(0, partnerMonate), 14);
+  const maxUebertrag = Math.min(
+    r.uebertragbare_monate_auf_spaeter,
+    maxMonate - clampedPartner,
   );
+  const clampedUebertrag = Math.min(Math.max(0, uebertragMonateSpater), maxUebertrag);
+
+  // Erster zusammenhängender Abschnitt
+  const monateErsterAbschnitt = maxMonate - clampedPartner - clampedUebertrag;
+
+  // Elternzeit-Ende des ersten Abschnitts
+  const elternzeitEnde = new Date(elternzeitStart);
+  elternzeitEnde.setMonth(elternzeitEnde.getMonth() + monateErsterAbschnitt);
 
   return {
-    geburtsdatum,
-    geburt,
-    et_beginn,
-    et1_ende,
-    max_ende,
-    anmeldung_bis,
-    elternteil1_monate,
-    elternteil2_monate,
-    gesamt_monate,
-    verbleibend_partner,
-    ueberschreitung,
-    gueltig: ueberschreitung === 0 && gesamt_monate <= max_monate_gesamt,
-    max_monate: max_monate_gesamt,
-    kind_alter_heute_monate
+    maxMonate,
+    anmeldeFristWochen,
+    schutzEnde: fmtDate(schutzEnde),
+    elternzeitStart: fmtDate(elternzeitStart),
+    elternzeitEnde: fmtDate(elternzeitEnde),
+    monateErsterAbschnitt,
+    monateSpater: clampedUebertrag,
+    partnerMonate: clampedPartner,
   };
 }

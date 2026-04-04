@@ -1,52 +1,68 @@
+/**
+ * Witwenrentenrechner 2026
+ * Berechnet die Witwenrente (grosse und kleine) inkl.
+ * Einkommensanrechnung nach § 97 SGB VI.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
 export interface WitwenrenteParams {
-  rentenpunkte_verstorbener: number;
-  ist_grosse_witwenrente: boolean;
-  alter_witwe: number;
+  entgeltpunkteVerstorbener: number;
+  eigeneEntgeltpunkte: number;
+  grosseWR: boolean; // true = grosse Witwenrente (55%), false = kleine (25%)
+  eigenesEinkommen: number; // monatliches Nettoeinkommen der Witwe/des Witwers
 }
 
 export interface WitwenrenteResult {
-  rentenpunkte_verstorbener: number;
-  rente_verstorbener: number;
-  ist_grosse_witwenrente: boolean;
-  satz_witwenrente: number;
-  witwenrente_monatlich: number;
-  zeitlich_begrenzt: boolean;
-  hinweis: string;
+  renteVerstorbener: number;
+  witwenrenteVorAnrechnung: number;
+  freibetrag: number;
+  anrechenbareEinkuenfte: number;
+  kuerzung: number;
+  witwenrenteNachAnrechnung: number;
 }
 
 export function berechne(
-  {
-    rentenpunkte_verstorbener,
-    ist_grosse_witwenrente,
-    alter_witwe
-  }: WitwenrenteParams,
-  rates: typeof RATES = RATES
+  params: WitwenrenteParams,
+  rates: RatesType = RATES
 ): WitwenrenteResult {
-  // Rentenwert from rates.json
+  const { entgeltpunkteVerstorbener, eigeneEntgeltpunkte, grosseWR, eigenesEinkommen } = params;
+
   const rentenwert = rates.witwenrente.rentenwert_west;
-  const rente_verstorbener = rund(rentenpunkte_verstorbener * rentenwert);
+  const grosseFaktor = rates.witwenrente.grosse_wr_faktor;
+  const kleineFaktor = rates.witwenrente.kleine_wr_faktor;
+  const freibetragFaktor = rates.witwenrente.freibetrag_faktor;
+  const anrechnungProzent = rates.witwenrente.einkommensanrechnung_prozent;
 
-  // Sätze für Witwenrente from rates.json
-  const satz_witwenrente = ist_grosse_witwenrente ? rates.witwenrente.grosse_wr_faktor : rates.witwenrente.kleine_wr_faktor;
-  const witwenrente_monatlich = rund(rente_verstorbener * satz_witwenrente);
+  // Rente des Verstorbenen
+  const renteVerstorbener = rund(entgeltpunkteVerstorbener * rentenwert);
 
-  const zeitlich_begrenzt =
-    !ist_grosse_witwenrente && alter_witwe < 45;
+  // Witwenrente vor Einkommensanrechnung
+  const wrFaktor = grosseWR ? grosseFaktor : kleineFaktor;
+  const witwenrenteVorAnrechnung = rund(renteVerstorbener * wrFaktor);
 
-  const hinweis = zeitlich_begrenzt
-    ? "Kleine Witwenrente wird nach 24 Monaten beendet, es sei denn, die Voraussetzungen für Große Witwenrente werden erfüllt."
-    : "Große Witwenrente wird auf Lebenszeit gewährt.";
+  // Freibetrag = freibetrag_faktor x aktueller Rentenwert
+  const freibetrag = rund(freibetragFaktor * rentenwert);
+
+  // Anrechenbares Einkommen: eigenesEinkommen - Freibetrag
+  const anrechenbareEinkuenfte = Math.max(0, rund(eigenesEinkommen - freibetrag));
+
+  // 40% des anrechenbaren Einkommens wird von der Witwenrente abgezogen
+  const kuerzung = rund(anrechenbareEinkuenfte * anrechnungProzent / 100);
+
+  // Witwenrente nach Anrechnung (min. 0)
+  const witwenrenteNachAnrechnung = Math.max(0, rund(witwenrenteVorAnrechnung - kuerzung));
 
   return {
-    rentenpunkte_verstorbener,
-    rente_verstorbener,
-    ist_grosse_witwenrente,
-    satz_witwenrente: rund(satz_witwenrente * 100),
-    witwenrente_monatlich,
-    zeitlich_begrenzt,
-    hinweis
+    renteVerstorbener,
+    witwenrenteVorAnrechnung,
+    freibetrag,
+    anrechenbareEinkuenfte,
+    kuerzung,
+    witwenrenteNachAnrechnung,
   };
 }

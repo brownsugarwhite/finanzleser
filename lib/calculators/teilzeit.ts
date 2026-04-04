@@ -1,58 +1,77 @@
+/**
+ * Teilzeit-Rechner 2026
+ * Berechnet Teilzeitgehalt, Beschäftigungsart und Netto-Schätzung.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
+type RatesType = typeof RATES;
+
+const WOCHEN_PRO_MONAT = 4.348;
+
+export type TeilzeitTyp = "minijob" | "midijob" | "regulaer";
+
 export interface TeilzeitParams {
-  vollzeit_brutto: number;
-  stunden_pro_woche_neu: number;
-  stunden_pro_woche_alt: number;
+  stundenlohn: number;
+  wochenstunden: number;
+  vollzeitStundenWoche: number;
 }
 
 export interface TeilzeitResult {
-  vollzeit_brutto: number;
-  stunden_pro_woche_alt: number;
-  stunden_pro_woche_neu: number;
-  reduktion_prozent: number;
-  teilzeit_brutto: number;
-  brutto_differenz: number;
-  netto_monatlich_alt: number;
-  netto_monatlich_neu: number;
-  netto_differenz: number;
+  stundenlohn: number;
+  wochenstunden: number;
+  vollzeitStundenWoche: number;
+  teilzeitProzent: number;
+  monatsStunden: number;
+  bruttoMonatlich: number;
+  typ: TeilzeitTyp;
+  nettoSchaetzung: number;
+  mindestlohnKonform: boolean;
 }
 
 export function berechne(
-  {
-    vollzeit_brutto,
-    stunden_pro_woche_neu,
-    stunden_pro_woche_alt
-  }: TeilzeitParams,
-  rates: typeof RATES = RATES
+  params: TeilzeitParams,
+  rates: RatesType = RATES
 ): TeilzeitResult {
-  const reduktion_prozent = rund(
-    ((stunden_pro_woche_alt - stunden_pro_woche_neu) / stunden_pro_woche_alt) *
-      100
-  );
+  const { stundenlohn, wochenstunden, vollzeitStundenWoche } = params;
+  const r = rates.teilzeit;
 
-  const teilzeit_brutto = rund(
-    vollzeit_brutto * (stunden_pro_woche_neu / stunden_pro_woche_alt)
-  );
+  const monatsStunden = rund(wochenstunden * WOCHEN_PRO_MONAT);
+  const bruttoMonatlich = rund(stundenlohn * monatsStunden);
+  const teilzeitProzent = rund((wochenstunden / vollzeitStundenWoche) * 100);
+  const mindestlohnKonform = stundenlohn >= r.mindestlohn_stunde;
 
-  const brutto_differenz = rund(vollzeit_brutto - teilzeit_brutto);
+  let typ: TeilzeitTyp;
+  if (bruttoMonatlich <= r.minijob_grenze_monatlich) {
+    typ = "minijob";
+  } else if (bruttoMonatlich <= r.gleitzone_obergrenze_monatlich) {
+    typ = "midijob";
+  } else {
+    typ = "regulaer";
+  }
 
-  // Vereinfachte Netto-Berechnung (20% SV + 10% Lohnsteuer)
-  const sv_pauschale = 0.2;
-  const netto_monatlich_alt = rund(vollzeit_brutto * (1 - sv_pauschale));
-  const netto_monatlich_neu = rund(teilzeit_brutto * (1 - sv_pauschale));
-  const netto_differenz = rund(netto_monatlich_alt - netto_monatlich_neu);
+  // Netto-Schätzung (vereinfacht)
+  const svAnProzent = rates.alg1.sv_pauschale_an_prozent;
+  let nettoSchaetzung: number;
+  if (typ === "minijob") {
+    nettoSchaetzung = bruttoMonatlich; // keine Abzüge
+  } else if (typ === "midijob") {
+    nettoSchaetzung = rund(bruttoMonatlich * (1 - (svAnProzent / 100) * 0.5)); // reduziert
+  } else {
+    nettoSchaetzung = rund(bruttoMonatlich * (1 - svAnProzent / 100));
+  }
 
   return {
-    vollzeit_brutto,
-    stunden_pro_woche_alt,
-    stunden_pro_woche_neu,
-    reduktion_prozent,
-    teilzeit_brutto,
-    brutto_differenz,
-    netto_monatlich_alt,
-    netto_monatlich_neu,
-    netto_differenz
+    stundenlohn,
+    wochenstunden,
+    vollzeitStundenWoche,
+    teilzeitProzent,
+    monatsStunden,
+    bruttoMonatlich,
+    typ,
+    nettoSchaetzung,
+    mindestlohnKonform,
   };
 }

@@ -1,45 +1,103 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type SteuerklassenParams, type SteuerklassenResult } from "@/lib/calculators/steuerklassen";
 import { euro } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
-import RechnerResultTable from "./ui/RechnerResultTable";
+import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
+import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
+import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function SteuerklassenRechner() {
-  const [params, setParams] = useState<SteuerklassenParams>({
-    monatsBrutto: 3500,
-    steuerklasse: 1,
-    kinder: 0
-  });
-
+  const [modus, setModus] = useState<"single" | "paar">("single");
+  const [monatsBrutto, setMonatsBrutto] = useState(3500);
+  const [monatsBruttoPartner, setMonatsBruttoPartner] = useState(2000);
   const [result, setResult] = useState<SteuerklassenResult | null>(null);
+
   const rates = useRates();
 
-  useEffect(() => {
-    setResult(berechne(params, rates));
-  }, [params, rates]);
+  const handleBerechnen = useCallback(() => {
+    setResult(berechne({ modus, monatsBrutto, monatsBruttoPartner }, rates));
+  }, [modus, monatsBrutto, monatsBruttoPartner, rates]);
+
+  const columns = [
+    { key: "beschreibung", label: "Steuerklasse", align: "left" as const },
+    { key: "netto", label: "Netto", align: "right" as const },
+    { key: "lohnsteuer", label: "Lohnsteuer", align: "right" as const },
+    { key: "soli", label: "Soli", align: "right" as const },
+  ];
 
   return (
-    
     <div className="rechner-container">
       <h3 className="rechner-title">Steuerklassen-Rechner 2026</h3>
-      
-    <div className="rechner-inputs">
-        <RechnerInput label="Monatliches Brutto" name="brutto" value={params.monatsBrutto} onChange={(val) => setParams(p => ({ ...p, monatsBrutto: Number(val) }))} einheit="€" />
-        <RechnerSelect label="Steuerklasse" name="klasse" value={params.steuerklasse.toString()} onChange={(val) => setParams(p => ({ ...p, steuerklasse: Number(val) }))} options={[{value: "1", label: "I - Ledig"}, {value: "2", label: "II - Alleinerziehend"}, {value: "3", label: "III - Verheiratet höheres Einkommen"}, {value: "4", label: "IV - Verheiratet ähnliches Einkommen"}, {value: "5", label: "V - Verheiratet (mit III)"}, {value: "6", label: "VI - Mehrfachbesteuerung"}]} />
+
+      <div className="rechner-inputs">
+        <RechnerSelect
+          label="Familienstand"
+          name="modus"
+          value={modus}
+          onChange={(v) => setModus(v as "single" | "paar")}
+          options={[
+            { label: "Einzelperson", value: "single" },
+            { label: "Ehepaar / Lebenspartnerschaft", value: "paar" },
+          ]}
+        />
+
+        <RechnerInput
+          label="Monatliches Bruttogehalt"
+          name="monatsBrutto"
+          value={monatsBrutto}
+          onChange={setMonatsBrutto}
+          einheit="€"
+          step={100}
+        />
+
+        <RechnerConditionalGroup visible={modus === "paar"}>
+          <RechnerInput
+            label="Bruttogehalt Partner/in"
+            name="monatsBruttoPartner"
+            value={monatsBruttoPartner}
+            onChange={setMonatsBruttoPartner}
+            einheit="€"
+            step={100}
+          />
+        </RechnerConditionalGroup>
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
+
       {result && (
-    <div className="rechner-results">
-          <div className="rechner-result-boxes">
-          <RechnerResultBox label="Lohnsteuer/Monat" value={euro(result.lohnsteuer_monatlich)} highlight={true} />
-          <RechnerResultBox label="Netto/Monat" value={euro(result.netto_monatlich)} highlight={false} />
-          <h4 className="rechner-result-section-title">Details</h4>
-          <RechnerResultTable rows={[{ label: "Steuerklasse", value: result.steuerklasse_beschreibung }, { label: "Effektiver Steuersatz", value: `${result.effektiver_steuersatz}%` }]} />
-        </div>
+        <div className="rechner-results">
+          {result.empfehlung && (
+            <div className="rechner-result-boxes">
+              <RechnerResultBox
+                label="Empfehlung"
+                value={result.empfehlung}
+                highlight
+                variant={result.vorteilBetrag && result.vorteilBetrag > 0 ? "positive" : "neutral"}
+              />
+            </div>
+          )}
+
+          <RechnerMultiColumnTable
+            columns={columns}
+            rows={result.vergleich.map((v) => ({
+              beschreibung: v.beschreibung,
+              netto: euro(v.netto),
+              lohnsteuer: euro(v.lohnsteuer),
+              soli: euro(v.soli),
+            }))}
+            groupSeparators={modus === "paar" ? [2] : []}
+          />
+
+          <RechnerHinweis>
+            Berechnung nach §38b EStG / §32a EStG 2026. Kirchensteuer und individueller
+            KV-Zusatzbeitrag sind hier nicht berücksichtigt.
+          </RechnerHinweis>
         </div>
       )}
     </div>

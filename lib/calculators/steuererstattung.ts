@@ -1,56 +1,109 @@
+/**
+ * Steuererstattungsrechner 2026
+ * Berechnet die voraussichtliche Steuererstattung basierend auf Abzügen.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
+import { berechneESt } from "./shared/estg32a";
+import { berechneSoli } from "./shared/soli";
 
-export interface StuerundererstattungParams {
-  jahresbrutto: number;
-  steuervorauszahlung: number;
-  steuerklasse: number;
+type RatesType = typeof RATES;
+
+export interface SteuererstattungParams {
+  jahresBrutto: number;
+  gezahlteLohnsteuer: number;
+  gezahlterSoli: number;
+  werbungskostenTatsaechlich: number;
+  homeofficeTage: number;
+  sonderausgabenTatsaechlich: number;
+  aussergewoehnlicheBelastungen: number;
+  handwerkerkosten: number; // Lohnkosten für §35a
 }
 
-export interface StuerundererstattungResult {
-  jahresbrutto: number;
-  steuervorauszahlung: number;
-  steuerklasse: number;
-  ungefaehre_jahressteuer: number;
-  steuererstattung: number;
-  hinweis: string;
+export interface SteuererstattungResult {
+  jahresBrutto: number;
+  // Abzüge
+  werbungskosten: number; // tatsächlich oder Pauschale
+  homeofficePauschale: number;
+  sonderausgaben: number;
+  aussergewoehnlicheBelastungen: number;
+  // zvE & Steuer
+  zvE: number;
+  estSoll: number;
+  soliSoll: number;
+  // Handwerkerleistungen §35a
+  handwerkerErmaessigung: number;
+  // Erstattung
+  erstattungESt: number;
+  erstattungSoli: number;
+  erstattungGesamt: number;
+  istErstattung: boolean;
 }
 
 export function berechne(
-  {
-    jahresbrutto,
-    steuervorauszahlung,
-    steuerklasse
-  }: StuerundererstattungParams,
-  rates: typeof RATES = RATES
-): StuerundererstattungResult {
-  // Vereinfachte Steuerberechnung (Steuerklasse 1) from rates.json
-  const grundfreibetrag = rates.lohnsteuer.grundfreibetrag;
-  const zvE = Math.max(0, jahresbrutto - grundfreibetrag - 1000); // 1000 € Sonderausgaben
+  params: SteuererstattungParams,
+  rates: RatesType = RATES
+): SteuererstattungResult {
+  const {
+    jahresBrutto,
+    gezahlteLohnsteuer,
+    gezahlterSoli,
+    werbungskostenTatsaechlich,
+    homeofficeTage,
+    sonderausgabenTatsaechlich,
+    aussergewoehnlicheBelastungen,
+    handwerkerkosten,
+  } = params;
 
-  // Durchschnittlicher Steuersatz bei verschiedenen Klassen
-  let steuersatz = 0.19;
-  if (steuerklasse === 3) steuersatz = 0.15; // günstiger
-  else if (steuerklasse === 5) steuersatz = 0.25; // ungünstiger
-  else if (steuerklasse === 6) steuersatz = 0.28; // sehr ungünstiger
+  const r = rates.steuererstattung;
 
-  const ungefaehre_jahressteuer = rund(zvE * steuersatz);
-  const steuererstattung = Math.max(
-    0,
-    steuervorauszahlung - ungefaehre_jahressteuer
+  // Homeoffice-Pauschale
+  const tage = Math.min(homeofficeTage, r.homeoffice_max_tage);
+  const homeofficePauschale = Math.min(tage * r.homeoffice_pauschale_je_tag, r.homeoffice_max_jahr);
+
+  // Werbungskosten: Maximum aus Pauschale und tatsächlichen Kosten
+  const wkGesamt = werbungskostenTatsaechlich + homeofficePauschale;
+  const werbungskosten = Math.max(wkGesamt, rates.lohnsteuer.arbeitnehmer_pauschbetrag);
+
+  // Sonderausgaben
+  const sonderausgaben = Math.max(sonderausgabenTatsaechlich, rates.lohnsteuer.sonderausgaben_pauschbetrag);
+
+  // zvE
+  const zvE = Math.max(0, Math.floor(jahresBrutto - werbungskosten - sonderausgaben - aussergewoehnlicheBelastungen));
+
+  // ESt
+  const estSoll = berechneESt(zvE, rates);
+  const soliSoll = berechneSoli(estSoll, false, rates);
+
+  // Handwerkerleistungen §35a: 20% der Lohnkosten, max 1.200€ Ermäßigung
+  const hwErmaessigung = Math.min(
+    rund(handwerkerkosten * r.handwerker_ermaessigung_prozent / 100),
+    r.handwerker_max_ermaessigung
   );
 
-  const hinweis =
-    steuererstattung > 100
-      ? "Steuererklärung könnte sich lohnen"
-      : "Keine oder geringfügige Erstattung";
+  // ESt nach Ermäßigung
+  const estNachErmaessigung = Math.max(0, estSoll - hwErmaessigung);
+
+  // Erstattung = Gezahlt - Soll
+  const erstattungESt = rund(gezahlteLohnsteuer - estNachErmaessigung);
+  const erstattungSoli = rund(gezahlterSoli - soliSoll);
+  const erstattungGesamt = rund(erstattungESt + erstattungSoli);
 
   return {
-    jahresbrutto,
-    steuervorauszahlung,
-    steuerklasse,
-    ungefaehre_jahressteuer,
-    steuererstattung: rund(steuererstattung),
-    hinweis
+    jahresBrutto,
+    werbungskosten,
+    homeofficePauschale,
+    sonderausgaben,
+    aussergewoehnlicheBelastungen,
+    zvE,
+    estSoll: estNachErmaessigung,
+    soliSoll,
+    handwerkerErmaessigung: hwErmaessigung,
+    erstattungESt,
+    erstattungSoli,
+    erstattungGesamt,
+    istErstattung: erstattungGesamt > 0,
   };
 }

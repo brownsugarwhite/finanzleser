@@ -1,92 +1,101 @@
+/**
+ * Buergergeld-Rechner 2026
+ * Regelbedarfe nach Haushalt-/Kindertyp, Freibetraege auf Erwerbseinkommen.
+ * Alle Werte aus RATES.
+ */
+
 import { RATES } from "./rates";
 import { rund } from "./utils";
 
-export interface BuergergeldelParams {
-  haushaltstyp: "allein" | "paar" | "allein_elternteil" | "paar_eltern";
-  kinder: {
-    k0_5?: number;
-    k6_13?: number;
-    k14_17?: number;
-  };
-  warmmiete: number;
-  anrechenbares_einkommen?: number;
+type RatesType = typeof RATES;
+
+/* ── Params & Result ─────────────────────────────────── */
+
+export type HaushaltTyp =
+  | "alleinstehend"
+  | "paar"
+  | "alleinerziehend_kinder"
+  | "paar_kinder";
+
+export interface BuergergeldParams {
+  haushaltTyp: HaushaltTyp;
+  anzahlKinder06: number;   // 0-5
+  anzahlKinder713: number;  // 0-5
+  anzahlKinder1417: number; // 0-5
+  eigenesEinkommen: number; // Bruttoerwerbseinkommen
 }
 
-export interface BuergergeldelResult {
+export interface BuergergeldResult {
   regelbedarf: number;
   kinderBedarf: number;
-  warmmiete: number;
   gesamtBedarf: number;
-  einkommenBrutto: number;
-  einkommenFreibetrag: number;
-  einkommenAnrechenbar: number;
-  buergergeld: number;
+  freibetrag: number;
+  anrechenbaresEinkommen: number;
+  buergergeldAnspruch: number;
 }
 
+/* ── Berechnung ──────────────────────────────────────── */
+
 export function berechne(
-  {
-    haushaltstyp,
-    kinder,
-    warmmiete,
-    anrechenbares_einkommen = 0
-  }: BuergergeldelParams,
-  rates: typeof RATES = RATES
-): BuergergeldelResult {
-  const regelbedarfe = {
-    stufe1: rates.buergergeld.regelbedarfe_2026.stufe1_alleinstehende, // Alleinstehende / Alleinerziehende
-    stufe2: rates.buergergeld.regelbedarfe_2026.stufe2_paare_je_partner, // Paare je Partner
-    stufe4: rates.buergergeld.regelbedarfe_2026.stufe4_jugendliche_14_17, // Jugendliche 14–17 Jahre
-    stufe5: rates.buergergeld.regelbedarfe_2026.stufe5_kinder_6_13, // Kinder 6–13 Jahre
-    stufe6: rates.buergergeld.regelbedarfe_2026.stufe6_kinder_0_5  // Kinder 0–5 Jahre
-  };
+  { haushaltTyp, anzahlKinder06, anzahlKinder713, anzahlKinder1417, eigenesEinkommen }: BuergergeldParams,
+  rates: RatesType = RATES,
+): BuergergeldResult {
+  const rb = rates.buergergeld.regelbedarfe_2026;
+  const fb = rates.buergergeld.freibetraege;
 
-  let bedarf = 0;
-
-  if (haushaltstyp === "allein") {
-    bedarf = regelbedarfe.stufe1;
-  } else if (haushaltstyp === "paar") {
-    bedarf = regelbedarfe.stufe2 * 2;
-  } else if (haushaltstyp === "allein_elternteil") {
-    bedarf = regelbedarfe.stufe1;
-  } else if (haushaltstyp === "paar_eltern") {
-    bedarf = regelbedarfe.stufe2 * 2;
+  // 1. Regelbedarf Erwachsene
+  let regelbedarf: number;
+  switch (haushaltTyp) {
+    case "alleinstehend":
+    case "alleinerziehend_kinder":
+      regelbedarf = rb.stufe1_alleinstehende;
+      break;
+    case "paar":
+    case "paar_kinder":
+      regelbedarf = rb.stufe2_paare_je_partner * 2;
+      break;
   }
 
-  let kinderBedarf = 0;
-  kinderBedarf += (kinder.k0_5 || 0) * regelbedarfe.stufe6;
-  kinderBedarf += (kinder.k6_13 || 0) * regelbedarfe.stufe5;
-  kinderBedarf += (kinder.k14_17 || 0) * regelbedarfe.stufe4;
-  const gesamtBedarf = bedarf + kinderBedarf + warmmiete;
+  // 2. Kinderbedarf
+  const kinderBedarf =
+    anzahlKinder06 * rb.stufe6_kinder_0_5 +
+    anzahlKinder713 * rb.stufe5_kinder_6_13 +
+    anzahlKinder1417 * rb.stufe4_jugendliche_14_17;
 
-  // Freibetrag auf Erwerbseinkommen
-  const grundfreibetrag = rates.buergergeld.freibetraege.grundfreibetrag;
-  const freibetrag_prozent_100_1000 = rates.buergergeld.freibetraege.freibetrag_prozent_100_1000 / 100;
-  const freibetrag_prozent_1000_1200 = rates.buergergeld.freibetraege.freibetrag_prozent_1000_1200 / 100;
+  const gesamtBedarf = regelbedarf + kinderBedarf;
 
-  let einkommenFreibetrag = 0;
-  if (anrechenbares_einkommen > grundfreibetrag) {
-    einkommenFreibetrag += Math.min(anrechenbares_einkommen - grundfreibetrag, 900) * freibetrag_prozent_100_1000;
+  // 3. Freibeträge auf Erwerbseinkommen (§ 11b SGB II)
+  //    Grundfreibetrag 100 €
+  //    100-1.000 €: 20 % Freibetrag
+  //    1.000-1.200 €: 10 % Freibetrag
+  let freibetrag = 0;
+  if (eigenesEinkommen > 0) {
+    // Grundfreibetrag
+    freibetrag += Math.min(eigenesEinkommen, fb.grundfreibetrag);
+
+    // 20% auf 100-1.000 €
+    if (eigenesEinkommen > fb.grundfreibetrag) {
+      const anteil20 = Math.min(eigenesEinkommen - fb.grundfreibetrag, 1000 - fb.grundfreibetrag);
+      freibetrag += anteil20 * (fb.freibetrag_prozent_100_1000 / 100);
+    }
+
+    // 10% auf 1.000-1.200 €
+    if (eigenesEinkommen > 1000) {
+      const anteil10 = Math.min(eigenesEinkommen - 1000, 200);
+      freibetrag += anteil10 * (fb.freibetrag_prozent_1000_1200 / 100);
+    }
   }
-  if (anrechenbares_einkommen > 1000) {
-    einkommenFreibetrag += Math.min(anrechenbares_einkommen - 1000, 200) * freibetrag_prozent_1000_1200;
-  }
-  const einkommenAnrechenbar = Math.max(
-    0,
-    anrechenbares_einkommen - grundfreibetrag - einkommenFreibetrag
-  );
+  freibetrag = rund(freibetrag);
 
-  const buergergeld = Math.max(0, gesamtBedarf - einkommenAnrechenbar);
+  const anrechenbaresEinkommen = rund(Math.max(0, eigenesEinkommen - freibetrag));
+  const buergergeldAnspruch = rund(Math.max(0, gesamtBedarf - anrechenbaresEinkommen));
 
   return {
-    regelbedarf: bedarf,
+    regelbedarf,
     kinderBedarf,
-    warmmiete,
     gesamtBedarf,
-    einkommenBrutto: anrechenbares_einkommen,
-    einkommenFreibetrag: rund(
-      einkommenFreibetrag + Math.min(anrechenbares_einkommen, grundfreibetrag)
-    ),
-    einkommenAnrechenbar: rund(einkommenAnrechenbar),
-    buergergeld: rund(buergergeld)
+    freibetrag,
+    anrechenbaresEinkommen,
+    buergergeldAnspruch,
   };
 }

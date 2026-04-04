@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
 import { berechne, type MehrwertsteuerParams, type MehrwertsteuerResult } from "@/lib/calculators/mehrwertsteuer";
 import { euro } from "@/lib/calculators/utils";
@@ -9,19 +9,19 @@ import RechnerSelect from "./ui/RechnerSelect";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function MehrwertsteuerRechner() {
   const [params, setParams] = useState<MehrwertsteuerParams>({
     betrag: 100,
-    richtung: "netto-brutto",
-    steuersatz: 19,
+    richtung: "netto",
+    steuersatz: "regelsteuersatz",
   });
-
   const [result, setResult] = useState<MehrwertsteuerResult | null>(null);
 
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
@@ -30,60 +30,57 @@ export default function MehrwertsteuerRechner() {
       <h3 className="rechner-title">Mehrwertsteuer-Rechner</h3>
 
       <div className="rechner-inputs">
+        <RechnerInput
+          label="Betrag"
+          name="betrag"
+          value={params.betrag}
+          onChange={(v) => setParams((p) => ({ ...p, betrag: v }))}
+          einheit="€"
+          step={1}
+        />
+
         <RechnerSelect
-          label="Berechnung"
+          label="Eingabe ist"
           name="richtung"
           value={params.richtung}
-          onChange={(val) =>
-            setParams((prev) => ({ ...prev, richtung: val as "brutto-netto" | "netto-brutto" }))
-          }
+          onChange={(v) => setParams((p) => ({ ...p, richtung: v as "netto" | "brutto" }))}
           options={[
-            { label: "Netto → Brutto", value: "netto-brutto" },
-            { label: "Brutto → Netto", value: "brutto-netto" },
+            { label: "Nettobetrag", value: "netto" },
+            { label: "Bruttobetrag", value: "brutto" },
           ]}
         />
 
         <RechnerSelect
           label="Steuersatz"
           name="steuersatz"
-          value={params.steuersatz.toString()}
-          onChange={(val) => setParams((prev) => ({ ...prev, steuersatz: parseInt(val) as 19 | 7 }))}
+          value={params.steuersatz}
+          onChange={(v) => setParams((p) => ({ ...p, steuersatz: v as "regelsteuersatz" | "ermaessigt" }))}
           options={[
-            { label: "Regelsteuersatz (19%)", value: "19" },
-            { label: "Ermäßigter Steuersatz (7%)", value: "7" },
+            { label: `${rates.mehrwertsteuer.regelsteuersatz_prozent} % (Regelsteuersatz)`, value: "regelsteuersatz" },
+            { label: `${rates.mehrwertsteuer.ermaessigter_steuersatz_prozent} % (Ermäßigt)`, value: "ermaessigt" },
           ]}
         />
-
-        <RechnerInput
-          label={params.richtung === "netto-brutto" ? "Nettobetrag" : "Bruttobetrag"}
-          name="betrag"
-          value={params.betrag}
-          onChange={(val) => setParams((prev) => ({ ...prev, betrag: val }))}
-          einheit="€"
-          step={10}
-          min={0}
-        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox label="Netto" value={euro(result.netto)} />
-            <RechnerResultBox label="MwSt" value={euro(result.mehrwertsteuer)} />
-            <RechnerResultBox label="Brutto" value={euro(result.brutto)} highlight={true} />
+            <RechnerResultBox label="Bruttobetrag" value={euro(result.brutto)} highlight />
           </div>
 
           <RechnerResultTable
             rows={[
               { label: "Nettobetrag", value: euro(result.netto) },
-              { label: `Mehrwertsteuer (${result.steuersatz}%)`, value: euro(result.mehrwertsteuer) },
+              { label: `Mehrwertsteuer (${result.steuersatzProzent} %)`, value: euro(result.mwst) },
               { label: "Bruttobetrag", value: euro(result.brutto) },
             ]}
           />
 
           <RechnerHinweis>
-            Regelsteuersatz 19% für die meisten Waren und Dienstleistungen. Ermäßigter Satz 7%
-            für Lebensmittel, Bücher und weitere Kategorien.
+            Regelsteuersatz {rates.mehrwertsteuer.regelsteuersatz_prozent} % (unverändert seit 2007).
+            Ermäßigter Satz {rates.mehrwertsteuer.ermaessigter_steuersatz_prozent} % für Lebensmittel, Bücher, Zeitungen u.a.
           </RechnerHinweis>
         </div>
       )}

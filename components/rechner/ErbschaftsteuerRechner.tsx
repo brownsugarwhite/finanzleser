@@ -1,39 +1,45 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRates } from "@/lib/hooks/useRates";
-import { berechne, type ErbschaftsteuerParams, type ErbschaftsteuerResult } from "@/lib/calculators/erbschaftsteuer";
-import { euro } from "@/lib/calculators/utils";
+import { berechne, type ErbschaftsteuerParams, type ErbschaftsteuerResult, type Verwandtschaft } from "@/lib/calculators/erbschaftsteuer";
+import { euro, prozent } from "@/lib/calculators/utils";
 import RechnerInput from "./ui/RechnerInput";
 import RechnerSelect from "./ui/RechnerSelect";
+import RechnerCheckbox from "./ui/RechnerCheckbox";
 import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
+import RechnerButton from "./ui/RechnerButton";
 
 export default function ErbschaftsteuerRechner() {
   const [params, setParams] = useState<ErbschaftsteuerParams>({
-    erbschaft: 100000,
-    verwandtschaftsgrad: 1,
+    erbschaftswert: 300000,
+    verwandtschaft: "kind",
+    alterKind: 10,
+    istErbschaft: true,
+    bereitsEmpfangen: 0,
   });
 
   const [result, setResult] = useState<ErbschaftsteuerResult | null>(null);
-
   const rates = useRates();
 
-  useEffect(() => {
+  const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
   }, [params, rates]);
 
+  const showAlterKind = params.verwandtschaft === "kind";
+
   return (
     <div className="rechner-container">
-      <h3 className="rechner-title">Erbschaftsteuer-Rechner</h3>
+      <h3 className="rechner-title">Erbschaftsteuerrechner</h3>
 
       <div className="rechner-inputs">
         <RechnerInput
-          label="Erbsumme"
-          name="erbschaft"
-          value={params.erbschaft}
-          onChange={(val) => setParams((prev) => ({ ...prev, erbschaft: val }))}
+          label="Erbschaftswert"
+          name="erbschaftswert"
+          value={params.erbschaftswert}
+          onChange={(val) => setParams((prev) => ({ ...prev, erbschaftswert: val }))}
           einheit="€"
           step={10000}
           min={0}
@@ -41,40 +47,81 @@ export default function ErbschaftsteuerRechner() {
 
         <RechnerSelect
           label="Verwandtschaftsverhältnis"
-          name="verwandtschaftsgrad"
-          value={params.verwandtschaftsgrad.toString()}
-          onChange={(val) => setParams((prev) => ({ ...prev, verwandtschaftsgrad: parseInt(val) }))}
+          name="verwandtschaft"
+          value={params.verwandtschaft}
+          onChange={(val) => setParams((prev) => ({ ...prev, verwandtschaft: val as Verwandtschaft }))}
           options={[
-            { label: "Kind", value: "1" },
-            { label: "Enkel", value: "2" },
-            { label: "Großeltern", value: "3" },
-            { label: "Geschwister", value: "4" },
-            { label: "Sonstige", value: "5" },
+            { label: "Ehegatte / Lebenspartner", value: "ehegatte" },
+            { label: "Kind / Stiefkind", value: "kind" },
+            { label: "Enkel", value: "enkel" },
+            { label: "Geschwister", value: "geschwister" },
+            { label: "Sonstige Personen", value: "sonstige" },
           ]}
         />
+
+        {showAlterKind && (
+          <RechnerInput
+            label="Alter des Kindes"
+            name="alterKind"
+            value={params.alterKind}
+            onChange={(val) => setParams((prev) => ({ ...prev, alterKind: val }))}
+            einheit="Jahre"
+            step={1}
+            min={0}
+            max={27}
+          />
+        )}
+
+        <RechnerCheckbox
+          label="Erbschaft (nicht Schenkung)"
+          name="istErbschaft"
+          checked={params.istErbschaft}
+          onChange={(val) => setParams((prev) => ({ ...prev, istErbschaft: val }))}
+        />
+
+        <RechnerInput
+          label="Bereits empfangene Schenkungen (10 Jahre)"
+          name="bereitsEmpfangen"
+          value={params.bereitsEmpfangen}
+          onChange={(val) => setParams((prev) => ({ ...prev, bereitsEmpfangen: val }))}
+          einheit="€"
+          step={10000}
+          min={0}
+          tooltip="Schenkungen der letzten 10 Jahre reduzieren den verfügbaren Freibetrag"
+        />
       </div>
+
+      <RechnerButton onClick={handleBerechnen} />
 
       {result && (
         <div className="rechner-results">
           <div className="rechner-result-boxes">
-            <RechnerResultBox label="Erbschaftsteuer" value={euro(result.erbschaftsteuer)} highlight={true} />
-            <RechnerResultBox label="Netto-Erbschaft" value={euro(result.nettoErbschaft)} />
+            <RechnerResultBox label="Erbschaftsteuer" value={euro(result.erbschaftsteuer)} highlight />
+            <RechnerResultBox label="Nettowert" value={euro(result.nettowert)} variant="positive" />
+            <RechnerResultBox label="Effektiver Steuersatz" value={prozent(result.effektiverSatzProzent)} />
           </div>
 
           <RechnerResultTable
             rows={[
-              { label: "Erbsumme", value: euro(result.erbschaft) },
-              { label: "Freibetrag", value: euro(result.freibetrag) },
-              { label: "Steuerpflichtiger Betrag", value: euro(result.steuerpflichtiger_betrag) },
-              { label: "Steuersatz", value: `${(result.steuersatz * 100).toFixed(0)}%` },
+              { label: "Verwandtschaft", value: result.verwandtschaftText },
+              { label: "Steuerklasse", value: String(result.steuerklasse) },
+              { label: "Erbschaftswert", value: euro(params.erbschaftswert) },
+              { label: "Persönlicher Freibetrag", value: euro(result.persoenlichFreibetrag) },
+              { label: "Versorgungsfreibetrag", value: euro(result.versorgungsfreibetrag) },
+              { label: "Gesamtfreibetrag", value: euro(result.gesamtFreibetrag) },
+              { label: "Verfügbarer Freibetrag", value: euro(result.verfuegbarerFreibetrag) },
+              { label: "Steuerpflichtiger Erwerb", value: euro(result.steuerpflichtigerErwerb) },
+              { label: "Steuersatz", value: prozent(result.steuersatzProzent) },
               { label: "Erbschaftsteuer", value: euro(result.erbschaftsteuer) },
-              { label: "Netto-Erbschaft", value: euro(result.nettoErbschaft) },
+              { label: "Nettowert", value: euro(result.nettowert) },
+              { label: "Effektiver Steuersatz", value: prozent(result.effektiverSatzProzent) },
             ]}
           />
 
           <RechnerHinweis>
-            Dies ist eine vereinfachte Berechnung. Die tatsächliche Erbschaftsteuer kann durch
-            weitere Faktoren und Freibeträge abweichen. Konsultieren Sie einen Steuerberater.
+            Die Erbschaftsteuer verwendet einen Stufentarif (nicht progressiv). Der Steuersatz
+            gilt auf den gesamten steuerpflichtigen Erwerb. Der Versorgungsfreibetrag gilt nur
+            bei Erbschaften, nicht bei Schenkungen. Konsultieren Sie einen Steuerberater.
           </RechnerHinweis>
         </div>
       )}
