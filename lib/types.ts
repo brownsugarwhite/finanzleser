@@ -122,6 +122,7 @@ export interface ChecklisteACF {
   checklisteBeschreibung?: string;
   checklistePunkte?: ChecklistePunkt[];
   checklistePdfGenerierung?: boolean;
+  checklistePdf?: { mediaItemUrl: string };
 }
 
 export interface Checkliste {
@@ -129,6 +130,10 @@ export interface Checkliste {
   title: string;
   slug: string;
   checklisteFelder?: ChecklisteACF;
+  checklisten?: {
+    checklistenBeschreibung?: string;
+    checklistePdf?: { node: { mediaItemUrl: string } };
+  };
 }
 
 // ─────────────────────────────────────────────

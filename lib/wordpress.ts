@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, PostACF, SEO, RechnerConfigOverrides } from "./types";
+import type { Post, Rechner, Checkliste, PostACF, SEO, RechnerConfigOverrides } from "./types";
 import { decodePostContent } from "./html-utils";
 
 function getClient(): GraphQLClient {
@@ -709,6 +709,68 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
     return data.rechnerBy;
   } catch (error) {
     console.error(`Error fetching Rechner with slug "${slug}":`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Alle Checklisten
+// ─────────────────────────────────────────────
+
+export async function getAllChecklisten(): Promise<Checkliste[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetChecklisten {
+      checklisten(first: 200) {
+        nodes {
+          id
+          title
+          slug
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ checklisten: { nodes: Checkliste[] } }>(query);
+    return data.checklisten.nodes;
+  } catch (error) {
+    console.error("Error fetching all Checklisten:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
+// Einzelne Checkliste nach Slug
+// ─────────────────────────────────────────────
+
+export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
+  const client = getClient();
+
+  const query = gql`
+    query GetChecklisteBySlug($slug: String!) {
+      checklisteBy(slug: $slug) {
+        id
+        title
+        slug
+        checklisten {
+          checklistenBeschreibung
+          checklistePdf {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ checklisteBy: Checkliste }>(query, { slug });
+    return data.checklisteBy;
+  } catch (error) {
+    console.error(`Error fetching Checkliste with slug "${slug}":`, error);
     return null;
   }
 }
