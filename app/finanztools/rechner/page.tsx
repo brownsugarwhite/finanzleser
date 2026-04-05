@@ -39,7 +39,7 @@ export default async function RechnerPage() {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           <Breadcrumb items={breadcrumbItems} />
 
           <h1 className="text-4xl font-bold mb-6 mt-4">Finanzrechner</h1>

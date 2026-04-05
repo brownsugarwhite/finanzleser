@@ -19,7 +19,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
   }
 
   return (
-    <nav className="mb-6" style={{ fontSize: "14px", color: "var(--color-text-medium)" }}>
+    <nav className="mb-3" style={{ fontSize: "14px", color: "var(--color-text-medium)" }}>
       <ul style={{ display: "flex", alignItems: "center", gap: "8px", listStyle: "none", padding: 0, margin: 0 }}>
         {breadcrumbs.map((item, index) => (
           <li key={item.href} style={{ display: "flex", alignItems: "center", gap: "8px" }}>

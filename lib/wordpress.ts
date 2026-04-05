@@ -731,6 +731,9 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
           id
           title
           slug
+          checklisten {
+            checklistenBeschreibung
+          }
         }
       }
     }

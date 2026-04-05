@@ -135,7 +135,7 @@ export default async function RechnerDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 

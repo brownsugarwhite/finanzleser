@@ -89,17 +89,18 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 
           {/* Kategorie */}
           <Link
             href="/finanztools/checklisten"
-            className="inline-block mt-4 text-sm font-medium"
+            className="inline-block mt-4 font-medium"
             style={{
               color: "var(--color-tool-checklisten)",
-              fontFamily: "var(--font-heading)",
+              fontFamily: "Merriweather, serif",
+              fontSize: "23px",
               fontStyle: "italic",
             }}
           >

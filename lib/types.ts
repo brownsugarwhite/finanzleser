@@ -130,6 +130,7 @@ export interface Checkliste {
   id: string;
   title: string;
   slug: string;
+  excerpt?: string;
   checklisteFelder?: ChecklisteACF;
   checklisten?: {
     checklistenBeschreibung?: string;

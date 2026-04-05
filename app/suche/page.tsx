@@ -21,7 +21,7 @@ export default async function SearchPage(props: SearchPageProps) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           <Breadcrumb items={[{ label: "Suche", href: "/suche" }]} />
           {/* Search Hero */}
           <div className="mb-12">
