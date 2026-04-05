@@ -4,6 +4,7 @@ import ArticleLayout from "@/components/layout/ArticleLayout";
 import ArticleSidebar from "@/components/layout/ArticleSidebar";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import type { Category } from "@/lib/types";
+import ArticleContent from "@/components/sections/ArticleContent";
 
 export default async function BeitragPage(props: {
   params: Promise<{ kategorie: string; sub: string; slug: string }>;
@@ -64,7 +65,7 @@ export default async function BeitragPage(props: {
     >
       <div className="prose prose-lg max-w-none">
         {post.content && post.content.trim() ? (
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <ArticleContent content={post.content} />
         ) : (
           <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
             <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
