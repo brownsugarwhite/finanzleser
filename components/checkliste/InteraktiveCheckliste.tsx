@@ -194,6 +194,10 @@ export default function InteraktiveCheckliste({
           </button>
         )}
       </div>
+
+      <p style={{ fontSize: 12, color: "var(--color-text-medium)", marginTop: 24 }}>
+        Hinweis: Diese Checkliste ersetzt keine professionelle Beratung. Für komplexe Fragen empfehlen wir die Unterstützung durch einen Fachmann.
+      </p>
     </div>
   );
 }

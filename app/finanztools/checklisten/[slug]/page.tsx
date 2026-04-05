@@ -184,12 +184,6 @@ export default async function ChecklisteDetailPage({ params }: Props) {
             </div>
           )}
 
-          {/* Disclaimer */}
-          <p className="mt-12 text-xs text-gray-400">
-            Hinweis: Diese Checkliste ersetzt keine professionelle Beratung. Für
-            komplexe Fragen empfehlen wir die Unterstützung durch einen
-            Fachmann.
-          </p>
         </div>
       </main>
       <Footer />

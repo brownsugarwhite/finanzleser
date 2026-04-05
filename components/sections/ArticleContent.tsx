@@ -76,7 +76,7 @@ export default function ArticleContent({ content }: Props) {
         }
         if (part.type === "checkliste") {
           return (
-            <div key={i} style={{ margin: "40px 0" }}>
+            <div key={i} className="checkliste-article-wrap">
               <ChecklisteInline slug={part.value} />
             </div>
           );

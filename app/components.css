@@ -503,16 +503,19 @@ a.megamenu-link:hover {
 .checkliste-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: calc(100% - 350px - 48px);
+  width: 100%;
   flex: 1;
+  
+}
+.checkliste-2col .checkliste-container {
+  width: calc(100% - 350px - 48px);
 }
 
 /* Progress – ersetzt den lila Streifen unter dem Titel */
 .checkliste-progress {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 4px;  
 }
 .checkliste-progress-info {
   display: flex;
@@ -539,6 +542,7 @@ a.megamenu-link:hover {
 .checkliste-viewport {
   overflow: hidden;
   transition: height 0.3s ease;
+  margin-top: 17px;
 }
 .checkliste-slides {
   display: flex;
@@ -550,16 +554,13 @@ a.megamenu-link:hover {
   flex: 0 0 100%;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 0 4px;
+  flex-direction: column;  
 }
 .checkliste-slide-titel {
   font-size: 18px;
   font-weight: 600;
   color: var(--color-text-primary);
-  padding-bottom: 8px;
-  margin: 0;
+  
 }
 
 /* Einzelner Punkt */
@@ -571,7 +572,7 @@ a.megamenu-link:hover {
 .checkliste-punkt + .checkliste-punkt::before {
   content: "";
   position: absolute;
-  top: -7px;
+  top: -8px;
   left: 16px;
   right: 16px;
   height: 1px;
@@ -693,7 +694,7 @@ a.megamenu-link:hover {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding-top: 16px;
+  padding-top: 5px;
 }
 .checkliste-nav-arrow-btn {
   display: flex;
@@ -790,6 +791,11 @@ a.megamenu-link:hover {
 }
 .checkliste-btn--print:hover {
   opacity: 0.9;
+}
+
+/* Checkliste/Rechner im Beitragstext – volle prose-Breite */
+.checkliste-article-wrap {
+  margin: 40px 0;
 }
 
 /* Ausgefüllte PDFs werden via pdf-lib generiert (kein Print-CSS nötig) */

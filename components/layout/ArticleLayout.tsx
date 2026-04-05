@@ -34,7 +34,7 @@ export default function ArticleLayout({ children, title, excerpt, featuredImage,
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="pb-12" style={{ paddingTop: 23 }}>
+        <div className="pb-12" style={{ paddingTop: 0 }}>
           <div className="flex">
             {/* Sidebar Left (TOC + DotLine) */}
             {sidebar}
