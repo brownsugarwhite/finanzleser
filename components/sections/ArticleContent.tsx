@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), {
@@ -9,6 +10,33 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 const ChecklisteInline = dynamic(() => import("@/components/checkliste/ChecklisteInline"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
 });
+
+const TOOL_CONFIG = {
+  rechner: { label: "Rechner", color: "var(--color-tool-rechner)", endpoint: "/finanzleser/v1/rechner" },
+  checkliste: { label: "Checkliste", color: "var(--color-tool-checklisten)", endpoint: "/finanzleser/v1/checklisten" },
+  vergleich: { label: "Vergleich", color: "var(--color-tool-vergleiche)", endpoint: "" },
+} as const;
+
+function ToolLabel({ type, slug }: { type: keyof typeof TOOL_CONFIG; slug: string }) {
+  const config = TOOL_CONFIG[type];
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    fetch(`/api/tool-title/${type}/${slug}`)
+      .then((res) => res.json())
+      .then((data) => { if (data.title) setTitle(data.title); })
+      .catch(() => {});
+  }, [type, slug]);
+
+  return (
+    <div className="article-tool-label">
+      <span className="article-tool-badge" style={{ background: config.color }}>
+        {config.label}
+      </span>
+      {title && <span className="article-tool-title">{title}</span>}
+    </div>
+  );
+}
 
 interface Props {
   content: string;
@@ -69,7 +97,8 @@ export default function ArticleContent({ content }: Props) {
         }
         if (part.type === "rechner") {
           return (
-            <div key={i} style={{ margin: "40px 0" }}>
+            <div key={i} style={{ margin: "40px 0" }} className="article-tool-embed">
+              <ToolLabel type="rechner" slug={part.value} />
               <RechnerEmbed slug={part.value} />
             </div>
           );
@@ -77,6 +106,7 @@ export default function ArticleContent({ content }: Props) {
         if (part.type === "checkliste") {
           return (
             <div key={i} className="checkliste-article-wrap">
+              <ToolLabel type="checkliste" slug={part.value} />
               <ChecklisteInline slug={part.value} />
             </div>
           );

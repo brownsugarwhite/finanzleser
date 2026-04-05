@@ -168,7 +168,7 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
 
   return (
     <div className="mb-12">
-      <p style={{ fontSize: "24px", fontWeight: 600, fontFamily: "var(--font-heading, 'Merriweather', serif)", marginBottom: "23px", color: "var(--color-text-primary)", margin: "0 0 36px 0" }}>
+      <p style={{ fontSize: "27px", fontWeight: 600, fontFamily: "var(--font-heading, 'Merriweather', serif)", marginBottom: "23px", color: "var(--color-text-primary)", margin: "0 0 36px 0" }}>
         Inhaltsverzeichnis
       </p>
 

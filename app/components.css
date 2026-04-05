@@ -85,7 +85,7 @@ h6 {
 }
 
 .prose h2 {
-  font-size: 24px !important;
+  font-size: 27px !important;
   font-weight: 600 !important;
   line-height: 1.35em !important;
   margin-top: 2em !important;
@@ -109,6 +109,60 @@ h6 {
 
 .prose li {
   margin-bottom: 0.5em !important;
+}
+
+/* Tabellen im Artikel – SubBanner-Style Header */
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2em 0;
+  table-layout: auto;
+  padding-top: 10px;
+  position: relative;
+}
+.prose table::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-text-medium);
+}
+.prose table::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-text-medium);
+}
+.prose thead th {
+  color: white;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 2px 16px;
+  text-align: left;
+  white-space: nowrap;
+  background: var(--color-text-medium);
+}
+.prose tbody td {
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-default, #e2e8f0);
+}
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+.prose th:last-child,
+.prose td:last-child {
+  width: 1%;
+  white-space: nowrap;
 }
 
 /* Glassmorphism Utilities */
@@ -796,6 +850,35 @@ a.megamenu-link:hover {
 /* Checkliste/Rechner im Beitragstext – volle prose-Breite */
 .checkliste-article-wrap {
   margin: 40px 0;
+}
+
+/* Rechner-Titel im Artikel ausblenden (Label übernimmt) */
+.article-tool-embed .rechner-title {
+  display: none;
+}
+
+/* Tool Label über Rechner/Checkliste im Artikel */
+.article-tool-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+.article-tool-badge {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 25px;
+  line-height: 1em;
+  font-weight: 600;
+  color: white;
+  padding: 7px 10px; 
+  white-space: nowrap;
+}
+.article-tool-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.35em;
+  color: var(--color-text-primary);
 }
 
 /* Ausgefüllte PDFs werden via pdf-lib generiert (kein Print-CSS nötig) */
