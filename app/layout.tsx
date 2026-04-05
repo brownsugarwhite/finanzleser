@@ -66,7 +66,7 @@ export default async function RootLayout({
           <div className="scalable-content" style={{ position: "relative" }}>
             {children}
           </div>
-          <ProgressiveBlur height={150} />
+          <ProgressiveBlur height={130} />
         </NavProvider>
         </Providers>
       </body>

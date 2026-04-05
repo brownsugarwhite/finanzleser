@@ -186,7 +186,6 @@ h6 {
   padding: 8px 16px;
   font-size: 0.9rem;
   width: 100%;
-  max-width: 320px;
   background: var(--color-bg-surface);
   color: var(--color-text-primary);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -765,6 +764,7 @@ a.megamenu-link:hover {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 24px;
 }
 .checkliste-btn {
   padding: 10px 20px;
