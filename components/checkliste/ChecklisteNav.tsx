@@ -10,7 +10,7 @@ interface Props {
 
 function ArrowLeft() {
   return (
-    <svg width="64" height="15" viewBox="0 0 64 15" fill="none" className="checkliste-nav-arrow">
+    <svg width="40" height="10" viewBox="0 0 64 15" fill="none" className="checkliste-nav-arrow">
       <path d="M0 15H64V0L0 15Z" fill="var(--color-text-primary)" />
     </svg>
   );
@@ -18,7 +18,7 @@ function ArrowLeft() {
 
 function ArrowRight() {
   return (
-    <svg width="64" height="15" viewBox="0 0 64 15" fill="none" className="checkliste-nav-arrow">
+    <svg width="40" height="10" viewBox="0 0 64 15" fill="none" className="checkliste-nav-arrow">
       <path d="M64 15H0V0L64 15Z" fill="var(--color-text-primary)" />
     </svg>
   );
