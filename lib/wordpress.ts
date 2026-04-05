@@ -673,6 +673,10 @@ export async function getAllRechner(): Promise<Rechner[]> {
           id
           title
           slug
+          rechnerFelder {
+            rechnerTyp
+            beschreibung
+          }
         }
       }
     }

@@ -61,9 +61,10 @@ export interface Post {
 export type RechnerTyp = "steuer" | "soziales" | "rente" | "kredit" | "brutto_netto" | "festgeld" | "tagesgeld";
 
 export interface RechnerACF {
-  rechnerTyp: RechnerTyp;
+  rechnerTyp: RechnerTyp | RechnerTyp[];
   rechnerBeschreibung?: string;
-  rechnerKonfiguration?: string; // JSON-String mit Berechnungslogik und Parametern
+  beschreibung?: string; // GraphQL-Feldname aus ACF
+  rechnerKonfiguration?: string;
   rechnerIcon?: { sourceUrl: string };
   rechnerKategorie?: { name: string; slug: string };
 }
