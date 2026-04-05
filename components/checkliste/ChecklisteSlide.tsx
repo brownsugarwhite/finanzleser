@@ -18,7 +18,6 @@ export default function ChecklisteSlide({
 }: Props) {
   return (
     <div className="checkliste-slide">
-      <h3 className="checkliste-slide-titel">{sektion.titel}</h3>
       <div className="checkliste-slide-punkte">
         {sektion.punkte.map((punkt, punktIndex) => {
           const key = `${sektionIndex}-${punktIndex}`;

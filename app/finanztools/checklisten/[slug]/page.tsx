@@ -96,12 +96,14 @@ export default async function ChecklisteDetailPage({ params }: Props) {
           {/* Kategorie */}
           <Link
             href="/finanztools/checklisten"
-            className="inline-block mt-4 font-medium"
             style={{
+              display: "inline-block",
+              marginBottom: 8,
               color: "var(--color-tool-checklisten)",
               fontFamily: "Merriweather, serif",
               fontSize: "23px",
               fontStyle: "italic",
+              transition: "opacity 0.2s",
             }}
           >
             Checklisten
@@ -109,11 +111,11 @@ export default async function ChecklisteDetailPage({ params }: Props) {
 
           {/* Titel */}
           <h1
-            className="mt-2 mb-4 font-bold"
             style={{
-              fontSize: "clamp(28px, 4vw, 42px)",
-              fontFamily: "var(--font-heading)",
-              color: "var(--color-text-primary)",
+              fontSize: "42px",
+              lineHeight: "1.3em",
+              fontWeight: 700,
+              marginBottom: 16,
             }}
           >
             {checkliste.title}
@@ -126,7 +128,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
               style={{
                 fontSize: "18px",
                 fontFamily: "var(--font-heading)",
-                color: "var(--color-text-medium)",
+                color: "var(--color-text-primary)",
                 lineHeight: 1.6,
               }}
             >
@@ -134,9 +136,33 @@ export default async function ChecklisteDetailPage({ params }: Props) {
             </p>
           )}
 
-          {/* Interaktive Checkliste */}
+          {/* 2-Column: Visual links + Slider rechts */}
           {parsedData && parsedData.sektionen.length > 0 ? (
-            <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
+            <div className="checkliste-2col">
+              {/* Links: Visual Platzhalter */}
+              <div className="checkliste-visual">
+                <div style={{
+                  width: "100%",
+                  aspectRatio: "3 / 4",
+                  background: "var(--color-bg-subtle)",
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--color-text-medium)",
+                  fontSize: 14,
+                  position: "sticky",
+                  top: 100,
+                }}>
+                  Visual
+                </div>
+              </div>
+
+              {/* Rechts: Slider */}
+              <div>
+                <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
+              </div>
+            </div>
           ) : (
             <div className="py-8 text-center text-gray-500">
               <p>

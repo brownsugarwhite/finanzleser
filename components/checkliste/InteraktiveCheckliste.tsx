@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { ChecklisteData } from "./types";
 import ChecklisteSlide from "./ChecklisteSlide";
@@ -48,14 +48,31 @@ export default function InteraktiveCheckliste({
     [emblaApi]
   );
 
+  const viewportRef = useRef<HTMLDivElement>(null);
+
+  // Höhe des Viewports an den aktiven Slide anpassen
+  const updateHeight = useCallback(() => {
+    if (!emblaApi || !viewportRef.current) return;
+    const slides = emblaApi.slideNodes();
+    const index = emblaApi.selectedScrollSnap();
+    const activeSlide = slides[index];
+    if (activeSlide) {
+      viewportRef.current.style.height = activeSlide.scrollHeight + "px";
+    }
+  }, [emblaApi]);
+
   useEffect(() => {
     if (!emblaApi) return;
-    const onSelect = () => setCurrentSlide(emblaApi.selectedScrollSnap());
+    const onSelect = () => {
+      setCurrentSlide(emblaApi.selectedScrollSnap());
+      updateHeight();
+    };
     emblaApi.on("select", onSelect);
+    updateHeight(); // Initial
     return () => {
       emblaApi.off("select", onSelect);
     };
-  }, [emblaApi]);
+  }, [emblaApi, updateHeight]);
 
   // Generiere ausgefüllte PDF mit Häkchen in der Original-PDF
   const handleDownloadChecked = useCallback(async () => {
@@ -129,10 +146,14 @@ export default function InteraktiveCheckliste({
 
   return (
     <div className="checkliste-container">
+      {/* Titel + Progress – außerhalb des Sliders, fix */}
+      <h3 className="checkliste-slide-titel">
+        {data.sektionen[currentSlide]?.titel}
+      </h3>
       <ChecklisteProgress checked={checkedCount} total={totalPunkte} />
 
       {/* Slider */}
-      <div className="checkliste-viewport" ref={emblaRef}>
+      <div className="checkliste-viewport" ref={(node) => { emblaRef(node); viewportRef.current = node; }}>
         <div className="checkliste-slides">
           {data.sektionen.map((sektion, sektionIndex) => (
             <ChecklisteSlide
