@@ -347,8 +347,40 @@ h6 {
   font-size: 12px;
   color: var(--color-text-medium);
   margin-top: 6px;
-  margin-left: ;
   text-align: left;
+}
+
+/* Result Spacer — Doppellinie + Arrow Icon */
+.result-spacer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.result-spacer-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.result-spacer-lines::before {
+  content: "";
+  height: 3px;
+  background: var(--color-text-medium);
+}
+
+.result-spacer-lines::after {
+  content: "";
+  height: 1px;
+  background: var(--color-text-medium);
+}
+
+.result-spacer-icon {
+  width: 32px;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .rechner-result-box--highlight {
@@ -583,15 +615,31 @@ h6 {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-top: 48px;
+  margin-top: 16px;
   padding-top: 32px;
-  border-top: 1px solid var(--color-border-default);
 }
 
 .rechner-result-boxes {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  position: relative;
+  padding-top: 56px;
+}
+
+.rechner-result-boxes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 23px;
+  background:
+    linear-gradient(var(--color-text-medium), var(--color-text-medium)) left top / calc(50% - 15px) 4px no-repeat,
+    linear-gradient(var(--color-text-medium), var(--color-text-medium)) right top / calc(50% - 10px) 4px no-repeat,
+    linear-gradient(var(--color-text-medium), var(--color-text-medium)) left 6px / calc(50% - 15px) 2px no-repeat,
+    linear-gradient(var(--color-text-medium), var(--color-text-medium)) right 6px / calc(50% - 12px) 2px no-repeat,
+    url("/icons/arrow down_double.svg") center top / 40px auto no-repeat;
 }
 
 .rechner-result-boxes > * {
