@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 
 // Old 17 calculators
 const BruttoNettoRechner = dynamic(() => import("./BruttoNettoRechner"), {
@@ -179,6 +180,22 @@ interface RechnerEmbedProps {
 }
 
 export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
+  const rechner = getRechnerComponent(slug);
+  if (!rechner) return null;
+
+  return (
+    <div className="rechner-layout">
+      <div className="rechner-visual">
+        <RechnerPlaceholder />
+      </div>
+      <div className="rechner-form-col">
+        {rechner}
+      </div>
+    </div>
+  );
+}
+
+function getRechnerComponent(slug: string) {
   switch (slug) {
     // Old 17 calculators
     case "brutto-netto":

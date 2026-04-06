@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import { getAllRechner, getRechnerBySlug } from "@/lib/wordpress";
 
@@ -58,6 +57,11 @@ const FALLBACK_RECHNER: Record<string, { title: string; type: string; desc: stri
   "haushaltsrechner": { title: "Haushalts-Rechner", type: "kredit", desc: "Erfassen Sie Einnahmen und Ausgaben und ermitteln Sie Ihr frei verfügbares Einkommen. Der Haushaltsrechner zeigt Einsparpotenziale und hilft bei der Kreditvorbereitung." },
   "paypal": { title: "PayPal-Gebühren-Rechner", type: "kredit", desc: "Berechnen Sie PayPal-Transaktionsgebühren für Verkäufer und Händler. Ermitteln Sie den Nettobetrag oder den nötigen Bruttobetrag für Ihren Wunscherlös." },
   "bafoeg": { title: "BAföG-Rechner", type: "kredit", desc: "Ermitteln Sie Ihren BAföG-Anspruch auf Basis des Elterneinkommens und Ihrer Wohnsituation. Der Rechner berechnet den monatlichen Förderbetrag vor der Antragstellung." },
+  "scheidungskosten": { title: "Scheidungskostenrechner", type: "soziales", desc: "Berechnen Sie die voraussichtlichen Kosten einer Scheidung: Gerichtsgebühren, Anwaltskosten und Verfahrenswert. Für eine realistische finanzielle Einschätzung." },
+  "unterhalt": { title: "Unterhaltsrechner", type: "soziales", desc: "Ermitteln Sie den Kindes- oder Ehegattenunterhalt nach der Düsseldorfer Tabelle. Berechnen Sie Zahlbeträge unter Berücksichtigung von Einkommen und Selbstbehalt." },
+  "heizkosten": { title: "Heizkostenrechner", type: "kredit", desc: "Berechnen Sie Ihre jährlichen Heizkosten nach Energieträger, Wohnfläche und Verbrauch. Vergleichen Sie Gas, Öl, Wärmepumpe und Fernwärme." },
+  "pv-foerderung": { title: "PV-Anlage Wirtschaftlichkeit", type: "kredit", desc: "Berechnen Sie die Wirtschaftlichkeit Ihrer Photovoltaikanlage: Investitionskosten, Einspeisevergütung, Eigenverbrauch und Amortisationsdauer." },
+  "kfw-studienkredit": { title: "KfW-Studienkreditrechner", type: "kredit", desc: "Ermitteln Sie monatliche Auszahlung und Rückzahlung des KfW-Studienkredits. Berechnen Sie Zinsen, Tilgungsdauer und Gesamtkosten der Studienfinanzierung." },
 };
 
 type Props = {
@@ -135,7 +139,7 @@ export default async function RechnerDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1000 }} className="mx-auto px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 
@@ -172,23 +176,9 @@ export default async function RechnerDetailPage({ params }: Props) {
             </p>
           )}
 
-          {/* Container: Image (sticky) left + Rechner right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Left: Placeholder SVG (Sticky only on desktop) */}
-            <div className="w-full lg:sticky lg:top-[100px] h-fit">
-              <div className="flex justify-center">
-                <div className="max-w-[600px]">
-                  <RechnerPlaceholder />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Rechner */}
-            <div>
-              <div className="p-6">
-                <RechnerEmbed slug={rechner.slug} />
-              </div>
-            </div>
+          {/* Rechner — identisches Layout wie im Artikel */}
+          <div className="article-tool-embed">
+            <RechnerEmbed slug={rechner.slug} />
           </div>
 
           {/* Disclaimer */}

@@ -285,6 +285,33 @@ const calculators = [
     title: "BAföG-Rechner",
     description: `Ermitteln Sie Ihren BAföG-Anspruch auf Basis des Elterneinkommens. Berechnen Sie die monatliche Förderung für Studierende und Schüler vor der Antragstellung.`,
   },
+
+  // ── WEITERE RECHNER (5) ─────────────────────────────────────────────────
+  {
+    slug: "scheidungskosten",
+    title: "Scheidungskostenrechner",
+    description: `Berechnen Sie die voraussichtlichen Kosten einer Scheidung: Gerichtsgebühren, Anwaltskosten und Verfahrenswert. Für eine realistische finanzielle Einschätzung.`,
+  },
+  {
+    slug: "unterhalt",
+    title: "Unterhaltsrechner",
+    description: `Ermitteln Sie den Kindes- oder Ehegattenunterhalt nach der Düsseldorfer Tabelle. Berechnen Sie Zahlbeträge unter Berücksichtigung von Einkommen und Selbstbehalt.`,
+  },
+  {
+    slug: "heizkosten",
+    title: "Heizkostenrechner",
+    description: `Berechnen Sie Ihre jährlichen Heizkosten nach Energieträger, Wohnfläche und Verbrauch. Vergleichen Sie Gas, Öl, Wärmepumpe und Fernwärme.`,
+  },
+  {
+    slug: "pv-foerderung",
+    title: "PV-Anlage Wirtschaftlichkeit",
+    description: `Berechnen Sie die Wirtschaftlichkeit Ihrer Photovoltaikanlage: Investitionskosten, Einspeisevergütung, Eigenverbrauch und Amortisationsdauer.`,
+  },
+  {
+    slug: "kfw-studienkredit",
+    title: "KfW-Studienkreditrechner",
+    description: `Ermitteln Sie monatliche Auszahlung und Rückzahlung des KfW-Studienkredits. Berechnen Sie Zinsen, Tilgungsdauer und Gesamtkosten der Studienfinanzierung.`,
+  },
 ];
 
 // ---------------------------------------------------------------------------
