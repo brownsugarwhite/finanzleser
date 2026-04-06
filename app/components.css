@@ -49,34 +49,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-h1 {
-  font-family: 'Merriweather', Georgia, serif !important;
+h1, h2 {
   font-weight: 900 !important;
-}
-
-h2 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 900 !important;
-}
-
-h3 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 700 !important;
-}
-
-h4 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 700 !important;
-}
-
-h5 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 700 !important;
-}
-
-h6 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 700 !important;
 }
 
 /* Article Prose Styles */
@@ -352,10 +326,12 @@ h6 {
 
 /* Result Spacer — Doppellinie + Arrow Icon */
 .result-spacer {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 32px 0;
+  gap: 0;
+  order: 98;
+  margin-top: 8px;
 }
 
 .result-spacer-lines {
@@ -365,20 +341,18 @@ h6 {
   gap: 2px;
 }
 
-.result-spacer-lines::before {
-  content: "";
-  height: 3px;
+.result-spacer-line-thick {
+  height: 4px;
   background: var(--color-text-medium);
 }
 
-.result-spacer-lines::after {
-  content: "";
-  height: 1px;
+.result-spacer-line-thin {
+  height: 2px;
   background: var(--color-text-medium);
 }
 
 .result-spacer-icon {
-  width: 32px;
+  width: 40px;
   height: auto;
   flex-shrink: 0;
 }
@@ -473,6 +447,13 @@ h6 {
   line-height: 1.5;
 }
 
+.rechner-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
 /* Rechner Input extras */
 .rechner-input::placeholder {
   color: var(--color-text-secondary);
@@ -500,7 +481,7 @@ h6 {
 .rechner-result-label {
   font-family: var(--font-heading);
   font-size: 14px;
-  color: var(--color-text-heading);
+  color: var(--color-text-medium);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -521,7 +502,7 @@ h6 {
 
 /* Rechner Table */
 .rechner-table-align-right {
-  text-align: left;
+  text-align: right;
 }
 
 .rechner-table-label {
@@ -559,7 +540,8 @@ h6 {
 .rechner-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  column-gap: 48px;
+  row-gap: 0;
   align-items: start;
   width: 100%;
 }
@@ -615,31 +597,38 @@ h6 {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-top: 16px;
-  padding-top: 32px;
+  margin-top: 0;
+  order: 99;
+}
+
+/* ERGEBNIS label with dotlines */
+.rechner-ergebnis-label {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  order: 97;
+}
+
+.rechner-ergebnis-label span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--color-text-medium);
+  flex-shrink: 0;
+}
+
+.rechner-ergebnis-dot {
+  flex: 1;
+  height: 3px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='3'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E") repeat-x left center / 9px 3px;
 }
 
 .rechner-result-boxes {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  position: relative;
-  padding-top: 56px;
-}
-
-.rechner-result-boxes::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 23px;
-  background:
-    linear-gradient(var(--color-text-medium), var(--color-text-medium)) left top / calc(50% - 15px) 4px no-repeat,
-    linear-gradient(var(--color-text-medium), var(--color-text-medium)) right top / calc(50% - 10px) 4px no-repeat,
-    linear-gradient(var(--color-text-medium), var(--color-text-medium)) left 6px / calc(50% - 15px) 2px no-repeat,
-    linear-gradient(var(--color-text-medium), var(--color-text-medium)) right 6px / calc(50% - 12px) 2px no-repeat,
-    url("/icons/arrow down_double.svg") center top / 40px auto no-repeat;
 }
 
 .rechner-result-boxes > * {
@@ -977,8 +966,7 @@ a.megamenu-link:hover {
   justify-content: center;
 }
 .checkliste-punkt-box--checked {
-  border-color: 1px solid var(--color-text-primary);
-
+  border: 1px solid var(--color-text-primary);
 }
 
 /* Check SVG – ragt über die Box hinaus */
@@ -1065,16 +1053,14 @@ a.megamenu-link:hover {
   margin-top: 15px;
 }
 .checkliste-nav-dot {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   border: none;
   background: var(--color-text-medium);
   cursor: pointer;
   padding: 0;
   transition: background 0.2s, transform 0.2s;
-  width: 6px;
-  height: 6px;
 }
 .checkliste-nav-dot--active {
   background: var(--color-text-medium);

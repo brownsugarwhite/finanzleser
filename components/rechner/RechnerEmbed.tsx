@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
+import ResultSpacer from "@/components/ui/ResultSpacer";
 
 // Old 17 calculators
 const BruttoNettoRechner = dynamic(() => import("./BruttoNettoRechner"), {
@@ -191,6 +192,12 @@ export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
       <div className="rechner-form-col">
         {rechner}
       </div>
+      <div className="rechner-ergebnis-label">
+        <div className="rechner-ergebnis-dot" />
+        <span>ERGEBNIS</span>
+        <div className="rechner-ergebnis-dot" />
+      </div>
+      <ResultSpacer />
     </div>
   );
 }
