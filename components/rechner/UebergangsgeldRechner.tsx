@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function UebergangsgeldRechner() {
@@ -19,10 +20,12 @@ export default function UebergangsgeldRechner() {
   });
 
   const [result, setResult] = useState<UebergangsgeldResult | null>(null);
+  const rechnerState = useRechnerState(params);
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   return (
@@ -46,12 +49,12 @@ export default function UebergangsgeldRechner() {
           checked={params.hatKind}
           onChange={(val) => setParams((prev) => ({ ...prev, hatKind: val }))}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Uebergangsgeld taeglich"

@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function SteuererstattungRechner() {
@@ -23,11 +24,13 @@ export default function SteuererstattungRechner() {
     handwerkerkosten: 0,
   });
   const [result, setResult] = useState<SteuererstattungResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   const set = (key: keyof SteuererstattungParams, val: number) =>
@@ -113,12 +116,12 @@ export default function SteuererstattungRechner() {
           step={100}
           tooltip={`§35a EStG: ${rates.steuererstattung.handwerker_ermaessigung_prozent}% Ermäßigung, max. ${euro(rates.steuererstattung.handwerker_max_ermaessigung)}`}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label={result.istErstattung ? "Voraussichtliche Erstattung" : "Voraussichtliche Nachzahlung"}

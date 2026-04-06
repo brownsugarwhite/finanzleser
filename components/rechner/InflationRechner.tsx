@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function InflationRechner() {
@@ -20,10 +21,12 @@ export default function InflationRechner() {
   });
 
   const [result, setResult] = useState<InflationResult | null>(null);
+  const rechnerState = useRechnerState(params);
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   return (
@@ -58,12 +61,12 @@ export default function InflationRechner() {
           step={1}
           min={1}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Reeller Wert" value={euro(result.reellerWert)} highlight />
             <RechnerResultBox label="Kaufkraftverlust" value={euro(result.kaufkraftVerlust)} variant="negative" />

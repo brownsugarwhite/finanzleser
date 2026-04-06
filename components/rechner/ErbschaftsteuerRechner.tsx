@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function ErbschaftsteuerRechner() {
@@ -23,10 +24,12 @@ export default function ErbschaftsteuerRechner() {
   });
 
   const [result, setResult] = useState<ErbschaftsteuerResult | null>(null);
+  const rechnerState = useRechnerState(params);
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   const showAlterKind = params.verwandtschaft === "kind";
@@ -90,12 +93,12 @@ export default function ErbschaftsteuerRechner() {
           min={0}
           tooltip="Schenkungen der letzten 10 Jahre reduzieren den verfügbaren Freibetrag"
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Erbschaftsteuer" value={euro(result.erbschaftsteuer)} highlight />
             <RechnerResultBox label="Nettowert" value={euro(result.nettowert)} variant="positive" />

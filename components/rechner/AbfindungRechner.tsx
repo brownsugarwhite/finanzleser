@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerComparisonTable from "./ui/RechnerComparisonTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function AbfindungRechner() {
@@ -19,11 +20,13 @@ export default function AbfindungRechner() {
     jahresBruttoEinkommen: 42000,
   });
   const [result, setResult] = useState<AbfindungResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   // Auto-berechne Jahresbrutto wenn Monatsbrutto geändert wird
@@ -80,12 +83,12 @@ export default function AbfindungRechner() {
           einheit="€"
           step={1000}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Abfindung (brutto)"

@@ -8,6 +8,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function PvFoerderungRechner() {
@@ -19,9 +20,11 @@ export default function PvFoerderungRechner() {
   });
 
   const [result, setResult] = useState<PvFoerderungResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params));
+    rechnerState.markCalculated();
   }, [params]);
 
   const handleChange = (key: keyof PvFoerderungParams, val: number) => {
@@ -73,12 +76,12 @@ export default function PvFoerderungRechner() {
           max={20}
           step={0.01}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtertrag / Jahr"

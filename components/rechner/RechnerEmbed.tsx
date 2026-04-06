@@ -188,6 +188,7 @@ export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
       <div className="rechner-visual">
         <RechnerPlaceholder />
       </div>
+      <div className="rechner-divider" />
       <div className="rechner-form-col">
         {rechner}
       </div>

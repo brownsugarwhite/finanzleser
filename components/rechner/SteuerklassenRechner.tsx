@@ -11,6 +11,7 @@ import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function SteuerklassenRechner() {
@@ -18,11 +19,13 @@ export default function SteuerklassenRechner() {
   const [monatsBrutto, setMonatsBrutto] = useState(3500);
   const [monatsBruttoPartner, setMonatsBruttoPartner] = useState(2000);
   const [result, setResult] = useState<SteuerklassenResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne({ modus, monatsBrutto, monatsBruttoPartner }, rates));
+    rechnerState.markCalculated();
   }, [modus, monatsBrutto, monatsBruttoPartner, rates]);
 
   const columns = [
@@ -67,12 +70,12 @@ export default function SteuerklassenRechner() {
             step={100}
           />
         </RechnerConditionalGroup>
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           {result.empfehlung && (
             <div className="rechner-result-boxes">
               <RechnerResultBox

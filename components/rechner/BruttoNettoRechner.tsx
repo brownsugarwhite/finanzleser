@@ -13,6 +13,7 @@ import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 const SK_OPTIONS = [
@@ -44,6 +45,7 @@ export default function BruttoNettoRechner() {
     kvZusatzbeitrag: 2.9,
   });
   const [result, setResult] = useState<BruttoNettoResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const rates = useRates();
 
@@ -53,6 +55,7 @@ export default function BruttoNettoRechner() {
       kvZusatzbeitrag: params.kvZusatzbeitrag || rates.sozialversicherung.krankenversicherung.durchschnittlicher_zusatzbeitrag_prozent,
     };
     setResult(berechne(p, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   const set = (key: keyof BruttoNettoParams, val: number | string | boolean) =>
@@ -134,12 +137,12 @@ export default function BruttoNettoRechner() {
           min={0}
           max={10}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Nettolohn" value={euro(result.netto)} highlight />
             <RechnerResultBox label="Netto (jährlich)" value={euro(result.nettoJahr)} />

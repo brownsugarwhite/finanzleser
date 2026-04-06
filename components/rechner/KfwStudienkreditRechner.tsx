@@ -8,6 +8,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function KfwStudienkreditRechner() {
@@ -20,9 +21,11 @@ export default function KfwStudienkreditRechner() {
   });
 
   const [result, setResult] = useState<KfwStudienkreditResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params));
+    rechnerState.markCalculated();
   }, [params]);
 
   const handleChange = (key: keyof KfwStudienkreditParams, val: number) => {
@@ -81,12 +84,12 @@ export default function KfwStudienkreditRechner() {
           min={1}
           max={300}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatsrate Tilgung"

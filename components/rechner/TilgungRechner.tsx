@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function TilgungRechner() {
@@ -21,10 +22,12 @@ export default function TilgungRechner() {
   });
 
   const [result, setResult] = useState<TilgungResult | null>(null);
+  const rechnerState = useRechnerState(params);
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   const hasSondertilgung = params.sondertilgungJahr > 0;
@@ -70,12 +73,12 @@ export default function TilgungRechner() {
           step={500}
           min={0}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
             <RechnerResultBox label="Laufzeit" value={`${result.laufzeitJahre} Jahre`} />

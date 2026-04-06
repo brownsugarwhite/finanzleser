@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function AnnuitaetRechner() {
@@ -20,10 +21,12 @@ export default function AnnuitaetRechner() {
   });
 
   const [result, setResult] = useState<AnnuitaetResult | null>(null);
+  const rechnerState = useRechnerState(params);
   const rates = useRates();
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params, rates));
+    rechnerState.markCalculated();
   }, [params, rates]);
 
   return (
@@ -59,12 +62,12 @@ export default function AnnuitaetRechner() {
           min={1}
           max={50}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
             <RechnerResultBox label="Gesamtzinsen" value={euro(result.gesamtZinsen)} />

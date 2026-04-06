@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function HeizkostenRechner() {
@@ -19,9 +20,11 @@ export default function HeizkostenRechner() {
   });
 
   const [result, setResult] = useState<HeizkostenResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params));
+    rechnerState.markCalculated();
   }, [params]);
 
   return (
@@ -63,12 +66,12 @@ export default function HeizkostenRechner() {
           einheit="kWh/Jahr"
           min={0}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Heizkosten / Jahr"

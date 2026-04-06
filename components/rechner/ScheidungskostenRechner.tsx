@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
 export default function ScheidungskostenRechner() {
@@ -19,9 +20,11 @@ export default function ScheidungskostenRechner() {
   });
 
   const [result, setResult] = useState<ScheidungskostenResult | null>(null);
+  const rechnerState = useRechnerState(params);
 
   const handleBerechnen = useCallback(() => {
     setResult(berechne(params));
+    rechnerState.markCalculated();
   }, [params]);
 
   return (
@@ -51,12 +54,12 @@ export default function ScheidungskostenRechner() {
           checked={params.versorgungsausgleich}
           onChange={(val) => setParams((p) => ({ ...p, versorgungsausgleich: val }))}
         />
+      <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
+
       </div>
 
-      <RechnerButton onClick={handleBerechnen} />
-
       {result && (
-        <RechnerResults>
+        <RechnerResults scrollKey={rechnerState.scrollKey}>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtkosten Scheidung"

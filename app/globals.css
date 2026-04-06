@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./tokens.css";
 @import "./components.css";
+@import "./rechner.css";
 
 /* Space for fixed logo + absolute nav bar */
 body {
