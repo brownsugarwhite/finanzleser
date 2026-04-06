@@ -857,12 +857,17 @@ a.megamenu-link:hover {
   display: none;
 }
 
-/* Tool Label über Rechner/Checkliste im Artikel */
-.article-tool-label {
+/* Tool Label über Rechner/Checkliste im Artikel – echtes h2 für TOC */
+h2.article-tool-label {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 16px;
+  margin: 0 0 16px 0;
+  padding: 0;
+  font-size: unset;
+  font-weight: unset;
+  line-height: unset;
+  border: none;
 }
 .article-tool-badge {
   font-family: 'Merriweather', Georgia, serif;

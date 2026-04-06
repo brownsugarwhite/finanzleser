@@ -22,13 +22,7 @@ const tocHoverStyles = `
 interface TOCItem {
   id: string;
   text: string;
-}
-
-interface TOCToolItem {
-  type: "rechner" | "vergleich" | "checkliste";
-  label: string;
-  title: string;
-  color: string;
+  toolType?: string; // "rechner" | "checkliste" | "vergleich"
 }
 
 interface TableOfContentsProps {
@@ -40,15 +34,11 @@ interface TableOfContentsProps {
 const RING_SIZE = 38;
 const BADGE_SIZE = 30;
 
-const toolPlaceholders: TOCToolItem[] = [
-  { type: "rechner", label: "Rechner", title: "Steuerrechner 2026", color: "var(--color-tool-rechner)" },
-  { type: "vergleich", label: "Vergleich", title: "Festgeldvergleich", color: "var(--color-tool-vergleiche)" },
-  { type: "checkliste", label: "Checkliste", title: "Steuererklärung Checkliste", color: "var(--color-tool-checklisten)" },
-];
-
-type MergedItem =
-  | { kind: "heading"; item: TOCItem; number: number }
-  | { kind: "tool"; tool: TOCToolItem; number: number };
+const TOOL_COLORS: Record<string, string> = {
+  rechner: "var(--color-tool-rechner)",
+  checkliste: "var(--color-tool-checklisten)",
+  vergleich: "var(--color-tool-vergleiche)",
+};
 
 export default function TableOfContents({ content, collapsed = false, onToggleCollapsed }: TableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
@@ -84,12 +74,24 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
         heading.id = id;
       }
 
-      const text = heading.textContent || "";
+      const isTool = heading.classList.contains("article-tool-label");
+      let toolType: string | undefined;
+      let text: string;
+
+      if (isTool) {
+        const badge = heading.querySelector(".article-tool-badge");
+        const titleEl = heading.querySelector(".article-tool-title");
+        const badgeText = badge?.textContent?.trim().toLowerCase() || "";
+        if (badgeText.includes("rechner")) toolType = "rechner";
+        else if (badgeText.includes("checkliste")) toolType = "checkliste";
+        else if (badgeText.includes("vergleich")) toolType = "vergleich";
+        text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
+      } else {
+        text = heading.textContent || "";
+      }
+
       if (text.trim()) {
-        tocItems.push({
-          id: heading.id,
-          text,
-        });
+        tocItems.push({ id: heading.id, text, toolType });
       }
     });
 
@@ -132,131 +134,17 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
 
   if (items.length === 0) return null;
 
-  // Merge headings + tool placeholders at fixed positions
-  const merged: MergedItem[] = [];
-  let num = 0;
-
-  for (let i = 0; i < items.length; i++) {
-    num++;
-    merged.push({ kind: "heading", item: items[i], number: num });
-
-    // After 3rd heading (index 2) → Rechner
-    if (i === 2) {
-      num++;
-      merged.push({ kind: "tool", tool: toolPlaceholders[0], number: num });
-    }
-    // After 5th heading (index 4) → Vergleich
-    if (i === 4) {
-      num++;
-      merged.push({ kind: "tool", tool: toolPlaceholders[1], number: num });
-    }
-  }
-  // Checkliste always at end
-  num++;
-  merged.push({ kind: "tool", tool: toolPlaceholders[2], number: num });
-
   return (
     <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
       <style>{tocHoverStyles}</style>
       <ol style={{ display: "flex", flexDirection: "column", gap: collapsed ? "10px" : "20px", listStyle: "none", margin: 0, padding: 0 }}>
-        {merged.map((entry, idx) => {
-          if (entry.kind === "tool") {
-            const { tool } = entry;
-            return (
-              <li key={`tool-${tool.type}`}>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  {/* Badge mit farbigem Dot */}
-                  <span
-                    style={{
-                      position: "relative",
-                      width: `${RING_SIZE}px`,
-                      height: `${RING_SIZE}px`,
-                      minWidth: `${RING_SIZE}px`,
-                    }}
-                  >
-                    <span
-                      style={{
-                        position: "absolute",
-                        top: "4px",
-                        left: "4px",
-                        width: `${BADGE_SIZE}px`,
-                        height: `${BADGE_SIZE}px`,
-                        borderRadius: "13px",
-                        border: "1px solid var(--color-text-medium)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontFamily: "Merriweather, serif",
-                        fontWeight: 300,
-                        fontStyle: "italic",
-                        fontSize: "17px",
-                        lineHeight: 1,
-                        color: "var(--color-text-medium)",
-                      }}
-                    >
-                      <span style={{ transform: "skewX(-10deg)", display: "inline-block" }}>
-                        {entry.number}
-                      </span>
-                    </span>
-                    {/* Farbiger Dot */}
-                    <span
-                      style={{
-                        position: "absolute",
-                        top: "3px",
-                        left: "4px",
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: tool.color,
-                      }}
-                    />
-                  </span>
-                  {/* Label + Titel */}
-                  <span style={{ display: collapsed ? "none" : "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        alignSelf: "flex-start",
-                        backgroundColor: tool.color,
-                        color: "#ffffff",
-                        fontFamily: "var(--font-body), sans-serif",
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        lineHeight: 1,
-                        padding: "5px 8px",
-                        borderRadius: "0px",
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {tool.label}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: "Merriweather, serif",
-                        fontWeight: 300,
-                        fontStyle: "italic",
-                        fontSize: "15px",
-                        color: "var(--color-text-medium)",
-                        lineHeight: "1.4",
-                      }}
-                    >
-                      {tool.title}
-                    </span>
-                  </span>
-                </div>
-              </li>
-            );
-          }
-
-          // Regular heading item
-          const { item } = entry;
+        {items.map((item, idx) => {
+          const number = idx + 1;
           const isActive = activeId === item.id;
+          const toolColor = item.toolType ? TOOL_COLORS[item.toolType] : undefined;
+          const toolLabel = item.toolType
+            ? item.toolType.charAt(0).toUpperCase() + item.toolType.slice(1)
+            : undefined;
 
           return (
             <li key={item.id}>
@@ -272,7 +160,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                   color: "inherit",
                 }}
               >
-                {/* Nummer-Badge mit Progress Ring */}
+                {/* Nummer-Badge mit Progress Ring + optionalem Tool-Dot */}
                 <span
                   style={{
                     position: "relative",
@@ -326,12 +214,64 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                     }}
                   >
                     <span className="toc-number" style={{ transform: "skewX(-10deg)", display: "inline-block", color: isActive ? "#ffffff" : "var(--color-text-medium)" }}>
-                      {entry.number}
+                      {number}
                     </span>
                   </span>
+                  {/* Farbiger Dot für Tools – fadet aus wenn aktiv */}
+                  {toolColor && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "3.5px",
+                        left: "3.5px",
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: toolColor,
+                        opacity: isActive ? 0 : 1,
+                      }}
+                    />
+                  )}
                 </span>
-                {/* Item-Text */}
-                {!collapsed && (
+                {/* Text: Tool mit Label + Titel, oder normaler Heading-Text */}
+                {!collapsed && toolLabel ? (
+                  <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        alignSelf: "flex-start",
+                        backgroundColor: toolColor,
+                        color: "#ffffff",
+                        fontFamily: "var(--font-body), sans-serif",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        lineHeight: 1,
+                        padding: "5px 8px",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {toolLabel}
+                    </span>
+                    <span
+                      className="toc-text"
+                      style={{
+                        fontFamily: "Merriweather, serif",
+                        fontWeight: isActive ? 700 : 300,
+                        fontStyle: isActive ? "normal" : "italic",
+                        fontSize: "15px",
+                        color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
+                        lineHeight: "1.4",
+                        transition: "none",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {item.text}
+                    </span>
+                  </span>
+                ) : !collapsed ? (
                   <span
                     className="toc-text"
                     style={{
@@ -352,7 +292,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                   >
                     {item.text}
                   </span>
-                )}
+                ) : null}
               </a>
             </li>
           );

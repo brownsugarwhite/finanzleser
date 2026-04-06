@@ -3,36 +3,25 @@
 import { useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import type { Rechner } from "@/lib/types";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 interface TOCItem {
   id: string;
   text: string;
+  toolType?: string; // "rechner" | "checkliste" | "vergleich" — oder undefined für normale Überschriften
 }
 
 interface ArticleTableOfContentsProps {
   content: string;
-  tools?: Rechner[];
 }
 
-interface TOCToolItem {
-  type: "rechner" | "vergleich" | "checkliste";
-  label: string;
-  title: string;
-  color: string;
-}
-
-const toolPlaceholders: TOCToolItem[] = [
-  { type: "rechner", label: "Rechner", title: "Steuerrechner 2026", color: "var(--color-tool-rechner)" },
-  { type: "vergleich", label: "Vergleich", title: "Festgeldvergleich", color: "var(--color-tool-vergleiche)" },
-  { type: "checkliste", label: "Checkliste", title: "Steuererklärung Checkliste", color: "var(--color-tool-checklisten)" },
-];
-
-type MergedItem =
-  | { kind: "heading"; item: TOCItem; number: number }
-  | { kind: "tool"; tool: TOCToolItem; number: number };
+// Tool-Farben für farbigen Punkt im TOC
+const TOOL_COLORS: Record<string, string> = {
+  rechner: "var(--color-tool-rechner)",
+  checkliste: "var(--color-tool-checklisten)",
+  vergleich: "var(--color-tool-vergleiche)",
+};
 
 function NumberBadge({ number, color }: { number: number; color?: string }) {
   return (
@@ -91,7 +80,7 @@ function ArrowLine() {
   );
 }
 
-export default function ArticleTableOfContents({ content, tools }: ArticleTableOfContentsProps) {
+export default function ArticleTableOfContents({ content }: ArticleTableOfContentsProps) {
   const [items, setItems] = useState<TOCItem[]>([]);
 
   const scrollToId = useCallback((id: string) => {
@@ -119,12 +108,28 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
         heading.id = id;
       }
 
-      const text = heading.textContent || "";
+      // Tool-H2 erkennen (hat Klasse article-tool-label)
+      const isTool = heading.classList.contains("article-tool-label");
+      let toolType: string | undefined;
+      let text: string;
+
+      if (isTool) {
+        // Badge-Element enthält den Tool-Typ-Text ("Rechner", "Checkliste", etc.)
+        const badge = heading.querySelector(".article-tool-badge");
+        const titleEl = heading.querySelector(".article-tool-title");
+        const badgeText = badge?.textContent?.trim().toLowerCase() || "";
+        // Tool-Typ aus Badge-Text ableiten
+        if (badgeText.includes("rechner")) toolType = "rechner";
+        else if (badgeText.includes("checkliste")) toolType = "checkliste";
+        else if (badgeText.includes("vergleich")) toolType = "vergleich";
+        // Nur den Titel-Text verwenden (ohne Badge)
+        text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
+      } else {
+        text = heading.textContent || "";
+      }
+
       if (text.trim()) {
-        tocItems.push({
-          id: heading.id,
-          text,
-        });
+        tocItems.push({ id: heading.id, text, toolType });
       }
     });
 
@@ -139,32 +144,9 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
     return () => timers.forEach((timer) => clearTimeout(timer));
   }, []);
 
-  if (items.length === 0 && (!tools || tools.length === 0)) {
+  if (items.length === 0) {
     return null;
   }
-
-  // Merge headings + tool placeholders at fixed positions
-  const merged: MergedItem[] = [];
-  let num = 0;
-
-  for (let i = 0; i < items.length; i++) {
-    num++;
-    merged.push({ kind: "heading", item: items[i], number: num });
-
-    // After 3rd heading → Rechner
-    if (i === 2) {
-      num++;
-      merged.push({ kind: "tool", tool: toolPlaceholders[0], number: num });
-    }
-    // After 5th heading → Vergleich
-    if (i === 4) {
-      num++;
-      merged.push({ kind: "tool", tool: toolPlaceholders[1], number: num });
-    }
-  }
-  // Checkliste at end
-  num++;
-  merged.push({ kind: "tool", tool: toolPlaceholders[2], number: num });
 
   return (
     <div className="mb-12">
@@ -173,53 +155,13 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
       </p>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-        {merged.map((entry) => {
-          if (entry.kind === "tool") {
-            const { tool } = entry;
-            return (
-              <div
-                key={`tool-${tool.type}`}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 6,
-                }}
-              >
-                <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                  <NumberBadge number={entry.number} color={tool.color} />
-                  <ArrowLine />
-                </span>
-                <span style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap" }}>
-                  <span style={{
-                    display: "inline-block",
-                    backgroundColor: tool.color,
-                    color: "#ffffff",
-                    fontFamily: "var(--font-body), sans-serif",
-                    fontSize: 16,
-                    fontWeight: 600,
-                    lineHeight: 1,
-                    padding: "8px 12px",
-                    letterSpacing: "0.05em",
-                    flexShrink: 0,
-                  }}>
-                    {tool.label}
-                  </span>
-                  <span style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontWeight: 300,
-                    fontStyle: "italic",
-                    fontSize: 17,
-                    color: "var(--color-text-medium)",
-                    lineHeight: 1.4,
-                  }}>
-                    {tool.title}
-                  </span>
-                </span>
-              </div>
-            );
-          }
+        {items.map((item, idx) => {
+          const number = idx + 1;
+          const toolColor = item.toolType ? TOOL_COLORS[item.toolType] : undefined;
+          const toolLabel = item.toolType
+            ? item.toolType.charAt(0).toUpperCase() + item.toolType.slice(1)
+            : undefined;
 
-          const { item } = entry;
           return (
             <a
               key={item.id}
@@ -233,19 +175,48 @@ export default function ArticleTableOfContents({ content, tools }: ArticleTableO
               }}
               className="hover:opacity-80 transition"
             >
-              <span style={{ display: "flex", alignItems: "center", gap: 0, flexShrink: 0 }}>
-                <NumberBadge number={entry.number} />
+              <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+                <NumberBadge number={number} color={toolColor} />
                 <ArrowLine />
               </span>
-              <span style={{
-                fontSize: 17,
-                fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                fontStyle: "italic",
-                fontWeight: 300,
-                color: "var(--color-text-medium)",
-              }}>
-                {item.text}
-              </span>
+              {toolLabel ? (
+                <span style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap" }}>
+                  <span style={{
+                    display: "inline-block",
+                    backgroundColor: toolColor,
+                    color: "#ffffff",
+                    fontFamily: "var(--font-body), sans-serif",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    lineHeight: 1,
+                    padding: "8px 12px",
+                    letterSpacing: "0.05em",
+                    flexShrink: 0,
+                  }}>
+                    {toolLabel}
+                  </span>
+                  <span style={{
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontWeight: 300,
+                    fontStyle: "italic",
+                    fontSize: 17,
+                    color: "var(--color-text-medium)",
+                    lineHeight: 1.4,
+                  }}>
+                    {item.text}
+                  </span>
+                </span>
+              ) : (
+                <span style={{
+                  fontSize: 17,
+                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                  fontStyle: "italic",
+                  fontWeight: 300,
+                  color: "var(--color-text-medium)",
+                }}>
+                  {item.text}
+                </span>
+              )}
             </a>
           );
         })}

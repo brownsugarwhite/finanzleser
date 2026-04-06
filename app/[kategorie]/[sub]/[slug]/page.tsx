@@ -59,7 +59,7 @@ export default async function BeitragPage(props: {
       sidebar={post.content ? <ArticleSidebar content={post.content} /> : undefined}
       contentTableOfContents={
         post.content ? (
-          <ArticleTableOfContents content={post.content} tools={post.beitragFelder?.beitragRechner} />
+          <ArticleTableOfContents content={post.content} />
         ) : undefined
       }
     >

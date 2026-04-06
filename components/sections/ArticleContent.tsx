@@ -29,12 +29,12 @@ function ToolLabel({ type, slug }: { type: keyof typeof TOOL_CONFIG; slug: strin
   }, [type, slug]);
 
   return (
-    <div className="article-tool-label">
+    <h2 className="article-tool-label">
       <span className="article-tool-badge" style={{ background: config.color }}>
         {config.label}
       </span>
       {title && <span className="article-tool-title">{title}</span>}
-    </div>
+    </h2>
   );
 }
 
