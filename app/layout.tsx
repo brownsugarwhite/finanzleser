@@ -10,6 +10,7 @@ import ContentScaler from "@/components/layout/ContentScaler";
 import MegaMenuWrapper from "@/components/layout/MegaMenuWrapper";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
+import MayaIcon from "@/components/ui/MayaIcon";
 import TopBanner from "@/components/ui/TopBanner";
 import "./globals.css";
 
@@ -67,6 +68,7 @@ export default async function RootLayout({
             {children}
           </div>
           <ProgressiveBlur height={120} />
+          <MayaIcon />
         </NavProvider>
         </Providers>
       </body>
