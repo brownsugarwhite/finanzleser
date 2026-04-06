@@ -24,7 +24,7 @@ export default function RechnerComparisonTable({
 
   return (
     <div className="rechner-comparison-wrapper">
-      {title && <h4 className="rechner-comparison-title">{title}</h4>}
+      {title && <h4 className="rechner-result-section-title">{title}</h4>}
       <table className="rechner-result-table rechner-comparison-table">
         <thead>
           <tr>
