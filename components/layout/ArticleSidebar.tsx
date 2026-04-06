@@ -19,7 +19,7 @@ export default function ArticleSidebar({ content, collapsed, setCollapsed }: Art
         alignSelf: "stretch",
         flexShrink: 0,
         width: "100%",
-        maxWidth: collapsed ? "100px" : "400px",
+        maxWidth: collapsed ? "120px" : "430px",
         paddingLeft: collapsed ? "23px" : "50px",
         paddingRight: collapsed ? "23px" : "23px",
       }}

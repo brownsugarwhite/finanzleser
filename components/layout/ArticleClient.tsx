@@ -12,9 +12,9 @@ import ArticleContent from "@/components/sections/ArticleContent";
 
 function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
-      <div style={{ width: "100%", minWidth: 1200, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: 1200 }}>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
+      <div style={{ width: "100%", minWidth: 1000, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ width: "100%", maxWidth: 1000 }}>
           {children}
         </div>
       </div>
@@ -24,8 +24,8 @@ function WideContainer({ children, collapsed }: { children: React.ReactNode; col
 
 function CenteredContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
-      <div style={{ width: "100%", minWidth: 750, display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
+      <div style={{ width: "100%", minWidth: 550, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ width: "100%", maxWidth: 750 }}>
           {children}
         </div>
@@ -90,41 +90,75 @@ export default function ArticleClient({
 
       {/* article_container */}
       <article style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        {/* Wide: Breadcrumb, Kategorie, Titel, Beschreibung, Lesedauer/Share, Visual */}
+        {/* Breadcrumb */}
         <WideContainer collapsed={collapsed}>
           <Breadcrumb items={breadcrumbItems} />
-          {category && mainCategory && (
-            <Link
-              href={`/${mainCategory}/${category.slug}`}
-              className="mb-2 inline-block transition hover:opacity-80"
-              style={{
-                color: "var(--color-brand-secondary)",
-                fontFamily: "Merriweather, serif",
-                fontSize: "23px",
-                fontStyle: "italic",
-              }}
-            >
-              {category.name}
-            </Link>
-          )}
-          {title && <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{title}</h1>}
-          {excerpt && (
-            <p
-              className="mb-8 text-gray-600"
-              style={{
-                fontFamily: "Merriweather, serif",
-                fontSize: "18px",
-                fontWeight: "400",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: excerpt.replace(/<[^>]*>/g, ""),
-              }}
-            />
-          )}
-          {featuredImage?.sourceUrl && (
-            <div className="mb-8 w-full">
-              {/* Meta Info Bar */}
-              <div className="flex justify-between items-center mb-4 text-gray-600">
+        </WideContainer>
+
+        {/* Header: Visual links, Text rechts */}
+        <WideContainer collapsed={collapsed}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
+            {/* Visual links */}
+            {featuredImage?.sourceUrl && (
+              <div style={{ flexShrink: 0, width: "60%" }}>
+                <div className="h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                  <InlineSVG
+                    src={featuredImage.sourceUrl}
+                    alt={featuredImage.altText || title || "Featured image"}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
+                {featuredImage.altText && (
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--color-text-medium)",
+                      marginTop: "8px",
+                    }}
+                  >
+                    {featuredImage.altText}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Text rechts */}
+            <div style={{ width: "40%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              {category && mainCategory && (
+                <Link
+                  href={`/${mainCategory}/${category.slug}`}
+                  className="mb-2 inline-block transition hover:opacity-80"
+                  style={{
+                    color: "var(--color-brand-secondary)",
+                    fontFamily: "Merriweather, serif",
+                    fontSize: "23px",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {category.name}
+                </Link>
+              )}
+              {title && <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{title}</h1>}
+              {excerpt && (
+                <p
+                  className="mb-8 text-gray-600"
+                  style={{
+                    fontFamily: "Merriweather, serif",
+                    fontSize: "18px",
+                    fontWeight: "400",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: (() => {
+                      const text = excerpt.replace(/<[^>]*>/g, "");
+                      if (text.length <= 200) return text;
+                      const truncated = text.slice(0, 200).replace(/\s+\S*$/, "");
+                      return truncated + " ...";
+                    })(),
+                  }}
+                />
+              )}
+              {/* Lesedauer / Share */}
+              <div className="flex justify-between items-center text-gray-600">
                 <div className="flex items-center gap-1 text-sm" style={{ fontSize: "14px" }}>
                   <img src="/icons/time_icon.svg" alt="" style={{ width: 13, height: 13, opacity: 0.5 }} />
                   <span>{content ? Math.ceil(content.split(/\s+/).length / 200) : 1} min Lesedauer</span>
@@ -151,30 +185,9 @@ export default function ArticleClient({
                   </a>
                 </div>
               </div>
-
-              {/* Visual */}
-              <div className="w-full h-96 mb-2 flex items-center justify-center rounded overflow-hidden bg-gray-50">
-                <InlineSVG
-                  src={featuredImage.sourceUrl}
-                  alt={featuredImage.altText || title || "Featured image"}
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </div>
-
-              {/* Image Caption/Alt Text */}
-              {featuredImage.altText && (
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "var(--color-text-medium)",
-                    marginBottom: "1.5em",
-                  }}
-                >
-                  {featuredImage.altText}
-                </p>
-              )}
             </div>
-          )}
+          </div>
+          <Spacer noMargin />
         </WideContainer>
 
         {/* Centered: Autor, TOC */}
@@ -193,7 +206,7 @@ export default function ArticleClient({
           {contentTableOfContents && content && (
             <ArticleTableOfContents content={content} />
           )}
-          <Spacer />
+          <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
         </CenteredContainer>
 
         {/* Artikel-Inhalt: alternating wide/centered Container */}

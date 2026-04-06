@@ -84,9 +84,9 @@ function parseContent(html: string): ContentPart[] {
 
 function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
-      <div style={{ width: "100%", minWidth: 1200, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: 1200 }}>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
+      <div style={{ width: "100%", minWidth: 1000, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ width: "100%", maxWidth: 1000 }}>
           {children}
         </div>
       </div>
@@ -96,7 +96,7 @@ function WideContainer({ children, collapsed }: { children: React.ReactNode; col
 
 function CenteredContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
       <div style={{ width: "100%", minWidth: 750, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ width: "100%", maxWidth: 750 }}>
           {children}
