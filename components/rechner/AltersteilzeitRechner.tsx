@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function AltersteilzeitRechner() {
   const [params, setParams] = useState<AltersteilzeitParams>({
@@ -50,7 +51,7 @@ export default function AltersteilzeitRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Teilzeit-Brutto (50 %)"
@@ -88,7 +89,7 @@ export default function AltersteilzeitRechner() {
             Die Aufstockung (hier 20 % des Vollzeit-Brutto) richtet sich nach Tarif- oder
             Betriebsvereinbarung. Grundlage: Paragraph 2 AltTZG. Mindestalter: 55 Jahre.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

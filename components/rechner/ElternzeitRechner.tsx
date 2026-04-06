@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function ElternzeitRechner() {
   const now = new Date();
@@ -88,7 +89,7 @@ export default function ElternzeitRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Erster Abschnitt"
@@ -117,7 +118,7 @@ export default function ElternzeitRechner() {
             Bis zu 24 Monate koennen auf den Zeitraum bis zum 8. Geburtstag uebertragen werden.
             Anmeldung mind. 7 Wochen vor Beginn. Grundlage: BEEG 2026.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

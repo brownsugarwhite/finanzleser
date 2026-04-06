@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 function formatAlter(alter: { jahre: number; monate: number }): string {
   if (alter.monate === 0) return `${alter.jahre} Jahre`;
@@ -63,7 +64,7 @@ export default function RentenbeginRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Regelaltersgrenze"
@@ -93,7 +94,7 @@ export default function RentenbeginRechner() {
             }
             {" "}Quelle: § 35, § 236 SGB VI.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

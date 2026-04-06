@@ -15,6 +15,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function BuergergelRechner() {
   const [params, setParams] = useState<BuergergeldParams>({
@@ -97,7 +98,7 @@ export default function BuergergelRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Buergergeld-Anspruch"
@@ -123,7 +124,7 @@ export default function BuergergelRechner() {
             erfolgt durch das Jobcenter unter Beruecksichtigung aller Vermoegensverhaeltnisse.
             Grundlage: SGB II.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function WitwenrenteRechner() {
   const [params, setParams] = useState<WitwenrenteParams>({
@@ -72,7 +73,7 @@ export default function WitwenrenteRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Witwenrente (nach Anrechnung)"
@@ -105,7 +106,7 @@ export default function WitwenrenteRechner() {
             {" "}Eigenes Einkommen ueber dem Freibetrag ({euro(result.freibetrag)}) wird zu 40 % angerechnet.
             Quelle: §§ 46, 97 SGB VI.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

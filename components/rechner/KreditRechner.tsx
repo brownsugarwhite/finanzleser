@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KreditRechner() {
   const [params, setParams] = useState<KreditParams>({
@@ -62,7 +63,7 @@ export default function KreditRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
             <RechnerResultBox label="Gesamtzinsen" value={euro(result.gesamtzinsen)} />
@@ -101,7 +102,7 @@ export default function KreditRechner() {
             Diese Berechnung erfolgt ohne Gewähr und stellt nur eine Näherung dar.
             Gebühren, Provisionen und weitere Kosten sind nicht enthalten.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

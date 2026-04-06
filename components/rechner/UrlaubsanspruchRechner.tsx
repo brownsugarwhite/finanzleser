@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function UrlaubsanspruchRechner() {
   const [params, setParams] = useState<UrlaubsanspruchParams>({
@@ -51,7 +52,7 @@ export default function UrlaubsanspruchRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamter Urlaubsanspruch"
@@ -74,7 +75,7 @@ export default function UrlaubsanspruchRechner() {
             Gesetzlicher Mindesturlaub nach BUrlG: 24 Werktage (6-Tage-Woche).
             Bei Schwerbehinderung (GdB {'>='} 50): 5 zusätzliche Arbeitstage nach SGB IX.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

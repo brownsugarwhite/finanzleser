@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function AnnuitaetRechner() {
   const [params, setParams] = useState<AnnuitaetParams>({
@@ -63,7 +64,7 @@ export default function AnnuitaetRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
             <RechnerResultBox label="Gesamtzinsen" value={euro(result.gesamtZinsen)} />
@@ -104,7 +105,7 @@ export default function AnnuitaetRechner() {
             Annuitätenformel: R = K x [i x (1+i)^n] / [(1+i)^n - 1].
             Die Monatsrate bleibt konstant, der Zinsanteil sinkt mit der Zeit.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

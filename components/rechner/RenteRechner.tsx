@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function RenteRechner() {
   const [params, setParams] = useState<RenteParams>({
@@ -77,7 +78,7 @@ export default function RenteRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatliche Rente"
@@ -109,7 +110,7 @@ export default function RenteRechner() {
             Die tatsaechliche Rente haengt von Ihren individuellen Versicherungszeiten ab.
             Quelle: Deutsche Rentenversicherung, SGB VI.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

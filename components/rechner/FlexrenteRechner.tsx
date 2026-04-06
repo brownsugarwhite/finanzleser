@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function FlexrenteRechner() {
   const [params, setParams] = useState<FlexrenteParams>({
@@ -65,7 +66,7 @@ export default function FlexrenteRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatliche Rente"
@@ -94,7 +95,7 @@ export default function FlexrenteRechner() {
             Zuschlag: 0,5 % pro Monat nach Regelaltersgrenze.
             Quelle: §§ 77, 302 SGB VI (Flexirentengesetz).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

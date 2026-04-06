@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KrankengeldRechner() {
   const [params, setParams] = useState<KrankengeldParams>({
@@ -52,7 +53,7 @@ export default function KrankengeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Krankengeld taeglich"
@@ -85,7 +86,7 @@ export default function KrankengeldRechner() {
             Die maximale Bezugsdauer betraegt {result.maxBezugsdauerWochen} Wochen fuer dieselbe Erkrankung
             innerhalb von 3 Jahren.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

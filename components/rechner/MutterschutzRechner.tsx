@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function MutterschutzRechner() {
   const now = new Date();
@@ -87,7 +88,7 @@ export default function MutterschutzRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtleistung"
@@ -124,7 +125,7 @@ export default function MutterschutzRechner() {
             Die Krankenkasse zahlt max. 13 EUR/Tag. Der Arbeitgeber stockt die Differenz
             zum durchschnittlichen Nettolohn auf. Grundlage: MuSchG 2026.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

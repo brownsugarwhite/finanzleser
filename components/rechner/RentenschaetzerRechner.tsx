@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function RentenschaetzerRechner() {
   const [params, setParams] = useState<RentenschaetzerParams>({
@@ -53,7 +54,7 @@ export default function RentenschaetzerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Geschaetzte monatliche Rente"
@@ -82,7 +83,7 @@ export default function RentenschaetzerRechner() {
             reduzieren die Rente. Nutzen Sie die offizielle Rentenauskunft der Deutschen
             Rentenversicherung fuer praezise Werte.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

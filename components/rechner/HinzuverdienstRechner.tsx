@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function HinzuverdienstRechner() {
   const [params, setParams] = useState<HinzuverdienstParams>({
@@ -61,7 +62,7 @@ export default function HinzuverdienstRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Verbleibende Rente"
@@ -97,7 +98,7 @@ export default function HinzuverdienstRechner() {
             }
             {" "}Quelle: § 34 SGB VI.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

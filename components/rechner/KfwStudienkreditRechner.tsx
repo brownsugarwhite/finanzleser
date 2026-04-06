@@ -8,6 +8,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KfwStudienkreditRechner() {
   const [params, setParams] = useState<KfwStudienkreditParams>({
@@ -85,7 +86,7 @@ export default function KfwStudienkreditRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatsrate Tilgung"
@@ -112,7 +113,7 @@ export default function KfwStudienkreditRechner() {
             KfW-Studienkredit (Programm 174): Zinssatz wird halbjaehrlich angepasst.
             Waehrend Auszahlung und Karenzphase fallen Zinsen an, die zum Kapital addiert werden.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

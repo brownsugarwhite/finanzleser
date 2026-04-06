@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function ZinseszinsRechner() {
   const [params, setParams] = useState<ZinseszinsParams>({
@@ -72,7 +73,7 @@ export default function ZinseszinsRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Endkapital" value={euro(result.endkapital)} highlight />
             <RechnerResultBox label="Einzahlungen" value={euro(result.gesamtEinzahlungen)} />
@@ -111,7 +112,7 @@ export default function ZinseszinsRechner() {
             Der Zinseszinseffekt zeigt, wie Zinsen auf Zinsen wachsen. Die Berechnung
             geht von einer jährlichen Verzinsung aus.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function InflationRechner() {
   const [params, setParams] = useState<InflationParams>({
@@ -62,7 +63,7 @@ export default function InflationRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Reeller Wert" value={euro(result.reellerWert)} highlight />
             <RechnerResultBox label="Kaufkraftverlust" value={euro(result.kaufkraftVerlust)} variant="negative" />
@@ -101,7 +102,7 @@ export default function InflationRechner() {
             Der &quot;benötigte Betrag&quot; ist der Wert, den Sie in Zukunft brauchen,
             um die gleiche Kaufkraft wie heute zu haben.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

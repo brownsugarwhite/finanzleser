@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function RentenabschlagRechner() {
   const [params, setParams] = useState<RentenabschlagParams>({
@@ -53,7 +54,7 @@ export default function RentenabschlagRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Rente nach Abschlag"
@@ -90,7 +91,7 @@ export default function RentenabschlagRechner() {
             Der Abschlag gilt dauerhaft fuer die gesamte Rentenbezugszeit.
             Quelle: § 77 Abs. 2 SGB VI.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

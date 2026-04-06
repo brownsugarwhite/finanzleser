@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function ErbschaftsteuerRechner() {
   const [params, setParams] = useState<ErbschaftsteuerParams>({
@@ -94,7 +95,7 @@ export default function ErbschaftsteuerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Erbschaftsteuer" value={euro(result.erbschaftsteuer)} highlight />
             <RechnerResultBox label="Nettowert" value={euro(result.nettowert)} variant="positive" />
@@ -123,7 +124,7 @@ export default function ErbschaftsteuerRechner() {
             gilt auf den gesamten steuerpflichtigen Erwerb. Der Versorgungsfreibetrag gilt nur
             bei Erbschaften, nicht bei Schenkungen. Konsultieren Sie einen Steuerberater.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

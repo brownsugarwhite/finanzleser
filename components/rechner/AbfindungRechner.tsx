@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerComparisonTable from "./ui/RechnerComparisonTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function AbfindungRechner() {
   const [params, setParams] = useState<AbfindungParams>({
@@ -84,7 +85,7 @@ export default function AbfindungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Abfindung (brutto)"
@@ -132,7 +133,7 @@ export default function AbfindungRechner() {
             sind in dieser vereinfachten Darstellung nicht separat ausgewiesen.
             Abfindungen sind grundsätzlich sozialversicherungsfrei.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

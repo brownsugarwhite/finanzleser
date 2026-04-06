@@ -13,6 +13,7 @@ import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const SK_OPTIONS = [
   { label: "I – Ledig", value: "1" },
@@ -138,7 +139,7 @@ export default function BruttoNettoRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Nettolohn" value={euro(result.netto)} highlight />
             <RechnerResultBox label="Netto (jährlich)" value={euro(result.nettoJahr)} />
@@ -168,7 +169,7 @@ export default function BruttoNettoRechner() {
             Kirchensteuer und eigener KV-Zusatzbeitrag berücksichtigt. Individuelle Freibeträge
             und Sonderausgaben sind nicht enthalten.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KinderkrangengeldRechner() {
   const [params, setParams] = useState<KinderkrankengeldParams>({
@@ -84,7 +85,7 @@ export default function KinderkrangengeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Kinderkrankengeld taeglich"
@@ -117,7 +118,7 @@ export default function KinderkrangengeldRechner() {
             Kinderkrankengeld: 70% des Brutto, max. 90% des Netto (SS 45 SGB V).
             Der Jahresanspruch haengt von der Anzahl der Kinder und dem Familienstatus ab.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

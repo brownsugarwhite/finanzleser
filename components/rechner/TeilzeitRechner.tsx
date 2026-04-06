@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const typLabels: Record<string, string> = {
   minijob: "Minijob",
@@ -71,7 +72,7 @@ export default function TeilzeitRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Brutto monatlich"
@@ -108,7 +109,7 @@ export default function TeilzeitRechner() {
             Kinderfreibetraegen ab. Bei Einkommen unter der Midijob-Grenze gelten reduzierte
             SV-Beitraege (SS 20 Abs. 2 SGB IV).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

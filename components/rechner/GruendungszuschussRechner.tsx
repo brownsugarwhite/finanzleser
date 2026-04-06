@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function GruendungszuschussRechner() {
   const [params, setParams] = useState<GruendungszuschussParams>({
@@ -40,7 +41,7 @@ export default function GruendungszuschussRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtfoerderung"
@@ -74,7 +75,7 @@ export default function GruendungszuschussRechner() {
             Phase 2: 300 EUR Pauschale fuer weitere 9 Monate (Bewilligung auf Antrag).
             Grundlage: Paragraph 93 SGB III.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

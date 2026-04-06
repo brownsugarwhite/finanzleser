@@ -11,6 +11,7 @@ import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function SteuerklassenRechner() {
   const [modus, setModus] = useState<"single" | "paar">("single");
@@ -71,7 +72,7 @@ export default function SteuerklassenRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           {result.empfehlung && (
             <div className="rechner-result-boxes">
               <RechnerResultBox
@@ -98,7 +99,7 @@ export default function SteuerklassenRechner() {
             Berechnung nach §38b EStG / §32a EStG 2026. Kirchensteuer und individueller
             KV-Zusatzbeitrag sind hier nicht berücksichtigt.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function HeizkostenRechner() {
   const [params, setParams] = useState<HeizkostenParams>({
@@ -67,7 +68,7 @@ export default function HeizkostenRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Heizkosten / Jahr"
@@ -94,7 +95,7 @@ export default function HeizkostenRechner() {
             Bei Verbrauch = 0 wird ein Durchschnittswert basierend auf Wohnflaeche und
             Energietraeger berechnet. Die Kosten sind Durchschnittswerte fuer Deutschland 2026.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -10,6 +10,7 @@ import RechnerComparisonTable from "./ui/RechnerComparisonTable";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KalteprogressionRechner() {
   const [params, setParams] = useState<KalteprogressionParams>({
@@ -64,7 +65,7 @@ export default function KalteprogressionRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Kalte Progression"
@@ -118,7 +119,7 @@ export default function KalteprogressionRechner() {
             Berechnung nach §32a EStG 2026. Die kalte Progression entsteht, wenn
             Gehaltserhöhungen durch den progressiven Steuertarif überproportional besteuert werden.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

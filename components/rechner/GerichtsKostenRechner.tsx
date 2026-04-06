@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function GerichtsKostenRechner() {
   const [params, setParams] = useState<GerichtskostenParams>({
@@ -58,7 +59,7 @@ export default function GerichtsKostenRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtkosten"
@@ -94,7 +95,7 @@ export default function GerichtsKostenRechner() {
             verdoppeln sich die Anwaltskosten. Gerichtsgebuehr je nach Instanz (AG/LG: 3-fach,
             OLG: 4-fach, BGH: 5-fach).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

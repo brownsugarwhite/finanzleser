@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function RentenbesteuerungRechner() {
   const [params, setParams] = useState<RentenbesteuerungParams>({
@@ -52,7 +53,7 @@ export default function RentenbesteuerungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Einkommensteuer auf Rente"
@@ -84,7 +85,7 @@ export default function RentenbesteuerungRechner() {
             Soli und Kirchensteuer sind nicht enthalten.
             Quelle: § 22 Nr. 1 Satz 3 Buchst. a EStG.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

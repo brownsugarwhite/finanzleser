@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function PendlerpauschaleRechner() {
   const [params, setParams] = useState<PendlerpauschaleParams>({
@@ -51,7 +52,7 @@ export default function PendlerpauschaleRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Pendlerpauschale/Jahr"
@@ -83,7 +84,7 @@ export default function PendlerpauschaleRechner() {
           <RechnerHinweis>
             Der erhoehte Satz von 0,38 EUR/km ab 21 km gilt bis 31.12.2026.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

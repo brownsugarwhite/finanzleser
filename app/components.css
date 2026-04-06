@@ -325,13 +325,16 @@ h1, h2 {
 }
 
 /* Result Spacer — Doppellinie + Arrow Icon */
-.result-spacer {
-  grid-column: 1 / -1;
+.rechner-ergebnis-header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-spacer {
+  display: flex;
+  align-items: flex-start;
   gap: 0;
-  order: 98;
-  margin-top: 8px;
 }
 
 .result-spacer-lines {
@@ -355,6 +358,8 @@ h1, h2 {
   width: 40px;
   height: auto;
   flex-shrink: 0;
+  display: block;
+  margin: 0 -2px;
 }
 
 .rechner-result-box--highlight {
@@ -591,24 +596,20 @@ h1, h2 {
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.08);
 }
 
-/* Results span full width below both columns */
+/* Results full width below both columns */
 .rechner-results {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-top: 0;
-  order: 99;
+  margin-top: 32px;
 }
 
 /* ERGEBNIS label with dotlines */
 .rechner-ergebnis-label {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 32px;
-  order: 97;
 }
 
 .rechner-ergebnis-label span {

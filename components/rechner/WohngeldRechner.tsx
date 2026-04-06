@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function WohngeldRechner() {
   const [params, setParams] = useState<WohngeldParams>({
@@ -82,7 +83,7 @@ export default function WohngeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Wohngeld monatlich"
@@ -110,7 +111,7 @@ export default function WohngeldRechner() {
             Die Mietenstufe haengt vom Wohnort ab (Stufe I = guenstig, VII = teuer).
             Grundlage: WoGG mit Anlagen 1-3, inkl. Klimakomponente.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

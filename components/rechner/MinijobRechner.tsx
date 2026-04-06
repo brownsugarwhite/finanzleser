@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const typLabels: Record<string, string> = {
   minijob: "Minijob",
@@ -56,7 +57,7 @@ export default function MinijobRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Beschaeftigungstyp"
@@ -114,7 +115,7 @@ export default function MinijobRechner() {
             von der RV-Aufstockung (3,6%) befreien lassen, verliert dann aber Rentenansprueche.
             Midijob-Grenze 2026: 538,01 bis 2.000 EUR.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function StundenlohnRechner() {
   const [params, setParams] = useState<StundenlohnParams>({
@@ -71,7 +72,7 @@ export default function StundenlohnRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Stundenlohn" value={euro(result.stundenlohn)} highlight />
             <RechnerResultBox label="Monatsgehalt" value={euro(result.monatsgehalt)} />
@@ -98,7 +99,7 @@ export default function StundenlohnRechner() {
             Berechnung basiert auf dem gesetzlichen Mindestlohn 2026 ({euro(rates.mindestlohn.stundensatz)}/h).
             Wochenenden (104 Tage) werden automatisch abgezogen.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

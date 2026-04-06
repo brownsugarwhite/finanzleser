@@ -12,6 +12,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const SK_OPTIONS = [
   { label: "I – Ledig", value: "1" },
@@ -131,7 +132,7 @@ export default function EinkommensteuerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtsteuer"
@@ -164,7 +165,7 @@ export default function EinkommensteuerRechner() {
             Berechnung nach §32a EStG 2026. Individuelle Freibeträge, Vorsorgeaufwendungen und Kinderfreibeträge
             können die tatsächliche Steuerlast verändern.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

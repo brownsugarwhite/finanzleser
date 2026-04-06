@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function GrundsicherungRechner() {
   const [params, setParams] = useState<GrundsicherungParams>({
@@ -61,7 +62,7 @@ export default function GrundsicherungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Grundsicherung / Monat"
@@ -89,7 +90,7 @@ export default function GrundsicherungRechner() {
             Erwerbsminderung. Freibetrag auf Rente: 30 %, max. Haelfte des Regelsatzes.
             Grundlage: SGB XII.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

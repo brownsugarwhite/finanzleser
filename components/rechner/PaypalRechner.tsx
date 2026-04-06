@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function PaypalRechner() {
   const [params, setParams] = useState<PaypalParams>({
@@ -54,7 +55,7 @@ export default function PaypalRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Gebühr" value={euro(result.gebuehr)} highlight />
             <RechnerResultBox label="Nettobetrag" value={euro(result.nettoBetrag)} variant="positive" />
@@ -74,7 +75,7 @@ export default function PaypalRechner() {
             Die Gebühren entsprechen den aktuellen PayPal-AGB für Deutschland.
             Bei Währungsumrechnungen fallen zusätzliche Gebühren an.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

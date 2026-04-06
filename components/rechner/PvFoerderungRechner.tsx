@@ -8,6 +8,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function PvFoerderungRechner() {
   const [params, setParams] = useState<PvFoerderungParams>({
@@ -77,7 +78,7 @@ export default function PvFoerderungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtertrag / Jahr"
@@ -104,7 +105,7 @@ export default function PvFoerderungRechner() {
             Durchschnittlicher PV-Ertrag in Deutschland: ca. 950 kWh pro kWp und Jahr.
             Einspeiseverguetung nach EEG 2024, Paragraph 48 (Anlagen bis 10 kWp: 8,03 ct/kWh).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

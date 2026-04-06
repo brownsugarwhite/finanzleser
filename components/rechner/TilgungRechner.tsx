@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function TilgungRechner() {
   const [params, setParams] = useState<TilgungParams>({
@@ -74,7 +75,7 @@ export default function TilgungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Monatsrate" value={euro(result.monatsrate)} highlight />
             <RechnerResultBox label="Laufzeit" value={`${result.laufzeitJahre} Jahre`} />
@@ -115,7 +116,7 @@ export default function TilgungRechner() {
             Annuität = Darlehensbetrag x (Zinssatz + Tilgungssatz) / 12. Die Sondertilgung
             wird am Jahresende verrechnet und verkürzt die Laufzeit.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function MehrwertsteuerRechner() {
   const [params, setParams] = useState<MehrwertsteuerParams>({
@@ -65,7 +66,7 @@ export default function MehrwertsteuerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Bruttobetrag" value={euro(result.brutto)} highlight />
           </div>
@@ -82,7 +83,7 @@ export default function MehrwertsteuerRechner() {
             Regelsteuersatz {rates.mehrwertsteuer.regelsteuersatz_prozent} % (unverändert seit 2007).
             Ermäßigter Satz {rates.mehrwertsteuer.ermaessigter_steuersatz_prozent} % für Lebensmittel, Bücher, Zeitungen u.a.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

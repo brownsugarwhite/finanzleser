@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function PfaendungRechner() {
   const [params, setParams] = useState<PfaendungParams>({
@@ -54,7 +55,7 @@ export default function PfaendungRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Pfaendbarer Betrag"
@@ -83,7 +84,7 @@ export default function PfaendungRechner() {
             Unterhaltspflicht: +585,23 EUR, weitere: +326,04 EUR. 70 % des
             ueberschuessigen Betrags sind pfaendbar. Grundlage: 850c ZPO.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

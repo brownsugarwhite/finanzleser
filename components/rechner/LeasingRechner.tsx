@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function LeasingRechner() {
   const [params, setParams] = useState<LeasingParams>({
@@ -83,7 +84,7 @@ export default function LeasingRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Leasingrate / Monat" value={euro(result.leasingrate)} highlight />
             <RechnerResultBox label="Gesamtkosten" value={euro(result.gesamtKosten)} />
@@ -106,7 +107,7 @@ export default function LeasingRechner() {
             Diese Berechnung basiert auf der Annuitätenmethode. Tatsächliche Leasing-Raten
             können durch Versicherung, Wartung und Kilometerkosten abweichen.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

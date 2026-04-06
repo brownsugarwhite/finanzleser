@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KfzSteuerRechner() {
   const [params, setParams] = useState<KfzSteuerParams>({
@@ -85,7 +86,7 @@ export default function KfzSteuerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Jahressteuer"
@@ -118,7 +119,7 @@ export default function KfzSteuerRechner() {
             Diesel: 9,50 EUR/100 ccm. CO2-Freibetrag: 95 g/km.
             Elektro-Befreiung bei Neuzulassung bis 2030 (max. 10 Jahre, laengstens bis 2035).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

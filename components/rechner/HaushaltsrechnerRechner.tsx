@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function HaushaltsrechnerRechner() {
   const [params, setParams] = useState<HaushaltsrechnerParams>({
@@ -114,7 +115,7 @@ export default function HaushaltsrechnerRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Sparbetrag / Monat"
@@ -140,7 +141,7 @@ export default function HaushaltsrechnerRechner() {
             Experten empfehlen eine Sparquote von mindestens 10-20% des Nettoeinkommens.
             Ein Notgroschen von 3-6 Monatsausgaben bietet finanzielle Sicherheit.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KindergeldRechner() {
   const [params, setParams] = useState<KindergeldParams>({
@@ -42,7 +43,7 @@ export default function KindergeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Kindergeld monatlich"
@@ -77,7 +78,7 @@ export default function KindergeldRechner() {
             Das Finanzamt prueft automatisch, ob Kindergeld oder Kinderfreibetrag
             guenstiger ist (Guenstigerpruefung). Grundlage: BKGG / EStG.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

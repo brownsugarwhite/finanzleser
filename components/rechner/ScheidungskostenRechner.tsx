@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function ScheidungskostenRechner() {
   const [params, setParams] = useState<ScheidungskostenParams>({
@@ -55,7 +56,7 @@ export default function ScheidungskostenRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtkosten Scheidung"
@@ -82,7 +83,7 @@ export default function ScheidungskostenRechner() {
             wird der Verfahrenswert um 10 % erhoeht. Anwaltskosten berechnet fuer 2 Anwaelte
             nach RVG (Verfahrens- und Terminsgebuehr + Post + MwSt).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

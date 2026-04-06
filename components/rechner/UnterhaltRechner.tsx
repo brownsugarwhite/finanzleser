@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const ALTERSSTUFEN_LABELS = ["0-5 Jahre", "6-11 Jahre", "12-17 Jahre", "ab 18 Jahre"];
 
@@ -89,7 +90,7 @@ export default function UnterhaltRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Zahlbetrag / Monat"
@@ -141,7 +142,7 @@ export default function UnterhaltRechner() {
             Unterhaltsberechtigter korrigiert. Fuer die tatsaechliche Unterhaltspflicht
             sollten Sie einen Anwalt oder das Jugendamt konsultieren.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

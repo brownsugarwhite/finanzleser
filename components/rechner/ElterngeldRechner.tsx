@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function ElterngeldRechner() {
   const [params, setParams] = useState<ElterngeldParams>({
@@ -53,7 +54,7 @@ export default function ElterngeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           {result.keinAnspruch ? (
             <RechnerResultBox
               label="Kein Anspruch"
@@ -92,7 +93,7 @@ export default function ElterngeldRechner() {
             minus progressiver Lohnsteuer. Ersatzrate 65-67 % je nach Nettoeinkommen.
             Min. 300 EUR, max. 1.800 EUR (Basis) bzw. 150-900 EUR (Plus).
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

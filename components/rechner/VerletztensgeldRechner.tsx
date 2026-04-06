@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function VerletztensgeldRechner() {
   const [params, setParams] = useState<VerletztengeldParams>({
@@ -52,7 +53,7 @@ export default function VerletztensgeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Verletztengeld taeglich"
@@ -82,7 +83,7 @@ export default function VerletztensgeldRechner() {
             Verletztengeld betraegt 80% des Regelentgelts, max. Nettoverdienst (SS 45-52 SGB VII).
             Es wird bei Arbeitsunfaellen und Berufskrankheiten gezahlt.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

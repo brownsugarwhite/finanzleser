@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function KurzarbeitssgeldRechner() {
   const [params, setParams] = useState<KurzarbeitsgeldParams>({
@@ -82,7 +83,7 @@ export default function KurzarbeitssgeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Kurzarbeitergeld"
@@ -115,7 +116,7 @@ export default function KurzarbeitssgeldRechner() {
             Voraussetzung: angemeldete Kurzarbeit bei der Agentur fuer Arbeit.
             Rechtsgrundlage: SS 95-111 SGB III.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

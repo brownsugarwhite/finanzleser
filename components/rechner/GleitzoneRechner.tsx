@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 const typLabels: Record<string, string> = {
   minijob: "Minijob",
@@ -48,7 +49,7 @@ export default function GleitzoneRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Beschaeftigungstyp"
@@ -88,7 +89,7 @@ export default function GleitzoneRechner() {
             In der Gleitzone (538,01-2.000 EUR) zahlen Arbeitnehmer reduzierte SV-Beitraege
             (SS 20 Abs. 2 SGB IV). Die Ersparnis ist bei niedrigem Einkommen am groessten.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

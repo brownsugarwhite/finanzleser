@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function UebergangsgeldRechner() {
   const [params, setParams] = useState<UebergangsgeldParams>({
@@ -50,7 +51,7 @@ export default function UebergangsgeldRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Uebergangsgeld taeglich"
@@ -82,7 +83,7 @@ export default function UebergangsgeldRechner() {
             Es wird waehrend medizinischer oder beruflicher Rehabilitation gezahlt.
             Rechtsgrundlage: SS 20-21 SGB VI / SS 49-52 SGB IX.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

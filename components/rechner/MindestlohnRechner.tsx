@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function MindestlohnRechner() {
   const [params, setParams] = useState<MindestlohnParams>({
@@ -53,7 +54,7 @@ export default function MindestlohnRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatliches Brutto"
@@ -99,7 +100,7 @@ export default function MindestlohnRechner() {
             Der gesetzliche Mindestlohn betraegt {result.mindestlohn.toFixed(2)} EUR/Stunde (MiLoG).
             Berechnungsgrundlage: 4,348 Wochen pro Monat.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );

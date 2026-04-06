@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerResults from "./ui/RechnerResults";
 
 export default function BafoegRechner() {
   const [params, setParams] = useState<BafoegParams>({
@@ -83,7 +84,7 @@ export default function BafoegRechner() {
       <RechnerButton onClick={handleBerechnen} />
 
       {result && (
-        <div className="rechner-results">
+        <RechnerResults>
           {result.hatAnspruch ? (
             <>
               <div className="rechner-result-boxes">
@@ -120,7 +121,7 @@ export default function BafoegRechner() {
             BAfoeg wird zur Haelfte als Zuschuss, zur Haelfte als zinsloses Darlehen
             gewaehrt (max. 10.010 EUR Rueckzahlung). Grundlage: BAfoeg 2024/2026.
           </RechnerHinweis>
-        </div>
+        </RechnerResults>
       )}
     </div>
   );
