@@ -7,6 +7,8 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Rechner wird geladen...</div>,
 });
 
+import FazitHeading from "@/components/ui/FazitHeading";
+
 const ChecklisteInline = dynamic(() => import("@/components/checkliste/ChecklisteInline"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
 });
@@ -126,6 +128,30 @@ function addHeadingIds(html: string, startIndex: number): { html: string; count:
   return { html: result, count: idx - startIndex };
 }
 
+// Splittet HTML an Fazit-H2s und gibt abwechselnd HTML-Strings und "fazit" Marker zurück
+function splitFazit(html: string): { type: "html" | "fazit"; value: string }[] {
+  const parts: { type: "html" | "fazit"; value: string }[] = [];
+  const regex = /<h2([^>]*)>\s*Fazit\s*<\/h2>/gi;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(html)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ type: "html", value: html.slice(lastIndex, match.index) });
+    }
+    // Extract id from the h2 tag if present
+    const idMatch = match[1].match(/id="([^"]+)"/);
+    parts.push({ type: "fazit", value: idMatch?.[1] || "" });
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < html.length) {
+    parts.push({ type: "html", value: html.slice(lastIndex) });
+  }
+
+  return parts.length > 0 ? parts : [{ type: "html", value: html }];
+}
+
 export default function ArticleContent({ content, collapsed }: Props) {
   const parts = parseContent(content);
 
@@ -135,11 +161,21 @@ export default function ArticleContent({ content, collapsed }: Props) {
     if (part.type === "html") {
       const { html, count } = addHeadingIds(part.value, headingIndex);
       headingIndex += count;
-      return (
-        <CenteredContainer key={i} collapsed={collapsed}>
-          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
-        </CenteredContainer>
-      );
+      const fazitParts = splitFazit(html);
+      return fazitParts.map((fp, j) => {
+        if (fp.type === "fazit") {
+          return (
+            <CenteredContainer key={`${i}-fazit-${j}`} collapsed={collapsed}>
+              <FazitHeading id={fp.value} />
+            </CenteredContainer>
+          );
+        }
+        return (
+          <CenteredContainer key={`${i}-html-${j}`} collapsed={collapsed}>
+            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: fp.value }} />
+          </CenteredContainer>
+        );
+      });
     }
     if (part.type === "rechner") {
       const id = `heading-${headingIndex}`;

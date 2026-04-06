@@ -182,6 +182,74 @@ h1, h2 {
   height: var(--blur-height, 120px);
 }
 
+/* ─────────────────────────────────────────────
+   Fazit Heading (Artikel H2)
+   ───────────────────────────────────────────── */
+
+.fazit-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0 24px;
+  font-weight: 900 !important;
+}
+
+.fazit-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-text-primary);
+}
+
+.fazit-badge {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fazit-starburst {
+  position: absolute;
+  inset: 0;
+  width: 96px;
+  height: 96px;
+}
+
+.fazit-circle {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 82px;
+  height: 82px;
+}
+
+.fazit-inner-line {
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  height: 1px;
+  background: var(--color-text-primary);
+}
+
+.fazit-inner-line--top {
+  top: 31%;
+}
+
+.fazit-inner-line--bottom {
+  bottom: 30%;
+}
+
+.fazit-text {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 27px;
+  font-weight: 900;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
 /* Rechner styles → see rechner.css */
 
 /* ─────────────────────────────────────────────
