@@ -11,13 +11,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   const post = await getPostBySlug(params.kategorie).catch(() => null);
   if (post) {
     return (
-      <ArticleLayout title={post.title}>
-        <div className="prose prose-lg max-w-none">
-          {post.content && (
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          )}
-        </div>
-      </ArticleLayout>
+      <ArticleLayout title={post.title} content={post.content} />
     );
   }
 

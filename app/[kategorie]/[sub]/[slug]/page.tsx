@@ -1,10 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
-import ArticleSidebar from "@/components/layout/ArticleSidebar";
-import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import type { Category } from "@/lib/types";
-import ArticleContent from "@/components/sections/ArticleContent";
 
 export default async function BeitragPage(props: {
   params: Promise<{ kategorie: string; sub: string; slug: string }>;
@@ -45,6 +42,8 @@ export default async function BeitragPage(props: {
       category={category}
       mainCategory={params.kategorie}
       mainCategoryName={mainCategory?.name}
+      content={post.content}
+      contentTableOfContents={!!post.content}
       author={
         post.author?.node
           ? {
@@ -56,22 +55,6 @@ export default async function BeitragPage(props: {
             }
           : undefined
       }
-      sidebar={post.content ? <ArticleSidebar content={post.content} /> : undefined}
-      contentTableOfContents={
-        post.content ? (
-          <ArticleTableOfContents content={post.content} />
-        ) : undefined
-      }
-    >
-      <div className="prose prose-lg max-w-none">
-        {post.content && post.content.trim() ? (
-          <ArticleContent content={post.content} />
-        ) : (
-          <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
-            <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
-          </div>
-        )}
-      </div>
-    </ArticleLayout>
+    />
   );
 }

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import TableOfContents from "@/components/sections/TableOfContents";
 
 interface ArticleSidebarProps {
   content: string;
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
 }
 
-export default function ArticleSidebar({ content }: ArticleSidebarProps) {
-  const [collapsed, setCollapsed] = useState(false);
+export default function ArticleSidebar({ content, collapsed, setCollapsed }: ArticleSidebarProps) {
 
   return (
     <aside
@@ -17,11 +17,11 @@ export default function ArticleSidebar({ content }: ArticleSidebarProps) {
         display: "flex",
         gap: collapsed ? "10px" : "23px",
         alignSelf: "stretch",
-        flexShrink: 1,
+        flexShrink: 0,
         width: "100%",
-        minWidth: collapsed ? "auto" : "400px",
+        maxWidth: collapsed ? "100px" : "400px",
         paddingLeft: collapsed ? "23px" : "50px",
-        paddingRight: collapsed ? "50px" : "23px",
+        paddingRight: collapsed ? "23px" : "23px",
       }}
     >
       <div className="sticky top-24" style={{ position: "sticky", top: "100px", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>

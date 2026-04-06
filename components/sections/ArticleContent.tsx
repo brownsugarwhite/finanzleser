@@ -17,7 +17,7 @@ const TOOL_CONFIG = {
   vergleich: { label: "Vergleich", color: "var(--color-tool-vergleiche)", endpoint: "" },
 } as const;
 
-function ToolLabel({ type, slug }: { type: keyof typeof TOOL_CONFIG; slug: string }) {
+function ToolLabel({ type, slug, headingId }: { type: keyof typeof TOOL_CONFIG; slug: string; headingId: string }) {
   const config = TOOL_CONFIG[type];
   const [title, setTitle] = useState("");
 
@@ -29,7 +29,7 @@ function ToolLabel({ type, slug }: { type: keyof typeof TOOL_CONFIG; slug: strin
   }, [type, slug]);
 
   return (
-    <h2 className="article-tool-label">
+    <h2 id={headingId} className="article-tool-label">
       <span className="article-tool-badge" style={{ background: config.color }}>
         {config.label}
       </span>
@@ -40,6 +40,7 @@ function ToolLabel({ type, slug }: { type: keyof typeof TOOL_CONFIG; slug: strin
 
 interface Props {
   content: string;
+  collapsed: boolean;
 }
 
 interface ContentPart {
@@ -81,38 +82,82 @@ function parseContent(html: string): ContentPart[] {
   return parts;
 }
 
-export default function ArticleContent({ content }: Props) {
+function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
+  return (
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
+      <div style={{ width: "100%", minWidth: 1200, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ width: "100%", maxWidth: 1200 }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CenteredContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
+  return (
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 100 : 400 }}>
+      <div style={{ width: "100%", minWidth: 750, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ width: "100%", maxWidth: 750 }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// H2-Tags im HTML-String mit heading-IDs versehen
+function addHeadingIds(html: string, startIndex: number): { html: string; count: number } {
+  let idx = startIndex;
+  const result = html.replace(/<h2([\s>])/gi, (_, after) => {
+    const id = `heading-${idx}`;
+    idx++;
+    return `<h2 id="${id}"${after}`;
+  });
+  return { html: result, count: idx - startIndex };
+}
+
+export default function ArticleContent({ content, collapsed }: Props) {
   const parts = parseContent(content);
 
-  // Kein Block gefunden → normales HTML
-  if (parts.length === 1 && parts[0].type === "html") {
-    return <div dangerouslySetInnerHTML={{ __html: content }} />;
-  }
+  // Globalen Heading-Index ueber alle Parts hinweg berechnen
+  let headingIndex = 0;
+  const rendered = parts.map((part, i) => {
+    if (part.type === "html") {
+      const { html, count } = addHeadingIds(part.value, headingIndex);
+      headingIndex += count;
+      return (
+        <CenteredContainer key={i} collapsed={collapsed}>
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
+        </CenteredContainer>
+      );
+    }
+    if (part.type === "rechner") {
+      const id = `heading-${headingIndex}`;
+      headingIndex++;
+      return (
+        <WideContainer key={i} collapsed={collapsed}>
+          <div className="article-tool-embed">
+            <ToolLabel type="rechner" slug={part.value} headingId={id} />
+            <RechnerEmbed slug={part.value} />
+          </div>
+        </WideContainer>
+      );
+    }
+    if (part.type === "checkliste") {
+      const id = `heading-${headingIndex}`;
+      headingIndex++;
+      return (
+        <WideContainer key={i} collapsed={collapsed}>
+          <div className="checkliste-article-wrap">
+            <ToolLabel type="checkliste" slug={part.value} headingId={id} />
+            <ChecklisteInline slug={part.value} />
+          </div>
+        </WideContainer>
+      );
+    }
+    return null;
+  });
 
-  return (
-    <>
-      {parts.map((part, i) => {
-        if (part.type === "html") {
-          return <div key={i} dangerouslySetInnerHTML={{ __html: part.value }} />;
-        }
-        if (part.type === "rechner") {
-          return (
-            <div key={i} style={{ margin: "40px 0" }} className="article-tool-embed">
-              <ToolLabel type="rechner" slug={part.value} />
-              <RechnerEmbed slug={part.value} />
-            </div>
-          );
-        }
-        if (part.type === "checkliste") {
-          return (
-            <div key={i} className="checkliste-article-wrap">
-              <ToolLabel type="checkliste" slug={part.value} />
-              <ChecklisteInline slug={part.value} />
-            </div>
-          );
-        }
-        return null;
-      })}
-    </>
-  );
+  return <>{rendered}</>;
 }

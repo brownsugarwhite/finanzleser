@@ -102,12 +102,7 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
 
     const tocItems: TOCItem[] = [];
 
-    headings.forEach((heading, idx) => {
-      const id = `heading-${idx}`;
-      if (!heading.id) {
-        heading.id = id;
-      }
-
+    headings.forEach((heading) => {
       // Tool-H2 erkennen (hat Klasse article-tool-label)
       const isTool = heading.classList.contains("article-tool-label");
       let toolType: string | undefined;

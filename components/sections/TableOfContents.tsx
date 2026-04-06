@@ -44,18 +44,23 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
+  const isScrollingRef = useRef(false);
+
   const scrollToId = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
+    isScrollingRef.current = true;
     gsap.to(window, {
       scrollTo: { y: el, offsetY: 90 },
       duration: 0.8,
       ease: "power2.inOut",
+      onComplete: () => { isScrollingRef.current = false; },
     });
   }, []);
   const [scrollProgress, setScrollProgress] = useState(0);
   const headingsRef = useRef<HTMLElement[]>([]);
   const articleRef = useRef<HTMLElement | null>(null);
+  const scrollCleanupRef = useRef<(() => void) | null>(null);
 
   const loadTOC = () => {
     const article = document.querySelector("article");
@@ -68,12 +73,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
 
     const tocItems: TOCItem[] = [];
 
-    headings.forEach((heading, idx) => {
-      const id = `heading-${idx}`;
-      if (!heading.id) {
-        heading.id = id;
-      }
-
+    headings.forEach((heading) => {
       const isTool = heading.classList.contains("article-tool-label");
       let toolType: string | undefined;
       let text: string;
@@ -97,40 +97,55 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
 
     setItems(tocItems);
 
-    const handleScroll = () => {
-      let currentId = "";
-      let progress = 0;
+    // Scroll-Handler nur einmal registrieren
+    if (!scrollCleanupRef.current) {
+      const handleScroll = () => {
+        const art = document.querySelector("article");
+        if (!art) return;
+        const h2s = Array.from(art.querySelectorAll("h2"));
+        if (h2s.length === 0) return;
 
-      for (let i = 0; i < headings.length; i++) {
-        const rect = headings[i].getBoundingClientRect();
-        if (rect.top <= 91) {
-          currentId = headings[i].id || "";
+        let currentId = "";
+        let progress = 0;
 
-          const start = headings[i].getBoundingClientRect().top + window.scrollY;
-          const end =
-            i < headings.length - 1
-              ? headings[i + 1].getBoundingClientRect().top + window.scrollY
-              : article.getBoundingClientRect().bottom + window.scrollY;
-          const scrollPos = window.scrollY + 91;
-          progress = Math.min(1, Math.max(0, (scrollPos - start) / (end - start)));
+        for (let i = 0; i < h2s.length; i++) {
+          const rect = h2s[i].getBoundingClientRect();
+          if (rect.top <= 91) {
+            currentId = h2s[i].id || "";
+
+            const start = h2s[i].getBoundingClientRect().top + window.scrollY;
+            const end =
+              i < h2s.length - 1
+                ? h2s[i + 1].getBoundingClientRect().top + window.scrollY
+                : art.getBoundingClientRect().bottom + window.scrollY;
+            const scrollPos = window.scrollY + 91;
+            progress = Math.min(1, Math.max(0, (scrollPos - start) / (end - start)));
+          }
         }
-      }
 
-      setActiveId(currentId);
-      setScrollProgress(progress);
-    };
+        setActiveId(currentId);
+        setScrollProgress(progress);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
+      scrollCleanupRef.current = () => window.removeEventListener("scroll", handleScroll);
+    }
   };
 
+  // Initial load mit Timers (wartet auf dynamische Inhalte wie Tool-Titel)
   useEffect(() => {
     const timers = [
       100, 200, 300, 500, 700, 1000, 1500, 2000, 3000,
     ].map((ms) => setTimeout(loadTOC, ms));
 
-    return () => timers.forEach((timer) => clearTimeout(timer));
+    return () => {
+      timers.forEach((timer) => clearTimeout(timer));
+      if (scrollCleanupRef.current) {
+        scrollCleanupRef.current();
+      }
+    };
   }, []);
+
 
   if (items.length === 0) return null;
 
