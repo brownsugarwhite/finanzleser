@@ -704,6 +704,9 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
         id
         title
         slug
+        rechnerFelder {
+          beschreibung
+        }
       }
     }
   `;

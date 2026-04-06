@@ -17,24 +17,33 @@ const TOOL_CONFIG = {
   vergleich: { label: "Vergleich", color: "var(--color-tool-vergleiche)", endpoint: "" },
 } as const;
 
-function ToolLabel({ type, slug, headingId }: { type: keyof typeof TOOL_CONFIG; slug: string; headingId: string }) {
+function ToolLabel({ type, slug, headingId, showExcerpt }: { type: keyof typeof TOOL_CONFIG; slug: string; headingId: string; showExcerpt?: boolean }) {
   const config = TOOL_CONFIG[type];
   const [title, setTitle] = useState("");
+  const [excerpt, setExcerpt] = useState("");
 
   useEffect(() => {
     fetch(`/api/tool-title/${type}/${slug}`)
       .then((res) => res.json())
-      .then((data) => { if (data.title) setTitle(data.title); })
+      .then((data) => {
+        if (data.title) setTitle(data.title);
+        if (data.excerpt) setExcerpt(data.excerpt);
+      })
       .catch(() => {});
   }, [type, slug]);
 
   return (
-    <h2 id={headingId} className="article-tool-label">
-      <span className="article-tool-badge" style={{ background: config.color }}>
-        {config.label}
-      </span>
-      {title && <span className="article-tool-title">{title}</span>}
-    </h2>
+    <>
+      <h2 id={headingId} className="article-tool-label">
+        <span className="article-tool-badge" style={{ background: config.color }}>
+          {config.label}
+        </span>
+        {title && <span className="article-tool-title">{title}</span>}
+      </h2>
+      {showExcerpt && excerpt && (
+        <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: excerpt }} />
+      )}
+    </>
   );
 }
 
@@ -138,7 +147,7 @@ export default function ArticleContent({ content, collapsed }: Props) {
       return (
         <WideContainer key={i} collapsed={collapsed}>
           <div className="article-tool-embed">
-            <ToolLabel type="rechner" slug={part.value} headingId={id} />
+            <ToolLabel type="rechner" slug={part.value} headingId={id} showExcerpt />
             <RechnerEmbed slug={part.value} />
           </div>
         </WideContainer>

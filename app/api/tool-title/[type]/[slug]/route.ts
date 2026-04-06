@@ -9,7 +9,8 @@ export async function GET(
 
   if (type === "rechner") {
     const rechner = await getRechnerBySlug(slug);
-    return NextResponse.json({ title: rechner?.title || "" });
+    const excerpt = rechner?.rechnerFelder?.beschreibung || rechner?.excerpt || "";
+    return NextResponse.json({ title: rechner?.title || "", excerpt });
   }
 
   if (type === "checkliste") {

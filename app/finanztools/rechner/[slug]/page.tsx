@@ -5,59 +5,59 @@ import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import { getAllRechner, getRechnerBySlug } from "@/lib/wordpress";
 
-// Fallback statische Daten - alle 52 Rechner
+// Fallback statische Daten - alle 51 Rechner
 const FALLBACK_RECHNER: Record<string, { title: string; type: string; desc: string }> = {
-  "brutto-netto": { title: "Brutto-Netto-Rechner", type: "steuer", desc: "Der Brutto-Netto-Rechner zeigt Ihnen, was von Ihrem Gehalt nach Abzug aller Steuern und Sozialabgaben tatsächlich übrig bleibt. Geben Sie Ihr Bruttogehalt ein und erhalten Sie eine detaillierte Aufschlüsselung aller Abzüge." },
-  "mehrwertsteuer": { title: "Mehrwertsteuer-Rechner", type: "steuer", desc: "Mit dem Mehrwertsteuer-Rechner können Sie schnell und einfach die Mehrwertsteuer aus einem Nettobetrag hinzurechnen oder aus einem Bruttobetrag herausrechnen." },
-  "einkommensteuer": { title: "Einkommensteuer-Rechner", type: "steuer", desc: "Der Einkommensteuer-Rechner berechnet die Einkommensteuer für Ihr zu versteuerndes Einkommen nach dem aktuellen Steuertarif." },
-  "kirchensteuer": { title: "Kirchensteuer-Rechner", type: "steuer", desc: "Die Kirchensteuer wird als Zuschlag auf die Lohn- oder Einkommensteuer erhoben und variiert je nach Bundesland und Konfession." },
-  "kfz-steuer": { title: "KFZ-Steuer-Rechner", type: "steuer", desc: "Die KFZ-Steuer hängt vom Hubraum, der Schadstoffklasse und dem Erstzulassungsdatum ab." },
-  "erbschaftsteuer": { title: "Erbschaftsteuer-Rechner", type: "steuer", desc: "Der Erbschaftsteuer-Rechner berechnet die anfallende Steuer, wenn Sie eine Erbschaft oder Schenkung erhalten." },
-  "kalteprogression": { title: "Kalte Progression-Rechner", type: "steuer", desc: "Die kalte Progression beschreibt das Phänomen, dass durch Inflation steigende nominale Einkommen zu einer höheren Steuerlast führen." },
-  "steuererstattung": { title: "Steuererstattung-Rechner", type: "steuer", desc: "Viele Arbeitnehmer erhalten jedes Jahr eine Steuererstattung durch die Steuererklärung." },
-  "steuerklassen": { title: "Steuerklassen-Rechner", type: "steuer", desc: "Ehepaare und Lebenspartner können zwischen Steuerklassenkombinationen wählen." },
-  "pendlerpauschale": { title: "Pendlerpauschale-Rechner", type: "steuer", desc: "Berufspendler können ihre Fahrtkosten über die Pendlerpauschale in der Steuererklärung geltend machen." },
-  "stundenlohn": { title: "Stundenlohn-Rechner", type: "steuer", desc: "Der Stundenlohn-Rechner konvertiert zwischen Stundenlohn, Monatsgehalt und Jahresgehalt." },
-  "abfindung": { title: "Abfindungs-Rechner", type: "steuer", desc: "Eine Abfindung kann erhebliche Steuerersparnisse bringen durch die sogenannte Fünftelregelung." },
-  "kindergeld": { title: "Kindergeld-Rechner", type: "soziales", desc: "Das Kindergeld ist eine Leistung des Staates für Familien mit Kindern." },
-  "elterngeld": { title: "Elterngeld-Rechner", type: "soziales", desc: "Das Elterngeld soll Eltern in den ersten Lebensmonaten des Kindes unterstützen." },
-  "elternzeit": { title: "Elternzeit-Rechner", type: "soziales", desc: "Mit der Elternzeit können Sie sich Zeit für Ihre Familie nehmen." },
-  "mutterschutz": { title: "Mutterschutz-Rechner", type: "soziales", desc: "Der Mutterschutz schützt Arbeitnehmerinnen vor Kündigung und regelt Beschäftigungsverbote." },
-  "wohngeld": { title: "Wohngeld-Rechner", type: "soziales", desc: "Das Wohngeld ist eine Leistung für Personen mit kleinerem Einkommen zur Unterstützung der Wohnkosten." },
-  "buergergeld": { title: "Bürgergeld-Rechner", type: "soziales", desc: "Das Bürgergeld ist die Grundsicherung für arbeitsuchende Personen." },
-  "grundsicherung": { title: "Grundsicherung-Rechner", type: "soziales", desc: "Die Grundsicherung im Alter und bei Erwerbsminderung hilft Menschen, die nicht genug Rente erhalten." },
-  "alg1": { title: "Arbeitslosengeld I-Rechner", type: "soziales", desc: "Das Arbeitslosengeld I (ALG I) ist eine Versicherungsleistung für Arbeitslose." },
-  "kurzarbeitsgeld": { title: "Kurzarbeitsgeld-Rechner", type: "soziales", desc: "Das Kurzarbeitergeld ersetzt Lohnausfälle bei vorübergehender Arbeitsausfallzeit." },
-  "krankengeld": { title: "Krankengeld-Rechner", type: "soziales", desc: "Das Krankengeld ersetzt das Einkommen ab dem 43. Tag der Erkrankung." },
-  "kinderkrankengeld": { title: "Kinderkrankengeld-Rechner", type: "soziales", desc: "Eltern erhalten Kinderkrankengeld, wenn sie wegen der Erkrankung eines Kindes arbeitsunfähig sind." },
-  "pfaendung": { title: "Pfändung-Rechner", type: "soziales", desc: "Bei Schulden wird oft Lohn gepfändet. Mit unserem Rechner können Sie berechnen, wie viel pfändbar ist." },
-  "urlaubsanspruch": { title: "Urlaubsanspruch-Rechner", type: "soziales", desc: "Der Urlaubsanspruch ist abhängig von der Arbeitswochenstundenzahl." },
-  "minijob": { title: "Minijob & Midijob-Rechner", type: "soziales", desc: "Minijobs haben eine Verdienstgrenze von 538€ monatlich, Midijobs von 538€ bis 1076€." },
-  "mindestlohn": { title: "Mindestlohn-Rechner", type: "soziales", desc: "Der gesetzliche Mindestlohn garantiert einen Mindeststundenlohn." },
-  "gleitzone": { title: "Gleitzone-Rechner", type: "soziales", desc: "Die Gleitzone betrifft Beschäftigte mit Einkommen zwischen 538€ und 1076€." },
-  "teilzeit": { title: "Teilzeit-Rechner", type: "soziales", desc: "Berechnen Sie, wie sich ein Wechsel von Vollzeit zu Teilzeit auf Ihr Einkommen auswirkt." },
-  "hinzuverdienst": { title: "Hinzuverdienst-Rechner", type: "soziales", desc: "Wer eine Altersrente bezieht, kann unbegrenzt hinzuverdienen." },
-  "gruendungszuschuss": { title: "Gründungszuschuss-Rechner", type: "soziales", desc: "Der Gründungszuschuss der Agentur für Arbeit unterstützt Arbeitlose." },
-  "uebergangsgeld": { title: "Übergangsgeld-Rechner", type: "soziales", desc: "Das Übergangsgeld wird gezahlt, wenn Sie an einer Rehabilitationsmaßnahme teilnehmen." },
-  "verletztengeld": { title: "Verletztengeld-Rechner", type: "soziales", desc: "Das Verletztengeld der Berufsgenossenschaft ersetzt das Einkommen bei Arbeitsunfällen." },
-  "gerichtskosten": { title: "Gerichtskosten-Rechner", type: "soziales", desc: "Bei Rechtsstreitigkeiten fallen Gerichtskosten und Anwaltsgebühren an." },
-  "rente": { title: "Renten-Rechner", type: "rente", desc: "Die Gesetzliche Rentenversicherung berechnet die Rente aus Rentenpunkten." },
-  "rentenabschlag": { title: "Rentenabschlag-Rechner", type: "rente", desc: "Wer vor der Regelaltersgrenze in Rente geht, muss mit Rentenzuschlägen rechnen." },
-  "rentenbeginn": { title: "Rentenbeginn-Rechner", type: "rente", desc: "Nicht alle Erwerbstätigen haben dieselbe Regelaltersgrenze für die Rente." },
-  "rentenbesteuerung": { title: "Rentenbesteuerung-Rechner", type: "rente", desc: "Nicht die gesamte Rente ist steuerpflichtig." },
-  "rentenschaetzer": { title: "Rentenschätzer", type: "rente", desc: "Schätzen Sie Ihren Rentenanspruch auf Basis bisheriger Beitragsjahre." },
-  "flexrente": { title: "Flexrenten-Rechner", type: "rente", desc: "Die Flexrente ermöglicht unbegrenzten Hinzuverdienst nach Renteneintritt." },
-  "altersteilzeit": { title: "Altersteilzeit-Rechner", type: "rente", desc: "Die Altersteilzeit ermöglicht ab 55 Jahren eine Reduzierung der Arbeitszeit." },
-  "witwenrente": { title: "Witwenrente-Rechner", type: "rente", desc: "Die Witwenrente für überlebende Ehepartner berechnen." },
-  "kredit": { title: "Kreditrechner", type: "kredit", desc: "Mit unserem Kreditrechner können Sie monatliche Raten und Zinsen berechnen." },
-  "zinseszins": { title: "Zinseszins-Rechner", type: "kredit", desc: "Der Zinseszins-Effekt zeigt, wie Ihr Kapital mit Zinsen wächst." },
-  "inflation": { title: "Inflationsrechner", type: "kredit", desc: "Die Inflation vermindert die Kaufkraft Ihres Geldes über Zeit." },
-  "tilgung": { title: "Tilgungsrechner", type: "kredit", desc: "Der Tilgungsrechner erstellt einen detaillierten Tilgungsplan." },
-  "annuitaet": { title: "Annuitätenrechner", type: "kredit", desc: "Berechnen Sie Annuitätendarlehen mit vollständigem Tilgungsplan." },
-  "leasing": { title: "Leasing-Rechner", type: "kredit", desc: "Leasing ist eine Alternative zum Autokauf mit Finanzierung." },
-  "haushaltsrechner": { title: "Haushalts-Rechner", type: "kredit", desc: "Planen Sie Ihr monatliches Budget mit unserem Haushaltsrechner." },
-  "paypal": { title: "PayPal-Gebühren-Rechner", type: "kredit", desc: "Berechnen Sie die Gebühren für gewerbliche PayPal-Transaktionen." },
-  "bafoeg": { title: "BAföG-Rechner", type: "kredit", desc: "Das BAföG ist eine finanzielle Unterstützung für Schüler und Studenten." },
+  "brutto-netto": { title: "Brutto-Netto-Rechner", type: "steuer", desc: "Mit dem Brutto-Netto-Rechner berechnen Sie, was nach Abzug von Steuern und Sozialabgaben von Ihrem Gehalt übrig bleibt. Ideal für Gehaltsverhandlungen und die monatliche Finanzplanung." },
+  "mehrwertsteuer": { title: "Mehrwertsteuer-Rechner", type: "steuer", desc: "Berechnen Sie die Mehrwertsteuer für Brutto- und Nettobeträge mit 19 % oder 7 % Steuersatz. Perfekt für Rechnungsstellung, Vorsteuerabzug und Preiskalkulation." },
+  "einkommensteuer": { title: "Einkommensteuer-Rechner", type: "steuer", desc: "Ermitteln Sie Ihre Einkommensteuer nach Grund- oder Splittingtarif inkl. Soli und Kirchensteuer. Der Rechner zeigt Steuerlast, Durchschnitts- und Grenzsteuersatz auf einen Blick." },
+  "kirchensteuer": { title: "Kirchensteuer-Rechner", type: "steuer", desc: "Berechnen Sie Ihre Kirchensteuer (8 % oder 9 % je nach Bundesland) auf Basis Ihrer Einkommensteuer. Inklusive Auswirkung als Sonderausgabe und monatlicher Belastung." },
+  "kfz-steuer": { title: "KFZ-Steuer-Rechner", type: "steuer", desc: "Berechnen Sie die jährliche Kfz-Steuer anhand von Hubraum, CO₂-Ausstoß und Antriebsart. Ideal beim Autokauf zum Vergleich der laufenden Kosten verschiedener Fahrzeuge." },
+  "erbschaftsteuer": { title: "Erbschaftsteuer-Rechner", type: "steuer", desc: "Ermitteln Sie die Erbschaft- oder Schenkungsteuer nach Verwandtschaftsgrad und Freibeträgen. Unverzichtbar für die Nachlassplanung und vorausschauende Vermögensübertragung." },
+  "kalteprogression": { title: "Kalte Progression-Rechner", type: "steuer", desc: "Berechnen Sie, wie viel Ihrer Gehaltserhöhung durch die kalte Progression aufgezehrt wird. Der Rechner zeigt den realen Nettoeffekt nach Inflation und Steuerprogression." },
+  "steuererstattung": { title: "Steuererstattung-Rechner", type: "steuer", desc: "Schätzen Sie Ihre Steuererstattung vorab ein. Der Rechner berücksichtigt Werbungskosten, Sonderausgaben und Ihre Steuerklasse und zeigt, wie viel Sie vom Finanzamt zurückbekommen." },
+  "steuerklassen": { title: "Steuerklassen-Rechner", type: "steuer", desc: "Finden Sie die optimale Steuerklassenkombination für Ehepaare. Vergleichen Sie III/V, IV/IV und Faktorverfahren und ermitteln Sie das höchste gemeinsame Nettoeinkommen." },
+  "pendlerpauschale": { title: "Pendlerpauschale-Rechner", type: "steuer", desc: "Berechnen Sie Ihre absetzbare Entfernungspauschale und die daraus resultierende Steuerersparnis. Geben Sie Entfernung und Arbeitstage ein und optimieren Sie Ihre Steuererklärung." },
+  "stundenlohn": { title: "Stundenlohn-Rechner", type: "steuer", desc: "Ermitteln Sie Ihren tatsächlichen Brutto- und Nettostundenlohn aus dem Monatsgehalt. Perfekt zum Vergleich von Jobangeboten, Teilzeit vs. Vollzeit und Mindestlohn-Check." },
+  "abfindung": { title: "Abfindungs-Rechner", type: "steuer", desc: "Berechnen Sie die Steuer auf Ihre Abfindung mit und ohne Fünftelregelung. Der Rechner zeigt die konkrete Ersparnis und was netto von Ihrer Abfindung übrig bleibt." },
+  "kindergeld": { title: "Kindergeld-Rechner", type: "soziales", desc: "Der Kindergeld-Rechner ermittelt Ihren monatlichen Anspruch auf Kindergeld. Geben Sie die Anzahl und das Alter Ihrer Kinder ein und erhalten Sie die exakte Berechnung." },
+  "elterngeld": { title: "Elterngeld-Rechner", type: "soziales", desc: "Berechnen Sie Ihren Elterngeldanspruch als Basiselterngeld oder ElterngeldPlus. Der Rechner ermittelt die monatliche Zahlung auf Basis Ihres Nettoeinkommens vor der Geburt." },
+  "elternzeit": { title: "Elternzeit-Rechner", type: "soziales", desc: "Planen Sie Ihre Elternzeit mit korrekten Fristen und optimaler Aufteilung zwischen beiden Elternteilen. Inkl. Anmeldefristen, Mutterschutzanrechnung und Teilzeitoptionen." },
+  "mutterschutz": { title: "Mutterschutz-Rechner", type: "soziales", desc: "Berechnen Sie Ihre Mutterschutzfristen und das voraussichtliche Mutterschaftsgeld. Geben Sie den Geburtstermin ein und erhalten Sie alle Schutzfristen und Zahlungsansprüche." },
+  "wohngeld": { title: "Wohngeld-Rechner", type: "soziales", desc: "Prüfen Sie Ihren Wohngeldanspruch und berechnen Sie den voraussichtlichen Mietzuschuss. Berücksichtigt Einkommen, Haushaltsgröße, Miete und die Mietstufe Ihres Wohnorts." },
+  "buergergeld": { title: "Bürgergeld-Rechner", type: "soziales", desc: "Ermitteln Sie Ihren Bürgergeld-Anspruch nach aktuellen Regelsätzen. Der Rechner berechnet Regelbedarf, Unterkunftskosten und Freibeträge bei Erwerbstätigkeit." },
+  "grundsicherung": { title: "Grundsicherung-Rechner", type: "soziales", desc: "Berechnen Sie Ihren Anspruch auf Grundsicherung im Alter oder bei Erwerbsminderung. Berücksichtigt Rente, Einkommen, Mietkosten und Freibeträge nach SGB XII." },
+  "alg1": { title: "Arbeitslosengeld I-Rechner", type: "soziales", desc: "Berechnen Sie Höhe und Bezugsdauer Ihres Arbeitslosengeldes I. Der Rechner ermittelt den monatlichen Anspruch auf Basis von Gehalt, Steuerklasse und Beschäftigungsdauer." },
+  "kurzarbeitsgeld": { title: "Kurzarbeitsgeld-Rechner", type: "soziales", desc: "Ermitteln Sie Ihr Kurzarbeitergeld bei reduzierter Arbeitszeit. Der Rechner berechnet die Nettoentgeltdifferenz und den monatlichen KuG-Anspruch inkl. erhöhter Sätze." },
+  "krankengeld": { title: "Krankengeld-Rechner", type: "soziales", desc: "Berechnen Sie Ihr Krankengeld bei längerer Arbeitsunfähigkeit. Der Rechner ermittelt den täglichen und monatlichen Anspruch nach Abzug der Sozialversicherungsbeiträge." },
+  "kinderkrankengeld": { title: "Kinderkrankengeld-Rechner", type: "soziales", desc: "Ermitteln Sie Ihren Anspruch auf Kinderkrankengeld: Anspruchstage pro Kind, tägliche Zahlung und den finanziellen Ausgleich bei Betreuung eines kranken Kindes." },
+  "pfaendung": { title: "Pfändung-Rechner", type: "soziales", desc: "Ermitteln Sie den pfändbaren und pfändungsfreien Anteil Ihres Einkommens nach aktueller Pfändungstabelle. Berücksichtigt Nettoeinkommen und Unterhaltspflichten." },
+  "urlaubsanspruch": { title: "Urlaubsanspruch-Rechner", type: "soziales", desc: "Berechnen Sie Ihren gesetzlichen Urlaubsanspruch nach BUrlG, auch bei Teilzeit, unterjährigem Eintritt oder Schwerbehinderung. Inkl. anteiligem Urlaub und Resturlaub." },
+  "minijob": { title: "Minijob & Midijob-Rechner", type: "soziales", desc: "Berechnen Sie Abgaben und Nettoeinkommen für Minijobs (bis 556 Euro) und Midijobs (bis 2.000 Euro). Zeigt Sozialversicherungsbeiträge und optimale Verdienstgrenzen." },
+  "mindestlohn": { title: "Mindestlohn-Rechner", type: "soziales", desc: "Prüfen Sie, ob Ihr Gehalt dem gesetzlichen Mindestlohn entspricht. Der Rechner vergleicht Ihren effektiven Stundenlohn mit dem aktuellen Minimum und Branchenmindestlöhnen." },
+  "gleitzone": { title: "Gleitzone-Rechner", type: "soziales", desc: "Berechnen Sie die reduzierten Sozialversicherungsbeiträge im Übergangsbereich (556-2.000 Euro). Zeigt die Ersparnis gegenüber vollen Beiträgen bei vollen Rentenansprüchen." },
+  "teilzeit": { title: "Teilzeit-Rechner", type: "soziales", desc: "Berechnen Sie die Auswirkungen einer Arbeitszeitreduzierung auf Ihr Nettoeinkommen. Vergleichen Sie Vollzeit und Teilzeit und sehen Sie den tatsächlichen Nettoeffekt." },
+  "hinzuverdienst": { title: "Hinzuverdienst-Rechner", type: "soziales", desc: "Berechnen Sie, wie viel Sie neben Rente, Bürgergeld oder ALG I dazuverdienen dürfen. Der Rechner zeigt Freibeträge und Anrechnungen für Ihre Leistungsart." },
+  "gruendungszuschuss": { title: "Gründungszuschuss-Rechner", type: "soziales", desc: "Berechnen Sie Höhe und Dauer des Gründungszuschusses aus der Arbeitslosigkeit. Ermitteln Sie die monatliche Förderung und Gesamtsumme für Ihre Existenzgründung." },
+  "uebergangsgeld": { title: "Übergangsgeld-Rechner", type: "soziales", desc: "Ermitteln Sie Ihr Übergangsgeld während einer Reha oder Umschulung. Der Rechner berechnet den Anspruch (68-75 % des Nettoentgelts) auf Basis Ihres letzten Gehalts." },
+  "verletztengeld": { title: "Verletztengeld-Rechner", type: "soziales", desc: "Berechnen Sie Ihr Verletztengeld nach einem Arbeitsunfall oder bei Berufskrankheit. Der Rechner ermittelt den Anspruch (80 % brutto) über die Berufsgenossenschaft." },
+  "gerichtskosten": { title: "Gerichtskosten-Rechner", type: "soziales", desc: "Berechnen Sie Gerichts- und Anwaltskosten auf Basis des Streitwerts nach GKG und RVG. Ermitteln Sie das Prozesskostenrisiko, bevor Sie klagen." },
+  "rente": { title: "Renten-Rechner", type: "rente", desc: "Ermitteln Sie Ihre voraussichtliche gesetzliche Rente nach der offiziellen Rentenformel. Der Rechner zeigt Brutto- und Nettorente sowie Ihre persönliche Versorgungslücke." },
+  "rentenabschlag": { title: "Rentenabschlag-Rechner", type: "rente", desc: "Berechnen Sie die Rentenkürzung bei vorzeitigem Renteneintritt (0,3 % pro Monat). Vergleichen Sie frühere Rente mit Abschlag gegen regulären Rentenbeginn ohne Kürzung." },
+  "rentenbeginn": { title: "Rentenbeginn-Rechner", type: "rente", desc: "Ermitteln Sie Ihren frühestmöglichen und regulären Renteneintritt nach Geburtsjahr und Versicherungszeiten. Zeigt alle Rentenarten mit Zugangsdaten und Abschlägen." },
+  "rentenbesteuerung": { title: "Rentenbesteuerung-Rechner", type: "rente", desc: "Ermitteln Sie die Einkommensteuer auf Ihre Rente nach dem Jahr des Rentenbeginns. Berechnet den steuerpflichtigen Anteil und zeigt, ob eine Steuererklärung nötig ist." },
+  "rentenschaetzer": { title: "Rentenschätzer", type: "rente", desc: "Schnelle Rentenprognose mit nur wenigen Angaben: Alter, Einkommen und Erwerbsdauer genügen. Ideal für eine erste Einschätzung Ihrer Versorgungslücke im Alter." },
+  "flexrente": { title: "Flexrenten-Rechner", type: "rente", desc: "Berechnen Sie das Gesamteinkommen aus Teilrente und Hinzuverdienst mit der Flexirente. Ideal für den gleitenden Übergang vom Berufsleben in den Ruhestand." },
+  "altersteilzeit": { title: "Altersteilzeit-Rechner", type: "rente", desc: "Berechnen Sie Einkommen und Rentenansprüche in der Altersteilzeit. Vergleichen Sie Block- und Gleichverteilungsmodell inkl. Aufstockungsbetrag und Renteneffekt." },
+  "witwenrente": { title: "Witwenrente-Rechner", type: "rente", desc: "Ermitteln Sie Ihren Anspruch auf Witwen- oder Witwerrente. Der Rechner berechnet große und kleine Witwenrente inkl. Einkommensanrechnung und Sterbevierteljahr." },
+  "kredit": { title: "Kreditrechner", type: "kredit", desc: "Berechnen Sie monatliche Rate, Gesamtkosten und Tilgungsplan für Ihren Ratenkredit. Vergleichen Sie verschiedene Kreditangebote anhand des effektiven Jahreszinses." },
+  "zinseszins": { title: "Zinseszins-Rechner", type: "kredit", desc: "Erleben Sie die Kraft des Zinseszinseffekts: Berechnen Sie, wie Ihr Kapital mit Sparrate und Reinvestition über die Jahre exponentiell wächst. Ideal für Sparplan-Planung." },
+  "inflation": { title: "Inflationsrechner", type: "kredit", desc: "Berechnen Sie den Kaufkraftverlust Ihres Geldes durch Inflation über beliebige Zeiträume. Unverzichtbar für Altersvorsorge, Sparanlagen-Bewertung und Gehaltsverhandlungen." },
+  "tilgung": { title: "Tilgungsrechner", type: "kredit", desc: "Erstellen Sie einen detaillierten Tilgungsplan für Ihre Baufinanzierung. Berechnen Sie Monatsrate, Restschuld und Gesamtlaufzeit inkl. Sondertilgungsoptionen." },
+  "annuitaet": { title: "Annuitätenrechner", type: "kredit", desc: "Berechnen Sie die gleichbleibende Monatsrate (Annuität) für Ihr Darlehen. Ermitteln Sie Zins- und Tilgungsanteil, Gesamtzinskosten und optimale Laufzeit." },
+  "leasing": { title: "Leasing-Rechner", type: "kredit", desc: "Berechnen Sie Leasingrate und Gesamtkosten Ihres Leasingvertrags. Vergleichen Sie Leasing mit Finanzierung und Barkauf anhand von Leasingfaktor und Effektivkosten." },
+  "haushaltsrechner": { title: "Haushalts-Rechner", type: "kredit", desc: "Erfassen Sie Einnahmen und Ausgaben und ermitteln Sie Ihr frei verfügbares Einkommen. Der Haushaltsrechner zeigt Einsparpotenziale und hilft bei der Kreditvorbereitung." },
+  "paypal": { title: "PayPal-Gebühren-Rechner", type: "kredit", desc: "Berechnen Sie PayPal-Transaktionsgebühren für Verkäufer und Händler. Ermitteln Sie den Nettobetrag oder den nötigen Bruttobetrag für Ihren Wunscherlös." },
+  "bafoeg": { title: "BAföG-Rechner", type: "kredit", desc: "Ermitteln Sie Ihren BAföG-Anspruch auf Basis des Elterneinkommens und Ihrer Wohnsituation. Der Rechner berechnet den monatlichen Förderbetrag vor der Antragstellung." },
 };
 
 type Props = {
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: Props) {
 
   return {
     title: rechner.title,
-    description: rechner.excerpt || `Nutzen Sie unseren ${rechner.title} für Ihre Finanzberechnungen.`,
+    description: rechner.rechnerFelder?.beschreibung || rechner.excerpt || `Nutzen Sie unseren ${rechner.title} für Ihre Finanzberechnungen.`,
   };
 }
 
@@ -159,7 +159,7 @@ export default async function RechnerDetailPage({ params }: Props) {
           </h1>
 
           {/* Beschreibung */}
-          {rechner.excerpt && (
+          {(rechner.rechnerFelder?.beschreibung || rechner.excerpt) && (
             <p
               className="mb-8 text-gray-600"
               style={{
@@ -168,7 +168,7 @@ export default async function RechnerDetailPage({ params }: Props) {
                 fontWeight: "400",
               }}
             >
-              {rechner.excerpt}
+              {rechner.rechnerFelder?.beschreibung || rechner.excerpt}
             </p>
           )}
 
