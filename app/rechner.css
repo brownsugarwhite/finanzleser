@@ -36,6 +36,7 @@
   height: 2003px;
   transform: translateY(-50%);
   display: block;
+  will-change: top;
 }
 
 .vertical-spacer-icon {
