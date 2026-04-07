@@ -9,7 +9,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 
 import FazitHeading from "@/components/ui/FazitHeading";
 
-const ChecklisteInline = dynamic(() => import("@/components/checkliste/ChecklisteInline"), {
+const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
 });
 
@@ -197,8 +197,10 @@ export default function ArticleContent({ content, collapsed }: Props) {
       return (
         <WideContainer key={i} collapsed={collapsed}>
           <div className="checkliste-article-wrap">
-            <ToolLabel type="checkliste" slug={part.value} headingId={id} />
-            <ChecklisteInline slug={part.value} />
+            <ChecklisteEmbed
+              slug={part.value}
+              formHeader={<ToolLabel type="checkliste" slug={part.value} headingId={id} showExcerpt />}
+            />
           </div>
         </WideContainer>
       );

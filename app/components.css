@@ -639,9 +639,48 @@ a.megamenu-link:hover {
   margin: 40px 0;
 }
 
+/* Checkliste 2-Column Layout: Liste links, Visual rechts */
+.checkliste-layout {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.checkliste-form-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkliste-visual-col {
+  width: 400px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkliste-form-header {
+  margin-bottom: 16px;
+}
+
+.checkliste-visual {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .checkliste-layout {
+    flex-direction: column;
+  }
+  .checkliste-visual-col {
+    order: -1;
+  }
+}
+
 /* Tool Label über Rechner/Checkliste im Artikel – echtes h2 für TOC */
 h2.article-tool-label {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 7px;
   margin: 0 0 16px 0;
@@ -657,8 +696,9 @@ h2.article-tool-label {
   line-height: 1em;
   font-weight: 600;
   color: white;
-  padding: 7px 10px; 
+  padding: 7px 10px;
   white-space: nowrap;
+  align-self: flex-start;
 }
 .article-tool-title {
   font-family: 'Merriweather', Georgia, serif;

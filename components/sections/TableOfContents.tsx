@@ -157,6 +157,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
           const number = idx + 1;
           const isActive = activeId === item.id;
           const toolColor = item.toolType ? TOOL_COLORS[item.toolType] : undefined;
+          const activeColor = toolColor || "var(--color-brand)";
           const toolLabel = item.toolType
             ? item.toolType.charAt(0).toUpperCase() + item.toolType.slice(1)
             : undefined;
@@ -193,7 +194,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                       width: `${RING_SIZE}px`,
                       height: `${RING_SIZE}px`,
                       borderRadius: "40%",
-                      border: `2px solid ${isActive ? "var(--color-brand)" : "transparent"}`,
+                      border: `2px solid ${isActive ? activeColor : "transparent"}`,
                       maskImage: isActive
                         ? `conic-gradient(from 6deg, #000 ${scrollProgress * 100}%, transparent ${scrollProgress * 100}%)`
                         : "none",
@@ -214,8 +215,8 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                       width: `${BADGE_SIZE}px`,
                       height: `${BADGE_SIZE}px`,
                       borderRadius: "12px",
-                      border: `1px solid ${isActive ? "var(--color-brand)" : "var(--color-text-medium)"}`,
-                      backgroundColor: isActive ? "var(--color-brand)" : "transparent",
+                      border: `1px solid ${isActive ? activeColor : "var(--color-text-medium)"}`,
+                      backgroundColor: isActive ? activeColor : "transparent",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -274,7 +275,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                         fontWeight: isActive ? 700 : 300,
                         fontStyle: isActive ? "normal" : "italic",
                         fontSize: "15px",
-                        color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
+                        color: isActive ? activeColor : "var(--color-text-medium)",
                         lineHeight: "1.4",
                         transition: "none",
                         display: "-webkit-box",

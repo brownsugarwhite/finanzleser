@@ -65,7 +65,7 @@ export default function ArticleClient({
   contentTableOfContents,
   author,
 }: ArticleClientProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
