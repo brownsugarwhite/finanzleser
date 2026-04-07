@@ -31,16 +31,19 @@ export default function VerticalSpacer() {
     function handleMouseMove(e: MouseEvent) {
       if (!ref.current) return;
       const layout = ref.current.closest(".rechner-layout");
-      const dividerRect = ref.current.parentElement?.getBoundingClientRect();
-      if (!layout || !dividerRect) return;
+      const divider = ref.current.parentElement;
+      const inputs = layout?.querySelector(".rechner-inputs") as HTMLElement | null;
+      if (!layout || !divider || !inputs) return;
 
-      const layoutRect = layout.getBoundingClientRect();
+      const dividerRect = divider.getBoundingClientRect();
+      const inputsRect = inputs.getBoundingClientRect();
 
       const isRightOfDivider = e.clientX >= dividerRect.right;
-      const isInVertical = e.clientY >= layoutRect.top && e.clientY <= layoutRect.bottom;
+      const isInInputArea = e.clientY >= inputsRect.top && e.clientY <= inputsRect.bottom;
 
-      if (isRightOfDivider && isInVertical) {
-        const relY = (e.clientY - layoutRect.top) / layoutRect.height;
+      if (isRightOfDivider && isInInputArea) {
+        // Map mouse position within inputs area to divider coordinates (only within inputs vertical range)
+        const relY = (e.clientY - dividerRect.top) / dividerRect.height;
         const targetY = Math.max(5, Math.min(95, relY * 100));
 
         if (!wasInForm) {

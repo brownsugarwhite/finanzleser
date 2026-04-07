@@ -230,34 +230,9 @@
 }
 
 /* ── Button ─────────────────────────────────── */
-
-.rechner-button {
-  margin-top: 24px;
-  min-width: 250px;
-  padding: 8px 32px;
-  border: none;
-  border-radius: 19px;
-  outline: 1.5px solid var(--color-text-primary);
-  outline-offset: 2px;
-  background: var(--color-text-primary);
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  align-self: flex-start;
-}
-
-.rechner-button:hover {
-  opacity: 0.85;
-}
+/* Inline-styled in RechnerButton.tsx — siehe Komponente */
 
 .rechner-button--disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.rechner-button--disabled:hover {
   opacity: 0.4;
 }
 
