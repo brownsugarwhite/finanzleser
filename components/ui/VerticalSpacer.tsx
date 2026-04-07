@@ -33,13 +33,18 @@ export default function VerticalSpacer() {
       const layout = ref.current.closest(".rechner-layout");
       const divider = ref.current.parentElement;
       const inputs = layout?.querySelector(".rechner-inputs") as HTMLElement | null;
+      const button = layout?.querySelector(".rechner-button") as HTMLElement | null;
+      const header = layout?.querySelector(".rechner-form-header") as HTMLElement | null;
       if (!layout || !divider || !inputs) return;
 
       const dividerRect = divider.getBoundingClientRect();
-      const inputsRect = inputs.getBoundingClientRect();
+      const topEl = header || inputs;
+      const bottomEl = button || inputs;
+      const topY = topEl.getBoundingClientRect().top;
+      const bottomY = bottomEl.getBoundingClientRect().bottom;
 
       const isRightOfDivider = e.clientX >= dividerRect.right;
-      const isInInputArea = e.clientY >= inputsRect.top && e.clientY <= inputsRect.bottom;
+      const isInInputArea = e.clientY >= topY && e.clientY <= bottomY;
 
       if (isRightOfDivider && isInInputArea) {
         // Map mouse position within inputs area to divider coordinates (only within inputs vertical range)

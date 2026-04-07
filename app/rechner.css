@@ -6,22 +6,32 @@
 /* ── Layout ─────────────────────────────────── */
 
 .rechner-layout {
-  display: grid;
-  grid-template-columns: 1fr 20px 1fr;
-  column-gap: 50px;
-  row-gap: 36px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
+.rechner-top-row {
+  display: flex;
+  align-items: stretch;
+  gap: 50px;
+  width: 100%;
+}
+
+.rechner-form-header {
+  margin-bottom: 16px;
+}
+
 .rechner-visual {
+  flex: 1;
+  min-width: 0;
   display: flex;
   justify-content: center;
 }
 
 .rechner-divider {
   width: 20px;
-  align-self: stretch;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -46,11 +56,27 @@
 }
 
 .rechner-form-col {
-  display: contents;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .rechner-layout .rechner-container {
-  display: contents;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rechner-results-portal {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.rechner-results {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .rechner-container {
@@ -239,7 +265,6 @@
 /* ── Results ────────────────────────────────── */
 
 .rechner-results {
-  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 32px;

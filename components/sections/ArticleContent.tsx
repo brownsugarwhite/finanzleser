@@ -183,8 +183,10 @@ export default function ArticleContent({ content, collapsed }: Props) {
       return (
         <WideContainer key={i} collapsed={collapsed}>
           <div className="article-tool-embed">
-            <ToolLabel type="rechner" slug={part.value} headingId={id} showExcerpt />
-            <RechnerEmbed slug={part.value} />
+            <RechnerEmbed
+              slug={part.value}
+              formHeader={<ToolLabel type="rechner" slug={part.value} headingId={id} showExcerpt />}
+            />
           </div>
         </WideContainer>
       );

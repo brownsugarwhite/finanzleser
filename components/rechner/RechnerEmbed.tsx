@@ -1,6 +1,10 @@
+"use client";
+
 import dynamic from "next/dynamic";
+import { useState, useCallback } from "react";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import VerticalSpacer from "@/components/ui/VerticalSpacer";
+import { RechnerLayoutContext } from "./RechnerLayoutContext";
 
 // Old 17 calculators
 const BruttoNettoRechner = dynamic(() => import("./BruttoNettoRechner"), {
@@ -178,22 +182,35 @@ const ScheidungskostenRechner = dynamic(() => import("./ScheidungskostenRechner"
 
 interface RechnerEmbedProps {
   slug: string;
+  formHeader?: React.ReactNode;
 }
 
-export default function RechnerEmbed({ slug }: RechnerEmbedProps) {
+export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
+  const [resultsContainer, setResultsContainer] = useState<HTMLElement | null>(null);
+
+  const containerRefCallback = useCallback((node: HTMLDivElement | null) => {
+    setResultsContainer(node);
+  }, []);
+
   const rechner = getRechnerComponent(slug);
   if (!rechner) return null;
 
   return (
-    <div className="rechner-layout">
-      <div className="rechner-visual">
-        <RechnerPlaceholder />
+    <RechnerLayoutContext.Provider value={{ resultsContainer }}>
+      <div className="rechner-layout">
+        <div className="rechner-top-row">
+          <div className="rechner-visual">
+            <RechnerPlaceholder />
+          </div>
+          <div className="rechner-divider"><VerticalSpacer /></div>
+          <div className="rechner-form-col">
+            {formHeader && <div className="rechner-form-header">{formHeader}</div>}
+            {rechner}
+          </div>
+        </div>
+        <div className="rechner-results-portal" ref={containerRefCallback} />
       </div>
-      <div className="rechner-divider"><VerticalSpacer /></div>
-      <div className="rechner-form-col">
-        {rechner}
-      </div>
-    </div>
+    </RechnerLayoutContext.Provider>
   );
 }
 
