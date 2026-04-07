@@ -10,8 +10,8 @@ function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null)
   const triggers: ScrollTrigger[] = [];
 
   const st1 = ScrollTrigger.create({
-    start: 0,
-    end: 120,
+    start: 50,
+    end: 100,
     scrub: true,
     animation: gsap.fromTo(claim, { opacity: 1 }, { opacity: 0, ease: "easeIn", immediateRender: false }),
   });
@@ -19,8 +19,8 @@ function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null)
 
   if (dotLine) {
     const st2 = ScrollTrigger.create({
-      start: 0,
-      end: 120,
+      start: 50,
+      end: 100,
       scrub: true,
       animation: gsap.fromTo(dotLine, { opacity: 1 }, { opacity: 0, ease: "easeIn", immediateRender: false }),
     });

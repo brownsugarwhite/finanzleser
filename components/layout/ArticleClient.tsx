@@ -13,8 +13,8 @@ import ArticleContent from "@/components/sections/ArticleContent";
 function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
-      <div style={{ width: "100%", minWidth: 1000, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: 1000 }}>
+      <div style={{ width: "100%", minWidth: "80vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ width: "100%", maxWidth: "80vw" }}>
           {children}
         </div>
       </div>
