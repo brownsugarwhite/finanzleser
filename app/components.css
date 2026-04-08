@@ -386,10 +386,14 @@ a.megamenu-link:hover {
   overflow: hidden;
   transition: height 0.3s ease;
   margin-top: 17px;
+  border-left: 1px solid var(--color-text-medium);
+  border-right: 1px solid var(--color-text-medium);
+  padding: 20px 20px;
 }
 .checkliste-slides {
   display: flex;
   align-items: flex-start;
+  gap: 24px;
 }
 
 /* Einzelner Slide */
@@ -606,17 +610,20 @@ a.megamenu-link:hover {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 24px;
+  justify-content: flex-start;
 }
 .checkliste-btn {
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
+  width: 100px;
+  height: 100px;
+  border-radius: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   text-decoration: none;
-  text-align: left;
-  transition: background 0.2s, border-color 0.2s;
+  transition: opacity 0.2s, border-color 0.2s;
   border: 1px solid var(--color-border-default, #e2e8f0);
+  flex-shrink: 0;
 }
 .checkliste-btn--download {
   background: var(--color-bg-surface);

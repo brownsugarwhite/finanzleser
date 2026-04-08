@@ -1,65 +1,48 @@
 "use client";
 
-import Image from "next/image";
-
 interface ButtonProps {
   label: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
-  size?: "md" | "lg";
+  disabled?: boolean;
+  textColor?: string;
 }
 
 export default function Button({
   label,
   onClick,
-  variant = "primary",
-  size = "md",
+  disabled = false,
+  textColor,
 }: ButtonProps) {
-
-  const sizeStyles = {
-    md: {
-      height: "50px",
-      fontSize: "17px",
-      paddingLeft: "20px",
-      paddingRight: "5px",
-      iconSize: 40,
-    },
-    lg: {
-      height: "56px",
-      fontSize: "18px",
-      paddingLeft: "24px",
-      paddingRight: "6px",
-      iconSize: 44,
-    },
-  };
-
-  const currentSize = sizeStyles[size];
-
   return (
     <button
+      type="button"
       onClick={onClick}
+      disabled={disabled}
       style={{
-        backgroundColor: "rgba(198, 200, 204, 0.23)",
-        borderRadius: "19px",
-        paddingLeft: currentSize.paddingLeft,
-        paddingRight: currentSize.paddingRight,
-        paddingTop: "5px",
-        paddingBottom: "5px",
-        border: "none",
-        cursor: "pointer",
+        backgroundColor: "transparent",
+        borderRadius: "21px",
+        paddingLeft: "20px",
+        paddingRight: "3px",
+        paddingTop: "3px",
+        paddingBottom: "3px",
+        border: "2px solid var(--color-text-primary)",
+        outline: "1px solid var(--color-text-primary)",
+        outlineOffset: "2px",
+        cursor: disabled ? "not-allowed" : "pointer",
         display: "flex",
         alignItems: "center",
-        gap: "15px",
-        height: currentSize.height,
+        gap: "13px",
+        height: "48px",
+        alignSelf: "flex-start",
       }}
     >
       <div
         style={{
           fontFamily: "Open Sans, sans-serif",
-          fontSize: currentSize.fontSize,
-          color: "var(--color-text-primary)",
-          fontWeight: "400",
-          lineHeight: `${currentSize.iconSize - 10}px`,
+          fontSize: "17px",
+          color: textColor ?? "#1a1a1a",
+          fontWeight: "500",
+          lineHeight: "30px",
           whiteSpace: "nowrap",
           display: "flex",
           flexDirection: "column",
@@ -67,28 +50,25 @@ export default function Button({
           margin: "0",
         }}
       >
-        <p style={{ margin: "0", padding: "0" }}>{label}</p>
+        <p style={{ margin: "0", padding: "0", color: textColor ?? "#1a1a1a" }}>{label}</p>
       </div>
       <div
         style={{
           position: "relative",
-          width: `${currentSize.iconSize}px`,
-          height: `${currentSize.iconSize}px`,
+          width: "38px",
+          height: "38px",
           flexShrink: 0,
         }}
       >
-        {/* Grüner Hintergrund */}
         <div
           style={{
             position: "absolute",
             width: "100%",
             height: "100%",
             backgroundColor: "var(--color-brand)",
-            borderRadius: "15px",
+            borderRadius: "17px",
           }}
         />
-
-        {/* Weißer Pfeil - wird animiert mit scaleY */}
         <svg
           width="11"
           height="15"
@@ -98,15 +78,11 @@ export default function Button({
             position: "absolute",
             top: "50%",
             left: "50%",
-            marginLeft: "-5.5px",
+            marginLeft: "-4.5px",
             marginTop: "-7.5px",
           }}
         >
-          <g
-            style={{
-              transformOrigin: "5.5px 7.5px",
-            }}
-          >
+          <g style={{ transformOrigin: "5.5px 7.5px" }}>
             <path
               d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
               stroke="white"

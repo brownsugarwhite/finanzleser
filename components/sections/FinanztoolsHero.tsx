@@ -136,13 +136,41 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
     <section ref={sectionRef} style={{ width: "100%" }}>
       <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ flex: 1 }}>
 
-          {/* 1. Spacer — dynamisch berechnet */}
-          <div style={{ height: "600px", width: "100%" }} />
+          {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
+          <div style={{ width: "100%", height: "500px", position: "relative" }}>
+            <div style={{ width: 430, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
+              <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right" }}>
+                Newsletter
+              </p>
+              <p
+                lang="de"
+                style={{
+                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  lineHeight: 1.3,
+                  color: "var(--color-text-primary)",
+                  textAlign: "right",
+                  hyphens: "auto",
+                  WebkitHyphens: "auto",
+                  wordBreak: "break-word",
+                }}
+              >
+                Bleiben Sie mit unserem Finanzleser.de<br />Newsletter immer auf dem neusten Stand!
+              </p>
+              <div style={{ display: "flex", justifyContent: "flex-end", width: "100%",  marginTop: 12 }}>
+                <Button onClick={() => {}} label="Jetzt abonnieren" />
+              </div>
+
+              {/* Horizontale Linie */}
+              <div style={{ width: 300, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
+            </div>
+          </div>
 
           {/* 2. Subheading — sticky bottom */}
-          <div style={{ width: 430, height: 23, position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div style={{ width: 430, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
             <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
@@ -286,7 +314,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
           {/* Dots */}
           <div style={{
             flex: 1,
-            marginTop: 60,
+            marginTop: 46,
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat-y",
             backgroundPosition: "center top",
@@ -310,7 +338,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 50, paddingLeft: 23 }}>
+        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 36, paddingLeft: 23 }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",

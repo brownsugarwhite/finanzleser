@@ -3,6 +3,7 @@ interface RechnerButtonProps {
   label?: string;
   disabled?: boolean;
   needsUpdate?: boolean;
+  textColor?: string;
 }
 
 export default function RechnerButton({
@@ -10,6 +11,7 @@ export default function RechnerButton({
   label = "Berechnen",
   disabled = false,
   needsUpdate = false,
+  textColor,
 }: RechnerButtonProps) {
   const text = needsUpdate ? "Ergebnis aktualisieren" : label;
 
@@ -35,7 +37,6 @@ export default function RechnerButton({
         alignItems: "center",
         gap: "15px",
         height: "48px",
-        marginTop: "24px",
         alignSelf: "flex-start",
       }}
     >
@@ -43,7 +44,7 @@ export default function RechnerButton({
         style={{
           fontFamily: "Open Sans, sans-serif",
           fontSize: "17px",
-          color: "var(--color-text-primary)",
+          color: textColor ?? "var(--color-text-primary)",
           fontWeight: "500",
           lineHeight: "30px",
           whiteSpace: "nowrap",
@@ -53,7 +54,7 @@ export default function RechnerButton({
           margin: "0",
         }}
       >
-        <p style={{ margin: "0", padding: "0" }}>{text}</p>
+        <p style={{ margin: "0", padding: "0", color: textColor ?? "var(--color-text-primary)" }}>{text}</p>
       </div>
       <div
         style={{

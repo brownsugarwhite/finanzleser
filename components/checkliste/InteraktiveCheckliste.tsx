@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import type { ChecklisteData } from "./types";
 import ChecklisteSlide from "./ChecklisteSlide";
 import ChecklisteProgress from "./ChecklisteProgress";
 import ChecklisteNav from "./ChecklisteNav";
+import { useChecklisteLayout } from "./ChecklisteLayoutContext";
 
 interface Props {
   data: ChecklisteData;
@@ -23,6 +25,7 @@ export default function InteraktiveCheckliste({
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [currentSlide, setCurrentSlide] = useState(0);
   const [generating, setGenerating] = useState(false);
+  const { actionsContainer } = useChecklisteLayout();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -175,25 +178,36 @@ export default function InteraktiveCheckliste({
         onGoTo={scrollTo}
       />
 
-      {/* Buttons */}
-      <div className="checkliste-actions">
-        <a
-          href={pdfUrl}
-          download
-          className="checkliste-btn checkliste-btn--download"
-        >
-          PDF herunterladen
-        </a>
-        {checkedCount > 0 && (
-          <button
-            onClick={handleDownloadChecked}
-            disabled={generating}
-            className="checkliste-btn checkliste-btn--print"
+      {/* Buttons – via Portal in die Visual-Spalte */}
+      {actionsContainer && createPortal(
+        <div className="checkliste-actions">
+          <a
+            href={pdfUrl}
+            download
+            className="checkliste-btn checkliste-btn--download"
+            title="PDF herunterladen"
           >
-            {generating ? "Wird erstellt..." : "Ausgefüllte PDF speichern"}
-          </button>
-        )}
-      </div>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </a>
+          {checkedCount > 0 && (
+            <button
+              onClick={handleDownloadChecked}
+              disabled={generating}
+              className="checkliste-btn checkliste-btn--print"
+              title="Ausgefüllte PDF speichern"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </button>
+          )}
+        </div>,
+        actionsContainer
+      )}
 
       <p style={{ fontSize: 12, color: "var(--color-text-medium)", marginTop: 24 }}>
         Hinweis: Diese Checkliste ersetzt keine professionelle Beratung. Für komplexe Fragen empfehlen wir die Unterstützung durch einen Fachmann.
