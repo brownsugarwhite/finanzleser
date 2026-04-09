@@ -12,7 +12,8 @@ function lerp(a: number, b: number, t: number) {
 }
 
 const DOT_FULL = 8;
-const SLOT = 14; // feste Slot-Breite pro Dot
+const DOT_ACTIVE = 11;
+const GAP = 6;
 
 export default function InstagramDots({
   current,
@@ -27,35 +28,28 @@ export default function InstagramDots({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        gap: GAP,
       }}>
         {Array.from({ length: total }).map((_, i) => {
           const isActive = i === current;
+          const size = isActive ? DOT_ACTIVE : DOT_FULL;
           return (
             <button
               key={i}
               onClick={() => onGoTo(i)}
               aria-label={`Slide ${i + 1}`}
               style={{
-                width: SLOT,
-                height: SLOT,
+                width: size,
+                height: size,
                 padding: 0,
                 border: "none",
-                background: "none",
                 cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                borderRadius: "50%",
+                background: "var(--color-text-primary)",
+                transition: "width 0.3s cubic-bezier(.4,0,.2,1), height 0.3s cubic-bezier(.4,0,.2,1)",
                 flexShrink: 0,
               }}
-            >
-              <div style={{
-                width: isActive ? 10 : 6,
-                height: isActive ? 10 : 6,
-                borderRadius: "50%",
-                background: isActive ? "var(--color-text-primary)" : "var(--color-text-medium)",
-                transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
-              }} />
-            </button>
+            />
           );
         })}
       </div>
@@ -71,8 +65,34 @@ export default function InstagramDots({
   const leftShrink = Math.min(1, activePos / 2);
   const rightShrink = Math.min(1, (visibleCount - 1 - activePos) / 2);
 
-  const containerWidth = visibleCount * SLOT;
-  const translateX = -(windowStart * SLOT);
+  // Compute size for each dot
+  function getDotSize(i: number): number {
+    if (i === current) return DOT_ACTIVE;
+    const posInWindow = i - windowStart;
+    if (posInWindow < 0 || posInWindow >= visibleCount) return 0;
+
+    if (posInWindow === 0) return lerp(DOT_FULL, 3, leftShrink);
+    if (posInWindow === 1) return lerp(DOT_FULL, 5, leftShrink);
+    if (posInWindow === visibleCount - 1) return lerp(DOT_FULL, 3, rightShrink);
+    if (posInWindow === visibleCount - 2) return lerp(DOT_FULL, 5, rightShrink);
+    return DOT_FULL;
+  }
+
+  // Compute container width (visible dots + gaps)
+  const sizes: number[] = [];
+  for (let i = 0; i < total; i++) sizes.push(getDotSize(i));
+
+  let containerWidth = 0;
+  for (let i = windowStart; i < windowStart + visibleCount; i++) {
+    containerWidth += sizes[i];
+    if (i < windowStart + visibleCount - 1) containerWidth += GAP;
+  }
+
+  // Compute translateX: sum of all dot widths + gaps before windowStart
+  let translateX = 0;
+  for (let i = 0; i < windowStart; i++) {
+    translateX -= sizes[i] + GAP;
+  }
 
   return (
     <div style={{
@@ -80,49 +100,18 @@ export default function InstagramDots({
       overflow: "hidden",
       display: "flex",
       alignItems: "center",
+      transition: "width 0.3s cubic-bezier(.4,0,.2,1)",
     }}>
       <div style={{
         display: "flex",
+        alignItems: "center",
+        gap: GAP,
         transform: `translateX(${translateX}px)`,
         transition: "transform 0.3s cubic-bezier(.4,0,.2,1)",
         flexShrink: 0,
       }}>
         {Array.from({ length: total }).map((_, i) => {
-          const isActive = i === current;
-          const posInWindow = i - windowStart;
-
-          let size = DOT_FULL;
-          let opacity = 1;
-
-          // Left edge
-          if (posInWindow === 0) {
-            size = lerp(DOT_FULL, 3, leftShrink);
-            opacity = lerp(1, 0.3, leftShrink);
-          } else if (posInWindow === 1) {
-            size = lerp(DOT_FULL, 5, leftShrink);
-            opacity = lerp(1, 0.6, leftShrink);
-          }
-
-          // Right edge
-          if (posInWindow === visibleCount - 1) {
-            size = lerp(DOT_FULL, 3, rightShrink);
-            opacity = lerp(1, 0.3, rightShrink);
-          } else if (posInWindow === visibleCount - 2) {
-            size = lerp(DOT_FULL, 5, rightShrink);
-            opacity = lerp(1, 0.6, rightShrink);
-          }
-
-          // Outside window
-          if (posInWindow < 0 || posInWindow >= visibleCount) {
-            size = 0;
-            opacity = 0;
-          }
-
-          // Active always full
-          if (isActive) {
-            size = DOT_FULL;
-            opacity = 1;
-          }
+          const size = sizes[i];
 
           return (
             <button
@@ -130,29 +119,17 @@ export default function InstagramDots({
               onClick={() => onGoTo(i)}
               aria-label={`Slide ${i + 1}`}
               style={{
-                width: SLOT,
-                height: SLOT,
-                padding: 0,
-                border: "none",
-                background: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}
-            >
-              <div style={{
                 width: size,
                 height: size,
+                padding: 0,
+                border: "none",
+                cursor: "pointer",
                 borderRadius: "50%",
-                background: isActive
-                  ? "var(--color-text-primary)"
-                  : "var(--color-text-medium)",
-                opacity,
-                transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
-              }} />
-            </button>
+                background: "var(--color-text-primary)",
+                transition: "width 0.3s cubic-bezier(.4,0,.2,1), height 0.3s cubic-bezier(.4,0,.2,1)",
+                flexShrink: 0,
+              }}
+            />
           );
         })}
       </div>
