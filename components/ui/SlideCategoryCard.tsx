@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import InlineSVG from '@/components/ui/InlineSVG';
-import { easeProgress } from '@/components/ui/SlideArticleCard';
 
 export interface CategorySlide {
   name: string;
@@ -16,77 +15,76 @@ export interface CategorySlide {
 interface SlideCategoryCardProps {
   category: CategorySlide;
   parentSlug: string;
-  progress?: number;
   active?: boolean;
   selected?: boolean;
   onClose?: () => void;
 }
 
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
+const CARD_WIDTH = 320;
+const T1 = 0.3; // Phase 1 duration (content collapse)
+const T2 = 0.3; // Phase 2 duration (width + font)
 
-const STATES = {
-  article: { width: 320, height: 390, radius: 0, bgAlpha: 0 },
-  medium:  { width: 200, height: 300, radius: 50, bgAlpha: 0.18 },
-  small:   { width: 100, height: 100, radius: 42, bgAlpha: 0.26 },
-};
-
-export function getCategoryCardWidth(progress: number): number {
-  const { t1, t2, phase } = easeProgress(progress);
-  if (phase === 'first') return lerp(STATES.article.width, STATES.medium.width, t1);
-  return lerp(STATES.medium.width, STATES.small.width, t2);
-}
-
-function getInterpolatedStyle(progress: number) {
-  const { t1, t2, phase } = easeProgress(progress);
-
-  let width: number;
-
-  if (phase === 'first') {
-    width = lerp(STATES.article.width, STATES.medium.width, t1);
-  } else {
-    width = lerp(STATES.medium.width, STATES.small.width, t2);
-  }
-
-  return { width };
-}
-
-const CARD_WIDTH = STATES.article.width;
-
-export default function SlideCategoryCard({ category, parentSlug, progress = 0, active = false, selected = false, onClose }: SlideCategoryCardProps) {
-  const { width } = getInterpolatedStyle(progress);
+export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
-  const titleSpanRef = useRef<HTMLSpanElement>(null);
-  const [titleWidth, setTitleWidth] = useState(CARD_WIDTH);
+
+  // 2-phase: width changes delayed when collapsing, immediate when expanding
+  const [phase2Active, setPhase2Active] = useState(false);
+  const phase2Timer = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
-    if (!titleSpanRef.current) return;
-    setTitleWidth(titleSpanRef.current.offsetWidth + 2);
+    if (phase2Timer.current) clearTimeout(phase2Timer.current);
+    if (active) {
+      // Collapse: delay phase 2 (width shrink)
+      phase2Timer.current = setTimeout(() => setPhase2Active(true), T1 * 1000);
+    } else {
+      // Expand: width first (immediate), content delayed
+      setPhase2Active(false);
+    }
+    return () => { if (phase2Timer.current) clearTimeout(phase2Timer.current); };
+  }, [active]);
+
+  const [titleWidth, setTitleWidth] = useState(CARD_WIDTH);
+
+  // Measure title at collapsed font (16px/600) using hidden element
+  useEffect(() => {
+    const el = document.createElement('span');
+    el.style.cssText = `
+      position: absolute; visibility: hidden; white-space: nowrap;
+      font-family: var(--font-heading, 'Merriweather', serif);
+      font-size: 16px; font-weight: 600; line-height: 1.3;
+    `;
+    el.textContent = category.name;
+    document.body.appendChild(el);
+    setTitleWidth(el.offsetWidth + 4);
+    document.body.removeChild(el);
   }, [category.name]);
 
-  const cardWidth = active ? titleWidth : width;
+  const cardWidth = phase2Active ? `${titleWidth}px` : `${CARD_WIDTH}px`;
+
+  const phase1Delay = active ? 0 : T2;
+  const phase1Ease = active ? 'ease-in' : 'ease-out';
+  const phase2Ease = active ? 'ease-out' : 'ease-in';
 
   return (
     <div
       style={{
-        width: `${cardWidth}px`,
+        width: cardWidth,
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
         userSelect: 'none',
         WebkitUserSelect: 'none',
-        transition: 'width 0.3s ease',
+        transition: `width ${T2}s ${phase2Ease}`,
       }}
     >
       {/* Visual */}
       <div style={{
-        width: CARD_WIDTH,
+        width: '100%',
         height: active ? 0 : 220,
         overflow: 'hidden',
         opacity: active ? 0 : 1,
-        transition: 'height 0.3s ease, opacity 0.3s ease',
+        transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
       }}>
         {category.image && (
           <InlineSVG
@@ -101,20 +99,21 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0, 
       <p
         lang="de"
         style={{
-          fontFamily: 'Merriweather, serif',
-          fontWeight: 700,
-          fontSize: '18px',
+          fontFamily: "var(--font-heading, 'Merriweather', serif)",
+          fontWeight: phase2Active ? 600 : 700,
+          fontSize: phase2Active ? '16px' : '20px',
           lineHeight: 1.3,
           color: 'var(--color-text-primary)',
           margin: 0,
-          padding: active ? 0 : '0 23px',
+          padding: phase2Active ? 0 : '0 23px',
           whiteSpace: 'nowrap',
           width: 'fit-content',
-          marginTop: active ? 0 : 27,
-          transition: 'padding 0.3s ease, margin 0.3s ease',
+          marginTop: phase2Active ? 0 : 27,
+          boxSizing: 'border-box',
+          transition: `padding ${T2}s ${phase2Ease}, margin ${T2}s ${phase2Ease}, font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}`,
         }}
       >
-        <span ref={titleSpanRef} style={{ paddingRight: 10 }}>
+        <span style={{ paddingRight: active ? 0 : 10 }}>
           {category.name}
           {active && selected && onClose && (
             <span
@@ -140,13 +139,13 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0, 
       {/* Description */}
       {category.description && (
         <div style={{
-          width: CARD_WIDTH,
+          width: '100%',
           overflow: 'hidden',
           maxHeight: active ? 0 : 100,
           opacity: active ? 0 : 1,
-          padding: active ? '0 23px' : '0 23px',
+          padding: '0 23px',
           marginTop: active ? 0 : 10,
-          transition: 'max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease',
+          transition: `max-height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s, margin ${T1}s ${phase1Ease} ${phase1Delay}s`,
         }}>
           <p style={{
             fontFamily: 'var(--font-body)',
@@ -167,12 +166,12 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0, 
 
       {/* Arrow Button */}
       <div style={{
-        width: CARD_WIDTH,
+        width: '100%',
         overflow: 'hidden',
         maxHeight: active ? 0 : 60,
         opacity: active ? 0 : 1,
         padding: active ? 0 : '10px 23px',
-        transition: 'max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease',
+        transition: `max-height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s, padding ${T1}s ${phase1Ease} ${phase1Delay}s`,
       }}>
         <Link href={categoryLink} style={{
           backgroundColor: 'transparent',

@@ -108,7 +108,7 @@ function InlineArticleSlider({ posts, onNavReady }: InlineArticleSliderProps) {
                 transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
                 transition: 'transform 0.1s ease',
               }}>
-                <SlideArticleCard post={post} progress={0} />
+                <SlideArticleCard post={post} />
               </div>
 
               {!isLast && (
@@ -183,7 +183,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
-    const FADE_LEFT = 250;
+    const FADE_LEFT = 200;
     const FADE_RIGHT = 200;
 
     const update = () => {
@@ -222,8 +222,16 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   }, [catEmblaApi, categories.length]);
 
   // Reset article nav when closing
+  // Delayed phase2 for spacer width (synced with card phase2)
+  const [spacerExpanded, setSpacerExpanded] = useState(false);
   useEffect(() => {
-    if (activeSlide === null) setArticleNav(null);
+    if (activeSlide === null) {
+      setArticleNav(null);
+      setSpacerExpanded(false);
+    } else {
+      const t = setTimeout(() => setSpacerExpanded(true), 300); // T1 = 0.3s
+      return () => clearTimeout(t);
+    }
   }, [activeSlide]);
 
   if (!categories || categories.length === 0) return null;
@@ -243,7 +251,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       {/* Category Slider */}
       <div ref={catEmblaRef} style={{ overflow: 'hidden', cursor: 'grab' }}>
         <div style={{ display: 'flex', gap: `${CAT_GAP}px` }}>
-          <div style={{ flex: `0 0 ${activeSlide !== null ? 'calc(10vw + 23px)' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
+          <div style={{ flex: `0 0 ${spacerExpanded ? 'calc(10vw + 23px)' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
           {categories.map((cat, index) => {
             const isLast = index === categories.length - 1;
 
@@ -272,7 +280,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                   <SlideCategoryCard
                     category={cat}
                     parentSlug={parentSlug}
-                    progress={0}
                     active={activeSlide !== null}
                     selected={activeSlide === index}
                     onClose={() => setActiveSlide(null)}
@@ -295,37 +302,28 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                     gap: 5,
                     pointerEvents: 'none',
                   }}>
-                    <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)', opacity: activeSlide !== null ? 0 : 1, transition: 'opacity 0.3s ease' }} />
+                    <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height 0.3s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : '0.3s'}` }} />
                     <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
                       <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
                     </svg>
-                    <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)', opacity: activeSlide !== null ? 0 : 1, transition: 'opacity 0.3s ease' }} />
+                    <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height 0.3s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : '0.3s'}` }} />
                   </div>
                 )}
               </div>
             );
           })}
-          <div style={{ flex: `0 0 ${activeSlide !== null ? '25vw' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
+          <div style={{ flex: `0 0 ${spacerExpanded ? '25vw' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
         </div>
       </div>
 
       {/* Article Slider — key forces fresh Embla per category */}
-      <div style={{
-        height: isArticleMode ? 'auto' : 0,
-        opacity: isArticleMode ? 1 : 0,
-        overflow: 'hidden',
-        transition: 'opacity 0.3s ease',
-      }}>
-        {activeSlide !== null && activePosts.length > 0 ? (
-          <InlineArticleSlider
-            key={categories[activeSlide].slug}
-            posts={activePosts}
-            onNavReady={handleArticleNavReady}
-          />
-        ) : (
-          <div style={{ height: 0 }} />
-        )}
-      </div>
+      {isArticleMode && (
+        <InlineArticleSlider
+          key={categories[activeSlide!].slug}
+          posts={activePosts}
+          onNavReady={handleArticleNavReady}
+        />
+      )}
 
       {/* Shared SliderNav */}
       <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>

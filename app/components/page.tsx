@@ -5,18 +5,13 @@ import DotSpacer from "@/components/ui/DotSpacer";
 import TopBanner from "@/components/ui/TopBanner";
 import SubBanner from "@/components/ui/SubBanner";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
-import ArticleSlider from "@/components/sections/ArticleSlider";
-import { getPostsByCategory, getCategoryWithChildren } from "@/lib/wordpress";
+import { getCategoryWithChildren } from "@/lib/wordpress";
 
 export default async function ComponentsPage() {
-  let sliderPosts: Awaited<ReturnType<typeof getPostsByCategory>> = [];
   let insuranceCategory: Awaited<ReturnType<typeof getCategoryWithChildren>> = null;
 
   try {
-    [sliderPosts, insuranceCategory] = await Promise.all([
-      getPostsByCategory('altersvorsorge'),
-      getCategoryWithChildren('versicherungen'),
-    ]);
+    insuranceCategory = await getCategoryWithChildren('versicherungen');
   } catch (error) {
     console.error("Fehler beim Laden der Slider-Daten:", error);
   }
@@ -79,12 +74,6 @@ export default async function ComponentsPage() {
         />
       )}
 
-      <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "48px 24px 0" }}>
-        <section style={{ marginBottom: "24px" }}>
-          <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "24px", fontWeight: 600, marginBottom: "16px", color: "var(--color-text-primary)" }}>ArticleSlider</h2>
-        </section>
-      </main>
-      <ArticleSlider posts={sliderPosts} />
 
       <div style={{ height: "60px" }} />
       <Footer />

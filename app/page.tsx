@@ -3,7 +3,6 @@ import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import MorphingSection from "@/components/sections/MorphingSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
-import SimpleArticleSlider from "@/components/sections/SimpleArticleSlider";
 import SearchSection from "@/components/sections/SearchSection";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
@@ -12,14 +11,12 @@ import type { Post } from "@/lib/types";
 export default async function LandingPage() {
   let posts: Post[] = [];
   let insuranceCategory: Awaited<ReturnType<typeof getCategoryWithChildren>> = null;
-  let insurancePosts: Post[] = [];
   let categoryPosts: Record<string, Post[]> = {};
 
   try {
-    [posts, insuranceCategory, insurancePosts] = await Promise.all([
+    [posts, insuranceCategory] = await Promise.all([
       getAllPosts(),
       getCategoryWithChildren('versicherungen'),
-      getPostsByCategory('versicherungen'),
     ]);
 
     // Alle Kategorie-Beiträge vorladen
@@ -52,11 +49,7 @@ export default async function LandingPage() {
             />
           )}
         </MorphingSection>
-        <MorphingSection variant="inverted" heading="Versicherungsratgeber" text="Versicherungen verstehen und Besser entscheiden">
-          {insurancePosts.length > 0 && (
-            <SimpleArticleSlider posts={insurancePosts} />
-          )}
-        </MorphingSection>
+        <MorphingSection variant="inverted" heading="Versicherungsratgeber" text="Versicherungen verstehen und Besser entscheiden" />
         <MorphingSection zIndex={3} heading="Steuerratgeber" text="Mehr Durchblick, mehr Geld behalten" />
         <div style={{ position: "relative", zIndex: 999 }}>
           <SearchSection />
