@@ -11,6 +11,9 @@ export interface CardState {
   h: number;
   zIndex: number;
   contentOpacity: number;
+  descOpacity: number;
+  bookmarkOpacity: number;
+  borderOpacity: number;
   titleFontSize: number;
 }
 
@@ -49,14 +52,14 @@ export function useRevolverSlider({
   /* ── Layout (stored in ref to keep callbacks stable) ── */
   const layout = useRef({ W: 0, TH: 0, GAP: 20, BW: 0, BH: 0, BY: 0, STAGE_H: 0, DRAG_PX: 0, SLOT: [] as Slot[] });
   {
-    const GAP = 20;
+    const GAP = 23;
     const BW = (W - GAP) / 2;
-    const BH = Math.round(BW * 0.75);
+    const BH = Math.round(BW * 0.75) - 40;
     const BY = TH + GAP;
     layout.current = {
       W, TH, GAP, BW, BH, BY,
       STAGE_H: TH + GAP + BH,
-      DRAG_PX: W * 1.6,
+      DRAG_PX: W * 1.4,
       SLOT: [
         { cx: W / 2, cy: TH / 2, w: W, h: TH },
         { cx: BW + GAP + BW / 2, cy: BY + BH / 2, w: BW, h: BH },
@@ -159,11 +162,39 @@ export function useRevolverSlider({
       else if (si !== 0 && ts === 0) contentOpacity = Math.pow(t, 2);
       else contentOpacity = 0;
 
+      // descOpacity: description+button fade faster, tied to width shrink
+      let descOpacity: number;
+      if (si === 0 && ts === 0) descOpacity = 1;
+      else if (si === 0 && ts !== 0) {
+        const { SLOT } = layout.current;
+        const wProgress = (SLOT[0].w - w) / (SLOT[0].w - SLOT[ts].w);
+        descOpacity = Math.max(0, 1 - wProgress);
+      }
+      else if (si !== 0 && ts === 0) {
+        const { SLOT } = layout.current;
+        const wProgress = (w - SLOT[si].w) / (SLOT[0].w - SLOT[si].w);
+        descOpacity = Math.max(0, wProgress);
+      }
+      else descOpacity = 0;
+
+      // bookmarkOpacity: fades out early (with desc), fades in late (with content)
+      let bookmarkOpacity: number;
+      if (si === 0 && ts === 0) bookmarkOpacity = 1;
+      else if (si === 0 && ts !== 0) bookmarkOpacity = descOpacity; // out early
+      else if (si !== 0 && ts === 0) bookmarkOpacity = contentOpacity; // in late
+      else bookmarkOpacity = 0;
+
       let titleFontSize: number;
       if (si === 0 && ts === 0) titleFontSize = 24;
-      else if (si === 0 && ts !== 0) titleFontSize = 24 - 8 * t;
+      else if (si === 0 && ts !== 0) {
+        // Shrink early, synced with bookmark/desc fadeout
+        const shrinkT = Math.min(1, t * 5);
+        titleFontSize = 24 - 8 * shrinkT;
+      }
       else if (si !== 0 && ts === 0) titleFontSize = 16 + 8 * t;
       else titleFontSize = 16;
+
+      const borderOpacity = contentOpacity;
 
       return {
         dataIndex: ci,
@@ -172,6 +203,9 @@ export function useRevolverSlider({
         w, h,
         zIndex: (si === 0 && ts === 0) ? 10 : si !== 0 ? 20 : 15,
         contentOpacity,
+        descOpacity,
+        bookmarkOpacity,
+        borderOpacity,
         titleFontSize,
       };
     });
@@ -188,11 +222,16 @@ export function useRevolverSlider({
     if (raf.current) cancelAnimationFrame(raf.current);
     vel.current = initVel;
     let snapTo = target;
+    let lastTime = performance.now();
 
     const step = () => {
-      vel.current += (snapTo - rot.current) * 0.006;
-      vel.current *= 0.92;
-      rot.current += vel.current;
+      const now = performance.now();
+      const dt = Math.min((now - lastTime) / 16.667, 3); // normalize to 60fps, cap at 3x
+      lastTime = now;
+
+      vel.current += (snapTo - rot.current) * 0.004 * dt;
+      vel.current *= Math.pow(0.94, dt);
+      rot.current += vel.current * dt;
 
       if (rot.current >= 1) {
         commit(true);

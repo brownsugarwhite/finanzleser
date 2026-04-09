@@ -146,24 +146,25 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 transform: `translate3d(${cs.x}px, ${cs.y}px, 0)`,
                 width: cs.w,
                 height: cs.h,
-                borderRadius: isExpanded ? 36 : 23,
-                background: "rgba(255, 255, 255, 0.8)",
-                backdropFilter: "brightness(1.3) blur(13px)",
-                WebkitBackdropFilter: "brightness(1.3) blur(13px)",
-                boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
+                borderRadius: 23 + cs.contentOpacity * 13,
+                background: `rgba(255, 255, 255, ${0.8 * (1 - cs.contentOpacity)})`,
+                backdropFilter: `brightness(${1 + 0.3 * (1 - cs.contentOpacity)}) blur(${13 * (1 - cs.contentOpacity)}px)`,
+                WebkitBackdropFilter: `brightness(${1 + 0.3 * (1 - cs.contentOpacity)}) blur(${13 * (1 - cs.contentOpacity)}px)`,
+                boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - cs.contentOpacity)})`,
+                border: `1px solid rgba(104, 108, 106, ${cs.borderOpacity})`,
                 overflow: "hidden",
                 cursor: "pointer",
                 willChange: "transform, width, height",
                 zIndex: cs.zIndex,
               }}
             >
-              {/* Card inner content — fixed width to prevent reflow during morph */}
+              {/* Card inner content */}
               <div style={{
                 position: "absolute",
                 top: 0,
                 left: 0,
                 width: isExpanded ? cs.w : "100%",
-                padding: "27px 23px 23px 27px",
+                padding: `${20 - 5 * cs.contentOpacity}px 23px 23px 27px`,
                 display: "flex",
                 flexDirection: "column",
                 pointerEvents: "none",
@@ -188,7 +189,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                       <div style={{
                         position: "absolute",
                         left: 27 + iconLeft,
-                        top: 27,
+                        top: 15,
                         width: 40,
                         height: 40,
                         borderRadius: 17,
@@ -221,10 +222,10 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
 
                 {/* Description + CTA (fades with contentOpacity) */}
                 <div style={{
-                  marginTop: 9,
+                  marginTop: 3,
                   width: containerWidth - 50,
-                  opacity: cs.contentOpacity,
-                  pointerEvents: cs.contentOpacity > 0.5 ? "auto" : "none",
+                  opacity: cs.descOpacity,
+                  pointerEvents: cs.descOpacity > 0.5 ? "auto" : "none",
                 }}>
                   <p style={{
                     fontFamily: "var(--font-body, 'Open Sans', sans-serif)",
@@ -243,20 +244,19 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
               </div>
 
               {/* Bookmark */}
-              {cs.contentOpacity > 0.3 && (
-                <div style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 36,
-                  width: 28,
-                  opacity: cs.contentOpacity,
-                }}>
+              <div style={{
+                position: "absolute",
+                top: 0,
+                right: 36,
+                width: 28,
+                opacity: cs.bookmarkOpacity,
+                pointerEvents: "none",
+              }}>
                   <div style={{ width: 28, height: 9, background: tool.color }} />
                   <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
                     <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
                   </svg>
                 </div>
-              )}
             </div>
           );
         })}
