@@ -19,8 +19,11 @@ export default function InstagramDots({
   current,
   total,
   onGoTo,
-  visibleCount = 7,
+  visibleCount: visibleCountProp,
 }: InstagramDotsProps) {
+  // Auto: 5 dots for ≤7 slides, 7 for more
+  const visibleCount = visibleCountProp ?? (total <= 7 ? 5 : 7);
+
   // Few dots: show all
   if (total <= visibleCount) {
     return (

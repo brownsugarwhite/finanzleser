@@ -6,7 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import type { ChecklisteData } from "./types";
 import ChecklisteSlide from "./ChecklisteSlide";
 import ChecklisteProgress from "./ChecklisteProgress";
-import ChecklisteNav from "./ChecklisteNav";
+import SliderNav from "@/components/ui/SliderNav";
 import { useChecklisteLayout } from "./ChecklisteLayoutContext";
 
 interface Props {
@@ -170,12 +170,14 @@ export default function InteraktiveCheckliste({
         </div>
       </div>
 
-      <ChecklisteNav
+      <SliderNav
         current={currentSlide}
         total={data.sektionen.length}
         onPrev={scrollPrev}
         onNext={scrollNext}
         onGoTo={scrollTo}
+        prevLabel="Vorherige Seite"
+        nextLabel="Nächste Seite"
       />
 
       {/* Buttons – via Portal in die Visual-Spalte */}
