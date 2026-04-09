@@ -7,7 +7,7 @@ import SlideArticleCard from '@/components/ui/SlideArticleCard';
 import SliderNav from '@/components/ui/SliderNav';
 import type { Post } from '@/lib/types';
 
-const CAT_GAP = 50;
+const CAT_GAP = 65;
 const ART_SLIDE_WIDTH = 265;
 const ART_GAP = 70;
 
