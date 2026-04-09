@@ -26,6 +26,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [topCardHeight, setTopCardHeight] = useState(200);
+  const [titleWidths, setTitleWidths] = useState<number[]>([]);
 
   /* ── Measure container width ── */
   useEffect(() => {
@@ -62,6 +63,21 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
       document.body.removeChild(probe);
     });
     setTopCardHeight(maxH);
+
+    // Measure title widths at collapsed font size (16px/600)
+    const widths = tools.map((tool) => {
+      const span = document.createElement("span");
+      span.style.cssText = `
+        position: absolute; visibility: hidden; white-space: nowrap;
+        font-family: 'Merriweather', serif; font-size: 16px; font-weight: 600;
+      `;
+      span.textContent = tool.title;
+      document.body.appendChild(span);
+      const w = span.offsetWidth;
+      document.body.removeChild(span);
+      return w;
+    });
+    setTitleWidths(widths);
   }, [containerWidth, tools]);
 
   /* ── Hook ── */
@@ -101,7 +117,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
           style={{
             position: "absolute",
             left: containerWidth / 2 - 10,
-            top: topCardHeight + revolver.slotLayout.GAP / 2 - 10,
+            top: topCardHeight + revolver.slotLayout.GAP / 2 - 10 + 9,
             opacity: revolver.sparkleOpacity * 0.65,
             transform: `rotate(${revolver.sparkleRotation}deg)`,
             pointerEvents: "none",
@@ -152,31 +168,56 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 flexDirection: "column",
                 pointerEvents: "none",
               }}>
-                {/* Icon + Title */}
-                <div style={{
-                  display: "flex",
-                  flexDirection: isExpanded ? "row" : "column",
-                  alignItems: "center",
-                  justifyContent: isExpanded ? "flex-start" : "center",
-                  gap: isExpanded ? 10 : 6,
-                }}>
-                  <div style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 17,
-                    border: "1px solid var(--color-text-primary)",
-                    flexShrink: 0,
-                  }} />
-                  <span style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontSize: cs.titleFontSize,
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    whiteSpace: "nowrap",
-                  }}>
-                    {tool.title}
-                  </span>
-                </div>
+                {/* Icon + Title — staggered: horizontal first, then vertical */}
+                {(() => {
+                  const t = cs.contentOpacity;
+                  const cw = Math.max(0, cs.w - 50);
+                  // Smoothstep for staggered X/Y
+                  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+                  const ss = (v: number) => v * v * (3 - 2 * v);
+                  const tX = ss(clamp01(t / 0.6));          // X: 0→0.6
+                  const tY = ss(clamp01((t - 0.4) / 0.6));  // Y: 0.4→1.0
+
+                  // Icon: horizontal movement (centered → left)
+                  const iconTX = ss(clamp01(t / 0.6));
+                  const iconLeft = (1 - iconTX) * (cw / 2 - 20);
+
+                  return (
+                    <>
+                      {/* Icon — absolute, animiert horizontal */}
+                      <div style={{
+                        position: "absolute",
+                        left: 27 + iconLeft,
+                        top: 27,
+                        width: 40,
+                        height: 40,
+                        borderRadius: 17,
+                        border: "1px solid var(--color-text-primary)",
+                      }} />
+                      {/* Title — in flow, nur paddingLeft + paddingTop animiert */}
+                      <p style={{
+                        marginTop: 0,
+                        marginBottom: 0,
+                        marginLeft: 0,
+                        marginRight: 0,
+                        paddingTop: 46 * (1 - tY) + 10 * tY,
+                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                        fontSize: cs.titleFontSize,
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        whiteSpace: "nowrap",
+                        textAlign: "left",
+                        transform: `translateX(${
+                          // collapsed: center title in card
+                          // expanded: 36px from left card edge (36 - 27 padding = 9px)
+                          ((cs.w - 50) / 2 - (titleWidths[cs.dataIndex] || 60) / 2) * (1 - tX) + 48 * tX
+                        }px)`,
+                      }}>
+                        {tool.title}
+                      </p>
+                    </>
+                  );
+                })()}
 
                 {/* Description + CTA (fades with contentOpacity) */}
                 <div style={{
