@@ -23,9 +23,9 @@ export default async function LandingPage() {
       <LandingIntro />
       <main className="bg-white scalable-landing">
         <FinanztoolsHero posts={posts} />
-        <MorphingSection />
-        <MorphingSection variant="inverted" />
-        <MorphingSection zIndex={3} />
+        <MorphingSection heading="Unsere Finanzratgeber" text="Wir bringen Klarheit in deine Entscheidungen" />
+        <MorphingSection variant="inverted" heading="Versicherungsratgeber" text="Versicherungen verstehen und Besser entscheiden" />
+        <MorphingSection zIndex={3} heading="Steuerratgeber" text="Mehr Durchblick, mehr Geld behalten" />
         <div style={{ position: "relative", zIndex: 999 }}>
           <SearchSection />
           <Footer hideNewsletter />

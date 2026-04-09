@@ -9,16 +9,18 @@ gsap.registerPlugin(ScrollTrigger);
 interface MorphingSectionProps {
   variant?: "default" | "inverted";
   zIndex?: number;
+  heading?: string;
+  text?: string;
 }
 
-export default function MorphingSection({ variant = "default", zIndex }: MorphingSectionProps) {
+export default function MorphingSection({ variant = "default", zIndex, heading, text }: MorphingSectionProps) {
   const inverted = variant === "inverted";
   const resolvedZIndex = zIndex ?? (inverted ? 2 : 1);
-  const sectionRef = useRef<HTMLElement>(null);
+  const innerSectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    const section = innerSectionRef.current;
     const inner = innerRef.current;
     if (!section || !inner) return;
 
@@ -44,7 +46,6 @@ export default function MorphingSection({ variant = "default", zIndex }: Morphin
       }, 0);
     });
 
-    // Refresh after fonts/images/sticky layout settle
     const onLoad = () => ScrollTrigger.refresh();
     if (document.readyState === "complete") {
       requestAnimationFrame(onLoad);
@@ -61,31 +62,72 @@ export default function MorphingSection({ variant = "default", zIndex }: Morphin
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
+    <div
       style={{
-        width: "100%",
-        height: 650,
-        paddingLeft: "10vw",
-        paddingRight: "10vw",
-        display: "flex-column",
-        alignItems: "flex-start",
         position: "relative",
+        height: 650,
         zIndex: resolvedZIndex,
-        background: "transparent",
+        width: "100%",
       }}
     >
-      <div
-        ref={innerRef}
+      {/* Content — in flow, über der absoluten Section */}
+      {(heading || text) && (
+        <div style={{ position: "relative", zIndex: 1, padding: "60px calc(10vw + 60px) 0" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {heading && (
+              <h2 style={{
+                fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                fontWeight: 600,
+                fontSize: 19,
+                lineHeight: 1.38,
+                color: "var(--color-text-primary)",
+                margin: 0,
+              }}>
+                {heading}
+              </h2>
+            )}
+            {text && (
+              <p style={{
+                fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                fontWeight: 900,
+                fontSize: 40,
+                lineHeight: 1.3,
+                color: "var(--color-text-primary)",
+                margin: 0,
+              }}>
+                {text}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Morphing Section — absolute dahinter */}
+      <section
+        ref={innerSectionRef}
         style={{
-          width: "100%",
-          minHeight: "230vh",
-          background: inverted ? "var(--color-bg-page)" : "#fff",
-          borderTopLeftRadius: 57,
-          borderTopRightRadius: 57,
-          boxShadow: inverted ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "100%",
+          paddingLeft: "10vw",
+          paddingRight: "10vw",
+          background: "transparent",
         }}
-      />
-    </section>
+      >
+        <div
+          ref={innerRef}
+          style={{
+            width: "100%",
+            minHeight: "230vh",
+            background: inverted ? "var(--color-bg-page)" : "#fff",
+            borderTopLeftRadius: 57,
+            borderTopRightRadius: 57,
+            boxShadow: inverted ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
+          }}
+        />
+      </section>
+    </div>
   );
 }
