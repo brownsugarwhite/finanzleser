@@ -18,13 +18,14 @@ interface SlideCategoryCardProps {
   active?: boolean;
   selected?: boolean;
   onClose?: () => void;
+  titleWidth?: number;
 }
 
 const CARD_WIDTH = 320;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
-export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose }: SlideCategoryCardProps) {
+export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose, titleWidth: titleWidthProp }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   // 2-phase: width changes delayed when collapsing, immediate when expanding
@@ -43,10 +44,11 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
     return () => { if (phase2Timer.current) clearTimeout(phase2Timer.current); };
   }, [active]);
 
-  const [titleWidth, setTitleWidth] = useState(CARD_WIDTH);
+  const [measuredTitleWidth, setMeasuredTitleWidth] = useState(CARD_WIDTH);
 
   // Measure title at collapsed font (16px/600) using hidden element
   useEffect(() => {
+    if (titleWidthProp !== undefined) return;
     const el = document.createElement('span');
     el.style.cssText = `
       position: absolute; visibility: hidden; white-space: nowrap;
@@ -55,9 +57,11 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
     `;
     el.textContent = category.name;
     document.body.appendChild(el);
-    setTitleWidth(el.offsetWidth + 4);
+    setMeasuredTitleWidth(el.offsetWidth + 4);
     document.body.removeChild(el);
-  }, [category.name]);
+  }, [category.name, titleWidthProp]);
+
+  const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
   const cardWidth = phase2Active ? `${titleWidth}px` : `${CARD_WIDTH}px`;
 
@@ -67,6 +71,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
 
   return (
     <div
+      data-slider-card
       style={{
         width: cardWidth,
         overflow: 'hidden',
