@@ -16,7 +16,7 @@ export default function SearchSection() {
   };
 
   return (
-    <section className="py-16 bg-white border-t border-gray-200">
+    <section className="py-16 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
           Suche

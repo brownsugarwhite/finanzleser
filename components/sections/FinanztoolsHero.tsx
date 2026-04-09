@@ -133,7 +133,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ width: "100%" }}>
+    <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
       <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
         <div style={{ flex: 1 }}>
@@ -183,7 +183,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
 
           {/* 3. Lottie */}
           <div style={{ width: "100%", marginTop: -76, marginBottom: -270 }}>
-            <div ref={lottieRef} style={{ width: "100%" }} />
+            <div ref={lottieRef} style={{ width: "100%", aspectRatio: "1 / 1" }} />
             <div style={{ position: 'relative', top: -300, display: 'flex', gap: 12 }}>
               <button
                 onClick={() => loadAnim(JSON.parse(JSON.stringify(vergleicheAnim)))}
