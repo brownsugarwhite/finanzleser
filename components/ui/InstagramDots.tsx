@@ -39,6 +39,7 @@ export default function InstagramDots({
           return (
             <button
               key={i}
+              className="slider-nav-dot"
               onClick={() => onGoTo(i)}
               aria-label={`Slide ${i + 1}`}
               style={{
@@ -119,6 +120,7 @@ export default function InstagramDots({
           return (
             <button
               key={i}
+              className="slider-nav-dot"
               onClick={() => onGoTo(i)}
               aria-label={`Slide ${i + 1}`}
               style={{

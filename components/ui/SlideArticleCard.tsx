@@ -39,7 +39,7 @@ export function easeProgress(progress: number): { t1: number; t2: number; phase:
 
 // Card states from Figma
 const STATES = {
-  article: { width: 265, height: 390, radius: 36, bgAlpha: 0.10 },
+  article: { width: 265, height: 390, radius: 36, bgAlpha: 0 },
   medium:  { width: 200, height: 300, radius: 50, bgAlpha: 0.18 },
   small:   { width: 100, height: 100, radius: 42, bgAlpha: 0.26 },
 };

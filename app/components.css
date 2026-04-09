@@ -559,7 +559,17 @@ a.megamenu-link:hover {
   cursor: default;
 }
 .slider-nav-arrow-btn:hover:not(:disabled) {
-  opacity: 0.6;
+  opacity: 1;
+  color: var(--color-brand-secondary);
+}
+.slider-nav-arrow-btn:hover:not(:disabled) .slider-nav-arrow path {
+  fill: var(--color-brand-secondary);
+}
+.slider-nav-arrow-btn:hover:not(:disabled) .slider-nav-track {
+  border-color: var(--color-brand-secondary);
+}
+.slider-nav-arrow-btn:hover:not(:disabled) .slider-nav-label {
+  color: var(--color-brand-secondary);
 }
 .slider-nav-arrow {
   flex-shrink: 0;
@@ -582,6 +592,9 @@ a.megamenu-link:hover {
   color: var(--color-text-primary);
   white-space: nowrap;
   line-height: 1;
+}
+.slider-nav-dot:hover {
+  background: var(--color-brand-secondary) !important;
 }
 
 /* Action Buttons */

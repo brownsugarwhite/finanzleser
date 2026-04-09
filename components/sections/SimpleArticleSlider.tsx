@@ -17,8 +17,7 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     loop: false,
-    slidesToScroll: 1,
-    duration: 25,
+    dragFree: true,
     containScroll: false,
   });
 
@@ -26,10 +25,28 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
 
   useEffect(() => {
     if (!emblaApi) return;
-    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on('select', onSelect);
-    onSelect();
-    return () => { emblaApi.off('select', onSelect); };
+
+    const snapList = emblaApi.scrollSnapList();
+    const update = () => {
+      const progress = emblaApi.scrollProgress();
+      let closest = 0;
+      let minDist = Infinity;
+      snapList.forEach((snap, i) => {
+        const dist = Math.abs(progress - snap);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      setSelectedIndex(closest);
+    };
+
+    emblaApi.on('scroll', update);
+    emblaApi.on('reInit', () => {
+      const snaps = emblaApi.scrollSnapList();
+      snapList.length = 0;
+      snaps.forEach(s => snapList.push(s));
+    });
+    update();
+
+    return () => { emblaApi.off('scroll', update); };
   }, [emblaApi]);
 
   if (!posts || posts.length === 0) return null;
