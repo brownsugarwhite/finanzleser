@@ -11,9 +11,10 @@ interface MorphingSectionProps {
   zIndex?: number;
   heading?: string;
   text?: string;
+  children?: React.ReactNode;
 }
 
-export default function MorphingSection({ variant = "default", zIndex, heading, text }: MorphingSectionProps) {
+export default function MorphingSection({ variant = "default", zIndex, heading, text, children }: MorphingSectionProps) {
   const inverted = variant === "inverted";
   const resolvedZIndex = zIndex ?? (inverted ? 2 : 1);
   const innerSectionRef = useRef<HTMLElement>(null);
@@ -65,40 +66,49 @@ export default function MorphingSection({ variant = "default", zIndex, heading, 
     <div
       style={{
         position: "relative",
-        height: 650,
+        minHeight: 650,
         zIndex: resolvedZIndex,
         width: "100%",
       }}
     >
       {/* Content — in flow, über der absoluten Section */}
-      {(heading || text) && (
-        <div style={{ position: "relative", zIndex: 1, padding: "60px calc(10vw + 60px) 0" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {heading && (
-              <h2 style={{
-                fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                fontWeight: 600,
-                fontSize: 19,
-                lineHeight: 1.38,
-                color: "var(--color-text-primary)",
-                margin: 0,
-              }}>
-                {heading}
-              </h2>
-            )}
-            {text && (
-              <p style={{
-                fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                fontWeight: 900,
-                fontSize: 40,
-                lineHeight: 1.3,
-                color: "var(--color-text-primary)",
-                margin: 0,
-              }}>
-                {text}
-              </p>
-            )}
-          </div>
+      {(heading || text || children) && (
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {(heading || text) && (
+            <div style={{ padding: "70px calc(10vw + 70px) 0" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {heading && (
+                  <h2 style={{
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontWeight: 600,
+                    fontSize: 19,
+                    lineHeight: 1.38,
+                    color: "var(--color-text-primary)",
+                    margin: 0,
+                  }}>
+                    {heading}
+                  </h2>
+                )}
+                {text && (
+                  <p style={{
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontWeight: 900,
+                    fontSize: 40,
+                    lineHeight: 1.3,
+                    color: "var(--color-text-primary)",
+                    margin: 0,
+                  }}>
+                    {text}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+          {children && (
+            <div style={{ width: "100%" }}>
+              {children}
+            </div>
+          )}
         </div>
       )}
 

@@ -24,7 +24,7 @@ function lerp(a: number, b: number, t: number) {
 }
 
 const STATES = {
-  article: { width: 350, height: 390, radius: 36, bgAlpha: 0.10 },
+  article: { width: 350, height: 390, radius: 0, bgAlpha: 0 },
   medium:  { width: 200, height: 300, radius: 50, bgAlpha: 0.18 },
   small:   { width: 100, height: 100, radius: 42, bgAlpha: 0.26 },
 };
@@ -184,19 +184,33 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
             />
           </div>
 
-          {/* Arrow Button */}
+          {/* Arrow Button — Main Button Style */}
           <Link href={categoryLink} style={{
-            width: '51px',
-            height: '42px',
-            borderRadius: '18px',
-            background: 'rgba(198, 200, 204, 0.23)',
+            backgroundColor: 'transparent',
+            borderRadius: '21px',
+            paddingLeft: '15px',
+            paddingRight: '3px',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            border: '2px solid var(--color-text-primary)',
+            outline: '1px solid var(--color-text-primary)',
+            outlineOffset: '2px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
-            paddingRight: '5px',
+            gap: '12px',
+            height: '40px',
             cursor: 'pointer',
             textDecoration: 'none',
           }}>
+            <span style={{
+              fontFamily: 'Open Sans, sans-serif',
+              fontSize: '14px',
+              color: '#1a1a1a',
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+            }}>
+              Mehr
+            </span>
             <div style={{
               width: '32px',
               height: '32px',
@@ -206,9 +220,8 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              paddingLeft: '1px',
             }}>
-              <svg width="11" height="15" viewBox="0 0 11 15" fill="none">
+              <svg width="9" height="13" viewBox="0 0 11 15" fill="none">
                 <path
                   d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
                   stroke="white"
