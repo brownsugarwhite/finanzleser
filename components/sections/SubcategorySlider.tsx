@@ -76,7 +76,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
           display: 'flex',
           gap: `${GAP}px`,
         }}>
-          <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
+          <div style={{ flex: `0 0 ${activeSlide !== null ? 'calc(10vw + 23px)' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
           {categories.map((cat, index) => {
             const isLast = index === categories.length - 1;
 
@@ -136,7 +136,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
               </div>
             );
           })}
-          <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
+          <div style={{ flex: `0 0 ${activeSlide !== null ? '25vw' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
         </div>
       </div>
       <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
