@@ -18,7 +18,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
     align: 'start',
     loop: false,
     dragFree: true,
-    containScroll: false,
+    containScroll: 'trimSnaps',
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -26,24 +26,14 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
   useEffect(() => {
     if (!emblaApi) return;
 
-    const snapList = emblaApi.scrollSnapList();
+    const slideCount = categories.length;
     const update = () => {
-      const progress = emblaApi.scrollProgress();
-      let closest = 0;
-      let minDist = Infinity;
-      snapList.forEach((snap, i) => {
-        const dist = Math.abs(progress - snap);
-        if (dist < minDist) { minDist = dist; closest = i; }
-      });
-      setSelectedIndex(closest);
+      const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+      const idx = Math.round(progress * (slideCount - 1));
+      setSelectedIndex(Math.max(0, Math.min(slideCount - 1, idx)));
     };
 
     emblaApi.on('scroll', update);
-    emblaApi.on('reInit', () => {
-      const snaps = emblaApi.scrollSnapList();
-      snapList.length = 0;
-      snaps.forEach(s => snapList.push(s));
-    });
     update();
 
     return () => { emblaApi.off('scroll', update); };
@@ -58,6 +48,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
           display: 'flex',
           gap: `${GAP}px`,
         }}>
+          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
           {categories.map((cat, index) => {
             const isLast = index === categories.length - 1;
 
@@ -70,8 +61,6 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
                   position: 'relative',
                   display: 'flex',
                   alignItems: 'stretch',
-                  ...(index === 0 ? { marginLeft: 'calc(10vw + 70px)' } : {}),
-                  ...(isLast ? { marginRight: '40px' } : {}),
                 }}
               >
                 <SlideCategoryCard
@@ -96,6 +85,7 @@ export default function SubcategorySlider({ categories, parentSlug }: Subcategor
               </div>
             );
           })}
+          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
         </div>
       </div>
       <div style={{ padding: '0 clamp(20px, 10vw, 200px)' }}>

@@ -18,7 +18,7 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
     align: 'start',
     loop: false,
     dragFree: true,
-    containScroll: false,
+    containScroll: 'trimSnaps',
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -26,24 +26,14 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
   useEffect(() => {
     if (!emblaApi) return;
 
-    const snapList = emblaApi.scrollSnapList();
+    const slideCount = posts.length;
     const update = () => {
-      const progress = emblaApi.scrollProgress();
-      let closest = 0;
-      let minDist = Infinity;
-      snapList.forEach((snap, i) => {
-        const dist = Math.abs(progress - snap);
-        if (dist < minDist) { minDist = dist; closest = i; }
-      });
-      setSelectedIndex(closest);
+      const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+      const idx = Math.round(progress * (slideCount - 1));
+      setSelectedIndex(Math.max(0, Math.min(slideCount - 1, idx)));
     };
 
     emblaApi.on('scroll', update);
-    emblaApi.on('reInit', () => {
-      const snaps = emblaApi.scrollSnapList();
-      snapList.length = 0;
-      snaps.forEach(s => snapList.push(s));
-    });
     update();
 
     return () => { emblaApi.off('scroll', update); };
@@ -55,9 +45,9 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
       <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab' }}>
         <div style={{ display: 'flex', gap: `${GAP}px` }}>
+          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
           {posts.map((post, index) => {
             const isLast = index === posts.length - 1;
-
             return (
               <div
                 key={post.id}
@@ -68,8 +58,6 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  ...(index === 0 ? { marginLeft: 'calc(10vw + 70px)' } : {}),
-                  ...(isLast ? { marginRight: '40px' } : {}),
                 }}
               >
                 <SlideArticleCard
@@ -93,6 +81,7 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
               </div>
             );
           })}
+          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
         </div>
       </div>
 
