@@ -6,6 +6,7 @@ import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
+import RevolverSlider from "@/components/ui/RevolverSlider";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
 import type { Post } from "@/lib/types";
 
@@ -68,6 +69,15 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
 
   // Measure collapsed card bar width + calculate spacer height
@@ -222,90 +232,100 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
             </div>
           </div>
 
-          {/* 4. Tool Cards — sticky bottom */}
-          <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
-            {TOOLS.map((tool, idx) => {
-              const isActive = activeCard === tool.title;
-              return (
-                <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
-                  {idx > 0 && <div style={{ marginBottom: 50 }}><Spark /></div>}
-                  <div
-                    onClick={() => setActiveCard(isActive ? null : tool.title)}
-                    style={{
-                      width: isActive ? 470 : 130,
-                      borderRadius: isActive ? 36 : 23,
-                      background: "rgba(255, 255, 255, 0.8)",
-                      backdropFilter: "brightness(1.3) blur(13px)",
-                      WebkitBackdropFilter: "brightness(1.3) blur(13px)",
-                      boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
-                      overflow: "hidden",
-                      position: "relative",
-                      cursor: "pointer",
-                      flexShrink: 0,
-                      padding: "27px 23px 23px 27px",
-                    }}
-                  >
-                    {/* Icon + Title */}
+          {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
+          {isMobile ? (
+            <div style={{ paddingTop: 23, paddingBottom: 23 }}>
+              <RevolverSlider
+                tools={TOOLS}
+                activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
+                onActiveChange={(idx) => setActiveCard(TOOLS[idx].title)}
+              />
+            </div>
+          ) : (
+            <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
+              {TOOLS.map((tool, idx) => {
+                const isActive = activeCard === tool.title;
+                return (
+                  <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
+                    {idx > 0 && <div style={{ marginBottom: 50 }}><Spark /></div>}
                     <div
+                      onClick={() => setActiveCard(isActive ? null : tool.title)}
                       style={{
-                        display: "flex",
-                        flexDirection: isActive ? "row" : "column",
-                        alignItems: "center",
-                        justifyContent: isActive ? "flex-start" : "center",
-                        gap: isActive ? 10 : 6,
-                        height: isActive ? "auto" : 50,
+                        width: isActive ? 470 : 130,
+                        borderRadius: isActive ? 36 : 23,
+                        background: "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: "brightness(1.3) blur(13px)",
+                        WebkitBackdropFilter: "brightness(1.3) blur(13px)",
+                        boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
+                        overflow: "hidden",
+                        position: "relative",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        padding: "27px 23px 23px 27px",
                       }}
                     >
+                      {/* Icon + Title */}
                       <div
                         style={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: 17,
-                          border: "1px solid var(--color-text-primary)",
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                          fontSize: isActive ? 24 : 16,
-                          fontWeight: 600,
-                          color: "var(--color-text-primary)",
-                          whiteSpace: "nowrap",
+                          display: "flex",
+                          flexDirection: isActive ? "row" : "column",
+                          alignItems: "center",
+                          justifyContent: isActive ? "flex-start" : "center",
+                          gap: isActive ? 10 : 6,
+                          height: isActive ? "auto" : 50,
                         }}
                       >
-                        {tool.title}
-                      </span>
-                    </div>
+                        <div
+                          style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: 17,
+                            border: "1px solid var(--color-text-primary)",
+                            flexShrink: 0,
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                            fontSize: isActive ? 24 : 16,
+                            fontWeight: 600,
+                            color: "var(--color-text-primary)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {tool.title}
+                        </span>
+                      </div>
 
-                    {/* Card Content */}
-                    {isActive && (
-                      <div style={{ marginTop: 9 }}>
-                        <div style={{ width: 420, display: "flex", flexDirection: "column", gap: 20 }}>
-                          <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
-                            {tool.description}
-                          </p>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                            <Button label={tool.cta} />
+                      {/* Card Content */}
+                      {isActive && (
+                        <div style={{ marginTop: 9 }}>
+                          <div style={{ width: 420, display: "flex", flexDirection: "column", gap: 20 }}>
+                            <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
+                              {tool.description}
+                            </p>
+                            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                              <Button label={tool.cta} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Lesezeichen */}
-                    {isActive && (
-                      <div style={{ position: "absolute", top: 0, right: 36, width: 28 }}>
-                        <div style={{ width: 28, height: 9, background: tool.color }} />
-                        <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
-                          <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
-                        </svg>
-                      </div>
-                    )}
+                      {/* Lesezeichen */}
+                      {isActive && (
+                        <div style={{ position: "absolute", top: 0, right: 36, width: 28 }}>
+                          <div style={{ width: 28, height: 9, background: tool.color }} />
+                          <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
+                            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Right: preview_container */}
