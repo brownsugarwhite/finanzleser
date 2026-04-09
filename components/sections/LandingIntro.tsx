@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useLayoutEffect, useState } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import TopNav from "@/components/layout/TopNav";
@@ -16,39 +16,23 @@ function SearchIcon() {
 }
 
 const PILL_BG = "var(--color-pill-bg)";
-const DURATION = 0.5;
-const EASE = "power2.out";
-const GAP = 10;
-const CONTENT_GAP = 20; // Abstand Input ↔ Button
+const CONTENT_GAP = 20;
 
 export default function LandingIntro() {
-  const [mode, setMode] = useState<"search" | "ki">("search");
   const [searchInput, setSearchInput] = useState("");
-  const [kiInput, setKiInput] = useState("");
   const router = useRouter();
 
   const heroRef = useRef<HTMLElement>(null);
   const searchPillRef = useRef<HTMLFormElement>(null);
-  const kiPillRef = useRef<HTMLDivElement>(null);
   const searchContentRef = useRef<HTMLDivElement>(null);
-  const kiContentRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const kiInputRef = useRef<HTMLInputElement>(null);
   const searchBtnRef = useRef<HTMLButtonElement>(null);
-  const kiBtnRef = useRef<HTMLButtonElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animatingRef = useRef(false);
   const isFirstRender = useRef(true);
 
   const [searchBtnWidth, setSearchBtnWidth] = useState(0);
-  const [kiBtnWidth, setKiBtnWidth] = useState(0);
   const [searchContentWidth, setSearchContentWidth] = useState(0);
-  const [kiContentWidth, setKiContentWidth] = useState(0);
-
-  const measureCollapsed = (pill: HTMLElement) => {
-    const btn = pill.querySelector("button") as HTMLElement;
-    return btn.offsetWidth + 20 + 6;
-  };
 
   useLayoutEffect(() => {
     if (!isFirstRender.current) return;
@@ -62,63 +46,42 @@ export default function LandingIntro() {
     }
 
     const searchPill = searchPillRef.current!;
-    const kiPill = kiPillRef.current!;
     const containerW = containerRef.current!.offsetWidth;
     const searchBtnW = searchBtnRef.current!.offsetWidth;
-    const kiBtnW = kiBtnRef.current!.offsetWidth;
+    const searchContentW = containerW - 20 - 6 - searchBtnW - CONTENT_GAP;
 
-    const kiCollapsed = measureCollapsed(kiPill);
-    const searchCollapsed = measureCollapsed(searchPill);
-    const searchExpandedW = containerW - GAP - kiCollapsed;
-    const kiExpandedW = containerW - GAP - searchCollapsed;
-
-    const searchContentW = searchExpandedW - 20 - 6 - searchBtnW - CONTENT_GAP;
-    const kiContentW = kiExpandedW - 20 - 6 - kiBtnW - CONTENT_GAP;
-
-    searchPill.style.width = searchExpandedW + "px";
-    kiPill.style.width = kiCollapsed + "px";
-
+    searchPill.style.width = "100%";
     gsap.set(searchContentRef.current!, { opacity: 1 });
-    gsap.set(kiContentRef.current!, { opacity: 0 });
 
     setSearchBtnWidth(searchBtnW);
-    setKiBtnWidth(kiBtnW);
     setSearchContentWidth(searchContentW);
-    setKiContentWidth(kiContentW);
   }, []);
 
-  const animateTo = useCallback((target: "search" | "ki") => {
-    if (mode === target || animatingRef.current) return;
-    animatingRef.current = true;
+  // Expand search pill when Maya undocks
+  useEffect(() => {
+    const collapseSlot = (animate: boolean) => {
+      const outer = outerRef.current;
+      const slot = document.getElementById("maya-dock-slot");
+      if (!outer || !slot) return;
 
-    const searchPill = searchPillRef.current!;
-    const kiPill = kiPillRef.current!;
-    const containerW = containerRef.current!.offsetWidth;
+      if (animate) {
+        gsap.to(slot, { width: 0, duration: 0.5, ease: "power2.inOut" });
+        gsap.to(outer, { gap: 0, duration: 0.5, ease: "power2.inOut" });
+      } else {
+        gsap.set(slot, { width: 0 });
+        gsap.set(outer, { gap: 0 });
+      }
+    };
 
-    const expandingPill = target === "search" ? searchPill : kiPill;
-    const collapsingPill = target === "search" ? kiPill : searchPill;
-    const expandingContent = target === "search" ? searchContentRef.current! : kiContentRef.current!;
-    const collapsingContent = target === "search" ? kiContentRef.current! : searchContentRef.current!;
-    const focusInput = target === "search" ? searchInputRef : kiInputRef;
+    // Already scrolled on mount → collapse immediately
+    if (window.scrollY > 5) {
+      collapseSlot(false);
+    }
 
-    const collapsedWidth = measureCollapsed(collapsingPill);
-    const expandedWidth = containerW - GAP - collapsedWidth;
-
-    gsap.set(expandingContent, { opacity: 0 });
-    setMode(target);
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        animatingRef.current = false;
-        focusInput.current?.focus();
-      },
-    });
-
-    tl.to(expandingPill, { width: expandedWidth, duration: DURATION, ease: EASE }, 0);
-    tl.to(collapsingPill, { width: collapsedWidth, duration: DURATION, ease: EASE }, 0);
-    tl.to(collapsingContent, { opacity: 0, duration: DURATION * 0.35, ease: "power1.in" }, 0);
-    tl.to(expandingContent, { opacity: 1, duration: DURATION * 0.4, ease: "power1.out" }, DURATION * 0.55);
-  }, [mode]);
+    const handleUndock = () => collapseSlot(true);
+    window.addEventListener("maya-undocked", handleUndock);
+    return () => window.removeEventListener("maya-undocked", handleUndock);
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,8 +90,6 @@ export default function LandingIntro() {
       setSearchInput("");
     }
   };
-
-  const isSearch = mode === "search";
 
   const pillBase: React.CSSProperties = {
     position: "relative",
@@ -193,9 +154,9 @@ export default function LandingIntro() {
         minHeight: "auto",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
         {/* Logo */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
           <img
             src="/icons/fl_logo.svg"
             alt="finanzleser"
@@ -212,110 +173,84 @@ export default function LandingIntro() {
             fontStyle: "italic",
             color: "var(--color-text-medium)",
             textAlign: "center",
-            margin: "0 0 36px 0",
+            margin: "0 0 23px 0",
           }}
         >
           Das digitale Finanzmagazin
         </p>
 
-        {/* Pill Bar */}
+        {/* Pill Bar + Maya */}
         <div
-          ref={containerRef}
-          style={{
-            display: "flex",
-            gap: "10px",
-            width: "100%",
-            maxWidth: "680px",
-            margin: "0 auto",
-            position: "relative",
-            zIndex: 1,
-          }}
+          ref={outerRef}
+          style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "center", width: "100%", maxWidth: "680px", margin: "0 auto", position: "relative", zIndex: 1 }}
         >
-          {/* ── Search Pill ── */}
-          <form
-            ref={searchPillRef}
-            onSubmit={handleSearch}
-            style={{
-              ...pillBase,
-              cursor: isSearch ? "text" : "pointer",
-            }}
-          >
-            <div
-              ref={searchContentRef}
-              style={{
-                ...contentBase,
-                left: "20px",
-                right: searchBtnWidth + 6 + CONTENT_GAP + "px",
-                width: searchContentWidth + "px",
-              }}
-            >
-              <SearchIcon />
-              <input
-                ref={searchInputRef}
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Suchbegiff eingeben"
-                tabIndex={isSearch ? 0 : -1}
-                className="search-input"
-                style={inputStyle}
-              />
-            </div>
-            <button
-              ref={searchBtnRef}
-              type={isSearch ? "submit" : "button"}
-              onClick={!isSearch ? () => animateTo("search") : undefined}
-              style={{ ...btnStyle, backgroundColor: "var(--color-brand)" }}
-            >
-              Suchen
-            </button>
-          </form>
-
-          {/* ── KI Agent Pill ── */}
           <div
-            ref={kiPillRef}
+            ref={containerRef}
             style={{
-              ...pillBase,
-              cursor: isSearch ? "pointer" : "text",
+              display: "flex",
+              flex: 1,
+              minWidth: 0,
+              position: "relative",
             }}
           >
-            <div
-              ref={kiContentRef}
+            <form
+              ref={searchPillRef}
+              onSubmit={handleSearch}
               style={{
-                ...contentBase,
-                left: "auto",
-                right: kiBtnWidth + 6 + CONTENT_GAP + "px",
-                width: kiContentWidth + "px",
+                ...pillBase,
+                cursor: "text",
+                width: "100%",
               }}
             >
-              <SearchIcon />
-              <input
-                ref={kiInputRef}
-                type="text"
-                value={kiInput}
-                onChange={(e) => setKiInput(e.target.value)}
-                placeholder="Wie kann ich Ihnen helfen?"
-                tabIndex={isSearch ? -1 : 0}
-                className="search-input"
-                style={inputStyle}
-              />
-            </div>
-            <button
-              ref={kiBtnRef}
-              type="button"
-              onClick={isSearch ? () => animateTo("ki") : undefined}
-              style={{ ...btnStyle, backgroundColor: "var(--color-brand-secondary)" }}
-            >
-              <span style={{ fontWeight: 800, color: "#ffffff" }}>KI </span>
-              <span style={{ fontWeight: 400, color: "#ffffff" }}>Agent</span>
-            </button>
+              <div
+                ref={searchContentRef}
+                style={{
+                  ...contentBase,
+                  left: "20px",
+                  right: searchBtnWidth + 6 + CONTENT_GAP + "px",
+                  width: searchContentWidth + "px",
+                }}
+              >
+                <SearchIcon />
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Suchbegiff eingeben"
+                  tabIndex={0}
+                  className="search-input"
+                  style={inputStyle}
+                />
+              </div>
+              <button
+                ref={searchBtnRef}
+                type="submit"
+                style={{ ...btnStyle, backgroundColor: "var(--color-brand)" }}
+              >
+                Suchen
+              </button>
+            </form>
           </div>
+
+          {/* Maya Dock Slot */}
+          <div
+            id="maya-dock-slot"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 70,
+              height: 70,
+              flexShrink: 0,
+            }}
+          />
         </div>
 
       </div>
 
       {/* Nav Links */}
-      <TopNav className="landing-nav" style={{ marginTop: "36px", alignItems: "center", paddingLeft: "0" }} />
+      <TopNav className="landing-nav" style={{ marginTop: "23px", alignItems: "center", paddingLeft: "0" }} />
 
       {/* DotLine + Powered by */}
       <div className="landing-dotline" style={{ position: "relative", zIndex: 51, width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>

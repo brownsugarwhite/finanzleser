@@ -18,7 +18,7 @@ export default async function LandingPage() {
 
   return (
     <>
-      <style>{`.logo-wrapper{visibility:hidden!important;pointer-events:none!important}.sticky-nav{display:none!important}body{padding-top:0!important}`}</style>
+      <style>{`.logo-wrapper{visibility:hidden!important;pointer-events:none!important}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="maya"]{visibility:hidden}`}</style>
       <LandingBodyAttr />
       <LandingIntro />
       <main className="bg-white scalable-landing">
