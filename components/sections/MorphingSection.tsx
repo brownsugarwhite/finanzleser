@@ -66,52 +66,11 @@ export default function MorphingSection({ variant = "default", zIndex, heading, 
     <div
       style={{
         position: "relative",
-        minHeight: 650,
+        minHeight: 750,
         zIndex: resolvedZIndex,
         width: "100%",
       }}
     >
-      {/* Content — in flow, über der absoluten Section */}
-      {(heading || text || children) && (
-        <div style={{ position: "relative", zIndex: 1 }}>
-          {(heading || text) && (
-            <div style={{ padding: "70px calc(10vw + 70px) 0" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {heading && (
-                  <h2 style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontWeight: 600,
-                    fontSize: 19,
-                    lineHeight: 1.38,
-                    color: "var(--color-text-primary)",
-                    margin: 0,
-                  }}>
-                    {heading}
-                  </h2>
-                )}
-                {text && (
-                  <p style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontWeight: 900,
-                    fontSize: 40,
-                    lineHeight: 1.3,
-                    color: "var(--color-text-primary)",
-                    margin: 0,
-                  }}>
-                    {text}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-          {children && (
-            <div style={{ width: "100%" }}>
-              {children}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Morphing Section — absolute dahinter */}
       <section
         ref={innerSectionRef}
@@ -131,12 +90,79 @@ export default function MorphingSection({ variant = "default", zIndex, heading, 
           style={{
             width: "100%",
             minHeight: "230vh",
+            position: "relative",
             background: inverted ? "var(--color-bg-page)" : "#fff",
             borderTopLeftRadius: 57,
             borderTopRightRadius: 57,
             boxShadow: inverted ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
+            overflow: "hidden",
           }}
-        />
+        >
+          {/* Heading — über den Gradients */}
+          {(heading || text) && (
+            <div style={{ position: "relative", zIndex: 3, left: "50%", transform: "translateX(-50%)", width: "100vw" }}>
+              <div style={{ padding: "70px calc(10vw + 70px) 0" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {heading && (
+                    <h2 style={{
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                      fontWeight: 600,
+                      fontSize: 19,
+                      lineHeight: 1.38,
+                      color: "var(--color-text-primary)",
+                      margin: 0,
+                    }}>
+                      {heading}
+                    </h2>
+                  )}
+                  {text && (
+                    <p style={{
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                      fontWeight: 900,
+                      fontSize: 40,
+                      lineHeight: 1.3,
+                      color: "var(--color-text-primary)",
+                      margin: 0,
+                    }}>
+                      {text}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Slider — unter den Gradients */}
+          {children && (
+            <div style={{ position: "absolute", zIndex: 1, left: "50%", transform: "translateX(-50%)", width: "100vw" }}>
+              {children}
+            </div>
+          )}
+
+          {/* Gradient Fade — links */}
+          <div style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 250,
+            background: `linear-gradient(to right, ${inverted ? "var(--color-bg-page)" : "#fff"}, transparent)`,
+            pointerEvents: "none",
+            zIndex: 2,
+          }} />
+
+          {/* Gradient Fade — rechts */}
+          <div style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: 250,
+            background: `linear-gradient(to left, ${inverted ? "var(--color-bg-page)" : "#fff"}, transparent)`,
+            pointerEvents: "none",
+            zIndex: 2,
+          }} />
+        </div>
       </section>
     </div>
   );

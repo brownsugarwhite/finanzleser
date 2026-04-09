@@ -77,7 +77,7 @@ function getInterpolatedStyle(progress: number) {
 }
 
 export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: SlideArticleCardProps) {
-  const { width, height, radius, bgAlpha, contentOpacity, contentScale } = getInterpolatedStyle(progress);
+  const { width, radius, contentOpacity } = getInterpolatedStyle(progress);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
@@ -103,35 +103,22 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
     <div
       style={{
         width: `${width}px`,
-        height: `${height}px`,
         borderRadius: `${radius}px`,
-        background: `rgba(181, 181, 181, ${bgAlpha})`,
+        background: 'transparent',
         overflow: 'hidden',
-        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        gap: '15px',
         flexShrink: 0,
-        willChange: 'width, height, border-radius',
         userSelect: 'none',
         WebkitUserSelect: 'none',
       }}
     >
-      {/* Content — fades out as card shrinks, stays centered horizontally */}
+      {/* Content */}
       <div style={{
-        opacity: contentOpacity,
-        pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
-        width: `${STATES.article.width}px`,
-        height: `${STATES.article.height}px`,
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         gap: '15px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: `translate(-50%, -50%) scale(${contentScale})`,
       }}>
         {/* Visual */}
         <div style={{ width: '100%', height: '160px', overflow: 'hidden' }}>
@@ -148,11 +135,10 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column' }}>
           {category && (
             <span style={{
-              fontFamily: 'Merriweather, serif',
+              fontFamily: 'merriweather, serif',
               fontSize: '14px',
-              fontWeight: 500,
-              fontStyle: 'italic',
-              color: 'var(--color-brand)',
+              fontWeight: 500,              
+              color: 'var(--color-text-primary)',
               marginBottom: 2,
             }}>
               {category.name}
@@ -168,6 +154,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             hyphens: 'auto',
             WebkitHyphens: 'auto',
             overflowWrap: 'break-word',
+            marginBottom: 10,
           }}>
             {post.title}
           </p>
@@ -191,20 +178,15 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           </p>
         </div>
 
-      </div>
-
-      {/* Button Row — fixed to card bottom, outside content wrapper */}
-      {contentOpacity > 0.1 && (
+        {/* Button Row */}
         <div style={{
-          position: 'absolute',
-          bottom: '15px',
-          left: '15px',
-          right: '15px',
+          width: '100%',
+          padding: '0 23px',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          opacity: contentOpacity,
-          pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
+          alignItems: 'center',
+          marginTop: '4px',
+          marginBottom: '10px',
         }}>
           {/* Info Button — circle with handwritten i, inverts on card hover */}
           <div
@@ -231,19 +213,30 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             />
           </div>
 
-          {/* Arrow Button (mini, no label) — links to article */}
+          {/* Arrow Button — Main Button Style mit Label */}
           <Link href={postLink} style={{
-            width: '51px',
-            height: '42px',
+            backgroundColor: 'transparent',
             borderRadius: '18px',
-            background: 'rgba(198, 200, 204, 0.23)',
+            padding: '3px 3px 3px 10px',
+            border: '2px solid var(--color-text-primary)',
+            outline: '1px solid var(--color-text-primary)',
+            outlineOffset: '2px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
-            paddingRight: '5px',
+            justifyContent: 'center',
             cursor: 'pointer',
             textDecoration: 'none',
           }}>
+            <span style={{
+              fontFamily: 'Open Sans, sans-serif',
+              fontSize: '14px',
+              color: '#1a1a1a',
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+              marginRight: '8px',
+            }}>
+              Lesen
+            </span>
             <div style={{
               width: '32px',
               height: '32px',
@@ -253,9 +246,8 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              paddingLeft: '1px',
             }}>
-              <svg width="11" height="15" viewBox="0 0 11 15" fill="none">
+              <svg width="9" height="13" viewBox="0 0 11 15" fill="none" style={{ marginLeft: 2 }}>
                 <path
                   d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
                   stroke="white"
@@ -268,14 +260,15 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             </div>
           </Link>
         </div>
-      )}
+
+      </div>
 
       {/* Lesezeichen (Bookmark) */}
       {bookmarkColor && contentOpacity > 0.3 && (
         <div style={{
           position: 'absolute',
           top: 0,
-          right: '36px',
+          right: '13px',
           width: '28px',
           opacity: contentOpacity,
         }}>

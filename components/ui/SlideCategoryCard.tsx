@@ -187,30 +187,17 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
           {/* Arrow Button — Main Button Style */}
           <Link href={categoryLink} style={{
             backgroundColor: 'transparent',
-            borderRadius: '21px',
-            paddingLeft: '15px',
-            paddingRight: '3px',
-            paddingTop: '3px',
-            paddingBottom: '3px',
+            borderRadius: '18px',
+            padding: '3px 3px 3px 10px',
             border: '2px solid var(--color-text-primary)',
             outline: '1px solid var(--color-text-primary)',
             outlineOffset: '2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
-            height: '40px',
+            justifyContent: 'center',
             cursor: 'pointer',
             textDecoration: 'none',
           }}>
-            <span style={{
-              fontFamily: 'Open Sans, sans-serif',
-              fontSize: '14px',
-              color: '#1a1a1a',
-              fontWeight: 500,
-              whiteSpace: 'nowrap',
-            }}>
-              Mehr
-            </span>
             <div style={{
               width: '32px',
               height: '32px',
@@ -221,7 +208,7 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
               justifyContent: 'center',
               flexShrink: 0,
             }}>
-              <svg width="9" height="13" viewBox="0 0 11 15" fill="none">
+              <svg width="9" height="13" viewBox="0 0 11 15" fill="none" style={{ transform: 'rotate(-90deg)' }}>
                 <path
                   d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
                   stroke="white"
