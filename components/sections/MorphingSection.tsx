@@ -134,7 +134,7 @@ export default function MorphingSection({ variant = "default", zIndex, heading, 
 
           {/* Slider — unter den Gradients */}
           {children && (
-            <div style={{ position: "absolute", zIndex: 1, left: "50%", transform: "translateX(-50%)", width: "100vw" }}>
+            <div style={{ position: "relative", zIndex: 1, width: "100vw", left: "50%", transform: "translateX(-50%)" }}>
               {children}
             </div>
           )}

@@ -13,6 +13,7 @@ export default async function LandingPage() {
   let posts: Post[] = [];
   let insuranceCategory: Awaited<ReturnType<typeof getCategoryWithChildren>> = null;
   let insurancePosts: Post[] = [];
+  let categoryPosts: Record<string, Post[]> = {};
 
   try {
     [posts, insuranceCategory, insurancePosts] = await Promise.all([
@@ -20,6 +21,17 @@ export default async function LandingPage() {
       getCategoryWithChildren('versicherungen'),
       getPostsByCategory('versicherungen'),
     ]);
+
+    // Alle Kategorie-Beiträge vorladen
+    if (insuranceCategory?.children) {
+      const results = await Promise.all(
+        insuranceCategory.children.map(async (cat) => ({
+          slug: cat.slug,
+          posts: await getPostsByCategory(cat.slug),
+        }))
+      );
+      results.forEach(({ slug, posts: p }) => { categoryPosts[slug] = p; });
+    }
   } catch (error) {
     console.error("Fehler beim Laden der Beiträge:", error);
   }
@@ -36,6 +48,7 @@ export default async function LandingPage() {
             <SubcategorySlider
               categories={insuranceCategory.children}
               parentSlug="versicherungen"
+              allCategoryPosts={categoryPosts}
             />
           )}
         </MorphingSection>

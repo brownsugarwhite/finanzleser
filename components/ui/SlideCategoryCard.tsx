@@ -18,6 +18,8 @@ interface SlideCategoryCardProps {
   parentSlug: string;
   progress?: number;
   active?: boolean;
+  selected?: boolean;
+  onClose?: () => void;
 }
 
 function lerp(a: number, b: number, t: number) {
@@ -52,7 +54,7 @@ function getInterpolatedStyle(progress: number) {
 
 const CARD_WIDTH = STATES.article.width;
 
-export default function SlideCategoryCard({ category, parentSlug, progress = 0, active = false }: SlideCategoryCardProps) {
+export default function SlideCategoryCard({ category, parentSlug, progress = 0, active = false, selected = false, onClose }: SlideCategoryCardProps) {
   const { width } = getInterpolatedStyle(progress);
   const categoryLink = `/${parentSlug}/${category.slug}/`;
   const titleSpanRef = useRef<HTMLSpanElement>(null);
@@ -112,7 +114,27 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0, 
           transition: 'padding 0.3s ease, margin 0.3s ease',
         }}
       >
-        <span ref={titleSpanRef} style={{ paddingRight: 10 }}>{category.name}</span>
+        <span ref={titleSpanRef} style={{ paddingRight: 10 }}>
+          {category.name}
+          {active && selected && onClose && (
+            <span
+              onClick={(e) => { e.stopPropagation(); onClose(); }}
+              style={{
+                marginLeft: 8,
+                cursor: 'pointer',
+                opacity: 0.5,
+                fontSize: '14px',
+                fontWeight: 400,
+                display: 'inline-block',
+                transition: 'opacity 0.2s ease',
+              }}
+              onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = '1'; }}
+              onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = '0.5'; }}
+            >
+              ✕
+            </span>
+          )}
+        </span>
       </p>
 
       {/* Description */}
