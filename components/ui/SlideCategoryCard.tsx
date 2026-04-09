@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import InlineSVG from '@/components/ui/InlineSVG';
 import { easeProgress } from '@/components/ui/SlideArticleCard';
@@ -24,7 +23,7 @@ function lerp(a: number, b: number, t: number) {
 }
 
 const STATES = {
-  article: { width: 350, height: 390, radius: 0, bgAlpha: 0 },
+  article: { width: 320, height: 390, radius: 0, bgAlpha: 0 },
   medium:  { width: 200, height: 300, radius: 50, bgAlpha: 0.18 },
   small:   { width: 100, height: 100, radius: 42, bgAlpha: 0.26 },
 };
@@ -62,15 +61,13 @@ function getInterpolatedStyle(progress: number) {
 }
 
 export default function SlideCategoryCard({ category, parentSlug, progress = 0 }: SlideCategoryCardProps) {
-  const { width, height, radius, bgAlpha, contentOpacity, contentScale } = getInterpolatedStyle(progress);
-  const [infoHovered, setInfoHovered] = useState(false);
+  const { width, radius, bgAlpha } = getInterpolatedStyle(progress);
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   return (
     <div
       style={{
         width: `${width}px`,
-        height: `${height}px`,
         borderRadius: `${radius}px`,
         background: `rgba(181, 181, 181, ${bgAlpha})`,
         overflow: 'hidden',
@@ -87,18 +84,11 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
     >
       {/* Content */}
       <div style={{
-        opacity: contentOpacity,
-        pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
-        width: `${STATES.article.width}px`,
-        height: `${STATES.article.height}px`,
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         gap: '15px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: `translate(-50%, -50%) scale(${contentScale})`,
+        marginBottom: '10px',
       }}>
         {/* Visual */}
         <div style={{ width: '100%', height: '220px', overflow: 'hidden' }}>
@@ -111,80 +101,41 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
           )}
         </div>
 
-        {/* Text Content */}
-        <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column' }}>
-          <p lang="de" style={{
-            fontFamily: 'Merriweather, serif',
-            fontWeight: 700,
-            fontSize: '18px',
-            lineHeight: 1.3,
-            color: 'var(--color-text-primary)',
-            margin: 0,
-            hyphens: 'auto',
-            WebkitHyphens: 'auto',
-            overflowWrap: 'break-word',
-          }}>
-            {category.name}
-          </p>
-          {category.description && (
-            <p style={{
-              marginTop: '10px',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 400,
-              fontSize: '16px',
+        {/* Text + Button Row */}
+        <div style={{ width: '100%', padding: '0 23px', display: 'flex', alignItems: 'flex-end', gap: 12 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p lang="de" style={{
+              fontFamily: 'Merriweather, serif',
+              fontWeight: 700,
+              fontSize: '18px',
               lineHeight: 1.3,
-              color: 'var(--color-text-medium)',
-              margin: '10px 0 0',
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
+              color: 'var(--color-text-primary)',
+              margin: 0,
+              hyphens: 'auto',
+              WebkitHyphens: 'auto',
+              overflowWrap: 'break-word',
+              marginTop: 27,
             }}>
-              {category.description}
+              {category.name}
             </p>
-          )}
-        </div>
-      </div>
-
-      {/* Button Row */}
-      {contentOpacity > 0.1 && (
-        <div style={{
-          position: 'absolute',
-          bottom: '15px',
-          left: '15px',
-          right: '15px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          opacity: contentOpacity,
-          pointerEvents: contentOpacity < 0.1 ? 'none' : 'auto',
-        }}>
-          {/* Info Button */}
-          <div
-            onMouseEnter={() => setInfoHovered(true)}
-            onMouseLeave={() => setInfoHovered(false)}
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-              background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              flexShrink: 0,
-              transition: 'background 0.1s, border 0.1s',
-              ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-            }}>
-            <InlineSVG
-              src="/icons/info_i.svg"
-              alt="Info"
-              style={{ width: '9px', height: '17px' }}
-            />
+            {category.description && (
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: 1.3,
+                color: 'var(--color-text-medium)',
+                margin: '10px 0 0',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+              }}>
+                {category.description}
+              </p>
+            )}
           </div>
-
-          {/* Arrow Button — Main Button Style */}
+          {/* Arrow Button */}
           <Link href={categoryLink} style={{
             backgroundColor: 'transparent',
             borderRadius: '18px',
@@ -221,7 +172,7 @@ export default function SlideCategoryCard({ category, parentSlug, progress = 0 }
             </div>
           </Link>
         </div>
-      )}
+      </div>
     </div>
   );
 }

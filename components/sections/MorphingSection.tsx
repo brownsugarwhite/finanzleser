@@ -66,7 +66,7 @@ export default function MorphingSection({ variant = "default", zIndex, heading, 
     <div
       style={{
         position: "relative",
-        minHeight: 750,
+        minHeight: 800,
         zIndex: resolvedZIndex,
         width: "100%",
       }}

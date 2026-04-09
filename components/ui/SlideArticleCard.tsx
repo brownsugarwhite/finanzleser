@@ -111,6 +111,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         flexShrink: 0,
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        marginBottom: '10px',
       }}
     >
       {/* Content */}
@@ -119,6 +120,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
         display: 'flex',
         flexDirection: 'column',
         gap: '15px',
+        
       }}>
         {/* Visual */}
         <div style={{ width: '100%', height: '160px', overflow: 'hidden' }}>
@@ -139,7 +141,8 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               fontSize: '14px',
               fontWeight: 500,              
               color: 'var(--color-text-primary)',
-              marginBottom: 2,
+              marginBottom: 5,
+              marginTop: 5,
             }}>
               {category.name}
             </span>
@@ -154,7 +157,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             hyphens: 'auto',
             WebkitHyphens: 'auto',
             overflowWrap: 'break-word',
-            marginBottom: 10,
+            marginBottom: 6,
           }}>
             {post.title}
           </p>
@@ -178,6 +181,11 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           </p>
         </div>
 
+        {/* Trennlinie */}
+        <div style={{ width: '100%', padding: '13px 23px' }}>
+          <div style={{ height: 1, background: 'rgba(0, 0, 0, 0.07)' }} />
+        </div>
+
         {/* Button Row */}
         <div style={{
           width: '100%',
@@ -188,31 +196,6 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
           marginTop: '4px',
           marginBottom: '10px',
         }}>
-          {/* Info Button — circle with handwritten i, inverts on card hover */}
-          <div
-            onMouseEnter={() => setInfoHovered(true)}
-            onMouseLeave={() => setInfoHovered(false)}
-            style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            flexShrink: 0,
-            transition: 'background 0.1s, border 0.1s',
-            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-          }}>
-            <InlineSVG
-              src="/icons/info_i.svg"
-              alt="Info"
-              style={{ width: '9px', height: '17px' }}
-            />
-          </div>
-
           {/* Arrow Button — Main Button Style mit Label */}
           <Link href={postLink} style={{
             backgroundColor: 'transparent',
@@ -225,7 +208,7 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            textDecoration: 'none',
+            textDecoration: 'none',        
           }}>
             <span style={{
               fontFamily: 'Open Sans, sans-serif',
@@ -259,6 +242,31 @@ export default function SlideArticleCard({ post, bookmarkType, progress = 0 }: S
               </svg>
             </div>
           </Link>
+
+          {/* Info Button */}
+          <div
+            onMouseEnter={() => setInfoHovered(true)}
+            onMouseLeave={() => setInfoHovered(false)}
+            style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
+            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'background 0.1s, border 0.1s',
+            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
+          }}>
+            <InlineSVG
+              src="/icons/info_i.svg"
+              alt="Info"
+              style={{ width: '9px', height: '17px' }}
+            />
+          </div>
         </div>
 
       </div>

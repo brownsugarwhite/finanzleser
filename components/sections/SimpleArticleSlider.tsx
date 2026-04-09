@@ -28,8 +28,8 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
     if (!emblaApi) return;
 
     const slideCount = posts.length;
-    const FADE_LEFT = 150;
-    const FADE_RIGHT = 80;
+    const FADE_LEFT = 250;
+    const FADE_RIGHT = 200;
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
@@ -74,7 +74,7 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
       <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab' }}>
         <div style={{ display: 'flex', gap: `${GAP}px` }}>
-          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
+          <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
           {posts.map((post, index) => {
             const isLast = index === posts.length - 1;
             return (
@@ -118,17 +118,17 @@ export default function SimpleArticleSlider({ posts }: SimpleArticleSliderProps)
                     gap: 5,
                     pointerEvents: 'none',
                   }}>
-                    <div style={{ width: 1, height: 150, background: 'var(--fill-0, #334A27)' }} />
+                    <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)' }} />
                     <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
                       <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
                     </svg>
-                    <div style={{ width: 1, height: 150, background: 'var(--fill-0, #334A27)' }} />
+                    <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)' }} />
                   </div>
                 )}
               </div>
             );
           })}
-          <div style={{ flex: '0 0 calc(10vw + 70px)', minWidth: 0 }} aria-hidden />
+          <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
         </div>
       </div>
 
