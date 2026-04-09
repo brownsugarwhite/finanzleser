@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import InlineSVG from '@/components/ui/InlineSVG';
 import { easeProgress } from '@/components/ui/SlideArticleCard';
@@ -16,6 +17,7 @@ interface SlideCategoryCardProps {
   category: CategorySlide;
   parentSlug: string;
   progress?: number;
+  active?: boolean;
 }
 
 function lerp(a: number, b: number, t: number) {
@@ -36,142 +38,155 @@ export function getCategoryCardWidth(progress: number): number {
 
 function getInterpolatedStyle(progress: number) {
   const { t1, t2, phase } = easeProgress(progress);
-  const rawP = Math.max(0, Math.min(1, progress));
 
-  let width: number, height: number, radius: number, bgAlpha: number, contentOpacity: number, contentScale: number;
+  let width: number;
 
   if (phase === 'first') {
     width = lerp(STATES.article.width, STATES.medium.width, t1);
-    height = lerp(STATES.article.height, STATES.medium.height, t1);
-    radius = lerp(STATES.article.radius, STATES.medium.radius, t1);
-    bgAlpha = lerp(STATES.article.bgAlpha, STATES.medium.bgAlpha, t1);
-    const rawT = rawP / 0.5;
-    contentOpacity = rawT < 0.3 ? 1 : lerp(1, 0, (rawT - 0.3) / 0.7);
-    contentScale = lerp(1, 0.8, t1);
   } else {
     width = lerp(STATES.medium.width, STATES.small.width, t2);
-    height = lerp(STATES.medium.height, STATES.small.height, t2);
-    radius = lerp(STATES.medium.radius, STATES.small.radius, t2);
-    bgAlpha = lerp(STATES.medium.bgAlpha, STATES.small.bgAlpha, t2);
-    contentOpacity = 0;
-    contentScale = 0.8;
   }
 
-  return { width, height, radius, bgAlpha, contentOpacity, contentScale };
+  return { width };
 }
 
-export default function SlideCategoryCard({ category, parentSlug, progress = 0 }: SlideCategoryCardProps) {
-  const { width, radius, bgAlpha } = getInterpolatedStyle(progress);
+const CARD_WIDTH = STATES.article.width;
+
+export default function SlideCategoryCard({ category, parentSlug, progress = 0, active = false }: SlideCategoryCardProps) {
+  const { width } = getInterpolatedStyle(progress);
   const categoryLink = `/${parentSlug}/${category.slug}/`;
+  const titleSpanRef = useRef<HTMLSpanElement>(null);
+  const [titleWidth, setTitleWidth] = useState(CARD_WIDTH);
+
+  useEffect(() => {
+    if (!titleSpanRef.current) return;
+    setTitleWidth(titleSpanRef.current.offsetWidth + 2);
+  }, [category.name]);
+
+  const cardWidth = active ? titleWidth : width;
 
   return (
     <div
       style={{
-        width: `${width}px`,
-        borderRadius: `${radius}px`,
-        background: `rgba(181, 181, 181, ${bgAlpha})`,
+        width: `${cardWidth}px`,
         overflow: 'hidden',
-        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        gap: '15px',
         flexShrink: 0,
-        willChange: 'width, height, border-radius',
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        transition: 'width 0.3s ease',
       }}
     >
-      {/* Content */}
+      {/* Visual */}
       <div style={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px',
-        marginBottom: '10px',
+        width: CARD_WIDTH,
+        height: active ? 0 : 220,
+        overflow: 'hidden',
+        opacity: active ? 0 : 1,
+        transition: 'height 0.3s ease, opacity 0.3s ease',
       }}>
-        {/* Visual */}
-        <div style={{ width: '100%', height: '220px', overflow: 'hidden' }}>
-          {category.image && (
-            <InlineSVG
-              src={category.image}
-              alt={category.name}
-              style={{ width: '100%', height: '100%' }}
-            />
-          )}
-        </div>
+        {category.image && (
+          <InlineSVG
+            src={category.image}
+            alt={category.name}
+            style={{ width: '100%', height: '100%' }}
+          />
+        )}
+      </div>
 
-        {/* Text + Button Row */}
-        <div style={{ width: '100%', padding: '0 23px', display: 'flex', alignItems: 'flex-end', gap: 12 }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <p lang="de" style={{
-              fontFamily: 'Merriweather, serif',
-              fontWeight: 700,
-              fontSize: '18px',
-              lineHeight: 1.3,
-              color: 'var(--color-text-primary)',
-              margin: 0,
-              hyphens: 'auto',
-              WebkitHyphens: 'auto',
-              overflowWrap: 'break-word',
-              marginTop: 27,
-            }}>
-              {category.name}
-            </p>
-            {category.description && (
-              <p style={{
-                fontFamily: 'var(--font-body)',
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: 1.3,
-                color: 'var(--color-text-medium)',
-                margin: '10px 0 0',
-                display: '-webkit-box',
-                WebkitLineClamp: 3,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-              }}>
-                {category.description}
-              </p>
-            )}
-          </div>
-          {/* Arrow Button */}
-          <Link href={categoryLink} style={{
-            backgroundColor: 'transparent',
-            borderRadius: '18px',
-            padding: '3px 3px 3px 10px',
-            border: '2px solid var(--color-text-primary)',
-            outline: '1px solid var(--color-text-primary)',
-            outlineOffset: '2px',
+      {/* Title */}
+      <p
+        lang="de"
+        style={{
+          fontFamily: 'Merriweather, serif',
+          fontWeight: 700,
+          fontSize: '18px',
+          lineHeight: 1.3,
+          color: 'var(--color-text-primary)',
+          margin: 0,
+          padding: active ? 0 : '0 23px',
+          whiteSpace: 'nowrap',
+          width: 'fit-content',
+          marginTop: active ? 0 : 27,
+          transition: 'padding 0.3s ease, margin 0.3s ease',
+        }}
+      >
+        <span ref={titleSpanRef} style={{ paddingRight: 10 }}>{category.name}</span>
+      </p>
+
+      {/* Description */}
+      {category.description && (
+        <div style={{
+          width: CARD_WIDTH,
+          overflow: 'hidden',
+          maxHeight: active ? 0 : 100,
+          opacity: active ? 0 : 1,
+          padding: active ? '0 23px' : '0 23px',
+          marginTop: active ? 0 : 10,
+          transition: 'max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease',
+        }}>
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: 1.3,
+            color: 'var(--color-text-medium)',
+            margin: 0,
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}>
+            {category.description}
+          </p>
+        </div>
+      )}
+
+      {/* Arrow Button */}
+      <div style={{
+        width: CARD_WIDTH,
+        overflow: 'hidden',
+        maxHeight: active ? 0 : 60,
+        opacity: active ? 0 : 1,
+        padding: active ? 0 : '10px 23px',
+        transition: 'max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease',
+      }}>
+        <Link href={categoryLink} style={{
+          backgroundColor: 'transparent',
+          borderRadius: '18px',
+          padding: '3px 3px 3px 10px',
+          border: '2px solid var(--color-text-primary)',
+          outline: '1px solid var(--color-text-primary)',
+          outlineOffset: '2px',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          textDecoration: 'none',
+        }}>
+          <div style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '14px',
+            backgroundColor: 'var(--color-brand)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: 'pointer',
-            textDecoration: 'none',
+            flexShrink: 0,
           }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '14px',
-              backgroundColor: 'var(--color-brand)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}>
-              <svg width="9" height="13" viewBox="0 0 11 15" fill="none" style={{ transform: 'rotate(-90deg)' }}>
-                <path
-                  d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
-                  stroke="white"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </div>
-          </Link>
-        </div>
+            <svg width="9" height="13" viewBox="0 0 11 15" fill="none" style={{ transform: 'rotate(-90deg)' }}>
+              <path
+                d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
+                stroke="white"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          </div>
+        </Link>
       </div>
     </div>
   );
