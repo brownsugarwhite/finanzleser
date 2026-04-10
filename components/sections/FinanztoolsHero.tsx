@@ -1,7 +1,11 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import lottie from "lottie-web";
+
+gsap.registerPlugin(ScrollToPlugin);
 import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
@@ -219,11 +223,11 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
       <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
-        <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined, paddingRight: isMobile ? 20 : 0 }}>
+        <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
           <div style={{ width: "100%", height: "500px", position: "relative" }}>
-            <div style={{ width: 430, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
+            <div style={{ width: isMobile ? "100%" : 430, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
               <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right" }}>
                 Newsletter
               </p>
@@ -248,19 +252,19 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
               </div>
 
               {/* Horizontale Linie */}
-              <div style={{ width: 300, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
+              <div style={{ width: isMobile ? "100%" : 300, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
             </div>
           </div>
 
           {/* 2. Subheading — sticky bottom */}
-          <div style={{ width: 430, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
+          <div style={{ width: isMobile ? "100%" : 430, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
             <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
           </div>
 
           {/* 3. Heading */}
-          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: "nowrap", textAlign: "right", width: 430 }}>
+          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: isMobile ? "normal" : "nowrap", textAlign: "right", width: isMobile ? "auto" : 430 }}>
             Alles in eigener Hand
           </p>
 
@@ -320,10 +324,16 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
               <RevolverSlider
                 tools={TOOLS}
                 activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
-                onActiveChange={(idx) => {
-                  // Only trigger lottie, don't feed back into revolver's activeIndex
+                onActiveChange={(idx, fromIntro) => {
                   const title = TOOLS[idx].title;
                   if (activeCard !== title) setActiveCard(title);
+                  // When clicking from intro state: scroll section bottom into view
+                  if (fromIntro && sectionRef.current) {
+                    const rect = sectionRef.current.getBoundingClientRect();
+                    const sectionBottom = window.scrollY + rect.bottom;
+                    const targetY = sectionBottom - window.innerHeight;
+                    gsap.to(window, { scrollTo: { y: targetY }, duration: 0.8, ease: "power2.inOut" });
+                  }
                 }}
               />
             </div>
@@ -388,7 +398,7 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
                       {/* Card Content */}
                       {isActive && (
                         <div style={{ marginTop: 9 }}>
-                          <div style={{ width: 420, display: "flex", flexDirection: "column", gap: 20 }}>
+                          <div style={{ width: isMobile ? "100%" : 420, display: "flex", flexDirection: "column", gap: 20 }}>
                             <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
                               {tool.description}
                             </p>

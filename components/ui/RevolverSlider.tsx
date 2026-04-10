@@ -17,7 +17,7 @@ interface Tool {
 interface RevolverSliderProps {
   tools: Tool[];
   activeIndex: number;
-  onActiveChange: (index: number) => void;
+  onActiveChange: (index: number, fromIntro: boolean) => void;
 }
 
 /* ── Component ── */
@@ -45,7 +45,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
       const span = document.createElement("span");
       span.style.cssText = `
         position: absolute; visibility: hidden; white-space: nowrap;
-        font-family: 'Merriweather', serif; font-size: 16px; font-weight: 600;
+        font-family: 'Merriweather', serif; font-size: 15px; font-weight: 600;
       `;
       span.textContent = tool.title;
       document.body.appendChild(span);
@@ -68,12 +68,13 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
   // Trigger intro tween when fully visible
   const stageRef = useRef<HTMLDivElement>(null);
   const isExpanded = useRef(false);
+  const isAnimating = useRef(false);
   const introTweenRef = useRef(revolver.introTween);
   introTweenRef.current = revolver.introTween;
   const collapseRef = useRef(revolver.collapseToIntro);
   collapseRef.current = revolver.collapseToIntro;
 
-  // Expand/collapse based on heading scroll position (50% viewport)
+  // Expand/collapse based on heading scroll position with hysteresis
   useEffect(() => {
     if (!containerWidth) return;
 
@@ -81,15 +82,21 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
     if (!heading) return;
 
     const onScroll = () => {
+      if (isAnimating.current) return;
       const rect = heading.getBoundingClientRect();
-      const threshold = window.innerHeight * 0.5;
+      const vh = window.innerHeight;
 
-      if (rect.top <= threshold && !isExpanded.current) {
+      // Expand at 50%, collapse at 65% (hysteresis prevents flicker)
+      if (rect.top <= vh * 0.5 && !isExpanded.current) {
         isExpanded.current = true;
+        isAnimating.current = true;
         introTweenRef.current();
-      } else if (rect.top > threshold && isExpanded.current) {
+        setTimeout(() => { isAnimating.current = false; }, 750);
+      } else if (rect.top > vh * 0.65 && isExpanded.current) {
         isExpanded.current = false;
+        isAnimating.current = true;
         collapseRef.current();
+        setTimeout(() => { isAnimating.current = false; }, 750);
       }
     };
 
@@ -159,7 +166,6 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 borderRadius: 23 + cs.contentOpacity * 13,
                 background: (() => {
                   const t = cs.contentOpacity;
-                  // Interpolate: collapsed white(0.8) → expanded page(0.8)
                   const r = Math.round(255 + (250 - 255) * t);
                   const g = Math.round(255 + (249 - 255) * t);
                   const b = Math.round(255 + (246 - 255) * t);

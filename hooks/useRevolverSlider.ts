@@ -31,7 +31,7 @@ interface UseRevolverSliderOptions {
   initialIndex: number;             // which item starts on top
   containerWidth: number;           // measured container width
   topCardHeight: number;            // measured expanded card height
-  onActiveChange?: (index: number) => void;
+  onActiveChange?: (index: number, fromIntro: boolean) => void;
 }
 
 /* ── Math helpers (from reference) ── */
@@ -74,7 +74,7 @@ export function useRevolverSlider({
   const introSlots = useRef<Slot[]>([]);
   {
     const { BH: bh, STAGE_H: sh } = layout.current;
-    const introGap = 15;
+    const introGap = 10;
     const iH = bh;
     const iW = Math.round((W - 2 * introGap) / 3);
     const iMargin = 0;
@@ -173,8 +173,8 @@ export function useRevolverSlider({
     const ISLOT = introSlots.current;
     const SLOT = layout.current.SLOT;
 
-    // ── Intro mode: 3 equal cards in a row ──
-    if (introMode.current) {
+    // ── Intro mode: 3 equal cards in a row (only when fully intro, not transitioning) ──
+    if (introMode.current && introP.current >= 1) {
       const states: CardState[] = order.current.map((ci, idx) => {
         const s = ISLOT[ci] || ISLOT[0];
         return {
@@ -182,7 +182,7 @@ export function useRevolverSlider({
           x: s.cx - s.w / 2, y: s.cy - s.h / 2,
           w: s.w, h: s.h,
           zIndex: 10, contentOpacity: 0, descOpacity: 0,
-          bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 16, iconProgress: 0,
+          bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 15, iconProgress: 0,
         };
       });
       setCardStates(states);
@@ -209,7 +209,7 @@ export function useRevolverSlider({
           const eW = sw(e, 0.4, 1.0);
           const eX = sw(e, 0.4, 1.0);
           const contentOp = sw(e, 0.6, 1.0);
-          const fontSize = 16 + 8 * sw(e, 0.5, 0.9);
+          const fontSize = 15 + 9 * sw(e, 0.5, 0.9);
 
           const cx = lerp(from.cx, to.cx, eX);
           const cy = lerp(from.cy, to.cy, eY);
@@ -231,7 +231,7 @@ export function useRevolverSlider({
           return {
             dataIndex: ci, x: cx - w / 2, y: cy - from.h / 2, w, h: from.h,
             zIndex: 10, contentOpacity: 0, descOpacity: 0,
-            bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 16, iconProgress: 0,
+            bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 15, iconProgress: 0,
           };
         }
       });
@@ -278,10 +278,10 @@ export function useRevolverSlider({
       if (si === 0 && ts === 0) titleFontSize = 24;
       else if (si === 0 && ts !== 0) {
         const shrinkT = Math.min(1, t * 5);
-        titleFontSize = 24 - 8 * shrinkT;
+        titleFontSize = 24 - 9 * shrinkT;
       }
-      else if (si !== 0 && ts === 0) titleFontSize = 16 + 8 * t;
-      else titleFontSize = 16;
+      else if (si !== 0 && ts === 0) titleFontSize = 15 + 9 * t;
+      else titleFontSize = 15;
 
       const borderOpacity = contentOpacity;
 
@@ -304,7 +304,7 @@ export function useRevolverSlider({
 
   const introTween = useCallback(() => {
     if (raf.current) cancelAnimationFrame(raf.current);
-    introMode.current = false;
+    // Don't set introMode.current = false yet — wait until animation completes
     rot.current = 0;
     vel.current = 0;
     let t0: number | null = null;
@@ -319,6 +319,7 @@ export function useRevolverSlider({
         raf.current = requestAnimationFrame(step);
       } else {
         introP.current = 0;
+        introMode.current = false;
         render();
       }
     };
@@ -396,17 +397,16 @@ export function useRevolverSlider({
   /* ── Click handler for bottom cards ── */
 
   const handleCardClick = useCallback((dataIndex: number) => {
-    // In intro mode: clicked card becomes top, then tween
+    // In intro mode: just notify parent (scroll trigger handles the morph)
     if (introMode.current) {
       order.current = [dataIndex, (dataIndex + 1) % count, (dataIndex + 2) % count];
-      introTween();
-      onActiveChangeRef.current?.(dataIndex);
+      onActiveChangeRef.current?.(dataIndex, true);
       return;
     }
     const si = order.current.indexOf(dataIndex);
     if (si === 1) detentSnap(-1, 0);
     else if (si === 2) detentSnap(1, 0);
-    onActiveChangeRef.current?.(dataIndex);
+    onActiveChangeRef.current?.(dataIndex, false);
   }, [detentSnap, introTween, count]);
 
   /* ── Pointer event handlers ── */
@@ -461,7 +461,7 @@ export function useRevolverSlider({
     if (snap !== 0) {
       const o = order.current;
       const nextOrder = snap > 0 ? [o[2], o[0], o[1]] : [o[1], o[2], o[0]];
-      onActiveChangeRef.current?.(nextOrder[0]);
+      onActiveChangeRef.current?.(nextOrder[0], false);
     }
 
     detentSnap(snap, Math.max(-0.012, Math.min(0.012, rv)));
