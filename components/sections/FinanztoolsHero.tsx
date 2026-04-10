@@ -46,6 +46,7 @@ const TOOLS = [
     cta: "Zu unseren Rechnern",
     href: "/finanztools/rechner",
     color: "var(--color-tool-rechner)",
+    anim: vergleicheAnim, // Platzhalter
   },
   {
     title: "Vergleiche",
@@ -53,6 +54,7 @@ const TOOLS = [
     cta: "Zu unseren Vergleichen",
     href: "/finanztools/vergleiche",
     color: "var(--color-tool-vergleiche)",
+    anim: vergleicheAnim,
   },
   {
     title: "Checklisten",
@@ -60,15 +62,18 @@ const TOOLS = [
     cta: "Zu unseren Checklisten",
     href: "/finanztools/checklisten",
     color: "var(--color-tool-checklisten)",
+    anim: vergleicheAnim, // Platzhalter
   },
 ];
 
 export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
-  const lottieRef = useRef<HTMLDivElement>(null);
-  const animRef = useRef<AnimationItem | null>(null);
+  const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
+  const animRefs = useRef<(AnimationItem | null)[]>([null, null, null]);
   const cardsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const prevIndex = useRef(-1);
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -93,52 +98,50 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
     return () => window.removeEventListener("resize", measure);
   }, [activeCard]);
 
-  function patchStrokes() {
-    if (!lottieRef.current) return;
-    lottieRef.current.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect').forEach(el => {
+  function patchStrokesIn(container: HTMLElement) {
+    container.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect').forEach(el => {
       el.setAttribute('vector-effect', 'non-scaling-stroke');
       el.setAttribute('stroke-width', '1');
     });
   }
 
-  function loadAnim(data: any) {
-    if (!lottieRef.current) return;
-    if (animRef.current) animRef.current.destroy();
+  function loadAnimAt(index: number, data: any) {
+    const container = lottieRefs.current[index];
+    if (!container) return;
+    if (animRefs.current[index]) animRefs.current[index]!.destroy();
     const anim = lottie.loadAnimation({
-      container: lottieRef.current,
+      container,
       renderer: 'svg',
       loop: false,
       autoplay: true,
       animationData: data,
     });
-    anim.addEventListener('DOMLoaded', () => patchStrokes());
-    animRef.current = anim;
+    anim.addEventListener('DOMLoaded', () => patchStrokesIn(container));
+    animRefs.current[index] = anim;
   }
 
-  // Lottie — lazy load
+  // Slide to active tool + start animation
   useEffect(() => {
-    if (!lottieRef.current) return;
-    const el = lottieRef.current;
+    if (activeCard === null) return;
+    const newIndex = TOOLS.findIndex(t => t.title === activeCard);
+    if (newIndex < 0) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        observer.disconnect();
-        const anim = lottie.loadAnimation({
-          container: el,
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          animationData: vergleicheAnim,
-        });
-        animRef.current = anim;
-        anim.addEventListener('DOMLoaded', () => patchStrokes());
-      }
-    }, { rootMargin: '200px' });
+    setActiveIndex(newIndex);
 
-    observer.observe(el);
+    // Determine stroke direction
+    const fromLeft = prevIndex.current >= 0 && newIndex > prevIndex.current;
+    const animData = TOOLS[newIndex].anim;
+    const data = fromLeft ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
+
+    // Start animation immediately with slide
+    loadAnimAt(newIndex, data);
+    prevIndex.current = newIndex;
+  }, [activeCard]);
+
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
-      observer.disconnect();
-      if (animRef.current) animRef.current.destroy();
+      animRefs.current.forEach(a => a?.destroy());
     };
   }, []);
 
@@ -191,44 +194,21 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
             Alles in eigener Hand
           </p>
 
-          {/* 3. Lottie */}
-          <div style={{ width: "100%", marginTop: -76, marginBottom: -270 }}>
-            <div ref={lottieRef} style={{ width: "100%", aspectRatio: "1 / 1" }} />
-            <div style={{ position: 'relative', top: -300, display: 'flex', gap: 12 }}>
-              <button
-                onClick={() => loadAnim(JSON.parse(JSON.stringify(vergleicheAnim)))}
-                style={{
-                  padding: '10px 24px',
-                  borderRadius: 19,
-                  border: 'none',
-                  background: 'var(--color-pill-bg)',
-                  backdropFilter: 'brightness(1.15)',
-                  WebkitBackdropFilter: 'brightness(1.15)',
-                  cursor: 'pointer',
-                  fontFamily: 'Open Sans, sans-serif',
-                  fontSize: 16,
-                  color: 'var(--color-text-primary)',
-                }}
-              >
-                → Von links
-              </button>
-              <button
-                onClick={() => loadAnim(reverseBaselineTrim(vergleicheAnim))}
-                style={{
-                  padding: '10px 24px',
-                  borderRadius: 19,
-                  border: 'none',
-                  background: 'var(--color-pill-bg)',
-                  backdropFilter: 'brightness(1.15)',
-                  WebkitBackdropFilter: 'brightness(1.15)',
-                  cursor: 'pointer',
-                  fontFamily: 'Open Sans, sans-serif',
-                  fontSize: 16,
-                  color: 'var(--color-text-primary)',
-                }}
-              >
-                ← Von rechts
-              </button>
+          {/* 3. Lottie Slider */}
+          <div style={{ width: "100%", marginTop: -76, marginBottom: -270, overflow: "hidden" }}>
+            <div style={{
+              display: "flex",
+              width: `${TOOLS.length * 100}%`,
+              transform: `translateX(-${(activeIndex < 0 ? 0 : activeIndex) * (100 / TOOLS.length)}%)`,
+              transition: activeIndex >= 0 ? "transform 0.5s ease" : "none",
+            }}>
+              {TOOLS.map((_, i) => (
+                <div
+                  key={i}
+                  ref={(el) => { lottieRefs.current[i] = el; }}
+                  style={{ flex: `0 0 ${100 / TOOLS.length}%`, aspectRatio: "1 / 1" }}
+                />
+              ))}
             </div>
           </div>
 
