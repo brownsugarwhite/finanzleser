@@ -254,7 +254,7 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
 
           {/* 2. Subheading — sticky bottom */}
           <div style={{ width: 430, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
+            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
           </div>
@@ -316,7 +316,7 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
 
           {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
           {isMobile ? (
-            <div style={{ paddingTop: 23, paddingBottom: 23, width: "100%" }}>
+            <div style={{ position: "sticky", bottom: 0, paddingTop: 23, paddingBottom: 16, width: "100%", zIndex: 10 }}>
               <RevolverSlider
                 tools={TOOLS}
                 activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}

@@ -25,10 +25,10 @@ interface RevolverSliderProps {
 export default function RevolverSlider({ tools, activeIndex, onActiveChange }: RevolverSliderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const [topCardHeight, setTopCardHeight] = useState(200);
+  const topCardHeight = 250; // fixed
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
 
-  /* ── Measure container width ── */
+  /* ── Measure container width + title widths ── */
   useEffect(() => {
     const measure = () => {
       if (containerRef.current) {
@@ -40,31 +40,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  /* ── Measure top card height (probe) ── */
   useEffect(() => {
-    if (!containerWidth) return;
-    const probe = document.createElement("div");
-    probe.style.cssText = `
-      position: fixed; visibility: hidden; pointer-events: none; top: 0; left: 0;
-      width: ${containerWidth}px; padding: 27px 23px 23px 27px; box-sizing: border-box;
-    `;
-    let maxH = 0;
-    tools.forEach((tool) => {
-      probe.innerHTML = `
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
-          <div style="width:40px;height:40px;border-radius:17px;border:1px solid #334a27;flex-shrink:0;"></div>
-          <span style="font-family:'Merriweather',serif;font-size:24px;font-weight:600;white-space:nowrap;">${tool.title}</span>
-        </div>
-        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.38;margin:0;">${tool.description}</p>
-        <div style="margin-top:16px;padding:10px 16px;display:inline-flex;font-size:14px;font-weight:700;border:none;border-radius:9px;">${tool.cta}</div>
-      `;
-      document.body.appendChild(probe);
-      maxH = Math.max(maxH, probe.scrollHeight);
-      document.body.removeChild(probe);
-    });
-    setTopCardHeight(maxH);
-
-    // Measure title widths at collapsed font size (16px/600)
     const widths = tools.map((tool) => {
       const span = document.createElement("span");
       span.style.cssText = `
@@ -78,7 +54,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
       return w;
     });
     setTitleWidths(widths);
-  }, [containerWidth, tools]);
+  }, [tools]);
 
   /* ── Hook ── */
   const revolver = useRevolverSlider({
@@ -89,14 +65,48 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
     onActiveChange,
   });
 
+  // Trigger intro tween when fully visible
+  const stageRef = useRef<HTMLDivElement>(null);
+  const isExpanded = useRef(false);
+  const introTweenRef = useRef(revolver.introTween);
+  introTweenRef.current = revolver.introTween;
+  const collapseRef = useRef(revolver.collapseToIntro);
+  collapseRef.current = revolver.collapseToIntro;
+
+  // Expand/collapse based on heading scroll position (50% viewport)
+  useEffect(() => {
+    if (!containerWidth) return;
+
+    const heading = document.querySelector('[data-finanztools-heading]') as HTMLElement | null;
+    if (!heading) return;
+
+    const onScroll = () => {
+      const rect = heading.getBoundingClientRect();
+      const threshold = window.innerHeight * 0.5;
+
+      if (rect.top <= threshold && !isExpanded.current) {
+        isExpanded.current = true;
+        introTweenRef.current();
+      } else if (rect.top > threshold && isExpanded.current) {
+        isExpanded.current = false;
+        collapseRef.current();
+      }
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [containerWidth]);
+
   if (!containerWidth) {
     return <div ref={containerRef} style={{ width: "100%", height: 100 }} />;
   }
 
   return (
-    <div ref={containerRef} style={{ width: "100%", paddingBottom: 16 }}>
+    <div ref={containerRef} style={{ width: "100%" }}>
       {/* Stage */}
       <div
+        ref={stageRef}
         {...revolver.pointerHandlers}
         style={{
           position: "relative",
@@ -188,7 +198,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
               }}>
                 {/* Icon + Title — staggered: horizontal first, then vertical */}
                 {(() => {
-                  const t = cs.contentOpacity;
+                  const t = cs.iconProgress;
                   const cw = Math.max(0, cs.w - 50);
                   // Smoothstep for staggered X/Y
                   const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -280,23 +290,6 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
         })}
       </div>
 
-      {/* Dots */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 7, marginTop: 16 }}>
-        {tools.map((tool, i) => (
-          <div
-            key={tool.title}
-            style={{
-              height: 4,
-              borderRadius: 2,
-              width: revolver.activeDataIndex === i ? 22 : 5,
-              background: revolver.activeDataIndex === i
-                ? "var(--color-text-primary, #334A27)"
-                : "rgba(26, 23, 20, 0.13)",
-              transition: "width 0.38s cubic-bezier(.4,0,.2,1), background 0.38s cubic-bezier(.4,0,.2,1)",
-            }}
-          />
-        ))}
-      </div>
     </div>
   );
 }

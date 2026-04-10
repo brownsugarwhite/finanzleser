@@ -15,6 +15,8 @@ export interface CardState {
   bookmarkOpacity: number;
   borderOpacity: number;
   titleFontSize: number;
+  /** Icon/title layout progress (0=collapsed center, 1=expanded left). Matches contentOpacity in normal mode, but starts earlier during intro morph. */
+  iconProgress: number;
 }
 
 interface Slot {
@@ -54,7 +56,7 @@ export function useRevolverSlider({
   {
     const GAP = 23;
     const BW = (W - GAP) / 2;
-    const BH = Math.round(BW * 0.75) - 20;
+    const BH = 95;
     const BY = TH + GAP;
     layout.current = {
       W, TH, GAP, BW, BH, BY,
@@ -68,11 +70,28 @@ export function useRevolverSlider({
     };
   }
 
+  /* ── Intro layout: 3 equal cards in a row (same size as bottom cards) ── */
+  const introSlots = useRef<Slot[]>([]);
+  {
+    const { BH: bh, STAGE_H: sh } = layout.current;
+    const introGap = 15;
+    const iH = bh;
+    const iW = Math.round((W - 2 * introGap) / 3);
+    const iMargin = 0;
+    const iCy = sh - iH / 2; // bottom of container
+    introSlots.current = [0, 1, 2].map(i => ({
+      cx: iMargin + iW / 2 + i * (iW + introGap),
+      cy: iCy,
+      w: iW,
+      h: iH,
+    }));
+  }
+
   /* ── Mutable state (rAF-driven, no React re-renders during animation) ── */
   const order = useRef<number[]>([
     initialIndex % count,
-    (initialIndex + 1) % count,
     (initialIndex + 2) % count,
+    (initialIndex + 1) % count,
   ]);
   const rot = useRef(0);
   const vel = useRef(0);
@@ -85,6 +104,8 @@ export function useRevolverSlider({
   const didDrag = useRef(false);
   const onActiveChangeRef = useRef(onActiveChange);
   onActiveChangeRef.current = onActiveChange;
+  const introMode = useRef(true);
+  const introP = useRef(1); // 1 = fully intro, 0 = fully revolver
 
   const CW_TO = [1, 2, 0];
   const CCW_TO = [2, 0, 1];
@@ -149,6 +170,79 @@ export function useRevolverSlider({
   /* ── Render to React state ── */
 
   const render = useCallback(() => {
+    const ISLOT = introSlots.current;
+    const SLOT = layout.current.SLOT;
+
+    // ── Intro mode: 3 equal cards in a row ──
+    if (introMode.current) {
+      const states: CardState[] = order.current.map((ci, idx) => {
+        const s = ISLOT[ci] || ISLOT[0];
+        return {
+          dataIndex: ci,
+          x: s.cx - s.w / 2, y: s.cy - s.h / 2,
+          w: s.w, h: s.h,
+          zIndex: 10, contentOpacity: 0, descOpacity: 0,
+          bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 16, iconProgress: 0,
+        };
+      });
+      setCardStates(states);
+      setSparkleOpacity(0);
+      setActiveDataIndex(order.current[0]);
+      return;
+    }
+
+    // ── Intro transition (introP > 0): 2-phase morph ──
+    // Phase 1 (e 0→0.5): Top card rises up + grows height
+    // Phase 2 (e 0.5→1): All cards settle to final width/position + content fades in
+    if (introP.current > 0) {
+      const e = 1 - Math.pow(introP.current, 3);
+      const states: CardState[] = order.current.map((ci) => {
+        const si = order.current.indexOf(ci);
+        const from = ISLOT[ci] || ISLOT[0];
+        const to = SLOT[si];
+
+        if (si === 0) {
+          // Phase 1: rise up + grow height (0→0.5)
+          const eY = sw(e, 0.0, 0.5);
+          const eH = sw(e, 0.0, 0.5);
+          // Phase 2: width + horizontal position (0.4→1.0)
+          const eW = sw(e, 0.4, 1.0);
+          const eX = sw(e, 0.4, 1.0);
+          const contentOp = sw(e, 0.6, 1.0);
+          const fontSize = 16 + 8 * sw(e, 0.5, 0.9);
+
+          const cx = lerp(from.cx, to.cx, eX);
+          const cy = lerp(from.cy, to.cy, eY);
+          const w = lerp(from.w, to.w, eW);
+          const h = lerp(from.h, to.h, eH);
+          return {
+            dataIndex: ci, x: cx - w / 2, y: cy - h / 2, w, h,
+            zIndex: 15, contentOpacity: contentOp, descOpacity: contentOp,
+            bookmarkOpacity: contentOp, borderOpacity: contentOp,
+            titleFontSize: fontSize, iconProgress: sw(e, 0.0, 0.6),
+          };
+        } else {
+          // Bottom cards: wait for phase 1, then move to position (0.4→1.0)
+          const ePos = sw(e, 0.4, 1.0);
+          const eW = sw(e, 0.4, 1.0);
+          const cx = lerp(from.cx, to.cx, ePos);
+          const cy = lerp(from.cy, to.cy, ePos);
+          const w = lerp(from.w, to.w, eW);
+          return {
+            dataIndex: ci, x: cx - w / 2, y: cy - from.h / 2, w, h: from.h,
+            zIndex: 10, contentOpacity: 0, descOpacity: 0,
+            bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 16, iconProgress: 0,
+          };
+        }
+      });
+      setCardStates(states);
+      setSparkleRotation(sparkleRot.current);
+      setSparkleOpacity(e);
+      setActiveDataIndex(order.current[0]);
+      return;
+    }
+
+    // ── Normal revolver mode ──
     const t = Math.min(1, Math.abs(rot.current));
     const NEXT = rot.current >= 0 ? CW_TO : CCW_TO;
 
@@ -162,32 +256,27 @@ export function useRevolverSlider({
       else if (si !== 0 && ts === 0) contentOpacity = Math.pow(t, 2);
       else contentOpacity = 0;
 
-      // descOpacity: description+button fade faster, tied to width shrink
       let descOpacity: number;
       if (si === 0 && ts === 0) descOpacity = 1;
       else if (si === 0 && ts !== 0) {
-        const { SLOT } = layout.current;
         const wProgress = (SLOT[0].w - w) / (SLOT[0].w - SLOT[ts].w);
         descOpacity = Math.max(0, 1 - wProgress);
       }
       else if (si !== 0 && ts === 0) {
-        const { SLOT } = layout.current;
         const wProgress = (w - SLOT[si].w) / (SLOT[0].w - SLOT[si].w);
         descOpacity = Math.max(0, wProgress);
       }
       else descOpacity = 0;
 
-      // bookmarkOpacity: fades out early (with desc), fades in late (with content)
       let bookmarkOpacity: number;
       if (si === 0 && ts === 0) bookmarkOpacity = 1;
-      else if (si === 0 && ts !== 0) bookmarkOpacity = descOpacity; // out early
-      else if (si !== 0 && ts === 0) bookmarkOpacity = contentOpacity; // in late
+      else if (si === 0 && ts !== 0) bookmarkOpacity = descOpacity;
+      else if (si !== 0 && ts === 0) bookmarkOpacity = contentOpacity;
       else bookmarkOpacity = 0;
 
       let titleFontSize: number;
       if (si === 0 && ts === 0) titleFontSize = 24;
       else if (si === 0 && ts !== 0) {
-        // Shrink early, synced with bookmark/desc fadeout
         const shrinkT = Math.min(1, t * 5);
         titleFontSize = 24 - 8 * shrinkT;
       }
@@ -198,15 +287,10 @@ export function useRevolverSlider({
 
       return {
         dataIndex: ci,
-        x: cx - w / 2,
-        y: cy - h / 2,
+        x: cx - w / 2, y: cy - h / 2,
         w, h,
         zIndex: (si === 0 && ts === 0) ? 10 : si !== 0 ? 20 : 15,
-        contentOpacity,
-        descOpacity,
-        bookmarkOpacity,
-        borderOpacity,
-        titleFontSize,
+        contentOpacity, descOpacity, bookmarkOpacity, borderOpacity, titleFontSize, iconProgress: contentOpacity,
       };
     });
 
@@ -215,6 +299,55 @@ export function useRevolverSlider({
     setSparkleOpacity(1);
     setActiveDataIndex(order.current[0]);
   }, [morph]);
+
+  /* ── Intro tween: morph from 3-in-a-row → revolver layout ── */
+
+  const introTween = useCallback(() => {
+    if (raf.current) cancelAnimationFrame(raf.current);
+    introMode.current = false;
+    rot.current = 0;
+    vel.current = 0;
+    let t0: number | null = null;
+    const dur = 700;
+
+    const step = (ts: number) => {
+      if (!t0) t0 = ts;
+      const p = Math.min(1, (ts - t0) / dur);
+      introP.current = 1 - p;
+      render();
+      if (p < 1) {
+        raf.current = requestAnimationFrame(step);
+      } else {
+        introP.current = 0;
+        render();
+      }
+    };
+    raf.current = requestAnimationFrame(step);
+  }, [render]);
+
+  /* ── Collapse back to intro: revolver → 3-in-a-row ── */
+
+  const collapseToIntro = useCallback(() => {
+    if (raf.current) cancelAnimationFrame(raf.current);
+    let t0: number | null = null;
+    const dur = 700;
+
+    const step = (ts: number) => {
+      if (!t0) t0 = ts;
+      const raw = Math.min(1, (ts - t0) / dur);
+      const p = 1 - Math.pow(1 - raw, 3); // ease out cubic
+      introP.current = p; // 0 → 1 (revolver → intro)
+      render();
+      if (p < 1) {
+        raf.current = requestAnimationFrame(step);
+      } else {
+        introP.current = 1;
+        introMode.current = true;
+        render();
+      }
+    };
+    raf.current = requestAnimationFrame(step);
+  }, [render]);
 
   /* ── Detent snap (spring physics) ── */
 
@@ -263,12 +396,18 @@ export function useRevolverSlider({
   /* ── Click handler for bottom cards ── */
 
   const handleCardClick = useCallback((dataIndex: number) => {
+    // In intro mode: clicked card becomes top, then tween
+    if (introMode.current) {
+      order.current = [dataIndex, (dataIndex + 1) % count, (dataIndex + 2) % count];
+      introTween();
+      onActiveChangeRef.current?.(dataIndex);
+      return;
+    }
     const si = order.current.indexOf(dataIndex);
     if (si === 1) detentSnap(-1, 0);
     else if (si === 2) detentSnap(1, 0);
-    // Notify parent immediately with the clicked card's index
     onActiveChangeRef.current?.(dataIndex);
-  }, [detentSnap]);
+  }, [detentSnap, introTween, count]);
 
   /* ── Pointer event handlers ── */
 
@@ -284,7 +423,7 @@ export function useRevolverSlider({
   }, []);
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!dragging.current) return;
+    if (!dragging.current || introMode.current) return;
     const now = Date.now();
     const dx = e.clientX - x0.current;
     if (Math.abs(dx) > 6) didDrag.current = true;
@@ -334,12 +473,12 @@ export function useRevolverSlider({
     detentSnap(Math.round(Math.max(-1, Math.min(1, rot.current))));
   }, [detentSnap]);
 
-  /* ── Initial render ── */
+  /* ── Render when layout is ready ── */
 
   useEffect(() => {
-    render();
+    if (W > 0) render();
     return () => { if (raf.current) cancelAnimationFrame(raf.current); };
-  }, [render]);
+  }, [W, render]);
 
   /* ── initialIndex only used for first mount (via useRef initial value) ── */
 
@@ -350,6 +489,8 @@ export function useRevolverSlider({
     sparkleOpacity,
     activeDataIndex,
     handleCardClick,
+    introTween,
+    collapseToIntro,
     pointerHandlers: {
       onPointerDown,
       onPointerMove,
