@@ -187,7 +187,9 @@ export default function ArticleClient({
               </div>
             </div>
           </div>
-          <Spacer noMargin />
+          <div style={{ marginTop: 50, marginBottom: 23 }}>
+            <Spacer noMargin />
+          </div>
         </WideContainer>
 
         {/* Centered: Autor, TOC */}

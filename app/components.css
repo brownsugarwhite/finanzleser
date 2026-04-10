@@ -386,8 +386,6 @@ a.megamenu-link:hover {
   overflow: hidden;
   transition: height 0.3s ease;
   margin-top: 17px;
-  border-left: 1px solid var(--color-text-medium);
-  border-right: 1px solid var(--color-text-medium);
   padding: 20px 20px;
 }
 .checkliste-slides {

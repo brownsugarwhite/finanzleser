@@ -253,15 +253,17 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
                       style={{
                         width: isActive ? 470 : 130,
                         borderRadius: isActive ? 36 : 23,
-                        background: "rgba(255, 255, 255, 0.8)",
-                        backdropFilter: "brightness(1.3) blur(13px)",
-                        WebkitBackdropFilter: "brightness(1.3) blur(13px)",
-                        boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
+                        background: isActive ? "transparent" : "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: isActive ? "none" : "brightness(1.3) blur(13px)",
+                        WebkitBackdropFilter: isActive ? "none" : "brightness(1.3) blur(13px)",
+                        boxShadow: isActive ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
+                        border: isActive ? "1px solid var(--color-text-medium)" : "none",
                         overflow: "hidden",
                         position: "relative",
                         cursor: "pointer",
                         flexShrink: 0,
                         padding: "27px 23px 23px 27px",
+                        transition: "background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, width 0.3s ease, border-radius 0.3s ease",
                       }}
                     >
                       {/* Icon + Title */}
