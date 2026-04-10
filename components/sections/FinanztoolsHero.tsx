@@ -73,7 +73,10 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const prevIndex = useRef(-1);
   const [activeCard, setActiveCard] = useState<string | null>(null);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [currentSlide, setCurrentSlide] = useState(-1);
+  const [prevSlide, setPrevSlide] = useState(-1);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+  const [slidePhase, setSlidePhase] = useState<"idle" | "prep" | "go">("idle");
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -120,21 +123,77 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
     animRefs.current[index] = anim;
   }
 
+  // Check baseline trim progress (0-1) by reading trim keyframes from anim data
+  function getBaselineProgress(): number {
+    const idx = prevIndex.current;
+    if (idx < 0) return 1;
+    const anim = animRefs.current[idx];
+    if (!anim || !anim.isLoaded) return 1;
+
+    // Find the last keyframe of the baseline trim end → that's when baseline is 100% drawn
+    const animData = (anim as any).animationData;
+    if (!animData) return anim.currentFrame / Math.max(1, anim.totalFrames);
+    const baseline = animData.layers?.find((l: any) => l.nm === 'baseline');
+    if (!baseline?.shapes) return 1;
+
+    function findTrim(shapes: any[]): any {
+      for (const s of shapes) {
+        if (s.ty === 'tm') return s;
+        if (s.it) { const r = findTrim(s.it); if (r) return r; }
+      }
+      return null;
+    }
+    const trim = findTrim(baseline.shapes);
+    if (!trim) return 1;
+
+    // Get the frame where trim reaches 100% (last keyframe of end or start)
+    const kfs = trim.e?.k || trim.s?.k || [];
+    const lastKf = kfs[kfs.length - 1];
+    const baselineEndFrame = lastKf?.t || anim.totalFrames;
+
+    return anim.currentFrame / Math.max(1, baselineEndFrame);
+  }
+
   // Slide to active tool + start animation
   useEffect(() => {
     if (activeCard === null) return;
     const newIndex = TOOLS.findIndex(t => t.title === activeCard);
-    if (newIndex < 0) return;
+    if (newIndex < 0 || newIndex === currentSlide) return;
 
-    setActiveIndex(newIndex);
+    const comesFromRight = prevIndex.current >= 0 && newIndex > prevIndex.current;
+    const dir: "left" | "right" = comesFromRight ? "right" : "left";
+    setDirection(dir);
 
-    // Determine stroke direction
-    const fromLeft = prevIndex.current >= 0 && newIndex > prevIndex.current;
+    // Stroke direction
     const animData = TOOLS[newIndex].anim;
-    const data = fromLeft ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
+    const data = comesFromRight ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
+    const progress = getBaselineProgress();
 
-    // Start animation immediately with slide
-    loadAnimAt(newIndex, data);
+    // Reset previous anim after transition
+    const prevIdx = prevIndex.current;
+    if (prevIdx >= 0 && animRefs.current[prevIdx]) {
+      setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
+    }
+
+    // Phase 1: position new slide off-screen (no transition)
+    setPrevSlide(currentSlide);
+    setCurrentSlide(newIndex);
+    setSlidePhase("prep");
+
+    // Phase 2: next frame → animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setSlidePhase("go");
+
+        // Start lottie based on baseline progress
+        if (progress >= 0.8) {
+          loadAnimAt(newIndex, data);
+        } else {
+          setTimeout(() => loadAnimAt(newIndex, data), 500);
+        }
+      });
+    });
+
     prevIndex.current = newIndex;
   }, [activeCard]);
 
@@ -194,22 +253,54 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
             Alles in eigener Hand
           </p>
 
-          {/* 3. Lottie Slider */}
-          <div style={{ width: "100%", marginTop: -76, marginBottom: -270, overflow: "hidden" }}>
-            <div style={{
-              display: "flex",
-              width: `${TOOLS.length * 100}%`,
-              transform: `translateX(-${(activeIndex < 0 ? 0 : activeIndex) * (100 / TOOLS.length)}%)`,
-              transition: activeIndex >= 0 ? "transform 0.5s ease" : "none",
-            }}>
-              {TOOLS.map((_, i) => (
+          {/* 3. Lottie Slider — stacked, slides enter from left/right */}
+          <div style={{ width: "100%", marginTop: -76, marginBottom: -270, overflow: "hidden", position: "relative" }}>
+            {/* Sizing ghost — maintains aspect ratio */}
+            <div style={{ width: "100%", aspectRatio: "1 / 1" }} />
+            {TOOLS.map((_, i) => {
+              const isCurrent = i === currentSlide;
+              const isExiting = i === prevSlide && prevSlide !== currentSlide;
+              const isVisible = isCurrent || isExiting;
+
+              let tx: string;
+              if (isCurrent) {
+                // prep: start off-screen, go: animate to center
+                tx = slidePhase === "prep"
+                  ? (direction === "right" ? "100%" : "-100%")
+                  : "0%";
+              } else if (isExiting) {
+                // prep: still at center, go: animate out
+                tx = slidePhase === "prep"
+                  ? "0%"
+                  : (direction === "right" ? "-100%" : "100%");
+              } else {
+                // hidden off-screen
+                tx = "100%";
+              }
+
+              return (
                 <div
                   key={i}
                   ref={(el) => { lottieRefs.current[i] = el; }}
-                  style={{ flex: `0 0 ${100 / TOOLS.length}%`, aspectRatio: "1 / 1" }}
+                  onTransitionEnd={() => {
+                    if (isExiting) {
+                      setSlidePhase("idle");
+                      setPrevSlide(-1);
+                    }
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    transform: `translateX(${tx})`,
+                    transition: (isVisible && slidePhase === "go") ? "transform 0.5s ease" : "none",
+                    visibility: isVisible ? "visible" : "hidden",
+                  }}
                 />
-              ))}
-            </div>
+              );
+            })}
           </div>
 
           {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
