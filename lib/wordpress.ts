@@ -728,8 +728,12 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
   const client = getClient();
 
   const query = gql`
-    query GetChecklisten {
-      checklisten(first: 200) {
+    query GetChecklisten($after: String) {
+      checklisten(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         nodes {
           id
           title
@@ -743,8 +747,20 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
   `;
 
   try {
-    const data = await client.request<{ checklisten: { nodes: Checkliste[] } }>(query);
-    return data.checklisten.nodes;
+    const allNodes: Checkliste[] = [];
+    let hasNextPage = true;
+    let after: string | null = null;
+
+    while (hasNextPage) {
+      const data = await client.request<{
+        checklisten: { nodes: Checkliste[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+      }>(query, { after });
+      allNodes.push(...data.checklisten.nodes);
+      hasNextPage = data.checklisten.pageInfo.hasNextPage;
+      after = data.checklisten.pageInfo.endCursor;
+    }
+
+    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Checklisten:", error);
     return [];
