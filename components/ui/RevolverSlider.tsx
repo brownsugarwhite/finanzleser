@@ -181,7 +181,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 top: 0,
                 left: 0,
                 width: isExpanded ? cs.w : "100%",
-                padding: `${20 - 5 * cs.contentOpacity}px 23px 23px 27px`,
+                padding: `${20 - 5 * cs.contentOpacity - 8 * (1 - cs.contentOpacity)}px 23px 23px 27px`,
                 display: "flex",
                 flexDirection: "column",
                 pointerEvents: "none",
@@ -206,7 +206,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                       <div style={{
                         position: "absolute",
                         left: 27 + iconLeft,
-                        top: 20,
+                        top: 20 - 9 * (1 - t),
                         width: 40,
                         height: 40,
                         borderRadius: 17,

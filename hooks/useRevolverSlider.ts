@@ -54,7 +54,7 @@ export function useRevolverSlider({
   {
     const GAP = 23;
     const BW = (W - GAP) / 2;
-    const BH = Math.round(BW * 0.75) - 40;
+    const BH = Math.round(BW * 0.75) - 20;
     const BY = TH + GAP;
     layout.current = {
       W, TH, GAP, BW, BH, BY,

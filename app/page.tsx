@@ -5,17 +5,21 @@ import MorphingSection from "@/components/sections/MorphingSection";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
 import SearchSection from "@/components/sections/SearchSection";
 import Footer from "@/components/layout/Footer";
-import { getAllPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
-import type { Post } from "@/lib/types";
+import { getAllPosts, getCategoryWithChildren, getPostsByCategory, getAllRechner, getAllChecklisten } from "@/lib/wordpress";
+import type { Post, Rechner, Checkliste } from "@/lib/types";
 
 export default async function LandingPage() {
   let posts: Post[] = [];
+  let rechner: Rechner[] = [];
+  let checklisten: Checkliste[] = [];
   let insuranceCategory: Awaited<ReturnType<typeof getCategoryWithChildren>> = null;
   let categoryPosts: Record<string, Post[]> = {};
 
   try {
-    [posts, insuranceCategory] = await Promise.all([
+    [posts, rechner, checklisten, insuranceCategory] = await Promise.all([
       getAllPosts(),
+      getAllRechner(),
+      getAllChecklisten(),
       getCategoryWithChildren('versicherungen'),
     ]);
 
@@ -39,7 +43,7 @@ export default async function LandingPage() {
       <LandingBodyAttr />
       <LandingIntro />
       <main className="bg-white scalable-landing">
-        <FinanztoolsHero posts={posts} />
+        <FinanztoolsHero posts={posts} rechner={rechner} checklisten={checklisten} />
         <MorphingSection heading="Unsere Finanzratgeber" text="Wir bringen Klarheit in deine Entscheidungen">
           {insuranceCategory && insuranceCategory.children.length > 0 && (
             <SubcategorySlider

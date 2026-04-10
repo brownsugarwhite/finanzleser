@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
-import type { Post } from "@/lib/types";
+import type { Post, Rechner, Checkliste } from "@/lib/types";
 
 function reverseBaselineTrim(animData: any): any {
   const data = JSON.parse(JSON.stringify(animData));
@@ -66,7 +66,7 @@ const TOOLS = [
   },
 ];
 
-export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
+export default function FinanztoolsHero({ posts = [], rechner = [], checklisten = [] }: { posts?: Post[]; rechner?: Rechner[]; checklisten?: Checkliste[] }) {
   const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const animRefs = useRef<(AnimationItem | null)[]>([null, null, null]);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -219,7 +219,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
       <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
         {/* Left: finanztools_container */}
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined, paddingRight: isMobile ? 20 : 0 }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
           <div style={{ width: "100%", height: "500px", position: "relative" }}>
@@ -265,7 +265,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
           </p>
 
           {/* 3. Lottie Slider — stacked, slides enter from left/right */}
-          <div style={{ width: "100%", marginTop: -76, marginBottom: -270, overflow: "hidden", position: "relative" }}>
+          <div style={{ width: "100%", marginTop: isMobile ? -13 : -76, marginBottom: isMobile ? -130 : -270, overflow: "hidden", position: "relative" }}>
             {/* Sizing ghost — maintains aspect ratio */}
             <div style={{ width: "100%", aspectRatio: "1 / 1" }} />
             {TOOLS.map((_, i) => {
@@ -316,7 +316,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
 
           {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
           {isMobile ? (
-            <div style={{ paddingTop: 23, paddingBottom: 23 }}>
+            <div style={{ paddingTop: 23, paddingBottom: 23, width: "100%" }}>
               <RevolverSlider
                 tools={TOOLS}
                 activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
@@ -418,7 +418,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
 
         {/* Right: preview_container */}
         {/* Vertical dot spacer */}
-        <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
+        <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: isMobile ? "none" : "flex", flexDirection: "column" }}>
           {/* Dots */}
           <div style={{
             flex: 1,
@@ -446,7 +446,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 36, paddingLeft: 23 }}>
+        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 36, paddingLeft: 23, display: isMobile ? "none" : "block" }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",
@@ -503,6 +503,61 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
               );
             })}
           </div>
+
+          {/* Tool-Liste — wechselt je nach aktiver Card */}
+          {activeCard && (() => {
+            const toolMap: Record<string, { title: string; items: { title: string; slug: string }[] }> = {
+              "Rechner": { title: "Unsere Rechner", items: rechner.slice(0, 4).map(r => ({ title: r.title, slug: r.slug })) },
+              "Vergleiche": { title: "Unsere Vergleiche", items: [] },
+              "Checklisten": { title: "Unsere Checklisten", items: checklisten.slice(0, 4).map(c => ({ title: c.title, slug: c.slug })) },
+            };
+            const tool = toolMap[activeCard];
+            if (!tool || tool.items.length === 0) return null;
+
+            const hrefBase = activeCard === "Rechner" ? "/finanztools/rechner" : activeCard === "Checklisten" ? "/finanztools/checklisten" : "/finanztools/vergleiche";
+
+            return (
+              <div style={{ marginTop: 30 }}>
+                <p style={{
+                  fontFamily: "'Merriweather', serif",
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  lineHeight: 1.3,
+                  color: "var(--color-text-primary)",
+                  margin: "0 0 20px 0",
+                }}>
+                  {tool.title}
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
+                  {tool.items.map((item) => (
+                    <Link key={item.slug} href={`${hrefBase}/${item.slug}`} className="latest-post-item" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p className="latest-post-title" style={{
+                          fontSize: 16,
+                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                          fontWeight: 600,
+                          margin: 0,
+                          lineHeight: 1.3,
+                          hyphens: "auto",
+                          WebkitHyphens: "auto",
+                          wordBreak: "break-word",
+                        }} lang="de">
+                          {item.title}
+                        </p>
+                      </div>
+                      <div className="latest-post-icon" style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 23,
+                        background: "transparent",
+                        flexShrink: 0,
+                      }} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
     </section>
