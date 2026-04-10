@@ -189,7 +189,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                       <div style={{
                         position: "absolute",
                         left: 27 + iconLeft,
-                        top: 15,
+                        top: 20,
                         width: 40,
                         height: 40,
                         borderRadius: 17,
@@ -201,9 +201,10 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                         marginBottom: 0,
                         marginLeft: 0,
                         marginRight: 0,
-                        paddingTop: 46 * (1 - tY) + 10 * tY,
+                        paddingTop: 40 * (1 - tY) + 15 * tY,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
                         fontSize: cs.titleFontSize,
+                        lineHeight: "36px",                      
                         fontWeight: 600,
                         color: "var(--color-text-primary)",
                         whiteSpace: "nowrap",
@@ -222,7 +223,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
 
                 {/* Description + CTA (fades with contentOpacity) */}
                 <div style={{
-                  marginTop: 3,
+                  marginTop: 5,
                   width: containerWidth - 50,
                   opacity: cs.descOpacity,
                   pointerEvents: cs.descOpacity > 0.5 ? "auto" : "none",

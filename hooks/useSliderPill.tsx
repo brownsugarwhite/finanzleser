@@ -58,12 +58,20 @@ export function useSliderPill({
     return base + Math.min(dist / 300, 1) * 0.15;
   }, []);
 
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
   const getScrollOffset = useCallback(() => {
     if (!emblaApi) return 0;
-    const root = emblaApi.rootNode() as HTMLElement | undefined;
-    const container = root?.children[0] as HTMLElement | undefined;
-    if (!container) return 0;
-    const matrix = new DOMMatrix(getComputedStyle(container).transform);
+    if (!scrollContainerRef.current) {
+      scrollContainerRef.current = emblaApi.rootNode()?.children[0] as HTMLElement || null;
+    }
+    const el = scrollContainerRef.current;
+    if (!el) return 0;
+    // Read transform directly from style attribute (avoids getComputedStyle)
+    const match = el.style.transform?.match(/translate3d\(([^,]+)/);
+    if (match) return -parseFloat(match[1]);
+    // Fallback
+    const matrix = new DOMMatrix(getComputedStyle(el).transform);
     return -matrix.m41;
   }, [emblaApi]);
 
@@ -244,7 +252,7 @@ export function useSliderPill({
 
   useEffect(() => {
     const sync = () => {
-      if (!pillRef.current || !lensRef.current) return;
+      if (!pillVisible.current || !pillRef.current || !lensRef.current) return;
       const px = gsap.getProperty(pillRef.current, "x") as number;
       const pw = gsap.getProperty(pillRef.current, "width") as number;
       const scrollOff = getScrollOffset();

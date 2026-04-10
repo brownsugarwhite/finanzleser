@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideCategoryCard, { type CategorySlide } from '@/components/ui/SlideCategoryCard';
 import SlideArticleCard from '@/components/ui/SlideArticleCard';
@@ -199,47 +199,62 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   const isArticleMode = activeSlide !== null && activePosts.length > 0;
 
   // Category scroll tracking
+  const slideStylesRef = useRef<{ opacity: number; scale: number }[]>([]);
+
   useEffect(() => {
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
     const FADE_LEFT = 200;
     const FADE_RIGHT = 200;
+    const FULL = { opacity: 1, scale: 1 };
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, catEmblaApi.scrollProgress()));
-      const idx = Math.round(progress * (slideCount - 1));
-      setSelectedIndex(Math.max(0, Math.min(slideCount - 1, idx)));
+      const idx = Math.max(0, Math.min(slideCount - 1, Math.round(progress * (slideCount - 1))));
+      setSelectedIndex(idx);
+
+      // Skip fade computation in button mode (all cards visible at full opacity)
+      if (activeSlide !== null) return;
 
       const rootNode = catEmblaApi.rootNode();
       const rootRect = rootNode.getBoundingClientRect();
       const slideNodes = catEmblaApi.slideNodes();
+      let changed = false;
 
-      const styles = slideNodes.map((node) => {
+      const styles = slideNodes.map((node, i) => {
         const rect = node.getBoundingClientRect();
         const slideCenter = rect.left + rect.width / 2;
         const distFromLeft = slideCenter - rootRect.left;
         const distFromRight = rootRect.right - slideCenter;
 
+        let s = FULL;
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
-          return { opacity: t, scale: 0.9 + 0.1 * t };
-        }
-        if (distFromRight < FADE_RIGHT) {
+          s = { opacity: t, scale: 0.9 + 0.1 * t };
+        } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
-          return { opacity: t, scale: 0.9 + 0.1 * t };
+          s = { opacity: t, scale: 0.9 + 0.1 * t };
         }
-        return { opacity: 1, scale: 1 };
+
+        const prev = slideStylesRef.current[i];
+        if (!prev || Math.abs(prev.opacity - s.opacity) > 0.01 || Math.abs(prev.scale - s.scale) > 0.005) {
+          changed = true;
+        }
+        return s;
       });
 
-      setSlideStyles(styles);
+      if (changed) {
+        slideStylesRef.current = styles;
+        setSlideStyles(styles);
+      }
     };
 
     catEmblaApi.on('scroll', update);
     update();
 
     return () => { catEmblaApi.off('scroll', update); };
-  }, [catEmblaApi, categories.length]);
+  }, [catEmblaApi, categories.length, activeSlide]);
 
   // Reset article nav when closing
   // Delayed phase2 for spacer width (synced with card phase2)
