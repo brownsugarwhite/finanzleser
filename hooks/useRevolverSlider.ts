@@ -253,8 +253,6 @@ export function useRevolverSlider({
           rot.current = 0;
         }
         render();
-        // Snap complete → notify parent
-        onActiveChangeRef.current?.(order.current[0]);
         return;
       }
       raf.current = requestAnimationFrame(step);
@@ -268,6 +266,8 @@ export function useRevolverSlider({
     const si = order.current.indexOf(dataIndex);
     if (si === 1) detentSnap(-1, 0);
     else if (si === 2) detentSnap(1, 0);
+    // Notify parent immediately with the clicked card's index
+    onActiveChangeRef.current?.(dataIndex);
   }, [detentSnap]);
 
   /* ── Pointer event handlers ── */
@@ -317,6 +317,14 @@ export function useRevolverSlider({
 
     const projected = rot.current + rv * 5;
     const snap = projected >= 0.5 ? 1 : projected <= -0.5 ? -1 : 0;
+
+    // Predict which card will be on top after snap and notify immediately
+    if (snap !== 0) {
+      const o = order.current;
+      const nextOrder = snap > 0 ? [o[2], o[0], o[1]] : [o[1], o[2], o[0]];
+      onActiveChangeRef.current?.(nextOrder[0]);
+    }
+
     detentSnap(snap, Math.max(-0.012, Math.min(0.012, rv)));
   }, [detentSnap]);
 
@@ -333,18 +341,7 @@ export function useRevolverSlider({
     return () => { if (raf.current) cancelAnimationFrame(raf.current); };
   }, [render]);
 
-  /* ── Sync initialIndex changes ── */
-
-  useEffect(() => {
-    order.current = [
-      initialIndex % count,
-      (initialIndex + 1) % count,
-      (initialIndex + 2) % count,
-    ];
-    rot.current = 0;
-    vel.current = 0;
-    render();
-  }, [initialIndex, count, render]);
+  /* ── initialIndex only used for first mount (via useRef initial value) ── */
 
   return {
     stageHeight: layout.current.STAGE_H,

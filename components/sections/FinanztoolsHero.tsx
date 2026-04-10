@@ -72,6 +72,7 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const prevIndex = useRef(-1);
+  const prevDirection = useRef<"left" | "right" | null>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [currentSlide, setCurrentSlide] = useState(-1);
   const [prevSlide, setPrevSlide] = useState(-1);
@@ -160,7 +161,8 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
     const newIndex = TOOLS.findIndex(t => t.title === activeCard);
     if (newIndex < 0 || newIndex === currentSlide) return;
 
-    const comesFromRight = prevIndex.current >= 0 && newIndex > prevIndex.current;
+    const isFirstPlay = prevIndex.current < 0;
+    const comesFromRight = !isFirstPlay && newIndex > prevIndex.current;
     const dir: "left" | "right" = comesFromRight ? "right" : "left";
     setDirection(dir);
 
@@ -175,24 +177,33 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
       setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
     }
 
-    // Phase 1: position new slide off-screen (no transition)
-    setPrevSlide(currentSlide);
-    setCurrentSlide(newIndex);
-    setSlidePhase("prep");
+    if (isFirstPlay) {
+      // First play: slide already in viewport, no slide animation
+      setCurrentSlide(newIndex);
+      setSlidePhase("idle");
+      loadAnimAt(newIndex, data);
+      prevDirection.current = dir;
+    } else {
+      // Phase 1: position new slide off-screen (no transition)
+      setPrevSlide(currentSlide);
+      setCurrentSlide(newIndex);
+      setSlidePhase("prep");
 
-    // Phase 2: next frame → animate in
-    requestAnimationFrame(() => {
+      // Phase 2: next frame → animate in
       requestAnimationFrame(() => {
-        setSlidePhase("go");
+        requestAnimationFrame(() => {
+          setSlidePhase("go");
 
-        // Start lottie based on baseline progress
-        if (progress >= 0.8) {
-          loadAnimAt(newIndex, data);
-        } else {
-          setTimeout(() => loadAnimAt(newIndex, data), 500);
-        }
+          const dirChanged = prevDirection.current !== null && prevDirection.current !== dir;
+          if (dirChanged || progress >= 0.8) {
+            loadAnimAt(newIndex, data);
+          } else {
+            setTimeout(() => loadAnimAt(newIndex, data), 500);
+          }
+          prevDirection.current = dir;
+        });
       });
-    });
+    }
 
     prevIndex.current = newIndex;
   }, [activeCard]);
@@ -309,7 +320,11 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
               <RevolverSlider
                 tools={TOOLS}
                 activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
-                onActiveChange={(idx) => setActiveCard(TOOLS[idx].title)}
+                onActiveChange={(idx) => {
+                  // Only trigger lottie, don't feed back into revolver's activeIndex
+                  const title = TOOLS[idx].title;
+                  if (activeCard !== title) setActiveCard(title);
+                }}
               />
             </div>
           ) : (
@@ -324,9 +339,9 @@ export default function FinanztoolsHero({ posts = [] }: { posts?: Post[] }) {
                       style={{
                         width: isActive ? 470 : 130,
                         borderRadius: isActive ? 36 : 23,
-                        background: isActive ? "transparent" : "rgba(255, 255, 255, 0.8)",
-                        backdropFilter: isActive ? "none" : "brightness(1.3) blur(13px)",
-                        WebkitBackdropFilter: isActive ? "none" : "brightness(1.3) blur(13px)",
+                        background: isActive ? "rgba(250, 249, 246, 0.8)" : "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
+                        WebkitBackdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
                         boxShadow: isActive ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
                         border: isActive ? "1px solid var(--color-text-medium)" : "none",
                         overflow: "hidden",

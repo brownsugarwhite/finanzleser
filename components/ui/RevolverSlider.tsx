@@ -147,9 +147,26 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 width: cs.w,
                 height: cs.h,
                 borderRadius: 23 + cs.contentOpacity * 13,
-                background: `rgba(255, 255, 255, ${0.8 * (1 - cs.contentOpacity)})`,
-                backdropFilter: `brightness(${1 + 0.3 * (1 - cs.contentOpacity)}) blur(${13 * (1 - cs.contentOpacity)}px)`,
-                WebkitBackdropFilter: `brightness(${1 + 0.3 * (1 - cs.contentOpacity)}) blur(${13 * (1 - cs.contentOpacity)}px)`,
+                background: (() => {
+                  const t = cs.contentOpacity;
+                  // Interpolate: collapsed white(0.8) → expanded page(0.8)
+                  const r = Math.round(255 + (250 - 255) * t);
+                  const g = Math.round(255 + (249 - 255) * t);
+                  const b = Math.round(255 + (246 - 255) * t);
+                  return `rgba(${r}, ${g}, ${b}, 0.8)`;
+                })(),
+                backdropFilter: (() => {
+                  const t = cs.contentOpacity;
+                  const brightness = 1 + 0.3 * (1 - t);
+                  const blur = 13 + (16 - 13) * t;
+                  return t < 0.99 ? `brightness(${brightness}) blur(${blur}px)` : `blur(16px)`;
+                })(),
+                WebkitBackdropFilter: (() => {
+                  const t = cs.contentOpacity;
+                  const brightness = 1 + 0.3 * (1 - t);
+                  const blur = 13 + (16 - 13) * t;
+                  return t < 0.99 ? `brightness(${brightness}) blur(${blur}px)` : `blur(16px)`;
+                })(),
                 boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - cs.contentOpacity)})`,
                 border: `1px solid rgba(104, 108, 106, ${cs.borderOpacity})`,
                 overflow: "hidden",
