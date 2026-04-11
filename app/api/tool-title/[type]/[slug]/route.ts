@@ -18,5 +18,17 @@ export async function GET(
     return NextResponse.json({ title: checkliste?.title || "" });
   }
 
+  if (type === "vergleich") {
+    // Fetch title from WordPress REST API
+    const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
+    try {
+      const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title`);
+      const posts = await res.json();
+      return NextResponse.json({ title: posts[0]?.title?.rendered || "" });
+    } catch {
+      return NextResponse.json({ title: "" });
+    }
+  }
+
   return NextResponse.json({ title: "" });
 }

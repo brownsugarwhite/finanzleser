@@ -44,13 +44,31 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
   // FinanceAds postMessage für auto-Höhe (Format: "rechnerid|height")
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (typeof event.data !== "string") return;
-      const parts = event.data.split("|");
-      if (parts.length === 2) {
-        const height = parseInt(parts[1], 10);
-        if (!isNaN(height) && height > 100) {
-          setIframeHeight(height);
-        }
+      let height: number | null = null;
+
+      // Format 1: FinanceAds "rechnerid|height"
+      if (typeof event.data === "string") {
+        const parts = event.data.split("|");
+        if (parts.length === 2) height = parseInt(parts[1], 10);
+      }
+
+      // Format 2: Object with height property { height: 1234 }
+      if (typeof event.data === "object" && event.data !== null) {
+        const h = event.data.height || event.data.frameHeight || event.data.scrollHeight;
+        if (h) height = parseInt(h, 10);
+      }
+
+      // Format 3: JSON string with height
+      if (typeof event.data === "string" && event.data.startsWith("{")) {
+        try {
+          const parsed = JSON.parse(event.data);
+          const h = parsed.height || parsed.frameHeight || parsed.scrollHeight;
+          if (h) height = parseInt(h, 10);
+        } catch { /* not JSON */ }
+      }
+
+      if (height && !isNaN(height) && height > 100) {
+        setIframeHeight(height);
       }
     };
 
