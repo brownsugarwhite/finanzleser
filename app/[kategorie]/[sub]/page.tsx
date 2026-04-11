@@ -28,7 +28,7 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
     return (
-      <ArticleLayout title={post.title} content={post.content} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
     );
   }
 

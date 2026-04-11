@@ -38,6 +38,7 @@ export { WideContainer, CenteredContainer };
 
 type ArticleClientProps = {
   title?: string;
+  subtitle?: string;
   excerpt?: string;
   featuredImage?: { sourceUrl: string; altText?: string };
   category?: { name: string; slug: string };
@@ -56,6 +57,7 @@ type ArticleClientProps = {
 
 export default function ArticleClient({
   title,
+  subtitle,
   excerpt,
   featuredImage,
   category,
@@ -124,21 +126,24 @@ export default function ArticleClient({
 
             {/* Text rechts */}
             <div style={{ width: "40%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              {category && mainCategory && (
-                <Link
-                  href={`/${mainCategory}/${category.slug}`}
-                  className="mb-2 inline-block transition hover:opacity-80"
+              {title && (
+                <h1
+                  className="article-title"
                   style={{
                     color: "var(--color-brand-secondary)",
                     fontFamily: "Merriweather, serif",
                     fontSize: "23px",
                     fontStyle: "italic",
+                    marginBottom: "8px",
+                    display: "inline-block",
                   }}
                 >
-                  {category.name}
-                </Link>
+                  {title}
+                </h1>
               )}
-              {title && <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{title}</h1>}
+              {subtitle && (
+                <h2 data-toc-exclude className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
+              )}
               {excerpt && (
                 <p
                   className="mb-8 text-gray-600"

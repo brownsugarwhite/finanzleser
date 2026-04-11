@@ -1,0 +1,6720 @@
+{
+  "newPosts": [
+    {
+      "textFile": "Abfindungen.docx",
+      "seoFile": "Abfindungen.docx",
+      "baseName": "Abfindungen",
+      "slug": "abfindungen-von-der-steuer-absetzen",
+      "oldSlug": "abfindungen-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Abgeltungssteuer.docx",
+      "seoFile": "Abgeltungssteuer.docx",
+      "baseName": "Abgeltungssteuer",
+      "slug": "abgeltungssteuer",
+      "oldSlug": "abgeltungssteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern",
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerarten",
+        "Geldanlage"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Abschreibungen.docx",
+      "seoFile": "Abschreibungen.docx",
+      "baseName": "Abschreibungen",
+      "slug": "abschreibung-steuererklaerung",
+      "oldSlug": "abschreibung-steuererklaerung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Aktien.docx",
+      "seoFile": "Aktien.docx",
+      "baseName": "Aktien",
+      "slug": "aktien-steuererklaerung",
+      "oldSlug": "aktien-steuererklaerung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Altersteilzeit.docx",
+      "seoFile": "Altersteilzeit.docx",
+      "baseName": "Altersteilzeit",
+      "slug": "altersteilzeit",
+      "oldSlug": "altersteilzeit",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Altersvorsorgeaufwendungen.docx",
+      "seoFile": "Altersvorsorgeaufwendungen.docx",
+      "baseName": "Altersvorsorgeaufwendungen",
+      "slug": "altersvorsorgeaufwendungen",
+      "oldSlug": "altersvorsorgeaufwendungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Arbeitgeberzuschuss_Private_Krankenversi_Ratgeber.docx",
+      "seoFile": "Arbeitgeberzuschuss_Private_Krankenversi_SEO.docx",
+      "baseName": "Arbeitgeberzuschuss Private Krankenversi",
+      "slug": "arbeitgeberzuschuss-private-krankenversicherung",
+      "oldSlug": "arbeitgeberzuschuss-private-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Arbeitnehmer_Sparzulage_Ratgeber.docx",
+      "seoFile": "Arbeitnehmer_Sparzulage_SEO.docx",
+      "baseName": "Arbeitnehmer Sparzulage",
+      "slug": "arbeitnehmer-sparzulage",
+      "oldSlug": "arbeitnehmer-sparzulage",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerplichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Arbeitskleidung_Ratgeber.docx",
+      "seoFile": "Arbeitskleidung_SEO.docx",
+      "baseName": "Arbeitskleidung",
+      "slug": "arbeitskleidung-von-der-steuer-absetzen",
+      "oldSlug": "arbeitskleidung-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Arbeitslosengeld_Ratgeber.docx",
+      "seoFile": "Arbeitslosengeld_SEO.docx",
+      "baseName": "Arbeitslosengeld",
+      "slug": "arbeitslosengeld",
+      "oldSlug": "arbeitslosengeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Arbeitsmittel_Ratgeber.docx",
+      "seoFile": "Arbeitsmittel_SEO.docx",
+      "baseName": "Arbeitsmittel",
+      "slug": "arbeitsmittel",
+      "oldSlug": "arbeitsmittel",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Arbeitszimmer_Ratgeber.docx",
+      "seoFile": "Arbeitszimmer_SEO.docx",
+      "baseName": "Arbeitszimmer",
+      "slug": "arbeitszimmer-von-der-steuer-absetzen",
+      "oldSlug": "arbeitszimmer-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Ausbildungskosten_Ratgeber.docx",
+      "seoFile": "Ausbildungskosten_SEO.docx",
+      "baseName": "Ausbildungskosten",
+      "slug": "ausbildungskosten-von-der-steuer-absetzen",
+      "oldSlug": "ausbildungskosten-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Auslandskrankenversicherung_Ratgeber.docx",
+      "seoFile": "Auslandskrankenversicherung_SEO.docx",
+      "baseName": "Auslandskrankenversicherung",
+      "slug": "auslandskrankenversicherung",
+      "oldSlug": "auslandskrankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Außergewöhnliche_Belastungen_Ratgeber.docx",
+      "seoFile": "Außergewöhnliche_Belastungen_SEO.docx",
+      "baseName": "Außergewöhnliche Belastungen",
+      "slug": "aussergewoehnliche-belastungen",
+      "oldSlug": "aussergewoehnliche-belastungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bafög_Ratgeber.docx",
+      "seoFile": "Bafög_SEO.docx",
+      "baseName": "Bafög",
+      "slug": "bafoeg",
+      "oldSlug": "bafoeg",
+      "isNew": false,
+      "hauptkategorien": [],
+      "subkategorien": [],
+      "matched": true
+    },
+    {
+      "textFile": "Basisrente_Ratgeber.docx",
+      "seoFile": "Basisrente_SEO.docx",
+      "baseName": "Basisrente",
+      "slug": "basisrente",
+      "oldSlug": "basisrente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Basistarif_in_der_PKV_Ratgeber.docx",
+      "seoFile": "Basistarif_in_der_PKV_SEO.docx",
+      "baseName": "Basistarif in der PKV",
+      "slug": "basistarif",
+      "oldSlug": "basistarif",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Baufinanzierung_Ratgeber.docx",
+      "seoFile": "Baufinanzierung_SEO.docx",
+      "baseName": "Baufinanzierung",
+      "slug": "baufinanzierung",
+      "oldSlug": "baufinanzierung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bauherrenhaftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Bauherrenhaftpflichtversicherung_SEO.docx",
+      "baseName": "Bauherrenhaftpflichtversicherung",
+      "slug": "bauherrenhaftpflichtversicherung",
+      "oldSlug": "bauherrenhaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bausparvertrag_Ratgeber.docx",
+      "seoFile": "Bausparvertrag_SEO.docx",
+      "baseName": "Bausparvertrag",
+      "slug": "bausparvertrag",
+      "oldSlug": "bausparvertrag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Beitragsanpassung_PKV_Ratgeber.docx",
+      "seoFile": "Beitragsanpassung_PKV_SEO.docx",
+      "baseName": "Beitragsanpassung PKV",
+      "slug": "beitragsanpassung-pkv",
+      "oldSlug": "beitragsanpassung-pkv",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Beitragsbemessungsgrenzen_Ratgeber.docx",
+      "seoFile": "Beitragsbemessungsgrenzen_SEO.docx",
+      "baseName": "Beitragsbemessungsgrenzen",
+      "slug": "beitragsbemessungsgrenzen",
+      "oldSlug": "beitragsbemessungsgrenzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherung"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Berliner_Testament_Ratgeber.docx",
+      "seoFile": "Berliner_Testament_SEO.docx",
+      "baseName": "Berliner Testament",
+      "slug": "berliner-testament",
+      "oldSlug": "berliner-testament",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Berufshaftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Berufshaftpflichtversicherung_SEO.docx",
+      "baseName": "Berufshaftpflichtversicherung",
+      "slug": "berufshaftpflichtversicherung",
+      "oldSlug": "berufshaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht"
+      ],
+      "subkategorien": [
+        "Sachversicherungen",
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Berufsunfähigkeitsversicherung_Ratgeber.docx",
+      "seoFile": "Berufsunfähigkeitsversicherung_SEO.docx",
+      "baseName": "Berufsunfähigkeitsversicherung",
+      "slug": "berufsunfaehigkeitsversicherung",
+      "oldSlug": "berufsunfaehigkeitsversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Berufsunfähigkeit"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Betreuungsverfügung_Ratgeber.docx",
+      "seoFile": "Betreuungsverfügung_SEO.docx",
+      "baseName": "Betreuungsverfügung",
+      "slug": "betreuungsverfuegung",
+      "oldSlug": "betreuungsverfuegung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Betriebliche_Altersversorgung_Ratgeber.docx",
+      "seoFile": "Betriebliche_Altersversorgung_SEO.docx",
+      "baseName": "Betriebliche Altersversorgung",
+      "slug": "betriebliche-altersversorgung",
+      "oldSlug": "betriebliche-altersversorgung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Betriebliche_Krankenversicherung_Ratgeber.docx",
+      "seoFile": "Betriebliche_Krankenversicherung_SEO.docx",
+      "baseName": "Betriebliche Krankenversicherung",
+      "slug": "betriebliche-krankenversicherung",
+      "oldSlug": "betriebliche-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Betriebshaftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Betriebshaftpflichtversicherung_SEO.docx",
+      "baseName": "Betriebshaftpflichtversicherung",
+      "slug": "betriebshaftpflichtversicherung",
+      "oldSlug": "betriebshaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bußgeldkatalog_Ratgeber.docx",
+      "seoFile": "Bußgeldkatalog_SEO.docx",
+      "baseName": "Bußgeldkatalog",
+      "slug": "bussgeldkatalog-pdf",
+      "oldSlug": "bussgeldkatalog-pdf",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bürgergeld_Ratgeber.docx",
+      "seoFile": "Bürgergeld_SEO.docx",
+      "baseName": "Bürgergeld",
+      "slug": "buergergeld",
+      "oldSlug": "buergergeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Bürgerversicherung_Ratgeber.docx",
+      "seoFile": "Bürgerversicherung_SEO.docx",
+      "baseName": "Bürgerversicherung",
+      "slug": "buergerversicherung",
+      "oldSlug": "buergerversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Cyberversicherung_Ratgeber.docx",
+      "seoFile": "Cyberversicherung_SEO.docx",
+      "baseName": "Cyberversicherung",
+      "slug": "cyberversicherung",
+      "oldSlug": "cyberversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Dienstreisen_Ratgeber.docx",
+      "seoFile": "Dienstreisen_SEO.docx",
+      "baseName": "Dienstreisen",
+      "slug": "dienstreise-von-der-steuer-absetzen",
+      "oldSlug": "dienstreise-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Dienstwagen_Ratgeber.docx",
+      "seoFile": "Dienstwagen_SEO.docx",
+      "baseName": "Dienstwagen",
+      "slug": "dienstwagen-von-der-steuer-absetzen",
+      "oldSlug": "dienstwagen-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Dienstwohnung_Ratgeber.docx",
+      "seoFile": "Dienstwohnung_SEO.docx",
+      "baseName": "Dienstwohnung",
+      "slug": "dienstwohnung-von-der-steuer-absetzen",
+      "oldSlug": "dienstwohnung-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Direktbank_vs__Filialbank_Ratgeber.docx",
+      "seoFile": "Direktbank_vs__Filialbank_SEO.docx",
+      "baseName": "Direktbank vs  Filialbank",
+      "slug": "direktbank-vs-filialbank",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlage",
+        "Konto & Karten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Direktversicherung_Ratgeber.docx",
+      "seoFile": "Direktversicherung_SEO.docx",
+      "baseName": "Direktversicherung",
+      "slug": "direktversicherung",
+      "oldSlug": "direktversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Doppelte_Haushaltsführung_Ratgeber.docx",
+      "seoFile": "Doppelte_Haushaltsführung_SEO.docx",
+      "baseName": "Doppelte Haushaltsführung",
+      "slug": "doppelte-haushaltsfuehrung",
+      "oldSlug": "doppelte-haushaltsfuehrung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Drohnenhaftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Drohnenhaftpflichtversicherung_SEO.docx",
+      "baseName": "Drohnenhaftpflichtversicherung",
+      "slug": "drohnenhaftpflichtversicherung",
+      "oldSlug": "drohnenhaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Düsseldorfer_Tabelle_Ratgeber.docx",
+      "seoFile": "Düsseldorfer_Tabelle_SEO.docx",
+      "baseName": "Düsseldorfer Tabelle",
+      "slug": "duesseldorfer-tabelle",
+      "oldSlug": "duesseldorfer-tabelle",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "ETC___Exchange_Traded_Commodities_Ratgeber.docx",
+      "seoFile": "ETC___Exchange_Traded_Commodities_SEO.docx",
+      "baseName": "ETC   Exchange Traded Commodities",
+      "slug": "etc-exchange-traded-commodities",
+      "oldSlug": "etc-exchange-traded-commodities",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "ETF___Exchange_Traded_Funds_Ratgeber.docx",
+      "seoFile": "ETF___Exchange_Traded_Funds_SEO.docx",
+      "baseName": "ETF   Exchange Traded Funds",
+      "slug": "etf-exchange-traded-funds",
+      "oldSlug": "etf-exchange-traded-funds",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "E_Bike_Versicherung_Ratgeber.docx",
+      "seoFile": "E_Bike_Versicherung_SEO.docx",
+      "baseName": "E Bike Versicherung",
+      "slug": "e-bike-versicherung",
+      "oldSlug": "e-bike-versicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "E_Scooter_Versicherung_Ratgeber.docx",
+      "seoFile": "E_Scooter_Versicherung_SEO.docx",
+      "baseName": "E Scooter Versicherung",
+      "slug": "e-scooter-versicherung",
+      "oldSlug": "e-scooter-versicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Ehegattensplitting_Ratgeber.docx",
+      "seoFile": "Ehegattensplitting_SEO.docx",
+      "baseName": "Ehegattensplitting",
+      "slug": "ehegattensplitting",
+      "oldSlug": "ehegattensplitting",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht",
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Ehe & Familie",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Ehegattenunterhalt_Ratgeber.docx",
+      "seoFile": "Ehegattenunterhalt_SEO.docx",
+      "baseName": "Ehegattenunterhalt",
+      "slug": "ehegattenunterhalt",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Einkommensteuer_Ratgeber.docx",
+      "seoFile": "Einkommensteuer_SEO.docx",
+      "baseName": "Einkommensteuer",
+      "slug": "einkommensteuer",
+      "oldSlug": "einkommensteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Einlagensicherung_Ratgeber.docx",
+      "seoFile": "Einlagensicherung_SEO.docx",
+      "baseName": "Einlagensicherung",
+      "slug": "einlagensicherung",
+      "oldSlug": "einlagensicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen",
+        "Konto & Karten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Elster_Ratgeber.docx",
+      "seoFile": "Elster_SEO.docx",
+      "baseName": "Elster",
+      "slug": "elster",
+      "oldSlug": "elster",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Elterngeld_Ratgeber.docx",
+      "seoFile": "Elterngeld_SEO.docx",
+      "baseName": "Elterngeld",
+      "slug": "elterngeld",
+      "oldSlug": "elterngeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Elternunterhalt_Ratgeber.docx",
+      "seoFile": "Elternunterhalt_SEO.docx",
+      "baseName": "Elternunterhalt",
+      "slug": "elternunterhalt",
+      "oldSlug": "elternunterhalt",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Elternzeit_Ratgeber.docx",
+      "seoFile": "Elternzeit_SEO.docx",
+      "baseName": "Elternzeit",
+      "slug": "elternzeit",
+      "oldSlug": "elternzeit",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Entlastungsbetrag_Alleinerziehende_Ratgeber.docx",
+      "seoFile": "Entlastungsbetrag_Alleinerziehende_SEO.docx",
+      "baseName": "Entlastungsbetrag Alleinerziehende",
+      "slug": "entlastungsbetrag-alleinerziehende",
+      "oldSlug": "entlastungsbetrag-alleinerziehende",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Erbrecht_Ratgeber.docx",
+      "seoFile": "Erbrecht_SEO.docx",
+      "baseName": "Erbrecht",
+      "slug": "erbrecht",
+      "oldSlug": "erbrecht",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Erbschaftsteuer_Ratgeber.docx",
+      "seoFile": "Erbschaftsteuer_SEO.docx",
+      "baseName": "Erbschaftsteuer",
+      "slug": "erbschaftsteuer",
+      "oldSlug": "erbschaftsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht",
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Ehe & Familie",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Erwerbsminderungsrente_Ratgeber.docx",
+      "seoFile": "Erwerbsminderungsrente_SEO.docx",
+      "baseName": "Erwerbsminderungsrente",
+      "slug": "erwerbsminderungsrente",
+      "oldSlug": "erwerbsminderungsrente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Berufsunfähigkeit"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Fahrgemeinschaft_Ratgeber.docx",
+      "seoFile": "Fahrgemeinschaft_SEO.docx",
+      "baseName": "Fahrgemeinschaft",
+      "slug": "fahrgemeinschaft-von-der-steuer-absetzen",
+      "oldSlug": "fahrgemeinschaft-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Fahrradversicherung_Ratgeber.docx",
+      "seoFile": "Fahrradversicherung_SEO.docx",
+      "baseName": "Fahrradversicherung",
+      "slug": "fahrradversicherung",
+      "oldSlug": "fahrradversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Familienversicherung_Ratgeber.docx",
+      "seoFile": "Familienversicherung_SEO.docx",
+      "baseName": "Familienversicherung",
+      "slug": "familienversicherung-gesetzliche-krankenkasse",
+      "oldSlug": "familienversicherung-gesetzliche-krankenkasse",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Ferienwohnung_Ratgeber.docx",
+      "seoFile": "Ferienwohnung_SEO.docx",
+      "baseName": "Ferienwohnung",
+      "slug": "ferienwohnung-von-der-steuer-absetzen",
+      "oldSlug": "ferienwohnung-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Festgeld.docx",
+      "seoFile": "Festgeld.docx",
+      "baseName": "Festgeld",
+      "slug": "festgeld",
+      "oldSlug": "festgeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Fonds.docx",
+      "seoFile": "Fonds.docx",
+      "baseName": "Fonds",
+      "slug": "fondsgebundene-lebensversicherung",
+      "oldSlug": "fondsgebundene-lebensversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Geldanlage"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Fondsgebundene_Lebensversicherung_Ratgeber.docx",
+      "seoFile": "Fondsgebundene_Lebensversicherung_SEO.docx",
+      "baseName": "Fondsgebundene Lebensversicherung",
+      "slug": "fondsgebundene-lebensversicherung",
+      "oldSlug": "fondsgebundene-lebensversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Geldanlage"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Freiwillige_gesetzliche_Krankenversicher_Ratgeber.docx",
+      "seoFile": "Freiwillige_gesetzliche_Krankenversicher_SEO.docx",
+      "baseName": "Freiwillige gesetzliche Krankenversicher",
+      "slug": "freiwillige-gesetzliche-krankenversicherung",
+      "oldSlug": "freiwillige-gesetzliche-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Freiwillige_gesetzliche_Rentenversicheru_Ratgeber.docx",
+      "seoFile": "Freiwillige_gesetzliche_Rentenversicheru_SEO.docx",
+      "baseName": "Freiwillige gesetzliche Rentenversicheru",
+      "slug": "freiwillige-gesetzliche-rente",
+      "oldSlug": "freiwillige-gesetzliche-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gaspreise_vergleichen_Ratgeber.docx",
+      "seoFile": "Gaspreise_vergleichen_SEO.docx",
+      "baseName": "Gaspreise vergleichen",
+      "slug": "gaspreise",
+      "oldSlug": "gaspreise",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Energiekosten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gehaltsumwandlung_Ratgeber.docx",
+      "seoFile": "Gehaltsumwandlung_SEO.docx",
+      "baseName": "Gehaltsumwandlung",
+      "slug": "gehaltsumwandlung",
+      "oldSlug": "gehaltsumwandlung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Geringfügige_Beschäftigung_Ratgeber.docx",
+      "seoFile": "Geringfügige_Beschäftigung_SEO.docx",
+      "baseName": "Geringfügige Beschäftigung",
+      "slug": "geringfuegige-beschaeftigung",
+      "oldSlug": "geringfuegige-beschaeftigung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht",
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Arbeitsrecht",
+        "Steuerpflichtige",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gesetzliche_Krankenversicherung_Ratgeber.docx",
+      "seoFile": "Gesetzliche_Krankenversicherung_SEO.docx",
+      "baseName": "Gesetzliche Krankenversicherung",
+      "slug": "gesetzliche-krankenversicherung",
+      "oldSlug": "gesetzliche-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gesetzliche_Rentenversicherung_Ratgeber.docx",
+      "seoFile": "Gesetzliche_Rentenversicherung_SEO.docx",
+      "baseName": "Gesetzliche Rentenversicherung",
+      "slug": "gesetzliche-rente",
+      "oldSlug": "gesetzliche-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gesetzliche_Unfallversicherung_Ratgeber.docx",
+      "seoFile": "Gesetzliche_Unfallversicherung_SEO.docx",
+      "baseName": "Gesetzliche Unfallversicherung",
+      "slug": "gesetzliche-unfallversicherung",
+      "oldSlug": "gesetzliche-unfallversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Unfallversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Gewerbesteuer_Ratgeber.docx",
+      "seoFile": "Gewerbesteuer_SEO.docx",
+      "baseName": "Gewerbesteuer",
+      "slug": "gewerbesteuer",
+      "oldSlug": "gewerbesteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Girokonto_Ratgeber.docx",
+      "seoFile": "Girokonto_SEO.docx",
+      "baseName": "Girokonto",
+      "slug": "girokonto",
+      "oldSlug": "girokonto",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Konto & Karten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Grunderwerbsteuer_Ratgeber.docx",
+      "seoFile": "Grunderwerbsteuer_SEO.docx",
+      "baseName": "Grunderwerbsteuer",
+      "slug": "grunderwerbsteuer",
+      "oldSlug": "grunderwerbsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Grundschuld_Ratgeber.docx",
+      "seoFile": "Grundschuld_SEO.docx",
+      "baseName": "Grundschuld",
+      "slug": "grundschuld",
+      "oldSlug": "grundschuld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Grundsicherung_Ratgeber.docx",
+      "seoFile": "Grundsicherung_SEO.docx",
+      "baseName": "Grundsicherung",
+      "slug": "grundsicherung",
+      "oldSlug": "grundsicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Grundsteuer_Ratgeber.docx",
+      "seoFile": "Grundsteuer_SEO.docx",
+      "baseName": "Grundsteuer",
+      "slug": "grundsteuer",
+      "oldSlug": "grundsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hausbesitzerhaftpflicht_und_Grundbesitze_Ratgeber.docx",
+      "seoFile": "Hausbesitzerhaftpflicht_und_Grundbesitze_SEO.docx",
+      "baseName": "Hausbesitzerhaftpflicht und Grundbesitze",
+      "slug": "hausbesitzerhaftpflichtversicherung",
+      "oldSlug": "hausbesitzerhaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Haushaltsnahe_Dienstleistungen_Ratgeber.docx",
+      "seoFile": "Haushaltsnahe_Dienstleistungen_SEO.docx",
+      "baseName": "Haushaltsnahe Dienstleistungen",
+      "slug": "haushaltsnahe-dienstleistungen",
+      "oldSlug": "haushaltsnahe-dienstleistungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hausratversicherung_Ratgeber.docx",
+      "seoFile": "Hausratversicherung_SEO.docx",
+      "baseName": "Hausratversicherung",
+      "slug": "hausratversicherung",
+      "oldSlug": "hausratversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hinzuverdienst_in_der_Rente_Ratgeber.docx",
+      "seoFile": "Hinzuverdienst_in_der_Rente_SEO.docx",
+      "baseName": "Hinzuverdienst in der Rente",
+      "slug": "hinzuverdienst-rente",
+      "oldSlug": "hinzuverdienst-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hunde_OP_Versicherung_Ratgeber.docx",
+      "seoFile": "Hunde_OP_Versicherung_SEO.docx",
+      "baseName": "Hunde OP Versicherung",
+      "slug": "hunde-op-versicherung",
+      "oldSlug": "hunde-op-versicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Tierversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hundehaftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Hundehaftpflichtversicherung_SEO.docx",
+      "baseName": "Hundehaftpflichtversicherung",
+      "slug": "hundehaftpflichtversicherung",
+      "oldSlug": "hundehaftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Tierversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Hundeversicherungen_Ratgeber.docx",
+      "seoFile": "Hundeversicherungen_SEO.docx",
+      "baseName": "Hundeversicherungen",
+      "slug": "hundeversicherungen",
+      "oldSlug": "hundeversicherungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Tierversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Immobilien.docx",
+      "seoFile": "Immobilien.docx",
+      "baseName": "Immobilien",
+      "slug": "anlageimmobilie",
+      "oldSlug": "anlageimmobilie",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Inflation_Ratgeber.docx",
+      "seoFile": "Inflation_SEO.docx",
+      "baseName": "Inflation",
+      "slug": "inflation",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlage"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Investition_in_Gold_Ratgeber.docx",
+      "seoFile": "Investition_in_Gold_SEO.docx",
+      "baseName": "Investition in Gold",
+      "slug": "investition-in-gold",
+      "oldSlug": "investition-in-gold",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Investition_in_Sachwerte_Ratgeber.docx",
+      "seoFile": "Investition_in_Sachwerte_SEO.docx",
+      "baseName": "Investition in Sachwerte",
+      "slug": "investition-in-sachwerte",
+      "oldSlug": "investition-in-sachwerte",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Jahressteuerbescheinigung_Ratgeber.docx",
+      "seoFile": "Jahressteuerbescheinigung_SEO.docx",
+      "baseName": "Jahressteuerbescheinigung",
+      "slug": "jahressteuerbescheinigung",
+      "oldSlug": "jahressteuerbescheinigung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "KfW_Förderung_Ratgeber.docx",
+      "seoFile": "KfW_Förderung_SEO.docx",
+      "baseName": "KfW Förderung",
+      "slug": "kfw-foerderung",
+      "oldSlug": "kfw-foerderung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "KfW_Studienkredit_Ratgeber.docx",
+      "seoFile": "KfW_Studienkredit_SEO.docx",
+      "baseName": "KfW Studienkredit",
+      "slug": "kfw-studienkredit",
+      "oldSlug": "kfw-studienkredit",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kfz_Versicherung_Ratgeber.docx",
+      "seoFile": "Kfz_Versicherung_SEO.docx",
+      "baseName": "Kfz Versicherung",
+      "slug": "kfz-versicherung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kinderbetreuungskosten_Ratgeber.docx",
+      "seoFile": "Kinderbetreuungskosten_SEO.docx",
+      "baseName": "Kinderbetreuungskosten",
+      "slug": "kinderbetreuung-von-der-steuer-absetzen",
+      "oldSlug": "kinderbetreuung-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kindergeld_Ratgeber.docx",
+      "seoFile": "Kindergeld_SEO.docx",
+      "baseName": "Kindergeld",
+      "slug": "kindergeld",
+      "oldSlug": "kindergeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht",
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Ehe & Familie",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kinderkrankengeld_Ratgeber.docx",
+      "seoFile": "Kinderkrankengeld_SEO.docx",
+      "baseName": "Kinderkrankengeld",
+      "slug": "kinderkrankengeld",
+      "oldSlug": "kinderkrankengeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kinderzuschlag_Ratgeber.docx",
+      "seoFile": "Kinderzuschlag_SEO.docx",
+      "baseName": "Kinderzuschlag",
+      "slug": "kinderzuschlag",
+      "oldSlug": "kinderzuschlag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht",
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Ehe & Familie",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kindesunterhalt_Ratgeber.docx",
+      "seoFile": "Kindesunterhalt_SEO.docx",
+      "baseName": "Kindesunterhalt",
+      "slug": "kindesunterhalt",
+      "oldSlug": "kindesunterhalt",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kirchensteuer_Ratgeber.docx",
+      "seoFile": "Kirchensteuer_SEO.docx",
+      "baseName": "Kirchensteuer",
+      "slug": "kirchensteuer",
+      "oldSlug": "kirchensteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Körperschaftsteuer_Ratgeber.docx",
+      "seoFile": "Körperschaftsteuer_SEO.docx",
+      "baseName": "Körperschaftsteuer",
+      "slug": "koerperschaftsteuer",
+      "oldSlug": "koerperschaftsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuer"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankengeld_Ratgeber.docx",
+      "seoFile": "Krankengeld_SEO.docx",
+      "baseName": "Krankengeld",
+      "slug": "krankengeld",
+      "oldSlug": "krankengeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankentagegeldversicherung_Ratgeber.docx",
+      "seoFile": "Krankentagegeldversicherung_SEO.docx",
+      "baseName": "Krankentagegeldversicherung",
+      "slug": "krankentagegeldversicherung",
+      "oldSlug": "krankentagegeldversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankenversicherung_Leistungen_Ratgeber.docx",
+      "seoFile": "Krankenversicherung_Leistungen_SEO.docx",
+      "baseName": "Krankenversicherung Leistungen",
+      "slug": "krankenversicherung-leistungen",
+      "oldSlug": "krankenversicherung-leistungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankenversicherung_Rentner_Ratgeber.docx",
+      "seoFile": "Krankenversicherung_Rentner_SEO.docx",
+      "baseName": "Krankenversicherung Rentner",
+      "slug": "krankenversicherung-rentner",
+      "oldSlug": "krankenversicherung-rentner",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankenversicherung_Studenten_Ratgeber.docx",
+      "seoFile": "Krankenversicherung_Studenten_SEO.docx",
+      "baseName": "Krankenversicherung Studenten",
+      "slug": "studenten-krankenversicherung",
+      "oldSlug": "studenten-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Krankenversicherungsbeiträge_Ratgeber.docx",
+      "seoFile": "Krankenversicherungsbeiträge_SEO.docx",
+      "baseName": "Krankenversicherungsbeiträge",
+      "slug": "krankenversicherungsbeitraege",
+      "oldSlug": "krankenversicherungsbeitraege",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Krankenversicherungspflicht_Ratgeber.docx",
+      "seoFile": "Krankenversicherungspflicht_SEO.docx",
+      "baseName": "Krankenversicherungspflicht",
+      "slug": "krankenversicherungspflicht",
+      "oldSlug": "krankenversicherungspflicht",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kredite.docx",
+      "seoFile": "Kredite.docx",
+      "baseName": "Kredite",
+      "slug": "kredite",
+      "oldSlug": "kredite",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": false
+    },
+    {
+      "textFile": "Kreditkarte_Ratgeber.docx",
+      "seoFile": "Kreditkarte_SEO.docx",
+      "baseName": "Kreditkarte",
+      "slug": "kreditkarte",
+      "oldSlug": "kreditkarte",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kryptowährung_Ratgeber.docx",
+      "seoFile": "Kryptowährung_SEO.docx",
+      "baseName": "Kryptowährung",
+      "slug": "kryptowaehrung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlage"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kurzarbeitergeld_Ratgeber.docx",
+      "seoFile": "Kurzarbeitergeld_SEO.docx",
+      "baseName": "Kurzarbeitergeld",
+      "slug": "kurzarbeitergeld",
+      "oldSlug": "kurzarbeitergeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kurzzeitpflege_Ratgeber.docx",
+      "seoFile": "Kurzzeitpflege_SEO.docx",
+      "baseName": "Kurzzeitpflege",
+      "slug": "kurzzeitpflege",
+      "oldSlug": "kurzzeitpflege",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kündigung_Krankenversicherung_Ratgeber.docx",
+      "seoFile": "Kündigung_Krankenversicherung_SEO.docx",
+      "baseName": "Kündigung Krankenversicherung",
+      "slug": "kuendigung-krankenversicherung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Kündigung_Ratgeber.docx",
+      "seoFile": "Kündigung_SEO.docx",
+      "baseName": "Kündigung",
+      "slug": "kuendigung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Künstlersozialkasse_Ratgeber.docx",
+      "seoFile": "Künstlersozialkasse_SEO.docx",
+      "baseName": "Künstlersozialkasse",
+      "slug": "kuenstlersozialkasse",
+      "oldSlug": "kuenstlersozialkasse",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Rentenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Lebensversicherung_Ratgeber.docx",
+      "seoFile": "Lebensversicherung_SEO.docx",
+      "baseName": "Lebensversicherung",
+      "slug": "lebensversicherung",
+      "oldSlug": "lebensversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Lohnsteuer_Ratgeber.docx",
+      "seoFile": "Lohnsteuer_SEO.docx",
+      "baseName": "Lohnsteuer",
+      "slug": "lohnsteuer",
+      "oldSlug": "lohnsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Lohnsteuerermäßigung_Ratgeber.docx",
+      "seoFile": "Lohnsteuerermäßigung_SEO.docx",
+      "baseName": "Lohnsteuerermäßigung",
+      "slug": "lohnsteuerermaessigung",
+      "oldSlug": "lohnsteuerermaessigung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Lohnsteuertabelle_Ratgeber.docx",
+      "seoFile": "Lohnsteuertabelle_SEO.docx",
+      "baseName": "Lohnsteuertabelle",
+      "slug": "lohnsteuertabelle",
+      "oldSlug": "lohnsteuertabelle",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Minijob_Ratgeber.docx",
+      "seoFile": "Minijob_SEO.docx",
+      "baseName": "Minijob",
+      "slug": "minijob",
+      "oldSlug": "minijob",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Mutterschaftsgeld_Ratgeber.docx",
+      "seoFile": "Mutterschaftsgeld_SEO.docx",
+      "baseName": "Mutterschaftsgeld",
+      "slug": "mutterschaftsgeld",
+      "oldSlug": "mutterschaftsgeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Nachhaltige_Geldanlagen_Ratgeber.docx",
+      "seoFile": "Nachhaltige_Geldanlagen_SEO.docx",
+      "baseName": "Nachhaltige Geldanlagen",
+      "slug": "nachhaltige-geldanlagen",
+      "oldSlug": "nachhaltige-geldanlagen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "PKV_Beitrag_Ratgeber.docx",
+      "seoFile": "PKV_Beitrag_SEO.docx",
+      "baseName": "PKV Beitrag",
+      "slug": "pkv-beitrag",
+      "oldSlug": "pkv-beitrag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Patientenverfügung_Ratgeber.docx",
+      "seoFile": "Patientenverfügung_SEO.docx",
+      "baseName": "Patientenverfügung",
+      "slug": "patientenverfuegung",
+      "oldSlug": "patientenverfuegung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pendlerpauschale_Ratgeber.docx",
+      "seoFile": "Pendlerpauschale_SEO.docx",
+      "baseName": "Pendlerpauschale",
+      "slug": "pendlerpauschale",
+      "oldSlug": "pendlerpauschale",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pfändung_Ratgeber.docx",
+      "seoFile": "Pfändung_SEO.docx",
+      "baseName": "Pfändung",
+      "slug": "pfaendung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Mietrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pferdeversicherungen_Ratgeber.docx",
+      "seoFile": "Pferdeversicherungen_SEO.docx",
+      "baseName": "Pferdeversicherungen",
+      "slug": "pferdeversicherung",
+      "oldSlug": "pferdeversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Tierversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegebedürftigkeit_Ratgeber.docx",
+      "seoFile": "Pflegebedürftigkeit_SEO.docx",
+      "baseName": "Pflegebedürftigkeit",
+      "slug": "pflegebeduerftigkeit",
+      "oldSlug": "pflegebeduerftigkeit",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegedienste_Ratgeber.docx",
+      "seoFile": "Pflegedienste_SEO.docx",
+      "baseName": "Pflegedienste",
+      "slug": "pflegedienste",
+      "oldSlug": "pflegedienste",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegegrad_beantragen_Ratgeber.docx",
+      "seoFile": "Pflegegrad_beantragen_SEO.docx",
+      "baseName": "Pflegegrad beantragen",
+      "slug": "pflegegrad-beantragen",
+      "oldSlug": "pflegegrad-beantragen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegegrade_Ratgeber.docx",
+      "seoFile": "Pflegegrade_SEO.docx",
+      "baseName": "Pflegegrade",
+      "slug": "pflegegrade",
+      "oldSlug": "pflegegrade",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegeversicherung_Ratgeber.docx",
+      "seoFile": "Pflegeversicherung_SEO.docx",
+      "baseName": "Pflegeversicherung",
+      "slug": "pflegeversicherung",
+      "oldSlug": "pflegeversicherung",
+      "isNew": false,
+      "hauptkategorien": [],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflegezusatzversicherung_Ratgeber.docx",
+      "seoFile": "Pflegezusatzversicherung_SEO.docx",
+      "baseName": "Pflegezusatzversicherung",
+      "slug": "pflegezusatzversicherung",
+      "oldSlug": "pflegezusatzversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Pflichtversicherung_Rente_Ratgeber.docx",
+      "seoFile": "Pflichtversicherung_Rente_SEO.docx",
+      "baseName": "Pflichtversicherung Rente",
+      "slug": "pflichtversicherung-rente",
+      "oldSlug": "pflichtversicherung-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Photovoltaik_Förderung_Ratgeber.docx",
+      "seoFile": "Photovoltaik_Förderung_SEO.docx",
+      "baseName": "Photovoltaik Förderung",
+      "slug": "photovoltaik-foerderung",
+      "oldSlug": "photovoltaik-foerderung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Energiekosten",
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Private_Haftpflichtversicherung_Ratgeber.docx",
+      "seoFile": "Private_Haftpflichtversicherung_SEO.docx",
+      "baseName": "Private Haftpflichtversicherung",
+      "slug": "private-haftpflichtversicherung",
+      "oldSlug": "private-haftpflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Private_Krankenversicherung_Ratgeber.docx",
+      "seoFile": "Private_Krankenversicherung_SEO.docx",
+      "baseName": "Private Krankenversicherung",
+      "slug": "private-krankenversicherung",
+      "oldSlug": "private-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Private_Pflege_Pflichtversicherung_Ratgeber.docx",
+      "seoFile": "Private_Pflege_Pflichtversicherung_SEO.docx",
+      "baseName": "Private Pflege Pflichtversicherung",
+      "slug": "private-pflege-pflichtversicherung",
+      "oldSlug": "private-pflege-pflichtversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Pflegeversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rechtsschutzversicherung_Ratgeber.docx",
+      "seoFile": "Rechtsschutzversicherung_SEO.docx",
+      "baseName": "Rechtsschutzversicherung",
+      "slug": "rechtsschutzversicherung",
+      "oldSlug": "rechtsschutzversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Reisekosten_Ratgeber.docx",
+      "seoFile": "Reisekosten_SEO.docx",
+      "baseName": "Reisekosten",
+      "slug": "reisekosten-von-der-steuer-absetzen",
+      "oldSlug": "reisekosten-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Reiseversicherungen_Ratgeber.docx",
+      "seoFile": "Reiseversicherungen_SEO.docx",
+      "baseName": "Reiseversicherungen",
+      "slug": "reiseversicherung",
+      "oldSlug": "reiseversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen",
+        "Krankenversicherung",
+        "Unfallversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenarten_Ratgeber.docx",
+      "seoFile": "Rentenarten_SEO.docx",
+      "baseName": "Rentenarten",
+      "slug": "rentenarten",
+      "oldSlug": "rentenarten",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung",
+        "Berufsunfähigkeitsversicherung",
+        "Unfallversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenbeitrag_Ratgeber.docx",
+      "seoFile": "Rentenbeitrag_SEO.docx",
+      "baseName": "Rentenbeitrag",
+      "slug": "rentenbeitrag",
+      "oldSlug": "rentenbeitrag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenbesteuerung_Ratgeber.docx",
+      "seoFile": "Rentenbesteuerung_SEO.docx",
+      "baseName": "Rentenbesteuerung",
+      "slug": "rentenbesteuerung",
+      "oldSlug": "rentenbesteuerung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenerhöhung_Ratgeber.docx",
+      "seoFile": "Rentenerhöhung_SEO.docx",
+      "baseName": "Rentenerhöhung",
+      "slug": "rentenerhoehung",
+      "oldSlug": "rentenerhoehung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Renteninformation_Ratgeber.docx",
+      "seoFile": "Renteninformation_SEO.docx",
+      "baseName": "Renteninformation",
+      "slug": "renteninformation",
+      "oldSlug": "renteninformation",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenversicherung_Ratgeber.docx",
+      "seoFile": "Rentenversicherung_SEO.docx",
+      "baseName": "Rentenversicherung",
+      "slug": "rentenversicherung",
+      "oldSlug": "rentenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rentenversicherungsbeitrag_Ratgeber.docx",
+      "seoFile": "Rentenversicherungsbeitrag_SEO.docx",
+      "baseName": "Rentenversicherungsbeitrag",
+      "slug": "rentenversicherungsbeitrag",
+      "oldSlug": "rentenversicherungsbeitrag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Riester_Rente_Ratgeber.docx",
+      "seoFile": "Riester_Rente_SEO.docx",
+      "baseName": "Riester Rente",
+      "slug": "riester-rente",
+      "oldSlug": "riester-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Risikolebensversicherung_Ratgeber.docx",
+      "seoFile": "Risikolebensversicherung_SEO.docx",
+      "baseName": "Risikolebensversicherung",
+      "slug": "risikolebensversicherung",
+      "oldSlug": "risikolebensversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Robo_Advisor_Ratgeber.docx",
+      "seoFile": "Robo_Advisor_SEO.docx",
+      "baseName": "Robo Advisor",
+      "slug": "roboadvisor",
+      "oldSlug": "roboadvisor",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rundfunkbeitrag_Ratgeber.docx",
+      "seoFile": "Rundfunkbeitrag_SEO.docx",
+      "baseName": "Rundfunkbeitrag",
+      "slug": "rundfunkbeitrag-pdf",
+      "oldSlug": "rundfunkbeitrag-pdf",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Mietrecht",
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Rürup_Rente_Ratgeber.docx",
+      "seoFile": "Rürup_Rente_SEO.docx",
+      "baseName": "Rürup Rente",
+      "slug": "ruerup-rente",
+      "oldSlug": "ruerup-rente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Schenkungssteuer_Ratgeber.docx",
+      "seoFile": "Schenkungssteuer_SEO.docx",
+      "baseName": "Schenkungssteuer",
+      "slug": "schenkungssteuer",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Solidaritätszuschlag_Ratgeber.docx",
+      "seoFile": "Solidaritätszuschlag_SEO.docx",
+      "baseName": "Solidaritätszuschlag",
+      "slug": "solidaritaetszuschlag",
+      "oldSlug": "solidaritaetszuschlag",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Sonderausgaben_Ratgeber.docx",
+      "seoFile": "Sonderausgaben_SEO.docx",
+      "baseName": "Sonderausgaben",
+      "slug": "sonderausgaben",
+      "oldSlug": "sonderausgaben",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Sozialhilfe_Ratgeber.docx",
+      "seoFile": "Sozialhilfe_SEO.docx",
+      "baseName": "Sozialhilfe",
+      "slug": "sozialhilfe",
+      "oldSlug": "sozialhilfe",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht",
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Arbeitsrecht",
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Sozialversicherung_Ratgeber.docx",
+      "seoFile": "Sozialversicherung_SEO.docx",
+      "baseName": "Sozialversicherung",
+      "slug": "sozialversicherung",
+      "oldSlug": "sozialversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Sozialversicherungsbeiträge_Ratgeber.docx",
+      "seoFile": "Sozialversicherungsbeiträge_SEO.docx",
+      "baseName": "Sozialversicherungsbeiträge",
+      "slug": "sozialversicherungsbeitraege",
+      "oldSlug": "sozialversicherungsbeitraege",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Spenden_Ratgeber.docx",
+      "seoFile": "Spenden_SEO.docx",
+      "baseName": "Spenden",
+      "slug": "spenden-von-der-steuer-absetzen",
+      "oldSlug": "spenden-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Splittingtabelle_Ratgeber.docx",
+      "seoFile": "Splittingtabelle_SEO.docx",
+      "baseName": "Splittingtabelle",
+      "slug": "splittingtabelle",
+      "oldSlug": "splittingtabelle",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuerpflichtige",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Standardtarif_in_der_PKV_Ratgeber.docx",
+      "seoFile": "Standardtarif_in_der_PKV_SEO.docx",
+      "baseName": "Standardtarif in der PKV",
+      "slug": "standardtarif",
+      "oldSlug": "standardtarif",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Sterbegeldversicherung_Ratgeber.docx",
+      "seoFile": "Sterbegeldversicherung_SEO.docx",
+      "baseName": "Sterbegeldversicherung",
+      "slug": "sterbegeldversicherung",
+      "oldSlug": "sterbegeldversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Altersvorsorge"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerberater_Ratgeber.docx",
+      "seoFile": "Steuerberater_SEO.docx",
+      "baseName": "Steuerberater",
+      "slug": "steuerberater-von-der-steuer-absetzen",
+      "oldSlug": "steuerberater-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerbescheid_Ratgeber.docx",
+      "seoFile": "Steuerbescheid_SEO.docx",
+      "baseName": "Steuerbescheid",
+      "slug": "steuerbescheid",
+      "oldSlug": "steuerbescheid",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuererklärung_Ratgeber.docx",
+      "seoFile": "Steuererklärung_SEO.docx",
+      "baseName": "Steuererklärung",
+      "slug": "steuererklaerung",
+      "oldSlug": "steuererklaerung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerformulare_Ratgeber.docx",
+      "seoFile": "Steuerformulare_SEO.docx",
+      "baseName": "Steuerformulare",
+      "slug": "steuerformulare-2024",
+      "oldSlug": "steuerformulare-2024",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerfreibetrag_Ratgeber.docx",
+      "seoFile": "Steuerfreibetrag_SEO.docx",
+      "baseName": "Steuerfreibetrag",
+      "slug": "steuerfreibetrag",
+      "oldSlug": "steuerfreibetrag",
+      "isNew": false,
+      "hauptkategorien": [],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerfreie_Einnahmen_Ratgeber.docx",
+      "seoFile": "Steuerfreie_Einnahmen_SEO.docx",
+      "baseName": "Steuerfreie Einnahmen",
+      "slug": "steuerfreie-einnahmen",
+      "oldSlug": "steuerfreie-einnahmen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuerklassen_Ratgeber.docx",
+      "seoFile": "Steuerklassen_SEO.docx",
+      "baseName": "Steuerklassen",
+      "slug": "steuerklassen",
+      "oldSlug": "steuerklassen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuern_für_Selbstständige_Ratgeber.docx",
+      "seoFile": "Steuern_für_Selbstständige_SEO.docx",
+      "baseName": "Steuern für Selbstständige",
+      "slug": "steuern-fuer-selbststaendige",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerarten",
+        "Steuerpflichtige"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Steuertabelle_Ratgeber.docx",
+      "seoFile": "Steuertabelle_SEO.docx",
+      "baseName": "Steuertabelle",
+      "slug": "steuertabelle",
+      "oldSlug": "steuertabelle",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Strompreise vergleichen_Ratgeber.docx",
+      "seoFile": "Strompreise vergleichen_SEO.docx",
+      "baseName": "Strompreise vergleichen",
+      "slug": "strompreise",
+      "oldSlug": "strompreise",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Energiekosten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Tagesgeld.docx",
+      "seoFile": "Tagesgeld.docx",
+      "baseName": "Tagesgeld",
+      "slug": "tagesgeld",
+      "oldSlug": "tagesgeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Testament_Ratgeber.docx",
+      "seoFile": "Testament_SEO.docx",
+      "baseName": "Testament",
+      "slug": "testament",
+      "oldSlug": "testament",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Tierversicherungen_Ratgeber.docx",
+      "seoFile": "Tierversicherungen_SEO.docx",
+      "baseName": "Tierversicherungen",
+      "slug": "tierversicherungen",
+      "oldSlug": "tierversicherungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Tierversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Umsatzsteuer_und_Mehrwertsteuer_Ratgeber.docx",
+      "seoFile": "Umsatzsteuer_und_Mehrwertsteuer_SEO.docx",
+      "baseName": "Umsatzsteuer und Mehrwertsteuer",
+      "slug": "umsatzsteuer-mehrwertsteuer",
+      "oldSlug": "umsatzsteuer-mehrwertsteuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Umsatzsteuererklärung_Ratgeber.docx",
+      "seoFile": "Umsatzsteuererklärung_SEO.docx",
+      "baseName": "Umsatzsteuererklärung",
+      "slug": "umsatzsteuererklaerung",
+      "oldSlug": "umsatzsteuererklaerung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Umsatzsteuervoranmeldung_Ratgeber.docx",
+      "seoFile": "Umsatzsteuervoranmeldung_SEO.docx",
+      "baseName": "Umsatzsteuervoranmeldung",
+      "slug": "umsatzsteuervoranmeldung",
+      "oldSlug": "umsatzsteuervoranmeldung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten",
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Umzugskosten_Ratgeber.docx",
+      "seoFile": "Umzugskosten_SEO.docx",
+      "baseName": "Umzugskosten",
+      "slug": "umzugskosten-von-der-steuer-absetzen",
+      "oldSlug": "umzugskosten-von-der-steuer-absetzen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Unfallversicherung_Ratgeber.docx",
+      "seoFile": "Unfallversicherung_SEO.docx",
+      "baseName": "Unfallversicherung",
+      "slug": "unfallversicherung",
+      "oldSlug": "unfallversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Unfallversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Unterhaltsvorschuss_Ratgeber.docx",
+      "seoFile": "Unterhaltsvorschuss_SEO.docx",
+      "baseName": "Unterhaltsvorschuss",
+      "slug": "unterhaltsvorschuss",
+      "oldSlug": "unterhaltsvorschuss",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Übergangsgeld_Ratgeber.docx",
+      "seoFile": "Übergangsgeld_SEO.docx",
+      "baseName": "Übergangsgeld",
+      "slug": "uebergangsgeld",
+      "oldSlug": "uebergangsgeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht"
+      ],
+      "subkategorien": [
+        "Sozialversicherungen",
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Verdienstgrenzen_Familienversicherung_Ratgeber.docx",
+      "seoFile": "Verdienstgrenzen_Familienversicherung_SEO.docx",
+      "baseName": "Verdienstgrenzen Familienversicherung",
+      "slug": "verdienstgrenzen-familienversicherung",
+      "oldSlug": "verdienstgrenzen-familienversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Vermögenswirksame_Leistungen_Ratgeber.docx",
+      "seoFile": "Vermögenswirksame_Leistungen_SEO.docx",
+      "baseName": "Vermögenswirksame Leistungen",
+      "slug": "vermoegenswirksame-leistungen",
+      "oldSlug": "vermoegenswirksame-leistungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Arbeitsrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Vorsorgeaufwendungen_Ratgeber.docx",
+      "seoFile": "Vorsorgeaufwendungen_SEO.docx",
+      "baseName": "Vorsorgeaufwendungen",
+      "slug": "vorsorgeaufwendungen",
+      "oldSlug": "vorsorgeaufwendungen",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuer",
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Vorsorgevollmacht_Ratgeber.docx",
+      "seoFile": "Vorsorgevollmacht_SEO.docx",
+      "baseName": "Vorsorgevollmacht",
+      "slug": "vorsorgevollmacht",
+      "oldSlug": "vorsorgevollmacht",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wahltarife_gesetzliche_Krankenkasse_Ratgeber.docx",
+      "seoFile": "Wahltarife_gesetzliche_Krankenkasse_SEO.docx",
+      "baseName": "Wahltarife gesetzliche Krankenkasse",
+      "slug": "wahltarife-gesetzliche-krankenkasse",
+      "oldSlug": "wahltarife-gesetzliche-krankenkasse",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wechsel_private_Krankenversicherung_Ratgeber.docx",
+      "seoFile": "Wechsel_private_Krankenversicherung_SEO.docx",
+      "baseName": "Wechsel private Krankenversicherung",
+      "slug": "wechsel-private-krankenversicherung",
+      "oldSlug": "wechsel-private-krankenversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Werbungskosten_Ratgeber.docx",
+      "seoFile": "Werbungskosten_SEO.docx",
+      "baseName": "Werbungskosten",
+      "slug": "werbungskosten",
+      "oldSlug": "werbungskosten",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuererklärung",
+        "Steuerarten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wertpapierdepot_Ratgeber.docx",
+      "seoFile": "Wertpapierdepot_SEO.docx",
+      "baseName": "Wertpapierdepot",
+      "slug": "wertpapierdepot",
+      "oldSlug": "wertpapierdepot",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlagen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Witwenrente_Ratgeber.docx",
+      "seoFile": "Witwenrente_SEO.docx",
+      "baseName": "Witwenrente",
+      "slug": "witwenrente",
+      "oldSlug": "witwenrente",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen",
+        "Recht"
+      ],
+      "subkategorien": [
+        "Altersvorsorge",
+        "Ehe & Familie"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wohngebäudeversicherung_Ratgeber.docx",
+      "seoFile": "Wohngebäudeversicherung_SEO.docx",
+      "baseName": "Wohngebäudeversicherung",
+      "slug": "wohngebaeudeversicherung",
+      "oldSlug": "wohngebaeudeversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wohngeld_Ratgeber.docx",
+      "seoFile": "Wohngeld_SEO.docx",
+      "baseName": "Wohngeld",
+      "slug": "wohngeld",
+      "oldSlug": "wohngeld",
+      "isNew": false,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Ehe & Familie",
+        "Mietrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wohnmobil_Versicherung_Ratgeber.docx",
+      "seoFile": "Wohnmobil_Versicherung_SEO.docx",
+      "baseName": "Wohnmobil Versicherung",
+      "slug": "wohnmobil-versicherung",
+      "oldSlug": "wohnmobil-versicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Sachversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Wohnungskündigung_Ratgeber.docx",
+      "seoFile": "Wohnungskündigung_SEO.docx",
+      "baseName": "Wohnungskündigung",
+      "slug": "wohnungskuendigung",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Recht"
+      ],
+      "subkategorien": [
+        "Mietrecht"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Zahnzusatzversicherung_Ratgeber.docx",
+      "seoFile": "Zahnzusatzversicherung_SEO.docx",
+      "baseName": "Zahnzusatzversicherung",
+      "slug": "zahnzusatzversicherung",
+      "oldSlug": "zahnzusatzversicherung",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Zinsbindungsfrist_Ratgeber.docx",
+      "seoFile": "Zinsbindungsfrist_SEO.docx",
+      "baseName": "Zinsbindungsfrist",
+      "slug": "zinsbindungsfrist",
+      "oldSlug": "zinsbindungsfrist",
+      "isNew": false,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Kredite & Bauen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Zinseszinseffekt_Ratgeber.docx",
+      "seoFile": "Zinseszinseffekt_SEO.docx",
+      "baseName": "Zinseszinseffekt",
+      "slug": "zinseszinseffekt",
+      "oldSlug": null,
+      "isNew": true,
+      "hauptkategorien": [
+        "Finanzen"
+      ],
+      "subkategorien": [
+        "Geldanlage",
+        "Konto & Karten"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "Zusatzbeitrag_Krankenkasse_Ratgeber.docx",
+      "seoFile": "Zusatzbeitrag_Krankenkasse_SEO.docx",
+      "baseName": "Zusatzbeitrag Krankenkasse",
+      "slug": "zusatzbeitrag-krankenkasse",
+      "oldSlug": "zusatzbeitrag-krankenkasse",
+      "isNew": false,
+      "hauptkategorien": [
+        "Versicherungen"
+      ],
+      "subkategorien": [
+        "Krankenversicherung",
+        "Sozialversicherungen"
+      ],
+      "matched": true
+    },
+    {
+      "textFile": "kfz_Steuer_Ratgeber.docx",
+      "seoFile": "kfz_Steuer_SEO.docx",
+      "baseName": "kfz Steuer",
+      "slug": "kfz-steuer",
+      "oldSlug": "kfz-steuer",
+      "isNew": false,
+      "hauptkategorien": [
+        "Steuern"
+      ],
+      "subkategorien": [
+        "Steuerarten"
+      ],
+      "matched": true
+    }
+  ],
+  "redirects": [
+    {
+      "oldSlug": "aktienfonds",
+      "targetName": "Fonds",
+      "targetSlug": "fondsgebundene-lebensversicherung"
+    },
+    {
+      "oldSlug": "annuitaetendarlehen",
+      "targetName": "Kredite",
+      "targetSlug": "kredite"
+    },
+    {
+      "oldSlug": "beitragsbemessungsgrenze",
+      "targetName": "Beitragsbemessungsgrenzen",
+      "targetSlug": "beitragsbemessungsgrenzen"
+    },
+    {
+      "oldSlug": "beitragsbemessungsgrenze-krankenversicherung",
+      "targetName": "Beitragsbemessungsgrenzen",
+      "targetSlug": "beitragsbemessungsgrenzen"
+    },
+    {
+      "oldSlug": "beitragsbemessungsgrenze-rentenversicherung",
+      "targetName": "Beitragsbemessungsgrenzen",
+      "targetSlug": "beitragsbemessungsgrenzen"
+    },
+    {
+      "oldSlug": "beitragssaetze",
+      "targetName": "Beitragsbemessungsgrenzen",
+      "targetSlug": "beitragsbemessungsgrenzen"
+    },
+    {
+      "oldSlug": "berufskleidung-von-der-steuer-absetzen",
+      "targetName": "Arbeitskleidung",
+      "targetSlug": "arbeitskleidung-von-der-steuer-absetzen"
+    },
+    {
+      "oldSlug": "berufsunfaehigkeitsversicherung-fuer-auszubildende",
+      "targetName": "Berufsunfähigkeitsversicherung",
+      "targetSlug": "berufsunfaehigkeitsversicherung"
+    },
+    {
+      "oldSlug": "berufsunfaehigkeitsversicherung-fuer-beamte",
+      "targetName": "Berufsunfähigkeitsversicherung",
+      "targetSlug": "berufsunfaehigkeitsversicherung"
+    },
+    {
+      "oldSlug": "berufsunfaehigkeitsversicherung-fuer-studenten",
+      "targetName": "Berufsunfähigkeitsversicherung",
+      "targetSlug": "berufsunfaehigkeitsversicherung"
+    },
+    {
+      "oldSlug": "berufsunfaehigkeitsversicherung-mit-vorerkrankungen",
+      "targetName": "Berufsunfähigkeitsversicherung",
+      "targetSlug": "berufsunfaehigkeitsversicherung"
+    },
+    {
+      "oldSlug": "betriebsrente",
+      "targetName": "Betriebliche Altersversorgung",
+      "targetSlug": "betriebliche-altersversorgung"
+    },
+    {
+      "oldSlug": "computer-von-der-steuer-absetzen",
+      "targetName": "Arbeitsmittel",
+      "targetSlug": "arbeitsmittel"
+    },
+    {
+      "oldSlug": "darlehen",
+      "targetName": "Kredite",
+      "targetSlug": "kredite"
+    },
+    {
+      "oldSlug": "erwerbsunfaehigkeitsrente",
+      "targetName": "Erwerbsminderungsrente",
+      "targetSlug": "erwerbsminderungsrente"
+    },
+    {
+      "oldSlug": "investmentfonds",
+      "targetName": "Fonds",
+      "targetSlug": "fondsgebundene-lebensversicherung"
+    },
+    {
+      "oldSlug": "krankengeld-fuer-selbststaendige",
+      "targetName": "Krankengeld",
+      "targetSlug": "krankengeld"
+    },
+    {
+      "oldSlug": "krankenkassenbeitrag",
+      "targetName": "Krankenversicherungsbeiträge",
+      "targetSlug": "krankenversicherungsbeitraege"
+    },
+    {
+      "oldSlug": "kredit-sondertilgung",
+      "targetName": "Kredite",
+      "targetSlug": "kredite"
+    },
+    {
+      "oldSlug": "kuendigung-gesetzliche-krankenkasse",
+      "targetName": "Kündigung Krankenversicherung",
+      "targetSlug": "kuendigung-krankenversicherung"
+    },
+    {
+      "oldSlug": "kuendigung-private-krankenversicherung",
+      "targetName": "Kündigung Krankenversicherung",
+      "targetSlug": "kuendigung-krankenversicherung"
+    },
+    {
+      "oldSlug": "lebensversicherung-beitragsfrei",
+      "targetName": "Lebensversicherung",
+      "targetSlug": "lebensversicherung"
+    },
+    {
+      "oldSlug": "lebensversicherung-kuendigen",
+      "targetName": "Lebensversicherung",
+      "targetSlug": "lebensversicherung"
+    },
+    {
+      "oldSlug": "lebensversicherung-verkaufen",
+      "targetName": "Lebensversicherung",
+      "targetSlug": "lebensversicherung"
+    },
+    {
+      "oldSlug": "mischfonds",
+      "targetName": "Fonds",
+      "targetSlug": "fondsgebundene-lebensversicherung"
+    },
+    {
+      "oldSlug": "perde-op-versicherung",
+      "targetName": "Pferdeversicherungen",
+      "targetSlug": "pferdeversicherung"
+    },
+    {
+      "oldSlug": "pferdekrankenversicherung-vergleich",
+      "targetName": "Pferdeversicherungen",
+      "targetSlug": "pferdeversicherung"
+    },
+    {
+      "oldSlug": "pflegeversicherung-krankenkasse",
+      "targetName": "Pflegeversicherung",
+      "targetSlug": "pflegeversicherung"
+    },
+    {
+      "oldSlug": "private-krankenversicherung-arbeitslose",
+      "targetName": "Private Krankenversicherung",
+      "targetSlug": "private-krankenversicherung"
+    },
+    {
+      "oldSlug": "private-krankenversicherung-beamte",
+      "targetName": "Private Krankenversicherung",
+      "targetSlug": "private-krankenversicherung"
+    },
+    {
+      "oldSlug": "private-krankenversicherung-kinder",
+      "targetName": "Private Krankenversicherung",
+      "targetSlug": "private-krankenversicherung"
+    },
+    {
+      "oldSlug": "private-krankenversicherung-rentner",
+      "targetName": "Private Krankenversicherung",
+      "targetSlug": "private-krankenversicherung"
+    },
+    {
+      "oldSlug": "private-rentenversicherung",
+      "targetName": "Rentenversicherung",
+      "targetSlug": "rentenversicherung"
+    },
+    {
+      "oldSlug": "ratenkredit",
+      "targetName": "Kredite",
+      "targetSlug": "kredite"
+    },
+    {
+      "oldSlug": "reiseruecktrittsversicherung",
+      "targetName": "Reiseversicherungen",
+      "targetSlug": "reiseversicherung"
+    },
+    {
+      "oldSlug": "rentenfonds",
+      "targetName": "Fonds",
+      "targetSlug": "fondsgebundene-lebensversicherung"
+    },
+    {
+      "oldSlug": "steuererklaerung-2025",
+      "targetName": "Steuererklärung",
+      "targetSlug": "steuererklaerung"
+    },
+    {
+      "oldSlug": "steuerformulare-2025",
+      "targetName": "Steuerformulare",
+      "targetSlug": "steuerformulare-2024"
+    },
+    {
+      "oldSlug": "steuerformulare",
+      "targetName": "Steuerformulare",
+      "targetSlug": "steuerformulare-2024"
+    },
+    {
+      "oldSlug": "steuerklassenwahl",
+      "targetName": "Steuerklassen",
+      "targetSlug": "steuerklassen"
+    },
+    {
+      "oldSlug": "steuerklassenwechsel",
+      "targetName": "Steuerklassen",
+      "targetSlug": "steuerklassen"
+    },
+    {
+      "oldSlug": "steuersoftware-steuererklaerung",
+      "targetName": "Elster",
+      "targetSlug": "elster"
+    }
+  ],
+  "vergleiche": [
+    {
+      "beitrag": "Autokredit Vergleich",
+      "slug": "autokredit-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Bauherren-Haftpflichtversicherung Vergleich",
+      "slug": "bauherren-haftpflichtversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Bausparen Vergleich",
+      "slug": "bausparen-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Berufsunfähigkeitsversicherung Vergleich",
+      "slug": "berufsunfaehigkeitsversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Cyberversicherung Vergleich",
+      "slug": "cyberversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Depot Vergleich",
+      "slug": "depot-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Drohnenversicherung Vergleich",
+      "slug": "drohnenversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Elektronikversicherung Vergleich",
+      "slug": "elektronikversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Fahrradversicherung Vergleich",
+      "slug": "fahrradversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Festgeld Vergleich",
+      "slug": "festgeldvergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Gaspreisvergleich",
+      "slug": "gaspreisvergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Gebäudeversicherung Vergleich",
+      "slug": "gebaeudeversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Geschäftskonto Vergleich",
+      "slug": "geschaeftskonto-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Girokonto Vergleich",
+      "slug": "girokonto-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Haus- und Grundbesitzerhaftpflicht Vergleich",
+      "slug": "haus-und-grundbesitzerhaftpflicht-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Hausratversicherung Vergleich",
+      "slug": "hausratversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Hundehaftpflicht Vergleich",
+      "slug": "hundehaftpflicht-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Hundekrankenversicherung Vergleich",
+      "slug": "hundekrankenversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Kfz-Versicherung Vergleich",
+      "slug": "kfz-versicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Kreditkarte Vergleich",
+      "slug": "kreditkarte-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Kreditkarten Vergleich",
+      "slug": "kreditkarten-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Kreditvergleich",
+      "slug": "kreditvergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Minikredit Vergleich",
+      "slug": "minikredit-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Pflegetagegeld Vergleich",
+      "slug": "pflegetagegeld-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Pflegeversicherung Vergleich",
+      "slug": "pflegeversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Photovoltaik Versicherung Vergleich",
+      "slug": "photovoltaik-versicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Private Haftpflichtversicherung Vergleich",
+      "slug": "private-haftpflichtversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Private Krankenversicherung Vergleich",
+      "slug": "private-krankenversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Ratenkredit Vergleich",
+      "slug": "ratenkredit-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Rechtsschutzversicherung Vergleich",
+      "slug": "rechtsschutzversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Reisekrankenversicherung Vergleich",
+      "slug": "reisekrankenversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Risikolebensversicherung Vergleich",
+      "slug": "risikolebensversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Sterbegeldversicherung Vergleich",
+      "slug": "sterbegeldversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Strompreisvergleich",
+      "slug": "strompreisvergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Studentenkonto Vergleich",
+      "slug": "studentenkonto-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Studentenkreditkarte Vergleich",
+      "slug": "studentenkreditkarte-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Tagesgeld Vergleich",
+      "slug": "tagesgeldvergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Unfallversicherung Vergleich",
+      "slug": "unfallversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    },
+    {
+      "beitrag": "Zahnzusatzversicherung Vergleich",
+      "slug": "zahnzusatzversicherung-vergleich",
+      "hauptkategorien": [],
+      "subkategorien": []
+    }
+  ],
+  "toDelete": [
+    {
+      "slug": "advocard-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "aktienfonds",
+      "reason": "merged"
+    },
+    {
+      "slug": "allianz-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "allianz-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-leipziger-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "alte-oldenburger-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "altenheimkosten-von-der-steuer-absetzen",
+      "reason": "nein"
+    },
+    {
+      "slug": "altersrueckstellungen-private-krankenversicherung",
+      "reason": "nein"
+    },
+    {
+      "slug": "altersteilzeitrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "ammerlaender-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "annuitaetendarlehen",
+      "reason": "merged"
+    },
+    {
+      "slug": "anwartschaft-private-krankenversicherung",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "arag-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "arbeitslosengeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "auslandskrankenversicherung",
+      "reason": "nein"
+    },
+    {
+      "slug": "auslandskrankenversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "autokredit-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "axa-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "axa-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "bafoeg-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "barmenia-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "barmenia-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basisrente-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "basler-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "basler-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "baufinanzierung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "baukredit",
+      "reason": "nein"
+    },
+    {
+      "slug": "bavaria-direkt-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "bayern-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "beitragsbemessungsgrenze",
+      "reason": "merged"
+    },
+    {
+      "slug": "beitragsbemessungsgrenze-krankenversicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "beitragsbemessungsgrenze-rentenversicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "beitragssaetze",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufskleidung-von-der-steuer-absetzen",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-fuer-auszubildende",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-fuer-beamte",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-fuer-studenten",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-mit-vorerkrankungen",
+      "reason": "merged"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "berufsunfaehigkeitsversicherung-test",
+      "reason": "nein"
+    },
+    {
+      "slug": "bessergruen-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "bestattungskosten-von-der-steuer-absetzen",
+      "reason": "nein"
+    },
+    {
+      "slug": "betriebsrente",
+      "reason": "merged"
+    },
+    {
+      "slug": "bgv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "bgv-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "bgv-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "bgv-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "bgv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "brutto-netto-gehaltsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "brutto-netto-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "bussgeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "canada-life-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "canada-life-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "canada-life-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "canada-life-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "checkliste-pkv-beitragsoptimierung-ohne-tarifwechsel",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-altersrente-beantragen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-altersrente-fuer-schwerbehinderte-menschen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-antrag-auf-schwerbehinderung",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-e-bike-versicherung-anbieter-vergleichen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-e-bike-versicherung-schadenmeldung-schritt-fuer-schritt",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-erwerbsminderungsrente-beantragen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-girokonto-eroeffnen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-haushaltsbuch",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-kostenplanung-bei-der-neuanschaffung-einer-katze",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-kostenplanung-bei-der-neuanschaffung-eines-hundes",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-kostenplanung-bei-der-neuanschaffung-eines-pferdes",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-laufende-kosten-eines-e-bikes",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-nebenjob-minijob-was-muss-ich-melden",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-pkv-wechsel",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-reise-und-pannenschutz-fuer-den-wohnmobilurlaub",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-checkliste-rentenluecke-berechnen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-steuererklaerung-fuer-selbststaendige-und-freelancer",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-steuererklaerung-jahres-checkliste-fuer-angestellte",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-strom-und-gasanbieter-wechseln",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-tierkrankenversicherung-worauf-sie-achten-sollten",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-versicherungsschutz-bei-auslandsreisen",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "checkliste-wohnmobil-richtig-versichern",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "wohnmobilkauf-worauf-sie-vor-dem-kauf-achten-sollten",
+      "reason": "Checkliste"
+    },
+    {
+      "slug": "computer-von-der-steuer-absetzen",
+      "reason": "merged"
+    },
+    {
+      "slug": "concordia-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "concordia-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "condor-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "continentale-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "cosmos-direkt-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "da-direkt-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "darlehen",
+      "reason": "merged"
+    },
+    {
+      "slug": "darlehensrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "debeka-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "debeka-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "delta-direkt-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "delta-direkt-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "deurag-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "deutsche-familienversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "deutsche-aerzteversicherung-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "deutsche-aerzteversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "devk-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dialog-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayrische-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayrische-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-bayerische-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-haftpflichtkasse-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-haftpflichtkasse-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-haftpflichtkasse-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "die-haftpflichtkasse-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dkv-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "dkv-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dkv-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "dmb-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "docura-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "docura-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "docura-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "domcura-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "dortmunder-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "elstam",
+      "reason": "nein"
+    },
+    {
+      "slug": "elterngeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "elternzeitrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "energieausweis-pdf",
+      "reason": "nein"
+    },
+    {
+      "slug": "erbbaurecht",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ergo-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "erwerbsunfaehigkeitsrente",
+      "reason": "merged"
+    },
+    {
+      "slug": "europa-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "feiertagsarbeit-steuererklaerung",
+      "reason": "nein"
+    },
+    {
+      "slug": "festgeld-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "friday-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "friday-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gehaltsabrechnung",
+      "reason": "nein"
+    },
+    {
+      "slug": "gehaltsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "generali-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "generali-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gesetzliche-krankenversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "gev-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gev-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gev-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gev-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gev-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gothaer-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvo-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvo-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvo-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvo-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvo-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvv-direkt-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvv-direkt-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvv-direkt-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "gvv-direkt-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hallesche-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hannoversche-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hansemerkur-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "haushaltsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "hauskreditrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "hdi-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hdi-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "heidelberger-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "helvetia-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hiscox-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hiscox-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "hiscox-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk-coburg-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "huk24-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "hypothekenrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "ideal-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ideal-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ideal-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ideal-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ideal-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ideal-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "inter-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interlloyd-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "interrisk-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "investmentfonds",
+      "reason": "merged"
+    },
+    {
+      "slug": "itzehoer-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "itzehoer-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "janitos-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "kfz-steuerrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "kfz-versicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "kindergeldauszahlung",
+      "reason": "nein"
+    },
+    {
+      "slug": "kindergeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "kindesunterhaltrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "kirchensteuerrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "krankengeld-fuer-selbststaendige",
+      "reason": "merged"
+    },
+    {
+      "slug": "krankenkassenbeitrag",
+      "reason": "merged"
+    },
+    {
+      "slug": "kredit-sondertilgung",
+      "reason": "merged"
+    },
+    {
+      "slug": "kreditrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "ks-auxilia-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "kuendigung-gesetzliche-krankenkasse",
+      "reason": "merged"
+    },
+    {
+      "slug": "kuendigung-private-krankenversicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "lebensversicherung-beitragsfrei",
+      "reason": "merged"
+    },
+    {
+      "slug": "lebensversicherung-kuendigen",
+      "reason": "merged"
+    },
+    {
+      "slug": "lebensversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "lebensversicherung-verkaufen",
+      "reason": "merged"
+    },
+    {
+      "slug": "lemonade-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "lkh-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "lohnabrechnung",
+      "reason": "nein"
+    },
+    {
+      "slug": "lohnrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "lohnsteuerkarte",
+      "reason": "nein"
+    },
+    {
+      "slug": "lohnsteuerrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "lpv-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lpv-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lv1871-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lv1871-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lv1871-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "lv1871-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lv1871-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvm-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "lvp-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "mannheimer-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "mecklenburgische-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "mietkaution-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "mischfonds",
+      "reason": "merged"
+    },
+    {
+      "slug": "monuta-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "mutterschaftsgeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "mutterschutzrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "mvk-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "muenchener-verein-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neodigital-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neodigital-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neodigital-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "neodigital-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neue-gesetze-und-regelungen-ab-januar-2026-das-aendert-sich",
+      "reason": "nein"
+    },
+    {
+      "slug": "neue-leben-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neue-leben-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neue-leben-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "neue-leben-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "nrv-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "nv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "nuernberger-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "oberoesterreichische-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ostangler-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ottonova-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "paypal-gebuehren-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "perde-op-versicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "pferdekrankenversicherung-vergleich",
+      "reason": "merged"
+    },
+    {
+      "slug": "pflegegraderechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "pflegeversicherung-krankenkasse",
+      "reason": "merged"
+    },
+    {
+      "slug": "prismalife-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "prismalife-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "prismalife-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "prismalife-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "private-krankenversicherung-arbeitslose",
+      "reason": "merged"
+    },
+    {
+      "slug": "private-krankenversicherung-beamte",
+      "reason": "merged"
+    },
+    {
+      "slug": "private-krankenversicherung-kinder",
+      "reason": "merged"
+    },
+    {
+      "slug": "private-krankenversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "private-krankenversicherung-rentner",
+      "reason": "merged"
+    },
+    {
+      "slug": "private-rentenversicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "protektor-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-rheinland-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-rheinland-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "provinzial-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "rv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ratenkredit",
+      "reason": "merged"
+    },
+    {
+      "slug": "reiseruecktrittsversicherung",
+      "reason": "merged"
+    },
+    {
+      "slug": "rentenbesteuerungsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "rentenfonds",
+      "reason": "merged"
+    },
+    {
+      "slug": "rentenhoehe",
+      "reason": "nein"
+    },
+    {
+      "slug": "rentenlueckenrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "rentenrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "rentenversicherung-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "rheinland-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "rhion-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rhion-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rhion-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "rhion-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "rhion-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "riesterrente-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "roland-rechtsschutz-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "saarland-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "saarland-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "saarland-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "saarland-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "signal-iduna-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "skandia-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-direkt-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-direkt-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-direkt-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-direktversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sparkassen-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "standard-life-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "standard-life-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "standard-life-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "standard-life-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "standard-life-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "steuererklaerung-2025",
+      "reason": "merged"
+    },
+    {
+      "slug": "steuerformulare-2025",
+      "reason": "merged"
+    },
+    {
+      "slug": "steuerformulare",
+      "reason": "merged"
+    },
+    {
+      "slug": "steuerklassenrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "steuerklassenwahl",
+      "reason": "merged"
+    },
+    {
+      "slug": "steuerklassenwechsel",
+      "reason": "merged"
+    },
+    {
+      "slug": "steuerrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "steuersoftware-steuererklaerung",
+      "reason": "merged"
+    },
+    {
+      "slug": "stuttgarter-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "stuttgarter-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "swiss-life-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "swiss-life-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "swiss-life-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "swiss-life-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "swiss-life-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "sueddeutsche-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "tagesgeld-rechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "targo-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "targo-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "targo-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "targo-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "targo-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "tilgungsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "uelzener-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "uelzener-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "uelzener-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "uelzener-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "uelzener-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ukv-union-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "ukv-union-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "ukv-union-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "unfallversicherung-leistungen",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "universa-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-krankenversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "universa-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "unterhaltsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "versicherungskammer-bayern-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "versicherungskammer-bayern-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "vgh-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vhv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vhv-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vhv-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vhv-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "vhv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "volkswohl-bund-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "vpv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "waldenburger-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "waldenburger-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "waldenburger-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "waldenburger-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wertgarantie-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wgv-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wohngeldrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "wwk-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-riesterrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wwk-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerttembergische-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-krankenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-pflegezusatzversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "wuerzburger-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zinsrechner",
+      "reason": "Rechner"
+    },
+    {
+      "slug": "zurich-basisrente-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-berufsunfaehigkeitsversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-kfz-versicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-lebensversicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-reiseversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-rentenversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-risikolebensversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-tierversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-unfallversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-versicherung-kontakt",
+      "reason": "nein"
+    },
+    {
+      "slug": "zurich-wohngebaeudeversicherung-kuendigen",
+      "reason": "nein"
+    },
+    {
+      "slug": "aenderungen-fuer-steuer-und-sozialversicherungen-2025",
+      "reason": "nein"
+    },
+    {
+      "slug": "oerag-rechtsschutzversicherung-kontakt",
+      "reason": "nein"
+    }
+  ],
+  "pdfSlugs": [
+    "pdf-betreuungsverfuegung",
+    "bussgeldgeldkatalog-pdf",
+    "duesseldorfer-tabelle-pdf",
+    "pdf-freistellungsauftrag",
+    "freistellungsauftrag-pdf",
+    "kindergeldauszahlungstermine-pdf",
+    "pdf-patientenverfuegung",
+    "pdf-pfaendungstabelle",
+    "pfaendungstabelle-pdf",
+    "renteninformation-pdf",
+    "sozialversicherungsbeitraege-2025-pdf",
+    "sozialversicherungswerte-2023-pdf",
+    "sozialversicherungswerte-pdf",
+    "sozialversicherungswerte-2026-pdf",
+    "steuerformulare-2024-pdf",
+    "steuerformulare-2025-pdf",
+    "steuerfreibetraege-2023-pdf",
+    "steuerfreibetraege-pdf-2025",
+    "steuerfreibetraege-2026-pdf",
+    "steuerratgeber-2024-pdf",
+    "pdf-vorsorgevollmacht",
+    "zusatzbeitrag-krankenkassen-pdf"
+  ]
+}

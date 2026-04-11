@@ -53,6 +53,10 @@ h1, h2 {
   font-weight: 900 !important;
 }
 
+h1.article-title {
+  font-weight: 500 !important;
+}
+
 /* Article Prose Styles */
 .prose {
   line-height: 1.8;

@@ -37,6 +37,7 @@ export default async function BeitragPage(props: {
   return (
     <ArticleLayout
       title={post.title}
+      subtitle={post.beitragFelder?.beitragUntertitel}
       excerpt={post.excerpt}
       featuredImage={post.featuredImage?.node}
       category={category}

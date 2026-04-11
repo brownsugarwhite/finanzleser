@@ -74,6 +74,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
     const tocItems: TOCItem[] = [];
 
     headings.forEach((heading) => {
+      if (heading.hasAttribute("data-toc-exclude")) return;
       const isTool = heading.classList.contains("article-tool-label");
       let toolType: string | undefined;
       let text: string;
@@ -102,7 +103,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
       const handleScroll = () => {
         const art = document.querySelector("article");
         if (!art) return;
-        const h2s = Array.from(art.querySelectorAll("h2"));
+        const h2s = Array.from(art.querySelectorAll("h2:not([data-toc-exclude])"));
         if (h2s.length === 0) return;
 
         let currentId = "";

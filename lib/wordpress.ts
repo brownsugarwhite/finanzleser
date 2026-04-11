@@ -16,8 +16,12 @@ export async function getAllPosts(): Promise<Post[]> {
   const client = getClient();
 
   const query = gql`
-    query GetPosts {
-      posts {
+    query GetPosts($after: String) {
+      posts(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         nodes {
           id
           title
@@ -41,8 +45,20 @@ export async function getAllPosts(): Promise<Post[]> {
     }
   `;
 
-  const data = await client.request<{ posts: { nodes: Post[] } }>(query);
-  return data.posts.nodes.map(post => decodePostContent(post));
+  const allNodes: Post[] = [];
+  let hasNextPage = true;
+  let after: string | null = null;
+
+  while (hasNextPage) {
+    const data = await client.request<{
+      posts: { nodes: Post[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    }>(query, { after });
+    allNodes.push(...data.posts.nodes);
+    hasNextPage = data.posts.pageInfo.hasNextPage;
+    after = data.posts.pageInfo.endCursor;
+  }
+
+  return allNodes.map(post => decodePostContent(post));
 }
 
 // ─────────────────────────────────────────────
@@ -208,43 +224,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       const aclQuery = gql`
         query GetPostACF($slug: String!) {
           postBy(slug: $slug) {
-            beitragFelder {
-              beitragUntertitel
-              beitragZusammenfassung
-              beitragPdf {
-                mediaItemUrl
-              }
-              beitragFeaturedTool
-              beitragRechner {
-                ... on Rechner {
-                  id
-                  title
-                  rechnerFelder {
-                    rechnerTyp
-                    rechnerBeschreibung
-                  }
-                }
-              }
-            }
-            seo {
-              title
-              metaDesc
-              canonical
-              opengraphTitle
-              opengraphDescription
-              opengraphImage {
-                sourceUrl
-              }
+            beitrag {
+              untertitel
+              featuredTool
             }
           }
         }
       `;
 
       try {
-        const aclData = await client.request<{ postBy: { beitragFelder?: PostACF; seo?: SEO } | null }>(aclQuery, { slug });
-        if (aclData.postBy) {
-          post.beitragFelder = aclData.postBy.beitragFelder;
-          post.seo = aclData.postBy.seo;
+        const aclData = await client.request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug });
+        if (aclData.postBy?.beitrag) {
+          post.beitragFelder = {
+            beitragUntertitel: aclData.postBy.beitrag.untertitel,
+            beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
+          };
         }
       } catch {
         // ACF fields not available for this post type - that's ok

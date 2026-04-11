@@ -3,6 +3,7 @@ import ArticleClient from "./ArticleClient";
 
 type ArticleLayoutProps = {
   title?: string;
+  subtitle?: string;
   excerpt?: string;
   featuredImage?: { sourceUrl: string; altText?: string };
   category?: { name: string; slug: string };

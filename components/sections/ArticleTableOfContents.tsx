@@ -103,6 +103,8 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
     const tocItems: TOCItem[] = [];
 
     headings.forEach((heading) => {
+      // Untertitel-H2 überspringen (hat data-toc-exclude)
+      if (heading.hasAttribute("data-toc-exclude")) return;
       // Tool-H2 erkennen (hat Klasse article-tool-label)
       const isTool = heading.classList.contains("article-tool-label");
       let toolType: string | undefined;

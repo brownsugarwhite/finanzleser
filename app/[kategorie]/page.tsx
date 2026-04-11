@@ -11,7 +11,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   const post = await getPostBySlug(params.kategorie).catch(() => null);
   if (post) {
     return (
-      <ArticleLayout title={post.title} content={post.content} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
     );
   }
 
