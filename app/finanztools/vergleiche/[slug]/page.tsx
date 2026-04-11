@@ -8,31 +8,31 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-// Beschreibungen für die 19 aktiven Vergleiche
-const VERGLEICH_DATA: Record<string, { desc: string }> = {
-  "private-haftpflichtversicherung-vergleich": { desc: "Vergleichen Sie aktuelle Tarife für die private Haftpflichtversicherung und finden Sie den besten Schutz zum günstigsten Preis." },
-  "festgeldvergleich": { desc: "Vergleichen Sie Festgeld-Angebote und sichern Sie sich die besten Zinsen für Ihre Geldanlage." },
-  "tagesgeldvergleich": { desc: "Finden Sie die besten Tagesgeld-Konditionen und profitieren Sie von attraktiven Zinsen bei täglicher Verfügbarkeit." },
-  "autokredit-vergleich": { desc: "Vergleichen Sie Autokredite und finden Sie die günstigste Finanzierung für Ihr Wunschfahrzeug." },
-  "ratenkredit-vergleich": { desc: "Vergleichen Sie Ratenkredite verschiedener Anbieter und sparen Sie durch den besten effektiven Jahreszins." },
-  "bausparen-vergleich": { desc: "Vergleichen Sie Bauspartarife und finden Sie den optimalen Bausparvertrag mit staatlicher Förderung." },
-  "baufinanzierung-vergleich": { desc: "Vergleichen Sie Baufinanzierungen und sichern Sie sich die besten Bauzinsen für Ihr Eigenheim." },
-  "private-krankenversicherung-vergleich": { desc: "Vergleichen Sie PKV-Tarife und finden Sie die private Krankenversicherung mit dem besten Preis-Leistungs-Verhältnis." },
-  "gaspreisvergleich": { desc: "Vergleichen Sie Gastarife und wechseln Sie zu einem günstigeren Anbieter. Sparen Sie sofort bei Ihren Energiekosten." },
-  "strompreisvergleich": { desc: "Vergleichen Sie Stromtarife und senken Sie Ihre Stromkosten durch einen einfachen Anbieterwechsel." },
-  "risikolebensversicherung-vergleich": { desc: "Vergleichen Sie Risikolebensversicherungen und sichern Sie Ihre Familie im Todesfall finanziell ab." },
-  "reisekrankenversicherung-vergleich": { desc: "Vergleichen Sie Reisekrankenversicherungen und reisen Sie weltweit mit optimalem Versicherungsschutz." },
-  "fahrradversicherung-vergleich": { desc: "Vergleichen Sie Fahrradversicherungen und schützen Sie Ihr Fahrrad vor Diebstahl und Beschädigung." },
-  "haus-und-grundbesitzerhaftpflicht-vergleich": { desc: "Vergleichen Sie Haus- und Grundbesitzerhaftpflichtversicherungen und sichern Sie sich als Eigentümer ab." },
-  "unfallversicherung-vergleich": { desc: "Vergleichen Sie private Unfallversicherungen und schützen Sie sich vor den finanziellen Folgen eines Unfalls." },
-  "gebaeudeversicherung-vergleich": { desc: "Vergleichen Sie Wohngebäudeversicherungen und schützen Sie Ihre Immobilie vor Feuer, Wasser und Sturm." },
-  "rechtsschutzversicherung-vergleich": { desc: "Vergleichen Sie Rechtsschutzversicherungen und sichern Sie sich gegen hohe Anwalts- und Gerichtskosten ab." },
-  "hausratversicherung-vergleich": { desc: "Vergleichen Sie Hausratversicherungen und schützen Sie Ihr Hab und Gut zum besten Preis." },
-  "kfz-versicherung-vergleich": { desc: "Vergleichen Sie Kfz-Versicherungen und finden Sie den günstigsten Tarif für Haftpflicht, Teil- und Vollkasko." },
-  "rentenversicherung-vergleich": { desc: "Vergleichen Sie private Rentenversicherungen und finden Sie die beste Altersvorsorge für Ihre Bedürfnisse." },
-  "lebensversicherung-vergleich": { desc: "Vergleichen Sie Lebensversicherungen und finden Sie den passenden Schutz für Ihre Familie und Altersvorsorge." },
-  "photovoltaik-versicherung-vergleich": { desc: "Vergleichen Sie Photovoltaik-Versicherungen und schützen Sie Ihre Solaranlage vor Schäden und Ertragsausfällen." },
-  "bussgeldrechner-vergleich": { desc: "Berechnen Sie Bußgelder, Punkte und Fahrverbote für Verkehrsverstöße mit dem aktuellen Bußgeldkatalog 2026." },
+// Titel und Beschreibungen für die aktiven Vergleiche
+const VERGLEICH_DATA: Record<string, { title: string; desc: string }> = {
+  "private-haftpflichtversicherung-vergleich": { title: "Private Haftpflichtversicherung Vergleich", desc: "Vergleichen Sie aktuelle Tarife für die private Haftpflichtversicherung und finden Sie den besten Schutz zum günstigsten Preis." },
+  "festgeldvergleich": { title: "Festgeld Vergleich", desc: "Vergleichen Sie Festgeld-Angebote und sichern Sie sich die besten Zinsen für Ihre Geldanlage." },
+  "tagesgeldvergleich": { title: "Tagesgeld Vergleich", desc: "Finden Sie die besten Tagesgeld-Konditionen und profitieren Sie von attraktiven Zinsen bei täglicher Verfügbarkeit." },
+  "autokredit-vergleich": { title: "Autokredit Vergleich", desc: "Vergleichen Sie Autokredite und finden Sie die günstigste Finanzierung für Ihr Wunschfahrzeug." },
+  "ratenkredit-vergleich": { title: "Ratenkredit Vergleich", desc: "Vergleichen Sie Ratenkredite verschiedener Anbieter und sparen Sie durch den besten effektiven Jahreszins." },
+  "bausparen-vergleich": { title: "Bausparen Vergleich", desc: "Vergleichen Sie Bauspartarife und finden Sie den optimalen Bausparvertrag mit staatlicher Förderung." },
+  "baufinanzierung-vergleich": { title: "Baufinanzierung Vergleich", desc: "Vergleichen Sie Baufinanzierungen und sichern Sie sich die besten Bauzinsen für Ihr Eigenheim." },
+  "private-krankenversicherung-vergleich": { title: "Private Krankenversicherung Vergleich", desc: "Vergleichen Sie PKV-Tarife und finden Sie die private Krankenversicherung mit dem besten Preis-Leistungs-Verhältnis." },
+  "gaspreisvergleich": { title: "Gaspreisvergleich", desc: "Vergleichen Sie Gastarife und wechseln Sie zu einem günstigeren Anbieter. Sparen Sie sofort bei Ihren Energiekosten." },
+  "strompreisvergleich": { title: "Strompreisvergleich", desc: "Vergleichen Sie Stromtarife und senken Sie Ihre Stromkosten durch einen einfachen Anbieterwechsel." },
+  "risikolebensversicherung-vergleich": { title: "Risikolebensversicherung Vergleich", desc: "Vergleichen Sie Risikolebensversicherungen und sichern Sie Ihre Familie im Todesfall finanziell ab." },
+  "reisekrankenversicherung-vergleich": { title: "Reisekrankenversicherung Vergleich", desc: "Vergleichen Sie Reisekrankenversicherungen und reisen Sie weltweit mit optimalem Versicherungsschutz." },
+  "fahrradversicherung-vergleich": { title: "Fahrradversicherung Vergleich", desc: "Vergleichen Sie Fahrradversicherungen und schützen Sie Ihr Fahrrad vor Diebstahl und Beschädigung." },
+  "haus-und-grundbesitzerhaftpflicht-vergleich": { title: "Haus- und Grundbesitzerhaftpflicht Vergleich", desc: "Vergleichen Sie Haus- und Grundbesitzerhaftpflichtversicherungen und sichern Sie sich als Eigentümer ab." },
+  "unfallversicherung-vergleich": { title: "Unfallversicherung Vergleich", desc: "Vergleichen Sie private Unfallversicherungen und schützen Sie sich vor den finanziellen Folgen eines Unfalls." },
+  "gebaeudeversicherung-vergleich": { title: "Gebäudeversicherung Vergleich", desc: "Vergleichen Sie Wohngebäudeversicherungen und schützen Sie Ihre Immobilie vor Feuer, Wasser und Sturm." },
+  "rechtsschutzversicherung-vergleich": { title: "Rechtsschutzversicherung Vergleich", desc: "Vergleichen Sie Rechtsschutzversicherungen und sichern Sie sich gegen hohe Anwalts- und Gerichtskosten ab." },
+  "hausratversicherung-vergleich": { title: "Hausratversicherung Vergleich", desc: "Vergleichen Sie Hausratversicherungen und schützen Sie Ihr Hab und Gut zum besten Preis." },
+  "kfz-versicherung-vergleich": { title: "Kfz-Versicherung Vergleich", desc: "Vergleichen Sie Kfz-Versicherungen und finden Sie den günstigsten Tarif für Haftpflicht, Teil- und Vollkasko." },
+  "rentenversicherung-vergleich": { title: "Rentenversicherung Vergleich", desc: "Vergleichen Sie private Rentenversicherungen und finden Sie die beste Altersvorsorge für Ihre Bedürfnisse." },
+  "lebensversicherung-vergleich": { title: "Lebensversicherung Vergleich", desc: "Vergleichen Sie Lebensversicherungen und finden Sie den passenden Schutz für Ihre Familie und Altersvorsorge." },
+  "photovoltaik-versicherung-vergleich": { title: "Photovoltaik-Versicherung Vergleich", desc: "Vergleichen Sie Photovoltaik-Versicherungen und schützen Sie Ihre Solaranlage vor Schäden und Ertragsausfällen." },
+  "bussgeldrechner-vergleich": { title: "Bußgeldrechner", desc: "Berechnen Sie Bußgelder, Punkte und Fahrverbote für Verkehrsverstöße mit dem aktuellen Bußgeldkatalog 2026." },
 };
 
 export async function generateStaticParams() {
@@ -44,11 +44,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const title = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const data = VERGLEICH_DATA[slug];
+  const title = data?.title || slug;
 
   return {
-    title: title,
+    title,
     description: data?.desc || `Vergleichen Sie aktuelle Angebote: ${title}`,
   };
 }
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function VergleichDetailPage({ params }: Props) {
   const { slug } = await params;
   const data = VERGLEICH_DATA[slug];
-  const title = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const title = data?.title || slug;
 
   if (!data) {
     return (

@@ -64,13 +64,17 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
 
     const container = scriptContainerRef.current;
 
+    // Prevent double-mount in React StrictMode
+    if (container.childElementCount > 0) return;
+
     if (scriptConfig.type === "finanzen-de") {
       // finanzen.de Widget
       const slotDiv = document.createElement("div");
       slotDiv.id = `fde-slot-am-${scriptConfig.slotId}`;
       container.appendChild(slotDiv);
 
-      (window as Record<string, unknown>).fde = (window as Record<string, unknown>).fde || [];
+      // Reset fde array to prevent duplicates
+      (window as Record<string, unknown>).fde = [];
       const fde = (window as Record<string, unknown>).fde as Array<Record<string, string>[]>;
       fde.push([
         { slotId: scriptConfig.slotId },
@@ -142,7 +146,7 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
       )}
 
       {iframeUrl && !loading && (
-        <div className="vergleich-iframe-container">
+        <div className={`vergleich-iframe-container${iframeUrl.includes("financeads.net") ? " financeads-embed" : ""}`}>
           <iframe
             ref={iframeRef}
             src={iframeUrl}

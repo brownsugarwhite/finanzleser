@@ -35,6 +35,7 @@ const VERGLEICH_DATA: Record<string, { iframeUrl?: string; scriptConfig?: Record
   },
   "risikolebensversicherung-vergleich": {
     scriptConfig: {
+      type: "finanzen-de",
       slotId: "1721399007",
       siteKey: "httpswwwfinanzleserde",
       designId: "11912",
@@ -80,13 +81,7 @@ const VERGLEICH_DATA: Record<string, { iframeUrl?: string; scriptConfig?: Record
     },
   },
   "photovoltaik-versicherung-vergleich": {
-    scriptConfig: {
-      type: "covomo",
-      embedType: "iframe",
-      dataType: "photovoltaik",
-      affiliate: "eyJhZmZpbGlhdGVfaWQiOiI1MDAwMDA3MjkxIiwiYSI6IjUwMDAwMDcyOTEifQ%3D%3D",
-      scriptSrc: "https://integrations.covomo.de/widget/covomoIframeWidget.js",
-    },
+    iframeUrl: "https://rechner.covomo.de/photovoltaik?theme=covomo&r=eyJhZmZpbGlhdGVfaWQiOiI1MDAwMDA3MjkxIiwiYSI6IjUwMDAwMDcyOTEifQ%3D%3D",
   },
   "bussgeldrechner-vergleich": {
     scriptConfig: {
