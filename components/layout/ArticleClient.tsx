@@ -9,6 +9,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import ArticleSidebar from "./ArticleSidebar";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import ArticleContent from "@/components/sections/ArticleContent";
+import PdfPreview from "@/components/ui/PdfPreview";
 
 function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
   return (
@@ -69,9 +70,12 @@ export default function ArticleClient({
 }: ArticleClientProps) {
   const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
+  const [pageSlug, setPageSlug] = useState("");
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
+    const parts = window.location.pathname.split("/").filter(Boolean);
+    setPageSlug(parts[parts.length - 1] || "");
   }, []);
 
   const breadcrumbItems = mainCategory && category ? [
@@ -221,7 +225,14 @@ export default function ArticleClient({
 
         {/* Artikel-Inhalt: alternating wide/centered Container */}
         {content && content.trim() ? (
-          <ArticleContent content={content} collapsed={collapsed} />
+          <>
+            <ArticleContent content={content} collapsed={collapsed} />
+            {pageSlug && (
+              <CenteredContainer collapsed={collapsed}>
+                <PdfPreview slug={pageSlug} />
+              </CenteredContainer>
+            )}
+          </>
         ) : (
           <CenteredContainer collapsed={collapsed}>
             <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
