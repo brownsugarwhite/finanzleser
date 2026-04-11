@@ -13,12 +13,17 @@ export default async function BeitragPage(props: {
     notFound();
   }
 
-  const category = post.categories?.nodes[0];
-
-  // Find main category (parent: null/0) from post categories
+  // Find main category (parent: null/0) and subcategory from post categories
   const mainCategory = post.categories?.nodes?.find(
     (cat: Category) => cat.parent === null || cat.parent === 0
   );
+
+  // Subcategory = matching the URL param, or first non-main category
+  const category = post.categories?.nodes?.find(
+    (cat: Category) => cat.slug === params.sub
+  ) || post.categories?.nodes?.find(
+    (cat: Category) => cat.parent !== null && cat.parent !== 0
+  ) || post.categories?.nodes[0];
 
   // Format date as "02. März 2026"
   const formattedDate = new Date(post.date).toLocaleDateString("de-DE", {

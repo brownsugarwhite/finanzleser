@@ -257,6 +257,28 @@ h1.article-title {
 /* Rechner styles → see rechner.css */
 
 /* ─────────────────────────────────────────────
+   Vergleich Embed
+   ───────────────────────────────────────────── */
+.vergleich-embed {
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.vergleich-iframe-container {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.vergleich-iframe-container iframe {
+  width: 100%;
+  height: auto;
+  border: none;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────
    MegaMenu Link Hover
    ───────────────────────────────────────────── */
 .megamenu-sub-line {

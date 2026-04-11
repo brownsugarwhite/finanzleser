@@ -75,7 +75,8 @@ export default function ArticleClient({
   }, []);
 
   const breadcrumbItems = mainCategory && category ? [
-    { label: mainCategoryName || mainCategory, href: `/${mainCategory}` },
+    { label: "Home", href: "/" },
+    { label: mainCategoryName || mainCategory.charAt(0).toUpperCase() + mainCategory.slice(1), href: `/${mainCategory}` },
     { label: category.name, href: `/${mainCategory}/${category.slug}` }
   ] : undefined;
 
@@ -99,10 +100,10 @@ export default function ArticleClient({
 
         {/* Header: Visual links, Text rechts */}
         <WideContainer collapsed={collapsed}>
-          <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "row", gap: "36px" }}>
             {/* Visual links */}
-            {featuredImage?.sourceUrl && (
-              <div style={{ flexShrink: 0, width: "60%" }}>
+            <div style={{ flexShrink: 0, width: "50%", height: "100%" }}>
+              {featuredImage?.sourceUrl ? (
                 <div className="h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
                   <InlineSVG
                     src={featuredImage.sourceUrl}
@@ -110,22 +111,24 @@ export default function ArticleClient({
                     style={{ width: '100%', height: '100%' }}
                   />
                 </div>
-                {featuredImage.altText && (
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "var(--color-text-medium)",
-                      marginTop: "8px",
-                    }}
-                  >
-                    {featuredImage.altText}
-                  </p>
-                )}
-              </div>
-            )}
+              ) : (
+                <div className="h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
+              )}
+              {featuredImage?.altText && (
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "var(--color-text-medium)",
+                    marginTop: "8px",
+                  }}
+                >
+                  {featuredImage.altText}
+                </p>
+              )}
+            </div>
 
             {/* Text rechts */}
-            <div style={{ width: "40%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               {title && (
                 <h1
                   className="article-title"

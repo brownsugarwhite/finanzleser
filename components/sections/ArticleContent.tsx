@@ -13,6 +13,10 @@ const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/Checkliste
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
 });
 
+const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"), {
+  loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Vergleich wird geladen...</div>,
+});
+
 const TOOL_CONFIG = {
   rechner: { label: "Rechner", color: "var(--color-tool-rechner)", endpoint: "/finanzleser/v1/rechner" },
   checkliste: { label: "Checkliste", color: "var(--color-tool-checklisten)", endpoint: "/finanzleser/v1/checklisten" },
@@ -55,15 +59,15 @@ interface Props {
 }
 
 interface ContentPart {
-  type: "html" | "rechner" | "checkliste";
+  type: "html" | "rechner" | "checkliste" | "vergleich";
   value: string; // HTML string or slug
 }
 
 function parseContent(html: string): ContentPart[] {
   const parts: ContentPart[] = [];
 
-  // Regex für die Block-Divs die WordPress rendert
-  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste)="([^"]+)"[^>]*><\/div>/g;
+  // Regex für Block-Divs (Rechner/Checkliste) und Gutenberg-Kommentare (Vergleich)
+  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->/g;
 
   let lastIndex = 0;
   let match;
@@ -75,10 +79,12 @@ function parseContent(html: string): ContentPart[] {
       if (before) parts.push({ type: "html", value: before });
     }
 
-    // Der Block selbst
+    // Der Block selbst (match[1]+[2] für div-Pattern, match[3]+[4] für Kommentar-Pattern)
+    const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
+    const blockSlug = match[2] || match[4];
     parts.push({
-      type: match[1] as "rechner" | "checkliste",
-      value: match[2],
+      type: blockType,
+      value: blockSlug,
     });
 
     lastIndex = match.index + match[0].length;
@@ -202,6 +208,18 @@ export default function ArticleContent({ content, collapsed }: Props) {
               formHeader={<ToolLabel type="checkliste" slug={part.value} headingId={id} showExcerpt />}
             />
           </div>
+        </WideContainer>
+      );
+    }
+    if (part.type === "vergleich") {
+      const id = `heading-${headingIndex}`;
+      headingIndex++;
+      return (
+        <WideContainer key={i} collapsed={collapsed}>
+          <VergleichEmbed
+            slug={part.value}
+            formHeader={<ToolLabel type="vergleich" slug={part.value} headingId={id} showExcerpt />}
+          />
         </WideContainer>
       );
     }

@@ -796,6 +796,34 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
 }
 
 // ─────────────────────────────────────────────
+// Alle Vergleiche
+// ─────────────────────────────────────────────
+
+export async function getAllVergleiche(): Promise<Vergleich[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetVergleiche {
+      vergleiche(first: 100) {
+        nodes {
+          id
+          title
+          slug
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ vergleiche: { nodes: Vergleich[] } }>(query);
+    return data.vergleiche.nodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+  } catch (error) {
+    console.error("Error fetching all Vergleiche:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Tools (Rechner/Vergleiche/Checklisten) nach Slugs
 // ─────────────────────────────────────────────
 
