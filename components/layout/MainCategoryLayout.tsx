@@ -22,6 +22,7 @@ export default function MainCategoryLayout({
   posts,
 }: MainCategoryLayoutProps) {
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: name, href: `/${slug}` }
   ];
   return (

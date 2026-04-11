@@ -17,6 +17,7 @@ type CategoryLayoutProps = {
 
 export default function CategoryLayout({ title, titleSlug, description, image, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
   const breadcrumbItems = mainCategorySlug && titleSlug ? [
+    { label: "Home", href: "/" },
     { label: mainCategoryName || mainCategorySlug, href: `/${mainCategorySlug}` },
     { label: title || titleSlug, href: `/${mainCategorySlug}/${titleSlug}` }
   ] : undefined;

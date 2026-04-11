@@ -132,6 +132,7 @@ export default async function RechnerDetailPage({ params }: Props) {
     rechner.rechnerFelder?.rechnerTyp === "kredit" ? "Kredit & Finanzen" : "Finanztools";
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
     { label: "Rechner", href: "/finanztools/rechner" }
   ];

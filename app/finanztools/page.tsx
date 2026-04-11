@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/Footer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import FinanztoolsGrid from "@/components/sections/FinanztoolsGrid";
 import { getToolCategories } from "@/lib/wordpress";
 
@@ -15,6 +16,7 @@ export default async function FinanztoolsPage() {
     <>
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 py-16">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Finanztools", href: "/finanztools" }]} />
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Finanztools

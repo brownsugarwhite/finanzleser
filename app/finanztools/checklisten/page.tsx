@@ -7,6 +7,7 @@ export default async function ChecklistenPage() {
   const checklisten = await getAllChecklisten();
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
   ];
 

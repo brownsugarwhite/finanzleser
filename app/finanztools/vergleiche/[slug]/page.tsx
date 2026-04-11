@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
@@ -28,6 +29,10 @@ const VERGLEICH_DATA: Record<string, { desc: string }> = {
   "rechtsschutzversicherung-vergleich": { desc: "Vergleichen Sie Rechtsschutzversicherungen und sichern Sie sich gegen hohe Anwalts- und Gerichtskosten ab." },
   "hausratversicherung-vergleich": { desc: "Vergleichen Sie Hausratversicherungen und schützen Sie Ihr Hab und Gut zum besten Preis." },
   "kfz-versicherung-vergleich": { desc: "Vergleichen Sie Kfz-Versicherungen und finden Sie den günstigsten Tarif für Haftpflicht, Teil- und Vollkasko." },
+  "rentenversicherung-vergleich": { desc: "Vergleichen Sie private Rentenversicherungen und finden Sie die beste Altersvorsorge für Ihre Bedürfnisse." },
+  "lebensversicherung-vergleich": { desc: "Vergleichen Sie Lebensversicherungen und finden Sie den passenden Schutz für Ihre Familie und Altersvorsorge." },
+  "photovoltaik-versicherung-vergleich": { desc: "Vergleichen Sie Photovoltaik-Versicherungen und schützen Sie Ihre Solaranlage vor Schäden und Ertragsausfällen." },
+  "bussgeldrechner-vergleich": { desc: "Berechnen Sie Bußgelder, Punkte und Fahrverbote für Verkehrsverstöße mit dem aktuellen Bußgeldkatalog 2026." },
 };
 
 export async function generateStaticParams() {
@@ -68,6 +73,7 @@ export default async function VergleichDetailPage({ params }: Props) {
   }
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
     { label: "Vergleiche", href: "/finanztools/vergleiche" },
   ];
@@ -77,6 +83,19 @@ export default async function VergleichDetailPage({ params }: Props) {
       <main className="min-h-screen bg-white">
         <div style={{ maxWidth: 1000 }} className="mx-auto px-6 pb-12">
           <Breadcrumb items={breadcrumbItems} />
+
+          <Link
+            href="/finanztools/vergleiche"
+            className="mb-2 inline-block transition hover:opacity-80"
+            style={{
+              color: "var(--color-tool-vergleiche)",
+              fontFamily: "Merriweather, serif",
+              fontSize: "23px",
+              fontStyle: "italic",
+            }}
+          >
+            Vergleich
+          </Link>
 
           <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
             {title}

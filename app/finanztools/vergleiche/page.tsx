@@ -24,6 +24,10 @@ const ACTIVE_SLUGS = new Set([
   "rechtsschutzversicherung-vergleich",
   "hausratversicherung-vergleich",
   "kfz-versicherung-vergleich",
+  "rentenversicherung-vergleich",
+  "lebensversicherung-vergleich",
+  "photovoltaik-versicherung-vergleich",
+  "bussgeldrechner-vergleich",
 ]);
 
 export default async function VergleichePage() {
@@ -31,6 +35,7 @@ export default async function VergleichePage() {
   const vergleiche = allVergleiche.filter(v => ACTIVE_SLUGS.has(v.slug));
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
   ];
 

@@ -82,6 +82,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
     checkliste.checklisten?.checklistenBeschreibung || "";
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
     { label: "Checklisten", href: "/finanztools/checklisten" },
   ];

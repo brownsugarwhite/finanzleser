@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 
 interface ScriptConfig {
-  slotId: string;
-  siteKey: string;
-  designId: string;
-  productId: string;
+  type: string;
   scriptSrc: string;
+  [key: string]: string;
 }
 
 interface VergleichEmbedProps {
@@ -60,33 +58,67 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
-  // JS-Widget laden (finanzen.de etc.)
+  // JS-Widget laden
   useEffect(() => {
     if (!scriptConfig || !scriptContainerRef.current) return;
 
     const container = scriptContainerRef.current;
-    const slotDiv = document.createElement("div");
-    slotDiv.id = `fde-slot-am-${scriptConfig.slotId}`;
-    container.appendChild(slotDiv);
 
-    // fde Array initialisieren und Script laden
-    (window as Record<string, unknown>).fde = (window as Record<string, unknown>).fde || [];
-    const fde = (window as Record<string, unknown>).fde as Array<Record<string, string>[]>;
-    fde.push([
-      { slotId: scriptConfig.slotId },
-      { siteKey: scriptConfig.siteKey },
-      { designId: scriptConfig.designId },
-      { contentType: "singlepageVue" },
-      { startedAt: String(performance.now()) },
-      { productId: scriptConfig.productId },
-      { affiliateCampaignCode: "" },
-    ]);
+    if (scriptConfig.type === "finanzen-de") {
+      // finanzen.de Widget
+      const slotDiv = document.createElement("div");
+      slotDiv.id = `fde-slot-am-${scriptConfig.slotId}`;
+      container.appendChild(slotDiv);
 
-    const script = document.createElement("script");
-    script.async = true;
-    script.type = "module";
-    script.src = scriptConfig.scriptSrc;
-    container.appendChild(script);
+      (window as Record<string, unknown>).fde = (window as Record<string, unknown>).fde || [];
+      const fde = (window as Record<string, unknown>).fde as Array<Record<string, string>[]>;
+      fde.push([
+        { slotId: scriptConfig.slotId },
+        { siteKey: scriptConfig.siteKey },
+        { designId: scriptConfig.designId },
+        { contentType: "singlepageVue" },
+        { startedAt: String(performance.now()) },
+        { productId: scriptConfig.productId },
+        { affiliateCampaignCode: "" },
+      ]);
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.type = "module";
+      script.src = scriptConfig.scriptSrc;
+      container.appendChild(script);
+    } else if (scriptConfig.type === "covomo") {
+      // Covomo Widget
+      const widgetDiv = document.createElement("div");
+      widgetDiv.id = "covomo-iframe-widget";
+      widgetDiv.setAttribute("data-embed-type", scriptConfig.embedType || "iframe");
+      widgetDiv.setAttribute("data-type", scriptConfig.dataType || "");
+      widgetDiv.setAttribute("data-affiliate", scriptConfig.affiliate || "");
+      container.appendChild(widgetDiv);
+
+      const script = document.createElement("script");
+      script.src = scriptConfig.scriptSrc;
+      script.defer = true;
+      container.appendChild(script);
+    } else if (scriptConfig.type === "bussgeld") {
+      // Bußgeldrechner Web Component
+      const el = document.createElement("bussgeld-rechner");
+      el.className = "bussgeldrechner";
+      el.setAttribute("data-type", "abbiegen");
+      el.setAttribute("data-background-color", "#ffffff");
+      el.setAttribute("data-font-color", "#313c45");
+      el.setAttribute("data-button-background-color", "#3889cf");
+      el.setAttribute("data-button-font-color", "#ffffff");
+      el.setAttribute("data-border-color", "#e0e0e0");
+      el.setAttribute("data-show-dropdown", "1");
+      el.setAttribute("data-publisher-id", scriptConfig.publisherId || "");
+      container.appendChild(el);
+
+      const script = document.createElement("script");
+      script.src = scriptConfig.scriptSrc;
+      script.async = true;
+      container.appendChild(script);
+    }
 
     return () => {
       container.innerHTML = "";

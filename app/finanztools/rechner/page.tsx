@@ -33,6 +33,7 @@ export default async function RechnerPage() {
   ];
 
   const breadcrumbItems = [
+    { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
   ];
 

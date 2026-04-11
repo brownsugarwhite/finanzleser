@@ -22,7 +22,7 @@ export default async function SearchPage(props: SearchPageProps) {
     <>
       <main className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-6 pb-12">
-          <Breadcrumb items={[{ label: "Suche", href: "/suche" }]} />
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Suche", href: "/suche" }]} />
           {/* Search Hero */}
           <div className="mb-12">
             <h1 className="text-4xl font-bold mb-6">Suche</h1>

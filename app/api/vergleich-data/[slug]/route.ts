@@ -66,6 +66,35 @@ const VERGLEICH_DATA: Record<string, { iframeUrl?: string; scriptConfig?: Record
   "kfz-versicherung-vergleich": {
     iframeUrl: "https://kfz.check24.de/auto/rechner/web/rechner?appSettings=44b37067-61a3-408f-946c-72505fc56de4",
   },
+  "rentenversicherung-vergleich": {
+    iframeUrl: "https://form.partner-versicherung.de/383ebb4ad0b6436d692cfca05cef2c89/form.php?aid=1226&cid=2&partner_id=46986&insurance_id=2&scrollto=page&module=formv4",
+  },
+  "lebensversicherung-vergleich": {
+    scriptConfig: {
+      type: "finanzen-de",
+      slotId: "1721399007",
+      siteKey: "httpswwwfinanzleserde",
+      designId: "11912",
+      productId: "38",
+      scriptSrc: "https://vue-singlepage.am.fgrp.net/de/fdeam.nocache.module.js",
+    },
+  },
+  "photovoltaik-versicherung-vergleich": {
+    scriptConfig: {
+      type: "covomo",
+      embedType: "iframe",
+      dataType: "photovoltaik",
+      affiliate: "eyJhZmZpbGlhdGVfaWQiOiI1MDAwMDA3MjkxIiwiYSI6IjUwMDAwMDcyOTEifQ%3D%3D",
+      scriptSrc: "https://integrations.covomo.de/widget/covomoIframeWidget.js",
+    },
+  },
+  "bussgeldrechner-vergleich": {
+    scriptConfig: {
+      type: "bussgeld",
+      publisherId: "66dec4e85e311",
+      scriptSrc: "https://widget.bussgeldrechner.org/3",
+    },
+  },
 };
 
 export async function GET(
