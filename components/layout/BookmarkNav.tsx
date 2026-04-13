@@ -22,8 +22,8 @@ const GLASS_R = 30;
 
 const GLASS_STYLE = {
   background: "rgba(255,255,255,0.01)",
-  backdropFilter: "blur(3px) saturate(130%)",
-  WebkitBackdropFilter: "blur(3px) saturate(130%)",
+  backdropFilter: "blur(5px) brightness(1.15)",
+  WebkitBackdropFilter: "blur(5px) brightness(1.15)",
   border: "none",
   outline: "1px solid rgba(255,255,255,0.5)",
   outlineOffset: "-1px",
@@ -292,7 +292,7 @@ export default function BookmarkNav() {
     // Pill expands left (width) + shifts right (x) over burger
     tl.to(pill, { width: FULL_W, x: shiftX, duration: 0.8, ease: "back.out(1)" }, 0);
     tl.to(inner, { x: 0, duration: 0.8, ease: "back.out(1)" }, 0);
-    tl.to(body, { width: EXPANDED_BODY_W, duration: 0.8, ease: "back.out(1)" }, 0);
+    tl.to(body, { width: EXPANDED_BODY_W, duration: 0.8, ease: "back.out(1.3)" }, 0);
 
     // Height pulse (top relative to spacer, center vertically)
     const topCenter = (BTN_HEIGHT - GLASS_H) / 2;
@@ -500,7 +500,16 @@ export default function BookmarkNav() {
                 }}
               />
               <button
-                onClick={(e) => { if (searchOpen.current) { e.stopPropagation(); closeSearch(); } }}
+                onClick={(e) => {
+                  if (!searchOpen.current) return;
+                  e.stopPropagation();
+                  const query = searchInputRef.current?.value.trim();
+                  if (query) {
+                    window.location.href = `/suche?q=${encodeURIComponent(query)}`;
+                  } else {
+                    closeSearch();
+                  }
+                }}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center",
                   width: BTN_HEIGHT, height: BTN_HEIGHT, borderRadius: BTN_BORDER_RADIUS,
