@@ -18,7 +18,10 @@ export default function BookmarkNav() {
   const [lupeState, setLupeState] = useState<"default" | "hover" | "active">("default");
   const [burgerState, setBurgerState] = useState<"default" | "hover" | "active">("default");
 
-  const burgerLinesRef = useRef<HTMLDivElement[]>([]);
+  // Wrapper refs: handle rotation + Y movement for X animation
+  const wrapperRefs = useRef<HTMLDivElement[]>([]);
+  // Line refs: handle scaleX for reveal/hide animation
+  const lineRefs = useRef<HTMLDivElement[]>([]);
   const burgerBtnRef = useRef<HTMLButtonElement>(null);
   const burgerIsX = useRef(false);
   const burgerVisible = useRef(false);
@@ -27,15 +30,12 @@ export default function BookmarkNav() {
   // ScrollTrigger: Burger reveal/hide when TopNav leaves/enters viewport
   useEffect(() => {
     const createTrigger = (isInit = false) => {
-      // Find the TopNav element (works on both landing and regular pages)
-      // On landing page, prefer the landing-nav TopNav (the layout one is display:none)
       const navEl = (document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]")) as HTMLElement | null;
       if (!navEl || !burgerBtnRef.current) return;
 
-      // Only reset to hidden on first mount, not on recreate
       if (isInit) {
         gsap.set(burgerBtnRef.current, { width: 0, padding: 0, overflow: "hidden" });
-        burgerLinesRef.current.forEach((line) => {
+        lineRefs.current.forEach((line) => {
           if (line) gsap.set(line, { scaleX: 0 });
         });
       }
@@ -54,27 +54,12 @@ export default function BookmarkNav() {
       const btn = burgerBtnRef.current;
       if (!btn) return;
 
-      // Phase 1: Expand button
-      gsap.to(btn, {
-        width: BTN_HEIGHT,
-        paddingRight: 8,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+      gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.out" });
 
-      // Phase 2: Scale in burger lines with stagger (transformOrigin only for scaleX)
-      burgerLinesRef.current.forEach((line, i) => {
+      lineRefs.current.forEach((line, i) => {
         if (!line) return;
         gsap.to(line, {
-          scaleX: 1,
-          transformOrigin: "right center",
-          duration: 0.3,
-          delay: 0.15 + i * 0.08,
-          ease: "power2.out",
-          onComplete: () => {
-            // Restore transformOrigin for X rotation
-            gsap.set(line, { transformOrigin: "center" });
-          },
+          scaleX: 1, duration: 0.3, delay: 0.15 + i * 0.08, ease: "power2.out",
         });
       });
     };
@@ -85,44 +70,22 @@ export default function BookmarkNav() {
       const btn = burgerBtnRef.current;
       if (!btn) return;
 
-      // Phase 1: Scale out burger lines with stagger
-      burgerLinesRef.current.forEach((line, i) => {
+      lineRefs.current.forEach((line, i) => {
         if (!line) return;
-        gsap.to(line, {
-          scaleX: 0,
-          transformOrigin: "right center",
-          duration: 0.2,
-          delay: i * 0.08,
-          ease: "power2.out",
-        });
+        gsap.to(line, { scaleX: 0, duration: 0.2, delay: i * 0.08, ease: "power2.out" });
       });
 
-      // Phase 2: Collapse button after lines are done
-      gsap.to(btn, {
-        width: 0,
-        paddingRight: 0,
-        duration: 0.3,
-        delay: 0.25,
-        ease: "power2.out",
-      });
+      gsap.to(btn, { width: 0, paddingRight: 0, duration: 0.3, delay: 0.25, ease: "power2.out" });
     };
 
-    // Delay to ensure DOM is ready
     const raf = requestAnimationFrame(() => {
       createTrigger(true);
     });
 
-    // Kill/recreate pattern (like LogoBar) for ContentScaler compatibility
     const onKill = () => {
-      if (triggerRef.current) {
-        triggerRef.current.kill();
-        triggerRef.current = null;
-      }
+      if (triggerRef.current) { triggerRef.current.kill(); triggerRef.current = null; }
     };
-
-    const onRecreate = () => {
-      createTrigger();
-    };
+    const onRecreate = () => { createTrigger(); };
 
     window.addEventListener("scroll-anim-kill", onKill);
     window.addEventListener("scroll-anim-recreate", onRecreate);
@@ -135,45 +98,148 @@ export default function BookmarkNav() {
     };
   }, []);
 
+  // X animation: operates on WRAPPERS (rotation + Y), not lines
   const animateToX = useCallback(() => {
     if (burgerIsX.current) return;
     burgerIsX.current = true;
-    const lines = burgerLinesRef.current;
-    if (lines.length < 3) return;
-    const [top, mid, bot] = lines;
+    const w = wrapperRefs.current;
+    if (w.length < 3) return;
+    const [top, mid, bot] = w;
     const tl = gsap.timeline();
     tl.to(top, { y: BURGER_GAP + 2, duration: 0.2, ease: "power2.inOut" }, 0);
     tl.to(bot, { y: -(BURGER_GAP + 2), duration: 0.2, ease: "power2.inOut" }, 0);
-    tl.to(mid, { opacity: 0, scaleX: 0, duration: 0.15, ease: "power2.in" }, 0);
+    tl.to(mid, { opacity: 0, duration: 0.15, ease: "power2.in" }, 0);
     tl.to(top, { rotation: 45, duration: 0.25, ease: "power2.out" }, 0.15);
     tl.to(bot, { rotation: -45, duration: 0.25, ease: "power2.out" }, 0.15);
   }, []);
 
+  // Burger animation: operates on WRAPPERS
   const animateToBurger = useCallback(() => {
     if (!burgerIsX.current) return;
     burgerIsX.current = false;
-    const lines = burgerLinesRef.current;
-    if (lines.length < 3) return;
-    const [top, mid, bot] = lines;
+    const w = wrapperRefs.current;
+    if (w.length < 3) return;
+    const [top, mid, bot] = w;
     const tl = gsap.timeline();
     tl.to(top, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
     tl.to(bot, { rotation: 0, duration: 0.2, ease: "power2.inOut" }, 0);
     tl.to(top, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
-    tl.to(mid, { opacity: 1, scaleX: 1, duration: 0, ease: "power2.out" }, 0.15);
+    tl.to(mid, { opacity: 1, duration: 0.15, ease: "power2.out" }, 0.15);
     tl.to(bot, { y: 0, duration: 0.2, ease: "power2.out" }, 0.15);
   }, []);
 
+  // Reveal as X: pre-set wrappers to X positions, then scale in lines from right
+  const revealAsX = useCallback(() => {
+    const btn = burgerBtnRef.current;
+    const w = wrapperRefs.current;
+    const lines = lineRefs.current;
+    if (!btn || w.length < 3 || lines.length < 3) return;
+    const [wTop, wMid, wBot] = w;
+
+    burgerVisible.current = true;
+    burgerIsX.current = true;
+
+    // Pre-set wrappers to X formation (instant, no animation)
+    gsap.set(wTop, { y: BURGER_GAP + 2, rotation: 45 });
+    gsap.set(wMid, { opacity: 0 });
+    gsap.set(wBot, { y: -(BURGER_GAP + 2), rotation: -45 });
+
+    // Reset lines to hidden
+    lines.forEach((line) => { if (line) gsap.set(line, { scaleX: 0 }); });
+
+    // Expand button
+    gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.out" });
+
+    // Scale in lines from right (only top and bottom visible since mid wrapper is opacity 0)
+    [lines[0], lines[2]].forEach((line, i) => {
+      if (!line) return;
+      gsap.to(line, {
+        scaleX: 1, duration: 0.3, delay: 0.15 + i * 0.08, ease: "power2.out",
+      });
+    });
+  }, []);
+
+  // Hide as X: scale out lines, collapse button, reset wrappers
+  const hideAsX = useCallback(() => {
+    const btn = burgerBtnRef.current;
+    const lines = lineRefs.current;
+    const w = wrapperRefs.current;
+    if (!btn || lines.length < 3) return;
+
+    burgerIsX.current = false;
+    burgerVisible.current = false;
+
+    // Scale out visible lines
+    [lines[0], lines[2]].forEach((line, i) => {
+      if (!line) return;
+      gsap.to(line, { scaleX: 0, duration: 0.2, delay: i * 0.08, ease: "power2.out" });
+    });
+
+    // Collapse button, then reset wrappers
+    gsap.to(btn, {
+      width: 0, paddingRight: 0, duration: 0.3, delay: 0.2, ease: "power2.out",
+      onComplete: () => {
+        w.forEach((wr) => { if (wr) gsap.set(wr, { rotation: 0, y: 0, opacity: 1 }); });
+      },
+    });
+  }, []);
+
+  // Animate burger to X when megamenu opens via TopNav
+  useEffect(() => {
+    const handleMenuOpened = (e: Event) => {
+      const label = (e as CustomEvent).detail?.label;
+      if (!label) return;
+
+      if (burgerVisible.current && !burgerIsX.current) {
+        animateToX();
+      } else if (!burgerVisible.current) {
+        revealAsX();
+      }
+    };
+    window.addEventListener("menu-opened", handleMenuOpened);
+    return () => window.removeEventListener("menu-opened", handleMenuOpened);
+  }, [animateToX, revealAsX]);
+
+  // Reset burger when menu is closed
+  useEffect(() => {
+    const handleMenuClosed = () => {
+      if (!burgerIsX.current) return;
+
+      const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
+      const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
+
+      if (navIsHidden) {
+        // Scrolled down: keep burger visible, just go back to lines
+        animateToBurger();
+      } else {
+        // Top of page: hide burger completely
+        hideAsX();
+      }
+    };
+    window.addEventListener("menu-closed", handleMenuClosed);
+    return () => window.removeEventListener("menu-closed", handleMenuClosed);
+  }, [animateToBurger, hideAsX]);
+
   const toggleBurger = useCallback(() => {
     if (burgerIsX.current) {
-      animateToBurger();
+      const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
+      const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
+
+      if (navIsHidden) {
+        // Scrolled down: animate back to burger lines, stay visible
+        animateToBurger();
+      } else {
+        // Top of page: slide out completely
+        hideAsX();
+      }
       window.dispatchEvent(new CustomEvent("burger-closed"));
       window.dispatchEvent(new CustomEvent("menu-closed"));
     } else {
       animateToX();
-      window.dispatchEvent(new CustomEvent("burger-opened", { detail: { label: "Menü" } }));
+      window.dispatchEvent(new CustomEvent("burger-opened"));
       window.dispatchEvent(new CustomEvent("menu-opened"));
     }
-  }, [animateToX, animateToBurger]);
+  }, [animateToX, animateToBurger, hideAsX]);
 
   const getButtonBackground = (state: "default" | "hover" | "active") => {
     if (state === "active") return "var(--color-btn-active)";
@@ -278,7 +344,7 @@ export default function BookmarkNav() {
           />
         </button>
 
-        {/* Burger Button */}
+        {/* Burger Button — wrapper (rotation/Y) + inner line (scaleX) */}
         <button
           ref={burgerBtnRef}
           onClick={toggleBurger}
@@ -302,39 +368,29 @@ export default function BookmarkNav() {
             ...getButtonStyle(burgerState),
           }}
         >
-          <div
-            ref={(el) => { if (el) burgerLinesRef.current[0] = el; }}
-            style={{
-              width: BURGER_LINE_W,
-              height: 2,
-              background: "white",
-              borderRadius: 1,
-              transformOrigin: "center",
-              transform: "scaleX(0)",
-            }}
-          />
-          <div
-            ref={(el) => { if (el) burgerLinesRef.current[1] = el; }}
-            style={{
-              width: BURGER_LINE_W,
-              height: 2,
-              background: "white",
-              borderRadius: 1,
-              transformOrigin: "center",
-              transform: "scaleX(0)",
-            }}
-          />
-          <div
-            ref={(el) => { if (el) burgerLinesRef.current[2] = el; }}
-            style={{
-              width: BURGER_LINE_W,
-              height: 2,
-              background: "white",
-              borderRadius: 1,
-              transformOrigin: "center",
-              transform: "scaleX(0)",
-            }}
-          />
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              ref={(el) => { if (el) wrapperRefs.current[i] = el; }}
+              style={{
+                width: BURGER_LINE_W,
+                height: 2,
+                transformOrigin: "center",
+              }}
+            >
+              <div
+                ref={(el) => { if (el) lineRefs.current[i] = el; }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  background: "white",
+                  borderRadius: 1,
+                  transformOrigin: "right center",
+                  transform: "scaleX(0)",
+                }}
+              />
+            </div>
+          ))}
         </button>
       </div>
     </div>

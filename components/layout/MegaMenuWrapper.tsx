@@ -1,38 +1,76 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
 import { useNavItems } from "@/lib/NavContext";
 import MegaMenu from "./MegaMenu";
+import TopNav from "./TopNav";
 
 export default function MegaMenuWrapper() {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [openedViaBurger, setOpenedViaBurger] = useState(false);
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const burgerNavRef = useRef<HTMLDivElement>(null);
+
+  // Track last open category so burger can reopen it
+  const lastCategoryRef = useRef<string | null>(null);
 
   useEffect(() => {
     const handleOpen = (e: Event) => {
-      const label = (e as CustomEvent).detail?.label;
+      const detail = (e as CustomEvent).detail;
+      const label = detail?.label;
       if (!label) return;
 
       // Find the nav item with this label that has a megamenu
       const item = NAV_ITEMS.find((n) => n.label === label && n.megamenu);
       if (item) {
+        // Keep burger mode when switching via burger TopNav, otherwise disable
+        if (!detail.fromBurgerNav) setOpenedViaBurger(false);
         setOpenCategory((prev) => (prev === label ? null : label));
       }
     };
 
+    const handleBurgerOpened = () => {
+      // Open last active category, or first one as default
+      const target = lastCategoryRef.current || NAV_ITEMS[0]?.label || null;
+      setOpenedViaBurger(true);
+      setOpenCategory(target);
+    };
+
     const handleClose = () => {
       setOpenCategory(null);
+      setOpenedViaBurger(false);
     };
 
     window.addEventListener("menu-opened", handleOpen);
+    window.addEventListener("burger-opened", handleBurgerOpened);
     window.addEventListener("menu-closed", handleClose);
     return () => {
       window.removeEventListener("menu-opened", handleOpen);
+      window.removeEventListener("burger-opened", handleBurgerOpened);
       window.removeEventListener("menu-closed", handleClose);
     };
   }, [NAV_ITEMS]);
+
+  // Remember last open category
+  useEffect(() => {
+    if (openCategory) {
+      lastCategoryRef.current = openCategory;
+    }
+  }, [openCategory]);
+
+  // Slide in burger TopNav
+  useEffect(() => {
+    if (openedViaBurger && visible && burgerNavRef.current) {
+      gsap.fromTo(
+        burgerNavRef.current,
+        { y: -60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  }, [openedViaBurger, visible]);
 
   const isOpen = !!openCategory;
 
@@ -41,8 +79,12 @@ export default function MegaMenuWrapper() {
     if (!isOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      const target = e.target as HTMLElement;
+      // Ignore clicks on nav pills (TopNav buttons) — they handle their own events
+      if (target.closest?.("[data-topnav]")) return;
+      if (wrapperRef.current && !wrapperRef.current.contains(target)) {
         setOpenCategory(null);
+        setOpenedViaBurger(false);
         window.dispatchEvent(new CustomEvent("menu-closed"));
       }
     };
@@ -86,6 +128,7 @@ export default function MegaMenuWrapper() {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpenCategory(null);
+        setOpenedViaBurger(false);
         window.dispatchEvent(new CustomEvent("menu-closed"));
       }
     };
@@ -100,6 +143,7 @@ export default function MegaMenuWrapper() {
 
   const closeAll = () => {
     setOpenCategory(null);
+    setOpenedViaBurger(false);
     window.dispatchEvent(new CustomEvent("menu-closed"));
   };
 
@@ -110,19 +154,48 @@ export default function MegaMenuWrapper() {
         position: "fixed",
         left: 0,
         right: 0,
-        top: 73,
+        top: openedViaBurger ? 0 : 73,
         zIndex: 57,
         opacity: visible ? 1 : 0,
         transition: "opacity 0.5s ease",
       }}
     >
-      <MegaMenu
-        activeCategory={activeItem.href.substring(1)}
-        activeCategoryLabel={activeItem.label}
-        items={activeItem.submenu}
-        mainCategoryHref={activeItem.href}
-        onClose={closeAll}
-      />
+      {/* Burger TopNav – slides in from top when opened via burger */}
+      {openedViaBurger && (
+        <div
+          ref={burgerNavRef}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: 33,
+            height: 83,
+            boxSizing: "border-box",
+            pointerEvents: "auto",
+          }}
+        >
+          <TopNav
+            className="burger-nav"
+            defaultActive={openCategory || undefined}
+            style={{
+              position: "relative",
+              zIndex: 3,
+              marginTop: 0,
+              pointerEvents: "auto",
+            }}
+          />
+        </div>
+      )}
+
+      {/* Megamenu content */}
+      <div style={openedViaBurger ? { marginTop: -10 } : undefined}>
+        <MegaMenu
+          activeCategory={activeItem.href.substring(1)}
+          activeCategoryLabel={activeItem.label}
+          items={activeItem.submenu}
+          mainCategoryHref={activeItem.href}
+          onClose={closeAll}
+        />
+      </div>
     </div>
   );
 }

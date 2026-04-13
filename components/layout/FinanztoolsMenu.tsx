@@ -36,18 +36,19 @@ export default function FinanztoolsMenu() {
   useEffect(() => {
     const handleToggle = () => {
       setOpen((prev) => {
-        if (!prev) {
-          // Opening: close any regular megamenu, trigger blur
-          window.dispatchEvent(new CustomEvent("menu-closed"));
-          // Small delay so the regular menu closes first
-          requestAnimationFrame(() => {
-            window.dispatchEvent(new CustomEvent("menu-opened"));
-          });
-          return true;
-        } else {
-          window.dispatchEvent(new CustomEvent("menu-closed"));
-          return false;
-        }
+        const opening = !prev;
+        // Dispatch events outside of setState to avoid updating other components mid-render
+        queueMicrotask(() => {
+          if (opening) {
+            window.dispatchEvent(new CustomEvent("menu-closed"));
+            requestAnimationFrame(() => {
+              window.dispatchEvent(new CustomEvent("menu-opened"));
+            });
+          } else {
+            window.dispatchEvent(new CustomEvent("menu-closed"));
+          }
+        });
+        return opening;
       });
     };
 

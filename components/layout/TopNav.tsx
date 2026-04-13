@@ -9,18 +9,37 @@ import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/hooks/useNavPill";
 import Spark from "@/components/ui/Spark";
 
-export default function TopNav({ className = "sticky-nav", style }: { className?: string; style?: React.CSSProperties }) {
+export default function TopNav({ className = "sticky-nav", style, defaultActive }: { className?: string; style?: React.CSSProperties; defaultActive?: string }) {
   const navItems = useNavItems();
   const navRef = useRef<HTMLDivElement>(null);
+  const didActivate = useRef(false);
+
+  const isInitialActivation = useRef(false);
 
   const pill = useNavPill({
     items: navItems,
     hasLens: true,
     onActivate: (label) => {
-      scrollToNav();
-      window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label } }));
+      // Skip event dispatch on initial programmatic activation
+      if (isInitialActivation.current) {
+        isInitialActivation.current = false;
+        return;
+      }
+      if (!defaultActive) scrollToNav();
+      window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label, fromBurgerNav: !!defaultActive } }));
     },
   });
+
+  // Activate pill programmatically on mount when defaultActive is set
+  useEffect(() => {
+    if (defaultActive && !didActivate.current) {
+      didActivate.current = true;
+      requestAnimationFrame(() => {
+        isInitialActivation.current = true;
+        pill.activateItem(defaultActive);
+      });
+    }
+  }, [defaultActive, pill]);
 
   // Listen for menu-closed to reset pill
   useEffect(() => {

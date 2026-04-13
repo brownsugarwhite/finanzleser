@@ -362,8 +362,8 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
 
     const { x, w } = pillPos(containerRef.current.getBoundingClientRect(), btn.getBoundingClientRect());
     gsap.set(pillRef.current, { x, width: w, opacity: 1, height: PILL_H, borderRadius: PILL_R });
-    if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
-    if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });
+    if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w, opacity: 1, y: 0 });
+    if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w, opacity: 1, y: 0 });
     setPillActive(true);
     onActivate?.(label);
   }, [setPillActive, onActivate]);
