@@ -53,6 +53,7 @@ export default function BookmarkNav() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSpacerRef = useRef<HTMLDivElement>(null);
   const searchOpen = useRef(false);
+
   const innerStartX = useRef(0);
 
   /* ══════════════════════════════════════════════════
@@ -287,7 +288,7 @@ export default function BookmarkNav() {
 
     const tl = gsap.timeline();
 
-    const EXPANDED_BODY_W = 330; // ← hier anpassen
+    const EXPANDED_BODY_W = 310; // ← hier anpassen
 
     // Pill expands left (width) + shifts right (x) over burger
     tl.to(pill, { width: FULL_W, x: shiftX, duration: 0.8, ease: "back.out(1)" }, 0);
@@ -299,13 +300,11 @@ export default function BookmarkNav() {
     tl.to(pill, { height: GLASS_H, top: topCenter, borderRadius: GLASS_R, duration: 0.15, ease: "power2.out" }, 0);
     tl.to(pill, { height: BTN_HEIGHT, top: 0, borderRadius: BTN_BORDER_RADIUS, duration: 0.45, ease: "power3.out" }, 0.35);
 
-    // Glass → green
+    // Glass → green (keep backdrop effects, remove shadows + outline)
     tl.to(pill, {
       background: PRIMARY_LIGHT,
-      backdropFilter: "blur(0px)",
-      WebkitBackdropFilter: "blur(0px)",
-      outline: "1px solid transparent",
       boxShadow: "none",
+      outline: "1px solid transparent",
       duration: 0.3, ease: "power2.out",
       onComplete: () => searchInputRef.current?.focus(),
     }, 0.45);
@@ -376,6 +375,15 @@ export default function BookmarkNav() {
     };
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [closeSearch]);
+
+  // Close on scroll
+  useEffect(() => {
+    const onScroll = () => {
+      if (searchOpen.current) closeSearch();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [closeSearch]);
 
   /* ══════════════════════════════════════════════════
@@ -452,6 +460,10 @@ export default function BookmarkNav() {
           <div
             ref={searchPillRef}
             onClick={() => { if (!searchOpen.current) openSearch(); }}
+            onMouseEnter={(e) => { if (!searchOpen.current) e.currentTarget.style.background = getButtonBackground("hover"); }}
+            onMouseLeave={(e) => { if (!searchOpen.current) e.currentTarget.style.background = "transparent"; }}
+            onMouseDown={(e) => { if (!searchOpen.current) e.currentTarget.style.background = getButtonBackground("active"); }}
+            onMouseUp={(e) => { if (!searchOpen.current) e.currentTarget.style.background = getButtonBackground("hover"); }}
             style={{
               position: "absolute",
               right: 0,
@@ -462,6 +474,7 @@ export default function BookmarkNav() {
               overflow: "hidden",
               cursor: "pointer",
               background: "transparent",
+              transition: "background 0.15s ease",
               zIndex: 3,
             }}
           >
@@ -496,7 +509,7 @@ export default function BookmarkNav() {
                   color: "rgba(255,255,255,0)",
                   flexShrink: 0, border: "none",
                   background: "transparent", outline: "none",
-                  width: 230, caretColor: "white",
+                  width: 215, caretColor: "white",
                 }}
               />
               <button
