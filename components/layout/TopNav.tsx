@@ -55,6 +55,7 @@ export default function TopNav({ className = "sticky-nav", style }: { className?
     <>
       <div
         ref={navRef}
+        data-topnav
         className={className}
         style={{
           width: "100%",

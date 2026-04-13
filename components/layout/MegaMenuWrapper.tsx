@@ -34,9 +34,11 @@ export default function MegaMenuWrapper() {
     };
   }, [NAV_ITEMS]);
 
+  const isOpen = !!openCategory;
+
   // Close on outside click
   useEffect(() => {
-    if (!openCategory) return;
+    if (!isOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -54,11 +56,11 @@ export default function MegaMenuWrapper() {
       clearTimeout(timer);
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [openCategory]);
+  }, [isOpen]);
 
   // Fade in only on first open, not on category switch
   useEffect(() => {
-    if (openCategory) {
+    if (isOpen) {
       if (!visible) {
         const timer = setTimeout(() => setVisible(true), 200);
         return () => clearTimeout(timer);
@@ -66,21 +68,21 @@ export default function MegaMenuWrapper() {
     } else {
       setVisible(false);
     }
-  }, [openCategory]);
+  }, [isOpen]);
 
   // Lock scroll when open
   useEffect(() => {
-    if (openCategory) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [openCategory]);
+  }, [isOpen]);
 
   // Close on Escape
   useEffect(() => {
-    if (!openCategory) return;
+    if (!isOpen) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpenCategory(null);
@@ -89,12 +91,17 @@ export default function MegaMenuWrapper() {
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
-  }, [openCategory]);
+  }, [isOpen]);
 
-  if (!openCategory) return null;
+  if (!isOpen) return null;
 
   const activeItem = NAV_ITEMS.find((n) => n.label === openCategory);
   if (!activeItem?.submenu) return null;
+
+  const closeAll = () => {
+    setOpenCategory(null);
+    window.dispatchEvent(new CustomEvent("menu-closed"));
+  };
 
   return (
     <div
@@ -114,10 +121,7 @@ export default function MegaMenuWrapper() {
         activeCategoryLabel={activeItem.label}
         items={activeItem.submenu}
         mainCategoryHref={activeItem.href}
-        onClose={() => {
-          setOpenCategory(null);
-          window.dispatchEvent(new CustomEvent("menu-closed"));
-        }}
+        onClose={closeAll}
       />
     </div>
   );

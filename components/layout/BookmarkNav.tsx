@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BURGER_LINE_W = 20;
 const BURGER_GAP = 5;
@@ -17,7 +19,121 @@ export default function BookmarkNav() {
   const [burgerState, setBurgerState] = useState<"default" | "hover" | "active">("default");
 
   const burgerLinesRef = useRef<HTMLDivElement[]>([]);
+  const burgerBtnRef = useRef<HTMLButtonElement>(null);
   const burgerIsX = useRef(false);
+  const burgerVisible = useRef(false);
+  const triggerRef = useRef<ScrollTrigger | null>(null);
+
+  // ScrollTrigger: Burger reveal/hide when TopNav leaves/enters viewport
+  useEffect(() => {
+    const createTrigger = (isInit = false) => {
+      // Find the TopNav element (works on both landing and regular pages)
+      // On landing page, prefer the landing-nav TopNav (the layout one is display:none)
+      const navEl = (document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]")) as HTMLElement | null;
+      if (!navEl || !burgerBtnRef.current) return;
+
+      // Only reset to hidden on first mount, not on recreate
+      if (isInit) {
+        gsap.set(burgerBtnRef.current, { width: 0, padding: 0, overflow: "hidden" });
+        burgerLinesRef.current.forEach((line) => {
+          if (line) gsap.set(line, { scaleX: 0 });
+        });
+      }
+
+      triggerRef.current = ScrollTrigger.create({
+        trigger: navEl,
+        start: "bottom top",
+        onEnter: () => revealBurger(),
+        onLeaveBack: () => hideBurger(),
+      });
+    };
+
+    const revealBurger = () => {
+      if (burgerVisible.current) return;
+      burgerVisible.current = true;
+      const btn = burgerBtnRef.current;
+      if (!btn) return;
+
+      // Phase 1: Expand button
+      gsap.to(btn, {
+        width: BTN_HEIGHT,
+        paddingRight: 8,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      // Phase 2: Scale in burger lines with stagger (transformOrigin only for scaleX)
+      burgerLinesRef.current.forEach((line, i) => {
+        if (!line) return;
+        gsap.to(line, {
+          scaleX: 1,
+          transformOrigin: "right center",
+          duration: 0.3,
+          delay: 0.15 + i * 0.08,
+          ease: "power2.out",
+          onComplete: () => {
+            // Restore transformOrigin for X rotation
+            gsap.set(line, { transformOrigin: "center" });
+          },
+        });
+      });
+    };
+
+    const hideBurger = () => {
+      if (!burgerVisible.current) return;
+      burgerVisible.current = false;
+      const btn = burgerBtnRef.current;
+      if (!btn) return;
+
+      // Phase 1: Scale out burger lines with stagger
+      burgerLinesRef.current.forEach((line, i) => {
+        if (!line) return;
+        gsap.to(line, {
+          scaleX: 0,
+          transformOrigin: "right center",
+          duration: 0.2,
+          delay: i * 0.08,
+          ease: "power2.out",
+        });
+      });
+
+      // Phase 2: Collapse button after lines are done
+      gsap.to(btn, {
+        width: 0,
+        paddingRight: 0,
+        duration: 0.3,
+        delay: 0.25,
+        ease: "power2.out",
+      });
+    };
+
+    // Delay to ensure DOM is ready
+    const raf = requestAnimationFrame(() => {
+      createTrigger(true);
+    });
+
+    // Kill/recreate pattern (like LogoBar) for ContentScaler compatibility
+    const onKill = () => {
+      if (triggerRef.current) {
+        triggerRef.current.kill();
+        triggerRef.current = null;
+      }
+    };
+
+    const onRecreate = () => {
+      createTrigger();
+    };
+
+    window.addEventListener("scroll-anim-kill", onKill);
+    window.addEventListener("scroll-anim-recreate", onRecreate);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      if (triggerRef.current) triggerRef.current.kill();
+      window.removeEventListener("scroll-anim-kill", onKill);
+      window.removeEventListener("scroll-anim-recreate", onRecreate);
+    };
+  }, []);
 
   const animateToX = useCallback(() => {
     if (burgerIsX.current) return;
@@ -105,8 +221,10 @@ export default function BookmarkNav() {
         }}
       >
         {/* Finanztools Button */}
-        <Link
-          href="/finanztools"
+        <button
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent("finanztools-toggle"));
+          }}
           onMouseEnter={() => setFinanztoolsState("hover")}
           onMouseLeave={() => setFinanztoolsState("default")}
           onMouseDown={() => setFinanztoolsState("active")}
@@ -131,7 +249,7 @@ export default function BookmarkNav() {
           }}
         >
           Finanztools
-        </Link>
+        </button>
 
         {/* Lupe Button */}
         <button
@@ -162,6 +280,7 @@ export default function BookmarkNav() {
 
         {/* Burger Button */}
         <button
+          ref={burgerBtnRef}
           onClick={toggleBurger}
           onMouseEnter={() => setBurgerState("hover")}
           onMouseLeave={() => setBurgerState("default")}
@@ -172,13 +291,14 @@ export default function BookmarkNav() {
             flexDirection: "column",
             alignItems: "flex-end",
             justifyContent: "center",
-            width: BTN_HEIGHT,
+            width: 0,
             height: BTN_HEIGHT,
             borderRadius: BTN_BORDER_RADIUS,
             border: "none",
             cursor: "pointer",
             gap: BURGER_GAP,
-            paddingRight: 8,
+            paddingRight: 0,
+            overflow: "hidden",
             ...getButtonStyle(burgerState),
           }}
         >
@@ -190,6 +310,7 @@ export default function BookmarkNav() {
               background: "white",
               borderRadius: 1,
               transformOrigin: "center",
+              transform: "scaleX(0)",
             }}
           />
           <div
@@ -200,6 +321,7 @@ export default function BookmarkNav() {
               background: "white",
               borderRadius: 1,
               transformOrigin: "center",
+              transform: "scaleX(0)",
             }}
           />
           <div
@@ -210,6 +332,7 @@ export default function BookmarkNav() {
               background: "white",
               borderRadius: 1,
               transformOrigin: "center",
+              transform: "scaleX(0)",
             }}
           />
         </button>

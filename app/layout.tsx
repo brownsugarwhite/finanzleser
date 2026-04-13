@@ -8,6 +8,7 @@ import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
 import ContentScaler from "@/components/layout/ContentScaler";
 import MegaMenuWrapper from "@/components/layout/MegaMenuWrapper";
+import FinanztoolsMenu from "@/components/layout/FinanztoolsMenu";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import MayaIcon from "@/components/ui/MayaIcon";
@@ -64,6 +65,7 @@ export default async function RootLayout({
           </div>
           <ContentScaler />
           <MegaMenuWrapper />
+          <FinanztoolsMenu />
           <div className="scalable-content" style={{ position: "relative" }}>
             {children}
           </div>
