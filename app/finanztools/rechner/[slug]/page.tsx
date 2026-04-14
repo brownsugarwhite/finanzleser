@@ -140,7 +140,7 @@ export default async function RechnerDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1000 }} className="mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 
@@ -177,10 +177,8 @@ export default async function RechnerDetailPage({ params }: Props) {
             </p>
           )}
 
-          {/* Rechner — identisches Layout wie im Artikel */}
-          <div className="article-tool-embed">
-            <RechnerEmbed slug={rechner.slug} />
-          </div>
+          {/* Rechner — volle Breite */}
+          <RechnerEmbed slug={rechner.slug} />
 
           {/* Disclaimer */}
           <div className="mt-12 pt-8 border-t border-gray-200">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import InteraktiveCheckliste from "@/components/checkliste/InteraktiveCheckliste";
+import ChecklisteDetailWrapper from "@/components/checkliste/ChecklisteDetailWrapper";
 import { getAllChecklisten, getChecklisteBySlug } from "@/lib/wordpress";
 import { parsePDF } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
@@ -90,7 +91,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 
@@ -139,31 +140,26 @@ export default async function ChecklisteDetailPage({ params }: Props) {
 
           {/* 2-Column: Visual links + Slider rechts */}
           {parsedData && parsedData.sektionen.length > 0 ? (
-            <div className="checkliste-2col">
-              {/* Links: Visual Platzhalter */}
-              <div className="checkliste-visual">
-                <div style={{
-                  width: "100%",
-                  aspectRatio: "3 / 4",
-                  background: "var(--color-bg-subtle)",
-                  borderRadius: 16,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "var(--color-text-medium)",
-                  fontSize: 14,
-                  position: "sticky",
-                  top: 100,
-                }}>
-                  Visual
+            <ChecklisteDetailWrapper>
+              <div style={{ display: "flex", width: "100%", gap: 48, alignItems: "stretch" }}>
+                {/* Links: Visual 40% */}
+                <div className="checkliste-visual" style={{ width: "40%", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+                  <div className="checkliste-detail-visual" style={{
+                    width: "100%",
+                    flex: 1,
+                    backgroundColor: "rgba(0, 0, 0, 0.08)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                  }} />
+                </div>
+
+                {/* Rechts: Checkliste 60% */}
+                <div style={{ width: "60%", minWidth: 0, overflow: "hidden" }}>
+                  <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
                 </div>
               </div>
-
-              {/* Rechts: Slider */}
-              <div>
-                <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
-              </div>
-            </div>
+            </ChecklisteDetailWrapper>
           ) : (
             <div className="py-8 text-center text-gray-500">
               <p>

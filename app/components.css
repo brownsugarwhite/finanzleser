@@ -431,7 +431,6 @@ a.megamenu-link:hover {
 .checkliste-2col {
   display: flex;
   width: 100%;
-  max-width: 1200px;
   gap: 48px;
 }
 .checkliste-visual {
@@ -453,7 +452,7 @@ a.megamenu-link:hover {
   
 }
 .checkliste-2col .checkliste-container {
-  width: calc(100% - 350px - 48px);
+  width: 100%;
 }
 
 /* Progress – ersetzt den lila Streifen unter dem Titel */
@@ -467,6 +466,7 @@ a.megamenu-link:hover {
   justify-content: space-between;
   font-size: 12px;
   color: var(--color-text-medium);
+  margin-Top: 10px;
 }
 .checkliste-progress-track {
   height: 5px;
@@ -487,8 +487,9 @@ a.megamenu-link:hover {
 .checkliste-viewport {
   overflow: hidden;
   transition: height 0.3s ease;
-  margin-top: 17px;
-  padding: 20px 20px;
+  margin-top: 23px;
+  margin-bottom: 5px;
+  padding: 0px 20px;
 }
 .checkliste-slides {
   display: flex;
@@ -503,6 +504,58 @@ a.megamenu-link:hover {
   display: flex;
   flex-direction: column;  
 }
+/* Finaler Slide – Ausgefüllte PDF */
+.checkliste-final-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+  min-height: 300px;
+}
+
+.checkliste-final-title {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+
+.checkliste-final-text {
+  font-size: 16px;
+  color: var(--color-text-medium);
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.checkliste-btn-final {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: 2px solid var(--color-brand);
+  background: transparent;
+  color: var(--color-brand);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.checkliste-btn-final:hover:not(:disabled) {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+.checkliste-btn-final:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .checkliste-slide-titel {
   font-size: 18px;
   font-weight: 600;
@@ -743,7 +796,7 @@ a.megamenu-link:hover {
 .checkliste-layout {
   display: flex;
   gap: 50px;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
 }
 
@@ -753,7 +806,7 @@ a.megamenu-link:hover {
 }
 
 .checkliste-visual-col {
-  width: 400px;
+  width: 300px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -765,7 +818,9 @@ a.megamenu-link:hover {
 
 .checkliste-visual {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

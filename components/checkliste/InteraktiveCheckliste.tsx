@@ -151,7 +151,10 @@ export default function InteraktiveCheckliste({
     <div className="checkliste-container">
       {/* Titel + Progress – außerhalb des Sliders, fix */}
       <h3 className="checkliste-slide-titel">
-        {data.sektionen[currentSlide]?.titel}
+        {currentSlide < data.sektionen.length
+          ? data.sektionen[currentSlide]?.titel
+          : "Checkliste abschließen"
+        }
       </h3>
       <ChecklisteProgress checked={checkedCount} total={totalPunkte} />
 
@@ -167,12 +170,34 @@ export default function InteraktiveCheckliste({
               onToggle={togglePunkt}
             />
           ))}
+          {/* Letzter Slide: Ausgefüllte PDF herunterladen */}
+          <div className="checkliste-slide">
+            <div className="checkliste-final-slide">
+              <h3 className="checkliste-final-title">Ihre ausgefüllte Checkliste</h3>
+              <p className="checkliste-final-text">
+                {checkedCount > 0
+                  ? `Sie haben ${checkedCount} von ${totalPunkte} Punkten abgehakt. Laden Sie Ihre persönliche Checkliste als PDF herunter.`
+                  : `Haken Sie die erledigten Punkte ab und laden Sie anschließend Ihre persönliche Checkliste herunter.`
+                }
+              </p>
+              <button
+                onClick={handleDownloadChecked}
+                disabled={generating || checkedCount === 0}
+                className="checkliste-btn-final"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {generating ? "Wird erstellt..." : "Ausgefüllte Checkliste herunterladen"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       <SliderNav
         current={currentSlide}
-        total={data.sektionen.length}
+        total={data.sektionen.length + 1}
         onPrev={scrollPrev}
         onNext={scrollNext}
         onGoTo={scrollTo}
@@ -180,7 +205,7 @@ export default function InteraktiveCheckliste({
         nextLabel="Nächste Seite"
       />
 
-      {/* Buttons – via Portal in die Visual-Spalte */}
+      {/* Download-Button (leere PDF) – via Portal ins Visual */}
       {actionsContainer && createPortal(
         <div className="checkliste-actions">
           <a
@@ -195,18 +220,6 @@ export default function InteraktiveCheckliste({
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
           </a>
-          {checkedCount > 0 && (
-            <button
-              onClick={handleDownloadChecked}
-              disabled={generating}
-              className="checkliste-btn checkliste-btn--print"
-              title="Ausgefüllte PDF speichern"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </button>
-          )}
         </div>,
         actionsContainer
       )}

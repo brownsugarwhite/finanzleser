@@ -26,9 +26,10 @@ export default function ChecklisteEmbed({ slug, formHeader }: ChecklisteEmbedPro
         </div>
         <div className="checkliste-visual-col">
           <div className="checkliste-visual">
-            <RechnerPlaceholder />
+            <RechnerPlaceholder>
+              <div className="checkliste-actions-portal" ref={containerRefCallback} style={{ display: "flex", justifyContent: "flex-end", padding: "12px 16px" }} />
+            </RechnerPlaceholder>
           </div>
-          <div className="checkliste-actions-portal" ref={containerRefCallback} />
         </div>
       </div>
     </ChecklisteLayoutContext.Provider>
