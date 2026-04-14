@@ -6,6 +6,9 @@ import { useNavItems } from "@/lib/NavContext";
 import MegaMenu from "./MegaMenu";
 import TopNav from "./TopNav";
 
+type SubData = { posts: { id: string; title: string; slug: string }[]; hasMore: boolean; tools: any[] };
+type MegaMenuCache = Record<string, SubData>;
+
 export default function MegaMenuWrapper() {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
@@ -13,9 +16,37 @@ export default function MegaMenuWrapper() {
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const burgerNavRef = useRef<HTMLDivElement>(null);
+  const [cache, setCache] = useState<MegaMenuCache>({});
 
   // Track last open category so burger can reopen it
   const lastCategoryRef = useRef<string | null>(null);
+
+  // Preload first subcategory of each category at page load
+  useEffect(() => {
+    const firstSubs = NAV_ITEMS.map(item => (item.submenu || [])[0]?.href).filter(Boolean);
+    const getCategorySlug = (href: string) => href.split("/").filter(Boolean).pop() || "";
+
+    const loadFirstSubs = async () => {
+      const results: MegaMenuCache = {};
+      await Promise.all(firstSubs.map(async (href) => {
+        const slug = getCategorySlug(href);
+        try {
+          const [postsRes, toolsRes] = await Promise.all([
+            fetch(`/api/megamenu/posts?category=${slug}`),
+            fetch(`/api/megamenu/tools?category=${slug}`),
+          ]);
+          const postsData = postsRes.ok ? await postsRes.json() : { posts: [], hasMore: false };
+          const toolsData = toolsRes.ok ? await toolsRes.json() : [];
+          results[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
+        } catch {
+          results[href] = { posts: [], hasMore: false, tools: [] };
+        }
+      }));
+      setCache(results);
+    };
+
+    loadFirstSubs();
+  }, [NAV_ITEMS]);
 
   useEffect(() => {
     const handleOpen = (e: Event) => {
@@ -167,7 +198,7 @@ export default function MegaMenuWrapper() {
           style={{
             display: "flex",
             justifyContent: "center",
-            paddingTop: 33,
+            paddingTop: 23,
             height: 83,
             boxSizing: "border-box",
             pointerEvents: "auto",
@@ -194,6 +225,7 @@ export default function MegaMenuWrapper() {
           items={activeItem.submenu}
           mainCategoryHref={activeItem.href}
           onClose={closeAll}
+          preloadedData={cache}
         />
       </div>
     </div>

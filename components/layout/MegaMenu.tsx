@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import type { NavSubItem } from "@/lib/navItems";
 
@@ -13,12 +13,15 @@ function boldYears(text: string) {
 import type { Post, Rechner } from "@/lib/types";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
+type PreloadedData = Record<string, { posts: Post[]; hasMore: boolean; tools: Rechner[] }>;
+
 interface MegaMenuProps {
   activeCategory: string;
   activeCategoryLabel: string;
   items: NavSubItem[];
   mainCategoryHref: string;
   onClose: () => void;
+  preloadedData?: PreloadedData;
 }
 
 export default function MegaMenu({
@@ -27,85 +30,109 @@ export default function MegaMenu({
   items,
   mainCategoryHref,
   onClose,
+  preloadedData = {},
 }: MegaMenuProps) {
   const [selectedSub, setSelectedSub] = useState<string>(items[0]?.href || "");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const heightLocked = useRef(false);
+
   const [posts, setPosts] = useState<Post[]>([]);
   const [hasMorePosts, setHasMorePosts] = useState(false);
   const [tools, setTools] = useState<Rechner[]>([]);
-  const [loading, setLoading] = useState(false);
+  const cacheRef = useRef<PreloadedData>({});
+  const currentSubRef = useRef<string>(items[0]?.href || "");
 
   const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory || "rechner";
 
-  // Extract category slug from href (e.g., "/finanzen/geldanlagen" -> "geldanlagen")
   const getCategorySlug = (href: string): string => {
     const parts = href.split("/").filter(Boolean);
     return parts[parts.length - 1];
   };
 
-  // Load tools based on selected subcategory
+  // Merge preloaded data into local cache
   useEffect(() => {
-    const loadTools = async () => {
-      setLoading(true);
-      try {
-        // Extract subcategory slug from href (e.g., "/finanzen/geldanlagen" -> "geldanlagen")
-        const subCategorySlug = getCategorySlug(selectedSub);
+    Object.assign(cacheRef.current, preloadedData);
+  }, [preloadedData]);
 
-        if (subCategorySlug) {
-          // Fetch tools by subcategory
-          const response = await fetch(`/api/megamenu/tools?category=${subCategorySlug}`);
-          if (response.ok) {
-            const data = await response.json();
-            setTools(data);
-          }
-        } else {
-          setTools([]);
+  // Apply data for a subcategory (from cache or fetch)
+  const applySubData = (href: string) => {
+    const data = cacheRef.current[href];
+    if (data) {
+      setPosts(data.posts);
+      setHasMorePosts(data.hasMore);
+      setTools(data.tools);
+    } else {
+      // Fetch on demand, then apply all at once
+      const slug = getCategorySlug(href);
+      Promise.all([
+        fetch(`/api/megamenu/posts?category=${slug}`).then(r => r.ok ? r.json() : { posts: [], hasMore: false }),
+        fetch(`/api/megamenu/tools?category=${slug}`).then(r => r.ok ? r.json() : []),
+      ]).then(([postsData, toolsData]) => {
+        cacheRef.current[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
+        // Only apply if still on this sub
+        if (href === currentSubRef.current) {
+          setPosts(postsData.posts);
+          setHasMorePosts(postsData.hasMore);
+          setTools(toolsData);
         }
-      } catch (error) {
-        console.error("Error loading tools:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (selectedSub) {
-      loadTools();
+      }).catch(() => {});
     }
-  }, [selectedSub]);
+  };
 
   // Reset to first subcategory when category changes
   useEffect(() => {
-    setSelectedSub(items[0]?.href || "");
-  }, [items]);
+    const first = items[0]?.href || "";
+    currentSubRef.current = first;
+    setSelectedSub(first);
+    applySubData(first);
+  }, [items, preloadedData]);
 
-  // Load posts when selectedSub changes
+  // Switch subcategory
+  const switchSub = (href: string) => {
+    if (href === selectedSub) return;
+    currentSubRef.current = href;
+    setSelectedSub(href);
+    applySubData(href);
+  };
+
+  // Lock container to explicit height on first render
   useEffect(() => {
-    const loadPosts = async () => {
-      setLoading(true);
-      try {
-        const slug = getCategorySlug(selectedSub);
-        const response = await fetch(`/api/megamenu/posts?category=${slug}`);
-        if (response.ok) {
-          const data = await response.json();
-          setPosts(data.posts);
-          setHasMorePosts(data.hasMore);
-        }
-      } catch (error) {
-        console.error("Error loading posts:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const el = containerRef.current;
+    if (!el || heightLocked.current) return;
+    heightLocked.current = true;
+    el.style.height = el.offsetHeight + "px";
+  });
 
-    if (selectedSub) {
-      loadPosts();
+  // Animate height after state changes (runs before paint)
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el || !heightLocked.current) return;
+
+    const prevHeight = el.getBoundingClientRect().height;
+
+    el.style.transition = "none";
+    el.style.height = "auto";
+    const newHeight = el.getBoundingClientRect().height;
+
+    if (Math.abs(prevHeight - newHeight) < 0.5) {
+      el.style.height = prevHeight + "px";
+      el.style.transition = "height 0.4s ease-in-out";
+      return;
     }
-  }, [selectedSub]);
+
+    el.style.height = prevHeight + "px";
+    void el.offsetHeight;
+    el.style.transition = "height 0.4s ease-in-out";
+    el.style.height = newHeight + "px";
+  }, [selectedSub, posts, tools]);
 
   return (
     <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
       <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Center Container: Subcategories + Posts */}
-        <div style={{
+        <div
+          ref={containerRef}
+          style={{
           display: "flex",
           flexDirection: "column",
           background: "white",
@@ -116,9 +143,10 @@ export default function MegaMenu({
           maxWidth: 860,
           width: "100%",
           minHeight: 300,
+          transition: "height 0.4s ease-in-out",
         }}>
           {/* Headings row */}
-          <div style={{ display: "flex", marginBottom: 0, padding: "0 40px" }}>
+          <div style={{ display: "flex", marginBottom: 0, padding: "0 40px", borderBottom: "1px solid rgba(0, 0, 0, 0.07)", paddingBottom: 16 }}>
             <div style={{ flex: 1, paddingRight: 24 }}>
               <Link
                 href={mainCategoryHref}
@@ -155,8 +183,6 @@ export default function MegaMenu({
             </div>
           </div>
 
-          {/* Divider line */}
-          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "16px 0px 0px 0px", width: "100%" }} />
 
           {/* Gray bar — full height behind bookmark */}
           <div style={{
@@ -203,7 +229,7 @@ export default function MegaMenu({
               {items.map((item) => (
                 <button
                   key={item.href}
-                  onClick={() => setSelectedSub(item.href)}
+                  onClick={() => switchSub(item.href)}
                   className="megamenu-sub-btn"
                   style={{
                     display: "flex",
@@ -250,9 +276,7 @@ export default function MegaMenu({
             }}>
               Neuste Beiträge
             </div>
-            {loading ? (
-              <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Wird geladen...</div>
-            ) : posts.length > 0 ? (
+            {posts.length > 0 ? (
               <nav style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
                 {posts.map((post) => (
                   <Link

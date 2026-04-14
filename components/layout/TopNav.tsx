@@ -25,7 +25,10 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
         isInitialActivation.current = false;
         return;
       }
-      if (!defaultActive) scrollToNav();
+      if (!defaultActive) {
+        scrollToNav();
+        openedViaPill.current = true;
+      }
       window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label, fromBurgerNav: !!defaultActive } }));
     },
   });
@@ -41,14 +44,26 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
     }
   }, [defaultActive, pill]);
 
-  // Listen for menu-closed to reset pill
+  // Track if menu was opened via this TopNav's pill (not burger)
+  const openedViaPill = useRef(false);
+
+  const scrollBackFromNav = useCallback(() => {
+    if (!navRef.current || defaultActive || !openedViaPill.current) return;
+    const rect = navRef.current.getBoundingClientRect();
+    const targetY = window.scrollY + rect.top - 33;
+    gsap.to(window, { scrollTo: { y: targetY }, duration: 0.5, ease: "power2.inOut" });
+  }, [defaultActive]);
+
+  // Listen for menu-closed to reset pill and scroll back
   useEffect(() => {
     const onClose = () => {
       pill.closeMenu();
+      scrollBackFromNav();
+      openedViaPill.current = false;
     };
     window.addEventListener("menu-closed", onClose);
     return () => window.removeEventListener("menu-closed", onClose);
-  }, [pill]);
+  }, [pill, scrollBackFromNav]);
 
   // Lens sync
   useEffect(() => {
@@ -66,7 +81,7 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
   const scrollToNav = useCallback(() => {
     if (!navRef.current) return;
     const rect = navRef.current.getBoundingClientRect();
-    const targetY = window.scrollY + rect.top - 33;
+    const targetY = window.scrollY + rect.top - 23;
     gsap.to(window, { scrollTo: { y: targetY }, duration: 0.5, ease: "power2.inOut" });
   }, []);
 
