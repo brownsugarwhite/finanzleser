@@ -135,7 +135,7 @@ export default function MegaMenu({
     const newNav = navRefsMap.current[newKey];
     if (newNav) {
       const newBtns = newNav.querySelectorAll(".megamenu-sub-btn");
-      gsap.fromTo(newBtns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: 0.3, ease: "power2.out" });
+      gsap.fromTo(newBtns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: 0.15, ease: "power2.out" });
     }
   }, [mainCategoryHref]);
 
