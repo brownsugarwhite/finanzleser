@@ -139,6 +139,9 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
                   slug
                 }
               }
+              beitrag {
+                untertitel
+              }
             }
           }
         }
@@ -149,13 +152,22 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
   try {
     const data = await client.request<{
       categories: {
-        nodes: Array<{ posts: { nodes: Post[] } }>
+        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] } }>
       }
     }>(query, {
       slug: [categorySlug],
     });
     const posts = data.categories.nodes[0]?.posts.nodes || [];
-    return posts.map(post => decodePostContent(post));
+    return posts.map(post => {
+      const decoded = decodePostContent(post);
+      if (post.beitrag?.untertitel) {
+        decoded.beitragFelder = {
+          ...decoded.beitragFelder,
+          beitragUntertitel: post.beitrag.untertitel,
+        };
+      }
+      return decoded;
+    });
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
     return [];

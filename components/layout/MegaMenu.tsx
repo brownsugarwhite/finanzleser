@@ -7,7 +7,7 @@ import type { NavSubItem } from "@/lib/navItems";
 
 function boldYears(text: string) {
   const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
-  return <span>{parts.map((part, i) =>
+  return <span style={{ color: "inherit" }}>{parts.map((part, i) =>
     /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 900 }}>{part}</strong> : part
   )}</span>;
 }
@@ -327,16 +327,17 @@ export default function MegaMenu({
           {/* Posts */}
           <div style={{ width: "50%", flexShrink: 0, paddingLeft: 36, paddingRight: 40, position: "relative", zIndex: 3 }}>
             <div style={{
-              fontFamily: "var(--font-heading, 'Merriweather', serif)",
-              fontSize: 15,
-              fontWeight: 600,
-              color: "var(--color-text-primary)",
+              fontFamily: "var(--font-body)",
+              fontSize: 13,
+              fontWeight: 500,
+              color: "var(--color-text-medium)",
+              opacity: 0.6,
               marginTop: 23,          
             }}>
               Neuste Beiträge
             </div>
             {posts.length > 0 ? (
-              <nav style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
+              <nav style={{ display: "flex", flexDirection: "column", gap: 13, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
                 {posts.map((post) => (
                   <Link
                     key={post.id}
@@ -344,17 +345,30 @@ export default function MegaMenu({
                     onClick={onClose}
                     style={{
                       display: "block",
+                      color: "var(--color-text-primary)",
                       padding: "6px 12px",
-                      fontSize: 14,
-                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      fontWeight: 600,
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       textDecoration: "none",
                       transition: "color 0.15s ease",
                     }}
-                    className="megamenu-link"
+                    className="megamenu-post-link"
                     onMouseEnter={(e) => { const el = e.currentTarget; el.style.color = "#D3005E"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = "inherit"); }}
-                    onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = ""; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
+                    onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = "var(--color-text-primary)"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
                   >
                     {boldYears(post.title)}
+                    {post.beitragFelder?.beitragUntertitel && (
+                      <span style={{
+                        display: "block",
+                        fontSize: 14,
+                        fontWeight: 450,
+                        fontFamily: "var(--font-body)",
+                        color: "var(--color-text-medium)",
+                      }}>
+                        {post.beitragFelder.beitragUntertitel}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </nav>
