@@ -254,6 +254,18 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
               {/* Horizontale Linie */}
               <div style={{ width: isMobile ? "100%" : 300, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
             </div>
+
+            {/* Visual Platzhalter — zwischen Newsletter und Sidebar */}
+            {!isMobile && (
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 460,
+                right: 23,
+                height: "30vw",
+                background: "rgba(0, 0, 0, 0.06)",                
+              }} />
+            )}
           </div>
 
           {/* 2. Subheading — sticky bottom */}

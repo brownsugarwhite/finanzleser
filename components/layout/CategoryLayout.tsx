@@ -53,7 +53,6 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
             width: "80%",
             height: 250,
             background: "rgba(0, 0, 0, 0.06)",
-            borderRadius: 24,
             marginBottom: 40,
           }} />
           {/* H1 mit Sparks und Linien — sticky über den Frames */}
@@ -66,8 +65,7 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
               alignItems: "center",
               gap: 0,
               width: "100vw",
-              padding: "0 40px",
-              marginBottom: -30,
+              padding: "0 40px",              
             }}>
               {/* Linie links */}
               <div style={{
@@ -117,7 +115,6 @@ export default function CategoryLayout({ title, titleSlug, description, image, m
             background: "transparent",
             border: "1px solid var(--color-text-medium)",
             borderRadius: 100,
-            marginBottom: "calc(-100vh - 80px)",
             zIndex: 5,
           }} />
           <div style={{
