@@ -56,6 +56,9 @@ h1, h2 {
 h1.article-title {
   font-weight: 500 !important;
 }
+h1.category-title {
+  font-weight: 700 !important;
+}
 
 /* Article Prose Styles */
 .prose {
