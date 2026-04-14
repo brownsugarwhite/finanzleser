@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
 import type { NavSubItem } from "@/lib/navItems";
 
 function boldYears(text: string) {
@@ -95,6 +96,49 @@ export default function MegaMenu({
     applySubData(href);
   };
 
+  // Keep all seen category navs so they're always in the DOM
+  const allNavsRef = useRef<Record<string, NavSubItem[]>>({});
+  allNavsRef.current[mainCategoryHref] = items;
+  const allNavs = allNavsRef.current;
+
+  // Refs for each nav container
+  const navRefsMap = useRef<Record<string, HTMLElement | null>>({});
+  const prevCategoryRef = useRef(mainCategoryHref);
+  // Track last active sub per category (for exit animation styling)
+  const lastSubPerCategory = useRef<Record<string, string>>({});
+  lastSubPerCategory.current[mainCategoryHref] = selectedSub;
+
+  // Cross-fade stagger on category switch
+  useEffect(() => {
+    const prevKey = prevCategoryRef.current;
+    const newKey = mainCategoryHref;
+    prevCategoryRef.current = newKey;
+
+    if (prevKey === newKey) {
+      // First mount: fade in
+      const nav = navRefsMap.current[newKey];
+      if (nav) {
+        const buttons = nav.querySelectorAll(".megamenu-sub-btn");
+        gsap.fromTo(buttons, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: "power2.out" });
+      }
+      return;
+    }
+
+    // Fade old out
+    const oldNav = navRefsMap.current[prevKey];
+    if (oldNav) {
+      const oldBtns = oldNav.querySelectorAll(".megamenu-sub-btn");
+      gsap.to(oldBtns, { opacity: 0, y: 25, duration: 0.25, stagger: 0.03, ease: "power2.in" });
+    }
+
+    // Fade new in
+    const newNav = navRefsMap.current[newKey];
+    if (newNav) {
+      const newBtns = newNav.querySelectorAll(".megamenu-sub-btn");
+      gsap.fromTo(newBtns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: 0.3, ease: "power2.out" });
+    }
+  }, [mainCategoryHref]);
+
   // Lock container to explicit height on first render
   useEffect(() => {
     const el = containerRef.current;
@@ -129,6 +173,44 @@ export default function MegaMenu({
   return (
     <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
       <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+        {/* Gray bar — behind bookmark, above overflow:hidden container */}
+        <div style={{
+          position: "absolute",
+          left: "50%",
+          top: 0,
+          bottom: 0,
+          width: 27,
+          transform: "translateX(-50%)",
+          background: "rgba(0, 0, 0, 0.03)",
+          zIndex: 1,
+          maxWidth: 860,
+        }} />
+
+        {/* Bookmark Divider — above overflow:hidden container */}
+        <div style={{
+          position: "absolute",
+          left: "50%",
+          top: 0,
+          bottom: "-4%",
+          width: 10,
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          zIndex: 2,
+        }}>
+          <div style={{
+            flex: 1,
+            background: "var(--color-brand-secondary)",
+            width: "100%",
+          }} />
+          <img
+            src="/icons/small_spikes_down.svg"
+            alt=""
+            style={{ width: "100%", height: "auto", display: "block" }}
+            aria-hidden
+          />
+        </div>
+
         {/* Center Container: Subcategories + Posts */}
         <div
           ref={containerRef}
@@ -144,6 +226,7 @@ export default function MegaMenu({
           width: "100%",
           minHeight: 300,
           transition: "height 0.4s ease-in-out",
+          overflow: "hidden",
         }}>
           {/* Headings row */}
           <div style={{ display: "flex", marginBottom: 0, padding: "0 40px", borderBottom: "1px solid rgba(0, 0, 0, 0.07)", paddingBottom: 16 }}>
@@ -184,49 +267,23 @@ export default function MegaMenu({
           </div>
 
 
-          {/* Gray bar — full height behind bookmark */}
-          <div style={{
-            position: "absolute",
-            left: "50%",
-            top: 0,
-            bottom: 0,
-            width: 27,
-            transform: "translateX(-50%)",
-            background: "rgba(0, 0, 0, 0.03)",
-            zIndex: 1,
-          }} />
-
-          {/* Bookmark Divider — absolute, full height */}
-          <div style={{
-            position: "absolute",
-            left: "50%",
-            top: 0,
-            bottom: "-4%",
-            width: 10,
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            zIndex: 2,
-          }}>
-            <div style={{
-              flex: 1,
-              background: "var(--color-brand-secondary)",
-              width: "100%",
-            }} />
-            <img
-              src="/icons/small_spikes_down.svg"
-              alt=""
-              style={{ width: "100%", height: "auto", display: "block" }}
-              aria-hidden
-            />
-          </div>
-
           {/* Columns */}
           <div style={{ display: "flex", paddingTop: 0 }}>
           {/* Subcategories */}
-          <div style={{ width: "50%", flexShrink: 0 }}>
-            <nav style={{ display: "flex", flexDirection: "column" }}>
-              {items.map((item) => (
+          <div style={{ width: "50%", flexShrink: 0, position: "relative" }}>
+            {Object.entries(allNavs).map(([catHref, catItems]) => {
+              const isActive = catHref === mainCategoryHref;
+              const activeSub = isActive ? selectedSub : "";
+              return (
+              <nav
+                key={catHref}
+                ref={(el) => { navRefsMap.current[catHref] = el; }}
+                style={{
+                  display: "flex", flexDirection: "column",
+                  ...(isActive ? {} : { position: "absolute", top: 0, left: 0, width: "100%", pointerEvents: "none" }),
+                }}
+              >
+              {catItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => switchSub(item.href)}
@@ -240,18 +297,18 @@ export default function MegaMenu({
                     padding: "15px 36px 5px 60px",
                     fontSize: 16,
                     fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontStyle: selectedSub === item.href ? "normal" : "italic",
+                    fontStyle: activeSub === item.href ? "normal" : "italic",
                     borderRadius: 0,
                     border: "none",
                     cursor: "pointer",
                     transition: "background 0.15s ease, color 0.15s ease",
                     background: "transparent",
-                    color: selectedSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
-                    fontWeight: selectedSub === item.href ? 400 : 300,
+                    color: activeSub === item.href ? "var(--color-brand)" : "var(--color-text-secondary)",
+                    fontWeight: activeSub === item.href ? 400 : 300,
                   }}
                 >
                   {item.label}
-                  <span className={`megamenu-sub-line ${selectedSub === item.href ? "megamenu-sub-line--active" : ""}`} style={{
+                  <span className={`megamenu-sub-line ${activeSub === item.href ? "megamenu-sub-line--active" : ""}`} style={{
                     height: 0,
                     borderTop: "1px solid currentColor",
                     opacity: 1,
@@ -262,7 +319,9 @@ export default function MegaMenu({
                   </svg>
                 </button>
               ))}
-            </nav>
+              </nav>
+              );
+            })}
           </div>
 
           {/* Posts */}
