@@ -8,10 +8,13 @@ body {
   padding-top: 0;
 }
 
-/* ── Hide logo + nav on landing page (has its own) ── */
+/* ── Landing page: logo starts off-screen left, slides in on scroll ── */
 body[data-landing] .logo-wrapper {
-  visibility: hidden !important;
-  pointer-events: none !important;
+  transform: translateX(-280px);
+  pointer-events: none;
+}
+body[data-landing] .logo-wrapper .logo-claim {
+  display: none !important;
 }
 body[data-landing] .sticky-nav {
   display: none !important;

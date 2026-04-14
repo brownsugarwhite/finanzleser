@@ -32,8 +32,10 @@ function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null)
 
 export default function LogoBar() {
   const claimRef = useRef<HTMLSpanElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
 
+  // Regular page: claim + dotline fade on scroll
   useEffect(() => {
     if (!claimRef.current) return;
 
@@ -42,10 +44,8 @@ export default function LogoBar() {
       triggersRef.current = createScrollAnimations(claimRef.current!, dotLine);
     });
 
-    // Listen for kill/recreate requests from ContentScaler
     const onKill = () => {
       triggersRef.current.forEach((st) => {
-        // Kill ScrollTrigger but keep animation's current values inline
         const anim = st.animation;
         if (anim) anim.pause();
         st.kill();
@@ -56,7 +56,6 @@ export default function LogoBar() {
     const onRecreate = () => {
       if (!claimRef.current) return;
       const dotLine = document.querySelector(".dotline-animated") as HTMLElement | null;
-      // No clearProps – let ScrollTrigger take over from current inline values
       triggersRef.current = createScrollAnimations(claimRef.current, dotLine);
     };
 
@@ -71,12 +70,37 @@ export default function LogoBar() {
     };
   }, []);
 
+  // Landing page: slide logo in/out synced with burger
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const onNavOut = () => {
+      if (!document.body.hasAttribute("data-landing")) return;
+      gsap.to(el, { x: 0, duration: 0.4, ease: "power2.out" });
+      el.style.pointerEvents = "auto";
+    };
+    const onNavIn = () => {
+      if (!document.body.hasAttribute("data-landing")) return;
+      gsap.to(el, { x: -280, duration: 0.4, ease: "power2.in" });
+      el.style.pointerEvents = "none";
+    };
+
+    window.addEventListener("nav-scrolled-out", onNavOut);
+    window.addEventListener("nav-scrolled-in", onNavIn);
+    return () => {
+      window.removeEventListener("nav-scrolled-out", onNavOut);
+      window.removeEventListener("nav-scrolled-in", onNavIn);
+    };
+  }, []);
+
   return (
     <div style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 54, marginTop: "-50px", pointerEvents: "none" }}>
-      <div className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
+      <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
         <a href="/"><img src="/icons/fl_logo.svg" alt="finanzleser" style={{ width: "225px", height: "auto", display: "block", marginTop: "19px" }} /></a>
         <span
           ref={claimRef}
+          className="logo-claim"
           style={{ fontFamily: "'Merriweather', serif", fontStyle: "italic", fontSize: "18px", fontWeight: "300", color: "var(--color-text-medium)", whiteSpace: "nowrap", marginTop: "8px" }}
         >
           Das digitale Finanzmagazin

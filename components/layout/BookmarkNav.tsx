@@ -83,10 +83,11 @@ export default function BookmarkNav() {
     const revealBurger = () => {
       if (burgerVisible.current) return;
       burgerVisible.current = true;
+      window.dispatchEvent(new CustomEvent("nav-scrolled-out"));
       const btn = burgerBtnRef.current;
       if (!btn) return;
 
-      gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.out" });
+      gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.inOut" });
       lineRefs.current.forEach((line, i) => {
         if (!line) return;
         gsap.to(line, { scaleX: 1, duration: 0.3, delay: 0.15 + i * 0.08, ease: "power2.out" });
@@ -95,13 +96,14 @@ export default function BookmarkNav() {
       // Compensate pill position when burger pushes spacer
       if (searchOpen.current && searchPillRef.current) {
         const curX = gsap.getProperty(searchPillRef.current, "x") as number;
-        gsap.to(searchPillRef.current, { x: curX + BTN_HEIGHT, duration: 0.3, ease: "power2.out" });
+        gsap.to(searchPillRef.current, { x: curX + BTN_HEIGHT, duration: 0.3, ease: "power2.inOut" });
       }
     };
 
     const hideBurger = () => {
       if (!burgerVisible.current) return;
       burgerVisible.current = false;
+      window.dispatchEvent(new CustomEvent("nav-scrolled-in"));
       const btn = burgerBtnRef.current;
       if (!btn) return;
 
@@ -109,12 +111,12 @@ export default function BookmarkNav() {
         if (!line) return;
         gsap.to(line, { scaleX: 0, duration: 0.2, delay: i * 0.08, ease: "power2.out" });
       });
-      gsap.to(btn, { width: 0, paddingRight: 0, duration: 0.3, delay: 0.25, ease: "power2.out" });
+      gsap.to(btn, { width: 0, paddingRight: 0, duration: 0.3, ease: "power2.inOut" });
 
       // Compensate pill position when burger releases spacer
       if (searchOpen.current && searchPillRef.current) {
         const curX = gsap.getProperty(searchPillRef.current, "x") as number;
-        gsap.to(searchPillRef.current, { x: curX - BTN_HEIGHT, duration: 0.3, delay: 0.25, ease: "power2.out" });
+        gsap.to(searchPillRef.current, { x: curX - BTN_HEIGHT, duration: 0.3, ease: "power2.inOut" });
       }
     };
 
@@ -179,7 +181,7 @@ export default function BookmarkNav() {
     gsap.set(wBot, { y: -(BURGER_GAP + 2), rotation: -45 });
     lines.forEach((line) => { if (line) gsap.set(line, { scaleX: 0 }); });
 
-    gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.out" });
+    gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.inOut" });
     [lines[0], lines[2]].forEach((line, i) => {
       if (!line) return;
       gsap.to(line, { scaleX: 1, duration: 0.3, delay: 0.15 + i * 0.08, ease: "power2.out" });
@@ -200,7 +202,7 @@ export default function BookmarkNav() {
       gsap.to(line, { scaleX: 0, duration: 0.2, delay: i * 0.08, ease: "power2.out" });
     });
     gsap.to(btn, {
-      width: 0, paddingRight: 0, duration: 0.3, delay: 0.2, ease: "power2.out",
+      width: 0, paddingRight: 0, duration: 0.3, delay: 0.2, ease: "power2.inOut",
       onComplete: () => {
         w.forEach((wr) => { if (wr) gsap.set(wr, { rotation: 0, y: 0, opacity: 1 }); });
       },
@@ -377,14 +379,6 @@ export default function BookmarkNav() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [closeSearch]);
 
-  // Close on scroll
-  useEffect(() => {
-    const onScroll = () => {
-      if (searchOpen.current) closeSearch();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [closeSearch]);
 
   /* ══════════════════════════════════════════════════
      HELPERS
