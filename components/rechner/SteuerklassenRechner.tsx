@@ -19,7 +19,7 @@ export default function SteuerklassenRechner() {
   const [monatsBrutto, setMonatsBrutto] = useState(3500);
   const [monatsBruttoPartner, setMonatsBruttoPartner] = useState(2000);
   const [result, setResult] = useState<SteuerklassenResult | null>(null);
-  const rechnerState = useRechnerState(params);
+  const rechnerState = useRechnerState({ modus, monatsBrutto, monatsBruttoPartner });
 
   const rates = useRates();
 
