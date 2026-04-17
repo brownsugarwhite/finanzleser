@@ -14,7 +14,45 @@ function boldYears(text: string) {
 import type { Post, Rechner } from "@/lib/types";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
-type PreloadedData = Record<string, { posts: Post[]; hasMore: boolean; tools: Rechner[] }>;
+type ToolType = "rechner" | "checkliste" | "vergleich";
+type MegaMenuPost = Post & { tools?: ToolType[] };
+
+const TOOL_DOT_COLORS: Record<ToolType, string> = {
+  rechner: "var(--color-tool-rechner)",
+  vergleich: "var(--color-tool-vergleiche)",
+  checkliste: "var(--color-tool-checklisten)",
+};
+
+function ToolDots({ tools }: { tools?: ToolType[] }) {
+  if (!tools || tools.length === 0) return null;
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        gap: 5,
+        marginLeft: 8,
+        verticalAlign: "middle",
+        whiteSpace: "nowrap",
+      }}
+      aria-hidden
+    >
+      {tools.map((t) => (
+        <span
+          key={t}
+          style={{
+            display: "inline-block",
+            width: 10,
+            height: 10,
+            borderRadius: "50%",
+            background: TOOL_DOT_COLORS[t],
+          }}
+        />
+      ))}
+    </span>
+  );
+}
+
+type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: Rechner[] }>;
 
 interface MegaMenuProps {
   activeCategory: string;
@@ -37,7 +75,7 @@ export default function MegaMenu({
   const containerRef = useRef<HTMLDivElement>(null);
   const heightLocked = useRef(false);
 
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<MegaMenuPost[]>([]);
   const [hasMorePosts, setHasMorePosts] = useState(false);
   const [tools, setTools] = useState<Rechner[]>([]);
   const cacheRef = useRef<PreloadedData>({});
@@ -358,6 +396,7 @@ export default function MegaMenu({
                     onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = "var(--color-text-primary)"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
                   >
                     {boldYears(post.title)}
+                    <ToolDots tools={post.tools} />
                     {post.beitragFelder?.beitragUntertitel && (
                       <span style={{
                         display: "block",

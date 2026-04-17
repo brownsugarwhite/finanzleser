@@ -1,4 +1,4 @@
-import { getPostsByCategory } from "@/lib/wordpress";
+import { getPostsByCategory, getMegamenuPostsByCategory } from "@/lib/wordpress";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -9,13 +9,14 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const posts = await getPostsByCategory(category);
-    const topPosts = posts.slice(0, 3);
-    // Return max 3 posts + total count for megamenu
+    const [topPosts, allPosts] = await Promise.all([
+      getMegamenuPostsByCategory(category, 3),
+      getPostsByCategory(category),
+    ]);
     return NextResponse.json({
       posts: topPosts,
-      total: posts.length,
-      hasMore: posts.length > 3,
+      total: allPosts.length,
+      hasMore: allPosts.length > 3,
     });
   } catch (error) {
     console.error("Error fetching megamenu posts:", error);

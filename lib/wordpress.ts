@@ -178,6 +178,58 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
 // Einzelner Beitrag mit ACF-Feldern
 // ─────────────────────────────────────────────
 
+export async function getMegamenuPostsByCategory(
+  categorySlug: string,
+  limit = 3
+): Promise<Array<Post & { tools: ("rechner" | "checkliste" | "vergleich")[] }>> {
+  const client = getClient();
+  const query = gql`
+    query GetMegamenuPosts($slug: [String!]!, $first: Int!) {
+      categories(where: { slug: $slug }) {
+        nodes {
+          posts(first: $first) {
+            nodes {
+              id
+              title
+              slug
+              date
+              excerpt
+              content
+              featuredImage { node { sourceUrl altText } }
+              categories { nodes { name slug } }
+              beitrag { untertitel }
+            }
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{
+      categories: {
+        nodes: Array<{ posts: { nodes: (Post & { content?: string; beitrag?: { untertitel?: string } })[] } }>;
+      };
+    }>(query, { slug: [categorySlug], first: limit });
+    const nodes = data.categories.nodes[0]?.posts.nodes || [];
+    return nodes.map((post) => {
+      const decoded = decodePostContent(post);
+      if (post.beitrag?.untertitel) {
+        decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
+      }
+      const content = post.content || "";
+      const tools: ("rechner" | "checkliste" | "vergleich")[] = [];
+      if (/wp:finanzleser\/rechner|data-finanzleser-rechner/.test(content)) tools.push("rechner");
+      if (/wp:finanzleser\/vergleich|data-finanzleser-vergleich/.test(content)) tools.push("vergleich");
+      if (/wp:finanzleser\/checkliste|data-finanzleser-checkliste/.test(content)) tools.push("checkliste");
+      const { content: _omit, ...withoutContent } = decoded;
+      return { ...withoutContent, tools };
+    });
+  } catch (error) {
+    console.error(`Error fetching megamenu posts for "${categorySlug}":`, error);
+    return [];
+  }
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const client = getClient();
 
