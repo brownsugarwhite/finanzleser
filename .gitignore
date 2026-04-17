@@ -24,3 +24,6 @@ npm-debug.log*
 # Vercel / Netlify
 .vercel
 .netlify
+
+# FAQ batch intermediates (agenten-generiert, in faqs-generated.json gemerged)
+scripts/faq-batches/

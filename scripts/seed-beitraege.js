@@ -11,6 +11,8 @@ const path = require("path");
 
 const articles = require("./articles-converted.json");
 const master = require("./beitraege-master.json");
+const faqsPath = path.join(__dirname, "faqs-generated.json");
+const faqs = fs.existsSync(faqsPath) ? require("./faqs-generated.json") : {};
 
 const PHP_BIN = "/Users/bsw/Library/Application Support/Local/lightning-services/php-8.2.27+1/bin/darwin-arm64/bin/php";
 const MYSQL_SOCK = "/Users/bsw/Library/Application Support/Local/run/i3IZYBnlJ/mysql/mysqld.sock";
@@ -25,6 +27,33 @@ function wp(cmd) {
 
 function wpSafe(cmd) {
   try { return wp(cmd); } catch (e) { return ""; }
+}
+
+function splitKeywords(keywords) {
+  if (!keywords) return [];
+  return keywords.split(/[,;]/).map((k) => k.trim()).filter((k) => k.length > 0 && k.length <= 50);
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function buildYoastFaqBlock(faqEntries) {
+  const base = Date.now();
+  const ids = faqEntries.map((_, i) => `faq-question-${base + i}`);
+  const attrs = JSON.stringify({
+    questions: faqEntries.map((f, i) => ({
+      id: ids[i],
+      question: [f.question],
+      answer: [f.answer],
+      jsonQuestion: f.question,
+      jsonAnswer: f.answer,
+    })),
+  });
+  const sections = faqEntries
+    .map((f, i) => `<div class="schema-faq-section" id="${ids[i]}"><strong class="schema-faq-question">${escapeHtml(f.question)}</strong> <p class="schema-faq-answer">${escapeHtml(f.answer)}</p> </div>`)
+    .join(" ");
+  return `<!-- wp:yoast/faq-block ${attrs} -->\n<div class="schema-faq wp-block-yoast-faq-block">${sections}</div>\n<!-- /wp:yoast/faq-block -->`;
 }
 
 // ─── Normalisierung der Kategorienamen ───
@@ -148,9 +177,16 @@ let errors = 0;
 
 for (const article of articles) {
   try {
+    // FAQ-Block an Content anhängen, falls vorhanden
+    let content = article.content;
+    const faqEntry = faqs[article.slug];
+    if (faqEntry && Array.isArray(faqEntry.faqs) && faqEntry.faqs.length === 4) {
+      content += "\n\n" + buildYoastFaqBlock(faqEntry.faqs);
+    }
+
     // Write content to temp file (avoid shell escaping issues)
     const tmpFile = `/tmp/wp-article-${article.slug}.html`;
-    fs.writeFileSync(tmpFile, article.content);
+    fs.writeFileSync(tmpFile, content);
 
     // Create post
     const postId = wp(`post create "${tmpFile}" --post_type=post --post_title="${article.title.replace(/"/g, '\\"')}" --post_name="${article.slug}" --post_status=publish --porcelain`);
@@ -168,6 +204,36 @@ for (const article of articles) {
     }
     if (catIds.length) {
       wp(`post term set ${id} category ${catIds.join(" ")}`);
+    }
+
+    // WordPress-Tags aus SEO-Keywords
+    const kws = splitKeywords(article.seo?.keywords);
+    if (kws.length) {
+      const phpArray = kws.map((k) => `"${k.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`).join(",");
+      const phpCode = `wp_set_post_terms(${id}, [${phpArray}], "post_tag", false);`;
+      wp(`eval '${phpCode.replace(/'/g, "'\\''")}'`);
+    }
+
+    // core/latest-posts Block für "Das könnte Sie auch interessieren" Slider
+    // Erste Subkategorie als Default — Redakteur kann später im Editor anpassen
+    if (article.subkategorien && article.subkategorien.length > 0) {
+      const subName = normCat(article.subkategorien[0]);
+      const subId = subCatIds[subName];
+      if (subId) {
+        const blockAttrs = JSON.stringify({
+          postsToShow: 10,
+          categories: [{ id: subId, value: subName }],
+          orderBy: "date",
+          order: "desc",
+          displayFeaturedImage: false,
+        });
+        const blockComment = `<!-- wp:latest-posts ${blockAttrs} /-->`;
+        const updatedContent = content + "\n\n" + blockComment;
+        const tmpUpdateFile = `/tmp/wp-article-update-${article.slug}.html`;
+        fs.writeFileSync(tmpUpdateFile, updatedContent);
+        wp(`post update ${id} "${tmpUpdateFile}"`);
+        fs.unlinkSync(tmpUpdateFile);
+      }
     }
 
     // ACF: Untertitel

@@ -196,7 +196,7 @@ export default function ArticleClient({
         {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
         {content && content.trim() ? (
           <>
-            <ArticleContent content={content} collapsed={collapsed} />
+            <ArticleContent content={content} collapsed={collapsed} currentSlug={pageSlug} />
             {pageSlug && (
               <ArticleElementWrapper variant="centered" collapsed={collapsed}>
                 <PdfPreview slug={pageSlug} />

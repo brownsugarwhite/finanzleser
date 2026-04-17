@@ -837,7 +837,8 @@ h2.article-tool-label {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 7px;
+  row-gap: 4px;
+  column-gap: 10px;
   margin: 0 0 16px 0;
   padding: 0;
   font-size: unset;
@@ -847,20 +848,137 @@ h2.article-tool-label {
 }
 .article-tool-badge {
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 25px;
+  font-size: 36px;
   line-height: 1em;
   font-weight: 600;
   color: white;
-  padding: 7px 10px;
+  padding: 10px 12px;
   white-space: nowrap;
   align-self: flex-start;
 }
 .article-tool-title {
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 27px;
+  font-size: 38px;
   font-weight: 600;
   line-height: 1.35em;
   color: var(--color-text-primary);
 }
 
 /* Ausgefüllte PDFs werden via pdf-lib generiert (kein Print-CSS nötig) */
+
+/* ─────────────────────────────────────────────
+   Yoast FAQ Block (Accordion)
+   Rendert <!-- wp:yoast/faq-block --> am Artikel-Ende
+   ───────────────────────────────────────────── */
+h2.faq-heading {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.schema-faq.wp-block-yoast-faq-block {
+  margin: 0 0 2rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--glass-white-40);
+  backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
+  border: 1px solid var(--color-border-default);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 var(--glass-white-40);
+}
+
+.schema-faq-section {
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.schema-faq-section:last-child {
+  border-bottom: none;
+}
+
+.schema-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.schema-faq-question::after {
+  content: "";
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--color-text-medium);
+  border-bottom: 2px solid var(--color-text-medium);
+  transform: rotate(45deg);
+  transform-origin: 65% 65%;
+  transition: transform 0.3s ease, border-color 0.2s ease;
+}
+
+.schema-faq-question:hover {
+  color: var(--color-brand);
+}
+
+.schema-faq-question:hover::after {
+  border-color: var(--color-brand);
+}
+
+.schema-faq-section.is-open .schema-faq-question::after {
+  transform: rotate(-135deg);
+}
+
+.schema-faq-answer {
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-medium);
+}
+
+.dark .schema-faq.wp-block-yoast-faq-block {
+  background: var(--glass-dark-20);
+  border-color: var(--color-border-default);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 var(--glass-white-10);
+}
+
+/* ─────────────────────────────────────────────
+   Related Posts Section
+   Full-Width Section unter jedem Artikel
+   ───────────────────────────────────────────── */
+.related-posts-section {
+  width: 100%;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  padding: 3rem 0 2rem;
+  overflow: hidden;
+}
+
+.related-posts-heading {
+  text-align: center;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem;
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+.related-posts-nav {
+  padding: 0 clamp(20px, 10vw, 200px);
+  margin-top: 23px;
+}

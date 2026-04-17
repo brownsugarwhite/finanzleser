@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import gsap from "gsap";
 
 const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Rechner wird geladen...</div>,
@@ -17,6 +18,7 @@ const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/Checkliste
 const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Vergleich wird geladen...</div>,
 });
+
 
 const TOOL_CONFIG = {
   rechner: { label: "Rechner", color: "var(--color-tool-rechner)", endpoint: "/finanzleser/v1/rechner" },
@@ -57,6 +59,7 @@ function ToolLabel({ type, slug, headingId, showExcerpt }: { type: keyof typeof 
 interface Props {
   content: string;
   collapsed: boolean;
+  currentSlug?: string;
 }
 
 interface ContentPart {
@@ -67,7 +70,7 @@ interface ContentPart {
 function parseContent(html: string): ContentPart[] {
   const parts: ContentPart[] = [];
 
-  // Regex für Block-Divs (Rechner/Checkliste) und Gutenberg-Kommentare (Vergleich)
+  // Regex für Block-Divs (Rechner/Checkliste), Gutenberg-Kommentare (Vergleich) und core/latest-posts
   const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->/g;
 
   let lastIndex = 0;
@@ -80,13 +83,9 @@ function parseContent(html: string): ContentPart[] {
       if (before) parts.push({ type: "html", value: before });
     }
 
-    // Der Block selbst (match[1]+[2] für div-Pattern, match[3]+[4] für Kommentar-Pattern)
     const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
     const blockSlug = match[2] || match[4];
-    parts.push({
-      type: blockType,
-      value: blockSlug,
-    });
+    parts.push({ type: blockType, value: blockSlug });
 
     lastIndex = match.index + match[0].length;
   }
@@ -135,8 +134,52 @@ function splitFazit(html: string): { type: "html" | "fazit"; value: string }[] {
   return parts.length > 0 ? parts : [{ type: "html", value: html }];
 }
 
-export default function ArticleContent({ content, collapsed }: Props) {
+export default function ArticleContent({ content, collapsed, currentSlug }: Props) {
   const parts = parseContent(content);
+
+  // Accordion-Interaktivität für Yoast FAQ-Block mit GSAP
+  useEffect(() => {
+    const DURATION = 0.4;
+    const PADDING_PX = 20; // entspricht 1.25rem bei 16px Basis
+    const handler = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const question = target.closest(".schema-faq-question") as HTMLElement | null;
+      if (!question) return;
+      const section = question.closest(".schema-faq-section") as HTMLElement | null;
+      if (!section) return;
+      const answer = section.querySelector(".schema-faq-answer") as HTMLElement | null;
+      if (!answer) return;
+
+      gsap.killTweensOf(answer);
+      const isOpen = section.classList.contains("is-open");
+
+      if (isOpen) {
+        const current = answer.getBoundingClientRect().height;
+        gsap.set(answer, { height: current });
+        gsap.to(answer, {
+          height: 0,
+          paddingBottom: 0,
+          duration: DURATION,
+          ease: "power3.out",
+          onStart: () => section.classList.remove("is-open"),
+          onComplete: () => gsap.set(answer, { clearProps: "height,paddingBottom" }),
+        });
+      } else {
+        section.classList.add("is-open");
+        gsap.set(answer, { height: 0, paddingBottom: 0 });
+        const contentHeight = answer.scrollHeight;
+        gsap.to(answer, {
+          height: contentHeight,
+          paddingBottom: PADDING_PX,
+          duration: DURATION,
+          ease: "power3.out",
+          onComplete: () => gsap.set(answer, { height: "auto" }),
+        });
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
 
   // Globalen Heading-Index ueber alle Parts hinweg berechnen
   let headingIndex = 0;

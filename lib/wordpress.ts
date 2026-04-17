@@ -934,6 +934,110 @@ export async function getCategoryBySlug(slug: string) {
 // Rechner-Konfiguration aus WordPress ACF
 // ─────────────────────────────────────────────
 
+export async function getLatestPostsByCategoryIds(
+  categoryIds: number[],
+  limit = 10,
+  excludeDatabaseId?: number
+): Promise<Post[]> {
+  if (categoryIds.length === 0) return [];
+  const client = getClient();
+
+  const query = gql`
+    query GetLatestByCats($cats: [ID], $first: Int!, $notIn: [ID]) {
+      posts(
+        first: $first
+        where: { categoryIn: $cats, notIn: $notIn, orderby: { field: DATE, order: DESC } }
+      ) {
+        nodes {
+          id
+          databaseId
+          title
+          slug
+          date
+          excerpt
+          featuredImage { node { sourceUrl altText } }
+          categories { nodes { name slug databaseId } }
+          beitrag { untertitel }
+        }
+      }
+    }
+  `;
+
+  async function fetchPosts(cats: number[], exclude: number[]): Promise<Post[]> {
+    try {
+      const data = await client.request<{
+        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; databaseId: number })[] };
+      }>(query, {
+        cats: cats.map(String),
+        first: limit + (exclude.length || 0) + 5,
+        notIn: exclude.map(String),
+      });
+      return data.posts.nodes.map((post) => {
+        const decoded = decodePostContent(post);
+        if (post.beitrag?.untertitel) {
+          decoded.beitragFelder = {
+            ...decoded.beitragFelder,
+            beitragUntertitel: post.beitrag.untertitel,
+          };
+        }
+        return decoded;
+      });
+    } catch (error) {
+      console.error("Error fetching posts by category IDs:", error);
+      return [];
+    }
+  }
+
+  const excludeArr = excludeDatabaseId ? [excludeDatabaseId] : [];
+  let posts = await fetchPosts(categoryIds, excludeArr);
+
+  // Fallback: wenn zu wenige → Parent-Kategorien mit einbeziehen
+  if (posts.length < limit) {
+    const parentIds = await getParentCategoryIds(categoryIds);
+    const newIds = parentIds.filter((id) => !categoryIds.includes(id));
+    if (newIds.length > 0) {
+      const existingIds = new Set(posts.map((p) => (p as Post & { databaseId?: number }).databaseId));
+      const fallbackExclude = [...excludeArr, ...posts.map((p) => (p as Post & { databaseId?: number }).databaseId!).filter(Boolean)];
+      const extra = await fetchPosts(newIds, fallbackExclude);
+      for (const post of extra) {
+        const dbId = (post as Post & { databaseId?: number }).databaseId;
+        if (dbId && !existingIds.has(dbId)) {
+          posts.push(post);
+          if (posts.length >= limit) break;
+        }
+      }
+    }
+  }
+
+  return posts.slice(0, limit);
+}
+
+async function getParentCategoryIds(categoryIds: number[]): Promise<number[]> {
+  const client = getClient();
+  const query = gql`
+    query GetParents($ids: [ID]) {
+      categories(where: { include: $ids }, first: 100) {
+        nodes {
+          databaseId
+          parent { node { databaseId } }
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{
+      categories: { nodes: Array<{ databaseId: number; parent?: { node?: { databaseId: number } } }> };
+    }>(query, { ids: categoryIds.map(String) });
+    const parents = data.categories.nodes
+      .map((c) => c.parent?.node?.databaseId)
+      .filter((id): id is number => typeof id === "number");
+    return Array.from(new Set(parents));
+  } catch (error) {
+    console.error("Error fetching parent category IDs:", error);
+    return [];
+  }
+}
+
 export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null> {
   const wpUrl = process.env.WORDPRESS_API_URL;
   if (!wpUrl) return null;

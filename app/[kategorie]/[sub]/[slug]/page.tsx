@@ -50,6 +50,7 @@ export default async function BeitragPage(props: {
       mainCategoryName={mainCategory?.name}
       content={post.content}
       contentTableOfContents={!!post.content}
+      slug={params.slug}
       author={
         post.author?.node
           ? {
