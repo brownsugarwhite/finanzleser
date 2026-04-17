@@ -1,41 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ArticleSidebar from "./ArticleSidebar";
+import ArticleElementWrapper from "./ArticleElementWrapper";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import ArticleContent from "@/components/sections/ArticleContent";
 import PdfPreview from "@/components/ui/PdfPreview";
-
-function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
-  return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
-      <div style={{ width: "100%", minWidth: "80vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: "80vw" }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CenteredContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
-  return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
-      <div style={{ width: "100%", minWidth: 550, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: 750 }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export { WideContainer, CenteredContainer };
 
 type ArticleClientProps = {
   title?: string;
@@ -85,8 +59,8 @@ export default function ArticleClient({
   ] : undefined;
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-      {/* sidebar_container */}
+    <div style={{ position: "relative", width: "100%" }}>
+      {/* Absolut positioniertes TOC (aus dem Flow raus) */}
       {content && (
         <ArticleSidebar
           content={content}
@@ -95,15 +69,11 @@ export default function ArticleClient({
         />
       )}
 
-      {/* article_container */}
+      {/* Main-Wrapper: Folge von Element-Wrappern */}
       <article style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        {/* Breadcrumb */}
-        <WideContainer collapsed={collapsed}>
+        {/* Breadcrumb + Hero-Block + Spacer (zusammen in einem Wrapper) */}
+        <ArticleElementWrapper variant="wide" collapsed={collapsed}>
           <Breadcrumb items={breadcrumbItems} />
-        </WideContainer>
-
-        {/* Header: Visual links, Text rechts */}
-        <WideContainer collapsed={collapsed}>
           <div style={{ width: "100%", display: "flex", flexDirection: "row", gap: "36px" }}>
             {/* Visual links */}
             <div style={{ flexShrink: 0, width: "50%", height: "100%" }}>
@@ -202,10 +172,10 @@ export default function ArticleClient({
           <div style={{ marginTop: 50, marginBottom: 23 }}>
             <Spacer noMargin />
           </div>
-        </WideContainer>
+        </ArticleElementWrapper>
 
-        {/* Centered: Autor, TOC */}
-        <CenteredContainer collapsed={collapsed}>
+        {/* Autor + inline-TOC + Trenner */}
+        <ArticleElementWrapper variant="centered" collapsed={collapsed}>
           {author && (
             <div className="pt-6 mb-8">
               <Author
@@ -221,24 +191,24 @@ export default function ArticleClient({
             <ArticleTableOfContents content={content} />
           )}
           <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
-        </CenteredContainer>
+        </ArticleElementWrapper>
 
-        {/* Artikel-Inhalt: alternating wide/centered Container */}
+        {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
         {content && content.trim() ? (
           <>
             <ArticleContent content={content} collapsed={collapsed} />
             {pageSlug && (
-              <CenteredContainer collapsed={collapsed}>
+              <ArticleElementWrapper variant="centered" collapsed={collapsed}>
                 <PdfPreview slug={pageSlug} />
-              </CenteredContainer>
+              </ArticleElementWrapper>
             )}
           </>
         ) : (
-          <CenteredContainer collapsed={collapsed}>
+          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
             <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
               <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
             </div>
-          </CenteredContainer>
+          </ArticleElementWrapper>
         )}
       </article>
     </div>

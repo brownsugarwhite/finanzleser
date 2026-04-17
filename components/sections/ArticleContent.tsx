@@ -8,6 +8,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 });
 
 import FazitHeading from "@/components/ui/FazitHeading";
+import ArticleElementWrapper from "@/components/layout/ArticleElementWrapper";
 
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
@@ -99,30 +100,6 @@ function parseContent(html: string): ContentPart[] {
   return parts;
 }
 
-function WideContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
-  return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
-      <div style={{ width: "100%", minWidth: "80vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: "80vw" }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CenteredContainer({ children, collapsed }: { children: React.ReactNode; collapsed: boolean }) {
-  return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch", paddingRight: collapsed ? 120 : 430 }}>
-      <div style={{ width: "100%", minWidth: 750, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ width: "100%", maxWidth: 750 }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // H2-Tags im HTML-String mit heading-IDs versehen
 function addHeadingIds(html: string, startIndex: number): { html: string; count: number } {
   let idx = startIndex;
@@ -171,15 +148,15 @@ export default function ArticleContent({ content, collapsed }: Props) {
       return fazitParts.map((fp, j) => {
         if (fp.type === "fazit") {
           return (
-            <CenteredContainer key={`${i}-fazit-${j}`} collapsed={collapsed}>
+            <ArticleElementWrapper key={`${i}-fazit-${j}`} variant="centered" collapsed={collapsed}>
               <FazitHeading id={fp.value} />
-            </CenteredContainer>
+            </ArticleElementWrapper>
           );
         }
         return (
-          <CenteredContainer key={`${i}-html-${j}`} collapsed={collapsed}>
+          <ArticleElementWrapper key={`${i}-html-${j}`} variant="centered" collapsed={collapsed}>
             <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: fp.value }} />
-          </CenteredContainer>
+          </ArticleElementWrapper>
         );
       });
     }
@@ -187,40 +164,40 @@ export default function ArticleContent({ content, collapsed }: Props) {
       const id = `heading-${headingIndex}`;
       headingIndex++;
       return (
-        <WideContainer key={i} collapsed={collapsed}>
+        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
           <div className="article-tool-embed">
             <RechnerEmbed
               slug={part.value}
               formHeader={<ToolLabel type="rechner" slug={part.value} headingId={id} showExcerpt />}
             />
           </div>
-        </WideContainer>
+        </ArticleElementWrapper>
       );
     }
     if (part.type === "checkliste") {
       const id = `heading-${headingIndex}`;
       headingIndex++;
       return (
-        <WideContainer key={i} collapsed={collapsed}>
+        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
           <div className="checkliste-article-wrap">
             <ChecklisteEmbed
               slug={part.value}
               formHeader={<ToolLabel type="checkliste" slug={part.value} headingId={id} showExcerpt />}
             />
           </div>
-        </WideContainer>
+        </ArticleElementWrapper>
       );
     }
     if (part.type === "vergleich") {
       const id = `heading-${headingIndex}`;
       headingIndex++;
       return (
-        <WideContainer key={i} collapsed={collapsed}>
+        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
           <VergleichEmbed
             slug={part.value}
             formHeader={<ToolLabel type="vergleich" slug={part.value} headingId={id} showExcerpt />}
           />
-        </WideContainer>
+        </ArticleElementWrapper>
       );
     }
     return null;

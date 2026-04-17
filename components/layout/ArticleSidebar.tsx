@@ -12,14 +12,17 @@ export default function ArticleSidebar({ content, collapsed, setCollapsed }: Art
 
   return (
     <aside
-      className="block"
       style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        height: "100%",
+        zIndex: 52,
         display: "flex",
         gap: collapsed ? "10px" : "23px",
-        alignSelf: "stretch",
         flexShrink: 0,
-        width: "100%",
-        maxWidth: collapsed ? "120px" : "430px",
+        width: collapsed ? "120px" : "430px",
         paddingLeft: collapsed ? "23px" : "50px",
         paddingRight: collapsed ? "23px" : "23px",
       }}
