@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Footer from "./Footer";
-import Breadcrumb from "@/components/ui/Breadcrumb";
+import CategoryHeader from "./CategoryHeader";
 import InlineSVG from "@/components/ui/InlineSVG";
 import type { Post } from "@/lib/types";
 
@@ -17,7 +17,6 @@ export default function MainCategoryLayout({
   name,
   slug,
   description,
-  image,
   categoryChildren,
   posts,
 }: MainCategoryLayoutProps) {
@@ -28,33 +27,9 @@ export default function MainCategoryLayout({
   return (
     <>
       <main className="min-h-screen bg-white">
+        <CategoryHeader title={name} description={description} breadcrumbItems={breadcrumbItems} />
+
         <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
-          <Breadcrumb items={breadcrumbItems} />
-
-          {/* Titelbild */}
-          {image && (
-            <div style={{ width: '100%', maxHeight: '300px', display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-              <InlineSVG
-                src={image}
-                alt={name}
-                style={{ maxWidth: '400px', width: '100%', height: '100%', maxHeight: '300px' }}
-              />
-            </div>
-          )}
-
-          <h1 className="text-5xl font-bold mb-4">{name}</h1>
-          {description && (
-            <p style={{
-              fontFamily: 'Merriweather, serif',
-              fontSize: '18px',
-              fontStyle: 'italic',
-              color: 'var(--color-text-medium)',
-              marginBottom: '32px',
-            }}>
-              {description}
-            </p>
-          )}
-
           {/* Unterkategorien */}
           {categoryChildren.length > 0 && (
             <div className="mb-16">

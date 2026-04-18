@@ -83,22 +83,14 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
         transition: `width ${T2}s ${phase2Ease}`,
       }}
     >
-      {/* Visual */}
+      {/* Visual — grauer Platzhalter */}
       <div style={{
         width: '100%',
         height: active ? 0 : 220,
-        overflow: 'hidden',
+        background: 'rgba(0, 0, 0, 0.08)',
         opacity: active ? 0 : 1,
         transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
-      }}>
-        {category.image && (
-          <InlineSVG
-            src={category.image}
-            alt={category.name}
-            style={{ width: '100%', height: '100%' }}
-          />
-        )}
-      </div>
+      }} />
 
       {/* Title */}
       <p

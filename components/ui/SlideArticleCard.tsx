@@ -54,16 +54,8 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
         WebkitUserSelect: 'none',
       }}
     >
-      {/* Visual */}
-      <div style={{ width: '100%', height: 160, overflow: 'hidden' }}>
-        {imageUrl && (
-          <InlineSVG
-            src={imageUrl}
-            alt={post.featuredImage?.node?.altText || post.title}
-            style={{ width: '100%', height: '100%' }}
-          />
-        )}
-      </div>
+      {/* Visual — grauer Platzhalter */}
+      <div style={{ width: '100%', height: 160, background: 'rgba(0, 0, 0, 0.08)' }} />
 
       {/* Text Content */}
       <div style={{ width: '100%', padding: '0 23px', display: 'flex', flexDirection: 'column' }}>
