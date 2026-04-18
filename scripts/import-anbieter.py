@@ -99,6 +99,68 @@ def parse_docx(path: Path):
     return {"url": url, "description": description, "table_rows": table_rows}
 
 
+def classify_row(label):
+    """Weist eine Kontaktzeile einer der drei Gruppen zu."""
+    l = label.lower()
+    if re.search(r"website|internet|homepage|\burl\b|\bweb\b|mail", l):
+        return "online"
+    if re.search(r"firmenname|unternehmen|firma|\bname\b|\bsitz\b|adresse|stra(s|ß)e|anschrift|postfach|\bort\b|\bplz\b", l):
+        return "adresse"
+    # Telefon, Hotline, Schaden, Service-Nummern, Oeffnungszeiten etc.
+    return "telefon"
+
+
+# Reihenfolge + Titel + Emoji-Platzhalter pro Gruppe
+GROUPS = [
+    ("adresse", "🏢 Name & Adresse"),
+    ("online",  "🌐 Website & E-Mail"),
+    ("telefon", "📞 Telefonnummern"),
+]
+
+
+def make_value_cell(group, value):
+    """Rendert den Value-Zellinhalt: Online/Telefon werden zu Links."""
+    v = value.strip()
+    if not v:
+        return ""
+
+    if group == "online":
+        if "@" in v:
+            # E-Mail: nur das erste @-Token als mailto (falls mehrere durch Leerzeichen getrennt)
+            first = v.split()[0]
+            return f'<a href="mailto:{html_escape(first)}">{html_escape(v)}</a>'
+        # Website
+        url = v if re.match(r"^https?://", v, re.I) else f"https://{v}"
+        return (
+            f'<a href="{html_escape(url)}" target="_blank" rel="noopener noreferrer">'
+            f'{html_escape(v)}</a>'
+        )
+
+    if group == "telefon":
+        # Nimm den ersten zusammenhaengenden Telefon-Block (bis zum ersten "(" oder Buchstaben)
+        m = re.match(r"^[\s+\d\-\/]+", v)
+        if m:
+            num = re.sub(r"[^\d+]", "", m.group(0))
+            if num:
+                return f'<a href="tel:{html_escape(num)}">{html_escape(v)}</a>'
+        return html_escape(v)
+
+    # adresse / default: kein Link
+    return html_escape(v)
+
+
+def build_table_block(rows, group):
+    body = "".join(
+        f"<tr><td>{html_escape(l)}</td><td>{make_value_cell(group, v)}</td></tr>"
+        for l, v in rows
+    )
+    return (
+        '<!-- wp:table -->\n'
+        f'<figure class="wp-block-table"><table><tbody>{body}</tbody></table></figure>\n'
+        '<!-- /wp:table -->'
+    )
+
+
 def build_content(description, table_rows):
     parts = []
 
@@ -107,21 +169,24 @@ def build_content(description, table_rows):
             f"<!-- wp:paragraph -->\n<p>{html_escape(description)}</p>\n<!-- /wp:paragraph -->"
         )
 
-    if table_rows:
-        parts.append('<!-- wp:heading -->\n<h2 class="wp-block-heading">Kontaktdaten</h2>\n<!-- /wp:heading -->')
+    if not table_rows:
+        return "\n\n".join(parts)
 
-        body_rows = []
-        for label, value in table_rows:
-            body_rows.append(
-                f"<tr><td>{html_escape(label)}</td><td>{html_escape(value)}</td></tr>"
-            )
-        tbody = "".join(body_rows)
-        table_html = (
-            '<!-- wp:table -->\n'
-            f'<figure class="wp-block-table"><table><tbody>{tbody}</tbody></table></figure>\n'
-            '<!-- /wp:table -->'
+    # Gruppiere Zeilen (Reihenfolge innerhalb der Gruppe bleibt erhalten)
+    grouped = {key: [] for key, _ in GROUPS}
+    for label, value in table_rows:
+        grouped[classify_row(label)].append((label, value))
+
+    parts.append('<!-- wp:heading -->\n<h2 class="wp-block-heading">Kontaktdaten</h2>\n<!-- /wp:heading -->')
+
+    for key, title in GROUPS:
+        rows = grouped[key]
+        if not rows:
+            continue
+        parts.append(
+            f'<!-- wp:heading {{"level":3}} -->\n<h3 class="wp-block-heading">{title}</h3>\n<!-- /wp:heading -->'
         )
-        parts.append(table_html)
+        parts.append(build_table_block(rows, key))
 
     return "\n\n".join(parts)
 

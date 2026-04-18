@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 
 type AnbieterLayoutProps = {
   title: string;
@@ -8,10 +9,12 @@ type AnbieterLayoutProps = {
 };
 
 export default function AnbieterLayout({ title, content }: AnbieterLayoutProps) {
+  const { name, kicker } = splitAnbieterTitle(title);
+
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Anbieter", href: "/anbieter" },
-    { label: title, href: "#" },
+    { label: name, href: "#" },
   ];
 
   return (
@@ -31,8 +34,22 @@ export default function AnbieterLayout({ title, content }: AnbieterLayoutProps) 
             />
           </div>
 
+          {kicker && (
+            <span
+              className="mb-2 inline-block"
+              style={{
+                color: "var(--color-brand-secondary)",
+                fontFamily: "Merriweather, serif",
+                fontSize: "23px",
+                fontStyle: "italic",
+              }}
+            >
+              {kicker}
+            </span>
+          )}
+
           <h1 className="font-bold mb-6" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
-            {title}
+            {name}
           </h1>
 
           <div

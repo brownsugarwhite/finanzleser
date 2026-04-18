@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import type { AnbieterPost } from "@/lib/types";
 
 type AnbieterListLayoutProps = {
@@ -13,10 +14,13 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
     { label: "Anbieter", href: "#" },
   ];
 
+  // Anzeige-Namen vorab berechnen, damit Gruppierung + Sortierung konsistent sind.
+  const items = anbieter.map((a) => ({ ...a, displayName: splitAnbieterTitle(a.title).name }));
+
   const umlautMap: Record<string, string> = { "Ä": "A", "Ö": "O", "Ü": "U" };
-  const grouped = new Map<string, AnbieterPost[]>();
-  for (const a of anbieter) {
-    const first = (a.title[0] || "#").toUpperCase();
+  const grouped = new Map<string, typeof items>();
+  for (const a of items) {
+    const first = (a.displayName[0] || "#").toUpperCase();
     const key = umlautMap[first] || (/[A-Z]/.test(first) ? first : "#");
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key)!.push(a);
@@ -49,7 +53,7 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
                       className="inline-block hover:opacity-80 transition"
                       style={{ color: "var(--color-text-dark)" }}
                     >
-                      {a.title}
+                      {a.displayName}
                     </Link>
                   </li>
                 ))}
