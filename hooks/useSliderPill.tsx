@@ -226,7 +226,7 @@ export function useSliderPill({
       // Erst bei echtem Scroll (drag) wird sie via onScroll-handler unten gehidet.
     };
     const reEvaluate = () => {
-      if (!isActiveMode || transitionLock.current) return;
+      if (!isActiveMode) return;
       let target: HTMLElement | null = null;
       let targetIdx = -1;
       if (isMouseInside.current && lastClientX.current !== null) {
@@ -299,9 +299,7 @@ export function useSliderPill({
     };
   }, [emblaApi, doHide, isActiveMode, getScrollOffset, movePillTo, activeIndex]);
 
-  /* ── Mode change → hide pill + lock during transition ── */
-
-  const transitionLock = useRef(false);
+  /* ── Mode change → hide pill + snap to active (lock handled by SubcategorySlider's morphLock) ── */
 
   /* ── Snap pill to active card (button-mode) ── */
 
@@ -331,10 +329,7 @@ export function useSliderPill({
       return;
     }
 
-    // Mode change (null↔active): instant hide, lock + optional snap+bloom
-    transitionLock.current = true;
-    const tLock = setTimeout(() => { transitionLock.current = false; }, 900);
-
+    // Mode change (null↔active): instant hide + optional snap+bloom
     gsap.killTweensOf(pillRef.current);
     if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
     if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
@@ -346,7 +341,6 @@ export function useSliderPill({
 
     const tSnap = curr !== null ? setTimeout(snapToActive, 720) : null;
     return () => {
-      clearTimeout(tLock);
       if (tSnap) clearTimeout(tSnap);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -372,7 +366,7 @@ export function useSliderPill({
   const handleContainerMove = useCallback((e: React.MouseEvent) => {
     isMouseInside.current = true;
     lastClientX.current = e.clientX;
-    if (isDragging.current || !isActiveMode || transitionLock.current) return;
+    if (isDragging.current || !isActiveMode) return;
 
     const viewportRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const mouseXViewport = e.clientX - viewportRect.left;
