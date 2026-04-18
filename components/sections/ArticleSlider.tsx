@@ -84,7 +84,7 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
   return (
     <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', marginTop: 30 }}>
       <div style={{ display: 'flex', gap: `${ART_GAP}px` }}>
-        <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
+        <div style={{ flex: '0 0 5vw', minWidth: 0 }} aria-hidden />
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
           return (
@@ -133,7 +133,7 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
             </div>
           );
         })}
-        <div style={{ flex: '0 0 10vw', minWidth: 0 }} aria-hidden />
+        <div style={{ flex: '0 0 5vw', minWidth: 0 }} aria-hidden />
       </div>
     </div>
   );

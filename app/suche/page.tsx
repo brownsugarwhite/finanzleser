@@ -3,6 +3,7 @@ import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { searchPosts } from "@/lib/wordpress";
+import { isMainCategory } from "@/lib/categories";
 import type { Post, Category } from "@/lib/types";
 
 type SearchPageProps = {
@@ -67,11 +68,8 @@ export default async function SearchPage(props: SearchPageProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {results.map((post) => {
-                  const category = post.categories?.nodes?.[0];
-                  // Finde Parent-Kategorie (Hauptkategorie)
-                  const mainCategory = post.categories?.nodes?.find(
-                    (cat: Category) => cat.parent === null || cat.parent === 0
-                  );
+                  const mainCategory = post.categories?.nodes?.find((cat: Category) => isMainCategory(cat.slug));
+                  const category = post.categories?.nodes?.find((cat: Category) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
                   const mainCategorySlug = mainCategory?.slug || "beitraege";
                   const subCategorySlug = category?.slug || "allgemein";
                   const postLink = `/${mainCategorySlug}/${subCategorySlug}/${post.slug}`;

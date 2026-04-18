@@ -1,6 +1,7 @@
 import Link from "next/link";
 import InlineSVG from "@/components/ui/InlineSVG";
 import type { Post } from "@/lib/types";
+import { isMainCategory } from "@/lib/categories";
 
 type FeaturedPostsProps = {
   posts: Post[];
@@ -30,12 +31,8 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredPosts.map((post) => {
-            const category = firstCategory(post);
-            // Finde Parent-Kategorie (Hauptkategorie)
-            const mainCategory = post.categories?.nodes?.find(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (cat: any) => cat.parent === null || cat.parent === 0
-            );
+            const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
+            const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || firstCategory(post);
             const mainCategorySlug = mainCategory?.slug || "beitraege";
             const subCategorySlug = category?.slug || "allgemein";
             const postLink = `/${mainCategorySlug}/${subCategorySlug}/${post.slug}`;

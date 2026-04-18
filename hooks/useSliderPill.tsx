@@ -307,7 +307,7 @@ export function useSliderPill({
   /* ── Render pill (overlay outside viewport, overflow visible for lines) ── */
 
   const renderPill = useCallback(() => {
-    const spacerLeft = spacerExpanded ? "calc(10vw + 23px)" : "10vw";
+    const spacerLeft = spacerExpanded ? "calc(5vw + 23px)" : "5vw";
 
     return (
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", zIndex: 4 }}>
@@ -363,7 +363,7 @@ export function useSliderPill({
                   </React.Fragment>
                 ))}
                 {/* Trailing gap + spacer */}
-                <div style={{ flex: `0 0 calc(${spacerExpanded ? "25vw" : "10vw"} + ${gap}px)`, minWidth: 0 }} />
+                <div style={{ flex: `0 0 calc(${spacerExpanded ? "18vw" : "5vw"} + ${gap}px)`, minWidth: 0 }} />
               </div>
             )}
           </div>

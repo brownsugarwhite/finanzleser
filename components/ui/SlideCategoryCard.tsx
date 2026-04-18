@@ -19,13 +19,14 @@ interface SlideCategoryCardProps {
   selected?: boolean;
   onClose?: () => void;
   titleWidth?: number;
+  fluidWidth?: boolean;
 }
 
-const CARD_WIDTH = 320;
+const CARD_WIDTH = 350;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
-export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose, titleWidth: titleWidthProp }: SlideCategoryCardProps) {
+export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   // 2-phase: width changes delayed when collapsing, immediate when expanding
@@ -63,7 +64,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
 
   const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
-  const cardWidth = phase2Active ? `${titleWidth}px` : `${CARD_WIDTH}px`;
+  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
 
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
@@ -80,97 +81,69 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
         flexShrink: 0,
         userSelect: 'none',
         WebkitUserSelect: 'none',
+        paddingBottom: 5,
         transition: `width ${T2}s ${phase2Ease}`,
       }}
     >
       {/* Visual — grauer Platzhalter */}
       <div style={{
         width: '100%',
-        height: active ? 0 : 220,
+        height: active ? 0 : 260,
         background: 'rgba(0, 0, 0, 0.08)',
         opacity: active ? 0 : 1,
         transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
       }} />
 
-      {/* Title */}
-      <p
-        lang="de"
-        style={{
-          fontFamily: "var(--font-heading, 'Merriweather', serif)",
-          fontWeight: phase2Active ? 600 : 700,
-          fontSize: phase2Active ? '16px' : '20px',
-          lineHeight: 1.3,
-          color: 'var(--color-text-primary)',
-          margin: 0,
-          padding: phase2Active ? 0 : '0 23px',
-          whiteSpace: 'nowrap',
-          width: 'fit-content',
-          marginTop: phase2Active ? 0 : 27,
-          boxSizing: 'border-box',
-          transition: `padding ${T2}s ${phase2Ease}, margin ${T2}s ${phase2Ease}, font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}`,
-        }}
-      >
-        <span style={{ paddingRight: active ? 0 : 10 }}>
-          {category.name}
-          {active && selected && onClose && (
-            <span
-              onClick={(e) => { e.stopPropagation(); onClose(); }}
-              style={{
-                marginLeft: 8,
-                cursor: 'pointer',
-                opacity: 0.5,
-                fontSize: '14px',
-                fontWeight: 400,
-                display: 'inline-block',
-                transition: 'opacity 0.2s ease',
-              }}
-              onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = '1'; }}
-              onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = '0.5'; }}
-            >
-              ✕
-            </span>
-          )}
-        </span>
-      </p>
-
-      {/* Description */}
-      {category.description && (
-        <div style={{
-          width: '100%',
-          overflow: 'hidden',
-          maxHeight: active ? 0 : 100,
-          opacity: active ? 0 : 1,
-          padding: '0 23px',
-          marginTop: active ? 0 : 10,
-          transition: `max-height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s, margin ${T1}s ${phase1Ease} ${phase1Delay}s`,
-        }}>
-          <p style={{
-            fontFamily: 'var(--font-body)',
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: 1.3,
-            color: 'var(--color-text-medium)',
-            margin: 0,
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}>
-            {category.description}
-          </p>
-        </div>
-      )}
-
-      {/* Arrow Button */}
+      {/* Title + Arrow-Button (rechts neben Titel wenn nicht collapsed) */}
       <div style={{
         width: '100%',
-        overflow: 'hidden',
-        maxHeight: active ? 0 : 60,
-        opacity: active ? 0 : 1,
-        padding: active ? 0 : '10px 23px',
-        transition: `max-height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s, padding ${T1}s ${phase1Ease} ${phase1Delay}s`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 12,
+        padding: phase2Active ? 0 : '0 23px',
+        marginTop: phase2Active ? 0 : 27,
+        boxSizing: 'border-box',
+        transition: `padding ${T2}s ${phase2Ease}, margin ${T2}s ${phase2Ease}`,
       }}>
-        <Link href={categoryLink} style={{
+        <p
+          lang="de"
+          style={{
+            fontFamily: "var(--font-heading, 'Merriweather', serif)",
+            fontWeight: phase2Active ? 600 : 700,
+            fontSize: phase2Active ? '16px' : '20px',
+            lineHeight: 1.3,
+            color: 'var(--color-text-primary)',
+            margin: 0,
+            padding: 0,
+            whiteSpace: 'nowrap',
+            transition: `font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}`,
+          }}
+        >
+          <span>
+            {category.name}
+            {active && selected && onClose && (
+              <span
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                style={{
+                  marginLeft: 8,
+                  cursor: 'pointer',
+                  opacity: 0.5,
+                  fontSize: '14px',
+                  fontWeight: 400,
+                  display: 'inline-block',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = '1'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = '0.5'; }}
+              >
+                ✕
+              </span>
+            )}
+          </span>
+        </p>
+        <Link href={categoryLink} onClick={(e) => e.stopPropagation()} style={{
+          flexShrink: 0,
           backgroundColor: 'transparent',
           borderRadius: '18px',
           padding: '3px 3px 3px 10px',
@@ -182,6 +155,10 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
           justifyContent: 'center',
           cursor: 'pointer',
           textDecoration: 'none',
+          maxWidth: active ? 0 : 60,
+          opacity: active ? 0 : 1,
+          overflow: 'hidden',
+          transition: `max-width ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
         }}>
           <div style={{
             width: '32px',

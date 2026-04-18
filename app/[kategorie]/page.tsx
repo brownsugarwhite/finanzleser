@@ -3,6 +3,7 @@ import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategory
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
+import type { Post } from "@/lib/types";
 
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;
@@ -18,6 +19,16 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?
   const categoryWithChildren = await getCategoryWithChildren(params.kategorie).catch(() => null);
   if (categoryWithChildren && categoryWithChildren.children && categoryWithChildren.children.length > 0) {
+    // Posts pro Subkategorie vorladen (für SubcategorySlider)
+    const allCategoryPosts: Record<string, Post[]> = {};
+    const results = await Promise.all(
+      categoryWithChildren.children.map(async (cat) => ({
+        slug: cat.slug,
+        posts: await getPostsByCategory(cat.slug).catch(() => []),
+      }))
+    );
+    results.forEach(({ slug, posts }) => { allCategoryPosts[slug] = posts; });
+
     return (
       <MainCategoryLayout
         name={categoryWithChildren.name}
@@ -26,6 +37,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
         image={categoryWithChildren.image}
         categoryChildren={categoryWithChildren.children}
         posts={categoryWithChildren.posts}
+        allCategoryPosts={allCategoryPosts}
       />
     );
   }

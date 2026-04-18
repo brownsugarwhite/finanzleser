@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { Post } from '@/lib/types';
+import { isMainCategory } from '@/lib/categories';
 import InlineSVG from '@/components/ui/InlineSVG';
 
 type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
@@ -26,10 +27,8 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
 
-  const category = post.categories?.nodes?.[0];
-  const mainCategory = post.categories?.nodes?.find(
-    (cat) => cat.parent === null || cat.parent === 0
-  );
+  const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
+  const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
   const postLink = `/${mainCategory?.slug || 'beitraege'}/${category?.slug || 'allgemein'}/${post.slug}`;
 
   const titleRef = useRef<HTMLParagraphElement>(null);

@@ -1,4 +1,11 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function SmallSpark() {
   return (
@@ -20,37 +27,70 @@ interface CategoryHeaderProps {
   title?: string;
   description?: string;
   breadcrumbItems?: { label: string; href: string }[];
+  children?: React.ReactNode;
 }
 
-export default function CategoryHeader({ title, description, breadcrumbItems }: CategoryHeaderProps) {
+export default function CategoryHeader({ title, description, breadcrumbItems, children }: CategoryHeaderProps) {
+  const sparksRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sparksRef.current;
+    if (!el) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { paddingLeft: 0, paddingRight: 0 },
+        {
+          paddingLeft: 200,
+          paddingRight: 200,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 60%",
+            end: "top 21px",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
     <div style={{
       width: "100%",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: "0 clamp(20px, 4vw, 40px)",
     }}>
       {/* Breadcrumb über dem Visual */}
-      <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23 }}>
+      <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
         <Breadcrumb items={breadcrumbItems} />
       </div>
-      {/* Visual Platzhalter */}
-      <div style={{
-        width: "100%",
-        maxWidth: "1200px",
-        height: 250,
-        background: "rgba(0, 0, 0, 0.06)",
-        marginBottom: 40,
-      }} />
-      {/* H1 mit Sparks und Linien */}
-      {title && (
+      {/* Visual Platzhalter — wrapper für seitliches Padding */}
+      <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
         <div style={{
+          width: "100%",
+          height: 250,
+          background: "rgba(0, 0, 0, 0.06)",
+        }} />
+      </div>
+      {/* H1 mit Sparks und Linien — sticky über dem Progressive Blur */}
+      {title && (
+        <div ref={sparksRef} style={{
           display: "flex",
           alignItems: "center",
           gap: 0,
           width: "100%",
           maxWidth: "1200px",
+          position: "sticky",
+          top: 21,
+          zIndex: 51,
+          paddingLeft: 40,
+          paddingRight: 40,
+          boxSizing: "border-box",
         }}>
           <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
           <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 10px" }}>
@@ -81,20 +121,24 @@ export default function CategoryHeader({ title, description, breadcrumbItems }: 
       )}
       {/* Beschreibung unter dem Sparks-Titel */}
       {description && (
-        <p style={{
-          width: "100%",
-          maxWidth: 750,
-          margin: "16px auto 24px",
-          padding: "0 16px",
-          fontFamily: "Merriweather, serif",
-          fontSize: 18,
-          fontStyle: "italic",
-          lineHeight: 1.5,
-          color: "var(--color-text-medium)",
-          textAlign: "center",
-        }}>
-          {description}
-        </p>
+        <div style={{ width: "100%", maxWidth: "1200px", ...sidePadding, boxSizing: "border-box" }}>
+          <p style={{
+            width: "100%",
+            maxWidth: 600,
+            margin: "23px auto 40px",
+            fontFamily: "Merriweather, serif",
+            fontSize: 18,
+            fontStyle: "italic",
+            lineHeight: 1.65,
+            color: "var(--color-text-medium)",
+            textAlign: "center",
+          }}>
+            {description}
+          </p>
+        </div>
+      )}
+      {children && (
+        <div style={{ width: "100%" }}>{children}</div>
       )}
     </div>
   );

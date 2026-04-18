@@ -9,6 +9,8 @@ import { useSliderPill } from '@/hooks/useSliderPill';
 import type { Post } from '@/lib/types';
 
 const CAT_GAP = 65;
+const CARD_WIDTH = 360;
+const MORPH_DURATION = 300; // ms — muss zu T1 in SlideCategoryCard passen
 
 // ── Main SubcategorySlider ──
 
@@ -138,6 +140,36 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     }
   }, [activeSlide]);
 
+  // Detect if all cards fit in viewport (without spacers) — no slider needed
+  const [canScroll, setCanScroll] = useState(true);
+  useEffect(() => {
+    if (!catEmblaApi) return;
+    const totalContent = categories.length * CARD_WIDTH + Math.max(0, categories.length - 1) * CAT_GAP;
+    const check = () => {
+      const fits = window.innerWidth >= totalContent + 40; // +40px breathing room
+      setCanScroll(!fits);
+      catEmblaApi.reInit({ watchDrag: !fits });
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [catEmblaApi, categories.length]);
+
+  // Delay static-layout expand on close so Card morphs first, THEN spacer grows
+  const [staticLayout, setStaticLayout] = useState(true);
+  useEffect(() => {
+    if (activeSlide !== null) {
+      // Open: collapse static layout immediately
+      setStaticLayout(false);
+    } else {
+      // Close: wait for card morph, then expand spacer
+      const t = setTimeout(() => setStaticLayout(true), MORPH_DURATION);
+      return () => clearTimeout(t);
+    }
+  }, [activeSlide]);
+
+  const useStaticLayout = !canScroll && staticLayout;
+
   // Slider pill hover effect
   const sliderPill = useSliderPill({
     items: categories,
@@ -169,10 +201,25 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           ref={catEmblaRef}
           onMouseMove={sliderPill.handleContainerMove}
           onMouseLeave={sliderPill.handleContainerLeave}
-          style={{ overflow: 'hidden', cursor: 'grab' }}
+          style={{
+            overflow: 'hidden',
+            cursor: canScroll ? 'grab' : 'default',
+            boxSizing: 'border-box',
+          }}
         >
           <div style={{ display: 'flex', gap: `${CAT_GAP}px` }}>
-            <div style={{ flex: `0 0 ${spacerExpanded ? 'calc(10vw + 23px)' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
+            <div
+              aria-hidden
+              style={{
+                flexGrow: useStaticLayout ? 1 : 0,
+                flexShrink: 0,
+                flexBasis: useStaticLayout
+                  ? '5vw'
+                  : (spacerExpanded ? 'calc(5vw + 23px)' : '5vw'),
+                minWidth: 0,
+                transition: 'flex-grow 0.3s ease, flex-basis 0.3s ease',
+              }}
+            />
             {categories.map((cat, index) => {
               const isLast = index === categories.length - 1;
 
@@ -235,7 +282,18 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                 </div>
               );
             })}
-            <div style={{ flex: `0 0 ${spacerExpanded ? '25vw' : '10vw'}`, minWidth: 0, transition: 'flex-basis 0.3s ease' }} aria-hidden />
+            <div
+              aria-hidden
+              style={{
+                flexGrow: useStaticLayout ? 1 : 0,
+                flexShrink: 0,
+                flexBasis: useStaticLayout
+                  ? '5vw'
+                  : (spacerExpanded ? '18vw' : '5vw'),
+                minWidth: 0,
+                transition: 'flex-grow 0.3s ease, flex-basis 0.3s ease',
+              }}
+            />
           </div>
         </div>
         {/* Pill overlay — outside viewport so lines aren't clipped by overflow:hidden */}
@@ -251,10 +309,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         />
       )}
 
-      {/* Shared SliderNav */}
-      <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
-        <SliderNav {...navProps} />
-      </div>
+      {/* Shared SliderNav — nur wenn scrollbar oder Article-Mode */}
+      {(canScroll || isArticleMode) && (
+        <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
+          <SliderNav {...navProps} />
+        </div>
+      )}
     </section>
   );
 }
