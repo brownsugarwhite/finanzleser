@@ -74,17 +74,15 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
-    const FADE_LEFT = 250;
-    const FADE_RIGHT = 200;
+    const FADE_LEFT = activeSlide !== null ? 120 : 250;
+    const FADE_RIGHT = activeSlide !== null ? 100 : 200;
+    const SCALE_MIN = activeSlide !== null ? 0.2 : 0.6;
     const FULL = { opacity: 1, scale: 1 };
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, catEmblaApi.scrollProgress()));
       const idx = Math.max(0, Math.min(slideCount - 1, Math.round(progress * (slideCount - 1))));
       setSelectedIndex(idx);
-
-      // Skip fade computation in button mode (all cards visible at full opacity)
-      if (activeSlide !== null) return;
 
       const rootNode = catEmblaApi.rootNode();
       const rootRect = rootNode.getBoundingClientRect();
@@ -101,11 +99,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
           const eased = t * t * (3 - 2 * t);
-          s = { opacity: eased, scale: 0.6 + 0.4 * eased };
+          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
         } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
           const eased = t * t * (3 - 2 * t);
-          s = { opacity: eased, scale: 0.6 + 0.4 * eased };
+          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
         }
 
         const prev = slideStylesRef.current[i];
@@ -122,9 +120,21 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     };
 
     catEmblaApi.on('scroll', update);
+    catEmblaApi.on('reInit', update);
+    catEmblaApi.on('resize', update);
     update();
 
-    return () => { catEmblaApi.off('scroll', update); };
+    // Re-measure during morph (cards shrink to buttons over MORPH_DURATION)
+    const tickInterval = setInterval(update, 50);
+    const stopTimer = setTimeout(() => clearInterval(tickInterval), MORPH_DURATION + 100);
+
+    return () => {
+      catEmblaApi.off('scroll', update);
+      catEmblaApi.off('reInit', update);
+      catEmblaApi.off('resize', update);
+      clearInterval(tickInterval);
+      clearTimeout(stopTimer);
+    };
   }, [catEmblaApi, categories.length, activeSlide]);
 
   // Reset article nav when closing
@@ -168,6 +178,20 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     }
   }, [activeSlide]);
 
+  // Hard lock against hover-pill movement only during card↔button morph
+  // (active → active wechsel löst KEINEN Lock aus)
+  const prevActiveSlideRef = useRef<number | null>(null);
+  const [morphLock, setMorphLock] = useState(false);
+  useEffect(() => {
+    const prev = prevActiveSlideRef.current;
+    prevActiveSlideRef.current = activeSlide;
+    const isModeChange = (prev === null) !== (activeSlide === null);
+    if (!isModeChange) return;
+    setMorphLock(true);
+    const t = setTimeout(() => setMorphLock(false), 900);
+    return () => clearTimeout(t);
+  }, [activeSlide]);
+
   const useStaticLayout = !canScroll && staticLayout;
 
   // Slider pill hover effect
@@ -179,6 +203,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     gap: CAT_GAP,
     spacerExpanded,
     hasLens: true,
+    activeIndex: activeSlide,
   });
 
   if (!categories || categories.length === 0) return null;
@@ -199,8 +224,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       <div style={{ position: 'relative' }}>
         <div
           ref={catEmblaRef}
-          onMouseMove={sliderPill.handleContainerMove}
-          onMouseLeave={sliderPill.handleContainerLeave}
+          onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
+          onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
           style={{
             overflow: 'hidden',
             cursor: canScroll ? 'grab' : 'default',
@@ -234,14 +259,14 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    opacity: activeSlide !== null ? 1 : (slideStyles[index + 1]?.opacity ?? 1),
+                    opacity: slideStyles[index + 1]?.opacity ?? 1,
                     transition: 'opacity 0.3s ease',
                   }}
                 >
                   <div
                     onClick={() => setActiveSlide(activeSlide === index ? null : index)}
                     style={{
-                      transform: `scale(${activeSlide !== null ? 1 : (slideStyles[index + 1]?.scale ?? 1)})`,
+                      transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
                       transition: 'transform 0.3s ease',
                       cursor: 'pointer',
                     }}
@@ -260,11 +285,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                   {!isLast && (
                     <div style={{
                       position: 'absolute',
-                      right: -CAT_GAP / 2 - 0.5,
+                      right: -CAT_GAP / 2 - 6,
                       top: '50%',
-                      transform: `translateY(-50%) scale(${activeSlide !== null ? 1 : Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
+                      transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
                       transformOrigin: 'center center',
-                      opacity: activeSlide !== null ? 1 : Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
+                      opacity: Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
                       transition: 'opacity 0.3s ease, transform 0.3s ease',
                       display: 'flex',
                       flexDirection: 'column',

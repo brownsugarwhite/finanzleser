@@ -113,14 +113,14 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
             fontWeight: phase2Active ? 600 : 700,
             fontSize: phase2Active ? '16px' : '20px',
             lineHeight: 1.3,
-            color: 'var(--color-text-primary)',
+            color: selected ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
             margin: 0,
             padding: 0,
             whiteSpace: 'nowrap',
-            transition: `font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}`,
+            transition: `font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}, color 0.2s ease`,
           }}
         >
-          <span>
+          <span style={{ color: 'inherit' }}>
             {category.name}
             {active && selected && onClose && (
               <span

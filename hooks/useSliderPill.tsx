@@ -25,6 +25,7 @@ export interface UseSliderPillOptions {
   gap: number;
   spacerExpanded: boolean;
   hasLens?: boolean;
+  activeIndex?: number | null;
 }
 
 /* ── Hook ───────────────────────────────────────── */
@@ -37,6 +38,7 @@ export function useSliderPill({
   gap,
   spacerExpanded,
   hasLens = true,
+  activeIndex = null,
 }: UseSliderPillOptions) {
   const pillRef = useRef<HTMLDivElement>(null);
   const pillBodyRef = useRef<HTMLDivElement>(null);
@@ -50,6 +52,8 @@ export function useSliderPill({
   const lastHoveredIdx = useRef(-1);
   const lastPillX = useRef(0);
   const scrollAtDown = useRef(0);
+  const lastClientX = useRef<number | null>(null);
+  const isMouseInside = useRef(false);
 
   /* ── Helpers ── */
 
@@ -111,14 +115,16 @@ export function useSliderPill({
       duration: d, ease: "back.out(1.5)",
     });
     if (line3Ref.current) {
-      gsap.killTweensOf(line3Ref.current, "x,width");
+      gsap.killTweensOf(line3Ref.current);
+      gsap.set(line3Ref.current, { opacity: 1, y: 0 });
       gsap.to(line3Ref.current, {
         x: targetX, width: targetW,
         duration: d + 0.04, ease: "back.out(1.5)", overwrite: "auto",
       });
     }
     if (line1Ref.current) {
-      gsap.killTweensOf(line1Ref.current, "x,width");
+      gsap.killTweensOf(line1Ref.current);
+      gsap.set(line1Ref.current, { opacity: 1, y: 0 });
       gsap.to(line1Ref.current, {
         x: targetX, width: targetW,
         duration: d + 0.08, ease: "back.out(1.5)", overwrite: "auto",
@@ -176,6 +182,8 @@ export function useSliderPill({
       const cx = x + w / 2;
 
       gsap.killTweensOf(pillRef.current);
+      if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
+      if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
       gsap.set(pillRef.current, {
         left: 0, top, x: cx - 5, width: 10, height: 10,
         scaleX: 1, scaleY: 1, borderRadius: `${PILL_R}px`, opacity: 1,
@@ -214,39 +222,135 @@ export function useSliderPill({
     const onDown = () => {
       scrollAtDown.current = emblaApi.scrollProgress();
       isDragging.current = true;
-      doHide();
+      // Pill NICHT sofort hiden — beim reinen Click soll sie sichtbar bleiben.
+      // Erst bei echtem Scroll (drag) wird sie via onScroll-handler unten gehidet.
     };
+    const reEvaluate = () => {
+      if (!isActiveMode || transitionLock.current) return;
+      let target: HTMLElement | null = null;
+      let targetIdx = -1;
+      if (isMouseInside.current && lastClientX.current !== null) {
+        const viewport = emblaApi.rootNode() as HTMLElement | null;
+        if (viewport) {
+          const vRect = viewport.getBoundingClientRect();
+          const mouseXViewport = lastClientX.current - vRect.left;
+          const cards = cardRefs.current.filter(Boolean);
+          const mouseXScroll = mouseXViewport + getScrollOffset();
+          for (let i = 0; i < cards.length; i++) {
+            const cLeft = cards[i].offsetLeft;
+            const cRight = cLeft + cards[i].offsetWidth;
+            let zoneEnd = cRight;
+            if (i < cards.length - 1) {
+              zoneEnd = (cRight + cards[i + 1].offsetLeft) / 2;
+            }
+            if (mouseXScroll <= zoneEnd || i === cards.length - 1) {
+              target = cards[i];
+              targetIdx = i;
+              break;
+            }
+          }
+        }
+      }
+      if (!target && activeIndex !== null && activeIndex !== undefined) {
+        target = cardRefs.current[activeIndex] || null;
+        targetIdx = activeIndex;
+      }
+      if (target) {
+        lastHoveredIdx.current = targetIdx;
+        movePillTo(target);
+      }
+    };
+
     const onUp = () => {
-      // Click (no scroll change) → re-enable immediately
       const moved = Math.abs(emblaApi.scrollProgress() - scrollAtDown.current) > 0.001;
-      if (!moved) isDragging.current = false;
-      // Drag → wait for settle
+      isDragging.current = false;
+      // Re-evaluate immediately on pointer up — don't wait for settle
+      if (moved) reEvaluate();
+    };
+    const onScroll = () => {
+      if (!isDragging.current || !pillVisible.current) return;
+      // Pill mit der card mit-scrollen (sticky to lastHovered/active card)
+      const idx = lastHoveredIdx.current >= 0
+        ? lastHoveredIdx.current
+        : (activeIndex ?? -1);
+      if (idx < 0) return;
+      const card = cardRefs.current[idx];
+      if (!card) return;
+      const { x, w } = getCardVX(card);
+      gsap.set(pillRef.current, { x, width: w });
+      if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
+      if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });
+      lastPillX.current = x;
     };
     const onSettle = () => {
       isDragging.current = false;
+      reEvaluate();
     };
 
     emblaApi.on("pointerDown", onDown);
     emblaApi.on("pointerUp", onUp);
+    emblaApi.on("scroll", onScroll);
     emblaApi.on("settle", onSettle);
     return () => {
       emblaApi.off("pointerDown", onDown);
       emblaApi.off("pointerUp", onUp);
+      emblaApi.off("scroll", onScroll);
       emblaApi.off("settle", onSettle);
     };
-  }, [emblaApi, doHide]);
+  }, [emblaApi, doHide, isActiveMode, getScrollOffset, movePillTo, activeIndex]);
 
   /* ── Mode change → hide pill + lock during transition ── */
 
   const transitionLock = useRef(false);
 
+  /* ── Snap pill to active card (button-mode) ── */
+
+  const snapToActive = useCallback(() => {
+    if (activeIndex === null || activeIndex === undefined) return;
+    const card = cardRefs.current[activeIndex];
+    if (!card) return;
+    movePillTo(card);
+    lastHoveredIdx.current = activeIndex;
+  }, [activeIndex, movePillTo]);
+
+  const prevActiveIndex = useRef<number | null>(null);
+
   useEffect(() => {
-    doHide();
-    lastHoveredIdx.current = -1;
+    const prev = prevActiveIndex.current;
+    const curr = activeIndex ?? null;
+    prevActiveIndex.current = curr;
+
+    // Active → Active: Pill bleibt sichtbar und slidet smooth zur neuen Card
+    // Kein transitionLock → handleContainerMove (Hover) bleibt aktiv
+    if (prev !== null && curr !== null && prev !== curr) {
+      const card = cardRefs.current[curr];
+      if (card) {
+        movePillTo(card);
+        lastHoveredIdx.current = curr;
+      }
+      return;
+    }
+
+    // Mode change (null↔active): instant hide, lock + optional snap+bloom
     transitionLock.current = true;
-    const t = setTimeout(() => { transitionLock.current = false; }, 700);
-    return () => clearTimeout(t);
-  }, [isActiveMode, doHide]);
+    const tLock = setTimeout(() => { transitionLock.current = false; }, 900);
+
+    gsap.killTweensOf(pillRef.current);
+    if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
+    if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
+    if (pillRef.current) gsap.set(pillRef.current, { opacity: 0, width: 1 });
+    if (line1Ref.current) gsap.set(line1Ref.current, { opacity: 0, width: 1 });
+    if (line3Ref.current) gsap.set(line3Ref.current, { opacity: 0, width: 1 });
+    pillVisible.current = false;
+    lastHoveredIdx.current = -1;
+
+    const tSnap = curr !== null ? setTimeout(snapToActive, 720) : null;
+    return () => {
+      clearTimeout(tLock);
+      if (tSnap) clearTimeout(tSnap);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActiveMode, activeIndex]);
 
   /* ── Lens sync (scroll-offset aware) ── */
 
@@ -266,6 +370,8 @@ export function useSliderPill({
   /* ── Mouse handlers ── */
 
   const handleContainerMove = useCallback((e: React.MouseEvent) => {
+    isMouseInside.current = true;
+    lastClientX.current = e.clientX;
     if (isDragging.current || !isActiveMode || transitionLock.current) return;
 
     const viewportRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -279,7 +385,15 @@ export function useSliderPill({
     const first = cards[0];
     const last = cards[cards.length - 1];
     if (mouseXScroll < first.offsetLeft || mouseXScroll > last.offsetLeft + last.offsetWidth) {
-      doHide();
+      if (activeIndex !== null && activeIndex !== undefined) {
+        const card = cardRefs.current[activeIndex];
+        if (card && lastHoveredIdx.current !== activeIndex) {
+          lastHoveredIdx.current = activeIndex;
+          movePillTo(card);
+        }
+      } else {
+        doHide();
+      }
       return;
     }
 
@@ -298,11 +412,22 @@ export function useSliderPill({
         return;
       }
     }
-  }, [getScrollOffset, movePillTo, doHide, isActiveMode]);
+  }, [getScrollOffset, movePillTo, doHide, isActiveMode, activeIndex]);
 
   const handleContainerLeave = useCallback(() => {
+    isMouseInside.current = false;
+    lastClientX.current = null;
+    if (activeIndex !== null && activeIndex !== undefined) {
+      // Snap back to active button instead of hiding
+      const card = cardRefs.current[activeIndex];
+      if (card) {
+        movePillTo(card);
+        lastHoveredIdx.current = activeIndex;
+        return;
+      }
+    }
     doHide();
-  }, [doHide]);
+  }, [doHide, activeIndex, movePillTo]);
 
   /* ── Render pill (overlay outside viewport, overflow visible for lines) ── */
 

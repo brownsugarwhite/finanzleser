@@ -123,14 +123,16 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
 
     // Linien folgen träger zum gleichen Ziel
     if (line3Ref.current) {
-      gsap.killTweensOf(line3Ref.current, "x,width");
+      gsap.killTweensOf(line3Ref.current);
+      gsap.set(line3Ref.current, { opacity: 1, y: 0 });
       gsap.to(line3Ref.current, {
         x: targetX, width: targetW,
         duration: d + 0.04, ease: "back.out(1.5)", overwrite: "auto",
       });
     }
     if (line1Ref.current) {
-      gsap.killTweensOf(line1Ref.current, "x,width");
+      gsap.killTweensOf(line1Ref.current);
+      gsap.set(line1Ref.current, { opacity: 1, y: 0 });
       gsap.to(line1Ref.current, {
         x: targetX, width: targetW,
         duration: d + 0.08, ease: "back.out(1.5)", overwrite: "auto",
@@ -177,6 +179,8 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     if (!pillVisible.current) {
       pillVisible.current = true;
       gsap.killTweensOf(pillRef.current);
+      if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
+      if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
       const cx = x + w / 2;
       gsap.set(pillRef.current, {
         left: 0, x: cx - 5, width: 10, height: 10,
