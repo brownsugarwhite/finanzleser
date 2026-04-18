@@ -27,3 +27,6 @@ npm-debug.log*
 
 # FAQ batch intermediates (agenten-generiert, in faqs-generated.json gemerged)
 scripts/faq-batches/
+
+# Anbieter-Import Zwischenergebnis (generiert aus assets/anbieter/)
+scripts/anbieter-import.json

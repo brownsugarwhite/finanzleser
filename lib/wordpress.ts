@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, PostACF, SEO, RechnerConfigOverrides } from "./types";
+import type { Post, Rechner, Checkliste, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
 import { decodePostContent } from "./html-utils";
 
 function getClient(): GraphQLClient {
@@ -1125,5 +1125,76 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
   } catch (error) {
     console.error("Error fetching rechner config from WordPress:", error);
     return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Anbieter (CPT): Einzelseite nach Slug
+// ─────────────────────────────────────────────
+
+export async function getAnbieterBySlug(slug: string): Promise<AnbieterPost | null> {
+  const client = getClient();
+
+  const query = gql`
+    query GetAnbieter($slug: String!) {
+      anbieterBy(slug: $slug) {
+        id
+        title
+        slug
+        content
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ anbieterBy: AnbieterPost | null }>(query, { slug });
+    return data.anbieterBy;
+  } catch (error) {
+    console.error(`Error fetching Anbieter with slug "${slug}":`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Anbieter (CPT): alle (fuer Uebersicht)
+// ─────────────────────────────────────────────
+
+export async function getAllAnbieter(): Promise<AnbieterPost[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetAllAnbieter($after: String) {
+      allAnbieter(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          id
+          title
+          slug
+        }
+      }
+    }
+  `;
+
+  type AllAnbieterData = {
+    allAnbieter: { pageInfo: { hasNextPage: boolean; endCursor: string | null }; nodes: AnbieterPost[] };
+  };
+
+  try {
+    const all: AnbieterPost[] = [];
+    let after: string | null = null;
+    let hasNext = true;
+    while (hasNext) {
+      const data: AllAnbieterData = await client.request<AllAnbieterData>(query, { after });
+      all.push(...data.allAnbieter.nodes);
+      hasNext = data.allAnbieter.pageInfo.hasNextPage;
+      after = data.allAnbieter.pageInfo.endCursor;
+    }
+    return all;
+  } catch (error) {
+    console.error("Error fetching all Anbieter:", error);
+    return [];
   }
 }

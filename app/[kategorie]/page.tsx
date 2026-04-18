@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
+import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 import type { Post } from "@/lib/types";
@@ -14,6 +15,12 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     return (
       <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
     );
+  }
+
+  // 1a. Ist es ein Anbieter-Slug (legacy URL, /advocard-rechtsschutzversicherung-kontakt/ etc.)?
+  const anbieter = await getAnbieterBySlug(params.kategorie).catch(() => null);
+  if (anbieter) {
+    return <AnbieterLayout title={anbieter.title} content={anbieter.content} />;
   }
 
   // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?

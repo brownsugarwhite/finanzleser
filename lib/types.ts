@@ -102,6 +102,17 @@ export interface VergleichACF {
   vergleichAnbieter?: Anbieter[];
 }
 
+// ─────────────────────────────────────────────
+// Anbieter (CPT: Versicherer- / Firmen-Kontaktseiten)
+// ─────────────────────────────────────────────
+
+export interface AnbieterPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+}
+
 export interface Vergleich {
   id: string;
   title: string;

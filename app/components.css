@@ -982,3 +982,53 @@ h2.faq-heading {
   padding: 0 clamp(20px, 10vw, 200px);
   margin-top: 23px;
 }
+
+/* ─────────────────────────────────────────────
+   Anbieter-Content (Beschreibung + Kontakttabelle)
+   ───────────────────────────────────────────── */
+.anbieter-content p {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-medium, #333);
+  margin-bottom: 1.5rem;
+}
+
+.anbieter-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.anbieter-content .wp-block-table {
+  margin: 0 0 2rem;
+  overflow-x: auto;
+}
+
+.anbieter-content .wp-block-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.anbieter-content .wp-block-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: top;
+}
+
+.anbieter-content .wp-block-table tr td:first-child {
+  font-weight: 600;
+  width: 40%;
+  color: var(--color-text-dark, #111);
+  padding-right: 24px;
+}
+
+.anbieter-content .wp-block-table tr:last-child td {
+  border-bottom: none;
+}
+
+.anbieter-content .wp-block-table tr:hover td {
+  background: rgba(69, 161, 23, 0.04);
+}
