@@ -95,7 +95,7 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
                 minWidth: 0,
                 position: 'relative',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 justifyContent: 'center',
                 opacity: slideStyles[index + 1]?.opacity ?? 1,
                 transition: 'opacity 0.1s ease',

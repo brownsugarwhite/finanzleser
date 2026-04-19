@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
-import InlineSVG from '@/components/ui/InlineSVG';
 
 export interface CategorySlide {
   name: string;
@@ -87,12 +86,39 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
     >
       {/* Visual — grauer Platzhalter */}
       <div style={{
+        position: 'relative',
         width: '100%',
         height: active ? 0 : 260,
         background: 'rgba(0, 0, 0, 0.08)',
         opacity: active ? 0 : 1,
+        overflow: 'hidden',
         transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
-      }} />
+      }}>
+        {/* Article-Count-Badge */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 13,
+            right: 13,
+            width: 36,
+            height: 36,
+            borderRadius: 13,
+            background: 'var(--color-text-primary)',
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: "Merriweather, serif",
+            fontStyle: 'italic',
+            fontSize: 14,
+            fontWeight: 500,
+            pointerEvents: 'none',
+          }}
+        >
+          {category.count}
+        </div>
+      </div>
 
       {/* Title + Arrow-Button (rechts neben Titel wenn nicht collapsed) */}
       <div style={{
@@ -155,10 +181,12 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
           justifyContent: 'center',
           cursor: 'pointer',
           textDecoration: 'none',
-          maxWidth: active ? 0 : 60,
+          // Opacity folgt Phase 1 (faded beim Collapse sofort, beim Expand verzögert um T2).
+          // max-width folgt Phase 2 (läuft synchron zur Card-Breite).
+          maxWidth: phase2Active ? 0 : 60,
           opacity: active ? 0 : 1,
           overflow: 'hidden',
-          transition: `max-width ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
+          transition: `max-width ${T2}s ${phase2Ease}, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
         }}>
           <div style={{
             width: '32px',

@@ -377,6 +377,32 @@ h1.category-title {
   border-color: var(--color-brand) !important;
   transition: width 0.4s ease-out !important;
 }
+
+/* ─────────────────────────────────────────────
+   Article-Card "Ratgeber lesen"-Link (Line-Grow-Pattern
+   gespiegelt von MegaMenu, aber sauber scoped).
+   ───────────────────────────────────────────── */
+.article-read-link,
+.article-read-link:visited,
+.article-read-link:hover,
+.article-read-link span {
+  color: var(--color-brand) !important;
+}
+.article-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.article-read-line {
+  width: 13px;
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.article-read-link:hover .article-read-line {
+  width: 36px;
+  transition: width 1s ease-out;
+}
 .megamenu-legal-link:hover {
   color: var(--color-brand-secondary) !important;
 }

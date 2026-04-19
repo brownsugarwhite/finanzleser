@@ -30,7 +30,7 @@ export default function MainCategoryLayout({
         <CategoryHeader title={name} description={description} breadcrumbItems={breadcrumbItems}>
           {categoryChildren.length > 0 && (
             <SubcategorySlider
-              categories={categoryChildren.map((c) => ({ name: c.name, slug: c.slug, image: c.image }))}
+              categories={categoryChildren.map((c) => ({ name: c.name, slug: c.slug, count: c.count, image: c.image }))}
               parentSlug={slug}
               allCategoryPosts={allCategoryPosts}
             />
