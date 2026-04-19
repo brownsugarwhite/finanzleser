@@ -26,7 +26,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number }[]>([]);
+  const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
 
   // Wenn alle Cards (bei Minimum-Breite) in den Viewport passen, Slider
   // deaktivieren. Cards werden dann zentriert und wachsen bis CARD_MAX_WIDTH,
@@ -80,14 +80,16 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
           const eased = t * (2 - t); // ease-out quadratic
-          return { opacity: eased, scale: 0.6 + 0.4 * eased };
+          // Card am linken Rand → Origin rechts
+          return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'right' as const };
         }
         if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
           const eased = t * (2 - t); // ease-out quadratic
-          return { opacity: eased, scale: 0.6 + 0.4 * eased };
+          // Card am rechten Rand → Origin links
+          return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'left' as const };
         }
-        return { opacity: 1, scale: 1 };
+        return { opacity: 1, scale: 1, origin: 'center' as const };
       });
 
       setSlideStyles(styles);
@@ -153,6 +155,10 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
               <div style={{
                 width: '100%',
                 transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
+                transformOrigin:
+                  slideStyles[index + 1]?.origin === 'right' ? 'right center' :
+                  slideStyles[index + 1]?.origin === 'left' ? 'left center' :
+                  'center center',
                 transition: 'transform 0.1s ease',
               }}>
                 <SlideArticleCard post={post} />

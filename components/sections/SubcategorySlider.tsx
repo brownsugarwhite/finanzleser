@@ -29,7 +29,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number }[]>([]);
+  const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
   const [activeSlide, setActiveSlide] = useState<number | null>(null);
 
   // Measure all title widths for pill lens + SlideCategoryCard
@@ -75,7 +75,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   const isArticleMode = activeSlide !== null && activePosts.length > 0;
 
   // Category scroll tracking
-  const slideStylesRef = useRef<{ opacity: number; scale: number }[]>([]);
+  const slideStylesRef = useRef<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
 
   useEffect(() => {
     if (!catEmblaApi) return;
@@ -84,7 +84,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     const FADE_LEFT = activeSlide !== null ? 120 : 250;
     const FADE_RIGHT = activeSlide !== null ? 100 : 200;
     const SCALE_MIN = activeSlide !== null ? 0.2 : 0.6;
-    const FULL = { opacity: 1, scale: 1 };
+    const FULL: { opacity: number; scale: number; origin: 'left' | 'right' | 'center' } = { opacity: 1, scale: 1, origin: 'center' };
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, catEmblaApi.scrollProgress()));
@@ -106,15 +106,17 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
           const eased = t * (2 - t); // ease-out quadratic
-          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
+          // Card am linken Rand → Origin rechts (Abstand zum nächsten inneren Nachbarn bleibt konstant)
+          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'right' };
         } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
           const eased = t * (2 - t); // ease-out quadratic
-          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
+          // Card am rechten Rand → Origin links
+          s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'left' };
         }
 
         const prev = slideStylesRef.current[i];
-        if (!prev || Math.abs(prev.opacity - s.opacity) > 0.01 || Math.abs(prev.scale - s.scale) > 0.005) {
+        if (!prev || Math.abs(prev.opacity - s.opacity) > 0.01 || Math.abs(prev.scale - s.scale) > 0.005 || prev.origin !== s.origin) {
           changed = true;
         }
         return s;
@@ -343,6 +345,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                     onClick={() => setActiveSlide(activeSlide === index ? null : index)}
                     style={{
                       transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
+                      transformOrigin:
+                        slideStyles[index + 1]?.origin === 'right' ? 'right center' :
+                        slideStyles[index + 1]?.origin === 'left' ? 'left center' :
+                        'center center',
                       cursor: 'pointer',
                     }}
                   >
