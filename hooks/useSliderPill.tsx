@@ -513,12 +513,26 @@ export function useSliderPill({
 
     const first = cards[0];
     const last = cards[cards.length - 1];
+    // Wenn die Pill unsichtbar ist UND der active Button aus dem Viewport
+    // geschoben wurde, soll das erste Hover auf einen neuen Button sanft
+    // einfaden statt von der Mitte auszubloomen (sonst wirkt's, als käme die
+    // Pill „von außen" rein).
+    const activeOutOfView = (() => {
+      if (activeIndex === null || activeIndex === undefined) return false;
+      const s = slideStylesRef.current?.[activeIndex + 1];
+      return !!s && s.opacity < 1.0;
+    })();
+    const appearFn = (card: HTMLElement) => {
+      if (!pillVisible.current && activeOutOfView) fadeInPillAt(card);
+      else movePillTo(card);
+    };
+
     if (mouseXScroll < first.offsetLeft || mouseXScroll > last.offsetLeft + last.offsetWidth) {
       if (activeIndex !== null && activeIndex !== undefined) {
         const card = cardRefs.current[activeIndex];
         if (card && lastHoveredIdx.current !== activeIndex) {
           lastHoveredIdx.current = activeIndex;
-          movePillTo(card);
+          appearFn(card);
         }
       } else {
         doHide();
@@ -536,18 +550,22 @@ export function useSliderPill({
       if (mouseXScroll <= zoneEnd || i === cards.length - 1) {
         if (i !== lastHoveredIdx.current) {
           lastHoveredIdx.current = i;
-          movePillTo(cards[i]);
+          appearFn(cards[i]);
         }
         return;
       }
     }
-  }, [getScrollOffset, movePillTo, doHide, isActiveMode, activeIndex]);
+  }, [getScrollOffset, movePillTo, doHide, isActiveMode, activeIndex, fadeInPillAt]);
 
   const handleContainerLeave = useCallback(() => {
     isMouseInside.current = false;
     lastClientX.current = null;
+    // Während Drag oder Momentum: Pill soll ausgefadet bleiben. Kein Snap
+    // zurück zum Active-Button, sonst fadet die Pill schon WÄHREND des Drags
+    // wieder ein (z.B. wenn Maus vertikal aus dem Slider raus geht). Erst bei
+    // pointerUp bzw. niedrigem Momentum übernimmt settleOnTarget das Fade-In.
+    if (isDragging.current || velocityRef.current >= LOW_VEL_THRESHOLD) return;
     if (activeIndex !== null && activeIndex !== undefined) {
-      // Snap back to active button instead of hiding
       const card = cardRefs.current[activeIndex];
       if (card) {
         movePillTo(card);
