@@ -2,18 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import SlideArticleCard from '@/components/ui/SlideArticleCard';
+import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import type { Post } from '@/lib/types';
 
-const ART_SLIDE_WIDTH = 265;
+const ART_SLIDE_WIDTH = CARD_MIN_WIDTH;
 const ART_GAP = 70;
+// Breathing-Puffer für die fit-Prüfung (damit Slider nicht direkt bei
+// 100% Content-Breite greift).
+const ART_FIT_BUFFER = 40;
 
 interface ArticleSliderProps {
   posts: Post[];
   onNavReady: (nav: { current: number; total: number; onPrev: () => void; onNext: () => void; onGoTo: (i: number) => void }) => void;
+  onCanScrollChange?: (canScroll: boolean) => void;
 }
 
-export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps) {
+export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: ArticleSliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     loop: false,
@@ -23,6 +27,32 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number }[]>([]);
+
+  // Wenn alle Cards (bei Minimum-Breite) in den Viewport passen, Slider
+  // deaktivieren. Cards werden dann zentriert und wachsen bis CARD_MAX_WIDTH,
+  // um die Breite auszunutzen.
+  const [canScroll, setCanScroll] = useState(true);
+  useEffect(() => {
+    if (!emblaApi) return;
+    const check = () => {
+      // Layout: spacer + card + card + ... + card + spacer → (n+2) Items,
+      // (n+1) Gaps. Spacer-Basis = 5vw je Seite.
+      const spacerBasis = window.innerWidth * 0.05;
+      const cards = posts.length * CARD_MIN_WIDTH;
+      const gaps = (posts.length + 1) * ART_GAP;
+      const needed = cards + gaps + 2 * spacerBasis + ART_FIT_BUFFER;
+      const fits = window.innerWidth >= needed;
+      setCanScroll(!fits);
+      emblaApi.reInit({ watchDrag: !fits });
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [emblaApi, posts.length]);
+
+  useEffect(() => {
+    onCanScrollChange?.(canScroll);
+  }, [canScroll, onCanScrollChange]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -82,26 +112,45 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
   }, [emblaApi, selectedIndex, posts.length, onNavReady]);
 
   return (
-    <div ref={emblaRef} style={{ overflow: 'hidden', cursor: 'grab', marginTop: 30 }}>
-      <div style={{ display: 'flex', gap: `${ART_GAP}px` }}>
-        <div style={{ flex: '0 0 5vw', minWidth: 0 }} aria-hidden />
+    <div ref={emblaRef} style={{ overflow: 'hidden', cursor: canScroll ? 'grab' : 'default', marginTop: 30 }}>
+      <div style={{
+        display: 'flex',
+        gap: `${ART_GAP}px`,
+      }}>
+        <div
+          aria-hidden
+          style={{
+            flexGrow: canScroll ? 0 : 1,
+            flexShrink: 0,
+            flexBasis: '5vw',
+            minWidth: 0,
+            transition: 'flex-grow 0.3s ease',
+          }}
+        />
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
           return (
             <div
               key={post.id}
               style={{
-                flex: `0 0 ${ART_SLIDE_WIDTH}px`,
+                // Nur flex-grow toggelt zwischen 0 (Slider = fixe 265er-Slides)
+                // und 1 (Static = Cards wachsen mit bis max 400). flex-basis
+                // und flex-shrink bleiben konstant → smoother Resize-Übergang.
+                flexGrow: canScroll ? 0 : 1,
+                flexShrink: 0,
+                flexBasis: `${ART_SLIDE_WIDTH}px`,
+                maxWidth: CARD_MAX_WIDTH,
                 minWidth: 0,
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: 'center',
                 opacity: slideStyles[index + 1]?.opacity ?? 1,
-                transition: 'opacity 0.1s ease',
+                transition: 'flex-grow 0.3s ease, opacity 0.1s ease',
               }}
             >
               <div style={{
+                width: '100%',
                 transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
                 transition: 'transform 0.1s ease',
               }}>
@@ -133,7 +182,16 @@ export default function ArticleSlider({ posts, onNavReady }: ArticleSliderProps)
             </div>
           );
         })}
-        <div style={{ flex: '0 0 5vw', minWidth: 0 }} aria-hidden />
+        <div
+          aria-hidden
+          style={{
+            flexGrow: canScroll ? 0 : 1,
+            flexShrink: 0,
+            flexBasis: '5vw',
+            minWidth: 0,
+            transition: 'flex-grow 0.3s ease',
+          }}
+        />
       </div>
     </div>
   );

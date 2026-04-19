@@ -20,7 +20,8 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
   neu: 'var(--color-brand)',
 };
 
-const CARD_WIDTH = 265;
+export const CARD_MIN_WIDTH = 265;
+export const CARD_MAX_WIDTH = 400;
 
 export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
@@ -40,7 +41,7 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
   return (
     <div
       style={{
-        width: CARD_WIDTH,
+        width: '100%',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -50,8 +51,36 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
         WebkitUserSelect: 'none',
       }}
     >
-      {/* Visual — grauer Platzhalter */}
-      <div style={{ width: '100%', height: 210, background: 'rgba(0, 0, 0, 0.08)', flexShrink: 0 }} />
+      {/* Visual — grauer Platzhalter (mit Info-Button unten rechts) */}
+      <div style={{ position: 'relative', width: '100%', height: 210, background: 'rgba(0, 0, 0, 0.08)', flexShrink: 0 }}>
+        <div
+          onMouseEnter={() => setInfoHovered(true)}
+          onMouseLeave={() => setInfoHovered(false)}
+          style={{
+            position: 'absolute',
+            bottom: 13,
+            right: 13,
+            width: 36,
+            height: 36,
+            borderRadius: '50%',
+            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
+            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'background 0.1s, border 0.1s',
+            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
+          }}
+        >
+          <InlineSVG
+            src="/icons/info_i.svg"
+            alt="Info"
+            style={{ width: 9, height: 17 }}
+          />
+        </div>
+      </div>
 
       {/* Text Content — natürliche Höhe, Footer kommt direkt dahinter */}
       <div style={{
@@ -71,7 +100,7 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
             hyphens: 'auto',
             WebkitHyphens: 'auto',
             overflowWrap: 'break-word',
-            marginBottom: 4,
+            marginBottom: 6,
           }}>
             {sublineText}
           </p>
@@ -94,9 +123,8 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
       {/* Footer: direkt nach dem Text (nicht am unteren Card-Rand) */}
       <div style={{
         width: '100%',
-        padding: '13px 23px 0',
+        padding: '6px 23px 0',
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
         flexShrink: 0,
       }}>
@@ -132,32 +160,6 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
             />
           </svg>
         </Link>
-
-        {/* Info Button */}
-        <div
-          onMouseEnter={() => setInfoHovered(true)}
-          onMouseLeave={() => setInfoHovered(false)}
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            flexShrink: 0,
-            transition: 'background 0.1s, border 0.1s',
-            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-          }}
-        >
-          <InlineSVG
-            src="/icons/info_i.svg"
-            alt="Info"
-            style={{ width: 9, height: 17 }}
-          />
-        </div>
       </div>
 
       {/* Lesezeichen */}

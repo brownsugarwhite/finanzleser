@@ -61,6 +61,13 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     setArticleNav(nav);
   }, []);
 
+  // Article-Slider meldet, ob er scrollbar ist (sonst soll die Nav unten
+  // ausgeblendet und die Cards zentriert angezeigt werden).
+  const [articleCanScroll, setArticleCanScroll] = useState(true);
+  const handleArticleCanScrollChange = useCallback((scroll: boolean) => {
+    setArticleCanScroll(scroll);
+  }, []);
+
   const activePosts = activeSlide !== null
     ? allCategoryPosts[categories[activeSlide]?.slug] || []
     : [];
@@ -273,14 +280,16 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                     alignItems: 'center',
                     justifyContent: 'center',
                     opacity: slideStyles[index + 1]?.opacity ?? 1,
-                    transition: 'opacity 0.3s ease',
+                    // KEINE CSS-transition — die RAF-Loop in update() setzt
+                    // slideStyles pro Frame neu. Eine 0.3s-Transition würde
+                    // bei jedem Update einen neuen Tween gegen ein bewegtes
+                    // Ziel starten → sichtbares Wiggle beim Card-Morph.
                   }}
                 >
                   <div
                     onClick={() => setActiveSlide(activeSlide === index ? null : index)}
                     style={{
                       transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
-                      transition: 'transform 0.3s ease',
                       cursor: 'pointer',
                     }}
                   >
@@ -303,7 +312,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                       transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
                       transformOrigin: 'center center',
                       opacity: Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
-                      transition: 'opacity 0.3s ease, transform 0.3s ease',
+                      // Keine CSS-transition (siehe Card-Wrapper oben)
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
@@ -344,6 +353,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           key={categories[activeSlide!].slug}
           posts={activePosts}
           onNavReady={handleArticleNavReady}
+          onCanScrollChange={handleArticleCanScrollChange}
         />
       )}
 
@@ -377,8 +387,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         />
       </div>
 
-      {/* Shared SliderNav — nur wenn scrollbar oder Article-Mode */}
-      {(canScroll || isArticleMode) && (
+      {/* Shared SliderNav — nur wenn Category- ODER Article-Slider scrollbar */}
+      {((canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)) && (
         <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
           <SliderNav {...navProps} />
         </div>
