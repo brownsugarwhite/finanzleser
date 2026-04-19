@@ -9,11 +9,24 @@ const PILL_R = 0;
 const PILL_BG = "var(--color-text-primary, #334a27)";
 const PILL_PX = 20; // horizontal padding
 
+// Velocity-Schwelle (Δ scrollProgress pro ms): unter LOW übernimmt die Pill
+// die Card unter der Maus; darüber bleibt sie im Momentum eingefroren.
+const LOW_VEL_THRESHOLD = 0.00005;
+const VELOCITY_EMA = 0.3; // Glättungsfaktor gegen Jitter
+
+// Snap-Delay zwischen Mode-Wechsel (null↔active) und Snap-to-Active-Bloom
+const MODE_CHANGE_SNAP_DELAY = 720;
+
 /* ── Types ──────────────────────────────────────── */
 
 export interface SliderPillItem {
   name: string;
   slug: string;
+}
+
+export interface SliderSlideStyle {
+  opacity: number;
+  scale: number;
 }
 
 export interface UseSliderPillOptions {
@@ -26,6 +39,12 @@ export interface UseSliderPillOptions {
   spacerExpanded: boolean;
   hasLens?: boolean;
   activeIndex?: number | null;
+  /**
+   * Fade-/Scale-Styles pro Slide (inkl. Spacer an [0] und [length-1]).
+   * Wenn gesetzt, fadet die Pill via `doHide` sobald opacity der aktuell
+   * angesteuerten Card < 1.0 wird.
+   */
+  slideStyles?: SliderSlideStyle[];
 }
 
 /* ── Hook ───────────────────────────────────────── */
@@ -39,6 +58,7 @@ export function useSliderPill({
   spacerExpanded,
   hasLens = true,
   activeIndex = null,
+  slideStyles,
 }: UseSliderPillOptions) {
   const pillRef = useRef<HTMLDivElement>(null);
   const pillBodyRef = useRef<HTMLDivElement>(null);
@@ -55,6 +75,17 @@ export function useSliderPill({
   const lastClientX = useRef<number | null>(null);
   const isMouseInside = useRef(false);
 
+  // Velocity-Tracking (Embla feuert `scroll` pro Frame der internen Animation)
+  const velocityRef = useRef(0);
+  const lastProgressRef = useRef(0);
+  const lastScrollTimeRef = useRef(0);
+
+  // Aktuelle slideStyles über Ref lesen, ohne onScroll-Effekt neu aufzubauen
+  const slideStylesRef = useRef<SliderSlideStyle[] | undefined>(slideStyles);
+  useEffect(() => {
+    slideStylesRef.current = slideStyles;
+  }, [slideStyles]);
+
   /* ── Helpers ── */
 
   const getDuration = useCallback((targetX: number, base: number) => {
@@ -62,21 +93,17 @@ export function useSliderPill({
     return base + Math.min(dist / 300, 1) * 0.15;
   }, []);
 
-  const scrollContainerRef = useRef<HTMLElement | null>(null);
-
+  /**
+   * Scroll-Offset = wie weit der Embla-Container relativ zum Viewport nach
+   * links verschoben ist (positiv = nach links gescrollt).
+   * Robuster als Regex auf style.transform: liest direkt das Rect.
+   */
   const getScrollOffset = useCallback(() => {
     if (!emblaApi) return 0;
-    if (!scrollContainerRef.current) {
-      scrollContainerRef.current = emblaApi.rootNode()?.children[0] as HTMLElement || null;
-    }
-    const el = scrollContainerRef.current;
-    if (!el) return 0;
-    // Read transform directly from style attribute (avoids getComputedStyle)
-    const match = el.style.transform?.match(/translate3d\(([^,]+)/);
-    if (match) return -parseFloat(match[1]);
-    // Fallback
-    const matrix = new DOMMatrix(getComputedStyle(el).transform);
-    return -matrix.m41;
+    const viewport = emblaApi.rootNode() as HTMLElement | null;
+    const container = emblaApi.containerNode() as HTMLElement | null;
+    if (!viewport || !container) return 0;
+    return viewport.getBoundingClientRect().left - container.getBoundingClientRect().left;
   }, [emblaApi]);
 
   /** Card position + size in wrapper-space (= viewport-space) */
@@ -104,22 +131,27 @@ export function useSliderPill({
 
   /* ── Slide animation ── */
 
-  const slideTo = useCallback((targetX: number, targetW: number) => {
+  /**
+   * @param soft — wenn true: `power3.out` (kein Overshoot — für Momentum-
+   * Wechsel, damit sich der Back-Out nicht mit Rubberband-Bounce addiert).
+   */
+  const slideTo = useCallback((targetX: number, targetW: number, soft = false) => {
     if (!pillRef.current) return;
     const d = getDuration(targetX, 0.4);
+    const ease = soft ? "power3.out" : "back.out(1.5)";
     lastPillX.current = targetX;
 
     gsap.killTweensOf(pillRef.current);
     gsap.to(pillRef.current, {
       x: targetX, width: targetW, height: PILL_H,
-      duration: d, ease: "back.out(1.5)",
+      duration: d, ease,
     });
     if (line3Ref.current) {
       gsap.killTweensOf(line3Ref.current);
       gsap.set(line3Ref.current, { opacity: 1, y: 0 });
       gsap.to(line3Ref.current, {
         x: targetX, width: targetW,
-        duration: d + 0.04, ease: "back.out(1.5)", overwrite: "auto",
+        duration: d + 0.04, ease, overwrite: "auto",
       });
     }
     if (line1Ref.current) {
@@ -127,7 +159,7 @@ export function useSliderPill({
       gsap.set(line1Ref.current, { opacity: 1, y: 0 });
       gsap.to(line1Ref.current, {
         x: targetX, width: targetW,
-        duration: d + 0.08, ease: "back.out(1.5)", overwrite: "auto",
+        duration: d + 0.08, ease, overwrite: "auto",
       });
     }
   }, [getDuration]);
@@ -169,7 +201,7 @@ export function useSliderPill({
 
   /* ── Move pill to card — viewport-space ── */
 
-  const movePillTo = useCallback((cardEl: HTMLElement) => {
+  const movePillTo = useCallback((cardEl: HTMLElement, soft = false) => {
     if (!pillRef.current || !emblaApi) return;
     const { x, w } = getCardVX(cardEl);
     const top = getTitleCenter(cardEl);
@@ -211,7 +243,7 @@ export function useSliderPill({
     gsap.set(pillRef.current, { top });
     if (line3Ref.current) gsap.set(line3Ref.current, { top: l3Top });
     if (line1Ref.current) gsap.set(line1Ref.current, { top: l1Top });
-    slideTo(x, w);
+    slideTo(x, w, soft);
   }, [emblaApi, getCardVX, getTitleCenter, slideTo]);
 
   /* ── Drag detection — differentiates click vs drag ── */
@@ -222,10 +254,20 @@ export function useSliderPill({
     const onDown = () => {
       scrollAtDown.current = emblaApi.scrollProgress();
       isDragging.current = true;
+      // Velocity-Tracking zurücksetzen
+      lastProgressRef.current = scrollAtDown.current;
+      lastScrollTimeRef.current = performance.now();
+      velocityRef.current = 0;
+      // Alte Hover-Tweens killen, damit der Drag-Sync (gsap.set in der
+      // Drag-Branch von onScroll) sauber authoritativ ist.
+      gsap.killTweensOf(pillRef.current);
+      if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
+      if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
       // Pill NICHT sofort hiden — beim reinen Click soll sie sichtbar bleiben.
-      // Erst bei echtem Scroll (drag) wird sie via onScroll-handler unten gehidet.
     };
-    const reEvaluate = () => {
+
+    /** Safety-Net: Card unter der Maus suchen, sonst auf active snappen. */
+    const reEvaluate = (soft = false) => {
       if (!isActiveMode) return;
       let target: HTMLElement | null = null;
       let targetIdx = -1;
@@ -256,35 +298,102 @@ export function useSliderPill({
         targetIdx = activeIndex;
       }
       if (target) {
+        // Edge-Fade-Schutz: nicht auf eine gerade fadene Card bloomen
+        const cardStyle = slideStylesRef.current?.[targetIdx + 1];
+        if (cardStyle && cardStyle.opacity < 1.0) return;
         lastHoveredIdx.current = targetIdx;
-        movePillTo(target);
+        movePillTo(target, soft);
       }
     };
 
     const onUp = () => {
-      const moved = Math.abs(emblaApi.scrollProgress() - scrollAtDown.current) > 0.001;
       isDragging.current = false;
-      // Re-evaluate immediately on pointer up — don't wait for settle
-      if (moved) reEvaluate();
+      // Kein sofortiges reEvaluate mehr — der onScroll-Handler übernimmt während
+      // der Momentum-Phase velocity-gesteuert. `settle` ist das finale Safety-Net.
     };
+
     const onScroll = () => {
-      if (!isDragging.current || !pillVisible.current) return;
-      // Pill mit der card mit-scrollen (sticky to lastHovered/active card)
-      const idx = lastHoveredIdx.current >= 0
-        ? lastHoveredIdx.current
-        : (activeIndex ?? -1);
-      if (idx < 0) return;
-      const card = cardRefs.current[idx];
-      if (!card) return;
-      const { x, w } = getCardVX(card);
-      gsap.set(pillRef.current, { x, width: w });
-      if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
-      if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });
-      lastPillX.current = x;
+      // ── Velocity pro ms berechnen (EMA-geglättet) ──
+      const now = performance.now();
+      const progress = emblaApi.scrollProgress();
+      const dt = Math.max(1, now - lastScrollTimeRef.current);
+      const rawVel = Math.abs(progress - lastProgressRef.current) / dt;
+      velocityRef.current = velocityRef.current * (1 - VELOCITY_EMA) + rawVel * VELOCITY_EMA;
+      lastProgressRef.current = progress;
+      lastScrollTimeRef.current = now;
+      const vel = velocityRef.current;
+
+      // ── Drag: Pill klebt IMMER am letzten gehoverten Button, unabhängig von
+      // der Velocity. Edge-Fade-Check bleibt aktiv, damit die Pill sauber
+      // verschwindet wenn man einen Button in die Fade-Zone zieht.
+      if (isDragging.current) {
+        if (!pillVisible.current) return;
+        const idx = lastHoveredIdx.current >= 0
+          ? lastHoveredIdx.current
+          : (activeIndex ?? -1);
+        if (idx < 0) return;
+        const cardStyle = slideStylesRef.current?.[idx + 1];
+        if (cardStyle && cardStyle.opacity < 1.0) {
+          doHide();
+          return;
+        }
+        const card = cardRefs.current[idx];
+        if (!card) return;
+        const { x, w } = getCardVX(card);
+        gsap.set(pillRef.current, { x, width: w });
+        if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
+        if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });
+        lastPillX.current = x;
+        return;
+      }
+
+      // ── Momentum (nach pointerUp) über LOW-Schwelle: Pill friert ein.
+      // WICHTIG: KEIN killTweensOf hier — sonst wird ein Hover-Slide-Tween
+      // während residualem Momentum sofort gekillt, die Pill snappt instant
+      // auf die Zielposition und der Lens-Text sieht so aus, als würde er
+      // "von der Seite" nachrutschen. Freeze = einfach passiv sein.
+      if (vel >= LOW_VEL_THRESHOLD) {
+        return;
+      }
+
+      // ── Zone LOW: Momentum läuft aus → Card unter Maus ansteuern ──
+      if (!isActiveMode || !isMouseInside.current || lastClientX.current === null) return;
+      const viewport = emblaApi.rootNode() as HTMLElement | null;
+      if (!viewport) return;
+      const vRect = viewport.getBoundingClientRect();
+      const mouseXViewport = lastClientX.current - vRect.left;
+      const mouseXScroll = mouseXViewport + getScrollOffset();
+      const cards = cardRefs.current.filter(Boolean);
+      for (let i = 0; i < cards.length; i++) {
+        const cLeft = cards[i].offsetLeft;
+        const cRight = cLeft + cards[i].offsetWidth;
+        let zoneEnd = cRight;
+        if (i < cards.length - 1) {
+          zoneEnd = (cRight + cards[i + 1].offsetLeft) / 2;
+        }
+        if (mouseXScroll <= zoneEnd || i === cards.length - 1) {
+          // Edge-Fade-Schutz: nicht auf eine fadende Card bloomen/springen
+          const cardStyle = slideStylesRef.current?.[i + 1];
+          if (cardStyle && cardStyle.opacity < 1.0) {
+            if (pillVisible.current) doHide();
+            return;
+          }
+
+          if (i !== lastHoveredIdx.current) {
+            lastHoveredIdx.current = i;
+            movePillTo(cards[i], true); // soft: kein Back-Out gegen Rubberband
+          }
+          // Gleiche Card → nichts tun. KEIN gsap.set, sonst wird ein laufender
+          // Hover-Slide-Tween jeden Frame auf die Zielposition geforced.
+          return;
+        }
+      }
     };
+
     const onSettle = () => {
       isDragging.current = false;
-      reEvaluate();
+      velocityRef.current = 0;
+      reEvaluate(false);
     };
 
     emblaApi.on("pointerDown", onDown);
@@ -297,7 +406,7 @@ export function useSliderPill({
       emblaApi.off("scroll", onScroll);
       emblaApi.off("settle", onSettle);
     };
-  }, [emblaApi, doHide, isActiveMode, getScrollOffset, movePillTo, activeIndex]);
+  }, [emblaApi, doHide, isActiveMode, getScrollOffset, getCardVX, movePillTo, activeIndex]);
 
   /* ── Mode change → hide pill + snap to active (lock handled by SubcategorySlider's morphLock) ── */
 
@@ -339,7 +448,7 @@ export function useSliderPill({
     pillVisible.current = false;
     lastHoveredIdx.current = -1;
 
-    const tSnap = curr !== null ? setTimeout(snapToActive, 720) : null;
+    const tSnap = curr !== null ? setTimeout(snapToActive, MODE_CHANGE_SNAP_DELAY) : null;
     return () => {
       if (tSnap) clearTimeout(tSnap);
     };
@@ -350,7 +459,10 @@ export function useSliderPill({
 
   useEffect(() => {
     const sync = () => {
-      if (!pillVisible.current || !pillRef.current || !lensRef.current) return;
+      // Früher Guard: Lens ist unsichtbar wenn Pill nicht visible ist —
+      // spart ~60 Frames/s bei idle.
+      if (!pillVisible.current) return;
+      if (!pillRef.current || !lensRef.current) return;
       const px = gsap.getProperty(pillRef.current, "x") as number;
       const pw = gsap.getProperty(pillRef.current, "width") as number;
       const scrollOff = getScrollOffset();
@@ -367,6 +479,11 @@ export function useSliderPill({
     isMouseInside.current = true;
     lastClientX.current = e.clientX;
     if (isDragging.current || !isActiveMode) return;
+    // Während Momentum (Velocity >= LOW) darf Hover die Pill NICHT bewegen —
+    // sonst startet slideTo auf eine Zielposition, die durch weiterlaufendes
+    // Scrollen veraltet, und der Lens-Text „rutscht" beim Ankommen ins Bild.
+    // Der onScroll-Handler übernimmt das Targeting, sobald Velocity unter LOW fällt.
+    if (velocityRef.current >= LOW_VEL_THRESHOLD) return;
 
     const viewportRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const mouseXViewport = e.clientX - viewportRect.left;

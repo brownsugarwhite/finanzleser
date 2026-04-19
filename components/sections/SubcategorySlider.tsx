@@ -10,7 +10,7 @@ import type { Post } from '@/lib/types';
 
 const CAT_GAP = 65;
 const CARD_WIDTH = 360;
-const MORPH_DURATION = 300; // ms — muss zu T1 in SlideCategoryCard passen
+export const MORPH_DURATION = 300; // ms — muss zu T1 in SlideCategoryCard passen
 
 // ── Main SubcategorySlider ──
 
@@ -124,16 +124,26 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     catEmblaApi.on('resize', update);
     update();
 
-    // Re-measure during morph (cards shrink to buttons over MORPH_DURATION)
-    const tickInterval = setInterval(update, 50);
-    const stopTimer = setTimeout(() => clearInterval(tickInterval), MORPH_DURATION + 100);
+    // Während des Morphs (T1 + T2) jeden Frame neu messen, da sich Card-Breiten
+    // über CSS-Transitions ändern. RAF statt setInterval — sauberer Tick-Rhythmus.
+    let rafId = 0;
+    let cancelled = false;
+    const morphEndsAt = performance.now() + MORPH_DURATION * 2 + 50;
+    const morphTick = () => {
+      if (cancelled) return;
+      update();
+      if (performance.now() < morphEndsAt) {
+        rafId = requestAnimationFrame(morphTick);
+      }
+    };
+    rafId = requestAnimationFrame(morphTick);
 
     return () => {
       catEmblaApi.off('scroll', update);
       catEmblaApi.off('reInit', update);
       catEmblaApi.off('resize', update);
-      clearInterval(tickInterval);
-      clearTimeout(stopTimer);
+      cancelled = true;
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, [catEmblaApi, categories.length, activeSlide]);
 
@@ -204,6 +214,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     spacerExpanded,
     hasLens: true,
     activeIndex: activeSlide,
+    slideStyles,
   });
 
   if (!categories || categories.length === 0) return null;
