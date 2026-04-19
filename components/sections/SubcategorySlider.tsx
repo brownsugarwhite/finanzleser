@@ -207,6 +207,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       catEmblaApi.off('resize', updateCanScroll);
     };
   }, [catEmblaApi]);
+  const prevFitsRef = useRef<boolean | null>(null);
   useEffect(() => {
     if (!catEmblaApi) return;
     const check = () => {
@@ -219,7 +220,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       const needed = contentWidth + gaps + 2 * spacerBasis + 40;
       const fits = window.innerWidth >= needed;
       setCanScroll(!fits);
-      catEmblaApi.reInit({ watchDrag: !fits });
+      // reInit nur wenn sich der Scroll-Status tatsächlich ändert —
+      // sonst springt der Scroll-Position bei Active→Active-Wechseln.
+      if (prevFitsRef.current !== fits) {
+        prevFitsRef.current = fits;
+        catEmblaApi.reInit({ watchDrag: !fits });
+      }
     };
     check();
     window.addEventListener('resize', check);
@@ -381,11 +387,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
               style={{
                 flexGrow: useStaticLayout ? 1 : 0,
                 flexShrink: 0,
-                flexBasis: useStaticLayout
-                  ? '5vw'
-                  : (spacerExpanded ? '18vw' : '5vw'),
+                flexBasis: '5vw', // dauerhaft 5vw — Button-Mode endet rechts wie Card-Mode
                 minWidth: 0,
-                transition: 'flex-grow 0.3s ease, flex-basis 0.3s ease',
+                transition: 'flex-grow 0.3s ease',
               }}
             />
           </div>
