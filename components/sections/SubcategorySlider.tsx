@@ -105,11 +105,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         let s = FULL;
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
-          const eased = t * t * (3 - 2 * t);
+          const eased = t * (2 - t); // ease-out quadratic
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
         } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
-          const eased = t * t * (3 - 2 * t);
+          const eased = t * (2 - t); // ease-out quadratic
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased };
         }
 
@@ -167,20 +167,64 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     }
   }, [activeSlide]);
 
-  // Detect if all cards fit in viewport (without spacers) — no slider needed
+  // Detect if all cards fit in viewport — no slider needed.
+  // Berücksichtigt den aktuellen Modus: in Card-Mode nimmt CARD_WIDTH, in
+  // Button-Mode die Summe der titleWidths. Fit-Formel identisch zum
+  // ArticleSlider: Spacer (5vw je Seite) + (n+1) Gaps mit einbeziehen.
   const [canScroll, setCanScroll] = useState(true);
+
+  // Scroll-Enabled-State pro Richtung für das Fade der Prev/Next-Arrows.
+  // Prev nutzt die native Embla-Logik (die mit Snap-Punkten sauber arbeitet).
+  // Next wird manuell anhand der letzten Card gemessen, weil der Trailing-
+  // Spacer sonst einen extra Scroll-Schritt zulassen würde.
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
   useEffect(() => {
     if (!catEmblaApi) return;
-    const totalContent = categories.length * CARD_WIDTH + Math.max(0, categories.length - 1) * CAT_GAP;
+    const updateCanScroll = () => {
+      setCanPrev(catEmblaApi.canScrollPrev());
+
+      const slides = catEmblaApi.slideNodes() as HTMLElement[];
+      const viewport = catEmblaApi.rootNode() as HTMLElement | null;
+      if (!viewport || slides.length < 3) {
+        setCanNext(false);
+        return;
+      }
+      const lastCard = slides[slides.length - 2]; // -2: Trailing-Spacer überspringen
+      const vRect = viewport.getBoundingClientRect();
+      const lRect = lastCard.getBoundingClientRect();
+      setCanNext(lRect.right > vRect.right + 1);
+    };
+    updateCanScroll();
+    catEmblaApi.on('select', updateCanScroll);
+    catEmblaApi.on('scroll', updateCanScroll);
+    catEmblaApi.on('reInit', updateCanScroll);
+    catEmblaApi.on('resize', updateCanScroll);
+    return () => {
+      catEmblaApi.off('select', updateCanScroll);
+      catEmblaApi.off('scroll', updateCanScroll);
+      catEmblaApi.off('reInit', updateCanScroll);
+      catEmblaApi.off('resize', updateCanScroll);
+    };
+  }, [catEmblaApi]);
+  useEffect(() => {
+    if (!catEmblaApi) return;
     const check = () => {
-      const fits = window.innerWidth >= totalContent + 40; // +40px breathing room
+      const spacerBasis = window.innerWidth * 0.05;
+      const gaps = (categories.length + 1) * CAT_GAP;
+      const contentWidth =
+        activeSlide !== null && titleWidths.length === categories.length
+          ? titleWidths.reduce((a, b) => a + b, 0)
+          : categories.length * CARD_WIDTH;
+      const needed = contentWidth + gaps + 2 * spacerBasis + 40;
+      const fits = window.innerWidth >= needed;
       setCanScroll(!fits);
       catEmblaApi.reInit({ watchDrag: !fits });
     };
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
-  }, [catEmblaApi, categories.length]);
+  }, [catEmblaApi, categories.length, titleWidths, activeSlide]);
 
   // Delay static-layout expand on close so Card morphs first, THEN spacer grows
   const [staticLayout, setStaticLayout] = useState(true);
@@ -209,7 +253,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     return () => clearTimeout(t);
   }, [activeSlide]);
 
-  const useStaticLayout = !canScroll && staticLayout;
+  // Im Button-Mode (activeSlide !== null) zählt staticLayout-Delay nicht —
+  // Spacer sollen sofort mitwachsen wenn die Buttons in den Viewport passen.
+  // Der staticLayout-Delay ist nur für's Card-Mode-Close (damit Cards erst
+  // expandieren bevor Spacer schrumpfen).
+  const useStaticLayout = !canScroll && (activeSlide !== null || staticLayout);
 
   // Slider pill hover effect
   const sliderPill = useSliderPill({
@@ -256,13 +304,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
             <div
               aria-hidden
               style={{
-                flexGrow: useStaticLayout ? 1 : 0,
+                // Leading Spacer bleibt klein (linksbündig) — nur Trailing wächst.
+                flexGrow: 0,
                 flexShrink: 0,
-                flexBasis: useStaticLayout
-                  ? '5vw'
-                  : (spacerExpanded ? 'calc(5vw + 23px)' : '5vw'),
+                flexBasis: spacerExpanded ? 'calc(5vw + 23px)' : '5vw',
                 minWidth: 0,
-                transition: 'flex-grow 0.3s ease, flex-basis 0.3s ease',
+                transition: 'flex-basis 0.3s ease',
               }}
             />
             {categories.map((cat, index) => {
@@ -345,6 +392,90 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         </div>
         {/* Pill overlay — outside viewport so lines aren't clipped by overflow:hidden */}
         {sliderPill.renderPill()}
+
+        {/* Prev/Next Arrows im Button-Mode (über dem Gradient) */}
+        {activeSlide !== null && canScroll && (
+          <>
+            <button
+              type="button"
+              aria-label="Vorherige Kategorie"
+              onClick={() => catEmblaApi?.scrollPrev()}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: 15,
+                transform: 'translateY(calc(-50% - 5px))',
+                width: 30,
+                height: 30,
+                borderRadius: '50%',
+                border: '1px solid var(--color-text-primary)',
+                background: 'rgba(255, 255, 255, 0.3)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                cursor: canPrev ? 'pointer' : 'default',
+                opacity: canPrev ? 1 : 0,
+                pointerEvents: canPrev ? 'auto' : 'none',
+                transition: 'opacity 0.2s ease',
+                zIndex: 6,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 0,
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 17.45 15.77" fill="none" aria-hidden>
+                <polyline
+                  points="16.95 15.27 8.27 8.11 16.95 .5"
+                  stroke="var(--color-text-primary)"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Nächste Kategorie"
+              onClick={() => catEmblaApi?.scrollNext()}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                right: 15,
+                transform: 'translateY(calc(-50% - 5px))',
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                border: '1px solid var(--color-text-primary)',
+                background: 'rgba(255, 255, 255, 0.3)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)',
+                cursor: canNext ? 'pointer' : 'default',
+                opacity: canNext ? 1 : 0,
+                pointerEvents: canNext ? 'auto' : 'none',
+                transition: 'opacity 0.2s ease',
+                zIndex: 6,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 0,
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ transform: 'rotate(180deg)' }}>
+                <polyline
+                  points="16.95 15.27 8.27 8.11 16.95 .5"
+                  stroke="var(--color-text-primary)"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+            </button>
+          </>
+        )}
       </div>
 
       {/* Article Slider — key forces fresh Embla per category */}

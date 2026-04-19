@@ -35,8 +35,8 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
   useEffect(() => {
     if (!emblaApi) return;
     const check = () => {
-      // Layout: spacer + card + card + ... + card + spacer → (n+2) Items,
-      // (n+1) Gaps. Spacer-Basis = 5vw je Seite.
+      // Layout: spacer + n cards + spacer → (n+2) Items, (n+1) Gaps.
+      // Beide Spacer 5vw (symmetrisch).
       const spacerBasis = window.innerWidth * 0.05;
       const cards = posts.length * CARD_MIN_WIDTH;
       const gaps = (posts.length + 1) * ART_GAP;
@@ -79,12 +79,12 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
 
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, distFromLeft / FADE_LEFT);
-          const eased = t * t * (3 - 2 * t); // smoothstep
+          const eased = t * (2 - t); // ease-out quadratic
           return { opacity: eased, scale: 0.6 + 0.4 * eased };
         }
         if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, distFromRight / FADE_RIGHT);
-          const eased = t * t * (3 - 2 * t);
+          const eased = t * (2 - t); // ease-out quadratic
           return { opacity: eased, scale: 0.6 + 0.4 * eased };
         }
         return { opacity: 1, scale: 1 };
@@ -120,11 +120,12 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
         <div
           aria-hidden
           style={{
-            flexGrow: canScroll ? 0 : 1,
+            // Beide Spacer fix auf 5vw. Cards absorbieren den Rest über ihre
+            // eigene flex-grow bis max 450 — symmetrisch und minimal.
+            flexGrow: 0,
             flexShrink: 0,
             flexBasis: '5vw',
             minWidth: 0,
-            transition: 'flex-grow 0.3s ease',
           }}
         />
         {posts.map((post, index) => {
@@ -133,9 +134,9 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
             <div
               key={post.id}
               style={{
-                // Nur flex-grow toggelt zwischen 0 (Slider = fixe 265er-Slides)
-                // und 1 (Static = Cards wachsen mit bis max 400). flex-basis
-                // und flex-shrink bleiben konstant → smoother Resize-Übergang.
+                // Static-Mode: Cards wachsen bis max 450px, danach absorbiert
+                // der Trailing-Spacer den Rest (linksbündig).
+                // Slider-Mode: fix auf 265px.
                 flexGrow: canScroll ? 0 : 1,
                 flexShrink: 0,
                 flexBasis: `${ART_SLIDE_WIDTH}px`,
@@ -160,7 +161,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
               {!isLast && (
                 <div style={{
                   position: 'absolute',
-                  right: -ART_GAP / 2 - 0.5,
+                  right: -ART_GAP / 2 - 6,
                   top: '50%',
                   transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
                   transformOrigin: 'center center',
@@ -185,11 +186,12 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
         <div
           aria-hidden
           style={{
-            flexGrow: canScroll ? 0 : 1,
+            // Trailing bleibt fix (5vw) — Leading wächst und schiebt die
+            // Cards nach rechts.
+            flexGrow: 0,
             flexShrink: 0,
             flexBasis: '5vw',
             minWidth: 0,
-            transition: 'flex-grow 0.3s ease',
           }}
         />
       </div>

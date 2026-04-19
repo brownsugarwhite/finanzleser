@@ -21,7 +21,7 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
 };
 
 export const CARD_MIN_WIDTH = 265;
-export const CARD_MAX_WIDTH = 400;
+export const CARD_MAX_WIDTH = 450;
 
 export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
