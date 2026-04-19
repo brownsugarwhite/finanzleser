@@ -231,6 +231,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   return (
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
+      {/* Slider-Stack mit Edge-Gradients (liegt über beiden Slidern + Pill) */}
+      <div style={{ position: 'relative' }}>
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
         <div
@@ -344,6 +346,36 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           onNavReady={handleArticleNavReady}
         />
       )}
+
+        {/* Edge-Gradients — links */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 150,
+            background: 'linear-gradient(to right, var(--color-bg-page), transparent)',
+            pointerEvents: 'none',
+            zIndex: 5,
+          }}
+        />
+        {/* Edge-Gradients — rechts */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: 150,
+            background: 'linear-gradient(to left, var(--color-bg-page), transparent)',
+            pointerEvents: 'none',
+            zIndex: 5,
+          }}
+        />
+      </div>
 
       {/* Shared SliderNav — nur wenn scrollbar oder Article-Mode */}
       {(canScroll || isArticleMode) && (

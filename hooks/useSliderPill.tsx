@@ -42,7 +42,7 @@ export interface UseSliderPillOptions {
   activeIndex?: number | null;
   /**
    * Fade-/Scale-Styles pro Slide (inkl. Spacer an [0] und [length-1]).
-   * Wenn gesetzt, fadet die Pill via `doHide` sobald opacity der aktuell
+   * Wenn gesetzt, fadet die Pill aus sobald opacity der aktuell
    * angesteuerten Card < 1.0 wird.
    */
   slideStyles?: SliderSlideStyle[];
@@ -80,6 +80,11 @@ export function useSliderPill({
   const velocityRef = useRef(0);
   const lastProgressRef = useRef(0);
   const lastScrollTimeRef = useRef(0);
+  // Zeitstempel der letzten Frame-Messung mit vel >= LOW. Wird bei jedem
+  // pointerUp zurückgesetzt, sodass Rubberband-Snap-Backs (bei denen die EMA
+  // im ersten Frame noch unterhalb von LOW liegt) eine Grace-Periode haben,
+  // bevor die Pill fade-in getriggert wird.
+  const lastHighVelAtRef = useRef(0);
 
   // True während ein Hover-Slide-Tween auf x/width läuft. Wird in settleOnTarget
   // geprüft, damit der onScroll-Sync den Slide nicht instant auf Ziel setzt.
@@ -176,42 +181,7 @@ export function useSliderPill({
     }
   }, [getDuration]);
 
-  /* ── Hide pill ── */
-
-  const doHide = useCallback(() => {
-    if (!pillVisible.current || !pillRef.current) return;
-    pillVisible.current = false;
-    lastHoveredIdx.current = -1;
-
-    gsap.killTweensOf(pillRef.current);
-    const px = gsap.getProperty(pillRef.current, "x") as number;
-    const pw = gsap.getProperty(pillRef.current, "width") as number;
-    const cx = px + pw / 2;
-
-    if (line3Ref.current) {
-      gsap.killTweensOf(line3Ref.current);
-      gsap.to(line3Ref.current, {
-        x: cx - 5, width: 10, y: PILL_H / 2 + 6, opacity: 0,
-        duration: 0.15, ease: "power3.in",
-      });
-    }
-    if (line1Ref.current) {
-      gsap.killTweensOf(line1Ref.current);
-      gsap.to(line1Ref.current, {
-        x: cx - 5, width: 10, y: PILL_H / 2 + 10, opacity: 0,
-        duration: 0.15, ease: "power3.in",
-      });
-    }
-    gsap.to(pillRef.current, {
-      x: cx - 5, width: 10, height: 10, opacity: 0, borderRadius: `${PILL_R}px`,
-      duration: 0.15, ease: "power3.in",
-      onComplete: () => {
-        if (pillRef.current) gsap.set(pillRef.current, { scaleX: 1, scaleY: 1, width: 1 });
-      },
-    });
-  }, []);
-
-  /* ── Simple fade-out (für Drag/Swipe) ── */
+  /* ── Simple fade-out (für Drag/Swipe und Hide-Fälle) ── */
 
   const fadeOutPill = useCallback(() => {
     if (!pillRef.current) return;
@@ -259,7 +229,24 @@ export function useSliderPill({
     lastPillX.current = x;
     pillVisible.current = true;
 
-    gsap.to(pillRef.current, { opacity: 1, duration: FADE_DURATION, ease: "power2.out" });
+    // onUpdate trackt Pill-Position live während des Fade-Ins, damit die
+    // Pill bei laufendem (langsamem) Momentum nicht an einer veralteten
+    // Stelle fixiert bleibt und am Fade-In-Ende dann sichtbar nachspringt.
+    gsap.to(pillRef.current, {
+      opacity: 1, duration: FADE_DURATION, ease: "power2.out",
+      onUpdate: () => {
+        if (isSlideActive.current) return; // Slide-Tween hat Priorität
+        const idx = lastHoveredIdx.current;
+        if (idx < 0) return;
+        const card = cardRefs.current[idx];
+        if (!card) return;
+        const { x: nx, w: nw } = getCardVX(card);
+        gsap.set(pillRef.current, { x: nx, width: nw });
+        if (line1Ref.current) gsap.set(line1Ref.current, { x: nx, width: nw });
+        if (line3Ref.current) gsap.set(line3Ref.current, { x: nx, width: nw });
+        lastPillX.current = nx;
+      },
+    });
     if (line1Ref.current) gsap.to(line1Ref.current, { opacity: 1, duration: FADE_DURATION, ease: "power2.out" });
     if (line3Ref.current) gsap.to(line3Ref.current, { opacity: 1, duration: FADE_DURATION, ease: "power2.out" });
   }, [emblaApi, getCardVX, getTitleCenter]);
@@ -274,33 +261,8 @@ export function useSliderPill({
     const l1Top = top - PILL_H / 2 - 10;
 
     if (!pillVisible.current) {
-      // ── Bloom from center ──
-      pillVisible.current = true;
-      const cx = x + w / 2;
-
-      gsap.killTweensOf(pillRef.current);
-      if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
-      if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
-      gsap.set(pillRef.current, {
-        left: 0, top, x: cx - 5, width: 10, height: 10,
-        scaleX: 1, scaleY: 1, borderRadius: `${PILL_R}px`, opacity: 1,
-      });
-      if (line3Ref.current) gsap.set(line3Ref.current, { top: l3Top, x: cx - 5, width: 10, y: PILL_H / 2 + 6, opacity: 1 });
-      if (line1Ref.current) gsap.set(line1Ref.current, { top: l1Top, x: cx - 5, width: 10, y: PILL_H / 2 + 10, opacity: 1 });
-      lastPillX.current = x;
-
-      // Colors
-      if (pillBodyRef.current) gsap.set(pillBodyRef.current, { background: PILL_BG });
-      if (line1Ref.current) gsap.set(line1Ref.current, { background: PILL_BG });
-      if (line3Ref.current) gsap.set(line3Ref.current, { background: PILL_BG });
-      if (lensRef.current) {
-        lensRef.current.querySelectorAll("span").forEach((s) => gsap.set(s, { color: "#fff" }));
-      }
-
-      // Bloom
-      gsap.to(pillRef.current, { x, width: w, height: PILL_H, borderRadius: `${PILL_R}px`, duration: 0.15, ease: "power2.out" });
-      if (line3Ref.current) gsap.to(line3Ref.current, { x, width: w, y: 0, duration: 0.15, ease: "power2.out" });
-      if (line1Ref.current) gsap.to(line1Ref.current, { x, width: w, y: 0, duration: 0.15, ease: "power2.out" });
+      // Fade-In statt Bloom (Slider-weit einheitliches Fade-Verhalten).
+      fadeInPillAt(cardEl);
       return;
     }
 
@@ -309,7 +271,7 @@ export function useSliderPill({
     if (line3Ref.current) gsap.set(line3Ref.current, { top: l3Top });
     if (line1Ref.current) gsap.set(line1Ref.current, { top: l1Top });
     slideTo(x, w, soft);
-  }, [emblaApi, getCardVX, getTitleCenter, slideTo]);
+  }, [emblaApi, getCardVX, getTitleCenter, slideTo, fadeInPillAt]);
 
   /* ── Drag detection — differentiates click vs drag ── */
 
@@ -322,8 +284,8 @@ export function useSliderPill({
       lastProgressRef.current = scrollAtDown.current;
       lastScrollTimeRef.current = performance.now();
       velocityRef.current = 0;
-      // Drag/Swipe-Start → Pill ausfaden (0.2s).
-      fadeOutPill();
+      // Noch NICHT fadeOutPill() — bei reinem Klick soll die Pill bleiben.
+      // Fade-Out kommt erst beim ersten onScroll mit echter Bewegung.
     };
 
     /** Card unter der Maus finden, sonst auf activeIndex zurückfallen. */
@@ -385,7 +347,9 @@ export function useSliderPill({
 
     const onUp = () => {
       isDragging.current = false;
-      // Fade-In übernimmt der onScroll-Handler bei vel < LOW bzw. onSettle.
+      // Grace-Start: Rubberband-Snap-Back braucht 1-2 Frames bis die EMA
+      // hochkommt. In der Zwischenzeit nicht fade-in'en.
+      lastHighVelAtRef.current = performance.now();
     };
 
     const onScroll = () => {
@@ -400,8 +364,21 @@ export function useSliderPill({
       const vel = velocityRef.current;
 
       // Während Drag oder schnellem Momentum: Pill bleibt ausgefadet, nichts tun.
-      if (isDragging.current) return;
-      if (vel >= LOW_VEL_THRESHOLD) return;
+      if (isDragging.current) {
+        // Erstes echtes Scroll-Event während Drag → jetzt erst fadeOut.
+        // (Bei reinem Klick ohne Bewegung feuert onScroll nicht.)
+        if (pillVisible.current && Math.abs(progress - scrollAtDown.current) > 0.001) {
+          fadeOutPill();
+        }
+        return;
+      }
+      if (vel >= LOW_VEL_THRESHOLD) {
+        lastHighVelAtRef.current = now;
+        return;
+      }
+      // Grace nach Pointer-Up / letztem High-Vel-Frame: Rubberband-Bursts
+      // werden sonst verpasst, weil die EMA erst mit Verzögerung über LOW geht.
+      if (now - lastHighVelAtRef.current < 200) return;
 
       // Momentum unter LOW-Schwelle → Pill an Button unter Maus einfaden oder
       // (falls schon sichtbar) sticky an die live-Position der Card syncen.
@@ -424,7 +401,7 @@ export function useSliderPill({
       emblaApi.off("scroll", onScroll);
       emblaApi.off("settle", onSettle);
     };
-  }, [emblaApi, doHide, isActiveMode, getScrollOffset, getCardVX, movePillTo, activeIndex, fadeOutPill, fadeInPillAt]);
+  }, [emblaApi, isActiveMode, getScrollOffset, getCardVX, movePillTo, activeIndex, fadeOutPill, fadeInPillAt]);
 
   /* ── Mode change → hide pill + snap to active (lock handled by SubcategorySlider's morphLock) ── */
 
@@ -535,7 +512,7 @@ export function useSliderPill({
           appearFn(card);
         }
       } else {
-        doHide();
+        fadeOutPill();
       }
       return;
     }
@@ -555,7 +532,7 @@ export function useSliderPill({
         return;
       }
     }
-  }, [getScrollOffset, movePillTo, doHide, isActiveMode, activeIndex, fadeInPillAt]);
+  }, [getScrollOffset, movePillTo, fadeOutPill, isActiveMode, activeIndex, fadeInPillAt]);
 
   const handleContainerLeave = useCallback(() => {
     isMouseInside.current = false;
@@ -573,8 +550,8 @@ export function useSliderPill({
         return;
       }
     }
-    doHide();
-  }, [doHide, activeIndex, movePillTo]);
+    fadeOutPill();
+  }, [fadeOutPill, activeIndex, movePillTo]);
 
   /* ── Render pill (overlay outside viewport, overflow visible for lines) ── */
 
