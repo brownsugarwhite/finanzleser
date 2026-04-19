@@ -51,6 +51,7 @@ const TOOLS = [
     cta: "Zu unseren Rechnern",
     href: "/finanztools/rechner",
     color: "var(--color-tool-rechner)",
+    icon: "/icons/rechner_icon.svg",
     anim: vergleicheAnim, // Platzhalter
   },
   {
@@ -59,6 +60,7 @@ const TOOLS = [
     cta: "Zu unseren Vergleichen",
     href: "/finanztools/vergleiche",
     color: "var(--color-tool-vergleiche)",
+    icon: "/icons/vergleich_icon.svg",
     anim: vergleicheAnim,
   },
   {
@@ -67,6 +69,7 @@ const TOOLS = [
     cta: "Zu unseren Checklisten",
     href: "/finanztools/checklisten",
     color: "var(--color-tool-checklisten)",
+    icon: "/icons/checkliste_icon.svg",
     anim: vergleicheAnim, // Platzhalter
   },
 ];
@@ -386,12 +389,14 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
                           height: isActive ? "auto" : 50,
                         }}
                       >
-                        <div
+                        <img
+                          src={tool.icon}
+                          alt=""
+                          aria-hidden
                           style={{
                             width: 40,
                             height: 40,
-                            borderRadius: 17,
-                            border: "1px solid var(--color-text-primary)",
+                            objectFit: "contain",
                             flexShrink: 0,
                           }}
                         />

@@ -1,0 +1,17 @@
+<svg width="59" height="61" viewBox="0 0 59 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>[stroke] { stroke-width: 1; vector-effect: non-scaling-stroke; }</style>
+<rect x="0.5" y="0.5" width="49" height="60" rx="4.5" stroke="black"/>
+<path d="M45 21L47 10.5L55 14L57 22.5L55 30.5L47 34.5L45 21Z" fill="white"/>
+<rect x="7" y="42" width="9" height="9" rx="2" fill="black"/>
+<rect x="6" y="25" width="11" height="11" rx="2" fill="black"/>
+<rect x="6" y="9" width="11" height="11" rx="2" fill="black"/>
+<path d="M9 31L11 32.5L14 28" stroke="white" stroke-width="2"/>
+<path d="M9 15L11 16.5L14 12" stroke="white" stroke-width="2"/>
+<path d="M23.8311 28.5782L19 39.0796L30 40.0412L56.5 27L57.541 22.2415L54.041 15.7415L49.7727 14.0192L23.8311 28.5782Z" stroke="black"/>
+<path d="M23.8311 39.502C21.1068 38.0413 21.1068 36.5 21.1068 34.5L19 39.4958L23.8311 39.502Z" fill="black"/>
+<path d="M49.7516 14.0192L49.041 18.7415L52.041 24.7415L56.3831 27.0192" stroke="black"/>
+<path d="M23.8311 28.5782L23.8311 33.0413L26.5 38.0413L30 40.0412" stroke="black"/>
+<path d="M22 46.5H41" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<path d="M22 14H41" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<ellipse cx="53.2523" cy="20.3872" rx="1.51824" ry="2.60304" transform="rotate(-24.2744 53.2523 20.3872)" fill="black"/>
+</svg>

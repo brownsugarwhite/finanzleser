@@ -12,6 +12,7 @@ interface Tool {
   cta: string;
   href: string;
   color: string;
+  icon?: string;
 }
 
 interface RevolverSliderProps {
@@ -219,15 +220,31 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                   return (
                     <>
                       {/* Icon — absolute, animiert horizontal */}
-                      <div style={{
-                        position: "absolute",
-                        left: 27 + iconLeft,
-                        top: 20 - 9 * (1 - t),
-                        width: 40,
-                        height: 40,
-                        borderRadius: 17,
-                        border: "1px solid var(--color-text-primary)",
-                      }} />
+                      {tool.icon ? (
+                        <img
+                          src={tool.icon}
+                          alt=""
+                          aria-hidden
+                          style={{
+                            position: "absolute",
+                            left: 27 + iconLeft,
+                            top: 20 - 9 * (1 - t),
+                            width: 40,
+                            height: 40,
+                            objectFit: "contain",
+                          }}
+                        />
+                      ) : (
+                        <div style={{
+                          position: "absolute",
+                          left: 27 + iconLeft,
+                          top: 20 - 9 * (1 - t),
+                          width: 40,
+                          height: 40,
+                          borderRadius: 17,
+                          border: "1px solid var(--color-text-primary)",
+                        }} />
+                      )}
                       {/* Title — in flow, nur paddingLeft + paddingTop animiert */}
                       <p style={{
                         marginTop: 0,

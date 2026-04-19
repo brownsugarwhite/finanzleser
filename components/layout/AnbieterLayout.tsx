@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
@@ -23,16 +22,7 @@ export default function AnbieterLayout({ title, content }: AnbieterLayoutProps) 
         <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
           <Breadcrumb items={breadcrumbItems} />
 
-          <div className="mb-8 overflow-hidden rounded-2xl" style={{ aspectRatio: "16 / 6", position: "relative" }}>
-            <Image
-              src="/assets/anbieter-placeholder.svg"
-              alt="Anbieter"
-              fill
-              priority
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+          <div className="mb-8 bg-gray-200" style={{ height: 230 }} aria-hidden="true" />
 
           {kicker && (
             <span
