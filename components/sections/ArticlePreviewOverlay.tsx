@@ -28,9 +28,9 @@ const NAV_EASE = "power2.inOut";
 const TEXT_FADE_DURATION = 0.15;
 const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
-const PREVIEW_PADDING = 40;
-const IMAGE_WIDTH = 400;
-const IMAGE_HEIGHT = 300;
+const PREVIEW_PADDING = 56;
+const IMAGE_WIDTH = 550;
+const IMAGE_HEIGHT = 350;
 const IMAGE_RADIUS = 0;
 const IMAGE_RADIUS_CSS = `${IMAGE_RADIUS}px`;
 const PREVIEW_SHADOW = "0 3px 23px rgba(0, 0, 0, 0.02)";
@@ -45,6 +45,8 @@ interface Props {
   onNavigate: (delta: -1 | 1) => void;
   onGoTo: (index: number) => void;
   onClose: () => void;
+  extrasCache: Record<string, PreviewExtras>;
+  prefetchExtras: (slug: string) => void;
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -69,16 +71,16 @@ function measureRectUnscaled(el: HTMLElement): DOMRect {
 // white bg, preview radius + shadow). Used at start of morph (to undo leftover morph styles
 // before measuring) and on morph complete (so subsequent nav-slider phase has correct layout).
 function restoreBoxToNatural(box: HTMLElement) {
-  box.style.position = "absolute";
-  box.style.top = "0";
-  box.style.right = "0";
-  box.style.bottom = "0";
-  box.style.left = "0";
-  box.style.width = "";
+  box.style.position = "relative";
+  box.style.top = "";
+  box.style.right = "";
+  box.style.bottom = "";
+  box.style.left = "";
+  box.style.width = "100%";
   box.style.height = "";
   box.style.margin = "";
   box.style.maxWidth = "";
-  box.style.maxHeight = "";
+  box.style.maxHeight = "calc(100vh - 220px)";
   box.style.overflow = "hidden";
   box.style.zIndex = "";
   box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
@@ -103,7 +105,7 @@ function restoreImageToNatural(image: HTMLElement) {
 // ────────────────────────────────────────────────────────────────────────────
 // Main
 // ────────────────────────────────────────────────────────────────────────────
-export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onGoTo, onClose }: Props) {
+export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onGoTo, onClose, extrasCache, prefetchExtras }: Props) {
   const { posts } = ctx;
   const post = posts[currentIndex];
 
@@ -111,7 +113,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const trackRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
-  const dotsRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   // Per-slide refs (keyed by post slug)
   const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -139,7 +141,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const isExitingRef = useRef(false);
   const initialIndexRef = useRef(currentIndex);
   const [phase, setPhase] = useState<Phase>("opening");
-  const [extrasCache, setExtrasCache] = useState<Record<string, PreviewExtras>>({});
 
   // ── Side effects + cleanup ────────────────────────────────────────────────
   useEffect(() => {
@@ -171,30 +172,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Fetch extras (cached per slug) ────────────────────────────────────────
-  const fetchExtras = useCallback((slug: string) => {
-    setExtrasCache((prev) => {
-      if (prev[slug]) return prev;
-      return prev;
-    });
-    // Fire fetch unconditionally; dedupe via functional set
-    fetch(`/api/article-preview?slug=${encodeURIComponent(slug)}`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data: PreviewExtras | null) => {
-        if (!data) return;
-        setExtrasCache((prev) => (prev[slug] ? prev : { ...prev, [slug]: data }));
-      })
-      .catch(() => {});
-  }, []);
-
+  // ── Prefetch extras for current + neighbors ───────────────────────────────
   useEffect(() => {
     if (!post) return;
-    fetchExtras(post.slug);
+    prefetchExtras(post.slug);
     const prev = posts[currentIndex - 1];
     const next = posts[currentIndex + 1];
-    if (prev) fetchExtras(prev.slug);
-    if (next) fetchExtras(next.slug);
-  }, [post, currentIndex, posts, fetchExtras]);
+    if (prev) prefetchExtras(prev.slug);
+    if (next) prefetchExtras(next.slug);
+  }, [post, currentIndex, posts, prefetchExtras]);
 
   // ── Initial track position (before first paint) ──────────────────────────
   useLayoutEffect(() => {
@@ -350,11 +336,41 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (closeBtnRef.current) {
       gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
     }
-    if (dotsRef.current) {
-      gsap.fromTo(dotsRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    if (footerRef.current) {
+      gsap.fromTo(footerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
+
+  // ── Animate box height when extras arrive late for current slide ──────────
+  const currentExtras = post ? extrasCache[post.slug] : null;
+  useLayoutEffect(() => {
+    if (phase !== "slider") return;
+    if (!post) return;
+    const box = boxRefs.current.get(post.slug);
+    if (!box) return;
+    const currentHeight = box.getBoundingClientRect().height;
+    box.style.height = "auto";
+    const naturalHeight = box.getBoundingClientRect().height;
+    if (Math.abs(naturalHeight - currentHeight) < 2) {
+      box.style.height = "";
+      return;
+    }
+    box.style.height = `${currentHeight}px`;
+    const t = gsap.to(box, {
+      height: naturalHeight,
+      duration: 0.35,
+      ease: "power2.inOut",
+      onComplete: () => {
+        box.style.height = "";
+      },
+    });
+    return () => {
+      t.kill();
+      box.style.height = "";
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentExtras, phase]);
 
   // ── Navigate animation: slide track + fade text swap ─────────────────────
   const prevIndexRef = useRef(currentIndex);
@@ -490,8 +506,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (closeBtnRef.current) {
       gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     }
-    if (dotsRef.current) {
-      gsap.to(dotsRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    if (footerRef.current) {
+      gsap.to(footerRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     }
     window.setTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
   }, [post]);
@@ -683,6 +699,18 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
       <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} />
 
+      {post && (
+        <PreviewFooter
+          footerRef={footerRef}
+          post={post}
+          readingTime={extrasCache[post.slug]?.readingTime ?? 0}
+          currentIndex={currentIndex}
+          total={posts.length}
+          onGoTo={onGoTo}
+          onClose={requestClose}
+        />
+      )}
+
       {/* Track — holds one slide per post; animates via `left` so position:fixed children stay viewport-anchored */}
       <div
         ref={trackRef}
@@ -711,6 +739,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 alignItems: "flex-start",
                 justifyContent: "center",
                 padding: "100px 20px 20px",
+                overflowY: "auto",
+                overflowX: "hidden",
                 boxSizing: "border-box",
               }}
             >
@@ -750,7 +780,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             position: "relative",
             width: "100%",
             maxWidth: 1000,
-            height: "min(900px, calc(100vh - 120px))",
+            height: "min(600px, calc(100vh - 320px))",
             pointerEvents: "none",
           }}
         >
@@ -780,25 +810,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             </svg>
           </button>
 
-          {phase === "slider" && posts.length > 1 && (
-            <div
-              ref={dotsRef}
-              style={{
-                position: "absolute",
-                left: "50%",
-                bottom: PREVIEW_PADDING + 24,
-                transform: "translate(-50%, 50%)",
-                pointerEvents: "auto",
-                opacity: 0,
-              }}
-            >
-              <InstagramDots
-                current={currentIndex}
-                total={posts.length}
-                onGoTo={onGoTo}
-              />
-            </div>
-          )}
         </div>
       </div>
 
@@ -851,23 +862,94 @@ function SlidePreview({
   const imageUrl = post.featuredImage?.node.sourceUrl;
   const toolsToShow = useMemo(() => (extras?.tools ?? []).slice(0, 3), [extras]);
 
+  const upperRowRef = useRef<HTMLDivElement>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const initialMeasurement = useMemo(() => {
+    if (typeof window === "undefined") {
+      return { maxLines: 6, paragraphMinHeight: 0, overflowMode: false };
+    }
+    const vh = window.innerHeight;
+    const maxBoxHeight = vh - 220;
+    const estUpperH = IMAGE_HEIGHT;
+    const available = maxBoxHeight - PREVIEW_PADDING * 2 - estUpperH - 40;
+    const lineH = 29;
+    const lines = Math.max(1, Math.floor(available / lineH));
+    if (lines < 3) {
+      return { maxLines: 999, paragraphMinHeight: 0, overflowMode: true };
+    }
+    return { maxLines: lines, paragraphMinHeight: lines * lineH, overflowMode: false };
+  }, []);
+
+  const [maxLines, setMaxLines] = useState(initialMeasurement.maxLines);
+  const [paragraphMinHeight, setParagraphMinHeight] = useState(initialMeasurement.paragraphMinHeight);
+  const [overflowMode, setOverflowMode] = useState(initialMeasurement.overflowMode);
+  const boxElRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const compute = () => {
+      const upper = upperRowRef.current;
+      if (!upper) return;
+      const vh = window.innerHeight;
+      const maxBoxHeight = vh - 220;
+      const upperRowH = upper.offsetHeight;
+      const available = maxBoxHeight - PREVIEW_PADDING * 2 - upperRowH - 40;
+      const pEl = paragraphRef.current;
+      const lineH = pEl ? parseFloat(getComputedStyle(pEl).lineHeight) || 29 : 29;
+      const lines = Math.max(1, Math.floor(available / lineH));
+      if (lines < 3) {
+        setOverflowMode(true);
+        setMaxLines(999);
+        setParagraphMinHeight(0);
+      } else {
+        setOverflowMode(false);
+        setMaxLines(lines);
+        setParagraphMinHeight(lines * lineH);
+      }
+    };
+    compute();
+    const ro = new ResizeObserver(compute);
+    if (upperRowRef.current) ro.observe(upperRowRef.current);
+    window.addEventListener("resize", compute);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", compute);
+    };
+  }, [extras, untertitel, toolsToShow.length]);
+
+  // Override inline maxHeight/overflow on the box when overflow mode is active
+  // (restoreBoxToNatural would otherwise re-apply the clamp).
+  useEffect(() => {
+    const box = boxElRef.current;
+    if (!box) return;
+    if (overflowMode) {
+      box.style.maxHeight = "none";
+      box.style.overflow = "visible";
+    } else {
+      box.style.maxHeight = "calc(100vh - 220px)";
+      box.style.overflow = "hidden";
+    }
+  }, [overflowMode]);
+
   return (
     <div
       style={{
         position: "relative",
         width: "100%",
         maxWidth: 1200,
-        height: "min(900px, calc(100vh - 120px))",
       }}
     >
       {/* Box — the white card */}
       <div
-        ref={setBoxRef}
+        ref={(el) => {
+          setBoxRef(el);
+          boxElRef.current = el;
+        }}
         data-flip-id={`preview-${post.slug}-box`}
         style={{
-          position: "absolute",
-          inset: 0,
-          overflow: "hidden",
+          position: "relative",
+          width: "100%",
+          maxHeight: overflowMode ? "none" : "calc(100vh - 220px)",
+          overflow: overflowMode ? "visible" : "hidden",
           background: "#ffffff",
           borderRadius: PREVIEW_BORDER_RADIUS,
           boxShadow: PREVIEW_SHADOW,
@@ -881,15 +963,14 @@ function SlidePreview({
         <div
           ref={setTextRef}
           style={{
-            flex: 1,
             display: "flex",
             flexDirection: "column",
             opacity: 0,
-            minHeight: 0,
           }}
         >
           {/* Upper row — image spacer (left) + subline/title column (right) */}
           <div
+            ref={upperRowRef}
             style={{
               display: "flex",
               gap: 40,
@@ -957,19 +1038,19 @@ function SlidePreview({
             </div>
           </div>
 
-          {/* Lower section — description, tools, reading time + CTA */}
+          {/* Lower section — description */}
           <div
             style={{
               marginTop: 40,
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              flex: 1,
-              minHeight: 0,
+              minHeight: paragraphMinHeight || undefined,
             }}
           >
             {extras?.firstParagraph ? (
               <p
+                ref={paragraphRef}
                 lang="de"
                 style={{
                   fontFamily: "Merriweather, serif",
@@ -978,6 +1059,11 @@ function SlidePreview({
                   lineHeight: 1.6,
                   color: "var(--color-text-primary)",
                   margin: 0,
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: maxLines,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {extras.firstParagraph}
@@ -985,29 +1071,6 @@ function SlidePreview({
             ) : (
               <SkeletonParagraph />
             )}
-            <Spacer noMargin />
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 20,
-                marginTop: "auto",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 15,
-                  color: "var(--color-text-medium)",
-                }}
-              >
-                {extras && extras.readingTime > 0 ? `Lesedauer: ${extras.readingTime} Min.` : "\u00A0"}
-              </span>
-              <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
-                <PreviewReadButton label="Ratgeber lesen" />
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -1122,6 +1185,72 @@ function PreviewHeader({ current, total, phase }: { current: number; total: numb
         <AnimatedNumber value={current} minChars={String(total).length} />
         <span>/{total}</span>
       </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// PreviewFooter — fixed row below the slides: reading time + dots + CTA
+// ────────────────────────────────────────────────────────────────────────────
+function PreviewFooter({
+  footerRef,
+  post,
+  readingTime,
+  currentIndex,
+  total,
+  onGoTo,
+  onClose,
+}: {
+  footerRef: React.RefObject<HTMLDivElement | null>;
+  post: Post;
+  readingTime: number;
+  currentIndex: number;
+  total: number;
+  onGoTo: (index: number) => void;
+  onClose: () => void;
+}) {
+  const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
+  const subCategory =
+    post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) ||
+    post.categories?.nodes?.[0];
+  const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
+
+  return (
+    <div
+      ref={footerRef}
+      style={{
+        position: "fixed",
+        left: "50%",
+        bottom: 40,
+        transform: "translateX(-50%)",
+        display: "flex",
+        alignItems: "center",
+        gap: 40,
+        zIndex: 6,
+        pointerEvents: "auto",
+        opacity: 0,
+      }}
+    >
+      <span
+        style={{
+          display: "inline-flex",
+          alignItems: "baseline",
+          fontFamily: "var(--font-body)",
+          fontSize: 15,
+          color: "var(--color-text-medium)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        Lesedauer:&nbsp;
+        <AnimatedNumber value={readingTime} minChars={2} />
+        &nbsp;Min.
+      </span>
+      {total > 1 && (
+        <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} />
+      )}
+      <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
+        <PreviewReadButton label="Ratgeber lesen" />
+      </Link>
     </div>
   );
 }
@@ -1250,7 +1379,7 @@ const textSublineStyle: React.CSSProperties = {
   fontFamily: "Merriweather, serif",
   fontStyle: "italic",
   fontWeight: 500,
-  fontSize: "23px",
+  fontSize: "20px",
   lineHeight: 1.3,
   color: "var(--color-brand-secondary)",
   margin: 0,
@@ -1262,8 +1391,8 @@ const textSublineStyle: React.CSSProperties = {
 const textTitleStyle: React.CSSProperties = {
   fontFamily: "Merriweather, serif",
   fontWeight: 700,
-  fontSize: "42px",
-  lineHeight: 1.3,
+  fontSize: "36px",
+  lineHeight: 1.2,
   color: "var(--color-text-primary)",
   margin: 0,
   hyphens: "auto",

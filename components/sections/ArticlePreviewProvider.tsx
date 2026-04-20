@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useRef, useState } from "react";
 import type { Post } from "@/lib/types";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 import ArticlePreviewOverlay from "./ArticlePreviewOverlay";
@@ -35,6 +35,8 @@ interface ArticlePreviewContextValue {
   goTo: (index: number) => void;
   closePreview: () => void;
   isOpen: boolean;
+  prefetchExtras: (slug: string) => void;
+  extrasCache: Record<string, PreviewExtras>;
 }
 
 const ArticlePreviewContext = createContext<ArticlePreviewContextValue | null>(null);
@@ -48,6 +50,8 @@ export function useArticlePreview(): ArticlePreviewContextValue {
       goTo: () => {},
       closePreview: () => {},
       isOpen: false,
+      prefetchExtras: () => {},
+      extrasCache: {},
     };
   }
   return ctx;
@@ -55,6 +59,26 @@ export function useArticlePreview(): ArticlePreviewContextValue {
 
 export default function ArticlePreviewProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<PreviewState | null>(null);
+  const [extrasCache, setExtrasCache] = useState<Record<string, PreviewExtras>>({});
+  const inflightRef = useRef<Set<string>>(new Set());
+
+  const prefetchExtras = useCallback((slug: string) => {
+    if (!slug) return;
+    if (extrasCache[slug]) return;
+    if (inflightRef.current.has(slug)) return;
+    inflightRef.current.add(slug);
+    fetch(`/api/article-preview?slug=${encodeURIComponent(slug)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: PreviewExtras | null) => {
+        if (data) {
+          setExtrasCache((prev) => (prev[slug] ? prev : { ...prev, [slug]: data }));
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        inflightRef.current.delete(slug);
+      });
+  }, [extrasCache]);
 
   const openPreview = useCallback((input: OpenPreviewInput) => {
     setState((prev) => {
@@ -98,7 +122,7 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
   }, []);
 
   return (
-    <ArticlePreviewContext.Provider value={{ openPreview, navigate, goTo, closePreview, isOpen: !!state }}>
+    <ArticlePreviewContext.Provider value={{ openPreview, navigate, goTo, closePreview, isOpen: !!state, prefetchExtras, extrasCache }}>
       {children}
       {state && (
         <ArticlePreviewOverlay
@@ -107,6 +131,8 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
           onNavigate={navigate}
           onGoTo={goTo}
           onClose={closePreview}
+          extrasCache={extrasCache}
+          prefetchExtras={prefetchExtras}
         />
       )}
     </ArticlePreviewContext.Provider>

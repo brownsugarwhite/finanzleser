@@ -55,7 +55,7 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
     return () => observer.disconnect();
   }, [imageVisible]);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
-  const { openPreview, isOpen } = useArticlePreview();
+  const { openPreview, isOpen, prefetchExtras } = useArticlePreview();
   const sliderCtx = useSliderPreviewContext();
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
@@ -71,6 +71,7 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
+    prefetchExtras(post.slug);
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -100,7 +101,10 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
       data-flip-id={`preview-${post.slug}-box`}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onMouseEnter={() => setInfoHovered(true)}
+      onMouseEnter={() => {
+        setInfoHovered(true);
+        prefetchExtras(post.slug);
+      }}
       onMouseLeave={() => setInfoHovered(false)}
       style={{
         width: '100%',
