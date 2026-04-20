@@ -1,13 +1,18 @@
-export default function RechnerPlaceholder({ children }: { children?: React.ReactNode }) {
+import VisualLottie from "./VisualLottie";
+
+export default function RechnerPlaceholder({ children, seed }: { children?: React.ReactNode; seed?: string }) {
   return (
     <div style={{
+      position: 'relative',
       width: '100%',
       flex: 1,
-      background: 'rgba(0, 0, 0, 0.06)',
+      background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
+      overflow: 'hidden',
     }}>
+      <VisualLottie seed={seed} />
       {children}
     </div>
   );

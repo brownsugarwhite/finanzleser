@@ -99,6 +99,18 @@
   /* SVG Effects */
   --svg-dark-filter: none;
 
+  /* Visual Fills (Lottie-Hintergrund-Palette, 10 Varianten) */
+  --visual-fill-1:  #e3ecd8;
+  --visual-fill-2:  #d9e7cb;
+  --visual-fill-3:  #eae4d4;
+  --visual-fill-4:  #e0d9c8;
+  --visual-fill-5:  #dbe4d1;
+  --visual-fill-6:  #e8dcc9;
+  --visual-fill-7:  #d4dec8;
+  --visual-fill-8:  #efe7d5;
+  --visual-fill-9:  #dde3d0;
+  --visual-fill-10: #e5ddd0;
+
   /* Author Avatar Gradients (6 variants) */
   --gradient-author-1: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram */
   --gradient-author-2: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); /* Warm Sunset */
@@ -148,6 +160,18 @@
   --pill-bg: #333838;
   --pill-border: rgba(0, 0, 0, 0.3);
   --pill-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), inset 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+  /* Visual Fills (Dark-Mode Varianten) */
+  --visual-fill-1:  #3a4434;
+  --visual-fill-2:  #36402f;
+  --visual-fill-3:  #433e30;
+  --visual-fill-4:  #3d382c;
+  --visual-fill-5:  #394232;
+  --visual-fill-6:  #43392d;
+  --visual-fill-7:  #353f2e;
+  --visual-fill-8:  #47402f;
+  --visual-fill-9:  #383f30;
+  --visual-fill-10: #41392e;
 }
 
 

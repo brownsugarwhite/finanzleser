@@ -9,6 +9,7 @@ import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import Spacer from "@/components/ui/Spacer";
 import InstagramDots from "@/components/ui/InstagramDots";
+import VisualLottie from "@/components/ui/VisualLottie";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 
@@ -917,6 +918,42 @@ function SlidePreview({
                   {untertitel}
                 </p>
               )}
+              {toolsToShow.length > 0 && (
+                <div style={{ marginTop: 20 }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: 12,
+                      fontWeight: 600,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      color: "var(--color-text-medium)",
+                      margin: "0 0 10px 0",
+                    }}
+                  >
+                    Finanztools in diesem Artikel
+                  </p>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    {toolsToShow.map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          backgroundColor: TOOL_META[t].color,
+                          color: "#ffffff",
+                          fontFamily: "var(--font-body)",
+                          fontWeight: 600,
+                          fontSize: 14,
+                          padding: "6px 14px",
+                          borderRadius: 0,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {TOOL_META[t].label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -947,27 +984,6 @@ function SlidePreview({
               </p>
             ) : (
               <SkeletonParagraph />
-            )}
-            {toolsToShow.length > 0 && (
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                {toolsToShow.map((t) => (
-                  <span
-                    key={t}
-                    style={{
-                      backgroundColor: TOOL_META[t].color,
-                      color: "#ffffff",
-                      fontFamily: "var(--font-body)",
-                      fontWeight: 600,
-                      fontSize: 14,
-                      padding: "6px 14px",
-                      borderRadius: 0,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {TOOL_META[t].label}
-                  </span>
-                ))}
-              </div>
             )}
             <Spacer noMargin />
             <div
@@ -1006,11 +1022,13 @@ function SlidePreview({
           left: PREVIEW_PADDING,
           width: IMAGE_WIDTH,
           height: IMAGE_HEIGHT,
-          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "#e5e5e5",
+          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "transparent",
           borderRadius: IMAGE_RADIUS_CSS,
           pointerEvents: "none",
+          overflow: "hidden",
         }}
       >
+        {!imageUrl && <VisualLottie seed={post.slug} />}
         {/* Info-i — morphs with the image (CSS child), opacity animated during open/close */}
         <div
           ref={setInfoRef}

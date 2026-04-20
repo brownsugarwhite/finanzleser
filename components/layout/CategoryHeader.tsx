@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import VisualLottie from "@/components/ui/VisualLottie";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,10 +73,14 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
       {/* Visual Platzhalter — wrapper für seitliches Padding */}
       <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
         <div style={{
+          position: "relative",
           width: "100%",
           height: 250,
-          background: "rgba(0, 0, 0, 0.06)",
-        }} />
+          background: "transparent",
+          overflow: "hidden",
+        }}>
+          <VisualLottie seed={title} />
+        </div>
       </div>
       {/* H1 mit Sparks und Linien — sticky über dem Progressive Blur */}
       {title && (

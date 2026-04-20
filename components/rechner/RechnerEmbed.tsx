@@ -200,7 +200,7 @@ export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
       <div className="rechner-layout">
         <div className="rechner-top-row">
           <div className="rechner-visual">
-            <RechnerPlaceholder />
+            <RechnerPlaceholder seed={slug} />
           </div>
           <div className="rechner-divider"><VerticalSpacer /></div>
           <div className="rechner-form-col">

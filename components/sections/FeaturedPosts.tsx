@@ -1,5 +1,6 @@
 import Link from "next/link";
 import InlineSVG from "@/components/ui/InlineSVG";
+import VisualLottie from "@/components/ui/VisualLottie";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 
@@ -43,7 +44,7 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
                 className="flex flex-col border border-gray-200 rounded overflow-hidden hover:shadow-lg transition"
               >
                 {/* Visual */}
-                <div className="h-48 bg-gray-50 flex items-center justify-center overflow-hidden p-4">
+                <div className="h-48 flex items-center justify-center overflow-hidden p-4 relative">
                   {post.featuredImage?.node?.sourceUrl ? (
                     <InlineSVG
                       src={post.featuredImage.node.sourceUrl}
@@ -51,7 +52,7 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
                       style={{ width: '100%', height: '100%' }}
                     />
                   ) : (
-                    <span className="text-gray-400 text-sm">Kein Bild</span>
+                    <VisualLottie seed={post.slug} />
                   )}
                 </div>
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
 import InlineSVG from '@/components/ui/InlineSVG';
+import VisualLottie from '@/components/ui/VisualLottie';
 import { useArticlePreview } from '@/components/sections/ArticlePreviewProvider';
 import { useSliderPreviewContext } from '@/components/sections/ArticleSliderContext';
 
@@ -99,6 +100,8 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
       data-flip-id={`preview-${post.slug}-box`}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
+      onMouseEnter={() => setInfoHovered(true)}
+      onMouseLeave={() => setInfoHovered(false)}
       style={{
         width: '100%',
         position: 'relative',
@@ -127,12 +130,15 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
           style={{
             position: 'absolute',
             inset: 0,
+            overflow: 'hidden',
             background:
               imageVisible && post.featuredImage?.node.sourceUrl
                 ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
-                : '#e5e5e5',
+                : 'transparent',
           }}
-        />
+        >
+          {!post.featuredImage?.node.sourceUrl && <VisualLottie seed={post.slug} />}
+        </div>
         <div
           data-card-info
           onMouseEnter={() => setInfoHovered(true)}
