@@ -117,7 +117,75 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const footerRef = useRef<HTMLDivElement>(null);
   const leftNavRef = useRef<HTMLDivElement>(null);
   const rightNavRef = useRef<HTMLDivElement>(null);
+  const leftArrowRef = useRef<HTMLDivElement>(null);
+  const rightArrowRef = useRef<HTMLDivElement>(null);
+  const leftArrowSvgRef = useRef<SVGSVGElement>(null);
+  const rightArrowSvgRef = useRef<SVGSVGElement>(null);
+  const leftLineRef = useRef<HTMLDivElement>(null);
+  const rightLineRef = useRef<HTMLDivElement>(null);
+  const leftArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
+  const rightArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
+  const leftDisabled = currentIndex === 0;
+  const rightDisabled = currentIndex === posts.length - 1;
+  const leftFirstRun = useRef(true);
+  const rightFirstRun = useRef(true);
+
+  // Initialise GSAP quickTo handlers once arrow refs are mounted
+  useEffect(() => {
+    if (leftArrowRef.current) {
+      leftArrowQuickTo.current = gsap.quickTo(leftArrowRef.current, "y", {
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    }
+    if (rightArrowRef.current) {
+      rightArrowQuickTo.current = gsap.quickTo(rightArrowRef.current, "y", {
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    }
+  }, []);
+
+  // Disable animation for LEFT nav: arrow shrinks → line shrinks (toward vline)
+  useLayoutEffect(() => {
+    const arrow = leftArrowSvgRef.current;
+    const line = leftLineRef.current;
+    if (!arrow || !line) return;
+    if (leftFirstRun.current) {
+      leftFirstRun.current = false;
+      gsap.set(arrow, { scale: leftDisabled ? 0 : 1 });
+      gsap.set(line, { scaleX: leftDisabled ? 0 : 1 });
+      return;
+    }
+    if (leftDisabled) {
+      gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(line, { scaleX: 0, duration: 0.2, delay: 0.25, ease: "power2.out", overwrite: true });
+    } else {
+      gsap.to(line, { scaleX: 1, duration: 0.2, ease: "power2.in", overwrite: true });
+      gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.2, ease: "power2.out", overwrite: true });
+    }
+  }, [leftDisabled]);
+
+  // Disable animation for RIGHT nav
+  useLayoutEffect(() => {
+    const arrow = rightArrowSvgRef.current;
+    const line = rightLineRef.current;
+    if (!arrow || !line) return;
+    if (rightFirstRun.current) {
+      rightFirstRun.current = false;
+      gsap.set(arrow, { scale: rightDisabled ? 0 : 1 });
+      gsap.set(line, { scaleX: rightDisabled ? 0 : 1 });
+      return;
+    }
+    if (rightDisabled) {
+      gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(line, { scaleX: 0, duration: 0.2, delay: 0.25, ease: "power2.out", overwrite: true });
+    } else {
+      gsap.to(line, { scaleX: 1, duration: 0.2, ease: "power2.in", overwrite: true });
+      gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.2, ease: "power2.out", overwrite: true });
+    }
+  }, [rightDisabled]);
 
   // Per-slide refs (keyed by post slug)
   const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -372,25 +440,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
-  // ── Track mouse X to highlight nav on hover over side margins ─────────────
-  useEffect(() => {
-    if (phase !== "slider") return;
-    const onMouseMove = (e: MouseEvent) => {
-      const vw = window.innerWidth;
-      const cardHalf = Math.min(600, (vw - 40) / 2);
-      const leftEdge = vw / 2 - cardHalf;
-      const rightEdge = vw / 2 + cardHalf;
-      if (e.clientX < leftEdge) setHoverSide("left");
-      else if (e.clientX > rightEdge) setHoverSide("right");
-      else setHoverSide(null);
-    };
-    window.addEventListener("mousemove", onMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      setHoverSide(null);
-    };
-  }, [phase]);
-
   // ── Animate box height when extras arrive late for current slide ──────────
   const currentExtras = post ? extrasCache[post.slug] : null;
   useLayoutEffect(() => {
@@ -437,10 +486,19 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const oldSlide = oldPost ? slideWrapperRefs.current.get(oldPost.slug) : null;
     const newSlide = newPost ? slideWrapperRefs.current.get(newPost.slug) : null;
 
+    // Kill any in-flight tweens on either slide so rapid nav can't keep stale
+    // values (especially lingering filter: blur) on the incoming slide.
+    if (oldSlide) gsap.killTweensOf(oldSlide);
+    if (newSlide) gsap.killTweensOf(newSlide);
+
     // Click-based nav: new slide has no prior transform → set offscreen start state.
     // Drag-based nav: state already mid-animation, don't reset.
     if (!dragNavRef.current && newSlide) {
       gsap.set(newSlide, { x: dir * 200, scale: 1.2, opacity: 0, filter: "blur(0px)" });
+    } else if (newSlide) {
+      // Drag-nav: ensure the new slide starts sharp even if it was previously
+      // the leaving slide (and thus mid-blur).
+      gsap.set(newSlide, { filter: "blur(0px)" });
     }
     dragNavRef.current = false;
     dragCandidateSlugRef.current = null;
@@ -453,11 +511,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         filter: "blur(10px)",
         duration: NAV_DURATION,
         ease: NAV_EASE,
+        overwrite: "auto",
       });
       gsap.to(oldSlide, {
         opacity: 0,
         duration: NAV_DURATION * 0.75,
         ease: NAV_EASE,
+        overwrite: "auto",
       });
     }
     if (newSlide) {
@@ -467,12 +527,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         scale: 1,
         duration: NAV_DURATION,
         ease: NAV_EASE,
+        overwrite: "auto",
       });
       gsap.to(newSlide, {
         opacity: 1,
         duration: NAV_DURATION * 0.75,
         delay: NAV_DURATION * 0.25,
         ease: NAV_EASE,
+        overwrite: "auto",
       });
     }
     // Ensure new slide's text wrapper is visible (opacity 0 default from JSX)
@@ -851,46 +913,85 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             pointerEvents: "none",
           }}
         />
-        {/* Verbindungslinie Prev-Pfeil → linke vertikale Linie */}
+        {/* Pfeil-Grafik + Verbindungslinie (bewegen sich gemeinsam per GSAP y) */}
         <div
+          ref={leftArrowRef}
           style={{
             position: "fixed",
-            top: "calc(50% + 12.5px)",
-            left: "calc(max(20px, calc(50% - 700px)) + 60px)",
-            width: 16,
-            height: 1,
-            background: hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
-            transition: "background 0.2s",
+            top: "calc(50% - 11px)",
+            left: `max(20px, calc(50% - ${hoverSide === "left" ? 706 : 690}px))`,
+            width: hoverSide === "left" ? 60 : 50,
+            height: 22,
             pointerEvents: "none",
-            zIndex: 2,
-          }}
-        />
-        <button
-          onClick={() => currentIndex > 0 && onNavigate(-1)}
-          disabled={currentIndex === 0}
-          aria-label="Zurück"
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "max(20px, calc(50% - 700px))",
-            transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            padding: 0,
-            cursor: currentIndex === 0 ? "default" : "pointer",
-            transition: "opacity 0.2s",
-            pointerEvents: "auto",
             zIndex: 3,
+            transition: "left 0.3s, width 0.3s",
           }}
         >
-          <svg width="60" height="27" viewBox="0 0 60 27" fill="none" style={{ display: "block" }}>
+          <svg
+            ref={leftArrowSvgRef}
+            width={hoverSide === "left" ? 60 : 50}
+            height={22}
+            viewBox="0 0 50 22"
+            preserveAspectRatio="none"
+            fill="none"
+            style={{
+              display: "block",
+              transformOrigin: "100% 100%",
+              transition: "width 0.3s",
+            }}
+          >
             <path
-              d="M0 27 L60 27 L60 0 Z"
+              d="M0 22 L50 22 L50 0 Z"
               fill={hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}
               style={{ transition: "fill 0.2s" }}
             />
           </svg>
-        </button>
+          <div
+            ref={leftLineRef}
+            style={{
+              position: "absolute",
+              top: 21,
+              left: hoverSide === "left" ? 60 : 50,
+              width: hoverSide === "left" ? 22 : 16,
+              height: 1,
+              transformOrigin: "100% 50%",
+              background: hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+              transition: "background 0.2s, left 0.3s, width 0.3s",
+            }}
+          />
+        </div>
+        {/* Hover-/Klick-Rechteck zwischen Pfeilspitze und vertikaler Linie */}
+        <button
+          type="button"
+          onClick={() => currentIndex > 0 && onNavigate(-1)}
+          onMouseEnter={() => !leftDisabled && setHoverSide("left")}
+          onMouseLeave={() => {
+            setHoverSide((s) => (s === "left" ? null : s));
+            leftArrowQuickTo.current?.(0);
+          }}
+          onMouseMove={(e) => {
+            if (leftDisabled) return;
+            const vh = window.innerHeight;
+            const maxOffset = 136.5;
+            const offset = Math.max(-maxOffset, Math.min(maxOffset, e.clientY - vh / 2));
+            leftArrowQuickTo.current?.(offset);
+          }}
+          disabled={leftDisabled}
+          aria-label="Zurück"
+          style={{
+            position: "fixed",
+            top: "calc(50% - 150px)",
+            left: "max(20px, calc(50% - 706px))",
+            right: "calc(100% - max(0px, calc(50% - 600px - 24px)) - 1px)",
+            height: 300,
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            cursor: leftDisabled ? "default" : "pointer",
+            pointerEvents: leftDisabled ? "none" : "auto",
+            zIndex: 4,
+          }}
+        />
       </div>
 
       {/* Nav-Gruppe RECHTS: vertikale Linie + Verbindungslinie + Pfeil */}
@@ -919,46 +1020,85 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             pointerEvents: "none",
           }}
         />
-        {/* Verbindungslinie rechte vertikale Linie → Next-Pfeil */}
+        {/* Pfeil-Grafik + Verbindungslinie (bewegen sich gemeinsam per GSAP y) */}
         <div
+          ref={rightArrowRef}
           style={{
             position: "fixed",
-            top: "calc(50% + 12.5px)",
-            right: "calc(max(20px, calc(50% - 700px)) + 60px)",
-            width: 16,
-            height: 1,
-            background: hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
-            transition: "background 0.2s",
+            top: "calc(50% - 11px)",
+            right: `max(20px, calc(50% - ${hoverSide === "right" ? 706 : 690}px))`,
+            width: hoverSide === "right" ? 60 : 50,
+            height: 22,
             pointerEvents: "none",
-            zIndex: 2,
-          }}
-        />
-        <button
-          onClick={() => currentIndex < posts.length - 1 && onNavigate(1)}
-          disabled={currentIndex === posts.length - 1}
-          aria-label="Weiter"
-          style={{
-            position: "fixed",
-            top: "50%",
-            right: "max(20px, calc(50% - 700px))",
-            transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            padding: 0,
-            cursor: currentIndex === posts.length - 1 ? "default" : "pointer",
-            transition: "opacity 0.2s",
-            pointerEvents: "auto",
             zIndex: 3,
+            transition: "right 0.3s, width 0.3s",
           }}
         >
-          <svg width="60" height="27" viewBox="0 0 60 27" fill="none" style={{ display: "block" }}>
+          <svg
+            ref={rightArrowSvgRef}
+            width={hoverSide === "right" ? 60 : 50}
+            height={22}
+            viewBox="0 0 50 22"
+            preserveAspectRatio="none"
+            fill="none"
+            style={{
+              display: "block",
+              transformOrigin: "0% 100%",
+              transition: "width 0.3s",
+            }}
+          >
             <path
-              d="M60 27 L0 27 L0 0 Z"
+              d="M50 22 L0 22 L0 0 Z"
               fill={hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}
               style={{ transition: "fill 0.2s" }}
             />
           </svg>
-        </button>
+          <div
+            ref={rightLineRef}
+            style={{
+              position: "absolute",
+              top: 21,
+              right: hoverSide === "right" ? 60 : 50,
+              width: hoverSide === "right" ? 22 : 16,
+              height: 1,
+              transformOrigin: "0% 50%",
+              background: hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+              transition: "background 0.2s, right 0.3s, width 0.3s",
+            }}
+          />
+        </div>
+        {/* Hover-/Klick-Rechteck zwischen vertikaler Linie und Pfeilspitze */}
+        <button
+          type="button"
+          onClick={() => currentIndex < posts.length - 1 && onNavigate(1)}
+          onMouseEnter={() => !rightDisabled && setHoverSide("right")}
+          onMouseLeave={() => {
+            setHoverSide((s) => (s === "right" ? null : s));
+            rightArrowQuickTo.current?.(0);
+          }}
+          onMouseMove={(e) => {
+            if (rightDisabled) return;
+            const vh = window.innerHeight;
+            const maxOffset = 136.5;
+            const offset = Math.max(-maxOffset, Math.min(maxOffset, e.clientY - vh / 2));
+            rightArrowQuickTo.current?.(offset);
+          }}
+          disabled={rightDisabled}
+          aria-label="Weiter"
+          style={{
+            position: "fixed",
+            top: "calc(50% - 150px)",
+            right: "max(20px, calc(50% - 706px))",
+            left: "calc(100% - max(0px, calc(50% - 600px - 24px)) - 1px)",
+            height: 300,
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            cursor: rightDisabled ? "default" : "pointer",
+            pointerEvents: rightDisabled ? "none" : "auto",
+            zIndex: 4,
+          }}
+        />
       </div>
 
       {post && (
