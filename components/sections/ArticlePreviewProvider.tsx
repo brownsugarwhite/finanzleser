@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useState } from "react";
 import type { Post } from "@/lib/types";
+import type { PreviewSliderContext } from "./ArticleSliderContext";
 import ArticlePreviewOverlay from "./ArticlePreviewOverlay";
 
 export type PreviewTool = "rechner" | "vergleich" | "checkliste";
@@ -12,13 +13,25 @@ export interface PreviewExtras {
   tools: PreviewTool[];
 }
 
+/**
+ * Two ways to open the preview:
+ *  - With slider context: enables in-preview navigation (prev/next) between slider posts.
+ *  - Standalone single post: no navigation, just the one article (legacy / fallback).
+ */
+export type OpenPreviewInput =
+  | { ctx: PreviewSliderContext; currentIndex: number }
+  | { post: Post; cardEl: HTMLElement };
+
 interface PreviewState {
-  post: Post;
-  cardEl: HTMLElement;
+  // Resolved to always have ctx + currentIndex internally.
+  // Standalone opens synthesize a single-post context.
+  ctx: PreviewSliderContext;
+  currentIndex: number;
 }
 
 interface ArticlePreviewContextValue {
-  openPreview: (post: Post, cardEl: HTMLElement) => void;
+  openPreview: (input: OpenPreviewInput) => void;
+  navigate: (delta: -1 | 1) => void;
   closePreview: () => void;
   isOpen: boolean;
 }
@@ -28,9 +41,9 @@ const ArticlePreviewContext = createContext<ArticlePreviewContextValue | null>(n
 export function useArticlePreview(): ArticlePreviewContextValue {
   const ctx = useContext(ArticlePreviewContext);
   if (!ctx) {
-    // Graceful fallback — never crash if component ends up outside provider during HMR
     return {
       openPreview: () => {},
+      navigate: () => {},
       closePreview: () => {},
       isOpen: false,
     };
@@ -41,8 +54,31 @@ export function useArticlePreview(): ArticlePreviewContextValue {
 export default function ArticlePreviewProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<PreviewState | null>(null);
 
-  const openPreview = useCallback((post: Post, cardEl: HTMLElement) => {
-    setState((prev) => (prev ? prev : { post, cardEl }));
+  const openPreview = useCallback((input: OpenPreviewInput) => {
+    setState((prev) => {
+      if (prev) return prev;
+      if ("ctx" in input) {
+        return { ctx: input.ctx, currentIndex: input.currentIndex };
+      }
+      // Standalone: synthesize a single-post context with a fixed card element.
+      const standaloneCtx: PreviewSliderContext = {
+        posts: [input.post],
+        emblaApi: null,
+        getCardEl: () => input.cardEl,
+      };
+      return { ctx: standaloneCtx, currentIndex: 0 };
+    });
+  }, []);
+
+  const navigate = useCallback((delta: -1 | 1) => {
+    setState((prev) => {
+      if (!prev) return prev;
+      const next = prev.currentIndex + delta;
+      if (next < 0 || next >= prev.ctx.posts.length) return prev;
+      // Sync background slider (emblaApi may be null for standalone).
+      prev.ctx.emblaApi?.scrollTo(next);
+      return { ...prev, currentIndex: next };
+    });
   }, []);
 
   const closePreview = useCallback(() => {
@@ -50,13 +86,13 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
   }, []);
 
   return (
-    <ArticlePreviewContext.Provider value={{ openPreview, closePreview, isOpen: !!state }}>
+    <ArticlePreviewContext.Provider value={{ openPreview, navigate, closePreview, isOpen: !!state }}>
       {children}
       {state && (
         <ArticlePreviewOverlay
-          key={state.post.slug}
-          post={state.post}
-          sourceCardEl={state.cardEl}
+          ctx={state.ctx}
+          currentIndex={state.currentIndex}
+          onNavigate={navigate}
           onClose={closePreview}
         />
       )}

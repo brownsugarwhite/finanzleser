@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import type { Post } from '@/lib/types';
+import { SliderPreviewContextProvider, type PreviewSliderContext } from '@/components/sections/ArticleSliderContext';
 
 const ART_SLIDE_WIDTH = CARD_MIN_WIDTH;
 const ART_GAP = 70;
@@ -113,7 +114,27 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
     });
   }, [emblaApi, selectedIndex, posts.length, onNavReady]);
 
+  // Card-lookup per index — emblaApi.slideNodes() enthält Leading-Spacer an Index 0,
+  // daher liegt Card N bei slideNodes()[N + 1]. Wir suchen die Card-Wurzel mit data-flip-id.
+  const getCardEl = useCallback(
+    (index: number): HTMLElement | null => {
+      if (!emblaApi) return null;
+      const nodes = emblaApi.slideNodes();
+      const wrapper = nodes[index + 1]; // +1 wegen Leading-Spacer
+      if (!wrapper) return null;
+      const card = wrapper.querySelector<HTMLElement>('[data-flip-id$="-box"]');
+      return card;
+    },
+    [emblaApi]
+  );
+
+  const previewCtx = useMemo<PreviewSliderContext>(
+    () => ({ posts, emblaApi: emblaApi ?? null, getCardEl }),
+    [posts, emblaApi, getCardEl]
+  );
+
   return (
+    <SliderPreviewContextProvider value={previewCtx}>
     <div ref={emblaRef} style={{ overflow: 'hidden', cursor: canScroll ? 'grab' : 'default', marginTop: 30 }}>
       <div style={{
         display: 'flex',
@@ -161,7 +182,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
                   'center center',
                 transition: 'transform 0.1s ease',
               }}>
-                <SlideArticleCard post={post} />
+                <SlideArticleCard post={post} index={index} />
               </div>
 
               {!isLast && (
@@ -202,5 +223,6 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
         />
       </div>
     </div>
+    </SliderPreviewContextProvider>
   );
 }

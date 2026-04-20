@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { gsap, Flip, initGSAP } from "@/lib/gsapConfig";
+import { useDrag } from "@use-gesture/react";
+import { gsap, initGSAP } from "@/lib/gsapConfig";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
+import type { PreviewSliderContext } from "./ArticleSliderContext";
 
 initGSAP();
 
@@ -18,38 +20,114 @@ const TOOL_META: Record<PreviewTool, { label: string; color: string }> = {
 
 const MORPH_DURATION = 0.5;
 const MORPH_EASE = "power2.inOut";
+const NAV_DURATION = 0.5;
+const NAV_EASE = "power2.inOut";
 const TEXT_FADE_DURATION = 0.15;
 const PREVIEW_BORDER_RADIUS = 56;
 const IMAGE_RADIUS_TOP = `${PREVIEW_BORDER_RADIUS}px ${PREVIEW_BORDER_RADIUS}px 0 0`;
 const PREVIEW_SHADOW = "0 40px 80px rgba(0,0,0,0.18)";
+const IMAGE_HEIGHT = 480;
+const SWIPE_THRESHOLD_PX = 60;
+const SWIPE_VELOCITY = 0.2;
+
+type Phase = "opening" | "slider" | "closing";
 
 interface Props {
-  post: Post;
-  sourceCardEl: HTMLElement;
+  ctx: PreviewSliderContext;
+  currentIndex: number;
+  onNavigate: (delta: -1 | 1) => void;
   onClose: () => void;
 }
 
-export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: Props) {
+// ────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ────────────────────────────────────────────────────────────────────────────
+function measureRectUnscaled(el: HTMLElement): DOMRect {
+  const scalable =
+    (document.querySelector(".scalable-landing") as HTMLElement | null) ||
+    (document.querySelector(".scalable-content") as HTMLElement | null);
+  if (!scalable) return el.getBoundingClientRect();
+  const origTransform = scalable.style.transform;
+  const origFilter = scalable.style.filter;
+  scalable.style.transform = "none";
+  scalable.style.filter = "none";
+  const rect = el.getBoundingClientRect();
+  scalable.style.transform = origTransform;
+  scalable.style.filter = origFilter;
+  return rect;
+}
+
+// Restore box to its NATURAL JSX layout (position:absolute inset:0 inside wrapper, with
+// white bg, preview radius + shadow). Used at start of morph (to undo leftover morph styles
+// before measuring) and on morph complete (so subsequent nav-slider phase has correct layout).
+function restoreBoxToNatural(box: HTMLElement) {
+  box.style.position = "absolute";
+  box.style.top = "0";
+  box.style.right = "0";
+  box.style.bottom = "0";
+  box.style.left = "0";
+  box.style.width = "";
+  box.style.height = "";
+  box.style.margin = "";
+  box.style.maxWidth = "";
+  box.style.maxHeight = "";
+  box.style.overflow = "hidden";
+  box.style.zIndex = "";
+  box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
+  box.style.backgroundColor = "#ffffff";
+  box.style.boxShadow = PREVIEW_SHADOW;
+}
+
+function restoreImageToNatural(image: HTMLElement) {
+  image.style.position = "absolute";
+  image.style.top = "0";
+  image.style.left = "0";
+  image.style.right = "";
+  image.style.bottom = "";
+  image.style.width = "100%";
+  image.style.height = `${IMAGE_HEIGHT}px`;
+  image.style.margin = "";
+  image.style.zIndex = "";
+  image.style.borderRadius = IMAGE_RADIUS_TOP;
+  // background / pointerEvents set by JSX — don't touch
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Main
+// ────────────────────────────────────────────────────────────────────────────
+export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onClose }: Props) {
+  const { posts } = ctx;
+  const post = posts[currentIndex];
+
   const rootRef = useRef<HTMLDivElement>(null);
-  const boxRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
-  const secondaryRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
-  const titleRef = useRef<HTMLParagraphElement>(null);
-  const sublineRef = useRef<HTMLParagraphElement>(null);
+
+  // Per-slide refs (keyed by post slug)
+  const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const textRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  const setBoxRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
+    if (el) boxRefs.current.set(slug, el);
+    else boxRefs.current.delete(slug);
+  }, []);
+  const setImageRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
+    if (el) imageRefs.current.set(slug, el);
+    else imageRefs.current.delete(slug);
+  }, []);
+  const setTextRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
+    if (el) textRefs.current.set(slug, el);
+    else textRefs.current.delete(slug);
+  }, []);
+
   const isExitingRef = useRef(false);
-  const savedCardRectRef = useRef<DOMRect | null>(null);
-  const savedImageRectRef = useRef<DOMRect | null>(null);
-  const [extras, setExtras] = useState<PreviewExtras | null>(null);
+  const initialIndexRef = useRef(currentIndex);
+  const [phase, setPhase] = useState<Phase>("opening");
+  const [extrasCache, setExtrasCache] = useState<Record<string, PreviewExtras>>({});
 
-  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
-  const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
-  const subCategory = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
-  const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
-  const imageUrl = post.featuredImage?.node.sourceUrl;
-
-  // Side effects + cleanup
+  // ── Side effects + cleanup ────────────────────────────────────────────────
   useEffect(() => {
     const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
     const previousOverflow = document.body.style.overflow;
@@ -58,223 +136,410 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
     document.body.style.overflow = "hidden";
     if (scrollbarW > 0) document.body.style.paddingRight = `${scrollbarW}px`;
 
-    let cancelled = false;
-    fetch(`/api/article-preview?slug=${encodeURIComponent(post.slug)}`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data: PreviewExtras | null) => {
-        if (cancelled) return;
-        if (data) setExtras(data);
-      })
-      .catch(() => {});
-
     return () => {
-      cancelled = true;
       document.body.style.overflow = previousOverflow;
       document.body.style.paddingRight = previousPadRight;
       window.dispatchEvent(new CustomEvent("menu-closed"));
-      if (sourceCardEl) {
-        sourceCardEl.style.visibility = "";
-        const textEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
-        if (textEl) textEl.style.opacity = "";
-      }
-    };
-  }, [post.slug, sourceCardEl]);
-
-  // IN morph — GSAP Flip (nested + scale: true) + saved rects für close
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    const box = boxRef.current;
-    const image = imageRef.current;
-    if (!root || !box || !image || !sourceCardEl) return;
-
-    const sourceFlipEls: HTMLElement[] = [
-      sourceCardEl,
-      ...Array.from(sourceCardEl.querySelectorAll<HTMLElement>("[data-flip-id]")),
-    ];
-    const targetFlipEls: HTMLElement[] = [
-      box,
-      ...Array.from(box.querySelectorAll<HTMLElement>("[data-flip-id]")),
-    ];
-    const srcImageEl = sourceCardEl.querySelector<HTMLElement>(
-      `[data-flip-id="preview-${post.slug}-image"]`
-    );
-
-    // Save pre-scale rects für close
-    savedCardRectRef.current = sourceCardEl.getBoundingClientRect();
-    savedImageRectRef.current = srcImageEl ? srcImageEl.getBoundingClientRect() : savedCardRectRef.current;
-
-    // Separate Flip States für Box und Image — keine nested-Magie, keine impliziten position:absolute
-    const boxState = Flip.getState(sourceCardEl, {
-      props: "borderRadius,backgroundColor,boxShadow",
-    });
-    const imageState = srcImageEl ? Flip.getState(srcImageEl, { props: "borderRadius" }) : null;
-
-    // Source card verstecken (bevor menu-opened)
-    sourceCardEl.style.visibility = "hidden";
-
-    // Card-Text fade-out
-    const cardTextEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
-    if (cardTextEl) {
-      gsap.to(cardTextEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
-
-    // Background blur — parallel
-    window.dispatchEvent(new CustomEvent("menu-opened"));
-
-    // Backdrop fade
-    if (backdropRef.current) {
-      gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" });
-    }
-
-    // Box flip (nur Box, ohne nested)
-    const flipBoxTween = Flip.from(boxState, {
-      targets: box,
-      scale: true,
-      duration: MORPH_DURATION,
-      ease: MORPH_EASE,
-    });
-
-    // Image flip separat (reines transform, sitzt innerhalb der Box aber per eigenem Transform animiert)
-    const flipImageTween = imageState
-      ? Flip.from(imageState, {
-          targets: image,
-          scale: true,
-          duration: MORPH_DURATION,
-          ease: MORPH_EASE,
-        })
-      : null;
-
-    // Text/Secondary/X fade-in nach morph
-    const fadeTimer = window.setTimeout(() => {
-      const fadeEls: HTMLElement[] = [];
-      if (sublineRef.current) fadeEls.push(sublineRef.current);
-      if (titleRef.current) fadeEls.push(titleRef.current);
-      if (secondaryRef.current) fadeEls.push(secondaryRef.current);
-      if (closeBtnRef.current) fadeEls.push(closeBtnRef.current);
-      if (fadeEls.length > 0) {
-        gsap.fromTo(fadeEls, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", stagger: 0.04 });
-      }
-    }, MORPH_DURATION * 1000);
-
-    return () => {
-      flipBoxTween?.kill();
-      flipImageTween?.kill();
-      window.clearTimeout(fadeTimer);
+      // Restore any hidden source cards
+      posts.forEach((_, i) => {
+        const el = ctx.getCardEl(i);
+        if (el) {
+          el.style.visibility = "";
+          const textEl = el.querySelector<HTMLElement>("[data-card-text]");
+          if (textEl) textEl.style.opacity = "";
+        }
+      });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // OUT morph — Flip.fit box & image back to card rects
+  // ── Fetch extras (cached per slug) ────────────────────────────────────────
+  const fetchExtras = useCallback((slug: string) => {
+    setExtrasCache((prev) => {
+      if (prev[slug]) return prev;
+      return prev;
+    });
+    // Fire fetch unconditionally; dedupe via functional set
+    fetch(`/api/article-preview?slug=${encodeURIComponent(slug)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: PreviewExtras | null) => {
+        if (!data) return;
+        setExtrasCache((prev) => (prev[slug] ? prev : { ...prev, [slug]: data }));
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!post) return;
+    fetchExtras(post.slug);
+    const prev = posts[currentIndex - 1];
+    const next = posts[currentIndex + 1];
+    if (prev) fetchExtras(prev.slug);
+    if (next) fetchExtras(next.slug);
+  }, [post, currentIndex, posts, fetchExtras]);
+
+  // ── Initial track position (before first paint) ──────────────────────────
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    // Start with initial slide centered. `left` not transform so position:fixed children work.
+    track.style.left = `${-initialIndexRef.current * window.innerWidth}px`;
+  }, []);
+
+  // ── IN morph ──────────────────────────────────────────────────────────────
+  useLayoutEffect(() => {
+    if (phase !== "opening") return;
+    if (!post) return;
+    const box = boxRefs.current.get(post.slug);
+    const image = imageRefs.current.get(post.slug);
+    const sourceCardEl = ctx.getCardEl(currentIndex);
+    if (!box || !image || !sourceCardEl) return;
+
+    // Restore to natural layout before measuring (safe for first run + StrictMode re-runs)
+    restoreBoxToNatural(box);
+    restoreImageToNatural(image);
+
+    const srcImageEl = sourceCardEl.querySelector<HTMLElement>(
+      `[data-flip-id="preview-${post.slug}-image"]`
+    );
+
+    // Measure target (natural) rects
+    const tgtBoxRect = box.getBoundingClientRect();
+    const tgtImageRect = image.getBoundingClientRect();
+    // Measure source (card) rects — pre-scale (.scalable-content not yet transformed)
+    const srcBoxRect = sourceCardEl.getBoundingClientRect();
+    const srcImageRect = srcImageEl ? srcImageEl.getBoundingClientRect() : srcBoxRect;
+
+    const srcBoxStyle = getComputedStyle(sourceCardEl);
+    const srcBoxRadius = srcBoxStyle.borderRadius || "0px";
+    const srcBoxBg = srcBoxStyle.backgroundColor || "rgba(0,0,0,0)";
+    const srcImageRadius = srcImageEl ? getComputedStyle(srcImageEl).borderRadius || "0px" : "0px";
+
+    // Hide source card
+    sourceCardEl.style.visibility = "hidden";
+    const cardTextEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
+    if (cardTextEl) gsap.to(cardTextEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+
+    // Background blur — parallel
+    window.dispatchEvent(new CustomEvent("menu-opened"));
+
+    // Backdrop fade in
+    if (backdropRef.current) {
+      gsap.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" });
+    }
+
+    // Direct layout styles on box (position:fixed so we can animate viewport coords)
+    box.style.position = "fixed";
+    box.style.margin = "0";
+    box.style.maxWidth = "none";
+    box.style.maxHeight = "none";
+    box.style.overflow = "hidden";
+    box.style.zIndex = "1";
+
+    image.style.position = "fixed";
+    image.style.margin = "0";
+    image.style.zIndex = "2";
+
+    const boxTween = gsap.fromTo(
+      box,
+      {
+        top: srcBoxRect.top,
+        left: srcBoxRect.left,
+        width: srcBoxRect.width,
+        height: srcBoxRect.height,
+        borderRadius: srcBoxRadius,
+        backgroundColor: srcBoxBg,
+        boxShadow: "0 0 0 rgba(0,0,0,0)",
+      },
+      {
+        top: tgtBoxRect.top,
+        left: tgtBoxRect.left,
+        width: tgtBoxRect.width,
+        height: tgtBoxRect.height,
+        borderRadius: PREVIEW_BORDER_RADIUS,
+        backgroundColor: "rgb(255, 255, 255)",
+        boxShadow: PREVIEW_SHADOW,
+        duration: MORPH_DURATION,
+        ease: MORPH_EASE,
+        immediateRender: true,
+      }
+    );
+
+    const imageTween = gsap.fromTo(
+      image,
+      {
+        top: srcImageRect.top,
+        left: srcImageRect.left,
+        width: srcImageRect.width,
+        height: srcImageRect.height,
+        borderRadius: srcImageRadius,
+      },
+      {
+        top: tgtImageRect.top,
+        left: tgtImageRect.left,
+        width: tgtImageRect.width,
+        height: tgtImageRect.height,
+        borderRadius: IMAGE_RADIUS_TOP,
+        duration: MORPH_DURATION,
+        ease: MORPH_EASE,
+        immediateRender: true,
+        onComplete: () => {
+          // Restore to natural layout — box + image land inside their slide slot,
+          // stable for navigation (track translation moves them with the slot).
+          restoreBoxToNatural(box);
+          restoreImageToNatural(image);
+          setPhase("slider");
+        },
+      }
+    );
+
+    return () => {
+      boxTween.kill();
+      imageTween.kill();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── Fade in text + X when entering slider phase ───────────────────────────
+  useLayoutEffect(() => {
+    if (phase !== "slider") return;
+    const textEl = textRefs.current.get(post?.slug ?? "");
+    if (textEl) gsap.fromTo(textEl, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
+    if (closeBtnRef.current) {
+      gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
+  // ── Navigate animation: slide track + fade text swap ─────────────────────
+  const prevIndexRef = useRef(currentIndex);
+  useEffect(() => {
+    if (phase !== "slider") {
+      prevIndexRef.current = currentIndex;
+      return;
+    }
+    const track = trackRef.current;
+    if (!track) return;
+    const prev = prevIndexRef.current;
+    if (prev === currentIndex) return;
+
+    // Animate track `left` (not transform) so ancestor-transform doesn't break fixed positioning
+    gsap.to(track, {
+      left: -currentIndex * window.innerWidth,
+      duration: NAV_DURATION,
+      ease: NAV_EASE,
+    });
+
+    // Fade out old slide text, fade in new slide text (with slight delay)
+    const oldPost = posts[prev];
+    const newPost = posts[currentIndex];
+    if (oldPost) {
+      const t = textRefs.current.get(oldPost.slug);
+      if (t) gsap.to(t, { opacity: 0, duration: 0.2, ease: "power2.in" });
+    }
+    if (newPost) {
+      const t = textRefs.current.get(newPost.slug);
+      if (t) {
+        gsap.fromTo(
+          t,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.3, delay: NAV_DURATION * 0.5, ease: "power2.out" }
+        );
+      }
+    }
+    prevIndexRef.current = currentIndex;
+  }, [currentIndex, phase, posts]);
+
+  // ── Resize handling: keep track aligned on viewport resize ────────────────
+  useEffect(() => {
+    const onResize = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      track.style.left = `${-currentIndex * window.innerWidth}px`;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [currentIndex]);
+
+  // ── Swipe / drag ──────────────────────────────────────────────────────────
+  const bindDrag = useDrag(
+    ({ last, movement: [mx], velocity: [vx], direction: [dx], cancel }) => {
+      if (phase !== "slider") return;
+      const track = trackRef.current;
+      if (!track) return;
+      const baseLeft = -currentIndex * window.innerWidth;
+
+      // Edge resistance
+      let effectiveMx = mx;
+      const atStart = currentIndex === 0;
+      const atEnd = currentIndex === posts.length - 1;
+      if ((atStart && mx > 0) || (atEnd && mx < 0)) {
+        effectiveMx = mx / 2.5;
+      }
+
+      if (!last) {
+        track.style.left = `${baseLeft + effectiveMx}px`;
+        return;
+      }
+
+      const absMx = Math.abs(mx);
+      const absVx = Math.abs(vx);
+      const shouldNavigate = absMx > SWIPE_THRESHOLD_PX || absVx > SWIPE_VELOCITY;
+
+      if (shouldNavigate && dx < 0 && !atEnd) {
+        onNavigate(1);
+      } else if (shouldNavigate && dx > 0 && !atStart) {
+        onNavigate(-1);
+      } else {
+        gsap.to(track, { left: baseLeft, duration: 0.25, ease: "power2.out" });
+      }
+      cancel();
+    },
+    { axis: "x", filterTaps: true, pointer: { touch: true } }
+  );
+
+  // ── OUT morph (close) ─────────────────────────────────────────────────────
   const requestClose = useCallback(() => {
     if (isExitingRef.current) return;
     isExitingRef.current = true;
 
-    const box = boxRef.current;
-    const image = imageRef.current;
-    if (!box || !image || !sourceCardEl) {
+    // Fade current slide text + X before phase swap
+    const textEl = post ? textRefs.current.get(post.slug) : null;
+    if (textEl) gsap.to(textEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    if (closeBtnRef.current) {
+      gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
+    window.setTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
+  }, [post]);
+
+  useLayoutEffect(() => {
+    if (phase !== "closing") return;
+    if (!post) {
+      onClose();
+      return;
+    }
+    const box = boxRefs.current.get(post.slug);
+    const image = imageRefs.current.get(post.slug);
+    const currentCardEl = ctx.getCardEl(currentIndex);
+    if (!box || !image || !currentCardEl) {
       onClose();
       return;
     }
 
-    // Fade preview text + secondary + X + backdrop
-    const fadeOutEls: HTMLElement[] = [];
-    if (sublineRef.current) fadeOutEls.push(sublineRef.current);
-    if (titleRef.current) fadeOutEls.push(titleRef.current);
-    if (secondaryRef.current) fadeOutEls.push(secondaryRef.current);
-    if (closeBtnRef.current) fadeOutEls.push(closeBtnRef.current);
-    if (fadeOutEls.length > 0) {
-      gsap.to(fadeOutEls, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
-    if (backdropRef.current) gsap.to(backdropRef.current, { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE });
+    // Restore to natural before measuring (in case any morph leftovers)
+    restoreBoxToNatural(box);
+    restoreImageToNatural(image);
 
-    // Background un-blur
+    // Backdrop fade out
+    if (backdropRef.current) {
+      gsap.to(backdropRef.current, { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE });
+    }
+
+    // Un-blur background
     window.dispatchEvent(new CustomEvent("menu-closed"));
 
-    // Fade card text back in
-    const cardTextEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
+    // Measure current box/image rects (natural — at their position inside the slide slot)
+    const curBoxRect = box.getBoundingClientRect();
+    const curImageRect = image.getBoundingClientRect();
+
+    // Measure current card's un-scaled rect
+    const tgtBoxRect = measureRectUnscaled(currentCardEl);
+    const srcImgElInCard = currentCardEl.querySelector<HTMLElement>(
+      `[data-flip-id="preview-${post.slug}-image"]`
+    );
+    const tgtImageRect = srcImgElInCard ? measureRectUnscaled(srcImgElInCard) : tgtBoxRect;
+
+    const cardStyle = getComputedStyle(currentCardEl);
+    const cardImageStyle = srcImgElInCard ? getComputedStyle(srcImgElInCard) : null;
+
+    // Keep target card hidden until morph completes
+    currentCardEl.style.visibility = "hidden";
+    const cardTextEl = currentCardEl.querySelector<HTMLElement>("[data-card-text]");
     if (cardTextEl) {
       gsap.to(cardTextEl, { opacity: 1, duration: 0.3, delay: MORPH_DURATION * 0.5, ease: "power2.out" });
     }
 
-    // Use saved pre-scale rects — accurate target regardless of current .scalable-content scale
-    const savedBoxRect = savedCardRectRef.current;
-    const savedImageRect = savedImageRectRef.current;
-    if (!savedBoxRect || !savedImageRect) {
-      window.setTimeout(() => onClose(), MORPH_DURATION * 1000);
-      return;
-    }
+    // Pin box and animate to target card rect
+    box.style.position = "fixed";
+    box.style.margin = "0";
+    box.style.maxWidth = "none";
+    box.style.maxHeight = "none";
+    box.style.overflow = "hidden";
+    box.style.zIndex = "1";
 
-    // Measure current overlay rects
-    const curBoxRect = box.getBoundingClientRect();
-    const curImageRect = image.getBoundingClientRect();
-
-    // Read card's natural computed styles for border-radius / bg to tween toward
-    const srcBoxStyle = getComputedStyle(sourceCardEl);
-    const srcImageElForStyle = sourceCardEl.querySelector<HTMLElement>(
-      `[data-flip-id="preview-${post.slug}-image"]`
+    gsap.fromTo(
+      box,
+      {
+        top: curBoxRect.top,
+        left: curBoxRect.left,
+        width: curBoxRect.width,
+        height: curBoxRect.height,
+      },
+      {
+        top: tgtBoxRect.top,
+        left: tgtBoxRect.left,
+        width: tgtBoxRect.width,
+        height: tgtBoxRect.height,
+        borderRadius: cardStyle.borderRadius || "0px",
+        backgroundColor: cardStyle.backgroundColor || "rgba(0,0,0,0)",
+        boxShadow: "0 0 0 rgba(0,0,0,0)",
+        duration: MORPH_DURATION,
+        ease: MORPH_EASE,
+        immediateRender: true,
+      }
     );
-    const srcImageStyle = srcImageElForStyle ? getComputedStyle(srcImageElForStyle) : null;
 
-    // Pin overlay box at current position/size, animate to saved card rect + card styles
-    gsap.set(box, {
-      position: "fixed",
-      top: curBoxRect.top,
-      left: curBoxRect.left,
-      width: curBoxRect.width,
-      height: curBoxRect.height,
-      margin: 0,
-      maxWidth: "none",
-      maxHeight: "none",
-      overflow: "hidden",
-      zIndex: 1,
-    });
-    gsap.to(box, {
-      top: savedBoxRect.top,
-      left: savedBoxRect.left,
-      width: savedBoxRect.width,
-      height: savedBoxRect.height,
-      borderRadius: srcBoxStyle.borderRadius,
-      backgroundColor: srcBoxStyle.backgroundColor,
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-      duration: MORPH_DURATION,
-      ease: MORPH_EASE,
-    });
+    image.style.position = "fixed";
+    image.style.margin = "0";
+    image.style.zIndex = "2";
 
-    gsap.set(image, {
-      position: "fixed",
-      top: curImageRect.top,
-      left: curImageRect.left,
-      width: curImageRect.width,
-      height: curImageRect.height,
-      zIndex: 2,
-    });
-    gsap.to(image, {
-      top: savedImageRect.top,
-      left: savedImageRect.left,
-      width: savedImageRect.width,
-      height: savedImageRect.height,
-      borderRadius: srcImageStyle ? srcImageStyle.borderRadius : 0,
-      duration: MORPH_DURATION,
-      ease: MORPH_EASE,
-    });
+    gsap.fromTo(
+      image,
+      {
+        top: curImageRect.top,
+        left: curImageRect.left,
+        width: curImageRect.width,
+        height: curImageRect.height,
+      },
+      {
+        top: tgtImageRect.top,
+        left: tgtImageRect.left,
+        width: tgtImageRect.width,
+        height: tgtImageRect.height,
+        borderRadius: cardImageStyle ? cardImageStyle.borderRadius || "0px" : "0px",
+        duration: MORPH_DURATION,
+        ease: MORPH_EASE,
+        immediateRender: true,
+      }
+    );
 
     window.setTimeout(() => {
-      if (sourceCardEl) sourceCardEl.style.visibility = "";
+      currentCardEl.style.visibility = "";
       onClose();
     }, MORPH_DURATION * 1000);
-  }, [onClose, sourceCardEl, post.slug]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
 
+  // ── Keyboard ──────────────────────────────────────────────────────────────
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") requestClose();
+      if (phase !== "slider") return;
+      if (e.key === "ArrowLeft") {
+        if (currentIndex > 0) onNavigate(-1);
+      }
+      if (e.key === "ArrowRight") {
+        if (currentIndex < posts.length - 1) onNavigate(1);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [requestClose]);
+  }, [requestClose, phase, currentIndex, posts.length, onNavigate]);
 
-  if (typeof document === "undefined") return null;
+  if (typeof document === "undefined" || !post) return null;
 
-  const toolsToShow = (extras?.tools ?? []).slice(0, 3);
+  const canGoPrev = currentIndex > 0;
+  const canGoNext = currentIndex < posts.length - 1;
 
   const overlay = (
     <div
@@ -285,10 +550,7 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
         position: "fixed",
         inset: 0,
         zIndex: 80,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
+        overflow: "hidden",
         pointerEvents: "auto",
       }}
     >
@@ -304,30 +566,131 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
         }}
       />
 
+      {/* Track — holds one slide per post; animates via `left` so position:fixed children stay viewport-anchored */}
       <div
+        ref={trackRef}
+        {...(phase === "slider" ? bindDrag() : {})}
         style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: 1000,
-          height: "min(900px, calc(100vh - 40px))",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: `${posts.length * 100}vw`,
+          willChange: "left",
+          touchAction: phase === "slider" ? "pan-y" : undefined,
         }}
       >
-        <div
-          ref={boxRef}
-          data-flip-id={`preview-${post.slug}-box`}
-          style={{
-            position: "absolute",
-            inset: 0,
-            overflowY: "auto",
-            overflowX: "hidden",
-            background: "#ffffff",
-            borderRadius: PREVIEW_BORDER_RADIUS,
-            boxShadow: PREVIEW_SHADOW,
-          }}
-        >
+        {posts.map((p, i) => {
+          const isActive = i === currentIndex;
+          return (
+            <div
+              key={p.slug}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: `${i * 100}vw`,
+                width: "100vw",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "20px",
+                boxSizing: "border-box",
+              }}
+            >
+              <SlidePreview
+                post={p}
+                extras={extrasCache[p.slug] ?? null}
+                setBoxRef={setBoxRef(p.slug)}
+                setImageRef={setImageRef(p.slug)}
+                setTextRef={setTextRef(p.slug)}
+                onClose={requestClose}
+                isActive={isActive}
+                closeBtnRef={isActive ? closeBtnRef : null}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Nav arrows — always in viewport, not inside track */}
+      {phase === "slider" && (
+        <>
+          <NavArrow
+            direction="prev"
+            disabled={!canGoPrev}
+            onClick={() => canGoPrev && onNavigate(-1)}
+          />
+          <NavArrow
+            direction="next"
+            disabled={!canGoNext}
+            onClick={() => canGoNext && onNavigate(1)}
+          />
+        </>
+      )}
+    </div>
+  );
+
+  return createPortal(overlay, document.body);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// SlidePreview — one full preview-box (box + image + content) per slide
+// ────────────────────────────────────────────────────────────────────────────
+interface SlidePreviewProps {
+  post: Post;
+  extras: PreviewExtras | null;
+  setBoxRef: (el: HTMLDivElement | null) => void;
+  setImageRef: (el: HTMLDivElement | null) => void;
+  setTextRef: (el: HTMLDivElement | null) => void;
+  onClose: () => void;
+  isActive: boolean;
+  closeBtnRef: React.RefObject<HTMLButtonElement | null> | null;
+}
+
+function SlidePreview({
+  post,
+  extras,
+  setBoxRef,
+  setImageRef,
+  setTextRef,
+  onClose,
+  isActive,
+  closeBtnRef,
+}: SlidePreviewProps) {
+  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
+  const subCategory = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
+  const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
+  const imageUrl = post.featuredImage?.node.sourceUrl;
+  const toolsToShow = useMemo(() => (extras?.tools ?? []).slice(0, 3), [extras]);
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        maxWidth: 1000,
+        height: "min(900px, calc(100vh - 40px))",
+      }}
+    >
+      {/* Box — the white card */}
+      <div
+        ref={setBoxRef}
+        data-flip-id={`preview-${post.slug}-box`}
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          background: "#ffffff",
+          borderRadius: PREVIEW_BORDER_RADIUS,
+          boxShadow: PREVIEW_SHADOW,
+        }}
+      >
+        {isActive && closeBtnRef && (
           <button
             ref={closeBtnRef}
-            onClick={requestClose}
+            onClick={onClose}
             aria-label="Schließen"
             style={{
               position: "absolute",
@@ -343,68 +706,37 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
               justifyContent: "center",
               cursor: "pointer",
               opacity: 0,
-              zIndex: 3,
+              zIndex: 5,
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
               <path d="M1 1 L15 15 M15 1 L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>
+        )}
 
-          {/* Spacer where the image sits visually — image itself is a sibling (absolute-positioned over this) */}
-          <div style={{ width: "100%", height: 480 }} aria-hidden />
+        {/* Spacer for the image area (image itself is sibling of box) */}
+        <div aria-hidden style={{ width: "100%", height: IMAGE_HEIGHT }} />
 
-          <div style={{ padding: "40px 64px 48px 64px", display: "flex", flexDirection: "column" }}>
-          <p
-            ref={sublineRef}
-            lang="de"
-            style={{
-              fontFamily: "Merriweather, serif",
-              fontStyle: "italic",
-              fontWeight: 500,
-              fontSize: "23px",
-              lineHeight: 1.3,
-              color: "var(--color-brand-secondary)",
-              margin: 0,
-              opacity: 0,
-              hyphens: "auto",
-              overflowWrap: "break-word",
-              marginBottom: 12,
-            }}
-          >
+        {/* Text content — ref for fade */}
+        <div
+          ref={setTextRef}
+          style={{
+            padding: "40px 64px 48px 64px",
+            display: "flex",
+            flexDirection: "column",
+            opacity: 0,
+          }}
+        >
+          <p lang="de" style={textSublineStyle}>
             {post.title}
           </p>
-
           {untertitel && (
-            <p
-              ref={titleRef}
-              lang="de"
-              style={{
-                fontFamily: "Merriweather, serif",
-                fontWeight: 700,
-                fontSize: "42px",
-                lineHeight: 1.3,
-                color: "var(--color-text-primary)",
-                margin: 0,
-                opacity: 0,
-                hyphens: "auto",
-                overflowWrap: "break-word",
-              }}
-            >
+            <p lang="de" style={textTitleStyle}>
               {untertitel}
             </p>
           )}
-
-          <div
-            ref={secondaryRef}
-            style={{
-              opacity: 0,
-              marginTop: 32,
-              display: "flex",
-              flexDirection: "column",
-              gap: 28,
-            }}
-          >
+          <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 28 }}>
             {extras?.firstParagraph ? (
               <p
                 lang="de"
@@ -419,7 +751,6 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
                 {extras.firstParagraph}
               </p>
             ) : null}
-
             {toolsToShow.length > 0 && (
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 {toolsToShow.map((t) => (
@@ -441,7 +772,6 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
                 ))}
               </div>
             )}
-
             <div
               style={{
                 display: "flex",
@@ -460,36 +790,120 @@ export default function ArticlePreviewOverlay({ post, sourceCardEl, onClose }: P
               >
                 {extras && extras.readingTime > 0 ? `Lesedauer: ${extras.readingTime} Min.` : "\u00A0"}
               </span>
-              <Link href={postLink} onClick={requestClose} style={{ textDecoration: "none" }}>
+              <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
                 <PreviewReadButton label="Ratgeber lesen" />
               </Link>
             </div>
           </div>
-          </div>
         </div>
-
-        {/* Image as sibling of box — absolute-positioned over box's top area */}
-        <div
-          ref={imageRef}
-          data-flip-id={`preview-${post.slug}-image`}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: 480,
-            background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "rgba(0,0,0,0.08)",
-            borderRadius: IMAGE_RADIUS_TOP,
-            pointerEvents: "none",
-          }}
-        />
       </div>
+
+      {/* Image — sibling of box, absolute-positioned over the top area */}
+      <div
+        ref={setImageRef}
+        data-flip-id={`preview-${post.slug}-image`}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: IMAGE_HEIGHT,
+          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "rgba(0,0,0,0.08)",
+          borderRadius: IMAGE_RADIUS_TOP,
+          pointerEvents: "none",
+        }}
+      />
     </div>
   );
-
-  return createPortal(overlay, document.body);
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// NavArrow — fixed to viewport
+// ────────────────────────────────────────────────────────────────────────────
+function NavArrow({
+  direction,
+  disabled,
+  onClick,
+}: {
+  direction: "prev" | "next";
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "prev" ? "Vorheriger Artikel" : "Nächster Artikel"}
+      style={{
+        position: "fixed",
+        top: "50%",
+        [direction === "prev" ? "left" : "right"]: 32,
+        transform: "translateY(-50%)",
+        width: 48,
+        height: 48,
+        borderRadius: "50%",
+        border: "1px solid var(--color-text-primary)",
+        background: "#ffffff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.35 : 1,
+        transition: "opacity 0.2s ease",
+        zIndex: 4,
+      }}
+    >
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 16 16"
+        aria-hidden
+        style={{ transform: direction === "prev" ? "rotate(180deg)" : undefined }}
+      >
+        <path
+          d="M5 2 L11 8 L5 14"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    </button>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Shared text styles
+// ────────────────────────────────────────────────────────────────────────────
+const textSublineStyle: React.CSSProperties = {
+  fontFamily: "Merriweather, serif",
+  fontStyle: "italic",
+  fontWeight: 500,
+  fontSize: "23px",
+  lineHeight: 1.3,
+  color: "var(--color-brand-secondary)",
+  margin: 0,
+  hyphens: "auto",
+  overflowWrap: "break-word",
+  marginBottom: 12,
+};
+
+const textTitleStyle: React.CSSProperties = {
+  fontFamily: "Merriweather, serif",
+  fontWeight: 700,
+  fontSize: "42px",
+  lineHeight: 1.3,
+  color: "var(--color-text-primary)",
+  margin: 0,
+  hyphens: "auto",
+  overflowWrap: "break-word",
+};
+
+// ────────────────────────────────────────────────────────────────────────────
+// PreviewReadButton
+// ────────────────────────────────────────────────────────────────────────────
 function PreviewReadButton({ label }: { label: string }) {
   return (
     <span

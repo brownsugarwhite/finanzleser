@@ -6,11 +6,13 @@ import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
 import InlineSVG from '@/components/ui/InlineSVG';
 import { useArticlePreview } from '@/components/sections/ArticlePreviewProvider';
+import { useSliderPreviewContext } from '@/components/sections/ArticleSliderContext';
 
 type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
 
 export interface SlideArticleCardProps {
   post: Post;
+  index?: number;
   bookmarkType?: BookmarkType;
 }
 
@@ -24,12 +26,13 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
 export const CARD_MIN_WIDTH = 265;
 export const CARD_MAX_WIDTH = 450;
 
-export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCardProps) {
+export default function SlideArticleCard({ post, index, bookmarkType }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const { openPreview, isOpen } = useArticlePreview();
+  const sliderCtx = useSliderPreviewContext();
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
@@ -58,7 +61,13 @@ export default function SlideArticleCard({ post, bookmarkType }: SlideArticleCar
     const target = e.target as HTMLElement;
     if (target.closest('.article-read-link')) return;
     if (!cardRef.current) return;
-    openPreview(post, cardRef.current);
+    // If inside a slider context, pass full context + index for in-preview navigation.
+    // Otherwise fall back to single-post preview (no nav).
+    if (sliderCtx && typeof index === 'number') {
+      openPreview({ ctx: sliderCtx, currentIndex: index });
+    } else {
+      openPreview({ post, cardEl: cardRef.current });
+    }
   };
 
   return (
