@@ -13,6 +13,7 @@ import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import MayaIcon from "@/components/ui/MayaIcon";
 import TopBanner from "@/components/ui/TopBanner";
+import ArticlePreviewProvider from "@/components/sections/ArticlePreviewProvider";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -54,6 +55,7 @@ export default async function RootLayout({
         <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
         <Providers>
         <NavProvider items={navItems}>
+        <ArticlePreviewProvider>
           <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
             <div style={{ pointerEvents: "auto" }}><BookmarkNav /></div>
           </div>
@@ -71,6 +73,7 @@ export default async function RootLayout({
           </div>
           <ProgressiveBlur height={120} />
           <MayaIcon />
+        </ArticlePreviewProvider>
         </NavProvider>
         </Providers>
       </body>
