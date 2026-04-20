@@ -24,7 +24,7 @@ const TOOL_META: Record<PreviewTool, { label: string; color: string }> = {
 const MORPH_DURATION = 0.5;
 const MORPH_EASE = "power2.inOut";
 const NAV_DURATION = 0.5;
-const NAV_EASE = "power2.inOut";
+const NAV_EASE = "back.out(1.2)";
 const TEXT_FADE_DURATION = 0.15;
 const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
@@ -115,12 +115,16 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const backdropRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
+  const leftNavRef = useRef<HTMLDivElement>(null);
+  const rightNavRef = useRef<HTMLDivElement>(null);
+  const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
 
   // Per-slide refs (keyed by post slug)
   const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const textRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const infoRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const slideWrapperRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const setBoxRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) boxRefs.current.set(slug, el);
@@ -182,14 +186,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (prev) prefetchExtras(prev.slug);
     if (next) prefetchExtras(next.slug);
   }, [post, currentIndex, posts, prefetchExtras]);
-
-  // ── Initial track position (before first paint) ──────────────────────────
-  useLayoutEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    // Start with initial slide centered. `left` not transform so position:fixed children work.
-    track.style.left = `${-initialIndexRef.current * window.innerWidth}px`;
-  }, []);
 
   // ── IN morph ──────────────────────────────────────────────────────────────
   useLayoutEffect(() => {
@@ -367,7 +363,32 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (footerRef.current) {
       gsap.fromTo(footerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
     }
+    if (leftNavRef.current) {
+      gsap.fromTo(leftNavRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    }
+    if (rightNavRef.current) {
+      gsap.fromTo(rightNavRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
+  // ── Track mouse X to highlight nav on hover over side margins ─────────────
+  useEffect(() => {
+    if (phase !== "slider") return;
+    const onMouseMove = (e: MouseEvent) => {
+      const vw = window.innerWidth;
+      const cardHalf = Math.min(600, (vw - 40) / 2);
+      const leftEdge = vw / 2 - cardHalf;
+      const rightEdge = vw / 2 + cardHalf;
+      if (e.clientX < leftEdge) setHoverSide("left");
+      else if (e.clientX > rightEdge) setHoverSide("right");
+      else setHoverSide(null);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      setHoverSide(null);
+    };
   }, [phase]);
 
   // ── Animate box height when extras arrive late for current slide ──────────
@@ -400,41 +421,64 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentExtras, phase]);
 
-  // ── Navigate animation: slide track + fade text swap ─────────────────────
+  // ── Navigate animation: crossfade + scale + translate (book-flip style) ──
   const prevIndexRef = useRef(currentIndex);
   useEffect(() => {
     if (phase !== "slider") {
       prevIndexRef.current = currentIndex;
       return;
     }
-    const track = trackRef.current;
-    if (!track) return;
     const prev = prevIndexRef.current;
     if (prev === currentIndex) return;
 
-    // Animate track `left` (not transform) so ancestor-transform doesn't break fixed positioning
-    gsap.to(track, {
-      left: -currentIndex * window.innerWidth,
-      duration: NAV_DURATION,
-      ease: NAV_EASE,
-    });
-
-    // Fade out old slide text, fade in new slide text (with slight delay)
+    const dir = currentIndex > prev ? 1 : -1; // 1 = next, -1 = prev
     const oldPost = posts[prev];
     const newPost = posts[currentIndex];
-    if (oldPost) {
-      const t = textRefs.current.get(oldPost.slug);
-      if (t) gsap.to(t, { opacity: 0, duration: 0.2, ease: "power2.in" });
+    const oldSlide = oldPost ? slideWrapperRefs.current.get(oldPost.slug) : null;
+    const newSlide = newPost ? slideWrapperRefs.current.get(newPost.slug) : null;
+
+    // Click-based nav: new slide has no prior transform → set offscreen start state.
+    // Drag-based nav: state already mid-animation, don't reset.
+    if (!dragNavRef.current && newSlide) {
+      gsap.set(newSlide, { x: dir * 200, scale: 1.2, opacity: 0, filter: "blur(0px)" });
     }
+    dragNavRef.current = false;
+    dragCandidateSlugRef.current = null;
+
+    if (oldSlide) {
+      oldSlide.style.pointerEvents = "none";
+      gsap.to(oldSlide, {
+        x: -dir * 200,
+        scale: 0.8,
+        filter: "blur(10px)",
+        duration: NAV_DURATION,
+        ease: NAV_EASE,
+      });
+      gsap.to(oldSlide, {
+        opacity: 0,
+        duration: NAV_DURATION * 0.75,
+        ease: NAV_EASE,
+      });
+    }
+    if (newSlide) {
+      newSlide.style.pointerEvents = "auto";
+      gsap.to(newSlide, {
+        x: 0,
+        scale: 1,
+        duration: NAV_DURATION,
+        ease: NAV_EASE,
+      });
+      gsap.to(newSlide, {
+        opacity: 1,
+        duration: NAV_DURATION * 0.75,
+        delay: NAV_DURATION * 0.25,
+        ease: NAV_EASE,
+      });
+    }
+    // Ensure new slide's text wrapper is visible (opacity 0 default from JSX)
     if (newPost) {
-      const t = textRefs.current.get(newPost.slug);
-      if (t) {
-        gsap.fromTo(
-          t,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.3, delay: NAV_DURATION * 0.5, ease: "power2.out" }
-        );
-      }
+      const newText = textRefs.current.get(newPost.slug);
+      if (newText) gsap.set(newText, { opacity: 1 });
     }
 
     // Restore the previously-shown card in the BG slider (visibility + card-text fade-in).
@@ -467,57 +511,108 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     prevIndexRef.current = currentIndex;
   }, [currentIndex, phase, posts]);
 
-  // ── Resize handling: keep track aligned on viewport resize ────────────────
-  useEffect(() => {
-    const onResize = () => {
-      const track = trackRef.current;
-      if (!track) return;
-      track.style.left = `${-currentIndex * window.innerWidth}px`;
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [currentIndex]);
-
   // ── Swipe / drag ──────────────────────────────────────────────────────────
   const navFiredThisGestureRef = useRef(false);
+  const dragCandidateSlugRef = useRef<string | null>(null);
+  const dragNavRef = useRef(false);
   const bindDrag = useDrag(
-    ({ first, last, movement: [mx], velocity: [vx], direction: [dx] }) => {
+    ({ first, last, movement: [mx], velocity: [vx] }) => {
       if (phase !== "slider") return;
-      if (first) navFiredThisGestureRef.current = false;
-
-      const track = trackRef.current;
-      if (!track) return;
-      const baseLeft = -currentIndex * window.innerWidth;
-
-      // Edge resistance
-      let effectiveMx = mx;
-      const atStart = currentIndex === 0;
-      const atEnd = currentIndex === posts.length - 1;
-      if ((atStart && mx > 0) || (atEnd && mx < 0)) {
-        effectiveMx = mx / 2.5;
+      if (first) {
+        navFiredThisGestureRef.current = false;
+        dragCandidateSlugRef.current = null;
       }
 
+      const currentSlideEl = post ? slideWrapperRefs.current.get(post.slug) : null;
+      if (!currentSlideEl) return;
+
+      const dirGesture: -1 | 1 = mx > 0 ? -1 : 1; // -1 = prev, 1 = next
+      const atStart = currentIndex === 0;
+      const atEnd = currentIndex === posts.length - 1;
+      const hasCandidate = (dirGesture === 1 && !atEnd) || (dirGesture === -1 && !atStart);
+      const candidatePost = hasCandidate ? posts[currentIndex + dirGesture] : null;
+      const candidateSlide = candidatePost ? slideWrapperRefs.current.get(candidatePost.slug) : null;
+
+      // If user switches direction mid-drag, reset the previously-revealed candidate
+      const newCandSlug = candidatePost?.slug ?? null;
+      if (dragCandidateSlugRef.current && dragCandidateSlugRef.current !== newCandSlug) {
+        const oldCand = slideWrapperRefs.current.get(dragCandidateSlugRef.current);
+        if (oldCand) gsap.set(oldCand, { x: 0, scale: 1.2, opacity: 0, filter: "blur(0px)" });
+      }
+      dragCandidateSlugRef.current = newCandSlug;
+
+      // Rubber-band: apply diminishing resistance to the raw drag distance so
+      // far pulls feel elastic rather than linear.
+      const rubberBand = (dist: number, limit: number) =>
+        Math.sign(dist) * (Math.abs(dist) / (1 + Math.abs(dist) / limit));
+      const limit = window.innerWidth / 1.5;
+      const rubberMx = hasCandidate ? rubberBand(mx, limit) : rubberBand(mx, limit) / 2.5;
+      // Progress 0..1 based on half viewport as max travel
+      const progress = Math.min(Math.abs(rubberMx) / (window.innerWidth / 2), 1);
+
       if (!last) {
-        track.style.left = `${baseLeft + effectiveMx}px`;
+        if (hasCandidate && candidateSlide && candidatePost) {
+          // Overlapping fade: old fades out across first 75% of progress,
+          // new starts fading in at 25% — giving them ~50% overlap so the old
+          // slide is still partly visible when the new one starts.
+          const oldOp = Math.max(0, Math.min(1, 1 - progress / 0.75));
+          const newOp = Math.max(0, Math.min(1, (progress - 0.25) / 0.75));
+          gsap.set(currentSlideEl, {
+            x: -dirGesture * 200 * progress,
+            scale: 1 - 0.2 * progress,
+            opacity: oldOp,
+            filter: `blur(${10 * progress}px)`,
+          });
+          gsap.set(candidateSlide, {
+            x: dirGesture * 200 * (1 - progress),
+            scale: 1.2 - 0.2 * progress,
+            opacity: newOp,
+            filter: "blur(0px)",
+          });
+          // Candidate's text wrapper starts at opacity 0 (set during opening morph
+          // for non-initial slides) — make its content visible during drag.
+          const candText = textRefs.current.get(candidatePost.slug);
+          if (candText) gsap.set(candText, { opacity: 1 });
+        } else {
+          // Rubber-band at edges
+          gsap.set(currentSlideEl, { x: rubberMx });
+        }
         return;
       }
 
-      // Guard: fire navigate at most ONCE per gesture (prevents double-fire from
-      // pointer+touch events overlapping or `last` firing multiple times).
+      // Release
       if (navFiredThisGestureRef.current) return;
 
       const absMx = Math.abs(mx);
       const absVx = Math.abs(vx);
-      const shouldNavigate = absMx > SWIPE_THRESHOLD_PX || absVx > SWIPE_VELOCITY;
+      const shouldNavigate =
+        hasCandidate && (absMx > SWIPE_THRESHOLD_PX || absVx > SWIPE_VELOCITY);
 
-      if (shouldNavigate && dx < 0 && !atEnd) {
+      if (shouldNavigate) {
         navFiredThisGestureRef.current = true;
-        onNavigate(1);
-      } else if (shouldNavigate && dx > 0 && !atStart) {
-        navFiredThisGestureRef.current = true;
-        onNavigate(-1);
+        dragNavRef.current = true;
+        onNavigate(dirGesture);
       } else {
-        gsap.to(track, { left: baseLeft, duration: 0.25, ease: "power2.out" });
+        // Spring back with bounce
+        gsap.to(currentSlideEl, {
+          x: 0,
+          scale: 1,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.5,
+          ease: "elastic.out(1, 0.55)",
+        });
+        if (candidateSlide) {
+          gsap.to(candidateSlide, {
+            x: dirGesture * 200,
+            scale: 1.2,
+            opacity: 0,
+            filter: "blur(0px)",
+            duration: 0.3,
+            ease: "power3.out",
+          });
+        }
+        dragCandidateSlugRef.current = null;
       }
     },
     { axis: "x", filterTaps: true }
@@ -533,6 +628,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (textEl) gsap.to(textEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     if (closeBtnRef.current) {
       gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
+    if (leftNavRef.current) {
+      gsap.to(leftNavRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
+    if (rightNavRef.current) {
+      gsap.to(rightNavRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     }
     if (footerRef.current) {
       gsap.to(footerRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
@@ -697,9 +798,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
   if (typeof document === "undefined" || !post) return null;
 
-  const canGoPrev = currentIndex > 0;
-  const canGoNext = currentIndex < posts.length - 1;
-
   const overlay = (
     <div
       ref={rootRef}
@@ -727,6 +825,142 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
       <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} />
 
+      {/* Nav-Gruppe LINKS: vertikale Linie + Verbindungslinie + Pfeil */}
+      <div
+        ref={leftNavRef}
+        aria-hidden={false}
+        style={{
+          position: "fixed",
+          inset: 0,
+          pointerEvents: "none",
+          opacity: 0,
+          zIndex: 4,
+        }}
+      >
+        {/* Vertikale Linie links */}
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "max(0px, calc(50% - 600px - 24px))",
+            width: 1,
+            height: 300,
+            transform: "translateY(-50%)",
+            background: hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+            transition: "background 0.2s",
+            pointerEvents: "none",
+          }}
+        />
+        {/* Verbindungslinie Prev-Pfeil → linke vertikale Linie */}
+        <div
+          style={{
+            position: "fixed",
+            top: "calc(50% + 12.5px)",
+            left: "calc(max(20px, calc(50% - 700px)) + 60px)",
+            width: 16,
+            height: 1,
+            background: hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+            transition: "background 0.2s",
+            pointerEvents: "none",
+            zIndex: 2,
+          }}
+        />
+        <button
+          onClick={() => currentIndex > 0 && onNavigate(-1)}
+          disabled={currentIndex === 0}
+          aria-label="Zurück"
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "max(20px, calc(50% - 700px))",
+            transform: "translateY(-50%)",
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: currentIndex === 0 ? "default" : "pointer",
+            transition: "opacity 0.2s",
+            pointerEvents: "auto",
+            zIndex: 3,
+          }}
+        >
+          <svg width="60" height="27" viewBox="0 0 60 27" fill="none" style={{ display: "block" }}>
+            <path
+              d="M0 27 L60 27 L60 0 Z"
+              fill={hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}
+              style={{ transition: "fill 0.2s" }}
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Nav-Gruppe RECHTS: vertikale Linie + Verbindungslinie + Pfeil */}
+      <div
+        ref={rightNavRef}
+        aria-hidden={false}
+        style={{
+          position: "fixed",
+          inset: 0,
+          pointerEvents: "none",
+          opacity: 0,
+          zIndex: 4,
+        }}
+      >
+        {/* Vertikale Linie rechts */}
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            right: "max(0px, calc(50% - 600px - 24px))",
+            width: 1,
+            height: 300,
+            transform: "translateY(-50%)",
+            background: hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+            transition: "background 0.2s",
+            pointerEvents: "none",
+          }}
+        />
+        {/* Verbindungslinie rechte vertikale Linie → Next-Pfeil */}
+        <div
+          style={{
+            position: "fixed",
+            top: "calc(50% + 12.5px)",
+            right: "calc(max(20px, calc(50% - 700px)) + 60px)",
+            width: 16,
+            height: 1,
+            background: hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+            transition: "background 0.2s",
+            pointerEvents: "none",
+            zIndex: 2,
+          }}
+        />
+        <button
+          onClick={() => currentIndex < posts.length - 1 && onNavigate(1)}
+          disabled={currentIndex === posts.length - 1}
+          aria-label="Weiter"
+          style={{
+            position: "fixed",
+            top: "50%",
+            right: "max(20px, calc(50% - 700px))",
+            transform: "translateY(-50%)",
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: currentIndex === posts.length - 1 ? "default" : "pointer",
+            transition: "opacity 0.2s",
+            pointerEvents: "auto",
+            zIndex: 3,
+          }}
+        >
+          <svg width="60" height="27" viewBox="0 0 60 27" fill="none" style={{ display: "block" }}>
+            <path
+              d="M60 27 L0 27 L0 0 Z"
+              fill={hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}
+              style={{ transition: "fill 0.2s" }}
+            />
+          </svg>
+        </button>
+      </div>
+
       {post && (
         <PreviewFooter
           footerRef={footerRef}
@@ -736,7 +970,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         />
       )}
 
-      {/* Track — holds one slide per post; animates via `left` so position:fixed children stay viewport-anchored */}
+      {/* Track — holds one slide per post, all stacked; only the active slide is
+          opaque. Navigation crossfades + scales + translates between them. */}
       <div
         ref={trackRef}
         {...(phase === "slider" ? bindDrag() : {})}
@@ -745,8 +980,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           top: 0,
           left: 0,
           height: "100%",
-          width: `${posts.length * 100}vw`,
-          willChange: "left",
+          width: "100vw",
           touchAction: phase === "slider" ? "pan-y" : undefined,
         }}
       >
@@ -754,10 +988,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           return (
             <div
               key={p.slug}
+              ref={(el) => {
+                if (el) slideWrapperRefs.current.set(p.slug, el);
+                else slideWrapperRefs.current.delete(p.slug);
+              }}
               style={{
                 position: "absolute",
                 top: 0,
-                left: `${i * 100}vw`,
+                left: 0,
                 width: "100vw",
                 height: "100%",
                 display: "flex",
@@ -767,6 +1005,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 overflowY: "auto",
                 overflowX: "hidden",
                 boxSizing: "border-box",
+                opacity: i === initialIndexRef.current ? 1 : 0,
+                pointerEvents: i === initialIndexRef.current ? "auto" : "none",
+                willChange: "transform, opacity",
               }}
             >
               <SlidePreview
@@ -837,20 +1078,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         </div>
       </div>
 
-      {phase === "slider" && (
-        <>
-          <NavArrow
-            direction="prev"
-            disabled={!canGoPrev}
-            onClick={() => canGoPrev && onNavigate(-1)}
-          />
-          <NavArrow
-            direction="next"
-            disabled={!canGoNext}
-            onClick={() => canGoNext && onNavigate(1)}
-          />
-        </>
-      )}
     </div>
   );
 
@@ -1247,63 +1474,6 @@ function AnimatedNumber({ value, minChars = 1 }: { value: number; minChars?: num
         {value}
       </span>
     </span>
-  );
-}
-
-// ────────────────────────────────────────────────────────────────────────────
-// NavArrow — fixed to viewport
-// ────────────────────────────────────────────────────────────────────────────
-function NavArrow({
-  direction,
-  disabled,
-  onClick,
-}: {
-  direction: "prev" | "next";
-  disabled: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={direction === "prev" ? "Vorheriger Artikel" : "Nächster Artikel"}
-      style={{
-        position: "fixed",
-        top: "50%",
-        [direction === "prev" ? "left" : "right"]: 32,
-        transform: "translateY(-50%)",
-        width: 48,
-        height: 48,
-        borderRadius: "50%",
-        border: "1px solid var(--color-text-primary)",
-        background: "#ffffff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.35 : 1,
-        transition: "opacity 0.2s ease",
-        zIndex: 4,
-      }}
-    >
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 16 16"
-        aria-hidden
-        style={{ transform: direction === "prev" ? "rotate(180deg)" : undefined }}
-      >
-        <path
-          d="M5 2 L11 8 L5 14"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-      </svg>
-    </button>
   );
 }
 
