@@ -362,9 +362,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   }, [currentIndex]);
 
   // ── Swipe / drag ──────────────────────────────────────────────────────────
+  const navFiredThisGestureRef = useRef(false);
   const bindDrag = useDrag(
-    ({ last, movement: [mx], velocity: [vx], direction: [dx], cancel }) => {
+    ({ first, last, movement: [mx], velocity: [vx], direction: [dx] }) => {
       if (phase !== "slider") return;
+      if (first) navFiredThisGestureRef.current = false;
+
       const track = trackRef.current;
       if (!track) return;
       const baseLeft = -currentIndex * window.innerWidth;
@@ -382,20 +385,25 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         return;
       }
 
+      // Guard: fire navigate at most ONCE per gesture (prevents double-fire from
+      // pointer+touch events overlapping or `last` firing multiple times).
+      if (navFiredThisGestureRef.current) return;
+
       const absMx = Math.abs(mx);
       const absVx = Math.abs(vx);
       const shouldNavigate = absMx > SWIPE_THRESHOLD_PX || absVx > SWIPE_VELOCITY;
 
       if (shouldNavigate && dx < 0 && !atEnd) {
+        navFiredThisGestureRef.current = true;
         onNavigate(1);
       } else if (shouldNavigate && dx > 0 && !atStart) {
+        navFiredThisGestureRef.current = true;
         onNavigate(-1);
       } else {
         gsap.to(track, { left: baseLeft, duration: 0.25, ease: "power2.out" });
       }
-      cancel();
     },
-    { axis: "x", filterTaps: true, pointer: { touch: true } }
+    { axis: "x", filterTaps: true }
   );
 
   // ── OUT morph (close) ─────────────────────────────────────────────────────
