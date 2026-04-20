@@ -25,6 +25,7 @@ const MORPH_EASE = "power2.inOut";
 const NAV_DURATION = 0.5;
 const NAV_EASE = "power2.inOut";
 const TEXT_FADE_DURATION = 0.15;
+const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
 const PREVIEW_PADDING = 40;
 const IMAGE_WIDTH = 400;
@@ -115,6 +116,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const textRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const infoRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const setBoxRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) boxRefs.current.set(slug, el);
@@ -127,6 +129,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const setTextRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) textRefs.current.set(slug, el);
     else textRefs.current.delete(slug);
+  }, []);
+  const setInfoRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
+    if (el) infoRefs.current.set(slug, el);
+    else infoRefs.current.delete(slug);
   }, []);
 
   const isExitingRef = useRef(false);
@@ -152,6 +158,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         const el = ctx.getCardEl(i);
         if (el) {
           el.style.visibility = "";
+          const bgEl = el.querySelector<HTMLElement>("[data-card-image-bg]");
+          if (bgEl) bgEl.style.visibility = "";
+          const infoEl = el.querySelector<HTMLElement>("[data-card-info]");
+          if (infoEl) infoEl.style.visibility = "";
           const textEl = el.querySelector<HTMLElement>("[data-card-text]");
           if (textEl) textEl.style.opacity = "";
         }
@@ -221,10 +231,35 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const srcBoxRadius = srcBoxStyle.borderRadius || "0px";
     const srcImageRadius = srcImageEl ? getComputedStyle(srcImageEl).borderRadius || "0px" : "0px";
 
-    // Hide source card
-    sourceCardEl.style.visibility = "hidden";
+    // Hide the BG layer + card info-i instantly (overlay info-i takes over).
+    // Keep card wrapper visible during text fade so the fade is actually seen.
+    const srcCardBgEl = sourceCardEl.querySelector<HTMLElement>("[data-card-image-bg]");
+    if (srcCardBgEl) srcCardBgEl.style.visibility = "hidden";
+    const srcCardInfoEl = sourceCardEl.querySelector<HTMLElement>("[data-card-info]");
+    if (srcCardInfoEl) srcCardInfoEl.style.visibility = "hidden";
     const cardTextEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
-    if (cardTextEl) gsap.to(cardTextEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    if (cardTextEl) {
+      gsap.to(cardTextEl, {
+        opacity: 0,
+        duration: CARD_TEXT_FADE_DURATION,
+        ease: "power2.in",
+        onComplete: () => {
+          sourceCardEl.style.visibility = "hidden";
+        },
+      });
+    } else {
+      sourceCardEl.style.visibility = "hidden";
+    }
+
+    // Overlay info-i fades 1→0 parallel to the image morph (CSS child of preview-image).
+    const overlayInfoEl = infoRefs.current.get(post.slug);
+    if (overlayInfoEl) {
+      gsap.fromTo(
+        overlayInfoEl,
+        { opacity: 1 },
+        { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
+      );
+    }
 
     // Background blur — parallel
     window.dispatchEvent(new CustomEvent("menu-opened"));
@@ -363,8 +398,25 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const prevCardEl = ctx.getCardEl(prev);
     if (prevCardEl) {
       prevCardEl.style.visibility = "";
+      const prevBgEl = prevCardEl.querySelector<HTMLElement>("[data-card-image-bg]");
+      if (prevBgEl) prevBgEl.style.visibility = "";
+      const prevInfoEl = prevCardEl.querySelector<HTMLElement>("[data-card-info]");
+      if (prevInfoEl) prevInfoEl.style.visibility = "";
       const cardTextEl = prevCardEl.querySelector<HTMLElement>("[data-card-text]");
       if (cardTextEl) gsap.to(cardTextEl, { opacity: 1, duration: 0.3, ease: "power2.out" });
+    }
+
+    // Put new current card into hidden state (matches initial-click state) so close-fade
+    // always starts from opacity 0 and is visible.
+    const nextCardEl = ctx.getCardEl(currentIndex);
+    if (nextCardEl) {
+      nextCardEl.style.visibility = "hidden";
+      const nextBgEl = nextCardEl.querySelector<HTMLElement>("[data-card-image-bg]");
+      if (nextBgEl) nextBgEl.style.visibility = "hidden";
+      const nextInfoEl = nextCardEl.querySelector<HTMLElement>("[data-card-info]");
+      if (nextInfoEl) nextInfoEl.style.visibility = "hidden";
+      const nextTextEl = nextCardEl.querySelector<HTMLElement>("[data-card-text]");
+      if (nextTextEl) nextTextEl.style.opacity = "0";
     }
 
     prevIndexRef.current = currentIndex;
@@ -483,11 +535,24 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const cardStyle = getComputedStyle(currentCardEl);
     const cardImageStyle = srcImgElInCard ? getComputedStyle(srcImgElInCard) : null;
 
-    // Keep target card hidden until morph completes
-    currentCardEl.style.visibility = "hidden";
+    // Card wrapper visible; bg + info-i stay hidden so the morphing preview-image +
+    // overlay info-i stand in for them during the morph. Text stays at opacity 0 and
+    // fades in AFTER the morph completes.
+    currentCardEl.style.visibility = "";
+    const tgtCardBgEl = currentCardEl.querySelector<HTMLElement>("[data-card-image-bg]");
+    if (tgtCardBgEl) tgtCardBgEl.style.visibility = "hidden";
+    const tgtCardInfoEl = currentCardEl.querySelector<HTMLElement>("[data-card-info]");
+    if (tgtCardInfoEl) tgtCardInfoEl.style.visibility = "hidden";
     const cardTextEl = currentCardEl.querySelector<HTMLElement>("[data-card-text]");
-    if (cardTextEl) {
-      gsap.to(cardTextEl, { opacity: 1, duration: 0.3, delay: MORPH_DURATION * 0.5, ease: "power2.out" });
+
+    // Overlay info-i fades 0→1 parallel to the image morph.
+    const overlayInfoEl = infoRefs.current.get(post.slug);
+    if (overlayInfoEl) {
+      gsap.fromTo(
+        overlayInfoEl,
+        { opacity: 0 },
+        { opacity: 1, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
+      );
     }
 
     // Pin box and animate to target card rect
@@ -548,9 +613,24 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     );
 
     window.setTimeout(() => {
-      currentCardEl.style.visibility = "";
-      onClose();
-    }, MORPH_DURATION * 1000);
+      // Morph done. Preview-image + overlay info-i sit at card position. Fade card text in
+      // on the card itself while the preview is still covering it (box is transparent).
+      const finish = () => {
+        if (tgtCardBgEl) tgtCardBgEl.style.visibility = "";
+        if (tgtCardInfoEl) tgtCardInfoEl.style.visibility = "";
+        onClose();
+      };
+      if (cardTextEl) {
+        gsap.to(cardTextEl, {
+          opacity: 1,
+          duration: CARD_TEXT_FADE_DURATION,
+          ease: "power2.out",
+          onComplete: finish,
+        });
+      } else {
+        finish();
+      }
+    }, (MORPH_DURATION - 0.2) * 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
@@ -637,6 +717,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 setBoxRef={setBoxRef(p.slug)}
                 setImageRef={setImageRef(p.slug)}
                 setTextRef={setTextRef(p.slug)}
+                setInfoRef={setInfoRef(p.slug)}
                 onClose={requestClose}
               />
             </div>
@@ -747,6 +828,7 @@ interface SlidePreviewProps {
   setBoxRef: (el: HTMLDivElement | null) => void;
   setImageRef: (el: HTMLDivElement | null) => void;
   setTextRef: (el: HTMLDivElement | null) => void;
+  setInfoRef: (el: HTMLDivElement | null) => void;
   onClose: () => void;
 }
 
@@ -756,6 +838,7 @@ function SlidePreview({
   setBoxRef,
   setImageRef,
   setTextRef,
+  setInfoRef,
   onClose,
 }: SlidePreviewProps) {
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
@@ -925,7 +1008,32 @@ function SlidePreview({
           borderRadius: IMAGE_RADIUS_CSS,
           pointerEvents: "none",
         }}
-      />
+      >
+        {/* Info-i — morphs with the image (CSS child), opacity animated during open/close */}
+        <div
+          ref={setInfoRef}
+          style={{
+            position: "absolute",
+            bottom: 13,
+            right: 13,
+            width: 36,
+            height: 36,
+            borderRadius: "50%",
+            border: "1px solid var(--color-text-primary)",
+            background: "transparent",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <svg width="9" height="17" viewBox="0 0 9 17" fill="var(--color-text-primary)" aria-hidden>
+            <path d="M7.16051 0L7.35875 0.0146957C7.47514 0.0235131 7.58758 0.0333103 7.70001 0.0646611C8.13695 0.186146 8.51174 0.421277 8.74845 0.813163C8.89443 1.05515 8.9753 1.31967 8.99503 1.60183C9.06111 2.53452 8.46637 3.35552 7.59843 3.67197C7.12993 3.84244 6.55295 3.86595 6.07459 3.72193C5.69092 3.60633 5.36149 3.36042 5.15536 3.0185C5.04489 2.83529 4.97881 2.64033 4.93738 2.43067C4.90582 2.27098 4.90878 2.11324 4.91371 1.95061C4.91963 1.75467 4.96007 1.57342 5.03207 1.39021C5.19086 0.985592 5.46999 0.642693 5.83295 0.397764C6.15448 0.181247 6.51941 0.0440871 6.90703 0.00881743C6.94253 0.00587829 6.97607 0.0156754 6.99974 0H7.16149L7.16051 0Z" />
+            <path d="M4.73725 16.1878C4.03303 16.5836 3.15227 16.9305 2.34251 16.9922C2.17977 17.0039 2.02098 17 1.85627 16.9932C1.54953 16.9804 1.25462 16.907 0.990295 16.7502C0.725966 16.5934 0.547446 16.3495 0.464596 16.0575C0.345254 15.6382 0.422185 15.1346 0.511939 14.7095C0.697363 13.8316 1.05342 12.8784 1.4006 12.0456L3.01517 8.16888L3.4738 7.04025C3.54482 6.86488 3.46394 6.5357 3.23314 6.48769C3.09112 6.4583 2.94613 6.49161 2.81298 6.54353C2.47172 6.67775 2.03084 7.0765 1.78328 7.34592L1.15698 8.02878C0.996213 8.20415 0.840377 8.37364 0.666788 8.53529C0.596761 8.60191 0.520815 8.6558 0.437966 8.70086C0.355117 8.74593 0.276213 8.73711 0.197309 8.69695C0.00399355 8.59897 -0.0472941 8.41185 0.0404867 8.22472C0.0848703 8.12969 0.134185 8.04054 0.195336 7.95432C0.308761 7.79561 0.417254 7.63983 0.557309 7.50071L1.48147 6.58076C2.07523 5.98999 3.01123 5.40511 3.8052 5.11413C4.47194 4.87018 5.20377 4.73596 5.9149 4.79474C6.36071 4.83099 6.83413 5.01616 7.11128 5.38159C7.25725 5.5746 7.36378 5.80287 7.38745 6.04682C7.41112 6.29077 7.41802 6.54549 7.38449 6.79728C7.3332 7.18525 7.2178 7.56636 7.07479 7.93277L5.07457 13.0714L4.98679 13.2938C4.85167 13.6367 4.64454 14.1226 4.63566 14.4861C4.63271 14.637 4.70569 14.7741 4.84279 14.8407C5.0075 14.9221 5.25013 14.8104 5.39808 14.7232C5.60619 14.6017 5.78569 14.4537 5.96323 14.2892C6.19501 14.0736 6.40805 13.8522 6.62701 13.6239L7.22273 13.0018C7.31446 12.9068 7.40717 12.8245 7.50975 12.7422C7.55413 12.7069 7.61134 12.6707 7.66657 12.6648C7.83523 12.6491 8.01671 12.8764 7.98514 13.0772C7.94273 13.3525 7.60147 13.7915 7.41605 14.008C7.17736 14.2862 6.92093 14.5419 6.64871 14.7908C6.06482 15.3257 5.42865 15.7969 4.73725 16.1859V16.1878Z" />
+          </svg>
+        </div>
+      </div>
     </div>
   );
 }

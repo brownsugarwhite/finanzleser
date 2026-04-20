@@ -119,14 +119,22 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
           position: 'relative',
           width: '100%',
           height: 210,
-          background:
-            imageVisible && post.featuredImage?.node.sourceUrl
-              ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
-              : '#e5e5e5',
           flexShrink: 0,
         }}
       >
         <div
+          data-card-image-bg
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              imageVisible && post.featuredImage?.node.sourceUrl
+                ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
+                : '#e5e5e5',
+          }}
+        />
+        <div
+          data-card-info
           onMouseEnter={() => setInfoHovered(true)}
           onMouseLeave={() => setInfoHovered(false)}
           style={{
