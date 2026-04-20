@@ -30,8 +30,8 @@ const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
 const PREVIEW_PADDING = 56;
 const PREVIEW_PADDING_TOP = 23;
-const IMAGE_WIDTH = 550;
-const IMAGE_HEIGHT = 350;
+const IMAGE_WIDTH = 400;
+const IMAGE_HEIGHT = 320;
 const IMAGE_RADIUS = 0;
 const IMAGE_RADIUS_CSS = `${IMAGE_RADIUS}px`;
 const PREVIEW_SHADOW = "0 3px 23px rgba(0, 0, 0, 0.02)";
@@ -81,7 +81,7 @@ function restoreBoxToNatural(box: HTMLElement) {
   box.style.height = "";
   box.style.margin = "";
   box.style.maxWidth = "";
-  box.style.maxHeight = "calc(100vh - 220px)";
+  box.style.maxHeight = "";
   box.style.overflow = "hidden";
   box.style.zIndex = "";
   box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
@@ -708,7 +708,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 80,
+        zIndex: 52,
         overflow: "hidden",
         pointerEvents: "auto",
       }}
@@ -730,12 +730,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       {post && (
         <PreviewFooter
           footerRef={footerRef}
-          post={post}
-          readingTime={extrasCache[post.slug]?.readingTime ?? 0}
           currentIndex={currentIndex}
           total={posts.length}
           onGoTo={onGoTo}
-          onClose={requestClose}
         />
       )}
 
@@ -766,7 +763,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "center",
-                padding: "100px 20px 20px",
+                padding: "95px 20px 120px",
                 overflowY: "auto",
                 overflowX: "hidden",
                 boxSizing: "border-box",
@@ -798,7 +795,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
-          padding: "100px 20px 20px",
+          padding: "95px 20px 120px",
           pointerEvents: "none",
           zIndex: 5,
         }}
@@ -807,7 +804,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "relative",
             width: "100%",
-            maxWidth: 1000,
+            maxWidth: 1200,
             height: "min(600px, calc(100vh - 320px))",
             pointerEvents: "none",
           }}
@@ -818,13 +815,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             aria-label="Schließen"
             style={{
               position: "absolute",
-              top: 24,
-              right: 24,
-              width: 44,
-              height: 44,
-              borderRadius: "50%",
-              border: "1px solid var(--color-text-primary)",
-              background: "#ffffff",
+              top: 40,
+              right: 40,
+              width: 40,
+              height: 40,
+              borderRadius: "17px",
+              background: "var(--color-text-primary)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -834,7 +830,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-              <path d="M1 1 L15 15 M15 1 L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M1 1 L15 15 M15 1 L1 15" stroke="white" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
 
@@ -890,74 +886,6 @@ function SlidePreview({
   const imageUrl = post.featuredImage?.node.sourceUrl;
   const toolsToShow = useMemo(() => (extras?.tools ?? []).slice(0, 3), [extras]);
 
-  const upperRowRef = useRef<HTMLDivElement>(null);
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const initialMeasurement = useMemo(() => {
-    if (typeof window === "undefined") {
-      return { maxLines: 6, paragraphMinHeight: 0, overflowMode: false };
-    }
-    const vh = window.innerHeight;
-    const maxBoxHeight = vh - 220;
-    const estUpperH = IMAGE_HEIGHT;
-    const available = maxBoxHeight - PREVIEW_PADDING_TOP - PREVIEW_PADDING - estUpperH - 40;
-    const lineH = 29;
-    const lines = Math.max(1, Math.floor(available / lineH));
-    if (lines < 3) {
-      return { maxLines: 999, paragraphMinHeight: 0, overflowMode: true };
-    }
-    return { maxLines: lines, paragraphMinHeight: lines * lineH, overflowMode: false };
-  }, []);
-
-  const [maxLines, setMaxLines] = useState(initialMeasurement.maxLines);
-  const [paragraphMinHeight, setParagraphMinHeight] = useState(initialMeasurement.paragraphMinHeight);
-  const [overflowMode, setOverflowMode] = useState(initialMeasurement.overflowMode);
-  const boxElRef = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    const compute = () => {
-      const upper = upperRowRef.current;
-      if (!upper) return;
-      const vh = window.innerHeight;
-      const maxBoxHeight = vh - 220;
-      const upperRowH = upper.offsetHeight;
-      const available = maxBoxHeight - PREVIEW_PADDING_TOP - PREVIEW_PADDING - upperRowH - 40;
-      const pEl = paragraphRef.current;
-      const lineH = pEl ? parseFloat(getComputedStyle(pEl).lineHeight) || 29 : 29;
-      const lines = Math.max(1, Math.floor(available / lineH));
-      if (lines < 3) {
-        setOverflowMode(true);
-        setMaxLines(999);
-        setParagraphMinHeight(0);
-      } else {
-        setOverflowMode(false);
-        setMaxLines(lines);
-        setParagraphMinHeight(lines * lineH);
-      }
-    };
-    compute();
-    const ro = new ResizeObserver(compute);
-    if (upperRowRef.current) ro.observe(upperRowRef.current);
-    window.addEventListener("resize", compute);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", compute);
-    };
-  }, [extras, untertitel, toolsToShow.length]);
-
-  // Override inline maxHeight/overflow on the box when overflow mode is active
-  // (restoreBoxToNatural would otherwise re-apply the clamp).
-  useEffect(() => {
-    const box = boxElRef.current;
-    if (!box) return;
-    if (overflowMode) {
-      box.style.maxHeight = "none";
-      box.style.overflow = "visible";
-    } else {
-      box.style.maxHeight = "calc(100vh - 220px)";
-      box.style.overflow = "hidden";
-    }
-  }, [overflowMode]);
-
   return (
     <div
       style={{
@@ -968,16 +896,12 @@ function SlidePreview({
     >
       {/* Box — the white card */}
       <div
-        ref={(el) => {
-          setBoxRef(el);
-          boxElRef.current = el;
-        }}
+        ref={setBoxRef}
         data-flip-id={`preview-${post.slug}-box`}
         style={{
           position: "relative",
           width: "100%",
-          maxHeight: overflowMode ? "none" : "calc(100vh - 220px)",
-          overflow: overflowMode ? "visible" : "hidden",
+          overflow: "hidden",
           background: "#ffffff",
           borderRadius: PREVIEW_BORDER_RADIUS,
           boxShadow: PREVIEW_SHADOW,
@@ -998,7 +922,6 @@ function SlidePreview({
         >
           {/* Upper row — image spacer (left) + subline/title column (right) */}
           <div
-            ref={upperRowRef}
             style={{
               display: "flex",
               gap: 40,
@@ -1069,7 +992,7 @@ function SlidePreview({
           {/* Lower section — description */}
           <div
             style={{
-              marginTop: 40,
+              marginTop: 16,
               display: "flex",
               flexDirection: "column",
               gap: 28,
@@ -1077,7 +1000,6 @@ function SlidePreview({
           >
             {extras?.firstParagraph ? (
               <p
-                ref={paragraphRef}
                 lang="de"
                 style={{
                   fontFamily: "Merriweather, serif",
@@ -1086,11 +1008,6 @@ function SlidePreview({
                   lineHeight: 1.6,
                   color: "var(--color-text-primary)",
                   margin: 0,
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: maxLines,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
                 }}
               >
                 {extras.firstParagraph}
@@ -1098,6 +1015,31 @@ function SlidePreview({
             ) : (
               <SkeletonParagraph />
             )}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 20,
+                marginTop: 12,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 15,
+                  color: "var(--color-text-medium)",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {extras && extras.readingTime > 0
+                  ? `Lesedauer: ${extras.readingTime} Min.`
+                  : "\u00A0"}
+              </span>
+              <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
+                <PreviewReadButton label="Ratgeber lesen" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -1191,13 +1133,12 @@ function PreviewHeader({ current, total, phase }: { current: number; total: numb
       ref={ref}
       style={{
         position: "fixed",
-        top: 44,
+        top: 36,
         left: "50%",
         transform: "translateX(-50%)",
         display: "flex",
         alignItems: "center",
         gap: 5,
-        zIndex: 6,
         pointerEvents: "none",
         fontFamily: "Merriweather, serif",
         fontSize: 18,
@@ -1221,27 +1162,16 @@ function PreviewHeader({ current, total, phase }: { current: number; total: numb
 // ────────────────────────────────────────────────────────────────────────────
 function PreviewFooter({
   footerRef,
-  post,
-  readingTime,
   currentIndex,
   total,
   onGoTo,
-  onClose,
 }: {
   footerRef: React.RefObject<HTMLDivElement | null>;
-  post: Post;
-  readingTime: number;
   currentIndex: number;
   total: number;
   onGoTo: (index: number) => void;
-  onClose: () => void;
 }) {
-  const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
-  const subCategory =
-    post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) ||
-    post.categories?.nodes?.[0];
-  const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
-
+  if (total <= 1) return null;
   return (
     <div
       ref={footerRef}
@@ -1250,34 +1180,12 @@ function PreviewFooter({
         left: "50%",
         bottom: 40,
         transform: "translateX(-50%)",
-        display: "flex",
-        alignItems: "center",
-        gap: 40,
         zIndex: 6,
         pointerEvents: "auto",
         opacity: 0,
       }}
     >
-      <span
-        style={{
-          display: "inline-flex",
-          alignItems: "baseline",
-          fontFamily: "var(--font-body)",
-          fontSize: 15,
-          color: "var(--color-text-medium)",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Lesedauer:&nbsp;
-        <AnimatedNumber value={readingTime} minChars={2} />
-        &nbsp;Min.
-      </span>
-      {total > 1 && (
-        <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} />
-      )}
-      <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
-        <PreviewReadButton label="Ratgeber lesen" />
-      </Link>
+      <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} />
     </div>
   );
 }

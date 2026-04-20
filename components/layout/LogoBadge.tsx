@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function LogoBadge() {
   return (
-    <div className="topbar-grid" style={{ position: "fixed", zIndex: 50, pointerEvents: "none" }}>
+    <div className="topbar-grid" style={{ position: "fixed", zIndex: 60, pointerEvents: "none" }}>
       <div className="logo-space" style={{ pointerEvents: "auto" }}>
         <Link href="/">
           <Image
