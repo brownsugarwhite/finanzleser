@@ -680,6 +680,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }}
       />
 
+      <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} />
+
       {/* Track — holds one slide per post; animates via `left` so position:fixed children stay viewport-anchored */}
       <div
         ref={trackRef}
@@ -705,9 +707,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 width: "100vw",
                 height: "100%",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "flex-start",
                 justifyContent: "center",
-                padding: "20px",
+                padding: "100px 20px 20px",
                 boxSizing: "border-box",
               }}
             >
@@ -735,9 +737,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           right: 0,
           bottom: 0,
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
-          padding: "20px",
+          padding: "100px 20px 20px",
           pointerEvents: "none",
           zIndex: 5,
         }}
@@ -747,7 +749,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             position: "relative",
             width: "100%",
             maxWidth: 1000,
-            height: "min(900px, calc(100vh - 40px))",
+            height: "min(900px, calc(100vh - 120px))",
             pointerEvents: "none",
           }}
         >
@@ -854,7 +856,7 @@ function SlidePreview({
         position: "relative",
         width: "100%",
         maxWidth: 1200,
-        height: "min(900px, calc(100vh - 40px))",
+        height: "min(900px, calc(100vh - 120px))",
       }}
     >
       {/* Box — the white card */}
@@ -1058,6 +1060,111 @@ function SkeletonParagraph() {
         />
       ))}
     </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// PreviewHeader — info icon + label + animated counter above the slider
+// ────────────────────────────────────────────────────────────────────────────
+function PreviewHeader({ current, total, phase }: { current: number; total: number; phase: Phase }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+    if (phase === "slider") {
+      gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    } else if (phase === "closing") {
+      gsap.to(ref.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
+  }, [phase]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        position: "fixed",
+        top: 44,
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        alignItems: "center",
+        gap: 5,
+        zIndex: 6,
+        pointerEvents: "none",
+        fontFamily: "Merriweather, serif",
+        fontSize: 18,
+        color: "var(--color-text-primary)",
+        opacity: 0,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <span>Ratgebervorschau</span>
+
+      <div style={{ display: "flex", alignItems: "baseline" }}>
+        <AnimatedNumber value={current} minChars={String(total).length} />
+        <span>/{total}</span>
+      </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// AnimatedNumber — number that slides up/down on change (odometer-style)
+// ────────────────────────────────────────────────────────────────────────────
+function AnimatedNumber({ value, minChars = 1 }: { value: number; minChars?: number }) {
+  const prevRef = useRef(value);
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const currentRef = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    if (value === prevRef.current) return;
+    const container = containerRef.current;
+    const entering = currentRef.current;
+    if (!container || !entering) return;
+    const dir = value > prevRef.current ? 1 : -1;
+    const oldValue = prevRef.current;
+    prevRef.current = value;
+
+    const distance = 18;
+    const leaving = document.createElement("span");
+    leaving.textContent = String(oldValue);
+    leaving.style.position = "absolute";
+    leaving.style.top = "0";
+    leaving.style.right = "0";
+    leaving.style.display = "inline-block";
+    container.appendChild(leaving);
+
+    const duration = 0.3;
+    const ease = "power2.inOut";
+    gsap.to(leaving, {
+      y: -dir * distance,
+      opacity: 0,
+      duration,
+      ease,
+      onComplete: () => leaving.remove(),
+    });
+    gsap.fromTo(
+      entering,
+      { y: dir * distance, opacity: 0 },
+      { y: 0, opacity: 1, duration, ease }
+    );
+  }, [value]);
+
+  return (
+    <span
+      ref={containerRef}
+      style={{
+        position: "relative",
+        display: "inline-block",
+        minWidth: `${minChars}ch`,
+        overflow: "hidden",
+        textAlign: "right",
+      }}
+    >
+      <span ref={currentRef} style={{ display: "inline-block" }}>
+        {value}
+      </span>
+    </span>
   );
 }
 
