@@ -29,6 +29,7 @@ const TEXT_FADE_DURATION = 0.15;
 const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
 const PREVIEW_PADDING = 56;
+const PREVIEW_PADDING_TOP = 23;
 const IMAGE_WIDTH = 550;
 const IMAGE_HEIGHT = 350;
 const IMAGE_RADIUS = 0;
@@ -90,7 +91,7 @@ function restoreBoxToNatural(box: HTMLElement) {
 
 function restoreImageToNatural(image: HTMLElement) {
   image.style.position = "absolute";
-  image.style.top = `${PREVIEW_PADDING}px`;
+  image.style.top = `${PREVIEW_PADDING_TOP}px`;
   image.style.left = `${PREVIEW_PADDING}px`;
   image.style.right = "";
   image.style.bottom = "";
@@ -321,18 +322,45 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       }
     );
 
+    // Fade in text already during the morph. To prevent the text from reflowing
+    // as the box grows in width, we pin the text wrapper to the box's *target*
+    // inner width from the start, and center it within the box so it grows
+    // outward from the middle (instead of entering from the right).
+    const textEl = textRefs.current.get(post.slug);
+    let textTween: gsap.core.Tween | null = null;
+    if (textEl) {
+      const targetInnerWidth = tgtBoxRect.width - PREVIEW_PADDING * 2;
+      textEl.style.width = `${targetInnerWidth}px`;
+      box.style.alignItems = "center";
+      textTween = gsap.fromTo(
+        textEl,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.35,
+          ease: "power2.out",
+          delay: MORPH_DURATION * 0.85,
+          onComplete: () => {
+            textEl.style.width = "";
+            box.style.alignItems = "";
+          },
+        }
+      );
+    }
+
     return () => {
       boxTween.kill();
       imageTween.kill();
+      if (textTween) textTween.kill();
+      if (textEl) textEl.style.width = "";
+      box.style.alignItems = "";
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Fade in text + X when entering slider phase ───────────────────────────
+  // ── Fade in X when entering slider phase ──────────────────────────────────
   useLayoutEffect(() => {
     if (phase !== "slider") return;
-    const textEl = textRefs.current.get(post?.slug ?? "");
-    if (textEl) gsap.fromTo(textEl, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
     if (closeBtnRef.current) {
       gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
     }
@@ -871,7 +899,7 @@ function SlidePreview({
     const vh = window.innerHeight;
     const maxBoxHeight = vh - 220;
     const estUpperH = IMAGE_HEIGHT;
-    const available = maxBoxHeight - PREVIEW_PADDING * 2 - estUpperH - 40;
+    const available = maxBoxHeight - PREVIEW_PADDING_TOP - PREVIEW_PADDING - estUpperH - 40;
     const lineH = 29;
     const lines = Math.max(1, Math.floor(available / lineH));
     if (lines < 3) {
@@ -892,7 +920,7 @@ function SlidePreview({
       const vh = window.innerHeight;
       const maxBoxHeight = vh - 220;
       const upperRowH = upper.offsetHeight;
-      const available = maxBoxHeight - PREVIEW_PADDING * 2 - upperRowH - 40;
+      const available = maxBoxHeight - PREVIEW_PADDING_TOP - PREVIEW_PADDING - upperRowH - 40;
       const pEl = paragraphRef.current;
       const lineH = pEl ? parseFloat(getComputedStyle(pEl).lineHeight) || 29 : 29;
       const lines = Math.max(1, Math.floor(available / lineH));
@@ -953,7 +981,7 @@ function SlidePreview({
           background: "#ffffff",
           borderRadius: PREVIEW_BORDER_RADIUS,
           boxShadow: PREVIEW_SHADOW,
-          padding: PREVIEW_PADDING,
+          padding: `${PREVIEW_PADDING_TOP}px ${PREVIEW_PADDING}px ${PREVIEW_PADDING}px`,
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
@@ -1045,7 +1073,6 @@ function SlidePreview({
               display: "flex",
               flexDirection: "column",
               gap: 28,
-              minHeight: paragraphMinHeight || undefined,
             }}
           >
             {extras?.firstParagraph ? (
@@ -1081,7 +1108,7 @@ function SlidePreview({
         data-flip-id={`preview-${post.slug}-image`}
         style={{
           position: "absolute",
-          top: PREVIEW_PADDING,
+          top: PREVIEW_PADDING_TOP,
           left: PREVIEW_PADDING,
           width: IMAGE_WIDTH,
           height: IMAGE_HEIGHT,
