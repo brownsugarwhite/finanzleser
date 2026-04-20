@@ -123,9 +123,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const rightArrowSvgRef = useRef<SVGSVGElement>(null);
   const leftLineRef = useRef<HTMLDivElement>(null);
   const rightLineRef = useRef<HTMLDivElement>(null);
+  const leftVlineRef = useRef<HTMLDivElement>(null);
+  const rightVlineRef = useRef<HTMLDivElement>(null);
   const leftArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const rightArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
+  const [closeHovered, setCloseHovered] = useState(false);
+  const [closeActive, setCloseActive] = useState(false);
   const leftDisabled = currentIndex === 0;
   const rightDisabled = currentIndex === posts.length - 1;
   const leftFirstRun = useRef(true);
@@ -147,23 +151,28 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     }
   }, []);
 
-  // Disable animation for LEFT nav: arrow shrinks → line shrinks (toward vline)
+  // Disable animation for LEFT nav: arrow shrinks → line shrinks (toward vline),
+  // vertical line scales to 0 toward its center in parallel (same total duration).
   useLayoutEffect(() => {
     const arrow = leftArrowSvgRef.current;
     const line = leftLineRef.current;
-    if (!arrow || !line) return;
+    const vline = leftVlineRef.current;
+    if (!arrow || !line || !vline) return;
     if (leftFirstRun.current) {
       leftFirstRun.current = false;
       gsap.set(arrow, { scale: leftDisabled ? 0 : 1 });
       gsap.set(line, { scaleX: leftDisabled ? 0 : 1 });
+      gsap.set(vline, { scaleY: leftDisabled ? 0 : 1 });
       return;
     }
     if (leftDisabled) {
       gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
       gsap.to(line, { scaleX: 0, duration: 0.2, delay: 0.25, ease: "power2.out", overwrite: true });
+      gsap.to(vline, { scaleY: 0, duration: 0.45, ease: "power2.inOut", overwrite: true });
     } else {
       gsap.to(line, { scaleX: 1, duration: 0.2, ease: "power2.in", overwrite: true });
       gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.2, ease: "power2.out", overwrite: true });
+      gsap.to(vline, { scaleY: 1, duration: 0.45, ease: "power2.inOut", overwrite: true });
     }
   }, [leftDisabled]);
 
@@ -171,19 +180,23 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   useLayoutEffect(() => {
     const arrow = rightArrowSvgRef.current;
     const line = rightLineRef.current;
-    if (!arrow || !line) return;
+    const vline = rightVlineRef.current;
+    if (!arrow || !line || !vline) return;
     if (rightFirstRun.current) {
       rightFirstRun.current = false;
       gsap.set(arrow, { scale: rightDisabled ? 0 : 1 });
       gsap.set(line, { scaleX: rightDisabled ? 0 : 1 });
+      gsap.set(vline, { scaleY: rightDisabled ? 0 : 1 });
       return;
     }
     if (rightDisabled) {
       gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
       gsap.to(line, { scaleX: 0, duration: 0.2, delay: 0.25, ease: "power2.out", overwrite: true });
+      gsap.to(vline, { scaleY: 0, duration: 0.45, ease: "power2.inOut", overwrite: true });
     } else {
       gsap.to(line, { scaleX: 1, duration: 0.2, ease: "power2.in", overwrite: true });
       gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.2, ease: "power2.out", overwrite: true });
+      gsap.to(vline, { scaleY: 1, duration: 0.45, ease: "power2.inOut", overwrite: true });
     }
   }, [rightDisabled]);
 
@@ -901,13 +914,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       >
         {/* Vertikale Linie links */}
         <div
+          ref={leftVlineRef}
           style={{
             position: "fixed",
-            top: "50%",
+            top: "calc(50% - 150px)",
             left: "max(0px, calc(50% - 600px - 24px))",
             width: 1,
             height: 300,
-            transform: "translateY(-50%)",
+            transformOrigin: "50% 50%",
             background: hoverSide === "left" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
             transition: "background 0.2s",
             pointerEvents: "none",
@@ -1008,13 +1022,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       >
         {/* Vertikale Linie rechts */}
         <div
+          ref={rightVlineRef}
           style={{
             position: "fixed",
-            top: "50%",
+            top: "calc(50% - 150px)",
             right: "max(0px, calc(50% - 600px - 24px))",
             width: 1,
             height: 300,
-            transform: "translateY(-50%)",
+            transformOrigin: "50% 50%",
             background: hoverSide === "right" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
             transition: "background 0.2s",
             pointerEvents: "none",
@@ -1193,6 +1208,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           <button
             ref={closeBtnRef}
             onClick={requestClose}
+            onMouseEnter={() => setCloseHovered(true)}
+            onMouseLeave={() => {
+              setCloseHovered(false);
+              setCloseActive(false);
+            }}
+            onMouseDown={() => setCloseActive(true)}
+            onMouseUp={() => setCloseActive(false)}
+            onTouchStart={() => setCloseActive(true)}
+            onTouchEnd={() => setCloseActive(false)}
             aria-label="Schließen"
             style={{
               position: "absolute",
@@ -1200,18 +1224,50 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               right: 40,
               width: 40,
               height: 40,
-              borderRadius: "17px",
-              background: "var(--color-text-primary)",
+              borderRadius: "50%",
+              background: closeHovered ? "var(--color-brand-secondary)" : "transparent",
+              border: `1px solid ${closeHovered ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
               opacity: 0,
               pointerEvents: "auto",
+              transform: closeActive ? "scale(1.1)" : "scale(1)",
+              transition: "background 0.1s ease-out, border-color 0.1s ease-out, transform 0.2s ease-out",
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-              <path d="M1 1 L15 15 M15 1 L1 15" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <svg width="20" height="20" viewBox="0 0 16 16" aria-hidden>
+              <line
+                x1="8"
+                y1="1"
+                x2="8"
+                y2="15"
+                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                style={{
+                  transform: `rotate(${closeActive ? -55 : -45}deg)`,
+                  transformBox: "fill-box",
+                  transformOrigin: "center",
+                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
+                }}
+              />
+              <line
+                x1="8"
+                y1="1"
+                x2="8"
+                y2="15"
+                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                style={{
+                  transform: `rotate(${closeActive ? 55 : 45}deg)`,
+                  transformBox: "fill-box",
+                  transformOrigin: "center",
+                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
+                }}
+              />
             </svg>
           </button>
 
