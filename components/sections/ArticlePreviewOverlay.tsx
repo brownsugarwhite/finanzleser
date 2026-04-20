@@ -7,6 +7,8 @@ import { useDrag } from "@use-gesture/react";
 import { gsap, initGSAP } from "@/lib/gsapConfig";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
+import Spacer from "@/components/ui/Spacer";
+import InstagramDots from "@/components/ui/InstagramDots";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 
@@ -24,9 +26,12 @@ const NAV_DURATION = 0.5;
 const NAV_EASE = "power2.inOut";
 const TEXT_FADE_DURATION = 0.15;
 const PREVIEW_BORDER_RADIUS = 56;
-const IMAGE_RADIUS_TOP = `${PREVIEW_BORDER_RADIUS}px ${PREVIEW_BORDER_RADIUS}px 0 0`;
-const PREVIEW_SHADOW = "0 40px 80px rgba(0,0,0,0.18)";
-const IMAGE_HEIGHT = 480;
+const PREVIEW_PADDING = 40;
+const IMAGE_WIDTH = 400;
+const IMAGE_HEIGHT = 300;
+const IMAGE_RADIUS = 0;
+const IMAGE_RADIUS_CSS = `${IMAGE_RADIUS}px`;
+const PREVIEW_SHADOW = "0 3px 23px rgba(0, 0, 0, 0.02)";
 const SWIPE_THRESHOLD_PX = 60;
 const SWIPE_VELOCITY = 0.2;
 
@@ -36,6 +41,7 @@ interface Props {
   ctx: PreviewSliderContext;
   currentIndex: number;
   onNavigate: (delta: -1 | 1) => void;
+  onGoTo: (index: number) => void;
   onClose: () => void;
 }
 
@@ -80,22 +86,22 @@ function restoreBoxToNatural(box: HTMLElement) {
 
 function restoreImageToNatural(image: HTMLElement) {
   image.style.position = "absolute";
-  image.style.top = "0";
-  image.style.left = "0";
+  image.style.top = `${PREVIEW_PADDING}px`;
+  image.style.left = `${PREVIEW_PADDING}px`;
   image.style.right = "";
   image.style.bottom = "";
-  image.style.width = "100%";
+  image.style.width = `${IMAGE_WIDTH}px`;
   image.style.height = `${IMAGE_HEIGHT}px`;
   image.style.margin = "";
   image.style.zIndex = "";
-  image.style.borderRadius = IMAGE_RADIUS_TOP;
+  image.style.borderRadius = IMAGE_RADIUS_CSS;
   // background / pointerEvents set by JSX — don't touch
 }
 
 // ────────────────────────────────────────────────────────────────────────────
 // Main
 // ────────────────────────────────────────────────────────────────────────────
-export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onClose }: Props) {
+export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onGoTo, onClose }: Props) {
   const { posts } = ctx;
   const post = posts[currentIndex];
 
@@ -103,6 +109,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const trackRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const dotsRef = useRef<HTMLDivElement>(null);
 
   // Per-slide refs (keyed by post slug)
   const boxRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -212,7 +219,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
     const srcBoxStyle = getComputedStyle(sourceCardEl);
     const srcBoxRadius = srcBoxStyle.borderRadius || "0px";
-    const srcBoxBg = srcBoxStyle.backgroundColor || "rgba(0,0,0,0)";
     const srcImageRadius = srcImageEl ? getComputedStyle(srcImageEl).borderRadius || "0px" : "0px";
 
     // Hide source card
@@ -248,8 +254,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: srcBoxRect.width,
         height: srcBoxRect.height,
         borderRadius: srcBoxRadius,
-        backgroundColor: srcBoxBg,
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)",
       },
       {
         top: tgtBoxRect.top,
@@ -257,7 +263,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: tgtBoxRect.width,
         height: tgtBoxRect.height,
         borderRadius: PREVIEW_BORDER_RADIUS,
-        backgroundColor: "rgb(255, 255, 255)",
+        backgroundColor: "rgba(255, 255, 255, 1)",
         boxShadow: PREVIEW_SHADOW,
         duration: MORPH_DURATION,
         ease: MORPH_EASE,
@@ -279,7 +285,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         left: tgtImageRect.left,
         width: tgtImageRect.width,
         height: tgtImageRect.height,
-        borderRadius: IMAGE_RADIUS_TOP,
+        borderRadius: IMAGE_RADIUS_CSS,
         duration: MORPH_DURATION,
         ease: MORPH_EASE,
         immediateRender: true,
@@ -307,6 +313,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (textEl) gsap.fromTo(textEl, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
     if (closeBtnRef.current) {
       gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    }
+    if (dotsRef.current) {
+      gsap.fromTo(dotsRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
@@ -347,6 +356,17 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         );
       }
     }
+
+    // Restore the previously-shown card in the BG slider (visibility + card-text fade-in).
+    // Without this, the initial source card stays hidden once the user navigates away,
+    // leaving an empty slot in the slider background.
+    const prevCardEl = ctx.getCardEl(prev);
+    if (prevCardEl) {
+      prevCardEl.style.visibility = "";
+      const cardTextEl = prevCardEl.querySelector<HTMLElement>("[data-card-text]");
+      if (cardTextEl) gsap.to(cardTextEl, { opacity: 1, duration: 0.3, ease: "power2.out" });
+    }
+
     prevIndexRef.current = currentIndex;
   }, [currentIndex, phase, posts]);
 
@@ -417,6 +437,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (closeBtnRef.current) {
       gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     }
+    if (dotsRef.current) {
+      gsap.to(dotsRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
     window.setTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
   }, [post]);
 
@@ -482,6 +505,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         left: curBoxRect.left,
         width: curBoxRect.width,
         height: curBoxRect.height,
+        borderRadius: `${PREVIEW_BORDER_RADIUS}px`,
+        backgroundColor: "rgba(255, 255, 255, 1)",
+        boxShadow: PREVIEW_SHADOW,
       },
       {
         top: tgtBoxRect.top,
@@ -489,8 +515,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: tgtBoxRect.width,
         height: tgtBoxRect.height,
         borderRadius: cardStyle.borderRadius || "0px",
-        backgroundColor: cardStyle.backgroundColor || "rgba(0,0,0,0)",
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)",
         duration: MORPH_DURATION,
         ease: MORPH_EASE,
         immediateRender: true,
@@ -589,7 +615,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }}
       >
         {posts.map((p, i) => {
-          const isActive = i === currentIndex;
           return (
             <div
               key={p.slug}
@@ -613,15 +638,86 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 setImageRef={setImageRef(p.slug)}
                 setTextRef={setTextRef(p.slug)}
                 onClose={requestClose}
-                isActive={isActive}
-                closeBtnRef={isActive ? closeBtnRef : null}
               />
             </div>
           );
         })}
       </div>
 
-      {/* Nav arrows — always in viewport, not inside track */}
+      {/* Close button + Nav arrows — always in viewport, not inside track.
+          Close button sits in a virtual wrapper that mirrors the preview box position. */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "20px",
+          pointerEvents: "none",
+          zIndex: 5,
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: 1000,
+            height: "min(900px, calc(100vh - 40px))",
+            pointerEvents: "none",
+          }}
+        >
+          <button
+            ref={closeBtnRef}
+            onClick={requestClose}
+            aria-label="Schließen"
+            style={{
+              position: "absolute",
+              top: 24,
+              right: 24,
+              width: 44,
+              height: 44,
+              borderRadius: "50%",
+              border: "1px solid var(--color-text-primary)",
+              background: "#ffffff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              opacity: 0,
+              pointerEvents: "auto",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+              <path d="M1 1 L15 15 M15 1 L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+
+          {phase === "slider" && posts.length > 1 && (
+            <div
+              ref={dotsRef}
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: PREVIEW_PADDING + 24,
+                transform: "translate(-50%, 50%)",
+                pointerEvents: "auto",
+                opacity: 0,
+              }}
+            >
+              <InstagramDots
+                current={currentIndex}
+                total={posts.length}
+                onGoTo={onGoTo}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
       {phase === "slider" && (
         <>
           <NavArrow
@@ -652,8 +748,6 @@ interface SlidePreviewProps {
   setImageRef: (el: HTMLDivElement | null) => void;
   setTextRef: (el: HTMLDivElement | null) => void;
   onClose: () => void;
-  isActive: boolean;
-  closeBtnRef: React.RefObject<HTMLButtonElement | null> | null;
 }
 
 function SlidePreview({
@@ -663,8 +757,6 @@ function SlidePreview({
   setImageRef,
   setTextRef,
   onClose,
-  isActive,
-  closeBtnRef,
 }: SlidePreviewProps) {
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
@@ -678,7 +770,7 @@ function SlidePreview({
       style={{
         position: "relative",
         width: "100%",
-        maxWidth: 1000,
+        maxWidth: 1200,
         height: "min(900px, calc(100vh - 40px))",
       }}
     >
@@ -693,63 +785,73 @@ function SlidePreview({
           background: "#ffffff",
           borderRadius: PREVIEW_BORDER_RADIUS,
           boxShadow: PREVIEW_SHADOW,
+          padding: PREVIEW_PADDING,
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        {isActive && closeBtnRef && (
-          <button
-            ref={closeBtnRef}
-            onClick={onClose}
-            aria-label="Schließen"
-            style={{
-              position: "absolute",
-              top: 24,
-              right: 24,
-              width: 44,
-              height: 44,
-              borderRadius: "50%",
-              border: "1px solid var(--color-text-primary)",
-              background: "#ffffff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              opacity: 0,
-              zIndex: 5,
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-              <path d="M1 1 L15 15 M15 1 L1 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-        )}
-
-        {/* Spacer for the image area (image itself is sibling of box) */}
-        <div aria-hidden style={{ width: "100%", height: IMAGE_HEIGHT }} />
-
-        {/* Text content — ref for fade */}
+        {/* Text wrapper — fades as a unit */}
         <div
           ref={setTextRef}
           style={{
-            padding: "40px 64px 48px 64px",
+            flex: 1,
             display: "flex",
             flexDirection: "column",
             opacity: 0,
+            minHeight: 0,
           }}
         >
-          <p lang="de" style={textSublineStyle}>
-            {post.title}
-          </p>
-          {untertitel && (
-            <p lang="de" style={textTitleStyle}>
-              {untertitel}
-            </p>
-          )}
-          <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 28 }}>
+          {/* Upper row — image spacer (left) + subline/title column (right) */}
+          <div
+            style={{
+              display: "flex",
+              gap: 40,
+              flexShrink: 0,
+            }}
+          >
+            {/* Image spacer: image sibling sits here visually via absolute positioning */}
+            <div aria-hidden style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT, flexShrink: 0 }} />
+
+            {/* Subline + title column, vertically centered next to the image */}
+            <div
+              style={{
+                flex: 1,
+                minWidth: 0,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                paddingRight: 40,
+              }}
+            >
+              <p lang="de" style={textSublineStyle}>
+                {post.title}
+              </p>
+              {untertitel && (
+                <p lang="de" style={textTitleStyle}>
+                  {untertitel}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Lower section — description, tools, reading time + CTA */}
+          <div
+            style={{
+              marginTop: 40,
+              display: "flex",
+              flexDirection: "column",
+              gap: 28,
+              flex: 1,
+              minHeight: 0,
+            }}
+          >
             {extras?.firstParagraph ? (
               <p
                 lang="de"
                 style={{
-                  fontFamily: "var(--font-body)",
+                  fontFamily: "Merriweather, serif",
+                  fontWeight: 400,
                   fontSize: "18px",
                   lineHeight: 1.6,
                   color: "var(--color-text-primary)",
@@ -758,7 +860,9 @@ function SlidePreview({
               >
                 {extras.firstParagraph}
               </p>
-            ) : null}
+            ) : (
+              <SkeletonParagraph />
+            )}
             {toolsToShow.length > 0 && (
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 {toolsToShow.map((t) => (
@@ -771,7 +875,7 @@ function SlidePreview({
                       fontWeight: 600,
                       fontSize: 14,
                       padding: "6px 14px",
-                      borderRadius: 999,
+                      borderRadius: 0,
                       whiteSpace: "nowrap",
                     }}
                   >
@@ -780,13 +884,14 @@ function SlidePreview({
                 ))}
               </div>
             )}
+            <Spacer noMargin />
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: 20,
-                marginTop: 8,
+                marginTop: "auto",
               }}
             >
               <span
@@ -806,21 +911,44 @@ function SlidePreview({
         </div>
       </div>
 
-      {/* Image — sibling of box, absolute-positioned over the top area */}
+      {/* Image — sibling of box, absolute-positioned over the top-left area (400×400) */}
       <div
         ref={setImageRef}
         data-flip-id={`preview-${post.slug}-image`}
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
+          top: PREVIEW_PADDING,
+          left: PREVIEW_PADDING,
+          width: IMAGE_WIDTH,
           height: IMAGE_HEIGHT,
-          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "rgba(0,0,0,0.08)",
-          borderRadius: IMAGE_RADIUS_TOP,
+          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "#e5e5e5",
+          borderRadius: IMAGE_RADIUS_CSS,
           pointerEvents: "none",
         }}
       />
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// SkeletonParagraph — loading placeholder with shimmer
+// ────────────────────────────────────────────────────────────────────────────
+function SkeletonParagraph() {
+  const LINE_HEIGHT = 18;
+  const GAP = 14;
+  const widths = ["100%", "100%", "100%", "60%"];
+  return (
+    <div
+      aria-hidden
+      style={{ display: "flex", flexDirection: "column", gap: GAP }}
+    >
+      {widths.map((w, i) => (
+        <div
+          key={i}
+          className="skeleton-line"
+          style={{ height: LINE_HEIGHT, width: w }}
+        />
+      ))}
     </div>
   );
 }

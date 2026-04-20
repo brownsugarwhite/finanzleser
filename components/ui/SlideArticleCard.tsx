@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
@@ -29,7 +29,30 @@ export const CARD_MAX_WIDTH = 450;
 export default function SlideArticleCard({ post, index, bookmarkType }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
+  const [imageVisible, setImageVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (imageVisible) return;
+    const el = imageRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setImageVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setImageVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px 300px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [imageVisible]);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const { openPreview, isOpen } = useArticlePreview();
   const sliderCtx = useSliderPreviewContext();
@@ -90,14 +113,16 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
     >
       {/* Visual — grauer Platzhalter (mit Info-Button unten rechts) */}
       <div
+        ref={imageRef}
         data-flip-id={`preview-${post.slug}-image`}
         style={{
           position: 'relative',
           width: '100%',
           height: 210,
-          background: post.featuredImage?.node.sourceUrl
-            ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
-            : 'rgba(0, 0, 0, 0.08)',
+          background:
+            imageVisible && post.featuredImage?.node.sourceUrl
+              ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
+              : '#e5e5e5',
           flexShrink: 0,
         }}
       >

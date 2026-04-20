@@ -32,6 +32,7 @@ interface PreviewState {
 interface ArticlePreviewContextValue {
   openPreview: (input: OpenPreviewInput) => void;
   navigate: (delta: -1 | 1) => void;
+  goTo: (index: number) => void;
   closePreview: () => void;
   isOpen: boolean;
 }
@@ -44,6 +45,7 @@ export function useArticlePreview(): ArticlePreviewContextValue {
     return {
       openPreview: () => {},
       navigate: () => {},
+      goTo: () => {},
       closePreview: () => {},
       isOpen: false,
     };
@@ -81,18 +83,29 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
     });
   }, []);
 
+  const goTo = useCallback((index: number) => {
+    setState((prev) => {
+      if (!prev) return prev;
+      if (index === prev.currentIndex) return prev;
+      if (index < 0 || index >= prev.ctx.posts.length) return prev;
+      prev.ctx.emblaApi?.scrollTo(index);
+      return { ...prev, currentIndex: index };
+    });
+  }, []);
+
   const closePreview = useCallback(() => {
     setState(null);
   }, []);
 
   return (
-    <ArticlePreviewContext.Provider value={{ openPreview, navigate, closePreview, isOpen: !!state }}>
+    <ArticlePreviewContext.Provider value={{ openPreview, navigate, goTo, closePreview, isOpen: !!state }}>
       {children}
       {state && (
         <ArticlePreviewOverlay
           ctx={state.ctx}
           currentIndex={state.currentIndex}
           onNavigate={navigate}
+          onGoTo={goTo}
           onClose={closePreview}
         />
       )}
