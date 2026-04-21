@@ -161,7 +161,7 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
             justifyContent: 'center',
             cursor: 'pointer',
             flexShrink: 0,
-            transition: 'background 0.1s, border 0.1s',
+            transition: 'background 0.15s, border 0.15s',
             ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
           }}
         >

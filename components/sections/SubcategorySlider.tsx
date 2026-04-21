@@ -81,8 +81,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
-    const FADE_LEFT = activeSlide !== null ? 120 : 250;
-    const FADE_RIGHT = activeSlide !== null ? 100 : 200;
+    const FADE_LEFT = activeSlide !== null ? 280 : 250;
+    const FADE_RIGHT = activeSlide !== null ? 240 : 200;
     const SCALE_MIN = activeSlide !== null ? 0.2 : 0.6;
     const FULL: { opacity: number; scale: number; origin: 'left' | 'right' | 'center' } = { opacity: 1, scale: 1, origin: 'center' };
 
