@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 
 const TOOLS = [
   {
@@ -40,6 +41,7 @@ export default function FinanztoolsMenu() {
         // Dispatch events outside of setState to avoid updating other components mid-render
         queueMicrotask(() => {
           if (opening) {
+            scrollToBookmarkSticky();
             window.dispatchEvent(new CustomEvent("menu-closed"));
             requestAnimationFrame(() => {
               window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));

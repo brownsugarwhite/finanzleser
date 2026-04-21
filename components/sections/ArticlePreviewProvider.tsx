@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useRef, useState } from "react"
 import type { Post } from "@/lib/types";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 import ArticlePreviewOverlay from "./ArticlePreviewOverlay";
+import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 
 export type PreviewTool = "rechner" | "vergleich" | "checkliste";
 
@@ -81,6 +82,7 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
   }, [extrasCache]);
 
   const openPreview = useCallback((input: OpenPreviewInput) => {
+    scrollToBookmarkSticky();
     setState((prev) => {
       if (prev) return prev;
       if ("ctx" in input) {

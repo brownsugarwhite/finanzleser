@@ -6,6 +6,7 @@ import gsap from "gsap";
 export default function ContentScaler() {
   const isOpenRef = useRef(false);
   const savedOpacities = useRef<Map<HTMLElement, number>>(new Map());
+  const savedPointerEvents = useRef<Map<HTMLElement, string>>(new Map());
   const previewScaleEls = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
@@ -63,6 +64,8 @@ export default function ContentScaler() {
       els.forEach((el) => {
         const rect = el.getBoundingClientRect();
         el.style.transformOrigin = `${vw / 2 - rect.left}px ${vh / 2 - rect.top}px`;
+        savedPointerEvents.current.set(el, el.style.pointerEvents);
+        el.style.pointerEvents = "none";
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 0.95,
@@ -109,6 +112,9 @@ export default function ContentScaler() {
             el.style.transform = "";
             el.style.filter = "";
             el.style.transformOrigin = "";
+            const savedPE = savedPointerEvents.current.get(el);
+            el.style.pointerEvents = savedPE ?? "";
+            savedPointerEvents.current.delete(el);
           },
         });
       });

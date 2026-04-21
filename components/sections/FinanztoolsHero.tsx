@@ -512,7 +512,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                   onClick={() => {
                     openPreview({ ctx: sidebarPreviewCtx, currentIndex: i });
                     window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
-                    if (window.scrollY < 50) window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
                 >
                   <div data-card-text style={{ flex: 1, minWidth: 0 }}>
