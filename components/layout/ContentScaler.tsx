@@ -64,7 +64,11 @@ export default function ContentScaler() {
       els.forEach((el) => {
         const rect = el.getBoundingClientRect();
         el.style.transformOrigin = `${vw / 2 - rect.left}px ${vh / 2 - rect.top}px`;
-        savedPointerEvents.current.set(el, el.style.pointerEvents);
+        // Only save original pointerEvents if we haven't already (prevents overwrite
+        // during interrupted open→close→open cycles where "none" would leak through).
+        if (!savedPointerEvents.current.has(el)) {
+          savedPointerEvents.current.set(el, el.style.pointerEvents);
+        }
         el.style.pointerEvents = "none";
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
@@ -99,6 +103,14 @@ export default function ContentScaler() {
       if (allEls.length === 0) return;
 
       allEls.forEach((el) => {
+        // Restore pointerEvents at scaleUp START (not in onComplete) — survives
+        // interruption: if a new scaleDown kills this tween, onComplete never fires,
+        // but PE is already restored here.
+        const savedPE = savedPointerEvents.current.get(el);
+        if (savedPE !== undefined) {
+          el.style.pointerEvents = savedPE;
+          savedPointerEvents.current.delete(el);
+        }
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 1,
@@ -112,9 +124,6 @@ export default function ContentScaler() {
             el.style.transform = "";
             el.style.filter = "";
             el.style.transformOrigin = "";
-            const savedPE = savedPointerEvents.current.get(el);
-            el.style.pointerEvents = savedPE ?? "";
-            savedPointerEvents.current.delete(el);
           },
         });
       });

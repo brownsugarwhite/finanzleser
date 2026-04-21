@@ -5,6 +5,9 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useDrag } from "@use-gesture/react";
 import { gsap, initGSAP } from "@/lib/gsapConfig";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import Spacer from "@/components/ui/Spacer";
@@ -755,10 +758,19 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       return;
     }
 
-    // Scroll card into view before morphing (backdrop covers the scroll).
+    // Scroll card into view, animated parallel to the morph (same duration, ease-out).
+    // We offset measured target rects by scrollDelta so the morph lands exactly on the
+    // card's post-scroll position, not its pre-scroll position.
     const cardRect = currentCardEl.getBoundingClientRect();
+    let scrollDelta = 0;
     if (cardRect.top < 0 || cardRect.bottom > window.innerHeight) {
-      currentCardEl.scrollIntoView({ behavior: "instant", block: "center" });
+      const centeredTop = (window.innerHeight - cardRect.height) / 2;
+      scrollDelta = cardRect.top - centeredTop;
+      gsap.to(window, {
+        scrollTo: { y: window.scrollY + scrollDelta },
+        duration: MORPH_DURATION,
+        ease: "power2.out",
+      });
     }
 
     // Kill any in-flight tweens on box/image so late-arrival height animations
@@ -782,12 +794,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const curBoxRect = box.getBoundingClientRect();
     const curImageRect = image.getBoundingClientRect();
 
-    // Measure current card's un-scaled rect
-    const tgtBoxRect = measureRectUnscaled(currentCardEl);
+    // Measure current card's un-scaled rect, offset .top by scrollDelta so the morph
+    // targets the card's POST-scroll viewport position (scroll runs parallel).
+    const rawTgtBoxRect = measureRectUnscaled(currentCardEl);
     const srcImgElInCard = currentCardEl.querySelector<HTMLElement>(
       `[data-flip-id="preview-${post.slug}-image"]`
     );
-    const tgtImageRect = srcImgElInCard ? measureRectUnscaled(srcImgElInCard) : tgtBoxRect;
+    const rawTgtImageRect = srcImgElInCard ? measureRectUnscaled(srcImgElInCard) : rawTgtBoxRect;
+    const tgtBoxRect = { top: rawTgtBoxRect.top - scrollDelta, left: rawTgtBoxRect.left, width: rawTgtBoxRect.width, height: rawTgtBoxRect.height };
+    const tgtImageRect = { top: rawTgtImageRect.top - scrollDelta, left: rawTgtImageRect.left, width: rawTgtImageRect.width, height: rawTgtImageRect.height };
 
     const cardStyle = getComputedStyle(currentCardEl);
     const cardImageStyle = srcImgElInCard ? getComputedStyle(srcImgElInCard) : null;
