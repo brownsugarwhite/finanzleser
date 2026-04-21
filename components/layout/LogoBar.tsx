@@ -95,7 +95,7 @@ export default function LogoBar() {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 54, marginTop: "-50px", pointerEvents: "none" }}>
+    <div style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>
       <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
         <a href="/"><img src="/icons/fl_logo.svg" alt="finanzleser" style={{ width: "225px", height: "auto", display: "block", marginTop: "19px" }} /></a>
         <span

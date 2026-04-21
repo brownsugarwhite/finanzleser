@@ -271,6 +271,7 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
           top: 0,
           right: 13,
           width: 28,
+          zIndex: 62,
         }}>
           <div style={{ width: 33, height: 16, backgroundColor: bookmarkColor }} />
           <svg width="33" height="25" viewBox="0 0 28 23" fill="none" preserveAspectRatio="none" style={{ display: 'block' }}>
