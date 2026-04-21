@@ -56,7 +56,7 @@ export default async function RootLayout({
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>
-          <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 60, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
+          <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 62, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
             <div style={{ pointerEvents: "auto" }}><BookmarkNav /></div>
           </div>
           <LogoBar />
