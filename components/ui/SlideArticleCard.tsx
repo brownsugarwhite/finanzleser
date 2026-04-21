@@ -117,7 +117,7 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
         userSelect: 'none',
         WebkitUserSelect: 'none',
         cursor: 'pointer',
-        transform: cardHovered ? 'scale(1.1)' : 'scale(1)',
+        transform: cardHovered ? 'scale(1.1)' : 'none',
         transition: 'transform 0.3s ease',
       }}
     >
