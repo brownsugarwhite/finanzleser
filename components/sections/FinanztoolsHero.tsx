@@ -495,28 +495,71 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
               return (
                 <Link key={post.id} href={postLink} className="latest-post-item" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    {category && (
-                      <p className="latest-post-category" style={{
-                        fontSize: 12,
-                        fontFamily: "var(--font-body)",
-                        marginBottom: 3,
-                        lineHeight: 1.3,
-                      }}>
-                        {category.name}
-                      </p>
-                    )}
-                    <p className="latest-post-title" style={{
-                      fontSize: 16,
-                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                      fontWeight: 600,
-                      margin: 0,
+                    <p className="latest-post-category" style={{
+                      fontSize: 11,
+                      fontFamily: "var(--font-body)",
+                      marginBottom: 4,
                       lineHeight: 1.3,
-                      hyphens: "auto",
-                      WebkitHyphens: "auto",
-                      wordBreak: "break-word",
-                    }} lang="de">
+                      color: "var(--color-text-secondary)",
+                    }}>
                       {post.title}
                     </p>
+                    {post.beitragFelder?.beitragUntertitel && (
+                      <p className="latest-post-title" style={{
+                        fontSize: 15,
+                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                        fontWeight: 700,
+                        margin: "0 0 8px 0",
+                        lineHeight: 1.35,
+                        hyphens: "auto",
+                        WebkitHyphens: "auto",
+                        wordBreak: "break-word",
+                      }} lang="de">
+                        {post.beitragFelder.beitragUntertitel}
+                      </p>
+                    )}
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{
+                        fontSize: 13,
+                        fontFamily: "var(--font-body)",
+                        fontWeight: 500,
+                        color: "var(--color-text-secondary)",
+                      }}>
+                        Vorschau
+                      </span>
+                      <span className="article-read-link" style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                        <span style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          whiteSpace: "nowrap",
+                        }}>
+                          Ratgeber lesen
+                        </span>
+                        <span
+                          className="article-read-line"
+                          style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }}
+                        />
+                        <svg
+                          width="8"
+                          height="8"
+                          viewBox="0 0 17.45 15.77"
+                          fill="none"
+                          aria-hidden
+                          style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}
+                        >
+                          <polyline
+                            points="16.95 15.27 8.27 8.11 16.95 .5"
+                            stroke="currentColor"
+                            strokeWidth="1"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            fill="none"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                   <div className="latest-post-icon" style={{
                     width: 50,

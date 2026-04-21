@@ -40,25 +40,34 @@ export async function getAllPosts(): Promise<Post[]> {
               slug
             }
           }
+          beitrag {
+            untertitel
+          }
         }
       }
     }
   `;
 
-  const allNodes: Post[] = [];
+  const allNodes: (Post & { beitrag?: { untertitel?: string } })[] = [];
   let hasNextPage = true;
   let after: string | null = null;
 
   while (hasNextPage) {
     const data = await client.request<{
-      posts: { nodes: Post[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
     }>(query, { after });
     allNodes.push(...data.posts.nodes);
     hasNextPage = data.posts.pageInfo.hasNextPage;
     after = data.posts.pageInfo.endCursor;
   }
 
-  return allNodes.map(post => decodePostContent(post));
+  return allNodes.map(post => {
+    const decoded = decodePostContent(post);
+    if (post.beitrag?.untertitel) {
+      decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
+    }
+    return decoded;
+  });
 }
 
 // ─────────────────────────────────────────────
