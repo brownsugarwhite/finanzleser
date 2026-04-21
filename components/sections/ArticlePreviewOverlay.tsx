@@ -920,7 +920,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 52,
+        zIndex: 60,
         overflow: "hidden",
         pointerEvents: "auto",
       }}
