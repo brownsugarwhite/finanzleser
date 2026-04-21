@@ -390,6 +390,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: srcImageRect.width,
         height: srcImageRect.height,
         borderRadius: srcImageRadius,
+        // Fade in from transparent when source card has no image element
+        ...(srcImageEl ? {} : { opacity: 0 }),
       },
       {
         top: tgtImageRect.top,
@@ -397,6 +399,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: tgtImageRect.width,
         height: tgtImageRect.height,
         borderRadius: IMAGE_RADIUS_CSS,
+        ...(srcImageEl ? {} : { opacity: 1 }),
         duration: MORPH_DURATION,
         ease: MORPH_EASE,
         immediateRender: true,
@@ -736,9 +739,26 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const box = boxRefs.current.get(post.slug);
     const image = imageRefs.current.get(post.slug);
     const currentCardEl = ctx.getCardEl(currentIndex);
-    if (!box || !image || !currentCardEl) {
+    if (!box || !image) {
       onClose();
       return;
+    }
+
+    // No source card (e.g. slides 6–10 from sidebar) — fade backdrop out instead of morphing.
+    if (!currentCardEl) {
+      window.dispatchEvent(new CustomEvent("menu-closed"));
+      if (backdropRef.current) {
+        gsap.to(backdropRef.current, { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE, onComplete: onClose });
+      } else {
+        onClose();
+      }
+      return;
+    }
+
+    // Scroll card into view before morphing (backdrop covers the scroll).
+    const cardRect = currentCardEl.getBoundingClientRect();
+    if (cardRect.top < 0 || cardRect.bottom > window.innerHeight) {
+      currentCardEl.scrollIntoView({ behavior: "instant", block: "center" });
     }
 
     // Kill any in-flight tweens on box/image so late-arrival height animations
@@ -836,6 +856,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         left: curImageRect.left,
         width: curImageRect.width,
         height: curImageRect.height,
+        // Fade out when source card had no image element (mirrors open fade-in)
+        ...(srcImgElInCard ? {} : { opacity: 1 }),
       },
       {
         top: tgtImageRect.top,
@@ -843,6 +865,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         width: tgtImageRect.width,
         height: tgtImageRect.height,
         borderRadius: cardImageStyle ? cardImageStyle.borderRadius || "0px" : "0px",
+        ...(srcImgElInCard ? {} : { opacity: 0 }),
         duration: MORPH_DURATION,
         ease: MORPH_EASE,
         immediateRender: true,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import lottie from "lottie-web";
@@ -14,6 +14,8 @@ import RevolverSlider from "@/components/ui/RevolverSlider";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
 import { isMainCategory } from "@/lib/categories";
 import type { Post, Rechner, Checkliste } from "@/lib/types";
+import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
+import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
 
 function reverseBaselineTrim(animData: any): any {
   const data = JSON.parse(JSON.stringify(animData));
@@ -74,10 +76,18 @@ const TOOLS = [
   },
 ];
 
-export default function FinanztoolsHero({ posts = [], rechner = [], checklisten = [] }: { posts?: Post[]; rechner?: Rechner[]; checklisten?: Checkliste[] }) {
+export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner = [], checklisten = [] }: { posts?: Post[]; latestPosts?: Post[]; rechner?: Rechner[]; checklisten?: Checkliste[] }) {
   const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const animRefs = useRef<(AnimationItem | null)[]>([null, null, null]);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const { openPreview } = useArticlePreview();
+
+  const sidebarPreviewCtx = useMemo<PreviewSliderContext>(() => ({
+    posts: latestPosts,
+    emblaApi: null,
+    getCardEl: (i) => sidebarCardRefs.current.get(i) ?? null,
+  }), [latestPosts]);
   const sectionRef = useRef<HTMLElement>(null);
   const prevIndex = useRef(-1);
   const prevDirection = useRef<"left" | "right" | null>(null);
@@ -487,14 +497,21 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-            {posts.slice(0, 5).map((post) => {
+            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 5).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
 
               return (
-                <Link key={post.id} href={postLink} className="latest-post-item" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
-                  <div style={{ flex: 1, minWidth: 0 }}>
+                <div
+                  key={post.id}
+                  ref={(el) => { if (el) sidebarCardRefs.current.set(i, el); }}
+                  data-flip-id={`preview-${post.slug}-box`}
+                  className="latest-post-item"
+                  style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
+                  onClick={() => openPreview({ ctx: sidebarPreviewCtx, currentIndex: i })}
+                >
+                  <div data-card-text style={{ flex: 1, minWidth: 0 }}>
                     <p className="latest-post-category" style={{
                       fontSize: 11,
                       fontFamily: "var(--font-body)",
@@ -527,7 +544,12 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
                       }}>
                         Vorschau
                       </span>
-                      <span className="article-read-link" style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                      <Link
+                        href={postLink}
+                        className="article-read-link"
+                        style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <span style={{
                           fontFamily: "var(--font-body)",
                           fontSize: "13px",
@@ -558,7 +580,7 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
                             vectorEffect="non-scaling-stroke"
                           />
                         </svg>
-                      </span>
+                      </Link>
                     </div>
                   </div>
                   <div className="latest-post-icon" style={{
@@ -568,7 +590,7 @@ export default function FinanztoolsHero({ posts = [], rechner = [], checklisten 
                     background: "transparent",
                     flexShrink: 0,
                   }} />
-                </Link>
+                </div>
               );
             })}
           </div>

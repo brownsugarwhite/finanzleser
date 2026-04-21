@@ -71,6 +71,59 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 // ─────────────────────────────────────────────
+// Neueste Beiträge (sortiert nach Datum DESC)
+// ─────────────────────────────────────────────
+
+export async function getLatestPosts(limit = 10): Promise<Post[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetLatestPosts($limit: Int!) {
+      posts(first: $limit, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          title
+          slug
+          date
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
+          beitrag {
+            untertitel
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+    }>(query, { limit });
+    return data.posts.nodes.map((post) => {
+      const decoded = decodePostContent(post);
+      if (post.beitrag?.untertitel) {
+        decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
+      }
+      return decoded;
+    });
+  } catch (error) {
+    console.error("Error fetching latest posts:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Beiträge suchen
 // ─────────────────────────────────────────────
 

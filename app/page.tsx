@@ -4,7 +4,7 @@ import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
 import StickySparkHeading from "@/components/ui/StickySparkHeading";
 import Footer from "@/components/layout/Footer";
-import { getAllPosts, getCategoryWithChildren, getPostsByCategory, getAllRechner, getAllChecklisten } from "@/lib/wordpress";
+import { getAllPosts, getLatestPosts, getCategoryWithChildren, getPostsByCategory, getAllRechner, getAllChecklisten } from "@/lib/wordpress";
 import type { Post, Rechner, Checkliste } from "@/lib/types";
 
 const RATGEBER_KATEGORIEN: Array<{ slug: string; heading: string }> = [
@@ -25,18 +25,21 @@ type KategorieBlock = {
 
 export default async function LandingPage() {
   let posts: Post[] = [];
+  let latestPosts: Post[] = [];
   let rechner: Rechner[] = [];
   let checklisten: Checkliste[] = [];
   let kategorieBlocks: KategorieBlock[] = [];
 
   try {
-    const [allPosts, allRechner, allChecklisten, ...mainCats] = await Promise.all([
+    const [allPosts, latest, allRechner, allChecklisten, ...mainCats] = await Promise.all([
       getAllPosts(),
+      getLatestPosts(10),
       getAllRechner(),
       getAllChecklisten(),
       ...RATGEBER_KATEGORIEN.map((k) => getCategoryWithChildren(k.slug)),
     ]);
     posts = allPosts;
+    latestPosts = latest;
     rechner = allRechner;
     checklisten = allChecklisten;
 
@@ -67,7 +70,7 @@ export default async function LandingPage() {
       <LandingIntro />
       <main className="bg-white">
         <div className="scalable-landing">
-          <FinanztoolsHero posts={posts} rechner={rechner} checklisten={checklisten} />
+          <FinanztoolsHero posts={posts} latestPosts={latestPosts} rechner={rechner} checklisten={checklisten} />
         </div>
 
         <section style={{ width: "100%", padding: "80px 0 120px" }}>
