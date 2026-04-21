@@ -21,9 +21,10 @@ export default function ContentScaler() {
       return { els, fadeTargets, isLanding };
     };
 
-    const scaleDown = () => {
+    const scaleDown = (e?: Event) => {
       if (isOpenRef.current) return;
       isOpenRef.current = true;
+      const fromPreview = (e as CustomEvent)?.detail?.fromPreview === true;
       const { els, fadeTargets } = getTargets();
       if (els.length === 0) return;
 
@@ -51,6 +52,17 @@ export default function ContentScaler() {
           gsap.to(t, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
         }
       });
+
+      // Preview-only: also scale+blur TopNav and fade dotline-animated
+      if (fromPreview) {
+        const topNav = document.querySelector<HTMLElement>("[data-topnav]");
+        const dotlineAnimated = document.querySelector<HTMLElement>(".dotline-animated");
+        [topNav, dotlineAnimated].forEach((el) => {
+          if (!el || savedOpacities.current.has(el)) return;
+          savedOpacities.current.set(el, parseFloat(getComputedStyle(el).opacity));
+          gsap.to(el, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
+        });
+      }
     };
 
     const scaleUp = () => {
@@ -67,8 +79,6 @@ export default function ContentScaler() {
           duration: 0.5,
           ease: "power2.inOut",
           onComplete: () => {
-            // Inline transform/filter auch bei Endwert "none-äquivalent" erzeugen
-            // einen Stacking-Context → Inline-Styles am Ende entfernen.
             el.style.transform = "";
             el.style.filter = "";
             el.style.transformOrigin = "";
@@ -76,10 +86,11 @@ export default function ContentScaler() {
         });
       });
 
-      fadeTargets.forEach((t) => {
-        const restoreOpacity = savedOpacities.current.get(t) ?? 1;
-        gsap.to(t, { opacity: restoreOpacity, duration: 0.5, ease: "power2.inOut" });
+      // Restore all saved elements (fadeTargets + any preview-only extras like TopNav/dotline)
+      savedOpacities.current.forEach((opacity, el) => {
+        gsap.to(el, { opacity, duration: 0.5, ease: "power2.inOut" });
       });
+      savedOpacities.current.clear();
 
       setTimeout(() => {
         window.dispatchEvent(new CustomEvent("scroll-anim-recreate"));
