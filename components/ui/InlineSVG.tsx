@@ -47,6 +47,7 @@ export default function InlineSVG({ src, className, style, alt }: InlineSVGProps
           const allElements = svgDoc.querySelectorAll('*');
           allElements.forEach((el) => {
             el.setAttribute('vector-effect', 'non-scaling-stroke');
+            el.setAttribute('stroke-width', '1');
 
             const classList = el.getAttribute('class');
             if (classList) {

@@ -16,6 +16,7 @@ import { isMainCategory } from "@/lib/categories";
 import type { Post, Rechner, Checkliste } from "@/lib/types";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
 import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
+import InlineSVG from "@/components/ui/InlineSVG";
 
 function reverseBaselineTrim(animData: any): any {
   const data = JSON.parse(JSON.stringify(animData));
@@ -235,13 +236,13 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
   return (
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
-      <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 40px)" }}>
+      <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
         {/* Left: finanztools_container */}
         <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
-          <div style={{ width: "100%", height: "500px", position: "relative" }}>
-            <div style={{ width: isMobile ? "100%" : 430, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
+          <div style={{ width: "100%", height: "300px", position: "relative" }}>
+            <div style={{ width: isMobile ? "100%" : 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
               <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right" }}>
                 Newsletter
               </p>
@@ -249,7 +250,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                 lang="de"
                 style={{
                   fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  fontWeight: 600,
+                  fontWeight: 650,
                   fontSize: 16,
                   lineHeight: 1.3,
                   color: "var(--color-text-primary)",
@@ -266,32 +267,33 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
               </div>
 
               {/* Horizontale Linie */}
-              <div style={{ width: isMobile ? "100%" : 300, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
+              <div style={{ width: isMobile ? "100%" : 330, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
             </div>
 
-            {/* Visual Platzhalter — zwischen Newsletter und Sidebar */}
+            {/* Visual — zwischen Newsletter und Sidebar */}
             {!isMobile && (
               <div style={{
                 position: "absolute",
                 top: 0,
-                left: 460,
+                left: 370,
                 right: 23,
                 height: "30vw",
-                background: "rgba(0, 0, 0, 0.06)",                
-              }} />
+              }}>
+                <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
+              </div>
             )}
           </div>
 
           {/* 2. Subheading — sticky bottom */}
-          <div style={{ width: isMobile ? "100%" : 430, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
+          <div style={{ width: isMobile ? "100%" : 330, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
             <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
               Die Finanztools
             </p>
           </div>
 
           {/* 3. Heading */}
-          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, whiteSpace: isMobile ? "normal" : "nowrap", textAlign: "right", width: isMobile ? "auto" : 430 }}>
-            Alles in eigener Hand
+          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, textAlign: "right", width: isMobile ? "auto" : 330 }}>
+            Alles in<br />eigener Hand
           </p>
 
           {/* 3. Lottie Slider — stacked, slides enter from left/right */}
@@ -373,8 +375,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                     <div
                       onClick={() => setActiveCard(isActive ? null : tool.title)}
                       style={{
-                        width: isActive ? 470 : 130,
-                        borderRadius: isActive ? 36 : 23,
+                        width: isActive ? 470 : 100,
+                        borderRadius: isActive ? 46 : 30,
                         background: isActive ? "rgba(250, 249, 246, 0.8)" : "rgba(255, 255, 255, 0.8)",
                         backdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
                         WebkitBackdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
@@ -384,7 +386,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         position: "relative",
                         cursor: "pointer",
                         flexShrink: 0,
-                        padding: "27px 23px 23px 27px",
+                        padding: "23px 27px",
                         transition: "background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, width 0.3s ease, border-radius 0.3s ease",
                       }}
                     >
@@ -404,8 +406,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                           alt=""
                           aria-hidden
                           style={{
-                            width: 40,
-                            height: 40,
+                            width: 38,
+                            height: 38,
                             objectFit: "contain",
                             flexShrink: 0,
                           }}
@@ -413,7 +415,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         <span
                           style={{
                             fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                            fontSize: isActive ? 24 : 16,
+                            fontSize: isActive ? 24 : 13.5,
                             fontWeight: 600,
                             color: "var(--color-text-primary)",
                             whiteSpace: "nowrap",
@@ -526,9 +528,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                     </p>
                     {post.beitragFelder?.beitragUntertitel && (
                       <p className="latest-post-title" style={{
-                        fontSize: 15,
+                        fontSize: 16,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                        fontWeight: 700,
+                        fontWeight: 650,
                         margin: "0 0 8px 0",
                         lineHeight: 1.35,
                         hyphens: "auto",
@@ -544,7 +546,27 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         fontFamily: "var(--font-body)",
                         fontWeight: 500,
                         color: "var(--color-text-secondary)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 5,
                       }}>
+                        <span style={{
+                          width: 18,
+                          height: 18,
+                          borderRadius: "50%",
+                          border: "1px solid var(--color-text-secondary)",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          ["--fill-0" as string]: "var(--color-text-secondary)",
+                        }}>
+                          <InlineSVG
+                            src="/icons/info_i.svg"
+                            alt="Info"
+                            style={{ width: 5, height: 10 }}
+                          />
+                        </span>
                         Vorschau
                       </span>
                       <Link
@@ -586,13 +608,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                       </Link>
                     </div>
                   </div>
-                  <div className="latest-post-icon" style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 23,
-                    background: "transparent",
-                    flexShrink: 0,
-                  }} />
                 </div>
               );
             })}
@@ -629,7 +644,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         <p className="latest-post-title" style={{
                           fontSize: 16,
                           fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                          fontWeight: 600,
+                          fontWeight: 650,
                           margin: 0,
                           lineHeight: 1.3,
                           hyphens: "auto",
