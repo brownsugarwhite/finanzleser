@@ -59,7 +59,7 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
   const Tag = as;
 
   return (
-    <div ref={sparksRef} style={{
+    <div ref={sparksRef} className="scalable-landing" style={{
       display: "flex",
       alignItems: "center",
       gap: 0,

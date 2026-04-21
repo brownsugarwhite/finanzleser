@@ -65,45 +65,52 @@ export default async function LandingPage() {
       <style>{`.logo-wrapper{transform:translateX(-280px);pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="maya"]{visibility:hidden}`}</style>
       <LandingBodyAttr />
       <LandingIntro />
-      <main className="bg-white scalable-landing">
-        <FinanztoolsHero posts={posts} rechner={rechner} checklisten={checklisten} />
+      <main className="bg-white">
+        <div className="scalable-landing">
+          <FinanztoolsHero posts={posts} rechner={rechner} checklisten={checklisten} />
+        </div>
 
         <section style={{ width: "100%", padding: "80px 0 120px" }}>
+          {/* Heading bewusst außerhalb von .scalable-landing — bleibt beim Menü-Open
+              in seinem eigenen Stacking-Context auf Root-Ebene und damit immer
+              über dem ProgressiveBlur. */}
           <StickySparkHeading title="Ratgeber" as="h2" />
 
-          {kategorieBlocks.map((block) => (
-            block.children.length > 0 && (
-              <div key={block.slug} style={{ marginTop: 80 }}>
-                <div style={{
-                  maxWidth: 1200,
-                  margin: "0 auto",
-                  padding: "0 40px",
-                  boxSizing: "border-box",
-                }}>
-                  <h3 style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontWeight: 700,
-                    fontStyle: "italic",
-                    fontSize: 28,
-                    color: "var(--color-text-primary)",
-                    letterSpacing: "0.01em",
-                    lineHeight: 1.3,
-                    margin: "0 0 23px",
+          <div className="scalable-landing">
+            {kategorieBlocks.map((block) => (
+              block.children.length > 0 && (
+                <div key={block.slug} style={{ marginTop: 80 }}>
+                  <div style={{
+                    maxWidth: 1200,
+                    margin: "0 auto",
+                    padding: "0 40px",
+                    boxSizing: "border-box",
                   }}>
-                    {block.heading}
-                  </h3>
+                    <h3 style={{
+                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                      fontWeight: 700,
+                      fontStyle: "italic",
+                      fontSize: 28,
+                      color: "var(--color-text-primary)",
+                      letterSpacing: "0.01em",
+                      lineHeight: 1.3,
+                      margin: "0 0 23px",
+                    }}>
+                      {block.heading}
+                    </h3>
+                  </div>
+                  <SubcategorySlider
+                    categories={block.children}
+                    parentSlug={block.slug}
+                    allCategoryPosts={block.categoryPosts}
+                  />
                 </div>
-                <SubcategorySlider
-                  categories={block.children}
-                  parentSlug={block.slug}
-                  allCategoryPosts={block.categoryPosts}
-                />
-              </div>
-            )
-          ))}
+              )
+            ))}
+          </div>
         </section>
 
-        <div style={{ position: "relative", zIndex: 999 }}>
+        <div className="scalable-landing" style={{ position: "relative", zIndex: 999 }}>
           <Footer hideNewsletter />
         </div>
       </main>
