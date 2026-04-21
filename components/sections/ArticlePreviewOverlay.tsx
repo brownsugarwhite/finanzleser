@@ -337,12 +337,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       );
     }
 
-    // Background blur — parallel (fromPreview flag so ContentScaler also fades TopNav)
-    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { fromPreview: true } }));
-    // Scroll to top if user hasn't scrolled yet
-    if (window.scrollY < 50) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    // Background blur — parallel
+    window.dispatchEvent(new CustomEvent("menu-opened"));
 
     // Backdrop fade in
     if (backdropRef.current) {

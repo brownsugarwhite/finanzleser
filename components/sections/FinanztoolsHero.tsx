@@ -509,7 +509,11 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                   data-flip-id={`preview-${post.slug}-box`}
                   className="latest-post-item"
                   style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
-                  onClick={() => openPreview({ ctx: sidebarPreviewCtx, currentIndex: i })}
+                  onClick={() => {
+                    openPreview({ ctx: sidebarPreviewCtx, currentIndex: i });
+                    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { fromPreview: true } }));
+                    if (window.scrollY < 50) window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                 >
                   <div data-card-text style={{ flex: 1, minWidth: 0 }}>
                     <p className="latest-post-category" style={{
