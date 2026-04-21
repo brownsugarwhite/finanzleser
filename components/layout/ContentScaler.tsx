@@ -6,6 +6,7 @@ import gsap from "gsap";
 export default function ContentScaler() {
   const isOpenRef = useRef(false);
   const savedOpacities = useRef<Map<HTMLElement, number>>(new Map());
+  const previewScaleEls = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const getTargets = () => {
@@ -28,6 +29,18 @@ export default function ContentScaler() {
       const { els, fadeTargets } = getTargets();
       if (els.length === 0) return;
 
+      // Preview-only: add TopNav + dotline-animated to the scale+blur set
+      if (fromPreview) {
+        const topNav = document.querySelector<HTMLElement>("[data-topnav]");
+        const dotlineAnimated = document.querySelector<HTMLElement>(".dotline-animated");
+        [topNav, dotlineAnimated].forEach((el) => {
+          if (el && !els.includes(el)) {
+            els.push(el);
+            previewScaleEls.current.push(el);
+          }
+        });
+      }
+
       // Save + freeze current opacity before killing scroll animations
       fadeTargets.forEach((t) => {
         const current = parseFloat(getComputedStyle(t).opacity);
@@ -36,7 +49,7 @@ export default function ContentScaler() {
       window.dispatchEvent(new CustomEvent("scroll-anim-kill"));
       fadeTargets.forEach((t) => gsap.set(t, { opacity: savedOpacities.current.get(t) ?? 0 }));
 
-      // Scale + blur content — alle .scalable-landing-Wrapper parallel
+      // Scale + blur all elements (content + optional TopNav/dotline)
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       els.forEach((el) => {
@@ -52,26 +65,20 @@ export default function ContentScaler() {
           gsap.to(t, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
         }
       });
-
-      // Preview-only: also scale+blur TopNav and fade dotline-animated
-      if (fromPreview) {
-        const topNav = document.querySelector<HTMLElement>("[data-topnav]");
-        const dotlineAnimated = document.querySelector<HTMLElement>(".dotline-animated");
-        [topNav, dotlineAnimated].forEach((el) => {
-          if (!el || savedOpacities.current.has(el)) return;
-          savedOpacities.current.set(el, parseFloat(getComputedStyle(el).opacity));
-          gsap.to(el, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
-        });
-      }
     };
 
     const scaleUp = () => {
       if (!isOpenRef.current) return;
       isOpenRef.current = false;
-      const { els, fadeTargets } = getTargets();
-      if (els.length === 0) return;
+      const { els } = getTargets();
 
-      els.forEach((el) => {
+      // Include any preview-only elements that were added during scaleDown
+      const allEls = [...els, ...previewScaleEls.current.filter((el) => !els.includes(el))];
+      previewScaleEls.current = [];
+
+      if (allEls.length === 0) return;
+
+      allEls.forEach((el) => {
         gsap.to(el, {
           scale: 1,
           filter: "blur(0px)",
@@ -86,7 +93,6 @@ export default function ContentScaler() {
         });
       });
 
-      // Restore all saved elements (fadeTargets + any preview-only extras like TopNav/dotline)
       savedOpacities.current.forEach((opacity, el) => {
         gsap.to(el, { opacity, duration: 0.5, ease: "power2.inOut" });
       });
