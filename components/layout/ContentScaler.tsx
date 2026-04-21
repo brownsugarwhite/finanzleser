@@ -25,16 +25,24 @@ export default function ContentScaler() {
     const scaleDown = (e?: Event) => {
       if (isOpenRef.current) return;
       isOpenRef.current = true;
-      const fromPreview = (e as CustomEvent)?.detail?.fromPreview === true;
+      const extended = (e as CustomEvent)?.detail?.extended === true;
       const { els, fadeTargets } = getTargets();
       if (els.length === 0) return;
 
-      // Preview-only: add TopNav + dotline-animated to the scale+blur set
-      if (fromPreview) {
-        const topNav = document.querySelector<HTMLElement>("[data-topnav]");
-        const dotlineAnimated = document.querySelector<HTMLElement>(".dotline-animated");
-        [topNav, dotlineAnimated].forEach((el) => {
-          if (el && !els.includes(el)) {
+      // Extended: also scale+blur TopNav(s), dotline(s) and opt-in elements (Logo/Subtitle/Pill on Landing)
+      if (extended) {
+        const extras: HTMLElement[] = [];
+        document.querySelectorAll<HTMLElement>("[data-topnav]").forEach((el) => {
+          if (el.offsetParent !== null) extras.push(el);
+        });
+        document.querySelectorAll<HTMLElement>(".dotline-animated, .landing-dotline").forEach((el) => {
+          if (el.offsetParent !== null) extras.push(el);
+        });
+        document.querySelectorAll<HTMLElement>("[data-scale-extended]").forEach((el) => {
+          if (el.offsetParent !== null) extras.push(el);
+        });
+        extras.forEach((el) => {
+          if (!els.includes(el)) {
             els.push(el);
             previewScaleEls.current.push(el);
           }
@@ -55,7 +63,16 @@ export default function ContentScaler() {
       els.forEach((el) => {
         const rect = el.getBoundingClientRect();
         el.style.transformOrigin = `${vw / 2 - rect.left}px ${vh / 2 - rect.top}px`;
-        gsap.to(el, { scale: 0.95, filter: "blur(23px)", opacity: 0.5, duration: 0.5, ease: "power2.inOut" });
+        gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
+        gsap.to(el, {
+          scale: 0.95,
+          filter: "blur(23px)",
+          opacity: 0.5,
+          duration: 0.5,
+          ease: "power2.inOut",
+          force3D: true,
+          overwrite: "auto",
+        });
       });
 
       // Fade out dotline + claim
@@ -79,12 +96,15 @@ export default function ContentScaler() {
       if (allEls.length === 0) return;
 
       allEls.forEach((el) => {
+        gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 1,
           filter: "blur(0px)",
           opacity: 1,
           duration: 0.5,
           ease: "power2.inOut",
+          force3D: true,
+          overwrite: "auto",
           onComplete: () => {
             el.style.transform = "";
             el.style.filter = "";

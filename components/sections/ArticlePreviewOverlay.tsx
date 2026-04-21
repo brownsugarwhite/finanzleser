@@ -337,8 +337,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       );
     }
 
-    // Background blur — parallel
-    window.dispatchEvent(new CustomEvent("menu-opened"));
+    // Background blur — parallel (extended: includes TopNav + dotline + opt-in landing elements)
+    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
 
     // Backdrop fade in
     if (backdropRef.current) {

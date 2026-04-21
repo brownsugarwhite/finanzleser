@@ -154,7 +154,7 @@ export default function LandingIntro() {
         minHeight: "auto",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
+      <div data-scale-extended style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
         {/* Logo */}
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
           <img

@@ -42,7 +42,7 @@ export default function FinanztoolsMenu() {
           if (opening) {
             window.dispatchEvent(new CustomEvent("menu-closed"));
             requestAnimationFrame(() => {
-              window.dispatchEvent(new CustomEvent("menu-opened"));
+              window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
             });
           } else {
             window.dispatchEvent(new CustomEvent("menu-closed"));
