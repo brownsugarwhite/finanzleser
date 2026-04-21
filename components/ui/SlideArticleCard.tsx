@@ -30,6 +30,7 @@ export const CARD_MAX_WIDTH = 450;
 export default function SlideArticleCard({ post, index, bookmarkType }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
+  const [cardHovered, setCardHovered] = useState(false);
   const [imageVisible, setImageVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -102,10 +103,10 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onMouseEnter={() => {
-        setInfoHovered(true);
+        setCardHovered(true);
         prefetchExtras(post.slug);
       }}
-      onMouseLeave={() => setInfoHovered(false)}
+      onMouseLeave={() => setCardHovered(false)}
       style={{
         width: '100%',
         position: 'relative',
@@ -116,6 +117,8 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
         userSelect: 'none',
         WebkitUserSelect: 'none',
         cursor: 'pointer',
+        transform: cardHovered ? 'scale(1.1)' : 'scale(1)',
+        transition: 'transform 0.3s ease',
       }}
     >
       {/* Visual — grauer Platzhalter (mit Info-Button unten rechts) */}

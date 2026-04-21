@@ -1,5 +1,7 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
 import InstagramDots from "@/components/ui/InstagramDots";
 
 interface SliderNavProps {
@@ -12,22 +14,6 @@ interface SliderNavProps {
   nextLabel?: string;
 }
 
-function ArrowLeft() {
-  return (
-    <svg width="40" height="10" viewBox="0 0 64 15" fill="none" className="slider-nav-arrow">
-      <path d="M0 15H64V0L0 15Z" fill="var(--color-text-primary)" />
-    </svg>
-  );
-}
-
-function ArrowRight() {
-  return (
-    <svg width="40" height="10" viewBox="0 0 64 15" fill="none" className="slider-nav-arrow">
-      <path d="M64 15H0V0L64 15Z" fill="var(--color-text-primary)" />
-    </svg>
-  );
-}
-
 export default function SliderNav({
   current,
   total,
@@ -37,17 +23,95 @@ export default function SliderNav({
   prevLabel = "Vorherige",
   nextLabel = "Nächste",
 }: SliderNavProps) {
+  const prevArrowRef = useRef<SVGSVGElement>(null);
+  const prevLineRef = useRef<HTMLSpanElement>(null);
+  const prevLabelRef = useRef<HTMLSpanElement>(null);
+  const nextArrowRef = useRef<SVGSVGElement>(null);
+  const nextLineRef = useRef<HTMLSpanElement>(null);
+  const nextLabelRef = useRef<HTMLSpanElement>(null);
+  const prevFirstRun = useRef(true);
+  const nextFirstRun = useRef(true);
+
+  const leftDisabled = current === 0;
+  const rightDisabled = current === total - 1;
+
+  // Disable/enable animation for PREV (left) side:
+  // out: arrow scale → 0, label fade out parallel (0.25s ease-in),
+  //      then line scaleX → 0 (0.2s ease-out)
+  // in:  line scaleX → 1 (0.2s ease-in), then arrow scale + label (0.25s ease-out)
+  useLayoutEffect(() => {
+    const arrow = prevArrowRef.current;
+    const line = prevLineRef.current;
+    const label = prevLabelRef.current;
+    if (!arrow || !line || !label) return;
+    if (prevFirstRun.current) {
+      prevFirstRun.current = false;
+      gsap.set(arrow, { scale: leftDisabled ? 0 : 1 });
+      gsap.set(line, { scaleX: leftDisabled ? 0 : 1 });
+      gsap.set(label, { opacity: leftDisabled ? 0 : 1 });
+      return;
+    }
+    if (leftDisabled) {
+      gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(label, { opacity: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(line, { scaleX: 0, duration: 0.3, delay: 0.25, ease: "power2.out", overwrite: true });
+    } else {
+      gsap.to(line, { scaleX: 1, duration: 0.3, ease: "power2.in", overwrite: true });
+      gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.3, ease: "power2.out", overwrite: true });
+      gsap.to(label, { opacity: 1, duration: 0.25, delay: 0.3, ease: "power2.out", overwrite: true });
+    }
+  }, [leftDisabled]);
+
+  useLayoutEffect(() => {
+    const arrow = nextArrowRef.current;
+    const line = nextLineRef.current;
+    const label = nextLabelRef.current;
+    if (!arrow || !line || !label) return;
+    if (nextFirstRun.current) {
+      nextFirstRun.current = false;
+      gsap.set(arrow, { scale: rightDisabled ? 0 : 1 });
+      gsap.set(line, { scaleX: rightDisabled ? 0 : 1 });
+      gsap.set(label, { opacity: rightDisabled ? 0 : 1 });
+      return;
+    }
+    if (rightDisabled) {
+      gsap.to(arrow, { scale: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(label, { opacity: 0, duration: 0.25, ease: "power2.in", overwrite: true });
+      gsap.to(line, { scaleX: 0, duration: 0.3, delay: 0.25, ease: "power2.out", overwrite: true });
+    } else {
+      gsap.to(line, { scaleX: 1, duration: 0.3, ease: "power2.in", overwrite: true });
+      gsap.to(arrow, { scale: 1, duration: 0.25, delay: 0.3, ease: "power2.out", overwrite: true });
+      gsap.to(label, { opacity: 1, duration: 0.25, delay: 0.3, ease: "power2.out", overwrite: true });
+    }
+  }, [rightDisabled]);
+
   return (
     <div className="slider-nav">
       <button
         className="slider-nav-arrow-btn"
         onClick={onPrev}
-        disabled={current === 0}
+        disabled={leftDisabled}
         aria-label="Zurück"
       >
-        <ArrowLeft />
+        <svg
+          ref={prevArrowRef}
+          className="slider-nav-arrow"
+          width="40"
+          height="10"
+          viewBox="0 0 64 15"
+          fill="none"
+          preserveAspectRatio="none"
+          style={{ transformBox: "fill-box", transformOrigin: "100% 100%" }}
+        >
+          <path d="M0 15H64V0L0 15Z" fill="var(--color-text-primary)" />
+        </svg>
         <span className="slider-nav-track">
-          <span className="slider-nav-label">{prevLabel}</span>
+          <span ref={prevLabelRef} className="slider-nav-label">{prevLabel}</span>
+          <span
+            ref={prevLineRef}
+            className="slider-nav-track-line"
+            style={{ transformOrigin: "100% 50%" }}
+          />
         </span>
       </button>
 
@@ -62,13 +126,29 @@ export default function SliderNav({
       <button
         className="slider-nav-arrow-btn slider-nav-arrow-btn--right"
         onClick={onNext}
-        disabled={current === total - 1}
+        disabled={rightDisabled}
         aria-label="Weiter"
       >
         <span className="slider-nav-track">
-          <span className="slider-nav-label">{nextLabel}</span>
+          <span ref={nextLabelRef} className="slider-nav-label">{nextLabel}</span>
+          <span
+            ref={nextLineRef}
+            className="slider-nav-track-line"
+            style={{ transformOrigin: "0% 50%" }}
+          />
         </span>
-        <ArrowRight />
+        <svg
+          ref={nextArrowRef}
+          className="slider-nav-arrow"
+          width="40"
+          height="10"
+          viewBox="0 0 64 15"
+          fill="none"
+          preserveAspectRatio="none"
+          style={{ transformBox: "fill-box", transformOrigin: "0% 100%" }}
+        >
+          <path d="M64 15H0V0L64 15Z" fill="var(--color-text-primary)" />
+        </svg>
       </button>
     </div>
   );

@@ -54,17 +54,28 @@ interface Props {
 // Helpers
 // ────────────────────────────────────────────────────────────────────────────
 function measureRectUnscaled(el: HTMLElement): DOMRect {
-  const scalable =
-    (document.querySelector(".scalable-landing") as HTMLElement | null) ||
-    (document.querySelector(".scalable-content") as HTMLElement | null);
-  if (!scalable) return el.getBoundingClientRect();
-  const origTransform = scalable.style.transform;
-  const origFilter = scalable.style.filter;
-  scalable.style.transform = "none";
-  scalable.style.filter = "none";
+  // Landing hat mehrere .scalable-landing-Wrapper (Hero, Slider-Block, Footer);
+  // alle temporär auf transform/filter: none stellen, damit der Rect natural
+  // gemessen wird, egal in welchem Wrapper el liegt.
+  const landings = Array.from(document.querySelectorAll<HTMLElement>(".scalable-landing"));
+  const fallback = document.querySelector<HTMLElement>(".scalable-content");
+  const els: HTMLElement[] = landings.length > 0 ? landings : fallback ? [fallback] : [];
+  if (els.length === 0) return el.getBoundingClientRect();
+
+  const saved = els.map((e) => ({
+    el: e,
+    transform: e.style.transform,
+    filter: e.style.filter,
+  }));
+  els.forEach((e) => {
+    e.style.transform = "none";
+    e.style.filter = "none";
+  });
   const rect = el.getBoundingClientRect();
-  scalable.style.transform = origTransform;
-  scalable.style.filter = origFilter;
+  saved.forEach((s) => {
+    s.el.style.transform = s.transform;
+    s.el.style.filter = s.filter;
+  });
   return rect;
 }
 
@@ -729,6 +740,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       onClose();
       return;
     }
+
+    // Kill any in-flight tweens on box/image so late-arrival height animations
+    // or leftover transform tweens don't interfere with the close morph.
+    gsap.killTweensOf(box);
+    gsap.killTweensOf(image);
 
     // Restore to natural before measuring (in case any morph leftovers)
     restoreBoxToNatural(box);

@@ -101,8 +101,9 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
       if (!prev) return prev;
       const next = prev.currentIndex + delta;
       if (next < 0 || next >= prev.ctx.posts.length) return prev;
-      // Sync background slider (emblaApi may be null for standalone).
-      prev.ctx.emblaApi?.scrollTo(next);
+      // Sync background slider instantly (jump=true) so the source card's
+      // position is stable when the close-morph measures it.
+      prev.ctx.emblaApi?.scrollTo(next, true);
       return { ...prev, currentIndex: next };
     });
   }, []);
@@ -112,7 +113,7 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
       if (!prev) return prev;
       if (index === prev.currentIndex) return prev;
       if (index < 0 || index >= prev.ctx.posts.length) return prev;
-      prev.ctx.emblaApi?.scrollTo(index);
+      prev.ctx.emblaApi?.scrollTo(index, true);
       return { ...prev, currentIndex: index };
     });
   }, []);

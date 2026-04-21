@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideCategoryCard, { type CategorySlide } from '@/components/ui/SlideCategoryCard';
 import SliderNav from '@/components/ui/SliderNav';
+import SliderSafeZone from '@/components/ui/SliderSafeZone';
 import ArticleSlider from '@/components/sections/ArticleSlider';
 import { useSliderPill } from '@/hooks/useSliderPill';
 import type { Post } from '@/lib/types';
@@ -81,9 +82,13 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
-    const FADE_LEFT = activeSlide !== null ? 280 : 250;
-    const FADE_RIGHT = activeSlide !== null ? 240 : 200;
+    const FADE_LEFT = activeSlide !== null ? 430 : 400;
+    const FADE_RIGHT = activeSlide !== null ? 360 : 320;
     const SCALE_MIN = activeSlide !== null ? 0.2 : 0.6;
+    // Overshoot: Fade-Strecke reicht FADE_OVERSHOOT Pixel über den Viewport-
+    // Rand hinaus. Cards sind am Bildschirmrand noch minimal sichtbar statt
+    // komplett weg; innere Schwellen (voll sichtbar / Beginn Ausfaden) bleiben.
+    const FADE_OVERSHOOT = 80;
     const FULL: { opacity: number; scale: number; origin: 'left' | 'right' | 'center' } = { opacity: 1, scale: 1, origin: 'center' };
 
     const update = () => {
@@ -104,12 +109,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
         let s = FULL;
         if (distFromLeft < FADE_LEFT) {
-          const t = Math.max(0, distFromLeft / FADE_LEFT);
+          const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           // Card am linken Rand → Origin rechts (Abstand zum nächsten inneren Nachbarn bleibt konstant)
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'right' };
         } else if (distFromRight < FADE_RIGHT) {
-          const t = Math.max(0, distFromRight / FADE_RIGHT);
+          const t = Math.max(0, Math.min(1, (distFromRight + FADE_OVERSHOOT) / (FADE_RIGHT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           // Card am rechten Rand → Origin links
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'left' };
@@ -300,15 +305,17 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       <div style={{ position: 'relative' }}>
         <div
           ref={catEmblaRef}
-          onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
-          onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
           style={{
-            overflow: 'hidden',
             cursor: canScroll ? 'grab' : 'default',
             boxSizing: 'border-box',
+            position: 'relative',
           }}
         >
-          <div style={{ display: 'flex', gap: `${CAT_GAP}px` }}>
+          <div
+            onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
+            onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
+            style={{ display: 'flex', gap: `${CAT_GAP}px` }}
+          >
             <div
               aria-hidden
               style={{
@@ -399,93 +406,21 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
               }}
             />
           </div>
+          {/* Safe-Zones links/rechts — blocken Hover/Klick auf Cards; PointerDown
+              bubbelt zum Embla-Viewport, Drag funktioniert weiter. */}
+          <SliderSafeZone
+            direction="left"
+            scrollable={canScroll && canPrev}
+            onClick={() => catEmblaApi?.scrollPrev()}
+          />
+          <SliderSafeZone
+            direction="right"
+            scrollable={canScroll && canNext}
+            onClick={() => catEmblaApi?.scrollNext()}
+          />
         </div>
         {/* Pill overlay — outside viewport so lines aren't clipped by overflow:hidden */}
         {sliderPill.renderPill()}
-
-        {/* Prev/Next Arrows im Button-Mode (über dem Gradient) */}
-        {activeSlide !== null && canScroll && (
-          <>
-            <button
-              type="button"
-              aria-label="Vorherige Kategorie"
-              onClick={() => catEmblaApi?.scrollPrev()}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: 15,
-                transform: 'translateY(calc(-50% - 5px))',
-                width: 30,
-                height: 30,
-                borderRadius: '50%',
-                border: '1px solid var(--color-text-primary)',
-                background: 'rgba(255, 255, 255, 0.3)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                cursor: canPrev ? 'pointer' : 'default',
-                opacity: canPrev ? 1 : 0,
-                pointerEvents: canPrev ? 'auto' : 'none',
-                transition: 'opacity 0.2s ease',
-                zIndex: 6,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 0,
-              }}
-            >
-              <svg width="10" height="10" viewBox="0 0 17.45 15.77" fill="none" aria-hidden>
-                <polyline
-                  points="16.95 15.27 8.27 8.11 16.95 .5"
-                  stroke="var(--color-text-primary)"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </button>
-            <button
-              type="button"
-              aria-label="Nächste Kategorie"
-              onClick={() => catEmblaApi?.scrollNext()}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                right: 15,
-                transform: 'translateY(calc(-50% - 5px))',
-                width: 36,
-                height: 36,
-                borderRadius: '50%',
-                border: '1px solid var(--color-text-primary)',
-                background: 'rgba(255, 255, 255, 0.3)',
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)',
-                cursor: canNext ? 'pointer' : 'default',
-                opacity: canNext ? 1 : 0,
-                pointerEvents: canNext ? 'auto' : 'none',
-                transition: 'opacity 0.2s ease',
-                zIndex: 6,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 0,
-              }}
-            >
-              <svg width="10" height="10" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ transform: 'rotate(180deg)' }}>
-                <polyline
-                  points="16.95 15.27 8.27 8.11 16.95 .5"
-                  stroke="var(--color-text-primary)"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </button>
-          </>
-        )}
       </div>
 
       {/* Article Slider — key forces fresh Embla per category */}

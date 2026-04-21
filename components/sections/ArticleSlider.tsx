@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
+import SliderSafeZone from '@/components/ui/SliderSafeZone';
 import type { Post } from '@/lib/types';
 import { SliderPreviewContextProvider, type PreviewSliderContext } from '@/components/sections/ArticleSliderContext';
 
@@ -28,6 +29,27 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const update = () => {
+      setCanPrev(emblaApi.canScrollPrev());
+      setCanNext(emblaApi.canScrollNext());
+    };
+    update();
+    emblaApi.on('select', update);
+    emblaApi.on('scroll', update);
+    emblaApi.on('reInit', update);
+    emblaApi.on('resize', update);
+    return () => {
+      emblaApi.off('select', update);
+      emblaApi.off('scroll', update);
+      emblaApi.off('reInit', update);
+      emblaApi.off('resize', update);
+    };
+  }, [emblaApi]);
 
   // Wenn alle Cards (bei Minimum-Breite) in den Viewport passen, Slider
   // deaktivieren. Cards werden dann zentriert und wachsen bis CARD_MAX_WIDTH,
@@ -59,8 +81,13 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
     if (!emblaApi) return;
 
     const slideCount = posts.length;
-    const FADE_LEFT = 250;
-    const FADE_RIGHT = 200;
+    const FADE_LEFT = 400;
+    const FADE_RIGHT = 320;
+    // Overshoot: Fade-Strecke reicht FADE_OVERSHOOT Pixel über den Viewport-
+    // Rand hinaus. Innere Grenze (voll sichtbar / Beginn Ausfaden) bleibt bei
+    // FADE_LEFT/RIGHT; am Bildschirmrand ist die Card dadurch noch minimal
+    // sichtbar statt komplett weg.
+    const FADE_OVERSHOOT = 80;
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
@@ -79,13 +106,13 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
         const distFromRight = rootRect.right - slideCenter;
 
         if (distFromLeft < FADE_LEFT) {
-          const t = Math.max(0, distFromLeft / FADE_LEFT);
+          const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           // Card am linken Rand → Origin rechts
           return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'right' as const };
         }
         if (distFromRight < FADE_RIGHT) {
-          const t = Math.max(0, distFromRight / FADE_RIGHT);
+          const t = Math.max(0, Math.min(1, (distFromRight + FADE_OVERSHOOT) / (FADE_RIGHT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           // Card am rechten Rand → Origin links
           return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'left' as const };
@@ -135,7 +162,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
 
   return (
     <SliderPreviewContextProvider value={previewCtx}>
-    <div ref={emblaRef} style={{ overflow: 'hidden', cursor: canScroll ? 'grab' : 'default', marginTop: 30 }}>
+    <div ref={emblaRef} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,
@@ -222,6 +249,18 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
           }}
         />
       </div>
+      {/* Safe-Zones links/rechts — blocken Hover/Klick auf Cards; PointerDown
+          bubbelt zum Embla-Viewport, Drag funktioniert weiter. */}
+      <SliderSafeZone
+        direction="left"
+        scrollable={canScroll && canPrev}
+        onClick={() => emblaApi?.scrollPrev()}
+      />
+      <SliderSafeZone
+        direction="right"
+        scrollable={canScroll && canNext}
+        onClick={() => emblaApi?.scrollNext()}
+      />
     </div>
     </SliderPreviewContextProvider>
   );

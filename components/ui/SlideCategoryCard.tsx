@@ -32,6 +32,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
   // 2-phase: width changes delayed when collapsing, immediate when expanding
   const [phase2Active, setPhase2Active] = useState(false);
   const phase2Timer = useRef<ReturnType<typeof setTimeout>>(null);
+  const [cardHovered, setCardHovered] = useState(false);
 
   useEffect(() => {
     if (phase2Timer.current) clearTimeout(phase2Timer.current);
@@ -73,16 +74,20 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
   return (
     <div
       data-slider-card
+      onMouseEnter={() => setCardHovered(true)}
+      onMouseLeave={() => setCardHovered(false)}
       style={{
         width: cardWidth,
-        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
         userSelect: 'none',
         WebkitUserSelect: 'none',
         paddingBottom: 5,
-        transition: `width ${T2}s ${phase2Ease}`,
+        // Hover-Scale nur im Card-Mode (nicht im Button-Mode, wo die Card
+        // zusammenklappt).
+        transform: cardHovered && !active ? 'scale(1.1)' : 'scale(1)',
+        transition: `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
       }}
     >
       {/* Visual — grauer Platzhalter */}

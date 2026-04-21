@@ -1,28 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import VisualLottie from "@/components/ui/VisualLottie";
-
-gsap.registerPlugin(ScrollTrigger);
-
-function SmallSpark() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block", flexShrink: 0 }}>
-      <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)" />
-    </svg>
-  );
-}
-
-function LargeSpark() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block", flexShrink: 0 }}>
-      <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)" />
-    </svg>
-  );
-}
+import StickySparkHeading from "@/components/ui/StickySparkHeading";
 
 interface CategoryHeaderProps {
   title?: string;
@@ -32,32 +12,6 @@ interface CategoryHeaderProps {
 }
 
 export default function CategoryHeader({ title, description, breadcrumbItems, children }: CategoryHeaderProps) {
-  const sparksRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = sparksRef.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { paddingLeft: 0, paddingRight: 0 },
-        {
-          paddingLeft: 200,
-          paddingRight: 200,
-          ease: "none",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 60%",
-            end: "top 21px",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-    });
-    return () => ctx.revert();
-  }, []);
-
   const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
     <div style={{
@@ -66,84 +20,65 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
       flexDirection: "column",
       alignItems: "center",
     }}>
-      {/* Breadcrumb über dem Visual */}
-      <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
-      {/* Visual Platzhalter — wrapper für seitliches Padding */}
-      <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
-        <div style={{
-          position: "relative",
-          width: "100%",
-          height: 250,
-          background: "transparent",
-          overflow: "hidden",
-        }}>
-          <VisualLottie seed={title} />
+      {/* Pre-Heading-Bereich (Breadcrumb + Visual) — skaliert mit beim Menü-Open */}
+      <div className="scalable-landing" style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}>
+        {/* Breadcrumb über dem Visual */}
+        <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
+          <Breadcrumb items={breadcrumbItems} />
         </div>
-      </div>
-      {/* H1 mit Sparks und Linien — sticky über dem Progressive Blur */}
-      {title && (
-        <div ref={sparksRef} style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 0,
-          width: "100%",
-          maxWidth: "1200px",
-          position: "sticky",
-          top: 21,
-          zIndex: 51,
-          paddingLeft: 40,
-          paddingRight: 40,
-          boxSizing: "border-box",
-        }}>
-          <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-          <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 10px" }}>
-            <SmallSpark />
-            <LargeSpark />
-          </div>
-          <h1 className="category-title" style={{
-            fontFamily: "var(--font-heading, 'Merriweather', serif)",
-            fontWeight: 700,
-            fontStyle: "italic",
-            fontSize: 42,
-            color: "var(--color-text-primary)",
-            textTransform: "uppercase",
-            letterSpacing: "0.02em",
-            lineHeight: 1.3,
-            whiteSpace: "nowrap",
-            margin: 0,
-            padding: "0 8px",
-          }}>
-            {title}
-          </h1>
-          <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 10px" }}>
-            <LargeSpark />
-            <SmallSpark />
-          </div>
-          <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-        </div>
-      )}
-      {/* Beschreibung unter dem Sparks-Titel */}
-      {description && (
-        <div style={{ width: "100%", maxWidth: "1200px", ...sidePadding, boxSizing: "border-box" }}>
-          <p style={{
+        {/* Visual Platzhalter — wrapper für seitliches Padding */}
+        <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
+          <div style={{
+            position: "relative",
             width: "100%",
-            maxWidth: 600,
-            margin: "23px auto 40px",
-            fontFamily: "Merriweather, serif",
-            fontSize: 18,
-            fontStyle: "italic",
-            lineHeight: 1.65,
-            color: "var(--color-text-medium)",
-            textAlign: "center",
+            height: 250,
+            background: "transparent",
+            overflow: "hidden",
           }}>
-            {description}
-          </p>
+            <VisualLottie seed={title} />
+          </div>
         </div>
-      )}
-      {children && (
-        <div style={{ width: "100%" }}>{children}</div>
+      </div>
+
+      {/* Sticky Heading — bringt .scalable-landing selbst mit, bleibt beim
+          Menü-Open über dem ProgressiveBlur (eigener Stacking-Context durch
+          sticky + z-index). */}
+      {title && <StickySparkHeading title={title} as="h1" />}
+
+      {/* Post-Heading-Bereich (Description + Children) — skaliert mit */}
+      {(description || children) && (
+        <div className="scalable-landing" style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}>
+          {description && (
+            <div style={{ width: "100%", maxWidth: "1200px", ...sidePadding, boxSizing: "border-box" }}>
+              <p style={{
+                width: "100%",
+                maxWidth: 600,
+                margin: "23px auto 40px",
+                fontFamily: "Merriweather, serif",
+                fontSize: 18,
+                fontStyle: "italic",
+                lineHeight: 1.65,
+                color: "var(--color-text-medium)",
+                textAlign: "center",
+              }}>
+                {description}
+              </p>
+            </div>
+          )}
+          {children && (
+            <div style={{ width: "100%" }}>{children}</div>
+          )}
+        </div>
       )}
     </div>
   );

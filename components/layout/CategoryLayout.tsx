@@ -25,7 +25,7 @@ export default function CategoryLayout({ title, titleSlug, description, mainCate
       <main className="min-h-screen bg-white">
         <CategoryHeader title={title} description={description} breadcrumbItems={breadcrumbItems} />
 
-        <div className="max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
+        <div className="scalable-landing max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
           {/* Posts Liste */}
           {posts && posts.length > 0 && (
             <ArticleList posts={posts} mainCategorySlug={mainCategorySlug} />
@@ -42,7 +42,9 @@ export default function CategoryLayout({ title, titleSlug, description, mainCate
           )}
         </div>
       </main>
-      <Footer />
+      <div className="scalable-landing">
+        <Footer />
+      </div>
     </>
   );
 }

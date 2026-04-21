@@ -37,7 +37,9 @@ export default function MainCategoryLayout({
           )}
         </CategoryHeader>
       </main>
-      <Footer />
+      <div className="scalable-landing">
+        <Footer />
+      </div>
     </>
   );
 }
