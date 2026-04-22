@@ -96,6 +96,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     getCardEl: (i) => sidebarCardRefs.current.get(i) ?? null,
   }), [latestPosts]);
   const sectionRef = useRef<HTMLElement>(null);
+  const alleinHandRef = useRef<HTMLParagraphElement>(null);
   const prevIndex = useRef(3);
   const prevDirection = useRef<"left" | "right" | null>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -185,6 +186,34 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     toolContentRefs.current.forEach((el) => {
       if (el) gsap.set(el, { height: 0, opacity: 0 });
     });
+    if (alleinHandRef.current) {
+      gsap.set(alleinHandRef.current, { opacity: 0, filter: "blur(10px)", y: 30 });
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = alleinHandRef.current;
+    const trigger = document.querySelector("[data-finanztools-heading]") as HTMLElement;
+    if (!el || !trigger) return;
+
+    const onScroll = () => {
+      const rect = trigger.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Start wenn Die Finanztools seine sticky-Position verlässt (bottom = vh - 140)
+      // Ende wenn es bei 50% Viewport angekommen ist
+      const startTop = vh - 140 - trigger.offsetHeight;
+      const endTop = vh * 0.5;
+      const progress = Math.max(0, Math.min(1, (startTop - rect.top) / (startTop - endTop)));
+      gsap.set(el, {
+        opacity: progress,
+        filter: `blur(${10 * (1 - progress)}px)`,
+        y: 30 * (1 - progress),
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -382,7 +411,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", marginLeft: 180 }}>
               Die Finanztools
             </p>
-            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0 }}>
+            <p ref={alleinHandRef} style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, opacity: 0 }}>
               Alles in eigener Hand
             </p>
           </div>
