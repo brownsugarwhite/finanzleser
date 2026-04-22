@@ -208,8 +208,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
       const target = isActive ? 1 : 0;
       gsap.to(cardProgObjs.current[i], {
         v: target,
-        duration: 0.55,
-        ease: "power2.out",
+        duration: isActive ? 0.75 : 0.75,
+        ease: isActive ? "back.out(1.2)" : "power2.inOut",
         overwrite: true,
         onUpdate: () => {
           setCardProgs([
@@ -224,8 +224,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
         gsap.to(contentEl, {
           height: isActive ? "auto" : 0,
           opacity: isActive ? 1 : 0,
-          duration: isActive ? 0.4 : 0.25,
-          ease: isActive ? "power2.out" : "power2.in",
+          duration: isActive ? 0.65 : 0.65,
+          ease: isActive ? "back.out(1.1)" : "power2.inOut",
           overwrite: true,
         });
       }
@@ -431,26 +431,28 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
                 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
                 const ss = (v: number) => v * v * (3 - 2 * v);
-                const easeIn2 = (v: number) => v * v;
-                const easeOut2 = (v: number) => 1 - (1 - v) * (1 - v);
+                const eo = (v: number) => 1 - (1 - v) * (1 - v);
+
+                // tc: geclampt [0,1] — kein Content-Overshoot; raw t für Kartenbreite (Bounce)
+                const tc = Math.min(1, Math.max(0, t));
 
                 const cardWidth = 100 + 370 * t;
-                const headerW = cardWidth - 54;
+                const headerW = (100 + 370 * tc) - 54;
 
-                // Icon X: easeIn (links zuerst), Icon Y: easeOut (dann nach unten, staggered)
-                const iconTX = easeIn2(clamp01(t / 0.65));
-                const iconTY = easeOut2(clamp01((t - 0.35) / 0.65));
+                // Phase 1 (0→0.67): Icon horizontal — easeOut, ~0.5s bei 0.75s Tween
+                const iconTX = eo(clamp01(tc / 0.67));
                 const iconLeft = ((headerW - 32) / 2) * (1 - iconTX);
-                const iconTop = 33 * iconTY; // 0 (oben) → 33px (neben Titel)
+                // Phase 2 (0.33→1.0): Icon vertikal + Titel paddingTop — easeOut, ~0.5s
+                const tY = eo(clamp01((tc - 0.33) / 0.67));
 
                 const tw = titleWidths[idx] || 0;
-                const titleCenterX = headerW / 2 - tw / 2;
-                const titleTranslateX = titleCenterX * (1 - ss(clamp01(t / 0.6))) + 40 * ss(clamp01(t / 0.6));
-                const titleFontSize = 13.5 + 10.5 * t;
+                const titleCenterX = (100 + 370 * tc - 54) / 2 - tw / 2;
+                const titleTranslateX = titleCenterX * (1 - ss(clamp01(tc / 0.67))) + 40 * ss(clamp01(tc / 0.67));
+                const titleFontSize = 13.5 + 10.5 * tc;
 
-                const bgR = Math.round(255 + (250 - 255) * t);
-                const bgG = Math.round(255 + (249 - 255) * t);
-                const bgB = Math.round(255 + (246 - 255) * t);
+                const bgR = Math.round(255 + (250 - 255) * tc);
+                const bgG = Math.round(255 + (249 - 255) * tc);
+                const bgB = Math.round(255 + (246 - 255) * tc);
 
                 return (
                   <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
@@ -467,9 +469,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         position: "relative",
                         cursor: "pointer",
                         flexShrink: 0,
-                        padding: "23px 27px",
+                        padding: `23px 27px ${14 + 9 * tc}px`,
                         width: cardWidth,
-                        borderRadius: 30 + 16 * t,
+                        borderRadius: 30 + 16 * tc,
                         willChange: "width, border-radius",
                         transition: "backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease",
                       }}
@@ -486,13 +488,13 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                             height: 32,
                             objectFit: "contain",
                             left: iconLeft,
-                            top: iconTop,
+                            top: 8 * tY,
                           }}
                         />
                         <span
                           style={{
                             display: "block",
-                            paddingTop: 37,
+                            paddingTop: 40 * (1 - tY) + 8 * tY,
                             fontFamily: "var(--font-heading, 'Merriweather', serif)",
                             fontWeight: 600,
                             fontSize: titleFontSize,
@@ -508,7 +510,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
                       {/* Card Content */}
                       <div ref={(el) => { toolContentRefs.current[idx] = el; }}>
-                        <div style={{ marginTop: 9 }}>
+                        <div style={{ marginTop: 5 }}>
                           <div style={{ width: isMobile ? "100%" : 420, display: "flex", flexDirection: "column", gap: 20 }}>
                             <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
                               {tool.description}
@@ -520,9 +522,12 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         </div>
                       </div>
 
-                      {/* Lesezeichen */}
+                      {/* Lesezeichen — faded nach t > 0.5 ein */}
                       {isActive && (
-                        <div style={{ position: "absolute", top: 0, right: 36, width: 28 }}>
+                        <div style={{
+                          position: "absolute", top: 0, right: 36, width: 28,
+                          opacity: Math.max(0, (tc - 0.5) * 2),
+                        }}>
                           <div style={{ width: 28, height: 9, background: tool.color }} />
                           <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
                             <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
