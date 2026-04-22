@@ -300,8 +300,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
           <div style={{ width: "100%", height: "300px", position: "relative" }}>
-            <div style={{ width: isMobile ? "100%" : 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end", marginTop: 36 }}>
-              <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right" }}>
+            <div style={{ width: isMobile ? "100%" : 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
+              <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
                 Newsletter
               </p>
               <p
@@ -332,7 +332,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             {!isMobile && (
               <div style={{
                 position: "absolute",
-                top: 0,
+                top: 23,
                 left: 370,
                 right: 23,
                 height: "30vw",
@@ -424,7 +424,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
               />
             </div>
           ) : (
-            <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
+            <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23, marginLeft: -15 }}>
               {TOOLS.map((tool, idx) => {
                 const isActive = activeCard === tool.title;
                 const t = cardProgs[idx];
@@ -436,8 +436,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                 // tc: geclampt [0,1] — kein Content-Overshoot; raw t für Kartenbreite (Bounce)
                 const tc = Math.min(1, Math.max(0, t));
 
-                const cardWidth = 100 + 370 * t;
-                const headerW = (100 + 370 * tc) - 54;
+                const cardWidth = 105 + 370 * t;
+                const headerW = (105 + 370 * tc) - 54;
 
                 // Phase 1 (0→0.67): Icon horizontal — easeOut, ~0.5s bei 0.75s Tween
                 const iconTX = eo(clamp01(tc / 0.67));
@@ -446,7 +446,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                 const tY = eo(clamp01((tc - 0.33) / 0.67));
 
                 const tw = titleWidths[idx] || 0;
-                const titleCenterX = (100 + 370 * tc - 54) / 2 - tw / 2;
+                const titleCenterX = (105 + 370 * tc - 54) / 2 - tw / 2;
                 const titleTranslateX = titleCenterX * (1 - ss(clamp01(tc / 0.67))) + 40 * ss(clamp01(tc / 0.67));
                 const titleFontSize = 13.5 + 10.5 * tc;
 
@@ -548,7 +548,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
           {/* Dots */}
           <div style={{
             flex: 1,
-            marginTop: 46,
+            marginTop: 72,
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat-y",
             backgroundPosition: "center top",
@@ -572,7 +572,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 36, paddingLeft: 23, display: isMobile ? "none" : "block" }}>
+        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 72, paddingLeft: 23, display: isMobile ? "none" : "block" }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",
