@@ -85,6 +85,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const [cardProgs, setCardProgs] = useState<number[]>([0, 0, 0]);
   const cardProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
+  const [contentProgs, setContentProgs] = useState<number[]>([0, 0, 0]);
+  const contentProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
   const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
   const { openPreview } = useArticlePreview();
 
@@ -216,6 +218,19 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             cardProgObjs.current[0].v,
             cardProgObjs.current[1].v,
             cardProgObjs.current[2].v,
+          ]);
+        },
+      });
+      gsap.to(contentProgObjs.current[i], {
+        v: target,
+        duration: 0.75,
+        ease: isActive ? "power2.out" : "power2.inOut",
+        overwrite: true,
+        onUpdate: () => {
+          setContentProgs([
+            contentProgObjs.current[0].v,
+            contentProgObjs.current[1].v,
+            contentProgObjs.current[2].v,
           ]);
         },
       });
@@ -433,8 +448,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                 const ss = (v: number) => v * v * (3 - 2 * v);
                 const eo = (v: number) => 1 - (1 - v) * (1 - v);
 
-                // tc: geclampt [0,1] — kein Content-Overshoot; raw t für Kartenbreite (Bounce)
-                const tc = Math.min(1, Math.max(0, t));
+                // tc: separates power2.out-Tween — Icon/Titel laufen synchron zur Karte ohne Clamp-Freeze
+                const tc = contentProgs[idx];
 
                 const cardWidth = 105 + 370 * t;
                 const headerW = (105 + 370 * tc) - 54;
@@ -461,10 +476,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                       onClick={() => setActiveCard(isActive ? null : tool.title)}
                       style={{
                         background: `rgba(${bgR}, ${bgG}, ${bgB}, 0.8)`,
-                        backdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
-                        WebkitBackdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
-                        boxShadow: isActive ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
-                        border: isActive ? "1px solid var(--color-text-medium)" : "none",
+                        backdropFilter: `brightness(${1.3 - 0.3 * tc}) blur(${13 + 3 * tc}px)`,
+                        WebkitBackdropFilter: `brightness(${1.3 - 0.3 * tc}) blur(${13 + 3 * tc}px)`,
+                        boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - tc)})`,
+                        border: `1px solid rgba(104, 108, 106, ${tc})`,
                         overflow: "hidden",
                         position: "relative",
                         cursor: "pointer",
@@ -473,7 +488,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         width: cardWidth,
                         borderRadius: 30 + 16 * tc,
                         willChange: "width, border-radius",
-                        transition: "backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease",
                       }}
                     >
                       {/* Icon + Title */}
@@ -488,13 +502,13 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                             height: 32,
                             objectFit: "contain",
                             left: iconLeft,
-                            top: 8 * tY,
+                            top: -2 + 10 * tY,
                           }}
                         />
                         <span
                           style={{
                             display: "block",
-                            paddingTop: 40 * (1 - tY) + 8 * tY,
+                            paddingTop: 34 * (1 - tY) + 8 * tY,
                             fontFamily: "var(--font-heading, 'Merriweather', serif)",
                             fontWeight: 600,
                             fontSize: titleFontSize,
@@ -509,7 +523,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                       </div>
 
                       {/* Card Content */}
-                      <div ref={(el) => { toolContentRefs.current[idx] = el; }}>
+                      <div ref={(el) => { toolContentRefs.current[idx] = el; }} style={{ height: 0, opacity: 0 }}>
                         <div style={{ marginTop: 5 }}>
                           <div style={{ width: isMobile ? "100%" : 420, display: "flex", flexDirection: "column", gap: 20 }}>
                             <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
@@ -522,18 +536,17 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         </div>
                       </div>
 
-                      {/* Lesezeichen — faded nach t > 0.5 ein */}
-                      {isActive && (
-                        <div style={{
+                      {/* Lesezeichen — faded nach tc > 0.5 ein, vor tc < 0.5 aus */}
+                      <div style={{
                           position: "absolute", top: 0, right: 36, width: 28,
                           opacity: Math.max(0, (tc - 0.5) * 2),
+                          pointerEvents: "none",
                         }}>
                           <div style={{ width: 28, height: 9, background: tool.color }} />
                           <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
                             <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
                           </svg>
                         </div>
-                      )}
                     </div>
                   </div>
                 );
