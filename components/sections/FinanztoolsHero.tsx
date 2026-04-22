@@ -97,6 +97,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   }), [latestPosts]);
   const sectionRef = useRef<HTMLElement>(null);
   const alleinHandRef = useRef<HTMLParagraphElement>(null);
+  const activeCardRef = useRef<string | null>(null);
+  const isScrollingToTarget = useRef(false);
+  const lastPastRef = useRef(false);
   const prevIndex = useRef(3);
   const prevDirection = useRef<"left" | "right" | null>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -231,6 +234,36 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     };
     measure();
     document.fonts.ready.then(measure);
+  }, []);
+
+  // Sync activeCard → ref (readable inside scroll listeners without closure stale-value issues)
+  useEffect(() => { activeCardRef.current = activeCard; }, [activeCard]);
+
+  // Auto-expand Rechner when buttons leave sticky-bottom; always collapse when scrolling back up
+  useEffect(() => {
+    const onScroll = () => {
+      // Skip while GSAP is programmatically scrolling to avoid premature collapse mid-animation
+      if (isScrollingToTarget.current || !sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const pastExit = rect.bottom <= window.innerHeight;
+
+      // Always collapse when scrolled back above exit, regardless of how card was opened
+      if (!pastExit && activeCardRef.current !== null) {
+        setActiveCard(null);
+        lastPastRef.current = false;
+        return;
+      }
+
+      // Edge-detection for expand: only trigger on the crossing, not continuously
+      if (pastExit !== lastPastRef.current) {
+        lastPastRef.current = pastExit;
+        if (pastExit && activeCardRef.current === null) {
+          setActiveCard("Rechner");
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -417,7 +450,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </div>
 
           {/* 3. Lottie Slider — stacked, slides enter from left/right */}
-          <div style={{ width: "100%", marginTop: isMobile ? -13 : -76, marginBottom: isMobile ? -130 : -270, overflow: "hidden", position: "relative" }}>
+          <div style={{ width: "100%", marginTop: isMobile ? -13 : -170, marginBottom: isMobile ? -130 : -380, overflow: "hidden", position: "relative" }}>
             {/* Sizing ghost — maintains aspect ratio */}
             <div style={{ width: "100%", aspectRatio: "1 / 1" }} />
             {TOOLS.map((_, i) => {
@@ -549,7 +582,29 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
                     {idx > 0 && <div style={{ marginBottom: 50 }}><Spark /></div>}
                     <div
-                      onClick={() => setActiveCard(isActive ? null : tool.title)}
+                      onClick={() => {
+                        const wasNoneActive = activeCardRef.current === null;
+                        setActiveCard(isActive ? null : tool.title);
+                        if (wasNoneActive && sectionRef.current) {
+                          const rect = sectionRef.current.getBoundingClientRect();
+                          const pastExit = rect.bottom <= window.innerHeight;
+                          if (!pastExit) {
+                            const targetY = window.scrollY + rect.bottom - window.innerHeight;
+                            isScrollingToTarget.current = true;
+                            gsap.to(window, {
+                              scrollTo: { y: Math.max(0, targetY) },
+                              duration: 0.8,
+                              ease: "power2.inOut",
+                              onComplete: () => {
+                                isScrollingToTarget.current = false;
+                                if (sectionRef.current) {
+                                  lastPastRef.current = sectionRef.current.getBoundingClientRect().bottom <= window.innerHeight;
+                                }
+                              },
+                            });
+                          }
+                        }
+                      }}
                       style={{
                         background: `rgba(${bgR}, ${bgG}, ${bgB}, 0.8)`,
                         backdropFilter: `brightness(${1.3 - 0.3 * tc}) blur(${13 + 3 * tc}px)`,

@@ -79,6 +79,24 @@ export default async function LandingPage() {
               über dem ProgressiveBlur. */}
           <StickySparkHeading title="Ratgeber" as="h2" />
 
+          <div className="scalable-landing" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ width: "100%", maxWidth: "1200px", padding: "0 clamp(20px, 4vw, 40px)", boxSizing: "border-box" }}>
+              <p style={{
+                width: "100%",
+                maxWidth: 600,
+                margin: "23px auto 0",
+                fontFamily: "Merriweather, serif",
+                fontSize: 18,
+                fontStyle: "italic",
+                lineHeight: 1.65,
+                color: "var(--color-text-medium)",
+                textAlign: "center",
+              }}>
+                Fundiertes Wissen für bessere Finanzentscheidungen. Unsere Ratgeber zu Steuern, Versicherungen, Geldanlage und Recht sind praxisnah formuliert, regelmäßig aktualisiert und kostenlos abrufbar.
+              </p>
+            </div>
+          </div>
+
           <div className="scalable-landing">
             {kategorieBlocks.map((block) => (
               block.children.length > 0 && (
