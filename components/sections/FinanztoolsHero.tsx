@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import lottie from "lottie-web";
@@ -54,7 +54,7 @@ const TOOLS = [
     cta: "Zu unseren Rechnern",
     href: "/finanztools/rechner",
     color: "var(--color-tool-rechner)",
-    icon: "/icons/rechner_icon.svg",
+    icon: "/icons/iconRechner.svg",
     anim: vergleicheAnim, // Platzhalter
   },
   {
@@ -63,7 +63,7 @@ const TOOLS = [
     cta: "Zu unseren Vergleichen",
     href: "/finanztools/vergleiche",
     color: "var(--color-tool-vergleiche)",
-    icon: "/icons/vergleich_icon.svg",
+    icon: "/icons/iconVergleich.svg",
     anim: vergleicheAnim,
   },
   {
@@ -72,7 +72,7 @@ const TOOLS = [
     cta: "Zu unseren Checklisten",
     href: "/finanztools/checklisten",
     color: "var(--color-tool-checklisten)",
-    icon: "/icons/checkliste_icon.svg",
+    icon: "/icons/iconCheckliste.svg",
     anim: vergleicheAnim, // Platzhalter
   },
 ];
@@ -81,7 +81,11 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
   const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const animRefs = useRef<(AnimationItem | null)[]>([null, null, null]);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const [cardProgs, setCardProgs] = useState<number[]>([0, 0, 0]);
+  const cardProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
+  const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
   const { openPreview } = useArticlePreview();
 
   const sidebarPreviewCtx = useMemo<PreviewSliderContext>(() => ({
@@ -173,6 +177,60 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
     return anim.currentFrame / Math.max(1, baselineEndFrame);
   }
+
+  useLayoutEffect(() => {
+    cardProgObjs.current.forEach(obj => gsap.killTweensOf(obj));
+    toolContentRefs.current.forEach((el) => {
+      if (el) gsap.set(el, { height: 0, opacity: 0 });
+    });
+  }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      const widths = TOOLS.map((tool) => {
+        const span = document.createElement("span");
+        span.style.cssText = `position:absolute;visibility:hidden;white-space:nowrap;font-family:var(--font-heading,'Merriweather',serif);font-size:13.5px;font-weight:600;`;
+        span.textContent = tool.title;
+        document.body.appendChild(span);
+        const w = span.offsetWidth;
+        document.body.removeChild(span);
+        return w;
+      });
+      setTitleWidths(widths);
+    };
+    measure();
+    document.fonts.ready.then(measure);
+  }, []);
+
+  useEffect(() => {
+    TOOLS.forEach((tool, i) => {
+      const isActive = activeCard === tool.title;
+      const target = isActive ? 1 : 0;
+      gsap.to(cardProgObjs.current[i], {
+        v: target,
+        duration: 0.55,
+        ease: "power2.out",
+        overwrite: true,
+        onUpdate: () => {
+          setCardProgs([
+            cardProgObjs.current[0].v,
+            cardProgObjs.current[1].v,
+            cardProgObjs.current[2].v,
+          ]);
+        },
+      });
+      const contentEl = toolContentRefs.current[i];
+      if (contentEl) {
+        gsap.to(contentEl, {
+          height: isActive ? "auto" : 0,
+          opacity: isActive ? 1 : 0,
+          duration: isActive ? 0.4 : 0.25,
+          ease: isActive ? "power2.out" : "power2.in",
+          overwrite: true,
+        });
+      }
+    });
+  }, [activeCard]);
 
   // Slide to active tool + start animation
   useEffect(() => {
@@ -369,15 +427,38 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23 }}>
               {TOOLS.map((tool, idx) => {
                 const isActive = activeCard === tool.title;
+                const t = cardProgs[idx];
+
+                const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+                const ss = (v: number) => v * v * (3 - 2 * v);
+                const easeIn2 = (v: number) => v * v;
+                const easeOut2 = (v: number) => 1 - (1 - v) * (1 - v);
+
+                const cardWidth = 100 + 370 * t;
+                const headerW = cardWidth - 54;
+
+                // Icon X: easeIn (links zuerst), Icon Y: easeOut (dann nach unten, staggered)
+                const iconTX = easeIn2(clamp01(t / 0.65));
+                const iconTY = easeOut2(clamp01((t - 0.35) / 0.65));
+                const iconLeft = ((headerW - 32) / 2) * (1 - iconTX);
+                const iconTop = 33 * iconTY; // 0 (oben) → 33px (neben Titel)
+
+                const tw = titleWidths[idx] || 0;
+                const titleCenterX = headerW / 2 - tw / 2;
+                const titleTranslateX = titleCenterX * (1 - ss(clamp01(t / 0.6))) + 40 * ss(clamp01(t / 0.6));
+                const titleFontSize = 13.5 + 10.5 * t;
+
+                const bgR = Math.round(255 + (250 - 255) * t);
+                const bgG = Math.round(255 + (249 - 255) * t);
+                const bgB = Math.round(255 + (246 - 255) * t);
+
                 return (
                   <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
                     {idx > 0 && <div style={{ marginBottom: 50 }}><Spark /></div>}
                     <div
                       onClick={() => setActiveCard(isActive ? null : tool.title)}
                       style={{
-                        width: isActive ? 470 : 100,
-                        borderRadius: isActive ? 46 : 30,
-                        background: isActive ? "rgba(250, 249, 246, 0.8)" : "rgba(255, 255, 255, 0.8)",
+                        background: `rgba(${bgR}, ${bgG}, ${bgB}, 0.8)`,
                         backdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
                         WebkitBackdropFilter: isActive ? "blur(16px)" : "brightness(1.3) blur(13px)",
                         boxShadow: isActive ? "none" : "0 3px 23px rgba(0, 0, 0, 0.02)",
@@ -387,38 +468,38 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                         cursor: "pointer",
                         flexShrink: 0,
                         padding: "23px 27px",
-                        transition: "background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, width 0.3s ease, border-radius 0.3s ease",
+                        width: cardWidth,
+                        borderRadius: 30 + 16 * t,
+                        willChange: "width, border-radius",
+                        transition: "backdrop-filter 0.3s ease, box-shadow 0.3s ease, border 0.3s ease",
                       }}
                     >
                       {/* Icon + Title */}
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: isActive ? "row" : "column",
-                          alignItems: "center",
-                          justifyContent: isActive ? "flex-start" : "center",
-                          gap: isActive ? 10 : 6,
-                          height: isActive ? "auto" : 50,
-                        }}
-                      >
+                      <div style={{ position: "relative", overflow: "visible" }}>
                         <img
                           src={tool.icon}
                           alt=""
                           aria-hidden
                           style={{
-                            width: 38,
-                            height: 38,
+                            position: "absolute",
+                            width: 32,
+                            height: 32,
                             objectFit: "contain",
-                            flexShrink: 0,
+                            left: iconLeft,
+                            top: iconTop,
                           }}
                         />
                         <span
                           style={{
+                            display: "block",
+                            paddingTop: 37,
                             fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                            fontSize: isActive ? 24 : 13.5,
                             fontWeight: 600,
+                            fontSize: titleFontSize,
                             color: "var(--color-text-primary)",
                             whiteSpace: "nowrap",
+                            transform: `translateX(${titleTranslateX}px)`,
+                            willChange: "transform",
                           }}
                         >
                           {tool.title}
@@ -426,7 +507,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                       </div>
 
                       {/* Card Content */}
-                      {isActive && (
+                      <div ref={(el) => { toolContentRefs.current[idx] = el; }}>
                         <div style={{ marginTop: 9 }}>
                           <div style={{ width: isMobile ? "100%" : 420, display: "flex", flexDirection: "column", gap: 20 }}>
                             <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
@@ -437,7 +518,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                             </div>
                           </div>
                         </div>
-                      )}
+                      </div>
 
                       {/* Lesezeichen */}
                       {isActive && (

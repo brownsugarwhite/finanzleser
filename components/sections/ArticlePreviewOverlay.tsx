@@ -1531,13 +1531,28 @@ function SlidePreview({
           left: PREVIEW_PADDING,
           width: IMAGE_WIDTH,
           height: IMAGE_HEIGHT,
-          background: imageUrl ? `url(${imageUrl}) center/cover no-repeat` : "transparent",
+          background: "transparent",
           borderRadius: IMAGE_RADIUS_CSS,
           pointerEvents: "none",
           overflow: "hidden",
         }}
       >
-        {!imageUrl && <VisualLottie seed={post.slug} />}
+        <VisualLottie seed={post.slug} />
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={post.featuredImage?.node.altText || ''}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              zIndex: 1,
+              display: "block",
+            }}
+          />
+        )}
         {/* Info-i — morphs with the image (CSS child), opacity animated during open/close */}
         <div
           ref={setInfoRef}

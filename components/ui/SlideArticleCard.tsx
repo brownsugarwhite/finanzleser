@@ -138,13 +138,25 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
             position: 'absolute',
             inset: 0,
             overflow: 'hidden',
-            background:
-              imageVisible && post.featuredImage?.node.sourceUrl
-                ? `url(${post.featuredImage.node.sourceUrl}) center/cover no-repeat`
-                : 'transparent',
           }}
         >
-          {!post.featuredImage?.node.sourceUrl && <VisualLottie seed={post.slug} />}
+          <VisualLottie seed={post.slug} />
+          {post.featuredImage?.node.sourceUrl && (
+            <img
+              src={post.featuredImage.node.sourceUrl}
+              alt={post.featuredImage.node.altText || ''}
+              loading="lazy"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                zIndex: 1,
+                display: 'block',
+              }}
+            />
+          )}
         </div>
         <div
           data-card-info
