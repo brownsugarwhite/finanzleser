@@ -13,7 +13,7 @@ import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
 import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
 import { isMainCategory } from "@/lib/categories";
-import type { Post, Rechner, Checkliste } from "@/lib/types";
+import type { Post } from "@/lib/types";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
 import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
 import InlineSVG from "@/components/ui/InlineSVG";
@@ -77,9 +77,9 @@ const TOOLS = [
   },
 ];
 
-export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner = [], checklisten = [] }: { posts?: Post[]; latestPosts?: Post[]; rechner?: Rechner[]; checklisten?: Checkliste[] }) {
-  const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
-  const animRefs = useRef<(AnimationItem | null)[]>([null, null, null]);
+export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
+  const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
+  const animRefs = useRef<(AnimationItem | null)[]>([null, null, null, null]);
   const cardsRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -96,10 +96,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
     getCardEl: (i) => sidebarCardRefs.current.get(i) ?? null,
   }), [latestPosts]);
   const sectionRef = useRef<HTMLElement>(null);
-  const prevIndex = useRef(-1);
+  const prevIndex = useRef(3);
   const prevDirection = useRef<"left" | "right" | null>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(-1);
+  const [currentSlide, setCurrentSlide] = useState(3);
   const [prevSlide, setPrevSlide] = useState(-1);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [slidePhase, setSlidePhase] = useState<"idle" | "prep" | "go">("idle");
@@ -249,7 +249,27 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
 
   // Slide to active tool + start animation
   useEffect(() => {
-    if (activeCard === null) return;
+    if (activeCard === null) {
+      const newIndex = 3;
+      if (newIndex === currentSlide) return;
+      const comesFromRight = newIndex > prevIndex.current;
+      const dir: "left" | "right" = comesFromRight ? "right" : "left";
+      setDirection(dir);
+      const prevIdx = prevIndex.current;
+      if (prevIdx >= 0 && prevIdx < 3 && animRefs.current[prevIdx]) {
+        setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
+      }
+      setPrevSlide(currentSlide);
+      setCurrentSlide(newIndex);
+      setSlidePhase("prep");
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        setSlidePhase("go");
+        prevDirection.current = dir;
+      }));
+      prevIndex.current = newIndex;
+      return;
+    }
+
     const newIndex = TOOLS.findIndex(t => t.title === activeCard);
     if (newIndex < 0 || newIndex === currentSlide) return;
 
@@ -314,7 +334,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
         <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
-          <div style={{ width: "100%", height: "300px", position: "relative" }}>
+          <div style={{ width: "100%", height: "390px", position: "relative" }}>
             <div style={{ width: isMobile ? "100%" : 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
               <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
                 Newsletter
@@ -347,7 +367,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             {!isMobile && (
               <div style={{
                 position: "absolute",
-                top: 23,
+                top:13,
                 left: 370,
                 right: 23,
                 height: "30vw",
@@ -357,17 +377,15 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             )}
           </div>
 
-          {/* 2. Subheading — sticky bottom */}
-          <div style={{ width: isMobile ? "100%" : 330, height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 256 }}>
-            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", margin: 0, textAlign: "right", paddingRight: 3 }}>
+          {/* 2. Subheading + Heading — sticky bottom */}
+          <div style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", alignItems: "baseline", gap: 10, paddingTop: 256 }}>
+            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", marginLeft: 180 }}>
               Die Finanztools
             </p>
+            <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0 }}>
+              Alles in eigener Hand
+            </p>
           </div>
-
-          {/* 3. Heading */}
-          <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, textAlign: "right", width: isMobile ? "auto" : 330 }}>
-            Alles in<br />eigener Hand
-          </p>
 
           {/* 3. Lottie Slider — stacked, slides enter from left/right */}
           <div style={{ width: "100%", marginTop: isMobile ? -13 : -76, marginBottom: isMobile ? -130 : -270, overflow: "hidden", position: "relative" }}>
@@ -417,6 +435,35 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
                 />
               );
             })}
+
+            {/* Slide 3: Intro-Visual — sichtbar wenn kein Tool aktiv */}
+            {(() => {
+              const isCurrent = currentSlide === 3;
+              const isExiting = prevSlide === 3 && prevSlide !== currentSlide;
+              const isVisible = isCurrent || isExiting;
+              let tx: string;
+              if (isCurrent) {
+                tx = slidePhase === "prep" ? (direction === "right" ? "100%" : "-100%") : "0%";
+              } else if (isExiting) {
+                tx = slidePhase === "prep" ? "0%" : (direction === "right" ? "-100%" : "100%");
+              } else {
+                tx = "100%";
+              }
+              return (
+                <div
+                  ref={(el) => { lottieRefs.current[3] = el; }}
+                  onTransitionEnd={() => { if (isExiting) { setSlidePhase("idle"); setPrevSlide(-1); } }}
+                  style={{
+                    position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
+                    transform: `translateX(${tx})`,
+                    transition: (isVisible && slidePhase === "go") ? "transform 0.5s ease" : "none",
+                    visibility: isVisible ? "visible" : "hidden",
+                  }}
+                >
+                  <InlineSVG src="/assets/visuals/visualFinanztools.svg" style={{ width: "100%", height: "100%" }} />
+                </div>
+              );
+            })()}
           </div>
 
           {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
@@ -598,7 +645,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 5).map((post, i) => {
+            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 4).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
@@ -712,60 +759,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], rechner 
             })}
           </div>
 
-          {/* Tool-Liste — wechselt je nach aktiver Card */}
-          {activeCard && (() => {
-            const toolMap: Record<string, { title: string; items: { title: string; slug: string }[] }> = {
-              "Rechner": { title: "Unsere Rechner", items: rechner.slice(0, 4).map(r => ({ title: r.title, slug: r.slug })) },
-              "Vergleiche": { title: "Unsere Vergleiche", items: [] },
-              "Checklisten": { title: "Unsere Checklisten", items: checklisten.slice(0, 4).map(c => ({ title: c.title, slug: c.slug })) },
-            };
-            const tool = toolMap[activeCard];
-            if (!tool || tool.items.length === 0) return null;
-
-            const hrefBase = activeCard === "Rechner" ? "/finanztools/rechner" : activeCard === "Checklisten" ? "/finanztools/checklisten" : "/finanztools/vergleiche";
-
-            return (
-              <div style={{ marginTop: 30 }}>
-                <p style={{
-                  fontFamily: "'Merriweather', serif",
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  lineHeight: 1.3,
-                  color: "var(--color-text-primary)",
-                  margin: "0 0 20px 0",
-                }}>
-                  {tool.title}
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-                  {tool.items.map((item) => (
-                    <Link key={item.slug} href={`${hrefBase}/${item.slug}`} className="latest-post-item" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <p className="latest-post-title" style={{
-                          fontSize: 16,
-                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                          fontWeight: 650,
-                          margin: 0,
-                          lineHeight: 1.3,
-                          hyphens: "auto",
-                          WebkitHyphens: "auto",
-                          wordBreak: "break-word",
-                        }} lang="de">
-                          {item.title}
-                        </p>
-                      </div>
-                      <div className="latest-post-icon" style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 23,
-                        background: "transparent",
-                        flexShrink: 0,
-                      }} />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
         </div>
       </div>
     </section>
