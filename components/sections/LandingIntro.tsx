@@ -30,6 +30,7 @@ export default function LandingIntro() {
   const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
+  const bubbleRef = useRef<HTMLDivElement>(null);
 
   const [searchBtnWidth, setSearchBtnWidth] = useState(0);
   const [searchContentWidth, setSearchContentWidth] = useState(0);
@@ -73,12 +74,16 @@ export default function LandingIntro() {
       }
     };
 
-    // Already scrolled on mount → collapse immediately
+    // Already scrolled on mount → collapse immediately + hide bubble
     if (window.scrollY > 5) {
       collapseSlot(false);
+      if (bubbleRef.current) gsap.set(bubbleRef.current, { opacity: 0 });
     }
 
-    const handleUndock = () => collapseSlot(true);
+    const handleUndock = () => {
+      collapseSlot(true);
+      if (bubbleRef.current) gsap.to(bubbleRef.current, { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" });
+    };
     window.addEventListener("maya-undocked", handleUndock);
     return () => window.removeEventListener("maya-undocked", handleUndock);
   }, []);
@@ -233,18 +238,49 @@ export default function LandingIntro() {
             </form>
           </div>
 
-          {/* Maya Dock Slot */}
-          <div
-            id="maya-dock-slot"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 70,
-              height: 70,
-              flexShrink: 0,
-            }}
-          />
+          {/* Maya Dock Slot + Speech Bubble */}
+          <div style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
+            {/* Speech bubble — fades out when Maya undocks */}
+            <div
+              ref={bubbleRef}
+              style={{
+                position: "absolute",
+                bottom: "calc(100% + 12px)",
+                right: -8,
+                pointerEvents: "none",
+              }}
+            >
+              {/*
+                SVG speech bubble — r=14, tail 11px tall at bottom-right
+                Tail center x=130 → aligns with Maya's center (35px from dock slot right = 165-35=130 from bubble left)
+                Shadow applied as SVG filter so it follows the shape incl. tail
+              */}
+              <svg width="165" height="76" viewBox="0 0 165 76" fill="none" overflow="visible">
+                <filter id="bs" x="-10%" y="-10%" width="130%" height="150%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="#000" floodOpacity="0.1" />
+                </filter>
+                <path
+                  d="M 14 0 H 151 Q 165 0 165 14 V 50 Q 165 64 151 64 H 141 L 130 76 L 119 64 H 14 Q 0 64 0 50 V 14 Q 0 0 14 0 Z"
+                  fill="white"
+                  stroke="rgba(0,0,0,0.18)"
+                  strokeWidth="1"
+                  filter="url(#bs)"
+                />
+                <text x="83" y="27" textAnchor="middle" fontFamily="Merriweather, serif" fontStyle="italic" fontSize="13" fill="rgba(0,0,0,0.55)">Fragen Sie unseren</text>
+                <text x="83" y="47" textAnchor="middle" fontFamily="Merriweather, serif" fontStyle="italic" fontSize="13" fill="rgba(0,0,0,0.55)">KI-Agenten MAYA</text>
+              </svg>
+            </div>
+            <div
+              id="maya-dock-slot"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 70,
+                height: 70,
+              }}
+            />
+          </div>
         </div>
 
       </div>
