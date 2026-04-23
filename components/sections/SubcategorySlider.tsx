@@ -225,7 +225,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       setArticleNav(null);
       setSpacerExpanded(false);
     } else {
-      const t = setTimeout(() => setSpacerExpanded(true), 300); // T1 = 0.3s
+      const t = setTimeout(() => setSpacerExpanded(true), MORPH_DURATION); // Phase 2 Start
       return () => clearTimeout(t);
     }
   }, [activeSlide]);
@@ -380,7 +380,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                 flexShrink: 0,
                 flexBasis: spacerExpanded ? 'calc(5vw + 23px)' : '5vw',
                 minWidth: 0,
-                transition: 'flex-basis 0.3s ease',
+                transition: `flex-basis ${MORPH_DURATION / 1000}s ease`,
               }}
             />
             {categories.map((cat, index) => {
@@ -440,11 +440,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                       gap: 5,
                       pointerEvents: 'none',
                     }}>
-                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height 0.3s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : '0.3s'}` }} />
+                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }} />
                       <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
                         <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
                       </svg>
-                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height 0.3s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : '0.3s'}` }} />
+                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }} />
                     </div>
                   )}
                 </div>
@@ -457,7 +457,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                 flexShrink: 0,
                 flexBasis: '5vw', // dauerhaft 5vw — Button-Mode endet rechts wie Card-Mode
                 minWidth: 0,
-                transition: 'flex-grow 0.3s ease',
+                transition: `flex-grow ${MORPH_DURATION / 1000}s ease`,
               }}
             />
           </div>
@@ -478,19 +478,18 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         {sliderPill.renderPill()}
       </div>
 
-      {/* Article Slider — absolut positioniert und bottom-anchored. Ein
-          Spacer-Div animiert die Container-Höhe von 0 → articleHeight parallel
-          zum Card-Visual-Collapse der Kategorie-Slider. Weil der Slider am
-          unteren Rand verankert ist, erscheinen die Artikel-Cards beim
-          Aufwachsen von oben nach unten — Visuals und Text sind während der
-          Animation sichtbar, nicht geclippt. Kein overflow:hidden. */}
+      {/* Article Slider — absolut positioniert mit top:0. Der Slider-Content
+          bleibt an fester Position am oberen Rand des Wrappers. Der Spacer
+          daneben animiert die Layout-Höhe 0 → articleHeight parallel zum
+          Category-Visual-Collapse und schiebt die Pagination nach unten.
+          Kein overflow:hidden. */}
       <div style={{ position: 'relative' }}>
         {articleMounted && renderedSlide !== null && renderedPosts.length > 0 && (
           <div
             ref={articleRef}
             style={{
               position: 'absolute',
-              bottom: 0,
+              top: 0,
               left: 0,
               right: 0,
               pointerEvents: phase1Visible ? 'auto' : 'none',
