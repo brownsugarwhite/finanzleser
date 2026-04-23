@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState, useCallback, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideCategoryCard, { type CategorySlide } from '@/components/ui/SlideCategoryCard';
 import SliderNav from '@/components/ui/SliderNav';
@@ -271,7 +271,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     };
   }, [catEmblaApi]);
   const prevFitsRef = useRef<boolean | null>(null);
-  useEffect(() => {
+  // useLayoutEffect: canScroll muss synchron vor dem nächsten Paint
+  // aktualisiert werden wenn activeSlide sich ändert — sonst blinkt die
+  // Pagination für 1 Frame weg beim Close-Morph.
+  useLayoutEffect(() => {
     if (!catEmblaApi) return;
     const check = () => {
       const spacerBasis = window.innerWidth * 0.05;
