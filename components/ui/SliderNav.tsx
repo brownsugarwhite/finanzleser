@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import InstagramDots from "@/components/ui/InstagramDots";
 
@@ -27,6 +27,7 @@ export default function SliderNav({
   nextLabel = "Nächste",
   visible = true,
 }: SliderNavProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const prevArrowRef = useRef<SVGSVGElement>(null);
   const prevLineRef = useRef<HTMLSpanElement>(null);
   const prevLabelRef = useRef<HTMLSpanElement>(null);
@@ -36,10 +37,36 @@ export default function SliderNav({
   const prevFirstRun = useRef(true);
   const nextFirstRun = useRef(true);
 
+  // inView: Flag via IntersectionObserver. Initial false, flippt auf true
+  // sobald die Nav das erste Mal in den Viewport kommt (und bleibt true).
+  // Kombiniert mit `visible` prop → effektive Sichtbarkeit: Nav animiert
+  // beim ersten Scroll-In ein (Pfeile scale 0→1, Dots scale 0→1).
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setInView(true);
+            io.disconnect();
+            return;
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const effectiveVisible = visible && inView;
+
   // Wenn die gesamte Nav unsichtbar geschaltet wird, verhalten sich Pfeile
   // wie im Disabled-Zustand (scale 0 + line scaleX 0 + label opacity 0).
-  const leftDisabled = !visible || current === 0;
-  const rightDisabled = !visible || current === total - 1;
+  const leftDisabled = !effectiveVisible || current === 0;
+  const rightDisabled = !effectiveVisible || current === total - 1;
 
   // Disable/enable animation for PREV (left) side:
   // out: arrow scale → 0, label fade out parallel (0.25s ease-in),
@@ -92,7 +119,7 @@ export default function SliderNav({
   }, [rightDisabled]);
 
   return (
-    <div className="slider-nav">
+    <div ref={containerRef} className="slider-nav">
       <button
         className="slider-nav-arrow-btn"
         onClick={onPrev}
@@ -121,17 +148,12 @@ export default function SliderNav({
         </span>
       </button>
 
-      <div
-        style={{
-          marginTop: 13,
-          transform: visible ? 'scale(1)' : 'scale(0)',
-          transition: 'transform 0.25s cubic-bezier(.4,0,.2,1)',
-        }}
-      >
+      <div style={{ marginTop: 13 }}>
         <InstagramDots
           current={current}
           total={total}
           onGoTo={onGoTo}
+          visible={effectiveVisible}
         />
       </div>
 
