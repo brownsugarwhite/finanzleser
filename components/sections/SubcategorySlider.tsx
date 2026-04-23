@@ -179,8 +179,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     // (MORPH_DURATION * 2) werden sie linear zwischen den Modes interpoliert,
     // damit die Scale der ersten/letzten Card nicht instant springt bei
     // Mode-Wechsel.
-    const CARD_PARAMS = { left: 400, right: 320, scaleMin: 0.6, overshoot: 80 };
-    const BTN_PARAMS = { left: 40, right: 40, scaleMin: 0, overshoot: 0 };
+    const CARD_PARAMS = { left: 400, right: 320, scaleMin: 0.2, overshoot: 150 };
+    const BTN_PARAMS = { left: 260, right: 200, scaleMin: 0, overshoot: 40 };
     const morphDurationMs = MORPH_DURATION * 2;
     const morphStartMs = performance.now();
     // Echter Mode-Wechsel nur bei button↔card, nicht bei Category-Switch
@@ -411,6 +411,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     spacerExpanded,
     hasLens: true,
     activeIndex: activeSlide,
+    slideStylesRef,
+    onClose: () => setActiveSlide(null),
   });
 
   if (!categories || categories.length === 0) return null;
@@ -426,7 +428,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       };
 
   return (
-    <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
+    <section style={{ width: '100%', overflowX: 'clip', padding: '40px 0' }}>
       {/* Slider-Stack mit Edge-Gradients (liegt über beiden Slidern + Pill).
           Eigene animierte Höhe (closed↔open) damit die Pagination smooth in
           eine Richtung wandert, ohne vom Natural-Flow des Contents beeinflusst. */}

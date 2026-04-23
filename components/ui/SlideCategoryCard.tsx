@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import VisualLottie from '@/components/ui/VisualLottie';
+import { X_EXTRA } from '@/hooks/useSliderPill';
 
 export interface CategorySlide {
   name: string;
@@ -64,7 +65,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
 
   const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
-  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
+  const cardWidth = phase2Active ? `${titleWidth + (selected ? X_EXTRA : 0)}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
 
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
@@ -155,11 +156,11 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
             fontWeight: phase2Active ? 600 : 700,
             fontSize: phase2Active ? '16px' : '20px',
             lineHeight: 1.3,
-            color: selected ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
+            color: (selected || (active && cardHovered)) ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
             margin: 0,
             padding: 0,
             whiteSpace: 'nowrap',
-            transition: `font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}, color 0.2s ease`,
+            transition: `font-size ${T2}s ${phase2Ease}, font-weight ${T2}s ${phase2Ease}, color 0.15s ease`,
           }}
         >
           <span style={{ color: 'inherit' }}>
