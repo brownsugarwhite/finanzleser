@@ -85,6 +85,14 @@ export function useSliderPill({
     return tRect.top + tRect.height / 2 - vTop;
   }, [emblaApi]);
 
+  /* ── Distance-based duration (same as TopNav) ── */
+
+  const lastPillX = useRef(0);
+  const getDuration = useCallback((targetX: number) => {
+    const dist = Math.abs(targetX - lastPillX.current);
+    return 0.4 + Math.min(dist / 350, 1) * 0.5;
+  }, []);
+
   /* ── Pill movement ── */
 
   const movePillTo = useCallback((cardEl: HTMLElement, overrideW?: number, overrideX?: number) => {
@@ -92,6 +100,8 @@ export function useSliderPill({
     const { x: measuredX, w: measuredW } = getCardVX(cardEl);
     const x = overrideX ?? measuredX;
     const w = overrideW ?? measuredW;
+    const d = getDuration(x);
+    lastPillX.current = x;
     const top = getTitleCenter(cardEl);
     const l3Top = top - PILL_H / 2 - 6;
     const l1Top = top - PILL_H / 2 - 10;
@@ -117,7 +127,7 @@ export function useSliderPill({
     gsap.killTweensOf(pillRef.current);
     gsap.to(pillRef.current, {
       top, x, width: w, height: PILL_H, opacity: 1, scale: 1,
-      duration: 0.7, ease: "back.out(1.5)",
+      duration: d, ease: "back.out(1.3)",
       onComplete: () => {
         // Final-Sync nach Tween-Ende (korrigiert Momentum-Drift)
         const idx = lastHoveredIdx.current;
@@ -133,11 +143,11 @@ export function useSliderPill({
     });
     if (line1Ref.current) {
       gsap.killTweensOf(line1Ref.current);
-      gsap.to(line1Ref.current, { top: l1Top, x, width: w, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" });
+      gsap.to(line1Ref.current, { top: l1Top, x, width: w, opacity: 1, scale: 1, duration: d + 0.08, ease: "back.out(1.3)" });
     }
     if (line3Ref.current) {
       gsap.killTweensOf(line3Ref.current);
-      gsap.to(line3Ref.current, { top: l3Top, x, width: w, opacity: 1, scale: 1, duration: 0.75, ease: "back.out(1.5)" });
+      gsap.to(line3Ref.current, { top: l3Top, x, width: w, opacity: 1, scale: 1, duration: d + 0.04, ease: "back.out(1.3)" });
     }
   }, [emblaApi, getCardVX, getTitleCenter]);
 
