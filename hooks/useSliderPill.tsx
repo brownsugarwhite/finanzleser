@@ -9,9 +9,6 @@ const PILL_R = 0;
 const PILL_BG = "var(--color-text-primary, #334a27)";
 const PILL_PX = 20;
 
-// Zusätzliche Breite für X-Icon im aktiven Button/Pill-Slot
-export const X_EXTRA = 20; // 12px icon + 4px margin + 4px Luft rechts
-
 // Snap-Delay zwischen Mode-Wechsel (null↔active) und Snap-to-Active
 const MODE_CHANGE_SNAP_DELAY = 720;
 
@@ -33,19 +30,10 @@ export interface UseSliderPillOptions {
   hasLens?: boolean;
   activeIndex?: number | null;
   slideStylesRef?: React.RefObject<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>;
-  onClose?: () => void;
 }
 
 /* ── Hook ───────────────────────────────────────── */
 
-/**
- * Clean Hover-Pill für den Category-Slider (Button-Mode).
- * Keine drag/momentum/fade-Effekte — einfach:
- * - Hover: Pill folgt Card unter Mauszeiger (smooth slide).
- * - MouseLeave: Pill snapt zum active Button (oder fadet aus).
- * - Scroll: Pill folgt der Card-Position (live sync).
- * - Mode-Change: Pill hide + snap to active.
- */
 export function useSliderPill({
   items,
   emblaApi,
@@ -56,7 +44,6 @@ export function useSliderPill({
   hasLens = true,
   activeIndex = null,
   slideStylesRef,
-  onClose,
 }: UseSliderPillOptions) {
   const pillRef = useRef<HTMLDivElement>(null);
   const pillBodyRef = useRef<HTMLDivElement>(null);
@@ -110,7 +97,6 @@ export function useSliderPill({
     const l1Top = top - PILL_H / 2 - 10;
 
     if (!pillVisible.current) {
-      // Fade-in an der Card-Position
       gsap.killTweensOf(pillRef.current);
       gsap.set(pillRef.current, { top, x, width: w, height: PILL_H, opacity: 0, scale: 1 });
       gsap.to(pillRef.current, { opacity: 1, duration: 0.2, ease: "power2.out" });
@@ -132,6 +118,18 @@ export function useSliderPill({
     gsap.to(pillRef.current, {
       top, x, width: w, height: PILL_H, opacity: 1, scale: 1,
       duration: 0.7, ease: "back.out(1.5)",
+      onComplete: () => {
+        // Final-Sync nach Tween-Ende (korrigiert Momentum-Drift)
+        const idx = lastHoveredIdx.current;
+        if (idx < 0 || !pillRef.current) return;
+        const c = cardRefs.current[idx];
+        if (!c) return;
+        const { x: fx, w: fw } = getCardVX(c);
+        const top2 = getTitleCenter(c);
+        gsap.set(pillRef.current, { x: fx, width: fw, top: top2 });
+        if (line1Ref.current) gsap.set(line1Ref.current, { x: fx, width: fw, top: top2 - PILL_H / 2 - 10 });
+        if (line3Ref.current) gsap.set(line3Ref.current, { x: fx, width: fw, top: top2 - PILL_H / 2 - 6 });
+      },
     });
     if (line1Ref.current) {
       gsap.killTweensOf(line1Ref.current);
@@ -142,7 +140,6 @@ export function useSliderPill({
       gsap.to(line3Ref.current, { top: l3Top, x, width: w, opacity: 1, scale: 1, duration: 0.75, ease: "back.out(1.5)" });
     }
   }, [emblaApi, getCardVX, getTitleCenter]);
-
 
   /** Bloom: Pill erscheint mit Scale-Pop an Ziel-Position. Für Mode-Change-Snap. */
   const bloomPillAt = useCallback((cardEl: HTMLElement) => {
@@ -182,9 +179,9 @@ export function useSliderPill({
       const card = cardRefs.current[idx];
       if (!card || !pillRef.current) return;
 
-      const { x: bxPill, w: bwPill } = getCardVX(card); // BCR-Werte (bereits durch CSS-scale beeinflusst)
-      const bx = bxPill + PILL_PX;       // card.left relativ zum Viewport
-      const bw = bwPill - PILL_PX * 2;  // card.width aus BCR
+      const { x: bxPill, w: bwPill } = getCardVX(card);
+      const bx = bxPill + PILL_PX;
+      const bw = bwPill - PILL_PX * 2;
 
       const edgeStyle = slideStylesRef?.current?.[idx + 1];
       const edgeOpacity = edgeStyle?.opacity ?? 1;
@@ -192,20 +189,16 @@ export function useSliderPill({
       const edgeOrigin = edgeStyle?.origin ?? 'center';
       const xOrig = edgeOrigin === 'right' ? '100%' : edgeOrigin === 'left' ? '0%' : '50%';
 
-      // Natürliche (unscalierte) Pill-Breite: BCR-Cardbreite durch edgeScale teilen
+      // Natürliche (unscalierte) Dimensionen für gleichmäßige Scale
       const naturalW = (edgeScale > 0 ? bw / edgeScale : bw) + PILL_PX * 2;
 
-      // Natürliches x je nach Transform-Origin des Buttons
       let naturalX: number;
       if (edgeOrigin === 'right') {
-        // Rechter Kartenrand ist fest → natural left = card_right - naturalCardW
         const naturalCardW = edgeScale > 0 ? bw / edgeScale : bw;
         naturalX = bx + bw - naturalCardW - PILL_PX;
       } else if (edgeOrigin === 'left') {
-        // Linker Kartenrand ist fest
         naturalX = bx - PILL_PX;
       } else {
-        // Mitte fest
         const naturalCardW = edgeScale > 0 ? bw / edgeScale : bw;
         naturalX = bx + (bw - naturalCardW) / 2 - PILL_PX;
       }
@@ -234,24 +227,17 @@ export function useSliderPill({
     const curr = activeIndex ?? null;
     prevActiveIndex.current = curr;
 
-    // Active → Active: smooth slide zu finalem x/w
-    // finalX: prev schrumpft → curr (wenn rechts davon) verschiebt sich um -X_EXTRA
-    // finalW: curr wächst auf titleWidths[curr] + X_EXTRA
+    // Active → Active: smooth slide zum neuen Button
     if (prev !== null && curr !== null && prev !== curr) {
       const card = cardRefs.current[curr];
       if (card) {
-        const { x: rawX } = getCardVX(card);
-        const xAdjust = prev < curr ? -X_EXTRA : 0;
-        const finalX = rawX + xAdjust;
-        const finalW = (titleWidths[curr] || 80) + X_EXTRA + PILL_PX * 2;
-        movePillTo(card, finalW, finalX);
+        movePillTo(card);
         lastHoveredIdx.current = curr;
       }
       return;
     }
 
-    // Mode change (null↔active): Pill + beide Linien instant hide,
-    // dann beim Open nach Delay Bloom auf active Button.
+    // Mode change (null↔active): Pill instant hide, dann beim Open Bloom
     if (pillRef.current) {
       gsap.killTweensOf(pillRef.current);
       gsap.set(pillRef.current, { opacity: 0, width: 1, scale: 1 });
@@ -292,7 +278,6 @@ export function useSliderPill({
 
   /* ── Mouse handlers ── */
 
-  // Pill bleibt fest am aktiven Button — kein Cursor-Tracking mehr.
   const handleContainerMove = useCallback((_e: React.MouseEvent) => {}, []);
   const handleContainerLeave = useCallback(() => {}, []);
 
@@ -303,7 +288,6 @@ export function useSliderPill({
 
     return (
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", zIndex: 4 }}>
-        {/* 2px Strich (höher) — transformOrigin auf Pill-Mittelpunkt, damit scale korrekt */}
         <div
           ref={(el) => {
             line1Ref.current = el;
@@ -311,7 +295,6 @@ export function useSliderPill({
           }}
           style={{ position: "absolute", top: 0, left: 0, height: "2px", width: "1px", opacity: 0, background: PILL_BG, pointerEvents: "none" }}
         />
-        {/* 4px Strich (näher an Pill) — transformOrigin auf Pill-Mittelpunkt */}
         <div
           ref={(el) => {
             line3Ref.current = el;
@@ -342,30 +325,12 @@ export function useSliderPill({
                 {items.map((item, i) => (
                   <React.Fragment key={item.slug}>
                     <span style={{
-                      flex: `0 0 ${(i === activeIndex ? (titleWidths[i] || 80) + X_EXTRA : titleWidths[i] || 80)}px`,
+                      flex: `0 0 ${titleWidths[i] || 80}px`,
                       fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       fontSize: "16px", fontWeight: 600, color: "#ffffff",
                       whiteSpace: "nowrap", display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
                       {item.name}
-                      {i === activeIndex && (
-                        <button
-                          type="button"
-                          aria-label="Kategorie schließen"
-                          onClick={(e) => { e.stopPropagation(); onClose?.(); }}
-                          style={{
-                            marginLeft: 4,
-                            background: "none", border: "none", padding: 0,
-                            cursor: "pointer", pointerEvents: "auto",
-                            display: "flex", alignItems: "center",
-                            color: "#ffffff", opacity: 0.8, lineHeight: 0,
-                          }}
-                        >
-                          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden>
-                            <path d="M1 1L10 10M10 1L1 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                          </svg>
-                        </button>
-                      )}
                     </span>
                     {i < items.length - 1 && (
                       <div style={{ flex: `0 0 ${gap}px`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -383,7 +348,7 @@ export function useSliderPill({
         </div>
       </div>
     );
-  }, [items, hasLens, titleWidths, gap, spacerExpanded, activeIndex, onClose]);
+  }, [items, hasLens, titleWidths, gap, spacerExpanded]);
 
   return {
     pillRef, lensRef, cardRefs,

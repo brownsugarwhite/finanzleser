@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import VisualLottie from '@/components/ui/VisualLottie';
-import { X_EXTRA } from '@/hooks/useSliderPill';
 
 export interface CategorySlide {
   name: string;
@@ -17,7 +16,7 @@ interface SlideCategoryCardProps {
   category: CategorySlide;
   parentSlug: string;
   active?: boolean;
-  selected?: boolean;
+
   titleWidth?: number;
   fluidWidth?: boolean;
 }
@@ -26,7 +25,7 @@ const CARD_WIDTH = 350;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
-export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
+export default function SlideCategoryCard({ category, parentSlug, active = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   // 2-phase: width changes delayed when collapsing, immediate when expanding
@@ -65,7 +64,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
 
   const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
-  const cardWidth = phase2Active ? `${titleWidth + (selected ? X_EXTRA : 0)}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
+  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
 
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
@@ -156,7 +155,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
             fontWeight: phase2Active ? 600 : 700,
             fontSize: phase2Active ? '16px' : '20px',
             lineHeight: 1.3,
-            color: (selected || (active && cardHovered)) ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
+            color: (active && cardHovered) ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
             margin: 0,
             padding: 0,
             whiteSpace: 'nowrap',

@@ -81,6 +81,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   const isArticleMode = activeSlide !== null && activePosts.length > 0;
 
+  // Merkt ob beim letzten Render bereits Button-Mode aktiv war.
+  // Verhindert Pre-Scroll bei Active→Active (nur bei card→button nötig).
+  const wasInButtonModeRef = useRef(false);
+
   // Behalte die zuletzt aktive Kategorie während der Schließen-Animation,
   // damit die Cards/Posts bis zum Ende der Ausblend-Animation weiter gerendert
   // werden können.
@@ -123,15 +127,15 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   const [fullyOpen, setFullyOpen] = useState(false);
   useEffect(() => {
     if (activeSlide !== null) {
+      const isFromCardMode = !wasInButtonModeRef.current;
+      wasInButtonModeRef.current = true;
       const startMorph = () => {
         setArticleMounted(true);
         setPhase1Visible(true);
       };
-      // Pre-scroll: NUR wenn der Slider gerade scrollbar ist UND der Button-
-      // Mode NICHT scrollbar sein wird (fits=true nach Morph). In dem Fall
-      // muss der Scroll auf 0, sonst gibt's am Ende einen Snap. Wenn
-      // Button-Mode auch scrollbar bleibt, kein Pre-scroll — User behält
-      // seine Scroll-Position.
+      // Pre-scroll: NUR beim Wechsel card→button (nicht bei Active→Active),
+      // und nur wenn alle Buttons passen (fits=true). Sonst würde scrollTo(0)
+      // ein laufendes Momentum unterbrechen und der Slider springt.
       const buttonFits = (() => {
         if (titleWidths.length !== categories.length) return false;
         const spacerBasis = window.innerWidth * 0.05;
@@ -140,7 +144,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         const needed = buttonContentWidth + gaps + 2 * spacerBasis + 40;
         return window.innerWidth >= needed;
       })();
-      const needsPreScroll = buttonFits && !!catEmblaApi?.canScrollPrev();
+      const needsPreScroll = isFromCardMode && buttonFits && !!catEmblaApi?.canScrollPrev();
       let tPre: ReturnType<typeof setTimeout> | null = null;
       if (needsPreScroll && catEmblaApi) {
         catEmblaApi.scrollTo(0, false);
@@ -156,6 +160,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         clearTimeout(tFull);
       };
     } else {
+      wasInButtonModeRef.current = false;
       setFullyOpen(false);
       setPhase2Visible(false);
       const t1 = setTimeout(() => setPhase1Visible(false), MORPH_DURATION);
@@ -412,7 +417,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     hasLens: true,
     activeIndex: activeSlide,
     slideStylesRef,
-    onClose: () => setActiveSlide(null),
   });
 
   if (!categories || categories.length === 0) return null;
@@ -500,7 +504,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                       category={cat}
                       parentSlug={parentSlug}
                       active={activeSlide !== null}
-                      selected={activeSlide === index}
+
                       titleWidth={titleWidths[index]}
                     />
                   </div>
