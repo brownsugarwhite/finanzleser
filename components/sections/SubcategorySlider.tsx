@@ -123,11 +123,38 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   const [fullyOpen, setFullyOpen] = useState(false);
   useEffect(() => {
     if (activeSlide !== null) {
-      setArticleMounted(true);
-      setPhase1Visible(true);
-      const t = setTimeout(() => setPhase2Visible(true), MORPH_DURATION);
-      const tFull = setTimeout(() => setFullyOpen(true), MORPH_DURATION * 2);
-      return () => { clearTimeout(t); clearTimeout(tFull); };
+      const startMorph = () => {
+        setArticleMounted(true);
+        setPhase1Visible(true);
+      };
+      // Pre-scroll: NUR wenn der Slider gerade scrollbar ist UND der Button-
+      // Mode NICHT scrollbar sein wird (fits=true nach Morph). In dem Fall
+      // muss der Scroll auf 0, sonst gibt's am Ende einen Snap. Wenn
+      // Button-Mode auch scrollbar bleibt, kein Pre-scroll — User behält
+      // seine Scroll-Position.
+      const buttonFits = (() => {
+        if (titleWidths.length !== categories.length) return false;
+        const spacerBasis = window.innerWidth * 0.05;
+        const gaps = (categories.length + 1) * CAT_GAP;
+        const buttonContentWidth = titleWidths.reduce((a, b) => a + b, 0);
+        const needed = buttonContentWidth + gaps + 2 * spacerBasis + 40;
+        return window.innerWidth >= needed;
+      })();
+      const needsPreScroll = buttonFits && !!catEmblaApi?.canScrollPrev();
+      let tPre: ReturnType<typeof setTimeout> | null = null;
+      if (needsPreScroll && catEmblaApi) {
+        catEmblaApi.scrollTo(0, false);
+        tPre = setTimeout(startMorph, 400);
+      } else {
+        startMorph();
+      }
+      const t = setTimeout(() => setPhase2Visible(true), MORPH_DURATION + (needsPreScroll ? 400 : 0));
+      const tFull = setTimeout(() => setFullyOpen(true), MORPH_DURATION * 2 + (needsPreScroll ? 400 : 0));
+      return () => {
+        if (tPre) clearTimeout(tPre);
+        clearTimeout(t);
+        clearTimeout(tFull);
+      };
     } else {
       setFullyOpen(false);
       setPhase2Visible(false);
@@ -135,28 +162,53 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       const t2 = setTimeout(() => setArticleMounted(false), MORPH_DURATION * 2 + 50);
       return () => { clearTimeout(t1); clearTimeout(t2); };
     }
-  }, [activeSlide]);
+  }, [activeSlide, catEmblaApi]);
 
   // Category scroll tracking
   const slideStylesRef = useRef<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
+  // Vorheriger Mode (button vs card) zur Erkennung von echten Mode-Wechseln.
+  // Category-Wechsel (X → Y, beide non-null) ist KEIN Mode-Wechsel → FADE-
+  // Params nicht interpolieren (sonst springt der erste Button).
+  const prevActiveModeRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (!catEmblaApi) return;
 
     const slideCount = categories.length;
-    const FADE_LEFT = activeSlide !== null ? 430 : 400;
-    const FADE_RIGHT = activeSlide !== null ? 360 : 320;
-    const SCALE_MIN = activeSlide !== null ? 0.2 : 0.6;
-    // Overshoot: Fade-Strecke reicht FADE_OVERSHOOT Pixel über den Viewport-
-    // Rand hinaus. Cards sind am Bildschirmrand noch minimal sichtbar statt
-    // komplett weg; innere Schwellen (voll sichtbar / Beginn Ausfaden) bleiben.
-    const FADE_OVERSHOOT = 80;
+    // FADE-Params: volle Werte für Card- und Button-Mode. Während Morph
+    // (MORPH_DURATION * 2) werden sie linear zwischen den Modes interpoliert,
+    // damit die Scale der ersten/letzten Card nicht instant springt bei
+    // Mode-Wechsel.
+    const CARD_PARAMS = { left: 400, right: 320, scaleMin: 0.6, overshoot: 80 };
+    const BTN_PARAMS = { left: 40, right: 40, scaleMin: 0, overshoot: 0 };
+    const morphDurationMs = MORPH_DURATION * 2;
+    const morphStartMs = performance.now();
+    // Echter Mode-Wechsel nur bei button↔card, nicht bei Category-Switch
+    // (X → Y, beide non-null).
+    const currMode = activeSlide !== null;
+    const isModeChange = prevActiveModeRef.current !== currMode;
+    prevActiveModeRef.current = currMode;
+
     const FULL: { opacity: number; scale: number; origin: 'left' | 'right' | 'center' } = { opacity: 1, scale: 1, origin: 'center' };
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, catEmblaApi.scrollProgress()));
       const idx = Math.max(0, Math.min(slideCount - 1, Math.round(progress * (slideCount - 1))));
       setSelectedIndex(idx);
+
+      // Morph-Progress: 0 = Start dieser Effekt-Iteration (vorheriger Mode),
+      // 1 = fully in neuem Mode. Nur interpolieren bei echtem Mode-Wechsel.
+      // Bei Category-Switch (X → Y) bleibt cardness stabil bei 0 (button).
+      const sinceMorph = performance.now() - morphStartMs;
+      const mProgress = Math.min(1, Math.max(0, sinceMorph / morphDurationMs));
+      // cardness: 0 = fully button, 1 = fully card
+      const cardness = isModeChange
+        ? (activeSlide !== null ? (1 - mProgress) : mProgress)
+        : (activeSlide !== null ? 0 : 1);
+      const FADE_LEFT = BTN_PARAMS.left + (CARD_PARAMS.left - BTN_PARAMS.left) * cardness;
+      const FADE_RIGHT = BTN_PARAMS.right + (CARD_PARAMS.right - BTN_PARAMS.right) * cardness;
+      const SCALE_MIN = BTN_PARAMS.scaleMin + (CARD_PARAMS.scaleMin - BTN_PARAMS.scaleMin) * cardness;
+      const FADE_OVERSHOOT = BTN_PARAMS.overshoot + (CARD_PARAMS.overshoot - BTN_PARAMS.overshoot) * cardness;
 
       const rootNode = catEmblaApi.rootNode();
       const rootRect = rootNode.getBoundingClientRect();
@@ -173,12 +225,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         if (distFromLeft < FADE_LEFT) {
           const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
-          // Card am linken Rand → Origin rechts (Abstand zum nächsten inneren Nachbarn bleibt konstant)
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'right' };
         } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, Math.min(1, (distFromRight + FADE_OVERSHOOT) / (FADE_RIGHT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
-          // Card am rechten Rand → Origin links
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'left' };
         }
 
@@ -200,11 +250,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     catEmblaApi.on('resize', update);
     update();
 
-    // Während des Morphs (T1 + T2) jeden Frame neu messen, da sich Card-Breiten
-    // über CSS-Transitions ändern. RAF statt setInterval — sauberer Tick-Rhythmus.
+    // RAF während des Morphs — tickt die Interpolation der FADE-Params
+    // sowie die per-Frame Layout-Messung (Card-Breiten ändern sich via CSS).
     let rafId = 0;
     let cancelled = false;
-    const morphEndsAt = performance.now() + MORPH_DURATION * 2 + 50;
+    const morphEndsAt = morphStartMs + morphDurationMs + 50;
     const morphTick = () => {
       if (cancelled) return;
       update();
@@ -282,6 +332,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Pagination für 1 Frame weg beim Close-Morph.
   useLayoutEffect(() => {
     if (!catEmblaApi) return;
+    let reInitTimer: ReturnType<typeof setTimeout> | null = null;
+    const doReInit = (fits: boolean) => {
+      const savedIndex = catEmblaApi.selectedScrollSnap();
+      catEmblaApi.reInit({ watchDrag: !fits });
+      if (savedIndex > 0) catEmblaApi.scrollTo(savedIndex, true);
+    };
     const check = () => {
       const spacerBasis = window.innerWidth * 0.05;
       const gaps = (categories.length + 1) * CAT_GAP;
@@ -292,16 +348,24 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       const needed = contentWidth + gaps + 2 * spacerBasis + 40;
       const fits = window.innerWidth >= needed;
       setCanScroll(!fits);
-      // reInit nur wenn sich der Scroll-Status tatsächlich ändert —
-      // sonst springt der Scroll-Position bei Active→Active-Wechseln.
       if (prevFitsRef.current !== fits) {
         prevFitsRef.current = fits;
-        catEmblaApi.reInit({ watchDrag: !fits });
+        if (activeSlide === null) {
+          // Auf Close: reInit verzögern bis nach Morph-Ende, damit embla die
+          // bereits zurückanimierten Card-Breiten misst (nicht die Button-
+          // Breiten während der Animation). Verhindert 1px-Snap am Ende.
+          reInitTimer = setTimeout(() => doReInit(fits), MORPH_DURATION * 2 + 50);
+        } else {
+          doReInit(fits);
+        }
       }
     };
     check();
     window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    return () => {
+      window.removeEventListener('resize', check);
+      if (reInitTimer) clearTimeout(reInitTimer);
+    };
   }, [catEmblaApi, categories.length, titleWidths, activeSlide]);
 
   // Delay static-layout expand on close so Card morphs first, THEN spacer grows
@@ -347,7 +411,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     spacerExpanded,
     hasLens: true,
     activeIndex: activeSlide,
-    slideStyles,
   });
 
   if (!categories || categories.length === 0) return null;
@@ -562,12 +625,15 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         />
       </div>
 
-      {/* Shared SliderNav — nur wenn Category- ODER Article-Slider scrollbar */}
-      {((canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)) && (
-        <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
-          <SliderNav {...navProps} />
-        </div>
-      )}
+      {/* Shared SliderNav — immer gemountet, damit die Pfeile und Dots beim
+          Wegfall der Sichtbarkeits-Bedingung smooth ausfahren (statt hart zu
+          unmounten). `visible` steuert die Scale-Animation. */}
+      <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
+        <SliderNav
+          {...navProps}
+          visible={(canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)}
+        />
+      </div>
     </section>
   );
 }

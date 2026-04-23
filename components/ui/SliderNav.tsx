@@ -12,6 +12,9 @@ interface SliderNavProps {
   onGoTo: (index: number) => void;
   prevLabel?: string;
   nextLabel?: string;
+  /** Wenn false fährt die gesamte Nav smooth aus (Pfeile scale 0, dots scale 0)
+   *  ohne zu unmounten. */
+  visible?: boolean;
 }
 
 export default function SliderNav({
@@ -22,6 +25,7 @@ export default function SliderNav({
   onGoTo,
   prevLabel = "Vorherige",
   nextLabel = "Nächste",
+  visible = true,
 }: SliderNavProps) {
   const prevArrowRef = useRef<SVGSVGElement>(null);
   const prevLineRef = useRef<HTMLSpanElement>(null);
@@ -32,8 +36,10 @@ export default function SliderNav({
   const prevFirstRun = useRef(true);
   const nextFirstRun = useRef(true);
 
-  const leftDisabled = current === 0;
-  const rightDisabled = current === total - 1;
+  // Wenn die gesamte Nav unsichtbar geschaltet wird, verhalten sich Pfeile
+  // wie im Disabled-Zustand (scale 0 + line scaleX 0 + label opacity 0).
+  const leftDisabled = !visible || current === 0;
+  const rightDisabled = !visible || current === total - 1;
 
   // Disable/enable animation for PREV (left) side:
   // out: arrow scale → 0, label fade out parallel (0.25s ease-in),
@@ -115,7 +121,13 @@ export default function SliderNav({
         </span>
       </button>
 
-      <div style={{ marginTop: 13 }}>
+      <div
+        style={{
+          marginTop: 13,
+          transform: visible ? 'scale(1)' : 'scale(0)',
+          transition: 'transform 0.25s cubic-bezier(.4,0,.2,1)',
+        }}
+      >
         <InstagramDots
           current={current}
           total={total}
