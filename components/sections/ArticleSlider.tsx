@@ -34,6 +34,9 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     return () => cancelAnimationFrame(raf);
   }, []);
   const effectivePhase1 = mounted && phase1Visible;
+  // Sparks + Linien: Timing an Phase 2 gekoppelt (Button-Breite ändert sich).
+  // Card-Visuals bleiben weiter an Phase 1.
+  const effectivePhase2 = mounted && phase2Visible;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     loop: false,
@@ -243,7 +246,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                 }}>
                   <div style={{
                     width: 1,
-                    height: effectivePhase1 ? 70 : 0,
+                    height: effectivePhase2 ? 70 : 0,
                     background: 'var(--fill-0, #334A27)',
                     transition: `height ${SPARK_DURATION}s ease`,
                   }} />
@@ -262,7 +265,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                   </svg>
                   <div style={{
                     width: 1,
-                    height: effectivePhase1 ? 70 : 0,
+                    height: effectivePhase2 ? 70 : 0,
                     background: 'var(--fill-0, #334A27)',
                     transition: `height ${SPARK_DURATION}s ease`,
                   }} />
