@@ -17,6 +17,7 @@ export interface SlideArticleCardProps {
   bookmarkType?: BookmarkType;
   phase1Visible?: boolean;
   phase2Visible?: boolean;
+  categoryTransition?: 'idle' | 'out' | 'in';
 }
 
 const PHASE_DURATION = 0.3;
@@ -31,7 +32,7 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
 export const CARD_MIN_WIDTH = 265;
 export const CARD_MAX_WIDTH = 450;
 
-export default function SlideArticleCard({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true }: SlideArticleCardProps) {
+export default function SlideArticleCard({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
@@ -125,7 +126,7 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
         transition: 'transform 0.3s ease',
       }}
     >
-      {/* Visual — grauer Platzhalter (mit Info-Button unten rechts) */}
+      {/* Visual */}
       <div
         ref={imageRef}
         data-flip-id={`preview-${post.slug}-image`}
@@ -134,11 +135,15 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
           width: '100%',
           height: 210,
           flexShrink: 0,
-          transform: phase1Visible ? 'scale(1)' : 'scale(0)',
-          transformOrigin: 'top center',
-          filter: phase1Visible ? 'blur(0px)' : 'blur(16px)',
-          opacity: phase1Visible ? 1 : 0,
-          transition: `transform ${PHASE_DURATION}s ease, filter ${PHASE_DURATION}s ease, opacity ${PHASE_DURATION}s ease`,
+          transform: categoryTransition === 'out' ? 'scale(0)' : phase1Visible ? 'scale(1)' : 'scale(0)',
+          transformOrigin: categoryTransition !== 'idle' ? 'center center' : 'top center',
+          filter: categoryTransition === 'out' ? 'blur(0px)' : phase1Visible ? 'blur(0px)' : 'blur(16px)',
+          opacity: categoryTransition === 'out' ? 0 : phase1Visible ? 1 : 0,
+          transition: categoryTransition === 'out'
+            ? 'transform 0.2s ease-in, opacity 0.2s ease-in'
+            : categoryTransition === 'in'
+            ? 'transform 0.2s ease-out, opacity 0.2s ease-out'
+            : `transform ${PHASE_DURATION}s ease, filter ${PHASE_DURATION}s ease, opacity ${PHASE_DURATION}s ease`,
           willChange: 'transform, filter',
         }}
       >
@@ -168,35 +173,39 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
             />
           )}
         </div>
-        <div
-          data-card-info
-          onMouseEnter={() => setInfoHovered(true)}
-          onMouseLeave={() => setInfoHovered(false)}
-          style={{
-            position: 'absolute',
-            bottom: 13,
-            right: 13,
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-            border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-            background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            flexShrink: 0,
-            opacity: phase2Visible ? 1 : 0,
-            transition: `background 0.15s, border 0.15s, opacity ${PHASE_DURATION}s ease`,
-            ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-          }}
-        >
-          <InlineSVG
-            src="/icons/info_i.svg"
-            alt="Info"
-            style={{ width: 9, height: 17 }}
-          />
-        </div>
+      </div>
+
+      {/* Info-i — außerhalb imageRef damit es beim Visual-Scale nicht mitskaliert */}
+      <div
+        data-card-info
+        onMouseEnter={() => setInfoHovered(true)}
+        onMouseLeave={() => setInfoHovered(false)}
+        style={{
+          position: 'absolute',
+          top: 161,
+          right: 13,
+          width: 36,
+          height: 36,
+          borderRadius: '50%',
+          border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
+          background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          flexShrink: 0,
+          opacity: categoryTransition === 'out' ? 0 : phase2Visible ? 1 : 0,
+          transition: categoryTransition === 'out'
+            ? `opacity 0.2s ease-in, background 0.15s, border 0.15s`
+            : `opacity ${PHASE_DURATION}s ease, background 0.15s, border 0.15s`,
+          ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
+        }}
+      >
+        <InlineSVG
+          src="/icons/info_i.svg"
+          alt="Info"
+          style={{ width: 9, height: 17 }}
+        />
       </div>
 
       {/* Text + Footer — fadet beim Preview-Öffnen aus */}
@@ -204,8 +213,10 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        opacity: phase2Visible ? 1 : 0,
-        transition: `opacity ${PHASE_DURATION}s ease`,
+        opacity: categoryTransition === 'out' ? 0 : phase2Visible ? 1 : 0,
+        transition: categoryTransition === 'out'
+          ? 'opacity 0.2s ease-in'
+          : `opacity ${PHASE_DURATION}s ease`,
       }}>
         <div style={{
           width: '100%',

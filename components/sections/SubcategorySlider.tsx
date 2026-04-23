@@ -85,14 +85,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Verhindert Pre-Scroll bei Active→Active (nur bei card→button nötig).
   const wasInButtonModeRef = useRef(false);
 
-  // Behalte die zuletzt aktive Kategorie während der Schließen-Animation,
-  // damit die Cards/Posts bis zum Ende der Ausblend-Animation weiter gerendert
-  // werden können.
-  const lastActiveRef = useRef<number | null>(null);
-  useEffect(() => {
-    if (activeSlide !== null) lastActiveRef.current = activeSlide;
-  }, [activeSlide]);
-  const renderedSlide = activeSlide ?? lastActiveRef.current;
+  // renderedSlide als State: entkoppelt vom activeSlide für den A→B-OUT-Delay.
+  const [renderedSlide, setRenderedSlide] = useState<number | null>(null);
+  const prevCatRef = useRef<number | null>(null);
+  const [categoryTransition, setCategoryTransition] = useState<'idle' | 'out' | 'in'>('idle');
+
   const renderedPosts = renderedSlide !== null
     ? (allCategoryPosts[categories[renderedSlide]?.slug] || [])
     : [];
@@ -126,7 +123,26 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Transition, visible im Ruhezustand), damit Card-Hover-Scale nicht geclippt.
   const [fullyOpen, setFullyOpen] = useState(false);
   useEffect(() => {
+    const prev = prevCatRef.current;
+    prevCatRef.current = activeSlide;
+
+    // A → B: OUT-Animation (200ms), dann Slide wechseln + IN-Animation
+    if (activeSlide !== null && prev !== null && activeSlide !== prev) {
+      setCategoryTransition('out');
+      const tIdleRef = { current: null as ReturnType<typeof setTimeout> | null };
+      const tSwitch = setTimeout(() => {
+        setRenderedSlide(activeSlide);
+        setCategoryTransition('in');
+        tIdleRef.current = setTimeout(() => setCategoryTransition('idle'), 300);
+      }, 200);
+      return () => {
+        clearTimeout(tSwitch);
+        if (tIdleRef.current) clearTimeout(tIdleRef.current);
+      };
+    }
+
     if (activeSlide !== null) {
+      setRenderedSlide(activeSlide);
       const isFromCardMode = !wasInButtonModeRef.current;
       wasInButtonModeRef.current = true;
       const startMorph = () => {
@@ -164,7 +180,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       setFullyOpen(false);
       setPhase2Visible(false);
       const t1 = setTimeout(() => setPhase1Visible(false), MORPH_DURATION);
-      const t2 = setTimeout(() => setArticleMounted(false), MORPH_DURATION * 2 + 50);
+      const t2 = setTimeout(() => {
+        setArticleMounted(false);
+        setRenderedSlide(null);
+      }, MORPH_DURATION * 2 + 50);
       return () => { clearTimeout(t1); clearTimeout(t2); };
     }
   }, [activeSlide, catEmblaApi]);
@@ -587,6 +606,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
               onCanScrollChange={handleArticleCanScrollChange}
               phase1Visible={phase1Visible}
               phase2Visible={phase2Visible}
+              categoryTransition={categoryTransition}
             />
           </div>
         )}
