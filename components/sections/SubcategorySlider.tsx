@@ -69,6 +69,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     setArticleCanScroll(scroll);
   }, []);
 
+  // Slider-Stack hat feste Höhen für Card- und Button-Mode. Zwischen diesen
+  // wird mit ease-in-out über die volle Morphdauer animiert. So wandert die
+  // Pagination smooth in eine Richtung, unabhängig vom Natural-Flow des Contents.
+  const STACK_HEIGHT_CLOSED = 350;
+  const STACK_HEIGHT_OPEN = 440;
+
   const activePosts = activeSlide !== null
     ? allCategoryPosts[categories[activeSlide]?.slug] || []
     : [];
@@ -358,8 +364,15 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   return (
     <section style={{ width: '100%', overflow: 'hidden', padding: '40px 0' }}>
-      {/* Slider-Stack mit Edge-Gradients (liegt über beiden Slidern + Pill) */}
-      <div style={{ position: 'relative' }}>
+      {/* Slider-Stack mit Edge-Gradients (liegt über beiden Slidern + Pill).
+          Eigene animierte Höhe (closed↔open) damit die Pagination smooth in
+          eine Richtung wandert, ohne vom Natural-Flow des Contents beeinflusst. */}
+      <div
+        style={{
+          position: 'relative',
+          height: activeSlide !== null ? STACK_HEIGHT_OPEN : STACK_HEIGHT_CLOSED,
+          transition: `height ${(MORPH_DURATION * 2) / 1400}s ease-out`,
+        }}>
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
         <div

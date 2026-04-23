@@ -244,6 +244,10 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
               hyphens: 'auto',
               WebkitHyphens: 'auto',
               overflowWrap: 'break-word',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
             }}
           >
             {titleText}
