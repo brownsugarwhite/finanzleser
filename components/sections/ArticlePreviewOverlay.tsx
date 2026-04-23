@@ -144,8 +144,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
   const [closeHovered, setCloseHovered] = useState(false);
   const [closeActive, setCloseActive] = useState(false);
-  const leftDisabled = currentIndex === 0;
-  const rightDisabled = currentIndex === posts.length - 1;
+  const [phase, setPhase] = useState<Phase>("opening");
+  // Arrows "disabled" außerhalb der slider-Phase → bestehende disable-Animation
+  // spielt beim Öffnen/Schließen (scale/line/vline in/out).
+  const leftDisabled = phase !== "slider" || currentIndex === 0;
+  const rightDisabled = phase !== "slider" || currentIndex === posts.length - 1;
   const leftFirstRun = useRef(true);
   const rightFirstRun = useRef(true);
 
@@ -240,7 +243,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
   const isExitingRef = useRef(false);
   const initialIndexRef = useRef(currentIndex);
-  const [phase, setPhase] = useState<Phase>("opening");
 
   // ── Side effects + cleanup ────────────────────────────────────────────────
   useEffect(() => {
@@ -452,20 +454,24 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Fade in X when entering slider phase ──────────────────────────────────
+  // ── Fade in X + dots scale-in bei Entry in slider phase; reverse bei closing ──
   useLayoutEffect(() => {
-    if (phase !== "slider") return;
-    if (closeBtnRef.current) {
-      gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
-    }
-    if (footerRef.current) {
-      gsap.fromTo(footerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
-    }
-    if (leftNavRef.current) {
-      gsap.fromTo(leftNavRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
-    }
-    if (rightNavRef.current) {
-      gsap.fromTo(rightNavRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+    if (phase === "slider") {
+      if (closeBtnRef.current) {
+        gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      }
+      // Dots skalieren jetzt individuell via visible-Prop an InstagramDots —
+      // kein Container-Scale mehr hier.
+      // Pfeile (leftNav/rightNav): Container bleibt sichtbar, die bestehende
+      // disable-Animation spielt jetzt beim Phase-Wechsel (scale/line/vline).
+      if (leftNavRef.current) gsap.set(leftNavRef.current, { opacity: 1 });
+      if (rightNavRef.current) gsap.set(rightNavRef.current, { opacity: 1 });
+    } else if (phase === "closing") {
+      if (closeBtnRef.current) {
+        gsap.to(closeBtnRef.current, { opacity: 0, duration: 0.2, ease: "power2.in" });
+      }
+      // Dots skalieren automatisch über visible=false an InstagramDots
+      // (jeder Dot einzeln via DotSlot).
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
@@ -721,15 +727,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (closeBtnRef.current) {
       gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
     }
-    if (leftNavRef.current) {
-      gsap.to(leftNavRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
-    if (rightNavRef.current) {
-      gsap.to(rightNavRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
-    if (footerRef.current) {
-      gsap.to(footerRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
+    // Pfeile + Dots NICHT per Opacity ausblenden — die disable-Animation
+    // (arrow scale 0, line scaleX 0, vline scaleY 0) spielt beim Wechsel
+    // zu phase="closing" automatisch. Dots skalieren einzeln über visible-
+    // Prop an InstagramDots (jeder Dot via DotSlot).
     window.setTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
   }, [post]);
 
@@ -1176,6 +1177,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           currentIndex={currentIndex}
           total={posts.length}
           onGoTo={onGoTo}
+          phase={phase}
         />
       )}
 
@@ -1614,9 +1616,9 @@ function PreviewHeader({ current, total, phase }: { current: number; total: numb
   useLayoutEffect(() => {
     if (!ref.current) return;
     if (phase === "slider") {
-      gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" });
     } else if (phase === "closing") {
-      gsap.to(ref.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+      gsap.to(ref.current, { opacity: 0, duration: 0.35, ease: "power2.in" });
     }
   }, [phase]);
 
@@ -1657,11 +1659,13 @@ function PreviewFooter({
   currentIndex,
   total,
   onGoTo,
+  phase,
 }: {
   footerRef: React.RefObject<HTMLDivElement | null>;
   currentIndex: number;
   total: number;
   onGoTo: (index: number) => void;
+  phase: Phase;
 }) {
   if (total <= 1) return null;
   return (
@@ -1674,10 +1678,9 @@ function PreviewFooter({
         transform: "translateX(-50%)",
         zIndex: 6,
         pointerEvents: "auto",
-        opacity: 0,
       }}
     >
-      <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} />
+      <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} visible={phase === "slider"} />
     </div>
   );
 }
