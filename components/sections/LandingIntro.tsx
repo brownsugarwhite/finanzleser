@@ -31,6 +31,7 @@ export default function LandingIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
   const bubbleRef = useRef<HTMLDivElement>(null);
+  const leoWrapRef = useRef<HTMLDivElement>(null);
 
   const [searchBtnWidth, setSearchBtnWidth] = useState(0);
   const [searchContentWidth, setSearchContentWidth] = useState(0);
@@ -62,15 +63,18 @@ export default function LandingIntro() {
   useEffect(() => {
     const collapseSlot = (animate: boolean) => {
       const outer = outerRef.current;
+      const wrap = leoWrapRef.current;
       const slot = document.getElementById("maya-dock-slot");
       if (!outer || !slot) return;
 
       if (animate) {
         gsap.to(slot, { width: 0, duration: 0.5, ease: "power2.inOut" });
         gsap.to(outer, { gap: 0, duration: 0.5, ease: "power2.inOut" });
+        if (wrap) gsap.to(wrap, { width: 0, overflow: "hidden", duration: 0.5, ease: "power2.inOut" });
       } else {
         gsap.set(slot, { width: 0 });
         gsap.set(outer, { gap: 0 });
+        if (wrap) gsap.set(wrap, { width: 0, overflow: "hidden" });
       }
     };
 
@@ -238,37 +242,47 @@ export default function LandingIntro() {
             </form>
           </div>
 
-          {/* Maya Dock Slot + Speech Bubble */}
-          <div style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
-            {/* Speech bubble — fades out when Maya undocks */}
+          {/* Leo Dock Slot + Speech Bubble */}
+          <div ref={leoWrapRef} style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
+            {/* Speech bubble — fades out when Leo undocks */}
             <div
               ref={bubbleRef}
               style={{
                 position: "absolute",
-                bottom: "calc(100% + 12px)",
-                right: -8,
+                bottom: "calc(100% + 8px)",
+                left: 25,
                 pointerEvents: "none",
               }}
             >
-              {/*
-                SVG speech bubble — r=14, tail 11px tall at bottom-right
-                Tail center x=130 → aligns with Maya's center (35px from dock slot right = 165-35=130 from bubble left)
-                Shadow applied as SVG filter so it follows the shape incl. tail
-              */}
-              <svg width="165" height="76" viewBox="0 0 165 76" fill="none" overflow="visible">
-                <filter id="bs" x="-10%" y="-10%" width="130%" height="150%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="#000" floodOpacity="0.1" />
-                </filter>
-                <path
-                  d="M 14 0 H 151 Q 165 0 165 14 V 50 Q 165 64 151 64 H 141 L 130 76 L 119 64 H 14 Q 0 64 0 50 V 14 Q 0 0 14 0 Z"
-                  fill="white"
-                  stroke="rgba(0,0,0,0.18)"
-                  strokeWidth="1"
-                  filter="url(#bs)"
-                />
-                <text x="83" y="27" textAnchor="middle" fontFamily="Merriweather, serif" fontStyle="italic" fontSize="13" fill="rgba(0,0,0,0.55)">Fragen Sie unseren</text>
-                <text x="83" y="47" textAnchor="middle" fontFamily="Merriweather, serif" fontStyle="italic" fontSize="13" fill="rgba(0,0,0,0.55)">KI-Agenten MAYA</text>
-              </svg>
+              <div style={{ position: "relative", width: 141, height: 81 }}>
+                <svg width="141" height="81" viewBox="0 0 141 81" fill="none" style={{ display: "block" }}>
+                  <path
+                    d="M39 0.5H102C109.491 0.5 115.075 0.50021 119.475 0.916016C123.867 1.33112 127.029 2.1569 129.69 3.77539C132.769 5.64729 135.353 8.23137 137.225 11.3096C140.486 16.6722 140.5 20.9959 140.5 34C140.5 41.4986 140.499 45.8181 140.086 48.9561C139.678 52.0507 138.872 53.982 137.225 56.6904C135.353 59.7686 132.769 62.3527 129.69 64.2246C127.029 65.8431 123.867 66.6689 119.475 67.084C115.075 67.4998 109.491 67.5 102 67.5H36.7988L36.6533 67.6396L24.2842 79.5498L26.4912 67.958L26.5996 67.3867L26.0186 67.3643C19.159 67.1051 14.8065 66.3511 11.3096 64.2246C8.23137 62.3527 5.64729 59.7686 3.77539 56.6904C2.12841 53.982 1.32151 52.0507 0.914062 48.9561C0.500937 45.8181 0.5 41.4986 0.5 34C0.5 20.9959 0.514407 16.6722 3.77539 11.3096C5.64729 8.23137 8.23137 5.64729 11.3096 3.77539C13.9712 2.1569 17.1329 1.33112 21.5254 0.916016C25.9254 0.50021 31.5089 0.5 39 0.5Z"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.55)"
+                    strokeWidth="1"
+                  />
+                </svg>
+                <div style={{
+                  position: "absolute",
+                  top: 0, left: 0, right: 0,
+                  height: 68,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 2,
+                  fontFamily: "Merriweather, serif",
+                  fontStyle: "italic",
+                  fontSize: 13,
+                  color: "rgba(0,0,0,0.55)",
+                  lineHeight: 1.4,
+                  pointerEvents: "none",
+                }}>
+                  <span>Fragen Sie unseren</span>
+                  <span>KI-Agenten LEO</span>
+                </div>
+              </div>
             </div>
             <div
               id="maya-dock-slot"

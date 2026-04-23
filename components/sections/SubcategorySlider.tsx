@@ -606,7 +606,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           aria-hidden
           style={{
             position: 'absolute',
-            top: 0,
+            top: -5,
             bottom: 0,
             left: 0,
             width: 150,
