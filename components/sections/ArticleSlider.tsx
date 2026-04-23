@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import SliderSafeZone from '@/components/ui/SliderSafeZone';
@@ -17,9 +17,23 @@ interface ArticleSliderProps {
   posts: Post[];
   onNavReady: (nav: { current: number; total: number; onPrev: () => void; onNext: () => void; onGoTo: (i: number) => void }) => void;
   onCanScrollChange?: (canScroll: boolean) => void;
+  phase1Visible?: boolean;
+  phase2Visible?: boolean;
 }
 
-export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: ArticleSliderProps) {
+const SPARK_DURATION = 0.3;
+
+export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true }: ArticleSliderProps) {
+  // Mount-flip: beim ersten Mount rendert die Komponente mit mounted=false, sodass
+  // das Visual bei scale(0) startet. Ein rAF flippt auf true → CSS-Transition zu
+  // scale(1) läuft parallel zur Spacer-Höhe-Animation. Sonst würde das Visual auf
+  // dem ersten Frame bereits bei scale(1) stehen und beim Öffnen "springen".
+  const [mounted, setMounted] = useState(false);
+  useLayoutEffect(() => {
+    const raf = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  const effectivePhase1 = mounted && phase1Visible;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     loop: false,
@@ -209,7 +223,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
                   'center center',
                 transition: 'transform 0.1s ease',
               }}>
-                <SlideArticleCard post={post} index={index} />
+                <SlideArticleCard post={post} index={index} phase1Visible={effectivePhase1} phase2Visible={phase2Visible} />
               </div>
 
               {!isLast && (
@@ -227,11 +241,31 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange }: 
                   gap: 5,
                   pointerEvents: 'none',
                 }}>
-                  <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)' }} />
-                  <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
+                  <div style={{
+                    width: 1,
+                    height: effectivePhase1 ? 70 : 0,
+                    background: 'var(--fill-0, #334A27)',
+                    transition: `height ${SPARK_DURATION}s ease`,
+                  }} />
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12.0005"
+                    fill="none"
+                    aria-hidden
+                    style={{
+                      opacity: effectivePhase1 ? 1 : 0,
+                      transition: `opacity ${SPARK_DURATION}s ease`,
+                    }}
+                  >
                     <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
                   </svg>
-                  <div style={{ width: 1, height: 70, background: 'var(--fill-0, #334A27)' }} />
+                  <div style={{
+                    width: 1,
+                    height: effectivePhase1 ? 70 : 0,
+                    background: 'var(--fill-0, #334A27)',
+                    transition: `height ${SPARK_DURATION}s ease`,
+                  }} />
                 </div>
               )}
             </div>

@@ -15,7 +15,11 @@ export interface SlideArticleCardProps {
   post: Post;
   index?: number;
   bookmarkType?: BookmarkType;
+  phase1Visible?: boolean;
+  phase2Visible?: boolean;
 }
+
+const PHASE_DURATION = 0.3;
 
 const BOOKMARK_COLORS: Record<BookmarkType, string> = {
   rechner: 'var(--color-brand-secondary)',
@@ -27,7 +31,7 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
 export const CARD_MIN_WIDTH = 265;
 export const CARD_MAX_WIDTH = 450;
 
-export default function SlideArticleCard({ post, index, bookmarkType }: SlideArticleCardProps) {
+export default function SlideArticleCard({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
@@ -130,6 +134,12 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
           width: '100%',
           height: 210,
           flexShrink: 0,
+          transform: phase1Visible ? 'scale(1)' : 'scale(0)',
+          transformOrigin: 'top center',
+          filter: phase1Visible ? 'blur(0px)' : 'blur(16px)',
+          opacity: phase1Visible ? 1 : 0,
+          transition: `transform ${PHASE_DURATION}s ease, filter ${PHASE_DURATION}s ease, opacity ${PHASE_DURATION}s ease`,
+          willChange: 'transform, filter',
         }}
       >
         <div
@@ -176,7 +186,8 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
             justifyContent: 'center',
             cursor: 'pointer',
             flexShrink: 0,
-            transition: 'background 0.15s, border 0.15s',
+            opacity: phase2Visible ? 1 : 0,
+            transition: `background 0.15s, border 0.15s, opacity ${PHASE_DURATION}s ease`,
             ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
           }}
         >
@@ -189,7 +200,13 @@ export default function SlideArticleCard({ post, index, bookmarkType }: SlideArt
       </div>
 
       {/* Text + Footer — fadet beim Preview-Öffnen aus */}
-      <div data-card-text style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div data-card-text style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        opacity: phase2Visible ? 1 : 0,
+        transition: `opacity ${PHASE_DURATION}s ease`,
+      }}>
         <div style={{
           width: '100%',
           padding: '13px 23px 0',

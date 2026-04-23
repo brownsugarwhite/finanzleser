@@ -75,6 +75,62 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   const isArticleMode = activeSlide !== null && activePosts.length > 0;
 
+  // Behalte die zuletzt aktive Kategorie während der Schließen-Animation,
+  // damit die Cards/Posts bis zum Ende der Ausblend-Animation weiter gerendert
+  // werden können.
+  const lastActiveRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (activeSlide !== null) lastActiveRef.current = activeSlide;
+  }, [activeSlide]);
+  const renderedSlide = activeSlide ?? lastActiveRef.current;
+  const renderedPosts = renderedSlide !== null
+    ? (allCategoryPosts[categories[renderedSlide]?.slug] || [])
+    : [];
+
+  // 2-Phasen-Animation für Artikel-Slider
+  // Phase 1: Sparks/Linien/Artikel-Visuals (parallel zum Card-Visual-Collapse)
+  // Phase 2: Artikel-Text (parallel zur Card-Breiten-Änderung)
+  const [phase1Visible, setPhase1Visible] = useState(false);
+  const [phase2Visible, setPhase2Visible] = useState(false);
+  const [articleMounted, setArticleMounted] = useState(false);
+  const articleRef = useRef<HTMLDivElement>(null);
+  const [articleHeight, setArticleHeight] = useState(0);
+  useEffect(() => {
+    if (!articleMounted) {
+      setArticleHeight(0);
+      return;
+    }
+    if (!articleRef.current) return;
+    const el = articleRef.current;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setArticleHeight(entry.contentRect.height);
+      }
+    });
+    ro.observe(el);
+    setArticleHeight(el.getBoundingClientRect().height);
+    return () => ro.disconnect();
+  }, [articleMounted]);
+  // fullyOpen: nach Abschluss der gesamten Öffnen-Animation true, sofort beim
+  // Schließen-Start wieder false. Steuert overflow-Switch (hidden während
+  // Transition, visible im Ruhezustand), damit Card-Hover-Scale nicht geclippt.
+  const [fullyOpen, setFullyOpen] = useState(false);
+  useEffect(() => {
+    if (activeSlide !== null) {
+      setArticleMounted(true);
+      setPhase1Visible(true);
+      const t = setTimeout(() => setPhase2Visible(true), MORPH_DURATION);
+      const tFull = setTimeout(() => setFullyOpen(true), MORPH_DURATION * 2);
+      return () => { clearTimeout(t); clearTimeout(tFull); };
+    } else {
+      setFullyOpen(false);
+      setPhase2Visible(false);
+      const t1 = setTimeout(() => setPhase1Visible(false), MORPH_DURATION);
+      const t2 = setTimeout(() => setArticleMounted(false), MORPH_DURATION * 2 + 50);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
+  }, [activeSlide]);
+
   // Category scroll tracking
   const slideStylesRef = useRef<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
 
@@ -364,7 +420,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                       parentSlug={parentSlug}
                       active={activeSlide !== null}
                       selected={activeSlide === index}
-                      onClose={() => setActiveSlide(null)}
                       titleWidth={titleWidths[index]}
                     />
                   </div>
@@ -423,15 +478,44 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         {sliderPill.renderPill()}
       </div>
 
-      {/* Article Slider — key forces fresh Embla per category */}
-      {isArticleMode && (
-        <ArticleSlider
-          key={categories[activeSlide!].slug}
-          posts={activePosts}
-          onNavReady={handleArticleNavReady}
-          onCanScrollChange={handleArticleCanScrollChange}
+      {/* Article Slider — absolut positioniert und bottom-anchored. Ein
+          Spacer-Div animiert die Container-Höhe von 0 → articleHeight parallel
+          zum Card-Visual-Collapse der Kategorie-Slider. Weil der Slider am
+          unteren Rand verankert ist, erscheinen die Artikel-Cards beim
+          Aufwachsen von oben nach unten — Visuals und Text sind während der
+          Animation sichtbar, nicht geclippt. Kein overflow:hidden. */}
+      <div style={{ position: 'relative' }}>
+        {articleMounted && renderedSlide !== null && renderedPosts.length > 0 && (
+          <div
+            ref={articleRef}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              pointerEvents: phase1Visible ? 'auto' : 'none',
+            }}
+          >
+            <ArticleSlider
+              key={categories[renderedSlide].slug}
+              posts={renderedPosts}
+              onNavReady={handleArticleNavReady}
+              onCanScrollChange={handleArticleCanScrollChange}
+              phase1Visible={phase1Visible}
+              phase2Visible={phase2Visible}
+            />
+          </div>
+        )}
+        {/* Spacer: animiert von 0 → articleHeight (natürliche Höhe via
+            ResizeObserver gemessen) parallel zur Kategorie-Card-Höhen-Collapse. */}
+        <div
+          aria-hidden
+          style={{
+            height: phase1Visible ? articleHeight : 0,
+            transition: `height ${MORPH_DURATION / 1000}s ease`,
+          }}
         />
-      )}
+      </div>
 
         {/* Edge-Gradients — links */}
         <div

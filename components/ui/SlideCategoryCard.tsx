@@ -17,7 +17,6 @@ interface SlideCategoryCardProps {
   parentSlug: string;
   active?: boolean;
   selected?: boolean;
-  onClose?: () => void;
   titleWidth?: number;
   fluidWidth?: boolean;
 }
@@ -26,7 +25,7 @@ const CARD_WIDTH = 350;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
-export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, onClose, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
+export default function SlideCategoryCard({ category, parentSlug, active = false, selected = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   // 2-phase: width changes delayed when collapsing, immediate when expanding
@@ -90,40 +89,50 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
         transition: `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
       }}
     >
-      {/* Visual — grauer Platzhalter */}
+      {/* Visual — Wrapper kollabiert Höhe 260→0, Inner scaled uniform + blurred */}
       <div style={{
         position: 'relative',
         width: '100%',
         height: active ? 0 : 260,
-        background: 'transparent',
-        opacity: active ? 0 : 1,
         overflow: 'hidden',
-        transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
+        transition: `height ${T1}s ${phase1Ease} ${phase1Delay}s`,
       }}>
-        <VisualLottie seed={category.slug} />
-        {/* Article-Count-Badge */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: 13,
-            right: 13,
-            width: 32,
-            height: 32,
-            borderRadius: 13,
-            background: 'var(--color-text-primary)',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: "Merriweather, serif",
-            fontStyle: 'italic',
-            fontSize: 18,
-            fontWeight: 500,
-            pointerEvents: 'none',
-          }}
-        >
-          {category.count}
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          height: 260,
+          transform: active ? 'scale(0)' : 'scale(1)',
+          transformOrigin: 'top center',
+          filter: active ? 'blur(16px)' : 'blur(0px)',
+          opacity: active ? 0 : 1,
+          transition: `transform ${T1}s ${phase1Ease} ${phase1Delay}s, filter ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
+          willChange: 'transform, filter',
+        }}>
+          <VisualLottie seed={category.slug} />
+          {/* Article-Count-Badge */}
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: 13,
+              right: 13,
+              width: 32,
+              height: 32,
+              borderRadius: 13,
+              background: 'var(--color-text-primary)',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: "Merriweather, serif",
+              fontStyle: 'italic',
+              fontSize: 18,
+              fontWeight: 500,
+              pointerEvents: 'none',
+            }}
+          >
+            {category.count}
+          </div>
         </div>
       </div>
 
@@ -155,24 +164,6 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
         >
           <span style={{ color: 'inherit' }}>
             {category.name}
-            {active && selected && onClose && (
-              <span
-                onClick={(e) => { e.stopPropagation(); onClose(); }}
-                style={{
-                  marginLeft: 8,
-                  cursor: 'pointer',
-                  opacity: 0.5,
-                  fontSize: '14px',
-                  fontWeight: 400,
-                  display: 'inline-block',
-                  transition: 'opacity 0.2s ease',
-                }}
-                onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = '1'; }}
-                onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = '0.5'; }}
-              >
-                ✕
-              </span>
-            )}
           </span>
         </p>
         <Link href={categoryLink} onClick={(e) => e.stopPropagation()} style={{
