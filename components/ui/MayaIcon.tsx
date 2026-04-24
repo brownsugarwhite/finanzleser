@@ -32,6 +32,7 @@ export default function MayaIcon() {
   const morphProgressBeforeChatRef = useRef(0);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
   const [smooth, setSmooth] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const wasInWindow = useRef(true);
   const [docked, setDocked] = useState(false);
   const isLanding = useRef(false);
@@ -544,6 +545,8 @@ export default function MayaIcon() {
       data-flip-id="maya"
       data-state="default"
       className="maya-batch-container"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         position: "relative",
         width: size,
@@ -642,8 +645,8 @@ export default function MayaIcon() {
               viewBox="0 0 564.09 533.81"
               style={{ position: "absolute", top: 0, left: 0, width: 44, height: "100%", pointerEvents: "none", overflow: "visible" }}
             >
-              <circle cx={LEFT_EYE.cx + pupilOffset.x} cy={LEFT_EYE.cy + pupilOffset.y} r={PUPIL_RADIUS} fill={COLOR} style={{ transition: smooth ? "cx 0.3s ease, cy 0.3s ease" : "none" }} />
-              <circle cx={RIGHT_EYE.cx + pupilOffset.x} cy={RIGHT_EYE.cy + pupilOffset.y} r={PUPIL_RADIUS} fill={COLOR} style={{ transition: smooth ? "cx 0.3s ease, cy 0.3s ease" : "none" }} />
+              <circle cx={LEFT_EYE.cx + pupilOffset.x} cy={LEFT_EYE.cy + pupilOffset.y} r={isHovered ? PUPIL_RADIUS * 0.6 : PUPIL_RADIUS} fill={COLOR} style={{ transition: `r 0.25s ease${smooth ? ", cx 0.3s ease, cy 0.3s ease" : ""}` }} />
+              <circle cx={RIGHT_EYE.cx + pupilOffset.x} cy={RIGHT_EYE.cy + pupilOffset.y} r={isHovered ? PUPIL_RADIUS * 0.6 : PUPIL_RADIUS} fill={COLOR} style={{ transition: `r 0.25s ease${smooth ? ", cx 0.3s ease, cy 0.3s ease" : ""}` }} />
             </svg>
           </div>
           <div>

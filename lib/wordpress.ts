@@ -621,23 +621,30 @@ export interface ToolCategory {
 export async function getToolCategories(): Promise<ToolCategory[]> {
   const client = getClient();
 
-  const query = gql`
-    query GetToolCategories {
-      allRechner(first: 1) {
-        nodes {
-          id
-        }
-      }
-      checklisten(first: 1) {
-        nodes {
-          id
-        }
-      }
-      vergleiche(first: 1) {
-        nodes {
-          id
-        }
-      }
+  // WPGraphQL clamped first: N auf 100 → paginieren bis hasNextPage=false
+  const countAllNodes = async (fieldName: "allRechner" | "checklisten" | "vergleiche"): Promise<number> => {
+    let total = 0;
+    let after: string | null = null;
+    while (true) {
+      const data: Record<string, { nodes: Array<{ id: string }>; pageInfo: { hasNextPage: boolean; endCursor: string | null } }> = await client.request(
+        `query($after: String) {
+          ${fieldName}(first: 100, after: $after) {
+            nodes { id }
+            pageInfo { hasNextPage endCursor }
+          }
+        }`,
+        { after }
+      );
+      const connection = data[fieldName];
+      total += connection.nodes.length;
+      if (!connection.pageInfo.hasNextPage) break;
+      after = connection.pageInfo.endCursor;
+    }
+    return total;
+  };
+
+  const categoryQuery = gql`
+    query GetToolPostCategories {
       rechnerCategory: categories(where: { slug: ["rechner"] }) {
         nodes {
           count
@@ -657,20 +664,21 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
   `;
 
   try {
-    const data = await client.request<{
-      allRechner: { nodes: Array<{ id: string }> };
-      checklisten: { nodes: Array<{ id: string }> };
-      vergleiche: { nodes: Array<{ id: string }> };
-      rechnerCategory: { nodes: Array<{ count: number }> };
-      checklistenCategory: { nodes: Array<{ count: number }> };
-      vergleichCategory: { nodes: Array<{ count: number }> };
-    }>(query);
+    const [rechnerCptCount, checklistenCptCount, vergleicheCptCount, catData] = await Promise.all([
+      countAllNodes("allRechner"),
+      countAllNodes("checklisten"),
+      countAllNodes("vergleiche"),
+      client.request<{
+        rechnerCategory: { nodes: Array<{ count: number }> };
+        checklistenCategory: { nodes: Array<{ count: number }> };
+        vergleichCategory: { nodes: Array<{ count: number }> };
+      }>(categoryQuery),
+    ]);
 
     const categories: ToolCategory[] = [];
 
     // Rechner (CPT + Posts mit Kategorie)
-    const rechnerCptCount = data.allRechner.nodes.length;
-    const rechnerPostCount = data.rechnerCategory.nodes[0]?.count || 0;
+    const rechnerPostCount = catData.rechnerCategory.nodes[0]?.count || 0;
     const rechnerTotal = rechnerCptCount + rechnerPostCount;
     if (rechnerTotal > 0) {
       categories.push({
@@ -683,8 +691,7 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
     }
 
     // Checklisten (CPT + Posts mit Kategorie)
-    const checklistenCptCount = data.checklisten.nodes.length;
-    const checklistenPostCount = data.checklistenCategory.nodes[0]?.count || 0;
+    const checklistenPostCount = catData.checklistenCategory.nodes[0]?.count || 0;
     const checklistenTotal = checklistenCptCount + checklistenPostCount;
     if (checklistenTotal > 0) {
       categories.push({
@@ -697,8 +704,7 @@ export async function getToolCategories(): Promise<ToolCategory[]> {
     }
 
     // Vergleiche (CPT + Posts mit Kategorie)
-    const vergleicheCptCount = data.vergleiche.nodes.length;
-    const vergleichePostCount = data.vergleichCategory.nodes[0]?.count || 0;
+    const vergleichePostCount = catData.vergleichCategory.nodes[0]?.count || 0;
     const vergleicheTotal = vergleicheCptCount + vergleichePostCount;
     if (vergleicheTotal > 0) {
       categories.push({

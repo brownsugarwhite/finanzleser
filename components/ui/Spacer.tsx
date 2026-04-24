@@ -1,11 +1,17 @@
-export default function Spacer({ noMargin = false }: { noMargin?: boolean }) {
+export default function Spacer({
+  noMargin = false,
+  maxWidth = "1100px",
+}: {
+  noMargin?: boolean;
+  maxWidth?: string | number;
+}) {
   return (
     <div
       className="spacer"
       style={{
         position: "relative",
         zIndex: 60,
-        maxWidth: "1100px",
+        maxWidth,
         margin: noMargin ? "0 auto" : "40px auto",
       }}
     >
