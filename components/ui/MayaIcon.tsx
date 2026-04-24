@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Flip } from "gsap/dist/Flip";
+import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger, Flip);
 
@@ -26,6 +27,9 @@ export default function MayaIcon() {
   const headRef = useRef<HTMLDivElement>(null);
   const dockedInSlot = useRef(false);
   const morphTlRef = useRef<gsap.core.Timeline | null>(null);
+  const chatOpenRef = useRef(false);
+  const previousParentRef = useRef<HTMLElement | null>(null);
+  const morphProgressBeforeChatRef = useRef(0);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
   const [smooth, setSmooth] = useState(false);
   const wasInWindow = useRef(true);
@@ -183,22 +187,14 @@ export default function MayaIcon() {
     if (!badge) return;
 
     const ctx = gsap.context(() => {
+      // Morph-TL: nur die "Leo-Transform"-Bewegungen. bg/shadow/spike laufen
+      // via CSS (data-state) und sind dadurch unabhängig vom Morph-Play-State.
       const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut" } });
       morphTlRef.current = tl;
 
-      // Pulse up (ganzer Batch) + Leo Counter-Scale (bleibt visuell gleich groß)
       tl.to(container, { scale: 1.25, duration: 0.28, ease: "power2.out" }, 0);
       tl.to(leoGroup, { scale: 1 / 1.25, duration: 0.28, ease: "power2.out" }, 0);
-      // Batch morpht: weiß → mint + Kreis → Bubble-Radius (synchron zum Pulse-Up)
-      // + Shadow raus (saubere Chat-Bubble-Optik)
-      tl.to(badge, {
-        backgroundColor: "#E9FFDE",
-        borderRadius: "27px",
-        boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)",
-        duration: 0.32,
-        ease: "power2.inOut",
-      }, 0);
-      // Kravatte
+      tl.to(badge, { borderRadius: "27px", duration: 0.32, ease: "power2.inOut" }, 0);
       tl.to(tie, {
         scaleX: 1.25,
         scaleY: 0.3,
@@ -206,23 +202,29 @@ export default function MayaIcon() {
         opacity: 0,
         duration: 0.32,
       }, 0);
-      // Leo slide out
       tl.to(leoGroup, { y: 80, duration: 0.38, ease: "power2.in" }, 0);
-      // Magenta pill zooms in from behind
       tl.to(pill, { scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
-      // Rechter Spike erscheint am Peak (Batch am größten)
-      tl.to(spikeRight, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
-      // Pulse zurück + Leo Counter-Scale zurück
       tl.to(container, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
       tl.to(leoGroup, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
-      // Text fades in
       tl.to(pillText, { opacity: 1, duration: 0.22 }, 0.42);
 
       ScrollTrigger.create({
         trigger: teaser,
         start: "top bottom-=60",
-        onEnter: () => tl.play(),
-        onLeaveBack: () => tl.reverse(),
+        onEnter: () => {
+          // Nur in "default"-State zu "morphed" wechseln — nicht überschreiben
+          // wenn User gerade im Chat ist.
+          if (container.dataset.state !== "chat") {
+            container.dataset.state = "morphed";
+          }
+          morphTlRef.current?.play();
+        },
+        onLeaveBack: () => {
+          if (container.dataset.state !== "chat") {
+            container.dataset.state = "default";
+          }
+          morphTlRef.current?.reverse();
+        },
       });
     }, container);
 
@@ -327,12 +329,221 @@ export default function MayaIcon() {
     };
   }, []);
 
+  // Chat-Modus: Klick auf Leo → Flip zur Viewport-Mitte + Content-Blur
+  useEffect(() => {
+    const container = containerRef.current;
+    const spikeRight = spikeRightRef.current;
+    const input = inputRef.current;
+    if (!container || !spikeRight || !input) return;
+
+    // Chat-Center Container (permanent, zentriert im Viewport, 560×140)
+    let chatCenter = document.getElementById("maya-chat-center");
+    if (!chatCenter) {
+      chatCenter = document.createElement("div");
+      chatCenter.id = "maya-chat-center";
+      Object.assign(chatCenter.style, {
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "560px",
+        height: "140px",
+        zIndex: "200",
+        pointerEvents: "none",
+      });
+      document.body.appendChild(chatCenter);
+    }
+
+    // Backdrop für Klick-zu-schließen (unter chat-center, über allem anderen)
+    let backdrop = document.getElementById("maya-chat-backdrop");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "maya-chat-backdrop";
+      Object.assign(backdrop.style, {
+        position: "fixed",
+        inset: "0",
+        zIndex: "150",
+        background: "transparent",
+        display: "none",
+        cursor: "pointer",
+      });
+      document.body.appendChild(backdrop);
+    }
+
+    const backdropEl = backdrop;
+    const chatCenterEl = chatCenter;
+
+    const openChat = () => {
+      if (chatOpenRef.current) return;
+      chatOpenRef.current = true;
+
+      // Legacy landing-undock MotionPath blockieren. Sonst feuert der Scroll-Handler
+      // aus dem ersten useEffect beim scrollToBookmarkSticky()-Call (scrollY > 5) und
+      // startet eine zweite, konkurrierende Flip/MotionPath-Animation auf dem Container.
+      const wasLandingDocked = isLanding.current && !hasUndocked.current;
+      hasUndocked.current = true;
+
+      // Wenn vom Landing-Page-Top geklickt wurde: LandingIntro soll die search-pill
+      // auf volle Breite expanden und die Sprechblase ausfaden (wie bei normalem Scroll).
+      if (wasLandingDocked) {
+        window.dispatchEvent(new CustomEvent("maya-undocked"));
+      }
+
+      const morphTl = morphTlRef.current;
+      morphProgressBeforeChatRef.current = morphTl ? morphTl.progress() : 0;
+      previousParentRef.current = container.parentElement;
+
+      // Scroll zum Sticky-Punkt falls Bookmark noch nicht sticky (wie Finanztools-Button)
+      scrollToBookmarkSticky();
+
+      // data-state auf "chat" → CSS übernimmt bg/shadow/spike via Transitions
+      container.dataset.state = "chat";
+
+      // Flip-State capturen (Original-Position in search-pill / home / dock-slot)
+      // Dann reparent + resize SOFORT — Maya raus aus allen blur-baren Ancestors
+      // damit ContentScaler ihr nichts anhaben kann.
+      const state = Flip.getState(container, { props: "width,height" });
+      chatCenterEl.appendChild(container);
+      container.style.width = "560px";
+      container.style.height = "140px";
+
+      // Erst JETZT menu-opened → Maya ist bereits body-child
+      document.body.style.overflow = "hidden";
+      backdropEl.style.display = "block";
+      backdropEl.addEventListener("click", closeChat);
+      chatCenterEl.style.pointerEvents = "auto";
+      window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
+
+      // Morph-TL (falls state A) parallel zur Flip-Expand — kein Konflikt weil
+      // die TL nur scale/leoGroup/tie/pill/radius tweent, Flip nur width/height/pos.
+      if (morphTl && morphTl.progress() < 1) {
+        morphTl.play();
+      }
+      Flip.from(state, {
+        duration: 0.75,
+        ease: "power3.inOut",
+        absolute: true,
+        onComplete: () => {
+          gsap.to(input, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          input.style.pointerEvents = "auto";
+        },
+      });
+    };
+
+    const closeChat = () => {
+      if (!chatOpenRef.current) return;
+      chatOpenRef.current = false;
+
+      let prev = previousParentRef.current;
+      if (!prev) return;
+
+      // Wenn User inzwischen gescrollt hat (z.B. durch scrollToBookmarkSticky beim Open),
+      // ist der search-pill-slot collapsed (width 0). In dem Fall statt dessen zu home zurück.
+      if (prev.id === "maya-dock-slot" && window.scrollY > 5) {
+        const home = document.getElementById("maya-floating-home");
+        if (home) prev = home;
+      }
+
+      const prevIsDockSlot = prev.id === "maya-dock-slot-ai";
+      const targetWidth = prevIsDockSlot ? 410 : 70;
+      const targetHeight = 70;
+
+      // Un-blur anstoßen (ContentScaler) + Backdrop weg
+      backdropEl.removeEventListener("click", closeChat);
+      backdropEl.style.display = "none";
+      chatCenterEl.style.pointerEvents = "none";
+      document.body.style.overflow = "";
+      window.dispatchEvent(new CustomEvent("menu-closed"));
+
+      // data-state zurücksetzen — CSS fadet bg/shadow/spike automatisch
+      container.dataset.state = prevIsDockSlot ? "morphed" : "default";
+
+      // Input ausfaden falls Ziel ≠ Dock-Slot
+      if (!prevIsDockSlot) {
+        gsap.to(input, { opacity: 0, duration: 0.2, ease: "power2.out" });
+        input.style.pointerEvents = "none";
+      }
+
+      // Target viewport rect berechnen. Wenn prev in einem skalierten Ancestor liegt
+      // (.scalable-landing oder [data-scale-extended] sind aktuell bei scale 0.95 vom
+      // Content-Scaler), müssen wir die UNscaled-Rect berechnen — sonst landet Maya
+      // am falschen Platz und springt beim Reparent (un-blur → scale zurück auf 1).
+      const rawRect = prev.getBoundingClientRect();
+      const insideScaled = prev.closest(".scalable-landing, [data-scale-extended]");
+      const targetRect = (() => {
+        if (!insideScaled) return { left: rawRect.left, top: rawRect.top };
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const scale = 0.95; // ContentScaler's scale factor
+        return {
+          left: cx + (rawRect.left - cx) / scale,
+          top: cy + (rawRect.top - cy) / scale,
+        };
+      })();
+
+      const chatCenterRect = chatCenterEl.getBoundingClientRect();
+      const deltaX = targetRect.left - chatCenterRect.left;
+      const deltaY = targetRect.top - chatCenterRect.top;
+
+      // Laufende Tweens auf container killen (Flip-Leftovers etc.)
+      gsap.killTweensOf(container);
+
+      // Maya auf position:absolute 0,0 innerhalb chat-center, explizite Start-Werte
+      container.style.position = "absolute";
+      container.style.top = "0";
+      container.style.left = "0";
+      gsap.set(container, { x: 0, y: 0 });
+
+      // Manuelle Animation: Maya BLEIBT in chat-center während der gesamten Close-Anim,
+      // damit sie nicht in einen (noch) geblurrten Ancestor reparented wird.
+      gsap.to(container, {
+        x: deltaX,
+        y: deltaY,
+        width: targetWidth,
+        height: targetHeight,
+        duration: 0.55,
+        ease: "power3.inOut",
+        overwrite: true,
+        onComplete: () => {
+          // Un-blur ist nun durch (0.5s) → sicher reparenten
+          prev.appendChild(container);
+          container.style.position = "relative";
+          container.style.top = "";
+          container.style.left = "";
+          container.style.width = `${targetWidth}px`;
+          container.style.height = `${targetHeight}px`;
+          gsap.set(container, { x: 0, y: 0, clearProps: "transform" });
+
+          // Morph-TL rückwärts wenn Ziel = state A (home oder search-pill)
+          const morphTl = morphTlRef.current;
+          if (morphTl && !prevIsDockSlot && morphProgressBeforeChatRef.current < 1) {
+            morphTl.reverse();
+          }
+        },
+      });
+    };
+
+    const handleContainerClick = (e: MouseEvent) => {
+      e.stopPropagation();
+      if (chatOpenRef.current) return;
+      openChat();
+    };
+    container.addEventListener("click", handleContainerClick);
+
+    return () => {
+      container.removeEventListener("click", handleContainerClick);
+      backdropEl.removeEventListener("click", closeChat);
+    };
+  }, []);
+
   const size = 70;
 
   return (
     <div
       ref={containerRef}
       data-flip-id="maya"
+      data-state="default"
+      className="maya-batch-container"
       style={{
         position: "relative",
         width: size,
@@ -372,14 +583,13 @@ export default function MayaIcon() {
       >
         <svg
           ref={spikeRightRef}
+          className="maya-spike-img"
           viewBox="0 0 20 24"
           aria-hidden="true"
           style={{
             width: "100%",
             height: "100%",
             display: "block",
-            opacity: 0,
-            transform: "scale(0)",
           }}
         >
           <path
@@ -391,15 +601,14 @@ export default function MayaIcon() {
 
       <div
         ref={badgeRef}
+        className="maya-badge"
         style={{
           position: "relative",
           width: "100%",
           height: "100%",
           borderRadius: "50%",
-          background: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "brightness(1.3) blur(13px)",
           WebkitBackdropFilter: "brightness(1.3) blur(13px)",
-          boxShadow: "0 3px 23px rgba(0, 0, 0, 0.05)",
           overflow: "hidden",
         }}
       >
@@ -455,9 +664,10 @@ export default function MayaIcon() {
             bottom: 0,
             left: 0,
             right: 70,
-            padding: "0 23px",
+            padding: "24px 23px 0",
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
+            alignItems: "flex-start",
             opacity: 0,
             pointerEvents: "none",
           }}
@@ -523,6 +733,32 @@ export default function MayaIcon() {
           </span>
         </div>
       </div>
+
+      <style>{`
+        .maya-batch-container .maya-badge {
+          background: rgba(255, 255, 255, 0.8);
+          box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+          transition: background 0.35s ease, box-shadow 0.35s ease;
+        }
+        .maya-batch-container[data-state="morphed"] .maya-badge {
+          background: #E9FFDE;
+          box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+        }
+        .maya-batch-container[data-state="chat"] .maya-badge {
+          background: rgba(255, 255, 255, 0.8);
+          box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+        }
+
+        .maya-batch-container .maya-spike-img {
+          opacity: 0;
+          transform: scale(0);
+          transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .maya-batch-container[data-state="morphed"] .maya-spike-img {
+          opacity: 1;
+          transform: scale(1);
+        }
+      `}</style>
     </div>
   );
 }
