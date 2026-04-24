@@ -107,18 +107,28 @@ export default async function LandingPage() {
                     padding: "0 40px",
                     boxSizing: "border-box",
                   }}>
-                    <h3 style={{
-                      fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                      fontWeight: 700,
-                      fontStyle: "italic",
-                      fontSize: 28,
-                      color: "var(--color-text-primary)",
-                      letterSpacing: "0.01em",
-                      lineHeight: 1.3,
-                      margin: "0 0 23px",
-                    }}>
-                      {block.heading}
-                    </h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 23 }}>
+                      <div style={{
+                        width: 36,
+                        height: 36,
+                        flexShrink: 0,
+                        borderRadius: 15,
+                        border: "1px solid var(--color-text-primary)",
+                        background: "transparent",
+                      }} />
+                      <h3 style={{
+                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                        fontWeight: 700,
+                        fontStyle: "italic",
+                        fontSize: 28,
+                        color: "var(--color-text-primary)",
+                        letterSpacing: "0.01em",
+                        lineHeight: 1.3,
+                        marginTop: 5,
+                      }}>
+                        {block.heading}
+                      </h3>
+                    </div>
                   </div>
                   <SubcategorySlider
                     categories={block.children}
