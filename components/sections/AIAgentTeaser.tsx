@@ -37,6 +37,7 @@ function ChatBubble({ children }: { children: React.ReactNode }) {
 export default function AIAgentTeaser() {
   return (
     <section
+      className="ai-agent-teaser"
       style={{
         position: "relative",
         width: "100%",

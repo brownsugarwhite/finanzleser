@@ -141,7 +141,7 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        <div className="scalable-landing" style={{ position: "relative", zIndex: 999 }}>
+        <div className="scalable-landing">
           <Footer hideNewsletter />
         </div>
       </main>
