@@ -141,6 +141,81 @@ function ChatBubble({ children }: { children: React.ReactNode }) {
 }
 
 export default function AIAgentTeaser() {
+  const leoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const leo = leoRef.current;
+    if (!leo) return;
+
+    const ctx = gsap.context(() => {
+      // Start off-screen links unten, klein, leicht gekippt
+      gsap.set(leo, {
+        yPercent: -50,
+        opacity: 0,
+        scale: 0.35,
+        x: -700,
+        y: 180,
+        rotation: -10,
+        transformOrigin: "50% 50%",
+      });
+
+      const entrance = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          // Schwebendes Wogen – zwei unabhängige Zyklen für organisches Gefühl
+          gsap.to(leo, {
+            y: "-=12",
+            duration: 2.4,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+          });
+          gsap.to(leo, {
+            rotation: 3,
+            duration: 3.3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+          });
+        },
+      });
+
+      entrance
+        .to(leo, {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.4,
+          ease: "power3.out",
+        }, 0)
+        .to(leo, {
+          y: 0,
+          duration: 1.4,
+          ease: "back.out(1.2)",
+        }, 0);
+
+      // Gleiche Trigger-Quelle wie die erste Bubble: deren slot-Element.
+      // querySelector explicit damit der gsap.context-Scope nicht stört.
+      const firstBubbleSlot = document.querySelector<HTMLElement>(
+        ".ai-bubbles-group > div"
+      );
+      if (firstBubbleSlot) {
+        ScrollTrigger.create({
+          trigger: firstBubbleSlot,
+          start: "bottom bottom-=100",
+          onEnter: () => entrance.play(),
+          onLeaveBack: () => {
+            gsap.killTweensOf(leo);
+            entrance.reverse();
+          },
+        });
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       className="ai-agent-teaser"
@@ -155,11 +230,11 @@ export default function AIAgentTeaser() {
       }}
     >
       <div
+        ref={leoRef}
         className="ai-agent-leo"
         style={{
           position: "absolute",
           top: "50%",
-          transform: "translateY(-50%)",
           left: "calc(50% - 350px - 220px)",
           width: "183px",
           height: "189px",
@@ -213,6 +288,7 @@ export default function AIAgentTeaser() {
         </p>
 
         <div
+          className="ai-bubbles-group"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -248,7 +324,7 @@ export default function AIAgentTeaser() {
             id="maya-dock-slot-ai"
             style={{
               position: "relative",
-              width: "350px",
+              width: "410px",
               height: "70px",
               maxWidth: "100%",
             }}

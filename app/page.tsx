@@ -14,6 +14,13 @@ const RATGEBER_KATEGORIEN: Array<{ slug: string; heading: string }> = [
   { slug: "recht", heading: "Rechtsratgeber" },
 ];
 
+const RATGEBER_ICONS: Record<string, string> = {
+  finanzen: "/icons/icon_finanzen.svg",
+  versicherungen: "/icons/icon_versicherungen.svg",
+  steuern: "/icons/icon_steuer.svg",
+  recht: "/icons/icon_recht.svg",
+};
+
 type KategorieBlock = {
   slug: string;
   heading: string;
@@ -102,14 +109,14 @@ export default async function LandingPage() {
                     boxSizing: "border-box",
                   }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 23 }}>
-                      <div style={{
-                        width: 36,
-                        height: 36,
-                        flexShrink: 0,
-                        borderRadius: 15,
-                        border: "1px solid var(--color-text-primary)",
-                        background: "transparent",
-                      }} />
+                      <img
+                        src={RATGEBER_ICONS[block.slug]}
+                        alt=""
+                        aria-hidden="true"
+                        width={36}
+                        height={36}
+                        style={{ flexShrink: 0, display: "block" }}
+                      />
                       <h3 style={{
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
                         fontWeight: 700,

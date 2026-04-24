@@ -21,10 +21,11 @@ export default function MayaIcon() {
   const leoGroupRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const pillTextRef = useRef<HTMLSpanElement>(null);
-  const spikeRightRef = useRef<HTMLImageElement>(null);
+  const spikeRightRef = useRef<SVGSVGElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const dockedInSlot = useRef(false);
+  const morphTlRef = useRef<gsap.core.Timeline | null>(null);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
   const [smooth, setSmooth] = useState(false);
   const wasInWindow = useRef(true);
@@ -32,8 +33,26 @@ export default function MayaIcon() {
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
 
-  // Detect landing page + set initial docked state
+  // Detect landing page + set initial home container + docked state.
+  // Der Home-Container ist die "feste Ecke" (position:fixed bottom-right),
+  // in der die Batch wohnt wenn sie nicht gerade in einem anderen Slot
+  // (Search-Pill oder KI-Section) angedockt ist.
   useEffect(() => {
+    let home = document.getElementById("maya-floating-home");
+    if (!home) {
+      home = document.createElement("div");
+      home.id = "maya-floating-home";
+      Object.assign(home.style, {
+        position: "fixed",
+        bottom: "23px",
+        right: "36px",
+        width: "70px",
+        height: "70px",
+        zIndex: "100",
+      });
+      document.body.appendChild(home);
+    }
+
     isLanding.current = document.body.hasAttribute("data-landing");
     if (isLanding.current && window.scrollY <= 5) {
       setDocked(true);
@@ -44,8 +63,11 @@ export default function MayaIcon() {
         containerRef.current.style.visibility = "visible";
       }
     } else {
-      // Already scrolled or not landing — show fixed immediately
+      // Already scrolled or not landing — in home container packen und anzeigen
       hasUndocked.current = true;
+      if (containerRef.current && containerRef.current.parentElement !== home) {
+        home.appendChild(containerRef.current);
+      }
       if (containerRef.current) {
         containerRef.current.style.visibility = "visible";
       }
@@ -62,28 +84,22 @@ export default function MayaIcon() {
         hasUndocked.current = true;
 
         const el = containerRef.current;
+        const home = document.getElementById("maya-floating-home");
+        if (!home) return;
 
         // Capture start position
         const startRect = el.getBoundingClientRect();
         const startX = startRect.left;
         const startY = startRect.top;
 
-        // Move to body with fixed position
-        document.body.appendChild(el);
-        Object.assign(el.style, {
-          position: "fixed",
-          bottom: "23px",
-          right: "36px",
-          width: "70px",
-          zIndex: "100",
-        });
+        // In Home reparenten (bleibt position:relative, Home managed Viewport-Pos)
+        home.appendChild(el);
 
-        // Capture end position
+        // Capture end position (= Home's position = bottom-right)
         const endRect = el.getBoundingClientRect();
         const endX = endRect.left;
         const endY = endRect.top;
 
-        // Offset from end to start
         const dx = startX - endX;
         const dy = startY - endY;
 
@@ -168,14 +184,17 @@ export default function MayaIcon() {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut" } });
+      morphTlRef.current = tl;
 
       // Pulse up (ganzer Batch) + Leo Counter-Scale (bleibt visuell gleich groß)
       tl.to(container, { scale: 1.25, duration: 0.28, ease: "power2.out" }, 0);
       tl.to(leoGroup, { scale: 1 / 1.25, duration: 0.28, ease: "power2.out" }, 0);
       // Batch morpht: weiß → mint + Kreis → Bubble-Radius (synchron zum Pulse-Up)
+      // + Shadow raus (saubere Chat-Bubble-Optik)
       tl.to(badge, {
-        backgroundColor: "#CFFFE3",
+        backgroundColor: "#E9FFDE",
         borderRadius: "27px",
+        boxShadow: "0px 0px 0px 0px rgba(0, 0, 0, 0)",
         duration: 0.32,
         ease: "power2.inOut",
       }, 0);
@@ -235,22 +254,26 @@ export default function MayaIcon() {
 
     let trigger: ScrollTrigger | null = null;
 
+    // Morph-Timeline auf Ende zwingen falls sie gerade mid-play ist —
+    // so kollidieren die Transforms nicht mit dem Flip.
+    const forceMorphDone = () => {
+      const tl = morphTlRef.current;
+      if (tl && tl.progress() < 1) tl.progress(1, false);
+    };
+
+    // DOCK: Flip zwischen Home und Slot (beide sind positionierte Container).
     const dockIntoSlot = () => {
       if (dockedInSlot.current) return;
       dockedInSlot.current = true;
 
+      forceMorphDone();
       gsap.killTweensOf(container);
       gsap.killTweensOf(input);
 
       const state = Flip.getState(container, { props: "width,height" });
 
       slot.appendChild(container);
-      container.style.position = "relative";
-      container.style.bottom = "";
-      container.style.right = "";
-      container.style.top = "";
-      container.style.left = "";
-      container.style.width = "350px";
+      container.style.width = "410px";
       container.style.height = "70px";
 
       Flip.from(state, {
@@ -264,24 +287,24 @@ export default function MayaIcon() {
       });
     };
 
+    // UNDOCK: Flip zurück vom Slot in den Home-Container.
     const undockFromSlot = () => {
       if (!dockedInSlot.current) return;
       dockedInSlot.current = false;
 
+      forceMorphDone();
       gsap.killTweensOf(container);
       gsap.killTweensOf(input);
 
-      gsap.set(input, { opacity: 0 });
+      gsap.to(input, { opacity: 0, duration: 0.15, ease: "power2.out" });
       input.style.pointerEvents = "none";
+
+      const home = document.getElementById("maya-floating-home");
+      if (!home) return;
 
       const state = Flip.getState(container, { props: "width,height" });
 
-      document.body.appendChild(container);
-      container.style.position = "fixed";
-      container.style.bottom = "23px";
-      container.style.right = "36px";
-      container.style.top = "";
-      container.style.left = "";
+      home.appendChild(container);
       container.style.width = "70px";
       container.style.height = "70px";
 
@@ -310,17 +333,8 @@ export default function MayaIcon() {
     <div
       ref={containerRef}
       data-flip-id="maya"
-      style={docked ? {
+      style={{
         position: "relative",
-        width: size,
-        height: size,
-        cursor: "pointer",
-        zIndex: 100,
-      } : {
-        position: "fixed",
-        bottom: 23,
-        right: 36,
-        zIndex: 100,
         width: size,
         height: size,
         cursor: "pointer",
@@ -348,7 +362,7 @@ export default function MayaIcon() {
       <div
         style={{
           position: "absolute",
-          right: "-6px",
+          right: "-5.5px",
           bottom: "-0.24px",
           width: "19.142px",
           height: "23.244px",
@@ -356,10 +370,9 @@ export default function MayaIcon() {
           pointerEvents: "none",
         }}
       >
-        <img
+        <svg
           ref={spikeRightRef}
-          src="/assets/bubbleSpike.svg"
-          alt=""
+          viewBox="0 0 20 24"
           aria-hidden="true"
           style={{
             width: "100%",
@@ -368,7 +381,12 @@ export default function MayaIcon() {
             opacity: 0,
             transform: "scale(0)",
           }}
-        />
+        >
+          <path
+            d="M17 17C10.2 24.2 3.83333 23.9346 0 22.268C2.04406 22.268 4.0144 20.5274 5 18.5C6.1185 16.1992 6 12.4237 6 9.5V0C12.8333 3 23.8 9.8 17 17Z"
+            fill="#E9FFDE"
+          />
+        </svg>
       </div>
 
       <div
@@ -439,20 +457,36 @@ export default function MayaIcon() {
             right: 70,
             padding: "0 23px",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            fontFamily: "var(--font-body)",
-            fontSize: "15px",
-            lineHeight: 1.3,
-            color: "#636A5F",
+            alignItems: "center",
             opacity: 0,
             pointerEvents: "none",
-            whiteSpace: "nowrap",
           }}
         >
-          <div>Sende Leo eine Nachricht</div>
-          <div>...</div>
+          <input
+            type="text"
+            placeholder="Sende Leo eine Nachricht ..."
+            size={29}
+            className="maya-chat-input"
+            style={{
+              background: "transparent",
+              border: "none",
+              outline: "none",
+              padding: 0,
+              margin: 0,
+              fontFamily: "var(--font-body)",
+              fontSize: "17px",
+              lineHeight: 1.3,
+              color: "#636A5F",
+              width: "auto",
+            }}
+          />
         </div>
+        <style>{`
+          .maya-chat-input::placeholder {
+            color: #636A5F;
+            opacity: 1;
+          }
+        `}</style>
 
         <div
           ref={pillRef}
