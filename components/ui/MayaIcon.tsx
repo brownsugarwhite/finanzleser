@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Flip } from "gsap/dist/Flip";
 
-gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+gsap.registerPlugin(MotionPathPlugin, ScrollTrigger, Flip);
 
 const LEFT_EYE = { cx: 158.34, cy: 450.80 };
 const RIGHT_EYE = { cx: 413.69, cy: 450.80 };
@@ -20,7 +21,10 @@ export default function MayaIcon() {
   const leoGroupRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const pillTextRef = useRef<HTMLSpanElement>(null);
+  const spikeRightRef = useRef<HTMLImageElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
+  const dockedInSlot = useRef(false);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
   const [smooth, setSmooth] = useState(false);
   const wasInWindow = useRef(true);
@@ -153,7 +157,8 @@ export default function MayaIcon() {
     const leoGroup = leoGroupRef.current;
     const pill = pillRef.current;
     const pillText = pillTextRef.current;
-    if (!container || !tie || !leoGroup || !pill || !pillText) return;
+    const spikeRight = spikeRightRef.current;
+    if (!container || !tie || !leoGroup || !pill || !pillText || !spikeRight) return;
 
     const teaser = document.querySelector<HTMLElement>(".ai-agent-teaser");
     if (!teaser) return;
@@ -167,6 +172,13 @@ export default function MayaIcon() {
       // Pulse up (ganzer Batch) + Leo Counter-Scale (bleibt visuell gleich groß)
       tl.to(container, { scale: 1.25, duration: 0.28, ease: "power2.out" }, 0);
       tl.to(leoGroup, { scale: 1 / 1.25, duration: 0.28, ease: "power2.out" }, 0);
+      // Batch morpht: weiß → mint + Kreis → Bubble-Radius (synchron zum Pulse-Up)
+      tl.to(badge, {
+        backgroundColor: "#CFFFE3",
+        borderRadius: "27px",
+        duration: 0.32,
+        ease: "power2.inOut",
+      }, 0);
       // Kravatte
       tl.to(tie, {
         scaleX: 1.25,
@@ -179,6 +191,8 @@ export default function MayaIcon() {
       tl.to(leoGroup, { y: 80, duration: 0.38, ease: "power2.in" }, 0);
       // Magenta pill zooms in from behind
       tl.to(pill, { scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
+      // Rechter Spike erscheint am Peak (Batch am größten)
+      tl.to(spikeRight, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
       // Pulse zurück + Leo Counter-Scale zurück
       tl.to(container, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
       tl.to(leoGroup, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
@@ -208,6 +222,88 @@ export default function MayaIcon() {
     };
   }, []);
 
+  // Dock: MayaIcon flippt in den reservierten Slot unter den Bubbles und
+  // expandiert zum Chat-Eingabefeld. Reversibel beim Zurückscrollen.
+  useEffect(() => {
+    const container = containerRef.current;
+    const badge = badgeRef.current;
+    const input = inputRef.current;
+    if (!container || !badge || !input) return;
+
+    const slot = document.getElementById("maya-dock-slot-ai");
+    if (!slot) return;
+
+    let trigger: ScrollTrigger | null = null;
+
+    const dockIntoSlot = () => {
+      if (dockedInSlot.current) return;
+      dockedInSlot.current = true;
+
+      gsap.killTweensOf(container);
+      gsap.killTweensOf(input);
+
+      const state = Flip.getState(container, { props: "width,height" });
+
+      slot.appendChild(container);
+      container.style.position = "relative";
+      container.style.bottom = "";
+      container.style.right = "";
+      container.style.top = "";
+      container.style.left = "";
+      container.style.width = "350px";
+      container.style.height = "70px";
+
+      Flip.from(state, {
+        duration: 0.75,
+        ease: "power3.inOut",
+        absolute: true,
+        onComplete: () => {
+          gsap.to(input, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          input.style.pointerEvents = "auto";
+        },
+      });
+    };
+
+    const undockFromSlot = () => {
+      if (!dockedInSlot.current) return;
+      dockedInSlot.current = false;
+
+      gsap.killTweensOf(container);
+      gsap.killTweensOf(input);
+
+      gsap.set(input, { opacity: 0 });
+      input.style.pointerEvents = "none";
+
+      const state = Flip.getState(container, { props: "width,height" });
+
+      document.body.appendChild(container);
+      container.style.position = "fixed";
+      container.style.bottom = "23px";
+      container.style.right = "36px";
+      container.style.top = "";
+      container.style.left = "";
+      container.style.width = "70px";
+      container.style.height = "70px";
+
+      Flip.from(state, {
+        duration: 0.6,
+        ease: "power3.inOut",
+        absolute: true,
+      });
+    };
+
+    trigger = ScrollTrigger.create({
+      trigger: slot,
+      start: "bottom bottom-=20",
+      onEnter: dockIntoSlot,
+      onLeaveBack: undockFromSlot,
+    });
+
+    return () => {
+      trigger?.kill();
+    };
+  }, []);
+
   const size = 70;
 
   return (
@@ -217,6 +313,7 @@ export default function MayaIcon() {
       style={docked ? {
         position: "relative",
         width: size,
+        height: size,
         cursor: "pointer",
         zIndex: 100,
       } : {
@@ -225,6 +322,7 @@ export default function MayaIcon() {
         right: 36,
         zIndex: 100,
         width: size,
+        height: size,
         cursor: "pointer",
       }}
     >
@@ -248,11 +346,37 @@ export default function MayaIcon() {
       </svg>
 
       <div
+        style={{
+          position: "absolute",
+          right: "-6px",
+          bottom: "-0.24px",
+          width: "19.142px",
+          height: "23.244px",
+          transform: "scaleX(-1)",
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          ref={spikeRightRef}
+          src="/assets/bubbleSpike.svg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+            opacity: 0,
+            transform: "scale(0)",
+          }}
+        />
+      </div>
+
+      <div
         ref={badgeRef}
         style={{
           position: "relative",
-          width: size,
-          height: size,
+          width: "100%",
+          height: "100%",
           borderRadius: "50%",
           background: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "brightness(1.3) blur(13px)",
@@ -306,11 +430,39 @@ export default function MayaIcon() {
         </div>
 
         <div
+          ref={inputRef}
+          style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 70,
+            padding: "0 23px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            fontFamily: "var(--font-body)",
+            fontSize: "15px",
+            lineHeight: 1.3,
+            color: "#636A5F",
+            opacity: 0,
+            pointerEvents: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <div>Sende Leo eine Nachricht</div>
+          <div>...</div>
+        </div>
+
+        <div
           ref={pillRef}
           style={{
             position: "absolute",
-            inset: 5,
-            borderRadius: "50%",
+            top: 5,
+            right: 5,
+            width: 60,
+            height: 60,
+            borderRadius: "20px",
             background: "var(--color-brand-secondary)",
             display: "flex",
             alignItems: "center",

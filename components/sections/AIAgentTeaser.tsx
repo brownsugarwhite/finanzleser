@@ -1,35 +1,141 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ChatBubble({ children }: { children: React.ReactNode }) {
+  const slotRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const slot = slotRef.current;
+    const box = boxRef.current;
+    const visual = visualRef.current;
+    const text = textRef.current;
+    if (!slot || !box || !visual || !text) return;
+
+    let tl: gsap.core.Timeline | null = null;
+    let trigger: ScrollTrigger | null = null;
+    let cancelled = false;
+
+    const setup = async () => {
+      // Wait for web fonts so measurements are stable
+      const fonts = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts;
+      if (fonts?.ready) await fonts.ready;
+      if (cancelled || !slot.isConnected) return;
+
+      // Measure natural sizes (visual is currently position: relative in flow)
+      const vRect = visual.getBoundingClientRect();
+      const w = vRect.width;
+      const h = vRect.height;
+      const tRect = text.getBoundingClientRect();
+      const tw = tRect.width;
+
+      // Lock slot + box to natural layout size (reserves space; ScrollTrigger position stable)
+      slot.style.width = `${w}px`;
+      slot.style.height = `${h}px`;
+      box.style.width = `${w}px`;
+      box.style.height = `${h}px`;
+
+      // Move visual to absolute bottom-left; text width locked; initial tiny state
+      visual.style.position = "absolute";
+      visual.style.left = "0";
+      visual.style.bottom = "0";
+      gsap.set(visual, { width: 40, height: 40 });
+      gsap.set(text, { width: Math.ceil(tw) + 2, opacity: 0 });
+      gsap.set(box, { opacity: 0 });
+
+      slot.style.visibility = "visible";
+
+      tl = gsap.timeline({ paused: true });
+      // Fade in whole bubble box (visual + spike together — no alpha overlap)
+      tl.to(box, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
+      // Bloom: grow to natural size with subtle overshoot (Apple-bubbly)
+      tl.to(visual, {
+        width: w,
+        height: h,
+        duration: 0.85,
+        ease: "back.out(1.4)",
+      }, 0);
+      // Text fades in slightly later — appears as the bubble is mostly grown
+      tl.to(text, { opacity: 1, duration: 0.45, ease: "power2.out" }, 0.35);
+
+      trigger = ScrollTrigger.create({
+        trigger: slot,
+        start: "bottom bottom-=100",
+        onEnter: () => tl?.play(),
+        once: true,
+      });
+    };
+
+    setup();
+
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") {
+      requestAnimationFrame(onLoad);
+    } else {
+      window.addEventListener("load", onLoad);
+    }
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 400);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", onLoad);
+      clearTimeout(refreshTimer);
+      trigger?.kill();
+      tl?.kill();
+    };
+  }, []);
+
   return (
     <div
+      ref={slotRef}
       style={{
         position: "relative",
-        display: "inline-block",
         maxWidth: "400px",
-        background: "#CFFFE3",
-        borderRadius: "27px",
-        padding: "23px 27px",
-        fontFamily: "var(--font-body)",
-        fontSize: "17px",
-        lineHeight: 1.35,
-        color: "#636A5F",
+        visibility: "hidden",
       }}
     >
-      {children}
-      <img
-        src="/assets/bubbleSpike.svg"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          left: "-6px",
-          bottom: "-0.24px",
-          width: "19.142px",
-          height: "23.244px",
-          pointerEvents: "none",
-        }}
-      />
+      <div ref={boxRef} style={{ position: "relative" }}>
+        <div
+          ref={visualRef}
+          style={{
+            position: "relative",
+            display: "inline-block",
+            maxWidth: "400px",
+            background: "#CFFFE3",
+            borderRadius: "27px",
+            padding: "23px 27px",
+            fontFamily: "var(--font-body)",
+            fontSize: "17px",
+            lineHeight: 1.35,
+            color: "#636A5F",
+            overflow: "hidden",
+            boxSizing: "border-box",
+          }}
+        >
+          <div ref={textRef}>{children}</div>
+        </div>
+        <img
+          src="/assets/bubbleSpike.svg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-6px",
+            bottom: "-0.24px",
+            width: "19.142px",
+            height: "23.244px",
+            pointerEvents: "none",
+          }}
+        />
+      </div>
     </div>
   );
 }
@@ -115,7 +221,7 @@ export default function AIAgentTeaser() {
           }}
         >
           <ChatBubble>
-            Hallo ich bin Leo,
+            Hallo ich bin <span style={{ fontWeight: 700, color: "inherit" }}>Leo</span>,
             <br />
             Ihr persönlicher Finanzagent
           </ChatBubble>
@@ -126,6 +232,27 @@ export default function AIAgentTeaser() {
             </span>
           </ChatBubble>
           <ChatBubble>Wie kann ich helfen?</ChatBubble>
+        </div>
+
+        {/* Reservierter Dock-Slot für MayaIcon (rechts-aligned, gegenüber der Bubbles).
+            Höhe/Breite fest damit das Layout nicht springt wenn MayaIcon einfliegt. */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+            marginTop: "28px",
+          }}
+        >
+          <div
+            id="maya-dock-slot-ai"
+            style={{
+              position: "relative",
+              width: "350px",
+              height: "70px",
+              maxWidth: "100%",
+            }}
+          />
         </div>
       </div>
 
