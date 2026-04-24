@@ -44,13 +44,13 @@ p, li, span {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Merriweather', Georgia, serif !important;
-  font-weight: 700 !important;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
   line-height: 1.2;
 }
 
 h1, h2 {
-  font-weight: 900 !important;
+  font-weight: 900;
 }
 
 h1.article-title {
