@@ -1,6 +1,13 @@
-# Alle Beiträge mit Kategorien
+# Beitrags-Inventar Live (Legacy-Bestand)
 
-**Gesamt: 1026 Beiträge**
+> **Stand:** Snapshot aus `https://www.finanzleser.de` (Live, IONOS).
+> Diese 1026 Beiträge sind der **alte** Bestand und werden zum Launch durch
+> den neuen lokalen Inhalt ersetzt. Nutze diese Liste als Referenz für
+> URL-Erhalt + 301-Redirects, nicht als aktuellen Content-Stand.
+>
+> Siehe [ROADMAP.md](../ROADMAP.md) für Migrations-Strategie.
+
+**Gesamt im Legacy-Live-Bestand: 1026 Beiträge**
 
 | # | Beitrag | Slug | Alte Kategorien | Neue Kategorien (Relaunch) |
 |---|---------|------|-----------------|---------------------------|

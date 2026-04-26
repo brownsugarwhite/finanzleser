@@ -1,6 +1,11 @@
 # WordPress ACF Setup für Rechner-Konfiguration
 
-> Anleitung zur Einrichtung der dynamischen Rechner-Konfiguration via WordPress ACF
+> ⚠️ **VERALTET** — Wird mit Roadmap-Phase E (ACF-Eliminierung) obsolet.
+> Die 13 Rechner-Konfigurationswerte werden auf WP-Options-API oder
+> `config/rates.json` migriert. Datei bleibt vorerst als Referenz für
+> die Migration. Siehe [ROADMAP.md](../ROADMAP.md) Phase E7.
+>
+> Anleitung zur Einrichtung der dynamischen Rechner-Konfiguration via WordPress ACF (aktueller Stand)
 
 ---
 
