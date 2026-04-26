@@ -1,8 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
 import { getAllVergleiche } from "@/lib/wordpress";
+import { buildMetadata, SITE_NAME } from "@/lib/seo";
+
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -42,15 +46,17 @@ export async function generateStaticParams() {
     .map(v => ({ slug: v.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const data = VERGLEICH_DATA[slug];
   const title = data?.title || slug;
 
-  return {
-    title,
+  return buildMetadata({
+    title: `${title} – Vergleich – ${SITE_NAME}`,
     description: data?.desc || `Vergleichen Sie aktuelle Angebote: ${title}`,
-  };
+    path: `/finanztools/vergleiche/${slug}`,
+    noIndex: !data,
+  });
 }
 
 export default async function VergleichDetailPage({ params }: Props) {

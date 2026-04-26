@@ -1,8 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import { getAllRechner, getRechnerBySlug } from "@/lib/wordpress";
+import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+
+export const revalidate = 3600;
 
 // Fallback statische Daten - alle 51 Rechner
 const FALLBACK_RECHNER: Record<string, { title: string; type: string; desc: string }> = {
@@ -75,21 +79,24 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const rechner = await getRechnerBySlug(slug);
+  const fallback = FALLBACK_RECHNER[slug];
 
-  if (!rechner) {
-    return {
-      title: "Rechner nicht gefunden",
-      description: "Der angeforderte Rechner existiert nicht.",
-    };
+  const title = rechner?.title || fallback?.title;
+  const desc = stripHtml(rechner?.rechnerFelder?.beschreibung || rechner?.excerpt) || fallback?.desc;
+
+  if (!title) {
+    return { title: `Rechner nicht gefunden – ${SITE_NAME}`, robots: { index: false, follow: false } };
   }
 
-  return {
-    title: rechner.title,
-    description: rechner.rechnerFelder?.beschreibung || rechner.excerpt || `Nutzen Sie unseren ${rechner.title} für Ihre Finanzberechnungen.`,
-  };
+  return buildMetadata({
+    title: `${title} – ${SITE_NAME}`,
+    description: desc || `Nutzen Sie unseren ${title} für Ihre Finanzberechnungen.`,
+    path: `/finanztools/rechner/${slug}`,
+    image: rechner?.featuredImage?.node?.sourceUrl,
+  });
 }
 
 export default async function RechnerDetailPage({ params }: Props) {

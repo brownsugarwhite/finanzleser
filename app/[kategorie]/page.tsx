@@ -1,10 +1,55 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 import type { Post } from "@/lib/types";
+import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+
+export const revalidate = 3600;
+
+export async function generateMetadata(
+  props: { params: Promise<{ kategorie: string }> }
+): Promise<Metadata> {
+  const params = await props.params;
+  const slug = params.kategorie;
+
+  const post = await getPostBySlug(slug).catch(() => null);
+  if (post) {
+    return buildMetadata({
+      title: `${post.title} – ${SITE_NAME}`,
+      description: stripHtml(post.excerpt),
+      path: `/${slug}`,
+      image: post.featuredImage?.node?.sourceUrl,
+      type: "article",
+      publishedTime: post.date,
+      modifiedTime: post.date,
+    });
+  }
+
+  const anbieter = await getAnbieterBySlug(slug).catch(() => null);
+  if (anbieter) {
+    return buildMetadata({
+      title: `${anbieter.title} – Kontakt – ${SITE_NAME}`,
+      description: stripHtml(anbieter.content).slice(0, 160),
+      path: `/${slug}`,
+    });
+  }
+
+  const cat = await getCategoryBySlug(slug).catch(() => null);
+  if (cat) {
+    return buildMetadata({
+      title: `${cat.name} – ${SITE_NAME}`,
+      description: stripHtml(cat.description) || `Ratgeber, Rechner und Vergleiche zum Thema ${cat.name}.`,
+      path: `/${slug}`,
+      image: cat.image,
+    });
+  }
+
+  return { title: `${slug} – ${SITE_NAME}` };
+}
 
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;

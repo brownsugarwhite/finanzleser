@@ -1,11 +1,39 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getPostBySlug } from "@/lib/wordpress";
 import { isMainCategory } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import type { Category } from "@/lib/types";
+import { buildMetadata, stripHtml, SITE_NAME, absoluteUrl } from "@/lib/seo";
+import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
+
+export const revalidate = 3600;
+
+type RouteParams = { kategorie: string; sub: string; slug: string };
+
+export async function generateMetadata(
+  props: { params: Promise<RouteParams> }
+): Promise<Metadata> {
+  const params = await props.params;
+  const post = await getPostBySlug(params.slug).catch(() => null);
+  if (!post) return { title: `Nicht gefunden – ${SITE_NAME}` };
+
+  const mainCategory = post.categories?.nodes?.find((c: Category) => isMainCategory(c.slug));
+  return buildMetadata({
+    title: `${post.title} – ${SITE_NAME}`,
+    description: stripHtml(post.excerpt || post.beitragFelder?.beitragUntertitel),
+    path: `/${params.kategorie}/${params.sub}/${params.slug}`,
+    image: post.featuredImage?.node?.sourceUrl,
+    imageAlt: post.featuredImage?.node?.altText || post.title,
+    type: "article",
+    publishedTime: post.date,
+    modifiedTime: post.date,
+    ...(mainCategory && {}),
+  });
+}
 
 export default async function BeitragPage(props: {
-  params: Promise<{ kategorie: string; sub: string; slug: string }>;
+  params: Promise<RouteParams>;
 }) {
   const params = await props.params;
   const post = await getPostBySlug(params.slug).catch(() => null);
@@ -38,7 +66,27 @@ export default async function BeitragPage(props: {
     return ((hash % 6) + 1) as 1 | 2 | 3 | 4 | 5 | 6;
   };
 
+  const articlePath = `/${params.kategorie}/${params.sub}/${params.slug}`;
+  const breadcrumbItems = [
+    { name: "Startseite", path: "/" },
+    ...(mainCategory ? [{ name: mainCategory.name, path: `/${params.kategorie}` }] : []),
+    ...(category ? [{ name: category.name, path: `/${params.kategorie}/${params.sub}` }] : []),
+    { name: post.title, path: articlePath },
+  ];
+
   return (
+    <>
+      <JsonLd data={articleSchema({
+        headline: post.title,
+        description: stripHtml(post.excerpt),
+        url: absoluteUrl(articlePath),
+        image: post.featuredImage?.node?.sourceUrl,
+        datePublished: post.date,
+        dateModified: post.date,
+        authorName: post.author?.node?.name,
+        section: mainCategory?.name,
+      })} />
+      <JsonLd data={breadcrumbSchema(breadcrumbItems)} />
     <ArticleLayout
       title={post.title}
       subtitle={post.beitragFelder?.beitragUntertitel}
@@ -62,5 +110,6 @@ export default async function BeitragPage(props: {
           : undefined
       }
     />
+    </>
   );
 }

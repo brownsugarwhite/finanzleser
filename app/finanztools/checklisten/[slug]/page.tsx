@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import VisualLottie from "@/components/ui/VisualLottie";
@@ -8,6 +9,9 @@ import { getAllChecklisten, getChecklisteBySlug } from "@/lib/wordpress";
 import { parsePDF } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
 import type { CheckboxPosition } from "@/lib/checklisteParser";
+import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -20,23 +24,24 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const checkliste = await getChecklisteBySlug(slug);
 
   if (!checkliste) {
     return {
-      title: "Checkliste nicht gefunden",
-      description: "Die angeforderte Checkliste existiert nicht.",
+      title: `Checkliste nicht gefunden – ${SITE_NAME}`,
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${checkliste.title} – Checkliste`,
-    description:
-      checkliste.checklisten?.checklistenBeschreibung ||
-      `Interaktive Checkliste: ${checkliste.title}`,
-  };
+  return buildMetadata({
+    title: `${checkliste.title} – Checkliste – ${SITE_NAME}`,
+    description: stripHtml(
+      checkliste.checklisten?.checklistenBeschreibung || checkliste.excerpt
+    ) || `Interaktive Checkliste: ${checkliste.title}`,
+    path: `/finanztools/checklisten/${slug}`,
+  });
 }
 
 export default async function ChecklisteDetailPage({ params }: Props) {

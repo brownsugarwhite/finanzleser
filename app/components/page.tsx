@@ -28,8 +28,8 @@ export default async function ComponentsPage() {
           <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "24px", fontWeight: 600, marginBottom: "16px", color: "var(--color-text-primary)" }}>Button</h2>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <Button label="Primary Button" />
-            <Button label="Secondary" variant="secondary" />
-            <Button label="Large Button" size="lg" />
+            <Button label="Secondary" />
+            <Button label="Large Button" />
           </div>
         </section>
 
