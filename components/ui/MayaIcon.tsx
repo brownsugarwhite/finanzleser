@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -37,11 +38,15 @@ export default function MayaIcon() {
   const [docked, setDocked] = useState(false);
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
+  const pathname = usePathname();
 
   // Detect landing page + set initial home container + docked state.
   // Der Home-Container ist die "feste Ecke" (position:fixed bottom-right),
   // in der die Batch wohnt wenn sie nicht gerade in einem anderen Slot
   // (Search-Pill oder KI-Section) angedockt ist.
+  // Re-runs bei Navigation (pathname-Änderung), damit Maya nach Page-Wechsel
+  // wieder einen gültigen Parent hat — sonst hängt sie im DOM-Limbo wenn ein
+  // page-spezifischer Slot (z.B. maya-dock-slot, maya-dock-slot-ai) entfernt wird.
   useEffect(() => {
     let home = document.getElementById("maya-floating-home");
     if (!home) {
@@ -58,26 +63,51 @@ export default function MayaIcon() {
       document.body.appendChild(home);
     }
 
+    const el = containerRef.current;
+    if (!el) return;
+
+    // State zurücksetzen — falls vorherige Page Maya in Chat- oder Dock-Mode hatte
+    dockedInSlot.current = false;
+    if (chatOpenRef.current) {
+      chatOpenRef.current = false;
+      document.body.style.overflow = "";
+      const backdrop = document.getElementById("maya-chat-backdrop");
+      if (backdrop) backdrop.style.display = "none";
+      const chatCenter = document.getElementById("maya-chat-center");
+      if (chatCenter) chatCenter.style.pointerEvents = "none";
+      window.dispatchEvent(new CustomEvent("menu-closed"));
+    }
+    gsap.killTweensOf(el);
+    el.dataset.state = "default";
+    el.style.position = "relative";
+    el.style.top = "";
+    el.style.left = "";
+    el.style.width = "70px";
+    el.style.height = "70px";
+    gsap.set(el, { x: 0, y: 0, clearProps: "transform" });
+    // Morph-TL auf Anfang zurück (falls auf voriger Page mid-play)
+    if (morphTlRef.current && morphTlRef.current.progress() > 0) {
+      morphTlRef.current.progress(0, false).pause();
+    }
+
     isLanding.current = document.body.hasAttribute("data-landing");
+    hasUndocked.current = false;
+
     if (isLanding.current && window.scrollY <= 5) {
       setDocked(true);
-      // Reparent into the pill slot if it exists
       const slot = document.getElementById("maya-dock-slot");
-      if (slot && containerRef.current) {
-        slot.appendChild(containerRef.current);
-        containerRef.current.style.visibility = "visible";
+      if (slot) {
+        slot.appendChild(el);
+      } else {
+        home.appendChild(el);
       }
     } else {
-      // Already scrolled or not landing — in home container packen und anzeigen
       hasUndocked.current = true;
-      if (containerRef.current && containerRef.current.parentElement !== home) {
-        home.appendChild(containerRef.current);
-      }
-      if (containerRef.current) {
-        containerRef.current.style.visibility = "visible";
-      }
+      setDocked(false);
+      home.appendChild(el);
     }
-  }, []);
+    el.style.visibility = "visible";
+  }, [pathname]);
 
   // Scroll listener: undock on first scroll
   useEffect(() => {
@@ -235,14 +265,19 @@ export default function MayaIcon() {
     } else {
       window.addEventListener("load", onLoad);
     }
-    const t = setTimeout(() => ScrollTrigger.refresh(), 300);
+    const t1 = setTimeout(() => ScrollTrigger.refresh(), 300);
+    // Zweiter Refresh nach 1.2s — fängt späte Bild-/Font-Loads auf Artikelseiten
+    // ab, sonst trigger-Position aus stale Layout (morph feuert zu früh).
+    const t2 = setTimeout(() => ScrollTrigger.refresh(), 1200);
 
     return () => {
       window.removeEventListener("load", onLoad);
-      clearTimeout(t);
+      clearTimeout(t1);
+      clearTimeout(t2);
       ctx.revert();
+      morphTlRef.current = null;
     };
-  }, []);
+  }, [pathname]);
 
   // Dock: MayaIcon flippt in den reservierten Slot unter den Bubbles und
   // expandiert zum Chat-Eingabefeld. Reversibel beim Zurückscrollen.
@@ -325,10 +360,16 @@ export default function MayaIcon() {
       onLeaveBack: undockFromSlot,
     });
 
+    // ScrollTrigger.refresh nach Navigation, damit der Trigger korrekte
+    // Positionen für die neue Page bekommt (sonst feuert er evtl. zu früh
+    // weil Layout-Höhen aus voriger Page gecached sind).
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 300);
+
     return () => {
       trigger?.kill();
+      clearTimeout(refreshTimer);
     };
-  }, []);
+  }, [pathname]);
 
   // Chat-Modus: Klick auf Leo → Flip zur Viewport-Mitte + Content-Blur
   useEffect(() => {
@@ -470,7 +511,12 @@ export default function MayaIcon() {
       // Content-Scaler), müssen wir die UNscaled-Rect berechnen — sonst landet Maya
       // am falschen Platz und springt beim Reparent (un-blur → scale zurück auf 1).
       const rawRect = prev.getBoundingClientRect();
-      const insideScaled = prev.closest(".scalable-landing, [data-scale-extended]");
+      // .scalable-content ist der Fallback-Scaler auf Nicht-Landing-Pages
+      // (Artikelseiten). Ohne ihn hier wäre die Unscale-Math nur auf Landing
+      // korrekt → springender Reparent-Snap auf Artikelseiten.
+      const insideScaled = prev.closest(
+        ".scalable-landing, [data-scale-extended], .scalable-content"
+      );
       const targetRect = (() => {
         if (!insideScaled) return { left: rawRect.left, top: rawRect.top };
         const cx = window.innerWidth / 2;
@@ -709,7 +755,7 @@ export default function MayaIcon() {
             right: 5,
             width: 60,
             height: 60,
-            borderRadius: "20px",
+            borderRadius: "22px",
             background: "var(--color-brand-secondary)",
             display: "flex",
             alignItems: "center",
