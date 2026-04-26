@@ -44,14 +44,37 @@ CLAUDE.md neu, README.md ausgebaut, ROADMAP.md (diese Datei) ergänzt, `docs/` a
 - `lib/hooks/` (Daten-Hooks) vs `/hooks/` (Animation-Hooks) — Doppelung auflösen
 - `lib/` ggf. in Subdirs (`lib/wordpress/`, `lib/utils/`)
 
-### Phase C — WordPress-Backend Cleanup (lokal) 🟡
+### ✅ Phase C — WordPress-Backend Cleanup (abgeschlossen)
 
-**Status:** ausstehend
-**Risiko:** Mittel — über WP-Admin via Claude-MCP-Connector
+**Status:** ✅ erledigt am 2026-04-26
+**Vorgehen:** WP-CLI via Local-by-Flywheel bundled phar (`/Applications/Local.app/.../wp-cli.phar`)
 
-48 Plugins → ~25 Plugins. Legacy raus (`js_composer`, `ubermenu`, `shortcodes-ultimate`, `wp-table-builder*`, `advanced-ads*`, `templatera`, `tinymce-advanced`, `header-footer`). Uploads aufräumen (~660 MB Archiv-Jahre, 333 MB ShortPixel-Backups).
+**Resultat: 48 Plugins → 11 Plugins + 3 mu-plugins, ~1.7 GB freigeräumt**
 
-Vorher: UpdraftPlus-Backup. Nachher: Speicherplatz-Vergleich, Stichprobe 4-5 Beiträge.
+Aktive Plugins finale Liste:
+- ACF Pro · WPGraphQL · WPGraphQL-ACF (alle bis Phase E)
+- Yoast SEO + Premium
+- finanzleser-blocks (eigene Custom Blocks)
+- UpdraftPlus (Backups)
+- Sucuri Scanner + BBQ Firewall (Security)
+- Yoast Duplicate Post (Komfort)
+- Zendesk (Vorbereitung KI-Agent)
+
+Aktive mu-plugins: `finanzleser-anbieter`, `finanzleser-block-passthrough`, `finanzleser-config` (alle Eigenentwicklung, alle nötig).
+
+Gelöscht (35 total):
+- 28 inaktive Legacy-Plugins (WPBakery, UberMenu, Shortcodes Ultimate, WP Table Builder + Pro, Advanced Ads + Pro + Tracking, Templatera, TinyMCE Advanced, Header-Footer, etc.)
+- 7 weitere als entbehrlich identifiziert (WP Sheet Editor + Redirection — wird durch MCP-Connector ersetzt; Native PHP Sessions; Catch IDs; Last Modified Timestamp; Health Check; WP Crontrol)
+- `fix-categories.php` mu-plugin (Legacy-Migration, längst gelaufen)
+
+Uploads-Cleanup:
+- ShortPixel-Backups (333 MB)
+- Alte Jahresordner 2016-2021 (~625 MB) — vorher per SQL geprüft: 0 Referenzen in publizierten Posts
+- WP-Rocket-Reste (~40 MB)
+- 2020 behalten (1 Bild noch als Featured-Image referenziert: Startseite)
+- 2026 selbstverständlich behalten (neue Inhalte)
+
+Alle Smoke-Tests grün (GraphQL + alle Next.js-Routen 200 OK).
 
 ### Phase D — Staging einrichten 🟡
 

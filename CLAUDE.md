@@ -73,7 +73,9 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 | WPGraphQL for ACF | ACF-Felder über GraphQL (🚧 entfällt mit Phase E) |
 | Yoast SEO Premium | Meta-Daten |
 | `finanzleser-blocks` (eigenes Plugin) | Custom Gutenberg Blocks (`finanzleser/rechner`, `/checkliste`, `/vergleich`) |
-| `core-extend` (eigenes Plugin) | Custom Hooks/Filter |
+| `finanzleser-anbieter` (mu-plugin) | Registriert CPT „anbieter" (147 Versicherer-Kontaktseiten) |
+| `finanzleser-block-passthrough` (mu-plugin) | Erhält `core/latest-posts` als Block-Kommentar im post_content (für Next.js-Render) |
+| `finanzleser-config` (mu-plugin) | ACF Options Page „Rechner-Konfiguration" + lädt `config/rates.json` (🚧 Phase E migriert dies in Direkt-Read) |
 
 ### Tools
 | Tool | Zweck |
