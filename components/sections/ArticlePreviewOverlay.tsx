@@ -1,13 +1,11 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useDrag } from "@use-gesture/react";
 import { gsap, initGSAP } from "@/lib/gsapConfig";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import Spacer from "@/components/ui/Spacer";

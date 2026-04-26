@@ -1,10 +1,9 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 
 function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null) {
   const triggers: ScrollTrigger[] = [];

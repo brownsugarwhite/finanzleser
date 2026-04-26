@@ -1,10 +1,8 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { Fragment, useRef, useCallback, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
+import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/hooks/useNavPill";
 import Spark from "@/components/ui/Spark";

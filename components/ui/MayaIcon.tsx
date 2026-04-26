@@ -1,14 +1,12 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { Flip } from "gsap/dist/Flip";
+import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger } from "@/lib/gsapConfig";
+import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
-
-gsap.registerPlugin(MotionPathPlugin, ScrollTrigger, Flip);
 
 const LEFT_EYE = { cx: 158.34, cy: 450.80 };
 const RIGHT_EYE = { cx: 413.69, cy: 450.80 };

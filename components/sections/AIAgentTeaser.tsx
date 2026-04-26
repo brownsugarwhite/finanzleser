@@ -1,11 +1,10 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 
 function ChatBubble({ children }: { children: React.ReactNode }) {
   const slotRef = useRef<HTMLDivElement>(null);

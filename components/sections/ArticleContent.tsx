@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 
 const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Rechner wird geladen...</div>,

@@ -1,10 +1,8 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useEffect, useState, useRef, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
+import gsap from "@/lib/gsapConfig";
 
 const tocHoverStyles = `
   .toc-item:not(.toc-active):hover .toc-badge {

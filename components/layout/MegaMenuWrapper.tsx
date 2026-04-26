@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
 import MegaMenu, { type PreloadedData } from "./MegaMenu";
 import TopNav from "./TopNav";

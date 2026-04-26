@@ -1,10 +1,9 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 
 interface MorphingSectionProps {
   variant?: "default" | "inverted";

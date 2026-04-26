@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/hooks/useNavPill";
 import MegaMenu from "./MegaMenu";

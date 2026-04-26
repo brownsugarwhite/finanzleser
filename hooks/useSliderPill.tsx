@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useCallback, useEffect } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 
 /* ── Constants ──────────────────────────────────── */
 

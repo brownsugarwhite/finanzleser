@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useLayoutEffect } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 
 interface TopBannerProps {
   text: string;

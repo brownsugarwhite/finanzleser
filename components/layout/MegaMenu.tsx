@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 import type { NavSubItem } from "@/lib/navItems";
 
 function boldYears(text: string) {

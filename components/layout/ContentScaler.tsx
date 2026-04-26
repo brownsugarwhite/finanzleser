@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 
 export default function ContentScaler() {
   const isOpenRef = useRef(false);

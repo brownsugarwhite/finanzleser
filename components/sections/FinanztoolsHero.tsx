@@ -1,11 +1,9 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import gsap from "@/lib/gsapConfig";
 import lottie from "lottie-web";
-
-gsap.registerPlugin(ScrollToPlugin);
 import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import Button from "@/components/ui/Button";

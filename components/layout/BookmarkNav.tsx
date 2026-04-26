@@ -1,11 +1,10 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import Image from "next/image";
 import { useRef, useCallback, useState, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 
 /* ── Constants ── */
 

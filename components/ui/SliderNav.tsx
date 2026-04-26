@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsapConfig";
 import InstagramDots from "@/components/ui/InstagramDots";
 
 interface SliderNavProps {

@@ -1,13 +1,11 @@
 "use client";
 
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import gsap from "@/lib/gsapConfig";
 import ResultSpacer from "@/components/ui/ResultSpacer";
 import { useRechnerLayout } from "@/components/rechner/RechnerLayoutContext";
-
-gsap.registerPlugin(ScrollToPlugin);
 
 interface RechnerResultsProps {
   children: React.ReactNode;

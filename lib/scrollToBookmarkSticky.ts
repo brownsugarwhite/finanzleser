@@ -1,9 +1,7 @@
 "use client";
 
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
+import gsap from "@/lib/gsapConfig";
 
 const STICKY_TOP = 23;
 

@@ -2,7 +2,7 @@
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 import TopNav from "@/components/layout/TopNav";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 

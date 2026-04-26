@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useCallback } from "react";
 import Image from "next/image";
-import gsap from "gsap";
+import gsap from "@/lib/gsapConfig";
 
 /* ── Constants ──────────────────────────────────── */
 
