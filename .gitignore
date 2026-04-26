@@ -30,3 +30,6 @@ scripts/faq-batches/
 
 # Anbieter-Import Zwischenergebnis (generiert aus assets/anbieter/)
 scripts/anbieter-import.json
+
+# Lokale MCP-Server-Registrierung (maschinenspezifische Pfade)
+.mcp.json
