@@ -3,11 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useNavItems } from "@/lib/NavContext";
-import MegaMenu from "./MegaMenu";
+import MegaMenu, { type PreloadedData } from "./MegaMenu";
 import TopNav from "./TopNav";
 
-type SubData = { posts: { id: string; title: string; slug: string }[]; hasMore: boolean; tools: any[] };
-type MegaMenuCache = Record<string, SubData>;
+type MegaMenuCache = PreloadedData;
 
 export default function MegaMenuWrapper() {
   const NAV_ITEMS = useNavItems();

@@ -92,8 +92,8 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
       container.appendChild(slotDiv);
 
       // Reset fde array to prevent duplicates
-      (window as Record<string, unknown>).fde = [];
-      const fde = (window as Record<string, unknown>).fde as Array<Record<string, string>[]>;
+      (window as unknown as Record<string, unknown>).fde = [];
+      const fde = (window as unknown as Record<string, unknown>).fde as Array<Record<string, string>[]>;
       fde.push([
         { slotId: scriptConfig.slotId },
         { siteKey: scriptConfig.siteKey },

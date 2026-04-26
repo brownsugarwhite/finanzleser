@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
+import type { Post, Rechner, Checkliste, Vergleich, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
 import { decodePostContent } from "./html-utils";
 
 function getClient(): GraphQLClient {
@@ -52,10 +52,11 @@ export async function getAllPosts(): Promise<Post[]> {
   let hasNextPage = true;
   let after: string | null = null;
 
+  type AllPostsResponse = {
+    posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+  };
   while (hasNextPage) {
-    const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
-    }>(query, { after });
+    const data: AllPostsResponse = await client.request<AllPostsResponse>(query, { after });
     allNodes.push(...data.posts.nodes);
     hasNextPage = data.posts.pageInfo.hasNextPage;
     after = data.posts.pageInfo.endCursor;
@@ -877,10 +878,11 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
     let hasNextPage = true;
     let after: string | null = null;
 
+    type ChecklistenResponse = {
+      checklisten: { nodes: Checkliste[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    };
     while (hasNextPage) {
-      const data = await client.request<{
-        checklisten: { nodes: Checkliste[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
-      }>(query, { after });
+      const data: ChecklistenResponse = await client.request<ChecklistenResponse>(query, { after });
       allNodes.push(...data.checklisten.nodes);
       hasNextPage = data.checklisten.pageInfo.hasNextPage;
       after = data.checklisten.pageInfo.endCursor;

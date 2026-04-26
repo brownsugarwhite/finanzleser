@@ -52,10 +52,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  typescript: {
-    // Bestand-TS-Fehler werden in Phase 2 (Cleanup) behoben.
-    ignoreBuildErrors: true,
-  },
   images: {
     remotePatterns: [
       {

@@ -14,8 +14,9 @@ function boldYears(text: string) {
 import type { Post, Rechner } from "@/lib/types";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
-type ToolType = "rechner" | "checkliste" | "vergleich";
-type MegaMenuPost = Post & { tools?: ToolType[] };
+export type ToolType = "rechner" | "checkliste" | "vergleich";
+export type MegaMenuPost = Post & { tools?: ToolType[] };
+export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: Rechner[] }>;
 
 const TOOL_DOT_COLORS: Record<ToolType, string> = {
   rechner: "var(--color-tool-rechner)",
@@ -51,8 +52,6 @@ function ToolDots({ tools }: { tools?: ToolType[] }) {
     </span>
   );
 }
-
-type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: Rechner[] }>;
 
 interface MegaMenuProps {
   activeCategory: string;

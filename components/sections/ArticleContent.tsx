@@ -162,7 +162,7 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
           duration: DURATION,
           ease: "power3.out",
           onStart: () => section.classList.remove("is-open"),
-          onComplete: () => gsap.set(answer, { clearProps: "height,paddingBottom" }),
+          onComplete: () => { gsap.set(answer, { clearProps: "height,paddingBottom" }); },
         });
       } else {
         section.classList.add("is-open");
@@ -173,7 +173,7 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
           paddingBottom: PADDING_PX,
           duration: DURATION,
           ease: "power3.out",
-          onComplete: () => gsap.set(answer, { height: "auto" }),
+          onComplete: () => { gsap.set(answer, { height: "auto" }); },
         });
       }
     };
