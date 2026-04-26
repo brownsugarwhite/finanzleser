@@ -4,6 +4,42 @@
    ───────────────────────────────────────────── */
 
 /* ─────────────────────────────────────────────
+   Root Layout (app/layout.tsx)
+   ───────────────────────────────────────────── */
+.scalable-content {
+  position: relative;
+}
+
+/* Bookmark Sticky Row im Root-Layout (BookmarkNav) */
+.bookmark-section {
+  width: 100%;
+  height: 50px;
+  margin-top: 23px;
+  position: sticky;
+  top: 23px;
+  z-index: 62;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.bookmark-section__inner {
+  pointer-events: auto;
+}
+
+/* Sticky Nav Row (DotLine + PoweredBy) im Root-Layout */
+.sticky-nav.dotline-animated {
+  position: sticky;
+  top: 76px;
+  z-index: 52;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 3px;
+  margin-bottom: 36px;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
    Top Bar Grid (shared by logo-container & nav-container)
    ───────────────────────────────────────────── */
 .topbar-grid {

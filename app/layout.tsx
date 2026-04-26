@@ -93,19 +93,19 @@ export default async function RootLayout({
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>
-          <div className="bookmark-section" style={{ width: "100%", height: "50px", marginTop: "23px", position: "sticky", top: "23px", zIndex: 62, display: "flex", justifyContent: "flex-end", pointerEvents: "none" }}>
-            <div style={{ pointerEvents: "auto" }}><BookmarkNav /></div>
+          <div className="bookmark-section">
+            <div className="bookmark-section__inner"><BookmarkNav /></div>
           </div>
           <LogoBar />
           <TopNav />
           {/* DotLine + Powered by */}
-          <div className="sticky-nav dotline-animated" style={{ position: "sticky", top: 76, zIndex: 52, width: "100%", display: "flex", justifyContent: "start", marginBottom: "36px", marginTop: "3px", pointerEvents: "none" }}>
+          <div className="sticky-nav dotline-animated">
             <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
           </div>
           <ContentScaler />
           <MegaMenuWrapper />
           <FinanztoolsMenu />
-          <div className="scalable-content" style={{ position: "relative" }}>
+          <div className="scalable-content">
             {children}
           </div>
           <ProgressiveBlur height={120} />
