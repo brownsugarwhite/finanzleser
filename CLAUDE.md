@@ -155,17 +155,15 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
   anbieter-utils.ts
   checklisteParser.ts   → PDF-Parser für Checklisten
   /calculators/         → Rechner-Logik (Pure-JS-Funktionen)
-  /hooks/               → useRates, useRechner, useRechnerState (Daten-Hooks)
-
-/hooks                  → useNavPill, useSliderPill, useRevolverSlider (Animation-Hooks)
-                          🚧 Doppelung mit lib/hooks/ wird in Roadmap-Phase B aufgelöst
+  /hooks/               → ALLE Hooks (Daten + Animation):
+                          useRates, useRechner, useRechnerState (Daten),
+                          useNavPill, useSliderPill, useRevolverSlider (Animation)
 
 /acf-json               → group_rechner_config.json (🚧 wird in Phase E gelöscht)
 
-/scripts                → Migrations-Scripts (seed-*, update-*, convert-*, fix-*)
-                          🚧 wird in Roadmap-Phase B in scripts/migrations/ + scripts/data/ getrennt
+/scripts                → Migrations-Scripts + Daten-Files (siehe scripts/README.md)
 
-/docs                   → WORDPRESS_ACF_SETUP.md, beitraege_kategorien.md, etc.
+/docs                   → WORDPRESS_ACF_SETUP.md, beitraege_kategorien.md
                           siehe ROADMAP.md für aktuellen Stand
 ```
 

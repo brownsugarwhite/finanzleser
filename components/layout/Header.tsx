@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
-import { useNavPill } from "@/hooks/useNavPill";
+import { useNavPill } from "@/lib/hooks/useNavPill";
 import MegaMenu from "./MegaMenu";
 import Spacer from "@/components/ui/Spacer";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";

@@ -4,7 +4,7 @@ import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { Fragment, useRef, useCallback, useEffect } from "react";
 import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
-import { useNavPill } from "@/hooks/useNavPill";
+import { useNavPill } from "@/lib/hooks/useNavPill";
 import Spark from "@/components/ui/Spark";
 
 export default function TopNav({ className = "sticky-nav", style, defaultActive }: { className?: string; style?: React.CSSProperties; defaultActive?: string }) {

@@ -6,7 +6,7 @@ import SlideCategoryCard, { type CategorySlide } from '@/components/ui/SlideCate
 import SliderNav from '@/components/ui/SliderNav';
 import SliderSafeZone from '@/components/ui/SliderSafeZone';
 import ArticleSlider from '@/components/sections/ArticleSlider';
-import { useSliderPill } from '@/hooks/useSliderPill';
+import { useSliderPill } from '@/lib/hooks/useSliderPill';
 import type { Post } from '@/lib/types';
 
 const CAT_GAP = 65;

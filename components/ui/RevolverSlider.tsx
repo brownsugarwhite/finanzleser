@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
-import { useRevolverSlider } from "@/hooks/useRevolverSlider";
+import { useRevolverSlider } from "@/lib/hooks/useRevolverSlider";
 
 /* ── Types ── */
 
