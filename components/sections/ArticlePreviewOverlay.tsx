@@ -220,6 +220,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const textRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const infoRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const categoryRefs = useRef<Map<string, HTMLElement>>(new Map());
   const slideWrapperRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const setBoxRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
@@ -237,6 +238,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const setInfoRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) infoRefs.current.set(slug, el);
     else infoRefs.current.delete(slug);
+  }, []);
+  const setCategoryRef = useCallback((slug: string) => (el: HTMLElement | null) => {
+    if (el) categoryRefs.current.set(slug, el);
+    else categoryRefs.current.delete(slug);
   }, []);
 
   const isExitingRef = useRef(false);
@@ -264,6 +269,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           if (bgEl) bgEl.style.visibility = "";
           const infoEl = el.querySelector<HTMLElement>("[data-card-info]");
           if (infoEl) infoEl.style.visibility = "";
+          const catEl = el.querySelector<HTMLElement>("[data-card-category]");
+          if (catEl) catEl.style.visibility = "";
           const textEl = el.querySelector<HTMLElement>("[data-card-text]");
           if (textEl) textEl.style.opacity = "";
         }
@@ -316,6 +323,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (srcCardBgEl) srcCardBgEl.style.visibility = "hidden";
     const srcCardInfoEl = sourceCardEl.querySelector<HTMLElement>("[data-card-info]");
     if (srcCardInfoEl) srcCardInfoEl.style.visibility = "hidden";
+    const srcCardCatEl = sourceCardEl.querySelector<HTMLElement>("[data-card-category]");
+    if (srcCardCatEl) srcCardCatEl.style.visibility = "hidden";
     const cardTextEl = sourceCardEl.querySelector<HTMLElement>("[data-card-text]");
     if (cardTextEl) {
       gsap.to(cardTextEl, {
@@ -337,6 +346,18 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         overlayInfoEl,
         { opacity: 1 },
         { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
+      );
+    }
+
+    // Overlay category badge fades 0→1 parallel to the image morph — appears as
+    // the image grows into the preview, regardless of whether the source card
+    // had its own category badge.
+    const overlayCategoryEl = categoryRefs.current.get(post.slug);
+    if (overlayCategoryEl) {
+      gsap.fromTo(
+        overlayCategoryEl,
+        { opacity: 0 },
+        { opacity: 1, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
       );
     }
 
@@ -587,6 +608,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       if (prevBgEl) prevBgEl.style.visibility = "";
       const prevInfoEl = prevCardEl.querySelector<HTMLElement>("[data-card-info]");
       if (prevInfoEl) prevInfoEl.style.visibility = "";
+      const prevCatEl = prevCardEl.querySelector<HTMLElement>("[data-card-category]");
+      if (prevCatEl) prevCatEl.style.visibility = "";
       const cardTextEl = prevCardEl.querySelector<HTMLElement>("[data-card-text]");
       if (cardTextEl) gsap.to(cardTextEl, { opacity: 1, duration: 0.3, ease: "power2.out" });
     }
@@ -600,6 +623,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       if (nextBgEl) nextBgEl.style.visibility = "hidden";
       const nextInfoEl = nextCardEl.querySelector<HTMLElement>("[data-card-info]");
       if (nextInfoEl) nextInfoEl.style.visibility = "hidden";
+      const nextCatEl = nextCardEl.querySelector<HTMLElement>("[data-card-category]");
+      if (nextCatEl) nextCatEl.style.visibility = "hidden";
       const nextTextEl = nextCardEl.querySelector<HTMLElement>("[data-card-text]");
       if (nextTextEl) nextTextEl.style.opacity = "0";
     }
@@ -814,6 +839,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (tgtCardBgEl) tgtCardBgEl.style.visibility = "hidden";
     const tgtCardInfoEl = currentCardEl.querySelector<HTMLElement>("[data-card-info]");
     if (tgtCardInfoEl) tgtCardInfoEl.style.visibility = "hidden";
+    const tgtCardCatEl = currentCardEl.querySelector<HTMLElement>("[data-card-category]");
+    if (tgtCardCatEl) tgtCardCatEl.style.visibility = "hidden";
     const cardTextEl = currentCardEl.querySelector<HTMLElement>("[data-card-text]");
 
     // Overlay info-i fades 0→1 parallel to the image morph.
@@ -823,6 +850,16 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         overlayInfoEl,
         { opacity: 0 },
         { opacity: 1, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
+      );
+    }
+
+    // Overlay category badge fades 1→0 parallel to the image morph (close).
+    const overlayCategoryEl = categoryRefs.current.get(post.slug);
+    if (overlayCategoryEl) {
+      gsap.fromTo(
+        overlayCategoryEl,
+        { opacity: 1 },
+        { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE, immediateRender: true }
       );
     }
 
@@ -892,6 +929,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       const finish = () => {
         if (tgtCardBgEl) tgtCardBgEl.style.visibility = "";
         if (tgtCardInfoEl) tgtCardInfoEl.style.visibility = "";
+        if (tgtCardCatEl) tgtCardCatEl.style.visibility = "";
         onClose();
       };
       if (cardTextEl) {
@@ -1226,6 +1264,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 setImageRef={setImageRef(p.slug)}
                 setTextRef={setTextRef(p.slug)}
                 setInfoRef={setInfoRef(p.slug)}
+                setCategoryRef={setCategoryRef(p.slug)}
                 onClose={requestClose}
               />
             </div>
@@ -1344,6 +1383,7 @@ interface SlidePreviewProps {
   setImageRef: (el: HTMLDivElement | null) => void;
   setTextRef: (el: HTMLDivElement | null) => void;
   setInfoRef: (el: HTMLDivElement | null) => void;
+  setCategoryRef: (el: HTMLElement | null) => void;
   onClose: () => void;
 }
 
@@ -1354,6 +1394,7 @@ function SlidePreview({
   setImageRef,
   setTextRef,
   setInfoRef,
+  setCategoryRef,
   onClose,
 }: SlidePreviewProps) {
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
@@ -1552,6 +1593,32 @@ function SlidePreview({
               display: "block",
             }}
           />
+        )}
+        {/* Kategorie oben links — fadet während des Morph synchron ein/aus.
+            Wird in der finalen Preview-Größe immer gezeigt, unabhängig davon
+            ob die Source-Card eine Kategorie trägt oder nicht. */}
+        {subCategory && (
+          <span
+            ref={setCategoryRef}
+            style={{
+              position: "absolute",
+              top: 13,
+              left: 13,
+              zIndex: 2,
+              fontFamily: "var(--font-body)",
+              fontSize: 12,
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+              color: "var(--color-text-primary)",
+              background: "rgba(255, 255, 255, 0.85)",
+              padding: "5px 10px",
+              borderRadius: 4,
+              opacity: 0,
+            }}
+          >
+            {subCategory.name}
+          </span>
         )}
         {/* Info-i — morphs with the image (CSS child), opacity animated during open/close */}
         <div

@@ -1,17 +1,34 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import VisualLottie from "@/components/ui/VisualLottie";
 import InlineSVG from "@/components/ui/InlineSVG";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
+import { useSliderPreviewContext } from "@/components/sections/ArticleSliderContext";
 
-export default function SearchResultCard({ post }: { post: Post }) {
+type Props = {
+  post: Post;
+  index?: number;
+  registerRef?: (el: HTMLElement | null) => void;
+};
+
+export default function SearchResultCard({ post, index, registerRef }: Props) {
   const [infoHovered, setInfoHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { openPreview, prefetchExtras } = useArticlePreview();
+  const cardRef = useRef<HTMLElement>(null);
+  const { openPreview, prefetchExtras, isOpen } = useArticlePreview();
+  const sliderCtx = useSliderPreviewContext();
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Register card root with parent grid (so its slider context can resolve
+  // getCardEl(index) → DOM node for FLIP morphing).
+  useEffect(() => {
+    if (!registerRef) return;
+    registerRef(cardRef.current);
+    return () => registerRef(null);
+  }, [registerRef]);
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category =
@@ -30,52 +47,86 @@ export default function SearchResultCard({ post }: { post: Post }) {
       ? excerpt.slice(0, 200).replace(/\s+\S*$/, "") + " …"
       : excerpt;
 
-  const handleInfoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (cardRef.current) openPreview({ post, cardEl: cardRef.current });
+  const triggerPreview = () => {
+    if (isOpen) return;
+    if (sliderCtx && typeof index === "number") {
+      openPreview({ ctx: sliderCtx, currentIndex: index });
+    } else if (cardRef.current) {
+      openPreview({ post, cardEl: cardRef.current });
+    }
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLElement>) => {
+    pointerStartRef.current = { x: e.clientX, y: e.clientY };
+    prefetchExtras(post.slug);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLElement>) => {
+    const start = pointerStartRef.current;
+    pointerStartRef.current = null;
+    if (!start) return;
+    if (isOpen) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (dx * dx + dy * dy > 36) return; // > 6px → treat as drag, ignore
+    const target = e.target as HTMLElement;
+    if (target.closest(".article-read-link")) return; // let the link handle nav
+    triggerPreview();
   };
 
   return (
     <article
       ref={cardRef}
+      data-flip-id={`preview-${post.slug}-box`}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
       onMouseEnter={() => prefetchExtras(post.slug)}
       style={{
         position: "relative",
         display: "flex",
         flexDirection: "column",
         width: "100%",
+        cursor: "pointer",
+        userSelect: "none",
+        WebkitUserSelect: "none",
       }}
     >
       {/* Visual */}
       <div
+        data-flip-id={`preview-${post.slug}-image`}
         style={{
           position: "relative",
           width: "100%",
           height: 210,
-          overflow: "hidden",
+          flexShrink: 0,
         }}
       >
-        <VisualLottie seed={post.slug} />
-        {post.featuredImage?.node?.sourceUrl && (
-          <img
-            src={post.featuredImage.node.sourceUrl}
-            alt={post.featuredImage.node.altText || ""}
-            loading="lazy"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              zIndex: 1,
-            }}
-          />
-        )}
+        <div
+          data-card-image-bg
+          style={{ position: "absolute", inset: 0, overflow: "hidden" }}
+        >
+          <VisualLottie seed={post.slug} />
+          {post.featuredImage?.node?.sourceUrl && (
+            <img
+              src={post.featuredImage.node.sourceUrl}
+              alt={post.featuredImage.node.altText || ""}
+              loading="lazy"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                zIndex: 1,
+              }}
+            />
+          )}
+        </div>
 
         {/* Category top-left */}
         {category && (
           <span
+            data-card-category
             style={{
               position: "absolute",
               top: 13,
@@ -97,11 +148,16 @@ export default function SearchResultCard({ post }: { post: Post }) {
         )}
       </div>
 
-      {/* Info-i bottom-right of visual (sits across visual/text boundary, like SlideArticleCard) */}
+      {/* Info-i — outside the visual flip target, sits across the boundary like
+          SlideArticleCard does. Click triggers the same preview as card click. */}
       <div
+        data-card-info
         onMouseEnter={() => setInfoHovered(true)}
         onMouseLeave={() => setInfoHovered(false)}
-        onClick={handleInfoClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          triggerPreview();
+        }}
         role="button"
         aria-label="Vorschau öffnen"
         style={{
@@ -129,7 +185,14 @@ export default function SearchResultCard({ post }: { post: Post }) {
       </div>
 
       {/* Text */}
-      <div style={{ padding: "13px 0 0", display: "flex", flexDirection: "column" }}>
+      <div
+        data-card-text
+        style={{
+          padding: "13px 0 0",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {sublineText && (
           <p
             lang="de"
@@ -179,44 +242,44 @@ export default function SearchResultCard({ post }: { post: Post }) {
             {truncatedExcerpt}
           </p>
         )}
-      </div>
 
-      {/* Footer: Ratgeber lesen → */}
-      <div style={{ padding: "12px 0 0", display: "flex" }}>
-        <Link href={postLink} className="article-read-link">
-          <span
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 14,
-              fontWeight: 500,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Ratgeber lesen
-          </span>
-          <span
-            className="article-read-line"
-            style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }}
-          />
-          <svg
-            width="8"
-            height="8"
-            viewBox="0 0 17.45 15.77"
-            fill="none"
-            aria-hidden
-            style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}
-          >
-            <polyline
-              points="16.95 15.27 8.27 8.11 16.95 .5"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-              vectorEffect="non-scaling-stroke"
+        {/* Footer: Ratgeber lesen → */}
+        <div style={{ padding: "12px 0 0", display: "flex" }}>
+          <Link href={postLink} className="article-read-link">
+            <span
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: 14,
+                fontWeight: 500,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Ratgeber lesen
+            </span>
+            <span
+              className="article-read-line"
+              style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }}
             />
-          </svg>
-        </Link>
+            <svg
+              width="8"
+              height="8"
+              viewBox="0 0 17.45 15.77"
+              fill="none"
+              aria-hidden
+              style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}
+            >
+              <polyline
+                points="16.95 15.27 8.27 8.11 16.95 .5"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          </Link>
+        </div>
       </div>
     </article>
   );

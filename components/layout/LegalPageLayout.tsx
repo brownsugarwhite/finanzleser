@@ -41,7 +41,7 @@ export default function LegalPageLayout({
                   style={{
                     width: "100%",
                     height: 250,
-                    background: "rgba(0, 0, 0, 0.05)",
+                    background: "var(--color-placeholder-bg)",
                   }}
                   aria-hidden="true"
                 />
@@ -122,7 +122,7 @@ export default function LegalPageLayout({
           flex-shrink: 0;
           width: 50%;
           min-height: 240px;
-          background: rgba(0, 0, 0, 0.05);
+          background: var(--color-placeholder-bg);
         }
         .legal-page__body {
           max-width: 760px;

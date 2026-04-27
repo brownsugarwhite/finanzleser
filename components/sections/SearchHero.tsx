@@ -160,7 +160,7 @@ export default function SearchHero({ initialQuery = "" }: { initialQuery?: strin
         .search-hero__logo {
           width: 150px;
           height: 150px;
-          background: rgba(0, 0, 0, 0.05);
+          background: var(--color-placeholder-bg);
           flex-shrink: 0;
         }
         .search-hero__title {

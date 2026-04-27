@@ -30,7 +30,7 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
           <div style={{
             width: "100%",
             height: 250,
-            background: "rgba(0, 0, 0, 0.05)",
+            background: "var(--color-placeholder-bg)",
           }} aria-hidden="true" />
         </div>
       </div>

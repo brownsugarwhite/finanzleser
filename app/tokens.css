@@ -26,6 +26,10 @@
   --color-bg-surface: #f8fafc;
   --color-bg-subtle: #f1f5f9;
 
+  /* Visual / Image Placeholder (a hair darker than page bg, no alpha so it
+     stays the same regardless of what's behind) */
+  --color-placeholder-bg: #ebeae7;
+
   /* Borders */
   --color-border-default: rgba(0, 0, 0, 0.08);
 
@@ -94,6 +98,9 @@
   --color-bg-page: #2b2f2f;
   --color-bg-surface: #1e293b;
   --color-bg-subtle: #334155;
+
+  /* Visual / Image Placeholder (lighter than dark page bg) */
+  --color-placeholder-bg: #3a3e3e;
 
   /* Borders */
   --color-border-default: rgba(255, 255, 255, 0.10);

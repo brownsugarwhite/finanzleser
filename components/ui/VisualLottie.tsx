@@ -12,7 +12,7 @@ export default function VisualLottie({ className, style }: Props) {
       style={{
         position: "absolute",
         inset: 0,
-        background: "rgba(0, 0, 0, 0.05)",
+        background: "var(--color-placeholder-bg)",
         pointerEvents: "none",
         ...style,
       }}

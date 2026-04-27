@@ -3,7 +3,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Spacer from "@/components/ui/Spacer";
 import SearchHero from "@/components/sections/SearchHero";
 import QuickAccessButtons from "@/components/sections/QuickAccessButtons";
-import SearchResultCard from "@/components/sections/SearchResultCard";
+import SearchResultsGrid from "@/components/sections/SearchResultsGrid";
 import ScrollToResults from "@/components/sections/ScrollToResults";
 import { searchPosts } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
@@ -56,11 +56,7 @@ export default async function SearchPage(props: SearchPageProps) {
                 </span>
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20">
-                {results.map((post: Post) => (
-                  <SearchResultCard key={post.id} post={post} />
-                ))}
-              </div>
+              <SearchResultsGrid posts={results} />
             </div>
           )}
 

@@ -40,7 +40,7 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
             style={{
               width: "100%",
               height: 250,
-              background: "rgba(0, 0, 0, 0.05)",
+              background: "var(--color-placeholder-bg)",
             }}
             aria-hidden="true"
           />
