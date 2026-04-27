@@ -1,0 +1,8 @@
+# Re-generierbar via 01-inventory.js (enthält absolute Quell-Pfade)
+inventory.json
+
+# Re-generierbar via 02a-extract-pdf-texts.js (PDF-Volltexte)
+pdf-extracts.json
+
+# Lokal-spezifisch (post_ids/attachment_ids der jeweiligen WP-DB)
+upload-log.json

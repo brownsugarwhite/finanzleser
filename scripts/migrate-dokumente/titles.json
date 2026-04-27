@@ -1,0 +1,1372 @@
+[
+  {
+    "sha256": "9217c36fa9d1812c0e2b10eb2951ada91c2fe97ae3753db4b5bb4fcb523ccbf9",
+    "filename": "betriebliche_altersversorgung.pdf",
+    "relpath": "2. Altersvorsorge/betriebliche_altersversorgung.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "betriebliche-altersversorgung",
+    "titel": "Betriebliche Altersversorgung: Vorsorge über den Arbeitgeber",
+    "beschreibung": "Überblick zur betrieblichen Altersversorgung (bAV): Vorsorge über den Arbeitgeber, Finanzierung, Sicherheit der Betriebsrente und staatliche Förderung für Arbeitnehmer."
+  },
+  {
+    "sha256": "713a2b09c6dc99874faa0c10f43640c93a3d3b3a7a2be9112d463ca820e209b3",
+    "filename": "broschuere-basisrente.pdf",
+    "relpath": "2. Altersvorsorge/broschuere-basisrente.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "broschuere-basisrente",
+    "titel": "Basisrente: Steuerliche Förderung & Leistungen",
+    "beschreibung": "Broschüre zur Basisrente (Rürup-Rente): staatliche steuerliche Förderung, Eignung für Selbstständige und Freiberufler sowie Leistungsübersicht und Beitragsgestaltung."
+  },
+  {
+    "sha256": "04bcdf50adbde2701f1696a29bb1e1149e9dccca151dafef10503add5ee66507",
+    "filename": "broschuere-leben-rente.pdf",
+    "relpath": "2. Altersvorsorge/broschuere-leben-rente.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "broschuere-leben-rente",
+    "titel": "Lebens- und Rentenversicherung: Gestaltung & Steuern",
+    "beschreibung": "Broschüre zu Lebens- und Rentenversicherungen: flexible individuelle Vertragsgestaltung, steuerliche Behandlung von Beiträgen und Auszahlungen sowie Leistungen im Überblick."
+  },
+  {
+    "sha256": "706a49301e023a65c82d91d9bbcb91f7067c40d3a19e37ef8be7a1dff597ed32",
+    "filename": "broschuere-riester-rente.pdf",
+    "relpath": "2. Altersvorsorge/broschuere-riester-rente.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "broschuere-riester-rente",
+    "titel": "Riester-Rente: Förderung, Zulagen & Praxis",
+    "beschreibung": "Broschüre zur Riester-Rente: Förderberechtigte, staatliche Zulagen, Vertragsdetails, Auszahlungsoptionen und steuerliche Aspekte im praktischen Überblick."
+  },
+  {
+    "sha256": "95575960c136729a7d7a040701a70ca4b18b983d122f5cfdabeb5f41060a348a",
+    "filename": "BU-Vergleich Checkliste.pdf",
+    "relpath": "2. Altersvorsorge/BU-Vergleich Checkliste.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "bu-vergleich-checkliste",
+    "titel": "Berufsunfähigkeitsversicherung: Vergleichs-Checkliste",
+    "beschreibung": "Checkliste für den Berufsunfähigkeitsversicherungs-Vergleich: Worauf bei einem Leistungsvergleich zu achten ist und wie man beitragsgünstige Qualitätstarife findet."
+  },
+  {
+    "sha256": "38d9862918525213c4c8fc2a101387387041b2732f1e64c31a3cc03584002507",
+    "filename": "Freistellungsauftrag.pdf",
+    "relpath": "2. Altersvorsorge/Freistellungsauftrag.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "freistellungsauftrag",
+    "titel": "Freistellungsauftrag für Kapitalerträge – Muster",
+    "beschreibung": "Musterformular für den Freistellungsauftrag bei Kapitalerträgen – gilt nicht für Betriebseinnahmen oder Einkünfte aus Vermietung und Verpachtung – mit Ausfüllhinweisen."
+  },
+  {
+    "sha256": "edf79a592087acd6803ce823f1d115d292ec72b9ae62e3b7591cffcd14e5eed1",
+    "filename": "GDV_Berufsunfähigkeitsversicherung.pdf",
+    "relpath": "2. Altersvorsorge/GDV_Berufsunfähigkeitsversicherung.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "gdv-berufsunfa-higkeitsversicherung",
+    "titel": "Private Berufsunfähigkeitsversicherung (GDV)",
+    "beschreibung": "GDV-Ratgeber zur privaten BU-Versicherung: wann Berufsunfähigkeit vorliegt, Risikoprüfung durch den Versicherer und Alternativen zur BU-Absicherung im Überblick."
+  },
+  {
+    "sha256": "87782ac90f97e03d82ef82b6dcdb53c012d3addb8621f0bca2da01ba40a43e08",
+    "filename": "infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-bav-pst1402.pdf",
+    "relpath": "2. Altersvorsorge/infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-bav-pst1402.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-bav-pst1402",
+    "titel": "Steuer- & SV-Landkarte bAV 2024 (Alte Leipziger)",
+    "beschreibung": "Infoblatt der Alten Leipziger zur steuer- und sozialversicherungsrechtlichen Einordnung der betrieblichen Altersversorgung (2. Schicht, Stand Dezember 2023) für das Jahr 2024."
+  },
+  {
+    "sha256": "191534437198521c4b72a17d2a338b88bc7c9a7444a86909603da34ea9621345",
+    "filename": "private_altersvorsorgung.pdf",
+    "relpath": "2. Altersvorsorge/private_altersvorsorgung.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "private-altersvorsorgung",
+    "titel": "Private Altersvorsorge: Heute die Zukunft planen",
+    "beschreibung": "Broschüre zur privaten Altersvorsorge: Bedeutung der gesetzlichen Rente, staatliche Förderung der Zusatzvorsorge und Besteuerung von Alterseinkünften."
+  },
+  {
+    "sha256": "e5eb988df2abd1e655b33d30f57d443c8488653cdded1a79252efbc39fb4a7f5",
+    "filename": "privatvorsorge_von_a_z.pdf",
+    "relpath": "2. Altersvorsorge/privatvorsorge_von_a_z.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "privatvorsorge-von-a-z",
+    "titel": "Privatvorsorge von A bis Z",
+    "beschreibung": "Nachschlagewerk zur privaten Altersvorsorge: Riester, betriebliche Altersversorgung, Anbieter, Produkte und staatliche Zertifizierung kompakt erklärt."
+  },
+  {
+    "sha256": "21ffa86cc2768915538a42f325aab6bd5473f99645778f1ea64ce87f4e38d614",
+    "filename": "riesterrente_checkliste.pdf",
+    "relpath": "2. Altersvorsorge/riesterrente_checkliste.pdf",
+    "kategorie_slug": "altersvorsorge",
+    "jahr": null,
+    "slug_vorschlag": "riesterrente-checkliste",
+    "titel": "Riester-Rente: Checkliste in vier Schritten",
+    "beschreibung": "Checkliste zur Riester-Rente mit vier Entscheidungsschritten, Vergleich zwischen privatem und betrieblichem Riestern sowie Hinweisen zu Zulagen und Ansprechpartnern."
+  },
+  {
+    "sha256": "24157d3068e4a4629e4e92c4a8f9d01559397b94085f97ec237f76682fd3e6f2",
+    "filename": "Arbeitsfoerderung.pdf",
+    "relpath": "3. Arbeit/Arbeitsfoerderung.pdf",
+    "kategorie_slug": "arbeit",
+    "jahr": null,
+    "slug_vorschlag": "arbeitsfoerderung",
+    "titel": "A-Z der Arbeitsförderung (SGB III)",
+    "beschreibung": "Nachschlagewerk zum Sozialgesetzbuch III: alphabetisches A-Z-Verzeichnis aller Leistungen und Fachbegriffe der Arbeitsförderung für Arbeitnehmer und Arbeitgeber."
+  },
+  {
+    "sha256": "97a36d20529f48b75020f4d03db6b7ac96fe898bec28734cf9d01f85bf1bf1b1",
+    "filename": "geringfuegige-beschaeftigung.pdf",
+    "relpath": "3. Arbeit/geringfuegige-beschaeftigung.pdf",
+    "kategorie_slug": "arbeit",
+    "jahr": null,
+    "slug_vorschlag": "geringfuegige-beschaeftigung",
+    "titel": "Geringfügige Beschäftigung & Übergangsbereich",
+    "beschreibung": "Leitfaden zu Minijobs und Midijobs: Regelungen aus Sozialversicherungsrecht, Arbeitsrecht und Steuerrecht, aktuelle Verdienstgrenzen und Mindestlohnregelungen."
+  },
+  {
+    "sha256": "895c286d0a6acbaad5a952ae08dcc9a5f0fa185eb425ac1dba215541733eade4",
+    "filename": "der-unterhaltsvorschuss-data.pdf",
+    "relpath": "4. Familie/der-unterhaltsvorschuss-data.pdf",
+    "kategorie_slug": "familie",
+    "jahr": null,
+    "slug_vorschlag": "der-unterhaltsvorschuss-data",
+    "titel": "Unterhaltsvorschuss: Hilfe für Alleinerziehende",
+    "beschreibung": "Informationsbroschüre zum staatlichen Unterhaltsvorschuss: Voraussetzungen, Antragsverfahren und Leistungshöhe für Alleinerziehende und ihre Kinder bei ausbleibendem Unterhalt."
+  },
+  {
+    "sha256": "21d8e28f7e69c3ef1f0bd2cf2981fa97b5df2633e2723d3035709f0a9a60d43e",
+    "filename": "Duesseldorfer-Tabelle-2026.pdf",
+    "relpath": "4. Familie/Duesseldorfer-Tabelle-2026.pdf",
+    "kategorie_slug": "familie",
+    "jahr": 2026,
+    "slug_vorschlag": "duesseldorfer-tabelle-2026",
+    "titel": "Düsseldorfer Tabelle 2026",
+    "beschreibung": "Offizielle Düsseldorfer Tabelle (Stand 01.01.2026): Mindestunterhalt nach Altersstufen und Nettoeinkommen des Barunterhaltspflichtigen sowie Bedarfskontrollbeträge."
+  },
+  {
+    "sha256": "4174cbc289af3e7b9eab8cde28d5d5703296404e465e8e446c2ec3a5ac35bf4e",
+    "filename": "Konditionen_KfW.pdf",
+    "relpath": "5. Finanzierung/Konditionen_KfW.pdf",
+    "kategorie_slug": "finanzierung",
+    "jahr": null,
+    "slug_vorschlag": "konditionen-kfw",
+    "titel": "KfW-Konditionen für Endkreditnehmer (2023)",
+    "beschreibung": "Konditionenübersicht der KfW-Bankengruppe für Endkreditnehmer: Zinssätze, Laufzeiten und Bereitstellungsprovisionen aller Förderprogramme (Stand Mai 2023)."
+  },
+  {
+    "sha256": "2b997988a547a808a05c412676c6adc0bbc5ac00ecc0ee3adb2087975add8482",
+    "filename": "krankenkassenliste.pdf",
+    "relpath": "6. Gesetzliche Krankenversicherung/krankenkassenliste.pdf",
+    "kategorie_slug": "gesetzliche-krankenkasse",
+    "jahr": null,
+    "slug_vorschlag": "krankenkassenliste",
+    "titel": "Krankenkassenliste mit Zusatzbeiträgen 2025",
+    "beschreibung": "Vollständige Übersicht aller geöffneten gesetzlichen Krankenkassen mit aktuellem Zusatzbeitragssatz und regionalem Geltungsbereich, Stand Januar 2025."
+  },
+  {
+    "sha256": "5b01aece4cc8223461cf68a62291b70bb77dfe22b6b820a263634c73c85ff3a4",
+    "filename": "Betreuungsverfuegung.pdf",
+    "relpath": "7. Pflegeversicherung/Betreuungsverfuegung.pdf",
+    "kategorie_slug": "pflegeversicherung",
+    "jahr": null,
+    "slug_vorschlag": "betreuungsverfuegung",
+    "titel": "Betreuungsverfügung – Mustervorlage",
+    "beschreibung": "Musterformular für eine Betreuungsverfügung: Festlegung einer Vertrauensperson für den Fall der Geschäftsunfähigkeit durch Krankheit oder Behinderung."
+  },
+  {
+    "sha256": "325d52946d7655657919971caacc47a5c993dbc172fe69a68b089ee54c932a49",
+    "filename": "Feststellung_Pflegebeduerftigkeit.pdf",
+    "relpath": "7. Pflegeversicherung/Feststellung_Pflegebeduerftigkeit.pdf",
+    "kategorie_slug": "pflegeversicherung",
+    "jahr": null,
+    "slug_vorschlag": "feststellung-pflegebeduerftigkeit",
+    "titel": "Antrag auf Feststellung der Pflegebedürftigkeit",
+    "beschreibung": "Musterformular für den Antrag auf Feststellung der Pflegebedürftigkeit bei der Pflegekasse oder privaten Pflegeversicherung gemäß SGB XI mit Ausfüllhinweisen."
+  },
+  {
+    "sha256": "612c976644d1cf835c10f10dbbd0bd50603d366cbabce5b39a99a7c8db0d7e7b",
+    "filename": "Konto_und_Depotvollmacht.pdf",
+    "relpath": "7. Pflegeversicherung/Konto_und_Depotvollmacht.pdf",
+    "kategorie_slug": "pflegeversicherung",
+    "jahr": null,
+    "slug_vorschlag": "konto-und-depotvollmacht",
+    "titel": "Konto-, Depot- und Schrankfachvollmacht – Muster",
+    "beschreibung": "Musterformular für eine Konto-, Depot- und Schrankfachvollmacht: Bankvollmacht für Vertrauenspersonen – Erteilung persönlich bei der Bank oder Sparkasse."
+  },
+  {
+    "sha256": "1e25e4ea2670f4425bfb9f8477b13eb3dc90db6435be37cc54c8efa4e9aabdc1",
+    "filename": "Patientenverfuegung.pdf",
+    "relpath": "7. Pflegeversicherung/Patientenverfuegung.pdf",
+    "kategorie_slug": "pflegeversicherung",
+    "jahr": null,
+    "slug_vorschlag": "patientenverfuegung",
+    "titel": "Patientenverfügung – Textbausteine & Muster",
+    "beschreibung": "Offizielle Textbausteine des Bundesjustizministeriums für eine schriftliche Patientenverfügung: Formulierungshilfen und Eingangsformel zur individuellen Anpassung."
+  },
+  {
+    "sha256": "94c8516ff45e9487e146fc7450366584e5782e4c90c99d7c21c93b87aeb83956",
+    "filename": "Vorsorgevollmacht.pdf",
+    "relpath": "7. Pflegeversicherung/Vorsorgevollmacht.pdf",
+    "kategorie_slug": "pflegeversicherung",
+    "jahr": null,
+    "slug_vorschlag": "vorsorgevollmacht",
+    "titel": "Vorsorgevollmacht – Musterformular",
+    "beschreibung": "Musterformular für eine umfassende Vorsorgevollmacht: bevollmächtigt eine Vertrauensperson zur Vertretung in allen persönlichen und finanziellen Angelegenheiten."
+  },
+  {
+    "sha256": "be4dfa805ca289766b9c7e330a3f580d04cd74521ca0f378e9ace2b2ce11553f",
+    "filename": "auslandsreisekrankenversicherung.pdf",
+    "relpath": "8. Private Krankenversicherung/auslandsreisekrankenversicherung.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "auslandsreisekrankenversicherung",
+    "titel": "Auslandsreisekrankenversicherung (PKV-Info)",
+    "beschreibung": "PKV-Infoblatt zur Auslandsreisekrankenversicherung: Leistungsumfang, Abgrenzung zur gesetzlichen Krankenversicherung und Bedeutung für Reisen im Ausland."
+  },
+  {
+    "sha256": "0c9078fb644305febad58d625875feb661e031bce67cf57a273c22c813fcbcd5",
+    "filename": "avb-ppv-2015.pdf",
+    "relpath": "8. Private Krankenversicherung/avb-ppv-2015.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": 2015,
+    "slug_vorschlag": "avb-ppv-2015",
+    "titel": "AVB Private Pflegepflichtversicherung MB/PPV 2015",
+    "beschreibung": "Allgemeine Versicherungsbedingungen für die private Pflegepflichtversicherung (MB/PPV 2015) mit Zusatzvereinbarungen und Tarifbedingungen des PKV-Verbands."
+  },
+  {
+    "sha256": "8e79b4933ad5b9eb180a9c7b032051dc05e4e68c9026f1bcb1a5729a7a4c7165",
+    "filename": "beitragskalkulation-in-der-pkv.pdf",
+    "relpath": "8. Private Krankenversicherung/beitragskalkulation-in-der-pkv.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "beitragskalkulation-in-der-pkv",
+    "titel": "Beitragskalkulation in der privaten Krankenversicherung",
+    "beschreibung": "PKV-Infoblatt zur Beitragskalkulation: Wie private Krankenversicherungen ihre Beiträge nach Alter, Gesundheitszustand und Leistungsumfang kalkulieren."
+  },
+  {
+    "sha256": "4e2cd0de6b7e9a103500f6738c7d912297f51b2e0d19b9635917404c581a9360",
+    "filename": "gebuehrenordnung-fuer-aerzte.pdf",
+    "relpath": "8. Private Krankenversicherung/gebuehrenordnung-fuer-aerzte.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "gebuehrenordnung-fuer-aerzte",
+    "titel": "Gebührenordnung für Ärzte (GOÄ) – Kurzfassung",
+    "beschreibung": "Kurzfassung der ärztlichen Gebührenordnung (GOÄ) – Kurz-GOÄ – mit verkürzten Leistungsbezeichnungen für die privatärztliche Abrechnung und Erstattung durch PKV."
+  },
+  {
+    "sha256": "87c02fa76e2227207ea5b4c0e0b77fb56d20da19cc0da0ba4861d4db7cc9f425",
+    "filename": "gebuehrenordnung-fuer-zahnaerzte.pdf",
+    "relpath": "8. Private Krankenversicherung/gebuehrenordnung-fuer-zahnaerzte.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "gebuehrenordnung-fuer-zahnaerzte",
+    "titel": "Gebührenordnung für Zahnärzte (GOZ) mit Liquidationsvordruck",
+    "beschreibung": "Vollständige zahnärztliche Gebührenordnung (GOZ) mit Gebührenverzeichnis und Liquidationsvordruck für die Abrechnung privatärztlicher zahnärztlicher Leistungen."
+  },
+  {
+    "sha256": "56598c7ecf5d833a785fca2b0c349a85b31d9cc4e175d2f567972283956604ed",
+    "filename": "kennzahlenkatalog.pdf",
+    "relpath": "8. Private Krankenversicherung/kennzahlenkatalog.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "kennzahlenkatalog",
+    "titel": "Kennzahlenkatalog der privaten Krankenversicherung",
+    "beschreibung": "Systematischer Kennzahlenkatalog des PKV-Verbands: Branchenkennzahlen zur Beurteilung und zum Vergleich der finanziellen Stabilität privater Krankenversicherungsunternehmen."
+  },
+  {
+    "sha256": "dc2702e4fd79cddbcf8c8afb0a82f20beaa3d4a6bfc7e8c0ee354c1a7908d0c3",
+    "filename": "mb-bt-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-bt-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-bt-2009",
+    "titel": "AVB Basistarif PKV (AVB/BT 2009)",
+    "beschreibung": "Allgemeine Versicherungsbedingungen für den PKV-Basistarif (AVB/BT 2009): Pflichtversicherungstarif mit sozialrechtlichem Schutzniveau einschließlich Tarifbedingungen."
+  },
+  {
+    "sha256": "319ff81b5911d8bf8e5edafd82828df019ddcef7022fcf11462bc1510a8eb041",
+    "filename": "mb-epv-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-epv-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-epv-2009",
+    "titel": "Musterbedingungen Ergänzende Pflegekrankenversicherung MB/EPV 2009",
+    "beschreibung": "Musterbedingungen 2009 des PKV-Verbands für die ergänzende Pflegekrankenversicherung (MB/EPV 2009) – Ergänzungsschutz zur gesetzlichen Pflegeversicherung."
+  },
+  {
+    "sha256": "8df8ccfbaa911f4bf715bd6e3b776435aa42478098f35f679be5f5c63bb1979d",
+    "filename": "mb-gepv.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-gepv.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-gepv",
+    "titel": "Musterbedingungen Staatlich geförderte Pflegeversicherung MB/GEPV 2013",
+    "beschreibung": "Musterbedingungen 2013 des PKV-Verbands für die staatlich geförderte ergänzende Pflegeversicherung (Pflege-Bahr, MB/GEPV 2013), §§ 1–26, inkl. Leistungsansprüchen."
+  },
+  {
+    "sha256": "d0610414188c6eb145a295abca6cda56b255f0896ab876d2645632f0175efad1",
+    "filename": "mb-kk-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-kk-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-kk-2009",
+    "titel": "Musterbedingungen Krankheitskosten- & Krankenhaustagegeld MB/KK 2009",
+    "beschreibung": "Musterbedingungen 2009 des PKV-Verbands für die Krankheitskosten- und Krankenhaustagegeldversicherung (MB/KK 2009) – Grundlage der privaten Krankenversicherung."
+  },
+  {
+    "sha256": "36b117d20cf8956f855aac1720554b2d286d8a8d536df0b0bae4d87ba8626729",
+    "filename": "mb-kt-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-kt-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-kt-2009",
+    "titel": "Musterbedingungen Krankentagegeldversicherung MB/KT 2009",
+    "beschreibung": "Musterbedingungen 2009 des PKV-Verbands für die Krankentagegeldversicherung (MB/KT 2009) – Absicherung des Verdienstausfalls bei krankheitsbedingter Arbeitsunfähigkeit."
+  },
+  {
+    "sha256": "02d950b634402cfde96807dbbe02cace6f16280ab3a40dc8094edbc9f1488ef9",
+    "filename": "mb-pskv-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-pskv-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-pskv-2009",
+    "titel": "AVB Private Studentische Krankenversicherung MB/PSKV 2009",
+    "beschreibung": "Allgemeine Versicherungsbedingungen des PKV-Verbands für die private studentische Krankenversicherung (MB/PSKV 2009) einschließlich Tarifbedingungen und Tarif PSKV."
+  },
+  {
+    "sha256": "bbba59dc4c2e74df200ab418b06868163b846ea7da6486bc03661bf16a3c5396",
+    "filename": "mb-pv-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-pv-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-pv-2009",
+    "titel": "Musterbedingungen Pflegekrankenversicherung MB/PV 2009",
+    "beschreibung": "Musterbedingungen 2009 des PKV-Verbands für die private Pflegekrankenversicherung (MB/PV 2009) als ergänzender Schutz zur gesetzlichen Pflegeversicherung."
+  },
+  {
+    "sha256": "924e5769163811f91b920da0ef5925d00640f74ee15ef7b313623fafb3ce1146",
+    "filename": "mb-st-2009.pdf",
+    "relpath": "8. Private Krankenversicherung/mb-st-2009.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "mb-st-2009",
+    "titel": "AVB Standardtarif PKV (MB/ST 2009)",
+    "beschreibung": "Allgemeine Versicherungsbedingungen für den PKV-Standardtarif (MB/ST 2009): günstige Absicherung für ältere PKV-Versicherte mit begrenztem Leistungsumfang."
+  },
+  {
+    "sha256": "150275abeaaf84b01215a68da0b19382b42d81e47801f4f64d35ef70bda3e3b1",
+    "filename": "pkv-im-sozialrecht.pdf",
+    "relpath": "8. Private Krankenversicherung/pkv-im-sozialrecht.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "pkv-im-sozialrecht",
+    "titel": "Privater Krankenversicherungsschutz im Sozialrecht",
+    "beschreibung": "Rechtliche Einordnung der privaten Krankenversicherung im Sozialrecht: Wechselwirkungen mit gesetzlichen Regelungen und Leistungsansprüchen aus Sozialgesetzen."
+  },
+  {
+    "sha256": "7d1df75494bdc7be6e668b640b164b100509062c5459a56dd2aa47a7cd15410b",
+    "filename": "pkv-im-studium.pdf",
+    "relpath": "8. Private Krankenversicherung/pkv-im-studium.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "pkv-im-studium",
+    "titel": "Private Kranken- & Pflegeversicherung im Studium",
+    "beschreibung": "PKV-Infoblatt für Studierende: Möglichkeiten, Vor- und Nachteile sowie Besonderheiten der privaten Kranken- und Pflegeversicherung während des Studiums im Überblick."
+  },
+  {
+    "sha256": "b5f22bfa21fadf80e92d6e7df7d17dfd90736e2fe96dc37951d8062dd141aa63",
+    "filename": "private-pflegepflichtversicherung.pdf",
+    "relpath": "8. Private Krankenversicherung/private-pflegepflichtversicherung.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "private-pflegepflichtversicherung",
+    "titel": "Private Pflegepflichtversicherung (PKV-Info)",
+    "beschreibung": "PKV-Infoblatt zur privaten Pflegepflichtversicherung: Leistungsumfang nach Pflegegraden, Beitragsregelung und Abgrenzung zur gesetzlichen Pflegeversicherung."
+  },
+  {
+    "sha256": "96a6897440cfe1bb85d432957f5d13b75353de8c5f8705545aad5ae2a6996601",
+    "filename": "private-pflegezusatzversicherung.pdf",
+    "relpath": "8. Private Krankenversicherung/private-pflegezusatzversicherung.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "private-pflegezusatzversicherung",
+    "titel": "Private Pflegezusatzversicherung (PKV-Info)",
+    "beschreibung": "PKV-Infoblatt zur privaten Pflegezusatzversicherung: Ergänzungsschutz zur gesetzlichen Pflegeversicherung – Pflegetagegeld, Pflegekosten- und Pflegerentenversicherung."
+  },
+  {
+    "sha256": "0f818e8613cfd1a154f38e275b023ac43cb096697aea9cd9aeb232b2f17f3f10",
+    "filename": "sozialtarife.pdf",
+    "relpath": "8. Private Krankenversicherung/sozialtarife.pdf",
+    "kategorie_slug": "private-krankenversicherung",
+    "jahr": null,
+    "slug_vorschlag": "sozialtarife",
+    "titel": "Sozialtarife der privaten Krankenversicherung",
+    "beschreibung": "PKV-Infoblatt zu den Sozialtarifen: Basistarif und Standardtarif der privaten Krankenversicherung für Personen mit eingeschränkter finanzieller Leistungsfähigkeit."
+  },
+  {
+    "sha256": "d6b5f54120c5164386cec5f576cc0db3854ca6d15137ab60e0356cadace57251",
+    "filename": "altersrentner_hinzuverdienst.pdf",
+    "relpath": "9. Rente/altersrentner_hinzuverdienst.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "altersrentner-hinzuverdienst",
+    "titel": "Altersrente & Hinzuverdienst: Flexibel kombinieren",
+    "beschreibung": "Deutsche Rentenversicherung: Ab der Regelaltersgrenze unbegrenzt hinzuverdienen möglich – flexible Kombination von Altersrente und Erwerbstätigkeit erklärt."
+  },
+  {
+    "sha256": "ec5ad3c2604d60e124ee3ae41cce6d8c2129eea0fe6fecd006f6c359f79a1bfe",
+    "filename": "arbeitslos_und_rente.pdf",
+    "relpath": "9. Rente/arbeitslos_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "arbeitslos-und-rente",
+    "titel": "Arbeitslos und Rente: Auswirkungen & Besonderheiten",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Wie Arbeitslosigkeit die Rente beeinflusst, wann Arbeitslose in Rente gehen können und was beim Rentenbeginn gilt."
+  },
+  {
+    "sha256": "7a8a5279340068816b2784292ae1db08fe9339301815a5366446f399167f2322",
+    "filename": "berufsstarter_und_rente.pdf",
+    "relpath": "9. Rente/berufsstarter_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "berufsstarter-und-rente",
+    "titel": "Berufsstarter und die Rente",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung für Berufseinsteiger: Versicherungsschutz von Beginn an, Rentenansprüche mit wenigen Beiträgen und Reha-Leistungen."
+  },
+  {
+    "sha256": "a5552b73a95dd472a38d4ae3c581084438808b10484588f9cc7c34250dfe2e73",
+    "filename": "das_renten_abc.pdf",
+    "relpath": "9. Rente/das_renten_abc.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "das-renten-abc",
+    "titel": "Das Renten-ABC: Über 150 Fachbegriffe erklärt",
+    "beschreibung": "Nachschlagewerk der Deutschen Rentenversicherung: über 150 Fachbegriffe aus dem Rentenrecht verständlich erklärt mit Hinweisen auf weiterführende Informationen."
+  },
+  {
+    "sha256": "8dbccacdcd9f1dedd6088473a8a55e881842f9d045ffcec8c821a77d115aff2f",
+    "filename": "die_renteninformation.pdf",
+    "relpath": "9. Rente/die_renteninformation.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "die-renteninformation",
+    "titel": "Die Renteninformation: Was sie aussagt",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur jährlichen Renteninformation: Rentenprognose verstehen, individuelle Zusatzvorsorge planen und Versicherungskonto prüfen."
+  },
+  {
+    "sha256": "d02fba38f93e673489d5a367c052c7d93c49928e60ba9bb0be324869d7ef0d9c",
+    "filename": "die_richtige_altersrente_fuer_sie.pdf",
+    "relpath": "9. Rente/die_richtige_altersrente_fuer_sie.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "die-richtige-altersrente-fuer-sie",
+    "titel": "Die richtige Altersrente für Sie",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Überblick über Altersrentenarten, Voraussetzungen für den Rentenbeginn und Berechnung der individuellen Rentenhöhe."
+  },
+  {
+    "sha256": "3b866127e89b3f0f62ae85a851d6f46013222d8db029d6ff1b46ce278282c2a8",
+    "filename": "ehrenamt.pdf",
+    "relpath": "9. Rente/ehrenamt.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "ehrenamt",
+    "titel": "Ehrenamt & Rente: Auswirkungen auf die Altersvorsorge",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Wie ehrenamtliches Engagement die spätere Rente beeinflusst und was Rentner bei freiwilliger Arbeit beachten müssen."
+  },
+  {
+    "sha256": "261ad00e35e5789b6e8a3cd92107d3020778bf3146cca58b1c6f4b267090a886",
+    "filename": "erwerbsminderungsrente.pdf",
+    "relpath": "9. Rente/erwerbsminderungsrente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "erwerbsminderungsrente",
+    "titel": "Erwerbsminderungsrente: Anspruch & Hinzuverdienst",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur Erwerbsminderungsrente: Anspruchsvoraussetzungen, Unterschied volle/teilweise Minderung, Hinzuverdienstgrenzen."
+  },
+  {
+    "sha256": "284b490117456ff1763822ba5652caf864eaaf0abc575c02bea4bda467f02322",
+    "filename": "flexirente.pdf",
+    "relpath": "9. Rente/flexirente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "flexirente",
+    "titel": "Flexirente: Flexibel in den Ruhestand",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur Flexirente: Rentenabschläge ausgleichen, Hinzuverdienst bei vorgezogener Rente, Weiterarbeiten nach Regelaltersgrenze."
+  },
+  {
+    "sha256": "92d10d606fd9fbbd9c48fa88dd3a74474d7f125e50fea2a3b7623490cf1d9344",
+    "filename": "freiwillige_rentenversicherung.pdf",
+    "relpath": "9. Rente/freiwillige_rentenversicherung.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "freiwillige-rentenversicherung",
+    "titel": "Freiwillige Rentenversicherung: Vorteile & Beiträge",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Wer freiwillig versichert sein kann, wann sich freiwillige Beiträge lohnen und wie hoch die Beiträge sind."
+  },
+  {
+    "sha256": "b4ce3569e3b21dc28392c9a57a883a673cd18dcb38d5e0cf1c554a204ceb110c",
+    "filename": "freiwilligendienst_und_rente.pdf",
+    "relpath": "9. Rente/freiwilligendienst_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "freiwilligendienst-und-rente",
+    "titel": "Freiwilligendienste & Rente: BFD, FSJ, FÖJ",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Versicherungsschutz im Bundesfreiwilligendienst, Freiwilligem Sozialen und Ökologischen Jahr und Auswirkungen auf die Rente."
+  },
+  {
+    "sha256": "4c36e6fb729a5f2727f57bc30591482edcd1862ad23e90fcba510a3ff644496a",
+    "filename": "geschiedene_rente.pdf",
+    "relpath": "9. Rente/geschiedene_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "geschiedene-rente",
+    "titel": "Rentenausgleich bei Scheidung: Versorgungsausgleich",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Versorgungsausgleich bei Scheidung – was ausgeglichen wird, wie sich die Rentenhöhe ändert und welche Sonderfälle gelten."
+  },
+  {
+    "sha256": "a0e2eaf6c8a6eabf6fa41a349ec900e82a83b7c6d7378fb49ada7e9e7b5e8682",
+    "filename": "grundrente.pdf",
+    "relpath": "9. Rente/grundrente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "grundrente",
+    "titel": "Grundrente: Zuschlag zur gesetzlichen Rente",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur Grundrente: Zuschlag für langjährig Versicherte mit niedrigem Einkommen – Anspruch, Berechnung und Einkommensanrechnung."
+  },
+  {
+    "sha256": "bddccedc058802c55e7b42fbfb181a8087d6e64f32ecb8814280f3b1d5ee22ca",
+    "filename": "grundsicherung_fuer_rentner.pdf",
+    "relpath": "9. Rente/grundsicherung_fuer_rentner.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "grundsicherung-fuer-rentner",
+    "titel": "Grundsicherung im Alter: Hilfe für Rentner",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur Grundsicherung im Alter: Wann Anspruch besteht, wer die Leistung erhält und wie die Höhe berechnet wird."
+  },
+  {
+    "sha256": "da04214228d2f3b713e150ac50556cac9946b3fc0fdf9ad4cad6fb9999e894f5",
+    "filename": "hinterbliebenenrente.pdf",
+    "relpath": "9. Rente/hinterbliebenenrente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "hinterbliebenenrente",
+    "titel": "Hinterbliebenenrente: Witwen-, Witwer- & Waisenrente",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Witwen-, Witwer- und Waisenrente sowie Erziehungsrente – Anspruchsvoraussetzungen und Leistungshöhe im Überblick."
+  },
+  {
+    "sha256": "7b6c6b5c4c2f94d56105261b7c8b79ade5b7e806e35bc932dc147c50709d7ed5",
+    "filename": "midijobs_und_rente.pdf",
+    "relpath": "9. Rente/midijobs_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "midijobs-und-rente",
+    "titel": "Minijob & Midijob: Bausteine für die Rente",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Arbeitgeberbeiträge, Verdienstgrenzen und Rentenansprüche bei Minijobs und Midijobs im Übergangsbereich erklärt."
+  },
+  {
+    "sha256": "fce0f5dc45383400362488e62574d964c74bdf581bfdc2839baca0f20f8111ed",
+    "filename": "minijobs_und_rente.pdf",
+    "relpath": "9. Rente/minijobs_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "minijobs-und-rente",
+    "titel": "Minijobs: Niedrige Beiträge, voller Rentenschutz",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zu Minijobs: Vorteile des freiwilligen vollen Rentenversicherungsschutzes und wichtige Änderungen zum 1. Januar 2013."
+  },
+  {
+    "sha256": "27ecfa3b82d90241acc1fba414fa76201a187aa10069128ddd2ec993871fe041",
+    "filename": "ost_west_rentenangleichung.pdf",
+    "relpath": "9. Rente/ost_west_rentenangleichung.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "ost-west-rentenangleichung",
+    "titel": "Ost-West-Rentenangleichung: Was sich ändert",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur schrittweisen Rentenangleichung Ost-West: gleiches Rentenrecht, Funktionsweise der Angleichung und Auswirkungen."
+  },
+  {
+    "sha256": "e16f8887324cc9ae80adcbdf317c9e7d73d74ff0b41259bbee0349518b388efd",
+    "filename": "rente_ausland.pdf",
+    "relpath": "9. Rente/rente_ausland.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-ausland",
+    "titel": "Rente und Arbeit im europäischen Ausland",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Europarecht bei grenzüberschreitender Beschäftigung, Rentenansprüche und Rentenberechnung im europäischen Ausland."
+  },
+  {
+    "sha256": "11c45cd5577a1f2e6b8d16061ea20668881ee19cdd0493bec00d6710917d384d",
+    "filename": "rente_fuer_pflegepersonen.pdf",
+    "relpath": "9. Rente/rente_fuer_pflegepersonen.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-fuer-pflegepersonen",
+    "titel": "Rente für Pflegepersonen: Kostenlose Beiträge",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Pflegende Angehörige erhalten kostenlose Rentenbeiträge vom Staat – Voraussetzungen, Versicherungsschutz und Meldeverfahren."
+  },
+  {
+    "sha256": "07f646fced486646e75d82a853864bf9acee9a44230b4f6e2f65b90c57eb385b",
+    "filename": "rente_jeder_monat_zaehlt.pdf",
+    "relpath": "9. Rente/rente_jeder_monat_zaehlt.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-jeder-monat-zaehlt",
+    "titel": "Rente: Jeder Monat zählt",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Rentenbausteine aus Erwerbstätigkeit, Kindererziehungszeiten und Zeiten der Arbeitslosigkeit im Überblick."
+  },
+  {
+    "sha256": "3c307db71e8973f6f91f3603cbc5e7dde268021621a8e7845fa0b8f0159a58e1",
+    "filename": "rente_mit_67.pdf",
+    "relpath": "9. Rente/rente_mit_67.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-mit-67",
+    "titel": "Rente mit 67: Altersgrenzen & Planung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zur Anhebung des Renteneintrittsalters auf 67: stufenweise Erhöhung, Frührentenabschläge und Hinzuverdienstregeln."
+  },
+  {
+    "sha256": "e4dd94595c6e054d1066b74a8a33dc681c864a7a8b1e6b2a5b4a2062155232c3",
+    "filename": "rente_so_wird_sie_berechnet_alte_bundeslaender.pdf",
+    "relpath": "9. Rente/rente_so_wird_sie_berechnet_alte_bundeslaender.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-so-wird-sie-berechnet-alte-bundeslaender",
+    "titel": "Rentenberechnung: Alte Bundesländer",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Rentenformel, Berechnungsbeispiel für eine Altersrente und Rendite der Beiträge in den alten Bundesländern."
+  },
+  {
+    "sha256": "fad64e89ddfdeb984029c382ea926e33cd0a9ffa10d136ba0149c39d8f15938c",
+    "filename": "rente_so_wird_sie_berechnet_neue_bundeslaender.pdf",
+    "relpath": "9. Rente/rente_so_wird_sie_berechnet_neue_bundeslaender.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rente-so-wird-sie-berechnet-neue-bundeslaender",
+    "titel": "Rentenberechnung: Neue Bundesländer",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Rentenformel, Berechnungsbeispiel für eine Altersrente und Rendite der Beiträge in den neuen Bundesländern."
+  },
+  {
+    "sha256": "143713c2cdd4582fefd49bf65dadc15f360bf53352447e0ead9f6f5bcb6c3153",
+    "filename": "rentenantrag.pdf",
+    "relpath": "9. Rente/rentenantrag.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rentenantrag",
+    "titel": "Rentenantrag stellen: So geht's",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung zum Rentenantrag: Wie und wo der Antrag gestellt wird, warum Formulare nötig sind und welche Unterlagen benötigt werden."
+  },
+  {
+    "sha256": "91cdd66d1d726915ef9d41c60d8a0251fd5830a5a5668390ee38f052d58e4993",
+    "filename": "rentenversicherung_familien.pdf",
+    "relpath": "9. Rente/rentenversicherung_familien.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rentenversicherung-familien",
+    "titel": "Rentenversicherung für Familien: Kindererziehung & Scheidung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung für Familien: Rentenpunkte durch Kindererziehung, Versorgungsausgleich nach Scheidung und Rentensplitting als Alternative."
+  },
+  {
+    "sha256": "042fb90a438c001fc23c35cf7ea791af61660a19a3332efcae1e46a7642ddb6a",
+    "filename": "rentner_krankenversicherung.pdf",
+    "relpath": "9. Rente/rentner_krankenversicherung.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rentner-krankenversicherung",
+    "titel": "Rentner und Krankenversicherung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Krankenversicherung als Rentner – Beitragsbeteiligung der Rentenversicherung, freie Kassenwahl und Versicherungsstatus."
+  },
+  {
+    "sha256": "2c49ecf389bd91c6decbc62f055ce1afec7cd909c7b7ccc10a53700cccf5d24d",
+    "filename": "rentner_steuerrecht.pdf",
+    "relpath": "9. Rente/rentner_steuerrecht.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "rentner-steuerrecht",
+    "titel": "Steuerrecht für Versicherte und Rentner",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Steuerliche Entlastung bei Beiträgen, Besteuerung von Renten und wann Rentner eine Steuererklärung abgeben müssen."
+  },
+  {
+    "sha256": "17336b132912965b4bce42e2c978cd8768834817160a67a9d25c83cb9757d7c3",
+    "filename": "selbstaendige_und_rente.pdf",
+    "relpath": "9. Rente/selbstaendige_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "selbstaendige-und-rente",
+    "titel": "Selbstständige und die Rentenversicherung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Pflichtversicherung für bestimmte Selbstständige, Möglichkeit der freiwilligen Versicherung und Sonderregelungen für Handwerker."
+  },
+  {
+    "sha256": "08bb36f1726721c7dc2d6b0ce73c8c7ed15d053a80532c2aa15bc1953ffc2fb8",
+    "filename": "tipps_fuer_rentnerinnen_und_rentner.pdf",
+    "relpath": "9. Rente/tipps_fuer_rentnerinnen_und_rentner.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "tipps-fuer-rentnerinnen-und-rentner",
+    "titel": "Tipps für Rentnerinnen und Rentner",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Flexibler Hinzuverdienst, wichtige Informationen rund um die Rentenzahlung und rechtzeitig an Vollmachten denken."
+  },
+  {
+    "sha256": "8511e88cd6a4c90d426c23a24a76506a4a995406b1d9a74b394407974b330403",
+    "filename": "von_altersgrenze_bis_zeitrente_rentenlexikon.pdf",
+    "relpath": "9. Rente/von_altersgrenze_bis_zeitrente_rentenlexikon.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "von-altersgrenze-bis-zeitrente-rentenlexikon",
+    "titel": "Rentenlexikon: Von Altersgrenze bis Zeitrente",
+    "beschreibung": "Nachschlagewerk der Deutschen Rentenversicherung mit rund 350 Fachbegriffen aus Rente und Rehabilitation – von Altersgrenze bis Zeitrente als persönliches Lexikon."
+  },
+  {
+    "sha256": "3d2f2bbfbb5723b607c3a14d230cf75848ef105b7e41c43f53e43a3e0ce5c30d",
+    "filename": "wehrdienst_und_rente.pdf",
+    "relpath": "9. Rente/wehrdienst_und_rente.pdf",
+    "kategorie_slug": "rente",
+    "jahr": null,
+    "slug_vorschlag": "wehrdienst-und-rente",
+    "titel": "Wehrdienst und Rente: Staatliche Beiträge",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung: Staat zahlt Rentenbeiträge für Wehr- und Zivildienst, rechtliche Besonderheiten und Zeiten bis 30. Juni 2011."
+  },
+  {
+    "sha256": "739d1b8e2bc910df8afd0cd43adc94f5c2e74684566457c43fdd339d5cc286e5",
+    "filename": "berufsstarter_und_sozialversicherung.pdf",
+    "relpath": "10. Sozialversicherung/berufsstarter_und_sozialversicherung.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "berufsstarter-und-sozialversicherung",
+    "titel": "Berufsstarter und die Sozialversicherung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung für Berufseinsteiger: Rentenversicherungsschutz von Beginn an, Absicherung bei Unfall oder Krankheit erklärt."
+  },
+  {
+    "sha256": "db3666f538e3adc35f4e9bad173a68445f64f63a28be20eff5bd8641e9fd6c8f",
+    "filename": "die_sozialversicherung.pdf",
+    "relpath": "10. Sozialversicherung/die_sozialversicherung.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "die-sozialversicherung",
+    "titel": "Unsere Sozialversicherung – Wissen für junge Leute",
+    "beschreibung": "Broschüre speziell für junge Menschen: Das deutsche Sozialversicherungssystem verständlich erklärt – Kranken-, Renten-, Pflege- und Arbeitslosenversicherung."
+  },
+  {
+    "sha256": "4967444f927a063bdc9179399c0a3a1cdd3a2fcc1177c215356d68a8d3c3f369",
+    "filename": "Elterngeld_ab_09_2021.pdf",
+    "relpath": "10. Sozialversicherung/Elterngeld_ab_09_2021.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": 2021,
+    "slug_vorschlag": "elterngeld-ab-09-2021",
+    "titel": "Elterngeld und Elternzeit (ab September 2021)",
+    "beschreibung": "Bundesgesetz zum Elterngeld und zur Elternzeit: Leistungsarten (Basiselterngeld, ElterngeldPlus, Partnerschaftsbonus) und Anspruchsvoraussetzungen ab 09/2021."
+  },
+  {
+    "sha256": "39685c1594aa09fe89874743878c721af47e24edb357275d98702927c87c9fa6",
+    "filename": "infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-pst1400.pdf",
+    "relpath": "10. Sozialversicherung/infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-pst1400.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-pst1400",
+    "titel": "Steuer- & SV-Landkarte pAV 2024 (Alte Leipziger)",
+    "beschreibung": "Infoblatt der Alten Leipziger zur steuer- und sozialversicherungsrechtlichen Einordnung aller drei Vorsorgeschichten (pAV, Stand Dezember 2023) für das Jahr 2024."
+  },
+  {
+    "sha256": "9604fd04518155c012288eb2d5f969e03cd5029c372977dd5afd32bddb0378b7",
+    "filename": "infoblatt-wichtige-daten-der-sozialversicherung-pst2000 (2).pdf",
+    "relpath": "10. Sozialversicherung/infoblatt-wichtige-daten-der-sozialversicherung-pst2000 (2).pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "infoblatt-wichtige-daten-der-sozialversicherung-pst2000-2",
+    "titel": "Sozialversicherung: Wichtige Daten für 2024",
+    "beschreibung": "Infoblatt der Alten Leipziger mit den zentralen Sozialversicherungswerten für 2024: aktueller Rentenwert, Beitragsbemessungsgrenzen, Beitragssätze aller Zweige."
+  },
+  {
+    "sha256": "1bdba5595ef063b551fd164af45cf768645b75ab7f0a12d5454d502cfa41f615",
+    "filename": "Kinderauszahlungstermine_2025.pdf",
+    "relpath": "10. Sozialversicherung/Kinderauszahlungstermine_2025.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": 2025,
+    "slug_vorschlag": "kinderauszahlungstermine-2025",
+    "titel": "Kindergeld: Auszahlungstermine 2025",
+    "beschreibung": "Monatliche Kindergeld-Auszahlungstermine 2025 der Familienkasse nach Kindergeldnummer: wann die Überweisung erfolgt und wie die Kindergeldnummer abgerufen wird."
+  },
+  {
+    "sha256": "9ccf008d899e76ed52617c61214623f8a100ee421a0fdd4564a745685d8339eb",
+    "filename": "Kindergeld_Antrag_Anlage.pdf",
+    "relpath": "10. Sozialversicherung/Kindergeld_Antrag_Anlage.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "kindergeld-antrag-anlage",
+    "titel": "Anlage Kind zum Kindergeldantrag – Formular",
+    "beschreibung": "Offizielles Formular der Familienkasse: Anlage Kind zum Antrag auf Kindergeld mit Angaben zur Identifikationsnummer, Geburtsdaten und weiteren Kinderdaten."
+  },
+  {
+    "sha256": "fdebffc31f55cca7f4d5c3636ea5965ef2611070a6bc03bdce350fed2e4cfc9b",
+    "filename": "Kindergeld_Antrag.pdf",
+    "relpath": "10. Sozialversicherung/Kindergeld_Antrag.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "kindergeld-antrag",
+    "titel": "Antrag auf Kindergeld – Formular (KG 1)",
+    "beschreibung": "Offizielles Antragsformular KG 1 der Familienkasse für den Antrag auf Kindergeld – für jedes Kind ist eine separate Anlage Kind beizufügen und einzureichen."
+  },
+  {
+    "sha256": "122842fb3a7f2a5b5a2349d6814a8be2a31d178343d2239ceeb01e7e24b28c8d",
+    "filename": "Kindergeldzuschlag_Antrag.pdf",
+    "relpath": "10. Sozialversicherung/Kindergeldzuschlag_Antrag.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "kindergeldzuschlag-antrag",
+    "titel": "Antrag auf Kinderzuschlag – Formular",
+    "beschreibung": "Offizielles Antragsformular der Familienkasse für den Kinderzuschlag: Ergänzungsleistung für Familien, die ihren Lebensunterhalt knapp nicht aus eigener Kraft decken können."
+  },
+  {
+    "sha256": "4f6f118812ea96180bc08a40e1832b7b982a47b654be2b49eb9d4d062d601cc9",
+    "filename": "Merkblatt_Kindergeld.pdf",
+    "relpath": "10. Sozialversicherung/Merkblatt_Kindergeld.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "merkblatt-kindergeld",
+    "titel": "Merkblatt Kindergeld: Informationen & Rechte",
+    "beschreibung": "Offizielles Merkblatt der Familienkasse zum Kindergeld: Anspruchsvoraussetzungen, Pflichten der antragstellenden Person und Antworten auf häufige Fragen."
+  },
+  {
+    "sha256": "0649ce61b386547fbccee33f54ec1a01f4a880c9479d290eb03d1ed15cd9f90a",
+    "filename": "Merkblatt_Kindergeldzuschlag.pdf",
+    "relpath": "10. Sozialversicherung/Merkblatt_Kindergeldzuschlag.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "merkblatt-kindergeldzuschlag",
+    "titel": "Merkblatt Kinderzuschlag für Familien mit kleinem Einkommen",
+    "beschreibung": "Offizielles Merkblatt der Familienkasse zum Kinderzuschlag: Ergänzungsleistung zum Kindergeld für Familien mit geringem Einkommen – Voraussetzungen und Antrag."
+  },
+  {
+    "sha256": "ebc3158a4677c05313c67a0105e533332ca9576977a143342114c64a599885b8",
+    "filename": "Sozialversicherungswerte_2026.pdf",
+    "relpath": "10. Sozialversicherung/Sozialversicherungswerte_2026.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": 2026,
+    "slug_vorschlag": "sozialversicherungswerte-2026",
+    "titel": "Sozialversicherungswerte 2026",
+    "beschreibung": "Aktuelle Sozialversicherungsdaten 2026: Rentenwert, Beitragsbemessungsgrenzen, Beitragssätze und Rechengrößen für Renten-, Kranken-, Pflege- und Arbeitslosenversicherung."
+  },
+  {
+    "sha256": "b81a090983578606a23f4ff877363861a045f6544581dc87cd814012ef49a8f3",
+    "filename": "studenten_sozialversicherung.pdf",
+    "relpath": "10. Sozialversicherung/studenten_sozialversicherung.pdf",
+    "kategorie_slug": "sozialversicherung",
+    "jahr": null,
+    "slug_vorschlag": "studenten-sozialversicherung",
+    "titel": "Studenten: Jobben und Sozialversicherung",
+    "beschreibung": "Broschüre der Deutschen Rentenversicherung für Studierende: Wann Sozialversicherungsbeiträge anfallen, Regelungen für Praktika, Minijobs und Aushilfstätigkeiten."
+  },
+  {
+    "sha256": "bea13a5abe33d83db7b9d450063963c4b7cfe233ba8bd587dabc6e3c47df5d1b",
+    "filename": "Anlage_34b_2024.pdf",
+    "relpath": "11. Steuern/Anlage_34b_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-34b-2024",
+    "titel": "Anlage 34b – Außerordentliche Holznutzungen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage 34b zur Einkommensteuer- oder Feststellungserklärung für Einkünfte aus außerordentlichen Holznutzungen nach § 34b EStG – je Betrieb eine Anlage."
+  },
+  {
+    "sha256": "d9a1135a8e6f2de4c9a41433f24c088f690358a4ff45820be3c73587f6cbfa91",
+    "filename": "Anlage_AUS_2024.pdf",
+    "relpath": "11. Steuern/Anlage_AUS_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-aus-2024",
+    "titel": "Anlage AUS – Ausländische Einkünfte & Steuern 2024",
+    "beschreibung": "Steuerformular 2024: Anlage AUS für steuerpflichtige ausländische Einkünfte sowie Anrechnung und Abzug ausländischer Steuern nach Doppelbesteuerungsabkommen."
+  },
+  {
+    "sha256": "c1a986aa0979aa3c7fb19fcd3396d70eb9f1ff750be0774366beb1a8b9e2cedf",
+    "filename": "Anlage_AV_2024.pdf",
+    "relpath": "11. Steuern/Anlage_AV_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-av-2024",
+    "titel": "Anlage AV – Riester-Altersvorsorge 2024",
+    "beschreibung": "Steuerformular 2024: Anlage AV für die steuerliche Förderung von Altersvorsorgebeiträgen aus zertifizierten Riester-Verträgen als zusätzlicher Sonderausgabenabzug."
+  },
+  {
+    "sha256": "139c5efdf12fee123ff8caaa8a4e96d7dc71d9b1b7301f5161cb0e887c3d3443",
+    "filename": "Anlage_Corona-Hilfen_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Corona-Hilfen_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-corona-hilfen-2024",
+    "titel": "Anlage Corona-Hilfen – Soforthilfen & Zuschüsse 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Corona-Hilfen für Corona-Soforthilfen, Überbrückungshilfen und vergleichbare Zuschüsse in der Einkommensteuer- oder Feststellungserklärung."
+  },
+  {
+    "sha256": "8e08094dfa053cac87588586f9be7829f86cf782346d20f6bf6832cf6bbaf650",
+    "filename": "Anlage_Energetische-Massnahmen_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Energetische-Massnahmen_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-energetische-massnahmen-2024",
+    "titel": "Anlage Energetische Maßnahmen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Energetische Maßnahmen für Aufwendungen bei energetischen Sanierungen selbst genutzter Wohngebäude gemäß § 35c EStG (Steuervorteil 20%)."
+  },
+  {
+    "sha256": "99103be5e7ca31c141e84d4bd5b500e49e7ef5849584a9f83b37269044118bbe",
+    "filename": "Anlage_FW_2024.pdf",
+    "relpath": "11. Steuern/Anlage_FW_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-fw-2024",
+    "titel": "Anlage FW – Förderung des Wohneigentums 2024",
+    "beschreibung": "Steuerformular 2024: Anlage FW für die steuerliche Förderung selbst genutzten Wohneigentums – Wohnungsbauprämie, Eigenheimzulage und ähnliche staatliche Förderprogramme."
+  },
+  {
+    "sha256": "5c63a80b4b33daf988abb80aeb0e459a79423faa0202834da58a713963fe7cb8",
+    "filename": "Anlage_G_2024.pdf",
+    "relpath": "11. Steuern/Anlage_G_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-g-2024",
+    "titel": "Anlage G – Einkünfte aus Gewerbebetrieb 2024",
+    "beschreibung": "Steuerformular 2024: Anlage G zur Einkommensteuererklärung für Einkünfte aus Gewerbebetrieb – für jeden Betrieb und jeden Ehegatten ist eine separate Anlage G abzugeben."
+  },
+  {
+    "sha256": "ac9d9cae586ac18f4729c8f4d153a071413b39927976bcd39d3574632fe1b3de",
+    "filename": "Anlage_Haushaltsnahe-Aufwendungen_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Haushaltsnahe-Aufwendungen_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-haushaltsnahe-aufwendungen-2024",
+    "titel": "Anlage Haushaltsnahe Aufwendungen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Haushaltsnahe Aufwendungen für Steuerermäßigungen bei Minijobs im Haushalt, haushaltsnahen Dienstleistungen und Handwerkerleistungen."
+  },
+  {
+    "sha256": "64412a623ffc28d3cc060c8e53118f6e67967da63c4597d0274af314a668d3cf",
+    "filename": "Anlage_K_2024.pdf",
+    "relpath": "11. Steuern/Anlage_K_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-k-2024",
+    "titel": "Anlage K – Übertragung Kinderfreibeträge",
+    "beschreibung": "Steuerformular: Anlage K für Groß- und Stiefelternteile zur Zustimmung der Übertragung von Kinderfreibeträgen und Erziehungs- oder Ausbildungsfreibeträgen."
+  },
+  {
+    "sha256": "42bfa59f2a9c5e4d932cb8f928f816877aa920a18d3b486bb257a598c61aa166",
+    "filename": "Anlage_KAP_2024.pdf",
+    "relpath": "11. Steuern/Anlage_KAP_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-kap-2024",
+    "titel": "Anlage KAP – Einkünfte aus Kapitalvermögen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage KAP für Kapitalerträge außerhalb der Abgeltungsteuer, Anrechnung von Steuern und Antrag auf Günstigerprüfung für alle Kapitalerträge."
+  },
+  {
+    "sha256": "78031c46c1f51187dd069edc2277be3e2fc568771ee7ff88decd604a578bd151",
+    "filename": "Anlage_KAP-BET_2024.pdf",
+    "relpath": "11. Steuern/Anlage_KAP-BET_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-kap-bet-2024",
+    "titel": "Anlage KAP-BET – Kapitalerträge aus Beteiligungen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage KAP-BET für Einkünfte aus Kapitalvermögen aus gesonderter und einheitlicher Feststellung (Beteiligungen an Fonds oder Gesellschaften)."
+  },
+  {
+    "sha256": "3169c7ccf05fde263e3c69cff19fa3f9bbee17386c71b4a5438185d5497aff8d",
+    "filename": "Anlage_KAP-INV_2024.pdf",
+    "relpath": "11. Steuern/Anlage_KAP-INV_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-kap-inv-2024",
+    "titel": "Anlage KAP-INV – Investmenterträge ohne Steuerabzug 2024",
+    "beschreibung": "Steuerformular 2024: Anlage KAP-INV für Investmenterträge, die nicht dem inländischen Steuerabzug unterlegen haben (z.B. im Ausland verwahrte Anteile)."
+  },
+  {
+    "sha256": "983fb5573e72f594e5bd2db7d9806e51354566cbefa96063482701b63bc35e4d",
+    "filename": "Anlage_Kind_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Kind_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-kind-2024",
+    "titel": "Anlage Kind – Steuererklärung 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Kind zur Einkommensteuererklärung mit Angaben zu Identifikationsnummer, Geburtsdaten und kinderbezogenen steuerlichen Vergünstigungen."
+  },
+  {
+    "sha256": "9f2f36a5dae194fa5a29f8d4bb5d98a82184bc40756641cd3e62712966f56e0a",
+    "filename": "Anlage_L_2024.pdf",
+    "relpath": "11. Steuern/Anlage_L_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-l-2024",
+    "titel": "Anlage L – Einkünfte aus Land- und Forstwirtschaft 2024",
+    "beschreibung": "Steuerformular 2024: Anlage L zur Einkommensteuer- oder Feststellungserklärung für Einkünfte aus Land- und Forstwirtschaft – für jeden Betrieb eine Anlage."
+  },
+  {
+    "sha256": "3c9b0034ed7f07349f10444fd4a56904d81ee9b5cd59afaecc675b83b72a0c37",
+    "filename": "Anlage_Mobilitaetspraemie_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Mobilitaetspraemie_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-mobilitaetspraemie-2024",
+    "titel": "Anlage Mobilitätsprämie 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Mobilitätsprämie für Pendler mit geringem zu versteuernden Einkommen als steuerliche Alternative zur Entfernungspauschale."
+  },
+  {
+    "sha256": "becce6031a868ec7e7894f818114a51635aa00448a8cdf87720faf7ab96946ab",
+    "filename": "Anlage_N_2024.pdf",
+    "relpath": "11. Steuern/Anlage_N_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-n-2024",
+    "titel": "Anlage N – Einkünfte aus nichtselbständiger Arbeit 2024",
+    "beschreibung": "Steuerformular 2024: Anlage N für Arbeitnehmer – Arbeitslohn, Werbungskosten und weitere Einkünfte aus nichtselbständiger Arbeit – je Person eine eigene Anlage."
+  },
+  {
+    "sha256": "655af7db827c76bb9640f394216a5a0ef988eb5ef290d176256bb2eec9524a76",
+    "filename": "Anlage_N-AUS_2024pdf.pdf",
+    "relpath": "11. Steuern/Anlage_N-AUS_2024pdf.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-n-aus-2024pdf",
+    "titel": "Anlage N-AUS – Ausländische Arbeitseinkünfte 2024",
+    "beschreibung": "Steuerformular 2024: Anlage N-AUS für ausländische Einkünfte aus nichtselbständiger Arbeit nach Doppelbesteuerungsabkommen – je Staat eine eigene Anlage."
+  },
+  {
+    "sha256": "9cdd4ab41e34ed7a0205896ae889ab47b9a0db8a78e1ad5bfadc026d722ee3c5",
+    "filename": "Anlage_N-Doppelte-Haushaltsfuehrung_2024.pdf",
+    "relpath": "11. Steuern/Anlage_N-Doppelte-Haushaltsfuehrung_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-n-doppelte-haushaltsfuehrung-2024",
+    "titel": "Anlage N-Doppelte Haushaltsführung 2024",
+    "beschreibung": "Steuerformular 2024: Anlage N-Doppelte Haushaltsführung für absetzbare Mehraufwendungen bei doppelter Haushaltsführung aus Einkünften aus nichtselbständiger Arbeit."
+  },
+  {
+    "sha256": "63855185382fe9db4ebb2d654c3e265e7ff1bb142c51800d8fab705136fa9f46",
+    "filename": "Anlage_R_2024.pdf",
+    "relpath": "11. Steuern/Anlage_R_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-r-2024",
+    "titel": "Anlage R – Renten aus dem Inland 2024",
+    "beschreibung": "Steuerformular 2024: Anlage R für Renten und Leistungen aus dem Inland – ohne Riester- und bAV-Leistungen – für jeden Ehegatten/Lebenspartner separat."
+  },
+  {
+    "sha256": "6580349f958650e556e363426226c5460cb1a5a798be5fb5585e6a4d1015581e",
+    "filename": "Anlage_R-AUS_2024.pdf",
+    "relpath": "11. Steuern/Anlage_R-AUS_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-r-aus-2024",
+    "titel": "Anlage R-AUS – Ausländische Renten & Leistungen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage R-AUS für Renten und Leistungen aus ausländischen Versicherungen, Rentenverträgen und betrieblichen Versorgungseinrichtungen."
+  },
+  {
+    "sha256": "9cb9962ee50f9100e3f0a22844e41bbecf7ea87050ff0270f02366bfe1f194d4",
+    "filename": "Anlage_R-AV_bAV_2024.pdf",
+    "relpath": "11. Steuern/Anlage_R-AV_bAV_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-r-av-bav-2024",
+    "titel": "Anlage R-AV/bAV – Riester & betriebliche Altersvorsorge 2024",
+    "beschreibung": "Steuerformular 2024: Anlage R-AV/bAV für Leistungen aus zertifizierten Altersvorsorgeverträgen (Riester) und inländischer betrieblicher Altersversorgung."
+  },
+  {
+    "sha256": "7257823d17e004adc3684de245eb46f792ac9aff40dbedc538e7ff6c3c813852",
+    "filename": "Anlage_S_2024.pdf",
+    "relpath": "11. Steuern/Anlage_S_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-s-2024",
+    "titel": "Anlage S – Einkünfte aus selbständiger Arbeit 2024",
+    "beschreibung": "Steuerformular 2024: Anlage S zur Einkommensteuererklärung für Einkünfte aus selbständiger Arbeit – für jeden Betrieb und Ehegatten separat abzugeben."
+  },
+  {
+    "sha256": "58eff753ac8256b76d08f046364c3f9a1dd55eaf6ce6edf3b782df083489b484",
+    "filename": "Anlage_SO_2024.pdf",
+    "relpath": "11. Steuern/Anlage_SO_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-so-2024",
+    "titel": "Anlage SO – Sonstige Einkünfte 2024",
+    "beschreibung": "Steuerformular 2024: Anlage SO für sonstige Einkünfte ohne Renten – wiederkehrende Bezüge, Unterhaltsleistungen, private Veräußerungsgeschäfte und Spekulationsgewinne."
+  },
+  {
+    "sha256": "c1c3945326200421f50a8523d0476352845bef0158b9c12bc4adc872e121ef50",
+    "filename": "Anlage_Sonderausgaben_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Sonderausgaben_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-sonderausgaben-2024",
+    "titel": "Anlage Sonderausgaben 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Sonderausgaben für Kirchensteuer, Spenden, Schul- und Ausbildungskosten sowie Sonderausgaben ohne Versicherungsaufwendungen."
+  },
+  {
+    "sha256": "c245508dfdbbaabd841d187cf0a340fd9610974a076ab69768698c888f15779c",
+    "filename": "Anlage_Sonstiges_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Sonstiges_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-sonstiges-2024",
+    "titel": "Anlage Sonstiges – Weitere Angaben & Anträge 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Sonstiges für ergänzende steuerliche Angaben und Anträge wie Steuerermäßigung wegen Erbschaftsteuer-Belastung nach § 35b EStG."
+  },
+  {
+    "sha256": "260823d32e5a94de09c79dfbc31334e131f47c2728079607deb2620dd70c5136",
+    "filename": "Anlage_U_2024.pdf",
+    "relpath": "11. Steuern/Anlage_U_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-u-2024",
+    "titel": "Anlage U – Unterhaltsleistungen an Ehegatten 2024",
+    "beschreibung": "Steuerformular: Anlage U für Unterhaltsleistungen und Ausgleichszahlungen zum Versorgungsausgleich an geschiedene oder dauerhaft getrennt lebende Ehegatten."
+  },
+  {
+    "sha256": "6607df0691f46063f0267d2f5e24100f6de0d4584c120801123ef4f1aa07d0fc",
+    "filename": "Anlage_Unterhalt_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Unterhalt_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-unterhalt-2024",
+    "titel": "Anlage Unterhalt – Unterhalt an bedürftige Personen 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Unterhalt für Unterhaltszahlungen an bedürftige Personen außerhalb des Haushalts – je unterstützten Haushalt eine eigene Anlage."
+  },
+  {
+    "sha256": "54c47a016701e93413f1451ac5d55a71a59a8b87e663a70374cb7f001bcebf48",
+    "filename": "Anlage_V_2024.pdf",
+    "relpath": "11. Steuern/Anlage_V_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-v-2024",
+    "titel": "Anlage V – Einkünfte aus Vermietung & Verpachtung 2024",
+    "beschreibung": "Steuerformular 2024: Anlage V zur Einkommensteuer- oder Feststellungserklärung für Einkünfte aus Vermietung und Verpachtung bebauter Grundstücke und Wohnungen."
+  },
+  {
+    "sha256": "eb77eee187729e9cc087280591d36d8c5feea1bc7d54992a10299b79478c6be0",
+    "filename": "Anlage_V-FeWo_2024.pdf",
+    "relpath": "11. Steuern/Anlage_V-FeWo_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-v-fewo-2024",
+    "titel": "Anlage V-FeWo – Ferienwohnungen & Kurzzeitvermietung 2024",
+    "beschreibung": "Steuerformular 2024: Anlage V-FeWo als Ergänzung zur Anlage V für Einkünfte aus Vermietung von Ferienwohnungen und kurzfristiger Wohnraumvermietung (z.B. Airbnb)."
+  },
+  {
+    "sha256": "b314c2f181da68e1a11674ecda7d45f0c5ff3d503b467c793e8e49dda9a03b81",
+    "filename": "Anlage_V-Sonstige_2024.pdf",
+    "relpath": "11. Steuern/Anlage_V-Sonstige_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-v-sonstige-2024",
+    "titel": "Anlage V-Sonstige – Weitere Vermietungseinkünfte 2024",
+    "beschreibung": "Steuerformular 2024: Anlage V-Sonstige für weitere Vermietungseinkünfte, z.B. aus gesonderter und einheitlicher Feststellung von Grundstücksgemeinschaften."
+  },
+  {
+    "sha256": "f19cfea7437777a8003ed6aa48bf13071f92f3ff0041f3a05b5e32b2f8e1709c",
+    "filename": "Anlage_Vorsorgeaufwand_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Vorsorgeaufwand_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-vorsorgeaufwand-2024",
+    "titel": "Anlage Vorsorgeaufwand – Versicherungsbeiträge 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Vorsorgeaufwand für Beiträge zur Altersvorsorge sowie Kranken-, Pflege- und sonstige Versicherungen als steuerlich absetzbare Sonderausgaben."
+  },
+  {
+    "sha256": "94493b04d3b309c45713781344bf6218751615f7c717c483ab27751b956575aa",
+    "filename": "Anlage_WA-ESt_2024.pdf",
+    "relpath": "11. Steuern/Anlage_WA-ESt_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-wa-est-2024",
+    "titel": "Anlage WA-ESt – Weitere Angaben mit Auslandsbezug 2024",
+    "beschreibung": "Steuerformular 2024: Anlage WA-ESt für Steuerpflichtige mit Auslandsbezug und zeitweiser unbeschränkter Steuerpflicht in Deutschland im Veranlagungsjahr 2024."
+  },
+  {
+    "sha256": "3c05cfd9b6e180e0841a9ac1d4e2466e46238998234cc329f4577b5b99ea9313",
+    "filename": "Anlage_Zinsschranke_2024.pdf",
+    "relpath": "11. Steuern/Anlage_Zinsschranke_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlage-zinsschranke-2024",
+    "titel": "Anlage Zinsschranke – Betriebsausgabenabzug 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Zinsschranke für den Betriebsausgabenabzug von Zinsaufwendungen nach § 4h EStG – für jeden Betrieb eine eigene Anlage abzugeben."
+  },
+  {
+    "sha256": "4d46b7236ddd222ab01c39725ebede5abe50668a15c5bb2d0f8ef4f0df013367",
+    "filename": "AnlageAVEUeR_2024.pdf",
+    "relpath": "11. Steuern/AnlageAVEUeR_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlageaveuer-2024",
+    "titel": "Anlage AVEÜR – Anlageverzeichnis zur EÜR 2024",
+    "beschreibung": "Steuerformular 2024: Anlage AVEÜR als Anlageverzeichnis und Ausweis des Umlaufvermögens zur Einnahmenüberschussrechnung (EÜR) für Selbstständige und Gewerbetreibende."
+  },
+  {
+    "sha256": "ed4cfa58aa5c513f191a79eef473e0ce4e1a838ba95205a0b95d66b95f5a502a",
+    "filename": "AnlageEUeR_2024.pdf",
+    "relpath": "11. Steuern/AnlageEUeR_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "anlageeuer-2024",
+    "titel": "Anlage EÜR – Einnahmenüberschussrechnung 2024",
+    "beschreibung": "Steuerformular 2024: Anlage EÜR für die Einnahmenüberschussrechnung nach § 4 Abs. 3 EStG – für jeden Betrieb separat von Selbstständigen und Gewerbetreibenden einzureichen."
+  },
+  {
+    "sha256": "5e1961a82da4689269c1f0a8c6b55ef343556568f05058826736c7d379984e8b",
+    "filename": "Aussergewoehnliche-Belastungen_2024.pdf",
+    "relpath": "11. Steuern/Aussergewoehnliche-Belastungen_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "aussergewoehnliche-belastungen-2024",
+    "titel": "Anlage Außergewöhnliche Belastungen & Pauschbeträge 2024",
+    "beschreibung": "Steuerformular 2024: Anlage Außergewöhnliche Belastungen für Behinderten-Pauschbetrag, Pflegekosten, Krankheitskosten und weitere außergewöhnliche Belastungen."
+  },
+  {
+    "sha256": "d85ed133b83507ba7b0c93b6aea422d9ad4ad4484ecd7552564c4b480138039b",
+    "filename": "Das ist von der Steuer absetzbar.pdf",
+    "relpath": "11. Steuern/Das ist von der Steuer absetzbar.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": null,
+    "slug_vorschlag": "das-ist-von-der-steuer-absetzbar",
+    "titel": "Was ist von der Steuer absetzbar? Übersicht",
+    "beschreibung": "Übersichtstabelle steuerlich absetzbarer Ausgaben mit Höchstbeträgen für Ledige und Verheiratete: Werbungskosten, Arbeitsmittel, Arbeitszimmer, Fahrten u.v.m."
+  },
+  {
+    "sha256": "64791ddf1bc1bf7def757dbfd9389a83ce9e50d4c2acc6c4050f71d638317e93",
+    "filename": "Erben_Vererben.pdf",
+    "relpath": "11. Steuern/Erben_Vererben.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": null,
+    "slug_vorschlag": "erben-vererben",
+    "titel": "Erben und Vererben: Erbrecht verständlich erklärt",
+    "beschreibung": "Broschüre zu Erbrecht und Erbschaftsteuer: Informationen zu gesetzlicher Erbfolge, Testament, Pflichtteil, Schenkungen und steuerlichen Freibeträgen für Privatpersonen."
+  },
+  {
+    "sha256": "40df9b3c88d8b283bb2fa8ae38349cec40b013dd14a1b59ecb67fe0e7a903edd",
+    "filename": "Hauptvordruck_ESt1A_2024.pdf",
+    "relpath": "11. Steuern/Hauptvordruck_ESt1A_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "hauptvordruck-est1a-2024",
+    "titel": "Einkommensteuererklärung Hauptvordruck ESt 1 A 2024",
+    "beschreibung": "Offizieller Hauptvordruck ESt 1 A 2024 für die Einkommensteuererklärung, Kirchensteuer auf Kapitalerträge und Festsetzung der Arbeitnehmer-Sparzulage."
+  },
+  {
+    "sha256": "3fcde0fbcebdb664c0b3af0721ccfd993341d1f127762d606033c114298d841a",
+    "filename": "Hauptvordruck_ESt1C_2024.pdf",
+    "relpath": "11. Steuern/Hauptvordruck_ESt1C_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "hauptvordruck-est1c-2024",
+    "titel": "Einkommensteuererklärung Hauptvordruck ESt 1 C 2024",
+    "beschreibung": "Offizieller Hauptvordruck ESt 1 C 2024 für die Einkommensteuererklärung beschränkt steuerpflichtiger Personen ohne Wohnsitz oder gewöhnlichen Aufenthalt in Deutschland."
+  },
+  {
+    "sha256": "0cdd0c025d66909190447cc5129678d4ac0603669a459716051afa8a302342ff",
+    "filename": "infoblatt-steuerliche-frei-und-foerderbetraege-pst1000 (4).pdf",
+    "relpath": "11. Steuern/infoblatt-steuerliche-frei-und-foerderbetraege-pst1000 (4).pdf",
+    "kategorie_slug": "steuern",
+    "jahr": null,
+    "slug_vorschlag": "infoblatt-steuerliche-frei-und-foerderbetraege-pst1000-4",
+    "titel": "Steuerliche Frei- und Förderbeträge 2024 (Alte Leipziger)",
+    "beschreibung": "Infoblatt der Alten Leipziger mit allen steuerlichen Freibeträgen und Förderbeträgen 2024: Grundfreibetrag, Kinderfreibetrag, Sonderausgaben und mehr."
+  },
+  {
+    "sha256": "52c5329a008253ee305a625a7af4010a94526b9e6072ff67adec0266c9eef026",
+    "filename": "Steuererklärung-Ratgeber_2024.pdf",
+    "relpath": "11. Steuern/Steuererklärung-Ratgeber_2024.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2024,
+    "slug_vorschlag": "steuererkla-rung-ratgeber-2024",
+    "titel": "Lohnsteuer 2024: Kleiner Ratgeber",
+    "beschreibung": "Praktischer Lohnsteuer-Ratgeber 2024 für Arbeitnehmer: Tipps zu Steuererklärung, absetzbaren Werbungskosten, Pauschbeträgen und den wichtigsten Steuerregeln."
+  },
+  {
+    "sha256": "9c33630706c029b78e0dd030738df3d3c38df9c04ac16bbb585b14d743440bb7",
+    "filename": "Steuerfreibetrag_2026.pdf",
+    "relpath": "11. Steuern/Steuerfreibetrag_2026.pdf",
+    "kategorie_slug": "steuern",
+    "jahr": 2026,
+    "slug_vorschlag": "steuerfreibetrag-2026",
+    "titel": "Steuerfreibeträge & Förderbeträge 2026",
+    "beschreibung": "Aktuelle Übersicht aller Steuerfreibeträge und Förderbeträge für 2026: Grundfreibetrag, Kinderfreibetrag, Altersvorsorgeaufwendungen und Sonderausgaben."
+  },
+  {
+    "sha256": "557e37eb8d5aa45ae0b2cf99335457543eba450cdcdf02ce285f2a49407d8769",
+    "filename": "Bußgeldkatalog.pdf",
+    "relpath": "12. Tabellen/Bußgeldkatalog.pdf",
+    "kategorie_slug": "tabellen",
+    "jahr": null,
+    "slug_vorschlag": "bussgeldkatalog",
+    "titel": "Bußgeldkatalog Straßenverkehr (14. Auflage 2021)",
+    "beschreibung": "Bundeseinheitlicher Tatbestandskatalog für Straßenverkehrsordnungswidrigkeiten (14. Auflage, Stand November 2021) mit Bußgeldern und Punkten in Flensburg."
+  },
+  {
+    "sha256": "01f0c85a492b51f7ec431fefec6e705112916593c4a149254fbddbc1aa266076",
+    "filename": "Pfaendungstabelle-2023-2024.pdf",
+    "relpath": "12. Tabellen/Pfaendungstabelle-2023-2024.pdf",
+    "kategorie_slug": "tabellen",
+    "jahr": 2023,
+    "slug_vorschlag": "pfaendungstabelle-2023-2024",
+    "titel": "Pfändungstabelle 2023/2024",
+    "beschreibung": "Offizielle Pfändungstabelle (01.07.2023–30.06.2024) gemäß Bundesgesetzblatt: Pfändbare Beträge nach Nettoeinkommen und Anzahl der Unterhaltsberechtigten."
+  },
+  {
+    "sha256": "0e469207120dcb844c652c9be949c97c68edfce2b8e96c8cb70662e17216e643",
+    "filename": "GDV_Autoversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Autoversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-autoversicherung",
+    "titel": "Kfz-Versicherung: Haftpflicht, Teil- & Vollkasko (GDV)",
+    "beschreibung": "GDV-Ratgeber zur Kfz-Versicherung: Pflicht-Haftpflicht, Teil- und Vollkasko erklärt, Verhalten nach Unfall und was Autofahrer im europäischen Ausland beachten müssen."
+  },
+  {
+    "sha256": "407dde74b08a593f6747bb8730cb03637caca3040305ef70e0bdc8b181d6c986",
+    "filename": "GDV_Haftpflichtversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Haftpflichtversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-haftpflichtversicherung",
+    "titel": "Private Haftpflichtversicherung (GDV)",
+    "beschreibung": "GDV-Ratgeber zur privaten Haftpflichtversicherung: Schutz für die ganze Familie, Haftung von Kindern, Hundehalterhaftung und besondere versicherte Risiken."
+  },
+  {
+    "sha256": "da8f878ae263f98307ada846341d77f2ba8ab32dc635f667e91c312d57e4018e",
+    "filename": "GDV_Hausrat_Wohngebäudeversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Hausrat_Wohngebäudeversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-hausrat-wohngeba-udeversicherung",
+    "titel": "Hausrat- & Wohngebäudeversicherung (GDV)",
+    "beschreibung": "GDV-Ratgeber zu Wohngebäude-, Hausrat- und Elementarschadenversicherung: Welche Schäden jeweils abgedeckt sind und wann der Hauseigentümer gegenüber Dritten haftet."
+  },
+  {
+    "sha256": "e7f62135455b91a559d215fbb4e35ec299891f47dbbdd53c5c804fbac7116124",
+    "filename": "GDV_Rechtsschutzversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Rechtsschutzversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-rechtsschutzversicherung",
+    "titel": "Rechtsschutzversicherung: Leistungen & Fallbeispiele (GDV)",
+    "beschreibung": "GDV-Ratgeber zur Rechtsschutzversicherung: Welche Kosten übernommen werden, außergerichtliche Lösungen und Schutz bei Verkehrsunfällen mit Fallbeispielen."
+  },
+  {
+    "sha256": "f84fdb5dd0e65e624ae9bbe4ee6500ff6f69afdc460bc4c0d4484228cb853a13",
+    "filename": "GDV_Reiseversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Reiseversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-reiseversicherung",
+    "titel": "Reiseversicherungen: Richtig absichern (GDV)",
+    "beschreibung": "GDV-Ratgeber zu Reiseversicherungen: Welche Deckungen Urlauber benötigen, Überschneidungen mit bestehenden Versicherungen und Schutz auf Spezialreisen."
+  },
+  {
+    "sha256": "6aabe10df8ab9ff36add32bb834b8a0a3d1e6e67ddc5de8d13de70946938063f",
+    "filename": "GDV_Unfallversicherung.pdf",
+    "relpath": "13. Versicherungen/GDV_Unfallversicherung.pdf",
+    "kategorie_slug": "versicherungen",
+    "jahr": null,
+    "slug_vorschlag": "gdv-unfallversicherung",
+    "titel": "Private Unfallversicherung: Leistungen & Schutz (GDV)",
+    "beschreibung": "GDV-Ratgeber zur privaten Unfallversicherung: Leistungen nach einem Unfall, Abgrenzung zur BU-Versicherung und ganzheitlicher Absicherungsschutz im Überblick."
+  }
+]
