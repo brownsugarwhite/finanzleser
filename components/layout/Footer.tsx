@@ -14,6 +14,12 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
   ];
 
   const toolCategories = await getToolCategories();
+  const toolIconByHref: Record<string, string> = {
+    "/finanztools/rechner": "/icons/iconRechner.svg",
+    "/finanztools/vergleiche": "/icons/iconVergleich.svg",
+    "/finanztools/checklisten": "/icons/iconCheckliste.svg",
+    "/finanztools/dokumente": "/icons/iconDokumente.svg",
+  };
 
   // Rechtliche Links (statisch)
   const legalLinks = [
@@ -63,16 +69,26 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
               Finanztools
             </h3>
             <ul className="space-y-2">
-              {toolCategories.map((tool) => (
-                <li key={tool.href}>
-                  <Link
-                    href={tool.href}
-                    className="text-sm text-gray-600 footer-link"
-                  >
-                    {tool.label} ({tool.count})
-                  </Link>
-                </li>
-              ))}
+              {toolCategories.map((tool) => {
+                const icon = toolIconByHref[tool.href];
+                return (
+                  <li key={tool.href}>
+                    <Link
+                      href={tool.href}
+                      className="text-sm text-gray-600 footer-link inline-flex items-center gap-2"
+                    >
+                      {icon && (
+                        <span
+                          className="footer-category-icon"
+                          aria-hidden="true"
+                          style={{ "--icon-url": `url(${icon})` } as React.CSSProperties}
+                        />
+                      )}
+                      {tool.label} ({tool.count})
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
