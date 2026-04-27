@@ -156,16 +156,28 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
               slug
             }
           }
+          beitrag {
+            untertitel
+          }
         }
       }
     }
   `;
 
   try {
-    const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
-      search: searchQuery,
+    const data = await client.request<{
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+    }>(query, { search: searchQuery });
+    const posts = data.posts.nodes.map((post) => {
+      const decoded = decodePostContent(post);
+      if (post.beitrag?.untertitel) {
+        decoded.beitragFelder = {
+          ...decoded.beitragFelder,
+          beitragUntertitel: post.beitrag.untertitel,
+        };
+      }
+      return decoded;
     });
-    const posts = data.posts.nodes.map(post => decodePostContent(post));
     return rankByRelevance(posts, searchQuery);
   } catch (error) {
     console.error(`Error searching posts for "${searchQuery}":`, error);

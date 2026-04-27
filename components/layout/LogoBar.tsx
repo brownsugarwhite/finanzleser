@@ -2,6 +2,7 @@
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 
@@ -33,6 +34,18 @@ export default function LogoBar() {
   const claimRef = useRef<HTMLSpanElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
+  const pathname = usePathname();
+
+  // Reset GSAP-set inline transform on the logo wrapper when leaving landing.
+  // Without this, an inline `transform: translateX(-280px)` set by the landing
+  // scroll handler can persist into the next page and keep the logo hidden.
+  useEffect(() => {
+    if (pathname === "/") return;
+    const el = wrapperRef.current;
+    if (!el) return;
+    gsap.set(el, { clearProps: "transform,x,pointerEvents" });
+    el.style.pointerEvents = "auto";
+  }, [pathname]);
 
   // Regular page: claim + dotline fade on scroll
   useEffect(() => {

@@ -74,13 +74,9 @@ export default function SearchHero({ initialQuery = "" }: { initialQuery?: strin
 
   return (
     <div className="search-hero">
-      {/* Logo + Suche Heading */}
+      {/* Logo-Platzhalter + Suche Heading */}
       <div className="search-hero__heading">
-        <img
-          src="/icons/fl_logo.svg"
-          alt="finanzleser"
-          className="search-hero__logo"
-        />
+        <div className="search-hero__logo" aria-hidden="true" title="Visual-Platzhalter" />
         <h1 className="search-hero__title">Suche</h1>
       </div>
 
@@ -151,21 +147,21 @@ export default function SearchHero({ initialQuery = "" }: { initialQuery?: strin
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-top: 32px;
+          padding-top: 0;
         }
         .search-hero__heading {
           display: flex;
-          align-items: baseline;
-          gap: 12px;
+          align-items: flex-end;
+          gap: 20px;
           flex-wrap: wrap;
           justify-content: center;
           margin-bottom: 32px;
         }
         .search-hero__logo {
-          width: 370px;
-          max-width: 100%;
-          height: auto;
-          display: block;
+          width: 150px;
+          height: 150px;
+          background: rgba(0, 0, 0, 0.05);
+          flex-shrink: 0;
         }
         .search-hero__title {
           font-family: var(--font-heading, "Merriweather", serif);

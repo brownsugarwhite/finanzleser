@@ -1,4 +1,3 @@
-import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
@@ -67,7 +66,6 @@ export default async function LandingPage() {
   return (
     <>
       <style>{`.logo-wrapper{transform:translateX(-280px);pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="maya"]{visibility:hidden}`}</style>
-      <LandingBodyAttr />
       <LandingIntro />
       <main className="bg-white">
         <div className="scalable-landing">

@@ -13,6 +13,8 @@ import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import MayaIcon from "@/components/ui/MayaIcon";
 import TopBanner from "@/components/ui/TopBanner";
+import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
+import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
 import ArticlePreviewProvider from "@/components/sections/ArticlePreviewProvider";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
@@ -87,6 +89,8 @@ export default async function RootLayout({
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body className="antialiased">
+        <LandingBodyAttr />
+        <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
         <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
