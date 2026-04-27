@@ -42,6 +42,10 @@ export function buildChecklisteUrl(slug: string): string {
   return `/finanztools/checklisten/${slug}`;
 }
 
+export function buildDokumentUrl(slug: string): string {
+  return `/finanztools/dokumente/${slug}`;
+}
+
 export function buildAnbieterUrl(slug: string): string {
   return `/${slug}`;
 }

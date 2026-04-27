@@ -501,6 +501,46 @@ a.megamenu-link:hover {
   }
 }
 
+/* Dokument-Detail: Visual links + PDF-Preview rechts */
+.dokument-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.dokument-detail-visual {
+  display: none;
+}
+.dokument-detail-visual-inner {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 400px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.dokument-detail-content {
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .dokument-detail-grid {
+    flex-direction: row;
+    gap: 48px;
+    align-items: stretch;
+  }
+  .dokument-detail-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 40%;
+    flex-shrink: 0;
+  }
+  .dokument-detail-content {
+    width: 60%;
+  }
+}
+
 .checkliste-container {
   display: flex;
   flex-direction: column;

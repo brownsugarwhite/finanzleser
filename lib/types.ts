@@ -150,6 +150,30 @@ export interface Checkliste {
 }
 
 // ─────────────────────────────────────────────
+// Dokumente (CPT)
+// ─────────────────────────────────────────────
+
+export interface DokumentKategorie {
+  name: string;
+  slug: string;
+}
+
+export interface Dokument {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  pdfFile?: {
+    mediaItemUrl: string;
+    fileSize?: number | string;
+    title?: string;
+    mediaDetails?: { file?: string };
+  };
+  dokumentKategorien?: { nodes: DokumentKategorie[] };
+  featuredImage?: { node: { sourceUrl: string } };
+}
+
+// ─────────────────────────────────────────────
 // SEO (Yoast)
 // ─────────────────────────────────────────────
 

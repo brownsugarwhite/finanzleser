@@ -57,6 +57,7 @@
   --color-tool-rechner: var(--color-brand-secondary);
   --color-tool-vergleiche: #06D496;
   --color-tool-checklisten: #9953c9;
+  --color-tool-dokumente: #E07A5F;
 
   /* Pill / Input Background */
   --color-pill-bg: rgba(255, 255, 255, 0.5);

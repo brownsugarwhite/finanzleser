@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
+import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
 import { decodePostContent } from "./html-utils";
 
 function getClient(): GraphQLClient {
@@ -981,6 +981,115 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
     return data.checklisteBy;
   } catch (error) {
     console.error(`Error fetching Checkliste with slug "${slug}":`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Alle Dokumente
+// ─────────────────────────────────────────────
+
+export async function getAllDokumente(): Promise<Dokument[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetDokumente($after: String) {
+      dokumente(first: 100, after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+          id
+          title
+          slug
+          excerpt
+          pdfFile {
+            mediaItemUrl
+            title
+            mediaDetails {
+              file
+            }
+          }
+          dokumentKategorien {
+            nodes {
+              name
+              slug
+            }
+          }
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const allNodes: Dokument[] = [];
+    let hasNextPage = true;
+    let after: string | null = null;
+
+    type DokumenteResponse = {
+      dokumente: { nodes: Dokument[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    };
+    while (hasNextPage) {
+      const data: DokumenteResponse = await client.request<DokumenteResponse>(query, { after });
+      allNodes.push(...data.dokumente.nodes);
+      hasNextPage = data.dokumente.pageInfo.hasNextPage;
+      after = data.dokumente.pageInfo.endCursor;
+    }
+
+    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+  } catch (error) {
+    console.error("Error fetching all Dokumente:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
+// Einzelnes Dokument nach Slug
+// ─────────────────────────────────────────────
+
+export async function getDokumentBySlug(slug: string): Promise<Dokument | null> {
+  const client = getClient();
+
+  const query = gql`
+    query GetDokumentBySlug($slug: String!) {
+      dokumentBy(slug: $slug) {
+        id
+        title
+        slug
+        excerpt
+        pdfFile {
+          mediaItemUrl
+          title
+          mediaDetails {
+            file
+          }
+        }
+        dokumentKategorien {
+          nodes {
+            name
+            slug
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ dokumentBy: Dokument | null }>(query, { slug });
+    return data.dokumentBy;
+  } catch (error) {
+    console.error(`Error fetching Dokument with slug "${slug}":`, error);
     return null;
   }
 }
