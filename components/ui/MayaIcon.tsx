@@ -7,6 +7,8 @@ import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
+import VersichererSelect from "@/components/ui/VersichererSelect";
+import type { Versicherer } from "@/lib/versicherer";
 
 const LEFT_EYE = { cx: 158.34, cy: 450.80 };
 const RIGHT_EYE = { cx: 413.69, cy: 450.80 };
@@ -34,6 +36,7 @@ export default function MayaIcon() {
   const [isHovered, setIsHovered] = useState(false);
   const wasInWindow = useRef(true);
   const [docked, setDocked] = useState(false);
+  const [selectedVersicherer, setSelectedVersicherer] = useState<Versicherer | null>(null);
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
   const pathname = usePathname();
@@ -105,6 +108,8 @@ export default function MayaIcon() {
       home.appendChild(el);
     }
     el.style.visibility = "visible";
+    // Versicherer-Auswahl bei Navigation zurücksetzen — neue Page = neuer Kontext
+    setSelectedVersicherer(null);
   }, [pathname]);
 
   // Scroll listener: undock on first scroll
@@ -737,6 +742,24 @@ export default function MayaIcon() {
               width: "auto",
             }}
           />
+
+          <div
+            className="maya-versicherer-slot"
+            style={{
+              marginTop: "auto",
+              alignSelf: "flex-end",
+              marginRight: -60,
+              paddingBottom: 4,
+              pointerEvents: "auto",
+              position: "relative",
+              zIndex: 50,
+            }}
+          >
+            <VersichererSelect
+              value={selectedVersicherer}
+              onChange={setSelectedVersicherer}
+            />
+          </div>
         </div>
         <style>{`
           .maya-chat-input::placeholder {
@@ -794,6 +817,15 @@ export default function MayaIcon() {
         .maya-batch-container[data-state="chat"] .maya-badge {
           background: rgba(255, 255, 255, 0.8);
           box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Versicherer-Trigger nur im echten Chat-Modus zeigen,
+           nicht im morphed-State (KI-Section-Pille) */
+        .maya-batch-container .maya-versicherer-slot {
+          display: none;
+        }
+        .maya-batch-container[data-state="chat"] .maya-versicherer-slot {
+          display: block;
         }
 
         .maya-batch-container .maya-spike-img {
