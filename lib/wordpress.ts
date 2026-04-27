@@ -165,11 +165,55 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
     const data = await client.request<{ posts: { nodes: Post[] } }>(query, {
       search: searchQuery,
     });
-    return data.posts.nodes.map(post => decodePostContent(post));
+    const posts = data.posts.nodes.map(post => decodePostContent(post));
+    return rankByRelevance(posts, searchQuery);
   } catch (error) {
     console.error(`Error searching posts for "${searchQuery}":`, error);
     return [];
   }
+}
+
+function relevanceScore(post: Post, query: string): number {
+  const q = query.toLowerCase().trim();
+  if (!q) return 0;
+  const title = (post.title || "").toLowerCase();
+  const excerpt = (post.excerpt || "").replace(/<[^>]*>/g, "").toLowerCase();
+
+  let score = 0;
+  if (title === q) score += 100;
+  if (title.startsWith(q)) score += 50;
+  if (title.includes(q)) score += 30;
+
+  // Word-boundary match in title
+  const wordRe = new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+  if (wordRe.test(title)) score += 15;
+
+  // Multi-token: each query token boosts if found in title
+  const tokens = q.split(/\s+/).filter((t) => t.length >= 2);
+  if (tokens.length > 1) {
+    for (const t of tokens) {
+      if (title.includes(t)) score += 8;
+    }
+  }
+
+  // Excerpt match (less weight)
+  if (excerpt.includes(q)) score += 6;
+  for (const t of tokens) {
+    if (excerpt.includes(t)) score += 1;
+  }
+
+  // Slight penalty for very long titles vs short ones (prefer concise, on-topic)
+  score -= Math.max(0, title.length - 60) * 0.02;
+
+  return score;
+}
+
+function rankByRelevance(posts: Post[], query: string): Post[] {
+  if (!query.trim() || posts.length <= 1) return posts;
+  return posts
+    .map((post) => ({ post, score: relevanceScore(post, query) }))
+    .sort((a, b) => b.score - a.score)
+    .map((x) => x.post);
 }
 
 // ─────────────────────────────────────────────
