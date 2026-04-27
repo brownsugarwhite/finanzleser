@@ -5,8 +5,8 @@ import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-const SLUG = "kontakt";
-const TITLE = "Kontakt";
+const SLUG = "dokumente";
+const TITLE = "Dokumente";
 const EYEBROW = "Service";
 
 export async function generateMetadata() {
@@ -15,14 +15,14 @@ export async function generateMetadata() {
     title: TITLE,
     description:
       page?.seoDescription ||
-      "Kontaktdaten der Finconext GmbH — Anschrift, Telefon und E-Mail.",
+      "Dokumente und PDF-Vorlagen zum Download.",
     path: `/${SLUG}`,
     modifiedTime: page?.modified,
     type: "website",
   });
 }
 
-export default async function KontaktPage() {
+export default async function DokumentePage() {
   const page = await getPageBySlug(SLUG);
   if (!page) notFound();
   return (

@@ -1,6 +1,7 @@
 import Footer from "./Footer";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import StickySparkHeading from "@/components/ui/StickySparkHeading";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 
 type LegalPageLayoutProps = {
@@ -8,6 +9,7 @@ type LegalPageLayoutProps = {
   title: string;
   content: string;
   visualPlaceholder?: boolean;
+  headingVariant?: "split" | "spark";
 };
 
 export default function LegalPageLayout({
@@ -15,6 +17,7 @@ export default function LegalPageLayout({
   title,
   content,
   visualPlaceholder = true,
+  headingVariant = "split",
 }: LegalPageLayoutProps) {
   const decodedTitle = decodeHtmlEntities(title);
 
@@ -26,32 +29,60 @@ export default function LegalPageLayout({
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pt-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pt-6">
           <Breadcrumb items={breadcrumbItems} />
-
-          <div className="legal-hero">
-            <div className="legal-hero__text">
-              <span className="legal-hero__eyebrow">{eyebrow}</span>
-              <h1 className="legal-hero__title font-bold">{decodedTitle}</h1>
-            </div>
-            {visualPlaceholder && (
-              <div
-                className="legal-hero__visual"
-                aria-hidden="true"
-                title="Visual-Platzhalter"
-              />
-            )}
-          </div>
-
-          <Spacer maxWidth="100%" noMargin />
-
-          <div className="legal-page__body">
-            <div
-              className="prose prose-lg legal-prose"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
-          </div>
         </div>
+
+        {headingVariant === "spark" ? (
+          <>
+            {visualPlaceholder && (
+              <div style={{ maxWidth: 1200, marginBottom: 40 }} className="mx-auto px-6">
+                <div
+                  style={{
+                    width: "100%",
+                    height: 250,
+                    background: "rgba(0, 0, 0, 0.05)",
+                  }}
+                  aria-hidden="true"
+                />
+              </div>
+            )}
+            <StickySparkHeading title={decodedTitle} as="h1" />
+            <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+              <div className="legal-page__body" style={{ marginTop: 40 }}>
+                <div
+                  className="prose prose-lg legal-prose"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+            <div className="legal-hero">
+              <div className="legal-hero__text">
+                <span className="legal-hero__eyebrow">{eyebrow}</span>
+                <h1 className="legal-hero__title font-bold">{decodedTitle}</h1>
+              </div>
+              {visualPlaceholder && (
+                <div
+                  className="legal-hero__visual"
+                  aria-hidden="true"
+                  title="Visual-Platzhalter"
+                />
+              )}
+            </div>
+
+            <Spacer maxWidth="100%" noMargin />
+
+            <div className="legal-page__body">
+              <div
+                className="prose prose-lg legal-prose"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
 
@@ -91,8 +122,7 @@ export default function LegalPageLayout({
           flex-shrink: 0;
           width: 50%;
           min-height: 240px;
-          background: rgba(0, 0, 0, 0.08);
-          border-radius: 4px;
+          background: rgba(0, 0, 0, 0.05);
         }
         .legal-page__body {
           max-width: 760px;

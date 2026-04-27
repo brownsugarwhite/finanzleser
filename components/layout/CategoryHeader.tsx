@@ -1,7 +1,6 @@
 "use client";
 
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import VisualLottie from "@/components/ui/VisualLottie";
 import StickySparkHeading from "@/components/ui/StickySparkHeading";
 
 interface CategoryHeaderProps {
@@ -14,12 +13,7 @@ interface CategoryHeaderProps {
 export default function CategoryHeader({ title, description, breadcrumbItems, children }: CategoryHeaderProps) {
   const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
-    <div style={{
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    }}>
+    <>
       {/* Pre-Heading-Bereich (Breadcrumb + Visual) — skaliert mit beim Menü-Open */}
       <div className="scalable-landing" style={{
         width: "100%",
@@ -31,23 +25,18 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
         <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        {/* Visual Platzhalter — wrapper für seitliches Padding */}
+        {/* Visual Platzhalter (graue Box, einheitliche Farbe) */}
         <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
           <div style={{
-            position: "relative",
             width: "100%",
             height: 250,
-            background: "transparent",
-            overflow: "hidden",
-          }}>
-            <VisualLottie seed={title} />
-          </div>
+            background: "rgba(0, 0, 0, 0.05)",
+          }} aria-hidden="true" />
         </div>
       </div>
 
-      {/* Sticky Heading — bringt .scalable-landing selbst mit, bleibt beim
-          Menü-Open über dem ProgressiveBlur (eigener Stacking-Context durch
-          sticky + z-index). */}
+      {/* Sticky Heading — Fragment-Top-Level, damit das Parent-<main> der
+          Containing Block ist und die Heading über die volle Body-Höhe klebt. */}
       {title && <StickySparkHeading title={title} as="h1" />}
 
       {/* Post-Heading-Bereich (Description + Children) — skaliert mit */}
@@ -80,6 +69,6 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

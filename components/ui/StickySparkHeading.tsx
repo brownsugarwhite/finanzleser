@@ -33,6 +33,7 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
   useEffect(() => {
     const el = sparksRef.current;
     if (!el) return;
+    const sparks = el.querySelectorAll<SVGSVGElement>("svg");
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
@@ -40,6 +41,22 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
         {
           paddingLeft: 200,
           paddingRight: 200,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 60%",
+            end: `top ${top}px`,
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        sparks,
+        { rotation: 0, transformOrigin: "50% 50%" },
+        {
+          rotation: 360,
+          transformOrigin: "50% 50%",
           ease: "none",
           scrollTrigger: {
             trigger: el,
@@ -72,7 +89,7 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
       boxSizing: "border-box",
     }}>
       <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 10px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
         <SmallSpark />
         <LargeSpark />
       </div>
@@ -87,11 +104,11 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
         lineHeight: 1.3,
         whiteSpace: "nowrap",
         margin: 0,
-        padding: "0 8px",
+        padding: 0,
       }}>
         {title}
       </Tag>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 10px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4, paddingRight: 10 }}>
         <LargeSpark />
         <SmallSpark />
       </div>

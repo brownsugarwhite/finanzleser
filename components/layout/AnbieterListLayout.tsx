@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import StickySparkHeading from "@/components/ui/StickySparkHeading";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import type { AnbieterPost } from "@/lib/types";
 
@@ -30,13 +31,29 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pt-6">
           <Breadcrumb items={breadcrumbItems} />
+        </div>
 
-          <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
-            Anbieter
-          </h1>
-          <p className="mb-10 text-gray-600" style={{ fontFamily: "Merriweather, serif", fontSize: "18px" }}>
+        <div style={{ maxWidth: 1200, marginBottom: 40, marginTop: 24 }} className="mx-auto px-6">
+          <div
+            style={{
+              width: "100%",
+              height: 250,
+              background: "rgba(0, 0, 0, 0.05)",
+            }}
+            aria-hidden="true"
+          />
+        </div>
+
+        <StickySparkHeading title="Anbieter" as="h1" />
+
+        <div style={{ maxWidth: 1200 }} className="mx-auto pb-12">
+          <div className="px-6" style={{ marginTop: 40 }}>
+          <p
+            className="mb-10 text-gray-600 text-center"
+            style={{ fontFamily: "Merriweather, serif", fontSize: "18px", fontStyle: "italic" }}
+          >
             Kontaktdaten von {anbieter.length} Versicherern und Finanzanbietern auf einen Blick.
           </p>
 
@@ -60,6 +77,7 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
               </ul>
             </section>
           ))}
+          </div>
         </div>
       </main>
       <Footer />
