@@ -10,9 +10,8 @@ const ITEMS: QuickItem[] = [
   { label: "Rechner", href: "/finanztools/rechner", icon: "/icons/iconRechner.svg" },
   { label: "Vergleiche", href: "/finanztools/vergleiche", icon: "/icons/iconVergleich.svg" },
   { label: "Checklisten", href: "/finanztools/checklisten", icon: "/icons/iconCheckliste.svg" },
-  // Platzhalter-Icons bis dedizierte SVGs vorliegen
-  { label: "Anbieter", href: "/anbieter", icon: "/icons/icon_finanzen.svg" },
-  { label: "Dokumente", href: "/dokumente", icon: "/icons/icon_recht.svg" },
+  { label: "Anbieter", href: "/anbieter", icon: "/icons/icon_anbieter.svg" },
+  { label: "Dokumente", href: "/finanztools/dokumente", icon: "/icons/iconDokumente.svg" },
 ];
 
 export default function QuickAccessButtons() {

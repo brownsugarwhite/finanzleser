@@ -82,30 +82,25 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
               Service
             </h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/anbieter"
-                  className="text-sm text-gray-600 footer-link"
-                >
-                  Anbieter
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dokumente"
-                  className="text-sm text-gray-600 footer-link"
-                >
-                  Dokumente
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/kontakt"
-                  className="text-sm text-gray-600 footer-link"
-                >
-                  Kontakt
-                </Link>
-              </li>
+              {[
+                { label: "Anbieter", href: "/anbieter", icon: "/icons/icon_anbieter.svg" },
+                { label: "Dokumente", href: "/finanztools/dokumente", icon: "/icons/iconDokumente.svg" },
+                { label: "Kontakt", href: "/kontakt", icon: "/icons/icon_kontakt.svg" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-gray-600 footer-link inline-flex items-center gap-2"
+                  >
+                    <span
+                      className="footer-category-icon"
+                      aria-hidden="true"
+                      style={{ "--icon-url": `url(${item.icon})` } as React.CSSProperties}
+                    />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
