@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       stripHtml(dokument.excerpt) ||
       `Dokument zum Download: ${dokument.title}`,
-    path: `/finanztools/dokumente/${slug}`,
+    path: `/dokumente/${slug}`,
   });
 }
 
@@ -66,8 +66,7 @@ export default async function DokumentDetailPage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Finanztools", href: "/finanztools" },
-    { label: "Dokumente", href: "/finanztools/dokumente" },
+    { label: "Dokumente", href: "/dokumente" },
   ];
 
   return (
@@ -78,7 +77,7 @@ export default async function DokumentDetailPage({ params }: Props) {
 
           {/* Eyebrow */}
           <Link
-            href="/finanztools/dokumente"
+            href="/dokumente"
             style={{
               display: "inline-block",
               marginBottom: 8,

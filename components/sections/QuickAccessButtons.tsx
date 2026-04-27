@@ -11,7 +11,7 @@ const ITEMS: QuickItem[] = [
   { label: "Vergleiche", href: "/finanztools/vergleiche", icon: "/icons/iconVergleich.svg" },
   { label: "Checklisten", href: "/finanztools/checklisten", icon: "/icons/iconCheckliste.svg" },
   { label: "Anbieter", href: "/anbieter", icon: "/icons/icon_anbieter.svg" },
-  { label: "Dokumente", href: "/finanztools/dokumente", icon: "/icons/iconDokumente.svg" },
+  { label: "Dokumente", href: "/dokumente", icon: "/icons/iconDokumente.svg" },
 ];
 
 export default function QuickAccessButtons() {

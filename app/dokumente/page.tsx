@@ -1,36 +1,42 @@
-import { notFound } from "next/navigation";
-import { getPageBySlug } from "@/lib/wordpress";
-import LegalPageLayout from "@/components/layout/LegalPageLayout";
-import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+import Footer from "@/components/layout/Footer";
+import Breadcrumb from "@/components/ui/Breadcrumb";
+import { getAllDokumente } from "@/lib/wordpress";
+import { buildMetadata, SITE_NAME } from "@/lib/seo";
+import DokumenteListClient from "./DokumenteListClient";
 
 export const revalidate = 3600;
 
-const SLUG = "dokumente";
-const TITLE = "Dokumente";
-const EYEBROW = "Service";
-
-export async function generateMetadata() {
-  const page = await getPageBySlug(SLUG);
-  return buildMetadata({
-    title: TITLE,
-    description:
-      page?.seoDescription ||
-      "Dokumente und PDF-Vorlagen zum Download.",
-    path: `/${SLUG}`,
-    modifiedTime: page?.modified,
-    type: "website",
-  });
-}
+export const metadata: Metadata = buildMetadata({
+  title: `Dokumente – Broschüren & Ratgeber – ${SITE_NAME}`,
+  description:
+    "Aktuelle Broschüren, Merkblätter, Tabellen und Formulare aus den Bereichen Finanzen, Steuern, Versicherungen und Recht – kostenlos zum Download.",
+  path: "/dokumente",
+});
 
 export default async function DokumentePage() {
-  const page = await getPageBySlug(SLUG);
-  if (!page) notFound();
+  const dokumente = await getAllDokumente();
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+  ];
+
   return (
-    <LegalPageLayout
-      eyebrow={EYEBROW}
-      title={page.title || TITLE}
-      content={page.content}
-      headingVariant="spark"
-    />
+    <>
+      <main className="min-h-screen bg-white">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
+          <Breadcrumb items={breadcrumbItems} />
+
+          <h1 className="text-4xl font-bold mb-6 mt-4">Dokumente</h1>
+          <p className="text-lg text-gray-600 mb-8">
+            Broschüren, Merkblätter, Tabellen und Formulare aus Finanzen, Steuern,
+            Versicherungen und Recht – kostenlos zum Download.
+          </p>
+
+          <DokumenteListClient dokumente={dokumente} />
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 }

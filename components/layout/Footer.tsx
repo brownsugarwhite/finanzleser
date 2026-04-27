@@ -18,7 +18,6 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
     "/finanztools/rechner": "/icons/iconRechner.svg",
     "/finanztools/vergleiche": "/icons/iconVergleich.svg",
     "/finanztools/checklisten": "/icons/iconCheckliste.svg",
-    "/finanztools/dokumente": "/icons/iconDokumente.svg",
   };
 
   // Rechtliche Links (statisch)
@@ -100,7 +99,7 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
             <ul className="space-y-2">
               {[
                 { label: "Anbieter", href: "/anbieter", icon: "/icons/icon_anbieter.svg" },
-                { label: "Dokumente", href: "/finanztools/dokumente", icon: "/icons/iconDokumente.svg" },
+                { label: "Dokumente", href: "/dokumente", icon: "/icons/iconDokumente.svg" },
                 { label: "Kontakt", href: "/kontakt", icon: "/icons/icon_kontakt.svg" },
               ].map((item) => (
                 <li key={item.href}>
