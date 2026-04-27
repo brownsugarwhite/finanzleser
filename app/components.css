@@ -517,7 +517,18 @@ a.megamenu-link:hover {
   flex: 1;
   min-height: 400px;
   overflow: hidden;
-  border-radius: 12px;
+}
+
+/* Blend-Layer: färbt Weiß in Body-Hintergrundfarbe (analog .vergleich-iframe-container) */
+.dokument-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--color-bg-page);
+  mix-blend-mode: darken;
+  opacity: 1;
+  z-index: 1;
 }
 .dokument-detail-content {
   width: 100%;

@@ -127,7 +127,7 @@ export default async function DokumentDetailPage({ params }: Props) {
             </div>
 
             <div className="dokument-detail-content">
-              <DokumentPreview pdfUrl={pdfUrl} title={dokument.title} />
+              <DokumentPreview slug={slug} pdfUrl={pdfUrl} title={dokument.title} />
               <div style={{ marginTop: 20 }}>
                 <DokumentDownload
                   pdfUrl={pdfUrl}
