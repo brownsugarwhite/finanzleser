@@ -1199,6 +1199,45 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
 }
 
 // ─────────────────────────────────────────────
+// Statische WP-Pages (Impressum, Datenschutz, …)
+// ─────────────────────────────────────────────
+
+export type WpPage = {
+  title: string;
+  content: string;
+  modified: string;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
+export async function getPageBySlug(slug: string): Promise<WpPage | null> {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return null;
+  const baseUrl = wpUrl.replace("/graphql", "");
+
+  try {
+    const response = await fetch(
+      `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
+      { next: { revalidate: 3600 } },
+    );
+    if (!response.ok) return null;
+    const arr = await response.json();
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    const page = arr[0];
+    return {
+      title: page.title?.rendered ?? "",
+      content: page.content?.rendered ?? "",
+      modified: page.modified ?? "",
+      seoTitle: page.yoast_head_json?.title,
+      seoDescription: page.yoast_head_json?.description,
+    };
+  } catch (error) {
+    console.error(`Error fetching page "${slug}" from WordPress:`, error);
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
 // Anbieter (CPT): Einzelseite nach Slug
 // ─────────────────────────────────────────────
 

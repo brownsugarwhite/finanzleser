@@ -20,7 +20,7 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
     { label: "Impressum", href: "/impressum" },
     { label: "Datenschutz", href: "/datenschutz" },
     { label: "AGB", href: "/agb" },
-    { label: "Kontakt", href: "/kontakt" },
+    { label: "Widerrufsrecht", href: "/widerrufsrecht" },
   ];
 
   return (
@@ -95,6 +95,14 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
                   className="text-sm text-gray-600 footer-link"
                 >
                   Dokumente
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/erstinformationen"
+                  className="text-sm text-gray-600 footer-link"
+                >
+                  Erstinformationen
                 </Link>
               </li>
               <li>

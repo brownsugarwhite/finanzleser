@@ -526,9 +526,8 @@ export default function MegaMenu({
       }}>
         <nav style={{ display: "flex", gap: 16, alignItems: "center" }}>
           {[
-            { label: "Impressum", href: "/impressum" },
-            { label: "Datenschutz", href: "/datenschutz" },
-            { label: "AGB", href: "/agb" },
+            { label: "Anbieter", href: "/anbieter" },
+            { label: "Dokumente", href: "/dokumente" },
             { label: "Kontakt", href: "/kontakt" },
           ].map((link) => (
             <Link
