@@ -5,6 +5,7 @@ import {
   getAllVergleiche,
   getAllChecklisten,
   getAllAnbieter,
+  getAllDokumente,
   getNavItems,
 } from "@/lib/wordpress";
 import { SITE_URL } from "@/lib/seo";
@@ -14,6 +15,7 @@ import {
   buildVergleichUrl,
   buildChecklisteUrl,
   buildAnbieterUrl,
+  buildDokumentUrl,
   buildCategoryUrl,
   buildSubcategoryUrl,
 } from "@/lib/urls";
@@ -26,16 +28,18 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitema
   { path: "/finanztools/rechner", changeFrequency: "weekly", priority: 0.8 },
   { path: "/finanztools/vergleiche", changeFrequency: "weekly", priority: 0.8 },
   { path: "/finanztools/checklisten", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/dokumente", changeFrequency: "weekly", priority: 0.8 },
   { path: "/suche", changeFrequency: "monthly", priority: 0.3 },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, rechner, vergleiche, checklisten, anbieter, navItems] = await Promise.all([
+  const [posts, rechner, vergleiche, checklisten, anbieter, dokumente, navItems] = await Promise.all([
     safe(getAllPosts, []),
     safe(getAllRechner, []),
     safe(getAllVergleiche, []),
     safe(getAllChecklisten, []),
     safe(getAllAnbieter, []),
+    safe(getAllDokumente, []),
     safe(getNavItems, []),
   ]);
 
@@ -98,6 +102,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.4,
   }));
 
+  const dokumentEntries: MetadataRoute.Sitemap = dokumente.map((d) => ({
+    url: `${SITE_URL}${buildDokumentUrl(d.slug)}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }));
+
   return [
     ...staticEntries,
     ...categoryEntries,
@@ -106,6 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...vergleichEntries,
     ...checklistenEntries,
     ...anbieterEntries,
+    ...dokumentEntries,
   ];
 }
 
