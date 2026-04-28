@@ -1170,3 +1170,21 @@ h2.faq-heading {
 .anbieter-content .wp-block-table tr:hover td {
   background: rgba(69, 161, 23, 0.04);
 }
+
+/* Mobile: globale + Landing-TopNav ausblenden (Burger-Nav im Drawer bleibt sichtbar).
+   !important nötig, weil TopNav.tsx inline display:flex setzt. */
+@media (max-width: 767px) {
+  .sticky-nav[data-topnav],
+  .landing-nav[data-topnav] {
+    display: none !important;
+  }
+
+  /* Landing-Hero: Logo 13px unter Bookmark, max 350px breit.
+     !important nötig, weil LandingIntro.tsx inline-Styles setzt. */
+  .landing-hero > [data-scale-extended] {
+    margin-top: 13px !important;
+  }
+  .landing-hero img[alt="finanzleser"] {
+    max-width: 350px !important;
+  }
+}

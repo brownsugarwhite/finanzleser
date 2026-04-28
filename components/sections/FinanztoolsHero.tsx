@@ -394,37 +394,40 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
         <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
-          <div style={{ width: "100%", height: "390px", position: "relative" }}>
-            <div style={{ width: isMobile ? "100%" : 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
-              <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
-                Newsletter
-              </p>
-              <p
-                lang="de"
-                style={{
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  fontWeight: 650,
-                  fontSize: 16,
-                  lineHeight: 1.3,
-                  color: "var(--color-text-primary)",
-                  textAlign: "right",
-                  hyphens: "auto",
-                  WebkitHyphens: "auto",
-                  wordBreak: "break-word",
-                }}
-              >
-                Bleiben Sie mit unserem Finanzleser.de<br />Newsletter immer auf dem neusten Stand!
-              </p>
-              <div style={{ display: "flex", justifyContent: "flex-end", width: "100%",  marginTop: 12 }}>
-                <Button onClick={() => {}} label="Jetzt abonnieren" />
-              </div>
-
-              {/* Horizontale Linie */}
-              <div style={{ width: isMobile ? "100%" : 330, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
-            </div>
-
-            {/* Visual — zwischen Newsletter und Sidebar */}
+          <div style={{ width: "100%", height: isMobile ? "auto" : "390px", position: "relative" }}>
             {!isMobile && (
+              <div style={{ width: 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
+                <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
+                  Newsletter
+                </p>
+                <p
+                  lang="de"
+                  style={{
+                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                    fontWeight: 650,
+                    fontSize: 16,
+                    lineHeight: 1.3,
+                    color: "var(--color-text-primary)",
+                    textAlign: "right",
+                    hyphens: "auto",
+                    WebkitHyphens: "auto",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  Bleiben Sie mit unserem Finanzleser.de<br />Newsletter immer auf dem neusten Stand!
+                </p>
+                <div style={{ display: "flex", justifyContent: "flex-end", width: "100%",  marginTop: 12 }}>
+                  <Button onClick={() => {}} label="Jetzt abonnieren" />
+                </div>
+
+                {/* Horizontale Linie */}
+                <div style={{ width: 330, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
+              </div>
+            )}
+
+            {/* Visual — Desktop: zwischen Newsletter und Sidebar (absolute);
+                         Mobile: full-bleed über Bildschirmbreite */}
+            {!isMobile ? (
               <div style={{
                 position: "absolute",
                 top:13,
@@ -434,12 +437,20 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
               }}>
                 <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
               </div>
+            ) : (
+              <div style={{
+                width: "100vw",
+                marginLeft: "calc(50% - 50vw)",
+                aspectRatio: "1309.52 / 855.59",
+              }}>
+                <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
+              </div>
             )}
           </div>
 
           {/* 2. Subheading + Heading — sticky bottom */}
-          <div style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", alignItems: "baseline", gap: 10, paddingTop: 256 }}>
-            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", marginLeft: 180 }}>
+          <div style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "baseline", gap: isMobile ? 4 : 10, paddingTop: 256 }}>
+            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", marginLeft: isMobile ? 0 : 180 }}>
               Die Finanztools
             </p>
             <p ref={alleinHandRef} style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, opacity: 0 }}>

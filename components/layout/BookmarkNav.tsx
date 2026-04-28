@@ -45,6 +45,21 @@ export default function BookmarkNav() {
   const burgerVisible = useRef(false);
   const triggerRef = useRef<ScrollTrigger | null>(null);
 
+  // Finanztools refs (mobile slide-in)
+  const ftBtnRef = useRef<HTMLButtonElement>(null);
+  const ftBtnNaturalW = useRef<number | null>(null);
+  const ftBtnVisible = useRef(true);
+
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
   // Search refs
   const bodyRef = useRef<HTMLDivElement>(null);
   const searchPillRef = useRef<HTMLDivElement>(null);
@@ -61,6 +76,16 @@ export default function BookmarkNav() {
 
   useEffect(() => {
     const createTrigger = (isInit = false) => {
+      // Mobile: Burger ist immer sichtbar — kein ScrollTrigger.
+      if (isMobile) {
+        const btn = burgerBtnRef.current;
+        if (!btn) return;
+        gsap.set(btn, { width: BTN_HEIGHT, paddingRight: 8, overflow: "hidden" });
+        lineRefs.current.forEach((line) => { if (line) gsap.set(line, { scaleX: 1 }); });
+        burgerVisible.current = true;
+        return;
+      }
+
       const navEl = (document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]")) as HTMLElement | null;
       if (!navEl || !burgerBtnRef.current) return;
 
@@ -69,6 +94,7 @@ export default function BookmarkNav() {
         lineRefs.current.forEach((line) => {
           if (line) gsap.set(line, { scaleX: 0 });
         });
+        burgerVisible.current = false;
       }
 
       triggerRef.current = ScrollTrigger.create({
@@ -127,11 +153,11 @@ export default function BookmarkNav() {
     window.addEventListener("scroll-anim-recreate", onRecreate);
     return () => {
       cancelAnimationFrame(raf);
-      if (triggerRef.current) triggerRef.current.kill();
+      if (triggerRef.current) { triggerRef.current.kill(); triggerRef.current = null; }
       window.removeEventListener("scroll-anim-kill", onKill);
       window.removeEventListener("scroll-anim-recreate", onRecreate);
     };
-  }, []);
+  }, [isMobile]);
 
   /* ══════════════════════════════════════════════════
      BURGER ANIMATIONS
@@ -223,6 +249,8 @@ export default function BookmarkNav() {
   useEffect(() => {
     const handleMenuClosed = () => {
       if (!burgerIsX.current) return;
+      // Mobile: Button bleibt immer sichtbar — nur X → Lines.
+      if (isMobile) { animateToBurger(); return; }
       const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
       const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
       if (navIsHidden) animateToBurger();
@@ -230,14 +258,81 @@ export default function BookmarkNav() {
     };
     window.addEventListener("menu-closed", handleMenuClosed);
     return () => window.removeEventListener("menu-closed", handleMenuClosed);
-  }, [animateToBurger, hideAsX]);
+  }, [animateToBurger, hideAsX, isMobile]);
+
+  /* ══════════════════════════════════════════════════
+     FINANZTOOLS BUTTON — Mobile: collapsed default, slide on menu open/close
+     ══════════════════════════════════════════════════ */
+
+  useEffect(() => {
+    const btn = ftBtnRef.current;
+    if (!btn) return;
+
+    if (isMobile) {
+      // Natürliche Breite einmalig messen (vor erstem Collapse)
+      if (ftBtnNaturalW.current === null) {
+        ftBtnNaturalW.current = btn.offsetWidth;
+      }
+      gsap.set(btn, { width: 0, paddingLeft: 0, paddingRight: 0, overflow: "hidden" });
+      ftBtnVisible.current = false;
+    } else {
+      gsap.set(btn, { clearProps: "width,paddingLeft,paddingRight,overflow" });
+      ftBtnVisible.current = true;
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const slideIn = () => {
+      const btn = ftBtnRef.current;
+      if (!btn || ftBtnNaturalW.current === null) return;
+      if (ftBtnVisible.current) return;
+      ftBtnVisible.current = true;
+      gsap.to(btn, {
+        width: ftBtnNaturalW.current,
+        paddingLeft: BTN_PADDING,
+        paddingRight: BTN_PADDING,
+        duration: 0.3,
+        ease: "power2.inOut",
+        overwrite: "auto",
+      });
+    };
+
+    const slideOut = () => {
+      const btn = ftBtnRef.current;
+      if (!btn) return;
+      if (!ftBtnVisible.current) return;
+      ftBtnVisible.current = false;
+      gsap.to(btn, {
+        width: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+        overwrite: "auto",
+      });
+    };
+
+    window.addEventListener("menu-opened", slideIn);
+    window.addEventListener("menu-closed", slideOut);
+    return () => {
+      window.removeEventListener("menu-opened", slideIn);
+      window.removeEventListener("menu-closed", slideOut);
+    };
+  }, [isMobile]);
 
   const toggleBurger = useCallback(() => {
     if (burgerIsX.current) {
-      const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
-      const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
-      if (navIsHidden) animateToBurger();
-      else hideAsX();
+      if (isMobile) {
+        // Mobile: Button bleibt immer sichtbar — nur X → Lines.
+        animateToBurger();
+      } else {
+        const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
+        const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
+        if (navIsHidden) animateToBurger();
+        else hideAsX();
+      }
       window.dispatchEvent(new CustomEvent("burger-closed"));
       window.dispatchEvent(new CustomEvent("menu-closed"));
     } else {
@@ -245,7 +340,7 @@ export default function BookmarkNav() {
       window.dispatchEvent(new CustomEvent("burger-opened"));
       window.dispatchEvent(new CustomEvent("menu-opened"));
     }
-  }, [animateToX, animateToBurger, hideAsX]);
+  }, [animateToX, animateToBurger, hideAsX, isMobile]);
 
   /* ══════════════════════════════════════════════════
      SEARCH PILL (always visible, collapsed = lupe only)
@@ -431,6 +526,7 @@ export default function BookmarkNav() {
       >
         {/* Finanztools Button */}
         <button
+          ref={ftBtnRef}
           onClick={() => { window.dispatchEvent(new CustomEvent("finanztools-toggle")); }}
           onMouseEnter={() => setFinanztoolsState("hover")}
           onMouseLeave={() => setFinanztoolsState("default")}
@@ -442,6 +538,7 @@ export default function BookmarkNav() {
             borderRadius: BTN_BORDER_RADIUS, border: "none", color: "white",
             fontFamily: '"Open Sans", sans-serif', fontSize: 17, fontWeight: 400,
             cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none",
+            overflow: "hidden",
             ...getButtonStyle(finansToolsState),
           }}
         >
