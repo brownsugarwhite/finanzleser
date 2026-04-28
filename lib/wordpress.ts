@@ -2,10 +2,13 @@ import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
 import { decodePostContent } from "./html-utils";
 
-function getClient(): GraphQLClient {
+function getClient(revalidate: number = 3600): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
   if (!endpoint) throw new Error("WORDPRESS_API_URL ist nicht gesetzt");
-  return new GraphQLClient(endpoint);
+  return new GraphQLClient(endpoint, {
+    fetch: globalThis.fetch,
+    next: { revalidate },
+  });
 }
 
 // ─────────────────────────────────────────────
@@ -1334,7 +1337,9 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
 
   try {
     // REST API: Holt ACF Options via custom Endpoint
-    const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`);
+    const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
+      next: { revalidate: 3600 },
+    });
     if (!response.ok) return null;
 
     const data = await response.json();
