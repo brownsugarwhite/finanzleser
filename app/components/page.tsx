@@ -51,7 +51,12 @@ export default async function ComponentsPage() {
         </section>
       </main>
 
-      <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
+      <TopBanner
+        text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!"
+        linkType="none"
+        linkValue=""
+        visibility="all"
+      />
 
       <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "48px 24px 60px" }}>
         {/* SubBanner */}

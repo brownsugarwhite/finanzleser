@@ -7,11 +7,16 @@ import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 
 function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null) {
+  // Wenn TopBanner ausgeblendet ist, soll der Fade sofort beim Scrollen starten.
+  const topBannerVisible = !!document.querySelector(".top-banner");
+  const start = topBannerVisible ? 50 : 0;
+  const end = topBannerVisible ? 100 : 50;
+
   const triggers: ScrollTrigger[] = [];
 
   const st1 = ScrollTrigger.create({
-    start: 50,
-    end: 100,
+    start,
+    end,
     scrub: true,
     animation: gsap.fromTo(claim, { opacity: 1 }, { opacity: 0, ease: "easeIn", immediateRender: false }),
   });
@@ -19,8 +24,8 @@ function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null)
 
   if (dotLine) {
     const st2 = ScrollTrigger.create({
-      start: 50,
-      end: 100,
+      start,
+      end,
       scrub: true,
       animation: gsap.fromTo(dotLine, { opacity: 1 }, { opacity: 0, ease: "easeIn", immediateRender: false }),
     });
@@ -77,10 +82,11 @@ export default function LogoBar() {
     return () => {
       cancelAnimationFrame(raf);
       triggersRef.current.forEach((st) => st.kill());
+      triggersRef.current = [];
       window.removeEventListener("scroll-anim-kill", onKill);
       window.removeEventListener("scroll-anim-recreate", onRecreate);
     };
-  }, []);
+  }, [pathname]);
 
   // Landing page: slide logo in/out synced with burger
   useEffect(() => {

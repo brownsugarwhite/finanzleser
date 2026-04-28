@@ -1,10 +1,16 @@
 "use client";
 
 import { useRef, useLayoutEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
+import type { SiteLinkType, TopBannerVisibility } from "@/lib/types";
 
 interface TopBannerProps {
   text: string;
+  linkType: SiteLinkType;
+  linkValue: string;
+  visibility: TopBannerVisibility;
 }
 
 const DOT_SIZE = 3;
@@ -13,7 +19,8 @@ const SPEED = 40;
 const HIT_BUFFER_FRONT = 2;  // vor dem Text (links)
 const HIT_BUFFER_BACK = 10;   // hinter dem Text (rechts, negativ = näher)
 
-export default function TopBanner({ text }: TopBannerProps) {
+export default function TopBanner({ text, linkType, linkValue, visibility }: TopBannerProps) {
+  const pathname = usePathname();
   const lineColor = "var(--color-dot)";
   const textColor = "rgba(104, 108, 106, 0.8)";
 
@@ -23,7 +30,13 @@ export default function TopBanner({ text }: TopBannerProps) {
   const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
   const dotCount = 500;
 
+  const shouldRender =
+    visibility !== "off" &&
+    text.trim() !== "" &&
+    (visibility === "all" || (visibility === "landing" && pathname === "/"));
+
   useLayoutEffect(() => {
+    if (!shouldRender) return;
     const track = trackRef.current!;
     const row = rowRef.current!;
     const textEl = textRef.current!;
@@ -88,7 +101,9 @@ export default function TopBanner({ text }: TopBannerProps) {
       marqueeTween.kill();
       gsap.ticker.remove(onTick);
     };
-  }, [text]);
+  }, [text, shouldRender]);
+
+  if (!shouldRender) return null;
 
   const textStyle: React.CSSProperties = {
     fontFamily: "var(--font-body)",
@@ -101,84 +116,145 @@ export default function TopBanner({ text }: TopBannerProps) {
     flexShrink: 0,
   };
 
-  return (
-    <div style={{ width: "100%", marginTop: "13px", position: "relative", padding: "0 13px", zIndex: 60 }}>
-      <div className="top-banner" style={{ width: "100%", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
-        {/* 3px line */}
-        <div style={{ height: "3px", backgroundColor: lineColor }} />
-        {/* 1px line */}
-        <div style={{ height: "1px", backgroundColor: lineColor, marginTop: "2px" }} />
+  const banner = (
+    <div className="top-banner" style={{ width: "100%", marginLeft: "auto", marginRight: "auto", overflow: "hidden" }}>
+      {/* 3px line */}
+      <div style={{ height: "3px", backgroundColor: lineColor }} />
+      {/* 1px line */}
+      <div style={{ height: "1px", backgroundColor: lineColor, marginTop: "2px" }} />
 
-        {/* Marquee row */}
+      {/* Marquee row */}
+      <div
+        ref={rowRef}
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          height: "1.4em",
+          display: "flex",
+          alignItems: "center",
+          fontSize: "16px",
+        }}
+      >
+        {/* Dots layer — static, full width */}
         <div
-          ref={rowRef}
           style={{
-            position: "relative",
-            overflow: "hidden",
-            height: "1.4em",
+            position: "absolute",
+            left: "5px",
+            right: "5px",
+            top: 0,
+            bottom: 0,
             display: "flex",
             alignItems: "center",
-            fontSize: "16px",
+            gap: "6px",
+            zIndex: 1,
           }}
         >
-          {/* Dots layer — static, full width */}
-          <div
-            style={{
-              position: "absolute",
-              left: "5px",
-              right: "5px",
-              top: 0,
-              bottom: 0,
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              zIndex: 1,
-            }}
-          >
-            {Array.from({ length: dotCount }, (_, i) => (
-              <span
-                key={i}
-                ref={(el) => { dotsRef.current[i] = el; }}
-                data-v="1"
-                style={{
-                  width: DOT_SIZE + "px",
-                  height: DOT_SIZE + "px",
-                  borderRadius: "50%",
-                  backgroundColor: DOT_COLOR,
-                  flexShrink: 0,
-                  willChange: "transform",
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Track: [copy2][gap spacer][copy1] — moves left to right */}
-          <div
-            ref={trackRef}
-            style={{
-              display: "flex",
-              position: "absolute",
-              left: 0,
-              top: 0,
-              bottom: 0,
-              alignItems: "center",
-              zIndex: 2,
-            }}
-          >
-            {/* copy2 (enters from left) */}
-            <span data-copy style={textStyle}>{text}</span>
-            {/* gap spacer — width set dynamically */}
-            <div style={{ flexShrink: 0 }} />
-            {/* copy1 (starts centered, exits right) */}
-            <span ref={textRef} data-copy style={textStyle}>{text}</span>
-          </div>
+          {Array.from({ length: dotCount }, (_, i) => (
+            <span
+              key={i}
+              ref={(el) => { dotsRef.current[i] = el; }}
+              data-v="1"
+              style={{
+                width: DOT_SIZE + "px",
+                height: DOT_SIZE + "px",
+                borderRadius: "50%",
+                backgroundColor: DOT_COLOR,
+                flexShrink: 0,
+                willChange: "transform",
+              }}
+            />
+          ))}
         </div>
 
-        {/* 1px line */}
-        <div style={{ height: "1px", backgroundColor: lineColor }} />
-        {/* 3px line */}
-        <div style={{ height: "3px", backgroundColor: lineColor, marginTop: "2px" }} />
+        {/* Track: [copy2][gap spacer][copy1] — moves left to right */}
+        <div
+          ref={trackRef}
+          style={{
+            display: "flex",
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            alignItems: "center",
+            zIndex: 2,
+          }}
+        >
+          {/* copy2 (enters from left) */}
+          <span data-copy style={textStyle}>{text}</span>
+          {/* gap spacer — width set dynamically */}
+          <div style={{ flexShrink: 0 }} />
+          {/* copy1 (starts centered, exits right) */}
+          <span ref={textRef} data-copy style={textStyle}>{text}</span>
+        </div>
       </div>
+
+      {/* 1px line */}
+      <div style={{ height: "1px", backgroundColor: lineColor }} />
+      {/* 3px line */}
+      <div style={{ height: "3px", backgroundColor: lineColor, marginTop: "2px" }} />
     </div>
   );
+
+  const outerStyle: React.CSSProperties = { width: "100%", marginTop: "13px", position: "relative", padding: "0 13px", zIndex: 60 };
+
+  const linkResetStyle: React.CSSProperties = {
+    display: "block",
+    color: "inherit",
+    textDecoration: "none",
+    cursor: "pointer",
+  };
+
+  if (linkType === "external" && linkValue) {
+    return (
+      <div style={outerStyle}>
+        <a href={linkValue} target="_blank" rel="noopener noreferrer" style={linkResetStyle} aria-label={text}>
+          {banner}
+        </a>
+      </div>
+    );
+  }
+
+  if (linkType === "internal" && linkValue) {
+    return (
+      <div style={outerStyle}>
+        <Link href={linkValue} style={linkResetStyle} aria-label={text}>
+          {banner}
+        </Link>
+      </div>
+    );
+  }
+
+  if (linkType === "anchor" && linkValue) {
+    const handleAnchorClick = () => {
+      const target = document.querySelector(linkValue);
+      if (!target) return;
+      gsap.to(window, {
+        duration: 0.8,
+        scrollTo: { y: target as Element, offsetY: 80 },
+        ease: "power2.inOut",
+      });
+    };
+    return (
+      <div style={outerStyle}>
+        <button
+          type="button"
+          onClick={handleAnchorClick}
+          aria-label={text}
+          style={{
+            ...linkResetStyle,
+            width: "100%",
+            border: "none",
+            background: "none",
+            padding: 0,
+            font: "inherit",
+            textAlign: "inherit",
+          }}
+        >
+          {banner}
+        </button>
+      </div>
+    );
+  }
+
+  return <div style={outerStyle}>{banner}</div>;
 }

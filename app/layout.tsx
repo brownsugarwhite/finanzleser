@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
 import { Providers } from "./providers";
 import { NavProvider } from "@/lib/NavContext";
-import { getNavItems } from "@/lib/wordpress";
+import { getNavItems, getSiteSettings } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
@@ -84,7 +84,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navItems = await getNavItems();
+  const [navItems, siteSettings] = await Promise.all([
+    getNavItems(),
+    getSiteSettings(),
+  ]);
 
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
@@ -93,7 +96,12 @@ export default async function RootLayout({
         <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
-        <TopBanner text="Der neue Finanzleser ist da. Abonnieren Sie jetzt unseren Newsletter!" />
+        <TopBanner
+          text={siteSettings.top_banner.text}
+          linkType={siteSettings.top_banner.link_type}
+          linkValue={siteSettings.top_banner.link_value}
+          visibility={siteSettings.top_banner.visibility}
+        />
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>

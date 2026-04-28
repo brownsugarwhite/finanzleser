@@ -206,3 +206,21 @@ export interface RechnerConfigOverrides {
   rc_elterngeld_max?: number;
   rc_letzte_aktualisierung?: string;
 }
+
+// ─────────────────────────────────────────────
+// Site-Settings (WP-Options via finanzleser-site-settings)
+// ─────────────────────────────────────────────
+
+export type TopBannerVisibility = "all" | "landing" | "off";
+export type SiteLinkType = "none" | "internal" | "external" | "anchor";
+
+export interface TopBannerSettings {
+  visibility: TopBannerVisibility;
+  text: string;
+  link_type: SiteLinkType;
+  link_value: string;
+}
+
+export interface SiteSettings {
+  top_banner: TopBannerSettings;
+}

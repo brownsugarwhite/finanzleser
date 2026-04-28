@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost } from "./types";
+import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
 import { decodePostContent } from "./html-utils";
 
 function getClient(revalidate: number = 3600): GraphQLClient {
@@ -1365,6 +1365,39 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
   } catch (error) {
     console.error("Error fetching rechner config from WordPress:", error);
     return null;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Site-Settings (TopBanner & Co.)
+// ─────────────────────────────────────────────
+
+export const SITE_SETTINGS_FALLBACK: SiteSettings = {
+  top_banner: {
+    visibility: "off",
+    text: "",
+    link_type: "none",
+    link_value: "",
+  },
+};
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return SITE_SETTINGS_FALLBACK;
+
+  const baseUrl = wpUrl.replace("/graphql", "");
+  try {
+    const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return SITE_SETTINGS_FALLBACK;
+    const data = (await res.json()) as Partial<SiteSettings>;
+    return {
+      top_banner: { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) },
+    };
+  } catch (error) {
+    console.error("Error fetching site settings from WordPress:", error);
+    return SITE_SETTINGS_FALLBACK;
   }
 }
 
