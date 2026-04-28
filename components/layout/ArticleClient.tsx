@@ -10,6 +10,9 @@ import ArticleElementWrapper from "./ArticleElementWrapper";
 import ArticleTableOfContents from "@/components/sections/ArticleTableOfContents";
 import ArticleContent from "@/components/sections/ArticleContent";
 import PdfPreview from "@/components/ui/PdfPreview";
+import MobileTocIndicator from "./MobileTocIndicator";
+import MobileTocOverlay from "./MobileTocOverlay";
+import { useArticleToc } from "@/lib/hooks/useArticleToc";
 
 type ArticleClientProps = {
   title?: string;
@@ -45,6 +48,8 @@ export default function ArticleClient({
   const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
   const [pageSlug, setPageSlug] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
+  const toc = useArticleToc();
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -60,13 +65,37 @@ export default function ArticleClient({
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
-      {/* Absolut positioniertes TOC (aus dem Flow raus) */}
+      {/* Absolut positioniertes TOC (aus dem Flow raus) — Desktop */}
       {content && (
         <ArticleSidebar
-          content={content}
+          items={toc.items}
+          activeId={toc.activeId}
+          scrollProgress={toc.scrollProgress}
+          scrollToId={toc.scrollToId}
           collapsed={collapsed}
           setCollapsed={setCollapsed}
         />
+      )}
+
+      {/* Mobile-only: Indicator + Overlay (Sidebar ist auf Mobile via CSS versteckt) */}
+      {content && (
+        <>
+          <MobileTocIndicator
+            items={toc.items}
+            activeId={toc.activeId}
+            scrollProgress={toc.scrollProgress}
+            isOpen={tocOpen}
+            onToggle={() => setTocOpen((v) => !v)}
+          />
+          <MobileTocOverlay
+            items={toc.items}
+            activeId={toc.activeId}
+            scrollProgress={toc.scrollProgress}
+            scrollToId={toc.scrollToId}
+            isOpen={tocOpen}
+            onClose={() => setTocOpen(false)}
+          />
+        </>
       )}
 
       {/* Main-Wrapper: Folge von Element-Wrappern */}

@@ -1,17 +1,22 @@
 "use client";
 
 import TableOfContents from "@/components/sections/TableOfContents";
+import type { TOCItem } from "@/lib/hooks/useArticleToc";
 
 interface ArticleSidebarProps {
-  content: string;
+  items: TOCItem[];
+  activeId: string;
+  scrollProgress: number;
+  scrollToId: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
 }
 
-export default function ArticleSidebar({ content, collapsed, setCollapsed }: ArticleSidebarProps) {
+export default function ArticleSidebar({ items, activeId, scrollProgress, scrollToId, collapsed, setCollapsed }: ArticleSidebarProps) {
 
   return (
     <aside
+      className="article-sidebar"
       style={{
         position: "absolute",
         top: 0,
@@ -43,7 +48,10 @@ export default function ArticleSidebar({ content, collapsed, setCollapsed }: Art
         </h3>
         <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
           <TableOfContents
-            content={content}
+            items={items}
+            activeId={activeId}
+            scrollProgress={scrollProgress}
+            scrollToId={scrollToId}
             collapsed={collapsed}
             onToggleCollapsed={() => setCollapsed(!collapsed)}
           />

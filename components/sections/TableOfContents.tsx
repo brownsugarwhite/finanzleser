@@ -1,8 +1,6 @@
 "use client";
 
-import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useEffect, useState, useRef, useCallback } from "react";
-import gsap from "@/lib/gsapConfig";
+import type { TOCItem } from "@/lib/hooks/useArticleToc";
 
 const tocHoverStyles = `
   .toc-item:not(.toc-active):hover .toc-badge {
@@ -17,16 +15,14 @@ const tocHoverStyles = `
   }
 `;
 
-interface TOCItem {
-  id: string;
-  text: string;
-  toolType?: string; // "rechner" | "checkliste" | "vergleich"
-}
-
 interface TableOfContentsProps {
-  content: string;
+  items: TOCItem[];
+  activeId: string;
+  scrollProgress: number;
+  scrollToId: (id: string) => void;
   collapsed?: boolean;
   onToggleCollapsed?: () => void;
+  onItemClick?: (id: string) => void;
 }
 
 const RING_SIZE = 38;
@@ -38,115 +34,20 @@ const TOOL_COLORS: Record<string, string> = {
   vergleich: "var(--color-tool-vergleiche)",
 };
 
-export default function TableOfContents({ content, collapsed = false, onToggleCollapsed }: TableOfContentsProps) {
-  const [items, setItems] = useState<TOCItem[]>([]);
-  const [activeId, setActiveId] = useState<string>("");
-
-  const isScrollingRef = useRef(false);
-
-  const scrollToId = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    isScrollingRef.current = true;
-    gsap.to(window, {
-      scrollTo: { y: el, offsetY: 90 },
-      duration: 0.8,
-      ease: "power2.inOut",
-      onComplete: () => { isScrollingRef.current = false; },
-    });
-  }, []);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const headingsRef = useRef<HTMLElement[]>([]);
-  const articleRef = useRef<HTMLElement | null>(null);
-  const scrollCleanupRef = useRef<(() => void) | null>(null);
-
-  const loadTOC = () => {
-    const article = document.querySelector("article");
-    if (!article) return;
-    articleRef.current = article;
-
-    const headings = Array.from(article.querySelectorAll("h2"));
-    if (headings.length === 0) return;
-    headingsRef.current = headings;
-
-    const tocItems: TOCItem[] = [];
-
-    headings.forEach((heading) => {
-      if (heading.hasAttribute("data-toc-exclude")) return;
-      const isTool = heading.classList.contains("article-tool-label");
-      let toolType: string | undefined;
-      let text: string;
-
-      if (isTool) {
-        const badge = heading.querySelector(".article-tool-badge");
-        const titleEl = heading.querySelector(".article-tool-title");
-        const badgeText = badge?.textContent?.trim().toLowerCase() || "";
-        if (badgeText.includes("rechner")) toolType = "rechner";
-        else if (badgeText.includes("checkliste")) toolType = "checkliste";
-        else if (badgeText.includes("vergleich")) toolType = "vergleich";
-        text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
-      } else {
-        text = heading.textContent || "";
-      }
-
-      if (text.trim()) {
-        tocItems.push({ id: heading.id, text, toolType });
-      }
-    });
-
-    setItems(tocItems);
-
-    // Scroll-Handler nur einmal registrieren
-    if (!scrollCleanupRef.current) {
-      const handleScroll = () => {
-        const art = document.querySelector("article");
-        if (!art) return;
-        const h2s = Array.from(art.querySelectorAll("h2:not([data-toc-exclude])"));
-        if (h2s.length === 0) return;
-
-        let currentId = "";
-        let progress = 0;
-
-        for (let i = 0; i < h2s.length; i++) {
-          const rect = h2s[i].getBoundingClientRect();
-          if (rect.top <= 91) {
-            currentId = h2s[i].id || "";
-
-            const start = h2s[i].getBoundingClientRect().top + window.scrollY;
-            const end =
-              i < h2s.length - 1
-                ? h2s[i + 1].getBoundingClientRect().top + window.scrollY
-                : art.getBoundingClientRect().bottom + window.scrollY;
-            const scrollPos = window.scrollY + 91;
-            progress = Math.min(1, Math.max(0, (scrollPos - start) / (end - start)));
-          }
-        }
-
-        setActiveId(currentId);
-        setScrollProgress(progress);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      scrollCleanupRef.current = () => window.removeEventListener("scroll", handleScroll);
-    }
-  };
-
-  // Initial load mit Timers (wartet auf dynamische Inhalte wie Tool-Titel)
-  useEffect(() => {
-    const timers = [
-      100, 200, 300, 500, 700, 1000, 1500, 2000, 3000,
-    ].map((ms) => setTimeout(loadTOC, ms));
-
-    return () => {
-      timers.forEach((timer) => clearTimeout(timer));
-      if (scrollCleanupRef.current) {
-        scrollCleanupRef.current();
-      }
-    };
-  }, []);
-
-
+export default function TableOfContents({
+  items,
+  activeId,
+  scrollProgress,
+  scrollToId,
+  collapsed = false,
+  onItemClick,
+}: TableOfContentsProps) {
   if (items.length === 0) return null;
+
+  const handleClick = (id: string) => {
+    scrollToId(id);
+    onItemClick?.(id);
+  };
 
   return (
     <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
@@ -164,7 +65,7 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
           return (
             <li key={item.id}>
               <a
-                onClick={(e) => { e.preventDefault(); scrollToId(item.id); }}
+                onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
                 className={`toc-item${isActive ? " toc-active" : ""}`}
                 style={{
                   cursor: "pointer",
@@ -175,7 +76,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                   color: "inherit",
                 }}
               >
-                {/* Nummer-Badge mit Progress Ring + optionalem Tool-Dot */}
                 <span
                   style={{
                     position: "relative",
@@ -184,7 +84,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                     minWidth: `${RING_SIZE}px`,
                   }}
                 >
-                  {/* Progress Ring via CSS */}
                   <span
                     style={{
                       position: "absolute",
@@ -204,7 +103,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                       boxSizing: "border-box",
                     }}
                   />
-                  {/* Badge */}
                   <span
                     className="toc-badge"
                     style={{
@@ -232,7 +130,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                       {number}
                     </span>
                   </span>
-                  {/* Farbiger Dot für Tools – fadet aus wenn aktiv */}
                   {toolColor && (
                     <span
                       style={{
@@ -248,7 +145,6 @@ export default function TableOfContents({ content, collapsed = false, onToggleCo
                     />
                   )}
                 </span>
-                {/* Text: Tool mit Label + Titel, oder normaler Heading-Text */}
                 {!collapsed && toolLabel ? (
                   <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
                     <span

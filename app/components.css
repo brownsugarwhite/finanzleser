@@ -1187,4 +1187,19 @@ h2.faq-heading {
   .landing-hero img[alt="finanzleser"] {
     max-width: 350px !important;
   }
+
+  /* Beitragsseiten: Desktop-Sidebar (TOC + Toggle) komplett ausblenden.
+     Mobile-TOC läuft über MobileTocIndicator + MobileTocOverlay. */
+  .article-sidebar {
+    display: none !important;
+  }
+}
+
+/* Desktop (≥768px): Mobile-TOC-Komponenten verstecken. */
+@media (min-width: 768px) {
+  .mobile-toc-indicator,
+  .mobile-toc-backdrop,
+  .mobile-toc-overlay {
+    display: none !important;
+  }
 }
