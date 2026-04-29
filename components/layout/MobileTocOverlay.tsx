@@ -66,6 +66,7 @@ export default function MobileTocOverlay({ items, activeId, scrollProgress, scro
           zIndex: 70,
           display: "none",
           opacity: 0,
+          pointerEvents: isOpen ? "auto" : "none",
         }}
         aria-hidden
       />
@@ -85,6 +86,7 @@ export default function MobileTocOverlay({ items, activeId, scrollProgress, scro
           zIndex: 71,
           display: "none",
           opacity: 0,
+          pointerEvents: isOpen ? "auto" : "none",
           padding: "20px",
           borderRadius: "16px",
           background: "rgba(255, 255, 255, 0.96)",

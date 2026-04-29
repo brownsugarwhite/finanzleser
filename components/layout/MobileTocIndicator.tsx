@@ -89,26 +89,34 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
   };
 
   return (
-    <div
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={isOpen ? "Inhaltsverzeichnis schließen" : "Inhaltsverzeichnis öffnen"}
+      aria-expanded={isOpen}
       className="mobile-toc-indicator"
       style={{
         position: "fixed",
-        top: "16px",
-        left: "13px",
-        right: "70px",
-        height: 48,
+        top: "25px",
+        left: "90px",
+        height: 46,
+        width: "max-content",
         display: "flex",
         alignItems: "center",
-        gap: "8px",
+        gap: "10px",
         zIndex: 63,
-        padding: "0 6px 0 4px",
-        borderRadius: "24px",
-        background: "rgba(255, 255, 255, 0.55)",
-        backdropFilter: "blur(10px) saturate(1.2)",
-        WebkitBackdropFilter: "blur(10px) saturate(1.2)",
-        border: "1px solid rgba(255, 255, 255, 0.6)",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.06)",
+        padding: "0 13px 0 4px",
+        borderRadius: "19px",
+        backgroundColor: "var(--color-pill-bg)",
+        backdropFilter: "blur(16px) brightness(1.15)",
+        WebkitBackdropFilter: "blur(16px) brightness(1.15)",
+        boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
         pointerEvents: "auto",
+        border: "none",
+        cursor: "pointer",
+        font: "inherit",
+        textAlign: "inherit",
+        color: "inherit",
       }}
     >
       {/* Ring + Badge */}
@@ -154,7 +162,7 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
             fontFamily: "Merriweather, serif",
             fontWeight: 300,
             fontStyle: "italic",
-            fontSize: "17px",
+            fontSize: "19px",
             lineHeight: 1,
             color: "#ffffff",
             overflow: "hidden",
@@ -172,56 +180,41 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
         </span>
       </span>
 
-      {/* Section text */}
+      {/* "Inhalt" Label */}
       <span
         style={{
-          flex: 1,
-          minWidth: 0,
           fontFamily: "Merriweather, serif",
-          fontWeight: 700,
-          fontSize: "13px",
-          lineHeight: 1.3,
-          color: activeColor,
+          fontWeight: 600,
+          fontSize: "14px",
+          lineHeight: 1,
+          color: "var(--color-text-primary)",
           whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          transition: "color 0.15s ease",
         }}
       >
-        {active.text}
+        Inhalt
       </span>
 
-      {/* Toggle */}
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-label={isOpen ? "Inhaltsverzeichnis schließen" : "Inhaltsverzeichnis öffnen"}
-        aria-expanded={isOpen}
+      {/* Toggle-Pfeil (visuelles Indikator — das ganze Pill ist klickbar) */}
+      <span
+        aria-hidden="true"
         style={{
-          width: 28,
-          height: 28,
-          borderRadius: "50%",
-          border: "1px solid var(--color-text-medium)",
-          background: "transparent",
-          cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: 0,
           flexShrink: 0,
         }}
       >
         <svg
-          width="10"
-          height="10"
+          width="12"
+          height="12"
           viewBox="0 0 17.45 15.77"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ transform: isOpen ? "rotate(90deg)" : "rotate(-90deg)", transition: "transform 0.2s ease" }}
+          style={{ transform: isOpen ? "rotate(90deg)" : "rotate(-90deg)", transition: "transform 0.2s ease", overflow: "visible" }}
         >
-          <polyline points="9.18 15.27 .5 8.11 9.18 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
-          <polyline points="16.95 15.27 8.27 8.11 16.95 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+          <polyline points="9.18 15.27 .5 8.11 9.18 .5" fill="none" stroke="#334A27" strokeWidth="1.2" vectorEffect="non-scaling-stroke" strokeLinecap="square" strokeLinejoin="miter" />
+          <polyline points="16.95 15.27 8.27 8.11 16.95 .5" fill="none" stroke="#334A27" strokeWidth="1.2" vectorEffect="non-scaling-stroke" strokeLinecap="square" strokeLinejoin="miter" />
         </svg>
-      </button>
-    </div>
+      </span>
+    </button>
   );
 }

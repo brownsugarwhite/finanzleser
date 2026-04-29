@@ -33,6 +33,31 @@ body[data-landing] {
   }
 }
 
+/* ── Logo + DotLine: Mobile-Anpassungen (≤767px) ── */
+@media (max-width: 767px) {
+  .logo-bar-sticky {
+    top: 25px !important;
+  }
+  .logo-wrapper {
+    padding-left: 16px !important;
+    /* Hard-cap, damit Lottie-SVG-Overflow nicht Bookmark-Touches blockiert. */
+    max-width: 240px !important;
+    overflow: hidden !important;
+  }
+  .logo-wrapper > a {
+    margin-top: 5px !important;
+  }
+  .logo-wrapper .lottie-logo {
+    width: 213px !important;
+  }
+  .logo-claim {
+    display: none !important;
+  }
+  .sticky-nav.dotline-animated {
+    display: none !important;
+  }
+}
+
 /* ── Search input placeholder ── */
 .search-input::placeholder {
   color: currentColor;

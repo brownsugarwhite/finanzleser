@@ -130,7 +130,7 @@ export default function ArticleClient({
             ) : null;
 
             const subtitleEl = subtitle ? (
-              <h2 data-toc-exclude className="font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
+              <h2 data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
             ) : null;
 
             const visualEl = (

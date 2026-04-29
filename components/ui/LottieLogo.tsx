@@ -216,6 +216,7 @@ const LottieLogo = forwardRef<LottieLogoHandle, Props>(function LottieLogo(
   return (
     <div
       ref={containerRef}
+      className="lottie-logo"
       role="img"
       aria-label={ariaLabel}
       style={{ width, height: "auto", display: "block", aspectRatio: "1720 / 280" }}

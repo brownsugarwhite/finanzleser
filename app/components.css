@@ -10,14 +10,15 @@
   position: relative;
 }
 
-/* Bookmark Sticky Row im Root-Layout (BookmarkNav) */
+/* Bookmark Sticky Row im Root-Layout (BookmarkNav) — highest z-index,
+   damit es zuverlässig über allem (TocIndicator, TocOverlay, LogoBar, MegaMenu) liegt. */
 .bookmark-section {
   width: 100%;
   height: 50px;
   margin-top: 23px;
   position: sticky;
   top: 23px;
-  z-index: 62;
+  z-index: 9999;
   display: flex;
   justify-content: flex-end;
   pointer-events: none;
@@ -91,6 +92,20 @@ h1, h2 {
 
 h1.article-title {
   font-weight: 500 !important;
+}
+
+/* Silbentrennung in Artikel-Überschriften — verhindert horizontalen Overflow
+ * auf Mobile durch lange deutsche Komposita. Greift dank lang="de" am <html>. */
+h1.article-title,
+h2.article-subtitle,
+h2.article-tool-label,
+h3.rechner-title,
+.prose h2,
+.prose h3 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 h1.category-title {
   font-weight: 700 !important;
