@@ -49,12 +49,21 @@ export default function ArticleClient({
   const [currentUrl, setCurrentUrl] = useState("");
   const [pageSlug, setPageSlug] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const toc = useArticleToc();
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
     const parts = window.location.pathname.split("/").filter(Boolean);
     setPageSlug(parts[parts.length - 1] || "");
+  }, []);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
   }, []);
 
   const breadcrumbItems = mainCategory && category ? [
@@ -103,72 +112,74 @@ export default function ArticleClient({
         {/* Breadcrumb + Hero-Block + Spacer (zusammen in einem Wrapper) */}
         <ArticleElementWrapper variant="wide" collapsed={collapsed}>
           <Breadcrumb items={breadcrumbItems} />
-          <div style={{ width: "100%", display: "flex", flexDirection: "row", gap: "36px" }}>
-            {/* Visual links */}
-            <div style={{ flexShrink: 0, width: "50%", height: "100%" }}>
-              {featuredImage?.sourceUrl ? (
-                <div className="h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
-                  <InlineSVG
-                    src={featuredImage.sourceUrl}
-                    alt={featuredImage.altText || title || "Featured image"}
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                </div>
-              ) : (
-                <div className="h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
-              )}
-              {featuredImage?.altText && (
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "var(--color-text-medium)",
-                    marginTop: "8px",
-                  }}
-                >
-                  {featuredImage.altText}
-                </p>
-              )}
-            </div>
+          {(() => {
+            const titleEl = title ? (
+              <h1
+                className="article-title"
+                style={{
+                  color: "var(--color-brand-secondary)",
+                  fontFamily: "Merriweather, serif",
+                  fontSize: "23px",
+                  fontStyle: "italic",
+                  marginBottom: "8px",
+                  display: "inline-block",
+                }}
+              >
+                {title}
+              </h1>
+            ) : null;
 
-            {/* Text rechts */}
-            <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              {title && (
-                <h1
-                  className="article-title"
-                  style={{
-                    color: "var(--color-brand-secondary)",
-                    fontFamily: "Merriweather, serif",
-                    fontSize: "23px",
-                    fontStyle: "italic",
-                    marginBottom: "8px",
-                    display: "inline-block",
-                  }}
-                >
-                  {title}
-                </h1>
-              )}
-              {subtitle && (
-                <h2 data-toc-exclude className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
-              )}
-              {excerpt && (
-                <p
-                  className="mb-8 text-gray-600"
-                  style={{
-                    fontFamily: "Merriweather, serif",
-                    fontSize: "18px",
-                    fontWeight: "400",
-                  }}
-                  dangerouslySetInnerHTML={{
-                    __html: (() => {
-                      const text = excerpt.replace(/<[^>]*>/g, "");
-                      if (text.length <= 200) return text;
-                      const truncated = text.slice(0, 200).replace(/\s+\S*$/, "");
-                      return truncated + " ...";
-                    })(),
-                  }}
-                />
-              )}
-              {/* Lesedauer / Share */}
+            const subtitleEl = subtitle ? (
+              <h2 data-toc-exclude className="font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
+            ) : null;
+
+            const visualEl = (
+              <>
+                {featuredImage?.sourceUrl ? (
+                  <div className="h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                    <InlineSVG
+                      src={featuredImage.sourceUrl}
+                      alt={featuredImage.altText || title || "Featured image"}
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  </div>
+                ) : (
+                  <div className="h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
+                )}
+                {featuredImage?.altText && (
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--color-text-medium)",
+                      marginTop: "8px",
+                    }}
+                  >
+                    {featuredImage.altText}
+                  </p>
+                )}
+              </>
+            );
+
+            const excerptEl = excerpt ? (
+              <p
+                className="mb-8 text-gray-600"
+                style={{
+                  fontFamily: "Merriweather, serif",
+                  fontSize: "18px",
+                  fontWeight: "400",
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: (() => {
+                    const text = excerpt.replace(/<[^>]*>/g, "");
+                    if (text.length <= 200) return text;
+                    const truncated = text.slice(0, 200).replace(/\s+\S*$/, "");
+                    return truncated + " ...";
+                  })(),
+                }}
+              />
+            ) : null;
+
+            const metaEl = (
               <div className="flex justify-between items-center text-gray-600">
                 <div className="flex items-center gap-1 text-sm" style={{ fontSize: "14px" }}>
                   <img src="/icons/time_icon.svg" alt="" style={{ width: 13, height: 13, opacity: 0.5 }} />
@@ -196,8 +207,36 @@ export default function ArticleClient({
                   </a>
                 </div>
               </div>
-            </div>
-          </div>
+            );
+
+            if (isMobile) {
+              return (
+                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+                  {titleEl}
+                  {subtitleEl}
+                  <div>{visualEl}</div>
+                  {excerptEl}
+                  {metaEl}
+                </div>
+              );
+            }
+
+            return (
+              <div style={{ width: "100%", display: "flex", flexDirection: "row", gap: "36px" }}>
+                {/* Visual links */}
+                <div style={{ flexShrink: 0, width: "50%", height: "100%" }}>
+                  {visualEl}
+                </div>
+                {/* Text rechts */}
+                <div style={{ width: "50%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  {titleEl}
+                  {subtitleEl}
+                  {excerptEl}
+                  {metaEl}
+                </div>
+              </div>
+            );
+          })()}
           <div style={{ marginTop: 50, marginBottom: 23 }}>
             <Spacer noMargin />
           </div>

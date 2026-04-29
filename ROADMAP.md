@@ -104,7 +104,7 @@ Sub-Phasen:
 | E1 | `kategorieFelder` (1 Feld: `kategorieBild`) | Term-Meta oder Block-Pattern |
 | E2 | `beitragFelder.beitragUntertitel` | Bestehendes `wp-subtitle` Plugin nutzen |
 | E3 | `beitragFelder.beitrag{Rechner,Vergleich,Checkliste}` | Bereits über `<!-- wp:finanzleser/* -->` Block-Kommentare in `post_content` — ACF-Typdef vermutlich nur Fossil, prüfen + entfernen |
-| E4 | `rechnerFelder` (CPT-Felder) | `register_post_meta` + `register_graphql_field` im `finanzleser-blocks` Plugin |
+| E4 | `rechnerFelder` (CPT-Felder) | `register_post_meta` + `register_graphql_field` im `finanzleser-blocks` Plugin. **Bei Sub-Feld `kategorie` evaluieren:** Standard-`category`-Taxonomie auch für `rechner`-CPT registrieren (`register_taxonomy_for_object_type`) — vereinheitlicht Beiträge + Rechner unter gleichem Kategorisierungs-Schema. Analoge Frage für `vergleich` und `checkliste`. |
 | E5 | `vergleichFelder.vergleichAnbieter[]` (Repeater) | `register_post_meta` mit JSON-Array |
 | E6 | `checklisteFelder.checklistePunkte[]` (Repeater + PDF) | `register_post_meta` + Media-ID statt URL |
 | E7 | Rechner-Konfiguration (13 Werte) | WP-Options ODER `config/rates.json` im Repo (User-Entscheidung) |
