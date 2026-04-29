@@ -2,17 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllRechner } from "@/lib/wordpress";
-
-// Mapping von rechner_typ → Anzeigename
-const TYP_LABELS: Record<string, string> = {
-  steuer: "Steuern & Lohn",
-  rente: "Rente & Altersvorsorge",
-  soziales: "Soziales & Arbeit",
-  kredit: "Kredit & Finanzen",
-};
-
-// Sortierreihenfolge der Kategorien
-const TYP_ORDER = ["steuer", "rente", "soziales", "kredit"];
+import { TYP_LABELS, TYP_ORDER } from "@/lib/rechnerCategories";
 
 export default async function RechnerPage() {
   const rechner = await getAllRechner();

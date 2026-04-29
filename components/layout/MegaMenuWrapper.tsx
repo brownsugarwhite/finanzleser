@@ -3,12 +3,20 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import MegaMenu, { type PreloadedData } from "./MegaMenu";
+import MobileMegaMenu from "./MobileMegaMenu";
 import TopNav from "./TopNav";
 
 type MegaMenuCache = PreloadedData;
 
 export default function MegaMenuWrapper() {
+  const isMobile = useIsMobile();
+  if (isMobile) return <MobileMegaMenu />;
+  return <DesktopMegaMenuWrapper />;
+}
+
+function DesktopMegaMenuWrapper() {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [openedViaBurger, setOpenedViaBurger] = useState(false);

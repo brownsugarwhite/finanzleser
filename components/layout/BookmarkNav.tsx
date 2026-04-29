@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, useCallback, useState, useEffect } from "react";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 /* ── Constants ── */
 
@@ -45,20 +46,8 @@ export default function BookmarkNav() {
   const burgerVisible = useRef(false);
   const triggerRef = useRef<ScrollTrigger | null>(null);
 
-  // Finanztools refs (mobile slide-in)
-  const ftBtnRef = useRef<HTMLButtonElement>(null);
-  const ftBtnNaturalW = useRef<number | null>(null);
-  const ftBtnVisible = useRef(true);
-
   // Mobile detection
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
+  const isMobile = useIsMobile();
 
   // Search refs
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -259,68 +248,6 @@ export default function BookmarkNav() {
     window.addEventListener("menu-closed", handleMenuClosed);
     return () => window.removeEventListener("menu-closed", handleMenuClosed);
   }, [animateToBurger, hideAsX, isMobile]);
-
-  /* ══════════════════════════════════════════════════
-     FINANZTOOLS BUTTON — Mobile: collapsed default, slide on menu open/close
-     ══════════════════════════════════════════════════ */
-
-  useEffect(() => {
-    const btn = ftBtnRef.current;
-    if (!btn) return;
-
-    if (isMobile) {
-      // Natürliche Breite einmalig messen (vor erstem Collapse)
-      if (ftBtnNaturalW.current === null) {
-        ftBtnNaturalW.current = btn.offsetWidth;
-      }
-      gsap.set(btn, { width: 0, paddingLeft: 0, paddingRight: 0, overflow: "hidden" });
-      ftBtnVisible.current = false;
-    } else {
-      gsap.set(btn, { clearProps: "width,paddingLeft,paddingRight,overflow" });
-      ftBtnVisible.current = true;
-    }
-  }, [isMobile]);
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const slideIn = () => {
-      const btn = ftBtnRef.current;
-      if (!btn || ftBtnNaturalW.current === null) return;
-      if (ftBtnVisible.current) return;
-      ftBtnVisible.current = true;
-      gsap.to(btn, {
-        width: ftBtnNaturalW.current,
-        paddingLeft: BTN_PADDING,
-        paddingRight: BTN_PADDING,
-        duration: 0.3,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    };
-
-    const slideOut = () => {
-      const btn = ftBtnRef.current;
-      if (!btn) return;
-      if (!ftBtnVisible.current) return;
-      ftBtnVisible.current = false;
-      gsap.to(btn, {
-        width: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        duration: 0.3,
-        ease: "power2.inOut",
-        overwrite: "auto",
-      });
-    };
-
-    window.addEventListener("menu-opened", slideIn);
-    window.addEventListener("menu-closed", slideOut);
-    return () => {
-      window.removeEventListener("menu-opened", slideIn);
-      window.removeEventListener("menu-closed", slideOut);
-    };
-  }, [isMobile]);
 
   const toggleBurger = useCallback(() => {
     if (burgerIsX.current) {
@@ -524,26 +451,26 @@ export default function BookmarkNav() {
           background: "linear-gradient(to left, rgba(22,142,3,0.8), #45a117)",
         }}
       >
-        {/* Finanztools Button */}
-        <button
-          ref={ftBtnRef}
-          onClick={() => { window.dispatchEvent(new CustomEvent("finanztools-toggle")); }}
-          onMouseEnter={() => setFinanztoolsState("hover")}
-          onMouseLeave={() => setFinanztoolsState("default")}
-          onMouseDown={() => setFinanztoolsState("active")}
-          onMouseUp={() => setFinanztoolsState("hover")}
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center",
-            height: BTN_HEIGHT, paddingLeft: BTN_PADDING, paddingRight: BTN_PADDING,
-            borderRadius: BTN_BORDER_RADIUS, border: "none", color: "white",
-            fontFamily: '"Open Sans", sans-serif', fontSize: 17, fontWeight: 400,
-            cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none",
-            overflow: "hidden",
-            ...getButtonStyle(finansToolsState),
-          }}
-        >
-          Finanztools
-        </button>
+        {/* Finanztools Button — nur Desktop */}
+        {!isMobile && (
+          <button
+            onClick={() => { window.dispatchEvent(new CustomEvent("finanztools-toggle")); }}
+            onMouseEnter={() => setFinanztoolsState("hover")}
+            onMouseLeave={() => setFinanztoolsState("default")}
+            onMouseDown={() => setFinanztoolsState("active")}
+            onMouseUp={() => setFinanztoolsState("hover")}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center",
+              height: BTN_HEIGHT, paddingLeft: BTN_PADDING, paddingRight: BTN_PADDING,
+              borderRadius: BTN_BORDER_RADIUS, border: "none", color: "white",
+              fontFamily: '"Open Sans", sans-serif', fontSize: 17, fontWeight: 400,
+              cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none",
+              ...getButtonStyle(finansToolsState),
+            }}
+          >
+            Finanztools
+          </button>
+        )}
 
         {/* Search Pill — inside a flex-flow spacer, absolute within it */}
         <div ref={searchSpacerRef} style={{ width: BTN_HEIGHT, height: BTN_HEIGHT, flexShrink: 0, position: "relative" }}>

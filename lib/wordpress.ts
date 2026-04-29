@@ -1126,6 +1126,36 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
 }
 
 // ─────────────────────────────────────────────
+// Vergleiche – zuletzt geändert
+// ─────────────────────────────────────────────
+
+export async function getLatestVergleiche(limit = 10): Promise<Vergleich[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetLatestVergleiche($first: Int!) {
+      vergleiche(first: $first, where: { orderby: { field: MODIFIED, order: DESC } }) {
+        nodes {
+          id
+          title
+          slug
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{ vergleiche: { nodes: Vergleich[] } }>(query, {
+      first: limit,
+    });
+    return data.vergleiche.nodes;
+  } catch (error) {
+    console.error("Error fetching latest Vergleiche:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
 // Tools (Rechner/Vergleiche/Checklisten) nach Slugs
 // ─────────────────────────────────────────────
 
