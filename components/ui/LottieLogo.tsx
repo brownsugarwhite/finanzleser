@@ -143,11 +143,35 @@ const LottieLogo = forwardRef<LottieLogoHandle, Props>(function LottieLogo(
         tweenObjRef.current.f = to;
         return;
       }
-      anim.goToAndStop(from, true);
-      tweenObjRef.current.f = from;
+      // If currentF is on this segment, tween from there (smooth reverse with
+      // proportional duration). Otherwise we're crossing between disjoint
+      // segments — snap to `from` and play full duration. Lottie's segment
+      // boundaries (118≈128, 180≈292, 0≈183) are visually identical, so the
+      // snap is invisible.
+      const currentF = tweenObjRef.current.f;
+      const segMin = Math.min(from, to);
+      const segMax = Math.max(from, to);
+      const onSegment = currentF >= segMin && currentF <= segMax;
+
+      let adjustedDuration: number;
+      if (onSegment) {
+        const span = segMax - segMin;
+        const remaining = Math.abs(currentF - to);
+        adjustedDuration = span > 0 ? duration * (remaining / span) : 0;
+      } else {
+        anim.goToAndStop(from, true);
+        tweenObjRef.current.f = from;
+        adjustedDuration = duration;
+      }
+
+      if (adjustedDuration === 0) {
+        anim.goToAndStop(to, true);
+        tweenObjRef.current.f = to;
+        return;
+      }
       tweenRef.current = gsap.to(tweenObjRef.current, {
         f: to,
-        duration,
+        duration: adjustedDuration,
         ease: "power2.out",
         onUpdate: () => {
           const a = animRef.current;

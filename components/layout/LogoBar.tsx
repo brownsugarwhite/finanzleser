@@ -46,6 +46,7 @@ export default function LogoBar() {
   const logoTriggerRef = useRef<ScrollTrigger | null>(null);
   const stateRef = useRef<LogoState>("long-visible");
   const menuOpenRef = useRef(false);
+  const reconcileSuspendedUntilRef = useRef(0);
   const pathname = usePathname();
   const isLanding = pathname === "/";
 
@@ -169,11 +170,35 @@ export default function LogoBar() {
       if (el) el.style.pointerEvents = "none";
     };
 
+    // Reconcile: if logo ended up "short-visible" while still in the
+    // "TopNav visible" zone (e.g. after opening the megamenu at page top
+    // → long-in → close → shrink), the natural state up there is hidden.
+    // On the next upward scroll, snap it back to hidden via short-out.
+    let lastScrollY = window.scrollY;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const wentUp = currentY < lastScrollY;
+      lastScrollY = currentY;
+      if (!wentUp) return;
+      if (menuOpenRef.current) return;
+      if (performance.now() < reconcileSuspendedUntilRef.current) return;
+      if (stateRef.current !== "short-visible") return;
+      const navEl = document.querySelector(".landing-nav[data-topnav]") as HTMLElement | null;
+      if (!navEl) return;
+      if (navEl.getBoundingClientRect().bottom <= 0) return; // TopNav already out
+      logoRef.current?.playShortOut();
+      stateRef.current = "hidden";
+      const el = wrapperRef.current;
+      if (el) el.style.pointerEvents = "none";
+    };
+
     window.addEventListener("nav-scrolled-out", onNavOut);
     window.addEventListener("nav-scrolled-in", onNavIn);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("nav-scrolled-out", onNavOut);
       window.removeEventListener("nav-scrolled-in", onNavIn);
+      window.removeEventListener("scroll", onScroll);
     };
   }, [isLanding]);
 
@@ -198,6 +223,11 @@ export default function LogoBar() {
       if (stateRef.current !== "long-visible") return;
       logoRef.current?.playShrink();
       stateRef.current = "short-visible";
+      // Suspend the landing reconcile-on-scroll-up listener until the shrink
+      // tween has settled. Body-scroll-lock release / ContentScaler layout
+      // shift can otherwise fire a phantom upward-scroll right after close,
+      // which would interrupt shrink and snap to short-out.
+      reconcileSuspendedUntilRef.current = performance.now() + 1300;
     };
 
     window.addEventListener("menu-opened", onMenuOpened);
@@ -211,17 +241,17 @@ export default function LogoBar() {
   return (
     <div style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>
       <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
-        <a href="/" style={{ display: "block", marginTop: "19px" }} aria-label="finanzleser Startseite">
+        <a href="/" style={{ display: "block", marginTop: "12px", marginLeft: "-3px" }} aria-label="finanzleser Startseite">
           <LottieLogo
             ref={logoRef}
             initialFrame={isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible}
-            width={225}
+            width={233}
           />
         </a>
         <span
           ref={claimRef}
           className="logo-claim"
-          style={{ fontFamily: "'Merriweather', serif", fontStyle: "italic", fontSize: "18px", fontWeight: "300", color: "var(--color-text-medium)", whiteSpace: "nowrap", marginTop: "8px" }}
+          style={{ fontFamily: "'Merriweather', serif", fontStyle: "italic", fontSize: "18px", fontWeight: "300", color: "var(--color-text-medium)", whiteSpace: "nowrap", marginTop: "4px" }}
         >
           Das digitale Finanzmagazin
         </span>
