@@ -265,7 +265,12 @@ export default function BookmarkNav() {
     } else {
       animateToX();
       window.dispatchEvent(new CustomEvent("burger-opened"));
-      window.dispatchEvent(new CustomEvent("menu-opened"));
+      // On mobile, the booklet covers the bookmark/logo area — ContentScaler should
+      // also blur Logo + Landing search pill (extended mode). On desktop, keep TopNav
+      // sharp because it slides in as the burger nav.
+      window.dispatchEvent(
+        new CustomEvent("menu-opened", { detail: isMobile ? { extended: true } : {} })
+      );
     }
   }, [animateToX, animateToBurger, hideAsX, isMobile]);
 

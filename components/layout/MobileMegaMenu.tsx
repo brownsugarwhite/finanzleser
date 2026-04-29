@@ -16,6 +16,7 @@ import { TYP_LABELS } from "@/lib/rechnerCategories";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 import AlphaList from "@/components/ui/AlphaList";
 import { cn } from "@/lib/cn";
+import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 
 /* ── Types ── */
 
@@ -36,8 +37,16 @@ interface MegaPost {
 
 /* ── Constants ── */
 
-const STRIP = 72; // visible strip width on the off-screen side (px)
+const SIDE_MARGIN = 24;   // bg gap on the bg-visible side
+const PEEK = 24;          // peek of the OTHER page next to the spine (so spine never touches edge)
+const SPINE_W = 10;       // magenta spine width (matches desktop)
+const SPINE_GRAY_W = 27;  // gray bar behind spine (matches desktop)
+const PAGE_RADIUS = 24;   // rounded corners on pages
+const TOP_OFFSET = 80;    // below sticky bookmark (23 + 50 + gap)
+const BOTTOM_OFFSET = 16;
 const SLIDE_DURATION = 0.42;
+const HEIGHT_TWEEN_MS = 320;
+const MAIN_PAGE_HEIGHT = 550; // fixed height for main menu view
 
 /* ── Icons map ── */
 
@@ -72,20 +81,24 @@ export default function MobileMegaMenu() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const bookletRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const mainContentRef = useRef<HTMLDivElement>(null);
+  const detailContentRef = useRef<HTMLDivElement>(null);
+  const [stageHeight, setStageHeight] = useState<number | null>(null);
 
   // Computed positions for booklet translateX (refresh on resize)
   const positionsRef = useRef({ vw: 0, pageW: 0, xClosedRight: 0, xMain: 0, xDetail: 0, xClosedLeft: 0 });
 
   const recalcPositions = useCallback(() => {
     const vw = window.innerWidth;
-    const pageW = vw - STRIP;
+    // Each page takes the available width minus bg gap on one side AND peek of the other page on the spine side
+    const pageW = vw - SIDE_MARGIN - SPINE_W - PEEK;
     positionsRef.current = {
       vw,
       pageW,
-      xClosedRight: vw,
-      xMain: 0,
-      xDetail: STRIP - pageW,
-      xClosedLeft: -2 * pageW,
+      xClosedRight: vw + SIDE_MARGIN,
+      xMain: SIDE_MARGIN,                                       // bg gap on LEFT, page2 peeks on RIGHT (PEEK px)
+      xDetail: PEEK - pageW,                                    // page1 peeks on LEFT (PEEK px), bg gap on RIGHT
+      xClosedLeft: -(2 * pageW + SPINE_W) - SIDE_MARGIN,
     };
   }, []);
 
@@ -100,6 +113,8 @@ export default function MobileMegaMenu() {
 
   useEffect(() => {
     const handleBurgerOpened = () => {
+      // Smooth scroll page so bookmark hits its sticky position; menu slides in below
+      scrollToBookmarkSticky();
       setOpen(true);
       setDetail(null);
       setOpenSection("ratgeber");
@@ -146,11 +161,77 @@ export default function MobileMegaMenu() {
     });
   }, [detail, open]);
 
+  /* ─── Dynamic height ───
+     Main view: fixed at MAIN_PAGE_HEIGHT (350).
+     Detail view (non-alpha): measure the natural content via first child's scrollHeight.
+     Detail view (alpha-list): force max viewport height for sticky-ABC scroll. */
+
+  useLayoutEffect(() => {
+    if (!open) return;
+
+    const maxH = () => window.innerHeight - TOP_OFFSET - BOTTOM_OFFSET;
+    const isAlphaList = detail?.kind === "anbieter" || detail?.kind === "checklisten";
+
+    const update = () => {
+      let next: number;
+      if (!detail) {
+        next = MAIN_PAGE_HEIGHT;
+      } else if (isAlphaList) {
+        next = maxH();
+      } else {
+        // detailContentRef has overflow:hidden + h-full child; its scrollHeight is bounded.
+        // The child wrapper (h-full overflow-y-auto) reports natural content via scrollHeight.
+        const measureEl = detailContentRef.current?.firstElementChild as HTMLElement | null;
+        if (!measureEl) {
+          next = maxH();
+        } else {
+          const chrome = 82; // header (~62) + content padding (~20)
+          // Floor at MAIN_PAGE_HEIGHT so detail never collapses below the main page height
+          next = Math.min(Math.max(measureEl.scrollHeight + chrome, MAIN_PAGE_HEIGHT), maxH());
+        }
+      }
+      setStageHeight((prev) => (prev === next ? prev : next));
+    };
+
+    update();
+
+    // Catch settling animations + lazy data loads on detail view
+    const timers = !detail || isAlphaList ? [] : [200, 400, 700].map((d) => setTimeout(update, d));
+
+    let mo: MutationObserver | undefined;
+    let rafId = 0;
+    if (detail && !isAlphaList && detailContentRef.current) {
+      const scheduled = () => {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(update);
+      };
+      mo = new MutationObserver(scheduled);
+      mo.observe(detailContentRef.current, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["style", "aria-expanded"],
+      });
+    }
+
+    window.addEventListener("resize", update);
+
+    return () => {
+      timers.forEach(clearTimeout);
+      cancelAnimationFrame(rafId);
+      mo?.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [open, detail]);
+
   /* ─── Body lock + backdrop scaler events ─── */
 
   useEffect(() => {
     if (open) {
-      window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label: "mobile" } }));
+      // extended:true → ContentScaler also blurs TopNav, Logo and Landing search pill
+      window.dispatchEvent(
+        new CustomEvent("menu-opened", { detail: { label: "mobile", extended: true } })
+      );
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -196,38 +277,43 @@ export default function MobileMegaMenu() {
     return null;
   }
 
-  const showLeftStrip = !detail; // strip on right when main visible
-  const showRightStrip = !!detail; // strip on left when detail visible
+  // Stage width = 2 * pageW + SPINE_W where pageW = vw - SIDE_MARGIN - SPINE_W - PEEK
+  const stageWidth = `calc(200vw - ${2 * (SIDE_MARGIN + PEEK) + SPINE_W}px)`;
 
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[57]"
-      style={{ pointerEvents: open ? "auto" : "none" }}
+      className="fixed left-0 right-0 z-[57]"
+      style={{
+        top: TOP_OFFSET,
+        bottom: BOTTOM_OFFSET,
+        pointerEvents: open ? "auto" : "none",
+      }}
       aria-hidden={!open}
     >
-      {/* Tap-target on left strip when in detail view → back to main */}
-      {showRightStrip && (
+      {/* Tap-target on the bg gap (left in detail, right in main) → back / close */}
+      {detail && (
         <button
           type="button"
           onClick={() => setDetail(null)}
           className="absolute top-0 bottom-0 left-0"
-          style={{ width: STRIP, background: "transparent", border: "none", zIndex: 1 }}
+          style={{ width: SIDE_MARGIN, background: "transparent", border: "none", zIndex: 1 }}
           aria-label="Zurück zum Hauptmenü"
         />
       )}
 
-      {/* The booklet — 2 pages wide, slides on x */}
+      {/* The booklet stage — page1 + spine + page2, slides on x */}
       <div
         ref={bookletRef}
-        className="absolute top-0 bottom-0 left-0 flex bg-[var(--color-bg-surface)]"
+        className="absolute top-0 left-0 flex"
         style={{
-          width: `calc(200vw - ${2 * STRIP}px)`,
-          willChange: "transform",
-          boxShadow: "0 0 32px rgba(0,0,0,0.18)",
+          width: stageWidth,
+          height: stageHeight !== null ? `${stageHeight}px` : "auto",
+          transition: stageHeight !== null ? `height ${HEIGHT_TWEEN_MS}ms ease-in-out` : "none",
+          willChange: "transform, height",
         }}
       >
-        <div ref={stageRef} className="flex w-full h-full">
+        <div ref={stageRef} className="flex w-full h-full relative">
           {/* PAGE 1 — Main menu */}
           <PageMain
             visible={!detail}
@@ -239,19 +325,75 @@ export default function MobileMegaMenu() {
             onPickFinanztool={(kind) => setDetail({ kind } as DetailType)}
             onPickAnbieter={() => setDetail({ kind: "anbieter" })}
             onNavigate={navigateAndClose}
-            showRightStripDecor={showLeftStrip}
+            contentRef={mainContentRef}
           />
+
+          {/* Spine flex spacer — keeps pages flush with the seam */}
+          <div style={{ width: SPINE_W, flexShrink: 0 }} aria-hidden />
 
           {/* PAGE 2 — Detail */}
           <PageDetail
             detail={detail}
             onBack={() => setDetail(null)}
             onNavigate={navigateAndClose}
-            showLeftStripDecor={showRightStrip}
+            contentRef={detailContentRef}
           />
+
+          {/* SPINE — magenta strip + spike + gray shadow (absolute, on top) */}
+          <Spine />
         </div>
       </div>
     </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   Spine (between pages) — magenta + spike + gray shadow
+   ──────────────────────────────────────────────── */
+
+function Spine() {
+  return (
+    <>
+      {/* Gray "shadow" bar behind the spine — overlaps both pages */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: `calc(50% - ${SPINE_GRAY_W / 2}px)`,
+          width: SPINE_GRAY_W,
+          background: "rgba(0,0,0,0.03)",
+          zIndex: 2,
+          pointerEvents: "none",
+        }}
+      />
+      {/* Magenta strip + spike — sits at the seam */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          bottom: "-4%",
+          left: `calc(50% - ${SPINE_W / 2}px)`,
+          width: SPINE_W,
+          display: "flex",
+          flexDirection: "column",
+          zIndex: 3,
+          pointerEvents: "none",
+        }}
+      >
+        <div style={{ flex: 1, background: "var(--color-brand-secondary)" }} />
+        <Image
+          src="/icons/small_spikes_down.svg"
+          alt=""
+          width={SPINE_W}
+          height={12}
+          style={{ width: "100%", height: "auto", display: "block" }}
+          aria-hidden
+        />
+      </div>
+    </>
   );
 }
 
@@ -267,7 +409,7 @@ function PageMain({
   onPickFinanztool,
   onPickAnbieter,
   onNavigate,
-  showRightStripDecor,
+  contentRef,
 }: {
   visible: boolean;
   openSection: MainSection;
@@ -276,28 +418,24 @@ function PageMain({
   onPickFinanztool: (kind: "rechner" | "vergleiche" | "checklisten") => void;
   onPickAnbieter: () => void;
   onNavigate: (href: string) => void;
-  showRightStripDecor: boolean;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <div
       className="relative flex flex-col h-full overflow-hidden"
-      style={{ width: `calc(100vw - ${STRIP}px)`, flexShrink: 0 }}
+      style={{
+        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        flexShrink: 0,
+        borderTopLeftRadius: PAGE_RADIUS,
+        borderBottomLeftRadius: PAGE_RADIUS,
+        backgroundColor: "var(--color-pill-bg)",
+        backdropFilter: "blur(16px) brightness(1.15)",
+        WebkitBackdropFilter: "blur(16px) brightness(1.15)",
+        boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
+      }}
       aria-hidden={!visible}
     >
-      {/* Right edge bookmark decoration (only on main view) */}
-      {showRightStripDecor && (
-        <div
-          aria-hidden
-          className="absolute top-0 bottom-0 right-0"
-          style={{
-            width: 4,
-            background: "var(--color-brand-secondary, #D3005E)",
-            opacity: 0.85,
-          }}
-        />
-      )}
-
-      <div className="flex-1 overflow-y-auto px-5 pt-20 pb-8">
+      <div ref={contentRef} className="flex-1 overflow-y-auto px-5 pt-6 pb-8">
         <Section
           label="Ratgeber"
           isOpen={openSection === "ratgeber"}
@@ -420,10 +558,19 @@ function Section({
 }) {
   const innerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | "auto">(isOpen ? "auto" : 0);
+  const initialMount = useRef(true);
 
   useLayoutEffect(() => {
     const el = innerRef.current;
     if (!el) return;
+    // Skip the open/close dance on initial mount — initial state already reflects
+    // the desired layout (auto when open, 0 when closed). Without this, all closed
+    // Sections briefly expand to scrollHeight before collapsing in RAF, which would
+    // make the parent's height measurement see "all sections open" for one frame.
+    if (initialMount.current) {
+      initialMount.current = false;
+      return;
+    }
     if (isOpen) {
       setHeight(el.scrollHeight);
       const t = setTimeout(() => setHeight("auto"), 320);
@@ -476,33 +623,29 @@ function PageDetail({
   detail,
   onBack,
   onNavigate,
-  showLeftStripDecor,
+  contentRef,
 }: {
   detail: DetailType | null;
   onBack: () => void;
   onNavigate: (href: string) => void;
-  showLeftStripDecor: boolean;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <div
       className="relative flex flex-col h-full overflow-hidden"
-      style={{ width: `calc(100vw - ${STRIP}px)`, flexShrink: 0 }}
+      style={{
+        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        flexShrink: 0,
+        borderTopRightRadius: PAGE_RADIUS,
+        borderBottomRightRadius: PAGE_RADIUS,
+        backgroundColor: "var(--color-pill-bg)",
+        backdropFilter: "blur(16px) brightness(1.15)",
+        WebkitBackdropFilter: "blur(16px) brightness(1.15)",
+        boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
+      }}
       aria-hidden={!detail}
     >
-      {/* Left edge bookmark decoration (only on detail view) */}
-      {showLeftStripDecor && (
-        <div
-          aria-hidden
-          className="absolute top-0 bottom-0 left-0"
-          style={{
-            width: 4,
-            background: "var(--color-brand-secondary, #D3005E)",
-            opacity: 0.85,
-          }}
-        />
-      )}
-
-      <div className="flex items-center gap-2 px-5 pt-20 pb-2">
+      <div className="flex items-center gap-2 px-5 pt-6 pb-2">
         <button
           type="button"
           onClick={onBack}
@@ -516,7 +659,7 @@ function PageDetail({
         </h2>
       </div>
 
-      <div className="flex-1 overflow-hidden px-5 pb-5">
+      <div ref={contentRef} className="flex-1 overflow-hidden px-5 pb-5">
         {detail?.kind === "ratgeber" && (
           <RatgeberDetail
             categoryLabel={detail.categoryLabel}
