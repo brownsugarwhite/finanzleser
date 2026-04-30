@@ -143,6 +143,63 @@ h1.category-title {
   margin-bottom: 0.5em !important;
 }
 
+/* Defensiv: Rich-Content-Elemente nie über Container hinaus */
+.prose img,
+.prose video,
+.prose iframe,
+.prose embed,
+.prose object {
+  max-width: 100%;
+  height: auto;
+}
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.prose code {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.prose a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Tabellen im Artikel – horizontaler Scroll-Container mit Edge-Gradients */
+.prose .table-scroll {
+  position: relative;
+  margin: 2em 0;
+}
+.prose .table-scroll-inner {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose .table-scroll-inner > table {
+  margin: 0 !important; /* Margin liegt auf .table-scroll, nicht auf table */
+}
+.prose .table-scroll::before,
+.prose .table-scroll::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.23s ease;
+  z-index: 2;
+}
+.prose .table-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg-page), transparent);
+}
+.prose .table-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg-page), transparent);
+}
+.prose .table-scroll.is-clipped-left::before { opacity: 1; }
+.prose .table-scroll.is-clipped-right::after { opacity: 1; }
+
 /* Tabellen im Artikel – SubBanner-Style Header */
 .prose table {
   width: 100%;

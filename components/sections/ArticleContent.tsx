@@ -67,6 +67,15 @@ interface ContentPart {
   value: string; // HTML string or slug
 }
 
+// Wrap each <table> in scroll containers so wide tables get horizontal scroll
+// instead of bleeding past the viewport. Edge gradients are added via CSS + JS.
+function wrapTables(html: string): string {
+  return html.replace(
+    /<table\b[^>]*>[\s\S]*?<\/table>/g,
+    (match) => `<div class="table-scroll"><div class="table-scroll-inner">${match}</div></div>`
+  );
+}
+
 function parseContent(html: string): ContentPart[] {
   const parts: ContentPart[] = [];
 
@@ -181,6 +190,33 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
     return () => document.removeEventListener("click", handler);
   }, []);
 
+  // Edge-gradient toggling for wrapped tables: show left gradient when content
+  // has been scrolled away from the start, right gradient while more is hidden right.
+  useEffect(() => {
+    const wrappers = Array.from(document.querySelectorAll<HTMLElement>(".table-scroll"));
+    const cleanups: Array<() => void> = [];
+    wrappers.forEach((wrapper) => {
+      const inner = wrapper.querySelector<HTMLElement>(".table-scroll-inner");
+      if (!inner) return;
+      const update = () => {
+        const overflow = inner.scrollWidth > inner.clientWidth + 1;
+        const atStart = inner.scrollLeft <= 0;
+        const atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
+        wrapper.classList.toggle("is-clipped-left", overflow && !atStart);
+        wrapper.classList.toggle("is-clipped-right", overflow && !atEnd);
+      };
+      update();
+      inner.addEventListener("scroll", update, { passive: true });
+      const ro = new ResizeObserver(update);
+      ro.observe(inner);
+      cleanups.push(() => {
+        inner.removeEventListener("scroll", update);
+        ro.disconnect();
+      });
+    });
+    return () => cleanups.forEach((fn) => fn());
+  }, [content]);
+
   // Globalen Heading-Index ueber alle Parts hinweg berechnen
   let headingIndex = 0;
   const rendered = parts.map((part, i) => {
@@ -198,7 +234,7 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
         }
         return (
           <ArticleElementWrapper key={`${i}-html-${j}`} variant="centered" collapsed={collapsed}>
-            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: fp.value }} />
+            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: wrapTables(fp.value) }} />
           </ArticleElementWrapper>
         );
       });
