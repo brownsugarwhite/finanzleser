@@ -165,7 +165,8 @@ h1.category-title {
   word-break: break-word;
 }
 
-/* Tabellen im Artikel – horizontaler Scroll-Container mit Edge-Gradients */
+/* Tabellen im Artikel – horizontaler Scroll-Container mit Edge-Gradient
+   Gradients fade in/out via JS class-toggle (.is-clipped-left / -right). */
 .prose .table-scroll {
   position: relative;
   margin: 2em 0;
@@ -175,7 +176,7 @@ h1.category-title {
   -webkit-overflow-scrolling: touch;
 }
 .prose .table-scroll-inner > table {
-  margin: 0 !important; /* Margin liegt auf .table-scroll, nicht auf table */
+  margin: 0 !important;
 }
 .prose .table-scroll::before,
 .prose .table-scroll::after {
@@ -191,11 +192,11 @@ h1.category-title {
 }
 .prose .table-scroll::before {
   left: 0;
-  background: linear-gradient(to right, var(--color-bg-page), transparent);
+  background: linear-gradient(to right, var(--color-bg-page), rgba(255, 255, 255, 0));
 }
 .prose .table-scroll::after {
   right: 0;
-  background: linear-gradient(to left, var(--color-bg-page), transparent);
+  background: linear-gradient(to left, var(--color-bg-page), rgba(255, 255, 255, 0));
 }
 .prose .table-scroll.is-clipped-left::before { opacity: 1; }
 .prose .table-scroll.is-clipped-right::after { opacity: 1; }
@@ -865,6 +866,52 @@ a.megamenu-link:hover {
   line-height: 1.5;
   color: var(--color-text-medium);
   transition: opacity 0.2s;
+}
+
+/* Mobile-Layout: 3 Zeilen — Nummer+Dots / Checkbox+Titel / Beschreibung volle Breite */
+@media (max-width: 767px) {
+  .checkliste-viewport {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .checkliste-punkt {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "nr nr"
+      "box title"
+      "text text";
+    column-gap: 12px;
+    row-gap: 8px;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .checkliste-punkt-nr-wrap {
+    grid-area: nr;
+    margin: 0;
+    width: 100%;
+    align-items: center;
+  }
+  .checkliste-punkt-nr-wrap .checkliste-punkt-dots {
+    flex: 1;
+    width: auto;
+  }
+  .checkliste-punkt-nummer {
+    margin-bottom: 0;
+  }
+  .checkliste-punkt-box {
+    grid-area: box;
+  }
+  .checkliste-punkt-content {
+    display: contents;
+  }
+  .checkliste-punkt-titel {
+    grid-area: title;
+  }
+  .checkliste-punkt-text {
+    grid-area: text;
+  }
 }
 
 /* Slider Navigation */

@@ -15,7 +15,17 @@ export default function ArticleElementWrapper({
   collapsed: boolean;
   children: React.ReactNode;
 }) {
-  const maxWidth = variant === "wide" ? "80vw" : 750;
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  // Mobile: full bleed (no horizontal margin). Desktop: keep wide=80vw / centered=750px.
+  const maxWidth = isMobile ? "100%" : variant === "wide" ? "80vw" : 750;
   const [shift, setShift] = useState(0);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { memo, useState, useEffect, useMemo, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import gsap from "@/lib/gsapConfig";
 
@@ -143,8 +143,41 @@ function splitFazit(html: string): { type: "html" | "fazit"; value: string }[] {
   return parts.length > 0 ? parts : [{ type: "html", value: html }];
 }
 
-export default function ArticleContent({ content, collapsed, currentSlug }: Props) {
-  const parts = parseContent(content);
+function ArticleContent({ content, collapsed, currentSlug }: Props) {
+  // Memoize ALL HTML transforms (parseContent + addHeadingIds + splitFazit + wrapTables)
+  // so dangerouslySetInnerHTML receives stable strings across re-renders. Otherwise
+  // every parent re-render (TOC scroll progress, collapsed toggle, …) produces a new
+  // HTML string → React re-sets innerHTML → DOM nodes get replaced → our cached
+  // .table-scroll refs go stale → classes never apply.
+  type RenderUnit =
+    | { kind: "html"; htmlString: string; itemKey: string }
+    | { kind: "fazit"; id: string; itemKey: string }
+    | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string };
+
+  const units = useMemo<RenderUnit[]>(() => {
+    const raw = parseContent(content);
+    const out: RenderUnit[] = [];
+    let headingIndex = 0;
+    raw.forEach((part, i) => {
+      if (part.type === "html") {
+        const { html, count } = addHeadingIds(part.value, headingIndex);
+        headingIndex += count;
+        const fazitParts = splitFazit(html);
+        fazitParts.forEach((fp, j) => {
+          if (fp.type === "fazit") {
+            out.push({ kind: "fazit", id: fp.value, itemKey: `${i}-fazit-${j}` });
+          } else {
+            out.push({ kind: "html", htmlString: wrapTables(fp.value), itemKey: `${i}-html-${j}` });
+          }
+        });
+      } else if (part.type === "rechner" || part.type === "checkliste" || part.type === "vergleich") {
+        const headingId = `heading-${headingIndex}`;
+        headingIndex++;
+        out.push({ kind: "tool", toolType: part.type, slug: part.value, headingId, itemKey: `${i}` });
+      }
+    });
+    return out;
+  }, [content]);
 
   // Accordion-Interaktivität für Yoast FAQ-Block mit GSAP
   useEffect(() => {
@@ -190,91 +223,85 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
     return () => document.removeEventListener("click", handler);
   }, []);
 
-  // Edge-gradient toggling for wrapped tables: show left gradient when content
-  // has been scrolled away from the start, right gradient while more is hidden right.
-  useEffect(() => {
-    const wrappers = Array.from(document.querySelectorAll<HTMLElement>(".table-scroll"));
-    const cleanups: Array<() => void> = [];
-    wrappers.forEach((wrapper) => {
-      const inner = wrapper.querySelector<HTMLElement>(".table-scroll-inner");
-      if (!inner) return;
-      const update = () => {
-        const overflow = inner.scrollWidth > inner.clientWidth + 1;
-        const atStart = inner.scrollLeft <= 0;
-        const atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
-        wrapper.classList.toggle("is-clipped-left", overflow && !atStart);
-        wrapper.classList.toggle("is-clipped-right", overflow && !atEnd);
-      };
-      update();
-      inner.addEventListener("scroll", update, { passive: true });
-      const ro = new ResizeObserver(update);
-      ro.observe(inner);
-      cleanups.push(() => {
-        inner.removeEventListener("scroll", update);
-        ro.disconnect();
-      });
+  // Edge-gradient toggle for wrapped tables.
+  // Strategy: re-apply classes on EVERY render (useLayoutEffect, no deps) so the
+  // state survives React DOM resets without any observers or refs. Plus a
+  // capture-phase scroll listener for live updates while the user pans the table.
+  useLayoutEffect(() => {
+    document.querySelectorAll<HTMLElement>(".table-scroll-inner").forEach((inner) => {
+      if (!inner.isConnected || inner.scrollWidth === 0) return;
+      const wrapper = inner.closest<HTMLElement>(".table-scroll");
+      if (!wrapper) return;
+      const overflow = inner.scrollWidth - inner.clientWidth > 0.5;
+      const atStart = inner.scrollLeft < 0.5;
+      const atEnd = inner.scrollWidth - inner.clientWidth - inner.scrollLeft < 0.5;
+      wrapper.classList.toggle("is-clipped-left", overflow && !atStart);
+      wrapper.classList.toggle("is-clipped-right", overflow && !atEnd);
     });
-    return () => cleanups.forEach((fn) => fn());
-  }, [content]);
+  });
 
-  // Globalen Heading-Index ueber alle Parts hinweg berechnen
-  let headingIndex = 0;
-  const rendered = parts.map((part, i) => {
-    if (part.type === "html") {
-      const { html, count } = addHeadingIds(part.value, headingIndex);
-      headingIndex += count;
-      const fazitParts = splitFazit(html);
-      return fazitParts.map((fp, j) => {
-        if (fp.type === "fazit") {
-          return (
-            <ArticleElementWrapper key={`${i}-fazit-${j}`} variant="centered" collapsed={collapsed}>
-              <FazitHeading id={fp.value} />
-            </ArticleElementWrapper>
-          );
-        }
-        return (
-          <ArticleElementWrapper key={`${i}-html-${j}`} variant="centered" collapsed={collapsed}>
-            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: wrapTables(fp.value) }} />
-          </ArticleElementWrapper>
-        );
-      });
-    }
-    if (part.type === "rechner") {
-      const id = `heading-${headingIndex}`;
-      headingIndex++;
+  useEffect(() => {
+    const onScroll = (e: Event) => {
+      const inner = e.target as HTMLElement | null;
+      if (!(inner instanceof HTMLElement) || !inner.classList.contains("table-scroll-inner")) return;
+      const wrapper = inner.closest<HTMLElement>(".table-scroll");
+      if (!wrapper) return;
+      const overflow = inner.scrollWidth - inner.clientWidth > 0.5;
+      const atStart = inner.scrollLeft < 0.5;
+      const atEnd = inner.scrollWidth - inner.clientWidth - inner.scrollLeft < 0.5;
+      wrapper.classList.toggle("is-clipped-left", overflow && !atStart);
+      wrapper.classList.toggle("is-clipped-right", overflow && !atEnd);
+    };
+    document.addEventListener("scroll", onScroll, { capture: true, passive: true });
+    return () => document.removeEventListener("scroll", onScroll, { capture: true } as EventListenerOptions);
+  }, []);
+
+
+  const rendered = units.map((unit) => {
+    if (unit.kind === "html") {
       return (
-        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: unit.htmlString }} />
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "fazit") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
+          <FazitHeading id={unit.id} />
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "tool" && unit.toolType === "rechner") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
           <div className="article-tool-embed">
             <RechnerEmbed
-              slug={part.value}
-              formHeader={<ToolLabel type="rechner" slug={part.value} headingId={id} showExcerpt />}
+              slug={unit.slug}
+              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
             />
           </div>
         </ArticleElementWrapper>
       );
     }
-    if (part.type === "checkliste") {
-      const id = `heading-${headingIndex}`;
-      headingIndex++;
+    if (unit.kind === "tool" && unit.toolType === "checkliste") {
       return (
-        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
           <div className="checkliste-article-wrap">
             <ChecklisteEmbed
-              slug={part.value}
-              formHeader={<ToolLabel type="checkliste" slug={part.value} headingId={id} showExcerpt />}
+              slug={unit.slug}
+              formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
             />
           </div>
         </ArticleElementWrapper>
       );
     }
-    if (part.type === "vergleich") {
-      const id = `heading-${headingIndex}`;
-      headingIndex++;
+    if (unit.kind === "tool" && unit.toolType === "vergleich") {
       return (
-        <ArticleElementWrapper key={i} variant="wide" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
           <VergleichEmbed
-            slug={part.value}
-            formHeader={<ToolLabel type="vergleich" slug={part.value} headingId={id} showExcerpt />}
+            slug={unit.slug}
+            formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
           />
         </ArticleElementWrapper>
       );
@@ -284,3 +311,8 @@ export default function ArticleContent({ content, collapsed, currentSlug }: Prop
 
   return <>{rendered}</>;
 }
+
+// Memo: parent (ArticleClient) re-renders on every vertical scroll (TOC active
+// heading updates). Without memo, ArticleContent would re-render too, causing
+// React to re-execute dangerouslySetInnerHTML and reset table scrollLeft.
+export default memo(ArticleContent);
