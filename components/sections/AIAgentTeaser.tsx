@@ -324,7 +324,7 @@ export default function AIAgentTeaser() {
             style={{
               position: "relative",
               width: "410px",
-              height: "70px",
+              height: "80px",
               maxWidth: "100%",
             }}
           />

@@ -18,6 +18,7 @@ const COLOR = "#000000";
 
 const LEO_SIZE_DESKTOP = 70;
 const LEO_SIZE_MOBILE = 64;
+const BUBBLE_H = 80;            // Höhe der expandierten Sprechblase (matched ChatBubble single-line)
 const isMobileMQ = "(max-width: 767px)";
 const checkMobile = () =>
   typeof window !== "undefined" && window.matchMedia(isMobileMQ).matches;
@@ -27,16 +28,13 @@ export default function LeoIcon() {
   const badgeRef = useRef<HTMLDivElement>(null);
   const tieRef = useRef<SVGSVGElement>(null);
   const leoGroupRef = useRef<HTMLDivElement>(null);
-  const pillRef = useRef<HTMLDivElement>(null);
-  const pillTextRef = useRef<HTMLSpanElement>(null);
   const spikeRightRef = useRef<SVGSVGElement>(null);
+  const arrowBtnRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const dockedInSlot = useRef(false);
-  const morphTlRef = useRef<gsap.core.Timeline | null>(null);
   const chatOpenRef = useRef(false);
   const previousParentRef = useRef<HTMLElement | null>(null);
-  const morphProgressBeforeChatRef = useRef(0);
   const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
   const [smooth, setSmooth] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -110,10 +108,6 @@ export default function LeoIcon() {
     el.style.width = `${elSize}px`;
     el.style.height = `${elSize}px`;
     gsap.set(el, { x: 0, y: 0, clearProps: "transform" });
-    // Morph-TL auf Anfang zurück (falls auf voriger Page mid-play)
-    if (morphTlRef.current && morphTlRef.current.progress() > 0) {
-      morphTlRef.current.progress(0, false).pause();
-    }
 
     isLanding.current = document.body.hasAttribute("data-landing");
     hasUndocked.current = false;
@@ -194,7 +188,7 @@ export default function LeoIcon() {
                 // leoGroup y:80 selbst animiert) sauber von der Default-Lage
                 // starten kann.
                 gsap.set(el, { scale: 1, transformOrigin: "50% 50%" });
-                gsap.set(tie, { scale: 1, opacity: 1, x: "-50%", transformOrigin: "50% 50%" });
+                gsap.set(tie, { scale: 1, opacity: 1, transformOrigin: "50% 50%" });
                 gsap.set(leoGroup, { y: 0 });
               },
             });
@@ -204,10 +198,10 @@ export default function LeoIcon() {
               { scale: 1, duration: 0.4, ease: "back.out(1.6)", transformOrigin: "50% 50%" },
               0
             );
-            // Tie kommt zurück — uniform scale (gleichförmig zur Mitte), x:-50% explizit damit GSAP die Zentrierung mit-trackt
+            // Tie kommt zurück — uniform scale (gleichförmig zur Mitte)
             inTl.fromTo(tie,
-              { scale: 0, opacity: 0, x: "-50%", transformOrigin: "50% 50%" },
-              { scale: 1, opacity: 1, x: "-50%",
+              { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+              { scale: 1, opacity: 1,
                 duration: 0.32, ease: "power2.out" },
               0.08
             );
@@ -224,7 +218,7 @@ export default function LeoIcon() {
         outTl.to(leoGroup, { y: 60, duration: 0.32, ease: "power2.in" }, 0);
         // Tie kollabiert uniform (gleichförmig auf 0 zur Mitte) — keine Quetschung mehr
         outTl.to(tie, {
-          scale: 0, opacity: 0, x: "-50%",
+          scale: 0, opacity: 0,
           transformOrigin: "50% 50%",
           duration: 0.3, ease: "power2.in",
         }, 0.05);
@@ -392,83 +386,8 @@ export default function LeoIcon() {
     };
   }, []);
 
-  // Morph: Leo-Badge → KI-Agent-Button beim Scroll in AIAgentTeaser
-  useEffect(() => {
-    const container = containerRef.current;
-    const tie = tieRef.current;
-    const leoGroup = leoGroupRef.current;
-    const pill = pillRef.current;
-    const pillText = pillTextRef.current;
-    const spikeRight = spikeRightRef.current;
-    if (!container || !tie || !leoGroup || !pill || !pillText || !spikeRight) return;
-
-    const teaser = document.querySelector<HTMLElement>(".ai-agent-teaser");
-    if (!teaser) return;
-
-    const badge = badgeRef.current;
-    if (!badge) return;
-
-    const ctx = gsap.context(() => {
-      // Morph-TL: nur die "Leo-Transform"-Bewegungen. bg/shadow/spike laufen
-      // via CSS (data-state) und sind dadurch unabhängig vom Morph-Play-State.
-      const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut" } });
-      morphTlRef.current = tl;
-
-      tl.to(container, { scale: 1.25, duration: 0.28, ease: "power2.out" }, 0);
-      tl.to(leoGroup, { scale: 1 / 1.25, duration: 0.28, ease: "power2.out" }, 0);
-      tl.to(badge, { borderRadius: "27px", duration: 0.32, ease: "power2.inOut" }, 0);
-      tl.to(tie, {
-        scaleX: 1.25,
-        scaleY: 0.3,
-        transformOrigin: "50% 0%",
-        opacity: 0,
-        duration: 0.32,
-      }, 0);
-      tl.to(leoGroup, { y: 80, duration: 0.38, ease: "power2.in" }, 0);
-      tl.to(pill, { scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
-      tl.to(container, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
-      tl.to(leoGroup, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
-      tl.to(pillText, { opacity: 1, duration: 0.22 }, 0.42);
-
-      ScrollTrigger.create({
-        trigger: teaser,
-        start: "top bottom-=60",
-        onEnter: () => {
-          // Nur in "default"-State zu "morphed" wechseln — nicht überschreiben
-          // wenn User gerade im Chat ist.
-          if (container.dataset.state !== "chat") {
-            container.dataset.state = "morphed";
-          }
-          morphTlRef.current?.play();
-        },
-        onLeaveBack: () => {
-          if (container.dataset.state !== "chat") {
-            container.dataset.state = "default";
-          }
-          morphTlRef.current?.reverse();
-        },
-      });
-    }, container);
-
-    const onLoad = () => ScrollTrigger.refresh();
-    if (document.readyState === "complete") {
-      requestAnimationFrame(onLoad);
-    } else {
-      window.addEventListener("load", onLoad);
-    }
-    const t1 = setTimeout(() => ScrollTrigger.refresh(), 300);
-    // Zweiter Refresh nach 1.2s — fängt späte Bild-/Font-Loads auf Artikelseiten
-    // ab, sonst trigger-Position aus stale Layout (morph feuert zu früh).
-    const t2 = setTimeout(() => ScrollTrigger.refresh(), 1200);
-
-    return () => {
-      window.removeEventListener("load", onLoad);
-      clearTimeout(t1);
-      clearTimeout(t2);
-      ctx.revert();
-      morphTlRef.current = null;
-    };
-  }, [pathname]);
+  // (Alter Morph zur „KI-Agent"-Pille entfernt — wird durch Morph 1
+  //  „Leo → Bubble-mit-Spike" in der Dock-Slot-Effect ersetzt.)
 
   // Dock: LeoIcon flippt in den reservierten Slot unter den Bubbles und
   // expandiert zum Chat-Eingabefeld. Reversibel beim Zurückscrollen.
@@ -481,69 +400,109 @@ export default function LeoIcon() {
     const slot = document.getElementById("leo-dock-slot-ai");
     if (!slot) return;
 
+    const tie = tieRef.current;
+    const leoGroup = leoGroupRef.current;
+    const arrowBtn = arrowBtnRef.current;
+    const spike = spikeRightRef.current;
+    if (!tie || !leoGroup || !arrowBtn || !spike) return;
+
     let trigger: ScrollTrigger | null = null;
 
-    // Morph-Timeline auf Ende zwingen falls sie gerade mid-play ist —
-    // so kollidieren die Transforms nicht mit dem Flip.
-    const forceMorphDone = () => {
-      const tl = morphTlRef.current;
-      if (tl && tl.progress() < 1) tl.progress(1, false);
-    };
-
-    // DOCK: Flip zwischen Home und Slot (beide sind positionierte Container).
+    // MORPH 1: alle Animationen PARALLEL (Pulse + Expand gleichzeitig).
+    //  - leoGroup taucht ab, tie kollabiert uniform
+    //  - container pulst (scale 1→1.25→1)
+    //  - arrowBtn pulst von 0→1
+    //  - Flip: Container reparenten zum Slot, Width/Height animieren
+    //  - badge borderRadius von 50% (rund) → bubbleH/2 (Stadium-Shape)
+    //  - Spike fährt aus (CSS via data-state="morphed")
     const dockIntoSlot = () => {
       if (dockedInSlot.current) return;
       dockedInSlot.current = true;
 
-      forceMorphDone();
-      gsap.killTweensOf(container);
-      gsap.killTweensOf(input);
+      gsap.killTweensOf([container, input, tie, leoGroup, arrowBtn, badge, spike]);
+      container.dataset.state = "morphed"; // CSS triggert Bubble-Bg-Übergang
 
+      const bubbleH = BUBBLE_H;
+      const bubbleW = checkMobile()
+        ? slot.offsetWidth || window.innerWidth
+        : 410;
+
+      // Flip-Reparent SOFORT (parallel zum Pulse). Nimmt width/height-Snapshot.
       const state = Flip.getState(container, { props: "width,height" });
-
-      const bubbleH = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       slot.appendChild(container);
-      container.style.width = "410px";
+      container.style.width = `${bubbleW}px`;
       container.style.height = `${bubbleH}px`;
-
-      Flip.from(state, {
-        duration: 0.75,
-        ease: "power3.inOut",
-        absolute: true,
-        onComplete: () => {
-          gsap.to(input, { opacity: 1, duration: 0.3, ease: "power2.out" });
-          input.style.pointerEvents = "auto";
-        },
-      });
-    };
-
-    // UNDOCK: Flip zurück vom Slot in den Home-Container.
-    const undockFromSlot = () => {
-      if (!dockedInSlot.current) return;
-      dockedInSlot.current = false;
-
-      forceMorphDone();
-      gsap.killTweensOf(container);
-      gsap.killTweensOf(input);
-
-      gsap.to(input, { opacity: 0, duration: 0.15, ease: "power2.out" });
-      input.style.pointerEvents = "none";
-
-      const home = document.getElementById("leo-floating-home");
-      if (!home) return;
-
-      const state = Flip.getState(container, { props: "width,height" });
-
-      const homeS = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
-      home.appendChild(container);
-      container.style.width = `${homeS}px`;
-      container.style.height = `${homeS}px`;
-
       Flip.from(state, {
         duration: 0.6,
         ease: "power3.inOut",
         absolute: true,
       });
+
+      // Pulse-Animationen + borderRadius parallel zum Flip
+      const tl = gsap.timeline();
+      tl.to(leoGroup, { y: 80, duration: 0.38, ease: "power2.in" }, 0);
+      tl.to(tie, {
+        scale: 0, opacity: 0, transformOrigin: "50% 50%",
+        duration: 0.32, ease: "power2.in",
+      }, 0);
+      tl.to(container, { scale: 1.15, duration: 0.28, ease: "power2.out" }, 0);
+      tl.to(container, { scale: 1, duration: 0.36, ease: "power2.inOut" }, 0.28);
+      tl.to(badge, {
+        borderRadius: "27px",   // matched mit ChatBubble
+        duration: 0.5,
+        ease: "power2.inOut",
+      }, 0);
+      tl.to(arrowBtn, { scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
+      // Spike fährt aus der unteren-linken Ecke aus (nur Scale, keine Opacity)
+      tl.to(spike, {
+        scale: 1, transformOrigin: "0% 0%",
+        duration: 0.4, ease: "back.out(1.6)",
+      }, 0.18);
+
+      // Input-Feld in der Bubble einblenden (mit Placeholder-Text)
+      input.style.pointerEvents = "auto";
+      tl.to(input, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0.35);
+    };
+
+    const undockFromSlot = () => {
+      if (!dockedInSlot.current) return;
+      dockedInSlot.current = false;
+
+      gsap.killTweensOf([container, input, tie, leoGroup, arrowBtn, badge, spike]);
+      container.dataset.state = "default";
+
+      // Input zuerst ausfaden (parallel zum Bubble-Schrumpfen, schneller fertig)
+      input.style.pointerEvents = "none";
+      gsap.to(input, { opacity: 0, duration: 0.2, ease: "power2.in" });
+
+      const home = document.getElementById("leo-floating-home");
+      if (!home) return;
+
+      const homeS = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
+
+      // Flip zurück + Pulse-Reverse + borderRadius zurück — alles parallel
+      const state = Flip.getState(container, { props: "width,height" });
+      home.appendChild(container);
+      container.style.width = `${homeS}px`;
+      container.style.height = `${homeS}px`;
+      Flip.from(state, {
+        duration: 0.55,
+        ease: "power3.inOut",
+        absolute: true,
+      });
+
+      const back = gsap.timeline();
+      back.to(arrowBtn, { scale: 0, duration: 0.25, ease: "power2.in" }, 0);
+      back.to(spike, {
+        scale: 0, transformOrigin: "0% 0%",
+        duration: 0.3, ease: "power2.in",
+      }, 0);
+      back.to(badge, { borderRadius: "35px", duration: 0.45, ease: "power2.inOut" }, 0);
+      back.to(tie, {
+        scale: 1, opacity: 1, transformOrigin: "50% 50%",
+        duration: 0.32, ease: "power2.out",
+      }, 0.1);
+      back.to(leoGroup, { y: 0, duration: 0.4, ease: "back.out(1.2)" }, 0.15);
     };
 
     trigger = ScrollTrigger.create({
@@ -612,48 +571,50 @@ export default function LeoIcon() {
       if (chatOpenRef.current) return;
       chatOpenRef.current = true;
 
-      // Legacy landing-undock MotionPath blockieren. Sonst feuert der Scroll-Handler
-      // aus dem ersten useEffect beim scrollToBookmarkSticky()-Call (scrollY > 5) und
-      // startet eine zweite, konkurrierende Flip/MotionPath-Animation auf dem Container.
+      const tie = tieRef.current;
+      const leoGroup = leoGroupRef.current;
+      const arrowBtn = arrowBtnRef.current;
+      const badge = badgeRef.current;
+      const spike = spikeRightRef.current;
+
+      // Wenn Leo aktuell noch im "default"-State (Mini-Badge ohne Pulse-Morph),
+      // muss zuerst die Pulse-Choreographie laufen (sonst kein Pfeil-Button,
+      // kein Abtauchen, etc.). Im "morphed"-State (bereits Bubble) entfällt das.
+      const wasDefault = container.dataset.state === "default";
+      const wasMorphed = container.dataset.state === "morphed";
+
       const wasLandingDocked = isLanding.current && !hasUndocked.current;
       hasUndocked.current = true;
-
-      // Wenn vom Landing-Page-Top geklickt wurde: LandingIntro soll die search-pill
-      // auf volle Breite expanden und die Sprechblase ausfaden (wie bei normalem Scroll).
       if (wasLandingDocked) {
         window.dispatchEvent(new CustomEvent("leo-undocked"));
       }
 
-      const morphTl = morphTlRef.current;
-      morphProgressBeforeChatRef.current = morphTl ? morphTl.progress() : 0;
       previousParentRef.current = container.parentElement;
-
-      // Scroll zum Sticky-Punkt falls Bookmark noch nicht sticky (wie Finanztools-Button)
       scrollToBookmarkSticky();
 
-      // data-state auf "chat" → CSS übernimmt bg/shadow/spike via Transitions
       container.dataset.state = "chat";
 
-      // Flip-State capturen (Original-Position in search-pill / home / dock-slot)
-      // Dann reparent + resize SOFORT — Leo raus aus allen blur-baren Ancestors
-      // damit ContentScaler ihr nichts anhaben kann.
+      gsap.killTweensOf([container, input, tie, leoGroup, arrowBtn, badge, spike]);
+
+      // Wenn bereits in der AI-Bubble: Spike rausanimieren (Chat-Pille hat keinen Spike)
+      if (wasMorphed && spike) {
+        gsap.to(spike, {
+          scale: 0, transformOrigin: "0% 0%",
+          duration: 0.3, ease: "power2.in",
+        });
+      }
+
       const state = Flip.getState(container, { props: "width,height" });
       chatCenterEl.appendChild(container);
       container.style.width = "560px";
       container.style.height = "140px";
 
-      // Erst JETZT menu-opened → Leo ist bereits body-child
       document.body.style.overflow = "hidden";
       backdropEl.style.display = "block";
       backdropEl.addEventListener("click", closeChat);
       chatCenterEl.style.pointerEvents = "auto";
       window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
 
-      // Morph-TL (falls state A) parallel zur Flip-Expand — kein Konflikt weil
-      // die TL nur scale/leoGroup/tie/pill/radius tweent, Flip nur width/height/pos.
-      if (morphTl && morphTl.progress() < 1) {
-        morphTl.play();
-      }
       Flip.from(state, {
         duration: 0.75,
         ease: "power3.inOut",
@@ -663,6 +624,18 @@ export default function LeoIcon() {
           input.style.pointerEvents = "auto";
         },
       });
+
+      // Falls aus default state geklickt: Pulse parallel zur Flip-Expand.
+      if (wasDefault && tie && leoGroup && arrowBtn && badge) {
+        const pulse = gsap.timeline();
+        pulse.to(leoGroup, { y: 80, duration: 0.38, ease: "power2.in" }, 0);
+        pulse.to(tie, {
+          scale: 0, opacity: 0, transformOrigin: "50% 50%",
+          duration: 0.32, ease: "power2.in",
+        }, 0);
+        pulse.to(badge, { borderRadius: "27px", duration: 0.5, ease: "power2.inOut" }, 0);
+        pulse.to(arrowBtn, { scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.28);
+      }
     };
 
     const closeChat = () => {
@@ -681,8 +654,10 @@ export default function LeoIcon() {
 
       const prevIsDockSlot = prev.id === "leo-dock-slot-ai";
       const defSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
-      const targetWidth = prevIsDockSlot ? 410 : defSize;
-      const targetHeight = prevIsDockSlot ? defSize : defSize;
+      const targetWidth = prevIsDockSlot
+        ? (checkMobile() ? prev.offsetWidth || window.innerWidth : 410)
+        : defSize;
+      const targetHeight = prevIsDockSlot ? BUBBLE_H : defSize;
 
       // Un-blur anstoßen (ContentScaler) + Backdrop weg
       backdropEl.removeEventListener("click", closeChat);
@@ -698,6 +673,36 @@ export default function LeoIcon() {
       if (!prevIsDockSlot) {
         gsap.to(input, { opacity: 0, duration: 0.2, ease: "power2.out" });
         input.style.pointerEvents = "none";
+      }
+
+      // Spike wiederherstellen, wenn Ziel = AI-Bubble (Bubble hat Spike)
+      if (prevIsDockSlot) {
+        const spike = spikeRightRef.current;
+        if (spike) {
+          gsap.to(spike, {
+            scale: 1, transformOrigin: "0% 0%",
+            duration: 0.4, ease: "back.out(1.6)",
+          });
+        }
+      }
+
+      // Falls Ziel = default state (home/search-pill): Pulse rückwärts —
+      // Pfeil raus, badge-borderRadius zurück, tie zurück, leoGroup auftauchen.
+      if (!prevIsDockSlot) {
+        const tie = tieRef.current;
+        const leoGroup = leoGroupRef.current;
+        const arrowBtn = arrowBtnRef.current;
+        const badge = badgeRef.current;
+        if (tie && leoGroup && arrowBtn && badge) {
+          const back = gsap.timeline();
+          back.to(arrowBtn, { scale: 0, duration: 0.25, ease: "power2.in" }, 0);
+          back.to(badge, { borderRadius: "35px", duration: 0.45, ease: "power2.inOut" }, 0);
+          back.to(tie, {
+            scale: 1, opacity: 1, transformOrigin: "50% 50%",
+            duration: 0.32, ease: "power2.out",
+          }, 0.1);
+          back.to(leoGroup, { y: 0, duration: 0.4, ease: "back.out(1.2)" }, 0.15);
+        }
       }
 
       // Target viewport rect berechnen. Wenn prev in einem skalierten Ancestor liegt
@@ -754,12 +759,6 @@ export default function LeoIcon() {
           container.style.width = `${targetWidth}px`;
           container.style.height = `${targetHeight}px`;
           gsap.set(container, { x: 0, y: 0, clearProps: "transform" });
-
-          // Morph-TL rückwärts wenn Ziel = state A (home oder search-pill)
-          const morphTl = morphTlRef.current;
-          if (morphTl && !prevIsDockSlot && morphProgressBeforeChatRef.current < 1) {
-            morphTl.reverse();
-          }
         },
       });
     };
@@ -798,8 +797,7 @@ export default function LeoIcon() {
         style={{
           position: "absolute",
           bottom: -9,
-          left: "50%",
-          transform: "translateX(-50%)",
+          right: size / 2 - 6,    // mittig im Leo-Column (size/2 von rechts), korrigiert um tie-width/2 (=6)
           width: 12,
           zIndex: 1,
           pointerEvents: "none",
@@ -847,7 +845,7 @@ export default function LeoIcon() {
           position: "relative",
           width: "100%",
           height: "100%",
-          borderRadius: "50%",
+          borderRadius: "35px",       // px statt % damit GSAP-Tween zu/von 27px sauber interpoliert
           backdropFilter: "brightness(1.3) blur(13px)",
           WebkitBackdropFilter: "brightness(1.3) blur(13px)",
           overflow: "hidden",
@@ -857,7 +855,10 @@ export default function LeoIcon() {
           ref={leoGroupRef}
           style={{
             position: "absolute",
-            inset: 0,
+            right: 0,           // anchor right-bottom — bleibt rechts in der expandierten Bubble
+            bottom: 0,          // (statt zur Mitte zu wandern wenn die Bubble breiter wird)
+            width: size,        // Charakter belegt eine size-px breite Spalte am rechten Rand
+            height: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -957,40 +958,39 @@ export default function LeoIcon() {
           }
         `}</style>
 
-        <div
-          ref={pillRef}
-          style={{
-            position: "absolute",
-            top: 5,
-            right: 5,
-            width: 60,
-            height: 60,
-            borderRadius: "22px",
-            background: "var(--color-brand-secondary)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transform: "scale(0)",
-            pointerEvents: "none",
-          }}
-        >
-          <span
-            ref={pillTextRef}
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "15px",
-              lineHeight: 1,
-              color: "#fff",
-              textAlign: "center",
-              opacity: 0,
-              marginBottom: "4px",
-            }}
-          >
-            <span style={{ fontWeight: 700, color: "#fff" }}>KI</span>
-            <br />
-            <span style={{ fontWeight: 400, color: "#fff" }}>Agent</span>
-          </span>
-        </div>
+      </div>
+
+      {/* Arrow-Button (Send-Style) — top-right des Badges, OUTSIDE des badge
+          weil badge overflow:hidden hat. Initial scale(0), pulst während
+          Morph 1 in. Magenta wie var(--color-brand-secondary). */}
+      <div
+        ref={arrowBtnRef}
+        className="leo-arrow-btn"
+        style={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+          width: 38,
+          height: 38,
+          borderRadius: "18px",   // rounded-rect, passt zum 27px-Bubble-Stil
+          background: "var(--color-brand-secondary)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transform: "scale(0)",
+          pointerEvents: "none",
+          zIndex: 10,
+        }}
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M8 14V2M8 2L3 7M8 2l5 5"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
 
       <style>{`
@@ -1017,14 +1017,10 @@ export default function LeoIcon() {
           display: block;
         }
 
+        /* Spike-Init — GSAP-driven (siehe dockIntoSlot/openChat). Nur Scale, keine Opacity. */
         .leo-batch-container .leo-spike-img {
-          opacity: 0;
           transform: scale(0);
-          transition: opacity 0.35s ease, transform 0.35s ease;
-        }
-        .leo-batch-container[data-state="morphed"] .leo-spike-img {
-          opacity: 1;
-          transform: scale(1);
+          transform-origin: 0% 0%;
         }
       `}</style>
     </div>
