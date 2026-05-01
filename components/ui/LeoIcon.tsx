@@ -8,17 +8,13 @@ import { ScrollTrigger } from "@/lib/gsapConfig";
 import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 import VersichererSelect from "@/components/ui/VersichererSelect";
+import LeoCharacter from "@/components/ui/LeoCharacter";
 import type { Versicherer } from "@/lib/versicherer";
-
-const LEFT_EYE = { cx: 158.34, cy: 450.80 };
-const RIGHT_EYE = { cx: 413.69, cy: 450.80 };
-const PUPIL_RADIUS = 80;
-const MAX_OFFSET = 23;
-const COLOR = "#000000";
 
 const LEO_SIZE_DESKTOP = 70;
 const LEO_SIZE_MOBILE = 64;
-const BUBBLE_H = 80;            // Höhe der expandierten Sprechblase (matched ChatBubble single-line)
+const BUBBLE_H = 80;            // Höhe der AI-Section-Sprechblase (matched ChatBubble single-line)
+// Höhe der Eingabe-Pille im Chat-Overlay = 100 px (siehe #leo-chat-pill-slot in components.css)
 const isMobileMQ = "(max-width: 767px)";
 const checkMobile = () =>
   typeof window !== "undefined" && window.matchMedia(isMobileMQ).matches;
@@ -31,14 +27,13 @@ export default function LeoIcon() {
   const spikeRightRef = useRef<SVGSVGElement>(null);
   const arrowBtnRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
-  const headRef = useRef<HTMLDivElement>(null);
+  const chatInputElRef = useRef<HTMLInputElement>(null);    // <input> für mobile auto-focus
+  const chatCenterRef = useRef<HTMLDivElement>(null);       // statischer Chat-Overlay-Container (in JSX)
+  const pillSlotRef = useRef<HTMLDivElement>(null);         // statischer Pill-Slot (Flip-Target)
+  const iconwrapRef = useRef<HTMLDivElement>(null);         // Icon-Leo + Greeting Wrapper
   const dockedInSlot = useRef(false);
   const chatOpenRef = useRef(false);
   const previousParentRef = useRef<HTMLElement | null>(null);
-  const [pupilOffset, setPupilOffset] = useState({ x: 0, y: 0 });
-  const [smooth, setSmooth] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const wasInWindow = useRef(true);
   const [docked, setDocked] = useState(false);
   const [selectedVersicherer, setSelectedVersicherer] = useState<Versicherer | null>(null);
   const isLanding = useRef(false);
@@ -349,42 +344,8 @@ export default function LeoIcon() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [docked]);
 
-  // Pupil tracking + Hover-Effekt nur auf Desktop. Mobile = statische Augen.
-  useEffect(() => {
-    if (checkMobile()) return;
-
-    function handleMouseMove(e: MouseEvent) {
-      if (!wasInWindow.current) {
-        wasInWindow.current = true;
-        setSmooth(true);
-        requestAnimationFrame(() => requestAnimationFrame(() => setSmooth(false)));
-      }
-      if (!headRef.current) return;
-      const rect = headRef.current.getBoundingClientRect();
-      const dx = e.clientX - (rect.left + rect.width / 2);
-      const dy = e.clientY - (rect.top + rect.height / 2);
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist === 0) return;
-      const clamp = Math.min(dist, 400) / 400;
-      setPupilOffset({
-        x: (dx / dist) * MAX_OFFSET * clamp,
-        y: (dy / dist) * MAX_OFFSET * clamp,
-      });
-    }
-
-    function handleMouseLeave() {
-      wasInWindow.current = false;
-      setSmooth(true);
-      setPupilOffset({ x: 0, y: 0 });
-    }
-
-    window.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  // (Pupil-Tracking + Hover-Effekt sind in <LeoCharacter trackPupils={...} />
+  //  selbst gekapselt — wird mit !checkMobile() aktiviert.)
 
   // (Alter Morph zur „KI-Agent"-Pille entfernt — wird durch Morph 1
   //  „Leo → Bubble-mit-Spike" in der Dock-Slot-Effect ersetzt.)
@@ -530,25 +491,16 @@ export default function LeoIcon() {
     const input = inputRef.current;
     if (!container || !spikeRight || !input) return;
 
-    // Chat-Center Container (permanent, zentriert im Viewport, 560×140)
-    let chatCenter = document.getElementById("leo-chat-center");
-    if (!chatCenter) {
-      chatCenter = document.createElement("div");
-      chatCenter.id = "leo-chat-center";
-      Object.assign(chatCenter.style, {
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "560px",
-        height: "140px",
-        zIndex: "200",
-        pointerEvents: "none",
-      });
-      document.body.appendChild(chatCenter);
-    }
+    // chat-center, pill-slot, iconwrap sind STATISCH in JSX gerendert
+    // (siehe Render-Block) — Refs greifen auf die Elemente. So ist das
+    // Flip-Target-Layout STABIL bevor openChat fired (kein DOM-Mutation
+    // während der Animation = kein Sprung).
+    const chatCenterEl = chatCenterRef.current;
+    const pillSlotEl = pillSlotRef.current;
+    const iconwrapEl = iconwrapRef.current;
+    if (!chatCenterEl || !pillSlotEl || !iconwrapEl) return;
 
-    // Backdrop für Klick-zu-schließen (unter chat-center, über allem anderen)
+    // Backdrop bleibt dynamisch (nur Click-Layer, nicht Flip-Target)
     let backdrop = document.getElementById("leo-chat-backdrop");
     if (!backdrop) {
       backdrop = document.createElement("div");
@@ -565,7 +517,6 @@ export default function LeoIcon() {
     }
 
     const backdropEl = backdrop;
-    const chatCenterEl = chatCenter;
 
     const openChat = () => {
       if (chatOpenRef.current) return;
@@ -604,15 +555,20 @@ export default function LeoIcon() {
         });
       }
 
+      // Pille-Dimensionen werden durch pill-slot definiert (CSS, fixed dimensions).
+      // Container reparented IN den statischen pill-slot — Flip-Target stabil vorhanden.
       const state = Flip.getState(container, { props: "width,height" });
-      chatCenterEl.appendChild(container);
-      container.style.width = "560px";
-      container.style.height = "140px";
+      pillSlotEl.appendChild(container);
+      container.style.width = "100%";
+      container.style.height = "100%";
+
+      // chat-center sichtbar machen (kein Layout-Change, nur opacity)
+      chatCenterEl.style.opacity = "1";
+      chatCenterEl.style.pointerEvents = "auto";
 
       document.body.style.overflow = "hidden";
       backdropEl.style.display = "block";
       backdropEl.addEventListener("click", closeChat);
-      chatCenterEl.style.pointerEvents = "auto";
       window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
 
       Flip.from(state, {
@@ -622,8 +578,18 @@ export default function LeoIcon() {
         onComplete: () => {
           gsap.to(input, { opacity: 1, duration: 0.3, ease: "power2.out" });
           input.style.pointerEvents = "auto";
+          // Mobile: Tastatur automatisch öffnen via input.focus()
+          if (checkMobile()) {
+            chatInputElRef.current?.focus();
+          }
         },
       });
+
+      // Icon-Leo + Greeting fade-in (parallel zur Flip)
+      gsap.fromTo(iconwrapEl,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: 0.2 }
+      );
 
       // Falls aus default state geklickt: Pulse parallel zur Flip-Expand.
       if (wasDefault && tie && leoGroup && arrowBtn && badge) {
@@ -663,8 +629,14 @@ export default function LeoIcon() {
       backdropEl.removeEventListener("click", closeChat);
       backdropEl.style.display = "none";
       chatCenterEl.style.pointerEvents = "none";
+      // Icon-Leo + Greeting fadet aus (parallel zum container-back-flight)
+      gsap.to(iconwrapEl, { opacity: 0, y: 12, duration: 0.3, ease: "power2.in" });
+
       document.body.style.overflow = "";
       window.dispatchEvent(new CustomEvent("menu-closed"));
+
+      // Mobile: Input blur (Tastatur schließen)
+      chatInputElRef.current?.blur();
 
       // data-state zurücksetzen — CSS fadet bg/shadow/spike automatisch
       container.dataset.state = prevIsDockSlot ? "morphed" : "default";
@@ -759,6 +731,8 @@ export default function LeoIcon() {
           container.style.width = `${targetWidth}px`;
           container.style.height = `${targetHeight}px`;
           gsap.set(container, { x: 0, y: 0, clearProps: "transform" });
+          // Chat-Center jetzt verstecken (container ist raus reparented, kein Sprung)
+          chatCenterEl.style.opacity = "0";
         },
       });
     };
@@ -777,13 +751,12 @@ export default function LeoIcon() {
   }, []);
 
   return (
+    <>
     <div
       ref={containerRef}
       data-flip-id="leo"
       data-state="default"
       className="leo-batch-container"
-      onMouseEnter={() => { if (!checkMobile()) setIsHovered(true); }}
-      onMouseLeave={() => { if (!checkMobile()) setIsHovered(false); }}
       style={{
         position: "relative",
         width: size,
@@ -866,36 +839,7 @@ export default function LeoIcon() {
             gap: 2,
           }}
         >
-          <div ref={headRef} style={{ position: "relative", display: "flex", alignItems: "flex-end" }}>
-            <svg viewBox="0 0 564.09 533.81" style={{ width: 44 }}>
-              <path
-                d="M279.08,181.17C-49.69,181.17,3.12,533.81,3.12,533.81l85.65-2.08c-22.75-19.57-37.16-48.57-37.16-80.93,0-58.94,47.78-106.73,106.73-106.73s106.73,47.78,106.73,106.73c0,30.5-12.8,58.02-33.32,77.47l105.91-2.57c-18.98-19.27-30.7-45.71-30.7-74.9,0-58.94,47.78-106.73,106.73-106.73s106.73,47.78,106.73,106.73c0,27.32-10.27,52.24-27.16,71.12l68.62-1.66s45.95-339.08-282.82-339.08Z"
-                fill={COLOR}
-              />
-              <path
-                d="M279.92,214.41c-5.25-39.35-14.6-77.6-27.65-113.12,20.17-6.05,61.44-8.32,61.44-8.32,0,0-47.54-40.18-71.32-60.27,17.49-6.44,32.99-16.88,50.48-23.32"
-                fill="none"
-                stroke={COLOR}
-                strokeMiterlimit={10}
-                strokeWidth={30}
-              />
-            </svg>
-            <svg
-              viewBox="0 0 564.09 533.81"
-              style={{ position: "absolute", top: 0, left: 0, width: 44, height: "100%", pointerEvents: "none", overflow: "visible" }}
-            >
-              <circle cx={LEFT_EYE.cx + pupilOffset.x} cy={LEFT_EYE.cy + pupilOffset.y} r={isHovered ? PUPIL_RADIUS * 0.6 : PUPIL_RADIUS} fill={COLOR} style={{ transition: `r 0.25s ease${smooth ? ", cx 0.3s ease, cy 0.3s ease" : ""}` }} />
-              <circle cx={RIGHT_EYE.cx + pupilOffset.x} cy={RIGHT_EYE.cy + pupilOffset.y} r={isHovered ? PUPIL_RADIUS * 0.6 : PUPIL_RADIUS} fill={COLOR} style={{ transition: `r 0.25s ease${smooth ? ", cx 0.3s ease, cy 0.3s ease" : ""}` }} />
-            </svg>
-          </div>
-          <div>
-            <svg viewBox="0 0 604.6 469.6" style={{ width: 46, display: "block", marginBottom: -13 }}>
-              <polygon
-                points="2 479.1 76.8 0 171.7 157.9 297.7 8.1 432.7 155.2 534.2 0 605 483.6 2 479.1"
-                fill={COLOR}
-              />
-            </svg>
-          </div>
+          <LeoCharacter trackPupils={!checkMobile()} />
         </div>
 
         <div
@@ -915,6 +859,7 @@ export default function LeoIcon() {
           }}
         >
           <input
+            ref={chatInputElRef}
             type="text"
             placeholder="Sende Leo eine Nachricht ..."
             size={29}
@@ -970,9 +915,9 @@ export default function LeoIcon() {
           position: "absolute",
           top: 8,
           right: 8,
-          width: 38,
-          height: 38,
-          borderRadius: "18px",   // rounded-rect, passt zum 27px-Bubble-Stil
+          width: 50,
+          height: 50,
+          borderRadius: "22px",   // proportional zu 50×50, passt zum 27px-Bubble-Stil
           background: "var(--color-brand-secondary)",
           display: "flex",
           alignItems: "center",
@@ -982,7 +927,7 @@ export default function LeoIcon() {
           zIndex: 10,
         }}
       >
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
           <path
             d="M8 14V2M8 2L3 7M8 2l5 5"
             stroke="white"
@@ -1024,5 +969,23 @@ export default function LeoIcon() {
         }
       `}</style>
     </div>
+
+    {/* Chat-Overlay — STATISCH gerendert (immer im DOM), hidden via opacity:0
+        damit Flip-Targets stabil sind und Layout vor/während Animation nicht
+        springt. Sichtbar via gsap.to(opacity, 1) in openChat. */}
+    <div
+      ref={chatCenterRef}
+      id="leo-chat-center"
+      style={{ opacity: 0, pointerEvents: "none" }}
+    >
+      <div ref={pillSlotRef} id="leo-chat-pill-slot" />
+    </div>
+    <div ref={iconwrapRef} id="leo-chat-iconwrap">
+      <div style={{ width: 90, height: 90, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <LeoCharacter headWidth={56} mouthWidth={58} mouthMarginBottom={-13} trackPupils={!checkMobile()} />
+      </div>
+      <div id="leo-chat-greeting">Wie kann ich Ihnen helfen?</div>
+    </div>
+    </>
   );
 }

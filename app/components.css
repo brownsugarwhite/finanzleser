@@ -27,6 +27,85 @@
   pointer-events: auto;
 }
 
+/* Leo Chat-Overlay — chat-center und iconwrap sind STATISCHE fixed-positionierte
+   Container im JSX. Pill-Slot innerhalb chat-center hat fixe CSS-Dimensionen
+   damit Flip einen stabilen Target hat (kein Layout-Shift während Animation). */
+#leo-chat-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  /* opacity + pointer-events werden via JS getoggelt (siehe LeoIcon openChat) */
+}
+@media (max-width: 767px) {
+  #leo-chat-center {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: none;
+    width: 100%;
+  }
+}
+
+/* Pill-Slot: stabiler Flip-Target. Container reparented HIER rein.
+   Desktop: 480 × 100. Mobile: 100% × 100 am Bottom. */
+#leo-chat-pill-slot {
+  width: 550px;
+  height: 120px;          /* CHAT_PILL_H */
+  position: relative;
+}
+@media (max-width: 767px) {
+  #leo-chat-pill-slot {
+    width: 100%;
+  }
+}
+
+/* Icon-Leo + Greeting Wrapper — eigenständig fixed-positioniert (nicht in
+   chat-center), damit chat-center-Layout stabil bleibt. */
+#leo-chat-iconwrap {
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+  opacity: 0;
+  /* Desktop: zentriert horizontal, über der Pille */
+  left: 50%;
+  bottom: calc(50% + 70px);    /* 70 = halbe Pill-Höhe (50) + Gap (20) */
+  transform: translateX(-50%);
+}
+@media (max-width: 767px) {
+  #leo-chat-iconwrap {
+    /* Mobile: mittig zwischen Viewport-Top und Pill-Top (Pille = 100 px hoch) */
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 100px;
+    transform: none;
+    justify-content: center;
+  }
+}
+
+#leo-chat-greeting {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+#leo-chat-greeting {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: center;
+}
+
 /* Leo Mobile-Dock-Slot — sticky links oben, gegenüber Bookmark.
    Liegt direkt nach TopBanner im Flow → Pageload-Position = 13px UNTER TopBanner.
    Beim Scrollen klebt er ab top:13px. margin-bottom:-70px damit der Slot

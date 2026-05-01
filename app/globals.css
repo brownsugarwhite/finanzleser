@@ -56,6 +56,10 @@ body[data-landing] {
   .sticky-nav.dotline-animated {
     display: none !important;
   }
+  /* Sticky-Ratgeber-Heading auf Landing — Mobile aus */
+  .ratgeber-heading-wrap {
+    display: none !important;
+  }
 }
 
 /* ── Search input placeholder ── */

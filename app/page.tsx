@@ -103,8 +103,10 @@ async function RatgeberSection() {
     <section style={{ width: "100%", padding: "80px 0 120px" }}>
       {/* Heading bewusst außerhalb von .scalable-landing — bleibt beim Menü-Open
           in seinem eigenen Stacking-Context auf Root-Ebene und damit immer
-          über dem ProgressiveBlur. */}
-      <StickySparkHeading title="Ratgeber" as="h2" />
+          über dem ProgressiveBlur. Mobile: ausgeblendet (siehe globals.css). */}
+      <div className="ratgeber-heading-wrap">
+        <StickySparkHeading title="Ratgeber" as="h2" />
+      </div>
 
       <div className="scalable-landing" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ width: "100%", maxWidth: "1200px", padding: "0 clamp(20px, 4vw, 40px)", boxSizing: "border-box" }}>

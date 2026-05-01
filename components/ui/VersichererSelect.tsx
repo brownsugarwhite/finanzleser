@@ -306,12 +306,13 @@ export default function VersichererSelect({ value, onChange }: Props) {
 
         .versicherer-select__panel {
           /* position/top/left/width/height werden inline gesetzt (Portal in document.body) */
-          /* Pill-Style analog Landing-Search (--color-pill-bg, brightness ohne blur) */
+          /* Pill-Style analog leo-badge — backdrop-blur + brightness. Portal in document.body
+             stellt sicher dass keine transformed/filtered ancestors den backdrop-filter blocken. */
           background-color: var(--color-pill-bg);
-          backdrop-filter: brightness(1.15);
-          -webkit-backdrop-filter: brightness(1.15);
+          backdrop-filter: brightness(1.15) blur(13px);
+          -webkit-backdrop-filter: brightness(1.15) blur(13px);
           border-radius: 19px;
-          box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);   /* matched leo-badge */
           z-index: 9999;
           display: flex;
           flex-direction: column;
