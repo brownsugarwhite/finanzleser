@@ -197,7 +197,7 @@ export default function LandingIntro() {
     >
       <div data-scale-extended style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
         {/* Logo */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
+        <div className="landing-logo" style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
           <img
             src="/icons/fl_logo.svg"
             alt="finanzleser"
@@ -441,11 +441,12 @@ export default function LandingIntro() {
         .landing-suggest__text > span { font-weight: 400; }
         .landing-suggest__text > strong { font-weight: 700; }
 
-        /* ── Mobile: Dotline raus, Leo lebt global im fixed Slot (app/layout.tsx) ── */
+        /* ── Mobile: Dotline raus, Pillbar (Search + Leo-Wrap) komplett aus,
+              Logo rutscht 36px nach unten. Leo lebt im globalen Slot (app/layout.tsx). ── */
         @media (max-width: 767px) {
           .landing-dotline { display: none !important; }
-          .landing-leo-wrap { display: none !important; }
-          .landing-pillbar { gap: 0 !important; }
+          .landing-pillbar { display: none !important; }
+          .landing-logo { margin-top: 36px !important; }
         }
       `}</style>
     </section>

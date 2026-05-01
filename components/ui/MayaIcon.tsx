@@ -143,67 +143,131 @@ export default function MayaIcon() {
     if (isMobile) {
       // Mobile: getriggert wenn Revolver-Slider mind. 100px vom unteren
       // Bildrand entfernt nach oben gewandert ist (= rect.bottom + 100 ≤ vh).
-      // Hinflug = MotionPath (wie Desktop), Rückflug = Cross-Fade.
-      const onScroll = () => {
+      // Hinflug = MotionPath (wie Desktop), Rückflug = Collapse-Animation
+      // (Badge width/height → 0 zur Mitte, leoGroup taucht vorher ab,
+      //  tie skaliert wie im KI-Button-Morph).
+
+      // OUT: Container scaled von 1 → 0 zur Mitte (wie Morph mit container.scale,
+      //      kein layout-thrashing). leoGroup taucht etwas vorher nach unten ab,
+      //      tie kollabiert wie im KI-Button-Morph.
+      // IN: rückwärts mit back.out für sanften Pop.
+      const collapseSwap = (target: HTMLElement, onAtTarget?: () => void) => {
         const el = containerRef.current;
+        const leoGroup = leoGroupRef.current;
+        const tie = tieRef.current;
+        if (!el || !leoGroup || !tie) return;
+
+        gsap.killTweensOf([el, leoGroup, tie]);
+
+        const outTl = gsap.timeline({
+          onComplete: () => {
+            target.appendChild(el);
+            onAtTarget?.();
+
+            const inTl = gsap.timeline({
+              onComplete: () => {
+                // React-JSX-Originalwerte sicherstellen, damit nachfolgender
+                // KI-Button-Morph (der container.scale 1.25 + tie scaleX/Y +
+                // leoGroup y:80 selbst animiert) sauber von der Default-Lage
+                // starten kann.
+                gsap.set(el, { scale: 1, transformOrigin: "50% 50%" });
+                gsap.set(tie, { scaleX: 1, scaleY: 1, opacity: 1, x: "-50%", transformOrigin: "50% 0%" });
+                gsap.set(leoGroup, { y: 0 });
+              },
+            });
+            // Container expandiert zuerst — back.out für sanften Pop
+            inTl.fromTo(el,
+              { scale: 0, transformOrigin: "50% 50%" },
+              { scale: 1, duration: 0.4, ease: "back.out(1.6)", transformOrigin: "50% 50%" },
+              0
+            );
+            // Tie kommt zurück — x:-50% explizit damit GSAP die Zentrierung mit-trackt
+            inTl.fromTo(tie,
+              { scaleX: 1.25, scaleY: 0.3, opacity: 0, x: "-50%", transformOrigin: "50% 0%" },
+              { scaleX: 1, scaleY: 1, opacity: 1, x: "-50%",
+                duration: 0.32, ease: "power2.out" },
+              0.08
+            );
+            // Leo taucht aus dem Boden auf (etwas nach Container)
+            inTl.fromTo(leoGroup,
+              { y: 60 },
+              { y: 0, duration: 0.4, ease: "back.out(1.4)" },
+              0.1
+            );
+          },
+        });
+
+        // leoGroup taucht zuerst ab (etwas vor dem Container-Collapse)
+        outTl.to(leoGroup, { y: 60, duration: 0.32, ease: "power2.in" }, 0);
+        // Tie kollabiert wie im KI-Button-Morph (scaleX:1.25, scaleY:0.3, opacity:0)
+        outTl.to(tie, {
+          scaleX: 1.25, scaleY: 0.3, opacity: 0, x: "-50%",
+          transformOrigin: "50% 0%",
+          duration: 0.3, ease: "power2.in",
+        }, 0.05);
+        // Container schrumpft zur Mitte (analog zum Morph, nur in die andere Richtung)
+        outTl.to(el, {
+          scale: 0, transformOrigin: "50% 50%",
+          duration: 0.32, ease: "power2.in",
+        }, 0.1);
+      };
+
+      // Hinflug: MotionPath wie Desktop (der „flip")
+      const flyTo = (target: HTMLElement, onComplete?: () => void) => {
+        const el = containerRef.current;
+        if (!el) return;
+        gsap.killTweensOf(el);
+
+        const startRect = el.getBoundingClientRect();
+        const startX = startRect.left;
+        const startY = startRect.top;
+        target.appendChild(el);
+        const endRect = el.getBoundingClientRect();
+        const dx = startX - endRect.left;
+        const dy = startY - endRect.top;
+
+        gsap.set(el, { x: dx, y: dy });
+        gsap.to(el, {
+          duration: 0.6,
+          ease: "power1.inOut",
+          motionPath: {
+            path: [
+              { x: dx, y: dy },
+              { x: dx * 0.5, y: dy + 100 },
+              { x: 0, y: 0 },
+            ],
+            curviness: 1.5,
+          },
+          onComplete() {
+            gsap.set(el, { clearProps: "x,y" });
+            onComplete?.();
+          },
+        });
+      };
+
+      const onScroll = () => {
         const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
         const home = document.getElementById("maya-floating-home");
         const slot = document.getElementById("maya-dock-slot-mobile");
-        if (!el || !buttons || !home || !slot) return;
+        if (!buttons || !home || !slot) return;
 
         const dist = window.innerHeight - buttons.getBoundingClientRect().bottom;
         const farFromBottom = dist >= 100;
 
         if (farFromBottom && !isAtHomeRef.current) {
-          // → Leo fliegt mit MotionPath nach unten-rechts, dann Logo-shortIn
+          // → MotionPath-Flug zur Home-Ecke, danach Logo-shortIn
           isAtHomeRef.current = true;
           setDocked(false);
-          gsap.killTweensOf(el);
-
-          const startRect = el.getBoundingClientRect();
-          const startX = startRect.left;
-          const startY = startRect.top;
-          home.appendChild(el);
-          const endRect = el.getBoundingClientRect();
-          const dx = startX - endRect.left;
-          const dy = startY - endRect.top;
-
-          gsap.set(el, { x: dx, y: dy, opacity: 1 });
-          gsap.to(el, {
-            duration: 0.6,
-            ease: "power1.inOut",
-            motionPath: {
-              path: [
-                { x: dx, y: dy },
-                { x: dx * 0.5, y: dy + 100 },
-                { x: 0, y: 0 },
-              ],
-              curviness: 1.5,
-            },
-            onComplete() {
-              gsap.set(el, { clearProps: "x,y" });
-              window.dispatchEvent(new CustomEvent("maya-flew-home"));
-            },
+          flyTo(home, () => {
+            window.dispatchEvent(new CustomEvent("maya-flew-home"));
           });
         } else if (!farFromBottom && isAtHomeRef.current) {
-          // → Logo erst ausanimieren, Leo parallel ausfaden, dann zurück in den Slot
+          // → Logo-shortOut signalisieren (parallel), Leo kollabiert,
+          //    Reparent in Slot, expandiert wieder
           isAtHomeRef.current = false;
           window.dispatchEvent(new CustomEvent("revolver-far-from-bottom"));
-          gsap.killTweensOf(el);
-          gsap.to(el, {
-            opacity: 0,
-            duration: 0.3,
-            ease: "power2.in",
-            onComplete: () => {
-              slot.appendChild(el);
-              setDocked(true);
-              gsap.to(el, {
-                opacity: 1,
-                duration: 0.4,
-                delay: 0.2,
-                ease: "power2.out",
-              });
-            },
+          collapseSwap(slot, () => {
+            setDocked(true);
           });
         }
       };
