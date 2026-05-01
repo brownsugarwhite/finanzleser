@@ -8,7 +8,6 @@ import { useDrag } from "@use-gesture/react";
 import { gsap, initGSAP } from "@/lib/gsapConfig";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
-import Spacer from "@/components/ui/Spacer";
 import InstagramDots from "@/components/ui/InstagramDots";
 import VisualLottie from "@/components/ui/VisualLottie";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
@@ -33,6 +32,7 @@ const PREVIEW_PADDING = 56;
 const PREVIEW_PADDING_TOP = 23;
 const IMAGE_WIDTH = 400;
 const IMAGE_HEIGHT = 320;
+const MOBILE_IMAGE_HEIGHT = 220;
 const IMAGE_RADIUS = 0;
 const IMAGE_RADIUS_CSS = `${IMAGE_RADIUS}px`;
 const PREVIEW_SHADOW = "0 3px 23px rgba(0, 0, 0, 0.02)";
@@ -84,6 +84,7 @@ function measureRectUnscaled(el: HTMLElement): DOMRect {
 // white bg, preview radius + shadow). Used at start of morph (to undo leftover morph styles
 // before measuring) and on morph complete (so subsequent nav-slider phase has correct layout).
 function restoreBoxToNatural(box: HTMLElement) {
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
   box.style.position = "relative";
   box.style.top = "";
   box.style.right = "";
@@ -94,7 +95,9 @@ function restoreBoxToNatural(box: HTMLElement) {
   box.style.margin = "";
   box.style.maxWidth = "";
   box.style.maxHeight = "";
-  box.style.overflow = "hidden";
+  // Mobile keeps overflow visible so the sticky bottom button can stick to the
+  // slide-wrapper scroll container; desktop clips the absolute image overlay.
+  box.style.overflow = isMobile ? "visible" : "hidden";
   box.style.zIndex = "";
   box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
   box.style.backgroundColor = "#ffffff";
@@ -102,6 +105,22 @@ function restoreBoxToNatural(box: HTMLElement) {
 }
 
 function restoreImageToNatural(image: HTMLElement) {
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+  if (isMobile) {
+    // On mobile the image lives in the text flow (between subtitle and description),
+    // not as an absolutely positioned overlay over the box top-left.
+    image.style.position = "relative";
+    image.style.top = "";
+    image.style.left = "";
+    image.style.right = "";
+    image.style.bottom = "";
+    image.style.width = "100%";
+    image.style.height = `${MOBILE_IMAGE_HEIGHT}px`;
+    image.style.margin = "";
+    image.style.zIndex = "";
+    image.style.borderRadius = IMAGE_RADIUS_CSS;
+    return;
+  }
   image.style.position = "absolute";
   image.style.top = `${PREVIEW_PADDING_TOP}px`;
   image.style.left = `${PREVIEW_PADDING}px`;
@@ -121,6 +140,19 @@ function restoreImageToNatural(image: HTMLElement) {
 export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, onGoTo, onClose, extrasCache, prefetchExtras }: Props) {
   const { posts } = ctx;
   const post = posts[currentIndex];
+  // Synchronous init: matchMedia is read before first render so SlidePreview's
+  // mobile branch + the open morph both see the correct viewport. Using the
+  // shared useIsMobile hook would init false → true after mount, causing the
+  // morph to measure desktop rects and the layout to jump on re-render.
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -444,7 +476,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const textEl = textRefs.current.get(post.slug);
     let textTween: gsap.core.Tween | null = null;
     if (textEl) {
-      const targetInnerWidth = tgtBoxRect.width - PREVIEW_PADDING * 2;
+      // Use the box's actual padding so mobile (24px) and desktop (56px) match
+      // their respective inner widths — otherwise the text wrapper width "jumps"
+      // when restoreBoxToNatural runs at the end of the morph.
+      const boxPaddingLeft = parseFloat(getComputedStyle(box).paddingLeft) || PREVIEW_PADDING;
+      const targetInnerWidth = tgtBoxRect.width - boxPaddingLeft * 2;
       textEl.style.width = `${targetInnerWidth}px`;
       box.style.alignItems = "center";
       textTween = gsap.fromTo(
@@ -972,6 +1008,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       style={{
         position: "fixed",
         inset: 0,
+        height: "100vh",        
         zIndex: 60,
         overflow: "hidden",
         pointerEvents: "auto",
@@ -981,8 +1018,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         ref={backdropRef}
         onClick={requestClose}
         style={{
-          position: "absolute",
-          inset: 0,
+          position: "absolute",          
           background: "transparent",
           cursor: "pointer",
           opacity: 0,
@@ -996,11 +1032,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         ref={leftNavRef}
         aria-hidden={false}
         style={{
-          position: "fixed",
-          inset: 0,
+          position: "fixed",          
           pointerEvents: "none",
           opacity: 0,
           zIndex: 4,
+          display: isMobile ? "none" : undefined,
         }}
       >
         {/* Vertikale Linie links */}
@@ -1109,6 +1145,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           pointerEvents: "none",
           opacity: 0,
           zIndex: 4,
+          display: isMobile ? "none" : undefined,
         }}
       >
         {/* Vertikale Linie rechts */}
@@ -1248,7 +1285,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "center",
-                padding: "95px 130px 120px",
+                padding: isMobile ? "95px 13px 120px" : "95px 130px 120px",
                 overflowY: "auto",
                 overflowX: "hidden",
                 boxSizing: "border-box",
@@ -1266,6 +1303,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 setInfoRef={setInfoRef(p.slug)}
                 setCategoryRef={setCategoryRef(p.slug)}
                 onClose={requestClose}
+                isMobile={isMobile}
+                phase={phase}
               />
             </div>
           );
@@ -1385,6 +1424,8 @@ interface SlidePreviewProps {
   setInfoRef: (el: HTMLDivElement | null) => void;
   setCategoryRef: (el: HTMLElement | null) => void;
   onClose: () => void;
+  isMobile: boolean;
+  phase: Phase;
 }
 
 function SlidePreview({
@@ -1396,6 +1437,8 @@ function SlidePreview({
   setInfoRef,
   setCategoryRef,
   onClose,
+  isMobile,
+  phase,
 }: SlidePreviewProps) {
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
@@ -1403,6 +1446,268 @@ function SlidePreview({
   const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
   const imageUrl = post.featuredImage?.node.sourceUrl;
   const toolsToShow = useMemo(() => (extras?.tools ?? []).slice(0, 3), [extras]);
+
+  // Image element — same DOM identity in both layouts; only positioning style differs.
+  const imageElement = (
+    <div
+      ref={setImageRef}
+      data-flip-id={`preview-${post.slug}-image`}
+      style={
+        isMobile
+          ? {
+              position: "relative",
+              width: "100%",
+              height: MOBILE_IMAGE_HEIGHT,
+              background: "transparent",
+              borderRadius: IMAGE_RADIUS_CSS,
+              pointerEvents: "none",
+              overflow: "hidden",
+              flexShrink: 0,
+            }
+          : {
+              position: "absolute",
+              top: PREVIEW_PADDING_TOP,
+              left: PREVIEW_PADDING,
+              width: IMAGE_WIDTH,
+              height: IMAGE_HEIGHT,
+              background: "transparent",
+              borderRadius: IMAGE_RADIUS_CSS,
+              pointerEvents: "none",
+              overflow: "hidden",
+            }
+      }
+    >
+      <VisualLottie seed={post.slug} />
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={post.featuredImage?.node.altText || ""}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            zIndex: 1,
+            display: "block",
+          }}
+        />
+      )}
+      {subCategory && (
+        <span
+          ref={setCategoryRef}
+          style={{
+            position: "absolute",
+            top: 13,
+            left: 13,
+            zIndex: 2,
+            fontFamily: "var(--font-body)",
+            fontSize: 12,
+            fontWeight: 600,
+            letterSpacing: "0.02em",
+            textTransform: "uppercase",
+            color: "var(--color-text-primary)",
+            background: "rgba(255, 255, 255, 0.85)",
+            padding: "5px 10px",
+            borderRadius: 4,
+            opacity: 0,
+          }}
+        >
+          {subCategory.name}
+        </span>
+      )}
+      <div
+        ref={setInfoRef}
+        style={{
+          position: "absolute",
+          bottom: 13,
+          right: 13,
+          width: 36,
+          height: 36,
+          borderRadius: "50%",
+          border: "1px solid var(--color-text-primary)",
+          background: "transparent",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <svg width="9" height="17" viewBox="0 0 9 17" fill="var(--color-text-primary)" aria-hidden>
+          <path d="M7.16051 0L7.35875 0.0146957C7.47514 0.0235131 7.58758 0.0333103 7.70001 0.0646611C8.13695 0.186146 8.51174 0.421277 8.74845 0.813163C8.89443 1.05515 8.9753 1.31967 8.99503 1.60183C9.06111 2.53452 8.46637 3.35552 7.59843 3.67197C7.12993 3.84244 6.55295 3.86595 6.07459 3.72193C5.69092 3.60633 5.36149 3.36042 5.15536 3.0185C5.04489 2.83529 4.97881 2.64033 4.93738 2.43067C4.90582 2.27098 4.90878 2.11324 4.91371 1.95061C4.91963 1.75467 4.96007 1.57342 5.03207 1.39021C5.19086 0.985592 5.46999 0.642693 5.83295 0.397764C6.15448 0.181247 6.51941 0.0440871 6.90703 0.00881743C6.94253 0.00587829 6.97607 0.0156754 6.99974 0H7.16149L7.16051 0Z" />
+          <path d="M4.73725 16.1878C4.03303 16.5836 3.15227 16.9305 2.34251 16.9922C2.17977 17.0039 2.02098 17 1.85627 16.9932C1.54953 16.9804 1.25462 16.907 0.990295 16.7502C0.725966 16.5934 0.547446 16.3495 0.464596 16.0575C0.345254 15.6382 0.422185 15.1346 0.511939 14.7095C0.697363 13.8316 1.05342 12.8784 1.4006 12.0456L3.01517 8.16888L3.4738 7.04025C3.54482 6.86488 3.46394 6.5357 3.23314 6.48769C3.09112 6.4583 2.94613 6.49161 2.81298 6.54353C2.47172 6.67775 2.03084 7.0765 1.78328 7.34592L1.15698 8.02878C0.996213 8.20415 0.840377 8.37364 0.666788 8.53529C0.596761 8.60191 0.520815 8.6558 0.437966 8.70086C0.355117 8.74593 0.276213 8.73711 0.197309 8.69695C0.00399355 8.59897 -0.0472941 8.41185 0.0404867 8.22472C0.0848703 8.12969 0.134185 8.04054 0.195336 7.95432C0.308761 7.79561 0.417254 7.63983 0.557309 7.50071L1.48147 6.58076C2.07523 5.98999 3.01123 5.40511 3.8052 5.11413C4.47194 4.87018 5.20377 4.73596 5.9149 4.79474C6.36071 4.83099 6.83413 5.01616 7.11128 5.38159C7.25725 5.5746 7.36378 5.80287 7.38745 6.04682C7.41112 6.29077 7.41802 6.54549 7.38449 6.79728C7.3332 7.18525 7.2178 7.56636 7.07479 7.93277L5.07457 13.0714L4.98679 13.2938C4.85167 13.6367 4.64454 14.1226 4.63566 14.4861C4.63271 14.637 4.70569 14.7741 4.84279 14.8407C5.0075 14.9221 5.25013 14.8104 5.39808 14.7232C5.60619 14.6017 5.78569 14.4537 5.96323 14.2892C6.19501 14.0736 6.40805 13.8522 6.62701 13.6239L7.22273 13.0018C7.31446 12.9068 7.40717 12.8245 7.50975 12.7422C7.55413 12.7069 7.61134 12.6707 7.66657 12.6648C7.83523 12.6491 8.01671 12.8764 7.98514 13.0772C7.94273 13.3525 7.60147 13.7915 7.41605 14.008C7.17736 14.2862 6.92093 14.5419 6.64871 14.7908C6.06482 15.3257 5.42865 15.7969 4.73725 16.1859V16.1878Z" />
+        </svg>
+      </div>
+    </div>
+  );
+
+  const finanztoolsBlock = toolsToShow.length > 0 && (
+    <div>
+      <p
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 12,
+          fontWeight: 600,
+          letterSpacing: "0.04em",
+          textTransform: "uppercase",
+          color: "var(--color-text-medium)",
+          margin: "0 0 10px 0",
+        }}
+      >
+        Finanztools in diesem Artikel
+      </p>
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        {toolsToShow.map((t) => (
+          <span
+            key={t}
+            style={{
+              backgroundColor: TOOL_META[t].color,
+              color: "#ffffff",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 14,
+              padding: "6px 14px",
+              borderRadius: 0,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {TOOL_META[t].label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
+  const lesedauerSpan = (
+    <span
+      style={{
+        fontFamily: "var(--font-body)",
+        fontSize: 15,
+        color: "var(--color-text-medium)",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {extras && extras.readingTime > 0
+        ? `Lesedauer: ${extras.readingTime} Min.`
+        : " "}
+    </span>
+  );
+
+  const descriptionEl = extras?.firstParagraph ? (
+    <p
+      lang="de"
+      style={{
+        fontFamily: "Merriweather, serif",
+        fontWeight: 400,
+        fontSize: isMobile ? "16px" : "18px",
+        lineHeight: 1.6,
+        color: "var(--color-text-primary)",
+        margin: 0,
+      }}
+    >
+      {extras.firstParagraph}
+    </p>
+  ) : (
+    <SkeletonParagraph />
+  );
+
+  if (isMobile) {
+    const bottomFadeStyle: React.CSSProperties = {
+      opacity: phase === "slider" ? 1 : 0,
+      transition: "opacity 0.35s ease-out",
+    };
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: 1200,
+        }}
+      >
+        <div
+          ref={setBoxRef}
+          data-flip-id={`preview-${post.slug}-box`}
+          style={{
+            position: "relative",
+            width: "100%",
+            overflow: "visible",
+            background: "#ffffff",
+            borderRadius: PREVIEW_BORDER_RADIUS,
+            boxShadow: PREVIEW_SHADOW,
+            padding: 24,
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* Top text — faded by morph via setTextRef */}
+          <div
+            ref={setTextRef}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              opacity: 0,
+            }}
+          >
+            <p lang="de" style={textSublineStyle}>
+              {post.title}
+            </p>
+            {untertitel && (
+              <p lang="de" style={{ ...textTitleStyle, fontSize: "26px" }}>
+                {untertitel}
+              </p>
+            )}
+          </div>
+
+          {/* Image — outside textRef so opacity 0 of textRef doesn't hide it.
+              The wrapper holds a fixed height so the slot doesn't collapse when
+              the image is taken out of flow (position: fixed) during the morph.
+              width: 100% prevents collapse during the brief window where the
+              morph applies box.alignItems = "center" before textTween clears it. */}
+          <div
+            style={{
+              marginTop: 20,
+              width: "100%",
+              height: MOBILE_IMAGE_HEIGHT,
+              flexShrink: 0,
+            }}
+          >
+            {imageElement}
+          </div>
+
+          {/* Bottom block — fades via phase-driven CSS transition */}
+          <div style={{ marginTop: 20, ...bottomFadeStyle }}>{descriptionEl}</div>
+          <div
+            style={{
+              marginTop: 24,
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              gap: 16,
+              ...bottomFadeStyle,
+            }}
+          >
+            <div style={{ flex: 1, minWidth: 0 }}>{finanztoolsBlock}</div>
+            {lesedauerSpan}
+          </div>
+
+          {/* Button — outside textRef so it's not faded with the morph */}
+          <div
+            style={{
+              alignSelf: "flex-end",
+              marginTop: 24,
+              ...bottomFadeStyle,
+            }}
+          >
+            <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
+              <PreviewReadButton label="Ratgeber lesen" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
