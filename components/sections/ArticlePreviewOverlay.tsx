@@ -1009,7 +1009,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 150px)",
-            left: "max(0px, calc(50% - 600px - 24px))",
+            left: "max(106px, calc(50% - 624px))",
             width: 1,
             height: 300,
             transformOrigin: "50% 50%",
@@ -1024,7 +1024,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 11px)",
-            left: `max(20px, calc(50% - ${hoverSide === "left" ? 706 : 690}px))`,
+            left: `max(${hoverSide === "left" ? 24 : 40}px, calc(50% - ${hoverSide === "left" ? 706 : 690}px))`,
             width: hoverSide === "left" ? 60 : 50,
             height: 22,
             pointerEvents: "none",
@@ -1086,8 +1086,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 150px)",
-            left: "max(20px, calc(50% - 706px))",
-            right: "calc(100% - max(0px, calc(50% - 600px - 24px)) - 1px)",
+            left: "max(24px, calc(50% - 706px))",
+            right: "calc(100% - max(106px, calc(50% - 624px)) - 1px)",
             height: 300,
             background: "transparent",
             border: "none",
@@ -1117,7 +1117,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 150px)",
-            right: "max(0px, calc(50% - 600px - 24px))",
+            right: "max(106px, calc(50% - 624px))",
             width: 1,
             height: 300,
             transformOrigin: "50% 50%",
@@ -1132,7 +1132,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 11px)",
-            right: `max(20px, calc(50% - ${hoverSide === "right" ? 706 : 690}px))`,
+            right: `max(${hoverSide === "right" ? 24 : 40}px, calc(50% - ${hoverSide === "right" ? 706 : 690}px))`,
             width: hoverSide === "right" ? 60 : 50,
             height: 22,
             pointerEvents: "none",
@@ -1194,8 +1194,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           style={{
             position: "fixed",
             top: "calc(50% - 150px)",
-            right: "max(20px, calc(50% - 706px))",
-            left: "calc(100% - max(0px, calc(50% - 600px - 24px)) - 1px)",
+            right: "max(24px, calc(50% - 706px))",
+            left: "calc(100% - max(106px, calc(50% - 624px)) - 1px)",
             height: 300,
             background: "transparent",
             border: "none",
@@ -1248,7 +1248,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "center",
-                padding: "95px 20px 120px",
+                padding: "95px 130px 120px",
                 overflowY: "auto",
                 overflowX: "hidden",
                 boxSizing: "border-box",
@@ -1284,7 +1284,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
-          padding: "95px 20px 120px",
+          padding: "95px 130px 120px",
           pointerEvents: "none",
           zIndex: 5,
         }}
