@@ -35,7 +35,7 @@ type KategorieBlock = {
 export default function LandingPage() {
   return (
     <>
-      <style>{`.logo-wrapper{pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="maya"]{visibility:hidden}`}</style>
+      <style>{`.logo-wrapper{pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="leo"]{visibility:hidden}`}</style>
       <LandingIntro />
       <main className="bg-white">
         <Suspense fallback={null}>

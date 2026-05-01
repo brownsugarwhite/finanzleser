@@ -32,20 +32,20 @@
    Beim Scrollen klebt er ab top:13px. margin-bottom:-70px damit der Slot
    keinen Layout-Platz verbraucht (nächstes Element überlagert).
    Nur auf Landing + Mobile sichtbar. Leo wird per JS rein-/rausreparented. */
-#maya-dock-slot-mobile {
+#leo-dock-slot-mobile {
   display: none;
   position: sticky;
   top: 13px;
   margin-top: 13px;
   margin-left: 16px;
-  margin-bottom: -83px;
-  width: 70px;
-  height: 70px;
+  margin-bottom: -77px;       /* -(13 + 64) damit Slot keinen Layout-Platz frisst */
+  width: 64px;                /* Mobile-Leo = 64×64 (Desktop = 70×70) */
+  height: 64px;
   z-index: 62;
   pointer-events: auto;
 }
 @media (max-width: 767px) {
-  body[data-landing] #maya-dock-slot-mobile {
+  body[data-landing] #leo-dock-slot-mobile {
     display: flex;
     align-items: center;
     justify-content: center;

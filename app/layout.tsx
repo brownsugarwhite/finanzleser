@@ -11,7 +11,7 @@ import MegaMenuWrapper from "@/components/layout/MegaMenuWrapper";
 import FinanztoolsMenu from "@/components/layout/FinanztoolsMenu";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
-import MayaIcon from "@/components/ui/MayaIcon";
+import LeoIcon from "@/components/ui/LeoIcon";
 import TopBanner from "@/components/ui/TopBanner";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
@@ -105,7 +105,7 @@ export default async function RootLayout({
         {/* Mobile-only Leo Dock-Slot — sticky top-left, gegenüber Bookmark.
             Position direkt nach TopBanner im Flow, sticky ab top:13px.
             Leo wird zur Laufzeit per JS hier rein-/rausreparented. */}
-        <div id="maya-dock-slot-mobile" />
+        <div id="leo-dock-slot-mobile" />
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>
@@ -125,7 +125,7 @@ export default async function RootLayout({
             {children}
           </div>
           <ProgressiveBlur height={120} />
-          <MayaIcon />
+          <LeoIcon />
         </ArticlePreviewProvider>
         </NavProvider>
         </Providers>

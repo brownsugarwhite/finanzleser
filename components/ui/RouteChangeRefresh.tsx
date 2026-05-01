@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 
 /** On each route change: tears down stale ScrollTriggers in persistent
- *  components (LogoBar, BookmarkNav, MayaIcon …) and rebuilds them against
+ *  components (LogoBar, BookmarkNav, LeoIcon …) and rebuilds them against
  *  the new page's DOM. Without this, triggers created on the landing page
  *  (e.g. attached to `.landing-nav[data-topnav]`) keep targeting now-removed
  *  nodes after navigation, leaving the burger reveal broken until reload. */

@@ -33,7 +33,7 @@ export default function VersichererSelect({ value, onChange }: Props) {
   const flat = useMemo(() => groups.flatMap((g) => g.entries), [groups]);
 
   // Native Click-Listener am Trigger (umgeht React-Event-Delegation,
-  // weil Maya per gsap-Flip außerhalb des React-Root-Containers verschoben wird)
+  // weil Leo per gsap-Flip außerhalb des React-Root-Containers verschoben wird)
   useEffect(() => {
     const t = triggerRef.current;
     if (!t) return;
@@ -190,7 +190,7 @@ export default function VersichererSelect({ value, onChange }: Props) {
         </button>
       )}
 
-      {/* Dropdown-Panel via Portal (sonst von .maya-badge overflow:hidden geclippt) */}
+      {/* Dropdown-Panel via Portal (sonst von .leo-badge overflow:hidden geclippt) */}
       {isOpen && panelPos && typeof document !== "undefined" && createPortal(
         <div
           ref={panelRef}

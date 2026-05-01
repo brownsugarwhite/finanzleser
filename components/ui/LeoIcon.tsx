@@ -16,7 +16,13 @@ const PUPIL_RADIUS = 80;
 const MAX_OFFSET = 23;
 const COLOR = "#000000";
 
-export default function MayaIcon() {
+const LEO_SIZE_DESKTOP = 70;
+const LEO_SIZE_MOBILE = 64;
+const isMobileMQ = "(max-width: 767px)";
+const checkMobile = () =>
+  typeof window !== "undefined" && window.matchMedia(isMobileMQ).matches;
+
+export default function LeoIcon() {
   const containerRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const tieRef = useRef<SVGSVGElement>(null);
@@ -40,42 +46,58 @@ export default function MayaIcon() {
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
   const isAtHomeRef = useRef(false); // Mobile: Leo aktuell unten-rechts (true) oder im Sticky-Slot (false)?
+  const [size, setSize] = useState(LEO_SIZE_DESKTOP);
   const pathname = usePathname();
+
+  // Reactive viewport-size (mobile = 64, desktop = 70). Updated on matchMedia change.
+  useEffect(() => {
+    const mq = window.matchMedia(isMobileMQ);
+    const update = () => setSize(mq.matches ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   // Detect landing page + set initial home container + docked state.
   // Der Home-Container ist die "feste Ecke" (position:fixed bottom-right),
   // in der die Batch wohnt wenn sie nicht gerade in einem anderen Slot
   // (Search-Pill oder KI-Section) angedockt ist.
-  // Re-runs bei Navigation (pathname-Änderung), damit Maya nach Page-Wechsel
+  // Re-runs bei Navigation (pathname-Änderung), damit Leo nach Page-Wechsel
   // wieder einen gültigen Parent hat — sonst hängt sie im DOM-Limbo wenn ein
-  // page-spezifischer Slot (z.B. maya-dock-slot, maya-dock-slot-ai) entfernt wird.
+  // page-spezifischer Slot (z.B. leo-dock-slot, leo-dock-slot-ai) entfernt wird.
   useEffect(() => {
-    let home = document.getElementById("maya-floating-home");
+    let home = document.getElementById("leo-floating-home");
     if (!home) {
       home = document.createElement("div");
-      home.id = "maya-floating-home";
+      home.id = "leo-floating-home";
+      const homeSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       Object.assign(home.style, {
         position: "fixed",
         bottom: "23px",
         right: "36px",
-        width: "70px",
-        height: "70px",
+        width: `${homeSize}px`,
+        height: `${homeSize}px`,
         zIndex: "100",
       });
       document.body.appendChild(home);
+    } else {
+      // Existing home — Maße aktualisieren falls Mobile/Desktop gewechselt
+      const homeSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
+      home.style.width = `${homeSize}px`;
+      home.style.height = `${homeSize}px`;
     }
 
     const el = containerRef.current;
     if (!el) return;
 
-    // State zurücksetzen — falls vorherige Page Maya in Chat- oder Dock-Mode hatte
+    // State zurücksetzen — falls vorherige Page Leo in Chat- oder Dock-Mode hatte
     dockedInSlot.current = false;
     if (chatOpenRef.current) {
       chatOpenRef.current = false;
       document.body.style.overflow = "";
-      const backdrop = document.getElementById("maya-chat-backdrop");
+      const backdrop = document.getElementById("leo-chat-backdrop");
       if (backdrop) backdrop.style.display = "none";
-      const chatCenter = document.getElementById("maya-chat-center");
+      const chatCenter = document.getElementById("leo-chat-center");
       if (chatCenter) chatCenter.style.pointerEvents = "none";
       window.dispatchEvent(new CustomEvent("menu-closed"));
     }
@@ -84,8 +106,9 @@ export default function MayaIcon() {
     el.style.position = "relative";
     el.style.top = "";
     el.style.left = "";
-    el.style.width = "70px";
-    el.style.height = "70px";
+    const elSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
+    el.style.width = `${elSize}px`;
+    el.style.height = `${elSize}px`;
     gsap.set(el, { x: 0, y: 0, clearProps: "transform" });
     // Morph-TL auf Anfang zurück (falls auf voriger Page mid-play)
     if (morphTlRef.current && morphTlRef.current.progress() > 0) {
@@ -106,7 +129,7 @@ export default function MayaIcon() {
       const initiallyFarFromBottom = buttons
         ? window.innerHeight - buttons.getBoundingClientRect().bottom >= 100
         : false;
-      const slot = document.getElementById("maya-dock-slot-mobile");
+      const slot = document.getElementById("leo-dock-slot-mobile");
       if (initiallyFarFromBottom || !slot) {
         isAtHomeRef.current = true;
         setDocked(false);
@@ -118,7 +141,7 @@ export default function MayaIcon() {
     } else if (isLanding.current && window.scrollY <= 5) {
       // Desktop: dock nur am Page-Top in den Search-Pill-Slot
       setDocked(true);
-      const slot = document.getElementById("maya-dock-slot");
+      const slot = document.getElementById("leo-dock-slot");
       if (slot) {
         slot.appendChild(el);
       } else {
@@ -171,7 +194,7 @@ export default function MayaIcon() {
                 // leoGroup y:80 selbst animiert) sauber von der Default-Lage
                 // starten kann.
                 gsap.set(el, { scale: 1, transformOrigin: "50% 50%" });
-                gsap.set(tie, { scaleX: 1, scaleY: 1, opacity: 1, x: "-50%", transformOrigin: "50% 0%" });
+                gsap.set(tie, { scale: 1, opacity: 1, x: "-50%", transformOrigin: "50% 50%" });
                 gsap.set(leoGroup, { y: 0 });
               },
             });
@@ -181,10 +204,10 @@ export default function MayaIcon() {
               { scale: 1, duration: 0.4, ease: "back.out(1.6)", transformOrigin: "50% 50%" },
               0
             );
-            // Tie kommt zurück — x:-50% explizit damit GSAP die Zentrierung mit-trackt
+            // Tie kommt zurück — uniform scale (gleichförmig zur Mitte), x:-50% explizit damit GSAP die Zentrierung mit-trackt
             inTl.fromTo(tie,
-              { scaleX: 1.25, scaleY: 0.3, opacity: 0, x: "-50%", transformOrigin: "50% 0%" },
-              { scaleX: 1, scaleY: 1, opacity: 1, x: "-50%",
+              { scale: 0, opacity: 0, x: "-50%", transformOrigin: "50% 50%" },
+              { scale: 1, opacity: 1, x: "-50%",
                 duration: 0.32, ease: "power2.out" },
               0.08
             );
@@ -199,10 +222,10 @@ export default function MayaIcon() {
 
         // leoGroup taucht zuerst ab (etwas vor dem Container-Collapse)
         outTl.to(leoGroup, { y: 60, duration: 0.32, ease: "power2.in" }, 0);
-        // Tie kollabiert wie im KI-Button-Morph (scaleX:1.25, scaleY:0.3, opacity:0)
+        // Tie kollabiert uniform (gleichförmig auf 0 zur Mitte) — keine Quetschung mehr
         outTl.to(tie, {
-          scaleX: 1.25, scaleY: 0.3, opacity: 0, x: "-50%",
-          transformOrigin: "50% 0%",
+          scale: 0, opacity: 0, x: "-50%",
+          transformOrigin: "50% 50%",
           duration: 0.3, ease: "power2.in",
         }, 0.05);
         // Container schrumpft zur Mitte (analog zum Morph, nur in die andere Richtung)
@@ -247,8 +270,8 @@ export default function MayaIcon() {
 
       const onScroll = () => {
         const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
-        const home = document.getElementById("maya-floating-home");
-        const slot = document.getElementById("maya-dock-slot-mobile");
+        const home = document.getElementById("leo-floating-home");
+        const slot = document.getElementById("leo-dock-slot-mobile");
         if (!buttons || !home || !slot) return;
 
         const dist = window.innerHeight - buttons.getBoundingClientRect().bottom;
@@ -259,7 +282,7 @@ export default function MayaIcon() {
           isAtHomeRef.current = true;
           setDocked(false);
           flyTo(home, () => {
-            window.dispatchEvent(new CustomEvent("maya-flew-home"));
+            window.dispatchEvent(new CustomEvent("leo-flew-home"));
           });
         } else if (!farFromBottom && isAtHomeRef.current) {
           // → Logo-shortOut signalisieren (parallel), Leo kollabiert,
@@ -285,7 +308,7 @@ export default function MayaIcon() {
         hasUndocked.current = true;
 
         const el = containerRef.current;
-        const home = document.getElementById("maya-floating-home");
+        const home = document.getElementById("leo-floating-home");
         if (!home) return;
 
         // Capture start position
@@ -322,7 +345,7 @@ export default function MayaIcon() {
         });
 
         setDocked(false);
-        window.dispatchEvent(new CustomEvent("maya-undocked"));
+        window.dispatchEvent(new CustomEvent("leo-undocked"));
 
         window.removeEventListener("scroll", handleScroll);
       }
@@ -332,8 +355,10 @@ export default function MayaIcon() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [docked]);
 
-  // Pupil tracking
+  // Pupil tracking + Hover-Effekt nur auf Desktop. Mobile = statische Augen.
   useEffect(() => {
+    if (checkMobile()) return;
+
     function handleMouseMove(e: MouseEvent) {
       if (!wasInWindow.current) {
         wasInWindow.current = true;
@@ -445,7 +470,7 @@ export default function MayaIcon() {
     };
   }, [pathname]);
 
-  // Dock: MayaIcon flippt in den reservierten Slot unter den Bubbles und
+  // Dock: LeoIcon flippt in den reservierten Slot unter den Bubbles und
   // expandiert zum Chat-Eingabefeld. Reversibel beim Zurückscrollen.
   useEffect(() => {
     const container = containerRef.current;
@@ -453,7 +478,7 @@ export default function MayaIcon() {
     const input = inputRef.current;
     if (!container || !badge || !input) return;
 
-    const slot = document.getElementById("maya-dock-slot-ai");
+    const slot = document.getElementById("leo-dock-slot-ai");
     if (!slot) return;
 
     let trigger: ScrollTrigger | null = null;
@@ -476,9 +501,10 @@ export default function MayaIcon() {
 
       const state = Flip.getState(container, { props: "width,height" });
 
+      const bubbleH = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       slot.appendChild(container);
       container.style.width = "410px";
-      container.style.height = "70px";
+      container.style.height = `${bubbleH}px`;
 
       Flip.from(state, {
         duration: 0.75,
@@ -503,14 +529,15 @@ export default function MayaIcon() {
       gsap.to(input, { opacity: 0, duration: 0.15, ease: "power2.out" });
       input.style.pointerEvents = "none";
 
-      const home = document.getElementById("maya-floating-home");
+      const home = document.getElementById("leo-floating-home");
       if (!home) return;
 
       const state = Flip.getState(container, { props: "width,height" });
 
+      const homeS = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       home.appendChild(container);
-      container.style.width = "70px";
-      container.style.height = "70px";
+      container.style.width = `${homeS}px`;
+      container.style.height = `${homeS}px`;
 
       Flip.from(state, {
         duration: 0.6,
@@ -545,10 +572,10 @@ export default function MayaIcon() {
     if (!container || !spikeRight || !input) return;
 
     // Chat-Center Container (permanent, zentriert im Viewport, 560×140)
-    let chatCenter = document.getElementById("maya-chat-center");
+    let chatCenter = document.getElementById("leo-chat-center");
     if (!chatCenter) {
       chatCenter = document.createElement("div");
-      chatCenter.id = "maya-chat-center";
+      chatCenter.id = "leo-chat-center";
       Object.assign(chatCenter.style, {
         position: "fixed",
         top: "50%",
@@ -563,10 +590,10 @@ export default function MayaIcon() {
     }
 
     // Backdrop für Klick-zu-schließen (unter chat-center, über allem anderen)
-    let backdrop = document.getElementById("maya-chat-backdrop");
+    let backdrop = document.getElementById("leo-chat-backdrop");
     if (!backdrop) {
       backdrop = document.createElement("div");
-      backdrop.id = "maya-chat-backdrop";
+      backdrop.id = "leo-chat-backdrop";
       Object.assign(backdrop.style, {
         position: "fixed",
         inset: "0",
@@ -594,7 +621,7 @@ export default function MayaIcon() {
       // Wenn vom Landing-Page-Top geklickt wurde: LandingIntro soll die search-pill
       // auf volle Breite expanden und die Sprechblase ausfaden (wie bei normalem Scroll).
       if (wasLandingDocked) {
-        window.dispatchEvent(new CustomEvent("maya-undocked"));
+        window.dispatchEvent(new CustomEvent("leo-undocked"));
       }
 
       const morphTl = morphTlRef.current;
@@ -608,14 +635,14 @@ export default function MayaIcon() {
       container.dataset.state = "chat";
 
       // Flip-State capturen (Original-Position in search-pill / home / dock-slot)
-      // Dann reparent + resize SOFORT — Maya raus aus allen blur-baren Ancestors
+      // Dann reparent + resize SOFORT — Leo raus aus allen blur-baren Ancestors
       // damit ContentScaler ihr nichts anhaben kann.
       const state = Flip.getState(container, { props: "width,height" });
       chatCenterEl.appendChild(container);
       container.style.width = "560px";
       container.style.height = "140px";
 
-      // Erst JETZT menu-opened → Maya ist bereits body-child
+      // Erst JETZT menu-opened → Leo ist bereits body-child
       document.body.style.overflow = "hidden";
       backdropEl.style.display = "block";
       backdropEl.addEventListener("click", closeChat);
@@ -647,14 +674,15 @@ export default function MayaIcon() {
 
       // Wenn User inzwischen gescrollt hat (z.B. durch scrollToBookmarkSticky beim Open),
       // ist der search-pill-slot collapsed (width 0). In dem Fall statt dessen zu home zurück.
-      if (prev.id === "maya-dock-slot" && window.scrollY > 5) {
-        const home = document.getElementById("maya-floating-home");
+      if (prev.id === "leo-dock-slot" && window.scrollY > 5) {
+        const home = document.getElementById("leo-floating-home");
         if (home) prev = home;
       }
 
-      const prevIsDockSlot = prev.id === "maya-dock-slot-ai";
-      const targetWidth = prevIsDockSlot ? 410 : 70;
-      const targetHeight = 70;
+      const prevIsDockSlot = prev.id === "leo-dock-slot-ai";
+      const defSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
+      const targetWidth = prevIsDockSlot ? 410 : defSize;
+      const targetHeight = prevIsDockSlot ? defSize : defSize;
 
       // Un-blur anstoßen (ContentScaler) + Backdrop weg
       backdropEl.removeEventListener("click", closeChat);
@@ -674,7 +702,7 @@ export default function MayaIcon() {
 
       // Target viewport rect berechnen. Wenn prev in einem skalierten Ancestor liegt
       // (.scalable-landing oder [data-scale-extended] sind aktuell bei scale 0.95 vom
-      // Content-Scaler), müssen wir die UNscaled-Rect berechnen — sonst landet Maya
+      // Content-Scaler), müssen wir die UNscaled-Rect berechnen — sonst landet Leo
       // am falschen Platz und springt beim Reparent (un-blur → scale zurück auf 1).
       const rawRect = prev.getBoundingClientRect();
       // .scalable-content ist der Fallback-Scaler auf Nicht-Landing-Pages
@@ -701,13 +729,13 @@ export default function MayaIcon() {
       // Laufende Tweens auf container killen (Flip-Leftovers etc.)
       gsap.killTweensOf(container);
 
-      // Maya auf position:absolute 0,0 innerhalb chat-center, explizite Start-Werte
+      // Leo auf position:absolute 0,0 innerhalb chat-center, explizite Start-Werte
       container.style.position = "absolute";
       container.style.top = "0";
       container.style.left = "0";
       gsap.set(container, { x: 0, y: 0 });
 
-      // Manuelle Animation: Maya BLEIBT in chat-center während der gesamten Close-Anim,
+      // Manuelle Animation: Leo BLEIBT in chat-center während der gesamten Close-Anim,
       // damit sie nicht in einen (noch) geblurrten Ancestor reparented wird.
       gsap.to(container, {
         x: deltaX,
@@ -749,16 +777,14 @@ export default function MayaIcon() {
     };
   }, []);
 
-  const size = 70;
-
   return (
     <div
       ref={containerRef}
-      data-flip-id="maya"
+      data-flip-id="leo"
       data-state="default"
-      className="maya-batch-container"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="leo-batch-container"
+      onMouseEnter={() => { if (!checkMobile()) setIsHovered(true); }}
+      onMouseLeave={() => { if (!checkMobile()) setIsHovered(false); }}
       style={{
         position: "relative",
         width: size,
@@ -798,7 +824,7 @@ export default function MayaIcon() {
       >
         <svg
           ref={spikeRightRef}
-          className="maya-spike-img"
+          className="leo-spike-img"
           viewBox="0 0 20 24"
           aria-hidden="true"
           style={{
@@ -816,7 +842,7 @@ export default function MayaIcon() {
 
       <div
         ref={badgeRef}
-        className="maya-badge"
+        className="leo-badge"
         style={{
           position: "relative",
           width: "100%",
@@ -891,7 +917,7 @@ export default function MayaIcon() {
             type="text"
             placeholder="Sende Leo eine Nachricht ..."
             size={29}
-            className="maya-chat-input"
+            className="leo-chat-input"
             style={{
               background: "transparent",
               border: "none",
@@ -907,7 +933,7 @@ export default function MayaIcon() {
           />
 
           <div
-            className="maya-versicherer-slot"
+            className="leo-versicherer-slot"
             style={{
               marginTop: "auto",
               alignSelf: "flex-end",
@@ -925,7 +951,7 @@ export default function MayaIcon() {
           </div>
         </div>
         <style>{`
-          .maya-chat-input::placeholder {
+          .leo-chat-input::placeholder {
             color: #636A5F;
             opacity: 1;
           }
@@ -968,35 +994,35 @@ export default function MayaIcon() {
       </div>
 
       <style>{`
-        .maya-batch-container .maya-badge {
+        .leo-batch-container .leo-badge {
           background: rgba(255, 255, 255, 0.8);
           box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
           transition: background 0.35s ease, box-shadow 0.35s ease;
         }
-        .maya-batch-container[data-state="morphed"] .maya-badge {
+        .leo-batch-container[data-state="morphed"] .leo-badge {
           background: #E9FFDE;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
         }
-        .maya-batch-container[data-state="chat"] .maya-badge {
+        .leo-batch-container[data-state="chat"] .leo-badge {
           background: rgba(255, 255, 255, 0.8);
           box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
         }
 
         /* Versicherer-Trigger nur im echten Chat-Modus zeigen,
            nicht im morphed-State (KI-Section-Pille) */
-        .maya-batch-container .maya-versicherer-slot {
+        .leo-batch-container .leo-versicherer-slot {
           display: none;
         }
-        .maya-batch-container[data-state="chat"] .maya-versicherer-slot {
+        .leo-batch-container[data-state="chat"] .leo-versicherer-slot {
           display: block;
         }
 
-        .maya-batch-container .maya-spike-img {
+        .leo-batch-container .leo-spike-img {
           opacity: 0;
           transform: scale(0);
           transition: opacity 0.35s ease, transform 0.35s ease;
         }
-        .maya-batch-container[data-state="morphed"] .maya-spike-img {
+        .leo-batch-container[data-state="morphed"] .leo-spike-img {
           opacity: 1;
           transform: scale(1);
         }

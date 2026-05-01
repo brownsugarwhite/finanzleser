@@ -69,12 +69,12 @@ export default function LandingIntro() {
     setSearchContentWidth(searchContentW);
   }, []);
 
-  // Expand search pill when Maya undocks
+  // Expand search pill when Leo undocks
   useEffect(() => {
     const collapseSlot = (animate: boolean) => {
       const outer = outerRef.current;
       const wrap = leoWrapRef.current;
-      const slot = document.getElementById("maya-dock-slot");
+      const slot = document.getElementById("leo-dock-slot");
       if (!outer || !slot) return;
 
       if (animate) {
@@ -98,8 +98,8 @@ export default function LandingIntro() {
       collapseSlot(true);
       if (bubbleRef.current) gsap.to(bubbleRef.current, { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" });
     };
-    window.addEventListener("maya-undocked", handleUndock);
-    return () => window.removeEventListener("maya-undocked", handleUndock);
+    window.addEventListener("leo-undocked", handleUndock);
+    return () => window.removeEventListener("leo-undocked", handleUndock);
   }, []);
 
   const submitSearch = (q: string) => {
@@ -220,7 +220,7 @@ export default function LandingIntro() {
           Das digitale Finanzmagazin
         </p>
 
-        {/* Pill Bar + Maya */}
+        {/* Pill Bar + Leo */}
         <div
           ref={outerRef}
           className="landing-pillbar"
@@ -319,7 +319,7 @@ export default function LandingIntro() {
           </div>
 
           {/* Leo Dock Slot + Speech Bubble (Desktop only — auf Mobile lebt Leo
-              im sticky #maya-dock-slot-mobile oben in der Section). */}
+              im sticky #leo-dock-slot-mobile oben in der Section). */}
           <div ref={leoWrapRef} className="landing-leo-wrap" style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
             {/* Speech bubble — fades out when Leo undocks */}
             <div
@@ -362,7 +362,7 @@ export default function LandingIntro() {
               </div>
             </div>
             <div
-              id="maya-dock-slot"
+              id="leo-dock-slot"
               style={{
                 display: "flex",
                 alignItems: "center",

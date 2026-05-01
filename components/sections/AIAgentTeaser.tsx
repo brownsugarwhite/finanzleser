@@ -309,8 +309,8 @@ export default function AIAgentTeaser() {
           <ChatBubble>Wie kann ich helfen?</ChatBubble>
         </div>
 
-        {/* Reservierter Dock-Slot für MayaIcon (rechts-aligned, gegenüber der Bubbles).
-            Höhe/Breite fest damit das Layout nicht springt wenn MayaIcon einfliegt. */}
+        {/* Reservierter Dock-Slot für LeoIcon (rechts-aligned, gegenüber der Bubbles).
+            Höhe/Breite fest damit das Layout nicht springt wenn LeoIcon einfliegt. */}
         <div
           style={{
             display: "flex",
@@ -320,7 +320,7 @@ export default function AIAgentTeaser() {
           }}
         >
           <div
-            id="maya-dock-slot-ai"
+            id="leo-dock-slot-ai"
             style={{
               position: "relative",
               width: "410px",

@@ -149,7 +149,7 @@ export default function LogoBar() {
     };
   }, [isLanding]);
 
-  // Landing: Mobile = Maya-Swap-Events (Leo↔Logo), Desktop = nav-scrolled-out/-in
+  // Landing: Mobile = Leo-Swap-Events (Leo↔Logo), Desktop = nav-scrolled-out/-in
   useEffect(() => {
     if (!isLanding) return;
 
@@ -174,10 +174,10 @@ export default function LogoBar() {
         const el = wrapperRef.current;
         if (el) el.style.pointerEvents = "none";
       };
-      window.addEventListener("maya-flew-home", onFlewHome);
+      window.addEventListener("leo-flew-home", onFlewHome);
       window.addEventListener("revolver-far-from-bottom", onRevolverFar);
       return () => {
-        window.removeEventListener("maya-flew-home", onFlewHome);
+        window.removeEventListener("leo-flew-home", onFlewHome);
         window.removeEventListener("revolver-far-from-bottom", onRevolverFar);
       };
     }
