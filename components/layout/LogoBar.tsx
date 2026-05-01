@@ -149,10 +149,40 @@ export default function LogoBar() {
     };
   }, [isLanding]);
 
-  // Landing: nav-scrolled-out / -in → shortIn / shortOut
+  // Landing: Mobile = Maya-Swap-Events (Leo↔Logo), Desktop = nav-scrolled-out/-in
   useEffect(() => {
     if (!isLanding) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (isMobile) {
+      // Mobile: Logo erscheint NACH Leos Flug zur Home-Ecke,
+      // verschwindet wenn Revolver-Buttons den 100px-Bereich verlassen.
+      const onFlewHome = () => {
+        if (menuOpenRef.current) return;
+        if (stateRef.current !== "hidden") return;
+        logoRef.current?.playShortIn();
+        stateRef.current = "short-visible";
+        const el = wrapperRef.current;
+        if (el) el.style.pointerEvents = "auto";
+      };
+      const onRevolverFar = () => {
+        if (menuOpenRef.current) return;
+        if (stateRef.current !== "short-visible") return;
+        logoRef.current?.playShortOut();
+        stateRef.current = "hidden";
+        const el = wrapperRef.current;
+        if (el) el.style.pointerEvents = "none";
+      };
+      window.addEventListener("maya-flew-home", onFlewHome);
+      window.addEventListener("revolver-far-from-bottom", onRevolverFar);
+      return () => {
+        window.removeEventListener("maya-flew-home", onFlewHome);
+        window.removeEventListener("revolver-far-from-bottom", onRevolverFar);
+      };
+    }
+
+    // Desktop: bestehendes Verhalten — TopNav-Out/-In triggert shortIn/shortOut
     const onNavOut = () => {
       if (menuOpenRef.current) return;
       if (stateRef.current !== "hidden") return;

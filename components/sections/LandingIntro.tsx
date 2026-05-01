@@ -223,6 +223,7 @@ export default function LandingIntro() {
         {/* Pill Bar + Maya */}
         <div
           ref={outerRef}
+          className="landing-pillbar"
           style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "center", width: "100%", maxWidth: "680px", margin: "0 auto", position: "relative", zIndex: 60 }}
         >
           <div
@@ -317,8 +318,9 @@ export default function LandingIntro() {
             </div>
           </div>
 
-          {/* Leo Dock Slot + Speech Bubble */}
-          <div ref={leoWrapRef} style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
+          {/* Leo Dock Slot + Speech Bubble (Desktop only — auf Mobile lebt Leo
+              im sticky #maya-dock-slot-mobile oben in der Section). */}
+          <div ref={leoWrapRef} className="landing-leo-wrap" style={{ position: "relative", width: 70, height: 70, flexShrink: 0 }}>
             {/* Speech bubble — fades out when Leo undocks */}
             <div
               ref={bubbleRef}
@@ -438,6 +440,13 @@ export default function LandingIntro() {
         }
         .landing-suggest__text > span { font-weight: 400; }
         .landing-suggest__text > strong { font-weight: 700; }
+
+        /* ── Mobile: Dotline raus, Leo lebt global im fixed Slot (app/layout.tsx) ── */
+        @media (max-width: 767px) {
+          .landing-dotline { display: none !important; }
+          .landing-leo-wrap { display: none !important; }
+          .landing-pillbar { gap: 0 !important; }
+        }
       `}</style>
     </section>
   );

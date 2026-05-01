@@ -111,7 +111,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
   }
 
   return (
-    <div ref={containerRef} style={{ width: "100%" }}>
+    <div ref={containerRef} data-revolver-buttons style={{ width: "100%" }}>
       {/* Stage */}
       <div
         ref={stageRef}

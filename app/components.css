@@ -27,6 +27,31 @@
   pointer-events: auto;
 }
 
+/* Leo Mobile-Dock-Slot — sticky links oben, gegenüber Bookmark.
+   Liegt direkt nach TopBanner im Flow → Pageload-Position = 13px UNTER TopBanner.
+   Beim Scrollen klebt er ab top:13px. margin-bottom:-70px damit der Slot
+   keinen Layout-Platz verbraucht (nächstes Element überlagert).
+   Nur auf Landing + Mobile sichtbar. Leo wird per JS rein-/rausreparented. */
+#maya-dock-slot-mobile {
+  display: none;
+  position: sticky;
+  top: 13px;
+  margin-top: 13px;
+  margin-left: 16px;
+  margin-bottom: -83px;
+  width: 70px;
+  height: 70px;
+  z-index: 62;
+  pointer-events: auto;
+}
+@media (max-width: 767px) {
+  body[data-landing] #maya-dock-slot-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 /* Sticky Nav Row (DotLine + PoweredBy) im Root-Layout */
 .sticky-nav.dotline-animated {
   position: sticky;

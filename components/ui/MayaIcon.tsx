@@ -39,6 +39,7 @@ export default function MayaIcon() {
   const [selectedVersicherer, setSelectedVersicherer] = useState<Versicherer | null>(null);
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
+  const isAtHomeRef = useRef(false); // Mobile: Leo aktuell unten-rechts (true) oder im Sticky-Slot (false)?
   const pathname = usePathname();
 
   // Detect landing page + set initial home container + docked state.
@@ -93,8 +94,29 @@ export default function MayaIcon() {
 
     isLanding.current = document.body.hasAttribute("data-landing");
     hasUndocked.current = false;
+    isAtHomeRef.current = false;
 
-    if (isLanding.current && window.scrollY <= 5) {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (isLanding.current && isMobile) {
+      // Mobile: Leo lebt im sticky-top-left Slot — bis der Revolver-Slider
+      // mind. 100px vom unteren Bildrand entfernt nach oben gewandert ist
+      // (= Slider-Bottom ≥ 100px überm Viewport-Bottom).
+      const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
+      const initiallyFarFromBottom = buttons
+        ? window.innerHeight - buttons.getBoundingClientRect().bottom >= 100
+        : false;
+      const slot = document.getElementById("maya-dock-slot-mobile");
+      if (initiallyFarFromBottom || !slot) {
+        isAtHomeRef.current = true;
+        setDocked(false);
+        home.appendChild(el);
+      } else {
+        setDocked(true);
+        slot.appendChild(el);
+      }
+    } else if (isLanding.current && window.scrollY <= 5) {
+      // Desktop: dock nur am Page-Top in den Search-Pill-Slot
       setDocked(true);
       const slot = document.getElementById("maya-dock-slot");
       if (slot) {
@@ -112,9 +134,86 @@ export default function MayaIcon() {
     setSelectedVersicherer(null);
   }, [pathname]);
 
-  // Scroll listener: undock on first scroll
+  // Scroll listener: Mobile = Revolver-Trigger (Swap mit Logo), Desktop = First-Scroll-Undock
   useEffect(() => {
-    if (!isLanding.current || hasUndocked.current) return;
+    if (!isLanding.current) return;
+
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (isMobile) {
+      // Mobile: getriggert wenn Revolver-Slider mind. 100px vom unteren
+      // Bildrand entfernt nach oben gewandert ist (= rect.bottom + 100 ≤ vh).
+      // Hinflug = MotionPath (wie Desktop), Rückflug = Cross-Fade.
+      const onScroll = () => {
+        const el = containerRef.current;
+        const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
+        const home = document.getElementById("maya-floating-home");
+        const slot = document.getElementById("maya-dock-slot-mobile");
+        if (!el || !buttons || !home || !slot) return;
+
+        const dist = window.innerHeight - buttons.getBoundingClientRect().bottom;
+        const farFromBottom = dist >= 100;
+
+        if (farFromBottom && !isAtHomeRef.current) {
+          // → Leo fliegt mit MotionPath nach unten-rechts, dann Logo-shortIn
+          isAtHomeRef.current = true;
+          setDocked(false);
+          gsap.killTweensOf(el);
+
+          const startRect = el.getBoundingClientRect();
+          const startX = startRect.left;
+          const startY = startRect.top;
+          home.appendChild(el);
+          const endRect = el.getBoundingClientRect();
+          const dx = startX - endRect.left;
+          const dy = startY - endRect.top;
+
+          gsap.set(el, { x: dx, y: dy, opacity: 1 });
+          gsap.to(el, {
+            duration: 0.6,
+            ease: "power1.inOut",
+            motionPath: {
+              path: [
+                { x: dx, y: dy },
+                { x: dx * 0.5, y: dy + 100 },
+                { x: 0, y: 0 },
+              ],
+              curviness: 1.5,
+            },
+            onComplete() {
+              gsap.set(el, { clearProps: "x,y" });
+              window.dispatchEvent(new CustomEvent("maya-flew-home"));
+            },
+          });
+        } else if (!farFromBottom && isAtHomeRef.current) {
+          // → Logo erst ausanimieren, Leo parallel ausfaden, dann zurück in den Slot
+          isAtHomeRef.current = false;
+          window.dispatchEvent(new CustomEvent("revolver-far-from-bottom"));
+          gsap.killTweensOf(el);
+          gsap.to(el, {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+              slot.appendChild(el);
+              setDocked(true);
+              gsap.to(el, {
+                opacity: 1,
+                duration: 0.4,
+                delay: 0.2,
+                ease: "power2.out",
+              });
+            },
+          });
+        }
+      };
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    // Desktop: erster Scroll → MotionPath-Flug zurück zur Home-Ecke
+    if (hasUndocked.current) return;
 
     const handleScroll = () => {
       if (hasUndocked.current || !containerRef.current) return;

@@ -102,6 +102,10 @@ export default async function RootLayout({
           linkValue={siteSettings.top_banner.link_value}
           visibility={siteSettings.top_banner.visibility}
         />
+        {/* Mobile-only Leo Dock-Slot — sticky top-left, gegenüber Bookmark.
+            Position direkt nach TopBanner im Flow, sticky ab top:13px.
+            Leo wird zur Laufzeit per JS hier rein-/rausreparented. */}
+        <div id="maya-dock-slot-mobile" />
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>
