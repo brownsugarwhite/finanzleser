@@ -11,22 +11,32 @@ const COLOR = "#000000";
 interface LeoCharacterProps {
   /** Breite des Head-SVG in px (Default 44, im Chat-Overlay z.B. 56). */
   headWidth?: number;
-  /** Breite des Mouth-SVG in px (Default 46). */
+  /** Breite des Body-SVG in px (Default 40). */
   mouthWidth?: number;
-  /** Mouth marginBottom (Default -13, sorgt für die Mund-Kerbe an der Bubble-Unterkante). */
+  /** Body marginBottom (Default -3). */
   mouthMarginBottom?: number;
   /** Eye-Tracking + Hover-Pupillen aktivieren — nur Desktop, Default false. */
   trackPupils?: boolean;
+  /** Body-Variante: "polygon" = klassischer Zickzack (default, Bubble), "round" = neuer rounder Body (Chat-Overlay). */
+  bodyVariant?: "polygon" | "round";
+  /** Wenn gesetzt: Kravatte zentriert über Body rendern (Chat-Overlay). Wert = Breite in px. */
+  kravatteWidth?: number;
+  /** Vertikaler Offset der Kravatte vom Body-Top in px (Default 3). */
+  kravatteOffsetTop?: number;
 }
 
-/** Leo-Charakter (Kopf + Augen + Mund) als wiederverwendbare Sub-Komponente.
+/** Leo-Charakter (Kopf + Augen + Body) als wiederverwendbare Sub-Komponente.
  *  Wird in LeoIcon (Bubble-Charakter, fixe 44px) und im Chat-Overlay
- *  (90×90 Icon-Leo) verwendet. Pupil-Tracking via Prop opt-in (nur Desktop). */
+ *  (90×90 Icon-Leo, mit bodyVariant="round" + Kravatte) verwendet.
+ *  Pupil-Tracking via Prop opt-in (nur Desktop). */
 export default function LeoCharacter({
   headWidth = 44,
   mouthWidth = 46,
   mouthMarginBottom = -13,
   trackPupils = false,
+  bodyVariant = "polygon",
+  kravatteWidth,
+  kravatteOffsetTop = 3,
 }: LeoCharacterProps) {
   const headRef = useRef<HTMLDivElement>(null);
   const wasInWindow = useRef(true);
@@ -110,13 +120,40 @@ export default function LeoCharacter({
           />
         </svg>
       </div>
-      <div>
-        <svg viewBox="0 0 604.6 469.6" style={{ width: mouthWidth, display: "block", marginBottom: mouthMarginBottom }}>
-          <polygon
-            points="2 479.1 76.8 0 171.7 157.9 297.7 8.1 432.7 155.2 534.2 0 605 483.6 2 479.1"
-            fill={COLOR}
-          />
-        </svg>
+      <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+        {bodyVariant === "round" ? (
+          <svg viewBox="0 0 489.13 341.38" style={{ width: mouthWidth, display: "block", marginBottom: mouthMarginBottom }}>
+            <path
+              d="M7.26,38.27L16.71,0l94.87,157.93L237.57,8.06l135.08,147.2L474.12,0l9.8,47.19c31.68,152.49-85.41,295.32-241.15,294.18h0C84.76,340.21-30.66,191.68,7.26,38.27Z"
+              fill={COLOR}
+            />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 604.6 469.6" style={{ width: mouthWidth, display: "block", marginBottom: mouthMarginBottom }}>
+            <polygon
+              points="2 479.1 76.8 0 171.7 157.9 297.7 8.1 432.7 155.2 534.2 0 605 483.6 2 479.1"
+              fill={COLOR}
+            />
+          </svg>
+        )}
+        {kravatteWidth ? (
+          <svg
+            viewBox="0 0 136.37 316.51"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: kravatteOffsetTop,
+              transform: "translateX(-50%)",
+              width: kravatteWidth,
+              pointerEvents: "none",
+            }}
+          >
+            <polygon
+              points="86.91 70.59 109.42 70.59 100.02 0 36.36 0 26.96 70.59 49.5 70.59 0 221.64 67.79 316.51 136.37 221.28 86.91 70.59"
+              fill="#d3005e"
+            />
+          </svg>
+        ) : null}
       </div>
     </div>
   );

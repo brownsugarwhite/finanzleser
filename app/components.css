@@ -52,8 +52,8 @@
 /* Pill-Slot: stabiler Flip-Target. Container reparented HIER rein.
    Desktop: 480 × 100. Mobile: 100% × 100 am Bottom. */
 #leo-chat-pill-slot {
-  width: 550px;
-  height: 120px;          /* CHAT_PILL_H */
+  width: 650px;
+  height: 130px;          /* CHAT_PILL_H */
   position: relative;
 }
 @media (max-width: 767px) {
@@ -68,14 +68,13 @@
   position: fixed;
   z-index: 200;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  flex-direction: row;
+  align-items: center;  
   pointer-events: none;
   opacity: 0;
   /* Desktop: zentriert horizontal, über der Pille */
   left: 50%;
-  bottom: calc(50% + 70px);    /* 70 = halbe Pill-Höhe (50) + Gap (20) */
+  bottom: calc(50% + 90px);    /* 70 = halbe Pill-Höhe (50) + Gap (20) */
   transform: translateX(-50%);
 }
 @media (max-width: 767px) {
@@ -91,19 +90,12 @@
 }
 
 #leo-chat-greeting {
-  font-family: var(--font-body);
-  font-size: 22px;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 650;
   color: #1a1a1a;
-  text-align: center;
-}
-
-#leo-chat-greeting {
-  font-family: var(--font-body);
-  font-size: 22px;
-  font-weight: 500;
-  color: #1a1a1a;
-  text-align: center;
+  text-align: left;
+  line-height: 1.15;
 }
 
 /* Leo Mobile-Dock-Slot — sticky links oben, gegenüber Bookmark.

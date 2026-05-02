@@ -766,7 +766,7 @@ export default function LeoIcon() {
     >
       <svg
         ref={tieRef}
-        viewBox="0 0 136.46 313.85"
+        viewBox="0 0 136.37 316.51"
         style={{
           position: "absolute",
           bottom: -9,
@@ -776,9 +776,9 @@ export default function LeoIcon() {
           pointerEvents: "none",
         }}
       >
-        <path
-          d="M80.02,82.29l20.97-34.49L70.63,0l-33.16,48.08,19.65,30.78C38.54,123.63,2.23,211.44.09,218.98c-2.88,10.16,67.79,94.87,67.79,94.87l68.58-95.23-56.44-136.33Z"
-          fill="#ff1d7b"
+        <polygon
+          points="86.91 70.59 109.42 70.59 100.02 0 36.36 0 26.96 70.59 49.5 70.59 0 221.64 67.79 316.51 136.37 221.28 86.91 70.59"
+          fill="#d3005e"
         />
       </svg>
 
@@ -981,8 +981,8 @@ export default function LeoIcon() {
       <div ref={pillSlotRef} id="leo-chat-pill-slot" />
     </div>
     <div ref={iconwrapRef} id="leo-chat-iconwrap">
-      <div style={{ width: 90, height: 90, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <LeoCharacter headWidth={56} mouthWidth={58} mouthMarginBottom={-13} trackPupils={!checkMobile()} />
+      <div style={{ width: 90, height: 90, display: "flex", alignItems: "center", justifyContent: "center", marginTop: -40 }}>
+        <LeoCharacter headWidth={56} mouthWidth={50} mouthMarginBottom={-5} trackPupils={!checkMobile()} bodyVariant="round" kravatteWidth={14} kravatteOffsetTop={9} />
       </div>
       <div id="leo-chat-greeting">Wie kann ich Ihnen helfen?</div>
     </div>
