@@ -171,6 +171,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const rightArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
   const [phase, setPhase] = useState<Phase>("opening");
+  // Triggered sofort beim Klick auf X — fadet PreviewHeader unabhängig von
+  // phase=closing aus (das setzt erst nach TEXT_FADE_DURATION ein).
+  const [headerExiting, setHeaderExiting] = useState(false);
   // Arrows "disabled" außerhalb der slider-Phase → bestehende disable-Animation
   // spielt beim Öffnen/Schließen (scale/line/vline in/out).
   const leftDisabled = phase !== "slider" || currentIndex === 0;
@@ -875,6 +878,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (isExitingRef.current) return;
     isExitingRef.current = true;
 
+    // Sofort den Header ausfaden — soll vor dem Logo-Wieder-Einanimieren
+    // komplett verschwunden sein, damit Logo nicht über die Ratgebervorschau
+    // gelegt wird.
+    setHeaderExiting(true);
+
     // Fade current slide text + bottom-block (mobile) before phase swap.
     // Beide synchron, damit Mobile-Description nicht erst nach Title fadet.
     const textEl = post ? textRefs.current.get(post.slug) : null;
@@ -1137,7 +1145,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }}
       />
 
-      <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} />
+      <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} exiting={headerExiting} />
 
       {/* Nav-Gruppe LINKS: vertikale Linie + Verbindungslinie + Pfeil */}
       <div
@@ -2045,26 +2053,42 @@ function SkeletonParagraph() {
 // ────────────────────────────────────────────────────────────────────────────
 // PreviewHeader — info icon + label + animated counter above the slider
 // ────────────────────────────────────────────────────────────────────────────
-function PreviewHeader({ current, total, phase }: { current: number; total: number; phase: Phase }) {
+function PreviewHeader({ current, total, phase, exiting }: { current: number; total: number; phase: Phase; exiting: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const fadedOutRef = useRef(false);
+
+  useLayoutEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+  }, []);
 
   useLayoutEffect(() => {
     if (!ref.current) return;
+    if (exiting && !fadedOutRef.current) {
+      fadedOutRef.current = true;
+      gsap.to(ref.current, { opacity: 0, duration: 0.3, ease: "power2.in" });
+      return;
+    }
+    if (fadedOutRef.current) return; // einmal exiting, nicht zurückfaden
     if (phase === "slider") {
       gsap.fromTo(ref.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" });
     } else if (phase === "closing") {
       gsap.to(ref.current, { opacity: 0, duration: 0.35, ease: "power2.in" });
     }
-  }, [phase]);
+  }, [phase, exiting]);
+
+  // Mobile: take the logo's top-left slot (LogoBar plays its out animation
+  // when preview opens). Desktop: keep centered above the slider.
+  const positionStyle: React.CSSProperties = isMobile
+    ? { top: 25, left: 25 }
+    : { top: 36, left: "50%", transform: "translateX(-50%)" };
 
   return (
     <div
       ref={ref}
       style={{
         position: "fixed",
-        top: 36,
-        left: "50%",
-        transform: "translateX(-50%)",
+        ...positionStyle,
         display: "flex",
         alignItems: "center",
         gap: 5,
@@ -2074,6 +2098,7 @@ function PreviewHeader({ current, total, phase }: { current: number; total: numb
         color: "var(--color-text-primary)",
         opacity: 0,
         whiteSpace: "nowrap",
+        zIndex: 65,
       }}
     >
       <span>Ratgebervorschau</span>

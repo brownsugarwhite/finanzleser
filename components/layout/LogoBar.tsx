@@ -47,6 +47,12 @@ export default function LogoBar() {
   const stateRef = useRef<LogoState>("long-visible");
   const menuOpenRef = useRef(false);
   const reconcileSuspendedUntilRef = useRef(0);
+  // Saved state from before a mobile preview-overlay opened. Restored on close.
+  const previewPriorStateRef = useRef<LogoState | null>(null);
+  // Restore-Timer (cancel-bar wenn ein erneutes menu-opened reinkommt — z.B.
+  // beim Dev-Mode-StrictMode-Doppellauf des Overlays, wo Mount-Cleanup ein
+  // menu-closed feuert zwischen zwei menu-opened-Events).
+  const previewRestoreTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
   const isLanding = pathname === "/";
 
@@ -234,8 +240,39 @@ export default function LogoBar() {
 
   // Menu open/close → grow/shrink (or longIn from hidden)
   useEffect(() => {
-    const onMenuOpened = () => {
+    const onMenuOpened = (e: Event) => {
+      // Pending Restore canceln (z.B. Dev-StrictMode-Cleanup hat menu-closed
+      // gefeuert während Overlay tatsächlich noch öffnet). priorState bleibt
+      // erhalten für den späteren echten Close.
+      if (previewRestoreTimerRef.current) {
+        clearTimeout(previewRestoreTimerRef.current);
+        previewRestoreTimerRef.current = null;
+      }
       menuOpenRef.current = true;
+      const detail = (e as CustomEvent).detail as { label?: string } | undefined;
+
+      // Preview-Overlay: OUT-Animation passend zum aktuellen Zustand spielen
+      // und prior state merken. priorState NUR einmal pro Open setzen — der
+      // Overlay-IN-Effect feuert in Dev (StrictMode) doppelt, sonst würde
+      // der zweite Call "hidden" reinschreiben und der Restore beim Close
+      // wäre kaputt.
+      if (detail?.label === "preview") {
+        const state = stateRef.current;
+        if (previewPriorStateRef.current === null) {
+          previewPriorStateRef.current = state;
+        }
+        if (state === "short-visible") {
+          logoRef.current?.playShortOut();
+          stateRef.current = "hidden";
+        } else if (state === "long-visible") {
+          logoRef.current?.playLongOut();
+          stateRef.current = "hidden";
+        }
+        const el = wrapperRef.current;
+        if (el) el.style.pointerEvents = "none";
+        return;
+      }
+
       const state = stateRef.current;
       if (state === "long-visible") return;
       if (state === "hidden") {
@@ -250,6 +287,33 @@ export default function LogoBar() {
 
     const onMenuClosed = () => {
       menuOpenRef.current = false;
+
+      // Restore prior logo state — verzögert via Timer, damit ein potentielles
+      // sofortiges Re-Open (Dev-StrictMode-Cleanup) den Timer wieder canceln
+      // kann. priorState wird erst im Timer-Callback geleert.
+      if (previewPriorStateRef.current !== null) {
+        const prior = previewPriorStateRef.current;
+        if (prior === "hidden") {
+          previewPriorStateRef.current = null;
+          return;
+        }
+        if (previewRestoreTimerRef.current) clearTimeout(previewRestoreTimerRef.current);
+        previewRestoreTimerRef.current = window.setTimeout(() => {
+          previewRestoreTimerRef.current = null;
+          previewPriorStateRef.current = null;
+          if (prior === "short-visible") {
+            logoRef.current?.playShortIn();
+            stateRef.current = "short-visible";
+          } else if (prior === "long-visible") {
+            logoRef.current?.playLongIn();
+            stateRef.current = "long-visible";
+          }
+          const el = wrapperRef.current;
+          if (el) el.style.pointerEvents = "auto";
+        }, 320);
+        return;
+      }
+
       if (stateRef.current !== "long-visible") return;
       logoRef.current?.playShrink();
       stateRef.current = "short-visible";
