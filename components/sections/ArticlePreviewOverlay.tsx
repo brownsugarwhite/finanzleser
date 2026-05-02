@@ -22,8 +22,27 @@ const TOOL_META: Record<PreviewTool, { label: string; color: string }> = {
 
 const MORPH_DURATION = 0.5;
 const MORPH_EASE = "power2.inOut";
-const NAV_DURATION = 0.5;
-const NAV_EASE = "back.out(1.2)";
+const NAV_DURATION = 0.6;
+const NAV_EASE = "power2.inOut";
+// Kindle-Page-Turn: Soft-Transition-Zone der Mask-Gradient-Kante (in %).
+// Weiterer Wert = breitere, weichere Wisch-Kante.
+// Mobile bekommt mehr, weil dort der Swipe das Tempo vorgibt und ein
+// breiterer Wisch ergonomischer aussieht; Desktop fühlt sich knackiger
+// an mit kompaktem Edge.
+const MASK_SOFT_ZONE_DESKTOP = 8;
+const MASK_SOFT_ZONE_MOBILE = 30;
+// Lücke zwischen Outgoing-Soft-Zone und Incoming-Soft-Zone (in %). Im
+// Gap-Bereich sind beide Slides transparent → Overlay-Hintergrund scheint
+// als feiner Riss durch.
+const MASK_GAP = 1;
+// Maximaler diagonaler Kippwinkel (in Grad) basierend auf Y-Position des
+// Swipe-Starts. Finger oben → Top führt; Finger unten → Bottom führt;
+// Mitte → reine Horizontale. Nur bei Drag aktiv (Click-Nav bleibt 0°).
+const SLIDE_TILT_MAX = 14;
+// Subtile Scale: incoming wächst von 0.96 → 1.0 (steigt aus der Tiefe),
+// outgoing schrumpft 1.0 → 0.96 (sinkt zurück). Akzent obendrauf, kein
+// dominanter Effekt — der Wisch bleibt das Hauptelement.
+const SLIDE_SCALE_OFFSET = 0.13;
 const TEXT_FADE_DURATION = 0.15;
 const CARD_TEXT_FADE_DURATION = 0.25;
 const PREVIEW_BORDER_RADIUS = 56;
@@ -48,6 +67,75 @@ interface Props {
   onClose: () => void;
   extrasCache: Record<string, PreviewExtras>;
   prefetchExtras: (slug: string) => void;
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Kindle-Page-Turn Mask-Helpers
+// ────────────────────────────────────────────────────────────────────────────
+// Beide Slides bekommen während der Transition komplementäre Linear-Gradient-
+// Masks. An jedem Pixel ist genau eine Seite sichtbar; in der 8%-Soft-Zone
+// blenden sie mit Alpha-Ramp ineinander über → weicher Kindle-Wisch ohne
+// Translation/Scale/Blur.
+//
+// reveal: 0 = Transition nicht gestartet (outgoing voll sichtbar, incoming
+// versteckt). 1 = Transition komplett (outgoing versteckt, incoming voll
+// sichtbar).
+//
+// angleDeg: CSS-Gradient-Winkel in Grad. 90 = rein horizontal "to right",
+// 270 = "to left". Abweichungen davon ergeben einen diagonalen Wisch.
+//
+// softZone: Breite der weichen Transition-Zone in % (Desktop kompakt, Mobile
+// breiter). Outgoing- und Incoming-Soft-Zonen überlappen exakt → Alpha-
+// Summe = 1 an jedem Pixel, kein "durch-Schimmer".
+type MaskRole = "outgoing" | "incoming";
+
+function buildSlideMask(angleDeg: number, role: MaskRole, reveal: number, softZone: number): string {
+  // c traversiert so, dass reveal=0 den Slide voll sichtbar (outgoing) bzw.
+  // voll versteckt (incoming) zeigt und reveal=1 den Endzustand erreicht.
+  // Outgoing-Soft-Zone endet GAP/2 VOR c, Incoming-Soft-Zone beginnt GAP/2
+  // NACH c → dazwischen ist eine Lücke wo beide transparent sind.
+  const span = 100 + MASK_GAP + 2 * softZone;
+  const c = (1 - reveal) * span - MASK_GAP / 2 - softZone;
+
+  if (role === "outgoing") {
+    const transStop = c - MASK_GAP / 2;
+    const blackStop = transStop - softZone;
+    return `linear-gradient(${angleDeg}deg, black 0%, black ${blackStop}%, transparent ${transStop}%, transparent 100%)`;
+  }
+  const transStop = c + MASK_GAP / 2;
+  const blackStop = transStop + softZone;
+  return `linear-gradient(${angleDeg}deg, transparent 0%, transparent ${transStop}%, black ${blackStop}%, black 100%)`;
+}
+
+function setSlideMask(
+  el: HTMLElement,
+  angleDeg: number,
+  role: MaskRole,
+  reveal: number,
+  softZone: number
+) {
+  const mask = buildSlideMask(angleDeg, role, reveal, softZone);
+  el.style.maskImage = mask;
+  // iOS Safari benötigt das vendor-prefixed Property auch in 2026 noch.
+  (el.style as CSSStyleDeclaration & { webkitMaskImage?: string }).webkitMaskImage = mask;
+}
+
+function clearSlideMask(el: HTMLElement) {
+  el.style.maskImage = "";
+  (el.style as CSSStyleDeclaration & { webkitMaskImage?: string }).webkitMaskImage = "";
+}
+
+// dir: 1 = next (forward), -1 = prev (backward).
+// Sweep läuft "in Bewegungsrichtung der neuen Seite":
+// - next: 90° (gradient "to right", visible-area der incoming wächst von
+//   rechts nach links).
+// - prev: 270° ("to left").
+// tiltDeg: zusätzlicher Kippwinkel für diagonalen Wisch (Drag-Y-abhängig).
+// Bei prev wird der Tilt gespiegelt — Finger oben soll in BEIDEN Richtungen
+// "Top führt" produzieren, sonst kippt der Wisch gegenläufig.
+function sweepAngle(dir: 1 | -1, tiltDeg = 0): number {
+  const adjustedTilt = dir === 1 ? tiltDeg : -tiltDeg;
+  return (dir === 1 ? 90 : 270) + adjustedTilt;
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -337,7 +425,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       textRefs.current.forEach((el) => gsap.killTweensOf(el));
       infoRefs.current.forEach((el) => gsap.killTweensOf(el));
       categoryRefs.current.forEach((el) => gsap.killTweensOf(el));
-      slideWrapperRefs.current.forEach((el) => gsap.killTweensOf(el));
+      slideWrapperRefs.current.forEach((el) => {
+        gsap.killTweensOf(el);
+        clearSlideMask(el);
+      });
       bottomRefs.current.forEach((el) => gsap.killTweensOf(el));
       if (backdropRef.current) gsap.killTweensOf(backdropRef.current);
       if (trackRef.current) gsap.killTweensOf(trackRef.current);
@@ -664,7 +755,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentExtras, phase]);
 
-  // ── Navigate animation: crossfade + scale + translate (book-flip style) ──
+  // ── Navigate animation: Kindle-Page-Turn (Gradient-Mask-Wipe) ──
   const prevIndexRef = useRef(currentIndex);
   useEffect(() => {
     if (phase !== "slider") {
@@ -674,64 +765,109 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     const prev = prevIndexRef.current;
     if (prev === currentIndex) return;
 
-    const dir = currentIndex > prev ? 1 : -1; // 1 = next, -1 = prev
+    const dir: 1 | -1 = currentIndex > prev ? 1 : -1; // 1 = next, -1 = prev
+    // Drag-Commit übernimmt Tilt aus letztem Drag; Click-Nav nutzt 0°.
+    const tiltDeg = dragNavRef.current ? lastDragTiltRef.current : 0;
+    const angle = sweepAngle(dir, tiltDeg);
+    const softZone = isMobile ? MASK_SOFT_ZONE_MOBILE : MASK_SOFT_ZONE_DESKTOP;
     const oldPost = posts[prev];
     const newPost = posts[currentIndex];
     const oldSlide = oldPost ? slideWrapperRefs.current.get(oldPost.slug) : null;
     const newSlide = newPost ? slideWrapperRefs.current.get(newPost.slug) : null;
 
     // Kill any in-flight tweens on either slide so rapid nav can't keep stale
-    // values (especially lingering filter: blur) on the incoming slide.
+    // mask-tween-values on the incoming slide.
     if (oldSlide) gsap.killTweensOf(oldSlide);
     if (newSlide) gsap.killTweensOf(newSlide);
 
-    // Neue Slide immer mit scrollTop 0 zeigen — wenn die User vorher in
+    // Neue Slide immer mit scrollTop 0 zeigen — wenn der User vorher in
     // einem anderen Slide vertikal gescrollt hat und dann hin/zurück
     // navigiert, soll der Slide jedes Mal von oben beginnen.
     if (newSlide) newSlide.scrollTop = 0;
 
-    // Click-based nav: new slide has no prior transform → set offscreen start state.
-    // Drag-based nav: state already mid-animation, don't reset.
-    if (!dragNavRef.current && newSlide) {
-      gsap.set(newSlide, { x: dir * 200, scale: 1.2, opacity: 0, filter: "blur(0px)" });
-    } else if (newSlide) {
-      // Drag-nav: ensure the new slide starts sharp even if it was previously
-      // the leaving slide (and thus mid-blur).
-      gsap.set(newSlide, { filter: "blur(0px)" });
+    // Stale Transform-/Filter-Werte aus eventuellem vorherigen Drag-State
+    // zurücksetzen (Drag-Handler arbeitet beim Rubber-Band noch mit x).
+    // Scale-Startwerte: outgoing kommt von 1.0, incoming startet 0.96.
+    // Wenn aus Drag heraus genavigiert wurde, übernimmt das Tween die
+    // bereits gesetzten Werte sanft (overwrite "auto").
+    if (oldSlide) {
+      const startScale = dragNavRef.current
+        ? 1 - SLIDE_SCALE_OFFSET * lastDragProgressRef.current
+        : 1;
+      gsap.set(oldSlide, { x: 0, scale: startScale, filter: "none" });
     }
+    if (newSlide) {
+      const startScale = dragNavRef.current
+        ? 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * lastDragProgressRef.current
+        : 1 - SLIDE_SCALE_OFFSET;
+      gsap.set(newSlide, { x: 0, scale: startScale, filter: "none" });
+    }
+
+    // Drag-Path und Click-Path liefern unterschiedliche Ausgangspunkte:
+    // - Click: kein vorheriger Mask-State, beide Slides müssen mit reveal=0
+    //   starten und auf reveal=1 animieren.
+    // - Drag: beide Slides haben bereits Mask-State (progress 0..1) gesetzt
+    //   bekommen; wir lesen den Wert NICHT zurück, sondern animieren weiter
+    //   bis 1 (Drag-Handler ruft onNavigate erst wenn Threshold überschritten,
+    //   also ist der State irgendwo zwischen ~0.3 und 1.0 → der finale Tween
+    //   überschreibt ihn ohnehin).
+    const tweenObj = { reveal: dragNavRef.current ? lastDragProgressRef.current : 0 };
     dragNavRef.current = false;
     dragCandidateSlugRef.current = null;
+    lastDragProgressRef.current = 0;
 
+    // Slides für Transition vorbereiten: beide opaque rendern, incoming auf
+    // höheres z-index damit Round-Corners der Box nicht den outgoing-Slide
+    // durchscheinen lassen.
     if (oldSlide) {
+      oldSlide.style.opacity = "1";
       oldSlide.style.pointerEvents = "none";
+      oldSlide.style.zIndex = "1";
+      setSlideMask(oldSlide, angle, "outgoing", tweenObj.reveal, softZone);
+    }
+    if (newSlide) {
+      newSlide.style.opacity = "1";
+      newSlide.style.pointerEvents = "auto";
+      newSlide.style.zIndex = "2";
+      setSlideMask(newSlide, angle, "incoming", tweenObj.reveal, softZone);
+    }
+
+    gsap.to(tweenObj, {
+      reveal: 1,
+      duration: NAV_DURATION,
+      ease: NAV_EASE,
+      onUpdate: () => {
+        if (oldSlide) setSlideMask(oldSlide, angle, "outgoing", tweenObj.reveal, softZone);
+        if (newSlide) setSlideMask(newSlide, angle, "incoming", tweenObj.reveal, softZone);
+      },
+      onComplete: () => {
+        // Endzustand: outgoing voll versteckt (opacity 0, mask weg), incoming
+        // voll sichtbar (opacity 1, mask weg). z-index zurück, scale auf 1.
+        if (oldSlide) {
+          clearSlideMask(oldSlide);
+          oldSlide.style.opacity = "0";
+          oldSlide.style.zIndex = "";
+          gsap.set(oldSlide, { scale: 1 });
+        }
+        if (newSlide) {
+          clearSlideMask(newSlide);
+          newSlide.style.zIndex = "";
+        }
+      },
+    });
+    // Scale parallel zum Mask-Wisch — outgoing 1.0 → 0.96, incoming 0.96 → 1.0.
+    if (oldSlide) {
       gsap.to(oldSlide, {
-        x: -dir * 200,
-        scale: 0.8,
-        filter: "blur(10px)",
+        scale: 1 - SLIDE_SCALE_OFFSET,
         duration: NAV_DURATION,
-        ease: NAV_EASE,
-        overwrite: "auto",
-      });
-      gsap.to(oldSlide, {
-        opacity: 0,
-        duration: NAV_DURATION * 0.75,
         ease: NAV_EASE,
         overwrite: "auto",
       });
     }
     if (newSlide) {
-      newSlide.style.pointerEvents = "auto";
       gsap.to(newSlide, {
-        x: 0,
         scale: 1,
         duration: NAV_DURATION,
-        ease: NAV_EASE,
-        overwrite: "auto",
-      });
-      gsap.to(newSlide, {
-        opacity: 1,
-        duration: NAV_DURATION * 0.75,
-        delay: NAV_DURATION * 0.25,
         ease: NAV_EASE,
         overwrite: "auto",
       });
@@ -778,18 +914,42 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
   // ── Swipe / drag ──────────────────────────────────────────────────────────
   const navFiredThisGestureRef = useRef(false);
+  // Letzter Drag-Progress (0..1) — die nav-effect-Logik nimmt ihn als
+  // Start-Wert für den Tween, sonst springt die Mask von z.B. 0.7 auf 0.5
+  // beim Übergang Drag → Click-Animation.
+  const lastDragProgressRef = useRef(0);
+  // Letzter Drag-Tilt (Grad) — diagonaler Kippwinkel basierend auf Y-Position
+  // des Touch-Starts. Click-Nav nutzt 0 (rein horizontal); Drag-Commit liest
+  // diesen Wert damit der laufende Wisch ohne Sprung weitergeht.
+  const lastDragTiltRef = useRef(0);
   const dragCandidateSlugRef = useRef<string | null>(null);
   const dragNavRef = useRef(false);
   const bindDrag = useDrag(
-    ({ first, last, movement: [mx], velocity: [vx] }) => {
+    ({ first, last, movement: [mx], velocity: [vx], xy: [, y] }) => {
       if (phase !== "slider") return;
       if (first) {
         navFiredThisGestureRef.current = false;
         dragCandidateSlugRef.current = null;
       }
+      // Diagonal-Tilt aus AKTUELLER Y-Position berechnen → der Wisch kippt
+      // dynamisch mit, wenn der User während des Drags hoch oder runter fährt.
+      // Finger oben (y ≈ 0) → −TILT_MAX. Finger unten → +TILT_MAX. Mitte → 0.
+      const halfH = window.innerHeight / 2;
+      const yRel = (y - halfH) / halfH; // -1..+1
+      lastDragTiltRef.current = Math.max(-1, Math.min(1, yRel)) * SLIDE_TILT_MAX;
 
       const currentSlideEl = post ? slideWrapperRefs.current.get(post.slug) : null;
       if (!currentSlideEl) return;
+
+      // Vertikales Scrollen während des Swipes blocken — sonst zappelt das
+      // Layout durch Mikro-Y-Bewegungen des Fingers. touchAction: none lässt
+      // Pointer-Events durch zu useDrag, blockt aber Browser-Pan komplett.
+      // overflow: hidden verhindert dass der scrollbare Slide selbst auf
+      // Touch-Events scrollt.
+      if (first) {
+        currentSlideEl.style.touchAction = "none";
+        currentSlideEl.style.overflowY = "hidden";
+      }
 
       const dirGesture: -1 | 1 = mx > 0 ? -1 : 1; // -1 = prev, 1 = next
       const atStart = currentIndex === 0;
@@ -817,33 +977,38 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
       if (!last) {
         if (hasCandidate && candidateSlide && candidatePost) {
-          // Overlapping fade: old fades out across first 75% of progress,
-          // new starts fading in at 25% — giving them ~50% overlap so the old
-          // slide is still partly visible when the new one starts.
-          const oldOp = Math.max(0, Math.min(1, 1 - progress / 0.75));
-          const newOp = Math.max(0, Math.min(1, (progress - 0.25) / 0.75));
-          gsap.set(currentSlideEl, {
-            x: -dirGesture * 200 * progress,
-            scale: 1 - 0.2 * progress,
-            opacity: oldOp,
-            filter: `blur(${10 * progress}px)`,
-          });
+          // Kindle-Page-Turn: progress mappt direkt auf den Mask-Reveal.
+          // Outgoing-Slide schrumpft visible-area, incoming wächst — beide
+          // synchron mit weicher Gradient-Kante in der Mitte.
+          const angle = sweepAngle(dirGesture, lastDragTiltRef.current);
+          const softZone = isMobile ? MASK_SOFT_ZONE_MOBILE : MASK_SOFT_ZONE_DESKTOP;
+          currentSlideEl.style.opacity = "1";
+          candidateSlide.style.opacity = "1";
+          currentSlideEl.style.zIndex = "1";
+          candidateSlide.style.zIndex = "2";
+          setSlideMask(currentSlideEl, angle, "outgoing", progress, softZone);
+          setSlideMask(candidateSlide, angle, "incoming", progress, softZone);
+          // Scale parallel: outgoing 1 → 0.96, incoming 0.96 → 1.
+          gsap.set(currentSlideEl, { scale: 1 - SLIDE_SCALE_OFFSET * progress });
           gsap.set(candidateSlide, {
-            x: dirGesture * 200 * (1 - progress),
-            scale: 1.2 - 0.2 * progress,
-            opacity: newOp,
-            filter: "blur(0px)",
+            scale: 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * progress,
           });
+          lastDragProgressRef.current = progress;
           // Candidate's text wrapper starts at opacity 0 (set during opening morph
           // for non-initial slides) — make its content visible during drag.
           const candText = textRefs.current.get(candidatePost.slug);
           if (candText) gsap.set(candText, { opacity: 1 });
         } else {
-          // Rubber-band at edges
+          // Rubber-band at edges (kein Sweep — kein Candidate vorhanden).
           gsap.set(currentSlideEl, { x: rubberMx });
         }
         return;
       }
+
+      // Release: vertikales Scrollen + Browser-Pan auf currentSlideEl wieder
+      // erlauben (matched die JSX-Default-Werte aus dem Slide-Wrapper).
+      currentSlideEl.style.touchAction = "";
+      currentSlideEl.style.overflowY = "auto";
 
       // Release
       if (navFiredThisGestureRef.current) return;
@@ -858,23 +1023,48 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         dragNavRef.current = true;
         onNavigate(dirGesture);
       } else {
-        // Spring back with bounce
-        gsap.to(currentSlideEl, {
-          x: 0,
-          scale: 1,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 0.5,
-          ease: "elastic.out(1, 0.55)",
-        });
-        if (candidateSlide) {
+        // Spring-Back: Sweep zurück auf reveal=0. Wenn kein Candidate
+        // (Rubber-Band-Edge), Position via x zurückfedern.
+        if (hasCandidate && candidateSlide) {
+          const angle = sweepAngle(dirGesture, lastDragTiltRef.current);
+          const softZone = isMobile ? MASK_SOFT_ZONE_MOBILE : MASK_SOFT_ZONE_DESKTOP;
+          const tweenObj = { reveal: progress };
+          gsap.to(tweenObj, {
+            reveal: 0,
+            duration: 0.35,
+            ease: "power2.out",
+            onUpdate: () => {
+              setSlideMask(currentSlideEl, angle, "outgoing", tweenObj.reveal, softZone);
+              setSlideMask(candidateSlide, angle, "incoming", tweenObj.reveal, softZone);
+            },
+            onComplete: () => {
+              clearSlideMask(currentSlideEl);
+              clearSlideMask(candidateSlide);
+              candidateSlide.style.opacity = "0";
+              candidateSlide.style.pointerEvents = "none";
+              currentSlideEl.style.zIndex = "";
+              candidateSlide.style.zIndex = "";
+            },
+          });
+          // Scale federt parallel zurück: outgoing → 1.0, incoming → 0.96.
+          gsap.to(currentSlideEl, {
+            scale: 1,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
           gsap.to(candidateSlide, {
-            x: dirGesture * 200,
-            scale: 1.2,
-            opacity: 0,
-            filter: "blur(0px)",
-            duration: 0.3,
-            ease: "power3.out",
+            scale: 1 - SLIDE_SCALE_OFFSET,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        } else {
+          // Rubber-band reset
+          gsap.to(currentSlideEl, {
+            x: 0,
+            duration: 0.4,
+            ease: "elastic.out(1, 0.55)",
           });
         }
         dragCandidateSlugRef.current = null;
