@@ -14,6 +14,15 @@ let initialized = false;
 export function initGSAP() {
   if (initialized) return;
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin, Flip);
+
+  // Lag-Smoothing: First-Paint-Lags > 150ms (typisch 200-400ms beim
+  // ersten Tap auf Mobile) werden auf 16ms geglättet, sonst springt GSAP
+  // den Tween um den vollen Lag-Wert vor → Animation wirkt "instant".
+  // Normale Mobile-Frames (25-40ms) liegen UNTER der Schwelle und laufen
+  // nativ — keine Slowdown der Wall-Clock-Time. Default war 500/33 was
+  // typische First-Paint-Lags nicht abdeckte.
+  gsap.ticker.lagSmoothing(150, 16);
+
   initialized = true;
 }
 

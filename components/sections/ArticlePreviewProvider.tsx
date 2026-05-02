@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { Post } from "@/lib/types";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 import ArticlePreviewOverlay from "./ArticlePreviewOverlay";
@@ -103,9 +103,6 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
       if (!prev) return prev;
       const next = prev.currentIndex + delta;
       if (next < 0 || next >= prev.ctx.posts.length) return prev;
-      // Sync background slider instantly (jump=true) so the source card's
-      // position is stable when the close-morph measures it.
-      prev.ctx.emblaApi?.scrollTo(next, true);
       return { ...prev, currentIndex: next };
     });
   }, []);
@@ -115,10 +112,33 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
       if (!prev) return prev;
       if (index === prev.currentIndex) return prev;
       if (index < 0 || index >= prev.ctx.posts.length) return prev;
-      prev.ctx.emblaApi?.scrollTo(index, true);
       return { ...prev, currentIndex: index };
     });
   }, []);
+
+  // Embla-Sync nach Render-Commit, damit setState-Updater pure bleiben.
+  // Synchroner scrollTo im Updater löste "Cannot update component while
+  // rendering different component"-Warning aus, weil Embla per Event-Bus
+  // sofort setSelectedIndex in ArticleSlider triggerte.
+  // Nur bei Index-Wechseln INNERHALB eines offenen Previews syncen — beim
+  // ersten Open (null → state) nicht, sonst springt die Source-Card und
+  // der Open-Morph misst falsche Rects.
+  const lastSyncedIndexRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (!state) {
+      lastSyncedIndexRef.current = null;
+      return;
+    }
+    if (lastSyncedIndexRef.current === null) {
+      // Erster Render mit state → Open. Kein Sync.
+      lastSyncedIndexRef.current = state.currentIndex;
+      return;
+    }
+    if (lastSyncedIndexRef.current !== state.currentIndex) {
+      state.ctx.emblaApi?.scrollTo(state.currentIndex, true);
+      lastSyncedIndexRef.current = state.currentIndex;
+    }
+  }, [state]);
 
   const closePreview = useCallback(() => {
     setState(null);

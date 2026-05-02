@@ -227,7 +227,16 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                 alignItems: 'flex-start',
                 justifyContent: 'center',
                 opacity: slideStyles[index + 1]?.opacity ?? 1,
-                transition: categoryTransition === 'in' ? 'opacity 0.1s ease' : 'flex-grow 0.3s ease, opacity 0.1s ease',
+                // Mobile: keine CSS-Transition für opacity — Embla feuert
+                // Scroll-Events pro Frame; eine 0.1s-Transition würde bei
+                // jedem Update einen neuen Tween gegen ein bewegtes Ziel
+                // starten → sichtbares Wiggle/Größen-Springen auf iPhone.
+                // (Gleiche Logik wie im SubcategorySlider.)
+                transition: categoryTransition === 'in'
+                  ? 'opacity 0.1s ease'
+                  : isMobile
+                  ? 'flex-grow 0.3s ease'
+                  : 'flex-grow 0.3s ease, opacity 0.1s ease',
               }}
             >
               <div style={{
@@ -237,7 +246,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                   slideStyles[index + 1]?.origin === 'right' ? 'right center' :
                   slideStyles[index + 1]?.origin === 'left' ? 'left center' :
                   'center center',
-                transition: categoryTransition === 'in' ? 'none' : 'transform 0.1s ease',
+                transition: categoryTransition === 'in' || isMobile ? 'none' : 'transform 0.1s ease',
               }}>
                 <SlideArticleCard post={post} index={index} phase1Visible={effectivePhase1} phase2Visible={effectivePhase2} categoryTransition={categoryTransition} />
               </div>
@@ -250,7 +259,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                   transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
                   transformOrigin: 'center center',
                   opacity: Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
-                  transition: 'opacity 0.1s ease, transform 0.1s ease',
+                  transition: isMobile ? 'none' : 'opacity 0.1s ease, transform 0.1s ease',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',

@@ -9,7 +9,6 @@ import { gsap, initGSAP } from "@/lib/gsapConfig";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import InstagramDots from "@/components/ui/InstagramDots";
-import VisualLottie from "@/components/ui/VisualLottie";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 
@@ -157,7 +156,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const leftNavRef = useRef<HTMLDivElement>(null);
   const rightNavRef = useRef<HTMLDivElement>(null);
@@ -172,8 +170,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const leftArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const rightArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
-  const [closeHovered, setCloseHovered] = useState(false);
-  const [closeActive, setCloseActive] = useState(false);
   const [phase, setPhase] = useState<Phase>("opening");
   // Arrows "disabled" außerhalb der slider-Phase → bestehende disable-Animation
   // spielt beim Öffnen/Schließen (scale/line/vline in/out).
@@ -279,6 +275,20 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const isExitingRef = useRef(false);
   const initialIndexRef = useRef(currentIndex);
 
+  // Pending-Timeouts sammeln, damit sie beim Unmount gecleared werden können.
+  // Sonst feuern setTimeouts aus requestClose/close-morph nach Unmount und
+  // rufen setPhase/onClose auf einer toten Komponente → React-Warning +
+  // akkumulierende GSAP-Tweens → OOM-Crash auf iOS nach 2-3 Open/Close.
+  const pendingTimeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+  const scheduleTimeout = useCallback((cb: () => void, ms: number) => {
+    const id = setTimeout(() => {
+      pendingTimeoutsRef.current.delete(id);
+      cb();
+    }, ms);
+    pendingTimeoutsRef.current.add(id);
+    return id;
+  }, []);
+
   // ── Side effects + cleanup ────────────────────────────────────────────────
   useEffect(() => {
     const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
@@ -292,10 +302,62 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       document.body.style.overflow = previousOverflow;
       document.body.style.paddingRight = previousPadRight;
       window.dispatchEvent(new CustomEvent("menu-closed"));
-      // Restore any hidden source cards
+
+      // Pending-Timeouts clearen — verhindert setState-on-unmounted-component
+      // und akkumulierende GSAP-Tweens nach 2-3 Open/Close-Zyklen.
+      pendingTimeoutsRef.current.forEach(clearTimeout);
+      pendingTimeoutsRef.current.clear();
+
+      // Alle GSAP-Tweens auf Slide-Refs killen — Morph-Tweens, Text-Fades,
+      // Backdrop-Fades. Sonst halten sie Detached-DOM-Knoten und akkumulieren
+      // → iOS-Mobile-OOM-Crash nach 2-3 Open/Close-Zyklen.
+      boxRefs.current.forEach((el) => gsap.killTweensOf(el));
+      imageRefs.current.forEach((el) => gsap.killTweensOf(el));
+      textRefs.current.forEach((el) => gsap.killTweensOf(el));
+      infoRefs.current.forEach((el) => gsap.killTweensOf(el));
+      categoryRefs.current.forEach((el) => gsap.killTweensOf(el));
+      slideWrapperRefs.current.forEach((el) => gsap.killTweensOf(el));
+      if (backdropRef.current) gsap.killTweensOf(backdropRef.current);
+      if (trackRef.current) gsap.killTweensOf(trackRef.current);
+
+      // Zusätzlich: Nav/Arrow/Line/Vline-Refs killen (slider-phase tweens).
+      if (leftArrowRef.current) gsap.killTweensOf(leftArrowRef.current);
+      if (rightArrowRef.current) gsap.killTweensOf(rightArrowRef.current);
+      if (leftArrowSvgRef.current) gsap.killTweensOf(leftArrowSvgRef.current);
+      if (rightArrowSvgRef.current) gsap.killTweensOf(rightArrowSvgRef.current);
+      if (leftLineRef.current) gsap.killTweensOf(leftLineRef.current);
+      if (rightLineRef.current) gsap.killTweensOf(rightLineRef.current);
+      if (leftVlineRef.current) gsap.killTweensOf(leftVlineRef.current);
+      if (rightVlineRef.current) gsap.killTweensOf(rightVlineRef.current);
+      if (leftNavRef.current) gsap.killTweensOf(leftNavRef.current);
+      if (rightNavRef.current) gsap.killTweensOf(rightNavRef.current);
+      if (footerRef.current) gsap.killTweensOf(footerRef.current);
+
+      // Belt-and-Suspenders: Auch alle Tweens auf Descendants des Root killen.
+      // Fängt Tweens auf transient queryselected Elementen (z.B. cardTextEl auf
+      // den Source-Cards), die wir nicht als Refs halten.
+      if (rootRef.current) {
+        const all = rootRef.current.querySelectorAll<HTMLElement>("*");
+        all.forEach((el) => gsap.killTweensOf(el));
+      }
+
+      // Ref-Maps leeren — sonst behalten wir Pointers auf detached DOM-Knoten.
+      boxRefs.current.clear();
+      imageRefs.current.clear();
+      textRefs.current.clear();
+      infoRefs.current.clear();
+      categoryRefs.current.clear();
+      slideWrapperRefs.current.clear();
+
+      // Restore any hidden source cards. ZUERST in-flight Tweens auf den
+      // Source-Card-Children killen — sonst kann ein noch laufender
+      // gsap.to(cardTextEl, ..., onComplete: visibility="hidden") nach unserem
+      // Restore noch feuern und die Card wieder verstecken.
       posts.forEach((_, i) => {
         const el = ctx.getCardEl(i);
         if (el) {
+          gsap.killTweensOf(el);
+          el.querySelectorAll<HTMLElement>("*").forEach((d) => gsap.killTweensOf(d));
           el.style.visibility = "";
           const bgEl = el.querySelector<HTMLElement>("[data-card-image-bg]");
           if (bgEl) bgEl.style.visibility = "";
@@ -393,8 +455,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       );
     }
 
-    // Background blur — parallel (extended: includes TopNav + dotline + opt-in landing elements)
-    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
+    // Background blur — parallel (extended: includes TopNav + dotline + opt-in landing elements).
+    // label:"preview" triggert den Burger-Morph zu X im BookmarkNav (handleMenuOpened
+    // bailt sonst auf !label) — der Burger fungiert dadurch als Close-Trigger.
+    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true, label: "preview" } }));
 
     // Backdrop fade in
     if (backdropRef.current) {
@@ -509,25 +573,18 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Fade in X + dots scale-in bei Entry in slider phase; reverse bei closing ──
+  // ── Dots scale-in bei Entry in slider phase; reverse bei closing ──
+  // Close-Button entfällt — Burger im BookmarkNav fungiert als Close-Trigger.
   useLayoutEffect(() => {
     if (phase === "slider") {
-      if (closeBtnRef.current) {
-        gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
-      }
       // Dots skalieren jetzt individuell via visible-Prop an InstagramDots —
       // kein Container-Scale mehr hier.
       // Pfeile (leftNav/rightNav): Container bleibt sichtbar, die bestehende
       // disable-Animation spielt jetzt beim Phase-Wechsel (scale/line/vline).
       if (leftNavRef.current) gsap.set(leftNavRef.current, { opacity: 1 });
       if (rightNavRef.current) gsap.set(rightNavRef.current, { opacity: 1 });
-    } else if (phase === "closing") {
-      if (closeBtnRef.current) {
-        gsap.to(closeBtnRef.current, { opacity: 0, duration: 0.2, ease: "power2.in" });
-      }
-      // Dots skalieren automatisch über visible=false an InstagramDots
-      // (jeder Dot einzeln via DotSlot).
     }
+    // closing-phase: Dots skalieren automatisch über visible=false an InstagramDots
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
@@ -780,18 +837,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (isExitingRef.current) return;
     isExitingRef.current = true;
 
-    // Fade current slide text + X before phase swap
+    // Fade current slide text before phase swap
     const textEl = post ? textRefs.current.get(post.slug) : null;
     if (textEl) gsap.to(textEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    if (closeBtnRef.current) {
-      gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
-    }
     // Pfeile + Dots NICHT per Opacity ausblenden — die disable-Animation
     // (arrow scale 0, line scaleX 0, vline scaleY 0) spielt beim Wechsel
     // zu phase="closing" automatisch. Dots skalieren einzeln über visible-
     // Prop an InstagramDots (jeder Dot via DotSlot).
-    window.setTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
-  }, [post]);
+    scheduleTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
+  }, [post, scheduleTimeout]);
 
   useLayoutEffect(() => {
     if (phase !== "closing") return;
@@ -959,7 +1013,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       }
     );
 
-    window.setTimeout(() => {
+    scheduleTimeout(() => {
       // Morph done. Preview-image + overlay info-i sit at card position. Fade card text in
       // on the card itself while the preview is still covering it (box is transparent).
       const finish = () => {
@@ -997,6 +1051,17 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [requestClose, phase, currentIndex, posts.length, onNavigate]);
+
+  // ── Burger als Close-Trigger ──────────────────────────────────────────────
+  // BookmarkNav.toggleBurger feuert burger-closed, wenn der User den Burger/X
+  // anklickt. Wir gehen über requestClose, damit der OUT-Morph (phase →
+  // "closing" + Flip zurück zur Source-Card) sauber durchläuft. Direktes
+  // closePreview würde das Overlay sofort unmounten und den Morph killen.
+  useEffect(() => {
+    const onBurgerClose = () => requestClose();
+    window.addEventListener("burger-closed", onBurgerClose);
+    return () => window.removeEventListener("burger-closed", onBurgerClose);
+  }, [requestClose]);
 
   if (typeof document === "undefined" || !post) return null;
 
@@ -1269,6 +1334,17 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }}
       >
         {posts.map((p, i) => {
+          // Virtualisierung: nur aktiver Slide + 1 Nachbar links/rechts wird
+          // gemountet. Bei einem Slider mit z.B. 22 Posts hängen sonst 22×
+          // (Image + DOM + Skeleton) parallel im Speicher → iOS-Mobile-OOM
+          // nach 2-3 Open/Close-Cycles. Mit Radius 1 sind es max 3.
+          //
+          // Beim Swipen/Klick wird currentIndex aktualisiert, React rendert
+          // die neue Nachbarschaft, useEffect-basierte Nav-Animation läuft
+          // wie bisher (slideWrapperRefs für nicht-gemountete Slides sind
+          // null → killTweensOf early-return, kein Side-Effect).
+          const isVisible = Math.abs(i - currentIndex) <= 1;
+          if (!isVisible) return null;
           return (
             <div
               key={p.slug}
@@ -1337,72 +1413,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             pointerEvents: "none",
           }}
         >
-          <button
-            ref={closeBtnRef}
-            onClick={requestClose}
-            onMouseEnter={() => setCloseHovered(true)}
-            onMouseLeave={() => {
-              setCloseHovered(false);
-              setCloseActive(false);
-            }}
-            onMouseDown={() => setCloseActive(true)}
-            onMouseUp={() => setCloseActive(false)}
-            onTouchStart={() => setCloseActive(true)}
-            onTouchEnd={() => setCloseActive(false)}
-            aria-label="Schließen"
-            style={{
-              position: "absolute",
-              top: 40,
-              right: 40,
-              width: 40,
-              height: 40,
-              borderRadius: "50%",
-              background: closeHovered ? "var(--color-brand-secondary)" : "transparent",
-              border: `1px solid ${closeHovered ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              opacity: 0,
-              pointerEvents: "auto",
-              transform: closeActive ? "scale(1.1)" : "scale(1)",
-              transition: "background 0.1s ease-out, border-color 0.1s ease-out, transform 0.2s ease-out",
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 16 16" aria-hidden>
-              <line
-                x1="8"
-                y1="1"
-                x2="8"
-                y2="15"
-                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                style={{
-                  transform: `rotate(${closeActive ? -55 : -45}deg)`,
-                  transformBox: "fill-box",
-                  transformOrigin: "center",
-                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
-                }}
-              />
-              <line
-                x1="8"
-                y1="1"
-                x2="8"
-                y2="15"
-                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                style={{
-                  transform: `rotate(${closeActive ? 55 : 45}deg)`,
-                  transformBox: "fill-box",
-                  transformOrigin: "center",
-                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
-                }}
-              />
-            </svg>
-          </button>
-
         </div>
       </div>
 
@@ -1477,7 +1487,6 @@ function SlidePreview({
             }
       }
     >
-      <VisualLottie seed={post.slug} />
       {imageUrl && (
         <img
           src={imageUrl}
@@ -1883,8 +1892,7 @@ function SlidePreview({
           overflow: "hidden",
         }}
       >
-        <VisualLottie seed={post.slug} />
-        {imageUrl && (
+          {imageUrl && (
           <img
             src={imageUrl}
             alt={post.featuredImage?.node.altText || ''}

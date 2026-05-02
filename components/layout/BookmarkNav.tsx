@@ -2,7 +2,7 @@
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import Image from "next/image";
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
@@ -58,6 +58,18 @@ export default function BookmarkNav() {
   const searchOpen = useRef(false);
 
   const innerStartX = useRef(0);
+
+  /* ══════════════════════════════════════════════════
+     INIT: GSAP-Transform-Setup auf den Burger-Linien.
+     Wir besitzen transform/transformOrigin der Linien EXKLUSIV via GSAP —
+     React darf sie nicht im JSX-Inline-Style verwalten, sonst überschreibt
+     ein Re-Render (burgerState-Change bei Hover) die laufende GSAP-Animation.
+     ══════════════════════════════════════════════════ */
+  useLayoutEffect(() => {
+    lineRefs.current.forEach((line) => {
+      if (line) gsap.set(line, { scaleX: 0, transformOrigin: "right center" });
+    });
+  }, []);
 
   /* ══════════════════════════════════════════════════
      SCROLL TRIGGER: Burger reveal/hide
@@ -193,7 +205,11 @@ export default function BookmarkNav() {
     gsap.set(wTop, { y: BURGER_GAP + 2, rotation: 45 });
     gsap.set(wMid, { opacity: 0 });
     gsap.set(wBot, { y: -(BURGER_GAP + 2), rotation: -45 });
-    lines.forEach((line) => { if (line) gsap.set(line, { scaleX: 0 }); });
+    // transformOrigin: "center center" für die scaleX-Animation der X-Linien.
+    // Default-CSS hat "right center" (für Burger-Reveal von rechts). Bei rotiertem
+    // Wrapper (45°/-45°) wächst die Linie damit von einer Ecke aus → Pfeil-Form.
+    // Mit "center center" wachsen die Linien symmetrisch von der Mitte → sauberes X.
+    lines.forEach((line) => { if (line) gsap.set(line, { scaleX: 0, transformOrigin: "center center" }); });
 
     gsap.to(btn, { width: BTN_HEIGHT, paddingRight: 8, duration: 0.3, ease: "power2.inOut" });
     [lines[0], lines[2]].forEach((line, i) => {
@@ -211,14 +227,17 @@ export default function BookmarkNav() {
     burgerIsX.current = false;
     burgerVisible.current = false;
 
+    // Symmetrisch zu revealAsX kollabieren — center center transformOrigin.
     [lines[0], lines[2]].forEach((line, i) => {
       if (!line) return;
-      gsap.to(line, { scaleX: 0, duration: 0.2, delay: i * 0.08, ease: "power2.out" });
+      gsap.to(line, { scaleX: 0, transformOrigin: "center center", duration: 0.2, delay: i * 0.08, ease: "power2.out" });
     });
     gsap.to(btn, {
       width: 0, paddingRight: 0, duration: 0.3, delay: 0.2, ease: "power2.inOut",
       onComplete: () => {
         w.forEach((wr) => { if (wr) gsap.set(wr, { rotation: 0, y: 0, opacity: 1 }); });
+        // transformOrigin der Linien zurück auf CSS-Default für nachfolgende Burger-Reveal-Animationen.
+        lines.forEach((line) => { if (line) gsap.set(line, { transformOrigin: "right center" }); });
       },
     });
   }, []);
@@ -228,8 +247,38 @@ export default function BookmarkNav() {
     const handleMenuOpened = (e: Event) => {
       const label = (e as CustomEvent).detail?.label;
       if (!label) return;
-      if (burgerVisible.current && !burgerIsX.current) animateToX();
-      else if (!burgerVisible.current) revealAsX();
+      if (burgerIsX.current) return;
+
+      const btn = burgerBtnRef.current;
+      if (!btn) return;
+
+      // Race-Killer: in-flight Reveal/Hide-Tweens (von ScrollTrigger ausgelöst)
+      // killen, sonst läuft revealBurger's line-scaleX-Animation parallel zu
+      // unserem animateToX → Wrapper rotieren, Linien sind aber noch
+      // halb-gedrawt mit "right center"-Origin → Krähenfuss-X.
+      gsap.killTweensOf(btn);
+      lineRefs.current.forEach((line) => { if (line) gsap.killTweensOf(line); });
+      wrapperRefs.current.forEach((w) => { if (w) gsap.killTweensOf(w); });
+
+      // Pfad-Auswahl auf Basis der TATSÄCHLICHEN Button-Breite, nicht des
+      // burgerVisible-Flags (der Flag kann durch in-flight ScrollTrigger
+      // bereits true sein, obwohl der Button noch animiert).
+      const currentWidth = (gsap.getProperty(btn, "width") as number) || 0;
+      const fullyVisible = currentWidth >= BTN_HEIGHT - 1;
+
+      if (fullyVisible) {
+        // Burger ist vollständig sichtbar → einfacher Burger→X-Morph.
+        // Linien werden nicht angerührt (bleiben scaleX:1) — animateToX
+        // rotiert nur die Wrapper.
+        lineRefs.current.forEach((line) => {
+          if (line) gsap.set(line, { scaleX: 1 });
+        });
+        animateToX();
+      } else {
+        // Burger nicht voll sichtbar (mid-reveal oder hidden) → revealAsX
+        // setzt Button-Width + draw-in der X-Linien aus dem Center.
+        revealAsX();
+      }
     };
     window.addEventListener("menu-opened", handleMenuOpened);
     return () => window.removeEventListener("menu-opened", handleMenuOpened);
@@ -584,7 +633,13 @@ export default function BookmarkNav() {
                 ref={(el) => { if (el) lineRefs.current[i] = el; }}
                 style={{
                   width: "100%", height: "100%", background: "white",
-                  borderRadius: 1, transformOrigin: "right center", transform: "scaleX(0)",
+                  borderRadius: 1,
+                  // KEIN transform/transformOrigin im JSX-Inline-Style!
+                  // React würde diese bei jedem Re-Render (z.B. burgerState-Change
+                  // bei Hover/Click) wieder auf scaleX(0)/right-center setzen und
+                  // damit GSAP-Animationen mid-flight resetten → "Krähenfuss"-X
+                  // oder Pop-In ohne Animation. Initialisierung erfolgt einmalig
+                  // per gsap.set in useLayoutEffect (siehe unten).
                 }}
               />
             </div>
