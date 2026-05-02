@@ -1320,6 +1320,12 @@ h2.faq-heading {
   margin-top: 23px;
 }
 
+@media (max-width: 767px) {
+  .related-posts-nav {
+    margin-top: -10px;
+  }
+}
+
 /* ─────────────────────────────────────────────
    Anbieter-Content (Beschreibung + Kontakttabelle)
    ───────────────────────────────────────────── */

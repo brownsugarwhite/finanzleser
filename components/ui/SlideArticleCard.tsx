@@ -37,8 +37,17 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
   const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
   const [imageVisible, setImageVisible] = useState(false);
+  const [hoverCapable, setHoverCapable] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: hover)');
+    setHoverCapable(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setHoverCapable(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     if (imageVisible) return;
@@ -122,7 +131,7 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
         userSelect: 'none',
         WebkitUserSelect: 'none',
         cursor: 'pointer',
-        transform: cardHovered ? 'scale(1.1)' : 'none',
+        transform: cardHovered && hoverCapable ? 'scale(1.1)' : 'none',
         transition: 'transform 0.3s ease',
       }}
     >

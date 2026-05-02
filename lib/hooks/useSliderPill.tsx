@@ -30,6 +30,7 @@ export interface UseSliderPillOptions {
   hasLens?: boolean;
   activeIndex?: number | null;
   slideStylesRef?: React.RefObject<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>;
+  isMobile?: boolean;
 }
 
 /* ── Hook ───────────────────────────────────────── */
@@ -44,6 +45,7 @@ export function useSliderPill({
   hasLens = true,
   activeIndex = null,
   slideStylesRef,
+  isMobile = false,
 }: UseSliderPillOptions) {
   const pillRef = useRef<HTMLDivElement>(null);
   const pillBodyRef = useRef<HTMLDivElement>(null);
@@ -294,7 +296,10 @@ export function useSliderPill({
   /* ── Render ── */
 
   const renderPill = useCallback(() => {
-    const spacerLeft = spacerExpanded ? "calc(5vw + 23px)" : "5vw";
+    // Mobile: Leading-Spacer im Slider ist 0 → Lens-Schrift muss
+    // entsprechend ohne Spacer-Versatz starten, sonst läuft die weiße
+    // Schrift unter der Pill aus dem sichtbaren Bereich raus.
+    const spacerLeft = isMobile ? "0px" : (spacerExpanded ? "calc(5vw + 23px)" : "5vw");
 
     return (
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", zIndex: 4 }}>
@@ -358,7 +363,7 @@ export function useSliderPill({
         </div>
       </div>
     );
-  }, [items, hasLens, titleWidths, gap, spacerExpanded]);
+  }, [items, hasLens, titleWidths, gap, spacerExpanded, isMobile]);
 
   return {
     pillRef, lensRef, cardRefs,

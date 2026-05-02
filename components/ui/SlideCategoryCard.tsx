@@ -22,6 +22,7 @@ interface SlideCategoryCardProps {
 }
 
 const CARD_WIDTH = 350;
+const CARD_WIDTH_MOBILE = 290;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
@@ -32,6 +33,23 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
   const [phase2Active, setPhase2Active] = useState(false);
   const phase2Timer = useRef<ReturnType<typeof setTimeout>>(null);
   const [cardHovered, setCardHovered] = useState(false);
+  const [hoverCapable, setHoverCapable] = useState(true);
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: hover)');
+    setHoverCapable(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setHoverCapable(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     if (phase2Timer.current) clearTimeout(phase2Timer.current);
@@ -64,7 +82,8 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
 
   const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
-  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${CARD_WIDTH}px`);
+  const baseCardWidth = isMobile ? CARD_WIDTH_MOBILE : CARD_WIDTH;
+  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${baseCardWidth}px`);
 
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
@@ -85,7 +104,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
         paddingBottom: 5,
         // Hover-Scale nur im Card-Mode (nicht im Button-Mode, wo die Card
         // zusammenklappt).
-        transform: cardHovered && !active ? 'scale(1.1)' : 'scale(1)',
+        transform: cardHovered && !active && hoverCapable ? 'scale(1.1)' : 'scale(1)',
         transition: `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
       }}
     >

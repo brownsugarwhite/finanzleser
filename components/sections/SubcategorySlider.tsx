@@ -33,6 +33,15 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
   const [activeSlide, setActiveSlide] = useState<number | null>(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
   // Measure all title widths for pill lens + SlideCategoryCard
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
   useEffect(() => {
@@ -203,7 +212,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     // (MORPH_DURATION * 2) werden sie linear zwischen den Modes interpoliert,
     // damit die Scale der ersten/letzten Card nicht instant springt bei
     // Mode-Wechsel.
-    const CARD_PARAMS = { left: 400, right: 320, scaleMin: 0.2, overshoot: 150 };
+    // Mobile: kürzere Right-Fade-Zone im Card-Mode (Button-Mode bleibt
+    // unverändert — Wert wirkt dort bereits passend).
+    const CARD_PARAMS = { left: 400, right: isMobile ? 200 : 320, scaleMin: 0.2, overshoot: isMobile ? 80 : 150 };
     const BTN_PARAMS = { left: 260, right: 200, scaleMin: 0, overshoot: 40 };
     const morphDurationMs = MORPH_DURATION * 2;
     const morphStartMs = performance.now();
@@ -246,7 +257,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         const distFromRight = rootRect.right - slideCenter;
 
         let s = FULL;
-        if (distFromLeft < FADE_LEFT) {
+        if (!isMobile && distFromLeft < FADE_LEFT) {
           const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           s = { opacity: eased, scale: SCALE_MIN + (1 - SCALE_MIN) * eased, origin: 'right' };
@@ -295,7 +306,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       cancelled = true;
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [catEmblaApi, categories.length, activeSlide]);
+  }, [catEmblaApi, categories.length, activeSlide, isMobile]);
 
   // Reset article nav when closing
   // Delayed phase2 for spacer width (synced with card phase2)
@@ -436,6 +447,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     hasLens: true,
     activeIndex: activeSlide,
     slideStylesRef,
+    isMobile,
   });
 
   if (!categories || categories.length === 0) return null;
@@ -480,9 +492,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
               aria-hidden
               style={{
                 // Leading Spacer bleibt klein (linksbündig) — nur Trailing wächst.
+                // Mobile: Leading-Spacer entfällt komplett (flexBasis 0).
                 flexGrow: 0,
                 flexShrink: 0,
-                flexBasis: spacerExpanded ? 'calc(5vw + 23px)' : '5vw',
+                flexBasis: isMobile ? 0 : (spacerExpanded ? 'calc(5vw + 23px)' : '5vw'),
                 minWidth: 0,
                 transition: `flex-basis ${MORPH_DURATION / 1000}s ease`,
               }}
@@ -621,21 +634,23 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         />
       </div>
 
-        {/* Edge-Gradients — links */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: -5,
-            bottom: 0,
-            left: 0,
-            width: 150,
-            background: 'linear-gradient(to right, var(--color-bg-page), transparent)',
-            pointerEvents: 'none',
-            zIndex: 5,
-          }}
-        />
-        {/* Edge-Gradients — rechts */}
+        {/* Edge-Gradients — links (auf Mobile entfällt er komplett) */}
+        {!isMobile && (
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: -5,
+              bottom: 0,
+              left: 0,
+              width: 150,
+              background: 'linear-gradient(to right, var(--color-bg-page), transparent)',
+              pointerEvents: 'none',
+              zIndex: 5,
+            }}
+          />
+        )}
+        {/* Edge-Gradients — rechts (auf Mobile schmaler) */}
         <div
           aria-hidden
           style={{
@@ -643,7 +658,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
             top: 0,
             bottom: 0,
             right: 0,
-            width: 150,
+            width: isMobile ? 60 : 150,
             background: 'linear-gradient(to left, var(--color-bg-page), transparent)',
             pointerEvents: 'none',
             zIndex: 5,
@@ -654,7 +669,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       {/* Shared SliderNav — immer gemountet, damit die Pfeile und Dots beim
           Wegfall der Sichtbarkeits-Bedingung smooth ausfahren (statt hart zu
           unmounten). `visible` steuert die Scale-Animation. */}
-      <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: 23 }}>
+      <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: isMobile ? 3 : 23 }}>
         <SliderNav
           {...navProps}
           visible={(canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)}

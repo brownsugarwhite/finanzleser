@@ -34,6 +34,15 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     const raf = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
   const effectivePhase1 = mounted && phase1Visible;
   // Sparks + Linien: Timing an Phase 2 gekoppelt (Button-Breite ändert sich).
   // Card-Visuals bleiben weiter an Phase 1.
@@ -100,12 +109,13 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
 
     const slideCount = posts.length;
     const FADE_LEFT = 400;
-    const FADE_RIGHT = 320;
+    // Mobile: kürzere Right-Fade-Zone — auf Desktop bleibt 320 erhalten.
+    const FADE_RIGHT = isMobile ? 200 : 320;
     // Overshoot: Fade-Strecke reicht FADE_OVERSHOOT Pixel über den Viewport-
     // Rand hinaus. Innere Grenze (voll sichtbar / Beginn Ausfaden) bleibt bei
     // FADE_LEFT/RIGHT; am Bildschirmrand ist die Card dadurch noch minimal
     // sichtbar statt komplett weg.
-    const FADE_OVERSHOOT = 80;
+    const FADE_OVERSHOOT = isMobile ? 50 : 80;
 
     const update = () => {
       const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
@@ -123,7 +133,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
         const distFromLeft = slideCenter - rootRect.left;
         const distFromRight = rootRect.right - slideCenter;
 
-        if (distFromLeft < FADE_LEFT) {
+        if (!isMobile && distFromLeft < FADE_LEFT) {
           const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
           const eased = t * (2 - t); // ease-out quadratic
           // Card am linken Rand → Origin rechts
@@ -145,7 +155,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     update();
 
     return () => { emblaApi.off('scroll', update); };
-  }, [emblaApi, posts.length]);
+  }, [emblaApi, posts.length, isMobile]);
 
   // Push nav state up to parent
   useEffect(() => {
@@ -190,9 +200,11 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
           style={{
             // Beide Spacer fix auf 5vw. Cards absorbieren den Rest über ihre
             // eigene flex-grow bis max 450 — symmetrisch und minimal.
+            // Mobile: Leading-Spacer entfällt (flexBasis 0), Cards starten am
+            // linken Rand und sliden nur von rechts ein.
             flexGrow: 0,
             flexShrink: 0,
-            flexBasis: '5vw',
+            flexBasis: isMobile ? 0 : '5vw',
             minWidth: 0,
           }}
         />
