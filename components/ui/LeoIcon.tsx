@@ -66,8 +66,8 @@ export default function LeoIcon() {
       const homeSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       Object.assign(home.style, {
         position: "fixed",
-        bottom: "23px",
-        right: "36px",
+        bottom: "16px",
+        right: "23px",
         width: `${homeSize}px`,
         height: `${homeSize}px`,
         zIndex: "100",

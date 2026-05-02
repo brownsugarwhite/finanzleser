@@ -9,6 +9,7 @@ import { gsap, initGSAP } from "@/lib/gsapConfig";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 import InstagramDots from "@/components/ui/InstagramDots";
+import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
 
@@ -219,9 +220,10 @@ function restoreBoxToNatural(box: HTMLElement) {
   // Mobile keeps overflow visible so the sticky bottom button can stick to the
   // slide-wrapper scroll container; desktop clips the absolute image overlay.
   box.style.overflow = isMobile ? "visible" : "hidden";
-  // zIndex BEHALTEN — die Card muss über LogoBar/PreviewHeader liegen, auch
-  // nach Morph-Ende. Wird in IN-/OUT-Morph explizit auf "70" gesetzt.
-  box.style.zIndex = "70";
+  // Kein expliziter zIndex — Slide-Wrapper hat z=70 und ist die stacking
+  // context. Box hier z-auto sorgt dafür dass Sticky-Button + Sticky-Blur
+  // im Slide-Wrapper-Context konkurrieren können.
+  box.style.zIndex = "";
   box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
   box.style.backgroundColor = "#ffffff";
   box.style.boxShadow = PREVIEW_SHADOW;
@@ -295,6 +297,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const rightArrowQuickTo = useRef<((v: number) => gsap.core.Tween) | null>(null);
   const [hoverSide, setHoverSide] = useState<"left" | "right" | null>(null);
   const [phase, setPhase] = useState<Phase>("opening");
+  // Bottom-Blur-Wrapper + Button-Wrapper — Opacity wird per phase fade-in
+  // (opening) und fade-out (closing) animiert.
+  const bottomBlurRef = useRef<HTMLDivElement>(null);
+  const bottomButtonRef = useRef<HTMLDivElement>(null);
   // Triggered sofort beim Klick auf X — fadet PreviewHeader unabhängig von
   // phase=closing aus (das setzt erst nach TEXT_FADE_DURATION ein).
   const [headerExiting, setHeaderExiting] = useState(false);
@@ -761,6 +767,33 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
+  // ── Button fade + Blur scaleY-Reveal (opening) / reverse (closing) ──
+  // Button: opacity auf Wrapper safe.
+  // Blur: scaleY 0→1 mit transform-origin bottom → "wächst" aus der Bottom-
+  // Kante hoch. Blur-Stärke ist dabei voll, nur die Höhe wird animiert.
+  useLayoutEffect(() => {
+    if (!isMobile) return;
+    const button = bottomButtonRef.current;
+    const blur = bottomBlurRef.current;
+    if (phase === "opening") {
+      if (button) {
+        gsap.set(button, { opacity: 0 });
+        gsap.to(button, { opacity: 1, duration: MORPH_DURATION, ease: MORPH_EASE });
+      }
+      if (blur) {
+        gsap.set(blur, { transformOrigin: "bottom", scaleY: 0 });
+        gsap.to(blur, { scaleY: 1, duration: MORPH_DURATION, ease: MORPH_EASE });
+      }
+    } else if (phase === "closing") {
+      if (button) {
+        gsap.to(button, { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE });
+      }
+      if (blur) {
+        gsap.to(blur, { scaleY: 0, duration: MORPH_DURATION, ease: MORPH_EASE });
+      }
+    }
+  }, [phase, isMobile]);
+
   // ── Animate box height when extras arrive late for current slide ──────────
   const currentExtras = post ? extrasCache[post.slug] : null;
   useLayoutEffect(() => {
@@ -824,19 +857,22 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // Stale Transform-/Filter-Werte aus eventuellem vorherigen Drag-State
     // zurücksetzen (Drag-Handler arbeitet beim Rubber-Band noch mit x).
     // Scale-Startwerte: outgoing kommt von 1.0, incoming startet 0.96.
-    // Wenn aus Drag heraus genavigiert wurde, übernimmt das Tween die
-    // bereits gesetzten Werte sanft (overwrite "auto").
-    if (oldSlide) {
+    // ⚠ Scale + Transform-Reset gehen auf den BOX (nicht den Slide-Wrapper),
+    // damit der Slide-Wrapper KEINEN Stacking-Context bekommt → Sticky-Button
+    // im Box kann zur Overlay-Ebene leak-outen und über dem Blur liegen.
+    const oldBox = oldPost ? boxRefs.current.get(oldPost.slug) : null;
+    const newBox = newPost ? boxRefs.current.get(newPost.slug) : null;
+    if (oldBox) {
       const startScale = dragNavRef.current
         ? 1 - SLIDE_SCALE_OFFSET * lastDragProgressRef.current
         : 1;
-      gsap.set(oldSlide, { x: 0, scale: startScale, filter: "none" });
+      gsap.set(oldBox, { x: 0, scale: startScale, filter: "none" });
     }
-    if (newSlide) {
+    if (newBox) {
       const startScale = dragNavRef.current
         ? 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * lastDragProgressRef.current
         : 1 - SLIDE_SCALE_OFFSET;
-      gsap.set(newSlide, { x: 0, scale: startScale, filter: "none" });
+      gsap.set(newBox, { x: 0, scale: startScale, filter: "none" });
     }
 
     // Drag-Path und Click-Path liefern unterschiedliche Ausgangspunkte:
@@ -848,9 +884,22 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     //   also ist der State irgendwo zwischen ~0.3 und 1.0 → der finale Tween
     //   überschreibt ihn ohnehin).
     const tweenObj = { reveal: dragNavRef.current ? lastDragProgressRef.current : 0 };
+    // Velocity-aware Duration: schnelle Flicks (vx hoch) bekommen kürzere
+    // Animation, langsame Drags / Click-Nav nutzen NAV_DURATION voll. vx
+    // ist Pixel pro Millisekunde (useDrag default). vx 1 ≈ schnell, 2+ flick.
+    const velocity = dragNavRef.current ? lastDragVelocityRef.current : 0;
+    const remaining = 1 - tweenObj.reveal;
+    // Bei vx=0 → NAV_DURATION * remaining (Click oder Spring-Commit).
+    // Bei vx=2 → ~30% davon (schneller Flick).
+    const speedFactor = Math.max(0.3, 1 - velocity * 0.35);
+    const dynamicDuration = Math.max(0.18, NAV_DURATION * remaining * speedFactor);
+    // Schneller Flick → snappiger Ease (power3.out), langsamer Click →
+    // bleibender power2.inOut.
+    const dynamicEase = velocity > 0.8 ? "power3.out" : NAV_EASE;
     dragNavRef.current = false;
     dragCandidateSlugRef.current = null;
     lastDragProgressRef.current = 0;
+    lastDragVelocityRef.current = 0;
 
     // Slides für Transition vorbereiten: beide opaque rendern, incoming auf
     // höheres z-index damit Round-Corners der Box nicht den outgoing-Slide
@@ -858,53 +907,56 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (oldSlide) {
       oldSlide.style.opacity = "1";
       oldSlide.style.pointerEvents = "none";
-      oldSlide.style.zIndex = "70";
+      oldSlide.style.zIndex = "";
       setSlideMask(oldSlide, angle, "outgoing", tweenObj.reveal, softZone);
     }
     if (newSlide) {
       newSlide.style.opacity = "1";
       newSlide.style.pointerEvents = "auto";
-      newSlide.style.zIndex = "71";
+      newSlide.style.zIndex = "";
       setSlideMask(newSlide, angle, "incoming", tweenObj.reveal, softZone);
     }
 
     gsap.to(tweenObj, {
       reveal: 1,
-      duration: NAV_DURATION,
-      ease: NAV_EASE,
+      duration: dynamicDuration,
+      ease: dynamicEase,
       onUpdate: () => {
         if (oldSlide) setSlideMask(oldSlide, angle, "outgoing", tweenObj.reveal, softZone);
         if (newSlide) setSlideMask(newSlide, angle, "incoming", tweenObj.reveal, softZone);
       },
       onComplete: () => {
-        // Endzustand: outgoing voll versteckt (opacity 0, mask weg), incoming
-        // voll sichtbar (opacity 1, mask weg). z-index zurück, scale auf 1.
+        // Endzustand: outgoing voll versteckt, incoming voll sichtbar.
+        // Box-Transform clearen → Box hat im Steady-State keinen Stacking-
+        // Context → Sticky-Button leakt via Slide-Wrapper auf Overlay-Ebene.
         if (oldSlide) {
           clearSlideMask(oldSlide);
           oldSlide.style.opacity = "0";
-          oldSlide.style.zIndex = "70"; // back to JSX-default — nicht clearen, sonst Header rückt drüber
-          gsap.set(oldSlide, { scale: 1 });
+          oldSlide.style.zIndex = "";
         }
         if (newSlide) {
           clearSlideMask(newSlide);
-          newSlide.style.zIndex = "70";
+          newSlide.style.zIndex = "";
         }
+        if (oldBox) gsap.set(oldBox, { clearProps: "transform" });
+        if (newBox) gsap.set(newBox, { clearProps: "transform" });
       },
     });
-    // Scale parallel zum Mask-Wisch — outgoing 1.0 → 0.96, incoming 0.96 → 1.0.
-    if (oldSlide) {
-      gsap.to(oldSlide, {
+    // Scale parallel zum Mask-Wisch — auf BOX (nicht slide-wrapper) damit
+    // slide-wrapper keinen Stacking-Context bekommt.
+    if (oldBox) {
+      gsap.to(oldBox, {
         scale: 1 - SLIDE_SCALE_OFFSET,
-        duration: NAV_DURATION,
-        ease: NAV_EASE,
+        duration: dynamicDuration,
+        ease: dynamicEase,
         overwrite: "auto",
       });
     }
-    if (newSlide) {
-      gsap.to(newSlide, {
+    if (newBox) {
+      gsap.to(newBox, {
         scale: 1,
-        duration: NAV_DURATION,
-        ease: NAV_EASE,
+        duration: dynamicDuration,
+        ease: dynamicEase,
         overwrite: "auto",
       });
     }
@@ -960,6 +1012,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const lastDragTiltRef = useRef(0);
   const dragCandidateSlugRef = useRef<string | null>(null);
   const dragNavRef = useRef(false);
+  // Rubber-band Edge-Flash: true wenn der User aktuell am Anfang/Ende
+  // gegen die Wand zieht. Wird beim Erst-Detect zu true (Border-Flash an),
+  // beim Release zurück auf false (Fade-out).
+  const rubberActiveRef = useRef(false);
+  // Letzte Release-Velocity (px/ms) — wird vom Nav-Effect gelesen für
+  // Velocity-aware Transition-Duration. 0 = kein Drag (Click-Nav).
+  const lastDragVelocityRef = useRef(0);
   const bindDrag = useDrag(
     ({ first, last, movement: [mx], velocity: [vx], xy: [, y] }) => {
       if (phase !== "slider") return;
@@ -998,8 +1057,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       const newCandSlug = candidatePost?.slug ?? null;
       if (dragCandidateSlugRef.current !== newCandSlug) {
         if (dragCandidateSlugRef.current) {
-          const oldCand = slideWrapperRefs.current.get(dragCandidateSlugRef.current);
-          if (oldCand) gsap.set(oldCand, { x: 0, scale: 1.2, opacity: 0, filter: "blur(0px)" });
+          const oldCandWrapper = slideWrapperRefs.current.get(dragCandidateSlugRef.current);
+          const oldCandBox = boxRefs.current.get(dragCandidateSlugRef.current);
+          if (oldCandWrapper) gsap.set(oldCandWrapper, { opacity: 0 });
+          // Transform-State der alten Candidate-Box zurücksetzen (sonst bleibt
+          // sie bei scale 1.2 hängen wenn der User die Richtung wechselt).
+          if (oldCandBox) gsap.set(oldCandBox, { x: 0, scale: 1.2, filter: "blur(0px)" });
         }
         // Neuer Kandidat — scrollTop NULLEN während er noch durch die Mask
         // versteckt ist (reveal ≈ 0). Sonst sieht der User beim Reveal die
@@ -1026,13 +1089,16 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           const softZone = isMobile ? MASK_SOFT_ZONE_MOBILE : MASK_SOFT_ZONE_DESKTOP;
           currentSlideEl.style.opacity = "1";
           candidateSlide.style.opacity = "1";
-          currentSlideEl.style.zIndex = "70";
-          candidateSlide.style.zIndex = "71";
+          currentSlideEl.style.zIndex = "";
+          candidateSlide.style.zIndex = "";
           setSlideMask(currentSlideEl, angle, "outgoing", progress, softZone);
           setSlideMask(candidateSlide, angle, "incoming", progress, softZone);
-          // Scale parallel: outgoing 1 → 0.96, incoming 0.96 → 1.
-          gsap.set(currentSlideEl, { scale: 1 - SLIDE_SCALE_OFFSET * progress });
-          gsap.set(candidateSlide, {
+          // Scale parallel auf BOX (nicht slide-wrapper) → kein Stacking-
+          // Context auf slide-wrapper, Sticky-Button leakt.
+          const currentBox = boxRefs.current.get(post!.slug);
+          const candidateBox = boxRefs.current.get(candidatePost.slug);
+          if (currentBox) gsap.set(currentBox, { scale: 1 - SLIDE_SCALE_OFFSET * progress });
+          if (candidateBox) gsap.set(candidateBox, {
             scale: 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * progress,
           });
           lastDragProgressRef.current = progress;
@@ -1042,7 +1108,22 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           if (candText) gsap.set(candText, { opacity: 1 });
         } else {
           // Rubber-band at edges (kein Sweep — kein Candidate vorhanden).
-          gsap.set(currentSlideEl, { x: rubberMx });
+          // Auch x auf BOX, damit slide-wrapper transformfrei bleibt.
+          const currentBox = boxRefs.current.get(post!.slug);
+          if (currentBox) {
+            gsap.set(currentBox, { x: rubberMx });
+            // Edge-Flash: bei Erst-Detection Border-Color in Brand-Secondary
+            // einfaden (0.1s) als Signal "Ende erreicht".
+            if (!rubberActiveRef.current && Math.abs(rubberMx) > 2) {
+              rubberActiveRef.current = true;
+              gsap.to(currentBox, {
+                outlineColor: "#D3005E",
+                duration: 0.1,
+                ease: "power2.out",
+                overwrite: "auto",
+              });
+            }
+          }
         }
         return;
       }
@@ -1051,6 +1132,20 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       // erlauben (matched die JSX-Default-Werte aus dem Slide-Wrapper).
       currentSlideEl.style.touchAction = "";
       currentSlideEl.style.overflowY = "auto";
+
+      // Edge-Flash ausfaden falls aktiv.
+      if (rubberActiveRef.current) {
+        rubberActiveRef.current = false;
+        const currentBox = boxRefs.current.get(post!.slug);
+        if (currentBox) {
+          gsap.to(currentBox, {
+            outlineColor: "transparent",
+            duration: 0.3,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        }
+      }
 
       // Release
       if (navFiredThisGestureRef.current) return;
@@ -1063,6 +1158,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       if (shouldNavigate) {
         navFiredThisGestureRef.current = true;
         dragNavRef.current = true;
+        // Velocity speichern für Velocity-aware Transition-Dauer im Nav-Effect.
+        lastDragVelocityRef.current = absVx;
         onNavigate(dirGesture);
       } else {
         // Spring-Back: Sweep zurück auf reveal=0. Wenn kein Candidate
@@ -1084,26 +1181,37 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               clearSlideMask(candidateSlide);
               candidateSlide.style.opacity = "0";
               candidateSlide.style.pointerEvents = "none";
-              currentSlideEl.style.zIndex = "70";
-              candidateSlide.style.zIndex = "70";
+              currentSlideEl.style.zIndex = "";
+              candidateSlide.style.zIndex = "";
+              const currentBox = boxRefs.current.get(post!.slug);
+              const candidateBox = candidatePost ? boxRefs.current.get(candidatePost.slug) : null;
+              if (currentBox) gsap.set(currentBox, { clearProps: "transform" });
+              if (candidateBox) gsap.set(candidateBox, { clearProps: "transform" });
             },
           });
-          // Scale federt parallel zurück: outgoing → 1.0, incoming → 0.96.
-          gsap.to(currentSlideEl, {
-            scale: 1,
-            duration: 0.35,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-          gsap.to(candidateSlide, {
-            scale: 1 - SLIDE_SCALE_OFFSET,
-            duration: 0.35,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
+          // Scale federt parallel zurück (auf BOX): outgoing → 1.0, incoming → 0.96.
+          const currentBox = boxRefs.current.get(post!.slug);
+          const candidateBox = boxRefs.current.get(candidatePost!.slug);
+          if (currentBox) {
+            gsap.to(currentBox, {
+              scale: 1,
+              duration: 0.35,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          }
+          if (candidateBox) {
+            gsap.to(candidateBox, {
+              scale: 1 - SLIDE_SCALE_OFFSET,
+              duration: 0.35,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          }
         } else {
-          // Rubber-band reset
-          gsap.to(currentSlideEl, {
+          // Rubber-band reset (auf BOX)
+          const currentBox = boxRefs.current.get(post!.slug);
+          gsap.to(currentBox || currentSlideEl, {
             x: 0,
             duration: 0.4,
             ease: "elastic.out(1, 0.55)",
@@ -1368,12 +1476,16 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       aria-modal="true"
       role="dialog"
       style={{
+        // iOS-Safari-Bottom-Cut-Workaround: position: absolute statt fixed,
+        // mit top = beim Mount eingefangener scrollY → Overlay sitzt visuell
+        // exakt im Viewport, in Document-Position aber an scrollY verankert.
+        // Body ist via overflow:hidden geblockt (Side-Effects-useEffect), kein
+        // Wegscrollen möglich. Vorteil ggü. fixed: iOS überlappt nicht mehr
+        // mit Status-/URL-Bar-Cut weil Overlay nicht viewport-bound ist.
         position: "fixed",
         inset: 0,
-        height: "100lvh",
-        minHeight: "100vh",
+        height: "100vh",
         zIndex: 70,
-        overflow: "hidden",
         pointerEvents: "auto",
       }}
     >
@@ -1398,7 +1510,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           position: "fixed",          
           pointerEvents: "none",
           opacity: 0,
-          zIndex: 4,
+          zIndex: 80,
           display: isMobile ? "none" : undefined,
         }}
       >
@@ -1427,7 +1539,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             width: hoverSide === "left" ? 60 : 50,
             height: 22,
             pointerEvents: "none",
-            zIndex: 3,
+            zIndex: 79,
             transition: "left 0.3s, width 0.3s",
           }}
         >
@@ -1493,7 +1605,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             padding: 0,
             cursor: leftDisabled ? "default" : "pointer",
             pointerEvents: leftDisabled ? "none" : "auto",
-            zIndex: 4,
+            zIndex: 80,
           }}
         />
       </div>
@@ -1507,7 +1619,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           inset: 0,
           pointerEvents: "none",
           opacity: 0,
-          zIndex: 4,
+          zIndex: 80,
           display: isMobile ? "none" : undefined,
         }}
       >
@@ -1536,7 +1648,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             width: hoverSide === "right" ? 60 : 50,
             height: 22,
             pointerEvents: "none",
-            zIndex: 3,
+            zIndex: 79,
             transition: "right 0.3s, width 0.3s",
           }}
         >
@@ -1602,7 +1714,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             padding: 0,
             cursor: rightDisabled ? "default" : "pointer",
             pointerEvents: rightDisabled ? "none" : "auto",
-            zIndex: 4,
+            zIndex: 80,
           }}
         />
       </div>
@@ -1665,16 +1777,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 boxSizing: "border-box",
                 opacity: i === initialIndexRef.current ? 1 : 0,
                 pointerEvents: i === initialIndexRef.current ? "auto" : "none",
-                // Slide-Wrapper bekommt transform: scale() vom Page-Turn →
-                // erzeugt einen eigenen Stacking-Context. Ohne expliziten
-                // z-Index liegt er bei "auto" und PreviewHeader (z=65) rückt
-                // wieder darüber. Mit z=70 hier (gleich wie Box) bleibt der
-                // Wrapper über dem Header.
-                zIndex: 70,
-                // willChange entfernt: war permanent auf jedem Slide-Wrapper
-                // gesetzt → unnötiger GPU-Layer pro Slide. Mit Virtualisierung
-                // max 3 Slides gleichzeitig, aber auch 3 dauerhafte Layer
-                // sind unnötig. Browser promoten beim Animations-Start.
+                // KEIN zIndex hier — Slide-Wrapper soll KEIN Stacking-Context
+                // sein, damit der Sticky-Button im Box per leak-out z=85 über
+                // dem Overlay-Blur (z=80) liegen kann. Die transform: scale()
+                // vom Page-Turn würde einen Ctx erzeugen — wir clearen sie
+                // im animation-onComplete (Steady-State = keine Transform).
+                // Header wird per zIndex-auto + Document-Order unter den
+                // Slides gehalten (PreviewHeader rendert vor dem Track).
               }}
             >
               <SlidePreview
@@ -1695,6 +1804,115 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         })}
       </div>
 
+      {isMobile && (
+        <ProgressiveBlur
+          ref={bottomBlurRef}
+          height={220}
+          position="bottom"
+          cssPosition="absolute"
+          zIndex={80}
+        />
+      )}
+
+      {isMobile && (() => {
+        const mainCat = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
+        const subCat = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
+        const link = `/${mainCat?.slug || "beitraege"}/${subCat?.slug || "allgemein"}/${post.slug}`;
+        return (
+          <div
+            ref={bottomButtonRef}
+            style={{
+              position: "fixed",
+              left: 26,
+              bottom: 19,
+              zIndex: 85,
+              pointerEvents: phase === "slider" ? "auto" : "none",
+            }}
+          >
+            <Link href={link} onClick={requestClose} style={{ textDecoration: "none" }}>
+              <PreviewReadButton label="Ratgeber lesen" />
+            </Link>
+          </div>
+        );
+      })()}
+
+      {/* Mobile-Only Nav-Arrows — fixed, vertikal-zentriert, an den
+          Bildrändern. z=85 über Slides + Blur. */}
+      {isMobile && phase === "slider" && (
+        <>
+          <button
+            type="button"
+            aria-label="Vorherige Vorschau"
+            onClick={() => currentIndex > 0 && onNavigate(-1)}
+            disabled={currentIndex === 0}
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: 0,
+              transform: "translateY(-50%)",
+              width: 44,
+              height: 60,
+              padding: 0,
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+              opacity: currentIndex === 0 ? 0.25 : 1,
+              transition: "opacity 0.2s",
+              zIndex: 85,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "auto",
+            }}
+          >
+            <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
+              <path
+                d="M12 2 L2 12 L12 22"
+                stroke="var(--color-text-primary)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Nächste Vorschau"
+            onClick={() => currentIndex < posts.length - 1 && onNavigate(1)}
+            disabled={currentIndex === posts.length - 1}
+            style={{
+              position: "fixed",
+              top: "50%",
+              right: 0,
+              transform: "translateY(-50%)",
+              width: 44,
+              height: 60,
+              padding: 0,
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+              opacity: currentIndex === posts.length - 1 ? 0.25 : 1,
+              transition: "opacity 0.2s",
+              zIndex: 85,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "auto",
+            }}
+          >
+            <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
+              <path
+                d="M2 2 L12 12 L2 22"
+                stroke="var(--color-text-primary)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </>
+      )}
+
       {/* Close button + Nav arrows — always in viewport, not inside track.
           Close button sits in a virtual wrapper that mirrors the preview box position. */}
       <div
@@ -1709,7 +1927,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           justifyContent: "center",
           padding: "95px 130px 120px",
           pointerEvents: "none",
-          zIndex: 5,
+          zIndex: 81,
         }}
       >
         <div
@@ -1954,11 +2172,9 @@ function SlidePreview({
             boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
-            // Box muss ÜBER PreviewHeader (z=65) liegen — sonst rückt
-            // "Ratgebervorschau" nach dem ersten Swipe wieder darüber
-            // weil die navigierten Slides keinen restoreBoxToNatural-
-            // Pfad durchlaufen, der den z-Index sonst auf "70" setzt.
-            zIndex: 70,
+            // Edge-Flash: 2px outline, color animiert via GSAP beim Rubber-Band.
+            outline: "2px solid transparent",
+            outlineOffset: "-2px",
           }}
         >
           {/* Top text — faded by morph via setTextRef */}
@@ -2019,20 +2235,12 @@ function SlidePreview({
             {lesedauerSpan}
           </div>
 
-          {/* Button — Teil des bottom-blocks für synchrones Fade */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: 24,
-            }}
-          >
-            <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
-              <PreviewReadButton label="Ratgeber lesen" />
-            </Link>
-          </div>
           </div>
         </div>
+        {/* Button NICHT mehr im Box gerendert — Box hat scale-Animation,
+            erzeugt Stacking-Context während der Anim → Button wäre dann
+            unter dem Blur. Button wird im slide-wrapper-Loop nach
+            SlidePreview als Sibling gerendert (siehe overlay JSX). */}
       </div>
     );
   }
@@ -2060,7 +2268,9 @@ function SlidePreview({
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
-          zIndex: 70,
+          // Edge-Flash: 2px outline, color animiert via GSAP beim Rubber-Band.
+          outline: "1px solid transparent",
+          outlineOffset: "-1px",
         }}
       >
         {/* Text wrapper — fades as a unit */}
@@ -2353,7 +2563,9 @@ function PreviewHeader({ current, total, phase, exiting }: { current: number; to
         color: "var(--color-text-primary)",
         opacity: 0,
         whiteSpace: "nowrap",
-        zIndex: 65,
+        // KEIN expliziter zIndex — Header soll per Document-Order unter den
+        // Slides liegen (Header rendert vor dem Track). Mit explizitem z=65
+        // läge er über z-auto Slides; mit z-auto + DOM-Order liegt er drunter.
       }}
     >
       <span>Ratgebervorschau</span>
@@ -2389,9 +2601,9 @@ function PreviewFooter({
       style={{
         position: "fixed",
         left: "50%",
-        bottom: 40,
+        bottom: 70,
         transform: "translateX(-50%)",
-        zIndex: 6,
+        zIndex: 82,
         pointerEvents: "auto",
       }}
     >
