@@ -160,7 +160,10 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
                 borderRadius: "50%",
                 backgroundColor: DOT_COLOR,
                 flexShrink: 0,
-                willChange: "transform",
+                // willChange entfernt — wären 500 permanente GPU-Backing-Stores
+                // für 3px-Punkte. Die Dots werden zwar via gsap scale-animiert,
+                // aber pro Frame nur ein paar Dutzend gleichzeitig. Browser
+                // promoten kleine Transform-Animationen auch ohne Hint.
               }}
             />
           ))}

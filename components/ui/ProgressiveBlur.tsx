@@ -40,7 +40,9 @@ export default function ProgressiveBlur({ height = 120 }: Props) {
             WebkitBackdropFilter: `blur(${blur}px)`,
             maskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
-            willChange: "transform",
+            // willChange entfernt — die Layer animieren nicht (statisch fixed
+            // positioniert). Backdrop-filter erzeugt eh schon einen Backing-
+            // Store; ein zusätzlicher willChange:transform-Layer wäre doppelt.
           }}
         />
       ))}
