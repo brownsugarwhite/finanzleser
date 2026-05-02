@@ -500,7 +500,6 @@ export default function BookmarkNav() {
           gap: 4,
           paddingLeft: 1,
           paddingRight: 25,
-          marginRight: -1,
           overflow: "visible",
           background: "linear-gradient(to left, rgba(22,142,3,0.8), #45a117)",
         }}

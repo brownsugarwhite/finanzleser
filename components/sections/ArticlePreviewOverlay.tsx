@@ -302,12 +302,22 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
   // ── Side effects + cleanup ────────────────────────────────────────────────
   useEffect(() => {
+    // Native-Scrollbar ist global via `scrollbar-width: none` versteckt → keine
+    // Gutter-Kompensation nötig. Auf iOS lieferte `innerWidth - clientWidth`
+    // gelegentlich 1px (Subpixel-Rounding) und schob Bookmark+Content 1px
+    // nach links. Threshold ≥5px filtert das raus, echte Desktop-Scrollbars
+    // (15-17px) würden weiterhin kompensiert.
+    // Native-Scrollbar ist global via `scrollbar-width: none` versteckt → keine
+    // Gutter-Kompensation nötig. Auf iOS lieferte `innerWidth - clientWidth`
+    // gelegentlich 1px (Subpixel-Rounding) und schob Bookmark+Content 1px
+    // nach links. Threshold ≥5px filtert das raus, echte Desktop-Scrollbars
+    // (15-17px) würden weiterhin kompensiert.
     const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
     const previousOverflow = document.body.style.overflow;
     const previousPadRight = document.body.style.paddingRight;
 
     document.body.style.overflow = "hidden";
-    if (scrollbarW > 0) document.body.style.paddingRight = `${scrollbarW}px`;
+    if (scrollbarW >= 5) document.body.style.paddingRight = `${scrollbarW}px`;
 
     return () => {
       document.body.style.overflow = previousOverflow;
