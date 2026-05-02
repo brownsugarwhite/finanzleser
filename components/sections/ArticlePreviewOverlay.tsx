@@ -185,7 +185,9 @@ function restoreBoxToNatural(box: HTMLElement) {
   // Mobile keeps overflow visible so the sticky bottom button can stick to the
   // slide-wrapper scroll container; desktop clips the absolute image overlay.
   box.style.overflow = isMobile ? "visible" : "hidden";
-  box.style.zIndex = "";
+  // zIndex BEHALTEN — die Card muss über LogoBar/PreviewHeader liegen, auch
+  // nach Morph-Ende. Wird in IN-/OUT-Morph explizit auf "70" gesetzt.
+  box.style.zIndex = "70";
   box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
   box.style.backgroundColor = "#ffffff";
   box.style.boxShadow = PREVIEW_SHADOW;
@@ -204,7 +206,7 @@ function restoreImageToNatural(image: HTMLElement) {
     image.style.width = "100%";
     image.style.height = `${MOBILE_IMAGE_HEIGHT}px`;
     image.style.margin = "";
-    image.style.zIndex = "";
+    image.style.zIndex = "71";
     image.style.borderRadius = IMAGE_RADIUS_CSS;
     return;
   }
@@ -216,7 +218,7 @@ function restoreImageToNatural(image: HTMLElement) {
   image.style.width = `${IMAGE_WIDTH}px`;
   image.style.height = `${IMAGE_HEIGHT}px`;
   image.style.margin = "";
-  image.style.zIndex = "";
+  image.style.zIndex = "71";
   image.style.borderRadius = IMAGE_RADIUS_CSS;
   // background / pointerEvents set by JSX — don't touch
 }
@@ -585,11 +587,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     box.style.maxWidth = "none";
     box.style.maxHeight = "none";
     box.style.overflow = "hidden";
-    box.style.zIndex = "1";
+    box.style.zIndex = "70";
 
     image.style.position = "fixed";
     image.style.margin = "0";
-    image.style.zIndex = "2";
+    image.style.zIndex = "71";
 
     const boxTween = gsap.fromTo(
       box,
@@ -822,13 +824,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (oldSlide) {
       oldSlide.style.opacity = "1";
       oldSlide.style.pointerEvents = "none";
-      oldSlide.style.zIndex = "1";
+      oldSlide.style.zIndex = "70";
       setSlideMask(oldSlide, angle, "outgoing", tweenObj.reveal, softZone);
     }
     if (newSlide) {
       newSlide.style.opacity = "1";
       newSlide.style.pointerEvents = "auto";
-      newSlide.style.zIndex = "2";
+      newSlide.style.zIndex = "71";
       setSlideMask(newSlide, angle, "incoming", tweenObj.reveal, softZone);
     }
 
@@ -984,8 +986,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           const softZone = isMobile ? MASK_SOFT_ZONE_MOBILE : MASK_SOFT_ZONE_DESKTOP;
           currentSlideEl.style.opacity = "1";
           candidateSlide.style.opacity = "1";
-          currentSlideEl.style.zIndex = "1";
-          candidateSlide.style.zIndex = "2";
+          currentSlideEl.style.zIndex = "70";
+          candidateSlide.style.zIndex = "71";
           setSlideMask(currentSlideEl, angle, "outgoing", progress, softZone);
           setSlideMask(candidateSlide, angle, "incoming", progress, softZone);
           // Scale parallel: outgoing 1 → 0.96, incoming 0.96 → 1.
@@ -1214,7 +1216,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     box.style.maxWidth = "none";
     box.style.maxHeight = "none";
     box.style.overflow = "hidden";
-    box.style.zIndex = "1";
+    box.style.zIndex = "70";
 
     gsap.fromTo(
       box,
@@ -1243,7 +1245,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
     image.style.position = "fixed";
     image.style.margin = "0";
-    image.style.zIndex = "2";
+    image.style.zIndex = "71";
 
     gsap.fromTo(
       image,
@@ -1328,8 +1330,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       style={{
         position: "fixed",
         inset: 0,
-        height: "100vh",        
-        zIndex: 60,
+        height: "100vh",
+        // Overlay sitzt OBER LogoBar (z=62) und PreviewHeader, aber UNTER
+        // BookmarkNav (z=9999). Slidercard kann dadurch Logo-Bereich + den
+        // top-left-Header überdecken, ohne den Burger/X anzutasten.
+        zIndex: 70,
         overflow: "hidden",
         pointerEvents: "auto",
       }}
@@ -2280,7 +2285,7 @@ function PreviewHeader({ current, total, phase, exiting }: { current: number; to
   // Mobile: take the logo's top-left slot (LogoBar plays its out animation
   // when preview opens). Desktop: keep centered above the slider.
   const positionStyle: React.CSSProperties = isMobile
-    ? { top: 25, left: 25 }
+    ? { top: 36, left: 16 }
     : { top: 36, left: "50%", transform: "translateX(-50%)" };
 
   return (

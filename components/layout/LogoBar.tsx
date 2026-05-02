@@ -252,11 +252,13 @@ export default function LogoBar() {
       const detail = (e as CustomEvent).detail as { label?: string } | undefined;
 
       // Preview-Overlay: OUT-Animation passend zum aktuellen Zustand spielen
-      // und prior state merken. priorState NUR einmal pro Open setzen — der
-      // Overlay-IN-Effect feuert in Dev (StrictMode) doppelt, sonst würde
-      // der zweite Call "hidden" reinschreiben und der Restore beim Close
-      // wäre kaputt.
-      if (detail?.label === "preview") {
+      // und prior state merken. NUR Mobile — auf Desktop bleibt das Logo
+      // sichtbar (Slidercard liegt z-index-mäßig drüber).
+      // priorState NUR einmal pro Open setzen — der Overlay-IN-Effect feuert
+      // in Dev (StrictMode) doppelt, sonst würde der zweite Call "hidden"
+      // reinschreiben und der Restore beim Close wäre kaputt.
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      if (detail?.label === "preview" && isMobile) {
         const state = stateRef.current;
         if (previewPriorStateRef.current === null) {
           previewPriorStateRef.current = state;
