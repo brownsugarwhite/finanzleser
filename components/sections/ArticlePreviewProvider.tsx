@@ -135,7 +135,13 @@ export default function ArticlePreviewProvider({ children }: { children: React.R
       return;
     }
     if (lastSyncedIndexRef.current !== state.currentIndex) {
-      state.ctx.emblaApi?.scrollTo(state.currentIndex, true);
+      // +1 wegen Leading-Spacer: ArticleSlider rendert <spacer><card0><card1>…
+      // emblaApi.slideNodes() enthält den Spacer an Index 0. Um zu Card N zu
+      // scrollen muss scrollTo(N + 1) gerufen werden — sonst landet die Card
+      // eine Position weiter rechts als gewünscht. Auf Desktop fiel das nicht
+      // auf weil der Viewport breit genug war; auf Mobile (schmaler Viewport
+      // + flexBasis-0-Spacer) slidet die Ziel-Card aus dem sichtbaren Bereich.
+      state.ctx.emblaApi?.scrollTo(state.currentIndex + 1, true);
       lastSyncedIndexRef.current = state.currentIndex;
     }
   }, [state]);

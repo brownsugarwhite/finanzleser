@@ -250,6 +250,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const infoRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const categoryRefs = useRef<Map<string, HTMLElement>>(new Map());
   const slideWrapperRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  // Mobile-only: bottom-block (description + tools + lesedauer + button) wird
+  // GSAP-gesteuert wie textRef — fadet synchron mit textRef beim Schließen
+  // und bekommt während des Morphs eine fixe Breite, damit Text nicht reflowt.
+  const bottomRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const setBoxRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) boxRefs.current.set(slug, el);
@@ -270,6 +274,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const setCategoryRef = useCallback((slug: string) => (el: HTMLElement | null) => {
     if (el) categoryRefs.current.set(slug, el);
     else categoryRefs.current.delete(slug);
+  }, []);
+  const setBottomRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
+    if (el) bottomRefs.current.set(slug, el);
+    else bottomRefs.current.delete(slug);
   }, []);
 
   const isExitingRef = useRef(false);
@@ -317,6 +325,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       infoRefs.current.forEach((el) => gsap.killTweensOf(el));
       categoryRefs.current.forEach((el) => gsap.killTweensOf(el));
       slideWrapperRefs.current.forEach((el) => gsap.killTweensOf(el));
+      bottomRefs.current.forEach((el) => gsap.killTweensOf(el));
       if (backdropRef.current) gsap.killTweensOf(backdropRef.current);
       if (trackRef.current) gsap.killTweensOf(trackRef.current);
 
@@ -348,6 +357,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       infoRefs.current.clear();
       categoryRefs.current.clear();
       slideWrapperRefs.current.clear();
+      bottomRefs.current.clear();
 
       // Restore any hidden source cards. ZUERST in-flight Tweens auf den
       // Source-Card-Children killen — sonst kann ein noch laufender
@@ -538,13 +548,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // inner width from the start, and center it within the box so it grows
     // outward from the middle (instead of entering from the right).
     const textEl = textRefs.current.get(post.slug);
+    const bottomEl = bottomRefs.current.get(post.slug);
+    const boxPaddingLeft = parseFloat(getComputedStyle(box).paddingLeft) || PREVIEW_PADDING;
+    const targetInnerWidth = tgtBoxRect.width - boxPaddingLeft * 2;
     let textTween: gsap.core.Tween | null = null;
+    let bottomTween: gsap.core.Tween | null = null;
     if (textEl) {
       // Use the box's actual padding so mobile (24px) and desktop (56px) match
       // their respective inner widths — otherwise the text wrapper width "jumps"
       // when restoreBoxToNatural runs at the end of the morph.
-      const boxPaddingLeft = parseFloat(getComputedStyle(box).paddingLeft) || PREVIEW_PADDING;
-      const targetInnerWidth = tgtBoxRect.width - boxPaddingLeft * 2;
       textEl.style.width = `${targetInnerWidth}px`;
       box.style.alignItems = "center";
       textTween = gsap.fromTo(
@@ -562,12 +574,33 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }
       );
     }
+    // Mobile-Bottom-Block (Description + Tools/Lesedauer + Button): synchron
+    // mit textTween fade-in, fixe Width während Morph damit Text nicht reflowt
+    // und die Finanztools-Zeile keinen Sprung beim Morph-Ende macht.
+    if (bottomEl) {
+      bottomEl.style.width = `${targetInnerWidth}px`;
+      bottomTween = gsap.fromTo(
+        bottomEl,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.35,
+          ease: "power2.out",
+          delay: MORPH_DURATION * 0.85,
+          onComplete: () => {
+            bottomEl.style.width = "";
+          },
+        }
+      );
+    }
 
     return () => {
       boxTween.kill();
       imageTween.kill();
       if (textTween) textTween.kill();
+      if (bottomTween) bottomTween.kill();
       if (textEl) textEl.style.width = "";
+      if (bottomEl) bottomEl.style.width = "";
       box.style.alignItems = "";
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -837,9 +870,18 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (isExitingRef.current) return;
     isExitingRef.current = true;
 
-    // Fade current slide text before phase swap
+    // Fade current slide text + bottom-block (mobile) before phase swap.
+    // Beide synchron, damit Mobile-Description nicht erst nach Title fadet.
     const textEl = post ? textRefs.current.get(post.slug) : null;
     if (textEl) gsap.to(textEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    const bottomEl = post ? bottomRefs.current.get(post.slug) : null;
+    if (bottomEl) {
+      // Width pinnen, damit beim OUT-Morph (Box schrumpft) der Text nicht
+      // reflowt während der Bottom-Block ausfadet.
+      const currentWidth = bottomEl.getBoundingClientRect().width;
+      if (currentWidth > 0) bottomEl.style.width = `${currentWidth}px`;
+      gsap.to(bottomEl, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
     // Pfeile + Dots NICHT per Opacity ausblenden — die disable-Animation
     // (arrow scale 0, line scaleX 0, vline scaleY 0) spielt beim Wechsel
     // zu phase="closing" automatisch. Dots skalieren einzeln über visible-
@@ -1378,6 +1420,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 setTextRef={setTextRef(p.slug)}
                 setInfoRef={setInfoRef(p.slug)}
                 setCategoryRef={setCategoryRef(p.slug)}
+                setBottomRef={setBottomRef(p.slug)}
                 onClose={requestClose}
                 isMobile={isMobile}
                 phase={phase}
@@ -1433,6 +1476,7 @@ interface SlidePreviewProps {
   setTextRef: (el: HTMLDivElement | null) => void;
   setInfoRef: (el: HTMLDivElement | null) => void;
   setCategoryRef: (el: HTMLElement | null) => void;
+  setBottomRef: (el: HTMLDivElement | null) => void;
   onClose: () => void;
   isMobile: boolean;
   phase: Phase;
@@ -1446,6 +1490,7 @@ function SlidePreview({
   setTextRef,
   setInfoRef,
   setCategoryRef,
+  setBottomRef,
   onClose,
   isMobile,
   phase,
@@ -1622,10 +1667,6 @@ function SlidePreview({
   );
 
   if (isMobile) {
-    const bottomFadeStyle: React.CSSProperties = {
-      opacity: phase === "slider" ? 1 : 0,
-      transition: "opacity 0.35s ease-out",
-    };
     return (
       <div
         style={{
@@ -1685,8 +1726,13 @@ function SlidePreview({
             {imageElement}
           </div>
 
-          {/* Bottom block — fades via phase-driven CSS transition */}
-          <div style={{ marginTop: 20, ...bottomFadeStyle }}>{descriptionEl}</div>
+          {/* Bottom block — Description + Finanztools/Lesedauer + Button.
+              EIN Wrapper mit setBottomRef → GSAP-gesteuertes Opacity-Fade
+              synchron mit textRef (statt phase-basiertem CSS-Fade der 0.5s
+              später feuert). Während des Morphs wird die Width gepinned,
+              damit der Text nicht reflowt. */}
+          <div ref={setBottomRef} style={{ opacity: 0 }}>
+          <div style={{ marginTop: 20 }}>{descriptionEl}</div>
           <div
             style={{
               marginTop: 24,
@@ -1694,24 +1740,24 @@ function SlidePreview({
               alignItems: "flex-start",
               justifyContent: "space-between",
               gap: 16,
-              ...bottomFadeStyle,
             }}
           >
             <div style={{ flex: 1, minWidth: 0 }}>{finanztoolsBlock}</div>
             {lesedauerSpan}
           </div>
 
-          {/* Button — outside textRef so it's not faded with the morph */}
+          {/* Button — Teil des bottom-blocks für synchrones Fade */}
           <div
             style={{
-              alignSelf: "flex-end",
+              display: "flex",
+              justifyContent: "flex-end",
               marginTop: 24,
-              ...bottomFadeStyle,
             }}
           >
             <Link href={postLink} onClick={onClose} style={{ textDecoration: "none" }}>
               <PreviewReadButton label="Ratgeber lesen" />
             </Link>
+          </div>
           </div>
         </div>
       </div>
