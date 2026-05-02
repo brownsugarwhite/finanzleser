@@ -672,6 +672,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (oldSlide) gsap.killTweensOf(oldSlide);
     if (newSlide) gsap.killTweensOf(newSlide);
 
+    // Neue Slide immer mit scrollTop 0 zeigen — wenn die User vorher in
+    // einem anderen Slide vertikal gescrollt hat und dann hin/zurück
+    // navigiert, soll der Slide jedes Mal von oben beginnen.
+    if (newSlide) newSlide.scrollTop = 0;
+
     // Click-based nav: new slide has no prior transform → set offscreen start state.
     // Drag-based nav: state already mid-animation, don't reset.
     if (!dragNavRef.current && newSlide) {
@@ -1409,7 +1414,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 boxSizing: "border-box",
                 opacity: i === initialIndexRef.current ? 1 : 0,
                 pointerEvents: i === initialIndexRef.current ? "auto" : "none",
-                willChange: "transform, opacity",
+                // willChange entfernt: war permanent auf jedem Slide-Wrapper
+                // gesetzt → unnötiger GPU-Layer pro Slide. Mit Virtualisierung
+                // max 3 Slides gleichzeitig, aber auch 3 dauerhafte Layer
+                // sind unnötig. Browser promoten beim Animations-Start.
               }}
             >
               <SlidePreview
@@ -1730,8 +1738,11 @@ function SlidePreview({
               EIN Wrapper mit setBottomRef → GSAP-gesteuertes Opacity-Fade
               synchron mit textRef (statt phase-basiertem CSS-Fade der 0.5s
               später feuert). Während des Morphs wird die Width gepinned,
-              damit der Text nicht reflowt. */}
-          <div ref={setBottomRef} style={{ opacity: 0 }}>
+              damit der Text nicht reflowt.
+              Initial-Opacity per Phase: bei "opening" startet das Fade-In
+              via GSAP von 0; bei "slider" (Swipe zu anderer Slide nach
+              dem Open) muss die neue Slide direkt sichtbar sein → 1. */}
+          <div ref={setBottomRef} style={{ opacity: phase === "slider" ? 1 : 0 }}>
           <div style={{ marginTop: 20 }}>{descriptionEl}</div>
           <div
             style={{

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { memo, useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import VisualLottie from '@/components/ui/VisualLottie';
 
@@ -26,7 +26,7 @@ const CARD_WIDTH_MOBILE = 290;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
-export default function SlideCategoryCard({ category, parentSlug, active = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
+function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
   // 2-phase: width changes delayed when collapsing, immediate when expanding
@@ -125,7 +125,7 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
           filter: active ? 'blur(16px)' : 'blur(0px)',
           opacity: active ? 0 : 1,
           transition: `transform ${T1}s ${phase1Ease} ${phase1Delay}s, filter ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
-          willChange: 'transform, filter',
+          // willChange entfernt — siehe SlideArticleCard.
         }}>
           <VisualLottie seed={category.slug} />
           {/* Article-Count-Badge */}
@@ -231,3 +231,9 @@ export default function SlideCategoryCard({ category, parentSlug, active = false
     </div>
   );
 }
+
+// memo: Card re-rendert sonst bei jedem SubcategorySlider-Re-Render
+// (z.B. setSlideStyles-Update via Embla-Scroll). Mit memo nur noch wenn
+// props (category/active/titleWidth) tatsächlich ändern.
+const SlideCategoryCard = memo(SlideCategoryCardImpl);
+export default SlideCategoryCard;

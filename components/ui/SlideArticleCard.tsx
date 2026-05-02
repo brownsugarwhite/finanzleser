@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
@@ -32,7 +32,7 @@ const BOOKMARK_COLORS: Record<BookmarkType, string> = {
 export const CARD_MIN_WIDTH = 265;
 export const CARD_MAX_WIDTH = 450;
 
-export default function SlideArticleCard({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
+function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
@@ -153,7 +153,9 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
             : categoryTransition === 'in'
             ? 'transform 0.2s ease-out, opacity 0.2s ease-out'
             : `transform ${PHASE_DURATION}s ease, filter ${PHASE_DURATION}s ease, opacity ${PHASE_DURATION}s ease`,
-          willChange: 'transform, filter',
+          // willChange entfernt: war permanent auf JEDER Card → 200+ GPU-
+          // Backing-Stores auf der Landing reservieren = Mobile-OOM-Risiko.
+          // Browser auto-promoten Transforms während Animation eh.
         }}
       >
         <div
@@ -351,3 +353,10 @@ export default function SlideArticleCard({ post, index, bookmarkType, phase1Visi
     </div>
   );
 }
+
+// memo: Cards re-rendern sonst bei jedem Eltern-Re-Render der ArticleSlider
+// (z.B. wenn setSlideStyles updates feuert oder Provider-Context-Value wechselt
+// auf isOpen-Flip). Mit memo nur noch wenn props (post/index/phase*) tatsächlich
+// ändern — auf Mobile mit vielen Cards spürbar weniger React-Reconciliation.
+const SlideArticleCard = memo(SlideArticleCardImpl);
+export default SlideArticleCard;

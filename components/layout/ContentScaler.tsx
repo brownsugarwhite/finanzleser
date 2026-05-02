@@ -8,6 +8,9 @@ export default function ContentScaler() {
   const savedOpacities = useRef<Map<HTMLElement, number>>(new Map());
   const savedPointerEvents = useRef<Map<HTMLElement, string>>(new Map());
   const previewScaleEls = useRef<HTMLElement[]>([]);
+  // recreate-Timeout tracken, damit rapid-Cycles (open-close-open in <350ms)
+  // keine queue'd Timer akkumulieren, die alle gleichzeitig feuern.
+  const recreateTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const getTargets = () => {
@@ -133,8 +136,11 @@ export default function ContentScaler() {
       });
       savedOpacities.current.clear();
 
-      setTimeout(() => {
+      // Vorherigen Recreate-Timer canceln (rapid-Cycles), dann neuen setzen.
+      if (recreateTimeoutRef.current) clearTimeout(recreateTimeoutRef.current);
+      recreateTimeoutRef.current = setTimeout(() => {
         window.dispatchEvent(new CustomEvent("scroll-anim-recreate"));
+        recreateTimeoutRef.current = null;
       }, 350);
     };
 
@@ -144,6 +150,10 @@ export default function ContentScaler() {
     return () => {
       window.removeEventListener("menu-opened", scaleDown);
       window.removeEventListener("menu-closed", scaleUp);
+      if (recreateTimeoutRef.current) {
+        clearTimeout(recreateTimeoutRef.current);
+        recreateTimeoutRef.current = null;
+      }
     };
   }, []);
 

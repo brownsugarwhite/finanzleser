@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import SliderSafeZone from '@/components/ui/SliderSafeZone';
@@ -104,6 +104,8 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     onCanScrollChange?.(canScroll);
   }, [canScroll, onCanScrollChange]);
 
+  // Ref-Spiegel der slideStyles für Change-Detection (siehe SubcategorySlider).
+  const slideStylesRef = useRef<typeof slideStyles>([]);
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -127,28 +129,43 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
       const rootRect = rootNode.getBoundingClientRect();
       const slideNodes = emblaApi.slideNodes();
 
-      const styles = slideNodes.map((node) => {
+      let changed = false;
+      const styles = slideNodes.map((node, i) => {
         const rect = node.getBoundingClientRect();
         const slideCenter = rect.left + rect.width / 2;
         const distFromLeft = slideCenter - rootRect.left;
         const distFromRight = rootRect.right - slideCenter;
 
+        let s: { opacity: number; scale: number; origin: 'left' | 'right' | 'center' };
         if (!isMobile && distFromLeft < FADE_LEFT) {
           const t = Math.max(0, Math.min(1, (distFromLeft + FADE_OVERSHOOT) / (FADE_LEFT + FADE_OVERSHOOT)));
-          const eased = t * (2 - t); // ease-out quadratic
-          // Card am linken Rand → Origin rechts
-          return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'right' as const };
-        }
-        if (distFromRight < FADE_RIGHT) {
+          const eased = t * (2 - t);
+          s = { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'right' };
+        } else if (distFromRight < FADE_RIGHT) {
           const t = Math.max(0, Math.min(1, (distFromRight + FADE_OVERSHOOT) / (FADE_RIGHT + FADE_OVERSHOOT)));
-          const eased = t * (2 - t); // ease-out quadratic
-          // Card am rechten Rand → Origin links
-          return { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'left' as const };
+          const eased = t * (2 - t);
+          s = { opacity: eased, scale: 0.6 + 0.4 * eased, origin: 'left' };
+        } else {
+          s = { opacity: 1, scale: 1, origin: 'center' };
         }
-        return { opacity: 1, scale: 1, origin: 'center' as const };
+
+        // Change-Detection mit kleinen Toleranzen: bei dragFree-Slidern feuert
+        // Embla 50-100× pro Sekunde "scroll", aber meistens ändert sich der
+        // visuelle Style der einzelnen Cards minimal. Ohne diesen Check würde
+        // setSlideStyles bei jedem Tick eine neue Array-Referenz setzen → React
+        // re-rendert die ArticleSlider mit allen Cards. Auf Mobile mit vielen
+        // Cards = Hauptthread-Backlog → wachsendes Tap-Delay.
+        const prev = slideStylesRef.current[i];
+        if (!prev || Math.abs(prev.opacity - s.opacity) > 0.01 || Math.abs(prev.scale - s.scale) > 0.005 || prev.origin !== s.origin) {
+          changed = true;
+        }
+        return s;
       });
 
-      setSlideStyles(styles);
+      if (changed) {
+        slideStylesRef.current = styles;
+        setSlideStyles(styles);
+      }
     };
 
     emblaApi.on('scroll', update);
