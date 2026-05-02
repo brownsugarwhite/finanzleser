@@ -89,22 +89,55 @@ interface Props {
 // Summe = 1 an jedem Pixel, kein "durch-Schimmer".
 type MaskRole = "outgoing" | "incoming";
 
-function buildSlideMask(angleDeg: number, role: MaskRole, reveal: number, softZone: number): string {
-  // c traversiert so, dass reveal=0 den Slide voll sichtbar (outgoing) bzw.
-  // voll versteckt (incoming) zeigt und reveal=1 den Endzustand erreicht.
-  // Outgoing-Soft-Zone endet GAP/2 VOR c, Incoming-Soft-Zone beginnt GAP/2
-  // NACH c → dazwischen ist eine Lücke wo beide transparent sind.
+// Mask-Image wird EINMAL pro role/softZone-Kombination gesetzt. Der Gradient-
+// String enthält `var(--reveal)` und `var(--mask-angle)` — pro Frame ändern
+// sich nur diese CSS-Custom-Properties. Damit muss iOS Safari nicht für jeden
+// Frame eine neue Gradient-Textur rasterisieren (war Hauptursache für den
+// progressiven Slowdown nach 5-10 Swipes auf iPhone).
+function buildMaskTemplate(role: MaskRole, softZone: number): string {
   const span = 100 + MASK_GAP + 2 * softZone;
-  const c = (1 - reveal) * span - MASK_GAP / 2 - softZone;
 
   if (role === "outgoing") {
-    const transStop = c - MASK_GAP / 2;
-    const blackStop = transStop - softZone;
-    return `linear-gradient(${angleDeg}deg, black 0%, black ${blackStop}%, transparent ${transStop}%, transparent 100%)`;
+    // c = (1 - reveal) * span - GAP/2 - softZone
+    // transStop = c - GAP/2 = (1 - reveal) * span - GAP - softZone
+    // blackStop = transStop - softZone = (1 - reveal) * span - GAP - 2*softZone
+    const blackOffset = MASK_GAP + 2 * softZone;
+    const transOffset = MASK_GAP + softZone;
+    return (
+      `linear-gradient(var(--mask-angle, 90deg), ` +
+      `black 0%, ` +
+      `black calc((1 - var(--reveal, 0)) * ${span}% - ${blackOffset}%), ` +
+      `transparent calc((1 - var(--reveal, 0)) * ${span}% - ${transOffset}%), ` +
+      `transparent 100%)`
+    );
   }
-  const transStop = c + MASK_GAP / 2;
-  const blackStop = transStop + softZone;
-  return `linear-gradient(${angleDeg}deg, transparent 0%, transparent ${transStop}%, black ${blackStop}%, black 100%)`;
+  // incoming:
+  // transStop = c + GAP/2 = (1 - reveal) * span - softZone
+  // blackStop = transStop + softZone = (1 - reveal) * span
+  return (
+    `linear-gradient(var(--mask-angle, 90deg), ` +
+    `transparent 0%, ` +
+    `transparent calc((1 - var(--reveal, 0)) * ${span}% - ${softZone}%), ` +
+    `black calc((1 - var(--reveal, 0)) * ${span}%), ` +
+    `black 100%)`
+  );
+}
+
+function applyMaskTemplate(el: HTMLElement, role: MaskRole, softZone: number) {
+  // Signature-Dedupe: vermeidet redundante Style-Sets im Drag-Handler
+  // (jeder Frame ruft ggf. applyMaskTemplate auf — nur bei role/softZone-
+  // Wechsel kostet das wirklich was).
+  const sig = `${role}-${softZone}`;
+  if (el.dataset.maskSig === sig) return;
+  el.dataset.maskSig = sig;
+  const mask = buildMaskTemplate(role, softZone);
+  el.style.maskImage = mask;
+  (el.style as CSSStyleDeclaration & { webkitMaskImage?: string }).webkitMaskImage = mask;
+}
+
+function setMaskState(el: HTMLElement, reveal: number, angleDeg: number) {
+  el.style.setProperty("--reveal", String(reveal));
+  el.style.setProperty("--mask-angle", `${angleDeg}deg`);
 }
 
 function setSlideMask(
@@ -114,15 +147,16 @@ function setSlideMask(
   reveal: number,
   softZone: number
 ) {
-  const mask = buildSlideMask(angleDeg, role, reveal, softZone);
-  el.style.maskImage = mask;
-  // iOS Safari benötigt das vendor-prefixed Property auch in 2026 noch.
-  (el.style as CSSStyleDeclaration & { webkitMaskImage?: string }).webkitMaskImage = mask;
+  applyMaskTemplate(el, role, softZone);
+  setMaskState(el, reveal, angleDeg);
 }
 
 function clearSlideMask(el: HTMLElement) {
   el.style.maskImage = "";
   (el.style as CSSStyleDeclaration & { webkitMaskImage?: string }).webkitMaskImage = "";
+  el.style.removeProperty("--reveal");
+  el.style.removeProperty("--mask-angle");
+  delete el.dataset.maskSig;
 }
 
 // dir: 1 = next (forward), -1 = prev (backward).
@@ -848,12 +882,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         if (oldSlide) {
           clearSlideMask(oldSlide);
           oldSlide.style.opacity = "0";
-          oldSlide.style.zIndex = "";
+          oldSlide.style.zIndex = "70"; // back to JSX-default — nicht clearen, sonst Header rückt drüber
           gsap.set(oldSlide, { scale: 1 });
         }
         if (newSlide) {
           clearSlideMask(newSlide);
-          newSlide.style.zIndex = "";
+          newSlide.style.zIndex = "70";
         }
       },
     });
@@ -962,9 +996,15 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
       // If user switches direction mid-drag, reset the previously-revealed candidate
       const newCandSlug = candidatePost?.slug ?? null;
-      if (dragCandidateSlugRef.current && dragCandidateSlugRef.current !== newCandSlug) {
-        const oldCand = slideWrapperRefs.current.get(dragCandidateSlugRef.current);
-        if (oldCand) gsap.set(oldCand, { x: 0, scale: 1.2, opacity: 0, filter: "blur(0px)" });
+      if (dragCandidateSlugRef.current !== newCandSlug) {
+        if (dragCandidateSlugRef.current) {
+          const oldCand = slideWrapperRefs.current.get(dragCandidateSlugRef.current);
+          if (oldCand) gsap.set(oldCand, { x: 0, scale: 1.2, opacity: 0, filter: "blur(0px)" });
+        }
+        // Neuer Kandidat — scrollTop NULLEN während er noch durch die Mask
+        // versteckt ist (reveal ≈ 0). Sonst sieht der User beim Reveal die
+        // Sprung-Animation auf 0.
+        if (candidateSlide) candidateSlide.scrollTop = 0;
       }
       dragCandidateSlugRef.current = newCandSlug;
 
@@ -1044,8 +1084,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               clearSlideMask(candidateSlide);
               candidateSlide.style.opacity = "0";
               candidateSlide.style.pointerEvents = "none";
-              currentSlideEl.style.zIndex = "";
-              candidateSlide.style.zIndex = "";
+              currentSlideEl.style.zIndex = "70";
+              candidateSlide.style.zIndex = "70";
             },
           });
           // Scale federt parallel zurück: outgoing → 1.0, incoming → 0.96.
@@ -1330,10 +1370,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       style={{
         position: "fixed",
         inset: 0,
-        height: "100vh",
-        // Overlay sitzt OBER LogoBar (z=62) und PreviewHeader, aber UNTER
-        // BookmarkNav (z=9999). Slidercard kann dadurch Logo-Bereich + den
-        // top-left-Header überdecken, ohne den Burger/X anzutasten.
+        height: "100lvh",
+        minHeight: "100vh",
         zIndex: 70,
         overflow: "hidden",
         pointerEvents: "auto",
@@ -1627,6 +1665,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 boxSizing: "border-box",
                 opacity: i === initialIndexRef.current ? 1 : 0,
                 pointerEvents: i === initialIndexRef.current ? "auto" : "none",
+                // Slide-Wrapper bekommt transform: scale() vom Page-Turn →
+                // erzeugt einen eigenen Stacking-Context. Ohne expliziten
+                // z-Index liegt er bei "auto" und PreviewHeader (z=65) rückt
+                // wieder darüber. Mit z=70 hier (gleich wie Box) bleibt der
+                // Wrapper über dem Header.
+                zIndex: 70,
                 // willChange entfernt: war permanent auf jedem Slide-Wrapper
                 // gesetzt → unnötiger GPU-Layer pro Slide. Mit Virtualisierung
                 // max 3 Slides gleichzeitig, aber auch 3 dauerhafte Layer
@@ -1910,6 +1954,11 @@ function SlidePreview({
             boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
+            // Box muss ÜBER PreviewHeader (z=65) liegen — sonst rückt
+            // "Ratgebervorschau" nach dem ersten Swipe wieder darüber
+            // weil die navigierten Slides keinen restoreBoxToNatural-
+            // Pfad durchlaufen, der den z-Index sonst auf "70" setzt.
+            zIndex: 70,
           }}
         >
           {/* Top text — faded by morph via setTextRef */}
@@ -2011,6 +2060,7 @@ function SlidePreview({
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
+          zIndex: 70,
         }}
       >
         {/* Text wrapper — fades as a unit */}
