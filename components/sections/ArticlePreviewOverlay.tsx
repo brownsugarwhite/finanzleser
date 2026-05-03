@@ -224,7 +224,7 @@ function restoreBoxToNatural(box: HTMLElement) {
   // context. Box hier z-auto sorgt dafür dass Sticky-Button + Sticky-Blur
   // im Slide-Wrapper-Context konkurrieren können.
   box.style.zIndex = "";
-  box.style.borderRadius = `${PREVIEW_BORDER_RADIUS}px`;
+  box.style.borderRadius = `${isMobile ? PREVIEW_BORDER_RADIUS - 3 : PREVIEW_BORDER_RADIUS}px`;
   box.style.backgroundColor = "#ffffff";
   box.style.boxShadow = PREVIEW_SHADOW;
 }
@@ -282,7 +282,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
   const leftNavRef = useRef<HTMLDivElement>(null);
   const rightNavRef = useRef<HTMLDivElement>(null);
   const leftArrowRef = useRef<HTMLDivElement>(null);
@@ -304,6 +303,11 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   // Triggered sofort beim Klick auf X — fadet PreviewHeader unabhängig von
   // phase=closing aus (das setzt erst nach TEXT_FADE_DURATION ein).
   const [headerExiting, setHeaderExiting] = useState(false);
+  // Eigener X-Button rechts oben im weißen Container — opacity-faded via GSAP
+  // synchron zum Slider-UI (Opening: nach Box-Morph; Closing: in requestClose).
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const [closeHovered, setCloseHovered] = useState(false);
+  const [closeActive, setCloseActive] = useState(false);
   // Arrows "disabled" außerhalb der slider-Phase → bestehende disable-Animation
   // spielt beim Öffnen/Schließen (scale/line/vline in/out).
   const leftDisabled = phase !== "slider" || currentIndex === 0;
@@ -486,7 +490,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       if (rightVlineRef.current) gsap.killTweensOf(rightVlineRef.current);
       if (leftNavRef.current) gsap.killTweensOf(leftNavRef.current);
       if (rightNavRef.current) gsap.killTweensOf(rightNavRef.current);
-      if (footerRef.current) gsap.killTweensOf(footerRef.current);
 
       // Belt-and-Suspenders: Auch alle Tweens auf Descendants des Root killen.
       // Fängt Tweens auf transient queryselected Elementen (z.B. cardTextEl auf
@@ -612,8 +615,10 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     }
 
     // Background blur — parallel (extended: includes TopNav + dotline + opt-in landing elements).
-    // label:"preview" triggert den Burger-Morph zu X im BookmarkNav (handleMenuOpened
-    // bailt sonst auf !label) — der Burger fungiert dadurch als Close-Trigger.
+    // label:"preview" triggert auf Mobile die Logo-OUT-Animation in LogoBar
+    // (an dieser Position landet das "Ratgebervorschau"-Label) und schaltet
+    // ContentScaler in extended-Mode. BookmarkNav ignoriert label:"preview"
+    // bewusst — Preview hat einen eigenen Close-Button im weißen Container.
     window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true, label: "preview" } }));
 
     // Backdrop fade in
@@ -649,7 +654,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         left: tgtBoxRect.left,
         width: tgtBoxRect.width,
         height: tgtBoxRect.height,
-        borderRadius: PREVIEW_BORDER_RADIUS,
+        borderRadius: isMobile ? PREVIEW_BORDER_RADIUS - 3 : PREVIEW_BORDER_RADIUS,
         backgroundColor: "rgba(255, 255, 255, 1)",
         boxShadow: PREVIEW_SHADOW,
         duration: MORPH_DURATION,
@@ -753,7 +758,8 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
   }, []);
 
   // ── Dots scale-in bei Entry in slider phase; reverse bei closing ──
-  // Close-Button entfällt — Burger im BookmarkNav fungiert als Close-Trigger.
+  // Close-Button (eigener X-Button rechts oben im weißen Container) fadet
+  // synchron zum Slider-UI ein.
   useLayoutEffect(() => {
     if (phase === "slider") {
       // Dots skalieren jetzt individuell via visible-Prop an InstagramDots —
@@ -762,6 +768,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       // disable-Animation spielt jetzt beim Phase-Wechsel (scale/line/vline).
       if (leftNavRef.current) gsap.set(leftNavRef.current, { opacity: 1 });
       if (rightNavRef.current) gsap.set(rightNavRef.current, { opacity: 1 });
+      if (closeBtnRef.current) {
+        gsap.fromTo(closeBtnRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      }
+    } else if (phase === "closing") {
+      if (closeBtnRef.current) {
+        gsap.to(closeBtnRef.current, { opacity: 0, duration: 0.2, ease: "power2.in" });
+      }
     }
     // closing-phase: Dots skalieren automatisch über visible=false an InstagramDots
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1249,6 +1262,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // (arrow scale 0, line scaleX 0, vline scaleY 0) spielt beim Wechsel
     // zu phase="closing" automatisch. Dots skalieren einzeln über visible-
     // Prop an InstagramDots (jeder Dot via DotSlot).
+    if (closeBtnRef.current) {
+      gsap.to(closeBtnRef.current, { opacity: 0, duration: TEXT_FADE_DURATION, ease: "power2.in" });
+    }
     scheduleTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
   }, [post, scheduleTimeout]);
 
@@ -1373,7 +1389,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         left: curBoxRect.left,
         width: curBoxRect.width,
         height: curBoxRect.height,
-        borderRadius: `${PREVIEW_BORDER_RADIUS}px`,
+        borderRadius: `${isMobile ? PREVIEW_BORDER_RADIUS - 3 : PREVIEW_BORDER_RADIUS}px`,
         backgroundColor: "rgba(255, 255, 255, 1)",
         boxShadow: PREVIEW_SHADOW,
       },
@@ -1457,17 +1473,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     return () => window.removeEventListener("keydown", onKey);
   }, [requestClose, phase, currentIndex, posts.length, onNavigate]);
 
-  // ── Burger als Close-Trigger ──────────────────────────────────────────────
-  // BookmarkNav.toggleBurger feuert burger-closed, wenn der User den Burger/X
-  // anklickt. Wir gehen über requestClose, damit der OUT-Morph (phase →
-  // "closing" + Flip zurück zur Source-Card) sauber durchläuft. Direktes
-  // closePreview würde das Overlay sofort unmounten und den Morph killen.
-  useEffect(() => {
-    const onBurgerClose = () => requestClose();
-    window.addEventListener("burger-closed", onBurgerClose);
-    return () => window.removeEventListener("burger-closed", onBurgerClose);
-  }, [requestClose]);
-
   if (typeof document === "undefined" || !post) return null;
 
   const overlay = (
@@ -1500,7 +1505,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }}
       />
 
-      <PreviewHeader current={currentIndex + 1} total={posts.length} phase={phase} exiting={headerExiting} />
+      <PreviewHeader
+        current={currentIndex + 1}
+        total={posts.length}
+        phase={phase}
+        exiting={headerExiting}
+        currentIndex={currentIndex}
+        onGoTo={onGoTo}
+      />
 
       {/* Nav-Gruppe LINKS: vertikale Linie + Verbindungslinie + Pfeil */}
       <div
@@ -1719,16 +1731,6 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         />
       </div>
 
-      {post && (
-        <PreviewFooter
-          footerRef={footerRef}
-          currentIndex={currentIndex}
-          total={posts.length}
-          onGoTo={onGoTo}
-          phase={phase}
-        />
-      )}
-
       {/* Track — holds one slide per post, all stacked; only the active slide is
           opaque. Navigation crossfades + scales + translates between them. */}
       <div
@@ -1771,7 +1773,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "center",
-                padding: isMobile ? "95px 13px 120px" : "95px 130px 120px",
+                padding: isMobile ? "100px 13px 120px" : "100px 130px 120px",
                 overflowY: "auto",
                 overflowX: "hidden",
                 boxSizing: "border-box",
@@ -1914,7 +1916,9 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
       )}
 
       {/* Close button + Nav arrows — always in viewport, not inside track.
-          Close button sits in a virtual wrapper that mirrors the preview box position. */}
+          Close button sits in a virtual wrapper that mirrors the preview box position.
+          Padding muss exakt mit slideWrapper (Zeile ~1776) übereinstimmen, damit
+          right:N am Button = N px vom rechten Box-Rand. */}
       <div
         style={{
           position: "fixed",
@@ -1925,7 +1929,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
-          padding: "95px 130px 120px",
+          padding: isMobile ? "103px 13px 120px" : "103px 130px 120px",
           pointerEvents: "none",
           zIndex: 81,
         }}
@@ -1939,6 +1943,73 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
             pointerEvents: "none",
           }}
         >
+          <button
+            ref={closeBtnRef}
+            onClick={requestClose}
+            onMouseEnter={() => setCloseHovered(true)}
+            onMouseLeave={() => {
+              setCloseHovered(false);
+              setCloseActive(false);
+            }}
+            onMouseDown={() => setCloseActive(true)}
+            onMouseUp={() => setCloseActive(false)}
+            onTouchStart={() => setCloseActive(true)}
+            onTouchEnd={() => setCloseActive(false)}
+            aria-label="Schließen"
+            style={{
+              position: "absolute",
+              top: 25,
+              right: 30,
+              width: 40,
+              height: 40,
+              borderRadius: "50%",
+              background: closeHovered ? "var(--color-brand-secondary)" : "var(--color-pill-bg)",
+              backdropFilter: closeHovered ? "none" : "blur(16px)",
+              WebkitBackdropFilter: closeHovered ? "none" : "blur(16px)",
+              border: `1px solid ${closeHovered ? "var(--color-brand-secondary)" : "var(--color-text-primary)"}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              opacity: 0,
+              pointerEvents: "auto",
+              transform: closeActive ? "scale(1.1)" : "scale(1)",
+              transition: "background 0.1s ease-out, border-color 0.1s ease-out, transform 0.2s ease-out",
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 16 16" aria-hidden>
+              <line
+                x1="8"
+                y1="1"
+                x2="8"
+                y2="15"
+                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                style={{
+                  transform: `rotate(${closeActive ? -55 : -45}deg)`,
+                  transformBox: "fill-box",
+                  transformOrigin: "center",
+                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
+                }}
+              />
+              <line
+                x1="8"
+                y1="1"
+                x2="8"
+                y2="15"
+                stroke={closeHovered ? "#ffffff" : "var(--color-text-primary)"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                style={{
+                  transform: `rotate(${closeActive ? 55 : 45}deg)`,
+                  transformBox: "fill-box",
+                  transformOrigin: "center",
+                  transition: "transform 0.2s ease-out, stroke 0.1s ease-out",
+                }}
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -2166,9 +2237,9 @@ function SlidePreview({
             width: "100%",
             overflow: "visible",
             background: "#ffffff",
-            borderRadius: PREVIEW_BORDER_RADIUS,
+            borderRadius: PREVIEW_BORDER_RADIUS - 3,
             boxShadow: PREVIEW_SHADOW,
-            padding: 24,
+            padding: "55px 24px",
             boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
@@ -2516,9 +2587,23 @@ function SkeletonParagraph() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// PreviewHeader — info icon + label + animated counter above the slider
+// PreviewHeader — info icon + label + animated counter + pagination dots
 // ────────────────────────────────────────────────────────────────────────────
-function PreviewHeader({ current, total, phase, exiting }: { current: number; total: number; phase: Phase; exiting: boolean }) {
+function PreviewHeader({
+  current,
+  total,
+  phase,
+  exiting,
+  currentIndex,
+  onGoTo,
+}: {
+  current: number;
+  total: number;
+  phase: Phase;
+  exiting: boolean;
+  currentIndex: number;
+  onGoTo: (index: number) => void;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const fadedOutRef = useRef(false);
@@ -2544,9 +2629,12 @@ function PreviewHeader({ current, total, phase, exiting }: { current: number; to
 
   // Mobile: take the logo's top-left slot (LogoBar plays its out animation
   // when preview opens). Desktop: keep centered above the slider.
+  // inline-flex + alignItems:stretch → die Dots-Reihe (Row 2) übernimmt die
+  // Breite der Label-Reihe (Row 1). Lines mit flex:1 füllen den Platz neben
+  // den Dots.
   const positionStyle: React.CSSProperties = isMobile
-    ? { top: 36, left: 16 }
-    : { top: 36, left: "50%", transform: "translateX(-50%)" };
+    ? { top: 27, left: 20 }
+    : { top: 27, left: "50%", transform: "translateX(-50%)" };
 
   return (
     <div
@@ -2554,12 +2642,13 @@ function PreviewHeader({ current, total, phase, exiting }: { current: number; to
       style={{
         position: "fixed",
         ...positionStyle,
-        display: "flex",
-        alignItems: "center",
-        gap: 5,
+        display: "inline-flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        gap: 6,
         pointerEvents: "none",
         fontFamily: "Merriweather, serif",
-        fontSize: 18,
+        fontSize: isMobile ? 17 : 18,
         color: "var(--color-text-primary)",
         opacity: 0,
         whiteSpace: "nowrap",
@@ -2568,46 +2657,24 @@ function PreviewHeader({ current, total, phase, exiting }: { current: number; to
         // läge er über z-auto Slides; mit z-auto + DOM-Order liegt er drunter.
       }}
     >
-      <span>Ratgebervorschau</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <span>Ratgebervorschau</span>
 
-      <div style={{ display: "flex", alignItems: "baseline" }}>
-        <AnimatedNumber value={current} minChars={String(total).length} />
-        <span>/{total}</span>
+        <div style={{ display: "flex", alignItems: "baseline" }}>
+          <AnimatedNumber value={current} minChars={String(total).length} />
+          <span>/{total}</span>
+        </div>
       </div>
-    </div>
-  );
-}
 
-// ────────────────────────────────────────────────────────────────────────────
-// PreviewFooter — fixed row below the slides: reading time + dots + CTA
-// ────────────────────────────────────────────────────────────────────────────
-function PreviewFooter({
-  footerRef,
-  currentIndex,
-  total,
-  onGoTo,
-  phase,
-}: {
-  footerRef: React.RefObject<HTMLDivElement | null>;
-  currentIndex: number;
-  total: number;
-  onGoTo: (index: number) => void;
-  phase: Phase;
-}) {
-  if (total <= 1) return null;
-  return (
-    <div
-      ref={footerRef}
-      style={{
-        position: "fixed",
-        left: "50%",
-        bottom: 70,
-        transform: "translateX(-50%)",
-        zIndex: 82,
-        pointerEvents: "auto",
-      }}
-    >
-      <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} visible={phase === "slider"} />
+      {total > 1 && (
+        <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
+          <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+          <div style={{ pointerEvents: "auto" }}>
+            <InstagramDots current={currentIndex} total={total} onGoTo={onGoTo} visible={phase === "slider"} />
+          </div>
+          <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+        </div>
+      )}
     </div>
   );
 }
@@ -2615,7 +2682,7 @@ function PreviewFooter({
 // ────────────────────────────────────────────────────────────────────────────
 // AnimatedNumber — number that slides up/down on change (odometer-style)
 // ────────────────────────────────────────────────────────────────────────────
-function AnimatedNumber({ value, minChars = 1 }: { value: number; minChars?: number }) {
+function AnimatedNumber({ value, minChars = 1, color }: { value: number; minChars?: number; color?: string }) {
   const prevRef = useRef(value);
   const containerRef = useRef<HTMLSpanElement>(null);
   const currentRef = useRef<HTMLSpanElement>(null);
@@ -2636,6 +2703,7 @@ function AnimatedNumber({ value, minChars = 1 }: { value: number; minChars?: num
     leaving.style.top = "0";
     leaving.style.right = "0";
     leaving.style.display = "inline-block";
+    if (color) leaving.style.color = color;
     container.appendChild(leaving);
 
     const duration = 0.3;
@@ -2665,7 +2733,7 @@ function AnimatedNumber({ value, minChars = 1 }: { value: number; minChars?: num
         textAlign: "right",
       }}
     >
-      <span ref={currentRef} style={{ display: "inline-block" }}>
+      <span ref={currentRef} style={{ display: "inline-block", color }}>
         {value}
       </span>
     </span>

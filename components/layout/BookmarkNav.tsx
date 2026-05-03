@@ -247,6 +247,9 @@ export default function BookmarkNav() {
     const handleMenuOpened = (e: Event) => {
       const label = (e as CustomEvent).detail?.label;
       if (!label) return;
+      // Preview hat seinen eigenen Close-Button im weißen Container — Burger
+      // bleibt im Hintergrund-Layer und wird nicht zum X.
+      if (label === "preview") return;
       if (burgerIsX.current) return;
 
       const btn = burgerBtnRef.current;
