@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Footer from "./Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import StickySparkHeading from "@/components/ui/StickySparkHeading";
+import SparkHeading from "@/components/ui/SparkHeading";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import type { AnbieterPost } from "@/lib/types";
 
@@ -46,7 +46,7 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
           />
         </div>
 
-        <StickySparkHeading title="Anbieter" as="h1" />
+        <SparkHeading title="Anbieter" as="h1" />
 
         <div style={{ maxWidth: 1200 }} className="mx-auto pb-12">
           <div className="px-6" style={{ marginTop: 40 }}>

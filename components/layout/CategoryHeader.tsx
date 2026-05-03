@@ -1,7 +1,7 @@
 "use client";
 
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import StickySparkHeading from "@/components/ui/StickySparkHeading";
+import SparkHeading from "@/components/ui/SparkHeading";
 
 interface CategoryHeaderProps {
   title?: string;
@@ -37,7 +37,7 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
 
       {/* Sticky Heading — Fragment-Top-Level, damit das Parent-<main> der
           Containing Block ist und die Heading über die volle Body-Höhe klebt. */}
-      {title && <StickySparkHeading title={title} as="h1" />}
+      {title && <SparkHeading title={title} as="h1" />}
 
       {/* Post-Heading-Bereich (Description + Children) — skaliert mit */}
       {(description || children) && (

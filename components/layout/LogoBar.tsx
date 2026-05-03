@@ -364,7 +364,7 @@ export default function LogoBar() {
           </span>
         </div>
       </div>
-      {/* Fixed-positionierter Target-Slot für StickySparkHeading-Flip-Dock.
+      {/* Fixed-positionierter Target-Slot für SparkHeading-Flip-Dock.
           Bewusst position:fixed (nicht im Sticky-Wrapper) — Flip braucht zwei
           stabile Endpunkte, sticky-relative Positionen verschieben sich beim
           Scrollen und führen zu Snap-Sprüngen. */}

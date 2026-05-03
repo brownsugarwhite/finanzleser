@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import StickySparkHeading from "@/components/ui/StickySparkHeading";
+import SparkHeading from "@/components/ui/SparkHeading";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 
 type LegalPageLayoutProps = {
@@ -47,7 +47,7 @@ export default function LegalPageLayout({
                 />
               </div>
             )}
-            <StickySparkHeading title={decodedTitle} as="h1" />
+            <SparkHeading title={decodedTitle} as="h1" />
             <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
               <div className="legal-page__body" style={{ marginTop: 40 }}>
                 <div

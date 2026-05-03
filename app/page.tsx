@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SubcategorySlider from "@/components/sections/SubcategorySlider";
-import StickySparkHeading from "@/components/ui/StickySparkHeading";
+import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts, getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
@@ -113,7 +113,7 @@ async function RatgeberSection() {
           height: 60,
         }}
       >
-        <StickySparkHeading title="Ratgeber" as="h2" />
+        <SparkHeading title="Ratgeber" as="h2" />
       </div>
 
       <div className="scalable-landing" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>

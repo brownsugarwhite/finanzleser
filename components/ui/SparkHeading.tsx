@@ -21,7 +21,7 @@ function LargeSpark() {
   );
 }
 
-interface StickySparkHeadingProps {
+interface SparkHeadingProps {
   title: string;
   as?: "h1" | "h2" | "h3";
 }
@@ -32,7 +32,11 @@ const DOCKED_FONT_SIZE = 25;
 const HOME_FONT_SIZE_DESKTOP = 42;
 const HOME_FONT_SIZE_MOBILE = 36;
 
-export default function StickySparkHeading({ title, as = "h2" }: StickySparkHeadingProps) {
+export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
+  // Outer wrapper bleibt immer im Flow — wird als ScrollTrigger-Trigger
+  // verwendet, damit der Trigger funktioniert auch nachdem der innere
+  // Container in den fixed-positionierten Slot gemorpht wurde.
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const tagRef = useRef<HTMLHeadingElement>(null);
   const leftSparksRef = useRef<HTMLDivElement>(null);
@@ -42,6 +46,11 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
 
   const isDockedRef = useRef(false);
   const homeParentRef = useRef<HTMLElement | null>(null);
+  // Original-Nachbar im DOM merken — damit Undock per insertBefore die
+  // exakte Position wiederherstellt. Bei Kategorie-Seiten hat das Heading
+  // Geschwister im Parent (CategoryHeader rendert pre/post-Heading-Divs);
+  // appendChild würde das Heading ans Ende werfen → Flip-Endposition falsch.
+  const homeNextSiblingRef = useRef<Node | null>(null);
 
   // Responsive Home-Font: Mobile 38, Desktop 42.
   const [homeFontSize, setHomeFontSize] = useState(HOME_FONT_SIZE_DESKTOP);
@@ -82,6 +91,8 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
       //    Position-Morph → kein Snap am Ende durch geänderte natural-rest.
       const state = Flip.getState(container, { props: "padding,fontSize" });
       // 2) DOM + Styles auf Ziel-Zustand setzen (slot, padding 0, font 18).
+      // Original-Nachbar merken VOR dem reparent.
+      homeNextSiblingRef.current = container.nextSibling;
       target.appendChild(container);
       container.style.width = "100%";
       container.style.padding = "0";
@@ -116,7 +127,14 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
       const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
 
       const state = Flip.getState(container, { props: "padding,fontSize" });
-      home.appendChild(container);
+      // Mit insertBefore an Original-Position einfügen, falls Nachbar
+      // noch im selben Parent ist; sonst Fallback appendChild.
+      const sibling = homeNextSiblingRef.current;
+      if (sibling && sibling.parentNode === home) {
+        home.insertBefore(container, sibling);
+      } else {
+        home.appendChild(container);
+      }
       container.style.width = "";
       container.style.padding = "";
       // Live lesen — useEffect-deps sind [], also würde die State-Capture
@@ -144,10 +162,34 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
       tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
     };
 
+    // Instant-Dock ohne Animation — für Page-Load wenn bereits an
+    // gedockter Scroll-Position (ScrollTrigger feuert onEnter nur bei
+    // tatsächlichem Crossing in der aktuellen Session).
+    const dockInstant = () => {
+      const target = document.getElementById("ratgeber-flip-target");
+      if (!target || isDockedRef.current) return;
+      isDockedRef.current = true;
+      const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
+      homeNextSiblingRef.current = container.nextSibling;
+      target.appendChild(container);
+      container.style.width = "100%";
+      container.style.padding = "0";
+      container.style.fontSize = `${DOCKED_FONT_SIZE}px`;
+      sparks.forEach((spark) => {
+        gsap.set(spark, { rotation: 360, scale: 0, transformOrigin: "50% 50%" });
+      });
+      gsap.set(leftLine, { scaleX: 0, transformOrigin: "right center" });
+      gsap.set(rightLine, { scaleX: 0, transformOrigin: "left center" });
+    };
+
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    let stTrigger: ScrollTrigger | null = null;
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: container,
+      stTrigger = ScrollTrigger.create({
+        // Wrapper als Trigger, NICHT der Container — sonst tracked
+        // ScrollTrigger nach dem Dock einen fixed-positionierten Trigger,
+        // dessen Scroll-Position konstant bleibt → onLeaveBack feuert nie.
+        trigger: wrapperRef.current,
         // Desktop: flip kurz bevor das Heading oben rausläuft (7% von top).
         // Mobile: früher (20%) — sonst dockt es zu spät.
         start: isMobile ? "top 20%" : "top 7%",
@@ -156,11 +198,22 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
       });
     });
 
+    // Initial-State prüfen: wenn schon gescrollt → instant dock.
+    if (stTrigger && (stTrigger as ScrollTrigger).scroll() >= (stTrigger as ScrollTrigger).start) {
+      dockInstant();
+    }
+
     return () => {
-      // Wenn beim Unmount noch gedockt: zurück in den Home-Parent appenden, damit
+      // Wenn beim Unmount noch gedockt: an Original-Position zurück, damit
       // ctx.revert() den DOM nicht mit dem leeren Slot stehen lässt.
       if (isDockedRef.current && homeParentRef.current && container.parentElement !== homeParentRef.current) {
-        homeParentRef.current.appendChild(container);
+        const home = homeParentRef.current;
+        const sibling = homeNextSiblingRef.current;
+        if (sibling && sibling.parentNode === home) {
+          home.insertBefore(container, sibling);
+        } else {
+          home.appendChild(container);
+        }
         container.style.width = "";
         container.style.maxWidth = "";
         container.style.margin = "";
@@ -173,6 +226,18 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
   const Tag = as;
 
   return (
+    // Outer wrapper mit fester Höhe — reserviert den Layout-Platz, damit
+    // beim Flip-Dock (Container wird in den Slot reparented) keine Geschwister
+    // hochrutschen und der Undock visuell wieder an die Original-Position
+    // landet. Wird intern statt extern gerendert, damit Kategorie-Seiten
+    // (CategoryHeader rendert das Heading direkt im Fragment) auch funktionieren.
+    // Dient gleichzeitig als ScrollTrigger-Trigger (bleibt immer im Flow).
+    <div ref={wrapperRef} style={{
+      width: "100%",
+      maxWidth: 1200,
+      margin: "0 auto",
+      height: 60,
+    }}>
     <div ref={containerRef} className="scalable-landing" style={{
       display: "flex",
       alignItems: "center",
@@ -216,6 +281,7 @@ export default function StickySparkHeading({ title, as = "h2" }: StickySparkHead
         <SmallSpark />
       </div>
       <div ref={rightLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+    </div>
     </div>
   );
 }
