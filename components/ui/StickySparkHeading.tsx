@@ -1,8 +1,9 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "@/lib/gsapConfig";
+import { ScrollTrigger, Flip } from "@/lib/gsapConfig";
 
 function SmallSpark() {
   return (
@@ -23,81 +24,183 @@ function LargeSpark() {
 interface StickySparkHeadingProps {
   title: string;
   as?: "h1" | "h2" | "h3";
-  top?: number;
-  zIndex?: number;
 }
 
-export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex = 51 }: StickySparkHeadingProps) {
-  const sparksRef = useRef<HTMLDivElement>(null);
+const DOCK_DURATION = 0.4;
+const DOCK_EASE = "power2.out";
+const DOCKED_FONT_SIZE = 25;
+const HOME_FONT_SIZE_DESKTOP = 42;
+const HOME_FONT_SIZE_MOBILE = 36;
+
+export default function StickySparkHeading({ title, as = "h2" }: StickySparkHeadingProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tagRef = useRef<HTMLHeadingElement>(null);
+  const leftSparksRef = useRef<HTMLDivElement>(null);
+  const rightSparksRef = useRef<HTMLDivElement>(null);
+  const leftLineRef = useRef<HTMLDivElement>(null);
+  const rightLineRef = useRef<HTMLDivElement>(null);
+
+  const isDockedRef = useRef(false);
+  const homeParentRef = useRef<HTMLElement | null>(null);
+
+  // Responsive Home-Font: Mobile 38, Desktop 42.
+  const [homeFontSize, setHomeFontSize] = useState(HOME_FONT_SIZE_DESKTOP);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const apply = () => setHomeFontSize(mql.matches ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP);
+    apply();
+    mql.addEventListener("change", apply);
+    return () => mql.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
-    const el = sparksRef.current;
-    if (!el) return;
-    const sparks = el.querySelectorAll<SVGSVGElement>("svg");
+    const container = containerRef.current;
+    const tag = tagRef.current;
+    const leftSparks = leftSparksRef.current;
+    const rightSparks = rightSparksRef.current;
+    const leftLine = leftLineRef.current;
+    const rightLine = rightLineRef.current;
+    if (!container || !tag || !leftSparks || !rightSparks || !leftLine || !rightLine) return;
+
+    // Heim-Parent merken, damit wir beim Undock + Unmount sauber zurück appenden.
+    // Der Heim-Wrapper hat in app/page.tsx feste Dimensionen (max-width 1200,
+    // height 60), der Slot in LogoBar ebenfalls (220×30) — Flip morpht
+    // zwischen zwei stabilen Boxen ohne Layout-Sprünge.
+    homeParentRef.current = container.parentElement;
+
+    const dock = () => {
+      const target = document.getElementById("ratgeber-flip-target");
+      if (!target || isDockedRef.current) return;
+      isDockedRef.current = true;
+
+      // Alle 4 Sparks individuell — jede SVG rotiert um ihren eigenen Mittelpunkt.
+      const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
+
+      // 1) State VOR Modifikationen erfassen. fontSize liegt auf dem Container
+      //    (h2 erbt) — so animiert Flip die Schriftgröße ohne den h2 selbst
+      //    aus dem Flex-Flow zu reißen. Container-Höhe schrumpft synchron mit
+      //    Position-Morph → kein Snap am Ende durch geänderte natural-rest.
+      const state = Flip.getState(container, { props: "padding,fontSize" });
+      // 2) DOM + Styles auf Ziel-Zustand setzen (slot, padding 0, font 18).
+      target.appendChild(container);
+      container.style.width = "100%";
+      container.style.padding = "0";
+      container.style.fontSize = `${DOCKED_FONT_SIZE}px`;
+      // 3) Flip + Sub-Animationen in einer Timeline, alle bei time 0 → garantiert
+      //    synchroner Start und kein Konflikt mit Flip-internem Setup.
+      const tl = gsap.timeline();
+      tl.add(Flip.from(state, {
+        duration: DOCK_DURATION,
+        ease: DOCK_EASE,
+        absolute: true,
+        props: "padding,fontSize",
+      }), 0);
+      sparks.forEach((spark) => {
+        tl.fromTo(
+          spark,
+          { rotation: 0, scale: 1, transformOrigin: "50% 50%" },
+          { rotation: 360, scale: 0, duration: DOCK_DURATION, ease: DOCK_EASE },
+          0
+        );
+      });
+      tl.fromTo(leftLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(rightLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+    };
+
+    const undock = () => {
+      if (!isDockedRef.current) return;
+      const home = homeParentRef.current;
+      if (!home) return;
+      isDockedRef.current = false;
+
+      const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
+
+      const state = Flip.getState(container, { props: "padding,fontSize" });
+      home.appendChild(container);
+      container.style.width = "";
+      container.style.padding = "";
+      // Live lesen — useEffect-deps sind [], also würde die State-Capture
+      // bei einem späteren Mobile↔Desktop-Resize stale sein.
+      const liveHomeFontSize = window.matchMedia("(max-width: 767px)").matches
+        ? HOME_FONT_SIZE_MOBILE
+        : HOME_FONT_SIZE_DESKTOP;
+      container.style.fontSize = `${liveHomeFontSize}px`;
+      const tl = gsap.timeline();
+      tl.add(Flip.from(state, {
+        duration: DOCK_DURATION,
+        ease: DOCK_EASE,
+        absolute: true,
+        props: "padding,fontSize",
+      }), 0);
+      sparks.forEach((spark) => {
+        tl.fromTo(
+          spark,
+          { rotation: 360, scale: 0, transformOrigin: "50% 50%" },
+          { rotation: 0, scale: 1, duration: DOCK_DURATION, ease: DOCK_EASE },
+          0
+        );
+      });
+      tl.fromTo(leftLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+    };
+
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { paddingLeft: 0, paddingRight: 0 },
-        {
-          paddingLeft: 200,
-          paddingRight: 200,
-          ease: "none",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 60%",
-            end: `top ${top}px`,
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-      gsap.fromTo(
-        sparks,
-        { rotation: 0, transformOrigin: "50% 50%" },
-        {
-          rotation: 360,
-          transformOrigin: "50% 50%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 60%",
-            end: `top ${top}px`,
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
+      ScrollTrigger.create({
+        trigger: container,
+        // Desktop: flip kurz bevor das Heading oben rausläuft (7% von top).
+        // Mobile: früher (20%) — sonst dockt es zu spät.
+        start: isMobile ? "top 20%" : "top 7%",
+        onEnter: dock,
+        onLeaveBack: undock,
+      });
     });
-    return () => ctx.revert();
-  }, [top]);
+
+    return () => {
+      // Wenn beim Unmount noch gedockt: zurück in den Home-Parent appenden, damit
+      // ctx.revert() den DOM nicht mit dem leeren Slot stehen lässt.
+      if (isDockedRef.current && homeParentRef.current && container.parentElement !== homeParentRef.current) {
+        homeParentRef.current.appendChild(container);
+        container.style.width = "";
+        container.style.maxWidth = "";
+        container.style.margin = "";
+        container.style.padding = "";
+      }
+      ctx?.revert();
+    };
+  }, []);
 
   const Tag = as;
 
   return (
-    <div ref={sparksRef} className="scalable-landing" style={{
+    <div ref={containerRef} className="scalable-landing" style={{
       display: "flex",
       alignItems: "center",
       gap: 0,
       width: "100%",
       maxWidth: "1200px",
       margin: "0 auto",
-      position: "sticky",
-      top,
-      zIndex,
       paddingLeft: 40,
       paddingRight: 40,
       boxSizing: "border-box",
+      // fontSize hier setzen statt auf dem h2 — der h2 erbt es. Damit kann
+      // Flip die fontSize allein auf dem Container animieren, ohne den h2
+      // als Flip-Target (mit absolute:true) aus dem Flex-Flow zu reißen.
+      fontSize: homeFontSize,
     }}>
-      <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-      <div style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
+      <div ref={leftLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+      <div ref={leftSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
         <SmallSpark />
         <LargeSpark />
       </div>
-      <Tag className="category-title" style={{
+      <Tag ref={tagRef as React.RefObject<HTMLHeadingElement>} className="category-title" style={{
         fontFamily: "var(--font-heading, 'Merriweather', serif)",
         fontWeight: 700,
         fontStyle: "italic",
-        fontSize: 42,
+        // 1em statt expliziter Pixel — der h2 erbt damit 1:1 die Container-
+        // fontSize. UA-Default für h2 ist 1.5em → ohne Override wäre der
+        // Text 1.5× größer als gewünscht. Flip animiert nur Container-fontSize.
+        fontSize: "1em",
         color: "var(--color-text-primary)",
         textTransform: "uppercase",
         letterSpacing: "0.02em",
@@ -108,11 +211,11 @@ export default function StickySparkHeading({ title, as = "h2", top = 21, zIndex 
       }}>
         {title}
       </Tag>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4, paddingRight: 10 }}>
+      <div ref={rightSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4, paddingRight: 10 }}>
         <LargeSpark />
         <SmallSpark />
       </div>
-      <div style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+      <div ref={rightLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
     </div>
   );
 }

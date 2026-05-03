@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
@@ -55,6 +55,16 @@ export default function LogoBar() {
   const previewRestoreTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
   const isLanding = pathname === "/";
+
+  // Slot-Position responsive: Mobile 60px, Desktop 90px vom linken Bildrand.
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   // Init / pathname change → snap logo + state
   useEffect(() => {
@@ -335,23 +345,43 @@ export default function LogoBar() {
   }, []);
 
   return (
-    <div className="logo-bar-sticky" style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>
-      <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
-        <a href="/" style={{ display: "block", marginTop: "12px", marginLeft: "-3px" }} aria-label="finanzleser Startseite">
-          <LottieLogo
-            ref={logoRef}
-            initialFrame={isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible}
-            width={233}
-          />
-        </a>
-        <span
-          ref={claimRef}
-          className="logo-claim"
-          style={{ fontFamily: "'Merriweather', serif", fontStyle: "italic", fontSize: "18px", fontWeight: "300", color: "var(--color-text-medium)", whiteSpace: "nowrap", marginTop: "4px" }}
-        >
-          Das digitale Finanzmagazin
-        </span>
+    <>
+      <div className="logo-bar-sticky" style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>
+        <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
+          <a href="/" style={{ display: "block", marginTop: "12px", marginLeft: "-3px" }} aria-label="finanzleser Startseite">
+            <LottieLogo
+              ref={logoRef}
+              initialFrame={isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible}
+              width={233}
+            />
+          </a>
+          <span
+            ref={claimRef}
+            className="logo-claim"
+            style={{ fontFamily: "'Merriweather', serif", fontStyle: "italic", fontSize: "18px", fontWeight: "300", color: "var(--color-text-medium)", whiteSpace: "nowrap", marginTop: "4px" }}
+          >
+            Das digitale Finanzmagazin
+          </span>
+        </div>
       </div>
-    </div>
+      {/* Fixed-positionierter Target-Slot für StickySparkHeading-Flip-Dock.
+          Bewusst position:fixed (nicht im Sticky-Wrapper) — Flip braucht zwei
+          stabile Endpunkte, sticky-relative Positionen verschieben sich beim
+          Scrollen und führen zu Snap-Sprüngen. */}
+      <div
+        id="ratgeber-flip-target"
+        style={{
+          position: "fixed",
+          top: isMobile ? 35 : 32,
+          left: isMobile ? 40 : 82,
+          width: 220,
+          height: 30,
+          pointerEvents: "auto",
+          display: "flex",
+          alignItems: "center",
+          zIndex: 62,
+        }}
+      />
+    </>
   );
 }
