@@ -87,6 +87,37 @@ export function useSliderPill({
     return tRect.top + tRect.height / 2 - vTop;
   }, [emblaApi]);
 
+  /* ── Edge-aware target (natural-size + edge scale) ──
+     Egal ob durch Drag oder Klick ausgelöst — die Pill muss in der Edge-Fade-
+     Zone des Sliders im selben Maß runterskaliert werden wie die zugehörige
+     Card, damit die weiße Schrift in der Lens mitskaliert. */
+  const getEdgeTarget = useCallback((cardEl: HTMLElement, idx: number) => {
+    const { x: bxPill, w: bwPill } = getCardVX(cardEl);
+    const bx = bxPill + PILL_PX;
+    const bw = bwPill - PILL_PX * 2;
+
+    const edgeStyle = slideStylesRef?.current?.[idx + 1];
+    const opacity = edgeStyle?.opacity ?? 1;
+    const scale = edgeStyle?.scale ?? 1;
+    const origin = edgeStyle?.origin ?? 'center';
+    const xOrig = origin === 'right' ? '100%' : origin === 'left' ? '0%' : '50%';
+
+    const naturalCardW = scale > 0 ? bw / scale : bw;
+    const width = naturalCardW + PILL_PX * 2;
+
+    let x: number;
+    if (origin === 'right') {
+      x = bx + bw - naturalCardW - PILL_PX;
+    } else if (origin === 'left') {
+      x = bx - PILL_PX;
+    } else {
+      x = bx + (bw - naturalCardW) / 2 - PILL_PX;
+    }
+
+    const top = getTitleCenter(cardEl);
+    return { x, width, top, scale, opacity, xOrig };
+  }, [getCardVX, getTitleCenter, slideStylesRef]);
+
   /* ── Distance-based duration (same as TopNav) ── */
 
   const lastPillX = useRef(0);
@@ -97,30 +128,28 @@ export function useSliderPill({
 
   /* ── Pill movement ── */
 
-  const movePillTo = useCallback((cardEl: HTMLElement, overrideW?: number, overrideX?: number) => {
+  const movePillTo = useCallback((cardEl: HTMLElement, idx?: number) => {
     if (!pillRef.current || !emblaApi) return;
-    const { x: measuredX, w: measuredW } = getCardVX(cardEl);
-    const x = overrideX ?? measuredX;
-    const w = overrideW ?? measuredW;
+    const cardIdx = idx ?? cardRefs.current.indexOf(cardEl);
+    const { x, width: w, top, scale, opacity, xOrig } = getEdgeTarget(cardEl, cardIdx);
     const d = getDuration(x);
     lastPillX.current = x;
-    const top = getTitleCenter(cardEl);
     const l3Top = top - PILL_H / 2 - 6;
     const l1Top = top - PILL_H / 2 - 10;
 
     if (!pillVisible.current) {
       gsap.killTweensOf(pillRef.current);
-      gsap.set(pillRef.current, { top, x, width: w, height: PILL_H, opacity: 0, scale: 1 });
-      gsap.to(pillRef.current, { opacity: 1, duration: 0.2, ease: "power2.out" });
+      gsap.set(pillRef.current, { transformOrigin: `${xOrig} 50%`, top, x, width: w, height: PILL_H, opacity: 0, scale });
+      gsap.to(pillRef.current, { opacity, duration: 0.2, ease: "power2.out" });
       if (line1Ref.current) {
         gsap.killTweensOf(line1Ref.current);
-        gsap.set(line1Ref.current, { top: l1Top, x, width: w, opacity: 0, scale: 1 });
-        gsap.to(line1Ref.current, { opacity: 1, duration: 0.2, ease: "power2.out" });
+        gsap.set(line1Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 10}px`, top: l1Top, x, width: w, opacity: 0, scale });
+        gsap.to(line1Ref.current, { opacity, duration: 0.2, ease: "power2.out" });
       }
       if (line3Ref.current) {
         gsap.killTweensOf(line3Ref.current);
-        gsap.set(line3Ref.current, { top: l3Top, x, width: w, opacity: 0, scale: 1 });
-        gsap.to(line3Ref.current, { opacity: 1, duration: 0.2, ease: "power2.out" });
+        gsap.set(line3Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 6}px`, top: l3Top, x, width: w, opacity: 0, scale });
+        gsap.to(line3Ref.current, { opacity, duration: 0.2, ease: "power2.out" });
       }
       pillVisible.current = true;
       return;
@@ -128,55 +157,57 @@ export function useSliderPill({
 
     gsap.killTweensOf(pillRef.current);
     gsap.to(pillRef.current, {
-      top, x, width: w, height: PILL_H, opacity: 1, scale: 1,
+      transformOrigin: `${xOrig} 50%`,
+      top, x, width: w, height: PILL_H, opacity, scale,
       duration: d, ease: "back.out(1.3)",
       onComplete: () => {
         // Final-Sync nach Tween-Ende (korrigiert Momentum-Drift)
-        const idx = lastHoveredIdx.current;
-        if (idx < 0 || !pillRef.current) return;
-        const c = cardRefs.current[idx];
+        const idx2 = lastHoveredIdx.current;
+        if (idx2 < 0 || !pillRef.current) return;
+        const c = cardRefs.current[idx2];
         if (!c) return;
-        const { x: fx, w: fw } = getCardVX(c);
-        const top2 = getTitleCenter(c);
-        gsap.set(pillRef.current, { x: fx, width: fw, top: top2 });
-        if (line1Ref.current) gsap.set(line1Ref.current, { x: fx, width: fw, top: top2 - PILL_H / 2 - 10 });
-        if (line3Ref.current) gsap.set(line3Ref.current, { x: fx, width: fw, top: top2 - PILL_H / 2 - 6 });
+        const t = getEdgeTarget(c, idx2);
+        gsap.set(pillRef.current, { transformOrigin: `${t.xOrig} 50%`, x: t.x, width: t.width, top: t.top, opacity: t.opacity, scale: t.scale });
+        if (line1Ref.current) gsap.set(line1Ref.current, { transformOrigin: `${t.xOrig} ${PILL_H / 2 + 10}px`, x: t.x, width: t.width, top: t.top - PILL_H / 2 - 10, opacity: t.opacity, scale: t.scale });
+        if (line3Ref.current) gsap.set(line3Ref.current, { transformOrigin: `${t.xOrig} ${PILL_H / 2 + 6}px`, x: t.x, width: t.width, top: t.top - PILL_H / 2 - 6, opacity: t.opacity, scale: t.scale });
       },
     });
     if (line1Ref.current) {
       gsap.killTweensOf(line1Ref.current);
-      gsap.to(line1Ref.current, { top: l1Top, x, width: w, opacity: 1, scale: 1, duration: d + 0.08, ease: "back.out(1.3)" });
+      gsap.to(line1Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 10}px`, top: l1Top, x, width: w, opacity, scale, duration: d + 0.08, ease: "back.out(1.3)" });
     }
     if (line3Ref.current) {
       gsap.killTweensOf(line3Ref.current);
-      gsap.to(line3Ref.current, { top: l3Top, x, width: w, opacity: 1, scale: 1, duration: d + 0.04, ease: "back.out(1.3)" });
+      gsap.to(line3Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 6}px`, top: l3Top, x, width: w, opacity, scale, duration: d + 0.04, ease: "back.out(1.3)" });
     }
-  }, [emblaApi, getCardVX, getTitleCenter]);
+  }, [emblaApi, getDuration, getEdgeTarget]);
 
   /** Bloom: Pill erscheint mit Scale-Pop an Ziel-Position. Für Mode-Change-Snap. */
-  const bloomPillAt = useCallback((cardEl: HTMLElement) => {
+  const bloomPillAt = useCallback((cardEl: HTMLElement, idx: number) => {
     if (!pillRef.current || !emblaApi) return;
-    const { x, w } = getCardVX(cardEl);
-    const top = getTitleCenter(cardEl);
+    const { x, width: w, top, scale: edgeScale, opacity: edgeOpacity, xOrig } = getEdgeTarget(cardEl, idx);
     const l3Top = top - PILL_H / 2 - 6;
     const l1Top = top - PILL_H / 2 - 10;
+    // Bloom-Pop von 0.5x der Edge-Scale auf die Edge-Scale (statt fix auf 1).
+    // So skaliert die Pill in der Fade-Zone mit der Card.
+    const startScale = edgeScale * 0.5;
 
     gsap.killTweensOf(pillRef.current);
-    gsap.set(pillRef.current, { top, x, width: w, height: PILL_H, opacity: 0, scale: 0.5, transformOrigin: "center center" });
-    gsap.to(pillRef.current, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.2)" });
+    gsap.set(pillRef.current, { transformOrigin: `${xOrig} 50%`, top, x, width: w, height: PILL_H, opacity: 0, scale: startScale });
+    gsap.to(pillRef.current, { opacity: edgeOpacity, scale: edgeScale, duration: 0.5, ease: "back.out(2.2)" });
 
     if (line1Ref.current) {
       gsap.killTweensOf(line1Ref.current);
-      gsap.set(line1Ref.current, { top: l1Top, x, width: w, opacity: 0, scale: 0.5, transformOrigin: "center center" });
-      gsap.to(line1Ref.current, { opacity: 1, scale: 1, duration: 0.5, delay: 0.08, ease: "back.out(2.2)" });
+      gsap.set(line1Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 10}px`, top: l1Top, x, width: w, opacity: 0, scale: startScale });
+      gsap.to(line1Ref.current, { opacity: edgeOpacity, scale: edgeScale, duration: 0.5, delay: 0.08, ease: "back.out(2.2)" });
     }
     if (line3Ref.current) {
       gsap.killTweensOf(line3Ref.current);
-      gsap.set(line3Ref.current, { top: l3Top, x, width: w, opacity: 0, scale: 0.5, transformOrigin: "center center" });
-      gsap.to(line3Ref.current, { opacity: 1, scale: 1, duration: 0.5, delay: 0.04, ease: "back.out(2.2)" });
+      gsap.set(line3Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 6}px`, top: l3Top, x, width: w, opacity: 0, scale: startScale });
+      gsap.to(line3Ref.current, { opacity: edgeOpacity, scale: edgeScale, duration: 0.5, delay: 0.04, ease: "back.out(2.2)" });
     }
     pillVisible.current = true;
-  }, [emblaApi, getCardVX, getTitleCenter]);
+  }, [emblaApi, getEdgeTarget]);
 
   /* ── Follow card on scroll (live sync) ── */
 
@@ -191,37 +222,15 @@ export function useSliderPill({
       const card = cardRefs.current[idx];
       if (!card || !pillRef.current) return;
 
-      const { x: bxPill, w: bwPill } = getCardVX(card);
-      const bx = bxPill + PILL_PX;
-      const bw = bwPill - PILL_PX * 2;
+      const { x, width: w, scale, opacity, xOrig } = getEdgeTarget(card, idx);
 
-      const edgeStyle = slideStylesRef?.current?.[idx + 1];
-      const edgeOpacity = edgeStyle?.opacity ?? 1;
-      const edgeScale  = edgeStyle?.scale  ?? 1;
-      const edgeOrigin = edgeStyle?.origin ?? 'center';
-      const xOrig = edgeOrigin === 'right' ? '100%' : edgeOrigin === 'left' ? '0%' : '50%';
-
-      // Natürliche (unscalierte) Dimensionen für gleichmäßige Scale
-      const naturalW = (edgeScale > 0 ? bw / edgeScale : bw) + PILL_PX * 2;
-
-      let naturalX: number;
-      if (edgeOrigin === 'right') {
-        const naturalCardW = edgeScale > 0 ? bw / edgeScale : bw;
-        naturalX = bx + bw - naturalCardW - PILL_PX;
-      } else if (edgeOrigin === 'left') {
-        naturalX = bx - PILL_PX;
-      } else {
-        const naturalCardW = edgeScale > 0 ? bw / edgeScale : bw;
-        naturalX = bx + (bw - naturalCardW) / 2 - PILL_PX;
-      }
-
-      gsap.set(pillRef.current,  { transformOrigin: `${xOrig} 50%`,                    x: naturalX, width: naturalW, opacity: edgeOpacity, scale: edgeScale });
-      if (line1Ref.current) gsap.set(line1Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 10}px`, x: naturalX, width: naturalW, opacity: edgeOpacity, scale: edgeScale });
-      if (line3Ref.current) gsap.set(line3Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 6}px`,  x: naturalX, width: naturalW, opacity: edgeOpacity, scale: edgeScale });
+      gsap.set(pillRef.current,  { transformOrigin: `${xOrig} 50%`,                    x, width: w, opacity, scale });
+      if (line1Ref.current) gsap.set(line1Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 10}px`, x, width: w, opacity, scale });
+      if (line3Ref.current) gsap.set(line3Ref.current, { transformOrigin: `${xOrig} ${PILL_H / 2 + 6}px`,  x, width: w, opacity, scale });
     };
     emblaApi.on("scroll", onScroll);
     return () => emblaApi.off("scroll", onScroll);
-  }, [emblaApi, getCardVX, slideStylesRef]);
+  }, [emblaApi, getEdgeTarget]);
 
   /* ── Mode change / active index change ── */
 
@@ -229,7 +238,7 @@ export function useSliderPill({
     if (activeIndex === null || activeIndex === undefined) return;
     const card = cardRefs.current[activeIndex];
     if (!card) return;
-    bloomPillAt(card);
+    bloomPillAt(card, activeIndex);
     lastHoveredIdx.current = activeIndex;
   }, [activeIndex, bloomPillAt]);
 
@@ -243,7 +252,7 @@ export function useSliderPill({
     if (prev !== null && curr !== null && prev !== curr) {
       const card = cardRefs.current[curr];
       if (card) {
-        movePillTo(card);
+        movePillTo(card, curr);
         lastHoveredIdx.current = curr;
       }
       return;
