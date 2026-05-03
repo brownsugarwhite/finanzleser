@@ -26,7 +26,7 @@ interface RevolverSliderProps {
 export default function RevolverSlider({ tools, activeIndex, onActiveChange }: RevolverSliderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const topCardHeight = 250; // fixed
+  const topCardHeight = 220; // fixed
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
 
   /* ── Measure container width + title widths ── */
@@ -46,7 +46,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
       const span = document.createElement("span");
       span.style.cssText = `
         position: absolute; visibility: hidden; white-space: nowrap;
-        font-family: 'Merriweather', serif; font-size: 15px; font-weight: 600;
+        font-family: 'Merriweather', serif; font-size: 14px; font-weight: 600;
       `;
       span.textContent = tool.title;
       document.body.appendChild(span);
@@ -198,7 +198,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                 top: 0,
                 left: 0,
                 width: isExpanded ? cs.w : "100%",
-                padding: `${20 - 5 * cs.contentOpacity - 8 * (1 - cs.contentOpacity)}px 23px 23px 27px`,
+                padding: `${20 - 10 * cs.contentOpacity - 8 * (1 - cs.contentOpacity)}px 23px 23px 27px`,
                 display: "flex",
                 flexDirection: "column",
                 pointerEvents: "none",
@@ -229,8 +229,8 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                             position: "absolute",
                             left: 27 + iconLeft,
                             top: 20 - 9 * (1 - t),
-                            width: 40,
-                            height: 40,
+                            width: 36,
+                            height: 36,
                             objectFit: "contain",
                           }}
                         />
@@ -239,8 +239,8 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                           position: "absolute",
                           left: 27 + iconLeft,
                           top: 20 - 9 * (1 - t),
-                          width: 40,
-                          height: 40,
+                          width: 36,
+                          height: 36,
                           borderRadius: 17,
                           border: "1px solid var(--color-text-primary)",
                         }} />
@@ -251,7 +251,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                         marginBottom: 0,
                         marginLeft: 0,
                         marginRight: 0,
-                        paddingTop: 40 * (1 - tY) + 15 * tY,
+                        paddingTop: 33 * (1 - tY) + 15 * tY,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
                         fontSize: cs.titleFontSize,
                         lineHeight: "36px",                      
@@ -281,10 +281,14 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
                   <p style={{
                     fontFamily: "var(--font-body, 'Open Sans', sans-serif)",
                     fontWeight: 400,
-                    fontSize: 17,
+                    fontSize: 16,
                     lineHeight: 1.38,
                     color: "var(--color-text-medium)",
                     margin: 0,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
                   }}>
                     {tool.description}
                   </p>

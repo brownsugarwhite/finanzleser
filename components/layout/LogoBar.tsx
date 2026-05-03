@@ -75,17 +75,24 @@ export default function LogoBar() {
     return () => mql.removeEventListener("change", handler);
   }, []);
 
+  // Helper: setzt pointerEvents UND visibility synchron auf dem Logo-Wrapper.
+  // visibility:hidden killt pointer-events auf dem gesamten Subtree
+  // (anchor + claim + lottie) — robust gegen child-Elemente die ihre eigene
+  // pointer-events:auto-Default haben.
+  const setLogoVisible = (visible: boolean) => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    el.style.pointerEvents = visible ? "auto" : "none";
+    el.style.visibility = visible ? "visible" : "hidden";
+  };
+
   // Init / pathname change → snap logo + state
   useEffect(() => {
     const initialFrame = isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible;
     stateRef.current = isLanding ? "hidden" : "long-visible";
     menuOpenRef.current = false;
     logoRef.current?.setFrame(initialFrame);
-
-    const el = wrapperRef.current;
-    if (el) {
-      el.style.pointerEvents = isLanding ? "none" : "auto";
-    }
+    setLogoVisible(!isLanding);
   }, [isLanding]);
 
   // Claim + dotline scrub fade (unchanged)
@@ -186,18 +193,18 @@ export default function LogoBar() {
       const onFlewHome = () => {
         if (menuOpenRef.current) return;
         if (stateRef.current !== "hidden") return;
+        setLogoVisible(true);
         logoRef.current?.playShortIn();
         stateRef.current = "short-visible";
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "auto";
       };
       const onRevolverFar = () => {
         if (menuOpenRef.current) return;
         if (stateRef.current !== "short-visible") return;
         logoRef.current?.playShortOut();
         stateRef.current = "hidden";
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "none";
+        // visibility erst NACH der Out-Animation hidden setzen — sonst
+        // wird der Out-Tween nicht sichtbar.
+        setTimeout(() => setLogoVisible(false), 500);
       };
       window.addEventListener("leo-flew-home", onFlewHome);
       window.addEventListener("revolver-far-from-bottom", onRevolverFar);
@@ -211,18 +218,16 @@ export default function LogoBar() {
     const onNavOut = () => {
       if (menuOpenRef.current) return;
       if (stateRef.current !== "hidden") return;
+      setLogoVisible(true);
       logoRef.current?.playShortIn();
       stateRef.current = "short-visible";
-      const el = wrapperRef.current;
-      if (el) el.style.pointerEvents = "auto";
     };
     const onNavIn = () => {
       if (menuOpenRef.current) return;
       if (stateRef.current !== "short-visible") return;
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      const el = wrapperRef.current;
-      if (el) el.style.pointerEvents = "none";
+      setTimeout(() => setLogoVisible(false), 500);
     };
 
     // Reconcile: if logo ended up "short-visible" while still in the
@@ -243,8 +248,7 @@ export default function LogoBar() {
       if (navEl.getBoundingClientRect().bottom <= 0) return; // TopNav already out
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      const el = wrapperRef.current;
-      if (el) el.style.pointerEvents = "none";
+      setTimeout(() => setLogoVisible(false), 500);
     };
 
     window.addEventListener("nav-scrolled-out", onNavOut);
@@ -289,8 +293,7 @@ export default function LogoBar() {
           logoRef.current?.playLongOut();
           stateRef.current = "hidden";
         }
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "none";
+        setTimeout(() => setLogoVisible(false), 1300);
         return;
       }
 
@@ -305,8 +308,6 @@ export default function LogoBar() {
       }
       if (state === "long-visible") return;
       if (state === "hidden") {
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "auto";
         // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
         // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
         const isMobileMQ = window.matchMedia("(max-width: 767px)").matches;
@@ -314,12 +315,15 @@ export default function LogoBar() {
           if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
           longInDelayTimerRef.current = window.setTimeout(() => {
             longInDelayTimerRef.current = null;
+            setLogoVisible(true);
             logoRef.current?.playLongIn();
           }, 400);
         } else {
+          setLogoVisible(true);
           logoRef.current?.playLongIn();
         }
       } else {
+        setLogoVisible(true);
         logoRef.current?.playGrow();
       }
       stateRef.current = "long-visible";
@@ -342,14 +346,14 @@ export default function LogoBar() {
           previewRestoreTimerRef.current = null;
           previewPriorStateRef.current = null;
           if (prior === "short-visible") {
+            setLogoVisible(true);
             logoRef.current?.playShortIn();
             stateRef.current = "short-visible";
           } else if (prior === "long-visible") {
+            setLogoVisible(true);
             logoRef.current?.playLongIn();
             stateRef.current = "long-visible";
           }
-          const el = wrapperRef.current;
-          if (el) el.style.pointerEvents = "auto";
         }, 320);
         return;
       }
@@ -362,8 +366,7 @@ export default function LogoBar() {
         longInDelayTimerRef.current = null;
         logoStateBeforeMenuRef.current = null;
         stateRef.current = "hidden";
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "none";
+        setLogoVisible(false);
         return;
       }
       if (stateRef.current !== "long-visible") return;
@@ -379,8 +382,7 @@ export default function LogoBar() {
         // Open hat hidden→long-visible via longIn gemacht → Close komplett aus.
         logoRef.current?.playLongOut();
         stateRef.current = "hidden";
-        const el = wrapperRef.current;
-        if (el) el.style.pointerEvents = "none";
+        setTimeout(() => setLogoVisible(false), 1300);
         return;
       }
       // priorState === "short-visible" oder null (Defensive) → shrink zurück.
@@ -404,7 +406,13 @@ export default function LogoBar() {
   return (
     <>
       <div className="logo-bar-sticky" style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>
-        <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", pointerEvents: "auto", width: "fit-content" }}>
+        {/* pointerEvents wird per useEffect (siehe oben) auf das DOM-Element
+            gesetzt — bewusst NICHT inline im JSX, da React beim Re-Render
+            (z.B. beim isMobile-State-Update via matchMedia) sonst den
+            inline-Wert zurück auf "auto" springen lassen würde, was den
+            Logo-Wrapper-Bereich beim Landing-Top-Mobile (Logo "hidden")
+            über Leos Sticky-Slot legt und dessen Klicks abfängt. */}
+        <div ref={wrapperRef} className="logo-wrapper" style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: "50px", width: "fit-content" }}>
           <a href="/" style={{ display: "block", marginTop: "12px", marginLeft: "-3px" }} aria-label="finanzleser Startseite">
             <LottieLogo
               ref={logoRef}

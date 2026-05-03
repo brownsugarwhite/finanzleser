@@ -112,7 +112,8 @@
   margin-bottom: -77px;       /* -(13 + 64) damit Slot keinen Layout-Platz frisst */
   width: 64px;                /* Mobile-Leo = 64×64 (Desktop = 70×70) */
   height: 64px;
-  z-index: 62;
+  z-index: 70;                /* über logo-bar-sticky (z=62) — sonst fängt der
+                                 Logo-Wrapper auf Mobile Klicks im Overlap ab. */
   pointer-events: auto;
 }
 @media (max-width: 767px) {

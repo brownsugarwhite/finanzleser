@@ -56,7 +56,7 @@ export function useRevolverSlider({
   {
     const GAP = 23;
     const BW = (W - GAP) / 2;
-    const BH = 95;
+    const BH = 85;
     const BY = TH + GAP;
     layout.current = {
       W, TH, GAP, BW, BH, BY,
@@ -182,7 +182,7 @@ export function useRevolverSlider({
           x: s.cx - s.w / 2, y: s.cy - s.h / 2,
           w: s.w, h: s.h,
           zIndex: 10, contentOpacity: 0, descOpacity: 0,
-          bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 15, iconProgress: 0,
+          bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 14, iconProgress: 0,
         };
       });
       setCardStates(states);
@@ -231,7 +231,7 @@ export function useRevolverSlider({
           return {
             dataIndex: ci, x: cx - w / 2, y: cy - from.h / 2, w, h: from.h,
             zIndex: 10, contentOpacity: 0, descOpacity: 0,
-            bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 15, iconProgress: 0,
+            bookmarkOpacity: 0, borderOpacity: 0, titleFontSize: 14, iconProgress: 0,
           };
         }
       });
@@ -278,10 +278,10 @@ export function useRevolverSlider({
       if (si === 0 && ts === 0) titleFontSize = 24;
       else if (si === 0 && ts !== 0) {
         const shrinkT = Math.min(1, t * 5);
-        titleFontSize = 24 - 9 * shrinkT;
+        titleFontSize = 24 - 10 * shrinkT;
       }
-      else if (si !== 0 && ts === 0) titleFontSize = 15 + 9 * t;
-      else titleFontSize = 15;
+      else if (si !== 0 && ts === 0) titleFontSize = 14 + 10 * t;
+      else titleFontSize = 14;
 
       const borderOpacity = contentOpacity;
 

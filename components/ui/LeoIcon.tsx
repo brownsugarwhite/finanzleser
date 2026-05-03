@@ -180,13 +180,13 @@ export default function LeoIcon() {
             const inTl = gsap.timeline({
               delay: inDelay,
               onComplete: () => {
-                // React-JSX-Originalwerte sicherstellen, damit nachfolgender
-                // KI-Button-Morph (der container.scale 1.25 + tie scaleX/Y +
-                // leoGroup y:80 selbst animiert) sauber von der Default-Lage
-                // starten kann.
-                gsap.set(el, { scale: 1, transformOrigin: "50% 50%" });
-                gsap.set(tie, { scale: 1, opacity: 1, transformOrigin: "50% 50%" });
-                gsap.set(leoGroup, { y: 0 });
+                // Inline-Transforms komplett räumen — kein matrix(1,0,0,1,0,0)
+                // residue der Flip später irritieren könnte. JSX-Defaults
+                // (scale 1, opacity 1, y 0) sind ohnehin identisch zu "kein
+                // Transform" → gleiche Wirkung.
+                gsap.set(el, { clearProps: "transform" });
+                gsap.set(tie, { clearProps: "transform,opacity" });
+                gsap.set(leoGroup, { clearProps: "transform" });
               },
             });
             // Container expandiert zuerst — back.out für sanften Pop
@@ -303,6 +303,10 @@ export default function LeoIcon() {
       const onMenuOpened = (e: Event) => {
         const detail = (e as CustomEvent).detail as { label?: string } | undefined;
         if (detail?.label === "preview") return;
+        // openChat dispatched ebenfalls menu-opened (für Logo-LongIn etc).
+        // Wenn Chat gerade öffnet, NICHT collapse-swappen — sonst kollidiert
+        // die Animation mit der Chat-Morph-Flip auf demselben Container.
+        if (chatOpenRef.current) return;
         const home = document.getElementById("leo-floating-home");
         if (!home || isAtHomeRef.current) return;
         wasInStickyForMenuRef.current = true;
