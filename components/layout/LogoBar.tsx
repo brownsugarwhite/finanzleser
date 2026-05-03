@@ -53,6 +53,14 @@ export default function LogoBar() {
   // beim Dev-Mode-StrictMode-Doppellauf des Overlays, wo Mount-Cleanup ein
   // menu-closed feuert zwischen zwei menu-opened-Events).
   const previewRestoreTimerRef = useRef<number | null>(null);
+  // Tracking: hat das menu-open das Logo aus "hidden" via longIn aufgemacht?
+  // Dann soll menu-close auf Mobile mit longOut komplett ausanimieren statt
+  // mit shrink auf "short-visible" zu landen.
+  const logoExpandedByMenuRef = useRef(false);
+  // Delayed longIn-Timer (Mobile menu-open): Logo wartet bis Leo collapse-OUT
+  // fertig ist (~0.3s), erst danach LongIn. Bei menu-close während des
+  // Delays wird der Timer gecancelt und longIn passiert nie.
+  const longInDelayTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
   const isLanding = pathname === "/";
 
@@ -288,9 +296,23 @@ export default function LogoBar() {
       const state = stateRef.current;
       if (state === "long-visible") return;
       if (state === "hidden") {
-        logoRef.current?.playLongIn();
+        // Mark: logo went hidden→long-visible via menu-open, so close should
+        // play longOut (back to hidden) instead of shrink (to short-visible).
+        logoExpandedByMenuRef.current = true;
         const el = wrapperRef.current;
         if (el) el.style.pointerEvents = "auto";
+        // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
+        // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
+        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+        if (isMobile) {
+          if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
+          longInDelayTimerRef.current = window.setTimeout(() => {
+            longInDelayTimerRef.current = null;
+            logoRef.current?.playLongIn();
+          }, 400);
+        } else {
+          logoRef.current?.playLongIn();
+        }
       } else {
         logoRef.current?.playGrow();
       }
@@ -326,7 +348,32 @@ export default function LogoBar() {
         return;
       }
 
+      // Delayed longIn-Timer canceln — falls Menu zuhause schließt bevor
+      // der Mobile-Delay abgelaufen ist, hat das Logo nie eingeblendet.
+      if (longInDelayTimerRef.current) {
+        clearTimeout(longInDelayTimerRef.current);
+        longInDelayTimerRef.current = null;
+        logoExpandedByMenuRef.current = false;
+        // State bleibt "long-visible" (gesetzt im open-Handler), aber das
+        // Logo ist tatsächlich noch hidden → manuell auf hidden zurück.
+        stateRef.current = "hidden";
+        const el = wrapperRef.current;
+        if (el) el.style.pointerEvents = "none";
+        return;
+      }
       if (stateRef.current !== "long-visible") return;
+      if (logoExpandedByMenuRef.current) {
+        // Logo wurde durch menu-open aus "hidden" via longIn aufgemacht →
+        // beim Close komplett ausanimieren (longOut zurück nach hidden).
+        // Greift typischerweise auf Mobile, wenn Leo wegen menu-open in die
+        // Floating-Home-Ecke geflogen ist und beim Close zurück swappt.
+        logoExpandedByMenuRef.current = false;
+        logoRef.current?.playLongOut();
+        stateRef.current = "hidden";
+        const el = wrapperRef.current;
+        if (el) el.style.pointerEvents = "none";
+        return;
+      }
       logoRef.current?.playShrink();
       stateRef.current = "short-visible";
       // Suspend the landing reconcile-on-scroll-up listener until the shrink

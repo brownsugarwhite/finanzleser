@@ -39,6 +39,7 @@ export default function LeoIcon() {
   const isLanding = useRef(false);
   const hasUndocked = useRef(false);
   const isAtHomeRef = useRef(false); // Mobile: Leo aktuell unten-rechts (true) oder im Sticky-Slot (false)?
+  const wasInStickyForMenuRef = useRef(false); // Mobile: Leo flog wegen menu-open zur Home-Ecke → bei menu-close zurück swappen.
   const [size, setSize] = useState(LEO_SIZE_DESKTOP);
   const pathname = usePathname();
 
@@ -163,7 +164,7 @@ export default function LeoIcon() {
       //      kein layout-thrashing). leoGroup taucht etwas vorher nach unten ab,
       //      tie kollabiert wie im KI-Button-Morph.
       // IN: rückwärts mit back.out für sanften Pop.
-      const collapseSwap = (target: HTMLElement, onAtTarget?: () => void) => {
+      const collapseSwap = (target: HTMLElement, onAtTarget?: () => void, inDelay = 0) => {
         const el = containerRef.current;
         const leoGroup = leoGroupRef.current;
         const tie = tieRef.current;
@@ -177,6 +178,7 @@ export default function LeoIcon() {
             onAtTarget?.();
 
             const inTl = gsap.timeline({
+              delay: inDelay,
               onComplete: () => {
                 // React-JSX-Originalwerte sicherstellen, damit nachfolgender
                 // KI-Button-Morph (der container.scale 1.25 + tie scaleX/Y +
@@ -258,6 +260,11 @@ export default function LeoIcon() {
       };
 
       const onScroll = () => {
+        // Wenn Menu Leo gerade in die Home-Ecke gezwungen hat, keine
+        // Scroll-Reaktion — sonst würde ein spurious scroll-event (durch
+        // body-scroll-lock beim Menu-Open) die collapseSwap(slot)-Logik
+        // triggern und Leo direkt wieder nach oben swappen.
+        if (wasInStickyForMenuRef.current) return;
         const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
         const home = document.getElementById("leo-floating-home");
         const slot = document.getElementById("leo-dock-slot-mobile");
@@ -285,7 +292,45 @@ export default function LeoIcon() {
       };
 
       window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
+
+      // Burger-Menü-Open auf Mobile: wenn Leo am Sticky-Slot oben ist, soll er
+      // mit dem normalen Flip nach unten in die Home-Ecke fliegen, damit das
+      // Logo (das beim menu-open via LongIn einanimiert) dort Platz hat.
+      // Beim Close das gleiche wie beim Hochscrollen: Leo collapse-swappt
+      // zurück in den Sticky-Slot.
+      // Article-Preview (label="preview") und KI-Vorschau haben eigene
+      // Handler — hier nur das nackte burger-menü ohne label.
+      const onMenuOpened = (e: Event) => {
+        const detail = (e as CustomEvent).detail as { label?: string } | undefined;
+        if (detail?.label === "preview") return;
+        const home = document.getElementById("leo-floating-home");
+        if (!home || isAtHomeRef.current) return;
+        wasInStickyForMenuRef.current = true;
+        isAtHomeRef.current = true;
+        setDocked(false);
+        // Statt Flip-MotionPath: Collapse-Swap wie beim Hochscrollen, nur
+        // umgekehrte Richtung (Sticky-Slot → Floating-Home).
+        collapseSwap(home);
+      };
+      const onMenuClosed = () => {
+        const slot = document.getElementById("leo-dock-slot-mobile");
+        if (!slot || !wasInStickyForMenuRef.current) return;
+        wasInStickyForMenuRef.current = false;
+        isAtHomeRef.current = false;
+        // Logo longOut, Leo OUT ~0.32s → IN-Phase verzögern, damit Leo erst
+        // auftaucht wenn das Logo überwiegend weg ist.
+        collapseSwap(slot, () => {
+          setDocked(true);
+        }, 0.6);
+      };
+      window.addEventListener("menu-opened", onMenuOpened);
+      window.addEventListener("menu-closed", onMenuClosed);
+
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("menu-opened", onMenuOpened);
+        window.removeEventListener("menu-closed", onMenuClosed);
+      };
     }
 
     // Desktop: erster Scroll → MotionPath-Flug zurück zur Home-Ecke
@@ -770,8 +815,10 @@ export default function LeoIcon() {
         style={{
           position: "absolute",
           bottom: -9,
-          right: size / 2 - 6,    // mittig im Leo-Column (size/2 von rechts), korrigiert um tie-width/2 (=6)
-          width: 12,
+          // Mobile: schmalere Kravatte passend zum kleineren Leo-Character.
+          // right korrigiert um tie-width/2 für mittige Ausrichtung im Leo-Column.
+          right: size / 2 - (size === LEO_SIZE_MOBILE ? 5 : 6),
+          width: size === LEO_SIZE_MOBILE ? 10 : 12,
           zIndex: 1,
           pointerEvents: "none",
         }}
@@ -839,7 +886,11 @@ export default function LeoIcon() {
             gap: 2,
           }}
         >
-          <LeoCharacter trackPupils={!checkMobile()} />
+          <LeoCharacter
+            trackPupils={!checkMobile()}
+            headWidth={size === LEO_SIZE_MOBILE ? 40 : 44}
+            mouthWidth={size === LEO_SIZE_MOBILE ? 42 : 46}
+          />
         </div>
 
         <div

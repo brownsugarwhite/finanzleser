@@ -190,9 +190,8 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         // ScrollTrigger nach dem Dock einen fixed-positionierten Trigger,
         // dessen Scroll-Position konstant bleibt → onLeaveBack feuert nie.
         trigger: wrapperRef.current,
-        // Desktop: flip kurz bevor das Heading oben rausläuft (7% von top).
-        // Mobile: früher (20%) — sonst dockt es zu spät.
-        start: isMobile ? "top 20%" : "top 7%",
+        // Desktop: 10% von top, Mobile: 15% (früher, weil weniger Scroll-Höhe).
+        start: isMobile ? "top 15%" : "top 10%",
         onEnter: dock,
         onLeaveBack: undock,
       });
