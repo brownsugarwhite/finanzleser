@@ -12,6 +12,14 @@ const ART_GAP = 70;
 // Breathing-Puffer für die fit-Prüfung (damit Slider nicht direkt bei
 // 100% Content-Breite greift).
 const ART_FIT_BUFFER = 40;
+// Progressive Mount: bei vielen Posts (50+) blockiert ein Full-Mount aller
+// SlideArticleCards den Frame nach Category-Switch (Stutter). Stattdessen
+// erst N sichtbare Cards mounten, Rest in Batches via requestIdleCallback.
+const INITIAL_MOUNT_COUNT = 8;
+const MOUNT_BATCH_SIZE = 6;
+// Höhe muss zur tatsächlichen Card-Höhe passen, sonst springt der via
+// ResizeObserver gemessene articleHeight-Spacer beim Nachmounten.
+const PLACEHOLDER_HEIGHT = 340;
 
 interface ArticleSliderProps {
   posts: Post[];
@@ -34,6 +42,24 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     const raf = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  // Progressive Mount: erste N Cards sofort, Rest in Batches per Idle-Callback.
+  // Reduziert den initial-Mount-Cost beim Category-Switch dramatisch (50 Cards
+  // gleichzeitig mounten = sichtbarer Stutter; 8 + Batches = unsichtbar).
+  const [mountedCount, setMountedCount] = useState(() =>
+    Math.min(INITIAL_MOUNT_COUNT, posts.length)
+  );
+  useEffect(() => {
+    if (mountedCount >= posts.length) return;
+    // Ein Frame zwischen Batches — Browser kann painten, aber alles ist
+    // nach wenigen Frames durch. Click-Frame bleibt unblockiert (das ist
+    // der eigentliche Stutter-Fix); Staggering selbst ist unsichtbar weil
+    // off-screen.
+    const raf = requestAnimationFrame(() => {
+      setMountedCount((c) => Math.min(c + MOUNT_BATCH_SIZE, posts.length));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [mountedCount, posts.length]);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -227,6 +253,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
         />
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
+          const isMountedCard = index < mountedCount;
           return (
             <div
               key={post.id}
@@ -256,19 +283,27 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                   : 'flex-grow 0.3s ease, opacity 0.1s ease',
               }}
             >
-              <div style={{
-                width: '100%',
-                transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
-                transformOrigin:
-                  slideStyles[index + 1]?.origin === 'right' ? 'right center' :
-                  slideStyles[index + 1]?.origin === 'left' ? 'left center' :
-                  'center center',
-                transition: categoryTransition === 'in' || isMobile ? 'none' : 'transform 0.1s ease',
-              }}>
-                <SlideArticleCard post={post} index={index} phase1Visible={effectivePhase1} phase2Visible={effectivePhase2} categoryTransition={categoryTransition} />
-              </div>
+              {isMountedCard ? (
+                <div style={{
+                  width: '100%',
+                  transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
+                  transformOrigin:
+                    slideStyles[index + 1]?.origin === 'right' ? 'right center' :
+                    slideStyles[index + 1]?.origin === 'left' ? 'left center' :
+                    'center center',
+                  transition: categoryTransition === 'in' || isMobile ? 'none' : 'transform 0.1s ease',
+                }}>
+                  <SlideArticleCard post={post} index={index} phase1Visible={effectivePhase1} phase2Visible={effectivePhase2} categoryTransition={categoryTransition} />
+                </div>
+              ) : (
+                // Placeholder bewahrt Slide-Höhe bis die Card via Idle-Callback
+                // nachgemountet wird. Höhe muss zur tatsächlichen Card-Höhe
+                // passen, sonst springt der ResizeObserver-gemessene
+                // articleHeight-Spacer beim Nachmounten.
+                <div aria-hidden style={{ width: '100%', height: PLACEHOLDER_HEIGHT, flexShrink: 0 }} />
+              )}
 
-              {!isLast && (
+              {!isLast && isMountedCard && (
                 <div style={{
                   position: 'absolute',
                   right: -ART_GAP / 2 - 6,

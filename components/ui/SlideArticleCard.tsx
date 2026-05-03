@@ -1,13 +1,33 @@
 'use client';
 
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
 import InlineSVG from '@/components/ui/InlineSVG';
-import VisualLottie from '@/components/ui/VisualLottie';
 import { useArticlePreview } from '@/components/sections/ArticlePreviewProvider';
 import { useSliderPreviewContext } from '@/components/sections/ArticleSliderContext';
+
+/* ── Modul-globaler hover-capable Listener ──
+   Bei vielen Cards (50+ bei Sozialversicherungen) würde ein matchMedia-
+   Listener pro Card-Mount = 50 native Listener anlegen → spürbarer Stutter
+   beim Category-Switch. Statt dessen ein einziger Listener auf Modul-Ebene,
+   alle Cards subscriben via useSyncExternalStore. */
+let hoverMql: MediaQueryList | null = null;
+const hoverSubs = new Set<() => void>();
+function getHoverCapable() {
+  if (typeof window === 'undefined') return true;
+  if (!hoverMql) {
+    hoverMql = window.matchMedia('(hover: hover)');
+    hoverMql.addEventListener('change', () => hoverSubs.forEach((fn) => fn()));
+  }
+  return hoverMql.matches;
+}
+function subscribeHoverCapable(fn: () => void) {
+  hoverSubs.add(fn);
+  return () => { hoverSubs.delete(fn); };
+}
+const SSR_HOVER_CAPABLE = () => true;
 
 type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
 
@@ -36,39 +56,9 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
   const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
-  const [imageVisible, setImageVisible] = useState(false);
-  const [hoverCapable, setHoverCapable] = useState(true);
+  // Shared subscription — ein matchMedia-Listener für alle Cards.
+  const hoverCapable = useSyncExternalStore(subscribeHoverCapable, getHoverCapable, SSR_HOVER_CAPABLE);
   const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mql = window.matchMedia('(hover: hover)');
-    setHoverCapable(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setHoverCapable(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, []);
-
-  useEffect(() => {
-    if (imageVisible) return;
-    const el = imageRef.current;
-    if (!el) return;
-    if (typeof IntersectionObserver === 'undefined') {
-      setImageVisible(true);
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setImageVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '300px 300px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [imageVisible]);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const { openPreview, isOpen, prefetchExtras } = useArticlePreview();
   const sliderCtx = useSliderPreviewContext();
@@ -137,7 +127,6 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
     >
       {/* Visual */}
       <div
-        ref={imageRef}
         data-flip-id={`preview-${post.slug}-image`}
         style={{
           position: 'relative',
@@ -164,9 +153,9 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
             position: 'absolute',
             inset: 0,
             overflow: 'hidden',
+            background: 'var(--color-placeholder-bg)',
           }}
         >
-          <VisualLottie seed={post.slug} />
           {post.featuredImage?.node.sourceUrl && (
             <img
               src={post.featuredImage.node.sourceUrl}
