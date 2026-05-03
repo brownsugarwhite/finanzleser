@@ -34,6 +34,12 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  /* Explizite Defaults — sonst bleiben Mobile-Override-Werte (right/bottom/
+     width) kleben, wenn der Viewport von ≤767 auf >767 hochgezogen wird,
+     und das Layout zerbricht. */
+  right: auto;
+  bottom: auto;
+  width: auto;
   transform: translate(-50%, -50%);
   z-index: 200;
   /* opacity + pointer-events werden via JS getoggelt (siehe LeoIcon openChat) */
@@ -41,11 +47,13 @@
 @media (max-width: 767px) {
   #leo-chat-center {
     top: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    /* Mit 10px-Inset rundherum statt Padding — pillSlot fills 100% sauber,
+       kein Padding-vs.-content-box Konflikt der den Flip-Snap verursacht hat. */
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     transform: none;
-    width: 100%;
+    width: auto;
   }
 }
 
@@ -69,21 +77,28 @@
   z-index: 200;
   display: flex;
   flex-direction: row;
-  align-items: center;  
+  align-items: center;
   pointer-events: none;
   opacity: 0;
   /* Desktop: zentriert horizontal, über der Pille */
   left: 50%;
   bottom: calc(50% + 90px);    /* 70 = halbe Pill-Höhe (50) + Gap (20) */
+  /* Explizite Defaults — Mobile-Override-Werte (top/right/justify-content)
+     müssen aktiv zurückgesetzt werden, sonst bleiben sie beim Viewport-Resize
+     hängen. */
+  top: auto;
+  right: auto;
+  justify-content: flex-start;
   transform: translateX(-50%);
 }
 @media (max-width: 767px) {
   #leo-chat-iconwrap {
-    /* Mobile: mittig zwischen Viewport-Top und Pill-Top (Pille = 100 px hoch) */
+    /* Mobile: zwischen Viewport-Top und Pill-Top (Pill 130 hoch + 10 Inset
+       + 10 Gap = 150 von unten). */
     left: 0;
     right: 0;
     top: 0;
-    bottom: 100px;
+    bottom: 150px;
     transform: none;
     justify-content: center;
   }
@@ -96,6 +111,11 @@
   color: #1a1a1a;
   text-align: left;
   line-height: 1.15;
+}
+@media (max-width: 767px) {
+  #leo-chat-greeting {
+    font-size: 6.5vw;
+  }
 }
 
 /* Leo Mobile-Dock-Slot — sticky links oben, gegenüber Bookmark.

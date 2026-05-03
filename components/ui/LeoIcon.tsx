@@ -46,10 +46,63 @@ export default function LeoIcon() {
   // Reactive viewport-size (mobile = 64, desktop = 70). Updated on matchMedia change.
   useEffect(() => {
     const mq = window.matchMedia(isMobileMQ);
-    const update = () => setSize(mq.matches ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP);
+    const update = () => {
+      const next = mq.matches ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
+      setSize(next);
+      // Floating-Home div an neue Viewport-Klasse anpassen — sonst stay sie
+      // auf alter Größe und Leo collapsed beim closeChat in den falschen Slot.
+      const home = document.getElementById("leo-floating-home");
+      if (home) {
+        home.style.width = `${next}px`;
+        home.style.height = `${next}px`;
+      }
+      // Wenn Chat offen ist: previousParentRef-Typ auf neuen Viewport mappen.
+      // Top-Dock-Slot (leo-dock-slot oder leo-dock-slot-mobile) → der jeweils
+      // korrekte für den neuen Viewport. Floating-Home bleibt floating-home.
+      // hasUndocked.current ist hier irreführend (wird in openChat auf true
+      // gesetzt) — wir verlassen uns auf den ursprünglich gespeicherten Parent.
+      if (chatOpenRef.current) {
+        const prev = previousParentRef.current;
+        if (!prev) return;
+        const wasTopDock = prev.id === "leo-dock-slot" || prev.id === "leo-dock-slot-mobile";
+        if (wasTopDock) {
+          const newPrev = document.getElementById(mq.matches ? "leo-dock-slot-mobile" : "leo-dock-slot");
+          if (newPrev) previousParentRef.current = newPrev;
+        }
+        return;
+      }
+
+      // Chat zu + nicht undocked + Landing-Top: Leo in korrekten Slot umparken.
+      if (!isLanding.current || hasUndocked.current || window.scrollY > 5) return;
+      const el = containerRef.current;
+      if (!el) return;
+      const targetSlot = document.getElementById(mq.matches ? "leo-dock-slot-mobile" : "leo-dock-slot");
+      if (targetSlot && el.parentElement !== targetSlot) {
+        targetSlot.appendChild(el);
+      }
+    };
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // ResizeObserver auf pillSlot: bei jedem CSS-Größen-Change (Viewport-Resize,
+  // Media-Query-Übergang) den Container-Width/Height auf "100%" zurücksetzen,
+  // damit der von Flip resolved-px-Inline-Wert verworfen wird und die neue
+  // pillSlot-CSS-Dimension greift. Greift NUR wenn Chat offen ist.
+  useEffect(() => {
+    const slot = pillSlotRef.current;
+    if (!slot) return;
+    const observer = new ResizeObserver(() => {
+      if (!chatOpenRef.current) return;
+      const c = containerRef.current;
+      if (c && c.parentElement === slot) {
+        c.style.width = "100%";
+        c.style.height = "100%";
+      }
+    });
+    observer.observe(slot);
+    return () => observer.disconnect();
   }, []);
 
   // Detect landing page + set initial home container + docked state.
@@ -625,6 +678,12 @@ export default function LeoIcon() {
         ease: "power3.inOut",
         absolute: true,
         onComplete: () => {
+          // Inline-Width/Height nach Flip wieder auf "100%" setzen — Flip
+          // hat während der Animation resolved-px-Werte (z.B. 650px desktop)
+          // ins inline geschrieben. Ohne Reset würde der Container bei
+          // Viewport-Resize NICHT mit der pillSlot-CSS reagieren.
+          container.style.width = "100%";
+          container.style.height = "100%";
           gsap.to(input, { opacity: 1, duration: 0.3, ease: "power2.out" });
           input.style.pointerEvents = "auto";
           // Mobile: Tastatur automatisch öffnen via input.focus()
@@ -637,7 +696,15 @@ export default function LeoIcon() {
       // Icon-Leo + Greeting fade-in (parallel zur Flip)
       gsap.fromTo(iconwrapEl,
         { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: 0.2 }
+        {
+          opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: 0.2,
+          onComplete: () => {
+            // Inline-Transform clearen — sonst überstimmt der gsap-Inline-
+            // matrix das CSS-`translateX(-50%)` (Desktop) bzw. die Mobile-
+            // Position bei Viewport-Resize.
+            gsap.set(iconwrapEl, { clearProps: "transform" });
+          },
+        }
       );
 
       // Falls aus default state geklickt: Pulse parallel zur Flip-Expand.
@@ -1035,12 +1102,28 @@ export default function LeoIcon() {
     >
       <div ref={pillSlotRef} id="leo-chat-pill-slot" />
     </div>
-    <div ref={iconwrapRef} id="leo-chat-iconwrap">
-      <div style={{ width: 90, height: 90, display: "flex", alignItems: "center", justifyContent: "center", marginTop: -40 }}>
-        <LeoCharacter headWidth={56} mouthWidth={50} mouthMarginBottom={-5} trackPupils={!checkMobile()} bodyVariant="round" kravatteWidth={14} kravatteOffsetTop={9} />
-      </div>
-      <div id="leo-chat-greeting">Wie kann ich Ihnen helfen?</div>
-    </div>
+    {(() => {
+      // size-State ist reaktiv auf matchMedia → mobile/desktop-Wechsel werden
+      // automatisch ge-rendered. checkMobile() (Funktion) wäre nicht reaktiv
+      // und würde bei SSR vs. Client-Render zu Hydration-Mismatch führen.
+      const isMobile = size === LEO_SIZE_MOBILE;
+      return (
+        <div ref={iconwrapRef} id="leo-chat-iconwrap">
+          <div style={{ width: isMobile ? 76 : 90, height: isMobile ? 76 : 90, display: "flex", alignItems: "center", justifyContent: "center", marginTop: isMobile ? -32 : -40 }}>
+            <LeoCharacter
+              headWidth={isMobile ? 46 : 56}
+              mouthWidth={isMobile ? 42 : 50}
+              mouthMarginBottom={-5}
+              trackPupils={!isMobile}
+              bodyVariant="round"
+              kravatteWidth={isMobile ? 12 : 14}
+              kravatteOffsetTop={isMobile ? 7 : 9}
+            />
+          </div>
+          <div id="leo-chat-greeting">Wie kann ich Ihnen helfen?</div>
+        </div>
+      );
+    })()}
     </>
   );
 }
