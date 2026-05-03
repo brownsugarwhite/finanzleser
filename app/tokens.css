@@ -65,7 +65,7 @@
   /* Decorative Dots */
   --color-dot: rgba(104, 108, 106, 0.7);
 
-  /* Visual Fills (Lottie-Hintergrund-Palette, dynamisch via VisualLottie) */
+  /* Visual Fills (Bg-Palette, ggf. später wieder dynamisch verwendet) */
   --visual-fill-1:  #e3ecd8;
   --visual-fill-2:  #d9e7cb;
   --visual-fill-3:  #eae4d4;

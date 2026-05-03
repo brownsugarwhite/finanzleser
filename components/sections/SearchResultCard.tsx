@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
-import VisualLottie from "@/components/ui/VisualLottie";
 import InlineSVG from "@/components/ui/InlineSVG";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
 import { useSliderPreviewContext } from "@/components/sections/ArticleSliderContext";
@@ -103,9 +102,8 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
       >
         <div
           data-card-image-bg
-          style={{ position: "absolute", inset: 0, overflow: "hidden" }}
+          style={{ position: "absolute", inset: 0, overflow: "hidden", background: "var(--color-placeholder-bg)" }}
         >
-          <VisualLottie seed={post.slug} />
           {post.featuredImage?.node?.sourceUrl && (
             <img
               src={post.featuredImage.node.sourceUrl}

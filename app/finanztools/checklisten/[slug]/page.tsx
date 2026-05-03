@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import VisualLottie from "@/components/ui/VisualLottie";
 import InteraktiveCheckliste from "@/components/checkliste/InteraktiveCheckliste";
 import ChecklisteDetailWrapper from "@/components/checkliste/ChecklisteDetailWrapper";
 import { getAllChecklisten, getChecklisteBySlug } from "@/lib/wordpress";
@@ -154,14 +153,12 @@ export default async function ChecklisteDetailPage({ params }: Props) {
                     position: "relative",
                     width: "100%",
                     flex: 1,
-                    backgroundColor: "transparent",
+                    background: "var(--color-placeholder-bg)",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-end",
                     overflow: "hidden",
-                  }}>
-                    <VisualLottie seed={slug} />
-                  </div>
+                  }} />
                 </div>
 
                 {/* Rechts: Checkliste 60% */}

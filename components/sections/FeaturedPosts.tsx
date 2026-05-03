@@ -1,6 +1,5 @@
 import Link from "next/link";
 import InlineSVG from "@/components/ui/InlineSVG";
-import VisualLottie from "@/components/ui/VisualLottie";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
 
@@ -52,7 +51,7 @@ export default function FeaturedPosts({ posts }: FeaturedPostsProps) {
                       style={{ width: '100%', height: '100%' }}
                     />
                   ) : (
-                    <VisualLottie seed={post.slug} />
+                    <div aria-hidden style={{ position: "absolute", inset: 0, background: "var(--color-placeholder-bg)" }} />
                   )}
                 </div>
 

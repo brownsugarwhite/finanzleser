@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import VisualLottie from "@/components/ui/VisualLottie";
 import DokumentPreview from "@/components/dokument/DokumentPreview";
 import DokumentDownload from "@/components/dokument/DokumentDownload";
 import { getAllDokumente, getDokumentBySlug } from "@/lib/wordpress";
@@ -121,9 +120,7 @@ export default async function DokumentDetailPage({ params }: Props) {
           {/* 2-Column: Visual links + PDF-Vorschau rechts */}
           <div className="dokument-detail-grid">
             <div className="dokument-detail-visual">
-              <div className="dokument-detail-visual-inner">
-                <VisualLottie seed={slug} />
-              </div>
+              <div className="dokument-detail-visual-inner" style={{ background: "var(--color-placeholder-bg)" }} />
             </div>
 
             <div className="dokument-detail-content">

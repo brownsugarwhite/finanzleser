@@ -2,7 +2,6 @@
 
 import { memo, useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
-import VisualLottie from '@/components/ui/VisualLottie';
 
 export interface CategorySlide {
   name: string;
@@ -120,6 +119,7 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
           position: 'relative',
           width: '100%',
           height: 260,
+          background: 'var(--color-placeholder-bg)',
           transform: active ? 'scale(0)' : 'scale(1)',
           transformOrigin: 'top center',
           filter: active ? 'blur(16px)' : 'blur(0px)',
@@ -127,7 +127,6 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
           transition: `transform ${T1}s ${phase1Ease} ${phase1Delay}s, filter ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
           // willChange entfernt — siehe SlideArticleCard.
         }}>
-          <VisualLottie seed={category.slug} />
           {/* Article-Count-Badge */}
           <div
             aria-hidden
