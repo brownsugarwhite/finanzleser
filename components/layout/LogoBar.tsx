@@ -53,10 +53,11 @@ export default function LogoBar() {
   // beim Dev-Mode-StrictMode-Doppellauf des Overlays, wo Mount-Cleanup ein
   // menu-closed feuert zwischen zwei menu-opened-Events).
   const previewRestoreTimerRef = useRef<number | null>(null);
-  // Tracking: hat das menu-open das Logo aus "hidden" via longIn aufgemacht?
-  // Dann soll menu-close auf Mobile mit longOut komplett ausanimieren statt
-  // mit shrink auf "short-visible" zu landen.
-  const logoExpandedByMenuRef = useRef(false);
+  // Pre-Menu-Logo-State zum Wiederherstellen beim Close:
+  //  - "hidden" vor Open → Close spielt LongOut zurück nach hidden
+  //  - "short-visible" vor Open → Close spielt Shrink zurück nach short
+  //  - "long-visible" vor Open → Close lässt Logo unangetastet
+  const logoStateBeforeMenuRef = useRef<LogoState | null>(null);
   // Delayed longIn-Timer (Mobile menu-open): Logo wartet bis Leo collapse-OUT
   // fertig ist (~0.3s), erst danach LongIn. Bei menu-close während des
   // Delays wird der Timer gecancelt und longIn passiert nie.
@@ -294,17 +295,22 @@ export default function LogoBar() {
       }
 
       const state = stateRef.current;
+      // Pre-Menu-State cachen, damit wir beim Close darauf zurückkehren können.
+      // Nur setzen wenn noch null — bei Mobile feuert sowohl BookmarkNav als
+      // auch MobileMegaMenu menu-opened, der zweite Call würde sonst den
+      // bereits aufs "long-visible" gesetzten state als priorState merken
+      // und beim Close fälschlich kein longOut spielen.
+      if (logoStateBeforeMenuRef.current === null) {
+        logoStateBeforeMenuRef.current = state;
+      }
       if (state === "long-visible") return;
       if (state === "hidden") {
-        // Mark: logo went hidden→long-visible via menu-open, so close should
-        // play longOut (back to hidden) instead of shrink (to short-visible).
-        logoExpandedByMenuRef.current = true;
         const el = wrapperRef.current;
         if (el) el.style.pointerEvents = "auto";
         // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
         // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
-        const isMobile = window.matchMedia("(max-width: 767px)").matches;
-        if (isMobile) {
+        const isMobileMQ = window.matchMedia("(max-width: 767px)").matches;
+        if (isMobileMQ) {
           if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
           longInDelayTimerRef.current = window.setTimeout(() => {
             longInDelayTimerRef.current = null;
@@ -348,32 +354,36 @@ export default function LogoBar() {
         return;
       }
 
-      // Delayed longIn-Timer canceln — falls Menu zuhause schließt bevor
-      // der Mobile-Delay abgelaufen ist, hat das Logo nie eingeblendet.
+      // Delayed longIn-Timer canceln — falls Menu schließt bevor der Mobile-
+      // Delay abgelaufen ist, hat das Logo nie eingeblendet, also auf den
+      // Pre-Menu-State (hidden) zurück.
       if (longInDelayTimerRef.current) {
         clearTimeout(longInDelayTimerRef.current);
         longInDelayTimerRef.current = null;
-        logoExpandedByMenuRef.current = false;
-        // State bleibt "long-visible" (gesetzt im open-Handler), aber das
-        // Logo ist tatsächlich noch hidden → manuell auf hidden zurück.
+        logoStateBeforeMenuRef.current = null;
         stateRef.current = "hidden";
         const el = wrapperRef.current;
         if (el) el.style.pointerEvents = "none";
         return;
       }
       if (stateRef.current !== "long-visible") return;
-      if (logoExpandedByMenuRef.current) {
-        // Logo wurde durch menu-open aus "hidden" via longIn aufgemacht →
-        // beim Close komplett ausanimieren (longOut zurück nach hidden).
-        // Greift typischerweise auf Mobile, wenn Leo wegen menu-open in die
-        // Floating-Home-Ecke geflogen ist und beim Close zurück swappt.
-        logoExpandedByMenuRef.current = false;
+
+      // Pre-Menu-State wiederherstellen.
+      const priorState = logoStateBeforeMenuRef.current;
+      logoStateBeforeMenuRef.current = null;
+      if (priorState === "long-visible") {
+        // Logo war schon long-visible vor Open → unangetastet lassen.
+        return;
+      }
+      if (priorState === "hidden") {
+        // Open hat hidden→long-visible via longIn gemacht → Close komplett aus.
         logoRef.current?.playLongOut();
         stateRef.current = "hidden";
         const el = wrapperRef.current;
         if (el) el.style.pointerEvents = "none";
         return;
       }
+      // priorState === "short-visible" oder null (Defensive) → shrink zurück.
       logoRef.current?.playShrink();
       stateRef.current = "short-visible";
       // Suspend the landing reconcile-on-scroll-up listener until the shrink
