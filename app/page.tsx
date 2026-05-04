@@ -138,14 +138,15 @@ async function RatgeberSection() {
         {kategorieBlocks.map((block) => (
           block.children.length > 0 && (
             <div key={block.slug} style={{ marginTop: 80 }}>
-              <div style={{
+              <div className="ratgeber-block-wrap" style={{
                 maxWidth: 1200,
                 margin: "0 auto",
                 padding: "0 40px",
                 boxSizing: "border-box",
               }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 23 }}>
+                <div className="ratgeber-block-head" style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 23 }}>
                   <img
+                    className="ratgeber-block-icon"
                     src={RATGEBER_ICONS[block.slug]}
                     alt=""
                     aria-hidden="true"
@@ -153,7 +154,7 @@ async function RatgeberSection() {
                     height={36}
                     style={{ flexShrink: 0, display: "block" }}
                   />
-                  <h3 style={{
+                  <h3 className="ratgeber-block-title" style={{
                     fontFamily: "var(--font-heading, 'Merriweather', serif)",
                     fontWeight: 700,
                     fontStyle: "italic",

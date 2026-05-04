@@ -394,9 +394,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
         <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
-          <div style={{ width: "100%", height: isMobile ? "auto" : "390px", position: "relative" }}>
-            {!isMobile && (
-              <div style={{ width: 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
+          <div className="ftools-spacer" style={{ width: "100%", height: "390px", position: "relative" }}>
+            <div className="ftools-newsletter-box" style={{ width: 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
                 <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
                   Newsletter
                 </p>
@@ -423,29 +422,14 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                 {/* Horizontale Linie */}
                 <div style={{ width: 330, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
               </div>
-            )}
 
             {/* Visual — Desktop: zwischen Newsletter und Sidebar (absolute);
-                         Mobile: full-bleed über Bildschirmbreite */}
-            {!isMobile ? (
-              <div style={{
-                position: "absolute",
-                top:13,
-                left: 370,
-                right: 23,
-                height: "30vw",
-              }}>
-                <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
-              </div>
-            ) : (
-              <div style={{
-                width: "100vw",
-                marginLeft: "calc(50% - 50vw)",
-                aspectRatio: "1309.52 / 855.59",
-              }}>
-                <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
-              </div>
-            )}
+                Mobile: full-bleed über Bildschirmbreite. CSS-toggle (statt
+                JS-Ternary) damit Mobile-SSR nicht initial in Desktop-Position
+                rendert und dann hüpft. */}
+            <div className="ftools-visual-wrap">
+              <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
+            </div>
           </div>
 
           {/* 2. Subheading + Heading — sticky bottom */}
@@ -697,7 +681,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
 
         {/* Right: preview_container */}
         {/* Vertical dot spacer */}
-        <div style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: isMobile ? "none" : "flex", flexDirection: "column" }}>
+        <div className="ftools-right-spacer" style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
           {/* Dots */}
           <div style={{
             flex: 1,
@@ -725,7 +709,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
         </div>
 
         {/* Right: preview_container */}
-        <div style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 72, paddingLeft: 23, display: isMobile ? "none" : "block" }}>
+        <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 72, paddingLeft: 23, display: "block" }}>
           <p style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",

@@ -56,6 +56,51 @@ body[data-landing] {
   .sticky-nav.dotline-animated {
     display: none !important;
   }
+  .ratgeber-block-title {
+    font-size: 26px !important;
+  }
+  .ratgeber-block-icon {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .ratgeber-block-wrap {
+    padding: 0 20px !important;
+  }
+  /* Layout-Shift-Fix: Desktop-Only-Elemente per CSS hiden statt JS,
+     damit Mobile-User beim Initial-Paint keinen Flash der Desktop-Elemente sehen. */
+  .bookmark-finanztools-btn {
+    display: none !important;
+  }
+  .ftools-newsletter-box {
+    display: none !important;
+  }
+  .ftools-right-spacer {
+    display: none !important;
+  }
+  .ftools-right-preview {
+    display: none !important;
+  }
+  .ftools-visual-wrap {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100vw !important;
+    height: auto !important;
+    margin-left: calc(50% - 50vw) !important;
+    aspect-ratio: 1309.52 / 855.59 !important;
+  }
+  .ftools-spacer {
+    height: auto !important;
+  }
+}
+/* Desktop default für Hero-Visual */
+.ftools-visual-wrap {
+  position: absolute;
+  top: 13px;
+  left: 370px;
+  right: 23px;
+  height: 30vw;
 }
 
 /* ── Search input placeholder ── */

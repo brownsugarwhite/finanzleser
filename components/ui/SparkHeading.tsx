@@ -54,9 +54,13 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
 
   // Responsive Home-Font: Mobile 38, Desktop 42.
   const [homeFontSize, setHomeFontSize] = useState(HOME_FONT_SIZE_DESKTOP);
+  const [homePadding, setHomePadding] = useState(40);
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
-    const apply = () => setHomeFontSize(mql.matches ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP);
+    const apply = () => {
+      setHomeFontSize(mql.matches ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP);
+      setHomePadding(mql.matches ? 13 : 40);
+    };
     apply();
     mql.addEventListener("change", apply);
     return () => mql.removeEventListener("change", apply);
@@ -136,12 +140,16 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         home.appendChild(container);
       }
       container.style.width = "";
-      container.style.padding = "";
       // Live lesen — useEffect-deps sind [], also würde die State-Capture
       // bei einem späteren Mobile↔Desktop-Resize stale sein.
-      const liveHomeFontSize = window.matchMedia("(max-width: 767px)").matches
-        ? HOME_FONT_SIZE_MOBILE
-        : HOME_FONT_SIZE_DESKTOP;
+      const isMobileNow = window.matchMedia("(max-width: 767px)").matches;
+      const liveHomeFontSize = isMobileNow ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP;
+      const liveHomePadding = isMobileNow ? 13 : 40;
+      // padding-shorthand clearen UND paddingLeft/paddingRight explizit re-setzen,
+      // weil React ohne Re-Render die ursprünglichen Inline-Werte nicht wiederherstellt.
+      container.style.padding = "";
+      container.style.paddingLeft = `${liveHomePadding}px`;
+      container.style.paddingRight = `${liveHomePadding}px`;
       container.style.fontSize = `${liveHomeFontSize}px`;
       const tl = gsap.timeline();
       tl.add(Flip.from(state, {
@@ -244,8 +252,8 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
       width: "100%",
       maxWidth: "1200px",
       margin: "0 auto",
-      paddingLeft: 40,
-      paddingRight: 40,
+      paddingLeft: homePadding,
+      paddingRight: homePadding,
       boxSizing: "border-box",
       // fontSize hier setzen statt auf dem h2 — der h2 erbt es. Damit kann
       // Flip die fontSize allein auf dem Container animieren, ohne den h2

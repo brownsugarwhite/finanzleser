@@ -669,7 +669,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       {/* Shared SliderNav — immer gemountet, damit die Pfeile und Dots beim
           Wegfall der Sichtbarkeits-Bedingung smooth ausfahren (statt hart zu
           unmounten). `visible` steuert die Scale-Animation. */}
-      <div style={{ padding: '0 clamp(20px, 10vw, 200px)', marginTop: isMobile ? 3 : 23 }}>
+      <div style={{ padding: isMobile ? '0 20px' : '0 clamp(20px, 10vw, 200px)', marginTop: isMobile ? 3 : 23 }}>
         <SliderNav
           {...navProps}
           visible={(canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)}

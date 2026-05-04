@@ -507,26 +507,26 @@ export default function BookmarkNav() {
           background: "linear-gradient(to left, rgba(22,142,3,0.8), #45a117)",
         }}
       >
-        {/* Finanztools Button — nur Desktop */}
-        {!isMobile && (
-          <button
-            onClick={() => { window.dispatchEvent(new CustomEvent("finanztools-toggle")); }}
-            onMouseEnter={() => setFinanztoolsState("hover")}
-            onMouseLeave={() => setFinanztoolsState("default")}
-            onMouseDown={() => setFinanztoolsState("active")}
-            onMouseUp={() => setFinanztoolsState("hover")}
-            style={{
-              display: "flex", alignItems: "center", justifyContent: "center",
-              height: BTN_HEIGHT, paddingLeft: BTN_PADDING, paddingRight: BTN_PADDING,
-              borderRadius: BTN_BORDER_RADIUS, border: "none", color: "white",
-              fontFamily: '"Open Sans", sans-serif', fontSize: 17, fontWeight: 400,
-              cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none",
-              ...getButtonStyle(finansToolsState),
-            }}
-          >
-            Finanztools
-          </button>
-        )}
+        {/* Finanztools Button — nur Desktop. Via CSS-Media-Query gehidet
+            (nicht JS), damit Mobile-User beim Initial-Paint keinen Flash sehen. */}
+        <button
+          className="bookmark-finanztools-btn"
+          onClick={() => { window.dispatchEvent(new CustomEvent("finanztools-toggle")); }}
+          onMouseEnter={() => setFinanztoolsState("hover")}
+          onMouseLeave={() => setFinanztoolsState("default")}
+          onMouseDown={() => setFinanztoolsState("active")}
+          onMouseUp={() => setFinanztoolsState("hover")}
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center",
+            height: BTN_HEIGHT, paddingLeft: BTN_PADDING, paddingRight: BTN_PADDING,
+            borderRadius: BTN_BORDER_RADIUS, border: "none", color: "white",
+            fontFamily: '"Open Sans", sans-serif', fontSize: 17, fontWeight: 400,
+            cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none",
+            ...getButtonStyle(finansToolsState),
+          }}
+        >
+          Finanztools
+        </button>
 
         {/* Search Pill — inside a flex-flow spacer, absolute within it */}
         <div ref={searchSpacerRef} style={{ width: BTN_HEIGHT, height: BTN_HEIGHT, flexShrink: 0, position: "relative" }}>
