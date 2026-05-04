@@ -93,20 +93,23 @@ const ProgressiveBlur = forwardRef<HTMLDivElement, Props>(function ProgressiveBl
           filter Children) sampled Safari die Farbe nicht zuverlässig — als
           eigenständig fixed-Element greift's. Unter ~5px wird der Streifen
           von Safari als dekorativ ignoriert. zIndex hoch damit nichts
-          drüber rendert was den Pixel-Sampling-Bereich verdeckt. */}
-      <div
-        aria-hidden
-        style={{
-          position: cssPosition,
-          left: 0,
-          right: 0,
-          ...(isBottom ? { bottom: 0 } : { top: 0 }),
-          height: 5,
-          background: "var(--color-bg-page)",
-          zIndex: 9999,
-          pointerEvents: "none",
-        }}
-      />
+          drüber rendert was den Pixel-Sampling-Bereich verdeckt.
+          NUR im top-Mode — am Bottom gibt es kein iOS-Tint-Mechanismus. */}
+      {!isBottom && (
+        <div
+          aria-hidden
+          style={{
+            position: cssPosition,
+            left: 0,
+            right: 0,
+            top: 0,
+            height: 5,
+            background: "var(--color-bg-page)",
+            zIndex: 9999,
+            pointerEvents: "none",
+          }}
+        />
+      )}
     </>
   );
 });
