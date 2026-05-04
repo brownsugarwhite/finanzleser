@@ -44,48 +44,70 @@ const ProgressiveBlur = forwardRef<HTMLDivElement, Props>(function ProgressiveBl
   const containerAnchor = isBottom ? { top: "auto", bottom: 0 } : { top: 0 };
 
   return (
-    <div
-      ref={ref}
-      // Kein className mehr — die `.progressive-blur` CSS-Klasse hat
-      // hardcoded `top: 0` was auf Chrome Desktop mit unserem inline
-      // `top: auto` (bottom mode) konfliktet. Alle Styles inline halten.
-      style={{
-        position: cssPosition,
-        left: 0,
-        right: 0,
-        ...containerAnchor,
-        height,
-        zIndex,
-        pointerEvents: "none",
-      }}
-    >
-      {layers.map(({ blur, heightPct }) => (
+    <>
+      <div
+        ref={ref}
+        // Kein className mehr — die `.progressive-blur` CSS-Klasse hat
+        // hardcoded `top: 0` was auf Chrome Desktop mit unserem inline
+        // `top: auto` (bottom mode) konfliktet. Alle Styles inline halten.
+        style={{
+          position: cssPosition,
+          left: 0,
+          right: 0,
+          ...containerAnchor,
+          height,
+          zIndex,
+          pointerEvents: "none",
+        }}
+      >
+        {layers.map(({ blur, heightPct }) => (
+          <div
+            key={blur}
+            style={{
+              position: "absolute",
+              ...layerAnchor,
+              left: 0,
+              right: 0,
+              height: `${heightPct}%`,
+              backdropFilter: `blur(${blur}px)`,
+              WebkitBackdropFilter: `blur(${blur}px)`,
+              maskImage: maskGradient,
+              WebkitMaskImage: maskGradient,
+            }}
+          />
+        ))}
+
         <div
-          key={blur}
+          className="progressive-blur-color-overlay"
           style={{
             position: "absolute",
-            ...layerAnchor,
-            left: 0,
-            right: 0,
-            height: `${heightPct}%`,
-            backdropFilter: `blur(${blur}px)`,
-            WebkitBackdropFilter: `blur(${blur}px)`,
-            maskImage: maskGradient,
-            WebkitMaskImage: maskGradient,
+            inset: 0,
+            background: colorGradient,
+            opacity: 1,
           }}
         />
-      ))}
-
+      </div>
+      {/* 5px Solid-Color-Streifen als Sibling des Blur-Containers — triggert
+          iOS Safaris Auto-Tint der Status-Bar/Adress-Leiste auf
+          var(--color-bg-page). Innerhalb des Blur-Containers (mit backdrop-
+          filter Children) sampled Safari die Farbe nicht zuverlässig — als
+          eigenständig fixed-Element greift's. Unter ~5px wird der Streifen
+          von Safari als dekorativ ignoriert. zIndex hoch damit nichts
+          drüber rendert was den Pixel-Sampling-Bereich verdeckt. */}
       <div
-        className="progressive-blur-color-overlay"
+        aria-hidden
         style={{
-          position: "absolute",
-          inset: 0,
-          background: colorGradient,
-          opacity: 1,
+          position: cssPosition,
+          left: 0,
+          right: 0,
+          ...(isBottom ? { bottom: 0 } : { top: 0 }),
+          height: 5,
+          background: "var(--color-bg-page)",
+          zIndex: 9999,
+          pointerEvents: "none",
         }}
       />
-    </div>
+    </>
   );
 });
 

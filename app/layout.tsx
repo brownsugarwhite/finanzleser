@@ -37,9 +37,7 @@ const merriweather = Merriweather({
 });
 
 
-export const viewport: Viewport = {
-  viewportFit: "cover",
-};
+export const viewport: Viewport = {};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
