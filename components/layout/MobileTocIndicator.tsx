@@ -31,6 +31,40 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
 
   const number = activeIdx >= 0 ? activeIdx + 1 : null;
 
+  // Reveal-Animation: Pill scaled in (Pulse) → Ring/Badge scaled in (Pulse) → Label+Pfeil faden ein.
+  // Beim Verlassen des Artikels (activeIdx wird -1) reverse.
+  const pillRef = useRef<HTMLButtonElement>(null);
+  const ringWrapRef = useRef<HTMLSpanElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const arrowRef = useRef<HTMLSpanElement>(null);
+  const shouldShow = activeIdx >= 0 && number !== null;
+  const prevShownRef = useRef(false);
+
+  useEffect(() => {
+    const wasShown = prevShownRef.current;
+    prevShownRef.current = shouldShow;
+    if (wasShown === shouldShow) return;
+
+    const pill = pillRef.current;
+    const ring = ringWrapRef.current;
+    const label = labelRef.current;
+    const arrow = arrowRef.current;
+    if (!pill || !ring || !label || !arrow) return;
+
+    const tl = gsap.timeline({ overwrite: "auto" });
+    if (shouldShow) {
+      // Enter — Apple-mäßiger Pulsschlag: scale 0 → overshoot → settle.
+      tl.to(pill, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, 0)
+        .to(ring, { scale: 1, duration: 0.45, ease: "back.out(2.6)" }, 0.22)
+        .to([label, arrow], { opacity: 1, duration: 0.32, ease: "power2.out" }, 0.4);
+    } else {
+      // Exit — reverse, kürzer und mit sanftem In-Back.
+      tl.to([label, arrow], { opacity: 0, duration: 0.18, ease: "power2.in" }, 0)
+        .to(ring, { scale: 0, duration: 0.28, ease: "back.in(2)" }, 0.06)
+        .to(pill, { scale: 0, duration: 0.32, ease: "back.in(2)" }, 0.18);
+    }
+  }, [shouldShow]);
+
   // Trigger slide on number change
   useEffect(() => {
     if (number === null) return;
@@ -68,10 +102,14 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
     );
   }, [exitingNumber]);
 
-  if (activeIdx < 0 || number === null) return null;
+  if (items.length === 0) return null;
 
-  const active = items[activeIdx];
-  const toolColor = active.toolType ? TOOL_COLORS[active.toolType] : undefined;
+  // Wenn momentan ausserhalb des aktiven Bereichs, fallback-Werte für stabilen Render
+  // (Pill ist dann via GSAP scale:0 unsichtbar, daher kosmetisch belanglos).
+  const fallbackIdx = activeIdx >= 0 ? activeIdx : Math.max(0, lastNumberRef.current ? lastNumberRef.current - 1 : 0);
+  const active = items[fallbackIdx];
+  const displayNumber = number ?? lastNumberRef.current ?? 1;
+  const toolColor = active?.toolType ? TOOL_COLORS[active.toolType] : undefined;
   const activeColor = toolColor || "var(--color-brand)";
 
   const numberInner: React.CSSProperties = {
@@ -90,6 +128,7 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
 
   return (
     <button
+      ref={pillRef}
       type="button"
       onClick={onToggle}
       aria-label={isOpen ? "Inhaltsverzeichnis schließen" : "Inhaltsverzeichnis öffnen"}
@@ -117,16 +156,22 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
         font: "inherit",
         textAlign: "inherit",
         color: "inherit",
+        // Hidden initial state — GSAP übernimmt beim ersten shouldShow-Wechsel.
+        transform: "scale(0)",
+        transformOrigin: "50% 50%",
       }}
     >
       {/* Ring + Badge */}
       <span
+        ref={ringWrapRef}
         style={{
           position: "relative",
           width: RING_SIZE,
           height: RING_SIZE,
           minWidth: RING_SIZE,
           flexShrink: 0,
+          transform: "scale(0)",
+          transformOrigin: "50% 50%",
         }}
       >
         {/* Progress ring */}
@@ -175,13 +220,14 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
             </span>
           )}
           <span ref={enterRef} style={layerStyle}>
-            <span style={numberInner}>{number}</span>
+            <span style={numberInner}>{displayNumber}</span>
           </span>
         </span>
       </span>
 
       {/* "Inhalt" Label */}
       <span
+        ref={labelRef}
         style={{
           fontFamily: "Merriweather, serif",
           fontWeight: 600,
@@ -189,6 +235,7 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
           lineHeight: 1,
           color: "var(--color-text-primary)",
           whiteSpace: "nowrap",
+          opacity: 0,
         }}
       >
         Inhalt
@@ -196,12 +243,14 @@ export default function MobileTocIndicator({ items, activeId, scrollProgress, is
 
       {/* Toggle-Pfeil (visuelles Indikator — das ganze Pill ist klickbar) */}
       <span
+        ref={arrowRef}
         aria-hidden="true"
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexShrink: 0,
+          opacity: 0,
         }}
       >
         <svg

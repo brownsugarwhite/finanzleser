@@ -100,6 +100,11 @@ export function useArticleToc() {
             }
           }
 
+          // Wenn unter dem Artikel: activeId zurücksetzen, damit der Indicator
+          // am Artikel-Ende elegant ausanimiert.
+          const artBottom = art.getBoundingClientRect().bottom;
+          if (artBottom <= threshold) currentId = "";
+
           setActiveId(currentId);
           setScrollProgress(progress);
         };
