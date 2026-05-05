@@ -511,7 +511,20 @@
   .rechner-layout {
     grid-template-columns: 1fr;
   }
-  .rechner-visual,
+  /* Mobile: Top-Row stacked, Visual full-width 270px hoch (analog Checkliste) */
+  .rechner-top-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .rechner-visual {
+    display: flex;
+    height: 270px;
+    flex: none;
+    /* break out of page/article wrapper (20px padding) for full-bleed */
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
   .rechner-divider {
     display: none;
   }

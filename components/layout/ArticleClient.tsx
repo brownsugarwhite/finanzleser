@@ -136,7 +136,7 @@ export default function ArticleClient({
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
-                  <div className="h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                  <div className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
                     <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
@@ -144,7 +144,7 @@ export default function ArticleClient({
                     />
                   </div>
                 ) : (
-                  <div className="h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
+                  <div className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
                 )}
                 {featuredImage?.altText && (
                   <p

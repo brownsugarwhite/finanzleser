@@ -1187,6 +1187,83 @@ a.megamenu-link:hover {
   }
   .checkliste-visual-col {
     order: -1;
+    width: 100%;
+  }
+  /* Article-Embed Visual: full-bleed durch das Article-Padding (20px) hindurch + 270px hoch */
+  .checkliste-visual {
+    height: 270px;
+    flex: none;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+}
+
+/* Checkliste Detail-Page Layout — Desktop + Mobile */
+.checkliste-detail-row {
+  display: flex;
+  width: 100%;
+  gap: 48px;
+  align-items: stretch;
+}
+.checkliste-detail-visual-col {
+  width: 40%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.checkliste-detail-row .checkliste-detail-visual {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  background: var(--color-placeholder-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.checkliste-detail-form {
+  width: 60%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .checkliste-detail-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .checkliste-detail-visual-col {
+    width: 100%;
+  }
+  .checkliste-detail-row .checkliste-detail-visual {
+    height: 270px;
+    flex: none;
+    /* break out of page wrapper px-5 (20px) for full-bleed */
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+  .checkliste-detail-form {
+    width: 100%;
+  }
+}
+
+/* ── Mobile: 20px Body-Padding für Artikel + Detail-Pages,
+   Visual + Tabellen breaken aus dem Padding aus ── */
+@media (max-width: 767px) {
+  .article-element-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .article-hero-visual {
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 0 !important;
+  }
+  .prose .table-scroll {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
   }
 }
 

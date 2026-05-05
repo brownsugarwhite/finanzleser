@@ -147,7 +147,7 @@ export default async function RechnerDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-5 md:px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 

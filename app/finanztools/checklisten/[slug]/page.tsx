@@ -96,7 +96,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+        <div style={{ maxWidth: 1200 }} className="mx-auto px-5 md:px-6 pb-12">
           {/* Breadcrumb */}
           <Breadcrumb items={breadcrumbItems} />
 
@@ -146,23 +146,14 @@ export default async function ChecklisteDetailPage({ params }: Props) {
           {/* 2-Column: Visual links + Slider rechts */}
           {parsedData && parsedData.sektionen.length > 0 ? (
             <ChecklisteDetailWrapper>
-              <div style={{ display: "flex", width: "100%", gap: 48, alignItems: "stretch" }}>
-                {/* Links: Visual 40% */}
-                <div className="checkliste-visual" style={{ width: "40%", flexShrink: 0, display: "flex", flexDirection: "column" }}>
-                  <div className="checkliste-detail-visual" style={{
-                    position: "relative",
-                    width: "100%",
-                    flex: 1,
-                    background: "var(--color-placeholder-bg)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                    overflow: "hidden",
-                  }} />
+              <div className="checkliste-detail-row">
+                {/* Links: Visual 40% (Desktop) / 100% full-bleed 270px (Mobile) */}
+                <div className="checkliste-detail-visual-col">
+                  <div className="checkliste-detail-visual" />
                 </div>
 
-                {/* Rechts: Checkliste 60% */}
-                <div style={{ width: "60%", minWidth: 0, overflow: "hidden" }}>
+                {/* Rechts: Checkliste 60% (Desktop) / 100% (Mobile) */}
+                <div className="checkliste-detail-form">
                   <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
                 </div>
               </div>

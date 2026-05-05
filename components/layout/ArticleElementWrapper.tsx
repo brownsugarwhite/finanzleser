@@ -47,6 +47,7 @@ export default function ArticleElementWrapper({
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div
+        className="article-element-wrapper"
         style={{
           width: "100%",
           maxWidth,

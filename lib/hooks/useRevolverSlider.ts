@@ -209,7 +209,7 @@ export function useRevolverSlider({
           const eW = sw(e, 0.4, 1.0);
           const eX = sw(e, 0.4, 1.0);
           const contentOp = sw(e, 0.6, 1.0);
-          const fontSize = 15 + 9 * sw(e, 0.5, 0.9);
+          const fontSize = 14 + 10 * sw(e, 0.5, 0.9);
 
           const cx = lerp(from.cx, to.cx, eX);
           const cy = lerp(from.cy, to.cy, eY);
