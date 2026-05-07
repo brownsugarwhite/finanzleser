@@ -71,6 +71,12 @@ body[data-landing] {
   .bookmark-finanztools-btn {
     display: none !important;
   }
+  /* Burger auf Mobile immer sichtbar — Initial-Width via CSS statt useEffect
+     + gsap.set, sonst Flash von width:0 → 36 nach Hydration. */
+  .bookmark-burger-btn {
+    width: 36px !important;
+    padding-right: 8px !important;
+  }
   .ftools-newsletter-box {
     display: none !important;
   }

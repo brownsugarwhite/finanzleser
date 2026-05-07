@@ -486,6 +486,8 @@ export default function BookmarkNav() {
           alt=""
           width={40}
           height={BOOKMARK_H}
+          priority
+          unoptimized
           style={{ display: "block", width: "100%", height: "100%" }}
           aria-hidden
         />
@@ -603,7 +605,7 @@ export default function BookmarkNav() {
                   flexShrink: 0, padding: 0, marginLeft: 12,
                 }}
               >
-                <Image src="/icons/lupe.svg" alt="Suche" width={18} height={18} />
+                <Image src="/icons/lupe.svg" alt="Suche" width={18} height={18} priority unoptimized />
               </button>
             </div>
           </div>
@@ -612,6 +614,7 @@ export default function BookmarkNav() {
         {/* Burger Button */}
         <button
           ref={burgerBtnRef}
+          className="bookmark-burger-btn"
           onClick={toggleBurger}
           onMouseEnter={() => setBurgerState("hover")}
           onMouseLeave={() => setBurgerState("default")}

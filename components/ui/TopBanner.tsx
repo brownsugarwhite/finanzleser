@@ -28,7 +28,7 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
   const trackRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const dotCount = 500;
+  const dotCount = 200;
 
   const shouldRender =
     visibility !== "off" &&
@@ -95,6 +95,10 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
       }
     };
 
+    // Initialen Tick einmal manuell ausführen, damit Dots vor erstem Paint
+    // schon gecullt sind. Danach Row sichtbar machen.
+    onTick();
+    gsap.set(row, { opacity: 1 });
     gsap.ticker.add(onTick);
 
     return () => {
@@ -123,7 +127,8 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
       {/* 1px line */}
       <div style={{ height: "1px", backgroundColor: lineColor, marginTop: "2px" }} />
 
-      {/* Marquee row */}
+      {/* Marquee row — startet auf opacity 0, useLayoutEffect positioniert
+          Track + culled Dots, danach opacity 1 → kein sichtbarer Sprung. */}
       <div
         ref={rowRef}
         style={{
@@ -133,6 +138,7 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
           display: "flex",
           alignItems: "center",
           fontSize: "16px",
+          opacity: 0,
         }}
       >
         {/* Dots layer — static, full width */}

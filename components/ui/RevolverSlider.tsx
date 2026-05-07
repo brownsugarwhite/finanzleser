@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import { useRevolverSlider } from "@/lib/hooks/useRevolverSlider";
 
@@ -29,8 +29,11 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
   const topCardHeight = 220; // fixed
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
 
-  /* ── Measure container width + title widths ── */
-  useEffect(() => {
+  /* ── Measure container width + title widths ──
+     useLayoutEffect statt useEffect: misst synchron nach DOM-Commit, vor Paint.
+     Damit ist der Initial-Paint nach Hydration bereits mit korrekten Maßen —
+     kein Sprung von Placeholder → Full-Slider. */
+  useLayoutEffect(() => {
     const measure = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
@@ -41,7 +44,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const widths = tools.map((tool) => {
       const span = document.createElement("span");
       span.style.cssText = `
