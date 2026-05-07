@@ -1,17 +1,11 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
+import SubcategorySlider from "@/components/sections/SubcategorySlider";
 import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
 import { getAllPosts, getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
-
-// Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
-// Initial-Bundle der Landing landet.
-const SubcategorySlider = dynamic(() => import("@/components/sections/SubcategorySlider"), {
-  loading: () => <div style={{ width: "100%", minHeight: 280 }} />,
-});
 
 export const revalidate = 3600;
 

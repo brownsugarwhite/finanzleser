@@ -1,7 +1,6 @@
 "use client";
 
-import "@/lib/gsapConfig"; // ensures core GSAP plugins are registered before tweens
-import "@/lib/gsap/motionPath"; // LeoIcon ist einziger MotionPath-Konsument
+import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";

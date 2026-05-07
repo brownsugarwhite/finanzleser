@@ -2,7 +2,6 @@
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import gsap from "@/lib/gsapConfig";
 import TopNav from "@/components/layout/TopNav";
 import PoweredByLine from "@/components/ui/PoweredByLine";
@@ -199,13 +198,9 @@ export default function LandingIntro() {
       <div data-scale-extended style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
         {/* Logo */}
         <div className="landing-logo" style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
-          <Image
+          <img
             src="/icons/fl_logo.svg"
             alt="finanzleser"
-            width={421}
-            height={49}
-            priority
-            unoptimized
             style={{ width: "100%", maxWidth: "460px", height: "auto" }}
           />
         </div>

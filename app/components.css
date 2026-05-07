@@ -228,64 +228,6 @@ h1.category-title {
   font-weight: 700 !important;
 }
 
-/* SparkHeading-Container — responsive Home-Padding + fontSize via CSS,
-   damit kein React-State + matchMedia-Listener nötig ist. Flip.getState
-   captures die computed Values, animation läuft korrekt zwischen
-   Home (CSS) und Docked (inline 0/25). */
-.spark-heading-container {
-  padding-left: 40px;
-  padding-right: 40px;
-  font-size: 42px;
-}
-@media (max-width: 767px) {
-  .spark-heading-container {
-    padding-left: 13px;
-    padding-right: 13px;
-    font-size: 36px;
-  }
-}
-
-/* SubcategorySlider — render-affecting Mobile-Toggles via CSS statt JS-isMobile.
-   data-expanded steuert den Spacer-Switch (closed↔open). */
-.subcat-leading-spacer {
-  flex-basis: 5vw;
-}
-.subcat-leading-spacer[data-expanded="true"] {
-  flex-basis: calc(5vw + 23px);
-}
-.subcat-nav-wrap {
-  padding: 0 clamp(20px, 10vw, 200px);
-  margin-top: 23px;
-}
-@media (max-width: 767px) {
-  .subcat-leading-spacer,
-  .subcat-leading-spacer[data-expanded="true"] {
-    flex-basis: 0;
-  }
-  .subcat-edge-left {
-    display: none;
-  }
-  .subcat-edge-right {
-    width: 60px !important;
-  }
-  .subcat-nav-wrap {
-    padding: 0 20px;
-    margin-top: 3px;
-  }
-}
-
-/* SlideCategoryCard — Card-Base-Width via CSS-Var.
-   Animation-State (phase2Active) bleibt JS-driven — nur das Default-Width
-   ist responsiv. Fallback CARD_WIDTH (350) im Inline-Style. */
-[data-slider-card] {
-  --card-base-width: 350px;
-}
-@media (max-width: 767px) {
-  [data-slider-card] {
-    --card-base-width: 290px;
-  }
-}
-
 /* Article Prose Styles */
 .prose {
   line-height: 1.8;

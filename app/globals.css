@@ -93,51 +93,6 @@ body[data-landing] {
   .ftools-spacer {
     height: auto !important;
   }
-  /* Restliche FinanztoolsHero Mobile-Layout-Switches */
-  .ftools-left-col {
-    flex: none !important;
-    width: 100% !important;
-  }
-  .ftools-subheading-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-  }
-  .ftools-subheading-text {
-    margin-left: 0 !important;
-  }
-  .ftools-lottie-slider {
-    margin-top: -13px !important;
-    margin-bottom: -130px !important;
-  }
-  .ftools-cards-mobile {
-    display: block !important;
-  }
-  .ftools-cards-desktop {
-    display: none !important;
-  }
-}
-/* Desktop defaults für FinanztoolsHero Layout-Switches */
-.ftools-left-col {
-  flex: 1;
-}
-.ftools-subheading-row {
-  flex-direction: row;
-  align-items: baseline;
-  gap: 10px;
-}
-.ftools-subheading-text {
-  margin-left: 180px;
-}
-.ftools-lottie-slider {
-  margin-top: -170px;
-  margin-bottom: -380px;
-}
-.ftools-cards-mobile {
-  display: none;
-}
-.ftools-cards-desktop {
-  display: flex;
 }
 /* Desktop default für Hero-Visual */
 .ftools-visual-wrap {

@@ -490,13 +490,12 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           >
             <div
               aria-hidden
-              className="subcat-leading-spacer"
-              data-expanded={spacerExpanded ? "true" : "false"}
               style={{
                 // Leading Spacer bleibt klein (linksbündig) — nur Trailing wächst.
-                // Mobile: Leading-Spacer entfällt komplett (flexBasis 0) via CSS.
+                // Mobile: Leading-Spacer entfällt komplett (flexBasis 0).
                 flexGrow: 0,
                 flexShrink: 0,
+                flexBasis: isMobile ? 0 : (spacerExpanded ? 'calc(5vw + 23px)' : '5vw'),
                 minWidth: 0,
                 transition: `flex-basis ${MORPH_DURATION / 1000}s ease`,
               }}
@@ -635,31 +634,31 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         />
       </div>
 
-        {/* Edge-Gradients — links (auf Mobile via CSS gehidet) */}
+        {/* Edge-Gradients — links (auf Mobile entfällt er komplett) */}
+        {!isMobile && (
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: -5,
+              bottom: 0,
+              left: 0,
+              width: 150,
+              background: 'linear-gradient(to right, var(--color-bg-page), transparent)',
+              pointerEvents: 'none',
+              zIndex: 5,
+            }}
+          />
+        )}
+        {/* Edge-Gradients — rechts (auf Mobile schmaler) */}
         <div
           aria-hidden
-          className="subcat-edge-left"
-          style={{
-            position: 'absolute',
-            top: -5,
-            bottom: 0,
-            left: 0,
-            width: 150,
-            background: 'linear-gradient(to right, var(--color-bg-page), transparent)',
-            pointerEvents: 'none',
-            zIndex: 5,
-          }}
-        />
-        {/* Edge-Gradients — rechts (Mobile-Width via CSS) */}
-        <div
-          aria-hidden
-          className="subcat-edge-right"
           style={{
             position: 'absolute',
             top: 0,
             bottom: 0,
             right: 0,
-            width: 150,
+            width: isMobile ? 60 : 150,
             background: 'linear-gradient(to left, var(--color-bg-page), transparent)',
             pointerEvents: 'none',
             zIndex: 5,
@@ -670,7 +669,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       {/* Shared SliderNav — immer gemountet, damit die Pfeile und Dots beim
           Wegfall der Sichtbarkeits-Bedingung smooth ausfahren (statt hart zu
           unmounten). `visible` steuert die Scale-Animation. */}
-      <div className="subcat-nav-wrap">
+      <div style={{ padding: isMobile ? '0 20px' : '0 clamp(20px, 10vw, 200px)', marginTop: isMobile ? 3 : 23 }}>
         <SliderNav
           {...navProps}
           visible={(canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)}

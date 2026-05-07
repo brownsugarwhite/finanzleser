@@ -3,13 +3,13 @@
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
 import gsap from "@/lib/gsapConfig";
-// lottie + 184kB JSON werden lazy importiert (siehe ensureLottieReady),
-// damit sie nicht im Landing-Initial-Bundle landen.
+import lottie from "lottie-web";
 import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
+import vergleicheAnim from "@/assets/lottie/vergleicheAnim.json";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
@@ -53,6 +53,7 @@ const TOOLS = [
     href: "/finanztools/rechner",
     color: "var(--color-tool-rechner)",
     icon: "/icons/iconRechner.svg",
+    anim: vergleicheAnim, // Platzhalter
   },
   {
     title: "Vergleiche",
@@ -61,6 +62,7 @@ const TOOLS = [
     href: "/finanztools/vergleiche",
     color: "var(--color-tool-vergleiche)",
     icon: "/icons/iconVergleich.svg",
+    anim: vergleicheAnim,
   },
   {
     title: "Checklisten",
@@ -69,29 +71,13 @@ const TOOLS = [
     href: "/finanztools/checklisten",
     color: "var(--color-tool-checklisten)",
     icon: "/icons/iconCheckliste.svg",
+    anim: vergleicheAnim, // Platzhalter
   },
 ];
 
 export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
   const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
   const animRefs = useRef<(AnimationItem | null)[]>([null, null, null, null]);
-  // Lazy-loaded lottie module + animation-JSON. Wird beim ersten activeCard-
-  // Wechsel via dynamic-import gefüllt — landet nicht im Initial-Bundle.
-  const lottieModRef = useRef<typeof import("lottie-web").default | null>(null);
-  const animDataRef = useRef<unknown>(null);
-  const lottieLoadPromise = useRef<Promise<void> | null>(null);
-  function ensureLottieReady(): Promise<void> {
-    if (lottieModRef.current && animDataRef.current) return Promise.resolve();
-    if (lottieLoadPromise.current) return lottieLoadPromise.current;
-    lottieLoadPromise.current = Promise.all([
-      import("lottie-web"),
-      import("@/assets/lottie/vergleicheAnim.json"),
-    ]).then(([lottieMod, animModule]) => {
-      lottieModRef.current = lottieMod.default;
-      animDataRef.current = animModule.default ?? animModule;
-    });
-    return lottieLoadPromise.current;
-  }
   const cardsRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -119,8 +105,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   const [prevSlide, setPrevSlide] = useState(-1);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [slidePhase, setSlidePhase] = useState<"idle" | "prep" | "go">("idle");
-  // isMobile-State + matchMedia-Listener entfernt — alle viewport-abhängigen
-  // Layout-Werte sind jetzt in CSS-Klassen (.ftools-*), keine SSR-Reflows mehr.
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
 
   // Measure collapsed card bar width + calculate spacer height
   useEffect(() => {
@@ -142,13 +136,11 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     });
   }
 
-  function loadAnimAt(index: number, data: unknown) {
-    const lottieLib = lottieModRef.current;
-    if (!lottieLib) return; // ensureLottieReady noch nicht aufgelöst
+  function loadAnimAt(index: number, data: any) {
     const container = lottieRefs.current[index];
     if (!container) return;
     if (animRefs.current[index]) animRefs.current[index]!.destroy();
-    const anim = lottieLib.loadAnimation({
+    const anim = lottie.loadAnimation({
       container,
       renderer: 'svg',
       loop: false,
@@ -346,49 +338,46 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     const dir: "left" | "right" = comesFromRight ? "right" : "left";
     setDirection(dir);
 
+    // Stroke direction
+    const animData = TOOLS[newIndex].anim;
+    const data = comesFromRight ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
+    const progress = getBaselineProgress();
+
     // Reset previous anim after transition
     const prevIdx = prevIndex.current;
     if (prevIdx >= 0 && animRefs.current[prevIdx]) {
       setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
     }
 
-    // Slide-DOM-Logik unabhängig von Lottie sofort ausführen — Lottie wird
-    // separat lazy-geladen und danach in den passenden Container geladen.
     if (isFirstPlay) {
+      // First play: slide already in viewport, no slide animation
       setCurrentSlide(newIndex);
       setSlidePhase("idle");
+      loadAnimAt(newIndex, data);
       prevDirection.current = dir;
     } else {
+      // Phase 1: position new slide off-screen (no transition)
       setPrevSlide(currentSlide);
       setCurrentSlide(newIndex);
       setSlidePhase("prep");
+
+      // Phase 2: next frame → animate in
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setSlidePhase("go");
+
+          const dirChanged = prevDirection.current !== null && prevDirection.current !== dir;
+          if (dirChanged || progress >= 0.8) {
+            loadAnimAt(newIndex, data);
+          } else {
+            setTimeout(() => loadAnimAt(newIndex, data), 500);
+          }
           prevDirection.current = dir;
         });
       });
     }
 
     prevIndex.current = newIndex;
-
-    // Lottie + JSON lazy laden (cached nach erstem Aufruf), dann animieren.
-    const progress = getBaselineProgress();
-    ensureLottieReady().then(() => {
-      const animData = animDataRef.current;
-      if (!animData) return;
-      const data = comesFromRight ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
-      if (isFirstPlay) {
-        loadAnimAt(newIndex, data);
-      } else {
-        const dirChanged = prevDirection.current !== null && prevDirection.current !== dir;
-        if (dirChanged || progress >= 0.8) {
-          loadAnimAt(newIndex, data);
-        } else {
-          setTimeout(() => loadAnimAt(newIndex, data), 500);
-        }
-      }
-    });
   }, [activeCard]);
 
   // Cleanup on unmount
@@ -402,7 +391,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
       <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
         {/* Left: finanztools_container */}
-        <div className="ftools-left-col">
+        <div style={{ flex: isMobile ? "none" : 1, width: isMobile ? "100%" : undefined }}>
 
           {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
           <div className="ftools-spacer" style={{ width: "100%", height: "390px", position: "relative" }}>
@@ -444,8 +433,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </div>
 
           {/* 2. Subheading + Heading — sticky bottom */}
-          <div className="ftools-subheading-row" style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", paddingTop: 256 }}>
-            <p data-finanztools-heading className="ftools-subheading-text" style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)" }}>
+          <div style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "baseline", gap: isMobile ? 4 : 10, paddingTop: 256 }}>
+            <p data-finanztools-heading style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", marginLeft: isMobile ? 0 : 180 }}>
               Die Finanztools
             </p>
             <p ref={alleinHandRef} style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, opacity: 0 }}>
@@ -454,7 +443,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </div>
 
           {/* 3. Lottie Slider — stacked, slides enter from left/right */}
-          <div className="ftools-lottie-slider" style={{ width: "100%", overflow: "hidden", position: "relative" }}>
+          <div style={{ width: "100%", marginTop: isMobile ? -13 : -170, marginBottom: isMobile ? -130 : -380, overflow: "hidden", position: "relative" }}>
             {/* Sizing ghost — maintains aspect ratio */}
             <div style={{ width: "100%", aspectRatio: "1 / 1" }} />
             {TOOLS.map((_, i) => {
@@ -532,27 +521,27 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             })()}
           </div>
 
-          {/* 4. Tool Cards — Mobile: RevolverSlider; Desktop: sticky cards row.
-              Beide rendern + CSS-toggle (.ftools-cards-mobile / -desktop) damit
-              SSR-HTML viewport-konsistent ist und kein Hydration-Reflow auftritt. */}
-          <div className="ftools-cards-mobile" style={{ position: "sticky", bottom: 0, paddingTop: 23, paddingBottom: 16, width: "100%", zIndex: 10 }}>
-            <RevolverSlider
-              tools={TOOLS}
-              activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
-              onActiveChange={(idx, fromIntro) => {
-                const title = TOOLS[idx].title;
-                if (activeCard !== title) setActiveCard(title);
-                // When clicking from intro state: scroll section bottom into view
-                if (fromIntro && sectionRef.current) {
-                  const rect = sectionRef.current.getBoundingClientRect();
-                  const sectionBottom = window.scrollY + rect.bottom;
-                  const targetY = sectionBottom - window.innerHeight;
-                  gsap.to(window, { scrollTo: { y: targetY }, duration: 0.8, ease: "power2.inOut" });
-                }
-              }}
-            />
-          </div>
-          <div ref={cardsRef} className="ftools-cards-desktop" style={{ position: "sticky", bottom: 0, height: 150, alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23, marginLeft: -15 }}>
+          {/* 4. Tool Cards — sticky bottom (desktop) / revolver (mobile) */}
+          {isMobile ? (
+            <div style={{ position: "sticky", bottom: 0, paddingTop: 23, paddingBottom: 16, width: "100%", zIndex: 10 }}>
+              <RevolverSlider
+                tools={TOOLS}
+                activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
+                onActiveChange={(idx, fromIntro) => {
+                  const title = TOOLS[idx].title;
+                  if (activeCard !== title) setActiveCard(title);
+                  // When clicking from intro state: scroll section bottom into view
+                  if (fromIntro && sectionRef.current) {
+                    const rect = sectionRef.current.getBoundingClientRect();
+                    const sectionBottom = window.scrollY + rect.bottom;
+                    const targetY = sectionBottom - window.innerHeight;
+                    gsap.to(window, { scrollTo: { y: targetY }, duration: 0.8, ease: "power2.inOut" });
+                  }
+                }}
+              />
+            </div>
+          ) : (
+            <div ref={cardsRef} style={{ position: "sticky", bottom: 0, height: 150, display: "flex", alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23, marginLeft: -15 }}>
               {TOOLS.map((tool, idx) => {
                 const isActive = activeCard === tool.title;
                 const t = cardProgs[idx];
@@ -660,7 +649,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                       {/* Card Content */}
                       <div ref={(el) => { toolContentRefs.current[idx] = el; }} style={{ height: 0, opacity: 0 }}>
                         <div style={{ marginTop: 5 }}>
-                          <div style={{ width: 420, display: "flex", flexDirection: "column", gap: 20 }}>
+                          <div style={{ width: isMobile ? "100%" : 420, display: "flex", flexDirection: "column", gap: 20 }}>
                             <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
                               {tool.description}
                             </p>
@@ -687,6 +676,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                 );
               })}
             </div>
+          )}
         </div>
 
         {/* Right: preview_container */}

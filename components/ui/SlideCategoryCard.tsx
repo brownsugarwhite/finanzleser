@@ -21,8 +21,7 @@ interface SlideCategoryCardProps {
 }
 
 const CARD_WIDTH = 350;
-// Mobile-Width (290) liegt in CSS via [data-slider-card] @media-Custom-Property
-// (--card-base-width). Kein React-State mehr — keine SSR-Mismatch-Reflows.
+const CARD_WIDTH_MOBILE = 290;
 const T1 = 0.3; // Phase 1 duration (content collapse)
 const T2 = 0.3; // Phase 2 duration (width + font)
 
@@ -38,6 +37,15 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
     const mql = window.matchMedia('(hover: hover)');
     setHoverCapable(mql.matches);
     const handler = (e: MediaQueryListEvent) => setHoverCapable(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
@@ -73,11 +81,8 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
 
   const titleWidth = titleWidthProp ?? measuredTitleWidth;
 
-  // baseCardWidth = CSS-Custom-Property (responsive 350/290) — fallback CARD_WIDTH
-  // wenn die Var (z.B. außerhalb des Sliders) nicht definiert ist.
-  const cardWidth = phase2Active
-    ? `${titleWidth}px`
-    : (fluidWidth ? '100%' : `var(--card-base-width, ${CARD_WIDTH}px)`);
+  const baseCardWidth = isMobile ? CARD_WIDTH_MOBILE : CARD_WIDTH;
+  const cardWidth = phase2Active ? `${titleWidth}px` : (fluidWidth ? '100%' : `${baseCardWidth}px`);
 
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
