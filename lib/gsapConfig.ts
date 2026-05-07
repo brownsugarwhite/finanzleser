@@ -6,14 +6,13 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
 import { Flip } from "gsap/dist/Flip";
 
 let initialized = false;
 
 export function initGSAP() {
   if (initialized) return;
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin, Flip);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Flip);
 
   // Lag-Smoothing: First-Paint-Lags > 150ms (typisch 200-400ms beim
   // ersten Tap auf Mobile) werden auf 16ms geglättet, sonst springt GSAP
@@ -27,9 +26,12 @@ export function initGSAP() {
 }
 
 // Eager registration on module load: any file that side-effect-imports this
-// module (e.g. `import "@/lib/gsapConfig";`) is guaranteed to have all GSAP
-// plugins registered before its component code runs.
+// module (e.g. `import "@/lib/gsapConfig";`) is guaranteed to have ScrollTrigger,
+// ScrollToPlugin und Flip registriert.
+// MotionPathPlugin liegt separat in `lib/gsap/motionPath.ts` — wird nur von
+// LeoIcon (Article-Routes, AIAgentTeaser) gebraucht und landet damit nicht
+// im Landing-Bundle.
 initGSAP();
 
-export { gsap, ScrollTrigger, ScrollToPlugin, MotionPathPlugin, Flip };
+export { gsap, ScrollTrigger, ScrollToPlugin, Flip };
 export default gsap;

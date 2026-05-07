@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger, Flip } from "@/lib/gsapConfig";
 
@@ -29,8 +29,9 @@ interface SparkHeadingProps {
 const DOCK_DURATION = 0.4;
 const DOCK_EASE = "power2.out";
 const DOCKED_FONT_SIZE = 25;
-const HOME_FONT_SIZE_DESKTOP = 42;
-const HOME_FONT_SIZE_MOBILE = 36;
+// Home-fontSize/padding sind in CSS (.spark-heading-container) responsiv via @media.
+// Flip.getState mit props:"padding,fontSize" capturet die computed Values direkt
+// aus dem Stylesheet — kein React-State, kein Mobile/Desktop-Resize-Listener nötig.
 
 export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
   // Outer wrapper bleibt immer im Flow — wird als ScrollTrigger-Trigger
@@ -51,20 +52,6 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
   // Geschwister im Parent (CategoryHeader rendert pre/post-Heading-Divs);
   // appendChild würde das Heading ans Ende werfen → Flip-Endposition falsch.
   const homeNextSiblingRef = useRef<Node | null>(null);
-
-  // Responsive Home-Font: Mobile 38, Desktop 42.
-  const [homeFontSize, setHomeFontSize] = useState(HOME_FONT_SIZE_DESKTOP);
-  const [homePadding, setHomePadding] = useState(40);
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    const apply = () => {
-      setHomeFontSize(mql.matches ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP);
-      setHomePadding(mql.matches ? 13 : 40);
-    };
-    apply();
-    mql.addEventListener("change", apply);
-    return () => mql.removeEventListener("change", apply);
-  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -140,17 +127,12 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         home.appendChild(container);
       }
       container.style.width = "";
-      // Live lesen — useEffect-deps sind [], also würde die State-Capture
-      // bei einem späteren Mobile↔Desktop-Resize stale sein.
-      const isMobileNow = window.matchMedia("(max-width: 767px)").matches;
-      const liveHomeFontSize = isMobileNow ? HOME_FONT_SIZE_MOBILE : HOME_FONT_SIZE_DESKTOP;
-      const liveHomePadding = isMobileNow ? 13 : 40;
-      // padding-shorthand clearen UND paddingLeft/paddingRight explizit re-setzen,
-      // weil React ohne Re-Render die ursprünglichen Inline-Werte nicht wiederherstellt.
+      // Inline-Overrides aus dem Dock clearen — CSS (.spark-heading-container)
+      // liefert die korrekten responsiven Home-Werte (40/42 Desktop, 13/36 Mobile).
       container.style.padding = "";
-      container.style.paddingLeft = `${liveHomePadding}px`;
-      container.style.paddingRight = `${liveHomePadding}px`;
-      container.style.fontSize = `${liveHomeFontSize}px`;
+      container.style.paddingLeft = "";
+      container.style.paddingRight = "";
+      container.style.fontSize = "";
       const tl = gsap.timeline();
       tl.add(Flip.from(state, {
         duration: DOCK_DURATION,
@@ -245,20 +227,16 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
       margin: "0 auto",
       height: 60,
     }}>
-    <div ref={containerRef} className="scalable-landing" style={{
+    <div ref={containerRef} className="scalable-landing spark-heading-container" style={{
       display: "flex",
       alignItems: "center",
       gap: 0,
       width: "100%",
       maxWidth: "1200px",
       margin: "0 auto",
-      paddingLeft: homePadding,
-      paddingRight: homePadding,
       boxSizing: "border-box",
-      // fontSize hier setzen statt auf dem h2 — der h2 erbt es. Damit kann
-      // Flip die fontSize allein auf dem Container animieren, ohne den h2
-      // als Flip-Target (mit absolute:true) aus dem Flex-Flow zu reißen.
-      fontSize: homeFontSize,
+      // padding + fontSize via CSS-Klasse (responsive @media) statt React-State.
+      // Flip animiert die computed Values direkt — kein Inline-Style nötig.
     }}>
       <div ref={leftLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
       <div ref={leftSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
