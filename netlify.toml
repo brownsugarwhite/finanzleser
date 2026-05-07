@@ -20,9 +20,6 @@
   WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
 
-# Verhindert Indexierung der Staging-Site (gilt nur im staging-Branch,
-# main bleibt ohne Header → Production wird normal indexiert)
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow, noarchive"
+# Hinweis: noindex-Header für Staging wird in next.config.ts gesetzt
+# (env-basiert über NEXT_PUBLIC_SITE_URL — funktioniert verlässlich
+# bei Next.js SSR, anders als ein netlify.toml [[headers]] Block).

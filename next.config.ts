@@ -71,7 +71,26 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "staging.finanzleser.de",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
+  },
+  async headers() {
+    // Staging: noindex für die ganze Site (env-basiert, nicht branch-basiert)
+    const isStaging = process.env.NEXT_PUBLIC_SITE_URL?.includes("staging.");
+    if (!isStaging) return [];
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+    ];
   },
 };
 
