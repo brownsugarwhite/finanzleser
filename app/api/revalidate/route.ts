@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: { secret?: string; path?: string; type?: string; slug?: string; status?: string };
+  let body: { secret?: string; path?: string; type?: string; slug?: string; status?: string; layout?: boolean };
   try {
     body = await request.json();
   } catch {
@@ -29,6 +29,19 @@ export async function POST(request: NextRequest) {
   }
 
   const revalidated: string[] = [];
+
+  // Layout-Bust (für globale Layout-Elemente wie TopBanner) — bustet ALLE Pages
+  if (body.layout) {
+    revalidatePath("/", "layout");
+    revalidated.push("/ (layout: alle Pages)");
+    return NextResponse.json({
+      ok: true,
+      revalidated,
+      type: body.type,
+      slug: body.slug,
+      timestamp: Date.now(),
+    });
+  }
 
   // Hauptpfad
   if (body.path && body.path.startsWith("/")) {

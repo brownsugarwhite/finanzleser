@@ -150,3 +150,32 @@ add_action( 'transition_post_status', function( $new, $old, $post ) {
     if ( $new === $old ) return;
     fl_headless_trigger_revalidate( $post->ID, $post );
 }, 10, 3 );
+
+/* ------------------------------------------------------------------ */
+/* 4. Site-Settings-Änderung → Layout-Cache komplett busten           */
+/* ------------------------------------------------------------------ */
+function fl_headless_revalidate_layout( $reason ) {
+    wp_remote_post( rtrim( FL_HEADLESS_FRONTEND_URL, '/' ) . '/api/revalidate', [
+        'headers'  => [ 'Content-Type' => 'application/json' ],
+        'body'     => wp_json_encode( [
+            'secret' => FL_HEADLESS_REVALIDATE_SECRET,
+            'type'   => 'site_settings',
+            'slug'   => $reason,
+            'layout' => true,
+        ] ),
+        'timeout'  => 5,
+        'blocking' => false,
+    ] );
+}
+// Site-Settings (TopBanner etc.)
+add_action( 'updated_option', function( $option ) {
+    if ( $option === 'finanzleser_site_settings' ) {
+        fl_headless_revalidate_layout( $option );
+    }
+}, 10, 1 );
+// Rechner-Konfig (Mindestlohn, Kindergeld, BBG etc.)
+add_action( 'updated_option', function( $option ) {
+    if ( strpos( $option, 'finanzleser_rc_' ) === 0 ) {
+        fl_headless_revalidate_layout( $option );
+    }
+}, 10, 1 );
