@@ -134,16 +134,16 @@ export default function SliderNav({
           viewBox="0 0 64 15"
           fill="none"
           preserveAspectRatio="none"
-          style={{ transformBox: "fill-box", transformOrigin: "100% 100%" }}
+          style={{ transformBox: "fill-box", transformOrigin: "100% 100%", transform: "scale(0)" }}
         >
           <path d="M0 15H64V0L0 15Z" fill="var(--color-text-primary)" />
         </svg>
         <span className="slider-nav-track">
-          <span ref={prevLabelRef} className="slider-nav-label">{prevLabel}</span>
+          <span ref={prevLabelRef} className="slider-nav-label" style={{ opacity: 0 }}>{prevLabel}</span>
           <span
             ref={prevLineRef}
             className="slider-nav-track-line"
-            style={{ transformOrigin: "100% 50%" }}
+            style={{ transformOrigin: "100% 50%", transform: "scaleX(0)" }}
           />
         </span>
       </button>
@@ -164,11 +164,11 @@ export default function SliderNav({
         aria-label="Weiter"
       >
         <span className="slider-nav-track">
-          <span ref={nextLabelRef} className="slider-nav-label">{nextLabel}</span>
+          <span ref={nextLabelRef} className="slider-nav-label" style={{ opacity: 0 }}>{nextLabel}</span>
           <span
             ref={nextLineRef}
             className="slider-nav-track-line"
-            style={{ transformOrigin: "0% 50%" }}
+            style={{ transformOrigin: "0% 50%", transform: "scaleX(0)" }}
           />
         </span>
         <svg
@@ -179,7 +179,7 @@ export default function SliderNav({
           viewBox="0 0 64 15"
           fill="none"
           preserveAspectRatio="none"
-          style={{ transformBox: "fill-box", transformOrigin: "0% 100%" }}
+          style={{ transformBox: "fill-box", transformOrigin: "0% 100%", transform: "scale(0)" }}
         >
           <path d="M64 15H0V0L64 15Z" fill="var(--color-text-primary)" />
         </svg>
