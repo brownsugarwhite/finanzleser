@@ -36,7 +36,17 @@ export async function GET(request: NextRequest) {
 
   (await draftMode()).enable();
 
-  // 307 damit Browser den Cookie behält
-  const target = new URL(redirectPath, request.url);
+  // External host nehmen (nicht request.url — das ist Netlify-intern,
+  // Cookie würde sonst auf falscher Domain gesetzt werden)
+  const host =
+    request.headers.get("x-forwarded-host") ||
+    request.headers.get("host") ||
+    new URL(request.url).host;
+  const proto = request.headers.get("x-forwarded-proto") || "https";
+
+  const target = new URL(redirectPath, `${proto}://${host}`);
+  // Query-Strings + Secret nicht durchreichen
+  target.search = "";
+
   return NextResponse.redirect(target, 307);
 }
