@@ -44,9 +44,10 @@ export async function GET(request: NextRequest) {
     new URL(request.url).host;
   const proto = request.headers.get("x-forwarded-proto") || "https";
 
-  const target = new URL(redirectPath, `${proto}://${host}`);
-  // Query-Strings + Secret nicht durchreichen
-  target.search = "";
+  // URL als String bauen — vermeidet alle URL-Constructor-Quirks
+  // (Next.js 15 / Netlify-Edge schleppt sonst Query-Strings mit)
+  const cleanPath = redirectPath.split("?")[0];
+  const target = `${proto}://${host}${cleanPath}`;
 
   return NextResponse.redirect(target, 307);
 }
