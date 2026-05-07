@@ -19,3 +19,10 @@
 [context.deploy-preview.environment]
   WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
+
+# Verhindert Indexierung der Staging-Site (gilt nur im staging-Branch,
+# main bleibt ohne Header → Production wird normal indexiert)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
