@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Production-Site (deployt vom main-Branch, später)
+[context.production.environment]
+  NEXT_PUBLIC_SITE_URL = "https://www.finanzleser.de"
+  # WORDPRESS_API_URL wird im Netlify-UI gesetzt (Production-WP-Endpoint)
+
+# Staging-Site (deployt vom staging-Branch)
+[context.staging.environment]
+  NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
+  WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
+
+# Deploy-Previews und Branch-Deploys
+[context.deploy-preview.environment]
+  WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
+  NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"

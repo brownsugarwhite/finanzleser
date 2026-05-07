@@ -12,6 +12,8 @@ node_modules/
 
 # Env files
 .env*.local
+.env.staging
+.env.production
 
 # Build
 build/
