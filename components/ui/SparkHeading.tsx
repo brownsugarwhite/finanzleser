@@ -90,23 +90,26 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
       container.style.fontSize = `${DOCKED_FONT_SIZE}px`;
       // 3) Flip + Sub-Animationen in einer Timeline, alle bei time 0 → garantiert
       //    synchroner Start und kein Konflikt mit Flip-internem Setup.
+      // clearProps am Ende: Inline-Styles abräumen, sonst bleibt residueller
+      // Transform/Padding inline und triggert Snap beim Wechsel absolute→Flow.
       const tl = gsap.timeline();
       tl.add(Flip.from(state, {
         duration: DOCK_DURATION,
         ease: DOCK_EASE,
         absolute: true,
         props: "padding,fontSize",
+        clearProps: "all",
       }), 0);
       sparks.forEach((spark) => {
         tl.fromTo(
           spark,
           { rotation: 0, scale: 1, transformOrigin: "50% 50%" },
-          { rotation: 360, scale: 0, duration: DOCK_DURATION, ease: DOCK_EASE },
+          { rotation: 360, scale: 0, duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" },
           0
         );
       });
-      tl.fromTo(leftLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
-      tl.fromTo(rightLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(leftLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
+      tl.fromTo(rightLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
     };
 
     const undock = () => {
@@ -139,17 +142,18 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         ease: DOCK_EASE,
         absolute: true,
         props: "padding,fontSize",
+        clearProps: "all",
       }), 0);
       sparks.forEach((spark) => {
         tl.fromTo(
           spark,
           { rotation: 360, scale: 0, transformOrigin: "50% 50%" },
-          { rotation: 0, scale: 1, duration: DOCK_DURATION, ease: DOCK_EASE },
+          { rotation: 0, scale: 1, duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" },
           0
         );
       });
-      tl.fromTo(leftLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
-      tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(leftLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
+      tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
     };
 
     // Instant-Dock ohne Animation — für Page-Load wenn bereits an
