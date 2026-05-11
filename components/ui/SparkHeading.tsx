@@ -212,7 +212,12 @@ export default function SparkHeading({ title, as = "h2", fadeSectionId }: SparkH
   const Tag = as;
 
   return (
-    <div ref={wrapperRef} className="spark-heading-wrapper">
+    // Outer: padding + Box-Geometrie (kein positioning context).
+    // Stage: positioning context (position:relative) UND Width = outer-
+    // content-area. Container während Flip-absolute hat width:100% relativ
+    // zur Stage-padding-box = 100% identisch zu natural-flow-Width. Kein Snap.
+    <div className="spark-heading-outer">
+      <div ref={wrapperRef} className="spark-heading-stage">
       <div ref={containerRef} className="scalable-landing spark-heading-container" style={{
         width: "100%",
         display: "flex",
@@ -248,6 +253,7 @@ export default function SparkHeading({ title, as = "h2", fadeSectionId }: SparkH
           <SmallSpark />
         </div>
         <div ref={rightLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+      </div>
       </div>
     </div>
   );

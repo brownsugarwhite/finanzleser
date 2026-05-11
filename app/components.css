@@ -228,13 +228,20 @@ h1.category-title {
   font-weight: 700 !important;
 }
 
-/* SparkHeading — Wrapper trägt das Padding + die Box-Geometrie und bleibt
-   im Flow als Layout-Platzhalter. Container ist die reine Animations-Box
-   (Flip ↔ Slot) ohne padding — flex:1-Linien sind während Flip-absolute
-   und nach dem Snap auf identischer Width-Basis → kein Sprung am
-   Animations-Ende. fontSize bleibt am Container, damit Flip sie als prop
-   animieren kann. */
-.spark-heading-wrapper {
+/* SparkHeading — drei-stufige Box-Architektur damit Flip's absolute-mode
+   sauber animiert ohne Width-Snap am Ende:
+
+   1) .spark-heading-outer  — trägt padding + max-width + Höhe (60px)
+   2) .spark-heading-stage  — width 100% des outer-content-area, position
+      RELATIVE → containing block für Container während Flip-absolute.
+      Width identisch zu natural-flow-Width → kein Snap.
+   3) .spark-heading-container — Animations-Target (Flip ↔ Slot), width
+      100% des stage. fontSize bleibt hier (Flip animiert sie als prop).
+
+   fontSize ist responsive via @media. Wrapper trägt das Padding nur am
+   AUSSEN — der Container hat NIE padding, sodass flex:1-Linien während
+   und nach Flip auf identischer Width-Basis sind. */
+.spark-heading-outer {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -245,11 +252,18 @@ h1.category-title {
   display: flex;
   align-items: center;
 }
+.spark-heading-stage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 .spark-heading-container {
   font-size: 42px;
 }
 @media (max-width: 767px) {
-  .spark-heading-wrapper {
+  .spark-heading-outer {
     padding-left: 13px;
     padding-right: 13px;
   }
