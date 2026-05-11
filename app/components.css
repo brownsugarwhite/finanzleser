@@ -228,19 +228,32 @@ h1.category-title {
   font-weight: 700 !important;
 }
 
-/* SparkHeading-Container — responsive Home-Padding + fontSize via CSS,
-   damit kein React-State + matchMedia-Listener nötig ist. Flip.getState
-   captures die computed Values, animation läuft korrekt zwischen
-   Home (CSS) und Docked (inline 0/25). */
-.spark-heading-container {
+/* SparkHeading — Wrapper trägt das Padding + die Box-Geometrie und bleibt
+   im Flow als Layout-Platzhalter. Container ist die reine Animations-Box
+   (Flip ↔ Slot) ohne padding — flex:1-Linien sind während Flip-absolute
+   und nach dem Snap auf identischer Width-Basis → kein Sprung am
+   Animations-Ende. fontSize bleibt am Container, damit Flip sie als prop
+   animieren kann. */
+.spark-heading-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 60px;
   padding-left: 40px;
   padding-right: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.spark-heading-container {
   font-size: 42px;
 }
 @media (max-width: 767px) {
-  .spark-heading-container {
+  .spark-heading-wrapper {
     padding-left: 13px;
     padding-right: 13px;
+  }
+  .spark-heading-container {
     font-size: 36px;
   }
 }

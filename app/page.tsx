@@ -106,21 +106,12 @@ async function RatgeberSection() {
   }
 
   return (
-    <section style={{ width: "100%", padding: "80px 0 120px" }}>
+    <section id="ratgeber-section" style={{ width: "100%", padding: "80px 0 120px" }}>
       {/* Heading bewusst außerhalb von .scalable-landing — bleibt beim Menü-Open
           in seinem eigenen Stacking-Context auf Root-Ebene und damit immer
-          über dem ProgressiveBlur. Mobile: ausgeblendet (siehe globals.css). */}
-      <div
-        className="ratgeber-heading-wrap"
-        style={{
-          width: "100%",
-          maxWidth: 1200,
-          margin: "0 auto",
-          height: 60,
-        }}
-      >
-        <SparkHeading title="Ratgeber" as="h2" />
-      </div>
+          über dem ProgressiveBlur. SparkHeading bringt seinen eigenen
+          .spark-heading-wrapper mit (max-width 1200, height 60, padding). */}
+      <SparkHeading title="Ratgeber" as="h2" fadeSectionId="ratgeber-section" />
 
       <div className="scalable-landing" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ width: "100%", maxWidth: "1200px", padding: "0 clamp(20px, 4vw, 40px)", boxSizing: "border-box" }}>

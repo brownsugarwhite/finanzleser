@@ -23,9 +23,21 @@ export default function CategoryLayout({ title, titleSlug, description, mainCate
   return (
     <>
       <main className="min-h-screen bg-white">
-        <CategoryHeader title={title} description={description} breadcrumbItems={breadcrumbItems} />
+        <CategoryHeader
+          title={title}
+          description={description}
+          breadcrumbItems={breadcrumbItems}
+          fadeSectionId="category-articles-section"
+        />
 
-        <div className="scalable-landing max-w-7xl mx-auto px-6 pb-12" style={{ paddingTop: 23 }}>
+        {/* Section trägt die ID für SparkHeading's Scroll-Fade-Trigger.
+            Wenn das untere Ende dieser Section beim Scrollen den Viewport
+            durchquert (50% → 0% von top), faded das Heading aus + bluht. */}
+        <section
+          id="category-articles-section"
+          className="scalable-landing max-w-7xl mx-auto px-6 pb-12"
+          style={{ paddingTop: 23 }}
+        >
           {/* Posts Liste */}
           {posts && posts.length > 0 && (
             <ArticleList posts={posts} mainCategorySlug={mainCategorySlug} />
@@ -40,7 +52,7 @@ export default function CategoryLayout({ title, titleSlug, description, mainCate
               <p>Keine Beiträge gefunden</p>
             </div>
           )}
-        </div>
+        </section>
       </main>
       <div className="scalable-landing">
         <Footer />

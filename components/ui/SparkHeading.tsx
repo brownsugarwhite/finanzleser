@@ -24,19 +24,26 @@ function LargeSpark() {
 interface SparkHeadingProps {
   title: string;
   as?: "h1" | "h2" | "h3";
+  /**
+   * Optional: ID einer Section. Wenn das untere Ende dieser Section beim
+   * Scrollen den Viewport durchquert, wird das Heading scrubbed
+   * ausgefadet + ausgeblurt.
+   * Start: section.bottom == 50% viewport (vom top).
+   * End:   section.bottom == 0%  viewport (= komplett raus).
+   */
+  fadeSectionId?: string;
 }
 
 const DOCK_DURATION = 0.4;
 const DOCK_EASE = "power2.out";
 const DOCKED_FONT_SIZE = 25;
-// Home-fontSize/padding sind in CSS (.spark-heading-container) responsiv via @media.
-// Flip.getState mit props:"padding,fontSize" capturet die computed Values direkt
-// aus dem Stylesheet — kein React-State, kein Mobile/Desktop-Resize-Listener nötig.
+const FADE_BLUR_MAX = 16;
 
-export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
-  // Outer wrapper bleibt immer im Flow — wird als ScrollTrigger-Trigger
-  // verwendet, damit der Trigger funktioniert auch nachdem der innere
-  // Container in den fixed-positionierten Slot gemorpht wurde.
+export default function SparkHeading({ title, as = "h2", fadeSectionId }: SparkHeadingProps) {
+  // Wrapper trägt padding + Box-Geometrie (CSS-Klasse), bleibt im Flow.
+  // Container ist die reine Animations-Box (Flip ↔ Slot) — kein padding,
+  // damit flex:1-Linien während Flip-absolute und nach dem Snap auf
+  // mathematisch identischer Width-Basis sind → kein Sprung am Ende.
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const tagRef = useRef<HTMLHeadingElement>(null);
@@ -47,10 +54,6 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
 
   const isDockedRef = useRef(false);
   const homeParentRef = useRef<HTMLElement | null>(null);
-  // Original-Nachbar im DOM merken — damit Undock per insertBefore die
-  // exakte Position wiederherstellt. Bei Kategorie-Seiten hat das Heading
-  // Geschwister im Parent (CategoryHeader rendert pre/post-Heading-Divs);
-  // appendChild würde das Heading ans Ende werfen → Flip-Endposition falsch.
   const homeNextSiblingRef = useRef<Node | null>(null);
 
   useEffect(() => {
@@ -62,54 +65,40 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
     const rightLine = rightLineRef.current;
     if (!container || !tag || !leftSparks || !rightSparks || !leftLine || !rightLine) return;
 
-    // Heim-Parent merken, damit wir beim Undock + Unmount sauber zurück appenden.
-    // Der Heim-Wrapper hat in app/page.tsx feste Dimensionen (max-width 1200,
-    // height 60), der Slot in LogoBar ebenfalls (220×30) — Flip morpht
-    // zwischen zwei stabilen Boxen ohne Layout-Sprünge.
     homeParentRef.current = container.parentElement;
 
     const dock = () => {
       const target = document.getElementById("ratgeber-flip-target");
       if (!target || isDockedRef.current) return;
       isDockedRef.current = true;
-
-      // Alle 4 Sparks individuell — jede SVG rotiert um ihren eigenen Mittelpunkt.
       const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
 
-      // 1) State VOR Modifikationen erfassen. fontSize liegt auf dem Container
-      //    (h2 erbt) — so animiert Flip die Schriftgröße ohne den h2 selbst
-      //    aus dem Flex-Flow zu reißen. Container-Höhe schrumpft synchron mit
-      //    Position-Morph → kein Snap am Ende durch geänderte natural-rest.
-      const state = Flip.getState(container, { props: "padding,fontSize" });
-      // 2) DOM + Styles auf Ziel-Zustand setzen (slot, padding 0, font 18).
-      // Original-Nachbar merken VOR dem reparent.
+      // Capture VOR Reparent — nur fontSize, kein padding mehr
+      // (Padding lebt am Wrapper und ist hier irrelevant).
+      const state = Flip.getState(container, { props: "fontSize" });
       homeNextSiblingRef.current = container.nextSibling;
       target.appendChild(container);
-      container.style.width = "100%";
-      container.style.padding = "0";
       container.style.fontSize = `${DOCKED_FONT_SIZE}px`;
-      // 3) Flip + Sub-Animationen in einer Timeline, alle bei time 0 → garantiert
-      //    synchroner Start und kein Konflikt mit Flip-internem Setup.
-      // clearProps am Ende: Inline-Styles abräumen, sonst bleibt residueller
-      // Transform/Padding inline und triggert Snap beim Wechsel absolute→Flow.
+
       const tl = gsap.timeline();
       tl.add(Flip.from(state, {
         duration: DOCK_DURATION,
         ease: DOCK_EASE,
         absolute: true,
-        props: "padding,fontSize",
-        clearProps: "all",
+        props: "fontSize",
       }), 0);
+      // KEIN clearProps bei Sparks — sie sollen am Ende bei scale:0
+      // bleiben (versteckt im Slot), sonst springen sie zurück zu scale:1.
       sparks.forEach((spark) => {
         tl.fromTo(
           spark,
           { rotation: 0, scale: 1, transformOrigin: "50% 50%" },
-          { rotation: 360, scale: 0, duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" },
+          { rotation: 360, scale: 0, duration: DOCK_DURATION, ease: DOCK_EASE },
           0
         );
       });
-      tl.fromTo(leftLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
-      tl.fromTo(rightLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
+      tl.fromTo(leftLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(rightLine, { scaleX: 1 }, { scaleX: 0, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
     };
 
     const undock = () => {
@@ -117,48 +106,37 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
       const home = homeParentRef.current;
       if (!home) return;
       isDockedRef.current = false;
-
       const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
 
-      const state = Flip.getState(container, { props: "padding,fontSize" });
-      // Mit insertBefore an Original-Position einfügen, falls Nachbar
-      // noch im selben Parent ist; sonst Fallback appendChild.
+      const state = Flip.getState(container, { props: "fontSize" });
       const sibling = homeNextSiblingRef.current;
       if (sibling && sibling.parentNode === home) {
         home.insertBefore(container, sibling);
       } else {
         home.appendChild(container);
       }
-      container.style.width = "";
-      // Inline-Overrides aus dem Dock clearen — CSS (.spark-heading-container)
-      // liefert die korrekten responsiven Home-Werte (40/42 Desktop, 13/36 Mobile).
-      container.style.padding = "";
-      container.style.paddingLeft = "";
-      container.style.paddingRight = "";
+      // Inline-fontSize clearen → CSS-Klasse (responsive) greift wieder.
       container.style.fontSize = "";
+
       const tl = gsap.timeline();
       tl.add(Flip.from(state, {
         duration: DOCK_DURATION,
         ease: DOCK_EASE,
         absolute: true,
-        props: "padding,fontSize",
-        clearProps: "all",
+        props: "fontSize",
       }), 0);
       sparks.forEach((spark) => {
         tl.fromTo(
           spark,
           { rotation: 360, scale: 0, transformOrigin: "50% 50%" },
-          { rotation: 0, scale: 1, duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" },
+          { rotation: 0, scale: 1, duration: DOCK_DURATION, ease: DOCK_EASE },
           0
         );
       });
-      tl.fromTo(leftLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
-      tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE, clearProps: "transform" }, 0);
+      tl.fromTo(leftLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "right center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
+      tl.fromTo(rightLine, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", duration: DOCK_DURATION, ease: DOCK_EASE }, 0);
     };
 
-    // Instant-Dock ohne Animation — für Page-Load wenn bereits an
-    // gedockter Scroll-Position (ScrollTrigger feuert onEnter nur bei
-    // tatsächlichem Crossing in der aktuellen Session).
     const dockInstant = () => {
       const target = document.getElementById("ratgeber-flip-target");
       if (!target || isDockedRef.current) return;
@@ -166,8 +144,6 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
       const sparks = Array.from(container.querySelectorAll<SVGSVGElement>("svg"));
       homeNextSiblingRef.current = container.nextSibling;
       target.appendChild(container);
-      container.style.width = "100%";
-      container.style.padding = "0";
       container.style.fontSize = `${DOCKED_FONT_SIZE}px`;
       sparks.forEach((spark) => {
         gsap.set(spark, { rotation: 360, scale: 0, transformOrigin: "50% 50%" });
@@ -184,21 +160,39 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         // ScrollTrigger nach dem Dock einen fixed-positionierten Trigger,
         // dessen Scroll-Position konstant bleibt → onLeaveBack feuert nie.
         trigger: wrapperRef.current,
-        // Desktop: 10% von top, Mobile: 15% (früher, weil weniger Scroll-Höhe).
         start: isMobile ? "top 15%" : "top 10%",
         onEnter: dock,
         onLeaveBack: undock,
       });
+
+      // Scroll-Fade + Blur basierend auf einer Section weiter unten.
+      // Greift unabhängig vom Dock-State — animiert das Container-Element
+      // direkt, egal ob es im Heim-Wrapper oder im Slot lebt.
+      if (fadeSectionId) {
+        const fadeSection = document.getElementById(fadeSectionId);
+        if (fadeSection) {
+          ScrollTrigger.create({
+            trigger: fadeSection,
+            start: "bottom 50%",
+            end: "bottom top",
+            scrub: true,
+            onUpdate: (self) => {
+              const c = containerRef.current;
+              if (!c) return;
+              const p = self.progress;
+              c.style.opacity = String(1 - p);
+              c.style.filter = `blur(${p * FADE_BLUR_MAX}px)`;
+            },
+          });
+        }
+      }
     });
 
-    // Initial-State prüfen: wenn schon gescrollt → instant dock.
     if (stTrigger && (stTrigger as ScrollTrigger).scroll() >= (stTrigger as ScrollTrigger).start) {
       dockInstant();
     }
 
     return () => {
-      // Wenn beim Unmount noch gedockt: an Original-Position zurück, damit
-      // ctx.revert() den DOM nicht mit dem leeren Slot stehen lässt.
       if (isDockedRef.current && homeParentRef.current && container.parentElement !== homeParentRef.current) {
         const home = homeParentRef.current;
         const sibling = homeNextSiblingRef.current;
@@ -207,70 +201,54 @@ export default function SparkHeading({ title, as = "h2" }: SparkHeadingProps) {
         } else {
           home.appendChild(container);
         }
-        container.style.width = "";
-        container.style.maxWidth = "";
-        container.style.margin = "";
-        container.style.padding = "";
+        container.style.fontSize = "";
+        container.style.opacity = "";
+        container.style.filter = "";
       }
       ctx?.revert();
     };
-  }, []);
+  }, [fadeSectionId]);
 
   const Tag = as;
 
   return (
-    // Outer wrapper mit fester Höhe — reserviert den Layout-Platz, damit
-    // beim Flip-Dock (Container wird in den Slot reparented) keine Geschwister
-    // hochrutschen und der Undock visuell wieder an die Original-Position
-    // landet. Wird intern statt extern gerendert, damit Kategorie-Seiten
-    // (CategoryHeader rendert das Heading direkt im Fragment) auch funktionieren.
-    // Dient gleichzeitig als ScrollTrigger-Trigger (bleibt immer im Flow).
-    <div ref={wrapperRef} style={{
-      width: "100%",
-      maxWidth: 1200,
-      margin: "0 auto",
-      height: 60,
-    }}>
-    <div ref={containerRef} className="scalable-landing spark-heading-container" style={{
-      display: "flex",
-      alignItems: "center",
-      gap: 0,
-      width: "100%",
-      maxWidth: "1200px",
-      margin: "0 auto",
-      boxSizing: "border-box",
-      // padding + fontSize via CSS-Klasse (responsive @media) statt React-State.
-      // Flip animiert die computed Values direkt — kein Inline-Style nötig.
-    }}>
-      <div ref={leftLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-      <div ref={leftSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
-        <SmallSpark />
-        <LargeSpark />
-      </div>
-      <Tag ref={tagRef as React.RefObject<HTMLHeadingElement>} className="category-title" style={{
-        fontFamily: "var(--font-heading, 'Merriweather', serif)",
-        fontWeight: 700,
-        fontStyle: "italic",
-        // 1em statt expliziter Pixel — der h2 erbt damit 1:1 die Container-
-        // fontSize. UA-Default für h2 ist 1.5em → ohne Override wäre der
-        // Text 1.5× größer als gewünscht. Flip animiert nur Container-fontSize.
-        fontSize: "1em",
-        color: "var(--color-text-primary)",
-        textTransform: "uppercase",
-        letterSpacing: "0.02em",
-        lineHeight: 1.3,
-        whiteSpace: "nowrap",
-        margin: 0,
-        padding: 0,
+    <div ref={wrapperRef} className="spark-heading-wrapper">
+      <div ref={containerRef} className="scalable-landing spark-heading-container" style={{
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        gap: 0,
+        boxSizing: "border-box",
       }}>
-        {title}
-      </Tag>
-      <div ref={rightSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4, paddingRight: 10 }}>
-        <LargeSpark />
-        <SmallSpark />
+        <div ref={leftLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
+        <div ref={leftSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 10, paddingRight: 4 }}>
+          <SmallSpark />
+          <LargeSpark />
+        </div>
+        <Tag ref={tagRef as React.RefObject<HTMLHeadingElement>} className="category-title" style={{
+          fontFamily: "var(--font-heading, 'Merriweather', serif)",
+          fontWeight: 700,
+          fontStyle: "italic",
+          // 1em statt expliziter Pixel — der h2 erbt damit 1:1 die Container-
+          // fontSize. UA-Default für h2 ist 1.5em → ohne Override wäre der
+          // Text 1.5× größer als gewünscht. Flip animiert nur Container-fontSize.
+          fontSize: "1em",
+          color: "var(--color-text-primary)",
+          textTransform: "uppercase",
+          letterSpacing: "0.02em",
+          lineHeight: 1.3,
+          whiteSpace: "nowrap",
+          margin: 0,
+          padding: 0,
+        }}>
+          {title}
+        </Tag>
+        <div ref={rightSparksRef} style={{ display: "flex", alignItems: "center", gap: 6, paddingLeft: 4, paddingRight: 10 }}>
+          <LargeSpark />
+          <SmallSpark />
+        </div>
+        <div ref={rightLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
       </div>
-      <div ref={rightLineRef} style={{ flex: 1, height: 1, background: "var(--color-text-primary)" }} />
-    </div>
     </div>
   );
 }

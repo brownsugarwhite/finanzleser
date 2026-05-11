@@ -8,9 +8,11 @@ interface CategoryHeaderProps {
   description?: string;
   breadcrumbItems?: { label: string; href: string }[];
   children?: React.ReactNode;
+  /** ID der Section, mit deren Bottom-Out das Heading scrubbed ausgefadet wird. */
+  fadeSectionId?: string;
 }
 
-export default function CategoryHeader({ title, description, breadcrumbItems, children }: CategoryHeaderProps) {
+export default function CategoryHeader({ title, description, breadcrumbItems, children, fadeSectionId }: CategoryHeaderProps) {
   const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
     <>
@@ -37,7 +39,7 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
 
       {/* Sticky Heading — Fragment-Top-Level, damit das Parent-<main> der
           Containing Block ist und die Heading über die volle Body-Höhe klebt. */}
-      {title && <SparkHeading title={title} as="h1" />}
+      {title && <SparkHeading title={title} as="h1" fadeSectionId={fadeSectionId} />}
 
       {/* Post-Heading-Bereich (Description + Children) — skaliert mit */}
       {(description || children) && (
