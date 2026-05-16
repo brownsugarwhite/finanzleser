@@ -9,10 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.73",
+    "@ai-sdk/react": "^3.0.184",
     "@anthropic-ai/sdk": "^0.90.0",
     "@gsap/react": "^2.1.2",
     "@use-gesture/react": "^10.3.1",
+    "ai": "^6.0.182",
     "embla-carousel-react": "^8.6.0",
+    "graphql": "^16.14.0",
     "graphql-request": "^7.4.0",
     "gsap": "^3.14.2",
     "lottie-web": "^5.13.0",
@@ -21,7 +25,10 @@
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^4.8.69",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

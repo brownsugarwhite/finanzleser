@@ -27,22 +27,48 @@
   pointer-events: auto;
 }
 
+/* Modal-Mode: wenn Leo-Chat offen ist, TopNav-Elemente nicht klickbar.
+   Spezifische Selektoren statt breite Disable-Regel — verhindert Konflikte mit
+   Scroll-Verhalten des Messages-Containers. */
+body.leo-chat-open .bookmark-section__inner,
+body.leo-chat-open [data-topnav],
+body.leo-chat-open .finanztools-menu,
+body.leo-chat-open .scalable-content,
+body.leo-chat-open .topbar-grid {
+  pointer-events: none !important;
+}
+
 /* Leo Chat-Overlay — chat-center und iconwrap sind STATISCHE fixed-positionierte
    Container im JSX. Pill-Slot innerhalb chat-center hat fixe CSS-Dimensionen
    damit Flip einen stabilen Target hat (kein Layout-Shift während Animation). */
 #leo-chat-center {
   position: fixed;
-  top: 50%;
+  /* Wir nutzen NUR `bottom` (kein top), damit der Morph welcome→conversation
+     zwischen zwei numerischen Werten interpolierbar ist. Welcome = vertikal
+     zentriert: bottom = 50vh - halbe Pillen-Höhe (65px für 130px Pille).
+     Transform nur translateX(-50%) — kein translateY-Swap. */
+  bottom: calc(50vh - 65px);
+  top: auto;
   left: 50%;
-  /* Explizite Defaults — sonst bleiben Mobile-Override-Werte (right/bottom/
-     width) kleben, wenn der Viewport von ≤767 auf >767 hochgezogen wird,
-     und das Layout zerbricht. */
   right: auto;
-  bottom: auto;
   width: auto;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 200;
-  /* opacity + pointer-events werden via JS getoggelt (siehe LeoIcon openChat) */
+  transition: bottom 0.7s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+@media (max-width: 767px) {
+  #leo-chat-center {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+  }
+}
+/* Desktop conversation-mode: chat-center fährt zum Viewport-Boden. */
+@media (min-width: 768px) {
+  #leo-chat-center[data-mode="conversation"] {
+    bottom: 24px;
+  }
 }
 @media (max-width: 767px) {
   #leo-chat-center {
@@ -63,10 +89,23 @@
   width: 650px;
   height: 130px;          /* CHAT_PILL_H */
   position: relative;
+  /* Width/Height-Morph (650×130 → 750×90 in conversation-mode) per CSS-transition;
+     ist interpolierbar weil nur numerische Werte. Chat-center und iconwrap
+     animieren parallel via GSAP Flip (siehe useEffect in LeoIcon.tsx). */
+  transition:
+    width 0.7s cubic-bezier(0.65, 0.05, 0.36, 1),
+    height 0.7s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 @media (max-width: 767px) {
   #leo-chat-pill-slot {
     width: 100%;
+  }
+}
+/* Desktop conversation-mode: Pille wird breiter und flacher. */
+@media (min-width: 768px) {
+  #leo-chat-center[data-mode="conversation"] #leo-chat-pill-slot {
+    width: 750px;
+    height: 90px;
   }
 }
 
@@ -80,16 +119,16 @@
   align-items: center;
   pointer-events: none;
   opacity: 0;
-  /* Desktop: zentriert horizontal, über der Pille */
+  /* Welcome-Position: über zentrierter Pille. Conversation-Morph läuft via
+     GSAP in LeoIcon useEffect (positioniert Leo dynamisch zum aktuellen
+     Antwort-Spike). Keine CSS-Transitions — GSAP handled die Animation. */
+  bottom: calc(50vh + 100px);         /* 10px höher als zuvor (war + 90px) */
   left: 50%;
-  bottom: calc(50% + 90px);    /* 70 = halbe Pill-Höhe (50) + Gap (20) */
-  /* Explizite Defaults — Mobile-Override-Werte (top/right/justify-content)
-     müssen aktiv zurückgesetzt werden, sonst bleiben sie beim Viewport-Resize
-     hängen. */
   top: auto;
   right: auto;
   justify-content: flex-start;
   transform: translateX(-50%);
+  transform-origin: bottom left;
 }
 @media (max-width: 767px) {
   #leo-chat-iconwrap {
@@ -103,19 +142,350 @@
     justify-content: center;
   }
 }
+/* Conversation-mode: GSAP positioniert iconwrap dynamisch via inline-style
+   neben dem Spike der aktuellen Antwort. Kein CSS für Position nötig hier. */
 
 #leo-chat-greeting {
   font-family: var(--font-heading);
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 650;
   color: #1a1a1a;
   text-align: left;
   line-height: 1.15;
+  /* Opacity fadet SCHNELL (0.25s) — Greeting ist unsichtbar bevor max-width
+     kollabiert (0.4s mit 0.2s delay). Verhindert das visuelle „Text shrinkt mit". */
+  transition:
+    opacity 0.25s ease,
+    max-width 0.4s cubic-bezier(0.65, 0.05, 0.36, 1) 0.2s;
+  max-width: 800px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 @media (max-width: 767px) {
   #leo-chat-greeting {
     font-size: 6.5vw;
   }
+}
+/* Conversation-mode: Greeting blendet aus + Text kollabiert (sonst stösst er
+   den geschrumpften Leo aus der vorgesehenen Top-Left-Position). */
+#leo-chat-iconwrap[data-mode="conversation"] #leo-chat-greeting {
+  opacity: 0;
+  max-width: 0;
+  pointer-events: none;
+}
+
+/* Leo Chat-Messages — scrollbare Verlaufs-Liste oberhalb der Eingabe-Pille.
+   Desktop: über pillSlot in chat-center, fade-mask oben.
+   Mobile: füllt den Raum zwischen Viewport-Top und Pill. */
+#leo-chat-messages {
+  /* fixed (nicht absolute) — eigenständiger Top-Level-Container (nicht in
+     chat-center), damit position:fixed wirklich am Viewport hängt und nicht
+     vom transform-Parent verschoben wird.
+     Full vertical span (top:0 → bottom:0 unter Pille). justify-content:
+     flex-start → Bubbles oben, neueste unten. */
+  position: fixed;
+  top: 0;
+  bottom: 0;                     /* bis zum unteren Bildrand — Pille floatet darüber */
+  /* Centering via margin:auto statt transform — sonst würde transform einen
+     Stacking-Context erzeugen und alle Children wären darin gefangen (= kein
+     z-index-Trick möglich, User-Bubbles könnten nicht über ProgressiveBlur). */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+  max-width: calc(100vw - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 14px;
+  padding:100px 23px 170px 23px;  /* 50px top, 23px links/rechts, 160px bottom (Platz für Pille + Bubble-Scroll unter Pille mit Gradient-Fade). */
+  pointer-events: auto;
+  scrollbar-width: none;         /* Firefox: kein Scrollbar */
+  /* KEIN z-index, KEIN isolation, KEIN transform — Container ist KEIN Stacking-
+     Context. Children's z-index wirkt im Document-Context:
+       - User-Bubbles (.chat-row--user z:100) → ÜBER ProgressiveBlur (z:50)
+       - Assistant-Bubbles (.chat-row--assistant z:1) → UNTER Blur (geblurrt) */
+  z-index: auto;
+  opacity: 0;                     /* gsap.fromTo in LeoChatMessages fadet ein */
+}
+
+/* Outline-Spike (Antwort) nutzt SVG-Datei /assets/bubble_spike_outline.svg —
+   Fill #faf9f6 (Page-BG) + Stroke #686C6A (text-medium) sind dort hartkodiert.
+   Erbt position/size von .chat-bubble-spike. */
+
+/* Gradient-Overlay am unteren Viewport-Rand — nur in conversation-mode sichtbar.
+   Faded die Bubbles aus, die unter die Eingabepille scrollen. 120px hoch,
+   full-width, von Page-Color (unten 100% Alpha) zu transparent (oben 0%).
+   z-index 199: über Messages-Container-Bubbles, unter chat-center (z:200, Pille). */
+.leo-chat-bottom-fade {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  /* Beide Stops mit gleichem RGB (Page-Color, #faf9f6 = 250,249,246) — nur
+     Alpha variiert. Verhindert grauen Zwischenton wie bei "transparent"-Keyword. */
+  background: linear-gradient(to top,
+    rgba(250, 249, 246, 1) 50%,
+    rgba(250, 249, 246, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 199;
+}
+
+/* (Top-Fade entfernt — die globale <ProgressiveBlur height={120}> aus
+   app/layout.tsx erfasst die Chat-Bubbles automatisch, sobald der
+   Messages-Container z-index UNTER ProgressiveBlur (z:50) liegt.) */
+
+/* User- und Assistant-Bubbles flowen beide normal — beide werden vom
+   globalen ProgressiveBlur am oberen Rand erfasst, kein Sticky-Stacking. */
+#leo-chat-messages .chat-row--user,
+#leo-chat-messages .chat-row--assistant {
+  position: relative;
+}
+@keyframes leo-chat-msg-fadein {
+  to { opacity: 1; }
+}
+/* Webkit (Chrome/Safari): Scrollbar komplett verstecken. */
+#leo-chat-messages::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 767px) {
+  #leo-chat-messages {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    transform: none;
+    bottom: 150px;
+    max-height: calc(100vh - 200px);
+    padding: 12px 4px;
+  }
+}
+
+.chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 100%;
+}
+.chat-row--user {
+  justify-content: flex-end;
+}
+.chat-row--assistant {
+  justify-content: flex-start;
+}
+/* Beide Bubbles dürfen breiter werden — näher an die jeweiligen Containerränder.
+   Pixel-Werte statt `calc(100% - X)`: vermeidet zirkuläre Größenberechnung mit
+   dem inline-block .chat-bubble-wrap drumherum (sonst werden auch kurze Texte
+   unnötig umgebrochen). Bubble sized to content natural, bis zu max-width. */
+@media (min-width: 768px) {
+  .chat-row--assistant .chat-bubble {
+    max-width: 660px;
+  }
+  .chat-row--user .chat-bubble {
+    max-width: 600px;
+  }
+}
+/* Leo sitzt nur neben der LATESTEN Antwort (unten links via fixed-positioniertem
+   iconwrap), nicht neben jeder Assistant-Bubble — daher kein padding-left auf
+   allen Rows. Falls visuelle Anpassung gewünscht, hier conversation-mode-spezifisch. */
+
+.chat-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.chat-bubble {
+  position: relative;                     /* anchor für Spike */
+  max-width: 540px;                       /* fallback; per-type overrides via .chat-row--user/assistant */
+  padding: 23px 27px;                     /* matched KI-Section AIAgentTeaser */
+  border-radius: 27px;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.35;
+  color: #636A5F;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.chat-bubble--user {
+  background: #ffffff;
+  border: none;
+}
+.chat-bubble--assistant {
+  background: var(--color-bg-page);
+  /* box-shadow statt outline — sitzt definitiv AUSSEN der Box (CSS outline kann
+     je nach Browser-Rendering "auf der Kante" wirken). Spread 1px = 1px Linie
+     direkt anliegend an die Bubble-Außenkante. */
+  box-shadow: 0 0 0 1px var(--color-text-medium);
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+.chat-bubble--error {
+  /* Gleicher Aufbau wie Assistant — Page-BG + box-shadow Outline, aber in
+     brand-secondary statt grau. */
+  background: var(--color-bg-page);
+  box-shadow: 0 0 0 1px var(--color-brand-secondary);
+  border: none;
+  outline: none;
+  color: #8a0040;
+  position: relative;
+  z-index: 1;
+}
+/* Spike-SVG (inlined in LeoChatMessages.tsx) — sitzt an der Bubble-Bottom-Ecke
+   und nimmt die Bubble-Farbe via currentColor. */
+.chat-bubble-spike {
+  position: absolute;
+  /* viewBox 0 0 22 28 mit translate(2, 2) — 2 SVG-Units Padding rundum, damit
+     der äußere Stroke (paint-order: stroke, width 2) an KEINEM viewBox-Rand
+     abgeschnitten wird (vorher: oben/unten/links Tip wurde geklippt).
+     Proportionale Display-Größe: scale 0.957 → 22*0.957=21.05, 28*0.957=26.80. */
+  bottom: -2px;
+  width: 21.05px;
+  height: 26.80px;
+  pointer-events: none;
+}
+.chat-bubble--assistant .chat-bubble-spike {
+  left: -7.4px;                           /* alt -5.5, minus 1.91 für viewBox-Padding-Kompensation */
+  color: var(--color-bg-page);            /* fill = bubble bg, kein stroke */
+  z-index: 2;                             /* ÜBER der Bubble — verdeckt Outline am Spike */
+}
+/* Wrapper hält Bubble + under-spike als Geschwister — nur so kann der under-spike
+   per z-index wirklich HINTER der Bubble (z:1) landen (Child z<1 würde sonst
+   immer über dem Background der Bubble paintet). */
+.chat-bubble-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+/* Under-Spike (mit Stroke) — Geschwister der Bubble, z-index 0. Stroke setzt
+   Bubble-Outline am Schwanz fort, Top-Stroke wird vom Over-Spike verdeckt. */
+.chat-bubble-spike--under {
+  position: absolute;
+  left: -7.4px;                           /* gleich Over-Spike — beide deckungsgleich */
+  bottom: -2px;
+  width: 21.05px;                         /* matched .chat-bubble-spike (neuer viewBox 22×28) */
+  height: 26.80px;
+  z-index: 0;
+  pointer-events: none;
+}
+.chat-bubble--user .chat-bubble-spike {
+  right: -7.9px;                          /* gleicher Padding-Shift wie Assistant-Spike */
+  transform: scaleX(-1);                  /* gespiegelt für rechte Seite */
+  color: #ffffff;
+}
+.chat-bubble--error .chat-bubble-spike {
+  left: -7.4px;                           /* matched Assistant — viewBox 22×28 Padding-Kompensation */
+  color: var(--color-bg-page);            /* over-spike fill = page-bg */
+  z-index: 2;                             /* über Bubble-Outline */
+}
+/* under-spike (mit brand-secondary stroke SVG) erbt Position/Size aus der
+   globalen .chat-bubble-spike--under-Regel — gleiches viewBox 22×28. */
+.chat-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+@media (max-width: 767px) {
+  .chat-bubble {
+    font-size: 15px;
+    max-width: 88%;
+  }
+}
+
+/* Streaming-Cursor — blinkender Block am Ende der laufenden Assistant-Message. */
+.chat-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--color-brand);
+  animation: leo-cursor-blink 1s steps(2, start) infinite;
+}
+@keyframes leo-cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Markdown-Element-Spacing innerhalb der Assistant-Bubble. */
+.chat-markdown > :first-child {
+  margin-top: 0;
+}
+.chat-markdown > :last-child {
+  margin-bottom: 0;
+}
+.chat-markdown p {
+  margin: 0 0 0.5em 0;
+}
+.chat-markdown ul,
+.chat-markdown ol {
+  margin: 0.25em 0 0.5em 0;
+  padding-left: 1.4em;
+}
+.chat-markdown li {
+  margin-bottom: 0.2em;
+}
+.chat-markdown li::marker {
+  color: var(--color-brand);
+}
+.chat-markdown strong {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.chat-markdown em {
+  font-style: italic;
+}
+.chat-markdown code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.chat-markdown pre {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 10px 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+.chat-markdown pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.88em;
+}
+.chat-markdown a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.chat-markdown table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  font-size: 0.95em;
+}
+.chat-markdown th,
+.chat-markdown td {
+  border: 1px solid var(--color-border-default);
+  padding: 4px 8px;
+  text-align: left;
+}
+.chat-markdown th {
+  background: rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+}
+.chat-markdown blockquote {
+  border-left: 3px solid var(--color-brand);
+  margin: 0.5em 0;
+  padding: 2px 0 2px 12px;
+  color: var(--color-text-medium);
 }
 
 /* Leo Mobile-Dock-Slot — sticky links oben, gegenüber Bookmark.

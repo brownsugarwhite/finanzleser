@@ -154,6 +154,7 @@ export default function FinanztoolsMenu() {
   return (
     <div
       ref={containerRef}
+      className="finanztools-menu"
       style={{
         position: "fixed",
         top: 73,

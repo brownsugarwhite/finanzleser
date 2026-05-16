@@ -4,12 +4,15 @@ import "@/lib/gsapConfig"; // ensures core GSAP plugins are registered before tw
 import "@/lib/gsap/motionPath"; // LeoIcon ist einziger MotionPath-Konsument
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useChat } from "@ai-sdk/react";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 import VersichererSelect from "@/components/ui/VersichererSelect";
 import LeoCharacter from "@/components/ui/LeoCharacter";
+import LeoChatMessages from "@/components/ui/LeoChatMessages";
+import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
 import type { Versicherer } from "@/lib/versicherer";
 
 const LEO_SIZE_DESKTOP = 70;
@@ -26,12 +29,13 @@ export default function LeoIcon() {
   const tieRef = useRef<SVGSVGElement>(null);
   const leoGroupRef = useRef<HTMLDivElement>(null);
   const spikeRightRef = useRef<SVGSVGElement>(null);
-  const arrowBtnRef = useRef<HTMLDivElement>(null);
+  const arrowBtnRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
   const chatInputElRef = useRef<HTMLInputElement>(null);    // <input> für mobile auto-focus
   const chatCenterRef = useRef<HTMLDivElement>(null);       // statischer Chat-Overlay-Container (in JSX)
   const pillSlotRef = useRef<HTMLDivElement>(null);         // statischer Pill-Slot (Flip-Target)
   const iconwrapRef = useRef<HTMLDivElement>(null);         // Icon-Leo + Greeting Wrapper
+  const leoBoxRef = useRef<HTMLDivElement>(null);           // NUR der Leo-Container (Scale-Target, ohne Greeting)
   const dockedInSlot = useRef(false);
   const chatOpenRef = useRef(false);
   const previousParentRef = useRef<HTMLElement | null>(null);
@@ -43,6 +47,132 @@ export default function LeoIcon() {
   const wasInStickyForMenuRef = useRef(false); // Mobile: Leo flog wegen menu-open zur Home-Ecke → bei menu-close zurück swappen.
   const [size, setSize] = useState(LEO_SIZE_DESKTOP);
   const pathname = usePathname();
+
+  // KI-Chat (Vercel AI SDK v6 + Google Gemini 2.5 Flash via /api/chat).
+  // Provider wird später in lib/ai/provider.ts gegen Kunden-Tool ausgetauscht.
+  const { messages, sendMessage, status, stop, error } = useChat();
+  const [chatInput, setChatInput] = useState("");
+  const isBusy = status === "streaming" || status === "submitted";
+
+  const handleChatSubmit = () => {
+    if (isBusy) {
+      stop();
+      return;
+    }
+    const trimmed = chatInput.trim();
+    if (!trimmed) return;
+    sendMessage({ text: trimmed });
+    setChatInput("");
+  };
+
+  // Layout-Mode + Leo-Tracking: welcome → conversation
+  // - iconwrap-Position via GSAP Flip (smooth Morph zur Bubble-Position).
+  // - Leo-Scale via separater gsap.to AUF leoBoxRef (nicht iconwrap), damit
+  //   der Greeting-Text NICHT mit skaliert wird.
+  // - Target-Fallback: wenn noch keine Assistant-Row da → User-Row nehmen, damit
+  //   der Morph SOFORT beim Submit startet (nicht erst wenn Antwort kommt).
+  // - ResizeObserver für Live-Tracking während Streaming.
+  useEffect(() => {
+    const center = chatCenterRef.current;
+    const wrap = iconwrapRef.current;
+    const leoBox = leoBoxRef.current;
+    if (!center || !wrap || !leoBox) return;
+
+    const computeTarget = () => {
+      // Bevorzugt Assistant-Row, fallback auf User-Row (für sofortigen Morph beim Submit).
+      const assistantRows = document.querySelectorAll<HTMLElement>(
+        "#leo-chat-messages .chat-row--assistant"
+      );
+      let row: HTMLElement | undefined = assistantRows[assistantRows.length - 1];
+      if (!row) {
+        const userRows = document.querySelectorAll<HTMLElement>(
+          "#leo-chat-messages .chat-row--user"
+        );
+        row = userRows[userRows.length - 1];
+      }
+      if (!row) return null;
+      const rect = row.getBoundingClientRect();
+      return {
+        row,
+        // Leo unten LINKS NEBEN dem Spike (nicht ON dem Spike).
+        bottom: window.innerHeight - rect.bottom - 5,
+        left: rect.left - 55,                // 5px weiter links als zuvor
+      };
+    };
+
+    // Welcome (initial oder Reset)
+    if (messages.length === 0) {
+      const wasInConversation = wrap.dataset.mode === "conversation";
+      if (!wasInConversation) {
+        center.dataset.mode = "welcome";
+        wrap.dataset.mode = "welcome";
+        return;
+      }
+      // Reset: Flip-Morph zurück + Leo-Scale animieren.
+      const state = Flip.getState(wrap);
+      center.dataset.mode = "welcome";
+      wrap.dataset.mode = "welcome";
+      gsap.set(wrap, { clearProps: "left,bottom,x,xPercent,transform" });
+      Flip.from(state, { duration: 0.5, ease: "power3.inOut" });
+      gsap.to(leoBox, { scale: 1, duration: 0.5, ease: "power3.inOut" });
+      return;
+    }
+
+    // Conversation mode
+    const target = computeTarget();
+    if (!target) return;
+    const { row } = target;
+
+    const wasInConversation = wrap.dataset.mode === "conversation";
+
+    if (!wasInConversation) {
+      // Erstmals in conversation: Flip-Morph iconwrap (Position) + gsap.to leoBox (Scale).
+      // Beide laufen parallel mit gleicher duration/ease → smooth simultaner Morph.
+      const state = Flip.getState(wrap);
+      center.dataset.mode = "conversation";
+      wrap.dataset.mode = "conversation";
+      gsap.set(wrap, {
+        left: target.left,
+        bottom: target.bottom,
+        x: 0,
+        xPercent: 0,
+      });
+      Flip.from(state, {
+        duration: 0.6,
+        ease: "power3.inOut",
+      });
+      // Scale NUR auf Leo-Box (greeting bleibt unskaliert, fadet via CSS-Opacity).
+      gsap.to(leoBox, {
+        scale: 0.653,                      // 8% größer als 0.605
+        duration: 0.6,
+        ease: "power3.inOut",
+      });
+    } else {
+      // Folgeupdates (neue Antwort, Streaming) — nur Position-Tweak.
+      gsap.to(wrap, {
+        left: target.left,
+        bottom: target.bottom,
+        duration: 0.4,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    }
+
+    // ResizeObserver: Bubble wächst während Streaming → Leo folgt
+    const ro = new ResizeObserver(() => {
+      const t = computeTarget();
+      if (!t) return;
+      gsap.to(wrap, {
+        left: t.left,
+        bottom: t.bottom,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    });
+    ro.observe(row);
+    return () => ro.disconnect();
+  }, [messages.length, status]);
 
   // Reactive viewport-size (mobile = 64, desktop = 70). Updated on matchMedia change.
   useEffect(() => {
@@ -611,15 +741,33 @@ export default function LeoIcon() {
       Object.assign(backdrop.style, {
         position: "fixed",
         inset: "0",
-        zIndex: "150",
+        zIndex: "30",
         background: "transparent",
         display: "none",
-        cursor: "pointer",
+        // pointer-events: none → Backdrop blockiert weder Scroll noch Klicks auf
+        // Messages-Container. Click-Outside-Close läuft stattdessen über einen
+        // document-Listener (siehe handleClickOutside in openChat).
+        pointerEvents: "none",
       });
       document.body.appendChild(backdrop);
     }
 
     const backdropEl = backdrop;
+
+    // Click-Outside-Close: Klick außerhalb der Chat-Elemente schließt den Chat.
+    // Ersetzt den backdrop-click-Listener (Backdrop hat pointer-events:none weil
+    // sonst Scroll auf Messages blockiert würde).
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (
+        target.closest("#leo-chat-center") ||
+        target.closest("#leo-chat-messages") ||
+        target.closest("#leo-chat-iconwrap") ||
+        target.closest(".leo-batch-container")
+      ) return;
+      closeChat();
+    };
 
     const openChat = () => {
       if (chatOpenRef.current) return;
@@ -669,9 +817,29 @@ export default function LeoIcon() {
       chatCenterEl.style.opacity = "1";
       chatCenterEl.style.pointerEvents = "auto";
 
+      // Body-Class für Modal-Mode → CSS deaktiviert pointer-events auf
+      // TopNav-Elementen (BookmarkNav z:9999, FinanztoolsMenu z:58 etc.) damit
+      // der User nichts außerhalb des Chats anklicken kann.
+      document.body.classList.add("leo-chat-open");
+
+      // Messages + Bottom-Fade beim Re-Open wieder einblenden.
+      const messagesEl = document.getElementById("leo-chat-messages");
+      const bottomFadeEl = document.querySelector(".leo-chat-bottom-fade") as HTMLElement | null;
+      if (messagesEl) {
+        gsap.to(messagesEl, { opacity: 1, duration: 0.35, ease: "power2.out" });
+      }
+      if (bottomFadeEl) {
+        gsap.to(bottomFadeEl, { opacity: 1, duration: 0.35, ease: "power2.out" });
+      }
+
       document.body.style.overflow = "hidden";
       backdropEl.style.display = "block";
-      backdropEl.addEventListener("click", closeChat);
+      // Statt backdrop-click (geht nicht wegen pointer-events:none) → document
+      // -Listener: Klick außerhalb der Chat-Elemente schließt. setTimeout delay
+      // verhindert dass der gerade abgesendete Open-Click sofort wieder closet.
+      setTimeout(() => {
+        document.addEventListener("click", handleClickOutside);
+      }, 100);
       window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
 
       Flip.from(state, {
@@ -694,18 +862,11 @@ export default function LeoIcon() {
         },
       });
 
-      // Icon-Leo + Greeting fade-in (parallel zur Flip)
+      // Icon-Leo + Greeting nur opacity-fade (kein y-Slide mehr — User wollte
+       // keine zusätzliche Pixel-Verschiebung nach dem Open-Morph).
       gsap.fromTo(iconwrapEl,
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1, y: 0, duration: 0.45, ease: "power2.out", delay: 0.2,
-          onComplete: () => {
-            // Inline-Transform clearen — sonst überstimmt der gsap-Inline-
-            // matrix das CSS-`translateX(-50%)` (Desktop) bzw. die Mobile-
-            // Position bei Viewport-Resize.
-            gsap.set(iconwrapEl, { clearProps: "transform" });
-          },
-        }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.45, ease: "power2.out", delay: 0.2 }
       );
 
       // Falls aus default state geklickt: Pulse parallel zur Flip-Expand.
@@ -743,11 +904,23 @@ export default function LeoIcon() {
       const targetHeight = prevIsDockSlot ? BUBBLE_H : defSize;
 
       // Un-blur anstoßen (ContentScaler) + Backdrop weg
-      backdropEl.removeEventListener("click", closeChat);
+      document.removeEventListener("click", handleClickOutside);
       backdropEl.style.display = "none";
       chatCenterEl.style.pointerEvents = "none";
+
+      // Body-Class für Modal-Mode entfernen — TopNav etc. wieder klickbar.
+      document.body.classList.remove("leo-chat-open");
       // Icon-Leo + Greeting fadet aus (parallel zum container-back-flight)
       gsap.to(iconwrapEl, { opacity: 0, y: 12, duration: 0.3, ease: "power2.in" });
+
+      // Messages-Container + Bottom-Fade-Gradient mit ausfaden.
+      const messagesEl = document.getElementById("leo-chat-messages");
+      const bottomFadeEl = document.querySelector(".leo-chat-bottom-fade") as HTMLElement | null;
+      [messagesEl, bottomFadeEl].forEach((el) => {
+        if (!el) return;
+        gsap.set(el, { opacity: 1 });
+        gsap.to(el, { opacity: 0, duration: 0.3, ease: "power2.in" });
+      });
 
       document.body.style.overflow = "";
       window.dispatchEvent(new CustomEvent("menu-closed"));
@@ -855,15 +1028,18 @@ export default function LeoIcon() {
     };
 
     const handleContainerClick = (e: MouseEvent) => {
-      e.stopPropagation();
+      // Wenn Chat schon offen ist: NICHT stopPropagation — sonst blockt der
+      // native Listener das React-Synthetic-Event-System für innere Klicks
+      // (z.B. Send/Stop-Button im Pill). React onClick handler würde nie feuern.
       if (chatOpenRef.current) return;
+      e.stopPropagation();
       openChat();
     };
     container.addEventListener("click", handleContainerClick);
 
     return () => {
       container.removeEventListener("click", handleContainerClick);
-      backdropEl.removeEventListener("click", closeChat);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -981,25 +1157,34 @@ export default function LeoIcon() {
             pointerEvents: "none",
           }}
         >
-          <input
-            ref={chatInputElRef}
-            type="text"
-            placeholder="Sende Leo eine Nachricht ..."
-            size={29}
-            className="leo-chat-input"
-            style={{
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              padding: 0,
-              margin: 0,
-              fontFamily: "var(--font-body)",
-              fontSize: "17px",
-              lineHeight: 1.3,
-              color: "#636A5F",
-              width: "auto",
-            }}
-          />
+          <form
+            onSubmit={(e) => { e.preventDefault(); handleChatSubmit(); }}
+            style={{ width: "100%", display: "flex" }}
+          >
+            <input
+              ref={chatInputElRef}
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              disabled={isBusy}
+              placeholder={isBusy ? "Leo antwortet …" : "Sende Leo eine Nachricht ..."}
+              size={29}
+              className="leo-chat-input"
+              style={{
+                background: "transparent",
+                border: "none",
+                outline: "none",
+                padding: 0,
+                margin: 0,
+                fontFamily: "var(--font-body)",
+                fontSize: "17px",
+                lineHeight: 1.3,
+                color: "#636A5F",
+                width: "auto",
+                flex: 1,
+              }}
+            />
+          </form>
 
           <div
             className="leo-versicherer-slot"
@@ -1031,35 +1216,37 @@ export default function LeoIcon() {
       {/* Arrow-Button (Send-Style) — top-right des Badges, OUTSIDE des badge
           weil badge overflow:hidden hat. Initial scale(0), pulst während
           Morph 1 in. Magenta wie var(--color-brand-secondary). */}
-      <div
+      <button
         ref={arrowBtnRef}
+        type="button"
         className="leo-arrow-btn"
+        aria-label={isBusy ? "Antwort stoppen" : "Nachricht senden"}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleChatSubmit();
+        }}
         style={{
           position: "absolute",
           top: 8,
           right: 8,
           width: 50,
           height: 50,
-          borderRadius: "22px",   // proportional zu 50×50, passt zum 27px-Bubble-Stil
+          borderRadius: "22px",
           background: "var(--color-brand-secondary)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           transform: "scale(0)",
-          pointerEvents: "none",
-          zIndex: 10,
+          zIndex: 9999,            // absolut sicherheitshalber sehr hoch
+          cursor: "pointer",
+          border: "none",
+          padding: 0,              // <button> default padding raus
+          pointerEvents: "auto",
         }}
       >
-        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-          <path
-            d="M8 14V2M8 2L3 7M8 2l5 5"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
+        <LeoChatSendButton status={status} />
+      </button>
 
       <style>{`
         .leo-batch-container .leo-badge {
@@ -1090,6 +1277,12 @@ export default function LeoIcon() {
           transform: scale(0);
           transform-origin: 0% 0%;
         }
+
+        /* Send/Stop-Button: nicht klickbar wenn skaliert auf 0 (vor Chat-Open),
+           klickbar im Chat-State. */
+        .leo-batch-container:not([data-state="chat"]) .leo-arrow-btn {
+          pointer-events: none;
+        }
       `}</style>
     </div>
 
@@ -1103,6 +1296,22 @@ export default function LeoIcon() {
     >
       <div ref={pillSlotRef} id="leo-chat-pill-slot" />
     </div>
+
+    {/* Messages-Container — eigenständig (NICHT in chat-center), weil
+        position:fixed innerhalb eines transform-Parents zu absolute relativ
+        zum Parent wird (CSS-Gotcha). So bleibt der Bubble-Block unabhängig
+        vom Pill-Morph an seiner Viewport-Position. */}
+    <LeoChatMessages
+      messages={messages}
+      status={status}
+      error={error}
+      mode={messages.length > 0 ? "conversation" : "welcome"}
+    />
+
+    {/* Bottom-Fade-Gradient — nur in conversation-mode. Lässt die Bubbles
+        unter die Eingabepille hin ausfaden. Page-Color full-alpha am Bottom
+        zu 0% Alpha am Top (120px hoch). */}
+    {messages.length > 0 && <div className="leo-chat-bottom-fade" aria-hidden />}
     {(() => {
       // size-State ist reaktiv auf matchMedia → mobile/desktop-Wechsel werden
       // automatisch ge-rendered. checkMobile() (Funktion) wäre nicht reaktiv
@@ -1110,15 +1319,15 @@ export default function LeoIcon() {
       const isMobile = size === LEO_SIZE_MOBILE;
       return (
         <div ref={iconwrapRef} id="leo-chat-iconwrap">
-          <div style={{ width: isMobile ? 76 : 90, height: isMobile ? 76 : 90, display: "flex", alignItems: "center", justifyContent: "center", marginTop: isMobile ? -32 : -40 }}>
+          <div ref={leoBoxRef} className="leo-chat-leo-box" style={{ width: isMobile ? 66 : 78, height: isMobile ? 66 : 78, display: "flex", alignItems: "center", justifyContent: "center", marginTop: isMobile ? -28 : -34, transformOrigin: "bottom left" }}>
             <LeoCharacter
-              headWidth={isMobile ? 46 : 56}
-              mouthWidth={isMobile ? 42 : 50}
+              headWidth={isMobile ? 40 : 48}
+              mouthWidth={isMobile ? 36 : 44}
               mouthMarginBottom={-5}
               trackPupils={!isMobile}
               bodyVariant="round"
-              kravatteWidth={isMobile ? 12 : 14}
-              kravatteOffsetTop={isMobile ? 7 : 9}
+              kravatteWidth={isMobile ? 10 : 12}
+              kravatteOffsetTop={isMobile ? 6 : 8}
             />
           </div>
           <div id="leo-chat-greeting">Wie kann ich Ihnen helfen?</div>
