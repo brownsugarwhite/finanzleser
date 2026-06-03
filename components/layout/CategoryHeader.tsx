@@ -30,25 +30,23 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
         <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        {/* Visual: WIDE-Banner der Kategorie, sonst graue Platzhalter-Box */}
+        {/* Visual: WIDE-Banner in voller Höhe (nie geclippt), sonst graue Platzhalter-Box */}
         <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
-          <div style={{
-            position: "relative",
-            width: "100%",
-            height: 250,
-            borderRadius: 16,
-            overflow: "hidden",
-            background: "var(--color-placeholder-bg)",
-          }} aria-hidden={imageWide ? undefined : "true"}>
-            {imageWide && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imageWide}
-                alt={imageWideAlt || title || ""}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            )}
-          </div>
+          {imageWide ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageWide}
+              alt={imageWideAlt || title || ""}
+              style={{ width: "100%", height: "auto", display: "block", borderRadius: 16 }}
+            />
+          ) : (
+            <div style={{
+              width: "100%",
+              height: 250,
+              borderRadius: 16,
+              background: "var(--color-placeholder-bg)",
+            }} aria-hidden="true" />
+          )}
         </div>
       </div>
 

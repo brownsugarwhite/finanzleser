@@ -114,7 +114,7 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
           position: 'relative',
           width: '100%',
           height: 260,
-          background: 'var(--color-placeholder-bg)',
+          background: category.image ? 'transparent' : 'var(--color-placeholder-bg)',
           transform: active ? 'scale(0)' : 'scale(1)',
           transformOrigin: 'top center',
           filter: active ? 'blur(16px)' : 'blur(0px)',
@@ -129,7 +129,7 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
               src={category.image}
               alt=""
               aria-hidden
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }}
             />
           )}
           {/* Article-Count-Badge */}
