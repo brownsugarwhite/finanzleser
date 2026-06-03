@@ -10,9 +10,12 @@ interface CategoryHeaderProps {
   children?: React.ReactNode;
   /** ID der Section, mit deren Bottom-Out das Heading scrubbed ausgefadet wird. */
   fadeSectionId?: string;
+  /** WIDE-Banner der (Sub-)Kategorie (Term-Meta kategorie_bild_wide_id). */
+  imageWide?: string;
+  imageWideAlt?: string;
 }
 
-export default function CategoryHeader({ title, description, breadcrumbItems, children, fadeSectionId }: CategoryHeaderProps) {
+export default function CategoryHeader({ title, description, breadcrumbItems, children, fadeSectionId, imageWide, imageWideAlt }: CategoryHeaderProps) {
   const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
     <>
@@ -27,13 +30,25 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
         <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        {/* Visual Platzhalter (graue Box, einheitliche Farbe) */}
+        {/* Visual: WIDE-Banner der Kategorie, sonst graue Platzhalter-Box */}
         <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
           <div style={{
+            position: "relative",
             width: "100%",
             height: 250,
+            borderRadius: 16,
+            overflow: "hidden",
             background: "var(--color-placeholder-bg)",
-          }} aria-hidden="true" />
+          }} aria-hidden={imageWide ? undefined : "true"}>
+            {imageWide && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={imageWide}
+                alt={imageWideAlt || title || ""}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            )}
+          </div>
         </div>
       </div>
 

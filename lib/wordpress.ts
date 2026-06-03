@@ -448,6 +448,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
   slug: string;
   description?: string;
   image?: string;
+  imageWide?: string;
   children: Array<{ name: string; slug: string; count: number; description?: string; image?: string }>;
   posts: Post[];
 } | null> {
@@ -462,12 +463,11 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           name
           slug
           description
-          kategorieFelder {
-            kategorieBild {
-              node {
-                sourceUrl
-              }
-            }
+          kategorieBildSlider {
+            sourceUrl
+          }
+          kategorieBildWide {
+            sourceUrl
           }
           posts(first: 6) {
             nodes {
@@ -503,7 +503,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           name: string;
           slug: string;
           description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
+          kategorieBildSlider?: { sourceUrl: string };
+          kategorieBildWide?: { sourceUrl: string };
           posts: { nodes: Post[] };
         }>;
       };
@@ -523,12 +524,8 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
             slug
             count
             description
-            kategorieFelder {
-              kategorieBild {
-                node {
-                  sourceUrl
-                }
-              }
+            kategorieBildSlider {
+              sourceUrl
             }
             posts(first: 6) {
               nodes {
@@ -563,7 +560,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           slug: string;
           count: number;
           description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
+          kategorieBildSlider?: { sourceUrl: string };
           posts: { nodes: Post[] };
         }>;
       };
@@ -584,13 +581,14 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
       name: category.name,
       slug: category.slug,
       description: category.description || undefined,
-      image: category.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
+      image: category.kategorieBildSlider?.sourceUrl || undefined,
+      imageWide: category.kategorieBildWide?.sourceUrl || undefined,
       children: childrenData.categories.nodes.map((child) => ({
         name: child.name,
         slug: child.slug,
         count: child.count,
         description: child.description || undefined,
-        image: child.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
+        image: child.kategorieBildSlider?.sourceUrl || undefined,
       })),
       posts: allPosts,
     };
@@ -1201,12 +1199,11 @@ export async function getCategoryBySlug(slug: string) {
           name
           slug
           description
-          kategorieFelder {
-            kategorieBild {
-              node {
-                sourceUrl
-              }
-            }
+          kategorieBildSlider {
+            sourceUrl
+          }
+          kategorieBildWide {
+            sourceUrl
           }
           parent {
             node {
@@ -1228,7 +1225,8 @@ export async function getCategoryBySlug(slug: string) {
           name: string;
           slug: string;
           description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
+          kategorieBildSlider?: { sourceUrl: string };
+          kategorieBildWide?: { sourceUrl: string };
           parent?: { node: { id: string; name: string; slug: string } };
         }>;
       };
@@ -1241,7 +1239,8 @@ export async function getCategoryBySlug(slug: string) {
       name: cat.name,
       slug: cat.slug,
       description: cat.description || undefined,
-      image: cat.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
+      image: cat.kategorieBildSlider?.sourceUrl || undefined,
+      imageWide: cat.kategorieBildWide?.sourceUrl || undefined,
       parent: cat.parent?.node || null,
     };
   } catch (error) {

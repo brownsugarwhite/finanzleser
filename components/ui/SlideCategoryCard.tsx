@@ -122,6 +122,16 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
           transition: `transform ${T1}s ${phase1Ease} ${phase1Delay}s, filter ${T1}s ${phase1Ease} ${phase1Delay}s, opacity ${T1}s ${phase1Ease} ${phase1Delay}s`,
           // willChange entfernt — siehe SlideArticleCard.
         }}>
+          {/* Kategorie-Visual (Term-Meta kategorie_bild_id), sonst Platzhalter-Bg */}
+          {category.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={category.image}
+              alt=""
+              aria-hidden
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          )}
           {/* Article-Count-Badge */}
           <div
             aria-hidden

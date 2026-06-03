@@ -8,13 +8,14 @@ type CategoryLayoutProps = {
   titleSlug?: string;
   description?: string;
   image?: string;
+  imageWide?: string;
   mainCategoryName?: string;
   mainCategorySlug?: string;
   children?: React.ReactNode;
   posts?: Post[];
 };
 
-export default function CategoryLayout({ title, titleSlug, description, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
+export default function CategoryLayout({ title, titleSlug, description, imageWide, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
   const breadcrumbItems = mainCategorySlug && titleSlug ? [
     { label: "Home", href: "/" },
     { label: mainCategoryName || mainCategorySlug, href: `/${mainCategorySlug}` },
@@ -28,6 +29,7 @@ export default function CategoryLayout({ title, titleSlug, description, mainCate
           description={description}
           breadcrumbItems={breadcrumbItems}
           fadeSectionId="category-articles-section"
+          imageWide={imageWide}
         />
 
         {/* Section trägt die ID für SparkHeading's Scroll-Fade-Trigger.

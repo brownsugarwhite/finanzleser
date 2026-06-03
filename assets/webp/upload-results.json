@@ -1,0 +1,683 @@
+[
+  {
+    "sanitizedName": "0001_abfindungen",
+    "type": "titelbild",
+    "mediaId": 52020,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0001_abfindungen.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49248,
+    "postSlug": "abfindungen-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0002_abgeltungssteuer",
+    "type": "titelbild",
+    "mediaId": 52021,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0002_abgeltungssteuer.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49249,
+    "postSlug": "abgeltungssteuer",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0003_abschreibungen",
+    "type": "titelbild",
+    "mediaId": 52022,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0003_abschreibungen.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49250,
+    "postSlug": "abschreibung-steuererklaerung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0004_aktien",
+    "type": "titelbild",
+    "mediaId": 52023,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0004_aktien.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49251,
+    "postSlug": "aktien-steuererklaerung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0005_altersteilzeit",
+    "type": "titelbild",
+    "mediaId": 52024,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0005_altersteilzeit.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49252,
+    "postSlug": "altersteilzeit",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0006_altersvorsorgeaufwendungen",
+    "type": "titelbild",
+    "mediaId": 52025,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0006_altersvorsorgeaufwendungen.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49253,
+    "postSlug": "altersvorsorgeaufwendungen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0007_arbeitgeberzuschuss_private_krankenversicherung",
+    "type": "titelbild",
+    "mediaId": 52026,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0007_arbeitgeberzuschuss_private_krankenversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49254,
+    "postSlug": "arbeitgeberzuschuss-private-krankenversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0008_arbeitnehmer_sparzulage",
+    "type": "titelbild",
+    "mediaId": 52027,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0008_arbeitnehmer_sparzulage.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49255,
+    "postSlug": "arbeitnehmer-sparzulage",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0009_arbeitskleidung",
+    "type": "titelbild",
+    "mediaId": 52028,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0009_arbeitskleidung.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49256,
+    "postSlug": "arbeitskleidung-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0010_arbeitslosengeld",
+    "type": "titelbild",
+    "mediaId": 52029,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0010_arbeitslosengeld.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49257,
+    "postSlug": "arbeitslosengeld",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0011_arbeitsmittel",
+    "type": "titelbild",
+    "mediaId": 52030,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0011_arbeitsmittel.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49258,
+    "postSlug": "arbeitsmittel",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0012_arbeitszimmer",
+    "type": "titelbild",
+    "mediaId": 52031,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0012_arbeitszimmer.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49259,
+    "postSlug": "arbeitszimmer-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0013_ausbildungskosten",
+    "type": "titelbild",
+    "mediaId": 52032,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0013_ausbildungskosten.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49260,
+    "postSlug": "ausbildungskosten-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0014_auslandskrankenversicherung",
+    "type": "titelbild",
+    "mediaId": 52033,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0014_auslandskrankenversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49261,
+    "postSlug": "auslandskrankenversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0015_ausergewoehnliche_belastung",
+    "type": "titelbild",
+    "mediaId": 52034,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0015_ausergewoehnliche_belastung.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein Treffer"
+  },
+  {
+    "sanitizedName": "0016_bafoeg",
+    "type": "titelbild",
+    "mediaId": 52035,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0016_bafoeg.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49263,
+    "postSlug": "bafoeg",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0017_basisrente",
+    "type": "titelbild",
+    "mediaId": 52036,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0017_basisrente.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49264,
+    "postSlug": "basisrente",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0018_basistarif_der_pkv",
+    "type": "titelbild",
+    "mediaId": 52037,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0018_basistarif_der_pkv.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein exakter Match (1 Suchtreffer)"
+  },
+  {
+    "sanitizedName": "0019_baufinanzierung",
+    "type": "titelbild",
+    "mediaId": 52038,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0019_baufinanzierung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49266,
+    "postSlug": "baufinanzierung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0020_bauherrenhaftpflichtversicherung",
+    "type": "titelbild",
+    "mediaId": 52039,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0020_bauherrenhaftpflichtversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49267,
+    "postSlug": "bauherrenhaftpflichtversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0021_bausparvertrag",
+    "type": "titelbild",
+    "mediaId": 52040,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0021_bausparvertrag.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49268,
+    "postSlug": "bausparvertrag",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0022_beitragsanpassung_pkv",
+    "type": "titelbild",
+    "mediaId": 52041,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0022_beitragsanpassung_pkv.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49269,
+    "postSlug": "beitragsanpassung-pkv",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0023_beitragsbemessungsgrenzen",
+    "type": "titelbild",
+    "mediaId": 52042,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0023_beitragsbemessungsgrenzen.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49270,
+    "postSlug": "beitragsbemessungsgrenzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0024_berliner_testament",
+    "type": "titelbild",
+    "mediaId": 52043,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0024_berliner_testament.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49271,
+    "postSlug": "berliner-testament",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0025_berufshaftpflichtversicherung",
+    "type": "titelbild",
+    "mediaId": 52044,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0025_berufshaftpflichtversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49272,
+    "postSlug": "berufshaftpflichtversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0026_berufsunfaehigkeitsversicherung",
+    "type": "titelbild",
+    "mediaId": 52045,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0026_berufsunfaehigkeitsversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49273,
+    "postSlug": "berufsunfaehigkeitsversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0027_betreuungsverfuegung",
+    "type": "titelbild",
+    "mediaId": 52046,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0027_betreuungsverfuegung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49274,
+    "postSlug": "betreuungsverfuegung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0028_betriebliche_altersvorsorge",
+    "type": "titelbild",
+    "mediaId": 52047,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0028_betriebliche_altersvorsorge.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein exakter Match (3 Suchtreffer)"
+  },
+  {
+    "sanitizedName": "0029_betriebliche_krankenkasse",
+    "type": "titelbild",
+    "mediaId": 52048,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0029_betriebliche_krankenkasse.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein Treffer"
+  },
+  {
+    "sanitizedName": "0030_betriebshaftpflichtversicherung",
+    "type": "titelbild",
+    "mediaId": 52049,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0030_betriebshaftpflichtversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49277,
+    "postSlug": "betriebshaftpflichtversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0031_buergergeld",
+    "type": "titelbild",
+    "mediaId": 52050,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0031_buergergeld.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49279,
+    "postSlug": "buergergeld",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0032_buergerversicherung",
+    "type": "titelbild",
+    "mediaId": 52051,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0032_buergerversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49280,
+    "postSlug": "buergerversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0033_buergerversicherung",
+    "type": "titelbild",
+    "mediaId": 52052,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0033_buergerversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49280,
+    "postSlug": "buergerversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0034_cyberversicherung",
+    "type": "titelbild",
+    "mediaId": 52053,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0034_cyberversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49281,
+    "postSlug": "cyberversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0035_dienstreisen",
+    "type": "titelbild",
+    "mediaId": 52054,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0035_dienstreisen.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49282,
+    "postSlug": "dienstreise-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0036_dienstwagen",
+    "type": "titelbild",
+    "mediaId": 52055,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0036_dienstwagen.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49283,
+    "postSlug": "dienstwagen-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0037_dienstwohnung",
+    "type": "titelbild",
+    "mediaId": 52056,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0037_dienstwohnung.webp",
+    "action": "hochgeladen",
+    "postMatch": "fuzzy-eindeutig",
+    "postId": 49284,
+    "postSlug": "dienstwohnung-von-der-steuer-absetzen",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0038_direktbank_vs_fillialbang",
+    "type": "titelbild",
+    "mediaId": 52057,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0038_direktbank_vs_fillialbang.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein Treffer"
+  },
+  {
+    "sanitizedName": "0039_direktversicherung",
+    "type": "titelbild",
+    "mediaId": 52058,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0039_direktversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49286,
+    "postSlug": "direktversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0040_doppelte_haushaltsfuehrung",
+    "type": "titelbild",
+    "mediaId": 52059,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0040_doppelte_haushaltsfuehrung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49287,
+    "postSlug": "doppelte-haushaltsfuehrung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0041_drohnenhaftpflichtversicherung",
+    "type": "titelbild",
+    "mediaId": 52060,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0041_drohnenhaftpflichtversicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49288,
+    "postSlug": "drohnenhaftpflichtversicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0042_duesseldorfer_tabelle",
+    "type": "titelbild",
+    "mediaId": 52061,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0042_duesseldorfer_tabelle.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49289,
+    "postSlug": "duesseldorfer-tabelle",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0043_e_bike_versicherung",
+    "type": "titelbild",
+    "mediaId": 52062,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0043_e_bike_versicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49292,
+    "postSlug": "e-bike-versicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0044_e_scooter_versicherung",
+    "type": "titelbild",
+    "mediaId": 52063,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0044_e_scooter_versicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49293,
+    "postSlug": "e-scooter-versicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0045_ehegattensplittung",
+    "type": "titelbild",
+    "mediaId": 52064,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0045_ehegattensplittung.webp",
+    "action": "hochgeladen",
+    "postMatch": "kein Treffer"
+  },
+  {
+    "sanitizedName": "0046_ehegattenunterhalt",
+    "type": "titelbild",
+    "mediaId": 52065,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0046_ehegattenunterhalt.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49295,
+    "postSlug": "ehegattenunterhalt",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0047_einkommensteuer",
+    "type": "titelbild",
+    "mediaId": 52066,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0047_einkommensteuer.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49296,
+    "postSlug": "einkommensteuer",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0048_einlagensicherung",
+    "type": "titelbild",
+    "mediaId": 52067,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0048_einlagensicherung.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49297,
+    "postSlug": "einlagensicherung",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "0049_elster",
+    "type": "titelbild",
+    "mediaId": 52068,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/0049_elster.webp",
+    "action": "hochgeladen",
+    "postMatch": "slug-exakt",
+    "postId": 49298,
+    "postSlug": "elster",
+    "featuredSet": true
+  },
+  {
+    "sanitizedName": "cat_finanzen",
+    "type": "cat-slider",
+    "termSlug": "finanzen",
+    "mediaId": 52069,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_finanzen_wide",
+    "type": "cat-wide",
+    "termSlug": "finanzen",
+    "mediaId": 52070,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_recht",
+    "type": "cat-slider",
+    "termSlug": "recht",
+    "mediaId": 52071,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_recht_wide",
+    "type": "cat-wide",
+    "termSlug": "recht",
+    "mediaId": 52072,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_steuer",
+    "type": "cat-slider",
+    "termSlug": "steuern",
+    "mediaId": 52073,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuer.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_steuer_wide",
+    "type": "cat-wide",
+    "termSlug": "steuern",
+    "mediaId": 52074,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuer_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_versicherungen",
+    "type": "cat-slider",
+    "termSlug": "versicherungen",
+    "mediaId": 52075,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_versicherungen_wide",
+    "type": "cat-wide",
+    "termSlug": "versicherungen",
+    "mediaId": 52076,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cat_versicherungen_altersvorsorge",
+    "type": "subcat-slider",
+    "termSlug": "altersvorsorge",
+    "mediaId": 52077,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen_altersvorsorge.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_arbeitsrecht",
+    "type": "subcat-slider",
+    "termSlug": "arbeitsrecht",
+    "mediaId": 52078,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_arbeitsrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "arbeitsrecht",
+    "mediaId": 52079,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_ehe-familie",
+    "type": "subcat-slider",
+    "termSlug": "ehe-familie",
+    "mediaId": 52080,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_ehe-familie_wide",
+    "type": "subcat-wide",
+    "termSlug": "ehe-familie",
+    "mediaId": 52081,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_mietrecht",
+    "type": "subcat-slider",
+    "termSlug": "mietrecht",
+    "mediaId": 52082,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_mietrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "mietrecht",
+    "mediaId": 52083,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuer_steuerarten",
+    "type": "subcat-slider",
+    "termSlug": "steuerarten",
+    "mediaId": 52084,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuerarten.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuer_steuerarten_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuerarten",
+    "mediaId": 52085,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuerarten_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuer_steuererklaerung",
+    "type": "subcat-slider",
+    "termSlug": "steuererklaerung",
+    "mediaId": 52086,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuererklaerung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuer_steuererklaerung_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuererklaerung",
+    "mediaId": 52087,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuererklaerung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_altersvorsorge_wide",
+    "type": "subcat-wide",
+    "termSlug": "altersvorsorge",
+    "mediaId": 52088,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_altersvorsorge_wide.webp",
+    "action": "hochgeladen"
+  }
+]
