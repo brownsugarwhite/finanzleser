@@ -10,6 +10,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 
 import FazitHeading from "@/components/ui/FazitHeading";
 import ArticleElementWrapper from "@/components/layout/ArticleElementWrapper";
+import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
@@ -63,8 +64,9 @@ interface Props {
 }
 
 interface ContentPart {
-  type: "html" | "rechner" | "checkliste" | "vergleich";
-  value: string; // HTML string or slug
+  type: "html" | "rechner" | "checkliste" | "vergleich" | "gamification";
+  value: string; // HTML string, slug, or gamification type
+  gamFields?: Record<string, string>; // nur bei gamification: Feldwerte (Behauptung, Auflösung, …)
 }
 
 // Wrap each <table> in scroll containers so wide tables get horizontal scroll
@@ -79,8 +81,11 @@ function wrapTables(html: string): string {
 function parseContent(html: string): ContentPart[] {
   const parts: ContentPart[] = [];
 
-  // Regex für Block-Divs (Rechner/Checkliste), Gutenberg-Kommentare (Vergleich) und core/latest-posts
-  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->/g;
+  // Regex für Block-Divs (Rechner/Checkliste), Gutenberg-Kommentare (Vergleich) und core/latest-posts.
+  // Gamification (3. Alternative) ist – anders als die Slug-Tools – NICHT leer: der Block enthält die
+  // Felder inline. Voraussetzung: keine verschachtelten <div> im Block (vom Studio so erzeugt), damit
+  // [\s\S]*? bis zum ersten </div> korrekt greift.
+  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
 
   let lastIndex = 0;
   let match;
@@ -92,9 +97,21 @@ function parseContent(html: string): ContentPart[] {
       if (before) parts.push({ type: "html", value: before });
     }
 
-    const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
-    const blockSlug = match[2] || match[4];
-    parts.push({ type: blockType, value: blockSlug });
+    const gamType = match[5];
+    if (gamType) {
+      // Gamification-Block: Felder aus den data-gam-field-Absätzen extrahieren (reiner Text)
+      const fields: Record<string, string> = {};
+      const fieldPattern = /<p\s+data-gam-field="([^"]+)"[^>]*>([\s\S]*?)<\/p>/g;
+      let fieldMatch;
+      while ((fieldMatch = fieldPattern.exec(match[6])) !== null) {
+        fields[fieldMatch[1]] = fieldMatch[2].replace(/<[^>]+>/g, "").trim();
+      }
+      parts.push({ type: "gamification", value: gamType, gamFields: fields });
+    } else {
+      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
+      const blockSlug = match[2] || match[4];
+      parts.push({ type: blockType, value: blockSlug });
+    }
 
     lastIndex = match.index + match[0].length;
   }
@@ -152,7 +169,8 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
   type RenderUnit =
     | { kind: "html"; htmlString: string; itemKey: string }
     | { kind: "fazit"; id: string; itemKey: string }
-    | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string };
+    | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string }
+    | { kind: "gamification"; gamType: string; fields: Record<string, string>; itemKey: string };
 
   const units = useMemo<RenderUnit[]>(() => {
     const raw = parseContent(content);
@@ -174,6 +192,8 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
         const headingId = `heading-${headingIndex}`;
         headingIndex++;
         out.push({ kind: "tool", toolType: part.type, slug: part.value, headingId, itemKey: `${i}` });
+      } else if (part.type === "gamification") {
+        out.push({ kind: "gamification", gamType: part.value, fields: part.gamFields ?? {}, itemKey: `${i}` });
       }
     });
     return out;
@@ -303,6 +323,13 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
             slug={unit.slug}
             formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
           />
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "gamification") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
+          <GamificationEmbed gamType={unit.gamType} fields={unit.fields} />
         </ArticleElementWrapper>
       );
     }
