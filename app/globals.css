@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./components.css";
 @import "./rechner.css";
+@import "./gamification.css";
 
 /* Space for fixed logo + absolute nav bar */
 body {
