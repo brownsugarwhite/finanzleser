@@ -7,90 +7,65 @@ interface GamificationEmbedProps {
   fields: Record<string, string>;
 }
 
-const LABELS: Record<string, string> = {
-  mythos: "Mythos oder Fakt?",
-  karte: "Karteikarte",
-  test: "Mini-Selbsttest",
-  gewusst: "Schon gewusst?",
-};
-
-const ICONS: Record<string, string> = {
-  mythos: "🔍",
-  karte: "🔄",
-  test: "🧠",
-  gewusst: "💡",
+const META: Record<string, { label: string; cls: string }> = {
+  mythos: { label: "Mythos oder Fakt", cls: "mythos" },
+  karte: { label: "Begriff erklärt", cls: "karte" },
+  test: { label: "Kurz nachgedacht", cls: "test" },
+  gewusst: { label: "Schon gewusst", cls: "gewusst" },
 };
 
 /**
- * Interaktive Gamification-Box im Artikel.
+ * Interaktive Gamification-Box im Artikel – redaktionell/dezent gehalten,
+ * passend zum Zeitungslayout (dünne Linien, Akzent oben, viel Weißraum).
  * Quelle: <div data-finanzleser-gamification="TYP"> mit data-gam-field-Feldern,
  * vom Content Studio erzeugt und in ArticleContent.parseContent() ausgelesen.
  */
 export default function GamificationEmbed({ gamType, fields }: GamificationEmbedProps) {
   const [open, setOpen] = useState(false);
-  const [flipped, setFlipped] = useState(false);
+  const meta = META[gamType] ?? { label: "Wissen", cls: "mythos" };
 
-  const label = LABELS[gamType] ?? "Wissen";
-  const icon = ICONS[gamType] ?? "💡";
-
-  // Karteikarte – echtes Umdrehen
-  if (gamType === "karte") {
-    const front = fields.begriff ?? "";
-    const back = fields.erklaerung ?? "";
-    return (
-      <div className={`fl-gam fl-gam-karte${flipped ? " is-flipped" : ""}`}>
-        <button
-          type="button"
-          className="fl-gam-card-btn"
-          onClick={() => setFlipped((v) => !v)}
-          aria-pressed={flipped}
-          aria-label={`Karteikarte ${front} umdrehen`}
-        >
-          <span className="fl-gam-card-inner">
-            <span className="fl-gam-card-face fl-gam-card-front">
-              <span className="fl-gam-tag">{icon} {label}</span>
-              <span className="fl-gam-card-term">{front}</span>
-              <span className="fl-gam-card-hint">Tippen zum Umdrehen</span>
-            </span>
-            <span className="fl-gam-card-face fl-gam-card-back">
-              <span className="fl-gam-card-def">{back}</span>
-              <span className="fl-gam-card-hint">Zurück tippen</span>
-            </span>
-          </span>
-        </button>
-      </div>
-    );
-  }
-
-  // Schon gewusst – statische Hinweis-Box
+  // Schon gewusst – statische Hinweis-Box (kein Aufklappen)
   if (gamType === "gewusst") {
     return (
-      <div className="fl-gam fl-gam-gewusst">
-        <span className="fl-gam-tag">{icon} {label}</span>
+      <aside className="fl-gam fl-gam-gewusst">
+        <span className="fl-gam-tag">{meta.label}</span>
         <p className="fl-gam-text">{fields.text ?? ""}</p>
-      </div>
+      </aside>
     );
   }
 
-  // Mythos oder Fakt / Mini-Selbsttest – aufklappbar
-  const primary = gamType === "mythos" ? (fields.behauptung ?? "") : (fields.frage ?? "");
-  const reveal = gamType === "mythos" ? (fields.aufloesung ?? "") : (fields.antwort ?? "");
-  const revealLabel = gamType === "mythos" ? "Auflösung anzeigen" : "Antwort anzeigen";
+  // Mythos / Begriff / Selbsttest – Aussage sichtbar, Auflösung aufklappbar
+  let primary = "";
+  let reveal = "";
+  let revealLabel = "";
+  if (gamType === "karte") {
+    primary = fields.begriff ?? "";
+    reveal = fields.erklaerung ?? "";
+    revealLabel = "Erklärung anzeigen";
+  } else if (gamType === "test") {
+    primary = fields.frage ?? "";
+    reveal = fields.antwort ?? "";
+    revealLabel = "Antwort anzeigen";
+  } else {
+    primary = fields.behauptung ?? "";
+    reveal = fields.aufloesung ?? "";
+    revealLabel = "Auflösung anzeigen";
+  }
 
   return (
-    <div className={`fl-gam fl-gam-${gamType}`}>
-      <span className="fl-gam-tag">{icon} {label}</span>
-      <p className="fl-gam-claim">{primary}</p>
+    <aside className={`fl-gam fl-gam-${meta.cls}`}>
+      <span className="fl-gam-tag">{meta.label}</span>
+      <p className={gamType === "karte" ? "fl-gam-term" : "fl-gam-claim"}>{primary}</p>
       <button
         type="button"
-        className="fl-gam-reveal-btn"
+        className="fl-gam-toggle"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        {open ? "▾ " : "▸ "}
-        {revealLabel}
+        {open ? "Verbergen" : revealLabel}
+        <span className="fl-gam-toggle-icon" aria-hidden="true">{open ? "−" : "+"}</span>
       </button>
       {open && <p className="fl-gam-reveal">{reveal}</p>}
-    </div>
+    </aside>
   );
 }
