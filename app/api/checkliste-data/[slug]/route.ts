@@ -25,11 +25,6 @@ export async function GET(
     return NextResponse.json({ data, checkboxPositions, pdfUrl });
   } catch (error) {
     console.error(`Error parsing checkliste "${slug}":`, error);
-    // TEMP-Diagnose: echten Fehler ausgeben (danach wieder entfernen)
-    const e = error as Error;
-    return NextResponse.json(
-      { error: "Parse error", name: e?.name, message: e?.message, stack: (e?.stack || "").split("\n").slice(0, 6) },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Parse error" }, { status: 500 });
   }
 }

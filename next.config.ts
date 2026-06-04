@@ -7,6 +7,13 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["pdfjs-dist"],
+  // pdfjs lädt seinen (Fake-)Worker per dynamischem Import nach — der wird vom
+  // File-Tracing nicht erkannt und fehlt sonst in der Netlify-Function. Für die
+  // Routen, die zur Laufzeit PDFs parsen, explizit mitkopieren.
+  outputFileTracingIncludes: {
+    "/api/checkliste-data/[slug]": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+    "/finanztools/checklisten/[slug]": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+  },
   async redirects() {
     return [
       // 301 Redirects für zusammengefasste Beiträge (42)
