@@ -102,7 +102,7 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
       >
         <div
           data-card-image-bg
-          style={{ position: "absolute", inset: 0, overflow: "hidden", background: "var(--color-placeholder-bg)" }}
+          style={{ position: "absolute", inset: 0, overflow: "hidden", background: post.featuredImage?.node?.sourceUrl ? "transparent" : "var(--color-placeholder-bg)" }}
         >
           {post.featuredImage?.node?.sourceUrl && (
             <img

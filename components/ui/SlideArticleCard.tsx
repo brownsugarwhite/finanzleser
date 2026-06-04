@@ -153,7 +153,7 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
             position: 'absolute',
             inset: 0,
             overflow: 'hidden',
-            background: 'var(--color-placeholder-bg)',
+            background: post.featuredImage?.node.sourceUrl ? 'transparent' : 'var(--color-placeholder-bg)',
           }}
         >
           {post.featuredImage?.node.sourceUrl && (
