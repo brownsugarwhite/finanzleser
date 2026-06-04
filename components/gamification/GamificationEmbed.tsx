@@ -22,7 +22,37 @@ const META: Record<string, { label: string; cls: string }> = {
  */
 export default function GamificationEmbed({ gamType, fields }: GamificationEmbedProps) {
   const [open, setOpen] = useState(false);
+  const [flipped, setFlipped] = useState(false);
   const meta = META[gamType] ?? { label: "Wissen", cls: "mythos" };
+
+  // Begriff erklärt – echte Karteikarte zum Umdrehen (3D-Flip)
+  if (gamType === "karte") {
+    const front = fields.begriff ?? "";
+    const back = fields.erklaerung ?? "";
+    return (
+      <aside className="fl-gam fl-gam-karte">
+        <span className="fl-gam-tag">{meta.label}</span>
+        <button
+          type="button"
+          className={`fl-card${flipped ? " is-flipped" : ""}`}
+          onClick={() => setFlipped((v) => !v)}
+          aria-pressed={flipped}
+          aria-label={`Karteikarte ${front} umdrehen`}
+        >
+          <span className="fl-card-inner">
+            <span className="fl-card-face fl-card-front">
+              <span className="fl-card-term">{front}</span>
+              <span className="fl-card-hint">Karte umdrehen →</span>
+            </span>
+            <span className="fl-card-face fl-card-back">
+              <span className="fl-card-def">{back}</span>
+              <span className="fl-card-hint">← zurück</span>
+            </span>
+          </span>
+        </button>
+      </aside>
+    );
+  }
 
   // Schon gewusst – statische Hinweis-Box (kein Aufklappen)
   if (gamType === "gewusst") {
@@ -34,28 +64,15 @@ export default function GamificationEmbed({ gamType, fields }: GamificationEmbed
     );
   }
 
-  // Mythos / Begriff / Selbsttest – Aussage sichtbar, Auflösung aufklappbar
-  let primary = "";
-  let reveal = "";
-  let revealLabel = "";
-  if (gamType === "karte") {
-    primary = fields.begriff ?? "";
-    reveal = fields.erklaerung ?? "";
-    revealLabel = "Erklärung anzeigen";
-  } else if (gamType === "test") {
-    primary = fields.frage ?? "";
-    reveal = fields.antwort ?? "";
-    revealLabel = "Antwort anzeigen";
-  } else {
-    primary = fields.behauptung ?? "";
-    reveal = fields.aufloesung ?? "";
-    revealLabel = "Auflösung anzeigen";
-  }
+  // Mythos / Selbsttest – Aussage sichtbar, Auflösung aufklappbar
+  const primary = gamType === "test" ? (fields.frage ?? "") : (fields.behauptung ?? "");
+  const reveal = gamType === "test" ? (fields.antwort ?? "") : (fields.aufloesung ?? "");
+  const revealLabel = gamType === "test" ? "Antwort anzeigen" : "Auflösung anzeigen";
 
   return (
     <aside className={`fl-gam fl-gam-${meta.cls}`}>
       <span className="fl-gam-tag">{meta.label}</span>
-      <p className={gamType === "karte" ? "fl-gam-term" : "fl-gam-claim"}>{primary}</p>
+      <p className="fl-gam-claim">{primary}</p>
       <button
         type="button"
         className="fl-gam-toggle"
