@@ -526,7 +526,7 @@
     "termSlug": "finanzen",
     "mediaId": 52103,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_finanzen_wide",
@@ -534,7 +534,7 @@
     "termSlug": "finanzen",
     "mediaId": 52104,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_recht",
@@ -542,7 +542,7 @@
     "termSlug": "recht",
     "mediaId": 52105,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_recht_wide",
@@ -550,7 +550,7 @@
     "termSlug": "recht",
     "mediaId": 52106,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_steuern",
@@ -558,7 +558,7 @@
     "termSlug": "steuern",
     "mediaId": 52107,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuern.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_steuern_wide",
@@ -566,7 +566,7 @@
     "termSlug": "steuern",
     "mediaId": 52108,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuern_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_versicherungen",
@@ -574,7 +574,7 @@
     "termSlug": "versicherungen",
     "mediaId": 52109,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "cat_versicherungen_wide",
@@ -582,7 +582,7 @@
     "termSlug": "versicherungen",
     "mediaId": 52110,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_energiekosten",
@@ -590,7 +590,7 @@
     "termSlug": "energiekosten",
     "mediaId": 52111,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_energiekosten.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_energiekosten_wide",
@@ -598,7 +598,7 @@
     "termSlug": "energiekosten",
     "mediaId": 52112,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_energiekosten_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_geldanlagen",
@@ -606,7 +606,7 @@
     "termSlug": "geldanlagen",
     "mediaId": 52113,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_geldanlagen.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_geldanlagen_wide",
@@ -614,7 +614,7 @@
     "termSlug": "geldanlagen",
     "mediaId": 52114,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_geldanlagen_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_konto-karten",
@@ -622,7 +622,7 @@
     "termSlug": "konto-karten",
     "mediaId": 52115,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_konto-karten.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_konto-karten_wide",
@@ -630,7 +630,7 @@
     "termSlug": "konto-karten",
     "mediaId": 52116,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_konto-karten_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_kredite-bauen",
@@ -638,7 +638,7 @@
     "termSlug": "kredite-bauen",
     "mediaId": 52117,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_kredite-bauen.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_finanzen_kredite-bauen_wide",
@@ -646,7 +646,7 @@
     "termSlug": "kredite-bauen",
     "mediaId": 52118,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_kredite-bauen_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_mietrecht_wide",
@@ -654,7 +654,7 @@
     "termSlug": "mietrecht",
     "mediaId": 52119,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_arbeitsrecht",
@@ -662,7 +662,7 @@
     "termSlug": "arbeitsrecht",
     "mediaId": 52120,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_arbeitsrecht_wide",
@@ -670,7 +670,7 @@
     "termSlug": "arbeitsrecht",
     "mediaId": 52121,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_ehe-familie",
@@ -678,7 +678,7 @@
     "termSlug": "ehe-familie",
     "mediaId": 52122,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_ehe-familie_wide",
@@ -686,7 +686,7 @@
     "termSlug": "ehe-familie",
     "mediaId": 52123,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_recht_mietrecht",
@@ -694,7 +694,7 @@
     "termSlug": "mietrecht",
     "mediaId": 52124,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuerarten",
@@ -702,7 +702,7 @@
     "termSlug": "steuerarten",
     "mediaId": 52125,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerarten.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuerarten_wide",
@@ -710,7 +710,7 @@
     "termSlug": "steuerarten",
     "mediaId": 52126,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerarten_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuererklaerung",
@@ -718,7 +718,7 @@
     "termSlug": "steuererklaerung",
     "mediaId": 52127,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuererklaerung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuererklaerung_wide",
@@ -726,7 +726,7 @@
     "termSlug": "steuererklaerung",
     "mediaId": 52128,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuererklaerung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuerpflichtige",
@@ -734,7 +734,7 @@
     "termSlug": "steuerpflichtige",
     "mediaId": 52129,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerpflichtige.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_steuern_steuerpflichtige_wide",
@@ -742,7 +742,7 @@
     "termSlug": "steuerpflichtige",
     "mediaId": 52130,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerpflichtige_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_tierversicherungen",
@@ -750,13 +750,13 @@
     "termSlug": "tierversicherungen",
     "mediaId": 52131,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_tierversicherungen.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_altersvorsorge",
     "type": "subcat-slider",
     "termSlug": "altersvorsorge",
-    "mediaId": 52132,
+    "mediaId": 52149,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_altersvorsorge.webp",
     "action": "hochgeladen"
   },
@@ -764,7 +764,7 @@
     "sanitizedName": "subcat_versicherungen_altersvorsorge_wide",
     "type": "subcat-wide",
     "termSlug": "altersvorsorge",
-    "mediaId": 52133,
+    "mediaId": 52150,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_altersvorsorge_wide.webp",
     "action": "hochgeladen"
   },
@@ -774,7 +774,7 @@
     "termSlug": "berufsunfaehigkeit",
     "mediaId": 52134,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_berufsunfaehigkeit_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit",
@@ -782,7 +782,7 @@
     "termSlug": "berufsunfaehigkeit",
     "mediaId": 52135,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_berufsunfaehigkeit.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_krankenversicherung",
@@ -790,7 +790,7 @@
     "termSlug": "krankenversicherung",
     "mediaId": 52136,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_krankenversicherung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_krankenversicherung_wide",
@@ -798,7 +798,7 @@
     "termSlug": "krankenversicherung",
     "mediaId": 52137,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_krankenversicherung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_pflegeversicherung",
@@ -806,7 +806,7 @@
     "termSlug": "pflegeversicherung",
     "mediaId": 52138,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_pflegeversicherung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_pflegeversicherung_wide",
@@ -814,7 +814,7 @@
     "termSlug": "pflegeversicherung",
     "mediaId": 52139,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_pflegeversicherung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_rentenversicherung",
@@ -822,7 +822,7 @@
     "termSlug": "rentenversicherung",
     "mediaId": 52140,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_rentenversicherung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_rentenversicherung_wide",
@@ -830,13 +830,13 @@
     "termSlug": "rentenversicherung",
     "mediaId": 52141,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_rentenversicherung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_sachversicherungen",
     "type": "subcat-slider",
     "termSlug": "sachversicherungen",
-    "mediaId": 52142,
+    "mediaId": 52151,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sachversicherungen.webp",
     "action": "hochgeladen"
   },
@@ -844,7 +844,7 @@
     "sanitizedName": "subcat_versicherungen_sachversicherungen_wide",
     "type": "subcat-wide",
     "termSlug": "sachversicherungen",
-    "mediaId": 52143,
+    "mediaId": 52152,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sachversicherungen_wide.webp",
     "action": "hochgeladen"
   },
@@ -854,7 +854,7 @@
     "termSlug": "sozialversicherung",
     "mediaId": 52144,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sozialversicherung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_sozialversicherung",
@@ -862,7 +862,7 @@
     "termSlug": "sozialversicherung",
     "mediaId": 52145,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sozialversicherung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_tierversicherungen_wide",
@@ -870,7 +870,7 @@
     "termSlug": "tierversicherungen",
     "mediaId": 52146,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_tierversicherungen_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_unfallversicherung",
@@ -878,7 +878,7 @@
     "termSlug": "unfallversicherung",
     "mediaId": 52147,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_unfallversicherung.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   },
   {
     "sanitizedName": "subcat_versicherungen_unfallversicherung_wide",
@@ -886,6 +886,6 @@
     "termSlug": "unfallversicherung",
     "mediaId": 52148,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_unfallversicherung_wide.webp",
-    "action": "hochgeladen"
+    "action": "übersprungen (existiert)"
   }
 ]

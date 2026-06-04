@@ -37,7 +37,9 @@ async function main() {
     process.exit(1);
   }
   const results = JSON.parse(fs.readFileSync(resultsPath, "utf8"));
-  const cats = results.filter((r) => r.termSlug && r.mediaId);
+  const termsArg = args.find((a) => a.startsWith("--terms="));
+  const termFilter = termsArg ? new Set(termsArg.split("=")[1].split(",").map((s) => s.trim())) : null;
+  const cats = results.filter((r) => r.termSlug && r.mediaId && (!termFilter || termFilter.has(r.termSlug)));
   console.log(`${DRY_RUN ? "🧪 DRY-RUN  " : ""}Ziel: ${BASE_URL}  ·  ${cats.length} alte Kategorie-Medien`);
 
   let ok = 0, fail = 0;
