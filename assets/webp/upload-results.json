@@ -887,5 +887,369 @@
     "mediaId": 52148,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_unfallversicherung_wide.webp",
     "action": "übersprungen (existiert)"
+  },
+  {
+    "sanitizedName": "abulance-shield",
+    "type": "general",
+    "mediaId": 52153,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/abulance-shield.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "animal-bird",
+    "type": "general",
+    "mediaId": 52154,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/animal-bird.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "animal-cat",
+    "type": "general",
+    "mediaId": 52155,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/animal-cat.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "animal-dog",
+    "type": "general",
+    "mediaId": 52156,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/animal-dog.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "animal-dog2",
+    "type": "general",
+    "mediaId": 52157,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/animal-dog2.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "animal-horse",
+    "type": "general",
+    "mediaId": 52158,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/animal-horse.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "bananamoney-calculator",
+    "type": "general",
+    "mediaId": 52159,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/bananamoney-calculator.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "book-universityhat",
+    "type": "general",
+    "mediaId": 52160,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/book-universityhat.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "buildings",
+    "type": "general",
+    "mediaId": 52161,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/buildings.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "calculator-money",
+    "type": "general",
+    "mediaId": 52162,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/calculator-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "calculator",
+    "type": "general",
+    "mediaId": 52163,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/calculator.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "calculator2",
+    "type": "general",
+    "mediaId": 52164,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/calculator2.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "calculator3",
+    "type": "general",
+    "mediaId": 52165,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/calculator3.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "car-solar-energy",
+    "type": "general",
+    "mediaId": 52166,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/car-solar-energy.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "car",
+    "type": "general",
+    "mediaId": 52167,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/car.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "cardhouse",
+    "type": "general",
+    "mediaId": 52168,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cardhouse.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "coinflower",
+    "type": "general",
+    "mediaId": 52169,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/coinflower.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "creditcard",
+    "type": "general",
+    "mediaId": 52170,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/creditcard.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "desk-computer",
+    "type": "general",
+    "mediaId": 52171,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/desk-computer.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "docs-paragraph",
+    "type": "general",
+    "mediaId": 52172,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/docs-paragraph.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "documents-law",
+    "type": "general",
+    "mediaId": 52173,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/documents-law.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "documents-idea",
+    "type": "general",
+    "mediaId": 52174,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/documents-idea.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "elster-taxes",
+    "type": "general",
+    "mediaId": 52175,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/elster-taxes.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "energy-battery",
+    "type": "general",
+    "mediaId": 52176,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/energy-battery.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "energy-buildings",
+    "type": "general",
+    "mediaId": 52177,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/energy-buildings.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "energy",
+    "type": "general",
+    "mediaId": 52178,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/energy.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "gas",
+    "type": "general",
+    "mediaId": 52179,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/gas.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "head-money",
+    "type": "general",
+    "mediaId": 52180,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/head-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "heart",
+    "type": "general",
+    "mediaId": 52181,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/heart.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "house-energy",
+    "type": "general",
+    "mediaId": 52182,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/house-energy.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "house-accident",
+    "type": "general",
+    "mediaId": 52183,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/house-accident.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "house-insurance",
+    "type": "general",
+    "mediaId": 52184,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/house-insurance.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "insurance-shield",
+    "type": "general",
+    "mediaId": 52185,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/insurance-shield.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "judge",
+    "type": "general",
+    "mediaId": 52186,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/judge.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "law-balance",
+    "type": "general",
+    "mediaId": 52187,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/law-balance.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "money",
+    "type": "general",
+    "mediaId": 52188,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "paperplane",
+    "type": "general",
+    "mediaId": 52189,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/paperplane.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "piggibank-umbrella01",
+    "type": "general",
+    "mediaId": 52190,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/piggibank-umbrella01.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "piggibank-umbrella02",
+    "type": "general",
+    "mediaId": 52191,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/piggibank-umbrella02.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "planets",
+    "type": "general",
+    "mediaId": 52192,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/planets.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "safe-money",
+    "type": "general",
+    "mediaId": 52193,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/safe-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "shield-money",
+    "type": "general",
+    "mediaId": 52194,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/shield-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "solar",
+    "type": "general",
+    "mediaId": 52195,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/solar.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "solarhouse",
+    "type": "general",
+    "mediaId": 52196,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/solarhouse.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "stuff_with_money",
+    "type": "general",
+    "mediaId": 52197,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/stuff_with_money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "temple-money",
+    "type": "general",
+    "mediaId": 52198,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/temple-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "temple",
+    "type": "general",
+    "mediaId": 52199,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/temple.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "tractormoney",
+    "type": "general",
+    "mediaId": 52200,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/tractormoney.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "tresor",
+    "type": "general",
+    "mediaId": 52201,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/tresor.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "umbrella-money",
+    "type": "general",
+    "mediaId": 52202,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/umbrella-money.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "wallet",
+    "type": "general",
+    "mediaId": 52203,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/wallet.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "wheelchair-accident",
+    "type": "general",
+    "mediaId": 52204,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/wheelchair-accident.webp",
+    "action": "hochgeladen"
   }
 ]

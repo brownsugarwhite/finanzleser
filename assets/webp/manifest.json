@@ -945,5 +945,473 @@
     "altText": "Unfallversicherung Banner",
     "title": "Unfallversicherung Banner",
     "bytes": 128146
+  },
+  {
+    "source": "assets/png_1920/general/abulance&shield.png",
+    "output": "assets/webp/general/abulance-shield.webp",
+    "sanitizedName": "abulance-shield",
+    "type": "general",
+    "altText": "Rettungswagen und Schutzschild",
+    "title": "Rettungswagen und Schutzschild",
+    "bytes": 93054
+  },
+  {
+    "source": "assets/png_1920/general/animal-bird.png",
+    "output": "assets/webp/general/animal-bird.webp",
+    "sanitizedName": "animal-bird",
+    "type": "general",
+    "altText": "Vogel",
+    "title": "Vogel",
+    "bytes": 107336
+  },
+  {
+    "source": "assets/png_1920/general/animal-cat.png",
+    "output": "assets/webp/general/animal-cat.webp",
+    "sanitizedName": "animal-cat",
+    "type": "general",
+    "altText": "Katze",
+    "title": "Katze",
+    "bytes": 103114
+  },
+  {
+    "source": "assets/png_1920/general/animal-dog.png",
+    "output": "assets/webp/general/animal-dog.webp",
+    "sanitizedName": "animal-dog",
+    "type": "general",
+    "altText": "Hund",
+    "title": "Hund",
+    "bytes": 132284
+  },
+  {
+    "source": "assets/png_1920/general/animal-dog2.png",
+    "output": "assets/webp/general/animal-dog2.webp",
+    "sanitizedName": "animal-dog2",
+    "type": "general",
+    "altText": "Hund",
+    "title": "Hund",
+    "bytes": 123602
+  },
+  {
+    "source": "assets/png_1920/general/animal-horse.png",
+    "output": "assets/webp/general/animal-horse.webp",
+    "sanitizedName": "animal-horse",
+    "type": "general",
+    "altText": "Pferd",
+    "title": "Pferd",
+    "bytes": 105818
+  },
+  {
+    "source": "assets/png_1920/general/bananaMoney&calculator.png",
+    "output": "assets/webp/general/bananamoney-calculator.webp",
+    "sanitizedName": "bananamoney-calculator",
+    "type": "general",
+    "altText": "Geld und Taschenrechner",
+    "title": "Geld und Taschenrechner",
+    "bytes": 118790
+  },
+  {
+    "source": "assets/png_1920/general/book&universityHat.png",
+    "output": "assets/webp/general/book-universityhat.webp",
+    "sanitizedName": "book-universityhat",
+    "type": "general",
+    "altText": "Bildung und Studium",
+    "title": "Bildung und Studium",
+    "bytes": 75604
+  },
+  {
+    "source": "assets/png_1920/general/buildings.png",
+    "output": "assets/webp/general/buildings.webp",
+    "sanitizedName": "buildings",
+    "type": "general",
+    "altText": "Gebäude",
+    "title": "Gebäude",
+    "bytes": 76222
+  },
+  {
+    "source": "assets/png_1920/general/calculator-money.png",
+    "output": "assets/webp/general/calculator-money.webp",
+    "sanitizedName": "calculator-money",
+    "type": "general",
+    "altText": "Taschenrechner und Geld",
+    "title": "Taschenrechner und Geld",
+    "bytes": 125336
+  },
+  {
+    "source": "assets/png_1920/general/calculator.png",
+    "output": "assets/webp/general/calculator.webp",
+    "sanitizedName": "calculator",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 91288
+  },
+  {
+    "source": "assets/png_1920/general/calculator2.png",
+    "output": "assets/webp/general/calculator2.webp",
+    "sanitizedName": "calculator2",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 107272
+  },
+  {
+    "source": "assets/png_1920/general/calculator3.png",
+    "output": "assets/webp/general/calculator3.webp",
+    "sanitizedName": "calculator3",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 103170
+  },
+  {
+    "source": "assets/png_1920/general/car-solar-energy.png",
+    "output": "assets/webp/general/car-solar-energy.webp",
+    "sanitizedName": "car-solar-energy",
+    "type": "general",
+    "altText": "Elektroauto und Solarenergie",
+    "title": "Elektroauto und Solarenergie",
+    "bytes": 114298
+  },
+  {
+    "source": "assets/png_1920/general/car.png",
+    "output": "assets/webp/general/car.webp",
+    "sanitizedName": "car",
+    "type": "general",
+    "altText": "Auto",
+    "title": "Auto",
+    "bytes": 110926
+  },
+  {
+    "source": "assets/png_1920/general/cardhouse.png",
+    "output": "assets/webp/general/cardhouse.webp",
+    "sanitizedName": "cardhouse",
+    "type": "general",
+    "altText": "Kartenhaus aus Spielkarten",
+    "title": "Kartenhaus aus Spielkarten",
+    "bytes": 121706
+  },
+  {
+    "source": "assets/png_1920/general/coinflower.png",
+    "output": "assets/webp/general/coinflower.webp",
+    "sanitizedName": "coinflower",
+    "type": "general",
+    "altText": "Geld vermehren",
+    "title": "Geld vermehren",
+    "bytes": 139584
+  },
+  {
+    "source": "assets/png_1920/general/creditcard.png",
+    "output": "assets/webp/general/creditcard.webp",
+    "sanitizedName": "creditcard",
+    "type": "general",
+    "altText": "Kreditkarte",
+    "title": "Kreditkarte",
+    "bytes": 105734
+  },
+  {
+    "source": "assets/png_1920/general/desk&computer.png",
+    "output": "assets/webp/general/desk-computer.webp",
+    "sanitizedName": "desk-computer",
+    "type": "general",
+    "altText": "Arbeitsplatz mit Computer",
+    "title": "Arbeitsplatz mit Computer",
+    "bytes": 79270
+  },
+  {
+    "source": "assets/png_1920/general/docs&paragraph.png",
+    "output": "assets/webp/general/docs-paragraph.webp",
+    "sanitizedName": "docs-paragraph",
+    "type": "general",
+    "altText": "Dokumente und Paragraf",
+    "title": "Dokumente und Paragraf",
+    "bytes": 152742
+  },
+  {
+    "source": "assets/png_1920/general/documents&law.png",
+    "output": "assets/webp/general/documents-law.webp",
+    "sanitizedName": "documents-law",
+    "type": "general",
+    "altText": "Dokumente und Recht",
+    "title": "Dokumente und Recht",
+    "bytes": 121720
+  },
+  {
+    "source": "assets/png_1920/general/documents-idea.png",
+    "output": "assets/webp/general/documents-idea.webp",
+    "sanitizedName": "documents-idea",
+    "type": "general",
+    "altText": "Dokumente und Idee",
+    "title": "Dokumente und Idee",
+    "bytes": 99286
+  },
+  {
+    "source": "assets/png_1920/general/elster-taxes.png",
+    "output": "assets/webp/general/elster-taxes.webp",
+    "sanitizedName": "elster-taxes",
+    "type": "general",
+    "altText": "Steuererklärung mit ELSTER",
+    "title": "Steuererklärung mit ELSTER",
+    "bytes": 116344
+  },
+  {
+    "source": "assets/png_1920/general/energy-battery.png",
+    "output": "assets/webp/general/energy-battery.webp",
+    "sanitizedName": "energy-battery",
+    "type": "general",
+    "altText": "Energie und Batterie",
+    "title": "Energie und Batterie",
+    "bytes": 95312
+  },
+  {
+    "source": "assets/png_1920/general/energy-buildings.png",
+    "output": "assets/webp/general/energy-buildings.webp",
+    "sanitizedName": "energy-buildings",
+    "type": "general",
+    "altText": "Energie und Gebäude",
+    "title": "Energie und Gebäude",
+    "bytes": 110058
+  },
+  {
+    "source": "assets/png_1920/general/energy.png",
+    "output": "assets/webp/general/energy.webp",
+    "sanitizedName": "energy",
+    "type": "general",
+    "altText": "Energie",
+    "title": "Energie",
+    "bytes": 141798
+  },
+  {
+    "source": "assets/png_1920/general/gas.png",
+    "output": "assets/webp/general/gas.webp",
+    "sanitizedName": "gas",
+    "type": "general",
+    "altText": "Gas",
+    "title": "Gas",
+    "bytes": 71412
+  },
+  {
+    "source": "assets/png_1920/general/head&money.png",
+    "output": "assets/webp/general/head-money.webp",
+    "sanitizedName": "head-money",
+    "type": "general",
+    "altText": "Finanzielle Gedanken",
+    "title": "Finanzielle Gedanken",
+    "bytes": 90494
+  },
+  {
+    "source": "assets/png_1920/general/heart.png",
+    "output": "assets/webp/general/heart.webp",
+    "sanitizedName": "heart",
+    "type": "general",
+    "altText": "Gesundheit und Vorsorge",
+    "title": "Gesundheit und Vorsorge",
+    "bytes": 107020
+  },
+  {
+    "source": "assets/png_1920/general/house&energy.png",
+    "output": "assets/webp/general/house-energy.webp",
+    "sanitizedName": "house-energy",
+    "type": "general",
+    "altText": "Haus und Energie",
+    "title": "Haus und Energie",
+    "bytes": 132136
+  },
+  {
+    "source": "assets/png_1920/general/house-accident.png",
+    "output": "assets/webp/general/house-accident.webp",
+    "sanitizedName": "house-accident",
+    "type": "general",
+    "altText": "Unfall im Haushalt",
+    "title": "Unfall im Haushalt",
+    "bytes": 141048
+  },
+  {
+    "source": "assets/png_1920/general/house-insurance.png",
+    "output": "assets/webp/general/house-insurance.webp",
+    "sanitizedName": "house-insurance",
+    "type": "general",
+    "altText": "Gebäudeversicherung",
+    "title": "Gebäudeversicherung",
+    "bytes": 126102
+  },
+  {
+    "source": "assets/png_1920/general/insurance-shield.png",
+    "output": "assets/webp/general/insurance-shield.webp",
+    "sanitizedName": "insurance-shield",
+    "type": "general",
+    "altText": "Versicherungsschutz",
+    "title": "Versicherungsschutz",
+    "bytes": 114176
+  },
+  {
+    "source": "assets/png_1920/general/judge.png",
+    "output": "assets/webp/general/judge.webp",
+    "sanitizedName": "judge",
+    "type": "general",
+    "altText": "Richter und Gericht",
+    "title": "Richter und Gericht",
+    "bytes": 82182
+  },
+  {
+    "source": "assets/png_1920/general/law-balance.png",
+    "output": "assets/webp/general/law-balance.webp",
+    "sanitizedName": "law-balance",
+    "type": "general",
+    "altText": "Recht und Waage",
+    "title": "Recht und Waage",
+    "bytes": 133308
+  },
+  {
+    "source": "assets/png_1920/general/money.png",
+    "output": "assets/webp/general/money.webp",
+    "sanitizedName": "money",
+    "type": "general",
+    "altText": "Geld",
+    "title": "Geld",
+    "bytes": 150328
+  },
+  {
+    "source": "assets/png_1920/general/paperplane.png",
+    "output": "assets/webp/general/paperplane.webp",
+    "sanitizedName": "paperplane",
+    "type": "general",
+    "altText": "Papierflieger",
+    "title": "Papierflieger",
+    "bytes": 97336
+  },
+  {
+    "source": "assets/png_1920/general/piggibank&umbrella01.png",
+    "output": "assets/webp/general/piggibank-umbrella01.webp",
+    "sanitizedName": "piggibank-umbrella01",
+    "type": "general",
+    "altText": "Sparen und Vorsorge",
+    "title": "Sparen und Vorsorge",
+    "bytes": 109714
+  },
+  {
+    "source": "assets/png_1920/general/piggibank&umbrella02.png",
+    "output": "assets/webp/general/piggibank-umbrella02.webp",
+    "sanitizedName": "piggibank-umbrella02",
+    "type": "general",
+    "altText": "Sparen und Vorsorge",
+    "title": "Sparen und Vorsorge",
+    "bytes": 115584
+  },
+  {
+    "source": "assets/png_1920/general/planets.png",
+    "output": "assets/webp/general/planets.webp",
+    "sanitizedName": "planets",
+    "type": "general",
+    "altText": "Planeten",
+    "title": "Planeten",
+    "bytes": 101696
+  },
+  {
+    "source": "assets/png_1920/general/safe&money.png",
+    "output": "assets/webp/general/safe-money.webp",
+    "sanitizedName": "safe-money",
+    "type": "general",
+    "altText": "Tresor mit Geld",
+    "title": "Tresor mit Geld",
+    "bytes": 93030
+  },
+  {
+    "source": "assets/png_1920/general/shield&money.png",
+    "output": "assets/webp/general/shield-money.webp",
+    "sanitizedName": "shield-money",
+    "type": "general",
+    "altText": "Geld absichern",
+    "title": "Geld absichern",
+    "bytes": 110522
+  },
+  {
+    "source": "assets/png_1920/general/solar.png",
+    "output": "assets/webp/general/solar.webp",
+    "sanitizedName": "solar",
+    "type": "general",
+    "altText": "Solarenergie",
+    "title": "Solarenergie",
+    "bytes": 121292
+  },
+  {
+    "source": "assets/png_1920/general/solarhouse.png",
+    "output": "assets/webp/general/solarhouse.webp",
+    "sanitizedName": "solarhouse",
+    "type": "general",
+    "altText": "Haus mit Solaranlage",
+    "title": "Haus mit Solaranlage",
+    "bytes": 109264
+  },
+  {
+    "source": "assets/png_1920/general/stuff_with_money.png",
+    "output": "assets/webp/general/stuff_with_money.webp",
+    "sanitizedName": "stuff_with_money",
+    "type": "general",
+    "altText": "Stuff with money",
+    "title": "Stuff with money",
+    "bytes": 110244
+  },
+  {
+    "source": "assets/png_1920/general/temple&money.png",
+    "output": "assets/webp/general/temple-money.webp",
+    "sanitizedName": "temple-money",
+    "type": "general",
+    "altText": "Bank und Geld",
+    "title": "Bank und Geld",
+    "bytes": 133012
+  },
+  {
+    "source": "assets/png_1920/general/temple.png",
+    "output": "assets/webp/general/temple.webp",
+    "sanitizedName": "temple",
+    "type": "general",
+    "altText": "Institution",
+    "title": "Institution",
+    "bytes": 105138
+  },
+  {
+    "source": "assets/png_1920/general/tractor.money.png",
+    "output": "assets/webp/general/tractormoney.webp",
+    "sanitizedName": "tractormoney",
+    "type": "general",
+    "altText": "Landwirtschaft und Förderung",
+    "title": "Landwirtschaft und Förderung",
+    "bytes": 117558
+  },
+  {
+    "source": "assets/png_1920/general/tresor.png",
+    "output": "assets/webp/general/tresor.webp",
+    "sanitizedName": "tresor",
+    "type": "general",
+    "altText": "Tresor",
+    "title": "Tresor",
+    "bytes": 126844
+  },
+  {
+    "source": "assets/png_1920/general/umbrella&money.png",
+    "output": "assets/webp/general/umbrella-money.webp",
+    "sanitizedName": "umbrella-money",
+    "type": "general",
+    "altText": "Geld absichern",
+    "title": "Geld absichern",
+    "bytes": 97944
+  },
+  {
+    "source": "assets/png_1920/general/wallet.png",
+    "output": "assets/webp/general/wallet.webp",
+    "sanitizedName": "wallet",
+    "type": "general",
+    "altText": "Geldbörse",
+    "title": "Geldbörse",
+    "bytes": 107252
+  },
+  {
+    "source": "assets/png_1920/general/wheelchair-accident.png",
+    "output": "assets/webp/general/wheelchair-accident.webp",
+    "sanitizedName": "wheelchair-accident",
+    "type": "general",
+    "altText": "Unfall und Rollstuhl",
+    "title": "Unfall und Rollstuhl",
+    "bytes": 105070
   }
 ]

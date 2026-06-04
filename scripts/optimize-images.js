@@ -78,6 +78,34 @@ const ALIAS_MANUAL = {
 // Akronyme/Eigennamen für Titelbild-Alt-Texte (Key = lowercase-Token)
 const ACRONYMS = { pkv: "PKV", gkv: "GKV", bafög: "BAföG", elster: "ELSTER" };
 
+// general-Grafiken: deutscher Alt-Text je sanitizedName (ein Bild bedient mehrere Posts → neutral-deskriptiv)
+const GENERAL_ALT = {
+  "abulance-shield": "Rettungswagen und Schutzschild",
+  "animal-bird": "Vogel", "animal-cat": "Katze", "animal-dog": "Hund", "animal-dog2": "Hund", "animal-horse": "Pferd",
+  "bananamoney-calculator": "Geld und Taschenrechner", "book-universityhat": "Bildung und Studium",
+  buildings: "Gebäude", "calculator-money": "Taschenrechner und Geld", calculator: "Taschenrechner",
+  calculator2: "Taschenrechner", calculator3: "Taschenrechner", "car-solar-energy": "Elektroauto und Solarenergie",
+  car: "Auto", cardhouse: "Kartenhaus aus Spielkarten", coinflower: "Geld vermehren", creditcard: "Kreditkarte",
+  "desk-computer": "Arbeitsplatz mit Computer", "docs-paragraph": "Dokumente und Paragraf",
+  "documents-law": "Dokumente und Recht", "documents-idea": "Dokumente und Idee", "elster-taxes": "Steuererklärung mit ELSTER",
+  "energy-battery": "Energie und Batterie", "energy-buildings": "Energie und Gebäude", energy: "Energie", gas: "Gas",
+  "head-money": "Finanzielle Gedanken", heart: "Gesundheit und Vorsorge", "house-energy": "Haus und Energie",
+  "house-accident": "Unfall im Haushalt", "house-insurance": "Gebäudeversicherung", "insurance-shield": "Versicherungsschutz",
+  judge: "Richter und Gericht", "law-balance": "Recht und Waage", money: "Geld", paperplane: "Papierflieger",
+  "piggibank-umbrella01": "Sparen und Vorsorge", "piggibank-umbrella02": "Sparen und Vorsorge", planets: "Planeten",
+  "safe-money": "Tresor mit Geld", "shield-money": "Geld absichern", solar: "Solarenergie", solarhouse: "Haus mit Solaranlage",
+  "stuff-with-money": "Rund ums Geld", "temple-money": "Bank und Geld", temple: "Institution",
+  tractormoney: "Landwirtschaft und Förderung", tresor: "Tresor", "umbrella-money": "Geld absichern",
+  wallet: "Geldbörse", "wheelchair-accident": "Unfall und Rollstuhl",
+};
+
+/** general-Alt-Text: aus Map, sonst humanisierter Dateiname. */
+function generalAltText(sanitized) {
+  if (GENERAL_ALT[sanitized]) return GENERAL_ALT[sanitized];
+  const words = sanitized.replace(/[-_]+/g, " ").replace(/\d+/g, "").trim();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /** Umlaute/ß → ASCII-Digraphe (für Dateinamen + Lookup-Keys). */
@@ -233,15 +261,43 @@ async function main() {
     console.log(`🗂️  ${file} → ${outName}  [${info.type} · ${info.termSlug}]  (${(bytes / 1024).toFixed(0)} kB)  alt="${info.altText}"`);
   }
 
+  // ── General-Grafiken (allgemeine Pool-Bilder für übrige Beiträge) ──
+  const genDir = path.join(SRC_DIR, "general");
+  if (fs.existsSync(genDir)) {
+    const genOut = path.join(OUT_DIR, "general");
+    fs.mkdirSync(genOut, { recursive: true });
+    const genFiles = fs.readdirSync(genDir).filter((f) => /\.png$/i.test(f)).sort();
+    for (const file of genFiles) {
+      const base = file.replace(/\.png$/i, "").normalize("NFC");
+      const sanitized = sanitizeName(base);
+      const outName = `${sanitized}.webp`;
+      const outPath = path.join(genOut, outName);
+      const altText = generalAltText(sanitized);
+      const bytes = await convert(path.join(genDir, file), outPath, WIDTH.titelbild);
+      manifest.push({
+        source: path.relative(ROOT, path.join(genDir, file)),
+        output: path.relative(ROOT, outPath),
+        sanitizedName: sanitized,
+        type: "general",
+        altText,
+        title: altText,
+        bytes,
+      });
+      console.log(`🎨 ${file} → ${outName}  (${(bytes / 1024).toFixed(0)} kB)  alt="${altText}"`);
+    }
+  }
+
   // ── Manifest schreiben ──
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const manifestPath = path.join(OUT_DIR, "manifest.json");
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
 
   const totalBytes = manifest.reduce((s, m) => s + m.bytes, 0);
+  const catCount = manifest.filter((m) => /^(cat|subcat)-/.test(m.type)).length;
   console.log("\n── Zusammenfassung ──");
   console.log(`  Titelbilder:  ${manifest.filter((m) => m.type === "titelbild").length}`);
-  console.log(`  Kategorien:   ${manifest.filter((m) => m.type !== "titelbild").length}`);
+  console.log(`  Kategorien:   ${catCount}`);
+  console.log(`  General:      ${manifest.filter((m) => m.type === "general").length}`);
   console.log(`  Übersprungen: ${skipped.length}`);
   skipped.forEach((s) => console.log(`     • ${s}`));
   console.log(`  Gesamt WebP:  ${(totalBytes / 1024 / 1024).toFixed(2)} MB`);

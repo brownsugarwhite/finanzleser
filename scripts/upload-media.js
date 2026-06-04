@@ -25,7 +25,8 @@ const MANIFEST = path.join(ROOT, "assets", "webp", "manifest.json");
 const RESULTS = path.join(ROOT, "assets", "webp", "upload-results.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");
-const CATEGORIES_ONLY = process.argv.includes("--categories"); // nur Kategorie-Bilder, Titelbilder unberührt
+const CATEGORIES_ONLY = process.argv.includes("--categories"); // nur Kategorie-Bilder
+const GENERAL_ONLY = process.argv.includes("--general"); // nur general-Pool-Grafiken
 const BASE_URL = (process.env.WP_URL || "").replace(/\/$/, "");
 const USER = process.env.WP_USER || "";
 const PASS = process.env.WP_APP_PASSWORD || "";
@@ -140,8 +141,10 @@ function germanTopicFromSource(sourceRel) {
 
 async function main() {
   let manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
-  if (CATEGORIES_ONLY) manifest = manifest.filter((m) => m.type !== "titelbild");
-  console.log(`${DRY_RUN ? "🧪 DRY-RUN  " : ""}${CATEGORIES_ONLY ? "[nur Kategorien] " : ""}Ziel: ${BASE_URL}  ·  ${manifest.length} Einträge\n`);
+  if (GENERAL_ONLY) manifest = manifest.filter((m) => m.type === "general");
+  else if (CATEGORIES_ONLY) manifest = manifest.filter((m) => Boolean(m.termSlug));
+  const tag = GENERAL_ONLY ? "[nur general] " : CATEGORIES_ONLY ? "[nur Kategorien] " : "";
+  console.log(`${DRY_RUN ? "🧪 DRY-RUN  " : ""}${tag}Ziel: ${BASE_URL}  ·  ${manifest.length} Einträge\n`);
 
   const results = [];
 
@@ -202,11 +205,13 @@ async function main() {
   }
 
   if (!DRY_RUN) {
-    // Bei --categories vorhandene Titelbild-Einträge (ohne termSlug) erhalten
+    // Upsert per sanitizedName: bei Teil-Läufen (--categories/--general) bleiben
+    // alle übrigen Einträge erhalten, nur die berührten werden aktualisiert.
     let out = results;
-    if (CATEGORIES_ONLY && fs.existsSync(RESULTS)) {
+    if (fs.existsSync(RESULTS)) {
       const prev = JSON.parse(fs.readFileSync(RESULTS, "utf8"));
-      out = [...prev.filter((r) => !r.termSlug), ...results];
+      const touched = new Set(results.map((r) => r.sanitizedName));
+      out = [...prev.filter((r) => !touched.has(r.sanitizedName)), ...results];
     }
     fs.writeFileSync(RESULTS, JSON.stringify(out, null, 2) + "\n");
   }
