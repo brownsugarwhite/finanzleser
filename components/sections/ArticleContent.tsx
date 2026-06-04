@@ -85,7 +85,7 @@ function parseContent(html: string): ContentPart[] {
   // Gamification (3. Alternative) ist – anders als die Slug-Tools – NICHT leer: der Block enthält die
   // Felder inline. Voraussetzung: keine verschachtelten <div> im Block (vom Studio so erzeugt), damit
   // [\s\S]*? bis zum ersten </div> korrekt greift.
-  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
+  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
 
   let lastIndex = 0;
   let match;
