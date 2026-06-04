@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getChecklisteBySlug } from "@/lib/wordpress";
 import { parsePDF } from "@/lib/checklisteParser";
 
+export const runtime = "nodejs";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
@@ -23,6 +25,11 @@ export async function GET(
     return NextResponse.json({ data, checkboxPositions, pdfUrl });
   } catch (error) {
     console.error(`Error parsing checkliste "${slug}":`, error);
-    return NextResponse.json({ error: "Parse error" }, { status: 500 });
+    // TEMP-Diagnose: echten Fehler ausgeben (danach wieder entfernen)
+    const e = error as Error;
+    return NextResponse.json(
+      { error: "Parse error", name: e?.name, message: e?.message, stack: (e?.stack || "").split("\n").slice(0, 6) },
+      { status: 500 }
+    );
   }
 }
