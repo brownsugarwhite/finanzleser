@@ -27,23 +27,52 @@ const OUT_DIR = path.join(ROOT, "assets", "webp");
 const WEBP_QUALITY = 80;
 const WIDTH = { titelbild: 1200, slider: 1400, wide: 1920 };
 
-// ── Mappings (Quelle: lib/categories.ts + lib/navItems.ts) ──────────────
-// Hauptkategorien: Bildname-Token → { slug (WP-Term), display (Alt-Text, mit Umlaut) }
-const MAIN_CATEGORIES = {
-  finanzen: { slug: "finanzen", display: "Finanzen" },
-  recht: { slug: "recht", display: "Recht" },
-  steuer: { slug: "steuern", display: "Steuern" }, // Bild „steuer" → Term „steuern"
-  versicherungen: { slug: "versicherungen", display: "Versicherungen" },
+// ── Term-Registry (Quelle: echte WP-Terms auf Staging, Stand 2026-06-04) ──
+// parent === null → Hauptkategorie. label = Alt-Text (deutsch, mit Umlaut).
+const TERM_REGISTRY = {
+  // Hauptkategorien
+  finanzen:           { parent: null, label: "Finanzen" },
+  versicherungen:     { parent: null, label: "Versicherungen" },
+  steuern:            { parent: null, label: "Steuern" },
+  recht:              { parent: null, label: "Recht" },
+  // Finanzen
+  energiekosten:      { parent: "finanzen", label: "Energiekosten" },
+  geldanlagen:        { parent: "finanzen", label: "Geldanlagen" },
+  "konto-karten":     { parent: "finanzen", label: "Konto & Karten" },
+  "kredite-bauen":    { parent: "finanzen", label: "Kredite & Bauen" },
+  // Versicherungen
+  altersvorsorge:     { parent: "versicherungen", label: "Altersvorsorge" },
+  berufsunfaehigkeit: { parent: "versicherungen", label: "Berufsunfähigkeit" },
+  krankenversicherung:{ parent: "versicherungen", label: "Krankenversicherung" },
+  pflegeversicherung: { parent: "versicherungen", label: "Pflegeversicherung" },
+  rentenversicherung: { parent: "versicherungen", label: "Rentenversicherung" },
+  sachversicherungen: { parent: "versicherungen", label: "Sachversicherungen" },
+  sozialversicherung: { parent: "versicherungen", label: "Sozialversicherung" },
+  tierversicherungen: { parent: "versicherungen", label: "Tierversicherungen" },
+  unfallversicherung: { parent: "versicherungen", label: "Unfallversicherung" },
+  // Steuern
+  steuerarten:        { parent: "steuern", label: "Steuerarten" },
+  steuererklaerung:   { parent: "steuern", label: "Steuererklärung" },
+  steuerpflichtige:   { parent: "steuern", label: "Steuerpflichtige" },
+  // Recht
+  arbeitsrecht:       { parent: "recht", label: "Arbeitsrecht" },
+  "ehe-familie":      { parent: "recht", label: "Ehe & Familie" },
+  mietrecht:          { parent: "recht", label: "Mietrecht" },
 };
 
-// Subkategorien: normalisierter Kind-Token → { slug (WP-Term), label (Alt-Text, mit Umlaut) }
-const SUBCATEGORIES = {
-  arbeitsrecht: { slug: "arbeitsrecht", label: "Arbeitsrecht" },
-  ehefamilie: { slug: "ehe-familie", label: "Ehe & Familie" },
-  mietrecht: { slug: "mietrecht", label: "Mietrecht" },
-  steuerarten: { slug: "steuerarten", label: "Steuerarten" },
-  steuererklaerung: { slug: "steuererklaerung", label: "Steuererklärung" },
-  altersvorsorge: { slug: "altersvorsorge", label: "Altersvorsorge" },
+// Alias-Map: normalisierter Bild-Token → Term-Slug. Fängt Tippfehler,
+// Singular/Plural, „und"-Schreibweisen und falsche Parent-Präfixe ab.
+// Identity-Aliase werden unten automatisch aus TERM_REGISTRY ergänzt.
+const ALIAS_MANUAL = {
+  steuer: "steuern",                       // cat_steuer → Term steuern
+  geldanlage: "geldanlagen",
+  kontoundkarten: "konto-karten",
+  krediteundbauen: "kredite-bauen",
+  eheundfamilie: "ehe-familie",
+  erufsunfaehigkeit: "berufsunfaehigkeit", // Tippfehler (fehlendes „b")
+  sachversicherung: "sachversicherungen",
+  sozielversicherungen: "sozialversicherung", // Tippfehler + Plural→Singular
+  sozialversicherungen: "sozialversicherung", // Plural→Singular
 };
 
 // Akronyme/Eigennamen für Titelbild-Alt-Texte (Key = lowercase-Token)
@@ -89,48 +118,47 @@ function titelbildAltText(base) {
     .join(" ");
 }
 
+// Vollständige Alias-Map: Identity (normKey(slug)→slug) + manuelle Varianten.
+const ALIAS = (() => {
+  const map = { ...ALIAS_MANUAL };
+  for (const slug of Object.keys(TERM_REGISTRY)) map[normKey(slug)] = slug;
+  return map;
+})();
+
 // ── Klassifizierung einer Kategorie-Datei ────────────────────────────────
-// Liefert { type, width, termSlug, isWide, altText, skip?, reason? }
+// Mappt rein über den Kind-Token (Parent-Präfix wird IGNORIERT, da unzuverlässig:
+// z. B. lag „arbeitsrecht" fälschlich unter subcat_steuer_). Liefert
+// { type, width, termSlug, isWide, altText, canonicalName } oder { skip, reason }.
 function classifyCategory(base) {
   const isWide = /_wide$/i.test(base);
   const core = base.replace(/_wide$/i, "");
-  const parts = core.split("_");
-
-  // Dubletten-Marker: endet auf _<ziffer> (z. B. steuerarten_1) → überspringen
-  if (/_\d+$/.test(core)) {
-    return { skip: true, reason: `Dubletten-Variante (${base}) übersprungen` };
-  }
-
+  const parts = core.split("_").filter(Boolean); // leere Tokens (doppelte __) raus
   const prefix = parts[0]; // "cat" | "subcat"
-  const rest = parts.slice(1); // ["finanzen"] oder ["versicherungen","altersvorsorge"]
 
-  // Hauptkategorie: cat_<name> (genau ein Rest-Token, und im MAIN-Mapping)
-  if (prefix === "cat" && rest.length === 1 && MAIN_CATEGORIES[rest[0]]) {
-    const m = MAIN_CATEGORIES[rest[0]];
-    return {
-      type: isWide ? "cat-wide" : "cat-slider",
-      width: isWide ? WIDTH.wide : WIDTH.slider,
-      termSlug: m.slug,
-      isWide,
-      altText: isWide ? `Kategorie ${m.display} Banner` : `Kategorie ${m.display}`,
-    };
-  }
+  let token;
+  if (prefix === "cat") token = parts.slice(1).join("_");      // Haupt-Token
+  else if (prefix === "subcat") token = parts.slice(2).join("_"); // Kind-Token, Parent egal
+  else return { skip: true, reason: `Unbekanntes Präfix: ${base}` };
 
-  // Subkategorie: subcat_<parent>_<child>  ODER  fehlbenanntes cat_<parent>_<child>
-  // (z. B. cat_versicherungen_altersvorsorge ist eigentlich ein Subkat-Slider)
-  const childToken = rest.slice(1).join("_"); // alles nach dem Parent
-  const sub = SUBCATEGORIES[normKey(childToken)];
-  if ((prefix === "subcat" || prefix === "cat") && rest.length >= 2 && sub) {
-    return {
-      type: isWide ? "subcat-wide" : "subcat-slider",
-      width: isWide ? WIDTH.wide : WIDTH.slider,
-      termSlug: sub.slug,
-      isWide,
-      altText: isWide ? `${sub.label} Banner` : sub.label,
-    };
-  }
+  const slug = ALIAS[normKey(token)];
+  if (!slug) return { skip: true, reason: `Unbekannter Token „${token}" in ${base}` };
 
-  return { skip: true, reason: `Unbekanntes Kategorie-Schema: ${base}` };
+  const term = TERM_REGISTRY[slug];
+  const isMain = term.parent === null;
+  const canonicalName = isMain
+    ? `cat_${slug}${isWide ? "_wide" : ""}`
+    : `subcat_${term.parent}_${slug}${isWide ? "_wide" : ""}`;
+
+  return {
+    type: isMain ? (isWide ? "cat-wide" : "cat-slider") : (isWide ? "subcat-wide" : "subcat-slider"),
+    width: isWide ? WIDTH.wide : WIDTH.slider,
+    termSlug: slug,
+    isWide,
+    altText: isMain
+      ? (isWide ? `Kategorie ${term.label} Banner` : `Kategorie ${term.label}`)
+      : (isWide ? `${term.label} Banner` : term.label),
+    canonicalName,
+  };
 }
 
 // ── Hauptlauf ─────────────────────────────────────────────────────────────
@@ -187,7 +215,7 @@ async function main() {
       console.log(`⏭️  ${file} — ${info.reason}`);
       continue;
     }
-    const sanitized = sanitizeName(base);
+    const sanitized = info.canonicalName; // kanonisch aus Registry (korrekter Parent)
     const outName = `${sanitized}.webp`;
     const outPath = path.join(catOut, outName);
     const bytes = await convert(path.join(catDir, file), outPath, info.width);

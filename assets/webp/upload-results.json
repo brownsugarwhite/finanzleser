@@ -524,7 +524,7 @@
     "sanitizedName": "cat_finanzen",
     "type": "cat-slider",
     "termSlug": "finanzen",
-    "mediaId": 52069,
+    "mediaId": 52103,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen.webp",
     "action": "hochgeladen"
   },
@@ -532,7 +532,7 @@
     "sanitizedName": "cat_finanzen_wide",
     "type": "cat-wide",
     "termSlug": "finanzen",
-    "mediaId": 52070,
+    "mediaId": 52104,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_finanzen_wide.webp",
     "action": "hochgeladen"
   },
@@ -540,7 +540,7 @@
     "sanitizedName": "cat_recht",
     "type": "cat-slider",
     "termSlug": "recht",
-    "mediaId": 52071,
+    "mediaId": 52105,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht.webp",
     "action": "hochgeladen"
   },
@@ -548,31 +548,31 @@
     "sanitizedName": "cat_recht_wide",
     "type": "cat-wide",
     "termSlug": "recht",
-    "mediaId": 52072,
+    "mediaId": 52106,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_recht_wide.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "cat_steuer",
+    "sanitizedName": "cat_steuern",
     "type": "cat-slider",
     "termSlug": "steuern",
-    "mediaId": 52073,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuer.webp",
+    "mediaId": 52107,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuern.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "cat_steuer_wide",
+    "sanitizedName": "cat_steuern_wide",
     "type": "cat-wide",
     "termSlug": "steuern",
-    "mediaId": 52074,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuer_wide.webp",
+    "mediaId": 52108,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_steuern_wide.webp",
     "action": "hochgeladen"
   },
   {
     "sanitizedName": "cat_versicherungen",
     "type": "cat-slider",
     "termSlug": "versicherungen",
-    "mediaId": 52075,
+    "mediaId": 52109,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen.webp",
     "action": "hochgeladen"
   },
@@ -580,23 +580,87 @@
     "sanitizedName": "cat_versicherungen_wide",
     "type": "cat-wide",
     "termSlug": "versicherungen",
-    "mediaId": 52076,
+    "mediaId": 52110,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen_wide.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "cat_versicherungen_altersvorsorge",
+    "sanitizedName": "subcat_finanzen_energiekosten",
     "type": "subcat-slider",
-    "termSlug": "altersvorsorge",
-    "mediaId": 52077,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/cat_versicherungen_altersvorsorge.webp",
+    "termSlug": "energiekosten",
+    "mediaId": 52111,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_energiekosten.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_energiekosten_wide",
+    "type": "subcat-wide",
+    "termSlug": "energiekosten",
+    "mediaId": 52112,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_energiekosten_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_geldanlagen",
+    "type": "subcat-slider",
+    "termSlug": "geldanlagen",
+    "mediaId": 52113,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_geldanlagen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_geldanlagen_wide",
+    "type": "subcat-wide",
+    "termSlug": "geldanlagen",
+    "mediaId": 52114,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_geldanlagen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_konto-karten",
+    "type": "subcat-slider",
+    "termSlug": "konto-karten",
+    "mediaId": 52115,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_konto-karten.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_konto-karten_wide",
+    "type": "subcat-wide",
+    "termSlug": "konto-karten",
+    "mediaId": 52116,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_konto-karten_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_kredite-bauen",
+    "type": "subcat-slider",
+    "termSlug": "kredite-bauen",
+    "mediaId": 52117,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_kredite-bauen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_finanzen_kredite-bauen_wide",
+    "type": "subcat-wide",
+    "termSlug": "kredite-bauen",
+    "mediaId": 52118,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_finanzen_kredite-bauen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_recht_mietrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "mietrecht",
+    "mediaId": 52119,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht_wide.webp",
     "action": "hochgeladen"
   },
   {
     "sanitizedName": "subcat_recht_arbeitsrecht",
     "type": "subcat-slider",
     "termSlug": "arbeitsrecht",
-    "mediaId": 52078,
+    "mediaId": 52120,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht.webp",
     "action": "hochgeladen"
   },
@@ -604,7 +668,7 @@
     "sanitizedName": "subcat_recht_arbeitsrecht_wide",
     "type": "subcat-wide",
     "termSlug": "arbeitsrecht",
-    "mediaId": 52079,
+    "mediaId": 52121,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_arbeitsrecht_wide.webp",
     "action": "hochgeladen"
   },
@@ -612,7 +676,7 @@
     "sanitizedName": "subcat_recht_ehe-familie",
     "type": "subcat-slider",
     "termSlug": "ehe-familie",
-    "mediaId": 52080,
+    "mediaId": 52122,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie.webp",
     "action": "hochgeladen"
   },
@@ -620,7 +684,7 @@
     "sanitizedName": "subcat_recht_ehe-familie_wide",
     "type": "subcat-wide",
     "termSlug": "ehe-familie",
-    "mediaId": 52081,
+    "mediaId": 52123,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_ehe-familie_wide.webp",
     "action": "hochgeladen"
   },
@@ -628,56 +692,200 @@
     "sanitizedName": "subcat_recht_mietrecht",
     "type": "subcat-slider",
     "termSlug": "mietrecht",
-    "mediaId": 52082,
+    "mediaId": 52124,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "subcat_recht_mietrecht_wide",
-    "type": "subcat-wide",
-    "termSlug": "mietrecht",
-    "mediaId": 52083,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_recht_mietrecht_wide.webp",
-    "action": "hochgeladen"
-  },
-  {
-    "sanitizedName": "subcat_steuer_steuerarten",
+    "sanitizedName": "subcat_steuern_steuerarten",
     "type": "subcat-slider",
     "termSlug": "steuerarten",
-    "mediaId": 52084,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuerarten.webp",
+    "mediaId": 52125,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerarten.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "subcat_steuer_steuerarten_wide",
+    "sanitizedName": "subcat_steuern_steuerarten_wide",
     "type": "subcat-wide",
     "termSlug": "steuerarten",
-    "mediaId": 52085,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuerarten_wide.webp",
+    "mediaId": 52126,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerarten_wide.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "subcat_steuer_steuererklaerung",
+    "sanitizedName": "subcat_steuern_steuererklaerung",
     "type": "subcat-slider",
     "termSlug": "steuererklaerung",
-    "mediaId": 52086,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuererklaerung.webp",
+    "mediaId": 52127,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuererklaerung.webp",
     "action": "hochgeladen"
   },
   {
-    "sanitizedName": "subcat_steuer_steuererklaerung_wide",
+    "sanitizedName": "subcat_steuern_steuererklaerung_wide",
     "type": "subcat-wide",
     "termSlug": "steuererklaerung",
-    "mediaId": 52087,
-    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuer_steuererklaerung_wide.webp",
+    "mediaId": 52128,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuererklaerung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuern_steuerpflichtige",
+    "type": "subcat-slider",
+    "termSlug": "steuerpflichtige",
+    "mediaId": 52129,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerpflichtige.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_steuern_steuerpflichtige_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuerpflichtige",
+    "mediaId": 52130,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_steuern_steuerpflichtige_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_tierversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "tierversicherungen",
+    "mediaId": 52131,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_tierversicherungen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_altersvorsorge",
+    "type": "subcat-slider",
+    "termSlug": "altersvorsorge",
+    "mediaId": 52132,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_altersvorsorge.webp",
     "action": "hochgeladen"
   },
   {
     "sanitizedName": "subcat_versicherungen_altersvorsorge_wide",
     "type": "subcat-wide",
     "termSlug": "altersvorsorge",
-    "mediaId": 52088,
+    "mediaId": 52133,
     "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_altersvorsorge_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit_wide",
+    "type": "subcat-wide",
+    "termSlug": "berufsunfaehigkeit",
+    "mediaId": 52134,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_berufsunfaehigkeit_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit",
+    "type": "subcat-slider",
+    "termSlug": "berufsunfaehigkeit",
+    "mediaId": 52135,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_berufsunfaehigkeit.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_krankenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "krankenversicherung",
+    "mediaId": 52136,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_krankenversicherung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_krankenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "krankenversicherung",
+    "mediaId": 52137,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_krankenversicherung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung",
+    "type": "subcat-slider",
+    "termSlug": "pflegeversicherung",
+    "mediaId": 52138,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_pflegeversicherung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "pflegeversicherung",
+    "mediaId": 52139,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_pflegeversicherung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_rentenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "rentenversicherung",
+    "mediaId": 52140,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_rentenversicherung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_rentenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "rentenversicherung",
+    "mediaId": 52141,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_rentenversicherung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_sachversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "sachversicherungen",
+    "mediaId": 52142,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sachversicherungen.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_sachversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "sachversicherungen",
+    "mediaId": 52143,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sachversicherungen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_sozialversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "sozialversicherung",
+    "mediaId": 52144,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sozialversicherung_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_sozialversicherung",
+    "type": "subcat-slider",
+    "termSlug": "sozialversicherung",
+    "mediaId": 52145,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_sozialversicherung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_tierversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "tierversicherungen",
+    "mediaId": 52146,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_tierversicherungen_wide.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_unfallversicherung",
+    "type": "subcat-slider",
+    "termSlug": "unfallversicherung",
+    "mediaId": 52147,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_unfallversicherung.webp",
+    "action": "hochgeladen"
+  },
+  {
+    "sanitizedName": "subcat_versicherungen_unfallversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "unfallversicherung",
+    "mediaId": 52148,
+    "sourceUrl": "https://staging.finanzleser.de/wp-content/uploads/2026/06/subcat_versicherungen_unfallversicherung_wide.webp",
     "action": "hochgeladen"
   }
 ]

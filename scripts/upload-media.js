@@ -25,6 +25,7 @@ const MANIFEST = path.join(ROOT, "assets", "webp", "manifest.json");
 const RESULTS = path.join(ROOT, "assets", "webp", "upload-results.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");
+const CATEGORIES_ONLY = process.argv.includes("--categories"); // nur Kategorie-Bilder, Titelbilder unberührt
 const BASE_URL = (process.env.WP_URL || "").replace(/\/$/, "");
 const USER = process.env.WP_USER || "";
 const PASS = process.env.WP_APP_PASSWORD || "";
@@ -138,8 +139,9 @@ function germanTopicFromSource(sourceRel) {
 // ── Hauptlauf ───────────────────────────────────────────────────────────────
 
 async function main() {
-  const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
-  console.log(`${DRY_RUN ? "🧪 DRY-RUN  " : ""}Ziel: ${BASE_URL}  ·  ${manifest.length} Einträge\n`);
+  let manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
+  if (CATEGORIES_ONLY) manifest = manifest.filter((m) => m.type !== "titelbild");
+  console.log(`${DRY_RUN ? "🧪 DRY-RUN  " : ""}${CATEGORIES_ONLY ? "[nur Kategorien] " : ""}Ziel: ${BASE_URL}  ·  ${manifest.length} Einträge\n`);
 
   const results = [];
 
@@ -199,7 +201,15 @@ async function main() {
     results.push(entry);
   }
 
-  if (!DRY_RUN) fs.writeFileSync(RESULTS, JSON.stringify(results, null, 2) + "\n");
+  if (!DRY_RUN) {
+    // Bei --categories vorhandene Titelbild-Einträge (ohne termSlug) erhalten
+    let out = results;
+    if (CATEGORIES_ONLY && fs.existsSync(RESULTS)) {
+      const prev = JSON.parse(fs.readFileSync(RESULTS, "utf8"));
+      out = [...prev.filter((r) => !r.termSlug), ...results];
+    }
+    fs.writeFileSync(RESULTS, JSON.stringify(out, null, 2) + "\n");
+  }
 
   // ── Report ──
   const by = (a) => results.filter(a).length;

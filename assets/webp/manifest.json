@@ -449,7 +449,7 @@
     "isWide": false,
     "altText": "Kategorie Finanzen",
     "title": "Kategorie Finanzen",
-    "bytes": 161452
+    "bytes": 141468
   },
   {
     "source": "assets/png_1920/categories/cat_finanzen_WIDE.png",
@@ -460,7 +460,7 @@
     "isWide": true,
     "altText": "Kategorie Finanzen Banner",
     "title": "Kategorie Finanzen Banner",
-    "bytes": 224450
+    "bytes": 97918
   },
   {
     "source": "assets/png_1920/categories/cat_recht.png",
@@ -471,7 +471,7 @@
     "isWide": false,
     "altText": "Kategorie Recht",
     "title": "Kategorie Recht",
-    "bytes": 146244
+    "bytes": 146892
   },
   {
     "source": "assets/png_1920/categories/cat_recht_WIDE.png",
@@ -482,29 +482,29 @@
     "isWide": true,
     "altText": "Kategorie Recht Banner",
     "title": "Kategorie Recht Banner",
-    "bytes": 161526
+    "bytes": 91602
   },
   {
     "source": "assets/png_1920/categories/cat_steuer.png",
-    "output": "assets/webp/categories/cat_steuer.webp",
-    "sanitizedName": "cat_steuer",
+    "output": "assets/webp/categories/cat_steuern.webp",
+    "sanitizedName": "cat_steuern",
     "type": "cat-slider",
     "termSlug": "steuern",
     "isWide": false,
     "altText": "Kategorie Steuern",
     "title": "Kategorie Steuern",
-    "bytes": 131898
+    "bytes": 117530
   },
   {
     "source": "assets/png_1920/categories/cat_steuer_WIDE.png",
-    "output": "assets/webp/categories/cat_steuer_wide.webp",
-    "sanitizedName": "cat_steuer_wide",
+    "output": "assets/webp/categories/cat_steuern_wide.webp",
+    "sanitizedName": "cat_steuern_wide",
     "type": "cat-wide",
     "termSlug": "steuern",
     "isWide": true,
     "altText": "Kategorie Steuern Banner",
     "title": "Kategorie Steuern Banner",
-    "bytes": 148692
+    "bytes": 107884
   },
   {
     "source": "assets/png_1920/categories/cat_versicherungen.png",
@@ -515,7 +515,7 @@
     "isWide": false,
     "altText": "Kategorie Versicherungen",
     "title": "Kategorie Versicherungen",
-    "bytes": 102626
+    "bytes": 103582
   },
   {
     "source": "assets/png_1920/categories/cat_versicherungen_WIDE.png",
@@ -526,73 +526,95 @@
     "isWide": true,
     "altText": "Kategorie Versicherungen Banner",
     "title": "Kategorie Versicherungen Banner",
-    "bytes": 141910
+    "bytes": 84408
   },
   {
-    "source": "assets/png_1920/categories/cat_versicherungen_altersvorsorge.png",
-    "output": "assets/webp/categories/cat_versicherungen_altersvorsorge.webp",
-    "sanitizedName": "cat_versicherungen_altersvorsorge",
+    "source": "assets/png_1920/categories/subcat_finanzen_energiekosten.png",
+    "output": "assets/webp/categories/subcat_finanzen_energiekosten.webp",
+    "sanitizedName": "subcat_finanzen_energiekosten",
     "type": "subcat-slider",
-    "termSlug": "altersvorsorge",
+    "termSlug": "energiekosten",
     "isWide": false,
-    "altText": "Altersvorsorge",
-    "title": "Altersvorsorge",
-    "bytes": 113292
+    "altText": "Energiekosten",
+    "title": "Energiekosten",
+    "bytes": 126094
   },
   {
-    "source": "assets/png_1920/categories/subcat_recht_arbeitsrecht.png",
-    "output": "assets/webp/categories/subcat_recht_arbeitsrecht.webp",
-    "sanitizedName": "subcat_recht_arbeitsrecht",
-    "type": "subcat-slider",
-    "termSlug": "arbeitsrecht",
-    "isWide": false,
-    "altText": "Arbeitsrecht",
-    "title": "Arbeitsrecht",
-    "bytes": 123592
-  },
-  {
-    "source": "assets/png_1920/categories/subcat_recht_arbeitsrecht_WIDE.png",
-    "output": "assets/webp/categories/subcat_recht_arbeitsrecht_wide.webp",
-    "sanitizedName": "subcat_recht_arbeitsrecht_wide",
+    "source": "assets/png_1920/categories/subcat_finanzen_energiekosten_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_energiekosten_wide.webp",
+    "sanitizedName": "subcat_finanzen_energiekosten_wide",
     "type": "subcat-wide",
-    "termSlug": "arbeitsrecht",
+    "termSlug": "energiekosten",
     "isWide": true,
-    "altText": "Arbeitsrecht Banner",
-    "title": "Arbeitsrecht Banner",
-    "bytes": 126296
+    "altText": "Energiekosten Banner",
+    "title": "Energiekosten Banner",
+    "bytes": 95254
   },
   {
-    "source": "assets/png_1920/categories/subcat_recht_ehe&familie.png",
-    "output": "assets/webp/categories/subcat_recht_ehe-familie.webp",
-    "sanitizedName": "subcat_recht_ehe-familie",
+    "source": "assets/png_1920/categories/subcat_finanzen_geldanlage.png",
+    "output": "assets/webp/categories/subcat_finanzen_geldanlagen.webp",
+    "sanitizedName": "subcat_finanzen_geldanlagen",
     "type": "subcat-slider",
-    "termSlug": "ehe-familie",
+    "termSlug": "geldanlagen",
     "isWide": false,
-    "altText": "Ehe & Familie",
-    "title": "Ehe & Familie",
-    "bytes": 133644
+    "altText": "Geldanlagen",
+    "title": "Geldanlagen",
+    "bytes": 162430
   },
   {
-    "source": "assets/png_1920/categories/subcat_recht_ehe&familie_WIDE.png",
-    "output": "assets/webp/categories/subcat_recht_ehe-familie_wide.webp",
-    "sanitizedName": "subcat_recht_ehe-familie_wide",
+    "source": "assets/png_1920/categories/subcat_finanzen_geldanlage_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_geldanlagen_wide.webp",
+    "sanitizedName": "subcat_finanzen_geldanlagen_wide",
     "type": "subcat-wide",
-    "termSlug": "ehe-familie",
+    "termSlug": "geldanlagen",
     "isWide": true,
-    "altText": "Ehe & Familie Banner",
-    "title": "Ehe & Familie Banner",
-    "bytes": 139972
+    "altText": "Geldanlagen Banner",
+    "title": "Geldanlagen Banner",
+    "bytes": 143660
   },
   {
-    "source": "assets/png_1920/categories/subcat_recht_mietrecht.png",
-    "output": "assets/webp/categories/subcat_recht_mietrecht.webp",
-    "sanitizedName": "subcat_recht_mietrecht",
+    "source": "assets/png_1920/categories/subcat_finanzen_konto_und_karten.png",
+    "output": "assets/webp/categories/subcat_finanzen_konto-karten.webp",
+    "sanitizedName": "subcat_finanzen_konto-karten",
     "type": "subcat-slider",
-    "termSlug": "mietrecht",
+    "termSlug": "konto-karten",
     "isWide": false,
-    "altText": "Mietrecht",
-    "title": "Mietrecht",
-    "bytes": 153158
+    "altText": "Konto & Karten",
+    "title": "Konto & Karten",
+    "bytes": 130874
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_konto_und_karten_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_konto-karten_wide.webp",
+    "sanitizedName": "subcat_finanzen_konto-karten_wide",
+    "type": "subcat-wide",
+    "termSlug": "konto-karten",
+    "isWide": true,
+    "altText": "Konto & Karten Banner",
+    "title": "Konto & Karten Banner",
+    "bytes": 105986
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_kredite_und_bauen.png",
+    "output": "assets/webp/categories/subcat_finanzen_kredite-bauen.webp",
+    "sanitizedName": "subcat_finanzen_kredite-bauen",
+    "type": "subcat-slider",
+    "termSlug": "kredite-bauen",
+    "isWide": false,
+    "altText": "Kredite & Bauen",
+    "title": "Kredite & Bauen",
+    "bytes": 137968
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_kredite_und_bauen_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_kredite-bauen_wide.webp",
+    "sanitizedName": "subcat_finanzen_kredite-bauen_wide",
+    "type": "subcat-wide",
+    "termSlug": "kredite-bauen",
+    "isWide": true,
+    "altText": "Kredite & Bauen Banner",
+    "title": "Kredite & Bauen Banner",
+    "bytes": 109804
   },
   {
     "source": "assets/png_1920/categories/subcat_recht_mietrecht_WIDE.png",
@@ -603,51 +625,150 @@
     "isWide": true,
     "altText": "Mietrecht Banner",
     "title": "Mietrecht Banner",
-    "bytes": 144606
+    "bytes": 91074
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_arbeitsrecht.png",
+    "output": "assets/webp/categories/subcat_recht_arbeitsrecht.webp",
+    "sanitizedName": "subcat_recht_arbeitsrecht",
+    "type": "subcat-slider",
+    "termSlug": "arbeitsrecht",
+    "isWide": false,
+    "altText": "Arbeitsrecht",
+    "title": "Arbeitsrecht",
+    "bytes": 128658
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_arbeitsrecht_WIDE.png",
+    "output": "assets/webp/categories/subcat_recht_arbeitsrecht_wide.webp",
+    "sanitizedName": "subcat_recht_arbeitsrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "arbeitsrecht",
+    "isWide": true,
+    "altText": "Arbeitsrecht Banner",
+    "title": "Arbeitsrecht Banner",
+    "bytes": 67776
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_ehe_und_familie.png",
+    "output": "assets/webp/categories/subcat_recht_ehe-familie.webp",
+    "sanitizedName": "subcat_recht_ehe-familie",
+    "type": "subcat-slider",
+    "termSlug": "ehe-familie",
+    "isWide": false,
+    "altText": "Ehe & Familie",
+    "title": "Ehe & Familie",
+    "bytes": 134932
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_ehe_und_familie_WIDE.png",
+    "output": "assets/webp/categories/subcat_recht_ehe-familie_wide.webp",
+    "sanitizedName": "subcat_recht_ehe-familie_wide",
+    "type": "subcat-wide",
+    "termSlug": "ehe-familie",
+    "isWide": true,
+    "altText": "Ehe & Familie Banner",
+    "title": "Ehe & Familie Banner",
+    "bytes": 94702
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_mietrecht.png",
+    "output": "assets/webp/categories/subcat_recht_mietrecht.webp",
+    "sanitizedName": "subcat_recht_mietrecht",
+    "type": "subcat-slider",
+    "termSlug": "mietrecht",
+    "isWide": false,
+    "altText": "Mietrecht",
+    "title": "Mietrecht",
+    "bytes": 155648
   },
   {
     "source": "assets/png_1920/categories/subcat_steuer_steuerarten.png",
-    "output": "assets/webp/categories/subcat_steuer_steuerarten.webp",
-    "sanitizedName": "subcat_steuer_steuerarten",
+    "output": "assets/webp/categories/subcat_steuern_steuerarten.webp",
+    "sanitizedName": "subcat_steuern_steuerarten",
     "type": "subcat-slider",
     "termSlug": "steuerarten",
     "isWide": false,
     "altText": "Steuerarten",
     "title": "Steuerarten",
-    "bytes": 140248
+    "bytes": 138948
   },
   {
     "source": "assets/png_1920/categories/subcat_steuer_steuerarten_WIDE.png",
-    "output": "assets/webp/categories/subcat_steuer_steuerarten_wide.webp",
-    "sanitizedName": "subcat_steuer_steuerarten_wide",
+    "output": "assets/webp/categories/subcat_steuern_steuerarten_wide.webp",
+    "sanitizedName": "subcat_steuern_steuerarten_wide",
     "type": "subcat-wide",
     "termSlug": "steuerarten",
     "isWide": true,
     "altText": "Steuerarten Banner",
     "title": "Steuerarten Banner",
-    "bytes": 121884
+    "bytes": 79996
   },
   {
     "source": "assets/png_1920/categories/subcat_steuer_steuererklärung.png",
-    "output": "assets/webp/categories/subcat_steuer_steuererklaerung.webp",
-    "sanitizedName": "subcat_steuer_steuererklaerung",
+    "output": "assets/webp/categories/subcat_steuern_steuererklaerung.webp",
+    "sanitizedName": "subcat_steuern_steuererklaerung",
     "type": "subcat-slider",
     "termSlug": "steuererklaerung",
     "isWide": false,
     "altText": "Steuererklärung",
     "title": "Steuererklärung",
-    "bytes": 141134
+    "bytes": 142732
   },
   {
     "source": "assets/png_1920/categories/subcat_steuer_steuererklärung_WIDE.png",
-    "output": "assets/webp/categories/subcat_steuer_steuererklaerung_wide.webp",
-    "sanitizedName": "subcat_steuer_steuererklaerung_wide",
+    "output": "assets/webp/categories/subcat_steuern_steuererklaerung_wide.webp",
+    "sanitizedName": "subcat_steuern_steuererklaerung_wide",
     "type": "subcat-wide",
     "termSlug": "steuererklaerung",
     "isWide": true,
     "altText": "Steuererklärung Banner",
     "title": "Steuererklärung Banner",
-    "bytes": 108802
+    "bytes": 75924
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerpflichtige.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerpflichtige.webp",
+    "sanitizedName": "subcat_steuern_steuerpflichtige",
+    "type": "subcat-slider",
+    "termSlug": "steuerpflichtige",
+    "isWide": false,
+    "altText": "Steuerpflichtige",
+    "title": "Steuerpflichtige",
+    "bytes": 132182
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerpflichtige_WIDE.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerpflichtige_wide.webp",
+    "sanitizedName": "subcat_steuern_steuerpflichtige_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuerpflichtige",
+    "isWide": true,
+    "altText": "Steuerpflichtige Banner",
+    "title": "Steuerpflichtige Banner",
+    "bytes": 96348
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen__tierversicherungen.png",
+    "output": "assets/webp/categories/subcat_versicherungen_tierversicherungen.webp",
+    "sanitizedName": "subcat_versicherungen_tierversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "tierversicherungen",
+    "isWide": false,
+    "altText": "Tierversicherungen",
+    "title": "Tierversicherungen",
+    "bytes": 128408
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_altersvorsorge.png",
+    "output": "assets/webp/categories/subcat_versicherungen_altersvorsorge.webp",
+    "sanitizedName": "subcat_versicherungen_altersvorsorge",
+    "type": "subcat-slider",
+    "termSlug": "altersvorsorge",
+    "isWide": false,
+    "altText": "Altersvorsorge",
+    "title": "Altersvorsorge",
+    "bytes": 113582
   },
   {
     "source": "assets/png_1920/categories/subcat_versicherungen_altersvorsorge_WIDE.png",
@@ -658,6 +779,171 @@
     "isWide": true,
     "altText": "Altersvorsorge Banner",
     "title": "Altersvorsorge Banner",
-    "bytes": 140784
+    "bytes": 79680
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_berufsunfähigkeit_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_berufsunfaehigkeit_wide.webp",
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit_wide",
+    "type": "subcat-wide",
+    "termSlug": "berufsunfaehigkeit",
+    "isWide": true,
+    "altText": "Berufsunfähigkeit Banner",
+    "title": "Berufsunfähigkeit Banner",
+    "bytes": 104118
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_erufsunfähigkeit.png",
+    "output": "assets/webp/categories/subcat_versicherungen_berufsunfaehigkeit.webp",
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit",
+    "type": "subcat-slider",
+    "termSlug": "berufsunfaehigkeit",
+    "isWide": false,
+    "altText": "Berufsunfähigkeit",
+    "title": "Berufsunfähigkeit",
+    "bytes": 132600
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_krankenversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_krankenversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_krankenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "krankenversicherung",
+    "isWide": false,
+    "altText": "Krankenversicherung",
+    "title": "Krankenversicherung",
+    "bytes": 152250
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_krankenversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_krankenversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_krankenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "krankenversicherung",
+    "isWide": true,
+    "altText": "Krankenversicherung Banner",
+    "title": "Krankenversicherung Banner",
+    "bytes": 99948
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_pflegeversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_pflegeversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung",
+    "type": "subcat-slider",
+    "termSlug": "pflegeversicherung",
+    "isWide": false,
+    "altText": "Pflegeversicherung",
+    "title": "Pflegeversicherung",
+    "bytes": 153598
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_pflegeversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_pflegeversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "pflegeversicherung",
+    "isWide": true,
+    "altText": "Pflegeversicherung Banner",
+    "title": "Pflegeversicherung Banner",
+    "bytes": 114070
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_rentenversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_rentenversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_rentenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "rentenversicherung",
+    "isWide": false,
+    "altText": "Rentenversicherung",
+    "title": "Rentenversicherung",
+    "bytes": 135854
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_rentenversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_rentenversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_rentenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "rentenversicherung",
+    "isWide": true,
+    "altText": "Rentenversicherung Banner",
+    "title": "Rentenversicherung Banner",
+    "bytes": 82032
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sachversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sachversicherungen.webp",
+    "sanitizedName": "subcat_versicherungen_sachversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "sachversicherungen",
+    "isWide": false,
+    "altText": "Sachversicherungen",
+    "title": "Sachversicherungen",
+    "bytes": 108192
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sachversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sachversicherungen_wide.webp",
+    "sanitizedName": "subcat_versicherungen_sachversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "sachversicherungen",
+    "isWide": true,
+    "altText": "Sachversicherungen Banner",
+    "title": "Sachversicherungen Banner",
+    "bytes": 102666
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sozialversicherungen_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sozialversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_sozialversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "sozialversicherung",
+    "isWide": true,
+    "altText": "Sozialversicherung Banner",
+    "title": "Sozialversicherung Banner",
+    "bytes": 81964
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sozielversicherungen.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sozialversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_sozialversicherung",
+    "type": "subcat-slider",
+    "termSlug": "sozialversicherung",
+    "isWide": false,
+    "altText": "Sozialversicherung",
+    "title": "Sozialversicherung",
+    "bytes": 105722
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_tierversicherungen_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_tierversicherungen_wide.webp",
+    "sanitizedName": "subcat_versicherungen_tierversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "tierversicherungen",
+    "isWide": true,
+    "altText": "Tierversicherungen Banner",
+    "title": "Tierversicherungen Banner",
+    "bytes": 81546
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_unfallversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_unfallversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_unfallversicherung",
+    "type": "subcat-slider",
+    "termSlug": "unfallversicherung",
+    "isWide": false,
+    "altText": "Unfallversicherung",
+    "title": "Unfallversicherung",
+    "bytes": 143032
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_unfallversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_unfallversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_unfallversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "unfallversicherung",
+    "isWide": true,
+    "altText": "Unfallversicherung Banner",
+    "title": "Unfallversicherung Banner",
+    "bytes": 128146
   }
 ]
