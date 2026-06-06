@@ -14,7 +14,9 @@ export async function GET(request: NextRequest) {
     // Fetch tools (posts + CPTs) by category and limit to 3
     const tools = await getPostsAndCPTsByCategory(category);
 
-    return NextResponse.json(tools.slice(0, 3));
+    return NextResponse.json(tools.slice(0, 3), {
+      headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
+    });
   } catch (error) {
     console.error("Error fetching megamenu tools:", error);
     return NextResponse.json({ error: "Failed to fetch tools" }, { status: 500 });

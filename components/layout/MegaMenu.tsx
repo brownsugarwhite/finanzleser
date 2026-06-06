@@ -134,6 +134,32 @@ export default function MegaMenu({
     applySubData(first);
   }, [items, preloadedData]);
 
+  // Alle Subkategorien der aktiven Kategorie im Hintergrund vorladen, sobald
+  // das Megamenü öffnet — so erscheinen die 3 neuesten Beiträge beim Umschalten
+  // sofort (ohne Loader), nicht erst nach dem Fetch beim Klick.
+  useEffect(() => {
+    items.forEach((item) => {
+      const href = item.href;
+      if (cacheRef.current[href]) return;
+      const slug = getCategorySlug(href);
+      Promise.all([
+        fetch(`/api/megamenu/posts?category=${slug}`).then((r) => (r.ok ? r.json() : { posts: [], hasMore: false })),
+        fetch(`/api/megamenu/tools?category=${slug}`).then((r) => (r.ok ? r.json() : [])),
+      ])
+        .then(([postsData, toolsData]) => {
+          cacheRef.current[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
+          // Falls der User genau auf diese Sub wartet (Loader sichtbar), sofort zeigen.
+          if (href === currentSubRef.current) {
+            setPosts(postsData.posts);
+            setHasMorePosts(postsData.hasMore);
+            setTools(toolsData);
+            setLoading(false);
+          }
+        })
+        .catch(() => {});
+    });
+  }, [items]);
+
   // Switch subcategory
   const switchSub = (href: string) => {
     if (href === selectedSub) return;
@@ -552,10 +578,10 @@ export default function MegaMenu({
         </div>
       </div>
 
-      {/* Legal Links */}
+      {/* Legal Links — links unter dem Booklet (wie zuvor) */}
       <div data-megamenu-panel style={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         marginTop: 16,
         maxWidth: 700,
         width: "100%",
