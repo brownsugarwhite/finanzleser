@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import type { ChecklisteData } from "./types";
 import type { CheckboxPosition } from "@/lib/checklisteParser";
 import InteraktiveCheckliste from "./InteraktiveCheckliste";
+import { refreshScrollTriggers } from "@/lib/refreshScrollTriggers";
 
 interface Props {
   slug: string;
@@ -34,9 +35,15 @@ export default function ChecklisteInline({ slug }: Props) {
       });
   }, [slug]);
 
+  // Nach dem Render der fertigen Checkliste hat sich die Dokumenthöhe geändert
+  // → ScrollTrigger-Positionen (Logo-/Leo-Batch-Flip) neu vermessen.
+  useEffect(() => {
+    if (!loading && data) refreshScrollTriggers();
+  }, [loading, data]);
+
   if (loading) {
     return (
-      <div style={{ padding: 24, textAlign: "center", color: "var(--color-text-medium)" }}>
+      <div style={{ minHeight: 400, padding: 24, textAlign: "center", color: "var(--color-text-medium)" }}>
         Checkliste wird geladen...
       </div>
     );

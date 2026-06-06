@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { refreshScrollTriggers } from "@/lib/refreshScrollTriggers";
 
 interface ScriptConfig {
   type: string;
@@ -75,6 +76,12 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+
+  // Iframe-Höhe ändert sich (postMessage) bzw. Embed fertig geladen →
+  // Dokumenthöhe verschiebt sich, ScrollTrigger neu vermessen.
+  useEffect(() => {
+    if (!loading) refreshScrollTriggers();
+  }, [loading, iframeHeight]);
 
   // JS-Widget laden
   useEffect(() => {
@@ -152,7 +159,7 @@ export default function VergleichEmbed({ slug, formHeader }: VergleichEmbedProps
       {formHeader}
 
       {loading && (
-        <div style={{ padding: 48, textAlign: "center", color: "#999" }}>
+        <div style={{ minHeight: 600, padding: 48, textAlign: "center", color: "#999" }}>
           Vergleich wird geladen...
         </div>
       )}
