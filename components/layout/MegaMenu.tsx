@@ -229,10 +229,20 @@ export default function MegaMenu({
   }, [selectedSub, posts, tools, loading]);
 
   return (
-    <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
+    <div
+      style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }}
+      onClick={(e) => {
+        // Klick in den leeren Bereich neben/zwischen den Panels schließt das Menü.
+        // Klicks auf die eigentlichen Panels (weißes Booklet, Finanztools, Footer)
+        // werden ignoriert.
+        if (!(e.target as HTMLElement).closest("[data-megamenu-panel]")) {
+          onClose();
+        }
+      }}
+    >
       <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Gray bar — behind bookmark, above overflow:hidden container */}
-        <div style={{
+        <div data-megamenu-panel style={{
           position: "absolute",
           left: "50%",
           top: 0,
@@ -245,7 +255,7 @@ export default function MegaMenu({
         }} />
 
         {/* Bookmark Divider — above overflow:hidden container */}
-        <div style={{
+        <div data-megamenu-panel style={{
           position: "absolute",
           left: "50%",
           top: 0,
@@ -272,6 +282,7 @@ export default function MegaMenu({
         {/* Center Container: Subcategories + Posts */}
         <div
           ref={containerRef}
+          data-megamenu-panel
           style={{
           display: "flex",
           flexDirection: "column",
@@ -463,7 +474,7 @@ export default function MegaMenu({
         </div>
 
         {/* Right: Finanztools (transparent, absolute) */}
-        <div style={{ position: "absolute", right: 0, top: 0, width: 230, padding: "12px 0", textAlign: "right" }}>
+        <div data-megamenu-panel style={{ position: "absolute", right: 0, top: 0, width: 230, padding: "12px 0", textAlign: "right" }}>
           <Link
             href="/finanztools"
             onClick={onClose}
@@ -542,7 +553,7 @@ export default function MegaMenu({
       </div>
 
       {/* Legal Links */}
-      <div style={{
+      <div data-megamenu-panel style={{
         display: "flex",
         justifyContent: "center",
         marginTop: 16,
