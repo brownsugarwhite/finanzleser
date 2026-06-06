@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import { getToolCategories } from "@/lib/wordpress";
 import NewsletterBanner from "@/components/sections/NewsletterBanner";
 import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
@@ -135,6 +136,27 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
           <Spacer noMargin maxWidth="100%" />
         </div>
         <div className="pt-8 pb-6">
+          {/* Trustpilot TrustBox (Micro Combo) */}
+          <Script
+            src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+            strategy="afterInteractive"
+          />
+          <div className="footer-trustpilot mb-6" style={{ maxWidth: 320 }}>
+            <div
+              className="trustpilot-widget"
+              data-locale="de-DE"
+              data-template-id="5419b6ffb0d04a076446a9af"
+              data-businessunit-id="65095be226c6ff8e9dedad97"
+              data-style-height="20px"
+              data-style-width="100%"
+              data-token="25522917-e563-49b9-abd1-73b98233e63d"
+            >
+              <a href="https://de.trustpilot.com/review/finconext.de" target="_blank" rel="noopener">
+                Trustpilot
+              </a>
+            </div>
+          </div>
+
           {/* Legal Links */}
           <div className="footer-legal mb-6">
             <ul className="flex flex-wrap gap-4 justify-center md:justify-start">
