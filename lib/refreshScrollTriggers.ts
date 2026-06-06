@@ -1,4 +1,5 @@
 import { ScrollTrigger } from "@/lib/gsapConfig";
+import { getActiveOverlay } from "@/lib/overlayController";
 
 let pending: ReturnType<typeof setTimeout> | null = null;
 
@@ -16,6 +17,9 @@ export function refreshScrollTriggers(delay = 150) {
   if (pending) clearTimeout(pending);
   pending = setTimeout(() => {
     pending = null;
+    // Nicht refreshen während ein Overlay offen ist (Inhalt skaliert/geblurrt
+    // → falsche Messung). Nach dem Schließen refresht ContentScaler ohnehin.
+    if (getActiveOverlay() !== null) return;
     ScrollTrigger.refresh();
   }, delay);
 }
