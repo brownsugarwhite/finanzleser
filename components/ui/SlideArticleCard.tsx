@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useRef, useState, useSyncExternalStore } from 'react';
+import { memo, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
@@ -62,6 +62,13 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const { openPreview, isOpen, prefetchExtras } = useArticlePreview();
   const sliderCtx = useSliderPreviewContext();
+
+  // Vorschau-Daten für die ersten (initial sichtbaren) Karten schon beim Mount
+  // vorladen — auf Mobile gibt es kein Hover, sonst würde der Fetch erst beim
+  // Antippen (= Öffnen) starten und das Skeleton bliebe lange stehen.
+  useEffect(() => {
+    if (typeof index === 'number' && index < 4) prefetchExtras(post.slug);
+  }, [index, post.slug, prefetchExtras]);
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];

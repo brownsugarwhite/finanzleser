@@ -352,6 +352,32 @@ export async function getMegamenuPostsByCategory(
   }
 }
 
+// Schlanke Query nur für die Artikel-Vorschau (erster Absatz, Lesezeit, Tools).
+// getPostBySlug zieht Autor, alle Kategorien + ACF — overkill für die Preview
+// und spürbar langsamer. Hier nur content laden → schnellerer Roundtrip, kürzeres
+// Skeleton im Vorschauslider.
+export async function getPostContentBySlug(slug: string): Promise<string | null> {
+  const client = getClient();
+  const query = gql`
+    query GetPostContent($slug: String!) {
+      posts(where: { name: $slug }) {
+        nodes {
+          content
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{ posts: { nodes: Array<{ content?: string }> } }>(query, { slug });
+    const node = data.posts.nodes[0];
+    if (!node) return null;
+    return node.content || "";
+  } catch (error) {
+    console.error(`Error fetching post content for "${slug}":`, error);
+    return null;
+  }
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const client = getClient();
 

@@ -400,6 +400,30 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     if (el) imageRefs.current.set(slug, el);
     else imageRefs.current.delete(slug);
   }, []);
+
+  // Desktop: Das Titelbild ist ein absolut positioniertes GESCHWISTER der Box
+  // und skaliert daher NICHT automatisch mit der Box-Scale-Animation (es würde
+  // sonst „über" der schrumpfenden Karte liegen bleiben). Hier skalieren wir das
+  // Bild synchron mit — transformOrigin = Karten-Zentrum relativ zur Bild-Ecke
+  // (Bild und Box teilen denselben Containing-Block), damit es exakt mit der
+  // Karte mitwandert. Mobile: Bild ist Kind der Box → skaliert ohnehin mit.
+  const applyImageScale = useCallback(
+    (slug: string, scale: number, tween?: { duration: number; ease: string }) => {
+      const mobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+      if (mobile) return;
+      const img = imageRefs.current.get(slug);
+      const box = boxRefs.current.get(slug);
+      if (!img || !box) return;
+      img.style.transformOrigin = `${box.offsetWidth / 2 - PREVIEW_PADDING}px ${box.offsetHeight / 2 - PREVIEW_PADDING_TOP}px`;
+      if (tween) gsap.to(img, { scale, duration: tween.duration, ease: tween.ease, overwrite: "auto" });
+      else gsap.set(img, { scale });
+    },
+    []
+  );
+  const clearImageTransform = useCallback((slug: string) => {
+    const img = imageRefs.current.get(slug);
+    if (img) gsap.set(img, { clearProps: "transform,transformOrigin" });
+  }, []);
   const setTextRef = useCallback((slug: string) => (el: HTMLDivElement | null) => {
     if (el) textRefs.current.set(slug, el);
     else textRefs.current.delete(slug);
@@ -880,12 +904,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         ? 1 - SLIDE_SCALE_OFFSET * lastDragProgressRef.current
         : 1;
       gsap.set(oldBox, { x: 0, scale: startScale, filter: "none" });
+      if (oldPost) applyImageScale(oldPost.slug, startScale);
     }
     if (newBox) {
       const startScale = dragNavRef.current
         ? 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * lastDragProgressRef.current
         : 1 - SLIDE_SCALE_OFFSET;
       gsap.set(newBox, { x: 0, scale: startScale, filter: "none" });
+      if (newPost) applyImageScale(newPost.slug, startScale);
     }
 
     // Drag-Path und Click-Path liefern unterschiedliche Ausgangspunkte:
@@ -953,10 +979,13 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         }
         if (oldBox) gsap.set(oldBox, { clearProps: "transform" });
         if (newBox) gsap.set(newBox, { clearProps: "transform" });
+        if (oldPost) clearImageTransform(oldPost.slug);
+        if (newPost) clearImageTransform(newPost.slug);
       },
     });
     // Scale parallel zum Mask-Wisch — auf BOX (nicht slide-wrapper) damit
-    // slide-wrapper keinen Stacking-Context bekommt.
+    // slide-wrapper keinen Stacking-Context bekommt. Das Bild (Desktop-Sibling)
+    // wird synchron mitskaliert.
     if (oldBox) {
       gsap.to(oldBox, {
         scale: 1 - SLIDE_SCALE_OFFSET,
@@ -964,6 +993,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         ease: dynamicEase,
         overwrite: "auto",
       });
+      if (oldPost) applyImageScale(oldPost.slug, 1 - SLIDE_SCALE_OFFSET, { duration: dynamicDuration, ease: dynamicEase });
     }
     if (newBox) {
       gsap.to(newBox, {
@@ -972,6 +1002,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
         ease: dynamicEase,
         overwrite: "auto",
       });
+      if (newPost) applyImageScale(newPost.slug, 1, { duration: dynamicDuration, ease: dynamicEase });
     }
     // Ensure new slide's text wrapper is visible (opacity 0 default from JSX)
     if (newPost) {
@@ -1110,10 +1141,16 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
           // Context auf slide-wrapper, Sticky-Button leakt.
           const currentBox = boxRefs.current.get(post!.slug);
           const candidateBox = boxRefs.current.get(candidatePost.slug);
-          if (currentBox) gsap.set(currentBox, { scale: 1 - SLIDE_SCALE_OFFSET * progress });
-          if (candidateBox) gsap.set(candidateBox, {
-            scale: 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * progress,
-          });
+          if (currentBox) {
+            gsap.set(currentBox, { scale: 1 - SLIDE_SCALE_OFFSET * progress });
+            applyImageScale(post!.slug, 1 - SLIDE_SCALE_OFFSET * progress);
+          }
+          if (candidateBox) {
+            gsap.set(candidateBox, {
+              scale: 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * progress,
+            });
+            applyImageScale(candidatePost.slug, 1 - SLIDE_SCALE_OFFSET + SLIDE_SCALE_OFFSET * progress);
+          }
           lastDragProgressRef.current = progress;
           // Candidate's text wrapper starts at opacity 0 (set during opening morph
           // for non-initial slides) — make its content visible during drag.
@@ -1200,9 +1237,12 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               const candidateBox = candidatePost ? boxRefs.current.get(candidatePost.slug) : null;
               if (currentBox) gsap.set(currentBox, { clearProps: "transform" });
               if (candidateBox) gsap.set(candidateBox, { clearProps: "transform" });
+              clearImageTransform(post!.slug);
+              if (candidatePost) clearImageTransform(candidatePost.slug);
             },
           });
           // Scale federt parallel zurück (auf BOX): outgoing → 1.0, incoming → 0.96.
+          // Bild (Desktop-Sibling) federt synchron mit.
           const currentBox = boxRefs.current.get(post!.slug);
           const candidateBox = boxRefs.current.get(candidatePost!.slug);
           if (currentBox) {
@@ -1212,6 +1252,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               ease: "power2.out",
               overwrite: "auto",
             });
+            applyImageScale(post!.slug, 1, { duration: 0.35, ease: "power2.out" });
           }
           if (candidateBox) {
             gsap.to(candidateBox, {
@@ -1220,6 +1261,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
               ease: "power2.out",
               overwrite: "auto",
             });
+            applyImageScale(candidatePost!.slug, 1 - SLIDE_SCALE_OFFSET, { duration: 0.35, ease: "power2.out" });
           }
         } else {
           // Rubber-band reset (auf BOX)

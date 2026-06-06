@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPostBySlug } from "@/lib/wordpress";
+import { getPostContentBySlug } from "@/lib/wordpress";
 import { getFirstParagraph, getReadingTimeMinutes, detectToolTypes } from "@/lib/content-utils";
 
 export async function GET(request: NextRequest) {
@@ -10,12 +10,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "slug required" }, { status: 400 });
   }
 
-  const post = await getPostBySlug(slug);
-  if (!post) {
+  const content = await getPostContentBySlug(slug);
+  if (content === null) {
     return NextResponse.json({ error: "not found" }, { status: 404 });
   }
 
-  const content = post.content || "";
   return NextResponse.json({
     firstParagraph: getFirstParagraph(content),
     readingTime: getReadingTimeMinutes(content),
