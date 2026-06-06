@@ -352,6 +352,71 @@ export async function getMegamenuPostsByCategory(
   }
 }
 
+export type MegamenuTool = { type: "rechner" | "vergleich" | "checkliste"; slug: string; title: string };
+
+// Die 3 neuesten Finanztools, die in den Beiträgen einer Subkategorie eingebaut
+// sind (neueste Beiträge zuerst). Ein Tool darf max. 2× erscheinen. Vollautomatisch
+// aus dem Beitrags-Content — keine Backend-Pflege nötig. Verlinkung nach Typ.
+export async function getMegamenuToolsByCategory(categorySlug: string): Promise<MegamenuTool[]> {
+  const client = getClient();
+  const postsQuery = gql`
+    query GetCatPostContents($slug: [String!]!) {
+      categories(where: { slug: $slug }) {
+        nodes {
+          posts(first: 25, where: { orderby: { field: DATE, order: DESC } }) {
+            nodes { content }
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{
+      categories: { nodes: Array<{ posts: { nodes: Array<{ content?: string }> } }> };
+    }>(postsQuery, { slug: [categorySlug] });
+    const posts = data.categories.nodes[0]?.posts.nodes || [];
+
+    const counts = new Map<string, number>();
+    const picked: Array<{ type: "rechner" | "vergleich" | "checkliste"; slug: string }> = [];
+    for (const p of posts) {
+      // Regex PRO Beitrag neu erzeugen — sonst trägt lastIndex (g-Flag) über
+      // verschiedene content-Strings hinweg und überspringt Treffer.
+      const embedRe = /data-finanzleser-(rechner|vergleich|checkliste)="([^"]+)"|wp:finanzleser\/(rechner|vergleich|checkliste)\s*\{"slug":"([^"]+)"\}/g;
+      const content = p.content || "";
+      let m: RegExpExecArray | null;
+      while ((m = embedRe.exec(content)) !== null) {
+        const type = (m[1] || m[3]) as "rechner" | "vergleich" | "checkliste";
+        const slug = m[2] || m[4];
+        if (!type || !slug) continue;
+        const key = `${type}:${slug}`;
+        const c = counts.get(key) || 0;
+        if (c >= 2) continue; // dasselbe Tool max. 2×
+        counts.set(key, c + 1);
+        picked.push({ type, slug });
+        if (picked.length >= 3) break;
+      }
+      if (picked.length >= 3) break;
+    }
+    if (picked.length === 0) return [];
+
+    // Titel pro Tool auflösen (aliased Single-Node-Queries je CPT-Typ).
+    const fieldFor = (t: string) => (t === "rechner" ? "rechnerBy" : t === "checkliste" ? "checklisteBy" : "vergleichBy");
+    const aliases = picked
+      .map((e, i) => `t${i}: ${fieldFor(e.type)}(slug: ${JSON.stringify(e.slug)}) { title slug }`)
+      .join("\n");
+    try {
+      const titleData = await client.request<Record<string, { title?: string } | null>>(`query { ${aliases} }`);
+      return picked.map((e, i) => ({ ...e, title: titleData[`t${i}`]?.title || e.slug }));
+    } catch {
+      // Titel-Auflösung fehlgeschlagen → Slug als Fallback-Titel (Links bleiben korrekt).
+      return picked.map((e) => ({ ...e, title: e.slug }));
+    }
+  } catch (error) {
+    console.error(`Error fetching megamenu tools for "${categorySlug}":`, error);
+    return [];
+  }
+}
+
 // Schlanke Query nur für die Artikel-Vorschau (erster Absatz, Lesezeit, Tools).
 // getPostBySlug zieht Autor, alle Kategorien + ACF — overkill für die Preview
 // und spürbar langsamer. Hier nur content laden → schnellerer Roundtrip, kürzeres

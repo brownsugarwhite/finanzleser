@@ -11,18 +11,23 @@ function boldYears(text: string) {
     /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 900 }}>{part}</strong> : part
   )}</span>;
 }
-import type { Post, Rechner } from "@/lib/types";
+import type { Post } from "@/lib/types";
+import type { MegamenuTool } from "@/lib/wordpress";
 import CircularLoader from "@/components/ui/CircularLoader";
 
 export type ToolType = "rechner" | "checkliste" | "vergleich";
 export type MegaMenuPost = Post & { tools?: ToolType[] };
-export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: Rechner[] }>;
+export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: MegamenuTool[] }>;
 
 const TOOL_DOT_COLORS: Record<ToolType, string> = {
   rechner: "var(--color-tool-rechner)",
   vergleich: "var(--color-tool-vergleiche)",
   checkliste: "var(--color-tool-checklisten)",
 };
+
+// Finanztools-Spalte: Pfad-Segment, Label und Badge-Farbe je Tool-Typ.
+const TOOL_PATH: Record<ToolType, string> = { rechner: "rechner", vergleich: "vergleiche", checkliste: "checklisten" };
+const TOOL_LABEL: Record<ToolType, string> = { rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste" };
 
 function ToolDots({ tools }: { tools?: ToolType[] }) {
   if (!tools || tools.length === 0) return null;
@@ -76,14 +81,12 @@ export default function MegaMenu({
 
   const [posts, setPosts] = useState<MegaMenuPost[]>([]);
   const [hasMorePosts, setHasMorePosts] = useState(false);
-  const [tools, setTools] = useState<Rechner[]>([]);
+  const [tools, setTools] = useState<MegamenuTool[]>([]);
   const [loading, setLoading] = useState(false);
   const cacheRef = useRef<PreloadedData>({});
   const currentSubRef = useRef<string>(items[0]?.href || "");
   // Posts-Spalte (Liste/Loader) zum Ein-/Ausblenden beim Sub-Wechsel
   const postsBodyRef = useRef<HTMLDivElement>(null);
-
-  const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory || "rechner";
 
   const getCategorySlug = (href: string): string => {
     const parts = href.split("/").filter(Boolean);
@@ -521,12 +524,12 @@ export default function MegaMenu({
           {tools.length > 0 ? (
             <nav style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
               {tools.map((tool, idx) => (
-                <div key={tool.id}>
+                <div key={`${tool.type}-${tool.slug}-${idx}`}>
                   {idx > 0 && (
                     <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "13px 12px" }} />
                   )}
                   <Link
-                    href={`/finanztools/rechner/${tool.slug}`}
+                    href={`/finanztools/${TOOL_PATH[tool.type]}/${tool.slug}`}
                     onClick={onClose}
                     style={{
                       display: "flex",
@@ -559,13 +562,9 @@ export default function MegaMenu({
                       color: "white",
                       padding: "2px 8px",
                       borderRadius: 0,
-                      background: toolCategory === "rechner"
-                        ? "var(--color-tool-rechner)"
-                        : toolCategory === "vergleich"
-                        ? "var(--color-tool-vergleiche)"
-                        : "var(--color-tool-checklisten)",
+                      background: TOOL_DOT_COLORS[tool.type],
                     }}>
-                      {toolCategory === "rechner" ? "Rechner" : toolCategory === "vergleich" ? "Vergleich" : "Checkliste"}
+                      {TOOL_LABEL[tool.type]}
                     </span>
                     {boldYears(tool.title)}
                   </Link>
