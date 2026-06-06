@@ -176,6 +176,12 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
     const raw = parseContent(content);
     const out: RenderUnit[] = [];
     let headingIndex = 0;
+    // Dedupe identischer Tool-Embeds (Typ+Slug): Ein Beitrag kann denselben
+    // Checklisten-/Rechner-/Vergleich-Embed versehentlich doppelt enthalten —
+    // z.B. ein roher <div data-finanzleser-checkliste> (Custom-HTML) PLUS der
+    // gerenderte Gutenberg-Block, die beide zum gleichen <div> rendern. Wir
+    // rendern jeden Tool-Slug nur einmal. Verschiedene Slugs bleiben erhalten.
+    const seenTools = new Set<string>();
     raw.forEach((part, i) => {
       if (part.type === "html") {
         const { html, count } = addHeadingIds(part.value, headingIndex);
@@ -189,6 +195,9 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
           }
         });
       } else if (part.type === "rechner" || part.type === "checkliste" || part.type === "vergleich") {
+        const toolKey = `${part.type}:${part.value}`;
+        if (seenTools.has(toolKey)) return; // Duplikat → nur einmal rendern
+        seenTools.add(toolKey);
         const headingId = `heading-${headingIndex}`;
         headingIndex++;
         out.push({ kind: "tool", toolType: part.type, slug: part.value, headingId, itemKey: `${i}` });
