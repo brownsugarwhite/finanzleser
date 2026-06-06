@@ -12,6 +12,7 @@ function boldYears(text: string) {
   )}</span>;
 }
 import type { Post, Rechner } from "@/lib/types";
+import CircularLoader from "@/components/ui/CircularLoader";
 
 export type ToolType = "rechner" | "checkliste" | "vergleich";
 export type MegaMenuPost = Post & { tools?: ToolType[] };
@@ -76,8 +77,11 @@ export default function MegaMenu({
   const [posts, setPosts] = useState<MegaMenuPost[]>([]);
   const [hasMorePosts, setHasMorePosts] = useState(false);
   const [tools, setTools] = useState<Rechner[]>([]);
+  const [loading, setLoading] = useState(false);
   const cacheRef = useRef<PreloadedData>({});
   const currentSubRef = useRef<string>(items[0]?.href || "");
+  // Posts-Spalte (Liste/Loader) zum Ein-/Ausblenden beim Sub-Wechsel
+  const postsBodyRef = useRef<HTMLDivElement>(null);
 
   const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory || "rechner";
 
@@ -95,11 +99,14 @@ export default function MegaMenu({
   const applySubData = (href: string) => {
     const data = cacheRef.current[href];
     if (data) {
+      // Cache-Hit: sofort, kein Loader
+      setLoading(false);
       setPosts(data.posts);
       setHasMorePosts(data.hasMore);
       setTools(data.tools);
     } else {
-      // Fetch on demand, then apply all at once
+      // Cache-Miss: Loader zeigen, dann nachladen
+      setLoading(true);
       const slug = getCategorySlug(href);
       Promise.all([
         fetch(`/api/megamenu/posts?category=${slug}`).then(r => r.ok ? r.json() : { posts: [], hasMore: false }),
@@ -111,8 +118,11 @@ export default function MegaMenu({
           setPosts(postsData.posts);
           setHasMorePosts(postsData.hasMore);
           setTools(toolsData);
+          setLoading(false);
         }
-      }).catch(() => {});
+      }).catch(() => {
+        if (href === currentSubRef.current) setLoading(false);
+      });
     }
   };
 
@@ -127,10 +137,22 @@ export default function MegaMenu({
   // Switch subcategory
   const switchSub = (href: string) => {
     if (href === selectedSub) return;
+    // Aktuellen Inhalt sofort ausblenden (Fade-out) bevor neue Daten kommen
+    if (postsBodyRef.current) {
+      gsap.to(postsBodyRef.current, { opacity: 0, duration: 0.12, ease: "power1.in" });
+    }
     currentSubRef.current = href;
     setSelectedSub(href);
     applySubData(href);
   };
+
+  // Posts-Spalte einblenden, sobald sich der gerenderte Inhalt ändert
+  // (neue Sub gewählt, Loader an/aus). Schlichter Fade.
+  useEffect(() => {
+    const el = postsBodyRef.current;
+    if (!el) return;
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" });
+  }, [selectedSub, loading]);
 
   // Keep all seen category navs so they're always in the DOM
   const allNavsRef = useRef<Record<string, NavSubItem[]>>({});
@@ -204,7 +226,7 @@ export default function MegaMenu({
     void el.offsetHeight;
     el.style.transition = "height 0.4s ease-in-out";
     el.style.height = newHeight + "px";
-  }, [selectedSub, posts, tools]);
+  }, [selectedSub, posts, tools, loading]);
 
   return (
     <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
@@ -372,7 +394,12 @@ export default function MegaMenu({
             }}>
               Neuste Beiträge
             </div>
-            {posts.length > 0 ? (
+            <div ref={postsBodyRef} style={{ minHeight: 140 }}>
+            {loading ? (
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: 140 }}>
+                <CircularLoader />
+              </div>
+            ) : posts.length > 0 ? (
               <nav style={{ display: "flex", flexDirection: "column", gap: 13, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
                 {posts.map((post) => (
                   <Link
@@ -412,7 +439,7 @@ export default function MegaMenu({
             ) : (
               <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Keine Beiträge gefunden</div>
             )}
-            {hasMorePosts && (
+            {!loading && hasMorePosts && (
               <Link
                 href={selectedSub}
                 onClick={onClose}
@@ -430,6 +457,7 @@ export default function MegaMenu({
                 Alle Beiträge ansehen <span style={{ display: "inline-block", width: 13, height: 0, borderTop: "1px solid currentColor", verticalAlign: "middle", marginLeft: 4 }} /><svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", display: "inline", verticalAlign: "middle", marginLeft: -4 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
               </Link>
             )}
+            </div>
           </div>
           </div>
         </div>
