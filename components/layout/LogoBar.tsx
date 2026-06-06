@@ -47,6 +47,11 @@ export default function LogoBar() {
   const stateRef = useRef<LogoState>("long-visible");
   const menuOpenRef = useRef(false);
   const reconcileSuspendedUntilRef = useRef(0);
+  // Pending „Logo ausblenden"-Timer (Landing). Muss gecancelt werden, sobald das
+  // Logo wieder eingeblendet wird — sonst feuert beim schnellen Hin-/Herscrollen
+  // ein verwaister Hide-Timer NACH dem erneuten shortIn und blendet das gerade
+  // eingeblendete Logo sofort wieder aus.
+  const hideTimerRef = useRef<number | null>(null);
   // Saved state from before a mobile preview-overlay opened. Restored on close.
   const previewPriorStateRef = useRef<LogoState | null>(null);
   // Restore-Timer (cancel-bar wenn ein erneutes menu-opened reinkommt — z.B.
@@ -84,6 +89,23 @@ export default function LogoBar() {
     if (!el) return;
     el.style.pointerEvents = visible ? "auto" : "none";
     el.style.visibility = visible ? "visible" : "hidden";
+  };
+
+  // Pending Hide-Timer abbrechen (wird beim erneuten Einblenden gerufen).
+  const cancelHide = () => {
+    if (hideTimerRef.current !== null) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  };
+  // Logo nach `delay`ms ausblenden — aber nur wenn der Zustand bis dahin noch
+  // "hidden" ist (ein zwischenzeitliches shortIn cancelt den Timer ohnehin).
+  const scheduleHide = (delay = 500) => {
+    cancelHide();
+    hideTimerRef.current = window.setTimeout(() => {
+      hideTimerRef.current = null;
+      if (stateRef.current === "hidden") setLogoVisible(false);
+    }, delay);
   };
 
   // Init / pathname change → snap logo + state
@@ -193,6 +215,7 @@ export default function LogoBar() {
       const onFlewHome = () => {
         if (menuOpenRef.current) return;
         if (stateRef.current !== "hidden") return;
+        cancelHide(); // verwaisten Hide-Timer abbrechen
         setLogoVisible(true);
         logoRef.current?.playShortIn();
         stateRef.current = "short-visible";
@@ -204,7 +227,7 @@ export default function LogoBar() {
         stateRef.current = "hidden";
         // visibility erst NACH der Out-Animation hidden setzen — sonst
         // wird der Out-Tween nicht sichtbar.
-        setTimeout(() => setLogoVisible(false), 500);
+        scheduleHide(500);
       };
       window.addEventListener("leo-flew-home", onFlewHome);
       window.addEventListener("revolver-far-from-bottom", onRevolverFar);
@@ -218,6 +241,7 @@ export default function LogoBar() {
     const onNavOut = () => {
       if (menuOpenRef.current) return;
       if (stateRef.current !== "hidden") return;
+      cancelHide(); // verwaisten Hide-Timer abbrechen
       setLogoVisible(true);
       logoRef.current?.playShortIn();
       stateRef.current = "short-visible";
@@ -227,7 +251,7 @@ export default function LogoBar() {
       if (stateRef.current !== "short-visible") return;
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      setTimeout(() => setLogoVisible(false), 500);
+      scheduleHide(500);
     };
 
     // Reconcile: if logo ended up "short-visible" while still in the
@@ -248,7 +272,7 @@ export default function LogoBar() {
       if (navEl.getBoundingClientRect().bottom <= 0) return; // TopNav already out
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      setTimeout(() => setLogoVisible(false), 500);
+      scheduleHide(500);
     };
 
     window.addEventListener("nav-scrolled-out", onNavOut);
@@ -293,7 +317,7 @@ export default function LogoBar() {
           logoRef.current?.playLongOut();
           stateRef.current = "hidden";
         }
-        setTimeout(() => setLogoVisible(false), 1300);
+        scheduleHide(1300);
         return;
       }
 
@@ -382,7 +406,7 @@ export default function LogoBar() {
         // Open hat hidden→long-visible via longIn gemacht → Close komplett aus.
         logoRef.current?.playLongOut();
         stateRef.current = "hidden";
-        setTimeout(() => setLogoVisible(false), 1300);
+        scheduleHide(1300);
         return;
       }
       // priorState === "short-visible" oder null (Defensive) → shrink zurück.
