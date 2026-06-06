@@ -12,6 +12,7 @@ import InstagramDots from "@/components/ui/InstagramDots";
 import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
 import type { PreviewExtras, PreviewTool } from "./ArticlePreviewProvider";
 import type { PreviewSliderContext } from "./ArticleSliderContext";
+import { openOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 
 initGSAP();
 
@@ -480,7 +481,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     return () => {
       document.body.style.overflow = previousOverflow;
       document.body.style.paddingRight = previousPadRight;
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("preview");
 
       // Pending-Timeouts clearen — verhindert setState-on-unmounted-component
       // und akkumulierende GSAP-Tweens nach 2-3 Open/Close-Zyklen.
@@ -643,7 +644,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     // (an dieser Position landet das "Ratgebervorschau"-Label) und schaltet
     // ContentScaler in extended-Mode. BookmarkNav ignoriert label:"preview"
     // bewusst — Preview hat einen eigenen Close-Button im weißen Container.
-    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true, label: "preview" } }));
+    openOverlay("preview", { extended: true, label: "preview" });
 
     // Backdrop fade in
     if (backdropRef.current) {
@@ -1310,6 +1311,14 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     scheduleTimeout(() => setPhase("closing"), TEXT_FADE_DURATION * 1000);
   }, [post, scheduleTimeout]);
 
+  // Overlay-Controller: Handoff-Closer registrieren — öffnet man ein anderes
+  // Overlay (z.B. Leo), animiert die Vorschau via requestClose aus, der Blur
+  // bleibt aber bestehen (closeOverlay ist beim Handoff ein No-Op).
+  useEffect(() => {
+    const unregister = registerOverlayCloser("preview", () => requestClose());
+    return unregister;
+  }, [requestClose]);
+
   useLayoutEffect(() => {
     if (phase !== "closing") return;
     if (!post) {
@@ -1326,7 +1335,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
 
     // No source card (e.g. slides 6–10 from sidebar) — fade backdrop out instead of morphing.
     if (!currentCardEl) {
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("preview");
       if (backdropRef.current) {
         gsap.to(backdropRef.current, { opacity: 0, duration: MORPH_DURATION, ease: MORPH_EASE, onComplete: onClose });
       } else {
@@ -1365,7 +1374,7 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     }
 
     // Un-blur background
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("preview");
 
     // Measure current box/image rects (natural — at their position inside the slide slot)
     const curBoxRect = box.getBoundingClientRect();

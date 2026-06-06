@@ -7,6 +7,7 @@ import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import MegaMenu, { type PreloadedData } from "./MegaMenu";
 import MobileMegaMenu from "./MobileMegaMenu";
 import TopNav from "./TopNav";
+import { setActiveOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 
 type MegaMenuCache = PreloadedData;
 
@@ -112,6 +113,19 @@ function DesktopMegaMenuWrapper() {
 
   const isOpen = !!openCategory;
 
+  // Overlay-Controller: Inhalts-Closer registrieren (Handoff schließt das Menü
+  // ohne Blur-Toggle) und das Menü als aktives Overlay markieren, solange offen.
+  useEffect(() => {
+    const unregister = registerOverlayCloser("menu", () => {
+      setOpenCategory(null);
+      setOpenedViaBurger(false);
+    });
+    return unregister;
+  }, []);
+  useEffect(() => {
+    if (isOpen) setActiveOverlay("menu");
+  }, [isOpen]);
+
   // Close on outside click
   useEffect(() => {
     if (!isOpen) return;
@@ -123,7 +137,7 @@ function DesktopMegaMenuWrapper() {
       if (wrapperRef.current && !wrapperRef.current.contains(target)) {
         setOpenCategory(null);
         setOpenedViaBurger(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("menu");
       }
     };
 
@@ -167,7 +181,7 @@ function DesktopMegaMenuWrapper() {
       if (e.key === "Escape") {
         setOpenCategory(null);
         setOpenedViaBurger(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("menu");
       }
     };
     document.addEventListener("keydown", handleKey);
@@ -182,7 +196,7 @@ function DesktopMegaMenuWrapper() {
   const closeAll = () => {
     setOpenCategory(null);
     setOpenedViaBurger(false);
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("menu");
   };
 
   return (

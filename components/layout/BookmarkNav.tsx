@@ -6,6 +6,7 @@ import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
+import { openOverlay, closeOverlay } from "@/lib/overlayController";
 
 /* ── Constants ── */
 
@@ -313,16 +314,15 @@ export default function BookmarkNav() {
         else hideAsX();
       }
       window.dispatchEvent(new CustomEvent("burger-closed"));
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("menu");
     } else {
       animateToX();
       window.dispatchEvent(new CustomEvent("burger-opened"));
       // On mobile, the booklet covers the bookmark/logo area — ContentScaler should
       // also blur Logo + Landing search pill (extended mode). On desktop, keep TopNav
       // sharp because it slides in as the burger nav.
-      window.dispatchEvent(
-        new CustomEvent("menu-opened", { detail: isMobile ? { extended: true } : {} })
-      );
+      // Über den Controller öffnen → schließt ggf. ein anderes Overlay (Blur bleibt).
+      openOverlay("menu", isMobile ? { extended: true } : {});
     }
   }, [animateToX, animateToBurger, hideAsX, isMobile]);
 

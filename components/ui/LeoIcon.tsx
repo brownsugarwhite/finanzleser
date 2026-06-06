@@ -10,6 +10,7 @@ import { ScrollTrigger } from "@/lib/gsapConfig";
 import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 import VersichererSelect from "@/components/ui/VersichererSelect";
+import { openOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 import LeoCharacter from "@/components/ui/LeoCharacter";
 import LeoChatMessages from "@/components/ui/LeoChatMessages";
 import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
@@ -277,7 +278,7 @@ export default function LeoIcon() {
       if (backdrop) backdrop.style.display = "none";
       const chatCenter = document.getElementById("leo-chat-center");
       if (chatCenter) chatCenter.style.pointerEvents = "none";
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("leo");
     }
     gsap.killTweensOf(el);
     el.dataset.state = "default";
@@ -840,7 +841,9 @@ export default function LeoIcon() {
       setTimeout(() => {
         document.addEventListener("click", handleClickOutside);
       }, 100);
-      window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
+      // Über den Controller öffnen → ein evtl. offenes Overlay (Menü/Vorschau)
+      // animiert aus, der Blur bleibt bestehen, Leo morpht ein.
+      openOverlay("leo", { extended: true });
 
       Flip.from(state, {
         duration: 0.75,
@@ -923,7 +926,7 @@ export default function LeoIcon() {
       });
 
       document.body.style.overflow = "";
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("leo");
 
       // Mobile: Input blur (Tastatur schließen)
       chatInputElRef.current?.blur();
@@ -1037,9 +1040,16 @@ export default function LeoIcon() {
     };
     container.addEventListener("click", handleContainerClick);
 
+    // Handoff-Closer: schließt den Chat-Inhalt ohne Blur-Toggle, falls ein
+    // anderes Overlay geöffnet wird während Leo offen ist.
+    const unregisterOverlay = registerOverlayCloser("leo", () => {
+      if (chatOpenRef.current) closeChat();
+    });
+
     return () => {
       container.removeEventListener("click", handleContainerClick);
       document.removeEventListener("click", handleClickOutside);
+      unregisterOverlay();
     };
   }, []);
 

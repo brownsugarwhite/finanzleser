@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 import {
   useCallback,
   useEffect,
@@ -121,9 +122,15 @@ export default function MobileMegaMenu() {
     const handleMenuClosed = () => setOpen(false);
     window.addEventListener("burger-opened", handleBurgerOpened);
     window.addEventListener("menu-closed", handleMenuClosed);
+    // Handoff-Closer: schließt das mobile Menü, wenn ein anderes Overlay öffnet.
+    const unregister = registerOverlayCloser("menu", () => {
+      setOpen(false);
+      setDetail(null);
+    });
     return () => {
       window.removeEventListener("burger-opened", handleBurgerOpened);
       window.removeEventListener("menu-closed", handleMenuClosed);
+      unregister();
     };
   }, []);
 
@@ -258,7 +265,7 @@ export default function MobileMegaMenu() {
 
   const closeMenu = useCallback(() => {
     window.dispatchEvent(new CustomEvent("burger-closed"));
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("menu");
   }, []);
 
   const navigateAndClose = useCallback(

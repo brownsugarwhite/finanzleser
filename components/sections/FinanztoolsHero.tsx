@@ -13,6 +13,7 @@ import RevolverSlider from "@/components/ui/RevolverSlider";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
+import { openOverlay } from "@/lib/overlayController";
 import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
 import InlineSVG from "@/components/ui/InlineSVG";
 
@@ -746,7 +747,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
                   onClick={() => {
                     openPreview({ ctx: sidebarPreviewCtx, currentIndex: i });
-                    window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
+                    // Über den Controller → schließt ggf. ein anderes Overlay, Blur sofort.
+                    openOverlay("preview", { extended: true });
                   }}
                 >
                   <div data-card-text style={{ flex: 1, minWidth: 0 }}>
