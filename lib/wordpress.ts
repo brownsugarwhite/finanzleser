@@ -5,10 +5,38 @@ import { decodePostContent } from "./html-utils";
 function getClient(revalidate: number = 3600): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
   if (!endpoint) throw new Error("WORDPRESS_API_URL ist nicht gesetzt");
-  return new GraphQLClient(endpoint, {
+  const client = new GraphQLClient(endpoint, {
     fetch: globalThis.fetch,
     next: { revalidate },
   });
+
+  // Retry mit Backoff bei transienten WP-Fehlern. IONOS-Shared-Hosting wirft
+  // unter Build-Last (456 Seiten parallel) "Error establishing a database
+  // connection" (500) bzw. "temporarily unavailable" (503). Ohne Retry fängt
+  // der jeweilige catch-Block das ab und liefert leeren Content → leere
+  // Slider/Footer/Tools im statischen Build. Mit Retry erholen sich die meisten
+  // Abfragen und der Build wird vollständig.
+  const orig = client.request.bind(client);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (client as any).request = async (...args: unknown[]) => {
+    const MAX = 4;
+    let lastErr: unknown;
+    for (let attempt = 0; attempt < MAX; attempt++) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return await (orig as any)(...args);
+      } catch (e: unknown) {
+        lastErr = e;
+        const status = (e as { response?: { status?: number } })?.response?.status;
+        const transient = typeof status === "number" && status >= 500;
+        if (!transient || attempt === MAX - 1) throw e;
+        // 400/600/800ms Backoff — gibt der WP-DB Luft.
+        await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
+      }
+    }
+    throw lastErr;
+  };
+  return client;
 }
 
 // ─────────────────────────────────────────────
