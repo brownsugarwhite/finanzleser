@@ -96,12 +96,14 @@ function isNumber(str: string): boolean {
 
 function isHeaderItem(str: string): boolean {
   const t = str.trim();
+  // Leerzeichen entfernen, um Buchstaben-Sperrung ("D A S  D I G I T A L E") mitzufangen
+  const c = t.replace(/ /g, "").toUpperCase();
   return (
-    t === "finanzleser" ||
-    t === "DAS DIGITALE" ||
-    t === "FINANZMAGAZIN" ||
-    t === "C H E C K L I S T E" ||
-    t.startsWith("SCHRITT-FÜR-SCHRITT")
+    c === "FINANZLESER" ||
+    c === "DASDIGITALE" ||
+    c === "FINANZMAGAZIN" ||
+    c === "CHECKLISTE" ||
+    c.startsWith("SCHRITT-FÜR-SCHRITT")
   );
 }
 
@@ -202,7 +204,7 @@ async function extractPdfItems(buffer: Buffer): Promise<{
       if (!str) continue;
 
       if (isHeaderItem(str)) {
-        if (str === "C H E C K L I S T E") foundChecklisteMarker = true;
+        if (str.replace(/ /g, "").toUpperCase() === "CHECKLISTE") foundChecklisteMarker = true;
         continue;
       }
 
@@ -293,10 +295,86 @@ export interface CheckboxPosition {
   y: number;
 }
 
+type Mat = [number, number, number, number, number, number];
+function _matMul(a: Mat, b: Mat): Mat {
+  return [
+    a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1],
+    a[0] * b[2] + a[2] * b[3], a[1] * b[2] + a[3] * b[3],
+    a[0] * b[4] + a[2] * b[5] + a[4], a[1] * b[4] + a[3] * b[5] + a[5],
+  ];
+}
+
+interface DetectedBox {
+  cx: number;
+  cy: number;
+  w: number;
+  h: number;
+}
+
 /**
- * Extrahiert die Checkbox-Mittelpositionen aus der PDF.
- * Berechnet sie relativ zu den Nummern-Textpositionen (01, 02, ...),
- * da die Checkbox immer rechts neben der Nummer steht.
+ * Erkennt quadratische Pfad-Boxen (Checkboxen, Nummernkreise) einer Seite – inkl. CTM-Tracking,
+ * damit die Koordinaten in derselben Nutzer-Space wie die Text-Items liegen.
+ */
+async function extractBoxesOnPage(
+  page: { getOperatorList: () => Promise<{ fnArray: number[]; argsArray: unknown[] }> },
+  OPS: Record<string, number>
+): Promise<DetectedBox[]> {
+  const ops = await page.getOperatorList();
+  let ctm: Mat = [1, 0, 0, 1, 0, 0];
+  const stack: Mat[] = [];
+  const seen = new Set<string>();
+  const boxes: DetectedBox[] = [];
+
+  for (let i = 0; i < ops.fnArray.length; i++) {
+    const fn = ops.fnArray[i];
+    if (fn === OPS.save) { stack.push([...ctm]); continue; }
+    if (fn === OPS.restore) { ctm = stack.pop() || [1, 0, 0, 1, 0, 0]; continue; }
+    if (fn === OPS.transform) { ctm = _matMul(ctm, ops.argsArray[i] as Mat); continue; }
+    if (fn !== OPS.constructPath) continue;
+
+    const a = ops.argsArray[i] as [number[], number[]];
+    const sub = a[0];
+    const co = a[1];
+    const xs: number[] = [];
+    const ys: number[] = [];
+    let ci = 0;
+    const pt = (x: number, y: number) => {
+      xs.push(ctm[0] * x + ctm[2] * y + ctm[4]);
+      ys.push(ctm[1] * x + ctm[3] * y + ctm[5]);
+    };
+    for (const so of sub) {
+      if (so === OPS.rectangle) {
+        const x = co[ci++], y = co[ci++], w = co[ci++], h = co[ci++];
+        pt(x, y); pt(x + w, y + h);
+      } else if (so === OPS.moveTo || so === OPS.lineTo) {
+        pt(co[ci++], co[ci++]);
+      } else if (so === OPS.curveTo) {
+        ci += 4; pt(co[ci++], co[ci++]);
+      } else if (so === OPS.curveTo2) {
+        ci += 2; pt(co[ci++], co[ci++]);
+      } else if (so === OPS.curveTo3) {
+        pt(co[ci++], co[ci++]); ci += 2;
+      }
+    }
+    if (!xs.length) continue;
+    const minx = Math.min(...xs), maxx = Math.max(...xs);
+    const miny = Math.min(...ys), maxy = Math.max(...ys);
+    const w = maxx - minx, h = maxy - miny;
+    if (w > 8 && w < 60 && h > 8 && h < 60) {
+      const cx = Math.round((minx + maxx) / 2);
+      const cy = Math.round((miny + maxy) / 2);
+      const key = `${cx},${cy}`;
+      if (!seen.has(key)) { seen.add(key); boxes.push({ cx, cy, w, h }); }
+    }
+  }
+  return boxes;
+}
+
+/**
+ * Checkbox-Mittelpositionen: erkennt das echte Kästchen-Rechteck pro nummerierter Zeile.
+ * Funktioniert unabhängig davon, ob die Checkbox links neben der Nummer (alte Checklisten)
+ * oder rechts außen sitzt (neues Studio-Layout). Fallback auf "Nummer + 28px", falls in einer
+ * Zeile kein Kästchen erkannt wird.
  */
 async function extractCheckboxPositions(
   buffer: Buffer
@@ -304,26 +382,35 @@ async function extractCheckboxPositions(
   const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
   const uint8 = new Uint8Array(buffer);
   const doc = await pdfjsLib.getDocument({ data: uint8 }).promise;
-
-  // Offset von der Nummer-Position zur Checkbox-Mitte (kalibriert)
-  const OFFSET_X = 28;
-  const OFFSET_Y = 1;
+  const OPS = pdfjsLib.OPS as unknown as Record<string, number>;
 
   const positions: CheckboxPosition[] = [];
 
   for (let p = 1; p <= doc.numPages; p++) {
     const page = await doc.getPage(p);
+    const boxes = await extractBoxesOnPage(page, OPS);
     const content = await page.getTextContent();
 
     for (const item of content.items) {
       const str = (item as { str?: string }).str?.trim();
-      if (str && /^\d{2}$/.test(str)) {
-        const tx = (item as { transform: number[] }).transform;
-        positions.push({
-          page: p,
-          x: tx[4] + OFFSET_X,
-          y: tx[5] + OFFSET_Y,
-        });
+      if (!str || !/^\d{2}$/.test(str)) continue;
+      const tx = (item as { transform: number[] }).transform;
+      const nx = tx[4], ny = tx[5];
+
+      // In dieser Zeile (y ≈ Nummer) das Kästchen finden, das NICHT der Nummernkreis ist
+      let best: DetectedBox | null = null;
+      let bestDy = Infinity;
+      for (const b of boxes) {
+        const dy = Math.abs(b.cy - ny);
+        if (dy > 22) continue;
+        if (Math.abs(b.cx - nx) < 20) continue; // Nummernkreis um die Ziffer ausschließen
+        if (dy < bestDy) { best = b; bestDy = dy; }
+      }
+
+      if (best) {
+        positions.push({ page: p, x: best.cx, y: best.cy });
+      } else {
+        positions.push({ page: p, x: nx + 28, y: ny + 1 }); // Fallback (alte Logik)
       }
     }
   }
