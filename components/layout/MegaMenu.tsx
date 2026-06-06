@@ -12,7 +12,6 @@ function boldYears(text: string) {
   )}</span>;
 }
 import type { Post, Rechner } from "@/lib/types";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 export type ToolType = "rechner" | "checkliste" | "vergleich";
 export type MegaMenuPost = Post & { tools?: ToolType[] };
@@ -514,7 +513,7 @@ export default function MegaMenu({
         </div>
       </div>
 
-      {/* Legal Links + Dark Mode Toggle */}
+      {/* Legal Links */}
       <div style={{
         display: "flex",
         justifyContent: "center",
@@ -547,16 +546,6 @@ export default function MegaMenu({
             </Link>
           ))}
         </nav>
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{
-            fontSize: 14,
-            fontFamily: "var(--font-body)",
-            color: "var(--color-text-secondary)",
-          }}>
-            Modus
-          </span>
-          <DarkModeToggle />
-        </div>
       </div>
     </div>
   );

@@ -13,7 +13,6 @@ import {
 import gsap from "@/lib/gsapConfig";
 import { NAV_ITEMS } from "@/lib/navItems";
 import { TYP_LABELS } from "@/lib/rechnerCategories";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
 import AlphaList from "@/components/ui/AlphaList";
 import { cn } from "@/lib/cn";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
@@ -533,10 +532,6 @@ function PageMain({
         </Section>
       </div>
 
-      <div className="flex items-center justify-center gap-3 py-4 border-t border-[var(--color-border-default)]">
-        <span className="text-sm text-[var(--color-text-secondary)]">Modus</span>
-        <DarkModeToggle />
-      </div>
     </div>
   );
 }

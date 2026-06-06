@@ -88,7 +88,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
+    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
       <body className="antialiased">
         <LandingBodyAttr />
         <RouteChangeRefresh />

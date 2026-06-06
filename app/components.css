@@ -1837,14 +1837,6 @@ h2.faq-heading {
   color: var(--color-text-medium);
 }
 
-.dark .schema-faq.wp-block-yoast-faq-block {
-  background: var(--glass-dark-20);
-  border-color: var(--color-border-default);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 var(--glass-white-10);
-}
-
 /* ─────────────────────────────────────────────
    Related Posts Section
    Full-Width Section unter jedem Artikel
