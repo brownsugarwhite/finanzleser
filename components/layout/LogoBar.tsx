@@ -110,11 +110,26 @@ export default function LogoBar() {
 
   // Init / pathname change → snap logo + state
   useEffect(() => {
+    cancelHide(); // evtl. verwaisten Landing-Hide-Timer abbrechen
     const initialFrame = isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible;
     stateRef.current = isLanding ? "hidden" : "long-visible";
     menuOpenRef.current = false;
     logoRef.current?.setFrame(initialFrame);
     setLogoVisible(!isLanding);
+
+    // Non-Landing: Logo, Untertitel (Claim) und Dotline explizit sichtbar
+    // setzen. Beim Wechsel von der Landing (wo Claim/Dotline ausgeblendet sind
+    // und ein Scrub-Tween oder ContentScaler opacity 0 hinterlassen haben kann)
+    // blieben sie sonst gelegentlich unsichtbar. Die anschließend (im Claim-
+    // Effect) neu erstellten Scrub-Trigger übernehmen ab dem ersten Scroll.
+    if (!isLanding) {
+      if (claimRef.current) gsap.set(claimRef.current, { opacity: 1 });
+      const dot = document.querySelector(".dotline-animated") as HTMLElement | null;
+      if (dot) gsap.set(dot, { opacity: 1 });
+      document
+        .querySelectorAll<HTMLElement>("[data-topnav]")
+        .forEach((el) => gsap.set(el, { opacity: 1, filter: "none" }));
+    }
   }, [isLanding]);
 
   // Claim + dotline scrub fade (unchanged)
