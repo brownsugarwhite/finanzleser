@@ -15,7 +15,11 @@ export async function GET(request: NextRequest) {
     const tools = await getPostsAndCPTsByCategory(category);
 
     return NextResponse.json(tools.slice(0, 3), {
-      headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
+      headers: {
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        // Edge-Cache pro Kategorie variieren (sonst überall dieselben Tools).
+        "Netlify-Vary": "query=category",
+      },
     });
   } catch (error) {
     console.error("Error fetching megamenu tools:", error);

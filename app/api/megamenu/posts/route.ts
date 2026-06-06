@@ -19,7 +19,14 @@ export async function GET(request: NextRequest) {
     const posts = fetched.slice(0, limit);
     return NextResponse.json(
       { posts, total: posts.length, hasMore },
-      { headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" } }
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+          // Netlify Edge variiert sonst NICHT nach ?category → alle Kategorien
+          // bekämen denselben Cache-Eintrag (Bug: überall die gleichen 3 Posts).
+          "Netlify-Vary": "query=category|limit",
+        },
+      }
     );
   } catch (error) {
     console.error("Error fetching megamenu posts:", error);
