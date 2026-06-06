@@ -4,7 +4,7 @@ import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
-import { getAllPosts, getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
+import { getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
 
 // Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
@@ -61,21 +61,20 @@ export default function LandingPage() {
 }
 
 async function FinanztoolsHeroSection() {
-  let posts: Post[] = [];
+  // Nur die neuesten Beiträge laden — die Hero-Sidebar nutzt ausschließlich
+  // latestPosts (max. 4). Früher wurde zusätzlich getAllPosts() (sequenzielle
+  // Pagination ALLER ~1000+ Beiträge, 10+ verkettete Requests) nur als Fallback
+  // geladen — das blockierte/timeoutete den SSR der Landing bei kaltem WordPress
+  // und führte zu „Beiträge erst nach Reload sichtbar".
   let latestPosts: Post[] = [];
   try {
-    const [allPosts, latest] = await Promise.all([
-      getAllPosts(),
-      getLatestPosts(10),
-    ]);
-    posts = allPosts;
-    latestPosts = latest;
+    latestPosts = await getLatestPosts(10);
   } catch (error) {
     console.error("Fehler beim Laden der Hero-Daten:", error);
   }
   return (
     <div className="scalable-landing">
-      <FinanztoolsHero posts={posts} latestPosts={latestPosts} />
+      <FinanztoolsHero latestPosts={latestPosts} />
     </div>
   );
 }
