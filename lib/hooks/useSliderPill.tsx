@@ -347,9 +347,9 @@ export function useSliderPill({
               >
                 {/* Leading-Offset MUSS exakt der realen card0-Position entsprechen,
                     sonst laufen weiße Schrift + Sparks versetzt. Mobile: reale
-                    Container haben paddingLeft:20 + display:none-Spacer (kein
-                    Leading-gap) → Lens-Spacer = 20px (ohne gap). Desktop: Spacer+gap. */}
-                <div style={{ flex: isMobile ? `0 0 20px` : `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
+                    Container haben paddingLeft (Button-Mode 36, Card-Mode 20) +
+                    display:none-Spacer (kein Leading-gap). Desktop: Spacer+gap. */}
+                <div style={{ flex: isMobile ? `0 0 ${isActiveMode ? 36 : 20}px` : `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
                 {items.map((item, i) => (
                   <React.Fragment key={item.slug}>
                     <span style={{
@@ -376,7 +376,7 @@ export function useSliderPill({
         </div>
       </div>
     );
-  }, [items, hasLens, titleWidths, gap, spacerExpanded, isMobile]);
+  }, [items, hasLens, titleWidths, gap, spacerExpanded, isMobile, isActiveMode]);
 
   return {
     pillRef, lensRef, cardRefs,

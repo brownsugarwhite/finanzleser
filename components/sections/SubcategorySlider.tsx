@@ -488,10 +488,11 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
             aria-hidden={!show}
             style={{ position: "absolute", top: 0, bottom: 0, [dir]: 0, width: 56, zIndex: 20, pointerEvents: "none" }}
           >
-            {/* Page-Color-Gradient maskiert die Buttons am Rand */}
+            {/* Page-Color-Gradient maskiert die Buttons am Rand. top/bottom -60,
+                damit auch die (höhere) aktive Pill samt Linien voll abgedeckt wird. */}
             <div
               style={{
-                position: "absolute", top: 0, bottom: 0, [dir]: 0, width: "100%",
+                position: "absolute", top: -60, bottom: -60, [dir]: 0, width: "100%",
                 background: `linear-gradient(to ${dir === "left" ? "right" : "left"}, var(--color-bg-page) 35%, rgba(250,249,246,0))`,
                 opacity: show ? 1 : 0,
                 transition: "opacity 0.25s ease",
@@ -524,9 +525,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           <div
             onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
             onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
-            // Mobile: ~20px Abstand zum linken Rand (Leading-Spacer ist mobil
-            // display:none). Desktop unverändert (Spacer übernimmt den Abstand).
-            style={{ display: 'flex', gap: `${CAT_GAP}px`, paddingLeft: isMobile ? 20 : 0 }}
+            // Mobile: Abstand zum linken Rand (Leading-Spacer ist mobil display:none).
+            // Button-Mode 36px (Pill überhängt den Text links ~16px → sonst am Rand
+            // abgeschnitten), Card-Mode 20px. Desktop unverändert.
+            style={{ display: 'flex', gap: `${CAT_GAP}px`, paddingLeft: isMobile ? (activeSlide !== null ? 36 : 20) : 0 }}
           >
             <div
               aria-hidden
@@ -619,18 +621,23 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
               }}
             />
           </div>
-          {/* Safe-Zones links/rechts — blocken Hover/Klick auf Cards; PointerDown
-              bubbelt zum Embla-Viewport, Drag funktioniert weiter. */}
-          <SliderSafeZone
-            direction="left"
-            scrollable={canScroll && canPrev}
-            onClick={() => catEmblaApi?.scrollPrev()}
-          />
-          <SliderSafeZone
-            direction="right"
-            scrollable={canScroll && canNext}
-            onClick={() => catEmblaApi?.scrollNext()}
-          />
+          {/* Safe-Zones (Desktop-Hover-Cursor-Pfeil) NUR Desktop — auf Mobile
+              übernehmen die Edge-Pfeile (8c); sonst wäre die Desktop-Safezone +
+              Cursor-Pfeil-Umwandlung im Mobile-Slider sichtbar. */}
+          {!isMobile && (
+            <>
+              <SliderSafeZone
+                direction="left"
+                scrollable={canScroll && canPrev}
+                onClick={() => catEmblaApi?.scrollPrev()}
+              />
+              <SliderSafeZone
+                direction="right"
+                scrollable={canScroll && canNext}
+                onClick={() => catEmblaApi?.scrollNext()}
+              />
+            </>
+          )}
         </div>
         {/* Pill overlay — outside viewport so lines aren't clipped by overflow:hidden */}
         {sliderPill.renderPill()}
