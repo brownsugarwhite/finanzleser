@@ -22,9 +22,12 @@ export async function GET(
     // Fetch title from WordPress REST API
     const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
     try {
-      const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title`);
+      const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`);
       const posts = await res.json();
-      return NextResponse.json({ title: posts[0]?.title?.rendered || "" });
+      return NextResponse.json({
+        title: posts[0]?.title?.rendered || "",
+        excerpt: posts[0]?.excerpt?.rendered || "",
+      });
     } catch {
       return NextResponse.json({ title: "" });
     }

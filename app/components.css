@@ -612,17 +612,6 @@ h1.category-title {
   font-weight: 700 !important;
 }
 
-/* Finanztool-Überschrift (Badge + Titel + Einleitung) über dem Tool — deutlicher
-   Abstand zum darüberliegenden Artikelinhalt. */
-.article-tool-head {
-  margin-top: 64px;
-}
-@media (max-width: 1024px) {
-  .article-tool-head {
-    margin-top: 40px;
-  }
-}
-
 /* SparkHeading — drei-stufige Box-Architektur damit Flip's absolute-mode
    sauber animiert ohne Width-Snap am Ende:
 

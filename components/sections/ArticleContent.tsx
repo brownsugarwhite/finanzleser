@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, Fragment, useState, useEffect, useMemo, useLayoutEffect } from "react";
+import { memo, useState, useEffect, useMemo, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import gsap from "@/lib/gsapConfig";
 
@@ -312,28 +312,38 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
         </ArticleElementWrapper>
       );
     }
-    if (unit.kind === "tool") {
-      // Überschrift (Badge + Titel) + Einleitung ÜBER dem Tool, in Artikeltext-
-      // breite (centered/750) zentriert. Die wide-Column enthält nur Visual + Tool.
-      let embed: React.ReactNode = null;
-      if (unit.toolType === "rechner") {
-        embed = <div className="article-tool-embed"><RechnerEmbed slug={unit.slug} /></div>;
-      } else if (unit.toolType === "checkliste") {
-        embed = <div className="checkliste-article-wrap"><ChecklisteEmbed slug={unit.slug} /></div>;
-      } else {
-        embed = <VergleichEmbed slug={unit.slug} />;
-      }
+    if (unit.kind === "tool" && unit.toolType === "rechner") {
       return (
-        <Fragment key={unit.itemKey}>
-          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-            <div className="article-tool-head">
-              <ToolLabel type={unit.toolType} slug={unit.slug} headingId={unit.headingId} showExcerpt />
-            </div>
-          </ArticleElementWrapper>
-          <ArticleElementWrapper variant="wide" collapsed={collapsed}>
-            {embed}
-          </ArticleElementWrapper>
-        </Fragment>
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
+          <div className="article-tool-embed">
+            <RechnerEmbed
+              slug={unit.slug}
+              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+            />
+          </div>
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "tool" && unit.toolType === "checkliste") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
+          <div className="checkliste-article-wrap">
+            <ChecklisteEmbed
+              slug={unit.slug}
+              formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+            />
+          </div>
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "tool" && unit.toolType === "vergleich") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
+          <VergleichEmbed
+            slug={unit.slug}
+            formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+          />
+        </ArticleElementWrapper>
       );
     }
     if (unit.kind === "gamification") {

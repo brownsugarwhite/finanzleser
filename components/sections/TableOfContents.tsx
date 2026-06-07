@@ -146,59 +146,71 @@ export default function TableOfContents({
                   )}
                 </span>
                 {/* Label-Block IMMER gerendert (kein conditional → kein Reflow-
-                    Snap). Im collapsed-Zustand via max-width/opacity weggeblendet;
-                    feste Innenbreite verhindert Umbruch während der Animation. */}
+                    Snap). Collapsed: NULL Höhe (grid-rows 0fr) + NULL Breite
+                    (max-width 0) → trägt keine Höhe, Dots bleiben gleichmäßig.
+                    Expand: erst Höhe/Breite auf, dann Labels einblenden (opacity
+                    verzögert). Feste Innenbreite verhindert Umbruch beim Öffnen. */}
                 <span
                   aria-hidden={collapsed}
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
-                    width: "200px",
+                    display: "grid",
+                    gridTemplateRows: collapsed ? "0fr" : "1fr",
                     flexShrink: 0,
                     overflow: "hidden",
                     maxWidth: collapsed ? 0 : "200px",
                     opacity: collapsed ? 0 : 1,
-                    transition:
-                      "max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transition: collapsed
+                      ? "grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
+                      : "grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0.12s",
                   }}
                 >
-                  {toolLabel && (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        alignSelf: "flex-start",
-                        backgroundColor: toolColor,
-                        color: "#ffffff",
-                        fontFamily: "var(--font-body), sans-serif",
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        lineHeight: 1,
-                        padding: "5px 8px",
-                        letterSpacing: "0.02em",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {toolLabel}
-                    </span>
-                  )}
                   <span
-                    className="toc-text"
                     style={{
-                      fontFamily: "Merriweather, serif",
-                      fontWeight: isActive ? 700 : 300,
-                      fontStyle: isActive ? "normal" : "italic",
-                      fontSize: "15px",
-                      color: isActive ? activeColor : "var(--color-text-medium)",
-                      lineHeight: "1.4",
-                      transition: "none",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "2px",
+                      width: "200px",
+                      minHeight: 0,
                       overflow: "hidden",
                     }}
                   >
-                    {item.text}
+                    {toolLabel && (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          alignSelf: "flex-start",
+                          backgroundColor: toolColor,
+                          color: "#ffffff",
+                          fontFamily: "var(--font-body), sans-serif",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          lineHeight: 1,
+                          padding: "5px 8px",
+                          letterSpacing: "0.02em",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {toolLabel}
+                      </span>
+                    )}
+                    <span
+                      className="toc-text"
+                      style={{
+                        fontFamily: "Merriweather, serif",
+                        fontWeight: isActive ? 700 : 300,
+                        fontStyle: isActive ? "normal" : "italic",
+                        fontSize: "15px",
+                        color: isActive ? activeColor : "var(--color-text-medium)",
+                        lineHeight: "1.4",
+                        transition: "none",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {item.text}
+                    </span>
                   </span>
                 </span>
               </a>
