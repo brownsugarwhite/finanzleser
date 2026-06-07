@@ -10,6 +10,9 @@ type LegalPageLayoutProps = {
   content: string;
   visualPlaceholder?: boolean;
   headingVariant?: "split" | "spark";
+  /** WIDE-Titelbild für die spark-Variante (statt Platzhalter-Box). */
+  imageWide?: string;
+  imageWideAlt?: string;
 };
 
 export default function LegalPageLayout({
@@ -18,6 +21,8 @@ export default function LegalPageLayout({
   content,
   visualPlaceholder = true,
   headingVariant = "split",
+  imageWide,
+  imageWideAlt,
 }: LegalPageLayoutProps) {
   const decodedTitle = decodeHtmlEntities(title);
 
@@ -35,25 +40,39 @@ export default function LegalPageLayout({
 
         {headingVariant === "spark" ? (
           <>
-            {visualPlaceholder && (
-              <div style={{ maxWidth: 1200, marginBottom: 40 }} className="mx-auto px-6">
-                <div
-                  style={{
-                    width: "100%",
-                    height: 250,
-                    background: "var(--color-placeholder-bg)",
-                  }}
-                  aria-hidden="true"
-                />
+            {(imageWide || visualPlaceholder) && (
+              <div className="scalable-landing">
+                <div style={{ maxWidth: 1200, marginBottom: 40 }} className="mx-auto px-6">
+                  {imageWide ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={imageWide}
+                      alt={imageWideAlt || decodedTitle || ""}
+                      style={{ width: "100%", height: "auto", display: "block", borderRadius: 16 }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: 250,
+                        borderRadius: 16,
+                        background: "var(--color-placeholder-bg)",
+                      }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
               </div>
             )}
             <SparkHeading title={decodedTitle} as="h1" />
-            <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
-              <div className="legal-page__body" style={{ marginTop: 40 }}>
-                <div
-                  className="prose prose-lg legal-prose"
-                  dangerouslySetInnerHTML={{ __html: content }}
-                />
+            <div className="scalable-landing">
+              <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
+                <div className="legal-page__body" style={{ marginTop: 40 }}>
+                  <div
+                    className="prose prose-lg legal-prose"
+                    dangerouslySetInnerHTML={{ __html: content }}
+                  />
+                </div>
               </div>
             </div>
           </>
