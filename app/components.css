@@ -141,6 +141,16 @@ body.leo-chat-open .topbar-grid {
     transform: none;
     justify-content: center;
   }
+  /* Conversation-Mode: NICHT mehr über die volle Breite zentrieren — sonst
+     überschreibt right:0 + justify-content:center die per GSAP gesetzte
+     left/bottom-Position und Leo landet mittig statt neben der Bubble. */
+  #leo-chat-iconwrap[data-mode="conversation"] {
+    right: auto;
+    top: auto;
+    width: auto;
+    justify-content: flex-start;
+    transform: none;
+  }
 }
 /* Conversation-mode: GSAP positioniert iconwrap dynamisch via inline-style
    neben dem Spike der aktuellen Antwort. Kein CSS für Position nötig hier. */
@@ -202,7 +212,10 @@ body.leo-chat-open .topbar-grid {
   justify-content: flex-start;
   gap: 14px;
   padding:100px 23px 170px 23px;  /* 50px top, 23px links/rechts, 160px bottom (Platz für Pille + Bubble-Scroll unter Pille mit Gradient-Fade). */
-  pointer-events: auto;
+  /* Default NICHT klickbar — sonst blockiert dieser fixed-Container (top:0
+     bottom:0, 750px breit) nach dem Schließen unsichtbar die ganze Mittelspalte.
+     Nur im offenen Chat (body.leo-chat-open) interaktiv/scrollbar. */
+  pointer-events: none;
   scrollbar-width: none;         /* Firefox: kein Scrollbar */
   /* KEIN z-index, KEIN isolation, KEIN transform — Container ist KEIN Stacking-
      Context. Children's z-index wirkt im Document-Context:
@@ -249,6 +262,10 @@ body.leo-chat-open .topbar-grid {
 @keyframes leo-chat-msg-fadein {
   to { opacity: 1; }
 }
+/* Nur im offenen Chat ist die Verlaufs-Liste interaktiv/scrollbar. */
+body.leo-chat-open #leo-chat-messages {
+  pointer-events: auto;
+}
 /* Webkit (Chrome/Safari): Scrollbar komplett verstecken. */
 #leo-chat-messages::-webkit-scrollbar {
   display: none;
@@ -261,7 +278,10 @@ body.leo-chat-open .topbar-grid {
     transform: none;
     bottom: 150px;
     max-height: calc(100vh - 200px);
-    padding: 12px 4px;
+    /* Top-Padding hält die erste Nachricht unter dem globalen ProgressiveBlur
+       (oben ~120px) hervor; Bottom-Padding gibt Luft über der Eingabe-Pille,
+       damit der Verlauf unten nicht abgeschnitten wirkt. */
+    padding: 96px 8px 28px 8px;
   }
 }
 

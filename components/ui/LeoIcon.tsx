@@ -18,6 +18,8 @@ import type { Versicherer } from "@/lib/versicherer";
 
 const LEO_SIZE_DESKTOP = 70;
 const LEO_SIZE_MOBILE = 64;
+// Versicherer-Auswahl im Chat vorerst deaktiviert (Funktionalität folgt später).
+const SHOW_VERSICHERER_SELECT = false;
 const BUBBLE_H = 80;            // Höhe der AI-Section-Sprechblase (matched ChatBubble single-line)
 // Höhe der Eingabe-Pille im Chat-Overlay = 100 px (siehe #leo-chat-pill-slot in components.css)
 const isMobileMQ = "(max-width: 767px)";
@@ -93,11 +95,13 @@ export default function LeoIcon() {
       }
       if (!row) return null;
       const rect = row.getBoundingClientRect();
+      const isMob = window.matchMedia(isMobileMQ).matches;
       return {
         row,
         // Leo unten LINKS NEBEN dem Spike (nicht ON dem Spike).
         bottom: window.innerHeight - rect.bottom - 5,
-        left: rect.left - 55,                // 5px weiter links als zuvor
+        // Mobile: kleinerer Offset + Clamp, damit Leo nicht aus dem Bild läuft.
+        left: isMob ? Math.max(8, rect.left - 30) : rect.left - 55,
       };
     };
 
@@ -889,6 +893,17 @@ export default function LeoIcon() {
       if (!chatOpenRef.current) return;
       chatOpenRef.current = false;
 
+      // ─── Teardown SOFORT + idempotent ──────────────────────────────────
+      // MUSS vor jedem early-return laufen, sonst bleibt die Seite unklickbar:
+      // body.leo-chat-open setzt pointer-events:none auf Nav/Content, und der
+      // fixed Messages-Container würde sonst weiter Klicks abfangen.
+      document.removeEventListener("click", handleClickOutside);
+      if (backdropEl) backdropEl.style.display = "none";
+      if (chatCenterEl) chatCenterEl.style.pointerEvents = "none";
+      document.body.classList.remove("leo-chat-open");
+      document.body.style.overflow = "";
+      closeOverlay("leo");
+
       let prev = previousParentRef.current;
       if (!prev) return;
 
@@ -906,13 +921,6 @@ export default function LeoIcon() {
         : defSize;
       const targetHeight = prevIsDockSlot ? BUBBLE_H : defSize;
 
-      // Un-blur anstoßen (ContentScaler) + Backdrop weg
-      document.removeEventListener("click", handleClickOutside);
-      backdropEl.style.display = "none";
-      chatCenterEl.style.pointerEvents = "none";
-
-      // Body-Class für Modal-Mode entfernen — TopNav etc. wieder klickbar.
-      document.body.classList.remove("leo-chat-open");
       // Icon-Leo + Greeting fadet aus (parallel zum container-back-flight)
       gsap.to(iconwrapEl, { opacity: 0, y: 12, duration: 0.3, ease: "power2.in" });
 
@@ -924,9 +932,6 @@ export default function LeoIcon() {
         gsap.set(el, { opacity: 1 });
         gsap.to(el, { opacity: 0, duration: 0.3, ease: "power2.in" });
       });
-
-      document.body.style.overflow = "";
-      closeOverlay("leo");
 
       // Mobile: Input blur (Tastatur schließen)
       chatInputElRef.current?.blur();
@@ -1196,23 +1201,28 @@ export default function LeoIcon() {
             />
           </form>
 
-          <div
-            className="leo-versicherer-slot"
-            style={{
-              marginTop: "auto",
-              alignSelf: "flex-end",
-              marginRight: -60,
-              paddingBottom: 4,
-              pointerEvents: "auto",
-              position: "relative",
-              zIndex: 50,
-            }}
-          >
-            <VersichererSelect
-              value={selectedVersicherer}
-              onChange={setSelectedVersicherer}
-            />
-          </div>
+          {/* Versicherer-Auswahl vorerst ausgeblendet (wird wieder eingebaut,
+              sobald die Funktionalität dahinter steht). Komponente + State
+              bleiben erhalten — nur Rendering deaktiviert. */}
+          {SHOW_VERSICHERER_SELECT && (
+            <div
+              className="leo-versicherer-slot"
+              style={{
+                marginTop: "auto",
+                alignSelf: "flex-end",
+                marginRight: -60,
+                paddingBottom: 4,
+                pointerEvents: "auto",
+                position: "relative",
+                zIndex: 50,
+              }}
+            >
+              <VersichererSelect
+                value={selectedVersicherer}
+                onChange={setSelectedVersicherer}
+              />
+            </div>
+          )}
         </div>
         <style>{`
           .leo-chat-input::placeholder {
