@@ -733,7 +733,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 4).map((post, i) => {
+            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 3).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
