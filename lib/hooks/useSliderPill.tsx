@@ -345,7 +345,11 @@ export function useSliderPill({
                 }}
                 style={{ position: "absolute", top: "50%", left: 0, display: "flex", alignItems: "center", pointerEvents: "none" }}
               >
-                <div style={{ flex: `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
+                {/* Leading-Offset MUSS exakt der realen card0-Position entsprechen,
+                    sonst laufen weiße Schrift + Sparks versetzt. Mobile: reale
+                    Container haben paddingLeft:20 + display:none-Spacer (kein
+                    Leading-gap) → Lens-Spacer = 20px (ohne gap). Desktop: Spacer+gap. */}
+                <div style={{ flex: isMobile ? `0 0 20px` : `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
                 {items.map((item, i) => (
                   <React.Fragment key={item.slug}>
                     <span style={{
