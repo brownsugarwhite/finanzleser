@@ -507,11 +507,11 @@
 
 /* ── Responsive ─────────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .rechner-layout {
     grid-template-columns: 1fr;
   }
-  /* Mobile: Top-Row stacked, Visual full-width 270px hoch (analog Checkliste) */
+  /* ≤1024: Top-Row stacked, Visual full-width 270px hoch (analog Checkliste) */
   .rechner-top-row {
     flex-direction: column;
     gap: 24px;

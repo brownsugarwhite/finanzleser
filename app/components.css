@@ -1723,7 +1723,7 @@ a.megamenu-link:hover {
 
 /* ── Mobile: 20px Body-Padding für Artikel + Detail-Pages,
    Visual + Tabellen breaken aus dem Padding aus ── */
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .article-element-wrapper {
     padding-left: 20px;
     padding-right: 20px;
@@ -1978,8 +1978,15 @@ h2.faq-heading {
   }
 }
 
-/* Desktop (≥768px): Mobile-TOC-Komponenten verstecken. */
-@media (min-width: 768px) {
+/* Beitragsseiten brechen ab 1024px auf Column um → Desktop-Sidebar dort aus. */
+@media (max-width: 1024px) {
+  .article-sidebar {
+    display: none !important;
+  }
+}
+
+/* Desktop (≥1025px): Mobile-TOC-Komponenten verstecken. */
+@media (min-width: 1025px) {
   .mobile-toc-indicator,
   .mobile-toc-backdrop,
   .mobile-toc-overlay {

@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect, useMemo, useLayoutEffect } from "react";
+import { memo, Fragment, useState, useEffect, useMemo, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import gsap from "@/lib/gsapConfig";
 
@@ -75,6 +75,17 @@ function wrapTables(html: string): string {
   return html.replace(
     /<table\b[^>]*>[\s\S]*?<\/table>/g,
     (match) => `<div class="table-scroll"><div class="table-scroll-inner">${match}</div></div>`
+  );
+}
+
+// FAQ-Markup robust machen: Von Hand eingefügte FAQs (statt Yoast-Block) haben
+// eine LEERE .schema-faq-question und den Fragetext in einem separaten <strong>.
+// Hier den Fragetext in die Frage-Klasse ziehen, damit Styling + Akkordeon greifen.
+function normalizeFaq(html: string): string {
+  if (!html.includes("schema-faq")) return html;
+  return html.replace(
+    /<(strong|h3)([^>]*)class="schema-faq-question"([^>]*)>\s*<\/\1>\s*<strong>([\s\S]*?)<\/strong>/g,
+    '<$1$2class="schema-faq-question"$3>$4</$1>'
   );
 }
 
@@ -184,7 +195,7 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
     const seenTools = new Set<string>();
     raw.forEach((part, i) => {
       if (part.type === "html") {
-        const { html, count } = addHeadingIds(part.value, headingIndex);
+        const { html, count } = addHeadingIds(normalizeFaq(part.value), headingIndex);
         headingIndex += count;
         const fazitParts = splitFazit(html);
         fazitParts.forEach((fp, j) => {
@@ -301,38 +312,28 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
         </ArticleElementWrapper>
       );
     }
-    if (unit.kind === "tool" && unit.toolType === "rechner") {
+    if (unit.kind === "tool") {
+      // Überschrift (Badge + Titel) + Einleitung ÜBER dem Tool, in Artikeltext-
+      // breite (centered/750) zentriert. Die wide-Column enthält nur Visual + Tool.
+      let embed: React.ReactNode = null;
+      if (unit.toolType === "rechner") {
+        embed = <div className="article-tool-embed"><RechnerEmbed slug={unit.slug} /></div>;
+      } else if (unit.toolType === "checkliste") {
+        embed = <div className="checkliste-article-wrap"><ChecklisteEmbed slug={unit.slug} /></div>;
+      } else {
+        embed = <VergleichEmbed slug={unit.slug} />;
+      }
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <div className="article-tool-embed">
-            <RechnerEmbed
-              slug={unit.slug}
-              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
-            />
-          </div>
-        </ArticleElementWrapper>
-      );
-    }
-    if (unit.kind === "tool" && unit.toolType === "checkliste") {
-      return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <div className="checkliste-article-wrap">
-            <ChecklisteEmbed
-              slug={unit.slug}
-              formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
-            />
-          </div>
-        </ArticleElementWrapper>
-      );
-    }
-    if (unit.kind === "tool" && unit.toolType === "vergleich") {
-      return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <VergleichEmbed
-            slug={unit.slug}
-            formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
-          />
-        </ArticleElementWrapper>
+        <Fragment key={unit.itemKey}>
+          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+            <div className="article-tool-head">
+              <ToolLabel type={unit.toolType} slug={unit.slug} headingId={unit.headingId} showExcerpt />
+            </div>
+          </ArticleElementWrapper>
+          <ArticleElementWrapper variant="wide" collapsed={collapsed}>
+            {embed}
+          </ArticleElementWrapper>
+        </Fragment>
       );
     }
     if (unit.kind === "gamification") {

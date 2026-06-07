@@ -59,7 +59,9 @@ export default function ArticleClient({
   }, []);
 
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
+    // Artikel-Layout bricht ab 1024px auf Column um (Header + Finanztools),
+    // synchron mit den CSS-Breakpoints (Sidebar aus, Mobile-TOC an).
+    const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
@@ -136,11 +138,11 @@ export default function ArticleClient({
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
-                  <div className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                  <div className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden">
                     <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
-                      style={{ width: '100%', height: '100%' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   </div>
                 ) : (

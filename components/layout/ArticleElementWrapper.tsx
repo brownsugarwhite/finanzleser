@@ -17,19 +17,21 @@ export default function ArticleElementWrapper({
 }) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
+    const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
   }, []);
 
-  // Mobile: full bleed (no horizontal margin). Desktop: keep wide=80vw / centered=750px.
+  // Mobile/≤1024: full bleed (no horizontal margin). Desktop: wide=80vw / centered=750px.
   const maxWidth = isMobile ? "100%" : variant === "wide" ? "80vw" : 750;
   const [shift, setShift] = useState(0);
 
   useEffect(() => {
     const computeShift = () => {
+      // ≤1024: kein Text-Shift — Desktop-TOC ist ausgeblendet (Mobile-Overlay).
+      if (window.matchMedia("(max-width: 1024px)").matches) { setShift(0); return; }
       const vw = window.innerWidth;
       const elementWidth = variant === "wide" ? vw * 0.8 : Math.min(vw, 750);
       const leftOffset = (vw - elementWidth) / 2;
