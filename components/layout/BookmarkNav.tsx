@@ -47,8 +47,8 @@ export default function BookmarkNav() {
   const burgerVisible = useRef(false);
   const triggerRef = useRef<ScrollTrigger | null>(null);
 
-  // Mobile detection
-  const isMobile = useIsMobile();
+  // Mobile detection — Punkt 4: Header-Chrome ab ≤1000px mobil
+  const isMobile = useIsMobile(1000);
 
   // Search refs
   const bodyRef = useRef<HTMLDivElement>(null);

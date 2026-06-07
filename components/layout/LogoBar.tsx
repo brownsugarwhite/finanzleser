@@ -73,7 +73,7 @@ export default function LogoBar() {
   // Slot-Position responsive: Mobile 60px, Desktop 90px vom linken Bildrand.
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
+    const mql = window.matchMedia("(max-width: 1000px)");
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
@@ -222,7 +222,7 @@ export default function LogoBar() {
   useEffect(() => {
     if (!isLanding) return;
 
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1000px)").matches;
 
     if (isMobile) {
       // Mobile: Logo erscheint NACH Leos Flug zur Home-Ecke,
@@ -319,7 +319,7 @@ export default function LogoBar() {
       // priorState NUR einmal pro Open setzen — der Overlay-IN-Effect feuert
       // in Dev (StrictMode) doppelt, sonst würde der zweite Call "hidden"
       // reinschreiben und der Restore beim Close wäre kaputt.
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const isMobile = window.matchMedia("(max-width: 1000px)").matches;
       if (detail?.label === "preview" && isMobile) {
         const state = stateRef.current;
         if (previewPriorStateRef.current === null) {
@@ -349,7 +349,7 @@ export default function LogoBar() {
       if (state === "hidden") {
         // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
         // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
-        const isMobileMQ = window.matchMedia("(max-width: 767px)").matches;
+        const isMobileMQ = window.matchMedia("(max-width: 1000px)").matches;
         if (isMobileMQ) {
           if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
           longInDelayTimerRef.current = window.setTimeout(() => {
@@ -447,7 +447,7 @@ export default function LogoBar() {
   // Separater additiver filter/opacity-Layer auf dem Wrapper — stört die
   // Logo-Zustandsmaschine (visibility/Lottie) nicht.
   useEffect(() => {
-    const isMobileMQ = () => window.matchMedia("(max-width: 767px)").matches;
+    const isMobileMQ = () => window.matchMedia("(max-width: 1000px)").matches;
     const onSearchOpen = () => {
       if (!isMobileMQ()) return;
       const el = wrapperRef.current;

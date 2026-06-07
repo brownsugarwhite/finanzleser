@@ -12,7 +12,7 @@ import { setActiveOverlay, closeOverlay, registerOverlayCloser } from "@/lib/ove
 type MegaMenuCache = PreloadedData;
 
 export default function MegaMenuWrapper() {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1000); // Punkt 4: Mobile-Megamenü ab ≤1000px
   if (isMobile) return <MobileMegaMenu />;
   return <DesktopMegaMenuWrapper />;
 }

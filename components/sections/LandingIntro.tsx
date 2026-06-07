@@ -446,9 +446,9 @@ export default function LandingIntro() {
         .landing-suggest__text > span { font-weight: 400; }
         .landing-suggest__text > strong { font-weight: 700; }
 
-        /* ── Mobile: Dotline raus, Pillbar (Search + Leo-Wrap) komplett aus,
-              Logo rutscht 36px nach unten. Leo lebt im globalen Slot (app/layout.tsx). ── */
-        @media (max-width: 767px) {
+        /* ── Mobile (≤1000px, Punkt 4): Dotline raus, Pillbar (Search + Leo-Wrap)
+              komplett aus, Logo rutscht 36px nach unten. Leo lebt im globalen Slot. ── */
+        @media (max-width: 1000px) {
           .landing-dotline { display: none !important; }
           .landing-pillbar { display: none !important; }
           .landing-logo { margin-top: 36px !important; }

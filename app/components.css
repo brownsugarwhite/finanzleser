@@ -2043,9 +2043,9 @@ h2.faq-heading {
   background: rgba(69, 161, 23, 0.04);
 }
 
-/* Mobile: globale + Landing-TopNav ausblenden (Burger-Nav im Drawer bleibt sichtbar).
-   !important nötig, weil TopNav.tsx inline display:flex setzt. */
-@media (max-width: 767px) {
+/* Mobile (≤1000px, Punkt 4): globale + Landing-TopNav ausblenden (Burger-Nav im
+   Drawer bleibt sichtbar). !important nötig, weil TopNav.tsx inline display:flex setzt. */
+@media (max-width: 1000px) {
   .sticky-nav[data-topnav],
   .landing-nav[data-topnav] {
     display: none !important;
