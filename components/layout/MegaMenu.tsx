@@ -269,9 +269,9 @@ export default function MegaMenu({
         }
       }}
     >
-      <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+      <div className="megamenu-stage" style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Gray bar — behind bookmark, above overflow:hidden container */}
-        <div data-megamenu-panel style={{
+        <div data-megamenu-panel className="megamenu-seam" style={{
           position: "absolute",
           left: "50%",
           top: 0,
@@ -284,7 +284,7 @@ export default function MegaMenu({
         }} />
 
         {/* Bookmark Divider — above overflow:hidden container */}
-        <div data-megamenu-panel style={{
+        <div data-megamenu-panel className="megamenu-seam" style={{
           position: "absolute",
           left: "50%",
           top: 0,

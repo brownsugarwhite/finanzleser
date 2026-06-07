@@ -606,6 +606,20 @@ body.leo-chat-open #leo-chat-messages {
   align-items: center !important;
 }
 
+/* Punkt 6: Desktop-Megamenü. Auf breiten Viewports zentriert; bei schmalen
+   (≤1320px, Desktop-Megamenü gibt es erst ab >1000px) wird rechts Platz für die
+   „passenden Finanztools" (~230px + Gap) reserviert → Booklet zentriert im
+   verbleibenden Raum (= nach links geschoben), Spine/Graubalken wandern mit
+   (Center −127px). So überlagern die Finanztools das Booklet nie. */
+@media (max-width: 1320px) {
+  .megamenu-stage {
+    padding-right: 254px;
+  }
+  .megamenu-seam {
+    left: calc(50% - 127px) !important;
+  }
+}
+
 /* Typography */
 p, li, span {
   color: var(--color-text-medium);
