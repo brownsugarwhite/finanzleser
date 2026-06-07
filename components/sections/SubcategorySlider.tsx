@@ -416,6 +416,19 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     }
   }, [activeSlide]);
 
+  // Punkt 9: Nach dem Card→Button-Morph (und bei Button-Wechsel) den AKTIVEN
+  // Button ins Sichtfeld holen, damit er nicht am Rand abgeschnitten ist.
+  // align:'start' → aktiver Button bündig links = garantiert ganz sichtbar.
+  // Embla-Slide-Index = Kategorie-Index + 1 (Leading-Spacer ist Slide 0).
+  useEffect(() => {
+    if (activeSlide === null || !catEmblaApi) return;
+    const t = setTimeout(() => {
+      if (!catEmblaApi) return;
+      catEmblaApi.scrollTo(activeSlide + 1);
+    }, MORPH_DURATION + 60);
+    return () => clearTimeout(t);
+  }, [activeSlide, catEmblaApi]);
+
   // Hard lock against hover-pill movement only during card↔button morph
   // (active → active wechsel löst KEINEN Lock aus)
   const prevActiveSlideRef = useRef<number | null>(null);
@@ -475,6 +488,51 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         }}>
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
+        {/* Punkt 8c: Pfeil-Navigation im Button-Mode — erscheint (scale-in) wenn
+            der Slider gestaucht/scrollbar ist; brand-secondary, Stil wie die
+            Vorschau-Slider-Pfeile. Pfeilspitze 20px hoch, 7px vom Rand. */}
+        {([
+          { dir: "left" as const, onClick: () => catEmblaApi?.scrollPrev(), label: "Zurück" },
+          { dir: "right" as const, onClick: () => catEmblaApi?.scrollNext(), label: "Weiter" },
+        ]).map(({ dir, onClick, label }) => {
+          const show = activeSlide !== null && canScroll;
+          return (
+            <button
+              key={dir}
+              aria-label={label}
+              onClick={onClick}
+              style={{
+                position: "absolute",
+                top: "50%",
+                [dir]: 7,
+                transform: `translateY(-50%) scale(${show ? 1 : 0})`,
+                opacity: show ? 1 : 0,
+                pointerEvents: show ? "auto" : "none",
+                transition:
+                  "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease",
+                transitionDelay: show ? "0.12s" : "0s",
+                zIndex: 20,
+                background: "none",
+                border: "none",
+                padding: 8,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <svg
+                width={16.7}
+                height={20}
+                viewBox="0 0 15 18"
+                aria-hidden
+                style={{ display: "block", transform: dir === "left" ? "scaleX(-1)" : undefined }}
+              >
+                <path d="M15 9L0 18V0L15 9Z" fill="var(--color-brand-secondary)" />
+              </svg>
+            </button>
+          );
+        })}
         <div
           ref={catEmblaRef}
           style={{
