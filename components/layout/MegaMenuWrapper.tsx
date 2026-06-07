@@ -7,9 +7,13 @@ import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import MegaMenu, { type PreloadedData } from "./MegaMenu";
 import MobileMegaMenu from "./MobileMegaMenu";
 import TopNav from "./TopNav";
-import { setActiveOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
+import { setActiveOverlay, closeOverlay, registerOverlayCloser, getActiveOverlay } from "@/lib/overlayController";
 
 type MegaMenuCache = PreloadedData;
+
+// Punkt 5: überlebt den Remount beim Breakpoint-Wechsel (Mobile↔Desktop), damit
+// das Desktop-Megamenü nach dem Wechsel wieder die zuletzt offene Kategorie zeigt.
+let persistedCategory: string | null = null;
 
 export default function MegaMenuWrapper() {
   const isMobile = useIsMobile(1000); // Punkt 4: Mobile-Megamenü ab ≤1000px
@@ -93,12 +97,23 @@ function DesktopMegaMenuWrapper() {
     };
   }, [NAV_ITEMS]);
 
-  // Remember last open category
+  // Remember last open category (instanz- + modulweit für Remount-Persistenz)
   useEffect(() => {
     if (openCategory) {
       lastCategoryRef.current = openCategory;
+      persistedCategory = openCategory;
     }
   }, [openCategory]);
+
+  // Punkt 5: Beim Mounten (Resize Mobile→Desktop über 1000px) das Menü wieder
+  // öffnen, wenn das Overlay aktiv ist → kein Verschwinden beim Breakpoint-Wechsel.
+  useEffect(() => {
+    if (getActiveOverlay() === "menu") {
+      setOpenedViaBurger(true);
+      setOpenCategory(persistedCategory || lastCategoryRef.current || NAV_ITEMS[0]?.label || null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Slide in burger TopNav
   useEffect(() => {

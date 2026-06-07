@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
+import { closeOverlay, registerOverlayCloser, setActiveOverlay, getActiveOverlay } from "@/lib/overlayController";
 import {
   useCallback,
   useEffect,
@@ -85,28 +85,50 @@ export default function MobileMegaMenu() {
   const detailContentRef = useRef<HTMLDivElement>(null);
   const [stageHeight, setStageHeight] = useState<number | null>(null);
 
+  // Punkt 5: Booklet-Modus. ≥600px (bis 1000, da Komponente nur ≤1000 rendert) =
+  // "both": beide Seiten ganz sichtbar (aufgeschlagenes Buch, kein Peek/Slide).
+  // <600px = "single": eine Seite + Slide zur anderen (wie bisher).
+  const [bothPages, setBothPages] = useState(false);
+
   // Computed positions for booklet translateX (refresh on resize)
   const positionsRef = useRef({ vw: 0, pageW: 0, xClosedRight: 0, xMain: 0, xDetail: 0, xClosedLeft: 0 });
 
   const recalcPositions = useCallback(() => {
     const vw = window.innerWidth;
-    // Each page takes the available width minus bg gap on one side AND peek of the other page on the spine side
-    const pageW = vw - SIDE_MARGIN - SPINE_W - PEEK;
-    positionsRef.current = {
-      vw,
-      pageW,
-      xClosedRight: vw + SIDE_MARGIN,
-      xMain: SIDE_MARGIN,                                       // bg gap on LEFT, page2 peeks on RIGHT (PEEK px)
-      xDetail: PEEK - pageW,                                    // page1 peeks on LEFT (PEEK px), bg gap on RIGHT
-      xClosedLeft: -(2 * pageW + SPINE_W) - SIDE_MARGIN,
-    };
+    const both = vw >= 600;
+    if (both) {
+      // Beide Seiten + Spine zentriert komplett sichtbar (je halbe Restbreite).
+      const pageW = (vw - 2 * SIDE_MARGIN - SPINE_W) / 2;
+      positionsRef.current = {
+        vw,
+        pageW,
+        xClosedRight: vw + SIDE_MARGIN,
+        xMain: SIDE_MARGIN,
+        xDetail: SIDE_MARGIN,                                   // kein Slide — beide sichtbar
+        xClosedLeft: -(2 * pageW + SPINE_W) - SIDE_MARGIN,
+      };
+    } else {
+      // Eine Seite breit, andere peekt am Spine (Slide zwischen den Seiten).
+      const pageW = vw - SIDE_MARGIN - SPINE_W - PEEK;
+      positionsRef.current = {
+        vw,
+        pageW,
+        xClosedRight: vw + SIDE_MARGIN,
+        xMain: SIDE_MARGIN,                                     // bg gap LEFT, page2 peekt RIGHT
+        xDetail: PEEK - pageW,                                  // page1 peekt LEFT, bg gap RIGHT
+        xClosedLeft: -(2 * pageW + SPINE_W) - SIDE_MARGIN,
+      };
+    }
   }, []);
 
   useEffect(() => {
-    recalcPositions();
-    const onResize = () => recalcPositions();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const apply = () => {
+      setBothPages(window.innerWidth >= 600);
+      recalcPositions();
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
   }, [recalcPositions]);
 
   /* ─── Open / Close lifecycle ─── */
@@ -154,7 +176,8 @@ export default function MobileMegaMenu() {
     void xDetail;
   }, [open, recalcPositions]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Animate booklet slide between main and detail
+  // Animate booklet slide between main and detail (im both-Modus kein Slide,
+  // weil xDetail == xMain — beide Seiten bleiben sichtbar).
   useEffect(() => {
     if (!open) return;
     const booklet = bookletRef.current;
@@ -166,6 +189,17 @@ export default function MobileMegaMenu() {
       ease: "power3.inOut",
     });
   }, [detail, open]);
+
+  // Modus-Wechsel bei offenem Menü (Resize über 600px) → Booklet sofort an die
+  // neue Zielposition setzen (kein Enter-/Slide-Replay), Menü bleibt offen.
+  useEffect(() => {
+    if (!open) return;
+    const booklet = bookletRef.current;
+    if (!booklet) return;
+    recalcPositions();
+    const { xMain, xDetail } = positionsRef.current;
+    gsap.set(booklet, { x: detail && !bothPages ? xDetail : xMain });
+  }, [bothPages, open, detail, recalcPositions]);
 
   /* ─── Dynamic height ───
      Main view: fixed at MAIN_PAGE_HEIGHT (350).
@@ -234,6 +268,9 @@ export default function MobileMegaMenu() {
 
   useEffect(() => {
     if (open) {
+      // Als aktives Overlay markieren (Punkt 5: damit das Menü beim Breakpoint-
+      // Wechsel ≤/≥1000 auf der anderen Variante weiter offen bleibt).
+      setActiveOverlay("menu");
       // extended:true → ContentScaler also blurs TopNav, Logo and Landing search pill
       window.dispatchEvent(
         new CustomEvent("menu-opened", { detail: { label: "mobile", extended: true } })
@@ -246,6 +283,16 @@ export default function MobileMegaMenu() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Punkt 5: Beim Mounten (z.B. Resize von Desktop→Mobile über 1000px) das Menü
+  // wieder öffnen, wenn es als Overlay aktiv ist → kein Verschwinden beim Wechsel.
+  useEffect(() => {
+    if (getActiveOverlay() === "menu") {
+      setOpen(true);
+      recalcPositions();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /* ─── Escape key closes ─── */
 
@@ -283,8 +330,15 @@ export default function MobileMegaMenu() {
     return null;
   }
 
-  // Stage width = 2 * pageW + SPINE_W where pageW = vw - SIDE_MARGIN - SPINE_W - PEEK
-  const stageWidth = `calc(200vw - ${2 * (SIDE_MARGIN + PEEK) + SPINE_W}px)`;
+  // Stage- + Seitenbreite modusabhängig (Punkt 5).
+  // both: Stage = vw − 2·SIDE_MARGIN; jede Seite = (vw − 2·SIDE_MARGIN − SPINE)/2.
+  // single: Stage = 2·pageW + SPINE; Seite = vw − SIDE_MARGIN − SPINE − PEEK.
+  const stageWidth = bothPages
+    ? `calc(100vw - ${2 * SIDE_MARGIN}px)`
+    : `calc(200vw - ${2 * (SIDE_MARGIN + PEEK) + SPINE_W}px)`;
+  const pageWidthCss = bothPages
+    ? `calc((100vw - ${2 * SIDE_MARGIN + SPINE_W}px) / 2)`
+    : `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`;
 
   return (
     <div
@@ -320,9 +374,10 @@ export default function MobileMegaMenu() {
         }}
       >
         <div ref={stageRef} className="flex w-full h-full relative">
-          {/* PAGE 1 — Main menu */}
+          {/* PAGE 1 — Main menu (im both-Modus immer sichtbar) */}
           <PageMain
-            visible={!detail}
+            visible={bothPages || !detail}
+            pageWidth={pageWidthCss}
             openSection={openSection}
             setOpenSection={setOpenSection}
             onPickRatgeberCategory={(label, href) =>
@@ -340,6 +395,7 @@ export default function MobileMegaMenu() {
           {/* PAGE 2 — Detail */}
           <PageDetail
             detail={detail}
+            pageWidth={pageWidthCss}
             onBack={() => setDetail(null)}
             onNavigate={navigateAndClose}
             contentRef={detailContentRef}
@@ -409,6 +465,7 @@ function Spine() {
 
 function PageMain({
   visible,
+  pageWidth,
   openSection,
   setOpenSection,
   onPickRatgeberCategory,
@@ -418,6 +475,7 @@ function PageMain({
   contentRef,
 }: {
   visible: boolean;
+  pageWidth: string;
   openSection: MainSection;
   setOpenSection: (s: MainSection) => void;
   onPickRatgeberCategory: (label: string, href: string) => void;
@@ -430,7 +488,7 @@ function PageMain({
     <div
       className="relative flex flex-col h-full overflow-hidden"
       style={{
-        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        width: pageWidth,
         flexShrink: 0,
         borderTopLeftRadius: PAGE_RADIUS,
         borderBottomLeftRadius: PAGE_RADIUS,
@@ -623,11 +681,13 @@ function Section({
 
 function PageDetail({
   detail,
+  pageWidth,
   onBack,
   onNavigate,
   contentRef,
 }: {
   detail: DetailType | null;
+  pageWidth: string;
   onBack: () => void;
   onNavigate: (href: string) => void;
   contentRef?: React.RefObject<HTMLDivElement | null>;
@@ -636,7 +696,7 @@ function PageDetail({
     <div
       className="relative flex flex-col h-full overflow-hidden"
       style={{
-        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        width: pageWidth,
         flexShrink: 0,
         borderTopRightRadius: PAGE_RADIUS,
         borderBottomRightRadius: PAGE_RADIUS,
@@ -647,19 +707,23 @@ function PageDetail({
       }}
       aria-hidden={!detail}
     >
-      <div className="flex items-center gap-2 px-5 pt-6 pb-2">
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-subtle)] transition-colors"
-          aria-label="Zurück"
-        >
-          <span className="text-xl text-[var(--color-text-primary)]">←</span>
-        </button>
-        <h2 className="text-xl font-semibold text-[var(--color-text-primary)] truncate">
-          {detailTitle(detail)}
-        </h2>
-      </div>
+      {/* Header nur wenn ein Detail gewählt ist — sonst (leere rechte Buchseite
+          im both-Modus) kein verwaister Zurück-Pfeil. */}
+      {detail && (
+        <div className="flex items-center gap-2 px-5 pt-6 pb-2">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-subtle)] transition-colors"
+            aria-label="Zurück"
+          >
+            <span className="text-xl text-[var(--color-text-primary)]">←</span>
+          </button>
+          <h2 className="text-xl font-semibold text-[var(--color-text-primary)] truncate">
+            {detailTitle(detail)}
+          </h2>
+        </div>
+      )}
 
       <div ref={contentRef} className="flex-1 overflow-hidden px-5 pb-5">
         {detail?.kind === "ratgeber" && (
