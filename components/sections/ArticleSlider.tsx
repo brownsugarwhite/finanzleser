@@ -237,6 +237,8 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,
+        // Mobile: ~20px Abstand zum linken Rand (Leading-Spacer mobil display:none).
+        paddingLeft: isMobile ? 20 : 0,
       }}>
         <div
           aria-hidden

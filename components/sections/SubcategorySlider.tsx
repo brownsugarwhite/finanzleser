@@ -450,21 +450,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     isMobile,
   });
 
-  // Punkt 9 (NUR Mobile): Nach dem Card→Button-Morph den AKTIVEN Button ins
-  // Sichtfeld holen, damit er nicht am Rand abgeschnitten ist. Desktop unverändert.
-  // Index robust über das echte DOM-Node bestimmen (indexOf) — unabhängig davon,
-  // ob embla den (mobil ausgeblendeten) Leading-Spacer mitzählt.
-  useEffect(() => {
-    if (!isMobile || activeSlide === null || !catEmblaApi) return;
-    const t = setTimeout(() => {
-      if (!catEmblaApi) return;
-      const cardEl = sliderPill.cardRefs.current[activeSlide];
-      const idx = cardEl ? catEmblaApi.slideNodes().indexOf(cardEl) : -1;
-      if (idx >= 0) catEmblaApi.scrollTo(idx);
-    }, MORPH_DURATION + 60);
-    return () => clearTimeout(t);
-  }, [activeSlide, catEmblaApi, isMobile, sliderPill.cardRefs]);
-
   if (!categories || categories.length === 0) return null;
 
   const navProps = isArticleMode && articleNav
@@ -539,7 +524,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           <div
             onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
             onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
-            style={{ display: 'flex', gap: `${CAT_GAP}px` }}
+            // Mobile: ~20px Abstand zum linken Rand (Leading-Spacer ist mobil
+            // display:none). Desktop unverändert (Spacer übernimmt den Abstand).
+            style={{ display: 'flex', gap: `${CAT_GAP}px`, paddingLeft: isMobile ? 20 : 0 }}
           >
             <div
               aria-hidden
