@@ -563,8 +563,11 @@ body.leo-chat-open .topbar-grid {
    schmalen Viewports nicht zu weit nach rechts/aus dem Bild rückt. */
 @media (max-width: 1260px) {
   .topbar-grid .nav-space {
-    padding-left: min(calc(1260px - 100vw), 240px);
-    box-sizing: border-box;
+    /* margin-left verschiebt die gesamte (zentrierte) Nav nach rechts → hält
+       Abstand zum Logo. (padding würde nur die zentrierten Pills um die Hälfte
+       verschieben.) Gedeckelt, damit die Nav auf schmalen Viewports nicht zu
+       weit rückt. */
+    margin-left: min(calc(1260px - 100vw), 200px);
   }
 }
 
@@ -607,6 +610,17 @@ h3.rechner-title,
 }
 h1.category-title {
   font-weight: 700 !important;
+}
+
+/* Finanztool-Überschrift (Badge + Titel + Einleitung) über dem Tool — deutlicher
+   Abstand zum darüberliegenden Artikelinhalt. */
+.article-tool-head {
+  margin-top: 64px;
+}
+@media (max-width: 1024px) {
+  .article-tool-head {
+    margin-top: 40px;
+  }
 }
 
 /* SparkHeading — drei-stufige Box-Architektur damit Flip's absolute-mode

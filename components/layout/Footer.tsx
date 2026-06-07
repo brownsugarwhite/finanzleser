@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Script from "next/script";
+import TrustpilotWidget from "@/components/ui/TrustpilotWidget";
 import { getToolCategories } from "@/lib/wordpress";
 import NewsletterBanner from "@/components/sections/NewsletterBanner";
 import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
@@ -133,25 +133,7 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
               padding: "16px",
             }}
           >
-            <Script
-              src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-              strategy="afterInteractive"
-            />
-            {/* TrustBox – Mini (Kachel mit Sternen + TrustScore) */}
-            <div
-              className="trustpilot-widget"
-              data-locale="de-DE"
-              data-template-id="53aa8807dec7e10d38f59f32"
-              data-businessunit-id="65095be226c6ff8e9dedad97"
-              data-style-height="130px"
-              data-style-width="100%"
-              data-token="25522917-e563-49b9-abd1-73b98233e63d"
-              style={{ width: "100%" }}
-            >
-              <a href="https://de.trustpilot.com/review/finconext.de" target="_blank" rel="noopener">
-                Trustpilot
-              </a>
-            </div>
+            <TrustpilotWidget />
           </div>
         </div>
 

@@ -457,8 +457,9 @@ export default function LogoBar() {
     const onSearchClose = () => {
       const el = wrapperRef.current;
       if (!el) return;
+      // Schnell + ohne wahrnehmbaren Delay wieder einbluren.
       gsap.to(el, {
-        filter: "blur(0px)", opacity: 1, duration: 0.45, ease: "power2.inOut",
+        filter: "blur(0px)", opacity: 1, duration: 0.3, ease: "power2.out",
         onComplete: () => { el.style.filter = ""; },
       });
     };

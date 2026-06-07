@@ -24,8 +24,10 @@ export default function ArticleElementWrapper({
     return () => mql.removeEventListener("change", handler);
   }, []);
 
-  // Mobile/≤1024: full bleed (no horizontal margin). Desktop: wide=80vw / centered=750px.
-  const maxWidth = isMobile ? "100%" : variant === "wide" ? "80vw" : 750;
+  // Centered (Artikeltext) immer auf 750 begrenzt — auch ≤1024, damit der Text
+  // beim Unterschreiten von 1024 nicht breiter wird als im Desktop. Wide (Tools)
+  // geht ≤1024 auf volle Breite, Desktop 80vw.
+  const maxWidth = variant === "wide" ? (isMobile ? "100%" : "80vw") : 750;
   const [shift, setShift] = useState(0);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export default function ArticleElementWrapper({
           width: "100%",
           maxWidth,
           transform: `translateX(${shift}px)`,
-          transition: "transform 0.3s ease",
+          transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           willChange: "transform",
         }}
       >

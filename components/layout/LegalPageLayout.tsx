@@ -34,8 +34,10 @@ export default function LegalPageLayout({
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6">
-          <Breadcrumb items={breadcrumbItems} />
+        <div className="scalable-landing">
+          <div style={{ maxWidth: 1200 }} className="mx-auto px-6">
+            <Breadcrumb items={breadcrumbItems} />
+          </div>
         </div>
 
         {headingVariant === "spark" ? (
