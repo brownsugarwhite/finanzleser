@@ -457,9 +457,10 @@ export default function LogoBar() {
     const onSearchClose = () => {
       const el = wrapperRef.current;
       if (!el) return;
-      // Schnell + ohne wahrnehmbaren Delay wieder einbluren.
+      // Erst mit etwas Delay wieder einbluren (Bookmark-Suchleiste zieht sich
+      // zuerst zusammen, dann erscheint das Logo).
       gsap.to(el, {
-        filter: "blur(0px)", opacity: 1, duration: 0.3, ease: "power2.out",
+        filter: "blur(0px)", opacity: 1, duration: 0.35, delay: 0.35, ease: "power2.out",
         onComplete: () => { el.style.filter = ""; },
       });
     };

@@ -124,7 +124,6 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
           <div
             className="footer-column"
             style={{
-              border: "1px solid var(--color-text-primary)",
               background: "transparent",
               minHeight: "100%",
               display: "flex",

@@ -563,11 +563,11 @@ body.leo-chat-open .topbar-grid {
    schmalen Viewports nicht zu weit nach rechts/aus dem Bild rückt. */
 @media (max-width: 1260px) {
   .topbar-grid .nav-space {
-    /* margin-left verschiebt die gesamte (zentrierte) Nav nach rechts → hält
-       Abstand zum Logo. (padding würde nur die zentrierten Pills um die Hälfte
-       verschieben.) Gedeckelt, damit die Nav auf schmalen Viewports nicht zu
-       weit rückt. */
-    margin-left: min(calc(1260px - 100vw), 200px);
+    /* transform statt margin: .nav-space hat flex-shrink:0, dadurch wird ein
+       margin-left vom Flex-Layout "geschluckt" (Item bleibt zentriert). transform
+       verschiebt die Nav rein visuell nach rechts → hält Abstand zum Logo.
+       Gedeckelt, damit die Nav auf schmalen Viewports nicht zu weit rückt. */
+    transform: translateX(min(calc(1260px - 100vw), 200px));
   }
 }
 

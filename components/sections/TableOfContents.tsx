@@ -50,7 +50,7 @@ export default function TableOfContents({
   };
 
   return (
-    <nav style={{ maxWidth: collapsed ? "none" : "300px" }}>
+    <nav style={{ maxWidth: "300px" }}>
       <style>{tocHoverStyles}</style>
       <ol style={{ display: "flex", flexDirection: "column", gap: collapsed ? "10px" : "20px", listStyle: "none", margin: 0, padding: 0 }}>
         {items.map((item, idx) => {
@@ -145,8 +145,25 @@ export default function TableOfContents({
                     />
                   )}
                 </span>
-                {!collapsed && toolLabel ? (
-                  <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
+                {/* Label-Block IMMER gerendert (kein conditional → kein Reflow-
+                    Snap). Im collapsed-Zustand via max-width/opacity weggeblendet;
+                    feste Innenbreite verhindert Umbruch während der Animation. */}
+                <span
+                  aria-hidden={collapsed}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "2px",
+                    width: "200px",
+                    flexShrink: 0,
+                    overflow: "hidden",
+                    maxWidth: collapsed ? 0 : "200px",
+                    opacity: collapsed ? 0 : 1,
+                    transition:
+                      "max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                >
+                  {toolLabel && (
                     <span
                       style={{
                         display: "inline-block",
@@ -159,30 +176,12 @@ export default function TableOfContents({
                         lineHeight: 1,
                         padding: "5px 8px",
                         letterSpacing: "0.02em",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {toolLabel}
                     </span>
-                    <span
-                      className="toc-text"
-                      style={{
-                        fontFamily: "Merriweather, serif",
-                        fontWeight: isActive ? 700 : 300,
-                        fontStyle: isActive ? "normal" : "italic",
-                        fontSize: "15px",
-                        color: isActive ? activeColor : "var(--color-text-medium)",
-                        lineHeight: "1.4",
-                        transition: "none",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {item.text}
-                    </span>
-                  </span>
-                ) : !collapsed ? (
+                  )}
                   <span
                     className="toc-text"
                     style={{
@@ -190,20 +189,18 @@ export default function TableOfContents({
                       fontWeight: isActive ? 700 : 300,
                       fontStyle: isActive ? "normal" : "italic",
                       fontSize: "15px",
-                      color: isActive ? "var(--color-brand)" : "var(--color-text-medium)",
+                      color: isActive ? activeColor : "var(--color-text-medium)",
                       lineHeight: "1.4",
                       transition: "none",
                       display: "-webkit-box",
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: "vertical",
                       overflow: "hidden",
-                      flex: 1,
-                      minWidth: 0,
                     }}
                   >
                     {item.text}
                   </span>
-                ) : null}
+                </span>
               </a>
             </li>
           );

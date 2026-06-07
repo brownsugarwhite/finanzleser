@@ -32,7 +32,7 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
         paddingRight: collapsed ? "23px" : "23px",
         // Synchron + gediegen zum Text-Slide (gleiches Timing/Easing).
         // gap NICHT mittransitionen (ruckelt) — nur Breite/Padding.
-        transition: "width 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
       <div className="sticky top-24" style={{ position: "sticky", top: "100px", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
@@ -45,7 +45,7 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
             margin: "0 0 " + (collapsed ? "12px" : "23px") + " 0",
             textAlign: collapsed ? "center" : "left",
             flexShrink: 0,
-            transition: "font-size 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: "font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
