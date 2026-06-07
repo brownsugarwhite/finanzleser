@@ -276,12 +276,12 @@ body.leo-chat-open #leo-chat-messages {
     right: 10px;
     width: auto;
     transform: none;
-    bottom: 150px;
-    max-height: calc(100vh - 200px);
-    /* Top-Padding hält die erste Nachricht unter dem globalen ProgressiveBlur
-       (oben ~120px) hervor; Bottom-Padding gibt Luft über der Eingabe-Pille,
-       damit der Verlauf unten nicht abgeschnitten wirkt. */
-    padding: 96px 8px 28px 8px;
+    /* bottom:0 wie Desktop → der Verlauf läuft HINTER der Eingabe-Pille durch
+       (kein abgeschnittener Gap). Bottom-Padding hält die letzte Nachricht über
+       der Pille; der .leo-chat-bottom-fade-Gradient blendet darunter aus.
+       Top-Padding hält die erste Nachricht unter dem globalen ProgressiveBlur. */
+    bottom: 0;
+    padding: 96px 8px 170px 8px;
   }
 }
 
@@ -332,8 +332,10 @@ body.leo-chat-open #leo-chat-messages {
   font-size: 17px;
   line-height: 1.35;
   color: #636A5F;
+  /* break-word statt anywhere: bricht nur überlange Wörter (URLs), schrumpft
+     aber NICHT die shrink-to-fit-Bubble → kurze Texte bleiben einzeilig. */
   word-wrap: break-word;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 .chat-bubble--user {
   background: #ffffff;
@@ -416,8 +418,15 @@ body.leo-chat-open #leo-chat-messages {
 }
 @media (max-width: 767px) {
   .chat-bubble {
-    font-size: 15px;
-    max-width: 88%;
+    font-size: 17px;          /* vorher 15px → war zu klein */
+    line-height: 1.4;
+    padding: 15px 18px;       /* vorher 23/27 → weniger Innenabstand */
+    max-width: 92%;           /* kurze Anfragen brechen nicht mehr früh */
+  }
+  /* Linker Gutter für Leo, damit der Avatar NEBEN der Antwort-Bubble sitzt
+     (nicht darüber lappt). Leo wird via iconwrap fix in diesen Gutter gesetzt. */
+  .chat-row--assistant {
+    padding-left: 50px;
   }
 }
 
