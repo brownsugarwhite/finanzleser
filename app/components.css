@@ -557,6 +557,17 @@ body.leo-chat-open .topbar-grid {
   align-items: center;
 }
 
+/* Ab 1260px abwärts hält die TopNav mindestens den Linksabstand, den sie bei
+   1260px hat — verhindert, dass die zentrierten Pills nach links über das Logo
+   wandern. Der Versatz wächst mit der Verkleinerung, gedeckelt damit die Nav auf
+   schmalen Viewports nicht zu weit nach rechts/aus dem Bild rückt. */
+@media (max-width: 1260px) {
+  .topbar-grid .nav-space {
+    padding-left: min(calc(1260px - 100vw), 240px);
+    box-sizing: border-box;
+  }
+}
+
 .topbar-grid .free-space {
   width: 100%;
   min-width: 300px;

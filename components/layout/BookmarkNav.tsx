@@ -352,6 +352,9 @@ export default function BookmarkNav() {
     if (searchOpen.current) return;
     searchOpen.current = true;
 
+    // Logo (Mobile) ausbluren, damit das breiter werdende Bookmark es nicht überlappt.
+    window.dispatchEvent(new CustomEvent("search-opened"));
+
     const pill = searchPillRef.current;
     const body = bodyRef.current;
     const inner = searchInnerRef.current;
@@ -398,6 +401,9 @@ export default function BookmarkNav() {
   const closeSearch = useCallback(() => {
     if (!searchOpen.current) return;
     searchOpen.current = false;
+
+    // Logo wieder einbluren.
+    window.dispatchEvent(new CustomEvent("search-closed"));
 
     const pill = searchPillRef.current;
     const body = bodyRef.current;

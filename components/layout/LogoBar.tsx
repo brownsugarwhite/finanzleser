@@ -442,6 +442,34 @@ export default function LogoBar() {
     };
   }, []);
 
+  // Mobile: Logo weich ausbluren, wenn die BookmarkNav-Suche aufgeht (Bookmark
+  // wird breiter und würde sonst das Logo überlappen), beim Schließen einbluren.
+  // Separater additiver filter/opacity-Layer auf dem Wrapper — stört die
+  // Logo-Zustandsmaschine (visibility/Lottie) nicht.
+  useEffect(() => {
+    const isMobileMQ = () => window.matchMedia("(max-width: 767px)").matches;
+    const onSearchOpen = () => {
+      if (!isMobileMQ()) return;
+      const el = wrapperRef.current;
+      if (!el) return;
+      gsap.to(el, { filter: "blur(8px)", opacity: 0, duration: 0.45, ease: "power2.inOut" });
+    };
+    const onSearchClose = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      gsap.to(el, {
+        filter: "blur(0px)", opacity: 1, duration: 0.45, ease: "power2.inOut",
+        onComplete: () => { el.style.filter = ""; },
+      });
+    };
+    window.addEventListener("search-opened", onSearchOpen);
+    window.addEventListener("search-closed", onSearchClose);
+    return () => {
+      window.removeEventListener("search-opened", onSearchOpen);
+      window.removeEventListener("search-closed", onSearchClose);
+    };
+  }, []);
+
   return (
     <>
       <div className="logo-bar-sticky" style={{ width: "100%", height: "50px", position: "sticky", top: "13px", zIndex: 62, marginTop: "-50px", pointerEvents: "none" }}>

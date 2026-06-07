@@ -123,7 +123,7 @@ export default function RevolverSlider({ tools, activeIndex, onActiveChange }: R
           position: "relative",
           width: containerWidth,
           height: revolver.stageHeight,
-          touchAction: "none",
+          touchAction: "pan-y",
           cursor: "grab",
           overflow: "visible",
         }}

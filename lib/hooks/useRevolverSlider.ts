@@ -99,6 +99,10 @@ export function useRevolverSlider({
   const raf = useRef<number | null>(null);
   const dragging = useRef(false);
   const x0 = useRef(0);
+  const y0 = useRef(0);
+  // Richtungs-Lock: null = noch unklar, "h" = horizontal (Slider dreht),
+  // "v" = vertikal (Seite scrollt — Slider greift NICHT ein).
+  const dirLocked = useRef<null | "h" | "v">(null);
   const rotStart = useRef(0);
   const samples = useRef<{ t: number; p: number }[]>([]);
   const didDrag = useRef(false);
@@ -412,20 +416,39 @@ export function useRevolverSlider({
   /* ── Pointer event handlers ── */
 
   const onPointerDown = useCallback((e: React.PointerEvent) => {
-    e.preventDefault();
+    // KEIN preventDefault / kein PointerCapture hier — sonst blockiert der
+    // Slider auf Mobile das vertikale Seiten-Scrollen. Richtung wird erst im
+    // Move bestimmt; erst bei horizontaler Geste übernimmt der Slider.
     dragging.current = true;
     didDrag.current = false;
+    dirLocked.current = null;
     x0.current = e.clientX;
+    y0.current = e.clientY;
     rotStart.current = rot.current;
     samples.current = [];
     if (raf.current) cancelAnimationFrame(raf.current);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
   }, []);
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     if (!dragging.current || introMode.current) return;
-    const now = Date.now();
     const dx = e.clientX - x0.current;
+    const dy = e.clientY - y0.current;
+
+    // Richtung bestimmen sobald genug Bewegung: vertikal → Slider abklemmen
+    // (Seite scrollt nativ, touch-action: pan-y); horizontal → Slider übernimmt.
+    if (dirLocked.current === null) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      if (Math.abs(dy) > Math.abs(dx)) {
+        dirLocked.current = "v";
+        dragging.current = false; // Drag aufgeben → vertikales Scrollen zulassen
+        return;
+      }
+      dirLocked.current = "h";
+      try { (e.target as HTMLElement).setPointerCapture(e.pointerId); } catch {}
+    }
+    if (dirLocked.current !== "h") return;
+
+    const now = Date.now();
     if (Math.abs(dx) > 6) didDrag.current = true;
 
     let newRot = rotStart.current + dx / layout.current.DRAG_PX;
