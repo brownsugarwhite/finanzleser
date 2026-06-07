@@ -2176,6 +2176,7 @@ function SlidePreview({
         </span>
       )}
       <div
+        data-card-info
         ref={setInfoRef}
         style={{
           position: "absolute",
@@ -2587,6 +2588,7 @@ function SlidePreview({
         )}
         {/* Info-i — morphs with the image (CSS child), opacity animated during open/close */}
         <div
+          data-card-info
           ref={setInfoRef}
           style={{
             position: "absolute",

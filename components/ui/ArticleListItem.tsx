@@ -159,6 +159,7 @@ export default function ArticleListItem({ post, href, bookmarkType }: ArticleLis
         }}>
           {/* Info Button */}
           <div
+            data-card-info
             onMouseEnter={() => setInfoHovered(true)}
             onMouseLeave={() => setInfoHovered(false)}
             style={{

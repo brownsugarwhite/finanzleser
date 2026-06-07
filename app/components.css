@@ -641,6 +641,13 @@ h1.category-title {
   font-weight: 700 !important;
 }
 
+/* Info-„i" auf Artikel-Cards (und Vorschau-Slider) global entfernt. DOM bleibt
+   erhalten (Morph-Animationen referenzieren die Elemente null-sicher), nur
+   ausgeblendet. */
+[data-card-info] {
+  display: none !important;
+}
+
 /* SparkHeading — drei-stufige Box-Architektur damit Flip's absolute-mode
    sauber animiert ohne Width-Snap am Ende:
 
@@ -700,7 +707,9 @@ h1.category-title {
 @media (max-width: 767px) {
   .subcat-leading-spacer,
   .subcat-leading-spacer[data-expanded="true"] {
-    flex-basis: 0;
+    /* display:none statt flex-basis:0 — sonst bleibt der Container-gap (65px)
+       VOR der ersten Card stehen. So starten die Cards nah am linken Rand. */
+    display: none;
   }
   .subcat-edge-left {
     display: none;

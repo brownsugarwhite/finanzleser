@@ -243,8 +243,9 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
           style={{
             // Beide Spacer fix auf 5vw. Cards absorbieren den Rest über ihre
             // eigene flex-grow bis max 450 — symmetrisch und minimal.
-            // Mobile: Leading-Spacer entfällt (flexBasis 0), Cards starten am
-            // linken Rand und sliden nur von rechts ein.
+            // Mobile: Leading-Spacer komplett raus (display:none) — flexBasis:0
+            // allein ließe den Container-gap VOR der ersten Card stehen.
+            display: isMobile ? 'none' : 'block',
             flexGrow: 0,
             flexShrink: 0,
             flexBasis: isMobile ? 0 : '5vw',
