@@ -539,10 +539,7 @@ body.leo-chat-open .topbar-grid {
 
 .topbar-grid .logo-space {
   width: 100%;
-  /* Reserviert links genug Platz, dass die linksbündigen Nav-Pills nie hinter
-     das Logo rutschen (Logo-Rechtskante ~283px). Vorher 263 → "Finanzen" lag
-     beim Verkleinern hinter dem Logo. */
-  min-width: 340px;
+  min-width: 263px;
   padding-left: 50px;
   padding-right: 23px;
   padding-bottom: 8px;
@@ -560,14 +557,21 @@ body.leo-chat-open .topbar-grid {
   align-items: center;
 }
 
-/* Ab 1260px abwärts hält die TopNav mindestens den Linksabstand, den sie bei
-   1260px hat — verhindert, dass die zentrierten Pills nach links über das Logo
-   wandern. Der Versatz wächst mit der Verkleinerung, gedeckelt damit die Nav auf
-   schmalen Viewports nicht zu weit nach rechts/aus dem Bild rückt. */
-
 .topbar-grid .free-space {
   width: 100%;
   min-width: 300px;
+}
+
+/* Sticky-TopNav (die zentrierte 650px-Pill-Reihe in app/layout) hält ab 1260px
+   abwärts ihren Linksabstand (≈ (1260-650)/2 = 305px), statt weiter zentriert
+   nach links über das Logo zu rutschen. !important, weil TopNav.tsx alignItems
+   und paddingLeft inline setzt. Gilt nur für die sticky-nav (nicht landing/burger). */
+@media (max-width: 1260px) {
+  .sticky-nav[data-topnav] {
+    align-items: flex-start !important;
+    padding-left: 320px !important;
+    box-sizing: border-box;
+  }
 }
 
 /* Typography */
