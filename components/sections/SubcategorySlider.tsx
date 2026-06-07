@@ -416,19 +416,6 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     }
   }, [activeSlide]);
 
-  // Punkt 9: Nach dem Card→Button-Morph (und bei Button-Wechsel) den AKTIVEN
-  // Button ins Sichtfeld holen, damit er nicht am Rand abgeschnitten ist.
-  // align:'start' → aktiver Button bündig links = garantiert ganz sichtbar.
-  // Embla-Slide-Index = Kategorie-Index + 1 (Leading-Spacer ist Slide 0).
-  useEffect(() => {
-    if (activeSlide === null || !catEmblaApi) return;
-    const t = setTimeout(() => {
-      if (!catEmblaApi) return;
-      catEmblaApi.scrollTo(activeSlide + 1);
-    }, MORPH_DURATION + 60);
-    return () => clearTimeout(t);
-  }, [activeSlide, catEmblaApi]);
-
   // Hard lock against hover-pill movement only during card↔button morph
   // (active → active wechsel löst KEINEN Lock aus)
   const prevActiveSlideRef = useRef<number | null>(null);
@@ -463,6 +450,21 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     isMobile,
   });
 
+  // Punkt 9 (NUR Mobile): Nach dem Card→Button-Morph den AKTIVEN Button ins
+  // Sichtfeld holen, damit er nicht am Rand abgeschnitten ist. Desktop unverändert.
+  // Index robust über das echte DOM-Node bestimmen (indexOf) — unabhängig davon,
+  // ob embla den (mobil ausgeblendeten) Leading-Spacer mitzählt.
+  useEffect(() => {
+    if (!isMobile || activeSlide === null || !catEmblaApi) return;
+    const t = setTimeout(() => {
+      if (!catEmblaApi) return;
+      const cardEl = sliderPill.cardRefs.current[activeSlide];
+      const idx = cardEl ? catEmblaApi.slideNodes().indexOf(cardEl) : -1;
+      if (idx >= 0) catEmblaApi.scrollTo(idx);
+    }, MORPH_DURATION + 60);
+    return () => clearTimeout(t);
+  }, [activeSlide, catEmblaApi, isMobile, sliderPill.cardRefs]);
+
   if (!categories || categories.length === 0) return null;
 
   const navProps = isArticleMode && articleNav
@@ -488,51 +490,44 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         }}>
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
-        {/* Punkt 8c: Pfeil-Navigation im Button-Mode — erscheint (scale-in) wenn
-            der Slider gestaucht/scrollbar ist; brand-secondary, Stil wie die
-            Vorschau-Slider-Pfeile. Pfeilspitze 20px hoch, 7px vom Rand. */}
-        {([
-          { dir: "left" as const, onClick: () => catEmblaApi?.scrollPrev(), label: "Zurück" },
-          { dir: "right" as const, onClick: () => catEmblaApi?.scrollNext(), label: "Weiter" },
-        ]).map(({ dir, onClick, label }) => {
-          const show = activeSlide !== null && canScroll;
-          return (
+        {/* Punkt 8c (NUR Mobile): Edge-Pfeile (Linie + Dreieck) + Page-Color-
+            Gradient im Button-Mode. Scale-in wenn in die jeweilige Richtung
+            scrollbar (Anfang/Ende erreicht → aus). Dark, bei Klick brand-secondary
+            + leichter Squeeze. Desktop unverändert. */}
+        {isMobile && activeSlide !== null && ([
+          { dir: "left" as const, show: canScroll && canPrev, onClick: () => catEmblaApi?.scrollPrev(), label: "Zurück" },
+          { dir: "right" as const, show: canScroll && canNext, onClick: () => catEmblaApi?.scrollNext(), label: "Weiter" },
+        ]).map(({ dir, show, onClick, label }) => (
+          <div
+            key={dir}
+            aria-hidden={!show}
+            style={{ position: "absolute", top: 0, bottom: 0, [dir]: 0, width: 56, zIndex: 20, pointerEvents: "none" }}
+          >
+            {/* Page-Color-Gradient maskiert die Buttons am Rand */}
+            <div
+              style={{
+                position: "absolute", top: 0, bottom: 0, [dir]: 0, width: "100%",
+                background: `linear-gradient(to ${dir === "left" ? "right" : "left"}, var(--color-bg-page) 35%, rgba(250,249,246,0))`,
+                opacity: show ? 1 : 0,
+                transition: "opacity 0.25s ease",
+              }}
+            />
             <button
-              key={dir}
               aria-label={label}
               onClick={onClick}
-              style={{
-                position: "absolute",
-                top: "50%",
-                [dir]: 7,
-                transform: `translateY(-50%) scale(${show ? 1 : 0})`,
-                opacity: show ? 1 : 0,
-                pointerEvents: show ? "auto" : "none",
-                transition:
-                  "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease",
-                transitionDelay: show ? "0.12s" : "0s",
-                zIndex: 20,
-                background: "none",
-                border: "none",
-                padding: 8,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="subcat-edge-arrow"
+              data-show={show ? "true" : "false"}
+              style={{ [dir]: 7 }}
             >
-              <svg
-                width={16.7}
-                height={20}
-                viewBox="0 0 15 18"
-                aria-hidden
-                style={{ display: "block", transform: dir === "left" ? "scaleX(-1)" : undefined }}
-              >
-                <path d="M15 9L0 18V0L15 9Z" fill="var(--color-brand-secondary)" />
+              <span className="subcat-edge-arrow-line" />
+              <svg width={16.7} height={20} viewBox="0 0 15 18" aria-hidden
+                style={{ display: "block", flexShrink: 0, transform: dir === "left" ? "scaleX(-1)" : undefined }}>
+                <path d="M15 9L0 18V0L15 9Z" />
               </svg>
+              <span className="subcat-edge-arrow-line" />
             </button>
-          );
-        })}
+          </div>
+        ))}
         <div
           ref={catEmblaRef}
           style={{
