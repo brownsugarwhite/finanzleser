@@ -539,7 +539,10 @@ body.leo-chat-open .topbar-grid {
 
 .topbar-grid .logo-space {
   width: 100%;
-  min-width: 263px;
+  /* Reserviert links genug Platz, dass die linksbündigen Nav-Pills nie hinter
+     das Logo rutschen (Logo-Rechtskante ~283px). Vorher 263 → "Finanzen" lag
+     beim Verkleinern hinter dem Logo. */
+  min-width: 340px;
   padding-left: 50px;
   padding-right: 23px;
   padding-bottom: 8px;
@@ -561,15 +564,6 @@ body.leo-chat-open .topbar-grid {
    1260px hat — verhindert, dass die zentrierten Pills nach links über das Logo
    wandern. Der Versatz wächst mit der Verkleinerung, gedeckelt damit die Nav auf
    schmalen Viewports nicht zu weit nach rechts/aus dem Bild rückt. */
-@media (max-width: 1260px) {
-  .topbar-grid .nav-space {
-    /* transform statt margin: .nav-space hat flex-shrink:0, dadurch wird ein
-       margin-left vom Flex-Layout "geschluckt" (Item bleibt zentriert). transform
-       verschiebt die Nav rein visuell nach rechts → hält Abstand zum Logo.
-       Gedeckelt, damit die Nav auf schmalen Viewports nicht zu weit rückt. */
-    transform: translateX(min(calc(1260px - 100vw), 200px));
-  }
-}
 
 .topbar-grid .free-space {
   width: 100%;
