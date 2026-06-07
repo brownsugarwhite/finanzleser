@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import gsap from "@/lib/gsapConfig";
 
@@ -168,6 +168,31 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
     }
     setPillActive();
   }, [getDuration, setPillActive]);
+
+  /* ── Squeeze: Pill + Lens an die tatsächliche (gestauchte) Reihenbreite anpassen ──
+     Die Nav-Reihe staucht unter ~1250px (symmetrisches 300px-Padding, max-width 650).
+     Die Lens hat fix 650px → ohne Anpassung laufen die weißen Labels aus der Reihe.
+     ResizeObserver setzt die Lens-Breite = Reihenbreite und positioniert eine
+     sichtbare/aktive Pill SOFORT (kein Lag) neu. */
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const reflow = () => {
+      if (lensRef.current) lensRef.current.style.width = `${container.clientWidth}px`;
+      if (!pillVisible.current || !pillRef.current) return;
+      const btn =
+        btnRefs.current.find((b) => b?.textContent === activeLabel.current) ||
+        btnRefs.current.find((b) => b?.textContent === lastHoveredLabel.current);
+      if (!btn) return;
+      const { x, w } = pillPos(container.getBoundingClientRect(), btn.getBoundingClientRect());
+      gsap.set(pillRef.current, { x, width: w });
+      if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
+      if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });
+    };
+    const ro = new ResizeObserver(reflow);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, []);
 
   /* ── Pill hover movement ── */
 
