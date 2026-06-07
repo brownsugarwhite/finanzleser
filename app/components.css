@@ -562,14 +562,16 @@ body.leo-chat-open .topbar-grid {
   min-width: 300px;
 }
 
-/* Sticky-TopNav (die zentrierte 650px-Pill-Reihe in app/layout) hält ab 1260px
-   abwärts ihren Linksabstand (≈ (1260-650)/2 = 305px), statt weiter zentriert
-   nach links über das Logo zu rutschen. !important, weil TopNav.tsx alignItems
-   und paddingLeft inline setzt. Gilt nur für die sticky-nav (nicht landing/burger). */
+/* TopNav (zentrierte 650px-Pill-Reihe) hält ab 1260px abwärts ihren Linksabstand,
+   statt weiter zentriert nach links über das Logo zu rutschen. Gilt für die
+   sticky-nav (app/layout) UND die burger-nav, die beim Öffnen des Megamenüs
+   einsliced. !important, weil TopNav.tsx alignItems/paddingLeft inline setzt.
+   (landing-nav unberührt — dort ist das Logo zentriert.) */
 @media (max-width: 1260px) {
-  .sticky-nav[data-topnav] {
+  .sticky-nav[data-topnav],
+  .burger-nav[data-topnav] {
     align-items: flex-start !important;
-    padding-left: 320px !important;
+    padding-left: 300px !important;
     box-sizing: border-box;
   }
 }
