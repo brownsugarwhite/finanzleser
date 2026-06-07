@@ -1419,6 +1419,12 @@ a.megamenu-link:hover {
   width: 17px;
   height: 17px;
   margin-top: 1px;
+  /* Unchecked: komplett unsichtbar. Verhindert den grünen Punkt rechts oben
+     (Haken-Endpunkt / SSR-Flash, bevor die JS-Dash-Animation greift). */
+  opacity: 0;
+}
+.checkliste-punkt-box--checked .checkliste-punkt-check {
+  opacity: 1;
 }
 .checkliste-punkt-content {
   display: flex;
