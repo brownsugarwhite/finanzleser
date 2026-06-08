@@ -30,6 +30,15 @@ function getSources(message: LeoUIMessage): LeoSource[] {
   return (part as { type: "data-sources"; data: LeoSource[] } | undefined)?.data ?? [];
 }
 
+/** Trennt einen angehängten "Anbieter: …"-Hinweis vom eigentlichen Fragetext ab,
+ *  damit er separat (kursiv/heller) gerendert werden kann. */
+const ANBIETER_MARKER = "\n\nAnbieter: ";
+function splitAnbieter(text: string): { main: string; anbieter: string | null } {
+  const idx = text.lastIndexOf(ANBIETER_MARKER);
+  if (idx === -1) return { main: text, anbieter: null };
+  return { main: text.slice(0, idx), anbieter: text.slice(idx + ANBIETER_MARKER.length) };
+}
+
 /** Spike-SVG passend zum KI-Section AIAgentTeaser-Design.
  *  Fill via currentColor → wird per CSS auf Bubble-Farbe gesetzt. */
 function BubbleSpike() {
@@ -99,7 +108,17 @@ export default function LeoChatMessages({ messages, status, error, mode }: LeoCh
               )}
               <div className={cn("chat-bubble", isUser ? "chat-bubble--user" : "chat-bubble--assistant")}>
                 {isUser ? (
-                  <p className="chat-text">{text}</p>
+                  (() => {
+                    const { main, anbieter } = splitAnbieter(text);
+                    return (
+                      <>
+                        <p className="chat-text">{main}</p>
+                        {anbieter && (
+                          <p className="chat-anbieter-tag">Anbieter: {anbieter}</p>
+                        )}
+                      </>
+                    );
+                  })()
                 ) : (
                   <div className="chat-text chat-markdown">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>

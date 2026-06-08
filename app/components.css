@@ -416,6 +416,13 @@ body.leo-chat-open #leo-chat-messages {
   margin: 0;
   white-space: pre-wrap;
 }
+/* Angehängter "Anbieter: …"-Hinweis in der User-Bubble — kursiv + heller. */
+.chat-anbieter-tag {
+  margin: 6px 0 0;
+  font-style: italic;
+  opacity: 0.55;
+  font-size: 0.92em;
+}
 /* Quellen-Liste unter der Assistant-Antwort (vom LEO-Backend gelieferte Broschüren). */
 .chat-sources {
   margin-top: 12px;

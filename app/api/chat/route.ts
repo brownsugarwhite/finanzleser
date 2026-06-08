@@ -41,11 +41,22 @@ export async function POST(req: Request) {
       messages,
       slug,
       category,
-    }: { messages: UIMessage[]; slug?: string; category?: string } = await req.json();
+      versicherer,
+    }: { messages: UIMessage[]; slug?: string; category?: string; versicherer?: string } =
+      await req.json();
 
     // Letzte User-Nachricht = aktuelle Frage; alles davor = history.
     const lastUserIdx = messages.map((m) => m.role).lastIndexOf("user");
-    const message = lastUserIdx >= 0 ? messageText(messages[lastUserIdx]) : "";
+    let message = lastUserIdx >= 0 ? messageText(messages[lastUserIdx]) : "";
+
+    // Bei gewähltem Anbieter: strikte, stille Anweisung anhängen (steuert Claude
+    // UND die RAG-Suche, da der Anbietername Teil der Frage wird).
+    if (versicherer?.trim()) {
+      message +=
+        `\n\n(Anweisung: Beziehe deine Antwort strikt auf den Anbieter „${versicherer}". ` +
+        `Stelle Angebot, Konditionen und Besonderheiten dieses Anbieters in den Mittelpunkt. ` +
+        `Wenn die Dokumente nichts Anbieterspezifisches hergeben, nutze die Live-Web-Suche.)`;
+    }
     const history = messages
       .slice(0, lastUserIdx < 0 ? messages.length : lastUserIdx)
       .map((m) => ({ role: m.role, content: messageText(m) }))

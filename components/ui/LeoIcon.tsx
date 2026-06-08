@@ -20,8 +20,9 @@ import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
 
 const LEO_SIZE_DESKTOP = 70;
 const LEO_SIZE_MOBILE = 64;
-// Versicherer-Auswahl im Chat vorerst deaktiviert (Funktionalität folgt später).
-const SHOW_VERSICHERER_SELECT = false;
+// Versicherer-Auswahl im Chat: ausgewählter Anbieter wird an LEO mitgegeben
+// (sichtbar in der Bubble + strikte Anbieter-Anweisung serverseitig in /api/chat).
+const SHOW_VERSICHERER_SELECT = true;
 const BUBBLE_H = 80;            // Höhe der AI-Section-Sprechblase (matched ChatBubble single-line)
 // Höhe der Eingabe-Pille im Chat-Overlay = 100 px (siehe #leo-chat-pill-slot in components.css)
 const isMobileMQ = "(max-width: 767px)";
@@ -75,7 +76,11 @@ export default function LeoIcon() {
       seg.length && (MAIN_CATEGORY_SLUGS as readonly string[]).includes(seg[0])
         ? seg[1] ?? seg[0]
         : "";
-    sendMessage({ text: trimmed }, { body: { slug, category } });
+    // Ausgewählten Anbieter sichtbar an die Nachricht hängen; die strikte
+    // Anbieter-Anweisung an die KI fügt /api/chat serverseitig hinzu.
+    const versicherer = selectedVersicherer?.name ?? "";
+    const displayText = versicherer ? `${trimmed}\n\nAnbieter: ${versicherer}` : trimmed;
+    sendMessage({ text: displayText }, { body: { slug, category, versicherer } });
     setChatInput("");
   };
 
@@ -780,7 +785,11 @@ export default function LeoIcon() {
         target.closest("#leo-chat-center") ||
         target.closest("#leo-chat-messages") ||
         target.closest("#leo-chat-iconwrap") ||
-        target.closest(".leo-batch-container")
+        target.closest(".leo-batch-container") ||
+        // Versicherer-Dropdown wird per Portal an document.body gehängt — Klicks
+        // darauf (Suche/Liste) liegen außerhalb des Chat-Subtrees, dürfen aber
+        // den Chat NICHT schließen.
+        target.closest(".versicherer-select__panel")
       ) return;
       closeChat();
     };
