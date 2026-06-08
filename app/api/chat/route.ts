@@ -9,7 +9,11 @@ import type { LeoSource, LeoUIMessage } from "@/lib/ai/leoMessage";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const LEO_BACKEND_URL = process.env.LEO_BACKEND_URL;
+// LEO-Backend des Kunden (Heroku). Default fest verdrahtet, weil die URL kein
+// Secret ist und netlify.toml-Env nicht zuverlässig in die Function-Laufzeit
+// gelangt. Per ENV überschreibbar (z. B. spätere separate Prod-URL).
+const LEO_BACKEND_URL =
+  process.env.LEO_BACKEND_URL ?? "https://leo-finanzleser-ea7e1549925c.herokuapp.com";
 
 /** Reiner Text einer UIMessage (Text-Parts zusammenfügen). */
 function messageText(message: UIMessage): string {
@@ -33,8 +37,6 @@ function messageText(message: UIMessage): string {
  */
 export async function POST(req: Request) {
   try {
-    if (!LEO_BACKEND_URL) throw new Error("LEO_BACKEND_URL ist nicht gesetzt.");
-
     const {
       messages,
       slug,
