@@ -1076,7 +1076,10 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
 // ─────────────────────────────────────────────
 
 export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
-  const client = getClient();
+  // revalidate: 0 -> immer frisch (kein 1-Std-Cache). Sonst zeigte das Frontend nach einer
+  // Checklisten-Aktualisierung (neue PDF im checkliste-CPT) bis zu 1 Std die alte Version,
+  // weil der On-Demand-Revalidate die Artikel-Checklisten-Daten nicht erfasst.
+  const client = getClient(0);
 
   const query = gql`
     query GetChecklisteBySlug($slug: String!) {
