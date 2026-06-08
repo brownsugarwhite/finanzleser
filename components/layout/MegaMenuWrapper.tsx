@@ -47,17 +47,40 @@ function DesktopMegaMenuWrapper() {
             fetch(`/api/megamenu/posts?category=${slug}`),
             fetch(`/api/megamenu/tools?category=${slug}`),
           ]);
-          const postsData = postsRes.ok ? await postsRes.json() : { posts: [], hasMore: false };
+          // Posts-Fehler (WP 500/Timeout) → NICHT cachen, sonst „lädt nie mehr".
+          // Der nächste Menü-Open/Sub-Wechsel versucht es dann erneut.
+          if (!postsRes.ok) return;
+          const postsData = await postsRes.json();
           const toolsData = toolsRes.ok ? await toolsRes.json() : [];
           results[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
         } catch {
-          results[href] = { posts: [], hasMore: false, tools: [] };
+          // skip → nicht cachen
         }
       }));
       setCache(results);
     };
 
-    loadFirstSubs();
+    // Nicht sofort beim Page-Load feuern — sonst konkurriert dieser Burst (~10-16
+    // parallele WP-Fetches) mit den GraphQL-Calls der eigentlichen Seite und lässt
+    // das (langsame) WP-Backend einbrechen. In die Idle-Zeit verschieben.
+    let cancelled = false;
+    const run = () => { if (!cancelled) loadFirstSubs(); };
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (h: number) => void;
+    };
+    let idleHandle: number | undefined;
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
+    if (w.requestIdleCallback) {
+      idleHandle = w.requestIdleCallback(run, { timeout: 4000 });
+    } else {
+      timeoutHandle = setTimeout(run, 1800);
+    }
+    return () => {
+      cancelled = true;
+      if (idleHandle !== undefined && w.cancelIdleCallback) w.cancelIdleCallback(idleHandle);
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+    };
   }, [NAV_ITEMS]);
 
   useEffect(() => {

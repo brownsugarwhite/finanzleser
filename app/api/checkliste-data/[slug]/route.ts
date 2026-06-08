@@ -3,6 +3,9 @@ import { getChecklisteBySlug } from "@/lib/wordpress";
 import { parsePDF } from "@/lib/checklisteParser";
 
 export const runtime = "nodejs";
+// HINWEIS: Bewusst KEIN Cache hier. Die Checklisten sollen frisch bleiben (vgl.
+// getChecklisteBySlug → getClient(0)), damit aktualisierte Checklisten-PDFs sofort
+// erscheinen statt verzögert. (Frühere Cache-Idee zurückgenommen zugunsten Freshness.)
 
 export async function GET(
   request: NextRequest,

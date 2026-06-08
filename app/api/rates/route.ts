@@ -5,7 +5,10 @@ import ratesJson from "@/config/rates.json";
  * Lädt rates.json und merged mit WordPress-Overrides
  */
 
-export const revalidate = 5; // 5 seconds cache
+// Rechner-Konfiguration (Mindestlohn, BBG, Kindergeld …) ändert sich ~jährlich.
+// Vorher 5s → WP wurde praktisch bei jedem Rechner-Seitenaufruf neu abgefragt
+// (~3,9s Latenz). 1h Cache reicht völlig; Config-Änderungen sind nicht zeitkritisch.
+export const revalidate = 3600;
 
 export async function GET() {
   try {
@@ -17,7 +20,9 @@ export async function GET() {
       const wpUrl = process.env.WORDPRESS_API_URL;
       if (wpUrl) {
         const baseUrl = wpUrl.replace('/graphql', '');
-        const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`);
+        const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
+          next: { revalidate: 3600 },
+        });
         if (response.ok) {
           const wpRates = await response.json();
 
@@ -44,7 +49,7 @@ export async function GET() {
     return Response.json(rates, {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "public, s-maxage=5, stale-while-revalidate=10",
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
       },
     });
   } catch (error) {

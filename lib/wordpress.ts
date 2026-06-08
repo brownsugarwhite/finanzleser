@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
 import { decodePostContent } from "./html-utils";
@@ -263,7 +264,7 @@ function rankByRelevance(posts: Post[], query: string): Post[] {
 // Beiträge nach Kategorie
 // ─────────────────────────────────────────────
 
-export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
+export const getPostsByCategory = cache(async (categorySlug: string): Promise<Post[]> => {
   const client = getClient();
 
   const query = gql`
@@ -322,7 +323,7 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
     return [];
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Einzelner Beitrag mit ACF-Feldern
@@ -471,7 +472,9 @@ export async function getPostContentBySlug(slug: string): Promise<string | null>
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+// React.cache → dedupliziert den Doppel-Aufruf aus generateMetadata + Page-Component
+// innerhalb desselben Requests (vorher 2× = 4 WP-Roundtrips/Artikel, jetzt 1×).
+export const getPostBySlug = cache(async (slug: string): Promise<Post | null> => {
   const client = getClient();
 
   // Query all post types (standard posts + custom post types like dokumente, nachrichten, etc.)
@@ -515,39 +518,36 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     }
   `;
 
-  try {
-    const data = await client.request<{ posts: { nodes: Post[] } }>(query, { slug });
-    let post = data.posts.nodes[0] || null;
+  // ACF-Felder (Untertitel/Featured-Tool) PARALLEL zur Hauptabfrage holen — beide
+  // hängen nur am slug, kein Waterfall. Custom Post Types haben kein `beitrag` →
+  // .catch(null), das ist ok.
+  const aclQuery = gql`
+    query GetPostACF($slug: String!) {
+      postBy(slug: $slug) {
+        beitrag {
+          untertitel
+          featuredTool
+        }
+      }
+    }
+  `;
 
-    // Dekodiere HTML-Entities
+  try {
+    const [data, aclData] = await Promise.all([
+      client.request<{ posts: { nodes: Post[] } }>(query, { slug }),
+      client
+        .request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug })
+        .catch(() => null),
+    ]);
+
+    let post = data.posts.nodes[0] || null;
     if (post) {
       post = decodePostContent(post);
-    }
-
-    // If it's a regular post, try to fetch ACF fields separately
-    if (post) {
-      const aclQuery = gql`
-        query GetPostACF($slug: String!) {
-          postBy(slug: $slug) {
-            beitrag {
-              untertitel
-              featuredTool
-            }
-          }
-        }
-      `;
-
-      try {
-        const aclData = await client.request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug });
-        if (aclData.postBy?.beitrag) {
-          post.beitragFelder = {
-            beitragUntertitel: aclData.postBy.beitrag.untertitel,
-            beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
-          };
-        }
-      } catch {
-        // ACF fields not available for this post type - that's ok
-        // Custom post types don't have these fields
+      if (aclData?.postBy?.beitrag) {
+        post.beitragFelder = {
+          beitragUntertitel: aclData.postBy.beitrag.untertitel,
+          beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
+        };
       }
     }
 
@@ -556,13 +556,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     console.error(`Error fetching post with slug "${slug}":`, error);
     return null;
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Hauptkategorie mit Child-Kategorien
 // ─────────────────────────────────────────────
 
-export async function getCategoryWithChildren(categorySlug: string): Promise<{
+export const getCategoryWithChildren = cache(async (categorySlug: string): Promise<{
   name: string;
   slug: string;
   description?: string;
@@ -570,43 +570,42 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
   imageWide?: string;
   children: Array<{ name: string; slug: string; count: number; description?: string; image?: string }>;
   posts: Post[];
-} | null> {
+} | null> => {
   const client = getClient();
 
-  // First query: get the main category
-  const mainCategoryQuery = gql`
-    query GetMainCategory($slug: [String!]!) {
+  // EINE verschachtelte Query: Hauptkategorie + Child-Kategorien zusammen — vorher
+  // zwei sequentielle Requests (2. brauchte die databaseId der 1.), jetzt ein
+  // Roundtrip via `children`-Connection.
+  const postFields = `
+    nodes {
+      id
+      title
+      slug
+      date
+      excerpt
+      featuredImage { node { sourceUrl altText } }
+      categories { nodes { name slug } }
+    }
+  `;
+  const query = gql`
+    query GetCategoryWithChildren($slug: [String!]!) {
       categories(where: { slug: $slug }) {
         nodes {
           databaseId
           name
           slug
           description
-          kategorieBildSlider {
-            sourceUrl
-          }
-          kategorieBildWide {
-            sourceUrl
-          }
-          posts(first: 6) {
+          kategorieBildSlider { sourceUrl }
+          kategorieBildWide { sourceUrl }
+          posts(first: 6) { ${postFields} }
+          children(first: 50) {
             nodes {
-              id
-              title
+              name
               slug
-              date
-              excerpt
-              featuredImage {
-                node {
-                  sourceUrl
-                  altText
-                }
-              }
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
+              count
+              description
+              kategorieBildSlider { sourceUrl }
+              posts(first: 6) { ${postFields} }
             }
           }
         }
@@ -625,72 +624,29 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           kategorieBildSlider?: { sourceUrl: string };
           kategorieBildWide?: { sourceUrl: string };
           posts: { nodes: Post[] };
+          children: {
+            nodes: Array<{
+              name: string;
+              slug: string;
+              count: number;
+              description?: string;
+              kategorieBildSlider?: { sourceUrl: string };
+              posts: { nodes: Post[] };
+            }>;
+          };
         }>;
       };
-    }>(mainCategoryQuery, {
-      slug: [categorySlug],
-    });
+    }>(query, { slug: [categorySlug] });
 
     const category = categoryData.categories.nodes[0];
     if (!category) return null;
 
-    // Second query: get child categories and their posts
-    const childrenQuery = gql`
-      query GetChildCategories($parent: Int!) {
-        categories(where: { parent: $parent }) {
-          nodes {
-            name
-            slug
-            count
-            description
-            kategorieBildSlider {
-              sourceUrl
-            }
-            posts(first: 6) {
-              nodes {
-                id
-                title
-                slug
-                date
-                excerpt
-                featuredImage {
-                  node {
-                    sourceUrl
-                    altText
-                  }
-                }
-                categories {
-                  nodes {
-                    name
-                    slug
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    const childrenData = await client.request<{
-      categories: {
-        nodes: Array<{
-          name: string;
-          slug: string;
-          count: number;
-          description?: string;
-          kategorieBildSlider?: { sourceUrl: string };
-          posts: { nodes: Post[] };
-        }>;
-      };
-    }>(childrenQuery, {
-      parent: category.databaseId,
-    });
+    const childNodes = category.children?.nodes ?? [];
 
     // If no direct posts, collect from children
     let allPosts = category.posts.nodes.map(post => decodePostContent(post));
-    if (allPosts.length === 0 && childrenData.categories.nodes.length > 0) {
-      childrenData.categories.nodes.forEach((child) => {
+    if (allPosts.length === 0 && childNodes.length > 0) {
+      childNodes.forEach((child) => {
         allPosts = allPosts.concat(child.posts.nodes.map(post => decodePostContent(post)));
       });
       allPosts = allPosts.slice(0, 6); // limit to 6
@@ -702,7 +658,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
       description: category.description || undefined,
       image: category.kategorieBildSlider?.sourceUrl || undefined,
       imageWide: category.kategorieBildWide?.sourceUrl || undefined,
-      children: childrenData.categories.nodes.map((child) => ({
+      children: childNodes.map((child) => ({
         name: child.name,
         slug: child.slug,
         count: child.count,
@@ -715,7 +671,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
     console.error(`Error fetching category with children "${categorySlug}":`, error);
     return null;
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Navigation: Hauptkategorien + Subkategorien aus WordPress
@@ -1307,7 +1263,7 @@ export async function getToolsBySlug(slugs: string[]): Promise<Post[]> {
 // Kategorie Details mit Parent-Info
 // ─────────────────────────────────────────────
 
-export async function getCategoryBySlug(slug: string) {
+export const getCategoryBySlug = cache(async (slug: string) => {
   const client = getClient();
 
   const query = gql`
@@ -1366,7 +1322,7 @@ export async function getCategoryBySlug(slug: string) {
     console.error("Error fetching category:", error);
     return null;
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Rechner-Konfiguration aus WordPress ACF

@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getRechnerBySlug, getChecklisteBySlug } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 
+// Tool-Titel/-Beschreibung ändern sich selten → 1h cachen (vorher ungecacht,
+// jeder Tool-Embed im Artikel löste einen frischen WP-Roundtrip aus).
+export const revalidate = 3600;
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ type: string; slug: string }> }

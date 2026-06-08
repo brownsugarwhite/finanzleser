@@ -112,7 +112,7 @@ export default function MegaMenu({
       setLoading(true);
       const slug = getCategorySlug(href);
       Promise.all([
-        fetch(`/api/megamenu/posts?category=${slug}`).then(r => r.ok ? r.json() : { posts: [], hasMore: false }),
+        fetch(`/api/megamenu/posts?category=${slug}`).then(r => { if (!r.ok) throw new Error("mm-posts"); return r.json(); }),
         fetch(`/api/megamenu/tools?category=${slug}`).then(r => r.ok ? r.json() : []),
       ]).then(([postsData, toolsData]) => {
         cacheRef.current[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
@@ -124,6 +124,7 @@ export default function MegaMenu({
           setLoading(false);
         }
       }).catch(() => {
+        // Fehler NICHT cachen → nächster Aufruf lädt neu (sonst „Beiträge laden nie").
         if (href === currentSubRef.current) setLoading(false);
       });
     }
@@ -146,7 +147,7 @@ export default function MegaMenu({
       if (cacheRef.current[href]) return;
       const slug = getCategorySlug(href);
       Promise.all([
-        fetch(`/api/megamenu/posts?category=${slug}`).then((r) => (r.ok ? r.json() : { posts: [], hasMore: false })),
+        fetch(`/api/megamenu/posts?category=${slug}`).then((r) => { if (!r.ok) throw new Error("mm-posts"); return r.json(); }),
         fetch(`/api/megamenu/tools?category=${slug}`).then((r) => (r.ok ? r.json() : [])),
       ])
         .then(([postsData, toolsData]) => {
@@ -159,7 +160,9 @@ export default function MegaMenu({
             setLoading(false);
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          // Fehler NICHT cachen → bleibt für einen erneuten Versuch offen.
+        });
     });
   }, [items]);
 
