@@ -15,6 +15,8 @@ import LeoCharacter from "@/components/ui/LeoCharacter";
 import LeoChatMessages from "@/components/ui/LeoChatMessages";
 import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
 import type { Versicherer } from "@/lib/versicherer";
+import type { LeoUIMessage } from "@/lib/ai/leoMessage";
+import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
 
 const LEO_SIZE_DESKTOP = 70;
 const LEO_SIZE_MOBILE = 64;
@@ -51,9 +53,9 @@ export default function LeoIcon() {
   const [size, setSize] = useState(LEO_SIZE_DESKTOP);
   const pathname = usePathname();
 
-  // KI-Chat (Vercel AI SDK v6 + Google Gemini 2.5 Flash via /api/chat).
-  // Provider wird später in lib/ai/provider.ts gegen Kunden-Tool ausgetauscht.
-  const { messages, sendMessage, status, stop, error } = useChat();
+  // KI-Chat (Vercel AI SDK v6). /api/chat proxyt auf das LEO-Backend des Kunden
+  // (RAG-Service auf Heroku); Modell + System-Prompt liegen dort.
+  const { messages, sendMessage, status, stop, error } = useChat<LeoUIMessage>();
   const [chatInput, setChatInput] = useState("");
   const isBusy = status === "streaming" || status === "submitted";
 
@@ -64,7 +66,16 @@ export default function LeoIcon() {
     }
     const trimmed = chatInput.trim();
     if (!trimmed) return;
-    sendMessage({ text: trimmed });
+    // Seiten-Kontext für die Broschüren-Vorauswahl des Backends mitgeben
+    // (Logik gespiegelt von embed.js: slug = letztes Segment, category bevorzugt
+    // die Subkategorie, sonst die Hauptkategorie).
+    const seg = pathname.split("/").filter(Boolean);
+    const slug = seg.length ? seg[seg.length - 1] : "";
+    const category =
+      seg.length && (MAIN_CATEGORY_SLUGS as readonly string[]).includes(seg[0])
+        ? seg[1] ?? seg[0]
+        : "";
+    sendMessage({ text: trimmed }, { body: { slug, category } });
     setChatInput("");
   };
 

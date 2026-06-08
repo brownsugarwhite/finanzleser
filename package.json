@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.0.73",
     "@ai-sdk/react": "^3.0.184",
     "@anthropic-ai/sdk": "^0.90.0",
     "@gsap/react": "^2.1.2",
