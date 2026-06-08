@@ -3,9 +3,6 @@
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
 import gsap from "@/lib/gsapConfig";
-// lottie + 184kB JSON werden lazy importiert (siehe ensureLottieReady),
-// damit sie nicht im Landing-Initial-Bundle landen.
-import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
@@ -17,35 +14,6 @@ import { openOverlay } from "@/lib/overlayController";
 import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
 import InlineSVG from "@/components/ui/InlineSVG";
 
-function reverseBaselineTrim(animData: any): any {
-  const data = JSON.parse(JSON.stringify(animData));
-  const baseline = data.layers?.find((l: any) => l.nm === 'baseline');
-  if (!baseline?.shapes) return data;
-
-  function findTrim(shapes: any[]): any {
-    for (const s of shapes) {
-      if (s.ty === 'tm') return s;
-      if (s.it) { const r = findTrim(s.it); if (r) return r; }
-    }
-    return null;
-  }
-
-  const trim = findTrim(baseline.shapes);
-  if (!trim) return data;
-
-  const originalEnd = trim.e;
-  trim.e = { a: 0, k: 100, ix: trim.e.ix };
-  const reversedKeyframes = JSON.parse(JSON.stringify(originalEnd));
-  if (reversedKeyframes.a === 1 && reversedKeyframes.k) {
-    for (const kf of reversedKeyframes.k) {
-      if (kf.s) kf.s = kf.s.map((v: number) => 100 - v);
-    }
-  }
-  trim.s = reversedKeyframes;
-
-  return data;
-}
-
 const TOOLS = [
   {
     title: "Rechner",
@@ -54,6 +22,7 @@ const TOOLS = [
     href: "/finanztools/rechner",
     color: "var(--color-tool-rechner)",
     icon: "/icons/iconRechner.svg",
+    image: "/assets/finanztoolSlider/rechner_visual.png",
   },
   {
     title: "Vergleiche",
@@ -62,6 +31,7 @@ const TOOLS = [
     href: "/finanztools/vergleiche",
     color: "var(--color-tool-vergleiche)",
     icon: "/icons/iconVergleich.svg",
+    image: "/assets/finanztoolSlider/vergleich_visual.png",
   },
   {
     title: "Checklisten",
@@ -70,29 +40,17 @@ const TOOLS = [
     href: "/finanztools/checklisten",
     color: "var(--color-tool-checklisten)",
     icon: "/icons/iconCheckliste.svg",
+    image: "/assets/finanztoolSlider/checklisten_visual.png",
   },
 ];
 
+// Intro-Bild — sichtbar wenn kein Tool aktiv ist (Slide-Index 3)
+const INTRO_IMAGE = "/assets/finanztoolSlider/toolbox.png";
+
+// Tool-Bilder etwas kleiner als das Toolbox-Intro
+const TOOL_IMAGE_SCALE = "88%";
+
 export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
-  const lottieRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
-  const animRefs = useRef<(AnimationItem | null)[]>([null, null, null, null]);
-  // Lazy-loaded lottie module + animation-JSON. Wird beim ersten activeCard-
-  // Wechsel via dynamic-import gefüllt — landet nicht im Initial-Bundle.
-  const lottieModRef = useRef<typeof import("lottie-web").default | null>(null);
-  const animDataRef = useRef<unknown>(null);
-  const lottieLoadPromise = useRef<Promise<void> | null>(null);
-  function ensureLottieReady(): Promise<void> {
-    if (lottieModRef.current && animDataRef.current) return Promise.resolve();
-    if (lottieLoadPromise.current) return lottieLoadPromise.current;
-    lottieLoadPromise.current = Promise.all([
-      import("lottie-web"),
-      import("@/assets/lottie/vergleicheAnim.json"),
-    ]).then(([lottieMod, animModule]) => {
-      lottieModRef.current = lottieMod.default;
-      animDataRef.current = animModule.default ?? animModule;
-    });
-    return lottieLoadPromise.current;
-  }
   const cardsRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -113,15 +71,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   const activeCardRef = useRef<string | null>(null);
   const isScrollingToTarget = useRef(false);
   const lastPastRef = useRef(false);
-  const prevIndex = useRef(3);
-  const prevDirection = useRef<"left" | "right" | null>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(3);
-  const [prevSlide, setPrevSlide] = useState(-1);
-  const [direction, setDirection] = useState<"left" | "right">("right");
-  const [slidePhase, setSlidePhase] = useState<"idle" | "prep" | "go">("idle");
-  // isMobile-State + matchMedia-Listener entfernt — alle viewport-abhängigen
-  // Layout-Werte sind jetzt in CSS-Klassen (.ftools-*), keine SSR-Reflows mehr.
+
+  // Intro-Progress: füllt sich am Auto-Expand-Trigger in 3s, danach öffnet Rechner.
+  const [introProgress, setIntroProgress] = useState(0);
+  const introProgObj = useRef({ v: 0 });
+  const introTweenRef = useRef<gsap.core.Tween | null>(null);
+
+  // Aktueller Slide-Index: 3 (Intro) wenn kein Tool aktiv, sonst Tool-Index.
+  // Crossfade läuft rein über opacity (siehe Render), keine Richtungs-/Phasen-Logik nötig.
+  const currentSlide = activeCard === null ? 3 : TOOLS.findIndex((t) => t.title === activeCard);
 
   // Measure collapsed card bar width + calculate spacer height
   useEffect(() => {
@@ -135,61 +94,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, [activeCard]);
-
-  function patchStrokesIn(container: HTMLElement) {
-    container.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect').forEach(el => {
-      el.setAttribute('vector-effect', 'non-scaling-stroke');
-      el.setAttribute('stroke-width', '1');
-    });
-  }
-
-  function loadAnimAt(index: number, data: unknown) {
-    const lottieLib = lottieModRef.current;
-    if (!lottieLib) return; // ensureLottieReady noch nicht aufgelöst
-    const container = lottieRefs.current[index];
-    if (!container) return;
-    if (animRefs.current[index]) animRefs.current[index]!.destroy();
-    const anim = lottieLib.loadAnimation({
-      container,
-      renderer: 'svg',
-      loop: false,
-      autoplay: true,
-      animationData: data,
-    });
-    anim.addEventListener('DOMLoaded', () => patchStrokesIn(container));
-    animRefs.current[index] = anim;
-  }
-
-  // Check baseline trim progress (0-1) by reading trim keyframes from anim data
-  function getBaselineProgress(): number {
-    const idx = prevIndex.current;
-    if (idx < 0) return 1;
-    const anim = animRefs.current[idx];
-    if (!anim || !anim.isLoaded) return 1;
-
-    // Find the last keyframe of the baseline trim end → that's when baseline is 100% drawn
-    const animData = (anim as any).animationData;
-    if (!animData) return anim.currentFrame / Math.max(1, anim.totalFrames);
-    const baseline = animData.layers?.find((l: any) => l.nm === 'baseline');
-    if (!baseline?.shapes) return 1;
-
-    function findTrim(shapes: any[]): any {
-      for (const s of shapes) {
-        if (s.ty === 'tm') return s;
-        if (s.it) { const r = findTrim(s.it); if (r) return r; }
-      }
-      return null;
-    }
-    const trim = findTrim(baseline.shapes);
-    if (!trim) return 1;
-
-    // Get the frame where trim reaches 100% (last keyframe of end or start)
-    const kfs = trim.e?.k || trim.s?.k || [];
-    const lastKf = kfs[kfs.length - 1];
-    const baselineEndFrame = lastKf?.t || anim.totalFrames;
-
-    return anim.currentFrame / Math.max(1, baselineEndFrame);
-  }
 
   useLayoutEffect(() => {
     cardProgObjs.current.forEach(obj => gsap.killTweensOf(obj));
@@ -246,17 +150,27 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Sync activeCard → ref (readable inside scroll listeners without closure stale-value issues)
   useEffect(() => { activeCardRef.current = activeCard; }, [activeCard]);
 
-  // Auto-expand Rechner when buttons leave sticky-bottom; always collapse when scrolling back up
+  // Auto-expand Rechner when buttons leave sticky-bottom; always collapse when scrolling back up.
+  // Am Trigger-Punkt füllt sich erst der Intro-Progress-Bar (3s), danach öffnet Rechner.
   useEffect(() => {
+    const cancelFill = () => {
+      if (introTweenRef.current) {
+        introTweenRef.current.kill();
+        introTweenRef.current = null;
+      }
+      introProgObj.current.v = 0;
+      setIntroProgress(0);
+    };
     const onScroll = () => {
       // Skip while GSAP is programmatically scrolling to avoid premature collapse mid-animation
       if (isScrollingToTarget.current || !sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const pastExit = rect.bottom <= window.innerHeight;
 
-      // Always collapse when scrolled back above exit, regardless of how card was opened
-      if (!pastExit && activeCardRef.current !== null) {
-        setActiveCard(null);
+      // Scrolled back above exit: cancel a pending fill + collapse any open card
+      if (!pastExit) {
+        cancelFill();
+        if (activeCardRef.current !== null) setActiveCard(null);
         lastPastRef.current = false;
         return;
       }
@@ -264,13 +178,26 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       // Edge-detection for expand: only trigger on the crossing, not continuously
       if (pastExit !== lastPastRef.current) {
         lastPastRef.current = pastExit;
-        if (pastExit && activeCardRef.current === null) {
-          setActiveCard("Rechner");
+        if (activeCardRef.current === null && !introTweenRef.current) {
+          // Progress-Bar in 3s füllen, dann Rechner öffnen
+          introTweenRef.current = gsap.to(introProgObj.current, {
+            v: 1,
+            duration: 3,
+            ease: "none",
+            onUpdate: () => setIntroProgress(introProgObj.current.v),
+            onComplete: () => {
+              introTweenRef.current = null;
+              if (activeCardRef.current === null) setActiveCard("Rechner");
+            },
+          });
         }
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      introTweenRef.current?.kill();
+    };
   }, []);
 
   useEffect(() => {
@@ -315,89 +242,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       }
     });
   }, [activeCard]);
-
-  // Slide to active tool + start animation
-  useEffect(() => {
-    if (activeCard === null) {
-      const newIndex = 3;
-      if (newIndex === currentSlide) return;
-      const comesFromRight = newIndex > prevIndex.current;
-      const dir: "left" | "right" = comesFromRight ? "right" : "left";
-      setDirection(dir);
-      const prevIdx = prevIndex.current;
-      if (prevIdx >= 0 && prevIdx < 3 && animRefs.current[prevIdx]) {
-        setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
-      }
-      setPrevSlide(currentSlide);
-      setCurrentSlide(newIndex);
-      setSlidePhase("prep");
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        setSlidePhase("go");
-        prevDirection.current = dir;
-      }));
-      prevIndex.current = newIndex;
-      return;
-    }
-
-    const newIndex = TOOLS.findIndex(t => t.title === activeCard);
-    if (newIndex < 0 || newIndex === currentSlide) return;
-
-    const isFirstPlay = prevIndex.current < 0;
-    const comesFromRight = !isFirstPlay && newIndex > prevIndex.current;
-    const dir: "left" | "right" = comesFromRight ? "right" : "left";
-    setDirection(dir);
-
-    // Reset previous anim after transition
-    const prevIdx = prevIndex.current;
-    if (prevIdx >= 0 && animRefs.current[prevIdx]) {
-      setTimeout(() => animRefs.current[prevIdx]?.goToAndStop(0, true), 500);
-    }
-
-    // Slide-DOM-Logik unabhängig von Lottie sofort ausführen — Lottie wird
-    // separat lazy-geladen und danach in den passenden Container geladen.
-    if (isFirstPlay) {
-      setCurrentSlide(newIndex);
-      setSlidePhase("idle");
-      prevDirection.current = dir;
-    } else {
-      setPrevSlide(currentSlide);
-      setCurrentSlide(newIndex);
-      setSlidePhase("prep");
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setSlidePhase("go");
-          prevDirection.current = dir;
-        });
-      });
-    }
-
-    prevIndex.current = newIndex;
-
-    // Lottie + JSON lazy laden (cached nach erstem Aufruf), dann animieren.
-    const progress = getBaselineProgress();
-    ensureLottieReady().then(() => {
-      const animData = animDataRef.current;
-      if (!animData) return;
-      const data = comesFromRight ? JSON.parse(JSON.stringify(animData)) : reverseBaselineTrim(animData);
-      if (isFirstPlay) {
-        loadAnimAt(newIndex, data);
-      } else {
-        const dirChanged = prevDirection.current !== null && prevDirection.current !== dir;
-        if (dirChanged || progress >= 0.8) {
-          loadAnimAt(newIndex, data);
-        } else {
-          setTimeout(() => loadAnimAt(newIndex, data), 500);
-        }
-      }
-    });
-  }, [activeCard]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      animRefs.current.forEach(a => a?.destroy());
-    };
-  }, []);
 
   return (
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
@@ -454,83 +298,67 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             </p>
           </div>
 
-          {/* 3. Lottie Slider — stacked, slides enter from left/right */}
-          <div className="ftools-lottie-slider" style={{ width: "100%", overflow: "hidden", position: "relative" }}>
-            {/* Sizing ghost — maintains aspect ratio */}
-            <div style={{ width: "100%", aspectRatio: "1 / 1" }} />
-            {TOOLS.map((_, i) => {
-              const isCurrent = i === currentSlide;
-              const isExiting = i === prevSlide && prevSlide !== currentSlide;
-              const isVisible = isCurrent || isExiting;
+          {/* 3. Visual-Slider — gestapelte Bilder, Crossfade zwischen den Slides.
+              Toolbox-Intro (volle Breite) treibt die Höhe und ist zugleich Slide 3;
+              die 3 Tool-Bilder liegen etwas kleiner + oben zentriert darüber.
+              Später durch Animationen/Videos ersetzbar. */}
+          <div className="ftools-lottie-slider" style={{ width: "100%", position: "relative", marginTop: 36 }}>
+            <img
+              src={INTRO_IMAGE}
+              alt=""
+              aria-hidden
+              style={{
+                display: "block",
+                width: "100%",
+                height: "auto",
+                opacity: currentSlide === 3 ? 1 : 0,
+                transition: "opacity 0.5s ease",
+              }}
+            />
+            {TOOLS.map((tool, i) => (
+              <img
+                key={i}
+                src={tool.image}
+                alt=""
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: TOOL_IMAGE_SCALE,
+                  height: "auto",
+                  opacity: i === currentSlide ? 1 : 0,
+                  transition: "opacity 0.5s ease",
+                  pointerEvents: "none",
+                }}
+              />
+            ))}
+          </div>
 
-              let tx: string;
-              if (isCurrent) {
-                // prep: start off-screen, go: animate to center
-                tx = slidePhase === "prep"
-                  ? (direction === "right" ? "100%" : "-100%")
-                  : "0%";
-              } else if (isExiting) {
-                // prep: still at center, go: animate out
-                tx = slidePhase === "prep"
-                  ? "0%"
-                  : (direction === "right" ? "-100%" : "100%");
-              } else {
-                // hidden off-screen
-                tx = "100%";
-              }
-
-              return (
-                <div
-                  key={i}
-                  ref={(el) => { lottieRefs.current[i] = el; }}
-                  onTransitionEnd={() => {
-                    if (isExiting) {
-                      setSlidePhase("idle");
-                      setPrevSlide(-1);
-                    }
-                  }}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    transform: `translateX(${tx})`,
-                    transition: (isVisible && slidePhase === "go") ? "transform 0.5s ease" : "none",
-                    visibility: isVisible ? "visible" : "hidden",
-                  }}
-                />
-              );
-            })}
-
-            {/* Slide 3: Intro-Visual — sichtbar wenn kein Tool aktiv */}
-            {(() => {
-              const isCurrent = currentSlide === 3;
-              const isExiting = prevSlide === 3 && prevSlide !== currentSlide;
-              const isVisible = isCurrent || isExiting;
-              let tx: string;
-              if (isCurrent) {
-                tx = slidePhase === "prep" ? (direction === "right" ? "100%" : "-100%") : "0%";
-              } else if (isExiting) {
-                tx = slidePhase === "prep" ? "0%" : (direction === "right" ? "-100%" : "100%");
-              } else {
-                tx = "100%";
-              }
-              return (
-                <div
-                  ref={(el) => { lottieRefs.current[3] = el; }}
-                  onTransitionEnd={() => { if (isExiting) { setSlidePhase("idle"); setPrevSlide(-1); } }}
-                  style={{
-                    position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-                    transform: `translateX(${tx})`,
-                    transition: (isVisible && slidePhase === "go") ? "transform 0.5s ease" : "none",
-                    visibility: isVisible ? "visible" : "hidden",
-                  }}
-                >
-                  <InlineSVG src="/assets/visuals/visualFinanztools.svg" style={{ width: "100%", height: "100%" }} />
-                </div>
-              );
-            })()}
+          {/* Intro-Progress-Bar (Apple-Style) — zentriert unter dem Slider.
+              Füllt am Auto-Expand-Trigger in 3s, dann öffnet Rechner. */}
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
+            <div
+              style={{
+                width: 140,
+                height: 5,
+                borderRadius: 999,
+                background: "rgba(0, 0, 0, 0.1)",
+                overflow: "hidden",
+                opacity: currentSlide === 3 ? 1 : 0,
+                transition: "opacity 0.4s ease",
+              }}
+            >
+              <div
+                style={{
+                  width: `${introProgress * 100}%`,
+                  height: "100%",
+                  borderRadius: 999,
+                  background: "var(--color-brand)",
+                }}
+              />
+            </div>
           </div>
 
           {/* 4. Tool Cards — Mobile: RevolverSlider; Desktop: sticky cards row.

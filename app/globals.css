@@ -113,10 +113,6 @@ body[data-landing] {
   .ftools-subheading-text {
     margin-left: 0 !important;
   }
-  .ftools-lottie-slider {
-    margin-top: -13px !important;
-    margin-bottom: -130px !important;
-  }
   .ftools-cards-mobile {
     display: block !important;
   }
@@ -135,10 +131,6 @@ body[data-landing] {
 }
 .ftools-subheading-text {
   margin-left: 180px;
-}
-.ftools-lottie-slider {
-  margin-top: -170px;
-  margin-bottom: -380px;
 }
 .ftools-cards-mobile {
   display: none;
