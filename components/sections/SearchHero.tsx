@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "@/lib/usePageTransition";
 import { useSearchSuggestions } from "@/lib/hooks/useSearchSuggestions";
 
 function SearchIcon({ size = 18 }: { size?: number }) {
@@ -29,7 +29,7 @@ function SearchIcon({ size = 18 }: { size?: number }) {
 }
 
 export default function SearchHero({ initialQuery = "" }: { initialQuery?: string }) {
-  const router = useRouter();
+  const { navigate } = useTransitionRouter();
   const [value, setValue] = useState(initialQuery);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ export default function SearchHero({ initialQuery = "" }: { initialQuery?: strin
     const trimmed = q.trim();
     if (!trimmed) return;
     setIsOpen(false);
-    router.push(`/suche?q=${encodeURIComponent(trimmed)}`);
+    navigate(`/suche?q=${encodeURIComponent(trimmed)}`);
   };
 
   const onSubmit = (e: React.FormEvent) => {

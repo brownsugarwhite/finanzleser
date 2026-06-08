@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
+import { setOpenScalableTargets, clearOpenScalableTargets } from "@/lib/scalableTargets";
+import { isTransitioning } from "@/lib/pageTransition";
 
 export default function ContentScaler() {
   const isOpenRef = useRef(false);
@@ -92,10 +94,25 @@ export default function ContentScaler() {
           gsap.to(t, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
         }
       });
+
+      // Offenes Set veröffentlichen, damit der Page-Transition-Controller (Fall A:
+      // aus offenem Overlay navigieren) dieselben Elemente übernehmen kann.
+      setOpenScalableTargets(els);
     };
 
     const scaleUp = () => {
       if (!isOpenRef.current) return;
+      // Läuft gerade eine Seiten-Transition (Fall A), übernimmt deren Controller den
+      // Wrapper (ausfaden → einfaden). NICHT gegen-animieren; nur State sauber halten.
+      if (isTransitioning()) {
+        isOpenRef.current = false;
+        savedPointerEvents.current.forEach((pe, el) => { el.style.pointerEvents = pe; });
+        savedPointerEvents.current.clear();
+        savedOpacities.current.clear();
+        previewScaleEls.current = [];
+        clearOpenScalableTargets();
+        return;
+      }
       isOpenRef.current = false;
       const { els } = getTargets();
 
@@ -144,12 +161,28 @@ export default function ContentScaler() {
       }, 350);
     };
 
+    // Page-Transition übernimmt das geblurte Set (Fall A). ContentScaler-State
+    // zurücksetzen OHNE zu animieren — der Controller treibt Wrapper + Chrome.
+    const onTransitionTakeover = () => {
+      if (!isOpenRef.current) return;
+      isOpenRef.current = false;
+      // fadeTargets (dotline/claim) sofort auf gespeicherte Opacity — sie werden
+      // vom Controller nicht gemanagt und sollen nicht unsichtbar hängenbleiben.
+      savedOpacities.current.forEach((op, el) => { gsap.set(el, { opacity: op }); });
+      savedOpacities.current.clear();
+      // pointerEvents NICHT restaurieren — der Controller setzt sie nach ENTER zurück.
+      savedPointerEvents.current.clear();
+      previewScaleEls.current = [];
+    };
+
     window.addEventListener("menu-opened", scaleDown);
     window.addEventListener("menu-closed", scaleUp);
+    window.addEventListener("page-transition-takeover", onTransitionTakeover);
 
     return () => {
       window.removeEventListener("menu-opened", scaleDown);
       window.removeEventListener("menu-closed", scaleUp);
+      window.removeEventListener("page-transition-takeover", onTransitionTakeover);
       if (recreateTimeoutRef.current) {
         clearTimeout(recreateTimeoutRef.current);
         recreateTimeoutRef.current = null;

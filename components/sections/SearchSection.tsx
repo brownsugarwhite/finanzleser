@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "@/lib/usePageTransition";
 
 export default function SearchSection() {
-  const router = useRouter();
+  const { navigate } = useTransitionRouter();
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchInput.trim()) {
-      router.push(`/suche?q=${encodeURIComponent(searchInput)}`);
+      navigate(`/suche?q=${encodeURIComponent(searchInput)}`);
       setSearchInput("");
     }
   };

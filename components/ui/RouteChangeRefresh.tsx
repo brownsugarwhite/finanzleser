@@ -4,13 +4,15 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { getActiveOverlay } from "@/lib/overlayController";
+import { isTransitioning } from "@/lib/pageTransition";
 
-/** ScrollTrigger.refresh(), aber NIE während ein Overlay offen ist — dann ist
- *  der Seiteninhalt skaliert/geblurrt (ContentScaler) und getBoundingClientRect
- *  läge daneben. In dem Fall überspringen; nach dem Schließen refreshen ohnehin
- *  ContentScaler (scroll-anim-recreate) bzw. der nächste Trigger. */
+/** ScrollTrigger.refresh(), aber NIE während ein Overlay offen ist ODER eine
+ *  Seiten-Transition läuft — dann ist der Seiteninhalt skaliert/geblurrt
+ *  (ContentScaler bzw. Transition-Controller) und getBoundingClientRect läge
+ *  daneben. In dem Fall überspringen; der Transition-Controller refresht am ENTER-
+ *  Ende selbst (scroll-anim-recreate), ContentScaler nach dem Schließen. */
 function safeRefresh() {
-  if (getActiveOverlay() !== null) return;
+  if (getActiveOverlay() !== null || isTransitioning()) return;
   ScrollTrigger.refresh();
 }
 

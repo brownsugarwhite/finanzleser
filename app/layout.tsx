@@ -16,6 +16,7 @@ import TopBanner from "@/components/ui/TopBanner";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
 import ArticlePreviewProvider from "@/components/sections/ArticlePreviewProvider";
+import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
@@ -107,6 +108,7 @@ export default async function RootLayout({
         <Providers>
         <NavProvider items={navItems}>
         <ArticlePreviewProvider>
+        <PageTransitionProvider>
           <div className="bookmark-section">
             <div className="bookmark-section__inner"><BookmarkNav /></div>
           </div>
@@ -124,6 +126,7 @@ export default async function RootLayout({
           </div>
           <ProgressiveBlur height={120} />
           <LeoIcon />
+        </PageTransitionProvider>
         </ArticlePreviewProvider>
         </NavProvider>
         </Providers>

@@ -75,6 +75,23 @@ export function closeOverlay(id: OverlayId) {
   window.dispatchEvent(new CustomEvent("menu-closed"));
 }
 
+/**
+ * Für den Seitenübergang: aktives Overlay sofort schließen, OHNE `menu-closed` zu
+ * feuern. Der Inhalts-Closer wird aufgerufen (sofortiges Hide via React-State), aber
+ * der Blur bleibt stehen — die Page-Transition treibt den Wrapper anschließend ganz
+ * raus (Fall A: geblurte Seite faded zu opacity 0). Gibt die geschlossene Overlay-Id
+ * zurück (oder null, wenn keins offen war). Nachträgliche `closeOverlay(id)`-Aufrufe
+ * aus dem Overlay-eigenen Cleanup sind danach No-Ops (active === null).
+ */
+export function consumeActiveOverlayForTransition(): OverlayId | null {
+  const id = active;
+  if (!id) return null;
+  active = null; // VOR dem Closer → dessen closeOverlay(id) wird No-Op (kein menu-closed)
+  const closer = closers.get(id);
+  if (closer) closer();
+  return id;
+}
+
 export function getActiveOverlay(): OverlayId | null {
   return active;
 }

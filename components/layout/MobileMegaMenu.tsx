@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { closeOverlay, registerOverlayCloser, setActiveOverlay, getActiveOverlay } from "@/lib/overlayController";
+import { useTransitionRouter } from "@/lib/usePageTransition";
 import {
   useCallback,
   useEffect,
@@ -72,7 +72,7 @@ function categorySlug(href: string): string {
 /* ── Component ── */
 
 export default function MobileMegaMenu() {
-  const router = useRouter();
+  const { navigate } = useTransitionRouter();
 
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MainSection>("ratgeber");
@@ -317,10 +317,12 @@ export default function MobileMegaMenu() {
 
   const navigateAndClose = useCallback(
     (href: string) => {
-      router.push(href);
-      closeMenu();
+      // Burger-Icon-State zurücksetzen; die Transition schließt das Menü (Fall A:
+      // geblurte Seite faded aus) und navigiert.
+      window.dispatchEvent(new CustomEvent("burger-closed"));
+      navigate(href, { fromOverlay: true, overlayId: "menu" });
     },
-    [router, closeMenu]
+    [navigate]
   );
 
   /* ─── Render guards ─── */

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "@/lib/usePageTransition";
 import Image from "next/image";
 import gsap from "@/lib/gsapConfig";
 import TopNav from "@/components/layout/TopNav";
@@ -22,7 +22,7 @@ const CONTENT_GAP = 20;
 
 export default function LandingIntro() {
   const [searchInput, setSearchInput] = useState("");
-  const router = useRouter();
+  const { navigate } = useTransitionRouter();
 
   const heroRef = useRef<HTMLElement>(null);
   const searchPillRef = useRef<HTMLFormElement>(null);
@@ -107,7 +107,7 @@ export default function LandingIntro() {
     const trimmed = q.trim();
     if (!trimmed) return;
     setIsOpen(false);
-    router.push(`/suche?q=${encodeURIComponent(trimmed)}`);
+    navigate(`/suche?q=${encodeURIComponent(trimmed)}`);
     setSearchInput("");
   };
 

@@ -1319,6 +1319,22 @@ export default function ArticlePreviewOverlay({ ctx, currentIndex, onNavigate, o
     return unregister;
   }, [requestClose]);
 
+  // Seiten-Transition (Klick auf „Ratgeber lesen"): Vorschau SOFORT hart schließen
+  // — den 0,5s-Morph überspringen. isExitingRef verhindert, dass der danach vom
+  // Transition-Controller aufgerufene Closer (requestClose) noch mitläuft. Der
+  // Controller treibt das Ausfaden der dahinterliegenden Seite selbst.
+  useEffect(() => {
+    const onFastClose = (e: Event) => {
+      const id = (e as CustomEvent).detail?.id;
+      if (id && id !== "preview") return;
+      if (isExitingRef.current) return;
+      isExitingRef.current = true;
+      onClose();
+    };
+    window.addEventListener("overlay-fast-close", onFastClose);
+    return () => window.removeEventListener("overlay-fast-close", onFastClose);
+  }, [onClose]);
+
   useLayoutEffect(() => {
     if (phase !== "closing") return;
     if (!post) {
