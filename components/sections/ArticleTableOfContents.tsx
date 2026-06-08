@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useEffect, useState, useCallback } from "react";
+import { useLayoutEffect, useState, useCallback } from "react";
 import gsap from "@/lib/gsapConfig";
 
 interface TOCItem {
@@ -12,6 +12,10 @@ interface TOCItem {
 
 interface ArticleTableOfContentsProps {
   content: string;
+  /** Server-seitig vorgebaute Items (lib/articleTocBuilder) → TOC steht schon im
+   *  SSR/Initial-Render mit voller Höhe → kein Layout-Shift. Client verfeinert
+   *  danach nur async geladene Tool-Titel. */
+  initialItems?: TOCItem[];
 }
 
 // Tool-Farben für farbigen Punkt im TOC
@@ -78,8 +82,8 @@ function ArrowLine() {
   );
 }
 
-export default function ArticleTableOfContents({ content }: ArticleTableOfContentsProps) {
-  const [items, setItems] = useState<TOCItem[]>([]);
+export default function ArticleTableOfContents({ content, initialItems = [] }: ArticleTableOfContentsProps) {
+  const [items, setItems] = useState<TOCItem[]>(initialItems);
 
   const scrollToId = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -131,7 +135,12 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
     setItems(tocItems);
   };
 
-  useEffect(() => {
+  // useLayoutEffect + sofortiger loadTOC(): die h2-Überschriften (inkl. IDs) stehen
+  // beim Mount bereits im committed DOM, also vor dem Paint scannen → das inline-TOC
+  // hat ab dem ersten Frame seine volle Höhe und der Artikel-Content rutscht NICHT
+  // mehr nach (Layout-Shift während der Transition). Timer verfeinern async Tool-Titel.
+  useLayoutEffect(() => {
+    loadTOC();
     const timers = [100, 200, 300, 500, 700, 1000, 1500, 2000, 3000].map((ms) =>
       setTimeout(loadTOC, ms)
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
@@ -13,6 +13,7 @@ import PdfPreview from "@/components/ui/PdfPreview";
 import MobileTocIndicator from "./MobileTocIndicator";
 import MobileTocOverlay from "./MobileTocOverlay";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
+import { buildArticleTocItems } from "@/lib/articleTocBuilder";
 
 type ArticleClientProps = {
   title?: string;
@@ -51,6 +52,9 @@ export default function ArticleClient({
   const [tocOpen, setTocOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const toc = useArticleToc();
+  // Inline-TOC server-seitig vorbauen (pure, läuft SSR + Client identisch) → kein
+  // Layout-Shift / Nachrutschen beim ersten Aufruf.
+  const inlineTocItems = useMemo(() => buildArticleTocItems(content), [content]);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -258,7 +262,7 @@ export default function ArticleClient({
             </div>
           )}
           {contentTableOfContents && content && (
-            <ArticleTableOfContents content={content} />
+            <ArticleTableOfContents content={content} initialItems={inlineTocItems} />
           )}
           <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
         </ArticleElementWrapper>

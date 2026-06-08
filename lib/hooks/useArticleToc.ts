@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import gsap from "@/lib/gsapConfig";
 
 export type TocToolType = "rechner" | "checkliste" | "vergleich";
@@ -42,7 +42,10 @@ export function useArticleToc() {
     });
   }, []);
 
-  useEffect(() => {
+  // useLayoutEffect statt useEffect: der erste loadTOC()-Aufruf läuft VOR dem Paint,
+  // sodass das (in-Flow-)TOC schon im ersten Frame gefüllt ist → kein Nachrutschen
+  // des Artikel-Contents mehr während der Seiten-Transition.
+  useLayoutEffect(() => {
     const loadTOC = () => {
       const article = document.querySelector("article");
       if (!article) return;
@@ -114,6 +117,10 @@ export function useArticleToc() {
       }
     };
 
+    // SOFORT aufbauen — die h2-Überschriften (inkl. IDs) stehen beim Mount bereits
+    // im DOM, also erscheint das TOC zusammen mit dem Artikel statt „nachträglich".
+    // Die Timer-Kaskade verfeinert danach (async geladene Tool-Titel, lazy Embeds).
+    loadTOC();
     const timers = [100, 200, 300, 500, 700, 1000, 1500, 2000, 3000].map((ms) =>
       setTimeout(loadTOC, ms),
     );
