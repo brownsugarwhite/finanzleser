@@ -885,6 +885,14 @@ h1.category-title {
 .prose a {
   overflow-wrap: anywhere;
   word-break: break-word;
+  color: var(--color-brand);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.prose a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Tabellen im Artikel – horizontaler Scroll-Container mit Edge-Gradient
