@@ -103,6 +103,11 @@
   display: none;
 }
 
+/* 50px Abstand nach oben (zu Content darüber bzw. zwischen 2 Tools im Artikel). */
+.article-tool-embed {
+  margin-top: 50px;
+}
+
 /* ── Inputs ─────────────────────────────────── */
 
 .rechner-inputs {

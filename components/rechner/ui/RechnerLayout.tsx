@@ -16,7 +16,7 @@ export default function RechnerLayout({ title, children, results }: RechnerLayou
       <div className="rechner-main">
         {/* Left: Visual */}
         <div className="rechner-visual">
-          <RechnerPlaceholder seed={title} />
+          <RechnerPlaceholder seed={title} image="/assets/general/rechner_visual.png" />
         </div>
 
         {/* Right: Inputs + Button */}

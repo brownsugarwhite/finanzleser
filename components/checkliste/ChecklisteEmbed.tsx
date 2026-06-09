@@ -26,7 +26,7 @@ export default function ChecklisteEmbed({ slug, formHeader }: ChecklisteEmbedPro
         </div>
         <div className="checkliste-visual-col">
           <div className="checkliste-visual">
-            <RechnerPlaceholder seed={slug}>
+            <RechnerPlaceholder seed={slug} image="/assets/general/checklisten_visual.png">
               <div className="checkliste-actions-portal" ref={containerRefCallback} style={{ display: "flex", justifyContent: "flex-end", padding: "12px 16px" }} />
             </RechnerPlaceholder>
           </div>
