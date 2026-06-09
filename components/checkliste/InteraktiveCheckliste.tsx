@@ -211,6 +211,8 @@ export default function InteraktiveCheckliste({
           <a
             href={pdfUrl}
             download
+            target="_blank"
+            rel="noopener noreferrer"
             className="checkliste-btn checkliste-btn--download"
             title="PDF herunterladen"
           >

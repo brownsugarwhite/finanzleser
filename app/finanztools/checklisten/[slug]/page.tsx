@@ -168,6 +168,8 @@ export default async function ChecklisteDetailPage({ params }: Props) {
                     <a
                       href={pdfUrl}
                       download
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="underline"
                       style={{ color: "var(--color-tool-checklisten)" }}
                     >
