@@ -284,7 +284,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                 JS-Ternary) damit Mobile-SSR nicht initial in Desktop-Position
                 rendert und dann hüpft. */}
             <div className="ftools-visual-wrap">
-              <InlineSVG src="/assets/visuals/mainVisualLanding.svg" style={{ width: "100%", height: "100%" }} />
+              <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
           </div>
 
