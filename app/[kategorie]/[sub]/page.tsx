@@ -4,6 +4,7 @@ import { getPostBySlug, getPostsByCategory, getCategoryBySlug, getNavItems } fro
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { extractArticleHeader } from "@/lib/articleHeader";
 
 export const revalidate = 3600;
 
@@ -41,9 +42,10 @@ export async function generateMetadata(
   }
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
+    const header = extractArticleHeader(post.content);
     return buildMetadata({
-      title: `${post.title} – ${SITE_NAME}`,
-      description: stripHtml(post.excerpt),
+      title: `${header?.title || post.title} – ${SITE_NAME}`,
+      description: stripHtml(header?.description || post.excerpt),
       path: `/${params.kategorie}/${params.sub}`,
       image: post.featuredImage?.node?.sourceUrl,
       type: "article",

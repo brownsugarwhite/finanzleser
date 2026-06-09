@@ -14,6 +14,7 @@ import MobileTocIndicator from "./MobileTocIndicator";
 import MobileTocOverlay from "./MobileTocOverlay";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
 import { buildArticleTocItems } from "@/lib/articleTocBuilder";
+import { extractArticleHeader } from "@/lib/articleHeader";
 
 type ArticleClientProps = {
   title?: string;
@@ -52,9 +53,18 @@ export default function ArticleClient({
   const [tocOpen, setTocOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const toc = useArticleToc();
+
+  // Neue Redaktions-Konvention: Titel (<h1>) + Beschreibung (führendes <p>) stehen
+  // im Content statt in den WP-Feldern. Herausziehen und aus dem Body entfernen;
+  // alte Beiträge (kein führendes <h1>) bleiben unverändert.
+  const header = useMemo(() => extractArticleHeader(content), [content]);
+  const displayTitle = header?.title ?? subtitle;          // fetter Titel
+  const displayDescription = header?.description ?? excerpt; // Beschreibungszeile
+  const bodyContent = header?.body ?? content;              // Fließtext ohne h1/Beschreibung
+
   // Inline-TOC server-seitig vorbauen (pure, läuft SSR + Client identisch) → kein
   // Layout-Shift / Nachrutschen beim ersten Aufruf.
-  const inlineTocItems = useMemo(() => buildArticleTocItems(content), [content]);
+  const inlineTocItems = useMemo(() => buildArticleTocItems(bodyContent), [bodyContent]);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -135,8 +145,8 @@ export default function ArticleClient({
               </h1>
             ) : null;
 
-            const subtitleEl = subtitle ? (
-              <h2 data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
+            const subtitleEl = displayTitle ? (
+              <h2 data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{displayTitle}</h2>
             ) : null;
 
             const visualEl = (
@@ -166,7 +176,7 @@ export default function ArticleClient({
               </>
             );
 
-            const excerptEl = excerpt ? (
+            const excerptEl = displayDescription ? (
               <p
                 className="mb-8 text-gray-600"
                 style={{
@@ -176,7 +186,7 @@ export default function ArticleClient({
                 }}
                 dangerouslySetInnerHTML={{
                   __html: (() => {
-                    const text = excerpt.replace(/<[^>]*>/g, "");
+                    const text = displayDescription.replace(/<[^>]*>/g, "");
                     if (text.length <= 200) return text;
                     const truncated = text.slice(0, 200).replace(/\s+\S*$/, "");
                     return truncated + " ...";
@@ -189,7 +199,7 @@ export default function ArticleClient({
               <div className="flex justify-between items-center text-gray-600">
                 <div className="flex items-center gap-1 text-sm" style={{ fontSize: "14px" }}>
                   <img src="/icons/time_icon.svg" alt="" style={{ width: 13, height: 13, opacity: 0.5 }} />
-                  <span>{content ? Math.ceil(content.split(/\s+/).length / 200) : 1} min Lesedauer</span>
+                  <span>{bodyContent ? Math.ceil(bodyContent.split(/\s+/).length / 200) : 1} min Lesedauer</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm" style={{ fontSize: "14px" }}>Teilen</span>
@@ -261,16 +271,16 @@ export default function ArticleClient({
               />
             </div>
           )}
-          {contentTableOfContents && content && (
-            <ArticleTableOfContents content={content} initialItems={inlineTocItems} />
+          {contentTableOfContents && bodyContent && (
+            <ArticleTableOfContents content={bodyContent} initialItems={inlineTocItems} />
           )}
           <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
         </ArticleElementWrapper>
 
         {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
-        {content && content.trim() ? (
+        {bodyContent && bodyContent.trim() ? (
           <>
-            <ArticleContent content={content} collapsed={collapsed} currentSlug={pageSlug} />
+            <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} />
             {pageSlug && (
               <ArticleElementWrapper variant="centered" collapsed={collapsed}>
                 <PdfPreview slug={pageSlug} />

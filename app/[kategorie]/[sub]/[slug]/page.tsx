@@ -5,6 +5,7 @@ import { isMainCategory } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import type { Category } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME, absoluteUrl } from "@/lib/seo";
+import { extractArticleHeader } from "@/lib/articleHeader";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const revalidate = 3600;
@@ -19,9 +20,11 @@ export async function generateMetadata(
   if (!post) return { title: `Nicht gefunden – ${SITE_NAME}` };
 
   const mainCategory = post.categories?.nodes?.find((c: Category) => isMainCategory(c.slug));
+  // Neue Konvention: echter Titel/Beschreibung stehen im Content (h1 + führendes p).
+  const header = extractArticleHeader(post.content);
   return buildMetadata({
-    title: `${post.title} – ${SITE_NAME}`,
-    description: stripHtml(post.excerpt || post.beitragFelder?.beitragUntertitel),
+    title: `${header?.title || post.title} – ${SITE_NAME}`,
+    description: stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
     path: `/${params.kategorie}/${params.sub}/${params.slug}`,
     image: post.featuredImage?.node?.sourceUrl,
     imageAlt: post.featuredImage?.node?.altText || post.title,
@@ -41,6 +44,9 @@ export default async function BeitragPage(props: {
   if (!post) {
     notFound();
   }
+
+  // Neue Konvention: echter Titel/Beschreibung im Content (h1 + führendes p).
+  const header = extractArticleHeader(post.content);
 
   // Find main category (slug is in MAIN_CATEGORY_SLUGS) and subcategory
   const mainCategory = post.categories?.nodes?.find((cat: Category) => isMainCategory(cat.slug));
@@ -77,8 +83,8 @@ export default async function BeitragPage(props: {
   return (
     <>
       <JsonLd data={articleSchema({
-        headline: post.title,
-        description: stripHtml(post.excerpt),
+        headline: header?.title || post.title,
+        description: stripHtml(header?.description || post.excerpt),
         url: absoluteUrl(articlePath),
         image: post.featuredImage?.node?.sourceUrl,
         datePublished: post.date,
