@@ -692,7 +692,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
-                {latestTools.map((tool) => {
+                {latestTools.map((tool, i) => {
                   const color = tool.type === "rechner"
                     ? "var(--color-tool-rechner)"
                     : tool.type === "checkliste"
@@ -701,26 +701,57 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                   const desc = tool.description.length > 100
                     ? tool.description.slice(0, 100).replace(/\s+\S*$/, "") + " …"
                     : tool.description;
+                  const isLast = i === latestTools.length - 1;
                   return (
-                    <Link key={tool.href} href={tool.href} style={{ display: "block", textDecoration: "none" }}>
-                      <p style={{ fontSize: 11, fontFamily: "var(--font-body)", fontWeight: 600, marginBottom: 4, lineHeight: 1.3, color }}>
+                    <Link
+                      key={tool.href}
+                      href={tool.href}
+                      style={{
+                        display: "block",
+                        textDecoration: "none",
+                        paddingBottom: isLast ? 0 : 23,
+                        borderBottom: isLast ? "none" : "1px solid rgba(0, 0, 0, 0.07)",
+                      }}
+                    >
+                      {/* Label-Badge — weiß auf Tool-Farbe */}
+                      <span style={{
+                        display: "inline-block",
+                        background: color,
+                        color: "#fff",
+                        fontFamily: "var(--font-body)",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        lineHeight: 1,
+                        padding: "5px 11px",
+                        letterSpacing: "0.02em",
+                        marginBottom: 10,
+                      }}>
                         {tool.label}
-                      </p>
+                      </span>
+                      {/* Titel klein */}
                       <p style={{
-                        fontSize: 16,
-                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                        fontWeight: 650,
-                        margin: "0 0 6px 0",
-                        lineHeight: 1.35,
-                        color: "var(--color-text-primary)",
-                        hyphens: "auto",
-                        WebkitHyphens: "auto",
-                        wordBreak: "break-word",
+                        fontSize: 13,
+                        fontFamily: "var(--font-body)",
+                        fontWeight: 500,
+                        margin: "0 0 4px 0",
+                        lineHeight: 1.3,
+                        color: "var(--color-text-secondary)",
                       }} lang="de">
                         {tool.title}
                       </p>
+                      {/* Beschreibung groß */}
                       {desc && (
-                        <p style={{ fontSize: 13, fontFamily: "var(--font-body)", color: "var(--color-text-secondary)", lineHeight: 1.4, margin: 0 }} lang="de">
+                        <p style={{
+                          fontSize: 16,
+                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                          fontWeight: 400,
+                          color: "var(--color-text-primary)",
+                          lineHeight: 1.4,
+                          margin: 0,
+                          hyphens: "auto",
+                          WebkitHyphens: "auto",
+                          wordBreak: "break-word",
+                        }} lang="de">
                           {desc}
                         </p>
                       )}

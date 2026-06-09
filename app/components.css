@@ -1784,7 +1784,7 @@ a.megamenu-link:hover {
 }
 
 .checkliste-visual-col {
-  width: 380px;
+  width: 460px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
