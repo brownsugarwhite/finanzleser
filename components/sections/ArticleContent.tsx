@@ -69,6 +69,25 @@ interface ContentPart {
   gamFields?: Record<string, string>; // nur bei gamification: Feldwerte (Behauptung, Auflösung, …)
 }
 
+// Tabellen aus dem (Gamification-/Studio-)Editor kommen teils OHNE <thead>/<tbody>:
+// die erste <tr> enthält <th>, steht aber direkt im <table>. Dann greift weder der
+// graue Header (.prose thead th) noch das korrekte Zebra (tbody tr:nth-child(even)),
+// und die Header-Zeile wird mitgezählt. Fix: erste <th>-Zeile in <thead> wrappen,
+// Rest in <tbody> → identische Optik wie in den alten Beiträgen.
+function normalizeTableHead(html: string): string {
+  if (!html.includes("<table")) return html;
+  return html.replace(/(<table\b[^>]*>)([\s\S]*?)(<\/table>)/gi, (full, open: string, inner: string, close: string) => {
+    if (/<thead[\s>]/i.test(inner)) return full; // bereits strukturiert
+    const m = inner.match(/<tr\b[^>]*>[\s\S]*?<\/tr>/i);
+    if (!m || m.index === undefined) return full;
+    const firstRow = m[0];
+    if (!/<th[\s>]/i.test(firstRow)) return full; // erste Zeile ist kein Header
+    const before = inner.slice(0, m.index);
+    const rest = inner.slice(m.index + firstRow.length);
+    return `${open}${before}<thead>${firstRow}</thead><tbody>${rest}</tbody>${close}`;
+  });
+}
+
 // Wrap each <table> in scroll containers so wide tables get horizontal scroll
 // instead of bleeding past the viewport. Edge gradients are added via CSS + JS.
 function wrapTables(html: string): string {
@@ -202,7 +221,7 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
           if (fp.type === "fazit") {
             out.push({ kind: "fazit", id: fp.value, itemKey: `${i}-fazit-${j}` });
           } else {
-            out.push({ kind: "html", htmlString: wrapTables(fp.value), itemKey: `${i}-html-${j}` });
+            out.push({ kind: "html", htmlString: wrapTables(normalizeTableHead(fp.value)), itemKey: `${i}-html-${j}` });
           }
         });
       } else if (part.type === "rechner" || part.type === "checkliste" || part.type === "vergleich") {
