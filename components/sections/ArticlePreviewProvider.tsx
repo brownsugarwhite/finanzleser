@@ -9,6 +9,9 @@ import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 export type PreviewTool = "rechner" | "vergleich" | "checkliste";
 
 export interface PreviewExtras {
+  // Neue Konvention: Titel/Beschreibung aus dem Content-<h1>/<p> (WP-Felder veraltet).
+  title?: string | null;
+  description?: string | null;
   firstParagraph: string;
   readingTime: number;
   tools: PreviewTool[];

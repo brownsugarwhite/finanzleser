@@ -2117,6 +2117,9 @@ function SlidePreview({
   phase,
 }: SlidePreviewProps) {
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  // Neue Konvention: echter Titel kommt aus dem Content-<h1> (via extras-API);
+  // das Untertitel-Feld ist veraltet. Fallback auf untertitel solange extras lädt.
+  const previewTitle = extras?.title || untertitel;
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const subCategory = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
   const postLink = `/${mainCategory?.slug || "beitraege"}/${subCategory?.slug || "allgemein"}/${post.slug}`;
@@ -2328,9 +2331,9 @@ function SlidePreview({
             <p lang="de" style={textSublineStyle}>
               {post.title}
             </p>
-            {untertitel && (
+            {previewTitle && (
               <p lang="de" style={{ ...textTitleStyle, fontSize: "26px" }}>
-                {untertitel}
+                {previewTitle}
               </p>
             )}
           </div>
@@ -2446,9 +2449,9 @@ function SlidePreview({
               <p lang="de" style={textSublineStyle}>
                 {post.title}
               </p>
-              {untertitel && (
+              {previewTitle && (
                 <p lang="de" style={textTitleStyle}>
-                  {untertitel}
+                  {previewTitle}
                 </p>
               )}
               {toolsToShow.length > 0 && (

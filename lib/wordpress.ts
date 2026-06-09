@@ -2,6 +2,22 @@ import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
 import { decodePostContent } from "./html-utils";
+import { extractArticleHeader } from "./articleHeader";
+
+/**
+ * Neue Redaktions-Konvention: der echte Titel steht als <h1> am Content-Anfang,
+ * das WP-Untertitel-Feld ist veraltet. Für Listen/Previews den Anzeige-Titel aus
+ * dem Content-<h1> ableiten und `content` NICHT an den Client durchreichen (Payload).
+ * Mutiert + liefert denselben Post zurück.
+ */
+function applyContentHeaderTitle(post: Post & { content?: string }): Post {
+  const header = extractArticleHeader(post.content);
+  if (header) {
+    post.beitragFelder = { ...post.beitragFelder, beitragUntertitel: header.title };
+  }
+  if ("content" in post) delete (post as { content?: string }).content;
+  return post;
+}
 
 function getClient(revalidate: number = 3600): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
@@ -119,6 +135,7 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
           slug
           date
           excerpt
+          content
           featuredImage {
             node {
               sourceUrl
@@ -141,14 +158,16 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
     }>(query, { limit });
     return data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
-      return decoded;
+      // Neue Konvention: Anzeige-Titel aus Content-<h1> (Untertitel-Feld veraltet),
+      // danach content aus dem Payload entfernen.
+      return applyContentHeaderTitle(decoded);
     });
   } catch (error) {
     console.error("Error fetching latest posts:", error);

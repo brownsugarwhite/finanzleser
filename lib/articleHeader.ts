@@ -1,14 +1,16 @@
 /**
  * Neue Redaktions-Konvention (Gamification-/Studio-Workflow): Titel und Beschreibung
- * stehen NICHT mehr im WP-Titel-/Untertitel-Feld, sondern am Anfang des Contents:
+ * stehen NICHT mehr im WP-Titel-/Untertitel-Feld, sondern am Anfang des Contents.
+ * Struktur:
  *
- *   <p><em>Beschreibung …</em></p>     ← Beschreibung (optional)
- *   <h1>Eigentlicher Titel …</h1>      ← fetter Titel (unter dem pinken Reiter)
- *   <p>Intro …</p>                      ← ab hier normaler Artikel-Flow
- *   <h2>…</h2> …
+ *   <p><em>… </em></p>     ← wird IGNORIERT (Alt-/Hilfszeile über dem Titel)
+ *   <h1>Eigentlicher Titel</h1>   ← fetter Titel (unter dem pinken Reiter)
+ *   <p>Einleitung …</p>           ← BESCHREIBUNG (oben, unter dem Titel)
+ *   <h2>…</h2> …                  ← ab hier der Artikel-Flow (nach dem TOC)
  *
- * extractArticleHeader zieht Titel (h1) + Beschreibung (führendes p) heraus und gibt
- * den restlichen Body zurück, damit beide NICHT doppelt im Fließtext landen.
+ * extractArticleHeader zieht Titel (h1) + Beschreibung (erstes <p> NACH dem h1)
+ * heraus; der Body beginnt beim ersten <h2>. Alles davor (führendes <p>, h1,
+ * Einleitungs-<p>) wird aus dem Fließtext entfernt.
  *
  * Greift nur, wenn der Content mit (optionalem <p> +) <h1> BEGINNT → alte Beiträge
  * (Titel/Untertitel in den WP-Feldern, kein führendes <h1>) bleiben unverändert.
@@ -26,12 +28,23 @@ function stripTags(s: string): string {
 
 export function extractArticleHeader(content?: string): ArticleHeader | null {
   if (!content) return null;
-  // Anker am Anfang: optionales führendes <p>…</p>, dann <h1>…</h1>.
-  const m = content.match(/^\s*(?:<p[^>]*>([\s\S]*?)<\/p>\s*)?<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  if (!m) return null;
-  const title = stripTags(m[2]);
+  // Muss mit (optionalem führenden <p> — wird ignoriert) + <h1> beginnen.
+  const head = content.match(/^\s*(?:<p[^>]*>[\s\S]*?<\/p>\s*)?<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  if (!head) return null;
+  const title = stripTags(head[1]);
   if (!title) return null;
-  const description = m[1] ? stripTags(m[1]) || null : null;
-  const body = content.slice(m[0].length).replace(/^\s+/, "");
+
+  const afterH1 = content.slice(head[0].length);
+  // Body beginnt beim ersten <h2>; alles davor ist Einleitung/Beschreibung.
+  const h2Idx = afterH1.search(/<h2[\s>]/i);
+  if (h2Idx < 0) {
+    // Kein <h2> → keine Beschreibung extrahieren, Rest bleibt Body.
+    return { title, description: null, body: afterH1.replace(/^\s+/, "") };
+  }
+  const beforeH2 = afterH1.slice(0, h2Idx);
+  const body = afterH1.slice(h2Idx);
+  // Beschreibung = erstes <p> zwischen h1 und erstem h2.
+  const pMatch = beforeH2.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  const description = pMatch ? stripTags(pMatch[1]) || null : null;
   return { title, description, body };
 }
