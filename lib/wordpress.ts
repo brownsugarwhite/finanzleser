@@ -1,8 +1,17 @@
 import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
-import { decodePostContent } from "./html-utils";
+import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
+import { VERGLEICH_DESCRIPTIONS } from "./vergleichDescriptions";
+
+export interface LatestTool {
+  type: "rechner" | "checkliste" | "vergleich";
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
 
 /**
  * Neue Redaktions-Konvention: der echte Titel steht als <h1> am Content-Anfang,
@@ -1216,6 +1225,48 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
     return data.vergleiche.nodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Vergleiche:", error);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────
+// Neueste Finanztools (je 1: Rechner, Checkliste, Vergleich) — für Landing-Sidebar
+// ─────────────────────────────────────────────
+
+export async function getLatestFinanztools(): Promise<LatestTool[]> {
+  const client = getClient();
+
+  const query = gql`
+    query GetLatestFinanztools {
+      allRechner(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug rechnerFelder { beschreibung } }
+      }
+      checklisten(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug checklisten { checklistenBeschreibung } }
+      }
+      vergleiche(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      allRechner: { nodes: { title: string; slug: string; rechnerFelder?: { beschreibung?: string } }[] };
+      checklisten: { nodes: { title: string; slug: string; checklisten?: { checklistenBeschreibung?: string } }[] };
+      vergleiche: { nodes: { title: string; slug: string }[] };
+    }>(query);
+
+    const tools: LatestTool[] = [];
+    const r = data.allRechner.nodes[0];
+    if (r) tools.push({ type: "rechner", label: "Rechner", title: decodeHtmlEntities(r.title), description: r.rechnerFelder?.beschreibung || "", href: `/finanztools/rechner/${r.slug}` });
+    const c = data.checklisten.nodes[0];
+    if (c) tools.push({ type: "checkliste", label: "Checkliste", title: decodeHtmlEntities(c.title), description: c.checklisten?.checklistenBeschreibung || "", href: `/finanztools/checklisten/${c.slug}` });
+    const v = data.vergleiche.nodes[0];
+    if (v) tools.push({ type: "vergleich", label: "Vergleich", title: decodeHtmlEntities(v.title), description: VERGLEICH_DESCRIPTIONS[v.slug] || "", href: `/finanztools/vergleiche/${v.slug}` });
+    return tools;
+  } catch (error) {
+    console.error("Error fetching latest Finanztools:", error);
     return [];
   }
 }

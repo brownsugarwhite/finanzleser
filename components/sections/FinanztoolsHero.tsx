@@ -9,6 +9,7 @@ import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
+import type { LatestTool } from "@/lib/wordpress";
 import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
 import { openOverlay } from "@/lib/overlayController";
 import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
@@ -50,7 +51,7 @@ const INTRO_IMAGE = "/assets/finanztoolSlider/toolbox.png";
 // Tool-Bilder etwas kleiner als das Toolbox-Intro
 const TOOL_IMAGE_SCALE = "88%";
 
-export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
+export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTools = [] }: { posts?: Post[]; latestPosts?: Post[]; latestTools?: LatestTool[] }) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -675,6 +676,60 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
               );
             })}
           </div>
+
+          {/* Neuste Finanztools — auf Höhe von „Die Finanztools" (marginTop tunebar) */}
+          {latestTools.length > 0 && (
+            <div style={{ marginTop: 230 }}>
+              <p style={{
+                fontFamily: "'Merriweather', serif",
+                fontSize: "18px",
+                fontWeight: 700,
+                lineHeight: 1.3,
+                color: "var(--color-text-primary)",
+                margin: "0 0 20px 0",
+              }}>
+                Neuste Finanztools
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
+                {latestTools.map((tool) => {
+                  const color = tool.type === "rechner"
+                    ? "var(--color-tool-rechner)"
+                    : tool.type === "checkliste"
+                      ? "var(--color-tool-checklisten)"
+                      : "var(--color-tool-vergleiche)";
+                  const desc = tool.description.length > 100
+                    ? tool.description.slice(0, 100).replace(/\s+\S*$/, "") + " …"
+                    : tool.description;
+                  return (
+                    <Link key={tool.href} href={tool.href} style={{ display: "block", textDecoration: "none" }}>
+                      <p style={{ fontSize: 11, fontFamily: "var(--font-body)", fontWeight: 600, marginBottom: 4, lineHeight: 1.3, color }}>
+                        {tool.label}
+                      </p>
+                      <p style={{
+                        fontSize: 16,
+                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                        fontWeight: 650,
+                        margin: "0 0 6px 0",
+                        lineHeight: 1.35,
+                        color: "var(--color-text-primary)",
+                        hyphens: "auto",
+                        WebkitHyphens: "auto",
+                        wordBreak: "break-word",
+                      }} lang="de">
+                        {tool.title}
+                      </p>
+                      {desc && (
+                        <p style={{ fontSize: 13, fontFamily: "var(--font-body)", color: "var(--color-text-secondary)", lineHeight: 1.4, margin: 0 }} lang="de">
+                          {desc}
+                        </p>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
         </div>
       </div>

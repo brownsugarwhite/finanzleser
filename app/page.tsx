@@ -4,7 +4,7 @@ import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
-import { getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
+import { getLatestPosts, getCategoryWithChildren, getPostsByCategory, getLatestFinanztools, type LatestTool } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
 
 // Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
@@ -67,14 +67,18 @@ async function FinanztoolsHeroSection() {
   // geladen — das blockierte/timeoutete den SSR der Landing bei kaltem WordPress
   // und führte zu „Beiträge erst nach Reload sichtbar".
   let latestPosts: Post[] = [];
+  let latestTools: LatestTool[] = [];
   try {
-    latestPosts = await getLatestPosts(10);
+    [latestPosts, latestTools] = await Promise.all([
+      getLatestPosts(10),
+      getLatestFinanztools(),
+    ]);
   } catch (error) {
     console.error("Fehler beim Laden der Hero-Daten:", error);
   }
   return (
     <div className="scalable-landing">
-      <FinanztoolsHero latestPosts={latestPosts} />
+      <FinanztoolsHero latestPosts={latestPosts} latestTools={latestTools} />
     </div>
   );
 }
