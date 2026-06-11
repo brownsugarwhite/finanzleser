@@ -12,6 +12,9 @@ import ArticleContent from "@/components/sections/ArticleContent";
 import PdfPreview from "@/components/ui/PdfPreview";
 import MobileTocIndicator from "./MobileTocIndicator";
 import MobileTocOverlay from "./MobileTocOverlay";
+import ArticleAdRails from "./ArticleAdRails";
+import AdSlot from "@/components/ui/AdSlot";
+import type { ArticleAdsSettings } from "@/lib/types";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
 import { buildArticleTocItems } from "@/lib/articleTocBuilder";
 import { extractArticleHeader } from "@/lib/articleHeader";
@@ -34,6 +37,7 @@ type ArticleClientProps = {
     imageUrl?: string;
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
+  articleAds?: ArticleAdsSettings;
 };
 
 export default function ArticleClient({
@@ -47,6 +51,7 @@ export default function ArticleClient({
   content,
   contentTableOfContents,
   author,
+  articleAds,
 }: ArticleClientProps) {
   const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
@@ -143,7 +148,7 @@ export default function ArticleClient({
       {/* Main-Wrapper: Folge von Element-Wrappern */}
       <article style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         {/* Breadcrumb + Hero-Block + Spacer (zusammen in einem Wrapper) */}
-        <ArticleElementWrapper variant="wide" collapsed={collapsed}>
+        <ArticleElementWrapper variant="hero" collapsed={collapsed}>
           <Breadcrumb items={breadcrumbItems} />
           {(() => {
             const titleEl = title ? (
@@ -180,17 +185,6 @@ export default function ArticleClient({
                   </div>
                 ) : (
                   <div ref={morphVisualRef} data-morph-target="article-visual" className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
-                )}
-                {featuredImage?.altText && (
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "var(--color-text-medium)",
-                      marginTop: "8px",
-                    }}
-                  >
-                    {featuredImage.altText}
-                  </p>
                 )}
               </>
             );
@@ -273,46 +267,61 @@ export default function ArticleClient({
             );
           })()}
           <div style={{ marginTop: 50, marginBottom: 23 }}>
-            <Spacer noMargin />
+            <Spacer noMargin maxWidth="100%" />
           </div>
         </ArticleElementWrapper>
 
-        {/* Autor + inline-TOC + Trenner */}
-        <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-          {author && (
-            <div className="pt-6 mb-8">
-              <Author
-                name={author.name}
-                role={author.role}
-                date={author.date}
-                imageUrl={author.imageUrl}
-                colorVariant={author.colorVariant}
-              />
-            </div>
-          )}
-          {contentTableOfContents && bodyContent && (
-            <ArticleTableOfContents content={bodyContent} initialItems={inlineTocItems} />
-          )}
-          <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
-        </ArticleElementWrapper>
+        {/* Relativer Bereich ab Top-Banner abwärts: trägt die absolut positionierten
+            Werbe-Rails, damit sie oben NEBEN dem Leaderboard starten (nicht erst im Body). */}
+        <div className="article-body-region" style={{ position: "relative", width: "100%" }}>
+          <ArticleAdRails collapsed={collapsed} show={!!articleAds?.rails && !!(bodyContent && bodyContent.trim())} />
 
-        {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
-        {bodyContent && bodyContent.trim() ? (
-          <>
-            <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} />
-            {pageSlug && (
-              <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-                <PdfPreview slug={pageSlug} />
-              </ArticleElementWrapper>
-            )}
-          </>
-        ) : (
+          {/* Werbung: Leaderboard unter dem Hero/Heading, vor dem Body */}
+          {articleAds?.top && (
+            <ArticleElementWrapper variant="wide" collapsed={collapsed}>
+              <div className="article-ad-top" style={{ margin: "18px 0 32px" }}>
+                <AdSlot format={isMobile ? "mobile" : "leaderboard"} />
+              </div>
+            </ArticleElementWrapper>
+          )}
+
+          {/* Autor + inline-TOC + Trenner */}
           <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-            <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
-              <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
-            </div>
+            {author && (
+              <div className="pt-6 mb-8">
+                <Author
+                  name={author.name}
+                  role={author.role}
+                  date={author.date}
+                  imageUrl={author.imageUrl}
+                  colorVariant={author.colorVariant}
+                />
+              </div>
+            )}
+            {contentTableOfContents && bodyContent && (
+              <ArticleTableOfContents content={bodyContent} initialItems={inlineTocItems} />
+            )}
+            <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
           </ArticleElementWrapper>
-        )}
+
+          {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
+          {bodyContent && bodyContent.trim() ? (
+            <>
+              <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} />
+              {pageSlug && (
+                <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+                  <PdfPreview slug={pageSlug} />
+                </ArticleElementWrapper>
+              )}
+            </>
+          ) : (
+            <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+              <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
+                <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
+              </div>
+            </ArticleElementWrapper>
+          )}
+        </div>
       </article>
     </div>
   );

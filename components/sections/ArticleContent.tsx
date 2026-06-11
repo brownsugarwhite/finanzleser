@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect, useMemo, useLayoutEffect } from "react";
+import { memo, useState, useEffect, useMemo, useLayoutEffect, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import gsap from "@/lib/gsapConfig";
 
@@ -61,6 +61,7 @@ interface Props {
   content: string;
   collapsed: boolean;
   currentSlug?: string;
+  showMidAd?: boolean;
 }
 
 interface ContentPart {
@@ -190,7 +191,18 @@ function splitFazit(html: string): { type: "html" | "fazit"; value: string }[] {
   return parts.length > 0 ? parts : [{ type: "html", value: html }];
 }
 
-function ArticleContent({ content, collapsed, currentSlug }: Props) {
+// Float-Werbebox vor dem 2. Absatz (oder 1., wenn nur einer) eines HTML-Blocks
+// einsetzen, damit der nachfolgende Text sie umfließt. Platzhalter — später Ad.
+function injectInlineAd(html: string): string {
+  const matches = [...html.matchAll(/<p[\s>]/gi)];
+  if (matches.length === 0) return html;
+  const at = matches[Math.min(1, matches.length - 1)].index ?? 0;
+  const box =
+    '<aside class="article-ad-inline" data-ad-format="rectangle" aria-label="Werbung"></aside>';
+  return html.slice(0, at) + box + html.slice(at);
+}
+
+function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
   // Memoize ALL HTML transforms (parseContent + addHeadingIds + splitFazit + wrapTables)
   // so dangerouslySetInnerHTML receives stable strings across re-renders. Otherwise
   // every parent re-render (TOC scroll progress, collapsed toggle, …) produces a new
@@ -316,11 +328,12 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
   }, []);
 
 
-  const rendered = units.map((unit) => {
+  const renderUnit = (unit: RenderUnit, withAd = false): ReactNode => {
     if (unit.kind === "html") {
+      const html = withAd ? injectInlineAd(unit.htmlString) : unit.htmlString;
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
-          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: unit.htmlString }} />
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
         </ArticleElementWrapper>
       );
     }
@@ -333,8 +346,8 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
     }
     if (unit.kind === "tool" && unit.toolType === "rechner") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <div className="article-tool-embed">
+        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+          <div className="article-tool-embed article-finanztool">
             <RechnerEmbed
               slug={unit.slug}
               formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
@@ -345,8 +358,8 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
     }
     if (unit.kind === "tool" && unit.toolType === "checkliste") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <div className="checkliste-article-wrap">
+        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+          <div className="checkliste-article-wrap article-finanztool">
             <ChecklisteEmbed
               slug={unit.slug}
               formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
@@ -357,11 +370,13 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
     }
     if (unit.kind === "tool" && unit.toolType === "vergleich") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="wide" collapsed={collapsed}>
-          <VergleichEmbed
-            slug={unit.slug}
-            formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
-          />
+        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+          <div className="article-finanztool">
+            <VergleichEmbed
+              slug={unit.slug}
+              formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+            />
+          </div>
         </ArticleElementWrapper>
       );
     }
@@ -373,7 +388,24 @@ function ArticleContent({ content, collapsed, currentSlug }: Props) {
       );
     }
     return null;
-  });
+  };
+
+  // 1–2 In-Text-Werbeflächen (float, der Text umfließt sie) gleichmäßig über die
+  // längeren HTML-Units verteilen. 2 ab genügend Blöcken, sonst 1.
+  const htmlIndices = units
+    .map((u, i) => (u.kind === "html" ? i : -1))
+    .filter((i) => i >= 0);
+  const adTargets = new Set<number>();
+  if (showMidAd && htmlIndices.length > 0) {
+    const n = htmlIndices.length >= 4 ? 2 : 1;
+    for (let k = 1; k <= n; k++) {
+      const idx = htmlIndices[Math.floor((htmlIndices.length * k) / (n + 1))]
+        ?? htmlIndices[htmlIndices.length - 1];
+      adTargets.add(idx);
+    }
+  }
+
+  const rendered = units.map((unit, i) => renderUnit(unit, adTargets.has(i)));
 
   return <>{rendered}</>;
 }

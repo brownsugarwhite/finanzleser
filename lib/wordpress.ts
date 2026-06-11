@@ -1556,6 +1556,12 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
     link_type: "none",
     link_value: "",
   },
+  // Default: Werbung aus — sicherer Zustand, falls WP nicht erreichbar.
+  article_ads: {
+    top: false,
+    rails: false,
+    mid: false,
+  },
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -1571,6 +1577,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     const data = (await res.json()) as Partial<SiteSettings>;
     return {
       top_banner: { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) },
+      article_ads: { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) },
     };
   } catch (error) {
     console.error("Error fetching site settings from WordPress:", error);

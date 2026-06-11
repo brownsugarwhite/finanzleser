@@ -1,6 +1,7 @@
 import Footer from "./Footer";
 import ArticleClient from "./ArticleClient";
 import RelatedPostsSection from "@/components/sections/RelatedPostsSection";
+import { getSiteSettings } from "@/lib/wordpress";
 
 type ArticleLayoutProps = {
   title?: string;
@@ -38,14 +39,16 @@ function extractLatestPostsBlock(content?: string): { categoryIds: number[]; pos
   }
 }
 
-export default function ArticleLayout(props: ArticleLayoutProps) {
+export default async function ArticleLayout(props: ArticleLayoutProps) {
   const relatedBlock = extractLatestPostsBlock(props.content);
+  // Werbe-Settings (gecacht/dedupliziert mit dem Aufruf in app/layout.tsx).
+  const { article_ads } = await getSiteSettings();
 
   return (
     <>
       <main className="min-h-screen bg-white">
         <div className="pb-12" style={{ paddingTop: 0 }}>
-          <ArticleClient {...props} />
+          <ArticleClient {...props} articleAds={article_ads} />
         </div>
         {relatedBlock && relatedBlock.categoryIds.length > 0 && (
           <RelatedPostsSection

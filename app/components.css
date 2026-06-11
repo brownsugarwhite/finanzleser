@@ -2134,6 +2134,71 @@ h2.faq-heading {
   }
 }
 
+/* ─── Werbe-Rails neben dem Artikel ───────────────────────────────────────
+   Absolut im relativen Wrapper (beginnen oben neben dem TOC), an den Außen-
+   kanten der 750px-Content-Spalte. Innen sticky (top:100px = TOC-Offset).
+   Breite responsiv über --rail-w: 300px (Half-Page) → 160px (Skyscraper) → aus. */
+/* Geteilte Werbe-Layout-Variablen: Rail-Breite + horizontaler Abstand zum
+   Artikel (750px). Hero/Heading und Rail-Außenkanten leiten ihre Breite davon
+   ab → fluchten exakt. 300px-Rails erst ab ≥1760px (sonst zu eng neben TOC). */
+:root {
+  --ad-rail-w: 300px;
+  --ad-rail-gap: 40px;
+}
+@media (max-width: 1760px) {
+  :root {
+    --ad-rail-w: 160px;
+  }
+}
+
+.article-ad-rail {
+  position: absolute;
+  top: 18px; /* bündig mit dem Leaderboard (margin-top 18px) */
+  bottom: 0;
+  width: var(--ad-rail-w);
+  z-index: 40; /* unter Nav/TOC (52/55), aber sichtbar in den Rändern */
+}
+.article-ad-rail-left {
+  left: calc(50% - 375px - var(--ad-rail-gap) - var(--ad-rail-w));
+}
+.article-ad-rail-right {
+  left: calc(50% + 375px + var(--ad-rail-gap));
+}
+.article-ad-rail-sticky {
+  position: sticky;
+  top: 100px;
+}
+.article-ad-rail-box {
+  width: var(--ad-rail-w);
+  height: 600px;
+  background: #d1d5db;
+}
+/* <1440px: kein Platz neben TOC + 750px-Content → Rails aus. */
+@media (max-width: 1440px) {
+  .article-ad-rail {
+    display: none !important;
+  }
+}
+
+/* ─── In-Text-Werbung (Mid) — float, Text umfließt sie ─────────────────────
+   Wird als <aside> in den Prosa-HTML-String injiziert (ArticleContent). */
+.prose .article-ad-inline {
+  float: right;
+  width: 300px;
+  height: 250px;
+  background: #d1d5db;
+  margin: 6px 0 16px 24px;
+  clear: right;
+}
+@media (max-width: 700px) {
+  .prose .article-ad-inline {
+    float: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 16px auto;
+  }
+}
+
 /* Desktop (≥1025px): Mobile-TOC-Komponenten verstecken. */
 @media (min-width: 1025px) {
   .mobile-toc-indicator,

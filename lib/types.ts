@@ -221,6 +221,14 @@ export interface TopBannerSettings {
   link_value: string;
 }
 
+// Werbebanner in Beiträgen — pro Platzierung einzeln schaltbar.
+export interface ArticleAdsSettings {
+  top: boolean; // breiter Banner zwischen Nav und Breadcrumb
+  rails: boolean; // sticky Seiten-Rails links + rechts
+  mid: boolean; // breiter Banner in der Artikelmitte
+}
+
 export interface SiteSettings {
   top_banner: TopBannerSettings;
+  article_ads: ArticleAdsSettings;
 }
