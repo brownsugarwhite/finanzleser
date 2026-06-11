@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
@@ -15,6 +15,7 @@ import MobileTocOverlay from "./MobileTocOverlay";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
 import { buildArticleTocItems } from "@/lib/articleTocBuilder";
 import { extractArticleHeader } from "@/lib/articleHeader";
+import { notifyTargetMounted } from "@/lib/morphTransition";
 
 type ArticleClientProps = {
   title?: string;
@@ -53,6 +54,22 @@ export default function ArticleClient({
   const [tocOpen, setTocOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const toc = useArticleToc();
+
+  // Morph-Ziele: der MorphTransitionLayer morpht Visual + fetten + kursiven Titel
+  // aus der angeklickten Card hierher. Refs auf die drei Header-Elemente.
+  const morphVisualRef = useRef<HTMLDivElement>(null);
+  const morphSubtitleRef = useRef<HTMLHeadingElement>(null);
+  const morphTitleRef = useRef<HTMLHeadingElement>(null);
+
+  // Nach dem Mount (vor Paint) dem Morph-Controller melden — no-op wenn kein
+  // Morph aktiv ist (normale Navigation).
+  useLayoutEffect(() => {
+    notifyTargetMounted({
+      visual: morphVisualRef.current,
+      bold: morphSubtitleRef.current,
+      italic: morphTitleRef.current,
+    });
+  }, []);
 
   // Neue Redaktions-Konvention: Titel (<h1>) + Beschreibung (führendes <p>) stehen
   // im Content statt in den WP-Feldern. Herausziehen und aus dem Body entfernen;
@@ -131,6 +148,8 @@ export default function ArticleClient({
           {(() => {
             const titleEl = title ? (
               <h1
+                ref={morphTitleRef}
+                data-morph-target="article-title"
                 className="article-title"
                 style={{
                   color: "var(--color-brand-secondary)",
@@ -146,13 +165,13 @@ export default function ArticleClient({
             ) : null;
 
             const subtitleEl = displayTitle ? (
-              <h2 data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{displayTitle}</h2>
+              <h2 ref={morphSubtitleRef} data-morph-target="article-subtitle" data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{displayTitle}</h2>
             ) : null;
 
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
-                  <div className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden">
+                  <div ref={morphVisualRef} data-morph-target="article-visual" data-morph-img={featuredImage.sourceUrl} className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden">
                     <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
@@ -160,7 +179,7 @@ export default function ArticleClient({
                     />
                   </div>
                 ) : (
-                  <div className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
+                  <div ref={morphVisualRef} data-morph-target="article-visual" className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
                 )}
                 {featuredImage?.altText && (
                   <p

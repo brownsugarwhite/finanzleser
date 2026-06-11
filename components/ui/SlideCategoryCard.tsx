@@ -1,7 +1,8 @@
 'use client';
 
-import { memo, useRef, useEffect, useState } from 'react';
+import { memo, useRef, useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
+import { isBackNavigation } from '@/lib/landingState';
 
 export interface CategorySlide {
   name: string;
@@ -29,8 +30,10 @@ const T2 = 0.3; // Phase 2 duration (width + font)
 function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidth: titleWidthProp, fluidWidth = false }: SlideCategoryCardProps) {
   const categoryLink = `/${parentSlug}/${category.slug}/`;
 
-  // 2-phase: width changes delayed when collapsing, immediate when expanding
-  const [phase2Active, setPhase2Active] = useState(false);
+  // 2-phase: width changes delayed when collapsing, immediate when expanding.
+  // Initial = active: bei Back-Restore (active schon true beim Mount) sofort
+  // Button-Breite (keine Breiten-Animation, die den Slider nachziehen würde).
+  const [phase2Active, setPhase2Active] = useState(active);
   const phase2Timer = useRef<ReturnType<typeof setTimeout>>(null);
   const [cardHovered, setCardHovered] = useState(false);
   const [hoverCapable, setHoverCapable] = useState(true);
@@ -56,8 +59,11 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
 
   const [measuredTitleWidth, setMeasuredTitleWidth] = useState(CARD_WIDTH);
 
-  // Measure title at collapsed font (16px/600) using hidden element
-  useEffect(() => {
+  // Measure title at collapsed font (16px/600) using hidden element.
+  // useLayoutEffect: Button-Breite muss VOR dem Paint final stehen, sonst startet sie
+  // beim Platzhalter (CARD_WIDTH) und schrumpft animiert auf die echte Titelbreite
+  // (sichtbares „Morphen" der Buttons beim Back-Restore).
+  useLayoutEffect(() => {
     if (titleWidthProp !== undefined) return;
     const el = document.createElement('span');
     el.style.cssText = `
@@ -82,6 +88,9 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
   const phase1Delay = active ? 0 : T2;
   const phase1Ease = active ? 'ease-in' : 'ease-out';
   const phase2Ease = active ? 'ease-out' : 'ease-in';
+  // Back-Restore: KEINE width/height-Transition → die Breite (Platzhalter→gemessene
+  // Titelbreite) und der Visual-Collapse stehen instant, statt sichtbar zu animieren.
+  const backRestore = useRef(typeof window !== 'undefined' && isBackNavigation()).current;
 
   return (
     <div
@@ -99,7 +108,7 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
         // Hover-Scale nur im Card-Mode (nicht im Button-Mode, wo die Card
         // zusammenklappt).
         transform: cardHovered && !active && hoverCapable ? 'scale(1.1)' : 'scale(1)',
-        transition: `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
+        transition: backRestore ? 'transform 0.3s ease' : `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
       }}
     >
       {/* Visual — Wrapper kollabiert Höhe 260→0, Inner scaled uniform + blurred */}

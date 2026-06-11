@@ -1,11 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import SliderSafeZone from '@/components/ui/SliderSafeZone';
+import { getArticleSliderPos, setArticleSliderPos, isBackNavigation } from '@/lib/landingState';
 import type { Post } from '@/lib/types';
-import { SliderPreviewContextProvider, type PreviewSliderContext } from '@/components/sections/ArticleSliderContext';
 
 const ART_SLIDE_WIDTH = CARD_MIN_WIDTH;
 const ART_GAP = 70;
@@ -28,16 +28,20 @@ interface ArticleSliderProps {
   phase1Visible?: boolean;
   phase2Visible?: boolean;
   categoryTransition?: 'idle' | 'out' | 'in';
+  /** Key (category slug) zum Merken/Wiederherstellen der Embla-Scroll-Position bei Zurück. */
+  persistKey?: string;
 }
 
 const SPARK_DURATION = 0.3;
 
-export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: ArticleSliderProps) {
+export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle', persistKey }: ArticleSliderProps) {
   // Mount-flip: beim ersten Mount rendert die Komponente mit mounted=false, sodass
   // das Visual bei scale(0) startet. Ein rAF flippt auf true → CSS-Transition zu
   // scale(1) läuft parallel zur Spacer-Höhe-Animation. Sonst würde das Visual auf
   // dem ersten Frame bereits bei scale(1) stehen und beim Öffnen "springen".
-  const [mounted, setMounted] = useState(false);
+  // Bei Zurück (Back-Restore) sofort mounted=true → Card-Visuals stehen direkt bei
+  // scale(1) (kein Scale-in-Pop, Morph landet auf stabiler Card). Sonst scale(0)→1.
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined' && isBackNavigation());
   useLayoutEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(raf);
@@ -85,6 +89,39 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
 
+  // Bei Zurück die zuvor gescrollte Position wiederherstellen. Embla-EIGENEN Snap-Index
+  // (selectedScrollSnap) persistieren — round-trippt korrekt (inkl. Leading-Spacer),
+  // anders als ein manuell aus scrollProgress gerundeter Index (führte zu Off-by-one →
+  // Ziel-Card außerhalb Viewport → kein Morph). Ziel EINMAL beim Render erfassen.
+  const restoreIndexRef = useRef<number>(
+    typeof window !== 'undefined' && isBackNavigation() && persistKey ? getArticleSliderPos(persistKey) : 0
+  );
+  // Back-Restore: Card-Breite (flex-grow) OHNE Transition → sofort final, damit der
+  // Rückwärts-Morph beim Messen die korrekte (breite) Größe erfasst statt MIN→MAX zu
+  // animieren. Einmal beim Mount erfasst.
+  const isBackRestoreRef = useRef(typeof window !== 'undefined' && isBackNavigation());
+  // Aktuelle Embla-Snap-Position merken (für die nächste Zurück-Navigation).
+  useEffect(() => {
+    if (!emblaApi || !persistKey) return;
+    const save = () => setArticleSliderPos(persistKey, emblaApi.selectedScrollSnap());
+    emblaApi.on('select', save);
+    emblaApi.on('settle', save);
+    save();
+    return () => { emblaApi.off('select', save); emblaApi.off('settle', save); };
+  }, [emblaApi, persistKey]);
+  // Wiederherstellen SYNCHRON vor Paint (useLayoutEffect) — damit die Card schon an
+  // der richtigen Position steht, BEVOR der Morph-Poll (rAF, nach Paint) misst (sonst
+  // misst er die Scroll-0-Position). Zusätzlich nach jedem reInit (Fit-Check) erneut
+  // anwenden, da reInit die Position zurücksetzen kann.
+  useLayoutEffect(() => {
+    if (!emblaApi || restoreIndexRef.current <= 0) return;
+    const apply = () => emblaApi.scrollTo(restoreIndexRef.current, true);
+    apply();
+    emblaApi.on('reInit', apply);
+    const t = setTimeout(() => emblaApi.off('reInit', apply), 400);
+    return () => { clearTimeout(t); emblaApi.off('reInit', apply); };
+  }, [emblaApi]);
+
   useEffect(() => {
     if (!emblaApi) return;
     const update = () => {
@@ -108,7 +145,10 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
   // deaktivieren. Cards werden dann zentriert und wachsen bis CARD_MAX_WIDTH,
   // um die Breite auszunutzen.
   const [canScroll, setCanScroll] = useState(true);
-  useEffect(() => {
+  // useLayoutEffect: Card-Breite (fit → MIN/MAX) muss VOR dem Paint final stehen,
+  // damit der Rückwärts-Morph beim Messen die korrekte Breite erfasst (sonst misst
+  // er MIN und springt auf MAX).
+  useLayoutEffect(() => {
     if (!emblaApi) return;
     const check = () => {
       // Layout: spacer + n cards + spacer → (n+2) Items, (n+1) Gaps.
@@ -212,27 +252,8 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     });
   }, [emblaApi, selectedIndex, posts.length, onNavReady]);
 
-  // Card-lookup per index — emblaApi.slideNodes() enthält Leading-Spacer an Index 0,
-  // daher liegt Card N bei slideNodes()[N + 1]. Wir suchen die Card-Wurzel mit data-flip-id.
-  const getCardEl = useCallback(
-    (index: number): HTMLElement | null => {
-      if (!emblaApi) return null;
-      const nodes = emblaApi.slideNodes();
-      const wrapper = nodes[index + 1]; // +1 wegen Leading-Spacer
-      if (!wrapper) return null;
-      const card = wrapper.querySelector<HTMLElement>('[data-flip-id$="-box"]');
-      return card;
-    },
-    [emblaApi]
-  );
-
-  const previewCtx = useMemo<PreviewSliderContext>(
-    () => ({ posts, emblaApi: emblaApi ?? null, getCardEl }),
-    [posts, emblaApi, getCardEl]
-  );
-
   return (
-    <SliderPreviewContextProvider value={previewCtx}>
+    <>
     <div ref={emblaRef} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
       <div style={{
         display: 'flex',
@@ -279,7 +300,9 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                 // jedem Update einen neuen Tween gegen ein bewegtes Ziel
                 // starten → sichtbares Wiggle/Größen-Springen auf iPhone.
                 // (Gleiche Logik wie im SubcategorySlider.)
-                transition: categoryTransition === 'in'
+                transition: isBackRestoreRef.current
+                  ? 'opacity 0.1s ease' // Back-Restore: flex-grow instant (keine Breiten-Animation)
+                  : categoryTransition === 'in'
                   ? 'opacity 0.1s ease'
                   : isMobile
                   ? 'flex-grow 0.3s ease'
@@ -397,6 +420,6 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
         onClick={() => emblaApi?.scrollNext()}
       />
     </div>
-    </SliderPreviewContextProvider>
+    </>
   );
 }

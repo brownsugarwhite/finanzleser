@@ -1,19 +1,19 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useRef, useEffect, useLayoutEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "@/lib/gsapConfig";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
 import type { LatestTool } from "@/lib/wordpress";
-import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
-import { openOverlay } from "@/lib/overlayController";
-import type { PreviewSliderContext } from "@/components/sections/ArticleSliderContext";
-import InlineSVG from "@/components/ui/InlineSVG";
+import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
+import { captureTextItem, hideSourceEls, getElementScale } from "@/lib/morphCapture";
+import { getFinanztoolsActiveCard, setFinanztoolsActiveCard, isBackNavigation } from "@/lib/landingState";
 
 const TOOLS = [
   {
@@ -54,25 +54,21 @@ const TOOL_IMAGE_SCALE = "88%";
 export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTools = [] }: { posts?: Post[]; latestPosts?: Post[]; latestTools?: LatestTool[] }) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
-  const sidebarCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const [cardProgs, setCardProgs] = useState<number[]>([0, 0, 0]);
   const cardProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
   const [contentProgs, setContentProgs] = useState<number[]>([0, 0, 0]);
   const contentProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
   const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
-  const { openPreview } = useArticlePreview();
-
-  const sidebarPreviewCtx = useMemo<PreviewSliderContext>(() => ({
-    posts: latestPosts,
-    emblaApi: null,
-    getCardEl: (i) => sidebarCardRefs.current.get(i) ?? null,
-  }), [latestPosts]);
+  const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const alleinHandRef = useRef<HTMLParagraphElement>(null);
   const activeCardRef = useRef<string | null>(null);
   const isScrollingToTarget = useRef(false);
   const lastPastRef = useRef(false);
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<string | null>(
+    () => (isBackNavigation() ? getFinanztoolsActiveCard() : null)
+  );
+  useEffect(() => { setFinanztoolsActiveCard(activeCard); }, [activeCard]);
 
   // Intro-Progress: füllt sich am Auto-Expand-Trigger in 3s, danach öffnet Rechner.
   const [introProgress, setIntroProgress] = useState(0);
@@ -570,18 +566,28 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
               return (
                 <div
                   key={post.id}
-                  ref={(el) => { if (el) sidebarCardRefs.current.set(i, el); }}
-                  data-flip-id={`preview-${post.slug}-box`}
                   className="latest-post-item"
+                  data-morph-card={post.slug}
                   style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
-                  onClick={() => {
-                    openPreview({ ctx: sidebarPreviewCtx, currentIndex: i });
-                    // Über den Controller → schließt ggf. ein anderes Overlay, Blur sofort.
-                    openOverlay("preview", { extended: true });
+                  onMouseEnter={() => { try { router.prefetch(postLink); } catch { /* noop */ } }}
+                  onClick={(e) => {
+                    if ((e.target as HTMLElement).closest("a")) return; // „Ratgeber lesen" navigiert selbst
+                    const item = e.currentTarget as HTMLElement;
+                    const scale = getElementScale(item); // Hover-Skalierung (1.1) der Reiter
+                    const boldEl = item.querySelector<HTMLElement>(".latest-post-title");
+                    const italicEl = item.querySelector<HTMLElement>(".latest-post-category");
+                    const items: MorphItemSource[] = [];
+                    // Untertitel (fett) → article-subtitle; post.title (Kategorie-Zeile) → article-title (pink).
+                    const bold = captureTextItem(boldEl, "bold", scale);
+                    if (bold) items.push(bold);
+                    const italic = captureTextItem(italicEl, "italic", scale);
+                    if (italic) items.push(italic);
+                    hideSourceEls(boldEl, italicEl);
+                    startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
                   }}
                 >
-                  <div data-card-text style={{ flex: 1, minWidth: 0 }}>
-                    <p className="latest-post-category" style={{
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p className="latest-post-category" data-morph-role="italic" style={{
                       fontSize: 11,
                       fontFamily: "var(--font-body)",
                       marginBottom: 4,
@@ -591,7 +597,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                       {post.title}
                     </p>
                     {post.beitragFelder?.beitragUntertitel && (
-                      <p className="latest-post-title" style={{
+                      <p className="latest-post-title" data-morph-role="bold" style={{
                         fontSize: 16,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
                         fontWeight: 650,
@@ -605,34 +611,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                       </p>
                     )}
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <span style={{
-                        fontSize: 13,
-                        fontFamily: "var(--font-body)",
-                        fontWeight: 500,
-                        color: "var(--color-text-secondary)",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 5,
-                      }}>
-                        <span style={{
-                          width: 18,
-                          height: 18,
-                          borderRadius: "50%",
-                          border: "1px solid var(--color-text-secondary)",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
-                          ["--fill-0" as string]: "var(--color-text-secondary)",
-                        }}>
-                          <InlineSVG
-                            src="/icons/info_i.svg"
-                            alt="Info"
-                            style={{ width: 5, height: 10 }}
-                          />
-                        </span>
-                        Vorschau
-                      </span>
                       <Link
                         href={postLink}
                         className="article-read-link"

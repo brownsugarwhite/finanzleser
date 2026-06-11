@@ -15,7 +15,7 @@ import LeoIcon from "@/components/ui/LeoIcon";
 import TopBanner from "@/components/ui/TopBanner";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
-import ArticlePreviewProvider from "@/components/sections/ArticlePreviewProvider";
+import MorphTransitionLayer from "@/components/sections/MorphTransitionLayer";
 import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
@@ -107,7 +107,6 @@ export default async function RootLayout({
         <div id="leo-dock-slot-mobile" />
         <Providers>
         <NavProvider items={navItems}>
-        <ArticlePreviewProvider>
         <PageTransitionProvider>
           <div className="bookmark-section">
             <div className="bookmark-section__inner"><BookmarkNav /></div>
@@ -124,10 +123,10 @@ export default async function RootLayout({
           <div className="scalable-content">
             {children}
           </div>
+          <MorphTransitionLayer />
           <ProgressiveBlur height={120} />
           <LeoIcon />
         </PageTransitionProvider>
-        </ArticlePreviewProvider>
         </NavProvider>
         </Providers>
       </body>

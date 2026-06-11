@@ -1,12 +1,12 @@
 'use client';
 
-import { memo, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { memo, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
-import InlineSVG from '@/components/ui/InlineSVG';
-import { useArticlePreview } from '@/components/sections/ArticlePreviewProvider';
-import { useSliderPreviewContext } from '@/components/sections/ArticleSliderContext';
+import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from '@/lib/morphCapture';
 
 /* ── Modul-globaler hover-capable Listener ──
    Bei vielen Cards (50+ bei Sozialversicherungen) würde ein matchMedia-
@@ -54,21 +54,15 @@ export const CARD_MAX_WIDTH = 450;
 
 function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
-  const [infoHovered, setInfoHovered] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);
   // Shared subscription — ein matchMedia-Listener für alle Cards.
   const hoverCapable = useSyncExternalStore(subscribeHoverCapable, getHoverCapable, SSR_HOVER_CAPABLE);
   const cardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const boldRef = useRef<HTMLParagraphElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
-  const { openPreview, isOpen, prefetchExtras } = useArticlePreview();
-  const sliderCtx = useSliderPreviewContext();
-
-  // Vorschau-Daten für die ersten (initial sichtbaren) Karten schon beim Mount
-  // vorladen — auf Mobile gibt es kein Hover, sonst würde der Fetch erst beim
-  // Antippen (= Öffnen) starten und das Skeleton bliebe lange stehen.
-  useEffect(() => {
-    if (typeof index === 'number' && index < 4) prefetchExtras(post.slug);
-  }, [index, post.slug, prefetchExtras]);
+  const router = useRouter();
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
@@ -81,42 +75,67 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
 
+  // Route vorladen, damit beim Klick der Commit (und damit der Morph-Flug) sofort
+  // bereitsteht — sonst wartet der Flug auf das Laden der Artikelseite.
+  const prefetchArticle = () => {
+    try { router.prefetch(postLink); } catch { /* noop */ }
+  };
+
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
-    prefetchExtras(post.slug);
+    prefetchArticle();
+  };
+
+  const startMorph = () => {
+    // Hover-Skalierung der Card (scale 1.1) → Morph startet beim gehoverten Zustand
+    // (kein Snap), Schrift wird im Helfer mitskaliert (gleicher Umbruch).
+    const scale = getElementScale(cardRef.current);
+    const items: MorphItemSource[] = [];
+
+    // Visual → article-visual (Rect bereits gehovert-skaliert → Start ohne Snap)
+    const visual = captureVisualItem(imageRef.current, post.featuredImage?.node.sourceUrl);
+    if (visual) items.push(visual);
+
+    // Text: Zuordnung nach String-Identität.
+    // Mit Untertitel: fett (=Untertitel) → article-subtitle, Subline (=post.title) → article-title (pink).
+    // Ohne Untertitel: der fette Titel IST post.title → article-title (pink).
+    if (sublineText) {
+      const bold = captureTextItem(boldRef.current, 'bold', scale);
+      if (bold) items.push(bold);
+      const italic = captureTextItem(sublineRef.current, 'italic', scale);
+      if (italic) items.push(italic);
+    } else {
+      const italic = captureTextItem(boldRef.current, 'italic', scale);
+      if (italic) items.push(italic);
+    }
+
+    // Original-Card-Elemente sofort unsichtbar schalten — der abgehobene Anker
+    // übernimmt visuell ihre Stelle (kein Doppelbild beim Ausblurren).
+    hideSourceEls(imageRef.current, boldRef.current, sublineRef.current);
+
+    startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     const start = pointerStartRef.current;
     pointerStartRef.current = null;
     if (!start) return;
-    if (isOpen) return;
     // Only treat as click if pointer barely moved (ignore Embla drag gestures)
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
     if (dx * dx + dy * dy > 36) return; // > 6px → drag, ignore
     const target = e.target as HTMLElement;
-    if (target.closest('.article-read-link')) return;
-    if (!cardRef.current) return;
-    // If inside a slider context, pass full context + index for in-preview navigation.
-    // Otherwise fall back to single-post preview (no nav).
-    if (sliderCtx && typeof index === 'number') {
-      openPreview({ ctx: sliderCtx, currentIndex: index });
-    } else {
-      openPreview({ post, cardEl: cardRef.current });
-    }
+    if (target.closest('.article-read-link')) return; // innerer Link navigiert selbst
+    startMorph();
   };
 
   return (
     <div
       ref={cardRef}
-      data-flip-id={`preview-${post.slug}-box`}
+      data-morph-card={post.slug}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onMouseEnter={() => {
-        setCardHovered(true);
-        prefetchExtras(post.slug);
-      }}
+      onMouseEnter={() => { setCardHovered(true); prefetchArticle(); }}
       onMouseLeave={() => setCardHovered(false)}
       style={{
         width: '100%',
@@ -134,7 +153,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
     >
       {/* Visual */}
       <div
-        data-flip-id={`preview-${post.slug}-image`}
+        ref={imageRef}
+        data-morph-role="visual"
         style={{
           position: 'relative',
           width: '100%',
@@ -182,41 +202,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         </div>
       </div>
 
-      {/* Info-i — außerhalb imageRef damit es beim Visual-Scale nicht mitskaliert */}
-      <div
-        data-card-info
-        onMouseEnter={() => setInfoHovered(true)}
-        onMouseLeave={() => setInfoHovered(false)}
-        style={{
-          position: 'absolute',
-          top: 161,
-          right: 13,
-          width: 36,
-          height: 36,
-          borderRadius: '50%',
-          border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-          background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          flexShrink: 0,
-          opacity: categoryTransition === 'out' ? 0 : phase2Visible ? 1 : 0,
-          transition: categoryTransition === 'out'
-            ? `opacity 0.2s ease-in, background 0.15s, border 0.15s`
-            : `opacity ${PHASE_DURATION}s ease, background 0.15s, border 0.15s`,
-          ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-        }}
-      >
-        <InlineSVG
-          src="/icons/info_i.svg"
-          alt="Info"
-          style={{ width: 9, height: 17 }}
-        />
-      </div>
-
-      {/* Text + Footer — fadet beim Preview-Öffnen aus */}
-      <div data-card-text style={{
+      {/* Text + Footer */}
+      <div style={{
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -233,6 +220,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         }}>
           {sublineText && (
             <p
+              ref={sublineRef}
+              data-morph-role="italic"
               lang="de"
               style={{
                 fontFamily: 'Merriweather, serif',
@@ -251,6 +240,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
             </p>
           )}
           <p
+            ref={boldRef}
+            data-morph-role={sublineText ? 'bold' : 'italic'}
             lang="de"
             style={{
               fontFamily: 'Merriweather, serif',

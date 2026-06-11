@@ -1,9 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import InlineSVG from '@/components/ui/InlineSVG';
+import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { captureTextItem, captureVisualItem, hideSourceEls } from '@/lib/morphCapture';
 
 type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
 
@@ -21,13 +24,38 @@ interface ArticleListItemProps {
 }
 
 export default function ArticleListItem({ post, href, bookmarkType }: ArticleListItemProps) {
-  const [infoHovered, setInfoHovered] = useState(false);
+  const router = useRouter();
+  const imageRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
   const category = post.categories?.nodes?.[0];
   const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
 
+  const prefetchArticle = () => {
+    try { router.prefetch(href); } catch { /* noop */ }
+  };
+
+  const startMorph = () => {
+    const items: MorphItemSource[] = [];
+    const visual = captureVisualItem(imageRef.current, imageUrl);
+    if (visual) items.push(visual);
+    // post.title (fett gezeigt) landet auf der Artikelseite im pinken kursiven
+    // Titel (article-title) → kind "italic".
+    const italic = captureTextItem(titleRef.current, 'italic');
+    if (italic) items.push(italic);
+    hideSourceEls(imageRef.current, titleRef.current);
+    startMorphNavigation({ href, items }, (h) => router.push(h));
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('a')) return; // „zum Beitrag" / sonstige Links selbst navigieren
+    startMorph();
+  };
+
   return (
-    <article data-card style={{
+    <article data-card data-morph-card={post.slug} onClick={handleClick} onMouseEnter={prefetchArticle} style={{
+      cursor: 'pointer',
       width: '100%',
       maxWidth: '1100px',
       borderRadius: '36px',
@@ -71,7 +99,7 @@ export default function ArticleListItem({ post, href, bookmarkType }: ArticleLis
         </div>
       )}
       {/* Visual links */}
-      <div style={{
+      <div ref={imageRef} data-morph-role="visual" data-morph-img={imageUrl || undefined} style={{
         width: '300px',
         minHeight: '220px',
         flexShrink: 0,
@@ -114,7 +142,7 @@ export default function ArticleListItem({ post, href, bookmarkType }: ArticleLis
         )}
 
         {/* Titel */}
-        <p lang="de" style={{
+        <p ref={titleRef} data-morph-role="italic" lang="de" style={{
           fontFamily: 'Merriweather, serif',
           fontWeight: 700,
           fontSize: '21px',
@@ -157,33 +185,6 @@ export default function ArticleListItem({ post, href, bookmarkType }: ArticleLis
           gap: '12px',
           marginTop: '12px',
         }}>
-          {/* Info Button */}
-          <div
-            data-card-info
-            onMouseEnter={() => setInfoHovered(true)}
-            onMouseLeave={() => setInfoHovered(false)}
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-              background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              flexShrink: 0,
-              transition: 'background 0.1s, border 0.1s',
-              ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-            }}
-          >
-            <InlineSVG
-              src="/icons/info_i.svg"
-              alt="Info"
-              style={{ width: '9px', height: '17px' }}
-            />
-          </div>
-
           {/* zum Beitrag Button */}
           <Link href={href} style={{
             backgroundColor: 'rgba(198, 200, 204, 0.23)',

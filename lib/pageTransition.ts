@@ -32,7 +32,7 @@ export type TransitionPhase = "idle" | "exiting" | "pending" | "entering";
 type Listener = (phase: TransitionPhase) => void;
 
 const EXIT_A = 0.3; // Fall A: nur opacity raus (Seite ist schon geblurt)
-const EXIT_B = 0.34; // Fall B: scale+blur+opacity raus
+export const EXIT_B = 0.34; // Fall B: scale+blur+opacity raus
 const ENTER_DUR = 0.55; // etwas länger + gediegener
 // Notbremse: erholt einen echten Hänger in ~8s. Mit dem robusten pathname-ENTER-
 // Trigger sollte sie quasi nie greifen — SSG-Seiten committen sofort.
@@ -46,6 +46,25 @@ let enterEls: HTMLElement[] = [];
 let enterWhenExitDone = false;
 let safetyTimer: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<Listener>();
+
+// ENTER-Gate: Der Morph-Controller (lib/morphTransition.ts) hält das ENTER zurück,
+// bis Visual + Titel an ihren Platz gemorpht sind. Solange `enterHeld` true ist,
+// merkt runEnter sich den Wunsch (`enterPending`) und führt ihn erst bei
+// releaseEnter() aus. Ohne aktiven Morph bleibt das Verhalten unverändert.
+let enterHeld = false;
+let enterPending = false;
+
+export function holdEnter(): void {
+  enterHeld = true;
+}
+
+export function releaseEnter(): void {
+  enterHeld = false;
+  if (enterPending) {
+    enterPending = false;
+    runEnter();
+  }
+}
 
 function emit() {
   listeners.forEach((l) => l(phase));
@@ -83,8 +102,8 @@ const ENTER_SCALE = 1.03; // Start-Scale beim Einfaden (von 1.03 → 1)
 // pro Frame) und ruckelt auf schweren Seiten (Slider/Bilder), die gleichzeitig
 // hydraten. Scale+Opacity tragen den Effekt; ein leichter Blur reicht visuell.
 const ENTER_BLUR = 6;
-const EXIT_SCALE = 0.95; // Fall B: alte Seite kleiner werden (wie beim Overlay-Öffnen)
-const EXIT_BLUR = 23; // gleicher Blur wie ContentScaler beim Overlay-Öffnen
+export const EXIT_SCALE = 0.95; // Fall B: alte Seite kleiner werden (wie beim Overlay-Öffnen)
+export const EXIT_BLUR = 23; // gleicher Blur wie ContentScaler beim Overlay-Öffnen
 
 /** Enter-Set: persistentes Chrome aus dem Exit-Set (noch im DOM, kein Content-Wrapper)
  *  plus der persistente `.scalable-content`-Wrapper, der die neuen children hält. */
@@ -125,6 +144,8 @@ function reset() {
   exitEls = [];
   enterEls = [];
   enterWhenExitDone = false;
+  enterHeld = false;
+  enterPending = false;
   clearOpenScalableTargets();
   clearSafety();
   emit();
@@ -134,11 +155,37 @@ export interface StartTransitionOpts {
   href: string;
   fromOverlay?: boolean;
   overlayId?: OverlayId;
+  /** Card→Artikel-Morph: KEINE Ausblend-Phase. Sofort pushen, neue Seite direkt
+   *  auf den ENTER-Startzustand seeden, damit der Morph sofort losfliegen kann
+   *  (das Ausblenden der alten Seite würde sonst ~0.34s Leerlauf vor dem Flug
+   *  erzeugen). Das Einblenden des Rests läuft dann parallel zum Morph. */
+  immediate?: boolean;
   doPush: (href: string) => void;
 }
 
 export function startTransition(opts: StartTransitionOpts): void {
   if (phase !== "idle") return; // Debounce: laufende Transition gewinnt
+
+  // Immediate-Modus (Morph): kein EXIT — direkt pending, neue Seite vor-seeden, push.
+  if (opts.immediate) {
+    phase = "pending";
+    started = true;
+    enterWhenExitDone = false;
+    emit();
+    armSafety();
+    enterEls = getTransitionWrapper();
+    enterEls.forEach((el) => {
+      gsap.killTweensOf(el);
+      gsap.set(el, {
+        scale: ENTER_SCALE,
+        filter: `blur(${ENTER_BLUR}px)`,
+        opacity: 0,
+        pointerEvents: "none",
+      });
+    });
+    opts.doPush(opts.href);
+    return;
+  }
 
   fromOverlay = opts.fromOverlay === true;
   phase = "exiting";
@@ -234,6 +281,13 @@ export function notifyRouteCommitted(): void {
 
 function runEnter(): void {
   if (phase === "entering") return;
+  // Morph-Gate: ENTER zurückhalten bis der Morph fertig ist. Wrapper bleibt im
+  // vorgeseedeten Zustand (opacity 0, scale 1.03) — der Rest blendet erst nach
+  // releaseEnter() ein. Phase bleibt "pending".
+  if (enterHeld) {
+    enterPending = true;
+    return;
+  }
   phase = "entering";
   emit();
 
@@ -286,3 +340,4 @@ function runEnter(): void {
 export function hasStarted(): boolean {
   return started;
 }
+

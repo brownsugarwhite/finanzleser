@@ -7,6 +7,7 @@ import SliderNav from '@/components/ui/SliderNav';
 import SliderSafeZone from '@/components/ui/SliderSafeZone';
 import ArticleSlider from '@/components/sections/ArticleSlider';
 import { useSliderPill } from '@/lib/hooks/useSliderPill';
+import { getSliderActive, setSliderActive, isBackNavigation } from '@/lib/landingState';
 import type { Post } from '@/lib/types';
 
 const CAT_GAP = 65;
@@ -31,7 +32,20 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
-  const [activeSlide, setActiveSlide] = useState<number | null>(null);
+  // Bei Browser-Zurück (Back-Flag) den vorherigen Slider-Zustand synchron + INSTANT
+  // wiederherstellen → Landing rendert sofort im finalen Artikelmodus (volle Höhe,
+  // keine Öffnungs-Animation), damit es exakt so aussieht wie beim Klick auf den
+  // Artikel und Nexts native Scroll-Restoration greift. Nur bei Back; sonst Default.
+  const [backOpen] = useState(
+    () => typeof window !== 'undefined' && isBackNavigation() && getSliderActive(parentSlug) !== null
+  );
+  const [activeSlide, setActiveSlide] = useState<number | null>(
+    () => (backOpen ? getSliderActive(parentSlug) : null)
+  );
+  // Zustand für die nächste Zurück-Navigation merken.
+  useEffect(() => {
+    setSliderActive(parentSlug, activeSlide);
+  }, [parentSlug, activeSlide]);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -44,7 +58,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Measure all title widths for pill lens + SlideCategoryCard
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
-  useEffect(() => {
+  // useLayoutEffect: Titelbreiten VOR Paint messen, damit Fit/Spacer/Button-Breiten
+  // beim Back-Restore sofort korrekt sind (kein nachträglicher Sprung der Button-Reihe).
+  useLayoutEffect(() => {
     const widths = categories.map((cat) => {
       const el = document.createElement('span');
       el.style.cssText = `
@@ -92,11 +108,16 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Merkt ob beim letzten Render bereits Button-Mode aktiv war.
   // Verhindert Pre-Scroll bei Active→Active (nur bei card→button nötig).
-  const wasInButtonModeRef = useRef(false);
+  const wasInButtonModeRef = useRef(backOpen);
+  // Back-Restore: erster Lauf(e) des Open-Effekts mit unverändertem activeSlide
+  // überspringen (Zustand ist via Initializer schon offen → keine Animation).
+  const restoredRef = useRef(backOpen);
 
   // renderedSlide als State: entkoppelt vom activeSlide für den A→B-OUT-Delay.
-  const [renderedSlide, setRenderedSlide] = useState<number | null>(null);
-  const prevCatRef = useRef<number | null>(null);
+  const [renderedSlide, setRenderedSlide] = useState<number | null>(
+    backOpen ? getSliderActive(parentSlug) : null
+  );
+  const prevCatRef = useRef<number | null>(backOpen ? getSliderActive(parentSlug) : null);
   const [categoryTransition, setCategoryTransition] = useState<'idle' | 'out' | 'in'>('idle');
 
   const renderedPosts = renderedSlide !== null
@@ -106,9 +127,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // 2-Phasen-Animation für Artikel-Slider
   // Phase 1: Sparks/Linien/Artikel-Visuals (parallel zum Card-Visual-Collapse)
   // Phase 2: Artikel-Text (parallel zur Card-Breiten-Änderung)
-  const [phase1Visible, setPhase1Visible] = useState(false);
-  const [phase2Visible, setPhase2Visible] = useState(false);
-  const [articleMounted, setArticleMounted] = useState(false);
+  const [phase1Visible, setPhase1Visible] = useState(backOpen);
+  const [phase2Visible, setPhase2Visible] = useState(backOpen);
+  const [articleMounted, setArticleMounted] = useState(backOpen);
   const articleRef = useRef<HTMLDivElement>(null);
   const [articleHeight, setArticleHeight] = useState(0);
   useEffect(() => {
@@ -130,10 +151,18 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // fullyOpen: nach Abschluss der gesamten Öffnen-Animation true, sofort beim
   // Schließen-Start wieder false. Steuert overflow-Switch (hidden während
   // Transition, visible im Ruhezustand), damit Card-Hover-Scale nicht geclippt.
-  const [fullyOpen, setFullyOpen] = useState(false);
+  const [fullyOpen, setFullyOpen] = useState(backOpen);
   useEffect(() => {
     const prev = prevCatRef.current;
     prevCatRef.current = activeSlide;
+
+    // Back-Restore: solange activeSlide unverändert dem initial wiederhergestellten
+    // Wert entspricht, ist der Zustand bereits final offen (Initializer) → KEINE
+    // Öffnungs-Animation. Erst eine echte Änderung schaltet auf normale Animationen.
+    if (restoredRef.current) {
+      if (activeSlide === prev) return;
+      restoredRef.current = false;
+    }
 
     // A → B: OUT-Animation (200ms), dann Slide wechseln + IN-Animation
     if (activeSlide !== null && prev !== null && activeSlide !== prev) {
@@ -202,7 +231,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Vorheriger Mode (button vs card) zur Erkennung von echten Mode-Wechseln.
   // Category-Wechsel (X → Y, beide non-null) ist KEIN Mode-Wechsel → FADE-
   // Params nicht interpolieren (sonst springt der erste Button).
-  const prevActiveModeRef = useRef<boolean>(false);
+  const prevActiveModeRef = useRef<boolean>(backOpen);
 
   useEffect(() => {
     if (!catEmblaApi) return;
@@ -310,7 +339,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Reset article nav when closing
   // Delayed phase2 for spacer width (synced with card phase2)
-  const [spacerExpanded, setSpacerExpanded] = useState(false);
+  const [spacerExpanded, setSpacerExpanded] = useState(backOpen);
   useEffect(() => {
     if (activeSlide === null) {
       setArticleNav(null);
@@ -540,7 +569,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                 flexGrow: 0,
                 flexShrink: 0,
                 minWidth: 0,
-                transition: `flex-basis ${MORPH_DURATION / 1000}s ease`,
+                // Back-Restore: instant (sonst schiebt die animierte Spacer-Breite die Button-Reihe).
+                transition: backOpen ? 'none' : `flex-basis ${MORPH_DURATION / 1000}s ease`,
               }}
             />
             {categories.map((cat, index) => {
@@ -617,7 +647,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                 flexShrink: 0,
                 flexBasis: '5vw', // dauerhaft 5vw — Button-Mode endet rechts wie Card-Mode
                 minWidth: 0,
-                transition: `flex-grow ${MORPH_DURATION / 1000}s ease`,
+                // Back-Restore: instant (sonst „wächst" der Trailing-Spacer animiert).
+                transition: backOpen ? 'none' : `flex-grow ${MORPH_DURATION / 1000}s ease`,
               }}
             />
           </div>
@@ -662,6 +693,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           >
             <ArticleSlider
               key={categories[renderedSlide].slug}
+              persistKey={categories[renderedSlide].slug}
               posts={renderedPosts}
               onNavReady={handleArticleNavReady}
               onCanScrollChange={handleArticleCanScrollChange}
@@ -677,7 +709,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           aria-hidden
           style={{
             height: phase1Visible ? articleHeight : 0,
-            transition: `height ${MORPH_DURATION / 1000}s ease`,
+            transition: backOpen ? 'none' : `height ${MORPH_DURATION / 1000}s ease`,
           }}
         />
       </div>

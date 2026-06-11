@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTransitionPhase } from "@/lib/usePageTransition";
+import { subscribeMorph, getMorphPhase, type MorphPhase } from "@/lib/morphTransition";
 import CircularLoader from "@/components/ui/CircularLoader";
 
 // Erst nach dieser Schwelle anzeigen — schnelle/gecachte Navigationen flashen
@@ -14,11 +15,16 @@ const THRESHOLD_MS = 130;
  */
 export default function PageTransitionLoader() {
   const phase = useTransitionPhase();
+  const [morphPhase, setMorphPhase] = useState<MorphPhase>(getMorphPhase());
   const [show, setShow] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  useEffect(() => subscribeMorph(setMorphPhase), []);
+
   useEffect(() => {
-    if (phase === "pending") {
+    // Während eines aktiven Card→Artikel-Morphs bleibt die Phase „pending" bis der
+    // Morph fertig ist — der Loader würde sonst über den Morph poppen.
+    if (phase === "pending" && morphPhase === "idle") {
       timerRef.current = setTimeout(() => setShow(true), THRESHOLD_MS);
     } else {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -28,7 +34,7 @@ export default function PageTransitionLoader() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [phase]);
+  }, [phase, morphPhase]);
 
   if (!show) return null;
 
