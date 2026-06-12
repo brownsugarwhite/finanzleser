@@ -1,23 +1,22 @@
 /**
- * Neue Redaktions-Konvention (Gamification-/Studio-Workflow): Titel und Beschreibung
- * stehen NICHT mehr im WP-Titel-/Untertitel-Feld, sondern am Anfang des Contents.
- * Struktur:
+ * Redaktions-Konvention v2 (Struktur-Migration 2026): Der echte Titel steht im
+ * WP-Titel-Feld (post.title) — NICHT mehr im Content. Der Content beginnt mit:
  *
- *   <p><em>… </em></p>     ← wird IGNORIERT (Alt-/Hilfszeile über dem Titel)
- *   <h1>Eigentlicher Titel</h1>   ← fetter Titel (unter dem pinken Reiter)
- *   <p>Einleitung …</p>           ← BESCHREIBUNG (oben, unter dem Titel)
- *   <h2>…</h2> …                  ← ab hier der Artikel-Flow (nach dem TOC)
+ *   <h2>Kicker-Tagline</h2>      ← 1. h2 = Untertitel (fett, 42px, brand-secondary)
+ *   <p>SEO-Beschreibung</p>      ← Beschreibung (liegt auch im Excerpt-Feld)
+ *   <h2>Begriff-Überschrift</h2> ← 2. h2 = erste echte TOC-Überschrift
+ *   <p>Body …</p>
  *
- * extractArticleHeader zieht Titel (h1) + Beschreibung (erstes <p> NACH dem h1)
- * heraus; der Body beginnt beim ersten <h2>. Alles davor (führendes <p>, h1,
- * Einleitungs-<p>) wird aus dem Fließtext entfernt.
+ * extractArticleHeader zieht subtitle (1. h2) + description (erstes <p> nach dem
+ * 1. h2) heraus; der Body beginnt beim 2. <h2>, sodass der TOC automatisch bei der
+ * Begriff-Überschrift startet und die Kicker-h2 nie im Fließtext/TOC auftaucht.
  *
- * Greift nur, wenn der Content mit (optionalem <p> +) <h1> BEGINNT → alte Beiträge
- * (Titel/Untertitel in den WP-Feldern, kein führendes <h1>) bleiben unverändert.
+ * Greift nur, wenn der Content mit einem <h2> beginnt (genauer: ein <h2> enthält).
+ * Beiträge ohne Content-h2 → null, Frontend fällt auf die WP-Felder zurück.
  */
 
 export interface ArticleHeader {
-  title: string;
+  subtitle: string;
   description: string | null;
   body: string;
 }
@@ -28,23 +27,33 @@ function stripTags(s: string): string {
 
 export function extractArticleHeader(content?: string): ArticleHeader | null {
   if (!content) return null;
-  // Muss mit (optionalem führenden <p> — wird ignoriert) + <h1> beginnen.
-  const head = content.match(/^\s*(?:<p[^>]*>[\s\S]*?<\/p>\s*)?<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  if (!head) return null;
-  const title = stripTags(head[1]);
-  if (!title) return null;
 
-  const afterH1 = content.slice(head[0].length);
-  // Body beginnt beim ersten <h2>; alles davor ist Einleitung/Beschreibung.
-  const h2Idx = afterH1.search(/<h2[\s>]/i);
-  if (h2Idx < 0) {
-    // Kein <h2> → keine Beschreibung extrahieren, Rest bleibt Body.
-    return { title, description: null, body: afterH1.replace(/^\s+/, "") };
+  // 1. <h2> = Kicker/Untertitel.
+  const firstH2 = content.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+  if (!firstH2 || firstH2.index === undefined) return null;
+  const subtitle = stripTags(firstH2[1]);
+  if (!subtitle) return null;
+
+  const afterFirstH2 = content.slice(firstH2.index + firstH2[0].length);
+
+  // 2. <h2> = erste echte Body-Überschrift (Begriff). Body beginnt dort.
+  const secondH2Rel = afterFirstH2.search(/<h2[\s>]/i);
+
+  if (secondH2Rel < 0) {
+    // Kein 2. h2 → Beschreibung = erstes <p> nach dem 1. h2, Body = Rest danach.
+    const pMatch = afterFirstH2.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    const description = pMatch ? stripTags(pMatch[1]) || null : null;
+    const body =
+      pMatch && pMatch.index !== undefined
+        ? afterFirstH2.slice(pMatch.index + pMatch[0].length).replace(/^\s+/, "")
+        : afterFirstH2.replace(/^\s+/, "");
+    return { subtitle, description, body };
   }
-  const beforeH2 = afterH1.slice(0, h2Idx);
-  const body = afterH1.slice(h2Idx);
-  // Beschreibung = erstes <p> zwischen h1 und erstem h2.
-  const pMatch = beforeH2.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+
+  const between = afterFirstH2.slice(0, secondH2Rel); // zwischen 1. und 2. h2
+  const body = afterFirstH2.slice(secondH2Rel); // ab 2. h2
+  // Beschreibung = erstes <p> zwischen den beiden h2.
+  const pMatch = between.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
   const description = pMatch ? stripTags(pMatch[1]) || null : null;
-  return { title, description, body };
+  return { subtitle, description, body };
 }

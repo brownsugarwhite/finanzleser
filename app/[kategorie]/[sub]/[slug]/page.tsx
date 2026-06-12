@@ -20,10 +20,10 @@ export async function generateMetadata(
   if (!post) return { title: `Nicht gefunden – ${SITE_NAME}` };
 
   const mainCategory = post.categories?.nodes?.find((c: Category) => isMainCategory(c.slug));
-  // Neue Konvention: echter Titel/Beschreibung stehen im Content (h1 + führendes p).
+  // Konvention v2: Titel = WP-Titel-Feld; Beschreibung = Content-<p> (1. h2 → <p>) bzw. Excerpt.
   const header = extractArticleHeader(post.content);
   return buildMetadata({
-    title: `${header?.title || post.title} – ${SITE_NAME}`,
+    title: `${post.title} – ${SITE_NAME}`,
     description: stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
     path: `/${params.kategorie}/${params.sub}/${params.slug}`,
     image: post.featuredImage?.node?.sourceUrl,
@@ -45,7 +45,7 @@ export default async function BeitragPage(props: {
     notFound();
   }
 
-  // Neue Konvention: echter Titel/Beschreibung im Content (h1 + führendes p).
+  // Konvention v2: Titel = WP-Titel-Feld; Beschreibung = Content-<p> (nach 1. h2).
   const header = extractArticleHeader(post.content);
 
   // Find main category (slug is in MAIN_CATEGORY_SLUGS) and subcategory
@@ -83,7 +83,7 @@ export default async function BeitragPage(props: {
   return (
     <>
       <JsonLd data={articleSchema({
-        headline: header?.title || post.title,
+        headline: post.title,
         description: stripHtml(header?.description || post.excerpt),
         url: absoluteUrl(articlePath),
         image: post.featuredImage?.node?.sourceUrl,

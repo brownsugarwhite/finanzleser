@@ -44,7 +44,7 @@ export async function generateMetadata(
   if (post) {
     const header = extractArticleHeader(post.content);
     return buildMetadata({
-      title: `${header?.title || post.title} – ${SITE_NAME}`,
+      title: `${post.title} – ${SITE_NAME}`,
       description: stripHtml(header?.description || post.excerpt),
       path: `/${params.kategorie}/${params.sub}`,
       image: post.featuredImage?.node?.sourceUrl,

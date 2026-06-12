@@ -76,13 +76,13 @@ export default function ArticleClient({
     });
   }, []);
 
-  // Neue Redaktions-Konvention: Titel (<h1>) + Beschreibung (führendes <p>) stehen
-  // im Content statt in den WP-Feldern. Herausziehen und aus dem Body entfernen;
-  // alte Beiträge (kein führendes <h1>) bleiben unverändert.
+  // Redaktions-Konvention v2: echter Titel = WP-Titel-Feld (title-Prop). Untertitel
+  // (1. h2) + Beschreibung (<p> darunter) stehen am Content-Anfang; Body beginnt beim
+  // 2. h2. Herausziehen; alte Beiträge (kein Content-h2) fallen auf die WP-Felder zurück.
   const header = useMemo(() => extractArticleHeader(content), [content]);
-  const displayTitle = header?.title ?? subtitle;          // fetter Titel
+  const displayTitle = header?.subtitle ?? subtitle;        // fetter Untertitel (42px)
   const displayDescription = header?.description ?? excerpt; // Beschreibungszeile
-  const bodyContent = header?.body ?? content;              // Fließtext ohne h1/Beschreibung
+  const bodyContent = header?.body ?? content;              // Fließtext ab 2. h2
 
   // Inline-TOC server-seitig vorbauen (pure, läuft SSR + Client identisch) → kein
   // Layout-Shift / Nachrutschen beim ersten Aufruf.
