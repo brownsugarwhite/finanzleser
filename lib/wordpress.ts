@@ -14,15 +14,18 @@ export interface LatestTool {
 }
 
 /**
- * Neue Redaktions-Konvention: der echte Titel steht als <h1> am Content-Anfang,
- * das WP-Untertitel-Feld ist veraltet. Für Listen/Previews den Anzeige-Titel aus
- * dem Content-<h1> ableiten und `content` NICHT an den Client durchreichen (Payload).
+ * Konvention v2 (Struktur-Migration): Der Karten-/Preview-Untertitel ist der Kicker
+ * = 1. Content-<h2> (= article-subtitle auf der Beitragsseite → kohärenter Morph).
+ * Das alte ACF-Feld beitragUntertitel ist veraltet; hier mit dem Content-h2
+ * überschreiben (ACF bleibt Fallback, wenn kein Content-h2 vorhanden). `content`
+ * wird NICHT an den Client durchgereicht (Payload schlank halten).
+ * WICHTIG: nach dem ACF-Mapping aufrufen, damit es den stale Wert überschreibt.
  * Mutiert + liefert denselben Post zurück.
  */
 function applyContentHeaderTitle(post: Post & { content?: string }): Post {
   const header = extractArticleHeader(post.content);
-  if (header) {
-    post.beitragFelder = { ...post.beitragFelder, beitragUntertitel: header.title };
+  if (header?.subtitle) {
+    post.beitragFelder = { ...post.beitragFelder, beitragUntertitel: header.subtitle };
   }
   if ("content" in post) delete (post as { content?: string }).content;
   return post;
@@ -174,8 +177,8 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
-      // Neue Konvention: Anzeige-Titel aus Content-<h1> (Untertitel-Feld veraltet),
-      // danach content aus dem Payload entfernen.
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (Kicker); überschreibt das
+      // veraltete ACF-Feld, danach content aus dem Payload entfernen.
       return applyContentHeaderTitle(decoded);
     });
   } catch (error) {
@@ -204,6 +207,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
           slug
           date
           excerpt
+          content
           featuredImage {
             node {
               sourceUrl
@@ -226,7 +230,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
     }>(query, { search: searchQuery });
     const posts = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
@@ -236,7 +240,8 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
           beitragUntertitel: post.beitrag.untertitel,
         };
       }
-      return decoded;
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+      return applyContentHeaderTitle(decoded);
     });
     return rankByRelevance(posts, searchQuery);
   } catch (error) {
@@ -306,6 +311,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
               slug
               date
               excerpt
+              content
               featuredImage {
                 node {
                   sourceUrl
@@ -331,7 +337,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
   try {
     const data = await client.request<{
       categories: {
-        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] } }>
+        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] } }>
       }
     }>(query, {
       slug: [categorySlug],
@@ -345,7 +351,8 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
           beitragUntertitel: post.beitrag.untertitel,
         };
       }
-      return decoded;
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+      return applyContentHeaderTitle(decoded);
     });
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
@@ -395,13 +402,15 @@ export async function getMegamenuPostsByCategory(
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
+      // tools VOR dem Strippen aus dem Content ableiten.
       const content = post.content || "";
       const tools: ("rechner" | "checkliste" | "vergleich")[] = [];
       if (/wp:finanzleser\/rechner|data-finanzleser-rechner/.test(content)) tools.push("rechner");
       if (/wp:finanzleser\/vergleich|data-finanzleser-vergleich/.test(content)) tools.push("vergleich");
       if (/wp:finanzleser\/checkliste|data-finanzleser-checkliste/.test(content)) tools.push("checkliste");
-      const { content: _omit, ...withoutContent } = decoded;
-      return { ...withoutContent, tools };
+      // Konvention v2: Untertitel = 1. Content-<h2> (überschreibt stale ACF) + strippt content.
+      applyContentHeaderTitle(decoded);
+      return { ...decoded, tools };
     });
   } catch (error) {
     console.error(`Error fetching megamenu posts for "${categorySlug}":`, error);
@@ -1422,6 +1431,7 @@ export async function getLatestPostsByCategoryIds(
           slug
           date
           excerpt
+          content
           featuredImage { node { sourceUrl altText } }
           categories { nodes { name slug databaseId } }
           beitrag { untertitel }
@@ -1433,7 +1443,7 @@ export async function getLatestPostsByCategoryIds(
   async function fetchPosts(cats: number[], exclude: number[]): Promise<Post[]> {
     try {
       const data = await client.request<{
-        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; databaseId: number })[] };
+        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string; databaseId: number })[] };
       }>(query, {
         cats: cats.map(String),
         first: limit + (exclude.length || 0) + 5,
@@ -1447,7 +1457,9 @@ export async function getLatestPostsByCategoryIds(
             beitragUntertitel: post.beitrag.untertitel,
           };
         }
-        return decoded;
+        // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+        // databaseId für den Fallback-Dedup erhalten (applyContentHeaderTitle strippt nur content).
+        return applyContentHeaderTitle(decoded as Post & { content?: string; databaseId: number });
       });
     } catch (error) {
       console.error("Error fetching posts by category IDs:", error);

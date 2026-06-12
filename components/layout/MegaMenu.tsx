@@ -463,19 +463,40 @@ export default function MegaMenu({
                     onMouseEnter={(e) => { const el = e.currentTarget; el.style.color = "#D3005E"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = "inherit"); }}
                     onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = "var(--color-text-primary)"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
                   >
-                    {boldYears(post.title)}
-                    <ToolDots tools={post.tools} />
-                    {post.beitragFelder?.beitragUntertitel && (
-                      <span style={{
-                        display: "block",
-                        fontSize: 14,
-                        fontWeight: 450,
-                        fontFamily: "var(--font-body)",
-                        color: "var(--color-text-medium)",
-                      }}>
-                        {post.beitragFelder.beitragUntertitel}
-                      </span>
-                    )}
+                    {/* Oben: kleiner post.title + Tool-Dots rechts daneben.
+                        Darunter: der Kicker (1. Content-h2) als fetter Titel — wie
+                        auf der Artikelseite und in den Card-Slidern. */}
+                    {(() => {
+                      const kicker = post.beitragFelder?.beitragUntertitel?.trim();
+                      if (!kicker) {
+                        return (
+                          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            {boldYears(post.title)}
+                            <ToolDots tools={post.tools} />
+                          </span>
+                        );
+                      }
+                      return (
+                        <>
+                          <span style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                            fontSize: 14,
+                            fontWeight: 450,
+                            fontFamily: "var(--font-body)",
+                            color: "var(--color-text-medium)",
+                            marginBottom: 2,
+                          }}>
+                            <span>{post.title}</span>
+                            <ToolDots tools={post.tools} />
+                          </span>
+                          <span style={{ display: "block" }}>
+                            {boldYears(kicker)}
+                          </span>
+                        </>
+                      );
+                    })()}
                   </Link>
                 ))}
               </nav>
