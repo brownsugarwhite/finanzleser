@@ -11,6 +11,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 import FazitHeading from "@/components/ui/FazitHeading";
 import ArticleElementWrapper from "@/components/layout/ArticleElementWrapper";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
+import ArticleFaq, { type FaqPair } from "@/components/sections/ArticleFaq";
 
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
@@ -100,13 +101,56 @@ function wrapTables(html: string): string {
 
 // FAQ-Markup robust machen: Von Hand eingefügte FAQs (statt Yoast-Block) haben
 // eine LEERE .schema-faq-question und den Fragetext in einem separaten <strong>.
-// Hier den Fragetext in die Frage-Klasse ziehen, damit Styling + Akkordeon greifen.
+// Hier den Fragetext in die Frage-Klasse ziehen, damit das Parsing greift.
+// HINWEIS: identisch in lib/articleTocBuilder.ts halten.
 function normalizeFaq(html: string): string {
   if (!html.includes("schema-faq")) return html;
   return html.replace(
     /<(strong|h3)([^>]*)class="schema-faq-question"([^>]*)>\s*<\/\1>\s*<strong>([\s\S]*?)<\/strong>/g,
     '<$1$2class="schema-faq-question"$3>$4</$1>'
   );
+}
+
+// Yoast-FAQ-Block (<div class="schema-faq …">) aus dem HTML herauslösen und in
+// Frage/Antwort-Paare parsen → wird als <ArticleFaq> (Master-Detail/Akkordeon)
+// gerendert. Liefert {before, pairs, after} oder null, wenn kein FAQ-Block da ist.
+function extractFaqBlock(html: string): { before: string; pairs: FaqPair[]; after: string } | null {
+  if (!html.includes("schema-faq")) return null;
+  const startMatch = html.match(/<div[^>]*class="schema-faq\b[^"]*"[^>]*>/i);
+  if (!startMatch || startMatch.index === undefined) return null;
+  const start = startMatch.index;
+  // Passendes </div> über Div-Tiefe finden (Sections sind verschachtelte <div>).
+  const tagRe = /<\/?div\b[^>]*>/gi;
+  tagRe.lastIndex = start;
+  let depth = 0;
+  let end = -1;
+  let t: RegExpExecArray | null;
+  while ((t = tagRe.exec(html)) !== null) {
+    if (t[0].charAt(1) === "/") {
+      depth--;
+      if (depth === 0) { end = tagRe.lastIndex; break; }
+    } else {
+      depth++;
+    }
+  }
+  if (end < 0) return null;
+
+  const block = normalizeFaq(html.slice(start, end));
+  const before = html.slice(0, start);
+  const after = html.slice(end);
+
+  const pairs: FaqPair[] = [];
+  const sectionRe = /<div[^>]*class="schema-faq-section[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+  let s: RegExpExecArray | null;
+  while ((s = sectionRe.exec(block)) !== null) {
+    const inner = s[1];
+    const qm = inner.match(/<(strong|h3)[^>]*class="schema-faq-question"[^>]*>([\s\S]*?)<\/\1>/i);
+    const am = inner.match(/<([a-z0-9]+)[^>]*class="schema-faq-answer"[^>]*>([\s\S]*?)<\/\1>/i);
+    const q = qm ? qm[2].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim() : "";
+    const a = am ? am[2].trim() : "";
+    if (q) pairs.push({ q, a });
+  }
+  return pairs.length ? { before, pairs, after } : null;
 }
 
 function parseContent(html: string): ContentPart[] {
@@ -212,7 +256,8 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     | { kind: "html"; htmlString: string; itemKey: string }
     | { kind: "fazit"; id: string; itemKey: string }
     | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string }
-    | { kind: "gamification"; gamType: string; fields: Record<string, string>; itemKey: string };
+    | { kind: "gamification"; gamType: string; fields: Record<string, string>; itemKey: string }
+    | { kind: "faq"; pairs: FaqPair[]; itemKey: string };
 
   const units = useMemo<RenderUnit[]>(() => {
     const raw = parseContent(content);
@@ -228,13 +273,26 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
       if (part.type === "html") {
         const { html, count } = addHeadingIds(normalizeFaq(part.value), headingIndex);
         headingIndex += count;
-        const fazitParts = splitFazit(html);
-        fazitParts.forEach((fp, j) => {
-          if (fp.type === "fazit") {
-            out.push({ kind: "fazit", id: fp.value, itemKey: `${i}-fazit-${j}` });
-          } else {
-            out.push({ kind: "html", htmlString: wrapTables(normalizeTableHead(fp.value)), itemKey: `${i}-html-${j}` });
+        // FAQ-Block (falls vorhanden) herauslösen → eigene <ArticleFaq>-Unit.
+        // before bleibt im Fließtext (enthält u.a. die h2.faq-heading = TOC-Eintrag).
+        const faq = extractFaqBlock(html);
+        const segments: { html: string; faq?: FaqPair[] }[] = faq
+          ? [{ html: faq.before }, { html: "", faq: faq.pairs }, { html: faq.after }]
+          : [{ html }];
+        segments.forEach((seg, sIdx) => {
+          if (seg.faq) {
+            out.push({ kind: "faq", pairs: seg.faq, itemKey: `${i}-faq-${sIdx}` });
+            return;
           }
+          if (!seg.html.trim()) return;
+          const fazitParts = splitFazit(seg.html);
+          fazitParts.forEach((fp, j) => {
+            if (fp.type === "fazit") {
+              out.push({ kind: "fazit", id: fp.value, itemKey: `${i}-fazit-${sIdx}-${j}` });
+            } else {
+              out.push({ kind: "html", htmlString: wrapTables(normalizeTableHead(fp.value)), itemKey: `${i}-html-${sIdx}-${j}` });
+            }
+          });
         });
       } else if (part.type === "rechner" || part.type === "checkliste" || part.type === "vergleich") {
         const toolKey = `${part.type}:${part.value}`;
@@ -250,49 +308,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     return out;
   }, [content]);
 
-  // Accordion-Interaktivität für Yoast FAQ-Block mit GSAP
-  useEffect(() => {
-    const DURATION = 0.4;
-    const PADDING_PX = 20; // entspricht 1.25rem bei 16px Basis
-    const handler = (e: Event) => {
-      const target = e.target as HTMLElement;
-      const question = target.closest(".schema-faq-question") as HTMLElement | null;
-      if (!question) return;
-      const section = question.closest(".schema-faq-section") as HTMLElement | null;
-      if (!section) return;
-      const answer = section.querySelector(".schema-faq-answer") as HTMLElement | null;
-      if (!answer) return;
-
-      gsap.killTweensOf(answer);
-      const isOpen = section.classList.contains("is-open");
-
-      if (isOpen) {
-        const current = answer.getBoundingClientRect().height;
-        gsap.set(answer, { height: current });
-        gsap.to(answer, {
-          height: 0,
-          paddingBottom: 0,
-          duration: DURATION,
-          ease: "power3.out",
-          onStart: () => section.classList.remove("is-open"),
-          onComplete: () => { gsap.set(answer, { clearProps: "height,paddingBottom" }); },
-        });
-      } else {
-        section.classList.add("is-open");
-        gsap.set(answer, { height: 0, paddingBottom: 0 });
-        const contentHeight = answer.scrollHeight;
-        gsap.to(answer, {
-          height: contentHeight,
-          paddingBottom: PADDING_PX,
-          duration: DURATION,
-          ease: "power3.out",
-          onComplete: () => { gsap.set(answer, { height: "auto" }); },
-        });
-      }
-    };
-    document.addEventListener("click", handler);
-    return () => document.removeEventListener("click", handler);
-  }, []);
+  // FAQ-Interaktion: jetzt in <ArticleFaq> (Master-Detail/Akkordeon) gekapselt.
 
   // Edge-gradient toggle for wrapped tables.
   // Strategy: re-apply classes on EVERY render (useLayoutEffect, no deps) so the
@@ -384,6 +400,13 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <GamificationEmbed gamType={unit.gamType} fields={unit.fields} />
+        </ArticleElementWrapper>
+      );
+    }
+    if (unit.kind === "faq") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+          <ArticleFaq pairs={unit.pairs} />
         </ArticleElementWrapper>
       );
     }
