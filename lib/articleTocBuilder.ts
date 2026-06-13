@@ -21,7 +21,7 @@ export interface ArticleTocItem {
 // Identisch zu ArticleContent.parseContent (Block-Divs / Gutenberg-Vergleich-Kommentar
 // / Gamification). Frisch instanziiert wegen lastIndex-State des g-Flags.
 const BLOCK_PATTERN_SRC =
-  '<div\\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*></div>|<!-- wp:finanzleser\\/(vergleich) \\{"slug":"([^"]+)"\\} \\/-->|<div\\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\\s\\S]*?)</div>';
+  '<div\\s+data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*></div>|<!-- wp:finanzleser\\/(vergleich) \\{"slug":"([^"]+)"\\} \\/-->|<div\\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\\s\\S]*?)</div>';
 
 // Identisch zu ArticleContent.normalizeFaq.
 function normalizeFaq(html: string): string {
@@ -40,7 +40,7 @@ export function buildArticleTocItems(content?: string): ArticleTocItem[] {
   if (!content) return [];
 
   // 1. Content in Parts splitten — wie ArticleContent.parseContent.
-  const parts: Array<{ type: "html" | "rechner" | "checkliste" | "vergleich" | "gamification"; value: string }> = [];
+  const parts: Array<{ type: "html" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "gamification"; value: string }> = [];
   const blockPattern = new RegExp(BLOCK_PATTERN_SRC, "g");
   let lastIndex = 0;
   let match: RegExpExecArray | null;
@@ -53,7 +53,7 @@ export function buildArticleTocItems(content?: string): ArticleTocItem[] {
     if (gamType) {
       parts.push({ type: "gamification", value: gamType });
     } else {
-      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
+      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich" | "dokumente";
       const blockSlug = match[2] || match[4];
       parts.push({ type: blockType, value: blockSlug });
     }
@@ -89,6 +89,16 @@ export function buildArticleTocItems(content?: string): ArticleTocItem[] {
       headingIndex++;
       // Tool-Titel wird async geladen (ToolLabel) → server leer, Client füllt nach.
       items.push({ id, text: "", toolType: part.type });
+    } else if (part.type === "dokumente") {
+      const key = `dokumente:${part.value}`;
+      if (seenTools.has(key)) continue;
+      seenTools.add(key);
+      const slugs = part.value.split(",").map((s) => s.trim()).filter(Boolean);
+      if (slugs.length === 0) continue;
+      const id = `heading-${headingIndex}`;
+      headingIndex++;
+      // Statische Überschrift „Dokumente" (kein async-Titel wie bei Tools).
+      items.push({ id, text: "Dokumente" });
     }
     // gamification: kein heading, kein Index
   }

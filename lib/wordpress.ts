@@ -969,6 +969,7 @@ export async function getAllRechner(): Promise<Rechner[]> {
           id
           title
           slug
+          excerpt
           rechnerFelder {
             rechnerTyp
             beschreibung
@@ -1000,6 +1001,7 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
         id
         title
         slug
+        excerpt
         rechnerFelder {
           beschreibung
         }
@@ -1034,6 +1036,7 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
           id
           title
           slug
+          excerpt
           checklisten {
             checklistenBeschreibung
           }
@@ -1080,6 +1083,7 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
         id
         title
         slug
+        excerpt
         checklisten {
           checklistenBeschreibung
           checklistePdf {
@@ -1211,6 +1215,18 @@ export async function getDokumentBySlug(slug: string): Promise<Dokument | null> 
 }
 
 // ─────────────────────────────────────────────
+// Mehrere Dokumente nach Slugs (für Dokumente-Block im Artikel, ≤4)
+// ─────────────────────────────────────────────
+
+export async function getDokumenteBySlugs(slugs: string[]): Promise<Dokument[]> {
+  const unique = Array.from(new Set(slugs.map((s) => s.trim()).filter(Boolean))).slice(0, 4);
+  if (unique.length === 0) return [];
+  const results = await Promise.all(unique.map((slug) => getDokumentBySlug(slug)));
+  // Reihenfolge der Slugs beibehalten, null (nicht gefunden) herausfiltern.
+  return results.filter((d): d is Dokument => d !== null);
+}
+
+// ─────────────────────────────────────────────
 // Alle Vergleiche
 // ─────────────────────────────────────────────
 
@@ -1224,6 +1240,7 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
           id
           title
           slug
+          excerpt
         }
       }
     }

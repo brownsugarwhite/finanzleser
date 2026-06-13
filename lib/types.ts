@@ -117,6 +117,7 @@ export interface Vergleich {
   id: string;
   title: string;
   slug: string;
+  excerpt?: string;
   vergleichFelder?: VergleichACF;
 }
 

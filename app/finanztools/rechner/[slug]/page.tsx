@@ -85,7 +85,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const fallback = FALLBACK_RECHNER[slug];
 
   const title = rechner?.title || fallback?.title;
-  const desc = stripHtml(rechner?.rechnerFelder?.beschreibung || rechner?.excerpt) || fallback?.desc;
+  const desc = stripHtml(rechner?.excerpt || rechner?.rechnerFelder?.beschreibung) || fallback?.desc;
 
   if (!title) {
     return { title: `Rechner nicht gefunden – ${SITE_NAME}`, robots: { index: false, follow: false } };
@@ -171,7 +171,7 @@ export default async function RechnerDetailPage({ params }: Props) {
           </h1>
 
           {/* Beschreibung */}
-          {(rechner.rechnerFelder?.beschreibung || rechner.excerpt) && (
+          {(rechner.excerpt || rechner.rechnerFelder?.beschreibung) && (
             <p
               className="mb-8 text-gray-600"
               style={{
@@ -180,7 +180,7 @@ export default async function RechnerDetailPage({ params }: Props) {
                 fontWeight: "400",
               }}
             >
-              {rechner.rechnerFelder?.beschreibung || rechner.excerpt}
+              {rechner.excerpt || rechner.rechnerFelder?.beschreibung}
             </p>
           )}
 

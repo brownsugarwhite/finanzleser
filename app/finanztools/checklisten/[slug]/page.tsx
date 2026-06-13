@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: `${checkliste.title} – Checkliste – ${SITE_NAME}`,
     description: stripHtml(
-      checkliste.checklisten?.checklistenBeschreibung || checkliste.excerpt
+      checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
     ) || `Interaktive Checkliste: ${checkliste.title}`,
     path: `/finanztools/checklisten/${slug}`,
   });
@@ -85,7 +85,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   }
 
   const beschreibung =
-    checkliste.checklisten?.checklistenBeschreibung || "";
+    checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung || "";
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

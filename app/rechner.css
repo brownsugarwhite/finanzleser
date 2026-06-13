@@ -108,6 +108,14 @@
   margin-top: 50px;
 }
 
+/* No-Visual-Variante (Artikel): kein Platzhalterbild, Formular volle (Body-)Breite. */
+.rechner-layout--no-visual .rechner-top-row {
+  gap: 0;
+}
+.rechner-layout--no-visual .rechner-form-col {
+  flex: 1 1 100%;
+}
+
 /* ── Inputs ─────────────────────────────────── */
 
 .rechner-inputs {

@@ -14,13 +14,17 @@ export async function GET(
 
   if (type === "rechner") {
     const rechner = await getRechnerBySlug(slug);
-    const excerpt = rechner?.rechnerFelder?.beschreibung || rechner?.excerpt || "";
+    // Natives excerpt bevorzugt (ACF-Ablösung), ACF-Feld als Fallback.
+    const excerpt = rechner?.excerpt || rechner?.rechnerFelder?.beschreibung || "";
     return NextResponse.json({ title: rechner?.title || "", excerpt });
   }
 
   if (type === "checkliste") {
     const checkliste = await getChecklisteBySlug(slug);
-    return NextResponse.json({ title: checkliste?.title || "" });
+    // Beschreibung wird nach der Tool-Überschrift im Artikel angezeigt. Quelle:
+    // natives excerpt bevorzugt (Ziel der ACF-Ablösung), ACF-Feld als Fallback.
+    const excerpt = checkliste?.excerpt || checkliste?.checklisten?.checklistenBeschreibung || "";
+    return NextResponse.json({ title: checkliste?.title || "", excerpt });
   }
 
   if (type === "vergleich") {

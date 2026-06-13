@@ -21,6 +21,10 @@ const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmb
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Vergleich wird geladen...</div>,
 });
 
+const DokumenteEmbed = dynamic(() => import("@/components/dokumente/DokumenteEmbed"), {
+  loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Dokumente werden geladen...</div>,
+});
+
 
 const TOOL_CONFIG = {
   rechner: { label: "Rechner", color: "var(--color-tool-rechner)", endpoint: "/finanzleser/v1/rechner" },
@@ -66,8 +70,8 @@ interface Props {
 }
 
 interface ContentPart {
-  type: "html" | "rechner" | "checkliste" | "vergleich" | "gamification";
-  value: string; // HTML string, slug, or gamification type
+  type: "html" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "gamification";
+  value: string; // HTML string, slug, kommagetrennte Dokument-Slugs, or gamification type
   gamFields?: Record<string, string>; // nur bei gamification: Feldwerte (Behauptung, Auflösung, …)
 }
 
@@ -160,7 +164,7 @@ function parseContent(html: string): ContentPart[] {
   // Gamification (3. Alternative) ist – anders als die Slug-Tools – NICHT leer: der Block enthält die
   // Felder inline. Voraussetzung: keine verschachtelten <div> im Block (vom Studio so erzeugt), damit
   // [\s\S]*? bis zum ersten </div> korrekt greift.
-  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
+  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
 
   let lastIndex = 0;
   let match;
@@ -183,7 +187,7 @@ function parseContent(html: string): ContentPart[] {
       }
       parts.push({ type: "gamification", value: gamType, gamFields: fields });
     } else {
-      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich";
+      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich" | "dokumente";
       const blockSlug = match[2] || match[4];
       parts.push({ type: blockType, value: blockSlug });
     }
@@ -256,6 +260,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     | { kind: "html"; htmlString: string; itemKey: string }
     | { kind: "fazit"; id: string; itemKey: string }
     | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string }
+    | { kind: "dokumente"; slugs: string[]; headingId: string; itemKey: string }
     | { kind: "gamification"; gamType: string; fields: Record<string, string>; itemKey: string }
     | { kind: "faq"; pairs: FaqPair[]; itemKey: string };
 
@@ -301,6 +306,15 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
         const headingId = `heading-${headingIndex}`;
         headingIndex++;
         out.push({ kind: "tool", toolType: part.type, slug: part.value, headingId, itemKey: `${i}` });
+      } else if (part.type === "dokumente") {
+        const toolKey = `dokumente:${part.value}`;
+        if (seenTools.has(toolKey)) return; // Duplikat → nur einmal rendern
+        seenTools.add(toolKey);
+        const slugs = part.value.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 4);
+        if (slugs.length === 0) return;
+        const headingId = `heading-${headingIndex}`;
+        headingIndex++;
+        out.push({ kind: "dokumente", slugs, headingId, itemKey: `${i}` });
       } else if (part.type === "gamification") {
         out.push({ kind: "gamification", gamType: part.value, fields: part.gamFields ?? {}, itemKey: `${i}` });
       }
@@ -362,10 +376,11 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     }
     if (unit.kind === "tool" && unit.toolType === "rechner") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <div className="article-tool-embed article-finanztool">
             <RechnerEmbed
               slug={unit.slug}
+              noVisual
               formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
             />
           </div>
@@ -374,10 +389,11 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     }
     if (unit.kind === "tool" && unit.toolType === "checkliste") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <div className="checkliste-article-wrap article-finanztool">
             <ChecklisteEmbed
               slug={unit.slug}
+              noVisual
               formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
             />
           </div>
@@ -396,6 +412,15 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
         </ArticleElementWrapper>
       );
     }
+    if (unit.kind === "dokumente") {
+      return (
+        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+          <div className="article-finanztool">
+            <DokumenteEmbed slugs={unit.slugs} headingId={unit.headingId} />
+          </div>
+        </ArticleElementWrapper>
+      );
+    }
     if (unit.kind === "gamification") {
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
@@ -405,7 +430,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     }
     if (unit.kind === "faq") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
+        <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
           <ArticleFaq pairs={unit.pairs} />
         </ArticleElementWrapper>
       );

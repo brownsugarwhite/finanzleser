@@ -1875,6 +1875,18 @@ a.megamenu-link:hover {
   width: 100%;
 }
 
+/* No-Visual-Variante (Artikel): kein Platzhalterbild, Liste volle (Body-)Breite,
+   PDF-Download-Button inline unter der Liste. */
+.checkliste-layout--no-visual {
+  display: block;
+}
+.checkliste-layout--no-visual .checkliste-form-col {
+  width: 100%;
+}
+.checkliste-actions-portal--inline {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .checkliste-layout {
     flex-direction: column;
@@ -1992,6 +2004,144 @@ h2.article-tool-label {
   font-weight: 600;
   line-height: 1.35em;
   color: var(--color-text-primary);
+}
+
+/* ── Dokumente-Block (Artikel) ──────────────────
+   H2 „Dokumente" (TOC) + Badge in Dark mit page-farbener Schrift,
+   bis zu 4 A4-Kacheln nebeneinander, Beschreibung/Buttons als Hover-Overlay
+   (Desktop) bzw. dauerhaft sichtbar (Mobile/Touch). */
+.dokumente-embed {
+  margin-top: 50px;
+  width: 100%;
+}
+.article-tool-badge--dokumente {
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
+}
+
+.dokumente-grid {
+  display: grid;
+  gap: 28px;
+  align-items: start;
+}
+.dokumente-grid[data-count="1"] { grid-template-columns: minmax(0, 320px); }
+.dokumente-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dokumente-grid[data-count="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dokumente-grid[data-count="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.dok-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.dok-card-title {
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35em;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+/* A4-Format (1 : 1.414) */
+.dok-card-sheet {
+  position: relative;
+  aspect-ratio: 1 / 1.414;
+  width: 100%;
+  background: var(--color-placeholder-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+.dok-card-sheet canvas,
+.dok-card-sheet img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.dok-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.dok-card-sheet:hover .dok-card-overlay,
+.dok-card-sheet:focus-within .dok-card-overlay {
+  opacity: 1;
+}
+.dok-card-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #fff;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dok-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dok-card-btn.rechner-button {
+  background: #fff;
+  color: var(--color-text-primary);
+  border: 1px solid #fff;
+  border-radius: 21px;
+  padding: 7px 16px;
+  font-size: 14px;
+  line-height: 1;
+}
+.dok-card-btn--download.rechner-button {
+  background: var(--color-brand);
+  color: #fff;
+  border-color: var(--color-brand);
+}
+
+/* Touch/Mobile: kein Hover → Beschreibung + Buttons dauerhaft unter dem Dokument. */
+@media (hover: none), (max-width: 768px) {
+  .dokumente-grid[data-count="3"],
+  .dokumente-grid[data-count="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dok-card-overlay {
+    position: static;
+    opacity: 1;
+    padding: 10px 0 0;
+    background: none;
+    color: inherit;
+    justify-content: flex-start;
+  }
+  .dok-card-desc {
+    color: var(--color-text-medium);
+    -webkit-line-clamp: 4;
+  }
+  .dok-card-btn.rechner-button {
+    background: transparent;
+    color: var(--color-text-primary);
+    border-color: var(--color-border-default);
+  }
+}
+@media (max-width: 520px) {
+  .dokumente-grid[data-count="2"],
+  .dokumente-grid[data-count="3"],
+  .dokumente-grid[data-count="4"] {
+    grid-template-columns: 1fr;
+  }
+  .dokumente-grid[data-count="1"] { grid-template-columns: 1fr; }
 }
 
 /* Ausgefüllte PDFs werden via pdf-lib generiert (kein Print-CSS nötig) */

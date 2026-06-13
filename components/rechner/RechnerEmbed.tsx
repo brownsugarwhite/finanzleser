@@ -183,9 +183,11 @@ const ScheidungskostenRechner = dynamic(() => import("./ScheidungskostenRechner"
 interface RechnerEmbedProps {
   slug: string;
   formHeader?: React.ReactNode;
+  /** Im Artikel: ohne Visual-Spalte, Formular volle Breite (Body-Breite). */
+  noVisual?: boolean;
 }
 
-export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
+export default function RechnerEmbed({ slug, formHeader, noVisual = false }: RechnerEmbedProps) {
   const [resultsContainer, setResultsContainer] = useState<HTMLElement | null>(null);
 
   const containerRefCallback = useCallback((node: HTMLDivElement | null) => {
@@ -197,12 +199,16 @@ export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
 
   return (
     <RechnerLayoutContext.Provider value={{ resultsContainer }}>
-      <div className="rechner-layout">
+      <div className={`rechner-layout${noVisual ? " rechner-layout--no-visual" : ""}`}>
         <div className="rechner-top-row">
-          <div className="rechner-visual">
-            <RechnerPlaceholder seed={slug} image="/assets/general/rechner_visual.png" />
-          </div>
-          <div className="rechner-divider"><VerticalSpacer /></div>
+          {!noVisual && (
+            <>
+              <div className="rechner-visual">
+                <RechnerPlaceholder seed={slug} image="/assets/general/rechner_visual.png" />
+              </div>
+              <div className="rechner-divider"><VerticalSpacer /></div>
+            </>
+          )}
           <div className="rechner-form-col">
             {formHeader && <div className="rechner-form-header">{formHeader}</div>}
             {rechner}
