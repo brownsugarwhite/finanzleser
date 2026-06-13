@@ -23,6 +23,7 @@ const TOOL_COLORS: Record<string, string> = {
   rechner: "var(--color-tool-rechner)",
   checkliste: "var(--color-tool-checklisten)",
   vergleich: "var(--color-tool-vergleiche)",
+  dokumente: "var(--color-text-primary)",
 };
 
 function NumberBadge({ number, color }: { number: number; color?: string }) {
@@ -121,6 +122,7 @@ export default function ArticleTableOfContents({ content, initialItems = [] }: A
         if (badgeText.includes("rechner")) toolType = "rechner";
         else if (badgeText.includes("checkliste")) toolType = "checkliste";
         else if (badgeText.includes("vergleich")) toolType = "vergleich";
+        else if (badgeText.includes("dokument")) toolType = "dokumente";
         // Nur den Titel-Text verwenden (ohne Badge)
         text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
       } else {

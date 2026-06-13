@@ -4,7 +4,7 @@ import "@/lib/gsapConfig";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import gsap from "@/lib/gsapConfig";
 
-export type TocToolType = "rechner" | "checkliste" | "vergleich";
+export type TocToolType = "rechner" | "checkliste" | "vergleich" | "dokumente";
 
 export interface TOCItem {
   id: string;
@@ -67,6 +67,8 @@ export function useArticleToc() {
           if (badgeText.includes("rechner")) toolType = "rechner";
           else if (badgeText.includes("checkliste")) toolType = "checkliste";
           else if (badgeText.includes("vergleich")) toolType = "vergleich";
+          else if (badgeText.includes("dokument")) toolType = "dokumente";
+          // Dokumente-H2 hat nur ein Badge (kein .article-tool-title) → "Dokumente"
           text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
         } else {
           text = heading.textContent || "";

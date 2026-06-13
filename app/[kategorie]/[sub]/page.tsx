@@ -5,6 +5,19 @@ import ArticleLayout from "@/components/layout/ArticleLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { extractArticleHeader } from "@/lib/articleHeader";
+import { getRedakteurForSlug } from "@/lib/redakteure";
+
+// Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.
+function redakteurAuthor(slug: string, date?: string) {
+  const r = getRedakteurForSlug(slug);
+  return {
+    name: r.name,
+    role: r.role,
+    date: date ? new Date(date).toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }) : undefined,
+    imageUrl: r.imageUrl,
+    colorVariant: r.colorVariant,
+  };
+}
 
 export const revalidate = 3600;
 
@@ -85,7 +98,7 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
     return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} author={redakteurAuthor(post.slug || params.sub, post.date)} />
     );
   }
 

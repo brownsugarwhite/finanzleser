@@ -33,6 +33,9 @@
   /* Borders */
   --color-border-default: rgba(0, 0, 0, 0.08);
 
+  /* Shadow für weiße Boxen (Checklisten-Hover-Pill) — seitenweit identisch */
+  --shadow-card: 0 3px 23px rgba(0, 0, 0, 0.02);
+
   /* Glass / White (active in components.css) */
   --glass-white-10: rgba(255, 255, 255, 0.10);
   --glass-white-40: rgba(255, 255, 255, 0.40);

@@ -6,6 +6,7 @@ import ArticleLayout from "@/components/layout/ArticleLayout";
 import type { Category } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME, absoluteUrl } from "@/lib/seo";
 import { extractArticleHeader } from "@/lib/articleHeader";
+import { getRedakteurForSlug } from "@/lib/redakteure";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const revalidate = 3600;
@@ -65,13 +66,6 @@ export default async function BeitragPage(props: {
     year: "numeric",
   });
 
-  // Assign color variant to author based on ID (1-6)
-  const getColorVariant = (authorId?: string): 1 | 2 | 3 | 4 | 5 | 6 => {
-    if (!authorId) return 1;
-    const hash = authorId.charCodeAt(0) + authorId.charCodeAt(authorId.length - 1);
-    return ((hash % 6) + 1) as 1 | 2 | 3 | 4 | 5 | 6;
-  };
-
   const articlePath = `/${params.kategorie}/${params.sub}/${params.slug}`;
   const breadcrumbItems = [
     { name: "Startseite", path: "/" },
@@ -104,17 +98,11 @@ export default async function BeitragPage(props: {
       content={post.content}
       contentTableOfContents={!!post.content}
       slug={params.slug}
-      author={
-        post.author?.node
-          ? {
-              name: post.author.node.name || "",
-              role: "Autorin bei Finanzleser.de",
-              date: formattedDate,
-              imageUrl: post.author.node.avatar?.url,
-              colorVariant: getColorVariant(post.author.node.id),
-            }
-          : undefined
-      }
+      author={(() => {
+        // Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.
+        const r = getRedakteurForSlug(post.slug || params.slug);
+        return { name: r.name, role: r.role, date: formattedDate, imageUrl: r.imageUrl, colorVariant: r.colorVariant };
+      })()}
     />
     </>
   );

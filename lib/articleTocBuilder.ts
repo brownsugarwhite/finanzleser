@@ -15,7 +15,7 @@
 export interface ArticleTocItem {
   id: string;
   text: string;
-  toolType?: "rechner" | "checkliste" | "vergleich";
+  toolType?: "rechner" | "checkliste" | "vergleich" | "dokumente";
 }
 
 // Identisch zu ArticleContent.parseContent (Block-Divs / Gutenberg-Vergleich-Kommentar
@@ -98,7 +98,7 @@ export function buildArticleTocItems(content?: string): ArticleTocItem[] {
       const id = `heading-${headingIndex}`;
       headingIndex++;
       // Statische Überschrift „Dokumente" (kein async-Titel wie bei Tools).
-      items.push({ id, text: "Dokumente" });
+      items.push({ id, text: "Dokumente", toolType: "dokumente" });
     }
     // gamification: kein heading, kein Index
   }

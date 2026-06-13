@@ -28,35 +28,40 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
 
   return (
     <div className="flex gap-4 items-center">
-      {/* Profile Image with Gradient Border */}
+      {/* Profilbild: Gradient-Ring → 3px Gap (page-bg) → Bildkreis (2px mehr Radius) */}
       <div
-        className="relative shrink-0 rounded-full flex-shrink-0 flex items-center justify-center"
+        className="relative shrink-0 rounded-full flex-shrink-0"
         style={{
-          width: "52px",
-          height: "52px",
-          padding: "3px",
+          width: "60px",
+          height: "60px",
+          padding: "3px", // Gradient-Ring-Dicke
           background: gradients[colorVariant],
         }}
       >
-        <div className="relative w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={name}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "600",
-                color: "var(--color-text-medium)",
-              }}
-            >
-              {initials}
-            </span>
-          )}
+        <div
+          className="w-full h-full rounded-full"
+          style={{ padding: "3px", background: "var(--color-bg-page)" }} // 3px Gap zum Ring
+        >
+          <div className="relative w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center">
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <span
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  color: "var(--color-text-medium)",
+                }}
+              >
+                {initials}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

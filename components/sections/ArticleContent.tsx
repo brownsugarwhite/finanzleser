@@ -403,7 +403,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     if (unit.kind === "tool" && unit.toolType === "vergleich") {
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
-          <div className="article-finanztool">
+          <div className="article-finanztool article-finanztool--wide">
             <VergleichEmbed
               slug={unit.slug}
               formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
@@ -415,7 +415,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     if (unit.kind === "dokumente") {
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
-          <div className="article-finanztool">
+          <div className="article-finanztool article-finanztool--wide">
             <DokumenteEmbed slugs={unit.slugs} headingId={unit.headingId} />
           </div>
         </ArticleElementWrapper>
@@ -440,8 +440,9 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
 
   // 1–2 In-Text-Werbeflächen (float, der Text umfließt sie) gleichmäßig über die
   // längeren HTML-Units verteilen. 2 ab genügend Blöcken, sonst 1.
+  // Units mit Tabellen NICHT bewerben — die Float-Box neben einer Tabelle sieht schlecht aus.
   const htmlIndices = units
-    .map((u, i) => (u.kind === "html" ? i : -1))
+    .map((u, i) => (u.kind === "html" && !u.htmlString.includes("<table") ? i : -1))
     .filter((i) => i >= 0);
   const adTargets = new Set<number>();
   if (showMidAd && htmlIndices.length > 0) {

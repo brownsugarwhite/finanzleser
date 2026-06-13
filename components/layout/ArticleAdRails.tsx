@@ -8,9 +8,10 @@ import { useEffect, useRef, useState } from "react";
  * - Breite per CSS-var --ad-rail-w: 300px ≥1760px, 160px ≥1440px, darunter aus.
  * - Beim Aufklappen des Sidebar-TOC wandern sie per translateX mit dem Content mit;
  *   linke Rail wird dabei ausgeblendet (kein Platz neben 430px-TOC).
- * - Der Sticky-Bereich ENDET beim ersten Finanztool (`.article-finanztool`): die
- *   Rail-Höhe wird bis dorthin begrenzt, sodass die Rails ab den Finanztools nach
- *   oben mitscrollen (statt die breiten Tools zu überlappen).
+ * - Der Sticky-Bereich ENDET beim ersten BREITEN Tool (`.article-finanztool--wide`
+ *   = Vergleich/Dokumente): die Rail-Höhe wird bis dorthin begrenzt. Rechner/
+ *   Checkliste/FAQ sind schmal (Body-Breite) → die Rails laufen daran vorbei nach
+ *   unten und rücken erst ab dem ersten breiten Tool nach oben (statt es zu überlappen).
  */
 const TOC_EXPANDED_WIDTH = 430;
 const RAIL_TOP = 18;
@@ -52,9 +53,12 @@ export default function ArticleAdRails({
     const region = rightRef.current?.closest(".article-body-region") as HTMLElement | null;
     if (!region) return;
     const compute = () => {
-      const tool = region.querySelector(".article-finanztool") as HTMLElement | null;
+      // Nur BREITE Tools (Vergleich/Dokumente, .--wide) stoppen die Rails. Rechner/
+      // Checkliste/FAQ sind jetzt schmal (Body-Breite) und kollidieren nicht → die Rails
+      // laufen daran vorbei nach unten und rücken erst ab dem ersten breiten Tool hoch.
+      const tool = region.querySelector(".article-finanztool--wide") as HTMLElement | null;
       if (!tool) {
-        setHeight(null); // kein Tool → Rails über den ganzen Artikel
+        setHeight(null); // kein breites Tool → Rails über den ganzen Artikel
         return;
       }
       // Direktes Region-Kind (Unit-Wrapper) des Tools finden.

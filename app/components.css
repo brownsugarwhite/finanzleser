@@ -1577,7 +1577,7 @@ a.megamenu-link:hover {
 .checkliste-punkt:hover {
   background: white;
   border-color: transparent;
-  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-card);
 }
 .checkliste-punkt--checked {
   border-color: var(--color-text-primary);
@@ -2162,60 +2162,54 @@ h2.faq-heading {
    ───────────────────────────────────────────── */
 .faq2 {
   margin: 0 0 2.5rem;
-  --faq-line: var(--color-border-default);
-  --faq-dot: color-mix(in srgb, var(--color-text-secondary) 55%, transparent);
 }
 
-/* Geteilte Frage-Zeile (Button) */
+/* Geteilte Frage-Zeile (Button) — Klick-/Hover-Optik wie Checklisten-Punkte */
 .faq2-q {
   display: flex;
   align-items: center;
-  gap: 0.95rem;
+  gap: 0.85rem;
   width: 100%;
   margin: 0;
-  padding: 1.05rem 0.25rem;
+  padding: 0.8rem 1.4rem 0.8rem 0.9rem;
   background: none;
-  border: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
   text-align: left;
   cursor: pointer;
   font-family: 'Merriweather', Georgia, serif;
-  font-weight: 700;
-  font-size: 1.0625rem;
+  font-weight: 650;
+  font-size: 0.95rem;
   line-height: 1.4;
   color: var(--color-text-primary);
-  transition: color 0.25s ease;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+/* Active = nur Border, KEIN weißer Hintergrund (wie Checklisten). */
+.faq2-q.is-active {
+  border-color: var(--color-text-primary);
+}
+/* Hover = weiße Box + (stärkerer) Shadow, KEIN Border — gewinnt auch über active. */
+.faq2-q:hover {
+  background: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-card);
 }
 .faq2-q:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 .faq2-num {
   flex-shrink: 0;
   min-width: 1.7em;
+  /* Exakt wie Checklisten-Punkt-Nummer (nur ohne die Dots-Reihe daneben) */
   font-family: var(--font-heading);
   font-style: italic;
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-weight: 300;
+  font-size: 24px;
   line-height: 1;
-  color: var(--color-text-secondary);
-  transition: color 0.25s ease;
+  color: var(--color-text-primary);
 }
-.faq2-q-text { flex: 1 1 auto; }
-.faq2-spark {
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.6) rotate(-25deg);
-  transition: opacity 0.28s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.faq2-q:hover { color: var(--color-brand); }
-.faq2-q:hover .faq2-num { color: var(--color-brand); }
-.faq2-q:hover .faq2-spark { opacity: 0.5; transform: scale(0.85) rotate(0deg); }
+.faq2-q-text { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; hyphens: auto; }
 
 /* Antwort-Typo (geteilt) */
 .faq2-answer {
@@ -2230,74 +2224,88 @@ h2.faq-heading {
 /* ── Master-Detail (Desktop) ── */
 .faq2--md {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  column-gap: 2.75rem;
-  align-items: start;
+  grid-template-columns: minmax(0, 0.95fr) 34px minmax(0, 1.12fr);
+  column-gap: 1.4rem;
+  align-items: stretch;
 }
 .faq2-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.faq2-litem {
-  /* Dotted-Trenner wie im restlichen Layout */
-  border-bottom: 1px dotted var(--faq-dot);
-}
-.faq2-litem:last-child { border-bottom: none; }
-.faq2--md .faq2-q.is-active { color: var(--color-brand); }
-.faq2--md .faq2-q.is-active .faq2-num { color: var(--color-brand); }
-.faq2--md .faq2-q.is-active .faq2-spark {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-/* Rechte Antwortbox: feine Linie statt Box, Spark-Akzent oben */
-.faq2-detail {
-  position: relative;
-  align-self: start;
-  padding: 0 0 0 2.5rem;
-  border-left: 1px solid var(--faq-line);
-  overflow: hidden;
-  will-change: height;
-}
-.faq2-detail::before {
-  /* Spark-Akzent am Anfang der Antwort (gleiche Form wie ui/Spark) */
+.faq2-litem { position: relative; }
+/* Lücke zwischen Tabs → Hover-Box berührt die Trennlinie nicht (wie Checklisten) */
+.faq2-litem + .faq2-litem { margin-top: 10px; }
+/* Helle, durchgehende Trennlinie mittig in der Lücke */
+.faq2-litem + .faq2-litem::before {
   content: "";
   position: absolute;
-  left: -7px;
-  top: 0.55rem;
-  width: 13px;
-  height: 13px;
-  background-color: var(--color-brand);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12.0005'%3E%3Cpath d='M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z'/%3E%3C/svg%3E") no-repeat center / contain;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12.0005'%3E%3Cpath d='M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z'/%3E%3C/svg%3E") no-repeat center / contain;
-  pointer-events: none;
+  top: -5px;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: var(--color-border-default);
+}
+
+/* Pfeil-Spalte: vertikale Linie volle Höhe + gleitende >-Spitze (wie Rechner) */
+.faq2-arrow {
+  position: relative;
+  overflow: hidden;
+}
+.faq2-arrow-svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  top: 0;
+  width: 20px;
+  height: 2003px;
+  will-change: transform;
+}
+
+/* Rechte Spalte: Antwortbox (weiß + backdrop brightness), slided/morpht zur Stelle */
+.faq2-detail {
+  position: relative;
+}
+.faq2-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: brightness(1.07) saturate(1.05);
+  backdrop-filter: brightness(1.07) saturate(1.05);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  will-change: transform, height;
 }
 .faq2--md .faq2-answer {
   position: absolute;
   top: 0;
-  left: 2.5rem;
+  left: 0;
   right: 0;
+  padding: calc(1.05rem + 5px) calc(1.3rem + 5px);
 }
 
 /* ── Akkordeon (Mobile / Fallback) ── */
-.faq2--acc .faq2-item {
-  border-bottom: 1px dotted var(--faq-dot);
-}
-.faq2--acc .faq2-item:last-child { border-bottom: none; }
-.faq2--acc .faq2-item.is-open .faq2-q,
-.faq2--acc .faq2-item.is-open .faq2-num { color: var(--color-brand); }
-.faq2--acc .faq2-item.is-open .faq2-spark {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
+.faq2--acc .faq2-item { position: relative; }
+.faq2--acc .faq2-item + .faq2-item { margin-top: 10px; }
+.faq2--acc .faq2-item + .faq2-item::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: var(--color-border-default);
 }
 .faq2-a-outer { will-change: height; }
 .faq2--acc .faq2-answer {
-  padding: 0 0 1.15rem 2.65rem;
+  padding: 0 0.9rem 1.15rem 3.1rem;
 }
 
 /* ── Statischer Fallback, falls ein FAQ-Block nicht geparst wird ── */
-.schema-faq-section { padding: 0.5rem 0; border-bottom: 1px dotted var(--faq-dot, rgba(0,0,0,0.18)); }
+.schema-faq-section { padding: 0.5rem 0; border-bottom: 1px solid var(--color-border-default); }
 .schema-faq-question { display: block; font-family: 'Merriweather', Georgia, serif; font-weight: 700; font-size: 1.0625rem; color: var(--color-text-primary); margin-bottom: 0.4rem; }
 .schema-faq-answer { font-family: var(--font-body); font-size: 1rem; line-height: 1.7; color: var(--color-text-medium); }
 

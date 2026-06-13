@@ -2,7 +2,6 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "@/lib/gsapConfig";
-import Spark from "@/components/ui/Spark";
 
 export interface FaqPair {
   q: string;
@@ -10,11 +9,11 @@ export interface FaqPair {
 }
 
 /**
- * Artikel-FAQ im Layout-Stil (feine Linien, Dotted-Trenner, Sparks — keine
- * Glass-Box). Desktop ≥1024px: Master-Detail (Fragen links, animierte Antwort-
- * box rechts). Mobile: Akkordeon (Single-Open). Alle Antworten liegen immer im
- * DOM (SEO). SSR rendert das Akkordeon; nach dem Mount wird auf Desktop
- * umgeschaltet → erste Client-Render === Server-Render (kein Hydration-Mismatch).
+ * Artikel-FAQ. Desktop ≥1024px: Master-Detail — Fragen links (Klick-Auswahl im
+ * Checklisten-Stil), ein vertikaler Pfeil (wie im Rechner) gleitet zum aktiven
+ * Tab, und die Antwortbox (weiß, backdrop-brightness) slided + morpht an die zum
+ * Tab passende Stelle (oben/unten geklemmt). Mobile: Akkordeon (Single-Open).
+ * Alle Antworten liegen immer im DOM (SEO).
  */
 export default function ArticleFaq({ pairs }: { pairs: FaqPair[] }) {
   const [mounted, setMounted] = useState(false);
@@ -38,75 +37,117 @@ function num(i: number) {
   return String(i + 1).padStart(2, "0");
 }
 
+const EASE = "power3.out";
+
 /* ── Desktop: Master-Detail ──────────────────────────────────────────────── */
 function FaqMasterDetail({ pairs }: { pairs: FaqPair[] }) {
   const [active, setActive] = useState(0);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const tabRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<SVGSVGElement>(null);
   const answerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const firstRun = useRef(true);
+  const firstArrow = useRef(true);
 
-  // Panel-Höhe + Crossfade, wenn sich die aktive Frage ändert. Erster Lauf
-  // instant (kein Auf-Animieren beim Laden), danach weiche Übergänge.
+  // Pfeil folgt dem HOVER-Tab; ohne Hover (Verlassen) gleitet er zur aktiven Card.
   useLayoutEffect(() => {
-    const panel = panelRef.current;
+    const arrow = arrowRef.current;
+    const tab = tabRefs.current[hovered ?? active];
+    if (!arrow || !tab) return;
+    const tabCenter = tab.offsetTop + tab.offsetHeight / 2;
+    const instant = firstArrow.current;
+    firstArrow.current = false;
+    // SVG-Pfeil (Kerbe bei y≈1001 von 2003) so verschieben, dass die Spitze am Tab-Center sitzt.
+    gsap.to(arrow, { y: tabCenter - 1001, duration: instant ? 0 : 0.4, ease: EASE, overwrite: true });
+  }, [hovered, active]);
+
+  // Antwortbox + Crossfade folgen dem KLICK (active).
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    const box = boxRef.current;
+    const tab = tabRefs.current[active];
     const answer = answerRefs.current[active];
-    if (!panel || !answer) return;
-    const target = answer.offsetHeight;
+    if (!list || !box || !tab || !answer) return;
+
     const instant = firstRun.current;
     firstRun.current = false;
+    const dur = instant ? 0 : 0.55;
 
-    gsap.to(panel, { height: target, duration: instant ? 0 : 0.42, ease: "power3.out", overwrite: true });
+    const listH = list.offsetHeight;
+    const tabCenter = tab.offsetTop + tab.offsetHeight / 2;
+    const boxH = answer.offsetHeight;
+    // Box vertikal am Tab ausrichten, aber im Container klemmen (oben/unten bündig).
+    const boxTop = Math.max(0, Math.min(tabCenter - boxH / 2, listH - boxH));
+
+    gsap.to(box, { y: boxTop, height: boxH, duration: dur, ease: EASE, overwrite: true });
+
+    // Crossfade der Antworten.
     answerRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.killTweensOf(el);
       if (i === active) {
         gsap.fromTo(
           el,
-          { autoAlpha: 0, y: instant ? 0 : 10 },
-          { autoAlpha: 1, y: 0, duration: instant ? 0 : 0.4, ease: "power2.out", delay: instant ? 0 : 0.06 }
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: instant ? 0 : 0.5, ease: "power2.out", delay: instant ? 0 : 0.12 }
         );
       } else {
-        gsap.set(el, { autoAlpha: 0, y: instant ? 0 : 10 });
+        gsap.to(el, { autoAlpha: 0, duration: instant ? 0 : 0.28, ease: "power1.out" });
       }
     });
   }, [active]);
 
   return (
     <div className="faq2 faq2--md" data-faq>
-      <ul className="faq2-list" role="tablist" aria-orientation="vertical">
+      <ul className="faq2-list" ref={listRef} role="tablist" aria-orientation="vertical" onMouseLeave={() => setHovered(null)}>
         {pairs.map((p, i) => {
           const on = i === active;
           return (
-            <li key={i} className="faq2-litem">
+            <li key={i} className="faq2-litem" ref={(el) => { tabRefs.current[i] = el; }}>
               <button
                 role="tab"
                 aria-selected={on}
                 className={"faq2-q" + (on ? " is-active" : "")}
                 onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
+                onMouseEnter={() => setHovered(i)}
               >
                 <span className="faq2-num">{num(i)}</span>
                 <span className="faq2-q-text">{p.q}</span>
-                <span className="faq2-spark" aria-hidden style={{ ["--fill-0" as string]: "var(--color-brand)" }}>
-                  <Spark />
-                </span>
               </button>
             </li>
           );
         })}
       </ul>
 
-      <div className="faq2-detail" ref={panelRef}>
-        {pairs.map((p, i) => (
-          <div
-            key={i}
-            ref={(el) => { answerRefs.current[i] = el; }}
-            role="tabpanel"
-            className="faq2-answer"
-            style={{ visibility: i === active ? "visible" : "hidden" }}
-            dangerouslySetInnerHTML={{ __html: p.a }}
+      {/* Vertikale Linie (volle Höhe) + gleitende >-Pfeilspitze, zeigt auf aktiven Tab */}
+      <div className="faq2-arrow" aria-hidden>
+        <svg ref={arrowRef} className="faq2-arrow-svg" viewBox="0 0 20 2003" fill="none" preserveAspectRatio="xMidYMid meet">
+          <path
+            d="M0.999913 1L0.999956 983.5L18.4999 1001L0.999957 1018.5L1 2001.5"
+            stroke="var(--color-text-primary)"
+            strokeWidth="1"
+            strokeLinecap="square"
+            vectorEffect="non-scaling-stroke"
           />
-        ))}
+        </svg>
+      </div>
+
+      {/* Rechte Spalte: Antwortbox slided + morpht zur richtigen Stelle */}
+      <div className="faq2-detail">
+        <div className="faq2-box" ref={boxRef}>
+          {pairs.map((p, i) => (
+            <div
+              key={i}
+              ref={(el) => { answerRefs.current[i] = el; }}
+              role="tabpanel"
+              className="faq2-answer"
+              style={{ visibility: i === active ? "visible" : "hidden", opacity: i === active ? 1 : 0 }}
+              dangerouslySetInnerHTML={{ __html: p.a }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -125,7 +166,6 @@ function FaqAccordion({ pairs }: { pairs: FaqPair[] }) {
     gsap.killTweensOf([outer, inner]);
     if (willOpen) {
       gsap.set(outer, { height: 0 });
-      // Höhe inkl. Innen-Padding messen → kein End-Sprung durch separates Padding.
       gsap.to(outer, {
         height: inner.offsetHeight,
         duration: 0.44,
@@ -154,16 +194,9 @@ function FaqAccordion({ pairs }: { pairs: FaqPair[] }) {
         const on = open === i;
         return (
           <div key={i} className={"faq2-item" + (on ? " is-open" : "")}>
-            <button className="faq2-q" aria-expanded={on} onClick={() => toggle(i)}>
+            <button className={"faq2-q" + (on ? " is-active" : "")} aria-expanded={on} onClick={() => toggle(i)}>
               <span className="faq2-num">{num(i)}</span>
               <span className="faq2-q-text">{p.q}</span>
-              <span
-                className="faq2-spark"
-                aria-hidden
-                style={{ ["--fill-0" as string]: on ? "var(--color-brand)" : "var(--color-text-medium)" }}
-              >
-                <Spark />
-              </span>
             </button>
             <div
               className="faq2-a-outer"
