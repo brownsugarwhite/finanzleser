@@ -54,6 +54,7 @@ export default function WohngeldRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={3000}
         />
 
         <RechnerSelect
@@ -80,6 +81,7 @@ export default function WohngeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={6000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

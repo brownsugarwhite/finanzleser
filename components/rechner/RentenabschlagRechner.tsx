@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -39,6 +40,7 @@ export default function RentenabschlagRechner() {
           onChange={(val) => setParams((p) => ({ ...p, monatlicheRente: val }))}
           einheit="€/Monat"
           min={0}
+          max={5000}
           step={100}
         />
 
@@ -58,6 +60,15 @@ export default function RentenabschlagRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={result.abschlagProzent}
+              max={14.4}
+              label="Abschlag (max. 14,4 %)"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Rente nach Abschlag"

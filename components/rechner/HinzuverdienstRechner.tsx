@@ -41,6 +41,7 @@ export default function HinzuverdienstRechner() {
           onChange={(val) => setParams((p) => ({ ...p, monatlicheRente: val }))}
           einheit="€/Monat"
           min={0}
+          max={5000}
           step={100}
         />
 
@@ -51,6 +52,7 @@ export default function HinzuverdienstRechner() {
           onChange={(val) => setParams((p) => ({ ...p, monatlichesEinkommen: val }))}
           einheit="€/Monat"
           min={0}
+          max={8000}
           step={100}
         />
 

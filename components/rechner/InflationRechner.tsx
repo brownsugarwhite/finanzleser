@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -42,6 +43,7 @@ export default function InflationRechner() {
           einheit="€"
           step={100}
           min={1}
+          max={100000}
         />
         <RechnerInput
           label="Inflationsrate"
@@ -51,6 +53,8 @@ export default function InflationRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={15}
+          slider
         />
         <RechnerInput
           label="Zeitraum"
@@ -60,6 +64,7 @@ export default function InflationRechner() {
           einheit="Jahre"
           step={1}
           min={1}
+          max={50}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 
@@ -67,6 +72,14 @@ export default function InflationRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={Math.max(0, Math.min(100, Math.round(result.verlustProzent)))}
+              label="Kaufkraftverlust"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Reeller Wert" value={euro(result.reellerWert)} highlight />
             <RechnerResultBox label="Kaufkraftverlust" value={euro(result.kaufkraftVerlust)} variant="negative" />

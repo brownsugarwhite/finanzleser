@@ -15,6 +15,8 @@ import MobileTocOverlay from "./MobileTocOverlay";
 import ArticleAdRails from "./ArticleAdRails";
 import AdSlot from "@/components/ui/AdSlot";
 import type { ArticleAdsSettings } from "@/lib/types";
+import type { ArticleToolData } from "@/lib/articleToolData";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
 import { buildArticleTocItems } from "@/lib/articleTocBuilder";
 import { extractArticleHeader } from "@/lib/articleHeader";
@@ -38,6 +40,7 @@ type ArticleClientProps = {
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
   articleAds?: ArticleAdsSettings;
+  toolData?: ArticleToolData;
 };
 
 export default function ArticleClient({
@@ -52,13 +55,32 @@ export default function ArticleClient({
   contentTableOfContents,
   author,
   articleAds,
+  toolData,
 }: ArticleClientProps) {
   const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
   const [pageSlug, setPageSlug] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [tocVisible, setTocVisible] = useState(false);
   const toc = useArticleToc();
+
+  // Seiten-TOC erst einblenden, wenn das In-Body-TOC oben aus dem Bild gescrollt ist.
+  useEffect(() => {
+    const el = document.getElementById("article-inline-toc");
+    if (!el) {
+      setTocVisible(true); // kein In-Body-TOC (kurzer Artikel) → Sidebar dauerhaft sichtbar
+      return;
+    }
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "center top+=60", // etwas früher als „genau zur Hälfte oben raus"
+      onLeave: () => setTocVisible(true),
+      onEnterBack: () => setTocVisible(false),
+    });
+    setTocVisible(el.getBoundingClientRect().top + el.offsetHeight / 2 < 60); // initialer Zustand (Reload mitten im Artikel)
+    return () => st.kill();
+  }, [toc.items.length]);
 
   // Morph-Ziele: der MorphTransitionLayer morpht Visual + fetten + kursiven Titel
   // aus der angeklickten Card hierher. Refs auf die drei Header-Elemente.
@@ -121,6 +143,7 @@ export default function ArticleClient({
           scrollToId={toc.scrollToId}
           collapsed={collapsed}
           setCollapsed={setCollapsed}
+          visible={tocVisible}
         />
       )}
 
@@ -307,7 +330,7 @@ export default function ArticleClient({
           {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
           {bodyContent && bodyContent.trim() ? (
             <>
-              <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} />
+              <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} toolData={toolData} />
               {pageSlug && (
                 <ArticleElementWrapper variant="centered" collapsed={collapsed}>
                   <PdfPreview slug={pageSlug} />

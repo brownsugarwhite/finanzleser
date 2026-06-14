@@ -9,6 +9,9 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
+import RechnerGauge from "./ui/RechnerGauge";
+import RechnerBenchmark from "./ui/RechnerBenchmark";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -31,6 +34,15 @@ export default function ElterngeldRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Elterngeld-Rechner 2026</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Teilzeit", values: { monatsBrutto: 1800, zvEJahr: 21600 } },
+          { label: "Durchschnitt", values: { monatsBrutto: 3000, zvEJahr: 36000 } },
+          { label: "Gutverdiener", values: { monatsBrutto: 6000, zvEJahr: 72000 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Durchschnittliches Monatsbrutto"
@@ -40,6 +52,7 @@ export default function ElterngeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={15000}
         />
 
         <RechnerInput
@@ -50,6 +63,7 @@ export default function ElterngeldRechner() {
           einheit="€"
           step={1000}
           min={0}
+          max={200000}
           tooltip="Relevant fuer Einkommenspruefung (Grenze: 175.000 EUR)"
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
@@ -67,6 +81,22 @@ export default function ElterngeldRechner() {
             />
           ) : (
             <>
+              <div className="rechner-gauge-row">
+                <RechnerGauge
+                  value={result.ersatzrateProzent}
+                  label="Ersatzrate"
+                  animateKey={rechnerState.scrollKey}
+                />
+                <RechnerBenchmark
+                  value={Math.round(result.basisElterngeld)}
+                  average={870}
+                  unit=" €"
+                  valueLabel="Dein Basiselterngeld"
+                  averageLabel="Ø Deutschland"
+                  animateKey={rechnerState.scrollKey}
+                />
+              </div>
+
               <div className="rechner-result-boxes">
                 <RechnerResultBox
                   label="Basiselterngeld / Monat"

@@ -8,6 +8,7 @@ import { buildMetadata, stripHtml, SITE_NAME, absoluteUrl } from "@/lib/seo";
 import { extractArticleHeader } from "@/lib/articleHeader";
 import { getRedakteurForSlug } from "@/lib/redakteure";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
+import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 
 export const revalidate = 3600;
 
@@ -48,6 +49,11 @@ export default async function BeitragPage(props: {
 
   // Konvention v2: Titel = WP-Titel-Feld; Beschreibung = Content-<p> (nach 1. h2).
   const header = extractArticleHeader(post.content);
+
+  // Finanztool-Daten serverseitig vorladen (ISR) → Rechner/Checkliste/Dokumente +
+  // Tool-Überschriften sofort, ohne Client-Fetch/Layoutshift. Vergleich-Widgets
+  // bleiben client-lazy. Fehler → leeres Set, Komponenten fallen auf Client-Fetch zurück.
+  const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
 
   // Find main category (slug is in MAIN_CATEGORY_SLUGS) and subcategory
   const mainCategory = post.categories?.nodes?.find((cat: Category) => isMainCategory(cat.slug));
@@ -97,6 +103,7 @@ export default async function BeitragPage(props: {
       mainCategoryName={mainCategory?.name}
       content={post.content}
       contentTableOfContents={!!post.content}
+      toolData={toolData}
       slug={params.slug}
       author={(() => {
         // Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.

@@ -2,6 +2,7 @@ import Footer from "./Footer";
 import ArticleClient from "./ArticleClient";
 import RelatedPostsSection from "@/components/sections/RelatedPostsSection";
 import { getSiteSettings } from "@/lib/wordpress";
+import type { ArticleToolData } from "@/lib/articleToolData";
 
 type ArticleLayoutProps = {
   title?: string;
@@ -21,6 +22,7 @@ type ArticleLayoutProps = {
     imageUrl?: string;
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
+  toolData?: ArticleToolData;
 };
 
 function extractLatestPostsBlock(content?: string): { categoryIds: number[]; postsToShow: number } | null {

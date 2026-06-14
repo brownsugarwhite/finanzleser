@@ -33,7 +33,7 @@ const TOOL_COLORS: Record<string, string> = {
   rechner: "var(--color-tool-rechner)",
   checkliste: "var(--color-tool-checklisten)",
   vergleich: "var(--color-tool-vergleiche)",
-  // Dokumente: dunkler Punkt + dunkler Aktiv-/Lade-Ring (analog Finanztools-Badge in Dark)
+  // Dokumente: dunkler Punkt + dunkler Aktiv-/Progress-Ring (Dark-Text, wie Staging)
   dokumente: "var(--color-text-primary)",
 };
 

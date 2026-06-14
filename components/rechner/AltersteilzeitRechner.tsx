@@ -38,7 +38,9 @@ export default function AltersteilzeitRechner() {
           value={params.monatsBrutto}
           onChange={(val) => setParams((p) => ({ ...p, monatsBrutto: val }))}
           einheit="EUR"
+          step={100}
           min={0}
+          max={12000}
         />
         <RechnerInput
           label="Alter"
@@ -46,6 +48,7 @@ export default function AltersteilzeitRechner() {
           value={params.alter}
           onChange={(val) => setParams((p) => ({ ...p, alter: val }))}
           einheit="Jahre"
+          step={1}
           min={50}
           max={67}
         />

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
+import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
@@ -70,8 +71,9 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   // 1. Zuerst prüfen: ist es ein Post-Slug (legacy URL)?
   const post = await getPostBySlug(params.kategorie).catch(() => null);
   if (post) {
+    const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
     return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} author={redakteurAuthor(post.slug || params.kategorie, post.date)} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} toolData={toolData} author={redakteurAuthor(post.slug || params.kategorie, post.date)} />
     );
   }
 

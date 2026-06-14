@@ -45,7 +45,7 @@ export default function AdSlot({
         width: w,
         maxWidth: "100%",
         aspectRatio: `${w} / ${h}`,
-        background: "#d1d5db",
+        background: "rgba(0, 0, 0, 0.10)",
         borderRadius: 0,
         marginInline: "auto",
       }}

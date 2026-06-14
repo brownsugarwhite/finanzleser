@@ -15,14 +15,17 @@ interface DokumentCard {
 
 interface Props {
   slugs: string[];
-  headingId: string;
+  headingId?: string;
+  /** Serverseitig vorgeladen (ISR) → kein Client-Fetch. */
+  initialDokumente?: DokumentCard[] | null;
 }
 
-export default function DokumenteEmbed({ slugs, headingId }: Props) {
-  const [dokumente, setDokumente] = useState<DokumentCard[]>([]);
-  const [loaded, setLoaded] = useState(false);
+export default function DokumenteEmbed({ slugs, initialDokumente }: Props) {
+  const [dokumente, setDokumente] = useState<DokumentCard[]>(initialDokumente ?? []);
+  const [loaded, setLoaded] = useState(!!initialDokumente);
 
   useEffect(() => {
+    if (initialDokumente) return; // bereits serverseitig geladen
     if (slugs.length === 0) return;
     fetch(`/api/dokumente/${encodeURIComponent(slugs.join(","))}`)
       .then((res) => res.json())
@@ -31,7 +34,7 @@ export default function DokumenteEmbed({ slugs, headingId }: Props) {
         setLoaded(true);
       })
       .catch(() => setLoaded(true));
-  }, [slugs]);
+  }, [slugs, initialDokumente]);
 
   // Nichts rendern, wenn (nach dem Laden) keine gültigen Dokumente gefunden wurden.
   if (loaded && dokumente.length === 0) return null;
@@ -40,10 +43,6 @@ export default function DokumenteEmbed({ slugs, headingId }: Props) {
 
   return (
     <div className="dokumente-embed">
-      <h2 id={headingId} className="article-tool-label">
-        <span className="article-tool-badge article-tool-badge--dokumente">Dokumente</span>
-      </h2>
-
       <div className="dokumente-grid" data-count={count}>
         {dokumente.map((dok) => (
           <article key={dok.slug} className="dok-card">

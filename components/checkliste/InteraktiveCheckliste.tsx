@@ -7,6 +7,8 @@ import type { ChecklisteData } from "./types";
 import ChecklisteSlide from "./ChecklisteSlide";
 import ChecklisteProgress from "./ChecklisteProgress";
 import SliderNav from "@/components/ui/SliderNav";
+import Button from "@/components/ui/Button";
+import InfoHint from "@/components/ui/InfoHint";
 import { useChecklisteLayout } from "./ChecklisteLayoutContext";
 
 interface Props {
@@ -170,7 +172,7 @@ export default function InteraktiveCheckliste({
               onToggle={togglePunkt}
             />
           ))}
-          {/* Letzter Slide: Ausgefüllte PDF herunterladen */}
+          {/* Letzter Slide: Text → Visual → Download-Button */}
           <div className="checkliste-slide">
             <div className="checkliste-final-slide">
               <h3 className="checkliste-final-title">Ihre ausgefüllte Checkliste</h3>
@@ -180,16 +182,21 @@ export default function InteraktiveCheckliste({
                   : `Haken Sie die erledigten Punkte ab und laden Sie anschließend Ihre persönliche Checkliste herunter.`
                 }
               </p>
-              <button
-                onClick={handleDownloadChecked}
-                disabled={generating || checkedCount === 0}
-                className="checkliste-btn-final"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                {generating ? "Wird erstellt..." : "Ausgefüllte Checkliste herunterladen"}
-              </button>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/general/checkliste_Visual_slide.png"
+                alt=""
+                className="checkliste-final-visual"
+                style={{ width: "100%", maxWidth: 520, height: "auto", margin: "4px auto 20px", display: "block" }}
+              />
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  label={generating ? "Wird erstellt..." : "Ausgefüllte Checkliste herunterladen"}
+                  onClick={handleDownloadChecked}
+                  disabled={generating || checkedCount === 0}
+                  icon="download"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -208,27 +215,21 @@ export default function InteraktiveCheckliste({
       {/* Download-Button (leere PDF) – via Portal ins Visual */}
       {actionsContainer && createPortal(
         <div className="checkliste-actions">
-          <a
+          <Button
+            label="Checkliste herunterladen"
             href={pdfUrl}
             download
             target="_blank"
             rel="noopener noreferrer"
-            className="checkliste-btn checkliste-btn--download"
-            title="PDF herunterladen"
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </a>
+            icon="download"
+          />
         </div>,
         actionsContainer
       )}
 
-      <p style={{ fontSize: 12, color: "var(--color-text-medium)", marginTop: 24 }}>
+      <InfoHint style={{ marginTop: 24 }}>
         Hinweis: Diese Checkliste ersetzt keine professionelle Beratung. Für komplexe Fragen empfehlen wir die Unterstützung durch einen Fachmann.
-      </p>
+      </InfoHint>
     </div>
   );
 }

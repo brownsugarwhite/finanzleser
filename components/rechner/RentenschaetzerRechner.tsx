@@ -39,6 +39,7 @@ export default function RentenschaetzerRechner() {
           onChange={(val) => setParams((p) => ({ ...p, monatlichesEinkommen: val }))}
           einheit="€/Monat"
           min={0}
+          max={8000}
           step={100}
         />
 

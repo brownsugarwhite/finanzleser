@@ -57,10 +57,15 @@ export function useArticleToc() {
       headings.forEach((heading) => {
         if (heading.hasAttribute("data-toc-exclude")) return;
         const isTool = heading.classList.contains("article-tool-label");
+        // Dokumente-Kopf nutzt eigenes Markup (.dok-head-h, nicht .article-tool-label)
+        const isDok = heading.classList.contains("dok-head-h");
         let toolType: TocToolType | undefined;
         let text: string;
 
-        if (isTool) {
+        if (isDok) {
+          toolType = "dokumente";
+          text = "Dokumente";
+        } else if (isTool) {
           const badge = heading.querySelector(".article-tool-badge");
           const titleEl = heading.querySelector(".article-tool-title");
           const badgeText = badge?.textContent?.trim().toLowerCase() || "";
@@ -80,25 +85,34 @@ export function useArticleToc() {
       setItems(tocItems);
 
       if (!scrollCleanupRef.current) {
-        const handleScroll = () => {
+        let rafPending = false;
+        const computeActive = () => {
+          rafPending = false;
+          // Auch während des programmatischen Tweens (TOC-Klick) weiter bestimmen →
+          // die Kreise/Marker laufen beim Auto-Scroll dynamisch mit.
           const art = document.querySelector("article");
           if (!art) return;
-          const h2s = Array.from(art.querySelectorAll("h2:not([data-toc-exclude])"));
+          // Nur Überschriften MIT id (echte TOC-Ziele) → id-lose h2 (z.B. FAQ-Deko)
+          // können den Active-Marker nicht auf einen falschen Punkt zwingen.
+          const h2s = Array.from(art.querySelectorAll("h2:not([data-toc-exclude])"))
+            .filter((h) => (h as HTMLElement).id);
           if (h2s.length === 0) return;
 
           // +1 Pixel Toleranz vermeidet Floating-Point-Lücke direkt nach dem Tween.
           const threshold = getScrollOffset() + 1;
+          // Alle Tops EINMAL messen (konsistenter Snapshot statt mehrfacher Reads
+          // zwischen denen ein Layout-Reflow den Marker springen lassen könnte).
+          const tops = h2s.map((h) => h.getBoundingClientRect().top);
           let currentId = "";
           let progress = 0;
 
           for (let i = 0; i < h2s.length; i++) {
-            const rect = h2s[i].getBoundingClientRect();
-            if (rect.top <= threshold) {
-              currentId = h2s[i].id || "";
-              const start = h2s[i].getBoundingClientRect().top + window.scrollY;
+            if (tops[i] <= threshold) {
+              currentId = h2s[i].id;
+              const start = tops[i] + window.scrollY;
               const end =
                 i < h2s.length - 1
-                  ? h2s[i + 1].getBoundingClientRect().top + window.scrollY
+                  ? tops[i + 1] + window.scrollY
                   : art.getBoundingClientRect().bottom + window.scrollY;
               const scrollPos = window.scrollY + threshold;
               progress = Math.min(1, Math.max(0, (scrollPos - start) / (end - start)));
@@ -112,6 +126,12 @@ export function useArticleToc() {
 
           setActiveId(currentId);
           setScrollProgress(progress);
+        };
+        // rAF-gedrosselt → Messung passiert nach dem Layout, nicht mitten im Scroll-Burst.
+        const handleScroll = () => {
+          if (rafPending) return;
+          rafPending = true;
+          requestAnimationFrame(computeActive);
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });

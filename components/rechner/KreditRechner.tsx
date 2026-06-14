@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -33,6 +34,15 @@ export default function KreditRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Kreditrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Autokredit", values: { kreditsumme: 20000, laufzeitMonate: 60, jahreszins: 5.5 } },
+          { label: "Ratenkredit", values: { kreditsumme: 10000, laufzeitMonate: 48, jahreszins: 6.5 } },
+          { label: "Modernisierung", values: { kreditsumme: 50000, laufzeitMonate: 120, jahreszins: 4.5 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Kreditsumme"
@@ -42,6 +52,7 @@ export default function KreditRechner() {
           einheit="€"
           step={500}
           min={100}
+          max={500000}
         />
         <RechnerInput
           label="Laufzeit"
@@ -50,7 +61,8 @@ export default function KreditRechner() {
           onChange={(val) => setParams((prev) => ({ ...prev, laufzeitMonate: val }))}
           einheit="Monate"
           step={6}
-          min={1}
+          min={6}
+          max={360}
         />
         <RechnerInput
           label="Jahreszins"
@@ -60,6 +72,8 @@ export default function KreditRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={15}
+          slider
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

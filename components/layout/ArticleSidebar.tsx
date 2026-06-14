@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
+import gsap from "@/lib/gsapConfig";
 import TableOfContents from "@/components/sections/TableOfContents";
 import type { TOCItem } from "@/lib/hooks/useArticleToc";
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 interface ArticleSidebarProps {
   items: TOCItem[];
@@ -11,6 +14,8 @@ interface ArticleSidebarProps {
   scrollToId: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
+  /** Erst sichtbar, wenn das In-Body-TOC oben aus dem Bild gescrollt ist. */
+  visible: boolean;
 }
 
 const EASE = "cubic-bezier(0.65, 0, 0.35, 1)"; // ease-in-out
@@ -41,7 +46,37 @@ const toggleStyles = `
   .toc-toggle svg { transition: transform ${DUR} ${EASE}; }
 `;
 
-export default function ArticleSidebar({ items, activeId, scrollProgress, scrollToId, collapsed, setCollapsed }: ArticleSidebarProps) {
+export default function ArticleSidebar({ items, activeId, scrollProgress, scrollToId, collapsed, setCollapsed, visible }: ArticleSidebarProps) {
+  // GSAP-Slide (gestaffelte Punkte) wie ursprünglich. Flash-Schutz NUR via
+  // opacity/visibility-CSS (`:not(.toc-init)`) — KEIN transform im CSS, damit es
+  // GSAPs xPercent/clearProps nicht stört (das war die eigentliche Bug-Ursache).
+  const asideRef = useRef<HTMLElement>(null);
+  const inited = useRef(false);
+  const [init, setInit] = useState(false);
+  useIsoLayoutEffect(() => {
+    if (asideRef.current) gsap.set(asideRef.current, { xPercent: -105, autoAlpha: 0 });
+    inited.current = true;
+    setInit(true);
+  }, []);
+  useEffect(() => {
+    const aside = asideRef.current;
+    if (!aside || !inited.current) return;
+    const dots = aside.querySelectorAll<HTMLElement>(".toc-item");
+    gsap.killTweensOf(aside);
+    gsap.killTweensOf(dots);
+    if (visible) {
+      const tl = gsap.timeline({
+        onComplete: () => { gsap.set(aside, { clearProps: "transform" }); gsap.set(dots, { clearProps: "transform" }); },
+      });
+      tl.fromTo(aside, { xPercent: -105, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45, ease: "power3.out", overwrite: true }, 0);
+      if (dots.length) {
+        tl.fromTo(dots, { x: -16, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out", stagger: 0.03 }, 0.12);
+      }
+    } else {
+      gsap.to(aside, { xPercent: -105, autoAlpha: 0, duration: 0.4, ease: "power3.in", overwrite: true });
+    }
+  }, [visible]);
+
   // Schreibmaschinen-Label
   const [labelLen, setLabelLen] = useState(collapsed ? SHORT.length : FULL.length);
   const lenRef = useRef(labelLen);
@@ -92,14 +127,15 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
 
   return (
     <aside
-      className="article-sidebar"
+      ref={asideRef}
+      className={`article-sidebar${init ? " toc-init" : ""}`}
       style={{
         position: "absolute",
         top: 0,
         left: 0,
         bottom: 0,
         height: "100%",
-        zIndex: 52,
+        zIndex: 40,
         display: "flex",
         gap: collapsed ? "8px" : "23px",
         flexShrink: 0,

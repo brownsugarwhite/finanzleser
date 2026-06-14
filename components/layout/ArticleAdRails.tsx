@@ -15,6 +15,9 @@ import { useEffect, useRef, useState } from "react";
  */
 const TOC_EXPANDED_WIDTH = 430;
 const RAIL_TOP = 18;
+// Klarer Abstand, damit die Rails sichtbar VOR der breiten Box (Vergleich/Dokumente)
+// enden statt sie zu berühren.
+const RAIL_BOTTOM_GAP = 40;
 
 export default function ArticleAdRails({
   collapsed,
@@ -66,14 +69,15 @@ export default function ArticleAdRails({
       while (unit.parentElement && unit.parentElement !== region) {
         unit = unit.parentElement;
       }
-      // Grenze = Unterkante des Elements VOR dem Tool (= Ende des Fazit-Texts);
-      // gibt es keins, fällt sie auf die Tool-Oberkante zurück.
+      // Grenze = Unterkante des Elements VOR dem Tool (= Ende der Vergleich-
+      // Beschreibung); gibt es keins, fällt sie auf die Tool-Oberkante zurück.
       const prev = unit.previousElementSibling as HTMLElement | null;
       const regionTop = region.getBoundingClientRect().top;
       const boundary = prev
         ? prev.getBoundingClientRect().bottom - regionTop
         : unit.getBoundingClientRect().top - regionTop;
-      setHeight(Math.max(0, boundary - RAIL_TOP));
+      // Rails enden klar VOR der Box (Beschreibungsende minus Sicherheits-Gap).
+      setHeight(Math.max(0, boundary - RAIL_TOP - RAIL_BOTTOM_GAP));
     };
     compute();
     const ro = new ResizeObserver(compute);

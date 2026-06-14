@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerComparisonTable from "./ui/RechnerComparisonTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -40,6 +41,15 @@ export default function AbfindungRechner() {
   return (
     <div className="rechner-container">
       <h3 className="rechner-title">Abfindungsrechner 2026</h3>
+
+      <RechnerPresets
+        presets={[
+          { label: "Sachbearbeiter", values: { monatsBrutto: 3000, jahresBruttoEinkommen: 36000, beschaeftigungsjahre: 8 } },
+          { label: "Fachkraft", values: { monatsBrutto: 4500, jahresBruttoEinkommen: 54000, beschaeftigungsjahre: 15 } },
+          { label: "Führungskraft", values: { monatsBrutto: 7000, jahresBruttoEinkommen: 84000, beschaeftigungsjahre: 20 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
 
       <div className="rechner-inputs">
         <RechnerInput
@@ -73,6 +83,7 @@ export default function AbfindungRechner() {
           min={0.1}
           max={2}
           tooltip="Üblich: 0,5 Monatsgehälter je Beschäftigungsjahr"
+          slider
         />
 
         <RechnerInput
@@ -82,6 +93,8 @@ export default function AbfindungRechner() {
           onChange={(v) => set("jahresBruttoEinkommen", v)}
           einheit="€"
           step={1000}
+          min={0}
+          max={200000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import { getAllRechner, getRechnerBySlug } from "@/lib/wordpress";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { RECHNER_DISCLAIMER } from "@/lib/rechnerDisclaimer";
 
 export const revalidate = 3600;
 
@@ -190,7 +191,7 @@ export default async function RechnerDetailPage({ params }: Props) {
           {/* Disclaimer */}
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600">
-              <strong>Hinweis:</strong> Alle Berechnungen sind unverbindliche Näherungswerte. Dieses Tool kann eine professionelle Steuer-, Finanz- oder Rechtsberatung nicht ersetzen.
+              <strong>Hinweis:</strong> {RECHNER_DISCLAIMER}
             </p>
           </div>
         </div>

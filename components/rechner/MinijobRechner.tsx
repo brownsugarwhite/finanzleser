@@ -47,6 +47,7 @@ export default function MinijobRechner() {
           einheit="€"
           step={10}
           min={0}
+          max={2500}
         />
 
         <RechnerCheckbox

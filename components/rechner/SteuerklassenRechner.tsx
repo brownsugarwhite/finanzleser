@@ -57,6 +57,8 @@ export default function SteuerklassenRechner() {
           value={monatsBrutto}
           onChange={setMonatsBrutto}
           einheit="€"
+          min={0}
+          max={15000}
           step={100}
         />
 
@@ -67,6 +69,8 @@ export default function SteuerklassenRechner() {
             value={monatsBruttoPartner}
             onChange={setMonatsBruttoPartner}
             einheit="€"
+            min={0}
+            max={15000}
             step={100}
           />
         </RechnerConditionalGroup>

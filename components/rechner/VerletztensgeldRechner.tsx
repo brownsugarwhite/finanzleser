@@ -40,6 +40,7 @@ export default function VerletztensgeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={15000}
         />
 
         <RechnerInput
@@ -50,6 +51,7 @@ export default function VerletztensgeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={10000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

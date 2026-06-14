@@ -3,36 +3,12 @@ import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllVergleiche } from "@/lib/wordpress";
 
-// Nur Vergleiche mit aktiver URL anzeigen
-const ACTIVE_SLUGS = new Set([
-  "private-haftpflichtversicherung-vergleich",
-  "festgeldvergleich",
-  "tagesgeldvergleich",
-  "autokredit-vergleich",
-  "ratenkredit-vergleich",
-  "bausparen-vergleich",
-  "baufinanzierung-vergleich",
-  "private-krankenversicherung-vergleich",
-  "gaspreisvergleich",
-  "strompreisvergleich",
-  "risikolebensversicherung-vergleich",
-  "reisekrankenversicherung-vergleich",
-  "fahrradversicherung-vergleich",
-  "haus-und-grundbesitzerhaftpflicht-vergleich",
-  "unfallversicherung-vergleich",
-  "gebaeudeversicherung-vergleich",
-  "rechtsschutzversicherung-vergleich",
-  "hausratversicherung-vergleich",
-  "kfz-versicherung-vergleich",
-  "rentenversicherung-vergleich",
-  "lebensversicherung-vergleich",
-  "photovoltaik-versicherung-vergleich",
-  "bussgeldrechner-vergleich",
-]);
+export const revalidate = 3600;
 
 export default async function VergleichePage() {
-  const allVergleiche = await getAllVergleiche();
-  const vergleiche = allVergleiche.filter(v => ACTIVE_SLUGS.has(v.slug));
+  // Alle veröffentlichten Vergleiche aus WordPress (CPT). Die Embed-Config liegt
+  // im CPT selbst – neue Vergleiche erscheinen hier automatisch ohne Code-Änderung.
+  const vergleiche = await getAllVergleiche();
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

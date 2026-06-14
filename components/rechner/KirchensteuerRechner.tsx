@@ -40,7 +40,9 @@ export default function KirchensteuerRechner() {
           value={params.lohnsteuerJahr}
           onChange={(v) => setParams((p) => ({ ...p, lohnsteuerJahr: v }))}
           einheit="€"
-          step={10}
+          step={100}
+          min={0}
+          max={100000}
         />
 
         <RechnerSelect

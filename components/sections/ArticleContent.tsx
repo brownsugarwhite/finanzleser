@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect, useMemo, useLayoutEffect, type ReactNode } from "react";
+import { memo, Fragment, useState, useEffect, useMemo, useLayoutEffect, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import gsap from "@/lib/gsapConfig";
 
@@ -12,6 +12,7 @@ import FazitHeading from "@/components/ui/FazitHeading";
 import ArticleElementWrapper from "@/components/layout/ArticleElementWrapper";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import ArticleFaq, { type FaqPair } from "@/components/sections/ArticleFaq";
+import type { ArticleToolData } from "@/lib/articleToolData";
 
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"), {
   loading: () => <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Checkliste wird geladen...</div>,
@@ -32,12 +33,13 @@ const TOOL_CONFIG = {
   vergleich: { label: "Vergleich", color: "var(--color-tool-vergleiche)", endpoint: "" },
 } as const;
 
-function ToolLabel({ type, slug, headingId, showExcerpt }: { type: keyof typeof TOOL_CONFIG; slug: string; headingId: string; showExcerpt?: boolean }) {
+function ToolLabel({ type, slug, headingId, showExcerpt, preload }: { type: keyof typeof TOOL_CONFIG; slug: string; headingId: string; showExcerpt?: boolean; preload?: { title: string; excerpt: string } }) {
   const config = TOOL_CONFIG[type];
-  const [title, setTitle] = useState("");
-  const [excerpt, setExcerpt] = useState("");
+  const [title, setTitle] = useState(preload?.title ?? "");
+  const [excerpt, setExcerpt] = useState(preload?.excerpt ?? "");
 
   useEffect(() => {
+    if (preload) return; // serverseitig vorgeladen
     fetch(`/api/tool-title/${type}/${slug}`)
       .then((res) => res.json())
       .then((data) => {
@@ -45,7 +47,7 @@ function ToolLabel({ type, slug, headingId, showExcerpt }: { type: keyof typeof 
         if (data.excerpt) setExcerpt(data.excerpt);
       })
       .catch(() => {});
-  }, [type, slug]);
+  }, [type, slug, preload]);
 
   return (
     <>
@@ -62,11 +64,26 @@ function ToolLabel({ type, slug, headingId, showExcerpt }: { type: keyof typeof 
   );
 }
 
+// Dokumente-Kopf: Spike-Label „Dokumente" (bündig zur Body-Breite) + Untertitel + Linie.
+function DokumenteHead({ headingId }: { headingId: string }) {
+  return (
+    <div className="dok-head">
+      <span className="dok-head-line" aria-hidden />
+      <h2 id={headingId} className="dok-head-h">
+        <span className="dok-head-label">Dokumente</span>
+      </h2>
+      <span className="dok-head-subtitle">Passende Formulare und Broschüren</span>
+    </div>
+  );
+}
+
 interface Props {
   content: string;
   collapsed: boolean;
   currentSlug?: string;
   showMidAd?: boolean;
+  /** Serverseitig vorgeladene Tool-Daten (ISR) → sofort, kein Client-Fetch. */
+  toolData?: ArticleToolData;
 }
 
 interface ContentPart {
@@ -118,7 +135,7 @@ function normalizeFaq(html: string): string {
 // Yoast-FAQ-Block (<div class="schema-faq …">) aus dem HTML herauslösen und in
 // Frage/Antwort-Paare parsen → wird als <ArticleFaq> (Master-Detail/Akkordeon)
 // gerendert. Liefert {before, pairs, after} oder null, wenn kein FAQ-Block da ist.
-function extractFaqBlock(html: string): { before: string; pairs: FaqPair[]; after: string } | null {
+function extractFaqBlock(html: string): { before: string; pairs: FaqPair[]; after: string; headingId: string } | null {
   if (!html.includes("schema-faq")) return null;
   const startMatch = html.match(/<div[^>]*class="schema-faq\b[^"]*"[^>]*>/i);
   if (!startMatch || startMatch.index === undefined) return null;
@@ -140,7 +157,18 @@ function extractFaqBlock(html: string): { before: string; pairs: FaqPair[]; afte
   if (end < 0) return null;
 
   const block = normalizeFaq(html.slice(start, end));
-  const before = html.slice(0, start);
+  // Originale „Häufig gestellte Fragen"-Überschrift entfernen — ArticleFaq rendert sie
+  // dekoriert selbst. Deren heading-ID übernehmen → FaqHeading bekommt sie, damit der
+  // TOC-Link funktioniert (sonst zeigt der TOC-Eintrag ins Leere).
+  let headingId = "";
+  // NUR das h2, das selbst „Häufig gestellte Fragen" enthält (Negative-Lookahead auf
+  // </h2> verhindert, dass der Match von einem FRÜHEREN h2 – z.B. „Fazit" – bis zur
+  // FAQ-Überschrift spannt und alles dazwischen löscht).
+  const before = html.slice(0, start).replace(/<h2\b([^>]*)>(?:(?!<\/h2>)[\s\S])*?Häufig gestellte Fragen(?:(?!<\/h2>)[\s\S])*?<\/h2>/gi, (_m, attrs: string) => {
+    const idm = attrs.match(/id="([^"]+)"/);
+    if (idm) headingId = idm[1];
+    return "";
+  });
   const after = html.slice(end);
 
   const pairs: FaqPair[] = [];
@@ -154,7 +182,7 @@ function extractFaqBlock(html: string): { before: string; pairs: FaqPair[]; afte
     const a = am ? am[2].trim() : "";
     if (q) pairs.push({ q, a });
   }
-  return pairs.length ? { before, pairs, after } : null;
+  return pairs.length ? { before, pairs, after, headingId } : null;
 }
 
 function parseContent(html: string): ContentPart[] {
@@ -250,7 +278,7 @@ function injectInlineAd(html: string): string {
   return html.slice(0, at) + box + html.slice(at);
 }
 
-function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
+function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }: Props) {
   // Memoize ALL HTML transforms (parseContent + addHeadingIds + splitFazit + wrapTables)
   // so dangerouslySetInnerHTML receives stable strings across re-renders. Otherwise
   // every parent re-render (TOC scroll progress, collapsed toggle, …) produces a new
@@ -262,7 +290,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     | { kind: "tool"; toolType: "rechner" | "checkliste" | "vergleich"; slug: string; headingId: string; itemKey: string }
     | { kind: "dokumente"; slugs: string[]; headingId: string; itemKey: string }
     | { kind: "gamification"; gamType: string; fields: Record<string, string>; itemKey: string }
-    | { kind: "faq"; pairs: FaqPair[]; itemKey: string };
+    | { kind: "faq"; pairs: FaqPair[]; headingId: string; itemKey: string };
 
   const units = useMemo<RenderUnit[]>(() => {
     const raw = parseContent(content);
@@ -281,12 +309,12 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
         // FAQ-Block (falls vorhanden) herauslösen → eigene <ArticleFaq>-Unit.
         // before bleibt im Fließtext (enthält u.a. die h2.faq-heading = TOC-Eintrag).
         const faq = extractFaqBlock(html);
-        const segments: { html: string; faq?: FaqPair[] }[] = faq
-          ? [{ html: faq.before }, { html: "", faq: faq.pairs }, { html: faq.after }]
+        const segments: { html: string; faq?: FaqPair[]; faqHeadingId?: string }[] = faq
+          ? [{ html: faq.before }, { html: "", faq: faq.pairs, faqHeadingId: faq.headingId }, { html: faq.after }]
           : [{ html }];
         segments.forEach((seg, sIdx) => {
           if (seg.faq) {
-            out.push({ kind: "faq", pairs: seg.faq, itemKey: `${i}-faq-${sIdx}` });
+            out.push({ kind: "faq", pairs: seg.faq, headingId: seg.faqHeadingId || "", itemKey: `${i}-faq-${sIdx}` });
             return;
           }
           if (!seg.html.trim()) return;
@@ -381,8 +409,10 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
             <RechnerEmbed
               slug={unit.slug}
               noVisual
-              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+              formHeader={<ToolLabel type="rechner" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`rechner:${unit.slug}`]} />}
             />
+            {/* Fester Abstand + Trennlinie nach dem Rechner (ein-/ausgeklappt gleich) */}
+            <hr className="article-tool-divider" />
           </div>
         </ArticleElementWrapper>
       );
@@ -394,31 +424,50 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
             <ChecklisteEmbed
               slug={unit.slug}
               noVisual
-              formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
+              initialData={toolData?.checklisten[unit.slug]}
+              formHeader={<ToolLabel type="checkliste" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`checkliste:${unit.slug}`]} />}
             />
+            <hr className="article-tool-divider" />
           </div>
         </ArticleElementWrapper>
       );
     }
     if (unit.kind === "tool" && unit.toolType === "vergleich") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
-          <div className="article-finanztool article-finanztool--wide">
-            <VergleichEmbed
-              slug={unit.slug}
-              formHeader={<ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt />}
-            />
-          </div>
-        </ArticleElementWrapper>
+        <Fragment key={unit.itemKey}>
+          {/* Überschrift + Beschreibung auf schmaler Body-Breite (Ads laufen weiter) */}
+          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+            <ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`vergleich:${unit.slug}`]} />
+          </ArticleElementWrapper>
+          {/* Widget breit, OHNE äußere Box (nur Streifen-Ladebox + Vergleich) */}
+          <ArticleElementWrapper variant="hero" collapsed={collapsed}>
+            <div className="article-finanztool article-finanztool--wide">
+              <VergleichEmbed slug={unit.slug} />
+            </div>
+          </ArticleElementWrapper>
+          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+            <hr className="article-tool-divider" />
+          </ArticleElementWrapper>
+        </Fragment>
       );
     }
     if (unit.kind === "dokumente") {
       return (
-        <ArticleElementWrapper key={unit.itemKey} variant="hero" collapsed={collapsed}>
-          <div className="article-finanztool article-finanztool--wide">
-            <DokumenteEmbed slugs={unit.slugs} headingId={unit.headingId} />
-          </div>
-        </ArticleElementWrapper>
+        <Fragment key={unit.itemKey}>
+          <ArticleElementWrapper variant="hero" collapsed={collapsed}>
+            <div className="article-finanztool article-finanztool--wide">
+              {/* Spike-Label-Kopf + Linie auf Box-Breite */}
+              <DokumenteHead headingId={unit.headingId} />
+              {/* Downloads in Box */}
+              <div className="article-widget-box">
+                <DokumenteEmbed slugs={unit.slugs} initialDokumente={toolData?.dokumente[unit.slugs.join(",")]} />
+              </div>
+            </div>
+          </ArticleElementWrapper>
+          <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+            <hr className="article-tool-divider" />
+          </ArticleElementWrapper>
+        </Fragment>
       );
     }
     if (unit.kind === "gamification") {
@@ -431,7 +480,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd }: Props) {
     if (unit.kind === "faq") {
       return (
         <ArticleElementWrapper key={unit.itemKey} variant="centered" collapsed={collapsed}>
-          <ArticleFaq pairs={unit.pairs} />
+          <ArticleFaq pairs={unit.pairs} headingId={unit.headingId} />
         </ArticleElementWrapper>
       );
     }

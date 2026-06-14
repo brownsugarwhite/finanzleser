@@ -40,7 +40,9 @@ export default function MehrwertsteuerRechner() {
           value={params.betrag}
           onChange={(v) => setParams((p) => ({ ...p, betrag: v }))}
           einheit="€"
-          step={1}
+          step={10}
+          min={0}
+          max={10000}
         />
 
         <RechnerSelect

@@ -1181,6 +1181,118 @@ h1.category-title {
   margin-bottom: 0;
 }
 
+/* Lazy-Ladebox: feste 180px, animiert auf feste 600px (Inhalt scrollt innen) */
+.vergleich-stage {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+/* Inhalt füllt die Stage (600px), höherer Inhalt scrollt innerhalb. Startet versteckt. */
+.vergleich-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  scrollbar-width: none; /* native aus → eigene Overlay-Scrollbar */
+}
+.vergleich-content::-webkit-scrollbar { display: none; }
+
+/* Eigene Overlay-Scrollbar: dotted line (wie Sidebar-TOC) + feste 8x36 Pill. */
+.vergleich-scrollbar {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: 4px;
+  width: 8px;
+  z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.75'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 3px 9px;
+}
+.vergleich-scrollbar-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 36px;
+  background: var(--color-text-medium);
+  border-radius: 4px;
+  cursor: grab;
+  touch-action: none;
+}
+.vergleich-scrollbar:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23D3005E' opacity='0.95'/%3E%3C/svg%3E");
+}
+.vergleich-scrollbar:hover .vergleich-scrollbar-thumb,
+.vergleich-scrollbar-thumb:active {
+  background: var(--color-brand-secondary);
+  cursor: grabbing;
+}
+/* 70px-Gradient am unteren Rand der Box → Vergleich „fadet von unten ein". */
+.vergleich-stage::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background: linear-gradient(to top, var(--color-bg-page) 0%, rgba(250, 249, 246, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Diagonale, breite Lauf-Streifen + kontrastdynamischer Text — Overlay über dem Inhalt */
+.vergleich-loading {
+  --vgl-bg: var(--color-bg-page);
+  --vgl-stripe: rgba(0, 0, 0, 0.08); /* schwarz, 8% Alpha */
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--vgl-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vergleich-loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, var(--vgl-stripe) 0 44px, transparent 44px 88px);
+  background-size: 124.45px 124.45px; /* 88 * √2 → nahtloser Loop */
+  animation: vgl-stripes 1.6s linear infinite;
+}
+.vergleich-loading-text {
+  /* Füllt die ganze Box → Gradient-Ursprung deckungsgleich mit ::before (kein Versatz). */
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: 0.5px;
+  /* Kontrast: über Streifen = bg-Farbe, über Lücke = Streifenfarbe (invertiertes, synchrones Muster) */
+  color: transparent;
+  background-image: repeating-linear-gradient(45deg, var(--vgl-bg) 0 44px, var(--vgl-stripe) 44px 88px);
+  background-size: 124.45px 124.45px;
+  background-position: 0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: vgl-stripes 1.6s linear infinite;
+}
+@keyframes vgl-stripes {
+  to { background-position: 124.45px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vergleich-loading::before, .vergleich-loading-text { animation: none; }
+}
+
 .vergleich-iframe-container {
   width: 100%;
   border-radius: 0px;
@@ -1494,9 +1606,9 @@ a.megamenu-link:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 60px 40px;
+  padding: 24px 20px;
   min-height: 300px;
 }
 
@@ -2155,6 +2267,140 @@ h2.faq-heading {
   margin-bottom: 1.5rem;
 }
 
+/* Dekorierte FAQ-Überschrift (ArticleFaq) — zentriert mit „?"-Füllung */
+.faq2-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 3rem 0 calc(1.5rem + 26px) 0;
+}
+.faq2-heading-text {
+  flex: 0 0 auto;
+  margin: 0;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  text-align: center;
+}
+.faq2-heading-q {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+  user-select: none;
+  transform: translateY(5px); /* nur die „?" etwas tiefer als der Mitteltext */
+}
+.faq2-heading-q--l { text-align: right; }
+.faq2-heading-q--r { text-align: left; }
+
+/* Site-Loader: Sprite-Sheet (16 Frames) als CSS-steps-Loop. */
+.site-loader {
+  display: inline-block;
+  background-image: url('/assets/loader/loader-sprite.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  will-change: background-position;
+  animation: site-loader-play 0.53s steps(16) infinite; /* ~30fps → klein, schnell, flüssig */
+}
+@keyframes site-loader-play {
+  from { background-position: 0 0; }
+  to { background-position: calc(-1 * var(--sprite-w)) 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-loader { animation-duration: 2.2s; }
+}
+
+/* Flash-Schutz vor GSAP-Init: NUR opacity/visibility verstecken (KEIN transform —
+   sonst Konflikt mit GSAPs xPercent/clearProps). Nach Mount steuert GSAP (autoAlpha). */
+.article-sidebar:not(.toc-init) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Box für breite Tools (Vergleich-Widget, Dokumente-Downloads) */
+.article-widget-box {
+  border-radius: 0;
+  outline: 1px solid var(--color-text-primary);
+  padding: 10px;
+}
+
+/* Trennlinie nach dem Rechner: 80px – Linie – 80px (identisch mit/ohne Ergebnis) */
+.article-tool-divider {
+  border: 0;
+  border-top: 1px solid var(--color-text-primary);
+  margin: 80px 0;
+}
+
+/* Dokumente-Kopf (Spike-Label + Untertitel + Linie über Box-Breite) */
+.dok-head {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 50px;
+  padding-bottom: 0;
+}
+/* durchgehende Linie über die ganze Box-Breite, am unteren Viertel des Labels */
+.dok-head-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  height: 1px;
+  background: var(--color-text-primary);
+  z-index: 0;
+}
+/* Badge-Wrapper mit 6px Page-BG-Gap links+rechts (schneidet die Linie) + Indent für linke Linie */
+.dok-head-h {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0 40px;
+  line-height: 0;
+  background: var(--color-bg-page);
+  padding: 0 6px;
+}
+.dok-head-label {
+  position: relative;
+  display: inline-block;
+  background: var(--color-text-primary);
+  color: var(--color-bg-page);
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 12px 14px;
+}
+/* Spikes komplett sichtbar (ganzes SVG, nicht geclippt) */
+.dok-head-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 12px;
+  background: var(--color-text-primary);
+  -webkit-mask: url(/assets/dokumente_spikes.svg) no-repeat bottom / 100% 100%;
+  mask: url(/assets/dokumente_spikes.svg) no-repeat bottom / 100% 100%;
+}
+/* Untertitel: liegt über der Linie (Linie läuft darunter durch), größer + kräftiger */
+.dok-head-subtitle {
+  position: relative;
+  z-index: 1;
+  margin-left: 12px;
+  padding-bottom: 4px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 22px;
+  font-weight: 650;
+  color: var(--color-text-primary);
+}
+
 /* ─────────────────────────────────────────────
    FAQ v2 (components/sections/ArticleFaq.tsx)
    Feine Linien · Dotted-Trenner · Sparks — keine Glass-Box.
@@ -2457,6 +2703,23 @@ h2.faq-heading {
   }
 }
 
+/* Platzhalter-Badge (36×36, oben links) in JEDER Werbefläche — Marker bis echte Ads kommen. */
+[data-ad-format] {
+  position: relative;
+}
+[data-ad-format]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  background: url("/assets/icons/AD-banner.svg") no-repeat top left;
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .article-ad-rail {
   position: absolute;
   top: 18px; /* bündig mit dem Leaderboard (margin-top 18px) */
@@ -2477,7 +2740,7 @@ h2.faq-heading {
 .article-ad-rail-box {
   width: var(--ad-rail-w);
   height: 600px;
-  background: #d1d5db;
+  background: rgba(0, 0, 0, 0.10);
 }
 /* <1440px: kein Platz neben TOC + 750px-Content → Rails aus. */
 @media (max-width: 1440px) {
@@ -2492,7 +2755,7 @@ h2.faq-heading {
   float: right;
   width: 300px;
   height: 250px;
-  background: #d1d5db;
+  background: rgba(0, 0, 0, 0.10);
   margin: 6px 0 16px 24px;
   clear: right;
 }

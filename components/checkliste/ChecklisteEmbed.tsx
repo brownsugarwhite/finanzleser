@@ -4,15 +4,19 @@ import { useState, useCallback } from "react";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import ChecklisteInline from "./ChecklisteInline";
 import { ChecklisteLayoutContext } from "./ChecklisteLayoutContext";
+import type { ChecklisteData } from "./types";
+import type { CheckboxPosition } from "@/lib/checklisteParser";
 
 interface ChecklisteEmbedProps {
   slug: string;
   formHeader?: React.ReactNode;
   /** Im Artikel: ohne Visual-Spalte, Liste volle Breite (Body-Breite). */
   noVisual?: boolean;
+  /** Serverseitig vorgeladen (ISR) → kein Client-Fetch. */
+  initialData?: { data: ChecklisteData; checkboxPositions: CheckboxPosition[]; pdfUrl: string } | null;
 }
 
-export default function ChecklisteEmbed({ slug, formHeader, noVisual = false }: ChecklisteEmbedProps) {
+export default function ChecklisteEmbed({ slug, formHeader, noVisual = false, initialData }: ChecklisteEmbedProps) {
   const [actionsContainer, setActionsContainer] = useState<HTMLElement | null>(null);
 
   const containerRefCallback = useCallback((node: HTMLDivElement | null) => {
@@ -24,7 +28,7 @@ export default function ChecklisteEmbed({ slug, formHeader, noVisual = false }: 
       <div className={`checkliste-layout${noVisual ? " checkliste-layout--no-visual" : ""}`}>
         <div className="checkliste-form-col">
           {formHeader && <div className="checkliste-form-header">{formHeader}</div>}
-          <ChecklisteInline slug={slug} />
+          <ChecklisteInline slug={slug} initialData={initialData} />
           {/* Ohne Visual: Aktions-Portal (PDF-Download) inline unter der Liste. */}
           {noVisual && (
             <div

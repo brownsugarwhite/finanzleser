@@ -110,10 +110,15 @@ export default function ArticleTableOfContents({ content, initialItems = [] }: A
       if (heading.hasAttribute("data-toc-exclude")) return;
       // Tool-H2 erkennen (hat Klasse article-tool-label)
       const isTool = heading.classList.contains("article-tool-label");
+      // Dokumente-Kopf nutzt eigenes Markup (.dok-head-h)
+      const isDok = heading.classList.contains("dok-head-h");
       let toolType: string | undefined;
       let text: string;
 
-      if (isTool) {
+      if (isDok) {
+        toolType = "dokumente";
+        text = "Dokumente";
+      } else if (isTool) {
         // Badge-Element enthält den Tool-Typ-Text ("Rechner", "Checkliste", etc.)
         const badge = heading.querySelector(".article-tool-badge");
         const titleEl = heading.querySelector(".article-tool-title");
@@ -155,7 +160,7 @@ export default function ArticleTableOfContents({ content, initialItems = [] }: A
   }
 
   return (
-    <div className="mb-12">
+    <div className="mb-12" id="article-inline-toc">
       <p style={{ fontSize: "27px", fontWeight: 600, fontFamily: "var(--font-heading, 'Merriweather', serif)", marginBottom: "23px", color: "var(--color-text-primary)", margin: "0 0 36px 0" }}>
         Inhaltsverzeichnis
       </p>

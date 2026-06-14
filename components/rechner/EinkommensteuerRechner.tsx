@@ -12,6 +12,8 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -58,6 +60,15 @@ export default function EinkommensteuerRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Einkommensteuer-Rechner 2026</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Berufseinsteiger", values: { jahresBrutto: 35000 } },
+          { label: "Durchschnitt", values: { jahresBrutto: 50000 } },
+          { label: "Gutverdiener", values: { jahresBrutto: 90000 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Jahresbruttoeinkommen"
@@ -66,6 +77,8 @@ export default function EinkommensteuerRechner() {
           onChange={(v) => set("jahresBrutto", v)}
           einheit="€"
           step={1000}
+          min={0}
+          max={300000}
         />
 
         <RechnerSelect
@@ -110,6 +123,8 @@ export default function EinkommensteuerRechner() {
               onChange={(v) => set("werbungskosten", v)}
               einheit="€"
               step={100}
+              min={0}
+              max={20000}
               tooltip={`Pauschbetrag: ${euro(rates.lohnsteuer.arbeitnehmer_pauschbetrag)}`}
             />
             <RechnerInput
@@ -119,6 +134,8 @@ export default function EinkommensteuerRechner() {
               onChange={(v) => set("sonderausgaben", v)}
               einheit="€"
               step={100}
+              min={0}
+              max={20000}
             />
             <RechnerInput
               label="Außergewöhnliche Belastungen"
@@ -127,6 +144,8 @@ export default function EinkommensteuerRechner() {
               onChange={(v) => set("aussergewoehnlicheBelastungen", v)}
               einheit="€"
               step={100}
+              min={0}
+              max={20000}
             />
           </>
         )}
@@ -136,6 +155,14 @@ export default function EinkommensteuerRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={Math.round(result.effektiverSteuersatz)}
+              label="Effektiver Steuersatz"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Gesamtsteuer"

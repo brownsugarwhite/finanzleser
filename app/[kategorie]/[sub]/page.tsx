@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryBySlug, getNavItems } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
+import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { extractArticleHeader } from "@/lib/articleHeader";
@@ -97,8 +98,9 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   // 2. Sonst: prüfen ob es ein Post-Slug ist
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
+    const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
     return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} author={redakteurAuthor(post.slug || params.sub, post.date)} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} toolData={toolData} author={redakteurAuthor(post.slug || params.sub, post.date)} />
     );
   }
 

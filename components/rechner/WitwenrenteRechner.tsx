@@ -42,6 +42,7 @@ export default function WitwenrenteRechner() {
           onChange={(val) => setParams((p) => ({ ...p, entgeltpunkteVerstorbener: val }))}
           einheit="EP"
           min={0}
+          max={100}
           step={0.5}
         />
 
@@ -52,6 +53,7 @@ export default function WitwenrenteRechner() {
           onChange={(val) => setParams((p) => ({ ...p, eigeneEntgeltpunkte: val }))}
           einheit="EP"
           min={0}
+          max={100}
           step={0.5}
         />
 
@@ -69,6 +71,7 @@ export default function WitwenrenteRechner() {
           onChange={(val) => setParams((p) => ({ ...p, eigenesEinkommen: val }))}
           einheit="€/Monat"
           min={0}
+          max={8000}
           step={100}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />

@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useState, useCallback } from "react";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import VerticalSpacer from "@/components/ui/VerticalSpacer";
+import InfoHint from "@/components/ui/InfoHint";
+import { RECHNER_DISCLAIMER } from "@/lib/rechnerDisclaimer";
 import { RechnerLayoutContext } from "./RechnerLayoutContext";
 
 // Old 17 calculators
@@ -214,6 +216,10 @@ export default function RechnerEmbed({ slug, formHeader, noVisual = false }: Rec
             {rechner}
           </div>
         </div>
+        {/* Im Artikel: generischer Hinweis nach dem Button, vor dem Ergebnis. */}
+        {noVisual && (
+          <InfoHint style={{ marginTop: 30 }}>Hinweis: {RECHNER_DISCLAIMER}</InfoHint>
+        )}
         <div className="rechner-results-portal" ref={containerRefCallback} />
       </div>
     </RechnerLayoutContext.Provider>

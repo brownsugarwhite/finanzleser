@@ -367,7 +367,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
 export async function getMegamenuPostsByCategory(
   categorySlug: string,
   limit = 3
-): Promise<Array<Post & { tools: ("rechner" | "checkliste" | "vergleich")[] }>> {
+): Promise<Array<Post & { tools: ("rechner" | "checkliste" | "vergleich" | "dokumente")[] }>> {
   const client = getClient();
   const query = gql`
     query GetMegamenuPosts($slug: [String!]!, $first: Int!) {
@@ -404,10 +404,11 @@ export async function getMegamenuPostsByCategory(
       }
       // tools VOR dem Strippen aus dem Content ableiten.
       const content = post.content || "";
-      const tools: ("rechner" | "checkliste" | "vergleich")[] = [];
+      const tools: ("rechner" | "checkliste" | "vergleich" | "dokumente")[] = [];
       if (/wp:finanzleser\/rechner|data-finanzleser-rechner/.test(content)) tools.push("rechner");
       if (/wp:finanzleser\/vergleich|data-finanzleser-vergleich/.test(content)) tools.push("vergleich");
       if (/wp:finanzleser\/checkliste|data-finanzleser-checkliste/.test(content)) tools.push("checkliste");
+      if (/wp:finanzleser\/dokumente|data-finanzleser-dokumente/.test(content)) tools.push("dokumente");
       // Konvention v2: Untertitel = 1. Content-<h2> (überschreibt stale ACF) + strippt content.
       applyContentHeaderTitle(decoded);
       return { ...decoded, tools };

@@ -15,7 +15,43 @@ export interface FaqPair {
  * Tab passende Stelle (oben/unten geklemmt). Mobile: Akkordeon (Single-Open).
  * Alle Antworten liegen immer im DOM (SEO).
  */
-export default function ArticleFaq({ pairs }: { pairs: FaqPair[] }) {
+// Dekorierte Überschrift: zentrierter Text, links/rechts „?"-Füllung (Merriweather bold).
+// Anzahl „?" wird gemessen → es werden nur GANZE „?" gerendert (kein Abschneiden).
+function FaqHeading({ headingId }: { headingId?: string }) {
+  const lRef = useRef<HTMLSpanElement>(null);
+  const rRef = useRef<HTMLSpanElement>(null);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const el = lRef.current || rRef.current;
+      if (!el) return;
+      const avail = el.clientWidth;
+      // Breite eines „?" einmalig messen.
+      const probe = document.createElement("span");
+      probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font-family:'Merriweather',Georgia,serif;font-weight:700;font-size:13px;letter-spacing:0;";
+      probe.textContent = "?".repeat(50);
+      document.body.appendChild(probe);
+      const w = probe.getBoundingClientRect().width / 50;
+      document.body.removeChild(probe);
+      if (w > 0) setCount(Math.max(0, Math.floor(avail / w)));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const q = "?".repeat(count);
+  return (
+    <div className="faq2-heading">
+      <span ref={lRef} className="faq2-heading-q faq2-heading-q--l" aria-hidden>{q}</span>
+      <h2 id={headingId || undefined} className="faq2-heading-text">Häufig gestellte Fragen</h2>
+      <span ref={rRef} className="faq2-heading-q faq2-heading-q--r" aria-hidden>{q}</span>
+    </div>
+  );
+}
+
+export default function ArticleFaq({ pairs, headingId }: { pairs: FaqPair[]; headingId?: string }) {
   const [mounted, setMounted] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -29,8 +65,12 @@ export default function ArticleFaq({ pairs }: { pairs: FaqPair[] }) {
   }, []);
 
   if (!pairs.length) return null;
-  if (mounted && isDesktop) return <FaqMasterDetail pairs={pairs} />;
-  return <FaqAccordion pairs={pairs} />;
+  return (
+    <>
+      <FaqHeading headingId={headingId} />
+      {mounted && isDesktop ? <FaqMasterDetail pairs={pairs} /> : <FaqAccordion pairs={pairs} />}
+    </>
+  );
 }
 
 function num(i: number) {

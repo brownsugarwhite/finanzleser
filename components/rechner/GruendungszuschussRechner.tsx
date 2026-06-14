@@ -38,6 +38,8 @@ export default function GruendungszuschussRechner() {
           onChange={(val) => setParams({ algMonatlich: val })}
           einheit="EUR"
           min={0}
+          max={3000}
+          step={50}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

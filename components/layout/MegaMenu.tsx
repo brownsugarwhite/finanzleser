@@ -13,9 +13,9 @@ function boldYears(text: string) {
 }
 import type { Post } from "@/lib/types";
 import type { MegamenuTool } from "@/lib/wordpress";
-import CircularLoader from "@/components/ui/CircularLoader";
+import SiteLoader from "@/components/ui/SiteLoader";
 
-export type ToolType = "rechner" | "checkliste" | "vergleich";
+export type ToolType = "rechner" | "checkliste" | "vergleich" | "dokumente";
 export type MegaMenuPost = Post & { tools?: ToolType[] };
 export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: MegamenuTool[] }>;
 
@@ -23,26 +23,31 @@ const TOOL_DOT_COLORS: Record<ToolType, string> = {
   rechner: "var(--color-tool-rechner)",
   vergleich: "var(--color-tool-vergleiche)",
   checkliste: "var(--color-tool-checklisten)",
+  dokumente: "var(--color-text-primary)",
 };
 
+// Feste Anzeige-Reihenfolge der Tool-Punkte.
+const TOOL_ORDER: ToolType[] = ["checkliste", "rechner", "vergleich", "dokumente"];
+
 // Finanztools-Spalte: Pfad-Segment, Label und Badge-Farbe je Tool-Typ.
-const TOOL_PATH: Record<ToolType, string> = { rechner: "rechner", vergleich: "vergleiche", checkliste: "checklisten" };
-const TOOL_LABEL: Record<ToolType, string> = { rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste" };
+const TOOL_PATH: Record<ToolType, string> = { rechner: "rechner", vergleich: "vergleiche", checkliste: "checklisten", dokumente: "dokumente" };
+const TOOL_LABEL: Record<ToolType, string> = { rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument" };
 
 function ToolDots({ tools }: { tools?: ToolType[] }) {
   if (!tools || tools.length === 0) return null;
+  const ordered = [...tools].sort((a, b) => TOOL_ORDER.indexOf(a) - TOOL_ORDER.indexOf(b));
   return (
     <span
       style={{
         display: "inline-flex",
         gap: 5,
-        marginLeft: 8,
+        marginLeft: 2,
         verticalAlign: "middle",
         whiteSpace: "nowrap",
       }}
       aria-hidden
     >
-      {tools.map((t) => (
+      {ordered.map((t) => (
         <span
           key={t}
           style={{
@@ -440,7 +445,7 @@ export default function MegaMenu({
             <div ref={postsBodyRef} style={{ minHeight: 140 }}>
             {loading ? (
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: 140 }}>
-                <CircularLoader />
+                <SiteLoader size={44} />
               </div>
             ) : posts.length > 0 ? (
               <nav style={{ display: "flex", flexDirection: "column", gap: 13, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>

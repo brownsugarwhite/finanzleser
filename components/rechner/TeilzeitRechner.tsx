@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -47,6 +48,7 @@ export default function TeilzeitRechner() {
           einheit="€/Std."
           step={0.50}
           min={0}
+          max={100}
         />
 
         <RechnerInput
@@ -76,6 +78,14 @@ export default function TeilzeitRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={Math.min(100, Math.max(0, Math.round(result.teilzeitProzent)))}
+              label="Teilzeitquote"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Brutto monatlich"

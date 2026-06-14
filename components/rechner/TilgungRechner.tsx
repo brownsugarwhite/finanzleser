@@ -45,6 +45,7 @@ export default function TilgungRechner() {
           einheit="€"
           step={5000}
           min={0}
+          max={1000000}
         />
         <RechnerInput
           label="Sollzinssatz p.a."
@@ -54,6 +55,8 @@ export default function TilgungRechner() {
           einheit="%"
           step={0.05}
           min={0}
+          max={10}
+          slider
         />
         <RechnerInput
           label="Anfängliche Tilgung p.a."
@@ -63,6 +66,8 @@ export default function TilgungRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={10}
+          slider
         />
         <RechnerInput
           label="Sondertilgung pro Jahr"
@@ -72,6 +77,7 @@ export default function TilgungRechner() {
           einheit="€"
           step={500}
           min={0}
+          max={50000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

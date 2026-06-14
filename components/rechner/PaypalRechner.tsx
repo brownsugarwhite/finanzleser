@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -32,6 +33,15 @@ export default function PaypalRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">PayPal-Gebührenrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Kleinbetrag", values: { betrag: 25 } },
+          { label: "Mittlerer Betrag", values: { betrag: 100 } },
+          { label: "Großbetrag", values: { betrag: 1000 } },
+        ]}
+        onApply={(v) => setParams((prev) => ({ ...prev, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Betrag"
@@ -41,6 +51,7 @@ export default function PaypalRechner() {
           einheit="€"
           step={10}
           min={0}
+          max={5000}
         />
         <RechnerSelect
           label="Transaktionstyp"

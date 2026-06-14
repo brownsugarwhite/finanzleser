@@ -40,6 +40,7 @@ export default function MindestlohnRechner() {
           einheit="€/Std."
           step={0.10}
           min={0}
+          max={50}
         />
 
         <RechnerInput

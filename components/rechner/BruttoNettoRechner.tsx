@@ -13,6 +13,9 @@ import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerConditionalGroup from "./ui/RechnerConditionalGroup";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
+import RechnerGauge from "./ui/RechnerGauge";
+import RechnerBenchmark from "./ui/RechnerBenchmark";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -70,6 +73,15 @@ export default function BruttoNettoRechner() {
   return (
     <div className="rechner-container">
       <h3 className="rechner-title">Brutto-Netto-Rechner 2026</h3>
+
+      <RechnerPresets
+        presets={[
+          { label: "Single", values: { steuerklasse: 1, kinderAnzahl: 0 } },
+          { label: "Familie", values: { steuerklasse: 3, kinderAnzahl: 2 } },
+          { label: "Alleinerziehend", values: { steuerklasse: 2, kinderAnzahl: 1 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
 
       <div className="rechner-inputs">
         <RechnerInput
@@ -136,6 +148,7 @@ export default function BruttoNettoRechner() {
           step={0.1}
           min={0}
           max={10}
+          slider
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 
@@ -143,6 +156,22 @@ export default function BruttoNettoRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={Math.round((result.netto / result.monatsBrutto) * 100)}
+              label="Nettoquote"
+              animateKey={rechnerState.scrollKey}
+            />
+            <RechnerBenchmark
+              value={Math.round(result.netto)}
+              average={2200}
+              unit=" €"
+              valueLabel="Dein Netto"
+              averageLabel="Ø Deutschland"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Nettolohn" value={euro(result.netto)} highlight />
             <RechnerResultBox label="Netto (jährlich)" value={euro(result.nettoJahr)} />

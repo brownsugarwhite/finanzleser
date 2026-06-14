@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerMultiColumnTable from "./ui/RechnerMultiColumnTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -34,6 +35,15 @@ export default function ZinseszinsRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Zinseszinsrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "ETF-Sparplan", values: { startkapital: 1000, monatlicheSparrate: 200, zinssatzPa: 7, laufzeitJahre: 20 } },
+          { label: "Tagesgeld", values: { startkapital: 10000, monatlicheSparrate: 0, zinssatzPa: 2.5, laufzeitJahre: 5 } },
+          { label: "Altersvorsorge", values: { startkapital: 5000, monatlicheSparrate: 300, zinssatzPa: 6, laufzeitJahre: 30 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Startkapital"
@@ -43,6 +53,7 @@ export default function ZinseszinsRechner() {
           einheit="€"
           step={1000}
           min={0}
+          max={500000}
         />
         <RechnerInput
           label="Monatliche Sparrate"
@@ -52,6 +63,7 @@ export default function ZinseszinsRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={5000}
         />
         <RechnerInput
           label="Zinssatz p.a."
@@ -61,6 +73,8 @@ export default function ZinseszinsRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={15}
+          slider
         />
         <RechnerInput
           label="Laufzeit"
@@ -70,6 +84,7 @@ export default function ZinseszinsRechner() {
           einheit="Jahre"
           step={1}
           min={1}
+          max={50}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

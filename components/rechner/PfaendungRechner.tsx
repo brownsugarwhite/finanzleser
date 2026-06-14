@@ -41,6 +41,7 @@ export default function PfaendungRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={10000}
         />
 
         <RechnerSelect
