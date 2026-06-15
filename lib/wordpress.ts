@@ -519,9 +519,75 @@ export async function getPostContentBySlug(slug: string): Promise<string | null>
   }
 }
 
-// React.cache → dedupliziert den Doppel-Aufruf aus generateMetadata + Page-Component
-// innerhalb desselben Requests (vorher 2× = 4 WP-Roundtrips/Artikel, jetzt 1×).
+// ── Build-Bulk ──
+// Beim SSG-Build alle Standard-Posts MIT content in ~8 gebündelten Abfragen holen statt
+// 200+ Einzel-getPostBySlug → IONOS-Shared-Hosting wird nicht überlastet (verhindert die
+// reihenweise gebackenen notFound()-404). Modul-Memo = pro Build-Worker-Prozess EINMAL.
+// Zur LAUFZEIT (on-demand/ISR) NICHT genutzt → dort frische Einzelabfrage.
+let _postsMapPromise: Promise<Map<string, Post>> | null = null;
+function getAllPostsMap(): Promise<Map<string, Post>> {
+  if (!_postsMapPromise) _postsMapPromise = buildPostsMap();
+  return _postsMapPromise;
+}
+async function buildPostsMap(): Promise<Map<string, Post>> {
+  const client = getClient();
+  const query = gql`
+    query BulkPosts($after: String) {
+      posts(first: 25, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id title slug date content excerpt
+          featuredImage { node { sourceUrl altText } }
+          author { node { id name firstName lastName description avatar { url } } }
+          categories { nodes { name slug } }
+          beitrag { untertitel featuredTool }
+        }
+      }
+    }
+  `;
+  type BulkPostsResponse = {
+    posts: { nodes: (Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+  };
+  const map = new Map<string, Post>();
+  let after: string | null = null;
+  let hasNext = true;
+  let guard = 0;
+  while (hasNext && guard++ < 60) {
+    try {
+      const data: BulkPostsResponse = await client.request<BulkPostsResponse>(query, { after });
+      for (const node of data.posts.nodes) {
+        const decoded = decodePostContent(node) as Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } };
+        if (node.beitrag) {
+          decoded.beitragFelder = { beitragUntertitel: node.beitrag.untertitel, beitragFeaturedTool: node.beitrag.featuredTool };
+        }
+        if (decoded.slug) map.set(decoded.slug, decoded);
+      }
+      hasNext = data.posts.pageInfo.hasNextPage;
+      after = data.posts.pageInfo.endCursor;
+    } catch (e) {
+      // Teil-Map: fehlende Posts fallen unten auf die Einzelabfrage zurück (kein harter Abbruch).
+      console.error("[buildPostsMap] chunk failed (partial map):", e);
+      break;
+    }
+  }
+  console.log(`[buildPostsMap] ${map.size} Posts gebündelt geladen`);
+  return map;
+}
+
+const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
+
+// React.cache → dedupliziert den Doppel-Aufruf aus generateMetadata + Page-Component.
+// Beim Build aus der Bulk-Map (1 Fetch/Worker), zur Laufzeit per Einzelabfrage (frisch).
 export const getPostBySlug = cache(async (slug: string): Promise<Post | null> => {
+  if (IS_BUILD) {
+    const hit = (await getAllPostsMap()).get(slug);
+    if (hit) return hit;
+    // Nicht in der Bulk-Map (z.B. CPT/Legacy-Slug) → Einzelabfrage.
+  }
+  return getPostBySlugSingle(slug);
+});
+
+async function getPostBySlugSingle(slug: string): Promise<Post | null> {
   const client = getClient();
 
   // Query all post types (standard posts + custom post types like dokumente, nachrichten, etc.)
@@ -603,7 +669,7 @@ export const getPostBySlug = cache(async (slug: string): Promise<Post | null> =>
     console.error(`Error fetching post with slug "${slug}":`, error);
     return null;
   }
-});
+}
 
 // ─────────────────────────────────────────────
 // Hauptkategorie mit Child-Kategorien

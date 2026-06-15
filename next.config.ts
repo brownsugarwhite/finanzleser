@@ -8,13 +8,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   serverExternalPackages: ["pdfjs-dist"],
   experimental: {
-    // IONOS-Shared-Hosting bricht unter paralleler Build-Last ein (500/503/ECONNRESET).
-    // Niedrige Concurrency entlastet die WP-DB → vollständigere SSG (Ursachen-Fix gegen
-    // on-demand-Cold-Renders). Trifft v.a. den kalt-gecachten Build; mit persistiertem
-    // Next-Fetch-Cache sind Folge-Builds schnell. Bei zu langen Builds wieder auf 3 erhöhen.
-    staticGenerationMaxConcurrency: 2,
-    // Schlägt eine Seite trotz getClient-Retry fehl, rendert Next sie erneut, statt
-    // sie als 404/dynamisch zu „backen".
+    // IONOS-Shared-Hosting ist unter Build-Last fragil. Da Artikel/Hauptkategorien jetzt
+    // on-demand sind (kein Build-Prerender), ist die Build-Last wieder auf dem zuvor
+    // funktionierenden Niveau (~Tool-Seiten). Retry fängt vereinzelte 5xx ab.
     staticGenerationRetryCount: 3,
   },
   // pdfjs lädt seinen (Fake-)Worker per dynamischem Import nach — der wird vom

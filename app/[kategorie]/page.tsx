@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug, getAllAnbieter } from "@/lib/wordpress";
-import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
@@ -25,18 +24,10 @@ function redakteurAuthor(slug: string, date?: string) {
 
 export const revalidate = 3600;
 
-// Hauptkategorien + Anbieter-Seiten (Legacy-Single-Segment-Pfad) beim Build vorrendern.
-// Legacy-Beitrags-Slugs unter dieser Route bleiben dynamisch (dynamicParams = default true).
-export async function generateStaticParams(): Promise<Array<{ kategorie: string }>> {
-  const params: Array<{ kategorie: string }> = MAIN_CATEGORY_SLUGS.map((slug) => ({ kategorie: slug }));
-  try {
-    const anbieter = await getAllAnbieter();
-    for (const a of anbieter) params.push({ kategorie: a.slug });
-  } catch (e) {
-    console.error("[main-category generateStaticParams] anbieter failed:", e);
-  }
-  return params;
-}
+// KEIN generateStaticParams: Diese Route ist ein Catch-all (Hauptkategorie / Anbieter /
+// Legacy-Post) und aggregiert Daten (z.B. Rechner-Zähler). Build-Prerender gegen das
+// flakige IONOS backte fehlerhaft „0 Rechner"/leere Listen statisch ein. On-Demand-ISR
+// holt die Daten beim Aufruf frisch (retry-fähig, self-healing) + cacht via revalidate.
 
 export async function generateMetadata(
   props: { params: Promise<{ kategorie: string }> }

@@ -15,10 +15,10 @@ export const revalidate = 3600;
 
 type RouteParams = { kategorie: string; sub: string; slug: string };
 
-// Alle Beiträge beim Build statisch vorrendern → Navigation startet den Morph sofort
-// (kein blockierender getPostBySlug-Fetch pro Klick). dynamicParams bleibt default true,
-// daher rendern Legacy-/unbekannte URLs weiterhin on-demand. Redakteur-Änderungen bleiben
-// via save_post → /api/revalidate (ISR) sofort sichtbar.
+// Full-SSG aller Beiträge — der frühere 404-Backe-Effekt kam vom IONOS-Build-Overload
+// (200+ Einzel-getPostBySlug). Jetzt lädt getPostBySlug beim Build aus einer gebündelten
+// Map (~8 Abfragen/Worker) → IONOS hält durch → vollständiges Prerender ohne 404.
+// dynamicParams bleibt default true (Legacy on-demand); Freshness via save_post-Revalidate.
 export async function generateStaticParams(): Promise<RouteParams[]> {
   try {
     const posts = await getAllPosts();
