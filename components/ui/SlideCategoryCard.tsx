@@ -105,10 +105,9 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
         userSelect: 'none',
         WebkitUserSelect: 'none',
         paddingBottom: 5,
-        // Hover-Scale nur im Card-Mode (nicht im Button-Mode, wo die Card
-        // zusammenklappt).
-        transform: cardHovered && !active && hoverCapable ? 'scale(1.1)' : 'scale(1)',
-        transition: backRestore ? 'transform 0.3s ease' : `width ${T2}s ${phase2Ease}, transform 0.3s ease`,
+        // Kein Hover-Scale mehr (nur noch Farbwechsel auf brand-secondary).
+        transform: 'none',
+        transition: backRestore ? 'none' : `width ${T2}s ${phase2Ease}`,
       }}
     >
       {/* Visual — Wrapper kollabiert Höhe 260→0, Inner scaled uniform + blurred */}
@@ -187,7 +186,7 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
             fontWeight: phase2Active ? 600 : 700,
             fontSize: phase2Active ? '16px' : '20px',
             lineHeight: 1.3,
-            color: (active && cardHovered) ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
+            color: (cardHovered && hoverCapable) ? 'var(--color-brand-secondary)' : 'var(--color-text-primary)',
             margin: 0,
             padding: 0,
             whiteSpace: 'nowrap',
@@ -222,11 +221,12 @@ function SlideCategoryCardImpl({ category, parentSlug, active = false, titleWidt
             width: '32px',
             height: '32px',
             borderRadius: '14px',
-            backgroundColor: 'var(--color-brand)',
+            backgroundColor: (cardHovered && hoverCapable) ? 'var(--color-brand-secondary)' : 'var(--color-brand)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
+            transition: 'background-color 0.15s ease',
           }}>
             <svg width="9" height="13" viewBox="0 0 11 15" fill="none" style={{ transform: 'rotate(-90deg)' }}>
               <path

@@ -7,6 +7,14 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["pdfjs-dist"],
+  experimental: {
+    // IONOS-Shared-Hosting bricht unter paralleler Build-Last ein (500/503/ECONNRESET).
+    // Weniger gleichzeitige Static-Generations entlasten die WP-DB → vollständigere SSG.
+    staticGenerationMaxConcurrency: 4,
+    // Schlägt eine Seite trotz getClient-Retry fehl, rendert Next sie erneut, statt
+    // sie als 404/dynamisch zu „backen".
+    staticGenerationRetryCount: 3,
+  },
   // pdfjs lädt seinen (Fake-)Worker per dynamischem Import nach — der wird vom
   // File-Tracing nicht erkannt und fehlt sonst in der Netlify-Function. Für die
   // Routen, die zur Laufzeit PDFs parsen, explizit mitkopieren.

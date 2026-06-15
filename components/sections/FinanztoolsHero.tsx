@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState, type CSSProperties } from "react";
 import gsap from "@/lib/gsapConfig";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,8 +12,21 @@ import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
 import type { LatestTool } from "@/lib/wordpress";
 import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
-import { captureTextItem, hideSourceEls, getElementScale } from "@/lib/morphCapture";
+import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from "@/lib/morphCapture";
 import { getFinanztoolsActiveCard, setFinanztoolsActiveCard, isBackNavigation } from "@/lib/landingState";
+import ToolDots from "@/components/ui/ToolDots";
+
+// Typ-Visuals für „Neuste Finanztools" (CPTs haben oft kein eigenes Titelbild).
+const TOOL_VISUAL: Record<LatestTool["type"], string> = {
+  rechner: "/assets/finanztoolSlider/rechner_visual.png",
+  vergleich: "/assets/finanztoolSlider/vergleich_visual.png",
+  checkliste: "/assets/finanztoolSlider/checklisten_visual.png",
+};
+const TOOL_CTA: Record<LatestTool["type"], string> = {
+  rechner: "Zum Rechner",
+  vergleich: "Zum Vergleich",
+  checkliste: "Zur Checkliste",
+};
 
 const TOOLS = [
   {
@@ -518,10 +531,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
         {/* Right: preview_container */}
         {/* Vertical dot spacer */}
         <div className="ftools-right-spacer" style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
+          {/* Kleiner Pfeil in Dot-Farbe oben über der gepunkteten Linie */}
+          <div style={{ marginTop: 72, display: "flex", justifyContent: "center" }}>
+            <svg width="9" height="6" viewBox="0 0 12 8" fill="none" aria-hidden style={{ transform: "rotate(180deg)" }}>
+              <polyline points="1 7 6 1.5 11 7" stroke="#686c6a" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
           {/* Dots */}
           <div style={{
             flex: 1,
-            marginTop: 72,
+            marginTop: 4,
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat-y",
             backgroundPosition: "center top",
@@ -545,8 +564,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
         </div>
 
         {/* Right: preview_container */}
-        <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", paddingTop: 72, paddingLeft: 23, display: "block" }}>
-          <p style={{
+        <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
+          {/* Fixbreiter, rechtsbündiger Inner-Container → Text bleibt fix beim Expanden */}
+          <div className="ftools-preview-inner" style={{ paddingTop: 72, paddingLeft: 23 }}>
+          <p className="ftools-preview-heading" style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",
             fontWeight: 700,
@@ -557,7 +578,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
             Neuste Beiträge
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
+          <div className="ftools-preview-list" style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
             {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 3).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
@@ -568,33 +589,47 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                   key={post.id}
                   className="latest-post-item"
                   data-morph-card={post.slug}
-                  style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
+                  style={{ display: "flex", alignItems: "center", cursor: "pointer", ["--i" as string]: i } as CSSProperties}
                   onMouseEnter={() => { try { router.prefetch(postLink); } catch { /* noop */ } }}
                   onClick={(e) => {
                     if ((e.target as HTMLElement).closest("a")) return; // „Ratgeber lesen" navigiert selbst
                     const item = e.currentTarget as HTMLElement;
-                    const scale = getElementScale(item); // Hover-Skalierung (1.1) der Reiter
+                    const scale = getElementScale(item);
+                    const thumbEl = item.querySelector<HTMLElement>(".latest-post-thumb");
                     const boldEl = item.querySelector<HTMLElement>(".latest-post-title");
                     const italicEl = item.querySelector<HTMLElement>(".latest-post-category");
                     const items: MorphItemSource[] = [];
+                    // Vorschaubild → article-visual (nur wenn Thumbnail vorhanden/aufgeklappt).
+                    const visual = captureVisualItem(thumbEl, post.featuredImage?.node.sourceUrl);
+                    if (visual) items.push(visual);
                     // Untertitel (fett) → article-subtitle; post.title (Kategorie-Zeile) → article-title (pink).
                     const bold = captureTextItem(boldEl, "bold", scale);
                     if (bold) items.push(bold);
                     const italic = captureTextItem(italicEl, "italic", scale);
                     if (italic) items.push(italic);
-                    hideSourceEls(boldEl, italicEl);
+                    hideSourceEls(thumbEl, boldEl, italicEl);
                     startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
                   }}
                 >
+                  {post.featuredImage?.node.sourceUrl && (
+                    <div className="latest-post-thumb" data-morph-role="visual">
+                      <img src={post.featuredImage.node.sourceUrl} alt={post.featuredImage.node.altText || ""} loading="lazy" />
+                    </div>
+                  )}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p className="latest-post-category" data-morph-role="italic" style={{
-                      fontSize: 11,
+                      fontSize: 12,
                       fontFamily: "var(--font-body)",
                       marginBottom: 4,
                       lineHeight: 1.3,
                       color: "var(--color-text-secondary)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      flexWrap: "wrap",
                     }}>
-                      {post.title}
+                      <span>{post.title}</span>
+                      <ToolDots tools={post.tools} size={8} style={{ marginLeft: 0 }} />
                     </p>
                     {post.beitragFelder?.beitragUntertitel && (
                       <p className="latest-post-title" data-morph-role="bold" style={{
@@ -658,7 +693,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
           {/* Neuste Finanztools — auf Höhe von „Die Finanztools" (marginTop tunebar) */}
           {latestTools.length > 0 && (
             <div style={{ marginTop: 230 }}>
-              <p style={{
+              <p className="ftools-preview-heading" style={{
                 fontFamily: "'Merriweather', serif",
                 fontSize: "18px",
                 fontWeight: 700,
@@ -669,7 +704,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                 Neuste Finanztools
               </p>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 17 }}>
+              <div className="ftools-preview-list" style={{ display: "flex", flexDirection: "column", gap: 17 }}>
                 {latestTools.map((tool, i) => {
                   const color = tool.type === "rechner"
                     ? "var(--color-tool-rechner)"
@@ -679,67 +714,109 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                   const desc = tool.description.length > 100
                     ? tool.description.slice(0, 100).replace(/\s+\S*$/, "") + " …"
                     : tool.description;
-                  const isLast = i === latestTools.length - 1;
                   return (
-                    <Link
+                    <div
                       key={tool.href}
-                      href={tool.href}
-                      style={{
-                        display: "block",
-                        textDecoration: "none",
-                        paddingBottom: isLast ? 0 : 23,
-                        borderBottom: isLast ? "none" : "1px solid rgba(0, 0, 0, 0.07)",
+                      className="latest-post-item"
+                      style={{ display: "flex", alignItems: "center", cursor: "pointer", ["--i" as string]: i } as CSSProperties}
+                      onMouseEnter={() => { try { router.prefetch(tool.href); } catch { /* noop */ } }}
+                      onClick={(e) => {
+                        if ((e.target as HTMLElement).closest("a")) return;
+                        router.push(tool.href);
                       }}
                     >
-                      {/* Label-Badge — weiß auf Tool-Farbe */}
-                      <span style={{
-                        display: "inline-block",
-                        background: color,
-                        color: "#fff",
-                        fontFamily: "var(--font-body)",
-                        fontSize: 14,
-                        fontWeight: 600,
-                        lineHeight: 1,
-                        padding: "5px 11px",
-                        letterSpacing: "0.02em",
-                        marginBottom: 10,
-                      }}>
-                        {tool.label}
-                      </span>
-                      {/* Titel klein */}
-                      <p style={{
-                        fontSize: 13,
-                        fontFamily: "var(--font-body)",
-                        fontWeight: 500,
-                        margin: "0 0 4px 0",
-                        lineHeight: 1.3,
-                        color: "var(--color-text-secondary)",
-                      }} lang="de">
-                        {tool.title}
-                      </p>
-                      {/* Beschreibung groß */}
-                      {desc && (
+                      <div className="latest-post-thumb">
+                        <img src={TOOL_VISUAL[tool.type]} alt="" loading="lazy" />
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        {/* Label-Badge — weiß auf Tool-Farbe */}
+                        <span style={{
+                          display: "inline-block",
+                          background: color,
+                          color: "#fff",
+                          fontFamily: "var(--font-body)",
+                          fontSize: 14,
+                          fontWeight: 600,
+                          lineHeight: 1,
+                          padding: "5px 11px",
+                          letterSpacing: "0.02em",
+                          marginBottom: 10,
+                        }}>
+                          {tool.label}
+                        </span>
+                        {/* Titel klein */}
                         <p style={{
-                          fontSize: 16,
-                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                          fontWeight: 400,
-                          color: "var(--color-text-primary)",
-                          lineHeight: 1.4,
-                          margin: 0,
-                          hyphens: "auto",
-                          WebkitHyphens: "auto",
-                          wordBreak: "break-word",
+                          fontSize: 13,
+                          fontFamily: "var(--font-body)",
+                          fontWeight: 500,
+                          margin: "0 0 4px 0",
+                          lineHeight: 1.3,
+                          color: "var(--color-text-secondary)",
                         }} lang="de">
-                          {desc}
+                          {tool.title}
                         </p>
-                      )}
-                    </Link>
+                        {/* Beschreibung groß (Merriweather 650, analog Beiträge) */}
+                        {desc && (
+                          <p style={{
+                            fontSize: 16,
+                            fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                            fontWeight: 650,
+                            color: "var(--color-text-primary)",
+                            lineHeight: 1.4,
+                            margin: "0 0 8px 0",
+                            hyphens: "auto",
+                            WebkitHyphens: "auto",
+                            wordBreak: "break-word",
+                          }} lang="de">
+                            {desc}
+                          </p>
+                        )}
+                        {/* „Zum Rechner/Vergleich/Checkliste" — identisch zum Artikellink */}
+                        <Link
+                          href={tool.href}
+                          className="article-read-link"
+                          style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span style={{
+                            fontFamily: "var(--font-body)",
+                            fontSize: "13px",
+                            fontWeight: 500,
+                            whiteSpace: "nowrap",
+                          }}>
+                            {TOOL_CTA[tool.type]}
+                          </span>
+                          <span
+                            className="article-read-line"
+                            style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }}
+                          />
+                          <svg
+                            width="8"
+                            height="8"
+                            viewBox="0 0 17.45 15.77"
+                            fill="none"
+                            aria-hidden
+                            style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}
+                          >
+                            <polyline
+                              points="16.95 15.27 8.27 8.11 16.95 .5"
+                              stroke="currentColor"
+                              strokeWidth="1"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              fill="none"
+                              vectorEffect="non-scaling-stroke"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
                   );
                 })}
               </div>
             </div>
           )}
-
+          </div>
         </div>
       </div>
     </section>

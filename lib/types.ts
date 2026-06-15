@@ -52,6 +52,8 @@ export interface Post {
   author?: { node: Author };
   beitragFelder?: PostACF;
   seo?: SEO;
+  /** Aus dem post_content abgeleitete eingebettete Finanztools (für Tool-Dots/Labels). */
+  tools?: ("rechner" | "vergleich" | "checkliste")[];
 }
 
 // ─────────────────────────────────────────────

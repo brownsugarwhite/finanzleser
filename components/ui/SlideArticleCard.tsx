@@ -1,40 +1,17 @@
 'use client';
 
-import { memo, useRef, useState, useSyncExternalStore } from 'react';
+import { memo, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
 import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
 import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from '@/lib/morphCapture';
-
-/* ── Modul-globaler hover-capable Listener ──
-   Bei vielen Cards (50+ bei Sozialversicherungen) würde ein matchMedia-
-   Listener pro Card-Mount = 50 native Listener anlegen → spürbarer Stutter
-   beim Category-Switch. Statt dessen ein einziger Listener auf Modul-Ebene,
-   alle Cards subscriben via useSyncExternalStore. */
-let hoverMql: MediaQueryList | null = null;
-const hoverSubs = new Set<() => void>();
-function getHoverCapable() {
-  if (typeof window === 'undefined') return true;
-  if (!hoverMql) {
-    hoverMql = window.matchMedia('(hover: hover)');
-    hoverMql.addEventListener('change', () => hoverSubs.forEach((fn) => fn()));
-  }
-  return hoverMql.matches;
-}
-function subscribeHoverCapable(fn: () => void) {
-  hoverSubs.add(fn);
-  return () => { hoverSubs.delete(fn); };
-}
-const SSR_HOVER_CAPABLE = () => true;
-
-type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
+import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
 
 export interface SlideArticleCardProps {
   post: Post;
   index?: number;
-  bookmarkType?: BookmarkType;
   phase1Visible?: boolean;
   phase2Visible?: boolean;
   categoryTransition?: 'idle' | 'out' | 'in';
@@ -42,21 +19,10 @@ export interface SlideArticleCardProps {
 
 const PHASE_DURATION = 0.3;
 
-const BOOKMARK_COLORS: Record<BookmarkType, string> = {
-  rechner: 'var(--color-brand-secondary)',
-  vergleich: 'var(--color-tool-vergleiche)',
-  checkliste: 'var(--color-tool-checklisten)',
-  neu: 'var(--color-brand)',
-};
-
 export const CARD_MIN_WIDTH = 265;
 export const CARD_MAX_WIDTH = 450;
 
-function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
-  const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
-  const [cardHovered, setCardHovered] = useState(false);
-  // Shared subscription — ein matchMedia-Listener für alle Cards.
-  const hoverCapable = useSyncExternalStore(subscribeHoverCapable, getHoverCapable, SSR_HOVER_CAPABLE);
+function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const boldRef = useRef<HTMLParagraphElement>(null);
@@ -132,11 +98,11 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
   return (
     <div
       ref={cardRef}
+      className="slide-article-card"
       data-morph-card={post.slug}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onMouseEnter={() => { setCardHovered(true); prefetchArticle(); }}
-      onMouseLeave={() => setCardHovered(false)}
+      onMouseEnter={prefetchArticle}
       style={{
         width: '100%',
         position: 'relative',
@@ -147,8 +113,6 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         userSelect: 'none',
         WebkitUserSelect: 'none',
         cursor: 'pointer',
-        transform: cardHovered && hoverCapable ? 'scale(1.1)' : 'none',
-        transition: 'transform 0.3s ease',
       }}
     >
       {/* Visual */}
@@ -306,35 +270,32 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         </div>
       </div>
 
-      {/* Lesezeichen */}
-      {bookmarkColor && (
+      {/* Tool-Labels — kleine Chips für eingebettete Finanztools (gleiche Labels wie „Neuste Finanztools") */}
+      {post.tools && post.tools.length > 0 && (
         <div style={{
           position: 'absolute',
-          top: 0,
-          right: 13,
-          width: 28,
+          top: 10,
+          left: 10,
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 6,
           zIndex: 62,
+          pointerEvents: 'none',
         }}>
-          <div style={{ width: 33, height: 16, backgroundColor: bookmarkColor }} />
-          <svg width="33" height="25" viewBox="0 0 28 23" fill="none" preserveAspectRatio="none" style={{ display: 'block' }}>
-            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={bookmarkColor} />
-          </svg>
-          {bookmarkType === 'neu' && (
-            <p style={{
-              position: 'absolute',
-              top: 3,
-              left: 3,
+          {post.tools.map((t) => (
+            <span key={t} style={{
+              background: TOOL_DOT_COLORS[t],
+              color: '#fff',
               fontFamily: 'var(--font-body)',
-              fontWeight: 700,
-              fontSize: 13,
-              lineHeight: 1.3,
-              color: 'white',
-              margin: 0,
-              whiteSpace: 'nowrap',
+              fontSize: 12,
+              fontWeight: 600,
+              lineHeight: 1,
+              padding: '5px 10px',
+              letterSpacing: '0.02em',
             }}>
-              NEU
-            </p>
-          )}
+              {TOOL_LABEL[t]}
+            </span>
+          ))}
         </div>
       )}
     </div>

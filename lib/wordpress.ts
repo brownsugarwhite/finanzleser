@@ -3,7 +3,8 @@ import { GraphQLClient, gql } from "graphql-request";
 import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
-import { VERGLEICH_DESCRIPTIONS } from "./vergleichDescriptions";
+import { detectToolTypes } from "./content-utils";
+import { stripHtml } from "./seo";
 
 export interface LatestTool {
   type: "rechner" | "checkliste" | "vergleich";
@@ -48,7 +49,7 @@ function getClient(revalidate: number = 3600): GraphQLClient {
   const orig = client.request.bind(client);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (client as any).request = async (...args: unknown[]) => {
-    const MAX = 4;
+    const MAX = 6;
     let lastErr: unknown;
     for (let attempt = 0; attempt < MAX; attempt++) {
       try {
@@ -57,10 +58,14 @@ function getClient(revalidate: number = 3600): GraphQLClient {
       } catch (e: unknown) {
         lastErr = e;
         const status = (e as { response?: { status?: number } })?.response?.status;
-        const transient = typeof status === "number" && status >= 500;
+        // Transient = 5xx ODER Netzwerkfehler ohne Response (ECONNRESET / "fetch failed" /
+        // Timeout). Letztere hatte die alte Logik NICHT abgedeckt → Build-Seiten fielen bei
+        // IONOS-Connection-Resets sofort aus (= unvollständige SSG / gebackene 404).
+        const hasResponse = !!(e as { response?: unknown })?.response;
+        const transient = !hasResponse || (typeof status === "number" && status >= 500);
         if (!transient || attempt === MAX - 1) throw e;
-        // 400/600/800ms Backoff — gibt der WP-DB Luft.
-        await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
+        // Progressiver Backoff (500ms..3s) — gibt der IONOS-DB unter Build-Last Luft.
+        await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
       }
     }
     throw lastErr;
@@ -177,9 +182,11 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
+      // Eingebettete Tools aus dem Content ableiten, BEVOR applyContentHeaderTitle ihn strippt.
+      const tools = detectToolTypes(post.content);
       // Konvention v2: Karten-Untertitel = 1. Content-<h2> (Kicker); überschreibt das
       // veraltete ACF-Feld, danach content aus dem Payload entfernen.
-      return applyContentHeaderTitle(decoded);
+      return { ...applyContentHeaderTitle(decoded), tools };
     });
   } catch (error) {
     console.error("Error fetching latest posts:", error);
@@ -351,8 +358,10 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
           beitragUntertitel: post.beitrag.untertitel,
         };
       }
+      // Eingebettete Tools ableiten, BEVOR applyContentHeaderTitle den Content strippt.
+      const tools = detectToolTypes(post.content);
       // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
-      return applyContentHeaderTitle(decoded);
+      return { ...applyContentHeaderTitle(decoded), tools };
     });
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
@@ -621,6 +630,7 @@ export const getCategoryWithChildren = cache(async (categorySlug: string): Promi
       slug
       date
       excerpt
+      content
       featuredImage { node { sourceUrl altText } }
       categories { nodes { name slug } }
     }
@@ -681,11 +691,19 @@ export const getCategoryWithChildren = cache(async (categorySlug: string): Promi
 
     const childNodes = category.children?.nodes ?? [];
 
+    // Tools aus dem Content ableiten, dann content aus dem Payload entfernen (schlank halten).
+    const mapPost = (post: Post & { content?: string }): Post => {
+      const tools = detectToolTypes(post.content);
+      const decoded = decodePostContent(post) as Post & { content?: string };
+      delete decoded.content;
+      return { ...decoded, tools };
+    };
+
     // If no direct posts, collect from children
-    let allPosts = category.posts.nodes.map(post => decodePostContent(post));
+    let allPosts = category.posts.nodes.map(mapPost);
     if (allPosts.length === 0 && childNodes.length > 0) {
       childNodes.forEach((child) => {
-        allPosts = allPosts.concat(child.posts.nodes.map(post => decodePostContent(post)));
+        allPosts = allPosts.concat(child.posts.nodes.map(mapPost));
       });
       allPosts = allPosts.slice(0, 6); // limit to 6
     }
@@ -1073,10 +1091,11 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
 // ─────────────────────────────────────────────
 
 export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
-  // revalidate: 0 -> immer frisch (kein 1-Std-Cache). Sonst zeigte das Frontend nach einer
-  // Checklisten-Aktualisierung (neue PDF im checkliste-CPT) bis zu 1 Std die alte Version,
-  // weil der On-Demand-Revalidate die Artikel-Checklisten-Daten nicht erfasst.
-  const client = getClient(0);
+  // WICHTIG: NICHT getClient(0)/revalidate:0 — das macht jede Seite, die diese Funktion
+  // aufruft (Checklisten-Route UND jeder Artikel mit eingebetteter Checkliste via
+  // getArticleToolData), DYNAMISCH ("Dynamic server usage") und verhindert SSG.
+  // Freshness läuft über ISR (1 Std) + On-Demand-Revalidate (save_post checkliste).
+  const client = getClient();
 
   const query = gql`
     query GetChecklisteBySlug($slug: String!) {
@@ -1263,34 +1282,35 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
 export async function getLatestFinanztools(): Promise<LatestTool[]> {
   const client = getClient();
 
+  // Beschreibung kommt jetzt einheitlich aus dem WP-Textauszug (excerpt, HTML) für alle 3 CPTs.
   const query = gql`
     query GetLatestFinanztools {
       allRechner(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
-        nodes { title slug rechnerFelder { beschreibung } }
+        nodes { title slug excerpt }
       }
       checklisten(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
-        nodes { title slug checklisten { checklistenBeschreibung } }
+        nodes { title slug excerpt }
       }
       vergleiche(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
-        nodes { title slug }
+        nodes { title slug excerpt }
       }
     }
   `;
 
   try {
     const data = await client.request<{
-      allRechner: { nodes: { title: string; slug: string; rechnerFelder?: { beschreibung?: string } }[] };
-      checklisten: { nodes: { title: string; slug: string; checklisten?: { checklistenBeschreibung?: string } }[] };
-      vergleiche: { nodes: { title: string; slug: string }[] };
+      allRechner: { nodes: { title: string; slug: string; excerpt?: string }[] };
+      checklisten: { nodes: { title: string; slug: string; excerpt?: string }[] };
+      vergleiche: { nodes: { title: string; slug: string; excerpt?: string }[] };
     }>(query);
 
     const tools: LatestTool[] = [];
     const r = data.allRechner.nodes[0];
-    if (r) tools.push({ type: "rechner", label: "Rechner", title: decodeHtmlEntities(r.title), description: r.rechnerFelder?.beschreibung || "", href: `/finanztools/rechner/${r.slug}` });
+    if (r) tools.push({ type: "rechner", label: "Rechner", title: decodeHtmlEntities(r.title), description: stripHtml(r.excerpt), href: `/finanztools/rechner/${r.slug}` });
     const c = data.checklisten.nodes[0];
-    if (c) tools.push({ type: "checkliste", label: "Checkliste", title: decodeHtmlEntities(c.title), description: c.checklisten?.checklistenBeschreibung || "", href: `/finanztools/checklisten/${c.slug}` });
+    if (c) tools.push({ type: "checkliste", label: "Checkliste", title: decodeHtmlEntities(c.title), description: stripHtml(c.excerpt), href: `/finanztools/checklisten/${c.slug}` });
     const v = data.vergleiche.nodes[0];
-    if (v) tools.push({ type: "vergleich", label: "Vergleich", title: decodeHtmlEntities(v.title), description: VERGLEICH_DESCRIPTIONS[v.slug] || "", href: `/finanztools/vergleiche/${v.slug}` });
+    if (v) tools.push({ type: "vergleich", label: "Vergleich", title: decodeHtmlEntities(v.title), description: stripHtml(v.excerpt), href: `/finanztools/vergleiche/${v.slug}` });
     return tools;
   } catch (error) {
     console.error("Error fetching latest Finanztools:", error);

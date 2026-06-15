@@ -5,9 +5,10 @@ import { useTransitionPhase } from "@/lib/usePageTransition";
 import { subscribeMorph, getMorphPhase, type MorphPhase } from "@/lib/morphTransition";
 import SiteLoader from "@/components/ui/SiteLoader";
 
-// Erst nach dieser kurzen Schwelle anzeigen — sehr schnelle/gecachte Navigationen
-// flashen keinen Loader.
-const THRESHOLD_MS = 60;
+// Erst nach dieser Schwelle anzeigen — schnelle/gecachte/SSG-Navigationen (Ziel
+// mountet in ~50–150 ms → Morph startet sofort) flashen so nie den Loader. Er bleibt
+// nur Fallback für echte Aussetzer (on-demand Legacy-Seiten, kalter WP).
+const THRESHOLD_MS = 450;
 // Mindestanzeigedauer: einmal sichtbar, mind. so lange zeigen (sonst „Blitz" bei
 // schnellen Ladezeiten → wirkt wie „nicht sichtbar").
 const MIN_VISIBLE_MS = 700;

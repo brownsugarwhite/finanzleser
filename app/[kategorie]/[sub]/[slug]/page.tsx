@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug } from "@/lib/wordpress";
+import { getPostBySlug, getAllPosts } from "@/lib/wordpress";
+import { getCategoryPair } from "@/lib/urls";
 import { isMainCategory } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import type { Category } from "@/lib/types";
@@ -13,6 +14,23 @@ import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 export const revalidate = 3600;
 
 type RouteParams = { kategorie: string; sub: string; slug: string };
+
+// Alle Beiträge beim Build statisch vorrendern → Navigation startet den Morph sofort
+// (kein blockierender getPostBySlug-Fetch pro Klick). dynamicParams bleibt default true,
+// daher rendern Legacy-/unbekannte URLs weiterhin on-demand. Redakteur-Änderungen bleiben
+// via save_post → /api/revalidate (ISR) sofort sichtbar.
+export async function generateStaticParams(): Promise<RouteParams[]> {
+  try {
+    const posts = await getAllPosts();
+    return posts.map((p) => {
+      const { main, sub } = getCategoryPair(p.categories);
+      return { kategorie: main, sub, slug: p.slug };
+    });
+  } catch (e) {
+    console.error("[article generateStaticParams] failed:", e);
+    return [];
+  }
+}
 
 export async function generateMetadata(
   props: { params: Promise<RouteParams> }

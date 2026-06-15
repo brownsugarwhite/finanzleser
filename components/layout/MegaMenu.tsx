@@ -14,54 +14,14 @@ function boldYears(text: string) {
 import type { Post } from "@/lib/types";
 import type { MegamenuTool } from "@/lib/wordpress";
 import SiteLoader from "@/components/ui/SiteLoader";
+import ToolDots, { TOOL_DOT_COLORS, TOOL_LABEL, type ToolType } from "@/components/ui/ToolDots";
 
-export type ToolType = "rechner" | "checkliste" | "vergleich" | "dokumente";
+export type { ToolType };
 export type MegaMenuPost = Post & { tools?: ToolType[] };
 export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: MegamenuTool[] }>;
 
-const TOOL_DOT_COLORS: Record<ToolType, string> = {
-  rechner: "var(--color-tool-rechner)",
-  vergleich: "var(--color-tool-vergleiche)",
-  checkliste: "var(--color-tool-checklisten)",
-  dokumente: "var(--color-text-primary)",
-};
-
-// Feste Anzeige-Reihenfolge der Tool-Punkte.
-const TOOL_ORDER: ToolType[] = ["checkliste", "rechner", "vergleich", "dokumente"];
-
-// Finanztools-Spalte: Pfad-Segment, Label und Badge-Farbe je Tool-Typ.
+// Finanztools-Spalte: Pfad-Segment je Tool-Typ.
 const TOOL_PATH: Record<ToolType, string> = { rechner: "rechner", vergleich: "vergleiche", checkliste: "checklisten", dokumente: "dokumente" };
-const TOOL_LABEL: Record<ToolType, string> = { rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument" };
-
-function ToolDots({ tools }: { tools?: ToolType[] }) {
-  if (!tools || tools.length === 0) return null;
-  const ordered = [...tools].sort((a, b) => TOOL_ORDER.indexOf(a) - TOOL_ORDER.indexOf(b));
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        gap: 5,
-        marginLeft: 2,
-        verticalAlign: "middle",
-        whiteSpace: "nowrap",
-      }}
-      aria-hidden
-    >
-      {ordered.map((t) => (
-        <span
-          key={t}
-          style={{
-            display: "inline-block",
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: TOOL_DOT_COLORS[t],
-          }}
-        />
-      ))}
-    </span>
-  );
-}
 
 interface MegaMenuProps {
   activeCategory: string;
