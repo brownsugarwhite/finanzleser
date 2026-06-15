@@ -130,6 +130,7 @@ async function _fetchAllPosts(): Promise<Post[]> {
     after = data.posts.pageInfo.endCursor;
   }
 
+  nonEmptyAtBuild("allPosts", allNodes);
   return allNodes.map(post => {
     const decoded = decodePostContent(post);
     if (post.beitrag?.untertitel) {
@@ -623,6 +624,7 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
       throw e;
     }
   }
+  if (map.size === 0) throw new Error("[buildPostsMap] leere Map beim Build (transient) → Retry");
   console.log(`[buildPostsMap] ${map.size} Posts gebündelt geladen`);
   return map;
 }
@@ -650,6 +652,16 @@ async function buildResilient<T>(label: string, fn: () => Promise<T>): Promise<T
     }
   }
   throw lastErr;
+}
+
+// Beim Build ist ein LEERES Ergebnis dieser Sammlungen praktisch immer ein transienter
+// WP-Aussetzer (200 mit leeren Daten unter IONOS-Last), KEIN echter Leerstand. Werfen →
+// buildResilient/Memo wiederholt, statt „leer" statisch zu backen (z.B. „Keine Checklisten").
+function nonEmptyAtBuild<T extends { length: number }>(label: string, v: T): T {
+  if (IS_BUILD && v.length === 0) {
+    throw new Error(`[${label}] leeres Ergebnis beim Build (vermutlich transient) → Retry`);
+  }
+  return v;
 }
 
 const _buildMemo = new Map<string, Promise<unknown>>();
@@ -939,7 +951,7 @@ async function _fetchNavItems(): Promise<NavItems> {
       data.categories.nodes.find((c) => c.slug === slug)
     ).filter(Boolean) as typeof data.categories.nodes;
 
-    return sorted.map((cat) => ({
+    return nonEmptyAtBuild("navItems", sorted.map((cat) => ({
       label: cat.name,
       href: `/${cat.slug}`,
       megamenu: true,
@@ -947,7 +959,7 @@ async function _fetchNavItems(): Promise<NavItems> {
         label: child.name,
         href: `/${cat.slug}/${child.slug}`,
       })),
-    }));
+    })));
   } catch (error) {
     console.error("Error fetching nav items from WordPress:", error);
     if (IS_BUILD) throw error;
@@ -1163,7 +1175,7 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
 
   try {
     const data = await client.request<{ allRechner: { nodes: Rechner[] } }>(query);
-    return data.allRechner.nodes;
+    return nonEmptyAtBuild("allRechner", data.allRechner.nodes);
   } catch (error) {
     console.error("Error fetching all Rechner:", error);
     if (IS_BUILD) throw error; // Build: nicht leer memoisieren → buildResilient wiederholt
@@ -1250,7 +1262,7 @@ async function _fetchAllChecklisten(): Promise<Checkliste[]> {
       after = data.checklisten.pageInfo.endCursor;
     }
 
-    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return nonEmptyAtBuild("allChecklisten", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Checklisten:", error);
     if (IS_BUILD) throw error;
@@ -1294,6 +1306,7 @@ function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
         throw e;
       }
     }
+    if (map.size === 0) throw new Error("[checklistenFull] leere Map beim Build (transient) → Retry");
     console.log(`[checklistenFull] ${map.size} Checklisten gebündelt`);
     return map;
   });
@@ -1395,7 +1408,7 @@ async function _fetchAllDokumente(): Promise<Dokument[]> {
       after = data.dokumente.pageInfo.endCursor;
     }
 
-    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return nonEmptyAtBuild("allDokumente", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Dokumente:", error);
     if (IS_BUILD) throw error;
@@ -1489,7 +1502,7 @@ async function _fetchAllVergleiche(): Promise<Vergleich[]> {
 
   try {
     const data = await client.request<{ vergleiche: { nodes: Vergleich[] } }>(query);
-    return data.vergleiche.nodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return nonEmptyAtBuild("allVergleiche", data.vergleiche.nodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Vergleiche:", error);
     if (IS_BUILD) throw error;
