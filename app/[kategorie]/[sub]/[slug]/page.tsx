@@ -59,7 +59,10 @@ export default async function BeitragPage(props: {
   params: Promise<RouteParams>;
 }) {
   const params = await props.params;
-  const post = await getPostBySlug(params.slug).catch(() => null);
+  // KEIN .catch(() => null): ein transienter Build-Fehler (IONOS) würde sonst zu notFound()
+  // = statisch gebackenem 404. So propagiert er → Next wiederholt die Seite. Zur Laufzeit
+  // fängt getPostBySlugSingle Fehler intern ab und liefert null (→ echtes 404 nur bei „nicht da").
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     notFound();

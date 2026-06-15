@@ -78,6 +78,9 @@ function getClient(revalidate: number = 3600): GraphQLClient {
 // ─────────────────────────────────────────────
 
 export async function getAllPosts(): Promise<Post[]> {
+  return buildMemo("allPosts", _fetchAllPosts);
+}
+async function _fetchAllPosts(): Promise<Post[]> {
   const client = getClient();
 
   const query = gql`
@@ -539,10 +542,8 @@ export async function getPostContentBySlug(slug: string): Promise<string | null>
 // 200+ Einzel-getPostBySlug → IONOS-Shared-Hosting wird nicht überlastet (verhindert die
 // reihenweise gebackenen notFound()-404). Modul-Memo = pro Build-Worker-Prozess EINMAL.
 // Zur LAUFZEIT (on-demand/ISR) NICHT genutzt → dort frische Einzelabfrage.
-let _postsMapPromise: Promise<Map<string, Post>> | null = null;
 function getAllPostsMap(): Promise<Map<string, Post>> {
-  if (!_postsMapPromise) _postsMapPromise = buildPostsMap();
-  return _postsMapPromise;
+  return buildMemo("postsMap", buildPostsMap);
 }
 async function buildPostsMap(): Promise<Map<string, Post>> {
   const client = getClient();
@@ -580,9 +581,10 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
       hasNext = data.posts.pageInfo.hasNextPage;
       after = data.posts.pageInfo.endCursor;
     } catch (e) {
-      // Teil-Map: fehlende Posts fallen unten auf die Einzelabfrage zurück (kein harter Abbruch).
-      console.error("[buildPostsMap] chunk failed (partial map):", e);
-      break;
+      // NICHT mit Teil-Map weiterlaufen (sonst 404 für alle restlichen Posts) — Fehler
+      // hochreichen, damit buildResilient den GANZEN Vorgang wiederholt.
+      console.error("[buildPostsMap] chunk failed → retry whole bulk:", e);
+      throw e;
     }
   }
   console.log(`[buildPostsMap] ${map.size} Posts gebündelt geladen`);
@@ -595,11 +597,37 @@ const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 // Beim SSG-Build dieselbe getAll*-Abfrage NICHT pro Seite neu feuern, sondern pro
 // Worker-Prozess EINMAL (z.B. getAllVergleiche wird sonst von jeder der 42 Detailseiten
 // erneut geholt). Zur LAUFZEIT (ISR/on-demand) kein Memo → frische Daten.
+const _sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Wiederholt einen GANZEN Bulk-Vorgang beim Build bis zu 5× mit Backoff. So überlebt der
+// Build einen kurzen IONOS-„Error establishing a database connection"-Burst, statt mit
+// Teildaten weiterzulaufen (→ gebackene 404). Erst danach Fehler hochreichen.
+async function buildResilient<T>(label: string, fn: () => Promise<T>): Promise<T> {
+  let lastErr: unknown;
+  for (let i = 0; i < 5; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      console.error(`[buildResilient ${label}] Versuch ${i + 1}/5 fehlgeschlagen`);
+      await _sleep(2000 * (i + 1));
+    }
+  }
+  throw lastErr;
+}
+
 const _buildMemo = new Map<string, Promise<unknown>>();
 function buildMemo<T>(key: string, fn: () => Promise<T>): Promise<T> {
   if (!IS_BUILD) return fn();
   let p = _buildMemo.get(key) as Promise<T> | undefined;
-  if (!p) { p = fn(); _buildMemo.set(key, p); }
+  if (!p) {
+    // Resilient + Fehlschläge NICHT cachen (sonst poisoned ein einmaliger Aussetzer alle Seiten).
+    p = buildResilient(key, fn).catch((e) => {
+      _buildMemo.delete(key);
+      throw e;
+    });
+    _buildMemo.set(key, p);
+  }
   return p;
 }
 
@@ -1099,6 +1127,7 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
     return data.allRechner.nodes;
   } catch (error) {
     console.error("Error fetching all Rechner:", error);
+    if (IS_BUILD) throw error; // Build: nicht leer memoisieren → buildResilient wiederholt
     return [];
   }
 }
@@ -1185,6 +1214,7 @@ async function _fetchAllChecklisten(): Promise<Checkliste[]> {
     return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Checklisten:", error);
+    if (IS_BUILD) throw error;
     return [];
   }
 }
@@ -1221,8 +1251,8 @@ function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
         hasNext = data.checklisten.pageInfo.hasNextPage;
         after = data.checklisten.pageInfo.endCursor;
       } catch (e) {
-        console.error("[checklistenFull] chunk failed (partial map):", e);
-        break;
+        console.error("[checklistenFull] chunk failed → retry whole bulk:", e);
+        throw e;
       }
     }
     console.log(`[checklistenFull] ${map.size} Checklisten gebündelt`);
@@ -1329,6 +1359,7 @@ async function _fetchAllDokumente(): Promise<Dokument[]> {
     return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Dokumente:", error);
+    if (IS_BUILD) throw error;
     return [];
   }
 }
@@ -1422,6 +1453,7 @@ async function _fetchAllVergleiche(): Promise<Vergleich[]> {
     return data.vergleiche.nodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Vergleiche:", error);
+    if (IS_BUILD) throw error;
     return [];
   }
 }
