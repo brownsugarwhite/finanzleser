@@ -719,10 +719,14 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
       }
     }
 
-    return post;
+    return post; // null = Beitrag existiert genuin nicht → Caller darf notFound()
   } catch (error) {
+    // FETCH-FEHLER ≠ „nicht gefunden". Werfen statt null, damit der Caller KEINEN 404 backt/cacht.
+    // Build: Seite wird von Next wiederholt. Laufzeit: 500 (nicht gecacht) → nächster Request
+    // versucht erneut → self-healing, statt 1 Std lang gecachtem 404. Legacy-Resolver mit
+    // .catch(()=>null) behandeln den Wurf weiterhin als „kein Post".
     console.error(`Error fetching post with slug "${slug}":`, error);
-    return null;
+    throw error;
   }
 }
 
