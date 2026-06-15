@@ -47,26 +47,26 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
     try { router.prefetch(postLink); } catch { /* noop */ }
   };
 
-  // Sichtbare Slider-Cards proaktiv beim Idle vorladen — nicht erst bei Hover.
-  // So sind auch „weiter hinten" geslidete Cards beim Klick schon da (RSC im Client-
-  // Cache + wärmt zugleich den Netlify-Edge). requestIdleCallback hält es niedrig-
-  // priorisiert, damit der Initial-Paint nicht konkurriert.
+  // Prefetch erst wenn die Card (fast) im Viewport ist — NICHT alle Cards auf einmal
+  // beim Mount (das löste einen Request-Sturm aus). Per IntersectionObserver mit
+  // großzügigem rootMargin: beim Sliden ist die nächste Card rechtzeitig vorgeladen,
+  // ohne off-screen alles gleichzeitig zu prefetchen.
   useEffect(() => {
-    const w = window as Window & {
-      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-    let idleId: number | null = null;
-    let toId: ReturnType<typeof setTimeout> | null = null;
-    if (w.requestIdleCallback) {
-      idleId = w.requestIdleCallback(() => prefetchArticle(), { timeout: 2500 });
-    } else {
-      toId = setTimeout(() => prefetchArticle(), 1200);
-    }
-    return () => {
-      if (idleId != null && w.cancelIdleCallback) w.cancelIdleCallback(idleId);
-      if (toId != null) clearTimeout(toId);
-    };
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    let done = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!done && entries.some((e) => e.isIntersecting)) {
+          done = true;
+          prefetchArticle();
+          io.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postLink]);
 

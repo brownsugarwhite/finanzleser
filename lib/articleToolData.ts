@@ -68,7 +68,10 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
   const fallback = VERGLEICH_DESCRIPTIONS[slug] || "";
   const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
   try {
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`);
+    // WICHTIG: revalidate setzen — ein ungecachtes fetch() ist in Next 15 `no-store`
+    // und macht JEDEN Artikel mit Vergleich dynamisch (kein SSG → on-demand-Cold-Render).
+    // Freshness via ISR (1h) + On-Demand-Revalidate.
+    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: 3600 } });
     const posts = await res.json();
     const wpExcerpt = (posts[0]?.excerpt?.rendered || "").trim();
     return { title: posts[0]?.title?.rendered || "", excerpt: wpExcerpt || fallback };
