@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(tools, {
       headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        // Leeres Ergebnis nicht cachen (transienter Aussetzer würde sonst lange hängen).
+        "Cache-Control": tools.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
         // Edge-Cache pro Kategorie variieren (sonst überall dieselben Tools).
         "Netlify-Vary": "query=category",
       },

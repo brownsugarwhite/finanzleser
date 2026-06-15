@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
 import { Providers } from "./providers";
 import { NavProvider } from "@/lib/NavContext";
-import { getNavItems, getSiteSettings } from "@/lib/wordpress";
+import { getNavItems, getSiteSettings, getMegamenuPreload } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
@@ -83,9 +83,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [navItems, siteSettings] = await Promise.all([
+  const [navItems, siteSettings, megamenuPreload] = await Promise.all([
     getNavItems(),
     getSiteSettings(),
+    getMegamenuPreload().catch(() => ({})),
   ]);
 
   return (
@@ -118,7 +119,7 @@ export default async function RootLayout({
             <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
           </div>
           <ContentScaler />
-          <MegaMenuWrapper />
+          <MegaMenuWrapper preloaded={megamenuPreload} />
           <FinanztoolsMenu />
           <div className="scalable-content">
             {children}

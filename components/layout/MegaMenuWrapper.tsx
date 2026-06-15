@@ -15,26 +15,30 @@ type MegaMenuCache = PreloadedData;
 // das Desktop-Megamenü nach dem Wechsel wieder die zuletzt offene Kategorie zeigt.
 let persistedCategory: string | null = null;
 
-export default function MegaMenuWrapper() {
+export default function MegaMenuWrapper({ preloaded = {} }: { preloaded?: PreloadedData }) {
   const isMobile = useIsMobile(1000); // Punkt 4: Mobile-Megamenü ab ≤1000px
   if (isMobile) return <MobileMegaMenu />;
-  return <DesktopMegaMenuWrapper />;
+  return <DesktopMegaMenuWrapper preloaded={preloaded} />;
 }
 
-function DesktopMegaMenuWrapper() {
+function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [openedViaBurger, setOpenedViaBurger] = useState(false);
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const burgerNavRef = useRef<HTMLDivElement>(null);
-  const [cache, setCache] = useState<MegaMenuCache>({});
+  // Mit SSG-Preload aus dem Layout vorbefüllt → Megamenü ist ab erstem Pageload sofort
+  // befüllt, ohne Laufzeit-API (umgeht auch evtl. verschmutzten Edge-Cache).
+  const [cache, setCache] = useState<MegaMenuCache>(preloaded);
+  const hasPreload = Object.keys(preloaded).length > 0;
 
   // Track last open category so burger can reopen it
   const lastCategoryRef = useRef<string | null>(null);
 
   // Preload first subcategory of each category at page load
   useEffect(() => {
+    if (hasPreload) return; // SSG-Preload deckt alle Subs ab → kein Laufzeit-Preload nötig
     const firstSubs = NAV_ITEMS.map(item => (item.submenu || [])[0]?.href).filter(Boolean);
     const getCategorySlug = (href: string) => href.split("/").filter(Boolean).pop() || "";
 

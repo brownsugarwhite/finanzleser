@@ -452,6 +452,9 @@ export type MegamenuTool = { type: "rechner" | "vergleich" | "checkliste"; slug:
 // sind (neueste Beiträge zuerst). Ein Tool darf max. 2× erscheinen. Vollautomatisch
 // aus dem Beitrags-Content — keine Backend-Pflege nötig. Verlinkung nach Typ.
 export async function getMegamenuToolsByCategory(categorySlug: string): Promise<MegamenuTool[]> {
+  return buildMemo(`mmtools:${categorySlug}`, () => _fetchMegamenuToolsByCategory(categorySlug));
+}
+async function _fetchMegamenuToolsByCategory(categorySlug: string): Promise<MegamenuTool[]> {
   const client = getClient();
   const postsQuery = gql`
     query GetCatPostContents($slug: [String!]!) {
@@ -507,8 +510,41 @@ export async function getMegamenuToolsByCategory(categorySlug: string): Promise<
     }
   } catch (error) {
     console.error(`Error fetching megamenu tools for "${categorySlug}":`, error);
+    if (IS_BUILD) throw error; // Build: nicht leer backen → buildResilient/Memo wiederholt
     return [];
   }
+}
+
+// ── Megamenü-Preload (SSG) ──
+// Alle Subkategorien (Posts + Tools) serverseitig bündeln → ins Layout backen, sodass
+// das Megamenü ab dem ersten Pageload SOFORT befüllt ist (kein Laufzeit-API-Fetch, keine
+// Abhängigkeit vom evtl. verschmutzten Edge-Cache). Posts kommen beim Build aus der
+// resilient geladenen Posts-Map (getPostsByCategory), Tools resilient + memoisiert.
+export type MegamenuPreload = Record<
+  string,
+  { posts: (Post & { tools?: ("rechner" | "vergleich" | "checkliste")[] })[]; hasMore: boolean; tools: MegamenuTool[] }
+>;
+export async function getMegamenuPreload(limit = 3): Promise<MegamenuPreload> {
+  const navItems = await getNavItems();
+  const subs = navItems.flatMap((item) =>
+    (item.submenu || []).map((s) => ({ href: s.href, slug: s.href.split("/").filter(Boolean).pop() || "" }))
+  );
+  const result: MegamenuPreload = {};
+  await Promise.all(
+    subs.map(async ({ href, slug }) => {
+      try {
+        const [posts, tools] = await Promise.all([
+          getPostsByCategory(slug),
+          getMegamenuToolsByCategory(slug),
+        ]);
+        result[href] = { posts: posts.slice(0, limit), hasMore: posts.length > limit, tools };
+      } catch (e) {
+        console.error(`[getMegamenuPreload] ${slug} failed:`, e);
+        // Einzelne Subkategorie ausgelassen → Megamenü fällt dort auf den Laufzeit-Fetch zurück.
+      }
+    })
+  );
+  return result;
 }
 
 // Schlanke Query nur für die Artikel-Vorschau (erster Absatz, Lesezeit, Tools).
@@ -860,14 +896,12 @@ export const getCategoryWithChildren = cache(async (categorySlug: string): Promi
 
 const NAV_MAIN_SLUGS = ["finanzen", "versicherungen", "steuern", "recht"];
 
-export async function getNavItems(): Promise<
-  Array<{
-    label: string;
-    href: string;
-    megamenu: boolean;
-    submenu: Array<{ label: string; href: string }>;
-  }>
-> {
+type NavItems = Array<{ label: string; href: string; megamenu: boolean; submenu: Array<{ label: string; href: string }> }>;
+export async function getNavItems(): Promise<NavItems> {
+  // Beim Build pro Worker EINMAL (Layout ruft es pro Seite auf → sonst ~700 Abfragen).
+  return buildMemo("navItems", _fetchNavItems);
+}
+async function _fetchNavItems(): Promise<NavItems> {
   const client = getClient();
 
   const query = gql`
@@ -916,6 +950,7 @@ export async function getNavItems(): Promise<
     }));
   } catch (error) {
     console.error("Error fetching nav items from WordPress:", error);
+    if (IS_BUILD) throw error;
     return [];
   }
 }

@@ -21,7 +21,9 @@ export async function GET(request: NextRequest) {
       { posts, total: posts.length, hasMore },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+          // Leere Ergebnisse NICHT cachen — ein transienter WP-Aussetzer würde sonst bis 24h
+          // (SWR) als „keine Beiträge" am Edge hängenbleiben.
+          "Cache-Control": posts.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
           // Netlify Edge variiert sonst NICHT nach ?category → alle Kategorien
           // bekämen denselben Cache-Eintrag (Bug: überall die gleichen 3 Posts).
           "Netlify-Vary": "query=category|limit",
