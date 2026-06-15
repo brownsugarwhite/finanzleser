@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useRef } from 'react';
+import { memo, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
@@ -46,6 +46,29 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
   const prefetchArticle = () => {
     try { router.prefetch(postLink); } catch { /* noop */ }
   };
+
+  // Sichtbare Slider-Cards proaktiv beim Idle vorladen — nicht erst bei Hover.
+  // So sind auch „weiter hinten" geslidete Cards beim Klick schon da (RSC im Client-
+  // Cache + wärmt zugleich den Netlify-Edge). requestIdleCallback hält es niedrig-
+  // priorisiert, damit der Initial-Paint nicht konkurriert.
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let idleId: number | null = null;
+    let toId: ReturnType<typeof setTimeout> | null = null;
+    if (w.requestIdleCallback) {
+      idleId = w.requestIdleCallback(() => prefetchArticle(), { timeout: 2500 });
+    } else {
+      toId = setTimeout(() => prefetchArticle(), 1200);
+    }
+    return () => {
+      if (idleId != null && w.cancelIdleCallback) w.cancelIdleCallback(idleId);
+      if (toId != null) clearTimeout(toId);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postLink]);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     pointerStartRef.current = { x: e.clientX, y: e.clientY };

@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = ".next"
 
+# Wärmt nach jedem Deploy die Caches vor (alle Sitemap-URLs einmal aufrufen), damit
+# auch nicht-prerenderte Seiten beim ersten echten Besuch schnell sind.
+# Abschalten via Env WARM_CACHE=false. Concurrency via WARM_CONCURRENCY.
+[[plugins]]
+  package = "/netlify/plugins/warm-cache"
+
 [build.environment]
   NODE_VERSION = "20"
   # LEO-Backend des Kunden (RAG-Service auf Heroku). /api/chat proxyt darauf.
