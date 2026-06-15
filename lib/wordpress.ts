@@ -305,6 +305,21 @@ function rankByRelevance(posts: Post[], query: string): Post[] {
 // ─────────────────────────────────────────────
 
 export const getPostsByCategory = cache(async (categorySlug: string): Promise<Post[]> => {
+  // Build: aus der Posts-Bulk-Map ableiten statt pro Subkategorie (~158) einzeln abzufragen.
+  if (IS_BUILD) {
+    const map = await getAllPostsMap();
+    const out: Post[] = [];
+    for (const p of map.values()) {
+      if (p.categories?.nodes?.some((c) => c.slug === categorySlug)) {
+        const tools = detectToolTypes((p as Post & { content?: string }).content);
+        // Klonen — applyContentHeaderTitle mutiert (strippt content) → Map-Eintrag nicht korrumpieren.
+        const clone = { ...p, beitragFelder: { ...p.beitragFelder } } as Post & { content?: string };
+        out.push({ ...applyContentHeaderTitle(clone), tools });
+      }
+    }
+    if (out.length > 0) return out;
+    // leer → Kategorie ohne Posts (oder Slug nicht in Map) → Einzelabfrage als Fallback.
+  }
   const client = getClient();
 
   const query = gql`
@@ -575,6 +590,18 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
 }
 
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
+
+// ── Build-Memo ──
+// Beim SSG-Build dieselbe getAll*-Abfrage NICHT pro Seite neu feuern, sondern pro
+// Worker-Prozess EINMAL (z.B. getAllVergleiche wird sonst von jeder der 42 Detailseiten
+// erneut geholt). Zur LAUFZEIT (ISR/on-demand) kein Memo → frische Daten.
+const _buildMemo = new Map<string, Promise<unknown>>();
+function buildMemo<T>(key: string, fn: () => Promise<T>): Promise<T> {
+  if (!IS_BUILD) return fn();
+  let p = _buildMemo.get(key) as Promise<T> | undefined;
+  if (!p) { p = fn(); _buildMemo.set(key, p); }
+  return p;
+}
 
 // React.cache → dedupliziert den Doppel-Aufruf aus generateMetadata + Page-Component.
 // Beim Build aus der Bulk-Map (1 Fetch/Worker), zur Laufzeit per Einzelabfrage (frisch).
@@ -1045,6 +1072,9 @@ export async function getPostsAndCPTsByCategory(categorySlug: string): Promise<P
 // ─────────────────────────────────────────────
 
 export async function getAllRechner(): Promise<Rechner[]> {
+  return buildMemo("allRechner", _fetchAllRechner);
+}
+async function _fetchAllRechner(): Promise<Rechner[]> {
   const client = getClient();
 
   const query = gql`
@@ -1078,6 +1108,10 @@ export async function getAllRechner(): Promise<Rechner[]> {
 // ─────────────────────────────────────────────
 
 export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
+  if (IS_BUILD) {
+    const hit = (await getAllRechner()).find((r) => r.slug === slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -1108,6 +1142,9 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
 // ─────────────────────────────────────────────
 
 export async function getAllChecklisten(): Promise<Checkliste[]> {
+  return buildMemo("allChecklisten", _fetchAllChecklisten);
+}
+async function _fetchAllChecklisten(): Promise<Checkliste[]> {
   const client = getClient();
 
   const query = gql`
@@ -1156,11 +1193,49 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
 // Einzelne Checkliste nach Slug
 // ─────────────────────────────────────────────
 
+// Build-Bulk MIT PDF-URL (getAllChecklisten holt die nicht) → eine Map für alle
+// getChecklisteBySlug-Aufrufe (207 Detailseiten + Artikel-Checklisten).
+function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
+  return buildMemo("checklistenFull", async () => {
+    const client = getClient();
+    const query = gql`
+      query BulkChecklistenFull($after: String) {
+        checklisten(first: 50, after: $after) {
+          pageInfo { hasNextPage endCursor }
+          nodes {
+            id title slug excerpt
+            checklisten { checklistenBeschreibung checklistePdf { node { mediaItemUrl } } }
+          }
+        }
+      }
+    `;
+    type Resp = { checklisten: { nodes: Checkliste[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+    const map = new Map<string, Checkliste>();
+    let after: string | null = null;
+    let hasNext = true;
+    let guard = 0;
+    while (hasNext && guard++ < 60) {
+      try {
+        const data: Resp = await client.request<Resp>(query, { after });
+        for (const n of data.checklisten.nodes) { if (n.slug) map.set(n.slug, n); }
+        hasNext = data.checklisten.pageInfo.hasNextPage;
+        after = data.checklisten.pageInfo.endCursor;
+      } catch (e) {
+        console.error("[checklistenFull] chunk failed (partial map):", e);
+        break;
+      }
+    }
+    console.log(`[checklistenFull] ${map.size} Checklisten gebündelt`);
+    return map;
+  });
+}
+
 export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
-  // WICHTIG: NICHT getClient(0)/revalidate:0 — das macht jede Seite, die diese Funktion
-  // aufruft (Checklisten-Route UND jeder Artikel mit eingebetteter Checkliste via
-  // getArticleToolData), DYNAMISCH ("Dynamic server usage") und verhindert SSG.
-  // Freshness läuft über ISR (1 Std) + On-Demand-Revalidate (save_post checkliste).
+  // Build: aus Bulk-Map; Laufzeit: Einzelabfrage (Freshness via ISR + On-Demand-Revalidate).
+  if (IS_BUILD) {
+    const hit = (await getAllChecklistenFullMap()).get(slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -1196,6 +1271,9 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
 // ─────────────────────────────────────────────
 
 export async function getAllDokumente(): Promise<Dokument[]> {
+  return buildMemo("allDokumente", _fetchAllDokumente);
+}
+async function _fetchAllDokumente(): Promise<Dokument[]> {
   const client = getClient();
 
   const query = gql`
@@ -1260,6 +1338,10 @@ export async function getAllDokumente(): Promise<Dokument[]> {
 // ─────────────────────────────────────────────
 
 export async function getDokumentBySlug(slug: string): Promise<Dokument | null> {
+  if (IS_BUILD) {
+    const hit = (await getAllDokumente()).find((d) => d.slug === slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -1317,6 +1399,9 @@ export async function getDokumenteBySlugs(slugs: string[]): Promise<Dokument[]> 
 // ─────────────────────────────────────────────
 
 export async function getAllVergleiche(): Promise<Vergleich[]> {
+  return buildMemo("allVergleiche", _fetchAllVergleiche);
+}
+async function _fetchAllVergleiche(): Promise<Vergleich[]> {
   const client = getClient();
 
   const query = gql`

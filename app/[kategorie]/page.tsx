@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
+import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
@@ -24,10 +25,12 @@ function redakteurAuthor(slug: string, date?: string) {
 
 export const revalidate = 3600;
 
-// KEIN generateStaticParams: Diese Route ist ein Catch-all (Hauptkategorie / Anbieter /
-// Legacy-Post) und aggregiert Daten (z.B. Rechner-Zähler). Build-Prerender gegen das
-// flakige IONOS backte fehlerhaft „0 Rechner"/leere Listen statisch ein. On-Demand-ISR
-// holt die Daten beim Aufruf frisch (retry-fähig, self-healing) + cacht via revalidate.
+// Nur die 4 Hauptkategorien prerendern (high-traffic Top-Nav). Daten-Fetches sind dank
+// Build-Bulk/Memo jetzt leicht → keine „0 Rechner"-Bakes mehr. Anbieter (147, low-traffic)
+// + Legacy-Slugs bleiben on-demand (dynamicParams = default true).
+export async function generateStaticParams(): Promise<Array<{ kategorie: string }>> {
+  return MAIN_CATEGORY_SLUGS.map((slug) => ({ kategorie: slug }));
+}
 
 export async function generateMetadata(
   props: { params: Promise<{ kategorie: string }> }
