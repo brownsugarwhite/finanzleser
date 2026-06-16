@@ -130,7 +130,7 @@ async function _fetchAllPosts(): Promise<Post[]> {
     after = data.posts.pageInfo.endCursor;
   }
 
-  nonEmptyAtBuild("allPosts", allNodes);
+  requireNonEmpty("allPosts", allNodes);
   return allNodes.map(post => {
     const decoded = decodePostContent(post);
     if (post.beitrag?.untertitel) {
@@ -181,7 +181,7 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
     const data = await client.request<{
       posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
     }>(query, { limit });
-    return data.posts.nodes.map((post) => {
+    const mapped = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
@@ -192,9 +192,10 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
       // veraltete ACF-Feld, danach content aus dem Payload entfernen.
       return { ...applyContentHeaderTitle(decoded), tools };
     });
+    return requireNonEmpty("latestPosts", mapped);
   } catch (error) {
     console.error("Error fetching latest posts:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -384,7 +385,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
     });
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leere Kategorie zu cachen
   }
 });
 
@@ -654,12 +655,16 @@ async function buildResilient<T>(label: string, fn: () => Promise<T>): Promise<T
   throw lastErr;
 }
 
-// Beim Build ist ein LEERES Ergebnis dieser Sammlungen praktisch immer ein transienter
-// WP-Aussetzer (200 mit leeren Daten unter IONOS-Last), KEIN echter Leerstand. Werfen →
-// buildResilient/Memo wiederholt, statt „leer" statisch zu backen (z.B. „Keine Checklisten").
-function nonEmptyAtBuild<T extends { length: number }>(label: string, v: T): T {
-  if (IS_BUILD && v.length === 0) {
-    throw new Error(`[${label}] leeres Ergebnis beim Build (vermutlich transient) → Retry`);
+// Ein LEERES Ergebnis dieser „immer befüllten" Sammlungen ist praktisch immer ein
+// transienter WP-Aussetzer (200 mit leeren Daten unter IONOS-Last), KEIN echter Leerstand.
+// IMMER werfen — beim Build UND zur Laufzeit:
+//  - Build: buildResilient/Memo wiederholt, statt „leer" statisch zu backen.
+//  - Laufzeit (ISR-Revalidierung): Next.js verwirft die fehlgeschlagene Regenerierung und
+//    behält den letzten guten Stand, statt eine leere Seite zu cachen (z.B. „Keine Checklisten").
+// Ohne diesen Schutz blieb eine leere ISR-Antwort bis zu 1 h am Frontend hängen.
+function requireNonEmpty<T extends { length: number }>(label: string, v: T): T {
+  if (v.length === 0) {
+    throw new Error(`[${label}] leeres Ergebnis (vermutlich transienter WP-Aussetzer) → kein Leer-Cache`);
   }
   return v;
 }
@@ -951,7 +956,7 @@ async function _fetchNavItems(): Promise<NavItems> {
       data.categories.nodes.find((c) => c.slug === slug)
     ).filter(Boolean) as typeof data.categories.nodes;
 
-    return nonEmptyAtBuild("navItems", sorted.map((cat) => ({
+    return requireNonEmpty("navItems", sorted.map((cat) => ({
       label: cat.name,
       href: `/${cat.slug}`,
       megamenu: true,
@@ -962,8 +967,7 @@ async function _fetchNavItems(): Promise<NavItems> {
     })));
   } catch (error) {
     console.error("Error fetching nav items from WordPress:", error);
-    if (IS_BUILD) throw error;
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1175,11 +1179,10 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
 
   try {
     const data = await client.request<{ allRechner: { nodes: Rechner[] } }>(query);
-    return nonEmptyAtBuild("allRechner", data.allRechner.nodes);
+    return requireNonEmpty("allRechner", data.allRechner.nodes);
   } catch (error) {
     console.error("Error fetching all Rechner:", error);
-    if (IS_BUILD) throw error; // Build: nicht leer memoisieren → buildResilient wiederholt
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1262,11 +1265,10 @@ async function _fetchAllChecklisten(): Promise<Checkliste[]> {
       after = data.checklisten.pageInfo.endCursor;
     }
 
-    return nonEmptyAtBuild("allChecklisten", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allChecklisten", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Checklisten:", error);
-    if (IS_BUILD) throw error;
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1408,11 +1410,10 @@ async function _fetchAllDokumente(): Promise<Dokument[]> {
       after = data.dokumente.pageInfo.endCursor;
     }
 
-    return nonEmptyAtBuild("allDokumente", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allDokumente", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Dokumente:", error);
-    if (IS_BUILD) throw error;
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1502,11 +1503,10 @@ async function _fetchAllVergleiche(): Promise<Vergleich[]> {
 
   try {
     const data = await client.request<{ vergleiche: { nodes: Vergleich[] } }>(query);
-    return nonEmptyAtBuild("allVergleiche", data.vergleiche.nodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allVergleiche", data.vergleiche.nodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Vergleiche:", error);
-    if (IS_BUILD) throw error;
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1892,7 +1892,11 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
       { next: { revalidate: 3600 } },
     );
-    if (!response.ok) return null;
+    // 404 = Seite existiert wirklich nicht → null (echtes notFound). Andere Fehler
+    // (5xx/Timeout unter IONOS-Last) → werfen, damit kein leeres 404 gecached wird
+    // (ISR behält den letzten guten Stand statt die Seite auf 404 zu backen).
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error(`getPageBySlug("${slug}") HTTP ${response.status}`);
     const arr = await response.json();
     if (!Array.isArray(arr) || arr.length === 0) return null;
     const page = arr[0];
@@ -1905,7 +1909,7 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
     };
   } catch (error) {
     console.error(`Error fetching page "${slug}" from WordPress:`, error);
-    return null;
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt 404 zu cachen
   }
 }
 
@@ -1973,9 +1977,9 @@ export async function getAllAnbieter(): Promise<AnbieterPost[]> {
       hasNext = data.allAnbieter.pageInfo.hasNextPage;
       after = data.allAnbieter.pageInfo.endCursor;
     }
-    return all;
+    return requireNonEmpty("allAnbieter", all);
   } catch (error) {
     console.error("Error fetching all Anbieter:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
