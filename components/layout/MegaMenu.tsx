@@ -265,52 +265,40 @@ export default function MegaMenu({
   // Refs for each nav container
   const navRefsMap = useRef<Record<string, HTMLElement | null>>({});
   const prevCategoryRef = useRef(mainCategoryHref);
-  const firstRunRef = useRef(true);
-  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Track last active sub per category (for exit animation styling)
   const lastSubPerCategory = useRef<Record<string, string>>({});
   lastSubPerCategory.current[mainCategoryHref] = selectedSub;
 
-  // Welche Nav gerade ausfadet (nur EINE, die unmittelbar vorherige). Alle anderen
-  // nicht-aktiven Navs werden von React hart versteckt → max. 2 Navs gleichzeitig
-  // sichtbar (aktiv + ausgehend) = KEINE Pile-up-Überlagerung bei schnellem Switch,
-  // bei UNVERÄNDERTEM Timing/Animation.
-  const [exitingKey, setExitingKey] = useState<string | null>(null);
-
-  // „Vorherige gerenderte Kategorie merken"-Pattern: während des Renders setzen,
-  // damit die ausgehende Nav ohne 1-Frame-Flash sofort als „exiting" sichtbar bleibt.
-  if (prevCategoryRef.current !== mainCategoryHref) {
-    setExitingKey(prevCategoryRef.current);
-    prevCategoryRef.current = mainCategoryHref;
-  }
-
-  // Eingehende (aktive) Nav herein-staggern — Original-Timing (delay 0.15, außer First-Mount).
-  // useLayoutEffect: setzt den from-State (opacity 0) VOR dem Paint → kein 1-Frame-
-  // Aufblitzen der Buttons (bei langen Listen wie Versicherungen sonst sichtbar).
-  useLayoutEffect(() => {
-    const isFirst = firstRunRef.current;
-    firstRunRef.current = false;
-    const nav = navRefsMap.current[mainCategoryHref];
-    if (!nav) return;
-    const btns = nav.querySelectorAll(".megamenu-sub-btn");
-    gsap.killTweensOf(btns);
-    gsap.fromTo(btns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: isFirst ? 0 : 0.15, ease: "power2.out" });
-  }, [mainCategoryHref]);
-
-  // Ausgehende Nav heraus-staggern — Original-Timing — und nach der Animation
-  // React-seitig verstecken (setExitingKey null), sodass sie aus dem Stack fällt.
+  // Cross-fade stagger on category switch
   useEffect(() => {
-    if (!exitingKey) return;
-    const nav = navRefsMap.current[exitingKey];
-    if (nav) {
-      const btns = nav.querySelectorAll(".megamenu-sub-btn");
-      gsap.killTweensOf(btns);
-      gsap.to(btns, { opacity: 0, y: 25, duration: 0.25, stagger: 0.03, ease: "power2.in" });
+    const prevKey = prevCategoryRef.current;
+    const newKey = mainCategoryHref;
+    prevCategoryRef.current = newKey;
+
+    if (prevKey === newKey) {
+      // First mount: fade in
+      const nav = navRefsMap.current[newKey];
+      if (nav) {
+        const buttons = nav.querySelectorAll(".megamenu-sub-btn");
+        gsap.fromTo(buttons, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: "power2.out" });
+      }
+      return;
     }
-    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
-    const key = exitingKey;
-    exitTimerRef.current = setTimeout(() => setExitingKey((cur) => (cur === key ? null : cur)), 450);
-  }, [exitingKey]);
+
+    // Fade old out
+    const oldNav = navRefsMap.current[prevKey];
+    if (oldNav) {
+      const oldBtns = oldNav.querySelectorAll(".megamenu-sub-btn");
+      gsap.to(oldBtns, { opacity: 0, y: 25, duration: 0.25, stagger: 0.03, ease: "power2.in" });
+    }
+
+    // Fade new in
+    const newNav = navRefsMap.current[newKey];
+    if (newNav) {
+      const newBtns = newNav.querySelectorAll(".megamenu-sub-btn");
+      gsap.fromTo(newBtns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: 0.15, ease: "power2.out" });
+    }
+  }, [mainCategoryHref]);
 
   // Lock container to explicit height on first render
   useEffect(() => {
@@ -440,7 +428,6 @@ export default function MegaMenu({
           <div style={{ width: "50%", flexShrink: 0, position: "relative" }}>
             {Object.entries(allNavs).map(([catHref, catItems]) => {
               const isActive = catHref === mainCategoryHref;
-              const isExiting = catHref === exitingKey;
               const activeSub = isActive ? selectedSub : "";
               return (
               <nav
@@ -448,14 +435,7 @@ export default function MegaMenu({
                 ref={(el) => { navRefsMap.current[catHref] = el; }}
                 style={{
                   display: "flex", flexDirection: "column",
-                  // Nur aktive + die EINE ausgehende Nav sind sichtbar (GSAP steuert deren
-                  // Button-Opacity); alle anderen hart von React versteckt → kein Pile-up.
-                  ...(isActive
-                    ? {}
-                    : {
-                        position: "absolute", top: 0, left: 0, width: "100%", pointerEvents: "none",
-                        ...(isExiting ? {} : { opacity: 0, visibility: "hidden" as const }),
-                      }),
+                  ...(isActive ? {} : { position: "absolute", top: 0, left: 0, width: "100%", pointerEvents: "none" }),
                 }}
               >
               {catItems.map((item) => (

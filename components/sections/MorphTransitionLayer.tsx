@@ -32,6 +32,7 @@ import {
   getMorphTargets,
   getIsPopstate,
   getPopstateScrollTop,
+  getCachedTargets,
   setCachedTargets,
   onMorphComplete,
   finishMorph,
@@ -145,6 +146,9 @@ export default function MorphTransitionLayer() {
   const itemsRef = useRef<ItemRuntime[]>([]);
   const clonesRef = useRef<HTMLElement[]>([]);
   const hiddenTargetsRef = useRef<HTMLElement[]>([]);
+  // True, wenn beim Klick bereits zur gecachten Ziel-Position geflogen wurde →
+  // die exakte Nachkorrektur (beim Mount) braucht dann nur eine kurze Settle-Dauer.
+  const flewToCacheRef = useRef(false);
 
   const cleanup = () => {
     // Reveal-Reihenfolge: ERST die echten Ziele wieder sichtbar machen, DANN die
@@ -325,16 +329,31 @@ export default function MorphTransitionLayer() {
       }
     });
 
-    flyTo(real, MORPH_DURATION, true).then(() => onMorphComplete());
+    // Sind die Klone bereits (zum Cache) unterwegs/angekommen, ist das hier nur eine
+    // kleine Korrektur auf die exakte gemessene Position → kurze Settle-Dauer, damit
+    // der Morph snappy bleibt. Ohne Vorab-Flug: volle Morph-Dauer.
+    const settleDur = flewToCacheRef.current ? 0.22 : MORPH_DURATION;
+    flyTo(real, settleDur, true).then(() => onMorphComplete());
   };
 
   // Morph-Phasen.
   useEffect(() => {
     return subscribeMorph((phase) => {
       if (phase === "exiting") {
-        // Anker an der Quell-Position erzeugen (scharf, sofort). Der Flug startet
-        // erst beim "morphing", wenn die EXAKTE Ziel-Position gemessen werden kann.
+        // Anker an der Quell-Position erzeugen (scharf, sofort) und — falls für diese
+        // Viewport-Breite ein Ziel-Cache existiert — SOFORT zur gecachten Position
+        // fliegen (parallel zum EXIT-Ausblenden der alten Seite). Beim Mount wird
+        // dann nur noch weich auf die exakte Position nachkorrigiert. Ohne Cache
+        // (erster Morph / neue Breite) bleibt das Verhalten: Flug erst beim Mount.
         createSourceClones();
+        flewToCacheRef.current = false;
+        if (!getIsPopstate()) {
+          const cached = getCachedTargets();
+          if (cached) {
+            flyTo(cached, MORPH_DURATION, false);
+            flewToCacheRef.current = true;
+          }
+        }
       } else if (phase === "morphing") {
         runMorphToReal();
       } else if (phase === "settling" && getIsPopstate()) {

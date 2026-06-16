@@ -127,7 +127,10 @@ type Listener = (phase: MorphPhase) => void;
 
 // Notbremse: wenn nach dem Klick nicht innerhalb dieser Zeit eine Artikelseite mit
 // Zielen meldet (z. B. Navigation auf eine Nicht-Artikel-Route), Gate freigeben.
-const SAFETY_MS = 1600;
+// Großzügig, damit langsame (Dev-)On-Demand-Mounts den Morph NICHT vorzeitig
+// abbrechen → die Morph-Klone halten an der Zielposition statt Loader→Sprung.
+// Auf SSG-Production mountet der Artikel in ~50–150 ms, die Notbremse greift dort nie.
+const SAFETY_MS = 5000;
 
 let phase: MorphPhase = "idle";
 let payload: MorphPayload | null = null;
