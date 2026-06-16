@@ -250,6 +250,34 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
           </p>
         </div>
 
+        {/* Tool-Labels — zwischen fettem Text und „Ratgeber lesen" */}
+        {post.tools && post.tools.length > 0 && (
+          <div style={{
+            width: '100%',
+            padding: '0 23px',
+            margin: '6px 0',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 6,
+            flexShrink: 0,
+          }}>
+            {post.tools.map((t) => (
+              <span key={t} style={{
+                background: TOOL_DOT_COLORS[t],
+                color: '#fff',
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                fontWeight: 600,
+                lineHeight: 1,
+                padding: '5px 10px',
+                letterSpacing: '0.02em',
+              }}>
+                {TOOL_LABEL[t]}
+              </span>
+            ))}
+          </div>
+        )}
+
         {/* Footer: direkt nach dem Text (nicht am unteren Card-Rand) */}
         <div style={{
           width: '100%',
@@ -292,35 +320,6 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
         </Link>
         </div>
       </div>
-
-      {/* Tool-Labels — kleine Chips für eingebettete Finanztools (gleiche Labels wie „Neuste Finanztools") */}
-      {post.tools && post.tools.length > 0 && (
-        <div style={{
-          position: 'absolute',
-          top: 10,
-          left: 10,
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 6,
-          zIndex: 62,
-          pointerEvents: 'none',
-        }}>
-          {post.tools.map((t) => (
-            <span key={t} style={{
-              background: TOOL_DOT_COLORS[t],
-              color: '#fff',
-              fontFamily: 'var(--font-body)',
-              fontSize: 12,
-              fontWeight: 600,
-              lineHeight: 1,
-              padding: '5px 10px',
-              letterSpacing: '0.02em',
-            }}>
-              {TOOL_LABEL[t]}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

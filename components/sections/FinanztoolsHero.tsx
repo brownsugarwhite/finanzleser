@@ -635,7 +635,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                       <p className="latest-post-title" data-morph-role="bold" style={{
                         fontSize: 16,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                        fontWeight: 650,
+                        fontWeight: 700,
                         margin: "0 0 8px 0",
                         lineHeight: 1.35,
                         hyphens: "auto",
@@ -744,25 +744,24 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                         }}>
                           {tool.label}
                         </span>
-                        {/* Titel klein */}
-                        <p style={{
-                          fontSize: 13,
+                        {/* Titel klein — exakt wie „Neuste Beiträge" (.latest-post-category) */}
+                        <p className="latest-post-category" style={{
+                          fontSize: 12,
                           fontFamily: "var(--font-body)",
-                          fontWeight: 500,
                           margin: "0 0 4px 0",
                           lineHeight: 1.3,
                           color: "var(--color-text-secondary)",
                         }} lang="de">
                           {tool.title}
                         </p>
-                        {/* Beschreibung groß (Merriweather 650, analog Beiträge) */}
+                        {/* Beschreibung groß (Merriweather 700, analog Beiträge) */}
                         {desc && (
-                          <p style={{
+                          <p className="latest-post-title" style={{
                             fontSize: 16,
                             fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                            fontWeight: 650,
+                            fontWeight: 700,
                             color: "var(--color-text-primary)",
-                            lineHeight: 1.4,
+                            lineHeight: 1.35,
                             margin: "0 0 8px 0",
                             hyphens: "auto",
                             WebkitHyphens: "auto",

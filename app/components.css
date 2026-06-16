@@ -1443,6 +1443,13 @@ h1.category-title {
 .slide-article-card:hover .article-read-link span {
   color: var(--color-brand-secondary) !important;
 }
+/* Kleiner Titel (inkl. innerem <span>{post.title}</span>) + fette Zeile sicher
+   mit auf brand-secondary — Inline-Color am inneren Span würde sonst gewinnen. */
+.latest-post-item:hover .latest-post-category span:not([style*="background"]),
+.latest-post-item:hover .latest-post-title span,
+.slide-article-card:hover p span:not([style*="background"]) {
+  color: var(--color-brand-secondary) !important;
+}
 .megamenu-legal-link:hover {
   color: var(--color-brand-secondary) !important;
 }

@@ -418,8 +418,8 @@ export default function MegaMenu({
                       display: "block",
                       color: "var(--color-text-primary)",
                       padding: "6px 12px",
-                      fontSize: 15,
-                      fontWeight: 600,
+                      fontSize: 16,
+                      fontWeight: 700,
                       fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       textDecoration: "none",
                       transition: "color 0.15s ease",
@@ -446,15 +446,16 @@ export default function MegaMenu({
                           <span style={{
                             display: "flex",
                             alignItems: "center",
-                            gap: 8,
-                            fontSize: 14,
-                            fontWeight: 450,
+                            gap: 6,
+                            fontSize: 12,
+                            fontWeight: 400,
                             fontFamily: "var(--font-body)",
-                            color: "var(--color-text-medium)",
-                            marginBottom: 2,
+                            color: "var(--color-text-secondary)",
+                            lineHeight: 1.3,
+                            marginBottom: 4,
                           }}>
                             <span>{post.title}</span>
-                            <ToolDots tools={post.tools} />
+                            <ToolDots tools={post.tools} size={8} style={{ marginLeft: 0 }} />
                           </span>
                           <span style={{ display: "block" }}>
                             {boldYears(kicker)}
@@ -525,8 +526,8 @@ export default function MegaMenu({
                       flexDirection: "column",
                       alignItems: "flex-end",
                       padding: "8px 12px",
-                      fontSize: 15,
-                      fontWeight: 500,
+                      fontSize: 16,
+                      fontWeight: 700,
                       lineHeight: 1.2,
                       fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       color: "var(--color-text-primary)",
