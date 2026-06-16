@@ -60,16 +60,13 @@ async function FinanztoolsHeroSection() {
   // Pagination ALLER ~1000+ Beiträge, 10+ verkettete Requests) nur als Fallback
   // geladen — das blockierte/timeoutete den SSR der Landing bei kaltem WordPress
   // und führte zu „Beiträge erst nach Reload sichtbar".
-  let latestPosts: Post[] = [];
-  let latestTools: LatestTool[] = [];
-  try {
-    [latestPosts, latestTools] = await Promise.all([
-      getLatestPosts(10),
-      getLatestFinanztools(),
-    ]);
-  } catch (error) {
-    console.error("Fehler beim Laden der Hero-Daten:", error);
-  }
+  // KEIN try/catch-Swallow: würde den Laufzeit-Leer-Schutz aushebeln (leere Hero-Sidebar
+  // backen statt letzten guten Stand zu behalten). Fehler propagieren → ISR behält den
+  // letzten Stand / Build retried (staticGenerationRetryCount).
+  const [latestPosts, latestTools] = await Promise.all([
+    getLatestPosts(10),
+    getLatestFinanztools(),
+  ]);
   return (
     <div className="scalable-landing">
       <FinanztoolsHero latestPosts={latestPosts} latestTools={latestTools} />
@@ -78,29 +75,27 @@ async function FinanztoolsHeroSection() {
 }
 
 async function RatgeberSection() {
-  let kategorieBlocks: KategorieBlock[] = [];
-  try {
-    const mainCats = await Promise.all(
-      RATGEBER_KATEGORIEN.map((k) => getCategoryWithChildren(k.slug))
-    );
-    kategorieBlocks = await Promise.all(
-      RATGEBER_KATEGORIEN.map(async (kat, i) => {
-        const main = mainCats[i];
-        const children = main?.children ?? [];
-        const results = await Promise.all(
-          children.map(async (cat) => ({
-            slug: cat.slug,
-            posts: await getPostsByCategory(cat.slug).catch(() => []),
-          }))
-        );
-        const categoryPosts: Record<string, Post[]> = {};
-        results.forEach(({ slug, posts: p }) => { categoryPosts[slug] = p; });
-        return { slug: kat.slug, heading: kat.heading, children, categoryPosts } as KategorieBlock;
-      })
-    );
-  } catch (error) {
-    console.error("Fehler beim Laden der Ratgeber-Daten:", error);
-  }
+  // KEIN try/catch-Swallow und KEIN .catch(()=>[]) pro Subkategorie: beides würde den
+  // Laufzeit-Leer-Schutz aushebeln und leere Kategorie-Slider backen. Fehler propagieren
+  // → ISR behält letzten guten Stand / Build retried, statt „leeren Slider" zu cachen.
+  const mainCats = await Promise.all(
+    RATGEBER_KATEGORIEN.map((k) => getCategoryWithChildren(k.slug))
+  );
+  const kategorieBlocks: KategorieBlock[] = await Promise.all(
+    RATGEBER_KATEGORIEN.map(async (kat, i) => {
+      const main = mainCats[i];
+      const children = main?.children ?? [];
+      const results = await Promise.all(
+        children.map(async (cat) => ({
+          slug: cat.slug,
+          posts: await getPostsByCategory(cat.slug),
+        }))
+      );
+      const categoryPosts: Record<string, Post[]> = {};
+      results.forEach(({ slug, posts: p }) => { categoryPosts[slug] = p; });
+      return { slug: kat.slug, heading: kat.heading, children, categoryPosts } as KategorieBlock;
+    })
+  );
 
   return (
     <section id="ratgeber-section" style={{ width: "100%", padding: "80px 0 120px" }}>
