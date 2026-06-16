@@ -1397,6 +1397,19 @@ h1.category-title {
   width: 36px;
   transition: width 1s ease-out;
 }
+/* „Alle Beiträge zu …" — Pfeil-Linie wächst bei Hover wie die Subkategorie-Punkte. */
+.megamenu-allposts-link:hover .megamenu-sub-line {
+  width: 36px;
+  transition: width 1s ease-out;
+}
+/* Booklet-Überschriften (Haupt-/Subkategorie): Hover färbt Text + Icon (mask, currentColor). */
+.megamenu-booklet-heading {
+  transition: color 0.15s ease;
+}
+.megamenu-booklet-heading:hover,
+.megamenu-booklet-heading:hover span {
+  color: var(--color-brand-secondary) !important;
+}
 .megamenu-sub-line--active {
   width: 100px !important;
   border-color: var(--color-brand) !important;

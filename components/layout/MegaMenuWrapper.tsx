@@ -26,6 +26,12 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [openedViaBurger, setOpenedViaBurger] = useState(false);
   const [visible, setVisible] = useState(false);
+  // Bleibt während der Schließ-Animation true, damit das Booklet ausfaden kann
+  // (statt hart zu unmounten) — symmetrisch zum Einfaden.
+  const [shouldRender, setShouldRender] = useState(false);
+  // Eingefrorene Werte fürs Ausfaden: während offen aktualisiert, beim Schließen
+  // beibehalten → kein Layout-Sprung (top/Burger-Nav/Kategorie) während des Fades.
+  const closeFreezeRef = useRef<{ category: string | null; burger: boolean }>({ category: null, burger: false });
   const wrapperRef = useRef<HTMLDivElement>(null);
   const burgerNavRef = useRef<HTMLDivElement>(null);
   // Mit SSG-Preload aus dem Layout vorbefüllt → Megamenü ist ab erstem Pageload sofort
@@ -197,13 +203,20 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
   // Fade in only on first open, not on category switch
   useEffect(() => {
     if (isOpen) {
+      setShouldRender(true);
       if (!visible) {
         const timer = setTimeout(() => setVisible(true), 200);
         return () => clearTimeout(timer);
       }
     } else {
       setVisible(false);
+      // Booklet noch gemountet lassen, bis die Opacity-Transition (0.5s) durch ist.
+      if (shouldRender) {
+        const timer = setTimeout(() => setShouldRender(false), 520);
+        return () => clearTimeout(timer);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   // Lock scroll when open
@@ -230,9 +243,17 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
     return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  // Während offen: aktuelle Werte einfrieren, damit das Ausfaden (openCategory→null)
+  // weiterhin Inhalt/Position zeigt statt hart zu verschwinden.
+  if (isOpen) {
+    closeFreezeRef.current = { category: openCategory, burger: openedViaBurger };
+  }
+  const renderCategory = isOpen ? openCategory : closeFreezeRef.current.category;
+  const renderBurger = isOpen ? openedViaBurger : closeFreezeRef.current.burger;
 
-  const activeItem = NAV_ITEMS.find((n) => n.label === openCategory);
+  if (!shouldRender) return null;
+
+  const activeItem = NAV_ITEMS.find((n) => n.label === renderCategory);
   if (!activeItem?.submenu) return null;
 
   const closeAll = () => {
@@ -248,14 +269,15 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
         position: "fixed",
         left: 0,
         right: 0,
-        top: openedViaBurger ? 0 : 73,
+        top: renderBurger ? 0 : 73,
         zIndex: 57,
         opacity: visible ? 1 : 0,
         transition: "opacity 0.5s ease",
+        pointerEvents: isOpen ? "auto" : "none",
       }}
     >
       {/* Burger TopNav – slides in from top when opened via burger */}
-      {openedViaBurger && (
+      {renderBurger && (
         <div
           ref={burgerNavRef}
           style={{
@@ -269,7 +291,7 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
         >
           <TopNav
             className="burger-nav"
-            defaultActive={openCategory || undefined}
+            defaultActive={renderCategory || undefined}
             style={{
               position: "relative",
               zIndex: 3,
@@ -281,7 +303,7 @@ function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
       )}
 
       {/* Megamenu content */}
-      <div style={openedViaBurger ? { marginTop: -10 } : undefined}>
+      <div style={renderBurger ? { marginTop: -10 } : undefined}>
         <MegaMenu
           activeCategory={activeItem.href.substring(1)}
           activeCategoryLabel={activeItem.label}

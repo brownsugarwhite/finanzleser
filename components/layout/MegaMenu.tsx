@@ -4,6 +4,102 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "@/lib/gsapConfig";
 import type { NavSubItem } from "@/lib/navItems";
+import { categoryIconForHref } from "@/lib/categoryIcons";
+
+/**
+ * Booklet-Überschrift mit Slide-Wechsel: bei Text-Änderung gleitet die alte
+ * Zeile nach oben aus dem Clip-Container, die neue von unten herein.
+ */
+function SlideHeading({
+  text,
+  href,
+  onClose,
+  leadingIcon,
+}: {
+  text: string;
+  href: string;
+  onClose: () => void;
+  leadingIcon?: string;
+}) {
+  const clipRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const prevText = useRef(text);
+  const prevIcon = useRef(leadingIcon);
+
+  // Icon pulsiert beim Kategoriewechsel (parallel zum Überschriften-Slide).
+  useEffect(() => {
+    if (prevIcon.current === leadingIcon) return;
+    prevIcon.current = leadingIcon;
+    const el = iconRef.current;
+    if (!el) return;
+    gsap.killTweensOf(el);
+    gsap.fromTo(el, { scale: 0.6, opacity: 0.3 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.2)" });
+  }, [leadingIcon]);
+
+  useEffect(() => {
+    if (prevText.current === text) return;
+    const oldText = prevText.current;
+    prevText.current = text;
+    const clip = clipRef.current;
+    const cur = textRef.current;
+    if (!clip || !cur) return;
+
+    const clone = document.createElement("span");
+    clone.textContent = oldText;
+    clone.style.cssText = "position:absolute;left:0;top:0;white-space:nowrap;display:inline-block;";
+    clip.appendChild(clone);
+
+    gsap.killTweensOf([clone, cur]);
+    gsap.fromTo(clone, { yPercent: 0, opacity: 1 }, { yPercent: -110, opacity: 0, duration: 0.4, ease: "power2.out", onComplete: () => clone.remove() });
+    gsap.fromTo(cur, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
+  }, [text]);
+
+  return (
+    <Link
+      href={href}
+      onClick={onClose}
+      className="megamenu-booklet-heading"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 10,
+        fontSize: 20,
+        fontWeight: 700,
+        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+        color: "var(--color-text-primary)",
+        textDecoration: "none",
+      }}
+    >
+      {leadingIcon && (
+        <span
+          ref={iconRef}
+          aria-hidden
+          className="megamenu-cat-icon"
+          style={{
+            width: 26,
+            height: 26,
+            flexShrink: 0,
+            display: "inline-block",
+            transformOrigin: "center",
+            background: "currentColor",
+            WebkitMaskImage: `url(${leadingIcon})`,
+            maskImage: `url(${leadingIcon})`,
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskSize: "contain",
+            maskSize: "contain",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
+          }}
+        />
+      )}
+      <span ref={clipRef} style={{ position: "relative", overflow: "hidden", display: "inline-block", paddingBottom: 2 }}>
+        <span ref={textRef} style={{ display: "inline-block" }}>{text}</span>
+      </span>
+    </Link>
+  );
+}
 
 function boldYears(text: string) {
   const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
@@ -151,6 +247,16 @@ export default function MegaMenu({
     gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" });
   }, [selectedSub, loading]);
 
+  // Finanztools schlicht „aufblitzen" lassen (Opacity-Fade) — wie die Posts-Spalte
+  // in der rechten Booklet-Hälfte, beim Öffnen und bei jedem Inhaltswechsel.
+  const toolsNavRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const nav = toolsNavRef.current;
+    if (!nav) return;
+    gsap.killTweensOf(nav);
+    gsap.fromTo(nav, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" });
+  }, [tools]);
+
   // Keep all seen category navs so they're always in the DOM
   const allNavsRef = useRef<Record<string, NavSubItem[]>>({});
   allNavsRef.current[mainCategoryHref] = items;
@@ -159,40 +265,50 @@ export default function MegaMenu({
   // Refs for each nav container
   const navRefsMap = useRef<Record<string, HTMLElement | null>>({});
   const prevCategoryRef = useRef(mainCategoryHref);
+  const firstRunRef = useRef(true);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Track last active sub per category (for exit animation styling)
   const lastSubPerCategory = useRef<Record<string, string>>({});
   lastSubPerCategory.current[mainCategoryHref] = selectedSub;
 
-  // Cross-fade stagger on category switch
+  // Welche Nav gerade ausfadet (nur EINE, die unmittelbar vorherige). Alle anderen
+  // nicht-aktiven Navs werden von React hart versteckt → max. 2 Navs gleichzeitig
+  // sichtbar (aktiv + ausgehend) = KEINE Pile-up-Überlagerung bei schnellem Switch,
+  // bei UNVERÄNDERTEM Timing/Animation.
+  const [exitingKey, setExitingKey] = useState<string | null>(null);
+
+  // „Vorherige gerenderte Kategorie merken"-Pattern: während des Renders setzen,
+  // damit die ausgehende Nav ohne 1-Frame-Flash sofort als „exiting" sichtbar bleibt.
+  if (prevCategoryRef.current !== mainCategoryHref) {
+    setExitingKey(prevCategoryRef.current);
+    prevCategoryRef.current = mainCategoryHref;
+  }
+
+  // Eingehende (aktive) Nav herein-staggern — Original-Timing (delay 0.15, außer First-Mount).
   useEffect(() => {
-    const prevKey = prevCategoryRef.current;
-    const newKey = mainCategoryHref;
-    prevCategoryRef.current = newKey;
-
-    if (prevKey === newKey) {
-      // First mount: fade in
-      const nav = navRefsMap.current[newKey];
-      if (nav) {
-        const buttons = nav.querySelectorAll(".megamenu-sub-btn");
-        gsap.fromTo(buttons, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, ease: "power2.out" });
-      }
-      return;
-    }
-
-    // Fade old out
-    const oldNav = navRefsMap.current[prevKey];
-    if (oldNav) {
-      const oldBtns = oldNav.querySelectorAll(".megamenu-sub-btn");
-      gsap.to(oldBtns, { opacity: 0, y: 25, duration: 0.25, stagger: 0.03, ease: "power2.in" });
-    }
-
-    // Fade new in
-    const newNav = navRefsMap.current[newKey];
-    if (newNav) {
-      const newBtns = newNav.querySelectorAll(".megamenu-sub-btn");
-      gsap.fromTo(newBtns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: 0.15, ease: "power2.out" });
-    }
+    const isFirst = firstRunRef.current;
+    firstRunRef.current = false;
+    const nav = navRefsMap.current[mainCategoryHref];
+    if (!nav) return;
+    const btns = nav.querySelectorAll(".megamenu-sub-btn");
+    gsap.killTweensOf(btns);
+    gsap.fromTo(btns, { opacity: 0, y: -25 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.05, delay: isFirst ? 0 : 0.15, ease: "power2.out" });
   }, [mainCategoryHref]);
+
+  // Ausgehende Nav heraus-staggern — Original-Timing — und nach der Animation
+  // React-seitig verstecken (setExitingKey null), sodass sie aus dem Stack fällt.
+  useEffect(() => {
+    if (!exitingKey) return;
+    const nav = navRefsMap.current[exitingKey];
+    if (nav) {
+      const btns = nav.querySelectorAll(".megamenu-sub-btn");
+      gsap.killTweensOf(btns);
+      gsap.to(btns, { opacity: 0, y: 25, duration: 0.25, stagger: 0.03, ease: "power2.in" });
+    }
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    const key = exitingKey;
+    exitTimerRef.current = setTimeout(() => setExitingKey((cur) => (cur === key ? null : cur)), 450);
+  }, [exitingKey]);
 
   // Lock container to explicit height on first render
   useEffect(() => {
@@ -297,38 +413,21 @@ export default function MegaMenu({
           {/* Headings row */}
           <div style={{ display: "flex", marginBottom: 0, padding: "0 40px", borderBottom: "1px solid rgba(0, 0, 0, 0.07)", paddingBottom: 16 }}>
             <div style={{ flex: 1, paddingRight: 24 }}>
-              <Link
+              <SlideHeading
+                text={activeCategoryLabel}
                 href={mainCategoryHref}
-                onClick={onClose}
-                style={{
-                  display: "block",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  color: "var(--color-text-primary)",
-                  textDecoration: "none",
-                }}
-              >
-                {activeCategoryLabel}
-              </Link>
+                onClose={onClose}
+                leadingIcon={categoryIconForHref(mainCategoryHref)}
+              />
             </div>
             {/* Spacer for bookmark */}
             <div style={{ width: 10, flexShrink: 0 }} />
             <div style={{ flex: 1, paddingLeft: 36 }}>
-              <Link
+              <SlideHeading
+                text={items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
                 href={selectedSub}
-                onClick={onClose}
-                style={{
-                  display: "block",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  color: "var(--color-text-primary)",
-                  textDecoration: "none",
-                }}
-              >
-                {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
-              </Link>
+                onClose={onClose}
+              />
             </div>
           </div>
 
@@ -339,6 +438,7 @@ export default function MegaMenu({
           <div style={{ width: "50%", flexShrink: 0, position: "relative" }}>
             {Object.entries(allNavs).map(([catHref, catItems]) => {
               const isActive = catHref === mainCategoryHref;
+              const isExiting = catHref === exitingKey;
               const activeSub = isActive ? selectedSub : "";
               return (
               <nav
@@ -346,7 +446,14 @@ export default function MegaMenu({
                 ref={(el) => { navRefsMap.current[catHref] = el; }}
                 style={{
                   display: "flex", flexDirection: "column",
-                  ...(isActive ? {} : { position: "absolute", top: 0, left: 0, width: "100%", pointerEvents: "none" }),
+                  // Nur aktive + die EINE ausgehende Nav sind sichtbar (GSAP steuert deren
+                  // Button-Opacity); alle anderen hart von React versteckt → kein Pile-up.
+                  ...(isActive
+                    ? {}
+                    : {
+                        position: "absolute", top: 0, left: 0, width: "100%", pointerEvents: "none",
+                        ...(isExiting ? {} : { opacity: 0, visibility: "hidden" as const }),
+                      }),
                 }}
               >
               {catItems.map((item) => (
@@ -473,18 +580,23 @@ export default function MegaMenu({
               <Link
                 href={selectedSub}
                 onClick={onClose}
+                className="megamenu-allposts-link"
                 style={{
-                  display: "block",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
                   marginTop: 23,
                   paddingTop: 16,
                   borderTop: "1px solid rgba(0, 0, 0, 0.07)",
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: 600,
                   color: "var(--color-brand)",
                   textDecoration: "none",
                 }}
               >
-                Alle Beiträge ansehen <span style={{ display: "inline-block", width: 13, height: 0, borderTop: "1px solid currentColor", verticalAlign: "middle", marginLeft: 4 }} /><svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", display: "inline", verticalAlign: "middle", marginLeft: -4 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
+                Alle Beiträge zu {items.find((item) => item.href === selectedSub)?.label || "dieser Kategorie"}
+                <span className="megamenu-sub-line" style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }} />
+                <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: -12 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
               </Link>
             )}
             </div>
@@ -512,9 +624,9 @@ export default function MegaMenu({
             Passende<br />Finanztools
           </Link>
           {tools.length > 0 ? (
-            <nav style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
+            <nav ref={toolsNavRef} style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
               {tools.map((tool, idx) => (
-                <div key={`${tool.type}-${tool.slug}-${idx}`}>
+                <div key={`${tool.type}-${tool.slug}-${idx}`} className="megamenu-tool-item">
                   {idx > 0 && (
                     <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "13px 12px" }} />
                   )}

@@ -6,6 +6,7 @@ import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
 import { getLatestPosts, getCategoryWithChildren, getPostsByCategory, getLatestFinanztools, type LatestTool } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
+import { CATEGORY_ICONS as RATGEBER_ICONS } from "@/lib/categoryIcons";
 
 // Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
 // Initial-Bundle der Landing landet.
@@ -21,13 +22,6 @@ const RATGEBER_KATEGORIEN: Array<{ slug: string; heading: string }> = [
   { slug: "steuern", heading: "Steuerratgeber" },
   { slug: "recht", heading: "Rechtsratgeber" },
 ];
-
-const RATGEBER_ICONS: Record<string, string> = {
-  finanzen: "/icons/icon_finanzen.svg",
-  versicherungen: "/icons/icon_versicherungen.svg",
-  steuern: "/icons/icon_steuer.svg",
-  recht: "/icons/icon_recht.svg",
-};
 
 type KategorieBlock = {
   slug: string;
