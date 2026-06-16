@@ -2,6 +2,7 @@
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import { Fragment, useRef, useCallback, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/lib/hooks/useNavPill";
@@ -62,6 +63,21 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
     window.addEventListener("menu-closed", onClose);
     return () => window.removeEventListener("menu-closed", onClose);
   }, [pill, scrollBackFromNav]);
+
+  // Route-Wechsel-Reset: Navigation auf einen Megamenü-Link schließt das Menü über
+  // consumeActiveOverlayForTransition() → KEIN „menu-closed", der aktive Pill blieb
+  // sonst markiert. Bei jedem pathname-Wechsel den Pill zurücksetzen. Die Burger-
+  // Variante (defaultActive) verwaltet ihren aktiven Pill selbst und unmountet eh.
+  const closeMenuRef = useRef(pill.closeMenu);
+  closeMenuRef.current = pill.closeMenu;
+  const pathname = usePathname();
+  const firstPathRef = useRef(true);
+  useEffect(() => {
+    if (firstPathRef.current) { firstPathRef.current = false; return; }
+    if (defaultActive) return;
+    closeMenuRef.current();
+    openedViaPill.current = false;
+  }, [pathname, defaultActive]);
 
   // Lens sync
   useEffect(() => {

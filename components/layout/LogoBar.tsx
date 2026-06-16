@@ -47,6 +47,12 @@ export default function LogoBar() {
   const stateRef = useRef<LogoState>("long-visible");
   const menuOpenRef = useRef(false);
   const reconcileSuspendedUntilRef = useRef(0);
+  // Nach einer Navigation kurz den Shrink/Grow-Trigger unterdrücken: der Trigger
+  // wird (scroll-anim-recreate) ggf. neu erstellt, während die neue Seite noch
+  // NICHT nach oben gesprungen ist (Scroll steht kurz auf alter Position) → sonst
+  // feuert onEnter fälschlich und shrinkt das Logo am Seiten-Top.
+  const navSettlingRef = useRef(false);
+  const navSettleTimerRef = useRef<number | null>(null);
   // Pending „Logo ausblenden"-Timer (Landing). Muss gecancelt werden, sobald das
   // Logo wieder eingeblendet wird — sonst feuert beim schnellen Hin-/Herscrollen
   // ein verwaister Hide-Timer NACH dem erneuten shortIn und blendet das gerade
@@ -108,29 +114,54 @@ export default function LogoBar() {
     }, delay);
   };
 
-  // Init / pathname change → snap logo + state
+  // Init / pathname change → snap logo + state.
+  // WICHTIG: Dependency ist `pathname` (nicht nur `isLanding`) — sonst wird bei
+  // Sub→Sub-Navigation der Logo-Zustand NICHT zurückgesetzt und bleibt im
+  // „short-visible" der gescrollten Vorseite hängen. Bei jedem Routenwechsel
+  // (neue Seite = Scroll-Top) auf den Soll-Zustand zurücksetzen.
   useEffect(() => {
     cancelHide(); // evtl. verwaisten Landing-Hide-Timer abbrechen
-    const initialFrame = isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible;
-    stateRef.current = isLanding ? "hidden" : "long-visible";
+    // Stale Menü-Zustände leeren (z.B. Navigation WÄHREND das Menü offen war →
+    // onMenuClosed feuert beim Transition-Close nicht; sonst bliebe der Logo-
+    // „vor-Menü"-Restore-State hängen).
     menuOpenRef.current = false;
-    logoRef.current?.setFrame(initialFrame);
-    setLogoVisible(!isLanding);
+    logoStateBeforeMenuRef.current = null;
+    if (longInDelayTimerRef.current !== null) { clearTimeout(longInDelayTimerRef.current); longInDelayTimerRef.current = null; }
 
-    // Non-Landing: Logo, Untertitel (Claim) und Dotline explizit sichtbar
-    // setzen. Beim Wechsel von der Landing (wo Claim/Dotline ausgeblendet sind
-    // und ein Scrub-Tween oder ContentScaler opacity 0 hinterlassen haben kann)
-    // blieben sie sonst gelegentlich unsichtbar. Die anschließend (im Claim-
-    // Effect) neu erstellten Scrub-Trigger übernehmen ab dem ersten Scroll.
-    if (!isLanding) {
-      if (claimRef.current) gsap.set(claimRef.current, { opacity: 1 });
-      const dot = document.querySelector(".dotline-animated") as HTMLElement | null;
-      if (dot) gsap.set(dot, { opacity: 1 });
-      document
-        .querySelectorAll<HTMLElement>("[data-topnav]")
-        .forEach((el) => gsap.set(el, { opacity: 1, filter: "none" }));
+    if (isLanding) {
+      stateRef.current = "hidden";
+      logoRef.current?.setFrame(LOGO_FRAMES.shortHidden);
+      setLogoVisible(false);
+      return;
     }
-  }, [isLanding]);
+
+    // Non-Landing: Navigation springt auf Scroll-Top → Logo soll GROSS (long)
+    // bleiben und sich erst beim echten Runterscrollen verkleinern. Den Shrink/
+    // Grow-Trigger während des Übergangs-Fensters unterdrücken, damit er nicht
+    // fälschlich shrinkt, solange der Scroll noch auf der alten Position steht
+    // (Trigger wird via scroll-anim-recreate kurz vor dem Scroll-to-Top neu erstellt).
+    stateRef.current = "long-visible";
+    logoRef.current?.setFrame(LOGO_FRAMES.longVisible);
+    setLogoVisible(true);
+
+    navSettlingRef.current = true;
+    if (navSettleTimerRef.current !== null) clearTimeout(navSettleTimerRef.current);
+    navSettleTimerRef.current = window.setTimeout(() => {
+      navSettleTimerRef.current = null;
+      navSettlingRef.current = false; // Trigger wieder zulassen; Logo bleibt long bis runtergescrollt wird
+    }, 800);
+
+    // Logo, Untertitel (Claim) und Dotline explizit sichtbar setzen. Beim Wechsel
+    // von der Landing (wo Claim/Dotline ausgeblendet sind und ein Scrub-Tween oder
+    // ContentScaler opacity 0 hinterlassen haben kann) blieben sie sonst gelegentlich
+    // unsichtbar.
+    if (claimRef.current) gsap.set(claimRef.current, { opacity: 1 });
+    const dot = document.querySelector(".dotline-animated") as HTMLElement | null;
+    if (dot) gsap.set(dot, { opacity: 1 });
+    document
+      .querySelectorAll<HTMLElement>("[data-topnav]")
+      .forEach((el) => gsap.set(el, { opacity: 1, filter: "none" }));
+  }, [pathname]);
 
   // Claim + dotline scrub fade (unchanged)
   useEffect(() => {
@@ -180,13 +211,13 @@ export default function LogoBar() {
         start: triggerPos,
         end: triggerPos + 1,
         onEnter: () => {
-          if (menuOpenRef.current) return;
+          if (menuOpenRef.current || navSettlingRef.current) return;
           if (stateRef.current !== "long-visible") return;
           logoRef.current?.playShrink();
           stateRef.current = "short-visible";
         },
         onLeaveBack: () => {
-          if (menuOpenRef.current) return;
+          if (menuOpenRef.current || navSettlingRef.current) return;
           if (stateRef.current !== "short-visible") return;
           logoRef.current?.playGrow();
           stateRef.current = "long-visible";
@@ -498,24 +529,6 @@ export default function LogoBar() {
           </span>
         </div>
       </div>
-      {/* Fixed-positionierter Target-Slot für SparkHeading-Flip-Dock.
-          Bewusst position:fixed (nicht im Sticky-Wrapper) — Flip braucht zwei
-          stabile Endpunkte, sticky-relative Positionen verschieben sich beim
-          Scrollen und führen zu Snap-Sprüngen. */}
-      <div
-        id="ratgeber-flip-target"
-        style={{
-          position: "fixed",
-          top: isMobile ? 35 : 32,
-          left: isMobile ? 40 : 82,
-          width: 220,
-          height: 30,
-          pointerEvents: "auto",
-          display: "flex",
-          alignItems: "center",
-          zIndex: 62,
-        }}
-      />
     </>
   );
 }

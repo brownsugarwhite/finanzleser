@@ -3,6 +3,7 @@
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import Image from "next/image";
 import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
@@ -301,6 +302,21 @@ export default function BookmarkNav() {
     window.addEventListener("menu-closed", handleMenuClosed);
     return () => window.removeEventListener("menu-closed", handleMenuClosed);
   }, [animateToBurger, hideAsX, isMobile]);
+
+  // Route-Wechsel-Reset: Wird das Menü durch Navigation auf einen Megamenü-Link
+  // geschlossen, läuft das über consumeActiveOverlayForTransition() — das feuert
+  // KEIN „menu-closed", deshalb blieb der Burger als X stehen. Bei jedem
+  // pathname-Wechsel den X-Zustand sauber auflösen (neue Seite = Scroll-Top →
+  // Nav sichtbar → X kollabiert raus; auf Mobile bleibt der Button als Burger).
+  const pathname = usePathname();
+  useEffect(() => {
+    if (!burgerIsX.current) return;
+    if (isMobile) { animateToBurger(); return; }
+    const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
+    const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
+    if (navIsHidden) animateToBurger();
+    else hideAsX();
+  }, [pathname, animateToBurger, hideAsX, isMobile]);
 
   const toggleBurger = useCallback(() => {
     if (burgerIsX.current) {

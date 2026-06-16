@@ -310,6 +310,19 @@ export default function LeoIcon() {
     el.style.height = `${elSize}px`;
     gsap.set(el, { x: 0, y: 0, clearProps: "transform" });
 
+    // Morph-/Chat-Child-Styles auf Home-Default zurücksetzen. Wurde Leo aus dem
+    // KI-Dock (data-state="morphed") heraus navigiert, blieben sonst die Bubble-
+    // Kinder (Arrow-Button, Spike, Input, kollabierter Leo/Tie) inline gesetzt →
+    // „Überlagerung von 2 States" über dem Home-Icon.
+    const morphChildren = [tieRef.current, leoGroupRef.current, arrowBtnRef.current, spikeRightRef.current, badgeRef.current, inputRef.current].filter(Boolean) as HTMLElement[];
+    gsap.killTweensOf(morphChildren);
+    if (leoGroupRef.current) gsap.set(leoGroupRef.current, { clearProps: "transform" });
+    if (tieRef.current) gsap.set(tieRef.current, { scale: 1, opacity: 1 });
+    if (arrowBtnRef.current) gsap.set(arrowBtnRef.current, { scale: 0 });
+    if (spikeRightRef.current) gsap.set(spikeRightRef.current, { scale: 0 });
+    if (badgeRef.current) gsap.set(badgeRef.current, { borderRadius: "35px" });
+    if (inputRef.current) { gsap.set(inputRef.current, { opacity: 0 }); inputRef.current.style.pointerEvents = "none"; }
+
     isLanding.current = document.body.hasAttribute("data-landing");
     hasUndocked.current = false;
     isAtHomeRef.current = false;
@@ -348,6 +361,11 @@ export default function LeoIcon() {
       home.appendChild(el);
     }
     el.style.visibility = "visible";
+    // Opacity explizit zurücksetzen: war Leo vor der Navigation in einer Sektion
+    // angedockt, die beim Seitenübergang ausgefadet wurde (Footer/KI-Section), konnte
+    // sie mit opacity:0 hängenbleiben → unsichtbar trotz visibility:visible.
+    el.style.opacity = "";
+    gsap.set(el, { opacity: 1 });
     // Versicherer-Auswahl bei Navigation zurücksetzen — neue Page = neuer Kontext
     setSelectedVersicherer(null);
   }, [pathname]);

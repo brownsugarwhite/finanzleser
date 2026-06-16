@@ -285,7 +285,9 @@ export default function MegaMenu({
   }
 
   // Eingehende (aktive) Nav herein-staggern — Original-Timing (delay 0.15, außer First-Mount).
-  useEffect(() => {
+  // useLayoutEffect: setzt den from-State (opacity 0) VOR dem Paint → kein 1-Frame-
+  // Aufblitzen der Buttons (bei langen Listen wie Versicherungen sonst sichtbar).
+  useLayoutEffect(() => {
     const isFirst = firstRunRef.current;
     firstRunRef.current = false;
     const nav = navRefsMap.current[mainCategoryHref];
