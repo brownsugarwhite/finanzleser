@@ -1415,6 +1415,52 @@ h1.category-title {
   border-color: var(--color-brand) !important;
   transition: width 0.4s ease-out !important;
 }
+/* Pfeilspitze färbt mit der Linie um (Brand), wenn diese aktiv/gefärbt wird. */
+.megamenu-sub-line--active + .megamenu-trail-arrow {
+  color: var(--color-brand);
+}
+
+/* ─────────────────────────────────────────────
+   Mobile-Megamenü Akkordeon-Items (Punkt 3 + 6):
+   gleiche Optik wie die Desktop-Subkategorie-Buttons
+   (Merriweather kursiv default → normal + brand bei
+   Klick/aktiv, wachsende Linie). Aktiv-Zustand offener
+   Akkordeons wird per `is-active`-Klasse aus React gesetzt.
+   ───────────────────────────────────────────── */
+.megamenu-m-btn {
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+}
+.megamenu-m-label {
+  font-family: var(--font-heading, "Merriweather", serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+}
+.megamenu-m-btn:active,
+.megamenu-m-btn.is-active {
+  color: var(--color-brand);
+}
+.megamenu-m-btn:active .megamenu-m-label,
+.megamenu-m-btn.is-active .megamenu-m-label {
+  font-style: normal;
+  font-weight: 400;
+}
+.megamenu-m-btn:active .megamenu-sub-line {
+  width: 36px;
+  border-color: var(--color-brand);
+  transition: width 0.4s ease-out;
+}
+/* Beitrags-Links im Mobile-„Neuste Beiträge"-Kasten: keine Unterlinie bei
+   Hover/Klick/Fokus, kein Tap-Highlight. */
+.megamenu-post-link-m,
+.megamenu-post-link-m:hover,
+.megamenu-post-link-m:active,
+.megamenu-post-link-m:focus {
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* ─────────────────────────────────────────────
    Article-Card "Ratgeber lesen"-Link (Line-Grow-Pattern

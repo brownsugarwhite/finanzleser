@@ -17,7 +17,7 @@ let persistedCategory: string | null = null;
 
 export default function MegaMenuWrapper({ preloaded = {} }: { preloaded?: PreloadedData }) {
   const isMobile = useIsMobile(1000); // Punkt 4: Mobile-Megamenü ab ≤1000px
-  if (isMobile) return <MobileMegaMenu />;
+  if (isMobile) return <MobileMegaMenu preloaded={preloaded} />;
   return <DesktopMegaMenuWrapper preloaded={preloaded} />;
 }
 

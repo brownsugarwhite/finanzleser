@@ -101,16 +101,12 @@ function SlideHeading({
   );
 }
 
-function boldYears(text: string) {
-  const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
-  return <span style={{ color: "inherit" }}>{parts.map((part, i) =>
-    /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 900 }}>{part}</strong> : part
-  )}</span>;
-}
 import type { Post } from "@/lib/types";
 import type { MegamenuTool } from "@/lib/wordpress";
 import SiteLoader from "@/components/ui/SiteLoader";
-import ToolDots, { TOOL_DOT_COLORS, TOOL_LABEL, type ToolType } from "@/components/ui/ToolDots";
+import { TOOL_DOT_COLORS, TOOL_LABEL, type ToolType } from "@/components/ui/ToolDots";
+import { MegaArrowTrail } from "@/components/ui/MegaArrow";
+import MegaPostContent, { boldYears } from "@/components/ui/MegaPostContent";
 
 export type { ToolType };
 export type MegaMenuPost = Post & { tools?: ToolType[] };
@@ -463,15 +459,7 @@ export default function MegaMenu({
                   }}
                 >
                   {item.label}
-                  <span className={`megamenu-sub-line ${activeSub === item.href ? "megamenu-sub-line--active" : ""}`} style={{
-                    height: 0,
-                    borderTop: "1px solid currentColor",
-                    opacity: 1,
-                    flexShrink: 0,
-                  }} />
-                  <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}>                    
-                    <polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" />
-                  </svg>
+                  <MegaArrowTrail active={activeSub === item.href} />
                 </button>
               ))}
               </nav>
@@ -519,39 +507,9 @@ export default function MegaMenu({
                   >
                     {/* Oben: kleiner post.title + Tool-Dots rechts daneben.
                         Darunter: der Kicker (1. Content-h2) als fetter Titel — wie
-                        auf der Artikelseite und in den Card-Slidern. */}
-                    {(() => {
-                      const kicker = post.beitragFelder?.beitragUntertitel?.trim();
-                      if (!kicker) {
-                        return (
-                          <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                            {boldYears(post.title)}
-                            <ToolDots tools={post.tools} />
-                          </span>
-                        );
-                      }
-                      return (
-                        <>
-                          <span style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 6,
-                            fontSize: 12,
-                            fontWeight: 400,
-                            fontFamily: "var(--font-body)",
-                            color: "var(--color-text-secondary)",
-                            lineHeight: 1.3,
-                            marginBottom: 4,
-                          }}>
-                            <span>{post.title}</span>
-                            <ToolDots tools={post.tools} size={8} style={{ marginLeft: 0 }} />
-                          </span>
-                          <span style={{ display: "block" }}>
-                            {boldYears(kicker)}
-                          </span>
-                        </>
-                      );
-                    })()}
+                        auf der Artikelseite und in den Card-Slidern.
+                        Geteilt mit dem Mobile-Megamenü via MegaPostContent. */}
+                    <MegaPostContent post={post} />
                   </Link>
                 ))}
               </nav>
@@ -577,8 +535,7 @@ export default function MegaMenu({
                 }}
               >
                 Alle Beiträge zu {items.find((item) => item.href === selectedSub)?.label || "dieser Kategorie"}
-                <span className="megamenu-sub-line" style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }} />
-                <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: -12 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
+                <MegaArrowTrail />
               </Link>
             )}
             </div>
