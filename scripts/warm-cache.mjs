@@ -15,12 +15,40 @@
 
 const DEFAULT_BASE = "https://finanzleser-staging.netlify.app";
 
+// Hauptkategorie-Slugs (für Sub-/Hauptkategorie-Erkennung).
+const MAIN_CATS = new Set(["finanzen", "versicherungen", "steuern", "recht"]);
+// Kuratierte „Hub"-Seiten: Landing + Übersichten — werden von praktisch jedem User
+// getroffen. Diese vorzuwärmen bringt den größten Nutzen.
+const CURATED_HUBS = new Set([
+  "/",
+  "/finanztools",
+  "/finanztools/checklisten",
+  "/finanztools/rechner-uebersicht",
+  "/finanztools/vergleiche",
+  "/dokumente",
+  "/anbieter",
+]);
+
+// Nur „Hub"-Seiten vorwärmen (Landing, Übersichten, Haupt-/Subkategorien). Die lange
+// Tail (Einzelartikel/-rechner/-checklisten/-dokumente/-anbieter) ist beim Build bereits
+// prerendert und wird beim ersten Besuch schnell aus dem Durable-Cache gezogen (keine
+// IONOS-Regenerierung) — Vorwärmen lohnt dort den Compute nicht.
+function isHubPath(p) {
+  if (CURATED_HUBS.has(p)) return true;
+  const seg = p.split("/").filter(Boolean);
+  // Hauptkategorie (/finanzen) oder Subkategorie (/finanzen/geldanlagen)
+  return seg.length >= 1 && seg.length <= 2 && MAIN_CATS.has(seg[0]);
+}
+
 export async function warm(baseInput, opts = {}) {
   const base = (baseInput || DEFAULT_BASE).replace(/\/$/, "");
   const concurrency = opts.concurrency ?? 6;
   const perRequestTimeoutMs = opts.timeoutMs ?? 20000;
 
-  const paths = await loadSitemapPaths(base);
+  let paths = await loadSitemapPaths(base);
+  // Standard: nur Hub-Seiten (spart massiv Compute/Build-Minuten). WARM_FULL=true → alles.
+  const full = opts.full ?? process.env.WARM_FULL === "true";
+  if (!full) paths = paths.filter(isHubPath);
   // Landing immer mit aufnehmen.
   if (!paths.includes("/")) paths.unshift("/");
 

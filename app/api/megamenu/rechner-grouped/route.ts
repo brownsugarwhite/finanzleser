@@ -23,14 +23,17 @@ export async function GET() {
       ...Object.keys(grouped).filter((t) => !TYP_ORDER.includes(t)),
     ];
 
-    return NextResponse.json({
-      groups: sortedTypes.map((typ) => ({
-        typ,
-        items: grouped[typ],
-      })),
-    });
+    return NextResponse.json(
+      {
+        groups: sortedTypes.map((typ) => ({
+          typ,
+          items: grouped[typ],
+        })),
+      },
+      { headers: { "Cache-Control": sortedTypes.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400" } },
+    );
   } catch (error) {
     console.error("Error fetching rechner grouped:", error);
-    return NextResponse.json({ error: "Failed to fetch rechner" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch rechner" }, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
 }
