@@ -105,6 +105,11 @@ export default function MobileMegaMenu({ preloaded = {} }: { preloaded?: Preload
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MainSection>("ratgeber");
   const [detail, setDetail] = useState<DetailType | null>(null);
+  // Verhindert das Aufblitzen beim ersten Öffnen: der frisch gemountete Booklet
+  // rendert sonst 1 Frame an x=0, bevor der useLayoutEffect ihn nach rechts raus
+  // setzt. Bis er positioniert ist → opacity 0 (React managed nur opacity, GSAP nur
+  // transform → kein Konflikt).
+  const [bookletReady, setBookletReady] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const bookletRef = useRef<HTMLDivElement>(null);
@@ -169,8 +174,10 @@ export default function MobileMegaMenu({ preloaded = {} }: { preloaded?: Preload
     const { xClosedRight, xMain, xDetail, xClosedLeft } = positionsRef.current;
 
     if (open) {
-      // Enter from right → main
+      // Enter from right → main. Position VOR dem ersten Paint setzen, dann sichtbar
+      // schalten (kein x=0-Aufblitzen beim allerersten Mount).
       gsap.set(booklet, { x: xClosedRight });
+      setBookletReady(true);
       gsap.to(booklet, { x: xMain, duration: SLIDE_DURATION, ease: "power3.out" });
     } else {
       // Exit: from main → right, from detail → left
@@ -361,6 +368,7 @@ export default function MobileMegaMenu({ preloaded = {} }: { preloaded?: Preload
           height: stageHeight !== null ? `${stageHeight}px` : "auto",
           transition: stageHeight !== null ? `height ${HEIGHT_TWEEN_MS}ms ease-in-out` : "none",
           willChange: "transform, height",
+          opacity: bookletReady ? 1 : 0,
         }}
       >
         <div ref={stageRef} className="flex w-full h-full relative">
