@@ -87,16 +87,22 @@ export default function ArticleClient({
   const morphVisualRef = useRef<HTMLDivElement>(null);
   const morphSubtitleRef = useRef<HTMLHeadingElement>(null);
   const morphTitleRef = useRef<HTMLHeadingElement>(null);
+  // Gate: erst NACHDEM isMobile aufgelöst ist (Layout = row vs column steht) dem
+  // Morph die Ziele melden — sonst misst der Morph das Row-Layout (isMobile=false beim
+  // ersten Render) und springt danach ins Column-Layout. Während des Morphs ist die
+  // neue Seite verdeckt, der Row→Column-Wechsel ist also unsichtbar.
+  const [morphReady, setMorphReady] = useState(false);
 
   // Nach dem Mount (vor Paint) dem Morph-Controller melden — no-op wenn kein
   // Morph aktiv ist (normale Navigation).
   useLayoutEffect(() => {
+    if (!morphReady) return;
     notifyTargetMounted({
       visual: morphVisualRef.current,
       bold: morphSubtitleRef.current,
       italic: morphTitleRef.current,
     });
-  }, []);
+  }, [morphReady]);
 
   // Redaktions-Konvention v2: echter Titel = WP-Titel-Feld (title-Prop). Untertitel
   // (1. h2) + Beschreibung (<p> darunter) stehen am Content-Anfang; Body beginnt beim
@@ -116,11 +122,13 @@ export default function ArticleClient({
     setPageSlug(parts[parts.length - 1] || "");
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Artikel-Layout bricht ab 1024px auf Column um (Header + Finanztools),
     // synchron mit den CSS-Breakpoints (Sidebar aus, Mobile-TOC an).
+    // useLayoutEffect + setMorphReady: Layout VOR dem Morph-Mess-Zeitpunkt festlegen.
     const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
+    setMorphReady(true); // jetzt steht das Layout → Morph darf die Ziele messen
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
@@ -196,10 +204,20 @@ export default function ArticleClient({
               <h2 ref={morphSubtitleRef} data-morph-target="article-subtitle" data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{displayTitle}</h2>
             ) : null;
 
+            // Schmale Screens: statt fixer 384px-Höhe ein FESTES Aspect-Ratio (volle
+            // Breite), das zur Auflösung passt — so morpht das Card-Visual sauber dorthin
+            // (kein Stretch in eine hohe Box). Desktop bleibt bei h-96 in der 50%-Spalte.
+            const visualMobileStyle: React.CSSProperties = { width: "100%", aspectRatio: "16 / 10" };
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
-                  <div ref={morphVisualRef} data-morph-target="article-visual" data-morph-img={featuredImage.sourceUrl} className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden">
+                  <div
+                    ref={morphVisualRef}
+                    data-morph-target="article-visual"
+                    data-morph-img={featuredImage.sourceUrl}
+                    className={`article-hero-visual ${isMobile ? "" : "h-96"} flex items-center justify-center rounded overflow-hidden`}
+                    style={isMobile ? visualMobileStyle : undefined}
+                  >
                     <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
@@ -207,7 +225,12 @@ export default function ArticleClient({
                     />
                   </div>
                 ) : (
-                  <div ref={morphVisualRef} data-morph-target="article-visual" className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
+                  <div
+                    ref={morphVisualRef}
+                    data-morph-target="article-visual"
+                    className={`article-hero-visual ${isMobile ? "" : "h-96"} rounded overflow-hidden`}
+                    style={isMobile ? { ...visualMobileStyle, backgroundColor: "rgba(0, 0, 0, 0.08)" } : { backgroundColor: "rgba(0, 0, 0, 0.08)" }}
+                  />
                 )}
               </>
             );
