@@ -184,7 +184,7 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
               items={items}
               activeId={activeId}
               scrollProgress={scrollProgress}
-              scrollToId={scrollToId}
+              scrollToId={(id) => { scrollToId(id); setCollapsed(true); }}
               collapsed={collapsed}
               onToggleCollapsed={() => setCollapsed(!collapsed)}
             />

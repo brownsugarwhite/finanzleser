@@ -76,7 +76,9 @@ export default function ArticleClient({
       trigger: el,
       start: "center top+=60", // etwas früher als „genau zur Hälfte oben raus"
       onLeave: () => setTocVisible(true),
-      onEnterBack: () => setTocVisible(false),
+      // Hoch gescrollt → TOC slidet aus UND klappt zu (Content zentriert sich smooth
+      // zurück; beim erneuten Runterscrollen slidet das collapsed TOC ein).
+      onEnterBack: () => { setTocVisible(false); setCollapsed(true); },
     });
     setTocVisible(el.getBoundingClientRect().top + el.offsetHeight / 2 < 60); // initialer Zustand (Reload mitten im Artikel)
     return () => st.kill();
@@ -142,7 +144,7 @@ export default function ArticleClient({
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
-      {/* Absolut positioniertes TOC (aus dem Flow raus) — Desktop */}
+      {/* Absolut positioniertes TOC (aus dem Flow raus) — Desktop, wie zuvor positioniert */}
       {content && (
         <ArticleSidebar
           items={toc.items}
@@ -178,8 +180,9 @@ export default function ArticleClient({
 
       {/* Main-Wrapper: Folge von Element-Wrappern */}
       <article style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        {/* Breadcrumb + Hero-Block + Spacer (zusammen in einem Wrapper) */}
-        <ArticleElementWrapper variant="hero" collapsed={collapsed}>
+        {/* Breadcrumb + Hero-Block + Spacer. noShift: Heading verschiebt sich NICHT
+            beim TOC-Öffnen — Positionierung ansonsten wie zuvor. */}
+        <ArticleElementWrapper variant="hero" collapsed={collapsed} noShift>
           <Breadcrumb items={breadcrumbItems} />
           {(() => {
             const titleEl = title ? (

@@ -114,9 +114,10 @@ export default async function RootLayout({
           </div>
           <LogoBar />
           <TopNav />
-          {/* DotLine + Powered by */}
+          {/* DotLine + Powered by — schrumpft mit dem Viewport, „powered by" hält
+              immer 50px Abstand zum rechten Bildrand (kein Abschneiden mehr). */}
           <div className="sticky-nav dotline-animated">
-            <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
+            <PoweredByLine style={{ width: "100%", maxWidth: 1200, paddingLeft: 280, paddingRight: 50 }} />
           </div>
           <ContentScaler />
           <MegaMenuWrapper preloaded={megamenuPreload} />

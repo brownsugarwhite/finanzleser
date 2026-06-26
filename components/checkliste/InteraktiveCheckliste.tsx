@@ -187,11 +187,11 @@ export default function InteraktiveCheckliste({
                 src="/assets/general/checkliste_Visual_slide.png"
                 alt=""
                 className="checkliste-final-visual"
-                style={{ width: "100%", maxWidth: 520, height: "auto", margin: "4px auto 20px", display: "block" }}
+                style={{ width: "100%", maxWidth: 640, height: "auto", margin: "-12px auto 16px", display: "block" }}
               />
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  label={generating ? "Wird erstellt..." : "Ausgefüllte Checkliste herunterladen"}
+                  label={generating ? "Wird erstellt..." : "Herunterladen"}
                   onClick={handleDownloadChecked}
                   disabled={generating || checkedCount === 0}
                   icon="download"

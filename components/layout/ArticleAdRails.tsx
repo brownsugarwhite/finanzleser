@@ -13,7 +13,8 @@ import { useEffect, useRef, useState } from "react";
  *   Checkliste/FAQ sind schmal (Body-Breite) → die Rails laufen daran vorbei nach
  *   unten und rücken erst ab dem ersten breiten Tool nach oben (statt es zu überlappen).
  */
-const TOC_EXPANDED_WIDTH = 430;
+// 30px enger als die TOC-Breite (430) — identisch zum Content-Shift (ArticleElementWrapper).
+const CONTENT_CLEAR = 400;
 const RAIL_TOP = 18;
 // Klarer Abstand, damit die Rails sichtbar VOR der breiten Box (Vergleich/Dokumente)
 // enden statt sie zu berühren.
@@ -40,8 +41,8 @@ export default function ArticleAdRails({
       const vw = window.innerWidth;
       const leftOffset = (vw - Math.min(vw, 750)) / 2;
       setShift(
-        !collapsed && leftOffset < TOC_EXPANDED_WIDTH
-          ? TOC_EXPANDED_WIDTH - leftOffset
+        !collapsed && leftOffset < CONTENT_CLEAR
+          ? CONTENT_CLEAR - leftOffset
           : 0
       );
     };
@@ -96,22 +97,38 @@ export default function ArticleAdRails({
 
   if (!show) return null;
 
-  const railStyle = {
+  // Timing IDENTISCH zu Content-Shift (ArticleElementWrapper) + Sidebar-TOC.
+  const TRANSITION = "transform 0.35s cubic-bezier(0.65, 0, 0.35, 1)";
+  const heightStyle = height != null ? { height, bottom: "auto" as const } : {};
+
+  // Rechte Rail: wandert NUR mit dem Content nach rechts (kein Scale, kein Wandern).
+  const rightStyle = {
+    ...heightStyle,
     transform: `translateX(${shift}px)`,
-    transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-    ...(height != null ? { height, bottom: "auto" as const } : {}),
+    transition: TRANSITION,
   };
 
   return (
     <>
-      {collapsed && (
-        <div className="article-ad-rail article-ad-rail-left" style={railStyle}>
-          <div className="article-ad-rail-sticky">
-            <div className="article-ad-rail-box" data-ad-format="rail" aria-label="Werbung" />
+      {/* Linke Rail: skaliert auf 0.9, ihr Inhalt slidet nach LINKS aus einem
+          overflow-hidden-Clip heraus (nichts wird gequetscht). Der Clip sitzt
+          INNERHALB des sticky-Elements, damit position:sticky nicht bricht. */}
+      <div className="article-ad-rail article-ad-rail-left" style={heightStyle}>
+        <div className="article-ad-rail-sticky">
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                transform: collapsed ? "translateX(0) scale(1)" : "translateX(-115%) scale(0.9)",
+                transformOrigin: "left center",
+                transition: TRANSITION,
+              }}
+            >
+              <div className="article-ad-rail-box" data-ad-format="rail" aria-label="Werbung" />
+            </div>
           </div>
         </div>
-      )}
-      <div ref={rightRef} className="article-ad-rail article-ad-rail-right" style={railStyle}>
+      </div>
+      <div ref={rightRef} className="article-ad-rail article-ad-rail-right" style={rightStyle}>
         <div className="article-ad-rail-sticky">
           <div className="article-ad-rail-box" data-ad-format="rail" aria-label="Werbung" />
         </div>

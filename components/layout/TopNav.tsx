@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { Fragment, useRef, useCallback, useEffect } from "react";
+import { Fragment, useRef, useState, useCallback, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { useNavItems } from "@/lib/NavContext";
@@ -12,6 +12,9 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
   const navItems = useNavItems();
   const navRef = useRef<HTMLDivElement>(null);
   const didActivate = useRef(false);
+  // Landing-Nav: bei offenem Menü auf die Top-Stauchung schrumpfen (siehe CSS
+  // .landing-nav.nav-compressed). Für sticky/burger-Nav ohne Effekt (immer gestaucht).
+  const [compressed, setCompressed] = useState(false);
 
   const isInitialActivation = useRef(false);
 
@@ -27,6 +30,7 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
       if (!defaultActive) {
         scrollToNav();
         openedViaPill.current = true;
+        setCompressed(true);
       }
       window.dispatchEvent(new CustomEvent("menu-opened", { detail: { label, fromBurgerNav: !!defaultActive } }));
     },
@@ -59,6 +63,7 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
       pill.closeMenu();
       scrollBackFromNav();
       openedViaPill.current = false;
+      setCompressed(false);
     };
     window.addEventListener("menu-closed", onClose);
     return () => window.removeEventListener("menu-closed", onClose);
@@ -77,6 +82,7 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
     if (defaultActive) return;
     closeMenuRef.current();
     openedViaPill.current = false;
+    setCompressed(false);
   }, [pathname, defaultActive]);
 
   // Lens sync
@@ -104,7 +110,7 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
       <div
         ref={navRef}
         data-topnav
-        className={className}
+        className={`${className}${compressed ? " nav-compressed" : ""}`}
         style={{
           width: "100%",
           position: "relative",

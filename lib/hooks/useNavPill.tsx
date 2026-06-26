@@ -185,6 +185,12 @@ export function useNavPill({ items, hasLens = true, onActivate, onDeactivate }: 
         btnRefs.current.find((b) => b?.textContent === lastHoveredLabel.current);
       if (!btn) return;
       const { x, w } = pillPos(container.getBoundingClientRect(), btn.getBoundingClientRect());
+      // Laufende Pill-Tweens killen, sonst überschreibt z. B. die Klick-Animation
+      // die Resize-Neupositionierung → Pill verrutscht während der Nav-Stauchung.
+      gsap.killTweensOf(pillRef.current);
+      if (line3Ref.current) gsap.killTweensOf(line3Ref.current);
+      if (line1Ref.current) gsap.killTweensOf(line1Ref.current);
+      lastPillX.current = x;
       gsap.set(pillRef.current, { x, width: w });
       if (line3Ref.current) gsap.set(line3Ref.current, { x, width: w });
       if (line1Ref.current) gsap.set(line1Ref.current, { x, width: w });

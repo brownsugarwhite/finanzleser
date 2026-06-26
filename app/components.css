@@ -627,19 +627,41 @@ body.leo-chat-open #leo-chat-messages {
   min-width: 300px;
 }
 
-/* TopNav (zentrierte 650px-Pill-Reihe): symmetrischer 300px-Abstand LINKS UND
-   RECHTS. Dadurch bleibt die Reihe auf breiten Viewports bei Viewport-Mitte
-   zentriert und STAUCHT automatisch unter ~1250px (Content-Box = Breite − 600,
-   Reihe max-width 650). Kein Media-Query nötig (selbst-stauchend).
-   !important, weil TopNav.tsx alignItems/paddingLeft inline setzt.
-   Gilt für sticky-nav, burger-nav (Megamenü-Slide-in) UND landing-nav. */
-.sticky-nav[data-topnav],
-.burger-nav[data-topnav],
-.landing-nav[data-topnav] {
-  padding-left: 300px !important;
-  padding-right: 300px !important;
+/* TopNav (zentrierte 650px-Pill-Reihe): ZENTRIERT (gleiche Gutter), aber links nie
+   < 300px, rechts nie < 250px. Per max(min, zentrierte Gutter) → auf breiten
+   Viewports mittig, beim Schmaler-Ziehen klemmen die Mindestabstände.
+   !important, weil TopNav.tsx alignItems/paddingLeft inline setzt. */
+.sticky-nav[data-topnav] {
+  padding-left: max(290px, calc((100% - 650px) / 2)) !important;
+  padding-right: max(250px, calc((100% - 650px) / 2)) !important;
   box-sizing: border-box;
   align-items: center !important;
+}
+.burger-nav[data-topnav] {
+  padding-left: 290px !important;
+  padding-right: 250px !important;
+  box-sizing: border-box;
+  align-items: center !important;
+}
+/* Landing-Nav: an seiner Position NICHT gestaucht. Erst beim Öffnen einer Kategorie
+   (Klasse .nav-compressed) staucht sie smooth (ease-out) auf 300/250 (wie der
+   „Top"-Zustand). WICHTIG: der UNGESTAUCHTE Zustand zentriert die 650er-Reihe schon
+   per Padding ((100%−650)/2) — KEIN max-width-Slack. Dadurch staucht die Reihe beim
+   Öffnen NUR (gleichförmig schmaler) statt erst (mit Slack) nach rechts zu driften
+   und dann zu schrumpfen → kein „erst rechts, dann links". Beide Paddings
+   transitionieren gleichzeitig. */
+.landing-nav[data-topnav] {
+  padding-left: max(0px, calc((100% - 650px) / 2)) !important;
+  padding-right: max(0px, calc((100% - 650px) / 2)) !important;
+  box-sizing: border-box;
+  align-items: center !important;
+  /* exakt wie der Autoscroll (scrollToNav): 0.5s, power2.inOut ≈ easeInOutQuad */
+  transition: padding-left 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+              padding-right 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.landing-nav[data-topnav].nav-compressed {
+  padding-left: max(290px, calc((100% - 650px) / 2)) !important;
+  padding-right: max(250px, calc((100% - 650px) / 2)) !important;
 }
 
 /* Punkt 6: Desktop-Megamenü. Auf breiten Viewports zentriert; bei schmalen
@@ -1555,7 +1577,8 @@ a.megamenu-link:hover {
 .latest-post-thumb {
   position: absolute;
   right: calc(100% + 16px);
-  top: 50%;
+  /* vertikal zentriert zum Karten-INHALT (Padding-bottom 23 + 1px Border kompensiert) */
+  top: calc(50% - 12px);
   width: 120px;
   height: 71px;
   z-index: 2;
@@ -1566,6 +1589,10 @@ a.megamenu-link:hover {
   transform-origin: right center;
   /* Exakt identisch zur Panel-/Visual-Skalierung: gleiche Dauer + Easing, kein Stagger. */
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Letztes Item hat kein Padding-bottom/Border → wieder echte Mitte. */
+.latest-post-item:last-child .latest-post-thumb {
+  top: 50%;
 }
 .latest-post-thumb img {
   width: 100%;
@@ -1589,25 +1616,34 @@ a.megamenu-link:hover {
   z-index: 5;
   transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* Collapsed 250 (50px schmaler), expanded 375 → Expand-Delta bleibt 125px wie
+   zuvor, damit das Hero-Visual (linke Spalte) im expanded Zustand gleich groß bleibt. */
 .ftools-right-preview:hover {
-  width: 425px !important;
+  width: 385px !important;
 }
 .ftools-preview-inner {
-  width: 300px;
+  width: 250px; /* Karten 50px schmaler */
   margin-left: auto;
   box-sizing: border-box;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Kompletter Sidebar-Inhalt rutscht beim Expanden 10px nach links. */
+.ftools-right-preview:hover .ftools-preview-inner {
+  transform: translateX(-10px);
 }
 .ftools-preview-list,
 .ftools-preview-heading {
   position: relative;
   z-index: 1;
 }
-/* Überschrift rutscht beim Expanden mit nach links (über die Thumbnail-Spalte). */
+/* Überschrift rutscht beim Expanden mit nach links (über die Thumbnail-Spalte) und
+   skaliert auf 1.5 mit Anker unten-links. */
 .ftools-preview-heading {
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left bottom;
 }
 .ftools-right-preview:hover .ftools-preview-heading {
-  transform: translateX(-110px);
+  transform: translateX(-120px) scale(1.5);
 }
 
 /* ─────────────────────────────────────────────
@@ -1937,6 +1973,11 @@ a.megamenu-link:hover {
     padding-left: 0;
     padding-right: 0;
   }
+  /* Im Artikel: Box näher an den Bildrand (10px statt 20px Wrapper-Padding). */
+  .checkliste-layout--no-visual .checkliste-viewport {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
   .checkliste-punkt {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -1947,8 +1988,9 @@ a.megamenu-link:hover {
     column-gap: 12px;
     row-gap: 8px;
     align-items: center;
-    padding-left: 0;
-    padding-right: 0;
+    /* Innen-Padding, damit der Inhalt nicht direkt an der Box-Kante klebt. */
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .checkliste-punkt-nr-wrap {
     grid-area: nr;
@@ -2264,30 +2306,57 @@ h2.article-tool-label {
    bis zu 4 A4-Kacheln nebeneinander, Beschreibung/Buttons als Hover-Overlay
    (Desktop) bzw. dauerhaft sichtbar (Mobile/Touch). */
 .dokumente-embed {
-  margin-top: 50px;
   width: 100%;
+  display: grid;
+  gap: 32px;
 }
 .article-tool-badge--dokumente {
   background: var(--color-text-primary);
   color: var(--color-bg-page);
 }
 
-.dokumente-grid {
-  display: grid;
-  gap: 28px;
-  align-items: start;
+/* 1–2 Dokumente: je Dokument eine Zeile — Vorschau links, Textblock (max. 400px)
+   rechts daneben mit großzügigem Vertikalabstand. */
+.dokumente-embed[data-layout="row"] {
+  grid-template-columns: 1fr;
 }
-.dokumente-grid[data-count="1"] { grid-template-columns: minmax(0, 320px); }
-.dokumente-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.dokumente-grid[data-count="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.dokumente-grid[data-count="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-.dok-card {
+.dokumente-embed[data-layout="row"] .dok-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 34px;
+}
+.dokumente-embed[data-layout="row"] .dok-card-frame {
+  width: 240px;
+  flex-shrink: 0;
+}
+.dokumente-embed[data-layout="row"] .dok-card-body {
+  flex: 1;
+  min-width: 0;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px; /* gleichmäßiger, kleinerer Abstand Titel/Beschreibung/Button */
+}
+/* Einzelnes Dokument: Vorschau größer */
+.dokumente-embed[data-count="1"][data-layout="row"] .dok-card-frame {
+  width: 300px;
+}
+
+/* 3+ Dokumente: Raster — Titel/Beschreibung/Button UNTER der Vorschau. */
+.dokumente-embed[data-layout="grid"][data-count="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dokumente-embed[data-layout="grid"][data-count="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dokumente-embed[data-layout="grid"] .dok-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-width: 0;
 }
+.dokumente-embed[data-layout="grid"] .dok-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .dok-card-title {
   font-family: 'Merriweather', Georgia, serif;
   font-size: 18px;
@@ -2295,18 +2364,44 @@ h2.article-tool-label {
   line-height: 1.35em;
   color: var(--color-text-primary);
   margin: 0;
-  text-align: center;
+}
+/* Einzelnes Dokument: Titel größer */
+.dokumente-embed[data-count="1"] .dok-card-title {
+  font-size: 22px;
 }
 
-/* A4-Format (1 : 1.414) */
+/* Rahmen nur um das Dokument: 2px Dark-Border außen, innen (4px Gap) 1px
+   Eck-Winkel an allen Ecken, 6px Abstand zur Vorschau. */
+.dok-card-frame {
+  position: relative;
+  border: 1px solid var(--color-text-primary);
+  padding: 10px;
+}
+.dok-card-frame::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  pointer-events: none;
+  --bc: var(--color-text-primary);
+  --bl: 13px; /* Länge der Eck-Winkel */
+  background:
+    linear-gradient(var(--bc), var(--bc)) left top / var(--bl) 1px no-repeat,
+    linear-gradient(var(--bc), var(--bc)) left top / 1px var(--bl) no-repeat,
+    linear-gradient(var(--bc), var(--bc)) right top / var(--bl) 1px no-repeat,
+    linear-gradient(var(--bc), var(--bc)) right top / 1px var(--bl) no-repeat,
+    linear-gradient(var(--bc), var(--bc)) left bottom / var(--bl) 1px no-repeat,
+    linear-gradient(var(--bc), var(--bc)) left bottom / 1px var(--bl) no-repeat,
+    linear-gradient(var(--bc), var(--bc)) right bottom / var(--bl) 1px no-repeat,
+    linear-gradient(var(--bc), var(--bc)) right bottom / 1px var(--bl) no-repeat;
+}
+
+/* Vorschau wie auf den CPT-Seiten: A4, flach — kein Schatten, keine Rundung. */
 .dok-card-sheet {
   position: relative;
   aspect-ratio: 1 / 1.414;
   width: 100%;
   background: var(--color-placeholder-bg);
-  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
 }
 .dok-card-sheet canvas,
 .dok-card-sheet img {
@@ -2316,85 +2411,45 @@ h2.article-tool-label {
   object-position: top center;
   display: block;
 }
-
-.dok-card-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 16px;
-  color: #fff;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0) 100%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.dok-card-sheet:hover .dok-card-overlay,
-.dok-card-sheet:focus-within .dok-card-overlay {
-  opacity: 1;
-}
 .dok-card-desc {
   margin: 0;
   font-size: 14px;
-  line-height: 1.45;
-  color: #fff;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: 1.5;
+  color: var(--color-text-medium);
 }
-.dok-card-actions {
+.dok-card-download {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.dok-card-btn.rechner-button {
-  background: #fff;
-  color: var(--color-text-primary);
-  border: 1px solid #fff;
-  border-radius: 21px;
-  padding: 7px 16px;
-  font-size: 14px;
-  line-height: 1;
-}
-.dok-card-btn--download.rechner-button {
-  background: var(--color-brand);
-  color: #fff;
-  border-color: var(--color-brand);
+  margin-top: 6px; /* Button etwas tiefer abgesetzt */
 }
 
-/* Touch/Mobile: kein Hover → Beschreibung + Buttons dauerhaft unter dem Dokument. */
-@media (hover: none), (max-width: 768px) {
-  .dokumente-grid[data-count="3"],
-  .dokumente-grid[data-count="4"] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .dok-card-overlay {
-    position: static;
-    opacity: 1;
-    padding: 10px 0 0;
-    background: none;
-    color: inherit;
-    justify-content: flex-start;
-  }
-  .dok-card-desc {
-    color: var(--color-text-medium);
-    -webkit-line-clamp: 4;
-  }
-  .dok-card-btn.rechner-button {
-    background: transparent;
-    color: var(--color-text-primary);
-    border-color: var(--color-border-default);
-  }
-}
-@media (max-width: 520px) {
-  .dokumente-grid[data-count="2"],
-  .dokumente-grid[data-count="3"],
-  .dokumente-grid[data-count="4"] {
+/* Mobile: Dokumente immer untereinander — Titel über dem Dokument, Beschreibung
+   + Button darunter. */
+@media (max-width: 768px) {
+  .dokumente-embed,
+  .dokumente-embed[data-layout="row"],
+  .dokumente-embed[data-layout="grid"][data-count="3"],
+  .dokumente-embed[data-layout="grid"][data-count="4"] {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
-  .dokumente-grid[data-count="1"] { grid-template-columns: 1fr; }
+  /* [data-layout] nötig, sonst gewinnt das row-Layout (gap:34px) per Spezifität →
+     gleichmäßiger, kleiner Abstand zwischen Titel/Beschreibung/Button. */
+  .dokumente-embed[data-layout] .dok-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  /* Body auflösen → Titel/Beschreibung/Button werden direkte Flex-Kinder der Card,
+     damit der Titel ÜBER das Dokument rücken kann. */
+  .dokumente-embed .dok-card-body {
+    display: contents !important;
+  }
+  /* Dokument zuerst, dann Titel (über der Beschreibung), Beschreibung, Button. */
+  .dokumente-embed .dok-card-frame    { width: 100% !important; order: 0 !important; }
+  .dokumente-embed .dok-card-title    { order: 1 !important; font-size: 17px; margin-bottom: 0 !important; }
+  .dokumente-embed .dok-card-desc     { order: 2 !important; max-width: none !important; }
+  .dokumente-embed .dok-card-download { order: 3 !important; align-self: start !important; margin-top: 6px !important; }
 }
 
 /* Ausgefüllte PDFs werden via pdf-lib generiert (kein Print-CSS nötig) */
@@ -2473,6 +2528,26 @@ h2.faq-heading {
   padding: 10px;
 }
 
+/* Tool-Container (Vergleich/Dokumente): zentriert, max heroWidth, 20px Mindest-
+   Padding, linker Rand nie näher als --toc-min (TOC-Breite + 20px). Rein CSS
+   (min/max gegen 100% des Containers) → folgt dem Viewport ruckelfrei; der
+   Collapse/Expand-Wechsel (--toc-min ändert sich) animiert via Transition. */
+.article-tool-wrapper {
+  --tool-max: min(100%, calc(750px + 2 * (var(--ad-rail-gap) + var(--ad-rail-w))));
+  --tool-w: min(var(--tool-max), calc(100% - var(--toc-min) - 20px));
+  width: var(--tool-w);
+  margin-left: max(calc((100% - var(--tool-w)) / 2), var(--toc-min));
+  margin-right: 0;
+  transition: margin-left 0.35s cubic-bezier(0.65, 0, 0.35, 1),
+              width 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+@media (max-width: 1024px) {
+  .article-tool-wrapper {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
 /* Trennlinie nach dem Rechner: 80px – Linie – 80px (identisch mit/ohne Ergebnis) */
 .article-tool-divider {
   border: 0;
@@ -2480,15 +2555,13 @@ h2.faq-heading {
   margin: 80px 0;
 }
 
-/* Dokumente-Kopf (Spike-Label + Untertitel + Linie über Box-Breite) */
+/* Dokumente-Kopf: Linie im breiten Container, Badge + Untertitel im 750px-Inner
+   (zentriert) → verhält sich wie eine normale Artikelüberschrift. */
 .dok-head {
   position: relative;
-  display: flex;
-  align-items: flex-end;
   margin-top: 50px;
-  padding-bottom: 0;
 }
-/* durchgehende Linie über die ganze Box-Breite, am unteren Viertel des Labels */
+/* durchgehende Linie über die ganze (breite) Container-Breite */
 .dok-head-line {
   position: absolute;
   left: 0;
@@ -2498,11 +2571,21 @@ h2.faq-heading {
   background: var(--color-text-primary);
   z-index: 0;
 }
-/* Badge-Wrapper mit 6px Page-BG-Gap links+rechts (schneidet die Linie) + Indent für linke Linie */
+/* Innerer Container = 750px (zentriert) → fluchtet mit dem Artikelbody. */
+.dok-head-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+/* Badge in pageBG-Container mit 6px Padding L/R (schneidet die Linie = Gap-Eindruck);
+   −6px Margin → Label-Linkskante bündig zur Body-Kante. */
 .dok-head-h {
   position: relative;
   z-index: 1;
-  margin: 0 0 0 40px;
+  margin: 0 0 0 -6px;
   line-height: 0;
   background: var(--color-bg-page);
   padding: 0 6px;
@@ -2518,28 +2601,55 @@ h2.faq-heading {
   line-height: 1;
   padding: 12px 14px;
 }
-/* Spikes komplett sichtbar (ganzes SVG, nicht geclippt) */
+/* Spikes lückenlos oben am Badge — 5px Überlappung → Zacken sitzen 2px tiefer */
 .dok-head-label::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 100%;
-  height: 12px;
+  bottom: calc(100% - 5px);
+  height: 15px;
   background: var(--color-text-primary);
   -webkit-mask: url(/assets/dokumente_spikes.svg) no-repeat bottom / 100% 100%;
   mask: url(/assets/dokumente_spikes.svg) no-repeat bottom / 100% 100%;
 }
-/* Untertitel: liegt über der Linie (Linie läuft darunter durch), größer + kräftiger */
+/* Untertitel: größer + 3px mehr Abstand zur Linie darunter */
 .dok-head-subtitle {
   position: relative;
   z-index: 1;
-  margin-left: 12px;
+  margin-left: 14px;
   padding-bottom: 4px;
+  transform: translateY(-6px);
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 650;
   color: var(--color-text-primary);
+}
+/* Kein umschließender Kasten mehr → Abstand direkt zwischen Patch und Embed */
+.dok-head + .dokumente-embed {
+  margin-top: 22px;
+}
+
+/* Mobile: Badge linksbündig, Untertitel unter den Badge, Linie weg, Zacken tiefer */
+@media (max-width: 768px) {
+  .dok-head-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .dok-head-line {
+    display: none;
+  }
+  .dok-head-h {
+    margin-left: 0;
+    padding: 0;
+  }
+  .dok-head-subtitle {
+    margin-left: 0;
+    padding-bottom: 0;
+    transform: none;
+    font-size: 22px;
+  }
 }
 
 /* ─────────────────────────────────────────────

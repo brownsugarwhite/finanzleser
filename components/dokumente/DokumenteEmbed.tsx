@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import DokumentPreview from "@/components/dokument/DokumentPreview";
+import DokumentDownload from "@/components/dokument/DokumentDownload";
 
 interface DokumentCard {
   slug: string;
@@ -40,43 +41,37 @@ export default function DokumenteEmbed({ slugs, initialDokumente }: Props) {
   if (loaded && dokumente.length === 0) return null;
 
   const count = dokumente.length || slugs.length;
+  // 1–2 Dokumente: Text neben der Vorschau. 3+: Text unter der Vorschau.
+  const layout = count <= 2 ? "row" : "grid";
 
   return (
-    <div className="dokumente-embed">
-      <div className="dokumente-grid" data-count={count}>
-        {dokumente.map((dok) => (
-          <article key={dok.slug} className="dok-card">
-            <h3 className="dok-card-title">{dok.title}</h3>
+    <div className="dokumente-embed" data-count={count} data-layout={layout}>
+      {dokumente.map((dok) => (
+        <article key={dok.slug} className="dok-card">
+          {/* Rahmen (2px) + innere Eck-Winkel nur um das Dokument selbst */}
+          <div className="dok-card-frame">
             <div className="dok-card-sheet">
               <DokumentPreview slug={dok.slug} pdfUrl={dok.pdfUrl} title={dok.title} />
-              <div className="dok-card-overlay">
-                {dok.beschreibung && <p className="dok-card-desc">{dok.beschreibung}</p>}
-                {dok.pdfUrl && (
-                  <div className="dok-card-actions">
-                    <a
-                      href={`/api/dokument-pdf/${encodeURIComponent(dok.slug)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rechner-button dok-card-btn"
-                    >
-                      Vorschau
-                    </a>
-                    <a
-                      href={dok.pdfUrl}
-                      download={dok.fileName}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rechner-button dok-card-btn dok-card-btn--download"
-                    >
-                      Download
-                    </a>
-                  </div>
-                )}
-              </div>
             </div>
-          </article>
-        ))}
-      </div>
+          </div>
+          {/* Textblock (Titel/Beschreibung/Button) — auf Mobile via display:contents
+              aufgelöst, damit der Titel über das Dokument rückt. */}
+          <div className="dok-card-body">
+            <h3 className="dok-card-title">{dok.title}</h3>
+            {dok.beschreibung && <p className="dok-card-desc">{dok.beschreibung}</p>}
+            {dok.pdfUrl && (
+              <div className="dok-card-download">
+                <DokumentDownload
+                  pdfUrl={dok.pdfUrl}
+                  fileName={dok.fileName}
+                  fileSize={dok.fileSize}
+                  label="Herunterladen"
+                />
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
     </div>
   );
 }

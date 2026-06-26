@@ -386,7 +386,9 @@ export default function LandingIntro() {
 
       {/* DotLine + Powered by */}
       <div className="landing-dotline" style={{ position: "relative", zIndex: 51, width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>
-        <PoweredByLine style={{ maxWidth: "1060px", width: "100%", paddingLeft: 70 }} />
+        {/* Behält 1060px Breite, schrumpft aber unter ~1160px mit und hält dabei
+            links + rechts 50px Abstand zum Bildrand (zentriert via .landing-dotline). */}
+        <PoweredByLine style={{ width: "min(1060px, calc(100% - 100px))" }} />
       </div>
 
       <style>{`

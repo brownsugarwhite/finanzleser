@@ -69,10 +69,14 @@ function DokumenteHead({ headingId }: { headingId: string }) {
   return (
     <div className="dok-head">
       <span className="dok-head-line" aria-hidden />
-      <h2 id={headingId} className="dok-head-h">
-        <span className="dok-head-label">Dokumente</span>
-      </h2>
-      <span className="dok-head-subtitle">Passende Formulare und Broschüren</span>
+      {/* Innerer Container fluchtet mit dem 750px-Artikelbody (zentriert),
+          die Linie läuft im breiteren Eltern-Container durch. */}
+      <div className="dok-head-inner">
+        <h2 id={headingId} className="dok-head-h">
+          <span className="dok-head-label">Dokumente</span>
+        </h2>
+        <span className="dok-head-subtitle">Passende Formulare und Broschüren</span>
+      </div>
     </div>
   );
 }
@@ -440,7 +444,7 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
             <ToolLabel type="vergleich" slug={unit.slug} headingId={unit.headingId} showExcerpt preload={toolData?.titles[`vergleich:${unit.slug}`]} />
           </ArticleElementWrapper>
           {/* Widget breit, OHNE äußere Box (nur Streifen-Ladebox + Vergleich) */}
-          <ArticleElementWrapper variant="hero" collapsed={collapsed}>
+          <ArticleElementWrapper variant="tool" collapsed={collapsed}>
             <div className="article-finanztool article-finanztool--wide">
               <VergleichEmbed slug={unit.slug} />
             </div>
@@ -454,14 +458,12 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
     if (unit.kind === "dokumente") {
       return (
         <Fragment key={unit.itemKey}>
-          <ArticleElementWrapper variant="hero" collapsed={collapsed}>
+          <ArticleElementWrapper variant="tool" collapsed={collapsed}>
             <div className="article-finanztool article-finanztool--wide">
               {/* Spike-Label-Kopf + Linie auf Box-Breite */}
               <DokumenteHead headingId={unit.headingId} />
-              {/* Downloads in Box */}
-              <div className="article-widget-box">
-                <DokumenteEmbed slugs={unit.slugs} initialDokumente={toolData?.dokumente[unit.slugs.join(",")]} />
-              </div>
+              {/* Downloads ohne umschließenden Kasten */}
+              <DokumenteEmbed slugs={unit.slugs} initialDokumente={toolData?.dokumente[unit.slugs.join(",")]} />
             </div>
           </ArticleElementWrapper>
           <ArticleElementWrapper variant="centered" collapsed={collapsed}>

@@ -564,7 +564,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
         </div>
 
         {/* Right: preview_container */}
-        <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
+        <div className="ftools-right-preview" style={{ width: 250, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
           {/* Fixbreiter, rechtsbündiger Inner-Container → Text bleibt fix beim Expanden */}
           <div className="ftools-preview-inner" style={{ paddingTop: 72, paddingLeft: 23 }}>
           <p className="ftools-preview-heading" style={{
