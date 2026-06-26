@@ -346,6 +346,13 @@
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-text-primary);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+.fl-karte-def {
+  overflow-wrap: anywhere;
 }
 .fl-karte-hint {
   font-size: 0.95rem;
@@ -499,13 +506,15 @@
 .fl-ticket-btn.fl-quiz-opt {
   flex: 0 0 auto;
   min-height: 0;
-  justify-content: flex-start;
+  justify-content: center; /* Antworttext zentriert */
   gap: 12px;
-  padding: 16px 22px;
-  text-align: left;
+  padding: 16px 48px; /* Platz, damit der zentrierte Text nicht den Key berührt */
+  text-align: center;
 }
+/* Key (A/B/C) absolut links → Text bleibt mittig, Key mit Abstand zur Box-Kante */
 .fl-quiz-opt-key {
-  position: relative;
+  position: absolute;
+  left: 26px;
   z-index: 1;
   flex-shrink: 0;
   font-family: var(--font-heading);
@@ -519,6 +528,7 @@
   z-index: 1;
   font-size: 1rem;
   line-height: 1.4;
+  text-align: center;
   color: currentColor;
 }
 /* Buttons-Stage (nur Mythos): kollabiert beim Antworten auf 0. overflow:visible,
@@ -889,4 +899,121 @@
   border-radius: 3px;
   font-weight: 700;
   white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   Mobile (≤480px) – Boxen kompakter, gleiche Optik wie Desktop.
+   Seiten-Padding 18px (statt 31px) → Antwort-Clip zieht mit.
+   ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .fl-gam {
+    padding: 14px 16px;
+  }
+
+  /* Gemeinsame Boxen (Mythos/Quiz/Karte/Gewusst/Schätzen) */
+  .fl-gam-mythos-box,
+  .fl-gam-karte-box,
+  .fl-gam-gewusst-box {
+    padding: 28px 14px 28px;
+    margin: 26px 0;
+  }
+  /* Schon-gewusst: Außenbox enger → mehr Platz fürs Ticket */
+  .fl-gam-gewusst-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .fl-gam-answer-clip {
+    left: 14px;
+    right: 14px;
+  }
+  .fl-gam-mythos-legend,
+  .fl-gam-karte-legend,
+  .fl-gam-gewusst-legend {
+    left: 14px;
+    gap: 7px;
+    font-size: 1.02rem;
+  }
+  .fl-gam-mythos-legend-icon,
+  .fl-gam-karte-legend-icon,
+  .fl-gam-gewusst-legend-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .fl-mythos-claim {
+    margin-bottom: 18px;
+    font-size: 1rem;
+  }
+  .fl-mythos-answer {
+    padding: 14px 16px;
+  }
+
+  /* Mythos: zwei Buttons nebeneinander, möglichst breit */
+  .fl-mythos-choices {
+    gap: 10px;
+  }
+  .fl-ticket-btn {
+    min-height: 64px;
+  }
+  .fl-ticket-btn-label {
+    font-size: 1.2rem;
+  }
+
+  /* Quiz-Optionen: volle Breite, breiter als der Fragetext */
+  .fl-gam-quiz-box .fl-mythos-claim {
+    padding-right: 24px;
+  }
+  .fl-ticket-btn.fl-quiz-opt {
+    padding: 13px 44px;
+    gap: 10px;
+  }
+  .fl-quiz-opt-key {
+    left: 20px;
+  }
+  .fl-quiz-opt-key {
+    font-size: 1.05rem;
+  }
+  .fl-quiz-opt-text {
+    font-size: 0.95rem;
+  }
+
+  /* Begriff erklärt – Flip-Karte */
+  .fl-karte-content {
+    padding: 20px 20px;
+    gap: 12px;
+  }
+  .fl-karte-term {
+    font-size: 1.6rem;
+  }
+  .fl-karte-face {
+    min-height: 104px;
+  }
+  .fl-karte-def {
+    font-size: 0.95rem;
+  }
+
+  /* Schon gewusst – Ticket (3-zeiliger Rubbel-Hinweis braucht Höhe) */
+  .fl-gam-ticket {
+    min-height: 142px;
+  }
+  .fl-gam-ticket-text {
+    padding: 24px 26px;
+    font-size: 0.95rem;
+  }
+
+  /* Schätz-Slider */
+  .fl-schaetz {
+    margin: 50px 4px 0;
+  }
+  .fl-schaetz-scale {
+    font-size: 0.72rem;
+  }
+  .fl-schaetz-actions {
+    margin-top: 24px;
+  }
+  .fl-ticket-btn.fl-schaetz-submit {
+    min-height: 54px;
+  }
+  .fl-schaetz-submit .fl-ticket-btn-label {
+    font-size: 0.92rem;
+  }
 }

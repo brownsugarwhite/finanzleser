@@ -12,6 +12,18 @@ const onlyNum = (s: string | undefined) => {
   return Number.isFinite(n) ? n : null;
 };
 
+// Auf Mobile sanft zur einsliddenden Auflösung scrollen. Erst NACH dem Settle der
+// Box-Morph-/Slide-Animation (~0.6s) scrollen, sonst wandert das Ziel während des
+// Smooth-Scrolls und es ruckelt.
+function scrollAnswerIntoView(el: HTMLElement | null) {
+  if (!el || typeof window === "undefined") return;
+  if (!window.matchMedia("(max-width: 768px)").matches) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.setTimeout(() => {
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+  }, 620);
+}
+
 /* ── Ticket-Button (geteilt: Mythos + Quiz) ── */
 const TICKET_INSET = 7; // Basis-Abstand der äußeren Outline zur Buttonkante
 const TICKET_R = 9; // invertierter Eckenradius (beide Outlines)
@@ -131,6 +143,7 @@ function MythosBox({ fields }: { fields: Record<string, string> }) {
       setStageH(0);
       setPadBottom(ans.offsetHeight + GAM_PAD_BOTTOM + GAM_ANSWER_GAP);
       setOpen(true);
+      scrollAnswerIntoView(ans);
     });
     return () => cancelAnimationFrame(id);
   }, [phase]);
@@ -200,6 +213,7 @@ function QuizBox({ fields }: { fields: Record<string, string> }) {
     const id = requestAnimationFrame(() => {
       setPadBottom(ans.offsetHeight + GAM_PAD_BOTTOM + GAM_ANSWER_GAP);
       setReveal(true);
+      scrollAnswerIntoView(ans);
     });
     return () => cancelAnimationFrame(id);
   }, [picked]);
@@ -357,6 +371,7 @@ function SchaetzBox({ fields }: { fields: Record<string, string> }) {
       setActionsH(0); // Button-Bereich kollabiert
       setPadBottom(ans.offsetHeight + GAM_PAD_BOTTOM + GAM_ANSWER_GAP);
       setReveal(true);
+      scrollAnswerIntoView(ans);
     });
     return () => cancelAnimationFrame(id);
   }, [submitted]);
@@ -621,35 +636,54 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
     ctx.lineWidth = 1.5;
     const lpath = buildInnerLinePath(WIN_X, WIN_Y, w - 2 * WIN_X, h - 2 * WIN_Y, WIN_R, INNER_OFFSET);
     if (lpath) ctx.stroke(new Path2D(lpath));
-    ctx.fillStyle = "#faf9f6";
-    ctx.font = "italic 600 19px Merriweather, Georgia, serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     (ctx as CanvasRenderingContext2D & { letterSpacing?: string }).letterSpacing = "2px";
-    const label = "ZUM AUFDECKEN RUBBELN";
-    const textY = h / 2 + 2; // nur der Text 3px nach unten
-    ctx.fillText(label, w / 2, textY);
-    // Weiße Sparks (klein+groß) vor und hinter dem Text — wie die Heading-Deko.
-    const tw = ctx.measureText(label).width;
     const spark = new Path2D(GAM_SPARK_PATH);
-    ctx.fillStyle = "#ffffff";
-    const sparkY = h / 2; // Sparks bleiben mittig
-    const drawSpark = (cx: number, px: number) => {
+    const drawSpark = (cx: number, cy: number, px: number) => {
       const s = px / 12;
       ctx.save();
-      ctx.translate(cx, sparkY);
+      ctx.translate(cx, cy);
       ctx.scale(s, s);
       ctx.translate(-6, -6);
       ctx.fill(spark);
       ctx.restore();
     };
-    const lx = w / 2 - tw / 2; // linke Textkante
-    const rx = w / 2 + tw / 2; // rechte Textkante
-    const GT = 9, GS = 5, LG = 18, SM = 12; // Gaps (Text↔Spark, Spark↔Spark) + Größen
-    drawSpark(lx - GT - LG / 2, LG); // links groß (nah am Text)
-    drawSpark(lx - GT - LG - GS - SM / 2, SM); // links klein (außen)
-    drawSpark(rx + GT + LG / 2, LG); // rechts groß
-    drawSpark(rx + GT + LG + GS + SM / 2, SM); // rechts klein
+    // Schmal (Mobile): Hinweis 3-zeilig gestapelt, je ein Spark oben + unten.
+    if (w < 440) {
+      ctx.font = "italic 600 17px Merriweather, Georgia, serif";
+      const lines = ["ZUM", "AUFDECKEN", "RUBBELN"];
+      const lineH = 25;
+      const SP = 15; // Spark-Größe
+      const sparkGap = 13; // Abstand Spark ↔ Textblock
+      const blockH = lines.length * lineH;
+      const totalH = SP + sparkGap + blockH + sparkGap + SP;
+      let y = h / 2 - totalH / 2;
+      ctx.fillStyle = "#ffffff";
+      drawSpark(w / 2, y + SP / 2, SP); // Spark oben
+      y += SP + sparkGap;
+      ctx.fillStyle = "#faf9f6";
+      lines.forEach((ln, i) => ctx.fillText(ln, w / 2, y + lineH / 2 + i * lineH));
+      y += blockH + sparkGap;
+      ctx.fillStyle = "#ffffff";
+      drawSpark(w / 2, y + SP / 2, SP); // Spark unten
+    } else {
+      // Breit (Desktop): eine Zeile, Sparks links + rechts (wie Heading-Deko).
+      ctx.font = "italic 600 19px Merriweather, Georgia, serif";
+      ctx.fillStyle = "#faf9f6";
+      const label = "ZUM AUFDECKEN RUBBELN";
+      ctx.fillText(label, w / 2, h / 2 + 2); // nur der Text 3px nach unten
+      const tw = ctx.measureText(label).width;
+      ctx.fillStyle = "#ffffff";
+      const sparkY = h / 2;
+      const lx = w / 2 - tw / 2; // linke Textkante
+      const rx = w / 2 + tw / 2; // rechte Textkante
+      const GT = 9, GS = 5, LG = 18, SM = 12; // Gaps + Größen
+      drawSpark(lx - GT - LG / 2, sparkY, LG); // links groß
+      drawSpark(lx - GT - LG - GS - SM / 2, sparkY, SM); // links klein
+      drawSpark(rx + GT + LG / 2, sparkY, LG); // rechts groß
+      drawSpark(rx + GT + LG + GS + SM / 2, sparkY, SM); // rechts klein
+    }
     ctx.globalCompositeOperation = "destination-out"; // ab jetzt radiert fill()
     setCoverReady(true); // Text darf nun (verdeckt) gerendert werden → beim Rubbeln sichtbar
   }, [size, revealed]);
