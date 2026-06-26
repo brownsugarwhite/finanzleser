@@ -53,7 +53,7 @@ export interface Post {
   beitragFelder?: PostACF;
   seo?: SEO;
   /** Aus dem post_content abgeleitete eingebettete Finanztools (für Tool-Dots/Labels). */
-  tools?: ("rechner" | "vergleich" | "checkliste")[];
+  tools?: ("rechner" | "vergleich" | "checkliste" | "dokumente")[];
 }
 
 // ─────────────────────────────────────────────

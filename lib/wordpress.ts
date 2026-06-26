@@ -524,7 +524,7 @@ async function _fetchMegamenuToolsByCategory(categorySlug: string): Promise<Mega
 // resilient geladenen Posts-Map (getPostsByCategory), Tools resilient + memoisiert.
 export type MegamenuPreload = Record<
   string,
-  { posts: (Post & { tools?: ("rechner" | "vergleich" | "checkliste")[] })[]; hasMore: boolean; tools: MegamenuTool[] }
+  { posts: (Post & { tools?: ("rechner" | "vergleich" | "checkliste" | "dokumente")[] })[]; hasMore: boolean; tools: MegamenuTool[] }
 >;
 export async function getMegamenuPreload(limit = 3): Promise<MegamenuPreload> {
   const navItems = await getNavItems();

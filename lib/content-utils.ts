@@ -27,7 +27,7 @@ export function getReadingTimeMinutes(content: string | undefined | null): numbe
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
-export type PreviewToolType = "rechner" | "vergleich" | "checkliste";
+export type PreviewToolType = "rechner" | "vergleich" | "checkliste" | "dokumente";
 
 export function detectToolTypes(content: string | undefined | null): PreviewToolType[] {
   if (!content) return [];
@@ -35,5 +35,6 @@ export function detectToolTypes(content: string | undefined | null): PreviewTool
   if (/wp:finanzleser\/rechner|data-finanzleser-rechner/.test(content)) tools.push("rechner");
   if (/wp:finanzleser\/vergleich|data-finanzleser-vergleich/.test(content)) tools.push("vergleich");
   if (/wp:finanzleser\/checkliste|data-finanzleser-checkliste/.test(content)) tools.push("checkliste");
+  if (/wp:finanzleser\/dokumente|data-finanzleser-dokumente/.test(content)) tools.push("dokumente");
   return tools;
 }
