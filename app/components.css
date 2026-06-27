@@ -807,10 +807,12 @@ h1.category-title {
   fill: var(--color-text-primary);
   transition: fill 0.15s ease;
 }
-.subcat-edge-arrow:active .subcat-edge-arrow-line {
+.subcat-edge-arrow:active .subcat-edge-arrow-line,
+.subcat-edge-arrow:hover .subcat-edge-arrow-line {
   background: var(--color-brand-secondary);
 }
-.subcat-edge-arrow:active svg path {
+.subcat-edge-arrow:active svg path,
+.subcat-edge-arrow:hover svg path {
   fill: var(--color-brand-secondary);
 }
 
@@ -1512,23 +1514,21 @@ h1.category-title {
   transition: width 1s ease-out;
 }
 
-/* Hover über den GANZEN Eintrag/Card → alle Texte (inkl. „Ratgeber lesen") brand-secondary. */
+/* Hover über den GANZEN Eintrag → alle Texte brand-secondary. NUR latest-post-item
+   (Listen-Eintrag); die Slider-Cards (.slide-article-card) bekommen stattdessen den
+   Hover-Kasten und färben den Text NICHT mehr. */
 .latest-post-item:hover,
 .latest-post-item:hover .latest-post-category,
 .latest-post-item:hover .latest-post-title,
 .latest-post-item:hover p,
 .latest-post-item:hover .article-read-link,
-.latest-post-item:hover .article-read-link span,
-.slide-article-card:hover p,
-.slide-article-card:hover .article-read-link,
-.slide-article-card:hover .article-read-link span {
+.latest-post-item:hover .article-read-link span {
   color: var(--color-brand-secondary) !important;
 }
 /* Kleiner Titel (inkl. innerem <span>{post.title}</span>) + fette Zeile sicher
    mit auf brand-secondary — Inline-Color am inneren Span würde sonst gewinnen. */
 .latest-post-item:hover .latest-post-category span:not([style*="background"]),
-.latest-post-item:hover .latest-post-title span,
-.slide-article-card:hover p span:not([style*="background"]) {
+.latest-post-item:hover .latest-post-title span {
   color: var(--color-brand-secondary) !important;
 }
 .megamenu-legal-link:hover {
@@ -2095,6 +2095,13 @@ a.megamenu-link:hover {
 .slider-nav-dot:hover {
   background: var(--color-brand-secondary) !important;
 }
+.slider-side-arrow {
+  color: var(--color-text-primary);
+  transition: color 0.15s, opacity 0.3s ease;
+}
+.slider-side-arrow:hover {
+  color: var(--color-brand-secondary);
+}
 
 /* Action Buttons */
 .checkliste-actions {
@@ -2510,6 +2517,13 @@ h2.faq-heading {
   from { background-position: 0 0; }
   to { background-position: calc(-1 * var(--sprite-w)) 0; }
 }
+
+/* Hover-Kasten-Sparks: langsame Endlos-Rotation solange eine Card gehovert wird. */
+@keyframes fl-spark-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-loader { animation-duration: 2.2s; }
 }

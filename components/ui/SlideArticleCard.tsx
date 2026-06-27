@@ -19,7 +19,7 @@ export interface SlideArticleCardProps {
 
 const PHASE_DURATION = 0.3;
 
-export const CARD_MIN_WIDTH = 265;
+export const CARD_MIN_WIDTH = 244;
 export const CARD_MAX_WIDTH = 450;
 
 function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
@@ -145,7 +145,7 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
         style={{
           position: 'relative',
           width: '100%',
-          height: 210,
+          height: 190,
           flexShrink: 0,
           transform: categoryTransition === 'out' ? 'scale(0)' : phase1Visible ? 'scale(1)' : 'scale(0)',
           transformOrigin: categoryTransition !== 'idle' ? 'center center' : 'top center',
@@ -166,7 +166,8 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
           style={{
             position: 'absolute',
             inset: 0,
-            overflow: 'hidden',
+            // KEIN overflow:hidden — das Visual darf bei höherem Bild oben/unten
+            // den Container überlappen.
             background: post.featuredImage?.node.sourceUrl ? 'transparent' : 'var(--color-placeholder-bg)',
           }}
         >
@@ -176,11 +177,14 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
               alt={post.featuredImage.node.altText || ''}
               loading="lazy"
               style={{
+                // Volle Breite, natürliche Höhe, vertikal zentriert → überlappt
+                // bei höherem Seitenverhältnis oben/unten den 190px-Rahmen.
                 position: 'absolute',
-                inset: 0,
+                top: '50%',
+                left: 0,
                 width: '100%',
-                height: '100%',
-                objectFit: 'contain',
+                height: 'auto',
+                transform: 'translateY(-50%)',
                 zIndex: 1,
                 display: 'block',
               }}
@@ -201,7 +205,7 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
       }}>
         <div style={{
           width: '100%',
-          padding: '13px 23px 0',
+          padding: '13px 0 0',
           display: 'flex',
           flexDirection: 'column',
         }}>
@@ -250,18 +254,19 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
           </p>
         </div>
 
-        {/* Tool-Labels — zwischen fettem Text und „Ratgeber lesen" */}
-        {post.tools && post.tools.length > 0 && (
+        {/* Tool-Labels — zwischen fettem Text und „Ratgeber lesen".
+            „dokumente" wird NICHT hier gezeigt (eigenes Lesezeichen oben links). */}
+        {post.tools && post.tools.filter((t) => t !== 'dokumente').length > 0 && (
           <div style={{
             width: '100%',
-            padding: '0 23px',
+            padding: 0,
             margin: '6px 0',
             display: 'flex',
             flexWrap: 'wrap',
             gap: 6,
             flexShrink: 0,
           }}>
-            {post.tools.map((t) => (
+            {post.tools.filter((t) => t !== 'dokumente').map((t) => (
               <span key={t} style={{
                 background: TOOL_DOT_COLORS[t],
                 color: '#fff',
@@ -281,7 +286,7 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
         {/* Footer: direkt nach dem Text (nicht am unteren Card-Rand) */}
         <div style={{
           width: '100%',
-          padding: '6px 23px 0',
+          padding: '6px 0 0',
           display: 'flex',
           alignItems: 'center',
           flexShrink: 0,

@@ -10,7 +10,7 @@ import { CATEGORY_ICONS as RATGEBER_ICONS } from "@/lib/categoryIcons";
 
 // Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
 // Initial-Bundle der Landing landet.
-const SubcategorySlider = dynamic(() => import("@/components/sections/SubcategorySlider"), {
+const RatgeberCategoryBlock = dynamic(() => import("@/components/sections/RatgeberCategoryBlock"), {
   loading: () => <div style={{ width: "100%", minHeight: 280 }} />,
 });
 
@@ -126,43 +126,14 @@ async function RatgeberSection() {
       <div className="scalable-landing">
         {kategorieBlocks.map((block) => (
           block.children.length > 0 && (
-            <div key={block.slug} style={{ marginTop: 80 }}>
-              <div className="ratgeber-block-wrap" style={{
-                maxWidth: 1200,
-                margin: "0 auto",
-                padding: "0 40px",
-                boxSizing: "border-box",
-              }}>
-                <div className="ratgeber-block-head" style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 23 }}>
-                  <img
-                    className="ratgeber-block-icon"
-                    src={RATGEBER_ICONS[block.slug]}
-                    alt=""
-                    aria-hidden="true"
-                    width={36}
-                    height={36}
-                    style={{ flexShrink: 0, display: "block" }}
-                  />
-                  <h3 className="ratgeber-block-title" style={{
-                    fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                    fontWeight: 700,
-                    fontStyle: "italic",
-                    fontSize: 28,
-                    color: "var(--color-text-primary)",
-                    letterSpacing: "0.01em",
-                    lineHeight: 1.3,
-                    marginTop: 5,
-                  }}>
-                    {block.heading}
-                  </h3>
-                </div>
-              </div>
-              <SubcategorySlider
-                categories={block.children}
-                parentSlug={block.slug}
-                allCategoryPosts={block.categoryPosts}
-              />
-            </div>
+            <RatgeberCategoryBlock
+              key={block.slug}
+              heading={block.heading}
+              iconSrc={RATGEBER_ICONS[block.slug]}
+              categories={block.children}
+              parentSlug={block.slug}
+              allCategoryPosts={block.categoryPosts}
+            />
           )
         ))}
       </div>
