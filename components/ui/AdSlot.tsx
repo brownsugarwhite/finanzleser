@@ -30,9 +30,12 @@ const AD_SIZES: Record<AdFormat, { w: number; h: number }> = {
 export default function AdSlot({
   format,
   className,
+  fullWidth = false,
 }: {
   format: AdFormat;
   className?: string;
+  /** Streckt den Slot auf 100% der Spaltenbreite (statt fixer IAB-Breite) — Aspect-Ratio bleibt. */
+  fullWidth?: boolean;
 }) {
   const { w, h } = AD_SIZES[format];
   return (
@@ -42,7 +45,7 @@ export default function AdSlot({
       role="complementary"
       aria-label="Werbung"
       style={{
-        width: w,
+        width: fullWidth ? "100%" : w,
         maxWidth: "100%",
         aspectRatio: `${w} / ${h}`,
         background: "rgba(0, 0, 0, 0.10)",

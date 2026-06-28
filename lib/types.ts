@@ -231,7 +231,30 @@ export interface ArticleAdsSettings {
   mid: boolean; // breiter Banner in der Artikelmitte
 }
 
+// Werbe-Platzierungen pro Seitentyp — einzeln über das WP-Backend schaltbar.
+// `mid` ist nur dort sinnvoll/verdrahtet, wo längere Prosa existiert (article/anbieter).
+export interface PageAdsSettings {
+  top: boolean; // breiter Banner zwischen Heading und Content
+  rails: boolean; // sticky Seiten-Rails links + rechts
+  mid?: boolean; // breiter Banner in der Mitte/unten
+}
+
+// Pro Seitentyp eigene Schalter. Default überall aus (siehe SITE_SETTINGS_FALLBACK).
+export interface SiteAdsSettings {
+  article: PageAdsSettings;
+  rechner: PageAdsSettings;
+  vergleich: PageAdsSettings;
+  checkliste: PageAdsSettings;
+  anbieter: PageAdsSettings;
+  kategorie: PageAdsSettings; // Kategorie- + Subkategorie-Listen
+  suche: PageAdsSettings;
+  dokumente: PageAdsSettings; // Dokumente-Listenseite
+}
+
 export interface SiteSettings {
   top_banner: TopBannerSettings;
+  // Legacy-Quelle für Artikel-Ads (bleibt als Fallback für ads.article erhalten).
   article_ads: ArticleAdsSettings;
+  // Neue, pro-Seitentyp granulare Werbe-Schalter.
+  ads: SiteAdsSettings;
 }

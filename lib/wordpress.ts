@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
+import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
@@ -873,7 +873,8 @@ export const getCategoryWithChildren = cache(async (categorySlug: string): Promi
     const mapPost = (post: Post & { content?: string }): Post => {
       const tools = detectToolTypes(post.content);
       const decoded = decodePostContent(post) as Post & { content?: string };
-      delete decoded.content;
+      // Karten-Untertitel (fetter Text) = 1. Content-<h2> (Konvention v2); löscht danach content.
+      applyContentHeaderTitle(decoded);
       return { ...decoded, tools };
     };
 
@@ -1847,6 +1848,18 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
     rails: false,
     mid: false,
   },
+  // Pro Seitentyp: alles aus per Default → beim Launch nichts sichtbar, bis im
+  // WP-Backend aktiviert. `article` spiegelt zur Sicherheit die Legacy-Defaults.
+  ads: {
+    article: { top: false, rails: false, mid: false },
+    rechner: { top: false, rails: false },
+    vergleich: { top: false, rails: false },
+    checkliste: { top: false, rails: false },
+    anbieter: { top: false, rails: false, mid: false },
+    kategorie: { top: false, rails: false },
+    suche: { top: false, rails: false },
+    dokumente: { top: false, rails: false },
+  },
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -1860,10 +1873,23 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     });
     if (!res.ok) return SITE_SETTINGS_FALLBACK;
     const data = (await res.json()) as Partial<SiteSettings>;
-    return {
-      top_banner: { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) },
-      article_ads: { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) },
+    const top_banner = { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) };
+    const article_ads = { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) };
+    const adsData = (data.ads ?? {}) as Partial<SiteAdsSettings>;
+    const fb = SITE_SETTINGS_FALLBACK.ads;
+    const ads: SiteAdsSettings = {
+      // article: bevorzugt ads.article aus WP, sonst Legacy article_ads (back-compat
+      // bis das mu-plugin den ads-Block ausliefert).
+      article: { ...fb.article, ...article_ads, ...(adsData.article ?? {}) },
+      rechner: { ...fb.rechner, ...(adsData.rechner ?? {}) },
+      vergleich: { ...fb.vergleich, ...(adsData.vergleich ?? {}) },
+      checkliste: { ...fb.checkliste, ...(adsData.checkliste ?? {}) },
+      anbieter: { ...fb.anbieter, ...(adsData.anbieter ?? {}) },
+      kategorie: { ...fb.kategorie, ...(adsData.kategorie ?? {}) },
+      suche: { ...fb.suche, ...(adsData.suche ?? {}) },
+      dokumente: { ...fb.dokumente, ...(adsData.dokumente ?? {}) },
     };
+    return { top_banner, article_ads, ads };
   } catch (error) {
     console.error("Error fetching site settings from WordPress:", error);
     return SITE_SETTINGS_FALLBACK;

@@ -4,7 +4,7 @@ import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
 import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
-import { getLatestPosts, getCategoryWithChildren, getPostsByCategory, getLatestFinanztools, type LatestTool } from "@/lib/wordpress";
+import { getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
 import { CATEGORY_ICONS as RATGEBER_ICONS } from "@/lib/categoryIcons";
 
@@ -63,13 +63,10 @@ async function FinanztoolsHeroSection() {
   // KEIN try/catch-Swallow: würde den Laufzeit-Leer-Schutz aushebeln (leere Hero-Sidebar
   // backen statt letzten guten Stand zu behalten). Fehler propagieren → ISR behält den
   // letzten Stand / Build retried (staticGenerationRetryCount).
-  const [latestPosts, latestTools] = await Promise.all([
-    getLatestPosts(10),
-    getLatestFinanztools(),
-  ]);
+  const latestPosts = await getLatestPosts(10);
   return (
     <div className="scalable-landing">
-      <FinanztoolsHero latestPosts={latestPosts} latestTools={latestTools} />
+      <FinanztoolsHero latestPosts={latestPosts} />
     </div>
   );
 }

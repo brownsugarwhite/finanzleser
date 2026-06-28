@@ -10,23 +10,10 @@ import Spark from "@/components/ui/Spark";
 import RevolverSlider from "@/components/ui/RevolverSlider";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
-import type { LatestTool } from "@/lib/wordpress";
 import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
 import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from "@/lib/morphCapture";
 import { getFinanztoolsActiveCard, setFinanztoolsActiveCard, isBackNavigation } from "@/lib/landingState";
 import ToolDots from "@/components/ui/ToolDots";
-
-// Typ-Visuals für „Neuste Finanztools" (CPTs haben oft kein eigenes Titelbild).
-const TOOL_VISUAL: Record<LatestTool["type"], string> = {
-  rechner: "/assets/finanztoolSlider/rechner_visual.png",
-  vergleich: "/assets/finanztoolSlider/vergleich_visual.png",
-  checkliste: "/assets/finanztoolSlider/checklisten_visual.png",
-};
-const TOOL_CTA: Record<LatestTool["type"], string> = {
-  rechner: "Zum Rechner",
-  vergleich: "Zum Vergleich",
-  checkliste: "Zur Checkliste",
-};
 
 const TOOLS = [
   {
@@ -64,8 +51,11 @@ const INTRO_IMAGE = "/assets/finanztoolSlider/toolbox.png";
 // Tool-Bilder etwas kleiner als das Toolbox-Intro
 const TOOL_IMAGE_SCALE = "88%";
 
-export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTools = [] }: { posts?: Post[]; latestPosts?: Post[]; latestTools?: LatestTool[] }) {
+export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
   const cardsRef = useRef<HTMLDivElement>(null);
+  const rightSpacerRef = useRef<HTMLDivElement>(null);
+  const dotFillerRef = useRef<HTMLDivElement>(null);
+  const anbieterVertRef = useRef<HTMLDivElement>(null);
   const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const [cardProgs, setCardProgs] = useState<number[]>([0, 0, 0]);
   const cardProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
@@ -104,6 +94,54 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, [activeCard]);
+
+  // Filler-Höhe der Dot-Spalte = Abstand von der Spalten-Unterkante bis zur Oberkante
+  // des vertikalen Anbieter-Schriftzugs. Dadurch endet der Sticky-Pfeil exakt über dem
+  // Schriftzug statt am Sektionsende. Differenz zweier getBoundingClientRect-Tops ist
+  // scroll-unabhängig → einmal messen + bei Reflow/Resize/Font-Load neu.
+  useLayoutEffect(() => {
+    const spacer = rightSpacerRef.current;
+    const filler = dotFillerRef.current;
+    const vert = anbieterVertRef.current;
+    const section = sectionRef.current;
+    if (!spacer || !filler || !vert) return;
+
+    const GAP = 14;     // Pfeilspitze endet diese Distanz über der Oberkante des Schriftzugs
+    const GAP_X = 10;   // Schriftzug zusätzlich nach links → größerer Abstand zum Visual
+
+    const measure = () => {
+      // Mobile: Spalte ausgeblendet → nichts messen.
+      if (spacer.offsetParent === null) { filler.style.height = "0px"; vert.style.transform = "none"; return; }
+
+      // Horizontal: Schriftzug auf die Mitte der Dot-/Pfeil-Spalte zentrieren, dann
+      // GAP_X nach links für mehr Abstand zum Visual.
+      vert.style.transform = "none"; // für saubere Messung zurücksetzen
+      const spacerRect = spacer.getBoundingClientRect();
+      const vertRect = vert.getBoundingClientRect();
+      const dx = (spacerRect.left + spacerRect.width / 2) - (vertRect.left + vertRect.width / 2) - GAP_X;
+      vert.style.transform = `translateX(${dx}px)`;
+
+      // Vertikal: Filler-Höhe = Abstand Spalten-Unterkante → Oberkante des Schriftzugs,
+      // damit der Sticky-Pfeil exakt darüber zur Ruhe kommt. Die Buchstaben überlaufen
+      // ihre (auf Blockhöhe begrenzte) Box nach oben → echte Oberkante = Top des ersten
+      // Wort-Spans, nicht der Wrapper-Box. translateX ändert die Top-Koordinate nicht.
+      filler.style.height = "0px";
+      const firstWord = (vert.firstElementChild as HTMLElement | null) ?? vert;
+      const vertTop = firstWord.getBoundingClientRect().top;
+      const h = Math.max(0, spacerRect.bottom - vertTop + GAP);
+      filler.style.height = `${h}px`;
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (section) ro.observe(section);
+    ro.observe(spacer);
+    window.addEventListener("resize", measure);
+    if (typeof document !== "undefined" && document.fonts?.ready) {
+      document.fonts.ready.then(measure).catch(() => {});
+    }
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
 
   useLayoutEffect(() => {
     cardProgObjs.current.forEach(obj => gsap.killTweensOf(obj));
@@ -293,7 +331,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
                 Mobile: full-bleed über Bildschirmbreite. CSS-toggle (statt
                 JS-Ternary) damit Mobile-SSR nicht initial in Desktop-Position
                 rendert und dann hüpft. */}
-            <div className="ftools-visual-wrap">
+            <div className="ftools-visual-wrap" style={{ transform: "translateY(15px)" }}>
               <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
           </div>
@@ -530,7 +568,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
 
         {/* Right: preview_container */}
         {/* Vertical dot spacer */}
-        <div className="ftools-right-spacer" style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
+        <div ref={rightSpacerRef} className="ftools-right-spacer" style={{ width: 14, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column" }}>
           {/* Kleiner Pfeil in Dot-Farbe oben über der gepunkteten Linie */}
           <div style={{ marginTop: 72, display: "flex", justifyContent: "center" }}>
             <svg width="9" height="6" viewBox="0 0 12 8" fill="none" aria-hidden style={{ transform: "rotate(180deg)" }}>
@@ -561,12 +599,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
           <div style={{ position: "sticky", bottom: 23, display: "flex", justifyContent: "center", zIndex: 3 }}>
             <img src="/icons/arrow down.svg" alt="" style={{ width: 12, height: "auto" }} />
           </div>
+          {/* Filler — Höhe via JS = Abstand bis zur Oberkante des vertikalen Schriftzugs.
+              Schiebt die Ruheposition des Sticky-Pfeils nach oben, sodass die Pfeilspitze
+              exakt über dem Schriftzug endet (statt am Sektionsende). */}
+          <div ref={dotFillerRef} style={{ flexShrink: 0, height: 0 }} aria-hidden />
         </div>
 
         {/* Right: preview_container */}
-        <div className="ftools-right-preview" style={{ width: 250, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
+        <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
           {/* Fixbreiter, rechtsbündiger Inner-Container → Text bleibt fix beim Expanden */}
-          <div className="ftools-preview-inner" style={{ paddingTop: 72, paddingLeft: 23 }}>
+          <div className="ftools-preview-inner" style={{ paddingTop: 72, paddingLeft: 23, paddingBottom: 16 }}>
           <p className="ftools-preview-heading" style={{
             fontFamily: "'Merriweather', serif",
             fontSize: "18px",
@@ -579,7 +621,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
           </p>
 
           <div className="ftools-preview-list" style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 3).map((post, i) => {
+            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 5).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
@@ -690,131 +732,31 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [], latestTo
             })}
           </div>
 
-          {/* Neuste Finanztools — auf Höhe von „Die Finanztools" (marginTop tunebar) */}
-          {latestTools.length > 0 && (
-            <div style={{ marginTop: 230 }}>
-              <p className="ftools-preview-heading" style={{
-                fontFamily: "'Merriweather', serif",
-                fontSize: "18px",
-                fontWeight: 700,
-                lineHeight: 1.3,
-                color: "var(--color-text-primary)",
-                margin: "0 0 20px 0",
-              }}>
-                Neuste Finanztools
-              </p>
-
-              <div className="ftools-preview-list" style={{ display: "flex", flexDirection: "column", gap: 17 }}>
-                {latestTools.map((tool, i) => {
-                  const color = tool.type === "rechner"
-                    ? "var(--color-tool-rechner)"
-                    : tool.type === "checkliste"
-                      ? "var(--color-tool-checklisten)"
-                      : "var(--color-tool-vergleiche)";
-                  const desc = tool.description.length > 100
-                    ? tool.description.slice(0, 100).replace(/\s+\S*$/, "") + " …"
-                    : tool.description;
-                  return (
-                    <div
-                      key={tool.href}
-                      className="latest-post-item"
-                      style={{ display: "flex", alignItems: "center", cursor: "pointer", ["--i" as string]: i } as CSSProperties}
-                      onMouseEnter={() => { try { router.prefetch(tool.href); } catch { /* noop */ } }}
-                      onClick={(e) => {
-                        if ((e.target as HTMLElement).closest("a")) return;
-                        router.push(tool.href);
-                      }}
-                    >
-                      <div className="latest-post-thumb">
-                        <img src={TOOL_VISUAL[tool.type]} alt="" loading="lazy" />
-                      </div>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        {/* Label-Badge — weiß auf Tool-Farbe */}
-                        <span style={{
-                          display: "inline-block",
-                          background: color,
-                          color: "#fff",
-                          fontFamily: "var(--font-body)",
-                          fontSize: 14,
-                          fontWeight: 600,
-                          lineHeight: 1,
-                          padding: "5px 11px",
-                          letterSpacing: "0.02em",
-                          marginBottom: 10,
-                        }}>
-                          {tool.label}
-                        </span>
-                        {/* Titel klein — exakt wie „Neuste Beiträge" (.latest-post-category) */}
-                        <p className="latest-post-category" style={{
-                          fontSize: 12,
-                          fontFamily: "var(--font-body)",
-                          margin: "0 0 4px 0",
-                          lineHeight: 1.3,
-                          color: "var(--color-text-secondary)",
-                        }} lang="de">
-                          {tool.title}
-                        </p>
-                        {/* Beschreibung groß (Merriweather 700, analog Beiträge) */}
-                        {desc && (
-                          <p className="latest-post-title" style={{
-                            fontSize: 16,
-                            fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                            fontWeight: 700,
-                            color: "var(--color-text-primary)",
-                            lineHeight: 1.35,
-                            margin: "0 0 8px 0",
-                            hyphens: "auto",
-                            WebkitHyphens: "auto",
-                            wordBreak: "break-word",
-                          }} lang="de">
-                            {desc}
-                          </p>
-                        )}
-                        {/* „Zum Rechner/Vergleich/Checkliste" — identisch zum Artikellink */}
-                        <Link
-                          href={tool.href}
-                          className="article-read-link"
-                          style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <span style={{
-                            fontFamily: "var(--font-body)",
-                            fontSize: "13px",
-                            fontWeight: 500,
-                            whiteSpace: "nowrap",
-                          }}>
-                            {TOOL_CTA[tool.type]}
-                          </span>
-                          <span
-                            className="article-read-line"
-                            style={{ height: 0, borderTop: "1px solid currentColor", flexShrink: 0 }}
-                          />
-                          <svg
-                            width="8"
-                            height="8"
-                            viewBox="0 0 17.45 15.77"
-                            fill="none"
-                            aria-hidden
-                            style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}
-                          >
-                            <polyline
-                              points="16.95 15.27 8.27 8.11 16.95 .5"
-                              stroke="currentColor"
-                              strokeWidth="1"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              fill="none"
-                              vectorEffect="non-scaling-stroke"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+          {/* Anbieter-Kontakte-Block — unter den neuesten Beiträgen */}
+          <div className="ftools-anbieter">
+            {/* Vertikaler Schriftzug — Buchstaben staggern beim Hover-Expand von links ein */}
+            <div ref={anbieterVertRef} className="ftools-anbieter-vert" aria-hidden="true">
+              <span className="ftools-anbieter-vert-word">
+                {"ANBIETER".split("").map((ch, i) => (
+                  <span key={i}>{ch}</span>
+                ))}
+              </span>
+              <span className="ftools-anbieter-vert-spark"><Spark /></span>
+              <span className="ftools-anbieter-vert-word">
+                {"KONTAKTE".split("").map((ch, i) => (
+                  <span key={i}>{ch}</span>
+                ))}
+              </span>
             </div>
-          )}
+            <div className="ftools-anbieter-main">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/anbieter_Banner.png" alt="" className="ftools-anbieter-img" loading="lazy" />
+              <p className="ftools-anbieter-text">
+                Wir haben die aktuellen Kontakte von über 100 deutschen Topversicherungen und Finanzanbietern für Sie aufgelistet.
+              </p>
+              <Button label="Anbieter" href="/anbieter" />
+            </div>
+          </div>
           </div>
         </div>
       </div>

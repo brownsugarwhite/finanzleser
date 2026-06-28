@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "@/lib/gsapConfig";
 import TopNav from "@/components/layout/TopNav";
 import PoweredByLine from "@/components/ui/PoweredByLine";
+import QuickLinksRow from "@/components/ui/QuickLinksRow";
 import { useSearchSuggestions } from "@/lib/hooks/useSearchSuggestions";
 
 function SearchIcon({ size = 16 }: { size?: number }) {
@@ -388,7 +389,12 @@ export default function LandingIntro() {
       <div className="landing-dotline" style={{ position: "relative", zIndex: 51, width: "100%", display: "flex", justifyContent: "center", marginTop: "3px" }}>
         {/* Behält 1060px Breite, schrumpft aber unter ~1160px mit und hält dabei
             links + rechts 50px Abstand zum Bildrand (zentriert via .landing-dotline). */}
-        <PoweredByLine style={{ width: "min(1060px, calc(100% - 100px))" }} />
+        <PoweredByLine showArrow style={{ width: "min(1060px, calc(100% - 100px))" }} />
+      </div>
+
+      {/* Schnellzugriff-Links 12px unter der Dotline (Landing). */}
+      <div style={{ position: "relative", zIndex: 51, width: "100%", display: "flex", justifyContent: "center" }}>
+        <QuickLinksRow style={{ width: "min(1060px, calc(100% - 100px))" }} />
       </div>
 
       <style>{`

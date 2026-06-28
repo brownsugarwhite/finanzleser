@@ -637,7 +637,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         >
           <div
             onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
-            onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
+            onMouseLeave={morphLock ? undefined : () => { sliderPill.handleContainerLeave(); hoverBox.leaveRegion(); }}
             // Mobile: Abstand zum linken Rand (Leading-Spacer ist mobil display:none).
             // Button-Mode 36px (Pill überhängt den Text links ~16px → sonst am Rand
             // abgeschnitten), Card-Mode 20px. Desktop unverändert.

@@ -267,7 +267,7 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
 
   return (
     <>
-    <div ref={emblaRef} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
+    <div ref={emblaRef} onMouseLeave={hoverEnabled ? hoverBox.leaveRegion : undefined} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,

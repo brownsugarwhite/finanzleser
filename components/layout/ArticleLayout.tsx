@@ -44,13 +44,15 @@ function extractLatestPostsBlock(content?: string): { categoryIds: number[]; pos
 export default async function ArticleLayout(props: ArticleLayoutProps) {
   const relatedBlock = extractLatestPostsBlock(props.content);
   // Werbe-Settings (gecacht/dedupliziert mit dem Aufruf in app/layout.tsx).
-  const { article_ads } = await getSiteSettings();
+  // Quelle jetzt ads.article (Fallback auf Legacy article_ads ist im Merge gelöst).
+  const { ads } = await getSiteSettings();
+  const articleAds = { top: ads.article.top, rails: ads.article.rails, mid: !!ads.article.mid };
 
   return (
     <>
       <main className="min-h-screen bg-white">
         <div className="pb-12" style={{ paddingTop: 0 }}>
-          <ArticleClient {...props} articleAds={article_ads} />
+          <ArticleClient {...props} articleAds={articleAds} />
         </div>
         {relatedBlock && relatedBlock.categoryIds.length > 0 && (
           <RelatedPostsSection

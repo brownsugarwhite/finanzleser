@@ -586,10 +586,41 @@ body.leo-chat-open #leo-chat-messages {
   z-index: 52;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: flex-start;
   margin-top: 3px;
   margin-bottom: 36px;
   pointer-events: none;
+}
+
+/* Schnellzugriff-Links unter der Dotline — zentriert, 4px Abstand. */
+.quicklinks-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: -1px;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+.quicklinks-link {
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.quicklinks-link:hover {
+  color: var(--color-brand-secondary);
+}
+@media (max-width: 1024px) {
+  .quicklinks-row {
+    display: none;
+  }
 }
 
 /* ─────────────────────────────────────────────
@@ -1509,7 +1540,8 @@ h1.category-title {
 }
 .article-read-link:hover .article-read-line,
 .latest-post-item:hover .article-read-line,
-.slide-article-card:hover .article-read-line {
+.slide-article-card:hover .article-read-line,
+[data-card]:hover .article-read-line {
   width: 36px;
   transition: width 1s ease-out;
 }
@@ -1579,8 +1611,8 @@ a.megamenu-link:hover {
   right: calc(100% + 16px);
   /* vertikal zentriert zum Karten-INHALT (Padding-bottom 23 + 1px Border kompensiert) */
   top: calc(50% - 12px);
-  width: 120px;
-  height: 71px;
+  width: 130px;
+  height: 77px;
   z-index: 2;
   border-radius: 4px;
   pointer-events: none;
@@ -1600,51 +1632,92 @@ a.megamenu-link:hover {
   object-fit: contain;
   display: block;
 }
-.ftools-right-preview:hover .latest-post-thumb {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
-}
-
-/* ── Sidebar-Expand ──
-   Panel wird bei Hover breiter (rechte Kante fix). Da .ftools-left-col flex:1 ist,
-   schrumpft die linke Spalte AUTOMATISCH mit → Hero-Visual (left/right-Anker) und
-   Lottie-Slider (width:100%) werden automatisch schmaler. Der Inhalt liegt in einem
-   fixbreiten, rechtsbündigen Inner-Container → Textposition/-breite ändern sich nicht.
-   Das Dot-Spacer (Punktlinie + Pfeile) rutscht ebenfalls automatisch mit nach links. */
+/* ── Sidebar (feste Breite, kein Expand) ──
+   Panel hat eine feste Breite (300px, inline gesetzt). Der Inhalt (Karten) füllt den
+   300px breiten Inner-Container. Der vertikale Anbieter-Schriftzug liegt links daneben
+   (überlappt per overflow:visible in den Bereich der Dotline). */
 .ftools-right-preview {
   position: relative;
   z-index: 5;
-  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* Collapsed 250 (50px schmaler), expanded 375 → Expand-Delta bleibt 125px wie
-   zuvor, damit das Hero-Visual (linke Spalte) im expanded Zustand gleich groß bleibt. */
-.ftools-right-preview:hover {
-  width: 385px !important;
 }
 .ftools-preview-inner {
-  width: 250px; /* Karten 50px schmaler */
+  width: 300px;
   margin-left: auto;
   box-sizing: border-box;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* Kompletter Sidebar-Inhalt rutscht beim Expanden 10px nach links. */
-.ftools-right-preview:hover .ftools-preview-inner {
-  transform: translateX(-10px);
 }
 .ftools-preview-list,
 .ftools-preview-heading {
   position: relative;
   z-index: 1;
 }
-/* Überschrift rutscht beim Expanden mit nach links (über die Thumbnail-Spalte) und
-   skaliert auf 1.5 mit Anker unten-links. */
-.ftools-preview-heading {
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: left bottom;
+
+/* ── Anbieter-Kontakte-Block (Sidebar, unter den neuesten Beiträgen) ── */
+.ftools-anbieter {
+  position: relative;
+  margin-top: 60px;
+  /* Visual + Text 20px schmaler als die Karten, rechte Kante bleibt bündig. */
+  width: calc(100% - 40px);
+  margin-left: 20px;
 }
-.ftools-right-preview:hover .ftools-preview-heading {
-  transform: translateX(-120px) scale(1.5);
+.ftools-anbieter-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
+/* Illustration nimmt die volle Breite des (collapsed) Inhalts ein. */
+.ftools-anbieter-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 18px;
+}
+.ftools-anbieter-text {
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  margin: 0 0 18px 0;
+}
+/* Vertikaler Schriftzug links (ANBIETER · Spark · KONTAKTE) — aufrecht gestapelt,
+   enger Zeichenabstand, Spark mittig mit 18px Gap. Dauerhaft sichtbar, fluchtet
+   unter der Dotline/dem Pfeil der rechten Sidebar (margin-right zentriert ihn dort). */
+.ftools-anbieter-vert {
+  position: absolute;
+  right: 100%;
+  /* Volle Container-Höhe (Visual-Oberkante bis Button-Unterkante). */
+  top: 0;
+  bottom: 0;
+  /* Fluchtet unter der Dotline (linke Preview-Kante) — gleiche Achse wie der Pfeil. */
+  margin-right: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 650;
+  font-size: 38px;
+  line-height: 1.08;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ftools-anbieter-vert-word {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ftools-anbieter-vert-spark {
+  display: block;
+  margin: 18px 0;
+}
+.ftools-anbieter-vert-spark svg {
+  width: 17px;
+  height: 17px;
+}
+
 
 /* ─────────────────────────────────────────────
    Checkliste – Interaktive Checklisten
@@ -3030,6 +3103,453 @@ h2.faq-heading {
     width: 100%;
     max-width: 300px;
     margin: 16px auto;
+  }
+}
+
+/* ─── Generische Seiten-Werbung (Tool-/Listen-/Anbieter-Seiten) ───────────────
+   Wiederverwendet --ad-rail-w/--ad-rail-gap + die [data-ad-format]-Badge.
+   --page-content-w wird inline je Seite gesetzt; Rails flankieren die zentrierte
+   Content-Spalte, starten oben in der Region (= unter dem Heading), innen sticky.
+   Pendant zu den Artikel-Rails, aber ohne TOC-Logik (reines CSS). */
+.page-ad-col {
+  max-width: var(--page-content-w, 850px);
+  margin-inline: auto;
+  padding-inline: 24px;
+  box-sizing: border-box;
+}
+/* „Exakte" Variante: Content soll GENAU --page-content-w breit sein (z. B. 728px
+   Leaderboard). Da border-box + 24px Padding sonst 48px abziehen, kompensiert die
+   max-width das Padding → sichtbarer Content = --page-content-w. Auf Mobile schrumpft
+   alles mit dem Padding. Die Rails fluchten via --ad-rail-gap exakt an der 728er-Kante. */
+.page-ad-col--exact {
+  max-width: calc(var(--page-content-w, 728px) + 48px);
+}
+/* Kategorie-Dokumente: wie der Artikel-Tool-Container über die VOLLE Breite
+   (728er-Content + beide Rails + 36px Gaps), zentriert. Die Linie im dok-head
+   läuft durch, das Inner fluchtet mit dem 728er-Content. Unter dem Rail-Bereich.
+   Graue Trennlinie davor (zwischen Checkliste und Dokumente). */
+.category-dokumente {
+  position: relative;
+  width: min(100%, calc(var(--cat-content-w, 728px) + 2 * (46px + var(--ad-rail-w))));
+  margin: 64px auto 0;
+  padding-top: 64px;
+  box-sizing: border-box;
+}
+/* (Grauer Trenn-Spacer vor Dokumente entfernt — Abstand bleibt via margin/padding.) */
+/* Badge linksbündig mit den Finanztool-Badges → Inner auf Content-Breite. */
+.category-dokumente .dok-head-inner {
+  max-width: var(--cat-content-w, 728px);
+}
+.category-dokumente .dok-head {
+  margin-top: 0;
+  /* Linie so breit wie die Spark-Heading-Linien unter dem Visual (1200er-Container
+     − 2×40px Padding = 1120px), zentriert. Das Content-breite Inner hält das Badge
+     content-bündig. */
+  max-width: 1120px;
+  margin-inline: auto;
+}
+/* Mehr Abstand vom Badge zum Dokumente-Raster. */
+.category-dokumente .dok-head + .dokumente-embed {
+  margin-top: 56px;
+}
+/* Titel + Beschreibung exakt wie bei den Finanztools (Titel fett/kursiv, kleine
+   Beschreibung). Download-Button bleibt unverändert darunter. */
+.category-dokumente .dok-card-title {
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.category-dokumente .dok-card-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text-medium);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+/* Download-Button 5px tiefer abgesetzt. */
+.category-dokumente .dok-card-download {
+  margin-top: 11px;
+}
+/* Textblock (Titel/Beschreibung/Button) 8px weiter unter die Dokumentvorschau. */
+.category-dokumente .dok-card-body {
+  margin-top: 8px;
+}
+/* Raster: 4 Dokumente bei voller Breite (300px-Rails), 3 bei Small-Rails, gestapelt
+   auf schmalen Screens. Das 4. Dokument nur bei voller Breite. Mehr Gap dazwischen. */
+@media (min-width: 1440px) {
+  .category-dokumente .dokumente-embed {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 61px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1439px) {
+  .category-dokumente .dokumente-embed {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 53px;
+  }
+  .category-dokumente .dok-card:nth-child(4) { display: none; }
+}
+@media (max-width: 768px) {
+  .category-dokumente .dok-card:nth-child(4) { display: none; }
+}
+@media (max-width: 1024px) {
+  .category-dokumente {
+    width: 100%;
+    padding-inline: 24px;
+  }
+}
+/* Kategorie-Rails (kein TOC, 728er Content): 300px-Banner wenn Platz, sonst die
+   schmaleren 160px, sonst aus. Eigene Breakpoints (passen früher als beim Artikel).
+   --ad-rail-w sitzt auf .category-page → Header (Visual/Breadcrumb/Titel) UND Section
+   leiten dieselbe „Content + Rails"-Breite davon ab. */
+.category-page { --cat-content-w: 728px; }
+@media (min-width: 1440px) {
+  .category-page { --ad-rail-w: 300px; }
+}
+@media (max-width: 1439px) {
+  .category-page { --ad-rail-w: 160px; }
+}
+/* Visual, Breadcrumb & Spark-Heading bleiben bei der Default-Breite (1200px) —
+   die schmalere Variante passt besser als „volle Content+Rails-Breite". */
+.category-head-wide {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
+  box-sizing: border-box;
+}
+/* Visual breiter: 85vw, gedeckelt bei 1600px. */
+.category-visual-wide {
+  width: 85vw;
+  max-width: 1600px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+@media (min-width: 1160px) {
+  #category-articles-section .page-ad-rail { display: block !important; }
+}
+@media (max-width: 1159px) {
+  #category-articles-section .page-ad-rail { display: none !important; }
+}
+/* Rails laufen über den Content hinaus mit nach unten (sticky), enden aber mit
+   Abstand ÜBER der Dokumente-Linie (20px mehr Luft zu den Dokumenten als zuvor). */
+#category-articles-section .page-ad-rail {
+  bottom: -109px;
+}
+
+/* ── Hauptkategorie-Übersichtsseite ───────────────────────────────────────
+   Breiteres Billboard oben, Content 970px, Rails 300/160 je nach Platz
+   (970 + 2·36 + 2·300 = 1642 → 300 ab ~1680; 160 ab ~1400; darunter aus). */
+.main-category-page { --cat-content-w: 970px; }
+@media (min-width: 1680px) { .main-category-page { --ad-rail-w: 300px; } }
+@media (max-width: 1679px) { .main-category-page { --ad-rail-w: 160px; } }
+@media (min-width: 1400px) { .main-category-page .page-ad-rail { display: block !important; } }
+@media (max-width: 1399px) { .main-category-page .page-ad-rail { display: none !important; } }
+/* Top-Rails (Beitrags-Reihen) laufen weiter nach unten — bis kurz vor das
+   Slider-Heading „Alle …ratgeber", erst dann scrollen sie mit. */
+#main-category-section .page-ad-rail {
+  bottom: -55px;
+}
+/* Tools-Rails: starten oben neben den Slider-Navigations-Pfeilen, laufen unten
+   bis über die Dokumente-Linie. */
+#main-category-tools-section .page-ad-rail {
+  top: -110px;
+  bottom: -109px;
+}
+/* Gap nach dem Slider halbiert (Finanztools rücken näher an den Slider). */
+#main-category-tools-section .finanztool-grids {
+  margin-top: 64px;
+}
+
+/* Beitrags-Reihen (oben 2, darunter 3): gestapelte Cards mit Spark-Trennern. */
+.mcat-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+.mcat-row {
+  display: flex;
+  /* center statt stretch → Cards behalten ihre natürliche Höhe (vertikal zentriert);
+     der Divider-Spark sitzt damit auf jeder Card-Mitte und die Hover-Box passt sich
+     der Card-Höhe an (statt der höchsten Card der Reihe). */
+  align-items: center;
+  padding-inline: 12px;
+}
+/* Obere Reihe: 10px je Seite schmaler (zentriert) → die Hover-Box der Außen-Cards
+   ragt nicht zu nah an die Rail-Banner. Größere Schrift + größerer Gap via Card/Divider. */
+.mcat-row--top {
+  padding-inline: 22px;
+}
+/* Abstand zwischen den 2 oberen Cards und der 3er-Liste darunter. */
+.mcat-list {
+  margin-top: 56px;
+}
+@media (max-width: 1023px) {
+  .mcat-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+    padding-inline: 0;
+  }
+  /* Vertikale Spark-Divider auf Mobile ausblenden (Cards stapeln). */
+  .mcat-row > :not(.mcat-cell) { display: none; }
+}
+
+/* „Neuste …"-Heading über den oberen 2 Cards — linksbündig & content-bündig zu
+   „Alle …ratgeber" (Content-Linkskante), gleiche Größe. */
+.mcat-top-heading {
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  margin: 0 0 34px;
+}
+
+/* Kategorie-Auswahl-Slider „Alle […]ratgeber" mit Linie + Morph — unter den 2×2-Cards. */
+.mcat-slider {
+  margin-top: 88px;
+}
+/* Heading mit Linie: Linie bis zu den Rail-Enden, Text content-bündig links
+   (Inner = Content-Breite, zentriert), 5px Lücke zur Linie via page-bg-Patch. */
+.cat-rule-head {
+  position: relative;
+  /* Linie so breit wie die Spark-Heading-Linien unter dem Visual (~1120px), zentriert. */
+  width: min(100%, 1120px);
+  margin: 0 auto 28px;
+}
+.cat-rule-head-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22px; /* Mitte des 34px/1.3-Titels (unabhängig vom Subtitle darunter) */
+  height: 1px;
+  background: var(--color-text-primary);
+}
+.cat-rule-head-inner {
+  position: relative;
+  max-width: var(--cat-content-w, 970px);
+  margin-inline: auto;
+}
+/* Titel + Morph-Schriftzug in einer Spalte, die auf die Titel-Breite schrumpft →
+   der Schriftzug richtet sich rechtsbündig an der Titel-Kante aus (wie Landing). */
+.cat-rule-textcol {
+  display: inline-flex;
+  flex-direction: column;
+}
+.cat-rule-head-text {
+  position: relative;
+  display: inline-block;
+  background: var(--color-bg-page);
+  padding: 0 5px;
+  margin: 0 0 0 -5px;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+/* Heading: Default Content-Breite. Mit aktiven Rails (--wide) spannt es über die
+   Gesamtbreite (Content + beide Rails + Gaps), zentriert. <1440px → Content-Breite. */
+.page-ad-heading {
+  max-width: var(--page-content-w, 850px);
+  margin-inline: auto;
+  padding-inline: 24px;
+  box-sizing: border-box;
+}
+.page-ad-heading--wide {
+  max-width: calc(var(--page-content-w, 850px) + 2 * (var(--ad-rail-gap) + var(--ad-rail-w)));
+}
+.page-ad-region {
+  position: relative;
+}
+/* Top-Billboard ohne oberen Abstand → Rails docken oben bündig an. */
+.page-ad-top {
+  margin: 0 0 32px;
+}
+.page-ad-mid {
+  margin: 40px 0 0;
+}
+.page-ad-rail {
+  position: absolute;
+  top: 0; /* bündig mit der Oberkante des Billboards/Contents */
+  bottom: 0;
+  width: var(--ad-rail-w);
+  z-index: 40;
+}
+.page-ad-rail-left {
+  left: calc(50% - var(--page-content-w, 850px) / 2 - var(--ad-rail-gap) - var(--ad-rail-w));
+}
+.page-ad-rail-right {
+  left: calc(50% + var(--page-content-w, 850px) / 2 + var(--ad-rail-gap));
+}
+.page-ad-rail-sticky {
+  position: sticky;
+  top: 100px;
+}
+.page-ad-rail-box {
+  width: var(--ad-rail-w);
+  height: 600px;
+  background: rgba(0, 0, 0, 0.10);
+}
+/* <1440px: nicht genug Platz neben dem Content → Rails aus,
+   Heading fällt auf die reine Content-Breite zurück. */
+@media (max-width: 1440px) {
+  .page-ad-rail {
+    display: none !important;
+  }
+  .page-ad-heading--wide {
+    max-width: var(--page-content-w, 850px);
+  }
+}
+
+/* „Ratgeber"-Überschrift über der Artikel-Liste (Subkategorie-Seiten). */
+.category-list-heading {
+  /* Sitzt über der Hover-Box (z-index 5) des 1. Items und überlappt deren obere
+     Linie; der page-bg-Patch hinter dem Text „unterbricht" die Linie optisch. */
+  position: relative;
+  z-index: 6;
+  display: inline-block;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 34px;            /* +6px */
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  margin: 0 0 28px 8px;       /* 8px nach rechts */
+  padding: 0 10px;            /* Patch etwas breiter als der Text */
+  background: var(--color-bg-page);
+  transform: translateY(8px); /* 8px runter → überlappt die Box-Linie des 1. Items */
+}
+
+/* ─── Finanztool-Listen (unter Artikel-Listen) ──────────────────────────────
+   Badge als Überschrift, Items 2-spaltig mit Spark-Dividern, kleiner Titel +
+   fette Beschreibung, keine Boxen. */
+.finanztool-grids {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+/* Hellgraue Trennlinie zwischen den Finanztool-Sektionen. */
+.finanztool-grid-section + .finanztool-grid-section {
+  border-top: 1px solid var(--color-border-default);
+  margin-top: 64px;
+  padding-top: 64px;
+}
+.finanztool-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 4px;
+  margin: 0 0 36px;
+}
+.finanztool-heading-badge {
+  display: inline-block;
+  font-family: 'Merriweather', serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1;
+  color: #fff;
+  padding: 10px 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+/* Text neben dem Badge = exakt wie der Tool-Titel im Artikel (.article-tool-title). */
+.finanztool-section-sub {
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.35em;
+  color: var(--color-text-primary);
+}
+.finanztool-rows {
+  display: flex;
+  flex-direction: column;
+}
+.finanztool-row {
+  display: flex;
+  /* center statt stretch → Cards behalten natürliche Höhe (vertikal zentriert),
+     Divider-Spark sitzt auf der Card-Mitte und die Hover-Box passt sich der
+     jeweiligen Card-Höhe an (statt der höchsten der Reihe). */
+  align-items: center;
+  /* Cards 20px schmaler (10px je Seite) + Platz, damit die Hover-Box-Überhänge
+     der Außen-Cards NICHT in die Rail-/Banner-Spalte ragen. */
+  padding-inline: 10px;
+}
+.finanztool-row-divider {
+  display: flex;
+  justify-content: center;
+  margin: 14px 0;
+}
+.finanztool-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  padding: 12px 0 6px;
+}
+/* Titel fett + kursiv (wie der Artikellisten-Titel), Beschreibung klein. */
+.finanztool-item-title {
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  transition: color 0.15s ease;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.finanztool-item:hover .finanztool-item-title {
+  color: var(--tool-color, var(--color-brand-secondary));
+}
+.finanztool-item-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text-medium);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.finanztool-cta {
+  margin-top: 7px;
+}
+/* Linie wächst beim Hover über das ganze Item (CTA ist kein eigener Link). */
+.finanztool-item:hover .finanztool-cta .article-read-line {
+  width: 36px;
+  transition: width 1s ease-out;
+}
+.finanztool-allbtn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 36px;
+}
+/* Mobile: 1-spaltig — vertikale Divider weg, Items unter-/nacheinander. */
+@media (max-width: 640px) {
+  .finanztool-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .finanztool-row > div[aria-hidden] {
+    display: none;
   }
 }
 

@@ -5,7 +5,8 @@ import SearchHero from "@/components/sections/SearchHero";
 import QuickAccessButtons from "@/components/sections/QuickAccessButtons";
 import SearchResultsGrid from "@/components/sections/SearchResultsGrid";
 import ScrollToResults from "@/components/sections/ScrollToResults";
-import { searchPosts } from "@/lib/wordpress";
+import PageAds from "@/components/layout/PageAds";
+import { searchPosts, getSiteSettings } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
 
 type SearchPageProps = {
@@ -21,6 +22,8 @@ export default async function SearchPage(props: SearchPageProps) {
     results = await searchPosts(query);
   }
 
+  const settings = await getSiteSettings();
+
   return (
     <>
       <main className="min-h-screen" style={{ backgroundColor: "var(--color-bg-page)" }}>
@@ -28,15 +31,20 @@ export default async function SearchPage(props: SearchPageProps) {
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Suche", href: "/suche" }]} />
         </div>
 
-        <section className="max-w-7xl mx-auto px-6 pb-12">
-          <SearchHero initialQuery={query} />
-          <QuickAccessButtons />
-          <ScrollToResults query={query} />
+        <section className="pb-12">
+          {/* Such-Hero = „Heading"; bleibt breit zentriert. */}
+          <div className="max-w-7xl mx-auto px-6">
+            <SearchHero initialQuery={query} />
+            <QuickAccessButtons />
+            <ScrollToResults query={query} />
 
-          <div style={{ position: "relative", zIndex: 1, marginTop: 56, marginBottom: 8 }}>
-            <Spacer />
+            <div style={{ position: "relative", zIndex: 1, marginTop: 56, marginBottom: 8 }}>
+              <Spacer />
+            </div>
           </div>
 
+          {/* Ergebnisse schmaler + Rails starten hier (unter dem Hero). */}
+          <PageAds ads={settings.ads.suche} contentWidth={1040}>
           {/* Results */}
           {query && results.length > 0 && (
             <div id="search-results" className="mt-8" style={{ scrollMarginTop: 24 }}>
@@ -82,6 +90,7 @@ export default async function SearchPage(props: SearchPageProps) {
               </p>
             </div>
           )}
+          </PageAds>
         </section>
       </main>
       <Footer />

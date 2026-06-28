@@ -9,6 +9,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"), 
 });
 
 import FazitHeading from "@/components/ui/FazitHeading";
+import DokumenteHead from "@/components/dokumente/DokumenteHead";
 import ArticleElementWrapper from "@/components/layout/ArticleElementWrapper";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import ArticleFaq, { type FaqPair } from "@/components/sections/ArticleFaq";
@@ -64,22 +65,6 @@ function ToolLabel({ type, slug, headingId, showExcerpt, preload }: { type: keyo
   );
 }
 
-// Dokumente-Kopf: Spike-Label „Dokumente" (bündig zur Body-Breite) + Untertitel + Linie.
-function DokumenteHead({ headingId }: { headingId: string }) {
-  return (
-    <div className="dok-head">
-      <span className="dok-head-line" aria-hidden />
-      {/* Innerer Container fluchtet mit dem 750px-Artikelbody (zentriert),
-          die Linie läuft im breiteren Eltern-Container durch. */}
-      <div className="dok-head-inner">
-        <h2 id={headingId} className="dok-head-h">
-          <span className="dok-head-label">Dokumente</span>
-        </h2>
-        <span className="dok-head-subtitle">Passende Formulare und Broschüren</span>
-      </div>
-    </div>
-  );
-}
 
 interface Props {
   content: string;

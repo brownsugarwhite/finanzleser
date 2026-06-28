@@ -26,12 +26,12 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
         flexDirection: "column",
         alignItems: "center",
       }}>
-        {/* Breadcrumb über dem Visual */}
-        <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
+        {/* Breadcrumb über dem Visual — volle Content+Rails-Breite */}
+        <div className="category-head-wide" style={{ paddingBottom: 23 }}>
           <Breadcrumb items={breadcrumbItems} />
         </div>
         {/* Visual: WIDE-Banner in voller Höhe (nie geclippt), sonst graue Platzhalter-Box */}
-        <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
+        <div className="category-visual-wide" style={{ marginBottom: 40 }}>
           {imageWide ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img

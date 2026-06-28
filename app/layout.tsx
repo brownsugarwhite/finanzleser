@@ -114,10 +114,11 @@ export default async function RootLayout({
           </div>
           <LogoBar />
           <TopNav />
-          {/* DotLine + Powered by — schrumpft mit dem Viewport, „powered by" hält
-              immer 50px Abstand zum rechten Bildrand (kein Abschneiden mehr). */}
+          {/* DotLine + „powered by" auf den Nicht-Landing-Seiten (auf der Landing ist
+              .sticky-nav ausgeblendet; dort rendert LandingIntro Dotline + Quicklinks).
+              Hier KEINE Quicklinks und KEIN Pfeil (nur Landing), max-width 90vw. */}
           <div className="sticky-nav dotline-animated">
-            <PoweredByLine style={{ width: "100%", maxWidth: 1200, paddingLeft: 280, paddingRight: 50 }} />
+            <PoweredByLine style={{ width: "100%", maxWidth: "90vw", paddingLeft: 280, paddingRight: 50 }} />
           </div>
           <ContentScaler />
           <MegaMenuWrapper preloaded={megamenuPreload} />

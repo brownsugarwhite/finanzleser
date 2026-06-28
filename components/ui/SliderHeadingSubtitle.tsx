@@ -6,16 +6,18 @@ import gsap from '@/lib/gsapConfig';
 /**
  * Rechtsbündiger Überschrift-Schriftzug unter der Slider-Überschrift.
  * Ruhe: „Wählen Sie eine Kategorie:".
- * Aktiv (Kategorie gewählt): morpht per Schreibmaschinen-Animation zu
- * „Kategorie schließen ✕" — „Wählen Sie eine " + „:" faden buchstabenweise aus
- * und kollabieren, „ schließen" fadet buchstabenweise ein, dann zeichnet sich
- * das X (Kreis + zwei Linien) Strich für Strich.
+ * Aktiv: morpht zu „Kategorie schließen ✕". Altes („Wählen Sie eine " + „:")
+ * fadet buchstabenweise aus, WÄHREND „ schließen" buchstabenweise einfadet
+ * (überlappender Typewriter), dann zeichnet sich das X Strich für Strich.
+ *
+ * Die Breiten werden NACH dem Font-Load gemessen (document.fonts.ready) — sonst
+ * sind sie mit der Fallback-Schrift gemessen und z. B. das X zeichnet sich nicht
+ * ein (war erst nach einem Reload korrekt).
  */
 const PREFIX = 'Wählen Sie eine ';
 const ANCHOR = 'Kategorie';
 const SUFFIX = ' schließen';
 
-// Stil wie die Beschreibung unter „Ratgeber": Merriweather 18px italic, text-medium.
 const TEXT_STYLE: React.CSSProperties = {
   fontFamily: 'Merriweather, serif',
   fontSize: 18,
@@ -32,41 +34,62 @@ export default function SliderHeadingSubtitle({ active, onClose }: { active: boo
   const xWrapRef = useRef<HTMLSpanElement>(null);
   const xRef = useRef<SVGSVGElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const activeRef = useRef(active);
+  activeRef.current = active;
 
-  // Timeline einmal aufbauen (nach Messung der natürlichen Breiten).
+  // Ruhezustand SOFORT setzen (kein kurzes Aufblitzen des vollen Textes).
   useLayoutEffect(() => {
     const prefix = prefixRef.current, suffix = suffixRef.current, colon = colonRef.current, xWrap = xWrapRef.current, x = xRef.current;
     if (!prefix || !suffix || !colon || !xWrap || !x) return;
+    gsap.set([prefix, colon, suffix, xWrap], { overflow: 'hidden' });
+    gsap.set(suffix, { width: 0 });
+    gsap.set(suffix.querySelectorAll('.fl-ch'), { opacity: 0 });
+    gsap.set(xWrap, { width: 0 });
+    gsap.set(x.querySelectorAll('.fl-stroke'), { strokeDashoffset: 1 });
+  }, []);
 
-    const suffixW = suffix.scrollWidth;
-    const xW = xWrap.scrollWidth;
-    const prefixChars = prefix.querySelectorAll('.fl-ch');
-    const suffixChars = suffix.querySelectorAll('.fl-ch');
-    const xStrokes = x.querySelectorAll('.fl-stroke');
+  // Timeline nach dem Font-Load bauen (korrekte Breiten).
+  useEffect(() => {
+    let cancelled = false;
+    const build = () => {
+      if (cancelled) return;
+      const prefix = prefixRef.current, suffix = suffixRef.current, colon = colonRef.current, xWrap = xWrapRef.current, x = xRef.current;
+      if (!prefix || !suffix || !colon || !xWrap || !x) return;
 
-    // overflow:hidden auf allen kollabierenden/expandierenden Teilen → die Zeichen
-    // werden sauber geclippt statt „Kategorie" zu überlappen.
-    gsap.set([prefix, colon], { overflow: 'hidden' });
-    // Ruhezustand: Suffix + X kollabiert/unsichtbar.
-    gsap.set(suffix, { width: 0, overflow: 'hidden' });
-    gsap.set(suffixChars, { opacity: 0 });
-    gsap.set(xWrap, { width: 0, overflow: 'hidden' });
-    gsap.set(xStrokes, { strokeDashoffset: 1 });
+      const prefixChars = prefix.querySelectorAll('.fl-ch');
+      const suffixChars = suffix.querySelectorAll('.fl-ch');
+      const xStrokes = x.querySelectorAll('.fl-stroke');
 
-    const tl = gsap.timeline({ paused: true });
-    // 1) „Wählen Sie eine " + „:" buchstabenweise raus + kollabieren
-    tl.to(prefixChars, { opacity: 0, duration: 0.18, ease: 'power1.in', stagger: { each: 0.025, from: 'end' } }, 0);
-    tl.to(colon, { opacity: 0, duration: 0.15 }, 0);
-    tl.to([prefix, colon], { width: 0, duration: 0.32, ease: 'power2.inOut' }, 0.12);
-    // 2) „ schließen" einfaden + ausklappen
-    tl.to(suffix, { width: suffixW, duration: 0.32, ease: 'power2.inOut' }, 0.34);
-    tl.to(suffixChars, { opacity: 1, duration: 0.16, ease: 'power1.out', stagger: { each: 0.03, from: 'start' } }, 0.4);
-    // 3) X einzeichnen (Strich für Strich)
-    tl.to(xWrap, { width: xW, duration: 0.22, ease: 'power2.out' }, 0.62);
-    tl.to(xStrokes, { strokeDashoffset: 0, duration: 0.22, ease: 'power1.inOut', stagger: 0.14 }, 0.7);
+      // Natürliche Zielbreiten messen: kurz ausklappen, lesen, wieder einklappen
+      // (synchron, kein Paint dazwischen → kein Flackern).
+      const prefixW = prefix.scrollWidth;
+      const colonW = colon.scrollWidth;
+      gsap.set([suffix, xWrap], { width: 'auto' });
+      const suffixW = suffix.scrollWidth;
+      const xW = xWrap.scrollWidth;
+      gsap.set([suffix, xWrap], { width: 0 });
+      gsap.set(prefix, { width: prefixW });
+      gsap.set(colon, { width: colonW });
 
-    tlRef.current = tl;
-    return () => { tl.kill(); tlRef.current = null; };
+      tlRef.current?.kill();
+      const tl = gsap.timeline({ paused: true });
+      // ── alles SIMULTAN ab 0: altes raus + neues rein (überlappender Typewriter) ──
+      tl.to(prefixChars, { opacity: 0, duration: 0.28, ease: 'power1.in', stagger: { each: 0.022, from: 'end' } }, 0);
+      tl.to(colon, { opacity: 0, duration: 0.18 }, 0);
+      tl.to([prefix, colon], { width: 0, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to(suffix, { width: suffixW, duration: 0.5, ease: 'power3.inOut' }, 0);
+      tl.to(suffixChars, { opacity: 1, duration: 0.28, ease: 'power1.out', stagger: { each: 0.022, from: 'start' } }, 0.06);
+      // X zeichnet sich gegen Ende ein (Container öffnet, dann Striche).
+      tl.to(xWrap, { width: xW, duration: 0.26, ease: 'power2.out' }, 0.34);
+      tl.to(xStrokes, { strokeDashoffset: 0, duration: 0.3, ease: 'power1.inOut', stagger: 0.12 }, 0.4);
+
+      tlRef.current = tl;
+      if (activeRef.current) tl.progress(1); // falls beim Bauen schon aktiv
+    };
+
+    const fonts = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts;
+    if (fonts?.ready) fonts.ready.then(build); else build();
+    return () => { cancelled = true; tlRef.current?.kill(); tlRef.current = null; };
   }, []);
 
   // Auf active reagieren.

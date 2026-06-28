@@ -11,9 +11,7 @@ import type { HoverBoxEls } from '@/components/ui/SliderHoverBox';
    Verlängerung vom 70px-Ende zur Ecke (Schritt 1) bzw. schließt die Lücke
    Ecke→70px-Linie (Schritt 3), plus die zwei Horizontalen. Nur an der ersten/
    letzten Card (keine echte Deko) zeichnet der Klon eine volle Kante + Spark. */
-const REST_LEN = 70;
 const LINE_OFF = 11;              // Spark-Mitte → Linienanfang
-const REAL_TIP = LINE_OFF + REST_LEN; // Spark-Mitte → Ende der echten 70px-Linie
 const SPARK_GAP = 11;             // Lücke um den Spark (Rand-Klon-Kante)
 const TOP_LESS = 20;             // oben weniger Padding als horizontal
 const BOT_LESS = 15;             // unten weniger Padding als horizontal
@@ -26,9 +24,12 @@ interface UseSliderHoverBoxOptions {
   cardSelector: string;
   enabled: boolean;
   onBoxClosed?: (index: number) => void;
+  /** Länge der echten Trenn-Linie (70 Slider-Default, 35 z. B. Finanztools). */
+  restLen?: number;
 }
 
-export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed }: UseSliderHoverBoxOptions) {
+export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed, restLen = 70 }: UseSliderHoverBoxOptions) {
+  const REAL_TIP = LINE_OFF + restLen; // Spark-Mitte → Ende der echten Linie
   const boxes = useRef<Map<number, HoverBoxEls>>(new Map());
   const cards = useRef<Map<number, HTMLElement>>(new Map());
   const sparks = useRef<Map<number, SVGSVGElement>>(new Map());
@@ -36,6 +37,8 @@ export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed }: UseSli
   const ovSpins = useRef<Map<number, gsap.core.Tween[]>>(new Map());
   const spinning = useRef<Set<SVGSVGElement>>(new Set());
   const active = useRef<Set<number>>(new Set());
+  const inRegion = useRef(false);
+  const enterTimers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
 
   const onBoxClosedRef = useRef(onBoxClosed);
   onBoxClosedRef.current = onBoxClosed;
@@ -87,7 +90,7 @@ export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed }: UseSli
     else done();
   }, [killOvSpins, syncSpins]);
 
-  const onEnter = useCallback((index: number) => {
+  const startBox = useCallback((index: number) => {
     if (!enabled) return;
     const els = boxes.current.get(index);
     const card = cards.current.get(index);
@@ -181,10 +184,32 @@ export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed }: UseSli
     tl.to([els.lUp, els.rDown], { scaleY: 1, duration: STEP, ease: EASE }, STEP * 2); // Schritt 3: Lücke schließen
     tls.current.set(index, tl);
     tl.play(0);
-  }, [enabled, cardSelector, syncSpins, killOvSpins, finishClose]);
+  }, [enabled, cardSelector, syncSpins, killOvSpins, finishClose, REAL_TIP]);
+
+  // Ab dem 2. Hover innerhalb des Sliders (Maus hat ihn nicht verlassen) 0,1s Delay
+  // vor dem Start; der 1. Hover startet sofort. Rück-Animation immer sofort.
+  const onEnter = useCallback((index: number) => {
+    if (!enabled) return;
+    const pending = enterTimers.current.get(index);
+    if (pending) { clearTimeout(pending); enterTimers.current.delete(index); }
+    const delay = inRegion.current ? 250 : 0;
+    inRegion.current = true;
+    if (delay === 0) { startBox(index); return; }
+    const timer = setTimeout(() => { enterTimers.current.delete(index); startBox(index); }, delay);
+    enterTimers.current.set(index, timer);
+  }, [enabled, startBox]);
 
   const onLeave = useCallback((index: number) => {
+    const pending = enterTimers.current.get(index);
+    if (pending) { clearTimeout(pending); enterTimers.current.delete(index); }
     tls.current.get(index)?.reverse();
+  }, []);
+
+  // Maus verlässt den GANZEN Slider → nächster Hover gilt wieder als „erster".
+  const leaveRegion = useCallback(() => {
+    inRegion.current = false;
+    enterTimers.current.forEach((t) => clearTimeout(t));
+    enterTimers.current.clear();
   }, []);
 
   const hideActive = useCallback(() => {
@@ -203,5 +228,5 @@ export function useSliderHoverBox({ cardSelector, enabled, onBoxClosed }: UseSli
     hideActive();
   }, [enabled, hideActive]);
 
-  return { registerBox, registerCard, registerSpark, onEnter, onLeave, hideActive };
+  return { registerBox, registerCard, registerSpark, onEnter, onLeave, hideActive, leaveRegion };
 }

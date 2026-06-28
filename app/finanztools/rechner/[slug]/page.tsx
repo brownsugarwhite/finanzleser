@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
-import { getAllRechner, getRechnerBySlug } from "@/lib/wordpress";
+import PageAds from "@/components/layout/PageAds";
+import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpress";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
-import { RECHNER_DISCLAIMER } from "@/lib/rechnerDisclaimer";
 
 export const revalidate = 3600;
 
@@ -145,56 +145,58 @@ export default async function RechnerDetailPage({ params }: Props) {
     { label: "Rechner", href: "/finanztools/rechner" }
   ];
 
+  const settings = await getSiteSettings();
+
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-5 md:px-6 pb-12">
-          {/* Breadcrumb */}
-          <Breadcrumb items={breadcrumbItems} />
+        <PageAds
+          ads={settings.ads.rechner}
+          contentWidth={850}
+          contentClassName="pb-12"
+          heading={
+            <>
+              {/* Breadcrumb */}
+              <Breadcrumb items={breadcrumbItems} />
 
-          {/* Kategorie - sekundärfarbe, Serif, Italic */}
-          <Link
-            href="/finanztools/rechner"
-            className="mb-2 inline-block transition hover:opacity-80"
-            style={{
-              color: "var(--color-brand-secondary)",
-              fontFamily: "Merriweather, serif",
-              fontSize: "23px",
-              fontStyle: "italic",
-            }}
-          >
-            {kategorieName}
-          </Link>
+              {/* Kategorie - sekundärfarbe, Serif, Italic */}
+              <Link
+                href="/finanztools/rechner"
+                className="mb-2 inline-block transition hover:opacity-80"
+                style={{
+                  color: "var(--color-brand-secondary)",
+                  fontFamily: "Merriweather, serif",
+                  fontSize: "23px",
+                  fontStyle: "italic",
+                }}
+              >
+                {kategorieName}
+              </Link>
 
-          {/* Titel */}
-          <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
-            {rechner.title}
-          </h1>
+              {/* Titel */}
+              <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
+                {rechner.title}
+              </h1>
 
-          {/* Beschreibung */}
-          {(rechner.excerpt || rechner.rechnerFelder?.beschreibung) && (
-            <p
-              className="mb-8 text-gray-600"
-              style={{
-                fontFamily: "Merriweather, serif",
-                fontSize: "18px",
-                fontWeight: "400",
-              }}
-            >
-              {rechner.excerpt || rechner.rechnerFelder?.beschreibung}
-            </p>
-          )}
-
-          {/* Rechner — volle Breite */}
-          <RechnerEmbed slug={rechner.slug} />
-
-          {/* Disclaimer */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
-              <strong>Hinweis:</strong> {RECHNER_DISCLAIMER}
-            </p>
-          </div>
-        </div>
+              {/* Beschreibung */}
+              {(rechner.excerpt || rechner.rechnerFelder?.beschreibung) && (
+                <p
+                  className="mb-8 text-gray-600"
+                  style={{
+                    fontFamily: "Merriweather, serif",
+                    fontSize: "18px",
+                    fontWeight: "400",
+                  }}
+                >
+                  {rechner.excerpt || rechner.rechnerFelder?.beschreibung}
+                </p>
+              )}
+            </>
+          }
+        >
+          {/* Rechner ohne Visual, 850px. Disclaimer steckt im noVisual-Embed (InfoHint). */}
+          <RechnerEmbed slug={rechner.slug} noVisual />
+        </PageAds>
       </main>
       <Footer />
     </>

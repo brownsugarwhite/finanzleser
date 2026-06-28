@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import CategoryHeader from "@/components/layout/CategoryHeader";
-import { getAllDokumente } from "@/lib/wordpress";
+import PageAds from "@/components/layout/PageAds";
+import { getAllDokumente, getSiteSettings } from "@/lib/wordpress";
 import { buildMetadata, SITE_NAME } from "@/lib/seo";
 import DokumenteListClient from "./DokumenteListClient";
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function DokumentePage() {
   const dokumente = await getAllDokumente();
+  const settings = await getSiteSettings();
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -33,9 +35,9 @@ export default async function DokumentePage() {
           description="Broschüren, Merkblätter, Tabellen und Formulare aus Finanzen, Steuern, Versicherungen und Recht – kostenlos zum Download."
         />
         <div className="scalable-landing">
-          <div className="max-w-7xl mx-auto px-6 pb-12">
+          <PageAds ads={settings.ads.dokumente} contentWidth={1040} contentClassName="pb-12">
             <DokumenteListClient dokumente={dokumente} />
-          </div>
+          </PageAds>
         </div>
       </main>
       <Footer />
