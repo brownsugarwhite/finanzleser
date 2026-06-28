@@ -95,7 +95,7 @@ async function RatgeberSection() {
   );
 
   return (
-    <section id="ratgeber-section" style={{ width: "100%", padding: "80px 0 120px" }}>
+    <section id="ratgeber-section" style={{ width: "100%", padding: "0 0 120px", marginTop: -30 }}>
       {/* Heading bewusst außerhalb von .scalable-landing — bleibt beim Menü-Open
           in seinem eigenen Stacking-Context auf Root-Ebene und damit immer
           über dem ProgressiveBlur. SparkHeading bringt seinen eigenen

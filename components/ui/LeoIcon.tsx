@@ -207,6 +207,7 @@ export default function LeoIcon() {
       if (home) {
         home.style.width = `${next}px`;
         home.style.height = `${next}px`;
+        home.style.right = mq.matches ? "18px" : "23px";
       }
       // Wenn Chat offen ist: previousParentRef-Typ auf neuen Viewport mappen.
       // Top-Dock-Slot (leo-dock-slot oder leo-dock-slot-mobile) → der jeweils
@@ -273,7 +274,7 @@ export default function LeoIcon() {
       Object.assign(home.style, {
         position: "fixed",
         bottom: "16px",
-        right: "23px",
+        right: checkMobile() ? "18px" : "23px",   // Mobile 5px weiter rechts
         width: `${homeSize}px`,
         height: `${homeSize}px`,
         zIndex: "100",
@@ -284,6 +285,7 @@ export default function LeoIcon() {
       const homeSize = checkMobile() ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
       home.style.width = `${homeSize}px`;
       home.style.height = `${homeSize}px`;
+      home.style.right = checkMobile() ? "18px" : "23px";
     }
 
     const el = containerRef.current;
@@ -330,22 +332,12 @@ export default function LeoIcon() {
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
     if (isLanding.current && isMobile) {
-      // Mobile: Leo lebt im sticky-top-left Slot — bis der Revolver-Slider
-      // mind. 100px vom unteren Bildrand entfernt nach oben gewandert ist
-      // (= Slider-Bottom ≥ 100px überm Viewport-Bottom).
-      const buttons = document.querySelector<HTMLElement>("[data-revolver-buttons]");
-      const initiallyFarFromBottom = buttons
-        ? window.innerHeight - buttons.getBoundingClientRect().bottom >= 100
-        : false;
-      const slot = document.getElementById("leo-dock-slot-mobile");
-      if (initiallyFarFromBottom || !slot) {
-        isAtHomeRef.current = true;
-        setDocked(false);
-        home.appendChild(el);
-      } else {
-        setDocked(true);
-        slot.appendChild(el);
-      }
+      // Mobile: Leo sitzt dauerhaft fixed unten rechts (floating-home) — kein
+      // Top-Left-Dock, kein Scroll-Swap.
+      isAtHomeRef.current = true;
+      hasUndocked.current = true;
+      setDocked(false);
+      home.appendChild(el);
     } else if (isLanding.current && window.scrollY <= 5) {
       // Desktop: dock nur am Page-Top in den Search-Pill-Slot
       setDocked(true);
@@ -375,6 +367,10 @@ export default function LeoIcon() {
     if (!isLanding.current) return;
 
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    // Mobile: Leo bleibt dauerhaft fixed unten rechts → die alte Mobile-Dock-/Swap-Logik
+    // (Sticky-Top-Slot ↔ Floating-Home, Burger-Menü-Swap) ist deaktiviert.
+    if (isMobile) return;
 
     if (isMobile) {
       // Mobile: getriggert wenn Revolver-Slider mind. 100px vom unteren

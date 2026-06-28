@@ -26,6 +26,34 @@
 .bookmark-section__inner {
   pointer-events: auto;
 }
+/* Newsletter-Button (nur Mobile-Landing) — absolut links auf Bookmark-Höhe, in der Landing
+   (scrollt ganz normal mit). Style wie Finanztool-Buttons. */
+.bookmark-newsletter { display: none; }
+@media (max-width: 767px) {
+  body[data-landing] .bookmark-newsletter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: -67px;
+    left: clamp(20px, 5vw, 40px);
+    z-index: 60;
+    pointer-events: auto;
+    box-sizing: border-box;
+    padding: 10px 16px 10px 12px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: brightness(1.3) blur(13px);
+    -webkit-backdrop-filter: brightness(1.3) blur(13px);
+    border-radius: 17px;
+    box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+  }
+  body[data-landing] .bookmark-newsletter img { width: 28px; height: 28px; flex-shrink: 0; object-fit: contain; }
+  body[data-landing] .bookmark-newsletter span {
+    font-family: 'Merriweather', serif; font-weight: 600; font-size: 16px;
+    color: var(--color-text-primary); white-space: nowrap;
+  }
+}
 
 /* Modal-Mode: wenn Leo-Chat offen ist, TopNav-Elemente nicht klickbar.
    Spezifische Selektoren statt breite Disable-Regel — verhindert Konflikte mit
@@ -571,13 +599,8 @@ body.leo-chat-open #leo-chat-messages {
                                  Logo-Wrapper auf Mobile Klicks im Overlap ab. */
   pointer-events: auto;
 }
-@media (max-width: 767px) {
-  body[data-landing] #leo-dock-slot-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
+/* Leo dockt auf Mobile nicht mehr oben links — er bleibt fixed unten rechts.
+   Slot bleibt daher ausgeblendet (display: none aus der Basis-Regel). */
 
 /* Sticky Nav Row (DotLine + PoweredBy) im Root-Layout */
 .sticky-nav.dotline-animated {
@@ -617,7 +640,7 @@ body.leo-chat-open #leo-chat-messages {
 .quicklinks-link:hover {
   color: var(--color-brand-secondary);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1000px) {
   .quicklinks-row {
     display: none;
   }
@@ -784,7 +807,7 @@ h1.category-title {
   align-items: center;
 }
 .spark-heading-container {
-  font-size: 42px;
+  font-size: 48px;
 }
 @media (max-width: 767px) {
   .spark-heading-outer {
@@ -792,7 +815,7 @@ h1.category-title {
     padding-right: 13px;
   }
   .spark-heading-container {
-    font-size: 36px;
+    font-size: 40px;
   }
 }
 
@@ -1655,9 +1678,9 @@ a.megamenu-link:hover {
 .ftools-anbieter {
   position: relative;
   margin-top: 60px;
-  /* Visual + Text 20px schmaler als die Karten, rechte Kante bleibt bündig. */
-  width: calc(100% - 40px);
-  margin-left: 20px;
+  /* Etwas breiter (Visual größer), linksbündig; rechts 20px Abstand. */
+  width: calc(100% - 20px);
+  margin-left: 0;
 }
 .ftools-anbieter-main {
   display: flex;
@@ -1686,7 +1709,8 @@ a.megamenu-link:hover {
 .ftools-anbieter-vert {
   position: absolute;
   right: 100%;
-  /* Volle Container-Höhe (Visual-Oberkante bis Button-Unterkante). */
+  /* Volle Container-Höhe; Schriftzug oben am Visual ausgerichtet (flex-start) →
+     der ganze Slack landet UNTEN, dadurch wird die untere Dotline (Segment 2) länger. */
   top: 0;
   bottom: 0;
   /* Fluchtet unter der Dotline (linke Preview-Kante) — gleiche Achse wie der Pfeil. */
@@ -1694,11 +1718,13 @@ a.megamenu-link:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  /* ANBIETER ↔ KONTAKTE näher zusammen (Spark entfernt → kleiner Gap). */
+  gap: 8px;
   font-family: 'Merriweather', serif;
   font-style: italic;
   font-weight: 650;
-  font-size: 38px;
+  font-size: 17px;
   line-height: 1.08;
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -1711,11 +1737,13 @@ a.megamenu-link:hover {
 }
 .ftools-anbieter-vert-spark {
   display: block;
-  margin: 18px 0;
+  margin: 11px 0;
+  /* Spark in derselben Farbe wie der Schriftzug (Spark nutzt var(--fill-0)). */
+  --fill-0: var(--color-text-primary);
 }
 .ftools-anbieter-vert-spark svg {
-  width: 17px;
-  height: 17px;
+  width: 13px;
+  height: 13px;
 }
 
 

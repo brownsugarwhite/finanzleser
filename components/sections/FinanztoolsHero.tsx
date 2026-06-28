@@ -6,8 +6,6 @@ import gsap from "@/lib/gsapConfig";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
-import Spark from "@/components/ui/Spark";
-import RevolverSlider from "@/components/ui/RevolverSlider";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
 import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
@@ -46,25 +44,67 @@ const TOOLS = [
 ];
 
 // Intro-Bild — sichtbar wenn kein Tool aktiv ist (Slide-Index 3)
-const INTRO_IMAGE = "/assets/finanztoolSlider/toolbox.png";
+const INTRO_IMAGE = "/assets/toolbox.png";
 
-// Tool-Bilder etwas kleiner als das Toolbox-Intro
-const TOOL_IMAGE_SCALE = "88%";
+// ── Desktop-„Revolver"-Bühne: Slot-Geometrie (wie Mobile-Revolver, kein Swipe) ──
+// Intro: 3 gleiche Cards in einer Reihe unten. Aktiv: 1 große Card oben + 2 kleine unten.
+const ST_W = 330;          // Controls-/Bühnenbreite
+const ST_BIG_H = 244;      // Höhe der großen (aktiven) Card (Inhalt + 4px Padding unter dem CTA → Outline nicht geclippt)
+const ST_SMALL_H = 96;     // Höhe der kleinen Cards
+const ST_HGAP = 12;        // horizontaler Abstand
+const ST_GAP_ABOVE = 28;   // 28px zwischen Button und hellgrauer Trennlinie (5px mehr)
+const ST_GAP_BELOW = 33;   // 33px unter der Linie zu den Buttons
+const ST_SMALL_W = (ST_W - ST_HGAP) / 2;
+const ST_INTRO_W = (ST_W - 2 * ST_HGAP) / 3;
+const ST_DIVIDER_Y = ST_BIG_H + ST_GAP_ABOVE;   // hellgraue Trennlinie (nur aktiv)
+const ST_ROW_Y = ST_DIVIDER_Y + ST_GAP_BELOW;   // kleine Card-Reihe darunter
+const STAGE_H = ST_ROW_Y + ST_SMALL_H;
+// Die Bühne soll 80px FRÜHER andocken (sticky-Container 80px kürzer): die Flow-Höhe wird
+// um ST_SHIFT gekürzt und die gesamte Slot-/Loader-Geometrie um ST_SHIFT nach oben gezogen.
+// Die große (aktive) Card ragt dadurch nach oben in den (ausgeblendeten) Beschreibungs-Bereich.
+const ST_SHIFT = 100;   // 80 + 20: Slider + Controls-Spalte nochmal 20px kürzer
+const STAGE_FLOW_H = STAGE_H - ST_SHIFT;   // tatsächliche Bühnen-Höhe im Flow
+type Slot = { x: number; y: number; w: number; h: number };
+const SLOT_BIG: Slot = { x: 0, y: -ST_SHIFT, w: ST_W, h: ST_BIG_H };
+const SLOT_SMALL_L: Slot = { x: 0, y: ST_ROW_Y - ST_SHIFT, w: ST_SMALL_W, h: ST_SMALL_H };
+const SLOT_SMALL_R: Slot = { x: ST_SMALL_W + ST_HGAP, y: ST_ROW_Y - ST_SHIFT, w: ST_SMALL_W, h: ST_SMALL_H };
+const SLOT_INTRO: Slot[] = [0, 1, 2].map((i) => ({ x: i * (ST_INTRO_W + ST_HGAP), y: ST_ROW_Y - ST_SHIFT, w: ST_INTRO_W, h: ST_SMALL_H }));
+// Zielslot einer Card i bei aktivem Index (−1 = Intro)
+function toolSlot(i: number, activeIndex: number): Slot {
+  if (activeIndex < 0) return SLOT_INTRO[i];
+  if (i === activeIndex) return SLOT_BIG;
+  const inactives = [0, 1, 2].filter((k) => k !== activeIndex);
+  return inactives.indexOf(i) === 0 ? SLOT_SMALL_L : SLOT_SMALL_R;
+}
+// Loader-Top: Intro = über der Card-Reihe (wie anfangs); aktiv = am Kopf der großen Card.
+const LOADER_TOP_INTRO = ST_ROW_Y - 36 - ST_SHIFT;
+const LOADER_TOP_ACTIVE = 6 - ST_SHIFT;
 
 export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const innerRowRef = useRef<HTMLDivElement>(null);
+  const sliderBoxRef = useRef<HTMLDivElement>(null);
   const rightSpacerRef = useRef<HTMLDivElement>(null);
+  const dotGapRef = useRef<HTMLDivElement>(null);
+  const segment2Ref = useRef<HTMLDivElement>(null);
   const dotFillerRef = useRef<HTMLDivElement>(null);
   const anbieterVertRef = useRef<HTMLDivElement>(null);
-  const toolContentRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
-  const [cardProgs, setCardProgs] = useState<number[]>([0, 0, 0]);
-  const cardProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
+  const anbieterRef = useRef<HTMLDivElement>(null);
   const [contentProgs, setContentProgs] = useState<number[]>([0, 0, 0]);
   const contentProgObjs = useRef([{ v: 0 }, { v: 0 }, { v: 0 }]);
+  // Card-Layout (x/y/w/h pro Card) — getweent auf die Zielslots (Big-Top/Two-Small/Intro).
+  const cardLayoutObjs = useRef<Slot[]>(SLOT_INTRO.map((s) => ({ ...s })));
+  const [cardLayouts, setCardLayouts] = useState<Slot[]>(SLOT_INTRO.map((s) => ({ ...s })));
+  // Loader-Position (fährt nach oben, wenn ein Tool aktiv ist).
+  const loaderTopObj = useRef({ v: LOADER_TOP_INTRO });
+  const [loaderTop, setLoaderTop] = useState(LOADER_TOP_INTRO);
   const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
   const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const alleinHandRef = useRef<HTMLParagraphElement>(null);
+  const desc1Ref = useRef<HTMLParagraphElement>(null);
+  const desc2Ref = useRef<HTMLParagraphElement>(null);
+  const stageLineRef = useRef<HTMLDivElement>(null);
+  const mobileWrapRef = useRef<HTMLDivElement>(null);
   const activeCardRef = useRef<string | null>(null);
   const isScrollingToTarget = useRef(false);
   const lastPastRef = useRef(false);
@@ -77,65 +117,173 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   const [introProgress, setIntroProgress] = useState(0);
   const introProgObj = useRef({ v: 0 });
   const introTweenRef = useRef<gsap.core.Tween | null>(null);
+  // Progress-Linie: aktiv (zeichnet sich ein + füllt) sobald der Auto-Expand-Bereich
+  // erreicht ist; per Play/Pause anhaltbar.
+  const [loaderActive, setLoaderActive] = useState(false);
+  const [loaderPaused, setLoaderPaused] = useState(false);
+  const loaderPausedRef = useRef(false);
+  useEffect(() => {
+    loaderPausedRef.current = loaderPaused;
+    const tw = introTweenRef.current;
+    if (tw) { if (loaderPaused) tw.pause(); else tw.resume(); }
+  }, [loaderPaused]);
 
   // Aktueller Slide-Index: 3 (Intro) wenn kein Tool aktiv, sonst Tool-Index.
   // Crossfade läuft rein über opacity (siehe Render), keine Richtungs-/Phasen-Logik nötig.
   const currentSlide = activeCard === null ? 3 : TOOLS.findIndex((t) => t.title === activeCard);
+  const activeTool = activeCard ? TOOLS.find((t) => t.title === activeCard) : null;
 
-  // Measure collapsed card bar width + calculate spacer height
+  // Visual/Slider-Boxhöhe = 4:3 der Box-Breite, min 350px. Treibt --stage-h, das
+  // sowohl die Stage-Boxen (height) als auch die Newsletter-min-height steuert →
+  // „Die Finanztools" bleibt auf der Linie (= Visual-Unterkante). Desktop only.
+  useLayoutEffect(() => {
+    const row = innerRowRef.current;
+    if (!row) return;
+    const apply = () => {
+      const w = row.clientWidth;
+      if (w <= 0) return;
+      const visualW = w - 330 - 72;        // Controls 330 + 2×36px Box-Margins
+      const h = Math.max(0, visualW * 0.75 - 80); // 4:3 − 80, KEINE Mindesthöhe mehr
+      row.style.setProperty("--stage-h", `${Math.round(h)}px`);
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(row);
+    window.addEventListener("resize", apply);
+    return () => { ro.disconnect(); window.removeEventListener("resize", apply); };
+  }, []);
+
+  // Mobile: Bird-Visual-Höhe so, dass Visual + „Die Finanztools" + Buttons in den ersten
+  // Viewport passen (Buttons sind sticky unten). Höhe = vh − Bird-Oben − Heading − Buttons − Gap.
   useEffect(() => {
-    const measure = () => {
-      if (cardsRef.current && sectionRef.current) {
-        const w = cardsRef.current.scrollWidth;
-        sectionRef.current.style.setProperty("--tools-bar-width", w + "px");
+    const wrap = mobileWrapRef.current;
+    if (!wrap) return;
+    const apply = () => {
+      const bird = wrap.querySelector<HTMLImageElement>(".ftools-m-bird");
+      if (!bird) return;
+      if (!window.matchMedia("(max-width: 767px)").matches) { bird.style.height = ""; return; }
+      const ft = wrap.querySelector<HTMLElement>(".ftools-m-finanztools");
+      const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
+      if (!ft || !btns) return;
+      const birdTop = bird.getBoundingClientRect().top + window.scrollY;
+      const h = window.innerHeight - birdTop - ft.offsetHeight - btns.offsetHeight - 44;
+      bird.style.height = `${Math.max(180, Math.round(h))}px`;
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    if (document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
+    return () => window.removeEventListener("resize", apply);
+  }, []);
+
+  // Mobile: „Alles in eigener Hand", Beschreibung 1 + Progress-Linie faden/bluren beim
+  // Scrollen ein. Start sobald die Objekt-Oberkante die Button-Oberkante berührt, voll
+  // sichtbar wenn die Oberkante 60% des Viewports erreicht.
+  useEffect(() => {
+    const wrap = mobileWrapRef.current;
+    if (!wrap || !window.matchMedia("(max-width: 767px)").matches) return;
+    const targets = ([".ftools-m-allein", ".ftools-m-desc"]
+      .map((s) => wrap.querySelector<HTMLElement>(s)).filter(Boolean)) as HTMLElement[];
+    const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
+    if (!targets.length || !btns) return;
+    const apply = () => {
+      const start = btns.getBoundingClientRect().top;   // Button-Oberkante
+      const end = 0.6 * window.innerHeight;             // 60% Viewport
+      const range = Math.max(1, start - end);
+      for (const el of targets) {
+        const p = Math.min(1, Math.max(0, (start - el.getBoundingClientRect().top) / range));
+        el.style.opacity = String(p);
+        el.style.filter = `blur(${(10 * (1 - p)).toFixed(2)}px)`;
       }
     };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [activeCard]);
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+    window.addEventListener("resize", apply);
+    return () => { window.removeEventListener("scroll", apply); window.removeEventListener("resize", apply); };
+  }, []);
 
-  // Filler-Höhe der Dot-Spalte = Abstand von der Spalten-Unterkante bis zur Oberkante
-  // des vertikalen Anbieter-Schriftzugs. Dadurch endet der Sticky-Pfeil exakt über dem
-  // Schriftzug statt am Sektionsende. Differenz zweier getBoundingClientRect-Tops ist
-  // scroll-unabhängig → einmal messen + bei Reflow/Resize/Font-Load neu.
+  // Mobile: Progress-Linie zeichnet sich von links nach rechts ein (scaleX) sobald sie den
+  // Andock-Bereich erreicht (Buttons docken ab) — einmalige Animation, NICHT scroll-gebunden.
+  useEffect(() => {
+    const wrap = mobileWrapRef.current;
+    if (!wrap || !window.matchMedia("(max-width: 767px)").matches) return;
+    const track = wrap.querySelector<HTMLElement>(".ftools-m-loader-track");
+    const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
+    if (!track || !btns) return;
+    let drawn = false;
+    const onScroll = () => {
+      // Buttons sind sticky bottom:16 → solange gedockt ist ihre Unterkante = vh−16.
+      // Sobald sie abdocken (mit dem Flow hochscrollen) wird sie < vh−16 → Linie einzeichnen.
+      const undocked = btns.getBoundingClientRect().bottom < window.innerHeight - 16 - 1;
+      if (undocked && !drawn) { drawn = true; track.style.transform = "scaleX(1)"; }
+      else if (!undocked && drawn) { drawn = false; track.style.transform = "scaleX(0)"; }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
+  }, []);
+
+  // Dot-Spalte mit ZWEI gepunkteten Segmenten um den vertikalen Schriftzug:
+  //  • Segment 1 (oben): Dotline aus dem Section-Top, Sticky-Pfeil ruht GAP über „ANBIETER".
+  //  • Schriftzug (liegt in der Preview-Spalte, per translateX auf die Pfeil-Achse zentriert).
+  //  • Segment 2 (unten): startet GAP unter „KONTAKTE", eigener Sticky-Pfeil ruht am
+  //    Ende des Anbieter-Blocks (Button-Unterkante) — exakt wie Segment 1.
+  // Drei Spacer (gap/segment2/filler) bekommen ihre Höhen via JS; Differenzen von
+  // getBoundingClientRect sind scroll-stabil → einmal messen + bei Reflow/Resize/Font neu.
   useLayoutEffect(() => {
     const spacer = rightSpacerRef.current;
+    const gapEl = dotGapRef.current;
+    const seg2 = segment2Ref.current;
     const filler = dotFillerRef.current;
     const vert = anbieterVertRef.current;
+    const anbieter = anbieterRef.current;
     const section = sectionRef.current;
-    if (!spacer || !filler || !vert) return;
+    if (!spacer || !gapEl || !seg2 || !filler || !vert || !anbieter) return;
 
-    const GAP = 14;     // Pfeilspitze endet diese Distanz über der Oberkante des Schriftzugs
-    const GAP_X = 10;   // Schriftzug zusätzlich nach links → größerer Abstand zum Visual
+    const GAP = 10;    // vertikaler Abstand Pfeilspitze ↔ Schriftzug (oben + Start Segment 2)
+    const GAP_X = 0;   // horizontaler Versatz des Schriftzugs (0 = exakt auf der Pfeil-Achse)
 
     const measure = () => {
-      // Mobile: Spalte ausgeblendet → nichts messen.
-      if (spacer.offsetParent === null) { filler.style.height = "0px"; vert.style.transform = "none"; return; }
+      // Mobile: Spalte ausgeblendet → nichts messen, Höhen platt.
+      if (spacer.offsetParent === null) {
+        vert.style.transform = "none";
+        gapEl.style.height = "0px"; seg2.style.height = "0px"; filler.style.height = "0px";
+        return;
+      }
 
-      // Horizontal: Schriftzug auf die Mitte der Dot-/Pfeil-Spalte zentrieren, dann
-      // GAP_X nach links für mehr Abstand zum Visual.
+      // Horizontal: Schriftzug exakt auf die Mitte der Dot-/Pfeil-Spalte zentrieren.
       vert.style.transform = "none"; // für saubere Messung zurücksetzen
       const spacerRect = spacer.getBoundingClientRect();
       const vertRect = vert.getBoundingClientRect();
       const dx = (spacerRect.left + spacerRect.width / 2) - (vertRect.left + vertRect.width / 2) - GAP_X;
       vert.style.transform = `translateX(${dx}px)`;
 
-      // Vertikal: Filler-Höhe = Abstand Spalten-Unterkante → Oberkante des Schriftzugs,
-      // damit der Sticky-Pfeil exakt darüber zur Ruhe kommt. Die Buchstaben überlaufen
-      // ihre (auf Blockhöhe begrenzte) Box nach oben → echte Oberkante = Top des ersten
-      // Wort-Spans, nicht der Wrapper-Box. translateX ändert die Top-Koordinate nicht.
-      filler.style.height = "0px";
+      // Vertikale Messpunkte. Buchstaben überlaufen die Box → echte Ober-/Unterkante
+      // = erstes/letztes Wort-Span. translateX ändert Top/Bottom nicht.
       const firstWord = (vert.firstElementChild as HTMLElement | null) ?? vert;
-      const vertTop = firstWord.getBoundingClientRect().top;
-      const h = Math.max(0, spacerRect.bottom - vertTop + GAP);
-      filler.style.height = `${h}px`;
+      const lastWord = (vert.lastElementChild as HTMLElement | null) ?? vert;
+      const LT = firstWord.getBoundingClientRect().top;       // Oberkante „ANBIETER"
+      const LB = lastWord.getBoundingClientRect().bottom;     // Unterkante „KONTAKTE"
+      const CB = spacerRect.bottom;                            // Spalten-Unterkante
+      // Segment 2 reicht bis 80px UNTER den Slider-Container (nicht mehr bis zum Anbieter-Ende).
+      const sliderEl = sliderBoxRef.current;
+      const sliderBottom = sliderEl ? sliderEl.getBoundingClientRect().bottom : anbieter.getBoundingClientRect().bottom;
+      const seg2End = Math.min(CB, sliderBottom + 80);
+
+      // gap: lässt Segment-1-Pfeil GAP über LT ruhen + reserviert die Schriftzughöhe + GAP unten.
+      gapEl.style.height = `${Math.max(0, (LB - LT) + GAP + GAP)}px`;
+      // Segment 2: von (LB + GAP) bis seg2End → eigene Dotline + Sticky-Pfeil, ruht bei seg2End.
+      seg2.style.height = `${Math.max(0, seg2End - LB - GAP)}px`;
+      // filler: Rest bis zur Spalten-Unterkante.
+      filler.style.height = `${Math.max(0, CB - seg2End)}px`;
     };
 
     measure();
     const ro = new ResizeObserver(measure);
     if (section) ro.observe(section);
     ro.observe(spacer);
+    ro.observe(vert);       // Schriftzug ist absolut → bei Font-/Größenänderung trotzdem neu messen
+    ro.observe(anbieter);   // Anbieter-Block-Größe ändert sich → Schriftzug neu zentrieren
     window.addEventListener("resize", measure);
     if (typeof document !== "undefined" && document.fonts?.ready) {
       document.fonts.ready.then(measure).catch(() => {});
@@ -144,38 +292,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   }, []);
 
   useLayoutEffect(() => {
-    cardProgObjs.current.forEach(obj => gsap.killTweensOf(obj));
-    toolContentRefs.current.forEach((el) => {
-      if (el) gsap.set(el, { height: 0, opacity: 0 });
-    });
-    if (alleinHandRef.current) {
-      gsap.set(alleinHandRef.current, { opacity: 0, filter: "blur(10px)", y: 30 });
-    }
-  }, []);
-
-  useEffect(() => {
-    const el = alleinHandRef.current;
-    const trigger = document.querySelector("[data-finanztools-heading]") as HTMLElement;
-    if (!el || !trigger) return;
-
-    const onScroll = () => {
-      const rect = trigger.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // Start wenn Die Finanztools seine sticky-Position verlässt (bottom = vh - 140)
-      // Ende wenn es bei 50% Viewport angekommen ist
-      const startTop = vh - 140 - trigger.offsetHeight;
-      const endTop = vh * 0.5;
-      const progress = Math.max(0, Math.min(1, (startTop - rect.top) / (startTop - endTop)));
-      gsap.set(el, {
-        opacity: progress,
-        filter: `blur(${10 * (1 - progress)}px)`,
-        y: 30 * (1 - progress),
-      });
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    cardLayoutObjs.current.forEach((obj) => gsap.killTweensOf(obj));
+    contentProgObjs.current.forEach((obj) => gsap.killTweensOf(obj));
+    gsap.killTweensOf(loaderTopObj.current);
   }, []);
 
   useEffect(() => {
@@ -195,11 +314,137 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     document.fonts.ready.then(measure);
   }, []);
 
+  // Scroll-Reveal: „Alles in eigener Hand" + die beiden Beschreibungen starten bei opacity 0
+  // und faden beim Reinscrollen ein. Pro Textfeld: Beginn wenn die Oberkante 80px von unten
+  // reingescrollt ist (top = vh−80 → opacity 0), voll da bei Viewport-Mitte (top = vh/2 → 1).
+  // Opacity wird direkt am DOM gesetzt (kein React-Inline-Opacity → kein Konflikt/Re-Render).
+  useEffect(() => {
+    const apply = () => {
+      const els = [alleinHandRef.current, desc1Ref.current, desc2Ref.current].filter(Boolean) as HTMLElement[];
+      if (!els.length) return;
+      const vh = window.innerHeight;
+      const start = vh - 120;           // Oberkante hier → opacity 0
+      const end = start - 100;         // 100px weiter hochgescrollt → opacity 1
+      const range = Math.max(1, start - end);
+      for (const el of els) {
+        const top = el.getBoundingClientRect().top;
+        const p = Math.min(1, Math.max(0, (start - top) / range)); // 0 → 1
+        el.style.opacity = String(p);
+        el.style.filter = `blur(${(10 * (1 - p)).toFixed(2)}px)`;   // 10px → 0px Blur
+      }
+
+      // Horizontale Linie unter dem Visual wächst von rechts nach links: 50% Breite wenn die
+      // Oberkante unten reinkommt (top = vh), volle Länge bei 40% Viewport von unten (top = 0.6·vh).
+      const line = stageLineRef.current;
+      if (line) {
+        const top = line.getBoundingClientRect().top;
+        const lp = Math.min(1, Math.max(0, (vh - top) / (0.4 * vh)));
+        line.style.transform = `scaleX(${(0.5 + 0.5 * lp).toFixed(4)})`;
+      }
+    };
+    apply();
+    window.addEventListener("scroll", apply, { passive: true });
+    window.addEventListener("resize", apply);
+    return () => {
+      window.removeEventListener("scroll", apply);
+      window.removeEventListener("resize", apply);
+    };
+  }, []);
+
   // Sync activeCard → ref (readable inside scroll listeners without closure stale-value issues)
   useEffect(() => { activeCardRef.current = activeCard; }, [activeCard]);
 
-  // Auto-expand Rechner when buttons leave sticky-bottom; always collapse when scrolling back up.
-  // Am Trigger-Punkt füllt sich erst der Intro-Progress-Bar (3s), danach öffnet Rechner.
+  // Aktiviert Tool i: setzt activeCard, Timer auf 0, 5s-Progress; danach Auto-Advance zum
+  // nächsten Tool (Loop). Über Ref, damit der onComplete-Callback nicht stale ist.
+  const activateToolRef = useRef<(i: number) => void>(() => {});
+  activateToolRef.current = (index: number) => {
+    const i = ((index % 3) + 3) % 3;
+    setActiveCard(TOOLS[i].title);
+    introTweenRef.current?.kill();
+    introProgObj.current.v = 0;
+    setIntroProgress(0);
+    setLoaderActive(true);
+    introTweenRef.current = gsap.to(introProgObj.current, {
+      v: 1,
+      duration: 5,
+      ease: "none",
+      paused: loaderPausedRef.current,
+      onUpdate: () => setIntroProgress(introProgObj.current.v),
+      onComplete: () => {
+        introTweenRef.current = null;
+        // Slideshow läuft genau EINMAL durch (… → Checklisten), danach collapsen + pausieren (kein Loop).
+        if (i === TOOLS.length - 1) collapseAndPauseRef.current();
+        else activateToolRef.current(i + 1);
+      },
+    });
+  };
+
+  // Collapse zu Intro + Balken über den Buttons sichtbar lassen + pausieren (X-Schließen & Ende der Slideshow).
+  const collapseAndPauseRef = useRef<() => void>(() => {});
+  collapseAndPauseRef.current = () => {
+    introTweenRef.current?.kill();
+    introTweenRef.current = null;
+    introProgObj.current.v = 0;
+    setIntroProgress(0);
+    setLoaderActive(true);   // Balken bleibt über den Buttons sichtbar …
+    setLoaderPaused(true);   // … pausiert; Play startet die Slideshow neu
+    loaderPausedRef.current = true;
+    setActiveCard(null);     // Intro-Layout
+    lastPastRef.current = true; // verhindert sofortiges Re-Triggern
+  };
+
+  // Klick auf einen Button: erst an die richtige Stelle scrollen (Slider voll sichtbar),
+  // DANN das Tool aufklappen (wie früher). Ist der Slider schon (fast) ganz sichtbar →
+  // direkt aufklappen.
+  const cardClickRef = useRef<(i: number) => void>(() => {});
+  cardClickRef.current = (i: number) => {
+    const slider = sliderBoxRef.current;
+    if (!slider) { activateToolRef.current(i); return; }
+    const r = slider.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // Schon (fast) am Andock-Punkt (Slider-Unterkante an der Linie vh−23)? → direkt aufklappen.
+    if (Math.abs(r.bottom - (vh - 23)) <= 16) {
+      activateToolRef.current(i);
+      return;
+    }
+    // Sonst exakt zum Andock-Punkt scrollen (wo die Buttons mit dem Flow zu scrollen beginnen).
+    isScrollingToTarget.current = true;
+    const targetY = window.scrollY + r.bottom - (vh - 23);
+    gsap.to(window, {
+      scrollTo: { y: targetY, autoKill: false },
+      duration: 0.6,
+      ease: "power2.inOut",
+      onComplete: () => {
+        isScrollingToTarget.current = false;
+        activateToolRef.current(i);
+      },
+    });
+  };
+
+  // Lead-in: Balken läuft einmal durch (5s, kein Tool) → danach öffnet Rechner + Auto-Advance.
+  // Wird vom Scroll-Trigger UND vom Play-Button (nach X-Collapse) genutzt.
+  const startLeadInRef = useRef<() => void>(() => {});
+  startLeadInRef.current = () => {
+    introTweenRef.current?.kill();
+    setLoaderActive(true);
+    setLoaderPaused(false);
+    loaderPausedRef.current = false;
+    introProgObj.current.v = 0;
+    setIntroProgress(0);
+    introTweenRef.current = gsap.to(introProgObj.current, {
+      v: 1,
+      duration: 5,
+      ease: "none",
+      paused: false,
+      onUpdate: () => setIntroProgress(introProgObj.current.v),
+      onComplete: () => {
+        introTweenRef.current = null;
+        activateToolRef.current(0);
+      },
+    });
+  };
+
+  // Auto-Advance startet, sobald 2/3 des Sliders sichtbar sind; collapse beim Hochscrollen.
   useEffect(() => {
     const cancelFill = () => {
       if (introTweenRef.current) {
@@ -208,99 +453,113 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       }
       introProgObj.current.v = 0;
       setIntroProgress(0);
+      setLoaderActive(false);
+      setLoaderPaused(false);
+      loaderPausedRef.current = false;
     };
     const onScroll = () => {
       // Skip while GSAP is programmatically scrolling to avoid premature collapse mid-animation
-      if (isScrollingToTarget.current || !sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const pastExit = rect.bottom <= window.innerHeight;
+      if (isScrollingToTarget.current) return;
+      const slider = sliderBoxRef.current;
+      if (!slider) return;
+      // Trigger GENAU dort, wo die 3 Buttons anfangen mit dem Flow zu scrollen: Der Slider
+      // schließt unten bündig mit den Buttons ab; sie docken (sticky bottom:23) ab, sobald
+      // ihre Unterkante die Linie vh−23 erreicht. Davor sind sie gepinnt.
+      const r = slider.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const triggered = r.bottom > 0 && r.bottom <= vh - 23;
 
-      // Scrolled back above exit: cancel a pending fill + collapse any open card
-      if (!pastExit) {
+      // Noch nicht (genug) sichtbar: laufende Füllung abbrechen + offene Karte schließen
+      if (!triggered) {
         cancelFill();
         if (activeCardRef.current !== null) setActiveCard(null);
         lastPastRef.current = false;
         return;
       }
 
-      // Edge-detection for expand: only trigger on the crossing, not continuously
-      if (pastExit !== lastPastRef.current) {
-        lastPastRef.current = pastExit;
+      // Flanke: Lead-in starten — der erste Balken läuft einmal durch (kein Tool),
+      // danach expandiert die erste Card (Rechner) und der Auto-Advance läuft weiter.
+      if (triggered !== lastPastRef.current) {
+        lastPastRef.current = triggered;
         if (activeCardRef.current === null && !introTweenRef.current) {
-          // Progress-Bar in 3s füllen, dann Rechner öffnen
+          setLoaderActive(true);
+          introProgObj.current.v = 0;
+          setIntroProgress(0);
           introTweenRef.current = gsap.to(introProgObj.current, {
             v: 1,
-            duration: 3,
+            duration: 5,
             ease: "none",
+            paused: loaderPausedRef.current,
             onUpdate: () => setIntroProgress(introProgObj.current.v),
             onComplete: () => {
               introTweenRef.current = null;
-              if (activeCardRef.current === null) setActiveCard("Rechner");
+              activateToolRef.current(0);
             },
           });
         }
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => {
       window.removeEventListener("scroll", onScroll);
       introTweenRef.current?.kill();
     };
   }, []);
 
+  // Card-Layout-Morph (Big-Top/Two-Small/Intro) + Content-Fade + Loader-Position.
+  // Manuelle Interpolation via GSAP-Tweens auf die Zielslots, bestehende Eases.
   useEffect(() => {
+    const activeIndex = activeCard ? TOOLS.findIndex((t) => t.title === activeCard) : -1;
+    const pushLayout = () => setCardLayouts(cardLayoutObjs.current.map((o) => ({ ...o })));
     TOOLS.forEach((tool, i) => {
-      const isActive = activeCard === tool.title;
-      const target = isActive ? 1 : 0;
-      gsap.to(cardProgObjs.current[i], {
-        v: target,
-        duration: isActive ? 0.75 : 0.75,
-        ease: isActive ? "back.out(1.2)" : "power2.inOut",
+      const isActive = i === activeIndex;
+      const slot = toolSlot(i, activeIndex);
+      gsap.to(cardLayoutObjs.current[i], {
+        x: slot.x, y: slot.y, w: slot.w, h: slot.h,
+        duration: 0.65,
+        ease: "power3.inOut",
         overwrite: true,
-        onUpdate: () => {
-          setCardProgs([
-            cardProgObjs.current[0].v,
-            cardProgObjs.current[1].v,
-            cardProgObjs.current[2].v,
-          ]);
-        },
+        onUpdate: pushLayout,
       });
       gsap.to(contentProgObjs.current[i], {
-        v: target,
-        duration: 0.75,
+        v: isActive ? 1 : 0,
+        duration: 0.65,
         ease: isActive ? "power2.out" : "power2.inOut",
         overwrite: true,
-        onUpdate: () => {
-          setContentProgs([
-            contentProgObjs.current[0].v,
-            contentProgObjs.current[1].v,
-            contentProgObjs.current[2].v,
-          ]);
-        },
+        onUpdate: () => setContentProgs([
+          contentProgObjs.current[0].v,
+          contentProgObjs.current[1].v,
+          contentProgObjs.current[2].v,
+        ]),
       });
-      const contentEl = toolContentRefs.current[i];
-      if (contentEl) {
-        gsap.to(contentEl, {
-          height: isActive ? "auto" : 0,
-          opacity: isActive ? 1 : 0,
-          duration: isActive ? 0.65 : 0.65,
-          ease: isActive ? "back.out(1.1)" : "power2.inOut",
-          overwrite: true,
-        });
-      }
+    });
+  }, [activeCard]);
+
+  // Loader: Intro/Lead-in = über den 3 Buttons; slided erst beim Öffnen einer Card nach oben.
+  useEffect(() => {
+    gsap.to(loaderTopObj.current, {
+      v: activeCard ? LOADER_TOP_ACTIVE : LOADER_TOP_INTRO,
+      duration: 0.6,
+      ease: "power2.inOut",
+      overwrite: true,
+      onUpdate: () => setLoaderTop(loaderTopObj.current.v),
     });
   }, [activeCard]);
 
   return (
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
-      <div style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
-        {/* Left: finanztools_container */}
+      <div className="ftools-row" style={{ display: "flex", maxWidth: 1600, margin: "0 auto", padding: "0 clamp(20px, 4vw, 60px)" }}>
+        {/* Left: finanztools_container — CONTROLS (links 300px) + STAGE (Visual+Slider) */}
         <div className="ftools-left-col">
+         <div ref={innerRowRef} className="ftools-inner-row">
 
-          {/* 1. Spacer — dynamisch berechnet, mit Newsletter-Container als Overlay */}
-          <div className="ftools-spacer" style={{ width: "100%", height: "390px", position: "relative" }}>
-            <div className="ftools-newsletter-box" style={{ width: 330, display: "flex", flexDirection: "column", gap: 9, alignSelf: "flex-start", alignItems: "flex-end" }}>
-                <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 72 }}>
+          {/* ===== CONTROLS (links, 300px) ===== */}
+          <div className="ftools-controls">
+
+            {/* Newsletter — oben */}
+            <div className="ftools-newsletter-box" style={{ display: "flex", flexDirection: "column", gap: 9, alignItems: "flex-end" }}>
+                <p style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)", textAlign: "right", marginTop: 56 }}>
                   Newsletter
                 </p>
                 <p
@@ -324,247 +583,202 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                 </div>
 
                 {/* Horizontale Linie */}
-                <div style={{ width: 330, height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
-              </div>
-
-            {/* Visual — Desktop: zwischen Newsletter und Sidebar (absolute);
-                Mobile: full-bleed über Bildschirmbreite. CSS-toggle (statt
-                JS-Ternary) damit Mobile-SSR nicht initial in Desktop-Position
-                rendert und dann hüpft. */}
-            <div className="ftools-visual-wrap" style={{ transform: "translateY(15px)" }}>
-              <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                <div style={{ width: "100%", height: 1, background: "rgba(0, 0, 0, 0.07)", marginTop: 30 }} />
             </div>
-          </div>
 
-          {/* 2. Subheading + Heading — sticky bottom */}
-          <div className="ftools-subheading-row" style={{ width: "100%", height: "auto", position: "sticky", bottom: 140, display: "flex", paddingTop: 256 }}>
-            <p data-finanztools-heading className="ftools-subheading-text" style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)" }}>
-              Die Finanztools
-            </p>
-            <p ref={alleinHandRef} style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: 0, opacity: 0 }}>
+            {/* „Die Finanztools" — sitzt auf der durchgehenden Linie, sticky, mit Blende.
+                Die Linie hier (Controls-Teil) + die Stage-Linie liegen beide sticky
+                bottom:140 → fluchten zu einer durchgehenden Linie. Blende (#faf9f6,
+                niedriger z-index) überdeckt die Linie hinter dem Text → smooth-cut. */}
+            <div className="ftools-finanztools">
+              <span data-finanztools-heading className="ftools-subheading-text" style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 700, fontSize: 19, lineHeight: 1.38, color: "var(--color-text-primary)" }}>
+                Die Finanztools
+              </span>
+            </div>
+
+            {/* „Alles in eigener Hand" — unter der Linie */}
+            <p ref={alleinHandRef} className="ftools-allein" style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 900, fontSize: 40, lineHeight: 1.3, color: "var(--color-text-primary)", margin: "5px 0 0" }}>
               Alles in eigener Hand
             </p>
-          </div>
 
-          {/* 3. Visual-Slider — gestapelte Bilder, Crossfade zwischen den Slides.
-              Toolbox-Intro (volle Breite) treibt die Höhe und ist zugleich Slide 3;
-              die 3 Tool-Bilder liegen etwas kleiner + oben zentriert darüber.
-              Später durch Animationen/Videos ersetzbar. */}
-          <div className="ftools-lottie-slider" style={{ width: "100%", position: "relative", marginTop: 36 }}>
-            <img
-              src={INTRO_IMAGE}
-              alt=""
-              aria-hidden
-              style={{
-                display: "block",
-                width: "100%",
-                height: "auto",
-                opacity: currentSlide === 3 ? 1 : 0,
-                transition: "opacity 0.5s ease",
-              }}
-            />
-            {TOOLS.map((tool, i) => (
-              <img
-                key={i}
-                src={tool.image}
-                alt=""
-                aria-hidden
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  width: TOOL_IMAGE_SCALE,
-                  height: "auto",
-                  opacity: i === currentSlide ? 1 : 0,
-                  transition: "opacity 0.5s ease",
-                  pointerEvents: "none",
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Intro-Progress-Bar (Apple-Style) — zentriert unter dem Slider.
-              Füllt am Auto-Expand-Trigger in 3s, dann öffnet Rechner. */}
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
-            <div
-              style={{
-                width: 140,
-                height: 5,
-                borderRadius: 999,
-                background: "rgba(0, 0, 0, 0.1)",
-                overflow: "hidden",
-                opacity: currentSlide === 3 ? 1 : 0,
-                transition: "opacity 0.4s ease",
-              }}
-            >
-              <div
-                style={{
-                  width: `${introProgress * 100}%`,
-                  height: "100%",
-                  borderRadius: 999,
-                  background: "var(--color-brand)",
-                }}
-              />
+            {/* Beschreibung (Intro) — im Flow, NICHT sticky; äußerer Wrapper = Scroll-Reveal-Opacity
+                (per JS), innerer = Ausblenden sobald ein Tool aktiv ist. */}
+            <div className="ftools-intro-descs" style={{ opacity: activeCard ? 0 : 1, transition: "opacity 0.4s ease", pointerEvents: activeCard ? "none" : "auto" }}>
+              {/* Jeder Absatz hat seinen eigenen Scroll-Reveal (eigener Ref → eigener Bereich). */}
+              <p ref={desc1Ref} className="ftools-allein-desc">
+                Behalten Sie die Kontrolle über Ihre<br />Finanzen und Versicherungen.
+              </p>
+              <p ref={desc2Ref} className="ftools-allein-desc ftools-allein-desc-2">
+                Von Brutto-Netto-Rechner bis zum komplexen Versicherungsvergleich. Wir haben das passende Tool für Sie
+              </p>
             </div>
-          </div>
 
-          {/* 4. Tool Cards — Mobile: RevolverSlider; Desktop: sticky cards row.
-              Beide rendern + CSS-toggle (.ftools-cards-mobile / -desktop) damit
-              SSR-HTML viewport-konsistent ist und kein Hydration-Reflow auftritt. */}
-          <div className="ftools-cards-mobile" style={{ position: "sticky", bottom: 0, paddingTop: 23, paddingBottom: 16, width: "100%", zIndex: 10 }}>
-            <RevolverSlider
-              tools={TOOLS}
-              activeIndex={activeCard !== null ? TOOLS.findIndex(t => t.title === activeCard) : 0}
-              onActiveChange={(idx, fromIntro) => {
-                const title = TOOLS[idx].title;
-                if (activeCard !== title) setActiveCard(title);
-                // When clicking from intro state: scroll section bottom into view
-                if (fromIntro && sectionRef.current) {
-                  const rect = sectionRef.current.getBoundingClientRect();
-                  const sectionBottom = window.scrollY + rect.bottom;
-                  const targetY = sectionBottom - window.innerHeight;
-                  gsap.to(window, { scrollTo: { y: targetY }, duration: 0.8, ease: "power2.inOut" });
-                }
-              }}
-            />
-          </div>
-          <div ref={cardsRef} className="ftools-cards-desktop" style={{ position: "sticky", bottom: 0, height: 150, alignItems: "flex-end", gap: 5, paddingTop: 23, paddingBottom: 23, marginLeft: -15 }}>
-              {TOOLS.map((tool, idx) => {
-                const isActive = activeCard === tool.title;
-                const t = cardProgs[idx];
+            {/* ── Tool-Bühne (sticky am unteren Rand): Intro (3 Cards) ↔ Aktiv (große Card oben
+                  + Trennlinie + 2 kleine unten). Kein Swipe; Auto-Advance + Klick. ── */}
+            <div className="ftools-tool-stage" style={{ position: "sticky", bottom: 23, marginTop: "auto", width: ST_W, height: STAGE_FLOW_H, overflow: "visible" }}>
 
-                const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-                const ss = (v: number) => v * v * (3 - 2 * v);
-                const eo = (v: number) => 1 - (1 - v) * (1 - v);
+              {/* Loader (fährt nach oben bei aktiv) + Play/Pause + Lesezeichen in Tool-Farbe */}
+              <div className="ftools-loader-wrap" style={{ position: "absolute", left: 0, top: loaderTop, opacity: loaderActive ? 1 : 0, transition: "opacity 0.3s ease", zIndex: 6 }}>
+                <button type="button" className="ftools-loader-toggle" style={{ opacity: loaderActive ? 1 : 0, pointerEvents: loaderActive ? "auto" : "none" }} onClick={() => {
+                  // Play aus dem X-Collapse-Zustand (keine Card, kein Tween) → Slideshow neu starten
+                  if (loaderPaused && activeCardRef.current === null && !introTweenRef.current) {
+                    startLeadInRef.current();
+                  } else {
+                    setLoaderPaused((p) => !p);
+                  }
+                }} aria-label={loaderPaused ? "Abspielen" : "Pause"}>
+                  {loaderPaused ? (
+                    <svg width="11" height="13" viewBox="0 0 11 13" aria-hidden><path d="M0 0v13l11-6.5z" fill="currentColor" /></svg>
+                  ) : (
+                    <svg width="10" height="13" viewBox="0 0 10 13" aria-hidden><rect width="3.2" height="13" fill="currentColor" /><rect x="6.8" width="3.2" height="13" fill="currentColor" /></svg>
+                  )}
+                </button>
+                <div className="ftools-loader" style={{ transform: `scaleX(${loaderActive ? 1 : 0})` }} />
+                <div className="ftools-loader-fill" style={{ width: `${introProgress * 100}%` }} />
+                <div className="ftools-loader-bookmark" style={{ opacity: activeTool ? 1 : 0 }} aria-hidden>
+                  <div style={{ width: 28, height: 9, background: activeTool?.color ?? "transparent" }} />
+                  <svg width="28" height="23" viewBox="0 0 28 23" fill="none" style={{ display: "block", marginTop: -1 }}>
+                    <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={activeTool?.color ?? "transparent"} />
+                  </svg>
+                </div>
+              </div>
 
-                // tc: separates power2.out-Tween — Icon/Titel laufen synchron zur Karte ohne Clamp-Freeze
-                const tc = contentProgs[idx];
+              {/* Hellgraue Trennlinie zwischen aktiver Box und den 2 kleinen Buttons (nur aktiv) */}
+              <div style={{ position: "absolute", left: 0, top: ST_DIVIDER_Y - ST_SHIFT, width: ST_W, height: 1, background: "rgba(0,0,0,0.10)", opacity: activeCard ? 1 : 0, transition: "opacity 0.3s ease" }} aria-hidden />
 
-                const cardWidth = 105 + 370 * t;
-                const headerW = (105 + 370 * tc) - 54;
-
-                // Phase 1 (0→0.67): Icon horizontal — easeOut, ~0.5s bei 0.75s Tween
-                const iconTX = eo(clamp01(tc / 0.67));
-                const iconLeft = ((headerW - 32) / 2) * (1 - iconTX);
-                // Phase 2 (0.33→1.0): Icon vertikal + Titel paddingTop — easeOut, ~0.5s
-                const tY = eo(clamp01((tc - 0.33) / 0.67));
-
-                const tw = titleWidths[idx] || 0;
-                const titleCenterX = (105 + 370 * tc - 54) / 2 - tw / 2;
-                const titleTranslateX = titleCenterX * (1 - ss(clamp01(tc / 0.67))) + 40 * ss(clamp01(tc / 0.67));
-                const titleFontSize = 13.5 + 10.5 * tc;
-
-                const bgR = Math.round(255 + (250 - 255) * tc);
-                const bgG = Math.round(255 + (249 - 255) * tc);
-                const bgB = Math.round(255 + (246 - 255) * tc);
-
-                return (
-                  <div key={tool.title} style={{ display: "flex", alignItems: "flex-end", gap: 5 }}>
-                    {idx > 0 && <div style={{ marginBottom: 50 }}><Spark /></div>}
+              {/* Desktop-Cards (absolut, morphen zwischen Intro-Reihe ↔ Big-Top/Two-Small) */}
+              <div className="ftools-cards-desktop">
+                {TOOLS.map((tool, i) => {
+                  const L = cardLayouts[i];
+                  const cp = contentProgs[i];
+                  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+                  const ss = (v: number) => v * v * (3 - 2 * v);
+                  const cw = Math.max(0, L.w - 48);
+                  const tX = ss(clamp01(cp / 0.6));
+                  const tY = ss(clamp01((cp - 0.4) / 0.6));
+                  const iconLeft = (1 - tX) * (cw / 2 - 17);
+                  const titleW = titleWidths[i] || 60;
+                  const titleTX = ((L.w - 48) / 2 - titleW / 2) * (1 - tX) + 44 * tX;
+                  return (
                     <div
-                      onClick={() => {
-                        const wasNoneActive = activeCardRef.current === null;
-                        setActiveCard(isActive ? null : tool.title);
-                        if (wasNoneActive && sectionRef.current) {
-                          const rect = sectionRef.current.getBoundingClientRect();
-                          const pastExit = rect.bottom <= window.innerHeight;
-                          if (!pastExit) {
-                            const targetY = window.scrollY + rect.bottom - window.innerHeight;
-                            isScrollingToTarget.current = true;
-                            gsap.to(window, {
-                              scrollTo: { y: Math.max(0, targetY) },
-                              duration: 0.8,
-                              ease: "power2.inOut",
-                              onComplete: () => {
-                                isScrollingToTarget.current = false;
-                                if (sectionRef.current) {
-                                  lastPastRef.current = sectionRef.current.getBoundingClientRect().bottom <= window.innerHeight;
-                                }
-                              },
-                            });
-                          }
-                        }
-                      }}
+                      key={tool.title}
+                      onClick={() => cardClickRef.current(i)}
+                      className="ftools-tcard"
                       style={{
-                        background: `rgba(${bgR}, ${bgG}, ${bgB}, 0.8)`,
-                        backdropFilter: `brightness(${1.3 - 0.3 * tc}) blur(${13 + 3 * tc}px)`,
-                        WebkitBackdropFilter: `brightness(${1.3 - 0.3 * tc}) blur(${13 + 3 * tc}px)`,
-                        boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - tc)})`,
-                        border: `1px solid rgba(104, 108, 106, ${tc})`,
-                        overflow: "hidden",
-                        position: "relative",
-                        cursor: "pointer",
-                        flexShrink: 0,
-                        padding: `23px 27px ${14 + 9 * tc}px`,
-                        width: cardWidth,
-                        borderRadius: 30 + 16 * tc,
-                        willChange: "width, border-radius",
+                        position: "absolute", left: 0, top: 0,
+                        transform: `translate3d(${L.x}px, ${L.y}px, 0)`,
+                        width: L.w, height: L.h,
+                        borderRadius: 30,
+                        background: `rgba(255, 255, 255, ${0.8 * (1 - cp)})`,
+                        // backdrop-filter clippt absolute Kinder an die Border-Box → im aktiven
+                        // Zustand auf "none", damit der Inhalt nicht beschnitten wird.
+                        backdropFilter: cp > 0.5 ? "none" : `brightness(${1 + 0.3 * (1 - cp)}) blur(${13 * (1 - cp)}px)`,
+                        WebkitBackdropFilter: cp > 0.5 ? "none" : `brightness(${1 + 0.3 * (1 - cp)}) blur(${13 * (1 - cp)}px)`,
+                        boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - cp)})`,
+                        zIndex: cp > 0.5 ? 5 : 4,
                       }}
                     >
-                      {/* Icon + Title */}
-                      <div style={{ position: "relative", overflow: "visible" }}>
-                        <img
-                          src={tool.icon}
-                          alt=""
-                          aria-hidden
-                          style={{
-                            position: "absolute",
-                            width: 32,
-                            height: 32,
-                            objectFit: "contain",
-                            left: iconLeft,
-                            top: -2 + 10 * tY,
-                          }}
-                        />
-                        <span
-                          style={{
-                            display: "block",
-                            paddingTop: 34 * (1 - tY) + 8 * tY,
-                            fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                            fontWeight: 600,
-                            fontSize: titleFontSize,
-                            color: "var(--color-text-primary)",
-                            whiteSpace: "nowrap",
-                            transform: `translateX(${titleTranslateX}px)`,
-                            willChange: "transform",
-                          }}
-                        >
-                          {tool.title}
-                        </span>
-                      </div>
-
-                      {/* Card Content */}
-                      <div ref={(el) => { toolContentRefs.current[idx] = el; }} style={{ height: 0, opacity: 0 }}>
-                        <div style={{ marginTop: 5 }}>
-                          <div style={{ width: 420, display: "flex", flexDirection: "column", gap: 20 }}>
-                            <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 17, lineHeight: 1.38, color: "var(--color-text-medium)", margin: 0 }}>
-                              {tool.description}
-                            </p>
-                            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                              <Button label={tool.cta} />
-                            </div>
-                          </div>
+                      {tool.icon && (
+                        <img src={tool.icon} alt="" aria-hidden style={{ position: "absolute", left: 24 + iconLeft, top: 22 + 30 * cp, width: 34, height: 34, objectFit: "contain" }} />
+                      )}
+                      <p style={{
+                        position: "absolute", left: 24, top: 0, margin: 0,
+                        paddingTop: 56 * (1 - tY) + 60 * tY,
+                        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                        fontWeight: 600, fontSize: 13.5 + 10.5 * cp, lineHeight: "34px",
+                        color: "var(--color-text-primary)", whiteSpace: "nowrap",
+                        transform: `translateX(${titleTX}px)`,
+                      }}>
+                        {tool.title}
+                      </p>
+                      <div style={{ position: "absolute", left: 24, top: 100, width: ST_W - 48, opacity: cp, pointerEvents: cp > 0.5 ? "auto" : "none" }}>
+                        <p style={{ fontFamily: "var(--font-body, 'Open Sans', sans-serif)", fontWeight: 400, fontSize: 16, lineHeight: 1.4, color: "var(--color-text-medium)", margin: 0, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                          {tool.description}
+                        </p>
+                        <div style={{ display: "flex", justifyContent: "flex-start", marginTop: 23 }}>
+                          <Button label={tool.cta} href={tool.href} />
                         </div>
                       </div>
-
-                      {/* Lesezeichen — faded nach tc > 0.5 ein, vor tc < 0.5 aus */}
-                      <div style={{
-                          position: "absolute", top: 0, right: 36, width: 28,
-                          opacity: Math.max(0, (tc - 0.5) * 2),
-                          pointerEvents: "none",
-                        }}>
-                          <div style={{ width: 28, height: 9, background: tool.color }} />
-                          <svg width="28" height="23" viewBox="0 0 28 23" fill="none" aria-hidden style={{ display: "block", marginTop: -1 }}>
-                            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={tool.color} />
-                          </svg>
-                        </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
+              {/* Schließen-X auf Höhe der Card-Überschrift — schließt die Card → Intro (3 Buttons) */}
+              <button
+                type="button"
+                className="ftools-tool-close"
+                style={{ opacity: activeCard ? 1 : 0, pointerEvents: activeCard ? "auto" : "none" }}
+                onClick={() => collapseAndPauseRef.current()}
+                aria-label="Schließen"
+              >
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden>
+                  <circle cx="17" cy="17" r="16" stroke="var(--color-text-primary)" strokeWidth="1.3" />
+                  <path d="M11.5 11.5l11 11M22.5 11.5l-11 11" stroke="var(--color-text-primary)" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </button>
+
+              {/* Mobile: 3 Tool-Buttons vertikal gestapelt (sticky unten links).
+                  Klick aktiviert das Tool (Slider-Crossfade wie Desktop).
+                  Reihenfolge wie im Screenshot: Rechner · Checklisten · Vergleiche. */}
+              <div className="ftools-cards-mobile">
+                {[0, 2, 1].map((origIdx) => {
+                  const tool = TOOLS[origIdx];
+                  return (
+                    <button key={tool.title} type="button" className="ftools-mbtn" onClick={() => cardClickRef.current(origIdx)}>
+                      {tool.icon && <img src={tool.icon} alt="" aria-hidden />}
+                      <span>{tool.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>{/* ftools-tool-stage */}
+          </div>{/* ftools-controls */}
+
+          {/* ===== STAGE (Mitte: Visual oben · Linie · Slider unten, gleich groß) ===== */}
+          <div className="ftools-stage">
+            {/* Visual-Box */}
+            <div className="ftools-stage-box">
+              <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden className="ftools-stage-img" />
             </div>
-        </div>
+            {/* Durchgehende Linie zwischen Visual & Slider — NICHT sticky, reicht über
+                die komplette Breite inkl. der 330px-Controls (negativer margin-left). */}
+            <div ref={stageLineRef} className="ftools-stage-line" />
+            {/* Slider-Box (gleich groß) — Toolbox + 3 Tool-Bilder Crossfade, button-getrieben */}
+            <div ref={sliderBoxRef} className="ftools-stage-box ftools-lottie-slider" style={{ position: "relative" }}>
+              <img
+                src={INTRO_IMAGE}
+                alt=""
+                aria-hidden
+                className="ftools-stage-img"
+                style={{ opacity: currentSlide === 3 ? 1 : 0, transition: "opacity 0.5s ease" }}
+              />
+              {TOOLS.map((tool, i) => (
+                <img
+                  key={i}
+                  src={tool.image}
+                  alt=""
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    opacity: i === currentSlide ? 1 : 0,
+                    transition: "opacity 0.5s ease",
+                    pointerEvents: "none",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+         </div>{/* ftools-inner-row */}
+         {/* 80px Puffer unter dem Slider → Section wird 80px höher, damit die rechte Dotline
+             80px unter den Slider-Container reichen kann (Slider/Buttons/Trigger bleiben oben). */}
+         <div style={{ height: 80, flexShrink: 0 }} aria-hidden />
+        </div>{/* ftools-left-col */}
 
         {/* Right: preview_container */}
         {/* Vertical dot spacer */}
@@ -595,23 +809,48 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             pointerEvents: "none",
             zIndex: 2,
           }} />
-          {/* Arrow */}
+          {/* Pfeil Segment 1 — ruht GAP über „ANBIETER" */}
           <div style={{ position: "sticky", bottom: 23, display: "flex", justifyContent: "center", zIndex: 3 }}>
             <img src="/icons/arrow down.svg" alt="" style={{ width: 12, height: "auto" }} />
           </div>
-          {/* Filler — Höhe via JS = Abstand bis zur Oberkante des vertikalen Schriftzugs.
-              Schiebt die Ruheposition des Sticky-Pfeils nach oben, sodass die Pfeilspitze
-              exakt über dem Schriftzug endet (statt am Sektionsende). */}
+          {/* Gap-Block — reserviert die Höhe des (in der Preview-Spalte liegenden)
+              Schriftzugs zwischen Segment 1 und Segment 2. Höhe via JS. */}
+          <div ref={dotGapRef} style={{ flexShrink: 0, height: 0 }} aria-hidden />
+          {/* Segment 2 — exakt wie Segment 1 (kleiner Pfeil, Dotline, Fade, Sticky-Pfeil).
+              Startet unter „KONTAKTE", endet am Anbieter-Block-Ende. Höhe via JS. */}
+          <div ref={segment2Ref} style={{ flexShrink: 0, height: 0, display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <svg width="9" height="6" viewBox="0 0 12 8" fill="none" aria-hidden style={{ transform: "rotate(180deg)" }}>
+                <polyline points="1 7 6 1.5 11 7" stroke="#686c6a" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div style={{
+              flex: 1,
+              marginTop: 4,
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.7'/%3E%3C/svg%3E")`,
+              backgroundRepeat: "repeat-y",
+              backgroundPosition: "center top",
+              backgroundSize: "3px 9px",
+            }} />
+            <div style={{
+              position: "sticky", bottom: 0, height: "33px", marginTop: "-33px", marginBottom: "-33px",
+              background: "var(--color-bg-page)", pointerEvents: "none", zIndex: 2,
+            }} />
+            <div style={{ position: "sticky", bottom: 23, display: "flex", justifyContent: "center", zIndex: 3 }}>
+              <img src="/icons/arrow down.svg" alt="" style={{ width: 12, height: "auto" }} />
+            </div>
+          </div>
+          {/* Filler — Rest bis zur Spalten-Unterkante (hält Segment 2 am Anbieter-Ende). */}
           <div ref={dotFillerRef} style={{ flexShrink: 0, height: 0 }} aria-hidden />
         </div>
 
         {/* Right: preview_container */}
         <div className="ftools-right-preview" style={{ width: 300, flexShrink: 0, alignSelf: "stretch", display: "block" }}>
           {/* Fixbreiter, rechtsbündiger Inner-Container → Text bleibt fix beim Expanden */}
-          <div className="ftools-preview-inner" style={{ paddingTop: 72, paddingLeft: 23, paddingBottom: 16 }}>
+          <div className="ftools-preview-inner" style={{ paddingTop: 56, paddingLeft: 23, paddingBottom: 16 }}>
           <p className="ftools-preview-heading" style={{
             fontFamily: "'Merriweather', serif",
-            fontSize: "18px",
+            fontSize: "19px",
             fontWeight: 700,
             lineHeight: 1.3,
             color: "var(--color-text-primary)",
@@ -621,7 +860,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </p>
 
           <div className="ftools-preview-list" style={{ display: "flex", flexDirection: "column", gap: 17, paddingTop: 3 }}>
-            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 5).map((post, i) => {
+            {(latestPosts.length > 0 ? latestPosts : posts).slice(0, 3).map((post, i) => {
               const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
@@ -732,8 +971,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             })}
           </div>
 
+          {/* CTA: Ratgeber durchsuchen — wie der Anbieter-Button (hugt Inhalt, Pfeil nach unten) */}
+          <div style={{ marginTop: 24, display: "flex" }}>
+            <Button label="Alle Ratgeber" href="/suche" icon="arrow-down" />
+          </div>
+
+          {/* hellgraue Trennlinie nach „Ratgeber durchsuchen" */}
+          <div style={{ height: 1, background: "rgba(0, 0, 0, 0.10)", marginTop: 40 }} aria-hidden />
+
           {/* Anbieter-Kontakte-Block — unter den neuesten Beiträgen */}
-          <div className="ftools-anbieter">
+          <div ref={anbieterRef} className="ftools-anbieter" style={{ marginTop: 44 }}>
             {/* Vertikaler Schriftzug — Buchstaben staggern beim Hover-Expand von links ein */}
             <div ref={anbieterVertRef} className="ftools-anbieter-vert" aria-hidden="true">
               <span className="ftools-anbieter-vert-word">
@@ -741,7 +988,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   <span key={i}>{ch}</span>
                 ))}
               </span>
-              <span className="ftools-anbieter-vert-spark"><Spark /></span>
               <span className="ftools-anbieter-vert-word">
                 {"KONTAKTE".split("").map((ch, i) => (
                   <span key={i}>{ch}</span>
@@ -750,7 +996,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             </div>
             <div className="ftools-anbieter-main">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/anbieter_Banner.png" alt="" className="ftools-anbieter-img" loading="lazy" />
+              <img src="/assets/kontaktAnbieter.png" alt="" className="ftools-anbieter-img" loading="lazy" />
               <p className="ftools-anbieter-text">
                 Wir haben die aktuellen Kontakte von über 100 deutschen Topversicherungen und Finanzanbietern für Sie aufgelistet.
               </p>
@@ -759,6 +1005,48 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           </div>
           </div>
         </div>
+      </div>
+
+      {/* ===== MOBILE-Layout (≤767) — eigener Aufbau; Desktop-Row darüber wird ≤767 ausgeblendet ===== */}
+      <div className="ftools-mobile" ref={mobileWrapRef}>
+        {/* 1. Landing-Visual (Bird), full width */}
+        <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden className="ftools-m-bird" />
+
+        {/* 2. Überschriften */}
+        <p className="ftools-m-finanztools">Die Finanztools</p>
+        <h2 className="ftools-m-allein">Alles in eigener Hand</h2>
+
+        {/* 3. Beschreibung 1 */}
+        <p className="ftools-m-desc">Behalten Sie die Kontrolle über Ihre Finanzen und Versicherungen.</p>
+
+        {/* 4. Toolbox / Tool-Slider (Crossfade wie Desktop) */}
+        <div className="ftools-m-slider">
+          <img src={INTRO_IMAGE} alt="" aria-hidden style={{ opacity: currentSlide === 3 ? 1 : 0 }} />
+          {TOOLS.map((tool, i) => (
+            <img key={i} src={tool.image} alt="" aria-hidden style={{ opacity: i === currentSlide ? 1 : 0 }} />
+          ))}
+        </div>
+
+        {/* 5. Progress-/Loader-Linie an der Stelle der grauen Linie über den Buttons (wie Desktop) */}
+        <div className="ftools-m-loader">
+          <div className="ftools-m-loader-track" />
+          <div className="ftools-m-loader-fill" style={{ width: `${Math.round(introProgress * 100)}%` }} />
+        </div>
+
+        {/* 7. Buttons sticky unten links (Reihenfolge Rechner · Checklisten · Vergleiche) */}
+        <div className="ftools-m-btns">
+          {[0, 2, 1].map((origIdx) => {
+            const tool = TOOLS[origIdx];
+            return (
+              <button key={tool.title} type="button" className="ftools-mbtn" onClick={() => cardClickRef.current(origIdx)}>
+                {tool.icon && <img src={tool.icon} alt="" aria-hidden />}
+                <span>{tool.title}</span>
+              </button>
+            );
+          })}
+        </div>
+        {/* Beschreibung 2 — scrollt mit (nicht sticky), unten rechts neben den Buttons */}
+        <p className="ftools-m-desc2">Von Brutto-Netto-Rechner bis zum komplexen Versicherungsvergleich. Wir haben das passende Tool für Sie</p>
       </div>
     </section>
   );

@@ -10,8 +10,8 @@ interface ButtonProps {
   download?: boolean | string;
   target?: string;
   rel?: string;
-  /** Icon im grünen Kreis: Pfeil (default) oder Download. */
-  icon?: "arrow" | "download";
+  /** Icon im grünen Kreis: Pfeil rechts (default), nach unten, oder Download. */
+  icon?: "arrow" | "arrow-down" | "download";
 }
 
 export default function Button({
@@ -90,9 +90,9 @@ export default function Button({
             height="15"
             viewBox="0 0 11 15"
             fill="none"
-            style={{ position: "absolute", top: "50%", left: "50%", marginLeft: "-4.5px", marginTop: "-7.5px" }}
+            style={{ position: "absolute", top: "50%", left: "50%", marginLeft: icon === "arrow-down" ? "-5.5px" : "-4.5px", marginTop: "-7.5px", overflow: "visible" }}
           >
-            <g style={{ transformOrigin: "5.5px 7.5px" }}>
+            <g style={{ transformOrigin: "5.5px 7.5px", transform: icon === "arrow-down" ? "rotate(90deg)" : undefined }}>
               <path
                 d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
                 stroke="white"
