@@ -6,6 +6,7 @@ import ArticleListItem from '@/components/ui/ArticleListItem';
 import SparkDivider from '@/components/ui/SparkDivider';
 import ListHoverBox from '@/components/ui/ListHoverBox';
 import { useListHoverBox } from '@/lib/hooks/useListHoverBox';
+import { buildPostUrl } from '@/lib/urls';
 
 interface ArticleListProps {
   posts: Post[];
@@ -40,9 +41,11 @@ export default function ArticleList({ posts, mainCategorySlug }: ArticleListProp
     >
       {posts.map((post, index) => {
         const category = post.categories?.nodes?.[0];
+        // Subkategorie-Seite: bewährter Pfad mit dem Seiten-Main. Sonst (z. B. Suche,
+        // gemischte Kategorien): robuster buildPostUrl (Main+Sub aus den Post-Kategorien).
         const postLink = mainCategorySlug && category
           ? `/${mainCategorySlug}/${category.slug}/${post.slug}`
-          : `/${category?.slug || 'beitraege'}/${post.slug}`;
+          : buildPostUrl(post);
 
         return (
           <Fragment key={post.id}>

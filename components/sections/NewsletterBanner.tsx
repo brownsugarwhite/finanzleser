@@ -3,6 +3,7 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import Button from "@/components/ui/Button";
 import RechnerCheckbox from "@/components/rechner/ui/RechnerCheckbox";
+import FieldOutline from "@/components/ui/FieldOutline";
 
 const PILL_BG = "var(--color-pill-bg)";
 
@@ -124,7 +125,7 @@ export default function NewsletterBanner() {
           {/* E-Mail-Pill: nur Eingabe, „E-Mail-Adresse" als Placeholder */}
           <div
             ref={pillRef}
-            className="nl-pill"
+            className="nl-pill field-wrap field-wrap--dark"
             style={{
               display: "flex",
               alignItems: "center",
@@ -136,7 +137,6 @@ export default function NewsletterBanner() {
               borderRadius: 19,
               padding: "6px 20px",
               boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
-              overflow: "hidden",
             }}
           >
             <input
@@ -159,6 +159,7 @@ export default function NewsletterBanner() {
                 padding: 0,
               }}
             />
+            <FieldOutline radius={19} />
           </div>
 
           {/* Einwilligung — gleiche Breite wie das Eingabefeld, Inhalt zentriert. */}

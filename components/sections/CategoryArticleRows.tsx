@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
 import CategoryStackedCard from '@/components/ui/CategoryStackedCard';
@@ -28,6 +28,7 @@ interface CategoryArticleRowsProps {
  */
 export default function CategoryArticleRows({ posts, fallbackMain, rows }: CategoryArticleRowsProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 1023px)');
     setIsMobile(mql.matches);
@@ -35,8 +36,34 @@ export default function CategoryArticleRows({ posts, fallbackMain, rows }: Categ
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
+  useLayoutEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsNarrow(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsNarrow(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   const hover = useSliderHoverBox({ cardSelector: '[data-card]', enabled: !isMobile });
+
+  // Mobile: alle Cards untereinander, gleiche Größe, getrennt durch HORIZONTALE
+  // Spark-Linien (keine vertikalen Divider, kein Hover-Box).
+  if (isNarrow) {
+    return (
+      <div className="mcat-rows mcat-rows--stacked">
+        {posts.map((post, i) => (
+          <Fragment key={post.id}>
+            {i > 0 && (
+              <div className="finanztool-row-divider"><SparkDivider orientation="horizontal" /></div>
+            )}
+            <div className="mcat-cell" style={{ display: 'flex' }}>
+              <CategoryStackedCard post={post} href={hrefFor(post, fallbackMain)} />
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    );
+  }
 
   // Flache globale Indizes über alle Reihen (für Spark-/Box-Registrierung).
   let start = 0;

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllChecklisten } from "@/lib/wordpress";
+import { cleanDescription } from "@/lib/content-utils";
 
 export default async function ChecklistenPage() {
   const checklisten = await getAllChecklisten();
@@ -25,7 +26,7 @@ export default async function ChecklistenPage() {
           {checklisten.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {checklisten.map((c) => {
-                const beschreibung = c.checklisten?.checklistenBeschreibung || "";
+                const beschreibung = cleanDescription(c.checklisten?.checklistenBeschreibung);
                 return (
                   <Link
                     key={c.id}

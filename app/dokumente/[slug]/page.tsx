@@ -74,58 +74,62 @@ export default async function DokumentDetailPage({ params }: Props) {
         <div style={{ maxWidth: 1200 }} className="mx-auto px-6 pb-12">
           <Breadcrumb items={breadcrumbItems} />
 
-          {/* Eyebrow */}
-          <Link
-            href="/dokumente"
-            style={{
-              display: "inline-block",
-              marginBottom: 8,
-              color: "var(--color-tool-dokumente)",
-              fontFamily: "Merriweather, serif",
-              fontSize: "23px",
-              fontStyle: "italic",
-              transition: "opacity 0.2s",
-            }}
-          >
-            {kategorie ? `Dokumente · ${kategorie.name}` : "Dokumente"}
-          </Link>
-
-          {/* Titel */}
-          <h1
-            style={{
-              fontSize: "42px",
-              lineHeight: "1.3em",
-              fontWeight: 700,
-              marginBottom: 16,
-            }}
-          >
-            {dokument.title}
-          </h1>
-
-          {/* Beschreibung */}
-          {beschreibung && (
-            <p
-              className="mb-8"
-              style={{
-                fontSize: "18px",
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-text-primary)",
-                lineHeight: 1.6,
-              }}
-            >
-              {beschreibung}
-            </p>
-          )}
-
-          {/* 2-Column: Visual links + PDF-Vorschau rechts */}
+          {/* 2-Column (50/50): Dokumentvorschau im Rahmen mit Eck-Winkeln links,
+              Heading + Beschreibung + Download rechts (oben, linksbündig). */}
           <div className="dokument-detail-grid">
-            <div className="dokument-detail-visual">
-              <div className="dokument-detail-visual-inner" style={{ background: "var(--color-placeholder-bg)" }} />
+            <div className="dokument-detail-preview">
+              <div className="dok-card-frame">
+                <div className="dok-card-sheet">
+                  <DokumentPreview slug={slug} pdfUrl={pdfUrl} title={dokument.title} />
+                </div>
+              </div>
             </div>
 
-            <div className="dokument-detail-content">
-              <DokumentPreview slug={slug} pdfUrl={pdfUrl} title={dokument.title} />
-              <div style={{ marginTop: 20 }}>
+            <div className="dokument-detail-info">
+              {/* Eyebrow */}
+              <Link
+                href="/dokumente"
+                style={{
+                  display: "inline-block",
+                  marginBottom: 8,
+                  color: "var(--color-tool-dokumente)",
+                  fontFamily: "Merriweather, serif",
+                  fontSize: "23px",
+                  fontStyle: "italic",
+                  transition: "opacity 0.2s",
+                }}
+              >
+                {kategorie ? `Dokumente · ${kategorie.name}` : "Dokumente"}
+              </Link>
+
+              {/* Titel */}
+              <h1
+                style={{
+                  fontSize: "42px",
+                  lineHeight: "1.3em",
+                  fontWeight: 700,
+                  marginBottom: 16,
+                }}
+              >
+                {dokument.title}
+              </h1>
+
+              {/* Beschreibung */}
+              {beschreibung && (
+                <p
+                  style={{
+                    fontSize: "18px",
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-text-primary)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {beschreibung}
+                </p>
+              )}
+
+              <div className="dokument-detail-download">
                 <DokumentDownload
                   pdfUrl={pdfUrl}
                   fileName={fileName}

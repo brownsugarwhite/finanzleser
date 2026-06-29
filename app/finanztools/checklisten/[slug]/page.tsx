@@ -9,6 +9,7 @@ import { parsePDF } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
 import type { CheckboxPosition } from "@/lib/checklisteParser";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { cleanDescription } from "@/lib/content-utils";
 
 export const revalidate = 3600;
 
@@ -84,8 +85,9 @@ export default async function ChecklisteDetailPage({ params }: Props) {
     }
   }
 
-  const beschreibung =
-    checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung || "";
+  const beschreibung = cleanDescription(
+    checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
+  );
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -104,7 +106,8 @@ export default async function ChecklisteDetailPage({ params }: Props) {
       <main className="min-h-screen bg-white">
         <PageAds
           ads={settings.ads.checkliste}
-          contentWidth={850}
+          variant="tool"
+          contentWidth={728}
           contentClassName="pb-12"
           heading={
             <>

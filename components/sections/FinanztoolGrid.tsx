@@ -35,7 +35,9 @@ const TYPE_CFG = {
 } as const;
 
 function strip(html?: string): string {
-  return decodeHtmlEntities((html || "").replace(/<[^>]*>/g, "")).trim();
+  // ZUERST dekodieren (WP liefert teils `&lt;p&gt;…`), DANN Tags entfernen — sonst
+  // bleibt ein literales `<p>` stehen.
+  return decodeHtmlEntities(html || "").replace(/<[^>]*>/g, "").trim();
 }
 /** Nur der erste Satz (bis zum ersten .!? bzw. Ende). */
 function firstSentence(s: string): string {

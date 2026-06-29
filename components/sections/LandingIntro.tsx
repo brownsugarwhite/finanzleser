@@ -1,75 +1,31 @@
 "use client";
 
-import { useRef, useLayoutEffect, useEffect, useState } from "react";
-import { useTransitionRouter } from "@/lib/usePageTransition";
+import { useRef, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import gsap from "@/lib/gsapConfig";
 import TopNav from "@/components/layout/TopNav";
 import PoweredByLine from "@/components/ui/PoweredByLine";
 import QuickLinksRow from "@/components/ui/QuickLinksRow";
-import { useSearchSuggestions } from "@/lib/hooks/useSearchSuggestions";
-
-function SearchIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size + 2} viewBox="0 0 21 22" fill="none" style={{ flexShrink: 0 }}>
-      <path d="M12.04 16.7812C16.4362 16.7812 20 13.2484 20 8.89059C20 4.53274 16.4362 1 12.04 1C7.64375 1 4.07991 4.53274 4.07991 8.89059C4.07991 13.2484 7.64375 16.7812 12.04 16.7812Z" stroke="currentColor" strokeWidth="2" strokeMiterlimit="10"/>
-      <path d="M0.591998 17.6095C-0.192466 18.3872 -0.198015 19.6535 0.579603 20.4379C1.35722 21.2224 2.62354 21.228 3.408 20.4503L2 19.0299L0.591998 17.6095ZM6.27569 14.7916L4.86769 13.3712L0.591998 17.6095L2 19.0299L3.408 20.4503L7.68369 16.212L6.27569 14.7916Z" fill="currentColor"/>
-    </svg>
-  );
-}
-
-const PILL_BG = "var(--color-pill-bg)";
-const CONTENT_GAP = 20;
+import SearchPill from "@/components/sections/SearchPill";
 
 export default function LandingIntro() {
-  const [searchInput, setSearchInput] = useState("");
-  const { navigate } = useTransitionRouter();
-
   const heroRef = useRef<HTMLElement>(null);
-  const searchPillRef = useRef<HTMLFormElement>(null);
-  const searchContentRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const searchBtnRef = useRef<HTMLButtonElement>(null);
   const outerRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const {
-    matches,
-    setIsOpen,
-    highlight,
-    setHighlight,
-    showDropdown,
-    listWrapRef,
-  } = useSearchSuggestions(searchInput, containerRef);
   const isFirstRender = useRef(true);
   const bubbleRef = useRef<HTMLDivElement>(null);
   const mobileBubbleRef = useRef<HTMLDivElement>(null);
   const leoWrapRef = useRef<HTMLDivElement>(null);
 
-  const [searchBtnWidth, setSearchBtnWidth] = useState(0);
-  const [searchContentWidth, setSearchContentWidth] = useState(0);
-
   useLayoutEffect(() => {
     if (!isFirstRender.current) return;
     isFirstRender.current = false;
 
-    // Pull hero to viewport top
+    // Hero an den Viewport-Top ziehen.
     if (heroRef.current) {
       const offset = heroRef.current.offsetTop;
       heroRef.current.style.marginTop = -offset + "px";
       heroRef.current.style.paddingTop = offset + "px";
     }
-
-    const searchPill = searchPillRef.current!;
-    const containerW = containerRef.current!.offsetWidth;
-    const searchBtnW = searchBtnRef.current!.offsetWidth;
-    const searchContentW = containerW - 20 - 6 - searchBtnW - CONTENT_GAP;
-
-    searchPill.style.width = "100%";
-    gsap.set(searchContentRef.current!, { opacity: 1 });
-
-    setSearchBtnWidth(searchBtnW);
-    setSearchContentWidth(searchContentW);
   }, []);
 
   // Expand search pill when Leo undocks
@@ -153,90 +109,6 @@ export default function LandingIntro() {
     };
   }, []);
 
-  const submitSearch = (q: string) => {
-    const trimmed = q.trim();
-    if (!trimmed) return;
-    setIsOpen(false);
-    navigate(`/suche?q=${encodeURIComponent(trimmed)}`);
-    setSearchInput("");
-  };
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (highlight >= 0 && matches[highlight]) {
-      submitSearch(matches[highlight].title);
-      return;
-    }
-    submitSearch(searchInput);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!showDropdown) return;
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setHighlight((h) => Math.min(h + 1, matches.length - 1));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setHighlight((h) => Math.max(h - 1, -1));
-    } else if (e.key === "Escape") {
-      setIsOpen(false);
-    }
-  };
-
-  const pillBase: React.CSSProperties = {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    backgroundColor: PILL_BG,
-    backdropFilter: "blur(16px) brightness(1.15)",
-    WebkitBackdropFilter: "blur(16px) brightness(1.15)",
-    borderRadius: "19px",
-    padding: "6px 6px 6px 20px",
-    boxShadow: "0 3px 23px rgba(0, 0, 0, 0.02)",
-    overflow: "hidden",
-    minWidth: 0,
-    boxSizing: "border-box",
-  };
-
-  const contentBase: React.CSSProperties = {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-    whiteSpace: "nowrap",
-  };
-
-  const inputStyle: React.CSSProperties = {
-    flex: 1,
-    border: "none",
-    background: "transparent",
-    fontFamily: "var(--font-body)",
-    fontSize: "17px",
-    color: "var(--color-text-primary)",
-    outline: "none",
-    lineHeight: "40px",
-    padding: 0,
-    minWidth: 0,
-  };
-
-  const btnStyle: React.CSSProperties = {
-    borderRadius: "15px",
-    padding: "0 20px",
-    border: "none",
-    cursor: "pointer",
-    fontFamily: "var(--font-body)",
-    fontSize: "16px",
-    color: "#ffffff",
-    lineHeight: "40px",
-    whiteSpace: "nowrap",
-    flexShrink: 0,
-    position: "relative",
-    zIndex: 2,
-  };
-
   return (
     <section
       ref={heroRef}
@@ -258,7 +130,7 @@ export default function LandingIntro() {
           document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
       >
-        <img src="/icons/iconRechner.svg" alt="" aria-hidden="true" />
+        <img src="/icons/iconNewsletter.svg" alt="" aria-hidden="true" />
         <span>Newsletter</span>
       </a>
 
@@ -297,96 +169,10 @@ export default function LandingIntro() {
           className="landing-pillbar"
           style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "center", width: "100%", maxWidth: "680px", margin: "0 auto", position: "relative", zIndex: 60 }}
         >
-          <div
-            ref={containerRef}
-            style={{
-              display: "flex",
-              flex: 1,
-              minWidth: 0,
-              position: "relative",
-            }}
-          >
-            <form
-              ref={searchPillRef}
-              onSubmit={handleSearch}
-              style={{
-                ...pillBase,
-                cursor: "text",
-                width: "100%",
-                borderRadius: showDropdown ? "19px 19px 0 0" : "19px",
-                transition: "border-radius 0.18s ease",
-              }}
-            >
-              <div
-                ref={searchContentRef}
-                style={{
-                  ...contentBase,
-                  left: "20px",
-                  right: searchBtnWidth + 6 + CONTENT_GAP + "px",
-                  width: searchContentWidth + "px",
-                }}
-              >
-                <SearchIcon />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchInput}
-                  onChange={(e) => {
-                    setSearchInput(e.target.value);
-                    setIsOpen(true);
-                  }}
-                  onFocus={() => setIsOpen(true)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Suchbegiff eingeben"
-                  tabIndex={0}
-                  className="search-input"
-                  autoComplete="off"
-                  spellCheck={false}
-                  style={inputStyle}
-                />
-              </div>
-              <button
-                ref={searchBtnRef}
-                type="submit"
-                style={{ ...btnStyle, backgroundColor: "var(--color-brand)" }}
-              >
-                Suchen
-              </button>
-            </form>
-
-            {/* Suggestions dropdown — sits flush against the pill bottom */}
-            <div
-              ref={listWrapRef}
-              aria-hidden={!showDropdown}
-              className={`landing-suggest ${showDropdown ? "is-open" : ""}`}
-            >
-              <ul className="landing-suggest__list" role="listbox">
-                {matches.map((s, i) => {
-                  const [head, tail] = s.parts;
-                  return (
-                    <li
-                      key={`${s.url}-${i}`}
-                      role="option"
-                      aria-selected={highlight === i}
-                      className={`landing-suggest__option ${highlight === i ? "is-active" : ""}`}
-                      onMouseEnter={() => setHighlight(i)}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        submitSearch(s.title);
-                      }}
-                    >
-                      <span className="landing-suggest__icon" aria-hidden>
-                        <SearchIcon size={14} />
-                      </span>
-                      <span className="landing-suggest__text">
-                        <span>{head}</span>
-                        <strong>{tail}</strong>
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+          {/* Geteiltes Such-Eingabefeld (identisch zur Suchseite). Wächst via flex:1,
+              wenn Leo beim ersten Scroll abdockt (collapseSlot schrumpft den Slot). */}
+          <div style={{ display: "flex", flex: 1, minWidth: 0 }}>
+            <SearchPill />
           </div>
 
           {/* Leo Dock Slot + Speech Bubble (Desktop only — auf Mobile lebt Leo
@@ -493,62 +279,6 @@ export default function LandingIntro() {
       </div>
 
       <style>{`
-        .landing-suggest {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          z-index: 5;
-          background-color: var(--color-pill-bg);
-          backdrop-filter: blur(16px) brightness(1.15);
-          -webkit-backdrop-filter: blur(16px) brightness(1.15);
-          border-radius: 0 0 19px 19px;
-          box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02);
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          transition: max-height 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease;
-        }
-        .landing-suggest.is-open { opacity: 1; }
-        .landing-suggest__list {
-          list-style: none;
-          margin: 0;
-          padding: 8px 0 13px;
-        }
-        .landing-suggest.is-open .landing-suggest__list {
-          border-top: 1px solid rgba(0, 0, 0, 0.06);
-        }
-        .landing-suggest__option {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          padding: 8px 20px;
-          cursor: pointer;
-          font-family: var(--font-body);
-          font-size: 16px;
-          color: var(--color-text-primary);
-          line-height: 1.4;
-        }
-        .landing-suggest__option.is-active,
-        .landing-suggest__option:hover {
-          background-color: rgba(0, 0, 0, 0.04);
-        }
-        .landing-suggest__icon {
-          color: var(--color-text-medium);
-          display: flex;
-          align-items: center;
-        }
-        .landing-suggest__text {
-          display: inline-flex;
-          gap: 0;
-          min-width: 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        .landing-suggest__text > span { font-weight: 400; }
-        .landing-suggest__text > strong { font-weight: 700; }
-
         /* ── ≤1024px: Dotline raus, Pillbar (Search + Leo-Wrap)
               komplett aus, Logo rutscht 36px nach unten. Leo lebt im globalen Slot. ── */
         @media (max-width: 1024px) {

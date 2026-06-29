@@ -8,6 +8,7 @@ import { getAllVergleiche, getSiteSettings } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { buildMetadata, SITE_NAME, stripHtml } from "@/lib/seo";
 import { decodeHtmlEntities } from "@/lib/html-utils";
+import { cleanDescription } from "@/lib/content-utils";
 
 export const revalidate = 3600;
 
@@ -76,7 +77,8 @@ export default async function VergleichDetailPage({ params }: Props) {
       <main className="min-h-screen bg-white">
         <PageAds
           ads={settings.ads.vergleich}
-          contentWidth={850}
+          variant="tool"
+          contentWidth={1200}
           contentClassName="pb-12"
           heading={
             <>
@@ -107,7 +109,7 @@ export default async function VergleichDetailPage({ params }: Props) {
                   fontWeight: "400",
                 }}
               >
-                {meta.desc}
+                {cleanDescription(meta.desc)}
               </p>
             </>
           }

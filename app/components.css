@@ -1261,67 +1261,20 @@ h1.category-title {
   margin-bottom: 0;
 }
 
-/* Lazy-Ladebox: feste 180px, animiert auf feste 600px (Inhalt scrollt innen) */
+/* Lazy-Ladebox: startet als Platzhalter, wächst beim Reveal auf die VOLLE
+   Vergleichshöhe (kein interner Scroll mehr → keine eigene Scrollbar). */
 .vergleich-stage {
   position: relative;
   width: 100%;
-  height: 180px;
-  overflow: hidden;
+  overflow: hidden; /* nur während des Ladens; nach Reveal per JS auf visible */
 }
-/* Inhalt füllt die Stage (600px), höherer Inhalt scrollt innerhalb. Startet versteckt. */
+/* Inhalt: während des Ladens absolut (versteckt unter der Ladebox); nach Reveal per
+   JS auf position:static → trägt die Stage-Höhe in voller Größe (kein Scroll). */
 .vergleich-content {
   position: absolute;
   inset: 0;
   width: 100%;
-  overflow-y: auto;
   opacity: 0;
-  scrollbar-width: none; /* native aus → eigene Overlay-Scrollbar */
-}
-.vergleich-content::-webkit-scrollbar { display: none; }
-
-/* Eigene Overlay-Scrollbar: dotted line (wie Sidebar-TOC) + feste 8x36 Pill. */
-.vergleich-scrollbar {
-  position: absolute;
-  top: 8px;
-  bottom: 8px;
-  right: 4px;
-  width: 8px;
-  z-index: 3;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23686c6a' opacity='0.75'/%3E%3C/svg%3E");
-  background-repeat: repeat-y;
-  background-position: center top;
-  background-size: 3px 9px;
-}
-.vergleich-scrollbar-thumb {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 8px;
-  height: 36px;
-  background: var(--color-text-medium);
-  border-radius: 4px;
-  cursor: grab;
-  touch-action: none;
-}
-.vergleich-scrollbar:hover {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='9'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%23D3005E' opacity='0.95'/%3E%3C/svg%3E");
-}
-.vergleich-scrollbar:hover .vergleich-scrollbar-thumb,
-.vergleich-scrollbar-thumb:active {
-  background: var(--color-brand-secondary);
-  cursor: grabbing;
-}
-/* 70px-Gradient am unteren Rand der Box → Vergleich „fadet von unten ein". */
-.vergleich-stage::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 70px;
-  background: linear-gradient(to top, var(--color-bg-page) 0%, rgba(250, 249, 246, 0) 100%);
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* Diagonale, breite Lauf-Streifen + kontrastdynamischer Text — Overlay über dem Inhalt */
@@ -1774,18 +1727,22 @@ a.megamenu-link:hover {
 .dokument-detail-grid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
+  width: 100%;
+  margin-top: 8px;
+}
+.dokument-detail-preview {
   width: 100%;
 }
-.dokument-detail-visual {
-  display: none;
-}
-.dokument-detail-visual-inner {
-  position: relative;
+.dokument-detail-info {
   width: 100%;
-  flex: 1;
-  min-height: 400px;
-  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.dokument-detail-download {
+  display: flex;
+  margin-top: 28px;
 }
 
 /* Blend-Layer: färbt Weiß in Body-Hintergrundfarbe (analog .vergleich-iframe-container) */
@@ -1799,25 +1756,22 @@ a.megamenu-link:hover {
   opacity: 1;
   z-index: 1;
 }
-.dokument-detail-content {
-  width: 100%;
-  min-width: 0;
-}
 @media (min-width: 1024px) {
   .dokument-detail-grid {
     flex-direction: row;
-    gap: 48px;
-    align-items: stretch;
+    gap: 56px;
+    align-items: flex-start;
   }
-  .dokument-detail-visual {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 40%;
+  .dokument-detail-info {
+    width: 50%;
+    text-align: left;
+  }
+  .dokument-detail-preview {
+    width: 50%;
     flex-shrink: 0;
   }
-  .dokument-detail-content {
-    width: 60%;
+  .dokument-detail-download {
+    justify-content: flex-start;
   }
 }
 
@@ -2986,9 +2940,12 @@ h2.faq-heading {
   color: var(--color-text-dark, #111);
 }
 
-.anbieter-content h3::first-letter {
-  font-size: 1.4em;
-  line-height: 1;
+.anbieter-content h3 .anbieter-h3-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: currentColor;
+  display: block;
 }
 
 .anbieter-content .wp-block-table {
@@ -3400,6 +3357,76 @@ h2.faq-heading {
 .page-ad-heading--wide {
   max-width: calc(var(--page-content-w, 850px) + 2 * (var(--ad-rail-gap) + var(--ad-rail-w)));
 }
+/* ── Sitewide Feld-States: animierte Outline (Hover zeichnet im Uhrzeigersinn ein,
+      Focus färbt) für alle Eingabefelder/Dropdowns. ── */
+.field-wrap {
+  position: relative;
+}
+.field-outline {
+  position: absolute;          /* Insets via inline (-gap rundum) */
+  overflow: visible;
+  pointer-events: none;
+  z-index: 0;                  /* unter dem Feld/Dropdown → Suggest-Dropdown liegt drüber */
+}
+.field-outline path {
+  fill: none;
+  stroke: var(--field-outline-color, var(--color-text-primary));
+  stroke-width: 1;             /* wie die Button-Outline (1px) */
+  stroke-linecap: round;       /* schließt die Naht am Start/Ende (keine 1px-Lücke) */
+  stroke-linejoin: round;
+  /* Dash wird per GSAP (FieldOutline.tsx) getrieben; hier nur der versteckte Startwert. */
+  stroke-dasharray: 0 100;
+  opacity: 0.9;
+  transition: stroke 0.2s ease;
+}
+/* Focus färbt die Outline um (Rechner secondary via --field-focus-color). */
+.field-wrap:focus-within > .field-outline path {
+  stroke: var(--field-focus-color, var(--color-brand));
+}
+
+/* Such-/Newsletter-Pills: gleiches Button-Konstrukt bei Focus (2px Ring am Feld +
+   abgesetzte Outline), aber alles in dark/text — Outline-Focus-Farbe bleibt dark. */
+.field-wrap--dark { --field-focus-color: var(--color-text-primary); }
+.field-wrap--dark.nl-pill,
+.field-wrap--dark > .search-pill {
+  transition: box-shadow 0.2s ease;
+}
+.field-wrap--dark.nl-pill:focus-within,
+.field-wrap--dark:focus-within > .search-pill {
+  box-shadow: 0 0 0 2px var(--color-text-primary) !important;
+}
+/* Newsletter-Eingabefeld geht bei Focus transparent (brightness 1, Blur bleibt). */
+.nl-pill.field-wrap--dark:focus-within {
+  background: transparent !important;
+  backdrop-filter: blur(16px) brightness(1) !important;
+  -webkit-backdrop-filter: blur(16px) brightness(1) !important;
+}
+
+/* .page-ad-frame (Default, Kategorie-Seiten): transparenter Wrapper, kein Cap. */
+/* Tool-Seiten (Rechner/Vergleich/Checkliste): Gesamtbreite auf 1200 deckeln und
+   zentrieren → Heading + Rails passen IMMER in 1200 (kein Überlappen/Abschneiden). */
+.page-ad-frame--tool {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+/* Heading spannt die volle Frame-Breite (= Mid + Rails) statt Viewport-Breite. */
+.page-ad-frame--tool .page-ad-heading--wide {
+  max-width: 100%;
+}
+/* Rails sitzen in den Seitenbändern des Frames (zwischen Frame-Rand und Mid-Spalte),
+   Box füllt das Band. Werden per JS ausgeblendet, wenn das Band zu schmal ist. */
+.page-ad-frame--tool .page-ad-rail {
+  left: auto;
+  right: auto;
+  width: calc((100% - var(--page-content-w, 728px)) / 2 - var(--ad-rail-gap, 24px));
+}
+.page-ad-frame--tool .page-ad-rail-left { left: 0; }
+.page-ad-frame--tool .page-ad-rail-right { right: 0; }
+.page-ad-frame--tool .page-ad-rail-box { width: 100%; }
+/* Tool-Rails: Sichtbarkeit steuert das JS (Band-Breite), nicht die globale 1440-Regel. */
+@media (max-width: 1440px) {
+  .page-ad-frame--tool .page-ad-rail { display: block !important; }
+}
 .page-ad-region {
   position: relative;
 }
@@ -3571,14 +3598,41 @@ h2.faq-heading {
   justify-content: flex-start;
   margin-top: 36px;
 }
-/* Mobile: 1-spaltig — vertikale Divider weg, Items unter-/nacheinander. */
-@media (max-width: 640px) {
-  .finanztool-row {
-    flex-direction: column;
-    align-items: stretch;
+/* Mobile (≤767): Karten 1-spaltig (JS rendert .finanztool-rows--stacked mit
+   HORIZONTALEN Spark-Linien) + kleinere, umbrechende Section-Headings. */
+@media (max-width: 767px) {
+  .finanztool-rows--stacked > .finanztool-cell { width: 100%; }
+  .mcat-rows--stacked { display: flex; flex-direction: column; }
+  .mcat-rows--stacked > .mcat-cell { width: 100%; }
+  /* Badge oben, Titel darunter, sobald es nicht in eine Zeile passt (flex-wrap). */
+  .finanztool-section-head {
+    align-items: flex-start;
   }
-  .finanztool-row > div[aria-hidden] {
-    display: none;
+  .finanztool-section-sub {
+    font-size: clamp(30px, 9vw, 44px);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .finanztool-heading-badge {
+    font-size: clamp(30px, 9vw, 44px);
+    padding: 6px 10px;
+  }
+}
+
+/* ArticleListItem (Subkategorie-/Such-Karten): auf Mobile von Row zu Column —
+   Visual oben, Inhalt darunter. */
+@media (max-width: 767px) {
+  .article-list-item {
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: stretch !important;
+  }
+  .article-list-item > div:first-child {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 180px !important;
   }
 }
 

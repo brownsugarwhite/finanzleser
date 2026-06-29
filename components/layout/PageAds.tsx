@@ -8,35 +8,29 @@ import type { PageAdsSettings } from "@/lib/types";
  * Generisches Werbe-Gerüst für Nicht-Artikel-Seiten (Tools, Anbieter, Listen).
  * Legt einen optionalen Top-Banner zwischen Heading und Content, flankiert die
  * zentrierte Content-Spalte (Breite `contentWidth`) mit sticky Rails und richtet
- * Heading + Content über `.page-ad-col` exakt aneinander aus. Alles server-
- * renderbar; sichtbar nur, wenn die jeweiligen `ads`-Schalter true sind.
+ * Heading + Content über `.page-ad-col` exakt aneinander aus.
  *
- * Pattern je Seite:
- *   <PageAds ads={settings.ads.<typ>} contentWidth={850} heading={<Heading/>}>
- *     {tool oder liste}
- *   </PageAds>
- *
- * WICHTIG: PageAds spannt volle Breite (Rails sitzen in den Viewport-Rändern) —
- * NICHT in einen schmalen, zentrierten Wrapper packen.
+ * variant="tool": Tool-Seiten (Rechner/Vergleich/Checkliste). Der Frame ist auf
+ * 1200px gedeckelt, die Rails sitzen in den Seitenbändern INNERHALB des Frames
+ * (nie über den Bildrand hinaus), werden nur bei genug Platz gezeigt und enden 40px
+ * vor der Newsletter-Section. Ohne variant bleibt das bisherige Verhalten (Kategorie-
+ * Seiten mit eigenen CSS-Overrides).
  */
 interface PageAdsProps {
   ads?: PageAdsSettings;
-  /** Breite der zentrierten Content-Spalte in px (z. B. 850 Tools, 1040 Listen). */
+  /** Breite der zentrierten Content-Spalte in px (z. B. 728 Tools, 1040 Listen). */
   contentWidth: number;
-  /** Optionaler Kopfbereich (Breadcrumb/Kategorie/H1/Beschreibung) — fluchtet mit dem Content. */
   heading?: ReactNode;
   children: ReactNode;
-  /** Zusätzliche Klassen für die Content-Spalte. */
   contentClassName?: string;
-  /** Top-Banner-Format: 'billboard' (voll, default) oder z. B. 'leaderboard' (schmal, wie Artikel). */
   topFormat?: AdFormat;
-  /** Feste Rail-Breite in px (überschreibt die responsive --ad-rail-w). */
   railWidth?: number;
-  /** Horizontaler Abstand Content↔Rail in px (überschreibt --ad-rail-gap). */
   railGap?: number;
+  /** "tool" = gedeckelter 1200-Frame + Band-Rails (Rechner/Vergleich/Checkliste). */
+  variant?: "tool";
 }
 
-export default function PageAds({ ads, contentWidth, heading, children, contentClassName, topFormat = "billboard", railWidth, railGap }: PageAdsProps) {
+export default function PageAds({ ads, contentWidth, heading, children, contentClassName, topFormat = "billboard", railWidth, railGap, variant }: PageAdsProps) {
   const showTop = !!ads?.top;
   const showRails = !!ads?.rails;
   const style = {
@@ -48,19 +42,19 @@ export default function PageAds({ ads, contentWidth, heading, children, contentC
 
   return (
     <div className="page-ads" style={style}>
-      {/* Heading spannt über die GESAMTBREITE (Content + Rails) — aber nur wenn
-          Rails aktiv sind; sonst auf Content-Breite. */}
-      {heading && <div className={cn("page-ad-heading", showRails && "page-ad-heading--wide")}>{heading}</div>}
-      <div className="page-ad-region">
-        {showRails && <PageAdRails />}
-        <div className={cn("page-ad-col", contentClassName)}>
-          {/* Top-Banner (Billboard voll, oder schmal z. B. Leaderboard). */}
-          {showTop && (
-            <div className="page-ad-top">
-              <AdSlot format={topFormat} fullWidth={topFull} />
-            </div>
-          )}
-          {children}
+      <div className={cn("page-ad-frame", variant === "tool" && "page-ad-frame--tool")}>
+        {/* Heading: bei aktiven Rails über die Gesamtbreite (Frame), sonst Content-Breite. */}
+        {heading && <div className={cn("page-ad-heading", showRails && "page-ad-heading--wide")}>{heading}</div>}
+        <div className="page-ad-region">
+          {showRails && <PageAdRails variant={variant} contentWidth={contentWidth} railGap={railGap ?? 24} />}
+          <div className={cn("page-ad-col", contentClassName)}>
+            {showTop && (
+              <div className="page-ad-top">
+                <AdSlot format={topFormat} fullWidth={topFull} />
+              </div>
+            )}
+            {children}
+          </div>
         </div>
       </div>
     </div>

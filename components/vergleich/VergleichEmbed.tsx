@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
 import { refreshScrollTriggers } from "@/lib/refreshScrollTriggers";
-
-const SB_PILL_H = 36;
 
 interface ScriptConfig {
   type: string;
@@ -16,8 +14,10 @@ interface VergleichEmbedProps {
   slug: string;
 }
 
-const MIN_LOAD_MS = 1000; // Loader mindestens 1s sichtbar
-const LOAD_FALLBACK_MS = 2500; // Spätestens dann gilt der Inhalt als geladen
+const MIN_LOAD_MS = 1000;      // Loader mindestens 1s sichtbar
+const STABLE_MS = 800;         // Höhe gilt als „final", wenn 800ms keine Änderung mehr
+const LOAD_FALLBACK_MS = 8000; // Notbremse: spätestens dann aufdecken
+const PLACEHOLDER_H = 180;     // Lade-Box-Höhe während des Ladens
 
 export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const [inView, setInView] = useState(false);
@@ -26,8 +26,10 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const [rawHtml, setRawHtml] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(600);
-  const [contentLoaded, setContentLoaded] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  // Loader bleibt gemountet, bis der Crossfade fertig ist (während des Wachsens laufen
+  // die Balken weiter) — erst danach aus dem DOM.
+  const [loaderGone, setLoaderGone] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -38,55 +40,12 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const rawContainerRef = useRef<HTMLDivElement>(null);
   const fetched = useRef(false);
   const inViewAt = useRef<number | null>(null);
-  const sbTrackRef = useRef<HTMLDivElement>(null);
-  const sbThumbRef = useRef<HTMLDivElement>(null);
-  const [hasOverflow, setHasOverflow] = useState(false);
+  const stableTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastH = useRef(0);
+  const revealedRef = useRef(false);
 
   // Config vorhanden → Inhalt darf montieren (lädt versteckt unter der Ladebox)
   const ready = !!(iframeUrl || scriptConfig || rawHtml);
-
-  // Eigene Overlay-Scrollbar (dotted line + feste 36px-Pill); native ist ausgeblendet.
-  const updateScrollbar = useCallback(() => {
-    const c = contentRef.current, thumb = sbThumbRef.current, track = sbTrackRef.current;
-    if (!c) return;
-    const max = c.scrollHeight - c.clientHeight;
-    const overflow = max > 2;
-    setHasOverflow(overflow);
-    if (!overflow || !thumb || !track) return;
-    const range = track.clientHeight - SB_PILL_H;
-    const top = range > 0 ? (c.scrollTop / max) * range : 0;
-    thumb.style.top = `${Math.max(0, Math.min(range, top))}px`;
-  }, []);
-
-  useEffect(() => {
-    if (!revealed) return;
-    const c = contentRef.current;
-    if (!c) return;
-    updateScrollbar();
-    c.addEventListener("scroll", updateScrollbar, { passive: true });
-    const ro = new ResizeObserver(updateScrollbar);
-    ro.observe(c);
-    if (c.firstElementChild) ro.observe(c.firstElementChild);
-    const t = setTimeout(updateScrollbar, 800);
-    return () => { c.removeEventListener("scroll", updateScrollbar); ro.disconnect(); clearTimeout(t); };
-  }, [revealed, hasOverflow, updateScrollbar, iframeHeight]);
-
-  const onThumbDown = (e: React.PointerEvent) => {
-    e.preventDefault();
-    const c = contentRef.current, track = sbTrackRef.current, thumb = sbThumbRef.current;
-    if (!c || !track || !thumb) return;
-    const startY = e.clientY;
-    const startTop = parseFloat(thumb.style.top || "0");
-    const max = c.scrollHeight - c.clientHeight;
-    const range = track.clientHeight - SB_PILL_H;
-    const move = (ev: PointerEvent) => {
-      const ny = Math.max(0, Math.min(range, startTop + (ev.clientY - startY)));
-      c.scrollTop = range > 0 ? (ny / range) * max : 0;
-    };
-    const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
-  };
 
   // Lazy: erst laden, wenn der Embed in den Viewport scrollt
   useEffect(() => {
@@ -116,44 +75,93 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
       .catch(() => setError(true));
   }, [inView, slug]);
 
-  // Inhalt gilt als geladen: iframe onLoad / erster postMessage / spätestens Fallback.
+  // Höhe messen + Stabilität erkennen: Der Embed wächst nach der internen Suche oft
+  // nach. Erst aufdecken, wenn die (volle) Höhe STABIL ist (STABLE_MS ohne Änderung)
+  // — bzw. spätestens nach LOAD_FALLBACK_MS. So „springt" der Vergleich nicht nach.
   useEffect(() => {
     if (!ready) return;
-    const t = setTimeout(() => setContentLoaded(true), LOAD_FALLBACK_MS);
-    return () => clearTimeout(t);
+    const content = contentRef.current;
+    if (!content) return;
+
+    const doReveal = () => {
+      if (revealedRef.current) return;
+      revealedRef.current = true;
+      const start = inViewAt.current ?? Date.now();
+      const remaining = Math.max(0, MIN_LOAD_MS - (Date.now() - start));
+      window.setTimeout(() => setRevealed(true), remaining);
+    };
+
+    const measure = () => {
+      const h = content.scrollHeight;
+      if (h !== lastH.current) {
+        lastH.current = h;
+        if (stableTimer.current) clearTimeout(stableTimer.current);
+        stableTimer.current = setTimeout(doReveal, STABLE_MS);
+      }
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(content);
+    if (content.firstElementChild) ro.observe(content.firstElementChild);
+    const fallback = setTimeout(doReveal, LOAD_FALLBACK_MS);
+    return () => {
+      ro.disconnect();
+      clearTimeout(fallback);
+      if (stableTimer.current) clearTimeout(stableTimer.current);
+    };
   }, [ready]);
 
-  // Reveal erst wenn Inhalt geladen UND Loader mind. 1s sichtbar war.
+  // Reveal: Lade-Box auf die volle (finale) Vergleichshöhe skalieren + Inhalt NUR per
+  // opacity einfaden (kein y-Slide). Loader fadet weg. Danach trägt der Inhalt im Flow.
   useEffect(() => {
-    if (!contentLoaded || revealed) return;
-    const start = inViewAt.current ?? Date.now();
-    const remaining = Math.max(0, MIN_LOAD_MS - (Date.now() - start));
-    const t = setTimeout(() => setRevealed(true), remaining);
-    return () => clearTimeout(t);
-  }, [contentLoaded, revealed]);
-
-  // Box auf feste 600px öffnen + Vergleich einfaden, Ladebox ausblenden.
-  useEffect(() => {
-    if (!revealed || !stageRef.current) return;
-    const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!revealed || !stageRef.current || !contentRef.current) return;
     const stage = stageRef.current;
-    if (reduce) {
-      gsap.set(stage, { height: 600 });
-      if (contentRef.current) gsap.set(contentRef.current, { opacity: 1 });
-      if (loadingRef.current) gsap.set(loadingRef.current, { autoAlpha: 0 });
+    const content = contentRef.current;
+    const finalH = content.scrollHeight || 600;
+    const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const settle = () => {
+      // Inhalt in den Flow nehmen → Stage-Höhe folgt ab jetzt automatisch (kein Scroll,
+      // keine feste Höhe). Höhen sind deckungsgleich (finalH) → kein Sprung.
+      content.style.position = "static";
+      content.style.opacity = "1";
+      stage.style.height = "auto";
+      stage.style.overflow = "visible";
+      setLoaderGone(true); // Loader erst JETZT aus dem DOM nehmen
       refreshScrollTriggers();
+    };
+
+    if (reduce) {
+      settle();
       return;
     }
-    gsap.fromTo(stage, { height: 180 }, {
-      height: 600, duration: 0.75, ease: "power3.inOut",
-      onComplete: refreshScrollTriggers,
+
+    // Phase 1: Lade-Box wächst auf die volle Vergleichshöhe — die Streifen + der
+    // Schriftzug laufen die GANZE Zeit weiter (Loader bleibt gemountet & sichtbar).
+    // Phase 2 (onComplete): erst JETZT Crossfade Loader↔Vergleich (gleichzeitig).
+    gsap.to(stage, {
+      height: finalH,
+      duration: 0.75,
+      ease: "power3.inOut",
+      onComplete: () => {
+        gsap.fromTo(content, { opacity: 0 }, { opacity: 1, duration: 0.55, ease: "power2.out" });
+        if (loadingRef.current) {
+          gsap.to(loadingRef.current, {
+            autoAlpha: 0,
+            duration: 0.55,
+            ease: "power2.out",
+            onComplete: settle,
+          });
+        } else {
+          settle();
+        }
+      },
     });
-    if (loadingRef.current) gsap.to(loadingRef.current, { autoAlpha: 0, duration: 0.45, ease: "power2.out" });
-    // Vergleich fadet sanft + leicht von unten ein (unter dem 70px-Bottom-Gradient).
-    if (contentRef.current) gsap.fromTo(contentRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: 0.3 });
   }, [revealed]);
 
-  // postMessage-Höhe (FinanceAds u. a.)
+  // postMessage-Höhe (FinanceAds u. a.) → treibt die iframe-Höhe; die Mess-Logik oben
+  // erkennt die Stabilität daraus.
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       let height: number | null = null;
@@ -172,7 +180,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
           if (h) height = parseInt(h, 10);
         } catch { /* not JSON */ }
       }
-      if (height && !isNaN(height) && height > 100) { setIframeHeight(height); setContentLoaded(true); }
+      if (height && !isNaN(height) && height > 100) setIframeHeight(height);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -256,7 +264,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
 
   return (
     <div className="vergleich-embed" ref={rootRef}>
-      <div className="vergleich-stage" ref={stageRef}>
+      <div className="vergleich-stage" ref={stageRef} style={{ height: PLACEHOLDER_H }}>
         {/* Inhalt montiert sobald Config da ist (lädt versteckt), Reveal später. */}
         {ready && (
           <div className="vergleich-content" ref={contentRef}>
@@ -269,7 +277,6 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
                   title={`Vergleich: ${slug}`}
                   loading="lazy"
                   allow="clipboard-write"
-                  onLoad={() => setContentLoaded(true)}
                 />
               </div>
             )}
@@ -278,13 +285,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
           </div>
         )}
 
-        {revealed && hasOverflow && (
-          <div className="vergleich-scrollbar" ref={sbTrackRef}>
-            <div className="vergleich-scrollbar-thumb" ref={sbThumbRef} onPointerDown={onThumbDown} />
-          </div>
-        )}
-
-        {!revealed && !error && (
+        {!loaderGone && !error && (
           <div className="vergleich-loading" ref={loadingRef}>
             <div className="vergleich-loading-text">Vergleich wird geladen…</div>
           </div>

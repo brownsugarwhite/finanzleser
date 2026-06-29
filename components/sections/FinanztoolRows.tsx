@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import SparkDivider from '@/components/ui/SparkDivider';
 import SliderHoverBox from '@/components/ui/SliderHoverBox';
@@ -10,6 +10,8 @@ export interface ToolItem {
   title: string;
   desc: string;
   href: string;
+  /** Optionaler Item-eigener CTA (für gemischte Tool-Typen, z. B. in der Suche). */
+  cta?: string;
 }
 
 const LINE = 35;
@@ -20,7 +22,7 @@ function ToolItemCell({ item, cta }: { item: ToolItem; cta: string }) {
       <span className="finanztool-item-title" lang="de">{item.title}</span>
       {item.desc && <span className="finanztool-item-desc" lang="de">{item.desc}</span>}
       <span className="article-read-link finanztool-cta">
-        <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap' }}>{cta}</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap' }}>{item.cta ?? cta}</span>
         <span className="article-read-line" style={{ height: 0, borderTop: '1px solid currentColor', flexShrink: 0 }} />
         <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: 'rotate(180deg)', marginLeft: '-12px' }}>
           <polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" />
@@ -33,6 +35,7 @@ function ToolItemCell({ item, cta }: { item: ToolItem; cta: string }) {
 export default function FinanztoolRows({ items, cta, perRow = 3 }: { items: ToolItem[]; cta: string; perRow?: number }) {
   const PER_ROW = perRow;
   const [isMobile, setIsMobile] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 1023px)');
     setIsMobile(mql.matches);
@@ -40,10 +43,36 @@ export default function FinanztoolRows({ items, cta, perRow = 3 }: { items: Tool
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
+  // Stacked-Layout (1-spaltig) ab Mobile (≤767). useLayoutEffect → Branch vor dem Paint.
+  useLayoutEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    setIsNarrow(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsNarrow(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   // Hover-Box EXAKT wie der Slider: die echten Spark-Divider sind die Anker
   // (registerSpark) — das Duplikat zeichnet nur die Verlängerung zur Ecke.
   const hover = useSliderHoverBox({ cardSelector: '.finanztool-item', enabled: !isMobile, restLen: LINE });
+
+  // Mobile: Karten untereinander, getrennt durch HORIZONTALE Spark-Linien (kein Hover-Box).
+  if (isNarrow) {
+    return (
+      <div className="finanztool-rows finanztool-rows--stacked">
+        {items.map((it, i) => (
+          <Fragment key={it.href}>
+            {i > 0 && (
+              <div className="finanztool-row-divider"><SparkDivider orientation="horizontal" lineLength={LINE} /></div>
+            )}
+            <div className="finanztool-cell" style={{ display: 'flex' }}>
+              <ToolItemCell item={it} cta={cta} />
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    );
+  }
 
   const rows: ToolItem[][] = [];
   for (let i = 0; i < items.length; i += PER_ROW) rows.push(items.slice(i, i + PER_ROW));

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import FieldOutline from "@/components/ui/FieldOutline";
 
 interface RechnerInputProps {
   label: string;
@@ -231,7 +232,7 @@ export default function RechnerInput({
           </div>
         </div>
       ) : (
-        <div className="rechner-input-container">
+        <div className="rechner-input-container field-wrap rechner-field">
           <input
             id={name}
             type="text"
@@ -250,16 +251,12 @@ export default function RechnerInput({
             }}
             onChange={handleChange}
             disabled={disabled}
-            className={`rechner-input ${disabled ? "rechner-input--disabled" : ""}`}
+            className={`rechner-input ${einheit ? "rechner-input--has-unit" : ""} ${disabled ? "rechner-input--disabled" : ""}`}
             aria-label={label}
             {...(max !== undefined ? { "aria-valuemax": max } : {})}
           />
-          {einheit && (
-            <>
-              <span className="rechner-input-connector" aria-hidden />
-              <span className="rechner-einheit-box">{einheit}</span>
-            </>
-          )}
+          {einheit && <span className="rechner-einheit-btn" aria-hidden>{einheit}</span>}
+          <FieldOutline radius={19} />
         </div>
       )}
     </div>

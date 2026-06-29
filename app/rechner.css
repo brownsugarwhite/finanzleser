@@ -136,11 +136,56 @@
 
 .rechner-label {
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 0.95rem;
+  font-size: 0.85rem;          /* etwas kleiner */
   color: var(--color-text-primary);
   font-weight: 600;
   margin-bottom: 6px;
+  margin-left: 20px;           /* 20px nach rechts */
   display: block;
+  transition: transform 0.3s ease, color 0.2s ease;
+}
+/* Label slidet 4px hoch, sobald sich die Feld-Outline einzeichnet (Hover/Focus). */
+.rechner-input-wrapper:hover .rechner-label,
+.rechner-input-wrapper:focus-within .rechner-label,
+.rechner-select-wrapper:hover .rechner-label,
+.rechner-select-wrapper:focus-within .rechner-label {
+  transform: translateY(-4px);
+}
+/* Bei Focus NUR die Textfarbe wechseln (kein Ring ums Label). */
+.rechner-input-wrapper:focus-within .rechner-label,
+.rechner-select-wrapper:focus-within .rechner-label {
+  color: var(--color-brand-secondary);
+}
+/* Rechner-Felder: Outline-Focus-Farbe = brand-secondary. */
+.rechner-field {
+  position: relative;
+  --field-focus-color: var(--color-brand-secondary);
+}
+/* Einheit als Button am rechten Innenrand des Inputs (wie der Suchen-Button):
+   solider Rahmen, passender Radius, Abstand oben/unten/rechts, etwas kleiner. */
+.rechner-einheit-btn {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border: 1px solid var(--color-text-primary);
+  border-radius: 14px;
+  color: var(--color-text-primary);
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  background: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+/* Einheit-Ring auf brand-secondary, sobald das Feld fokussiert ist. */
+.rechner-field:focus-within .rechner-einheit-btn {
+  border-color: var(--color-brand-secondary);
+  color: var(--color-brand-secondary);
 }
 
 .rechner-input-container {
@@ -193,16 +238,22 @@
 .rechner-input::placeholder {
   color: var(--color-text-secondary);
 }
+/* Platz für den Einheit-Button am rechten Rand. */
+.rechner-input--has-unit {
+  padding-right: 64px;
+}
 
-/* Focus / aktiver Slider-Drag: kein grüner Ring, sondern 1px dark, transparent, ohne Schatten (wie Checkliste/FAQ) */
+/* Focus: 2px Ring DIREKT am Input (box-shadow outset → kein Layout-Shift), Farbe
+   brand-secondary; die äußere animierte FieldOutline (4px Abstand) ist ebenfalls
+   secondary → zusammen Button-Optik (Border + abgesetzte Outline). */
 .rechner-input:focus,
 .rechner-input.is-focused {
   outline: none;
   background: transparent;
-  box-shadow: none;
+  box-shadow: 0 0 0 2px var(--color-brand-secondary);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-color: var(--color-text-primary);
+  border-color: transparent;
 }
 
 .rechner-input:disabled {
@@ -561,13 +612,10 @@
   color: var(--color-text-primary);
 }
 
+/* Focus: 2px Ring am Select (secondary), wie beim Input. */
 .rechner-select:focus {
   outline: none;
-  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.02), 0 0 0 3px var(--glass-brand-10);
-}
-
-.rechner-select:hover {
-  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 2px var(--color-brand-secondary);
 }
 
 /* ── Checkbox (exakt wie Checkliste: animierter Haken) ───────── */

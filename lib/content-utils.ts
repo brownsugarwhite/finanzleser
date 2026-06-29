@@ -1,9 +1,19 @@
-import { stripVCShortcodes } from "./html-utils";
+import { stripVCShortcodes, decodeHtmlEntities } from "./html-utils";
 
 const WORDS_PER_MINUTE = 220;
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Bereinigt eine CPT-Beschreibung für die reine Text-Anzeige: dekodiert zuerst
+ * HTML-Entities (WP liefert teils `&lt;p&gt;…`), dann werden alle Tags entfernt.
+ * So erscheint kein literales `<p>` mehr am Anfang/Ende der Beschreibung.
+ */
+export function cleanDescription(s: string | undefined | null): string {
+  if (!s) return "";
+  return stripHtml(decodeHtmlEntities(s));
 }
 
 export function getFirstParagraph(content: string | undefined | null): string {

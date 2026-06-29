@@ -6,6 +6,7 @@ import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import PageAds from "@/components/layout/PageAds";
 import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpress";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { cleanDescription } from "@/lib/content-utils";
 
 export const revalidate = 3600;
 
@@ -152,7 +153,8 @@ export default async function RechnerDetailPage({ params }: Props) {
       <main className="min-h-screen bg-white">
         <PageAds
           ads={settings.ads.rechner}
-          contentWidth={850}
+          variant="tool"
+          contentWidth={728}
           contentClassName="pb-12"
           heading={
             <>
@@ -188,7 +190,7 @@ export default async function RechnerDetailPage({ params }: Props) {
                     fontWeight: "400",
                   }}
                 >
-                  {rechner.excerpt || rechner.rechnerFelder?.beschreibung}
+                  {cleanDescription(rechner.excerpt || rechner.rechnerFelder?.beschreibung)}
                 </p>
               )}
             </>

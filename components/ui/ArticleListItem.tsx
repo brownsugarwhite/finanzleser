@@ -8,6 +8,7 @@ import InlineSVG from '@/components/ui/InlineSVG';
 import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
 import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
 import { captureTextItem, captureVisualItem, hideSourceEls } from '@/lib/morphCapture';
+import { cleanDescription } from '@/lib/content-utils';
 
 interface ArticleListItemProps {
   post: Post;
@@ -33,7 +34,7 @@ export default function ArticleListItem({ post, href, hero = false }: ArticleLis
   const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
-  const excerpt = post.excerpt?.replace(/<[^>]*>/g, '').trim() || '';
+  const excerpt = cleanDescription(post.excerpt);
   const tools = post.tools || [];
 
   const prefetchArticle = () => {
@@ -63,6 +64,7 @@ export default function ArticleListItem({ post, href, hero = false }: ArticleLis
       data-morph-card={post.slug}
       onClick={handleClick}
       onMouseEnter={prefetchArticle}
+      className="article-list-item"
       style={{ cursor: 'pointer', width: '100%', display: 'flex', gap: '32px', alignItems: 'center', position: 'relative' }}
     >
       {/* Visual links (40%) */}
