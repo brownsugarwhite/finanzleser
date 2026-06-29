@@ -91,7 +91,17 @@ export default async function RootLayout({
 
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
-      <body className="antialiased">
+      {/* suppressHydrationWarning: das Inline-Script unten setzt data-landing VOR der
+          Hydration → bewusste Abweichung zur SSR-HTML, kein echter Mismatch. */}
+      <body className="antialiased" suppressHydrationWarning>
+        {/* No-FOUC: data-landing synchron VOR dem Paint setzen, damit landing-spezifisches
+            CSS (sticky-nav aus, Newsletter, Dotline, Logo-Claim, Mobile-Fixes) schon beim
+            ersten Paint greift. LandingBodyAttr hält es danach für SPA-Navigation in Sync. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(location.pathname==='/')document.body.setAttribute('data-landing','')}catch(e){}`,
+          }}
+        />
         <LandingBodyAttr />
         <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />

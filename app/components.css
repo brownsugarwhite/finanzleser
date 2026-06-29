@@ -201,7 +201,7 @@ body.leo-chat-open .topbar-grid {
 }
 @media (max-width: 767px) {
   #leo-chat-greeting {
-    font-size: 6.5vw;
+    font-size: 6vw;
   }
 }
 /* Conversation-mode: Greeting blendet aus + Text kollabiert (sonst stösst er
@@ -640,7 +640,7 @@ body.leo-chat-open #leo-chat-messages {
 .quicklinks-link:hover {
   color: var(--color-brand-secondary);
 }
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .quicklinks-row {
     display: none;
   }
@@ -811,11 +811,13 @@ h1.category-title {
 }
 @media (max-width: 767px) {
   .spark-heading-outer {
-    padding-left: 13px;
-    padding-right: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .spark-heading-container {
-    font-size: 40px;
+    /* SSR-/First-Paint-Fallback: clamp skaliert grob mit der Viewport-Breite, bevor
+       JS (useLayoutEffect) den exakten Wert pro Titel setzt → kein Layout-Shift. */
+    font-size: clamp(22px, 9vw, 40px);
   }
 }
 
@@ -3021,27 +3023,26 @@ h2.faq-heading {
   background: rgba(69, 161, 23, 0.04);
 }
 
-/* Mobile (≤1000px, Punkt 4): globale + Landing-TopNav ausblenden (Burger-Nav im
+/* ≤1024px: globale + Landing-TopNav ausblenden (Burger-Nav im
    Drawer bleibt sichtbar). !important nötig, weil TopNav.tsx inline display:flex setzt. */
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .sticky-nav[data-topnav],
   .landing-nav[data-topnav] {
     display: none !important;
   }
+}
 
+/* Logo-Wordmark bleibt bis Mobile (≤767) groß wie bei >1024 — erst dann verkleinern
+   + verschieben (das restliche Landing-Chrome schaltet bereits bei 1024 um). */
+@media (max-width: 767px) {
   /* Landing-Hero: Logo 13px unter Bookmark, max 350px breit.
-     !important nötig, weil LandingIntro.tsx inline-Styles setzt. */
-  .landing-hero > [data-scale-extended] {
+     !important nötig, weil LandingIntro.tsx inline-Styles setzt.
+     NUR .landing-inner (nicht jedes [data-scale-extended]). */
+  .landing-hero > .landing-inner {
     margin-top: 13px !important;
   }
   .landing-hero img[alt="finanzleser"] {
     max-width: 350px !important;
-  }
-
-  /* Beitragsseiten: Desktop-Sidebar (TOC + Toggle) komplett ausblenden.
-     Mobile-TOC läuft über MobileTocIndicator + MobileTocOverlay. */
-  .article-sidebar {
-    display: none !important;
   }
 }
 

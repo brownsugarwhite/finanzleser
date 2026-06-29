@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 interface RechnerCheckboxProps {
-  label: string;
+  label: ReactNode;
   name: string;
   checked: boolean;
   onChange: (checked: boolean) => void;

@@ -640,7 +640,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   }, [activeCard]);
 
   // Mobile: Stage-Breite messen (fluid) → treibt die Card-Slot-Geometrie.
-  useEffect(() => {
+  // useLayoutEffect: VOR dem Paint messen, damit die Buttons/Cards schon im ersten
+  // Frame an ihrer finalen Position/Breite stehen (kein Sprung nach Load).
+  useLayoutEffect(() => {
     const wrap = mobileWrapRef.current;
     if (!wrap) return;
     const apply = () => {
@@ -711,7 +713,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   Bleiben Sie mit unserem Finanzleser.de<br />Newsletter immer auf dem neusten Stand!
                 </p>
                 <div style={{ display: "flex", justifyContent: "flex-end", width: "100%",  marginTop: 12 }}>
-                  <Button onClick={() => {}} label="Jetzt abonnieren" />
+                  <Button
+                    onClick={() => document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                    label="Jetzt abonnieren"
+                  />
                 </div>
 
                 {/* Horizontale Linie */}
@@ -747,7 +752,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
 
             {/* ── Tool-Bühne (sticky am unteren Rand): Intro (3 Cards) ↔ Aktiv (große Card oben
                   + Trennlinie + 2 kleine unten). Kein Swipe; Auto-Advance + Klick. ── */}
-            <div className="ftools-tool-stage" style={{ position: "sticky", bottom: 23, marginTop: "auto", width: ST_W, height: STAGE_FLOW_H, overflow: "visible" }}>
+            <div className="ftools-tool-stage" style={{ position: "sticky", bottom: 23, marginTop: "auto", width: ST_W, height: STAGE_FLOW_H, overflow: "visible", pointerEvents: "none" }}>
 
               {/* Loader (fährt nach oben bei aktiv) + Play/Pause + Lesezeichen in Tool-Farbe */}
               <div className="ftools-loader-wrap" style={{ position: "absolute", left: 0, top: loaderTop, opacity: loaderActive ? 1 : 0, transition: "opacity 0.3s ease", zIndex: 6 }}>
@@ -808,6 +813,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                         WebkitBackdropFilter: cp > 0.5 ? "none" : `brightness(${1 + 0.3 * (1 - cp)}) blur(${13 * (1 - cp)}px)`,
                         boxShadow: `0 3px 23px rgba(0, 0, 0, ${0.02 * (1 - cp)})`,
                         zIndex: cp > 0.5 ? 5 : 4,
+                        // Stage ist pointer-events:none (lässt Klicks zum „Jetzt abonnieren"-
+                        // Button durch); die Cards selbst bleiben klickbar.
+                        pointerEvents: "auto",
                       }}
                     >
                       {tool.icon && (

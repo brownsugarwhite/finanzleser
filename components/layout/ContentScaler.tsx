@@ -24,7 +24,10 @@ export default function ContentScaler() {
       const dotLine = landingDotLine || layoutDotLine;
       const isLanding = !!landingDotLine;
       const claim = document.querySelector(".logo-wrapper span") as HTMLElement | null;
-      const fadeTargets = [dotLine, !isLanding && claim].filter(Boolean) as HTMLElement[];
+      // Quicklinks-Reihe (unter der Dotline, Landing-Desktop) faded bei JEDEM Overlay
+      // mit (auch dem Megamenü, das extended:false ist) — wie die Dotline darüber.
+      const quicklinks = document.querySelector(".quicklinks-row") as HTMLElement | null;
+      const fadeTargets = [dotLine, quicklinks, !isLanding && claim].filter(Boolean) as HTMLElement[];
       return { els, fadeTargets, isLanding };
     };
 
@@ -44,8 +47,11 @@ export default function ContentScaler() {
         document.querySelectorAll<HTMLElement>(".dotline-animated, .landing-dotline").forEach((el) => {
           if (el.offsetParent !== null) extras.push(el);
         });
+        // Sichtbarkeitsprüfung via display (NICHT offsetParent) — fixed-positionierte
+        // Targets (z.B. .landing-bubble-mobile) haben offsetParent===null obwohl sichtbar
+        // und würden sonst fälschlich übersprungen.
         document.querySelectorAll<HTMLElement>("[data-scale-extended]").forEach((el) => {
-          if (el.offsetParent !== null) extras.push(el);
+          if (getComputedStyle(el).display !== "none") extras.push(el);
         });
         extras.forEach((el) => {
           if (!els.includes(el)) {

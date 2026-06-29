@@ -126,6 +126,33 @@ export default function LandingIntro() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Newsletter-Button (Mobile) ausbluren wenn die Bookmark-Suche aufgeht — gleicher
+  // Mechanismus + Timing wie das Logo in LogoBar, damit beide synchron laufen.
+  useEffect(() => {
+    const isMobileMQ = () => window.matchMedia("(max-width: 767px)").matches;
+    const getBtn = () => document.querySelector<HTMLElement>(".bookmark-newsletter");
+    const onSearchOpen = () => {
+      if (!isMobileMQ()) return;
+      const el = getBtn();
+      if (!el) return;
+      gsap.to(el, { filter: "blur(8px)", opacity: 0, duration: 0.45, ease: "power2.inOut" });
+    };
+    const onSearchClose = () => {
+      const el = getBtn();
+      if (!el) return;
+      gsap.to(el, {
+        filter: "blur(0px)", opacity: 1, duration: 0.35, delay: 0.35, ease: "power2.out",
+        onComplete: () => { el.style.filter = ""; },
+      });
+    };
+    window.addEventListener("search-opened", onSearchOpen);
+    window.addEventListener("search-closed", onSearchClose);
+    return () => {
+      window.removeEventListener("search-opened", onSearchOpen);
+      window.removeEventListener("search-closed", onSearchClose);
+    };
+  }, []);
+
   const submitSearch = (q: string) => {
     const trimmed = q.trim();
     if (!trimmed) return;
@@ -221,7 +248,16 @@ export default function LandingIntro() {
       }}
     >
       {/* Newsletter-Button (Mobile-Landing) — links auf Bookmark-Höhe, scrollt ganz normal mit */}
-      <a className="bookmark-newsletter" href="#newsletter" aria-label="Newsletter">
+      <a
+        data-scale-extended
+        className="bookmark-newsletter"
+        href="#newsletter"
+        aria-label="Newsletter"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      >
         <img src="/icons/iconRechner.svg" alt="" aria-hidden="true" />
         <span>Newsletter</span>
       </a>
@@ -430,6 +466,7 @@ export default function LandingIntro() {
           zeigt nach unten-rechts), Text normal. Scrollt mit der Section + faded (JS). */}
       <div
         ref={mobileBubbleRef}
+        data-scale-extended
         className="landing-bubble-mobile"
         aria-hidden
         style={{ position: "fixed", bottom: 89, right: 36, zIndex: 60, pointerEvents: "none" }}
@@ -512,18 +549,17 @@ export default function LandingIntro() {
         .landing-suggest__text > span { font-weight: 400; }
         .landing-suggest__text > strong { font-weight: 700; }
 
-        /* ── Mobile (≤1000px, Punkt 4): Dotline raus, Pillbar (Search + Leo-Wrap)
+        /* ── ≤1024px: Dotline raus, Pillbar (Search + Leo-Wrap)
               komplett aus, Logo rutscht 36px nach unten. Leo lebt im globalen Slot. ── */
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
           .landing-dotline { display: none !important; }
           .landing-pillbar { display: none !important; }
-          .landing-logo { margin-top: 36px !important; }
         }
         /* Mobile-Sprechblase nur ≤767 */
         .landing-bubble-mobile { display: none; }
         @media (max-width: 767px) {
           .landing-bubble-mobile { display: block; }
-          /* Logo 20px höher (36 → 16) */
+          /* Logo erst auf Mobile nach unten schieben (vorher bleibt es wie bei >1024). */
           .landing-logo { margin-top: 16px !important; }
           /* Mobile-Seitenpadding clamp: 20px bei 400px → max 40px */
           .landing-inner { padding-left: clamp(20px, 5vw, 40px) !important; padding-right: clamp(20px, 5vw, 40px) !important; }

@@ -2,7 +2,7 @@
 
 import "@/lib/gsapConfig"; // ensures core GSAP plugins are registered before tweens
 import "@/lib/gsap/motionPath"; // LeoIcon ist einziger MotionPath-Konsument
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useChat } from "@ai-sdk/react";
 import gsap from "@/lib/gsapConfig";
@@ -196,7 +196,9 @@ export default function LeoIcon() {
   }, [messages.length, status]);
 
   // Reactive viewport-size (mobile = 64, desktop = 70). Updated on matchMedia change.
-  useEffect(() => {
+  // useLayoutEffect: die Mobile-Größe wird VOR dem ersten Paint gesetzt → kein
+  // sichtbarer 70→64-Sprung beim Mobile-Erstrender.
+  useLayoutEffect(() => {
     const mq = window.matchMedia(isMobileMQ);
     const update = () => {
       const next = mq.matches ? LEO_SIZE_MOBILE : LEO_SIZE_DESKTOP;
@@ -1373,7 +1375,7 @@ export default function LeoIcon() {
       const isMobile = size === LEO_SIZE_MOBILE;
       return (
         <div ref={iconwrapRef} id="leo-chat-iconwrap">
-          <div ref={leoBoxRef} className="leo-chat-leo-box" style={{ width: isMobile ? 66 : 78, height: isMobile ? 66 : 78, display: "flex", alignItems: "center", justifyContent: "center", marginTop: isMobile ? -28 : -34, transformOrigin: "bottom left" }}>
+          <div ref={leoBoxRef} className="leo-chat-leo-box" style={{ width: isMobile ? 52 : 64, height: isMobile ? 66 : 78, display: "flex", alignItems: "center", justifyContent: "center", marginTop: isMobile ? -28 : -34, transformOrigin: "bottom left" }}>
             <LeoCharacter
               headWidth={isMobile ? 40 : 48}
               mouthWidth={isMobile ? 36 : 44}

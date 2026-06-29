@@ -66,7 +66,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   }, [parentSlug, activeSlide]);
 
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
+  // useLayoutEffect: Breakpoint VOR dem Paint festlegen → der Mobile-/Desktop-
+  // DOM-Swap (Zeilen ~577/604) flippt vor dem Paint statt sichtbar danach.
+  useLayoutEffect(() => {
     const mql = window.matchMedia('(max-width: 767px)');
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);

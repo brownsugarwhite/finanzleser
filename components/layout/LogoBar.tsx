@@ -79,7 +79,7 @@ export default function LogoBar() {
   // Slot-Position responsive: Mobile 60px, Desktop 90px vom linken Bildrand.
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 1000px)");
+    const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
@@ -253,33 +253,54 @@ export default function LogoBar() {
   useEffect(() => {
     if (!isLanding) return;
 
-    const isMobile = window.matchMedia("(max-width: 1000px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     if (isMobile) {
-      // Mobile: Logo erscheint NACH Leos Flug zur Home-Ecke,
-      // verschwindet wenn Revolver-Buttons den 100px-Bereich verlassen.
-      const onFlewHome = () => {
-        if (menuOpenRef.current) return;
+      // Mobile-Landing: short-Logo erscheint, sobald der große Wortmarken-Schriftzug
+      // (.landing-logo) oben aus dem Viewport gescrollt ist — wie Desktop (nav-out).
+      // Verschwindet beim Zurückscrollen nach oben. ScrollTrigger am .landing-logo,
+      // dessen Unterkante die Viewport-Oberkante kreuzt. Killt/recreated bei
+      // scroll-anim-kill/-recreate (Seiten-Transition) → kein Springen beim Wechsel.
+      const showShort = () => {
+        if (menuOpenRef.current || navSettlingRef.current) return;
         if (stateRef.current !== "hidden") return;
         cancelHide(); // verwaisten Hide-Timer abbrechen
         setLogoVisible(true);
         logoRef.current?.playShortIn();
         stateRef.current = "short-visible";
       };
-      const onRevolverFar = () => {
-        if (menuOpenRef.current) return;
+      const hideShort = () => {
+        if (menuOpenRef.current || navSettlingRef.current) return;
         if (stateRef.current !== "short-visible") return;
         logoRef.current?.playShortOut();
         stateRef.current = "hidden";
-        // visibility erst NACH der Out-Animation hidden setzen — sonst
-        // wird der Out-Tween nicht sichtbar.
+        // visibility erst NACH der Out-Animation hidden setzen.
         scheduleHide(500);
       };
-      window.addEventListener("leo-flew-home", onFlewHome);
-      window.addEventListener("revolver-far-from-bottom", onRevolverFar);
+
+      let st: ScrollTrigger | null = null;
+      const create = () => {
+        const wordmark = document.querySelector<HTMLElement>(".landing-logo");
+        if (!wordmark) return;
+        st = ScrollTrigger.create({
+          trigger: wordmark,
+          start: "bottom top", // Wortmarken-Unterkante kreuzt Viewport-Oberkante
+          onEnter: showShort, // runtergescrollt → Schriftzug raus → short rein
+          onLeaveBack: hideShort, // zurück nach oben → Schriftzug wieder da → short raus
+        });
+      };
+
+      const raf = requestAnimationFrame(create);
+      const onKill = () => { if (st) { st.kill(); st = null; } };
+      const onRecreate = () => { onKill(); create(); };
+      window.addEventListener("scroll-anim-kill", onKill);
+      window.addEventListener("scroll-anim-recreate", onRecreate);
+
       return () => {
-        window.removeEventListener("leo-flew-home", onFlewHome);
-        window.removeEventListener("revolver-far-from-bottom", onRevolverFar);
+        cancelAnimationFrame(raf);
+        onKill();
+        window.removeEventListener("scroll-anim-kill", onKill);
+        window.removeEventListener("scroll-anim-recreate", onRecreate);
       };
     }
 
@@ -350,7 +371,7 @@ export default function LogoBar() {
       // priorState NUR einmal pro Open setzen — der Overlay-IN-Effect feuert
       // in Dev (StrictMode) doppelt, sonst würde der zweite Call "hidden"
       // reinschreiben und der Restore beim Close wäre kaputt.
-      const isMobile = window.matchMedia("(max-width: 1000px)").matches;
+      const isMobile = window.matchMedia("(max-width: 1024px)").matches;
       if (detail?.label === "preview" && isMobile) {
         const state = stateRef.current;
         if (previewPriorStateRef.current === null) {
@@ -380,7 +401,7 @@ export default function LogoBar() {
       if (state === "hidden") {
         // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
         // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
-        const isMobileMQ = window.matchMedia("(max-width: 1000px)").matches;
+        const isMobileMQ = window.matchMedia("(max-width: 1024px)").matches;
         if (isMobileMQ) {
           if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
           longInDelayTimerRef.current = window.setTimeout(() => {
@@ -478,7 +499,7 @@ export default function LogoBar() {
   // Separater additiver filter/opacity-Layer auf dem Wrapper — stört die
   // Logo-Zustandsmaschine (visibility/Lottie) nicht.
   useEffect(() => {
-    const isMobileMQ = () => window.matchMedia("(max-width: 1000px)").matches;
+    const isMobileMQ = () => window.matchMedia("(max-width: 1024px)").matches;
     const onSearchOpen = () => {
       if (!isMobileMQ()) return;
       const el = wrapperRef.current;

@@ -47,7 +47,7 @@ export default function LandingPage() {
         </Suspense>
 
         <div className="scalable-landing">
-          <Footer hideNewsletter />
+          <Footer />
         </div>
       </main>
     </>

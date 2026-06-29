@@ -33,7 +33,7 @@ type Listener = (phase: TransitionPhase) => void;
 
 const EXIT_A = 0.3; // Fall A: nur opacity raus (Seite ist schon geblurt)
 export const EXIT_B = 0.34; // Fall B: scale+blur+opacity raus
-const ENTER_DUR = 0.55; // etwas länger + gediegener
+const ENTER_DUR = 0.75; // langsamer + gediegener (war 0.55)
 // Notbremse: erholt einen echten Hänger in ~8s. Mit dem robusten pathname-ENTER-
 // Trigger sollte sie quasi nie greifen — SSG-Seiten committen sofort.
 const SAFETY_MS = 8000;
@@ -97,13 +97,13 @@ function viewportCenterOrigin(el: HTMLElement): string {
   return `${window.innerWidth / 2 - rect.left}px ${window.innerHeight / 2 - rect.top}px`;
 }
 
-const ENTER_SCALE = 1.03; // Start-Scale beim Einfaden (von 1.03 → 1)
+const ENTER_SCALE = 1.025; // dezenter Start-Scale beim Einfaden (war 1.03)
 // Enter-Blur bewusst klein: blur() auf dem ganzen Wrapper ist GPU-teuer (re-raster
 // pro Frame) und ruckelt auf schweren Seiten (Slider/Bilder), die gleichzeitig
 // hydraten. Scale+Opacity tragen den Effekt; ein leichter Blur reicht visuell.
-const ENTER_BLUR = 6;
+const ENTER_BLUR = 2.5; // weniger Start-Blur (war 6)
 export const EXIT_SCALE = 0.95; // Fall B: alte Seite kleiner werden (wie beim Overlay-Öffnen)
-export const EXIT_BLUR = 23; // gleicher Blur wie ContentScaler beim Overlay-Öffnen
+export const EXIT_BLUR = 18; // einen Tick weniger Blur (war 23)
 
 /** Enter-Set: persistentes Chrome aus dem Exit-Set (noch im DOM, kein Content-Wrapper)
  *  plus der persistente `.scalable-content`-Wrapper, der die neuen children hält. */
@@ -133,6 +133,12 @@ function armSafety() {
       gsap.set(el, { clearProps: "transform,filter,opacity,transformOrigin" });
       el.style.pointerEvents = "";
     });
+    // Auch im Notfall einen ggf. hängenden Loader weich entfernen.
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("page-transition-loader-hide", { detail: { pageInDur: 0 } })
+      );
+    }
     reset();
   }, SAFETY_MS);
 }
@@ -290,6 +296,14 @@ function runEnter(): void {
   }
   phase = "entering";
   emit();
+  // Loader koordiniert ausblenden: GENAU wenn die neue Seite anfängt einzufaden.
+  // Der Loader faded über seinen eigenen Tween aus und ist ~0.15s VOR Ende des
+  // Page-Ins weg → sitzt nie auf der bereits committeten Seite.
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("page-transition-loader-hide", { detail: { pageInDur: ENTER_DUR } })
+    );
+  }
 
   // Neu auflösen — falls der Content-Wrapper inzwischen ein anderer Knoten ist.
   enterEls = uniq([
