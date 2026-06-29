@@ -114,7 +114,7 @@ export default function LandingIntro() {
     // Start an Button-Oberkante, voll bei 60% Viewport).
     const onScroll = () => {
       const allein = document.querySelector(".ftools-m-allein");
-      const btns = document.querySelector(".ftools-m-btns");
+      const btns = document.querySelector(".ftools-m-stage");
       if (!allein || !btns) { el.style.opacity = "1"; return; }
       const start = btns.getBoundingClientRect().top;
       const range = Math.max(1, start - 0.6 * window.innerHeight);

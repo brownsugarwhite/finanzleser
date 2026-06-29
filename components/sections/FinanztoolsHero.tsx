@@ -80,6 +80,42 @@ function toolSlot(i: number, activeIndex: number): Slot {
 const LOADER_TOP_INTRO = ST_ROW_Y - 36 - ST_SHIFT;
 const LOADER_TOP_ACTIVE = 6 - ST_SHIFT;
 
+// ── Mobile-Revolver (≤767): GLEICHE Technik wie Desktop (absolut positionierte Cards, auf Slots
+// getweent), INVERTIERTES Layout (kleine Buttons oben, große Card unten, Progress dazwischen).
+// WICHTIG: Cards sind UNTEN verankert (Slot.y = Abstand zur Stage-Unterkante). Die Stage hat eine
+// KOMPAKTE Flow-Höhe (M_INTRO_H, kein Reservegap); der Expand-Inhalt ragt nach OBEN raus
+// (overflow visible) und der Slider rutscht per translateY um M_VISUAL_SHIFT hoch → Grundlayout bleibt. ──
+const M_SMALL_H = 50;      // Button-Höhe
+const M_BIG_H = 190;       // große (aktive) Card-Höhe — knapp = Inhalt, CTA sitzt unten (+4px Outline)
+const M_VGAP = 11;         // vertikaler Abstand (gestapelte Intro-Buttons)
+const M_HGAP = 12;         // horizontaler Abstand (2 kleine oben)
+const M_PROG_GAP = 18;     // Abstand Progress ↔ Buttons/Card
+const M_INTRO_ORDER = [0, 2, 1];   // Rechner · Checklisten · Vergleiche
+const M_STACK_H = 3 * M_SMALL_H + 2 * M_VGAP;                       // 172 — Höhe des Intro-Stacks
+const M_INTRO_H = M_STACK_H + M_PROG_GAP + 6;                       // kompakte Flow-Höhe (Progress über dem Stack)
+const M_EXPAND_H = M_BIG_H + M_PROG_GAP + 6 + M_PROG_GAP + M_SMALL_H; // visuelle Höhe expandiert
+const M_VISUAL_SHIFT = M_EXPAND_H - M_INTRO_H;                      // so weit rutscht der Slider beim Expand hoch
+const M_LOADER_INTRO_YB = M_STACK_H + M_PROG_GAP;                   // Progress-Abstand v. unten (Intro: über Stack)
+const M_LOADER_ACTIVE_YB = M_BIG_H + M_PROG_GAP;                    // Progress-Abstand v. unten (aktiv: über Card)
+// Slot.y = Abstand der Card-UNTERKANTE zur Stage-Unterkante (bottom-anchored).
+function mToolSlot(i: number, activeIndex: number, MW: number, titleW: number[]): Slot {
+  if (activeIndex < 0) {
+    // Intro: 3 Buttons gestapelt, unten verankert, HUG-CONTENT (Pad 14 + Icon 28 + Gap 10 + Titel + Pad 12).
+    const p = M_INTRO_ORDER.indexOf(i);   // 0 = oben
+    const w = Math.round(64 + (titleW[i] || 60));
+    return { x: 0, y: (2 - p) * (M_SMALL_H + M_VGAP), w, h: M_SMALL_H };
+  }
+  if (i === activeIndex) {
+    // Aktiv: große Card ganz unten, volle Breite.
+    return { x: 0, y: 0, w: MW, h: M_BIG_H };
+  }
+  // Inaktiv: kleiner Button in der Reihe OBEN (ragt über die kompakte Stage hinaus).
+  const inactives = M_INTRO_ORDER.filter((k) => k !== activeIndex);
+  const idx = inactives.indexOf(i);
+  const smallW = Math.round((MW - M_HGAP) / 2);
+  return { x: idx === 0 ? 0 : smallW + M_HGAP, y: M_EXPAND_H - M_SMALL_H, w: smallW, h: M_SMALL_H };
+}
+
 export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
   const innerRowRef = useRef<HTMLDivElement>(null);
   const sliderBoxRef = useRef<HTMLDivElement>(null);
@@ -97,6 +133,15 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Loader-Position (fährt nach oben, wenn ein Tool aktiv ist).
   const loaderTopObj = useRef({ v: LOADER_TOP_INTRO });
   const [loaderTop, setLoaderTop] = useState(LOADER_TOP_INTRO);
+  // ── Mobile-Revolver-State (gemessene Breite + getweente Card-Slots + Loader-Position) ──
+  const [mStageW, setMStageW] = useState(0);
+  const mCardLayoutObjs = useRef<Slot[]>([]);
+  const [mCardLayouts, setMCardLayouts] = useState<Slot[]>([]);
+  const mLoaderTopObj = useRef({ v: M_LOADER_INTRO_YB });
+  const [mLoaderTop, setMLoaderTop] = useState(M_LOADER_INTRO_YB);
+  // Gecachter Andock-Scroll (gemessen wenn untransformiert/nicht aktiv) — von Loader-Trigger UND
+  // Autoscroll genutzt → exakt gleiche Position, auch im Expanded-Zustand (Slider translateY).
+  const mUndockRef = useRef(0);
   const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
   const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
@@ -132,6 +177,11 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Crossfade läuft rein über opacity (siehe Render), keine Richtungs-/Phasen-Logik nötig.
   const currentSlide = activeCard === null ? 3 : TOOLS.findIndex((t) => t.title === activeCard);
   const activeTool = activeCard ? TOOLS.find((t) => t.title === activeCard) : null;
+  // Mobile-Card ist IMMER im DOM (für den Flip-Morph) — behält den zuletzt aktiven Inhalt,
+  // damit beim Zuklappen nichts „leer" wird, während die Card rausmorpht.
+  const lastCardToolRef = useRef(TOOLS[0]);
+  if (activeTool) lastCardToolRef.current = activeTool;
+  const cardTool = activeTool ?? lastCardToolRef.current;
 
   // Visual/Slider-Boxhöhe = 4:3 der Box-Breite, min 350px. Treibt --stage-h, das
   // sowohl die Stage-Boxen (height) als auch die Newsletter-min-height steuert →
@@ -143,7 +193,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       const w = row.clientWidth;
       if (w <= 0) return;
       const visualW = w - 330 - 72;        // Controls 330 + 2×36px Box-Margins
-      const h = Math.max(0, visualW * 0.75 - 80); // 4:3 − 80, KEINE Mindesthöhe mehr
+      const h = Math.max(0, visualW * 0.75); // exakt 4:3 der Box-Breite
       row.style.setProperty("--stage-h", `${Math.round(h)}px`);
     };
     apply();
@@ -151,28 +201,6 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     ro.observe(row);
     window.addEventListener("resize", apply);
     return () => { ro.disconnect(); window.removeEventListener("resize", apply); };
-  }, []);
-
-  // Mobile: Bird-Visual-Höhe so, dass Visual + „Die Finanztools" + Buttons in den ersten
-  // Viewport passen (Buttons sind sticky unten). Höhe = vh − Bird-Oben − Heading − Buttons − Gap.
-  useEffect(() => {
-    const wrap = mobileWrapRef.current;
-    if (!wrap) return;
-    const apply = () => {
-      const bird = wrap.querySelector<HTMLImageElement>(".ftools-m-bird");
-      if (!bird) return;
-      if (!window.matchMedia("(max-width: 767px)").matches) { bird.style.height = ""; return; }
-      const ft = wrap.querySelector<HTMLElement>(".ftools-m-finanztools");
-      const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
-      if (!ft || !btns) return;
-      const birdTop = bird.getBoundingClientRect().top + window.scrollY;
-      const h = window.innerHeight - birdTop - ft.offsetHeight - btns.offsetHeight - 44;
-      bird.style.height = `${Math.max(180, Math.round(h))}px`;
-    };
-    apply();
-    window.addEventListener("resize", apply);
-    if (document.fonts?.ready) document.fonts.ready.then(apply).catch(() => {});
-    return () => window.removeEventListener("resize", apply);
   }, []);
 
   // Mobile: „Alles in eigener Hand", Beschreibung 1 + Progress-Linie faden/bluren beim
@@ -183,10 +211,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     if (!wrap || !window.matchMedia("(max-width: 767px)").matches) return;
     const targets = ([".ftools-m-allein", ".ftools-m-desc"]
       .map((s) => wrap.querySelector<HTMLElement>(s)).filter(Boolean)) as HTMLElement[];
-    const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
+    const btns = wrap.querySelector<HTMLElement>(".ftools-m-stage");
     if (!targets.length || !btns) return;
     const apply = () => {
-      const start = btns.getBoundingClientRect().top;   // Button-Oberkante
+      const start = btns.getBoundingClientRect().top;   // Stage-/Button-Oberkante
       const end = 0.6 * window.innerHeight;             // 60% Viewport
       const range = Math.max(1, start - end);
       for (const el of targets) {
@@ -203,25 +231,64 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
 
   // Mobile: Progress-Linie zeichnet sich von links nach rechts ein (scaleX) sobald sie den
   // Andock-Bereich erreicht (Buttons docken ab) — einmalige Animation, NICHT scroll-gebunden.
+  // Gleichzeitig läuft der Progress-Balken automatisch los (Lead-in 5s, wie Desktop) + der
+  // Pause/Play-Button (loaderActive) faded ein. Beim Re-Docken: alles zurücksetzen.
   useEffect(() => {
     const wrap = mobileWrapRef.current;
     if (!wrap || !window.matchMedia("(max-width: 767px)").matches) return;
     const track = wrap.querySelector<HTMLElement>(".ftools-m-loader-track");
-    const btns = wrap.querySelector<HTMLElement>(".ftools-m-btns");
-    if (!track || !btns) return;
+    const stage = wrap.querySelector<HTMLElement>(".ftools-m-stage");
+    if (!track || !stage) return;
     let drawn = false;
+    const startLeadIn = () => {
+      introTweenRef.current?.kill();
+      introProgObj.current.v = 0;
+      setIntroProgress(0);
+      setLoaderActive(true);
+      // Lead-in IMMER unpausiert starten (sonst füllt sich der Balken im collapsed Zustand nicht,
+      // falls vorher per X/Slideshow-Ende pausiert wurde).
+      setLoaderPaused(false);
+      loaderPausedRef.current = false;
+      introTweenRef.current = gsap.to(introProgObj.current, {
+        v: 1,
+        duration: 5,
+        ease: "none",
+        paused: false,
+        onUpdate: () => setIntroProgress(introProgObj.current.v),
+        // Lead-in einmal durch → erstes Tool (Rechner) expandieren, danach Auto-Advance (wie Desktop).
+        onComplete: () => { introTweenRef.current = null; activateToolRef.current(0); },
+      });
+    };
+    const cancel = () => {
+      introTweenRef.current?.kill();
+      introTweenRef.current = null;
+      introProgObj.current.v = 0;
+      setIntroProgress(0);
+      setLoaderActive(false);
+      if (activeCardRef.current !== null) setActiveCard(null);
+    };
     const onScroll = () => {
-      // Buttons sind sticky bottom:16 → solange gedockt ist ihre Unterkante = vh−16.
-      // Sobald sie abdocken (mit dem Flow hochscrollen) wird sie < vh−16 → Linie einzeichnen.
-      const undocked = btns.getBoundingClientRect().bottom < window.innerHeight - 16 - 1;
-      if (undocked && !drawn) { drawn = true; track.style.transform = "scaleX(1)"; }
-      else if (!undocked && drawn) { drawn = false; track.style.transform = "scaleX(0)"; }
+      // Während programmatischem Scroll (Button-Klick) nicht canceln/collapsen.
+      if (isScrollingToTarget.current) return;
+      // Andock-Scroll EXAKT wie der Autoscroll berechnen (gleiche Slider-Referenz + Konstanten),
+      // damit Loader-Einzeichnen und Autoscroll-Ziel an DERSELBEN Stelle liegen (= wo die Buttons
+      // mit der Seite zu scrollen beginnen). Nur messen wenn untransformiert (nicht aktiv) → cachen.
+      const slider = wrap.querySelector<HTMLElement>(".ftools-m-slider");
+      if (slider && activeCardRef.current === null) {
+        mUndockRef.current = slider.getBoundingClientRect().bottom + window.scrollY + 22 + M_INTRO_H - (window.innerHeight - 16);
+      }
+      const undocked = window.scrollY >= mUndockRef.current - 1;
+      // Linie/Balken laufen über loaderActive (deklarativ via startLeadIn/cancel) — NICHT imperativ,
+      // damit sie auch nach dem Autoscroll (ohne weiteres Scroll-Event) sofort sichtbar sind.
+      if (undocked && !drawn) { drawn = true; startLeadIn(); }
+      else if (!undocked && drawn) { drawn = false; cancel(); }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); introTweenRef.current?.kill(); };
   }, []);
+
 
   // Dot-Spalte mit ZWEI gepunkteten Segmenten um den vertikalen Schriftzug:
   //  • Segment 1 (oben): Dotline aus dem Section-Top, Sticky-Pfeil ruht GAP über „ANBIETER".
@@ -421,6 +488,29 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     });
   };
 
+  // Mobile-Pendant: erst zum Finanztool-Bereich scrollen — exakt an die Stelle, an der die Buttons
+  // abdocken (natürliche Stage-Unterkante = vh−16) — DANN das Tool aufklappen + Timeline starten.
+  // Die Stage ist sticky → ihre gerenderte Unterkante ist immer vh−16; deshalb die NATÜRLICHE
+  // Flow-Position via offsetTop/offsetHeight rechnen (sticky-unabhängig).
+  const mobileCardClickRef = useRef<(i: number) => void>(() => {});
+  mobileCardClickRef.current = (i: number) => {
+    // Gecachter Andock-Scroll (vom Loader-Trigger gemessen, untransformiert) → EXAKT die gleiche
+    // Position wie das Loader-Einzeichnen, und korrekt auch im Expanded-Zustand (Slider translateY).
+    const targetY = Math.round(mUndockRef.current);
+    // Noch nicht gemessen ODER schon (fast) am Andock-Punkt? → direkt aufklappen (kein Scroll).
+    if (!targetY || Math.abs(window.scrollY - targetY) <= 8) { activateToolRef.current(i); return; }
+    isScrollingToTarget.current = true;
+    gsap.to(window, {
+      scrollTo: { y: targetY, autoKill: false },
+      duration: 0.6,
+      ease: "power2.inOut",
+      onComplete: () => {
+        isScrollingToTarget.current = false;
+        activateToolRef.current(i);
+      },
+    });
+  };
+
   // Lead-in: Balken läuft einmal durch (5s, kein Tool) → danach öffnet Rechner + Auto-Advance.
   // Wird vom Scroll-Trigger UND vom Play-Button (nach X-Collapse) genutzt.
   const startLeadInRef = useRef<() => void>(() => {});
@@ -458,6 +548,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       loaderPausedRef.current = false;
     };
     const onScroll = () => {
+      // Mobile hat einen eigenen Lead-in (Desktop-Slider ist hidden → würde sonst dauernd cancelFill feuern).
+      if (window.matchMedia("(max-width: 767px)").matches) return;
       // Skip while GSAP is programmatically scrolling to avoid premature collapse mid-animation
       if (isScrollingToTarget.current) return;
       const slider = sliderBoxRef.current;
@@ -546,6 +638,46 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       onUpdate: () => setLoaderTop(loaderTopObj.current.v),
     });
   }, [activeCard]);
+
+  // Mobile: Stage-Breite messen (fluid) → treibt die Card-Slot-Geometrie.
+  useEffect(() => {
+    const wrap = mobileWrapRef.current;
+    if (!wrap) return;
+    const apply = () => {
+      if (!window.matchMedia("(max-width: 767px)").matches) return;
+      const stage = wrap.querySelector<HTMLElement>(".ftools-m-stage");
+      if (stage && stage.clientWidth > 0) setMStageW(stage.clientWidth);
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(wrap);
+    window.addEventListener("resize", apply);
+    return () => { ro.disconnect(); window.removeEventListener("resize", apply); };
+  }, []);
+
+  // Mobile-Revolver-Morph: Card-Slots + Loader-Position auf die Zielwerte tweenen (wie Desktop).
+  useEffect(() => {
+    if (mStageW <= 0) return;
+    const activeIndex = activeCard ? TOOLS.findIndex((t) => t.title === activeCard) : -1;
+    // Erstinitialisierung (oder nach Breitenänderung ohne bestehende Objs): direkt setzen.
+    if (mCardLayoutObjs.current.length === 0) {
+      mCardLayoutObjs.current = TOOLS.map((_, i) => ({ ...mToolSlot(i, activeIndex, mStageW, titleWidths) }));
+      setMCardLayouts(mCardLayoutObjs.current.map((o) => ({ ...o })));
+    }
+    const push = () => setMCardLayouts(mCardLayoutObjs.current.map((o) => ({ ...o })));
+    TOOLS.forEach((_, i) => {
+      const slot = mToolSlot(i, activeIndex, mStageW, titleWidths);
+      gsap.to(mCardLayoutObjs.current[i], {
+        x: slot.x, y: slot.y, w: slot.w, h: slot.h,
+        duration: 0.6, ease: "power3.inOut", overwrite: true, onUpdate: push,
+      });
+    });
+    gsap.to(mLoaderTopObj.current, {
+      v: activeCard ? M_LOADER_ACTIVE_YB : M_LOADER_INTRO_YB,
+      duration: 0.6, ease: "power2.inOut", overwrite: true,
+      onUpdate: () => setMLoaderTop(mLoaderTopObj.current.v),
+    });
+  }, [activeCard, mStageW, titleWidths]);
 
   return (
     <section ref={sectionRef} style={{ width: "100%", marginBottom: 100 }}>
@@ -1009,45 +1141,157 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
 
       {/* ===== MOBILE-Layout (≤767) — eigener Aufbau; Desktop-Row darüber wird ≤767 ausgeblendet ===== */}
       <div className="ftools-mobile" ref={mobileWrapRef}>
-        {/* 1. Landing-Visual (Bird), full width */}
+        {/* 1. Landing-Visual (Bird), full width, natürliche Höhe (keine JS-Berechnung mehr). */}
         <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden className="ftools-m-bird" />
 
-        {/* 2. Überschriften */}
-        <p className="ftools-m-finanztools">Die Finanztools</p>
+        {/* Platzhalter über „Die Finanztools" → drückt dessen Flow-Position runter, damit das Label
+            (sticky bottom) wie Desktop unten klebt und erst nach etwas Scrollen mit hochscrollt. */}
+        <div className="ftools-m-finanztools-spacer" aria-hidden />
+
+        {/* 2. Überschriften — „Die Finanztools" + Wolke. STICKY BOTTOM (wie Desktop): klebt perfekt
+              über den 3 Buttons; scrollt erst mit, wenn die Wolke 36px Abstand zum Bird darüber hat. */}
+        <div className="ftools-m-finanztools-row">
+          <img src="/assets/finanztoolBlendMobile.svg" alt="" aria-hidden className="ftools-m-blend" />
+          <p className="ftools-m-finanztools">Die Finanztools</p>
+        </div>
         <h2 className="ftools-m-allein">Alles in eigener Hand</h2>
 
-        {/* 3. Beschreibung 1 */}
-        <p className="ftools-m-desc">Behalten Sie die Kontrolle über Ihre Finanzen und Versicherungen.</p>
+        {/* 3. Beschreibung 1 — fadet aus UND kollabiert sobald ein Tool expanded ist, damit der
+              freiwerdende Platz nach oben genutzt wird (Slider rutscht hoch, Stage wächst nicht nach unten).
+              Innerer .ftools-m-desc = Scroll-Reveal. */}
+        <div
+          className="ftools-m-desc-wrap"
+          style={{
+            position: "relative",
+            zIndex: 2,
+            opacity: activeCard ? 0 : 1,
+            // Nur ausfaden (NICHT kollabieren) — der Platz fürs Hochrutschen kommt aus dem Slider-translateY,
+            // damit das Grundlayout/die Höhe gleich bleibt (kein Reflow/Sprung).
+            transition: "opacity 0.3s ease",
+          }}
+        >
+          <p className="ftools-m-desc">Behalten Sie die Kontrolle über Ihre Finanzen und Versicherungen.</p>
+        </div>
 
-        {/* 4. Toolbox / Tool-Slider (Crossfade wie Desktop) */}
-        <div className="ftools-m-slider">
+        {/* 4. Toolbox / Tool-Slider (Crossfade wie Desktop). Rutscht beim Expand per translateY hoch,
+              damit die nach oben öffnende Card Platz hat — Grundlayout bleibt (visual-only). */}
+        <div
+          className="ftools-m-slider"
+          style={{ transform: `translateY(${activeCard ? -M_VISUAL_SHIFT : 0}px)`, transition: "transform 0.6s cubic-bezier(0.77,0,0.18,1)" }}
+        >
           <img src={INTRO_IMAGE} alt="" aria-hidden style={{ opacity: currentSlide === 3 ? 1 : 0 }} />
           {TOOLS.map((tool, i) => (
             <img key={i} src={tool.image} alt="" aria-hidden style={{ opacity: i === currentSlide ? 1 : 0 }} />
           ))}
         </div>
 
-        {/* 5. Progress-/Loader-Linie an der Stelle der grauen Linie über den Buttons (wie Desktop) */}
-        <div className="ftools-m-loader">
-          <div className="ftools-m-loader-track" />
-          <div className="ftools-m-loader-fill" style={{ width: `${Math.round(introProgress * 100)}%` }} />
-        </div>
+        {/* 5. Sticky-Revolver-Stage (≤767): Desktop-Technik, bottom-anchored. KOMPAKTE Flow-Höhe
+              (kein Reservegap im Intro); der Expand-Inhalt ragt nach OBEN raus (overflow visible).
+              Cards/Loader sind über `bottom` (Abstand zur Unterkante) verankert. */}
+        <div className="ftools-m-stage" style={{ height: M_INTRO_H, overflow: "visible" }}>
+          {/* Progress-Linie + Pause/Play + Bookmark — absolut, bottom = mLoaderTop (slided wie Desktop). */}
+          <div className="ftools-m-loader" style={{ position: "absolute", left: 0, right: 0, bottom: mLoaderTop }}>
+            <button
+              type="button"
+              className="ftools-m-loader-toggle"
+              style={{ top: activeCard ? -98 : -28, opacity: loaderActive ? 1 : 0, pointerEvents: loaderActive ? "auto" : "none" }}
+              onClick={() => {
+                // Play aus dem X-Collapse-Zustand (keine Card, kein Tween) → Lead-in neu starten.
+                if (loaderPaused && activeCardRef.current === null && !introTweenRef.current) {
+                  startLeadInRef.current();
+                } else {
+                  setLoaderPaused((p) => !p);
+                }
+              }}
+              aria-label={loaderPaused ? "Abspielen" : "Pause"}
+            >
+              {loaderPaused ? (
+                <svg width="11" height="13" viewBox="0 0 11 13" aria-hidden><path d="M0 0v13l11-6.5z" fill="currentColor" /></svg>
+              ) : (
+                <svg width="10" height="13" viewBox="0 0 10 13" aria-hidden><rect width="3.2" height="13" fill="currentColor" /><rect x="6.8" width="3.2" height="13" fill="currentColor" /></svg>
+              )}
+            </button>
+            <div className="ftools-m-loader-track" style={{ transform: loaderActive ? "scaleX(1)" : "scaleX(0)" }} />
+            <div className="ftools-m-loader-fill" style={{ width: `${Math.round(introProgress * 100)}%` }} />
+            <div className="ftools-m-loader-bookmark" style={{ opacity: activeTool ? 1 : 0 }} aria-hidden>
+              <div style={{ width: 28, height: 9, background: activeTool?.color ?? "transparent" }} />
+              <svg width="28" height="23" viewBox="0 0 28 23" fill="none" style={{ display: "block", marginTop: -1 }}>
+                <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={activeTool?.color ?? "transparent"} />
+              </svg>
+            </div>
+          </div>
 
-        {/* 7. Buttons sticky unten links (Reihenfolge Rechner · Checklisten · Vergleiche) */}
-        <div className="ftools-m-btns">
-          {[0, 2, 1].map((origIdx) => {
-            const tool = TOOLS[origIdx];
+          {/* 3 Tool-Cards (absolut, getweent). Header (Icon+Titel) immer sichtbar; Body (Desc+CTA)
+              opacity = contentProg → erscheint beim Aufmorphen zur großen Card. */}
+          {TOOLS.map((tool, i) => {
+            const activeIndex = activeCard ? TOOLS.findIndex((t) => t.title === activeCard) : -1;
+            const L = mCardLayouts[i] ?? mToolSlot(i, activeIndex, mStageW || 320, titleWidths);
+            const cp = contentProgs[i];
+            const isActiveTool = activeCard === tool.title;
             return (
-              <button key={tool.title} type="button" className="ftools-mbtn" onClick={() => cardClickRef.current(origIdx)}>
-                {tool.icon && <img src={tool.icon} alt="" aria-hidden />}
-                <span>{tool.title}</span>
-              </button>
+              <div
+                key={tool.title}
+                className="ftools-m-tcard"
+                onClick={() => { if (!isActiveTool) mobileCardClickRef.current(i); }}
+                style={{
+                  position: "absolute",
+                  left: Math.round(L.x), bottom: Math.round(L.y),
+                  width: L.w, height: L.h,
+                  overflow: "hidden",   // Content vom Button geclippt → reveal beim Aufmorphen (wie Desktop)
+                  // Glass NUR als Button — fadet zur großen Card komplett raus (wie Desktop):
+                  // kein Radius/Background/Blur/Schatten/Füllung mehr bei cp=1.
+                  borderRadius: 17 * (1 - cp),
+                  background: `rgba(255, 255, 255, ${(0.8 * (1 - cp)).toFixed(3)})`,
+                  backdropFilter: cp > 0.5 ? "none" : "brightness(1.3) blur(13px)",
+                  WebkitBackdropFilter: cp > 0.5 ? "none" : "brightness(1.3) blur(13px)",
+                  boxShadow: `0 3px 23px rgba(0, 0, 0, ${(0.05 * (1 - cp)).toFixed(3)})`,
+                  zIndex: cp > 0.5 ? 3 : 2,
+                }}
+              >
+                {/* Header: Icon NEBEN Titel — Titel unten bündig mit dem Icon (align-end), nah dran.
+                    Größen morphen Button→Card: Icon 28→38, Titel 14→28. */}
+                <div className="ftools-m-tcard-head">
+                  {tool.icon && <img src={tool.icon} alt="" aria-hidden style={{ width: 28 + 10 * cp, height: 28 + 10 * cp }} />}
+                  {/* Titel rutscht mit cp leicht runter → unten bündig mit dem (größeren) Icon. */}
+                  <span style={{ fontSize: 14 + 14 * cp, transform: `translateY(${(5 * cp).toFixed(2)}px)` }}>{tool.title}</span>
+                </div>
+                {/* Beschreibung — oben verankert, FESTE Breite (große Card) → bricht beim Morph nicht um. */}
+                <p className="ftools-m-card-desc" style={{ width: (mStageW || 320) - 36, opacity: cp, pointerEvents: cp > 0.5 ? "auto" : "none" }}>{tool.description}</p>
+                {/* CTA — TOP-verankert an seiner FINALEN Position (M_BIG_H − 52 → unten, 4px Outline-Luft).
+                    So bewegt er sich beim Morph nicht (die Card-Oberkante steht ~fest), nur Clip/Opacity. */}
+                <div className="ftools-m-card-cta" style={{ top: M_BIG_H - 52, opacity: cp, pointerEvents: cp > 0.5 ? "auto" : "none" }}>
+                  <Button label={tool.cta.replace("Zu unseren", "Zu den")} href={tool.href} />
+                </div>
+              </div>
             );
           })}
+
+          {/* Schließen-X — EINE feste Instanz wie Desktop (morpht NICHT mit den Cards). Oben rechts
+              an der großen Card, bottom-anchored, faded mit activeCard. */}
+          <button
+            type="button"
+            className="ftools-m-card-close"
+            onClick={() => collapseAndPauseRef.current()}
+            aria-label="Schließen"
+            tabIndex={activeCard ? 0 : -1}
+            style={{ bottom: M_BIG_H - 9 - 34, opacity: activeCard ? 1 : 0, pointerEvents: activeCard ? "auto" : "none" }}
+          >
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden>
+              <circle cx="17" cy="17" r="16" stroke="var(--color-text-primary)" strokeWidth="1.3" />
+              <path d="M11.5 11.5l11 11M22.5 11.5l-11 11" stroke="var(--color-text-primary)" strokeWidth="1.3" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>{/* ftools-m-stage */}
+
+        {/* Beschreibung 2 — im Section-Flow (scrollt mit, NICHT sticky). Flex-Reihe mit einem LEEREN
+            Platzhalter in EXAKTER Größe des Button-Stacks (Breite = breitester Button, Höhe = Stack) +
+            desc2 daneben (top-aligned, streckt nach rechts). So sitzt der Text immer korrekt — keine
+            Schätzung. bottom = padding-bottom (56) → Platzhalter deckt sich mit dem Button-Stack. */}
+        <div className="ftools-m-desc2-row" style={{ opacity: activeCard ? 0 : 1, transition: "opacity 0.3s ease" }}>
+          <div className="ftools-m-desc2-spacer" style={{ width: 64 + Math.max(60, ...titleWidths), height: M_STACK_H }} aria-hidden />
+          <p className="ftools-m-desc2">Von Brutto-Netto-Rechner bis zum komplexen Versicherungsvergleich. Wir haben das passende Tool für Sie</p>
         </div>
-        {/* Beschreibung 2 — scrollt mit (nicht sticky), unten rechts neben den Buttons */}
-        <p className="ftools-m-desc2">Von Brutto-Netto-Rechner bis zum komplexen Versicherungsvergleich. Wir haben das passende Tool für Sie</p>
-      </div>
+      </div>{/* ftools-mobile */}
     </section>
   );
 }

@@ -88,24 +88,45 @@ body[data-landing] {
 /* Bird-Visual full-bleed + horizontal zentriert */
 .ftools-m-bird { display: block; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); height: auto; object-fit: contain; }
 /* Überschriften exakt wie Desktop: „Die Finanztools" 19/700, „Alles in eigener Hand" 26/900 */
+/* „Die Finanztools" mit Blende-Wolke dahinter — maskiert das von oben reinragende Visual.
+   Row überlappt das Visual (negativer margin-top); Blende absolut dahinter (z 0), Text davor (z 1). */
+/* Platzhalter (tunebar) — Höhe = Scrollweg, bevor das Label mit hochscrollt. */
+.ftools-m-finanztools-spacer { height: 100px; }
+/* Label + Wolke sticky bottom: bottom-Wert = Position perfekt über den Buttons (tunebar). */
+.ftools-m-finanztools-row { position: sticky; bottom: 200px; margin-top: -14px; z-index: 49; }
+.ftools-m-blend {
+  position: absolute; z-index: 0; pointer-events: none;
+  left: -6px; bottom: -6px; width: 161px; height: auto;
+}
 .ftools-m-finanztools {
+  position: relative; z-index: 1; margin: 0;
   font-family: var(--font-heading, 'Merriweather', serif);
-  font-weight: 700; font-size: 19px; line-height: 1.38;
-  color: var(--color-text-primary); margin: 14px 0 0;   /* Gap zwischen Visual und Heading */
+  font-weight: 700; font-size: 17px; line-height: 1.38;
+  color: var(--color-text-primary);
 }
 .ftools-m-allein {
+  position: relative; z-index: 2;   /* über der Finanztools-Row/Blende (z 1) */
   font-family: var(--font-heading, 'Merriweather', serif);
   font-weight: 900; font-size: 26px; line-height: 1.3;
   color: var(--color-text-primary); margin: 2px 0 0;
 }
 /* Loader wie Desktop: 1px-Linie (Track) zeichnet sich von links nach rechts ein (scaleX,
    per JS getriggert wenn die Buttons abdocken — NICHT scroll-gebunden) + 6px-Fill. */
-.ftools-m-loader { position: relative; height: 6px; margin: 18px 0 0; }
+.ftools-m-loader { position: relative; height: 6px; margin: 0; }
 .ftools-m-loader-track {
-  position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--color-text-primary);
+  position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-text-primary);
   transform: scaleX(0); transform-origin: left center; transition: transform 0.6s ease;
 }
-.ftools-m-loader-fill { position: absolute; left: 0; top: 0; height: 6px; background: var(--color-text-primary); transition: width 0.1s linear; }
+.ftools-m-loader-fill { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--color-text-primary); transition: width 0.1s linear; }
+/* Pause/Play-Button — über der Linie rechts; erscheint mit Verzögerung (≈ Draw-in) wie Desktop. */
+.ftools-m-loader-toggle {
+  position: absolute; top: -28px; right: 0;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; border: none; background: none;
+  color: var(--color-text-primary); cursor: pointer;
+  transition: opacity 0.25s ease 0.5s;
+}
 /* desc1 — Merriweather wie Desktop (.ftools-allein-desc) */
 .ftools-m-desc {
   font-family: var(--font-heading, 'Merriweather', serif);
@@ -114,18 +135,73 @@ body[data-landing] {
 .ftools-m-slider { position: relative; width: 100%; aspect-ratio: 746 / 527; margin: 14px 0 0; }
 .ftools-m-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.5s ease; }
 .ftools-m-divider { height: 1px; background: rgba(0,0,0,0.12); margin: 18px 0 0; }
-/* Buttons sticky unten links — Container .ftools-mobile ist hoch genug zum Kleben. */
-/* Buttons sticky unten links */
+/* Sticky-Stage (≤767): Buttons · Progress · Expanded Card als EINE Einheit, klebt unten.
+   Flex-column + order → Progress liegt geschlossen ÜBER den Buttons, offen darunter. */
+/* Revolver-Stage: feste Höhe (inline), sticky unten; die 3 Tool-Cards liegen ABSOLUT darin
+   und werden auf ihre Slots getweent (gleiche Technik wie Desktop). z-index hoch → Buttons/Cards
+   liegen über allem außer Leo (z 60). */
+.ftools-m-stage { position: sticky; bottom: 16px; margin-top: 22px; z-index: 50; }
+
+/* Tool-Card (Button ↔ große Card) — Glass-Optik kommt inline aus cp (fadet zur großen Card raus). */
+.ftools-m-tcard { cursor: pointer; }
+.ftools-m-tcard-head {
+  position: absolute; left: 13px; right: 12px; top: 0; height: 50px;
+  display: flex; align-items: center; gap: 8px; pointer-events: none;
+}
+.ftools-m-tcard-head img { flex-shrink: 0; object-fit: contain; }
+.ftools-m-tcard-head span {
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 600; line-height: 1; color: var(--color-text-primary); white-space: nowrap;
+}
+
+/* Buttons-Reihe: Intro = 3 gestapelt (links); aktiv = 2 inaktive klein NEBENEINANDER. */
 .ftools-m-btns {
-  position: sticky; bottom: 16px;
+  order: 1; position: relative;
   display: flex; flex-direction: column; gap: 11px; align-items: flex-start;
-  width: 46%; max-width: 250px; margin-top: 22px;
+  width: 46%; max-width: 250px;
+}
+.ftools-m-btns.is-active {
+  flex-direction: row; width: 100%; max-width: none; gap: 12px; align-items: stretch;
+}
+.ftools-m-btns.is-active .ftools-mbtn { flex: 1 1 0; width: auto; justify-content: flex-start; }
+/* aktives Tool: aus dem Flow (Reihe zeigt nur 2), faded raus — Flip morpht den Rest. */
+.ftools-mbtn { transition: opacity 0.3s ease; }
+.ftools-mbtn.is-hidden { position: absolute; opacity: 0; pointer-events: none; }
+
+/* ── Expanded Card (Mobile) ── immer im DOM, geschlossen kollabiert (Flip morpht die Höhe). */
+/* Schließen-X — feste Instanz in der Stage (bottom inline), faded mit activeCard, morpht NICHT mit. */
+.ftools-m-card-close {
+  position: absolute; right: 4px; width: 34px; height: 34px; z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; border: none; background: none; color: var(--color-text-primary); cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.ftools-m-card-desc {
+  position: absolute; left: 18px; top: 52px; margin: 0;   /* width inline (feste große-Card-Breite) */
+  font-family: var(--font-body, 'Open Sans', sans-serif);
+  font-weight: 400; font-size: 16px; line-height: 1.35; color: var(--color-text-medium);
+  display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* CTA TOP-verankert (top inline = finale Position) → bewegt sich beim Morph nicht. */
+.ftools-m-card-cta { position: absolute; left: 18px; display: flex; justify-content: flex-start; }
+
+/* Bookmark (Tool-Farbe) hängt rechts an der Progress-Linie nach unten. */
+.ftools-m-loader-bookmark {
+  position: absolute; right: 37px; top: 0;
+  display: flex; flex-direction: column; align-items: center;
+  transition: opacity 0.3s ease;
 }
 /* Beschreibung 2 — scrollt mit der Section (absolut, NICHT sticky). Unten rechts, +5px Gap
    zu den Buttons (left 52%); etwas höher als vorher (bottom 66). */
+/* Flex-Reihe im Section-Flow: Platzhalter (Button-Stack-Größe) + desc2 daneben, oben ausgerichtet.
+   bottom = padding-bottom (56) → Platzhalter deckt sich exakt mit dem Button-Stack. */
+.ftools-m-desc2-row {
+  position: absolute; left: clamp(20px, 5vw, 40px); right: clamp(20px, 5vw, 40px); bottom: 56px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.ftools-m-desc2-spacer { flex-shrink: 0; }
 .ftools-m-desc2 {
-  position: absolute; left: 52%; right: clamp(20px, 5vw, 40px); bottom: 96px;
-  margin: 0;
+  flex: 1; margin: 0;
   font-family: var(--font-body, 'Open Sans', sans-serif);
   font-size: 15px; line-height: 1.4; color: var(--color-text-medium);
 }
