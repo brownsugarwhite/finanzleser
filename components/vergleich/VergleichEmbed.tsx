@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
 import { refreshScrollTriggers } from "@/lib/refreshScrollTriggers";
+import { useConsent } from "@/lib/consent/ConsentContext";
 
 interface ScriptConfig {
   type: string;
@@ -19,11 +20,35 @@ const STABLE_MS = 800;         // Höhe gilt als „final", wenn 800ms keine Än
 const LOAD_FALLBACK_MS = 8000; // Notbremse: spätestens dann aufdecken
 const PLACEHOLDER_H = 180;     // Lade-Box-Höhe während des Ladens
 
+// Anbieter-Label für den Consent-Platzhalter aus der Embed-Quelle ableiten.
+const PROVIDER_LABELS: { match: string; label: string }[] = [
+  { match: "financeads.net", label: "financeads" },
+  { match: "check24.de", label: "CHECK24" },
+  { match: "mr-money.de", label: "mr-money" },
+  { match: "covomo.de", label: "Covomo" },
+  { match: "partner-versicherung.de", label: "Partner-Versicherung" },
+  { match: "bussgeldrechner", label: "Bußgeldrechner" },
+  { match: "fgrp.net", label: "finanzen.de" },
+];
+
+function providerLabel(data: { iframeUrl?: string; scriptConfig?: ScriptConfig }): string {
+  const hay = data.iframeUrl || data.scriptConfig?.scriptSrc || "";
+  for (const p of PROVIDER_LABELS) if (hay.includes(p.match)) return p.label;
+  if (data.scriptConfig?.type === "finanzen-de") return "finanzen.de";
+  if (data.scriptConfig?.type === "covomo") return "Covomo";
+  if (data.scriptConfig?.type === "bussgeld") return "Bußgeldrechner";
+  return "einem externen Anbieter";
+}
+
 export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
+  const { hasConsent, grant, openSettings } = useConsent();
+  const allowed = hasConsent("externalMedia");
+
   const [inView, setInView] = useState(false);
   const [iframeUrl, setIframeUrl] = useState<string | null>(null);
   const [scriptConfig, setScriptConfig] = useState<ScriptConfig | null>(null);
   const [rawHtml, setRawHtml] = useState<string | null>(null);
+  const [provider, setProvider] = useState<string>("einem externen Anbieter");
   const [error, setError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(600);
   const [revealed, setRevealed] = useState(false);
@@ -44,8 +69,11 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const lastH = useRef(0);
   const revealedRef = useRef(false);
 
-  // Config vorhanden → Inhalt darf montieren (lädt versteckt unter der Ladebox)
+  // Config vorhanden → Daten da. Erst MIT Consent darf der Inhalt montieren/laden.
   const ready = !!(iframeUrl || scriptConfig || rawHtml);
+  const mounted = ready && allowed;
+  // Daten da, aber (noch) kein Consent → 2-Klick-Platzhalter statt Drittanbieter-Inhalt.
+  const gated = ready && !allowed && !error;
 
   // Lazy: erst laden, wenn der Embed in den Viewport scrollt
   useEffect(() => {
@@ -60,7 +88,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
     return () => io.disconnect();
   }, []);
 
-  // Daten holen, sobald sichtbar
+  // Daten holen, sobald sichtbar (same-origin Proxy → kein Drittanbieter-Cookie).
   useEffect(() => {
     if (!inView || fetched.current) return;
     fetched.current = true;
@@ -70,7 +98,8 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
         if (data.iframeUrl) setIframeUrl(data.iframeUrl);
         else if (data.scriptConfig) setScriptConfig(data.scriptConfig);
         else if (data.rawHtml) setRawHtml(data.rawHtml);
-        else setError(true);
+        else { setError(true); return; }
+        setProvider(providerLabel(data));
       })
       .catch(() => setError(true));
   }, [inView, slug]);
@@ -79,7 +108,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   // nach. Erst aufdecken, wenn die (volle) Höhe STABIL ist (STABLE_MS ohne Änderung)
   // — bzw. spätestens nach LOAD_FALLBACK_MS. So „springt" der Vergleich nicht nach.
   useEffect(() => {
-    if (!ready) return;
+    if (!mounted) return;
     const content = contentRef.current;
     if (!content) return;
 
@@ -110,7 +139,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
       clearTimeout(fallback);
       if (stableTimer.current) clearTimeout(stableTimer.current);
     };
-  }, [ready]);
+  }, [mounted]);
 
   // Reveal: Lade-Box auf die volle (finale) Vergleichshöhe skalieren + Inhalt NUR per
   // opacity einfaden (kein y-Slide). Loader fadet weg. Danach trägt der Inhalt im Flow.
@@ -186,11 +215,11 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
-  useEffect(() => { if (ready) refreshScrollTriggers(); }, [ready, iframeHeight]);
+  useEffect(() => { if (mounted) refreshScrollTriggers(); }, [mounted, iframeHeight]);
 
-  // JS-Widget laden
+  // JS-Widget laden — erst MIT Consent (Container existiert nur dann).
   useEffect(() => {
-    if (!scriptConfig || !scriptContainerRef.current) return;
+    if (!mounted || !scriptConfig || !scriptContainerRef.current) return;
     const container = scriptContainerRef.current;
     if (container.childElementCount > 0) return;
 
@@ -243,11 +272,11 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
       container.appendChild(script);
     }
     return () => { container.innerHTML = ""; };
-  }, [scriptConfig]);
+  }, [mounted, scriptConfig]);
 
-  // Roh-Embed laden (Scripts neu erzeugen → werden ausgeführt)
+  // Roh-Embed laden (Scripts neu erzeugen → werden ausgeführt) — erst MIT Consent.
   useEffect(() => {
-    if (!rawHtml || !rawContainerRef.current) return;
+    if (!mounted || !rawHtml || !rawContainerRef.current) return;
     const container = rawContainerRef.current;
     if (container.childElementCount > 0) return;
     const template = document.createElement("template");
@@ -260,13 +289,36 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
     });
     container.appendChild(template.content);
     return () => { container.innerHTML = ""; };
-  }, [rawHtml]);
+  }, [mounted, rawHtml]);
+
+  // 2-Klick-Platzhalter: Daten geladen, aber Nutzer hat externe Inhalte (noch) nicht erlaubt.
+  if (gated) {
+    return (
+      <div className="vergleich-embed" ref={rootRef}>
+        <div className="embed-consent">
+          <p className="embed-consent__title">Externer Vergleichsrechner</p>
+          <p className="embed-consent__text">
+            Dieser Vergleichsrechner wird von <strong>{provider}</strong> bereitgestellt. Beim Laden
+            können Cookies gesetzt und Daten an den Anbieter übertragen werden.
+          </p>
+          <div className="embed-consent__actions">
+            <button type="button" className="cookie-btn cookie-btn--primary" onClick={() => grant("externalMedia")}>
+              Inhalt laden
+            </button>
+            <button type="button" className="cookie-btn cookie-btn--ghost" onClick={openSettings}>
+              Einstellungen
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="vergleich-embed" ref={rootRef}>
       <div className="vergleich-stage" ref={stageRef} style={{ height: PLACEHOLDER_H }}>
-        {/* Inhalt montiert sobald Config da ist (lädt versteckt), Reveal später. */}
-        {ready && (
+        {/* Inhalt montiert erst MIT Consent (lädt versteckt), Reveal später. */}
+        {mounted && (
           <div className="vergleich-content" ref={contentRef}>
             {iframeUrl && (
               <div className={`vergleich-iframe-container${iframeUrl.includes("financeads.net") ? " financeads-embed" : ""}`}>
