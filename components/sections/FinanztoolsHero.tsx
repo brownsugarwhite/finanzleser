@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useRef, useEffect, useLayoutEffect, useState, type CSSProperties } from "react";
+import { useRef, useEffect, useLayoutEffect, useState, useCallback, type CSSProperties } from "react";
 import gsap from "@/lib/gsapConfig";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,8 +43,15 @@ const TOOLS = [
   },
 ];
 
-// Intro-Bild — sichtbar wenn kein Tool aktiv ist (Slide-Index 3)
-const INTRO_IMAGE = "/assets/toolbox.png";
+// Slider-Videos (4:3, je 5s) — Index = Slide-Index: 0–2 = Tools (Rechner/Vergleiche/
+// Checklisten, gleiche Reihenfolge wie TOOLS), 3 = Intro/Toolbox. Laufen synchron zum
+// 5s-Progress-Balken (Play/Pause/Reset deklarativ, siehe Effect).
+const SLIDE_VIDEOS = [
+  "/assets/vids/rechner.mp4",     // 0 Rechner
+  "/assets/vids/vergleiche.mp4",  // 1 Vergleiche
+  "/assets/vids/checklisten.mp4", // 2 Checklisten
+  "/assets/vids/toolbox.mp4",     // 3 Intro
+];
 
 // ── Desktop-„Revolver"-Bühne: Slot-Geometrie (wie Mobile-Revolver, kein Swipe) ──
 // Intro: 3 gleiche Cards in einer Reihe unten. Aktiv: 1 große Card oben + 2 kleine unten.
@@ -118,7 +125,24 @@ function mToolSlot(i: number, activeIndex: number, MW: number, titleW: number[])
 
 export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { posts?: Post[]; latestPosts?: Post[] }) {
   const innerRowRef = useRef<HTMLDivElement>(null);
+  const visualBoxRef = useRef<HTMLDivElement>(null);
   const sliderBoxRef = useRef<HTMLDivElement>(null);
+  // Alle Slider-<video>-Elemente (Desktop + Mobile) registrieren → zentral steuern.
+  const sliderVideosRef = useRef<Set<HTMLVideoElement>>(new Set());
+  const prevSlideRef = useRef<number>(-1);
+  const belowViewportRef = useRef(false); // Slider unten komplett aus dem Bild? (einmaliger Reset)
+  const registerSlideVideo = useCallback((el: HTMLVideoElement | null) => {
+    if (el) sliderVideosRef.current.add(el);
+  }, []);
+  // Video(s) eines Slides auf Anfang setzen — nötig beim Wiederholen DESSELBEN Slides
+  // (Slide-Wechsel-Reset im Sync-Effect greift da nicht, weil currentSlide gleich bleibt).
+  const resetSlideVideo = useCallback((slideIdx: number) => {
+    sliderVideosRef.current.forEach((el) => {
+      if (Number(el.dataset.slide) === slideIdx) {
+        try { el.currentTime = 0; } catch { /* noop */ }
+      }
+    });
+  }, []);
   const rightSpacerRef = useRef<HTMLDivElement>(null);
   const dotGapRef = useRef<HTMLDivElement>(null);
   const segment2Ref = useRef<HTMLDivElement>(null);
@@ -177,28 +201,53 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Crossfade läuft rein über opacity (siehe Render), keine Richtungs-/Phasen-Logik nötig.
   const currentSlide = activeCard === null ? 3 : TOOLS.findIndex((t) => t.title === activeCard);
   const activeTool = activeCard ? TOOLS.find((t) => t.title === activeCard) : null;
+
+  // Slider-Videos synchron zum 5s-Progress-Balken: das aktive (sichtbare) Video läuft,
+  // solange der Balken läuft (loaderActive && !paused) — sonst pausiert es; bei Slide-
+  // Wechsel von vorn. Beide sind 5s lang → starten/laufen gemeinsam. Nur das sichtbare
+  // Set (Desktop ODER Mobile) spielt (offsetParent-Check).
+  useEffect(() => {
+    const slideChanged = prevSlideRef.current !== currentSlide;
+    prevSlideRef.current = currentSlide;
+    sliderVideosRef.current.forEach((el) => {
+      const idx = Number(el.dataset.slide);
+      if (idx === currentSlide) {
+        if (slideChanged) { try { el.currentTime = 0; } catch { /* noop */ } }
+        if (loaderActive && !loaderPaused && el.offsetParent !== null) {
+          const p = el.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } else {
+          el.pause();
+        }
+      } else {
+        // KEIN currentTime-Reset hier: das ausfadende (alte) Video soll seinen LETZTEN
+        // Frame zeigen, nicht zu Frame 0 springen. Zurückgesetzt wird erst bei (Re-)Aktivierung.
+        el.pause();
+      }
+    });
+  }, [currentSlide, loaderActive, loaderPaused]);
   // Mobile-Card ist IMMER im DOM (für den Flip-Morph) — behält den zuletzt aktiven Inhalt,
   // damit beim Zuklappen nichts „leer" wird, während die Card rausmorpht.
   const lastCardToolRef = useRef(TOOLS[0]);
   if (activeTool) lastCardToolRef.current = activeTool;
   const cardTool = activeTool ?? lastCardToolRef.current;
 
-  // Visual/Slider-Boxhöhe = 4:3 der Box-Breite, min 350px. Treibt --stage-h, das
-  // sowohl die Stage-Boxen (height) als auch die Newsletter-min-height steuert →
-  // „Die Finanztools" bleibt auf der Linie (= Visual-Unterkante). Desktop only.
+  // --stage-h = GEMESSENE Höhe der Visual-Box (steuert nur noch die Newsletter-
+  // min-height → „Die Finanztools" bleibt auf der Linie = Visual-Unterkante).
+  // Messen statt rechnen, weil die Box-Breite je Breakpoint variiert (Margin -36 vs
+  // -72, Padding-Clamp) UND eine min-height (450px) greift — eine feste Formel lag
+  // sonst daneben (Linie zu tief). Desktop only (Mobile nutzt .ftools-m-*).
   useLayoutEffect(() => {
     const row = innerRowRef.current;
-    if (!row) return;
+    const box = visualBoxRef.current;
+    if (!row || !box) return;
     const apply = () => {
-      const w = row.clientWidth;
-      if (w <= 0) return;
-      const visualW = w - 330 - 72;        // Controls 330 + 2×36px Box-Margins
-      const h = Math.max(0, visualW * 0.75); // exakt 4:3 der Box-Breite
-      row.style.setProperty("--stage-h", `${Math.round(h)}px`);
+      const h = box.offsetHeight;
+      if (h > 0) row.style.setProperty("--stage-h", `${Math.round(h)}px`);
     };
     apply();
     const ro = new ResizeObserver(apply);
-    ro.observe(row);
+    ro.observe(box);
     window.addEventListener("resize", apply);
     return () => { ro.disconnect(); window.removeEventListener("resize", apply); };
   }, []);
@@ -249,14 +298,16 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       // falls vorher per X/Slideshow-Ende pausiert wurde).
       setLoaderPaused(false);
       loaderPausedRef.current = false;
+      resetSlideVideo(3); // Intro-Video von vorn.
       introTweenRef.current = gsap.to(introProgObj.current, {
         v: 1,
         duration: 5,
         ease: "none",
         paused: false,
         onUpdate: () => setIntroProgress(introProgObj.current.v),
-        // Lead-in einmal durch → erstes Tool (Rechner) expandieren, danach Auto-Advance (wie Desktop).
-        onComplete: () => { introTweenRef.current = null; activateToolRef.current(0); },
+        // Lead-in spielt das Intro-Video (Toolbox) einmal ab und bleibt dann stehen —
+        // KEIN Auto-Öffnen eines Tools. Tools laufen nur per Button-Klick. Toggle → „Play".
+        onComplete: () => { introTweenRef.current = null; setLoaderPaused(true); loaderPausedRef.current = true; },
       });
     };
     const cancel = () => {
@@ -421,8 +472,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Sync activeCard → ref (readable inside scroll listeners without closure stale-value issues)
   useEffect(() => { activeCardRef.current = activeCard; }, [activeCard]);
 
-  // Aktiviert Tool i: setzt activeCard, Timer auf 0, 5s-Progress; danach Auto-Advance zum
-  // nächsten Tool (Loop). Über Ref, damit der onComplete-Callback nicht stale ist.
+  // Aktiviert Tool i: setzt activeCard, Timer auf 0, spielt das 5s-Video EINMAL ab und
+  // bleibt dann am Ende stehen (KEIN Auto-Advance mehr). Klick spielt IMMER ab — auch
+  // wenn vorher pausiert war. Über Ref, damit der Callback nicht stale ist.
   const activateToolRef = useRef<(i: number) => void>(() => {});
   activateToolRef.current = (index: number) => {
     const i = ((index % 3) + 3) % 3;
@@ -431,17 +483,22 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     introProgObj.current.v = 0;
     setIntroProgress(0);
     setLoaderActive(true);
+    // Klick spielt IMMER ab → vorherige Pause aufheben.
+    setLoaderPaused(false);
+    loaderPausedRef.current = false;
+    resetSlideVideo(i); // Wiederholung desselben Tools: Video von vorn.
     introTweenRef.current = gsap.to(introProgObj.current, {
       v: 1,
       duration: 5,
       ease: "none",
-      paused: loaderPausedRef.current,
+      paused: false,
       onUpdate: () => setIntroProgress(introProgObj.current.v),
       onComplete: () => {
+        // Kein Auto-Advance: Balken bleibt voll, Video bleibt am letzten Frame stehen.
+        // Toggle wird zu „Play" → Klick wiederholt das Video.
         introTweenRef.current = null;
-        // Slideshow läuft genau EINMAL durch (… → Checklisten), danach collapsen + pausieren (kein Loop).
-        if (i === TOOLS.length - 1) collapseAndPauseRef.current();
-        else activateToolRef.current(i + 1);
+        setLoaderPaused(true);
+        loaderPausedRef.current = true;
       },
     });
   };
@@ -511,7 +568,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     });
   };
 
-  // Lead-in: Balken läuft einmal durch (5s, kein Tool) → danach öffnet Rechner + Auto-Advance.
+  // Lead-in: Balken läuft einmal durch (5s) → spielt das Intro-Video (Toolbox) ab und
+  // bleibt dann stehen. KEIN Auto-Öffnen eines Tools (Tools nur per Button-Klick).
   // Wird vom Scroll-Trigger UND vom Play-Button (nach X-Collapse) genutzt.
   const startLeadInRef = useRef<() => void>(() => {});
   startLeadInRef.current = () => {
@@ -521,6 +579,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
     loaderPausedRef.current = false;
     introProgObj.current.v = 0;
     setIntroProgress(0);
+    resetSlideVideo(3); // Intro-Video (Toolbox) von vorn.
     introTweenRef.current = gsap.to(introProgObj.current, {
       v: 1,
       duration: 5,
@@ -529,9 +588,23 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       onUpdate: () => setIntroProgress(introProgObj.current.v),
       onComplete: () => {
         introTweenRef.current = null;
-        activateToolRef.current(0);
+        setLoaderPaused(true);
+        loaderPausedRef.current = true;
       },
     });
+  };
+
+  // Klick auf den Loader-Toggle:
+  //  • läuft gerade / ist mittendrin pausiert → Pause/Resume toggeln
+  //  • am Ende (Balken voll, kein Tween, „Play") → aktuelles Video/Intro NEU starten
+  const loaderToggleRef = useRef<() => void>(() => {});
+  loaderToggleRef.current = () => {
+    if (loaderPausedRef.current && !introTweenRef.current) {
+      if (activeCardRef.current === null) startLeadInRef.current();
+      else activateToolRef.current(TOOLS.findIndex((t) => t.title === activeCardRef.current));
+    } else {
+      setLoaderPaused((p) => !p);
+    }
   };
 
   // Auto-Advance startet, sobald 2/3 des Sliders sichtbar sind; collapse beim Hochscrollen.
@@ -559,24 +632,44 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
       // ihre Unterkante die Linie vh−23 erreicht. Davor sind sie gepinnt.
       const r = slider.getBoundingClientRect();
       const vh = window.innerHeight;
-      const triggered = r.bottom > 0 && r.bottom <= vh - 23;
+      // Reset NUR wenn der Slider unten KOMPLETT aus dem Viewport ist (Hochscrollen, Video
+      // unten raus) → Balken + Video auf Anfang. Nach OBEN rauslaufen (Runterscrollen) NICHT
+      // zurücksetzen: Video zuende laufen lassen / am letzten Frame stehen lassen.
+      const belowViewport = r.top >= vh;     // unten KOMPLETT raus (Hochscrollen)
+      const belowDock = r.bottom > vh - 23;  // unter der Dock-Linie (Hochscrollen)
+      const aboveTop = r.bottom <= 0;        // oben raus (Runterscrollen)
 
-      // Noch nicht (genug) sichtbar: laufende Füllung abbrechen + offene Karte schließen
-      if (!triggered) {
+      // Video-Frame-0-Reset NUR einmal, sobald der Slider unten KOMPLETT aus dem Bild ist
+      // → nächster Runterscroll startet sauber bei Frame 1 (kein sichtbarer Sprung).
+      if (belowViewport) {
+        if (!belowViewportRef.current) {
+          belowViewportRef.current = true;
+          [0, 1, 2, 3].forEach((s) => resetSlideVideo(s));
+        }
+      } else {
+        belowViewportRef.current = false;
+      }
+
+      // Unter der Dock-Linie (Hochscrollen) → Navigation SOFORT collapsen + Balken weg (wie zuvor).
+      // Getrennt vom Video-Reset (der passiert erst „unten ganz raus", siehe oben).
+      if (belowDock) {
         cancelFill();
         if (activeCardRef.current !== null) setActiveCard(null);
         lastPastRef.current = false;
         return;
       }
 
-      // Flanke: Lead-in starten — der erste Balken läuft einmal durch (kein Tool),
-      // danach expandiert die erste Card (Rechner) und der Auto-Advance läuft weiter.
-      if (triggered !== lastPastRef.current) {
-        lastPastRef.current = triggered;
+      // Oben aus dem Bild (Runterscrollen) → NICHT zurücksetzen (zuende laufen / letzter Frame).
+      if (aboveTop) return;
+
+      // Andock-Bereich → Lead-in EINMAL starten (Intro-Video von vorn).
+      if (!lastPastRef.current) {
+        lastPastRef.current = true;
         if (activeCardRef.current === null && !introTweenRef.current) {
           setLoaderActive(true);
           introProgObj.current.v = 0;
           setIntroProgress(0);
+          resetSlideVideo(3); // Intro-Video von vorn.
           introTweenRef.current = gsap.to(introProgObj.current, {
             v: 1,
             duration: 5,
@@ -584,8 +677,10 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             paused: loaderPausedRef.current,
             onUpdate: () => setIntroProgress(introProgObj.current.v),
             onComplete: () => {
+              // Intro-Video läuft einmal, bleibt dann stehen — kein Auto-Öffnen. Toggle → „Play".
               introTweenRef.current = null;
-              activateToolRef.current(0);
+              setLoaderPaused(true);
+              loaderPausedRef.current = true;
             },
           });
         }
@@ -756,14 +851,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
 
               {/* Loader (fährt nach oben bei aktiv) + Play/Pause + Lesezeichen in Tool-Farbe */}
               <div className="ftools-loader-wrap" style={{ position: "absolute", left: 0, top: loaderTop, opacity: loaderActive ? 1 : 0, transition: "opacity 0.3s ease", zIndex: 6 }}>
-                <button type="button" className="ftools-loader-toggle" style={{ opacity: loaderActive ? 1 : 0, pointerEvents: loaderActive ? "auto" : "none" }} onClick={() => {
-                  // Play aus dem X-Collapse-Zustand (keine Card, kein Tween) → Slideshow neu starten
-                  if (loaderPaused && activeCardRef.current === null && !introTweenRef.current) {
-                    startLeadInRef.current();
-                  } else {
-                    setLoaderPaused((p) => !p);
-                  }
-                }} aria-label={loaderPaused ? "Abspielen" : "Pause"}>
+                <button type="button" className="ftools-loader-toggle" style={{ opacity: loaderActive ? 1 : 0, pointerEvents: loaderActive ? "auto" : "none" }} onClick={() => loaderToggleRef.current()} aria-label={loaderPaused ? "Abspielen" : "Pause"}>
                   {loaderPaused ? (
                     <svg width="11" height="13" viewBox="0 0 11 13" aria-hidden><path d="M0 0v13l11-6.5z" fill="currentColor" /></svg>
                   ) : (
@@ -878,7 +966,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           {/* ===== STAGE (Mitte: Visual oben · Linie · Slider unten, gleich groß) ===== */}
           <div className="ftools-stage">
             {/* Visual-Box */}
-            <div className="ftools-stage-box">
+            <div className="ftools-stage-box" ref={visualBoxRef}>
               <img src="/assets/visuals/mainVisualLanding.png" alt="" aria-hidden className="ftools-stage-img" />
             </div>
             {/* Durchgehende Linie zwischen Visual & Slider — NICHT sticky, reicht über
@@ -886,27 +974,26 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             <div ref={stageLineRef} className="ftools-stage-line" />
             {/* Slider-Box (gleich groß) — Toolbox + 3 Tool-Bilder Crossfade, button-getrieben */}
             <div ref={sliderBoxRef} className="ftools-stage-box ftools-lottie-slider" style={{ position: "relative" }}>
-              <img
-                src={INTRO_IMAGE}
-                alt=""
-                aria-hidden
-                className="ftools-stage-img"
-                style={{ opacity: currentSlide === 3 ? 1 : 0, transition: "opacity 0.5s ease" }}
-              />
-              {TOOLS.map((tool, i) => (
-                <img
+              {SLIDE_VIDEOS.map((src, i) => (
+                <video
                   key={i}
-                  src={tool.image}
-                  alt=""
+                  ref={registerSlideVideo}
+                  data-slide={i}
+                  src={src}
+                  muted
+                  playsInline
+                  preload="auto"
                   aria-hidden
                   style={{
                     position: "absolute",
                     inset: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "contain",
+                    objectFit: "cover",
                     opacity: i === currentSlide ? 1 : 0,
-                    transition: "opacity 0.5s ease",
+                    // Kein Crossfade: erst altes ausblenden (0.4s), dann neues einblenden
+                    // (0.4s Delay). Das aktive Video fadet verzögert ein, das alte sofort aus.
+                    transition: i === currentSlide ? "opacity 0.4s ease 0.4s" : "opacity 0.4s ease",
                     pointerEvents: "none",
                   }}
                 />
@@ -1187,9 +1274,22 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
           className="ftools-m-slider"
           style={{ transform: `translateY(${activeCard ? -M_VISUAL_SHIFT : 0}px)`, transition: "transform 0.6s cubic-bezier(0.77,0,0.18,1)" }}
         >
-          <img src={INTRO_IMAGE} alt="" aria-hidden style={{ opacity: currentSlide === 3 ? 1 : 0 }} />
-          {TOOLS.map((tool, i) => (
-            <img key={i} src={tool.image} alt="" aria-hidden style={{ opacity: i === currentSlide ? 1 : 0 }} />
+          {SLIDE_VIDEOS.map((src, i) => (
+            <video
+              key={i}
+              ref={registerSlideVideo}
+              data-slide={i}
+              src={src}
+              muted
+              playsInline
+              preload="auto"
+              aria-hidden
+              style={{
+                opacity: i === currentSlide ? 1 : 0,
+                // Kein Crossfade: erst aus-, dann (verzögert) einblenden.
+                transition: i === currentSlide ? "opacity 0.4s ease 0.4s" : "opacity 0.4s ease",
+              }}
+            />
           ))}
         </div>
 
@@ -1203,14 +1303,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
               type="button"
               className="ftools-m-loader-toggle"
               style={{ top: activeCard ? -98 : -28, opacity: loaderActive ? 1 : 0, pointerEvents: loaderActive ? "auto" : "none" }}
-              onClick={() => {
-                // Play aus dem X-Collapse-Zustand (keine Card, kein Tween) → Lead-in neu starten.
-                if (loaderPaused && activeCardRef.current === null && !introTweenRef.current) {
-                  startLeadInRef.current();
-                } else {
-                  setLoaderPaused((p) => !p);
-                }
-              }}
+              onClick={() => loaderToggleRef.current()}
               aria-label={loaderPaused ? "Abspielen" : "Pause"}
             >
               {loaderPaused ? (

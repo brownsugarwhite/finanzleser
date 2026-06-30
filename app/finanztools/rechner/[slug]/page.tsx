@@ -164,7 +164,7 @@ export default async function RechnerDetailPage({ params }: Props) {
               {/* Kategorie - sekundärfarbe, Serif, Italic */}
               <Link
                 href="/finanztools/rechner"
-                className="mb-2 inline-block transition hover:opacity-80"
+                className="cpt-eyebrow mb-2 inline-block transition hover:opacity-80"
                 style={{
                   color: "var(--color-brand-secondary)",
                   fontFamily: "Merriweather, serif",
@@ -176,14 +176,14 @@ export default async function RechnerDetailPage({ params }: Props) {
               </Link>
 
               {/* Titel */}
-              <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
+              <h1 className="cpt-title font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
                 {rechner.title}
               </h1>
 
               {/* Beschreibung */}
               {(rechner.excerpt || rechner.rechnerFelder?.beschreibung) && (
                 <p
-                  className="mb-8 text-gray-600"
+                  className="cpt-desc mb-8 text-gray-600"
                   style={{
                     fontFamily: "Merriweather, serif",
                     fontSize: "18px",

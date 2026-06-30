@@ -106,9 +106,13 @@ export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number
       aria-hidden
       viewBox={w > 0 && h > 0 ? `0 0 ${w} ${h}` : undefined}
       preserveAspectRatio="none"
-      // Box exakt via Insets (kein width/height-Attribut, kein Runden, kein Timing-
-      // Versatz): SVG = Feld + 2×gap rundum.
-      style={{ top: -gap, right: -gap, bottom: -gap, left: -gap }}
+      // EXPLIZITE Pixel-Maße (statt nur Insets): iOS-Safari streckt ein absolut
+      // positioniertes SVG NICHT zuverlässig auf alle vier Insets → ohne width/height
+      // fiel die Box auf eine Default-Größe zurück und der Pfad wurde verzerrt/versetzt.
+      // Maße sind bereits gemessen (Feld + 2×gap); positioniert wird nur top/left.
+      width={w > 0 ? w : undefined}
+      height={h > 0 ? h : undefined}
+      style={{ top: -gap, left: -gap }}
     >
       {d && <path ref={pathRef} d={d} pathLength={100} vectorEffect="non-scaling-stroke" />}
     </svg>

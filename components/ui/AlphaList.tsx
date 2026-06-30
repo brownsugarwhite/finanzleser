@@ -107,7 +107,17 @@ export default function AlphaList({ items, emptyLabel = "Keine Einträge" }: Alp
             }}
             className="mb-4"
           >
-            <div className="sticky top-0 z-10 bg-[var(--color-bg-surface)]/95 backdrop-blur-sm py-1 text-sm font-bold text-[var(--color-brand)]">
+            <div
+              className="sticky top-0 z-10 pt-1 pb-1 mb-1"
+              style={{
+                fontFamily: "var(--font-heading), Merriweather, serif",
+                fontWeight: 700,
+                fontSize: "16px",
+                color: "var(--color-text-primary)",
+                background: "#ffffff",
+                borderBottom: "1px solid var(--color-text-primary)",
+              }}
+            >
               {letter}
             </div>
             <ul className="space-y-1 mt-1">

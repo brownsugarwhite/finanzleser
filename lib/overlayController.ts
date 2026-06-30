@@ -18,7 +18,7 @@
  * wenn schon offen), daher kein Flackern.
  */
 
-export type OverlayId = "menu" | "finanztools" | "leo" | "preview";
+export type OverlayId = "menu" | "finanztools" | "leo" | "preview" | "cookie";
 
 export interface OverlayOpenDetail {
   extended?: boolean;

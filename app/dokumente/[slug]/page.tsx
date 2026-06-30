@@ -89,6 +89,7 @@ export default async function DokumentDetailPage({ params }: Props) {
               {/* Eyebrow */}
               <Link
                 href="/dokumente"
+                className="cpt-eyebrow"
                 style={{
                   display: "inline-block",
                   marginBottom: 8,
@@ -104,6 +105,7 @@ export default async function DokumentDetailPage({ params }: Props) {
 
               {/* Titel */}
               <h1
+                className="cpt-title"
                 style={{
                   fontSize: "42px",
                   lineHeight: "1.3em",
@@ -117,6 +119,7 @@ export default async function DokumentDetailPage({ params }: Props) {
               {/* Beschreibung */}
               {beschreibung && (
                 <p
+                  className="cpt-desc"
                   style={{
                     fontSize: "18px",
                     fontFamily: "var(--font-heading)",

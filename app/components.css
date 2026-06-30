@@ -48,7 +48,13 @@
     box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
     text-decoration: none;
   }
-  body[data-landing] .bookmark-newsletter img { width: 28px; height: 28px; flex-shrink: 0; object-fit: contain; }
+  /* Icon als getönte Maske → exakt dunkle Textfarbe (SVG ist sonst schwarz). */
+  body[data-landing] .bookmark-newsletter-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    background-color: var(--color-text-primary);
+    -webkit-mask: url(/icons/iconNewsletter.svg) center / contain no-repeat;
+    mask: url(/icons/iconNewsletter.svg) center / contain no-repeat;
+  }
   body[data-landing] .bookmark-newsletter span {
     font-family: 'Merriweather', serif; font-weight: 600; font-size: 16px;
     color: var(--color-text-primary); white-space: nowrap;
@@ -300,16 +306,21 @@ body.leo-chat-open #leo-chat-messages {
 }
 @media (max-width: 767px) {
   #leo-chat-messages {
-    left: 10px;
-    right: 10px;
+    /* Voll-Breite auf Mobile → Bubble-Abstände werden zu 100% per Row-Padding
+       gesteuert (kein Container-Inset, keine Desktop-Kappe calc(100vw-40px)). */
+    left: 0;
+    right: 0;
     width: auto;
+    max-width: none;
     transform: none;
     /* bottom:0 wie Desktop → der Verlauf läuft HINTER der Eingabe-Pille durch
        (kein abgeschnittener Gap). Bottom-Padding hält die letzte Nachricht über
        der Pille; der .leo-chat-bottom-fade-Gradient blendet darunter aus.
        Top-Padding hält die erste Nachricht unter dem globalen ProgressiveBlur. */
     bottom: 0;
-    padding: 96px 8px 170px 8px;
+    /* Seiten-Padding 0 (Container ist bereits 10px vom Rand) → exakte Bubble-
+       Abstände werden per Row gesteuert (siehe unten). */
+    padding: 96px 0 170px 0;
   }
 }
 
@@ -485,13 +496,58 @@ body.leo-chat-open #leo-chat-messages {
     font-size: 17px;          /* vorher 15px → war zu klein */
     line-height: 1.4;
     padding: 15px 18px;       /* vorher 23/27 → weniger Innenabstand */
-    max-width: 92%;           /* kurze Anfragen brechen nicht mehr früh */
+    max-width: 92%;           /* Fallback; per-Row unten überschrieben */
   }
-  /* Linker Gutter für Leo, damit der Avatar NEBEN der Antwort-Bubble sitzt
-     (nicht darüber lappt). Leo wird via iconwrap fix in diesen Gutter gesetzt. */
+  /* Container ist voll-breit → Abstände = Row-Padding (Pixel = Abstand vom Bildschirm).
+     Assistant-Bubble: linker Gutter für Leo, rechter Rand 23px. */
   .chat-row--assistant {
-    padding-left: 50px;
+    padding-left: 49px;
+    padding-right: 23px;
   }
+  .chat-row--assistant .chat-bubble {
+    max-width: 100%;
+  }
+  /* User-Bubble: rechter Rand 13px, linker Mindestabstand 30px. */
+  .chat-row--user {
+    padding-left: 30px;
+    padding-right: 13px;
+  }
+  .chat-row--user .chat-bubble {
+    max-width: 100%;
+  }
+  /* Erste Bubble etwas tiefer, damit sie nicht unter dem Schließen-Button klebt. */
+  #leo-chat-messages .chat-row:first-child {
+    margin-top: 10px;
+  }
+}
+
+/* Schließen-Button im Leo-Chat — oben rechts unter dem Bookmark, alle Breakpoints.
+   Nur sichtbar während der Chat offen ist (Body-Klasse wird in open/closeChat gesetzt). */
+.leo-chat-close {
+  display: none;
+  position: fixed;
+  top: 84px;
+  right: 20px;
+  z-index: 9000;            /* über Chat (200), unter Bookmark (9999) */
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: brightness(1.3) blur(13px);
+  -webkit-backdrop-filter: brightness(1.3) blur(13px);
+  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.leo-chat-close:hover { color: var(--color-brand-secondary); transform: scale(1.05); }
+body.leo-chat-open .leo-chat-close { display: flex; }
+@media (max-width: 767px) {
+  .leo-chat-close { top: 80px; right: 14px; width: 40px; height: 40px; }
 }
 
 /* Streaming-Cursor — blinkender Block am Ende der laufenden Assistant-Message. */
@@ -757,15 +813,28 @@ h1.article-title,
 h2.article-subtitle,
 h2.article-tool-label,
 h3.rechner-title,
+.cpt-title,
 .prose h2,
 .prose h3 {
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
   -webkit-hyphens: auto;
+  min-width: 0;     /* in Flex-Containern (z.B. Artikel-Header-Spalte) erst dann brechen */
+  max-width: 100%;
 }
 h1.category-title {
   font-weight: 700 !important;
+}
+
+/* CPT-Detailseiten-Header (Rechner/Vergleich/Checkliste/Dokument): auf Mobile
+   an den Artikel-Header angleichen (Größe + Abstände). Die Seiten sind Server-
+   Components mit Inline-fontSize → !important nötig, um sie mobil zu überschreiben.
+   Breakpoint 1024 wie isMobile im Artikel-Header. */
+@media (max-width: 1024px) {
+  .cpt-eyebrow { font-size: 21px !important; margin-bottom: 4px !important; }
+  .cpt-title { font-size: 30px !important; margin-bottom: 4px !important; }
+  .cpt-desc { font-size: 17px !important; margin-bottom: 12px !important; }
 }
 
 /* Info-„i" auf Artikel-Cards (und Vorschau-Slider) global entfernt. DOM bleibt
@@ -1756,6 +1825,10 @@ a.megamenu-link:hover {
   opacity: 1;
   z-index: 1;
 }
+@media (max-width: 1023px) {
+  /* Mobile: Text + Download-Button ÜBER die Dokumentvorschau. */
+  .dokument-detail-info { order: -1; }
+}
 @media (min-width: 1024px) {
   .dokument-detail-grid {
     flex-direction: row;
@@ -2315,12 +2388,34 @@ a.megamenu-link:hover {
   }
 }
 
+/* Artikel-Header: Seiten-Padding auch auf Desktop (80px). Die maxWidth ist dafür
+   inline (ArticleElementWrapper, hero) um +160px breiter → Innenbreite bleibt gleich. */
+.article-element-wrapper--hero {
+  --hero-gutter: 80px;
+  padding-left: var(--hero-gutter);
+  padding-right: var(--hero-gutter);
+}
+
 /* ── Mobile: 20px Body-Padding für Artikel + Detail-Pages,
    Visual + Tabellen breaken aus dem Padding aus ── */
 @media (max-width: 1024px) {
   .article-element-wrapper {
     padding-left: 20px;
     padding-right: 20px;
+  }
+  /* Artikel-Header (Column-Umbruch ≤1024): Gutter skaliert von 80px (bei 1024)
+     bis 20px (bei 400px) — linear, exakte Endpunkte. padding-left/right hier ERNEUT
+     setzen, sonst gewinnt die generische `.article-element-wrapper { padding:20px }`
+     (gleiche Spezifität, später in der Quelle). */
+  .article-element-wrapper--hero {
+    --hero-gutter: clamp(20px, calc((100vw - 400px) / 10.4 + 20px), 80px);
+    padding-left: var(--hero-gutter);
+    padding-right: var(--hero-gutter);
+  }
+  /* Header-Visual bleibt randbündig (kompensiert das Gutter-Padding). */
+  .article-element-wrapper--hero .article-hero-visual {
+    margin-left: calc(-1 * var(--hero-gutter));
+    margin-right: calc(-1 * var(--hero-gutter));
   }
   .article-hero-visual {
     margin-left: -20px;
@@ -2987,6 +3082,11 @@ h2.faq-heading {
   .landing-nav[data-topnav] {
     display: none !important;
   }
+  /* Die TopNav (marginTop -40 + height 50 = +10px Flow) verschwindet hier → die
+     Dotline mit „powered by" würde ~10px nach oben springen. Kompensieren. */
+  .sticky-nav.dotline-animated {
+    margin-top: 13px;
+  }
 }
 
 /* Logo-Wordmark bleibt bis Mobile (≤767) groß wie bei >1024 — erst dann verkleinern
@@ -3434,6 +3534,13 @@ h2.faq-heading {
 .page-ad-top {
   margin: 0 0 32px;
 }
+/* Mobile (CPTs): mehr Luft zwischen Beschreibung und Werbebanner darunter.
+   Rails sind hier ohnehin aus → kein Konflikt mit dem bündigen Rail-Andocken. */
+@media (max-width: 1024px) {
+  .page-ad-top {
+    margin-top: 24px;
+  }
+}
 .page-ad-mid {
   margin: 40px 0 0;
 }
@@ -3663,12 +3770,16 @@ h2.faq-heading {
   pointer-events: auto;
   width: 100%;
   max-width: 1100px;
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 20px 24px;
   display: flex;
   align-items: center;
   gap: 28px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.16);
+  /* Exakt der Leo-Badge-Hintergrund (siehe .leo-badge) */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: brightness(1.3) blur(13px);
+  -webkit-backdrop-filter: brightness(1.3) blur(13px);
+  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
 }
 .cookie-banner__title {
   display: block;
@@ -3735,27 +3846,35 @@ h2.faq-heading {
   position: fixed;
   inset: 0;
   z-index: 2147483001;
+  /* Der GANZE Container scrollt (nicht nur der Inhalt): passt das Panel nicht auf
+     den Bildschirm, ragt es nach unten raus und wird beim Scrollen hochgeschoben. */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 20px;
 }
+/* Kein dunkler Backdrop mehr — der Hintergrund wird (wie beim Menü/Finanztools)
+   per ContentScaler geblurrt & skaliert. Diese Ebene fängt nur Klicks außerhalb
+   und bleibt fixiert, während das Panel scrollt. */
 .cookie-modal__backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(20, 28, 16, 0.45);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: transparent;
 }
 .cookie-modal__panel {
   position: relative;
+  /* margin:auto zentriert vertikal/horizontal, solange das Panel passt; ist es
+     höher als der Viewport, wird daraus 0 → Panel startet oben, Scroll deckt es auf. */
+  margin: auto;
   width: 100%;
   max-width: 560px;
-  max-height: 88vh;
-  overflow-y: auto;
-  border-radius: 22px;
+  border-radius: 28px;
   padding: 26px 28px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  /* Exakt der Leo-Badge-Hintergrund (siehe .leo-badge) */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: brightness(1.3) blur(13px);
+  -webkit-backdrop-filter: brightness(1.3) blur(13px);
+  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
 }
 .cookie-modal__header {
   display: flex;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useConsent } from "@/lib/consent/ConsentContext";
 import { CONSENT_CATEGORIES, ConsentState } from "@/lib/consent/types";
+import { openOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 
 /**
  * Einstellungen-Modal mit Schaltern pro Kategorie. Wird über den Banner oder den
@@ -18,9 +19,14 @@ export default function CookieSettings() {
     if (settingsOpen) setDraft({ ...consent });
   }, [settingsOpen, consent]);
 
-  // ESC schließt + Body-Scroll sperren, solange offen.
+  // Wird ein anderes Overlay geöffnet (Menü/Finanztools/Leo), schließt das Modal mit.
+  useEffect(() => registerOverlayCloser("cookie", () => closeSettings()), [closeSettings]);
+
+  // ESC schließt + Body-Scroll sperren + denselben Blur/Scale-Effekt der Hintergrund-
+  // inhalte wie beim Menü/Finanztools (über den Overlay-Controller).
   useEffect(() => {
     if (!settingsOpen) return;
+    openOverlay("cookie", { extended: true });
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeSettings(); };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -28,6 +34,7 @@ export default function CookieSettings() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      closeOverlay("cookie");
     };
   }, [settingsOpen, closeSettings]);
 
@@ -39,7 +46,7 @@ export default function CookieSettings() {
   return (
     <div className="cookie-modal" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen">
       <div className="cookie-modal__backdrop" onClick={closeSettings} aria-hidden="true" />
-      <div className="cookie-modal__panel glass-card">
+      <div className="cookie-modal__panel">
         <div className="cookie-modal__header">
           <h2 className="cookie-modal__title">Cookie-Einstellungen</h2>
           <button type="button" className="cookie-modal__close" onClick={closeSettings} aria-label="Schließen">

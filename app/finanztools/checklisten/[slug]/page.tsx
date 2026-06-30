@@ -117,6 +117,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
               {/* Kategorie */}
               <Link
                 href="/finanztools/checklisten"
+                className="cpt-eyebrow"
                 style={{
                   display: "inline-block",
                   marginBottom: 8,
@@ -132,6 +133,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
 
               {/* Titel */}
               <h1
+                className="cpt-title"
                 style={{
                   fontSize: "42px",
                   lineHeight: "1.3em",
@@ -145,7 +147,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
               {/* Beschreibung */}
               {beschreibung && (
                 <p
-                  className="mb-8"
+                  className="cpt-desc mb-8"
                   style={{
                     fontSize: "18px",
                     fontFamily: "var(--font-heading)",

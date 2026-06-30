@@ -8,13 +8,13 @@ import { useConsent } from "@/lib/consent/ConsentContext";
  * gespeichert ist. Drei Aktionen: Alle akzeptieren / Nur notwendig / Einstellungen.
  */
 export default function CookieBanner() {
-  const { bannerOpen, acceptAll, rejectAll, openSettings } = useConsent();
+  const { bannerOpen, settingsOpen, acceptAll, rejectAll, openSettings } = useConsent();
 
-  if (!bannerOpen) return null;
+  if (!bannerOpen || settingsOpen) return null;
 
   return (
     <div className="cookie-banner" role="dialog" aria-label="Cookie-Hinweis" aria-modal="false">
-      <div className="cookie-banner__inner glass-card">
+      <div className="cookie-banner__inner">
         <div className="cookie-banner__text">
           <strong className="cookie-banner__title">Wir respektieren deine Privatsphäre</strong>
           <p>

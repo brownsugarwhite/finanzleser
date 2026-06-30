@@ -130,13 +130,13 @@ export default function LandingIntro() {
           document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
       >
-        <img src="/icons/iconNewsletter.svg" alt="" aria-hidden="true" />
+        <span className="bookmark-newsletter-icon" aria-hidden="true" />
         <span>Newsletter</span>
       </a>
 
       <div data-scale-extended className="landing-inner" style={{ maxWidth: "1200px", margin: "-16px auto 0px auto", padding: "0 24px" }}>
         {/* Logo */}
-        <div className="landing-logo" style={{ display: "flex", justifyContent: "center", marginBottom: "11px" }}>
+        <div className="landing-logo" style={{ display: "flex", justifyContent: "center", marginBottom: "11px", position: "relative", zIndex: 60 }}>
           <Image
             src="/icons/fl_logo.svg"
             alt="finanzleser"
@@ -283,12 +283,17 @@ export default function LandingIntro() {
               komplett aus, Logo rutscht 36px nach unten. Leo lebt im globalen Slot. ── */
         @media (max-width: 1024px) {
           .landing-dotline { display: none !important; }
-          .landing-pillbar { display: none !important; }
+        }
+        /* 768–1024: großes Logo 30px weiter runter (Mobile ≤767 bleibt wie es ist). */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .landing-logo { margin-top: 30px; }
         }
         /* Mobile-Sprechblase nur ≤767 */
         .landing-bubble-mobile { display: none; }
         @media (max-width: 767px) {
           .landing-bubble-mobile { display: block; }
+          /* Search-Pill (Pillbar) erst auf Mobile ausblenden, nicht schon ≤1024. */
+          .landing-pillbar { display: none !important; }
           /* Logo erst auf Mobile nach unten schieben (vorher bleibt es wie bei >1024). */
           .landing-logo { margin-top: 16px !important; }
           /* Mobile-Seitenpadding clamp: 20px bei 400px → max 40px */

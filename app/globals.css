@@ -136,8 +136,9 @@ body[data-landing] {
   /* Scroll-Reveal: initial verborgen (JS setzt inline opacity beim Scrollen). */
   opacity: 0;
 }
-.ftools-m-slider { position: relative; width: 100%; aspect-ratio: 746 / 527; margin: 14px 0 0; }
-.ftools-m-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.5s ease; }
+.ftools-m-slider { position: relative; width: 100%; aspect-ratio: 4 / 3; margin: 14px 0 0; }
+.ftools-m-slider img,
+.ftools-m-slider video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
 .ftools-m-divider { height: 1px; background: rgba(0,0,0,0.12); margin: 18px 0 0; }
 /* Sticky-Stage (≤767): Buttons · Progress · Expanded Card als EINE Einheit, klebt unten.
    Flex-column + order → Progress liegt geschlossen ÜBER den Buttons, offen darunter. */
@@ -272,8 +273,10 @@ body[data-landing] {
 }
 .ftools-newsletter-box {
   width: 330px;
-  /* +72 = Visual-margin-top 36 + Linien-margin-top 36 → „Die Finanztools" bleibt auf der Linie */
-  min-height: calc(var(--stage-h) + 72px);
+  /* +72 = Visual-margin-top 36 + Linien-margin-top 36 → „Die Finanztools" bleibt auf der
+     Linie. --stage-h ist die GEMESSENE Visual-Höhe (inkl. 450px-min-height), darum exakt;
+     Fallback 450px für den ersten Paint, bevor JS gemessen hat. */
+  min-height: calc(var(--stage-h, 450px) + 72px);
 }
 
 /* „Die Finanztools" — rechtsbündig (wie Newsletter), nur Text + Blende, keine eigene
@@ -418,6 +421,12 @@ body[data-landing] {
    Höhe = 4:3 der eigenen Breite via CSS aspect-ratio (== JS-Formel visualW*0.75) →
    schon im ersten SSR-Paint korrekt, KEIN Sprung mehr beim Hydrieren. */
 .ftools-stage > .ftools-stage-box:first-child { margin-top: 36px; flex: 0 0 auto; height: auto; aspect-ratio: 4 / 3; }
+/* Stage-Boxen (Visual + Slider-Video): Mindesthöhe nur auf Desktop (≥768; Mobile
+   nutzt .ftools-m-*). Beide gleich → Linie mittig, „Die Finanztools" passt. */
+@media (min-width: 768px) {
+  .ftools-stage > .ftools-stage-box:first-child,
+  .ftools-stage > .ftools-stage-box.ftools-lottie-slider { min-height: 450px; }
+}
 /* Slider (zweite Box) gleich groß wie das Visual (4:3) — ebenfalls CSS-getrieben,
    damit die Stage-Höhe nicht vom JS-Fallback (--stage-h) abhängt und nicht springt. */
 .ftools-stage-box.ftools-lottie-slider { flex: 0 0 auto; height: auto; aspect-ratio: 4 / 3; min-height: 0; }

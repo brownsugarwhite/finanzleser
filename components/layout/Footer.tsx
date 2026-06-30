@@ -181,7 +181,12 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
           background: none;
           border: none;
           padding: 0;
-          font: inherit;
+          margin: 0;
+          font-family: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
+          vertical-align: baseline;
           cursor: pointer;
         }
         .footer-link:hover {

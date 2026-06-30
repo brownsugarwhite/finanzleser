@@ -193,9 +193,9 @@ export default function ArticleClient({
                 style={{
                   color: "var(--color-brand-secondary)",
                   fontFamily: "Merriweather, serif",
-                  fontSize: "23px",
+                  fontSize: isMobile ? "21px" : "23px",
                   fontStyle: "italic",
-                  marginBottom: "8px",
+                  marginBottom: "4px",
                   display: "inline-block",
                 }}
               >
@@ -204,13 +204,16 @@ export default function ArticleClient({
             ) : null;
 
             const subtitleEl = displayTitle ? (
-              <h2 ref={morphSubtitleRef} data-morph-target="article-subtitle" data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{displayTitle}</h2>
+              <h2 ref={morphSubtitleRef} data-morph-target="article-subtitle" data-toc-exclude className="article-subtitle font-bold" style={{ fontSize: isMobile ? "30px" : "42px", lineHeight: "1.3em", marginBottom: "4px" }}>{displayTitle}</h2>
             ) : null;
 
             // Schmale Screens: statt fixer 384px-Höhe ein FESTES Aspect-Ratio (volle
             // Breite), das zur Auflösung passt — so morpht das Card-Visual sauber dorthin
             // (kein Stretch in eine hohe Box). Desktop bleibt bei h-96 in der 50%-Spalte.
-            const visualMobileStyle: React.CSSProperties = { width: "100%", aspectRatio: "16 / 10" };
+            // KEIN width:100% — sonst greift der rechte Negativ-Margin (Full-Bleed) nicht
+            // und das Visual sitzt links statt zentriert. Block-Auto-Breite + Negativ-Margins
+            // (CSS) spannen es symmetrisch über die volle Breite.
+            const visualMobileStyle: React.CSSProperties = { aspectRatio: "16 / 10" };
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
@@ -240,11 +243,12 @@ export default function ArticleClient({
 
             const excerptEl = displayDescription ? (
               <p
-                className="mb-8 text-gray-600"
+                className="text-gray-600"
                 style={{
                   fontFamily: "Merriweather, serif",
-                  fontSize: "18px",
+                  fontSize: isMobile ? "17px" : "18px",
                   fontWeight: "400",
+                  marginBottom: "12px",
                 }}
                 dangerouslySetInnerHTML={{
                   __html: (() => {
@@ -289,10 +293,10 @@ export default function ArticleClient({
 
             if (isMobile) {
               return (
-                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <div>{visualEl}</div>
                   {titleEl}
                   {subtitleEl}
-                  <div>{visualEl}</div>
                   {excerptEl}
                   {metaEl}
                 </div>
@@ -315,7 +319,7 @@ export default function ArticleClient({
               </div>
             );
           })()}
-          <div style={{ marginTop: 50, marginBottom: 23 }}>
+          <div style={{ marginTop: isMobile ? 35 : 50, marginBottom: 23 }}>
             <Spacer noMargin maxWidth="100%" />
           </div>
         </ArticleElementWrapper>

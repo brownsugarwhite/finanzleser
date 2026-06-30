@@ -575,15 +575,13 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           height: activeSlide !== null ? STACK_HEIGHT_OPEN : STACK_HEIGHT_CLOSED,
           transition: `height ${(MORPH_DURATION * 2) / 1400}s ease-out`,
         }}>
-      {/* Einfache Pfeil-Badges mittig über dem Slider (Desktop). */}
-      {!isMobile && (
-        <SliderSideArrows
-          onPrev={navProps.onPrev}
-          onNext={navProps.onNext}
-          canPrev={navVisible && navProps.current > 0}
-          canNext={navVisible && navProps.current < navProps.total - 1}
-        />
-      )}
+      {/* Einfache Pfeil-Badges mittig über dem Slider (Desktop + Mobile, mobil schmaler). */}
+      <SliderSideArrows
+        onPrev={navProps.onPrev}
+        onNext={navProps.onNext}
+        canPrev={navVisible && navProps.current > 0}
+        canNext={navVisible && navProps.current < navProps.total - 1}
+      />
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
         {/* Punkt 8c: Edge-Pfeile (Linie + Dreieck) im Button-Mode — jetzt Mobile

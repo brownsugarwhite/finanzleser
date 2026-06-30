@@ -86,7 +86,7 @@ export default async function VergleichDetailPage({ params }: Props) {
 
               <Link
                 href="/finanztools/vergleiche"
-                className="mb-2 inline-block transition hover:opacity-80"
+                className="cpt-eyebrow mb-2 inline-block transition hover:opacity-80"
                 style={{
                   color: "var(--color-tool-vergleiche)",
                   fontFamily: "Merriweather, serif",
@@ -97,12 +97,12 @@ export default async function VergleichDetailPage({ params }: Props) {
                 Vergleich
               </Link>
 
-              <h1 className="font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
+              <h1 className="cpt-title font-bold mb-4" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
                 {title}
               </h1>
 
               <p
-                className="mb-8 text-gray-600"
+                className="cpt-desc mb-8 text-gray-600"
                 style={{
                   fontFamily: "Merriweather, serif",
                   fontSize: "18px",

@@ -95,7 +95,9 @@ export default function ArticleElementWrapper({
     variant === "hero"
       ? isMobile
         ? "100%"
-        : "calc(750px + 2 * (var(--ad-rail-gap) + var(--ad-rail-w)))"
+        // +160px breiter, damit das neue 80px-Seiten-Padding (border-box) die
+        // Innenbreite nicht verkleinert (Rail-Flucht bleibt erhalten).
+        : "calc(750px + 2 * (var(--ad-rail-gap) + var(--ad-rail-w)) + 160px)"
       : variant === "wide"
         ? isMobile
           ? "100%"
@@ -105,7 +107,7 @@ export default function ArticleElementWrapper({
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div
-        className="article-element-wrapper"
+        className={`article-element-wrapper article-element-wrapper--${variant}`}
         style={{
           width: "100%",
           maxWidth,

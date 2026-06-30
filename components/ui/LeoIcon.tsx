@@ -9,6 +9,7 @@ import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { Flip } from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
+import { refreshScrollTriggers } from "@/lib/refreshScrollTriggers";
 import VersichererSelect from "@/components/ui/VersichererSelect";
 import { openOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 import LeoCharacter from "@/components/ui/LeoCharacter";
@@ -37,13 +38,14 @@ export default function LeoIcon() {
   const spikeRightRef = useRef<SVGSVGElement>(null);
   const arrowBtnRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
-  const chatInputElRef = useRef<HTMLInputElement>(null);    // <input> für mobile auto-focus
+  const chatInputElRef = useRef<HTMLTextAreaElement>(null); // <textarea> (umbrechend) + mobile auto-focus
   const chatCenterRef = useRef<HTMLDivElement>(null);       // statischer Chat-Overlay-Container (in JSX)
   const pillSlotRef = useRef<HTMLDivElement>(null);         // statischer Pill-Slot (Flip-Target)
   const iconwrapRef = useRef<HTMLDivElement>(null);         // Icon-Leo + Greeting Wrapper
   const leoBoxRef = useRef<HTMLDivElement>(null);           // NUR der Leo-Container (Scale-Target, ohne Greeting)
   const dockedInSlot = useRef(false);
   const chatOpenRef = useRef(false);
+  const closeChatRef = useRef<() => void>(() => {}); // closeChat aus dem Effect nach außen (Schließen-Button)
   const previousParentRef = useRef<HTMLElement | null>(null);
   const [docked, setDocked] = useState(false);
   const [selectedVersicherer, setSelectedVersicherer] = useState<Versicherer | null>(null);
@@ -82,6 +84,8 @@ export default function LeoIcon() {
     const displayText = versicherer ? `${trimmed}\n\nAnbieter: ${versicherer}` : trimmed;
     sendMessage({ text: displayText }, { body: { slug, category, versicherer } });
     setChatInput("");
+    // Auto-grow-Höhe der Textarea nach dem Senden zurücksetzen.
+    if (chatInputElRef.current) chatInputElRef.current.style.height = "auto";
   };
 
   // Layout-Mode + Leo-Tracking: welcome → conversation
@@ -112,10 +116,18 @@ export default function LeoIcon() {
       if (!row) return null;
       const rect = row.getBoundingClientRect();
       const isMob = window.matchMedia(isMobileMQ).matches;
+      // Untergrenze: Leo darf nie unter die Eingabe-Pille rutschen. Ist die zugehörige
+      // Bubble weggescrollt, bleibt er (geclamped) links ÜBER der Pille sichtbar.
+      const pill = document.getElementById("leo-chat-pill-slot");
+      const pr = pill?.getBoundingClientRect();
+      const minBottom = pr && pr.height > 0
+        ? Math.max(0, window.innerHeight - pr.top + 8)
+        : (isMob ? 160 : 120);
+      const rawBottom = window.innerHeight - rect.bottom - 5;
       return {
         row,
-        // Leo unten LINKS NEBEN dem Spike (nicht ON dem Spike).
-        bottom: window.innerHeight - rect.bottom - 5,
+        // Leo unten LINKS NEBEN dem Spike (nicht ON dem Spike), nie unter die Pille.
+        bottom: Math.max(rawBottom, minBottom),
         // Mobile: kleinerer Offset + Clamp, damit Leo nicht aus dem Bild läuft.
         left: isMob ? Math.max(8, rect.left - 30) : rect.left - 55,
       };
@@ -179,17 +191,14 @@ export default function LeoIcon() {
       });
     }
 
-    // ResizeObserver: Bubble wächst während Streaming → Leo folgt
+    // ResizeObserver: Bubble wächst während Streaming → Leo folgt.
+    // KEIN Scroll-Listener: Leo ist position:fixed und sitzt durch den Clamp in
+    // computeTarget immer über der Eingabe-Pille → beim Scrollen bleibt er ruhig
+    // stehen (kein Mitwandern/Zittern), rutscht aber auch nie unten raus.
     const ro = new ResizeObserver(() => {
       const t = computeTarget();
       if (!t) return;
-      gsap.to(wrap, {
-        left: t.left,
-        bottom: t.bottom,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
+      gsap.to(wrap, { left: t.left, bottom: t.bottom, duration: 0.25, ease: "power2.out", overwrite: "auto" });
     });
     ro.observe(row);
     return () => ro.disconnect();
@@ -748,9 +757,19 @@ export default function LeoIcon() {
     // weil Layout-Höhen aus voriger Page gecached sind).
     const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 300);
 
+    // Nachträgliche Höhenänderungen (lazy Embeds/Bilder, Vergleichs-iframes, TOC etc.)
+    // verschieben den Dock-Slot → der gecachte Trigger feuert zu früh/spät. Ein
+    // ResizeObserver auf den Haupt-Content stößt refreshScrollTriggers() an (debounced,
+    // überspringt offene Overlays), sodass die Position immer aktuell bleibt.
+    const ro = new ResizeObserver(() => refreshScrollTriggers());
+    ro.observe(document.body);
+    const mainContent = document.querySelector(".scalable-content");
+    if (mainContent) ro.observe(mainContent);
+
     return () => {
       trigger?.kill();
       clearTimeout(refreshTimer);
+      ro.disconnect();
     };
   }, [pathname]);
 
@@ -1071,6 +1090,9 @@ export default function LeoIcon() {
       });
     };
 
+    // closeChat nach außen verfügbar machen (Schließen-Button im JSX).
+    closeChatRef.current = closeChat;
+
     const handleContainerClick = (e: MouseEvent) => {
       // Wenn Chat schon offen ist: NICHT stopPropagation — sonst blockt der
       // native Listener das React-Synthetic-Event-System für innere Klicks
@@ -1212,14 +1234,26 @@ export default function LeoIcon() {
             onSubmit={(e) => { e.preventDefault(); handleChatSubmit(); }}
             style={{ width: "100%", display: "flex" }}
           >
-            <input
+            <textarea
               ref={chatInputElRef}
-              type="text"
               value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
+              onChange={(e) => {
+                setChatInput(e.target.value);
+                // Auto-Grow: Höhe an Inhalt anpassen (begrenzt → danach interner Scroll).
+                const ta = e.currentTarget;
+                ta.style.height = "auto";
+                ta.style.height = `${Math.min(ta.scrollHeight, 66)}px`;
+              }}
+              onKeyDown={(e) => {
+                // Enter sendet, Shift+Enter = Zeilenumbruch.
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleChatSubmit();
+                }
+              }}
               disabled={isBusy}
               placeholder={isBusy ? "Leo antwortet …" : "Sende Leo eine Nachricht ..."}
-              size={29}
+              rows={1}
               className="leo-chat-input"
               style={{
                 background: "transparent",
@@ -1231,8 +1265,12 @@ export default function LeoIcon() {
                 fontSize: "17px",
                 lineHeight: 1.3,
                 color: "#636A5F",
-                width: "auto",
+                width: "100%",
                 flex: 1,
+                resize: "none",
+                overflowY: "auto",
+                maxHeight: "66px",
+                display: "block",
               }}
             />
           </form>
@@ -1352,6 +1390,19 @@ export default function LeoIcon() {
     >
       <div ref={pillSlotRef} id="leo-chat-pill-slot" />
     </div>
+
+    {/* Schließen-Button — oben rechts unter dem Bookmark, alle Breakpoints.
+        Sichtbar nur bei offenem Chat (CSS: body.leo-chat-open). */}
+    <button
+      type="button"
+      className="leo-chat-close"
+      aria-label="Chat schließen"
+      onClick={() => closeChatRef.current?.()}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+      </svg>
+    </button>
 
     {/* Messages-Container — eigenständig (NICHT in chat-center), weil
         position:fixed innerhalb eines transform-Parents zu absolute relativ
