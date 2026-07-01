@@ -99,9 +99,35 @@ export default function TopBanner({ text, linkType, linkValue, visibility }: Top
     // schon gecullt sind. Danach Row sichtbar machen.
     onTick();
     gsap.set(row, { opacity: 1 });
-    gsap.ticker.add(onTick);
+
+    // Heat-Schutz: der per-Frame-Tick (misst alle Dots) + die Marquee-Animation laufen
+    // NUR, solange der Banner im Viewport ist. Sobald weggescrollt → beides pausiert
+    // (kein Dauer-getBoundingClientRect im Hintergrund). prefers-reduced-motion: still.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ticking = false;
+    const startTicking = () => {
+      if (ticking || reduceMotion) return;
+      ticking = true;
+      gsap.ticker.add(onTick);
+      marqueeTween.resume();
+    };
+    const stopTicking = () => {
+      if (!ticking) return;
+      ticking = false;
+      gsap.ticker.remove(onTick);
+      marqueeTween.pause();
+    };
+    if (reduceMotion) marqueeTween.pause();
+    else startTicking(); // Banner ist beim Laden sichtbar (oben)
+
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) startTicking(); else stopTicking(); },
+      { threshold: 0 }
+    );
+    io.observe(row);
 
     return () => {
+      io.disconnect();
       marqueeTween.kill();
       gsap.ticker.remove(onTick);
     };

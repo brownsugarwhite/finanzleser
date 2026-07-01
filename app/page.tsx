@@ -36,10 +36,11 @@ export default function LandingPage() {
   return (
     <>
       <style>{`.logo-wrapper{pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="leo"]{visibility:hidden}`}</style>
-      {/* Erst-gezeigtes Finanztool-Slider-Video (Intro = toolbox.mp4) sofort beim HTML-Parse
-          vorladen — unabhängig davon, dass FinanztoolsHero in <Suspense> steckt. React 19
-          hebt das <link> in den <head>. Die übrigen 3 Videos laden via preload="auto". */}
-      <link rel="preload" as="video" type="video/mp4" href="/assets/vids/toolbox.mp4" fetchPriority="high" />
+      {/* Intro-Poster (erster Frame des Finanztool-Slider-Visuals) sofort vorladen → der
+          Visual-Kasten ist beim ersten Paint gefüllt, kein Aufblitzen. `as="video"` ist kein
+          gültiger Preload-Wert (Browser ignoriert es); das Poster-Bild ist gültig + wirksam.
+          Das Video selbst lädt via preload="auto". */}
+      <link rel="preload" as="image" href="/assets/vids/toolbox.webp" fetchPriority="high" />
       <LandingIntro />
       <main className="bg-white">
         {/* Platzhalter mit reservierter Höhe statt fallback={null}: sonst kollabiert beim

@@ -166,7 +166,11 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
   // Gecachter Andock-Scroll (gemessen wenn untransformiert/nicht aktiv) — von Loader-Trigger UND
   // Autoscroll genutzt → exakt gleiche Position, auch im Expanded-Zustand (Slider translateY).
   const mUndockRef = useRef(0);
-  const [titleWidths, setTitleWidths] = useState<number[]>([0, 0, 0]);
+  // Vorausberechnete Titel-Breiten (px, gemessen @13.5px/600/Heading-Font, nach Font-Load)
+  // für [Rechner, Vergleiche, Checklisten] → SSR + erster Paint haben sofort die richtige
+  // Button-Breite (kein Flackern/Morph). Die Laufzeit-Messung (useEffect + fonts.ready)
+  // bestätigt/verfeinert die Werte nur noch.
+  const [titleWidths, setTitleWidths] = useState<number[]>([55, 68, 77]);
   const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const alleinHandRef = useRef<HTMLParagraphElement>(null);
@@ -980,6 +984,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   ref={registerSlideVideo}
                   data-slide={i}
                   src={src}
+                  poster={src.replace(".mp4", ".webp")}
                   muted
                   playsInline
                   preload="auto"
@@ -1280,6 +1285,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
               ref={registerSlideVideo}
               data-slide={i}
               src={src}
+              poster={src.replace(".mp4", ".webp")}
               muted
               playsInline
               preload="auto"

@@ -627,7 +627,7 @@ export default function BookmarkNav() {
                   flexShrink: 0, padding: 0, marginLeft: 12,
                 }}
               >
-                <Image src="/icons/lupe.svg" alt="Suche" width={18} height={18} priority unoptimized />
+                <Image src="/icons/lupe.svg" alt="Suche" width={18} height={18} priority unoptimized style={{ width: 18, height: 18 }} />
               </button>
             </div>
           </div>
