@@ -276,7 +276,11 @@ export default function LeoIcon() {
   // Re-runs bei Navigation (pathname-Änderung), damit Leo nach Page-Wechsel
   // wieder einen gültigen Parent hat — sonst hängt sie im DOM-Limbo wenn ein
   // page-spezifischer Slot (z.B. leo-dock-slot, leo-dock-slot-ai) entfernt wird.
-  useEffect(() => {
+  // useLayoutEffect statt useEffect: Positionierung (Dock-Slot/Home) + visibility:visible
+  // laufen VOR dem Paint → Leo sitzt beim ersten Frame korrekt, statt „etwas nachträglich"
+  // einzublenden. Die Page-Transition fasst Leo nicht an (kein Flip-Konflikt); Leos Flip
+  // ist nur für Dock/Undock/Chat (Scroll/Klick), nicht für Navigation.
+  useLayoutEffect(() => {
     let home = document.getElementById("leo-floating-home");
     if (!home) {
       home = document.createElement("div");

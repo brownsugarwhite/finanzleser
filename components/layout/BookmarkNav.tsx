@@ -355,13 +355,14 @@ export default function BookmarkNav() {
     return -(lupeBtn.offsetLeft);
   }, []);
 
-  // Set inner offset on mount
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const offset = calcInnerOffset();
-      innerStartX.current = offset;
-      if (searchInnerRef.current) gsap.set(searchInnerRef.current, { x: offset });
-    });
+  // Set inner offset on mount — VOR dem Paint (useLayoutEffect), sonst zeigt die
+  // Pille beim ersten Frame den ungescrollten Zustand (Input statt Lupe) und
+  // „springt" erst nach einem rAF in den Lupe-Collapse. offsetLeft ist zum
+  // Layout-Zeitpunkt bereits messbar.
+  useLayoutEffect(() => {
+    const offset = calcInnerOffset();
+    innerStartX.current = offset;
+    if (searchInnerRef.current) gsap.set(searchInnerRef.current, { x: offset });
   }, [calcInnerOffset]);
 
   const openSearch = useCallback(() => {
