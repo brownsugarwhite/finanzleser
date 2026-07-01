@@ -591,7 +591,7 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
   const [revealed, setRevealed] = useState(false);
   const [coverReady, setCoverReady] = useState(false); // grüner Cover gezeichnet?
   const [size, setSize] = useState({ w: 0, h: 0 });
-  const [coin, setCoin] = useState({ x: 0, y: 0, show: false });
+  const [coin, setCoin] = useState({ x: 0, y: 0, show: false, big: false });
   const drawing = useRef(false);
 
   // Ticket-Maße messen (Höhe = Antworttext) und bei Resize nachziehen.
@@ -710,11 +710,13 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
     if (total && cleared / total > 0.5) setRevealed(true);
   };
 
-  const trackCoin = (clientX: number, clientY: number) => {
+  // big = true, solange aktiv gerubbelt wird (Finger/Drag) → Münze etwas größer
+  // „unter dem Finger". Beim reinen Hover (Desktop) bleibt sie klein.
+  const trackCoin = (clientX: number, clientY: number, big = false) => {
     const el = ticketRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    setCoin({ x: clientX - r.left, y: clientY - r.top, show: true });
+    setCoin({ x: clientX - r.left, y: clientY - r.top, show: true, big });
   };
 
   // Maus-Drag startet auf dem Canvas, läuft aber über window weiter → solange die
@@ -726,8 +728,8 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
   const startMouseScratch = (clientX: number, clientY: number) => {
     drawing.current = true;
     scratch(clientX, clientY);
-    trackCoin(clientX, clientY);
-    const onWinMove = (e: MouseEvent) => { scratch(e.clientX, e.clientY); trackCoin(e.clientX, e.clientY); };
+    trackCoin(clientX, clientY, true);
+    const onWinMove = (e: MouseEvent) => { scratch(e.clientX, e.clientY); trackCoin(e.clientX, e.clientY, true); };
     const onWinUp = () => {
       drawing.current = false;
       window.removeEventListener("mousemove", onWinMove);
@@ -743,9 +745,11 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
   };
 
   // Touch fängt Bewegungen implizit am Canvas ein → läuft auch außerhalb weiter.
-  const onTouchDown = (x: number, y: number) => { drawing.current = true; scratch(x, y); };
-  const onTouchMove = (x: number, y: number) => { if (drawing.current) scratch(x, y); };
-  const onTouchUp = () => { drawing.current = false; };
+  // Auch auf Touch die Münze mitführen (vorher nur Maus) → auf Mobile sichtbar,
+  // „big" während des Rubbelns unter dem Finger.
+  const onTouchDown = (x: number, y: number) => { drawing.current = true; scratch(x, y); trackCoin(x, y, true); };
+  const onTouchMove = (x: number, y: number) => { if (drawing.current) { scratch(x, y); trackCoin(x, y, true); } };
+  const onTouchUp = () => { drawing.current = false; setCoin((c) => ({ ...c, show: false })); };
 
   // Canvas nur auf das Fenster begrenzen → nur der innere Bereich ist rubbelbar.
   const clip = windowPath ? { clipPath: `path('${windowPath}')`, WebkitClipPath: `path('${windowPath}')` } : undefined;
@@ -795,7 +799,7 @@ function GewusstBox({ fields }: { fields: Record<string, string> }) {
           <img
             src="/icons/rubbelCoin.png"
             alt=""
-            className="fl-gam-coin"
+            className={`fl-gam-coin${coin.big ? " is-big" : ""}`}
             style={{ left: coin.x, top: coin.y }}
           />
         )}

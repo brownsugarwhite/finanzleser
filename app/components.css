@@ -3758,14 +3758,8 @@ h2.faq-heading {
   justify-content: center;
   pointer-events: none;
 }
-/* Ganzflächiger Backdrop-Blur hinter dem Consent-Banner (Fokus auf die Auswahl). */
-.cookie-banner::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(12px);
-  pointer-events: none;
-}
+/* KEIN ganzflächiger Backdrop-Blur hinter dem Consent-Banner — der Seitenhintergrund
+   bleibt scharf. Nur der Banner-Container (.cookie-banner__inner) hat Backdrop-Blur. */
 .cookie-banner__inner {
   pointer-events: auto;
   width: 100%;
@@ -3859,7 +3853,8 @@ h2.faq-heading {
   position: fixed;
   inset: 0;
   background: transparent;
-  backdrop-filter: blur(12px);
+  /* Kein eigener Backdrop-Blur — der Hintergrund wird beim Einstellungen-Modal
+     ausschließlich per ContentScaler skaliert & geblurrt (wie Menü/Finanztools). */
 }
 .cookie-modal__panel {
   position: relative;

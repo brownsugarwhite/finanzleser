@@ -66,14 +66,11 @@ const nextConfig: NextConfig = {
       { source: "/steuerklassenwahl", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuerklassenwechsel", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuersoftware-steuererklaerung", destination: "/steuern/steuererklaerung/elster", permanent: true },
-      // Groß-/Kleinschreibung: Legal-Seiten robust gegen kapitalisierte Links (z.B. aus
-      // externen Mails/Tools wie CleverReach). Next.js-Routen sind case-sensitive.
-      { source: "/Datenschutz", destination: "/datenschutz", permanent: true },
-      { source: "/Impressum", destination: "/impressum", permanent: true },
-      { source: "/AGB", destination: "/agb", permanent: true },
-      { source: "/Widerrufsrecht", destination: "/widerrufsrecht", permanent: true },
-      { source: "/Kontakt", destination: "/kontakt", permanent: true },
-      { source: "/Erstinformationen", destination: "/erstinformationen", permanent: true },
+      // HINWEIS: KEINE Groß-/Klein-Redirects für Legal-Seiten (/Datenschutz → /datenschutz).
+      // Next.js matcht Redirect-`source` case-INSENSITIV → eine solche Regel fängt AUCH die
+      // korrekte lowercase-URL und redirectet sie auf sich selbst = Endlos-Loop (308×∞).
+      // Der CleverReach-DOI-Link ist auf lowercase umgestellt; kapitalisierte Alt-Links
+      // müssten via Middleware (pathname !== toLowerCase) behandelt werden, nicht hier.
       // Auto-generierte Legacy-Flach-URL-Redirects (~642) für konsolidierte/entfallene
       // Beiträge & Tools. Quelle: scripts/generate-legacy-redirects.mjs → lib/redirects.generated.ts.
       // Review: scripts/output/legacy-redirects.review.txt (medium/low confidence prüfen).

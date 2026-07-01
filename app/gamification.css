@@ -463,6 +463,11 @@
   transform: translate(-50%, -42%);
   pointer-events: none;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+  transition: width 0.12s ease;
+}
+/* Während des aktiven Rubbelns (Finger/Drag) etwas größer unter dem Finger. */
+.fl-gam-coin.is-big {
+  width: 48px;
 }
 .fl-gam-ticket.is-revealed {
   animation: fl-gam-fade 0.3s ease;
