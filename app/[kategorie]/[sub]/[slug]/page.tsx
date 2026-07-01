@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getAllPosts } from "@/lib/wordpress";
+import { getPostBySlug, getAllPosts, getYoastMeta } from "@/lib/wordpress";
 import { getCategoryPair } from "@/lib/urls";
 import { isMainCategory } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
@@ -36,15 +36,19 @@ export async function generateMetadata(
   props: { params: Promise<RouteParams> }
 ): Promise<Metadata> {
   const params = await props.params;
-  const post = await getPostBySlug(params.slug).catch(() => null);
+  // Yoast-SEO-Meta (von Redakteuren gepflegt) hat Vorrang vor Content-Ableitung.
+  const [post, yoast] = await Promise.all([
+    getPostBySlug(params.slug).catch(() => null),
+    getYoastMeta(params.slug, "posts").catch(() => null),
+  ]);
   if (!post) return { title: `Nicht gefunden – ${SITE_NAME}` };
 
   const mainCategory = post.categories?.nodes?.find((c: Category) => isMainCategory(c.slug));
-  // Konvention v2: Titel = WP-Titel-Feld; Beschreibung = Content-<p> (1. h2 → <p>) bzw. Excerpt.
+  // Titel/Description: zuerst Yoast (Redaktions-optimiert), sonst WP-Titel + Content-<p>/Excerpt.
   const header = extractArticleHeader(post.content);
   return buildMetadata({
-    title: `${post.title} – ${SITE_NAME}`,
-    description: stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
+    title: yoast?.title || `${post.title} – ${SITE_NAME}`,
+    description: yoast?.description || stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
     path: `/${params.kategorie}/${params.sub}/${params.slug}`,
     image: post.featuredImage?.node?.sourceUrl,
     imageAlt: post.featuredImage?.node?.altText || post.title,

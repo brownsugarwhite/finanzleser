@@ -1940,6 +1940,48 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
 }
 
 // ─────────────────────────────────────────────
+// Yoast-SEO-Meta (Titel/Beschreibung) via REST — für Beiträge/CPTs.
+// Kein WPGraphQL-Yoast-Addon nötig; Yoast liefert yoast_head_json in der REST-API.
+// Die Redakteure pflegen SEO-Titel + Meta-Description im Yoast-Feld → hier auslesen,
+// damit das Frontend sie nutzt statt WP-Titel/Content-Absatz.
+// ─────────────────────────────────────────────
+
+export type YoastMeta = {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+};
+
+export async function getYoastMeta(slug: string, restBase = "posts"): Promise<YoastMeta | null> {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return null;
+  const baseUrl = wpUrl.replace("/graphql", "");
+  try {
+    const res = await fetch(
+      `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
+      { next: { revalidate: 3600 } },
+    );
+    // Meta ist optional → bei Fehler NICHT werfen (sonst bräche der Metadata-Build),
+    // sondern null zurück und Frontend nutzt seinen Fallback.
+    if (!res.ok) return null;
+    const arr = await res.json();
+    const y = Array.isArray(arr) ? arr[0]?.yoast_head_json : null;
+    if (!y) return null;
+    return {
+      title: y.title || undefined,
+      description: y.description || undefined,
+      ogTitle: y.og_title || undefined,
+      ogDescription: y.og_description || undefined,
+      ogImage: Array.isArray(y.og_image) ? y.og_image[0]?.url : undefined,
+    };
+  } catch {
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────
 // Anbieter (CPT): Einzelseite nach Slug
 // ─────────────────────────────────────────────
 
