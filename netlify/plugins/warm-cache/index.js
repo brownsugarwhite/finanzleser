@@ -1,7 +1,9 @@
-// Netlify Build-Plugin: wärmt nach erfolgreichem Deploy die Edge-/ISR-Caches vor,
-// indem es einmal alle Sitemap-URLs des frisch deployten Sites aufruft. So bekommt
-// der erste echte Besucher auch dann eine schnelle Seite, wenn der Build (IONOS-
-// Flakiness) nicht alles prerendern konnte.
+// Netlify Build-Plugin: wärmt nach erfolgreichem Deploy die Edge-/ISR-Caches der
+// Hub-Seiten vor (Landing, Haupt-/Subkategorien, Tool-Übersichten — siehe isHubPath
+// in scripts/warm-cache.mjs; WARM_FULL=true würde die ganze Sitemap wärmen). So bekommt
+// der erste echte Besucher der meistbesuchten Einstiege eine schnelle Seite, auch wenn
+// der Build (IONOS-Flakiness) nicht alles prerendern konnte.
+// Voraussetzung: NODE_VERSION >= 22 (Netlify-Plugin-Mindestversion), siehe netlify.toml.
 //
 // Deaktivieren:  WARM_CACHE=false  (Netlify-Env)
 // Concurrency:   WARM_CONCURRENCY=6 (Default)

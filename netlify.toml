@@ -2,14 +2,17 @@
   command = "npm run build"
   publish = ".next"
 
-# Wärmt nach jedem Deploy die Caches vor (alle Sitemap-URLs einmal aufrufen), damit
-# auch nicht-prerenderte Seiten beim ersten echten Besuch schnell sind.
+# Wärmt nach jedem Deploy die Hub-Seiten vor (Landing, Haupt-/Subkategorien, Tool-
+# Übersichten — Standard; WARM_FULL=true würde die ganze Sitemap wärmen), damit die
+# meistbesuchten Einstiege beim ersten echten Besuch schnell sind.
 # Abschalten via Env WARM_CACHE=false. Concurrency via WARM_CONCURRENCY.
 [[plugins]]
   package = "/netlify/plugins/warm-cache"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # 22 (LTS): Netlify verlangt für Build-Plugins Node >= 22 — sonst wird das
+  # warm-cache-Plugin übersprungen (Post-Deploy-Warming läuft dann nicht).
+  NODE_VERSION = "22"
   # LEO-Backend des Kunden (RAG-Service auf Heroku). /api/chat proxyt darauf.
   # Gilt für alle Kontexte (Staging, Previews, Production) — ein einziges Backend.
   # Falls der Kunde später eine separate Prod-URL liefert: in [context.production.environment] überschreiben.
