@@ -16,6 +16,8 @@ const PILL_BG = "var(--color-pill-bg)";
 export default function NewsletterBanner() {
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
   const contentRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
 
@@ -44,11 +46,32 @@ export default function NewsletterBanner() {
     return () => { ro.disconnect(); window.removeEventListener("resize", compute); };
   }, []);
 
-  const handleSubmit = () => {
-    // TODO: Anbindung an Newsletter-Provider. Vorerst nur Platzhalter.
-    if (!email || !consent) return;
-    // eslint-disable-next-line no-console
-    console.log("Newsletter-Abo:", { email, consent });
+  const handleSubmit = async () => {
+    if (status === "loading") return;
+    if (!email) { setStatus("error"); setFeedback("Bitte eine E-Mail-Adresse angeben."); return; }
+    if (!consent) { setStatus("error"); setFeedback("Bitte der Datenschutzerklärung zustimmen."); return; }
+    setStatus("loading");
+    setFeedback("");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, consent }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        setStatus("success");
+        setFeedback("Fast geschafft! Wir haben dir eine E-Mail geschickt – bitte bestätige darin deine Anmeldung.");
+        setEmail("");
+        setConsent(false);
+      } else {
+        setStatus("error");
+        setFeedback(data?.error || "Anmeldung fehlgeschlagen. Bitte später erneut versuchen.");
+      }
+    } catch {
+      setStatus("error");
+      setFeedback("Anmeldung fehlgeschlagen. Bitte später erneut versuchen.");
+    }
   };
 
   return (
@@ -186,8 +209,27 @@ export default function NewsletterBanner() {
 
           {/* Submit — darunter, zentriert, im Default-Button-Stil */}
           <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-            <Button label="Abonnieren" onClick={handleSubmit} />
+            <Button label={status === "loading" ? "Wird gesendet…" : "Abonnieren"} onClick={handleSubmit} />
           </div>
+
+          {/* Status-Meldung (Erfolg = Bestätigungshinweis, sonst Fehler) */}
+          {feedback && (
+            <p
+              role="status"
+              aria-live="polite"
+              style={{
+                margin: 0,
+                maxWidth: 480,
+                fontFamily: "var(--font-body)",
+                fontSize: 15,
+                lineHeight: 1.5,
+                color: status === "error" ? "var(--color-brand-secondary)" : "var(--color-text-primary)",
+                fontWeight: status === "success" ? 700 : 500,
+              }}
+            >
+              {feedback}
+            </p>
+          )}
         </form>
       </div>
 
