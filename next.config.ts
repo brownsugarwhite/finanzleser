@@ -66,6 +66,14 @@ const nextConfig: NextConfig = {
       { source: "/steuerklassenwahl", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuerklassenwechsel", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuersoftware-steuererklaerung", destination: "/steuern/steuererklaerung/elster", permanent: true },
+      // Groß-/Kleinschreibung: Legal-Seiten robust gegen kapitalisierte Links (z.B. aus
+      // externen Mails/Tools wie CleverReach). Next.js-Routen sind case-sensitive.
+      { source: "/Datenschutz", destination: "/datenschutz", permanent: true },
+      { source: "/Impressum", destination: "/impressum", permanent: true },
+      { source: "/AGB", destination: "/agb", permanent: true },
+      { source: "/Widerrufsrecht", destination: "/widerrufsrecht", permanent: true },
+      { source: "/Kontakt", destination: "/kontakt", permanent: true },
+      { source: "/Erstinformationen", destination: "/erstinformationen", permanent: true },
       // Auto-generierte Legacy-Flach-URL-Redirects (~642) für konsolidierte/entfallene
       // Beiträge & Tools. Quelle: scripts/generate-legacy-redirects.mjs → lib/redirects.generated.ts.
       // Review: scripts/output/legacy-redirects.review.txt (medium/low confidence prüfen).
