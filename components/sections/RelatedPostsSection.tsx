@@ -53,7 +53,7 @@ export default function RelatedPostsSection({
       <h2 id="related-posts-heading" className="related-posts-heading" data-toc-exclude>
         Das könnte Sie auch interessieren
       </h2>
-      <ArticleSlider posts={posts} onNavReady={handleNavReady} />
+      <ArticleSlider posts={posts} onNavReady={handleNavReady} sideArrows />
       {nav && (
         <div className="related-posts-nav">
           <SliderNav {...nav} />

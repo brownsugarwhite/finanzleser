@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import SliderEdgeSpark from '@/components/ui/SliderEdgeSpark';
 import SliderHoverBox from '@/components/ui/SliderHoverBox';
+import SliderSideArrows from '@/components/ui/SliderSideArrows';
 import DokumenteBookmark from '@/components/ui/DokumenteBookmark';
 import { useSliderHoverBox } from '@/lib/hooks/useSliderHoverBox';
 import { getArticleSliderPos, setArticleSliderPos, isBackNavigation } from '@/lib/landingState';
@@ -33,11 +34,14 @@ interface ArticleSliderProps {
   categoryTransition?: 'idle' | 'out' | 'in';
   /** Key (category slug) zum Merken/Wiederherstellen der Embla-Scroll-Position bei Zurück. */
   persistKey?: string;
+  /** Eigene Seitenpfeile rendern (Standalone-Nutzung, z.B. RelatedPostsSection). Im
+   *  SubcategorySlider FALSE lassen — dort stellt der Eltern-Slider die gemeinsamen Pfeile. */
+  sideArrows?: boolean;
 }
 
 const SPARK_DURATION = 0.3;
 
-export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle', persistKey }: ArticleSliderProps) {
+export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle', persistKey, sideArrows = false }: ArticleSliderProps) {
   // Mount-flip: beim ersten Mount rendert die Komponente mit mounted=false, sodass
   // das Visual bei scale(0) startet. Ein rAF flippt auf true → CSS-Transition zu
   // scale(1) läuft parallel zur Spacer-Höhe-Animation. Sonst würde das Visual auf
@@ -267,12 +271,12 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
 
   return (
     <>
-    <div ref={emblaRef} onMouseLeave={hoverEnabled ? hoverBox.leaveRegion : undefined} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
-      {/* Seitenpfeile werden NICHT hier gerendert: die Navigation wird via onNavReady
-          nach oben gereicht. Der Eltern-SubcategorySlider stellt die gemeinsamen
-          SliderSideArrows (auf articleNav umgeschaltet), RelatedPostsSection eine
-          eigene SliderNav. Ein <SliderSideArrows> als erstes Kind des Embla-Viewports
-          würde von Embla als Container fehlinterpretiert → Slider-Navigation kaputt. */}
+    {/* Relativer Wrapper trägt die Seitenpfeile als GESCHWISTER des Embla-Viewports —
+        NICHT als dessen erstes Kind (das würde Embla als Container fehlinterpretieren
+        und die Navigation lahmlegen). sideArrows nur im Standalone-Fall (RelatedPosts);
+        im SubcategorySlider liefert der Eltern-Slider die gemeinsamen Pfeile. */}
+    <div style={{ position: 'relative', marginTop: 30 }}>
+    <div ref={emblaRef} onMouseLeave={hoverEnabled ? hoverBox.leaveRegion : undefined} style={{ cursor: canScroll ? 'grab' : 'default', position: 'relative' }}>
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,
@@ -458,6 +462,15 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
           }}
         />
       </div>
+    </div>
+    {sideArrows && (
+      <SliderSideArrows
+        onPrev={() => emblaApi?.scrollPrev()}
+        onNext={() => emblaApi?.scrollNext()}
+        canPrev={canScroll && selectedIndex > 0}
+        canNext={canScroll && selectedIndex < posts.length - 1}
+      />
+    )}
     </div>
     </>
   );
