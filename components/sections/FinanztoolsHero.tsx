@@ -1198,9 +1198,9 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
             })}
           </div>
 
-          {/* CTA: Ratgeber durchsuchen — wie der Anbieter-Button (hugt Inhalt, Pfeil nach unten) */}
+          {/* CTA: Alle Ratgeber — smooth-scrollt zu den Ratgeber-Slidern (#ratgeber-section) auf der Landing */}
           <div style={{ marginTop: 24, display: "flex" }}>
-            <Button label="Alle Ratgeber" href="/suche" icon="arrow-down" />
+            <Button label="Alle Ratgeber" onClick={() => document.getElementById("ratgeber-section")?.scrollIntoView({ behavior: "smooth", block: "start" })} icon="arrow-down" />
           </div>
 
           {/* hellgraue Trennlinie nach „Ratgeber durchsuchen" */}
