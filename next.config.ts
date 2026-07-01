@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { legacyRedirects } from "./lib/redirects.generated";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -65,6 +66,10 @@ const nextConfig: NextConfig = {
       { source: "/steuerklassenwahl", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuerklassenwechsel", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuersoftware-steuererklaerung", destination: "/steuern/steuererklaerung/elster", permanent: true },
+      // Auto-generierte Legacy-Flach-URL-Redirects (~642) für konsolidierte/entfallene
+      // Beiträge & Tools. Quelle: scripts/generate-legacy-redirects.mjs → lib/redirects.generated.ts.
+      // Review: scripts/output/legacy-redirects.review.txt (medium/low confidence prüfen).
+      ...legacyRedirects,
     ];
   },
   eslint: {

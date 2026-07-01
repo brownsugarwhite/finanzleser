@@ -8,6 +8,10 @@ import { isTransitioning } from "@/lib/pageTransition";
 export default function ContentScaler() {
   const isOpenRef = useRef(false);
   const savedOpacities = useRef<Map<HTMLElement, number>>(new Map());
+  // Ruhe-Opacity der SKALIERTEN Elemente (nicht nur fadeTargets) vor dem Öffnen.
+  // Nötig, weil manche scale-extended Elemente scroll-abhängig eine Opacity < 1 haben
+  // (z.B. .landing-bubble-mobile) — die darf beim Schließen NICHT hart auf 1 zurück.
+  const savedElOpacities = useRef<Map<HTMLElement, number>>(new Map());
   const savedPointerEvents = useRef<Map<HTMLElement, string>>(new Map());
   const previewScaleEls = useRef<HTMLElement[]>([]);
   // recreate-Timeout tracken, damit rapid-Cycles (open-close-open in <350ms)
@@ -81,6 +85,11 @@ export default function ContentScaler() {
           savedPointerEvents.current.set(el, el.style.pointerEvents);
         }
         el.style.pointerEvents = "none";
+        // Ruhe-Opacity sichern (Guard gegen Overwrite bei unterbrochenen open→close→open-Zyklen),
+        // BEVOR die Blur-Tween sie auf 0.5 zieht. Wird in scaleUp als Wiederherstellungsziel genutzt.
+        if (!savedElOpacities.current.has(el)) {
+          savedElOpacities.current.set(el, parseFloat(getComputedStyle(el).opacity) || 1);
+        }
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 0.95,
@@ -137,11 +146,15 @@ export default function ContentScaler() {
           el.style.pointerEvents = savedPE;
           savedPointerEvents.current.delete(el);
         }
+        // Auf die vor dem Öffnen gesicherte Ruhe-Opacity zurück (Default 1) — NICHT hart 1,
+        // sonst würde z.B. die scroll-ausgeblendete Mobile-Sprechblase fälschlich eingeblendet.
+        const restoreOpacity = savedElOpacities.current.get(el) ?? 1;
+        savedElOpacities.current.delete(el);
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 1,
           filter: "blur(0px)",
-          opacity: 1,
+          opacity: restoreOpacity,
           duration: 0.5,
           ease: "power2.inOut",
           force3D: true,
@@ -153,6 +166,7 @@ export default function ContentScaler() {
           },
         });
       });
+      savedElOpacities.current.clear();
 
       savedOpacities.current.forEach((opacity, el) => {
         gsap.to(el, { opacity, duration: 0.5, ease: "power2.inOut" });
@@ -176,6 +190,7 @@ export default function ContentScaler() {
       // vom Controller nicht gemanagt und sollen nicht unsichtbar hängenbleiben.
       savedOpacities.current.forEach((op, el) => { gsap.set(el, { opacity: op }); });
       savedOpacities.current.clear();
+      savedElOpacities.current.clear();
       // pointerEvents NICHT restaurieren — der Controller setzt sie nach ENTER zurück.
       savedPointerEvents.current.clear();
       previewScaleEls.current = [];

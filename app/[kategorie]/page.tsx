@@ -1,27 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
 import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
-import ArticleLayout from "@/components/layout/ArticleLayout";
-import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
+import { buildPostUrl } from "@/lib/urls";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 import type { Post } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
-import { getRedakteurForSlug } from "@/lib/redakteure";
-
-// Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.
-function redakteurAuthor(slug: string, date?: string) {
-  const r = getRedakteurForSlug(slug);
-  return {
-    name: r.name,
-    role: r.role,
-    date: date ? new Date(date).toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }) : undefined,
-    imageUrl: r.imageUrl,
-    colorVariant: r.colorVariant,
-  };
-}
 
 export const revalidate = 3600;
 
@@ -76,13 +62,13 @@ export async function generateMetadata(
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;
 
-  // 1. Zuerst prüfen: ist es ein Post-Slug (legacy URL)?
+  // 1. Legacy-Flach-URL eines Beitrags (/slug) → 301/308 auf die kanonische verschachtelte
+  //    URL (/main/sub/slug). Direktes Rendern hier lieferte eine degradierte Seite (ohne
+  //    featuredImage/Visual, abweichendes TOC-Verhalten) und erzeugte Duplicate Content.
+  //    Der Redirect konsolidiert Rendering + Ranking-Signale auf den Kanon.
   const post = await getPostBySlug(params.kategorie).catch(() => null);
   if (post) {
-    const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
-    return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} toolData={toolData} author={redakteurAuthor(post.slug || params.kategorie, post.date)} />
-    );
+    permanentRedirect(buildPostUrl(post));
   }
 
   // 1a. Ist es ein Anbieter-Slug (legacy URL, /advocard-rechtsschutzversicherung-kontakt/ etc.)?

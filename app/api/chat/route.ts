@@ -15,6 +15,39 @@ export const maxDuration = 60;
 const LEO_BACKEND_URL =
   process.env.LEO_BACKEND_URL ?? "https://leo-finanzleser-ea7e1549925c.herokuapp.com";
 
+// Missbrauchsschutz für den offenen Proxy: Origin-Check + Best-Effort-Rate-Limit
+// (In-Memory pro warmer Function-Instanz — kein perfekter Schutz, aber bremst Bots
+// und Fremdseiten-Nutzung ohne externen Store). Bei Bedarf später auf Upstash o.ä.
+const RL_WINDOW_MS = 60_000;
+const RL_MAX = 20; // Anfragen pro IP je Fenster
+const rlHits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const arr = (rlHits.get(ip) ?? []).filter((t) => now - t < RL_WINDOW_MS);
+  arr.push(now);
+  rlHits.set(ip, arr);
+  if (rlHits.size > 5000) rlHits.delete(rlHits.keys().next().value as string); // simpler Leak-Schutz
+  return arr.length > RL_MAX;
+}
+
+function allowedOrigin(req: Request): boolean {
+  const origin = req.headers.get("origin");
+  if (!origin) return true; // Same-Origin-Fetch ohne Origin-Header / SSR → durchlassen
+  try {
+    const host = new URL(origin).host;
+    const site = process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL).host : "";
+    return (
+      (site && host === site) ||
+      host.endsWith(".finanzleser.de") ||
+      host.endsWith(".netlify.app") ||
+      host.startsWith("localhost")
+    );
+  } catch {
+    return false;
+  }
+}
+
 /** Reiner Text einer UIMessage (Text-Parts zusammenfügen). */
 function messageText(message: UIMessage): string {
   return message.parts
@@ -37,6 +70,21 @@ function messageText(message: UIMessage): string {
  */
 export async function POST(req: Request) {
   try {
+    if (!allowedOrigin(req)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+    const ip = (
+      req.headers.get("x-nf-client-connection-ip") ||
+      req.headers.get("x-forwarded-for") ||
+      "unknown"
+    ).split(",")[0].trim();
+    if (rateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Leo macht gerade eine kurze Pause. Bitte versuchen Sie es in einer Minute erneut." },
+        { status: 429 }
+      );
+    }
+
     const {
       messages,
       slug,

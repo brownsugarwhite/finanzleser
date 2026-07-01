@@ -5,7 +5,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
 import SliderEdgeSpark from '@/components/ui/SliderEdgeSpark';
 import SliderHoverBox from '@/components/ui/SliderHoverBox';
-import SliderSideArrows from '@/components/ui/SliderSideArrows';
 import DokumenteBookmark from '@/components/ui/DokumenteBookmark';
 import { useSliderHoverBox } from '@/lib/hooks/useSliderHoverBox';
 import { getArticleSliderPos, setArticleSliderPos, isBackNavigation } from '@/lib/landingState';
@@ -269,13 +268,11 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
   return (
     <>
     <div ref={emblaRef} onMouseLeave={hoverEnabled ? hoverBox.leaveRegion : undefined} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
-      {/* Seitenpfeile mittig über dem Slider (Desktop + Mobile, mobil schmaler). */}
-      <SliderSideArrows
-        onPrev={() => emblaApi?.scrollPrev()}
-        onNext={() => emblaApi?.scrollNext()}
-        canPrev={canScroll && selectedIndex > 0}
-        canNext={canScroll && selectedIndex < posts.length - 1}
-      />
+      {/* Seitenpfeile werden NICHT hier gerendert: die Navigation wird via onNavReady
+          nach oben gereicht. Der Eltern-SubcategorySlider stellt die gemeinsamen
+          SliderSideArrows (auf articleNav umgeschaltet), RelatedPostsSection eine
+          eigene SliderNav. Ein <SliderSideArrows> als erstes Kind des Embla-Viewports
+          würde von Embla als Container fehlinterpretiert → Slider-Navigation kaputt. */}
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,

@@ -36,13 +36,20 @@ export default function LandingPage() {
   return (
     <>
       <style>{`.logo-wrapper{pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="leo"]{visibility:hidden}`}</style>
+      {/* Erst-gezeigtes Finanztool-Slider-Video (Intro = toolbox.mp4) sofort beim HTML-Parse
+          vorladen — unabhängig davon, dass FinanztoolsHero in <Suspense> steckt. React 19
+          hebt das <link> in den <head>. Die übrigen 3 Videos laden via preload="auto". */}
+      <link rel="preload" as="video" type="video/mp4" href="/assets/vids/toolbox.mp4" fetchPriority="high" />
       <LandingIntro />
       <main className="bg-white">
-        <Suspense fallback={null}>
+        {/* Platzhalter mit reservierter Höhe statt fallback={null}: sonst kollabiert beim
+            Streaming-SSR die Layout-Höhe der async Sections und der Footer/Newsletter
+            (helles BG-Bild) blitzt kurz oben auf, bevor die Sections nachströmen. */}
+        <Suspense fallback={<div aria-hidden style={{ minHeight: "100vh" }} />}>
           <FinanztoolsHeroSection />
         </Suspense>
 
-        <Suspense fallback={null}>
+        <Suspense fallback={<div aria-hidden style={{ minHeight: 600 }} />}>
           <RatgeberSection />
         </Suspense>
 
