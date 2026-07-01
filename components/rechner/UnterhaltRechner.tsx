@@ -47,6 +47,7 @@ export default function UnterhaltRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={10000}
         />
 
         <RechnerInput
@@ -57,6 +58,7 @@ export default function UnterhaltRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={3000}
           tooltip="Berufliche Aufwendungen ueber die 5%-Pauschale hinaus"
         />
 

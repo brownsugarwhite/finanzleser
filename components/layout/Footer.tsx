@@ -1,4 +1,6 @@
 import Link from "next/link";
+import TrustpilotWidget from "@/components/ui/TrustpilotWidget";
+import CookieSettingsLink from "@/components/consent/CookieSettingsLink";
 import { getToolCategories } from "@/lib/wordpress";
 import NewsletterBanner from "@/components/sections/NewsletterBanner";
 import AIAgentTeaser from "@/components/sections/AIAgentTeaser";
@@ -119,15 +121,20 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
             </ul>
           </div>
 
-          {/* Column 4: Platzhalter-Rechteck */}
+          {/* Column 4: Trustpilot-Box (Mini-Kachel) */}
           <div
             className="footer-column"
             style={{
-              border: "1px solid var(--color-text-primary)",
               background: "transparent",
               minHeight: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "16px",
             }}
-          />
+          >
+            <TrustpilotWidget />
+          </div>
         </div>
 
         {/* Divider */}
@@ -138,7 +145,7 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
           {/* Legal Links */}
           <div className="footer-legal mb-6">
             <ul className="flex flex-wrap gap-4 justify-center md:justify-start">
-              {legalLinks.map((link, idx) => (
+              {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -146,11 +153,12 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
                   >
                     {link.label}
                   </Link>
-                  {idx < legalLinks.length - 1 && (
-                    <span className="text-gray-300 ml-4">|</span>
-                  )}
+                  <span className="text-gray-300 ml-4">|</span>
                 </li>
               ))}
+              <li>
+                <CookieSettingsLink className="text-xs text-gray-600 footer-link footer-cookie-btn" />
+              </li>
             </ul>
           </div>
 
@@ -168,6 +176,18 @@ export default async function Footer({ hideNewsletter = false }: { hideNewslette
       <style>{`
         .footer-link {
           transition: color 0.15s ease;
+        }
+        .footer-cookie-btn {
+          background: none;
+          border: none;
+          padding: 0;
+          margin: 0;
+          font-family: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
+          vertical-align: baseline;
+          cursor: pointer;
         }
         .footer-link:hover {
           color: var(--color-brand-secondary) !important;

@@ -1,7 +1,8 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
-import ArticleLayout from "@/components/layout/ArticleLayout";
+import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
+import { buildPostUrl } from "@/lib/urls";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
@@ -9,6 +10,13 @@ import type { Post } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 
 export const revalidate = 3600;
+
+// Nur die 4 Hauptkategorien prerendern (high-traffic Top-Nav). Daten-Fetches sind dank
+// Build-Bulk/Memo jetzt leicht → keine „0 Rechner"-Bakes mehr. Anbieter (147, low-traffic)
+// + Legacy-Slugs bleiben on-demand (dynamicParams = default true).
+export async function generateStaticParams(): Promise<Array<{ kategorie: string }>> {
+  return MAIN_CATEGORY_SLUGS.map((slug) => ({ kategorie: slug }));
+}
 
 export async function generateMetadata(
   props: { params: Promise<{ kategorie: string }> }
@@ -54,12 +62,13 @@ export async function generateMetadata(
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;
 
-  // 1. Zuerst prüfen: ist es ein Post-Slug (legacy URL)?
+  // 1. Legacy-Flach-URL eines Beitrags (/slug) → 301/308 auf die kanonische verschachtelte
+  //    URL (/main/sub/slug). Direktes Rendern hier lieferte eine degradierte Seite (ohne
+  //    featuredImage/Visual, abweichendes TOC-Verhalten) und erzeugte Duplicate Content.
+  //    Der Redirect konsolidiert Rendering + Ranking-Signale auf den Kanon.
   const post = await getPostBySlug(params.kategorie).catch(() => null);
   if (post) {
-    return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
-    );
+    permanentRedirect(buildPostUrl(post));
   }
 
   // 1a. Ist es ein Anbieter-Slug (legacy URL, /advocard-rechtsschutzversicherung-kontakt/ etc.)?
@@ -87,6 +96,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
         slug={params.kategorie}
         description={categoryWithChildren.description}
         image={categoryWithChildren.image}
+        imageWide={categoryWithChildren.imageWide}
         categoryChildren={categoryWithChildren.children}
         posts={categoryWithChildren.posts}
         allCategoryPosts={allCategoryPosts}
@@ -107,6 +117,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
       titleSlug={params.kategorie}
       description={category?.description}
       image={category?.image}
+      imageWide={category?.imageWide}
       mainCategoryName={category?.parent?.name}
       mainCategorySlug={category?.parent?.slug}
       posts={posts}

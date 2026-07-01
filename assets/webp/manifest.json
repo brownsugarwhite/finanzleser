@@ -1,0 +1,1417 @@
+[
+  {
+    "source": "assets/png_1920/titelbilder/0001_abfindungen.png",
+    "output": "assets/webp/titelbilder/0001_abfindungen.webp",
+    "sanitizedName": "0001_abfindungen",
+    "type": "titelbild",
+    "altText": "Abfindungen",
+    "title": "Abfindungen",
+    "bytes": 103496
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0002_abgeltungssteuer.png",
+    "output": "assets/webp/titelbilder/0002_abgeltungssteuer.webp",
+    "sanitizedName": "0002_abgeltungssteuer",
+    "type": "titelbild",
+    "altText": "Abgeltungssteuer",
+    "title": "Abgeltungssteuer",
+    "bytes": 112442
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0003_abschreibungen.png",
+    "output": "assets/webp/titelbilder/0003_abschreibungen.webp",
+    "sanitizedName": "0003_abschreibungen",
+    "type": "titelbild",
+    "altText": "Abschreibungen",
+    "title": "Abschreibungen",
+    "bytes": 109870
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0004_aktien.png",
+    "output": "assets/webp/titelbilder/0004_aktien.webp",
+    "sanitizedName": "0004_aktien",
+    "type": "titelbild",
+    "altText": "Aktien",
+    "title": "Aktien",
+    "bytes": 92872
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0005_altersteilzeit.png",
+    "output": "assets/webp/titelbilder/0005_altersteilzeit.webp",
+    "sanitizedName": "0005_altersteilzeit",
+    "type": "titelbild",
+    "altText": "Altersteilzeit",
+    "title": "Altersteilzeit",
+    "bytes": 101994
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0006_altersvorsorgeaufwendungen.png",
+    "output": "assets/webp/titelbilder/0006_altersvorsorgeaufwendungen.webp",
+    "sanitizedName": "0006_altersvorsorgeaufwendungen",
+    "type": "titelbild",
+    "altText": "Altersvorsorgeaufwendungen",
+    "title": "Altersvorsorgeaufwendungen",
+    "bytes": 122482
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0007_arbeitgeberzuschuss_private_krankenversicherung.png",
+    "output": "assets/webp/titelbilder/0007_arbeitgeberzuschuss_private_krankenversicherung.webp",
+    "sanitizedName": "0007_arbeitgeberzuschuss_private_krankenversicherung",
+    "type": "titelbild",
+    "altText": "Arbeitgeberzuschuss private krankenversicherung",
+    "title": "Arbeitgeberzuschuss private krankenversicherung",
+    "bytes": 100922
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0008_arbeitnehmer_sparzulage.png",
+    "output": "assets/webp/titelbilder/0008_arbeitnehmer_sparzulage.webp",
+    "sanitizedName": "0008_arbeitnehmer_sparzulage",
+    "type": "titelbild",
+    "altText": "Arbeitnehmer sparzulage",
+    "title": "Arbeitnehmer sparzulage",
+    "bytes": 98824
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0009_arbeitskleidung.png",
+    "output": "assets/webp/titelbilder/0009_arbeitskleidung.webp",
+    "sanitizedName": "0009_arbeitskleidung",
+    "type": "titelbild",
+    "altText": "Arbeitskleidung",
+    "title": "Arbeitskleidung",
+    "bytes": 107704
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0010_arbeitslosengeld.png",
+    "output": "assets/webp/titelbilder/0010_arbeitslosengeld.webp",
+    "sanitizedName": "0010_arbeitslosengeld",
+    "type": "titelbild",
+    "altText": "Arbeitslosengeld",
+    "title": "Arbeitslosengeld",
+    "bytes": 127544
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0011_arbeitsmittel.png",
+    "output": "assets/webp/titelbilder/0011_arbeitsmittel.webp",
+    "sanitizedName": "0011_arbeitsmittel",
+    "type": "titelbild",
+    "altText": "Arbeitsmittel",
+    "title": "Arbeitsmittel",
+    "bytes": 93116
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0012_arbeitszimmer.png",
+    "output": "assets/webp/titelbilder/0012_arbeitszimmer.webp",
+    "sanitizedName": "0012_arbeitszimmer",
+    "type": "titelbild",
+    "altText": "Arbeitszimmer",
+    "title": "Arbeitszimmer",
+    "bytes": 79342
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0013_ausbildungskosten.png",
+    "output": "assets/webp/titelbilder/0013_ausbildungskosten.webp",
+    "sanitizedName": "0013_ausbildungskosten",
+    "type": "titelbild",
+    "altText": "Ausbildungskosten",
+    "title": "Ausbildungskosten",
+    "bytes": 116112
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0014_auslandskrankenversicherung.png",
+    "output": "assets/webp/titelbilder/0014_auslandskrankenversicherung.webp",
+    "sanitizedName": "0014_auslandskrankenversicherung",
+    "type": "titelbild",
+    "altText": "Auslandskrankenversicherung",
+    "title": "Auslandskrankenversicherung",
+    "bytes": 116484
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0015_ausergewöhnliche_belastung.png",
+    "output": "assets/webp/titelbilder/0015_ausergewoehnliche_belastung.webp",
+    "sanitizedName": "0015_ausergewoehnliche_belastung",
+    "type": "titelbild",
+    "altText": "Ausergewöhnliche belastung",
+    "title": "Ausergewöhnliche belastung",
+    "bytes": 104038
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0016_bafög.png",
+    "output": "assets/webp/titelbilder/0016_bafoeg.webp",
+    "sanitizedName": "0016_bafoeg",
+    "type": "titelbild",
+    "altText": "BAföG",
+    "title": "BAföG",
+    "bytes": 138460
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0017_basisrente.png",
+    "output": "assets/webp/titelbilder/0017_basisrente.webp",
+    "sanitizedName": "0017_basisrente",
+    "type": "titelbild",
+    "altText": "Basisrente",
+    "title": "Basisrente",
+    "bytes": 93878
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0018_basistarif der PKV.png",
+    "output": "assets/webp/titelbilder/0018_basistarif_der_pkv.webp",
+    "sanitizedName": "0018_basistarif_der_pkv",
+    "type": "titelbild",
+    "altText": "Basistarif der PKV",
+    "title": "Basistarif der PKV",
+    "bytes": 117376
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0019_baufinanzierung.png",
+    "output": "assets/webp/titelbilder/0019_baufinanzierung.webp",
+    "sanitizedName": "0019_baufinanzierung",
+    "type": "titelbild",
+    "altText": "Baufinanzierung",
+    "title": "Baufinanzierung",
+    "bytes": 123512
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0020_bauherrenhaftpflichtversicherung.png",
+    "output": "assets/webp/titelbilder/0020_bauherrenhaftpflichtversicherung.webp",
+    "sanitizedName": "0020_bauherrenhaftpflichtversicherung",
+    "type": "titelbild",
+    "altText": "Bauherrenhaftpflichtversicherung",
+    "title": "Bauherrenhaftpflichtversicherung",
+    "bytes": 118802
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0021_bausparvertrag.png",
+    "output": "assets/webp/titelbilder/0021_bausparvertrag.webp",
+    "sanitizedName": "0021_bausparvertrag",
+    "type": "titelbild",
+    "altText": "Bausparvertrag",
+    "title": "Bausparvertrag",
+    "bytes": 93758
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0022_beitragsanpassung_PKV.png",
+    "output": "assets/webp/titelbilder/0022_beitragsanpassung_pkv.webp",
+    "sanitizedName": "0022_beitragsanpassung_pkv",
+    "type": "titelbild",
+    "altText": "Beitragsanpassung PKV",
+    "title": "Beitragsanpassung PKV",
+    "bytes": 82456
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0023_beitragsbemessungsgrenzen.png",
+    "output": "assets/webp/titelbilder/0023_beitragsbemessungsgrenzen.webp",
+    "sanitizedName": "0023_beitragsbemessungsgrenzen",
+    "type": "titelbild",
+    "altText": "Beitragsbemessungsgrenzen",
+    "title": "Beitragsbemessungsgrenzen",
+    "bytes": 128520
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0024_berliner_testament.png",
+    "output": "assets/webp/titelbilder/0024_berliner_testament.webp",
+    "sanitizedName": "0024_berliner_testament",
+    "type": "titelbild",
+    "altText": "Berliner testament",
+    "title": "Berliner testament",
+    "bytes": 100516
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0025_berufshaftpflichtversicherung.png",
+    "output": "assets/webp/titelbilder/0025_berufshaftpflichtversicherung.webp",
+    "sanitizedName": "0025_berufshaftpflichtversicherung",
+    "type": "titelbild",
+    "altText": "Berufshaftpflichtversicherung",
+    "title": "Berufshaftpflichtversicherung",
+    "bytes": 88198
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0026_berufsunfähigkeitsversicherung.png",
+    "output": "assets/webp/titelbilder/0026_berufsunfaehigkeitsversicherung.webp",
+    "sanitizedName": "0026_berufsunfaehigkeitsversicherung",
+    "type": "titelbild",
+    "altText": "Berufsunfähigkeitsversicherung",
+    "title": "Berufsunfähigkeitsversicherung",
+    "bytes": 109456
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0027_betreuungsverfügung.png",
+    "output": "assets/webp/titelbilder/0027_betreuungsverfuegung.webp",
+    "sanitizedName": "0027_betreuungsverfuegung",
+    "type": "titelbild",
+    "altText": "Betreuungsverfügung",
+    "title": "Betreuungsverfügung",
+    "bytes": 82664
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0028_betriebliche_altersvorsorge.png",
+    "output": "assets/webp/titelbilder/0028_betriebliche_altersvorsorge.webp",
+    "sanitizedName": "0028_betriebliche_altersvorsorge",
+    "type": "titelbild",
+    "altText": "Betriebliche altersvorsorge",
+    "title": "Betriebliche altersvorsorge",
+    "bytes": 124374
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0029_betriebliche_krankenkasse.png",
+    "output": "assets/webp/titelbilder/0029_betriebliche_krankenkasse.webp",
+    "sanitizedName": "0029_betriebliche_krankenkasse",
+    "type": "titelbild",
+    "altText": "Betriebliche krankenkasse",
+    "title": "Betriebliche krankenkasse",
+    "bytes": 99192
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0030_betriebshaftpflichtversicherung.png",
+    "output": "assets/webp/titelbilder/0030_betriebshaftpflichtversicherung.webp",
+    "sanitizedName": "0030_betriebshaftpflichtversicherung",
+    "type": "titelbild",
+    "altText": "Betriebshaftpflichtversicherung",
+    "title": "Betriebshaftpflichtversicherung",
+    "bytes": 97608
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0031_bürgergeld.png",
+    "output": "assets/webp/titelbilder/0031_buergergeld.webp",
+    "sanitizedName": "0031_buergergeld",
+    "type": "titelbild",
+    "altText": "Bürgergeld",
+    "title": "Bürgergeld",
+    "bytes": 121484
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0032_bürgerversicherung.png",
+    "output": "assets/webp/titelbilder/0032_buergerversicherung.webp",
+    "sanitizedName": "0032_buergerversicherung",
+    "type": "titelbild",
+    "altText": "Bürgerversicherung",
+    "title": "Bürgerversicherung",
+    "bytes": 129332
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0033_bürgerversicherung.png",
+    "output": "assets/webp/titelbilder/0033_buergerversicherung.webp",
+    "sanitizedName": "0033_buergerversicherung",
+    "type": "titelbild",
+    "altText": "Bürgerversicherung",
+    "title": "Bürgerversicherung",
+    "bytes": 117964
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0034_cyberversicherung.png",
+    "output": "assets/webp/titelbilder/0034_cyberversicherung.webp",
+    "sanitizedName": "0034_cyberversicherung",
+    "type": "titelbild",
+    "altText": "Cyberversicherung",
+    "title": "Cyberversicherung",
+    "bytes": 87766
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0035_dienstreisen.png",
+    "output": "assets/webp/titelbilder/0035_dienstreisen.webp",
+    "sanitizedName": "0035_dienstreisen",
+    "type": "titelbild",
+    "altText": "Dienstreisen",
+    "title": "Dienstreisen",
+    "bytes": 113408
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0036_dienstwagen.png",
+    "output": "assets/webp/titelbilder/0036_dienstwagen.webp",
+    "sanitizedName": "0036_dienstwagen",
+    "type": "titelbild",
+    "altText": "Dienstwagen",
+    "title": "Dienstwagen",
+    "bytes": 74146
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0037_dienstwohnung.png",
+    "output": "assets/webp/titelbilder/0037_dienstwohnung.webp",
+    "sanitizedName": "0037_dienstwohnung",
+    "type": "titelbild",
+    "altText": "Dienstwohnung",
+    "title": "Dienstwohnung",
+    "bytes": 133160
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0038_direktbank_vs_fillialbang.png",
+    "output": "assets/webp/titelbilder/0038_direktbank_vs_fillialbang.webp",
+    "sanitizedName": "0038_direktbank_vs_fillialbang",
+    "type": "titelbild",
+    "altText": "Direktbank vs fillialbang",
+    "title": "Direktbank vs fillialbang",
+    "bytes": 106280
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0039_direktversicherung.png",
+    "output": "assets/webp/titelbilder/0039_direktversicherung.webp",
+    "sanitizedName": "0039_direktversicherung",
+    "type": "titelbild",
+    "altText": "Direktversicherung",
+    "title": "Direktversicherung",
+    "bytes": 87346
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0040_doppelte_haushaltsführung.png",
+    "output": "assets/webp/titelbilder/0040_doppelte_haushaltsfuehrung.webp",
+    "sanitizedName": "0040_doppelte_haushaltsfuehrung",
+    "type": "titelbild",
+    "altText": "Doppelte haushaltsführung",
+    "title": "Doppelte haushaltsführung",
+    "bytes": 90670
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0041_drohnenhaftpflichtversicherung.png",
+    "output": "assets/webp/titelbilder/0041_drohnenhaftpflichtversicherung.webp",
+    "sanitizedName": "0041_drohnenhaftpflichtversicherung",
+    "type": "titelbild",
+    "altText": "Drohnenhaftpflichtversicherung",
+    "title": "Drohnenhaftpflichtversicherung",
+    "bytes": 124728
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0042_düsseldorfer_tabelle.png",
+    "output": "assets/webp/titelbilder/0042_duesseldorfer_tabelle.webp",
+    "sanitizedName": "0042_duesseldorfer_tabelle",
+    "type": "titelbild",
+    "altText": "Düsseldorfer tabelle",
+    "title": "Düsseldorfer tabelle",
+    "bytes": 84446
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0043_e_bike_versicherung.png",
+    "output": "assets/webp/titelbilder/0043_e_bike_versicherung.webp",
+    "sanitizedName": "0043_e_bike_versicherung",
+    "type": "titelbild",
+    "altText": "E bike versicherung",
+    "title": "E bike versicherung",
+    "bytes": 129420
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0044_e_scooter_versicherung.png",
+    "output": "assets/webp/titelbilder/0044_e_scooter_versicherung.webp",
+    "sanitizedName": "0044_e_scooter_versicherung",
+    "type": "titelbild",
+    "altText": "E scooter versicherung",
+    "title": "E scooter versicherung",
+    "bytes": 132552
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0045_ehegattensplittung.png",
+    "output": "assets/webp/titelbilder/0045_ehegattensplittung.webp",
+    "sanitizedName": "0045_ehegattensplittung",
+    "type": "titelbild",
+    "altText": "Ehegattensplittung",
+    "title": "Ehegattensplittung",
+    "bytes": 105980
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0046_ehegattenunterhalt.png",
+    "output": "assets/webp/titelbilder/0046_ehegattenunterhalt.webp",
+    "sanitizedName": "0046_ehegattenunterhalt",
+    "type": "titelbild",
+    "altText": "Ehegattenunterhalt",
+    "title": "Ehegattenunterhalt",
+    "bytes": 123922
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0047_einkommensteuer.png",
+    "output": "assets/webp/titelbilder/0047_einkommensteuer.webp",
+    "sanitizedName": "0047_einkommensteuer",
+    "type": "titelbild",
+    "altText": "Einkommensteuer",
+    "title": "Einkommensteuer",
+    "bytes": 144048
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0048_einlagensicherung.png",
+    "output": "assets/webp/titelbilder/0048_einlagensicherung.webp",
+    "sanitizedName": "0048_einlagensicherung",
+    "type": "titelbild",
+    "altText": "Einlagensicherung",
+    "title": "Einlagensicherung",
+    "bytes": 107002
+  },
+  {
+    "source": "assets/png_1920/titelbilder/0049_elster.png",
+    "output": "assets/webp/titelbilder/0049_elster.webp",
+    "sanitizedName": "0049_elster",
+    "type": "titelbild",
+    "altText": "ELSTER",
+    "title": "ELSTER",
+    "bytes": 118816
+  },
+  {
+    "source": "assets/png_1920/categories/cat_finanzen.png",
+    "output": "assets/webp/categories/cat_finanzen.webp",
+    "sanitizedName": "cat_finanzen",
+    "type": "cat-slider",
+    "termSlug": "finanzen",
+    "isWide": false,
+    "altText": "Kategorie Finanzen",
+    "title": "Kategorie Finanzen",
+    "bytes": 141468
+  },
+  {
+    "source": "assets/png_1920/categories/cat_finanzen_WIDE.png",
+    "output": "assets/webp/categories/cat_finanzen_wide.webp",
+    "sanitizedName": "cat_finanzen_wide",
+    "type": "cat-wide",
+    "termSlug": "finanzen",
+    "isWide": true,
+    "altText": "Kategorie Finanzen Banner",
+    "title": "Kategorie Finanzen Banner",
+    "bytes": 97918
+  },
+  {
+    "source": "assets/png_1920/categories/cat_recht.png",
+    "output": "assets/webp/categories/cat_recht.webp",
+    "sanitizedName": "cat_recht",
+    "type": "cat-slider",
+    "termSlug": "recht",
+    "isWide": false,
+    "altText": "Kategorie Recht",
+    "title": "Kategorie Recht",
+    "bytes": 146892
+  },
+  {
+    "source": "assets/png_1920/categories/cat_recht_WIDE.png",
+    "output": "assets/webp/categories/cat_recht_wide.webp",
+    "sanitizedName": "cat_recht_wide",
+    "type": "cat-wide",
+    "termSlug": "recht",
+    "isWide": true,
+    "altText": "Kategorie Recht Banner",
+    "title": "Kategorie Recht Banner",
+    "bytes": 91602
+  },
+  {
+    "source": "assets/png_1920/categories/cat_steuer.png",
+    "output": "assets/webp/categories/cat_steuern.webp",
+    "sanitizedName": "cat_steuern",
+    "type": "cat-slider",
+    "termSlug": "steuern",
+    "isWide": false,
+    "altText": "Kategorie Steuern",
+    "title": "Kategorie Steuern",
+    "bytes": 117530
+  },
+  {
+    "source": "assets/png_1920/categories/cat_steuer_WIDE.png",
+    "output": "assets/webp/categories/cat_steuern_wide.webp",
+    "sanitizedName": "cat_steuern_wide",
+    "type": "cat-wide",
+    "termSlug": "steuern",
+    "isWide": true,
+    "altText": "Kategorie Steuern Banner",
+    "title": "Kategorie Steuern Banner",
+    "bytes": 107884
+  },
+  {
+    "source": "assets/png_1920/categories/cat_versicherungen.png",
+    "output": "assets/webp/categories/cat_versicherungen.webp",
+    "sanitizedName": "cat_versicherungen",
+    "type": "cat-slider",
+    "termSlug": "versicherungen",
+    "isWide": false,
+    "altText": "Kategorie Versicherungen",
+    "title": "Kategorie Versicherungen",
+    "bytes": 103582
+  },
+  {
+    "source": "assets/png_1920/categories/cat_versicherungen_WIDE.png",
+    "output": "assets/webp/categories/cat_versicherungen_wide.webp",
+    "sanitizedName": "cat_versicherungen_wide",
+    "type": "cat-wide",
+    "termSlug": "versicherungen",
+    "isWide": true,
+    "altText": "Kategorie Versicherungen Banner",
+    "title": "Kategorie Versicherungen Banner",
+    "bytes": 84408
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_energiekosten.png",
+    "output": "assets/webp/categories/subcat_finanzen_energiekosten.webp",
+    "sanitizedName": "subcat_finanzen_energiekosten",
+    "type": "subcat-slider",
+    "termSlug": "energiekosten",
+    "isWide": false,
+    "altText": "Energiekosten",
+    "title": "Energiekosten",
+    "bytes": 126094
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_energiekosten_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_energiekosten_wide.webp",
+    "sanitizedName": "subcat_finanzen_energiekosten_wide",
+    "type": "subcat-wide",
+    "termSlug": "energiekosten",
+    "isWide": true,
+    "altText": "Energiekosten Banner",
+    "title": "Energiekosten Banner",
+    "bytes": 95254
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_geldanlage.png",
+    "output": "assets/webp/categories/subcat_finanzen_geldanlagen.webp",
+    "sanitizedName": "subcat_finanzen_geldanlagen",
+    "type": "subcat-slider",
+    "termSlug": "geldanlagen",
+    "isWide": false,
+    "altText": "Geldanlagen",
+    "title": "Geldanlagen",
+    "bytes": 162430
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_geldanlage_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_geldanlagen_wide.webp",
+    "sanitizedName": "subcat_finanzen_geldanlagen_wide",
+    "type": "subcat-wide",
+    "termSlug": "geldanlagen",
+    "isWide": true,
+    "altText": "Geldanlagen Banner",
+    "title": "Geldanlagen Banner",
+    "bytes": 143660
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_konto_und_karten.png",
+    "output": "assets/webp/categories/subcat_finanzen_konto-karten.webp",
+    "sanitizedName": "subcat_finanzen_konto-karten",
+    "type": "subcat-slider",
+    "termSlug": "konto-karten",
+    "isWide": false,
+    "altText": "Konto & Karten",
+    "title": "Konto & Karten",
+    "bytes": 130874
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_konto_und_karten_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_konto-karten_wide.webp",
+    "sanitizedName": "subcat_finanzen_konto-karten_wide",
+    "type": "subcat-wide",
+    "termSlug": "konto-karten",
+    "isWide": true,
+    "altText": "Konto & Karten Banner",
+    "title": "Konto & Karten Banner",
+    "bytes": 105986
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_kredite_und_bauen.png",
+    "output": "assets/webp/categories/subcat_finanzen_kredite-bauen.webp",
+    "sanitizedName": "subcat_finanzen_kredite-bauen",
+    "type": "subcat-slider",
+    "termSlug": "kredite-bauen",
+    "isWide": false,
+    "altText": "Kredite & Bauen",
+    "title": "Kredite & Bauen",
+    "bytes": 137968
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_finanzen_kredite_und_bauen_WIDE.png",
+    "output": "assets/webp/categories/subcat_finanzen_kredite-bauen_wide.webp",
+    "sanitizedName": "subcat_finanzen_kredite-bauen_wide",
+    "type": "subcat-wide",
+    "termSlug": "kredite-bauen",
+    "isWide": true,
+    "altText": "Kredite & Bauen Banner",
+    "title": "Kredite & Bauen Banner",
+    "bytes": 109804
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_recht_mietrecht_WIDE.png",
+    "output": "assets/webp/categories/subcat_recht_mietrecht_wide.webp",
+    "sanitizedName": "subcat_recht_mietrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "mietrecht",
+    "isWide": true,
+    "altText": "Mietrecht Banner",
+    "title": "Mietrecht Banner",
+    "bytes": 91074
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_arbeitsrecht.png",
+    "output": "assets/webp/categories/subcat_recht_arbeitsrecht.webp",
+    "sanitizedName": "subcat_recht_arbeitsrecht",
+    "type": "subcat-slider",
+    "termSlug": "arbeitsrecht",
+    "isWide": false,
+    "altText": "Arbeitsrecht",
+    "title": "Arbeitsrecht",
+    "bytes": 128658
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_arbeitsrecht_WIDE.png",
+    "output": "assets/webp/categories/subcat_recht_arbeitsrecht_wide.webp",
+    "sanitizedName": "subcat_recht_arbeitsrecht_wide",
+    "type": "subcat-wide",
+    "termSlug": "arbeitsrecht",
+    "isWide": true,
+    "altText": "Arbeitsrecht Banner",
+    "title": "Arbeitsrecht Banner",
+    "bytes": 67776
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_ehe_und_familie.png",
+    "output": "assets/webp/categories/subcat_recht_ehe-familie.webp",
+    "sanitizedName": "subcat_recht_ehe-familie",
+    "type": "subcat-slider",
+    "termSlug": "ehe-familie",
+    "isWide": false,
+    "altText": "Ehe & Familie",
+    "title": "Ehe & Familie",
+    "bytes": 134932
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_ehe_und_familie_WIDE.png",
+    "output": "assets/webp/categories/subcat_recht_ehe-familie_wide.webp",
+    "sanitizedName": "subcat_recht_ehe-familie_wide",
+    "type": "subcat-wide",
+    "termSlug": "ehe-familie",
+    "isWide": true,
+    "altText": "Ehe & Familie Banner",
+    "title": "Ehe & Familie Banner",
+    "bytes": 94702
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_mietrecht.png",
+    "output": "assets/webp/categories/subcat_recht_mietrecht.webp",
+    "sanitizedName": "subcat_recht_mietrecht",
+    "type": "subcat-slider",
+    "termSlug": "mietrecht",
+    "isWide": false,
+    "altText": "Mietrecht",
+    "title": "Mietrecht",
+    "bytes": 155648
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerarten.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerarten.webp",
+    "sanitizedName": "subcat_steuern_steuerarten",
+    "type": "subcat-slider",
+    "termSlug": "steuerarten",
+    "isWide": false,
+    "altText": "Steuerarten",
+    "title": "Steuerarten",
+    "bytes": 138948
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerarten_WIDE.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerarten_wide.webp",
+    "sanitizedName": "subcat_steuern_steuerarten_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuerarten",
+    "isWide": true,
+    "altText": "Steuerarten Banner",
+    "title": "Steuerarten Banner",
+    "bytes": 79996
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuererklärung.png",
+    "output": "assets/webp/categories/subcat_steuern_steuererklaerung.webp",
+    "sanitizedName": "subcat_steuern_steuererklaerung",
+    "type": "subcat-slider",
+    "termSlug": "steuererklaerung",
+    "isWide": false,
+    "altText": "Steuererklärung",
+    "title": "Steuererklärung",
+    "bytes": 142732
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuererklärung_WIDE.png",
+    "output": "assets/webp/categories/subcat_steuern_steuererklaerung_wide.webp",
+    "sanitizedName": "subcat_steuern_steuererklaerung_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuererklaerung",
+    "isWide": true,
+    "altText": "Steuererklärung Banner",
+    "title": "Steuererklärung Banner",
+    "bytes": 75924
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerpflichtige.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerpflichtige.webp",
+    "sanitizedName": "subcat_steuern_steuerpflichtige",
+    "type": "subcat-slider",
+    "termSlug": "steuerpflichtige",
+    "isWide": false,
+    "altText": "Steuerpflichtige",
+    "title": "Steuerpflichtige",
+    "bytes": 132182
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_steuer_steuerpflichtige_WIDE.png",
+    "output": "assets/webp/categories/subcat_steuern_steuerpflichtige_wide.webp",
+    "sanitizedName": "subcat_steuern_steuerpflichtige_wide",
+    "type": "subcat-wide",
+    "termSlug": "steuerpflichtige",
+    "isWide": true,
+    "altText": "Steuerpflichtige Banner",
+    "title": "Steuerpflichtige Banner",
+    "bytes": 96348
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen__tierversicherungen.png",
+    "output": "assets/webp/categories/subcat_versicherungen_tierversicherungen.webp",
+    "sanitizedName": "subcat_versicherungen_tierversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "tierversicherungen",
+    "isWide": false,
+    "altText": "Tierversicherungen",
+    "title": "Tierversicherungen",
+    "bytes": 128408
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_altersvorsorge.png",
+    "output": "assets/webp/categories/subcat_versicherungen_altersvorsorge.webp",
+    "sanitizedName": "subcat_versicherungen_altersvorsorge",
+    "type": "subcat-slider",
+    "termSlug": "altersvorsorge",
+    "isWide": false,
+    "altText": "Altersvorsorge",
+    "title": "Altersvorsorge",
+    "bytes": 113582
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_altersvorsorge_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_altersvorsorge_wide.webp",
+    "sanitizedName": "subcat_versicherungen_altersvorsorge_wide",
+    "type": "subcat-wide",
+    "termSlug": "altersvorsorge",
+    "isWide": true,
+    "altText": "Altersvorsorge Banner",
+    "title": "Altersvorsorge Banner",
+    "bytes": 79680
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_berufsunfähigkeit_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_berufsunfaehigkeit_wide.webp",
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit_wide",
+    "type": "subcat-wide",
+    "termSlug": "berufsunfaehigkeit",
+    "isWide": true,
+    "altText": "Berufsunfähigkeit Banner",
+    "title": "Berufsunfähigkeit Banner",
+    "bytes": 104118
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_erufsunfähigkeit.png",
+    "output": "assets/webp/categories/subcat_versicherungen_berufsunfaehigkeit.webp",
+    "sanitizedName": "subcat_versicherungen_berufsunfaehigkeit",
+    "type": "subcat-slider",
+    "termSlug": "berufsunfaehigkeit",
+    "isWide": false,
+    "altText": "Berufsunfähigkeit",
+    "title": "Berufsunfähigkeit",
+    "bytes": 132600
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_krankenversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_krankenversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_krankenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "krankenversicherung",
+    "isWide": false,
+    "altText": "Krankenversicherung",
+    "title": "Krankenversicherung",
+    "bytes": 152250
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_krankenversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_krankenversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_krankenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "krankenversicherung",
+    "isWide": true,
+    "altText": "Krankenversicherung Banner",
+    "title": "Krankenversicherung Banner",
+    "bytes": 99948
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_pflegeversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_pflegeversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung",
+    "type": "subcat-slider",
+    "termSlug": "pflegeversicherung",
+    "isWide": false,
+    "altText": "Pflegeversicherung",
+    "title": "Pflegeversicherung",
+    "bytes": 153598
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_pflegeversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_pflegeversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_pflegeversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "pflegeversicherung",
+    "isWide": true,
+    "altText": "Pflegeversicherung Banner",
+    "title": "Pflegeversicherung Banner",
+    "bytes": 114070
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_rentenversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_rentenversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_rentenversicherung",
+    "type": "subcat-slider",
+    "termSlug": "rentenversicherung",
+    "isWide": false,
+    "altText": "Rentenversicherung",
+    "title": "Rentenversicherung",
+    "bytes": 135854
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_rentenversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_rentenversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_rentenversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "rentenversicherung",
+    "isWide": true,
+    "altText": "Rentenversicherung Banner",
+    "title": "Rentenversicherung Banner",
+    "bytes": 82032
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sachversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sachversicherungen.webp",
+    "sanitizedName": "subcat_versicherungen_sachversicherungen",
+    "type": "subcat-slider",
+    "termSlug": "sachversicherungen",
+    "isWide": false,
+    "altText": "Sachversicherungen",
+    "title": "Sachversicherungen",
+    "bytes": 145574
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sachversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sachversicherungen_wide.webp",
+    "sanitizedName": "subcat_versicherungen_sachversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "sachversicherungen",
+    "isWide": true,
+    "altText": "Sachversicherungen Banner",
+    "title": "Sachversicherungen Banner",
+    "bytes": 83184
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sozialversicherungen_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sozialversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_sozialversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "sozialversicherung",
+    "isWide": true,
+    "altText": "Sozialversicherung Banner",
+    "title": "Sozialversicherung Banner",
+    "bytes": 81964
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_sozielversicherungen.png",
+    "output": "assets/webp/categories/subcat_versicherungen_sozialversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_sozialversicherung",
+    "type": "subcat-slider",
+    "termSlug": "sozialversicherung",
+    "isWide": false,
+    "altText": "Sozialversicherung",
+    "title": "Sozialversicherung",
+    "bytes": 105722
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_tierversicherungen_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_tierversicherungen_wide.webp",
+    "sanitizedName": "subcat_versicherungen_tierversicherungen_wide",
+    "type": "subcat-wide",
+    "termSlug": "tierversicherungen",
+    "isWide": true,
+    "altText": "Tierversicherungen Banner",
+    "title": "Tierversicherungen Banner",
+    "bytes": 81546
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_unfallversicherung.png",
+    "output": "assets/webp/categories/subcat_versicherungen_unfallversicherung.webp",
+    "sanitizedName": "subcat_versicherungen_unfallversicherung",
+    "type": "subcat-slider",
+    "termSlug": "unfallversicherung",
+    "isWide": false,
+    "altText": "Unfallversicherung",
+    "title": "Unfallversicherung",
+    "bytes": 143032
+  },
+  {
+    "source": "assets/png_1920/categories/subcat_versicherungen_unfallversicherung_WIDE.png",
+    "output": "assets/webp/categories/subcat_versicherungen_unfallversicherung_wide.webp",
+    "sanitizedName": "subcat_versicherungen_unfallversicherung_wide",
+    "type": "subcat-wide",
+    "termSlug": "unfallversicherung",
+    "isWide": true,
+    "altText": "Unfallversicherung Banner",
+    "title": "Unfallversicherung Banner",
+    "bytes": 128146
+  },
+  {
+    "source": "assets/png_1920/general/abulance&shield.png",
+    "output": "assets/webp/general/abulance-shield.webp",
+    "sanitizedName": "abulance-shield",
+    "type": "general",
+    "altText": "Rettungswagen und Schutzschild",
+    "title": "Rettungswagen und Schutzschild",
+    "bytes": 93054
+  },
+  {
+    "source": "assets/png_1920/general/animal-bird.png",
+    "output": "assets/webp/general/animal-bird.webp",
+    "sanitizedName": "animal-bird",
+    "type": "general",
+    "altText": "Vogel",
+    "title": "Vogel",
+    "bytes": 107336
+  },
+  {
+    "source": "assets/png_1920/general/animal-cat.png",
+    "output": "assets/webp/general/animal-cat.webp",
+    "sanitizedName": "animal-cat",
+    "type": "general",
+    "altText": "Katze",
+    "title": "Katze",
+    "bytes": 103114
+  },
+  {
+    "source": "assets/png_1920/general/animal-dog.png",
+    "output": "assets/webp/general/animal-dog.webp",
+    "sanitizedName": "animal-dog",
+    "type": "general",
+    "altText": "Hund",
+    "title": "Hund",
+    "bytes": 132284
+  },
+  {
+    "source": "assets/png_1920/general/animal-dog2.png",
+    "output": "assets/webp/general/animal-dog2.webp",
+    "sanitizedName": "animal-dog2",
+    "type": "general",
+    "altText": "Hund",
+    "title": "Hund",
+    "bytes": 123602
+  },
+  {
+    "source": "assets/png_1920/general/animal-horse.png",
+    "output": "assets/webp/general/animal-horse.webp",
+    "sanitizedName": "animal-horse",
+    "type": "general",
+    "altText": "Pferd",
+    "title": "Pferd",
+    "bytes": 105818
+  },
+  {
+    "source": "assets/png_1920/general/bananaMoney&calculator.png",
+    "output": "assets/webp/general/bananamoney-calculator.webp",
+    "sanitizedName": "bananamoney-calculator",
+    "type": "general",
+    "altText": "Geld und Taschenrechner",
+    "title": "Geld und Taschenrechner",
+    "bytes": 118790
+  },
+  {
+    "source": "assets/png_1920/general/book&universityHat.png",
+    "output": "assets/webp/general/book-universityhat.webp",
+    "sanitizedName": "book-universityhat",
+    "type": "general",
+    "altText": "Bildung und Studium",
+    "title": "Bildung und Studium",
+    "bytes": 75604
+  },
+  {
+    "source": "assets/png_1920/general/buildings.png",
+    "output": "assets/webp/general/buildings.webp",
+    "sanitizedName": "buildings",
+    "type": "general",
+    "altText": "Gebäude",
+    "title": "Gebäude",
+    "bytes": 76222
+  },
+  {
+    "source": "assets/png_1920/general/calculator-money.png",
+    "output": "assets/webp/general/calculator-money.webp",
+    "sanitizedName": "calculator-money",
+    "type": "general",
+    "altText": "Taschenrechner und Geld",
+    "title": "Taschenrechner und Geld",
+    "bytes": 125336
+  },
+  {
+    "source": "assets/png_1920/general/calculator.png",
+    "output": "assets/webp/general/calculator.webp",
+    "sanitizedName": "calculator",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 91288
+  },
+  {
+    "source": "assets/png_1920/general/calculator2.png",
+    "output": "assets/webp/general/calculator2.webp",
+    "sanitizedName": "calculator2",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 107272
+  },
+  {
+    "source": "assets/png_1920/general/calculator3.png",
+    "output": "assets/webp/general/calculator3.webp",
+    "sanitizedName": "calculator3",
+    "type": "general",
+    "altText": "Taschenrechner",
+    "title": "Taschenrechner",
+    "bytes": 103170
+  },
+  {
+    "source": "assets/png_1920/general/car-solar-energy.png",
+    "output": "assets/webp/general/car-solar-energy.webp",
+    "sanitizedName": "car-solar-energy",
+    "type": "general",
+    "altText": "Elektroauto und Solarenergie",
+    "title": "Elektroauto und Solarenergie",
+    "bytes": 114298
+  },
+  {
+    "source": "assets/png_1920/general/car.png",
+    "output": "assets/webp/general/car.webp",
+    "sanitizedName": "car",
+    "type": "general",
+    "altText": "Auto",
+    "title": "Auto",
+    "bytes": 110926
+  },
+  {
+    "source": "assets/png_1920/general/cardhouse.png",
+    "output": "assets/webp/general/cardhouse.webp",
+    "sanitizedName": "cardhouse",
+    "type": "general",
+    "altText": "Kartenhaus aus Spielkarten",
+    "title": "Kartenhaus aus Spielkarten",
+    "bytes": 121706
+  },
+  {
+    "source": "assets/png_1920/general/coinflower.png",
+    "output": "assets/webp/general/coinflower.webp",
+    "sanitizedName": "coinflower",
+    "type": "general",
+    "altText": "Geld vermehren",
+    "title": "Geld vermehren",
+    "bytes": 139584
+  },
+  {
+    "source": "assets/png_1920/general/creditcard.png",
+    "output": "assets/webp/general/creditcard.webp",
+    "sanitizedName": "creditcard",
+    "type": "general",
+    "altText": "Kreditkarte",
+    "title": "Kreditkarte",
+    "bytes": 105734
+  },
+  {
+    "source": "assets/png_1920/general/desk&computer.png",
+    "output": "assets/webp/general/desk-computer.webp",
+    "sanitizedName": "desk-computer",
+    "type": "general",
+    "altText": "Arbeitsplatz mit Computer",
+    "title": "Arbeitsplatz mit Computer",
+    "bytes": 79270
+  },
+  {
+    "source": "assets/png_1920/general/docs&paragraph.png",
+    "output": "assets/webp/general/docs-paragraph.webp",
+    "sanitizedName": "docs-paragraph",
+    "type": "general",
+    "altText": "Dokumente und Paragraf",
+    "title": "Dokumente und Paragraf",
+    "bytes": 152742
+  },
+  {
+    "source": "assets/png_1920/general/documents&law.png",
+    "output": "assets/webp/general/documents-law.webp",
+    "sanitizedName": "documents-law",
+    "type": "general",
+    "altText": "Dokumente und Recht",
+    "title": "Dokumente und Recht",
+    "bytes": 121720
+  },
+  {
+    "source": "assets/png_1920/general/documents-idea.png",
+    "output": "assets/webp/general/documents-idea.webp",
+    "sanitizedName": "documents-idea",
+    "type": "general",
+    "altText": "Dokumente und Idee",
+    "title": "Dokumente und Idee",
+    "bytes": 99286
+  },
+  {
+    "source": "assets/png_1920/general/elster-taxes.png",
+    "output": "assets/webp/general/elster-taxes.webp",
+    "sanitizedName": "elster-taxes",
+    "type": "general",
+    "altText": "Steuererklärung mit ELSTER",
+    "title": "Steuererklärung mit ELSTER",
+    "bytes": 116344
+  },
+  {
+    "source": "assets/png_1920/general/energy-battery.png",
+    "output": "assets/webp/general/energy-battery.webp",
+    "sanitizedName": "energy-battery",
+    "type": "general",
+    "altText": "Energie und Batterie",
+    "title": "Energie und Batterie",
+    "bytes": 95312
+  },
+  {
+    "source": "assets/png_1920/general/energy-buildings.png",
+    "output": "assets/webp/general/energy-buildings.webp",
+    "sanitizedName": "energy-buildings",
+    "type": "general",
+    "altText": "Energie und Gebäude",
+    "title": "Energie und Gebäude",
+    "bytes": 110058
+  },
+  {
+    "source": "assets/png_1920/general/energy.png",
+    "output": "assets/webp/general/energy.webp",
+    "sanitizedName": "energy",
+    "type": "general",
+    "altText": "Energie",
+    "title": "Energie",
+    "bytes": 141798
+  },
+  {
+    "source": "assets/png_1920/general/gas.png",
+    "output": "assets/webp/general/gas.webp",
+    "sanitizedName": "gas",
+    "type": "general",
+    "altText": "Gas",
+    "title": "Gas",
+    "bytes": 71412
+  },
+  {
+    "source": "assets/png_1920/general/head&money.png",
+    "output": "assets/webp/general/head-money.webp",
+    "sanitizedName": "head-money",
+    "type": "general",
+    "altText": "Finanzielle Gedanken",
+    "title": "Finanzielle Gedanken",
+    "bytes": 90494
+  },
+  {
+    "source": "assets/png_1920/general/heart.png",
+    "output": "assets/webp/general/heart.webp",
+    "sanitizedName": "heart",
+    "type": "general",
+    "altText": "Gesundheit und Vorsorge",
+    "title": "Gesundheit und Vorsorge",
+    "bytes": 107020
+  },
+  {
+    "source": "assets/png_1920/general/house&energy.png",
+    "output": "assets/webp/general/house-energy.webp",
+    "sanitizedName": "house-energy",
+    "type": "general",
+    "altText": "Haus und Energie",
+    "title": "Haus und Energie",
+    "bytes": 132136
+  },
+  {
+    "source": "assets/png_1920/general/house-accident.png",
+    "output": "assets/webp/general/house-accident.webp",
+    "sanitizedName": "house-accident",
+    "type": "general",
+    "altText": "Unfall im Haushalt",
+    "title": "Unfall im Haushalt",
+    "bytes": 141048
+  },
+  {
+    "source": "assets/png_1920/general/house-insurance.png",
+    "output": "assets/webp/general/house-insurance.webp",
+    "sanitizedName": "house-insurance",
+    "type": "general",
+    "altText": "Gebäudeversicherung",
+    "title": "Gebäudeversicherung",
+    "bytes": 126102
+  },
+  {
+    "source": "assets/png_1920/general/insurance-shield.png",
+    "output": "assets/webp/general/insurance-shield.webp",
+    "sanitizedName": "insurance-shield",
+    "type": "general",
+    "altText": "Versicherungsschutz",
+    "title": "Versicherungsschutz",
+    "bytes": 114176
+  },
+  {
+    "source": "assets/png_1920/general/judge.png",
+    "output": "assets/webp/general/judge.webp",
+    "sanitizedName": "judge",
+    "type": "general",
+    "altText": "Richter und Gericht",
+    "title": "Richter und Gericht",
+    "bytes": 82182
+  },
+  {
+    "source": "assets/png_1920/general/law-balance.png",
+    "output": "assets/webp/general/law-balance.webp",
+    "sanitizedName": "law-balance",
+    "type": "general",
+    "altText": "Recht und Waage",
+    "title": "Recht und Waage",
+    "bytes": 133308
+  },
+  {
+    "source": "assets/png_1920/general/money.png",
+    "output": "assets/webp/general/money.webp",
+    "sanitizedName": "money",
+    "type": "general",
+    "altText": "Geld",
+    "title": "Geld",
+    "bytes": 150328
+  },
+  {
+    "source": "assets/png_1920/general/paperplane.png",
+    "output": "assets/webp/general/paperplane.webp",
+    "sanitizedName": "paperplane",
+    "type": "general",
+    "altText": "Papierflieger",
+    "title": "Papierflieger",
+    "bytes": 97336
+  },
+  {
+    "source": "assets/png_1920/general/piggibank&umbrella01.png",
+    "output": "assets/webp/general/piggibank-umbrella01.webp",
+    "sanitizedName": "piggibank-umbrella01",
+    "type": "general",
+    "altText": "Sparen und Vorsorge",
+    "title": "Sparen und Vorsorge",
+    "bytes": 109714
+  },
+  {
+    "source": "assets/png_1920/general/piggibank&umbrella02.png",
+    "output": "assets/webp/general/piggibank-umbrella02.webp",
+    "sanitizedName": "piggibank-umbrella02",
+    "type": "general",
+    "altText": "Sparen und Vorsorge",
+    "title": "Sparen und Vorsorge",
+    "bytes": 115584
+  },
+  {
+    "source": "assets/png_1920/general/planets.png",
+    "output": "assets/webp/general/planets.webp",
+    "sanitizedName": "planets",
+    "type": "general",
+    "altText": "Planeten",
+    "title": "Planeten",
+    "bytes": 101696
+  },
+  {
+    "source": "assets/png_1920/general/safe&money.png",
+    "output": "assets/webp/general/safe-money.webp",
+    "sanitizedName": "safe-money",
+    "type": "general",
+    "altText": "Tresor mit Geld",
+    "title": "Tresor mit Geld",
+    "bytes": 93030
+  },
+  {
+    "source": "assets/png_1920/general/shield&money.png",
+    "output": "assets/webp/general/shield-money.webp",
+    "sanitizedName": "shield-money",
+    "type": "general",
+    "altText": "Geld absichern",
+    "title": "Geld absichern",
+    "bytes": 110522
+  },
+  {
+    "source": "assets/png_1920/general/solar.png",
+    "output": "assets/webp/general/solar.webp",
+    "sanitizedName": "solar",
+    "type": "general",
+    "altText": "Solarenergie",
+    "title": "Solarenergie",
+    "bytes": 121292
+  },
+  {
+    "source": "assets/png_1920/general/solarhouse.png",
+    "output": "assets/webp/general/solarhouse.webp",
+    "sanitizedName": "solarhouse",
+    "type": "general",
+    "altText": "Haus mit Solaranlage",
+    "title": "Haus mit Solaranlage",
+    "bytes": 109264
+  },
+  {
+    "source": "assets/png_1920/general/stuff_with_money.png",
+    "output": "assets/webp/general/stuff_with_money.webp",
+    "sanitizedName": "stuff_with_money",
+    "type": "general",
+    "altText": "Stuff with money",
+    "title": "Stuff with money",
+    "bytes": 110244
+  },
+  {
+    "source": "assets/png_1920/general/temple&money.png",
+    "output": "assets/webp/general/temple-money.webp",
+    "sanitizedName": "temple-money",
+    "type": "general",
+    "altText": "Bank und Geld",
+    "title": "Bank und Geld",
+    "bytes": 133012
+  },
+  {
+    "source": "assets/png_1920/general/temple.png",
+    "output": "assets/webp/general/temple.webp",
+    "sanitizedName": "temple",
+    "type": "general",
+    "altText": "Institution",
+    "title": "Institution",
+    "bytes": 105138
+  },
+  {
+    "source": "assets/png_1920/general/tractor.money.png",
+    "output": "assets/webp/general/tractormoney.webp",
+    "sanitizedName": "tractormoney",
+    "type": "general",
+    "altText": "Landwirtschaft und Förderung",
+    "title": "Landwirtschaft und Förderung",
+    "bytes": 117558
+  },
+  {
+    "source": "assets/png_1920/general/tresor.png",
+    "output": "assets/webp/general/tresor.webp",
+    "sanitizedName": "tresor",
+    "type": "general",
+    "altText": "Tresor",
+    "title": "Tresor",
+    "bytes": 126844
+  },
+  {
+    "source": "assets/png_1920/general/umbrella&money.png",
+    "output": "assets/webp/general/umbrella-money.webp",
+    "sanitizedName": "umbrella-money",
+    "type": "general",
+    "altText": "Geld absichern",
+    "title": "Geld absichern",
+    "bytes": 97944
+  },
+  {
+    "source": "assets/png_1920/general/wallet.png",
+    "output": "assets/webp/general/wallet.webp",
+    "sanitizedName": "wallet",
+    "type": "general",
+    "altText": "Geldbörse",
+    "title": "Geldbörse",
+    "bytes": 107252
+  },
+  {
+    "source": "assets/png_1920/general/wheelchair-accident.png",
+    "output": "assets/webp/general/wheelchair-accident.webp",
+    "sanitizedName": "wheelchair-accident",
+    "type": "general",
+    "altText": "Unfall und Rollstuhl",
+    "title": "Unfall und Rollstuhl",
+    "bytes": 105070
+  }
+]

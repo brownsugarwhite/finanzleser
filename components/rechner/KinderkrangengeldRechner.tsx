@@ -45,6 +45,7 @@ export default function KinderkrangengeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={12000}
         />
 
         <RechnerInput
@@ -55,6 +56,7 @@ export default function KinderkrangengeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={8000}
         />
 
         <RechnerSelect
@@ -81,7 +83,9 @@ export default function KinderkrangengeldRechner() {
           value={params.bereitsGenutzteTage}
           onChange={(val) => setParams((prev) => ({ ...prev, bereitsGenutzteTage: val }))}
           einheit="Tage"
+          step={1}
           min={0}
+          max={70}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

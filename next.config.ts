@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { legacyRedirects } from "./lib/redirects.generated";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -7,6 +8,19 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["pdfjs-dist"],
+  experimental: {
+    // IONOS-Shared-Hosting ist unter Build-Last fragil. Da Artikel/Hauptkategorien jetzt
+    // on-demand sind (kein Build-Prerender), ist die Build-Last wieder auf dem zuvor
+    // funktionierenden Niveau (~Tool-Seiten). Retry fängt vereinzelte 5xx ab.
+    staticGenerationRetryCount: 3,
+  },
+  // pdfjs lädt seinen (Fake-)Worker per dynamischem Import nach — der wird vom
+  // File-Tracing nicht erkannt und fehlt sonst in der Netlify-Function. Für die
+  // Routen, die zur Laufzeit PDFs parsen, explizit mitkopieren.
+  outputFileTracingIncludes: {
+    "/api/checkliste-data/[slug]": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+    "/finanztools/checklisten/[slug]": ["./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"],
+  },
   async redirects() {
     return [
       // 301 Redirects für zusammengefasste Beiträge (42)
@@ -52,6 +66,10 @@ const nextConfig: NextConfig = {
       { source: "/steuerklassenwahl", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuerklassenwechsel", destination: "/steuern/steuererklaerung/steuerklassen", permanent: true },
       { source: "/steuersoftware-steuererklaerung", destination: "/steuern/steuererklaerung/elster", permanent: true },
+      // Auto-generierte Legacy-Flach-URL-Redirects (~642) für konsolidierte/entfallene
+      // Beiträge & Tools. Quelle: scripts/generate-legacy-redirects.mjs → lib/redirects.generated.ts.
+      // Review: scripts/output/legacy-redirects.review.txt (medium/low confidence prüfen).
+      ...legacyRedirects,
     ];
   },
   eslint: {

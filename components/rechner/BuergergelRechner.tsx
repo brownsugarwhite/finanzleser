@@ -93,8 +93,9 @@ export default function BuergergelRechner() {
           value={params.eigenesEinkommen}
           onChange={(val) => setParams((p) => ({ ...p, eigenesEinkommen: val }))}
           einheit="€"
-          step={100}
+          step={50}
           min={0}
+          max={3000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

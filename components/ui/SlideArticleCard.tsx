@@ -1,40 +1,17 @@
 'use client';
 
-import { memo, useRef, useState, useSyncExternalStore } from 'react';
+import { memo, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
-import InlineSVG from '@/components/ui/InlineSVG';
-import { useArticlePreview } from '@/components/sections/ArticlePreviewProvider';
-import { useSliderPreviewContext } from '@/components/sections/ArticleSliderContext';
-
-/* ── Modul-globaler hover-capable Listener ──
-   Bei vielen Cards (50+ bei Sozialversicherungen) würde ein matchMedia-
-   Listener pro Card-Mount = 50 native Listener anlegen → spürbarer Stutter
-   beim Category-Switch. Statt dessen ein einziger Listener auf Modul-Ebene,
-   alle Cards subscriben via useSyncExternalStore. */
-let hoverMql: MediaQueryList | null = null;
-const hoverSubs = new Set<() => void>();
-function getHoverCapable() {
-  if (typeof window === 'undefined') return true;
-  if (!hoverMql) {
-    hoverMql = window.matchMedia('(hover: hover)');
-    hoverMql.addEventListener('change', () => hoverSubs.forEach((fn) => fn()));
-  }
-  return hoverMql.matches;
-}
-function subscribeHoverCapable(fn: () => void) {
-  hoverSubs.add(fn);
-  return () => { hoverSubs.delete(fn); };
-}
-const SSR_HOVER_CAPABLE = () => true;
-
-type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
+import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from '@/lib/morphCapture';
+import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
 
 export interface SlideArticleCardProps {
   post: Post;
   index?: number;
-  bookmarkType?: BookmarkType;
   phase1Visible?: boolean;
   phase2Visible?: boolean;
   categoryTransition?: 'idle' | 'out' | 'in';
@@ -42,26 +19,16 @@ export interface SlideArticleCardProps {
 
 const PHASE_DURATION = 0.3;
 
-const BOOKMARK_COLORS: Record<BookmarkType, string> = {
-  rechner: 'var(--color-brand-secondary)',
-  vergleich: 'var(--color-tool-vergleiche)',
-  checkliste: 'var(--color-tool-checklisten)',
-  neu: 'var(--color-brand)',
-};
-
-export const CARD_MIN_WIDTH = 265;
+export const CARD_MIN_WIDTH = 244;
 export const CARD_MAX_WIDTH = 450;
 
-function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
-  const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
-  const [infoHovered, setInfoHovered] = useState(false);
-  const [cardHovered, setCardHovered] = useState(false);
-  // Shared subscription — ein matchMedia-Listener für alle Cards.
-  const hoverCapable = useSyncExternalStore(subscribeHoverCapable, getHoverCapable, SSR_HOVER_CAPABLE);
+function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: SlideArticleCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const boldRef = useRef<HTMLParagraphElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
-  const { openPreview, isOpen, prefetchExtras } = useArticlePreview();
-  const sliderCtx = useSliderPreviewContext();
+  const router = useRouter();
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
@@ -74,43 +41,91 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
 
+  // Route vorladen, damit beim Klick der Commit (und damit der Morph-Flug) sofort
+  // bereitsteht — sonst wartet der Flug auf das Laden der Artikelseite.
+  const prefetchArticle = () => {
+    try { router.prefetch(postLink); } catch { /* noop */ }
+  };
+
+  // Prefetch erst wenn die Card (fast) im Viewport ist — NICHT alle Cards auf einmal
+  // beim Mount (das löste einen Request-Sturm aus). Per IntersectionObserver mit
+  // großzügigem rootMargin: beim Sliden ist die nächste Card rechtzeitig vorgeladen,
+  // ohne off-screen alles gleichzeitig zu prefetchen.
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    let done = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!done && entries.some((e) => e.isIntersecting)) {
+          done = true;
+          prefetchArticle();
+          io.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postLink]);
+
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
-    prefetchExtras(post.slug);
+    prefetchArticle();
+  };
+
+  const startMorph = () => {
+    // Hover-Skalierung der Card (scale 1.1) → Morph startet beim gehoverten Zustand
+    // (kein Snap), Schrift wird im Helfer mitskaliert (gleicher Umbruch).
+    const scale = getElementScale(cardRef.current);
+    const items: MorphItemSource[] = [];
+
+    // Visual → article-visual (Rect bereits gehovert-skaliert → Start ohne Snap)
+    const visual = captureVisualItem(imageRef.current, post.featuredImage?.node.sourceUrl);
+    if (visual) items.push(visual);
+
+    // Text: Zuordnung nach String-Identität.
+    // Mit Untertitel: fett (=Untertitel) → article-subtitle, Subline (=post.title) → article-title (pink).
+    // Ohne Untertitel: der fette Titel IST post.title → article-title (pink).
+    if (sublineText) {
+      const bold = captureTextItem(boldRef.current, 'bold', scale);
+      if (bold) items.push(bold);
+      const italic = captureTextItem(sublineRef.current, 'italic', scale);
+      if (italic) items.push(italic);
+    } else {
+      const italic = captureTextItem(boldRef.current, 'italic', scale);
+      if (italic) items.push(italic);
+    }
+
+    // Original-Card-Elemente sofort unsichtbar schalten — der abgehobene Anker
+    // übernimmt visuell ihre Stelle (kein Doppelbild beim Ausblurren).
+    hideSourceEls(imageRef.current, boldRef.current, sublineRef.current);
+
+    startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     const start = pointerStartRef.current;
     pointerStartRef.current = null;
     if (!start) return;
-    if (isOpen) return;
     // Only treat as click if pointer barely moved (ignore Embla drag gestures)
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
     if (dx * dx + dy * dy > 36) return; // > 6px → drag, ignore
     const target = e.target as HTMLElement;
-    if (target.closest('.article-read-link')) return;
-    if (!cardRef.current) return;
-    // If inside a slider context, pass full context + index for in-preview navigation.
-    // Otherwise fall back to single-post preview (no nav).
-    if (sliderCtx && typeof index === 'number') {
-      openPreview({ ctx: sliderCtx, currentIndex: index });
-    } else {
-      openPreview({ post, cardEl: cardRef.current });
-    }
+    if (target.closest('.article-read-link')) return; // innerer Link navigiert selbst
+    startMorph();
   };
 
   return (
     <div
       ref={cardRef}
-      data-flip-id={`preview-${post.slug}-box`}
+      className="slide-article-card"
+      data-morph-card={post.slug}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onMouseEnter={() => {
-        setCardHovered(true);
-        prefetchExtras(post.slug);
-      }}
-      onMouseLeave={() => setCardHovered(false)}
+      onMouseEnter={prefetchArticle}
       style={{
         width: '100%',
         position: 'relative',
@@ -121,17 +136,16 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         userSelect: 'none',
         WebkitUserSelect: 'none',
         cursor: 'pointer',
-        transform: cardHovered && hoverCapable ? 'scale(1.1)' : 'none',
-        transition: 'transform 0.3s ease',
       }}
     >
       {/* Visual */}
       <div
-        data-flip-id={`preview-${post.slug}-image`}
+        ref={imageRef}
+        data-morph-role="visual"
         style={{
           position: 'relative',
           width: '100%',
-          height: 210,
+          height: 190,
           flexShrink: 0,
           transform: categoryTransition === 'out' ? 'scale(0)' : phase1Visible ? 'scale(1)' : 'scale(0)',
           transformOrigin: categoryTransition !== 'idle' ? 'center center' : 'top center',
@@ -152,8 +166,9 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
           style={{
             position: 'absolute',
             inset: 0,
-            overflow: 'hidden',
-            background: 'var(--color-placeholder-bg)',
+            // KEIN overflow:hidden — das Visual darf bei höherem Bild oben/unten
+            // den Container überlappen.
+            background: post.featuredImage?.node.sourceUrl ? 'transparent' : 'var(--color-placeholder-bg)',
           }}
         >
           {post.featuredImage?.node.sourceUrl && (
@@ -162,11 +177,14 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
               alt={post.featuredImage.node.altText || ''}
               loading="lazy"
               style={{
+                // Volle Breite, natürliche Höhe, vertikal zentriert → überlappt
+                // bei höherem Seitenverhältnis oben/unten den 190px-Rahmen.
                 position: 'absolute',
-                inset: 0,
+                top: '50%',
+                left: 0,
                 width: '100%',
-                height: '100%',
-                objectFit: 'contain',
+                height: 'auto',
+                transform: 'translateY(-50%)',
                 zIndex: 1,
                 display: 'block',
               }}
@@ -175,41 +193,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         </div>
       </div>
 
-      {/* Info-i — außerhalb imageRef damit es beim Visual-Scale nicht mitskaliert */}
-      <div
-        data-card-info
-        onMouseEnter={() => setInfoHovered(true)}
-        onMouseLeave={() => setInfoHovered(false)}
-        style={{
-          position: 'absolute',
-          top: 161,
-          right: 13,
-          width: 36,
-          height: 36,
-          borderRadius: '50%',
-          border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-          background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          flexShrink: 0,
-          opacity: categoryTransition === 'out' ? 0 : phase2Visible ? 1 : 0,
-          transition: categoryTransition === 'out'
-            ? `opacity 0.2s ease-in, background 0.15s, border 0.15s`
-            : `opacity ${PHASE_DURATION}s ease, background 0.15s, border 0.15s`,
-          ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-        }}
-      >
-        <InlineSVG
-          src="/icons/info_i.svg"
-          alt="Info"
-          style={{ width: 9, height: 17 }}
-        />
-      </div>
-
-      {/* Text + Footer — fadet beim Preview-Öffnen aus */}
-      <div data-card-text style={{
+      {/* Text + Footer */}
+      <div style={{
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -220,12 +205,14 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
       }}>
         <div style={{
           width: '100%',
-          padding: '13px 23px 0',
+          padding: '13px 0 0',
           display: 'flex',
           flexDirection: 'column',
         }}>
           {sublineText && (
             <p
+              ref={sublineRef}
+              data-morph-role="italic"
               lang="de"
               style={{
                 fontFamily: 'Merriweather, serif',
@@ -244,6 +231,8 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
             </p>
           )}
           <p
+            ref={boldRef}
+            data-morph-role={sublineText ? 'bold' : 'italic'}
             lang="de"
             style={{
               fontFamily: 'Merriweather, serif',
@@ -265,10 +254,39 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
           </p>
         </div>
 
+        {/* Tool-Labels — zwischen fettem Text und „Ratgeber lesen".
+            „dokumente" wird NICHT hier gezeigt (eigenes Lesezeichen oben links). */}
+        {post.tools && post.tools.filter((t) => t !== 'dokumente').length > 0 && (
+          <div style={{
+            width: '100%',
+            padding: 0,
+            margin: '6px 0',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 6,
+            flexShrink: 0,
+          }}>
+            {post.tools.filter((t) => t !== 'dokumente').map((t) => (
+              <span key={t} style={{
+                background: TOOL_DOT_COLORS[t],
+                color: '#fff',
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                fontWeight: 600,
+                lineHeight: 1,
+                padding: '5px 10px',
+                letterSpacing: '0.02em',
+              }}>
+                {TOOL_LABEL[t]}
+              </span>
+            ))}
+          </div>
+        )}
+
         {/* Footer: direkt nach dem Text (nicht am unteren Card-Rand) */}
         <div style={{
           width: '100%',
-          padding: '6px 23px 0',
+          padding: '6px 0 0',
           display: 'flex',
           alignItems: 'center',
           flexShrink: 0,
@@ -307,38 +325,6 @@ function SlideArticleCardImpl({ post, index, bookmarkType, phase1Visible = true,
         </Link>
         </div>
       </div>
-
-      {/* Lesezeichen */}
-      {bookmarkColor && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          right: 13,
-          width: 28,
-          zIndex: 62,
-        }}>
-          <div style={{ width: 33, height: 16, backgroundColor: bookmarkColor }} />
-          <svg width="33" height="25" viewBox="0 0 28 23" fill="none" preserveAspectRatio="none" style={{ display: 'block' }}>
-            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={bookmarkColor} />
-          </svg>
-          {bookmarkType === 'neu' && (
-            <p style={{
-              position: 'absolute',
-              top: 3,
-              left: 3,
-              fontFamily: 'var(--font-body)',
-              fontWeight: 700,
-              fontSize: 13,
-              lineHeight: 1.3,
-              color: 'white',
-              margin: 0,
-              whiteSpace: 'nowrap',
-            }}>
-              NEU
-            </p>
-          )}
-        </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
 import Spacer from "@/components/ui/Spacer";
@@ -12,7 +12,15 @@ import ArticleContent from "@/components/sections/ArticleContent";
 import PdfPreview from "@/components/ui/PdfPreview";
 import MobileTocIndicator from "./MobileTocIndicator";
 import MobileTocOverlay from "./MobileTocOverlay";
+import ArticleAdRails from "./ArticleAdRails";
+import AdSlot from "@/components/ui/AdSlot";
+import type { ArticleAdsSettings } from "@/lib/types";
+import type { ArticleToolData } from "@/lib/articleToolData";
+import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useArticleToc } from "@/lib/hooks/useArticleToc";
+import { buildArticleTocItems } from "@/lib/articleTocBuilder";
+import { extractArticleHeader } from "@/lib/articleHeader";
+import { notifyTargetMounted } from "@/lib/morphTransition";
 
 type ArticleClientProps = {
   title?: string;
@@ -31,6 +39,8 @@ type ArticleClientProps = {
     imageUrl?: string;
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
+  articleAds?: ArticleAdsSettings;
+  toolData?: ArticleToolData;
 };
 
 export default function ArticleClient({
@@ -44,13 +54,69 @@ export default function ArticleClient({
   content,
   contentTableOfContents,
   author,
+  articleAds,
+  toolData,
 }: ArticleClientProps) {
   const [collapsed, setCollapsed] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
   const [pageSlug, setPageSlug] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [tocVisible, setTocVisible] = useState(false);
   const toc = useArticleToc();
+
+  // Seiten-TOC erst einblenden, wenn das In-Body-TOC oben aus dem Bild gescrollt ist.
+  useEffect(() => {
+    const el = document.getElementById("article-inline-toc");
+    if (!el) {
+      setTocVisible(true); // kein In-Body-TOC (kurzer Artikel) → Sidebar dauerhaft sichtbar
+      return;
+    }
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "center top+=60", // etwas früher als „genau zur Hälfte oben raus"
+      onLeave: () => setTocVisible(true),
+      // Hoch gescrollt → TOC slidet aus UND klappt zu (Content zentriert sich smooth
+      // zurück; beim erneuten Runterscrollen slidet das collapsed TOC ein).
+      onEnterBack: () => { setTocVisible(false); setCollapsed(true); },
+    });
+    setTocVisible(el.getBoundingClientRect().top + el.offsetHeight / 2 < 60); // initialer Zustand (Reload mitten im Artikel)
+    return () => st.kill();
+  }, [toc.items.length]);
+
+  // Morph-Ziele: der MorphTransitionLayer morpht Visual + fetten + kursiven Titel
+  // aus der angeklickten Card hierher. Refs auf die drei Header-Elemente.
+  const morphVisualRef = useRef<HTMLDivElement>(null);
+  const morphSubtitleRef = useRef<HTMLHeadingElement>(null);
+  const morphTitleRef = useRef<HTMLHeadingElement>(null);
+  // Gate: erst NACHDEM isMobile aufgelöst ist (Layout = row vs column steht) dem
+  // Morph die Ziele melden — sonst misst der Morph das Row-Layout (isMobile=false beim
+  // ersten Render) und springt danach ins Column-Layout. Während des Morphs ist die
+  // neue Seite verdeckt, der Row→Column-Wechsel ist also unsichtbar.
+  const [morphReady, setMorphReady] = useState(false);
+
+  // Nach dem Mount (vor Paint) dem Morph-Controller melden — no-op wenn kein
+  // Morph aktiv ist (normale Navigation).
+  useLayoutEffect(() => {
+    if (!morphReady) return;
+    notifyTargetMounted({
+      visual: morphVisualRef.current,
+      bold: morphSubtitleRef.current,
+      italic: morphTitleRef.current,
+    });
+  }, [morphReady]);
+
+  // Redaktions-Konvention v2: echter Titel = WP-Titel-Feld (title-Prop). Untertitel
+  // (1. h2) + Beschreibung (<p> darunter) stehen am Content-Anfang; Body beginnt beim
+  // 2. h2. Herausziehen; alte Beiträge (kein Content-h2) fallen auf die WP-Felder zurück.
+  const header = useMemo(() => extractArticleHeader(content), [content]);
+  const displayTitle = header?.subtitle ?? subtitle;        // fetter Untertitel (42px)
+  const displayDescription = header?.description ?? excerpt; // Beschreibungszeile
+  const bodyContent = header?.body ?? content;              // Fließtext ab 2. h2
+
+  // Inline-TOC server-seitig vorbauen (pure, läuft SSR + Client identisch) → kein
+  // Layout-Shift / Nachrutschen beim ersten Aufruf.
+  const inlineTocItems = useMemo(() => buildArticleTocItems(bodyContent), [bodyContent]);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -58,9 +124,13 @@ export default function ArticleClient({
     setPageSlug(parts[parts.length - 1] || "");
   }, []);
 
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
+  useLayoutEffect(() => {
+    // Artikel-Layout bricht ab 1024px auf Column um (Header + Finanztools),
+    // synchron mit den CSS-Breakpoints (Sidebar aus, Mobile-TOC an).
+    // useLayoutEffect + setMorphReady: Layout VOR dem Morph-Mess-Zeitpunkt festlegen.
+    const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
+    setMorphReady(true); // jetzt steht das Layout → Morph darf die Ziele messen
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
@@ -74,7 +144,7 @@ export default function ArticleClient({
 
   return (
     <div style={{ position: "relative", width: "100%" }}>
-      {/* Absolut positioniertes TOC (aus dem Flow raus) — Desktop */}
+      {/* Absolut positioniertes TOC (aus dem Flow raus) — Desktop, wie zuvor positioniert */}
       {content && (
         <ArticleSidebar
           items={toc.items}
@@ -83,6 +153,7 @@ export default function ArticleClient({
           scrollToId={toc.scrollToId}
           collapsed={collapsed}
           setCollapsed={setCollapsed}
+          visible={tocVisible}
         />
       )}
 
@@ -109,19 +180,22 @@ export default function ArticleClient({
 
       {/* Main-Wrapper: Folge von Element-Wrappern */}
       <article style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        {/* Breadcrumb + Hero-Block + Spacer (zusammen in einem Wrapper) */}
-        <ArticleElementWrapper variant="wide" collapsed={collapsed}>
+        {/* Breadcrumb + Hero-Block + Spacer. noShift: Heading verschiebt sich NICHT
+            beim TOC-Öffnen — Positionierung ansonsten wie zuvor. */}
+        <ArticleElementWrapper variant="hero" collapsed={collapsed} noShift>
           <Breadcrumb items={breadcrumbItems} />
           {(() => {
             const titleEl = title ? (
               <h1
+                ref={morphTitleRef}
+                data-morph-target="article-title"
                 className="article-title"
                 style={{
                   color: "var(--color-brand-secondary)",
                   fontFamily: "Merriweather, serif",
-                  fontSize: "23px",
+                  fontSize: isMobile ? "21px" : "23px",
                   fontStyle: "italic",
-                  marginBottom: "8px",
+                  marginBottom: "4px",
                   display: "inline-block",
                 }}
               >
@@ -129,48 +203,56 @@ export default function ArticleClient({
               </h1>
             ) : null;
 
-            const subtitleEl = subtitle ? (
-              <h2 data-toc-exclude className="article-subtitle font-bold mb-4" style={{ fontSize: isMobile ? "32px" : "42px", lineHeight: "1.3em" }}>{subtitle}</h2>
+            const subtitleEl = displayTitle ? (
+              <h2 ref={morphSubtitleRef} data-morph-target="article-subtitle" data-toc-exclude className="article-subtitle font-bold" style={{ fontSize: isMobile ? "30px" : "42px", lineHeight: "1.3em", marginBottom: "4px" }}>{displayTitle}</h2>
             ) : null;
 
+            // Schmale Screens: statt fixer 384px-Höhe ein FESTES Aspect-Ratio (volle
+            // Breite), das zur Auflösung passt — so morpht das Card-Visual sauber dorthin
+            // (kein Stretch in eine hohe Box). Desktop bleibt bei h-96 in der 50%-Spalte.
+            // KEIN width:100% — sonst greift der rechte Negativ-Margin (Full-Bleed) nicht
+            // und das Visual sitzt links statt zentriert. Block-Auto-Breite + Negativ-Margins
+            // (CSS) spannen es symmetrisch über die volle Breite.
+            const visualMobileStyle: React.CSSProperties = { aspectRatio: "16 / 10" };
             const visualEl = (
               <>
                 {featuredImage?.sourceUrl ? (
-                  <div className="article-hero-visual h-96 flex items-center justify-center rounded overflow-hidden bg-gray-50">
+                  <div
+                    ref={morphVisualRef}
+                    data-morph-target="article-visual"
+                    data-morph-img={featuredImage.sourceUrl}
+                    className={`article-hero-visual ${isMobile ? "" : "h-96"} flex items-center justify-center rounded overflow-hidden`}
+                    style={isMobile ? visualMobileStyle : undefined}
+                  >
                     <InlineSVG
                       src={featuredImage.sourceUrl}
                       alt={featuredImage.altText || title || "Featured image"}
-                      style={{ width: '100%', height: '100%' }}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   </div>
                 ) : (
-                  <div className="article-hero-visual h-96 rounded overflow-hidden" style={{ backgroundColor: "rgba(0, 0, 0, 0.08)" }} />
-                )}
-                {featuredImage?.altText && (
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "var(--color-text-medium)",
-                      marginTop: "8px",
-                    }}
-                  >
-                    {featuredImage.altText}
-                  </p>
+                  <div
+                    ref={morphVisualRef}
+                    data-morph-target="article-visual"
+                    className={`article-hero-visual ${isMobile ? "" : "h-96"} rounded overflow-hidden`}
+                    style={isMobile ? { ...visualMobileStyle, backgroundColor: "rgba(0, 0, 0, 0.08)" } : { backgroundColor: "rgba(0, 0, 0, 0.08)" }}
+                  />
                 )}
               </>
             );
 
-            const excerptEl = excerpt ? (
+            const excerptEl = displayDescription ? (
               <p
-                className="mb-8 text-gray-600"
+                className="text-gray-600"
                 style={{
                   fontFamily: "Merriweather, serif",
-                  fontSize: "18px",
+                  fontSize: isMobile ? "17px" : "18px",
                   fontWeight: "400",
+                  marginBottom: "12px",
                 }}
                 dangerouslySetInnerHTML={{
                   __html: (() => {
-                    const text = excerpt.replace(/<[^>]*>/g, "");
+                    const text = displayDescription.replace(/<[^>]*>/g, "");
                     if (text.length <= 200) return text;
                     const truncated = text.slice(0, 200).replace(/\s+\S*$/, "");
                     return truncated + " ...";
@@ -183,7 +265,7 @@ export default function ArticleClient({
               <div className="flex justify-between items-center text-gray-600">
                 <div className="flex items-center gap-1 text-sm" style={{ fontSize: "14px" }}>
                   <img src="/icons/time_icon.svg" alt="" style={{ width: 13, height: 13, opacity: 0.5 }} />
-                  <span>{content ? Math.ceil(content.split(/\s+/).length / 200) : 1} min Lesedauer</span>
+                  <span>{bodyContent ? Math.ceil(bodyContent.split(/\s+/).length / 200) : 1} min Lesedauer</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm" style={{ fontSize: "14px" }}>Teilen</span>
@@ -211,10 +293,10 @@ export default function ArticleClient({
 
             if (isMobile) {
               return (
-                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "6px" }}>
+                  <div>{visualEl}</div>
                   {titleEl}
                   {subtitleEl}
-                  <div>{visualEl}</div>
                   {excerptEl}
                   {metaEl}
                 </div>
@@ -237,47 +319,62 @@ export default function ArticleClient({
               </div>
             );
           })()}
-          <div style={{ marginTop: 50, marginBottom: 23 }}>
-            <Spacer noMargin />
+          <div style={{ marginTop: isMobile ? 35 : 50, marginBottom: 23 }}>
+            <Spacer noMargin maxWidth="100%" />
           </div>
         </ArticleElementWrapper>
 
-        {/* Autor + inline-TOC + Trenner */}
-        <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-          {author && (
-            <div className="pt-6 mb-8">
-              <Author
-                name={author.name}
-                role={author.role}
-                date={author.date}
-                imageUrl={author.imageUrl}
-                colorVariant={author.colorVariant}
-              />
-            </div>
-          )}
-          {contentTableOfContents && content && (
-            <ArticleTableOfContents content={content} />
-          )}
-          <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
-        </ArticleElementWrapper>
+        {/* Relativer Bereich ab Top-Banner abwärts: trägt die absolut positionierten
+            Werbe-Rails, damit sie oben NEBEN dem Leaderboard starten (nicht erst im Body). */}
+        <div className="article-body-region" style={{ position: "relative", width: "100%" }}>
+          <ArticleAdRails collapsed={collapsed} show={!!articleAds?.rails && !!(bodyContent && bodyContent.trim())} />
 
-        {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
-        {content && content.trim() ? (
-          <>
-            <ArticleContent content={content} collapsed={collapsed} currentSlug={pageSlug} />
-            {pageSlug && (
-              <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-                <PdfPreview slug={pageSlug} />
-              </ArticleElementWrapper>
-            )}
-          </>
-        ) : (
+          {/* Werbung: Leaderboard unter dem Hero/Heading, vor dem Body */}
+          {articleAds?.top && (
+            <ArticleElementWrapper variant="wide" collapsed={collapsed}>
+              <div className="article-ad-top" style={{ margin: "18px 0 32px" }}>
+                <AdSlot format={isMobile ? "mobile" : "leaderboard"} />
+              </div>
+            </ArticleElementWrapper>
+          )}
+
+          {/* Autor + inline-TOC + Trenner */}
           <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-            <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
-              <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
-            </div>
+            {author && (
+              <div className="pt-6 mb-8">
+                <Author
+                  name={author.name}
+                  role={author.role}
+                  date={author.date}
+                  imageUrl={author.imageUrl}
+                  colorVariant={author.colorVariant}
+                />
+              </div>
+            )}
+            {contentTableOfContents && bodyContent && (
+              <ArticleTableOfContents content={bodyContent} initialItems={inlineTocItems} />
+            )}
+            <div style={{ width: "100%", height: "1px", background: "var(--color-text-medium)" }} />
           </ArticleElementWrapper>
-        )}
+
+          {/* Artikel-Inhalt: je Chunk ein ElementWrapper */}
+          {bodyContent && bodyContent.trim() ? (
+            <>
+              <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} toolData={toolData} />
+              {pageSlug && (
+                <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+                  <PdfPreview slug={pageSlug} />
+                </ArticleElementWrapper>
+              )}
+            </>
+          ) : (
+            <ArticleElementWrapper variant="centered" collapsed={collapsed}>
+              <div className="bg-gray-50 border border-gray-200 rounded p-6 text-center">
+                <p className="text-gray-600 text-lg">Inhalt folgt in Kürze.</p>
+              </div>
+            </ArticleElementWrapper>
+          )}
+        </div>
       </article>
     </div>
   );

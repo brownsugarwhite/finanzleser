@@ -1,3 +1,5 @@
+import FieldOutline from "@/components/ui/FieldOutline";
+
 interface RechnerSelectProps {
   label: string;
   name: string;
@@ -18,19 +20,22 @@ export default function RechnerSelect({
       <label htmlFor={name} className="rechner-label">
         {label}
       </label>
-      <select
-        id={name}
-        name={name}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="rechner-select"
-      >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+      <div className="field-wrap rechner-field">
+        <select
+          id={name}
+          name={name}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="rechner-select"
+        >
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <FieldOutline radius={15} />
+      </div>
     </div>
   );
 }

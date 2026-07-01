@@ -9,6 +9,8 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -36,6 +38,15 @@ export default function GleitzoneRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Gleitzone/Midijob-Rechner 2026</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Minijob", values: { monatsBrutto: 538 } },
+          { label: "Midijob", values: { monatsBrutto: 1200 } },
+          { label: "Regulär", values: { monatsBrutto: 2500 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Monatliches Bruttogehalt"
@@ -53,6 +64,14 @@ export default function GleitzoneRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={result.monatsBrutto > 0 ? Math.round((result.nettoNachSV / result.monatsBrutto) * 100) : 0}
+              label="Nettoquote"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Beschaeftigungstyp"

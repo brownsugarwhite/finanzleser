@@ -2,10 +2,16 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "@/lib/gsapConfig";
+import { setOpenScalableTargets, clearOpenScalableTargets } from "@/lib/scalableTargets";
+import { isTransitioning } from "@/lib/pageTransition";
 
 export default function ContentScaler() {
   const isOpenRef = useRef(false);
   const savedOpacities = useRef<Map<HTMLElement, number>>(new Map());
+  // Ruhe-Opacity der SKALIERTEN Elemente (nicht nur fadeTargets) vor dem Öffnen.
+  // Nötig, weil manche scale-extended Elemente scroll-abhängig eine Opacity < 1 haben
+  // (z.B. .landing-bubble-mobile) — die darf beim Schließen NICHT hart auf 1 zurück.
+  const savedElOpacities = useRef<Map<HTMLElement, number>>(new Map());
   const savedPointerEvents = useRef<Map<HTMLElement, string>>(new Map());
   const previewScaleEls = useRef<HTMLElement[]>([]);
   // recreate-Timeout tracken, damit rapid-Cycles (open-close-open in <350ms)
@@ -22,7 +28,10 @@ export default function ContentScaler() {
       const dotLine = landingDotLine || layoutDotLine;
       const isLanding = !!landingDotLine;
       const claim = document.querySelector(".logo-wrapper span") as HTMLElement | null;
-      const fadeTargets = [dotLine, !isLanding && claim].filter(Boolean) as HTMLElement[];
+      // Quicklinks-Reihe (unter der Dotline, Landing-Desktop) faded bei JEDEM Overlay
+      // mit (auch dem Megamenü, das extended:false ist) — wie die Dotline darüber.
+      const quicklinks = document.querySelector(".quicklinks-row") as HTMLElement | null;
+      const fadeTargets = [dotLine, quicklinks, !isLanding && claim].filter(Boolean) as HTMLElement[];
       return { els, fadeTargets, isLanding };
     };
 
@@ -42,8 +51,11 @@ export default function ContentScaler() {
         document.querySelectorAll<HTMLElement>(".dotline-animated, .landing-dotline").forEach((el) => {
           if (el.offsetParent !== null) extras.push(el);
         });
+        // Sichtbarkeitsprüfung via display (NICHT offsetParent) — fixed-positionierte
+        // Targets (z.B. .landing-bubble-mobile) haben offsetParent===null obwohl sichtbar
+        // und würden sonst fälschlich übersprungen.
         document.querySelectorAll<HTMLElement>("[data-scale-extended]").forEach((el) => {
-          if (el.offsetParent !== null) extras.push(el);
+          if (getComputedStyle(el).display !== "none") extras.push(el);
         });
         extras.forEach((el) => {
           if (!els.includes(el)) {
@@ -73,6 +85,11 @@ export default function ContentScaler() {
           savedPointerEvents.current.set(el, el.style.pointerEvents);
         }
         el.style.pointerEvents = "none";
+        // Ruhe-Opacity sichern (Guard gegen Overwrite bei unterbrochenen open→close→open-Zyklen),
+        // BEVOR die Blur-Tween sie auf 0.5 zieht. Wird in scaleUp als Wiederherstellungsziel genutzt.
+        if (!savedElOpacities.current.has(el)) {
+          savedElOpacities.current.set(el, parseFloat(getComputedStyle(el).opacity) || 1);
+        }
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 0.95,
@@ -92,10 +109,25 @@ export default function ContentScaler() {
           gsap.to(t, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
         }
       });
+
+      // Offenes Set veröffentlichen, damit der Page-Transition-Controller (Fall A:
+      // aus offenem Overlay navigieren) dieselben Elemente übernehmen kann.
+      setOpenScalableTargets(els);
     };
 
     const scaleUp = () => {
       if (!isOpenRef.current) return;
+      // Läuft gerade eine Seiten-Transition (Fall A), übernimmt deren Controller den
+      // Wrapper (ausfaden → einfaden). NICHT gegen-animieren; nur State sauber halten.
+      if (isTransitioning()) {
+        isOpenRef.current = false;
+        savedPointerEvents.current.forEach((pe, el) => { el.style.pointerEvents = pe; });
+        savedPointerEvents.current.clear();
+        savedOpacities.current.clear();
+        previewScaleEls.current = [];
+        clearOpenScalableTargets();
+        return;
+      }
       isOpenRef.current = false;
       const { els } = getTargets();
 
@@ -114,11 +146,15 @@ export default function ContentScaler() {
           el.style.pointerEvents = savedPE;
           savedPointerEvents.current.delete(el);
         }
+        // Auf die vor dem Öffnen gesicherte Ruhe-Opacity zurück (Default 1) — NICHT hart 1,
+        // sonst würde z.B. die scroll-ausgeblendete Mobile-Sprechblase fälschlich eingeblendet.
+        const restoreOpacity = savedElOpacities.current.get(el) ?? 1;
+        savedElOpacities.current.delete(el);
         gsap.killTweensOf(el, "scale,x,y,rotation,filter,opacity,transform");
         gsap.to(el, {
           scale: 1,
           filter: "blur(0px)",
-          opacity: 1,
+          opacity: restoreOpacity,
           duration: 0.5,
           ease: "power2.inOut",
           force3D: true,
@@ -130,6 +166,7 @@ export default function ContentScaler() {
           },
         });
       });
+      savedElOpacities.current.clear();
 
       savedOpacities.current.forEach((opacity, el) => {
         gsap.to(el, { opacity, duration: 0.5, ease: "power2.inOut" });
@@ -144,12 +181,29 @@ export default function ContentScaler() {
       }, 350);
     };
 
+    // Page-Transition übernimmt das geblurte Set (Fall A). ContentScaler-State
+    // zurücksetzen OHNE zu animieren — der Controller treibt Wrapper + Chrome.
+    const onTransitionTakeover = () => {
+      if (!isOpenRef.current) return;
+      isOpenRef.current = false;
+      // fadeTargets (dotline/claim) sofort auf gespeicherte Opacity — sie werden
+      // vom Controller nicht gemanagt und sollen nicht unsichtbar hängenbleiben.
+      savedOpacities.current.forEach((op, el) => { gsap.set(el, { opacity: op }); });
+      savedOpacities.current.clear();
+      savedElOpacities.current.clear();
+      // pointerEvents NICHT restaurieren — der Controller setzt sie nach ENTER zurück.
+      savedPointerEvents.current.clear();
+      previewScaleEls.current = [];
+    };
+
     window.addEventListener("menu-opened", scaleDown);
     window.addEventListener("menu-closed", scaleUp);
+    window.addEventListener("page-transition-takeover", onTransitionTakeover);
 
     return () => {
       window.removeEventListener("menu-opened", scaleDown);
       window.removeEventListener("menu-closed", scaleUp);
+      window.removeEventListener("page-transition-takeover", onTransitionTakeover);
       if (recreateTimeoutRef.current) {
         clearTimeout(recreateTimeoutRef.current);
         recreateTimeoutRef.current = null;

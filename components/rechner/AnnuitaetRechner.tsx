@@ -10,6 +10,7 @@ import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerAmortizationTable from "./ui/RechnerAmortizationTable";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -33,6 +34,15 @@ export default function AnnuitaetRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Annuitätenrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Eigentumswohnung", values: { darlehensbetrag: 250000, zinssatzPa: 3.5, laufzeitJahre: 20 } },
+          { label: "Einfamilienhaus", values: { darlehensbetrag: 450000, zinssatzPa: 3.5, laufzeitJahre: 30 } },
+          { label: "Modernisierung", values: { darlehensbetrag: 60000, zinssatzPa: 4.0, laufzeitJahre: 10 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Darlehensbetrag"
@@ -42,6 +52,7 @@ export default function AnnuitaetRechner() {
           einheit="€"
           step={5000}
           min={0}
+          max={1000000}
         />
         <RechnerInput
           label="Jahreszinssatz"
@@ -51,6 +62,8 @@ export default function AnnuitaetRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={15}
+          slider
         />
         <RechnerInput
           label="Laufzeit"

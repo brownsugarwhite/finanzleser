@@ -3,9 +3,11 @@
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
 import Image from "next/image";
 import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "@/lib/gsapConfig";
 import { ScrollTrigger } from "@/lib/gsapConfig";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
+import { openOverlay, closeOverlay } from "@/lib/overlayController";
 
 /* ── Constants ── */
 
@@ -46,8 +48,8 @@ export default function BookmarkNav() {
   const burgerVisible = useRef(false);
   const triggerRef = useRef<ScrollTrigger | null>(null);
 
-  // Mobile detection
-  const isMobile = useIsMobile();
+  // Mobile detection — Header-Chrome ab ≤1024px mobil
+  const isMobile = useIsMobile(1024);
 
   // Search refs
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -301,6 +303,21 @@ export default function BookmarkNav() {
     return () => window.removeEventListener("menu-closed", handleMenuClosed);
   }, [animateToBurger, hideAsX, isMobile]);
 
+  // Route-Wechsel-Reset: Wird das Menü durch Navigation auf einen Megamenü-Link
+  // geschlossen, läuft das über consumeActiveOverlayForTransition() — das feuert
+  // KEIN „menu-closed", deshalb blieb der Burger als X stehen. Bei jedem
+  // pathname-Wechsel den X-Zustand sauber auflösen (neue Seite = Scroll-Top →
+  // Nav sichtbar → X kollabiert raus; auf Mobile bleibt der Button als Burger).
+  const pathname = usePathname();
+  useEffect(() => {
+    if (!burgerIsX.current) return;
+    if (isMobile) { animateToBurger(); return; }
+    const navEl = document.querySelector(".landing-nav[data-topnav]") || document.querySelector("[data-topnav]");
+    const navIsHidden = !navEl || navEl.getBoundingClientRect().bottom < 0;
+    if (navIsHidden) animateToBurger();
+    else hideAsX();
+  }, [pathname, animateToBurger, hideAsX, isMobile]);
+
   const toggleBurger = useCallback(() => {
     if (burgerIsX.current) {
       if (isMobile) {
@@ -313,16 +330,15 @@ export default function BookmarkNav() {
         else hideAsX();
       }
       window.dispatchEvent(new CustomEvent("burger-closed"));
-      window.dispatchEvent(new CustomEvent("menu-closed"));
+      closeOverlay("menu");
     } else {
       animateToX();
       window.dispatchEvent(new CustomEvent("burger-opened"));
       // On mobile, the booklet covers the bookmark/logo area — ContentScaler should
       // also blur Logo + Landing search pill (extended mode). On desktop, keep TopNav
       // sharp because it slides in as the burger nav.
-      window.dispatchEvent(
-        new CustomEvent("menu-opened", { detail: isMobile ? { extended: true } : {} })
-      );
+      // Über den Controller öffnen → schließt ggf. ein anderes Overlay (Blur bleibt).
+      openOverlay("menu", isMobile ? { extended: true } : {});
     }
   }, [animateToX, animateToBurger, hideAsX, isMobile]);
 
@@ -351,6 +367,9 @@ export default function BookmarkNav() {
   const openSearch = useCallback(() => {
     if (searchOpen.current) return;
     searchOpen.current = true;
+
+    // Logo (Mobile) ausbluren, damit das breiter werdende Bookmark es nicht überlappt.
+    window.dispatchEvent(new CustomEvent("search-opened"));
 
     const pill = searchPillRef.current;
     const body = bodyRef.current;
@@ -398,6 +417,9 @@ export default function BookmarkNav() {
   const closeSearch = useCallback(() => {
     if (!searchOpen.current) return;
     searchOpen.current = false;
+
+    // Logo wieder einbluren.
+    window.dispatchEvent(new CustomEvent("search-closed"));
 
     const pill = searchPillRef.current;
     const body = bodyRef.current;

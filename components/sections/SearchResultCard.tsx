@@ -1,33 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { Post } from "@/lib/types";
 import { isMainCategory } from "@/lib/categories";
-import InlineSVG from "@/components/ui/InlineSVG";
-import { useArticlePreview } from "@/components/sections/ArticlePreviewProvider";
-import { useSliderPreviewContext } from "@/components/sections/ArticleSliderContext";
+import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
+import { captureTextItem, captureVisualItem, hideSourceEls } from "@/lib/morphCapture";
 
 type Props = {
   post: Post;
-  index?: number;
-  registerRef?: (el: HTMLElement | null) => void;
 };
 
-export default function SearchResultCard({ post, index, registerRef }: Props) {
-  const [infoHovered, setInfoHovered] = useState(false);
+export default function SearchResultCard({ post }: Props) {
   const cardRef = useRef<HTMLElement>(null);
-  const { openPreview, prefetchExtras, isOpen } = useArticlePreview();
-  const sliderCtx = useSliderPreviewContext();
+  const imageRef = useRef<HTMLDivElement>(null);
+  const boldRef = useRef<HTMLParagraphElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
-
-  // Register card root with parent grid (so its slider context can resolve
-  // getCardEl(index) → DOM node for FLIP morphing).
-  useEffect(() => {
-    if (!registerRef) return;
-    registerRef(cardRef.current);
-    return () => registerRef(null);
-  }, [registerRef]);
+  const router = useRouter();
 
   const mainCategory = post.categories?.nodes?.find((cat) => isMainCategory(cat.slug));
   const category =
@@ -46,40 +37,51 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
       ? excerpt.slice(0, 200).replace(/\s+\S*$/, "") + " …"
       : excerpt;
 
-  const triggerPreview = () => {
-    if (isOpen) return;
-    if (sliderCtx && typeof index === "number") {
-      openPreview({ ctx: sliderCtx, currentIndex: index });
-    } else if (cardRef.current) {
-      openPreview({ post, cardEl: cardRef.current });
+  const prefetchArticle = () => {
+    try { router.prefetch(postLink); } catch { /* noop */ }
+  };
+
+  const startMorph = () => {
+    const items: MorphItemSource[] = [];
+    const visual = captureVisualItem(imageRef.current, post.featuredImage?.node?.sourceUrl);
+    if (visual) items.push(visual);
+    if (sublineText) {
+      const bold = captureTextItem(boldRef.current, "bold");
+      if (bold) items.push(bold);
+      const italic = captureTextItem(sublineRef.current, "italic");
+      if (italic) items.push(italic);
+    } else {
+      const italic = captureTextItem(boldRef.current, "italic");
+      if (italic) items.push(italic);
     }
+    hideSourceEls(imageRef.current, boldRef.current, sublineRef.current);
+    startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLElement>) => {
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
-    prefetchExtras(post.slug);
+    prefetchArticle();
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLElement>) => {
     const start = pointerStartRef.current;
     pointerStartRef.current = null;
     if (!start) return;
-    if (isOpen) return;
     const dx = e.clientX - start.x;
     const dy = e.clientY - start.y;
     if (dx * dx + dy * dy > 36) return; // > 6px → treat as drag, ignore
     const target = e.target as HTMLElement;
     if (target.closest(".article-read-link")) return; // let the link handle nav
-    triggerPreview();
+    startMorph();
   };
 
   return (
     <article
       ref={cardRef}
-      data-flip-id={`preview-${post.slug}-box`}
+      data-morph-card={post.slug}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onMouseEnter={() => prefetchExtras(post.slug)}
+      onMouseEnter={prefetchArticle}
       style={{
         position: "relative",
         display: "flex",
@@ -92,7 +94,8 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
     >
       {/* Visual */}
       <div
-        data-flip-id={`preview-${post.slug}-image`}
+        ref={imageRef}
+        data-morph-role="visual"
         style={{
           position: "relative",
           width: "100%",
@@ -101,8 +104,7 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
         }}
       >
         <div
-          data-card-image-bg
-          style={{ position: "absolute", inset: 0, overflow: "hidden", background: "var(--color-placeholder-bg)" }}
+          style={{ position: "absolute", inset: 0, overflow: "hidden", background: post.featuredImage?.node?.sourceUrl ? "transparent" : "var(--color-placeholder-bg)" }}
         >
           {post.featuredImage?.node?.sourceUrl && (
             <img
@@ -124,7 +126,6 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
         {/* Category top-left */}
         {category && (
           <span
-            data-card-category
             style={{
               position: "absolute",
               top: 13,
@@ -146,45 +147,8 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
         )}
       </div>
 
-      {/* Info-i — outside the visual flip target, sits across the boundary like
-          SlideArticleCard does. Click triggers the same preview as card click. */}
-      <div
-        data-card-info
-        onMouseEnter={() => setInfoHovered(true)}
-        onMouseLeave={() => setInfoHovered(false)}
-        onClick={(e) => {
-          e.stopPropagation();
-          triggerPreview();
-        }}
-        role="button"
-        aria-label="Vorschau öffnen"
-        style={{
-          position: "absolute",
-          top: 161,
-          right: 13,
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          border: infoHovered ? "none" : "1px solid var(--color-text-primary)",
-          background: infoHovered ? "var(--color-text-primary)" : "transparent",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-          zIndex: 3,
-          transition: "background 0.15s, border 0.15s",
-          ["--fill-0" as string]: infoHovered
-            ? "#ffffff"
-            : "var(--color-text-primary)",
-        }}
-      >
-        <InlineSVG src="/icons/info_i.svg" alt="Info" style={{ width: 9, height: 17 }} />
-      </div>
-
       {/* Text */}
       <div
-        data-card-text
         style={{
           padding: "13px 0 0",
           display: "flex",
@@ -193,6 +157,8 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
       >
         {sublineText && (
           <p
+            ref={sublineRef}
+            data-morph-role="italic"
             lang="de"
             style={{
               fontFamily: "Merriweather, serif",
@@ -207,6 +173,8 @@ export default function SearchResultCard({ post, index, registerRef }: Props) {
           </p>
         )}
         <p
+          ref={boldRef}
+          data-morph-role={sublineText ? "bold" : "italic"}
           lang="de"
           style={{
             fontFamily: "Merriweather, serif",

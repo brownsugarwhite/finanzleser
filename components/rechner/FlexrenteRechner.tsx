@@ -40,6 +40,7 @@ export default function FlexrenteRechner() {
           onChange={(val) => setParams((p) => ({ ...p, entgeltpunkte: val }))}
           einheit="EP"
           min={0}
+          max={80}
           step={0.5}
         />
 

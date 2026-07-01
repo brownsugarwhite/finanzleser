@@ -7,29 +7,44 @@ import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import MegaMenu, { type PreloadedData } from "./MegaMenu";
 import MobileMegaMenu from "./MobileMegaMenu";
 import TopNav from "./TopNav";
+import { setActiveOverlay, closeOverlay, registerOverlayCloser, getActiveOverlay } from "@/lib/overlayController";
 
 type MegaMenuCache = PreloadedData;
 
-export default function MegaMenuWrapper() {
-  const isMobile = useIsMobile();
-  if (isMobile) return <MobileMegaMenu />;
-  return <DesktopMegaMenuWrapper />;
+// Punkt 5: überlebt den Remount beim Breakpoint-Wechsel (Mobile↔Desktop), damit
+// das Desktop-Megamenü nach dem Wechsel wieder die zuletzt offene Kategorie zeigt.
+let persistedCategory: string | null = null;
+
+export default function MegaMenuWrapper({ preloaded = {} }: { preloaded?: PreloadedData }) {
+  const isMobile = useIsMobile(1024); // Mobile-Megamenü ab ≤1024px
+  if (isMobile) return <MobileMegaMenu preloaded={preloaded} />;
+  return <DesktopMegaMenuWrapper preloaded={preloaded} />;
 }
 
-function DesktopMegaMenuWrapper() {
+function DesktopMegaMenuWrapper({ preloaded }: { preloaded: PreloadedData }) {
   const NAV_ITEMS = useNavItems();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [openedViaBurger, setOpenedViaBurger] = useState(false);
   const [visible, setVisible] = useState(false);
+  // Bleibt während der Schließ-Animation true, damit das Booklet ausfaden kann
+  // (statt hart zu unmounten) — symmetrisch zum Einfaden.
+  const [shouldRender, setShouldRender] = useState(false);
+  // Eingefrorene Werte fürs Ausfaden: während offen aktualisiert, beim Schließen
+  // beibehalten → kein Layout-Sprung (top/Burger-Nav/Kategorie) während des Fades.
+  const closeFreezeRef = useRef<{ category: string | null; burger: boolean }>({ category: null, burger: false });
   const wrapperRef = useRef<HTMLDivElement>(null);
   const burgerNavRef = useRef<HTMLDivElement>(null);
-  const [cache, setCache] = useState<MegaMenuCache>({});
+  // Mit SSG-Preload aus dem Layout vorbefüllt → Megamenü ist ab erstem Pageload sofort
+  // befüllt, ohne Laufzeit-API (umgeht auch evtl. verschmutzten Edge-Cache).
+  const [cache, setCache] = useState<MegaMenuCache>(preloaded);
+  const hasPreload = Object.keys(preloaded).length > 0;
 
   // Track last open category so burger can reopen it
   const lastCategoryRef = useRef<string | null>(null);
 
   // Preload first subcategory of each category at page load
   useEffect(() => {
+    if (hasPreload) return; // SSG-Preload deckt alle Subs ab → kein Laufzeit-Preload nötig
     const firstSubs = NAV_ITEMS.map(item => (item.submenu || [])[0]?.href).filter(Boolean);
     const getCategorySlug = (href: string) => href.split("/").filter(Boolean).pop() || "";
 
@@ -42,17 +57,40 @@ function DesktopMegaMenuWrapper() {
             fetch(`/api/megamenu/posts?category=${slug}`),
             fetch(`/api/megamenu/tools?category=${slug}`),
           ]);
-          const postsData = postsRes.ok ? await postsRes.json() : { posts: [], hasMore: false };
+          // Posts-Fehler (WP 500/Timeout) → NICHT cachen, sonst „lädt nie mehr".
+          // Der nächste Menü-Open/Sub-Wechsel versucht es dann erneut.
+          if (!postsRes.ok) return;
+          const postsData = await postsRes.json();
           const toolsData = toolsRes.ok ? await toolsRes.json() : [];
           results[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
         } catch {
-          results[href] = { posts: [], hasMore: false, tools: [] };
+          // skip → nicht cachen
         }
       }));
       setCache(results);
     };
 
-    loadFirstSubs();
+    // Nicht sofort beim Page-Load feuern — sonst konkurriert dieser Burst (~10-16
+    // parallele WP-Fetches) mit den GraphQL-Calls der eigentlichen Seite und lässt
+    // das (langsame) WP-Backend einbrechen. In die Idle-Zeit verschieben.
+    let cancelled = false;
+    const run = () => { if (!cancelled) loadFirstSubs(); };
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (h: number) => void;
+    };
+    let idleHandle: number | undefined;
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
+    if (w.requestIdleCallback) {
+      idleHandle = w.requestIdleCallback(run, { timeout: 4000 });
+    } else {
+      timeoutHandle = setTimeout(run, 1800);
+    }
+    return () => {
+      cancelled = true;
+      if (idleHandle !== undefined && w.cancelIdleCallback) w.cancelIdleCallback(idleHandle);
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+    };
   }, [NAV_ITEMS]);
 
   useEffect(() => {
@@ -92,12 +130,23 @@ function DesktopMegaMenuWrapper() {
     };
   }, [NAV_ITEMS]);
 
-  // Remember last open category
+  // Remember last open category (instanz- + modulweit für Remount-Persistenz)
   useEffect(() => {
     if (openCategory) {
       lastCategoryRef.current = openCategory;
+      persistedCategory = openCategory;
     }
   }, [openCategory]);
+
+  // Punkt 5: Beim Mounten (Resize Mobile→Desktop über 1000px) das Menü wieder
+  // öffnen, wenn das Overlay aktiv ist → kein Verschwinden beim Breakpoint-Wechsel.
+  useEffect(() => {
+    if (getActiveOverlay() === "menu") {
+      setOpenedViaBurger(true);
+      setOpenCategory(persistedCategory || lastCategoryRef.current || NAV_ITEMS[0]?.label || null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Slide in burger TopNav
   useEffect(() => {
@@ -112,6 +161,19 @@ function DesktopMegaMenuWrapper() {
 
   const isOpen = !!openCategory;
 
+  // Overlay-Controller: Inhalts-Closer registrieren (Handoff schließt das Menü
+  // ohne Blur-Toggle) und das Menü als aktives Overlay markieren, solange offen.
+  useEffect(() => {
+    const unregister = registerOverlayCloser("menu", () => {
+      setOpenCategory(null);
+      setOpenedViaBurger(false);
+    });
+    return unregister;
+  }, []);
+  useEffect(() => {
+    if (isOpen) setActiveOverlay("menu");
+  }, [isOpen]);
+
   // Close on outside click
   useEffect(() => {
     if (!isOpen) return;
@@ -123,7 +185,7 @@ function DesktopMegaMenuWrapper() {
       if (wrapperRef.current && !wrapperRef.current.contains(target)) {
         setOpenCategory(null);
         setOpenedViaBurger(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("menu");
       }
     };
 
@@ -141,13 +203,20 @@ function DesktopMegaMenuWrapper() {
   // Fade in only on first open, not on category switch
   useEffect(() => {
     if (isOpen) {
+      setShouldRender(true);
       if (!visible) {
         const timer = setTimeout(() => setVisible(true), 200);
         return () => clearTimeout(timer);
       }
     } else {
       setVisible(false);
+      // Booklet noch gemountet lassen, bis die Opacity-Transition (0.5s) durch ist.
+      if (shouldRender) {
+        const timer = setTimeout(() => setShouldRender(false), 520);
+        return () => clearTimeout(timer);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   // Lock scroll when open
@@ -167,22 +236,30 @@ function DesktopMegaMenuWrapper() {
       if (e.key === "Escape") {
         setOpenCategory(null);
         setOpenedViaBurger(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("menu");
       }
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  // Während offen: aktuelle Werte einfrieren, damit das Ausfaden (openCategory→null)
+  // weiterhin Inhalt/Position zeigt statt hart zu verschwinden.
+  if (isOpen) {
+    closeFreezeRef.current = { category: openCategory, burger: openedViaBurger };
+  }
+  const renderCategory = isOpen ? openCategory : closeFreezeRef.current.category;
+  const renderBurger = isOpen ? openedViaBurger : closeFreezeRef.current.burger;
 
-  const activeItem = NAV_ITEMS.find((n) => n.label === openCategory);
+  if (!shouldRender) return null;
+
+  const activeItem = NAV_ITEMS.find((n) => n.label === renderCategory);
   if (!activeItem?.submenu) return null;
 
   const closeAll = () => {
     setOpenCategory(null);
     setOpenedViaBurger(false);
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("menu");
   };
 
   return (
@@ -192,14 +269,15 @@ function DesktopMegaMenuWrapper() {
         position: "fixed",
         left: 0,
         right: 0,
-        top: openedViaBurger ? 0 : 73,
+        top: renderBurger ? 0 : 73,
         zIndex: 57,
         opacity: visible ? 1 : 0,
         transition: "opacity 0.5s ease",
+        pointerEvents: isOpen ? "auto" : "none",
       }}
     >
       {/* Burger TopNav – slides in from top when opened via burger */}
-      {openedViaBurger && (
+      {renderBurger && (
         <div
           ref={burgerNavRef}
           style={{
@@ -213,7 +291,7 @@ function DesktopMegaMenuWrapper() {
         >
           <TopNav
             className="burger-nav"
-            defaultActive={openCategory || undefined}
+            defaultActive={renderCategory || undefined}
             style={{
               position: "relative",
               zIndex: 3,
@@ -225,7 +303,7 @@ function DesktopMegaMenuWrapper() {
       )}
 
       {/* Megamenu content */}
-      <div style={openedViaBurger ? { marginTop: -10 } : undefined}>
+      <div style={renderBurger ? { marginTop: -10 } : undefined}>
         <MegaMenu
           activeCategory={activeItem.href.substring(1)}
           activeCategoryLabel={activeItem.label}

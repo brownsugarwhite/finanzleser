@@ -79,6 +79,25 @@ export default function QuickAccessButtons() {
         .quick-access__item:hover .quick-access__label {
           color: var(--color-brand-secondary);
         }
+        /* Mobile: EINE Reihe (horizontal scrollbar-los scrollbar), Label 2px kleiner. */
+        @media (max-width: 767px) {
+          .quick-access {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            gap: 6px;
+            padding: 0 12px;
+          }
+          .quick-access::-webkit-scrollbar { display: none; }
+          .quick-access__item {
+            flex: 0 0 76px;
+            width: 76px;
+            padding: 8px 2px;
+          }
+          .quick-access__label { font-size: 12px; }
+        }
       `}</style>
     </nav>
   );

@@ -1,14 +1,76 @@
+import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings } from "./types";
-import { decodePostContent } from "./html-utils";
+import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
+import { decodePostContent, decodeHtmlEntities } from "./html-utils";
+import { extractArticleHeader } from "./articleHeader";
+import { detectToolTypes } from "./content-utils";
+import { stripHtml } from "./seo";
+
+export interface LatestTool {
+  type: "rechner" | "checkliste" | "vergleich";
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+/**
+ * Konvention v2 (Struktur-Migration): Der Karten-/Preview-Untertitel ist der Kicker
+ * = 1. Content-<h2> (= article-subtitle auf der Beitragsseite → kohärenter Morph).
+ * Das alte ACF-Feld beitragUntertitel ist veraltet; hier mit dem Content-h2
+ * überschreiben (ACF bleibt Fallback, wenn kein Content-h2 vorhanden). `content`
+ * wird NICHT an den Client durchgereicht (Payload schlank halten).
+ * WICHTIG: nach dem ACF-Mapping aufrufen, damit es den stale Wert überschreibt.
+ * Mutiert + liefert denselben Post zurück.
+ */
+function applyContentHeaderTitle(post: Post & { content?: string }): Post {
+  const header = extractArticleHeader(post.content);
+  if (header?.subtitle) {
+    post.beitragFelder = { ...post.beitragFelder, beitragUntertitel: header.subtitle };
+  }
+  if ("content" in post) delete (post as { content?: string }).content;
+  return post;
+}
 
 function getClient(revalidate: number = 3600): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
   if (!endpoint) throw new Error("WORDPRESS_API_URL ist nicht gesetzt");
-  return new GraphQLClient(endpoint, {
+  const client = new GraphQLClient(endpoint, {
     fetch: globalThis.fetch,
     next: { revalidate },
   });
+
+  // Retry mit Backoff bei transienten WP-Fehlern. IONOS-Shared-Hosting wirft
+  // unter Build-Last (456 Seiten parallel) "Error establishing a database
+  // connection" (500) bzw. "temporarily unavailable" (503). Ohne Retry fängt
+  // der jeweilige catch-Block das ab und liefert leeren Content → leere
+  // Slider/Footer/Tools im statischen Build. Mit Retry erholen sich die meisten
+  // Abfragen und der Build wird vollständig.
+  const orig = client.request.bind(client);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (client as any).request = async (...args: unknown[]) => {
+    const MAX = 6;
+    let lastErr: unknown;
+    for (let attempt = 0; attempt < MAX; attempt++) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return await (orig as any)(...args);
+      } catch (e: unknown) {
+        lastErr = e;
+        const status = (e as { response?: { status?: number } })?.response?.status;
+        // Transient = 5xx ODER Netzwerkfehler ohne Response (ECONNRESET / "fetch failed" /
+        // Timeout). Letztere hatte die alte Logik NICHT abgedeckt → Build-Seiten fielen bei
+        // IONOS-Connection-Resets sofort aus (= unvollständige SSG / gebackene 404).
+        const hasResponse = !!(e as { response?: unknown })?.response;
+        const transient = !hasResponse || (typeof status === "number" && status >= 500);
+        if (!transient || attempt === MAX - 1) throw e;
+        // Progressiver Backoff (500ms..3s) — gibt der IONOS-DB unter Build-Last Luft.
+        await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+      }
+    }
+    throw lastErr;
+  };
+  return client;
 }
 
 // ─────────────────────────────────────────────
@@ -16,6 +78,9 @@ function getClient(revalidate: number = 3600): GraphQLClient {
 // ─────────────────────────────────────────────
 
 export async function getAllPosts(): Promise<Post[]> {
+  return buildMemo("allPosts", _fetchAllPosts);
+}
+async function _fetchAllPosts(): Promise<Post[]> {
   const client = getClient();
 
   const query = gql`
@@ -65,6 +130,7 @@ export async function getAllPosts(): Promise<Post[]> {
     after = data.posts.pageInfo.endCursor;
   }
 
+  requireNonEmpty("allPosts", allNodes);
   return allNodes.map(post => {
     const decoded = decodePostContent(post);
     if (post.beitrag?.untertitel) {
@@ -90,6 +156,7 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
           slug
           date
           excerpt
+          content
           featuredImage {
             node {
               sourceUrl
@@ -112,18 +179,23 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
     }>(query, { limit });
-    return data.posts.nodes.map((post) => {
+    const mapped = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
-      return decoded;
+      // Eingebettete Tools aus dem Content ableiten, BEVOR applyContentHeaderTitle ihn strippt.
+      const tools = detectToolTypes(post.content);
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (Kicker); überschreibt das
+      // veraltete ACF-Feld, danach content aus dem Payload entfernen.
+      return { ...applyContentHeaderTitle(decoded), tools };
     });
+    return requireNonEmpty("latestPosts", mapped);
   } catch (error) {
     console.error("Error fetching latest posts:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -147,6 +219,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
           slug
           date
           excerpt
+          content
           featuredImage {
             node {
               sourceUrl
@@ -169,7 +242,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] };
+      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
     }>(query, { search: searchQuery });
     const posts = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
@@ -179,7 +252,8 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
           beitragUntertitel: post.beitrag.untertitel,
         };
       }
-      return decoded;
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+      return applyContentHeaderTitle(decoded);
     });
     return rankByRelevance(posts, searchQuery);
   } catch (error) {
@@ -235,7 +309,22 @@ function rankByRelevance(posts: Post[], query: string): Post[] {
 // Beiträge nach Kategorie
 // ─────────────────────────────────────────────
 
-export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
+export const getPostsByCategory = cache(async (categorySlug: string): Promise<Post[]> => {
+  // Build: aus der Posts-Bulk-Map ableiten statt pro Subkategorie (~158) einzeln abzufragen.
+  if (IS_BUILD) {
+    const map = await getAllPostsMap();
+    const out: Post[] = [];
+    for (const p of map.values()) {
+      if (p.categories?.nodes?.some((c) => c.slug === categorySlug)) {
+        const tools = detectToolTypes((p as Post & { content?: string }).content);
+        // Klonen — applyContentHeaderTitle mutiert (strippt content) → Map-Eintrag nicht korrumpieren.
+        const clone = { ...p, beitragFelder: { ...p.beitragFelder } } as Post & { content?: string };
+        out.push({ ...applyContentHeaderTitle(clone), tools });
+      }
+    }
+    if (out.length > 0) return out;
+    // leer → Kategorie ohne Posts (oder Slug nicht in Map) → Einzelabfrage als Fallback.
+  }
   const client = getClient();
 
   const query = gql`
@@ -249,6 +338,7 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
               slug
               date
               excerpt
+              content
               featuredImage {
                 node {
                   sourceUrl
@@ -274,7 +364,7 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
   try {
     const data = await client.request<{
       categories: {
-        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[] } }>
+        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] } }>
       }
     }>(query, {
       slug: [categorySlug],
@@ -288,13 +378,16 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
           beitragUntertitel: post.beitrag.untertitel,
         };
       }
-      return decoded;
+      // Eingebettete Tools ableiten, BEVOR applyContentHeaderTitle den Content strippt.
+      const tools = detectToolTypes(post.content);
+      // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+      return { ...applyContentHeaderTitle(decoded), tools };
     });
   } catch (error) {
     console.error(`Error fetching posts for category "${categorySlug}":`, error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leere Kategorie zu cachen
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Einzelner Beitrag mit ACF-Feldern
@@ -303,7 +396,7 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
 export async function getMegamenuPostsByCategory(
   categorySlug: string,
   limit = 3
-): Promise<Array<Post & { tools: ("rechner" | "checkliste" | "vergleich")[] }>> {
+): Promise<Array<Post & { tools: ("rechner" | "checkliste" | "vergleich" | "dokumente")[] }>> {
   const client = getClient();
   const query = gql`
     query GetMegamenuPosts($slug: [String!]!, $first: Int!) {
@@ -338,13 +431,16 @@ export async function getMegamenuPostsByCategory(
       if (post.beitrag?.untertitel) {
         decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
       }
+      // tools VOR dem Strippen aus dem Content ableiten.
       const content = post.content || "";
-      const tools: ("rechner" | "checkliste" | "vergleich")[] = [];
+      const tools: ("rechner" | "checkliste" | "vergleich" | "dokumente")[] = [];
       if (/wp:finanzleser\/rechner|data-finanzleser-rechner/.test(content)) tools.push("rechner");
       if (/wp:finanzleser\/vergleich|data-finanzleser-vergleich/.test(content)) tools.push("vergleich");
       if (/wp:finanzleser\/checkliste|data-finanzleser-checkliste/.test(content)) tools.push("checkliste");
-      const { content: _omit, ...withoutContent } = decoded;
-      return { ...withoutContent, tools };
+      if (/wp:finanzleser\/dokumente|data-finanzleser-dokumente/.test(content)) tools.push("dokumente");
+      // Konvention v2: Untertitel = 1. Content-<h2> (überschreibt stale ACF) + strippt content.
+      applyContentHeaderTitle(decoded);
+      return { ...decoded, tools };
     });
   } catch (error) {
     console.error(`Error fetching megamenu posts for "${categorySlug}":`, error);
@@ -352,7 +448,254 @@ export async function getMegamenuPostsByCategory(
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+export type MegamenuTool = { type: "rechner" | "vergleich" | "checkliste"; slug: string; title: string };
+
+// Die 3 neuesten Finanztools, die in den Beiträgen einer Subkategorie eingebaut
+// sind (neueste Beiträge zuerst). Ein Tool darf max. 2× erscheinen. Vollautomatisch
+// aus dem Beitrags-Content — keine Backend-Pflege nötig. Verlinkung nach Typ.
+export async function getMegamenuToolsByCategory(categorySlug: string): Promise<MegamenuTool[]> {
+  return buildMemo(`mmtools:${categorySlug}`, () => _fetchMegamenuToolsByCategory(categorySlug));
+}
+async function _fetchMegamenuToolsByCategory(categorySlug: string): Promise<MegamenuTool[]> {
+  const client = getClient();
+  const postsQuery = gql`
+    query GetCatPostContents($slug: [String!]!) {
+      categories(where: { slug: $slug }) {
+        nodes {
+          posts(first: 25, where: { orderby: { field: DATE, order: DESC } }) {
+            nodes { content }
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{
+      categories: { nodes: Array<{ posts: { nodes: Array<{ content?: string }> } }> };
+    }>(postsQuery, { slug: [categorySlug] });
+    const posts = data.categories.nodes[0]?.posts.nodes || [];
+
+    const counts = new Map<string, number>();
+    const picked: Array<{ type: "rechner" | "vergleich" | "checkliste"; slug: string }> = [];
+    for (const p of posts) {
+      // Regex PRO Beitrag neu erzeugen — sonst trägt lastIndex (g-Flag) über
+      // verschiedene content-Strings hinweg und überspringt Treffer.
+      const embedRe = /data-finanzleser-(rechner|vergleich|checkliste)="([^"]+)"|wp:finanzleser\/(rechner|vergleich|checkliste)\s*\{"slug":"([^"]+)"\}/g;
+      const content = p.content || "";
+      let m: RegExpExecArray | null;
+      while ((m = embedRe.exec(content)) !== null) {
+        const type = (m[1] || m[3]) as "rechner" | "vergleich" | "checkliste";
+        const slug = m[2] || m[4];
+        if (!type || !slug) continue;
+        const key = `${type}:${slug}`;
+        const c = counts.get(key) || 0;
+        if (c >= 2) continue; // dasselbe Tool max. 2×
+        counts.set(key, c + 1);
+        picked.push({ type, slug });
+        if (picked.length >= 3) break;
+      }
+      if (picked.length >= 3) break;
+    }
+    if (picked.length === 0) return [];
+
+    // Titel pro Tool auflösen (aliased Single-Node-Queries je CPT-Typ).
+    const fieldFor = (t: string) => (t === "rechner" ? "rechnerBy" : t === "checkliste" ? "checklisteBy" : "vergleichBy");
+    const aliases = picked
+      .map((e, i) => `t${i}: ${fieldFor(e.type)}(slug: ${JSON.stringify(e.slug)}) { title slug }`)
+      .join("\n");
+    try {
+      const titleData = await client.request<Record<string, { title?: string } | null>>(`query { ${aliases} }`);
+      return picked.map((e, i) => ({ ...e, title: titleData[`t${i}`]?.title || e.slug }));
+    } catch {
+      // Titel-Auflösung fehlgeschlagen → Slug als Fallback-Titel (Links bleiben korrekt).
+      return picked.map((e) => ({ ...e, title: e.slug }));
+    }
+  } catch (error) {
+    console.error(`Error fetching megamenu tools for "${categorySlug}":`, error);
+    if (IS_BUILD) throw error; // Build: nicht leer backen → buildResilient/Memo wiederholt
+    return [];
+  }
+}
+
+// ── Megamenü-Preload (SSG) ──
+// Alle Subkategorien (Posts + Tools) serverseitig bündeln → ins Layout backen, sodass
+// das Megamenü ab dem ersten Pageload SOFORT befüllt ist (kein Laufzeit-API-Fetch, keine
+// Abhängigkeit vom evtl. verschmutzten Edge-Cache). Posts kommen beim Build aus der
+// resilient geladenen Posts-Map (getPostsByCategory), Tools resilient + memoisiert.
+export type MegamenuPreload = Record<
+  string,
+  { posts: (Post & { tools?: ("rechner" | "vergleich" | "checkliste" | "dokumente")[] })[]; hasMore: boolean; tools: MegamenuTool[] }
+>;
+export async function getMegamenuPreload(limit = 3): Promise<MegamenuPreload> {
+  const navItems = await getNavItems();
+  const subs = navItems.flatMap((item) =>
+    (item.submenu || []).map((s) => ({ href: s.href, slug: s.href.split("/").filter(Boolean).pop() || "" }))
+  );
+  const result: MegamenuPreload = {};
+  await Promise.all(
+    subs.map(async ({ href, slug }) => {
+      try {
+        const [posts, tools] = await Promise.all([
+          getPostsByCategory(slug),
+          getMegamenuToolsByCategory(slug),
+        ]);
+        result[href] = { posts: posts.slice(0, limit), hasMore: posts.length > limit, tools };
+      } catch (e) {
+        console.error(`[getMegamenuPreload] ${slug} failed:`, e);
+        // Einzelne Subkategorie ausgelassen → Megamenü fällt dort auf den Laufzeit-Fetch zurück.
+      }
+    })
+  );
+  return result;
+}
+
+// Schlanke Query nur für die Artikel-Vorschau (erster Absatz, Lesezeit, Tools).
+// getPostBySlug zieht Autor, alle Kategorien + ACF — overkill für die Preview
+// und spürbar langsamer. Hier nur content laden → schnellerer Roundtrip, kürzeres
+// Skeleton im Vorschauslider.
+export async function getPostContentBySlug(slug: string): Promise<string | null> {
+  const client = getClient();
+  const query = gql`
+    query GetPostContent($slug: String!) {
+      posts(where: { name: $slug }) {
+        nodes {
+          content
+        }
+      }
+    }
+  `;
+  try {
+    const data = await client.request<{ posts: { nodes: Array<{ content?: string }> } }>(query, { slug });
+    const node = data.posts.nodes[0];
+    if (!node) return null;
+    return node.content || "";
+  } catch (error) {
+    console.error(`Error fetching post content for "${slug}":`, error);
+    return null;
+  }
+}
+
+// ── Build-Bulk ──
+// Beim SSG-Build alle Standard-Posts MIT content in ~8 gebündelten Abfragen holen statt
+// 200+ Einzel-getPostBySlug → IONOS-Shared-Hosting wird nicht überlastet (verhindert die
+// reihenweise gebackenen notFound()-404). Modul-Memo = pro Build-Worker-Prozess EINMAL.
+// Zur LAUFZEIT (on-demand/ISR) NICHT genutzt → dort frische Einzelabfrage.
+function getAllPostsMap(): Promise<Map<string, Post>> {
+  return buildMemo("postsMap", buildPostsMap);
+}
+async function buildPostsMap(): Promise<Map<string, Post>> {
+  const client = getClient();
+  const query = gql`
+    query BulkPosts($after: String) {
+      posts(first: 25, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id title slug date content excerpt
+          featuredImage { node { sourceUrl altText } }
+          author { node { id name firstName lastName description avatar { url } } }
+          categories { nodes { name slug } }
+          beitrag { untertitel featuredTool }
+        }
+      }
+    }
+  `;
+  type BulkPostsResponse = {
+    posts: { nodes: (Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+  };
+  const map = new Map<string, Post>();
+  let after: string | null = null;
+  let hasNext = true;
+  let guard = 0;
+  while (hasNext && guard++ < 60) {
+    try {
+      const data: BulkPostsResponse = await client.request<BulkPostsResponse>(query, { after });
+      for (const node of data.posts.nodes) {
+        const decoded = decodePostContent(node) as Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } };
+        if (node.beitrag) {
+          decoded.beitragFelder = { beitragUntertitel: node.beitrag.untertitel, beitragFeaturedTool: node.beitrag.featuredTool };
+        }
+        if (decoded.slug) map.set(decoded.slug, decoded);
+      }
+      hasNext = data.posts.pageInfo.hasNextPage;
+      after = data.posts.pageInfo.endCursor;
+    } catch (e) {
+      // NICHT mit Teil-Map weiterlaufen (sonst 404 für alle restlichen Posts) — Fehler
+      // hochreichen, damit buildResilient den GANZEN Vorgang wiederholt.
+      console.error("[buildPostsMap] chunk failed → retry whole bulk:", e);
+      throw e;
+    }
+  }
+  if (map.size === 0) throw new Error("[buildPostsMap] leere Map beim Build (transient) → Retry");
+  console.log(`[buildPostsMap] ${map.size} Posts gebündelt geladen`);
+  return map;
+}
+
+const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
+
+// ── Build-Memo ──
+// Beim SSG-Build dieselbe getAll*-Abfrage NICHT pro Seite neu feuern, sondern pro
+// Worker-Prozess EINMAL (z.B. getAllVergleiche wird sonst von jeder der 42 Detailseiten
+// erneut geholt). Zur LAUFZEIT (ISR/on-demand) kein Memo → frische Daten.
+const _sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Wiederholt einen GANZEN Bulk-Vorgang beim Build bis zu 5× mit Backoff. So überlebt der
+// Build einen kurzen IONOS-„Error establishing a database connection"-Burst, statt mit
+// Teildaten weiterzulaufen (→ gebackene 404). Erst danach Fehler hochreichen.
+async function buildResilient<T>(label: string, fn: () => Promise<T>): Promise<T> {
+  let lastErr: unknown;
+  for (let i = 0; i < 5; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      console.error(`[buildResilient ${label}] Versuch ${i + 1}/5 fehlgeschlagen`);
+      await _sleep(2000 * (i + 1));
+    }
+  }
+  throw lastErr;
+}
+
+// Ein LEERES Ergebnis dieser „immer befüllten" Sammlungen ist praktisch immer ein
+// transienter WP-Aussetzer (200 mit leeren Daten unter IONOS-Last), KEIN echter Leerstand.
+// IMMER werfen — beim Build UND zur Laufzeit:
+//  - Build: buildResilient/Memo wiederholt, statt „leer" statisch zu backen.
+//  - Laufzeit (ISR-Revalidierung): Next.js verwirft die fehlgeschlagene Regenerierung und
+//    behält den letzten guten Stand, statt eine leere Seite zu cachen (z.B. „Keine Checklisten").
+// Ohne diesen Schutz blieb eine leere ISR-Antwort bis zu 1 h am Frontend hängen.
+function requireNonEmpty<T extends { length: number }>(label: string, v: T): T {
+  if (v.length === 0) {
+    throw new Error(`[${label}] leeres Ergebnis (vermutlich transienter WP-Aussetzer) → kein Leer-Cache`);
+  }
+  return v;
+}
+
+const _buildMemo = new Map<string, Promise<unknown>>();
+function buildMemo<T>(key: string, fn: () => Promise<T>): Promise<T> {
+  if (!IS_BUILD) return fn();
+  let p = _buildMemo.get(key) as Promise<T> | undefined;
+  if (!p) {
+    // Resilient + Fehlschläge NICHT cachen (sonst poisoned ein einmaliger Aussetzer alle Seiten).
+    p = buildResilient(key, fn).catch((e) => {
+      _buildMemo.delete(key);
+      throw e;
+    });
+    _buildMemo.set(key, p);
+  }
+  return p;
+}
+
+// React.cache → dedupliziert den Doppel-Aufruf aus generateMetadata + Page-Component.
+// Beim Build aus der Bulk-Map (1 Fetch/Worker), zur Laufzeit per Einzelabfrage (frisch).
+export const getPostBySlug = cache(async (slug: string): Promise<Post | null> => {
+  if (IS_BUILD) {
+    const hit = (await getAllPostsMap()).get(slug);
+    if (hit) return hit;
+    // Nicht in der Bulk-Map (z.B. CPT/Legacy-Slug) → Einzelabfrage.
+  }
+  return getPostBySlugSingle(slug);
+});
+
+async function getPostBySlugSingle(slug: string): Promise<Post | null> {
   const client = getClient();
 
   // Query all post types (standard posts + custom post types like dokumente, nachrichten, etc.)
@@ -396,46 +739,47 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     }
   `;
 
-  try {
-    const data = await client.request<{ posts: { nodes: Post[] } }>(query, { slug });
-    let post = data.posts.nodes[0] || null;
+  // ACF-Felder (Untertitel/Featured-Tool) PARALLEL zur Hauptabfrage holen — beide
+  // hängen nur am slug, kein Waterfall. Custom Post Types haben kein `beitrag` →
+  // .catch(null), das ist ok.
+  const aclQuery = gql`
+    query GetPostACF($slug: String!) {
+      postBy(slug: $slug) {
+        beitrag {
+          untertitel
+          featuredTool
+        }
+      }
+    }
+  `;
 
-    // Dekodiere HTML-Entities
+  try {
+    const [data, aclData] = await Promise.all([
+      client.request<{ posts: { nodes: Post[] } }>(query, { slug }),
+      client
+        .request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug })
+        .catch(() => null),
+    ]);
+
+    let post = data.posts.nodes[0] || null;
     if (post) {
       post = decodePostContent(post);
-    }
-
-    // If it's a regular post, try to fetch ACF fields separately
-    if (post) {
-      const aclQuery = gql`
-        query GetPostACF($slug: String!) {
-          postBy(slug: $slug) {
-            beitrag {
-              untertitel
-              featuredTool
-            }
-          }
-        }
-      `;
-
-      try {
-        const aclData = await client.request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug });
-        if (aclData.postBy?.beitrag) {
-          post.beitragFelder = {
-            beitragUntertitel: aclData.postBy.beitrag.untertitel,
-            beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
-          };
-        }
-      } catch {
-        // ACF fields not available for this post type - that's ok
-        // Custom post types don't have these fields
+      if (aclData?.postBy?.beitrag) {
+        post.beitragFelder = {
+          beitragUntertitel: aclData.postBy.beitrag.untertitel,
+          beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
+        };
       }
     }
 
-    return post;
+    return post; // null = Beitrag existiert genuin nicht → Caller darf notFound()
   } catch (error) {
+    // FETCH-FEHLER ≠ „nicht gefunden". Werfen statt null, damit der Caller KEINEN 404 backt/cacht.
+    // Build: Seite wird von Next wiederholt. Laufzeit: 500 (nicht gecacht) → nächster Request
+    // versucht erneut → self-healing, statt 1 Std lang gecachtem 404. Legacy-Resolver mit
+    // .catch(()=>null) behandeln den Wurf weiterhin als „kein Post".
     console.error(`Error fetching post with slug "${slug}":`, error);
-    return null;
+    throw error;
   }
 }
 
@@ -443,51 +787,51 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 // Hauptkategorie mit Child-Kategorien
 // ─────────────────────────────────────────────
 
-export async function getCategoryWithChildren(categorySlug: string): Promise<{
+export const getCategoryWithChildren = cache(async (categorySlug: string): Promise<{
   name: string;
   slug: string;
   description?: string;
   image?: string;
+  imageWide?: string;
   children: Array<{ name: string; slug: string; count: number; description?: string; image?: string }>;
   posts: Post[];
-} | null> {
+} | null> => {
   const client = getClient();
 
-  // First query: get the main category
-  const mainCategoryQuery = gql`
-    query GetMainCategory($slug: [String!]!) {
+  // EINE verschachtelte Query: Hauptkategorie + Child-Kategorien zusammen — vorher
+  // zwei sequentielle Requests (2. brauchte die databaseId der 1.), jetzt ein
+  // Roundtrip via `children`-Connection.
+  const postFields = `
+    nodes {
+      id
+      title
+      slug
+      date
+      excerpt
+      content
+      featuredImage { node { sourceUrl altText } }
+      categories { nodes { name slug } }
+    }
+  `;
+  const query = gql`
+    query GetCategoryWithChildren($slug: [String!]!) {
       categories(where: { slug: $slug }) {
         nodes {
           databaseId
           name
           slug
           description
-          kategorieFelder {
-            kategorieBild {
-              node {
-                sourceUrl
-              }
-            }
-          }
-          posts(first: 6) {
+          kategorieBildSlider { sourceUrl }
+          kategorieBildWide { sourceUrl }
+          posts(first: 6) { ${postFields} }
+          children(first: 50) {
             nodes {
-              id
-              title
+              name
               slug
-              date
-              excerpt
-              featuredImage {
-                node {
-                  sourceUrl
-                  altText
-                }
-              }
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
+              count
+              description
+              kategorieBildSlider { sourceUrl }
+              posts(first: 6) { ${postFields} }
             }
           }
         }
@@ -503,79 +847,42 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
           name: string;
           slug: string;
           description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
+          kategorieBildSlider?: { sourceUrl: string };
+          kategorieBildWide?: { sourceUrl: string };
           posts: { nodes: Post[] };
+          children: {
+            nodes: Array<{
+              name: string;
+              slug: string;
+              count: number;
+              description?: string;
+              kategorieBildSlider?: { sourceUrl: string };
+              posts: { nodes: Post[] };
+            }>;
+          };
         }>;
       };
-    }>(mainCategoryQuery, {
-      slug: [categorySlug],
-    });
+    }>(query, { slug: [categorySlug] });
 
     const category = categoryData.categories.nodes[0];
     if (!category) return null;
 
-    // Second query: get child categories and their posts
-    const childrenQuery = gql`
-      query GetChildCategories($parent: Int!) {
-        categories(where: { parent: $parent }) {
-          nodes {
-            name
-            slug
-            count
-            description
-            kategorieFelder {
-              kategorieBild {
-                node {
-                  sourceUrl
-                }
-              }
-            }
-            posts(first: 6) {
-              nodes {
-                id
-                title
-                slug
-                date
-                excerpt
-                featuredImage {
-                  node {
-                    sourceUrl
-                    altText
-                  }
-                }
-                categories {
-                  nodes {
-                    name
-                    slug
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
+    const childNodes = category.children?.nodes ?? [];
 
-    const childrenData = await client.request<{
-      categories: {
-        nodes: Array<{
-          name: string;
-          slug: string;
-          count: number;
-          description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
-          posts: { nodes: Post[] };
-        }>;
-      };
-    }>(childrenQuery, {
-      parent: category.databaseId,
-    });
+    // Tools aus dem Content ableiten, dann content aus dem Payload entfernen (schlank halten).
+    const mapPost = (post: Post & { content?: string }): Post => {
+      const tools = detectToolTypes(post.content);
+      const decoded = decodePostContent(post) as Post & { content?: string };
+      // Karten-Untertitel (fetter Text) = 1. Content-<h2> (Konvention v2); löscht danach content.
+      applyContentHeaderTitle(decoded);
+      return { ...decoded, tools };
+    };
 
     // If no direct posts, collect from children
-    let allPosts = category.posts.nodes.map(post => decodePostContent(post));
-    if (allPosts.length === 0 && childrenData.categories.nodes.length > 0) {
-      childrenData.categories.nodes.forEach((child) => {
-        allPosts = allPosts.concat(child.posts.nodes.map(post => decodePostContent(post)));
+    let allPosts = category.posts.nodes.map(mapPost);
+    if (allPosts.length === 0 && childNodes.length > 0) {
+      childNodes.forEach((child) => {
+        allPosts = allPosts.concat(child.posts.nodes.map(mapPost));
       });
       allPosts = allPosts.slice(0, 6); // limit to 6
     }
@@ -584,13 +891,14 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
       name: category.name,
       slug: category.slug,
       description: category.description || undefined,
-      image: category.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
-      children: childrenData.categories.nodes.map((child) => ({
+      image: category.kategorieBildSlider?.sourceUrl || undefined,
+      imageWide: category.kategorieBildWide?.sourceUrl || undefined,
+      children: childNodes.map((child) => ({
         name: child.name,
         slug: child.slug,
         count: child.count,
         description: child.description || undefined,
-        image: child.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
+        image: child.kategorieBildSlider?.sourceUrl || undefined,
       })),
       posts: allPosts,
     };
@@ -598,7 +906,7 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
     console.error(`Error fetching category with children "${categorySlug}":`, error);
     return null;
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Navigation: Hauptkategorien + Subkategorien aus WordPress
@@ -606,14 +914,12 @@ export async function getCategoryWithChildren(categorySlug: string): Promise<{
 
 const NAV_MAIN_SLUGS = ["finanzen", "versicherungen", "steuern", "recht"];
 
-export async function getNavItems(): Promise<
-  Array<{
-    label: string;
-    href: string;
-    megamenu: boolean;
-    submenu: Array<{ label: string; href: string }>;
-  }>
-> {
+type NavItems = Array<{ label: string; href: string; megamenu: boolean; submenu: Array<{ label: string; href: string }> }>;
+export async function getNavItems(): Promise<NavItems> {
+  // Beim Build pro Worker EINMAL (Layout ruft es pro Seite auf → sonst ~700 Abfragen).
+  return buildMemo("navItems", _fetchNavItems);
+}
+async function _fetchNavItems(): Promise<NavItems> {
   const client = getClient();
 
   const query = gql`
@@ -651,7 +957,7 @@ export async function getNavItems(): Promise<
       data.categories.nodes.find((c) => c.slug === slug)
     ).filter(Boolean) as typeof data.categories.nodes;
 
-    return sorted.map((cat) => ({
+    return requireNonEmpty("navItems", sorted.map((cat) => ({
       label: cat.name,
       href: `/${cat.slug}`,
       megamenu: true,
@@ -659,10 +965,10 @@ export async function getNavItems(): Promise<
         label: child.name,
         href: `/${cat.slug}/${child.slug}`,
       })),
-    }));
+    })));
   } catch (error) {
     console.error("Error fetching nav items from WordPress:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -850,6 +1156,9 @@ export async function getPostsAndCPTsByCategory(categorySlug: string): Promise<P
 // ─────────────────────────────────────────────
 
 export async function getAllRechner(): Promise<Rechner[]> {
+  return buildMemo("allRechner", _fetchAllRechner);
+}
+async function _fetchAllRechner(): Promise<Rechner[]> {
   const client = getClient();
 
   const query = gql`
@@ -859,6 +1168,7 @@ export async function getAllRechner(): Promise<Rechner[]> {
           id
           title
           slug
+          excerpt
           rechnerFelder {
             rechnerTyp
             beschreibung
@@ -870,10 +1180,10 @@ export async function getAllRechner(): Promise<Rechner[]> {
 
   try {
     const data = await client.request<{ allRechner: { nodes: Rechner[] } }>(query);
-    return data.allRechner.nodes;
+    return requireNonEmpty("allRechner", data.allRechner.nodes);
   } catch (error) {
     console.error("Error fetching all Rechner:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -882,6 +1192,10 @@ export async function getAllRechner(): Promise<Rechner[]> {
 // ─────────────────────────────────────────────
 
 export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
+  if (IS_BUILD) {
+    const hit = (await getAllRechner()).find((r) => r.slug === slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -890,6 +1204,7 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
         id
         title
         slug
+        excerpt
         rechnerFelder {
           beschreibung
         }
@@ -911,6 +1226,9 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
 // ─────────────────────────────────────────────
 
 export async function getAllChecklisten(): Promise<Checkliste[]> {
+  return buildMemo("allChecklisten", _fetchAllChecklisten);
+}
+async function _fetchAllChecklisten(): Promise<Checkliste[]> {
   const client = getClient();
 
   const query = gql`
@@ -924,6 +1242,7 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
           id
           title
           slug
+          excerpt
           checklisten {
             checklistenBeschreibung
           }
@@ -947,10 +1266,10 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
       after = data.checklisten.pageInfo.endCursor;
     }
 
-    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allChecklisten", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Checklisten:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -958,7 +1277,50 @@ export async function getAllChecklisten(): Promise<Checkliste[]> {
 // Einzelne Checkliste nach Slug
 // ─────────────────────────────────────────────
 
+// Build-Bulk MIT PDF-URL (getAllChecklisten holt die nicht) → eine Map für alle
+// getChecklisteBySlug-Aufrufe (207 Detailseiten + Artikel-Checklisten).
+function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
+  return buildMemo("checklistenFull", async () => {
+    const client = getClient();
+    const query = gql`
+      query BulkChecklistenFull($after: String) {
+        checklisten(first: 50, after: $after) {
+          pageInfo { hasNextPage endCursor }
+          nodes {
+            id title slug excerpt
+            checklisten { checklistenBeschreibung checklistePdf { node { mediaItemUrl } } }
+          }
+        }
+      }
+    `;
+    type Resp = { checklisten: { nodes: Checkliste[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+    const map = new Map<string, Checkliste>();
+    let after: string | null = null;
+    let hasNext = true;
+    let guard = 0;
+    while (hasNext && guard++ < 60) {
+      try {
+        const data: Resp = await client.request<Resp>(query, { after });
+        for (const n of data.checklisten.nodes) { if (n.slug) map.set(n.slug, n); }
+        hasNext = data.checklisten.pageInfo.hasNextPage;
+        after = data.checklisten.pageInfo.endCursor;
+      } catch (e) {
+        console.error("[checklistenFull] chunk failed → retry whole bulk:", e);
+        throw e;
+      }
+    }
+    if (map.size === 0) throw new Error("[checklistenFull] leere Map beim Build (transient) → Retry");
+    console.log(`[checklistenFull] ${map.size} Checklisten gebündelt`);
+    return map;
+  });
+}
+
 export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
+  // Build: aus Bulk-Map; Laufzeit: Einzelabfrage (Freshness via ISR + On-Demand-Revalidate).
+  if (IS_BUILD) {
+    const hit = (await getAllChecklistenFullMap()).get(slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -967,6 +1329,7 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
         id
         title
         slug
+        excerpt
         checklisten {
           checklistenBeschreibung
           checklistePdf {
@@ -993,6 +1356,9 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
 // ─────────────────────────────────────────────
 
 export async function getAllDokumente(): Promise<Dokument[]> {
+  return buildMemo("allDokumente", _fetchAllDokumente);
+}
+async function _fetchAllDokumente(): Promise<Dokument[]> {
   const client = getClient();
 
   const query = gql`
@@ -1045,10 +1411,10 @@ export async function getAllDokumente(): Promise<Dokument[]> {
       after = data.dokumente.pageInfo.endCursor;
     }
 
-    return allNodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allDokumente", allNodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Dokumente:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
 
@@ -1057,6 +1423,10 @@ export async function getAllDokumente(): Promise<Dokument[]> {
 // ─────────────────────────────────────────────
 
 export async function getDokumentBySlug(slug: string): Promise<Dokument | null> {
+  if (IS_BUILD) {
+    const hit = (await getAllDokumente()).find((d) => d.slug === slug);
+    if (hit) return hit;
+  }
   const client = getClient();
 
   const query = gql`
@@ -1098,10 +1468,25 @@ export async function getDokumentBySlug(slug: string): Promise<Dokument | null> 
 }
 
 // ─────────────────────────────────────────────
+// Mehrere Dokumente nach Slugs (für Dokumente-Block im Artikel, ≤4)
+// ─────────────────────────────────────────────
+
+export async function getDokumenteBySlugs(slugs: string[]): Promise<Dokument[]> {
+  const unique = Array.from(new Set(slugs.map((s) => s.trim()).filter(Boolean))).slice(0, 4);
+  if (unique.length === 0) return [];
+  const results = await Promise.all(unique.map((slug) => getDokumentBySlug(slug)));
+  // Reihenfolge der Slugs beibehalten, null (nicht gefunden) herausfiltern.
+  return results.filter((d): d is Dokument => d !== null);
+}
+
+// ─────────────────────────────────────────────
 // Alle Vergleiche
 // ─────────────────────────────────────────────
 
 export async function getAllVergleiche(): Promise<Vergleich[]> {
+  return buildMemo("allVergleiche", _fetchAllVergleiche);
+}
+async function _fetchAllVergleiche(): Promise<Vergleich[]> {
   const client = getClient();
 
   const query = gql`
@@ -1111,6 +1496,7 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
           id
           title
           slug
+          excerpt
         }
       }
     }
@@ -1118,9 +1504,52 @@ export async function getAllVergleiche(): Promise<Vergleich[]> {
 
   try {
     const data = await client.request<{ vergleiche: { nodes: Vergleich[] } }>(query);
-    return data.vergleiche.nodes.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    return requireNonEmpty("allVergleiche", data.vergleiche.nodes).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching all Vergleiche:", error);
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
+  }
+}
+
+// ─────────────────────────────────────────────
+// Neueste Finanztools (je 1: Rechner, Checkliste, Vergleich) — für Landing-Sidebar
+// ─────────────────────────────────────────────
+
+export async function getLatestFinanztools(): Promise<LatestTool[]> {
+  const client = getClient();
+
+  // Beschreibung kommt jetzt einheitlich aus dem WP-Textauszug (excerpt, HTML) für alle 3 CPTs.
+  const query = gql`
+    query GetLatestFinanztools {
+      allRechner(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug excerpt }
+      }
+      checklisten(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug excerpt }
+      }
+      vergleiche(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes { title slug excerpt }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<{
+      allRechner: { nodes: { title: string; slug: string; excerpt?: string }[] };
+      checklisten: { nodes: { title: string; slug: string; excerpt?: string }[] };
+      vergleiche: { nodes: { title: string; slug: string; excerpt?: string }[] };
+    }>(query);
+
+    const tools: LatestTool[] = [];
+    const r = data.allRechner.nodes[0];
+    if (r) tools.push({ type: "rechner", label: "Rechner", title: decodeHtmlEntities(r.title), description: stripHtml(r.excerpt), href: `/finanztools/rechner/${r.slug}` });
+    const c = data.checklisten.nodes[0];
+    if (c) tools.push({ type: "checkliste", label: "Checkliste", title: decodeHtmlEntities(c.title), description: stripHtml(c.excerpt), href: `/finanztools/checklisten/${c.slug}` });
+    const v = data.vergleiche.nodes[0];
+    if (v) tools.push({ type: "vergleich", label: "Vergleich", title: decodeHtmlEntities(v.title), description: stripHtml(v.excerpt), href: `/finanztools/vergleiche/${v.slug}` });
+    return tools;
+  } catch (error) {
+    console.error("Error fetching latest Finanztools:", error);
     return [];
   }
 }
@@ -1190,7 +1619,7 @@ export async function getToolsBySlug(slugs: string[]): Promise<Post[]> {
 // Kategorie Details mit Parent-Info
 // ─────────────────────────────────────────────
 
-export async function getCategoryBySlug(slug: string) {
+export const getCategoryBySlug = cache(async (slug: string) => {
   const client = getClient();
 
   const query = gql`
@@ -1201,12 +1630,11 @@ export async function getCategoryBySlug(slug: string) {
           name
           slug
           description
-          kategorieFelder {
-            kategorieBild {
-              node {
-                sourceUrl
-              }
-            }
+          kategorieBildSlider {
+            sourceUrl
+          }
+          kategorieBildWide {
+            sourceUrl
           }
           parent {
             node {
@@ -1228,7 +1656,8 @@ export async function getCategoryBySlug(slug: string) {
           name: string;
           slug: string;
           description?: string;
-          kategorieFelder?: { kategorieBild?: { node?: { sourceUrl: string } } };
+          kategorieBildSlider?: { sourceUrl: string };
+          kategorieBildWide?: { sourceUrl: string };
           parent?: { node: { id: string; name: string; slug: string } };
         }>;
       };
@@ -1241,14 +1670,15 @@ export async function getCategoryBySlug(slug: string) {
       name: cat.name,
       slug: cat.slug,
       description: cat.description || undefined,
-      image: cat.kategorieFelder?.kategorieBild?.node?.sourceUrl || undefined,
+      image: cat.kategorieBildSlider?.sourceUrl || undefined,
+      imageWide: cat.kategorieBildWide?.sourceUrl || undefined,
       parent: cat.parent?.node || null,
     };
   } catch (error) {
     console.error("Error fetching category:", error);
     return null;
   }
-}
+});
 
 // ─────────────────────────────────────────────
 // Rechner-Konfiguration aus WordPress ACF
@@ -1275,6 +1705,7 @@ export async function getLatestPostsByCategoryIds(
           slug
           date
           excerpt
+          content
           featuredImage { node { sourceUrl altText } }
           categories { nodes { name slug databaseId } }
           beitrag { untertitel }
@@ -1286,7 +1717,7 @@ export async function getLatestPostsByCategoryIds(
   async function fetchPosts(cats: number[], exclude: number[]): Promise<Post[]> {
     try {
       const data = await client.request<{
-        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; databaseId: number })[] };
+        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string; databaseId: number })[] };
       }>(query, {
         cats: cats.map(String),
         first: limit + (exclude.length || 0) + 5,
@@ -1300,7 +1731,9 @@ export async function getLatestPostsByCategoryIds(
             beitragUntertitel: post.beitrag.untertitel,
           };
         }
-        return decoded;
+        // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
+        // databaseId für den Fallback-Dedup erhalten (applyContentHeaderTitle strippt nur content).
+        return applyContentHeaderTitle(decoded as Post & { content?: string; databaseId: number });
       });
     } catch (error) {
       console.error("Error fetching posts by category IDs:", error);
@@ -1409,6 +1842,24 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
     link_type: "none",
     link_value: "",
   },
+  // Default: Werbung aus — sicherer Zustand, falls WP nicht erreichbar.
+  article_ads: {
+    top: false,
+    rails: false,
+    mid: false,
+  },
+  // Pro Seitentyp: alles aus per Default → beim Launch nichts sichtbar, bis im
+  // WP-Backend aktiviert. `article` spiegelt zur Sicherheit die Legacy-Defaults.
+  ads: {
+    article: { top: false, rails: false, mid: false },
+    rechner: { top: false, rails: false },
+    vergleich: { top: false, rails: false },
+    checkliste: { top: false, rails: false },
+    anbieter: { top: false, rails: false, mid: false },
+    kategorie: { top: false, rails: false },
+    suche: { top: false, rails: false },
+    dokumente: { top: false, rails: false },
+  },
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -1422,9 +1873,23 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     });
     if (!res.ok) return SITE_SETTINGS_FALLBACK;
     const data = (await res.json()) as Partial<SiteSettings>;
-    return {
-      top_banner: { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) },
+    const top_banner = { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) };
+    const article_ads = { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) };
+    const adsData = (data.ads ?? {}) as Partial<SiteAdsSettings>;
+    const fb = SITE_SETTINGS_FALLBACK.ads;
+    const ads: SiteAdsSettings = {
+      // article: bevorzugt ads.article aus WP, sonst Legacy article_ads (back-compat
+      // bis das mu-plugin den ads-Block ausliefert).
+      article: { ...fb.article, ...article_ads, ...(adsData.article ?? {}) },
+      rechner: { ...fb.rechner, ...(adsData.rechner ?? {}) },
+      vergleich: { ...fb.vergleich, ...(adsData.vergleich ?? {}) },
+      checkliste: { ...fb.checkliste, ...(adsData.checkliste ?? {}) },
+      anbieter: { ...fb.anbieter, ...(adsData.anbieter ?? {}) },
+      kategorie: { ...fb.kategorie, ...(adsData.kategorie ?? {}) },
+      suche: { ...fb.suche, ...(adsData.suche ?? {}) },
+      dokumente: { ...fb.dokumente, ...(adsData.dokumente ?? {}) },
     };
+    return { top_banner, article_ads, ads };
   } catch (error) {
     console.error("Error fetching site settings from WordPress:", error);
     return SITE_SETTINGS_FALLBACK;
@@ -1453,7 +1918,11 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
       { next: { revalidate: 3600 } },
     );
-    if (!response.ok) return null;
+    // 404 = Seite existiert wirklich nicht → null (echtes notFound). Andere Fehler
+    // (5xx/Timeout unter IONOS-Last) → werfen, damit kein leeres 404 gecached wird
+    // (ISR behält den letzten guten Stand statt die Seite auf 404 zu backen).
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error(`getPageBySlug("${slug}") HTTP ${response.status}`);
     const arr = await response.json();
     if (!Array.isArray(arr) || arr.length === 0) return null;
     const page = arr[0];
@@ -1466,6 +1935,48 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
     };
   } catch (error) {
     console.error(`Error fetching page "${slug}" from WordPress:`, error);
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt 404 zu cachen
+  }
+}
+
+// ─────────────────────────────────────────────
+// Yoast-SEO-Meta (Titel/Beschreibung) via REST — für Beiträge/CPTs.
+// Kein WPGraphQL-Yoast-Addon nötig; Yoast liefert yoast_head_json in der REST-API.
+// Die Redakteure pflegen SEO-Titel + Meta-Description im Yoast-Feld → hier auslesen,
+// damit das Frontend sie nutzt statt WP-Titel/Content-Absatz.
+// ─────────────────────────────────────────────
+
+export type YoastMeta = {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+};
+
+export async function getYoastMeta(slug: string, restBase = "posts"): Promise<YoastMeta | null> {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return null;
+  const baseUrl = wpUrl.replace("/graphql", "");
+  try {
+    const res = await fetch(
+      `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
+      { next: { revalidate: 3600 } },
+    );
+    // Meta ist optional → bei Fehler NICHT werfen (sonst bräche der Metadata-Build),
+    // sondern null zurück und Frontend nutzt seinen Fallback.
+    if (!res.ok) return null;
+    const arr = await res.json();
+    const y = Array.isArray(arr) ? arr[0]?.yoast_head_json : null;
+    if (!y) return null;
+    return {
+      title: y.title || undefined,
+      description: y.description || undefined,
+      ogTitle: y.og_title || undefined,
+      ogDescription: y.og_description || undefined,
+      ogImage: Array.isArray(y.og_image) ? y.og_image[0]?.url : undefined,
+    };
+  } catch {
     return null;
   }
 }
@@ -1534,9 +2045,9 @@ export async function getAllAnbieter(): Promise<AnbieterPost[]> {
       hasNext = data.allAnbieter.pageInfo.hasNextPage;
       after = data.allAnbieter.pageInfo.endCursor;
     }
-    return all;
+    return requireNonEmpty("allAnbieter", all);
   } catch (error) {
     console.error("Error fetching all Anbieter:", error);
-    return [];
+    throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }

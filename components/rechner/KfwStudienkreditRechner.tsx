@@ -55,6 +55,7 @@ export default function KfwStudienkreditRechner() {
           einheit="Monate"
           min={1}
           max={84}
+          step={1}
         />
         <RechnerInput
           label="Zinssatz p.a."
@@ -65,6 +66,7 @@ export default function KfwStudienkreditRechner() {
           min={0}
           max={15}
           step={0.01}
+          slider
         />
         <RechnerInput
           label="Karenzphase"
@@ -74,6 +76,7 @@ export default function KfwStudienkreditRechner() {
           einheit="Monate"
           min={0}
           max={23}
+          step={1}
         />
         <RechnerInput
           label="Tilgungsdauer"
@@ -83,6 +86,7 @@ export default function KfwStudienkreditRechner() {
           einheit="Monate"
           min={1}
           max={300}
+          step={1}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

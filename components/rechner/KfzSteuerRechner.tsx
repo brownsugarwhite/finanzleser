@@ -62,6 +62,7 @@ export default function KfzSteuerRechner() {
               einheit="ccm"
               step={100}
               min={0}
+              max={6000}
             />
             <RechnerInput
               label="CO2-Ausstoss"
@@ -71,6 +72,7 @@ export default function KfzSteuerRechner() {
               einheit="g/km"
               step={5}
               min={0}
+              max={400}
             />
           </>
         )}
@@ -81,6 +83,7 @@ export default function KfzSteuerRechner() {
           value={params.erstzulassung_jahr}
           onChange={(val) => setParams((p) => ({ ...p, erstzulassung_jahr: val }))}
           einheit="Jahr"
+          step={1}
           min={1990}
           max={2026}
         />

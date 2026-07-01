@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { closeOverlay, registerOverlayCloser, setActiveOverlay, getActiveOverlay } from "@/lib/overlayController";
+import { useTransitionRouter } from "@/lib/usePageTransition";
 import {
   useCallback,
   useEffect,
@@ -11,10 +12,12 @@ import {
   useState,
 } from "react";
 import gsap from "@/lib/gsapConfig";
-import { NAV_ITEMS } from "@/lib/navItems";
+import { useNavItems, type NavItem } from "@/lib/NavContext";
 import { TYP_LABELS } from "@/lib/rechnerCategories";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
 import AlphaList from "@/components/ui/AlphaList";
+import MegaArrow, { MegaArrowTrail } from "@/components/ui/MegaArrow";
+import MegaPostContent from "@/components/ui/MegaPostContent";
+import type { PreloadedData, MegaMenuPost } from "./MegaMenu";
 import { cn } from "@/lib/cn";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
 
@@ -27,13 +30,6 @@ type DetailType =
   | { kind: "vergleiche" }
   | { kind: "checklisten" }
   | { kind: "anbieter" };
-
-interface MegaPost {
-  title: string;
-  slug: string;
-  uri?: string;
-  href?: string;
-}
 
 /* ── Constants ── */
 
@@ -69,14 +65,51 @@ function categorySlug(href: string): string {
   return href.split("/").filter(Boolean).pop() || "";
 }
 
+/* Trailing-Teil eines Akkordeon-Items wie auf Desktop: wachsende Linie +
+   einheitliche Pfeilspitze (flush), Farbe erbt via currentColor vom Button. */
+function ItemTrail({ active }: { active?: boolean }) {
+  return <MegaArrowTrail active={active} />;
+}
+
+/* Animiertes Auf-/Zuklappen (Höhe 0 ↔ Inhaltshöhe). Ein ResizeObserver hält die
+   Höhe korrekt, wenn der Inhalt erst später kommt (z. B. nachgeladene Beiträge). */
+function Collapse({ isOpen, children }: { isOpen: boolean; children: React.ReactNode }) {
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const el = innerRef.current;
+    if (!el) return;
+    const apply = () => setHeight(isOpen ? el.scrollHeight : 0);
+    apply();
+    if (!isOpen) return;
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isOpen]);
+
+  return (
+    <div style={{ height, overflow: "hidden", transition: "height 0.3s ease-in-out" }}>
+      <div ref={innerRef}>{children}</div>
+    </div>
+  );
+}
+
 /* ── Component ── */
 
-export default function MobileMegaMenu() {
-  const router = useRouter();
+export default function MobileMegaMenu({ preloaded = {} }: { preloaded?: PreloadedData }) {
+  const { navigate } = useTransitionRouter();
+  // Kategorien dynamisch aus WordPress — exakt dieselbe Quelle wie das Desktop-Megamenü.
+  const navItems = useNavItems();
 
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MainSection>("ratgeber");
   const [detail, setDetail] = useState<DetailType | null>(null);
+  // Verhindert das Aufblitzen beim ersten Öffnen: der frisch gemountete Booklet
+  // rendert sonst 1 Frame an x=0, bevor der useLayoutEffect ihn nach rechts raus
+  // setzt. Bis er positioniert ist → opacity 0 (React managed nur opacity, GSAP nur
+  // transform → kein Konflikt).
+  const [bookletReady, setBookletReady] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const bookletRef = useRef<HTMLDivElement>(null);
@@ -90,23 +123,22 @@ export default function MobileMegaMenu() {
 
   const recalcPositions = useCallback(() => {
     const vw = window.innerWidth;
-    // Each page takes the available width minus bg gap on one side AND peek of the other page on the spine side
+    // Eine Seite breit, andere peekt am Spine (Slide zwischen den Seiten).
     const pageW = vw - SIDE_MARGIN - SPINE_W - PEEK;
     positionsRef.current = {
       vw,
       pageW,
       xClosedRight: vw + SIDE_MARGIN,
-      xMain: SIDE_MARGIN,                                       // bg gap on LEFT, page2 peeks on RIGHT (PEEK px)
-      xDetail: PEEK - pageW,                                    // page1 peeks on LEFT (PEEK px), bg gap on RIGHT
+      xMain: SIDE_MARGIN,                                     // bg gap LEFT, page2 peekt RIGHT
+      xDetail: PEEK - pageW,                                  // page1 peekt LEFT, bg gap RIGHT
       xClosedLeft: -(2 * pageW + SPINE_W) - SIDE_MARGIN,
     };
   }, []);
 
   useEffect(() => {
     recalcPositions();
-    const onResize = () => recalcPositions();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    window.addEventListener("resize", recalcPositions);
+    return () => window.removeEventListener("resize", recalcPositions);
   }, [recalcPositions]);
 
   /* ─── Open / Close lifecycle ─── */
@@ -122,9 +154,15 @@ export default function MobileMegaMenu() {
     const handleMenuClosed = () => setOpen(false);
     window.addEventListener("burger-opened", handleBurgerOpened);
     window.addEventListener("menu-closed", handleMenuClosed);
+    // Handoff-Closer: schließt das mobile Menü, wenn ein anderes Overlay öffnet.
+    const unregister = registerOverlayCloser("menu", () => {
+      setOpen(false);
+      setDetail(null);
+    });
     return () => {
       window.removeEventListener("burger-opened", handleBurgerOpened);
       window.removeEventListener("menu-closed", handleMenuClosed);
+      unregister();
     };
   }, []);
 
@@ -136,8 +174,10 @@ export default function MobileMegaMenu() {
     const { xClosedRight, xMain, xDetail, xClosedLeft } = positionsRef.current;
 
     if (open) {
-      // Enter from right → main
+      // Enter from right → main. Position VOR dem ersten Paint setzen, dann sichtbar
+      // schalten (kein x=0-Aufblitzen beim allerersten Mount).
       gsap.set(booklet, { x: xClosedRight });
+      setBookletReady(true);
       gsap.to(booklet, { x: xMain, duration: SLIDE_DURATION, ease: "power3.out" });
     } else {
       // Exit: from main → right, from detail → left
@@ -148,7 +188,7 @@ export default function MobileMegaMenu() {
     void xDetail;
   }, [open, recalcPositions]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Animate booklet slide between main and detail
+  // Animate booklet slide between main and detail.
   useEffect(() => {
     if (!open) return;
     const booklet = bookletRef.current;
@@ -228,6 +268,9 @@ export default function MobileMegaMenu() {
 
   useEffect(() => {
     if (open) {
+      // Als aktives Overlay markieren (Punkt 5: damit das Menü beim Breakpoint-
+      // Wechsel ≤/≥1000 auf der anderen Variante weiter offen bleibt).
+      setActiveOverlay("menu");
       // extended:true → ContentScaler also blurs TopNav, Logo and Landing search pill
       window.dispatchEvent(
         new CustomEvent("menu-opened", { detail: { label: "mobile", extended: true } })
@@ -240,6 +283,16 @@ export default function MobileMegaMenu() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Punkt 5: Beim Mounten (z.B. Resize von Desktop→Mobile über 1000px) das Menü
+  // wieder öffnen, wenn es als Overlay aktiv ist → kein Verschwinden beim Wechsel.
+  useEffect(() => {
+    if (getActiveOverlay() === "menu") {
+      setOpen(true);
+      recalcPositions();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /* ─── Escape key closes ─── */
 
@@ -259,15 +312,17 @@ export default function MobileMegaMenu() {
 
   const closeMenu = useCallback(() => {
     window.dispatchEvent(new CustomEvent("burger-closed"));
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("menu");
   }, []);
 
   const navigateAndClose = useCallback(
     (href: string) => {
-      router.push(href);
-      closeMenu();
+      // Burger-Icon-State zurücksetzen; die Transition schließt das Menü (Fall A:
+      // geblurte Seite faded aus) und navigiert.
+      window.dispatchEvent(new CustomEvent("burger-closed"));
+      navigate(href, { fromOverlay: true, overlayId: "menu" });
     },
-    [router, closeMenu]
+    [navigate]
   );
 
   /* ─── Render guards ─── */
@@ -277,8 +332,10 @@ export default function MobileMegaMenu() {
     return null;
   }
 
-  // Stage width = 2 * pageW + SPINE_W where pageW = vw - SIDE_MARGIN - SPINE_W - PEEK
+  // Stage- + Seitenbreite (single-page: eine Seite sichtbar, andere peekt am Spine).
+  // Stage = 2·pageW + SPINE; Seite = vw − SIDE_MARGIN − SPINE − PEEK.
   const stageWidth = `calc(200vw - ${2 * (SIDE_MARGIN + PEEK) + SPINE_W}px)`;
+  const pageWidthCss = `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`;
 
   return (
     <div
@@ -311,12 +368,15 @@ export default function MobileMegaMenu() {
           height: stageHeight !== null ? `${stageHeight}px` : "auto",
           transition: stageHeight !== null ? `height ${HEIGHT_TWEEN_MS}ms ease-in-out` : "none",
           willChange: "transform, height",
+          opacity: bookletReady ? 1 : 0,
         }}
       >
         <div ref={stageRef} className="flex w-full h-full relative">
           {/* PAGE 1 — Main menu */}
           <PageMain
             visible={!detail}
+            pageWidth={pageWidthCss}
+            navItems={navItems}
             openSection={openSection}
             setOpenSection={setOpenSection}
             onPickRatgeberCategory={(label, href) =>
@@ -334,6 +394,9 @@ export default function MobileMegaMenu() {
           {/* PAGE 2 — Detail */}
           <PageDetail
             detail={detail}
+            pageWidth={pageWidthCss}
+            navItems={navItems}
+            preloaded={preloaded}
             onBack={() => setDetail(null)}
             onNavigate={navigateAndClose}
             contentRef={detailContentRef}
@@ -403,6 +466,8 @@ function Spine() {
 
 function PageMain({
   visible,
+  pageWidth,
+  navItems,
   openSection,
   setOpenSection,
   onPickRatgeberCategory,
@@ -412,6 +477,8 @@ function PageMain({
   contentRef,
 }: {
   visible: boolean;
+  pageWidth: string;
+  navItems: NavItem[];
   openSection: MainSection;
   setOpenSection: (s: MainSection) => void;
   onPickRatgeberCategory: (label: string, href: string) => void;
@@ -424,7 +491,7 @@ function PageMain({
     <div
       className="relative flex flex-col h-full overflow-hidden"
       style={{
-        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        width: pageWidth,
         flexShrink: 0,
         borderTopLeftRadius: PAGE_RADIUS,
         borderBottomLeftRadius: PAGE_RADIUS,
@@ -442,12 +509,12 @@ function PageMain({
           onToggle={() => setOpenSection("ratgeber")}
         >
           <ul className="space-y-1">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.href}>
                 <button
                   type="button"
                   onClick={() => onPickRatgeberCategory(item.label, item.href)}
-                  className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
+                  className="megamenu-m-btn w-full flex items-center gap-2 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
                 >
                   {RATGEBER_ICONS[item.label] && (
                     <Image
@@ -458,10 +525,8 @@ function PageMain({
                       aria-hidden
                     />
                   )}
-                  <span className="text-base font-medium text-[var(--color-text-primary)]">
-                    {item.label}
-                  </span>
-                  <span className="ml-auto text-[var(--color-text-secondary)]">→</span>
+                  <span className="megamenu-m-label">{item.label}</span>
+                  <ItemTrail />
                 </button>
               </li>
             ))}
@@ -479,13 +544,11 @@ function PageMain({
                 <button
                   type="button"
                   onClick={() => onPickFinanztool(item.kind)}
-                  className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
+                  className="megamenu-m-btn w-full flex items-center gap-2 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
                 >
                   <Image src={item.icon} alt="" width={24} height={24} aria-hidden />
-                  <span className="text-base font-medium text-[var(--color-text-primary)]">
-                    {item.label}
-                  </span>
-                  <span className="ml-auto text-[var(--color-text-secondary)]">→</span>
+                  <span className="megamenu-m-label">{item.label}</span>
+                  <ItemTrail />
                 </button>
               </li>
             ))}
@@ -502,41 +565,37 @@ function PageMain({
               <button
                 type="button"
                 onClick={onPickAnbieter}
-                className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
+                className="megamenu-m-btn w-full flex items-center gap-2 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
               >
                 <Image src="/icons/icon_anbieter.svg" alt="" width={24} height={24} aria-hidden />
-                <span className="text-base font-medium text-[var(--color-text-primary)]">Anbieter</span>
-                <span className="ml-auto text-[var(--color-text-secondary)]">→</span>
+                <span className="megamenu-m-label">Anbieter</span>
+                <ItemTrail />
               </button>
             </li>
             <li>
               <button
                 type="button"
                 onClick={() => onNavigate("/dokumente")}
-                className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
+                className="megamenu-m-btn w-full flex items-center gap-2 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
               >
                 <Image src="/icons/iconDokumente.svg" alt="" width={24} height={24} aria-hidden />
-                <span className="text-base font-medium text-[var(--color-text-primary)]">Dokumente</span>
+                <span className="megamenu-m-label">Dokumente</span>
               </button>
             </li>
             <li>
               <button
                 type="button"
                 onClick={() => onNavigate("/kontakt")}
-                className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
+                className="megamenu-m-btn w-full flex items-center gap-2 py-3 px-2 rounded-lg text-left hover:bg-[var(--color-bg-subtle)] transition-colors"
               >
                 <Image src="/icons/icon_kontakt.svg" alt="" width={24} height={24} aria-hidden />
-                <span className="text-base font-medium text-[var(--color-text-primary)]">Kontakt</span>
+                <span className="megamenu-m-label">Kontakt</span>
               </button>
             </li>
           </ul>
         </Section>
       </div>
 
-      <div className="flex items-center justify-center gap-3 py-4 border-t border-[var(--color-border-default)]">
-        <span className="text-sm text-[var(--color-text-secondary)]">Modus</span>
-        <DarkModeToggle />
-      </div>
     </div>
   );
 }
@@ -590,15 +649,23 @@ function Section({
         className="w-full flex items-center justify-between py-4"
         aria-expanded={isOpen}
       >
-        <span className="text-lg font-semibold text-[var(--color-text-primary)]">{label}</span>
         <span
           className={cn(
-            "text-[var(--color-text-secondary)] transition-transform duration-300",
+            "text-lg transition-colors duration-150",
+            isOpen ? "text-[var(--color-brand)]" : "text-[var(--color-text-primary)]"
+          )}
+          style={{ fontFamily: "var(--font-heading, 'Merriweather', serif)", fontWeight: 650 }}
+        >
+          {label}
+        </span>
+        <MegaArrow
+          size={11}
+          className={cn(
+            "transition-transform duration-300",
+            isOpen ? "text-[var(--color-brand)]" : "text-[var(--color-text-secondary)]",
             isOpen ? "rotate-90" : "rotate-0"
           )}
-        >
-          →
-        </span>
+        />
       </button>
       <div
         style={{
@@ -621,11 +688,17 @@ function Section({
 
 function PageDetail({
   detail,
+  pageWidth,
+  navItems,
+  preloaded,
   onBack,
   onNavigate,
   contentRef,
 }: {
   detail: DetailType | null;
+  pageWidth: string;
+  navItems: NavItem[];
+  preloaded: PreloadedData;
   onBack: () => void;
   onNavigate: (href: string) => void;
   contentRef?: React.RefObject<HTMLDivElement | null>;
@@ -634,7 +707,7 @@ function PageDetail({
     <div
       className="relative flex flex-col h-full overflow-hidden"
       style={{
-        width: `calc(100vw - ${SIDE_MARGIN + SPINE_W + PEEK}px)`,
+        width: pageWidth,
         flexShrink: 0,
         borderTopRightRadius: PAGE_RADIUS,
         borderBottomRightRadius: PAGE_RADIUS,
@@ -645,25 +718,31 @@ function PageDetail({
       }}
       aria-hidden={!detail}
     >
-      <div className="flex items-center gap-2 px-5 pt-6 pb-2">
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-subtle)] transition-colors"
-          aria-label="Zurück"
-        >
-          <span className="text-xl text-[var(--color-text-primary)]">←</span>
-        </button>
-        <h2 className="text-xl font-semibold text-[var(--color-text-primary)] truncate">
-          {detailTitle(detail)}
-        </h2>
-      </div>
+      {/* Header nur wenn ein Detail gewählt ist — sonst (leere rechte Buchseite
+          die am Spine peekt) kein verwaister Zurück-Pfeil. */}
+      {detail && (
+        <div className="flex items-center gap-2 px-5 pt-6 pb-2">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-[var(--color-bg-subtle)] transition-colors"
+            aria-label="Zurück"
+          >
+            <span className="text-xl text-[var(--color-text-primary)]">←</span>
+          </button>
+          <h2 className="text-xl font-semibold text-[var(--color-text-primary)] truncate">
+            {detailTitle(detail)}
+          </h2>
+        </div>
+      )}
 
       <div ref={contentRef} className="flex-1 overflow-hidden px-5 pb-5">
         {detail?.kind === "ratgeber" && (
           <RatgeberDetail
             categoryLabel={detail.categoryLabel}
             categoryHref={detail.categoryHref}
+            navItems={navItems}
+            preloaded={preloaded}
             onNavigate={onNavigate}
           />
         )}
@@ -699,30 +778,39 @@ function detailTitle(detail: DetailType | null): string {
 function RatgeberDetail({
   categoryLabel,
   categoryHref,
+  navItems,
+  preloaded,
   onNavigate,
 }: {
   categoryLabel: string;
   categoryHref: string;
+  navItems: NavItem[];
+  preloaded: PreloadedData;
   onNavigate: (href: string) => void;
 }) {
-  const item = NAV_ITEMS.find((n) => n.label === categoryLabel);
+  const item = navItems.find((n) => n.label === categoryLabel);
   const subs = item?.submenu || [];
   const [openSub, setOpenSub] = useState<string | null>(null);
 
   return (
     <div className="h-full overflow-y-auto -mr-1 pr-1">
       <ul className="space-y-1">
-        {subs.map((sub) => (
-          <SubAccordionItem
-            key={sub.href}
-            label={sub.label}
-            isOpen={openSub === sub.href}
-            onToggle={() => setOpenSub((cur) => (cur === sub.href ? null : sub.href))}
-            categorySlug={categorySlug(sub.href)}
-            categoryHref={sub.href}
-            onNavigate={onNavigate}
-          />
-        ))}
+        {subs.map((sub) => {
+          const pre = preloaded[sub.href];
+          return (
+            <SubAccordionItem
+              key={sub.href}
+              label={sub.label}
+              isOpen={openSub === sub.href}
+              onToggle={() => setOpenSub((cur) => (cur === sub.href ? null : sub.href))}
+              categorySlug={categorySlug(sub.href)}
+              categoryHref={sub.href}
+              onNavigate={onNavigate}
+              preloadedPosts={pre?.posts}
+              preloadedHasMore={pre?.hasMore}
+            />
+          );
+        })}
       </ul>
       <div className="mt-4 pt-3 border-t border-[var(--color-border-default)]">
         <button
@@ -744,6 +832,8 @@ function SubAccordionItem({
   categorySlug: slug,
   categoryHref,
   onNavigate,
+  preloadedPosts,
+  preloadedHasMore,
 }: {
   label: string;
   isOpen: boolean;
@@ -751,15 +841,19 @@ function SubAccordionItem({
   categorySlug: string;
   categoryHref: string;
   onNavigate: (href: string) => void;
+  preloadedPosts?: MegaMenuPost[];
+  preloadedHasMore?: boolean;
 }) {
-  const [posts, setPosts] = useState<MegaPost[] | null>(null);
-  const [hasMore, setHasMore] = useState(false);
+  // SSG-Preload → die 3 Beiträge sind sofort serverseitig da (wie Desktop);
+  // nur falls eine Subkategorie beim Build ausgelassen wurde, Laufzeit-Fallback.
+  const [posts, setPosts] = useState<MegaMenuPost[] | null>(preloadedPosts ?? null);
+  const [hasMore, setHasMore] = useState(preloadedHasMore ?? false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!isOpen || posts !== null) return;
     setLoading(true);
-    fetch(`/api/megamenu/posts?category=${encodeURIComponent(slug)}&limit=5`)
+    fetch(`/api/megamenu/posts?category=${encodeURIComponent(slug)}&limit=3`)
       .then((r) => (r.ok ? r.json() : { posts: [], hasMore: false }))
       .then((data) => {
         setPosts(data.posts || []);
@@ -770,24 +864,17 @@ function SubAccordionItem({
   }, [isOpen, posts, slug]);
 
   return (
-    <li className="border-b border-[var(--color-border-default)]">
+    <li className={cn(!isOpen && "border-b border-[var(--color-border-default)]")}>
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-3"
+        className={cn("megamenu-m-btn w-full flex items-center gap-2 py-3", isOpen && "is-active")}
         aria-expanded={isOpen}
       >
-        <span className="text-base text-[var(--color-text-primary)]">{label}</span>
-        <span
-          className={cn(
-            "text-sm text-[var(--color-text-secondary)] transition-transform duration-300",
-            isOpen ? "rotate-90" : "rotate-0"
-          )}
-        >
-          →
-        </span>
+        <span className="megamenu-m-label">{label}</span>
+        <ItemTrail active={isOpen} />
       </button>
-      {isOpen && (
+      <Collapse isOpen={isOpen}>
         <div className="pb-3 pl-1">
           {loading && (
             <p className="text-sm text-[var(--color-text-secondary)] py-1">Lädt …</p>
@@ -796,22 +883,50 @@ function SubAccordionItem({
             <p className="text-sm text-[var(--color-text-secondary)] py-1">Keine Beiträge</p>
           )}
           {!loading && posts && posts.length > 0 && (
-            <ul className="space-y-2">
-              {posts.map((p) => {
-                const href = p.uri || p.href || `${categoryHref}/${p.slug}`;
-                return (
-                  <li key={p.slug}>
-                    <button
-                      type="button"
-                      onClick={() => onNavigate(href)}
-                      className="text-sm text-left text-[var(--color-text-primary)] hover:text-[var(--color-brand)]"
-                    >
-                      {p.title}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+            <>
+              <div
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: "var(--color-text-medium)",
+                  opacity: 0.6,
+                  marginBottom: 8,
+                }}
+              >
+                Neuste Beiträge
+              </div>
+              <ul
+                className="flex flex-col"
+                style={{
+                  gap: 13,
+                  outline: "1px solid rgba(0, 0, 0, 0.04)",
+                  padding: "12px 8px",
+                }}
+              >
+                {posts.map((p) => {
+                  const href = `${categoryHref}/${p.slug}`;
+                  return (
+                    <li key={p.slug}>
+                      <button
+                        type="button"
+                        onClick={() => onNavigate(href)}
+                        className="megamenu-post-link-m block text-left"
+                        style={{
+                          color: "var(--color-text-primary)",
+                          fontSize: 16,
+                          fontWeight: 700,
+                          fontFamily: "var(--font-heading, 'Merriweather', serif)",
+                          padding: "0 4px",
+                        }}
+                      >
+                        <MegaPostContent post={p} />
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
           )}
           {!loading && hasMore && (
             <button
@@ -823,7 +938,7 @@ function SubAccordionItem({
             </button>
           )}
         </div>
-      )}
+      </Collapse>
     </li>
   );
 }
@@ -860,26 +975,17 @@ function RechnerDetail({ onNavigate }: { onNavigate: (href: string) => void }) {
           const hasMore = g.items.length > 5;
           const isOpen = openTyp === g.typ;
           return (
-            <li key={g.typ} className="border-b border-[var(--color-border-default)]">
+            <li key={g.typ} className={cn(!isOpen && "border-b border-[var(--color-border-default)]")}>
               <button
                 type="button"
                 onClick={() => setOpenTyp((cur) => (cur === g.typ ? null : g.typ))}
-                className="w-full flex items-center justify-between py-3"
+                className={cn("megamenu-m-btn w-full flex items-center gap-2 py-3", isOpen && "is-active")}
                 aria-expanded={isOpen}
               >
-                <span className="text-base text-[var(--color-text-primary)]">
-                  {TYP_LABELS[g.typ] || g.typ}
-                </span>
-                <span
-                  className={cn(
-                    "text-sm text-[var(--color-text-secondary)] transition-transform duration-300",
-                    isOpen ? "rotate-90" : "rotate-0"
-                  )}
-                >
-                  →
-                </span>
+                <span className="megamenu-m-label">{TYP_LABELS[g.typ] || g.typ}</span>
+                <ItemTrail active={isOpen} />
               </button>
-              {isOpen && (
+              <Collapse isOpen={isOpen}>
                 <div className="pb-3 pl-1">
                   <ul className="space-y-2">
                     {limited.map((r) => (
@@ -904,7 +1010,7 @@ function RechnerDetail({ onNavigate }: { onNavigate: (href: string) => void }) {
                     </button>
                   )}
                 </div>
-              )}
+              </Collapse>
             </li>
           );
         })}

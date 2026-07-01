@@ -10,6 +10,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -41,6 +42,7 @@ export default function UebergangsgeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={15000}
         />
 
         <RechnerCheckbox
@@ -55,6 +57,14 @@ export default function UebergangsgeldRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={result.satzProzent}
+              label="Leistungssatz"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Uebergangsgeld taeglich"

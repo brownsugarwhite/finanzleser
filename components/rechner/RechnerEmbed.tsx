@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useState, useCallback } from "react";
 import RechnerPlaceholder from "@/components/ui/RechnerPlaceholder";
 import VerticalSpacer from "@/components/ui/VerticalSpacer";
+import InfoHint from "@/components/ui/InfoHint";
+import { RECHNER_DISCLAIMER } from "@/lib/rechnerDisclaimer";
 import { RechnerLayoutContext } from "./RechnerLayoutContext";
 
 // Old 17 calculators
@@ -183,9 +185,11 @@ const ScheidungskostenRechner = dynamic(() => import("./ScheidungskostenRechner"
 interface RechnerEmbedProps {
   slug: string;
   formHeader?: React.ReactNode;
+  /** Im Artikel: ohne Visual-Spalte, Formular volle Breite (Body-Breite). */
+  noVisual?: boolean;
 }
 
-export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
+export default function RechnerEmbed({ slug, formHeader, noVisual = false }: RechnerEmbedProps) {
   const [resultsContainer, setResultsContainer] = useState<HTMLElement | null>(null);
 
   const containerRefCallback = useCallback((node: HTMLDivElement | null) => {
@@ -197,17 +201,25 @@ export default function RechnerEmbed({ slug, formHeader }: RechnerEmbedProps) {
 
   return (
     <RechnerLayoutContext.Provider value={{ resultsContainer }}>
-      <div className="rechner-layout">
+      <div className={`rechner-layout${noVisual ? " rechner-layout--no-visual" : ""}`}>
         <div className="rechner-top-row">
-          <div className="rechner-visual">
-            <RechnerPlaceholder seed={slug} />
-          </div>
-          <div className="rechner-divider"><VerticalSpacer /></div>
+          {!noVisual && (
+            <>
+              <div className="rechner-visual">
+                <RechnerPlaceholder seed={slug} image="/assets/general/rechner_visual.png" />
+              </div>
+              <div className="rechner-divider"><VerticalSpacer /></div>
+            </>
+          )}
           <div className="rechner-form-col">
             {formHeader && <div className="rechner-form-header">{formHeader}</div>}
             {rechner}
           </div>
         </div>
+        {/* Im Artikel: generischer Hinweis nach dem Button, vor dem Ergebnis. */}
+        {noVisual && (
+          <InfoHint style={{ marginTop: 30 }}>Hinweis: {RECHNER_DISCLAIMER}</InfoHint>
+        )}
         <div className="rechner-results-portal" ref={containerRefCallback} />
       </div>
     </RechnerLayoutContext.Provider>

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
 import { Providers } from "./providers";
 import { NavProvider } from "@/lib/NavContext";
-import { getNavItems, getSiteSettings } from "@/lib/wordpress";
+import { getNavItems, getSiteSettings, getMegamenuPreload } from "@/lib/wordpress";
 import BookmarkNav from "@/components/layout/BookmarkNav";
 import LogoBar from "@/components/layout/LogoBar";
 import TopNav from "@/components/layout/TopNav";
@@ -15,7 +15,8 @@ import LeoIcon from "@/components/ui/LeoIcon";
 import TopBanner from "@/components/ui/TopBanner";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
-import ArticlePreviewProvider from "@/components/sections/ArticlePreviewProvider";
+import MorphTransitionLayer from "@/components/sections/MorphTransitionLayer";
+import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
@@ -82,14 +83,25 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [navItems, siteSettings] = await Promise.all([
+  const [navItems, siteSettings, megamenuPreload] = await Promise.all([
     getNavItems(),
     getSiteSettings(),
+    getMegamenuPreload().catch(() => ({})),
   ]);
 
   return (
-    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`} suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
+      {/* suppressHydrationWarning: das Inline-Script unten setzt data-landing VOR der
+          Hydration → bewusste Abweichung zur SSR-HTML, kein echter Mismatch. */}
+      <body className="antialiased" suppressHydrationWarning>
+        {/* No-FOUC: data-landing synchron VOR dem Paint setzen, damit landing-spezifisches
+            CSS (sticky-nav aus, Newsletter, Dotline, Logo-Claim, Mobile-Fixes) schon beim
+            ersten Paint greift. LandingBodyAttr hält es danach für SPA-Navigation in Sync. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(location.pathname==='/')document.body.setAttribute('data-landing','')}catch(e){}`,
+          }}
+        />
         <LandingBodyAttr />
         <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
@@ -106,25 +118,28 @@ export default async function RootLayout({
         <div id="leo-dock-slot-mobile" />
         <Providers>
         <NavProvider items={navItems}>
-        <ArticlePreviewProvider>
+        <PageTransitionProvider>
           <div className="bookmark-section">
             <div className="bookmark-section__inner"><BookmarkNav /></div>
           </div>
           <LogoBar />
           <TopNav />
-          {/* DotLine + Powered by */}
+          {/* DotLine + „powered by" auf den Nicht-Landing-Seiten (auf der Landing ist
+              .sticky-nav ausgeblendet; dort rendert LandingIntro Dotline + Quicklinks).
+              Hier KEINE Quicklinks und KEIN Pfeil (nur Landing), max-width 90vw. */}
           <div className="sticky-nav dotline-animated">
-            <PoweredByLine style={{ minWidth: "1200px", width: "80%", paddingLeft: 280, paddingRight: 0 }} />
+            <PoweredByLine style={{ width: "100%", maxWidth: "90vw", paddingLeft: 280, paddingRight: 50 }} />
           </div>
           <ContentScaler />
-          <MegaMenuWrapper />
+          <MegaMenuWrapper preloaded={megamenuPreload} />
           <FinanztoolsMenu />
           <div className="scalable-content">
             {children}
           </div>
+          <MorphTransitionLayer />
           <ProgressiveBlur height={120} />
           <LeoIcon />
-        </ArticlePreviewProvider>
+        </PageTransitionProvider>
         </NavProvider>
         </Providers>
       </body>

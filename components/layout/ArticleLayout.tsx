@@ -1,6 +1,8 @@
 import Footer from "./Footer";
 import ArticleClient from "./ArticleClient";
 import RelatedPostsSection from "@/components/sections/RelatedPostsSection";
+import { getSiteSettings } from "@/lib/wordpress";
+import type { ArticleToolData } from "@/lib/articleToolData";
 
 type ArticleLayoutProps = {
   title?: string;
@@ -20,6 +22,7 @@ type ArticleLayoutProps = {
     imageUrl?: string;
     colorVariant?: 1 | 2 | 3 | 4 | 5 | 6;
   };
+  toolData?: ArticleToolData;
 };
 
 function extractLatestPostsBlock(content?: string): { categoryIds: number[]; postsToShow: number } | null {
@@ -38,14 +41,18 @@ function extractLatestPostsBlock(content?: string): { categoryIds: number[]; pos
   }
 }
 
-export default function ArticleLayout(props: ArticleLayoutProps) {
+export default async function ArticleLayout(props: ArticleLayoutProps) {
   const relatedBlock = extractLatestPostsBlock(props.content);
+  // Werbe-Settings (gecacht/dedupliziert mit dem Aufruf in app/layout.tsx).
+  // Quelle jetzt ads.article (Fallback auf Legacy article_ads ist im Merge gelöst).
+  const { ads } = await getSiteSettings();
+  const articleAds = { top: ads.article.top, rails: ads.article.rails, mid: !!ads.article.mid };
 
   return (
     <>
       <main className="min-h-screen bg-white">
         <div className="pb-12" style={{ paddingTop: 0 }}>
-          <ArticleClient {...props} />
+          <ArticleClient {...props} articleAds={articleAds} />
         </div>
         {relatedBlock && relatedBlock.categoryIds.length > 0 && (
           <RelatedPostsSection

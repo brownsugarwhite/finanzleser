@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -45,6 +46,7 @@ export default function Alg1Rechner() {
           einheit="€"
           step={100}
           min={0}
+          max={12000}
         />
 
         <RechnerSelect
@@ -71,6 +73,7 @@ export default function Alg1Rechner() {
           value={params.versicherungsmonate}
           onChange={(val) => setParams((prev) => ({ ...prev, versicherungsmonate: val }))}
           einheit="Monate"
+          step={1}
           min={0}
           max={30}
         />
@@ -81,6 +84,7 @@ export default function Alg1Rechner() {
           value={params.alter}
           onChange={(val) => setParams((prev) => ({ ...prev, alter: val }))}
           einheit="Jahre"
+          step={1}
           min={16}
           max={67}
         />
@@ -90,6 +94,14 @@ export default function Alg1Rechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={result.satzProzent}
+              label="Leistungssatz"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="ALG I monatlich"

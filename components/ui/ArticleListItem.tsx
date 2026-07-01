@@ -1,234 +1,143 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import InlineSVG from '@/components/ui/InlineSVG';
-
-type BookmarkType = 'rechner' | 'vergleich' | 'checkliste' | 'neu';
-
-const BOOKMARK_COLORS: Record<BookmarkType, string> = {
-  rechner: 'var(--color-brand-secondary)',
-  vergleich: 'var(--color-tool-vergleiche)',
-  checkliste: 'var(--color-tool-checklisten)',
-  neu: 'var(--color-brand)',
-};
+import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
+import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { captureTextItem, captureVisualItem, hideSourceEls } from '@/lib/morphCapture';
+import { cleanDescription } from '@/lib/content-utils';
 
 interface ArticleListItemProps {
   post: Post;
   href: string;
-  bookmarkType?: BookmarkType;
+  /** Hero-Variante (Hauptkategorie): Visual 50% + größerer Text. */
+  hero?: boolean;
 }
 
-export default function ArticleListItem({ post, href, bookmarkType }: ArticleListItemProps) {
-  const [infoHovered, setInfoHovered] = useState(false);
+/**
+ * Listen-Card (Subkategorie-Seiten) im Stil der Slider-Artikel-Cards:
+ * Visual links, rechts Titel (Subline) → fetter Text → Beschreibung →
+ * Finanztool-Badges → „Ratgeber lesen". Morph-fähig (visual + italic + bold).
+ */
+export default function ArticleListItem({ post, href, hero = false }: ArticleListItemProps) {
+  const router = useRouter();
+  const imageRef = useRef<HTMLDivElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
+  const boldRef = useRef<HTMLParagraphElement>(null);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
-  const category = post.categories?.nodes?.[0];
-  const bookmarkColor = bookmarkType ? BOOKMARK_COLORS[bookmarkType] : undefined;
+
+  // Gleiche Titel-Logik wie SlideArticleCard: bold = Untertitel (oder Titel),
+  // Subline = Titel (nur wenn Untertitel existiert).
+  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const titleText = untertitel || post.title;
+  const sublineText = untertitel ? post.title : null;
+  const excerpt = cleanDescription(post.excerpt);
+  const tools = post.tools || [];
+
+  const prefetchArticle = () => {
+    try { router.prefetch(href); } catch { /* noop */ }
+  };
+
+  const startMorph = () => {
+    const items: MorphItemSource[] = [];
+    const visual = captureVisualItem(imageRef.current, imageUrl);
+    if (visual) items.push(visual);
+    const subline = captureTextItem(sublineRef.current, 'italic');
+    if (subline) items.push(subline);
+    const bold = captureTextItem(boldRef.current, sublineText ? 'bold' : 'italic');
+    if (bold) items.push(bold);
+    hideSourceEls(imageRef.current, sublineRef.current, boldRef.current);
+    startMorphNavigation({ href, items }, (h) => router.push(h));
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest('a')) return; // „Ratgeber lesen" navigiert selbst
+    startMorph();
+  };
 
   return (
-    <article data-card style={{
-      width: '100%',
-      maxWidth: '1100px',
-      borderRadius: '36px',
-      background: 'rgba(247, 247, 247, 0.7)',
-      backdropFilter: 'blur(8px)',
-      WebkitBackdropFilter: 'blur(8px)',
-      display: 'flex',
-      overflow: 'hidden',
-      gap: '24px',
-      position: 'relative',
-    }}>
-      {/* Lesezeichen */}
-      {bookmarkColor && (
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          right: '36px',
-          width: '28px',
-          zIndex: 1,
-        }}>
-          <div style={{ width: '33px', height: '16px', backgroundColor: bookmarkColor }} />
-          <svg width="33" height="25" viewBox="0 0 28 23" fill="none" preserveAspectRatio="none" style={{ display: 'block' }}>
-            <path d="M13.9991 8.58256L28 22.5817V6.8343e-07L0 1.90735e-06L0 22.5817L13.9991 8.58256Z" fill={bookmarkColor} />
-          </svg>
-          {bookmarkType === 'neu' && (
-            <p style={{
-              position: 'absolute',
-              top: '3px',
-              left: '3px',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 700,
-              fontSize: '13px',
-              lineHeight: 1.3,
-              color: 'white',
-              margin: 0,
-              whiteSpace: 'nowrap',
-            }}>
-              NEU
-            </p>
-          )}
-        </div>
-      )}
-      {/* Visual links */}
-      <div style={{
-        width: '300px',
-        minHeight: '220px',
-        flexShrink: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-      }}>
+    <article
+      data-card
+      data-morph-card={post.slug}
+      onClick={handleClick}
+      onMouseEnter={prefetchArticle}
+      className="article-list-item"
+      style={{ cursor: 'pointer', width: '100%', display: 'flex', gap: '32px', alignItems: 'center', position: 'relative' }}
+    >
+      {/* Visual links (40%) */}
+      <div
+        ref={imageRef}
+        data-morph-role="visual"
+        data-morph-img={imageUrl || undefined}
+        style={{ flex: hero ? '0 0 50%' : '0 0 40%', minWidth: 0, minHeight: hero ? '260px' : '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
+      >
         {imageUrl ? (
-          <InlineSVG
-            src={imageUrl}
-            alt={post.featuredImage?.node?.altText || post.title}
-            style={{ width: '100%', height: '100%' }}
-          />
+          <InlineSVG src={imageUrl} alt={post.featuredImage?.node?.altText || post.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         ) : (
           <span style={{ color: 'var(--color-text-medium)', fontSize: '14px' }}>Kein Bild</span>
         )}
       </div>
 
       {/* Content rechts */}
-      <div style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '24px 28px 24px 0',
-        gap: '4px',
-      }}>
-        {/* Kategorie */}
-        {category && (
-          <span style={{
-            fontFamily: 'Merriweather, serif',
-            fontSize: '14px',
-            fontWeight: 500,
-            fontStyle: 'italic',
-            color: 'var(--color-brand)',
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+        {/* Titel (Subline, kursiv) */}
+        {sublineText && (
+          <p ref={sublineRef} data-morph-role="italic" lang="de" style={{
+            fontFamily: 'Merriweather, serif', fontWeight: 500, fontStyle: 'italic', fontSize: hero ? '18px' : '15px',
+            lineHeight: 1.3, color: 'var(--color-text-medium)', margin: '0 0 6px 0',
           }}>
-            {category.name}
-          </span>
+            {sublineText}
+          </p>
         )}
 
-        {/* Titel */}
-        <p lang="de" style={{
-          fontFamily: 'Merriweather, serif',
-          fontWeight: 700,
-          fontSize: '21px',
-          lineHeight: 1.3,
-          color: 'var(--color-text-primary)',
-          margin: 0,
-          hyphens: 'auto',
-          WebkitHyphens: 'auto',
-          overflowWrap: 'break-word',
-          paddingRight: '5px',
+        {/* Fetter Text */}
+        <p ref={boldRef} data-morph-role={sublineText ? 'bold' : 'italic'} lang="de" style={{
+          fontFamily: 'Merriweather, serif', fontWeight: 700, fontSize: hero ? '30px' : '22px', lineHeight: 1.3,
+          color: 'var(--color-text-primary)', margin: 0,
+          hyphens: 'auto', WebkitHyphens: 'auto', overflowWrap: 'break-word',
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
         }}>
-          {post.title}
+          {titleText}
         </p>
 
         {/* Beschreibung */}
-        <p lang="de" style={{
-          fontFamily: 'var(--font-body)',
-          fontWeight: 400,
-          fontSize: '16px',
-          lineHeight: 1.4,
-          color: 'var(--color-text-medium)',
-          margin: '4px 0 0 0',
-          hyphens: 'auto',
-          WebkitHyphens: 'auto',
-          overflowWrap: 'break-word',
-          display: '-webkit-box',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
-          paddingRight: '5px',
-        }}>
-          {post.excerpt?.replace(/<[^>]*>/g, '') || ''}
-        </p>
-
-        {/* Button Row */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          gap: '12px',
-          marginTop: '12px',
-        }}>
-          {/* Info Button */}
-          <div
-            onMouseEnter={() => setInfoHovered(true)}
-            onMouseLeave={() => setInfoHovered(false)}
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              border: infoHovered ? 'none' : '1px solid var(--color-text-primary)',
-              background: infoHovered ? 'var(--color-text-primary)' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              flexShrink: 0,
-              transition: 'background 0.1s, border 0.1s',
-              ['--fill-0' as string]: infoHovered ? '#ffffff' : 'var(--color-text-primary)',
-            }}
-          >
-            <InlineSVG
-              src="/icons/info_i.svg"
-              alt="Info"
-              style={{ width: '9px', height: '17px' }}
-            />
-          </div>
-
-          {/* zum Beitrag Button */}
-          <Link href={href} style={{
-            backgroundColor: 'rgba(198, 200, 204, 0.23)',
-            borderRadius: '19px',
-            paddingLeft: '20px',
-            paddingRight: '5px',
-            paddingTop: '5px',
-            paddingBottom: '5px',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '15px',
-            height: '50px',
-            textDecoration: 'none',
+        {excerpt && (
+          <p lang="de" style={{
+            fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: hero ? '17px' : '15px', lineHeight: 1.45,
+            color: 'var(--color-text-medium)', margin: '8px 0 0 0',
+            hyphens: 'auto', WebkitHyphens: 'auto', overflowWrap: 'break-word',
           }}>
-            <span style={{
-              fontFamily: 'Open Sans, sans-serif',
-              fontSize: '17px',
-              color: 'var(--color-text-primary)',
-              fontWeight: 400,
-              whiteSpace: 'nowrap',
-            }}>
-              zum Beitrag
+            {excerpt}
+          </p>
+        )}
+
+        {/* Finanztool-Badges */}
+        {tools.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '12px 0 0' }}>
+            {tools.map((t) => (
+              <span key={t} style={{
+                background: TOOL_DOT_COLORS[t], color: '#fff', fontFamily: 'var(--font-body)',
+                fontSize: 12, fontWeight: 600, lineHeight: 1, padding: '5px 10px', letterSpacing: '0.02em',
+              }}>
+                {TOOL_LABEL[t]}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Ratgeber lesen */}
+        <div style={{ marginTop: 14, display: 'flex', alignItems: 'center' }}>
+          <Link href={href} className="article-read-link">
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap' }}>
+              Ratgeber lesen
             </span>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '15px',
-              backgroundColor: 'var(--color-brand)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}>
-              <svg width="11" height="15" viewBox="0 0 11 15" fill="none">
-                <path
-                  d="M1.5 1.50009L9.5 7.50009L1.5 13.5001"
-                  stroke="white"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-            </div>
+            <span className="article-read-line" style={{ height: 0, borderTop: '1px solid currentColor', flexShrink: 0 }} />
+            <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: 'rotate(180deg)', marginLeft: '-12px' }}>
+              <polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" />
+            </svg>
           </Link>
         </div>
       </div>

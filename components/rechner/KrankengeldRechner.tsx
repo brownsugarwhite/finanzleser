@@ -40,6 +40,7 @@ export default function KrankengeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={12000}
         />
 
         <RechnerInput
@@ -50,6 +51,7 @@ export default function KrankengeldRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={8000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

@@ -4,54 +4,116 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "@/lib/gsapConfig";
 import type { NavSubItem } from "@/lib/navItems";
+import { categoryIconForHref } from "@/lib/categoryIcons";
 
-function boldYears(text: string) {
-  const parts = text.split(/(20\d{2}(?:\/\d{2,4})?)/g);
-  return <span style={{ color: "inherit" }}>{parts.map((part, i) =>
-    /^20\d{2}/.test(part) ? <strong key={i} style={{ fontWeight: 900 }}>{part}</strong> : part
-  )}</span>;
-}
-import type { Post, Rechner } from "@/lib/types";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
+/**
+ * Booklet-Überschrift mit Slide-Wechsel: bei Text-Änderung gleitet die alte
+ * Zeile nach oben aus dem Clip-Container, die neue von unten herein.
+ */
+function SlideHeading({
+  text,
+  href,
+  onClose,
+  leadingIcon,
+}: {
+  text: string;
+  href: string;
+  onClose: () => void;
+  leadingIcon?: string;
+}) {
+  const clipRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const prevText = useRef(text);
+  const prevIcon = useRef(leadingIcon);
 
-export type ToolType = "rechner" | "checkliste" | "vergleich";
-export type MegaMenuPost = Post & { tools?: ToolType[] };
-export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: Rechner[] }>;
+  // Icon pulsiert beim Kategoriewechsel (parallel zum Überschriften-Slide).
+  useEffect(() => {
+    if (prevIcon.current === leadingIcon) return;
+    prevIcon.current = leadingIcon;
+    const el = iconRef.current;
+    if (!el) return;
+    gsap.killTweensOf(el);
+    gsap.fromTo(el, { scale: 0.6, opacity: 0.3 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.2)" });
+  }, [leadingIcon]);
 
-const TOOL_DOT_COLORS: Record<ToolType, string> = {
-  rechner: "var(--color-tool-rechner)",
-  vergleich: "var(--color-tool-vergleiche)",
-  checkliste: "var(--color-tool-checklisten)",
-};
+  useEffect(() => {
+    if (prevText.current === text) return;
+    const oldText = prevText.current;
+    prevText.current = text;
+    const clip = clipRef.current;
+    const cur = textRef.current;
+    if (!clip || !cur) return;
 
-function ToolDots({ tools }: { tools?: ToolType[] }) {
-  if (!tools || tools.length === 0) return null;
+    const clone = document.createElement("span");
+    clone.textContent = oldText;
+    clone.style.cssText = "position:absolute;left:0;top:0;white-space:nowrap;display:inline-block;";
+    clip.appendChild(clone);
+
+    gsap.killTweensOf([clone, cur]);
+    gsap.fromTo(clone, { yPercent: 0, opacity: 1 }, { yPercent: -110, opacity: 0, duration: 0.4, ease: "power2.out", onComplete: () => clone.remove() });
+    gsap.fromTo(cur, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, ease: "power2.out" });
+  }, [text]);
+
   return (
-    <span
+    <Link
+      href={href}
+      onClick={onClose}
+      className="megamenu-booklet-heading"
       style={{
         display: "inline-flex",
-        gap: 5,
-        marginLeft: 8,
-        verticalAlign: "middle",
-        whiteSpace: "nowrap",
+        alignItems: "center",
+        gap: 10,
+        fontSize: 20,
+        fontWeight: 700,
+        fontFamily: "var(--font-heading, 'Merriweather', serif)",
+        color: "var(--color-text-primary)",
+        textDecoration: "none",
       }}
-      aria-hidden
     >
-      {tools.map((t) => (
+      {leadingIcon && (
         <span
-          key={t}
+          ref={iconRef}
+          aria-hidden
+          className="megamenu-cat-icon"
           style={{
+            width: 26,
+            height: 26,
+            flexShrink: 0,
             display: "inline-block",
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: TOOL_DOT_COLORS[t],
+            transformOrigin: "center",
+            background: "currentColor",
+            WebkitMaskImage: `url(${leadingIcon})`,
+            maskImage: `url(${leadingIcon})`,
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskSize: "contain",
+            maskSize: "contain",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
           }}
         />
-      ))}
-    </span>
+      )}
+      <span ref={clipRef} style={{ position: "relative", overflow: "hidden", display: "inline-block", paddingBottom: 2 }}>
+        <span ref={textRef} style={{ display: "inline-block" }}>{text}</span>
+      </span>
+    </Link>
   );
 }
+
+import type { Post } from "@/lib/types";
+import type { MegamenuTool } from "@/lib/wordpress";
+import SiteLoader from "@/components/ui/SiteLoader";
+import { TOOL_DOT_COLORS, TOOL_LABEL, type ToolType } from "@/components/ui/ToolDots";
+import { MegaArrowTrail } from "@/components/ui/MegaArrow";
+import MegaPostContent, { boldYears } from "@/components/ui/MegaPostContent";
+
+export type { ToolType };
+export type MegaMenuPost = Post & { tools?: ToolType[] };
+export type PreloadedData = Record<string, { posts: MegaMenuPost[]; hasMore: boolean; tools: MegamenuTool[] }>;
+
+// Finanztools-Spalte: Pfad-Segment je Tool-Typ.
+const TOOL_PATH: Record<ToolType, string> = { rechner: "rechner", vergleich: "vergleiche", checkliste: "checklisten", dokumente: "dokumente" };
 
 interface MegaMenuProps {
   activeCategory: string;
@@ -76,11 +138,12 @@ export default function MegaMenu({
 
   const [posts, setPosts] = useState<MegaMenuPost[]>([]);
   const [hasMorePosts, setHasMorePosts] = useState(false);
-  const [tools, setTools] = useState<Rechner[]>([]);
+  const [tools, setTools] = useState<MegamenuTool[]>([]);
+  const [loading, setLoading] = useState(false);
   const cacheRef = useRef<PreloadedData>({});
   const currentSubRef = useRef<string>(items[0]?.href || "");
-
-  const toolCategory = items.find((item) => item.href === selectedSub)?.toolCategory || "rechner";
+  // Posts-Spalte (Liste/Loader) zum Ein-/Ausblenden beim Sub-Wechsel
+  const postsBodyRef = useRef<HTMLDivElement>(null);
 
   const getCategorySlug = (href: string): string => {
     const parts = href.split("/").filter(Boolean);
@@ -96,14 +159,17 @@ export default function MegaMenu({
   const applySubData = (href: string) => {
     const data = cacheRef.current[href];
     if (data) {
+      // Cache-Hit: sofort, kein Loader
+      setLoading(false);
       setPosts(data.posts);
       setHasMorePosts(data.hasMore);
       setTools(data.tools);
     } else {
-      // Fetch on demand, then apply all at once
+      // Cache-Miss: Loader zeigen, dann nachladen
+      setLoading(true);
       const slug = getCategorySlug(href);
       Promise.all([
-        fetch(`/api/megamenu/posts?category=${slug}`).then(r => r.ok ? r.json() : { posts: [], hasMore: false }),
+        fetch(`/api/megamenu/posts?category=${slug}`).then(r => { if (!r.ok) throw new Error("mm-posts"); return r.json(); }),
         fetch(`/api/megamenu/tools?category=${slug}`).then(r => r.ok ? r.json() : []),
       ]).then(([postsData, toolsData]) => {
         cacheRef.current[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
@@ -112,8 +178,12 @@ export default function MegaMenu({
           setPosts(postsData.posts);
           setHasMorePosts(postsData.hasMore);
           setTools(toolsData);
+          setLoading(false);
         }
-      }).catch(() => {});
+      }).catch(() => {
+        // Fehler NICHT cachen → nächster Aufruf lädt neu (sonst „Beiträge laden nie").
+        if (href === currentSubRef.current) setLoading(false);
+      });
     }
   };
 
@@ -125,13 +195,63 @@ export default function MegaMenu({
     applySubData(first);
   }, [items, preloadedData]);
 
+  // Alle Subkategorien der aktiven Kategorie im Hintergrund vorladen, sobald
+  // das Megamenü öffnet — so erscheinen die 3 neuesten Beiträge beim Umschalten
+  // sofort (ohne Loader), nicht erst nach dem Fetch beim Klick.
+  useEffect(() => {
+    items.forEach((item) => {
+      const href = item.href;
+      if (cacheRef.current[href]) return;
+      const slug = getCategorySlug(href);
+      Promise.all([
+        fetch(`/api/megamenu/posts?category=${slug}`).then((r) => { if (!r.ok) throw new Error("mm-posts"); return r.json(); }),
+        fetch(`/api/megamenu/tools?category=${slug}`).then((r) => (r.ok ? r.json() : [])),
+      ])
+        .then(([postsData, toolsData]) => {
+          cacheRef.current[href] = { posts: postsData.posts, hasMore: postsData.hasMore, tools: toolsData };
+          // Falls der User genau auf diese Sub wartet (Loader sichtbar), sofort zeigen.
+          if (href === currentSubRef.current) {
+            setPosts(postsData.posts);
+            setHasMorePosts(postsData.hasMore);
+            setTools(toolsData);
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          // Fehler NICHT cachen → bleibt für einen erneuten Versuch offen.
+        });
+    });
+  }, [items]);
+
   // Switch subcategory
   const switchSub = (href: string) => {
     if (href === selectedSub) return;
+    // Aktuellen Inhalt sofort ausblenden (Fade-out) bevor neue Daten kommen
+    if (postsBodyRef.current) {
+      gsap.to(postsBodyRef.current, { opacity: 0, duration: 0.12, ease: "power1.in" });
+    }
     currentSubRef.current = href;
     setSelectedSub(href);
     applySubData(href);
   };
+
+  // Posts-Spalte einblenden, sobald sich der gerenderte Inhalt ändert
+  // (neue Sub gewählt, Loader an/aus). Schlichter Fade.
+  useEffect(() => {
+    const el = postsBodyRef.current;
+    if (!el) return;
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" });
+  }, [selectedSub, loading]);
+
+  // Finanztools schlicht „aufblitzen" lassen (Opacity-Fade) — wie die Posts-Spalte
+  // in der rechten Booklet-Hälfte, beim Öffnen und bei jedem Inhaltswechsel.
+  const toolsNavRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const nav = toolsNavRef.current;
+    if (!nav) return;
+    gsap.killTweensOf(nav);
+    gsap.fromTo(nav, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" });
+  }, [tools]);
 
   // Keep all seen category navs so they're always in the DOM
   const allNavsRef = useRef<Record<string, NavSubItem[]>>({});
@@ -205,13 +325,23 @@ export default function MegaMenu({
     void el.offsetHeight;
     el.style.transition = "height 0.4s ease-in-out";
     el.style.height = newHeight + "px";
-  }, [selectedSub, posts, tools]);
+  }, [selectedSub, posts, tools, loading]);
 
   return (
-    <div style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }} onClick={(e) => e.stopPropagation()}>
-      <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+    <div
+      style={{ width: "100%", padding: "36px 50px 24px 24px", color: "var(--color-text-primary)" }}
+      onClick={(e) => {
+        // Klick in den leeren Bereich neben/zwischen den Panels schließt das Menü.
+        // Klicks auf die eigentlichen Panels (weißes Booklet, Finanztools, Footer)
+        // werden ignoriert.
+        if (!(e.target as HTMLElement).closest("[data-megamenu-panel]")) {
+          onClose();
+        }
+      }}
+    >
+      <div className="megamenu-stage" style={{ position: "relative", display: "flex", justifyContent: "center" }}>
         {/* Gray bar — behind bookmark, above overflow:hidden container */}
-        <div style={{
+        <div data-megamenu-panel className="megamenu-seam" style={{
           position: "absolute",
           left: "50%",
           top: 0,
@@ -224,7 +354,7 @@ export default function MegaMenu({
         }} />
 
         {/* Bookmark Divider — above overflow:hidden container */}
-        <div style={{
+        <div data-megamenu-panel className="megamenu-seam" style={{
           position: "absolute",
           left: "50%",
           top: 0,
@@ -251,6 +381,7 @@ export default function MegaMenu({
         {/* Center Container: Subcategories + Posts */}
         <div
           ref={containerRef}
+          data-megamenu-panel
           style={{
           display: "flex",
           flexDirection: "column",
@@ -268,38 +399,21 @@ export default function MegaMenu({
           {/* Headings row */}
           <div style={{ display: "flex", marginBottom: 0, padding: "0 40px", borderBottom: "1px solid rgba(0, 0, 0, 0.07)", paddingBottom: 16 }}>
             <div style={{ flex: 1, paddingRight: 24 }}>
-              <Link
+              <SlideHeading
+                text={activeCategoryLabel}
                 href={mainCategoryHref}
-                onClick={onClose}
-                style={{
-                  display: "block",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  color: "var(--color-text-primary)",
-                  textDecoration: "none",
-                }}
-              >
-                {activeCategoryLabel}
-              </Link>
+                onClose={onClose}
+                leadingIcon={categoryIconForHref(mainCategoryHref)}
+              />
             </div>
             {/* Spacer for bookmark */}
             <div style={{ width: 10, flexShrink: 0 }} />
             <div style={{ flex: 1, paddingLeft: 36 }}>
-              <Link
+              <SlideHeading
+                text={items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
                 href={selectedSub}
-                onClick={onClose}
-                style={{
-                  display: "block",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  fontFamily: "var(--font-heading, 'Merriweather', serif)",
-                  color: "var(--color-text-primary)",
-                  textDecoration: "none",
-                }}
-              >
-                {items.find((item) => item.href === selectedSub)?.label || "Beiträge"}
-              </Link>
+                onClose={onClose}
+              />
             </div>
           </div>
 
@@ -345,15 +459,7 @@ export default function MegaMenu({
                   }}
                 >
                   {item.label}
-                  <span className={`megamenu-sub-line ${activeSub === item.href ? "megamenu-sub-line--active" : ""}`} style={{
-                    height: 0,
-                    borderTop: "1px solid currentColor",
-                    opacity: 1,
-                    flexShrink: 0,
-                  }} />
-                  <svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", marginLeft: "-12px" }}>                    
-                    <polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" />
-                  </svg>
+                  <MegaArrowTrail active={activeSub === item.href} />
                 </button>
               ))}
               </nav>
@@ -373,7 +479,12 @@ export default function MegaMenu({
             }}>
               Neuste Beiträge
             </div>
-            {posts.length > 0 ? (
+            <div ref={postsBodyRef} style={{ minHeight: 140 }}>
+            {loading ? (
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: 140 }}>
+                <SiteLoader size={44} />
+              </div>
+            ) : posts.length > 0 ? (
               <nav style={{ display: "flex", flexDirection: "column", gap: 13, maxHeight: 320, overflowY: "auto", outline: "1px solid rgba(0, 0, 0, 0.04)", marginTop: 10, padding: "12px 8px" }}>
                 {posts.map((post) => (
                   <Link
@@ -384,8 +495,8 @@ export default function MegaMenu({
                       display: "block",
                       color: "var(--color-text-primary)",
                       padding: "6px 12px",
-                      fontSize: 15,
-                      fontWeight: 600,
+                      fontSize: 16,
+                      fontWeight: 700,
                       fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       textDecoration: "none",
                       transition: "color 0.15s ease",
@@ -394,49 +505,46 @@ export default function MegaMenu({
                     onMouseEnter={(e) => { const el = e.currentTarget; el.style.color = "#D3005E"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = "inherit"); }}
                     onMouseLeave={(e) => { const el = e.currentTarget; el.style.color = "var(--color-text-primary)"; el.querySelectorAll("span, strong").forEach(c => (c as HTMLElement).style.color = ""); }}
                   >
-                    {boldYears(post.title)}
-                    <ToolDots tools={post.tools} />
-                    {post.beitragFelder?.beitragUntertitel && (
-                      <span style={{
-                        display: "block",
-                        fontSize: 14,
-                        fontWeight: 450,
-                        fontFamily: "var(--font-body)",
-                        color: "var(--color-text-medium)",
-                      }}>
-                        {post.beitragFelder.beitragUntertitel}
-                      </span>
-                    )}
+                    {/* Oben: kleiner post.title + Tool-Dots rechts daneben.
+                        Darunter: der Kicker (1. Content-h2) als fetter Titel — wie
+                        auf der Artikelseite und in den Card-Slidern.
+                        Geteilt mit dem Mobile-Megamenü via MegaPostContent. */}
+                    <MegaPostContent post={post} />
                   </Link>
                 ))}
               </nav>
             ) : (
               <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Keine Beiträge gefunden</div>
             )}
-            {hasMorePosts && (
+            {!loading && hasMorePosts && (
               <Link
                 href={selectedSub}
                 onClick={onClose}
+                className="megamenu-allposts-link"
                 style={{
-                  display: "block",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
                   marginTop: 23,
                   paddingTop: 16,
                   borderTop: "1px solid rgba(0, 0, 0, 0.07)",
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: 600,
                   color: "var(--color-brand)",
                   textDecoration: "none",
                 }}
               >
-                Alle Beiträge ansehen <span style={{ display: "inline-block", width: 13, height: 0, borderTop: "1px solid currentColor", verticalAlign: "middle", marginLeft: 4 }} /><svg width="8" height="8" viewBox="0 0 17.45 15.77" fill="none" aria-hidden style={{ flexShrink: 0, transform: "rotate(180deg)", display: "inline", verticalAlign: "middle", marginLeft: -4 }}><polyline points="16.95 15.27 8.27 8.11 16.95 .5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" vectorEffect="non-scaling-stroke" /></svg>
+                Alle Beiträge zu {items.find((item) => item.href === selectedSub)?.label || "dieser Kategorie"}
+                <MegaArrowTrail />
               </Link>
             )}
+            </div>
           </div>
           </div>
         </div>
 
         {/* Right: Finanztools (transparent, absolute) */}
-        <div style={{ position: "absolute", right: 0, top: 0, width: 230, padding: "12px 0", textAlign: "right" }}>
+        <div data-megamenu-panel style={{ position: "absolute", right: 0, top: 0, width: 230, padding: "12px 0", textAlign: "right" }}>
           <Link
             href="/finanztools"
             onClick={onClose}
@@ -455,22 +563,22 @@ export default function MegaMenu({
             Passende<br />Finanztools
           </Link>
           {tools.length > 0 ? (
-            <nav style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
+            <nav ref={toolsNavRef} style={{ display: "flex", flexDirection: "column", maxHeight: 400, overflowY: "auto", alignItems: "flex-end" }}>
               {tools.map((tool, idx) => (
-                <div key={tool.id}>
+                <div key={`${tool.type}-${tool.slug}-${idx}`} className="megamenu-tool-item">
                   {idx > 0 && (
                     <div style={{ height: 1, background: "rgba(0, 0, 0, 0.07)", margin: "13px 12px" }} />
                   )}
                   <Link
-                    href={`/finanztools/rechner/${tool.slug}`}
+                    href={`/finanztools/${TOOL_PATH[tool.type]}/${tool.slug}`}
                     onClick={onClose}
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "flex-end",
                       padding: "8px 12px",
-                      fontSize: 15,
-                      fontWeight: 500,
+                      fontSize: 16,
+                      fontWeight: 700,
                       lineHeight: 1.2,
                       fontFamily: "var(--font-heading, 'Merriweather', serif)",
                       color: "var(--color-text-primary)",
@@ -495,13 +603,9 @@ export default function MegaMenu({
                       color: "white",
                       padding: "2px 8px",
                       borderRadius: 0,
-                      background: toolCategory === "rechner"
-                        ? "var(--color-tool-rechner)"
-                        : toolCategory === "vergleich"
-                        ? "var(--color-tool-vergleiche)"
-                        : "var(--color-tool-checklisten)",
+                      background: TOOL_DOT_COLORS[tool.type],
                     }}>
-                      {toolCategory === "rechner" ? "Rechner" : toolCategory === "vergleich" ? "Vergleich" : "Checkliste"}
+                      {TOOL_LABEL[tool.type]}
                     </span>
                     {boldYears(tool.title)}
                   </Link>
@@ -514,10 +618,10 @@ export default function MegaMenu({
         </div>
       </div>
 
-      {/* Legal Links + Dark Mode Toggle */}
-      <div style={{
+      {/* Legal Links — links unter dem Booklet (wie zuvor) */}
+      <div data-megamenu-panel style={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         marginTop: 16,
         maxWidth: 700,
         width: "100%",
@@ -547,16 +651,6 @@ export default function MegaMenu({
             </Link>
           ))}
         </nav>
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{
-            fontSize: 14,
-            fontFamily: "var(--font-body)",
-            color: "var(--color-text-secondary)",
-          }}>
-            Modus
-          </span>
-          <DarkModeToggle />
-        </div>
       </div>
     </div>
   );

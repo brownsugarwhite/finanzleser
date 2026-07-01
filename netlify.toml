@@ -2,8 +2,18 @@
   command = "npm run build"
   publish = ".next"
 
+# Wärmt nach jedem Deploy die Caches vor (alle Sitemap-URLs einmal aufrufen), damit
+# auch nicht-prerenderte Seiten beim ersten echten Besuch schnell sind.
+# Abschalten via Env WARM_CACHE=false. Concurrency via WARM_CONCURRENCY.
+[[plugins]]
+  package = "/netlify/plugins/warm-cache"
+
 [build.environment]
   NODE_VERSION = "20"
+  # LEO-Backend des Kunden (RAG-Service auf Heroku). /api/chat proxyt darauf.
+  # Gilt für alle Kontexte (Staging, Previews, Production) — ein einziges Backend.
+  # Falls der Kunde später eine separate Prod-URL liefert: in [context.production.environment] überschreiben.
+  LEO_BACKEND_URL = "https://leo-finanzleser-ea7e1549925c.herokuapp.com"
 
 # Production-Site (deployt vom main-Branch, später)
 [context.production.environment]

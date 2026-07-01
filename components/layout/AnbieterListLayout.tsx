@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Footer from "./Footer";
-import Breadcrumb from "@/components/ui/Breadcrumb";
-import SparkHeading from "@/components/ui/SparkHeading";
+import CategoryHeader from "./CategoryHeader";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import type { AnbieterPost } from "@/lib/types";
 
@@ -31,32 +30,17 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-6">
-          <Breadcrumb items={breadcrumbItems} />
-        </div>
+        <CategoryHeader
+          title="Anbieter"
+          breadcrumbItems={breadcrumbItems}
+          imageWide="/headers/anbieter_wide.webp"
+          imageWideAlt="Anbieter"
+          description={`Kontaktdaten von ${anbieter.length} Versicherern und Finanzanbietern auf einen Blick.`}
+        />
 
-        <div style={{ maxWidth: 1200, marginBottom: 40, marginTop: 24 }} className="mx-auto px-6">
-          <div
-            style={{
-              width: "100%",
-              height: 250,
-              background: "var(--color-placeholder-bg)",
-            }}
-            aria-hidden="true"
-          />
-        </div>
-
-        <SparkHeading title="Anbieter" as="h1" />
-
+        <div className="scalable-landing">
         <div style={{ maxWidth: 1200 }} className="mx-auto pb-12">
-          <div className="px-6" style={{ marginTop: 40 }}>
-          <p
-            className="mb-10 text-gray-600 text-center"
-            style={{ fontFamily: "Merriweather, serif", fontSize: "18px", fontStyle: "italic" }}
-          >
-            Kontaktdaten von {anbieter.length} Versicherern und Finanzanbietern auf einen Blick.
-          </p>
-
+          <div className="px-6">
           {letters.map((letter) => (
             <section key={letter} className="mb-10">
               <h2 className="font-bold mb-4" style={{ fontSize: "24px", color: "var(--color-brand-secondary)" }}>
@@ -78,6 +62,7 @@ export default function AnbieterListLayout({ anbieter }: AnbieterListLayoutProps
             </section>
           ))}
           </div>
+        </div>
         </div>
       </main>
       <Footer />

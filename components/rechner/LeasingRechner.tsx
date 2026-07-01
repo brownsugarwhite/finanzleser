@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -34,6 +35,15 @@ export default function LeasingRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Leasingrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Kurzleasing (24 Mon.)", values: { laufzeitMonate: 24, restwertProzent: 55 } },
+          { label: "Standard (36 Mon.)", values: { laufzeitMonate: 36, restwertProzent: 45 } },
+          { label: "Langleasing (48 Mon.)", values: { laufzeitMonate: 48, restwertProzent: 35 } },
+        ]}
+        onApply={(v) => setParams((prev) => ({ ...prev, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Kaufpreis"
@@ -43,6 +53,7 @@ export default function LeasingRechner() {
           einheit="€"
           step={1000}
           min={0}
+          max={150000}
         />
         <RechnerInput
           label="Laufzeit"
@@ -63,6 +74,7 @@ export default function LeasingRechner() {
           step={5}
           min={0}
           max={100}
+          slider
         />
         <RechnerInput
           label="Zinssatz p.a."
@@ -72,6 +84,8 @@ export default function LeasingRechner() {
           einheit="%"
           step={0.1}
           min={0}
+          max={15}
+          slider
         />
         <RechnerInput
           label="Anzahlung"
@@ -81,6 +95,7 @@ export default function LeasingRechner() {
           einheit="€"
           step={500}
           min={0}
+          max={30000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

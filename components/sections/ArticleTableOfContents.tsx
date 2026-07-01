@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/gsapConfig"; // ensures GSAP plugins are registered before tweens
-import { useEffect, useState, useCallback } from "react";
+import { useLayoutEffect, useState, useCallback } from "react";
 import gsap from "@/lib/gsapConfig";
 
 interface TOCItem {
@@ -12,6 +12,10 @@ interface TOCItem {
 
 interface ArticleTableOfContentsProps {
   content: string;
+  /** Server-seitig vorgebaute Items (lib/articleTocBuilder) → TOC steht schon im
+   *  SSR/Initial-Render mit voller Höhe → kein Layout-Shift. Client verfeinert
+   *  danach nur async geladene Tool-Titel. */
+  initialItems?: TOCItem[];
 }
 
 // Tool-Farben für farbigen Punkt im TOC
@@ -19,6 +23,7 @@ const TOOL_COLORS: Record<string, string> = {
   rechner: "var(--color-tool-rechner)",
   checkliste: "var(--color-tool-checklisten)",
   vergleich: "var(--color-tool-vergleiche)",
+  dokumente: "var(--color-text-primary)",
 };
 
 function NumberBadge({ number, color }: { number: number; color?: string }) {
@@ -78,8 +83,8 @@ function ArrowLine() {
   );
 }
 
-export default function ArticleTableOfContents({ content }: ArticleTableOfContentsProps) {
-  const [items, setItems] = useState<TOCItem[]>([]);
+export default function ArticleTableOfContents({ content, initialItems = [] }: ArticleTableOfContentsProps) {
+  const [items, setItems] = useState<TOCItem[]>(initialItems);
 
   const scrollToId = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -105,10 +110,15 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
       if (heading.hasAttribute("data-toc-exclude")) return;
       // Tool-H2 erkennen (hat Klasse article-tool-label)
       const isTool = heading.classList.contains("article-tool-label");
+      // Dokumente-Kopf nutzt eigenes Markup (.dok-head-h)
+      const isDok = heading.classList.contains("dok-head-h");
       let toolType: string | undefined;
       let text: string;
 
-      if (isTool) {
+      if (isDok) {
+        toolType = "dokumente";
+        text = "Dokumente";
+      } else if (isTool) {
         // Badge-Element enthält den Tool-Typ-Text ("Rechner", "Checkliste", etc.)
         const badge = heading.querySelector(".article-tool-badge");
         const titleEl = heading.querySelector(".article-tool-title");
@@ -117,6 +127,7 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
         if (badgeText.includes("rechner")) toolType = "rechner";
         else if (badgeText.includes("checkliste")) toolType = "checkliste";
         else if (badgeText.includes("vergleich")) toolType = "vergleich";
+        else if (badgeText.includes("dokument")) toolType = "dokumente";
         // Nur den Titel-Text verwenden (ohne Badge)
         text = titleEl?.textContent?.trim() || heading.textContent?.trim() || "";
       } else {
@@ -131,7 +142,12 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
     setItems(tocItems);
   };
 
-  useEffect(() => {
+  // useLayoutEffect + sofortiger loadTOC(): die h2-Überschriften (inkl. IDs) stehen
+  // beim Mount bereits im committed DOM, also vor dem Paint scannen → das inline-TOC
+  // hat ab dem ersten Frame seine volle Höhe und der Artikel-Content rutscht NICHT
+  // mehr nach (Layout-Shift während der Transition). Timer verfeinern async Tool-Titel.
+  useLayoutEffect(() => {
+    loadTOC();
     const timers = [100, 200, 300, 500, 700, 1000, 1500, 2000, 3000].map((ms) =>
       setTimeout(loadTOC, ms)
     );
@@ -144,7 +160,7 @@ export default function ArticleTableOfContents({ content }: ArticleTableOfConten
   }
 
   return (
-    <div className="mb-12">
+    <div className="mb-12" id="article-inline-toc">
       <p style={{ fontSize: "27px", fontWeight: 600, fontFamily: "var(--font-heading, 'Merriweather', serif)", marginBottom: "23px", color: "var(--color-text-primary)", margin: "0 0 36px 0" }}>
         Inhaltsverzeichnis
       </p>

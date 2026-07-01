@@ -9,6 +9,8 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerPresets from "./ui/RechnerPresets";
+import RechnerBenchmark from "./ui/RechnerBenchmark";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -33,6 +35,15 @@ export default function StundenlohnRechner() {
     <div className="rechner-container">
       <h3 className="rechner-title">Stundenlohnrechner</h3>
 
+      <RechnerPresets
+        presets={[
+          { label: "Vollzeit", values: { wochenstunden: 40, urlaubstage: 30 } },
+          { label: "Teilzeit", values: { wochenstunden: 20, urlaubstage: 30 } },
+          { label: "30-Stunden-Woche", values: { wochenstunden: 30, urlaubstage: 30 } },
+        ]}
+        onApply={(v) => setParams((p) => ({ ...p, ...v }))}
+      />
+
       <div className="rechner-inputs">
         <RechnerInput
           label="Jahresgehalt (brutto)"
@@ -42,6 +53,7 @@ export default function StundenlohnRechner() {
           einheit="€"
           step={1000}
           min={0}
+          max={150000}
         />
         <RechnerInput
           label="Wochenstunden"
@@ -51,6 +63,7 @@ export default function StundenlohnRechner() {
           einheit="h"
           step={1}
           min={1}
+          max={60}
         />
         <RechnerInput
           label="Urlaubstage"
@@ -60,6 +73,7 @@ export default function StundenlohnRechner() {
           einheit="Tage"
           step={1}
           min={0}
+          max={40}
         />
         <RechnerInput
           label="Feiertage"
@@ -69,6 +83,7 @@ export default function StundenlohnRechner() {
           einheit="Tage"
           step={1}
           min={0}
+          max={20}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 
@@ -76,6 +91,17 @@ export default function StundenlohnRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerBenchmark
+              value={Math.round(result.stundenlohn * 100) / 100}
+              average={25}
+              unit=" €"
+              valueLabel="Dein Stundenlohn"
+              averageLabel="Ø Deutschland"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Stundenlohn" value={euro(result.stundenlohn)} highlight />
             <RechnerResultBox label="Monatsgehalt" value={euro(result.monatsgehalt)} />

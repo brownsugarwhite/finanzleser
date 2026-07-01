@@ -9,6 +9,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerBenchmark from "./ui/RechnerBenchmark";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -62,6 +63,7 @@ export default function RenteRechner() {
           onChange={(val) => setParams((p) => ({ ...p, jahresBrutto: val }))}
           einheit="€/Jahr"
           min={0}
+          max={120000}
           step={1000}
         />
 
@@ -82,6 +84,17 @@ export default function RenteRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerBenchmark
+              value={Math.round(result.renteMonatlich)}
+              average={Math.round(result.standardrente)}
+              unit=" €"
+              valueLabel="Deine Rente"
+              averageLabel="Standardrente (45 EP)"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Monatliche Rente"

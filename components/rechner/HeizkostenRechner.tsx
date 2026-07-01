@@ -40,6 +40,7 @@ export default function HeizkostenRechner() {
           einheit="m2"
           min={10}
           max={500}
+          step={5}
         />
         <RechnerSelect
           label="Energietraeger"
@@ -65,6 +66,8 @@ export default function HeizkostenRechner() {
           onChange={(val) => setParams((p) => ({ ...p, verbrauchKwh: val }))}
           einheit="kWh/Jahr"
           min={0}
+          max={40000}
+          step={100}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

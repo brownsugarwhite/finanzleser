@@ -1,7 +1,11 @@
 "use client";
 
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
+import gsap from "@/lib/gsapConfig";
 import TableOfContents from "@/components/sections/TableOfContents";
 import type { TOCItem } from "@/lib/hooks/useArticleToc";
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 interface ArticleSidebarProps {
   items: TOCItem[];
@@ -10,29 +14,141 @@ interface ArticleSidebarProps {
   scrollToId: (id: string) => void;
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
+  /** Erst sichtbar, wenn das In-Body-TOC oben aus dem Bild gescrollt ist. */
+  visible: boolean;
 }
 
-export default function ArticleSidebar({ items, activeId, scrollProgress, scrollToId, collapsed, setCollapsed }: ArticleSidebarProps) {
+const EASE = "cubic-bezier(0.65, 0, 0.35, 1)"; // ease-in-out
+const DUR = "0.35s";
+
+// Label-Schreibmaschine: "Inhalt" ist Präfix von "Inhaltsverzeichnis" → reines
+// Slicen genügt (vorwärts ergänzen / rückwärts abbauen).
+const SHORT = "Inhalt";
+const FULL = "Inhaltsverzeichnis";
+
+const toggleStyles = `
+  .toc-toggle {
+    background: transparent;
+    border: 1px solid var(--color-text-medium);
+    color: #334A27;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .toc-toggle:hover {
+    background: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+    color: var(--color-bg-page);
+  }
+  .toc-toggle:active {
+    background: var(--color-brand-secondary);
+    border-color: var(--color-brand-secondary);
+    color: #ffffff;
+  }
+  .toc-toggle svg { transition: transform ${DUR} ${EASE}; }
+`;
+
+export default function ArticleSidebar({ items, activeId, scrollProgress, scrollToId, collapsed, setCollapsed, visible }: ArticleSidebarProps) {
+  // GSAP-Slide (gestaffelte Punkte) wie ursprünglich. Flash-Schutz NUR via
+  // opacity/visibility-CSS (`:not(.toc-init)`) — KEIN transform im CSS, damit es
+  // GSAPs xPercent/clearProps nicht stört (das war die eigentliche Bug-Ursache).
+  const asideRef = useRef<HTMLElement>(null);
+  const inited = useRef(false);
+  const [init, setInit] = useState(false);
+  useIsoLayoutEffect(() => {
+    if (asideRef.current) gsap.set(asideRef.current, { xPercent: -105, autoAlpha: 0 });
+    inited.current = true;
+    setInit(true);
+  }, []);
+  useEffect(() => {
+    const aside = asideRef.current;
+    if (!aside || !inited.current) return;
+    const dots = aside.querySelectorAll<HTMLElement>(".toc-item");
+    gsap.killTweensOf(aside);
+    gsap.killTweensOf(dots);
+    if (visible) {
+      const tl = gsap.timeline({
+        onComplete: () => { gsap.set(aside, { clearProps: "transform" }); gsap.set(dots, { clearProps: "transform" }); },
+      });
+      tl.fromTo(aside, { xPercent: -105, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45, ease: "power3.out", overwrite: true }, 0);
+      if (dots.length) {
+        tl.fromTo(dots, { x: -16, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out", stagger: 0.03 }, 0.12);
+      }
+    } else {
+      gsap.to(aside, { xPercent: -105, autoAlpha: 0, duration: 0.4, ease: "power3.in", overwrite: true });
+    }
+  }, [visible]);
+
+  // Schreibmaschinen-Label
+  const [labelLen, setLabelLen] = useState(collapsed ? SHORT.length : FULL.length);
+  const lenRef = useRef(labelLen);
+  useEffect(() => {
+    const target = collapsed ? SHORT.length : FULL.length;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      if (cancelled) return;
+      const cur = lenRef.current;
+      if (cur === target) return;
+      const next = cur + (target > cur ? 1 : -1);
+      lenRef.current = next;
+      setLabelLen(next);
+      if (next !== target) timer = setTimeout(tick, 26);
+    };
+    timer = setTimeout(tick, 0);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [collapsed]);
+
+  // Scroll-Zustand des TOC-Containers: Top-Linie (gescrollt) + Bottom-Gradient (abgeschnitten)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrolledTop, setScrolledTop] = useState(false);
+  const [cutOff, setCutOff] = useState(false);
+  const recompute = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setScrolledTop(el.scrollTop > 2);
+    setCutOff(el.scrollTop + el.clientHeight < el.scrollHeight - 2);
+  }, []);
+  useEffect(() => {
+    recompute();
+    const el = scrollRef.current;
+    window.addEventListener("resize", recompute);
+    let ro: ResizeObserver | undefined;
+    if (el && typeof ResizeObserver !== "undefined") {
+      // Container- UND Content-Größe beobachten → cutOff/scrolledTop stimmen auch,
+      // wenn der Inhalt (async Tool-Titel, Layout) erst später seine Höhe bekommt.
+      ro = new ResizeObserver(() => recompute());
+      ro.observe(el);
+      if (el.firstElementChild) ro.observe(el.firstElementChild);
+    }
+    return () => {
+      window.removeEventListener("resize", recompute);
+      ro?.disconnect();
+    };
+  }, [recompute, items, collapsed]);
 
   return (
     <aside
-      className="article-sidebar"
+      ref={asideRef}
+      className={`article-sidebar${init ? " toc-init" : ""}`}
       style={{
         position: "absolute",
         top: 0,
         left: 0,
         bottom: 0,
         height: "100%",
-        zIndex: 52,
+        zIndex: 40,
         display: "flex",
-        gap: collapsed ? "10px" : "23px",
+        gap: collapsed ? "8px" : "23px",
         flexShrink: 0,
-        width: collapsed ? "120px" : "430px",
-        paddingLeft: collapsed ? "23px" : "50px",
-        paddingRight: collapsed ? "23px" : "23px",
+        width: collapsed ? "100px" : "430px",
+        paddingLeft: collapsed ? "18px" : "50px",
+        paddingRight: collapsed ? "12px" : "23px",
+        transition: `width ${DUR} ${EASE}, padding ${DUR} ${EASE}, gap ${DUR} ${EASE}`,
       }}
     >
-      <div className="sticky top-24" style={{ position: "sticky", top: "100px", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", maxHeight: "calc(100vh - 120px)", flexShrink: 0 }}>
+      <style>{toggleStyles}</style>
+      {/* Natürliche Breite (flexShrink:0, kein Grow) → kein Breiten-Snap beim Toggle, expanded
+          bleibt eng an der dotted line. Kreise werden collapsed via <a> justifyContent zentriert. */}
+      <div className="sticky top-24" style={{ position: "sticky", top: "100px", zIndex: 51, alignSelf: "flex-start", display: "flex", flexDirection: "column", flexShrink: 0, minWidth: 0, alignItems: "stretch" }}>
         <h3
           style={{
             fontFamily: "Merriweather, serif",
@@ -40,35 +156,64 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
             fontWeight: 600,
             color: "var(--color-text-primary)",
             margin: "0 0 " + (collapsed ? "12px" : "23px") + " 0",
-            textAlign: collapsed ? "center" : "left",
+            textAlign: "left",
+            alignSelf: "flex-start",
+            whiteSpace: "nowrap",
             flexShrink: 0,
+            transition: `font-size ${DUR} ${EASE}, margin ${DUR} ${EASE}`,
           }}
         >
-          {collapsed ? "Inhalt" : "Inhaltsverzeichnis"}
+          {FULL.slice(0, labelLen)}
         </h3>
-        <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
-          <TableOfContents
-            items={items}
-            activeId={activeId}
-            scrollProgress={scrollProgress}
-            scrollToId={scrollToId}
-            collapsed={collapsed}
-            onToggleCollapsed={() => setCollapsed(!collapsed)}
+
+        {/* Scroll-Container mit Top-Linie (beim Scrollen) + Bottom-Gradient (abgeschnitten).
+            Eigene max-height (viewport-bezogen) → scrollt zuverlässig, statt von flex:1 abzuhängen. */}
+        <div style={{ position: "relative", width: "100%", minHeight: 0 }}>
+          <div
+            aria-hidden
+            style={{
+              position: "absolute", top: 0, left: 0, right: 0, height: 1,
+              background: "rgba(0,0,0,0.12)",
+              opacity: scrolledTop ? 1 : 0,
+              transition: "opacity 0.25s ease",
+              pointerEvents: "none", zIndex: 2,
+            }}
+          />
+          <div ref={scrollRef} onScroll={recompute} style={{ overflowY: "auto", maxHeight: "calc(100vh - 180px)", minHeight: 0, width: "100%", paddingBottom: 60 }}>
+            <TableOfContents
+              items={items}
+              activeId={activeId}
+              scrollProgress={scrollProgress}
+              scrollToId={(id) => { scrollToId(id); setCollapsed(true); }}
+              collapsed={collapsed}
+              onToggleCollapsed={() => setCollapsed(!collapsed)}
+            />
+          </div>
+          <div
+            aria-hidden
+            style={{
+              position: "absolute", bottom: 0, left: 0, right: 0, height: 60,
+              // page-bg (unten) → page-bg mit 0 Alpha (oben) für Einfade-Effekt
+              background: "linear-gradient(to top, rgb(250,249,246) 0%, rgba(250,249,246,0) 100%)",
+              opacity: cutOff ? 1 : 0,
+              transition: "opacity 0.25s ease",
+              pointerEvents: "none", zIndex: 2,
+            }}
           />
         </div>
       </div>
+
       {/* Toggle + Vertical DotLine */}
       <div style={{ width: 24, flexShrink: 0, alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "center", zIndex: 51 }}>
         {/* Toggle Button */}
         <div style={{ position: "sticky", top: "96px", zIndex: 3, marginTop: "-4px" }}>
           <button
+            className="toc-toggle"
             onClick={() => setCollapsed(!collapsed)}
             style={{
               width: "24px",
               height: "24px",
               borderRadius: "50%",
-              border: "1px solid var(--color-text-medium)",
-              backgroundColor: "transparent",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
@@ -77,9 +222,9 @@ export default function ArticleSidebar({ items, activeId, scrollProgress, scroll
             }}
             aria-label={collapsed ? "Inhaltsverzeichnis aufklappen" : "Inhaltsverzeichnis zuklappen"}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.45 15.77" width="10" height="10" style={{ transform: collapsed ? "rotate(180deg)" : "none" }}>
-              <polyline points="9.18 15.27 .5 8.11 9.18 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
-              <polyline points="16.95 15.27 8.27 8.11 16.95 .5" fill="none" stroke="#334A27" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.45 15.77" width="10" height="10" style={{ transform: collapsed ? "rotate(180deg)" : "rotate(0deg)" }}>
+              <polyline points="9.18 15.27 .5 8.11 9.18 .5" fill="none" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+              <polyline points="16.95 15.27 8.27 8.11 16.95 .5" fill="none" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>

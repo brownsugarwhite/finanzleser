@@ -1,11 +1,15 @@
 'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideArticleCard, { CARD_MIN_WIDTH, CARD_MAX_WIDTH } from '@/components/ui/SlideArticleCard';
-import SliderSafeZone from '@/components/ui/SliderSafeZone';
+import SliderEdgeSpark from '@/components/ui/SliderEdgeSpark';
+import SliderHoverBox from '@/components/ui/SliderHoverBox';
+import SliderSideArrows from '@/components/ui/SliderSideArrows';
+import DokumenteBookmark from '@/components/ui/DokumenteBookmark';
+import { useSliderHoverBox } from '@/lib/hooks/useSliderHoverBox';
+import { getArticleSliderPos, setArticleSliderPos, isBackNavigation } from '@/lib/landingState';
 import type { Post } from '@/lib/types';
-import { SliderPreviewContextProvider, type PreviewSliderContext } from '@/components/sections/ArticleSliderContext';
 
 const ART_SLIDE_WIDTH = CARD_MIN_WIDTH;
 const ART_GAP = 70;
@@ -28,16 +32,23 @@ interface ArticleSliderProps {
   phase1Visible?: boolean;
   phase2Visible?: boolean;
   categoryTransition?: 'idle' | 'out' | 'in';
+  /** Key (category slug) zum Merken/Wiederherstellen der Embla-Scroll-Position bei Zurück. */
+  persistKey?: string;
+  /** Eigene Seitenpfeile rendern (Standalone-Nutzung, z.B. RelatedPostsSection). Im
+   *  SubcategorySlider FALSE lassen — dort stellt der Eltern-Slider die gemeinsamen Pfeile. */
+  sideArrows?: boolean;
 }
 
 const SPARK_DURATION = 0.3;
 
-export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle' }: ArticleSliderProps) {
+export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, phase1Visible = true, phase2Visible = true, categoryTransition = 'idle', persistKey, sideArrows = false }: ArticleSliderProps) {
   // Mount-flip: beim ersten Mount rendert die Komponente mit mounted=false, sodass
   // das Visual bei scale(0) startet. Ein rAF flippt auf true → CSS-Transition zu
   // scale(1) läuft parallel zur Spacer-Höhe-Animation. Sonst würde das Visual auf
   // dem ersten Frame bereits bei scale(1) stehen und beim Öffnen "springen".
-  const [mounted, setMounted] = useState(false);
+  // Bei Zurück (Back-Restore) sofort mounted=true → Card-Visuals stehen direkt bei
+  // scale(1) (kein Scale-in-Pop, Morph landet auf stabiler Card). Sonst scale(0)→1.
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined' && isBackNavigation());
   useLayoutEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(raf);
@@ -69,6 +80,32 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
+  // Hover-Kasten nur auf Desktop (echtes Hover) — Mobile-Tap bleibt Navigation.
+  // Außerdem erst NACH dem Eintritts-Morph: solange der Slider noch reinmorpht
+  // (phase2 noch nicht da oder Category-Transition läuft), ist die Card-Höhe nicht
+  // final → der Kasten würde sie falsch erfassen. hoverReady greift erst, wenn
+  // alles steht (Phase 2 sichtbar, idle) + kurzer Settle-Puffer.
+  const [hoverReady, setHoverReady] = useState(false);
+  useEffect(() => {
+    if (!mounted || !phase2Visible || categoryTransition !== 'idle') {
+      setHoverReady(false);
+      return;
+    }
+    const t = setTimeout(() => setHoverReady(true), 350);
+    return () => clearTimeout(t);
+  }, [mounted, phase2Visible, categoryTransition]);
+  const hoverEnabled = !isMobile && hoverReady;
+  // Beim Hover wird die Card (und ihre flankierenden Deko-Sparks/Linien) auf
+  // volle Opacity/Scale gezogen — auch wenn sie in der Edge-Fade-Zone liegt —
+  // damit der Kasten immer an einer voll sichtbaren Card sauber andockt.
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const hoverBox = useSliderHoverBox({
+    cardSelector: '.slide-article-card',
+    enabled: hoverEnabled,
+    // Card/Deko erst zurück-faden, wenn der Kasten fertig zurückgefahren ist.
+    onBoxClosed: (i) => setHoveredIndex((h) => (h === i ? null : h)),
+  });
+
   const effectivePhase1 = mounted && phase1Visible;
   // Sparks + Linien: Timing an Phase 2 gekoppelt (Button-Breite ändert sich).
   // Card-Visuals bleiben weiter an Phase 1.
@@ -82,41 +119,58 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(false);
 
+  // Bei Zurück die zuvor gescrollte Position wiederherstellen. Embla-EIGENEN Snap-Index
+  // (selectedScrollSnap) persistieren — round-trippt korrekt (inkl. Leading-Spacer),
+  // anders als ein manuell aus scrollProgress gerundeter Index (führte zu Off-by-one →
+  // Ziel-Card außerhalb Viewport → kein Morph). Ziel EINMAL beim Render erfassen.
+  const restoreIndexRef = useRef<number>(
+    typeof window !== 'undefined' && isBackNavigation() && persistKey ? getArticleSliderPos(persistKey) : 0
+  );
+  // Back-Restore: Card-Breite (flex-grow) OHNE Transition → sofort final, damit der
+  // Rückwärts-Morph beim Messen die korrekte (breite) Größe erfasst statt MIN→MAX zu
+  // animieren. Einmal beim Mount erfasst.
+  const isBackRestoreRef = useRef(typeof window !== 'undefined' && isBackNavigation());
+  // Aktuelle Embla-Snap-Position merken (für die nächste Zurück-Navigation).
   useEffect(() => {
-    if (!emblaApi) return;
-    const update = () => {
-      setCanPrev(emblaApi.canScrollPrev());
-      setCanNext(emblaApi.canScrollNext());
-    };
-    update();
-    emblaApi.on('select', update);
-    emblaApi.on('scroll', update);
-    emblaApi.on('reInit', update);
-    emblaApi.on('resize', update);
-    return () => {
-      emblaApi.off('select', update);
-      emblaApi.off('scroll', update);
-      emblaApi.off('reInit', update);
-      emblaApi.off('resize', update);
-    };
+    if (!emblaApi || !persistKey) return;
+    const save = () => setArticleSliderPos(persistKey, emblaApi.selectedScrollSnap());
+    emblaApi.on('select', save);
+    emblaApi.on('settle', save);
+    save();
+    return () => { emblaApi.off('select', save); emblaApi.off('settle', save); };
+  }, [emblaApi, persistKey]);
+  // Wiederherstellen SYNCHRON vor Paint (useLayoutEffect) — damit die Card schon an
+  // der richtigen Position steht, BEVOR der Morph-Poll (rAF, nach Paint) misst (sonst
+  // misst er die Scroll-0-Position). Zusätzlich nach jedem reInit (Fit-Check) erneut
+  // anwenden, da reInit die Position zurücksetzen kann.
+  useLayoutEffect(() => {
+    if (!emblaApi || restoreIndexRef.current <= 0) return;
+    const apply = () => emblaApi.scrollTo(restoreIndexRef.current, true);
+    apply();
+    emblaApi.on('reInit', apply);
+    const t = setTimeout(() => emblaApi.off('reInit', apply), 400);
+    return () => { clearTimeout(t); emblaApi.off('reInit', apply); };
   }, [emblaApi]);
 
   // Wenn alle Cards (bei Minimum-Breite) in den Viewport passen, Slider
   // deaktivieren. Cards werden dann zentriert und wachsen bis CARD_MAX_WIDTH,
   // um die Breite auszunutzen.
   const [canScroll, setCanScroll] = useState(true);
-  useEffect(() => {
+  // useLayoutEffect: Card-Breite (fit → MIN/MAX) muss VOR dem Paint final stehen,
+  // damit der Rückwärts-Morph beim Messen die korrekte Breite erfasst (sonst misst
+  // er MIN und springt auf MAX).
+  useLayoutEffect(() => {
     if (!emblaApi) return;
     const check = () => {
-      // Layout: spacer + n cards + spacer → (n+2) Items, (n+1) Gaps.
-      // Beide Spacer 5vw (symmetrisch).
+      // Static (kein Slider), sobald die letzte Card noch >40px Abstand zum
+      // rechten Rand hat. Maßgeblich ist NUR: Leading-Spacer (5vw) + Leading-Gap
+      // + interne Gaps (= n Gaps) + Cards. Der Trailing-Spacer/Gap zählt NICHT
+      // mit (wird im Static-Mode ausgeblendet, sonst würde er Overflow erzwingen).
       const spacerBasis = window.innerWidth * 0.05;
       const cards = posts.length * CARD_MIN_WIDTH;
-      const gaps = (posts.length + 1) * ART_GAP;
-      const needed = cards + gaps + 2 * spacerBasis + ART_FIT_BUFFER;
+      const gaps = posts.length * ART_GAP;
+      const needed = spacerBasis + cards + gaps + ART_FIT_BUFFER;
       const fits = window.innerWidth >= needed;
       setCanScroll(!fits);
       emblaApi.reInit({ watchDrag: !fits });
@@ -136,7 +190,10 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     if (!emblaApi) return;
 
     const slideCount = posts.length;
-    const FADE_LEFT = 400;
+    // Linke Fade-Zone bewusst flach: die erste Card (im Ruhezustand bei
+    // ~5vw + Gap + halbe Cardbreite ≈ 245-265px vom Rand) soll NICHT skaliert/
+    // gefaded sein. Erst wenn sie beim Scrollen weiter nach links wandert, fadet sie.
+    const FADE_LEFT = 245;
     // Mobile: kürzere Right-Fade-Zone — auf Desktop bleibt 320 erhalten.
     const FADE_RIGHT = isMobile ? 200 : 320;
     // Overshoot: Fade-Strecke reicht FADE_OVERSHOOT Pixel über den Viewport-
@@ -212,39 +269,28 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
     });
   }, [emblaApi, selectedIndex, posts.length, onNavReady]);
 
-  // Card-lookup per index — emblaApi.slideNodes() enthält Leading-Spacer an Index 0,
-  // daher liegt Card N bei slideNodes()[N + 1]. Wir suchen die Card-Wurzel mit data-flip-id.
-  const getCardEl = useCallback(
-    (index: number): HTMLElement | null => {
-      if (!emblaApi) return null;
-      const nodes = emblaApi.slideNodes();
-      const wrapper = nodes[index + 1]; // +1 wegen Leading-Spacer
-      if (!wrapper) return null;
-      const card = wrapper.querySelector<HTMLElement>('[data-flip-id$="-box"]');
-      return card;
-    },
-    [emblaApi]
-  );
-
-  const previewCtx = useMemo<PreviewSliderContext>(
-    () => ({ posts, emblaApi: emblaApi ?? null, getCardEl }),
-    [posts, emblaApi, getCardEl]
-  );
-
   return (
-    <SliderPreviewContextProvider value={previewCtx}>
-    <div ref={emblaRef} style={{ cursor: canScroll ? 'grab' : 'default', marginTop: 30, position: 'relative' }}>
+    <>
+    {/* Relativer Wrapper trägt die Seitenpfeile als GESCHWISTER des Embla-Viewports —
+        NICHT als dessen erstes Kind (das würde Embla als Container fehlinterpretieren
+        und die Navigation lahmlegen). sideArrows nur im Standalone-Fall (RelatedPosts);
+        im SubcategorySlider liefert der Eltern-Slider die gemeinsamen Pfeile. */}
+    <div style={{ position: 'relative', marginTop: 30 }}>
+    <div ref={emblaRef} onMouseLeave={hoverEnabled ? hoverBox.leaveRegion : undefined} style={{ cursor: canScroll ? 'grab' : 'default', position: 'relative' }}>
       <div style={{
         display: 'flex',
         gap: `${ART_GAP}px`,
+        // Mobile: ~20px Abstand zum linken Rand (Leading-Spacer mobil display:none).
+        paddingLeft: isMobile ? 20 : 0,
       }}>
         <div
           aria-hidden
           style={{
             // Beide Spacer fix auf 5vw. Cards absorbieren den Rest über ihre
             // eigene flex-grow bis max 450 — symmetrisch und minimal.
-            // Mobile: Leading-Spacer entfällt (flexBasis 0), Cards starten am
-            // linken Rand und sliden nur von rechts ein.
+            // Mobile: Leading-Spacer komplett raus (display:none) — flexBasis:0
+            // allein ließe den Container-gap VOR der ersten Card stehen.
+            display: isMobile ? 'none' : 'block',
             flexGrow: 0,
             flexShrink: 0,
             flexBasis: isMobile ? 0 : '5vw',
@@ -254,14 +300,27 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
           const isMountedCard = index < mountedCount;
+          // Gehoverte Card + angrenzende Deko auf voll ziehen (NICHT ausblenden):
+          // die echten 70px-Linien + der echte (rotierende) Spark bleiben sichtbar,
+          // der Klon zeichnet nur die Verlängerungen + Horizontalen.
+          const cardFull = hoverEnabled && hoveredIndex === index;
+          const decoFull = hoverEnabled && (hoveredIndex === index || hoveredIndex === index + 1);
+          const cardOpacity = cardFull ? 1 : (slideStyles[index + 1]?.opacity ?? 1);
+          const cardScale = cardFull ? 1 : (slideStyles[index + 1]?.scale ?? 1);
+          const decoScale = decoFull ? 1 : Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1);
+          const decoOpacity = decoFull ? 1 : Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1);
+          // Card-Skalierung beim Hover langsam (synchron zum Kasten); Edge-Fade
+          // aller anderen Cards beim Scroll bleibt kurz.
+          const cardSlow = cardFull && categoryTransition === 'idle';
           return (
             <div
               key={post.id}
+              ref={(el) => hoverBox.registerCard(index, el)}
+              onMouseEnter={hoverEnabled ? () => { setHoveredIndex(index); hoverBox.onEnter(index); } : undefined}
+              onMouseLeave={hoverEnabled ? () => hoverBox.onLeave(index) : undefined}
               style={{
-                // Static-Mode: Cards wachsen bis max 450px, danach absorbiert
-                // der Trailing-Spacer den Rest (linksbündig).
-                // Slider-Mode: fix auf 265px.
-                flexGrow: canScroll ? 0 : 1,
+                // Alle Cards gleiche feste Breite (kein Wachsen bei freiem Platz).
+                flexGrow: 0,
                 flexShrink: 0,
                 flexBasis: `${ART_SLIDE_WIDTH}px`,
                 maxWidth: CARD_MAX_WIDTH,
@@ -270,28 +329,30 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: 'center',
-                opacity: slideStyles[index + 1]?.opacity ?? 1,
+                opacity: cardOpacity,
                 // Mobile: keine CSS-Transition für opacity — Embla feuert
                 // Scroll-Events pro Frame; eine 0.1s-Transition würde bei
                 // jedem Update einen neuen Tween gegen ein bewegtes Ziel
                 // starten → sichtbares Wiggle/Größen-Springen auf iPhone.
                 // (Gleiche Logik wie im SubcategorySlider.)
-                transition: categoryTransition === 'in'
+                transition: isBackRestoreRef.current
+                  ? 'opacity 0.1s ease' // Back-Restore: flex-grow instant (keine Breiten-Animation)
+                  : categoryTransition === 'in'
                   ? 'opacity 0.1s ease'
                   : isMobile
                   ? 'flex-grow 0.3s ease'
-                  : 'flex-grow 0.3s ease, opacity 0.1s ease',
+                  : `flex-grow 0.3s ease, opacity ${cardSlow ? '0.5s cubic-bezier(0.25,0.46,0.45,0.94)' : '0.1s ease'}`,
               }}
             >
               {isMountedCard ? (
                 <div style={{
                   width: '100%',
-                  transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
+                  transform: `scale(${cardScale})`,
                   transformOrigin:
                     slideStyles[index + 1]?.origin === 'right' ? 'right center' :
                     slideStyles[index + 1]?.origin === 'left' ? 'left center' :
                     'center center',
-                  transition: categoryTransition === 'in' || isMobile ? 'none' : 'transform 0.1s ease',
+                  transition: categoryTransition === 'in' || isMobile ? 'none' : `transform ${cardSlow ? '0.5s cubic-bezier(0.25,0.46,0.45,0.94)' : '0.1s ease'}`,
                 }}>
                   <SlideArticleCard post={post} index={index} phase1Visible={effectivePhase1} phase2Visible={effectivePhase2} categoryTransition={categoryTransition} />
                 </div>
@@ -304,21 +365,23 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
               )}
 
               {!isLast && isMountedCard && (
-                <div style={{
-                  position: 'absolute',
-                  right: -ART_GAP / 2 - 6,
-                  top: '50%',
-                  transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
-                  transformOrigin: 'center center',
-                  opacity: Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
-                  transition: isMobile ? 'none' : 'opacity 0.1s ease, transform 0.1s ease',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 5,
-                  pointerEvents: 'none',
-                }}>
-                  <div style={{
+                <SliderEdgeSpark
+                  sparkRef={(el) => hoverBox.registerSpark(index, el)}
+                  wrapperStyle={{
+                    position: 'absolute',
+                    right: -ART_GAP / 2 - 6,
+                    top: '50%',
+                    transform: `translateY(-50%) scale(${decoScale})`,
+                    transformOrigin: 'center center',
+                    opacity: decoOpacity,
+                    transition: isMobile ? 'none' : `opacity ${hoverEnabled && categoryTransition === 'idle' ? '0.2s' : '0.1s'} ease, transform 0.1s ease`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 5,
+                    pointerEvents: 'none',
+                  }}
+                  topLineStyle={{
                     width: 1,
                     height: effectivePhase2 ? 70 : 0,
                     background: 'var(--fill-0, #334A27)',
@@ -329,30 +392,21 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                       : categoryTransition === 'in'
                       ? 'height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                       : `height ${SPARK_DURATION}s ease`,
-                  }} />
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12.0005"
-                    fill="none"
-                    aria-hidden
-                    style={{
-                      transform: categoryTransition === 'out'
-                        ? 'scale(0) rotate(90deg)'
-                        : (categoryTransition === 'in' && !effectivePhase2)
-                        ? 'scale(0) rotate(-90deg)'
-                        : effectivePhase2 ? 'scale(1)' : 'scale(0)',
-                      transformOrigin: 'center',
-                      transition: categoryTransition === 'out'
-                        ? 'transform 0.2s ease-in'
-                        : categoryTransition === 'in'
-                        ? 'transform 0.2s ease-out'
-                        : `transform ${SPARK_DURATION}s ease`,
-                    }}
-                  >
-                    <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
-                  </svg>
-                  <div style={{
+                  }}
+                  sparkStyle={{
+                    transform: categoryTransition === 'out'
+                      ? 'scale(0) rotate(90deg)'
+                      : (categoryTransition === 'in' && !effectivePhase2)
+                      ? 'scale(0) rotate(-90deg)'
+                      : effectivePhase2 ? 'scale(1)' : 'scale(0)',
+                    transformOrigin: 'center',
+                    transition: categoryTransition === 'out'
+                      ? 'transform 0.2s ease-in'
+                      : categoryTransition === 'in'
+                      ? 'transform 0.2s ease-out'
+                      : `transform ${SPARK_DURATION}s ease`,
+                  }}
+                  bottomLineStyle={{
                     width: 1,
                     height: effectivePhase2 ? 70 : 0,
                     background: 'var(--fill-0, #334A27)',
@@ -363,7 +417,31 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
                       : categoryTransition === 'in'
                       ? 'height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                       : `height ${SPARK_DURATION}s ease`,
-                  }} />
+                  }}
+                />
+              )}
+
+              {hoverEnabled && isMountedCard && (
+                <SliderHoverBox index={index} gap={ART_GAP} register={hoverBox.registerBox} />
+              )}
+
+              {/* Dokumente-Lesezeichen oben links — erscheint NACH dem Zeichnen
+                  des Kastens (Delay), einfacher Fade. Position an der Box-Ecke
+                  (top/marginLeft sind Feinjustage-Werte). */}
+              {hoverEnabled && isMountedCard && post.tools?.includes('dokumente') && (
+                <div style={{
+                  position: 'absolute',
+                  top: -(ART_GAP / 2 - 20) + 12,
+                  left: -ART_GAP / 2,
+                  marginLeft: -0.5,
+                  zIndex: 6,
+                  pointerEvents: 'none',
+                  opacity: hoveredIndex === index ? 1 : 0,
+                  transition: hoveredIndex === index
+                    ? 'opacity 0.25s ease 0.5s'
+                    : 'opacity 0.12s ease',
+                }}>
+                  <DokumenteBookmark />
                 </div>
               )}
             </div>
@@ -372,8 +450,11 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
         <div
           aria-hidden
           style={{
-            // Trailing bleibt fix (5vw) — Leading wächst und schiebt die
-            // Cards nach rechts.
+            // Im Slider-Mode: fixer 5vw-Puffer rechts. Im Static-Mode (passt
+            // komplett) komplett raus (display:none entfernt auch den 70px-Gap
+            // davor) — sonst würde 5vw+Gap den geforderten 40px-Rand sprengen
+            // und die letzte Card abschneiden.
+            display: canScroll ? 'block' : 'none',
             flexGrow: 0,
             flexShrink: 0,
             flexBasis: '5vw',
@@ -381,19 +462,16 @@ export default function ArticleSlider({ posts, onNavReady, onCanScrollChange, ph
           }}
         />
       </div>
-      {/* Safe-Zones links/rechts — blocken Hover/Klick auf Cards; PointerDown
-          bubbelt zum Embla-Viewport, Drag funktioniert weiter. */}
-      <SliderSafeZone
-        direction="left"
-        scrollable={canScroll && canPrev}
-        onClick={() => emblaApi?.scrollPrev()}
-      />
-      <SliderSafeZone
-        direction="right"
-        scrollable={canScroll && canNext}
-        onClick={() => emblaApi?.scrollNext()}
-      />
     </div>
-    </SliderPreviewContextProvider>
+    {sideArrows && (
+      <SliderSideArrows
+        onPrev={() => emblaApi?.scrollPrev()}
+        onNext={() => emblaApi?.scrollNext()}
+        canPrev={canScroll && selectedIndex > 0}
+        canNext={canScroll && selectedIndex < posts.length - 1}
+      />
+    )}
+    </div>
+    </>
   );
 }

@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { UIMessage } from "ai";
 import gsap from "@/lib/gsapConfig";
 import { cn } from "@/lib/cn";
+import type { LeoSource, LeoUIMessage } from "@/lib/ai/leoMessage";
 
 interface LeoChatMessagesProps {
-  messages: UIMessage[];
+  messages: LeoUIMessage[];
   /** AI-SDK Chat-Status: 'submitted' (wartet auf erste Bytes), 'streaming' (Tokens kommen), 'ready', 'error'. */
   status: "submitted" | "streaming" | "ready" | "error";
   /** Fehler vom useChat-Hook — wird als rote Fehler-Bubble unter den Messages gerendert. */
@@ -17,11 +17,26 @@ interface LeoChatMessagesProps {
   mode: "welcome" | "conversation";
 }
 
-function getMessageText(message: UIMessage): string {
+function getMessageText(message: LeoUIMessage): string {
   return message.parts
     .filter((p) => p.type === "text")
     .map((p) => (p as { type: "text"; text: string }).text)
     .join("");
+}
+
+/** Quellen aus dem `data-sources`-Part (vom LEO-Backend via meta-Event). */
+function getSources(message: LeoUIMessage): LeoSource[] {
+  const part = message.parts.find((p) => p.type === "data-sources");
+  return (part as { type: "data-sources"; data: LeoSource[] } | undefined)?.data ?? [];
+}
+
+/** Trennt einen angehängten "Anbieter: …"-Hinweis vom eigentlichen Fragetext ab,
+ *  damit er separat (kursiv/heller) gerendert werden kann. */
+const ANBIETER_MARKER = "\n\nAnbieter: ";
+function splitAnbieter(text: string): { main: string; anbieter: string | null } {
+  const idx = text.lastIndexOf(ANBIETER_MARKER);
+  if (idx === -1) return { main: text, anbieter: null };
+  return { main: text.slice(0, idx), anbieter: text.slice(idx + ANBIETER_MARKER.length) };
 }
 
 /** Spike-SVG passend zum KI-Section AIAgentTeaser-Design.
@@ -76,6 +91,7 @@ export default function LeoChatMessages({ messages, status, error, mode }: LeoCh
         const isLast = idx === messages.length - 1;
         const showCursor = !isUser && isLast && (status === "streaming" || status === "submitted");
         const text = getMessageText(message);
+        const sources = isUser ? [] : getSources(message);
         return (
           <div
             key={message.id}
@@ -92,13 +108,36 @@ export default function LeoChatMessages({ messages, status, error, mode }: LeoCh
               )}
               <div className={cn("chat-bubble", isUser ? "chat-bubble--user" : "chat-bubble--assistant")}>
                 {isUser ? (
-                  <p className="chat-text">{text}</p>
+                  (() => {
+                    const { main, anbieter } = splitAnbieter(text);
+                    return (
+                      <>
+                        <p className="chat-text">{main}</p>
+                        {anbieter && (
+                          <p className="chat-anbieter-tag">Anbieter: {anbieter}</p>
+                        )}
+                      </>
+                    );
+                  })()
                 ) : (
                   <div className="chat-text chat-markdown">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {text || (status === "submitted" ? "…" : "")}
                     </ReactMarkdown>
                     {showCursor && <span className="chat-cursor" aria-hidden>▍</span>}
+                  </div>
+                )}
+                {!isUser && sources.length > 0 && (
+                  <div className="chat-sources">
+                    <span className="chat-sources-label">Quellen</span>
+                    <ul>
+                      {sources.map((s, i) => (
+                        <li key={i}>
+                          {s.title}
+                          {s.pages ? <span className="chat-sources-pages"> · {s.pages}</span> : null}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
                 <BubbleSpike />

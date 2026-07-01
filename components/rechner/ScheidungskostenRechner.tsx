@@ -39,6 +39,8 @@ export default function ScheidungskostenRechner() {
           onChange={(val) => setParams((p) => ({ ...p, nettoeinkommenBeide: val }))}
           einheit="EUR/Monat"
           min={0}
+          max={15000}
+          step={100}
         />
         <RechnerInput
           label="Vermoegen (gemeinsam)"
@@ -47,6 +49,8 @@ export default function ScheidungskostenRechner() {
           onChange={(val) => setParams((p) => ({ ...p, vermoegen: val }))}
           einheit="EUR"
           min={0}
+          max={1000000}
+          step={1000}
         />
         <RechnerCheckbox
           label="Versorgungsausgleich"

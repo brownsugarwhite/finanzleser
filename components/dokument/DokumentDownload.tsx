@@ -86,27 +86,16 @@ export default function DokumentDownload({
             borderRadius: "17px",
           }}
         />
-        {/* Download-Icon weiß */}
+        {/* Download-Icon weiß — identisch zum Checklisten-Herunterladen-Button (Button.tsx) */}
         <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
+          width="11"
+          height="12.5"
+          viewBox="0 0 15 17"
           fill="none"
-          stroke="white"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            marginLeft: "-7px",
-            marginTop: "-7px",
-          }}
+          style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
         >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
+          <path d="M13.5001 1.50009L7.50009 9.50009L1.50009 1.50009" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+          <path d="M1.50009 15.5001L13.5001 15.5001" stroke="white" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
         </svg>
       </div>
     </a>

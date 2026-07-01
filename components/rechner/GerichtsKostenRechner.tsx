@@ -40,6 +40,8 @@ export default function GerichtsKostenRechner() {
           onChange={(val) => setParams((p) => ({ ...p, streitwert: val }))}
           einheit="EUR"
           min={0}
+          max={500000}
+          step={1000}
         />
         <RechnerSelect
           label="Instanz"

@@ -9,6 +9,8 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
+import RechnerBenchmark from "./ui/RechnerBenchmark";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -46,6 +48,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={15000}
         />
 
         <h4 className="rechner-result-section-title">Ausgaben</h4>
@@ -58,6 +61,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={5000}
         />
         <RechnerInput
           label="Nebenkosten"
@@ -67,6 +71,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
         <RechnerInput
           label="Lebensmittel"
@@ -76,6 +81,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
         <RechnerInput
           label="Versicherungen"
@@ -85,6 +91,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
         <RechnerInput
           label="Mobilität"
@@ -94,6 +101,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
         <RechnerInput
           label="Freizeit"
@@ -103,6 +111,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
         <RechnerInput
           label="Sonstiges"
@@ -112,6 +121,7 @@ export default function HaushaltsrechnerRechner() {
           einheit="€"
           step={25}
           min={0}
+          max={1500}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 
@@ -119,6 +129,22 @@ export default function HaushaltsrechnerRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={Math.max(0, Math.min(100, Math.round(result.sparQuoteProzent)))}
+              label="Sparquote"
+              animateKey={rechnerState.scrollKey}
+            />
+            <RechnerBenchmark
+              value={Math.round(result.sparQuoteProzent)}
+              average={15}
+              unit=" %"
+              valueLabel="Deine Sparquote"
+              averageLabel="Empfehlung"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox
               label="Sparbetrag / Monat"

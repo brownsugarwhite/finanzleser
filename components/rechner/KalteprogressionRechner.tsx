@@ -44,6 +44,8 @@ export default function KalteprogressionRechner() {
           onChange={(v) => set("monatsBrutto", v)}
           einheit="€"
           step={100}
+          min={0}
+          max={20000}
         />
 
         <RechnerInput
@@ -53,6 +55,9 @@ export default function KalteprogressionRechner() {
           onChange={(v) => set("gehaltssteigerungProzent", v)}
           einheit="%"
           step={0.1}
+          min={0}
+          max={20}
+          slider
         />
 
         <RechnerInput
@@ -62,6 +67,9 @@ export default function KalteprogressionRechner() {
           onChange={(v) => set("inflationsrateProzent", v)}
           einheit="%"
           step={0.1}
+          min={0}
+          max={15}
+          slider
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

@@ -68,6 +68,7 @@ export default function MutterschutzRechner() {
           onChange={(val) => setParams((p) => ({ ...p, entbindungDay: val }))}
           min={1}
           max={31}
+          step={1}
         />
 
         <RechnerInput
@@ -78,6 +79,7 @@ export default function MutterschutzRechner() {
           einheit="€"
           step={100}
           min={0}
+          max={10000}
         />
 
         <RechnerCheckbox

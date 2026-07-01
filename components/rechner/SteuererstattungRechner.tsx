@@ -47,6 +47,8 @@ export default function SteuererstattungRechner() {
           value={params.jahresBrutto}
           onChange={(v) => set("jahresBrutto", v)}
           einheit="€"
+          min={0}
+          max={200000}
           step={1000}
         />
 
@@ -56,6 +58,8 @@ export default function SteuererstattungRechner() {
           value={params.gezahlteLohnsteuer}
           onChange={(v) => set("gezahlteLohnsteuer", v)}
           einheit="€"
+          min={0}
+          max={80000}
           step={100}
         />
 
@@ -65,6 +69,8 @@ export default function SteuererstattungRechner() {
           value={params.gezahlterSoli}
           onChange={(v) => set("gezahlterSoli", v)}
           einheit="€"
+          min={0}
+          max={5000}
           step={10}
         />
 
@@ -74,6 +80,8 @@ export default function SteuererstattungRechner() {
           value={params.werbungskostenTatsaechlich}
           onChange={(v) => set("werbungskostenTatsaechlich", v)}
           einheit="€"
+          min={0}
+          max={10000}
           step={100}
           tooltip={`Pauschbetrag: ${euro(rates.lohnsteuer.arbeitnehmer_pauschbetrag)}`}
         />
@@ -84,6 +92,7 @@ export default function SteuererstattungRechner() {
           value={params.homeofficeTage}
           onChange={(v) => set("homeofficeTage", v)}
           einheit="Tage"
+          min={0}
           step={1}
           max={rates.steuererstattung.homeoffice_max_tage}
           tooltip={`Max. ${rates.steuererstattung.homeoffice_max_tage} Tage à ${euro(rates.steuererstattung.homeoffice_pauschale_je_tag)}`}
@@ -95,6 +104,8 @@ export default function SteuererstattungRechner() {
           value={params.sonderausgabenTatsaechlich}
           onChange={(v) => set("sonderausgabenTatsaechlich", v)}
           einheit="€"
+          min={0}
+          max={10000}
           step={100}
         />
 
@@ -104,6 +115,8 @@ export default function SteuererstattungRechner() {
           value={params.aussergewoehnlicheBelastungen}
           onChange={(v) => set("aussergewoehnlicheBelastungen", v)}
           einheit="€"
+          min={0}
+          max={20000}
           step={100}
         />
 
@@ -113,6 +126,8 @@ export default function SteuererstattungRechner() {
           value={params.handwerkerkosten}
           onChange={(v) => set("handwerkerkosten", v)}
           einheit="€"
+          min={0}
+          max={10000}
           step={100}
           tooltip={`§35a EStG: ${rates.steuererstattung.handwerker_ermaessigung_prozent}% Ermäßigung, max. ${euro(rates.steuererstattung.handwerker_max_ermaessigung)}`}
         />

@@ -11,6 +11,7 @@ import RechnerResultBox from "./ui/RechnerResultBox";
 import RechnerResultTable from "./ui/RechnerResultTable";
 import RechnerHinweis from "./ui/RechnerHinweis";
 import RechnerButton from "./ui/RechnerButton";
+import RechnerGauge from "./ui/RechnerGauge";
 import { useRechnerState } from "@/lib/hooks/useRechnerState";
 import RechnerResults from "./ui/RechnerResults";
 
@@ -47,6 +48,7 @@ export default function ErbschaftsteuerRechner() {
           einheit="€"
           step={10000}
           min={0}
+          max={1000000}
         />
 
         <RechnerSelect
@@ -91,6 +93,7 @@ export default function ErbschaftsteuerRechner() {
           einheit="€"
           step={10000}
           min={0}
+          max={1000000}
           tooltip="Schenkungen der letzten 10 Jahre reduzieren den verfügbaren Freibetrag"
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
@@ -99,6 +102,14 @@ export default function ErbschaftsteuerRechner() {
 
       {result && (
         <RechnerResults scrollKey={rechnerState.scrollKey}>
+          <div className="rechner-gauge-row">
+            <RechnerGauge
+              value={result.effektiverSatzProzent}
+              label="Effektiver Steuersatz"
+              animateKey={rechnerState.scrollKey}
+            />
+          </div>
+
           <div className="rechner-result-boxes">
             <RechnerResultBox label="Erbschaftsteuer" value={euro(result.erbschaftsteuer)} highlight />
             <RechnerResultBox label="Nettowert" value={euro(result.nettowert)} variant="positive" />

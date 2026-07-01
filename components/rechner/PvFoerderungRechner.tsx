@@ -55,6 +55,7 @@ export default function PvFoerderungRechner() {
           min={0}
           max={100}
           step={5}
+          slider
         />
         <RechnerInput
           label="Strompreis"
@@ -65,6 +66,7 @@ export default function PvFoerderungRechner() {
           min={0}
           max={80}
           step={0.5}
+          slider
         />
         <RechnerInput
           label="Einspeiseverguetung"
@@ -75,6 +77,7 @@ export default function PvFoerderungRechner() {
           min={0}
           max={20}
           step={0.01}
+          slider
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

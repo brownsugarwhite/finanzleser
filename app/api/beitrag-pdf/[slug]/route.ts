@@ -12,7 +12,7 @@ export async function GET(
     // Get post by slug with ACF fields
     const res = await fetch(
       `${WP_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,acf`,
-      { next: { revalidate: 60 } }
+      { next: { revalidate: 3600 } }
     );
     const posts = await res.json();
     if (!posts.length || !posts[0].acf?.beitrag_pdf) {
@@ -24,7 +24,7 @@ export async function GET(
     // Get attachment URL
     const attachRes = await fetch(
       `${WP_URL}/wp-json/wp/v2/media/${attachmentId}?_fields=source_url,title,mime_type`,
-      { next: { revalidate: 60 } }
+      { next: { revalidate: 3600 } }
     );
     const attachment = await attachRes.json();
 

@@ -47,6 +47,17 @@ export default function LogoBar() {
   const stateRef = useRef<LogoState>("long-visible");
   const menuOpenRef = useRef(false);
   const reconcileSuspendedUntilRef = useRef(0);
+  // Nach einer Navigation kurz den Shrink/Grow-Trigger unterdrücken: der Trigger
+  // wird (scroll-anim-recreate) ggf. neu erstellt, während die neue Seite noch
+  // NICHT nach oben gesprungen ist (Scroll steht kurz auf alter Position) → sonst
+  // feuert onEnter fälschlich und shrinkt das Logo am Seiten-Top.
+  const navSettlingRef = useRef(false);
+  const navSettleTimerRef = useRef<number | null>(null);
+  // Pending „Logo ausblenden"-Timer (Landing). Muss gecancelt werden, sobald das
+  // Logo wieder eingeblendet wird — sonst feuert beim schnellen Hin-/Herscrollen
+  // ein verwaister Hide-Timer NACH dem erneuten shortIn und blendet das gerade
+  // eingeblendete Logo sofort wieder aus.
+  const hideTimerRef = useRef<number | null>(null);
   // Saved state from before a mobile preview-overlay opened. Restored on close.
   const previewPriorStateRef = useRef<LogoState | null>(null);
   // Restore-Timer (cancel-bar wenn ein erneutes menu-opened reinkommt — z.B.
@@ -68,7 +79,7 @@ export default function LogoBar() {
   // Slot-Position responsive: Mobile 60px, Desktop 90px vom linken Bildrand.
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
+    const mql = window.matchMedia("(max-width: 1024px)");
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mql.addEventListener("change", handler);
@@ -86,14 +97,71 @@ export default function LogoBar() {
     el.style.visibility = visible ? "visible" : "hidden";
   };
 
-  // Init / pathname change → snap logo + state
+  // Pending Hide-Timer abbrechen (wird beim erneuten Einblenden gerufen).
+  const cancelHide = () => {
+    if (hideTimerRef.current !== null) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  };
+  // Logo nach `delay`ms ausblenden — aber nur wenn der Zustand bis dahin noch
+  // "hidden" ist (ein zwischenzeitliches shortIn cancelt den Timer ohnehin).
+  const scheduleHide = (delay = 500) => {
+    cancelHide();
+    hideTimerRef.current = window.setTimeout(() => {
+      hideTimerRef.current = null;
+      if (stateRef.current === "hidden") setLogoVisible(false);
+    }, delay);
+  };
+
+  // Init / pathname change → snap logo + state.
+  // WICHTIG: Dependency ist `pathname` (nicht nur `isLanding`) — sonst wird bei
+  // Sub→Sub-Navigation der Logo-Zustand NICHT zurückgesetzt und bleibt im
+  // „short-visible" der gescrollten Vorseite hängen. Bei jedem Routenwechsel
+  // (neue Seite = Scroll-Top) auf den Soll-Zustand zurücksetzen.
   useEffect(() => {
-    const initialFrame = isLanding ? LOGO_FRAMES.shortHidden : LOGO_FRAMES.longVisible;
-    stateRef.current = isLanding ? "hidden" : "long-visible";
+    cancelHide(); // evtl. verwaisten Landing-Hide-Timer abbrechen
+    // Stale Menü-Zustände leeren (z.B. Navigation WÄHREND das Menü offen war →
+    // onMenuClosed feuert beim Transition-Close nicht; sonst bliebe der Logo-
+    // „vor-Menü"-Restore-State hängen).
     menuOpenRef.current = false;
-    logoRef.current?.setFrame(initialFrame);
-    setLogoVisible(!isLanding);
-  }, [isLanding]);
+    logoStateBeforeMenuRef.current = null;
+    if (longInDelayTimerRef.current !== null) { clearTimeout(longInDelayTimerRef.current); longInDelayTimerRef.current = null; }
+
+    if (isLanding) {
+      stateRef.current = "hidden";
+      logoRef.current?.setFrame(LOGO_FRAMES.shortHidden);
+      setLogoVisible(false);
+      return;
+    }
+
+    // Non-Landing: Navigation springt auf Scroll-Top → Logo soll GROSS (long)
+    // bleiben und sich erst beim echten Runterscrollen verkleinern. Den Shrink/
+    // Grow-Trigger während des Übergangs-Fensters unterdrücken, damit er nicht
+    // fälschlich shrinkt, solange der Scroll noch auf der alten Position steht
+    // (Trigger wird via scroll-anim-recreate kurz vor dem Scroll-to-Top neu erstellt).
+    stateRef.current = "long-visible";
+    logoRef.current?.setFrame(LOGO_FRAMES.longVisible);
+    setLogoVisible(true);
+
+    navSettlingRef.current = true;
+    if (navSettleTimerRef.current !== null) clearTimeout(navSettleTimerRef.current);
+    navSettleTimerRef.current = window.setTimeout(() => {
+      navSettleTimerRef.current = null;
+      navSettlingRef.current = false; // Trigger wieder zulassen; Logo bleibt long bis runtergescrollt wird
+    }, 800);
+
+    // Logo, Untertitel (Claim) und Dotline explizit sichtbar setzen. Beim Wechsel
+    // von der Landing (wo Claim/Dotline ausgeblendet sind und ein Scrub-Tween oder
+    // ContentScaler opacity 0 hinterlassen haben kann) blieben sie sonst gelegentlich
+    // unsichtbar.
+    if (claimRef.current) gsap.set(claimRef.current, { opacity: 1 });
+    const dot = document.querySelector(".dotline-animated") as HTMLElement | null;
+    if (dot) gsap.set(dot, { opacity: 1 });
+    document
+      .querySelectorAll<HTMLElement>("[data-topnav]")
+      .forEach((el) => gsap.set(el, { opacity: 1, filter: "none" }));
+  }, [pathname]);
 
   // Claim + dotline scrub fade (unchanged)
   useEffect(() => {
@@ -143,13 +211,13 @@ export default function LogoBar() {
         start: triggerPos,
         end: triggerPos + 1,
         onEnter: () => {
-          if (menuOpenRef.current) return;
+          if (menuOpenRef.current || navSettlingRef.current) return;
           if (stateRef.current !== "long-visible") return;
           logoRef.current?.playShrink();
           stateRef.current = "short-visible";
         },
         onLeaveBack: () => {
-          if (menuOpenRef.current) return;
+          if (menuOpenRef.current || navSettlingRef.current) return;
           if (stateRef.current !== "short-visible") return;
           logoRef.current?.playGrow();
           stateRef.current = "long-visible";
@@ -185,32 +253,54 @@ export default function LogoBar() {
   useEffect(() => {
     if (!isLanding) return;
 
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
 
     if (isMobile) {
-      // Mobile: Logo erscheint NACH Leos Flug zur Home-Ecke,
-      // verschwindet wenn Revolver-Buttons den 100px-Bereich verlassen.
-      const onFlewHome = () => {
-        if (menuOpenRef.current) return;
+      // Mobile-Landing: short-Logo erscheint, sobald der große Wortmarken-Schriftzug
+      // (.landing-logo) oben aus dem Viewport gescrollt ist — wie Desktop (nav-out).
+      // Verschwindet beim Zurückscrollen nach oben. ScrollTrigger am .landing-logo,
+      // dessen Unterkante die Viewport-Oberkante kreuzt. Killt/recreated bei
+      // scroll-anim-kill/-recreate (Seiten-Transition) → kein Springen beim Wechsel.
+      const showShort = () => {
+        if (menuOpenRef.current || navSettlingRef.current) return;
         if (stateRef.current !== "hidden") return;
+        cancelHide(); // verwaisten Hide-Timer abbrechen
         setLogoVisible(true);
         logoRef.current?.playShortIn();
         stateRef.current = "short-visible";
       };
-      const onRevolverFar = () => {
-        if (menuOpenRef.current) return;
+      const hideShort = () => {
+        if (menuOpenRef.current || navSettlingRef.current) return;
         if (stateRef.current !== "short-visible") return;
         logoRef.current?.playShortOut();
         stateRef.current = "hidden";
-        // visibility erst NACH der Out-Animation hidden setzen — sonst
-        // wird der Out-Tween nicht sichtbar.
-        setTimeout(() => setLogoVisible(false), 500);
+        // visibility erst NACH der Out-Animation hidden setzen.
+        scheduleHide(500);
       };
-      window.addEventListener("leo-flew-home", onFlewHome);
-      window.addEventListener("revolver-far-from-bottom", onRevolverFar);
+
+      let st: ScrollTrigger | null = null;
+      const create = () => {
+        const wordmark = document.querySelector<HTMLElement>(".landing-logo");
+        if (!wordmark) return;
+        st = ScrollTrigger.create({
+          trigger: wordmark,
+          start: "bottom top", // Wortmarken-Unterkante kreuzt Viewport-Oberkante
+          onEnter: showShort, // runtergescrollt → Schriftzug raus → short rein
+          onLeaveBack: hideShort, // zurück nach oben → Schriftzug wieder da → short raus
+        });
+      };
+
+      const raf = requestAnimationFrame(create);
+      const onKill = () => { if (st) { st.kill(); st = null; } };
+      const onRecreate = () => { onKill(); create(); };
+      window.addEventListener("scroll-anim-kill", onKill);
+      window.addEventListener("scroll-anim-recreate", onRecreate);
+
       return () => {
-        window.removeEventListener("leo-flew-home", onFlewHome);
-        window.removeEventListener("revolver-far-from-bottom", onRevolverFar);
+        cancelAnimationFrame(raf);
+        onKill();
+        window.removeEventListener("scroll-anim-kill", onKill);
+        window.removeEventListener("scroll-anim-recreate", onRecreate);
       };
     }
 
@@ -218,6 +308,7 @@ export default function LogoBar() {
     const onNavOut = () => {
       if (menuOpenRef.current) return;
       if (stateRef.current !== "hidden") return;
+      cancelHide(); // verwaisten Hide-Timer abbrechen
       setLogoVisible(true);
       logoRef.current?.playShortIn();
       stateRef.current = "short-visible";
@@ -227,7 +318,7 @@ export default function LogoBar() {
       if (stateRef.current !== "short-visible") return;
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      setTimeout(() => setLogoVisible(false), 500);
+      scheduleHide(500);
     };
 
     // Reconcile: if logo ended up "short-visible" while still in the
@@ -248,7 +339,7 @@ export default function LogoBar() {
       if (navEl.getBoundingClientRect().bottom <= 0) return; // TopNav already out
       logoRef.current?.playShortOut();
       stateRef.current = "hidden";
-      setTimeout(() => setLogoVisible(false), 500);
+      scheduleHide(500);
     };
 
     window.addEventListener("nav-scrolled-out", onNavOut);
@@ -280,7 +371,7 @@ export default function LogoBar() {
       // priorState NUR einmal pro Open setzen — der Overlay-IN-Effect feuert
       // in Dev (StrictMode) doppelt, sonst würde der zweite Call "hidden"
       // reinschreiben und der Restore beim Close wäre kaputt.
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const isMobile = window.matchMedia("(max-width: 1024px)").matches;
       if (detail?.label === "preview" && isMobile) {
         const state = stateRef.current;
         if (previewPriorStateRef.current === null) {
@@ -293,7 +384,7 @@ export default function LogoBar() {
           logoRef.current?.playLongOut();
           stateRef.current = "hidden";
         }
-        setTimeout(() => setLogoVisible(false), 1300);
+        scheduleHide(1300);
         return;
       }
 
@@ -310,7 +401,7 @@ export default function LogoBar() {
       if (state === "hidden") {
         // Mobile: kurz warten damit Leo erst collapse-OUTen kann (~0.3s),
         // bevor das Logo seinen Platz übernimmt. Desktop: sofort longIn.
-        const isMobileMQ = window.matchMedia("(max-width: 767px)").matches;
+        const isMobileMQ = window.matchMedia("(max-width: 1024px)").matches;
         if (isMobileMQ) {
           if (longInDelayTimerRef.current) clearTimeout(longInDelayTimerRef.current);
           longInDelayTimerRef.current = window.setTimeout(() => {
@@ -382,7 +473,7 @@ export default function LogoBar() {
         // Open hat hidden→long-visible via longIn gemacht → Close komplett aus.
         logoRef.current?.playLongOut();
         stateRef.current = "hidden";
-        setTimeout(() => setLogoVisible(false), 1300);
+        scheduleHide(1300);
         return;
       }
       // priorState === "short-visible" oder null (Defensive) → shrink zurück.
@@ -400,6 +491,36 @@ export default function LogoBar() {
     return () => {
       window.removeEventListener("menu-opened", onMenuOpened);
       window.removeEventListener("menu-closed", onMenuClosed);
+    };
+  }, []);
+
+  // Mobile: Logo weich ausbluren, wenn die BookmarkNav-Suche aufgeht (Bookmark
+  // wird breiter und würde sonst das Logo überlappen), beim Schließen einbluren.
+  // Separater additiver filter/opacity-Layer auf dem Wrapper — stört die
+  // Logo-Zustandsmaschine (visibility/Lottie) nicht.
+  useEffect(() => {
+    const isMobileMQ = () => window.matchMedia("(max-width: 1024px)").matches;
+    const onSearchOpen = () => {
+      if (!isMobileMQ()) return;
+      const el = wrapperRef.current;
+      if (!el) return;
+      gsap.to(el, { filter: "blur(8px)", opacity: 0, duration: 0.45, ease: "power2.inOut" });
+    };
+    const onSearchClose = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      // Erst mit etwas Delay wieder einbluren (Bookmark-Suchleiste zieht sich
+      // zuerst zusammen, dann erscheint das Logo).
+      gsap.to(el, {
+        filter: "blur(0px)", opacity: 1, duration: 0.35, delay: 0.35, ease: "power2.out",
+        onComplete: () => { el.style.filter = ""; },
+      });
+    };
+    window.addEventListener("search-opened", onSearchOpen);
+    window.addEventListener("search-closed", onSearchClose);
+    return () => {
+      window.removeEventListener("search-opened", onSearchOpen);
+      window.removeEventListener("search-closed", onSearchClose);
     };
   }, []);
 
@@ -429,24 +550,6 @@ export default function LogoBar() {
           </span>
         </div>
       </div>
-      {/* Fixed-positionierter Target-Slot für SparkHeading-Flip-Dock.
-          Bewusst position:fixed (nicht im Sticky-Wrapper) — Flip braucht zwei
-          stabile Endpunkte, sticky-relative Positionen verschieben sich beim
-          Scrollen und führen zu Snap-Sprüngen. */}
-      <div
-        id="ratgeber-flip-target"
-        style={{
-          position: "fixed",
-          top: isMobile ? 35 : 32,
-          left: isMobile ? 40 : 82,
-          width: 220,
-          height: 30,
-          pointerEvents: "auto",
-          display: "flex",
-          alignItems: "center",
-          zIndex: 62,
-        }}
-      />
     </>
   );
 }

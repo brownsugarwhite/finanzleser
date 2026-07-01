@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import gsap from "@/lib/gsapConfig";
 import { scrollToBookmarkSticky } from "@/lib/scrollToBookmarkSticky";
+import { openOverlay, closeOverlay, registerOverlayCloser } from "@/lib/overlayController";
 
 const TOOLS = [
   {
@@ -42,36 +43,22 @@ export default function FinanztoolsMenu() {
         queueMicrotask(() => {
           if (opening) {
             scrollToBookmarkSticky();
-            window.dispatchEvent(new CustomEvent("menu-closed"));
-            requestAnimationFrame(() => {
-              window.dispatchEvent(new CustomEvent("menu-opened", { detail: { extended: true } }));
-            });
+            // Controller schließt ggf. ein anderes offenes Overlay (Blur bleibt).
+            openOverlay("finanztools", { extended: true });
           } else {
-            window.dispatchEvent(new CustomEvent("menu-closed"));
+            closeOverlay("finanztools");
           }
         });
         return opening;
       });
     };
 
-    // Close when a regular megamenu opens
-    const handleMenuOpened = (e: Event) => {
-      const label = (e as CustomEvent).detail?.label;
-      if (label) {
-        // A nav category opened → close finanztools
-        setOpen(false);
-      }
-    };
-
-    const handleMenuClosed = () => {
-      // Only close if triggered externally (e.g. outside click on MegaMenuWrapper)
-    };
-
     window.addEventListener("finanztools-toggle", handleToggle);
-    window.addEventListener("menu-opened", handleMenuOpened);
+    // Handoff-Closer: schließt nur den Inhalt (kein Blur-Toggle).
+    const unregister = registerOverlayCloser("finanztools", () => setOpen(false));
     return () => {
       window.removeEventListener("finanztools-toggle", handleToggle);
-      window.removeEventListener("menu-opened", handleMenuOpened);
+      unregister();
     };
   }, []);
 
@@ -82,7 +69,7 @@ export default function FinanztoolsMenu() {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setOpen(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("finanztools");
       }
     };
 
@@ -102,7 +89,7 @@ export default function FinanztoolsMenu() {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
-        window.dispatchEvent(new CustomEvent("menu-closed"));
+        closeOverlay("finanztools");
       }
     };
     document.addEventListener("keydown", handleKey);
@@ -146,7 +133,7 @@ export default function FinanztoolsMenu() {
 
   const handleClose = () => {
     setOpen(false);
-    window.dispatchEvent(new CustomEvent("menu-closed"));
+    closeOverlay("finanztools");
   };
 
   if (!open) return null;

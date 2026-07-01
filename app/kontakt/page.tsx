@@ -31,6 +31,8 @@ export default async function KontaktPage() {
       title={page.title || TITLE}
       content={page.content}
       headingVariant="spark"
+      imageWide="/headers/kontakt_wide.webp"
+      imageWideAlt="Kontakt"
     />
   );
 }

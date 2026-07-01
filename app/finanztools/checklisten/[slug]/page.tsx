@@ -2,13 +2,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import InteraktiveCheckliste from "@/components/checkliste/InteraktiveCheckliste";
-import ChecklisteDetailWrapper from "@/components/checkliste/ChecklisteDetailWrapper";
-import { getAllChecklisten, getChecklisteBySlug } from "@/lib/wordpress";
+import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
+import PageAds from "@/components/layout/PageAds";
+import { getAllChecklisten, getChecklisteBySlug, getSiteSettings } from "@/lib/wordpress";
 import { parsePDF } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
 import type { CheckboxPosition } from "@/lib/checklisteParser";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { cleanDescription } from "@/lib/content-utils";
 
 export const revalidate = 3600;
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: `${checkliste.title} – Checkliste – ${SITE_NAME}`,
     description: stripHtml(
-      checkliste.checklisten?.checklistenBeschreibung || checkliste.excerpt
+      checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
     ) || `Interaktive Checkliste: ${checkliste.title}`,
     path: `/finanztools/checklisten/${slug}`,
   });
@@ -84,8 +85,9 @@ export default async function ChecklisteDetailPage({ params }: Props) {
     }
   }
 
-  const beschreibung =
-    checkliste.checklisten?.checklistenBeschreibung || "";
+  const beschreibung = cleanDescription(
+    checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
+  );
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -93,93 +95,75 @@ export default async function ChecklisteDetailPage({ params }: Props) {
     { label: "Checklisten", href: "/finanztools/checklisten" },
   ];
 
+  const settings = await getSiteSettings();
+  // Serverseitig geparste PDF-Daten an den Embed reichen → kein Client-Refetch.
+  const initialData = parsedData && parsedData.sektionen.length > 0
+    ? { data: parsedData, checkboxPositions, pdfUrl }
+    : null;
+
   return (
     <>
       <main className="min-h-screen bg-white">
-        <div style={{ maxWidth: 1200 }} className="mx-auto px-5 md:px-6 pb-12">
-          {/* Breadcrumb */}
-          <Breadcrumb items={breadcrumbItems} />
+        <PageAds
+          ads={settings.ads.checkliste}
+          variant="tool"
+          contentWidth={728}
+          contentClassName="pb-12"
+          heading={
+            <>
+              {/* Breadcrumb */}
+              <Breadcrumb items={breadcrumbItems} />
 
-          {/* Kategorie */}
-          <Link
-            href="/finanztools/checklisten"
-            style={{
-              display: "inline-block",
-              marginBottom: 8,
-              color: "var(--color-tool-checklisten)",
-              fontFamily: "Merriweather, serif",
-              fontSize: "23px",
-              fontStyle: "italic",
-              transition: "opacity 0.2s",
-            }}
-          >
-            Checklisten
-          </Link>
+              {/* Kategorie */}
+              <Link
+                href="/finanztools/checklisten"
+                className="cpt-eyebrow"
+                style={{
+                  display: "inline-block",
+                  marginBottom: 8,
+                  color: "var(--color-tool-checklisten)",
+                  fontFamily: "Merriweather, serif",
+                  fontSize: "23px",
+                  fontStyle: "italic",
+                  transition: "opacity 0.2s",
+                }}
+              >
+                Checklisten
+              </Link>
 
-          {/* Titel */}
-          <h1
-            style={{
-              fontSize: "42px",
-              lineHeight: "1.3em",
-              fontWeight: 700,
-              marginBottom: 16,
-            }}
-          >
-            {checkliste.title}
-          </h1>
+              {/* Titel */}
+              <h1
+                className="cpt-title"
+                style={{
+                  fontSize: "42px",
+                  lineHeight: "1.3em",
+                  fontWeight: 700,
+                  marginBottom: 16,
+                }}
+              >
+                {checkliste.title}
+              </h1>
 
-          {/* Beschreibung */}
-          {beschreibung && (
-            <p
-              className="mb-8"
-              style={{
-                fontSize: "18px",
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-text-primary)",
-                lineHeight: 1.6,
-              }}
-            >
-              {beschreibung}
-            </p>
-          )}
-
-          {/* 2-Column: Visual links + Slider rechts */}
-          {parsedData && parsedData.sektionen.length > 0 ? (
-            <ChecklisteDetailWrapper>
-              <div className="checkliste-detail-row">
-                {/* Links: Visual 40% (Desktop) / 100% full-bleed 270px (Mobile) */}
-                <div className="checkliste-detail-visual-col">
-                  <div className="checkliste-detail-visual" />
-                </div>
-
-                {/* Rechts: Checkliste 60% (Desktop) / 100% (Mobile) */}
-                <div className="checkliste-detail-form">
-                  <InteraktiveCheckliste data={parsedData} pdfUrl={pdfUrl} slug={slug} checkboxPositions={checkboxPositions} />
-                </div>
-              </div>
-            </ChecklisteDetailWrapper>
-          ) : (
-            <div className="py-8 text-center text-gray-500">
-              <p>
-                Keine Checklisten-Daten verfügbar.
-                {pdfUrl && (
-                  <>
-                    {" "}
-                    <a
-                      href={pdfUrl}
-                      download
-                      className="underline"
-                      style={{ color: "var(--color-tool-checklisten)" }}
-                    >
-                      PDF herunterladen
-                    </a>
-                  </>
-                )}
-              </p>
-            </div>
-          )}
-
-        </div>
+              {/* Beschreibung */}
+              {beschreibung && (
+                <p
+                  className="cpt-desc mb-8"
+                  style={{
+                    fontSize: "18px",
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-text-primary)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {beschreibung}
+                </p>
+              )}
+            </>
+          }
+        >
+          {/* Checkliste ohne Visual, 850px. Aktions-Portal (PDF) inline unter der Liste. */}
+          <ChecklisteEmbed slug={slug} noVisual initialData={initialData} />
+        </PageAds>
       </main>
       <Footer />
     </>

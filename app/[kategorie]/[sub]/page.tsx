@@ -1,11 +1,45 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getPostsByCategory, getCategoryBySlug } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryBySlug, getNavItems } from "@/lib/wordpress";
 import ArticleLayout from "@/components/layout/ArticleLayout";
+import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { extractArticleHeader } from "@/lib/articleHeader";
+import { getRedakteurForSlug } from "@/lib/redakteure";
+
+// Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.
+function redakteurAuthor(slug: string, date?: string) {
+  const r = getRedakteurForSlug(slug);
+  return {
+    name: r.name,
+    role: r.role,
+    date: date ? new Date(date).toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }) : undefined,
+    imageUrl: r.imageUrl,
+    colorVariant: r.colorVariant,
+  };
+}
 
 export const revalidate = 3600;
+
+// Unterkategorie-Seiten beim Build vorrendern (SSG) statt dynamisch pro Request —
+// die Kombinationen kommen aus der Nav-Struktur. Legacy-Post-Slugs unter einer
+// Hauptkategorie bleiben dynamisch (dynamicParams = default true).
+export async function generateStaticParams() {
+  try {
+    const navItems = await getNavItems();
+    const params: Array<{ kategorie: string; sub: string }> = [];
+    for (const item of navItems) {
+      for (const sub of item.submenu || []) {
+        const parts = sub.href.replace(/^\//, "").split("/").filter(Boolean);
+        if (parts.length === 2) params.push({ kategorie: parts[0], sub: parts[1] });
+      }
+    }
+    return params;
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata(
   props: { params: Promise<{ kategorie: string; sub: string }> }
@@ -22,9 +56,10 @@ export async function generateMetadata(
   }
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
+    const header = extractArticleHeader(post.content);
     return buildMetadata({
       title: `${post.title} – ${SITE_NAME}`,
-      description: stripHtml(post.excerpt),
+      description: stripHtml(header?.description || post.excerpt),
       path: `/${params.kategorie}/${params.sub}`,
       image: post.featuredImage?.node?.sourceUrl,
       type: "article",
@@ -37,10 +72,14 @@ export async function generateMetadata(
 export default async function SubkategoriePage(props: { params: Promise<{ kategorie: string; sub: string }> }) {
   const params = await props.params;
 
-  // 1. Zuerst prüfen: ist es eine Kategorie-Seite?
-  const categoryPosts = await getPostsByCategory(params.sub).catch(() => []);
+  // 1. Zuerst prüfen: ist es eine Kategorie-Seite? Posts + Kategorie PARALLEL holen
+  // (beide hängen nur an params.sub; getCategoryBySlug ist via React.cache dedupliziert
+  // mit generateMetadata).
+  const [categoryPosts, category] = await Promise.all([
+    getPostsByCategory(params.sub).catch(() => []),
+    getCategoryBySlug(params.sub).catch(() => null),
+  ]);
   if (categoryPosts.length > 0) {
-    const category = await getCategoryBySlug(params.sub).catch(() => null);
     const mainCategory = category?.parent ? category.parent : { name: params.kategorie, slug: params.kategorie };
     return (
       <CategoryLayout
@@ -48,6 +87,7 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
         titleSlug={params.sub}
         description={category?.description}
         image={category?.image}
+        imageWide={category?.imageWide}
         mainCategoryName={mainCategory?.name}
         mainCategorySlug={mainCategory?.slug}
         posts={categoryPosts}
@@ -58,8 +98,9 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   // 2. Sonst: prüfen ob es ein Post-Slug ist
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
+    const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
     return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} />
+      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} toolData={toolData} author={redakteurAuthor(post.slug || params.sub, post.date)} />
     );
   }
 

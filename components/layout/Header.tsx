@@ -8,7 +8,6 @@ import { useNavItems } from "@/lib/NavContext";
 import { useNavPill } from "@/lib/hooks/useNavPill";
 import MegaMenu from "./MegaMenu";
 import Spacer from "@/components/ui/Spacer";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 const Spark = () => (
   <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden style={{ pointerEvents: "none", display: "block" }}>
@@ -213,11 +212,6 @@ export default function Header() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <nav className="md:hidden border-t border-gray-200 pt-4 pb-4">
-          {/* Dark Mode Toggle */}
-          <div className="flex justify-end mb-4 px-0">
-            <DarkModeToggle />
-          </div>
-
           {NAV_ITEMS.map((item) => (
             <div key={item.label}>
               <button

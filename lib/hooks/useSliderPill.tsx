@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useCallback, useEffect } from "react";
 import gsap from "@/lib/gsapConfig";
+import { isBackNavigation } from "@/lib/landingState";
 
 /* ── Constants ──────────────────────────────────── */
 
@@ -57,35 +58,44 @@ export function useSliderPill({
   const pillVisible = useRef(false);
   const lastHoveredIdx = useRef(-1);
 
+  // Frische emblaApi-Referenz: rAF-Retries / Closures nach einem StrictMode-Remount
+  // sollen NICHT auf ein veraltetes null zeigen (sonst bricht der Bloom ab und die
+  // Back-Restore-Pill bleibt unsichtbar).
+  const emblaApiRef = useRef(emblaApi);
+  emblaApiRef.current = emblaApi;
+
   /* ── Helpers ── */
 
   const getScrollOffset = useCallback(() => {
-    if (!emblaApi) return 0;
-    const viewport = emblaApi.rootNode() as HTMLElement | null;
-    const container = emblaApi.containerNode() as HTMLElement | null;
+    const embla = emblaApiRef.current;
+    if (!embla) return 0;
+    const viewport = embla.rootNode() as HTMLElement | null;
+    const container = embla.containerNode() as HTMLElement | null;
     if (!viewport || !container) return 0;
     return viewport.getBoundingClientRect().left - container.getBoundingClientRect().left;
-  }, [emblaApi]);
+  }, []);
 
   const getCardVX = useCallback((cardEl: HTMLElement) => {
-    if (!emblaApi) return { x: 0, w: 0 };
-    const viewport = emblaApi.rootNode() as HTMLElement;
+    const embla = emblaApiRef.current;
+    if (!embla) return { x: 0, w: 0 };
+    const viewport = embla.rootNode() as HTMLElement;
     const vRect = viewport.getBoundingClientRect();
     const inner = cardEl.querySelector("[data-slider-card]") as HTMLElement | null;
     const target = inner || cardEl;
     const tRect = target.getBoundingClientRect();
     return { x: tRect.left - vRect.left - PILL_PX, w: tRect.width + PILL_PX * 2 };
-  }, [emblaApi]);
+  }, []);
 
   const getTitleCenter = useCallback((cardEl: HTMLElement) => {
-    if (!emblaApi) return 0;
-    const viewport = emblaApi.rootNode() as HTMLElement;
+    const embla = emblaApiRef.current;
+    if (!embla) return 0;
+    const viewport = embla.rootNode() as HTMLElement;
     const vTop = viewport.getBoundingClientRect().top;
     const titleEl = cardEl.querySelector("p");
     const target = titleEl || cardEl;
     const tRect = target.getBoundingClientRect();
     return tRect.top + tRect.height / 2 - vTop;
-  }, [emblaApi]);
+  }, []);
 
   /* ── Edge-aware target (natural-size + edge scale) ──
      Egal ob durch Drag oder Klick ausgelöst — die Pill muss in der Edge-Fade-
@@ -129,7 +139,7 @@ export function useSliderPill({
   /* ── Pill movement ── */
 
   const movePillTo = useCallback((cardEl: HTMLElement, idx?: number) => {
-    if (!pillRef.current || !emblaApi) return;
+    if (!pillRef.current || !emblaApiRef.current) return;
     const cardIdx = idx ?? cardRefs.current.indexOf(cardEl);
     const { x, width: w, top, scale, opacity, xOrig } = getEdgeTarget(cardEl, cardIdx);
     const d = getDuration(x);
@@ -184,7 +194,7 @@ export function useSliderPill({
 
   /** Bloom: Pill erscheint mit Scale-Pop an Ziel-Position. Für Mode-Change-Snap. */
   const bloomPillAt = useCallback((cardEl: HTMLElement, idx: number) => {
-    if (!pillRef.current || !emblaApi) return;
+    if (!pillRef.current || !emblaApiRef.current) return;
     const { x, width: w, top, scale: edgeScale, opacity: edgeOpacity, xOrig } = getEdgeTarget(cardEl, idx);
     const l3Top = top - PILL_H / 2 - 6;
     const l1Top = top - PILL_H / 2 - 10;
@@ -235,18 +245,44 @@ export function useSliderPill({
   /* ── Mode change / active index change ── */
 
   const snapToActive = useCallback(() => {
-    if (activeIndex === null || activeIndex === undefined) return;
-    const card = cardRefs.current[activeIndex];
-    if (!card) return;
-    bloomPillAt(card, activeIndex);
-    lastHoveredIdx.current = activeIndex;
+    const idx = activeIndex;
+    if (idx === null || idx === undefined) return;
+    // Retry per rAF, bis Embla + Card + Pill bereit sind. Beim Back-Restore (StrictMode-
+    // Remount / kurz null emblaApi) ist sonst beim ersten Versuch nichts da → Pill bliebe
+    // unsichtbar bis zum nächsten Klick.
+    let tries = 0;
+    const attempt = () => {
+      const card = cardRefs.current[idx];
+      if (card && emblaApiRef.current && pillRef.current) {
+        bloomPillAt(card, idx);
+        lastHoveredIdx.current = idx;
+        return;
+      }
+      if (tries++ < 40) requestAnimationFrame(attempt);
+    };
+    attempt();
   }, [activeIndex, bloomPillAt]);
 
   const prevActiveIndex = useRef<number | null>(null);
+  // Back-Restore: die Pill soll SOFORT an der aktiven Kategorie sitzen, OHNE vorher zu
+  // verstecken — sonst würde ein zweiter Effekt-Lauf (StrictMode-Doppel-Invoke /
+  // transientes embla=null) die gerade gebloomte Pill wieder ausblenden und nicht neu
+  // bloomen. Solange activeIndex dem wiederhergestellten Wert entspricht, nur snappen.
+  const backRestoreRef = useRef(typeof window !== "undefined" && isBackNavigation());
+  const restoredActiveRef = useRef<number | null | undefined>(undefined);
   useEffect(() => {
     const prev = prevActiveIndex.current;
     const curr = activeIndex ?? null;
     prevActiveIndex.current = curr;
+
+    if (backRestoreRef.current && curr !== null) {
+      if (restoredActiveRef.current === undefined) restoredActiveRef.current = curr;
+      if (curr === restoredActiveRef.current) {
+        snapToActive(); // sofort an aktive Kategorie, ohne Hide
+        return;
+      }
+      backRestoreRef.current = false; // echte Änderung → normaler Pfad
+    }
 
     // Active → Active: smooth slide zum neuen Button
     if (prev !== null && curr !== null && prev !== curr) {
@@ -274,7 +310,9 @@ export function useSliderPill({
     pillVisible.current = false;
     lastHoveredIdx.current = -1;
 
-    const tSnap = curr !== null ? setTimeout(snapToActive, MODE_CHANGE_SNAP_DELAY) : null;
+    const delay = backRestoreRef.current ? 0 : MODE_CHANGE_SNAP_DELAY;
+    backRestoreRef.current = false; // nur beim ersten (Back-Restore-)Lauf
+    const tSnap = curr !== null ? setTimeout(snapToActive, delay) : null;
     return () => {
       if (tSnap) clearTimeout(tSnap);
     };
@@ -345,7 +383,11 @@ export function useSliderPill({
                 }}
                 style={{ position: "absolute", top: "50%", left: 0, display: "flex", alignItems: "center", pointerEvents: "none" }}
               >
-                <div style={{ flex: `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
+                {/* Leading-Offset MUSS exakt der realen card0-Position entsprechen,
+                    sonst laufen weiße Schrift + Sparks versetzt. Mobile: reale
+                    Container haben paddingLeft (Button-Mode 36, Card-Mode 20) +
+                    display:none-Spacer (kein Leading-gap). Desktop: Spacer+gap. */}
+                <div style={{ flex: isMobile ? `0 0 ${isActiveMode ? 36 : 20}px` : `0 0 calc(${spacerLeft} + ${gap}px)`, minWidth: 0 }} />
                 {items.map((item, i) => (
                   <React.Fragment key={item.slug}>
                     <span style={{
@@ -372,7 +414,7 @@ export function useSliderPill({
         </div>
       </div>
     );
-  }, [items, hasLens, titleWidths, gap, spacerExpanded, isMobile]);
+  }, [items, hasLens, titleWidths, gap, spacerExpanded, isMobile, isActiveMode]);
 
   return {
     pillRef, lensRef, cardRefs,

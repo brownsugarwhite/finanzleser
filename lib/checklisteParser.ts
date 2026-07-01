@@ -84,10 +84,15 @@ function normalizeSpacedTitle(spaced: string, glyphWords?: string[]): string {
 function isSectionTitle(str: string): boolean {
   const trimmed = str.trim();
   if (trimmed.length < 10) return false;
-  const cleaned = trimmed.replace(/[\s:\-]/g, "");
-  if (cleaned.length < 5) return false;
-  // Großbuchstaben (inkl. Umlaute), Spaces, Doppelpunkte und Bindestriche
-  return /^[A-ZÄÖÜ :\-]+$/.test(trimmed) && /^[A-ZÄÖÜ]+$/.test(cleaned);
+  // Sektions-Titel sind durchgehend GROSSGESCHRIEBEN und gesperrt
+  // ("S O N D E R A U S G A B E N  V S .  W E R B U N G S K O S T E N").
+  // Statt einer Positiv-Liste erlaubter Zeichen (die an "VS.", "+", "&", "/" …
+  // scheitert) erkennen wir Titel am FEHLEN von Kleinbuchstaben: Fließtext
+  // enthält immer Kleinbuchstaben, Überschriften nie. So sind beliebige
+  // Satzzeichen und Jahreszahlen ("… 2026") automatisch abgedeckt.
+  if (/[a-zäöüß]/.test(trimmed)) return false;
+  const letters = (trimmed.match(/[A-ZÄÖÜ]/g) || []).length;
+  return letters >= 5;
 }
 
 function isNumber(str: string): boolean {
@@ -169,10 +174,11 @@ async function extractPdfItems(buffer: Buffer): Promise<{
         );
         const firstGlyph = glyphs[0] as { unicode?: string } | undefined;
         if (!firstGlyph?.unicode) continue;
-        // Nur Großbuchstaben-Sequenzen
+        // Nur gesperrte Großbuchstaben-Sequenzen (kein Kleinbuchstabe) –
+        // deckt Satzzeichen wie "VS.", "+", "&" in Titeln automatisch ab.
         const allUpper = glyphs.every((g: { unicode?: string }) => {
           const u = g.unicode || "";
-          return u === " " || /^[A-ZÄÖÜ:\-]$/.test(u);
+          return u === " " || !/[a-zäöüß]/.test(u);
         });
         if (allUpper && glyphs.length >= 8) {
           const words = extractWordsFromGlyphs(arr);

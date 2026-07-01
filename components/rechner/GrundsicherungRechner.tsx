@@ -49,6 +49,7 @@ export default function GrundsicherungRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={2000}
         />
 
         <RechnerInput
@@ -59,6 +60,7 @@ export default function GrundsicherungRechner() {
           einheit="€"
           step={50}
           min={0}
+          max={2000}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

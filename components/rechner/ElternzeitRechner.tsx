@@ -43,6 +43,7 @@ export default function ElternzeitRechner() {
           onChange={(val) => setParams((p) => ({ ...p, geburtYear: val }))}
           min={2020}
           max={2030}
+          step={1}
         />
 
         <RechnerSelect

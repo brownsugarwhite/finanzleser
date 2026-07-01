@@ -25,6 +25,7 @@ body[data-landing] {
 
 
 /* ── Landing page mobile fixes ── */
+/* ≤1024px: Landing TopNav + Dotline (Powered by) ausblenden. */
 @media (max-width: 1024px) {
   body[data-landing] .landing-nav {
     visibility: hidden !important;
@@ -32,6 +33,7 @@ body[data-landing] {
     margin-top: 0 !important;
     overflow: hidden !important;
   }
+  .landing-dotline { display: none !important; }
 }
 
 /* ── Logo + DotLine: Mobile-Anpassungen (≤767px) ── */
@@ -78,81 +80,399 @@ body[data-landing] {
     width: 36px !important;
     padding-right: 8px !important;
   }
-  .ftools-newsletter-box {
-    display: none !important;
-  }
-  .ftools-right-spacer {
-    display: none !important;
-  }
-  .ftools-right-preview {
-    display: none !important;
-  }
-  .ftools-visual-wrap {
-    position: static !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100vw !important;
-    height: auto !important;
-    margin-left: calc(50% - 50vw) !important;
-    aspect-ratio: 1309.52 / 855.59 !important;
-  }
-  .ftools-spacer {
-    height: auto !important;
-  }
-  /* Restliche FinanztoolsHero Mobile-Layout-Switches */
-  .ftools-left-col {
-    flex: none !important;
-    width: 100% !important;
-  }
-  .ftools-subheading-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-  }
-  .ftools-subheading-text {
-    margin-left: 0 !important;
-  }
-  .ftools-lottie-slider {
-    margin-top: -13px !important;
-    margin-bottom: -130px !important;
-  }
-  .ftools-cards-mobile {
-    display: block !important;
-  }
-  .ftools-cards-desktop {
-    display: none !important;
-  }
 }
-/* Desktop defaults für FinanztoolsHero Layout-Switches */
-.ftools-left-col {
-  flex: 1;
+
+/* ===== FinanztoolsHero Mobile-Block (≤767px) — eigener Aufbau; Desktop-Row aus ===== */
+.ftools-mobile { display: none; position: relative; padding: 0 clamp(20px, 5vw, 40px) 56px; margin-top: -10px; }
+/* Bird-Visual full-bleed + horizontal zentriert */
+.ftools-m-bird { display: block; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); height: auto; object-fit: contain; }
+/* Überschriften exakt wie Desktop: „Die Finanztools" 19/700, „Alles in eigener Hand" 26/900 */
+/* „Die Finanztools" mit Blende-Wolke dahinter — maskiert das von oben reinragende Visual.
+   Row überlappt das Visual (negativer margin-top); Blende absolut dahinter (z 0), Text davor (z 1). */
+/* Platzhalter (tunebar) — Höhe = Scrollweg, bevor das Label mit hochscrollt. */
+.ftools-m-finanztools-spacer { height: 100px; }
+/* Label + Wolke sticky bottom: bottom-Wert = Position perfekt über den Buttons (tunebar). */
+.ftools-m-finanztools-row { position: sticky; bottom: 200px; margin-top: -14px; z-index: 49; }
+.ftools-m-blend {
+  position: absolute; z-index: 0; pointer-events: none;
+  left: -6px; bottom: -6px; width: 161px; height: auto;
 }
-.ftools-subheading-row {
-  flex-direction: row;
-  align-items: baseline;
-  gap: 10px;
+.ftools-m-finanztools {
+  position: relative; z-index: 1; margin: 0;
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 700; font-size: 17px; line-height: 1.38;
+  color: var(--color-text-primary);
 }
-.ftools-subheading-text {
-  margin-left: 180px;
+.ftools-m-allein {
+  position: relative; z-index: 2;   /* über der Finanztools-Row/Blende (z 1) */
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 900; font-size: 26px; line-height: 1.3;
+  color: var(--color-text-primary); margin: 2px 0 0;
+  /* Scroll-Reveal: initial verborgen (JS setzt inline opacity beim Scrollen) →
+     kein kurzes Aufblitzen vor dem ersten Effect-Lauf. */
+  opacity: 0;
 }
-.ftools-lottie-slider {
-  margin-top: -170px;
-  margin-bottom: -380px;
+/* Loader wie Desktop: 1px-Linie (Track) zeichnet sich von links nach rechts ein (scaleX,
+   per JS getriggert wenn die Buttons abdocken — NICHT scroll-gebunden) + 6px-Fill. */
+.ftools-m-loader { position: relative; height: 6px; margin: 0; }
+.ftools-m-loader-track {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-text-primary);
+  transform: scaleX(0); transform-origin: left center; transition: transform 0.6s ease;
 }
-.ftools-cards-mobile {
-  display: none;
+.ftools-m-loader-fill { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--color-text-primary); transition: width 0.1s linear; }
+/* Pause/Play-Button — über der Linie rechts; erscheint mit Verzögerung (≈ Draw-in) wie Desktop. */
+.ftools-m-loader-toggle {
+  position: absolute; top: -28px; right: 0;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; border: none; background: none;
+  color: var(--color-text-primary); cursor: pointer;
+  transition: opacity 0.25s ease 0.5s;
 }
-.ftools-cards-desktop {
+/* desc1 — Merriweather wie Desktop (.ftools-allein-desc) */
+.ftools-m-desc {
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 650; font-size: 16px; line-height: 1.3; color: var(--color-text-primary); margin: 11px 0 0;
+  /* Scroll-Reveal: initial verborgen (JS setzt inline opacity beim Scrollen). */
+  opacity: 0;
+}
+.ftools-m-slider { position: relative; width: 100%; aspect-ratio: 4 / 3; margin: 14px 0 0; }
+.ftools-m-slider img,
+.ftools-m-slider video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
+.ftools-m-divider { height: 1px; background: rgba(0,0,0,0.12); margin: 18px 0 0; }
+/* Sticky-Stage (≤767): Buttons · Progress · Expanded Card als EINE Einheit, klebt unten.
+   Flex-column + order → Progress liegt geschlossen ÜBER den Buttons, offen darunter. */
+/* Revolver-Stage: feste Höhe (inline), sticky unten; die 3 Tool-Cards liegen ABSOLUT darin
+   und werden auf ihre Slots getweent (gleiche Technik wie Desktop). z-index hoch → Buttons/Cards
+   liegen über allem außer Leo (z 60). */
+.ftools-m-stage { position: sticky; bottom: 16px; margin-top: 22px; z-index: 50; }
+
+/* Tool-Card (Button ↔ große Card) — Glass-Optik kommt inline aus cp (fadet zur großen Card raus). */
+.ftools-m-tcard { cursor: pointer; }
+.ftools-m-tcard-head {
+  position: absolute; left: 13px; right: 12px; top: 0; height: 50px;
+  display: flex; align-items: center; gap: 8px; pointer-events: none;
+}
+.ftools-m-tcard-head img { flex-shrink: 0; object-fit: contain; }
+.ftools-m-tcard-head span {
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 600; line-height: 1; color: var(--color-text-primary); white-space: nowrap;
+}
+
+/* Buttons-Reihe: Intro = 3 gestapelt (links); aktiv = 2 inaktive klein NEBENEINANDER. */
+.ftools-m-btns {
+  order: 1; position: relative;
+  display: flex; flex-direction: column; gap: 11px; align-items: flex-start;
+  width: 46%; max-width: 250px;
+}
+.ftools-m-btns.is-active {
+  flex-direction: row; width: 100%; max-width: none; gap: 12px; align-items: stretch;
+}
+.ftools-m-btns.is-active .ftools-mbtn { flex: 1 1 0; width: auto; justify-content: flex-start; }
+/* aktives Tool: aus dem Flow (Reihe zeigt nur 2), faded raus — Flip morpht den Rest. */
+.ftools-mbtn { transition: opacity 0.3s ease; }
+.ftools-mbtn.is-hidden { position: absolute; opacity: 0; pointer-events: none; }
+
+/* ── Expanded Card (Mobile) ── immer im DOM, geschlossen kollabiert (Flip morpht die Höhe). */
+/* Schließen-X — feste Instanz in der Stage (bottom inline), faded mit activeCard, morpht NICHT mit. */
+.ftools-m-card-close {
+  position: absolute; right: 4px; width: 34px; height: 34px; z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; border: none; background: none; color: var(--color-text-primary); cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.ftools-m-card-desc {
+  position: absolute; left: 18px; top: 52px; margin: 0;   /* width inline (feste große-Card-Breite) */
+  font-family: var(--font-body, 'Open Sans', sans-serif);
+  font-weight: 400; font-size: 16px; line-height: 1.35; color: var(--color-text-medium);
+  display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* CTA TOP-verankert (top inline = finale Position) → bewegt sich beim Morph nicht. */
+.ftools-m-card-cta { position: absolute; left: 18px; display: flex; justify-content: flex-start; }
+
+/* Bookmark (Tool-Farbe) hängt rechts an der Progress-Linie nach unten. */
+.ftools-m-loader-bookmark {
+  position: absolute; right: 37px; top: 0;
+  display: flex; flex-direction: column; align-items: center;
+  transition: opacity 0.3s ease;
+}
+/* Beschreibung 2 — scrollt mit der Section (absolut, NICHT sticky). Unten rechts, +5px Gap
+   zu den Buttons (left 52%); etwas höher als vorher (bottom 66). */
+/* Flex-Reihe im Section-Flow: Platzhalter (Button-Stack-Größe) + desc2 daneben, oben ausgerichtet.
+   bottom = padding-bottom (56) → Platzhalter deckt sich exakt mit dem Button-Stack. */
+.ftools-m-desc2-row {
+  position: absolute; left: clamp(20px, 5vw, 40px); right: clamp(20px, 5vw, 40px); bottom: 56px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.ftools-m-desc2-spacer { flex-shrink: 0; }
+.ftools-m-desc2 {
+  flex: 1; margin: 0;
+  font-family: var(--font-body, 'Open Sans', sans-serif);
+  font-size: 15px; line-height: 1.4; color: var(--color-text-medium);
+}
+
+@media (max-width: 767px) {
+  .ftools-row { display: none !important; }
+  .ftools-mobile { display: block; }
+}
+/* ===== FinanztoolsHero Desktop-Layout =====
+   CONTROLS (330px, links) + STAGE (Mitte: Visual+Slider, volle Breite), KEIN Gap.
+   EINE nicht-sticky Linie zwischen Visual & Slider, die über die komplette Breite
+   inkl. der 330px-Controls reicht (Stage-Linie mit negativem margin-left). „Die
+   Finanztools" (rechtsbündig zu Newsletter) + Blende sitzen darauf; CONTROLS liegt
+   per z-index über der STAGE → die Blende überdeckt die Linie (smooth-cut). */
+.ftools-left-col { flex: 1; min-width: 0; }
+.ftools-inner-row {
   display: flex;
+  align-items: stretch;
+  gap: 0;
+  --stage-h: 450px;           /* Fallback; JS setzt 4:3 der Box-Breite, min 350px */
 }
-/* Desktop default für Hero-Visual */
-.ftools-visual-wrap {
+
+/* ── Responsive (Desktop-Bereich, oberhalb des Mobile-Breakpoints 1024) ──
+   ≤1400: Der linke Block (Controls + Visual/Slider) behält seine 1400px-Größe
+          (eingefroren auf 974px = 1288 Content − 14 Dot-Spalte − 300 Sidebar).
+   1400→1330: Section-Padding schrumpft beidseitig gleichmäßig (56→46px) UND die rechte
+   Sidebar (Cards + Anbieter-Visual/Text) schrumpft in der Breite bis −50px (300 → 250),
+   damit der linke Block fix bleibt und alles so groß wie möglich sichtbar ist. Sidebar-
+   Innen-Padding bleibt gleich (Inhalt wird schmaler, nicht das Padding). */
+@media (min-width: 1025px) and (max-width: 1400px) {
+  .ftools-row {
+    padding-left: clamp(46px, calc(100vw / 7 - 144px), 56px) !important;
+    padding-right: clamp(46px, calc(100vw / 7 - 144px), 56px) !important;
+  }
+  .ftools-left-col { flex: 0 0 974px !important; }
+  .ftools-right-preview { flex: 0 1 300px !important; min-width: 250px; }
+  /* Inner-Container (sonst fix 300px) mit der schrumpfenden Sidebar mitziehen →
+     Artikel-Cards + Anbieter-Visual/Text werden tatsächlich schmaler. */
+  .ftools-preview-inner { width: 100% !important; }
+}
+/* ≤1330: rechte Sidebar + Dot-Spalte komplett ausblenden; der linke Block (Controls +
+   Visual/Slider) ist als Ganzes zentriert und 100px schmaler. Die „100px schmaler"
+   stecken im PADDING (statt in einer fixen Zentrier-Marge), damit beim Verschmälern das
+   GESAMTE Padding gleichmäßig schrumpft (96→20px, je Seite). Der Content bleibt dabei
+   konstant; erst ab ~1178px (Padding am Minimum 20) wird der Content kleiner. */
+@media (min-width: 768px) and (max-width: 1330px) {
+  .ftools-row {
+    padding-left: clamp(36px, calc(50vw - 569px), 96px) !important;
+    padding-right: clamp(36px, calc(50vw - 569px), 96px) !important;
+  }
+  .ftools-left-col { flex: 1 1 0% !important; margin: 0 !important; }
+  /* Visual/Slider rechts bündig (kein 36px-Rechtsrand des Stage-Box-Containers mehr). */
+  .ftools-stage-box { width: calc(100% - 36px) !important; margin-right: 0 !important; }
+  .ftools-right-spacer { display: none !important; }
+  .ftools-right-preview { display: none !important; }
+}
+.ftools-controls {
+  width: 330px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;                 /* über der Stage → Blende überdeckt die Linie */
+}
+.ftools-newsletter-box {
+  width: 330px;
+  /* +72 = Visual-margin-top 36 + Linien-margin-top 36 → „Die Finanztools" bleibt auf der
+     Linie. --stage-h ist die GEMESSENE Visual-Höhe (inkl. 450px-min-height), darum exakt;
+     Fallback 450px für den ersten Paint, bevor JS gemessen hat. */
+  min-height: calc(var(--stage-h, 450px) + 72px);
+}
+
+/* „Die Finanztools" — rechtsbündig (wie Newsletter), nur Text + Blende, keine eigene
+   Linie. STICKY: sitzt über den Buttons und dockt genau auf der (mitscrollenden) Linie an. */
+/* „Die Finanztools" — Kasten mit Page-Bg + 6px Padding (überdeckt die Linie statt Blende) */
+.ftools-finanztools {
+  position: sticky;
+  bottom: 133px;              /* sticky: 7px tiefer */
+  z-index: 3;                 /* über alles/desc + über der nicht-stickyen Linie */
+  align-self: flex-end;
+  margin-top: -20px;          /* Ruhezustand auf der Linie: 7px höher */
+  margin-right: -6px;         /* gleicht das 6px-Padding aus → bündig rechts */
+  background: var(--color-bg-page);
+  padding: 6px;
+}
+.ftools-finanztools .ftools-subheading-text {
+  white-space: nowrap;
+}
+
+/* „Alles in eigener Hand" + Texte darunter — 280px, rechtsbündig (mit „Die Finanztools"),
+   rechts ausgerichtet, etwas kleiner und näher an „Die Finanztools". */
+.ftools-allein {
+  width: 280px;
+  white-space: nowrap;
+  font-size: 26px !important;
+  text-align: right;
+  margin: -3px 0 0 auto !important;   /* wieder 5px tiefer */
+}
+/* Beschreibung 1 — gleiche Schrift/Größe wie der Newsletter-Text, volle 330px Breite */
+.ftools-allein-desc {
+  width: 330px;
+  margin: 20px 0 0 auto;              /* größerer Gap (unter Alles + zwischen den Absätzen) */
+  text-align: right;
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 650;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+/* Beschreibung 2 — Merriweather wie desc1, 400 */
+.ftools-allein-desc-2 {
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+/* Loader + Buttons als Gruppe an die Container-Unterkante (bündig mit Slider) */
+.ftools-controls-bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+/* Progress-Bar (volle Controls-Breite), Play/Pause oben rechts. Die 1px-Linie + der
+   abgerundete Fortschritts-Pill liegen beide absolut auf gleicher Höhe → der Pill wird
+   NICHT vom scaleX der Linie verzerrt (bleibt sauber rund). */
+.ftools-loader-wrap {
+  /* Position wird inline gesetzt (absolut in der Tool-Bühne, top = loaderTop). */
+  width: 330px;
+  height: 1px;
+  margin: 0;
+}
+/* Lesezeichen in Tool-Farbe am rechten Ende des Loaders (hängt unter der Linie) */
+.ftools-loader-bookmark {
   position: absolute;
-  top: 13px;
-  left: 370px;
-  right: 23px;
-  height: 30vw;
+  right: 40px;                /* nach links, sodass die Linie rechts rausschaut */
+  top: -6px;
+  width: 28px;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+/* Schließen-X auf Höhe der Card-Überschrift (nur aktiv) */
+.ftools-tool-close {
+  position: absolute;
+  top: -34px;   /* Card-Überschrift sitzt 80px höher (Bühnen-Shift) */
+  right: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  z-index: 7;
+}
+/* Tool-Cards (absolut in der Bühne, gemorpht). Kein Glass im aktiven Zustand. */
+.ftools-tcard {
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  will-change: transform, width, height;
+}
+.ftools-loader-toggle {
+  position: absolute;
+  top: -28px;                 /* nochmal 5px höher */
+  right: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  /* erscheint erst nachdem sich die Linie eingezeichnet hat (Verzögerung ≈ Draw-in) */
+  transition: opacity 0.25s ease 0.5s;
+}
+/* Track: dünne Linie, skaliert beim Aktivieren von links 0→100% */
+.ftools-loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--color-text-primary);
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+}
+/* Fortschritt: rechteckiger (NICHT abgerundeter) dunkler Balken, sitzt EXAKT auf der
+   Linie (bottom-bündig) und ragt nach oben — nicht zentriert. */
+.ftools-loader-fill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--color-text-primary);
+}
+
+/* STAGE — Visual + Slider gleich groß (contain), volle Breite + durchgehende Linie */
+.ftools-stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+/* Visual/Slider mit 36px Abstand links + rechts */
+.ftools-stage-box { width: calc(100% - 72px); margin: 0 36px; height: var(--stage-h); position: relative; }
+/* Landing-Visual (erste Box) 36px weiter runter; schrumpft nicht.
+   Höhe = 4:3 der eigenen Breite via CSS aspect-ratio (== JS-Formel visualW*0.75) →
+   schon im ersten SSR-Paint korrekt, KEIN Sprung mehr beim Hydrieren. */
+.ftools-stage > .ftools-stage-box:first-child { margin-top: 36px; flex: 0 0 auto; height: auto; aspect-ratio: 4 / 3; }
+/* Stage-Boxen (Visual + Slider-Video): Mindesthöhe nur auf Desktop (≥768; Mobile
+   nutzt .ftools-m-*). Beide gleich → Linie mittig, „Die Finanztools" passt. */
+@media (min-width: 768px) {
+  .ftools-stage > .ftools-stage-box:first-child,
+  .ftools-stage > .ftools-stage-box.ftools-lottie-slider { min-height: 450px; }
+}
+/* Slider (zweite Box) gleich groß wie das Visual (4:3) — ebenfalls CSS-getrieben,
+   damit die Stage-Höhe nicht vom JS-Fallback (--stage-h) abhängt und nicht springt. */
+.ftools-stage-box.ftools-lottie-slider { flex: 0 0 auto; height: auto; aspect-ratio: 4 / 3; min-height: 0; }
+.ftools-stage-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.ftools-stage-line {
+  /* 90px kürzer am LINKEN Ende (margin-left -240), rechts weiter 36px vor der Sidebar;
+     36px Abstand oben (zum Visual) + unten (zum Slider) */
+  width: calc(100% + 204px);
+  margin: 36px 0 36px -240px;
+  height: 1px;
+  background: var(--color-text-primary);
+  position: relative;
+  z-index: 0;
+  /* wächst beim Reinscrollen von rechts nach links (scaleX via JS) */
+  transform-origin: right center;
+}
+
+.ftools-cards-mobile { display: none; }
+.ftools-cards-desktop { display: contents; }
+
+/* Mobile-Tool-Buttons (≤767): weiße Pills, Icon (dunkles Quadrat) + Titel, vertikal
+   gestapelt. Container-Display/Sticky setzt der ≤767-Reflow. */
+.ftools-mbtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 10px 13px 10px 12px;
+  /* exakt wie der Leo-Badge */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: brightness(1.3) blur(13px);
+  -webkit-backdrop-filter: brightness(1.3) blur(13px);
+  border: none;
+  border-radius: 17px;
+  box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+}
+.ftools-mbtn img { width: 28px; height: 28px; flex-shrink: 0; object-fit: contain; }
+.ftools-mbtn span {
+  font-family: var(--font-heading, 'Merriweather', serif);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text-primary);
 }
 
 /* ── Search input placeholder ── */

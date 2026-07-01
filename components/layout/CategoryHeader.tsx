@@ -10,9 +10,12 @@ interface CategoryHeaderProps {
   children?: React.ReactNode;
   /** ID der Section, mit deren Bottom-Out das Heading scrubbed ausgefadet wird. */
   fadeSectionId?: string;
+  /** WIDE-Banner der (Sub-)Kategorie (Term-Meta kategorie_bild_wide_id). */
+  imageWide?: string;
+  imageWideAlt?: string;
 }
 
-export default function CategoryHeader({ title, description, breadcrumbItems, children, fadeSectionId }: CategoryHeaderProps) {
+export default function CategoryHeader({ title, description, breadcrumbItems, children, fadeSectionId, imageWide, imageWideAlt }: CategoryHeaderProps) {
   const sidePadding = { paddingLeft: "clamp(20px, 4vw, 40px)", paddingRight: "clamp(20px, 4vw, 40px)" };
   return (
     <>
@@ -23,17 +26,27 @@ export default function CategoryHeader({ title, description, breadcrumbItems, ch
         flexDirection: "column",
         alignItems: "center",
       }}>
-        {/* Breadcrumb über dem Visual */}
-        <div style={{ width: "100%", maxWidth: "1200px", paddingBottom: 23, ...sidePadding, boxSizing: "border-box" }}>
+        {/* Breadcrumb über dem Visual — volle Content+Rails-Breite */}
+        <div className="category-head-wide" style={{ paddingBottom: 23 }}>
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        {/* Visual Platzhalter (graue Box, einheitliche Farbe) */}
-        <div style={{ width: "100%", maxWidth: "1200px", marginBottom: 40, ...sidePadding, boxSizing: "border-box" }}>
-          <div style={{
-            width: "100%",
-            height: 250,
-            background: "var(--color-placeholder-bg)",
-          }} aria-hidden="true" />
+        {/* Visual: WIDE-Banner in voller Höhe (nie geclippt), sonst graue Platzhalter-Box */}
+        <div className="category-visual-wide" style={{ marginBottom: 40 }}>
+          {imageWide ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageWide}
+              alt={imageWideAlt || title || ""}
+              style={{ width: "100%", height: "auto", display: "block", borderRadius: 16 }}
+            />
+          ) : (
+            <div style={{
+              width: "100%",
+              height: 250,
+              borderRadius: 16,
+              background: "var(--color-placeholder-bg)",
+            }} aria-hidden="true" />
+          )}
         </div>
       </div>
 

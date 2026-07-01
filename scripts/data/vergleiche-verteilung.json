@@ -1,0 +1,162 @@
+[
+  {
+    "cpt": "bauherren-haftpflichtversicherung-vergleich",
+    "target": "bauherrenhaftpflichtversicherung",
+    "postId": 49267,
+    "kind": "exakt",
+    "status": "⚠ hat: private-haftpflichtversicherung-vergleich",
+    "alt": []
+  },
+  {
+    "cpt": "berufsunfaehigkeitsversicherung-vergleich",
+    "target": "berufsunfaehigkeitsversicherung",
+    "postId": 49273,
+    "kind": "exakt",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "cyberversicherung-vergleich",
+    "target": "cyberversicherung",
+    "postId": 49281,
+    "kind": "exakt",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "depot-vergleich",
+    "target": "wertpapierdepot",
+    "postId": 49439,
+    "kind": "override~",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "drohnenversicherung-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "elektronikversicherung-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "geschaeftskonto-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN (override fehlt)",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "girokonto-vergleich",
+    "target": "girokonto",
+    "postId": 49322,
+    "kind": "override",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "hundehaftpflicht-vergleich",
+    "target": "hundehaftpflichtversicherung",
+    "postId": 49332,
+    "kind": "override",
+    "status": "⚠ hat: private-haftpflichtversicherung-vergleich",
+    "alt": []
+  },
+  {
+    "cpt": "hundekrankenversicherung-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "kreditkarten-vergleich",
+    "target": "kreditkarte",
+    "postId": 49357,
+    "kind": "override",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "mietkaution-rechner",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN (override fehlt)",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "minikredit-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN (override fehlt)",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "pferdekrankenversicherung-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "rentenlueckenrechner",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN (override fehlt)",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "sterbegeldversicherung-vergleich",
+    "target": "sterbegeldversicherung",
+    "postId": 49411,
+    "kind": "exakt",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "studentenkonto-vergleich",
+    "target": null,
+    "postId": null,
+    "kind": "KEIN (override fehlt)",
+    "status": "—",
+    "alt": []
+  },
+  {
+    "cpt": "studentenkreditkarte-vergleich",
+    "target": "kreditkarte",
+    "postId": 49357,
+    "kind": "override~",
+    "status": "leer→einfügen",
+    "alt": []
+  },
+  {
+    "cpt": "unfallversicherung-leistungen",
+    "target": "unfallversicherung",
+    "postId": 49429,
+    "kind": "override",
+    "status": "⚠ hat: unfallversicherung-vergleich",
+    "alt": []
+  },
+  {
+    "cpt": "zahnzusatzversicherung-vergleich",
+    "target": "zahnzusatzversicherung",
+    "postId": 49445,
+    "kind": "exakt",
+    "status": "leer→einfügen",
+    "alt": []
+  }
+]

@@ -10,13 +10,21 @@ export async function GET(request: NextRequest) {
       getLatestVergleiche(limit),
       getAllVergleiche(),
     ]);
-    return NextResponse.json({
-      vergleiche: latest,
-      total: all.length,
-      hasMore: all.length > limit,
-    });
+    return NextResponse.json(
+      {
+        vergleiche: latest,
+        total: all.length,
+        hasMore: all.length > limit,
+      },
+      {
+        headers: {
+          "Cache-Control": latest.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
+          "Netlify-Vary": "query=limit",
+        },
+      },
+    );
   } catch (error) {
     console.error("Error fetching latest vergleiche:", error);
-    return NextResponse.json({ error: "Failed to fetch vergleiche" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch vergleiche" }, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
 }

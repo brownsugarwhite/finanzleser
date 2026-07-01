@@ -40,6 +40,7 @@ export default function PendlerpauschaleRechner() {
           einheit="km"
           min={1}
           max={200}
+          step={1}
         />
         <RechnerInput
           label="Arbeitstage pro Jahr"
@@ -49,6 +50,7 @@ export default function PendlerpauschaleRechner() {
           einheit="Tage"
           min={1}
           max={365}
+          step={1}
         />
       <RechnerButton onClick={handleBerechnen} disabled={rechnerState.buttonDisabled} needsUpdate={rechnerState.needsUpdate} />
 

@@ -4,9 +4,13 @@ import { useEffect, useLayoutEffect, useState, useCallback, useRef } from 'react
 import useEmblaCarousel from 'embla-carousel-react';
 import SlideCategoryCard, { type CategorySlide } from '@/components/ui/SlideCategoryCard';
 import SliderNav from '@/components/ui/SliderNav';
-import SliderSafeZone from '@/components/ui/SliderSafeZone';
+import SliderSideArrows from '@/components/ui/SliderSideArrows';
+import SliderEdgeSpark from '@/components/ui/SliderEdgeSpark';
+import SliderHoverBox from '@/components/ui/SliderHoverBox';
 import ArticleSlider from '@/components/sections/ArticleSlider';
 import { useSliderPill } from '@/lib/hooks/useSliderPill';
+import { useSliderHoverBox } from '@/lib/hooks/useSliderHoverBox';
+import { getSliderActive, setSliderActive, isBackNavigation } from '@/lib/landingState';
 import type { Post } from '@/lib/types';
 
 const CAT_GAP = 65;
@@ -19,9 +23,13 @@ interface SubcategorySliderProps {
   categories: CategorySlide[];
   parentSlug: string;
   allCategoryPosts?: Record<string, Post[]>;
+  /** Meldet, ob eine Kategorie gewählt ist (Button-Modus) — für den Überschrift-Morph. */
+  onActiveChange?: (active: boolean) => void;
+  /** Erhöhter Zähler schließt die aktive Kategorie (Klick auf „schließen"). */
+  closeToken?: number;
 }
 
-export default function SubcategorySlider({ categories, parentSlug, allCategoryPosts = {} }: SubcategorySliderProps) {
+export default function SubcategorySlider({ categories, parentSlug, allCategoryPosts = {}, onActiveChange, closeToken }: SubcategorySliderProps) {
   const [catEmblaRef, catEmblaApi] = useEmblaCarousel({
     align: 'start',
     loop: false,
@@ -31,10 +39,36 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [slideStyles, setSlideStyles] = useState<{ opacity: number; scale: number; origin: 'left' | 'right' | 'center' }[]>([]);
-  const [activeSlide, setActiveSlide] = useState<number | null>(null);
+  // Bei Browser-Zurück (Back-Flag) den vorherigen Slider-Zustand synchron + INSTANT
+  // wiederherstellen → Landing rendert sofort im finalen Artikelmodus (volle Höhe,
+  // keine Öffnungs-Animation), damit es exakt so aussieht wie beim Klick auf den
+  // Artikel und Nexts native Scroll-Restoration greift. Nur bei Back; sonst Default.
+  const [backOpen] = useState(
+    () => typeof window !== 'undefined' && isBackNavigation() && getSliderActive(parentSlug) !== null
+  );
+  const [activeSlide, setActiveSlide] = useState<number | null>(
+    () => (backOpen ? getSliderActive(parentSlug) : null)
+  );
+  // Aktiv-Zustand (Kategorie gewählt) nach oben melden — treibt den Überschrift-Morph.
+  useEffect(() => {
+    onActiveChange?.(activeSlide !== null);
+  }, [activeSlide, onActiveChange]);
+  // Klick auf „schließen" (Token-Erhöhung) → aktive Kategorie schließen.
+  const closeTokenRef = useRef(closeToken);
+  useEffect(() => {
+    if (closeToken === undefined || closeToken === closeTokenRef.current) return;
+    closeTokenRef.current = closeToken;
+    setActiveSlide(null);
+  }, [closeToken]);
+  // Zustand für die nächste Zurück-Navigation merken.
+  useEffect(() => {
+    setSliderActive(parentSlug, activeSlide);
+  }, [parentSlug, activeSlide]);
 
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
+  // useLayoutEffect: Breakpoint VOR dem Paint festlegen → der Mobile-/Desktop-
+  // DOM-Swap (Zeilen ~577/604) flippt vor dem Paint statt sichtbar danach.
+  useLayoutEffect(() => {
     const mql = window.matchMedia('(max-width: 767px)');
     setIsMobile(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
@@ -44,7 +78,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Measure all title widths for pill lens + SlideCategoryCard
   const [titleWidths, setTitleWidths] = useState<number[]>([]);
-  useEffect(() => {
+  // useLayoutEffect: Titelbreiten VOR Paint messen, damit Fit/Spacer/Button-Breiten
+  // beim Back-Restore sofort korrekt sind (kein nachträglicher Sprung der Button-Reihe).
+  useLayoutEffect(() => {
     const widths = categories.map((cat) => {
       const el = document.createElement('span');
       el.style.cssText = `
@@ -92,11 +128,16 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Merkt ob beim letzten Render bereits Button-Mode aktiv war.
   // Verhindert Pre-Scroll bei Active→Active (nur bei card→button nötig).
-  const wasInButtonModeRef = useRef(false);
+  const wasInButtonModeRef = useRef(backOpen);
+  // Back-Restore: erster Lauf(e) des Open-Effekts mit unverändertem activeSlide
+  // überspringen (Zustand ist via Initializer schon offen → keine Animation).
+  const restoredRef = useRef(backOpen);
 
   // renderedSlide als State: entkoppelt vom activeSlide für den A→B-OUT-Delay.
-  const [renderedSlide, setRenderedSlide] = useState<number | null>(null);
-  const prevCatRef = useRef<number | null>(null);
+  const [renderedSlide, setRenderedSlide] = useState<number | null>(
+    backOpen ? getSliderActive(parentSlug) : null
+  );
+  const prevCatRef = useRef<number | null>(backOpen ? getSliderActive(parentSlug) : null);
   const [categoryTransition, setCategoryTransition] = useState<'idle' | 'out' | 'in'>('idle');
 
   const renderedPosts = renderedSlide !== null
@@ -106,9 +147,9 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // 2-Phasen-Animation für Artikel-Slider
   // Phase 1: Sparks/Linien/Artikel-Visuals (parallel zum Card-Visual-Collapse)
   // Phase 2: Artikel-Text (parallel zur Card-Breiten-Änderung)
-  const [phase1Visible, setPhase1Visible] = useState(false);
-  const [phase2Visible, setPhase2Visible] = useState(false);
-  const [articleMounted, setArticleMounted] = useState(false);
+  const [phase1Visible, setPhase1Visible] = useState(backOpen);
+  const [phase2Visible, setPhase2Visible] = useState(backOpen);
+  const [articleMounted, setArticleMounted] = useState(backOpen);
   const articleRef = useRef<HTMLDivElement>(null);
   const [articleHeight, setArticleHeight] = useState(0);
   useEffect(() => {
@@ -130,10 +171,18 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // fullyOpen: nach Abschluss der gesamten Öffnen-Animation true, sofort beim
   // Schließen-Start wieder false. Steuert overflow-Switch (hidden während
   // Transition, visible im Ruhezustand), damit Card-Hover-Scale nicht geclippt.
-  const [fullyOpen, setFullyOpen] = useState(false);
+  const [fullyOpen, setFullyOpen] = useState(backOpen);
   useEffect(() => {
     const prev = prevCatRef.current;
     prevCatRef.current = activeSlide;
+
+    // Back-Restore: solange activeSlide unverändert dem initial wiederhergestellten
+    // Wert entspricht, ist der Zustand bereits final offen (Initializer) → KEINE
+    // Öffnungs-Animation. Erst eine echte Änderung schaltet auf normale Animationen.
+    if (restoredRef.current) {
+      if (activeSlide === prev) return;
+      restoredRef.current = false;
+    }
 
     // A → B: OUT-Animation (200ms), dann Slide wechseln + IN-Animation
     if (activeSlide !== null && prev !== null && activeSlide !== prev) {
@@ -202,7 +251,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Vorheriger Mode (button vs card) zur Erkennung von echten Mode-Wechseln.
   // Category-Wechsel (X → Y, beide non-null) ist KEIN Mode-Wechsel → FADE-
   // Params nicht interpolieren (sonst springt der erste Button).
-  const prevActiveModeRef = useRef<boolean>(false);
+  const prevActiveModeRef = useRef<boolean>(backOpen);
 
   useEffect(() => {
     if (!catEmblaApi) return;
@@ -214,8 +263,10 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     // Mode-Wechsel.
     // Mobile: kürzere Right-Fade-Zone im Card-Mode (Button-Mode bleibt
     // unverändert — Wert wirkt dort bereits passend).
-    const CARD_PARAMS = { left: 400, right: isMobile ? 200 : 320, scaleMin: 0.2, overshoot: isMobile ? 80 : 150 };
-    const BTN_PARAMS = { left: 260, right: 200, scaleMin: 0, overshoot: 40 };
+    // left bewusst flach: die erste Card/Button (im Ruhezustand) soll NICHT
+    // skaliert/gefaded sein — erst beim Weiterscrollen nach links fadet sie.
+    const CARD_PARAMS = { left: 290, right: isMobile ? 200 : 320, scaleMin: 0.2, overshoot: isMobile ? 80 : 150 };
+    const BTN_PARAMS = { left: 170, right: 200, scaleMin: 0, overshoot: 40 };
     const morphDurationMs = MORPH_DURATION * 2;
     const morphStartMs = performance.now();
     // Echter Mode-Wechsel nur bei button↔card, nicht bei Category-Switch
@@ -310,7 +361,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
   // Reset article nav when closing
   // Delayed phase2 for spacer width (synced with card phase2)
-  const [spacerExpanded, setSpacerExpanded] = useState(false);
+  const [spacerExpanded, setSpacerExpanded] = useState(backOpen);
   useEffect(() => {
     if (activeSlide === null) {
       setArticleNav(null);
@@ -374,13 +425,17 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       if (savedIndex > 0) catEmblaApi.scrollTo(savedIndex, true);
     };
     const check = () => {
+      // Static (kein Slider), sobald die letzte Card noch >40px Abstand zum
+      // rechten Rand hat. Maßgeblich: Leading-Spacer (5vw) + n Gaps (Leading-Gap
+      // + interne) + Content. Trailing-Spacer/Gap zählt NICHT mit (wird im
+      // Static-Mode ausgeblendet, sonst würde er Overflow erzwingen).
       const spacerBasis = window.innerWidth * 0.05;
-      const gaps = (categories.length + 1) * CAT_GAP;
+      const gaps = categories.length * CAT_GAP;
       const contentWidth =
         activeSlide !== null && titleWidths.length === categories.length
           ? titleWidths.reduce((a, b) => a + b, 0)
           : categories.length * CARD_WIDTH;
-      const needed = contentWidth + gaps + 2 * spacerBasis + 40;
+      const needed = spacerBasis + contentWidth + gaps + 40;
       const fits = window.innerWidth >= needed;
       setCanScroll(!fits);
       if (prevFitsRef.current !== fits) {
@@ -435,6 +490,40 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
   // Der staticLayout-Delay ist nur für's Card-Mode-Close (damit Cards erst
   // expandieren bevor Spacer schrumpfen).
   const useStaticLayout = !canScroll && (activeSlide !== null || staticLayout);
+  // Nur die Kategorie-Cards im Card-Modus zentrieren, wenn sie KEIN Slider sind
+  // (static). Button-Modus + Artikel-Slider bleiben linksbündig.
+  const centerStaticCards = useStaticLayout && activeSlide === null;
+  // Der card→button-Morph ist 2-teilig: erst Höhe (Phase 1), dann Breite (Phase 2).
+  // Die Zentrierung→Linksbündig soll NUR im 2. Teil (Breite) laufen — daher schaltet
+  // cardsCentered bei einem echten Card↔Button-Morph erst nach MORPH_DURATION um.
+  // Initial-Load/Resize (kein Morph): sofort.
+  const [cardsCentered, setCardsCentered] = useState(centerStaticCards);
+  const prevActiveForCenterRef = useRef(activeSlide);
+  useEffect(() => {
+    const prev = prevActiveForCenterRef.current;
+    prevActiveForCenterRef.current = activeSlide;
+    const isMorph = (prev === null) !== (activeSlide === null);
+    if (isMorph && activeSlide !== null) {
+      // ÖFFNEN: Breiten-Phase ist der 2. Teil → Zentrierung erst nach MORPH_DURATION lösen.
+      const t = setTimeout(() => setCardsCentered(false), MORPH_DURATION);
+      return () => clearTimeout(t);
+    }
+    if (isMorph && activeSlide === null) {
+      // SCHLIESSEN: Breiten-(Rück-)Phase ist der 1. Teil → SOFORT (re-)zentrieren,
+      // synchron zur Breiten-Animation (sonst Sprung an der Phasengrenze). Ziel:
+      // passt der Card-Modus in den Viewport? (centerStaticCards ist hier noch
+      // false, da staticLayout erst bei MORPH_DURATION kippt → direkt messen.)
+      const spacerBasis = window.innerWidth * 0.05;
+      const cardFits = window.innerWidth >= spacerBasis + categories.length * CARD_WIDTH + categories.length * CAT_GAP + 40;
+      setCardsCentered(cardFits);
+      return;
+    }
+    setCardsCentered(centerStaticCards);
+  }, [activeSlide, centerStaticCards, categories.length]);
+  // Easing der Zentrierung EXAKT wie die Card-Breiten-Animation (SlideCategoryCard
+  // phase2Ease = active ? 'ease-out' : 'ease-in'): sonst läuft die Zentrierung der
+  // Breitenänderung voraus (erst zentriert, dann wächst die Breite → ruckelig).
+  const centerEase = activeSlide !== null ? 'ease-out' : 'ease-in';
 
   // Slider pill hover effect
   const sliderPill = useSliderPill({
@@ -450,6 +539,18 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
     isMobile,
   });
 
+  // Hover-Kasten (nur Desktop + Card-Modus; Button-Modus nutzt die Pill).
+  // Hover erst NACH dem Morph aktiv — während/direkt nach dem card↔button-Morph
+  // (morphLock, 900ms) ist die Card-Höhe noch nicht final → Kasten erfasst sie
+  // falsch. morphLock deckt die ~650ms Morphdauer + Settle-Puffer ab.
+  const hoverEnabled = !isMobile && activeSlide === null && !morphLock;
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const hoverBox = useSliderHoverBox({
+    cardSelector: '[data-slider-card]',
+    enabled: hoverEnabled,
+    onBoxClosed: (i) => setHoveredIndex((h) => (h === i ? null : h)),
+  });
+
   if (!categories || categories.length === 0) return null;
 
   const navProps = isArticleMode && articleNav
@@ -461,6 +562,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         onNext: () => catEmblaApi?.scrollNext(),
         onGoTo: (i: number) => catEmblaApi?.scrollTo(i),
       };
+  const navVisible = (canScroll && !isArticleMode) || (isArticleMode && articleCanScroll);
 
   return (
     <section style={{ width: '100%', overflowX: 'clip', padding: '40px 0' }}>
@@ -473,8 +575,58 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           height: activeSlide !== null ? STACK_HEIGHT_OPEN : STACK_HEIGHT_CLOSED,
           transition: `height ${(MORPH_DURATION * 2) / 1400}s ease-out`,
         }}>
+      {/* Einfache Pfeil-Badges mittig über dem Slider (Desktop + Mobile, mobil schmaler). */}
+      <SliderSideArrows
+        onPrev={navProps.onPrev}
+        onNext={navProps.onNext}
+        canPrev={navVisible && navProps.current > 0}
+        canNext={navVisible && navProps.current < navProps.total - 1}
+      />
       {/* Category Slider — wrapper for pill overlay */}
       <div style={{ position: 'relative' }}>
+        {/* Punkt 8c: Edge-Pfeile (Linie + Dreieck) im Button-Mode — jetzt Mobile
+            UND Desktop. Scale-in wenn in die jeweilige Richtung scrollbar
+            (Anfang/Ende erreicht → aus). Dark, bei Hover/Klick brand-secondary
+            + leichter Squeeze. Der eigene Page-Gradient nur mobil (Desktop hat
+            bereits die 150px subcat-edge-Gradients → sonst doppelter Fade). */}
+        {activeSlide !== null && ([
+          { dir: "left" as const, show: canScroll && canPrev, onClick: () => catEmblaApi?.scrollPrev(), label: "Zurück" },
+          { dir: "right" as const, show: canScroll && canNext, onClick: () => catEmblaApi?.scrollNext(), label: "Weiter" },
+        ]).map(({ dir, show, onClick, label }) => (
+          <div
+            key={dir}
+            aria-hidden={!show}
+            style={{ position: "absolute", top: 0, bottom: 0, [dir]: 0, width: 56, zIndex: 20, pointerEvents: "none" }}
+          >
+            {/* Page-Color-Gradient maskiert die Buttons am Rand. top/bottom -60,
+                damit auch die (höhere) aktive Pill samt Linien voll abgedeckt wird.
+                Nur Mobile — Desktop maskiert über die subcat-edge-Gradients. */}
+            {isMobile && (
+            <div
+              style={{
+                position: "absolute", top: -60, bottom: -60, [dir]: 0, width: "100%",
+                background: `linear-gradient(to ${dir === "left" ? "right" : "left"}, var(--color-bg-page) 35%, rgba(250,249,246,0))`,
+                opacity: show ? 1 : 0,
+                transition: "opacity 0.25s ease",
+              }}
+            />
+            )}
+            <button
+              aria-label={label}
+              onClick={onClick}
+              className="subcat-edge-arrow"
+              data-show={show ? "true" : "false"}
+              style={{ [dir]: 7 }}
+            >
+              <span className="subcat-edge-arrow-line" />
+              <svg width={16.7} height={20} viewBox="0 0 15 18" aria-hidden
+                style={{ display: "block", flexShrink: 0, transform: dir === "left" ? "scaleX(-1)" : undefined }}>
+                <path d="M15 9L0 18V0L15 9Z" />
+              </svg>
+              <span className="subcat-edge-arrow-line" />
+            </button>
+          </div>
+        ))}
         <div
           ref={catEmblaRef}
           style={{
@@ -485,29 +637,47 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
         >
           <div
             onMouseMove={morphLock ? undefined : sliderPill.handleContainerMove}
-            onMouseLeave={morphLock ? undefined : sliderPill.handleContainerLeave}
-            style={{ display: 'flex', gap: `${CAT_GAP}px` }}
+            onMouseLeave={morphLock ? undefined : () => { sliderPill.handleContainerLeave(); hoverBox.leaveRegion(); }}
+            // Mobile: Abstand zum linken Rand (Leading-Spacer ist mobil display:none).
+            // Button-Mode 36px (Pill überhängt den Text links ~16px → sonst am Rand
+            // abgeschnitten), Card-Mode 20px. Desktop unverändert.
+            style={{ display: 'flex', gap: `${CAT_GAP}px`, paddingLeft: isMobile ? (activeSlide !== null ? 36 : 20) : 0 }}
           >
             <div
               aria-hidden
               className="subcat-leading-spacer"
               data-expanded={spacerExpanded ? "true" : "false"}
               style={{
-                // Leading Spacer bleibt klein (linksbündig) — nur Trailing wächst.
-                // Mobile: Leading-Spacer entfällt komplett (flexBasis 0) via CSS.
-                flexGrow: 0,
+                // Static-Card-Modus: Leading wächst symmetrisch zum Trailing
+                // (beide flex-grow:1, flex-basis:0) → Cards zentriert. Sonst bleibt
+                // er der kleine 5vw-Rand (flex-basis via CSS). Da flex-grow/flex-basis
+                // animierbar sind, gleitet der card→button-Morph weich von zentriert
+                // nach linksbündig statt zu springen.
+                // Mobile: Leading-Spacer entfällt komplett (display:none) via CSS.
+                flexGrow: cardsCentered ? 1 : 0,
                 flexShrink: 0,
+                flexBasis: cardsCentered ? 0 : undefined,
                 minWidth: 0,
-                transition: `flex-basis ${MORPH_DURATION / 1000}s ease`,
+                // Back-Restore: instant (sonst schiebt die animierte Spacer-Breite die Button-Reihe).
+                // Easing = centerEase (deckt sich mit der Card-Breiten-Animation).
+                transition: backOpen ? 'none' : `flex-grow ${MORPH_DURATION / 1000}s ${centerEase}, flex-basis ${MORPH_DURATION / 1000}s ${centerEase}`,
               }}
             />
             {categories.map((cat, index) => {
               const isLast = index === categories.length - 1;
+              const cardFull = hoverEnabled && hoveredIndex === index;
+              const decoFull = hoverEnabled && (hoveredIndex === index || hoveredIndex === index + 1);
+              const wrapOpacity = cardFull ? 1 : (slideStyles[index + 1]?.opacity ?? 1);
+              const innerScale = cardFull ? 1 : (slideStyles[index + 1]?.scale ?? 1);
+              const decoScale = decoFull ? 1 : Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1);
+              const decoOpacity = decoFull ? 1 : Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1);
 
               return (
                 <div
                   key={cat.slug}
-                  ref={(el) => { if (el) sliderPill.cardRefs.current[index] = el; }}
+                  ref={(el) => { if (el) sliderPill.cardRefs.current[index] = el; hoverBox.registerCard(index, el); }}
+                  onMouseEnter={hoverEnabled ? () => { setHoveredIndex(index); hoverBox.onEnter(index); } : undefined}
+                  onMouseLeave={hoverEnabled ? () => hoverBox.onLeave(index) : undefined}
                   style={{
                     flex: '0 0 auto',
                     minWidth: 0,
@@ -515,7 +685,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    opacity: slideStyles[index + 1]?.opacity ?? 1,
+                    opacity: wrapOpacity,
                     // KEINE CSS-transition — die RAF-Loop in update() setzt
                     // slideStyles pro Frame neu. Eine 0.3s-Transition würde
                     // bei jedem Update einen neuen Tween gegen ein bewegtes
@@ -525,7 +695,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
                   <div
                     onClick={() => setActiveSlide(activeSlide === index ? null : index)}
                     style={{
-                      transform: `scale(${slideStyles[index + 1]?.scale ?? 1})`,
+                      transform: `scale(${innerScale})`,
                       transformOrigin:
                         slideStyles[index + 1]?.origin === 'right' ? 'right center' :
                         slideStyles[index + 1]?.origin === 'left' ? 'left center' :
@@ -544,26 +714,29 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
 
                   {/* Spark + Linien */}
                   {!isLast && (
-                    <div style={{
-                      position: 'absolute',
-                      right: -CAT_GAP / 2 - 6,
-                      top: '50%',
-                      transform: `translateY(-50%) scale(${Math.min(slideStyles[index + 1]?.scale ?? 1, slideStyles[index + 2]?.scale ?? 1)})`,
-                      transformOrigin: 'center center',
-                      opacity: Math.min(slideStyles[index + 1]?.opacity ?? 1, slideStyles[index + 2]?.opacity ?? 1),
-                      // Keine CSS-transition (siehe Card-Wrapper oben)
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: 5,
-                      pointerEvents: 'none',
-                    }}>
-                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }} />
-                      <svg width="12" height="12" viewBox="0 0 12 12.0005" fill="none" aria-hidden>
-                        <path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="var(--fill-0, #334A27)"/>
-                      </svg>
-                      <div style={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }} />
-                    </div>
+                    <SliderEdgeSpark
+                      sparkRef={(el) => hoverBox.registerSpark(index, el)}
+                      wrapperStyle={{
+                        position: 'absolute',
+                        right: -CAT_GAP / 2 - 6,
+                        top: '50%',
+                        transform: `translateY(-50%) scale(${decoScale})`,
+                        transformOrigin: 'center center',
+                        opacity: decoOpacity,
+                        // Keine CSS-transition (siehe Card-Wrapper oben)
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 5,
+                        pointerEvents: 'none',
+                      }}
+                      topLineStyle={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }}
+                      bottomLineStyle={{ width: 1, height: activeSlide !== null ? 0 : 70, background: 'var(--fill-0, #334A27)', transition: `height ${MORPH_DURATION / 1000}s ${activeSlide !== null ? 'ease-in' : 'ease-out'} ${activeSlide !== null ? '0s' : `${MORPH_DURATION / 1000}s`}` }}
+                    />
+                  )}
+
+                  {hoverEnabled && (
+                    <SliderHoverBox index={index} gap={CAT_GAP} register={hoverBox.registerBox} />
                   )}
                 </div>
               );
@@ -571,26 +744,21 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
             <div
               aria-hidden
               style={{
-                flexGrow: useStaticLayout ? 1 : 0,
+                // An `canScroll` (NICHT am verzögerten useStaticLayout) gekoppelt,
+                // damit der Trailing-Spacer beim Rück-Morph KONSTANT bleibt (canScroll
+                // springt synchron) und nur der Leading animiert — sonst springen beide
+                // Spacer gleichzeitig an der Phasengrenze. Fits: flex-basis 0 + flex-grow 1
+                // → nimmt nur den Rest-Platz (kein Overflow, letzte Card behält >40px Rand;
+                // im zentrierten Card-Modus symmetrisch zum Leading). Slider: fixe 5vw rechts.
+                flexGrow: !canScroll ? 1 : 0,
                 flexShrink: 0,
-                flexBasis: '5vw', // dauerhaft 5vw — Button-Mode endet rechts wie Card-Mode
+                flexBasis: !canScroll ? 0 : '5vw',
                 minWidth: 0,
-                transition: `flex-grow ${MORPH_DURATION / 1000}s ease`,
+                // Back-Restore: instant (sonst „wächst" der Trailing-Spacer animiert).
+                transition: backOpen ? 'none' : `flex-grow ${MORPH_DURATION / 1000}s ease, flex-basis ${MORPH_DURATION / 1000}s ease`,
               }}
             />
           </div>
-          {/* Safe-Zones links/rechts — blocken Hover/Klick auf Cards; PointerDown
-              bubbelt zum Embla-Viewport, Drag funktioniert weiter. */}
-          <SliderSafeZone
-            direction="left"
-            scrollable={canScroll && canPrev}
-            onClick={() => catEmblaApi?.scrollPrev()}
-          />
-          <SliderSafeZone
-            direction="right"
-            scrollable={canScroll && canNext}
-            onClick={() => catEmblaApi?.scrollNext()}
-          />
         </div>
         {/* Pill overlay — outside viewport so lines aren't clipped by overflow:hidden */}
         {sliderPill.renderPill()}
@@ -615,6 +783,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           >
             <ArticleSlider
               key={categories[renderedSlide].slug}
+              persistKey={categories[renderedSlide].slug}
               posts={renderedPosts}
               onNavReady={handleArticleNavReady}
               onCanScrollChange={handleArticleCanScrollChange}
@@ -630,7 +799,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           aria-hidden
           style={{
             height: phase1Visible ? articleHeight : 0,
-            transition: `height ${MORPH_DURATION / 1000}s ease`,
+            transition: backOpen ? 'none' : `height ${MORPH_DURATION / 1000}s ease`,
           }}
         />
       </div>
@@ -641,7 +810,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           className="subcat-edge-left"
           style={{
             position: 'absolute',
-            top: -5,
+            // 5px höher (−10 statt −5), damit die Hover-Pill oben nicht 2px überragt.
+            top: -10,
             bottom: 0,
             left: 0,
             width: 150,
@@ -656,7 +826,8 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
           className="subcat-edge-right"
           style={{
             position: 'absolute',
-            top: 0,
+            // 5px höher, damit die Hover-Pill oben nicht 2px überragt.
+            top: -10,
             bottom: 0,
             right: 0,
             width: 150,
@@ -673,7 +844,7 @@ export default function SubcategorySlider({ categories, parentSlug, allCategoryP
       <div className="subcat-nav-wrap">
         <SliderNav
           {...navProps}
-          visible={(canScroll && !isArticleMode) || (isArticleMode && articleCanScroll)}
+          visible={navVisible}
         />
       </div>
     </section>
