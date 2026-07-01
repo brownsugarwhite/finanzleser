@@ -320,6 +320,16 @@
 .fl-karte-back {
   transform: rotateY(180deg);
 }
+/* Safari-Fallback: dort versagt backface-visibility zusammen mit preserve-3d + grid,
+   wodurch die abgewandte (gespiegelte) Seite durchscheint. Deshalb die jeweils
+   abgewandte Seite zusätzlich per Opacity zur Flip-Mitte (0.35s = halbe Dauer)
+   hart ausblenden. Auf Chrome/Firefox ohne sichtbare Änderung (dort war die Seite
+   ohnehin per backface schon verdeckt). */
+.fl-karte-face {
+  transition: opacity 0s linear 0.35s;
+}
+.fl-karte-flip:not(.is-flipped) .fl-karte-back { opacity: 0; }
+.fl-karte-flip.is-flipped .fl-karte-front { opacity: 0; }
 .fl-karte-content {
   position: relative;
   z-index: 1;
@@ -996,7 +1006,7 @@
     min-height: 142px;
   }
   .fl-gam-ticket-text {
-    padding: 24px 26px;
+    padding: 24px 36px;
     font-size: 0.95rem;
   }
 
