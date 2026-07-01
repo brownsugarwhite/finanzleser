@@ -1,7 +1,7 @@
 import { getAllAnbieter } from "@/lib/wordpress";
 import AnbieterListLayout from "@/components/layout/AnbieterListLayout";
 
-export const revalidate = 300;
+export const revalidate = 86400;
 
 export const metadata = {
   title: "Anbieter – finanzleser.de",

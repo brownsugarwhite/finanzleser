@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDokumentBySlug } from "@/lib/wordpress";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export async function GET(
   _req: NextRequest,

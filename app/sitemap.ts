@@ -20,7 +20,7 @@ import {
   buildSubcategoryUrl,
 } from "@/lib/urls";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number }> = [
   { path: "/", changeFrequency: "daily", priority: 1.0 },

@@ -9,7 +9,7 @@ import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 import type { Post } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // Nur die 4 Hauptkategorien prerendern (high-traffic Top-Nav). Daten-Fetches sind dank
 // Build-Bulk/Memo jetzt leicht → keine „0 Rechner"-Bakes mehr. Anbieter (147, low-traffic)

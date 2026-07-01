@@ -11,7 +11,7 @@ import type { CheckboxPosition } from "@/lib/checklisteParser";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { cleanDescription } from "@/lib/content-utils";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ slug: string }>;

@@ -7,7 +7,7 @@ import DokumentDownload from "@/components/dokument/DokumentDownload";
 import { getAllDokumente, getDokumentBySlug } from "@/lib/wordpress";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ slug: string }>;

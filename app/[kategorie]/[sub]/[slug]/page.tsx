@@ -11,7 +11,7 @@ import { getRedakteurForSlug } from "@/lib/redakteure";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type RouteParams = { kategorie: string; sub: string; slug: string };
 

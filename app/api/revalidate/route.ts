@@ -2,6 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 30;
+
+// Nach dem Invalidieren die betroffenen Seiten EINMAL server-seitig neu holen →
+// sie sind warm (regeneriert + gecacht), bevor ein echter Besucher kommt. Sonst
+// träfe der erste Besucher nach jeder Änderung eine Kaltgenerierung (2–9 s via WP).
+async function rewarm(base: string, paths: string[]): Promise<void> {
+  const unique = [...new Set(paths.filter((p) => p.startsWith("/") && !p.includes(" ")))];
+  await Promise.allSettled(
+    unique.map((p) => {
+      // 7s-Cap je Seite (Fetches laufen parallel → Gesamt ≈ langsamste Seite),
+      // damit der Webhook sicher unter dem Netlify-Function-Limit bleibt. Nicht
+      // rechtzeitig gewärmte Seiten wärmen beim nächsten Besuch (wie bisher).
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 7000);
+      return fetch(base + p, { cache: "no-store", signal: ctrl.signal })
+        .catch(() => {})
+        .finally(() => clearTimeout(t));
+    })
+  );
+}
 
 /**
  * On-Demand Revalidation
@@ -28,12 +48,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
+  const base = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
   const revalidated: string[] = [];
 
   // Layout-Bust (für globale Layout-Elemente wie TopBanner) — bustet ALLE Pages
   if (body.layout) {
     revalidatePath("/", "layout");
     revalidated.push("/ (layout: alle Pages)");
+    // Layout-Bust trifft alle Seiten — nur die Startseite re-warmen (Rest wärmt beim
+    // nächsten Besuch/eigenen Webhook; alles zu warmen wäre zu teuer).
+    await rewarm(base, ["/"]);
     return NextResponse.json({
       ok: true,
       revalidated,
@@ -84,6 +108,9 @@ export async function POST(request: NextRequest) {
   // Sitemap immer mit revalidieren
   revalidatePath("/sitemap.xml");
   revalidated.push("/sitemap.xml");
+
+  // Betroffene Seiten sofort wieder warmlaufen lassen (kein Kaltstart für den ersten Besucher).
+  await rewarm(base, revalidated);
 
   return NextResponse.json({
     ok: true,

@@ -6,7 +6,7 @@ import { getAllDokumente, getSiteSettings } from "@/lib/wordpress";
 import { buildMetadata, SITE_NAME } from "@/lib/seo";
 import DokumenteListClient from "./DokumenteListClient";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata: Metadata = buildMetadata({
   title: `Dokumente – Broschüren & Ratgeber – ${SITE_NAME}`,

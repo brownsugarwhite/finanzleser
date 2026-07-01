@@ -8,7 +8,7 @@ import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpres
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { cleanDescription } from "@/lib/content-utils";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // Fallback statische Daten - alle 51 Rechner
 const FALLBACK_RECHNER: Record<string, { title: string; type: string; desc: string }> = {

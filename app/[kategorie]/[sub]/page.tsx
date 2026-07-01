@@ -20,7 +20,7 @@ function redakteurAuthor(slug: string, date?: string) {
   };
 }
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // Unterkategorie-Seiten beim Build vorrendern (SSG) statt dynamisch pro Request —
 // die Kombinationen kommen aus der Nav-Struktur. Legacy-Post-Slugs unter einer

@@ -10,7 +10,7 @@ import { buildMetadata, SITE_NAME, stripHtml } from "@/lib/seo";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { cleanDescription } from "@/lib/content-utils";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ slug: string }>;

@@ -4,7 +4,7 @@ import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 
 // Tool-Titel/-Beschreibung ändern sich selten → 1h cachen (vorher ungecacht,
 // jeder Tool-Embed im Artikel löste einen frischen WP-Roundtrip aus).
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export async function GET(
   request: NextRequest,

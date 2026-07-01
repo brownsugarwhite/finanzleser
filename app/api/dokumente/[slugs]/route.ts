@@ -3,7 +3,7 @@ import { getDokumenteBySlugs } from "@/lib/wordpress";
 import { stripHtml } from "@/lib/seo";
 
 // Dokument-Kartendaten für den Dokumente-Block im Artikel (≤4). 1h Cache wie tool-title.
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export async function GET(
   _req: NextRequest,

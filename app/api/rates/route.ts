@@ -8,7 +8,7 @@ import ratesJson from "@/config/rates.json";
 // Rechner-Konfiguration (Mindestlohn, BBG, Kindergeld …) ändert sich ~jährlich.
 // Vorher 5s → WP wurde praktisch bei jedem Rechner-Seitenaufruf neu abgefragt
 // (~3,9s Latenz). 1h Cache reicht völlig; Config-Änderungen sind nicht zeitkritisch.
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export async function GET() {
   try {

@@ -3,7 +3,7 @@ import { getPageBySlug } from "@/lib/wordpress";
 import LegalPageLayout from "@/components/layout/LegalPageLayout";
 import { buildMetadata } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const SLUG = "kontakt";
 const TITLE = "Kontakt";

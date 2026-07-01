@@ -14,7 +14,7 @@ const RatgeberCategoryBlock = dynamic(() => import("@/components/sections/Ratgeb
   loading: () => <div style={{ width: "100%", minHeight: 280 }} />,
 });
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const RATGEBER_KATEGORIEN: Array<{ slug: string; heading: string }> = [
   { slug: "finanzen", heading: "Finanzratgeber" },
