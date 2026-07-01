@@ -322,12 +322,17 @@ export function useSliderPill({
   /* ── Lens sync (scroll-offset aware) ── */
 
   useEffect(() => {
+    // Change-Detection: die Layout-Writes nur ausführen, wenn sich Position/Breite/
+    // Scroll seit dem letzten Frame geändert haben → keine Dauer-Reflows im Ruhezustand.
+    let lastPx = NaN, lastPw = NaN, lastOff = NaN;
     const sync = () => {
       if (!pillVisible.current) return;
       if (!pillRef.current || !lensRef.current) return;
       const px = gsap.getProperty(pillRef.current, "x") as number;
       const pw = gsap.getProperty(pillRef.current, "width") as number;
       const scrollOff = getScrollOffset();
+      if (px === lastPx && pw === lastPw && scrollOff === lastOff) return;
+      lastPx = px; lastPw = pw; lastOff = scrollOff;
       gsap.set(lensRef.current, { x: -(px + scrollOff) });
       lensRef.current.style.transformOrigin = `${px + scrollOff + pw / 2}px center`;
     };

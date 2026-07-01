@@ -85,12 +85,15 @@ export default function TopNav({ className = "sticky-nav", style, defaultActive 
     setCompressed(false);
   }, [pathname, defaultActive]);
 
-  // Lens sync
+  // Lens sync — Change-Detection: Layout-Writes nur bei Änderung (keine Dauer-Reflows).
   useEffect(() => {
+    let lastPx = NaN, lastPw = NaN;
     const sync = () => {
       if (!pill.pillRef.current || !pill.lensRef.current) return;
       const px = gsap.getProperty(pill.pillRef.current, "x") as number;
       const pw = gsap.getProperty(pill.pillRef.current, "width") as number;
+      if (px === lastPx && pw === lastPw) return;
+      lastPx = px; lastPw = pw;
       gsap.set(pill.lensRef.current, { x: -px });
       pill.lensRef.current.style.transformOrigin = `${px + pw / 2}px center`;
     };
