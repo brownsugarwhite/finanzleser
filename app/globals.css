@@ -466,7 +466,6 @@ body[data-landing] {
   /* exakt wie der Leo-Badge */
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: brightness(1.3) blur(13px);
-  -webkit-backdrop-filter: brightness(1.3) blur(13px);
   border: none;
   border-radius: 17px;
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);

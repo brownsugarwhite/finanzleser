@@ -43,7 +43,6 @@
     padding: 10px 16px 10px 12px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: brightness(1.3) blur(13px);
-    -webkit-backdrop-filter: brightness(1.3) blur(13px);
     border-radius: 17px;
     box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
     text-decoration: none;
@@ -539,7 +538,6 @@ body.leo-chat-open #leo-chat-messages {
   color: var(--color-text-primary);
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: brightness(1.3) blur(13px);
-  -webkit-backdrop-filter: brightness(1.3) blur(13px);
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.08);
   pointer-events: auto;
   transition: color 0.15s ease, transform 0.15s ease;
@@ -1211,7 +1209,6 @@ h1.category-title {
 @utility glass-card {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.20);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
@@ -1221,7 +1218,6 @@ h1.category-title {
 @utility glass-dark {
   background: rgba(0, 0, 0, 0.20);
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.30),
@@ -1231,7 +1227,6 @@ h1.category-title {
 @utility glass-brand {
   background: var(--glass-brand-10);
   backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-md)) saturate(180%);
   border: 1px solid var(--glass-brand-20);
   box-shadow:
     0 8px 32px var(--glass-brand-5),
@@ -1241,7 +1236,6 @@ h1.category-title {
 @utility glass-subtle {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(var(--glass-blur-sm));
-  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
@@ -2936,7 +2930,6 @@ h2.faq-heading {
   right: 0;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.55);
-  -webkit-backdrop-filter: brightness(1.07) saturate(1.05);
   backdrop-filter: brightness(1.07) saturate(1.05);
   box-shadow: var(--shadow-card);
   overflow: hidden;
@@ -3499,7 +3492,6 @@ h2.faq-heading {
 .nl-pill.field-wrap--dark:focus-within {
   background: transparent !important;
   backdrop-filter: blur(16px) brightness(1) !important;
-  -webkit-backdrop-filter: blur(16px) brightness(1) !important;
 }
 
 /* .page-ad-frame (Default, Kategorie-Seiten): transparenter Wrapper, kein Cap. */
@@ -3772,7 +3764,6 @@ h2.faq-heading {
   position: fixed;
   inset: 0;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   pointer-events: none;
 }
 .cookie-banner__inner {
@@ -3787,7 +3778,6 @@ h2.faq-heading {
   /* Exakt der Leo-Badge-Hintergrund (siehe .leo-badge) */
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: brightness(1.3) blur(13px);
-  -webkit-backdrop-filter: brightness(1.3) blur(13px);
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
 }
 .cookie-banner__title {
@@ -3870,7 +3860,6 @@ h2.faq-heading {
   inset: 0;
   background: transparent;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 .cookie-modal__panel {
   position: relative;
@@ -3884,7 +3873,6 @@ h2.faq-heading {
   /* Exakt der Leo-Badge-Hintergrund (siehe .leo-badge) */
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: brightness(1.3) blur(13px);
-  -webkit-backdrop-filter: brightness(1.3) blur(13px);
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
 }
 .cookie-modal__header {
