@@ -118,12 +118,14 @@ export default function SliderHeadingSubtitle({ active, onClose }: { active: boo
         ))}
       </span>
       <span>{ANCHOR}</span>
-      <span ref={suffixRef} style={{ display: 'inline-flex' }}>
+      {/* Ruhezustand bereits im SSR-HTML: suffix + X eingeklappt (width:0) → kein Snap,
+          wenn der Client-useLayoutEffect nachzieht. */}
+      <span ref={suffixRef} style={{ display: 'inline-flex', width: 0, overflow: 'hidden' }}>
         {SUFFIX.split('').map((c, i) => (
-          <span key={i} className="fl-ch" style={{ whiteSpace: 'pre' }}>{c}</span>
+          <span key={i} className="fl-ch" style={{ whiteSpace: 'pre', opacity: 0 }}>{c}</span>
         ))}
       </span>
-      <span ref={xWrapRef} style={{ display: 'inline-flex', alignItems: 'center' }}>
+      <span ref={xWrapRef} style={{ display: 'inline-flex', alignItems: 'center', width: 0, overflow: 'hidden' }}>
         <svg ref={xRef} width={19} height={19} viewBox="0 0 24 24" fill="none" aria-hidden style={{ marginLeft: 7, display: 'block' }}>
           <circle className="fl-stroke" cx={12} cy={12} r={10} pathLength={1} stroke="currentColor" strokeWidth={1.5}
             style={{ strokeDasharray: 1, strokeDashoffset: 1 }} />
