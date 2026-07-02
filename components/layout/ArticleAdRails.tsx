@@ -113,8 +113,8 @@ export default function ArticleAdRails({
       {/* Linke Rail: skaliert auf 0.9, ihr Inhalt slidet nach LINKS aus einem
           overflow-hidden-Clip heraus (nichts wird gequetscht). Der Clip sitzt
           INNERHALB des sticky-Elements, damit position:sticky nicht bricht. */}
-      <div className="article-ad-rail article-ad-rail-left" style={heightStyle}>
-        <div className="article-ad-rail-sticky">
+      <div className="article-side-rail article-side-rail-left" style={heightStyle}>
+        <div className="article-side-rail-sticky">
           <div style={{ overflow: "hidden" }}>
             <div
               style={{
@@ -123,14 +123,14 @@ export default function ArticleAdRails({
                 transition: TRANSITION,
               }}
             >
-              <div className="article-ad-rail-box" data-ad-format="rail" aria-label="Werbung" />
+              <div className="article-side-rail-box" data-slot-format="rail" />
             </div>
           </div>
         </div>
       </div>
-      <div ref={rightRef} className="article-ad-rail article-ad-rail-right" style={rightStyle}>
-        <div className="article-ad-rail-sticky">
-          <div className="article-ad-rail-box" data-ad-format="rail" aria-label="Werbung" />
+      <div ref={rightRef} className="article-side-rail article-side-rail-right" style={rightStyle}>
+        <div className="article-side-rail-sticky">
+          <div className="article-side-rail-box" data-slot-format="rail" />
         </div>
       </div>
     </>

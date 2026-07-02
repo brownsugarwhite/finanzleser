@@ -86,7 +86,7 @@ export default async function AnbieterLayout({ title, content }: AnbieterLayoutP
 
           {/* Mid-Werbung (nach dem Inhalt) — nur wenn geschaltet. */}
           {settings.ads.anbieter.mid && (
-            <div className="page-ad-mid">
+            <div className="page-shell-mid">
               <AdSlot format="billboard" fullWidth />
             </div>
           )}

@@ -332,7 +332,7 @@ export default function ArticleClient({
           {/* Werbung: Leaderboard unter dem Hero/Heading, vor dem Body */}
           {articleAds?.top && (
             <ArticleElementWrapper variant="wide" collapsed={collapsed}>
-              <div className="article-ad-top" style={{ margin: "18px 0 32px" }}>
+              <div className="article-side-top" style={{ margin: "18px 0 32px" }}>
                 <AdSlot format={isMobile ? "mobile" : "leaderboard"} />
               </div>
             </ArticleElementWrapper>

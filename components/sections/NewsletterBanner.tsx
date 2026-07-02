@@ -77,7 +77,7 @@ export default function NewsletterBanner() {
   return (
     <section
       id="newsletter"
-      className="newsletter-banner"
+      className="newsletter-bar"
       style={{
         position: "relative",
         width: "100%",
@@ -237,39 +237,39 @@ export default function NewsletterBanner() {
       <style>{`
         /* Mehr Höhe vor allem auf Mobile. */
         @media (max-width: 767px) {
-          .newsletter-banner {
+          .newsletter-bar {
             min-height: 0 !important;       /* Höhe skaliert auf den Content */
             padding-top: 80px !important;
             padding-bottom: 130px !important;
           }
           /* Heading auf Mobile gestapelt (untereinander) + größer. */
-          .newsletter-banner .nl-heading {
+          .newsletter-bar .nl-heading {
             white-space: normal !important;
             font-size: clamp(38px, 12vw, 60px) !important;
             line-height: 1.05 !important;
           }
         }
         /* Checkbox zentriert unter dem Input; Box oben an der ersten Zeile ausrichten */
-        .newsletter-banner .rechner-check {
+        .newsletter-bar .rechner-check {
           justify-content: center;
           align-items: flex-start;
         }
-        .newsletter-banner .rechner-check-label {
+        .newsletter-bar .rechner-check-label {
           font-size: calc(0.95rem - 1px);
           text-align: left;
         }
         /* Datenschutz-Link: fett, nicht unterstrichen, Hover = brand-secondary */
-        .newsletter-banner .nl-privacy-link {
+        .newsletter-bar .nl-privacy-link {
           font-weight: 700;
           color: inherit;
           text-decoration: none;
           transition: color 0.15s ease;
         }
-        .newsletter-banner .nl-privacy-link:hover {
+        .newsletter-bar .nl-privacy-link:hover {
           color: var(--color-brand-secondary);
         }
         /* Checkbox-Box wie das Eingabefeld: gleicher Hintergrund + Blur/Brightness, kein Outline */
-        .newsletter-banner .rechner-check-box {
+        .newsletter-bar .rechner-check-box {
           border: none;
           background: ${PILL_BG};
           backdrop-filter: blur(16px) brightness(1.15);

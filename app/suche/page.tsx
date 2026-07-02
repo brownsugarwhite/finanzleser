@@ -127,7 +127,7 @@ export default async function SearchPage(props: SearchPageProps) {
           </div>
 
           {/* Ergebnisse exakt wie Unterkategorie: Content 728, Band-Rails. */}
-          <PageAds ads={settings.ads.suche} variant="tool" contentWidth={728} railGap={46} topFormat="leaderboard" contentClassName="page-ad-col--exact">
+          <PageAds ads={settings.ads.suche} variant="tool" contentWidth={728} railGap={46} topFormat="leaderboard" contentClassName="page-shell-col--exact">
             {query && results.length > 0 && (
               <div id="search-results" className="mt-8" style={{ scrollMarginTop: 24 }}>
                 <p className="text-gray-600 mb-8" style={{ fontSize: 16 }}>

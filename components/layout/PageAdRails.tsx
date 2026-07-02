@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Sticky Werbe-Rails links + rechts neben dem zentrierten Content.
  *
- * - Ohne `variant`: rein statisch, positioniert über CSS (`.page-ad-rail-left/right`
+ * - Ohne `variant`: rein statisch, positioniert über CSS (`.page-shell-rail-left/right`
  *   + die Kategorie-spezifischen Overrides). Bisheriges Verhalten.
  * - variant="tool": Rails sitzen in den Seitenbändern des (auf 1200 gedeckelten)
  *   Frames, werden nur gezeigt, wenn das Band breit genug ist (kein Abschneiden am
@@ -29,7 +29,7 @@ export default function PageAdRails({
 
   useEffect(() => {
     if (variant !== "tool") return;
-    const region = ref.current?.closest(".page-ad-region") as HTMLElement | null;
+    const region = ref.current?.closest(".page-shell-region") as HTMLElement | null;
     if (!region) return;
     const compute = () => {
       const band = (region.clientWidth - contentWidth) / 2 - railGap;
@@ -65,14 +65,14 @@ export default function PageAdRails({
 
   return (
     <div ref={ref} style={{ display: "contents" }}>
-      <div className="page-ad-rail page-ad-rail-left" aria-hidden style={style}>
-        <div className="page-ad-rail-sticky">
-          <div className="page-ad-rail-box" data-ad-format="rail" role="complementary" aria-label="Werbung" />
+      <div className="page-shell-rail page-shell-rail-left" aria-hidden style={style}>
+        <div className="page-shell-rail-sticky">
+          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary" />
         </div>
       </div>
-      <div className="page-ad-rail page-ad-rail-right" aria-hidden style={style}>
-        <div className="page-ad-rail-sticky">
-          <div className="page-ad-rail-box" data-ad-format="rail" role="complementary" aria-label="Werbung" />
+      <div className="page-shell-rail page-shell-rail-right" aria-hidden style={style}>
+        <div className="page-shell-rail-sticky">
+          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary" />
         </div>
       </div>
     </div>

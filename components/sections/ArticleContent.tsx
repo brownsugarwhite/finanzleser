@@ -263,7 +263,7 @@ function injectInlineAd(html: string): string {
   if (matches.length === 0) return html;
   const at = matches[Math.min(1, matches.length - 1)].index ?? 0;
   const box =
-    '<aside class="article-ad-inline" data-ad-format="rectangle" aria-label="Werbung"></aside>';
+    '<aside class="article-side-inline" data-slot-format="rectangle"></aside>';
   return html.slice(0, at) + box + html.slice(at);
 }
 

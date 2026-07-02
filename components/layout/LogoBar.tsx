@@ -11,7 +11,7 @@ type LogoState = "hidden" | "short-visible" | "long-visible";
 
 function createScrollAnimations(claim: HTMLElement, dotLine: HTMLElement | null) {
   // Wenn TopBanner ausgeblendet ist, soll der Fade sofort beim Scrollen starten.
-  const topBannerVisible = !!document.querySelector(".top-banner");
+  const topBannerVisible = !!document.querySelector(".top-bar");
   const start = topBannerVisible ? 50 : 0;
   const end = topBannerVisible ? 100 : 50;
 
@@ -204,7 +204,7 @@ export default function LogoBar() {
     if (isLanding) return;
 
     const create = () => {
-      const topBannerVisible = !!document.querySelector(".top-banner");
+      const topBannerVisible = !!document.querySelector(".top-bar");
       const triggerPos = topBannerVisible ? 50 : 0;
 
       logoTriggerRef.current = ScrollTrigger.create({

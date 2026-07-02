@@ -40,10 +40,10 @@ export default function AdSlot({
   const { w, h } = AD_SIZES[format];
   return (
     <div
-      className={cn("ad-slot", className)}
-      data-ad-format={format}
+      className={cn("pg-slot", className)}
+      data-slot-format={format}
       role="complementary"
-      aria-label="Werbung"
+     
       style={{
         width: fullWidth ? "100%" : w,
         maxWidth: "100%",

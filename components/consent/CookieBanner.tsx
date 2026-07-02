@@ -13,10 +13,10 @@ export default function CookieBanner() {
   if (!bannerOpen || settingsOpen) return null;
 
   return (
-    <div className="cookie-banner" role="dialog" aria-label="Cookie-Hinweis" aria-modal="false">
-      <div className="cookie-banner__inner">
-        <div className="cookie-banner__text">
-          <strong className="cookie-banner__title">Wir respektieren deine Privatsphäre</strong>
+    <div className="cookie-bar" role="dialog" aria-label="Cookie-Hinweis" aria-modal="false">
+      <div className="cookie-bar__inner">
+        <div className="cookie-bar__text">
+          <strong className="cookie-bar__title">Wir respektieren deine Privatsphäre</strong>
           <p>
             Wir verwenden nur technisch notwendige Cookies. Externe Inhalte wie Vergleichsrechner
             unserer Partner und unser Bewertungs-Widget werden erst nach deiner Zustimmung geladen
@@ -26,7 +26,7 @@ export default function CookieBanner() {
             <Link href="/impressum" className="cookie-link">Impressum</Link>.
           </p>
         </div>
-        <div className="cookie-banner__actions">
+        <div className="cookie-bar__actions">
           <button type="button" className="cookie-btn cookie-btn--ghost" onClick={openSettings}>
             Einstellungen
           </button>

@@ -3121,10 +3121,10 @@ h2.faq-heading {
 }
 
 /* Platzhalter-Badge (36×36, oben links) in JEDER Werbefläche — Marker bis echte Ads kommen. */
-[data-ad-format] {
+[data-slot-format] {
   position: relative;
 }
-[data-ad-format]::before {
+[data-slot-format]::before {
   content: "";
   position: absolute;
   top: 0;
@@ -3137,38 +3137,38 @@ h2.faq-heading {
   z-index: 1;
 }
 
-.article-ad-rail {
+.article-side-rail {
   position: absolute;
   top: 18px; /* bündig mit dem Leaderboard (margin-top 18px) */
   bottom: 0;
   width: var(--ad-rail-w);
   z-index: 40; /* unter Nav/TOC (52/55), aber sichtbar in den Rändern */
 }
-.article-ad-rail-left {
+.article-side-rail-left {
   left: calc(50% - 375px - var(--ad-rail-gap) - var(--ad-rail-w));
 }
-.article-ad-rail-right {
+.article-side-rail-right {
   left: calc(50% + 375px + var(--ad-rail-gap));
 }
-.article-ad-rail-sticky {
+.article-side-rail-sticky {
   position: sticky;
   top: 100px;
 }
-.article-ad-rail-box {
+.article-side-rail-box {
   width: var(--ad-rail-w);
   height: 600px;
   background: rgba(0, 0, 0, 0.10);
 }
 /* <1440px: kein Platz neben TOC + 750px-Content → Rails aus. */
 @media (max-width: 1440px) {
-  .article-ad-rail {
+  .article-side-rail {
     display: none !important;
   }
 }
 
 /* ─── In-Text-Werbung (Mid) — float, Text umfließt sie ─────────────────────
    Wird als <aside> in den Prosa-HTML-String injiziert (ArticleContent). */
-.prose .article-ad-inline {
+.prose .article-side-inline {
   float: right;
   width: 300px;
   height: 250px;
@@ -3177,7 +3177,7 @@ h2.faq-heading {
   clear: right;
 }
 @media (max-width: 700px) {
-  .prose .article-ad-inline {
+  .prose .article-side-inline {
     float: none;
     width: 100%;
     max-width: 300px;
@@ -3186,11 +3186,11 @@ h2.faq-heading {
 }
 
 /* ─── Generische Seiten-Werbung (Tool-/Listen-/Anbieter-Seiten) ───────────────
-   Wiederverwendet --ad-rail-w/--ad-rail-gap + die [data-ad-format]-Badge.
+   Wiederverwendet --ad-rail-w/--ad-rail-gap + die [data-slot-format]-Badge.
    --page-content-w wird inline je Seite gesetzt; Rails flankieren die zentrierte
    Content-Spalte, starten oben in der Region (= unter dem Heading), innen sticky.
    Pendant zu den Artikel-Rails, aber ohne TOC-Logik (reines CSS). */
-.page-ad-col {
+.page-shell-col {
   max-width: var(--page-content-w, 850px);
   margin-inline: auto;
   padding-inline: 24px;
@@ -3200,7 +3200,7 @@ h2.faq-heading {
    Leaderboard). Da border-box + 24px Padding sonst 48px abziehen, kompensiert die
    max-width das Padding → sichtbarer Content = --page-content-w. Auf Mobile schrumpft
    alles mit dem Padding. Die Rails fluchten via --ad-rail-gap exakt an der 728er-Kante. */
-.page-ad-col--exact {
+.page-shell-col--exact {
   max-width: calc(var(--page-content-w, 728px) + 48px);
 }
 /* Kategorie-Dokumente: wie der Artikel-Tool-Container über die VOLLE Breite
@@ -3314,14 +3314,14 @@ h2.faq-heading {
   box-sizing: border-box;
 }
 @media (min-width: 1160px) {
-  #category-articles-section .page-ad-rail { display: block !important; }
+  #category-articles-section .page-shell-rail { display: block !important; }
 }
 @media (max-width: 1159px) {
-  #category-articles-section .page-ad-rail { display: none !important; }
+  #category-articles-section .page-shell-rail { display: none !important; }
 }
 /* Rails laufen über den Content hinaus mit nach unten (sticky), enden aber mit
    Abstand ÜBER der Dokumente-Linie (20px mehr Luft zu den Dokumenten als zuvor). */
-#category-articles-section .page-ad-rail {
+#category-articles-section .page-shell-rail {
   bottom: -109px;
 }
 
@@ -3331,16 +3331,16 @@ h2.faq-heading {
 .main-category-page { --cat-content-w: 970px; }
 @media (min-width: 1680px) { .main-category-page { --ad-rail-w: 300px; } }
 @media (max-width: 1679px) { .main-category-page { --ad-rail-w: 160px; } }
-@media (min-width: 1400px) { .main-category-page .page-ad-rail { display: block !important; } }
-@media (max-width: 1399px) { .main-category-page .page-ad-rail { display: none !important; } }
+@media (min-width: 1400px) { .main-category-page .page-shell-rail { display: block !important; } }
+@media (max-width: 1399px) { .main-category-page .page-shell-rail { display: none !important; } }
 /* Top-Rails (Beitrags-Reihen) laufen weiter nach unten — bis kurz vor das
    Slider-Heading „Alle …ratgeber", erst dann scrollen sie mit. */
-#main-category-section .page-ad-rail {
+#main-category-section .page-shell-rail {
   bottom: -55px;
 }
 /* Tools-Rails: starten oben neben den Slider-Navigations-Pfeilen, laufen unten
    bis über die Dokumente-Linie. */
-#main-category-tools-section .page-ad-rail {
+#main-category-tools-section .page-shell-rail {
   top: -110px;
   bottom: -109px;
 }
@@ -3441,13 +3441,13 @@ h2.faq-heading {
 }
 /* Heading: Default Content-Breite. Mit aktiven Rails (--wide) spannt es über die
    Gesamtbreite (Content + beide Rails + Gaps), zentriert. <1440px → Content-Breite. */
-.page-ad-heading {
+.page-shell-heading {
   max-width: var(--page-content-w, 850px);
   margin-inline: auto;
   padding-inline: 24px;
   box-sizing: border-box;
 }
-.page-ad-heading--wide {
+.page-shell-heading--wide {
   max-width: calc(var(--page-content-w, 850px) + 2 * (var(--ad-rail-gap) + var(--ad-rail-w)));
 }
 /* ── Sitewide Feld-States: animierte Outline (Hover zeichnet im Uhrzeigersinn ein,
@@ -3494,66 +3494,66 @@ h2.faq-heading {
   backdrop-filter: blur(16px) brightness(1) !important;
 }
 
-/* .page-ad-frame (Default, Kategorie-Seiten): transparenter Wrapper, kein Cap. */
+/* .page-shell-frame (Default, Kategorie-Seiten): transparenter Wrapper, kein Cap. */
 /* Tool-Seiten (Rechner/Vergleich/Checkliste): Gesamtbreite auf 1200 deckeln und
    zentrieren → Heading + Rails passen IMMER in 1200 (kein Überlappen/Abschneiden). */
-.page-ad-frame--tool {
+.page-shell-frame--tool {
   max-width: 1200px;
   margin-inline: auto;
 }
 /* Heading spannt die volle Frame-Breite (= Mid + Rails) statt Viewport-Breite. */
-.page-ad-frame--tool .page-ad-heading--wide {
+.page-shell-frame--tool .page-shell-heading--wide {
   max-width: 100%;
 }
 /* Rails sitzen in den Seitenbändern des Frames (zwischen Frame-Rand und Mid-Spalte),
    Box füllt das Band. Werden per JS ausgeblendet, wenn das Band zu schmal ist. */
-.page-ad-frame--tool .page-ad-rail {
+.page-shell-frame--tool .page-shell-rail {
   left: auto;
   right: auto;
   width: calc((100% - var(--page-content-w, 728px)) / 2 - var(--ad-rail-gap, 24px));
 }
-.page-ad-frame--tool .page-ad-rail-left { left: 0; }
-.page-ad-frame--tool .page-ad-rail-right { right: 0; }
-.page-ad-frame--tool .page-ad-rail-box { width: 100%; }
+.page-shell-frame--tool .page-shell-rail-left { left: 0; }
+.page-shell-frame--tool .page-shell-rail-right { right: 0; }
+.page-shell-frame--tool .page-shell-rail-box { width: 100%; }
 /* Tool-Rails: Sichtbarkeit steuert das JS (Band-Breite), nicht die globale 1440-Regel. */
 @media (max-width: 1440px) {
-  .page-ad-frame--tool .page-ad-rail { display: block !important; }
+  .page-shell-frame--tool .page-shell-rail { display: block !important; }
 }
-.page-ad-region {
+.page-shell-region {
   position: relative;
 }
 /* Top-Billboard ohne oberen Abstand → Rails docken oben bündig an. */
-.page-ad-top {
+.page-shell-top {
   margin: 0 0 32px;
 }
 /* Mobile (CPTs): mehr Luft zwischen Beschreibung und Werbebanner darunter.
    Rails sind hier ohnehin aus → kein Konflikt mit dem bündigen Rail-Andocken. */
 @media (max-width: 1024px) {
-  .page-ad-top {
+  .page-shell-top {
     margin-top: 24px;
   }
 }
-.page-ad-mid {
+.page-shell-mid {
   margin: 40px 0 0;
 }
-.page-ad-rail {
+.page-shell-rail {
   position: absolute;
   top: 0; /* bündig mit der Oberkante des Billboards/Contents */
   bottom: 0;
   width: var(--ad-rail-w);
   z-index: 40;
 }
-.page-ad-rail-left {
+.page-shell-rail-left {
   left: calc(50% - var(--page-content-w, 850px) / 2 - var(--ad-rail-gap) - var(--ad-rail-w));
 }
-.page-ad-rail-right {
+.page-shell-rail-right {
   left: calc(50% + var(--page-content-w, 850px) / 2 + var(--ad-rail-gap));
 }
-.page-ad-rail-sticky {
+.page-shell-rail-sticky {
   position: sticky;
   top: 100px;
 }
-.page-ad-rail-box {
+.page-shell-rail-box {
   width: var(--ad-rail-w);
   height: 600px;
   background: rgba(0, 0, 0, 0.10);
@@ -3561,10 +3561,10 @@ h2.faq-heading {
 /* <1440px: nicht genug Platz neben dem Content → Rails aus,
    Heading fällt auf die reine Content-Breite zurück. */
 @media (max-width: 1440px) {
-  .page-ad-rail {
+  .page-shell-rail {
     display: none !important;
   }
-  .page-ad-heading--wide {
+  .page-shell-heading--wide {
     max-width: var(--page-content-w, 850px);
   }
 }
@@ -3747,7 +3747,7 @@ h2.faq-heading {
 /* ──────────────────────────────────────────────────────────────────────────
    Cookie-Consent: Banner, Einstellungen-Modal, Schalter, Embed-Platzhalter
    ────────────────────────────────────────────────────────────────────────── */
-.cookie-banner {
+.cookie-bar {
   position: fixed;
   left: 0;
   right: 0;
@@ -3759,8 +3759,8 @@ h2.faq-heading {
   pointer-events: none;
 }
 /* KEIN ganzflächiger Backdrop-Blur hinter dem Consent-Banner — der Seitenhintergrund
-   bleibt scharf. Nur der Banner-Container (.cookie-banner__inner) hat Backdrop-Blur. */
-.cookie-banner__inner {
+   bleibt scharf. Nur der Banner-Container (.cookie-bar__inner) hat Backdrop-Blur. */
+.cookie-bar__inner {
   pointer-events: auto;
   width: 100%;
   max-width: 1100px;
@@ -3774,21 +3774,21 @@ h2.faq-heading {
   backdrop-filter: brightness(1.3) blur(13px);
   box-shadow: 0 3px 23px rgba(0, 0, 0, 0.05);
 }
-.cookie-banner__title {
+.cookie-bar__title {
   display: block;
   font-family: var(--font-heading), serif;
   font-size: 17px;
   color: var(--color-text-primary);
   margin-bottom: 4px;
 }
-.cookie-banner__text p {
+.cookie-bar__text p {
   margin: 0;
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.55;
   color: var(--color-text-medium);
 }
-.cookie-banner__actions {
+.cookie-bar__actions {
   display: flex;
   gap: 10px;
   flex-shrink: 0;
@@ -3829,9 +3829,9 @@ h2.faq-heading {
 .cookie-btn--ghost:hover { background-color: rgba(51, 74, 39, 0.06); }
 
 @media (max-width: 860px) {
-  .cookie-banner__inner { flex-direction: column; align-items: stretch; gap: 16px; }
-  .cookie-banner__actions { justify-content: stretch; }
-  .cookie-banner__actions .cookie-btn { flex: 1; text-align: center; }
+  .cookie-bar__inner { flex-direction: column; align-items: stretch; gap: 16px; }
+  .cookie-bar__actions { justify-content: stretch; }
+  .cookie-bar__actions .cookie-btn { flex: 1; text-align: center; }
 }
 
 /* Einstellungen-Modal */

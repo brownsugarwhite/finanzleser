@@ -8,7 +8,7 @@ import type { PageAdsSettings } from "@/lib/types";
  * Generisches Werbe-Gerüst für Nicht-Artikel-Seiten (Tools, Anbieter, Listen).
  * Legt einen optionalen Top-Banner zwischen Heading und Content, flankiert die
  * zentrierte Content-Spalte (Breite `contentWidth`) mit sticky Rails und richtet
- * Heading + Content über `.page-ad-col` exakt aneinander aus.
+ * Heading + Content über `.page-shell-col` exakt aneinander aus.
  *
  * variant="tool": Tool-Seiten (Rechner/Vergleich/Checkliste). Der Frame ist auf
  * 1200px gedeckelt, die Rails sitzen in den Seitenbändern INNERHALB des Frames
@@ -41,15 +41,15 @@ export default function PageAds({ ads, contentWidth, heading, children, contentC
   const topFull = topFormat === "billboard";
 
   return (
-    <div className="page-ads" style={style}>
-      <div className={cn("page-ad-frame", variant === "tool" && "page-ad-frame--tool")}>
+    <div className="page-shell" style={style}>
+      <div className={cn("page-shell-frame", variant === "tool" && "page-shell-frame--tool")}>
         {/* Heading: bei aktiven Rails über die Gesamtbreite (Frame), sonst Content-Breite. */}
-        {heading && <div className={cn("page-ad-heading", showRails && "page-ad-heading--wide")}>{heading}</div>}
-        <div className="page-ad-region">
+        {heading && <div className={cn("page-shell-heading", showRails && "page-shell-heading--wide")}>{heading}</div>}
+        <div className="page-shell-region">
           {showRails && <PageAdRails variant={variant} contentWidth={contentWidth} railGap={railGap ?? 24} />}
-          <div className={cn("page-ad-col", contentClassName)}>
+          <div className={cn("page-shell-col", contentClassName)}>
             {showTop && (
-              <div className="page-ad-top">
+              <div className="page-shell-top">
                 <AdSlot format={topFormat} fullWidth={topFull} />
               </div>
             )}

@@ -65,7 +65,7 @@ export default async function MainCategoryLayout({
               contentWidth={970}
               topFormat="billboard"
               railGap={46}
-              contentClassName="page-ad-col--exact"
+              contentClassName="page-shell-col--exact"
             >
               <h2 className="mcat-top-heading">Neuste {ratgeber}</h2>
               <CategoryArticleRows posts={topPosts} fallbackMain={slug} rows={[2, 3]} />
@@ -90,7 +90,7 @@ export default async function MainCategoryLayout({
             ads={{ ...settings.ads.kategorie, top: false }}
             contentWidth={970}
             railGap={46}
-            contentClassName="page-ad-col--exact"
+            contentClassName="page-shell-col--exact"
           >
             <FinanztoolGrid
               mainCategorySlug={slug}

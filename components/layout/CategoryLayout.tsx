@@ -53,7 +53,7 @@ export default async function CategoryLayout({ title, titleSlug, description, im
             contentWidth={728}
             topFormat="leaderboard"
             railGap={46}
-            contentClassName="page-ad-col--exact"
+            contentClassName="page-shell-col--exact"
           >
             {/* Posts Liste */}
             {posts && posts.length > 0 && (
