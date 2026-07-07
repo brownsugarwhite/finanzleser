@@ -38,3 +38,7 @@ scripts/anbieter-import.json
 
 # Lokale MCP-Server-Registrierung (maschinenspezifische Pfade)
 .mcp.json
+
+# Generierte Visual-Raster-Derivate (regenerierbar via scripts/build-visuals.mjs, ~230 MB).
+# SVG-Master (assets/visuals/**) + manifest.json werden getrackt, die Derivate nicht.
+assets/visuals-build/
