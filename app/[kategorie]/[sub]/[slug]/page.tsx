@@ -8,7 +8,8 @@ import type { Category } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME, absoluteUrl } from "@/lib/seo";
 import { extractArticleHeader } from "@/lib/articleHeader";
 import { getRedakteurForSlug } from "@/lib/redakteure";
-import { JsonLd, articleSchema, breadcrumbSchema } from "@/components/seo/JsonLd";
+import { JsonLd, articleSchema, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
+import { extractFaqPairs } from "@/lib/articleFaq";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 
 export const revalidate = 86400;
@@ -103,6 +104,7 @@ export default async function BeitragPage(props: {
 
   // JSON-LD/Breadcrumbs aus den kanonischen Post-Daten, nie aus params.
   const articlePath = buildPostUrl(post);
+  const faqPairs = extractFaqPairs(post.content);
   const breadcrumbItems = [
     { name: "Startseite", path: "/" },
     ...(mainCategory ? [{ name: mainCategory.name, path: `/${main}` }] : []),
@@ -123,6 +125,7 @@ export default async function BeitragPage(props: {
         section: mainCategory?.name,
       })} />
       <JsonLd data={breadcrumbSchema(breadcrumbItems)} />
+      {faqPairs.length > 0 && <JsonLd data={faqSchema(faqPairs)} />}
     <ArticleLayout
       title={post.title}
       subtitle={post.beitragFelder?.beitragUntertitel}

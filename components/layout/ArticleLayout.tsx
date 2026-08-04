@@ -1,8 +1,9 @@
 import Footer from "./Footer";
 import ArticleClient from "./ArticleClient";
 import RelatedPostsSection from "@/components/sections/RelatedPostsSection";
-import { getSiteSettings } from "@/lib/wordpress";
+import { getSiteSettings, getRelatedPosts } from "@/lib/wordpress";
 import type { ArticleToolData } from "@/lib/articleToolData";
+import type { Post } from "@/lib/types";
 
 type ArticleLayoutProps = {
   title?: string;
@@ -43,6 +44,15 @@ function extractLatestPostsBlock(content?: string): { categoryIds: number[]; pos
 
 export default async function ArticleLayout(props: ArticleLayoutProps) {
   const relatedBlock = extractLatestPostsBlock(props.content);
+
+  // Related-Posts serverseitig (ISR) statt Client-Fetch — spart eine Function-
+  // Invocation pro Artikel-View und liefert die Links im initialen HTML (SEO).
+  let relatedPosts: Post[] = [];
+  if (relatedBlock && relatedBlock.categoryIds.length > 0) {
+    relatedPosts = await getRelatedPosts(relatedBlock.categoryIds, relatedBlock.postsToShow + 1)
+      .then((p) => (props.slug ? p.filter((x) => x.slug !== props.slug) : p).slice(0, relatedBlock.postsToShow))
+      .catch(() => []); // WP-Ausfall → Sektion entfällt still (wie bisher beim Client-Fallback)
+  }
   // Werbe-Settings (gecacht/dedupliziert mit dem Aufruf in app/layout.tsx).
   // Quelle jetzt ads.article (Fallback auf Legacy article_ads ist im Merge gelöst).
   const { ads } = await getSiteSettings();
@@ -54,13 +64,7 @@ export default async function ArticleLayout(props: ArticleLayoutProps) {
         <div className="pb-12" style={{ paddingTop: 0 }}>
           <ArticleClient {...props} articleAds={articleAds} />
         </div>
-        {relatedBlock && relatedBlock.categoryIds.length > 0 && (
-          <RelatedPostsSection
-            categoryIds={relatedBlock.categoryIds}
-            excludeSlug={props.slug}
-            postsToShow={relatedBlock.postsToShow}
-          />
-        )}
+        {relatedPosts.length > 0 && <RelatedPostsSection posts={relatedPosts} />}
       </main>
       <Footer />
     </>

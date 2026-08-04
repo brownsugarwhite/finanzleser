@@ -18,6 +18,9 @@ interface VergleichEmbedProps {
 const MIN_LOAD_MS = 1000;      // Loader mindestens 1s sichtbar
 const STABLE_MS = 800;         // Höhe gilt als „final", wenn 800ms keine Änderung mehr
 const LOAD_FALLBACK_MS = 8000; // Notbremse: spätestens dann aufdecken
+// Drittanbieter-iframe ohne load-Event nach 10s (z. B. financeads-Ausfall) →
+// Hinweis statt endloser Leerfläche/Loader.
+const IFRAME_FAIL_MS = 10000;
 const PLACEHOLDER_H = 180;     // Lade-Box-Höhe während des Ladens
 
 // Anbieter-Label für den Consent-Platzhalter aus der Embed-Quelle ableiten.
@@ -52,6 +55,8 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const [error, setError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState(600);
   const [revealed, setRevealed] = useState(false);
+  const [frameLoaded, setFrameLoaded] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   // Loader bleibt gemountet, bis der Crossfade fertig ist (während des Wachsens laufen
   // die Balken weiter) — erst danach aus dem DOM.
   const [loaderGone, setLoaderGone] = useState(false);
@@ -68,6 +73,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
   const stableTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastH = useRef(0);
   const revealedRef = useRef(false);
+  const unavailableRef = useRef(false);
 
   // Config vorhanden → Daten da. Erst MIT Consent darf der Inhalt montieren/laden.
   const ready = !!(iframeUrl || scriptConfig || rawHtml);
@@ -93,7 +99,10 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
     if (!inView || fetched.current) return;
     fetched.current = true;
     fetch(`/api/vergleich-data/${slug}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
       .then((data) => {
         if (data.iframeUrl) setIframeUrl(data.iframeUrl);
         else if (data.scriptConfig) setScriptConfig(data.scriptConfig);
@@ -113,7 +122,7 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
     if (!content) return;
 
     const doReveal = () => {
-      if (revealedRef.current) return;
+      if (revealedRef.current || unavailableRef.current) return;
       revealedRef.current = true;
       const start = inViewAt.current ?? Date.now();
       const remaining = Math.max(0, MIN_LOAD_MS - (Date.now() - start));
@@ -188,6 +197,18 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
       },
     });
   }, [revealed]);
+
+  // Drittanbieter-Ausfall: iframe liefert kein load-Event (Host down/blockiert) →
+  // nach IFRAME_FAIL_MS Hinweis-Box statt Dauerloader. Lädt das iframe doch noch,
+  // räumt onLoad den Zustand wieder auf.
+  useEffect(() => {
+    if (!mounted || !iframeUrl || frameLoaded) return;
+    const t = setTimeout(() => {
+      unavailableRef.current = true;
+      setUnavailable(true);
+    }, IFRAME_FAIL_MS);
+    return () => clearTimeout(t);
+  }, [mounted, iframeUrl, frameLoaded]);
 
   // postMessage-Höhe (FinanceAds u. a.) → treibt die iframe-Höhe; die Mess-Logik oben
   // erkennt die Stabilität daraus.
@@ -329,6 +350,11 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
                   title={`Vergleich: ${slug}`}
                   loading="lazy"
                   allow="clipboard-write"
+                  onLoad={() => {
+                    unavailableRef.current = false;
+                    setFrameLoaded(true);
+                    setUnavailable(false);
+                  }}
                 />
               </div>
             )}
@@ -337,9 +363,15 @@ export default function VergleichEmbed({ slug }: VergleichEmbedProps) {
           </div>
         )}
 
-        {!loaderGone && !error && (
+        {!loaderGone && !error && !unavailable && (
           <div className="vergleich-loading" ref={loadingRef}>
             <div className="vergleich-loading-text">Vergleich wird geladen…</div>
+          </div>
+        )}
+
+        {unavailable && !frameLoaded && !error && (
+          <div style={{ padding: 48, textAlign: "center", color: "#999" }}>
+            Der Vergleich ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.
           </div>
         )}
 

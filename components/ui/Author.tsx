@@ -65,13 +65,14 @@ export default function Author({ name, role = "Autorin bei Finanzleser.de", date
         </div>
       </div>
 
-      {/* Author Info */}
+      {/* Author Info — Wortlaut gem. EU-KI-Kennzeichnung: keine Personennamen. */}
       <div className="flex flex-col gap-1">
         <p style={{ fontSize: "14px", lineHeight: "1.15em" }}>
-          <span style={{ color: "var(--color-text-medium)" }}>von </span>
+          <span style={{ color: "var(--color-text-medium)" }}>Erstellt von der </span>
           <span style={{ color: "var(--color-text-medium)", fontWeight: "600" }}>
             {name}
           </span>
+          <span style={{ color: "var(--color-text-medium)" }}>.</span>
         </p>
         {role && (
           <p style={{ fontSize: "14px", lineHeight: "1.15em", color: "var(--color-text-medium)" }}>

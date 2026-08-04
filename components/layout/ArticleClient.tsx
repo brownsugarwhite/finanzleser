@@ -3,6 +3,7 @@
 import { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import InlineSVG from "@/components/ui/InlineSVG";
 import Author from "@/components/ui/Author";
+import KiHinweis from "@/components/ui/KiHinweis";
 import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ArticleSidebar from "./ArticleSidebar";
@@ -349,6 +350,7 @@ export default function ArticleClient({
                   imageUrl={author.imageUrl}
                   colorVariant={author.colorVariant}
                 />
+                <KiHinweis />
               </div>
             )}
             {contentTableOfContents && bodyContent && (

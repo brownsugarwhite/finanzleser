@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getChecklisteBySlug } from "@/lib/wordpress";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
@@ -10,7 +11,7 @@ export async function GET(
   const pdfUrl = checkliste?.checklisten?.checklistePdf?.node?.mediaItemUrl;
 
   if (!pdfUrl) {
-    return NextResponse.json({ error: "PDF not found" }, { status: 404 });
+    return NextResponse.json({ error: "PDF not found" }, { status: 404, headers: { "Cache-Control": "no-store" } });
   }
 
   const response = await fetch(pdfUrl);
@@ -20,6 +21,7 @@ export async function GET(
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `inline; filename="Checkliste_${slug}.pdf"`,
+      ...cacheHeaders(86400, 86400),
     },
   });
 }

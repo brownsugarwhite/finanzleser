@@ -1,5 +1,6 @@
 import { getMegamenuPostsByCategory } from "@/lib/wordpress";
 import { NextRequest, NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category");
@@ -23,7 +24,7 @@ export async function GET(request: NextRequest) {
         headers: {
           // Leere Ergebnisse NICHT cachen — ein transienter WP-Aussetzer würde sonst bis 24h
           // (SWR) als „keine Beiträge" am Edge hängenbleiben.
-          "Cache-Control": posts.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
+          ...(posts.length === 0 ? { "Cache-Control": "no-store" } : cacheHeaders(3600, 3600)),
           // Netlify Edge variiert sonst NICHT nach ?category → alle Kategorien
           // bekämen denselben Cache-Eintrag (Bug: überall die gleichen 3 Posts).
           "Netlify-Vary": "query=category|limit",

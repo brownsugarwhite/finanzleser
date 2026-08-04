@@ -1686,6 +1686,15 @@ export const getCategoryBySlug = cache(async (slug: string) => {
 // Rechner-Konfiguration aus WordPress ACF
 // ─────────────────────────────────────────────
 
+/**
+ * Related-Posts für den Artikel-Footer — beim SSG-Build pro Kategorie-Set memoisiert
+ * (statt einer Query pro Artikelseite). Ersetzt die frühere /api/related-posts-Route.
+ */
+export function getRelatedPosts(categoryIds: number[], limit = 10): Promise<Post[]> {
+  const key = `related:${[...categoryIds].sort((a, b) => a - b).join(",")}|${limit}`;
+  return buildMemo(key, () => getLatestPostsByCategoryIds(categoryIds, limit));
+}
+
 export async function getLatestPostsByCategoryIds(
   categoryIds: number[],
   limit = 10,

@@ -1198,12 +1198,14 @@ h1.category-title {
   font-size: 15px;
   color: var(--color-text-primary);
   text-align: left;
+  /* Lange Zellinhalte (z. B. Leistungsbeschreibungen) umbrechen statt die
+     Tabelle in den Dauer-Horizontalscroll zu sprengen. */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
-.prose th:last-child,
-.prose td:last-child {
-  width: 1%;
-  white-space: nowrap;
-}
+/* Die frühere letzte-Spalte-nowrap-Regel (width:1% + nowrap, gedacht für kurze
+   Preis-/Ja-Nein-Spalten) hat Tabellen mit Fließtext in der letzten Spalte
+   (z. B. Zahnzusatzversicherung) unbenutzbar breit gemacht — entfernt. */
 
 /* Glassmorphism Utilities */
 @utility glass-card {

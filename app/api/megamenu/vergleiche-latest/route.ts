@@ -1,5 +1,6 @@
 import { getLatestVergleiche, getAllVergleiche } from "@/lib/wordpress";
 import { NextRequest, NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET(request: NextRequest) {
   const limitParam = request.nextUrl.searchParams.get("limit");
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
       },
       {
         headers: {
-          "Cache-Control": latest.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
+          ...(latest.length === 0 ? { "Cache-Control": "no-store" } : cacheHeaders(3600, 3600)),
           "Netlify-Vary": "query=limit",
         },
       },

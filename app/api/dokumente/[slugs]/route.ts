@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDokumenteBySlugs } from "@/lib/wordpress";
 import { stripHtml } from "@/lib/seo";
+import { cacheHeaders } from "@/lib/httpCache";
 
 // Dokument-Kartendaten für den Dokumente-Block im Artikel (≤4). 1h Cache wie tool-title.
 export const revalidate = 86400;
@@ -27,5 +28,5 @@ export async function GET(
     kategorie: d.dokumentKategorien?.nodes?.[0]?.name || "",
   }));
 
-  return NextResponse.json({ dokumente: cards });
+  return NextResponse.json({ dokumente: cards }, { headers: cacheHeaders(3600, 86400) });
 }

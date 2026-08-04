@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import ArticleSlider from "@/components/sections/ArticleSlider";
 import SliderNav from "@/components/ui/SliderNav";
 import type { Post } from "@/lib/types";
 
+// Rein präsentational: Posts kommen serverseitig aus ArticleLayout (ISR) —
+// der frühere /api/related-posts-Client-Fetch ist entfallen.
 interface RelatedPostsSectionProps {
-  categoryIds: number[];
-  excludeSlug?: string;
-  postsToShow?: number;
+  posts: Post[];
 }
 
 interface NavState {
@@ -19,33 +19,11 @@ interface NavState {
   onGoTo: (i: number) => void;
 }
 
-export default function RelatedPostsSection({
-  categoryIds,
-  excludeSlug,
-  postsToShow = 10,
-}: RelatedPostsSectionProps) {
-  const [posts, setPosts] = useState<Post[] | null>(null);
+export default function RelatedPostsSection({ posts }: RelatedPostsSectionProps) {
   const [nav, setNav] = useState<NavState | null>(null);
-
-  useEffect(() => {
-    if (categoryIds.length === 0) {
-      setPosts([]);
-      return;
-    }
-    const params = new URLSearchParams({
-      cats: categoryIds.join(","),
-      limit: String(postsToShow),
-      ...(excludeSlug ? { excludeSlug } : {}),
-    });
-    fetch(`/api/related-posts?${params.toString()}`)
-      .then((r) => r.json())
-      .then((data) => setPosts(data.posts || []))
-      .catch(() => setPosts([]));
-  }, [categoryIds.join(","), excludeSlug, postsToShow]);
 
   const handleNavReady = useCallback((n: NavState) => setNav(n), []);
 
-  if (posts === null) return null;
   if (posts.length === 0) return null;
 
   return (

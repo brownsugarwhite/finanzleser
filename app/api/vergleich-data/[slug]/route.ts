@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Vergleich-Embed-Config
@@ -56,10 +57,14 @@ async function getConfigFromCpt(slug: string): Promise<{ config: EmbedConfig; ti
   if (!apiUrl) return null;
   const base = apiUrl.replace(/\/graphql\/?$/, "");
 
+  // 5s-Cap: bei WP-Hänger fällt die Route auf die statische Map zurück statt
+  // die Function bis zum Lambda-Timeout zu blockieren.
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 5000);
   try {
     const res = await fetch(
       `${base}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,content`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 }, signal: ctrl.signal }
     );
     if (!res.ok) return null;
     const posts = await res.json();
@@ -81,8 +86,13 @@ async function getConfigFromCpt(slug: string): Promise<{ config: EmbedConfig; ti
     }
   } catch {
     return null;
+  } finally {
+    clearTimeout(timer);
   }
 }
+
+// Config ändert sich selten → pro Slug im Full-Route-/Durable-Cache backen.
+export const revalidate = 3600;
 
 export async function GET(
   _request: Request,
@@ -97,7 +107,7 @@ export async function GET(
 
   const data: EmbedConfig | undefined = hasCptConfig ? cptConfig : VERGLEICH_DATA[slug];
   if (!data) {
-    return NextResponse.json({ error: "Vergleich nicht gefunden" }, { status: 404 });
+    return NextResponse.json({ error: "Vergleich nicht gefunden" }, { status: 404, headers: { "Cache-Control": "no-store" } });
   }
 
   return NextResponse.json({
@@ -105,5 +115,5 @@ export async function GET(
     iframeUrl: data.iframeUrl || "",
     scriptConfig: data.scriptConfig || null,
     rawHtml: data.rawHtml || "",
-  });
+  }, { headers: cacheHeaders(3600, 3600) });
 }

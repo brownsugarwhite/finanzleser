@@ -6,6 +6,8 @@ import SparkHeading from "@/components/ui/SparkHeading";
 import Footer from "@/components/layout/Footer";
 import { getLatestPosts, getCategoryWithChildren, getPostsByCategory } from "@/lib/wordpress";
 import type { Post } from "@/lib/types";
+import { JsonLd, webPageSchema, itemListSchema } from "@/components/seo/JsonLd";
+import { SITE_DESCRIPTION } from "@/lib/seo";
 import { CATEGORY_ICONS as RATGEBER_ICONS } from "@/lib/categoryIcons";
 
 // Below-the-fold — lazy code-split, damit embla-carousel-Chunk nicht im
@@ -41,8 +43,18 @@ export default function LandingPage() {
           gültiger Preload-Wert (Browser ignoriert es); das Poster-Bild ist gültig + wirksam.
           Das Video selbst lädt via preload="auto". */}
       <link rel="preload" as="image" href="/assets/vids/toolbox.webp" fetchPriority="high" />
+      <JsonLd data={webPageSchema({
+        name: "Finanzleser – Ratgeber, Rechner & Vergleiche",
+        description: SITE_DESCRIPTION,
+        path: "/",
+      })} />
+      <JsonLd data={itemListSchema(RATGEBER_KATEGORIEN.map((k) => ({ name: k.heading, path: `/${k.slug}` })))} />
       <LandingIntro />
       <main className="bg-white">
+        {/* Dokument-Outline: visuell versteckte H1 (Landing ist rein grafisch aufgebaut). */}
+        <h1 style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap", border: 0 }}>
+          Finanzleser – Ratgeber, Rechner und Vergleiche zu Steuern, Finanzen, Versicherungen und Recht
+        </h1>
         {/* Platzhalter mit reservierter Höhe statt fallback={null}: sonst kollabiert beim
             Streaming-SSR die Layout-Höhe der async Sections und der Footer/Newsletter
             (helles BG-Bild) blitzt kurz oben auf, bevor die Sections nachströmen. */}

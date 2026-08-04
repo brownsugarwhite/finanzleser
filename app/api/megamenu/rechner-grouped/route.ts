@@ -1,6 +1,7 @@
 import { getAllRechner } from "@/lib/wordpress";
 import { TYP_ORDER } from "@/lib/rechnerCategories";
 import { NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET() {
   try {
@@ -30,7 +31,7 @@ export async function GET() {
           items: grouped[typ],
         })),
       },
-      { headers: { "Cache-Control": sortedTypes.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400" } },
+      { headers: sortedTypes.length === 0 ? { "Cache-Control": "no-store" } : cacheHeaders(3600, 3600) },
     );
   } catch (error) {
     console.error("Error fetching rechner grouped:", error);

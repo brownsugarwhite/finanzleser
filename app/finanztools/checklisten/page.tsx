@@ -4,6 +4,8 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllChecklisten } from "@/lib/wordpress";
 import { cleanDescription } from "@/lib/content-utils";
 
+export const revalidate = 86400;
+
 export default async function ChecklistenPage() {
   const checklisten = await getAllChecklisten();
 

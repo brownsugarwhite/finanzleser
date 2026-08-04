@@ -1,6 +1,7 @@
 import { getMegamenuToolsByCategory } from "@/lib/wordpress";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET(request: NextRequest) {
   try {
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(tools, {
       headers: {
         // Leeres Ergebnis nicht cachen (transienter Aussetzer würde sonst lange hängen).
-        "Cache-Control": tools.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
+        ...(tools.length === 0 ? { "Cache-Control": "no-store" } : cacheHeaders(3600, 3600)),
         // Edge-Cache pro Kategorie variieren (sonst überall dieselben Tools).
         "Netlify-Vary": "query=category",
       },

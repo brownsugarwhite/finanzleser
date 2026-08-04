@@ -3,6 +3,8 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import FinanztoolsGrid from "@/components/sections/FinanztoolsGrid";
 import { getToolCategories } from "@/lib/wordpress";
 
+export const revalidate = 86400;
+
 export const metadata = {
   title: "Finanztools - Rechner, Checklisten & Vergleiche",
   description:

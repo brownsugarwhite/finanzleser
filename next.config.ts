@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Tool-Übersichts-Kurzpfade → /finanztools/* (ersetzen die früheren SSR-Stub-Pages,
+      // die pro Aufruf eine Function-Invocation kosteten; hier = CDN-Redirect).
+      { source: "/rechner", destination: "/finanztools/rechner", permanent: true },
+      { source: "/vergleiche", destination: "/finanztools/vergleiche", permanent: true },
+      { source: "/checklisten", destination: "/finanztools/checklisten", permanent: true },
       // 301 Redirects für zusammengefasste Beiträge (42)
       { source: "/aktienfonds", destination: "/versicherungen/altersvorsorge/fondsgebundene-lebensversicherung", permanent: true },
       { source: "/annuitaetendarlehen", destination: "/finanzen/kredite-und-bauen/kredite", permanent: true },
@@ -103,10 +108,21 @@ const nextConfig: NextConfig = {
     ],
   },
   async headers() {
+    // /suche ist durch searchParams dynamisch (Function pro Request). Der Durable-Cache
+    // pro ?q= fängt Wiederholungs-Queries (v. a. Bots) ohne Function ab. Browser-Cache
+    // bleibt aus (Next setzt für dynamische Seiten private/no-cache — korrekt).
+    const sucheCache = {
+      source: "/suche",
+      headers: [
+        { key: "Netlify-CDN-Cache-Control", value: "public, durable, s-maxage=900, stale-while-revalidate=86400" },
+        { key: "Netlify-Vary", value: "query=q" },
+      ],
+    };
     // Staging: noindex für die ganze Site (env-basiert, nicht branch-basiert)
     const isStaging = process.env.NEXT_PUBLIC_SITE_URL?.includes("staging.");
-    if (!isStaging) return [];
+    if (!isStaging) return [sucheCache];
     return [
+      sucheCache,
       {
         source: "/:path*",
         headers: [

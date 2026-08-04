@@ -37,6 +37,52 @@ export function websiteSchema() {
   };
 }
 
+/** Seitenspezifisches WebPage-Schema (Startseite/Übersichten). */
+export function webPageSchema(input: { name: string; description?: string; path: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": absoluteUrl(input.path),
+    name: input.name,
+    ...(input.description && { description: input.description }),
+    url: absoluteUrl(input.path),
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    inLanguage: "de-DE",
+  };
+}
+
+/** ItemList (z. B. die Ratgeber-Hauptkategorien auf der Startseite). */
+export function itemListSchema(items: Array<{ name: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export interface FaqPairInput {
+  q: string;
+  a: string;
+}
+
+/** FAQPage-Schema aus den Frage/Antwort-Paaren eines Artikels (Antworten als Klartext). */
+export function faqSchema(pairs: FaqPairInput[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: pairs.map((p) => ({
+      "@type": "Question",
+      name: p.q,
+      acceptedAnswer: { "@type": "Answer", text: p.a },
+    })),
+  };
+}
+
 export interface ArticleSchemaInput {
   headline: string;
   description?: string;

@@ -113,11 +113,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 }
 
+// 3 Versuche mit Backoff: ein transienter IONOS-Einbruch unter Build-Last hat sonst
+// schon einmal eine fast leere Sitemap (30 statt ~820 URLs) live geshippt.
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
-  try {
-    return await fn();
-  } catch (e) {
-    console.error("[sitemap] fetch failed:", e);
-    return fallback;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      console.error(`[sitemap] fetch failed (Versuch ${attempt}/3):`, e);
+      if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 2000));
+    }
   }
+  return fallback;
 }

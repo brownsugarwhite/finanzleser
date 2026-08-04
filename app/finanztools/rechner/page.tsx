@@ -4,6 +4,8 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllRechner } from "@/lib/wordpress";
 import { TYP_LABELS, TYP_ORDER } from "@/lib/rechnerCategories";
 
+export const revalidate = 86400;
+
 export default async function RechnerPage() {
   const rechner = await getAllRechner();
 

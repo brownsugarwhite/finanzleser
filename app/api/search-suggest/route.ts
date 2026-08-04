@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 type Suggestion = { title: string; url: string };
 
@@ -14,15 +15,23 @@ function decodeHtmlEntities(input: string): string {
     .replace(/&apos;/g, "'");
 }
 
+// Suggest-Antworten pro Query im Durable-Cache teilen — ohne Netlify-Vary
+// kollabieren sonst ALLE ?q=-Varianten auf einen einzigen Cache-Eintrag.
+const SUGGEST_HEADERS = {
+  ...cacheHeaders(300, 3600),
+  "Netlify-Vary": "query=q",
+};
+const NO_STORE = { "Cache-Control": "no-store" };
+
 export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams.get("q")?.trim() ?? "";
   if (q.length < 2) {
-    return NextResponse.json({ suggestions: [] satisfies Suggestion[] });
+    return NextResponse.json({ suggestions: [] satisfies Suggestion[] }, { headers: NO_STORE });
   }
 
   const wpGraphqlUrl = process.env.WORDPRESS_API_URL;
   if (!wpGraphqlUrl) {
-    return NextResponse.json({ suggestions: [] satisfies Suggestion[] });
+    return NextResponse.json({ suggestions: [] satisfies Suggestion[] }, { headers: NO_STORE });
   }
   const wpBase = wpGraphqlUrl.replace(/\/graphql\/?$/, "");
 
@@ -32,7 +41,7 @@ export async function GET(req: NextRequest) {
       { next: { revalidate: 60 } },
     );
     if (!res.ok) {
-      return NextResponse.json({ suggestions: [] satisfies Suggestion[] });
+      return NextResponse.json({ suggestions: [] satisfies Suggestion[] }, { headers: NO_STORE });
     }
     const raw: { title?: string; url?: string }[] = await res.json();
 
@@ -51,8 +60,8 @@ export async function GET(req: NextRequest) {
         };
       });
 
-    return NextResponse.json({ suggestions });
+    return NextResponse.json({ suggestions }, { headers: SUGGEST_HEADERS });
   } catch {
-    return NextResponse.json({ suggestions: [] satisfies Suggestion[] });
+    return NextResponse.json({ suggestions: [] satisfies Suggestion[] }, { headers: NO_STORE });
   }
 }

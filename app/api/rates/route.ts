@@ -1,4 +1,5 @@
 import ratesJson from "@/config/rates.json";
+import { cacheHeaders } from "@/lib/httpCache";
 
 /**
  * API Endpoint für dynamische Rechner-Konfiguration
@@ -8,7 +9,7 @@ import ratesJson from "@/config/rates.json";
 // Rechner-Konfiguration (Mindestlohn, BBG, Kindergeld …) ändert sich ~jährlich.
 // Vorher 5s → WP wurde praktisch bei jedem Rechner-Seitenaufruf neu abgefragt
 // (~3,9s Latenz). 1h Cache reicht völlig; Config-Änderungen sind nicht zeitkritisch.
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export async function GET() {
   try {
@@ -49,7 +50,7 @@ export async function GET() {
     return Response.json(rates, {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        ...cacheHeaders(3600, 3600),
       },
     });
   } catch (error) {

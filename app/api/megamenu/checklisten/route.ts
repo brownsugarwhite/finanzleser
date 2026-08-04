@@ -1,5 +1,6 @@
 import { getAllChecklisten } from "@/lib/wordpress";
 import { NextResponse } from "next/server";
+import { cacheHeaders } from "@/lib/httpCache";
 
 export async function GET() {
   try {
@@ -9,7 +10,7 @@ export async function GET() {
       .sort((a, b) => a.title.localeCompare(b.title, "de"));
     return NextResponse.json(
       { checklisten: items },
-      { headers: { "Cache-Control": items.length === 0 ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400" } },
+      { headers: items.length === 0 ? { "Cache-Control": "no-store" } : cacheHeaders(3600, 3600) },
     );
   } catch (error) {
     console.error("Error fetching checklisten:", error);
