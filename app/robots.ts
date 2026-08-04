@@ -7,7 +7,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/test/", "/components/"],
+        // /_next/ NICHT blockieren: Google braucht /_next/static + /_next/image zum Rendern.
+        disallow: ["/api/", "/test/", "/components/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

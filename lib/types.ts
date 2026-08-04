@@ -45,6 +45,8 @@ export interface Post {
   title: string;
   slug: string;
   date: string;
+  /** Letztes Änderungsdatum aus WP (ContentNode.modified) — für sitemap lastmod + article:modified_time. */
+  modified?: string;
   excerpt?: string;
   content?: string;
   featuredImage?: FeaturedImage;

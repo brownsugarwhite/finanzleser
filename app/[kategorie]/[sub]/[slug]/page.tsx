@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getAllPosts, getYoastMeta } from "@/lib/wordpress";
-import { getCategoryPair } from "@/lib/urls";
+import { getCategoryPair, buildPostUrl } from "@/lib/urls";
 import { isMainCategory } from "@/lib/categories";
 import ArticleLayout from "@/components/layout/ArticleLayout";
 import type { Category } from "@/lib/types";
@@ -43,19 +43,19 @@ export async function generateMetadata(
   ]);
   if (!post) return { title: `Nicht gefunden – ${SITE_NAME}` };
 
-  const mainCategory = post.categories?.nodes?.find((c: Category) => isMainCategory(c.slug));
   // Titel/Description: zuerst Yoast (Redaktions-optimiert), sonst WP-Titel + Content-<p>/Excerpt.
   const header = extractArticleHeader(post.content);
   return buildMetadata({
     title: yoast?.title || `${post.title} – ${SITE_NAME}`,
     description: yoast?.description || stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
-    path: `/${params.kategorie}/${params.sub}/${params.slug}`,
+    // Canonical IMMER aus den echten Post-Kategorien, nie aus der angefragten URL —
+    // sonst bestätigt jede Pfad-Variante sich selbst als Kanon (Duplicate Content).
+    path: buildPostUrl(post),
     image: post.featuredImage?.node?.sourceUrl,
     imageAlt: post.featuredImage?.node?.altText || post.title,
     type: "article",
     publishedTime: post.date,
-    modifiedTime: post.date,
-    ...(mainCategory && {}),
+    modifiedTime: post.modified || post.date,
   });
 }
 
@@ -72,6 +72,14 @@ export default async function BeitragPage(props: {
     notFound();
   }
 
+  // Nicht-kanonischer Pfad (falsche/alte Kategorie-Segmente) → 308 auf den Kanon statt
+  // 200-Duplikat. Loop-sicher: buildPostUrl liefert exakt /main/sub/slug, dort greift die
+  // Bedingung nicht mehr. permanentRedirect wirft NEXT_REDIRECT — nie in try/catch wrappen.
+  const { main, sub } = getCategoryPair(post.categories);
+  if (main !== params.kategorie || sub !== params.sub) {
+    permanentRedirect(buildPostUrl(post));
+  }
+
   // Konvention v2: Titel = WP-Titel-Feld; Beschreibung = Content-<p> (nach 1. h2).
   const header = extractArticleHeader(post.content);
 
@@ -80,14 +88,10 @@ export default async function BeitragPage(props: {
   // bleiben client-lazy. Fehler → leeres Set, Komponenten fallen auf Client-Fetch zurück.
   const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
 
-  // Find main category (slug is in MAIN_CATEGORY_SLUGS) and subcategory
+  // Kategorien aus den Post-Daten (nach dem Guard identisch mit main/sub der URL).
   const mainCategory = post.categories?.nodes?.find((cat: Category) => isMainCategory(cat.slug));
-
-  // Subcategory = matching the URL param, or first non-main category
   const category = post.categories?.nodes?.find(
-    (cat: Category) => cat.slug === params.sub
-  ) || post.categories?.nodes?.find(
-    (cat: Category) => !isMainCategory(cat.slug)
+    (cat: Category) => cat.slug === sub
   ) || post.categories?.nodes[0];
 
   // Format date as "02. März 2026"
@@ -97,11 +101,12 @@ export default async function BeitragPage(props: {
     year: "numeric",
   });
 
-  const articlePath = `/${params.kategorie}/${params.sub}/${params.slug}`;
+  // JSON-LD/Breadcrumbs aus den kanonischen Post-Daten, nie aus params.
+  const articlePath = buildPostUrl(post);
   const breadcrumbItems = [
     { name: "Startseite", path: "/" },
-    ...(mainCategory ? [{ name: mainCategory.name, path: `/${params.kategorie}` }] : []),
-    ...(category ? [{ name: category.name, path: `/${params.kategorie}/${params.sub}` }] : []),
+    ...(mainCategory ? [{ name: mainCategory.name, path: `/${main}` }] : []),
+    ...(category ? [{ name: category.name, path: `/${main}/${sub}` }] : []),
     { name: post.title, path: articlePath },
   ];
 
@@ -113,7 +118,7 @@ export default async function BeitragPage(props: {
         url: absoluteUrl(articlePath),
         image: post.featuredImage?.node?.sourceUrl,
         datePublished: post.date,
-        dateModified: post.date,
+        dateModified: post.modified || post.date,
         authorName: post.author?.node?.name,
         section: mainCategory?.name,
       })} />
@@ -124,7 +129,7 @@ export default async function BeitragPage(props: {
       excerpt={post.excerpt}
       featuredImage={post.featuredImage?.node}
       category={category}
-      mainCategory={params.kategorie}
+      mainCategory={main}
       mainCategoryName={mainCategory?.name}
       content={post.content}
       contentTableOfContents={!!post.content}

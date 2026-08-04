@@ -1,8 +1,8 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
-import { MAIN_CATEGORY_SLUGS } from "@/lib/categories";
-import { buildPostUrl } from "@/lib/urls";
+import { MAIN_CATEGORY_SLUGS, isMainCategory } from "@/lib/categories";
+import { buildPostUrl, buildSubcategoryUrl } from "@/lib/urls";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
@@ -24,19 +24,7 @@ export async function generateMetadata(
   const params = await props.params;
   const slug = params.kategorie;
 
-  const post = await getPostBySlug(slug).catch(() => null);
-  if (post) {
-    return buildMetadata({
-      title: `${post.title} – ${SITE_NAME}`,
-      description: stripHtml(post.excerpt),
-      path: `/${slug}`,
-      image: post.featuredImage?.node?.sourceUrl,
-      type: "article",
-      publishedTime: post.date,
-      modifiedTime: post.date,
-    });
-  }
-
+  // Post-Slugs redirectet die Page permanent auf den Kanon → keine Post-Metadata nötig.
   const anbieter = await getAnbieterBySlug(slug).catch(() => null);
   if (anbieter) {
     return buildMetadata({
@@ -105,12 +93,22 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   }
 
   // 3. Sonst: Subkategorie-Seite mit Post-Liste
+  const category = await getCategoryBySlug(params.kategorie).catch(() => null);
+
+  // Subkategorie mit Main-Parent hat ihren Kanon unter /parent/sub → 308 statt
+  // Root-Duplikat (/geldanlagen vs. /finanzen/geldanlagen). isMainCategory-Guard wegen
+  // WP-Quirk: Hauptkategorien hängen unter "ratgeber" und dürfen hier nicht wegredirecten
+  // (werden ohnehin von Schritt 2 abgefangen). Muss VOR dem posts-Check stehen, damit
+  // auch eine leere Subkategorie 308 statt 404 liefert.
+  if (category?.parent?.slug && isMainCategory(category.parent.slug)) {
+    permanentRedirect(buildSubcategoryUrl(category.parent.slug, params.kategorie));
+  }
+
   const posts = await getPostsByCategory(params.kategorie).catch(() => []);
   if (!posts || posts.length === 0) {
     notFound();
   }
 
-  const category = await getCategoryBySlug(params.kategorie).catch(() => null);
   return (
     <CategoryLayout
       title={category?.name || params.kategorie}

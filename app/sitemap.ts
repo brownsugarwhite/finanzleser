@@ -43,11 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     safe(getNavItems, []),
   ]);
 
-  const now = new Date();
-
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
     url: `${SITE_URL}${r.path}`,
-    lastModified: now,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
   }));
@@ -55,13 +52,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categoryEntries: MetadataRoute.Sitemap = navItems.flatMap((cat) => [
     {
       url: `${SITE_URL}${buildCategoryUrl(cat.href.replace(/^\//, ""))}`,
-      lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     ...cat.submenu.map((sub) => ({
       url: `${SITE_URL}${buildSubcategoryUrl(cat.href.replace(/^\//, ""), sub.href.split("/").pop() || "")}`,
-      lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
@@ -69,42 +64,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${SITE_URL}${buildPostUrl(post)}`,
-    lastModified: post.date ? new Date(post.date) : now,
+    // Echtes Änderungsdatum aus WP — ein täglich rotierender Build-Zeitstempel machte
+    // lastmod für Google wertlos. Ohne Datum lieber gar kein lastmod als ein falsches.
+    ...(post.modified || post.date ? { lastModified: new Date((post.modified || post.date) as string) } : {}),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   const rechnerEntries: MetadataRoute.Sitemap = rechner.map((r) => ({
     url: `${SITE_URL}${buildRechnerUrl(r.slug)}`,
-    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   const vergleichEntries: MetadataRoute.Sitemap = vergleiche.map((v) => ({
     url: `${SITE_URL}${buildVergleichUrl(v.slug)}`,
-    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
   const checklistenEntries: MetadataRoute.Sitemap = checklisten.map((c) => ({
     url: `${SITE_URL}${buildChecklisteUrl(c.slug)}`,
-    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
   const anbieterEntries: MetadataRoute.Sitemap = anbieter.map((a) => ({
     url: `${SITE_URL}${buildAnbieterUrl(a.slug)}`,
-    lastModified: now,
     changeFrequency: "yearly" as const,
     priority: 0.4,
   }));
 
   const dokumentEntries: MetadataRoute.Sitemap = dokumente.map((d) => ({
     url: `${SITE_URL}${buildDokumentUrl(d.slug)}`,
-    lastModified: now,
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));

@@ -1,26 +1,22 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getPostBySlug, getPostsByCategory, getCategoryBySlug, getNavItems } from "@/lib/wordpress";
-import ArticleLayout from "@/components/layout/ArticleLayout";
-import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
-import { extractArticleHeader } from "@/lib/articleHeader";
-import { getRedakteurForSlug } from "@/lib/redakteure";
-
-// Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.
-function redakteurAuthor(slug: string, date?: string) {
-  const r = getRedakteurForSlug(slug);
-  return {
-    name: r.name,
-    role: r.role,
-    date: date ? new Date(date).toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }) : undefined,
-    imageUrl: r.imageUrl,
-    colorVariant: r.colorVariant,
-  };
-}
+import { isMainCategory } from "@/lib/categories";
+import { buildSubcategoryUrl, buildPostUrl } from "@/lib/urls";
 
 export const revalidate = 86400;
+
+// Kanonischer Pfad einer Kategorie-Landingpage. Von generateMetadata UND Page genutzt,
+// damit Canonical-Tag und Redirect-Ziel garantiert identisch sind.
+// WP-Quirk: die 4 Hauptkategorien hängen in WP unter "ratgeber" → per Slug erkennen,
+// nicht per parent, sonst würde /ratgeber/finanzen zum Kanon erklärt.
+function canonicalCategoryPath(subSlug: string, parentSlug?: string | null): string {
+  if (isMainCategory(subSlug)) return `/${subSlug}`;
+  if (parentSlug) return buildSubcategoryUrl(parentSlug, subSlug);
+  return `/${subSlug}`; // parentlose Kategorie → Root-Ebene
+}
 
 // Unterkategorie-Seiten beim Build vorrendern (SSG) statt dynamisch pro Request —
 // die Kombinationen kommen aus der Nav-Struktur. Legacy-Post-Slugs unter einer
@@ -50,22 +46,12 @@ export async function generateMetadata(
     return buildMetadata({
       title: `${cat.name} – ${SITE_NAME}`,
       description: stripHtml(cat.description) || `Ratgeber zu ${cat.name}.`,
-      path: `/${params.kategorie}/${params.sub}`,
+      // Canonical aus den echten Kategorie-Daten, nie aus der angefragten URL.
+      path: canonicalCategoryPath(params.sub, cat.parent?.slug),
       image: cat.image,
     });
   }
-  const post = await getPostBySlug(params.sub).catch(() => null);
-  if (post) {
-    const header = extractArticleHeader(post.content);
-    return buildMetadata({
-      title: `${post.title} – ${SITE_NAME}`,
-      description: stripHtml(header?.description || post.excerpt),
-      path: `/${params.kategorie}/${params.sub}`,
-      image: post.featuredImage?.node?.sourceUrl,
-      type: "article",
-      publishedTime: post.date,
-    });
-  }
+  // Post-Slugs unter /x/slug redirectet die Page permanent → Metadata wird verworfen.
   return { title: `${params.sub} – ${SITE_NAME}` };
 }
 
@@ -80,6 +66,15 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
     getCategoryBySlug(params.sub).catch(() => null),
   ]);
   if (categoryPosts.length > 0) {
+    // Nicht-kanonischer Pfad (/quatsch/geldanlagen, /x/finanzen) → 308 auf den Kanon
+    // statt 200-Duplikat. Nur mit verifizierten Kategorie-Daten redirecten — bei
+    // transientem Fetch-Fail lieber rendern als falsch umleiten.
+    if (category) {
+      const canonical = canonicalCategoryPath(params.sub, category.parent?.slug);
+      if (canonical !== `/${params.kategorie}/${params.sub}`) {
+        permanentRedirect(canonical);
+      }
+    }
     const mainCategory = category?.parent ? category.parent : { name: params.kategorie, slug: params.kategorie };
     return (
       <CategoryLayout
@@ -95,13 +90,12 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
     );
   }
 
-  // 2. Sonst: prüfen ob es ein Post-Slug ist
+  // 2. Sonst: Post-Slug unter zwei Segmenten (/x/slug) → 308 auf die kanonische
+  // dreistufige URL statt degradiertem Duplikat-Render (früher: ArticleLayout ohne
+  // featuredImage/JSON-LD mit Self-Canonical auf den Fake-Pfad).
   const post = await getPostBySlug(params.sub).catch(() => null);
   if (post) {
-    const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
-    return (
-      <ArticleLayout title={post.title} subtitle={post.beitragFelder?.beitragUntertitel} content={post.content} toolData={toolData} author={redakteurAuthor(post.slug || params.sub, post.date)} />
-    );
+    permanentRedirect(buildPostUrl(post));
   }
 
   // 3. Nichts gefunden

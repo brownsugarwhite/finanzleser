@@ -95,6 +95,7 @@ async function _fetchAllPosts(): Promise<Post[]> {
           title
           slug
           date
+          modified
           excerpt
           featuredImage {
             node {
@@ -590,7 +591,7 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
       posts(first: 25, after: $after) {
         pageInfo { hasNextPage endCursor }
         nodes {
-          id title slug date content excerpt
+          id title slug date modified content excerpt
           featuredImage { node { sourceUrl altText } }
           author { node { id name firstName lastName description avatar { url } } }
           categories { nodes { name slug } }
@@ -708,6 +709,7 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
           title
           slug
           date
+          modified
           content
           excerpt
           featuredImage {

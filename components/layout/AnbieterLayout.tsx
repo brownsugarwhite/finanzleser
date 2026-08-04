@@ -59,22 +59,26 @@ export default async function AnbieterLayout({ title, content }: AnbieterLayoutP
             <>
               <Breadcrumb items={breadcrumbItems} />
 
-              {kicker && (
-                <span
-                  className="mb-2 inline-block"
-                  style={{
-                    color: "var(--color-brand-secondary)",
-                    fontFamily: "Merriweather, serif",
-                    fontSize: "23px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {kicker}
+              {/* Kicker INNERHALB der h1: die Seiten ranken historisch auf „<Firma> Kontakt" —
+                  DOM-Reihenfolge Name→Kontakt, visuell via order-first Kicker oben (unverändert). */}
+              <h1 className="mb-6 flex flex-col">
+                <span className="font-bold" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
+                  {name}
                 </span>
-              )}
-
-              <h1 className="font-bold mb-6" style={{ fontSize: "42px", lineHeight: "1.3em" }}>
-                {name}
+                {kicker && (
+                  <span
+                    className="order-first mb-2"
+                    style={{
+                      color: "var(--color-brand-secondary)",
+                      fontFamily: "Merriweather, serif",
+                      fontSize: "23px",
+                      fontStyle: "italic",
+                      fontWeight: "normal",
+                    }}
+                  >
+                    {kicker}
+                  </span>
+                )}
               </h1>
             </>
           }
