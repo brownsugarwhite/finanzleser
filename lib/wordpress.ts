@@ -300,10 +300,14 @@ function relevanceScore(post: Post, query: string): number {
 
 function rankByRelevance(posts: Post[], query: string): Post[] {
   if (!query.trim() || posts.length <= 1) return posts;
-  return posts
+  const scored = posts
     .map((post) => ({ post, score: relevanceScore(post, query) }))
-    .sort((a, b) => b.score - a.score)
-    .map((x) => x.post);
+    .sort((a, b) => b.score - a.score);
+  // Relevanz-Cutoff: WP-Volltextsuche liefert jede Fließtext-Erwähnung als Treffer
+  // („zu viele Ergebnisse"). Nur Posts mit echtem Titel-/Excerpt-Signal behalten;
+  // fällt damit alles weg, die besten 10 zeigen statt gar nichts (Fail-open).
+  const relevant = scored.filter((x) => x.score >= 6);
+  return (relevant.length > 0 ? relevant : scored.slice(0, 10)).map((x) => x.post);
 }
 
 // ─────────────────────────────────────────────

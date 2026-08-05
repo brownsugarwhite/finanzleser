@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { isMainCategory } from "@/lib/categories";
 import type { Post } from "@/lib/types";
-import { startMorphNavigation, type MorphItemSource } from "@/lib/morphTransition";
+import { startMorphNavigation, isPlainLeftClick, type MorphItemSource } from "@/lib/morphTransition";
 import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from "@/lib/morphCapture";
 import { getFinanztoolsActiveCard, setFinanztoolsActiveCard, isBackNavigation } from "@/lib/landingState";
 import ToolDots from "@/components/ui/ToolDots";
@@ -1097,6 +1097,25 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
               const category = post.categories?.nodes?.find((cat) => !isMainCategory(cat.slug)) || post.categories?.nodes?.[0];
               const postLink = `/${mainCategory?.slug || "beitraege"}/${category?.slug || "allgemein"}/${post.slug}`;
 
+              // Card-Morph — vom Karten-Klick UND vom „Ratgeber lesen"-Link genutzt.
+              const morphToPost = (item: HTMLElement) => {
+                const scale = getElementScale(item);
+                const thumbEl = item.querySelector<HTMLElement>(".latest-post-thumb");
+                const boldEl = item.querySelector<HTMLElement>(".latest-post-title");
+                const italicEl = item.querySelector<HTMLElement>(".latest-post-category");
+                const items: MorphItemSource[] = [];
+                // Vorschaubild → article-visual (nur wenn Thumbnail vorhanden/aufgeklappt).
+                const visual = captureVisualItem(thumbEl, post.featuredImage?.node.sourceUrl);
+                if (visual) items.push(visual);
+                // Untertitel (fett) → article-subtitle; post.title (Kategorie-Zeile) → article-title (pink).
+                const bold = captureTextItem(boldEl, "bold", scale);
+                if (bold) items.push(bold);
+                const italic = captureTextItem(italicEl, "italic", scale);
+                if (italic) items.push(italic);
+                hideSourceEls(thumbEl, boldEl, italicEl);
+                startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
+              };
+
               return (
                 <div
                   key={post.id}
@@ -1105,23 +1124,8 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                   style={{ display: "flex", alignItems: "center", cursor: "pointer", ["--i" as string]: i } as CSSProperties}
                   onMouseEnter={() => { try { router.prefetch(postLink); } catch { /* noop */ } }}
                   onClick={(e) => {
-                    if ((e.target as HTMLElement).closest("a")) return; // „Ratgeber lesen" navigiert selbst
-                    const item = e.currentTarget as HTMLElement;
-                    const scale = getElementScale(item);
-                    const thumbEl = item.querySelector<HTMLElement>(".latest-post-thumb");
-                    const boldEl = item.querySelector<HTMLElement>(".latest-post-title");
-                    const italicEl = item.querySelector<HTMLElement>(".latest-post-category");
-                    const items: MorphItemSource[] = [];
-                    // Vorschaubild → article-visual (nur wenn Thumbnail vorhanden/aufgeklappt).
-                    const visual = captureVisualItem(thumbEl, post.featuredImage?.node.sourceUrl);
-                    if (visual) items.push(visual);
-                    // Untertitel (fett) → article-subtitle; post.title (Kategorie-Zeile) → article-title (pink).
-                    const bold = captureTextItem(boldEl, "bold", scale);
-                    if (bold) items.push(bold);
-                    const italic = captureTextItem(italicEl, "italic", scale);
-                    if (italic) items.push(italic);
-                    hideSourceEls(thumbEl, boldEl, italicEl);
-                    startMorphNavigation({ href: postLink, items }, (h) => router.push(h));
+                    if ((e.target as HTMLElement).closest("a")) return; // Link behandelt sich selbst (inkl. Modifier-Klicks)
+                    morphToPost(e.currentTarget as HTMLElement);
                   }}
                 >
                   {post.featuredImage?.node.sourceUrl && (
@@ -1162,8 +1166,17 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                       <Link
                         href={postLink}
                         className="article-read-link"
+                        data-no-transition
                         style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Gleicher Morph wie der Karten-Klick; Modifier-Klicks bleiben nativ.
+                          if (isPlainLeftClick(e)) {
+                            e.preventDefault();
+                            const item = (e.currentTarget as HTMLElement).closest("[data-morph-card]");
+                            if (item) morphToPost(item as HTMLElement);
+                          }
+                        }}
                       >
                         <span style={{
                           fontFamily: "var(--font-body)",

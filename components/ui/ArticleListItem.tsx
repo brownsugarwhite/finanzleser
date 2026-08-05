@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import InlineSVG from '@/components/ui/InlineSVG';
 import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
-import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { startMorphNavigation, isPlainLeftClick, type MorphItemSource } from '@/lib/morphTransition';
 import { captureTextItem, captureVisualItem, hideSourceEls } from '@/lib/morphCapture';
 import { cleanDescription } from '@/lib/content-utils';
 
@@ -130,7 +130,16 @@ export default function ArticleListItem({ post, href, hero = false }: ArticleLis
 
         {/* Ratgeber lesen */}
         <div style={{ marginTop: 14, display: 'flex', alignItems: 'center' }}>
-          <Link href={href} className="article-read-link">
+          <Link
+            href={href}
+            className="article-read-link"
+            data-no-transition
+            onClick={(e) => {
+              // „Ratgeber lesen" nutzt denselben Card-Morph wie der Karten-Klick;
+              // Modifier-/Mittelklicks bleiben native Navigation übers href.
+              if (isPlainLeftClick(e)) { e.preventDefault(); e.stopPropagation(); startMorph(); }
+            }}
+          >
             <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap' }}>
               Ratgeber lesen
             </span>

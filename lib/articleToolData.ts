@@ -32,7 +32,7 @@ export const EMPTY_TOOL_DATA: ArticleToolData = { titles: {}, checklisten: {}, d
 
 // Gleiches Block-Muster wie in components/sections/ArticleContent.tsx (Slug-Tools).
 const BLOCK_RE =
-  /<div\s+data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->/g;
+  /<div\s+[^>]*?data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*>\s*<\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->/g;
 
 interface ToolRefs {
   rechner: string[];

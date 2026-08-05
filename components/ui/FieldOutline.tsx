@@ -28,9 +28,14 @@ export default function FieldOutline({ radius = 19, gap = 4 }: { radius?: number
     if (!parent) return;
     const measure = () => {
       const r = parent.getBoundingClientRect();
+      // getBoundingClientRect liefert TRANSFORM-SKALIERTE Maße — das SVG rendert aber
+      // im lokalen (unskalierten) Raum des Parents. Unter einem skalierten Vorfahren
+      // (z. B. ContentScaler auf der Landing → Newsletter-Pill) saß die Outline sonst
+      // verkleinert oben-links. Kumulierte Skalierung über offsetWidth herausrechnen.
+      const scale = parent.offsetWidth > 0 ? r.width / parent.offsetWidth : 1;
       // KEIN Runden → keine 0.5px-Asymmetrie. Die SVG-Box selbst wird per CSS-Insets
       // (-gap rundum) exakt aufgespannt; w/h dienen nur der viewBox (Eckenradius).
-      setBox({ w: r.width + gap * 2, h: r.height + gap * 2 });
+      setBox({ w: r.width / scale + gap * 2, h: r.height / scale + gap * 2 });
     };
     measure();
     const ro = new ResizeObserver(measure);

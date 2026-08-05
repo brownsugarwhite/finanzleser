@@ -181,7 +181,10 @@ function parseContent(html: string): ContentPart[] {
   // Gamification (3. Alternative) ist – anders als die Slug-Tools – NICHT leer: der Block enthält die
   // Felder inline. Voraussetzung: keine verschachtelten <div> im Block (vom Studio so erzeugt), damit
   // [\s\S]*? bis zum ersten </div> korrekt greift.
-  const blockPattern = /<div\s+data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*><\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
+  // WICHTIG: data-Attribute dürfen NICHT als erstes Attribut vorausgesetzt werden —
+  // der Gutenberg-Editor schiebt beim erneuten Speichern class/style davor (so brachen
+  // die Gamification-Felder in „buergergeld"). Daher überall [^>]*? vor dem Attribut.
+  const blockPattern = /<div\s+[^>]*?data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*>\s*<\/div>|<!-- wp:finanzleser\/(vergleich) \{"slug":"([^"]+)"\} \/-->|<div\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\s\S]*?)<\/div>/g;
 
   let lastIndex = 0;
   let match;
@@ -197,7 +200,8 @@ function parseContent(html: string): ContentPart[] {
     if (gamType) {
       // Gamification-Block: Felder aus den data-gam-field-Absätzen extrahieren (reiner Text)
       const fields: Record<string, string> = {};
-      const fieldPattern = /<p\s+data-gam-field="([^"]+)"[^>]*>([\s\S]*?)<\/p>/g;
+      // Attributreihenfolge-tolerant: WP speichert teils <p style="…" data-gam-field="…">.
+      const fieldPattern = /<p\b[^>]*?\bdata-gam-field="([^"]+)"[^>]*>([\s\S]*?)<\/p>/g;
       let fieldMatch;
       while ((fieldMatch = fieldPattern.exec(match[6])) !== null) {
         fields[fieldMatch[1]] = fieldMatch[2].replace(/<[^>]+>/g, "").trim();

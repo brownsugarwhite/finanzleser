@@ -44,10 +44,11 @@ function firstSentence(s: string): string {
 
 function scorer(query: string) {
   const tokens = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  return (hay: string) => {
-    const h = hay.toLowerCase();
-    return tokens.reduce((n, t) => n + (h.includes(t) ? 1 : 0), 0);
-  };
+  // Wortanfang-Match statt reinem Substring: „rente" trifft „Rentenversicherung",
+  // aber nicht mehr „Elternrente" mitten im Wort (zu viele falsche Treffer).
+  // \p{L}-basiert, weil JS-\b an Umlauten (ä/ö/ü) versagt.
+  const res = tokens.map((t) => new RegExp(`(?:^|[^\\p{L}])${t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "iu"));
+  return (hay: string) => res.reduce((n, re) => n + (re.test(hay) ? 1 : 0), 0);
 }
 
 /** Volltext-Match je Tool-Typ (Top 3) — wie FinanztoolGrid, aber suchgetrieben. */

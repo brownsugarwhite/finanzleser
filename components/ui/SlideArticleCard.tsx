@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
 import { isMainCategory } from '@/lib/categories';
-import { startMorphNavigation, type MorphItemSource } from '@/lib/morphTransition';
+import { startMorphNavigation, isPlainLeftClick, type MorphItemSource } from '@/lib/morphTransition';
 import { captureTextItem, captureVisualItem, hideSourceEls, getElementScale } from '@/lib/morphCapture';
 import { TOOL_DOT_COLORS, TOOL_LABEL } from '@/components/ui/ToolDots';
 
@@ -291,7 +291,15 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
           alignItems: 'center',
           flexShrink: 0,
         }}>
-        <Link href={postLink} className="article-read-link">
+        <Link
+          href={postLink}
+          className="article-read-link"
+            data-no-transition
+          onClick={(e) => {
+            // Gleicher Morph wie der Card-Klick; Modifier-Klicks bleiben nativ.
+            if (isPlainLeftClick(e)) { e.preventDefault(); e.stopPropagation(); startMorph(); }
+          }}
+        >
           <span style={{
             fontFamily: 'var(--font-body)',
             fontSize: '14px',

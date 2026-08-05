@@ -27,6 +27,15 @@ import {
 } from "@/lib/pageTransition";
 
 export type MorphKind = "visual" | "bold" | "italic";
+
+/**
+ * Nur einfacher Linksklick ohne Modifier — dann darf ein Link-Klick abgefangen und
+ * durch den Card-Morph ersetzt werden. Cmd/Ctrl/Shift/Mittelklick (neuer Tab/Fenster)
+ * bleiben native Browser-Navigation über das href.
+ */
+export function isPlainLeftClick(e: { button?: number; metaKey: boolean; ctrlKey: boolean; shiftKey: boolean; altKey: boolean }): boolean {
+  return (e.button ?? 0) === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+}
 export type MorphPhase = "idle" | "exiting" | "morphing" | "settling";
 
 export interface MorphRect {
