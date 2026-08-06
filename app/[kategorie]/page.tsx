@@ -1,8 +1,8 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug, getRechnerBySlug, getChecklisteBySlug, getAllVergleiche } from "@/lib/wordpress";
 import { MAIN_CATEGORY_SLUGS, isMainCategory } from "@/lib/categories";
-import { buildPostUrl, buildSubcategoryUrl } from "@/lib/urls";
+import { buildPostUrl, buildSubcategoryUrl, buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl } from "@/lib/urls";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
 import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
@@ -106,6 +106,18 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
 
   const posts = await getPostsByCategory(params.kategorie).catch(() => []);
   if (!posts || posts.length === 0) {
+    // 4. Letzte Stufe vor dem 404: Legacy-Flach-URL eines FINANZTOOLS (alte Beiträge,
+    //    die zu Rechnern/Checklisten/Vergleichen wurden — z. B. /abfindung, /zinseszins).
+    //    Diese Slugs fehlen in den generierten Redirects; generisch auflösen statt 74
+    //    Einzel-Redirects pflegen. Läuft nur, wenn sonst nichts matcht (echte 404-Pfade).
+    const rechner = await getRechnerBySlug(params.kategorie).catch(() => null);
+    if (rechner) permanentRedirect(buildRechnerUrl(rechner.slug));
+    const checkliste = await getChecklisteBySlug(params.kategorie).catch(() => null);
+    if (checkliste) permanentRedirect(buildChecklisteUrl(checkliste.slug));
+    const vergleiche = await getAllVergleiche().catch(() => []);
+    if (vergleiche.some((v) => v.slug === params.kategorie)) {
+      permanentRedirect(buildVergleichUrl(params.kategorie));
+    }
     notFound();
   }
 
