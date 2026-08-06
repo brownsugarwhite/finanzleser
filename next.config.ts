@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import { legacyRedirects } from "./lib/redirects.generated";
+import { manualRedirects } from "./lib/redirects.manual";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -76,6 +77,9 @@ const nextConfig: NextConfig = {
       // korrekte lowercase-URL und redirectet sie auf sich selbst = Endlos-Loop (308×∞).
       // Der CleverReach-DOI-Link ist auf lowercase umgestellt; kapitalisierte Alt-Links
       // müssten via Middleware (pathname !== toLowerCase) behandelt werden, nicht hier.
+      // Manuell kuratierte Redirects (GSC-Arbeitsliste 2026-08-06) — VOR den generierten,
+      // damit sie deren ungenaue Übersichts-Ziele überschreiben (erster Treffer gewinnt).
+      ...manualRedirects,
       // Auto-generierte Legacy-Flach-URL-Redirects (~642) für konsolidierte/entfallene
       // Beiträge & Tools. Quelle: scripts/generate-legacy-redirects.mjs → lib/redirects.generated.ts.
       // Review: scripts/output/legacy-redirects.review.txt (medium/low confidence prüfen).

@@ -50,6 +50,14 @@ export async function generateMetadata(
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
   const params = await props.params;
 
+  // 0. Groß-/Kleinschreibung normalisieren (/Datenschutz, /AGB, alte Mailing-Links):
+  //    Großbuchstaben-Pfade matchen die statischen lowercase-Routen nicht und landen
+  //    hier → 308 auf lowercase. NICHT über next.config redirects() lösbar (matcht
+  //    case-INSENSITIV → /datenschutz→/datenschutz-Loop, siehe Kommentar dort).
+  if (params.kategorie !== params.kategorie.toLowerCase()) {
+    permanentRedirect(`/${params.kategorie.toLowerCase()}`);
+  }
+
   // 1. Legacy-Flach-URL eines Beitrags (/slug) → 301/308 auf die kanonische verschachtelte
   //    URL (/main/sub/slug). Direktes Rendern hier lieferte eine degradierte Seite (ohne
   //    featuredImage/Visual, abweichendes TOC-Verhalten) und erzeugte Duplicate Content.
