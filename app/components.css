@@ -3139,6 +3139,28 @@ h2.faq-heading {
   z-index: 1;
 }
 
+/* Echte Ads (data-live via AdSenseUnit): Badge nur auf Platzhaltern, graue
+   Fläche der fix dimensionierten Container weg. Label-Klasse bewusst neutral
+   benannt (pg-note) — Adblocker-Regel aus 042b9a0. */
+[data-slot-format][data-live]::before {
+  content: none;
+}
+[data-live].article-side-inline,
+[data-live].article-side-rail-box,
+[data-live].page-shell-rail-box {
+  background: none;
+}
+.pg-note {
+  display: block;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
 .article-side-rail {
   position: absolute;
   top: 18px; /* bündig mit dem Leaderboard (margin-top 18px) */
