@@ -5,6 +5,7 @@ import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
 import { stripHtml } from "./seo";
+import { ADSENSE_ENABLED, ADSENSE_TEST } from "./ads";
 
 export interface LatestTool {
   type: "rechner" | "checkliste" | "vergleich";
@@ -1877,16 +1878,41 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
   },
 };
 
+// Staging-/Test-Builds: alle Werbepositionen erzwingen, OHNE die WP-Schalter
+// anzufassen. WICHTIG: Es gibt nur EIN WordPress (staging.finanzleser.de) — es
+// ist zugleich das produktive CMS für www.finanzleser.de. Die Schalter dort zu
+// aktivieren würde sofort Platzhalter auf Live zeigen. Der Override greift nur
+// bei ADSENSE_ENABLED && ADSENSE_TEST (= Staging/Previews/lokal, nie Production)
+// und fliegt mit dem Live-Go-Commit wieder raus — ab dann gelten die WP-Schalter.
+function forceAllAdsOn(settings: SiteSettings): SiteSettings {
+  if (!(ADSENSE_ENABLED && ADSENSE_TEST)) return settings;
+  const on = { top: true, rails: true, mid: true };
+  return {
+    ...settings,
+    article_ads: { ...on },
+    ads: {
+      article: { ...on },
+      rechner: { top: true, rails: true },
+      vergleich: { top: true, rails: true },
+      checkliste: { top: true, rails: true },
+      anbieter: { ...on },
+      kategorie: { top: true, rails: true },
+      suche: { top: true, rails: true },
+      dokumente: { top: true, rails: true },
+    },
+  };
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   const wpUrl = process.env.WORDPRESS_API_URL;
-  if (!wpUrl) return SITE_SETTINGS_FALLBACK;
+  if (!wpUrl) return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
 
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
       next: { revalidate: 3600 },
     });
-    if (!res.ok) return SITE_SETTINGS_FALLBACK;
+    if (!res.ok) return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
     const data = (await res.json()) as Partial<SiteSettings>;
     const top_banner = { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) };
     const article_ads = { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) };
@@ -1904,10 +1930,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       suche: { ...fb.suche, ...(adsData.suche ?? {}) },
       dokumente: { ...fb.dokumente, ...(adsData.dokumente ?? {}) },
     };
-    return { top_banner, article_ads, ads };
+    return forceAllAdsOn({ top_banner, article_ads, ads });
   } catch (error) {
     console.error("Error fetching site settings from WordPress:", error);
-    return SITE_SETTINGS_FALLBACK;
+    return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
   }
 }
 

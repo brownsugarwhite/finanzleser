@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ADSENSE_ENABLED } from "@/lib/ads";
+import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 /**
  * Sticky Werbe-Rails links + rechts neben dem zentrierten Content.
@@ -67,12 +69,16 @@ export default function PageAdRails({
     <div ref={ref} style={{ display: "contents" }}>
       <div className="page-shell-rail page-shell-rail-left" aria-hidden style={style}>
         <div className="page-shell-rail-sticky">
-          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary" />
+          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary">
+            {ADSENSE_ENABLED && <AdSenseUnit format="halfpage" fullWidth bare />}
+          </div>
         </div>
       </div>
       <div className="page-shell-rail page-shell-rail-right" aria-hidden style={style}>
         <div className="page-shell-rail-sticky">
-          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary" />
+          <div className="page-shell-rail-box" data-slot-format="rail" role="complementary">
+            {ADSENSE_ENABLED && <AdSenseUnit format="halfpage" fullWidth bare />}
+          </div>
         </div>
       </div>
     </div>

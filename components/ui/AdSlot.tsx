@@ -1,31 +1,19 @@
-import { cn } from "@/lib/cn";
+import { ADSENSE_ENABLED, type AdFormat } from "@/lib/ads";
+import AdPlaceholder from "@/components/ads/AdPlaceholder";
+import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 /**
- * Werbe-Platzhalter. Rendert vorerst nur eine graue Fläche in IAB-Standardgröße
- * (kein border-radius). Hier wird später das echte Ad-Markup eingesetzt — entweder
- * ein Drittanbieter-Script-Slot oder Eigenwerbung für die finanzleser-Tools.
+ * Werbe-Slot — zentrale Weiche für alle Positionen (Artikel-Top, Tool-Seiten,
+ * Kategorien, Anbieter, Suche, Dokumente). Ob eine Position überhaupt rendert,
+ * entscheiden weiterhin die WP-Site-Settings-Booleans in den Layouts.
+ *
+ * - Ohne NEXT_PUBLIC_ADSENSE=1: grauer Platzhalter wie bisher (server-rendered).
+ * - Mit Flag: echte AdSense-Unit (consent-gated über "marketing", siehe AdSenseUnit).
  *
  * Formate (IAB 2026): billboard 970×250, leaderboard 728×90, skyscraper 160×600,
  * halfpage 300×600, rectangle 300×250, mobile 320×100.
  */
-export type AdFormat =
-  | "billboard"
-  | "superleaderboard"
-  | "leaderboard"
-  | "skyscraper"
-  | "halfpage"
-  | "rectangle"
-  | "mobile";
-
-const AD_SIZES: Record<AdFormat, { w: number; h: number }> = {
-  billboard: { w: 970, h: 250 },
-  superleaderboard: { w: 970, h: 90 },
-  leaderboard: { w: 728, h: 90 },
-  skyscraper: { w: 160, h: 600 },
-  halfpage: { w: 300, h: 600 },
-  rectangle: { w: 300, h: 250 },
-  mobile: { w: 320, h: 100 },
-};
+export type { AdFormat };
 
 export default function AdSlot({
   format,
@@ -34,24 +22,11 @@ export default function AdSlot({
 }: {
   format: AdFormat;
   className?: string;
-  /** Streckt den Slot auf 100% der Spaltenbreite (statt fixer IAB-Breite) — Aspect-Ratio bleibt. */
+  /** Streckt den Slot auf 100% der Spaltenbreite (statt fixer IAB-Breite). */
   fullWidth?: boolean;
 }) {
-  const { w, h } = AD_SIZES[format];
-  return (
-    <div
-      className={cn("pg-slot", className)}
-      data-slot-format={format}
-      role="complementary"
-     
-      style={{
-        width: fullWidth ? "100%" : w,
-        maxWidth: "100%",
-        aspectRatio: `${w} / ${h}`,
-        background: "rgba(0, 0, 0, 0.10)",
-        borderRadius: 0,
-        marginInline: "auto",
-      }}
-    />
-  );
+  if (!ADSENSE_ENABLED) {
+    return <AdPlaceholder format={format} className={className} fullWidth={fullWidth} />;
+  }
+  return <AdSenseUnit format={format} className={className} fullWidth={fullWidth} />;
 }
