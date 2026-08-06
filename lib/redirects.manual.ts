@@ -4,6 +4,8 @@
 // Quellen lowercase (Next matcht case-insensitiv); Gross-Varianten wie /Datenschutz
 // loest der Root-Resolver per Lowercase-Redirect (Loop-Falle in redirects()!).
 export const manualRedirects = [
+  { source: "/ruv-versicherung-kuendigen", destination: "/anbieter", permanent: true },
+  { source: "/ovag-versicherung", destination: "/anbieter", permanent: true },
   { source: "/abfindungsrechner", destination: "/finanztools/rechner/abfindung", permanent: true },
   { source: "/about", destination: "/impressum", permanent: true },
   { source: "/allianz-hausratversicherung", destination: "/allianz-versicherung-kontakt", permanent: true },
@@ -22,7 +24,7 @@ export const manualRedirects = [
   { source: "/dokumente-formulare", destination: "/dokumente", permanent: true },
   { source: "/ehegattenunterhaltrechner", destination: "/finanztools/rechner/unterhalt", permanent: true },
   { source: "/festgeld-rechner", destination: "/finanztools/vergleiche/festgeldvergleich", permanent: true },
-  { source: "/finanzvergleich/versicherungsvergleich", destination: "/finanztools/vergleiche", permanent: true },
+  { source: "/finanzvergleich/versicherungsvergleich", destination: "/versicherungen", permanent: true },
   { source: "/foerdermittel-neubau-und-sanierung", destination: "/finanzen/kredite-bauen/kfw-foerderung", permanent: true },
   { source: "/gebaeude-energie-gesetz-geg-2024", destination: "/finanzen/energiekosten", permanent: true },
   { source: "/gehaltsrechner", destination: "/finanztools/rechner/brutto-netto", permanent: true },

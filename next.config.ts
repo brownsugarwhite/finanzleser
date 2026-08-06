@@ -120,9 +120,6 @@ const nextConfig: NextConfig = {
       "/neue-regelungen-ab-juli-2025",
       "/neue-gesetzes-und-pflichtaenderungen-ab-2026",
       "/hochwasserschutz-kann-fuer-europa-kostspielig-werden",
-      // Versicherer ohne Entsprechung im Anbieter-Bestand (R+V, OVAG):
-      "/ruv-versicherung-kuendigen",
-      "/ovag-versicherung",
     ];
     return GONE.map((source) => ({ source, destination: "/api/gone" }));
   },
