@@ -43,6 +43,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     safe(getNavItems, []),
   ]);
 
+  // NIE eine Rumpf-Sitemap ausliefern: Kommt eine Kern-Abfrage trotz Retries leer
+  // zurück (WP-Überlast), soll die Regeneration FEHLSCHLAGEN — Next liefert dann die
+  // letzte gute Sitemap weiter (stale-on-error), statt die halbe Site aus der Sitemap
+  // zu werfen (Vorfall 2026-08-06: 822 → 413 URLs während einer WP-Überlastphase).
+  const kern: Array<[string, number]> = [
+    ["posts", posts.length], ["rechner", rechner.length], ["checklisten", checklisten.length],
+    ["vergleiche", vergleiche.length], ["anbieter", anbieter.length], ["dokumente", dokumente.length],
+    ["navItems", navItems.length],
+  ];
+  const leer = kern.filter(([, n]) => n === 0).map(([name]) => name);
+  if (leer.length > 0) {
+    throw new Error(`[sitemap] Kern-Abfragen leer (${leer.join(", ")}) → Regeneration abgebrochen, letzte gute Sitemap bleibt aktiv`);
+  }
+
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
     url: `${SITE_URL}${r.path}`,
     changeFrequency: r.changeFrequency,
