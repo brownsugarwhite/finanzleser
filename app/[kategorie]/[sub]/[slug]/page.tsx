@@ -11,6 +11,7 @@ import { getRedakteurForSlug } from "@/lib/redakteure";
 import { JsonLd, articleSchema, breadcrumbSchema, faqSchema } from "@/components/seo/JsonLd";
 import { extractFaqPairs } from "@/lib/articleFaq";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
+import { isBotPath } from "@/lib/botPaths";
 
 export const revalidate = 86400;
 
@@ -37,6 +38,8 @@ export async function generateMetadata(
   props: { params: Promise<RouteParams> }
 ): Promise<Metadata> {
   const params = await props.params;
+  // Scanner-Proben nicht gegen WP abfragen (siehe lib/botPaths.ts).
+  if (isBotPath(params.kategorie, params.sub, params.slug)) return { title: SITE_NAME };
   // Yoast-SEO-Meta (von Redakteuren gepflegt) hat Vorrang vor Content-Ableitung.
   const [post, yoast] = await Promise.all([
     // KEIN .catch(() => null) — analog zur Page unten (Zeile 67 ff.). Ein geschluckter
@@ -77,6 +80,12 @@ export default async function BeitragPage(props: {
   params: Promise<RouteParams>;
 }) {
   const params = await props.params;
+
+  // Scanner-Proben früh raus, bevor die WP-Queries laufen (siehe lib/botPaths.ts).
+  if (isBotPath(params.kategorie, params.sub, params.slug)) {
+    notFound();
+  }
+
   // KEIN .catch(() => null): ein transienter Build-Fehler (IONOS) würde sonst zu notFound()
   // = statisch gebackenem 404. So propagiert er → Next wiederholt die Seite. Zur Laufzeit
   // fängt getPostBySlugSingle Fehler intern ab und liefert null (→ echtes 404 nur bei „nicht da").
