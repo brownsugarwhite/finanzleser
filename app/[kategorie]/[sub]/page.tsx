@@ -5,6 +5,7 @@ import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { isMainCategory } from "@/lib/categories";
 import { buildSubcategoryUrl, buildPostUrl } from "@/lib/urls";
+import { isBotPath } from "@/lib/botPaths";
 
 export const revalidate = 86400;
 
@@ -41,6 +42,8 @@ export async function generateMetadata(
   props: { params: Promise<{ kategorie: string; sub: string }> }
 ): Promise<Metadata> {
   const params = await props.params;
+  // Scanner-Proben (/wp-content/plugins …) nicht gegen WP abfragen.
+  if (isBotPath(params.kategorie, params.sub)) return { title: SITE_NAME };
   const cat = await getCategoryBySlug(params.sub).catch(() => null);
   if (cat) {
     return buildMetadata({
@@ -57,6 +60,12 @@ export async function generateMetadata(
 
 export default async function SubkategoriePage(props: { params: Promise<{ kategorie: string; sub: string }> }) {
   const params = await props.params;
+
+  // Scanner-Proben früh raus, bevor die WP-Queries laufen (siehe lib/botPaths.ts).
+  // /wp-content/plugins/foo landet erst hier, nicht in der Root-Route.
+  if (isBotPath(params.kategorie, params.sub)) {
+    notFound();
+  }
 
   // 1. Zuerst prüfen: ist es eine Kategorie-Seite? Posts + Kategorie PARALLEL holen
   // (beide hängen nur an params.sub; getCategoryBySlug ist via React.cache dedupliziert

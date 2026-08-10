@@ -8,6 +8,7 @@ import CategoryLayout from "@/components/layout/CategoryLayout";
 import MainCategoryLayout from "@/components/layout/MainCategoryLayout";
 import type { Post } from "@/lib/types";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
+import { isBotPath } from "@/lib/botPaths";
 
 export const revalidate = 86400;
 
@@ -23,6 +24,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
   const slug = params.kategorie;
+
+  // Scanner-Proben (/wp-login.php, /.env …) gar nicht erst gegen WP abfragen —
+  // generateMetadata kostet sonst allein zwei GraphQL-Roundtrips pro Bot-Hit.
+  if (isBotPath(slug)) return { title: SITE_NAME };
 
   // Post-Slugs redirectet die Page permanent auf den Kanon → keine Post-Metadata nötig.
   const anbieter = await getAnbieterBySlug(slug).catch(() => null);
@@ -56,6 +61,18 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   //    case-INSENSITIV → /datenschutz→/datenschutz-Loop, siehe Kommentar dort).
   if (params.kategorie !== params.kategorie.toLowerCase()) {
     permanentRedirect(`/${params.kategorie.toLowerCase()}`);
+  }
+
+  // 0a. Scanner-Proben früh abfangen — MUSS nach der lowercase-Normalisierung stehen,
+  //     damit /AGB, /Datenschutz & Co. weiterhin ihren 308 bekommen.
+  //     Die Kaskade darunter ist die SEO-Reparatur aus der GSC-Arbeit und macht bis zu
+  //     8 sequentielle GraphQL-Queries. Für /wp-login.php, /.env, /xmlrpc.php lief die
+  //     bisher genauso durch — und weil Non-200 nicht im Durable Cache landet, war jede
+  //     dieser URLs eine eigene teure Invocation.
+  //     Denylist statt Allowlist: siehe lib/botPaths.ts. Getroffene Pfade hätten ohnehin
+  //     404 geliefert, es kann also keine Weiterleitung verloren gehen.
+  if (isBotPath(params.kategorie)) {
+    notFound();
   }
 
   // 1. Legacy-Flach-URL eines Beitrags (/slug) → 301/308 auf die kanonische verschachtelte
