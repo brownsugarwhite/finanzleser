@@ -366,7 +366,7 @@ export default function ArticleClient({
               <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} toolData={toolData} />
               {pageSlug && (
                 <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-                  <PdfPreview slug={pageSlug} />
+                  <PdfPreview slug={pageSlug} initialData={toolData?.beitragPdf} />
                 </ArticleElementWrapper>
               )}
             </>

@@ -9,6 +9,69 @@
 [[plugins]]
   package = "/netlify/plugins/warm-cache"
 
+# 410 Gone auf CDN-Ebene, damit diese URLs KEINE Function kosten.
+#
+# Hintergrund: `app/api/gone` und `app/page/[n]` deklarieren zwar `force-static`, werden
+# aber trotzdem nicht prerendert — Next prerendert Route-Handler nur bei Status 200.
+# Ergebnis: jeder Crawler-Hit auf eine dieser 27 URLs war eine Function-Invocation, und
+# genau diese URLs crawlt Google besonders hartnäckig weiter.
+#
+# Die Next-Routen + rewrites() in next.config.ts BLEIBEN als Fallback bestehen: greift
+# die CDN-Regel wider Erwarten nicht, ist das Verhalten unverändert wie bisher. Es kann
+# also in keinem Fall eine SEO-Regression entstehen (410 deindexiert schneller als 404).
+#
+# Abnahme auf dem Deploy-Preview:
+#   curl -sI https://<preview>/aenderungen-2019 | head -1     → HTTP/2 410
+#   curl -sI https://<preview>/page/7          | head -1      → HTTP/2 410
+[[redirects]]
+  from = "/aenderungen-2019"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/ampel-kabinett-nach-73-tagen-im-amt"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/neue-regelungen-ab-juli-2025"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/neue-gesetzes-und-pflichtaenderungen-ab-2026"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/hochwasserschutz-kann-fuer-europa-kostspielig-werden"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/ruv-versicherung-kuendigen"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/ovag-versicherung"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Alte Blog-Paginierung der Vorgaenger-Seite (/page/1 … /page/19)
+[[redirects]]
+  from = "/page/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
 [build.environment]
   # 22 (LTS): Netlify verlangt für Build-Plugins Node >= 22 — sonst wird das
   # warm-cache-Plugin übersprungen (Post-Deploy-Warming läuft dann nicht).

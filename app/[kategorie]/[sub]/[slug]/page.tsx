@@ -87,7 +87,9 @@ export default async function BeitragPage(props: {
   // Finanztool-Daten serverseitig vorladen (ISR) → Rechner/Checkliste/Dokumente +
   // Tool-Überschriften sofort, ohne Client-Fetch/Layoutshift. Vergleich-Widgets
   // bleiben client-lazy. Fehler → leeres Set, Komponenten fallen auf Client-Fetch zurück.
-  const toolData = await getArticleToolData(post.content).catch(() => EMPTY_TOOL_DATA);
+  // Slug mitgeben, damit auch das Beitrags-PDF vorgeladen wird (sonst feuerte
+  // PdfPreview /api/beitrag-pdf auf jedem Artikel-View). Fallback wie in Zeile 143.
+  const toolData = await getArticleToolData(post.content, post.slug || params.slug).catch(() => EMPTY_TOOL_DATA);
 
   // Kategorien aus den Post-Daten (nach dem Guard identisch mit main/sub der URL).
   const mainCategory = post.categories?.nodes?.find((cat: Category) => isMainCategory(cat.slug));
