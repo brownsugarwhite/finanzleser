@@ -33,7 +33,25 @@ function applyContentHeaderTitle(post: Post & { content?: string }): Post {
   return post;
 }
 
-function getClient(revalidate: number = 3600): GraphQLClient {
+// Einheitliches ISR-Intervall für ALLE WP-Daten (GraphQL + REST).
+//
+// ACHTUNG, hier lag ein stiller Bug: Next nimmt für eine Route das MINIMUM aus dem
+// Segment-`revalidate` und allen `fetch(..., { next: { revalidate } })` darin. Die drei
+// Layout-Fetches (getNavItems/getSiteSettings/getMegamenuPreload in app/layout.tsx) laufen
+// auf JEDER Seite — solange die auf 3600 standen, zog das jede Route auf 3600 runter,
+// obwohl die Segmente längst `export const revalidate = 86400` deklarierten. Ergebnis im
+// Build: 685 von 689 vorgerenderten Routen mit initialRevalidateSeconds 3600 statt 86400,
+// also bis zu 24× mehr ISR-Regenerationen (= Netlify-Function-Invocations) als gewollt.
+//
+// Aktualität leidet dadurch nicht: der Save-Webhook (/api/revalidate) bustet + rewärmt die
+// betroffenen Pfade sofort. Das lange Intervall ist nur das Sicherheitsnetz.
+//
+// Gegenprobe nach einem Build:
+//   node -e "const r=require('./.next/prerender-manifest.json').routes; \
+//     console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"
+export const CONTENT_REVALIDATE = 86400;
+
+function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
   if (!endpoint) throw new Error("WORDPRESS_API_URL ist nicht gesetzt");
   const client = new GraphQLClient(endpoint, {
@@ -1817,7 +1835,7 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
   try {
     // REST API: Holt ACF Options via custom Endpoint
     const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: CONTENT_REVALIDATE },
     });
     if (!response.ok) return null;
 
@@ -1910,7 +1928,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: CONTENT_REVALIDATE },
     });
     if (!res.ok) return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
     const data = (await res.json()) as Partial<SiteSettings>;
@@ -1957,7 +1975,7 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
   try {
     const response = await fetch(
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: CONTENT_REVALIDATE } },
     );
     // 404 = Seite existiert wirklich nicht → null (echtes notFound). Andere Fehler
     // (5xx/Timeout unter IONOS-Last) → werfen, damit kein leeres 404 gecached wird
@@ -2002,7 +2020,7 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
   try {
     const res = await fetch(
       `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: CONTENT_REVALIDATE } },
     );
     // Meta ist optional → bei Fehler NICHT werfen (sonst bräche der Metadata-Build),
     // sondern null zurück und Frontend nutzt seinen Fallback.

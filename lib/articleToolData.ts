@@ -1,5 +1,5 @@
 import "server-only";
-import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs } from "@/lib/wordpress";
+import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs, CONTENT_REVALIDATE } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { stripHtml } from "@/lib/seo";
 import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
@@ -70,8 +70,9 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
   try {
     // WICHTIG: revalidate setzen — ein ungecachtes fetch() ist in Next 15 `no-store`
     // und macht JEDEN Artikel mit Vergleich dynamisch (kein SSG → on-demand-Cold-Render).
-    // Freshness via ISR (1h) + On-Demand-Revalidate.
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: 3600 } });
+    // Freshness via ISR + On-Demand-Revalidate. CONTENT_REVALIDATE, damit dieser Fetch
+    // nicht das Segment-Intervall der Artikelroute nach unten zieht (Next nimmt das Minimum).
+    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: CONTENT_REVALIDATE } });
     const posts = await res.json();
     const wpExcerpt = (posts[0]?.excerpt?.rendered || "").trim();
     return { title: posts[0]?.title?.rendered || "", excerpt: wpExcerpt || fallback };
