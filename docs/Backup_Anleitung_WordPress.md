@@ -48,41 +48,58 @@ sofort — und muss nicht alles wiederholen.
 Im WordPress-Menü: **Einstellungen → UpdraftPlus Backups**
 Reiter: **„Sicherung / Wiederherstellung"**
 
-Unten unter **„Vorhandene Sicherungen"** stehen die Einträge vom Mai. Jede Zeile hat fünf
-Knöpfe:
+Unten unter **„Vorhandene Sicherungen"** stehen die Einträge vom Mai. Auf den Knopf
+**„Datenbank"** klicken — UpdraftPlus bereitet die Datei vor, danach erscheint
+„Herunterladen".
 
-| Datenbank | Plugins | Themes | Uploads | Andere |
-|---|---|---|---|---|
-
-- Auf **jeden einzelnen** klicken. UpdraftPlus bereitet die Datei vor, danach erscheint
-  „Herunterladen"
-- **Alle Teile holen.** Große Uploads werden zerlegt (`...uploads.zip`, `...uploads2.zip`,
-  `...uploads3.zip`, …). Fehlt ein Stück, ist das ganze Backup wertlos
-- Ablegen in einem Ordner namens:
+Ablegen in einem Ordner namens:
 
 ```
 finanzleser-backup-2026-05-07_SAUBERE-REFERENZ
 ```
 
-> Fehlt in einer Zeile einer der fünf Knöpfe, war schon dieses alte Backup unvollständig.
-> Kein Drama — kurz notieren und weitermachen.
+### ⚠️ Befund vom 11.08.2026: die alten Dateien sind vermutlich weg
+
+In der Liste stehen zwar Einträge ab dem 30. April, aber **nur mit einem einzigen Knopf
+„Datenbank"** — Plugins, Themes und Uploads fehlen. Und der Download liefert
+höchstwahrscheinlich nichts.
+
+Der Grund: Als UpdraftPlus im Mai deinstalliert wurde, sind die Archivdateien vom Server
+verschwunden. Die Liste selbst lebt aber in der WordPress-Datenbank weiter. Man sieht also
+Einträge, hinter denen nichts mehr liegt.
+
+**Kurz gegenprüfen:** Auf „Datenbank" in der Zeile vom 7. Mai klicken. Kommt kein Download
+oder eine Fehlermeldung → die Dateien sind tatsächlich weg.
+
+**Was das bedeutet, wenn es sich bestätigt:**
+
+Wir haben dann **keine eigene saubere Kopie aus der Zeit vor dem Einbruch**. Daraus folgen
+zwei Dinge:
+
+1. **Das Restore-Angebot von IONOS auf den Stand vom 18.07.2026 wird wichtig.** Es ist dann
+   der einzige verfügbare Zustand von vor dem Angriff. Das sollte beim Kunden angesprochen
+   werden, bevor IONOS die Frist dafür schließt.
+2. **Die Security-Firma muss anders vorgehen.** Statt gegen ein sauberes Backup zu
+   vergleichen, prüft man den WordPress-Kern und alle Plugins aus dem offiziellen
+   Verzeichnis gegen die Prüfsummen von wordpress.org (`wp core verify-checksums`). Das
+   deckt fast alles ab — **außer** den drei selbst entwickelten Bausteinen
+   (`finanzleser-anbieter`, `finanzleser-block-passthrough`, `finanzleser-config`) und dem
+   Theme. Für die gibt es keine Vergleichsbasis; die muss jemand ansehen, der den Code kennt.
+
+Die leeren Einträge kann man später über **„Lokalen Ordner nach neuen Sicherungssätzen
+durchsuchen"** (Reiter „Erweiterte Werkzeuge") aus der Liste räumen. Hat keine Eile.
 
 ---
 
 ## Schritt 2 — Neues Backup: NUR die Datenbank
 
 Reiter **„Sicherung / Wiederherstellung"** → Knopf **„Jetzt sichern"**.
-
-Im Fenster, das aufgeht:
+Es öffnet sich das Fenster **„Eine neue Sicherung erstellen"**:
 
 | Option | Einstellung |
 |---|---|
-| Datenbank in die Sicherung einbeziehen | ☑ **an** |
-| Dateien in die Sicherung einbeziehen | ☐ **aus** |
-| Diese Sicherung nur manuell löschen lassen | ☑ **an** |
-
-Das dritte Häkchen ist wichtig — sonst räumt die automatische Aufbewahrung dein Backup
-irgendwann selbst wieder weg.
+| Deine Datenbank zur Sicherung hinzufügen | ☑ **an** |
+| Deine Dateien zur Sicherung hinzufügen | ☐ **aus** |
 
 → **„Jetzt sichern"** klicken. Dauert typisch 1–3 Minuten.
 
@@ -93,32 +110,71 @@ irgendwann selbst wieder weg.
 **Falls es abbricht:** Reiter **„Einstellungen"** → ganz unten **„Erweiterte Einstellungen"**
 → den Wert für die Aufteilungsgröße halbieren → erneut versuchen.
 
+✅ *Erledigt am 11.08.2026, 4:52 Uhr.*
+
 ---
 
-## Schritt 3 — Neues Backup: NUR die Dateien
+## Schritt 3 — Neues Backup: die Dateien, in ZWEI Durchgängen
 
-Nochmal **„Jetzt sichern"**, diesmal genau umgekehrt:
+Nochmal **„Jetzt sichern"**. Diesmal:
 
 | Option | Einstellung |
 |---|---|
-| Datenbank in die Sicherung einbeziehen | ☐ **aus** |
-| Dateien in die Sicherung einbeziehen | ☑ **an** |
-| Diese Sicherung nur manuell löschen lassen | ☑ **an** |
+| Deine Datenbank zur Sicherung hinzufügen | ☐ **aus** *(steht schon aus Schritt 2)* |
+| Deine Dateien zur Sicherung hinzufügen | ☑ **an** |
 
-Das dauert deutlich länger als die Datenbank — die Mediathek ist groß. Browser-Tab offen
-lassen.
+🚨 **Wichtig:** Neben „Deine Dateien zur Sicherung hinzufügen" steht ein **`(...)`**.
+Daraufklicken — es klappt eine Liste mit fünf Kästchen auf, und die sind standardmäßig
+**alle leer**. Bleiben sie leer, wird trotz gesetztem Haken **nichts** gesichert.
 
-**Falls es abbricht:** Unter **„Einstellungen"** kann man auswählen, welche Dateitypen
-gesichert werden. Dann in zwei Läufen:
+### Durchgang 1 — alles außer der Mediathek
 
-1. Lauf: nur **Uploads**
-2. Lauf: **Plugins** + **Themes** + **Andere**
+| Kästchen | |
+|---|---|
+| Plugins | ☑ |
+| Themes | ☑ |
+| Uploads | ☐ **noch nicht** |
+| Unverzichtbare Plugins | ☑ |
+| Andere Verzeichnisse, die in wp-content gefunden wurden | ☑ |
+
+Läuft in ein bis zwei Minuten durch.
+
+> **„Unverzichtbare Plugins" ist der wichtigste Punkt der ganzen Sicherung.** Dahinter
+> stecken die drei selbst entwickelten Bausteine `finanzleser-anbieter`,
+> `finanzleser-block-passthrough` und `finanzleser-config`. Die gibt es nirgendwo sonst —
+> nicht im WordPress-Verzeichnis, nicht bei einem Hersteller. Ohne sie funktioniert die
+> Verbindung zwischen WordPress und der Website nicht mehr.
+
+### Durchgang 2 — nur die Mediathek
+
+| Kästchen | |
+|---|---|
+| Plugins | ☐ |
+| Themes | ☐ |
+| Uploads | ☑ |
+| Unverzichtbare Plugins | ☐ |
+| Andere Verzeichnisse | ☐ |
+
+Das dauert deutlich länger. Browser-Tab offen lassen.
+
+**Der Sinn der Aufteilung:** Wenn die Mediathek einen Abbruch verursacht, ist trotzdem schon
+alles andere gesichert — und du wiederholst nur diesen einen Durchgang statt alles.
+
+### Kein Online-Speicher eingerichtet
+
+Im Fenster steht: *„Sicherungen werden nicht zu einem Online-Speicher gesendet."* Das ist in
+Ordnung — du lädst in Schritt 4 von Hand herunter. Ein automatisches Ziel außerhalb von
+IONOS richten wir später ein, wenn die Lage beruhigt ist.
 
 ---
 
 ## Schritt 4 — Herunterladen
 
-Beide neuen Einträge, alle Teile, genau wie in Schritt 1.
+Die neuen Einträge zeigen jetzt mehrere Knöpfe: `Datenbank`, `Plugins`, `Themes`, `Uploads`,
+`Andere`. **Auf jeden einzelnen klicken** und herunterladen.
+
+**Alle Teile holen.** Große Uploads werden zerlegt (`...uploads.zip`, `...uploads2.zip`,
+`...uploads3.zip`, …). Fehlt ein Stück, ist das Backup unbrauchbar.
 
 Ablegen in einem Ordner namens:
 
@@ -145,7 +201,9 @@ Benutzerdaten.
 
 ## Schritt 6 — Prüfen (bitte nicht überspringen)
 
-### a) Ist das Mai-Backup wirklich sauber?
+### a) Falls doch ein Mai-Backup herunterladbar war: ist es sauber?
+
+*(Entfällt, wenn sich Schritt 1 bestätigt hat und die alten Dateien weg sind.)*
 
 Die Datenbank-Datei entpacken (Endung `.gz`, Doppelklick genügt). Die entstandene
 `.sql`-Datei in einem Texteditor öffnen und nach diesem Text suchen:
@@ -180,6 +238,18 @@ adm_4f587ad5f3
 - Sind alle fünf Knöpfe da (Datenbank, Plugins, Themes, Uploads, Andere)?
 - Ist die Uploads-Datei mehrere hundert Megabyte groß? Nur ein paar Megabyte wäre ein
   Abbruch
+
+**Die drei eigenen Bausteine im Archiv finden.** Das `Andere`- bzw.
+`Unverzichtbare Plugins`-Archiv entpacken und nachsehen, ob diese drei Dateien darin sind:
+
+```
+finanzleser-anbieter.php
+finanzleser-block-passthrough.php
+finanzleser-config.php
+```
+
+Fehlen sie, war beim Durchgang 1 das Kästchen „Unverzichtbare Plugins" nicht gesetzt —
+dann bitte diesen Durchgang wiederholen.
 
 ---
 
