@@ -1,11 +1,50 @@
 # Sofortmaßnahme: Fremdzugänge schließen
 
-**Stand: 11.08.2026** · System: `staging.finanzleser.de` (= das Live-CMS)
-**Dauer: ca. 20 Minuten** · **Voraussetzung: Das Backup ist gezogen und geprüft ✅**
+**Stand: 11.08.2026, aktualisiert nach der Backup-Auswertung**
+System: `staging.finanzleser.de` (= das Live-CMS)
+**Voraussetzung: Das Backup ist gezogen und geprüft ✅**
 
 ---
 
-## Warum das nicht auf die Security-Firma warten kann
+## Lage am 11.08.2026, geprüft
+
+| | |
+|---|---|
+| Hintertür `blaze-updater-pad.php` in `mu-plugins/` | **nicht vorhanden** (404; Gegenprobe mit eigener Datei liefert 500) — vermutlich von der Firma entfernt |
+| Installer `wp-content/uploads/2026/08/845a5f6d.zip` | **noch da, HTTP 200, öffentlich abrufbar** |
+| Installer `wp-content/themes/twentytwentyfive/845a5f6d.zip` | **noch da, HTTP 200, öffentlich abrufbar** |
+| Selbstwiederherstellung in der Datenbank | **unverändert vorhanden** (Stand Backup) |
+| WordPress-Version | **6.9.4 — Lücke weiterhin offen** |
+| Fremd-Sitzungen | **gültig bis 23.08.** |
+
+Vollständiger Befund: [Befund_Schadcode_2026-08-11.md](Befund_Schadcode_2026-08-11.md)
+
+---
+
+## Reihenfolge im Überblick
+
+| | Was | Abstimmung nötig? | Dauer |
+|---|---|---|---|
+| **1** | Befund an die Security-Firma | nein | 5 Min |
+| **2** | Schlüssel, Passwörter, Anwendungs-Passwörter | nein | 20 Min |
+| **3** | Installer-Archive entfernen | **ja** | 5 Min |
+| **4** | Datenbank-Einträge der Hintertür entfernen | **ja** | 10 Min |
+| **5** | WordPress auf 7.0.3 | **ja — siehe Warnung** | 10 Min |
+| **6** | Fremde Konten löschen | **ja** | 5 Min |
+
+Die Schritte 1 und 2 kannst du sofort machen: Sie vernichten keine Spuren.
+Ab Schritt 3 wird gelöscht — das gehört mit der Firma abgesprochen.
+
+> ⚠️ **Korrektur zu einer früheren Aussage von mir.** Ich hatte geschrieben, das
+> Datei-Backup konserviere die Beweislage, ein Kern-Update sei daher unbedenklich.
+> **Das war falsch.** UpdraftPlus sichert nur `wp-content` — `wp-admin/`, `wp-includes/`
+> und die PHP-Dateien im Wurzelverzeichnis sind **nicht** im Backup. Ein Kern-Update
+> überschreibt genau diese Verzeichnisse und würde Spuren dort unwiederbringlich löschen.
+> Schritt 5 gehört deshalb hinter die Durchsicht der Firma, nicht davor.
+
+---
+
+## Warum Schritt 2 nicht auf die Security-Firma warten kann
 
 Aus dem Datenbank-Backup: Vom 4. bis 9. August hat sich alle rund zehn Stunden ein
 automatisiertes Werkzeug in **alle** WordPress-Konten eingeloggt — auch in `flandeik`,
@@ -206,6 +245,81 @@ Text zum Weitergeben:
 > Betracht. Für die zwölf Plugins aus dem offiziellen Verzeichnis funktioniert das; für
 > die eigenentwickelten Bestandteile (`finanzleser-blocks`, `finanzleser-studio-helper`,
 > neun mu-plugins, Theme) gibt es keine Referenz.
+
+---
+
+---
+
+# Schritte 3–6 — mit der Security-Firma abstimmen
+
+Diese vier Schritte löschen Dinge. Frag die Firma, ob sie die betroffenen Stellen bereits
+gesichert hat, und mach sie dann in dieser Reihenfolge.
+
+## Schritt 3 — Die beiden Installer-Archive entfernen
+
+Per SFTP löschen:
+
+```
+wp-content/uploads/2026/08/845a5f6d.zip
+wp-content/themes/twentytwentyfive/845a5f6d.zip
+```
+
+Beide sind identisch (SHA-256 `7aed1ef8…8782`) und enthalten die Hintertür. **Beide sind
+aktuell öffentlich über das Internet abrufbar** — das ist der Grund, warum dieser Schritt
+weit vorne steht. Vorher eine Kopie für die Firma sichern, falls sie noch keine hat.
+
+## Schritt 4 — Die Datenbank-Einträge entfernen
+
+**Das ist der Schritt, ohne den alles andere wirkungslos bleibt.** Hier steckt die
+Selbstwiederherstellung: Sie prüft, ob die Datei noch da ist, und holt sie zurück.
+
+Über phpMyAdmin in der Tabelle `wp_options` löschen:
+
+| Eintrag (`option_name`) | Was es ist |
+|---|---|
+| `sc_persist_manifest` | merkt sich Pfad und Größe der eigenen Datei |
+| `sc_last_recovery_check` | Zeitpunkt der letzten Selbstprüfung |
+| `e74601b1b835` | Dateiname rückwärts + Version |
+| `7e1fbe4a9185` · `188031f8ead8` · `7f3b2f1573` · `f584f6977c2c` · `379ad01d8c08` | Nutzlast (die vier größten Einträge) |
+| `9c9a55f0ec25` · `005b826a6ab3` · `89ae22bcaa3a` · `58e2721dcf5d` · `db05451aba` · `05c1b9b773` · `b5717761427c` · `bcd8c2a17f9c` · `69196134209f` | Konfiguration |
+
+Dazu in `wp_usermeta` alle Zeilen mit `user_id = 15` (das gelöschte Fremdkonto, dessen
+Administratorrechte als Datenrest übrig sind).
+
+> Wenn du unsicher bist: Lass diesen Schritt die Firma machen. Ein falsch gelöschter
+> Eintrag in `wp_options` kann die Seite lahmlegen. Die Liste oben ist aber vollständig
+> und geprüft — es steht nichts drin, was WordPress braucht.
+
+## Schritt 5 — WordPress auf 7.0.3 ⚠️ erst nach Freigabe
+
+Schließt die Lücke, die 18 Tage offen stand. **Aber:** Das Update überschreibt `wp-admin/`
+und `wp-includes/`, und die liegen nicht im Backup. Wenn die Firma dort noch nicht
+nachgesehen hat, gehen mögliche Spuren verloren. Also erst fragen.
+
+Alle zwölf installierten Plugins sind für 7.0 freigegeben, das ist geprüft.
+
+Danach die Baseline gegenprüfen:
+
+```
+/wp-json/finanzleser/v1/site-settings   → top_banner + Werbeschalter
+/wp-json/finanzleser/v1/rechner-config  → 13 Werte
+/graphql                                 → kennt allRechner, allAnbieter, checklisten
+```
+
+## Schritt 6 — Die vier fremden Konten löschen
+
+`adm_eca43b986e` (16) · `admin_2088d8aecc` (17) · `admin_0503829c0f` (18) ·
+`adm_4f587ad5f3` (19)
+
+Alle haben 0 Beiträge, 0 Seiten, 0 Medien — es geht nichts verloren. **Zuletzt**, weil sie
+bis dahin Beweismittel sind und nach Schritt 2 ohnehin keinen Zugang mehr haben.
+
+## Und danach: warum die Nachbarprojekte mitmüssen
+
+Auf diesem Webspace laufen mehrere Projekte unter demselben Systembenutzer. Wird finanzleser
+gesäubert, die Nachbarn aber nicht, kommt die Infektion über das gemeinsame Dateisystem
+zurück — und die ganze Arbeit war umsonst. Das gehört der Firma gegenüber betont, falls sie
+die Projekte nacheinander abarbeitet.
 
 ---
 
