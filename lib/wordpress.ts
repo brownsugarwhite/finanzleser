@@ -1218,13 +1218,10 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
     }
   `;
 
-  try {
-    const data = await client.request<{ rechnerBy: Rechner }>(query, { slug });
-    return data.rechnerBy;
-  } catch (error) {
-    console.error(`Error fetching Rechner with slug "${slug}":`, error);
-    return null;
-  }
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  // `rechnerBy: null` = existiert nicht; eine Exception = WP nicht erreichbar.
+  const data = await client.request<{ rechnerBy: Rechner | null }>(query, { slug });
+  return data.rechnerBy;
 }
 
 // ─────────────────────────────────────────────
@@ -1348,13 +1345,9 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
     }
   `;
 
-  try {
-    const data = await client.request<{ checklisteBy: Checkliste }>(query, { slug });
-    return data.checklisteBy;
-  } catch (error) {
-    console.error(`Error fetching Checkliste with slug "${slug}":`, error);
-    return null;
-  }
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  const data = await client.request<{ checklisteBy: Checkliste | null }>(query, { slug });
+  return data.checklisteBy;
 }
 
 // ─────────────────────────────────────────────
@@ -1464,13 +1457,9 @@ export async function getDokumentBySlug(slug: string): Promise<Dokument | null> 
     }
   `;
 
-  try {
-    const data = await client.request<{ dokumentBy: Dokument | null }>(query, { slug });
-    return data.dokumentBy;
-  } catch (error) {
-    console.error(`Error fetching Dokument with slug "${slug}":`, error);
-    return null;
-  }
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  const data = await client.request<{ dokumentBy: Dokument | null }>(query, { slug });
+  return data.dokumentBy;
 }
 
 // ─────────────────────────────────────────────
@@ -2014,13 +2003,15 @@ export async function getAnbieterBySlug(slug: string): Promise<AnbieterPost | nu
     }
   `;
 
-  try {
-    const data = await client.request<{ anbieterBy: AnbieterPost | null }>(query, { slug });
-    return data.anbieterBy;
-  } catch (error) {
-    console.error(`Error fetching Anbieter with slug "${slug}":`, error);
-    return null;
-  }
+  // KEIN try/catch mit `return null`. WPGraphQL liefert für einen unbekannten Slug
+  // `anbieterBy: null` OHNE Fehler — „nicht vorhanden" ist also bereits sauber von
+  // „WP nicht erreichbar" unterscheidbar. Ein geschluckter Transportfehler wurde dagegen
+  // als 404 bzw. als Metadata ohne Canonical in den ISR-Cache gebacken und blieb dort
+  // stehen: gemessen am 19./20.08.2026 lieferten 12 existierende Anbieter live 404 und
+  // 25 weitere einen Canonical auf die Startseite. Fehler MÜSSEN werfen, damit Next
+  // nichts cacht und der letzte gute Stand ausgeliefert bleibt.
+  const data = await client.request<{ anbieterBy: AnbieterPost | null }>(query, { slug });
+  return data.anbieterBy;
 }
 
 // ─────────────────────────────────────────────

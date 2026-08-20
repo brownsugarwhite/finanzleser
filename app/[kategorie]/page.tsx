@@ -24,8 +24,12 @@ export async function generateMetadata(
   const params = await props.params;
   const slug = params.kategorie;
 
-  // Post-Slugs redirectet die Page permanent auf den Kanon → keine Post-Metadata nötig.
-  const anbieter = await getAnbieterBySlug(slug).catch(() => null);
+  // 🚨 KEIN .catch(() => null) auf diesen Fetches. Ein geschluckter WP-Fehler fiel bis
+  // zum Fallback unten durch und lieferte Metadata OHNE Canonical — womit der Canonical
+  // des Root-Layouts (= Startseite) griff. Next backt das in den ISR-Cache, und Google
+  // liest „diese Seite ist eine Dublette der Startseite" (gemessen 19./20.08.2026:
+  // 25 Anbieterseiten in genau diesem Zustand). Fehler müssen werfen → nichts wird gecacht.
+  const anbieter = await getAnbieterBySlug(slug);
   if (anbieter) {
     return buildMetadata({
       title: `${anbieter.title} – Kontakt – ${SITE_NAME}`,
@@ -34,7 +38,7 @@ export async function generateMetadata(
     });
   }
 
-  const cat = await getCategoryBySlug(slug).catch(() => null);
+  const cat = await getCategoryBySlug(slug);
   if (cat) {
     return buildMetadata({
       title: `${cat.name} – ${SITE_NAME}`,
@@ -44,7 +48,10 @@ export async function generateMetadata(
     });
   }
 
-  return { title: `${slug} – ${SITE_NAME}` };
+  // Weder Anbieter noch Kategorie: die Page redirectet gleich (Legacy-Slug) oder liefert
+  // 404 — in beiden Fällen ist diese Metadata folgenlos. Trotzdem über buildMetadata mit
+  // SELBST-Canonical, damit hier nie wieder der Startseiten-Canonical durchschlagen kann.
+  return buildMetadata({ title: `${slug} – ${SITE_NAME}`, path: `/${slug}` });
 }
 
 export default async function KategoriePage(props: { params: Promise<{ kategorie: string }> }) {
@@ -62,26 +69,39 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   //    URL (/main/sub/slug). Direktes Rendern hier lieferte eine degradierte Seite (ohne
   //    featuredImage/Visual, abweichendes TOC-Verhalten) und erzeugte Duplicate Content.
   //    Der Redirect konsolidiert Rendering + Ranking-Signale auf den Kanon.
-  const post = await getPostBySlug(params.kategorie).catch(() => null);
+  // 🚨 REGEL FÜR DIE GESAMTE KASKADE: KEIN .catch(() => null) / .catch(() => []).
+  //
+  // Jede Stufe hier entscheidet über Redirect, Rendering oder 404. Wurde ein WP-Fehler
+  // geschluckt, fiel die Anfrage durch ALLE Stufen bis zum notFound() unten — und Next
+  // backte diese 404 in den ISR-Cache, wo sie stehen blieb. Gemessen am 19./20.08.2026:
+  // 12 Anbieter, die im CMS existieren und per GraphQL sauber antworten, lieferten live
+  // 404. Ausgelöst wurde es durch Last auf dem IONOS-WP (~2,3 s pro Abfrage, hier bis zu
+  // 8 Abfragen pro Miss).
+  //
+  // Ein durchgereichter Fehler ist das kleinere Übel: Next cacht nichts, der CDN liefert
+  // weiter den letzten guten Stand. Ein gebackener 404 nimmt die Seite dagegen dauerhaft
+  // aus dem Google-Index. „Existiert nicht" liefert weiterhin sauber `null` und führt zum
+  // echten 404 — das bleibt unverändert.
+  const post = await getPostBySlug(params.kategorie);
   if (post) {
     permanentRedirect(buildPostUrl(post));
   }
 
   // 1a. Ist es ein Anbieter-Slug (legacy URL, /advocard-rechtsschutzversicherung-kontakt/ etc.)?
-  const anbieter = await getAnbieterBySlug(params.kategorie).catch(() => null);
+  const anbieter = await getAnbieterBySlug(params.kategorie);
   if (anbieter) {
     return <AnbieterLayout title={anbieter.title} content={anbieter.content} />;
   }
 
   // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?
-  const categoryWithChildren = await getCategoryWithChildren(params.kategorie).catch(() => null);
+  const categoryWithChildren = await getCategoryWithChildren(params.kategorie);
   if (categoryWithChildren && categoryWithChildren.children && categoryWithChildren.children.length > 0) {
     // Posts pro Subkategorie vorladen (für SubcategorySlider)
     const allCategoryPosts: Record<string, Post[]> = {};
     const results = await Promise.all(
       categoryWithChildren.children.map(async (cat) => ({
         slug: cat.slug,
-        posts: await getPostsByCategory(cat.slug).catch(() => []),
+        posts: await getPostsByCategory(cat.slug),
       }))
     );
     results.forEach(({ slug, posts }) => { allCategoryPosts[slug] = posts; });
@@ -101,7 +121,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   }
 
   // 3. Sonst: Subkategorie-Seite mit Post-Liste
-  const category = await getCategoryBySlug(params.kategorie).catch(() => null);
+  const category = await getCategoryBySlug(params.kategorie);
 
   // Subkategorie mit Main-Parent hat ihren Kanon unter /parent/sub → 308 statt
   // Root-Duplikat (/geldanlagen vs. /finanzen/geldanlagen). isMainCategory-Guard wegen
@@ -112,17 +132,17 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
     permanentRedirect(buildSubcategoryUrl(category.parent.slug, params.kategorie));
   }
 
-  const posts = await getPostsByCategory(params.kategorie).catch(() => []);
+  const posts = await getPostsByCategory(params.kategorie);
   if (!posts || posts.length === 0) {
     // 4. Letzte Stufe vor dem 404: Legacy-Flach-URL eines FINANZTOOLS (alte Beiträge,
     //    die zu Rechnern/Checklisten/Vergleichen wurden — z. B. /abfindung, /zinseszins).
     //    Diese Slugs fehlen in den generierten Redirects; generisch auflösen statt 74
     //    Einzel-Redirects pflegen. Läuft nur, wenn sonst nichts matcht (echte 404-Pfade).
-    const rechner = await getRechnerBySlug(params.kategorie).catch(() => null);
+    const rechner = await getRechnerBySlug(params.kategorie);
     if (rechner) permanentRedirect(buildRechnerUrl(rechner.slug));
-    const checkliste = await getChecklisteBySlug(params.kategorie).catch(() => null);
+    const checkliste = await getChecklisteBySlug(params.kategorie);
     if (checkliste) permanentRedirect(buildChecklisteUrl(checkliste.slug));
-    const vergleiche = await getAllVergleiche().catch(() => []);
+    const vergleiche = await getAllVergleiche();
     if (vergleiche.some((v) => v.slug === params.kategorie)) {
       permanentRedirect(buildVergleichUrl(params.kategorie));
     }

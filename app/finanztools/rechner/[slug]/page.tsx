@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -120,18 +121,12 @@ export default async function RechnerDetailPage({ params }: Props) {
     };
   }
 
+  // notFound() statt eines eigenen „nicht gefunden"-Renderings: letzteres lieferte
+  // HTTP 200 auf JEDEN erfundenen Slug (/finanztools/rechner/xyz123 → 200). Das ist ein
+  // lehrbuchmäßiger Soft-404 — er verbrennt Crawl-Budget und füllt den GSC-Bericht mit
+  // Rauschen, in dem echte Fehler untergehen.
   if (!rechner) {
-    return (
-      <>
-        <main className="min-h-screen bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold mb-6">Rechner nicht gefunden</h1>
-            <p className="text-lg text-gray-600">Der angeforderte Rechner existiert nicht.</p>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
+    notFound();
   }
 
   const kategorieName =
