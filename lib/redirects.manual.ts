@@ -144,4 +144,84 @@ export const manualRedirects = [
   { source: "/zurich-rechtsschutzversicherung", destination: "/zurich-versicherung-kontakt", permanent: true }, // 600 Impr.
   { source: "/zurich-rechtsschutzversicherung-kuendigen", destination: "/zurich-versicherung-kontakt", permanent: true }, // 103 Impr.
   { source: "/zurich-wohngebaeudeversicherung", destination: "/zurich-versicherung-kontakt", permanent: true }, // 171 Impr.
+
+  // ── Schwache Ziele ersetzen (GSC 2026-08-20) ────────────────────────────
+  // Diese 67 URLs leiteten bisher (aus redirects.generated) auf eine GENERISCHE
+  // Uebersicht — /versicherungen, /steuern, /finanzen, /dokumente. Google wertet eine
+  // Weiterleitung auf eine thematisch unspezifische Seite als Soft-404: die alte URL
+  // fliegt aus dem Index und es werden KEINE Ranking-Signale uebertragen.
+  //
+  // Zusammen 35.902 Impressionen aus 12 Monaten. Groesster Einzelposten:
+  // /kindergeldauszahlung mit 17.897 Impressionen, bisher auf /finanzen.
+  //
+  // manualRedirects wird in next.config.ts VOR redirects.generated gespreadet —
+  // erster Treffer gewinnt, diese Eintraege ueberschreiben die schwachen dort.
+  // Alle 18 Ziele am 2026-08-20 einzeln auf HTTP 200 geprueft.
+  { source: "/altenheimkosten-von-der-steuer-absetzen", destination: "/steuern/steuererklaerung/aussergewoehnliche-belastungen", permanent: true }, // 0 Impr.
+  { source: "/auslandsreisekrankenversicherung", destination: "/dokumente/auslandsreisekrankenversicherung", permanent: true }, // 0 Impr.
+  { source: "/berufsunfaehigkeitsversicherung-test", destination: "/versicherungen/berufsunfaehigkeit/berufsunfaehigkeitsversicherung", permanent: true }, // 4486 Impr.
+  { source: "/bestattungskosten-von-der-steuer-absetzen", destination: "/steuern/steuererklaerung/aussergewoehnliche-belastungen", permanent: true }, // 5408 Impr.
+  { source: "/bussgeldgeldkatalog-pdf", destination: "/recht/ehe-familie/bussgeldkatalog-pdf", permanent: true }, // 489 Impr.
+  { source: "/debeka-basisrente-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-berufsunfaehigkeitsversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-kfz-versicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-pflegezusatzversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-reiseversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 103 Impr.
+  { source: "/debeka-rentenversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-risikolebensversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/debeka-tierversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 95 Impr.
+  { source: "/debeka-wohngebaeudeversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/dkv-pflegezusatzversicherung-kuendigen", destination: "/dkv-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/dkv-reiseversicherung-kuendigen", destination: "/dkv-krankenversicherung-kontakt", permanent: true }, // 164 Impr.
+  { source: "/hannoversche-basisrente-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hannoversche-berufsunfaehigkeitsversicherung-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hannoversche-rentenversicherung-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 71 Impr.
+  { source: "/hannoversche-riesterrente-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 75 Impr.
+  { source: "/hannoversche-risikolebensversicherung-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 40 Impr.
+  { source: "/hansemerkur-basisrente-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hansemerkur-berufsunfaehigkeitsversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hansemerkur-kfz-versicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hansemerkur-pflegezusatzversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 46 Impr.
+  { source: "/hansemerkur-reiseversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 1334 Impr.
+  { source: "/hansemerkur-rentenversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 30 Impr.
+  { source: "/hansemerkur-riesterrente-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 4 Impr.
+  { source: "/hansemerkur-risikolebensversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 62 Impr.
+  { source: "/hansemerkur-tierversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 49 Impr.
+  { source: "/hansemerkur-unfallversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/hansemerkur-wohngebaeudeversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/kindergeldauszahlung", destination: "/recht/ehe-familie/kindergeld", permanent: true }, // 17897 Impr.
+  { source: "/lohnabrechnung", destination: "/steuern/steuerarten/lohnsteuer", permanent: true }, // 2466 Impr.
+  { source: "/lohnsteuerkarte", destination: "/steuern/steuerarten/lohnsteuer", permanent: true }, // 2091 Impr.
+  { source: "/lv1871-basisrente-kuendigen", destination: "/lv1871-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/lv1871-berufsunfaehigkeitsversicherung-kuendigen", destination: "/lv1871-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/lv1871-rentenversicherung-kuendigen", destination: "/lv1871-lebensversicherung-kontakt", permanent: true }, // 65 Impr.
+  { source: "/lv1871-risikolebensversicherung-kuendigen", destination: "/lv1871-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/rentenhoehe", destination: "/versicherungen/altersvorsorge/gesetzliche-rente", permanent: true }, // 800 Impr.
+  { source: "/stuttgarter-basisrente-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-berufsunfaehigkeitsversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-kfz-versicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-krankenversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-pflegezusatzversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-rentenversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-risikolebensversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-tierversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-unfallversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/stuttgarter-wohngebaeudeversicherung-kuendigen", destination: "/stuttgarter-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/sueddeutsche-berufsunfaehigkeitsversicherung-kuendigen", destination: "/sueddeutsche-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/sueddeutsche-pflegezusatzversicherung-kuendigen", destination: "/sueddeutsche-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/sueddeutsche-risikolebensversicherung-kuendigen", destination: "/sueddeutsche-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/sueddeutsche-unfallversicherung-kuendigen", destination: "/sueddeutsche-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/targo-berufsunfaehigkeitsversicherung-kuendigen", destination: "/targo-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/targo-rentenversicherung-kuendigen", destination: "/targo-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/targo-risikolebensversicherung-kuendigen", destination: "/targo-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/targo-unfallversicherung-kuendigen", destination: "/targo-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/ukv-union-pflegezusatzversicherung-kuendigen", destination: "/ukv-union-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/ukv-union-reiseversicherung-kuendigen", destination: "/ukv-union-krankenversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/unfallversicherung-leistungen", destination: "/versicherungen/unfallversicherung/unfallversicherung", permanent: true }, // 112 Impr.
+  { source: "/vpv-basisrente-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/vpv-berufsunfaehigkeitsversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/vpv-kfz-versicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/vpv-rentenversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/vpv-unfallversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
+  { source: "/vpv-wohngebaeudeversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 15 Impr.
 ];
