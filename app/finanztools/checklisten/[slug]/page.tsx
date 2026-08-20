@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -48,22 +49,10 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   const { slug } = await params;
   const checkliste = await getChecklisteBySlug(slug);
 
+  // notFound() statt eigenem „nicht gefunden"-Rendering — sonst HTTP 200 auf jeden
+  // erfundenen Slug (Soft-404). Siehe app/finanztools/rechner/[slug]/page.tsx.
   if (!checkliste) {
-    return (
-      <>
-        <main className="min-h-screen bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold mb-6">
-              Checkliste nicht gefunden
-            </h1>
-            <p className="text-lg text-gray-600">
-              Die angeforderte Checkliste existiert nicht.
-            </p>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
+    notFound();
   }
 
   // PDF holen und parsen

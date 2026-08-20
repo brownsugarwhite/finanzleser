@@ -1197,7 +1197,8 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
 // Einzelner Rechner nach Slug
 // ─────────────────────────────────────────────
 
-export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
+// cache() — dedupliziert Metadata- und Page-Abfrage, siehe getAnbieterBySlug.
+export const getRechnerBySlug = cache(async (slug: string): Promise<Rechner | null> => {
   if (IS_BUILD) {
     const hit = (await getAllRechner()).find((r) => r.slug === slug);
     if (hit) return hit;
@@ -1218,14 +1219,11 @@ export async function getRechnerBySlug(slug: string): Promise<Rechner | null> {
     }
   `;
 
-  try {
-    const data = await client.request<{ rechnerBy: Rechner }>(query, { slug });
-    return data.rechnerBy;
-  } catch (error) {
-    console.error(`Error fetching Rechner with slug "${slug}":`, error);
-    return null;
-  }
-}
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  // `rechnerBy: null` = existiert nicht; eine Exception = WP nicht erreichbar.
+  const data = await client.request<{ rechnerBy: Rechner | null }>(query, { slug });
+  return data.rechnerBy;
+});
 
 // ─────────────────────────────────────────────
 // Alle Checklisten
@@ -1321,7 +1319,8 @@ function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
   });
 }
 
-export async function getChecklisteBySlug(slug: string): Promise<Checkliste | null> {
+// cache() — dedupliziert Metadata- und Page-Abfrage, siehe getAnbieterBySlug.
+export const getChecklisteBySlug = cache(async (slug: string): Promise<Checkliste | null> => {
   // Build: aus Bulk-Map; Laufzeit: Einzelabfrage (Freshness via ISR + On-Demand-Revalidate).
   if (IS_BUILD) {
     const hit = (await getAllChecklistenFullMap()).get(slug);
@@ -1348,14 +1347,10 @@ export async function getChecklisteBySlug(slug: string): Promise<Checkliste | nu
     }
   `;
 
-  try {
-    const data = await client.request<{ checklisteBy: Checkliste }>(query, { slug });
-    return data.checklisteBy;
-  } catch (error) {
-    console.error(`Error fetching Checkliste with slug "${slug}":`, error);
-    return null;
-  }
-}
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  const data = await client.request<{ checklisteBy: Checkliste | null }>(query, { slug });
+  return data.checklisteBy;
+});
 
 // ─────────────────────────────────────────────
 // Alle Dokumente
@@ -1428,7 +1423,8 @@ async function _fetchAllDokumente(): Promise<Dokument[]> {
 // Einzelnes Dokument nach Slug
 // ─────────────────────────────────────────────
 
-export async function getDokumentBySlug(slug: string): Promise<Dokument | null> {
+// cache() — dedupliziert Metadata- und Page-Abfrage, siehe getAnbieterBySlug.
+export const getDokumentBySlug = cache(async (slug: string): Promise<Dokument | null> => {
   if (IS_BUILD) {
     const hit = (await getAllDokumente()).find((d) => d.slug === slug);
     if (hit) return hit;
@@ -1464,14 +1460,10 @@ export async function getDokumentBySlug(slug: string): Promise<Dokument | null> 
     }
   `;
 
-  try {
-    const data = await client.request<{ dokumentBy: Dokument | null }>(query, { slug });
-    return data.dokumentBy;
-  } catch (error) {
-    console.error(`Error fetching Dokument with slug "${slug}":`, error);
-    return null;
-  }
-}
+  // Fehler werfen statt schlucken — Begründung bei getAnbieterBySlug.
+  const data = await client.request<{ dokumentBy: Dokument | null }>(query, { slug });
+  return data.dokumentBy;
+});
 
 // ─────────────────────────────────────────────
 // Mehrere Dokumente nach Slugs (für Dokumente-Block im Artikel, ≤4)
@@ -2000,7 +1992,12 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
 // Anbieter (CPT): Einzelseite nach Slug
 // ─────────────────────────────────────────────
 
-export async function getAnbieterBySlug(slug: string): Promise<AnbieterPost | null> {
+// cache() = Deduplizierung innerhalb EINES Render-Durchlaufs. generateMetadata und die
+// Page-Komponente fragen denselben Slug beide ab; ohne cache() waren das zwei GraphQL-
+// Roundtrips à ~2,3 s gegen ein IONOS-WP, das unter Last mit „Error establishing a
+// database connection" aussteigt. Jede eingesparte Abfrage senkt die Wahrscheinlichkeit,
+// dass ein Rendering scheitert und ein kaputter Zustand in den ISR-Cache gebacken wird.
+export const getAnbieterBySlug = cache(async (slug: string): Promise<AnbieterPost | null> => {
   const client = getClient();
 
   const query = gql`
@@ -2014,14 +2011,16 @@ export async function getAnbieterBySlug(slug: string): Promise<AnbieterPost | nu
     }
   `;
 
-  try {
-    const data = await client.request<{ anbieterBy: AnbieterPost | null }>(query, { slug });
-    return data.anbieterBy;
-  } catch (error) {
-    console.error(`Error fetching Anbieter with slug "${slug}":`, error);
-    return null;
-  }
-}
+  // KEIN try/catch mit `return null`. WPGraphQL liefert für einen unbekannten Slug
+  // `anbieterBy: null` OHNE Fehler — „nicht vorhanden" ist also bereits sauber von
+  // „WP nicht erreichbar" unterscheidbar. Ein geschluckter Transportfehler wurde dagegen
+  // als 404 bzw. als Metadata ohne Canonical in den ISR-Cache gebacken und blieb dort
+  // stehen: gemessen am 19./20.08.2026 lieferten 12 existierende Anbieter live 404 und
+  // 25 weitere einen Canonical auf die Startseite. Fehler MÜSSEN werfen, damit Next
+  // nichts cacht und der letzte gute Stand ausgeliefert bleibt.
+  const data = await client.request<{ anbieterBy: AnbieterPost | null }>(query, { slug });
+  return data.anbieterBy;
+});
 
 // ─────────────────────────────────────────────
 // Anbieter (CPT): alle (fuer Uebersicht)

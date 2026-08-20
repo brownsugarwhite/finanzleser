@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -50,18 +51,10 @@ export default async function VergleichDetailPage({ params }: Props) {
   const meta = await getVergleichMeta(slug);
   const title = meta?.title || slug;
 
+  // notFound() statt eigenem „nicht verfügbar"-Rendering — sonst HTTP 200 auf jeden
+  // erfundenen Slug (Soft-404). Siehe app/finanztools/rechner/[slug]/page.tsx.
   if (!meta) {
-    return (
-      <>
-        <main className="min-h-screen bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <h1 className="text-4xl font-bold mb-6">Vergleich nicht verfügbar</h1>
-            <p className="text-lg text-gray-600">Dieser Vergleich ist aktuell nicht verfügbar.</p>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
+    notFound();
   }
 
   const breadcrumbItems = [

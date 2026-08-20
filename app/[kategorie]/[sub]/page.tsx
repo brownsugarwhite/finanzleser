@@ -5,6 +5,7 @@ import CategoryLayout from "@/components/layout/CategoryLayout";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { isMainCategory } from "@/lib/categories";
 import { buildSubcategoryUrl, buildPostUrl } from "@/lib/urls";
+import { isBotPath } from "@/lib/botPaths";
 
 export const revalidate = 86400;
 
@@ -41,7 +42,11 @@ export async function generateMetadata(
   props: { params: Promise<{ kategorie: string; sub: string }> }
 ): Promise<Metadata> {
   const params = await props.params;
-  const cat = await getCategoryBySlug(params.sub).catch(() => null);
+  // Scanner-Proben (/wp-content/plugins …) nicht gegen WP abfragen.
+  if (isBotPath(params.kategorie, params.sub)) return { title: SITE_NAME };
+  // KEIN .catch(() => null) — ein geschluckter WP-Fehler landete im Fallback unten und
+  // erbte damit den Startseiten-Canonical des Root-Layouts. Siehe app/[kategorie]/page.tsx.
+  const cat = await getCategoryBySlug(params.sub);
   if (cat) {
     return buildMetadata({
       title: `${cat.name} – ${SITE_NAME}`,
@@ -52,23 +57,36 @@ export async function generateMetadata(
     });
   }
   // Post-Slugs unter /x/slug redirectet die Page permanent → Metadata wird verworfen.
-  return { title: `${params.sub} – ${SITE_NAME}` };
+  // Trotzdem SELBST-Canonical statt Root-Fallback (= Startseite), siehe oben.
+  return buildMetadata({
+    title: `${params.sub} – ${SITE_NAME}`,
+    path: `/${params.kategorie}/${params.sub}`,
+  });
 }
 
 export default async function SubkategoriePage(props: { params: Promise<{ kategorie: string; sub: string }> }) {
   const params = await props.params;
 
+  // Scanner-Proben früh raus, bevor die WP-Queries laufen (siehe lib/botPaths.ts).
+  // /wp-content/plugins/foo landet erst hier, nicht in der Root-Route.
+  if (isBotPath(params.kategorie, params.sub)) {
+    notFound();
+  }
+
   // 1. Zuerst prüfen: ist es eine Kategorie-Seite? Posts + Kategorie PARALLEL holen
   // (beide hängen nur an params.sub; getCategoryBySlug ist via React.cache dedupliziert
   // mit generateMetadata).
+  // KEIN .catch(...) — sonst wird aus einem WP-Aussetzer ein gebackenes notFound() (unten)
+  // oder ein Render ohne Kategorie-Daten. Beides landet im ISR-Cache und bleibt stehen.
+  // Siehe die ausführliche Begründung in app/[kategorie]/page.tsx.
   const [categoryPosts, category] = await Promise.all([
-    getPostsByCategory(params.sub).catch(() => []),
-    getCategoryBySlug(params.sub).catch(() => null),
+    getPostsByCategory(params.sub),
+    getCategoryBySlug(params.sub),
   ]);
   if (categoryPosts.length > 0) {
     // Nicht-kanonischer Pfad (/quatsch/geldanlagen, /x/finanzen) → 308 auf den Kanon
-    // statt 200-Duplikat. Nur mit verifizierten Kategorie-Daten redirecten — bei
-    // transientem Fetch-Fail lieber rendern als falsch umleiten.
+    // statt 200-Duplikat. `category` ist hier nur noch dann null, wenn es die Kategorie
+    // wirklich nicht gibt (Fehler werfen inzwischen) — dann bleibt es beim Render.
     if (category) {
       const canonical = canonicalCategoryPath(params.sub, category.parent?.slug);
       if (canonical !== `/${params.kategorie}/${params.sub}`) {
@@ -93,7 +111,7 @@ export default async function SubkategoriePage(props: { params: Promise<{ katego
   // 2. Sonst: Post-Slug unter zwei Segmenten (/x/slug) → 308 auf die kanonische
   // dreistufige URL statt degradiertem Duplikat-Render (früher: ArticleLayout ohne
   // featuredImage/JSON-LD mit Self-Canonical auf den Fake-Pfad).
-  const post = await getPostBySlug(params.sub).catch(() => null);
+  const post = await getPostBySlug(params.sub);
   if (post) {
     permanentRedirect(buildPostUrl(post));
   }
