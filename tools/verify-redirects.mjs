@@ -39,6 +39,21 @@ const OFFLINE = args.includes("--offline");
 const PREVIEW = args[args.indexOf("--preview") + 1];
 const LIMIT = args.includes("--limit") ? Number(args[args.indexOf("--limit") + 1]) : Infinity;
 
+// 🚨 Parallelitaet bewusst NIEDRIG (Default 3, vorher fest 8).
+//
+// Dieser Lauf fragt jede URL gegen Preview UND Produktion ab. Auf der Produktion trifft
+// er dabei abgelaufene ISR-Eintraege und loest deren Neuerzeugung aus — und die laeuft
+// gegen ein IONOS-WordPress, das bei ~2,3s pro Abfrage unter Parallellast mit
+// "Error establishing a database connection" aussteigt. Genau so sind am 19.08.2026
+// 12 Anbieterseiten als 404 und 25 mit Startseiten-Canonical in den Cache gebacken
+// worden: durch einen Mess-Sweep mit 12 parallelen Verbindungen. Der Zeitstempel
+// x-nextjs-date der kaputten Seiten lag exakt im Fenster dieses Sweeps.
+//
+// Ein Pruefwerkzeug darf das, was es prueft, nicht beschaedigen. Hoeher als 6 nie setzen.
+const CONCURRENCY = args.includes("--concurrency")
+  ? Math.max(1, Number(args[args.indexOf("--concurrency") + 1]))
+  : 3;
+
 // --- Denylist direkt aus lib/botPaths.ts ------------------------------------
 // Kein Nachbau, kein Duplikat: Node 22+ kann TypeScript per --experimental-strip-types
 // direkt laden. Damit testet dieses Skript garantiert genau den Code, der auch laeuft.
@@ -164,10 +179,11 @@ async function runLive() {
     ...await fromSitemap(PROD),
   ])].slice(0, LIMIT);
 
-  console.log(`Vergleiche ${known.length} URLs: ${PREVIEW}  vs.  ${PROD}\n`);
+  console.log(`Vergleiche ${known.length} URLs: ${PREVIEW}  vs.  ${PROD}`);
+  console.log(`Parallelitaet: ${CONCURRENCY} (schont das IONOS-WP — siehe Kommentar bei CONCURRENCY)\n`);
 
   let done = 0;
-  const results = await mapLimit(known, 8, async (p) => {
+  const results = await mapLimit(known, CONCURRENCY, async (p) => {
     const [prev, prod] = await Promise.all([probe(PREVIEW, p), probe(PROD, p)]);
     if (++done % 100 === 0) process.stdout.write(`  ${done}/${known.length}\r`);
     return { path: p, prev, prod };
