@@ -70,4 +70,78 @@ export const manualRedirects = [
   { source: "/vhv-haftpflichtversicherung", destination: "/vhv-versicherung-kontakt", permanent: true },
   { source: "/wohnungsbaupraemie", destination: "/finanzen/kredite-bauen", permanent: true },
   { source: "/zinsrechner", destination: "/finanztools/rechner/zinseszins", permanent: true },
+
+  // ── GSC-Auswertung 2026-08-20 ────────────────────────────────────────────
+  // Quelle: Search-Console-Export „Nicht gefunden (404)" (12 Monate) gekreuzt mit
+  // dem Leistungsbericht. 59 alte Flach-URLs mit zusammen 35.242 Impressionen, die
+  // live 404 lieferten. Muster durchgehend: /<versicherer>-<sparte> bzw.
+  // /<versicherer>-<sparte>-kuendigen → die Kontaktseite DESSELBEN Versicherers.
+  //
+  // Warum die Anbieterseite und nicht /versicherungen: Wer „Debeka Unfallversicherung
+  // kuendigen" sucht, braucht die Kontaktdaten der Debeka — die Suchabsicht wird also
+  // erfuellt. Eine Weiterleitung auf die Kategorie-Uebersicht wertet Google dagegen als
+  // Soft-404 und uebertraegt KEINE Signale.
+  //
+  // Alle 35 Ziele wurden am 2026-08-20 einzeln auf HTTP 200 geprueft.
+  // Wo es fuer einen Versicherer mehrere Kontaktseiten gibt, gewinnt die allgemeinste
+  // (z. B. /signal-iduna-kontakt vor /signal-iduna-lebensversicherung-kontakt).
+  { source: "/allianz-haftpflichtversicherung-kuendigen", destination: "/allianz-versicherung-kontakt", permanent: true }, // 908 Impr.
+  { source: "/alte-leipziger-lebensversicherung-kuendigen", destination: "/alte-leipziger-versicherung-kontakt", permanent: true }, // 44 Impr.
+  { source: "/alte-leipziger-unfallversicherung", destination: "/alte-leipziger-versicherung-kontakt", permanent: true }, // 9 Impr.
+  { source: "/alte-leipziger-versicherung-kuendigen", destination: "/alte-leipziger-versicherung-kontakt", permanent: true }, // 44 Impr.
+  { source: "/arag-versicherung-kuendigen", destination: "/arag-versicherung-kontakt", permanent: true }, // 501 Impr.
+  { source: "/basler-unfallversicherung-kuendigen", destination: "/basler-versicherung-kontakt", permanent: true }, // 9 Impr.
+  { source: "/concordia-rechtsschutzversicherung", destination: "/concordia-versicherung-kontakt", permanent: true }, // 971 Impr.
+  { source: "/concordia-risikolebensversicherung", destination: "/concordia-versicherung-kontakt", permanent: true }, // 75 Impr.
+  { source: "/cosmos-direkt-hausratversicherung", destination: "/cosmos-direkt-versicherung-kontakt", permanent: true }, // 60 Impr.
+  { source: "/debeka-rechtsschutzversicherung", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 249 Impr.
+  { source: "/debeka-unfallversicherung", destination: "/debeka-krankenversicherung-kontakt", permanent: true }, // 2419 Impr.
+  { source: "/deutsche-aerzteversicherung-kuendigen", destination: "/deutsche-aerzteversicherung-kontakt", permanent: true }, // 32 Impr.
+  { source: "/devk-rentenversicherung", destination: "/devk-versicherung-kontakt", permanent: true }, // 1080 Impr.
+  { source: "/devk-unfallversicherung-kuendigen", destination: "/devk-versicherung-kontakt", permanent: true }, // 66 Impr.
+  { source: "/dialog-haftpflichtversicherung-kuendigen", destination: "/dialog-versicherung-kontakt", permanent: true }, // 52 Impr.
+  { source: "/dialog-hausratversicherung", destination: "/dialog-versicherung-kontakt", permanent: true }, // 494 Impr.
+  { source: "/generali-haftpflichtversicherung", destination: "/generali-versicherung-kontakt", permanent: true }, // 382 Impr.
+  { source: "/generali-versicherung-kuendigen", destination: "/generali-versicherung-kontakt", permanent: true }, // 319 Impr.
+  { source: "/gev-haftpflichtversicherung", destination: "/gev-versicherung-kontakt", permanent: true }, // 172 Impr.
+  { source: "/gev-haftpflichtversicherung-kuendigen", destination: "/gev-versicherung-kontakt", permanent: true }, // 306 Impr.
+  { source: "/gev-unfallversicherung", destination: "/gev-versicherung-kontakt", permanent: true }, // 164 Impr.
+  { source: "/gev-versicherung-kuendigen", destination: "/gev-versicherung-kontakt", permanent: true }, // 5 Impr.
+  { source: "/gothaer-haftpflichtversicherung", destination: "/gothaer-versicherung-kontakt", permanent: true }, // 36 Impr.
+  { source: "/gothaer-versicherung-kuendigen", destination: "/gothaer-versicherung-kontakt", permanent: true }, // 185 Impr.
+  { source: "/gvv-direkt-wohngebaeudeversicherung", destination: "/gvv-direkt-versicherung-kontakt", permanent: true }, // 48 Impr.
+  { source: "/hannoversche-lebensversicherung-kuendigen", destination: "/hannoversche-lebensversicherung-kontakt", permanent: true }, // 71 Impr.
+  { source: "/hansemerkur-krankenversicherung-kuendigen", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true }, // 1402 Impr.
+  { source: "/helvetia-versicherung-kuendigen", destination: "/helvetia-versicherung-kontakt", permanent: true }, // 146 Impr.
+  { source: "/hiscox-haftpflichtversicherung-kuendigen", destination: "/hiscox-versicherung-kontakt", permanent: true }, // 36 Impr.
+  { source: "/huk-coburg-lebensversicherung-kuendigen", destination: "/huk-coburg-versicherung-kontakt", permanent: true }, // 5 Impr.
+  { source: "/huk-coburg-rechtsschutzversicherung", destination: "/huk-coburg-versicherung-kontakt", permanent: true }, // 399 Impr.
+  { source: "/huk-coburg-risikolebensversicherung", destination: "/huk-coburg-versicherung-kontakt", permanent: true }, // 1154 Impr.
+  { source: "/huk24-unfallversicherung", destination: "/huk24-versicherung-kontakt", permanent: true }, // 13637 Impr.
+  { source: "/lvm-rechtsschutzversicherung", destination: "/lvm-versicherung-kontakt", permanent: true }, // 44 Impr.
+  { source: "/mannheimer-unfallversicherung", destination: "/mannheimer-versicherung-kontakt", permanent: true }, // 89 Impr.
+  { source: "/mecklenburgische-rechtsschutzversicherung", destination: "/mecklenburgische-versicherung-kontakt", permanent: true }, // 142 Impr.
+  { source: "/muenchener-verein-wohngebaeudeversicherung", destination: "/muenchener-verein-versicherung-kontakt", permanent: true }, // 69 Impr.
+  { source: "/rheinland-versicherung-kuendigen", destination: "/rheinland-versicherung-kontakt", permanent: true }, // 152 Impr.
+  { source: "/signal-iduna-krankenversicherung-kuendigen", destination: "/signal-iduna-kontakt", permanent: true }, // 15 Impr.
+  { source: "/signal-iduna-lebensversicherung", destination: "/signal-iduna-kontakt", permanent: true }, // 653 Impr.
+  { source: "/signal-iduna-pflegezusatzversicherung", destination: "/signal-iduna-kontakt", permanent: true }, // 651 Impr.
+  { source: "/signal-iduna-rechtsschutzversicherung", destination: "/signal-iduna-kontakt", permanent: true }, // 465 Impr.
+  { source: "/signal-iduna-tierversicherung", destination: "/signal-iduna-kontakt", permanent: true }, // 3144 Impr.
+  { source: "/sparkassen-direktversicherung-kuendigen", destination: "/sparkassen-direktversicherung-kontakt", permanent: true }, // 392 Impr.
+  { source: "/versicherungskammer-bayern-haftpflichtversicherung", destination: "/versicherungskammer-bayern-versicherung-kontakt", permanent: true }, // 46 Impr.
+  { source: "/vpv-unfallversicherung", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 553 Impr.
+  { source: "/waldenburger-unfallversicherung", destination: "/waldenburger-versicherung-kontakt", permanent: true }, // 67 Impr.
+  { source: "/wertgarantie-versicherung-kuendigen", destination: "/wertgarantie-versicherung-kontakt", permanent: true }, // 104 Impr.
+  { source: "/wgv-hausratversicherung-kuendigen", destination: "/wgv-versicherung-kontakt", permanent: true }, // 722 Impr.
+  { source: "/wgv-rechtsschutzversicherung", destination: "/wgv-versicherung-kontakt", permanent: true }, // 106 Impr.
+  { source: "/wgv-risikolebensversicherung", destination: "/wgv-versicherung-kontakt", permanent: true }, // 79 Impr.
+  { source: "/wgv-wohngebaeudeversicherung", destination: "/wgv-versicherung-kontakt", permanent: true }, // 429 Impr.
+  { source: "/wuerttembergische-hausratversicherung-kuendigen", destination: "/wuerttembergische-versicherung-kontakt", permanent: true }, // 29 Impr.
+  { source: "/wwk-basisrente", destination: "/wwk-versicherung-kontakt", permanent: true }, // 228 Impr.
+  { source: "/zurich-kfz-versicherung", destination: "/zurich-versicherung-kontakt", permanent: true }, // 487 Impr.
+  { source: "/zurich-lebensversicherung-kuendigen", destination: "/zurich-versicherung-kontakt", permanent: true }, // 222 Impr.
+  { source: "/zurich-rechtsschutzversicherung", destination: "/zurich-versicherung-kontakt", permanent: true }, // 600 Impr.
+  { source: "/zurich-rechtsschutzversicherung-kuendigen", destination: "/zurich-versicherung-kontakt", permanent: true }, // 103 Impr.
+  { source: "/zurich-wohngebaeudeversicherung", destination: "/zurich-versicherung-kontakt", permanent: true }, // 171 Impr.
 ];
