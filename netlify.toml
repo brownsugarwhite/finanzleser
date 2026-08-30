@@ -53,23 +53,121 @@
   status = 410
   force = true
 
-[[redirects]]
-  from = "/ruv-versicherung-kuendigen"
-  to = "/410.html"
-  status = 410
-  force = true
-
-[[redirects]]
-  from = "/ovag-versicherung"
-  to = "/410.html"
-  status = 410
-  force = true
+# R+V und OVAG stehen hier BEWUSST NICHT (mehr): fb7569d hat sie auf Wunsch aus der
+# Nachjustierungs-Liste von 410 auf 301 -> /anbieter umgestellt (lib/redirects.manual.ts).
+# Eine 410-Regel mit force = true wuerde diesen Redirect ueberstimmen — sie kam beim
+# Merge des cleanup-Branches mit und ist am 30.08.2026 wieder entfernt worden.
 
 # Alte Blog-Paginierung der Vorgaenger-Seite (/page/1 … /page/19)
 [[redirects]]
   from = "/page/*"
   to = "/410.html"
   status = 410
+  force = true
+
+# ── Scanner-Proben am CDN abfangen ─────────────────────────────────────────────
+#
+# lib/botPaths.ts spart bereits die WP-Abfragen, aber die Function laeuft trotzdem an:
+# Next-Server laden, 404 rendern. Und weil Non-200 NIE im Durable Cache landet, kostet
+# jeder einzelne Scanner-Hit erneut eine Invocation — auch der tausendste auf dieselbe
+# URL. Diese Grundlast ist von den Besucherzahlen voellig entkoppelt.
+#
+# Hier endet der Traffic am CDN, ohne Function. Bewusst nur die eindeutigen Praefixe:
+# Netlify kann keine Regex, und die Muster aus botPaths.ts (Dateiendungen, Traversal-
+# Encodings) lassen sich nicht vollstaendig abbilden. lib/botPaths.ts BLEIBT deshalb
+# als Fallback in den drei Routen — greift eine Regel hier nicht, ist das Verhalten
+# unveraendert wie bisher. Es kann also keine Regression entstehen.
+#
+# 🚨 Vor jeder Aenderung an dieser Liste: npm run verify:redirects -- --offline
+#    Freigabebedingung ist NULL Treffer auf echten URLs. Eine zu breite Regel macht aus
+#    einem funktionierenden 301 eine 404 und beschaedigt die GSC-Reparatur.
+#
+# 🚨 KEIN pauschales /wp-* — next.config.ts erlaubt in images.remotePatterns ausdruecklich
+# Bilder von www.finanzleser.de/wp-content/uploads/** (also dieser Domain). Eine breite
+# Regel haette die abgeschossen. Deshalb hier nur Pfade, unter denen es garantiert kein
+# ausgeliefertes Asset gibt; /wp-content/uploads/ bleibt bewusst unberuehrt.
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-includes/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-json/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-content/plugins/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-content/themes/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-config.php"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wp-cron.php"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/xmlrpc.php"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.env"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.git/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/vendor/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/cgi-bin/*"
+  to = "/404-bot.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/phpmyadmin/*"
+  to = "/404-bot.html"
+  status = 404
   force = true
 
 [build.environment]
