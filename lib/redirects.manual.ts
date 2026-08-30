@@ -224,4 +224,51 @@ export const manualRedirects = [
   { source: "/vpv-rentenversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
   { source: "/vpv-unfallversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 0 Impr.
   { source: "/vpv-wohngebaeudeversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true }, // 15 Impr.
+  // ── Nachtrag 30.08.2026: GSC-Export "Nicht gefunden (404)" ──────────────────
+  // Quelle: docs/https___www.finanzleser.de_-Coverage-Drilldown-2026-08-30/Tabelle.csv
+  // 177 gemeldete URLs, davon 63 bereits abgedeckt. Von den verbleibenden sind
+  // 45 reiner Query-Muell (?doing_wp_cron, ?amp), 4 Muster aus einer alten
+  // robots.txt (/wp-*.php, /*) und 2 bereits per netlify.toml auf 410 — die
+  // brauchen nichts. Hier stehen die, die ein echtes Ziel haben.
+  // Zuordnung ueber die Marke im Slug, gegen den Bestand der 147 Anbieterseiten
+  // geprueft; jedes Ziel existiert (verifiziert gegen prerender-manifest.json).
+  { source: "/provinzial-tierversicherung", destination: "/provinzial-rheinland-versicherung-kontakt", permanent: true },
+  { source: "/vgh-pflegezusatzversicherung", destination: "/vgh-versicherung-kontakt", permanent: true },
+  { source: "/bgv-reiseversicherung", destination: "/bgv-versicherung-kontakt", permanent: true },
+  { source: "/hansemerkur-pflegezusatzversicherung", destination: "/hansemerkur-krankenversicherung-kontakt", permanent: true },
+  { source: "/provinzial-pflegezusatzversicherung", destination: "/provinzial-rheinland-versicherung-kontakt", permanent: true },
+  { source: "/targo-lebensversicherung", destination: "/targo-lebensversicherung-kontakt", permanent: true },
+  { source: "/lvm-basisrente", destination: "/lvm-lebensversicherung-kontakt", permanent: true },
+  { source: "/devk-risikolebensversicherung", destination: "/devk-lebensversicherung-kontakt", permanent: true },
+  { source: "/continentale-risikolebensversicherung", destination: "/continentale-krankenversicherung-kontakt", permanent: true },
+  { source: "/provinzial-kfz-versicherung", destination: "/provinzial-rheinland-versicherung-kontakt", permanent: true },
+  { source: "/die-haftpflichtkasse-unfallversicherung", destination: "/die-haftpflichtkasse-kontakt", permanent: true },
+  { source: "/nv-tierversicherung", destination: "/nv-versicherung-kontakt", permanent: true },
+  { source: "/docura-kfz-versicherung", destination: "/docura-versicherung-kontakt", permanent: true },
+  { source: "/ideal-kfz-versicherung", destination: "/ideal-versicherung-kontakt", permanent: true },
+  { source: "/volkswohl-bund-lebensversicherung", destination: "/volkswohl-bund-lebensversicherung-kontakt", permanent: true },
+  { source: "/lvm-versicherung-kuendigen", destination: "/lvm-versicherung-kontakt", permanent: true },
+  { source: "/bgv-rechtsschutzversicherung-kuendigen", destination: "/bgv-versicherung-kontakt", permanent: true },
+  { source: "/hdi-versicherung-kuendigen", destination: "/hdi-versicherung-kontakt", permanent: true },
+  { source: "/rv-rechtsschutzversicherung", destination: "/rv-lebensversicherung-kontakt", permanent: true },
+  { source: "/bayern-versicherung-kuendigen", destination: "/bayern-versicherung-kontakt", permanent: true },
+  { source: "/concordia-unfallversicherung", destination: "/concordia-lebensversicherung-kontakt", permanent: true },
+  { source: "/docura-versicherung-kuendigen", destination: "/docura-versicherung-kontakt", permanent: true },
+  { source: "/docura-haftpflichtversicherung", destination: "/docura-versicherung-kontakt", permanent: true },
+  { source: "/wuerttembergische-haftpflichtversicherung-kuendigen", destination: "/wuerttembergische-lebensversicherung-kontakt", permanent: true },
+  { source: "/debeka-haftpflichtversicherung-kuendigen", destination: "/debeka-krankenversicherung-kontakt", permanent: true },
+  { source: "/vpv-hausratversicherung-kuendigen", destination: "/vpv-lebensversicherung-kontakt", permanent: true },
+  { source: "/arag-unfallversicherung-kuendigen", destination: "/arag-krankenversicherung-kontakt", permanent: true },
+  { source: "/wuerzburger-hausratversicherung-kuendigen", destination: "/wuerzburger-versicherung-kontakt", permanent: true },
+  { source: "/alte-leipziger-haftpflichtversicherung-kuendigen", destination: "/alte-leipziger-lebensversicherung-kontakt", permanent: true },
+  { source: "/lpv-lebensversicherung-kuendigen", destination: "/anbieter", permanent: true },
+  { source: "/flexirente", destination: "/dokumente/flexirente", permanent: true },
+  { source: "/pdf-berufsstart-und-sozialversicherung", destination: "/dokumente/berufsstarter-und-sozialversicherung", permanent: true },
+  { source: "/pflegetagegeldversicherung", destination: "/versicherungen", permanent: true },
+  { source: "/grundfaehigkeitsversicherung", destination: "/versicherungen", permanent: true },
+  { source: "/minijobrechner", destination: "/finanztools/rechner/minijob", permanent: true },
+  { source: "/ratenkreditrechner", destination: "/finanztools/rechner/kredit", permanent: true },
+  { source: "/lohnsteuerrechner-2", destination: "/finanztools/rechner/brutto-netto", permanent: true },
+  { source: "/steuerrechner", destination: "/finanztools/rechner", permanent: true },
+  { source: "/sitemap", destination: "/sitemap.xml", permanent: true },
 ];

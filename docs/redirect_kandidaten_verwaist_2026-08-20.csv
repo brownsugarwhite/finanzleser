@@ -27,3 +27,29 @@
 /immobilienfonds;0;67;;/finanzen/geldanlagen/anlageimmobilie;gut;
 /schuldverschreibung;0;67;;/finanzen/geldanlagen/wertpapierdepot;gut;
 /provinzial-pflegezusatzversicherung;2;56;ergo pflegezusatzversicherung sinnvoll (362) | ergo pflegezusatzversicherung vergleich (331) | provinzial tierversicherung (201);;Provinzial hat KEINE Anbieterseite - anlegen oder 410;
+# ── Nachtrag 30.08.2026 aus dem GSC-Export (docs/gsc_404_2026-08-30.csv) ──
+# Diese URLs liefern 404, haben aber KEIN eindeutiges Ziel. Redaktionsentscheidung noetig:
+# entweder passendes Ziel benennen oder bewusst auf 410 setzen (netlify.toml).
+/betreuungsgeld;;;;;alte Leistung, 2015 abgeschafft - 410 denkbar;
+/bauzinsen;0;2883;bauzinsen chart;;steht bereits oben in dieser Liste;
+/privatinsolvenz;;;;;Thema ohne Artikel - Content-Luecke;
+/forward-darlehen;;;;;Thema ohne Artikel - Content-Luecke;
+/schuldverschreibung;;;;;Thema ohne Artikel - Content-Luecke;
+/immobilienfonds;;;;;Thema ohne Artikel - Content-Luecke;
+/gesundheitsfonds;;;;;Thema ohne Artikel - Content-Luecke;
+/interhyp;;;;;Anbietername ohne Anbieterseite;
+/pdf-unterhaltsvorschuss;;;;;altes PDF, Nachfolger pruefen;
+/lohnabrechnung;;;;;Thema ohne Artikel;
+# Alte News-/Blogbeitraege ohne Nachfolger - 410 waere sauberer als 404:
+/mehrheit-der-wohnungen-werden-mit-gas-und-oel-beheizt;;;;;News 2021;
+/deutsche-werden-aelter-als-angenommen;;;;;News;
+/heizkosten-pellets-am-guenstigsten;;;;;News;
+/das-machen-die-deutschen-im-netz;;;;;News;
+/so-wird-das-jahr-2021-fuer-anleger;;;;;News 2021;
+/steigende-preise-treffen-wirtschaft-ueberall;;;;;News;
+/welche-vorsaetze-haben-sie-fuer-2021;;;;;News 2021;
+/in-diesen-berufen-fehlen-azubis;;;;;News;
+/digitale-echtheitszertifikate-nfts-als-renditebringer;;;;;News;
+/gesetze-und-regelungen-aktuell-august-2025;;;;;News, veraltet;
+/neue-blaue-kennzeichen-fuer-mofas-und-e-scooter-ab-maerz;;;;;News;
+/kadewe-insolvenz;;;;;News;
