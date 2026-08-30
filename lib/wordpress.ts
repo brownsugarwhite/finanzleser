@@ -5,7 +5,6 @@ import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
 import { stripHtml } from "./seo";
-import { ADSENSE_ENABLED, ADSENSE_TEST } from "./ads";
 
 export interface LatestTool {
   type: "rechner" | "checkliste" | "vergleich";
@@ -1888,41 +1887,24 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
   },
 };
 
-// Staging-/Test-Builds: alle Werbepositionen erzwingen, OHNE die WP-Schalter
-// anzufassen. WICHTIG: Es gibt nur EIN WordPress (staging.finanzleser.de) — es
-// ist zugleich das produktive CMS für www.finanzleser.de. Die Schalter dort zu
-// aktivieren würde sofort Platzhalter auf Live zeigen. Der Override greift nur
-// bei ADSENSE_ENABLED && ADSENSE_TEST (= Staging/Previews/lokal, nie Production)
-// und fliegt mit dem Live-Go-Commit wieder raus — ab dann gelten die WP-Schalter.
-function forceAllAdsOn(settings: SiteSettings): SiteSettings {
-  if (!(ADSENSE_ENABLED && ADSENSE_TEST)) return settings;
-  const on = { top: true, rails: true, mid: true };
-  return {
-    ...settings,
-    article_ads: { ...on },
-    ads: {
-      article: { ...on },
-      rechner: { top: true, rails: true },
-      vergleich: { top: true, rails: true },
-      checkliste: { top: true, rails: true },
-      anbieter: { ...on },
-      kategorie: { top: true, rails: true },
-      suche: { top: true, rails: true },
-      dokumente: { top: true, rails: true },
-    },
-  };
-}
+// Hier stand bis 30.08.2026 forceAllAdsOn(): ein Override, der auf Staging alle
+// Werbepositionen erzwang, ohne die WP-Schalter anzufassen (es gibt nur EIN
+// WordPress — staging.finanzleser.de ist zugleich das produktive CMS für
+// www.finanzleser.de, ein Schalter dort wirkt sofort live). Der Override war
+// ausdrücklich Wegwerf-Code für die Staging-Abnahme und ist mit dem Merge in die
+// main-Linie entfernt. Ab jetzt gilt allein, was WP liefert — und solange
+// NEXT_PUBLIC_ADSENSE nicht gesetzt ist, rendert ohnehin kein Ad-Code.
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   const wpUrl = process.env.WORDPRESS_API_URL;
-  if (!wpUrl) return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
+  if (!wpUrl) return SITE_SETTINGS_FALLBACK;
 
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
       next: { revalidate: CONTENT_REVALIDATE },
     });
-    if (!res.ok) return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
+    if (!res.ok) return SITE_SETTINGS_FALLBACK;
     const data = (await res.json()) as Partial<SiteSettings>;
     const top_banner = { ...SITE_SETTINGS_FALLBACK.top_banner, ...(data.top_banner ?? {}) };
     const article_ads = { ...SITE_SETTINGS_FALLBACK.article_ads, ...(data.article_ads ?? {}) };
@@ -1940,10 +1922,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       suche: { ...fb.suche, ...(adsData.suche ?? {}) },
       dokumente: { ...fb.dokumente, ...(adsData.dokumente ?? {}) },
     };
-    return forceAllAdsOn({ top_banner, article_ads, ads });
+    return { top_banner, article_ads, ads };
   } catch (error) {
     console.error("Error fetching site settings from WordPress:", error);
-    return forceAllAdsOn(SITE_SETTINGS_FALLBACK);
+    return SITE_SETTINGS_FALLBACK;
   }
 }
 
@@ -2036,12 +2018,53 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
 // Anbieter (CPT): Einzelseite nach Slug
 // ─────────────────────────────────────────────
 
+// Build-Bulk MIT content (getAllAnbieter holt nur id/title/slug) → eine Map für alle
+// getAnbieterBySlug-Aufrufe der 147 prerenderten Kontaktseiten.
+function getAllAnbieterFullMap(): Promise<Map<string, AnbieterPost>> {
+  return buildMemo("anbieterFull", async () => {
+    const client = getClient();
+    const query = gql`
+      query BulkAnbieterFull($after: String) {
+        allAnbieter(first: 50, after: $after) {
+          pageInfo { hasNextPage endCursor }
+          nodes { id title slug content }
+        }
+      }
+    `;
+    type Resp = { allAnbieter: { nodes: AnbieterPost[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+    const map = new Map<string, AnbieterPost>();
+    let after: string | null = null;
+    let hasNext = true;
+    let guard = 0;
+    while (hasNext && guard++ < 60) {
+      const data: Resp = await client.request<Resp>(query, { after });
+      for (const n of data.allAnbieter.nodes) { if (n.slug) map.set(n.slug, n); }
+      hasNext = data.allAnbieter.pageInfo.hasNextPage;
+      after = data.allAnbieter.pageInfo.endCursor;
+    }
+    // Leere Map = transienter WP-Aussetzer. Werfen statt 147 Seiten leer zu backen.
+    if (map.size === 0) throw new Error("[anbieterFull] leere Map beim Build (transient) → Retry");
+    console.log(`[anbieterFull] ${map.size} Anbieter gebündelt`);
+    return map;
+  });
+}
+
 // cache() = Deduplizierung innerhalb EINES Render-Durchlaufs. generateMetadata und die
 // Page-Komponente fragen denselben Slug beide ab; ohne cache() waren das zwei GraphQL-
 // Roundtrips à ~2,3 s gegen ein IONOS-WP, das unter Last mit „Error establishing a
 // database connection" aussteigt. Jede eingesparte Abfrage senkt die Wahrscheinlichkeit,
 // dass ein Rendering scheitert und ein kaputter Zustand in den ISR-Cache gebacken wird.
 export const getAnbieterBySlug = cache(async (slug: string): Promise<AnbieterPost | null> => {
+  // Build: aus der Bulk-Map. Seit die 147 Kontaktseiten prerendert werden, wäre die
+  // Einzelabfrage 147 Roundtrips à ~2,3 s gegen das IONOS-WP — genau die Last, unter der
+  // es mit „Error establishing a database connection" aussteigt. Gebündelt sind es 3.
+  // Laufzeit: weiterhin Einzelabfrage (Freshness via ISR + On-Demand-Revalidate).
+  // Kein Treffer → durchfallen: die Root-Catch-All fragt hier auch Kategorie-Slugs ab.
+  if (IS_BUILD) {
+    const hit = (await getAllAnbieterFullMap()).get(slug);
+    if (hit) return hit;
+  }
+
   const client = getClient();
 
   const query = gql`
