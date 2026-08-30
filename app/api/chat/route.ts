@@ -7,7 +7,21 @@ import { NextResponse } from "next/server";
 import type { LeoSource, LeoUIMessage } from "@/lib/ai/leoMessage";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 60;
+// 45 statt 60: Netlify rechnet Compute-SEKUNDEN ab, nicht nur Invocations. Eine
+// Function, die auf ein totes Heroku-Dyno wartet, kostet so viel wie hunderte
+// Seitenaufrufe. Die beiden Timeouts unten greifen ohnehin frueher — das hier ist
+// nur die letzte Reissleine.
+export const maxDuration = 45;
+
+// Zeit bis die Antwort-HEADER des Backends da sind. Deckt den Heroku-Cold-Start ab
+// (Dyno faehrt hoch), begrenzt aber ein totes Backend hart. Wird geloescht, sobald
+// die Header da sind — der Stream selbst darf danach laenger laufen.
+const UPSTREAM_CONNECT_TIMEOUT_MS = 25_000;
+
+// Stillstand IM Stream: kommt 20 s lang kein Chunk mehr, ist das Backend weg.
+// Ohne das haelt eine offene, aber stumme Verbindung die Function bis maxDuration.
+// Grosszuegig bemessen — im Normalbetrieb kommen Tokens im Sekundentakt.
+const STREAM_IDLE_TIMEOUT_MS = 20_000;
 
 // LEO-Backend des Kunden (Heroku). Default fest verdrahtet, weil die URL kein
 // Secret ist und netlify.toml-Env nicht zuverlässig in die Function-Laufzeit
@@ -110,11 +124,27 @@ export async function POST(req: Request) {
       .map((m) => ({ role: m.role, content: messageText(m) }))
       .filter((m) => m.content.trim().length > 0);
 
-    const upstream = await fetch(`${LEO_BACKEND_URL}/chat/stream`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, history, slug, category }),
-    });
+    // Timeout NUR auf den Verbindungsaufbau. Der Controller wird nach Erhalt der
+    // Header entschaerft (clearTimeout), sonst wuerde er mitten in eine laufende
+    // Antwort hineinabbrechen — der Response-Body haengt am selben Signal.
+    const connectController = new AbortController();
+    const connectTimer = setTimeout(() => connectController.abort(), UPSTREAM_CONNECT_TIMEOUT_MS);
+    let upstream: Response;
+    try {
+      upstream = await fetch(`${LEO_BACKEND_URL}/chat/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, history, slug, category }),
+        signal: connectController.signal,
+      });
+    } catch (e) {
+      if (connectController.signal.aborted) {
+        throw new Error(`Backend antwortet nicht innerhalb von ${UPSTREAM_CONNECT_TIMEOUT_MS / 1000}s`);
+      }
+      throw e;
+    } finally {
+      clearTimeout(connectTimer);
+    }
 
     if (!upstream.ok || !upstream.body) {
       const detail = await upstream.text().catch(() => "");
@@ -150,8 +180,31 @@ export async function POST(req: Request) {
           // "done" → Schleife endet ohnehin mit dem Stream-Ende.
         };
 
+        // Wie reader.read(), bricht aber ab, wenn STREAM_IDLE_TIMEOUT_MS lang nichts
+        // kommt. Verliert das Rennen der Timer, wird der Reader gecancelt — sonst
+        // liefe die Verbindung im Hintergrund weiter und haelt die Function offen.
+        const readOrTimeout = async () => {
+          let timer: ReturnType<typeof setTimeout> | undefined;
+          try {
+            return await Promise.race([
+              reader.read(),
+              new Promise<never>((_, reject) => {
+                timer = setTimeout(
+                  () => reject(new Error(`Backend sendet seit ${STREAM_IDLE_TIMEOUT_MS / 1000}s nichts mehr`)),
+                  STREAM_IDLE_TIMEOUT_MS
+                );
+              }),
+            ]);
+          } catch (e) {
+            await reader.cancel().catch(() => {});
+            throw e;
+          } finally {
+            clearTimeout(timer);
+          }
+        };
+
         for (;;) {
-          const { value, done } = await reader.read();
+          const { value, done } = await readOrTimeout();
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
           const blocks = buffer.split("\n\n");
