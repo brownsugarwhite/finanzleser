@@ -39,6 +39,10 @@ npm-debug.log*
 docs/*.xlsx
 docs/*.docx
 
+# Roh-Exporte aus der Search Console (ZIP). Jederzeit neu ziehbar, und die
+# Auswertung landet ohnehin als CSV/Markdown im Repo — nicht der Rohexport.
+docs/seo_export_*/
+
 # Hinweis: assets/ und scripts/ wurden am 10.08.2026 in das Schwester-Repo
 # ../finanzleser-assets ausgelagert (156 MB, kein Anwendungsbezug). Falls sie
 # versehentlich wieder auftauchen, gehoeren sie dorthin — nicht hierher.

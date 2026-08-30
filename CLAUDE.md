@@ -3,7 +3,7 @@
 > Diese Datei gibt Claude Code den vollständigen Kontext über das Projekt.
 > Lies sie zu Beginn jeder Session vollständig durch.
 >
-> Stand: **2026-08-10**
+> Stand: **2026-08-30**
 
 ---
 
@@ -21,8 +21,22 @@
   `project_security_wp2shell_2026_08_10.md`. Vor Weiterarbeit am WP dort nachlesen.
 - ✅ Seite ist **live** (Netlify, `main`). Post-Launch-Batches + SEO-Reparatur der
   Google-Deindexierung abgeschlossen.
-- ✅ Cleanup + Compute-Paket August 2026 (siehe [ROADMAP.md](ROADMAP.md))
+- ✅ Cleanup + Compute-Paket August 2026 (siehe [ROADMAP.md](ROADMAP.md)) — lag bis zum
+  30.08. ungemergt auf `chore/cleanup-und-compute`, ist jetzt in der main-Linie
 - 🔄 **Phase 2** in Vorbereitung: Werbung, Login-Bereich, KI-Ausbau, WhatsApp
+
+**🚨 Zwei Fallen, die im August real zugeschlagen haben — beide gelten weiter:**
+
+1. **Das IONOS-WordPress ist der Flaschenhals.** ~2,3 s pro GraphQL-Abfrage, und unter
+   Parallellast antwortet es mit „Error establishing a database connection". Daran ist
+   am 30.08. ein Build gestorben (147 zusätzliche Einzelabfragen auf einmal), und am
+   19.08. hat ein Mess-Sweep mit 12 parallelen Verbindungen kaputte Seiten in den
+   ISR-Cache gebacken. Werkzeuge, die gegen live laufen, immer drosseln (≤ 3 parallel).
+2. **Kein `.catch(() => null)` auf WP-Fetches in gecachten Routen.** Ein geschluckter
+   Fehler wird als 404 oder als Metadata ohne Canonical dauerhaft in den ISR-Cache
+   gebacken. Fehler müssen werfen — dann cacht Next nichts und der letzte gute Stand
+   bleibt. Ausnahmen nur, wo der Fetch eine Verbesserung ist und keine Existenz-
+   Entscheidung (z. B. Yoast-Meta).
 
 **Historischer Stand (April 2026):**
 - ✅ WordPress-Backend neu aufgesetzt, Custom Post Types + ACF eingerichtet

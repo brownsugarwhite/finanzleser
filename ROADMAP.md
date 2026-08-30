@@ -1,6 +1,6 @@
 # Roadmap finanzleser.de
 
-> Stand: **2026-08-10**
+> Stand: **2026-08-30**
 > Vollständiger Projektkontext: [CLAUDE.md](CLAUDE.md)
 
 ---
@@ -18,9 +18,42 @@ widerrufen (auch das des MCP-Connectors), `WP_REVALIDATE_SECRET` und
 
 ---
 
+## ✅ Zusammenführung 30.08.2026 (Branch `chore/merge-compute-2026-08-30`)
+
+Der Cleanup-Block unten lag seit dem 11.08. ungemergt auf `chore/cleanup-und-compute`,
+während `main` parallel die SEO- und Sicherheitsarbeit bekam. **Beide Linien sind jetzt
+zusammengeführt** — der Netlify-Compute-Fix war bis dahin nie live.
+
+🚨 **Lehre für künftige Merges dieser Art:** In vier von fünf Konfliktdateien war *main*
+der neuere Stand. Ein naiver Merge hätte den fail-open-Fix (`34d2ba1`) zurückgerollt und
+damit das Cache-Poisoning vom 19./20.08. wieder ermöglicht, dazu die Drosselung des
+Prüfwerkzeugs (`2ed75cf`) entfernt — also genau die Ursache jenes Schadens.
+Konfliktauflösung immer inhaltlich prüfen, nie nach Branch-Alter.
+
+| Commit | Was |
+|---|---|
+| `67d4097` | Merge mit kontrollierter Konfliktauflösung (5 Dateien) |
+| `930900d` | `forceAllAdsOn()` raus (Wegwerf-Code der Staging-Abnahme) + `getAllAnbieterFullMap()` |
+| `4b0441d` | **147 Anbieter-Kontaktseiten prerendern** — standen in der Sitemap, waren aber nicht vorgerendert; jeder Crawler-Hit lief durch die 8-Query-Kaskade |
+| `d14cf9d` | **Scanner-Proben am CDN abfangen** — `botPaths.ts` sparte die WP-Abfragen, die Function lief trotzdem an; Non-200 landet nie im Durable Cache, also kostete jeder Hit erneut |
+| `f3bd3f6` | **`/api/chat` Timeouts** — `fetch` ohne Timeout hielt die Function bei totem Heroku-Dyno 60 s offen (Netlify rechnet Compute-Sekunden ab) |
+
+Ebenfalls in `d14cf9d` korrigiert: die 410-Regeln für R+V/OVAG kamen mit dem Merge in
+`netlify.toml` mit und hätten mit `force = true` den 301 auf `/anbieter` überstimmt,
+den `fb7569d` auf Wunsch aus der Nachjustierungs-Liste gesetzt hatte.
+
+**Werbung:** Der AdSense-Code ist mitgemergt, bleibt aber über `NEXT_PUBLIC_ADSENSE`
+deaktiviert — Production zeigt weiter Platzhalter. Offen bis zum Livegang: AdSense-Konto-
+zugang (Genehmigungsstatus prüfen), `CONSENT_VERSION` auf 2, Banner-Text korrigieren,
+Datenschutzerklärung im WP, Production-Flag. Für **personalisierte** Ads verlangt Google
+zusätzlich eine zertifizierte CMP mit IAB TCF v2.3 (seit 01.03.2026) plus Consent Mode v2
+— der Eigenbau-Banner erfüllt das nicht; ohne CMP liefert Google „Limited Ads".
+
+---
+
 ## ✅ Cleanup August 2026 (Branch `chore/cleanup-und-compute`)
 
-Snapshot-Tag: `pre-cleanup-2026-08-10`.
+Snapshot-Tag: `pre-cleanup-2026-08-10`. **Am 30.08. in die main-Linie gemergt** (siehe oben).
 
 | Commit | Was |
 |---|---|
@@ -33,10 +66,12 @@ Snapshot-Tag: `pre-cleanup-2026-08-10`.
 Ergebnis: Arbeitsbaum ~171 MB → ~15 MB, getrackte Dateien 1981 → 525.
 
 **Offen aus diesem Block:**
-- Build-Verifikation + Deploy-Preview (wartet, bis das WordPress wieder stabil ist —
-  ein Build zieht ~689 Seiten über GraphQL)
 - `@netlify/plugin-nextjs` in `package.json` pinnen (bewusst aufgeschoben: nicht ohne
   Deploy testbar, aktuell Auto-Install v5.15.13)
+- **Beobachten nach dem Deploy:** `app/layout.tsx` hat `.catch(() => ({}))` auf
+  `getMegamenuPreload()`. Fällt WP beim Regenerieren aus, ist `preloaded` leer und
+  *jeder* Besucher löst 10–16 parallele Megamenu-API-Invocations aus. Kein Dauerzustand,
+  aber bei wackligem IONOS-WP ein möglicher Invocation-Sturm
 - Struktur-Refactoring: `lib/wordpress.ts` (2094 Z.) aufteilen, `LeoIcon.tsx` (1450 Z.,
   Inline-SVG raus), `app/components.css` (4015 Z.) nach Feature splitten,
   `useListHoverBox`/`useSliderHoverBox` zusammenführen. Braucht visuelle Verifikation
