@@ -54,7 +54,12 @@ export function useSearchSuggestions(
       } catch {
         // aborted or network error: ignore
       }
-    }, 150);
+      // 300ms statt 150ms: bei normalem Tipptempo (~150–250ms je Anschlag) loeste 150ms
+      // fuer fast jeden Buchstaben einen Request aus — „berufsunfaehigkeit" waren so bis
+      // zu 15 Invocations pro Suchvorgang. Der AbortController bricht zwar die Antwort ab,
+      // der Request ist da aber laengst raus. 300ms buendelt Woerter, ohne dass sich die
+      // Vorschlagsliste spuerbar traeger anfuehlt.
+    }, 300);
     return () => {
       if (debounceRef.current) window.clearTimeout(debounceRef.current);
     };

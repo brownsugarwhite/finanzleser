@@ -5,6 +5,7 @@ import { ConsentProvider } from "@/lib/consent/ConsentContext";
 import CookieBanner from "@/components/consent/CookieBanner";
 import CookieSettings from "@/components/consent/CookieSettings";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import AdSenseLoader from "@/components/ads/AdSenseLoader";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <CookieBanner />
       <CookieSettings />
       <GoogleAnalytics />
+      <AdSenseLoader />
     </ConsentProvider>
   );
 }

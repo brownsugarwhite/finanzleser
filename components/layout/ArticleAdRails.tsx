@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ADSENSE_ENABLED } from "@/lib/ads";
+import AdSenseUnit from "@/components/ads/AdSenseUnit";
 
 /**
  * Sticky Werbe-Rails links + rechts neben dem Artikel.
@@ -123,14 +125,18 @@ export default function ArticleAdRails({
                 transition: TRANSITION,
               }}
             >
-              <div className="article-side-rail-box" data-slot-format="rail" />
+              <div className="article-side-rail-box" data-slot-format="rail">
+                {ADSENSE_ENABLED && <AdSenseUnit format="halfpage" fullWidth bare />}
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div ref={rightRef} className="article-side-rail article-side-rail-right" style={rightStyle}>
         <div className="article-side-rail-sticky">
-          <div className="article-side-rail-box" data-slot-format="rail" />
+          <div className="article-side-rail-box" data-slot-format="rail">
+            {ADSENSE_ENABLED && <AdSenseUnit format="halfpage" fullWidth bare />}
+          </div>
         </div>
       </div>
     </>

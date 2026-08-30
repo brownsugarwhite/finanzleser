@@ -1,6 +1,6 @@
 // Netlify Build-Plugin: wärmt nach erfolgreichem Deploy die Edge-/ISR-Caches der
 // Hub-Seiten vor (Landing, Haupt-/Subkategorien, Tool-Übersichten — siehe isHubPath
-// in scripts/warm-cache.mjs; WARM_FULL=true würde die ganze Sitemap wärmen). So bekommt
+// in ./warm-cache.mjs; WARM_FULL=true würde die ganze Sitemap wärmen). So bekommt
 // der erste echte Besucher der meistbesuchten Einstiege eine schnelle Seite, auch wenn
 // der Build (IONOS-Flakiness) nicht alles prerendern konnte.
 // Voraussetzung: NODE_VERSION >= 22 (Netlify-Plugin-Mindestversion), siehe netlify.toml.
@@ -20,7 +20,7 @@ module.exports = {
       return;
     }
     try {
-      const { warm } = await import("../../../scripts/warm-cache.mjs");
+      const { warm } = await import("./warm-cache.mjs");
       await warm(base, { concurrency: Number(process.env.WARM_CONCURRENCY) || 6 });
     } catch (e) {
       // Warming-Fehler dürfen den Deploy NICHT kippen.

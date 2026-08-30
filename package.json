@@ -7,14 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "warm": "node scripts/warm-cache.mjs",
+    "warm": "node netlify/plugins/warm-cache/warm-cache.mjs",
     "verify:redirects": "node --experimental-strip-types tools/verify-redirects.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.184",
     "@anthropic-ai/sdk": "^0.90.0",
-    "@gsap/react": "^2.1.2",
-    "@use-gesture/react": "^10.3.1",
     "ai": "^6.0.182",
     "embla-carousel-react": "^8.6.0",
     "graphql": "^16.14.0",
