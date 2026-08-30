@@ -1,5 +1,3 @@
-backup/
-
 # Next.js
 .next/
 out/
@@ -30,15 +28,23 @@ npm-debug.log*
 .vercel
 .netlify
 
-# FAQ batch intermediates (agenten-generiert, in faqs-generated.json gemerged)
-scripts/faq-batches/
-
-# Anbieter-Import Zwischenergebnis (generiert aus assets/anbieter/)
-scripts/anbieter-import.json
-
 # Lokale MCP-Server-Registrierung (maschinenspezifische Pfade)
 .mcp.json
 
-# Generierte Visual-Raster-Derivate (regenerierbar via scripts/build-visuals.mjs, ~230 MB).
-# SVG-Master (assets/visuals/**) + manifest.json werden getrackt, die Derivate nicht.
-assets/visuals-build/
+# Office-Sperrdateien (~$Datei.xlsx), entstehen beim Oeffnen in Excel/Word
+~$*
+
+# Binaerdokumente in docs/: Angebote, Bugreports, Content-Inventare.
+# Gehoeren nicht in ein Frontend-Repo — liegen im Projektordner bzw. beim Kunden.
+docs/*.xlsx
+docs/*.docx
+
+# Roh-Exporte aus der Search Console (ZIP). Jederzeit neu ziehbar, und die
+# Auswertung landet ohnehin als CSV/Markdown im Repo — nicht der Rohexport.
+docs/seo_export_*/
+
+# Hinweis: assets/ und scripts/ wurden am 10.08.2026 in das Schwester-Repo
+# ../finanzleser-assets ausgelagert (156 MB, kein Anwendungsbezug). Falls sie
+# versehentlich wieder auftauchen, gehoeren sie dorthin — nicht hierher.
+assets/
+scripts/

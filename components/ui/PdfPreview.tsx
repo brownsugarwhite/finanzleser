@@ -1,16 +1,26 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import type { BeitragPdf } from "@/lib/articleToolData";
 
 interface PdfPreviewProps {
   slug: string;
+  /**
+   * Serverseitig vorgeladen (ISR). `null` = geprüft, kein PDF vorhanden.
+   * `undefined` = nicht vorgeladen → Client-Fallback auf /api/beitrag-pdf.
+   */
+  initialData?: BeitragPdf | null;
 }
 
-export default function PdfPreview({ slug }: PdfPreviewProps) {
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
-  const [pdfTitle, setPdfTitle] = useState<string>("");
+export default function PdfPreview({ slug, initialData }: PdfPreviewProps) {
+  const [pdfUrl, setPdfUrl] = useState<string | null>(initialData?.pdfUrl ?? null);
+  const [pdfTitle, setPdfTitle] = useState<string>(initialData?.pdfTitle ?? "");
 
   useEffect(() => {
+    // Vorgeladen (inkl. „kein PDF" = null) → kein Client-Roundtrip. Ohne diesen Guard
+    // feuerte /api/beitrag-pdf auf JEDEM der 202 Artikel-Views, auch ohne PDF.
+    if (initialData !== undefined) return;
+
     fetch(`/api/beitrag-pdf/${slug}`)
       .then((res) => res.json())
       .then((data) => {
@@ -20,7 +30,7 @@ export default function PdfPreview({ slug }: PdfPreviewProps) {
         }
       })
       .catch(() => {});
-  }, [slug]);
+  }, [slug, initialData]);
 
   if (!pdfUrl) return null;
 

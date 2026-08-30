@@ -1,6 +1,6 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug, getRechnerBySlug, getChecklisteBySlug, getAllVergleiche } from "@/lib/wordpress";
+import { getPostBySlug, getPostsByCategory, getCategoryWithChildren, getCategoryBySlug, getAnbieterBySlug, getRechnerBySlug, getChecklisteBySlug, getAllVergleiche, getAllAnbieter } from "@/lib/wordpress";
 import { MAIN_CATEGORY_SLUGS, isMainCategory } from "@/lib/categories";
 import { buildPostUrl, buildSubcategoryUrl, buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl } from "@/lib/urls";
 import AnbieterLayout from "@/components/layout/AnbieterLayout";
@@ -12,11 +12,37 @@ import { isBotPath } from "@/lib/botPaths";
 
 export const revalidate = 86400;
 
-// Nur die 4 Hauptkategorien prerendern (high-traffic Top-Nav). Daten-Fetches sind dank
-// Build-Bulk/Memo jetzt leicht → keine „0 Rechner"-Bakes mehr. Anbieter (147, low-traffic)
-// + Legacy-Slugs bleiben on-demand (dynamicParams = default true).
+// Die 4 Hauptkategorien (high-traffic Top-Nav) UND die 147 Anbieter-Kontaktseiten.
+//
+// Die Anbieter waren bis 30.08.2026 als „low-traffic" on-demand gelassen. Das war der
+// falsche Maßstab: app/sitemap.ts meldet alle 147 an Google, also crawlt Google sie —
+// und jeder Miss lief hier durch die sequentielle Kaskade (bis zu 8 GraphQL-Abfragen,
+// plus 2 in generateMetadata), weil Non-200 und On-demand-Renders nicht im Durable Cache
+// landen. Statisch sind sie außerdem immun gegen das Cache-Poisoning vom 19./20.08.
+//
+// Legacy-Slugs bleiben on-demand (dynamicParams = default true).
 export async function generateStaticParams(): Promise<Array<{ kategorie: string }>> {
-  return MAIN_CATEGORY_SLUGS.map((slug) => ({ kategorie: slug }));
+  // Annotation nötig: MAIN_CATEGORY_SLUGS ist ein Literal-Tupel, sonst verengt TS
+  // `kategorie` auf die 4 Kategorienamen und die Anbieter-Slugs passen nicht mehr.
+  const params: Array<{ kategorie: string }> = MAIN_CATEGORY_SLUGS.map((slug) => ({ kategorie: slug }));
+  const known = new Set<string>(MAIN_CATEGORY_SLUGS);
+
+  try {
+    for (const a of await getAllAnbieter()) {
+      // Kollision mit einem Kategorie-Slug wäre ein Datenfehler in WP — die Kategorie
+      // gewinnt, weil die Kaskade sie ohnehin zuerst auflöst.
+      if (a.slug && !known.has(a.slug)) {
+        known.add(a.slug);
+        params.push({ kategorie: a.slug });
+      }
+    }
+  } catch (error) {
+    // Kein harter Build-Abbruch: fällt WP hier aus, bleiben die Anbieter on-demand —
+    // also exakt das bisherige Verhalten. Muster wie in app/[kategorie]/[sub]/page.tsx.
+    console.error("[generateStaticParams] Anbieter nicht ladbar, bleiben on-demand:", error);
+  }
+
+  return params;
 }
 
 export async function generateMetadata(

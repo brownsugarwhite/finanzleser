@@ -1,5 +1,5 @@
 import "server-only";
-import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs } from "@/lib/wordpress";
+import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs, CONTENT_REVALIDATE } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { stripHtml } from "@/lib/seo";
 import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
@@ -19,6 +19,11 @@ export interface DokumentCard {
   kategorie?: string;
 }
 
+export interface BeitragPdf {
+  pdfUrl: string;
+  pdfTitle: string;
+}
+
 export interface ArticleToolData {
   /** Tool-Titel/-Beschreibung, Key = `${type}:${slug}` */
   titles: Record<string, ToolTitle>;
@@ -26,6 +31,11 @@ export interface ArticleToolData {
   checklisten: Record<string, ChecklisteInlineData>;
   /** Dokument-Karten, Key = normalisierte Slug-Liste (`slugs.join(",")`) */
   dokumente: Record<string, DokumentCard[]>;
+  /**
+   * Beitrags-PDF (ACF `beitrag_pdf`). `null` = geprüft, keins vorhanden.
+   * `undefined` = nicht vorgeladen → PdfPreview fällt auf /api/beitrag-pdf zurück.
+   */
+  beitragPdf?: BeitragPdf | null;
 }
 
 export const EMPTY_TOOL_DATA: ArticleToolData = { titles: {}, checklisten: {}, dokumente: {} };
@@ -70,8 +80,9 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
   try {
     // WICHTIG: revalidate setzen — ein ungecachtes fetch() ist in Next 15 `no-store`
     // und macht JEDEN Artikel mit Vergleich dynamisch (kein SSG → on-demand-Cold-Render).
-    // Freshness via ISR (1h) + On-Demand-Revalidate.
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: 3600 } });
+    // Freshness via ISR + On-Demand-Revalidate. CONTENT_REVALIDATE, damit dieser Fetch
+    // nicht das Segment-Intervall der Artikelroute nach unten zieht (Next nimmt das Minimum).
+    const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: CONTENT_REVALIDATE } });
     const posts = await res.json();
     const wpExcerpt = (posts[0]?.excerpt?.rendered || "").trim();
     return { title: posts[0]?.title?.rendered || "", excerpt: wpExcerpt || fallback };
@@ -87,9 +98,48 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
  * Jeder Teil ist einzeln try/catch-gekapselt → fehlende Daten = Client-Fallback,
  * nichts bricht.
  */
-export async function getArticleToolData(content?: string): Promise<ArticleToolData> {
+/**
+ * Beitrags-PDF (ACF-Feld `beitrag_pdf`) serverseitig auflösen.
+ *
+ * Vorher lud PdfPreview das per useEffect über /api/beitrag-pdf — und zwar auf JEDEM
+ * der 202 Artikel-Views, auch wenn der Beitrag gar kein PDF hat. Das ist dieselbe
+ * Situation wie bei Checklisten/Dokumenten/Tool-Titeln, die alle schon vorgeladen
+ * werden. Die API-Route bleibt als Client-Fallback bestehen.
+ *
+ * Rückgabe: `null` heißt „geprüft, kein PDF" — davon lebt der Guard in PdfPreview.
+ * Bei einem WP-Fehler werfen wir NICHT, sondern liefern `null`; der Client-Fallback
+ * hat dann noch eine zweite Chance.
+ */
+async function loadBeitragPdf(slug: string): Promise<BeitragPdf | null> {
+  const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
+  try {
+    const res = await fetch(
+      `${wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,acf`,
+      { next: { revalidate: CONTENT_REVALIDATE } },
+    );
+    if (!res.ok) return null;
+    const posts = await res.json();
+    const attachmentId = posts?.[0]?.acf?.beitrag_pdf;
+    if (!attachmentId) return null;
+
+    const attachRes = await fetch(
+      `${wpUrl}/wp-json/wp/v2/media/${attachmentId}?_fields=source_url,title`,
+      { next: { revalidate: CONTENT_REVALIDATE } },
+    );
+    if (!attachRes.ok) return null;
+    const attachment = await attachRes.json();
+    if (!attachment?.source_url) return null;
+
+    return { pdfUrl: attachment.source_url, pdfTitle: attachment.title?.rendered || "PDF-Dokument" };
+  } catch {
+    return null;
+  }
+}
+
+export async function getArticleToolData(content?: string, slug?: string): Promise<ArticleToolData> {
   if (!content) return EMPTY_TOOL_DATA;
   const refs = parseToolRefs(content);
+  let beitragPdf: BeitragPdf | null | undefined;
   const titles: Record<string, ToolTitle> = {};
   const checklisten: Record<string, ChecklisteInlineData> = {};
   const dokumente: Record<string, DokumentCard[]> = {};
@@ -138,7 +188,9 @@ export async function getArticleToolData(content?: string): Promise<ArticleToolD
         }));
       } catch { /* Client-Fallback */ }
     }),
+    // Läuft parallel zu den Tool-Fetches mit, kostet also keine zusätzliche Latenz.
+    ...(slug ? [loadBeitragPdf(slug).then((r) => { beitragPdf = r; })] : []),
   ]);
 
-  return { titles, checklisten, dokumente };
+  return { titles, checklisten, dokumente, beitragPdf };
 }

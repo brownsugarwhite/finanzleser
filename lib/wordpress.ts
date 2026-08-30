@@ -32,7 +32,25 @@ function applyContentHeaderTitle(post: Post & { content?: string }): Post {
   return post;
 }
 
-function getClient(revalidate: number = 3600): GraphQLClient {
+// Einheitliches ISR-Intervall für ALLE WP-Daten (GraphQL + REST).
+//
+// ACHTUNG, hier lag ein stiller Bug: Next nimmt für eine Route das MINIMUM aus dem
+// Segment-`revalidate` und allen `fetch(..., { next: { revalidate } })` darin. Die drei
+// Layout-Fetches (getNavItems/getSiteSettings/getMegamenuPreload in app/layout.tsx) laufen
+// auf JEDER Seite — solange die auf 3600 standen, zog das jede Route auf 3600 runter,
+// obwohl die Segmente längst `export const revalidate = 86400` deklarierten. Ergebnis im
+// Build: 685 von 689 vorgerenderten Routen mit initialRevalidateSeconds 3600 statt 86400,
+// also bis zu 24× mehr ISR-Regenerationen (= Netlify-Function-Invocations) als gewollt.
+//
+// Aktualität leidet dadurch nicht: der Save-Webhook (/api/revalidate) bustet + rewärmt die
+// betroffenen Pfade sofort. Das lange Intervall ist nur das Sicherheitsnetz.
+//
+// Gegenprobe nach einem Build:
+//   node -e "const r=require('./.next/prerender-manifest.json').routes; \
+//     console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"
+export const CONTENT_REVALIDATE = 86400;
+
+function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
   if (!endpoint) throw new Error("WORDPRESS_API_URL ist nicht gesetzt");
   const client = new GraphQLClient(endpoint, {
@@ -695,7 +713,20 @@ export const getPostBySlug = cache(async (slug: string): Promise<Post | null> =>
   if (IS_BUILD) {
     const hit = (await getAllPostsMap()).get(slug);
     if (hit) return hit;
-    // Nicht in der Bulk-Map (z.B. CPT/Legacy-Slug) → Einzelabfrage.
+
+    // 🚨 Anbieter-Slugs NICHT einzeln nachfragen. Die Root-Catch-All prueft in ihrer
+    // Kaskade zuerst auf Post und erst danach auf Anbieter — seit die 147 Kontaktseiten
+    // prerendert werden, waren das 147 zusaetzliche Einzelabfragen gegen das IONOS-WP.
+    // Genau daran ist der Build am 30.08.2026 gestorben ("Error establishing a database
+    // connection", 17 Seiten nach je 3 Versuchen aufgegeben). Ein Slug, der in der
+    // Anbieter-Map steht, ist per Definition kein Beitrag — die Abfrage ist reine Last.
+    // Die Map ist beim Build ohnehin geladen (buildMemo), kostet hier also nichts.
+    if ((await getAllAnbieterFullMap()).has(slug)) return null;
+
+    // Sonst nicht in der Bulk-Map (z.B. anderer CPT/Legacy-Slug) → Einzelabfrage.
+    // Bewusst KEIN generelles "Miss = null": buildPostsMap ist zwar vollstaendig
+    // paginiert und wirft bei Teilfehlern, aber ein falsches null wuerde hier einen
+    // 404 backen. Nur der nachweislich sichere Fall oben wird abgekuerzt.
   }
   return getPostBySlugSingle(slug);
 });
@@ -1808,7 +1839,7 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
   try {
     // REST API: Holt ACF Options via custom Endpoint
     const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: CONTENT_REVALIDATE },
     });
     if (!response.ok) return null;
 
@@ -1869,6 +1900,14 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
   },
 };
 
+// Hier stand bis 30.08.2026 forceAllAdsOn(): ein Override, der auf Staging alle
+// Werbepositionen erzwang, ohne die WP-Schalter anzufassen (es gibt nur EIN
+// WordPress — staging.finanzleser.de ist zugleich das produktive CMS für
+// www.finanzleser.de, ein Schalter dort wirkt sofort live). Der Override war
+// ausdrücklich Wegwerf-Code für die Staging-Abnahme und ist mit dem Merge in die
+// main-Linie entfernt. Ab jetzt gilt allein, was WP liefert — und solange
+// NEXT_PUBLIC_ADSENSE nicht gesetzt ist, rendert ohnehin kein Ad-Code.
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   const wpUrl = process.env.WORDPRESS_API_URL;
   if (!wpUrl) return SITE_SETTINGS_FALLBACK;
@@ -1876,7 +1915,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: CONTENT_REVALIDATE },
     });
     if (!res.ok) return SITE_SETTINGS_FALLBACK;
     const data = (await res.json()) as Partial<SiteSettings>;
@@ -1923,7 +1962,7 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
   try {
     const response = await fetch(
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: CONTENT_REVALIDATE } },
     );
     // 404 = Seite existiert wirklich nicht → null (echtes notFound). Andere Fehler
     // (5xx/Timeout unter IONOS-Last) → werfen, damit kein leeres 404 gecached wird
@@ -1968,7 +2007,7 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
   try {
     const res = await fetch(
       `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: CONTENT_REVALIDATE } },
     );
     // Meta ist optional → bei Fehler NICHT werfen (sonst bräche der Metadata-Build),
     // sondern null zurück und Frontend nutzt seinen Fallback.
@@ -1992,12 +2031,53 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
 // Anbieter (CPT): Einzelseite nach Slug
 // ─────────────────────────────────────────────
 
+// Build-Bulk MIT content (getAllAnbieter holt nur id/title/slug) → eine Map für alle
+// getAnbieterBySlug-Aufrufe der 147 prerenderten Kontaktseiten.
+function getAllAnbieterFullMap(): Promise<Map<string, AnbieterPost>> {
+  return buildMemo("anbieterFull", async () => {
+    const client = getClient();
+    const query = gql`
+      query BulkAnbieterFull($after: String) {
+        allAnbieter(first: 50, after: $after) {
+          pageInfo { hasNextPage endCursor }
+          nodes { id title slug content }
+        }
+      }
+    `;
+    type Resp = { allAnbieter: { nodes: AnbieterPost[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+    const map = new Map<string, AnbieterPost>();
+    let after: string | null = null;
+    let hasNext = true;
+    let guard = 0;
+    while (hasNext && guard++ < 60) {
+      const data: Resp = await client.request<Resp>(query, { after });
+      for (const n of data.allAnbieter.nodes) { if (n.slug) map.set(n.slug, n); }
+      hasNext = data.allAnbieter.pageInfo.hasNextPage;
+      after = data.allAnbieter.pageInfo.endCursor;
+    }
+    // Leere Map = transienter WP-Aussetzer. Werfen statt 147 Seiten leer zu backen.
+    if (map.size === 0) throw new Error("[anbieterFull] leere Map beim Build (transient) → Retry");
+    console.log(`[anbieterFull] ${map.size} Anbieter gebündelt`);
+    return map;
+  });
+}
+
 // cache() = Deduplizierung innerhalb EINES Render-Durchlaufs. generateMetadata und die
 // Page-Komponente fragen denselben Slug beide ab; ohne cache() waren das zwei GraphQL-
 // Roundtrips à ~2,3 s gegen ein IONOS-WP, das unter Last mit „Error establishing a
 // database connection" aussteigt. Jede eingesparte Abfrage senkt die Wahrscheinlichkeit,
 // dass ein Rendering scheitert und ein kaputter Zustand in den ISR-Cache gebacken wird.
 export const getAnbieterBySlug = cache(async (slug: string): Promise<AnbieterPost | null> => {
+  // Build: aus der Bulk-Map. Seit die 147 Kontaktseiten prerendert werden, wäre die
+  // Einzelabfrage 147 Roundtrips à ~2,3 s gegen das IONOS-WP — genau die Last, unter der
+  // es mit „Error establishing a database connection" aussteigt. Gebündelt sind es 3.
+  // Laufzeit: weiterhin Einzelabfrage (Freshness via ISR + On-Demand-Revalidate).
+  // Kein Treffer → durchfallen: die Root-Catch-All fragt hier auch Kategorie-Slugs ab.
+  if (IS_BUILD) {
+    const hit = (await getAllAnbieterFullMap()).get(slug);
+    if (hit) return hit;
+  }
+
   const client = getClient();
 
   const query = gql`

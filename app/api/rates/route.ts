@@ -1,5 +1,6 @@
 import ratesJson from "@/config/rates.json";
 import { cacheHeaders } from "@/lib/httpCache";
+import { RECHNER_CONFIG_TAG } from "@/lib/cacheTags";
 
 /**
  * API Endpoint für dynamische Rechner-Konfiguration
@@ -8,8 +9,10 @@ import { cacheHeaders } from "@/lib/httpCache";
 
 // Rechner-Konfiguration (Mindestlohn, BBG, Kindergeld …) ändert sich ~jährlich.
 // Vorher 5s → WP wurde praktisch bei jedem Rechner-Seitenaufruf neu abgefragt
-// (~3,9s Latenz). 1h Cache reicht völlig; Config-Änderungen sind nicht zeitkritisch.
-export const revalidate = 3600;
+// (~3,9s Latenz). Jetzt 24h: der Save-Webhook bustet diese Route bei jeder
+// finanzleser_rc_*-Änderung gezielt (app/api/revalidate), Aktualität ist also
+// garantiert — das Intervall ist nur noch das Sicherheitsnetz.
+export const revalidate = 86400;
 
 export async function GET() {
   try {
@@ -21,8 +24,13 @@ export async function GET() {
       const wpUrl = process.env.WORDPRESS_API_URL;
       if (wpUrl) {
         const baseUrl = wpUrl.replace('/graphql', '');
+        // Tag zusätzlich zum Pfad: revalidatePath("/api/rates") bustet die Route,
+        // aber auf den Data-Cache-Eintrag dieses Fetches ist bei 86400 kein Verlass.
+        // Der Webhook revalidiert deshalb auch den Tag — sonst würde die Route zwar
+        // neu rendern, aber die alte WP-Antwort wiederverwenden (Kindergeld & Co.
+        // hingen bis zu 24 h fest).
         const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
-          next: { revalidate: 3600 },
+          next: { revalidate: 86400, tags: [RECHNER_CONFIG_TAG] },
         });
         if (response.ok) {
           const wpRates = await response.json();

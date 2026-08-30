@@ -15,6 +15,7 @@ import MobileTocIndicator from "./MobileTocIndicator";
 import MobileTocOverlay from "./MobileTocOverlay";
 import ArticleAdRails from "./ArticleAdRails";
 import AdSlot from "@/components/ui/AdSlot";
+import InlineAdPortals from "@/components/ads/InlineAdPortals";
 import type { ArticleAdsSettings } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import { ScrollTrigger } from "@/lib/gsapConfig";
@@ -365,7 +366,7 @@ export default function ArticleClient({
               <ArticleContent content={bodyContent} collapsed={collapsed} currentSlug={pageSlug} showMidAd={!!articleAds?.mid} toolData={toolData} />
               {pageSlug && (
                 <ArticleElementWrapper variant="centered" collapsed={collapsed}>
-                  <PdfPreview slug={pageSlug} />
+                  <PdfPreview slug={pageSlug} initialData={toolData?.beitragPdf} />
                 </ArticleElementWrapper>
               )}
             </>
@@ -376,6 +377,10 @@ export default function ArticleClient({
               </div>
             </ArticleElementWrapper>
           )}
+
+          {/* Echte Ads in die injizierten Mid-Article-Asides portalen (nach dem
+              Content gemountet, damit die Asides beim Query bereits im DOM sind). */}
+          <InlineAdPortals />
         </div>
       </article>
     </div>

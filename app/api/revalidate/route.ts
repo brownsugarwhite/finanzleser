@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { RECHNER_CONFIG_TAG } from "@/lib/cacheTags";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -51,13 +52,40 @@ export async function POST(request: NextRequest) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
   const revalidated: string[] = [];
 
-  // Layout-Bust (für globale Layout-Elemente wie TopBanner) — bustet ALLE Pages
   if (body.layout) {
-    revalidatePath("/", "layout");
-    revalidated.push("/ (layout: alle Pages)");
-    // Layout-Bust trifft alle Seiten — nur die Startseite re-warmen (Rest wärmt beim
-    // nächsten Besuch/eigenen Webhook; alles zu warmen wäre zu teuer).
-    await rewarm(base, ["/"]);
+    // Das mu-plugin (wp-headless/finanzleser-headless.php) feuert `layout: true` für
+    // ZWEI sehr unterschiedliche Fälle und schickt den Options-Namen als `slug` mit:
+    //
+    //   finanzleser_site_settings  → TopBanner + Werbeschalter, stecken im Root-Layout
+    //                                 → betrifft wirklich jede Seite
+    //   finanzleser_rc_*           → Rechner-Konfiguration (Mindestlohn, Kindergeld, BBG …)
+    //                                 → wird AUSSCHLIESSLICH von /api/rates gelesen und von
+    //                                   dort clientseitig via useRates verteilt. Kommt in
+    //                                   keinem Server-Render einer Seite vor.
+    //
+    // Bisher bustete auch der zweite Fall alle 689 Seiten — bei einer Wertänderung, die
+    // keine einzige gerenderte Seite berührt. Danach lief die komplette Site kalt.
+    //
+    // Randnotiz zu revalidateTag: für den site_settings-Fall bringt das nichts. Die Daten
+    // hängen im Root-Layout, also wären exakt dieselben 689 Routen getaggt — der Radius
+    // ist der Daten geschuldet, nicht dem Bust-Mechanismus.
+    const isRechnerConfig = body.slug?.startsWith("finanzleser_rc_");
+
+    if (isRechnerConfig) {
+      // Pfad UND Tag: der Pfad bustet den Route-Cache, der Tag den Data-Cache-Eintrag
+      // des WP-Fetches darin (siehe lib/cacheTags.ts).
+      revalidateTag(RECHNER_CONFIG_TAG);
+      revalidatePath("/api/rates");
+      revalidated.push("/api/rates", `tag:${RECHNER_CONFIG_TAG}`);
+      await rewarm(base, ["/api/rates"]);
+    } else {
+      revalidatePath("/", "layout");
+      revalidated.push("/ (layout: alle Pages)");
+      // Layout-Bust trifft alle Seiten — nur die Startseite re-warmen (Rest wärmt beim
+      // nächsten Besuch/eigenen Webhook; alles zu warmen wäre zu teuer).
+      await rewarm(base, ["/"]);
+    }
+
     return NextResponse.json({
       ok: true,
       revalidated,

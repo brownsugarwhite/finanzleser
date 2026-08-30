@@ -3,7 +3,7 @@
 > Diese Datei gibt Claude Code den vollständigen Kontext über das Projekt.
 > Lies sie zu Beginn jeder Session vollständig durch.
 >
-> Stand: **2026-04-26**
+> Stand: **2026-08-30**
 
 ---
 
@@ -15,7 +15,30 @@
 **Themen:** Steuern, Finanzen, Versicherungen, Recht
 **Sprache:** Deutsch (einsprachig)
 
-**Aktueller Status (April 2026):**
+**Aktueller Status (August 2026):**
+- 🚨 **Sicherheitsvorfall 10.08.2026:** IONOS-Account kompromittiert (wp2shell /
+  CVE-2026-63030), Security-Firma im Fall. Details + Runbook: Memory
+  `project_security_wp2shell_2026_08_10.md`. Vor Weiterarbeit am WP dort nachlesen.
+- ✅ Seite ist **live** (Netlify, `main`). Post-Launch-Batches + SEO-Reparatur der
+  Google-Deindexierung abgeschlossen.
+- ✅ Cleanup + Compute-Paket August 2026 (siehe [ROADMAP.md](ROADMAP.md)) — lag bis zum
+  30.08. ungemergt auf `chore/cleanup-und-compute`, ist jetzt in der main-Linie
+- 🔄 **Phase 2** in Vorbereitung: Werbung, Login-Bereich, KI-Ausbau, WhatsApp
+
+**🚨 Zwei Fallen, die im August real zugeschlagen haben — beide gelten weiter:**
+
+1. **Das IONOS-WordPress ist der Flaschenhals.** ~2,3 s pro GraphQL-Abfrage, und unter
+   Parallellast antwortet es mit „Error establishing a database connection". Daran ist
+   am 30.08. ein Build gestorben (147 zusätzliche Einzelabfragen auf einmal), und am
+   19.08. hat ein Mess-Sweep mit 12 parallelen Verbindungen kaputte Seiten in den
+   ISR-Cache gebacken. Werkzeuge, die gegen live laufen, immer drosseln (≤ 3 parallel).
+2. **Kein `.catch(() => null)` auf WP-Fetches in gecachten Routen.** Ein geschluckter
+   Fehler wird als 404 oder als Metadata ohne Canonical dauerhaft in den ISR-Cache
+   gebacken. Fehler müssen werfen — dann cacht Next nichts und der letzte gute Stand
+   bleibt. Ausnahmen nur, wo der Fetch eine Verbesserung ist und keine Existenz-
+   Entscheidung (z. B. Yoast-Meta).
+
+**Historischer Stand (April 2026):**
 - ✅ WordPress-Backend neu aufgesetzt, Custom Post Types + ACF eingerichtet
 - ✅ Next.js Frontend weitestgehend fertig (Layout, Animationen, Slider, Megamenü, Article-Preview, KI-Section)
 - ✅ Cleanup-Phasen 1–4 abgeschlossen (SEO-Fundament, Dead Code, GSAP-Konsolidierung, CSS-Hygiene)
@@ -36,7 +59,8 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 - Lokale Entwicklung: `http://finanzleser.local` (Local by Flywheel)
 - GraphQL Endpoint (lokal): `http://finanzleser.local/graphql`
 - Live (Legacy): `https://www.finanzleser.de` (IONOS)
-- Staging (in Vorbereitung): `https://staging.finanzleser.de`
+- **Staging = Produktions-CMS**: `https://staging.finanzleser.de` — es gibt nur EINE
+  WordPress-Instanz, sie bedient Staging UND Live. Siehe Memory `project_single_wp_architecture.md`
 - Zweck: Nur CMS für Redakteure – kein Frontend-Rendering
 
 ### Next.js (Frontend)
@@ -96,10 +120,11 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 - Text (`--color-text-primary`, `-medium`, `-secondary`)
 - Bg (`--color-bg-page`, `-surface`, `-subtle`)
 - Borders (`--color-border-default`)
-- Glass (`--glass-white-{10,40}`, `--glass-dark-20`, `--glass-brand-{5,10,20}`, `--glass-blur-{sm,md}`)
+- Glass (`--glass-brand-{5,10,20}`, `--glass-blur-{sm,md}`)
 - Tool-Farben (`--color-tool-rechner`, `-vergleiche`, `-checklisten`)
 - Author-Gradients (1–6, dynamisch via `Author.tsx`)
-- Visual-Fills (1–10, dynamisch via `VisualLottie.tsx`)
+- Visual-Fills (1–10) — ⚠️ aktuell **ohne Consumer**; `VisualLottie.tsx` existiert nicht
+  mehr. Per Kommentar in `tokens.css` für spätere dynamische Nutzung reserviert.
 
 **Glassmorphism-Klassen** in [app/components.css](app/components.css) als `@utility`:
 - `glass-card` — heller Glass-Effekt
@@ -156,18 +181,36 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
   content-utils.ts
   anbieter-utils.ts
   checklisteParser.ts   → PDF-Parser für Checklisten
+  botPaths.ts           → 🚨 Denylist für Scanner-Pfade (siehe Regel 0)
+  cacheTags.ts          → Next Data-Cache-Tags für gezieltes Invalidieren
+  httpCache.ts          → Cache-Control + Netlify-CDN-Cache-Control (durable)
+  articleToolData.ts    → serverseitiger Preload aller Artikel-Einbettungen
+  /lottie/              → importierte Lottie-Daten (logoShrink.json)
   /calculators/         → Rechner-Logik (Pure-JS-Funktionen)
   /hooks/               → ALLE Hooks (Daten + Animation):
-                          useRates, useRechner, useRechnerState (Daten),
-                          useNavPill, useSliderPill, useRevolverSlider (Animation)
+                          useRates, useRechnerState (Daten),
+                          useNavPill, useSliderPill (Animation),
+                          useListHoverBox, useSliderHoverBox, useArticleToc,
+                          useIsMobile, useSearchSuggestions
 
 /acf-json               → group_rechner_config.json (🚧 wird in Phase E gelöscht)
 
-/scripts                → Migrations-Scripts + Daten-Files (siehe scripts/README.md)
+/netlify/plugins/warm-cache
+                        → Build-Plugin + warm-cache.mjs (wärmt Hub-Seiten nach Deploy)
+
+/tools                  → Entwickler-Werkzeuge, die dauerhaft gebraucht werden
+  verify-redirects.mjs  → 🚨 PFLICHT-Regressionstest für die SEO-Weiterleitungen
+
+/wp-headless            → mu-plugin-Quelle (Preview + Revalidate-Bridge), Deploy per SFTP
 
 /docs                   → WORDPRESS_ACF_SETUP.md, beitraege_kategorien.md
                           siehe ROADMAP.md für aktuellen Stand
 ```
+
+> **Ausgelagert am 10.08.2026:** `assets/` (134 MB Design-/Medien-Quellen, kein Code-Bezug)
+> und `scripts/` (122 historische Migrations-Skripte) liegen jetzt in
+> **`../finanzleser-assets`** — siehe das README dort. Sie sind in `.gitignore` gesperrt,
+> damit sie nicht zurückwandern.
 
 > **Hinweis Tailwind v4:** Keine `tailwind.config.ts` – alle Tokens und Utilities
 > direkt in `app/globals.css` via `@theme inline` und `@utility`.
@@ -319,6 +362,13 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
 
 ## 🚨 Wichtige Regeln
 
+0. **Weiterleitungen sind heilig.** `app/[kategorie]/page.tsx` ist die Kaskade, die die
+   Google-Deindexierung repariert hat. Vor jeder Änderung daran (und an
+   `lib/botPaths.ts`, `lib/redirects.generated.ts`, `next.config.ts`):
+   `npm run verify:redirects -- --offline`, vor dem Merge zusätzlich
+   `-- --preview <url>`. **Jede Abweichung ist ein Blocker.**
+   Und: **niemals eine Allowlist bekannter Slugs** — fehlt einer, wird aus einem 301
+   eine 404. Nur Denylists unmöglicher Muster.
 1. **URL-Erhalt:** bestehende Beitrags-URLs nie ohne 301-Redirect ändern
 2. **WordPress-Dateien gehören nicht ins Git** — nur Next.js-Frontend
 3. **ACF JSON Sync** nutzen solange ACF lebt — Felder als JSON in `acf-json/` versionieren
@@ -329,6 +379,14 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
 8. **Atomare Sub-Commits** bei größeren Refactorings — pro Schritt User-Verifikation
 9. **GSAP-Imports aus `@/lib/gsapConfig`** — niemals direkt aus `gsap`
 10. **Gutenberg statt ACF für Neues** — siehe Memory `feedback_gutenberg_over_acf.md`
+11. **ISR-Intervalle über `CONTENT_REVALIDATE`** (`lib/wordpress.ts`) — niemals einen
+    eigenen `revalidate`-Wert an einen Fetch hängen, der im Server-Render einer Seite
+    läuft. Next nimmt das **Minimum** aus Segment-`revalidate` und allen Fetches darin;
+    ein einzelner 3600er-Fetch zieht die ganze Route herunter. Genau so war das
+    beabsichtigte `86400` monatelang wirkungslos (685 von 689 Routen liefen auf 3600).
+    Gegenprobe nach jedem Build:
+    `node -e "const r=require('./.next/prerender-manifest.json').routes; console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"`
+    → erwartet `[86400, false]`.
 
 ---
 
@@ -343,4 +401,4 @@ Memory (Cross-Session-Notizen): siehe `/Users/bsw/.claude/projects/-Users-bsw-Pr
 
 ---
 
-*Zuletzt aktualisiert: 2026-04-26 (Roadmap-Phase A: Doku-Konsolidierung)*
+*Zuletzt aktualisiert: 2026-08-10 (Cleanup + Compute-Paket, Branch `chore/cleanup-und-compute`)*

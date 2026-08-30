@@ -5,7 +5,7 @@ export type ConsentCategory = "necessary" | "statistics" | "marketing" | "extern
 export interface ConsentState {
   necessary: true;
   statistics: boolean; // vorbereitet/leer — späteres Google Analytics
-  marketing: boolean; // Trustpilot-Bewertungen; später Werbung/AdSense
+  marketing: boolean; // Trustpilot-Bewertungen + Google-AdSense-Werbung
   externalMedia: boolean; // externe Vergleichstools (financeads, check24, …)
 }
 
@@ -64,8 +64,8 @@ export const CONSENT_CATEGORIES: ConsentCategoryMeta[] = [
     key: "marketing",
     title: "Marketing",
     description:
-      "Inhalte, die uns helfen, unser Angebot bekannter zu machen – z. B. unser Bewertungs-Widget.",
-    services: "Trustpilot",
+      "Inhalte, die uns helfen, unser Angebot bekannter zu machen und zu finanzieren – z. B. unser Bewertungs-Widget und personalisierte Werbung (Google AdSense). Dabei können Drittanbieter Cookies setzen.",
+    services: "Trustpilot, Google AdSense",
   },
   {
     key: "statistics",

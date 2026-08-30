@@ -120,6 +120,9 @@ const nextConfig: NextConfig = {
       "/neue-regelungen-ab-juli-2025",
       "/neue-gesetzes-und-pflichtaenderungen-ab-2026",
       "/hochwasserschutz-kann-fuer-europa-kostspielig-werden",
+      // R+V und OVAG NICHT hier: die werden seit fb7569d als 301 auf /anbieter
+      // aufgelöst (lib/redirects.manual.ts). Ein 410-Rewrite daneben wäre eine
+      // zweite Behandlung derselben URL.
     ];
     return GONE.map((source) => ({ source, destination: "/api/gone" }));
   },

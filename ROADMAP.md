@@ -1,7 +1,83 @@
 # Roadmap finanzleser.de
 
-> Stand: **2026-04-26**
+> Stand: **2026-08-30**
 > Vollständiger Projektkontext: [CLAUDE.md](CLAUDE.md)
+
+---
+
+## 🚨 Aktuell: Sicherheitsvorfall (10.08.2026)
+
+Der IONOS-Account wurde kompromittiert (**wp2shell / CVE-2026-63030**), eine
+Security-Firma arbeitet am Fall. Vier unbekannte Administrator-Accounts (IDs 16–19).
+Vollständiger Befund, Runbook und die Vorher-Baseline zum Gegenprüfen:
+Memory `project_security_wp2shell_2026_08_10.md`.
+
+**Nicht vergessen, sobald das WP sauber ist:** Application Passwords aller User
+widerrufen (auch das des MCP-Connectors), `WP_REVALIDATE_SECRET` und
+`WP_PREVIEW_SECRET` rotieren — in der Netlify-Env **und** im mu-plugin.
+
+---
+
+## ✅ Zusammenführung 30.08.2026 (Branch `chore/merge-compute-2026-08-30`)
+
+Der Cleanup-Block unten lag seit dem 11.08. ungemergt auf `chore/cleanup-und-compute`,
+während `main` parallel die SEO- und Sicherheitsarbeit bekam. **Beide Linien sind jetzt
+zusammengeführt** — der Netlify-Compute-Fix war bis dahin nie live.
+
+🚨 **Lehre für künftige Merges dieser Art:** In vier von fünf Konfliktdateien war *main*
+der neuere Stand. Ein naiver Merge hätte den fail-open-Fix (`34d2ba1`) zurückgerollt und
+damit das Cache-Poisoning vom 19./20.08. wieder ermöglicht, dazu die Drosselung des
+Prüfwerkzeugs (`2ed75cf`) entfernt — also genau die Ursache jenes Schadens.
+Konfliktauflösung immer inhaltlich prüfen, nie nach Branch-Alter.
+
+| Commit | Was |
+|---|---|
+| `67d4097` | Merge mit kontrollierter Konfliktauflösung (5 Dateien) |
+| `930900d` | `forceAllAdsOn()` raus (Wegwerf-Code der Staging-Abnahme) + `getAllAnbieterFullMap()` |
+| `4b0441d` | **147 Anbieter-Kontaktseiten prerendern** — standen in der Sitemap, waren aber nicht vorgerendert; jeder Crawler-Hit lief durch die 8-Query-Kaskade |
+| `d14cf9d` | **Scanner-Proben am CDN abfangen** — `botPaths.ts` sparte die WP-Abfragen, die Function lief trotzdem an; Non-200 landet nie im Durable Cache, also kostete jeder Hit erneut |
+| `f3bd3f6` | **`/api/chat` Timeouts** — `fetch` ohne Timeout hielt die Function bei totem Heroku-Dyno 60 s offen (Netlify rechnet Compute-Sekunden ab) |
+
+Ebenfalls in `d14cf9d` korrigiert: die 410-Regeln für R+V/OVAG kamen mit dem Merge in
+`netlify.toml` mit und hätten mit `force = true` den 301 auf `/anbieter` überstimmt,
+den `fb7569d` auf Wunsch aus der Nachjustierungs-Liste gesetzt hatte.
+
+**Werbung:** Der AdSense-Code ist mitgemergt, bleibt aber über `NEXT_PUBLIC_ADSENSE`
+deaktiviert — Production zeigt weiter Platzhalter. Offen bis zum Livegang: AdSense-Konto-
+zugang (Genehmigungsstatus prüfen), `CONSENT_VERSION` auf 2, Banner-Text korrigieren,
+Datenschutzerklärung im WP, Production-Flag. Für **personalisierte** Ads verlangt Google
+zusätzlich eine zertifizierte CMP mit IAB TCF v2.3 (seit 01.03.2026) plus Consent Mode v2
+— der Eigenbau-Banner erfüllt das nicht; ohne CMP liefert Google „Limited Ads".
+
+---
+
+## ✅ Cleanup August 2026 (Branch `chore/cleanup-und-compute`)
+
+Snapshot-Tag: `pre-cleanup-2026-08-10`. **Am 30.08. in die main-Linie gemergt** (siehe oben).
+
+| Commit | Was |
+|---|---|
+| `87518fd` | **ISR-Fix:** `revalidate = 86400` war nie aktiv — `getClient()` gab jedem Fetch 3600 mit, Next nimmt das Minimum. 685/689 Routen liefen auf 3600 statt 86400. `CONTENT_REVALIDATE` ist jetzt die einzige Quelle |
+| `eba9636` | PDF-Preload serverseitig (feuerte auf allen 202 Artikel-Views), Durable-Header für `dokument-pdf`, Rechner-Konfig bustet nicht mehr alle 689 Seiten, 410 auf CDN-Ebene, Such-Debounce 150→300 ms |
+| `690694c` | 13 tote Module (~1341 LOC), 2 ungenutzte Deps, 3 gemergte Branches, 3 Glass-Tokens |
+| `5b5b34e` | `assets/` + `scripts/` (156 MB) nach `../finanzleser-assets` ausgelagert |
+| `d67518d` | Bot-Guard vor der SEO-Kaskade + `tools/verify-redirects.mjs` als Pflicht-Regressionstest |
+
+Ergebnis: Arbeitsbaum ~171 MB → ~15 MB, getrackte Dateien 1981 → 525.
+
+**Offen aus diesem Block:**
+- `@netlify/plugin-nextjs` in `package.json` pinnen (bewusst aufgeschoben: nicht ohne
+  Deploy testbar, aktuell Auto-Install v5.15.13)
+- **Beobachten nach dem Deploy:** `app/layout.tsx` hat `.catch(() => ({}))` auf
+  `getMegamenuPreload()`. Fällt WP beim Regenerieren aus, ist `preloaded` leer und
+  *jeder* Besucher löst 10–16 parallele Megamenu-API-Invocations aus. Kein Dauerzustand,
+  aber bei wackligem IONOS-WP ein möglicher Invocation-Sturm
+- Struktur-Refactoring: `lib/wordpress.ts` (2094 Z.) aufteilen, `LeoIcon.tsx` (1450 Z.,
+  Inline-SVG raus), `app/components.css` (4015 Z.) nach Feature splitten,
+  `useListHoverBox`/`useSliderHoverBox` zusammenführen. Braucht visuelle Verifikation
+- `--visual-fill-1..10` in `tokens.css`: ungenutzt, aber per Kommentar für spätere
+  dynamische Nutzung reserviert → Entscheidung offen
+- `origin/feature/gamification-boxen` remote löschen (lokal schon weg)
 
 ---
 
@@ -24,25 +100,20 @@ Vor-Launch-Cleanup, alle in `main` und live deploybar.
 
 5 sequenzielle Phasen, jede ein eigener Branch + Snapshot-Tag.
 
-### Phase A — MD-Dokumentation aktualisieren 🟢
+### ✅ Phase A — MD-Dokumentation aktualisieren
 
-**Status:** in Arbeit
+**Status:** erledigt (zuletzt 10.08.2026)
 **Branch:** `chore/docs-consolidation`
 **Risiko:** Null (rein dokumentarisch)
 
 CLAUDE.md neu, README.md ausgebaut, ROADMAP.md (diese Datei) ergänzt, `docs/` aufgeräumt, Memory aktualisiert.
 
-### Phase B — Repo-Struktur aufräumen 🟢
+### ✅ Phase B — Repo-Struktur aufräumen (abgeschlossen)
 
-**Status:** ausstehend
-**Branch:** `chore/repo-structure`
-**Risiko:** Niedrig
-
-- `backup/`, `wp-cli.phar`, `wordpress-setup/`, `tsconfig.tsbuildinfo` raus
-- `tailwind.config.ts` prüfen (vermutlich obsolet seit Tailwind v4)
-- `scripts/` neu strukturieren (`scripts/migrations/` + `scripts/data/`)
-- `lib/hooks/` (Daten-Hooks) vs `/hooks/` (Animation-Hooks) — Doppelung auflösen
-- `lib/` ggf. in Subdirs (`lib/wordpress/`, `lib/utils/`)
+Erledigt in Commit `5494206` (April) und im August-Block oben. `scripts/` wurde nicht
+umstrukturiert, sondern ganz ausgelagert — laut eigenem README war nichts davon
+importiert. Verbleibend als Teil des Struktur-Refactorings oben:
+`lib/` in Subdirs, `tailwind.config.ts` prüfen (Tailwind v4 braucht sie nicht mehr).
 
 ### ✅ Phase C — WordPress-Backend Cleanup (abgeschlossen)
 
@@ -76,9 +147,15 @@ Uploads-Cleanup:
 
 Alle Smoke-Tests grün (GraphQL + alle Next.js-Routen 200 OK).
 
-### Phase D — Staging einrichten 🟡
+### ✅ Phase D — Staging einrichten (abgeschlossen)
 
-**Status:** ausstehend
+**Status:** erledigt — ⚠️ mit einer Einschränkung, die alles Weitere praegt:
+es gibt am Ende nur EIN WordPress (`staging.finanzleser.de`), das gleichzeitig
+Produktions-CMS ist. Siehe Memory `project_single_wp_architecture.md`. Das ist der
+Grund fuer `forceAllAdsOn` und das staerkste Argument fuer das in Phase 2 geplante
+eigene Backend.
+
+**Urspruengliche Planung (historisch):**
 **Branch:** `chore/staging-setup`
 **Risiko:** Mittel — DNS, SSL, DB-Migration
 

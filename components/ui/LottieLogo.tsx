@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import lottie from "lottie-web";
 import type { AnimationItem } from "lottie-web";
 import gsap from "@/lib/gsapConfig";
-import logoData from "@/assets/lottie/logoShrink.json";
+import logoData from "@/lib/lottie/logoShrink.json";
 
 export const LOGO_FRAMES = {
   longVisible: 0,
