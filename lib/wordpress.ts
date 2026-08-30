@@ -713,7 +713,20 @@ export const getPostBySlug = cache(async (slug: string): Promise<Post | null> =>
   if (IS_BUILD) {
     const hit = (await getAllPostsMap()).get(slug);
     if (hit) return hit;
-    // Nicht in der Bulk-Map (z.B. CPT/Legacy-Slug) → Einzelabfrage.
+
+    // 🚨 Anbieter-Slugs NICHT einzeln nachfragen. Die Root-Catch-All prueft in ihrer
+    // Kaskade zuerst auf Post und erst danach auf Anbieter — seit die 147 Kontaktseiten
+    // prerendert werden, waren das 147 zusaetzliche Einzelabfragen gegen das IONOS-WP.
+    // Genau daran ist der Build am 30.08.2026 gestorben ("Error establishing a database
+    // connection", 17 Seiten nach je 3 Versuchen aufgegeben). Ein Slug, der in der
+    // Anbieter-Map steht, ist per Definition kein Beitrag — die Abfrage ist reine Last.
+    // Die Map ist beim Build ohnehin geladen (buildMemo), kostet hier also nichts.
+    if ((await getAllAnbieterFullMap()).has(slug)) return null;
+
+    // Sonst nicht in der Bulk-Map (z.B. anderer CPT/Legacy-Slug) → Einzelabfrage.
+    // Bewusst KEIN generelles "Miss = null": buildPostsMap ist zwar vollstaendig
+    // paginiert und wirft bei Teilfehlern, aber ein falsches null wuerde hier einen
+    // 404 backen. Nur der nachweislich sichere Fall oben wird abgekuerzt.
   }
   return getPostBySlugSingle(slug);
 });
