@@ -405,6 +405,71 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
 
 ---
 
+## 🌿 Branch-Regeln
+
+> Festgelegt am 02.09.2026, nachdem sich vier Karteileichen, ein hängengebliebener
+> Commit und ein 27 Commits veralteter lokaler `main` angesammelt hatten.
+
+### Die eine Regel, die heute schon zugeschlagen hat
+
+**🚨 `main` auf deinem Rechner ist NICHT `main` auf GitHub.** Die lokale Kopie
+aktualisiert sich nie von selbst. Am 02.09. hing sie 27 Commits zurück — eine Prüfung
+gegen sie meldete fälschlich, das gesamte Compute-Paket sei nicht live.
+
+```bash
+git fetch origin          # IMMER zuerst
+git log --oneline origin/main -3
+git rev-list --left-right --count HEAD...origin/main   # links=vor, rechts=hinter
+```
+
+Wer „ist X in main?" beantworten will, fragt **`origin/main`** — nie `main`.
+`git branch --merged main` und `git show main:datei` lügen bei veralteter Kopie.
+
+### Wovon abzweigen
+
+| Zeitpunkt | Basis für neue Branches | Ziel des PR |
+|---|---|---|
+| bis Phase 4 | `origin/main` | `main` |
+| ab Phase 4 | `dev` | `dev`, danach `dev` → `main` |
+
+Nie von einem anderen Feature-Branch abzweigen. Wer das tut, schleppt fremde Commits
+in seinen PR — genau so hing `e6eb1a2` (SEO-Stand 30.08.) monatelang in einem Branch
+fest, statt in `main` zu landen.
+
+```bash
+git fetch origin && git switch -c fix/thema origin/main
+```
+
+### Namen
+
+`feature/` neue Funktion · `fix/` Fehlerbehebung · `perf/` Performance ·
+`chore/` Aufräumen, Werkzeuge · `docs/` nur Dokumentation
+
+### Lebensdauer
+
+- **Ein Branch = ein Thema.** Wird ein Branch zum Sammelbecken, lässt er sich nicht mehr
+  einzeln zurücknehmen.
+- **Kurz halten.** `chore/cleanup-und-compute` lag 19 Tage ungemergt, während `main`
+  weiterlief. Beim Zusammenführen war *main* in 4 von 5 Konfliktdateien der neuere Stand;
+  ein naiver Merge hätte den fail-open-Fix zurückgerollt und das Cache-Poisoning erneut
+  ermöglicht.
+- **Nach dem Merge löschen**, lokal *und* auf GitHub. Ein Branch mit „0 vor / N hinter"
+  enthält nichts Eigenes mehr und ist nur noch Verwechslungsgefahr.
+
+```bash
+git branch -d chore/thema && git push origin --delete chore/thema
+```
+
+### Nie
+
+- Direkt auf `main` committen oder pushen (Branch-Schutz ist eingerichtet)
+- Einen Branch mergen, dessen Konflikte nicht **inhaltlich** geprüft wurden —
+  nie nach Branch-Alter entscheiden
+- Vor dem Merge nach `main` den Pflichttest auslassen: `npm run verify:redirects`
+  (siehe Regel 0)
+
+---
+
 ## 📂 Dokumentation
 
 - [ROADMAP.md](ROADMAP.md) — Aktueller Phasen-Stand
