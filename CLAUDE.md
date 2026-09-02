@@ -201,7 +201,10 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 /tools                  → Entwickler-Werkzeuge, die dauerhaft gebraucht werden
   verify-redirects.mjs  → 🚨 PFLICHT-Regressionstest für die SEO-Weiterleitungen
 
-/wp-headless            → mu-plugin-Quelle (Preview + Revalidate-Bridge), Deploy per SFTP
+/wordpress               → EIGENER WordPress-PHP-Code, Deploy per SFTP (nie über Netlify)
+  mu-plugins/            → 9 mu-plugins (Headless-Bridge, Site-Settings, CPTs, …)
+  plugins/               → finanzleser-blocks (Gutenberg), finanzleser-studio-helper
+  einmal-skripte/        → historisch (Vorfallsbereinigung 08/2026), nicht deployen
 
 /docs                   → WORDPRESS_ACF_SETUP.md, beitraege_kategorien.md
                           siehe ROADMAP.md für aktuellen Stand
@@ -272,10 +275,13 @@ Aktuell noch in WordPress:
 - Rechner-Konfiguration → entweder WP-Options oder `config/rates.json` im Repo
 
 ### Gutenberg-Blocks (`finanzleser-blocks` Plugin)
-Bereits aktiv:
+Bereits aktiv — **fünf** Blöcke (verifiziert am Quellcode `wordpress/plugins/finanzleser-blocks/`,
+zwei davon standen bisher nicht in dieser Datei):
 - `finanzleser/rechner` (statisch, `slug`-Attribut)
 - `finanzleser/vergleich` (statisch, `slug`-Attribut)
 - `finanzleser/checkliste` (dynamisch, `render_callback`)
+- `finanzleser/dokumente`
+- `finanzleser/vergleich-quelle`
 
 Frontend-Parser: [components/sections/ArticleContent.tsx](components/sections/ArticleContent.tsx) parst die `<!-- wp:finanzleser/* -->` Block-Kommentare aus `post_content` und rendert die jeweiligen React-Komponenten.
 
@@ -370,7 +376,13 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
    Und: **niemals eine Allowlist bekannter Slugs** — fehlt einer, wird aus einem 301
    eine 404. Nur Denylists unmöglicher Muster.
 1. **URL-Erhalt:** bestehende Beitrags-URLs nie ohne 301-Redirect ändern
-2. **WordPress-Dateien gehören nicht ins Git** — nur Next.js-Frontend
+2. **Fremde WordPress-Dateien gehören nicht ins Git** (Kern, Themes, Fremd-Plugins —
+   die werden beim Aufbau frisch von der Quelle geholt). **Eigener PHP-Code schon**:
+   er liegt in `wordpress/` und wird per SFTP deployed, nicht über Netlify.
+   🚨 Diese Regel stand bis zum 02.09.2026 pauschal da — dadurch existierten 9 mu-plugins
+   und `finanzleser-blocks` nur auf dem Server und in einem ungeversionierten Backup-ZIP.
+   Beim Einbruch im August war genau das der blinde Fleck: gegen wordpress.org-Prüfsummen
+   war alles abgleichbar außer diesem Code.
 3. **ACF JSON Sync** nutzen solange ACF lebt — Felder als JSON in `acf-json/` versionieren
 4. **Mobile-first** — alle Komponenten zuerst für Mobile
 5. **Deutsche Sprache** — `lang="de"`, alle UI-Texte auf Deutsch
