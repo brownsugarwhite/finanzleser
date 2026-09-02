@@ -272,11 +272,32 @@ muss der Kunde sie einzeln anlegen und die Ergebnisse zurückmelden.
 | Nr. | Anzulegen | Wo im Kundencenter | Was zurückkommen muss |
 |:--|:-------------------------|:----------------------|:--------------------------|
 | 1 | **Zwei MySQL-Datenbanken** | Hosting → Datenbanken | je Datenbank: Name, Benutzer, Passwort, Hostname |
-| 2 | **Zwei Unteradressen** `cms.` und `cms-dev.`, jeweils eigener Ordner | Domains & SSL → Subdomain | kurze Bestätigung |
-| 3 | **SSL für beide** (Let's Encrypt, im Paket enthalten) | Domains & SSL → SSL-Zertifikat | kurze Bestätigung |
+| 2 | **Drei Adressen** — zwei auf den Webspace, eine auf Netlify (siehe unten) | Domains & SSL → Subdomain bzw. DNS | kurze Bestätigung |
+| 3 | **SSL für `cms.` und `cms-dev.`** (Let's Encrypt, im Paket enthalten) | Domains & SSL → SSL-Zertifikat | kurze Bestätigung |
 | 4 | **PHP 8.3+** einstellen, **SSH** freischalten | Hosting → PHP / SSH | kurze Bestätigung |
 | 5 | — | — | Auskunft: liegt ein **weiteres Projekt** im selben Webspace? |
 | 6 | — | — | **Lizenzschlüssel** ACF Pro und Yoast SEO Premium |
+
+## Die drei Adressen im Einzelnen
+
+🚨 **Das sind zwei verschiedene Vorgänge im Kundencenter.** Die ersten beiden werden mit
+dem Webspace verbunden, die dritte ausdrücklich nicht — sie zeigt auf Netlify.
+
+| Adresse | Anzulegen als | Ziel |
+|:-------------------------------|:--------------------------------|:-------------------------------------------|
+| `cms.finanzleser.de` | Subdomain **auf den Webspace** | Ordner `/cms` |
+| `cms-dev.finanzleser.de` | Subdomain **auf den Webspace** | Ordner `/cms-dev` |
+| `dev.finanzleser.de` | **DNS-Eintrag, Typ CNAME** | `dev--finanzleser-production.netlify.app` |
+
+Wird `dev.finanzleser.de` versehentlich als Webspace-Subdomain angelegt, zeigt die
+Test-Website auf einen leeren Ordner. Um ihr SSL-Zertifikat kümmert sich Netlify selbst;
+im Kundencenter ist dafür nichts zu tun.
+
+Das CNAME-Ziel darf schon jetzt auf den künftigen Netlify-Namen gesetzt werden, obwohl
+die Umbenennung erst später erfolgt: `*.netlify.app` ist ein Wildcard — jeder Name unter
+dieser Domain löst auf dieselben Netlify-Adressen auf, und Netlify entscheidet anhand der
+angefragten Domain, welche Seite es ausliefert. Es gibt hier also keine
+Reihenfolge-Abhängigkeit.
 
 ## Was an diesen Punkten wichtig ist
 
@@ -306,7 +327,13 @@ unberührt und kommen vollständig mit.
 
 ## Reihenfolge
 
-Punkt **1 und 2 sind die eigentliche Blockade** — ohne sie lässt sich kein WordPress
-installieren und damit nichts vom Rest beginnen. Punkt 3 und 4 werden beim Aufbau
-gebraucht, Punkt 5 und 6 erst kurz danach. Es lohnt sich also nicht, auf Vollständigkeit
-zu warten: Sobald 1 und 2 stehen, kann die Arbeit anfangen.
+Punkt **1 und 2 sind die eigentliche Blockade** — ohne Datenbank und Webspace-Adresse
+lässt sich kein WordPress installieren und damit nichts vom Rest beginnen. Punkt 3 und 4
+werden erst danach gebraucht, Punkt 5 und 6 zum Schluss.
+
+Der DNS-Eintrag für `dev.` aus Punkt 2 hat dabei die längste Leine: Die Test-Website wird
+erst gebraucht, wenn das neue CMS bereits steht. Er ist trotzdem gleich mit aufgeführt,
+damit alle Adress-Einträge in einem Arbeitsgang erledigt sind statt in zweien.
+
+Es lohnt sich also nicht, auf Vollständigkeit zu warten: Sobald 1 und 2 stehen, kann die
+Arbeit anfangen.

@@ -68,8 +68,8 @@ Falls das nicht geht, hier die Punkte zum Abhaken:
 | | Was | Wo im Kundencenter |
 |---|---|---|
 | ☐ 1 | Zwei MySQL-Datenbanken anlegen | Hosting → Datenbanken |
-| ☐ 2 | Zwei Unteradressen anlegen (siehe Tabelle unten) | Domains & SSL → Subdomain |
-| ☐ 3 | SSL für beide aktivieren (Let's Encrypt, im Paket enthalten) | Domains & SSL → SSL-Zertifikat |
+| ☐ 2 | Drei Adressen anlegen (siehe Tabelle unten) | Domains & SSL → Subdomain bzw. DNS |
+| ☐ 3 | SSL für die beiden Webspace-Adressen aktivieren | Domains & SSL → SSL-Zertifikat |
 | ☐ 4 | PHP auf 8.3 oder neuer stellen, SSH freischalten | Hosting → PHP-Einstellungen / SSH |
 | ☐ 5 | Zwei Fragen beantworten (siehe unten) | — |
 | ☐ 6 | Zwei Lizenzschlüssel heraussuchen | — |
@@ -95,16 +95,26 @@ Falls dein Paket nur eine Datenbank enthält: kurz Bescheid sagen. Es gibt einen
 Behelfsweg, der trennt die beiden Systeme aber schlechter. Ein Upgrade kostet bei IONOS
 nur wenige Euro im Monat und ist die deutlich sauberere Lösung.
 
-### Zu 2 · Die zwei Unteradressen
+### Zu 2 · Die drei Adressen
 
-| Unteradresse | Ziel-Ordner |
-|---|---|
-| `cms.finanzleser.de` | `/cms` |
-| `cms-dev.finanzleser.de` | `/cms-dev` |
+**Achtung: das sind zwei verschiedene Vorgänge.** Die ersten beiden werden mit dem
+Webspace verbunden, die dritte ausdrücklich **nicht** — sie zeigt auf Netlify, wo die
+Website liegt.
+
+| Adresse | Anzulegen als | Ziel |
+|---|---|---|
+| `cms.finanzleser.de` | Subdomain **auf den Webspace** | Ordner `/cms` |
+| `cms-dev.finanzleser.de` | Subdomain **auf den Webspace** | Ordner `/cms-dev` |
+| `dev.finanzleser.de` | **DNS-Eintrag, Typ CNAME** | `dev--finanzleser-production.netlify.app` |
+
+Wird `dev.finanzleser.de` versehentlich als Webspace-Subdomain angelegt, zeigt die
+Test-Website auf einen leeren Ordner. Der Weg dafür ist *Domains & SSL → Aktionen-Menü →
+DNS*, nicht *Subdomain anlegen*.
 
 `cms` wird euer Redaktionssystem — dort arbeitet ihr künftig.
 `cms-dev` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und in Sekunden neu
 erzeugt werden kann.
+`dev` ist die Test-Website, auf der das Team abnimmt, bevor etwas live geht.
 
 Das ist die wichtigste Verbesserung des ganzen Umbaus. Bisher gab es nur ein einziges
 System: Jede Umstellung im WordPress — ein Plugin installieren, eine Einstellung ändern,
@@ -114,7 +124,9 @@ keine tragbare Grundlage; das sind genau die Eingriffe, die man vorher ausprobie
 
 ### Zu 3 · SSL
 
-Ohne SSL liefen die Daten zwischen Webspace und Website unverschlüsselt durchs Netz.
+Nur für `cms.` und `cms-dev.` — ohne SSL liefen die Daten zwischen Webspace und Website
+unverschlüsselt durchs Netz. Um das Zertifikat für `dev.finanzleser.de` kümmert sich
+Netlify automatisch, dort ist nichts zu tun.
 
 ### Zu 4 · PHP und SSH
 
