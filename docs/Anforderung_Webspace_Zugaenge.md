@@ -25,7 +25,7 @@ Sobald man im IONOS-Kundencenter die Domain auf den Webspace stellt, überschrei
 automatisch die Adresseinträge — und Besucher sehen statt der Website die nackte
 WordPress-Oberfläche. Genau das war der Ausfall im August.
 
-Der Webspace bekommt deshalb nur zwei eigene Unteradressen (`cms.` und `cms-test.`,
+Der Webspace bekommt deshalb nur zwei eigene Unteradressen (`cms.` und `cms-dev.`,
 siehe unten). `finanzleser.de` und `www.finanzleser.de` bleiben unangetastet.
 
 **Die Domain bleibt komplett dort, wo sie ist — und deine E-Mail-Postfächer damit auch.**
@@ -83,10 +83,10 @@ Monat und ist die deutlich sauberere Lösung.
 | Unteradresse | Ziel-Ordner |
 |---|---|
 | `cms.finanzleser.de` | `/cms` |
-| `cms-test.finanzleser.de` | `/cms-test` |
+| `cms-dev.finanzleser.de` | `/cms-dev` |
 
 `cms` wird das eigentliche Redaktionssystem — dort arbeitet ihr künftig.
-`cms-test` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und neu erzeugt
+`cms-dev` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und neu erzeugt
 werden kann.
 
 Das ist die wichtigste Verbesserung gegenüber vorher: Bisher gab es nur ein einziges
