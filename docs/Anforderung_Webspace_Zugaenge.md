@@ -26,9 +26,15 @@ automatisch die Adresseinträge — und Besucher sehen statt der Website die nac
 WordPress-Oberfläche. Genau das war der Ausfall im August.
 
 Der Webspace bekommt deshalb nur zwei eigene Unteradressen (`cms.` und `cms-test.`,
-siehe unten). `finanzleser.de` und `www.finanzleser.de` bleiben unangetastet. Um die
-Domain selbst kümmern wir uns ganz zum Schluss, wenn der Umzug steht und nichts mehr
-schiefgehen kann.
+siehe unten). `finanzleser.de` und `www.finanzleser.de` bleiben unangetastet.
+
+**Die Domain bleibt komplett dort, wo sie ist — und deine E-Mail-Postfächer damit auch.**
+Du hattest gefragt, ob es ein Problem ist, dass die Postfächer noch im alten Vertrag
+liegen: nein, im Gegenteil. E-Mail und Webspace haben bei IONOS nichts miteinander zu
+tun, der Umzug des Webspace berührt die Postfächer nicht. Und einen Domainumzug machen
+wir bewusst *nicht*: IONOS löscht dabei alle E-Mail-Adressen der Domain, sie müssten im
+neuen Vertrag einzeln neu angelegt und migriert werden. Bei sieben Postfächern ist das
+ein Risiko ohne Gegenwert.
 
 ## Und die gute Nachricht: die Website läuft während des ganzen Umzugs weiter
 
@@ -110,9 +116,12 @@ Im Sicherheitsbericht vom August stand als offener Punkt, dass eine erneute Infe
 über ein Nachbarprojekt im selben Webspace möglich ist. Das wurde nie geklärt. Beim
 neuen Webspace möchte ich es diesmal vorher wissen.
 
-**b) Wo liegen die 7 E-Mail-Postfächer — im alten oder im neuen Vertrag?**
-Davon hängt ab, ob der spätere Domainumzug die E-Mail beeinträchtigen kann. Das möchte
-ich vorher wissen und nicht hinterher merken.
+**b) Was genau enthält der alte Vertrag — und lässt sich der Webspace-Teil kündigen,
+ohne dass Domain und E-Mail-Postfächer mitgehen?**
+Schick mir bei Gelegenheit die Vertragsübersicht aus dem Kundencenter. Wenn sich das
+nicht trennen lässt, ist das kein Drama — dann laufen einfach zwei Verträge nebeneinander
+weiter, der alte nur noch für Domain und E-Mail. Das ist immer noch besser, als die
+Postfächer anzufassen.
 
 ### 6 · Lizenzschlüssel
 
