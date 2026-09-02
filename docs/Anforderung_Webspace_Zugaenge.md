@@ -1,129 +1,146 @@
-# Was ich für den Umzug auf den neuen Webspace brauche
+# Nachricht an den Kunden — Zugänge neuer Webspace
 
-**Stand: 02.09.2026** · Neuer Webspace: `access-5021324858.webspace-host.com` (IONOS)
-
-Danke für die Zugangsdaten. Mit SFTP allein komme ich allerdings nicht weit: ohne
-Datenbank läuft kein WordPress, und ohne Subdomain hat es keine Adresse. Beides lässt
-sich nur im IONOS-Kundencenter anlegen, nicht über SFTP.
-
-Damit wir das in einem Rutsch erledigen statt in fünf Rückfragen über zwei Wochen, hier
-alles auf einmal.
+**Stand: 02.09.2026** · Webspace: `access-5021324858.webspace-host.com` (IONOS)
+Direkt versendbar, unverändert kopierbar.
 
 ---
 
-## ⚠️ Zuerst das Wichtigste: die Domain bitte NICHT mit dem Webspace verbinden
+Hallo Andreas,
 
-Du hattest geschrieben: *„Die Domain finanzleser.de umziehen / Mit Webspace verbinden"*.
+danke für die Zugangsdaten zum neuen Webspace. Ich habe mir das angesehen und den
+kompletten Umzug durchgeplant. Zwei Dinge vorab, dann die Liste dessen, was ich von dir
+brauche.
 
-**Bitte genau das nicht machen.** Es klingt naheliegend, würde die Seite aber sofort
+## Zuerst: die Domain bitte NICHT mit dem Webspace verbinden
+
+Du hattest geschrieben, als nächstes stehe an, „die Domain finanzleser.de umzuziehen und
+mit dem Webspace zu verbinden".
+
+**Bitte genau das nicht machen.** Es klingt naheliegend, würde die Website aber sofort
 abschalten — so wie am 18. August schon einmal.
 
-Der Grund: finanzleser.de liegt nicht auf dem Webspace. Die Seite läuft bei einem
-anderen Anbieter (Netlify), der Webspace liefert nur die *Inhalte* dahinter zu. Sobald
-man im Kundencenter die Domain auf den Webspace stellt, überschreibt IONOS automatisch
-die Adresseinträge — und Besucher sehen statt der Seite die nackte WordPress-Oberfläche.
-Genau das war der Ausfall im August.
+Der Hintergrund: finanzleser.de liegt gar nicht auf dem Webspace. Die Website selbst
+läuft bei einem anderen Anbieter (Netlify), der Webspace liefert nur die Inhalte dazu.
+Sobald man im IONOS-Kundencenter die Domain auf den Webspace stellt, überschreibt IONOS
+automatisch die Adresseinträge — und Besucher sehen statt der Website die nackte
+WordPress-Oberfläche. Genau das war der Ausfall im August.
 
-**Der Webspace bekommt nur zwei eigene Unteradressen** (`cms.` und `cms-test.`, siehe
-Punkt 3). `finanzleser.de` und `www.finanzleser.de` bleiben unangetastet. Um die Domain
-kümmern wir uns ganz zum Schluss, wenn der Umzug fertig ist und nichts mehr schiefgehen
-kann.
+Der Webspace bekommt deshalb nur zwei eigene Unteradressen (`cms.` und `cms-test.`,
+siehe unten). `finanzleser.de` und `www.finanzleser.de` bleiben unangetastet. Um die
+Domain selbst kümmern wir uns ganz zum Schluss, wenn der Umzug steht und nichts mehr
+schiefgehen kann.
+
+## Und die gute Nachricht: die Website läuft während des ganzen Umzugs weiter
+
+Ich baue das neue System vollständig daneben auf und schalte erst um, wenn es geprüft
+ist. Für Besucher ändert sich in der Zwischenzeit nichts. Die eigentliche Umschaltung
+dauert am Ende wenige Minuten und lässt sich mit zwei Klicks rückgängig machen. Es gibt
+also keinen Stichtag, an dem die Seite offline geht.
+
+Deine Inhalte kommen dabei vollständig mit — Artikel, Bilder, Rechner, Checklisten,
+Einstellungen. Ich habe den Sicherungsstand geprüft: er ist aktuell, es geht nichts
+verloren.
 
 ---
 
-## Am einfachsten: Zugang zum Kundencenter
+## Was ich brauche
 
-Wenn du mir einen Zugang zum IONOS-Kundencenter des neuen Vertrags gibst, erledige ich
-die Punkte 1–5 selbst und du musst nichts weiter tun. Das spart uns beiden am meisten
-Zeit.
+Mit SFTP allein komme ich nicht weit: ohne Datenbank läuft kein WordPress, und ohne
+Unteradresse hat es keine Adresse im Netz. Beides lässt sich nur im IONOS-Kundencenter
+anlegen, nicht über den Dateizugang, den du mir geschickt hast.
 
-Falls das nicht geht, hier die Punkte einzeln zum Abarbeiten:
+**Am einfachsten wäre ein Zugang zum IONOS-Kundencenter des neuen Vertrags** — dann
+erledige ich die Punkte 1 bis 4 selbst und du musst nichts weiter tun.
 
----
+Falls das nicht geht, hier die Punkte einzeln:
 
-## 1 · Zwei Datenbanken anlegen
+### 1 · Zwei Datenbanken anlegen
 
-**Kundencenter → Hosting → Datenbanken → MySQL-Datenbank anlegen** (zweimal)
+*Kundencenter → Hosting → Datenbanken → MySQL-Datenbank anlegen* (zweimal)
 
-Schick mir danach je: Datenbankname, Benutzername, Passwort, Hostname.
+Schick mir danach jeweils: Datenbankname, Benutzername, Passwort, Hostname.
 
-> 🚨 **Wichtig: Das Datenbank-Passwort darf nicht dasselbe sein wie das
-> SFTP-Passwort.** Auf dem alten Webspace waren beide identisch — und das
-> Datenbank-Passwort steht bei WordPress systembedingt unverschlüsselt in einer
-> Konfigurationsdatei. Wer diese eine Datei lesen konnte, hatte damit automatisch auch
-> den Dateizugang. Das wiederholen wir nicht.
+**Wichtig: Das Datenbank-Passwort darf nicht dasselbe sein wie das SFTP-Passwort.** Auf
+dem alten Webspace waren beide identisch — und das Datenbank-Passwort steht bei
+WordPress systembedingt unverschlüsselt in einer Konfigurationsdatei. Wer diese eine
+Datei lesen konnte, hatte damit automatisch auch den Dateizugang zum ganzen Webspace.
+Das wiederholen wir nicht.
 
-Die zweite Datenbank ist für die Testumgebung (siehe Punkt 3). Falls dein Paket nur eine
-Datenbank enthält: sag kurz Bescheid, dann finde ich einen Weg — ein Upgrade auf zwei
-Datenbanken kostet bei IONOS allerdings nur wenige Euro im Monat und ist die deutlich
-sauberere Lösung.
+Die zweite Datenbank ist für die Testumgebung (siehe Punkt 2). Falls dein Paket nur eine
+Datenbank enthält, sag kurz Bescheid — ein Upgrade kostet bei IONOS nur wenige Euro im
+Monat und ist die deutlich sauberere Lösung.
 
-## 2 · Zwei Unteradressen einrichten
+### 2 · Zwei Unteradressen einrichten
 
-**Kundencenter → Domains & SSL → Subdomain anlegen**
+*Kundencenter → Domains & SSL → Subdomain anlegen*
 
-| Subdomain | Ziel-Ordner |
+| Unteradresse | Ziel-Ordner |
 |---|---|
 | `cms.finanzleser.de` | `/cms` |
 | `cms-test.finanzleser.de` | `/cms-test` |
 
-`cms` wird das eigentliche Redaktionssystem — dort arbeitest du und dein Team künftig.
+`cms` wird das eigentliche Redaktionssystem — dort arbeitet ihr künftig.
 `cms-test` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und neu erzeugt
-werden kann. Damit lassen sich Änderungen künftig gefahrlos testen, bevor sie live
-gehen. Bisher ging das nicht: jede Umstellung im WordPress wirkte sofort auf die echte
-Seite.
+werden kann.
 
-## 3 · SSL für beide aktivieren
+Das ist die wichtigste Verbesserung gegenüber vorher: Bisher gab es nur ein einziges
+System. Jede Umstellung im WordPress — ein Plugin installieren, eine Einstellung ändern,
+ein Update einspielen — wirkte sofort auf die echte Website. Testen war schlicht nicht
+möglich. Für Phase 2 (Login-Bereich, Werbung, KI-Ausbau) ist das keine tragbare
+Grundlage. Mit der Testkopie probieren wir alles gefahrlos durch, bevor es live geht.
 
-**Kundencenter → Domains & SSL → SSL-Zertifikat** (Let's Encrypt, ist im Paket enthalten)
+### 3 · SSL für beide aktivieren
 
-Ohne SSL liefen die Daten zwischen Webspace und Website unverschlüsselt.
+*Kundencenter → Domains & SSL → SSL-Zertifikat* (Let's Encrypt, im Paket enthalten)
 
-## 4 · PHP-Version und SSH
+Sonst liefen die Daten zwischen Webspace und Website unverschlüsselt.
 
-- **PHP 8.3 oder neuer** einstellen (Kundencenter → Hosting → PHP-Einstellungen)
-- **SSH-Zugang aktivieren** (Kundencenter → Hosting → SSH)
+### 4 · PHP-Version und SSH
+
+- **PHP 8.3 oder neuer** einstellen (*Hosting → PHP-Einstellungen*)
+- **SSH-Zugang aktivieren** (*Hosting → SSH*)
 
 SSH ist kein Muss, spart mir aber viele Stunden Handarbeit beim Einrichten und beim
 späteren Erzeugen der Testkopie.
 
-## 5 · Zwei Fragen zum Vertrag
+### 5 · Zwei Fragen zum Vertrag
 
-**a) Liegt sonst noch ein Projekt in diesem Webspace?**
-Falls ja, welches? Im Sicherheitsbericht vom August stand als offener Punkt, dass eine
-Neuinfektion über ein Nachbarprojekt im selben Webspace möglich ist. Das war nie
-geklärt. Für den neuen Webspace möchte ich es diesmal vorher wissen.
+**a) Liegt sonst noch ein Projekt in diesem Webspace?** Falls ja, welches?
+Im Sicherheitsbericht vom August stand als offener Punkt, dass eine erneute Infektion
+über ein Nachbarprojekt im selben Webspace möglich ist. Das wurde nie geklärt. Beim
+neuen Webspace möchte ich es diesmal vorher wissen.
 
 **b) Wo liegen die 7 E-Mail-Postfächer — im alten oder im neuen Vertrag?**
-Davon hängt ab, ob der spätere Domainumzug die E-Mail beeinträchtigen kann. Ich möchte
-das vorher wissen, nicht hinterher merken.
+Davon hängt ab, ob der spätere Domainumzug die E-Mail beeinträchtigen kann. Das möchte
+ich vorher wissen und nicht hinterher merken.
 
-## 6 · Lizenzschlüssel
+### 6 · Lizenzschlüssel
 
-Für zwei kostenpflichtige Erweiterungen brauche ich die Schlüssel, weil ich sie neu
-installiere statt sie vom alten Server zu kopieren:
+Für zwei kostenpflichtige Erweiterungen brauche ich die Schlüssel:
 
 - **ACF Pro** (Advanced Custom Fields)
 - **Yoast SEO Premium**
 
-> **Warum neu installieren statt kopieren?** Der alte Server war kompromittiert. Alles,
-> was von dort mitkommt, müsste man einzeln auf Manipulation prüfen. Frisch vom
-> Hersteller geladen ist beweisbar sauber und schneller. Deine Inhalte — Artikel,
-> Bilder, Einstellungen — kommen selbstverständlich vollständig mit; nur der
-> Programmcode wird neu geholt.
+Warum neu installieren statt vom alten Server kopieren: Der alte Server war
+kompromittiert. Alles, was von dort mitkäme, müsste einzeln auf Manipulation geprüft
+werden. Frisch beim Hersteller geladen ist beweisbar sauber — und schneller. Deine
+Inhalte kommen davon unberührt vollständig mit; nur der Programmcode wird neu geholt.
 
 ---
 
-## Was ich schon erledigt habe
+## Was ich in der Zwischenzeit schon erledigt habe
 
-- Der gesamte selbst entwickelte Programmcode (11 Erweiterungen) ist gesichert und
-  versioniert. Er lag bisher nur auf dem gehackten Server.
-- Der Sicherungsstand vom 11. August ist geprüft und inhaltlich aktuell — es gibt keinen
-  Datenverlust beim Umzug.
-- Der Umzugsplan steht: die Seite läuft während des kompletten Aufbaus ununterbrochen
-  weiter. Die Umschaltung dauert am Ende wenige Minuten und lässt sich mit zwei Klicks
-  rückgängig machen.
+- Der gesamte selbst entwickelte Programmcode für eure Website (elf Erweiterungen) ist
+  gesichert und versioniert. Er lag bisher ausschließlich auf dem gehackten Server — wäre
+  der Webspace gelöscht worden, hätte er neu geschrieben werden müssen.
+- Der Sicherungsstand vom 11. August ist gegen das laufende System geprüft und
+  inhaltlich aktuell.
+- Der Umzugsplan steht vollständig, inklusive Rückweg für jeden Schritt.
 
-## Was ich ohne die Punkte oben nicht anfangen kann
+## Womit es weitergeht
 
-Alles ab „WordPress installieren". Der Umzug hängt vollständig an Punkt 1 und 2.
+Sobald Punkt 1 und 2 stehen, kann ich anfangen. Alles andere hängt daran — ohne
+Datenbank und Unteradresse lässt sich kein WordPress installieren.
+
+Viele Grüße
+Florian
