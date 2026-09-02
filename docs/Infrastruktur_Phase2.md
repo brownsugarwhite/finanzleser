@@ -4,7 +4,10 @@ subtitle: "Zielarchitektur nach dem Umzug auf den neuen Webspace"
 author: "Florian Frey"
 date: "2. September 2026"
 lang: de-DE
+toc-title: "Inhalt"
 ---
+
+\newpage
 
 # Warum umgebaut wird
 
@@ -37,7 +40,7 @@ Nach dem Umbau gibt es vier Systeme. Das Präfix verrät die **Art** des Systems
 Suffix die **Umgebung**.
 
 | Adresse | Was | Wer arbeitet damit |
-|---|---|---|
+|:----------------------------------|:---------------------------|:----------------------|
 | `www.finanzleser.de` | Live-Website | Besucher |
 | `dev.finanzleser.de` | Test-Website | Team, zur Abnahme |
 | `cms.finanzleser.de` | WordPress, echte Inhalte | Redaktion |
@@ -116,7 +119,7 @@ Angriffsfläche weniger, die dauerhaft gepatcht werden müsste.
 # Der Weg von der Idee zur Live-Seite
 
 | Schritt | Was passiert | Wo sichtbar |
-|---|---|---|
+|:--|:------------------------------------|:--------------------|
 | 1 | Entwickler öffnet einen Branch für ein Feature | — |
 | 2 | Pull Request → automatische Vorschau-Version | eigene Vorschau-Adresse |
 | 3 | Zusammenführen in `dev` | `dev.finanzleser.de` |
@@ -154,7 +157,7 @@ nachher:  cms.finanzleser.de
 Daraus folgt der Ablauf:
 
 | Phase | Zustand der Live-Website |
-|---|---|
+|:------------------------|:--------------------------------------|
 | heute | läuft, liest aus dem alten CMS |
 | Aufbau des neuen CMS | **läuft unverändert weiter** |
 | Prüfung des neuen CMS | **läuft unverändert weiter** |
@@ -188,7 +191,7 @@ Der Aufbau des neuen CMS folgt einer Grundregel: **Vom alten Server kommen nur I
 kein Programmcode.**
 
 | Was | Woher |
-|---|---|
+|:--------------------------------------------|:---------------------------|
 | Artikel, Bilder, Einstellungen, Rechner, Checklisten | vollständig vom alten System |
 | WordPress-Kern | frisch von wordpress.org |
 | Fremd-Plugins, Design-Vorlage | frisch vom jeweiligen Hersteller |
@@ -221,7 +224,7 @@ werden. Frisch geladen ist es beweisbar sauber — und schneller.
 Der Wechsel der Namen ist nicht rein kosmetisch. Drei Stellen müssen mitgeführt werden:
 
 | Stelle | Änderung |
-|---|---|
+|:-----------------------------------|:---------------------------------------|
 | Bildquellen-Freigabe (`next.config.ts`) | `cms.finanzleser.de` aufnehmen; alte Adresse zunächst behalten, damit ein Rückweg bleibt |
 | Umgebungsvariablen (`netlify.toml`) | Zieladresse des CMS je Umgebung |
 | **Sperre für Suchmaschinen** (`next.config.ts`) | siehe unten |
@@ -251,23 +254,59 @@ jede unerwartete Konfiguration zur sicheren Variante statt zur riskanten.
   Infrastruktur, Dateizugang funktioniert.
 - **Umzugsplan vollständig**, inklusive Rückweg für jeden einzelnen Schritt.
 
-# Was noch fehlt
+\newpage
 
-Der Umzug hängt vollständig an Zugängen, die nur im IONOS-Kundencenter angelegt werden
-können. Der Dateizugang allein reicht nicht: Ohne Datenbank läuft kein WordPress, ohne
-Unteradresse hat es keine Adresse im Netz.
+# Was jetzt gebraucht wird
 
-| Nr. | Benötigt |
-|---|---|
-| 1 | Zwei Datenbanken (Passwort **nicht** identisch zum Dateizugang) |
-| 2 | Zwei Unteradressen: `cms.finanzleser.de`, `cms-dev.finanzleser.de` |
-| 3 | SSL-Zertifikate für beide |
-| 4 | PHP 8.3 oder neuer, SSH-Zugang |
-| 5 | Auskunft: liegt ein weiteres Projekt im selben Webspace? |
-| 6 | Lizenzschlüssel für ACF Pro und Yoast SEO Premium |
+Vom Kunden liegt bisher nur der **Dateizugang** (SFTP) vor. Der reicht nicht: Über SFTP
+lassen sich Dateien hochladen, aber keine Datenbank anlegen und keine Adresse vergeben.
+Ohne Datenbank läuft kein WordPress, ohne Unteradresse ist es nicht erreichbar. Beides
+geht ausschließlich über das IONOS-Kundencenter.
 
-Punkt 5 stammt aus dem Sicherheitsbericht vom August: Eine erneute Infektion über ein
-Nachbarprojekt im selben Webspace war dort als offener Punkt vermerkt und wurde nie
-geklärt.
+**Der kürzeste Weg ist ein Zugang zum Kundencenter des neuen Vertrags.** Dann sind die
+Punkte 1 bis 4 in etwa zwanzig Minuten erledigt, ohne weitere Abstimmung. Andernfalls
+muss der Kunde sie einzeln anlegen und die Ergebnisse zurückmelden.
 
-**Sobald Punkt 1 und 2 stehen, kann der Aufbau beginnen.** Alles Weitere hängt daran.
+## Die sechs Punkte
+
+| Nr. | Anzulegen | Wo im Kundencenter | Was zurückkommen muss |
+|:--|:-------------------------|:----------------------|:--------------------------|
+| 1 | **Zwei MySQL-Datenbanken** | Hosting → Datenbanken | je Datenbank: Name, Benutzer, Passwort, Hostname |
+| 2 | **Zwei Unteradressen** `cms.` und `cms-dev.`, jeweils eigener Ordner | Domains & SSL → Subdomain | kurze Bestätigung |
+| 3 | **SSL für beide** (Let's Encrypt, im Paket enthalten) | Domains & SSL → SSL-Zertifikat | kurze Bestätigung |
+| 4 | **PHP 8.3+** einstellen, **SSH** freischalten | Hosting → PHP / SSH | kurze Bestätigung |
+| 5 | — | — | Auskunft: liegt ein **weiteres Projekt** im selben Webspace? |
+| 6 | — | — | **Lizenzschlüssel** ACF Pro und Yoast SEO Premium |
+
+## Was an diesen Punkten wichtig ist
+
+**Zu 1 — die Passwörter müssen sich unterscheiden.** Auf dem alten Webspace war das
+Datenbank-Passwort identisch mit dem Passwort für den Dateizugang. WordPress legt sein
+Datenbank-Passwort systembedingt unverschlüsselt in einer Konfigurationsdatei ab — wer
+also diese eine Datei lesen konnte, hatte damit automatisch auch vollen Dateizugriff auf
+den gesamten Webspace. Zwei verschiedene Passwörter kosten nichts und brechen diese Kette.
+
+**Zu 1 — falls das Paket nur eine Datenbank enthält:** kurze Rückmeldung genügt. Es gibt
+einen Behelfsweg, aber er trennt die beiden Systeme schlechter. Ein Upgrade auf zwei
+Datenbanken kostet bei IONOS nur wenige Euro monatlich und ist die sauberere Lösung.
+
+**Zu 4 — SSH ist kein Muss, aber eine deutliche Ersparnis.** Mit SSH wird das Erzeugen
+der Testkopie ein einzelner Befehl. Ohne SSH ist es jedes Mal Handarbeit über mehrere
+Schritte — bei einer Kopie, die bewusst häufig neu erzeugt werden soll, summiert sich das.
+
+**Zu 5 — dieser Punkt stammt aus dem Sicherheitsbericht vom August.** Dort war vermerkt,
+dass eine erneute Infektion über ein anderes Projekt im selben Webspace möglich ist.
+Geklärt wurde er nie. Beim neuen Webspace sollte er vor dem Aufbau beantwortet sein und
+nicht nach dem nächsten Vorfall.
+
+**Zu 6 — beide Erweiterungen werden neu installiert, nicht kopiert.** Alles, was vom
+kompromittierten Server käme, müsste einzeln auf Manipulation geprüft werden. Frisch beim
+Hersteller geladen ist es beweisbar sauber und schneller. Die Inhalte bleiben davon
+unberührt und kommen vollständig mit.
+
+## Reihenfolge
+
+Punkt **1 und 2 sind die eigentliche Blockade** — ohne sie lässt sich kein WordPress
+installieren und damit nichts vom Rest beginnen. Punkt 3 und 4 werden beim Aufbau
+gebraucht, Punkt 5 und 6 erst kurz danach. Es lohnt sich also nicht, auf Vollständigkeit
+zu warten: Sobald 1 und 2 stehen, kann die Arbeit anfangen.

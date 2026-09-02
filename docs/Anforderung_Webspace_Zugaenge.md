@@ -51,105 +51,120 @@ verloren.
 
 ## Was ich brauche
 
-Mit SFTP allein komme ich nicht weit: ohne Datenbank läuft kein WordPress, und ohne
-Unteradresse hat es keine Adresse im Netz. Beides lässt sich nur im IONOS-Kundencenter
-anlegen, nicht über den Dateizugang, den du mir geschickt hast.
+Mit dem Dateizugang allein komme ich leider nicht weit. Über SFTP kann ich Dateien
+hochladen — aber keine Datenbank anlegen und keine Adresse vergeben. Ohne Datenbank läuft
+kein WordPress, ohne Unteradresse ist es nicht erreichbar. Beides geht nur im
+IONOS-Kundencenter.
 
-**Am einfachsten wäre ein Zugang zum IONOS-Kundencenter des neuen Vertrags** — dann
-erledige ich die Punkte 1 bis 4 selbst und du musst nichts weiter tun.
+### Der schnellste Weg
 
-Falls das nicht geht, hier die Punkte einzeln:
+**Gib mir einen Zugang zum IONOS-Kundencenter des neuen Vertrags.** Dann erledige ich die
+Punkte 1 bis 4 in etwa zwanzig Minuten selbst und du musst dich um nichts kümmern.
 
-### 1 · Zwei Datenbanken anlegen
+Falls das nicht geht, hier die Punkte zum Abhaken:
 
-*Kundencenter → Hosting → Datenbanken → MySQL-Datenbank anlegen* (zweimal)
+### Zum Abhaken
 
-Schick mir danach jeweils: Datenbankname, Benutzername, Passwort, Hostname.
+| | Was | Wo im Kundencenter |
+|---|---|---|
+| ☐ 1 | Zwei MySQL-Datenbanken anlegen | Hosting → Datenbanken |
+| ☐ 2 | Zwei Unteradressen anlegen (siehe Tabelle unten) | Domains & SSL → Subdomain |
+| ☐ 3 | SSL für beide aktivieren (Let's Encrypt, im Paket enthalten) | Domains & SSL → SSL-Zertifikat |
+| ☐ 4 | PHP auf 8.3 oder neuer stellen, SSH freischalten | Hosting → PHP-Einstellungen / SSH |
+| ☐ 5 | Zwei Fragen beantworten (siehe unten) | — |
+| ☐ 6 | Zwei Lizenzschlüssel heraussuchen | — |
 
-**Wichtig: Das Datenbank-Passwort darf nicht dasselbe sein wie das SFTP-Passwort.** Auf
-dem alten Webspace waren beide identisch — und das Datenbank-Passwort steht bei
-WordPress systembedingt unverschlüsselt in einer Konfigurationsdatei. Wer diese eine
-Datei lesen konnte, hatte damit automatisch auch den Dateizugang zum ganzen Webspace.
-Das wiederholen wir nicht.
+**Was mir danach zurückkommen muss:**
 
-Die zweite Datenbank ist für die Testumgebung (siehe Punkt 2). Falls dein Paket nur eine
-Datenbank enthält, sag kurz Bescheid — ein Upgrade kostet bei IONOS nur wenige Euro im
-Monat und ist die deutlich sauberere Lösung.
+- **zu 1:** je Datenbank Name, Benutzername, Passwort und Hostname
+- **zu 2 bis 4:** eine kurze Bestätigung, dass es erledigt ist
+- **zu 5 und 6:** die Antworten bzw. Schlüssel
 
-### 2 · Zwei Unteradressen einrichten
+---
 
-*Kundencenter → Domains & SSL → Subdomain anlegen*
+### Zu 1 · Die zwei Datenbanken
+
+**Bitte für die Datenbanken nicht dasselbe Passwort nehmen wie für den Dateizugang.**
+
+Auf dem alten Webspace war beides identisch. WordPress legt sein Datenbank-Passwort
+technisch bedingt unverschlüsselt in einer Konfigurationsdatei ab — wer also diese eine
+Datei lesen konnte, hatte damit automatisch auch vollen Zugriff auf sämtliche Dateien des
+Webspace. Zwei verschiedene Passwörter kosten nichts und unterbrechen diese Kette.
+
+Falls dein Paket nur eine Datenbank enthält: kurz Bescheid sagen. Es gibt einen
+Behelfsweg, der trennt die beiden Systeme aber schlechter. Ein Upgrade kostet bei IONOS
+nur wenige Euro im Monat und ist die deutlich sauberere Lösung.
+
+### Zu 2 · Die zwei Unteradressen
 
 | Unteradresse | Ziel-Ordner |
 |---|---|
 | `cms.finanzleser.de` | `/cms` |
 | `cms-dev.finanzleser.de` | `/cms-dev` |
 
-`cms` wird das eigentliche Redaktionssystem — dort arbeitet ihr künftig.
-`cms-dev` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und neu erzeugt
-werden kann.
+`cms` wird euer Redaktionssystem — dort arbeitet ihr künftig.
+`cms-dev` ist eine Kopie zum Ausprobieren, die jederzeit weggeworfen und in Sekunden neu
+erzeugt werden kann.
 
-Das ist die wichtigste Verbesserung gegenüber vorher: Bisher gab es nur ein einziges
-System. Jede Umstellung im WordPress — ein Plugin installieren, eine Einstellung ändern,
-ein Update einspielen — wirkte sofort auf die echte Website. Testen war schlicht nicht
-möglich. Für Phase 2 (Login-Bereich, Werbung, KI-Ausbau) ist das keine tragbare
-Grundlage. Mit der Testkopie probieren wir alles gefahrlos durch, bevor es live geht.
+Das ist die wichtigste Verbesserung des ganzen Umbaus. Bisher gab es nur ein einziges
+System: Jede Umstellung im WordPress — ein Plugin installieren, eine Einstellung ändern,
+ein Update einspielen — wirkte sofort auf die echte Website. Gefahrloses Testen war
+schlicht nicht möglich. Für Phase 2 mit Login-Bereich, Werbung und KI-Ausbau ist das
+keine tragbare Grundlage; das sind genau die Eingriffe, die man vorher ausprobieren will.
 
-### 3 · SSL für beide aktivieren
+### Zu 3 · SSL
 
-*Kundencenter → Domains & SSL → SSL-Zertifikat* (Let's Encrypt, im Paket enthalten)
+Ohne SSL liefen die Daten zwischen Webspace und Website unverschlüsselt durchs Netz.
 
-Sonst liefen die Daten zwischen Webspace und Website unverschlüsselt.
+### Zu 4 · PHP und SSH
 
-### 4 · PHP-Version und SSH
+SSH ist kein Muss, aber eine spürbare Ersparnis: Damit wird das Erzeugen der Testkopie
+ein einzelner Befehl. Ohne SSH ist es jedes Mal Handarbeit über mehrere Schritte — bei
+einer Kopie, die bewusst häufig neu erzeugt werden soll, summiert sich das schnell.
 
-- **PHP 8.3 oder neuer** einstellen (*Hosting → PHP-Einstellungen*)
-- **SSH-Zugang aktivieren** (*Hosting → SSH*)
-
-SSH ist kein Muss, spart mir aber viele Stunden Handarbeit beim Einrichten und beim
-späteren Erzeugen der Testkopie.
-
-### 5 · Zwei Fragen zum Vertrag
+### Zu 5 · Zwei Fragen
 
 **a) Liegt sonst noch ein Projekt in diesem Webspace?** Falls ja, welches?
+
 Im Sicherheitsbericht vom August stand als offener Punkt, dass eine erneute Infektion
-über ein Nachbarprojekt im selben Webspace möglich ist. Das wurde nie geklärt. Beim
-neuen Webspace möchte ich es diesmal vorher wissen.
+über ein anderes Projekt im selben Webspace möglich ist. Geklärt wurde er nie. Beim neuen
+Webspace hätte ich die Antwort gern vorher — nicht nach dem nächsten Vorfall.
 
-**b) Was genau enthält der alte Vertrag — und lässt sich der Webspace-Teil kündigen,
-ohne dass Domain und E-Mail-Postfächer mitgehen?**
+**b) Was enthält der alte Vertrag genau — und lässt sich der Webspace-Teil kündigen, ohne
+dass Domain und E-Mail-Postfächer mitgehen?**
+
 Schick mir bei Gelegenheit die Vertragsübersicht aus dem Kundencenter. Wenn sich das
-nicht trennen lässt, ist das kein Drama — dann laufen einfach zwei Verträge nebeneinander
-weiter, der alte nur noch für Domain und E-Mail. Das ist immer noch besser, als die
-Postfächer anzufassen.
+nicht trennen lässt, ist das kein Drama: Dann laufen einfach zwei Verträge nebeneinander
+weiter, der alte nur noch für Domain und E-Mail. Immer noch besser, als die Postfächer
+anzufassen.
 
-### 6 · Lizenzschlüssel
+### Zu 6 · Lizenzschlüssel
 
-Für zwei kostenpflichtige Erweiterungen brauche ich die Schlüssel:
+Für **ACF Pro** und **Yoast SEO Premium**.
 
-- **ACF Pro** (Advanced Custom Fields)
-- **Yoast SEO Premium**
-
-Warum neu installieren statt vom alten Server kopieren: Der alte Server war
-kompromittiert. Alles, was von dort mitkäme, müsste einzeln auf Manipulation geprüft
-werden. Frisch beim Hersteller geladen ist beweisbar sauber — und schneller. Deine
-Inhalte kommen davon unberührt vollständig mit; nur der Programmcode wird neu geholt.
+Beide installiere ich neu, statt sie vom alten Server zu kopieren. Alles, was von dort
+mitkäme, müsste ich einzeln auf Manipulation prüfen — frisch beim Hersteller geladen ist
+es beweisbar sauber und geht schneller. Deine Inhalte bleiben davon unberührt und kommen
+vollständig mit; nur der Programmcode wird neu geholt.
 
 ---
 
 ## Was ich in der Zwischenzeit schon erledigt habe
 
-- Der gesamte selbst entwickelte Programmcode für eure Website (elf Erweiterungen) ist
-  gesichert und versioniert. Er lag bisher ausschließlich auf dem gehackten Server — wäre
-  der Webspace gelöscht worden, hätte er neu geschrieben werden müssen.
-- Der Sicherungsstand vom 11. August ist gegen das laufende System geprüft und
-  inhaltlich aktuell.
-- Der Umzugsplan steht vollständig, inklusive Rückweg für jeden Schritt.
+- **Euren Programmcode gesichert.** Elf selbst entwickelte Erweiterungen lagen bisher
+  ausschließlich auf dem gehackten Server. Wäre der Webspace gelöscht worden, hätten sie
+  neu geschrieben werden müssen. Sie liegen jetzt in der Versionsverwaltung.
+- **Den Sicherungsstand geprüft.** Der Stand vom 11. August ist gegen das laufende System
+  abgeglichen und inhaltlich aktuell — es geht beim Umzug nichts verloren.
+- **Den Umzugsplan fertiggestellt**, inklusive Rückweg für jeden einzelnen Schritt.
 
 ## Womit es weitergeht
 
-Sobald Punkt 1 und 2 stehen, kann ich anfangen. Alles andere hängt daran — ohne
-Datenbank und Unteradresse lässt sich kein WordPress installieren.
+**Punkt 1 und 2 sind die eigentliche Blockade** — ohne Datenbank und Unteradresse lässt
+sich kein WordPress installieren. Punkt 3 und 4 brauche ich beim Aufbau, Punkt 5 und 6
+kurz danach.
+
+Warte also bitte nicht auf Vollständigkeit: Sobald 1 und 2 stehen, lege ich los.
 
 Viele Grüße
 Florian

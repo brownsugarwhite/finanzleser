@@ -200,6 +200,9 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 
 /tools                  → Entwickler-Werkzeuge, die dauerhaft gebraucht werden
   verify-redirects.mjs  → 🚨 PFLICHT-Regressionstest für die SEO-Weiterleitungen
+  docx/                 → Word-Ausgabe im finanzleser-Layout aus Markdown
+                          `tools/docx/build.sh docs/Datei.md` → docs/Datei.docx
+                          Quelle bleibt .md (versioniert), .docx ist gitignored
 
 /wordpress               → EIGENER WordPress-PHP-Code, Deploy per SFTP (nie über Netlify)
   mu-plugins/            → 9 mu-plugins (Headless-Bridge, Site-Settings, CPTs, …)
