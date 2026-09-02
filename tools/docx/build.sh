@@ -5,6 +5,14 @@
 #   tools/docx/build.sh docs/Infrastruktur_Phase2.md
 #   → docs/Infrastruktur_Phase2.docx
 #
+# Ueberschriften werden durchnummeriert (1, 1.1, 1.2 …). Die Nummern erben Schrift
+# und Farbe der jeweiligen Ueberschrift — "Section Number" ist ein Zeichenformat
+# ohne eigene Vorgaben, das muss also nicht gesondert gestaltet werden.
+#
+# Ein Inhaltsverzeichnis wird bewusst NICHT erzeugt. Wer eines braucht:
+#
+#   TOC=1 tools/docx/build.sh docs/Datei.md
+#
 # Voraussetzungen: pandoc, python3 mit python-docx (pip install python-docx)
 #
 # Warum ein Skript und keine Handarbeit: die Formatvorlage wird bei jedem Lauf neu
@@ -43,9 +51,26 @@ print(f"  {anzahl} Seitenumbrueche uebersetzt")
 PY
 
 # 3 · Bauen
+#
+# Kein Array fuer die optionalen Argumente: macOS liefert bash 3.2, dort bricht
+# "${ARRAY[@]}" bei LEEREM Array unter `set -u` mit "unbound variable" ab. Eine
+# einfache Zeichenkette ist hier gefahrlos, weil die Argumente keine Leerzeichen
+# enthalten.
+VERZEICHNIS=""
+if [[ -n "${TOC:-}" ]]; then
+  VERZEICHNIS="--toc --toc-depth=2"
+  echo "  Inhaltsverzeichnis: an"
+fi
+
+# shellcheck disable=SC2086
 pandoc "$TMP/quelle.md" \
   --reference-doc="$TMP/finanzleser-reference.docx" \
-  --toc --toc-depth=2 \
+  --number-sections \
+  $VERZEICHNIS \
   -o "$ZIEL"
+
+# Gegenprobe: ist die Datei wirklich neu? Ein Lauf, der nichts erzeugt, aber
+# nichts sagt, ist schlimmer als einer, der abbricht.
+[[ "$ZIEL" -nt "$QUELLE" ]] || { echo "FEHLER: $ZIEL wurde nicht neu erzeugt" >&2; exit 1; }
 
 echo "✅ $ZIEL"
