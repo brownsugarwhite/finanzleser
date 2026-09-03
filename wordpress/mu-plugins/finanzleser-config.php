@@ -1,144 +1,172 @@
 <?php
 /**
- * Finanzleser Configuration
- * - Registriert ACF Options Page "Rechner-Konfiguration"
- * - Lädt rates.json in ACF Rechner-Konfiguration
- * - BBG Felder als text-input (nicht number)
+ * Finanzleser Rechner-Konfiguration (ACF-frei)
+ *
+ * Stellt 13 Rechenwerte (Mindestlohn, Kindergeld, Beitragssätze, Freibeträge …)
+ * unter `/wp-json/finanzleser/v1/rechner-config` bereit und gibt der Redaktion eine
+ * Eingabemaske dafür.
+ *
+ * ── Umbau am 03.09.2026 (Roadmap-Phase E) ────────────────────────────────────
+ *
+ * Vorher lief das über eine ACF-Options-Page und `get_field($key, 'options')`.
+ * Ohne ACF war `get_field()` eine undefinierte Funktion — der Endpunkt lieferte
+ * HTTP 500. Die Werte selbst lagen ohnehin schon als ganz normale Optionen in der
+ * Datenbank (`options_rc_*`), ACF war nur die Oberfläche davor.
+ *
+ * 🚨 Die Optionsnamen bleiben deshalb unverändert (`options_rc_mindestlohn` usw.) —
+ * die vorhandenen Werte werden ohne Datenmigration weiterverwendet.
+ *
+ * Ebenfalls entfernt, weil aktiv schädlich (Altlast der Vorgängerseite):
+ *
+ *   - „Aggressive cache clearing": löschte bei JEDEM Seitenaufruf sämtliche
+ *     Transients per DELETE-Query — also WordPress' eigenen Zwischenspeicher,
+ *     plus eine Schreiboperation pro Anfrage.
+ *   - „Send no-cache headers": setzte auf jeder Antwort `no-store`, auch auf
+ *     REST und GraphQL, und verhinderte damit jede Zwischenspeicherung.
+ *
+ *   Beides zusammen erklärt einen erheblichen Teil der Antwortzeiten des alten
+ *   Systems (~3,1 s je GraphQL-Abfrage). Netlify rechnet nach Compute-Sekunden ab;
+ *   im August entfielen 74 % der Rechnung auf Wartezeit gegenüber WordPress.
+ *
+ * Der frühere Selbst-Befüller aus `config/rates.json` ist entfallen: Er las aus
+ * einem lokalen Entwicklungspfad (`$HOME/Projekte/…`), lief auf dem Server also nie.
+ * `config/rates.json` bleibt im Frontend die Basisquelle, dieser Endpunkt überschreibt.
  */
 
-// 0. Registriere ACF Options Page
-add_action('acf/init', function() {
-    if (!function_exists('acf_add_options_page')) return;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-    acf_add_options_page(array(
-        'page_title' => 'Rechner-Konfiguration',
-        'menu_title' => 'Rechner-Konfiguration',
-        'menu_slug'  => 'rechner-konfiguration',
-        'parent_slug' => 'edit.php',
-        'icon_url'   => 'dashicons-calculator',
-        'redirect'   => false,
-        'capability' => 'manage_options',
-    ));
-});
+const FL_RECHNER_FELDER = array(
+	'rc_mindestlohn'      => 'Mindestlohn (€/Stunde)',
+	'rc_kindergeld'       => 'Kindergeld (€/Monat je Kind)',
+	'rc_rentenwert'       => 'Rentenwert (€)',
+	'rc_rv_an'            => 'Rentenversicherung Arbeitnehmer (%)',
+	'rc_kv_an'            => 'Krankenversicherung Arbeitnehmer (%)',
+	'rc_kv_zusatz'        => 'KV-Zusatzbeitrag durchschnittlich (%)',
+	'rc_pv_kinderlos'     => 'Pflegeversicherung kinderlos über 23 (%)',
+	'rc_alv_an'           => 'Arbeitslosenversicherung Arbeitnehmer (%)',
+	'rc_grundfreibetrag'  => 'Grundfreibetrag (€/Jahr)',
+	'rc_bbg_kv'           => 'BBG Kranken-/Pflegeversicherung (€/Monat)',
+	'rc_bbg_rv'           => 'BBG Renten-/Arbeitslosenversicherung (€/Monat)',
+	'rc_elterngeld_min'   => 'Elterngeld Minimum (€/Monat)',
+	'rc_elterngeld_max'   => 'Elterngeld Maximum (€/Monat)',
+);
 
-// 1. Lade rates.json - auf späteren Hook für besseres Timing
-add_action('acf/init', function() {
-    if (!current_user_can('manage_options')) return;
+/** Optionsname wie ihn ACF angelegt hat — Präfix „options_" bleibt erhalten. */
+function fl_rechner_option_name( $feld ) {
+	return 'options_' . $feld;
+}
 
-    $rates_file = getenv('HOME') . '/Projekte/finanzleser/config/rates.json';
-    if (!file_exists($rates_file)) return;
+/**
+ * Kommazahl robust einlesen: die Redaktion tippt „5.812,50" oder „5812.5".
+ * Getrennt behandelt, weil ein reines (float) bei deutscher Schreibweise 5 ergäbe.
+ */
+function fl_rechner_zahl( $eingabe ) {
+	if ( is_float( $eingabe ) || is_int( $eingabe ) ) {
+		return (float) $eingabe;
+	}
+	$s = trim( (string) $eingabe );
+	if ( $s === '' ) {
+		return '';
+	}
+	// Tausenderpunkte nur entfernen, wenn zusätzlich ein Komma vorkommt.
+	if ( strpos( $s, ',' ) !== false ) {
+		$s = str_replace( '.', '', $s );
+		$s = str_replace( ',', '.', $s );
+	}
+	return is_numeric( $s ) ? (float) $s : '';
+}
 
-    $json = file_get_contents($rates_file);
-    $rates = json_decode($json, true);
-    if (!is_array($rates)) return;
+// ─────────────────────────────────────────────
+// REST: /wp-json/finanzleser/v1/rechner-config
+// ─────────────────────────────────────────────
 
-    // Mapping: ACF-Feldname → rates.json Pfad
-    $values = array(
-        'rc_mindestlohn' => $rates['mindestlohn']['stundensatz'] ?? null,
-        'rc_kindergeld' => $rates['kindergeld']['monatlich_je_kind'] ?? null,
-        'rc_rentenwert' => $rates['rente']['rentenwert_ab_01jul_2026'] ?? null,
-        'rc_rv_an' => $rates['sozialversicherung']['rentenversicherung']['arbeitnehmer_prozent'] ?? null,
-        'rc_kv_an' => $rates['sozialversicherung']['krankenversicherung']['allgemeiner_beitrag_an_prozent'] ?? null,
-        'rc_kv_zusatz' => $rates['sozialversicherung']['krankenversicherung']['durchschnittlicher_zusatzbeitrag_prozent'] ?? null,
-        'rc_pv_kinderlos' => $rates['sozialversicherung']['pflegeversicherung']['arbeitnehmer_nach_kindern']['kinderlos_ueber23'] ?? null,
-        'rc_alv_an' => $rates['sozialversicherung']['arbeitslosenversicherung']['arbeitnehmer_prozent'] ?? null,
-        'rc_grundfreibetrag' => $rates['lohnsteuer']['grundfreibetrag'] ?? null,
-        'rc_bbg_kv' => $rates['beitragsbemessungsgrenzen']['kranken_pflege']['monatlich'] ?? null,
-        'rc_bbg_rv' => $rates['beitragsbemessungsgrenzen']['renten_arbeitslosen']['monatlich'] ?? null,
-        'rc_elterngeld_min' => $rates['elterngeld']['minimum'] ?? null,
-        'rc_elterngeld_max' => $rates['elterngeld']['maximum'] ?? null,
-    );
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'finanzleser/v1', '/rechner-config', array(
+		'methods'             => 'GET',
+		'permission_callback' => '__return_true',
+		'callback'            => function () {
+			$config = array();
+			foreach ( array_keys( FL_RECHNER_FELDER ) as $feld ) {
+				$wert = get_option( fl_rechner_option_name( $feld ), null );
+				if ( $wert !== null && $wert !== false && $wert !== '' ) {
+					$config[ $feld ] = (float) $wert;
+				}
+			}
+			return rest_ensure_response( $config );
+		},
+	) );
+} );
 
-    // Speichere als floats - nur wenn leer
-    foreach ($values as $key => $value) {
-        if ($value !== null && !get_field($key, 'options')) {
-            if (function_exists('update_field')) {
-                update_field($key, (float) $value, 'options');
-            }
-        }
-    }
-}, 20);
+// ─────────────────────────────────────────────
+// Eingabemaske für die Redaktion
+// ─────────────────────────────────────────────
 
-// 2. BBG Felder als TEXT rendern (nicht NUMBER - das verhindert Dezimal-Fehler)
-add_filter('acf/load_field', function($field) {
-    if (!isset($field['name'])) return $field;
+add_action( 'admin_menu', function () {
+	add_submenu_page(
+		'edit.php',
+		'Rechner-Konfiguration',
+		'Rechner-Konfiguration',
+		'manage_options',
+		'rechner-konfiguration',
+		'fl_rechner_config_seite'
+	);
+} );
 
-    if (in_array($field['name'], ['rc_bbg_kv', 'rc_bbg_rv'])) {
-        $field['type'] = 'text';
-    }
-    return $field;
-});
+add_action( 'admin_init', function () {
+	foreach ( array_keys( FL_RECHNER_FELDER ) as $feld ) {
+		register_setting( 'fl_rechner_config', fl_rechner_option_name( $feld ), array(
+			'type'              => 'string',
+			'sanitize_callback' => 'fl_rechner_zahl',
+			'default'           => '',
+		) );
+	}
+} );
 
-// 3. BBG Werte beim Speichern zu floats konvertieren
-add_filter('acf/update_value', function($value, $post_id, $field) {
-    if (in_array($field['name'], ['rc_bbg_kv', 'rc_bbg_rv'])) {
-        if (is_string($value)) {
-            $value = str_replace(',', '.', $value);
-            $value = (float) $value;
-        }
-    }
-    return $value;
-}, 10, 3);
+function fl_rechner_config_seite() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	?>
+	<div class="wrap">
+		<h1>Rechner-Konfiguration</h1>
+		<p>Diese Werte übersteuern die Grundwerte aus <code>config/rates.json</code> im
+		   Frontend. Das Frontend liest sie über
+		   <code>/wp-json/finanzleser/v1/rechner-config</code>.</p>
+		<form method="post" action="options.php">
+			<?php settings_fields( 'fl_rechner_config' ); ?>
+			<table class="form-table" role="presentation">
+				<?php foreach ( FL_RECHNER_FELDER as $feld => $beschriftung ) :
+					$name = fl_rechner_option_name( $feld );
+					$wert = get_option( $name, '' );
+					?>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( $name ); ?>"><?php echo esc_html( $beschriftung ); ?></label></th>
+						<td>
+							<input type="text" class="regular-text" id="<?php echo esc_attr( $name ); ?>"
+							       name="<?php echo esc_attr( $name ); ?>"
+							       value="<?php echo esc_attr( $wert ); ?>">
+							<p class="description"><code><?php echo esc_html( $feld ); ?></code></p>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+			<?php submit_button(); ?>
+		</form>
+	</div>
+	<?php
+}
 
-// 4. REST API Endpoint für Rechner-Konfiguration
-add_action('rest_api_init', function() {
-    register_rest_route('finanzleser/v1', '/rechner-config', array(
-        'methods' => 'GET',
-        'callback' => function() {
-            $config = array();
+// ─────────────────────────────────────────────
+// Kosmetik: Spaltenbreiten der Listentabellen
+// ─────────────────────────────────────────────
 
-            // Hole alle ACF Werte
-            $fields = array('rc_mindestlohn', 'rc_kindergeld', 'rc_rentenwert', 'rc_rv_an', 'rc_kv_an',
-                          'rc_kv_zusatz', 'rc_pv_kinderlos', 'rc_alv_an', 'rc_grundfreibetrag',
-                          'rc_bbg_kv', 'rc_bbg_rv', 'rc_elterngeld_min', 'rc_elterngeld_max');
-
-            foreach ($fields as $field) {
-                $value = get_field($field, 'options');
-                if ($value !== null && $value !== false) {
-                    $config[$field] = (float) $value;
-                }
-            }
-
-            return rest_ensure_response($config);
-        },
-        'permission_callback' => '__return_true',
-    ));
-});
-
-// 5. Fix admin table layout (same as pages list)
-add_action('admin_head', function() {
-    echo '<style>';
-    echo '.wp-list-table { table-layout: auto !important; width: 100%; }';
-    echo '.wp-list-table thead th, .wp-list-table tbody td { word-break: normal; overflow-wrap: break-word; }';
-    echo '.wp-list-table .column-title { word-wrap: break-word; white-space: normal; }';
-    echo '.wp-list-table .wp-column-tip { display: none; }';
-    echo '.wp-list-table .column-comments { min-width: 110px !important; }';
-    echo '.wp-list-table .column-sticky { min-width: 110px !important; }';
-    echo '.wp-list-table .column-date { min-width: 110px !important; }';
-    echo '.wp-list-table .column-modified { min-width: 110px !important; }';
-    echo '.wp-list-table .column-cb { min-width: 110px !important; }';
-    echo '</style>';
-});
-
-// 6. Aggressive cache clearing
-add_action('init', function() {
-    // Flush WP Rocket
-    if (function_exists('rocket_clean_files')) {
-        rocket_clean_files();
-    }
-    // Flush WP Supercache
-    if (function_exists('wp_cache_clean_cache')) {
-        wp_cache_clean_cache();
-    }
-    // Flush all transients
-    global $wpdb;
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%_transient_%'");
-}, 1);
-
-// 7. Send no-cache headers
-add_action('init', function() {
-    header('Cache-Control: no-cache, no-store, must-revalidate');
-    header('Pragma: no-cache');
-    header('Expires: 0');
-});
-
+add_action( 'admin_head', function () {
+	echo '<style>'
+	   . '.wp-list-table{table-layout:auto!important;width:100%}'
+	   . '.wp-list-table thead th,.wp-list-table tbody td{word-break:normal;overflow-wrap:break-word}'
+	   . '.wp-list-table .column-title{word-wrap:break-word;white-space:normal}'
+	   . '.wp-list-table .column-comments,.wp-list-table .column-sticky,'
+	   . '.wp-list-table .column-date,.wp-list-table .column-modified,'
+	   . '.wp-list-table .column-cb{min-width:110px!important}'
+	   . '</style>';
+} );
