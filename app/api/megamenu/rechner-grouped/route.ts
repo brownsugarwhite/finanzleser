@@ -9,7 +9,7 @@ export async function GET() {
 
     const grouped: Record<string, { title: string; slug: string }[]> = {};
     for (const r of rechner) {
-      const rawTyp = r.rechnerFelder?.rechnerTyp;
+      const rawTyp = r.rechnerTyp;
       const typ = Array.isArray(rawTyp) ? rawTyp[0] : rawTyp || "sonstige";
       if (!grouped[typ]) grouped[typ] = [];
       grouped[typ].push({ title: r.title, slug: r.slug });

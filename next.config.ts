@@ -105,6 +105,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "cms.finanzleser.de",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
+      // Altes CMS bewusst noch drin: solange die Produktion nicht umgestellt ist,
+      // muessen beide Hosts erlaubt sein — sonst brechen Bilder beim Rueckweg.
+      // Entfaellt nach erfolgreicher Abnahme der Produktion.
+      {
+        protocol: "https",
         hostname: "staging.finanzleser.de",
         port: "",
         pathname: "/wp-content/uploads/**",

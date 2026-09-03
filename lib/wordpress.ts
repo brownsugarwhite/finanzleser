@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, PostACF, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
+import type { Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
@@ -26,7 +26,7 @@ export interface LatestTool {
 function applyContentHeaderTitle(post: Post & { content?: string }): Post {
   const header = extractArticleHeader(post.content);
   if (header?.subtitle) {
-    post.beitragFelder = { ...post.beitragFelder, beitragUntertitel: header.subtitle };
+    post.untertitel = header.subtitle;
   }
   if ("content" in post) delete (post as { content?: string }).content;
   return post;
@@ -127,20 +127,18 @@ async function _fetchAllPosts(): Promise<Post[]> {
               slug
             }
           }
-          beitrag {
-            untertitel
-          }
+          untertitel
         }
       }
     }
   `;
 
-  const allNodes: (Post & { beitrag?: { untertitel?: string } })[] = [];
+  const allNodes: (Post & { untertitel?: string })[] = [];
   let hasNextPage = true;
   let after: string | null = null;
 
   type AllPostsResponse = {
-    posts: { nodes: (Post & { beitrag?: { untertitel?: string } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    posts: { nodes: (Post & { untertitel?: string })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
   };
   while (hasNextPage) {
     const data: AllPostsResponse = await client.request<AllPostsResponse>(query, { after });
@@ -152,9 +150,6 @@ async function _fetchAllPosts(): Promise<Post[]> {
   requireNonEmpty("allPosts", allNodes);
   return allNodes.map(post => {
     const decoded = decodePostContent(post);
-    if (post.beitrag?.untertitel) {
-      decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
-    }
     return decoded;
   });
 }
@@ -188,9 +183,7 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
               slug
             }
           }
-          beitrag {
-            untertitel
-          }
+          untertitel
         }
       }
     }
@@ -198,13 +191,10 @@ export async function getLatestPosts(limit = 10): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
+      posts: { nodes: (Post & { untertitel?: string; content?: string })[] };
     }>(query, { limit });
     const mapped = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
-      if (post.beitrag?.untertitel) {
-        decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
-      }
       // Eingebettete Tools aus dem Content ableiten, BEVOR applyContentHeaderTitle ihn strippt.
       const tools = detectToolTypes(post.content);
       // Konvention v2: Karten-Untertitel = 1. Content-<h2> (Kicker); überschreibt das
@@ -251,9 +241,7 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
               slug
             }
           }
-          beitrag {
-            untertitel
-          }
+          untertitel
         }
       }
     }
@@ -261,16 +249,10 @@ export async function searchPosts(searchQuery: string): Promise<Post[]> {
 
   try {
     const data = await client.request<{
-      posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] };
+      posts: { nodes: (Post & { untertitel?: string; content?: string })[] };
     }>(query, { search: searchQuery });
     const posts = data.posts.nodes.map((post) => {
       const decoded = decodePostContent(post);
-      if (post.beitrag?.untertitel) {
-        decoded.beitragFelder = {
-          ...decoded.beitragFelder,
-          beitragUntertitel: post.beitrag.untertitel,
-        };
-      }
       // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
       return applyContentHeaderTitle(decoded);
     });
@@ -341,7 +323,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
       if (p.categories?.nodes?.some((c) => c.slug === categorySlug)) {
         const tools = detectToolTypes((p as Post & { content?: string }).content);
         // Klonen — applyContentHeaderTitle mutiert (strippt content) → Map-Eintrag nicht korrumpieren.
-        const clone = { ...p, beitragFelder: { ...p.beitragFelder } } as Post & { content?: string };
+        const clone = { ...p } as Post & { content?: string };
         out.push({ ...applyContentHeaderTitle(clone), tools });
       }
     }
@@ -374,9 +356,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
                   slug
                 }
               }
-              beitrag {
-                untertitel
-              }
+              untertitel
             }
           }
         }
@@ -387,7 +367,7 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
   try {
     const data = await client.request<{
       categories: {
-        nodes: Array<{ posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string })[] } }>
+        nodes: Array<{ posts: { nodes: (Post & { untertitel?: string; content?: string })[] } }>
       }
     }>(query, {
       slug: [categorySlug],
@@ -395,12 +375,6 @@ export const getPostsByCategory = cache(async (categorySlug: string): Promise<Po
     const posts = data.categories.nodes[0]?.posts.nodes || [];
     return posts.map(post => {
       const decoded = decodePostContent(post);
-      if (post.beitrag?.untertitel) {
-        decoded.beitragFelder = {
-          ...decoded.beitragFelder,
-          beitragUntertitel: post.beitrag.untertitel,
-        };
-      }
       // Eingebettete Tools ableiten, BEVOR applyContentHeaderTitle den Content strippt.
       const tools = detectToolTypes(post.content);
       // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
@@ -435,7 +409,7 @@ export async function getMegamenuPostsByCategory(
               content
               featuredImage { node { sourceUrl altText } }
               categories { nodes { name slug } }
-              beitrag { untertitel }
+              untertitel
             }
           }
         }
@@ -445,15 +419,12 @@ export async function getMegamenuPostsByCategory(
   try {
     const data = await client.request<{
       categories: {
-        nodes: Array<{ posts: { nodes: (Post & { content?: string; beitrag?: { untertitel?: string } })[] } }>;
+        nodes: Array<{ posts: { nodes: (Post & { content?: string; untertitel?: string })[] } }>;
       };
     }>(query, { slug: [categorySlug], first: limit });
     const nodes = data.categories.nodes[0]?.posts.nodes || [];
     return nodes.map((post) => {
       const decoded = decodePostContent(post);
-      if (post.beitrag?.untertitel) {
-        decoded.beitragFelder = { ...decoded.beitragFelder, beitragUntertitel: post.beitrag.untertitel };
-      }
       // tools VOR dem Strippen aus dem Content ableiten.
       const content = post.content || "";
       const tools: ("rechner" | "checkliste" | "vergleich" | "dokumente")[] = [];
@@ -617,13 +588,13 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
           featuredImage { node { sourceUrl altText } }
           author { node { id name firstName lastName description avatar { url } } }
           categories { nodes { name slug } }
-          beitrag { untertitel featuredTool }
+          untertitel
         }
       }
     }
   `;
   type BulkPostsResponse = {
-    posts: { nodes: (Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    posts: { nodes: (Post & { untertitel?: string })[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
   };
   const map = new Map<string, Post>();
   let after: string | null = null;
@@ -633,10 +604,7 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
     try {
       const data: BulkPostsResponse = await client.request<BulkPostsResponse>(query, { after });
       for (const node of data.posts.nodes) {
-        const decoded = decodePostContent(node) as Post & { beitrag?: { untertitel?: string; featuredTool?: boolean } };
-        if (node.beitrag) {
-          decoded.beitragFelder = { beitragUntertitel: node.beitrag.untertitel, beitragFeaturedTool: node.beitrag.featuredTool };
-        }
+        const decoded = decodePostContent(node) as Post & { untertitel?: string };
         if (decoded.slug) map.set(decoded.slug, decoded);
       }
       hasNext = data.posts.pageInfo.hasNextPage;
@@ -747,6 +715,7 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
           modified
           content
           excerpt
+          untertitel
           featuredImage {
             node {
               sourceUrl
@@ -776,37 +745,15 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
     }
   `;
 
-  // ACF-Felder (Untertitel/Featured-Tool) PARALLEL zur Hauptabfrage holen — beide
-  // hängen nur am slug, kein Waterfall. Custom Post Types haben kein `beitrag` →
-  // .catch(null), das ist ok.
-  const aclQuery = gql`
-    query GetPostACF($slug: String!) {
-      postBy(slug: $slug) {
-        beitrag {
-          untertitel
-          featuredTool
-        }
-      }
-    }
-  `;
-
+  // Frueher holte eine ZWEITE Abfrage die ACF-Felder parallel dazu. Seit `untertitel`
+  // ein flaches Feld auf Post ist (Roadmap-Phase E, ACF raus), steht es in der
+  // Hauptabfrage — eine GraphQL-Anfrage weniger pro Artikelseite.
   try {
-    const [data, aclData] = await Promise.all([
-      client.request<{ posts: { nodes: Post[] } }>(query, { slug }),
-      client
-        .request<{ postBy: { beitrag?: { untertitel?: string; featuredTool?: boolean } } | null }>(aclQuery, { slug })
-        .catch(() => null),
-    ]);
+    const data = await client.request<{ posts: { nodes: Post[] } }>(query, { slug });
 
     let post = data.posts.nodes[0] || null;
     if (post) {
       post = decodePostContent(post);
-      if (aclData?.postBy?.beitrag) {
-        post.beitragFelder = {
-          beitragUntertitel: aclData.postBy.beitrag.untertitel,
-          beitragFeaturedTool: aclData.postBy.beitrag.featuredTool,
-        };
-      }
     }
 
     return post; // null = Beitrag existiert genuin nicht → Caller darf notFound()
@@ -1206,10 +1153,8 @@ async function _fetchAllRechner(): Promise<Rechner[]> {
           title
           slug
           excerpt
-          rechnerFelder {
-            rechnerTyp
-            beschreibung
-          }
+          rechnerTyp
+          beschreibung
         }
       }
     }
@@ -1243,9 +1188,7 @@ export const getRechnerBySlug = cache(async (slug: string): Promise<Rechner | nu
         title
         slug
         excerpt
-        rechnerFelder {
-          beschreibung
-        }
+        beschreibung
       }
     }
   `;
@@ -1278,9 +1221,7 @@ async function _fetchAllChecklisten(): Promise<Checkliste[]> {
           title
           slug
           excerpt
-          checklisten {
-            checklistenBeschreibung
-          }
+          beschreibung
         }
       }
     }
@@ -1323,7 +1264,8 @@ function getAllChecklistenFullMap(): Promise<Map<string, Checkliste>> {
           pageInfo { hasNextPage endCursor }
           nodes {
             id title slug excerpt
-            checklisten { checklistenBeschreibung checklistePdf { node { mediaItemUrl } } }
+            beschreibung
+            pdfUrl
           }
         }
       }
@@ -1366,14 +1308,8 @@ export const getChecklisteBySlug = cache(async (slug: string): Promise<Checklist
         title
         slug
         excerpt
-        checklisten {
-          checklistenBeschreibung
-          checklistePdf {
-            node {
-              mediaItemUrl
-            }
-          }
-        }
+        beschreibung
+        pdfUrl
       }
     }
   `;
@@ -1746,7 +1682,7 @@ export async function getLatestPostsByCategoryIds(
           content
           featuredImage { node { sourceUrl altText } }
           categories { nodes { name slug databaseId } }
-          beitrag { untertitel }
+          untertitel
         }
       }
     }
@@ -1755,7 +1691,7 @@ export async function getLatestPostsByCategoryIds(
   async function fetchPosts(cats: number[], exclude: number[]): Promise<Post[]> {
     try {
       const data = await client.request<{
-        posts: { nodes: (Post & { beitrag?: { untertitel?: string }; content?: string; databaseId: number })[] };
+        posts: { nodes: (Post & { untertitel?: string; content?: string; databaseId: number })[] };
       }>(query, {
         cats: cats.map(String),
         first: limit + (exclude.length || 0) + 5,
@@ -1763,12 +1699,6 @@ export async function getLatestPostsByCategoryIds(
       });
       return data.posts.nodes.map((post) => {
         const decoded = decodePostContent(post);
-        if (post.beitrag?.untertitel) {
-          decoded.beitragFelder = {
-            ...decoded.beitragFelder,
-            beitragUntertitel: post.beitrag.untertitel,
-          };
-        }
         // Konvention v2: Karten-Untertitel = 1. Content-<h2> (überschreibt stale ACF).
         // databaseId für den Fallback-Dedup erhalten (applyContentHeaderTitle strippt nur content).
         return applyContentHeaderTitle(decoded as Post & { content?: string; databaseId: number });

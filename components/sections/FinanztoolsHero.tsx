@@ -1148,7 +1148,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                       <span>{post.title}</span>
                       <ToolDots tools={post.tools} size={8} style={{ marginLeft: 0 }} />
                     </p>
-                    {post.beitragFelder?.beitragUntertitel && (
+                    {post.untertitel && (
                       <p className="latest-post-title" data-morph-role="bold" style={{
                         fontSize: 16,
                         fontFamily: "var(--font-heading, 'Merriweather', serif)",
@@ -1159,7 +1159,7 @@ export default function FinanztoolsHero({ posts = [], latestPosts = [] }: { post
                         WebkitHyphens: "auto",
                         wordBreak: "break-word",
                       }} lang="de">
-                        {post.beitragFelder.beitragUntertitel}
+                        {post.untertitel}
                       </p>
                     )}
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>

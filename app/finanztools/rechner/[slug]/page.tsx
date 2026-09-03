@@ -8,6 +8,7 @@ import PageAds from "@/components/layout/PageAds";
 import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpress";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { cleanDescription } from "@/lib/content-utils";
+import type { RechnerTyp } from "@/lib/types";
 
 export const revalidate = 86400;
 
@@ -88,7 +89,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const fallback = FALLBACK_RECHNER[slug];
 
   const title = rechner?.title || fallback?.title;
-  const desc = stripHtml(rechner?.excerpt || rechner?.rechnerFelder?.beschreibung) || fallback?.desc;
+  const desc = stripHtml(rechner?.excerpt || rechner?.beschreibung) || fallback?.desc;
 
   if (!title) {
     return { title: `Rechner nicht gefunden – ${SITE_NAME}`, robots: { index: false, follow: false } };
@@ -114,10 +115,8 @@ export default async function RechnerDetailPage({ params }: Props) {
       title: fallback.title,
       slug,
       excerpt: fallback.desc,
-      rechnerFelder: {
-        rechnerTyp: fallback.type as any,
-        rechnerBeschreibung: fallback.desc,
-      },
+      rechnerTyp: fallback.type as RechnerTyp,
+      beschreibung: fallback.desc,
     };
   }
 
@@ -130,10 +129,10 @@ export default async function RechnerDetailPage({ params }: Props) {
   }
 
   const kategorieName =
-    rechner.rechnerFelder?.rechnerTyp === "steuer" ? "Steuer & Lohn" :
-    rechner.rechnerFelder?.rechnerTyp === "soziales" ? "Soziales & Arbeit" :
-    rechner.rechnerFelder?.rechnerTyp === "rente" ? "Rente & Altersvorsorge" :
-    rechner.rechnerFelder?.rechnerTyp === "kredit" ? "Kredit & Finanzen" : "Finanztools";
+    rechner.rechnerTyp === "steuer" ? "Steuer & Lohn" :
+    rechner.rechnerTyp === "soziales" ? "Soziales & Arbeit" :
+    rechner.rechnerTyp === "rente" ? "Rente & Altersvorsorge" :
+    rechner.rechnerTyp === "kredit" ? "Kredit & Finanzen" : "Finanztools";
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -176,7 +175,7 @@ export default async function RechnerDetailPage({ params }: Props) {
               </h1>
 
               {/* Beschreibung */}
-              {(rechner.excerpt || rechner.rechnerFelder?.beschreibung) && (
+              {(rechner.excerpt || rechner.beschreibung) && (
                 <p
                   className="cpt-desc mb-8 text-gray-600"
                   style={{
@@ -185,7 +184,7 @@ export default async function RechnerDetailPage({ params }: Props) {
                     fontWeight: "400",
                   }}
                 >
-                  {cleanDescription(rechner.excerpt || rechner.rechnerFelder?.beschreibung)}
+                  {cleanDescription(rechner.excerpt || rechner.beschreibung)}
                 </p>
               )}
             </>

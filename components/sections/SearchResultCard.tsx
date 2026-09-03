@@ -28,7 +28,7 @@ export default function SearchResultCard({ post }: Props) {
     category?.slug || "allgemein"
   }/${post.slug}`;
 
-  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const untertitel = post.untertitel?.trim();
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
   const excerpt = (post.excerpt || "").replace(/<[^>]*>/g, "").trim();

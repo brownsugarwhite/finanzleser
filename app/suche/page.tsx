@@ -64,16 +64,16 @@ async function getMatchingTools(query: string): Promise<ToolGroups> {
 
   return {
     rechner: top(rechner.map((x) => ({
-      s: score(`${x.title} ${x.excerpt || ""} ${x.rechnerFelder?.beschreibung || ""}`),
-      item: { title: decodeHtmlEntities(x.title), desc: firstSentence(cleanDescription(x.rechnerFelder?.beschreibung || x.excerpt)), href: buildRechnerUrl(x.slug) } as ToolItem,
+      s: score(`${x.title} ${x.excerpt || ""} ${x.beschreibung || ""}`),
+      item: { title: decodeHtmlEntities(x.title), desc: firstSentence(cleanDescription(x.beschreibung || x.excerpt)), href: buildRechnerUrl(x.slug) } as ToolItem,
     }))),
     vergleich: top(vergleiche.map((x) => ({
       s: score(`${x.title} ${x.excerpt || ""}`),
       item: { title: decodeHtmlEntities(x.title), desc: firstSentence(cleanDescription(x.excerpt)), href: buildVergleichUrl(x.slug) } as ToolItem,
     }))),
     checkliste: top(checklisten.map((x) => ({
-      s: score(`${x.title} ${x.excerpt || ""} ${x.checklisten?.checklistenBeschreibung || ""}`),
-      item: { title: decodeHtmlEntities(x.title), desc: firstSentence(cleanDescription(x.checklisten?.checklistenBeschreibung || x.excerpt)), href: buildChecklisteUrl(x.slug) } as ToolItem,
+      s: score(`${x.title} ${x.excerpt || ""} ${x.beschreibung || ""}`),
+      item: { title: decodeHtmlEntities(x.title), desc: firstSentence(cleanDescription(x.beschreibung || x.excerpt)), href: buildChecklisteUrl(x.slug) } as ToolItem,
     }))),
   };
 }

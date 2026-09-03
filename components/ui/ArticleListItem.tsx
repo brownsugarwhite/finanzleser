@@ -31,7 +31,7 @@ export default function ArticleListItem({ post, href, hero = false }: ArticleLis
 
   // Gleiche Titel-Logik wie SlideArticleCard: bold = Untertitel (oder Titel),
   // Subline = Titel (nur wenn Untertitel existiert).
-  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const untertitel = post.untertitel?.trim();
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
   const excerpt = cleanDescription(post.excerpt);

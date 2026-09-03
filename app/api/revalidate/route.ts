@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
   const revalidated: string[] = [];
 
   if (body.layout) {
-    // Das mu-plugin (wp-headless/finanzleser-headless.php) feuert `layout: true` für
+    // Das mu-plugin (wordpress/mu-plugins/finanzleser-headless.php) feuert `layout: true` für
     // ZWEI sehr unterschiedliche Fälle und schickt den Options-Namen als `slug` mit:
     //
     //   finanzleser_site_settings  → TopBanner + Werbeschalter, stecken im Root-Layout

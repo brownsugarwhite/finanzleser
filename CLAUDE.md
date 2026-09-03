@@ -200,8 +200,14 @@ Besucher → Netlify CDN → Next.js Frontend → WordPress GraphQL API → Word
 
 /tools                  → Entwickler-Werkzeuge, die dauerhaft gebraucht werden
   verify-redirects.mjs  → 🚨 PFLICHT-Regressionstest für die SEO-Weiterleitungen
+  docx/                 → Word-Ausgabe im finanzleser-Layout aus Markdown
+                          `tools/docx/build.sh docs/Datei.md` → docs/Datei.docx
+                          Quelle bleibt .md (versioniert), .docx ist gitignored
 
-/wp-headless            → mu-plugin-Quelle (Preview + Revalidate-Bridge), Deploy per SFTP
+/wordpress               → EIGENER WordPress-PHP-Code, Deploy per SFTP (nie über Netlify)
+  mu-plugins/            → 9 mu-plugins (Headless-Bridge, Site-Settings, CPTs, …)
+  plugins/               → finanzleser-blocks (Gutenberg), finanzleser-studio-helper
+  einmal-skripte/        → historisch (Vorfallsbereinigung 08/2026), nicht deployen
 
 /docs                   → WORDPRESS_ACF_SETUP.md, beitraege_kategorien.md
                           siehe ROADMAP.md für aktuellen Stand
@@ -272,10 +278,13 @@ Aktuell noch in WordPress:
 - Rechner-Konfiguration → entweder WP-Options oder `config/rates.json` im Repo
 
 ### Gutenberg-Blocks (`finanzleser-blocks` Plugin)
-Bereits aktiv:
+Bereits aktiv — **fünf** Blöcke (verifiziert am Quellcode `wordpress/plugins/finanzleser-blocks/`,
+zwei davon standen bisher nicht in dieser Datei):
 - `finanzleser/rechner` (statisch, `slug`-Attribut)
 - `finanzleser/vergleich` (statisch, `slug`-Attribut)
 - `finanzleser/checkliste` (dynamisch, `render_callback`)
+- `finanzleser/dokumente`
+- `finanzleser/vergleich-quelle`
 
 Frontend-Parser: [components/sections/ArticleContent.tsx](components/sections/ArticleContent.tsx) parst die `<!-- wp:finanzleser/* -->` Block-Kommentare aus `post_content` und rendert die jeweiligen React-Komponenten.
 
@@ -370,7 +379,13 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
    Und: **niemals eine Allowlist bekannter Slugs** — fehlt einer, wird aus einem 301
    eine 404. Nur Denylists unmöglicher Muster.
 1. **URL-Erhalt:** bestehende Beitrags-URLs nie ohne 301-Redirect ändern
-2. **WordPress-Dateien gehören nicht ins Git** — nur Next.js-Frontend
+2. **Fremde WordPress-Dateien gehören nicht ins Git** (Kern, Themes, Fremd-Plugins —
+   die werden beim Aufbau frisch von der Quelle geholt). **Eigener PHP-Code schon**:
+   er liegt in `wordpress/` und wird per SFTP deployed, nicht über Netlify.
+   🚨 Diese Regel stand bis zum 02.09.2026 pauschal da — dadurch existierten 9 mu-plugins
+   und `finanzleser-blocks` nur auf dem Server und in einem ungeversionierten Backup-ZIP.
+   Beim Einbruch im August war genau das der blinde Fleck: gegen wordpress.org-Prüfsummen
+   war alles abgleichbar außer diesem Code.
 3. **ACF JSON Sync** nutzen solange ACF lebt — Felder als JSON in `acf-json/` versionieren
 4. **Mobile-first** — alle Komponenten zuerst für Mobile
 5. **Deutsche Sprache** — `lang="de"`, alle UI-Texte auf Deutsch
@@ -387,6 +402,113 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
     Gegenprobe nach jedem Build:
     `node -e "const r=require('./.next/prerender-manifest.json').routes; console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"`
     → erwartet `[86400, false]`.
+
+12. **Schema-Änderung und Datenquelle gehören in EINEN Commit.** Wer eine GraphQL-Abfrage
+    im Frontend ändert, muss im selben Commit dafür sorgen, dass die gebaute Umgebung
+    gegen ein CMS zeigt, das die Felder kennt. Sonst entsteht ein Commit, der **nicht
+    baubar ist** — auch wenn der nächste ihn repariert.
+
+    🚨 Real passiert am 03.09.2026: `f1ed4bc` stellte das Frontend auf ACF-freie Felder
+    (`untertitel`, `rechnerTyp`, `pdfUrl`) um, `netlify.toml` zeigte aber noch aufs alte
+    CMS. Der Deploy-Preview scheiterte zwangsläufig mit
+    `Cannot query field "untertitel" on type "Post"`. Erst `d1d8a14` hängte die
+    Preview-Umgebung um — zwei Commits für einen untrennbaren Vorgang.
+
+    Gegenprobe vor dem Push, wenn Abfragen angefasst wurden:
+    ```bash
+    curl -s -X POST -H "Content-Type: application/json" \
+      -d '{"query":"{ posts(first:1){nodes{slug untertitel}} }"}' \
+      "$WORDPRESS_API_URL" | grep -q '"errors"' && echo "CMS kennt das Feld NICHT"
+    ```
+
+14. 🚨 **`WORDPRESS_API_URL` gehört NIE in `netlify.toml`** — nur ins Netlify-UI, dort
+    pro Deploy-Kontext. Variablen aus `netlify.toml` erreichen **nur den Build**, nicht
+    die Functions zur Laufzeit (Netlify-Doku: „available to builds" + „snippet
+    injection"; Functions fehlen in der Liste). Steht der Wert an beiden Stellen, lesen
+    Build und Laufzeit aus **verschiedenen Datenbanken**.
+
+    **Am 03.09.2026 real passiert:** Der Deploy-Preview baute grün gegen das neue CMS
+    (836 Seiten), aber jede Seite, die zur Laufzeit nachfragte, landete beim alten CMS
+    ohne die neuen Felder → HTTP 500 auf allen Kaskaden-Weiterleitungen und auf `/suche`.
+    Besonders tückisch: **der Build war grün.** Ein Fehler, der nur die Laufzeit trifft,
+    sieht in der Buildausgabe nach Erfolg aus.
+
+    Woran man es erkennt — vorgerenderte Seiten sind in Ordnung, alles was zur Laufzeit
+    WordPress braucht, wirft 500:
+    ```bash
+    curl -so/dev/null -w "%{http_code} /impressum (vorgerendert)\n"  "$P/impressum"
+    curl -so/dev/null -w "%{http_code} /suche?q=x  (Laufzeit)\n"      "$P/suche?q=test"
+    ```
+
+15. **„Trigger deploy" im Netlify-UI baut immer `main`** — es gibt dort keinen Weg, einen
+    Deploy-Preview auszulösen. Einen Preview bekommt man nur über einen Push auf den
+    Branch des offenen PR. Ein „Retry deploy" auf einem fehlgeschlagenen Preview baut
+    denselben Commit erneut und hilft daher nicht, wenn der Commit selbst das Problem ist.
+
+---
+
+## 🌿 Branch-Regeln
+
+> Festgelegt am 02.09.2026, nachdem sich vier Karteileichen, ein hängengebliebener
+> Commit und ein 27 Commits veralteter lokaler `main` angesammelt hatten.
+
+### Die eine Regel, die heute schon zugeschlagen hat
+
+**🚨 `main` auf deinem Rechner ist NICHT `main` auf GitHub.** Die lokale Kopie
+aktualisiert sich nie von selbst. Am 02.09. hing sie 27 Commits zurück — eine Prüfung
+gegen sie meldete fälschlich, das gesamte Compute-Paket sei nicht live.
+
+```bash
+git fetch origin          # IMMER zuerst
+git log --oneline origin/main -3
+git rev-list --left-right --count HEAD...origin/main   # links=vor, rechts=hinter
+```
+
+Wer „ist X in main?" beantworten will, fragt **`origin/main`** — nie `main`.
+`git branch --merged main` und `git show main:datei` lügen bei veralteter Kopie.
+
+### Wovon abzweigen
+
+| Zeitpunkt | Basis für neue Branches | Ziel des PR |
+|---|---|---|
+| bis Phase 4 | `origin/main` | `main` |
+| ab Phase 4 | `dev` | `dev`, danach `dev` → `main` |
+
+Nie von einem anderen Feature-Branch abzweigen. Wer das tut, schleppt fremde Commits
+in seinen PR — genau so hing `e6eb1a2` (SEO-Stand 30.08.) monatelang in einem Branch
+fest, statt in `main` zu landen.
+
+```bash
+git fetch origin && git switch -c fix/thema origin/main
+```
+
+### Namen
+
+`feature/` neue Funktion · `fix/` Fehlerbehebung · `perf/` Performance ·
+`chore/` Aufräumen, Werkzeuge · `docs/` nur Dokumentation
+
+### Lebensdauer
+
+- **Ein Branch = ein Thema.** Wird ein Branch zum Sammelbecken, lässt er sich nicht mehr
+  einzeln zurücknehmen.
+- **Kurz halten.** `chore/cleanup-und-compute` lag 19 Tage ungemergt, während `main`
+  weiterlief. Beim Zusammenführen war *main* in 4 von 5 Konfliktdateien der neuere Stand;
+  ein naiver Merge hätte den fail-open-Fix zurückgerollt und das Cache-Poisoning erneut
+  ermöglicht.
+- **Nach dem Merge löschen**, lokal *und* auf GitHub. Ein Branch mit „0 vor / N hinter"
+  enthält nichts Eigenes mehr und ist nur noch Verwechslungsgefahr.
+
+```bash
+git branch -d chore/thema && git push origin --delete chore/thema
+```
+
+### Nie
+
+- Direkt auf `main` committen oder pushen (Branch-Schutz ist eingerichtet)
+- Einen Branch mergen, dessen Konflikte nicht **inhaltlich** geprüft wurden —
+  nie nach Branch-Alter entscheiden
+- Vor dem Merge nach `main` den Pflichttest auslassen: `npm run verify:redirects`
+  (siehe Regel 0)
 
 ---
 

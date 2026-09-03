@@ -12,7 +12,7 @@ export default async function RechnerPage() {
   // Nach Typ gruppieren
   const grouped: Record<string, typeof rechner> = {};
   for (const r of rechner) {
-    const rawTyp = r.rechnerFelder?.rechnerTyp;
+    const rawTyp = r.rechnerTyp;
     const typ = Array.isArray(rawTyp) ? rawTyp[0] : rawTyp || "sonstige";
     if (!grouped[typ]) grouped[typ] = [];
     grouped[typ].push(r);

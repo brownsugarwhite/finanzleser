@@ -37,7 +37,7 @@ function SlideArticleCardImpl({ post, index, phase1Visible = true, phase2Visible
   // Neuer Titel = beitragUntertitel (der große 42px-Titel der Beitragsseite).
   // Falls kein Untertitel gesetzt, fällt die Card auf post.title zurück und
   // zeigt dann keine Subline an (sonst wäre Titel = Subline).
-  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const untertitel = post.untertitel?.trim();
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
 

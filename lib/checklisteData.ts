@@ -20,7 +20,7 @@ export interface ChecklisteInlineData {
  */
 export async function loadChecklisteData(slug: string): Promise<ChecklisteInlineData | null> {
   const checkliste = await getChecklisteBySlug(slug);
-  const pdfUrl = checkliste?.checklisten?.checklistePdf?.node?.mediaItemUrl;
+  const pdfUrl = checkliste?.pdfUrl;
   if (!pdfUrl) return null;
 
   const response = await fetch(pdfUrl, { next: { revalidate: CONTENT_REVALIDATE } });

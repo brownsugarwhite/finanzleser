@@ -18,7 +18,7 @@ export async function GET(
   if (type === "rechner") {
     const rechner = await getRechnerBySlug(slug);
     // Natives excerpt bevorzugt (ACF-Ablösung), ACF-Feld als Fallback.
-    const excerpt = rechner?.excerpt || rechner?.rechnerFelder?.beschreibung || "";
+    const excerpt = rechner?.excerpt || rechner?.beschreibung || "";
     return NextResponse.json({ title: rechner?.title || "", excerpt }, { headers: TT_HEADERS });
   }
 
@@ -26,7 +26,7 @@ export async function GET(
     const checkliste = await getChecklisteBySlug(slug);
     // Beschreibung wird nach der Tool-Überschrift im Artikel angezeigt. Quelle:
     // natives excerpt bevorzugt (Ziel der ACF-Ablösung), ACF-Feld als Fallback.
-    const excerpt = checkliste?.excerpt || checkliste?.checklisten?.checklistenBeschreibung || "";
+    const excerpt = checkliste?.excerpt || checkliste?.beschreibung || "";
     return NextResponse.json({ title: checkliste?.title || "", excerpt }, { headers: TT_HEADERS });
   }
 
