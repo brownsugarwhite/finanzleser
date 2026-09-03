@@ -83,25 +83,25 @@ export default async function FinanztoolGrid({ mainCategorySlug, mainCategoryNam
 
   const r = pick(
     rechner,
-    (x) => `${x.title} ${x.excerpt || ""} ${x.rechnerFelder?.beschreibung || ""}`,
+    (x) => `${x.title} ${x.excerpt || ""} ${x.beschreibung || ""}`,
     (x) => {
-      const typ = Array.isArray(x.rechnerFelder?.rechnerTyp) ? x.rechnerFelder?.rechnerTyp[0] : x.rechnerFelder?.rechnerTyp;
+      const typ = Array.isArray(x.rechnerTyp) ? x.rechnerTyp[0] : x.rechnerTyp;
       return typ && RECHNERTYP_MAIN[typ] === mainCategorySlug ? 2 : 0;
     },
     keywords,
     perRow,
-  ).map((x): ToolItem => ({ title: decodeHtmlEntities(x.title), desc: firstSentence(strip(x.rechnerFelder?.beschreibung || x.excerpt)), href: buildRechnerUrl(x.slug) }));
+  ).map((x): ToolItem => ({ title: decodeHtmlEntities(x.title), desc: firstSentence(strip(x.beschreibung || x.excerpt)), href: buildRechnerUrl(x.slug) }));
 
   const v = pick(vergleiche, (x) => `${x.title} ${x.excerpt || ""}`, () => 0, keywords, perRow)
     .map((x): ToolItem => ({ title: decodeHtmlEntities(x.title), desc: firstSentence(strip(x.excerpt)), href: buildVergleichUrl(x.slug) }));
 
   const c = pick(
     checklisten,
-    (x) => `${x.title} ${x.excerpt || ""} ${x.checklisten?.checklistenBeschreibung || ""}`,
+    (x) => `${x.title} ${x.excerpt || ""} ${x.beschreibung || ""}`,
     () => 0,
     keywords,
     perRow,
-  ).map((x): ToolItem => ({ title: decodeHtmlEntities(x.title), desc: firstSentence(strip(x.checklisten?.checklistenBeschreibung || x.excerpt)), href: buildChecklisteUrl(x.slug) }));
+  ).map((x): ToolItem => ({ title: decodeHtmlEntities(x.title), desc: firstSentence(strip(x.beschreibung || x.excerpt)), href: buildChecklisteUrl(x.slug) }));
 
   const sections = [
     { key: "rechner" as const, items: r },

@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: `${checkliste.title} – Checkliste – ${SITE_NAME}`,
     description: stripHtml(
-      checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
+      checkliste.excerpt || checkliste.beschreibung
     ) || `Interaktive Checkliste: ${checkliste.title}`,
     path: `/finanztools/checklisten/${slug}`,
   });
@@ -57,7 +57,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
 
   // PDF holen und parsen
   const pdfUrl =
-    checkliste.checklisten?.checklistePdf?.node?.mediaItemUrl || "";
+    checkliste.pdfUrl || "";
   let parsedData: ChecklisteData | null = null;
   let checkboxPositions: CheckboxPosition[] = [];
 
@@ -75,7 +75,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   }
 
   const beschreibung = cleanDescription(
-    checkliste.excerpt || checkliste.checklisten?.checklistenBeschreibung
+    checkliste.excerpt || checkliste.beschreibung
   );
 
   const breadcrumbItems = [

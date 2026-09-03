@@ -28,7 +28,7 @@ export default function CategoryStackedCard({ post, href, large = false }: Categ
   const boldRef = useRef<HTMLParagraphElement>(null);
   const imageUrl = post.featuredImage?.node?.sourceUrl;
 
-  const untertitel = post.beitragFelder?.beitragUntertitel?.trim();
+  const untertitel = post.untertitel?.trim();
   const titleText = untertitel || post.title;
   const sublineText = untertitel ? post.title : null;
   const excerpt = post.excerpt?.replace(/<[^>]*>/g, '').trim() || '';

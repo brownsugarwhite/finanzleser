@@ -15,17 +15,17 @@ export async function GET(
   const { slug } = await params;
 
   try {
-    // Get post by slug with ACF fields
+    // Beitrag per Slug holen; die PDF-Anhang-ID steht als Post-Meta darin.
     const res = await fetch(
-      `${WP_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,acf`,
+      `${WP_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,meta`,
       { next: { revalidate: 3600 } }
     );
     const posts = await res.json();
-    if (!posts.length || !posts[0].acf?.beitrag_pdf) {
+    if (!posts.length || !posts[0].meta?.beitrag_pdf) {
       return NextResponse.json({ pdfUrl: null }, { headers: PDF_HEADERS });
     }
 
-    const attachmentId = posts[0].acf.beitrag_pdf;
+    const attachmentId = posts[0].meta.beitrag_pdf;
 
     // Get attachment URL
     const attachRes = await fetch(

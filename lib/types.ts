@@ -30,16 +30,6 @@ export interface Author {
 // Post (Standard-Beitrag / Ratgeber-Artikel)
 // ─────────────────────────────────────────────
 
-export interface PostACF {
-  beitragUntertitel?: string;
-  beitragZusammenfassung?: string;
-  beitragPdf?: { mediaItemUrl: string };
-  beitragFeaturedTool?: boolean;
-  beitragRechner?: Rechner[];
-  beitragVergleich?: Vergleich[];
-  beitragCheckliste?: Checkliste[];
-}
-
 export interface Post {
   id: string;
   title: string;
@@ -52,7 +42,8 @@ export interface Post {
   featuredImage?: FeaturedImage;
   categories: { nodes: Category[] };
   author?: { node: Author };
-  beitragFelder?: PostACF;
+  /** Untertitel/Kicker. Kommt aus WP-Meta `beitrag_untertitel` (früher ACF beitragFelder.beitragUntertitel). */
+  untertitel?: string;
   seo?: SEO;
   /** Aus dem post_content abgeleitete eingebettete Finanztools (für Tool-Dots/Labels). */
   tools?: ("rechner" | "vergleich" | "checkliste" | "dokumente")[];
@@ -63,15 +54,6 @@ export interface Post {
 // ─────────────────────────────────────────────
 
 export type RechnerTyp = "steuer" | "soziales" | "rente" | "kredit" | "brutto_netto" | "festgeld" | "tagesgeld";
-
-export interface RechnerACF {
-  rechnerTyp: RechnerTyp | RechnerTyp[];
-  rechnerBeschreibung?: string;
-  beschreibung?: string; // GraphQL-Feldname aus ACF
-  rechnerKonfiguration?: string;
-  rechnerIcon?: { sourceUrl: string };
-  rechnerKategorie?: { name: string; slug: string };
-}
 
 export interface Rechner {
   id: string;
@@ -85,7 +67,10 @@ export interface Rechner {
       altText?: string;
     };
   };
-  rechnerFelder?: RechnerACF;
+  /** Steuert, welche Rechner-Komponente das Frontend lädt. WP-Meta `rechner_typ`. */
+  rechnerTyp?: RechnerTyp | RechnerTyp[];
+  /** Kurzbeschreibung für Karten und Übersichten. WP-Meta `rechner_beschreibung`. */
+  beschreibung?: string;
 }
 
 // ─────────────────────────────────────────────
@@ -135,23 +120,15 @@ export interface ChecklistePunkt {
   punktPflicht?: boolean;
 }
 
-export interface ChecklisteACF {
-  checklisteBeschreibung?: string;
-  checklistePunkte?: ChecklistePunkt[];
-  checklistePdfGenerierung?: boolean;
-  checklistePdf?: { mediaItemUrl: string };
-}
-
 export interface Checkliste {
   id: string;
   title: string;
   slug: string;
   excerpt?: string;
-  checklisteFelder?: ChecklisteACF;
-  checklisten?: {
-    checklistenBeschreibung?: string;
-    checklistePdf?: { node: { mediaItemUrl: string } };
-  };
+  /** Kurzbeschreibung. WP-Meta `checkliste_beschreibung`. */
+  beschreibung?: string;
+  /** URL des hinterlegten PDFs, aus dem die interaktive Checkliste gebaut wird. */
+  pdfUrl?: string;
 }
 
 // ─────────────────────────────────────────────

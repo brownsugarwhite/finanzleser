@@ -20,7 +20,7 @@ export function boldYears(text: string) {
 
 export interface MegaPostLike {
   title: string;
-  beitragFelder?: { beitragUntertitel?: string | null } | null;
+  untertitel?: string | null;
   tools?: ToolType[];
 }
 
@@ -31,7 +31,7 @@ export interface MegaPostLike {
  * + Tool-Dots in einer Zeile. Der umschließende Link/Button bleibt beim Caller.
  */
 export default function MegaPostContent({ post }: { post: MegaPostLike }) {
-  const kicker = post.beitragFelder?.beitragUntertitel?.trim();
+  const kicker = post.untertitel?.trim();
 
   if (!kicker) {
     return (

@@ -157,6 +157,41 @@ add_action( 'init', function () {
 		'sanitize_callback' => 'sanitize_textarea_field',
 		'auth_callback'     => $nur_redaktion,
 	) );
+
+	register_post_meta( 'checkliste', 'checkliste_pdf', array(
+		'type'              => 'integer',
+		'single'            => true,
+		'default'           => 0,
+		'description'       => 'Anhang-ID des Checklisten-PDFs',
+		'show_in_rest'      => true,
+		'sanitize_callback' => 'absint',
+		'auth_callback'     => $nur_redaktion,
+	) );
+
+	register_post_meta( 'checkliste', 'checkliste_beschreibung', array(
+		'type'              => 'string',
+		'single'            => true,
+		'default'           => '',
+		'description'       => 'Kurzbeschreibung der Checkliste (Karten und Übersichten)',
+		'show_in_rest'      => true,
+		'sanitize_callback' => 'sanitize_textarea_field',
+		'auth_callback'     => $nur_redaktion,
+	) );
+
+	// 🚨 Anhang-ID eines Beitrags-PDFs. Das Frontend las das bisher als `acf.beitrag_pdf`
+	// aus der REST-Antwort — ohne ACF fehlt dieses Objekt ersatzlos, und die
+	// PDF-Vorschau waere LAUTLOS verschwunden (kein Fehler, nur weg). Betrifft aktuell
+	// genau EINEN Beitrag — die 27 postmeta-Zeilen sind bis auf eine alle 0.
+	// Mit `show_in_rest` steht der Wert jetzt unter `meta.beitrag_pdf`.
+	register_post_meta( 'post', 'beitrag_pdf', array(
+		'type'              => 'integer',
+		'single'            => true,
+		'default'           => 0,
+		'description'       => 'Anhang-ID des zugehörigen PDF-Dokuments',
+		'show_in_rest'      => true,
+		'sanitize_callback' => 'absint',
+		'auth_callback'     => $nur_redaktion,
+	) );
 }, 5 );
 
 // ─────────────────────────────────────────────
@@ -197,5 +232,31 @@ add_action( 'graphql_register_types', function () {
 		'type'        => 'String',
 		'description' => 'Kurzbeschreibung des Rechners (frueher ACF rechnerFelder.beschreibung)',
 		'resolve'     => $aus_meta( 'rechner_beschreibung' ),
+	) );
+
+	register_graphql_field( 'Checkliste', 'beschreibung', array(
+		'type'        => 'String',
+		'description' => 'Kurzbeschreibung der Checkliste (frueher ACF checklisten.checklistenBeschreibung)',
+		'resolve'     => $aus_meta( 'checkliste_beschreibung' ),
+	) );
+
+	// Frueher `checklisten { checklistePdf { node { mediaItemUrl } } }`. Die Verschachtelung
+	// war eine ACF-Eigenheit; gespeichert ist ohnehin nur eine Anhang-ID. Hier direkt als
+	// URL — das Frontend braucht nichts anderes davon.
+	register_graphql_field( 'Checkliste', 'pdfUrl', array(
+		'type'        => 'String',
+		'description' => 'URL des hinterlegten Checklisten-PDFs',
+		'resolve'     => function ( $post ) {
+			$id = $post->databaseId ?? ( $post->ID ?? 0 );
+			if ( ! $id ) {
+				return null;
+			}
+			$anhang = (int) get_post_meta( $id, 'checkliste_pdf', true );
+			if ( ! $anhang ) {
+				return null;
+			}
+			$url = wp_get_attachment_url( $anhang );
+			return $url ? $url : null;
+		},
 	) );
 } );

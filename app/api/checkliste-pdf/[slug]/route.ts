@@ -8,7 +8,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const checkliste = await getChecklisteBySlug(slug);
-  const pdfUrl = checkliste?.checklisten?.checklistePdf?.node?.mediaItemUrl;
+  const pdfUrl = checkliste?.pdfUrl;
 
   if (!pdfUrl) {
     return NextResponse.json({ error: "PDF not found" }, { status: 404, headers: { "Cache-Control": "no-store" } });

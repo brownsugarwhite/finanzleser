@@ -64,7 +64,7 @@ export async function generateMetadata(
   const header = extractArticleHeader(post.content);
   return buildMetadata({
     title: yoast?.title || `${post.title} – ${SITE_NAME}`,
-    description: yoast?.description || stripHtml(header?.description || post.excerpt || post.beitragFelder?.beitragUntertitel),
+    description: yoast?.description || stripHtml(header?.description || post.excerpt || post.untertitel),
     // Canonical IMMER aus den echten Post-Kategorien, nie aus der angefragten URL —
     // sonst bestätigt jede Pfad-Variante sich selbst als Kanon (Duplicate Content).
     path: buildPostUrl(post),
@@ -152,7 +152,7 @@ export default async function BeitragPage(props: {
       {faqPairs.length > 0 && <JsonLd data={faqSchema(faqPairs)} />}
     <ArticleLayout
       title={post.title}
-      subtitle={post.beitragFelder?.beitragUntertitel}
+      subtitle={post.untertitel}
       excerpt={post.excerpt}
       featuredImage={post.featuredImage?.node}
       category={category}

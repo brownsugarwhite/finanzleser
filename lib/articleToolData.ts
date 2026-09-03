@@ -114,12 +114,14 @@ async function loadBeitragPdf(slug: string): Promise<BeitragPdf | null> {
   const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
   try {
     const res = await fetch(
-      `${wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,acf`,
+      `${wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,meta`,
       { next: { revalidate: CONTENT_REVALIDATE } },
     );
     if (!res.ok) return null;
     const posts = await res.json();
-    const attachmentId = posts?.[0]?.acf?.beitrag_pdf;
+    // Frueher `acf.beitrag_pdf` — ohne ACF gibt es kein acf-Objekt mehr, der Wert
+    // steht jetzt als registriertes Post-Meta unter `meta`.
+    const attachmentId = posts?.[0]?.meta?.beitrag_pdf;
     if (!attachmentId) return null;
 
     const attachRes = await fetch(
@@ -150,7 +152,7 @@ export async function getArticleToolData(content?: string, slug?: string): Promi
         const r = await getRechnerBySlug(slug);
         titles[`rechner:${slug}`] = {
           title: r?.title || "",
-          excerpt: r?.excerpt || r?.rechnerFelder?.beschreibung || "",
+          excerpt: r?.excerpt || r?.beschreibung || "",
         };
       } catch { /* Client-Fallback */ }
     }),
@@ -159,7 +161,7 @@ export async function getArticleToolData(content?: string, slug?: string): Promi
         const c = await getChecklisteBySlug(slug);
         titles[`checkliste:${slug}`] = {
           title: c?.title || "",
-          excerpt: c?.excerpt || c?.checklisten?.checklistenBeschreibung || "",
+          excerpt: c?.excerpt || c?.beschreibung || "",
         };
       } catch { /* Client-Fallback */ }
       try {
