@@ -60,12 +60,23 @@ Webspace, sondern eine **Eigenschaft des einzelnen Zugangs**. Beim Anlegen wähl
 zwischen „SFTP" und „SFTP + SSH". Der Zugang, den du mir geschickt hast, ist als reines
 SFTP-Konto angelegt.
 
-**Was zu tun ist:** *Hosting → SFTP/SSH*, dort einen **neuen Zugang vom Typ „SFTP + SSH"**
-anlegen. Der Benutzername wird automatisch vergeben, ist also ein anderer — schick mir
-bitte den neuen. Falls du bereits einen zweiten Zugang angelegt hast: dann brauche ich
-einfach dessen Daten.
+**Was zu tun ist:** *Hosting → SFTP/SSH → Zugang anlegen*, dabei als Typ **„SFTP + SSH"**
+wählen. Zwei Hinweise dazu:
 
-Warum es sich lohnt: Ohne SSH funktioniert alles, aber vieles nur umständlich. Vor allem
+- Das Feld **„Verzeichnis" bitte leer lassen.** Standardmäßig gilt der Zugang für den
+  ganzen Webspace — genau das brauche ich, sonst komme ich nur an einen der Ordner.
+- Der **Benutzername wird automatisch vergeben** und lässt sich nicht wählen. Er ist also
+  ein anderer als der bisherige; schick mir bitte beides, Name und Passwort.
+
+Falls du bereits einen zweiten Zugang angelegt hast, brauche ich einfach dessen Daten.
+
+**Der bisherige Zugang kann danach weg.** Der neue kann beides, SFTP und SSH — den alten
+brauchen wir dann nicht mehr. Und weil dessen Passwort über den Chat gelaufen ist, ist
+Löschen ohnehin besser als Neusetzen: eine Zugangstür weniger auf einem Server, der
+sauber bleiben soll. Sag mir kurz Bescheid, wenn der neue da ist, dann prüfe ich ihn und
+du kannst den alten entfernen.
+
+Warum sich das lohnt: Ohne SSH funktioniert alles, aber vieles nur umständlich. Vor allem
 die Testkopie — die soll sich in Sekunden neu erzeugen lassen, damit wir sie oft und
 gefahrlos benutzen. Ohne SSH wird daraus jedes Mal eine mehrstufige Handarbeit, und dann
 benutzt sie erfahrungsgemäß niemand mehr.
@@ -85,8 +96,10 @@ Die Passwörter sind über den Teams-Chat gelaufen. Damit liegen sie dauerhaft i
 Microsofts Rechenzentrum, sind für Administratoren lesbar und stehen in Backups und in
 der Suche — zurückholen lässt sich das nicht.
 
-Für den Aufbau ist das kein Problem, ich **tausche sie unmittelbar danach aus** und melde
-dir die neuen Werte. Dann sind die Werte aus dem Chat wertlos, egal wer sie noch liest.
+Für den Aufbau ist das kein Problem. Der **SFTP-Zugang** erledigt sich von selbst, sobald
+der neue SSH-Zugang steht und wir den alten löschen (Punkt 2). Die beiden
+**Datenbank-Passwörter** tausche ich unmittelbar nach dem Aufbau aus und melde dir die
+neuen Werte. Danach sind die Angaben aus dem Chat wertlos, egal wer sie noch liest.
 
 Für den neuen SSH-Zugang wäre mir ein anderer Weg lieber. Am einfachsten: eine
 selbstlöschende Notiz (z. B. **onetimesecret.com**) — Text eintragen, Link erzeugen, Link
