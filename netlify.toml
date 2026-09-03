@@ -187,14 +187,16 @@
 # Staging-Site (deployt vom staging-Branch)
 [context.staging.environment]
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
-  WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
+  WORDPRESS_API_URL = "https://cms.finanzleser.de/graphql"
   # Echte AdSense-Ads (Testmodus data-adtest kommt automatisch über die
   # Staging-URL). Production bekommt das Flag erst mit der Live-Freigabe.
   NEXT_PUBLIC_ADSENSE = "1"
 
 # Deploy-Previews und Branch-Deploys
 [context.deploy-preview.environment]
-  WORDPRESS_API_URL = "https://staging.finanzleser.de/graphql"
+  # Liest das NEUE CMS. Production haengt weiter am alten, bis die Abnahme steht
+  # (dort kommt WORDPRESS_API_URL aus dem Netlify-UI).
+  WORDPRESS_API_URL = "https://cms.finanzleser.de/graphql"
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
   NEXT_PUBLIC_ADSENSE = "1"
 
