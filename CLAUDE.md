@@ -403,6 +403,29 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
     `node -e "const r=require('./.next/prerender-manifest.json').routes; console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"`
     → erwartet `[86400, false]`.
 
+12. **Schema-Änderung und Datenquelle gehören in EINEN Commit.** Wer eine GraphQL-Abfrage
+    im Frontend ändert, muss im selben Commit dafür sorgen, dass die gebaute Umgebung
+    gegen ein CMS zeigt, das die Felder kennt. Sonst entsteht ein Commit, der **nicht
+    baubar ist** — auch wenn der nächste ihn repariert.
+
+    🚨 Real passiert am 03.09.2026: `f1ed4bc` stellte das Frontend auf ACF-freie Felder
+    (`untertitel`, `rechnerTyp`, `pdfUrl`) um, `netlify.toml` zeigte aber noch aufs alte
+    CMS. Der Deploy-Preview scheiterte zwangsläufig mit
+    `Cannot query field "untertitel" on type "Post"`. Erst `d1d8a14` hängte die
+    Preview-Umgebung um — zwei Commits für einen untrennbaren Vorgang.
+
+    Gegenprobe vor dem Push, wenn Abfragen angefasst wurden:
+    ```bash
+    curl -s -X POST -H "Content-Type: application/json" \
+      -d '{"query":"{ posts(first:1){nodes{slug untertitel}} }"}' \
+      "$WORDPRESS_API_URL" | grep -q '"errors"' && echo "CMS kennt das Feld NICHT"
+    ```
+
+13. **„Trigger deploy" im Netlify-UI baut immer `main`** — es gibt dort keinen Weg, einen
+    Deploy-Preview auszulösen. Einen Preview bekommt man nur über einen Push auf den
+    Branch des offenen PR. Ein „Retry deploy" auf einem fehlgeschlagenen Preview baut
+    denselben Commit erneut und hilft daher nicht, wenn der Commit selbst das Problem ist.
+
 ---
 
 ## 🌿 Branch-Regeln
