@@ -180,23 +180,38 @@
   LEO_BACKEND_URL = "https://leo-finanzleser-ea7e1549925c.herokuapp.com"
 
 # Production-Site (deployt vom main-Branch, später)
+# 🚨 WORDPRESS_API_URL steht hier BEWUSST NIRGENDS — in keinem Kontext.
+#
+# Variablen aus dieser Datei erreichen nur den BUILD, nicht die Functions zur
+# Laufzeit (Netlify-Doku: netlify.toml-Variablen sind "available to builds" und
+# "snippet injection"; Functions fehlen dort). Wer den Wert hier setzt, erzeugt
+# einen Zustand, in dem Build und Laufzeit aus VERSCHIEDENEN Datenbanken lesen.
+#
+# Genau das ist am 03.09.2026 passiert: Der Deploy-Preview baute korrekt gegen das
+# neue CMS (836 Seiten), aber jede Seite, die zur Laufzeit nachfragte, landete beim
+# alten CMS — das die neuen Felder nicht kennt. Ergebnis: HTTP 500 auf allen
+# Weiterleitungen aus der Kaskade und auf /suche. Der Fehler war umso tückischer,
+# als der Build gruen war.
+#
+# Der Wert gehoert deshalb AUSSCHLIESSLICH ins Netlify-UI, dort pro Deploy-Kontext:
+#   Project configuration → Environment variables → WORDPRESS_API_URL
+#     Production      → das CMS, von dem die Live-Seite liest
+#     Deploy previews → das CMS, gegen das getestet wird
+#     Branch deploys  → dito
+# Nur so ziehen Build und Laufzeit am selben Strang.
+
 [context.production.environment]
   NEXT_PUBLIC_SITE_URL = "https://www.finanzleser.de"
-  # WORDPRESS_API_URL wird im Netlify-UI gesetzt (Production-WP-Endpoint)
 
 # Staging-Site (deployt vom staging-Branch)
 [context.staging.environment]
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
-  WORDPRESS_API_URL = "https://cms.finanzleser.de/graphql"
   # Echte AdSense-Ads (Testmodus data-adtest kommt automatisch über die
   # Staging-URL). Production bekommt das Flag erst mit der Live-Freigabe.
   NEXT_PUBLIC_ADSENSE = "1"
 
 # Deploy-Previews und Branch-Deploys
 [context.deploy-preview.environment]
-  # Liest das NEUE CMS. Production haengt weiter am alten, bis die Abnahme steht
-  # (dort kommt WORDPRESS_API_URL aus dem Netlify-UI).
-  WORDPRESS_API_URL = "https://cms.finanzleser.de/graphql"
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
   NEXT_PUBLIC_ADSENSE = "1"
 

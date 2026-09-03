@@ -421,7 +421,26 @@ Aktuelle Phasen siehe [ROADMAP.md](ROADMAP.md). Kurzfassung:
       "$WORDPRESS_API_URL" | grep -q '"errors"' && echo "CMS kennt das Feld NICHT"
     ```
 
-13. **„Trigger deploy" im Netlify-UI baut immer `main`** — es gibt dort keinen Weg, einen
+14. 🚨 **`WORDPRESS_API_URL` gehört NIE in `netlify.toml`** — nur ins Netlify-UI, dort
+    pro Deploy-Kontext. Variablen aus `netlify.toml` erreichen **nur den Build**, nicht
+    die Functions zur Laufzeit (Netlify-Doku: „available to builds" + „snippet
+    injection"; Functions fehlen in der Liste). Steht der Wert an beiden Stellen, lesen
+    Build und Laufzeit aus **verschiedenen Datenbanken**.
+
+    **Am 03.09.2026 real passiert:** Der Deploy-Preview baute grün gegen das neue CMS
+    (836 Seiten), aber jede Seite, die zur Laufzeit nachfragte, landete beim alten CMS
+    ohne die neuen Felder → HTTP 500 auf allen Kaskaden-Weiterleitungen und auf `/suche`.
+    Besonders tückisch: **der Build war grün.** Ein Fehler, der nur die Laufzeit trifft,
+    sieht in der Buildausgabe nach Erfolg aus.
+
+    Woran man es erkennt — vorgerenderte Seiten sind in Ordnung, alles was zur Laufzeit
+    WordPress braucht, wirft 500:
+    ```bash
+    curl -so/dev/null -w "%{http_code} /impressum (vorgerendert)\n"  "$P/impressum"
+    curl -so/dev/null -w "%{http_code} /suche?q=x  (Laufzeit)\n"      "$P/suche?q=test"
+    ```
+
+15. **„Trigger deploy" im Netlify-UI baut immer `main`** — es gibt dort keinen Weg, einen
     Deploy-Preview auszulösen. Einen Preview bekommt man nur über einen Push auf den
     Branch des offenen PR. Ein „Retry deploy" auf einem fehlgeschlagenen Preview baut
     denselben Commit erneut und hilft daher nicht, wenn der Commit selbst das Problem ist.
