@@ -395,6 +395,29 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .inhalt__zeile.aktiv .inhalt__nr { background: var(--pink); border-color: var(--pink); color: #fff; }
 .faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--pink); }
 
+/* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
+.faden-shell .leo-strom { display: grid; gap: 14px; padding: 4px 0 12px; }
+.faden-shell .leo-strom:empty { display: none; padding: 0; }
+.faden-shell .leo-strom--alt { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--rule); }
+.faden-shell .wort--frage .kicker { display: block; margin-bottom: 2px; }
+.faden-shell .tippt { display: inline-flex; gap: 5px; align-items: center; height: 20px; }
+.faden-shell .tippt i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: faden-blink 1.2s infinite; }
+.faden-shell .tippt i:nth-child(2) { animation-delay: .2s; } .faden-shell .tippt i:nth-child(3) { animation-delay: .4s; }
+@keyframes faden-blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+.faden-shell .leo-markdown { font-size: 16px; }
+.faden-shell .leo-markdown > :first-child { margin-top: 0; } .faden-shell .leo-markdown > :last-child { margin-bottom: 0; }
+.faden-shell .leo-markdown .cursor { display: inline-block; width: 2px; height: 1em; background: var(--green); vertical-align: -2px; margin-left: 2px; animation: faden-blink .9s infinite; }
+.faden-shell .wort--leo .werkzeuge { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.faden-shell .wort--fehler p { color: var(--pink); }
+.faden-shell .leo-chips { margin-left: 42px; }
+.faden-shell .sprung { position: absolute; left: 0; right: 0; bottom: calc(100% + 8px); background: var(--white); border: 1px solid var(--rule-strong); border-radius: 16px; padding: 8px; display: grid; gap: 1px; box-shadow: 0 10px 26px rgba(51,74,39,.14); z-index: 7; max-height: 60vh; overflow: auto; }
+.faden-shell .sprung__kopf { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 4px 10px 6px; }
+.faden-shell .sprung button { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: 7px 10px; font: inherit; font-size: 14.5px; border-radius: 8px; color: var(--ink); cursor: pointer; }
+.faden-shell .sprung button:hover, .faden-shell .sprung button.aktiv { background: var(--tint); }
+.faden-shell .sprung .typ { width: 84px; flex: none; font: 600 10.5px/1.5 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .sprung .unter { margin-left: auto; color: var(--muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%; }
+.faden-shell .sprung .frage { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 9px; color: var(--pink); font-weight: 600; border-radius: 0; }
+
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
@@ -451,6 +474,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
 }
 @media (max-width: 900px) {
+  .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .leo-chips { margin-left: 0; }
   .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
   .faden-shell .kopf__innen { padding-left: 16px; }
   .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }

@@ -11,6 +11,8 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { BegriffDaten } from "@/lib/faden/glossar";
+import { useChat } from "@ai-sdk/react";
+import type { LeoUIMessage } from "@/lib/ai/leoMessage";
 import { usePathname, useRouter } from "next/navigation";
 
 export interface Schnappschuss {
@@ -45,6 +47,9 @@ interface FadenContextWert {
   begriffEntfernen: (slug: string) => void;
   /** Begriffsdaten aus dem Kapitel-JSON, sonst /api/faden/glossar/<slug>; null = unbekannt. */
   begriffHolen: (slug: string) => Promise<BegriffDaten | null>;
+  /** Leo: eine Chat-Instanz für die ganze Sitzung; sichtbar sind die Nachrichten des lebenden Kapitels. */
+  leo: { nachrichten: LeoUIMessage[]; status: "submitted" | "streaming" | "ready" | "error"; fehler?: Error; stop: () => void };
+  fragen: (text: string) => void;
 }
 
 const FadenContext = createContext<FadenContextWert | null>(null);
@@ -79,6 +84,15 @@ function schnappschuss(): Schnappschuss | null {
   klon.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
   klon.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));
   const inhalt = klon.querySelector(".kapitel__inhalt");
+  // Leos Wortwechsel zu diesem Kapitel gehört mit ins eingefrorene Kapitel.
+  const leo = document.getElementById("leo-strom");
+  if (leo && leo.children.length) {
+    const l = leo.cloneNode(true) as HTMLElement;
+    l.removeAttribute("id"); l.removeAttribute("aria-live"); l.classList.add("leo-strom--alt");
+    l.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
+    l.querySelectorAll(".tippt, .cursor, .leo-chips, .werkzeuge").forEach((e) => e.remove());
+    (inhalt || klon).appendChild(l);
+  }
   return {
     id,
     key: live.dataset.key || `seite:${location.pathname}`,
@@ -151,6 +165,7 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
       }
       return liste.slice(-MAX_VERLAUF);
     });
+    setLeoAb(chatRef.current.messages.length);
     scrollNachNavigation.current = true;
     router.push(href, { scroll: false });
   }, [router]);
@@ -193,6 +208,22 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
       }
     });
   }, [pathname]);
+
+  // Leo: eine useChat-Instanz für die Sitzung (überlebt Navigation). Sichtbar im Strom sind nur
+  // die Nachrichten seit dem letzten Kapitelwechsel; die Vorgeschichte geht als history mit.
+  const chat = useChat<LeoUIMessage>();
+  const chatRef = useRef(chat); chatRef.current = chat;
+  const [leoAb, setLeoAb] = useState(0);
+  const fragen = useCallback((text: string) => {
+    const t = text.trim();
+    if (!t) return;
+    const seg = location.pathname.split("/").filter(Boolean);
+    const slug = seg.length ? seg[seg.length - 1] : "";
+    const category = seg.length > 1 ? seg[0] : "";
+    setBlatt(null);
+    chatRef.current.sendMessage({ text: t }, { body: { slug, category } });
+  }, []);
+  useEffect(() => { setLeoAb(chatRef.current.messages.length); }, [pathname]);
 
   // Glossar der Sitzung (sessionStorage) + Begriffs-Cache (Kapitel-JSON, dann Route).
   const [glossarSitzung, setGlossarSitzung] = useState<string[]>([]);
@@ -277,7 +308,9 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
   const wert = useMemo<FadenContextWert>(() => ({
     blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
-  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen]);
+    leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
+    fragen,
+  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen]);
 
   return (
     <FadenContext.Provider value={wert}>

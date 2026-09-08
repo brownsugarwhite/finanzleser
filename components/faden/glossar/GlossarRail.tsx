@@ -11,7 +11,7 @@ import type { BegriffDaten } from "@/lib/faden/glossar";
 const LABEL: Record<string, string> = { rechner: "Rechner", checkliste: "Checkliste", vergleich: "Vergleich", dokumente: "Dokument" };
 
 export default function GlossarRail() {
-  const { glossarSitzung, glossarOffen, begriffAufklappen, begriffEntfernen, begriffHolen } = useFaden();
+  const { glossarSitzung, glossarOffen, begriffAufklappen, begriffEntfernen, begriffHolen, fragen } = useFaden();
   const [daten, setDaten] = useState<Record<string, BegriffDaten | null>>({});
 
   useEffect(() => {
@@ -38,7 +38,8 @@ export default function GlossarRail() {
               <div className="mehr">
                 {d?.ratgeber && <a className="textlink" href={d.ratgeber.href}>Ratgeber</a>}
                 {d?.tool && <a className="textlink" href={d.tool.href}>{LABEL[d.tool.typ] || "Werkzeug"}</a>}
-                <a className="textlink textlink--still" href={d?.url || `/glossar/${s}`}>Leo fragen</a>
+                <button type="button" className="textlink textlink--still" onClick={() => fragen(`Was bedeutet „${d?.titel || s}“?`)}>Leo fragen</button>
+                <a className="textlink textlink--still" href={d?.url || `/glossar/${s}`}>Seite</a>
                 <button type="button" className="textlink textlink--still" onClick={() => begriffEntfernen(s)}>Entfernen</button>
               </div>
             </div>

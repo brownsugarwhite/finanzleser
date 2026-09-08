@@ -4,13 +4,20 @@
  * Aktionen unter dem Ratgeber: Kurzfassung von Leo (aus dem CMS, klappt auf),
  * Teilen, In den Aktenkoffer, Wächter setzen (Stufe 2/3), Vorlesen.
  */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FadenKurzfassung } from "@/lib/types";
 import { useFaden } from "@/components/faden/FadenProvider";
 
 export default function Aktionen({ titel, url, kurzfassung, artikelId }: { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string }) {
   const { inDenKoffer, toast } = useFaden();
   const [kurz, setKurz] = useState(false);
+  const kurzRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!kurzfassung) return;
+    const h = () => { setKurz(true); setTimeout(() => { const k = document.getElementById("kopf"); const el = kurzRef.current; if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - (k ? k.offsetHeight : 64) - 16, behavior: "smooth" }); }, 50); };
+    document.addEventListener("faden:kurzfassung", h);
+    return () => document.removeEventListener("faden:kurzfassung", h);
+  }, [kurzfassung]);
   const voll = `https://www.finanzleser.de${url}`;
 
   const teilen = async () => {
@@ -41,7 +48,7 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId }: { titel
         <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
       </div>
       {kurzfassung && (
-        <div className="wort wort--leo kurzfassung" hidden={!kurz}>
+        <div className="wort wort--leo kurzfassung" hidden={!kurz} ref={kurzRef}>
           <img src="/assets/leo.svg" alt="Leo" />
           <div>
             <span className="kicker kicker--gruen">Leo · Kurzfassung</span>

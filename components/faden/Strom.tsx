@@ -7,6 +7,7 @@
  */
 import type { ReactNode } from "react";
 import { useFaden } from "./FadenProvider";
+import LeoStrom from "./leo/LeoStrom";
 
 export default function Strom({ children }: { children: ReactNode }) {
   const { verlauf, kapitelUmschalten, navigieren } = useFaden();
@@ -32,6 +33,7 @@ export default function Strom({ children }: { children: ReactNode }) {
         </section>
       ))}
       {children}
+      <LeoStrom />
     </div>
   );
 }

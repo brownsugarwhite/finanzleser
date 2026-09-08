@@ -17,3 +17,17 @@ export interface LeoSource {
  * und vom Frontend (`useChat<LeoUIMessage>`, `LeoChatMessages`) beim Rendern.
  */
 export type LeoUIMessage = UIMessage<unknown, { sources: LeoSource[] }>;
+
+/** Reiner Text einer Nachricht (alle Text-Parts zusammengefügt). */
+export function getMessageText(message: LeoUIMessage): string {
+  return message.parts
+    .filter((p) => p.type === "text")
+    .map((p) => (p as { type: "text"; text: string }).text)
+    .join("");
+}
+
+/** Quellen aus dem `data-sources`-Part (vom LEO-Backend via meta-Event). */
+export function getSources(message: LeoUIMessage): LeoSource[] {
+  const part = message.parts.find((p) => p.type === "data-sources");
+  return (part as { type: "data-sources"; data: LeoSource[] } | undefined)?.data ?? [];
+}

@@ -15,7 +15,7 @@ const ABC = ["Alle", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 let zeilenCache: BegriffZeile[] | null = null;
 
 export default function Nachschlag({ buchstabe, oeffnen }: { buchstabe: string; oeffnen: (l: string) => void }) {
-  const { begriffHolen, begriffMerken, toast } = useFaden();
+  const { begriffHolen, begriffMerken, toast, fragen, blattZu } = useFaden();
   const [zeilen, setZeilen] = useState<BegriffZeile[] | null>(zeilenCache);
   const [q, setQ] = useState("");
   const [aktiv, setAktiv] = useState("");
@@ -86,6 +86,7 @@ export default function Nachschlag({ buchstabe, oeffnen }: { buchstabe: string; 
                 {detail.ratgeber && <a className="textlink" href={detail.ratgeber.href}>Ratgeber „{detail.ratgeber.titel}“</a>}
                 {detail.tool && <a className="textlink" href={detail.tool.href}>{detail.tool.titel}</a>}
                 <a className="textlink textlink--still" href={detail.url}>Eigene Seite</a>
+                <button type="button" className="textlink textlink--still" onClick={() => { blattZu(); fragen(detail.frage || `Was bedeutet „${detail.titel}“?`); }}>Leo fragen</button>
                 <button type="button" className="textlink textlink--still" onClick={() => { begriffMerken(detail.slug, true); toast("Rechts in der Sitzung gemerkt"); }}>Merken</button>
               </div>
             </>

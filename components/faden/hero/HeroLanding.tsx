@@ -3,7 +3,7 @@
 /**
  * Landing-Hero: Zierlinie, Kicker, Titel, Suchpille exakt auf der Bildschirmmitte, ein
  * Satz, drei Vorschläge, die Werkzeugreihe und der Pfeil ins Kapitel „Heute“.
- * Ruhig, viel Papier (Prototyp, Runde 10). Der Flug der Pille kommt mit dem Feinschliff.
+ * Ruhig, viel Papier (Prototyp, Runde 10). Enter fragt Leo. Der Flug der Pille kommt mit dem Feinschliff.
  */
 import { useEffect, useRef, useState } from "react";
 import { useFaden, zumKapitelScrollen } from "@/components/faden/FadenProvider";
@@ -14,7 +14,7 @@ const ZIEL: Record<HeroWerkzeug["typ"], string> = { rechner: "Zu den Rechnern", 
 export interface HeroWerkzeug { typ: "rechner" | "vergleich" | "checkliste"; label: string; zahl: number; beschreibung: string; href: string }
 
 export default function HeroLanding({ vorschlaege, werkzeuge }: { vorschlaege: HeroVorschlag[]; werkzeuge: HeroWerkzeug[] }) {
-  const { navigieren } = useFaden();
+  const { fragen } = useFaden();
   const [wert, setWert] = useState("");
   const ref = useRef<HTMLElement>(null);
   // Solange der Hero mit seiner eigenen Pille im Bild ist, bleibt die Eingabe unten weg.
@@ -24,7 +24,8 @@ export default function HeroLanding({ vorschlaege, werkzeuge }: { vorschlaege: H
     io.observe(el);
     return () => { io.disconnect(); document.body.classList.remove("faden-hero-sichtbar"); };
   }, []);
-  const senden = (e: React.FormEvent) => { e.preventDefault(); const q = wert.trim(); if (!q) return; navigieren(`/suche?q=${encodeURIComponent(q)}`); };
+  // Enter im Hero fragt Leo; die Antwort erscheint unter dem Kapitel „Heute“ (LeoStrom rollt hin).
+  const senden = (e: React.FormEvent) => { e.preventDefault(); const q = wert.trim(); if (!q) return; setWert(""); fragen(q); };
   return (
     <section ref={ref} className="hero-landing" aria-label="Einstieg">
       <div className="hero-landing__mitte">

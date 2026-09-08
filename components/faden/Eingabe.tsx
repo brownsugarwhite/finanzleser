@@ -1,34 +1,112 @@
 "use client";
 
 /**
- * Die Eingabe am unteren Rand: Suchpille „Was kann ich für Sie tun?“. Bis Leo
- * (Meilenstein 5) angeschlossen ist, führt Enter auf die bestehende Suche.
- * Die Sprungleiste (Typeahead über den Bestand) kommt ebenfalls mit M5.
+ * Die Eingabe am unteren Rand: Suchpille „Was kann ich für Sie tun?“ mit Sprungleiste.
+ * Ab zwei Zeichen zeigt die Leiste Treffer aus dem Bestand (Ratgeber, Rubriken, Themen,
+ * Werkzeuge, Begriffe; Wortanfang zuerst), die letzte Zeile fragt Leo. Enter ohne
+ * gewählten Treffer fragt Leo; Pfeiltasten wählen, Escape schließt.
  */
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFaden } from "./FadenProvider";
+import type { IndexEintrag } from "@/lib/faden/index";
+
+const TYP_LABEL: Record<IndexEintrag["typ"], string> = { ratgeber: "Ratgeber", rubrik: "Rubrik", thema: "Thema", rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument", begriff: "Begriff" };
+const RANG: Record<IndexEintrag["typ"], number> = { ratgeber: 0, rubrik: 1, thema: 1, rechner: 2, vergleich: 2, checkliste: 2, dokumente: 2, begriff: 3 };
+let indexCache: IndexEintrag[] | null = null;
+let indexLaedt: Promise<IndexEintrag[]> | null = null;
+
+function normal(s: string): string {
+  return s.toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+}
+
+export function sucheImIndex(index: IndexEintrag[], q: string, max = 8): IndexEintrag[] {
+  const n = normal(q.trim());
+  if (n.length < 2) return [];
+  const bewertet: { e: IndexEintrag; s: number }[] = [];
+  for (const e of index) {
+    const t = normal(e.titel);
+    let s = -1;
+    if (t.startsWith(n)) s = 0;
+    else if (t.includes(" " + n) || t.includes("-" + n)) s = 1;
+    else if (t.includes(n)) s = 2;
+    else if (e.unter && normal(e.unter).includes(n)) s = 3;
+    if (s < 0) continue;
+    bewertet.push({ e, s: s * 10 + RANG[e.typ] });
+  }
+  return bewertet.sort((a, b) => a.s - b.s || a.e.titel.localeCompare(b.e.titel, "de")).slice(0, max).map((x) => x.e);
+}
+
+async function holeIndex(): Promise<IndexEintrag[]> {
+  if (indexCache) return indexCache;
+  if (!indexLaedt) indexLaedt = fetch("/api/faden/index").then((r) => r.json()).then((j: { items: IndexEintrag[] }) => { indexCache = j.items || []; return indexCache; }).catch(() => { indexLaedt = null; return []; });
+  return indexLaedt;
+}
 
 export default function Eingabe() {
-  const { navigieren } = useFaden();
+  const { navigieren, fragen, leo } = useFaden();
   const [wert, setWert] = useState("");
-  const senden = (e: React.FormEvent) => {
-    e.preventDefault();
-    const q = wert.trim();
-    if (!q) return;
-    setWert("");
-    navigieren(`/suche?q=${encodeURIComponent(q)}`);
+  const [index, setIndex] = useState<IndexEintrag[] | null>(indexCache);
+  const [offen, setOffen] = useState(false);
+  const [aktiv, setAktiv] = useState(-1);
+  const wrap = useRef<HTMLDivElement>(null);
+  const beschaeftigt = leo.status === "submitted" || leo.status === "streaming";
+
+  useEffect(() => {
+    if (wert.trim().length < 2 || index) return;
+    let lebt = true;
+    holeIndex().then((i) => { if (lebt) setIndex(i); });
+    return () => { lebt = false; };
+  }, [wert, index]);
+
+  const treffer = useMemo(() => (index && wert.trim().length >= 2 ? sucheImIndex(index, wert) : []), [index, wert]);
+  const zeigeLeiste = offen && wert.trim().length >= 2;
+  const zeilen = treffer.length + 1; // + „Leo fragen“
+
+  useEffect(() => {
+    if (!zeigeLeiste) return;
+    const klick = (ev: MouseEvent) => { if (!wrap.current?.contains(ev.target as Node)) setOffen(false); };
+    document.addEventListener("click", klick);
+    return () => document.removeEventListener("click", klick);
+  }, [zeigeLeiste]);
+
+  const leoFragen = (q: string) => { const t = q.trim(); if (!t) return; setWert(""); setOffen(false); setAktiv(-1); fragen(t); };
+  const waehlen = (e: IndexEintrag) => { setWert(""); setOffen(false); setAktiv(-1); navigieren(e.href); };
+  const senden = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    if (beschaeftigt) { leo.stop(); return; }
+    if (zeigeLeiste && aktiv >= 0 && aktiv < treffer.length) { waehlen(treffer[aktiv]); return; }
+    leoFragen(wert);
   };
+  const taste = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+    if (ev.key === "Escape") { setOffen(false); setAktiv(-1); return; }
+    if (!zeigeLeiste) return;
+    if (ev.key === "ArrowDown") { ev.preventDefault(); setAktiv((a) => Math.min(a + 1, zeilen - 1)); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); setAktiv((a) => Math.max(a - 1, -1)); }
+  };
+
   return (
     <div className="eingabe">
       <div className="eingabe__blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
-      <div className="suchpille-wrap" id="fadenPille">
-        <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert ? " hat-text" : "")}>
-          <label className="sr" htmlFor="frage">Fragen Sie Leo oder suchen Sie im Bestand</label>
-          <input id="frage" type="text" placeholder="Was kann ich für Sie tun?" autoComplete="off" value={wert} onChange={(e) => setWert(e.target.value)} />
-          <button type="submit" className="senden">Fragen</button>
+      <div className="suchpille-wrap" id="fadenPille" ref={wrap}>
+        {zeigeLeiste && (
+          <div className="sprung" id="sprung" role="listbox" aria-label="Sprungleiste">
+            <div className="sprung__kopf">{treffer.length ? "Im Bestand" : index ? "Nichts Passendes im Bestand" : "Bestand wird geladen …"}</div>
+            {treffer.map((e, i) => (
+              <button key={e.href + e.typ} type="button" role="option" aria-selected={i === aktiv} className={i === aktiv ? "aktiv" : ""} onMouseEnter={() => setAktiv(i)} onClick={() => waehlen(e)}>
+                <span className="typ">{TYP_LABEL[e.typ]}</span><span>{e.titel}</span>{e.unter && <span className="unter">{e.unter}</span>}
+              </button>
+            ))}
+            <button type="button" role="option" aria-selected={aktiv === treffer.length} className={"frage" + (aktiv === treffer.length ? " aktiv" : "")} onMouseEnter={() => setAktiv(treffer.length)} onClick={() => leoFragen(wert)}>
+              Leo fragen: „{wert.trim()}“
+            </button>
+          </div>
+        )}
+        <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert || beschaeftigt ? " hat-text" : "")}>
+          <label className="sr" htmlFor="frage">Fragen Sie Leo oder springen Sie im Bestand</label>
+          <input id="frage" type="text" placeholder={beschaeftigt ? "Leo antwortet …" : "Was kann ich für Sie tun?"} autoComplete="off" value={wert} onChange={(e) => { setWert(e.target.value); setOffen(true); setAktiv(-1); }} onFocus={() => setOffen(true)} onKeyDown={taste} aria-autocomplete="list" aria-expanded={zeigeLeiste} />
+          <button type="submit" className="senden">{beschaeftigt ? "Stopp" : "Fragen"}</button>
         </form>
       </div>
-      <div className="chips" id="eingabeChips" />
     </div>
   );
 }
