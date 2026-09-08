@@ -120,7 +120,7 @@ export default async function RootLayout({
              die alte Seite (Produktion ohne Schalter). */
           <Providers>
           <NavProvider items={navItems}>
-            <FadenShell>{children}</FadenShell>
+            <FadenShell nav={navItems} preload={megamenuPreload}>{children}</FadenShell>
           </NavProvider>
           </Providers>
         ) : (

@@ -70,7 +70,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .register { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-width: 0; height: 50px; }
 .faden-shell .register__reihe { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; height: 50px; }
 .faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
-.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; font: 600 16px/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
+.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; margin: 0 -20px; font: 600 16px/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
 .faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
 .faden-shell .register [data-key="plus"] { color: var(--green); }
 .faden-shell .register .offen { color: var(--pink); }
@@ -226,6 +226,128 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose img { max-width: 100%; height: auto; } .faden-shell .prose figure { margin: 0 0 12px; }
 .faden-shell .prose a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
+/* ---------- Registerblatt ---------- */
+.faden-shell .blatt__innen { max-width: 1320px; margin: 0 auto; padding: 18px 28px 22px; display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: 28px; position: relative; }
+.faden-shell .blatt__spalte { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.faden-shell .blatt__spalte + .blatt__spalte { border-left: 1px solid var(--rule); padding-left: 24px; }
+.faden-shell .blatt__spalte--breit { grid-column: 2 / -1; }
+.faden-shell .blatt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.faden-shell .blatt .thema { width: 100%; text-align: left; border: 0; background: none; padding: 6px 4px; font-size: 14px; display: flex; align-items: center; gap: 8px; border-radius: 6px; }
+.faden-shell .blatt .thema img { width: 15px; height: 15px; opacity: .8; }
+.faden-shell .blatt .thema small { margin-left: auto; color: var(--muted); font-size: 11.5px; }
+.faden-shell .blatt .thema:hover, .faden-shell .blatt .thema.aktiv { color: var(--green-ink); font-weight: 700; }
+.faden-shell .blatt .thema.aktiv::after { content: "›"; margin-left: 4px; }
+.faden-shell .blatt .eintraege { display: grid; gap: 0; }
+.faden-shell .blatt .eintraege--kompakt { max-height: 44vh; overflow: auto; scrollbar-width: thin; }
+.faden-shell .blatt .eintrag { display: block; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: 8px 2px 10px; text-decoration: none; color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 700; line-height: 1.3; }
+.faden-shell .blatt .eintrag:hover { color: var(--green-ink); }
+.faden-shell .blatt .werkzeug { width: 100%; text-align: left; border: 0; background: none; padding: 5px 2px; font-size: 13.5px; display: flex; gap: 8px; align-items: center; text-decoration: none; color: var(--ink); }
+.faden-shell .blatt .werkzeug small { color: var(--muted); font-weight: 400; }
+.faden-shell .blatt .werkzeug:hover { color: var(--green-ink); }
+.faden-shell .blatt input { font: inherit; font-size: 13px; padding: 7px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--white); color: var(--ink); width: 100%; }
+.faden-shell .blatt .schliessen { position: absolute; right: 24px; top: 14px; border: 0; background: none; color: var(--muted); font-size: 12px; }
+.faden-shell .blatt .hinweis { font-size: 12.5px; color: var(--muted); background: none; border: 0; padding: 0; }
+.faden-shell .blatt__gruppe { display: grid; gap: 4px; }
+.faden-shell .abc { display: flex; flex-wrap: wrap; gap: 4px; }
+.faden-shell .abc button { border: 1px solid var(--rule); background: none; padding: 2px 8px; font-size: 12px; font-weight: 700; border-radius: 999px; min-width: 28px; }
+.faden-shell .abc button:disabled { opacity: .35; cursor: default; }
+.faden-shell .abc button:hover:not(:disabled) { border-color: var(--green-ink); color: var(--green-ink); } .faden-shell .abc button.aktiv { border-color: var(--pink); color: var(--pink); }
+.faden-shell .lesezeichen .btn--menue { display: none; }
+
+/* ---------- Mobiles Menü ---------- */
+.faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: 18px 24px; overflow: auto; }
+.faden-shell .menue__kopf { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.faden-shell .menue__kopf img { height: 24px; }
+.faden-shell .menue button.zeile-m { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: 16px 0; font-family: var(--serif); font-weight: 700; font-size: 24px; display: flex; align-items: center; justify-content: space-between; }
+.faden-shell .menue button.zeile-m small { font: 600 11px/1.4 var(--sans); color: var(--muted); letter-spacing: .1em; text-transform: uppercase; text-align: right; max-width: 44%; }
+.faden-shell .menue .klein { display: grid; gap: 4px; margin-top: 18px; }
+.faden-shell .menue .klein button { text-align: left; border: 0; background: none; padding: 10px 0; font-weight: 600; font-size: 16px; display: flex; gap: 10px; align-items: center; }
+
+/* ---------- Listenkarte (Rubrik, Thema, Übersichten) ---------- */
+.faden-shell .kasten--liste { gap: 14px; }
+.faden-shell .liste__gruppe { display: grid; gap: 4px; }
+.faden-shell .liste__titel { font-size: 18px; border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; margin-top: 6px; }
+.faden-shell .liste__titel a { color: inherit; text-decoration: none; } .faden-shell .liste__titel a:hover { color: var(--green-ink); }
+.faden-shell .liste__titel small { color: var(--muted); font: 600 12px var(--sans); }
+.faden-shell .kasten--liste .eintraege { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 26px; }
+.faden-shell .kasten--liste .eintrag { display: grid; gap: 3px; border-bottom: 1px solid var(--rule); padding: 9px 0 10px; text-decoration: none; color: var(--ink); }
+.faden-shell .kasten--liste .eintrag b { font-family: var(--serif); font-size: 15.5px; font-weight: 700; line-height: 1.3; }
+.faden-shell .kasten--liste .eintrag:hover b { color: var(--green-ink); }
+.faden-shell .eintrag__klein, .faden-shell .spalte__kleine { display: flex; align-items: center; gap: 6px; font: 400 12px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .eintrag__einzeilig { display: flex; align-items: center; gap: 8px; }
+.faden-shell .kasten--liste .eintrag small { color: var(--muted); font-size: 12px; }
+
+/* ---------- Landing-Hero ---------- */
+.faden-shell .hero-landing { position: relative; min-height: calc(100dvh - var(--kopf-h, 64px)); display: grid; }
+.faden-shell .hero-landing__mitte { display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; padding: 0 24px calc(var(--kopf-h, 64px) + 20px); }
+.faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; }
+.faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; }
+.faden-shell .hero-landing h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.22; font-weight: 700; max-width: 30ch; margin: 0; }
+.faden-shell .hero-landing__pille { width: min(750px, 100%); }
+.faden-shell .landing-unten { align-self: start; margin-top: 30px; display: grid; gap: 18px; justify-items: center; width: min(820px, 100%); }
+.faden-shell .landing-sub { font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 48ch; margin: 0; }
+.faden-shell .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.faden-shell .hero-chips .chip { text-decoration: none; }
+.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
+.faden-shell .werkzeugreihe__paar { display: contents; }
+.faden-shell .trenner { flex: none; width: 9px; position: relative; }
+.faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: 28px; background: var(--rule-strong); }
+.faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
+.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: -6px 0 0 -6px; }
+.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: start; text-decoration: none; color: var(--ink); }
+.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
+.faden-shell .werkzeug-k b small { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 6px; font-family: var(--sans); }
+.faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { font-size: 12.5px; color: var(--muted); }
+.faden-shell .werkzeug-k .pfeil-link { margin-top: 4px; font-size: 13px; }
+.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; }
+.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: 13px; animation: faden-wippen 2.2s ease-in-out infinite; }
+@keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.faden-shell .strom > .hero-landing + .kapitel { border-top: 0; }
+.faden-shell .eingabe { transition: opacity .25s ease, transform .25s ease; }
+body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; transform: translateY(14px); }
+
+/* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
+.faden-shell .spalten-kasten { padding: 14px 18px 16px; }
+.faden-shell .spalten__kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 22px; }
+.faden-shell .spalten { position: relative; display: grid; align-items: stretch; transition: grid-template-columns .6s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spalten .trenner { min-height: 160px; }
+.faden-shell .spalten .trenner::before, .faden-shell .spalten .trenner::after { height: 70px; }
+.faden-shell .spalte { position: relative; min-width: 0; }
+.faden-shell .spalte__inhalt { padding: 12px 16px 14px; display: grid; gap: 4px; align-content: start; transition: opacity .2s; }
+.faden-shell .spalte__inhalt > img { width: 28px; height: 28px; opacity: .85; margin-bottom: 4px; }
+.faden-shell .spalte__titel { font-family: var(--serif); font-size: clamp(14px, 1.25vw, 18px); font-weight: 700; line-height: 1.2; }
+.faden-shell .spalte__inhalt > small { color: var(--muted); font-size: 12px; }
+.faden-shell .spalte__themen { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
+.faden-shell .spalte__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: 5px 0; font-size: 13.5px; display: flex; justify-content: space-between; gap: 8px; color: var(--ink); }
+.faden-shell .spalte__themen button small { color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.faden-shell .spalte__themen button:hover, .faden-shell .spalte__themen button:hover small { color: var(--green-ink); }
+.faden-shell .spalte__ruecken { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; gap: 10px; padding: 12px 0; border: 0; background: none; cursor: pointer; }
+.faden-shell .spalte__ruecken img { width: 22px; height: 22px; opacity: .75; }
+.faden-shell .spalte__ruecken span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--muted); white-space: nowrap; }
+.faden-shell .spalte__ruecken:hover span { color: var(--green-ink); }
+.faden-shell .spalte.ist-ruecken .spalte__inhalt { opacity: 0; pointer-events: none; }
+.faden-shell .spalte.ist-ruecken .spalte__ruecken { display: flex; animation: faden-ruecken-ein .35s .3s both; }
+@keyframes faden-ruecken-ein { from { opacity: 0; } to { opacity: 1; } }
+.faden-shell .spalte.ist-offen .spalte__inhalt { display: none; }
+.faden-shell .spalte__offen { display: grid; gap: 12px; padding: 12px 18px 8px; animation: faden-stufe-ein .45s .15s both; }
+@keyframes faden-stufe-ein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.faden-shell .spalte__kopfzeile { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.faden-shell .spalte__kopfzeile img { width: 26px; height: 26px; opacity: .85; align-self: center; }
+.faden-shell .spalte__kopfzeile b { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+.faden-shell .spalte__kopfzeile small { color: var(--muted); font-size: 12.5px; }
+.faden-shell .spalte__kopfzeile .textlink { margin-left: auto; }
+.faden-shell .spalte__tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.faden-shell .spalte__tabs .chip { padding: 3px 12px; font-size: 13px; border-color: var(--rule); color: var(--muted); }
+.faden-shell .spalte__tabs .chip.chip--aktiv { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.faden-shell .spalte__liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0 26px; border-top: 1px solid var(--rule); }
+.faden-shell .spalte__artikel { text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: 10px 0 12px; display: grid; gap: 4px; text-decoration: none; color: var(--ink); animation: faden-stufe-ein .4s both; }
+.faden-shell .spalte__artikel b { font-family: var(--serif); font-size: 16px; font-weight: 700; line-height: 1.3; }
+.faden-shell .spalte__artikel:hover b { color: var(--green-ink); }
+.faden-shell .spalte__artikel .pfeil-link { font-size: 12.5px; }
+.faden-shell .spalte__fuss { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.faden-shell .spalte__fuss .chip { text-decoration: none; }
+.faden-shell .spalte__alle { margin-left: auto; }
+
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
@@ -284,6 +406,19 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
   .faden-shell .kopf__innen { padding-left: 16px; }
   .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
   .faden-shell .register { display: none; }
+  .faden-shell .lesezeichen .btn--menue { display: inline-flex; }
+  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 14px; padding: 14px 14px 18px; }
+  .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
+  .faden-shell .blatt__spalte--breit { grid-column: auto; }
+  .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
+  .faden-shell .spalten { grid-template-columns: 1fr !important; } .faden-shell .spalten .trenner { display: none; } .faden-shell .spalte__inhalt { padding: 10px 0; } .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); } .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; } .faden-shell .spalte__offen { padding: 6px 0; }
+  .faden-shell .werkzeugreihe { flex-wrap: wrap; } .faden-shell .werkzeugreihe .trenner { display: none; } .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: 6px 12px; display: flex; align-items: baseline; gap: 10px; } .faden-shell .werkzeug-k b { font-size: 19px; } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; } .faden-shell .werkzeug-k .pfeil-link { margin: 0 0 0 auto; white-space: nowrap; }
+  .faden-shell .hero-landing h1 { font-size: 24px; }
+  .faden-shell .hero-landing { min-height: 0; }
+  .faden-shell .hero-landing__mitte { grid-template-rows: auto auto auto; padding: 14px 0 64px; min-width: 0; }
+  .faden-shell .landing-oben { margin-bottom: 18px; } .faden-shell .landing-unten { margin-top: 18px; gap: 14px; }
+  .faden-shell .hero-chips .chip { white-space: normal; text-align: center; }
+  .faden-shell .hero-cta { bottom: 10px; }
   .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
   .faden-shell .lesezeichen .lz-wort { display: none; }
   .faden-shell .faden { padding: 12px 14px 110px; }

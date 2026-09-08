@@ -1,4 +1,10 @@
 import Footer from "./Footer";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte from "@/components/faden/karten/ListenKarte";
+import BlattStart from "@/components/faden/kopf/BlattStart";
+import { buildPostUrl } from "@/lib/urls";
+import type { ToolType } from "@/components/ui/ToolDots";
 import CategoryHeader from "./CategoryHeader";
 import PageAds from "./PageAds";
 import ArticleList from "@/components/sections/ArticleList";
@@ -20,6 +26,16 @@ type CategoryLayoutProps = {
 };
 
 export default async function CategoryLayout({ title, titleSlug, description, imageWide, mainCategoryName, mainCategorySlug, children, posts }: CategoryLayoutProps) {
+  if (FADEN_AKTIV && posts) {
+    const krumen = [{ name: "Ratgeber", href: "/" }, ...(mainCategorySlug && mainCategoryName ? [{ name: mainCategoryName, href: `/${mainCategorySlug}` }] : [])];
+    const url = mainCategorySlug && titleSlug ? `/${mainCategorySlug}/${titleSlug}` : `/${titleSlug || ""}`;
+    return (
+      <KartenKapitel schluessel={`thema:${titleSlug || title}`} titel={title || ""} kicker={`Ratgeber${mainCategoryName ? ` · ${mainCategoryName}` : ""}`} beschreibung={description} krumen={krumen} url={url}>
+        {mainCategorySlug && titleSlug && <BlattStart schluessel="ratgeber" a={mainCategorySlug} b={titleSlug} />}
+        <ListenKarte kicker={`${posts.length} Ratgeber im Thema`} gruppen={[{ eintraege: posts.map((p) => ({ titel: p.title, untertitel: p.untertitel || undefined, href: buildPostUrl(p), tools: (p.tools || []) as ToolType[] })) }]} />
+      </KartenKapitel>
+    );
+  }
   const breadcrumbItems = mainCategorySlug && titleSlug ? [
     { label: "Home", href: "/" },
     { label: mainCategoryName || mainCategorySlug, href: `/${mainCategorySlug}` },

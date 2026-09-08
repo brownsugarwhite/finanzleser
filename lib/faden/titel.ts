@@ -24,7 +24,8 @@ export const getBeitragsIndex = cache(async (): Promise<Map<string, { titel: str
 });
 
 export async function verweiseAufloesen(ziele: FadenZiel[], toolTitel: Record<string, string> = {}): Promise<Verweis[]> {
-  const index = await getBeitragsIndex().catch(() => new Map<string, { titel: string; href: string }>());
+  // Fehler werfen lassen (CLAUDE.md, Falle 2): sonst fehlt „Dazu passt“ 24 h lang im ISR-Cache.
+  const index = await getBeitragsIndex();
   const out: Verweis[] = [];
   for (const z of ziele) {
     if (z.typ === "post") {

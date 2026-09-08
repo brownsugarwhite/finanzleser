@@ -23,7 +23,12 @@ export interface Schnappschuss {
   offen: boolean;
 }
 
+export interface BlattZustand { key: "ratgeber" | "finanztools" | "service" | "plus"; a?: string; b?: string }
+
 interface FadenContextWert {
+  blatt: BlattZustand | null;
+  blattOeffnen: (key: BlattZustand["key"], a?: string, b?: string) => void;
+  blattZu: () => void;
   verlauf: Schnappschuss[];
   kapitelNr: number;
   navigieren: (href: string) => void;
@@ -94,6 +99,8 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [verlauf, setVerlauf] = useState<Schnappschuss[]>([]);
   const [koffer, setKoffer] = useState<string[]>([]);
+  const [blatt, setBlatt] = useState<BlattZustand | null>(null);
+  const blattFrisch = useRef(false);
   const [toastText, setToastText] = useState("");
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollNachNavigation = useRef(false);
@@ -176,6 +183,28 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
     });
   }, [pathname]);
 
+  // Registerblatt: öffnen/schließen; der Klick, der es öffnet, darf es nicht im selben Moment
+  // wieder schließen (Dokument-Klick-Schließer) — Lehre aus dem Prototyp.
+  const blattOeffnen = useCallback((key: BlattZustand["key"], a?: string, b?: string) => {
+    blattFrisch.current = true; setTimeout(() => { blattFrisch.current = false; }, 0);
+    setBlatt({ key, a, b });
+  }, []);
+  const blattZu = useCallback(() => setBlatt(null), []);
+  useEffect(() => {
+    if (!blatt) return;
+    const aufKlick = (ev: MouseEvent) => {
+      if (blattFrisch.current) return;
+      const t = ev.target as Element | null;
+      if (t && (t.closest("#kopf") || t.closest(".menue"))) return;
+      setBlatt(null);
+    };
+    const aufTaste = (ev: KeyboardEvent) => { if (ev.key === "Escape") setBlatt(null); };
+    document.addEventListener("click", aufKlick);
+    document.addEventListener("keydown", aufTaste);
+    return () => { document.removeEventListener("click", aufKlick); document.removeEventListener("keydown", aufTaste); };
+  }, [blatt]);
+  useEffect(() => { setBlatt(null); }, [pathname]);
+
   const kapitelUmschalten = useCallback((id: string) => {
     setVerlauf((alt) => alt.map((k) => (k.id === id ? { ...k, offen: !k.offen } : k)));
   }, []);
@@ -190,8 +219,8 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
   }, [toast]);
 
   const wert = useMemo<FadenContextWert>(() => ({
-    verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
-  }), [verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast]);
+    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
+  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast]);
 
   return (
     <FadenContext.Provider value={wert}>
