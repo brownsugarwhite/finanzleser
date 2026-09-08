@@ -23,6 +23,7 @@ Gilt für jeden Unterauftrag, der Mechaniken aus `docs/prototype/` nach `compone
 
 ## Prüfen
 - `npx tsc --noEmit -p .` fehlerfrei; `npx eslint <deine Dateien>` ohne Fehler (Warnungen zu `<img>` sind bekannt).
+- 🚨 **Keine Browser-Tests durch Unteragenten, solange mehrere parallel laufen:** Jeder Seitenaufruf am Dev-Server erzeugt WordPress-Abfragen auf dem IONOS-Webspace; am 08.09.2026 haben vier gleichzeitige Playwright-Läufe cms-dev und cms lahmgelegt. Playwright-Skript schreiben (`_<name>.tmp.mjs`, Projektroot) und im Bericht nennen — ausgeführt wird es nacheinander von der Hauptsession. Daten aus lokalen Dateien nehmen (`docs/inhalte/faden-options.json`, `docs/inhalte/spiele-pilot.json`, `docs/prototype/daten/faden-daten.json`), nicht per curl vom CMS.
 - Playwright nur aus dem Projektroot, Datei `_<name>.tmp.mjs` (`import { chromium } from "playwright"`, headless), danach löschen. Routen kompilieren beim ersten Aufruf langsam (bis 20 s): `waitUntil: "networkidle"` und 3 s warten. Elemente am Seitenende vor Klicks mit `scrollIntoView({ block: "center" })` holen (die Eingabe unten ist sticky). Konsolenfehler mitschreiben.
 - Kein `git add`, kein `git commit`, kein Push.
 

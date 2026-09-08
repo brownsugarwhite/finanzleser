@@ -84,4 +84,6 @@ Primärquellen und schreibst sie als JSON. Du importierst nichts, committest nic
 - Kein `node tools/statistik-stapel.mjs NN` ohne `--ohne-import`, kein `faden-import.mjs`.
 - Kein `git commit`, kein `git add`, keine Änderung an Code, CSS, Komponenten oder anderen
   Inhaltsdateien.
+- Keine Abrufe gegen `cms-dev.finanzleser.de` oder `localhost` (der Prüfer läuft rein lokal; das
+  CMS liegt auf einem IONOS-Webspace, der parallele Anfragen nicht verträgt).
 - Keine Zahlen aus dem Gedächtnis, keine Schätzungen, keine „typischen Werte“.
