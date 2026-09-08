@@ -210,6 +210,11 @@
   # Staging-URL). Production bekommt das Flag erst mit der Live-Freigabe.
   NEXT_PUBLIC_ADSENSE = "1"
 
+# Test-Frontend dev.finanzleser.de (Branch-Deploy des dev-Branches).
+# WORDPRESS_API_URL steht auch hier NICHT — die gehört ins Netlify-UI (Regel 14).
+[context.dev.environment]
+  NEXT_PUBLIC_SITE_URL = "https://dev.finanzleser.de"
+
 # Deploy-Previews und Branch-Deploys
 [context.deploy-preview.environment]
   NEXT_PUBLIC_SITE_URL = "https://staging.finanzleser.de"
