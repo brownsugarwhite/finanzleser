@@ -91,10 +91,12 @@ async function dokumentKarten(slugs: string[], toolData?: ArticleToolData): Prom
 }
 
 export default async function WerkzeugKarte({
-  teil, toolData, ohneTitel, checklisteDaten,
+  teil, toolData, ohneTitel, checklisteDaten, imInhalt,
 }: {
   teil: Embed;
   toolData?: ArticleToolData;
+  /** Eigener Eintrag im Inhaltsverzeichnis (Block am Beitragsende): Titel und Typ als data-Attribute. */
+  imInhalt?: boolean;
   /** Auf der eigenen Seite des Werkzeugs steht der Titel schon im h1. */
   ohneTitel?: boolean;
   /** Bereits geparste Checkliste (Detailseite), spart einen zweiten PDF-Parse. */
@@ -119,7 +121,7 @@ export default async function WerkzeugKarte({
   }
 
   return (
-    <div id={`werkzeug-${teil.typ}-${teil.slug}`} className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`}>
+    <div id={`werkzeug-${teil.typ}-${teil.slug}`} className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`} data-toc-titel={imInhalt ? titel : undefined} data-toc-typ={imInhalt ? teil.typ : undefined}>
       {teil.grund && <div className="einwurf einwurf--inline">Leo wirft ein: {teil.grund}</div>}
       <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
       {!ohneTitel && <h3>{titel}</h3>}

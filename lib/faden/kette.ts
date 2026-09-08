@@ -44,7 +44,10 @@ export interface Abschnitt {
 export interface TocEintrag {
   id: string;
   titel: string;
-  art: "abschnitt" | "werkzeuge" | "faq" | "fazit";
+  art: "abschnitt" | "werkzeug" | "faq" | "fazit";
+  /** Nur bei `werkzeug`: Typ und Slug; der Titel wird beim Rendern aufgelöst. */
+  typ?: WerkzeugTyp;
+  slug?: string;
 }
 
 export interface Krume {
@@ -239,7 +242,7 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
   const toc: TocEintrag[] = fach.map((a) => ({ id: a.id, titel: a.titel, art: "abschnitt" as const }));
   if (faq.length && faqId) toc.push({ id: faqId, titel: "Häufige Fragen", art: "faq" });
   if (fazitHtml && fazitId) toc.push({ id: fazitId, titel: "Fazit", art: "fazit" });
-  if (pool.length) toc.push({ id: "werkzeuge", titel: "Finanztools zum Beitrag", art: "werkzeuge" });
+  for (const w of pool) toc.push({ id: werkzeugId(w.typ, w.slug), titel: w.slug, art: "werkzeug", typ: w.typ, slug: w.slug });
 
   void opts;
   return {

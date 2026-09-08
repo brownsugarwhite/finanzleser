@@ -133,8 +133,13 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
   // Verlauf-Metadaten und Koffer aus der Sitzung holen (Schnappschuss-HTML überlebt keinen Reload).
   useEffect(() => {
     try {
-      const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
-      if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: "", offen: false })));
+      if (location.pathname === "/") {
+        // Startseite frisch geladen = neuer Faden mit dem Landing-Hero oben (wie im Prototyp).
+        sessionStorage.removeItem(META_KEY);
+      } else {
+        const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
+        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: "", offen: false })));
+      }
     } catch { /* leer */ }
     try {
       const k = JSON.parse(localStorage.getItem(KOFFER_KEY) || "[]");

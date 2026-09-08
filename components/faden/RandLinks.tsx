@@ -56,7 +56,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
                         {live.toc.map((t, i) => (
                           <li key={t.id}>
                             <button type="button" className={t.id === aktiv ? "aktiv" : ""} onClick={() => { zuAbschnitt(t.id); onZu?.(); }}>
-                              <i>{i + 1}</i><span>{t.titel}</span>
+                              <i>{t.typ ? <b className={`dot dot--${t.typ}`} /> : i + 1}</i><span>{t.titel}</span>
                             </button>
                           </li>
                         ))}

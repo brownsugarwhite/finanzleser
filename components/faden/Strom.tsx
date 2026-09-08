@@ -18,7 +18,7 @@ export default function Strom({ children }: { children: ReactNode }) {
     <div className="strom" id="strom">
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
-        <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />
+        {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
         <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
             <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>

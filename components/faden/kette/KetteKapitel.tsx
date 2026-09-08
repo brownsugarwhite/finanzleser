@@ -22,7 +22,7 @@ import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import KapitelKopf from "@/components/faden/KapitelKopf";
 import Weiterlesen from "./Weiterlesen";
 import Aktionen from "./Aktionen";
-import WerkzeugKarte, { toolTitel } from "./WerkzeugKarte";
+import WerkzeugKarte, { toolTitel, werkzeugTitel } from "./WerkzeugKarte";
 import WochenbriefKasten from "./WochenbriefKasten";
 
 const EINWURF_ZIEL: Record<string, string> = { rechner: "Zum Rechner", checkliste: "Zur Checkliste", vergleich: "Zum Vergleich", dokumente: "Zu den Dokumenten" };
@@ -68,6 +68,8 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   const begriffe = await loeseBegriffe([...ctx.gesehen].map((sl) => glossar.get(sl)).filter((e): e is NonNullable<typeof e> => !!e));
   const dazu = await verweiseAufloesen(k.faden.dazuPasst, toolTitel.alle(toolData));
   const pfad = k.krumen.map((x) => x.name);
+  // Ein Eintrag je Finanztool im Inhaltsverzeichnis (Titel aus dem Preload, sonst gecachter Getter).
+  const toc = await Promise.all(k.toc.map(async (t) => (t.art === "werkzeug" && t.typ && t.slug ? { ...t, titel: await werkzeugTitel(t.typ, t.slug, toolData) } : t)));
 
   return (
     <section className="kapitel kapitel--live" id="kapitel-live" data-key={`post:${k.slug}`} data-titel={k.titel} data-pfad={pfad.join(" › ")}>
@@ -100,14 +102,14 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               <div className="prose fliess__html" dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
             </div>
           )}
-          {k.toc.length > 0 && (
+          {toc.length > 0 && (
             <nav className="inhalt" aria-label="Inhalt">
               <span className="kicker">Inhalt</span>
               <ol className="inhalt__liste">
-                {k.toc.map((t, i) => (
+                {toc.map((t, i) => (
                   <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art}>
                     <a href={`#${t.id}`}>
-                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : "⚙"}</i>
+                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : <b className={`dot dot--${t.typ}`} />}</i>
                       <span className="inhalt__linie" aria-hidden="true" />
                       <span className="inhalt__titel">{t.titel}</span>
                     </a>
@@ -143,11 +145,11 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </section>
           )}
           {k.werkzeuge.length > 0 && (
-            <section className="abschnitt abschnitt--werkzeuge" id="werkzeuge" data-toc-titel="Finanztools zum Beitrag">
+            <section className="abschnitt abschnitt--werkzeuge" id="werkzeuge">
               <span className="kicker">Finanztools zum Beitrag</span>
               <h2 className="abschnitt__titel">Rechnen, prüfen, vergleichen</h2>
               <div className="werkzeuge-liste">
-                {k.werkzeuge.map((w) => <WerkzeugKarte key={werkzeugId(w.typ, w.slug)} teil={w} toolData={toolData} />)}
+                {k.werkzeuge.map((w) => <WerkzeugKarte key={werkzeugId(w.typ, w.slug)} teil={w} toolData={toolData} imInhalt />)}
               </div>
             </section>
           )}

@@ -187,6 +187,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .inhalt__zeile a { display: grid; grid-template-columns: 32px 36px minmax(0, 1fr); align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
 .faden-shell .inhalt__nr { width: 32px; height: 32px; border-radius: 13px; border: 1px solid var(--rule-strong); display: grid; place-items: center; font: italic 400 17px/1 var(--serif); color: var(--ink); transform: skewX(-6deg); }
 .faden-shell .inhalt__zeile--faq .inhalt__nr, .faden-shell .inhalt__zeile--fazit .inhalt__nr { font-style: normal; font-size: 14px; color: var(--muted); border-color: var(--rule); }
+.faden-shell .inhalt__zeile--werkzeug .inhalt__nr { transform: none; border-color: var(--rule); }
+.faden-shell .inhalt__nr .dot { width: 10px; height: 10px; }
+.faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
 .faden-shell .inhalt__linie { display: block; height: 1px; background: var(--rule-strong); position: relative; }
 .faden-shell .inhalt__linie::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border-top: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); transform: rotate(45deg); }
 .faden-shell .inhalt__titel { font: italic 400 16.5px/1.35 var(--serif); }

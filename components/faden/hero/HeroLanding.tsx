@@ -17,7 +17,14 @@ const seg = (p: number, a: number, b: number) => Math.max(0, Math.min(1, (p - a)
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+/** Der Hero gehört nur an den Anfang eines Fadens; kommt man später zur Startseite zurück, hängt sich nur „Heute“ an. */
 export default function HeroLanding() {
+  const { verlauf } = useFaden();
+  if (verlauf.length) return null;
+  return <HeroInnen />;
+}
+
+function HeroInnen() {
   const { fragen } = useFaden();
   const [wert, setWert] = useState("");
   const hero = useRef<HTMLElement>(null);
