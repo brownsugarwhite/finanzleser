@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W1 · Startseite: Scroll-Intro in vier Beats, dann das Gespräch</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Erstbesuch: vier kurze Bilder beim Scrollen, das Intro kollabiert in die Eingabe. Wiederbesuch: nur Beat 4.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="40" y="150" width="350" height="560" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="150" width="350" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="170" width="350" height="14" fill="#E5E7EB"/>
+<circle cx="56" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="72" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="88" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="110" y="158" width="266" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="120" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser.de</text>
+<text x="215.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Beat 1 · Das Problem</text>
+<text x="215" y="370" font-size="26" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Versicherungs-</text>
+<text x="215" y="406" font-size="26" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">bedingungen haben</text>
+<text x="215" y="442" font-size="26" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">80 Seiten.</text>
+<circle cx="215" cy="650" r="36" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="204.92" cy="643.952" r="5.76" fill="white"/>
+<circle cx="225.08" cy="643.952" r="5.76" fill="white"/>
+<path d="M200.6 659.0 Q215 671.6 229.4 659.0" stroke="white" stroke-width="3.2399999999999998" fill="none"/>
+<text x="215" y="550" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">↓ scrollen</text>
+<rect x="425" y="150" width="350" height="560" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="425" y="150" width="350" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="425" y="170" width="350" height="14" fill="#E5E7EB"/>
+<circle cx="441" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="457" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="473" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="495" y="158" width="266" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="505" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser.de</text>
+<text x="600.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Beat 2 · Der Beweis</text>
+<text x="600" y="280" font-size="22" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Leo hat sie alle gelesen.</text>
+<rect x="485" y="450" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<rect x="495" y="438" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<rect x="505" y="426" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<rect x="515" y="414" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<rect x="525" y="402" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<rect x="535" y="390" width="150" height="90" rx="4" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<circle cx="685" cy="480" r="44" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="672.68" cy="472.608" r="7.04" fill="white"/>
+<circle cx="697.32" cy="472.608" r="7.04" fill="white"/>
+<path d="M667.4 491.0 Q685 506.4 702.6 491.0" stroke="white" stroke-width="3.96" fill="none"/>
+<text x="600" y="620" font-size="24" fill="#45A117" font-weight="700" text-anchor="middle">12.480 Dokumente</text>
+<text x="600" y="645" font-size="12" fill="#6B7280" font-weight="400" text-anchor="middle">Zähler animiert</text>
+<rect x="810" y="150" width="350" height="560" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="810" y="150" width="350" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="810" y="170" width="350" height="14" fill="#E5E7EB"/>
+<circle cx="826" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="842" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="858" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="880" y="158" width="266" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="890" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser.de</text>
+<text x="985.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Beat 3 · Die Einladung</text>
+<text x="985" y="280" font-size="24" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Fragen Sie ihn.</text>
+<circle cx="985" cy="370" r="40" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="973.8" cy="363.28" r="6.4" fill="white"/>
+<circle cx="996.2" cy="363.28" r="6.4" fill="white"/>
+<path d="M969.0 380.0 Q985 394.0 1001.0 380.0" stroke="white" stroke-width="3.5999999999999996" fill="none"/>
+<rect x="840" y="450" width="290" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="985.0" y="467" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Zahlt die Haftpflicht bei Schlüsselverlust?</text>
+<rect x="840" y="494" width="290" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="985.0" y="511" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Was ist die Düsseldorfer Tabelle?</text>
+<rect x="840" y="538" width="290" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="985.0" y="555" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Wie viel Unterhalt steht mir zu?</text>
+<rect x="840" y="582" width="290" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="985.0" y="599" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Lohnt sich eine Hundekrankenversicherung?</text>
+<rect x="1195" y="150" width="350" height="560" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="1195" y="150" width="350" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="1195" y="170" width="350" height="14" fill="#E5E7EB"/>
+<circle cx="1211" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="1227" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="1243" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="1265" y="158" width="266" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1275" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser.de</text>
+<text x="1370.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">Beat 4 · Das Gespräch</text>
+<rect x="1207" y="194" width="326" height="30" rx="6" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="1217" y="213" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">Finanzen  Versicherungen  Steuern  Recht  Finanztools</text>
+<circle cx="1370" cy="280" r="30" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="1361.6" cy="274.96" r="4.8" fill="white"/>
+<circle cx="1378.4" cy="274.96" r="4.8" fill="white"/>
+<path d="M1358.0 287.5 Q1370 298.0 1382.0 287.5" stroke="white" stroke-width="2.6999999999999997" fill="none"/>
+<text x="1370" y="340" font-size="13" fill="#1F2937" font-weight="400" text-anchor="middle">Hallo, ich bin Leo. Womit kann ich</text>
+<text x="1370" y="358" font-size="13" fill="#1F2937" font-weight="400" text-anchor="middle">Ihnen heute helfen?</text>
+<rect x="1220" y="390" width="300" height="54" rx="27" fill="#FFFFFF" stroke="#45A117" stroke-width="2"/>
+<text x="1240" y="422" font-size="14" fill="#6B7280" font-weight="400" text-anchor="start">Ihre Frage …</text>
+<circle cx="1493" cy="417" r="18" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="1493" y="422" font-size="14" fill="white" font-weight="400" text-anchor="middle">➤</text>
+<rect x="1220" y="460" width="130" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="1285.0" y="477" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Schlüsselverlust</text>
+<rect x="1360" y="460" width="130" height="26" rx="13" fill="#FFFFFF" stroke="#45A117" stroke-width="1.2"/>
+<text x="1425.0" y="477" font-size="12" fill="#45A117" font-weight="600" text-anchor="middle">Unterhalt 2026</text>
+<rect x="1220" y="494" width="150" height="26" rx="13" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="1295.0" y="511" font-size="12" fill="#D3005E" font-weight="600" text-anchor="middle">Finanzfrage des Tages</text>
+<text x="1220" y="550" font-size="11" fill="#6B7280" font-weight="700" text-anchor="start">Neu im Magazin</text>
+<rect x="1220" y="562" width="96" height="110" rx="8" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1220" y="562" width="96" height="56" rx="8" fill="#E5E7EB" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="1228" y="630" width="80" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="1228" y="641" width="48" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="1322" y="562" width="96" height="110" rx="8" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1322" y="562" width="96" height="56" rx="8" fill="#E5E7EB" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="1330" y="630" width="80" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="1330" y="641" width="48" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="1424" y="562" width="96" height="110" rx="8" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="1424" y="562" width="96" height="56" rx="8" fill="#E5E7EB" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="1432" y="630" width="80" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="1432" y="641" width="48" height="5" rx="3" fill="#E5E7EB"/>
+<line x1="60" y1="760" x2="1540" y2="760" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<text x="800" y="790" font-size="13" fill="#6B7280" font-weight="400" text-anchor="middle">Scroll-Richtung · Gesamtdauer etwa 12 Sekunden · Assets: Leo-Lottie, Dokumentenstapel, Zähler, Video optional</text>
+<rect x="40" y="820" width="1520" height="52.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="50" y="838.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Regeln: Intro ist überspringbar (Klick/Tipp), respektiert „Bewegung reduzieren“, wird nach dem ersten Besuch gemerkt (localStorage) und dann auf Beat 4 verkürzt.</text>
+<text x="50" y="855.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Beat 4 ist zugleich der Zustand, in dem ein Wiederbesucher und ein Suchmaschinen-Bot die Startseite sehen: Eingabe, Vorschläge, neue Karten, Magazin-Menü.</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Leo / Aktion</text>
+<rect x="174" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="194" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Spiel / Hervorhebung</text>
+<rect x="364" y="958" width="14" height="14" rx="3" fill="#E5E7EB" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="384" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Platzhalter</text>
+</svg>

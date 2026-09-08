@@ -1,0 +1,111 @@
+SLUG: kindesunterhalt
+TITEL: Kindesunterhalt
+UNTERTITEL: Unterhaltsregelung für Kinder 2026: Sätze, Berechnung und Pflichten
+KATEGORIEN: Ehe & Familie, Recht
+GEÄNDERT: 2026-06-13
+
+## Unterhalt für Kinder: Rechte, Pflichten & Berechnung
+
+Kindesunterhalt sichert den Bedarf von Kindern nach einer Trennung. Wie er sich 2026 nach der Düsseldorfer Tabelle berechnet und wer wie viel zahlen muss.
+
+## Kindesunterhalt 2026: Höhe, Berechnung und Düsseldorfer Tabelle
+
+Kindesunterhalt regelt die finanzielle Verpflichtung von Eltern für ihre Kinder nach einer Trennung oder Scheidung. Diese gesetzlich verankerte Unterhaltspflicht sichert den Lebensunterhalt minderjähriger und volljähriger Kinder und orientiert sich an klaren rechtlichen Vorgaben, die durch die Düsseldorfer Tabelle konkretisiert werden.
+
+Die Berechnung des Kindesunterhalts basiert auf bewährten Grundsätzen des Familienrechts. Bei minderjährigen Kindern wird das Kindergeld in der Regel zur Hälfte angerechnet und bei volljährigen Kindern in vollem Umfang. Diese differenzierte Behandlung trägt den unterschiedlichen Lebensumständen Rechnung und stellt sicher, dass der Unterhalt bedarfsgerecht bemessen wird.
+
+## Wie wird Kindesunterhalt 2026 berechnet?
+
+Die Berechnung erfolgt nach der Düsseldorfer Tabelle, die unter Beteiligung und in Abstimmung sämtlicher Oberlandesgerichte und der Unterhaltskommission des Deutschen Familiengerichtstages e.V. erarbeitet wird. Als Grundlage dient das bereinigte Nettoeinkommen des unterhaltspflichtigen Elternteils, von dem berufsbedingte Aufwendungen abgezogen werden.
+
+Die Tabellenstruktur ist gegenüber 2025 unverändert. Es verbleibt bei 15 Einkommensgruppen und dem der Tabelle zugrundeliegenden Regelfall zweier Unterhaltsberechtigter. Die erste Einkommensgruppe endet weiterhin bei 2.100 EUR, die 15. Einkommensgruppe bei 11.200 EUR. Je nach Einkommen und Kinderzahl können Ab- oder Zuschläge angemessen sein.
+
+Ein praktisches Berechnungsbeispiel verdeutlicht das Vorgehen: Bei einem bereinigten Nettoeinkommen von 2.500 Euro und einem achtjährigen Kind liegt der Tabellenbetrag bei 614 Euro. Nach Abzug des hälftigen Kindergeldes von 129,50 Euro ergibt sich ein monatlicher Zahlbetrag von 484,50 Euro.
+
+[SPIEL mythos] 
+🔍 Mythos oder Fakt?
+
+Der Mindestunterhalt gemäß § 1612a BGB erhöht sich ab dem 1. Januar 2026 in allen Altersstufen um 4 EUR und beträgt für Kinder der 1. Altersstufe (0 bis 5 Jahre) 486 EUR, für Kinder der 2. Altersstufe (6 bis 11 Jahre) 558 EUR und für Kinder der 3. Altersstufe (12 bis 17 Jahre) 653 EUR.
+
+Das Kindergeld wurde zum 1. Januar 2026 auf monatlich 259 Euro angehoben. Während das Kindergeld in 2025 sich auf monatlich 255 Euro je Kind belief, wurde es ab 01.01.2026 auf 259 Euro angehoben. Bei minderjährigen Kindern ist der Tabellenbetrag der Düsseldorfer Tabelle um das halbe Kindergeld zu reduzieren.
+
+ | Altersstufe | Mindestunterhalt 2026 | Zahlbetrag nach Kindergeldabzug
+
+ | 0-5 Jahre | 486 Euro | 356,50 Euro
+
+ | 6-11 Jahre | 558 Euro | 428,50 Euro
+
+ | 12-17 Jahre | 653 Euro | 523,50 Euro
+
+ | Volljährige | 698 Euro | 438,50 Euro*
+
+*Bei volljährigen Kindern wird das gesamte Kindergeld abgezogen
+
+[SPIEL karte] 
+🔄 Karteikarte
+
+Der Elternteil, bei dem das Kind nicht überwiegend lebt, ist zum Barunterhalt verpflichtet. Die Unterhaltspflicht entsteht automatisch mit der Geburt und besteht unabhängig vom Familienstand der Eltern. Bei volljährigen Kindern können beide Elternteile anteilig zum Barunterhalt herangezogen werden.
+
+Der notwendige Eigenbedarf bzw. Selbstbehalt gilt für minderjährige und privilegierte volljährige Kinder bis 21 Jahren und beträgt seit dem 01.01.2024 beim erwerbstätigen Unterhaltspflichtigen 1.450 Euro monatlich und beim nicht erwerbstätigen Unterhaltspflichtigen 1.200 Euro monatlich. In diesen Beträgen sind 520 Euro monatlich für Wohnkosten enthalten.
+
+Für eine Anhebung bestand insbesondere angesichts des unverändert gebliebenen sozialhilferechtlichen Regelbedarfs kein Anlass. Die Selbstbehalte werden zum 1. Januar 2026 nicht erhöht. Dies bedeutet eine reale Verschlechterung für Unterhaltspflichtige bei gestiegenen Lebenshaltungskosten.
+
+Besondere Regelungen gelten für den Elternunterhalt. Beim Elternunterhalt beträgt der Selbstbehalt für den Unterhaltspflichtigen 2.650 € (inkl. 1.000 € Warmmiete) und für den Ehegatte 2.120 € (inkl. 800 € Warmmiete). Vom den Selbstbehalt übersteigenden Einkommen bleiben 70 % anrechnungsfrei.
+
+## Was passiert bei unzureichendem Einkommen – die Mangelfallberechnung?
+
+Ein Mangelfall liegt vor, wenn das Einkommen nicht ausreicht, um alle Unterhaltsansprüche zu befriedigen, ohne den Selbstbehalt zu unterschreiten. Die Verteilungsmasse wird nun ins Verhältnis zum vollen Kindesunterhalt gesetzt. Die verfügbaren Mittel werden proportional auf alle gleichrangigen Unterhaltsberechtigten verteilt.
+
+Ein Beispiel verdeutlicht die Berechnung: Ein Vater hat ein monatlich anrechenbares Nettoeinkommen von 2.090 € und muss für zwei Kinder Unterhalt zahlen. In der Summe müsste der Vater also 952 € Kindesunterhalt (Zahlbetrag) zahlen. Zieht man nun diese 952 € von den 2.090 € Einkommen ab, so würde sein Selbstbehalt von 1.450 € unterschritten, da lediglich 1.138 € übrig blieben. Aus diesem Grund muss auf die Verteilungsmasse des Einkommens zurückgegriffen werden, die in diesem Fall bei 640 € liegt.
+
+Die Mangelfallberechnung erfolgt nach folgender Formel:
+
+- Verfügbare Verteilungsmasse: Einkommen minus Selbstbehalt
+
+- Kürzungsquote: Verteilungsmasse geteilt durch Summe aller Einsatzbeträge
+
+- Gekürzter Unterhalt: Ursprungsanspruch mal Kürzungsquote
+
+Gerade bei der Sicherstellung des Mindestunterhalts für minderjährige Kinder und privilegierte Volljährige besteht eine gesteigerte Erwerbspflicht des Unterhaltspflichtigen. Er muss also alles Nötige tun, um den Mindestunterhalt sicher zu stellen und den Mangelfall zu verhindern. In solchen Fällen kann der Unterhaltsvorschuss eine wichtige Stütze für das Kind darstellen.
+
+[SPIEL quiz] 
+🧠 Quiz
+
+Mit der Volljährigkeit ändert sich die Berechnungsgrundlage erheblich. Beide Elternteile werden dann nach ihren Einkommensverhältnissen anteilig zum Barunterhalt herangezogen. Der Betreuungsanteil entfällt, stattdessen sind beide Eltern barunterhaltspflichtig.
+
+Die Unterhaltspflicht endet nicht automatisch mit dem 18. Geburtstag. Eltern müssen ihren Kindern in der Regel so lange Unterhalt zahlen, bis diese ihre erste berufliche Ausbildung vollendet haben. Dies umfasst sowohl Berufsausbildungen als auch Studiengänge.
+
+Der Bedarfssatz eines studierenden Kindes, das nicht bei seinen Eltern oder einem Elternteil wohnt, bleibt mit 990 EUR (einschließlich 440 EUR Warmmiete) gegenüber 2025 unverändert. Von diesem Bedarf kann mit Rücksicht auf die Lebensstellung der Eltern oder bei erhöhtem Bedarf nach oben abgewichen werden.
+
+Bei privilegiert volljährigen Kindern (unverheiratet, bis 21 Jahre, im elterlichen Haushalt, in allgemeiner Schulausbildung) gelten die gleichen Regelungen wie für minderjährige Kinder. Dies betrifft sowohl den Selbstbehalt als auch die Kindergeldanrechnung.
+
+- Privilegiert volljährige Kinder: nur hälftige Kindergeldanrechnung
+
+- Nicht privilegiert volljährige Kinder: vollständige Kindergeldanrechnung
+
+- Studierende auswärts: Pauschalbedarf von 990 Euro monatlich
+
+- Ausbildungsvergütung: wird bedarfsmindernd angerechnet
+
+## Fazit
+
+Der Kindesunterhalt folgt 2026 klaren gesetzlichen Vorgaben mit moderaten Anpassungen. Der Mindestunterhalt steigt in allen Altersstufen um 4 €. Ab dem 1. Januar 2026 gilt in der 1. Einkommensgruppe (bis 2.100 € netto): 0–5 Jahre 486 €, 6–11 Jahre 558 € und 12–17 Jahre 653 €. Nach Abzug des hälftigen Kindergeldes ergeben sich Zahlbeträge zwischen 356,50 Euro und 523,50 Euro.
+
+Der Selbstbehalt bleibt trotz steigender Lebenshaltungskosten unverändert bei 1.450 Euro für Erwerbstätige und 1.200 Euro für Nichterwerbstätige. Dies führt zu einer realen Belastungszunahme für Unterhaltspflichtige. Bei unzureichender Leistungsfähigkeit greift die Mangelfallberechnung, die eine quotenmäßige Verteilung der verfügbaren Mittel vorsieht.
+
+## Häufig gestellte Fragen
+
+Wie wird der Kindesunterhalt berechnet? Die Berechnung erfolgt nach der Düsseldorfer Tabelle auf Basis des bereinigten Nettoeinkommens des unterhaltspflichtigen Elternteils. Die Tabelle gliedert sich in 15 Einkommensgruppen und vier Altersstufen; berufsbedingte Aufwendungen werden pauschal mit 50 bis 150 Euro abgezogen.
+ 
+ Wie hoch ist der Mindestunterhalt 2026? Der Mindestunterhalt gemäß § 1612a BGB beträgt 2026 für Kinder von 0–5 Jahren 486 Euro, für 6–11 Jahre 558 Euro, für 12–17 Jahre 653 Euro und für Volljährige 698 Euro. Das hälftige Kindergeld wird bei Minderjährigen vom Bedarf abgezogen.
+ 
+ Wer ist zum Kindesunterhalt verpflichtet? Der Elternteil, bei dem das Kind nicht überwiegend lebt, leistet Barunterhalt. Der betreuende Elternteil erbringt Naturalunterhalt durch Unterkunft, Kleidung und Verpflegung. Bei volljährigen Kindern sind grundsätzlich beide Eltern zum Barunterhalt verpflichtet.
+ 
+ Wie wird das Kindergeld auf den Unterhalt angerechnet? Bei minderjährigen Kindern wird das hälftige Kindergeld vom Tabellenbetrag abgezogen. Beispiel: Bei 511 Euro Tabellenbedarf eines fünfjährigen Kindes ergibt sich nach Abzug des halben Kindergelds (129,50 Euro) ein Zahlbetrag von 381,50 Euro. Bei Volljährigen wird das gesamte Kindergeld abgezogen.
+ 
+
+[BLOCK checkliste kindesunterhalt]
+
+[BLOCK rechner unterhalt]
+
+[BLOCK dokumente anlage-unterhalt-2024,duesseldorfer-tabelle-2026,der-unterhaltsvorschuss-data]

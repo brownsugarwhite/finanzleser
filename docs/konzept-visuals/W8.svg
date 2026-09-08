@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W8 · Die Spiel-Schleife: tägliches Ritual, Punkte, Sammelalbum, Belohnung bei Finconext</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Was Menschen ohnehin gern spielen (Rätsel, Quiz, Schätzen), übersetzt in 30 Sekunden Finanzwissen pro Tag.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="370" y="165" width="260" height="120" rx="14" fill="#FFFFFF" stroke="#D3005E" stroke-width="2"/>
+<text x="500" y="195" font-size="15" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Tägliches Ritual</text>
+<text x="500" y="219" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Finanzfrage des Tages</text>
+<text x="500" y="237" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Schätzen oder Mythos/Fakt</text>
+<text x="500" y="255" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">30 Sekunden, teilbar</text>
+<rect x="635" y="430" width="260" height="120" rx="14" fill="#FFFFFF" stroke="#D3005E" stroke-width="2"/>
+<text x="765" y="460" font-size="15" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Punkte + Serie</text>
+<text x="765" y="484" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">+20 Punkte je Antwort</text>
+<text x="765" y="502" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Serie zählt Tage</text>
+<text x="765" y="520" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Serien-Schutz 1× pro Woche</text>
+<rect x="370" y="695" width="260" height="120" rx="14" fill="#FFFFFF" stroke="#D3005E" stroke-width="2"/>
+<text x="500" y="725" font-size="15" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Sammelalbum + Level</text>
+<text x="500" y="749" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">12 Themen-Wappen</text>
+<text x="500" y="767" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Level: Einsteiger → Kenner → Lotse</text>
+<text x="500" y="785" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Fortschritt sichtbar</text>
+<rect x="105" y="430" width="260" height="120" rx="14" fill="#FFFFFF" stroke="#45A117" stroke-width="2"/>
+<text x="235" y="460" font-size="15" fill="#1F2937" font-weight="700" text-anchor="middle" font-family="Merriweather, Georgia, serif">Belohnung</text>
+<text x="235" y="484" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Versicherungs-Check bei Finconext</text>
+<text x="235" y="502" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">PDF-Guide, Akademie-Vorteil</text>
+<text x="235" y="520" font-size="11" fill="#6B7280" font-weight="400" text-anchor="middle">Wochenbrief erinnert</text>
+<path d="M608,248 A265,265 0 0 1 742,382" fill="none" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M742,598 A265,265 0 0 1 608,732" fill="none" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M392,732 A265,265 0 0 1 258,598" fill="none" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M258,382 A265,265 0 0 1 392,248" fill="none" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<circle cx="500" cy="490" r="40" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="488.8" cy="483.28" r="6.4" fill="white"/>
+<circle cx="511.2" cy="483.28" r="6.4" fill="white"/>
+<path d="M484.0 500.0 Q500 514.0 516.0 500.0" stroke="white" stroke-width="3.5999999999999996" fill="none"/>
+<text x="500" y="552" font-size="12" fill="#45A117" font-weight="700" text-anchor="middle">Leo moderiert</text>
+<text x="940" y="150" font-size="13" fill="#6B7280" font-weight="700" text-anchor="start">Bestehende Formate (bleiben, bekommen Punkte)</text>
+<rect x="940" y="162" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="162" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="186" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Mythos oder Fakt</text>
+<text x="1130" y="186" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Ticket-Frage, Auflösung schiebt sich ein</text>
+<rect x="940" y="208" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="208" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="232" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Quiz</text>
+<text x="1130" y="232" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Mehrfachauswahl, richtig/falsch</text>
+<rect x="940" y="254" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="254" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="278" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Schätzfrage</text>
+<text x="1130" y="278" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Zahl oder Schieberegler gegen Referenz</text>
+<rect x="940" y="300" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="300" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="324" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Rubbellos</text>
+<text x="1130" y="324" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Freirubbeln mit Münz-Cursor</text>
+<rect x="940" y="346" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="346" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="370" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Selbsttest</text>
+<text x="1130" y="370" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Kurzer Test, aufklappbar</text>
+<rect x="940" y="392" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="940" y="392" width="5" height="38" rx="2" fill="#D3005E"/>
+<text x="956" y="416" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Gewusst?</text>
+<text x="1130" y="416" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Aha-Kasten</text>
+<text x="940" y="470" font-size="13" fill="#6B7280" font-weight="700" text-anchor="start">Neue Formate (aus der Recherche)</text>
+<rect x="940" y="482" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="956" y="506" font-size="12" fill="#D3005E" font-weight="700" text-anchor="start">Finanzfrage des Tages</text>
+<text x="1130" y="506" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Ein Rätsel täglich, Teilen-Raster wie bei Wordle</text>
+<rect x="940" y="528" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="956" y="552" font-size="12" fill="#D3005E" font-weight="700" text-anchor="start">Zahlen-Wordle</text>
+<text x="1130" y="552" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Schätze den Wert in 5 Versuchen (z. B. Grundfreibetrag)</text>
+<rect x="940" y="574" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="956" y="598" font-size="12" fill="#D3005E" font-weight="700" text-anchor="start">Wochen-Quiz</text>
+<text x="1130" y="598" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">5 Fragen aus den Artikeln der Woche, Rangliste freiwillig</text>
+<rect x="940" y="620" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="956" y="644" font-size="12" fill="#D3005E" font-weight="700" text-anchor="start">Sammelalbum</text>
+<text x="1130" y="644" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Wappen je Thema: Haftpflicht, Hausrat, Hund, Steuer …</text>
+<rect x="940" y="666" width="600" height="38" rx="8" fill="#FFFFFF" stroke="#D3005E" stroke-width="1.2"/>
+<text x="956" y="690" font-size="12" fill="#D3005E" font-weight="700" text-anchor="start">Kassensturz</text>
+<text x="1130" y="690" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Selbsttest in 8 Fragen, Ergebnis sofort, Wiederholung in 6 Monaten</text>
+<text x="940" y="750" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Teilen-Raster (Beispiel)</text>
+<text x="940" y="775" font-size="14" fill="#1F2937" font-weight="400" text-anchor="start">🟩⬜⬜</text>
+<text x="940" y="797" font-size="14" fill="#1F2937" font-weight="400" text-anchor="start">🟩🟩⬜</text>
+<text x="940" y="819" font-size="14" fill="#1F2937" font-weight="400" text-anchor="start">🟩🟩🟩</text>
+<text x="1030" y="775" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Finanzfrage #143 · 3/5</text>
+<text x="1030" y="797" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Serie: 6 Tage</text>
+<text x="1030" y="819" font-size="12" fill="#45A117" font-weight="400" text-anchor="start">finanzleser.de/spiele/finanzfrage-143</text>
+<rect x="40" y="860" width="1520" height="52.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="50" y="878.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Belohnungen zahlen aufs Maklergeschäft ein: Der „Versicherungs-Check“ ist ein Beratungstermin bei Finconext, freigeschaltet ab Level 2. Punkte sind nie Geld.</text>
+<text x="50" y="895.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Jedes Spiel hat eine eigene Seite (/spiele/…), erscheint als Karte im Faden und kann in Ratgebern eingebettet bleiben.</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Spiel / Punkte</text>
+<rect x="188" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="208" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Finconext / Leo</text>
+</svg>

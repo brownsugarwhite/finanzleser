@@ -48,3 +48,11 @@ docs/seo_export_*/
 # versehentlich wieder auftauchen, gehoeren sie dorthin — nicht hierher.
 assets/
 scripts/
+
+# Faden: abgeleitete/generierte Dateien (reproduzierbar per tools/faden-text.mjs,
+# tools/faden-export.mjs und python3 docs/prototype/build.py; zusammen ~20 MB)
+docs/inhalte/text/
+docs/prototype/daten/
+docs/prototype/src/02b-daten.html
+docs/prototype/leo-faden.html
+docs/https___www.finanzleser.de_-Coverage-Drilldown-*/

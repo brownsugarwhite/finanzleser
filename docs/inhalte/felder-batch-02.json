@@ -1,0 +1,913 @@
+[
+  {
+    "slug": "vorsorgevollmacht",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Mit einer Vorsorgevollmacht bestimmen Sie selbst, wer für Sie handelt, wenn Sie es nicht mehr können; ohne sie bestellt das Betreuungsgericht einen Betreuer, denn Ehepartner dürfen seit 2023 nur in Gesundheitsfragen und nur sechs Monate vertreten.",
+          "Sie gilt für sieben Bereiche wie Gesundheit, Finanzen, Wohnen und Behörden, die Sie einzeln übertragen können; freiheitsbeschränkende Maßnahmen brauchen eine ausdrückliche Klausel.",
+          "Schriftform mit Unterschrift genügt, das kostenlose Muster des Bundesjustizministeriums reicht; notariell nötig ist sie nur für Immobilien, Kredite und Firmenanteile.",
+          "Registrieren Sie sie für 20,50 Euro im Zentralen Vorsorgeregister, sonst findet das Gericht sie nicht.",
+          "Banken verlangen meist zusätzlich ihr eigenes Vollmachtsformular."
+        ],
+        "quellen": [
+          "§§ 164 ff., 1358, 1814 ff. BGB",
+          "Bundesnotarkammer, Zentrales Vorsorgeregister",
+          "Beitrag Vorsorgevollmacht"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist eine Vorsorgevollmacht? Definition und rechtliche Grundlagen",
+          "status": "freigegeben",
+          "frage": "Mein Mann kann doch für mich entscheiden, wenn etwas passiert, oder?",
+          "antwort": "Nur eingeschränkt. Seit 2023 darf ein Ehepartner in Gesundheitsfragen für höchstens sechs Monate vertreten, wenn ein Arzt die Voraussetzungen bestätigt. Für Konten, Verträge, Wohnung und Behörden braucht er eine Vollmacht, sonst bestellt das Gericht einen Betreuer.",
+          "quellen": [
+            "§ 1358 BGB",
+            "Beitrag, Abschnitt Definition"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Die 7 Lebensbereiche: Umfang und Gestaltung der Vollmacht",
+          "status": "freigegeben",
+          "frage": "Darf mein Bevollmächtigter mich in ein Pflegeheim mit geschlossener Station bringen?",
+          "antwort": "Nur wenn die Vollmacht freiheitsbeschränkende Maßnahmen ausdrücklich nennt und das Betreuungsgericht zusätzlich zustimmt. Fehlt die Klausel, ist der Bevollmächtigte dafür machtlos, auch wenn er sonst alles regeln darf.",
+          "quellen": [
+            "§ 1829 BGB in Verbindung mit § 1820 Abs. 2 BGB",
+            "Beitrag, Tabelle Lebensbereiche"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie erstelle ich eine rechtsgültige Vorsorgevollmacht?",
+          "status": "freigegeben",
+          "frage": "Muss ich zum Notar?",
+          "antwort": "Für die Vollmacht selbst nicht; Schriftform und Unterschrift genügen. Zum Notar müssen Sie, wenn der Bevollmächtigte Immobilien verkaufen, Kredite aufnehmen oder GmbH-Anteile übertragen soll. Eine Unterschriftsbeglaubigung bei der Betreuungsbehörde kostet 10 Euro und hilft bei Banken.",
+          "quellen": [
+            "§ 29 GBO",
+            "§ 7 BtOG (Beglaubigung durch die Betreuungsbehörde)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Zentrale Registrierung: Das Vorsorgeregister als Sicherheitsnetz",
+          "status": "freigegeben",
+          "frage": "Was passiert, wenn meine Vollmacht im Ernstfall niemand findet?",
+          "antwort": "Dann bestellt das Gericht einen Betreuer, obwohl die Vollmacht gültig wäre. Deshalb gehört sie ins Zentrale Vorsorgeregister: Jedes Betreuungsgericht muss dort nachsehen. Die Online-Registrierung kostet 20,50 Euro und speichert nur, dass es die Vollmacht gibt und wo sie liegt.",
+          "quellen": [
+            "§ 1817 Abs. 1 BGB",
+            "vorsorgeregister.de, Gebühren 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Bankvollmacht: Warum Banken besondere Formulare verlangen",
+          "status": "freigegeben",
+          "frage": "Meine Bank will die Vorsorgevollmacht nicht anerkennen. Darf sie das?",
+          "antwort": "Rechtlich muss sie eine wirksame Vollmacht akzeptieren, in der Praxis verweist sie auf Geldwäscheregeln und ihr eigenes Formular. Der schnellste Weg ist, zusätzlich die Konto- und Depotvollmacht der Bank zu unterschreiben, solange Sie es noch können.",
+          "quellen": [
+            "§ 10 GwG (Sorgfaltspflichten)",
+            "Beitrag, Abschnitt Bankvollmacht"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "vorsorgevollmacht",
+        "notvertretungsrecht",
+        "vorsorgeregister",
+        "generalvollmacht"
+      ]
+    }
+  },
+  {
+    "slug": "testament",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein eigenhändiges Testament muss komplett von Hand geschrieben und unterschrieben sein; getippt ist es ungültig, auch mit Unterschrift. Datum und Ort gehören dazu.",
+          "Das notarielle Testament kostet mehr, wird aber automatisch amtlich verwahrt und erspart den Erben oft den Erbschein.",
+          "Enterben geht nur bis zum Pflichtteil: Kinder, Ehepartner und ohne Kinder die Eltern bekommen die Hälfte ihres gesetzlichen Erbteils als Geld.",
+          "Geändert wird durch ein neues Testament, das alle alten ausdrücklich widerruft, oder durch Vernichten; beim Berliner Testament ist der Überlebende nach dem ersten Todesfall gebunden.",
+          "Die amtliche Verwahrung beim Nachlassgericht kostet 93 Euro und sorgt dafür, dass das Testament im Erbfall gefunden wird."
+        ],
+        "quellen": [
+          "§§ 2247, 2258, 2271, 2303 BGB",
+          "GNotKG, Kostenverzeichnis Nr. 12100 (Verwahrung)",
+          "Beitrag Testament"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Formvorschriften für handschriftliche Testamente",
+          "status": "freigegeben",
+          "frage": "Ich habe mein Testament am Computer geschrieben und unterschrieben. Gilt das?",
+          "antwort": "Nein. Ein privates Testament ist nur gültig, wenn der ganze Text von Ihrer Hand stammt; die Unterschrift allein reicht nicht. Schreiben Sie es ab, mit Ort, Datum und vollem Namen, oder lassen Sie es notariell beurkunden.",
+          "quellen": [
+            "§ 2247 Abs. 1 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Testament ändern oder widerrufen",
+          "status": "freigegeben",
+          "frage": "Ich möchte mein altes Testament ändern. Reicht ein Zusatz am Rand?",
+          "antwort": "Handschriftliche Zusätze mit Datum und Unterschrift sind möglich, aber streitanfällig. Sicherer ist ein neues Testament mit dem Satz, dass alle früheren Verfügungen widerrufen werden. Ein beim Nachlassgericht verwahrtes Testament holen Sie zur Änderung persönlich zurück.",
+          "quellen": [
+            "§§ 2253 bis 2258 BGB",
+            "Beitrag, Abschnitt Ändern oder widerrufen"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sichere Aufbewahrung des Testaments",
+          "status": "freigegeben",
+          "frage": "Lohnt sich die amtliche Verwahrung?",
+          "antwort": "Für 93 Euro einmalig ja: Das Nachlassgericht schützt das Original vor Verlust und Fälschung, das Zentrale Testamentsregister meldet den Erbfall automatisch, und die Eröffnung ist garantiert. Zu Hause im Ordner findet es im Ernstfall oft niemand oder der Falsche.",
+          "quellen": [
+            "§ 2248 BGB",
+            "GNotKG Nr. 12100; Bundesnotarkammer, Zentrales Testamentsregister"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Pflichtteilsrecht begrenzt Testierfreiheit",
+          "status": "freigegeben",
+          "frage": "Kann ich meinen Sohn komplett enterben?",
+          "antwort": "Als Erben ja, sein Pflichtteil bleibt: die Hälfte des gesetzlichen Erbteils, als Geldanspruch gegen die Erben, verjährt nach drei Jahren. Ganz entziehen lässt er sich nur in Ausnahmefällen wie schweren Straftaten gegen Sie.",
+          "quellen": [
+            "§§ 2303, 2333 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflichtteil",
+        "berliner-testament",
+        "erbschaftsteuer",
+        "familienheim"
+      ]
+    }
+  },
+  {
+    "slug": "patientenverfuegung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Eine Patientenverfügung legt schriftlich fest, welche Behandlungen Sie in bestimmten Situationen wollen oder ablehnen; sie bindet Ärzte direkt, ohne dass jemand für Sie entscheiden muss.",
+          "Sie ist nur wirksam, wenn sie konkret ist: benannte Situationen wie Endstadium einer tödlichen Krankheit oder schwere Hirnschädigung und benannte Maßnahmen wie Beatmung, Sondenernährung oder Reanimation. Pauschale Sätze reichen seit den BGH-Urteilen 2016 und 2018 nicht.",
+          "Schriftform und Unterschrift genügen, ein Notar ist nicht nötig; die Textbausteine des Bundesjustizministeriums sind kostenlos.",
+          "Registrieren Sie sie für 20,50 Euro im Zentralen Vorsorgeregister und laden Sie einen Scan in die elektronische Patientenakte, damit Ärzte sie im Notfall in Minuten finden.",
+          "Alle zwei bis drei Jahre prüfen; widerrufen können Sie jederzeit formlos."
+        ],
+        "quellen": [
+          "§ 1827 BGB",
+          "BGH XII ZB 61/16 und XII ZB 604/15",
+          "Beitrag Patientenverfügung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist eine Patientenverfügung?",
+          "status": "freigegeben",
+          "frage": "Reicht der Satz „Ich will keine lebensverlängernden Maßnahmen“?",
+          "antwort": "Nein. Der Bundesgerichtshof verlangt, dass Sie konkrete Situationen und konkrete Maßnahmen benennen, etwa Verzicht auf künstliche Beatmung und Sondenernährung im Endstadium einer tödlichen Krankheit. Allgemeine Wünsche sind nur ein Anhaltspunkt, keine bindende Verfügung.",
+          "quellen": [
+            "BGH XII ZB 61/16, Beschluss vom 6. Juli 2016",
+            "§ 1827 Abs. 1 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Unterschiede zu Vorsorgevollmacht und Betreuungsverfügung",
+          "status": "freigegeben",
+          "frage": "Brauche ich zusätzlich zur Patientenverfügung eine Vorsorgevollmacht?",
+          "antwort": "Ja, die Dokumente ergänzen sich: Die Patientenverfügung sagt, was Sie wollen, die Vorsorgevollmacht bestimmt, wer es gegenüber Ärzten durchsetzt und alles regelt, was die Verfügung nicht abdeckt. Ohne Vollmacht bestellt das Gericht einen Betreuer.",
+          "quellen": [
+            "§ 1827 Abs. 1 und 2 BGB",
+            "Beitrag, Tabelle Vorsorgedokumente"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Digitale Patientenverfügung: ePA und Zentrales Vorsorgeregister 2026",
+          "status": "freigegeben",
+          "frage": "Wie kommt meine Patientenverfügung ins Krankenhaus, wenn ich bewusstlos bin?",
+          "antwort": "Über zwei Wege: Das Zentrale Vorsorgeregister verrät dem Gericht und auf Anfrage den Ärzten, dass es sie gibt und wo sie liegt; ein Scan in Ihrer elektronischen Patientenakte lässt Ärzte den Wortlaut direkt lesen. Zusätzlich sollten Hausarzt und Bevollmächtigter Kopien haben.",
+          "quellen": [
+            "§ 341 SGB V (elektronische Patientenakte)",
+            "Beitrag, Abschnitt Digitale Patientenverfügung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kosten: Von kostenlos bis 250 Euro",
+          "status": "freigegeben",
+          "frage": "Was kostet eine rechtssichere Patientenverfügung?",
+          "antwort": "Zwischen null und rund 250 Euro. Mit den kostenlosen Textbausteinen des Bundesjustizministeriums, einer kurzen Anwaltsberatung von etwa 100 Euro und der Registrierung für 20,50 Euro liegen Sie bei rund 120 Euro. Ein Notar ist nicht nötig.",
+          "quellen": [
+            "Beitrag, Kostentabelle 2026",
+            "vorsorgeregister.de"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "patientenverfuegung",
+        "vorsorgeregister",
+        "vorsorgevollmacht",
+        "betreuungsverfuegung"
+      ]
+    }
+  },
+  {
+    "slug": "erbrecht",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ohne Testament gilt die gesetzliche Erbfolge in Ordnungen: zuerst Kinder und Enkel, dann Eltern und Geschwister, dann Großeltern; der Ehepartner erbt daneben, bei Zugewinngemeinschaft mit Kindern die Hälfte.",
+          "Erben übernehmen alles, auch Schulden; wer das nicht will, muss binnen sechs Wochen ausschlagen.",
+          "Testament oder Erbvertrag setzen die gesetzliche Erbfolge außer Kraft, begrenzt durch den Pflichtteil von der Hälfte des gesetzlichen Erbteils für Kinder, Ehepartner und Eltern.",
+          "Schenkungen der letzten zehn Jahre werden beim Pflichtteil anteilig mitgerechnet, jedes Jahr zehn Prozent weniger.",
+          "Zwei Drittel der Deutschen haben kein Testament; digitaler Nachlass und Kryptowährungen werden vererbt wie alles andere, aber nur mit Zugangsdaten."
+        ],
+        "quellen": [
+          "§§ 1922 bis 1936, 1944, 2303, 2325 BGB",
+          "BGH III ZR 183/17 (digitaler Nachlass)",
+          "Beitrag Erbrecht"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist Erbrecht?",
+          "status": "freigegeben",
+          "frage": "Erbe ich auch die Schulden meines Vaters?",
+          "antwort": "Ja, der Erbe tritt in alle Rechte und Pflichten ein. Sind die Schulden höher als das Vermögen, können Sie binnen sechs Wochen ab Kenntnis beim Nachlassgericht ausschlagen oder die Haftung mit Nachlassverwaltung oder Nachlassinsolvenz auf den Nachlass beschränken.",
+          "quellen": [
+            "§ 1922 BGB",
+            "§§ 1944, 1975 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Gesetzliche Erbfolge – Wer erbt ohne Testament?",
+          "status": "freigegeben",
+          "frage": "Wir sind nicht verheiratet, leben aber seit 20 Jahren zusammen. Erbt mein Partner?",
+          "antwort": "Nein, nichts. Die gesetzliche Erbfolge kennt nur Verwandte und Ehepartner; nach 20 Jahren ohne Trauschein erben Ihre Kinder oder Eltern. Wollen Sie den Partner absichern, brauchen Sie ein Testament oder einen Erbvertrag, und er hat nur 20.000 Euro Freibetrag.",
+          "quellen": [
+            "§§ 1924 ff., 1931 BGB",
+            "§ 16 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Pflichtteilsrecht schützt nahe Angehörige",
+          "status": "freigegeben",
+          "frage": "Meine Mutter hat meinem Bruder vor sechs Jahren das Haus geschenkt. Habe ich noch Ansprüche?",
+          "antwort": "Ja, einen Pflichtteilsergänzungsanspruch. Schenkungen der letzten zehn Jahre werden dem Nachlass zugerechnet, jedes Jahr um ein Zehntel weniger; nach sechs Jahren zählen noch 40 Prozent des Hauswerts. Der Anspruch verjährt drei Jahre nach dem Erbfall.",
+          "quellen": [
+            "§ 2325 Abs. 3 BGB",
+            "§ 2332 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Digitaler Nachlass – Neue Herausforderungen",
+          "status": "freigegeben",
+          "frage": "Was passiert mit dem Bitcoin-Wallet meines verstorbenen Mannes?",
+          "antwort": "Es gehört zum Nachlass und wird mit dem Kurs am Todestag besteuert, aber ohne den privaten Schlüssel kommt niemand an die Bestände. Suchen Sie nach Seed-Phrase, Hardware-Wallet und Börsenkonten; bei Börsen wie Coinbase hilft der Erbschein weiter, bei einem selbst verwahrten Wallet nur der Schlüssel.",
+          "quellen": [
+            "BGH III ZR 183/17",
+            "§ 12 BewG (gemeiner Wert)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "gesetzliche-erbfolge",
+        "pflichtteil",
+        "digitaler-nachlass",
+        "erbschaftsteuer"
+      ]
+    }
+  },
+  {
+    "slug": "berliner-testament",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Beim Berliner Testament setzen sich Ehepartner gegenseitig als Alleinerben ein, die Kinder erben erst nach dem Tod des Zweiten; einer schreibt es von Hand, beide unterschreiben.",
+          "Es sichert den überlebenden Partner und vermeidet Erbengemeinschaften, kostet aber Steuer: Die Freibeträge der Kinder von 400.000 Euro je Elternteil verfallen beim ersten Erbfall, und alles wird zweimal besteuert.",
+          "Bei 1,6 Millionen Euro und zwei Kindern sind das rund 180.000 statt 30.000 Euro Erbschaftsteuer.",
+          "Nach dem ersten Todesfall ist der Überlebende an die Schlusserbeneinsetzung gebunden, außer das Testament enthält einen Änderungsvorbehalt; Pflichtteilsstrafklausel und Wiederverheiratungsklausel gehören hinein.",
+          "Alternativen bei größerem Vermögen: Vermächtnis für die Kinder beim ersten Erbfall, Nießbrauch oder Schenkungen alle zehn Jahre."
+        ],
+        "quellen": [
+          "§§ 2265 bis 2271 BGB",
+          "OLG Zweibrücken 8 W 88/25, Beschluss vom 25. Februar 2026",
+          "§ 16 ErbStG",
+          "Beitrag Berliner Testament"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist ein Berliner Testament und wer kann es errichten?",
+          "status": "freigegeben",
+          "frage": "Können wir als unverheiratetes Paar ein Berliner Testament machen?",
+          "antwort": "Nein, das gemeinschaftliche Testament ist Ehepaaren und eingetragenen Lebenspartnern vorbehalten. Unverheiratete erreichen dasselbe mit zwei aufeinander abgestimmten Einzeltestamenten oder einem notariellen Erbvertrag, der ebenfalls bindet.",
+          "quellen": [
+            "§ 2265 BGB",
+            "§ 2274 BGB (Erbvertrag)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die steuerlichen Nachteile?",
+          "status": "freigegeben",
+          "frage": "Wir haben 900.000 Euro und zwei Kinder. Ist das Berliner Testament ein Problem?",
+          "antwort": "Steuerlich kaum. Beim ersten Erbfall erbt der Partner 450.000 Euro unter seinem Freibetrag von 500.000 Euro, beim zweiten erben die Kinder je 450.000 Euro gegen 400.000 Euro Freibetrag; 50.000 Euro je Kind zu 7 Prozent sind 3.500 Euro. Erst ab etwa einer Million lohnt eine Vermächtnislösung.",
+          "quellen": [
+            "§§ 16, 19 ErbStG",
+            "Beitrag, Fazit"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche wichtigen Klauseln sollten enthalten sein?",
+          "status": "freigegeben",
+          "frage": "Was bringt die Pflichtteilsstrafklausel?",
+          "antwort": "Sie schreckt ab: Wer beim Tod des ersten Elternteils seinen Pflichtteil verlangt, bekommt auch beim zweiten nur den Pflichtteil statt des vollen Erbes. So bleibt das Vermögen beim überlebenden Partner. Die Klausel muss die Folge ausdrücklich nennen, sonst wirkt sie nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Klauseln",
+            "§ 2303 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Warum ist die Bindungswirkung so gefährlich?",
+          "status": "freigegeben",
+          "frage": "Mein Mann ist gestorben. Kann ich unser Berliner Testament noch ändern?",
+          "antwort": "In der Regel nicht. Die gegenseitige Erbeinsetzung und die Schlusserben sind wechselbezüglich, daran sind Sie nach seinem Tod gebunden, außer das Testament enthält einen Änderungsvorbehalt. Der einzige Ausweg ist, das Erbe auszuschlagen; auch Schenkungen zulasten der Schlusserben können diese später zurückfordern.",
+          "quellen": [
+            "§§ 2270, 2271 Abs. 2 BGB",
+            "§ 2287 BGB",
+            "OLG Zweibrücken 8 W 88/25"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "berliner-testament",
+        "pflichtteil",
+        "niessbrauch",
+        "zehnjahresfrist"
+      ]
+    }
+  },
+  {
+    "slug": "betreuungsverfuegung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Mit einer Betreuungsverfügung sagen Sie dem Betreuungsgericht, wen es als Betreuer einsetzen soll und wen auf keinen Fall, falls eine Betreuung nötig wird; Angehörige werden nicht automatisch Betreuer.",
+          "Anders als bei der Vorsorgevollmacht prüft und kontrolliert das Gericht den Betreuer; das schützt vor Missbrauch, kostet aber ein Verfahren.",
+          "Formfrei gültig, schriftlich mit Datum und Unterschrift empfohlen; Beglaubigung bei der Betreuungsbehörde 10 Euro, Registrierung im Vorsorgeregister 20,50 Euro.",
+          "Das Gericht darf nur abweichen, wenn Sie erkennbar andere Wünsche haben oder die Person ungeeignet ist.",
+          "Seit 2023 stehen Ihre Wünsche im Mittelpunkt der Betreuung, Ehepartner dürfen in Gesundheitsfragen sechs Monate vertreten; seit 2026 ist die Betreuervergütung auf zwei Stufen vereinfacht."
+        ],
+        "quellen": [
+          "§§ 1816, 1817, 1821 BGB",
+          "§ 1358 BGB",
+          "Beitrag Betreuungsverfügung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist eine Betreuungsverfügung und wann wird sie benötigt?",
+          "status": "freigegeben",
+          "frage": "Ich habe eine Vorsorgevollmacht. Brauche ich trotzdem eine Betreuungsverfügung?",
+          "antwort": "Als Rückfallebene ja. Fällt der Bevollmächtigte aus, wird die Vollmacht angezweifelt oder deckt sie einen Bereich nicht ab, bestellt das Gericht einen Betreuer, und dann entscheidet Ihre Betreuungsverfügung, wer das ist. Beides passt auf ein Formular.",
+          "quellen": [
+            "§ 1816 Abs. 2 BGB",
+            "Beitrag, Abschnitt Was ist eine Betreuungsverfügung"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie unterscheidet sich die Betreuungsverfügung von anderen Vorsorgedokumenten?",
+          "status": "freigegeben",
+          "frage": "Was ist sicherer gegen Missbrauch, Vollmacht oder Betreuungsverfügung?",
+          "antwort": "Die Betreuungsverfügung: Der Betreuer wird vom Gericht geprüft, muss Rechenschaft ablegen und braucht für große Geschäfte Genehmigungen. Eine Vollmacht wirkt sofort und ohne Kontrolle, dafür ohne Verfahren. Wer der Person voll vertraut, nimmt die Vollmacht, sonst die Verfügung.",
+          "quellen": [
+            "§§ 1862, 1865 BGB (Aufsicht, Rechnungslegung)",
+            "Beitrag, Vergleichstabelle"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie erstellen Sie eine rechtsgültige Betreuungsverfügung?",
+          "status": "freigegeben",
+          "frage": "Kann ich auch festlegen, wer mich auf keinen Fall betreuen soll?",
+          "antwort": "Ja, Ausschlusswünsche sind ausdrücklich vorgesehen und für das Gericht genauso verbindlich wie der Vorschlag. Schreiben Sie dazu, wo Sie leben möchten und welche Behandlungen Ihnen wichtig sind; der Betreuer muss sich daran halten.",
+          "quellen": [
+            "§ 1816 Abs. 2 BGB",
+            "§ 1821 Abs. 2 BGB (Wünsche des Betreuten)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was änderte sich durch die Betreuungsreform 2023?",
+          "status": "freigegeben",
+          "frage": "Darf mein Betreuer über meinen Kopf hinweg entscheiden?",
+          "antwort": "Seit 2023 nicht mehr am Wohl vorbei, das er selbst definiert: Er muss Ihre Wünsche feststellen und befolgen, auch unvernünftige, solange sie Sie nicht erheblich gefährden. Betreuung ist Unterstützung, Stellvertretung nur, soweit nötig.",
+          "quellen": [
+            "§ 1821 BGB in der Fassung seit 1. Januar 2023"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "betreuungsverfuegung",
+        "vorsorgevollmacht",
+        "notvertretungsrecht",
+        "vorsorgeregister"
+      ]
+    }
+  },
+  {
+    "slug": "bussgeldkatalog-pdf",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Bußgeldkatalog 2026 bleibt bei den Sätzen der Reform von 2021: innerorts 30 bis 800 Euro fürs Rasen, außerorts 20 bis 700 Euro; ab 21 km/h zu viel gibt es einen Punkt, ab 31 innerorts und 41 außerorts zwei Punkte und einen Monat Fahrverbot.",
+          "Punkte gibt es nur für sicherheitsrelevante Verstöße, ein bis drei je Tat; bei acht Punkten ist der Führerschein weg.",
+          "Handy am Steuer kostet 100 Euro und einen Punkt, eine rote Ampel 90 Euro und einen Punkt, nach mehr als einer Sekunde Rot 200 Euro, zwei Punkte und Fahrverbot.",
+          "Ab Juli 2026 verjähren Verkehrsordnungswidrigkeiten erst nach sechs statt drei Monaten; Einspruch gegen den Bescheid ist zwei Wochen ab Zustellung möglich.",
+          "Bei jeder Messung wird Toleranz abgezogen, 3 km/h bis 100 km/h, darüber 3 Prozent; viele Messungen sind angreifbar."
+        ],
+        "quellen": [
+          "Bußgeldkatalog-Verordnung (BKatV) in der Fassung vom 9. November 2021",
+          "§ 4 StVG (Fahreignungs-Bewertungssystem)",
+          "§ 26 Abs. 3 StVG (Verjährung)",
+          "Beitrag Bußgeldkatalog"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert das Punktesystem in Deutschland?",
+          "status": "freigegeben",
+          "frage": "Wie lange bleiben Punkte in Flensburg stehen?",
+          "antwort": "Je nach Schwere: ein Punkt zweieinhalb Jahre, zwei Punkte fünf Jahre, drei Punkte zehn Jahre. Jeder Eintrag verjährt für sich, neue Punkte verlängern alte nicht mehr. Ab vier Punkten gibt es eine Ermahnung, ab sechs eine Verwarnung, bei acht den Entzug.",
+          "quellen": [
+            "§ 29 StVG (Tilgungsfristen)",
+            "§ 4 Abs. 5 StVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Was sind die aktuellen Bußgelder für Geschwindigkeitsverstöße?",
+          "status": "freigegeben",
+          "frage": "Ich wurde innerorts mit 24 km/h zu viel geblitzt. Was kommt auf mich zu?",
+          "antwort": "Nach Toleranzabzug von 3 km/h bleiben 21 km/h: 115 Euro und ein Punkt, kein Fahrverbot. Wer innerhalb eines Jahres zweimal mit mindestens 26 km/h zu viel erwischt wird, bekommt trotzdem einen Monat Fahrverbot.",
+          "quellen": [
+            "BKatV, Tabelle 1 Nr. 11",
+            "§ 4 Abs. 2 BKatV (beharrlicher Verstoß)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche wichtigen Änderungen gibt es 2026?",
+          "status": "freigegeben",
+          "frage": "Der Blitzer war im März, der Bescheid kam erst nach vier Monaten. Ist das verjährt?",
+          "antwort": "Für Verstöße vor dem 1. Juli 2026 gilt noch die Frist von drei Monaten, wenn die Behörde sie nicht durch einen Anhörungsbogen unterbrochen hat. Prüfen Sie das Datum des Anhörungsbogens; danach läuft die Frist neu. Für spätere Verstöße gelten sechs Monate.",
+          "quellen": [
+            "§ 26 Abs. 3 StVG",
+            "§ 33 OWiG (Unterbrechung)",
+            "Beitrag, Abschnitt Änderungen 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie funktioniert das Bußgeldverfahren?",
+          "status": "freigegeben",
+          "frage": "Lohnt sich ein Einspruch gegen den Bußgeldbescheid?",
+          "antwort": "Bei Punkten oder Fahrverbot oft ja: Messprotokoll, Eichschein und Schulung des Messbeamten sind einsehbar, und Fehler kommen vor. Sie haben zwei Wochen ab Zustellung; eine Verkehrsrechtsschutzversicherung übernimmt Anwalt und Gutachter. Bei 30 Euro ohne Punkt lohnt der Aufwand selten.",
+          "quellen": [
+            "§ 67 OWiG (Einspruchsfrist)",
+            "Beitrag, Abschnitt Bußgeldverfahren"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Probezeit und besondere Regelungen",
+          "status": "freigegeben",
+          "frage": "Ich bin in der Probezeit und mit 22 km/h zu viel geblitzt worden. Was passiert?",
+          "antwort": "Das ist ein A-Verstoß: Neben 100 Euro und einem Punkt verlängert sich die Probezeit auf vier Jahre, und Sie müssen ein Aufbauseminar besuchen, das rund 300 Euro kostet. Ein zweiter A-Verstoß bringt eine Verwarnung, der dritte den Entzug.",
+          "quellen": [
+            "§ 2a StVG",
+            "Anlage 12 FeV (A- und B-Verstöße)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "punktesystem",
+        "toleranzabzug",
+        "rechtsschutz",
+        "kasko"
+      ]
+    }
+  },
+  {
+    "slug": "rundfunkbeitrag-pdf",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Rundfunkbeitrag bleibt 2026 bei 18,36 Euro im Monat je Wohnung, für 2027 steht eine Erhöhung auf 18,64 Euro im Raum.",
+          "Für Befreiung, Abmeldung ins Ausland, Zahlungsänderungen und Sonderfälle braucht der Beitragsservice ein ausgedrucktes, eigenhändig unterschriebenes PDF-Formular; digitale Unterschriften gelten nicht.",
+          "Befreit werden Empfänger von Bürgergeld, Grundsicherung, Asylbewerberleistungen, BAföG außerhalb des Elternhauses und Taubblinde, ermäßigt auf 6,12 Euro Menschen mit Merkzeichen RF; nur auf Antrag mit Bescheid, bis zu drei Jahre rückwirkend.",
+          "Nebenwohnungen sind seit dem Urteil des Bundesverfassungsgerichts 2018 beitragsfrei, wenn die Hauptwohnung auf Sie angemeldet ist.",
+          "Seit 2024 gibt es nur noch eine einmalige Zahlungsaufforderung; die Termine müssen Sie selbst im Blick behalten."
+        ],
+        "quellen": [
+          "Rundfunkbeitragsstaatsvertrag §§ 2, 4, 4a",
+          "BVerfG 1 BvR 1675/16, Urteil vom 18. Juli 2018",
+          "Beitrag Rundfunkbeitrag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche PDF-Formulare stellt der Beitragsservice bereit?",
+          "status": "freigegeben",
+          "frage": "Kann ich mich online befreien lassen oder muss es Papier sein?",
+          "antwort": "Für die Befreiung braucht es das PDF-Formular, ausgedruckt und von Hand unterschrieben, mit einer Kopie des Bewilligungsbescheids per Post. Online gehen nur einfache Dinge wie Adress- oder Kontoänderung. Rechnen Sie mit fünf bis zehn Werktagen Bearbeitung.",
+          "quellen": [
+            "§ 4 Abs. 7 RBStV",
+            "Beitrag, Abschnitt PDF-Formulare"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Befreiungsanträge richtig stellen – wie lange wirkt die Rückwirkung?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme seit zwei Jahren Bürgergeld, habe aber weiter gezahlt. Bekomme ich das Geld zurück?",
+          "antwort": "Ja, die Befreiung wirkt bis zu drei Jahre zurück, wenn die Voraussetzung in der Zeit bestand. Stellen Sie den Antrag mit allen Bewilligungsbescheiden der beiden Jahre; der Beitragsservice erstattet dann rund 440 Euro.",
+          "quellen": [
+            "§ 4 Abs. 4 RBStV",
+            "Beitrag, Abschnitt Befreiungsanträge"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Warum digitale Unterschriften bei Rundfunkbeitrag-Formularen nicht gelten",
+          "status": "freigegeben",
+          "frage": "Ich habe den Antrag eingescannt und per E-Mail geschickt. Reicht das?",
+          "antwort": "Nein, der Beitragsservice verlangt das Original mit eigenhändiger Unterschrift auf Papier; Scans, Fotos und elektronische Signaturen lehnt er ab. Schicken Sie das unterschriebene Formular per Post, das Datum der Rückwirkung bleibt dabei erhalten.",
+          "quellen": [
+            "§ 4 Abs. 7 RBStV",
+            "Beitrag, Abschnitt digitale Unterschriften"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Nebenwohnungen und Sonderfälle – wie es funktioniert",
+          "status": "freigegeben",
+          "frage": "Ich habe eine Zweitwohnung am Arbeitsort. Zahle ich doppelt?",
+          "antwort": "Nein, seit dem Urteil des Bundesverfassungsgerichts von 2018 nicht mehr, sofern Sie den Beitrag für Ihre Hauptwohnung selbst zahlen. Melden Sie die Nebenwohnung mit dem Formular und dem Meldenachweis an, dann wird sie befreit.",
+          "quellen": [
+            "BVerfG 1 BvR 1675/16",
+            "§ 4a RBStV"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "rundfunkbeitrag",
+        "buergergeld",
+        "textform"
+      ]
+    }
+  },
+  {
+    "slug": "steuererklaerung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Steuererklärung für 2025 ist bis 31. Juli 2026 fällig, mit Steuerberater oder Lohnsteuerhilfeverein bis 28. Februar 2027; freiwillige Erklärungen gehen vier Jahre zurück, für 2022 also bis Ende 2026.",
+          "Pflicht ist sie bei Nebeneinkünften über 410 Euro, Lohnersatzleistungen wie Elterngeld oder Kurzarbeitergeld, Steuerklasse 3 und 5 oder 4 mit Faktor, mehreren Arbeitgebern und einem eingetragenen Freibetrag.",
+          "Wer zu spät abgibt, zahlt ab dem 15. Monat nach dem Steuerjahr zwingend Verspätungszuschlag: 0,25 Prozent der Steuer je Monat, mindestens 25 Euro.",
+          "2026 gelten 12.348 Euro Grundfreibetrag, 259 Euro Kindergeld, 9.756 Euro Kinderfreibetrag, 960 Euro Ehrenamts- und 3.300 Euro Übungsleiterpauschale, dazu die Aktivrente.",
+          "Freiwillige Abgabe bringt im Schnitt 1.172 Euro zurück; das Finanzamt bearbeitet ab Mitte März, wenn die Arbeitgeberdaten da sind."
+        ],
+        "quellen": [
+          "§ 149 AO (Fristen)",
+          "§ 152 AO (Verspätungszuschlag)",
+          "§ 46 EStG (Pflichtveranlagung)",
+          "Beitrag Steuererklärung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Fristen für die Steuererklärung 2026: Wann müssen Sie abgeben?",
+          "status": "freigegeben",
+          "frage": "Ich schaffe den 31. Juli nicht. Kann ich Verlängerung beantragen?",
+          "antwort": "Ja, mit einem formlosen Antrag beim Finanzamt vor Fristablauf, mit Begründung wie Krankheit oder fehlenden Unterlagen; oft werden ein bis zwei Monate gewährt. Alternativ beauftragen Sie einen Steuerberater oder Lohnsteuerhilfeverein, dann gilt automatisch der 28. Februar 2027.",
+          "quellen": [
+            "§ 109 AO (Fristverlängerung)",
+            "§ 149 Abs. 3 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer ist zur Abgabe einer Steuererklärung verpflichtet?",
+          "status": "freigegeben",
+          "frage": "Ich hatte 2025 vier Monate Elterngeld. Muss ich deshalb abgeben?",
+          "antwort": "Ja. Lohnersatzleistungen über 410 Euro im Jahr lösen die Pflichtveranlagung aus, weil das Elterngeld über den Progressionsvorbehalt den Steuersatz erhöht. Rechnen Sie mit einer Nachzahlung, wenn Ihr Partner gut verdient hat.",
+          "quellen": [
+            "§ 46 Abs. 2 Nr. 1 EStG",
+            "§ 32b EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was passiert bei verspäteter Abgabe der Steuererklärung?",
+          "status": "freigegeben",
+          "frage": "Was kostet mich ein halbes Jahr Verspätung?",
+          "antwort": "Mindestens 150 Euro: 25 Euro je angefangenen Monat, oder 0,25 Prozent der festgesetzten Steuer, wenn das mehr ist. Bis 14 Monate nach dem Steuerjahr kann das Finanzamt bei guter Entschuldigung noch absehen, danach muss es den Zuschlag festsetzen. Bei einer Erstattung bleibt der Mindestbetrag.",
+          "quellen": [
+            "§ 152 Abs. 2 und 5 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Freiwillige Steuererklärung: Geld zurück ohne Zwang",
+          "status": "freigegeben",
+          "frage": "Lohnt sich eine freiwillige Erklärung für die Jahre 2022 bis 2024 noch?",
+          "antwort": "Sehr wahrscheinlich, wenn Sie Fahrtkosten, Fortbildungen, Handwerkerrechnungen oder Krankheitskosten hatten; im Schnitt gibt es 1.172 Euro zurück. Für 2022 läuft die Frist am 31. Dezember 2026 ab, für 2023 Ende 2027. Ein Verspätungszuschlag droht bei freiwilliger Abgabe nie.",
+          "quellen": [
+            "§ 46 Abs. 2 Nr. 8 EStG",
+            "§ 169 AO (Festsetzungsfrist)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "abgabefrist",
+        "verspaetungszuschlag",
+        "grundfreibetrag",
+        "elster"
+      ]
+    }
+  },
+  {
+    "slug": "steuerbescheid",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Steuerbescheid gilt vier Tage nach Aufgabe zur Post oder nach Bereitstellung in ELSTER als bekannt gegeben, seit 2025 statt drei; ab dann läuft die Einspruchsfrist von einem Monat, ob Sie ihn gelesen haben oder nicht.",
+          "2026 bekommt den digitalen Bescheid nur, wer zustimmt; ab 2027 kommt er automatisch in ELSTER, wenn Sie elektronisch abgegeben haben, außer Sie beantragen dauerhaft Papier.",
+          "Prüfen Sie drei Teile: persönliche Daten, jede Zahl gegen Ihre Erklärung, und die Erläuterungen, in denen das Finanzamt Streichungen begründet.",
+          "Bei einem einzelnen Fehler ist die schlichte Änderung der sichere Weg, formlos und ohne Risiko, dass der Bescheid schlechter wird; der Einspruch rollt alles neu auf, erlaubt aber die Aussetzung der Zahlung.",
+          "Taktik: schlichte Änderung beantragen, kurz vor Fristende vorsorglich Einspruch einlegen und ihn zurücknehmen, wenn die Änderung kommt."
+        ],
+        "quellen": [
+          "§ 122 Abs. 2 AO (Bekanntgabefiktion)",
+          "§ 122a AO (elektronische Bekanntgabe)",
+          "§§ 172, 355, 367 AO",
+          "Beitrag Steuerbescheid"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Ab 2027: Digitale Zustellung als neuer Standard",
+          "status": "freigegeben",
+          "frage": "Ich gebe über ELSTER ab, will den Bescheid aber auf Papier. Geht das ab 2027 noch?",
+          "antwort": "Ja, wenn Sie in ELSTER unter „Elektronische Bekanntgabe verwalten“ die dauerhafte postalische Bekanntgabe beantragen, formlos und ohne Begründung. Ohne diesen Antrag landet der Bescheid ab 2027 nur noch im ELSTER-Postfach.",
+          "quellen": [
+            "§ 122a AO in der Fassung ab 1. Januar 2027",
+            "Beitrag, Abschnitt Widerspruchsrecht"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Neue Fristen: Die Vier-Tages-Regel und ihre Folgen",
+          "status": "freigegeben",
+          "frage": "Der Bescheid ist vom 10. Juni. Bis wann kann ich Einspruch einlegen?",
+          "antwort": "Bis zum 14. Juli. Der Bescheid gilt am 14. Juni als bekannt gegeben, vier Tage nach Aufgabe zur Post, die Monatsfrist endet mit dem 14. Juli. Fällt der Tag auf ein Wochenende, verschiebt sich das Ende auf den nächsten Werktag. Bei ELSTER zählt die Bereitstellung, nicht Ihr Abruf.",
+          "quellen": [
+            "§ 122 Abs. 2 Nr. 1 AO",
+            "§ 355 AO, § 108 Abs. 3 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Steuerbescheid systematisch prüfen: Ihr Fahrplan",
+          "status": "freigegeben",
+          "frage": "Woran erkenne ich, ob das Finanzamt etwas gestrichen hat?",
+          "antwort": "Am Abschnitt „Erläuterungen“ am Ende des Bescheids: Dort steht, welche Werbungskosten oder Sonderausgaben nicht anerkannt wurden und warum. Vergleichen Sie zusätzlich die Summe der Werbungskosten mit Ihrer Erklärung; steht dort 1.230 Euro, wurde nur die Pauschale angesetzt.",
+          "quellen": [
+            "§ 121 AO (Begründung)",
+            "Beitrag, Abschnitt Systematisch prüfen"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Fehler entdeckt: Einspruch oder schlichte Änderung?",
+          "status": "freigegeben",
+          "frage": "Ich habe noch eine Handwerkerrechnung gefunden. Einspruch oder schlichte Änderung?",
+          "antwort": "Schlichte Änderung: formlos per ELSTER, Brief oder Telefon innerhalb der Monatsfrist, nur dieser Punkt wird geprüft, der Rest bleibt unangetastet. Der Einspruch wäre nötig, wenn Sie über einen Rechtsstandpunkt streiten oder die Zahlung aussetzen wollen.",
+          "quellen": [
+            "§ 172 Abs. 1 Nr. 2a AO",
+            "§ 367 Abs. 2 AO (Verböserung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "bekanntgabefiktion",
+        "einspruch",
+        "schlichte-aenderung",
+        "elster"
+      ]
+    }
+  },
+  {
+    "slug": "steuerklassen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Steuerklasse steuert nur die monatliche Lohnsteuer, die Jahressteuer ist am Ende dieselbe; sechs Klassen gibt es, von 1 für Ledige bis 6 für den Zweitjob ohne Freibeträge.",
+          "Alleinerziehende bekommen Klasse 2 mit 4.260 Euro Entlastungsbetrag, plus 240 Euro je weiteres Kind, aber nur auf Antrag und nur ohne weitere Erwachsene im Haushalt.",
+          "Ehepaare wählen 4/4 bei ähnlichen Einkommen, 3/5 bei großem Unterschied oder 4 mit Faktor, das den Splittingvorteil schon monatlich verteilt.",
+          "Der Wechsel läuft nur noch digital über ELSTER, mehrmals im Jahr möglich, für das laufende Jahr bis 30. November.",
+          "Vor Elterngeld oder Arbeitslosengeld lohnt der Wechsel des künftigen Beziehers in Klasse 3, mindestens sieben Monate vor der Geburt, weil beide Leistungen vom Netto abhängen. Die Abschaffung von 3 und 5 ist vom Tisch."
+        ],
+        "quellen": [
+          "§§ 38b, 39e, 39f EStG",
+          "§ 24b EStG (Entlastungsbetrag)",
+          "§ 2c BEEG (Steuerklasse und Elterngeld)",
+          "Beitrag Steuerklassen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Steuerklasse 2: Wie profitieren Alleinerziehende?",
+          "status": "freigegeben",
+          "frage": "Mein neuer Freund ist bei mir eingezogen. Behalte ich Steuerklasse 2?",
+          "antwort": "Nein. Sobald ein anderer Erwachsener im Haushalt lebt, für den Sie kein Kindergeld bekommen, entfällt der Entlastungsbetrag und damit Klasse 2, auch ohne Heirat. Melden Sie das dem Finanzamt, sonst droht eine Nachzahlung.",
+          "quellen": [
+            "§ 24b Abs. 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie funktioniert die Steuerklassenwahl für Ehepaare?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 5.000 Euro brutto, meine Frau 2.000. Welche Kombination passt?",
+          "antwort": "Für das höchste Monatsnetto 3 für Sie und 5 für Ihre Frau, mit Pflicht zur Steuererklärung und oft einer Nachzahlung. Fairer und ohne Überraschung ist 4 mit Faktor: Das Finanzamt verteilt den Splittingvorteil schon monatlich nach Ihren Gehältern. Die Jahressteuer ist in allen Fällen gleich.",
+          "quellen": [
+            "§ 39f EStG",
+            "Beitrag, Abschnitt Steuerklassenwahl"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wann und wie können Sie die Steuerklasse wechseln?",
+          "status": "freigegeben",
+          "frage": "Wie schnell wirkt ein Steuerklassenwechsel?",
+          "antwort": "Nach drei bis sieben Werktagen Bearbeitung ab dem Folgemonat; der Arbeitgeber holt die neue Klasse automatisch aus den elektronischen Lohnsteuerabzugsmerkmalen. Der Antrag geht nur noch über ELSTER, Papier nimmt das Finanzamt nicht mehr an.",
+          "quellen": [
+            "§ 39 Abs. 6 EStG",
+            "§ 39e EStG (ELStAM)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Welche Auswirkungen haben Steuerklassen auf Ihr Nettoeinkommen?",
+          "status": "freigegeben",
+          "frage": "Wir erwarten ein Kind. Sollte meine Frau die Steuerklasse wechseln?",
+          "antwort": "Ja, wenn sie das Elterngeld beziehen wird: Sie sollte mindestens sieben Monate vor dem Mutterschutz in Klasse 3 wechseln, denn das Elterngeld richtet sich nach dem Netto der zwölf Monate vor der Geburt. Die Steuerklasse zählt, die im Bemessungszeitraum überwiegend galt. Ihr Netto sinkt vorübergehend, die Jahressteuer bleibt gleich.",
+          "quellen": [
+            "§ 2c Abs. 3 BEEG",
+            "Beitrag, Abschnitt Auswirkungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "steuerklasse",
+        "faktorverfahren",
+        "entlastungsbetrag-alleinerziehende",
+        "splitting"
+      ]
+    }
+  },
+  {
+    "slug": "steuerfreibetrag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Freibeträge senken das zu versteuernde Einkommen, bevor der Tarif greift; der wichtigste ist der Grundfreibetrag mit 12.348 Euro für 2026, das Doppelte für Ehepaare.",
+          "Familien bekommen 259 Euro Kindergeld oder den Kinderfreibetrag von 9.756 Euro, was das Finanzamt automatisch vergleicht; Alleinerziehende zusätzlich 4.260 Euro Entlastungsbetrag.",
+          "Arbeitnehmer haben 1.230 Euro Pauschbetrag, 38 Cent Entfernungspauschale ab dem ersten Kilometer und 6 Euro je Homeoffice-Tag bis 1.260 Euro.",
+          "Neu ist die Aktivrente: 2.000 Euro im Monat steuerfrei für sozialversicherungspflichtig Beschäftigte über der Regelaltersgrenze, automatisch über den Arbeitgeber.",
+          "Dazu 1.000 Euro Sparerpauschbetrag, 3.300 Euro Übungsleiter- und 960 Euro Ehrenamtspauschale sowie Behindertenpauschbeträge, die das Finanzamt ab 2026 automatisch kennt."
+        ],
+        "quellen": [
+          "§§ 3 Nr. 26 und 26a, 9, 9a, 20 Abs. 9, 24b, 32 Abs. 6, 32a, 33b EStG",
+          "§ 34 Abs. 2 EStG (Aktivrente)",
+          "Beitrag Steuerfreibeträge"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist ein Steuerfreibetrag und wie funktioniert er?",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen Freibetrag und Freigrenze?",
+          "antwort": "Beim Freibetrag bleibt der Betrag immer steuerfrei, nur der Rest wird besteuert. Bei einer Freigrenze wird alles steuerpflichtig, sobald Sie sie um einen Euro überschreiten, etwa bei privaten Veräußerungsgewinnen ab 1.000 Euro. Ein Pauschbetrag ersetzt den Einzelnachweis von Kosten.",
+          "quellen": [
+            "§ 23 Abs. 3 EStG (Freigrenze)",
+            "§ 9a EStG (Pauschbetrag)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Grundfreibetrag 2026: Höhere Steuerfreiheit für alle",
+          "status": "freigegeben",
+          "frage": "Was bringt mir die Erhöhung des Grundfreibetrags konkret?",
+          "antwort": "Wenig, aber jedem: Bei 30.000 Euro brutto etwa 70 Euro im Jahr, bei 45.000 Euro rund 105 Euro, also 6 bis 9 Euro mehr Netto im Monat. Wichtiger ist die Wirkung gegen die kalte Progression, damit reine Inflationsausgleiche nicht in einen höheren Satz führen.",
+          "quellen": [
+            "Beitrag, Tabelle Steuerersparnis 2026",
+            "§ 32a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Arbeitnehmerfreibeträge bringen 2026 Entlastung?",
+          "status": "freigegeben",
+          "frage": "Ab wie viel Kilometern Arbeitsweg lohnt sich die Steuererklärung?",
+          "antwort": "Ab etwa 15 Kilometern: 15 Kilometer mal 38 Cent mal 220 Arbeitstage sind 1.254 Euro und damit mehr als der Pauschbetrag von 1.230 Euro. Alles darüber, dazu Arbeitsmittel und Homeoffice-Tage, bringt Geld zurück.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 EStG",
+            "Beitrag, Abschnitt Arbeitnehmerfreibeträge"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Aktivrente 2026: Bis zu 2.000 Euro steuerfrei im Alter",
+          "status": "freigegeben",
+          "frage": "Ich bin 68 und verdiene in einem Monat 1.500, im nächsten 2.500 Euro. Wie wirkt die Aktivrente?",
+          "antwort": "Monat für Monat: Im ersten bleiben 1.500 Euro steuerfrei, die ungenutzten 500 Euro verfallen; im zweiten sind 2.000 Euro frei und 500 Euro steuerpflichtig. Der Arbeitgeber berücksichtigt das beim Lohnsteuerabzug automatisch, Sozialbeiträge fallen auf alles an.",
+          "quellen": [
+            "§ 34 Abs. 2 EStG (Aktivrentengesetz)",
+            "Beitrag, Abschnitt Aktivrente"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grundfreibetrag",
+        "kalte-progression",
+        "pauschbetrag",
+        "aktivrente"
+      ]
+    }
+  }
+]

@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W2 · Der Faden im Zeitungsstil: Register oben, Kapitel unten, Eingabe fest</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Kein Chat-Look: Papier, dünne Linien, Serif-Titel. Ältere Kapitel falten sich zu einer Zeile. Das Menü lebt oben, nicht im Faden.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="40" y="120" width="1520" height="810" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="120" width="1520" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="140" width="1520" height="14" fill="#E5E7EB"/>
+<circle cx="56" cy="137" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="72" cy="137" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="88" cy="137" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="110" y="128" width="1436" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="120" y="141" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">www.finanzleser.de/versicherungen/haftpflicht/schluesselverlust/</text>
+<rect x="41" y="154" width="1518" height="96" rx="0" fill="#F7F6F1" stroke="#F7F6F1" stroke-width="1.5"/>
+<text x="65" y="194" font-size="26" fill="#1F2937" font-weight="900" text-anchor="start" font-family="Merriweather, Georgia, serif">finanzleser</text>
+<text x="241" y="194" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Donnerstag, 3. September 2026 · Ausgabe 143 des Fadens</text>
+<rect x="1309" y="170" width="110" height="30" rx="15" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="1364.0" y="189" font-size="12" fill="white" font-weight="700" text-anchor="middle">Wochenbrief</text>
+<rect x="1429" y="170" width="90" height="30" rx="15" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="1474.0" y="189" font-size="12" fill="#1F2937" font-weight="600" text-anchor="middle">Plus</text>
+<line x1="41" y1="212" x2="1559" y2="212" stroke="#1F2937" stroke-width="2"/>
+<line x1="41" y1="216" x2="1559" y2="216" stroke="#1F2937" stroke-width="0.8"/>
+<text x="101.0" y="239" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Finanzen</text>
+<rect x="153" y="222" width="132" height="24" rx="0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1"/>
+<text x="219.0" y="239" font-size="13" fill="#1F2937" font-weight="700" text-anchor="middle">Versicherungen</text>
+<text x="333.0" y="239" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Steuern</text>
+<text x="411.0" y="239" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Recht</text>
+<text x="505.0" y="239" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Finanztools</text>
+<text x="611.0" y="239" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Anbieter</text>
+<text x="1535" y="239" font-size="11" fill="#6B7280" font-weight="400" text-anchor="end">Sie lesen: Versicherungen › Haftpflicht</text>
+<line x1="41" y1="250" x2="1559" y2="250" stroke="#D9D6CC" stroke-width="1"/>
+<text x="65" y="272" font-size="10" fill="#6B7280" font-weight="700" text-anchor="start">HEUTE IM FADEN</text>
+<text x="65" y="300" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">○ 1 · Unterhaltsrechner 2026</text>
+<text x="65" y="326" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">○ 2 · Hundekrankenversicherung</text>
+<text x="65" y="352" font-size="11" fill="#1F2937" font-weight="700" text-anchor="start">● 3 · Schlüsselverlust und Haftpflicht</text>
+<line x1="65" y1="382" x2="277" y2="382" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="65" y="408" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Aktenkoffer</text>
+<text x="277" y="408" font-size="12" fill="#6B7280" font-weight="400" text-anchor="end">3</text>
+<text x="65" y="432" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Wächter</text>
+<text x="277" y="432" font-size="12" fill="#6B7280" font-weight="400" text-anchor="end">2 aktiv</text>
+<text x="65" y="456" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start">Punkte</text>
+<text x="277" y="456" font-size="12" fill="#6B7280" font-weight="400" text-anchor="end">340</text>
+<line x1="65" y1="488" x2="277" y2="488" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="65" y="514" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">LEOS WOCHENBRIEF</text>
+<text x="65" y="534" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Ausgabe 143 · Do., 10. September</text>
+<rect x="65" y="544" width="212" height="26" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<text x="75" y="561" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">ihre@adresse.de · Eintragen</text>
+<text x="65" y="600" font-size="10" fill="#D3005E" font-weight="700" text-anchor="start">FINANZFRAGE DES TAGES</text>
+<text x="65" y="620" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">🔥 Serie 6 Tage · Sammelalbum 4/12</text>
+<text x="65" y="870" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Was Suchmaschinen sehen</text>
+<line x1="301" y1="252" x2="301" y2="929" stroke="#D9D6CC" stroke-width="1.5"/>
+<line x1="340" y1="262" x2="1060" y2="262" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="340" y="282" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">KAPITEL 1 · FINANZTOOLS › RECHNER · 14:02</text>
+<text x="340" y="304" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026 · 1.096 € / Monat</text>
+<text x="1060" y="304" font-size="11" fill="#6B7280" font-weight="400" text-anchor="end">aufklappen ▾</text>
+<line x1="340" y1="320" x2="1060" y2="320" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="340" y="340" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">KAPITEL 2 · VERSICHERUNGEN › TIER · 14:18</text>
+<text x="340" y="362" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Hundekrankenversicherung: OP-Schutz oder Vollschutz?</text>
+<text x="1060" y="362" font-size="11" fill="#6B7280" font-weight="400" text-anchor="end">aufklappen ▾</text>
+<line x1="340" y1="378" x2="1060" y2="378" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="340" y="400" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">KAPITEL 3 · VERSICHERUNGEN › HAFTPFLICHT · 14:32</text>
+<rect x="340" y="412" width="720" height="40" rx="0" fill="#F7F6F1" stroke="#F7F6F1" stroke-width="1.5"/>
+<text x="352" y="428" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">IHRE FRAGE</text>
+<text x="352" y="445" font-size="13" fill="#1F2937" font-weight="400" text-anchor="start" font-family="Merriweather, Georgia, serif" font-style="italic">Zahlt meine Haftpflicht, wenn ich den Schlüssel der Mietwohnung verliere?</text>
+<circle cx="354" cy="478" r="12" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="350.64" cy="475.984" r="1.92" fill="white"/>
+<circle cx="357.36" cy="475.984" r="1.92" fill="white"/>
+<path d="M349.2 481.0 Q354 485.2 358.8 481.0" stroke="white" stroke-width="1.5" fill="none"/>
+<text x="374" y="483" font-size="9.5" fill="#45A117" font-weight="700" text-anchor="start">LEO</text>
+<text x="340" y="506" font-size="12.5" fill="#1F2937" font-weight="400" text-anchor="start">Ja, wenn „Schlüsselverlust“ mitversichert ist. Das gilt bei 9 von 10 Tarifen unserer Partner, meist bis 30.000 €.</text>
+<text x="340" y="525" font-size="12.5" fill="#1F2937" font-weight="400" text-anchor="start">Quelle: AVB Ammerländer Privathaftpflicht, § 4 Abs. 2, Seite 12. Der Ratgeber dazu, ganz ausgerollt:</text>
+<line x1="340" y1="552" x2="1060" y2="552" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="340" y="572" font-size="9.5" fill="#45A117" font-weight="700" text-anchor="start">RATGEBER · VERSICHERUNGEN › HAFTPFLICHT · 4 MIN.</text>
+<text x="340" y="602" font-size="24" fill="#1F2937" font-weight="900" text-anchor="start" font-family="Merriweather, Georgia, serif">Schlüsselverlust: Wann die Haftpflicht zahlt</text>
+<text x="340" y="624" font-size="12.5" fill="#6B7280" font-weight="400" text-anchor="start" font-style="italic">Ein verlorener fremder Schlüssel kann eine ganze Schließanlage kosten. Was die Bedingungen dazu sagen.</text>
+<rect x="340" y="638" width="220" height="90" rx="0" fill="#E5E7EB" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="576" y="644" width="484" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="576" y="658" width="484" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="576" y="672" width="484" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="576" y="686" width="484" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="576" y="700" width="290" height="5" rx="3" fill="#E5E7EB"/>
+<text x="576" y="724" font-size="10.5" fill="#6B7280" font-weight="400" text-anchor="start">Inhalt: Was mitversichert ist · Berufliche Schlüssel · Sofort tun · Häufige Fragen</text>
+<text x="340" y="760" font-size="16" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Was „Schlüsselverlust“ in den Bedingungen bedeutet</text>
+<rect x="340" y="772" width="720" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="340" y="786" width="720" height="5" rx="3" fill="#E5E7EB"/>
+<rect x="340" y="800" width="432" height="5" rx="3" fill="#E5E7EB"/>
+<text x="340" y="826" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Leo: Und bei grober Fahrlässigkeit?  ·  Abschnitt teilen</text>
+<text x="340" y="848" font-size="10.5" fill="#6B7280" font-weight="400" text-anchor="start">… Abschnitt 2 mit Statistik-Kasten · Abschnitt 3 mit Checkliste · Häufige Fragen · Fazit · Wochenbrief · Dazu passt</text>
+<rect x="340" y="856" width="720" height="46" rx="2" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="356" y="884" font-size="13" fill="#6B7280" font-weight="400" text-anchor="start">Fragen Sie Leo … oder springen Sie: „Unterhalt“</text>
+<text x="1044" y="884" font-size="14" fill="#1F2937" font-weight="400" text-anchor="end">🎤   ➤</text>
+<text x="340" y="916" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Was kostet das?   ·   Checkliste Schlüsselverlust   ·   Vorlesen</text>
+<line x1="1080" y1="252" x2="1080" y2="929" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="1100" y="272" font-size="10" fill="#6B7280" font-weight="700" text-anchor="start">LEO SCHLÄGT VOR</text>
+<text x="1100" y="300" font-size="9" fill="#45A117" font-weight="700" text-anchor="start">CHECKLISTE</text>
+<text x="1100" y="318" font-size="12.5" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Nach dem Schlüsselverlust</text>
+<line x1="1100" y1="328" x2="1530" y2="328" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="1100" y="350" font-size="9" fill="#45A117" font-weight="700" text-anchor="start">RECHNER</text>
+<text x="1100" y="368" font-size="12.5" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Selbstbeteiligung lohnt?</text>
+<line x1="1100" y1="378" x2="1530" y2="378" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="1100" y="400" font-size="9" fill="#D3005E" font-weight="700" text-anchor="start">SPIEL</text>
+<text x="1100" y="418" font-size="12.5" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Mythos oder Fakt: Nachschlüssel</text>
+<line x1="1100" y1="428" x2="1530" y2="428" stroke="#D9D6CC" stroke-width="1.5"/>
+<rect x="1100" y="472" width="430" height="124.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="490.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Was den Zeitungsstil ausmacht:</text>
+<text x="1110" y="507.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Papier statt Blasen: Leo und Leserfrage als Absätze mit Kicker</text>
+<text x="1110" y="524.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· dünne Linien statt Schatten, keine gerundeten Kästen</text>
+<text x="1110" y="542.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Serif-Titel in drei Größen, Kicker in Kapitälchen</text>
+<text x="1110" y="559.6" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Farbe nur für Aktionen (Grün) und Spiele (Magenta)</text>
+<text x="1110" y="577.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· eine Textspalte von 64 Zeichen, Kästen für Werkzeuge</text>
+<rect x="1100" y="632" width="430" height="106.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="650.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Kapitel statt Chat-Verlauf:</text>
+<text x="1110" y="667.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· jede Frage oder Auswahl eröffnet ein Kapitel</text>
+<text x="1110" y="684.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· beim nächsten Kapitel faltet sich das vorige zur Kopfzeile</text>
+<text x="1110" y="702.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· „aufklappen“ holt es zurück; links die Kapitelliste</text>
+<text x="1110" y="719.6" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· das Menü erscheint nie im Faden, nur sein Ergebnis</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Leo / Aktion</text>
+<rect x="174" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="194" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Spiel</text>
+<rect x="259" y="958" width="14" height="14" rx="3" fill="#D9D6CC" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="279" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Linien statt Kästen</text>
+</svg>

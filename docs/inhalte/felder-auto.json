@@ -1,0 +1,7692 @@
+[
+ {
+  "slug": "photovoltaik-foerderung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Welche Säulen der Photovoltaik-Förderung gibt es?",
+     "typ": "rechner",
+     "slug": "pv-foerderung",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Einspeisevergütung 2026: Wie viel verdienen Sie mit Solarstrom?",
+     "typ": "vergleich",
+     "slug": "photovoltaik-versicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Lohnt sich eine Photovoltaikanlage 2026 noch?",
+     "typ": "checkliste",
+     "slug": "photovoltaik-foerderung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "strompreise"
+    },
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "risikolebensversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kredit"
+   ]
+  }
+ },
+ {
+  "slug": "strompreise",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie entwickelten sich die Strompreise seit der Energiekrise?",
+     "typ": "vergleich",
+     "slug": "strompreisvergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Lohnt sich ein dynamischer Stromtarif?",
+     "typ": "checkliste",
+     "slug": "strompreise",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "gaspreise"
+    },
+    {
+     "typ": "post",
+     "slug": "photovoltaik-foerderung"
+    },
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "buergergeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Bürgergeld und was ändert sich 2026?",
+     "typ": "rechner",
+     "slug": "buergergeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Bürgergeld oder Wohngeld mit Kinderzuschlag?",
+     "typ": "checkliste",
+     "slug": "buergergeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "kuendigung"
+    }
+   ],
+   "waechter_regeln": [
+    "buergergeld.regelbedarfe_2026",
+    "buergergeld.freibetraege"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "zusatzbeitrag-krankenkasse",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wechsel der Krankenkasse: Sparpotenzial und Prozess",
+     "typ": "checkliste",
+     "slug": "zusatzbeitrag-krankenkasse",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wechsel der Krankenkasse: Sparpotenzial und Prozess",
+     "typ": "dokumente",
+     "slug": "krankenkassenliste",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "krankenversicherungspflicht"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "zinsbindungsfrist",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Aktuelle Bauzinsen nach Zinsbindungsdauer 2026",
+     "typ": "vergleich",
+     "slug": "baufinanzierung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Praktische Tipps zur optimalen Zinsbindung 2026",
+     "typ": "checkliste",
+     "slug": "zinsbindungsfrist",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    },
+    {
+     "typ": "post",
+     "slug": "kfw-foerderung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "baufinanzierung",
+    "kredit",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "zahnzusatzversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Kosten für eine Zahnzusatzversicherung?",
+     "typ": "vergleich",
+     "slug": "zahnzusatzversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Auswirkungen der GKV-Reform 2026 auf die Zahnzusatzversicherung",
+     "typ": "checkliste",
+     "slug": "zahnzusatzversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    },
+    {
+     "typ": "post",
+     "slug": "pkv-beitrag"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "wartezeit",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "zinseszinseffekt",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist der Zinseszinseffekt?",
+     "typ": "rechner",
+     "slug": "zinseszins",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Warum ist die Anlagedauer beim Zinseszinseffekt so entscheidend?",
+     "typ": "checkliste",
+     "slug": "zinseszinseffekt",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "einlagensicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "direktbank-vs-filialbank"
+    },
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "wohngeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer hat Anspruch auf Wohngeld 2026?",
+     "typ": "rechner",
+     "slug": "wohngeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wohngeld beantragen: Schritt für Schritt",
+     "typ": "checkliste",
+     "slug": "wohngeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rundfunkbeitrag-pdf"
+    },
+    {
+     "typ": "post",
+     "slug": "wohnungskuendigung"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    }
+   ],
+   "waechter_regeln": [
+    "wohngeld.klima_faktor",
+    "wohngeld.mindest_wohngeld",
+    "wohngeld.zuschlag_weiteres_mitglied_ab_13",
+    "wohngeld.hoechstbetraege_anlage1"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "wohnungskuendigung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Schriftform und Zugang: Warum E-Mail nicht ausreicht",
+     "typ": "vergleich",
+     "slug": "mietkaution-rechner",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Reaktion auf Vermieterkündigungen und Härteeinwände",
+     "typ": "checkliste",
+     "slug": "wohnungskuendigung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pfaendung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngeld"
+    },
+    {
+     "typ": "post",
+     "slug": "rundfunkbeitrag-pdf"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "wohnmobil-versicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie entwickeln sich die Kosten für Wohnmobil-Versicherungen 2026?",
+     "typ": "vergleich",
+     "slug": "kfz-versicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wann sollten Sie Ihre Wohnmobil-Versicherung wechseln?",
+     "typ": "checkliste",
+     "slug": "wohnmobil-versicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "private-haftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "wohngebaeudeversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Schäden werden durch die Wohngebäudeversicherung abgedeckt?",
+     "typ": "vergleich",
+     "slug": "gebaeudeversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Testsieger und Anbietervergleich 2026",
+     "typ": "checkliste",
+     "slug": "wohngebaeudeversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Testsieger und Anbietervergleich 2026",
+     "typ": "dokumente",
+     "slug": "gdv-hausrat-wohngeba-udeversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "private-haftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "versicherungssumme",
+    "elementarschaden"
+   ]
+  }
+ },
+ {
+  "slug": "witwenrente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie hoch ist die Witwenrente 2026?",
+     "typ": "rechner",
+     "slug": "witwenrente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie beantrage ich die Witwenrente?",
+     "typ": "checkliste",
+     "slug": "witwenrente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie beantrage ich die Witwenrente?",
+     "typ": "dokumente",
+     "slug": "hinterbliebenenrente",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    },
+    {
+     "typ": "post",
+     "slug": "hinzuverdienst-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    }
+   ],
+   "waechter_regeln": [
+    "witwenrente.rentenwert_west",
+    "witwenrente.rentenwert_ost",
+    "witwenrente.grosse_wr_faktor",
+    "witwenrente.kleine_wr_faktor"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "wertpapierdepot",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Depot-Anbieter im Überblick",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Sicherheit und Zukunftstrends",
+     "typ": "checkliste",
+     "slug": "wertpapierdepot",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    },
+    {
+     "typ": "post",
+     "slug": "kryptowaehrung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "wechsel-private-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Kosten beim Wechsel: Was ändert sich 2026?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Checkliste: Worauf Sie beim Wechsel achten sollten",
+     "typ": "checkliste",
+     "slug": "wechsel-private-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Checkliste: Worauf Sie beim Wechsel achten sollten",
+     "typ": "dokumente",
+     "slug": "private-pflegezusatzversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    },
+    {
+     "typ": "post",
+     "slug": "pkv-beitrag"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "wahltarife-gesetzliche-krankenkasse",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Für wen welche Wahltarife sinnvoll sind",
+     "typ": "checkliste",
+     "slug": "wahltarife-gesetzliche-krankenkasse",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Für wen welche Wahltarife sinnvoll sind",
+     "typ": "dokumente",
+     "slug": "krankenkassenliste",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "krankenversicherungspflicht"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "selbstbehalt",
+    "beitrag",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "werbungskosten",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie berechnen Sie Ihre Steuerersparnis?",
+     "typ": "checkliste",
+     "slug": "werbungskosten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreibetrag"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "entfernungspauschale",
+    "homeoffice-pauschale"
+   ]
+  }
+ },
+ {
+  "slug": "vorsorgevollmacht",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Häufige Fehler vermeiden: Vollmacht wirksam gestalten",
+     "typ": "checkliste",
+     "slug": "vorsorgevollmacht",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Häufige Fehler vermeiden: Vollmacht wirksam gestalten",
+     "typ": "dokumente",
+     "slug": "vorsorgevollmacht",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    },
+    {
+     "typ": "post",
+     "slug": "patientenverfuegung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "vermoegenswirksame-leistungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Laufzeit und Sperrfristen",
+     "typ": "checkliste",
+     "slug": "vermoegenswirksame-leistungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "hinzuverdienst-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "vorsorgeaufwendungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Kranken- und Pflegeversicherung: Unbegrenzte Abzugsfähigkeit mit Nuancen",
+     "typ": "checkliste",
+     "slug": "vorsorgeaufwendungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Kranken- und Pflegeversicherung: Unbegrenzte Abzugsfähigkeit mit Nuancen",
+     "typ": "dokumente",
+     "slug": "anlage-haushaltsnahe-aufwendungen-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "geringfuegige-beschaeftigung"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    },
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "verdienstgrenzen-familienversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Mindestlohnerhöhung 2026: Paradoxe Folgen",
+     "typ": "checkliste",
+     "slug": "verdienstgrenzen-familienversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Mindestlohnerhöhung 2026: Paradoxe Folgen",
+     "typ": "dokumente",
+     "slug": "rentenversicherung-familien",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "krankenversicherungspflicht"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "unfallversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Unfälle sind versichert?",
+     "typ": "vergleich",
+     "slug": "unfallversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Top-Versicherer und Testsieger 2026 im Überblick",
+     "typ": "checkliste",
+     "slug": "unfallversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Top-Versicherer und Testsieger 2026 im Überblick",
+     "typ": "dokumente",
+     "slug": "gdv-unfallversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "reiseversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenarten"
+    },
+    {
+     "typ": "post",
+     "slug": "gesetzliche-unfallversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "bu",
+    "unfallversicherung",
+    "versicherungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "umsatzsteuervoranmeldung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer ist zur Umsatzsteuervoranmeldung 2026 verpflichtet?",
+     "typ": "rechner",
+     "slug": "mehrwertsteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was passiert bei verspäteter Abgabe oder Zahlung?",
+     "typ": "checkliste",
+     "slug": "umsatzsteuervoranmeldung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreibetrag"
+    }
+   ],
+   "waechter_regeln": [
+    "mehrwertsteuer.regelsteuersatz_prozent",
+    "mehrwertsteuer.ermaessigter_steuersatz_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "umsatzsteuererklaerung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer muss eine Umsatzsteuererklärung 2026 abgeben?",
+     "typ": "rechner",
+     "slug": "mehrwertsteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Besonderheiten für verschiedene Unternehmergruppen",
+     "typ": "checkliste",
+     "slug": "umsatzsteuererklaerung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Besonderheiten für verschiedene Unternehmergruppen",
+     "typ": "dokumente",
+     "slug": "steuererkla-rung-ratgeber-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreibetrag"
+    }
+   ],
+   "waechter_regeln": [
+    "mehrwertsteuer.regelsteuersatz_prozent",
+    "mehrwertsteuer.ermaessigter_steuersatz_prozent"
+   ],
+   "glossar_begriffe": [
+    "elster"
+   ]
+  }
+ },
+ {
+  "slug": "umzugskosten-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Besondere Regelungen und Ausnahmen",
+     "typ": "checkliste",
+     "slug": "umzugskosten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "sonderausgaben"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "umsatzsteuer-mehrwertsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was bedeutet Umsatzsteuer für Unternehmer?",
+     "typ": "rechner",
+     "slug": "mehrwertsteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Umsatzsteuervoranmeldung und praktische Abwicklung",
+     "typ": "checkliste",
+     "slug": "umsatzsteuer-und-mehrwertsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "solidaritaetszuschlag"
+    },
+    {
+     "typ": "post",
+     "slug": "kfz-steuer"
+    },
+    {
+     "typ": "post",
+     "slug": "einkommensteuer"
+    }
+   ],
+   "waechter_regeln": [
+    "mehrwertsteuer.regelsteuersatz_prozent",
+    "mehrwertsteuer.ermaessigter_steuersatz_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "uebergangsgeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Übergangsgeld?",
+     "typ": "rechner",
+     "slug": "uebergangsgeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Antragstellung und wichtige Hinweise",
+     "typ": "checkliste",
+     "slug": "uebergangsgeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sozialhilfe"
+    },
+    {
+     "typ": "post",
+     "slug": "geringfuegige-beschaeftigung"
+    },
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    }
+   ],
+   "waechter_regeln": [
+    "uebergangsgeld.satz_ohne_kind_prozent",
+    "uebergangsgeld.satz_mit_kind_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "testament",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Pflichtteilsrecht begrenzt Testierfreiheit",
+     "typ": "checkliste",
+     "slug": "testament",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "patientenverfuegung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "tierversicherungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Arten von Tierversicherungen gibt es?",
+     "typ": "vergleich",
+     "slug": "pferdekrankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Testsieger und aktuelle Bewertungen 2026",
+     "typ": "checkliste",
+     "slug": "tierversicherungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pferdeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "hundeversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "hundehaftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "haftpflicht"
+   ]
+  }
+ },
+ {
+  "slug": "steuertabelle",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Wie nutze ich die Steuertabelle praktisch?",
+     "typ": "checkliste",
+     "slug": "steuertabelle",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "sonderausgaben"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "splitting",
+    "grundfreibetrag",
+    "einkommensteuer"
+   ]
+  }
+ },
+ {
+  "slug": "steuern-fuer-selbststaendige",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Abgabefristen und Steuererklärung 2026",
+     "typ": "checkliste",
+     "slug": "steuern-fuer-selbstaendige",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Abgabefristen und Steuererklärung 2026",
+     "typ": "dokumente",
+     "slug": "selbstaendige-und-rente",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuerfreie-einnahmen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    },
+    {
+     "typ": "post",
+     "slug": "steuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "einkommensteuer"
+   ]
+  }
+ },
+ {
+  "slug": "steuerfreie-einnahmen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Strategische Kombination und praktische Tipps",
+     "typ": "checkliste",
+     "slug": "steuerfreie-einnahmen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    },
+    {
+     "typ": "post",
+     "slug": "steuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "rentenfreibetrag",
+    "grundfreibetrag"
+   ]
+  }
+ },
+ {
+  "slug": "steuerklassen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was sind Steuerklassen und warum gibt es sie?",
+     "typ": "rechner",
+     "slug": "steuerklassen",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was ändert sich 2026 bei den Steuerklassen?",
+     "typ": "checkliste",
+     "slug": "steuerklassen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuerberater-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "entlastungsbetrag-alleinerziehende"
+    },
+    {
+     "typ": "post",
+     "slug": "arbeitnehmer-sparzulage"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "nettoeinkommen"
+   ]
+  }
+ },
+ {
+  "slug": "steuerfreibetrag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Weitere wichtige Freibeträge und ihre Höhen 2026",
+     "typ": "checkliste",
+     "slug": "steuerfreibetrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Weitere wichtige Freibeträge und ihre Höhen 2026",
+     "typ": "dokumente",
+     "slug": "steuerfreibetrag-2026",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "grundfreibetrag",
+    "aktivrente"
+   ]
+  }
+ },
+ {
+  "slug": "steuererklaerung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Freiwillige Steuererklärung: Geld zurück ohne Zwang",
+     "typ": "checkliste",
+     "slug": "steuererklaerung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Freiwillige Steuererklärung: Geld zurück ohne Zwang",
+     "typ": "dokumente",
+     "slug": "steuererkla-rung-ratgeber-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreie-einnahmen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "elster"
+   ]
+  }
+ },
+ {
+  "slug": "steuerberater-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Praxistipps: So vermeiden Sie häufige Fehler",
+     "typ": "checkliste",
+     "slug": "steuerberater",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuerklassen"
+    },
+    {
+     "typ": "post",
+     "slug": "entlastungsbetrag-alleinerziehende"
+    },
+    {
+     "typ": "post",
+     "slug": "arbeitnehmer-sparzulage"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "steuerbescheid",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Taktisches Vorgehen: Beide Wege nutzen",
+     "typ": "checkliste",
+     "slug": "steuerbescheid",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreie-einnahmen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "sterbegeldversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Bestattungskosten in Deutschland?",
+     "typ": "vergleich",
+     "slug": "sterbegeldversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Für wen sich die Sterbegeldversicherung lohnt",
+     "typ": "checkliste",
+     "slug": "sterbegeldversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "lebensversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "avb",
+    "versicherungssumme",
+    "wartezeit"
+   ]
+  }
+ },
+ {
+  "slug": "standardtarif",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wer kann in den Standardtarif PKV wechseln?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Ursachen der Beitragserhöhungen",
+     "typ": "checkliste",
+     "slug": "standardtarif-in-der-pkv",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pkv-beitrag"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "selbstbeteiligung",
+    "beitrag",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "spenden-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-10",
+     "nach_titel": "So planen Sie Ihre Spende richtig",
+     "typ": "checkliste",
+     "slug": "spenden",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "sonderausgaben"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "splittingtabelle",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Zusammenveranlagung vs. Einzelveranlagung: Die Günstigerprüfung",
+     "typ": "checkliste",
+     "slug": "splittingtabelle",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreie-einnahmen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "splitting",
+    "guenstigerpruefung",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "sozialversicherungsbeitraege",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Sachbezugswerte und Entlastungsmaßnahmen 2026",
+     "typ": "checkliste",
+     "slug": "sozialversicherungsbeitraege",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Sachbezugswerte und Entlastungsmaßnahmen 2026",
+     "typ": "dokumente",
+     "slug": "studenten-sozialversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sozialversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "beitragsbemessungsgrenzen"
+    },
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "sozialversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Demografischer Wandel: Kann das System bestehen?",
+     "typ": "checkliste",
+     "slug": "sozialversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Demografischer Wandel: Kann das System bestehen?",
+     "typ": "dokumente",
+     "slug": "studenten-sozialversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sozialversicherungsbeitraege"
+    },
+    {
+     "typ": "post",
+     "slug": "beitragsbemessungsgrenzen"
+    },
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "sozialhilfe",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Unterschiede zwischen Sozialhilfe-Leistungen",
+     "typ": "checkliste",
+     "slug": "sozialhilfe",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    },
+    {
+     "typ": "post",
+     "slug": "geringfuegige-beschaeftigung"
+    },
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "sonderausgaben",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Pauschbetrag und Nachweispflicht",
+     "typ": "checkliste",
+     "slug": "sonderausgaben",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Pauschbetrag und Nachweispflicht",
+     "typ": "dokumente",
+     "slug": "anlage-sonderausgaben-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "schenkungssteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Freibeträge 2026: Höhe nach Verwandtschaftsgrad",
+     "typ": "rechner",
+     "slug": "erbschaftsteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Schenkungssteuer vs. Erbschaftssteuer",
+     "typ": "checkliste",
+     "slug": "schenkungssteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [
+    "erbschaftsteuer.freibetraege",
+    "erbschaftsteuer.versorgungsfreibetrag",
+    "erbschaftsteuer.steuersaetze_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "solidaritaetszuschlag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Bundesverfassungsgericht bestätigt Verfassungsmäßigkeit",
+     "typ": "checkliste",
+     "slug": "solidaritaetszuschlag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umsatzsteuer-mehrwertsteuer"
+    },
+    {
+     "typ": "post",
+     "slug": "kfz-steuer"
+    },
+    {
+     "typ": "post",
+     "slug": "einkommensteuer"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "rundfunkbeitrag-pdf",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Nebenwohnungen und Sonderfälle – wie es funktioniert",
+     "typ": "checkliste",
+     "slug": "rundfunkbeitrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohngeld"
+    },
+    {
+     "typ": "post",
+     "slug": "wohnungskuendigung"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "ruerup-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie hoch ist der Rürup-Höchstbetrag 2026?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wer profitiert besonders von der Rürup-Rente?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Rürup-Rente vs. Alternativen: Was passt zu wem?",
+     "typ": "checkliste",
+     "slug": "ruerup-rente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "lebensversicherung"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "roboadvisor",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Emotionale Fehler vermeiden – der größte Vorteil",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Top-Anbieter 2026 im Überblick",
+     "typ": "checkliste",
+     "slug": "robo-advisor",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    },
+    {
+     "typ": "post",
+     "slug": "kryptowaehrung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "risikolebensversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Für wen ist eine Risikolebensversicherung sinnvoll?",
+     "typ": "vergleich",
+     "slug": "risikolebensversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Besondere Leistungen und Varianten",
+     "typ": "checkliste",
+     "slug": "risikolebensversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "fondsgebundene-lebensversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    },
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "versicherungssumme",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "riester-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Warum wird die Riester-Rente reformiert?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Riester-Zulagen 2026?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Wie unterscheidet sich das Altersvorsorgedepot von der Riester-Rente?",
+     "typ": "checkliste",
+     "slug": "riester-rente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "lebensversicherung"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "rentenversicherungsbeitrag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie hoch ist der Rentenversicherungsbeitrag 2026?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Steuerliche Aspekte",
+     "typ": "checkliste",
+     "slug": "rentenversicherungsbeitrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Steuerliche Aspekte",
+     "typ": "dokumente",
+     "slug": "rentenversicherung-familien",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenbeitrag"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "rentenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie hoch ist die durchschnittliche Altersrente in Deutschland?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Änderungen bringt das Jahr 2026 bei den Altersgrenzen?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Strategie: Welche Altersvorsorge passt zu wem?",
+     "typ": "checkliste",
+     "slug": "rentenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenbeitrag"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "renteninformation",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer bekommt die Renteninformation und was ist darin enthalten?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie funktioniert die Berechnung Ihrer Rentenpunkte?",
+     "typ": "vergleich",
+     "slug": "rentenlueckenrechner",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Prüfen Sie Ihre Daten – das ist Ihr nächster Schritt",
+     "typ": "checkliste",
+     "slug": "renteninformation",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenbeitrag"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "rentenbeitrag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist ein Rentenbeitrag?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Rentenbeitragssätze 2026?",
+     "typ": "vergleich",
+     "slug": "rentenlueckenrechner",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Auswirkungen der gestiegenen Beitragsbemessungsgrenze",
+     "typ": "checkliste",
+     "slug": "rentenbeitrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "rentenerhoehung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie kommt die Rentenerhöhung 2026 zustande?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Wie berechnen Sie Ihre individuelle Rentenerhöhung?",
+     "typ": "checkliste",
+     "slug": "rentenerhoehung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Wie berechnen Sie Ihre individuelle Rentenerhöhung?",
+     "typ": "dokumente",
+     "slug": "das-renten-abc",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "inflation"
+   ]
+  }
+ },
+ {
+  "slug": "reiseversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Auslandskrankenversicherung – der unverzichtbare Baustein",
+     "typ": "vergleich",
+     "slug": "reisekrankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Kosten für Reiseversicherungen 2026",
+     "typ": "checkliste",
+     "slug": "reiseversicherungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Kosten für Reiseversicherungen 2026",
+     "typ": "dokumente",
+     "slug": "gdv-reiseversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "kuenstlersozialkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "berufshaftpflichtversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "baustein",
+    "police"
+   ]
+  }
+ },
+ {
+  "slug": "reisekosten-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie trage ich Reisekosten in der Steuererklärung ein?",
+     "typ": "checkliste",
+     "slug": "reisekosten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "entfernungspauschale"
+   ]
+  }
+ },
+ {
+  "slug": "rentenarten",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Die wichtigsten Rentenarten im Überblick",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie funktioniert die Altersrente?",
+     "typ": "vergleich",
+     "slug": "rentenlueckenrechner",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was kostet eine höhere Rente?",
+     "typ": "checkliste",
+     "slug": "rentenarten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "erwerbsminderungsrente",
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "private-pflege-pflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Die Pflegelücke: Warum eine Zusatzversicherung nötig ist",
+     "typ": "checkliste",
+     "slug": "private-pflege-pflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Die Pflegelücke: Warum eine Zusatzversicherung nötig ist",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegezusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "rechtsschutzversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie funktioniert das Bausteinsystem?",
+     "typ": "vergleich",
+     "slug": "rechtsschutzversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie wähle ich den richtigen Tarif?",
+     "typ": "checkliste",
+     "slug": "rechtsschutzversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie wähle ich den richtigen Tarif?",
+     "typ": "dokumente",
+     "slug": "gdv-rechtsschutzversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "private-haftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rechtsschutz",
+    "wartezeit",
+    "baustein"
+   ]
+  }
+ },
+ {
+  "slug": "pkv-beitrag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie entwickelten sich die Beiträge langfristig?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Neue Regelungen 2026",
+     "typ": "checkliste",
+     "slug": "pkv-beitrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Neue Regelungen 2026",
+     "typ": "dokumente",
+     "slug": "beitragskalkulation-in-der-pkv",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "private-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was leistet die private Krankenversicherung?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Digitale Neuerungen 2026 in der PKV",
+     "typ": "checkliste",
+     "slug": "private-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Digitale Neuerungen 2026 in der PKV",
+     "typ": "dokumente",
+     "slug": "private-pflegezusatzversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pflichtversicherung-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer ist automatisch rentenversichert – und wer nicht?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was die Rente leistet",
+     "typ": "checkliste",
+     "slug": "pflichtversicherung-rente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was die Rente leistet",
+     "typ": "dokumente",
+     "slug": "hinterbliebenenrente",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "pflegezusatzversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Finanzielle Hilfen bei fehlendem Geld",
+     "typ": "checkliste",
+     "slug": "pflegezusatzversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Finanzielle Hilfen bei fehlendem Geld",
+     "typ": "dokumente",
+     "slug": "private-pflegezusatzversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "private-pflege-pflichtversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "pflegeversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Private Pflegeversicherung: Struktur und Beitragsanpassungen",
+     "typ": "checkliste",
+     "slug": "pflegeversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Private Pflegeversicherung: Struktur und Beitragsanpassungen",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrad-beantragen"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegebeduerftigkeit"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "pflegegrade",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Antrag und Begutachtung – Der Weg zum Pflegegrad",
+     "typ": "checkliste",
+     "slug": "pflegegrade",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Antrag und Begutachtung – Der Weg zum Pflegegrad",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrad-beantragen"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegebeduerftigkeit"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pflegegrad-beantragen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was tun bei Ablehnung oder falscher Einstufung?",
+     "typ": "checkliste",
+     "slug": "pflegegrad-beantragen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was tun bei Ablehnung oder falscher Einstufung?",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegebeduerftigkeit"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pflegebeduerftigkeit",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was ändert sich 2026 in der Pflegeversicherung?",
+     "typ": "checkliste",
+     "slug": "pflegebeduerftigkeit",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was ändert sich 2026 in der Pflegeversicherung?",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrad-beantragen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pflegedienste",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was vereinfacht sich für Angehörige?",
+     "typ": "checkliste",
+     "slug": "pflegedienste",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was vereinfacht sich für Angehörige?",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrad-beantragen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pferdeversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Pferde-OP-Versicherung – Wie viel zahlt die Versicherung für Operationen?",
+     "typ": "vergleich",
+     "slug": "pferdekrankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Kosten-Vergleich: Welche Versicherung passt?",
+     "typ": "checkliste",
+     "slug": "pferdeversicherungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "tierversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "hundeversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "hundehaftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "haftpflicht",
+    "wartezeit",
+    "opschutz"
+   ]
+  }
+ },
+ {
+  "slug": "pfaendung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie funktioniert eine Pfändung rechtlich?",
+     "typ": "rechner",
+     "slug": "pfaendung",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Häufige Fehler vermeiden",
+     "typ": "checkliste",
+     "slug": "pfaendung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Häufige Fehler vermeiden",
+     "typ": "dokumente",
+     "slug": "pfaendungstabelle-2023-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnungskuendigung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngeld"
+    },
+    {
+     "typ": "post",
+     "slug": "rundfunkbeitrag-pdf"
+    }
+   ],
+   "waechter_regeln": [
+    "pfaendung.grundfreibetrag_monat",
+    "pfaendung.erhoehung_erste_person",
+    "pfaendung.erhoehung_weitere_person",
+    "pfaendung.vollpfaendbar_ab"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "pendlerpauschale",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist die Pendlerpauschale und wie funktioniert sie?",
+     "typ": "rechner",
+     "slug": "pendlerpauschale",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "So tragen Sie die Pauschale in der Steuererklärung ein",
+     "typ": "checkliste",
+     "slug": "pendlerpauschale",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [
+    "pendlerpauschale.pauschale_bis_20km",
+    "pendlerpauschale.pauschale_ab_21km",
+    "pendlerpauschale.max_pauschale_pkw"
+   ],
+   "glossar_begriffe": [
+    "entfernungspauschale",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "patientenverfuegung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Häufige Fehler vermeiden",
+     "typ": "checkliste",
+     "slug": "patientenverfuegung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Häufige Fehler vermeiden",
+     "typ": "dokumente",
+     "slug": "patientenverfuegung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "nachhaltige-geldanlagen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie performen nachhaltige ETFs 2026?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Greenwashing erkennen",
+     "typ": "checkliste",
+     "slug": "nachhaltige-geldanlagen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "kryptowaehrung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "mutterschaftsgeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer hat Anspruch auf Mutterschaftsgeld?",
+     "typ": "rechner",
+     "slug": "mutterschutz",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Steuerliche Behandlung und Anrechnung auf Elterngeld",
+     "typ": "checkliste",
+     "slug": "mutterschaftsgeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [
+    "mutterschutz.schutzfrist_vor_geburt_wochen",
+    "mutterschutz.schutzfrist_nach_geburt_wochen",
+    "mutterschutz.schutzfrist_nach_geburt_frueh_wochen",
+    "mutterschutz.mutterschaftsgeld_max_tag_gkv"
+   ],
+   "glossar_begriffe": [
+    "elterngeld"
+   ]
+  }
+ },
+ {
+  "slug": "minijob",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Zwei Arten von Minijobs",
+     "typ": "rechner",
+     "slug": "minijob",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Abgaben und Steuern",
+     "typ": "checkliste",
+     "slug": "minijob",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Abgaben und Steuern",
+     "typ": "dokumente",
+     "slug": "geringfuegige-beschaeftigung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "kuendigung"
+    }
+   ],
+   "waechter_regeln": [
+    "minijob.minijob_grenze_monatlich",
+    "minijob.gleitzone_untergrenze",
+    "minijob.gleitzone_obergrenze",
+    "minijob.ag_kv_pauschale_prozent"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "lebensversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Lebensversicherer führen 2026 die Tests an?",
+     "typ": "vergleich",
+     "slug": "lebensversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Welche Rolle spielt die betriebliche Altersvorsorge?",
+     "typ": "checkliste",
+     "slug": "lebensversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "versicherungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "lohnsteuertabelle",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist die Lohnsteuertabelle 2026?",
+     "typ": "rechner",
+     "slug": "einkommensteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Praktische Anwendung und häufige Fehler",
+     "typ": "checkliste",
+     "slug": "lohnsteuertabelle",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [
+    "beitragsbemessungsgrenzen.kranken_pflege",
+    "beitragsbemessungsgrenzen.renten_arbeitslosen",
+    "lohnsteuer.grundfreibetrag",
+    "lohnsteuer.arbeitnehmer_pauschbetrag"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "lohnsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Lohnsteuer?",
+     "typ": "rechner",
+     "slug": "einkommensteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Lohnsteuerrechner und praktische Anwendung",
+     "typ": "checkliste",
+     "slug": "lohnsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [
+    "beitragsbemessungsgrenzen.kranken_pflege",
+    "beitragsbemessungsgrenzen.renten_arbeitslosen",
+    "lohnsteuer.grundfreibetrag",
+    "lohnsteuer.arbeitnehmer_pauschbetrag"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "lohnsteuerermaessigung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer hat Anspruch auf Lohnsteuerermäßigung?",
+     "typ": "rechner",
+     "slug": "einkommensteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-5",
+     "nach_titel": "Wichtige Regelungen für 2026",
+     "typ": "checkliste",
+     "slug": "lohnsteuerermaessigung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [
+    "beitragsbemessungsgrenzen.kranken_pflege",
+    "beitragsbemessungsgrenzen.renten_arbeitslosen",
+    "lohnsteuer.grundfreibetrag",
+    "lohnsteuer.arbeitnehmer_pauschbetrag"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kurzarbeitergeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wann haben Sie Anspruch auf Kurzarbeitergeld?",
+     "typ": "rechner",
+     "slug": "kurzarbeitsgeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Häufige Fehler, die Sie vermeiden sollten",
+     "typ": "checkliste",
+     "slug": "kurzarbeitergeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kuendigung"
+    }
+   ],
+   "waechter_regeln": [
+    "kurzarbeitsgeld.leistungssatz_ohne_kind_prozent",
+    "kurzarbeitsgeld.leistungssatz_mit_kind_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kurzzeitpflege",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Neue Fristen und wichtige Termine für 2026",
+     "typ": "checkliste",
+     "slug": "kurzzeitpflege",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Neue Fristen und wichtige Termine für 2026",
+     "typ": "dokumente",
+     "slug": "private-pflegepflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "pflegeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrade"
+    },
+    {
+     "typ": "post",
+     "slug": "pflegegrad-beantragen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kuenstlersozialkasse",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Leistungen und Vorteile der Künstlersozialversicherung",
+     "typ": "checkliste",
+     "slug": "kuenstlersozialkasse",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "kuendigung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Finanzielle Folgen einer Kündigung",
+     "typ": "checkliste",
+     "slug": "kuendigung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kuendigung-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Schritte für erfolgreiche Kündigung",
+     "typ": "checkliste",
+     "slug": "kuendigung-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Schritte für erfolgreiche Kündigung",
+     "typ": "dokumente",
+     "slug": "rentner-krankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "kryptowaehrung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch ist die Marktkapitalisierung der größten Kryptowährungen 2026?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Marktentwicklung und institutionelle Adoption",
+     "typ": "checkliste",
+     "slug": "kryptowaehrung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kreditkarte",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was sind Kreditkarten und wie funktionieren sie?",
+     "typ": "rechner",
+     "slug": "kredit",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Kosten verschiedener Kreditkartentypen?",
+     "typ": "vergleich",
+     "slug": "kreditkarten-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Welche Zusatzleistungen bieten moderne Kreditkarten?",
+     "typ": "checkliste",
+     "slug": "kreditkarte",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    },
+    {
+     "typ": "post",
+     "slug": "kfw-foerderung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kredit",
+    "schufa"
+   ]
+  }
+ },
+ {
+  "slug": "kredite",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Welche Kreditarten gibt es? Ein umfassender Überblick",
+     "typ": "rechner",
+     "slug": "kredit",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die aktuellen Zinssätze für Kredite?",
+     "typ": "vergleich",
+     "slug": "minikredit-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie funktionieren Sondertilgungen bei Krediten?",
+     "typ": "checkliste",
+     "slug": "kredite",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kfw-foerderung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tilgung",
+    "kredit",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "krankenversicherungspflicht",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Finanzielle Folgen ohne Versicherung",
+     "typ": "checkliste",
+     "slug": "krankenversicherungspflicht",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Finanzielle Folgen ohne Versicherung",
+     "typ": "dokumente",
+     "slug": "rentner-krankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "studenten-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Kosten der studentischen Krankenversicherung 2026",
+     "typ": "vergleich",
+     "slug": "studentenkonto-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Nach dem Studium: Der Übergang",
+     "typ": "checkliste",
+     "slug": "krankenversicherung-studenten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Nach dem Studium: Der Übergang",
+     "typ": "dokumente",
+     "slug": "auslandsreisekrankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "krankenversicherungsbeitraege",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Sparmöglichkeiten: Krankenkassenwechsel richtig nutzen",
+     "typ": "checkliste",
+     "slug": "krankenversicherungsbeitraege",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Sparmöglichkeiten: Krankenkassenwechsel richtig nutzen",
+     "typ": "dokumente",
+     "slug": "rentner-krankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "krankenversicherung-rentner",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wechselmöglichkeiten und Sparen",
+     "typ": "checkliste",
+     "slug": "krankenversicherung-rentner",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wechselmöglichkeiten und Sparen",
+     "typ": "dokumente",
+     "slug": "rentner-krankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "krankengeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Krankengeld und wie unterscheidet es sich von der Entgeltfortzahlung?",
+     "typ": "rechner",
+     "slug": "krankengeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was passiert nach der Aussteuerung?",
+     "typ": "checkliste",
+     "slug": "krankengeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [
+    "krankengeld.satz_brutto_prozent",
+    "krankengeld.netto_grenze_prozent",
+    "krankengeld.max_bezugsdauer_wochen"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "krankentagegeldversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Alternative Wege zur Aufstockung des Krankentagegelds",
+     "typ": "checkliste",
+     "slug": "krankentagegeldversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "krankenversicherung-leistungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was ändert sich bei den Beitragssätzen?",
+     "typ": "checkliste",
+     "slug": "krankenversicherung-leistungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was ändert sich bei den Beitragssätzen?",
+     "typ": "dokumente",
+     "slug": "auslandsreisekrankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "kirchensteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Kirchensteuer?",
+     "typ": "rechner",
+     "slug": "kirchensteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Kirchensteuer bei Paaren",
+     "typ": "checkliste",
+     "slug": "kirchensteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [
+    "kirchensteuer_standalone.satz_8_prozent_bundeslaender",
+    "kirchensteuer_standalone.satz_9_prozent_bundeslaender"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "koerperschaftsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Welche Herausforderungen entstehen für die Finanzplanung?",
+     "typ": "checkliste",
+     "slug": "koerperschaftsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuern-fuer-selbststaendige"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerfreie-einnahmen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerformulare-2024"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kinderzuschlag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist der Kinderzuschlag?",
+     "typ": "rechner",
+     "slug": "kindergeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Wer ist ausgeschlossen?",
+     "typ": "checkliste",
+     "slug": "kinderzuschlag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Wer ist ausgeschlossen?",
+     "typ": "dokumente",
+     "slug": "merkblatt-kindergeldzuschlag",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "kindergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "erbschaftsteuer"
+    },
+    {
+     "typ": "post",
+     "slug": "ehegattensplitting"
+    }
+   ],
+   "waechter_regeln": [
+    "kindergeld.monatlich_je_kind",
+    "kindergeld.kinderfreibetrag_sachleistungen_je_elternteil",
+    "kindergeld.kinderfreibetrag_betreuung_je_elternteil",
+    "kindergeld.kinderfreibetrag_gesamt_je_elternteil"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kinderkrankengeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Kinderkrankengeld?",
+     "typ": "rechner",
+     "slug": "kinderkrankengeld",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Was ändert sich ab 2027?",
+     "typ": "checkliste",
+     "slug": "kinderkrankengeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [
+    "kinderkrankengeld.satz_brutto_prozent",
+    "kinderkrankengeld.netto_grenze_prozent",
+    "kinderkrankengeld.anspruchstage_2026"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kfz-versicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Gesetzliche Mindestdeckungssummen für Kfz-Versicherung",
+     "typ": "vergleich",
+     "slug": "kfz-versicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Persönliche Faktoren bei Kfz-Versicherung",
+     "typ": "checkliste",
+     "slug": "kfz-versicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Persönliche Faktoren bei Kfz-Versicherung",
+     "typ": "dokumente",
+     "slug": "gdv-autoversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kasko",
+    "haftpflicht",
+    "deckungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "kinderbetreuung-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Praktische Tipps für 2026",
+     "typ": "checkliste",
+     "slug": "kinderbetreuungskosten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "kfz-steuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist die Kfz-Steuer und wer muss sie zahlen?",
+     "typ": "rechner",
+     "slug": "kfz-steuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Neue Zahlungsregelung und Fälligkeit",
+     "typ": "checkliste",
+     "slug": "kfz-steuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Neue Zahlungsregelung und Fälligkeit",
+     "typ": "dokumente",
+     "slug": "gdv-autoversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umsatzsteuer-mehrwertsteuer"
+    },
+    {
+     "typ": "post",
+     "slug": "solidaritaetszuschlag"
+    },
+    {
+     "typ": "post",
+     "slug": "einkommensteuer"
+    }
+   ],
+   "waechter_regeln": [
+    "kfz_steuer.hubraum_benzin_euro_je_100ccm",
+    "kfz_steuer.hubraum_diesel_euro_je_100ccm",
+    "kfz_steuer.co2_freibetrag_g_km",
+    "kfz_steuer.co2_flat_euro_je_g"
+   ],
+   "glossar_begriffe": [
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "kfw-foerderung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Zusätzliche Finanzierungsmöglichkeiten",
+     "typ": "checkliste",
+     "slug": "kfw-foerderung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Zusätzliche Finanzierungsmöglichkeiten",
+     "typ": "dokumente",
+     "slug": "arbeitsfoerderung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kredit"
+   ]
+  }
+ },
+ {
+  "slug": "kfw-studienkredit",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer kann den KfW-Studienkredit beantragen?",
+     "typ": "rechner",
+     "slug": "kfw-studienkredit",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch ist die Auszahlung und wie lange wird gefördert?",
+     "typ": "vergleich",
+     "slug": "studentenkonto-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Rückzahlungsphase: Flexibilität und Optionen",
+     "typ": "checkliste",
+     "slug": "kfw-studienkredit",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kredit"
+   ]
+  }
+ },
+ {
+  "slug": "investition-in-gold",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie funktionieren Gold-Investments in der Praxis?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Umsetzung: Schritt für Schritt zum Gold-Investment",
+     "typ": "checkliste",
+     "slug": "investition-in-gold",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "investition-in-sachwerte",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie entwickeln sich Gold, Silber und Kupfer als Sachwerte 2026?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Alternative Sachwerte: Von Kunst bis Batteriespeicher",
+     "typ": "checkliste",
+     "slug": "investition-in-sachwerte",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "inflation"
+   ]
+  }
+ },
+ {
+  "slug": "jahressteuerbescheinigung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Häufige Fehler und wie Sie sie vermeiden",
+     "typ": "checkliste",
+     "slug": "jahressteuerbescheinigung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "inflation",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Inflation und wie wird sie gemessen?",
+     "typ": "rechner",
+     "slug": "inflation",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-11",
+     "nach_titel": "Auswirkungen auf Verbraucher und Haushaltseinkommen",
+     "typ": "checkliste",
+     "slug": "inflation",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "inflation",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "anlageimmobilie",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Immobilie oder ETF: Der direkte Vergleich",
+     "typ": "checkliste",
+     "slug": "immobilien-als-geldanlage",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "hundeversicherungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie haben sich die Tierarztkosten 2026 entwickelt?",
+     "typ": "vergleich",
+     "slug": "hundehaftpflicht-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-5",
+     "nach_titel": "Welche Auswahlkriterien sind entscheidend?",
+     "typ": "checkliste",
+     "slug": "hundeversicherungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "tierversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "pferdeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "hundehaftpflichtversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "hundehaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Für wen ist die Hundehaftpflichtversicherung Pflicht?",
+     "typ": "vergleich",
+     "slug": "hundehaftpflicht-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Besonderheiten bei Listenhunden",
+     "typ": "checkliste",
+     "slug": "hundehaftpflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Besonderheiten bei Listenhunden",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "tierversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "pferdeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "hundeversicherungen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "haftpflicht",
+    "deckungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "hunde-op-versicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Häufige Operationen bei Hunden: Was kostet wie viel?",
+     "typ": "vergleich",
+     "slug": "hundekrankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "OP-Versicherung oder Vollschutz: Was passt zu Ihnen?",
+     "typ": "checkliste",
+     "slug": "hunde-op-versicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "tierversicherungen"
+    },
+    {
+     "typ": "post",
+     "slug": "pferdeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "hundeversicherungen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "got",
+    "opschutz",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "hinzuverdienst-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Altersrentner: Unbegrenzt hinzuverdienen",
+     "typ": "rechner",
+     "slug": "hinzuverdienst",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Praktische Umsetzung",
+     "typ": "checkliste",
+     "slug": "hinzuverdienst-in-der-rente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Praktische Umsetzung",
+     "typ": "dokumente",
+     "slug": "hinterbliebenenrente",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    }
+   ],
+   "waechter_regeln": [
+    "hinzuverdienst.bbg_monat",
+    "hinzuverdienst.jahresgrenze_faktor",
+    "hinzuverdienst.kuerzung_prozent",
+    "hinzuverdienst.hinzuverdienst_grenze_vorzeitig_jahr"
+   ],
+   "glossar_begriffe": [
+    "erwerbsminderungsrente",
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "haushaltsnahe-dienstleistungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Sonderfall: Energetische Sanierung",
+     "typ": "checkliste",
+     "slug": "haushaltsnahe-dienstleistungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Sonderfall: Energetische Sanierung",
+     "typ": "dokumente",
+     "slug": "anlage-haushaltsnahe-aufwendungen-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "hausbesitzerhaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wann benötige ich eine separate Hausbesitzerhaftpflicht?",
+     "typ": "vergleich",
+     "slug": "haus-und-grundbesitzerhaftpflicht-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Häufige Schadenfälle und praktische Beispiele",
+     "typ": "checkliste",
+     "slug": "hausbesitzerhaftpflicht-und-grundbesitzerhaftpflicht",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Häufige Schadenfälle und praktische Beispiele",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "versicherungssumme",
+    "haftpflicht"
+   ]
+  }
+ },
+ {
+  "slug": "grundsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was die Reform konkret ändert",
+     "typ": "checkliste",
+     "slug": "grundsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "grundsicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Bürgergeld zur Grundsicherung – Die wichtigsten Unterschiede",
+     "typ": "rechner",
+     "slug": "grundsicherung",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Antragstellung und Übergangsregelungen",
+     "typ": "checkliste",
+     "slug": "grundsicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Antragstellung und Übergangsregelungen",
+     "typ": "dokumente",
+     "slug": "grundsicherung-fuer-rentner",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    }
+   ],
+   "waechter_regeln": [
+    "grundsicherung.regelbedarfe_2026",
+    "grundsicherung.freibetrag_rente_prozent",
+    "grundsicherung.freibetrag_rente_max"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "grundschuld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Unterschiede zur Hypothek",
+     "typ": "vergleich",
+     "slug": "baufinanzierung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Grundschuldabtretung bei Bankwechsel",
+     "typ": "checkliste",
+     "slug": "grundschuld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tilgung"
+   ]
+  }
+ },
+ {
+  "slug": "girokonto",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Kostenlose Girokonten: Bedingungen verstehen",
+     "typ": "vergleich",
+     "slug": "girokonto-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Das richtige Girokonto für Sie finden",
+     "typ": "checkliste",
+     "slug": "girokonto",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinseszinseffekt"
+    },
+    {
+     "typ": "post",
+     "slug": "einlagensicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "direktbank-vs-filialbank"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kredit",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "grunderwerbsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie können Sie legal Steuern sparen?",
+     "typ": "checkliste",
+     "slug": "grunderwerbsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "gewerbesteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Digitalisierung und neue Regelungen",
+     "typ": "checkliste",
+     "slug": "gewerbesteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "einkommensteuer"
+   ]
+  }
+ },
+ {
+  "slug": "gesetzliche-unfallversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was sind die verschiedenen Arten von Versicherungsfällen?",
+     "typ": "vergleich",
+     "slug": "unfallversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie melden Sie einen Arbeitsunfall richtig?",
+     "typ": "checkliste",
+     "slug": "gesetzliche-unfallversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie melden Sie einen Arbeitsunfall richtig?",
+     "typ": "dokumente",
+     "slug": "gdv-unfallversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenarten"
+    },
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "unfallversicherung",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "gesetzliche-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Funktionsweise der gesetzlichen Rentenversicherung",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Beitragssätze und Grenzen 2026 im Überblick",
+     "typ": "vergleich",
+     "slug": "rentenlueckenrechner",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Ausblick und Reformperspektiven",
+     "typ": "checkliste",
+     "slug": "gesetzliche-rentenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenversicherungsbeitrag"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "renteninformation"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "gesetzliche-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Die richtige Krankenkasse finden: Worauf Sie achten sollten",
+     "typ": "checkliste",
+     "slug": "gesetzliche-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Die richtige Krankenkasse finden: Worauf Sie achten sollten",
+     "typ": "dokumente",
+     "slug": "auslandsreisekrankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "festgeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie funktioniert die Festgeldanlage?",
+     "typ": "vergleich",
+     "slug": "festgeldvergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Steuerliche Behandlung von Festgeldzinsen 2026",
+     "typ": "checkliste",
+     "slug": "geldanlage-auf-festgeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tagesgeld",
+    "festgeld",
+    "bonitaet"
+   ]
+  }
+ },
+ {
+  "slug": "tagesgeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Aktuelle Zinsentwicklung und Prognosen für 2026",
+     "typ": "vergleich",
+     "slug": "tagesgeldvergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Worauf sollten Sie bei der Auswahl eines Tagesgeldkontos achten?",
+     "typ": "checkliste",
+     "slug": "geldanlage-auf-tagesgeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tagesgeld",
+    "festgeld",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "geringfuegige-beschaeftigung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist geringfügige Beschäftigung?",
+     "typ": "rechner",
+     "slug": "minijob",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Compliance und Rechtliches",
+     "typ": "checkliste",
+     "slug": "geringfuegige-beschaeftigung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Compliance und Rechtliches",
+     "typ": "dokumente",
+     "slug": "geringfuegige-beschaeftigung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgeaufwendungen"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    },
+    {
+     "typ": "post",
+     "slug": "sozialhilfe"
+    }
+   ],
+   "waechter_regeln": [
+    "minijob.minijob_grenze_monatlich",
+    "minijob.gleitzone_untergrenze",
+    "minijob.gleitzone_obergrenze",
+    "minijob.ag_kv_pauschale_prozent"
+   ],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "gehaltsumwandlung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Steuerliche Vorteile der Gehaltsumwandlung",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Umsetzung der Gehaltsumwandlung: Wichtige Punkte",
+     "typ": "checkliste",
+     "slug": "gehaltsumwandlung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "freiwillige-gesetzliche-rente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wer kann freiwillig in die Rentenversicherung einzahlen?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Antragstellung und praktische Umsetzung",
+     "typ": "checkliste",
+     "slug": "freiwillige-gesetzliche-rentenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Antragstellung und praktische Umsetzung",
+     "typ": "dokumente",
+     "slug": "hinterbliebenenrente",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "gaspreise",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie setzt sich der Gaspreis 2026 zusammen?",
+     "typ": "vergleich",
+     "slug": "gaspreisvergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie entwickeln sich Gaspreise langfristig?",
+     "typ": "checkliste",
+     "slug": "gaspreise-vergleichen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "strompreise"
+    },
+    {
+     "typ": "post",
+     "slug": "photovoltaik-foerderung"
+    },
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "fonds",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche Arten von Fonds gibt es?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Risiken und Chancen richtig einschätzen",
+     "typ": "checkliste",
+     "slug": "fonds",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "sparerpauschbetrag"
+   ]
+  }
+ },
+ {
+  "slug": "freiwillige-gesetzliche-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was sind die Unterschiede zur privaten Krankenversicherung?",
+     "typ": "checkliste",
+     "slug": "freiwillige-gesetzliche-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was sind die Unterschiede zur privaten Krankenversicherung?",
+     "typ": "dokumente",
+     "slug": "auslandsreisekrankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "fondsgebundene-lebensversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Fondsgebundene versus klassische Lebensversicherung: Was sind die Unterschiede?",
+     "typ": "vergleich",
+     "slug": "lebensversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Fondsgebundene Lebensversicherung vs. ETF-Sparpläne: Was ist besser?",
+     "typ": "checkliste",
+     "slug": "fondsgebundene-lebensversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "risikolebensversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "witwenrente"
+    },
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "ferienwohnung-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Neue Regelungen für 2026",
+     "typ": "checkliste",
+     "slug": "ferienwohnung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "familienversicherung-gesetzliche-krankenkasse",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?",
+     "typ": "checkliste",
+     "slug": "familienversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?",
+     "typ": "dokumente",
+     "slug": "krankenkassenliste",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "fahrradversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was leistet eine gute Fahrradversicherung?",
+     "typ": "vergleich",
+     "slug": "fahrradversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Top-Anbieter und Testsieger 2026",
+     "typ": "checkliste",
+     "slug": "fahrradversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "hausrat",
+    "versicherungsfall",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "etf-exchange-traded-funds",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Gebühren und Kosten verstehen",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "ETF-Strategien für 2026",
+     "typ": "checkliste",
+     "slug": "etf-exchange-traded-funds",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "fahrgemeinschaft-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Praktische Umsetzung in der Steuererklärung 2026",
+     "typ": "checkliste",
+     "slug": "fahrgemeinschaft",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "entfernungspauschale"
+   ]
+  }
+ },
+ {
+  "slug": "erbschaftsteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Freibeträge 2026 – wer erhält wie viel?",
+     "typ": "rechner",
+     "slug": "erbschaftsteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Anzeigepflicht und praktische Schritte",
+     "typ": "checkliste",
+     "slug": "erbschaftsteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Anzeigepflicht und praktische Schritte",
+     "typ": "dokumente",
+     "slug": "erben-vererben",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "kinderzuschlag"
+    },
+    {
+     "typ": "post",
+     "slug": "kindergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "ehegattensplitting"
+    }
+   ],
+   "waechter_regeln": [
+    "erbschaftsteuer.freibetraege",
+    "erbschaftsteuer.versorgungsfreibetrag",
+    "erbschaftsteuer.steuersaetze_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "erwerbsminderungsrente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist die Erwerbsminderungsrente und wer hat Anspruch?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie wird die Erwerbsminderungsrente 2026 berechnet?",
+     "typ": "vergleich",
+     "slug": "berufsunfaehigkeitsversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "So stellen Sie den Antrag richtig",
+     "typ": "checkliste",
+     "slug": "erwerbsminderungsrente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "berufsunfaehigkeitsversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rentenarten"
+    },
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "erwerbsminderungsrente",
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "etc-exchange-traded-commodities",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie unterscheiden sich ETCs von ETFs?",
+     "typ": "vergleich",
+     "slug": "depot-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Welche Risiken sollten Sie beachten?",
+     "typ": "checkliste",
+     "slug": "etc-exchange-traded-commodities",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "erbrecht",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Digitaler Nachlass – Neue Herausforderungen",
+     "typ": "checkliste",
+     "slug": "erbrecht",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "entlastungsbetrag-alleinerziehende",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Was müssen Sie bei Änderungen machen?",
+     "typ": "checkliste",
+     "slug": "entlastungsbetrag-alleinerziehende",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuerklassen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerberater-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "arbeitnehmer-sparzulage"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "elternzeit",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Anspruch und maximale Dauer",
+     "typ": "rechner",
+     "slug": "elternzeit",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Vorbereitung: Checkliste für 2026",
+     "typ": "checkliste",
+     "slug": "elternzeit",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [
+    "elternzeit.max_monate_gesamt",
+    "elternzeit.anmeldung_frist_wochen",
+    "elternzeit.uebertragbare_monate_auf_spaeter",
+    "elternzeit.max_alter_kind_jahre"
+   ],
+   "glossar_begriffe": [
+    "elterngeld"
+   ]
+  }
+ },
+ {
+  "slug": "elternunterhalt",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wann müssen Kinder für ihre Eltern Unterhalt zahlen?",
+     "typ": "rechner",
+     "slug": "unterhalt",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktisches Vorgehen bei Anfragen vom Sozialamt",
+     "typ": "checkliste",
+     "slug": "elternunterhalt",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktisches Vorgehen bei Anfragen vom Sozialamt",
+     "typ": "dokumente",
+     "slug": "anlage-unterhalt-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [
+    "unterhalt.kindergeld_pro_kind",
+    "unterhalt.kindergeld_abzug_minderjaehrig",
+    "unterhalt.bedarf_studierende_eigener_haushalt",
+    "unterhalt.selbstbehalt"
+   ],
+   "glossar_begriffe": [
+    "selbstbehalt",
+    "unterhalt"
+   ]
+  }
+ },
+ {
+  "slug": "bussgeldkatalog-pdf",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was sind die aktuellen Bußgelder für Geschwindigkeitsverstöße?",
+     "typ": "vergleich",
+     "slug": "bussgeldrechner-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Rechtliche Grundlagen und Struktur",
+     "typ": "checkliste",
+     "slug": "bussgeldkatalog",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Rechtliche Grundlagen und Struktur",
+     "typ": "dokumente",
+     "slug": "bussgeldkatalog",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "elster",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Häufige ELSTER-Probleme und Lösungen",
+     "typ": "checkliste",
+     "slug": "elster",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "elster"
+   ]
+  }
+ },
+ {
+  "slug": "einlagensicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Schutzgrenzen 2026: Das müssen Sie wissen",
+     "typ": "vergleich",
+     "slug": "festgeldvergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Sicherheitsstrategien für größere Vermögen",
+     "typ": "checkliste",
+     "slug": "einlagensicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinseszinseffekt"
+    },
+    {
+     "typ": "post",
+     "slug": "direktbank-vs-filialbank"
+    },
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "bonitaet"
+   ]
+  }
+ },
+ {
+  "slug": "einkommensteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist die Einkommensteuer und wer muss sie zahlen?",
+     "typ": "rechner",
+     "slug": "einkommensteuer",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Steuern sparen – Praktische Tipps für 2026",
+     "typ": "checkliste",
+     "slug": "einkommensteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umsatzsteuer-mehrwertsteuer"
+    },
+    {
+     "typ": "post",
+     "slug": "solidaritaetszuschlag"
+    },
+    {
+     "typ": "post",
+     "slug": "kfz-steuer"
+    }
+   ],
+   "waechter_regeln": [
+    "beitragsbemessungsgrenzen.kranken_pflege",
+    "beitragsbemessungsgrenzen.renten_arbeitslosen",
+    "lohnsteuer.grundfreibetrag",
+    "lohnsteuer.arbeitnehmer_pauschbetrag"
+   ],
+   "glossar_begriffe": [
+    "grundfreibetrag",
+    "einkommensteuer",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "ehegattenunterhalt",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Trennungsunterhalt vs. nachehelicher Unterhalt",
+     "typ": "rechner",
+     "slug": "unterhalt",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Selbstbehalt 2026",
+     "typ": "checkliste",
+     "slug": "ehegattenunterhalt",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Selbstbehalt 2026",
+     "typ": "dokumente",
+     "slug": "anlage-unterhalt-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [
+    "unterhalt.kindergeld_pro_kind",
+    "unterhalt.kindergeld_abzug_minderjaehrig",
+    "unterhalt.bedarf_studierende_eigener_haushalt",
+    "unterhalt.selbstbehalt"
+   ],
+   "glossar_begriffe": [
+    "selbstbehalt",
+    "unterhalt"
+   ]
+  }
+ },
+ {
+  "slug": "e-bike-versicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Pflicht oder Empfehlung: Wann brauchen Sie E-Bike Versicherung?",
+     "typ": "vergleich",
+     "slug": "fahrradversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Gebraucht gekaufte E-Bikes versichern",
+     "typ": "checkliste",
+     "slug": "e-bike-versicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "hausrat"
+   ]
+  }
+ },
+ {
+  "slug": "ehegattensplitting",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Steuerklassenwahl und praktische Umsetzung",
+     "typ": "checkliste",
+     "slug": "ehegattensplitting",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "kinderzuschlag"
+    },
+    {
+     "typ": "post",
+     "slug": "kindergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "erbschaftsteuer"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "splitting"
+   ]
+  }
+ },
+ {
+  "slug": "e-scooter-versicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Versicherungspflicht: Welche Kennzeichen-Regeln gelten 2026?",
+     "typ": "vergleich",
+     "slug": "kfz-versicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wie beantrage ich eine E-Scooter Versicherung 2026?",
+     "typ": "checkliste",
+     "slug": "e-scooter-versicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "drohnenhaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wer muss versichert sein? – Ausnahmen & Sonderfälle",
+     "typ": "vergleich",
+     "slug": "drohnenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Schadensfall-Abwicklung & praktische Tipps",
+     "typ": "checkliste",
+     "slug": "drohnenhaftpflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Schadensfall-Abwicklung & praktische Tipps",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "kasko",
+    "haftpflicht",
+    "selbstbeteiligung"
+   ]
+  }
+ },
+ {
+  "slug": "doppelte-haushaltsfuehrung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Eintragung in die Steuererklärung 2026",
+     "typ": "checkliste",
+     "slug": "doppelte-haushaltsfuehrung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Eintragung in die Steuererklärung 2026",
+     "typ": "dokumente",
+     "slug": "anlage-n-doppelte-haushaltsfuehrung-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "direktversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche steuerlichen Vorteile bietet die Direktversicherung 2026?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Mobilität und Jobwechsel bei der Direktversicherung",
+     "typ": "checkliste",
+     "slug": "direktversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "dienstwohnung-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Korrekte Angaben in der Steuererklärung machen",
+     "typ": "checkliste",
+     "slug": "dienstwohnung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "direktbank-vs-filialbank",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was ist eine Direktbank?",
+     "typ": "vergleich",
+     "slug": "girokonto-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Welche Bankform passt zu Ihnen?",
+     "typ": "checkliste",
+     "slug": "direktbank-vs-filialbank",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinseszinseffekt"
+    },
+    {
+     "typ": "post",
+     "slug": "einlagensicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "dienstwagen-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Abschreibungsvorteile für Unternehmen",
+     "typ": "checkliste",
+     "slug": "dienstwagen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "entfernungspauschale"
+   ]
+  }
+ },
+ {
+  "slug": "dienstreise-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Das Wichtigste zusammengefasst",
+     "typ": "checkliste",
+     "slug": "dienstreisen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "cyberversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Markt und Prämien 2026",
+     "typ": "vergleich",
+     "slug": "cyberversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Prämien senken und Ablehnungen vermeiden",
+     "typ": "checkliste",
+     "slug": "cyberversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "buergerversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Internationale Perspektiven",
+     "typ": "checkliste",
+     "slug": "buergerversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "wahltarife-gesetzliche-krankenkasse"
+    },
+    {
+     "typ": "post",
+     "slug": "verdienstgrenzen-familienversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "betriebshaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Für wen ist eine Betriebshaftpflichtversicherung sinnvoll?",
+     "typ": "vergleich",
+     "slug": "private-haftpflichtversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Praktische Tipps zur Absicherung",
+     "typ": "checkliste",
+     "slug": "betriebshaftpflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Praktische Tipps zur Absicherung",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "betriebshaftpflicht",
+    "haftpflicht",
+    "deckungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "betriebliche-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Warum wächst der bKV-Markt 2026 so stark?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Umsetzung einer betrieblichen Krankenversicherung",
+     "typ": "checkliste",
+     "slug": "betriebliche-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Praktische Umsetzung einer betrieblichen Krankenversicherung",
+     "typ": "dokumente",
+     "slug": "auslandsreisekrankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "betriebliche-altersversorgung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Welche fünf Durchführungswege stehen zur Verfügung?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Welche Neuerungen bringt die Aktivrente 2026?",
+     "typ": "checkliste",
+     "slug": "betriebliche-altersversorgung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Welche Neuerungen bringt die Aktivrente 2026?",
+     "typ": "dokumente",
+     "slug": "betriebliche-altersversorgung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "aktivrente"
+   ]
+  }
+ },
+ {
+  "slug": "berufshaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Für welche Berufe ist eine Berufshaftpflichtversicherung Pflicht?",
+     "typ": "vergleich",
+     "slug": "private-haftpflichtversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was beim Abschluss einer Berufshaftpflichtversicherung zu beachten ist",
+     "typ": "checkliste",
+     "slug": "berufshaftpflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was beim Abschluss einer Berufshaftpflichtversicherung zu beachten ist",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vermoegenswirksame-leistungen"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    },
+    {
+     "typ": "post",
+     "slug": "sozialhilfe"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "versicherungssumme",
+    "haftpflicht",
+    "selbstbeteiligung"
+   ]
+  }
+ },
+ {
+  "slug": "betreuungsverfuegung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Kosten und praktische Überlegungen",
+     "typ": "checkliste",
+     "slug": "betreuungsverfuegung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Kosten und praktische Überlegungen",
+     "typ": "dokumente",
+     "slug": "betreuungsverfuegung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "beitragsanpassung-pkv",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Rechtlicher Rahmen: Wann darf die PKV erhöhen?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Ist die Erhöhung rechtmäßig?",
+     "typ": "checkliste",
+     "slug": "beitragsanpassung-pkv",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "beitragsbemessungsgrenzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Strategische Tipps für Betroffene",
+     "typ": "checkliste",
+     "slug": "beitragsbemessungsgrenzen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sozialversicherungsbeitraege"
+    },
+    {
+     "typ": "post",
+     "slug": "sozialversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "zusatzbeitrag-krankenkasse"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "berliner-testament",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Welche Alternativen gibt es zum klassischen Berliner Testament?",
+     "typ": "checkliste",
+     "slug": "berliner-testament",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "vorsorgevollmacht"
+    },
+    {
+     "typ": "post",
+     "slug": "unterhaltsvorschuss"
+    },
+    {
+     "typ": "post",
+     "slug": "testament"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "baufinanzierung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie viel Eigenkapital brauchen Sie für beste Konditionen?",
+     "typ": "vergleich",
+     "slug": "baufinanzierung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Baufinanzierung vergleichen – Worauf Sie achten müssen",
+     "typ": "checkliste",
+     "slug": "baufinanzierung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "baufinanzierung",
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "bauherrenhaftpflichtversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Was leistet die Bauherrenhaftpflichtversicherung?",
+     "typ": "vergleich",
+     "slug": "bauherren-haftpflichtversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Bauherrenhaftpflicht vs. andere Versicherungen",
+     "typ": "checkliste",
+     "slug": "bauherrenhaftpflichtversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Bauherrenhaftpflicht vs. andere Versicherungen",
+     "typ": "dokumente",
+     "slug": "gdv-haftpflichtversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wohnmobil-versicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wohngebaeudeversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "rechtsschutzversicherung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "haftpflicht",
+    "deckungssumme"
+   ]
+  }
+ },
+ {
+  "slug": "bausparvertrag",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wie hoch sind die Zinsen beim Bausparvertrag 2026?",
+     "typ": "vergleich",
+     "slug": "bausparen-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Vor- und Nachteile im Überblick",
+     "typ": "checkliste",
+     "slug": "bausparvertrag",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zinsbindungsfrist"
+    },
+    {
+     "typ": "post",
+     "slug": "kreditkarte"
+    },
+    {
+     "typ": "post",
+     "slug": "kredite"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "zinsen"
+   ]
+  }
+ },
+ {
+  "slug": "basistarif",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wer kann in den Basistarif PKV wechseln?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Aus dem Basistarif PKV herauswechseln",
+     "typ": "checkliste",
+     "slug": "basistarif-in-der-pkv",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "beitrag",
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "basisrente",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie funktioniert die steuerliche Förderung der Basisrente?",
+     "typ": "rechner",
+     "slug": "rente",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-3",
+     "nach_titel": "Für wen lohnt sich die Basisrente besonders?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Welche Gestaltungsmöglichkeiten gibt es?",
+     "typ": "checkliste",
+     "slug": "basisrente",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "sterbegeldversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "ruerup-rente"
+    },
+    {
+     "typ": "post",
+     "slug": "riester-rente"
+    }
+   ],
+   "waechter_regeln": [
+    "rente.rentenwert_bis_30jun_2026",
+    "rente.rentenwert_ab_01jul_2026",
+    "rente.durchschnittsentgelt_2026",
+    "rente.max_entgeltpunkte_pro_jahr"
+   ],
+   "glossar_begriffe": [
+    "rente"
+   ]
+  }
+ },
+ {
+  "slug": "bafoeg",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Wie hoch ist der BAföG-Höchstsatz 2026?",
+     "typ": "rechner",
+     "slug": "bafoeg",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Was ändert sich beim BAföG 2026?",
+     "typ": "checkliste",
+     "slug": "bafoeg",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "rentenarten"
+    },
+    {
+     "typ": "post",
+     "slug": "vorsorgeaufwendungen"
+    },
+    {
+     "typ": "post",
+     "slug": "uebergangsgeld"
+    }
+   ],
+   "waechter_regeln": [
+    "bafoeg.bedarfssaetze",
+    "bafoeg.freibetraege",
+    "bafoeg.einkommensanrechnung_eltern_prozent",
+    "bafoeg.darlehens_max_gesamt"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "auslandskrankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Testsieger und beste Anbieter 2026",
+     "typ": "vergleich",
+     "slug": "reisekrankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Praktische Tipps zu Abschluss und Schadensfall",
+     "typ": "checkliste",
+     "slug": "auslandskrankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Praktische Tipps zu Abschluss und Schadensfall",
+     "typ": "dokumente",
+     "slug": "rentner-krankenversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "tarif"
+   ]
+  }
+ },
+ {
+  "slug": "ausbildungskosten-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Das Bundesverfassungsgericht-Urteil von 2019: Warum Erstausbildung anders behandelt wird",
+     "typ": "checkliste",
+     "slug": "ausbildungskosten",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "aussergewoehnliche-belastungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie beantrage ich außergewöhnliche Belastungen in der Steuererklärung?",
+     "typ": "checkliste",
+     "slug": "aussergewoehnliche-belastungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Wie beantrage ich außergewöhnliche Belastungen in der Steuererklärung?",
+     "typ": "dokumente",
+     "slug": "aussergewoehnliche-belastungen-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "arbeitszimmer-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Häufige Fehler und Fallstricke vermeiden",
+     "typ": "checkliste",
+     "slug": "arbeitszimmer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "homeoffice-pauschale"
+   ]
+  }
+ },
+ {
+  "slug": "arbeitsmittel",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wann lohnt sich der Einzelnachweis gegenüber dem Pauschbetrag?",
+     "typ": "checkliste",
+     "slug": "arbeitsmittel",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "aktien-steuererklaerung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wann muss ich eine Steuererklärung abgeben?",
+     "typ": "checkliste",
+     "slug": "aktien",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wann muss ich eine Steuererklärung abgeben?",
+     "typ": "dokumente",
+     "slug": "steuererkla-rung-ratgeber-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "wertpapierdepot"
+    },
+    {
+     "typ": "post",
+     "slug": "roboadvisor"
+    },
+    {
+     "typ": "post",
+     "slug": "nachhaltige-geldanlagen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "sparerpauschbetrag"
+   ]
+  }
+ },
+ {
+  "slug": "arbeitslosengeld",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Arbeitslosengeld I?",
+     "typ": "rechner",
+     "slug": "alg1",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wann droht eine Sperrzeit?",
+     "typ": "checkliste",
+     "slug": "arbeitslosengeld",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Wann droht eine Sperrzeit?",
+     "typ": "dokumente",
+     "slug": "arbeitsfoerderung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    }
+   ],
+   "waechter_regeln": [
+    "alg1.leistungssatz_ohne_kind_prozent",
+    "alg1.leistungssatz_mit_kind_prozent",
+    "alg1.bbg_alv_monatlich",
+    "alg1.sv_pauschale_an_prozent"
+   ],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "arbeitskleidung-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Besonderheiten für Selbstständige und besondere Fälle",
+     "typ": "checkliste",
+     "slug": "arbeitskleidung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "arbeitnehmer-sparzulage",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-7",
+     "nach_titel": "Sperrfrist und Auszahlung",
+     "typ": "checkliste",
+     "slug": "arbeitnehmer-sparzulage",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "steuerklassen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuerberater-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "entlastungsbetrag-alleinerziehende"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "arbeitgeberzuschuss-private-krankenversicherung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Wer hat Anspruch auf den Arbeitgeberzuschuss?",
+     "typ": "vergleich",
+     "slug": "private-krankenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Steuerliche Behandlung und rechtliche Grundlagen",
+     "typ": "checkliste",
+     "slug": "arbeitgeberzuschuss-private-krankenversicherung",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Steuerliche Behandlung und rechtliche Grundlagen",
+     "typ": "dokumente",
+     "slug": "private-pflegezusatzversicherung",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "zahnzusatzversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "wechsel-private-krankenversicherung"
+    },
+    {
+     "typ": "post",
+     "slug": "standardtarif"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "altersvorsorgeaufwendungen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-3",
+     "nach_titel": "Höchstbeträge 2026: Wie viel können Sie steuerlich geltend machen?",
+     "typ": "vergleich",
+     "slug": "rentenversicherung-vergleich",
+     "grund": "Tarife und Anbieter nebeneinander"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Unterschied zwischen verschiedenen Vorsorgeaufwendungen",
+     "typ": "checkliste",
+     "slug": "altersvorsorgeaufwendungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-7",
+     "nach_titel": "Unterschied zwischen verschiedenen Vorsorgeaufwendungen",
+     "typ": "dokumente",
+     "slug": "anlage-haushaltsnahe-aufwendungen-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "rente",
+    "beitrag"
+   ]
+  }
+ },
+ {
+  "slug": "altersteilzeit",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was ist Altersteilzeit genau?",
+     "typ": "rechner",
+     "slug": "altersteilzeit",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-9",
+     "nach_titel": "Absicherung und rechtliche Aspekte",
+     "typ": "checkliste",
+     "slug": "altersteilzeit",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "buergergeld"
+    },
+    {
+     "typ": "post",
+     "slug": "minijob"
+    },
+    {
+     "typ": "post",
+     "slug": "kurzarbeitergeld"
+    }
+   ],
+   "waechter_regeln": [
+    "altersteilzeit.mindestalter_jahre",
+    "altersteilzeit.teilzeit_anteil_prozent"
+   ],
+   "glossar_begriffe": [
+    "rente",
+    "aktivrente"
+   ]
+  }
+ },
+ {
+  "slug": "abschreibung-steuererklaerung",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-8",
+     "nach_titel": "Strategische Steuerplanung mit Abschreibungen",
+     "typ": "checkliste",
+     "slug": "abschreibungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    },
+    {
+     "nach": "heading-8",
+     "nach_titel": "Strategische Steuerplanung mit Abschreibungen",
+     "typ": "dokumente",
+     "slug": "steuererkla-rung-ratgeber-2024",
+     "grund": "Formulare und Merkblätter zum Ausdrucken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": []
+  }
+ },
+ {
+  "slug": "abgeltungssteuer",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-9",
+     "nach_titel": "Besonderheiten bei Auslandsdepots und steuerfreien Anlagen",
+     "typ": "checkliste",
+     "slug": "abgeltungssteuer",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "werbungskosten"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuervoranmeldung"
+    },
+    {
+     "typ": "post",
+     "slug": "umsatzsteuererklaerung"
+    }
+   ],
+   "waechter_regeln": [],
+   "glossar_begriffe": [
+    "sparerpauschbetrag",
+    "guenstigerpruefung"
+   ]
+  }
+ },
+ {
+  "slug": "abfindungen-von-der-steuer-absetzen",
+  "felder": {
+   "leo_einwuerfe": [
+    {
+     "nach": "heading-2",
+     "nach_titel": "Was sind Abfindungen und wann entstehen sie?",
+     "typ": "rechner",
+     "slug": "abfindung",
+     "grund": "Ihre Zahlen statt der Beispiele"
+    },
+    {
+     "nach": "heading-6",
+     "nach_titel": "Was ändert sich bei Abfindungen 2026?",
+     "typ": "checkliste",
+     "slug": "abfindungen",
+     "grund": "Schritt für Schritt, zum Abhaken"
+    }
+   ],
+   "dazu_passt": [
+    {
+     "typ": "post",
+     "slug": "umzugskosten-von-der-steuer-absetzen"
+    },
+    {
+     "typ": "post",
+     "slug": "steuertabelle"
+    },
+    {
+     "typ": "post",
+     "slug": "spenden-von-der-steuer-absetzen"
+    }
+   ],
+   "waechter_regeln": [
+    "lohnsteuer.grundfreibetrag",
+    "lohnsteuer.arbeitnehmer_pauschbetrag",
+    "lohnsteuer.sonderausgaben_pauschbetrag",
+    "lohnsteuer.entlastungsbetrag_alleinerziehend"
+   ],
+   "glossar_begriffe": []
+  }
+ }
+]
