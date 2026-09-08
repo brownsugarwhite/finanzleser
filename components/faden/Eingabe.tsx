@@ -9,6 +9,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
+import FieldOutline from "@/components/ui/FieldOutline";
 import type { IndexEintrag } from "@/lib/faden/index";
 
 const TYP_LABEL: Record<IndexEintrag["typ"], string> = { ratgeber: "Ratgeber", rubrik: "Rubrik", thema: "Thema", rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument", begriff: "Begriff" };
@@ -106,6 +107,7 @@ export default function Eingabe() {
     <div className={"eingabe" + (zeigeChips ? " mit-chips" : "")}>
       <div className="eingabe__blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
       <div className="suchpille-wrap" id="fadenPille" ref={wrap}>
+        <FieldOutline radius={26} gap={4} />
         {zeigeLeiste && (
           <div className="sprung" id="sprung" role="listbox" aria-label="Sprungleiste">
             <div className="sprung__kopf">{treffer.length ? "Im Bestand" : index ? "Nichts Passendes im Bestand" : "Bestand wird geladen …"}</div>

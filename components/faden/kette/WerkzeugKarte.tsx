@@ -119,7 +119,7 @@ export default async function WerkzeugKarte({
   }
 
   return (
-    <div className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`}>
+    <div id={`werkzeug-${teil.typ}-${teil.slug}`} className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`}>
       {teil.grund && <div className="einwurf einwurf--inline">Leo wirft ein: {teil.grund}</div>}
       <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
       {!ohneTitel && <h3>{titel}</h3>}

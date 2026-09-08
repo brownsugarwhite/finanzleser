@@ -21,7 +21,15 @@ export type WerkzeugTyp = "rechner" | "checkliste" | "vergleich" | "dokumente";
 export type Teil =
   | { art: "html"; html: string }
   | { art: "embed"; typ: WerkzeugTyp; slug: string; slugs?: string[]; grund?: string; vonLeo?: boolean; nachtrag?: boolean }
-  | { art: "spiel"; typ: string; felder: Record<string, string> };
+  | { art: "spiel"; typ: string; felder: Record<string, string> }
+  /** Leos Einwurf im Abschnitt: verweist auf die Werkzeugkarte am Ende des Beitrags. */
+  | { art: "einwurf"; typ: WerkzeugTyp; slug: string; grund: string; ziel: string };
+
+export type WerkzeugTeil = Extract<Teil, { art: "embed" }>;
+
+export function werkzeugId(typ: WerkzeugTyp, slug: string): string {
+  return `werkzeug-${typ}-${slug}`;
+}
 
 export interface Abschnitt {
   /** `heading-<n>` */
@@ -36,7 +44,7 @@ export interface Abschnitt {
 export interface TocEintrag {
   id: string;
   titel: string;
-  art: "abschnitt" | "faq" | "fazit";
+  art: "abschnitt" | "werkzeuge" | "faq" | "fazit";
 }
 
 export interface Krume {
@@ -63,6 +71,8 @@ export interface Kette {
   faqId?: string;
   fazitHtml?: string;
   fazitId?: string;
+  /** Alle Werkzeuge des Beitrags, in CMS-Reihenfolge, für den Block am Ende. */
+  werkzeuge: WerkzeugTeil[];
   toc: TocEintrag[];
   faden: FadenFelder;
 }
@@ -184,33 +194,29 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     fach.push({ id: `heading-${s.nr}`, nr: s.nr, titel: s.titel, teile, fragen: [], statistiken: [] });
   }
 
-  // 3) Werkzeuge: Dedupe, dann nach leo_einwuerfe in den Abschnitt, Rest an den letzten Fachabschnitt.
+  // 3) Werkzeuge: Dedupe in CMS-Reihenfolge; sie stehen wie auf der alten Seite gesammelt am Ende
+  //    des Beitrags. Leos Einwürfe (leo_einwuerfe) bleiben im Abschnitt und zeigen auf die Karte.
   const gesehen = new Set<string>();
-  const pool = verirrteEmbeds.filter((e) => {
+  const pool: WerkzeugTeil[] = verirrteEmbeds.filter((e) => {
     const key = `${e.typ}:${e.slugs ? e.slugs.join(",") : e.slug}`;
     if (gesehen.has(key)) return false;
     gesehen.add(key);
     return true;
-  });
-  const platziert = new Set<Extract<Teil, { art: "embed" }>>();
+  }).map((e) => ({ ...e, nachtrag: true }));
   const nachId = (id: string) => fach.find((a) => a.id === id);
   for (const e of faden.leoEinwuerfe as FadenEinwurf[]) {
     if (e.typ === "post" || e.typ === "glossar" || e.typ === "spiel") continue;
     const ziel = nachId(e.nach);
     if (!ziel) continue;
-    const treffer = pool.find((w) => w.typ === e.typ && (w.slug === e.slug || (w.slugs || []).includes(e.slug)) && !platziert.has(w));
-    if (treffer) {
-      platziert.add(treffer);
-      ziel.teile.push({ ...treffer, grund: e.grund, vonLeo: true });
-    } else {
-      // Einwurf auf ein Werkzeug, das im Beitrag nicht eingebettet ist: trotzdem zeigen (Karte kommt aus dem Bestand).
-      ziel.teile.push({ art: "embed", typ: e.typ as WerkzeugTyp, slug: e.slug, grund: e.grund, vonLeo: true });
+    const typ = e.typ as WerkzeugTyp;
+    let karte = pool.find((w) => w.typ === typ && (w.slug === e.slug || (w.slugs || []).includes(e.slug)));
+    if (!karte) {
+      // Einwurf auf ein Werkzeug, das im Beitrag nicht eingebettet ist: Karte kommt aus dem Bestand.
+      karte = { art: "embed", typ, slug: e.slug, vonLeo: true, nachtrag: true };
+      pool.push(karte);
     }
-  }
-  const rest = pool.filter((w) => !platziert.has(w));
-  if (rest.length && fach.length) {
-    const letzter = fach[fach.length - 1];
-    rest.forEach((w) => letzter.teile.push({ ...w, nachtrag: true }));
+    if (!karte.grund && e.grund) { karte.grund = e.grund; karte.vonLeo = true; }
+    ziel.teile.push({ art: "einwurf", typ, slug: karte.slug, grund: e.grund || "", ziel: werkzeugId(typ, karte.slug) });
   }
 
   // 4) Leo-Fragen und Statistiken je Abschnitt.
@@ -233,6 +239,7 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
   const toc: TocEintrag[] = fach.map((a) => ({ id: a.id, titel: a.titel, art: "abschnitt" as const }));
   if (faq.length && faqId) toc.push({ id: faqId, titel: "Häufige Fragen", art: "faq" });
   if (fazitHtml && fazitId) toc.push({ id: fazitId, titel: "Fazit", art: "fazit" });
+  if (pool.length) toc.push({ id: "werkzeuge", titel: "Finanztools zum Beitrag", art: "werkzeuge" });
 
   void opts;
   return {
@@ -253,6 +260,7 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     faqId,
     fazitHtml,
     fazitId,
+    werkzeuge: pool,
     toc,
     faden,
   };

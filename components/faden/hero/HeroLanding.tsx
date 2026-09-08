@@ -11,6 +11,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useFaden } from "@/components/faden/FadenProvider";
 import Spark from "@/components/ui/Spark";
+import FieldOutline from "@/components/ui/FieldOutline";
 
 const seg = (p: number, a: number, b: number) => Math.max(0, Math.min(1, (p - a) / (b - a)));
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
@@ -92,6 +93,7 @@ export default function HeroLanding() {
         </div>
         <div className="hero-landing__pille">
           <div className="suchpille-wrap" ref={wrap}>
+            <FieldOutline radius={26} gap={4} />
             <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert ? " hat-text" : "")}>
               <label className="sr" htmlFor="hero-frage">Fragen Sie Leo oder suchen Sie im Bestand</label>
               <input id="hero-frage" type="text" placeholder="Was kann ich für Sie tun?" autoComplete="off" value={wert} onChange={(e) => setWert(e.target.value)} />

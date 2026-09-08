@@ -2,7 +2,7 @@
 
 /**
  * Macht das serverseitig gerenderte Inhaltsverzeichnis der Kette lebendig: markiert den
- * Abschnitt im Lesefenster und scrollt Klicks sanft unter den Kopf (gleiche Quelle wie
+ * Abschnitt im Lesefenster und scrollt Anker-Klicks im Kapitel (Inhalt, Leos Einwürfe) sanft unter den Kopf (gleiche Quelle wie
  * das Inhaltsverzeichnis in der linken Randspalte).
  */
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ export default function InhaltAktiv() {
   }, [aktiv, pathname]);
 
   useEffect(() => {
-    const nav = document.querySelector("#kapitel-live .inhalt__liste");
+    const nav = document.getElementById("kapitel-live");
     if (!nav) return;
     const h = (ev: Event) => {
       const a = (ev.target as Element | null)?.closest?.("a[href^='#']");

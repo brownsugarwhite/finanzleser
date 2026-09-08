@@ -108,12 +108,15 @@ export default async function RootLayout({
         <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
-        <TopBanner
-          text={siteSettings.top_banner.text}
-          linkType={siteSettings.top_banner.link_type}
-          linkValue={siteSettings.top_banner.link_value}
-          visibility={siteSettings.top_banner.visibility}
-        />
+        {!FADEN_AKTIV && (
+          /* Im Faden gibt es keinen Banner über dem Kopf (Prototyp); die alte Seite behält ihn. */
+          <TopBanner
+            text={siteSettings.top_banner.text}
+            linkType={siteSettings.top_banner.link_type}
+            linkValue={siteSettings.top_banner.link_value}
+            visibility={siteSettings.top_banner.visibility}
+          />
+        )}
         {FADEN_AKTIV ? (
           /* Der Faden (Stufe 1): Kopf, Randspalten, Strom mit der Seite als lebendem Kapitel, Eingabe.
              Megamenü, Preview-Slider, Morph-Übergänge und das Leo-Dock bleiben im Else-Zweig für

@@ -8,7 +8,7 @@
  */
 import type { Post } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
-import { baueKette, type Abschnitt, type Teil } from "@/lib/faden/kette";
+import { baueKette, werkzeugId, type Abschnitt, type Teil } from "@/lib/faden/kette";
 import { verweiseAufloesen } from "@/lib/faden/titel";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
@@ -24,12 +24,15 @@ import Aktionen from "./Aktionen";
 import WerkzeugKarte, { toolTitel } from "./WerkzeugKarte";
 import WochenbriefKasten from "./WochenbriefKasten";
 
+const EINWURF_ZIEL: Record<string, string> = { rechner: "Zum Rechner", checkliste: "Zur Checkliste", vergleich: "Zum Vergleich", dokumente: "Zu den Dokumenten" };
+
 function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData }) {
   return (
     <>
       {teile.map((t, i) => {
         if (t.art === "html") return <div key={i} className="prose fliess__html" dangerouslySetInnerHTML={{ __html: t.html }} />;
         if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><GamificationEmbed gamType={t.typ} fields={t.felder} /></div>;
+        if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         return <WerkzeugKarte key={i} teil={t} toolData={toolData} />;
       })}
     </>
@@ -102,7 +105,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
                 {k.toc.map((t, i) => (
                   <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art}>
                     <a href={`#${t.id}`}>
-                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : "★"}</i>
+                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : "⚙"}</i>
                       <span className="inhalt__linie" aria-hidden="true" />
                       <span className="inhalt__titel">{t.titel}</span>
                     </a>
@@ -135,6 +138,15 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
               <div className="fazit-kopf"><span><img src="/icons/fazit-starburst.svg" alt="" />Fazit</span></div>
               <div className="fazit prose" dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
+            </section>
+          )}
+          {k.werkzeuge.length > 0 && (
+            <section className="abschnitt abschnitt--werkzeuge" id="werkzeuge" data-toc-titel="Finanztools zum Beitrag">
+              <span className="kicker">Finanztools zum Beitrag</span>
+              <h2 className="abschnitt__titel">Rechnen, prüfen, vergleichen</h2>
+              <div className="werkzeuge-liste">
+                {k.werkzeuge.map((w) => <WerkzeugKarte key={werkzeugId(w.typ, w.slug)} teil={w} toolData={toolData} />)}
+              </div>
             </section>
           )}
           <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} />

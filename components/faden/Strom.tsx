@@ -19,7 +19,7 @@ export default function Strom({ children }: { children: ReactNode }) {
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
         <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />
-        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} inert={!k.offen} id={`kapitel-alt-${k.id}`}>
+        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
             <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
             <h2>{k.titel}</h2>
@@ -29,7 +29,7 @@ export default function Strom({ children }: { children: ReactNode }) {
           </div>
           <div className="kapitel__inhalt">
             {k.html ? (
-              <div className="kapitel__schnappschuss" dangerouslySetInnerHTML={{ __html: k.html }} />
+              <div className="kapitel__schnappschuss" inert dangerouslySetInnerHTML={{ __html: k.html }} />
             ) : (
               <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="textlink" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
             )}

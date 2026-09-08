@@ -147,6 +147,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .faden-shell .einwurf { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--green-ink); font-style: italic; }
 .faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--green); flex: none; }
+.faden-shell a.einwurf--zeiger { text-decoration: none; margin: 6px 0 10px; flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: 12px; } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
+.faden-shell .abschnitt--werkzeuge .werkzeuge-liste { display: grid; gap: 18px; margin-top: 6px; }
+.faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
 
 /* ---------- Kasten (Werkzeugkarte) ---------- */
 .faden-shell .kasten { position: relative; background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--green); border-radius: 2px; padding: 14px 18px 12px; display: grid; gap: 10px; scroll-margin-top: 110px; }
@@ -449,7 +452,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .eingabe__blur b { position: absolute; inset: 0; background: linear-gradient(to top, var(--paper) 30%, transparent 100%); }
 .faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: 750px; margin-left: -11px; }
 .faden-shell .suchpille-wrap { position: relative; width: 100%; z-index: 6; }
-.faden-shell .suchpille { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.55); backdrop-filter: blur(16px) brightness(1.15); border-radius: 26px; box-shadow: 0 3px 23px rgba(0,0,0,.02); padding: 6px 6px 6px 22px; min-height: 52px; transition: box-shadow .2s ease; border: 1px solid var(--rule); }
+.faden-shell .suchpille { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.55); backdrop-filter: blur(16px) brightness(1.15); border-radius: 26px; box-shadow: 0 3px 23px rgba(0,0,0,.02); padding: 6px 6px 6px 22px; min-height: 52px; transition: box-shadow .2s ease; }
 .faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--ink); }
 .faden-shell .suchpille input { flex: 1; border: 0; background: none; font: 400 17px/40px var(--sans); color: var(--ink); min-width: 0; outline: none; padding: 0; }
 .faden-shell .suchpille input::placeholder { color: var(--muted); opacity: 1; }
