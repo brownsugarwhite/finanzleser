@@ -20,6 +20,7 @@ import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { getFadenOptionen } from "@/lib/faden/optionen";
 import FadenShell from "@/components/faden/FadenShell";
 import "./globals.css";
 
@@ -85,10 +86,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [navItems, siteSettings, megamenuPreload] = await Promise.all([
+  const [navItems, siteSettings, megamenuPreload, fadenOptionen] = await Promise.all([
     getNavItems(),
     getSiteSettings(),
     getMegamenuPreload().catch(() => ({})),
+    // Level-Stufen für das Punktekonto; nur im Faden (Produktion ohne Schalter fragt nichts Neues ab).
+    FADEN_AKTIV ? getFadenOptionen() : Promise.resolve(null),
   ]);
 
   return (
@@ -123,7 +126,7 @@ export default async function RootLayout({
              die alte Seite (Produktion ohne Schalter). */
           <Providers>
           <NavProvider items={navItems}>
-            <FadenShell nav={navItems} preload={megamenuPreload}>{children}</FadenShell>
+            <FadenShell nav={navItems} preload={megamenuPreload} level={fadenOptionen?.level}>{children}</FadenShell>
           </NavProvider>
           </Providers>
         ) : (

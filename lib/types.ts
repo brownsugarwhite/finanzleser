@@ -349,6 +349,20 @@ export interface FadenFelder {
 }
 
 /** Glossarbegriff (CPT `glossar` aus wordpress/mu-plugins/finanzleser-faden.php; nur mit Faden-Schalter abgefragt). */
+/** Spiel des Fadens (Beitragstyp `spiel`, mu-plugin finanzleser-faden). */
+export interface Spiel {
+  id: string;
+  slug: string;
+  title: string;
+  typ: "mythos" | "quiz" | "schaetzen" | "karte" | "gewusst" | "finanzwort" | "rubbellos";
+  felder: Record<string, string>;
+  wappen: string;
+  status: string;
+  punkte: number;
+  /** YYYY-MM-DD oder null = zeitlos. */
+  datum: string | null;
+}
+
 export interface GlossarEintrag {
   id: string;
   title: string;

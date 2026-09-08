@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Zustand des Fadens (Stufe 1): Verlauf (eingefrorene Kapitel), Aktenkoffer,
- * Toast, Navigation „anhängen statt ersetzen“.
+ * Zustand des Fadens (Stufe 1): Verlauf (eingefrorene Kapitel), Aktenkoffer, Punkte/Serie/Wappen
+ * mit Belohnung, Toast, Navigation „anhängen statt ersetzen“.
  *
  * Kapitelmodell: Das lebende Kapitel ist die aktuelle Next-Seite (#kapitel-live am Ende
  * des Stroms). Bei jedem internen Link wird das lebende Kapitel als HTML-Schnappschuss
@@ -14,6 +14,8 @@ import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
 import { usePathname, useRouter } from "next/navigation";
+import { LEVEL_STANDARD, type Level } from "@/lib/faden/optionen";
+import { abzeichen, konfetti, nochmal, reduzierteBewegung } from "@/lib/faden/belohnung";
 
 export interface Schnappschuss {
   id: string;
@@ -50,6 +52,16 @@ interface FadenContextWert {
   /** Leo: eine Chat-Instanz für die ganze Sitzung; sichtbar sind die Nachrichten des lebenden Kapitels. */
   leo: { nachrichten: LeoUIMessage[]; status: "submitted" | "streaming" | "ready" | "error"; fehler?: Error; stop: () => void };
   fragen: (text: string) => void;
+  /** Punktekonto (localStorage `faden-punkte`): Punkte, Serie in Tagen, freigeschaltete Wappen, Level-Stufen aus dem CMS. */
+  punkte: number;
+  serie: number;
+  wappen: string[];
+  level: Level[];
+  /**
+   * Belohnung wie im Prototyp: Punkte gutschreiben, Serie fortführen, an `kasten` Konfetti
+   * und „+N Punkte“-Abzeichen, Puls am Register, Leo freut sich. Ohne Kasten nur ein Toast.
+   */
+  belohne: (punkte: number, kasten?: HTMLElement | null, opts?: { wappen?: string; text?: string }) => void;
 }
 
 const FadenContext = createContext<FadenContextWert | null>(null);
@@ -64,6 +76,15 @@ const MAX_VERLAUF = 8;
 const META_KEY = "faden-verlauf";
 const KOFFER_KEY = "faden-koffer";
 const GLOSSAR_KEY = "faden-glossar";
+const PUNKTE_KEY = "faden-punkte";
+
+interface Konto { punkte: number; serie: number; letzterTag: string; wappen: string[] }
+const KONTO_LEER: Konto = { punkte: 0, serie: 0, letzterTag: "", wappen: [] };
+
+/** Lokales Datum als YYYY-MM-DD (für die Serie zählt der Tag des Lesers). */
+function tag(d = new Date()): string {
+  return new Intl.DateTimeFormat("sv-SE", { year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+}
 
 function uhr(d = new Date()): string {
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
@@ -118,11 +139,12 @@ export function zumKapitelScrollen(): void {
   window.scrollTo({ top: Math.max(0, ziel), behavior: reduziert ? "auto" : "smooth" });
 }
 
-export default function FadenProvider({ children }: { children: ReactNode }) {
+export default function FadenProvider({ children, level = LEVEL_STANDARD }: { children: ReactNode; level?: Level[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const [verlauf, setVerlauf] = useState<Schnappschuss[]>([]);
   const [koffer, setKoffer] = useState<string[]>([]);
+  const [konto, setKonto] = useState<Konto>(KONTO_LEER);
   const [blatt, setBlatt] = useState<BlattZustand | null>(null);
   const blattFrisch = useRef(false);
   const [toastText, setToastText] = useState("");
@@ -144,6 +166,10 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
     try {
       const k = JSON.parse(localStorage.getItem(KOFFER_KEY) || "[]");
       if (Array.isArray(k)) setKoffer(k.filter((x) => typeof x === "string"));
+    } catch { /* leer */ }
+    try {
+      const k = JSON.parse(localStorage.getItem(PUNKTE_KEY) || "null");
+      if (k && typeof k.punkte === "number") setKonto({ punkte: k.punkte, serie: Number(k.serie) || 0, letzterTag: typeof k.letzterTag === "string" ? k.letzterTag : "", wappen: Array.isArray(k.wappen) ? k.wappen.filter((x: unknown) => typeof x === "string") : [] });
     } catch { /* leer */ }
   }, []);
 
@@ -310,12 +336,35 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
     toast("Im Aktenkoffer: „" + (titel.length > 40 ? titel.slice(0, 38) + "…" : titel) + "“");
   }, [toast]);
 
+  const belohne = useCallback((p: number, kasten?: HTMLElement | null, opts?: { wappen?: string; text?: string }) => {
+    let neuesWappen = false;
+    setKonto((alt) => {
+      const heute = tag(), gestern = tag(new Date(Date.now() - 86_400_000));
+      const serie = alt.letzterTag === heute ? Math.max(1, alt.serie) : alt.letzterTag === gestern ? alt.serie + 1 : 1;
+      neuesWappen = !!opts?.wappen && !alt.wappen.includes(opts.wappen);
+      const neu: Konto = { punkte: alt.punkte + p, serie, letzterTag: heute, wappen: neuesWappen && opts?.wappen ? [...alt.wappen, opts.wappen] : alt.wappen };
+      try { localStorage.setItem(PUNKTE_KEY, JSON.stringify(neu)); } catch { /* egal */ }
+      return neu;
+    });
+    const text = opts?.text || `+${p} Punkte`;
+    if (!kasten || reduzierteBewegung()) { toast(text); }
+    else {
+      konfetti(kasten);
+      abzeichen(kasten, text);
+      const leos = kasten.closest(".kapitel__inhalt")?.querySelectorAll(".wort--leo img");
+      if (leos && leos.length) nochmal(leos[leos.length - 1], "leo-freut");
+    }
+    nochmal(document.querySelector('.register button[data-key="plus"]'), "punkte-puls");
+    if (opts?.wappen) setTimeout(() => { if (neuesWappen) toast(`Wappen „${opts.wappen}“ freigeschaltet`); }, 900);
+  }, [toast]);
+
   const wert = useMemo<FadenContextWert>(() => ({
     blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
     leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
     fragen,
-  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen]);
+    punkte: konto.punkte, serie: konto.serie, wappen: konto.wappen, level, belohne,
+  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
 
   return (
     <FadenContext.Provider value={wert}>

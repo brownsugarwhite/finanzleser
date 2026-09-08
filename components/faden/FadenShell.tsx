@@ -8,6 +8,7 @@
 import { useState, type ReactNode } from "react";
 import type { NavItem } from "@/lib/navItems";
 import type { MegamenuPreload } from "@/lib/wordpress";
+import type { Level } from "@/lib/faden/optionen";
 import FadenProvider from "./FadenProvider";
 import Kopf from "./Kopf";
 import Strom from "./Strom";
@@ -18,12 +19,12 @@ import Fussnote from "./Fussnote";
 import Menue from "./kopf/Menue";
 import BegriffMenue from "./glossar/BegriffMenue";
 
-export default function FadenShell({ children, nav, preload }: { children: ReactNode; nav: NavItem[]; preload: MegamenuPreload }) {
+export default function FadenShell({ children, nav, preload, level }: { children: ReactNode; nav: NavItem[]; preload: MegamenuPreload; level?: Level[] }) {
   const [schublade, setSchublade] = useState<"links" | "rechts" | null>(null);
   const [menue, setMenue] = useState(false);
   const zu = () => setSchublade(null);
   return (
-    <FadenProvider>
+    <FadenProvider level={level}>
       <div className="faden-shell">
         <Kopf nav={nav} preload={preload} onMenue={() => setMenue(true)} />
         <Menue offen={menue} onZu={() => setMenue(false)} onRand={(s) => setSchublade(s)} />

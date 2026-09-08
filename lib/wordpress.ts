@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import type { GlossarEintrag, Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
+import type { GlossarEintrag, Spiel, Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
@@ -2137,6 +2137,53 @@ async function _fetchAllGlossar(): Promise<GlossarEintrag[]> {
     return requireNonEmpty("allGlossar", eintraege).sort((a, b) => a.title.localeCompare(b.title, "de"));
   } catch (error) {
     console.error("Error fetching Glossar:", error);
+    throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand
+  }
+}
+
+// ─────────────────────────────────────────────
+// Spiele (Beitragstyp `spiel`): 49 Einträge, eine Abfrage, im Build-Memo.
+// ─────────────────────────────────────────────
+
+export async function getAllSpiele(): Promise<Spiel[]> {
+  return buildMemo("allSpiele", _fetchAllSpiele);
+}
+async function _fetchAllSpiele(): Promise<Spiel[]> {
+  const client = getClient();
+  const query = gql`
+    query GetSpiele($after: String) {
+      spiele(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes { id title slug spielTyp spielFelder wappen status punkte datum }
+      }
+    }
+  `;
+  type Roh = { id: string; title: string; slug: string; spielTyp?: string | null; spielFelder?: string | null; wappen?: string | null; status?: string | null; punkte?: string | null; datum?: string | null };
+  type Antwort = { spiele: { nodes: Roh[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+  try {
+    const alle: Roh[] = [];
+    let after: string | null = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const data: Antwort = await client.request<Antwort>(query, { after });
+      alle.push(...data.spiele.nodes);
+      hasNextPage = data.spiele.pageInfo.hasNextPage;
+      after = data.spiele.pageInfo.endCursor;
+    }
+    const spiele: Spiel[] = alle
+      .filter((r) => !!r.spielTyp)
+      .map((r) => {
+        let felder: Record<string, string> = {};
+        try { const f = JSON.parse(r.spielFelder || "{}"); if (f && typeof f === "object" && !Array.isArray(f)) felder = Object.fromEntries(Object.entries(f).map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)])); } catch { /* Felder bleiben leer */ }
+        return {
+          id: r.id, slug: r.slug, title: r.title, typ: r.spielTyp as Spiel["typ"], felder,
+          wappen: r.wappen || "", status: r.status || "", punkte: Number(r.punkte) || 0,
+          datum: r.datum && /^\d{4}-\d{2}-\d{2}$/.test(r.datum) ? r.datum : null,
+        };
+      });
+    return requireNonEmpty("allSpiele", spiele);
+  } catch (error) {
+    console.error("Error fetching Spiele:", error);
     throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand
   }
 }

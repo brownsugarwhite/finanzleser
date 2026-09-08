@@ -19,7 +19,7 @@ const EINTRAEGE: { key: BlattZustand["key"]; label: string; href: string }[] = [
 ];
 
 export default function Register() {
-  const { blatt, blattOeffnen, blattZu, toast } = useFaden();
+  const { blatt, blattOeffnen, blattZu, toast, punkte } = useFaden();
   const blattRef = useRef(blatt); blattRef.current = blatt;
   const pill = useNavPill({
     items: EINTRAEGE.map((e) => ({ label: e.label, href: e.href })),
@@ -68,7 +68,7 @@ export default function Register() {
         {EINTRAEGE.map((e, i) => (
           <Fragment key={e.key}>
             {i > 0 && <Spark />}
-            <button type="button" data-key={e.key} className={blatt?.key === e.key ? "offen" : ""} {...pill.getButtonProps(i)}>{e.label}</button>
+            <button type="button" data-key={e.key} className={blatt?.key === e.key ? "offen" : ""} {...pill.getButtonProps(i)}>{e.label}{e.key === "plus" && punkte > 0 && <small className="punkte-zahl">· {punkte} P.</small>}</button>
           </Fragment>
         ))}
         <Spark />
