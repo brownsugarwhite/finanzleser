@@ -1,0 +1,806 @@
+[
+  {
+    "slug": "zinsbindungsfrist",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Aktuelle Bauzinsen nach Zinsbindungsdauer 2026",
+          "art": "balken",
+          "titel": "Bauzinsen im Juli 2026 nach Zinsbindungsdauer",
+          "untertitel": "Effektiver Jahreszins im Neugeschäft der deutschen Banken",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Zinssätze und Volumina für das Neugeschäft der deutschen Banken (MFIs) – Wohnungsbaukredite an private Haushalte",
+            "url": "https://www.bundesbank.de/resource/blob/615036/9f4efe4e8f601ff991ec86223910816f/472B63F073F071307366337C94F8C870/s510athyp-data.pdf",
+            "stand": "Juli 2026 (vorläufiger Wert)"
+          },
+          "reihen": [
+            {
+              "key": "jul2026",
+              "label": "Juli 2026",
+              "werte": [
+                {
+                  "label": "Variabel oder bis 1 Jahr",
+                  "wert": 4.41
+                },
+                {
+                  "label": "1 bis 5 Jahre",
+                  "wert": 3.97
+                },
+                {
+                  "label": "5 bis 10 Jahre",
+                  "wert": 3.78
+                },
+                {
+                  "label": "Über 10 Jahre",
+                  "wert": 3.92
+                }
+              ]
+            }
+          ],
+          "hinweis": "Über alle Bindungsfristen gemittelt lag der effektive Jahreszins im Juli 2026 bei 3,94 % (einschließlich sonstiger Kosten 3,98 %).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Das Sonderkündigungsrecht nach 10 Jahren",
+          "art": "balken",
+          "titel": "Kündigungsfrist nach § 489 BGB je nach Zinsart",
+          "untertitel": "Ordentliches Kündigungsrecht des Darlehensnehmers",
+          "einheit": "Monate",
+          "quelle": {
+            "name": "§ 489 BGB (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/bgb/__489.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "frist",
+              "label": "Kündigungsfrist",
+              "werte": [
+                {
+                  "label": "Gebundener Zins, bei Ende der Zinsbindung",
+                  "wert": 1
+                },
+                {
+                  "label": "Gebundener Zins, nach 10 Jahren",
+                  "wert": 6
+                },
+                {
+                  "label": "Veränderlicher Zins, jederzeit",
+                  "wert": 3
+                }
+              ]
+            }
+          ],
+          "hinweis": "Das Recht, nach zehn Jahren Zinsbindung mit sechs Monaten Frist zu kündigen, erlischt nicht – es besteht auch nach elf oder zwölf Jahren fort.",
+          "abschnitt": "heading-7",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "zinseszinseffekt",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Renditen sind 2026 realistisch?",
+          "art": "torte",
+          "titel": "Was von 100 € Kapitalertrag nach Steuern bleibt",
+          "untertitel": "Abgeltungsteuer plus Solidaritätszuschlag, ohne Kirchensteuer",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 32d Abs. 1 EStG und § 3, § 4 SolzG 1995 (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32d.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "aufteilung",
+              "label": "Aufteilung",
+              "werte": [
+                {
+                  "label": "Nettoertrag",
+                  "wert": 73.625
+                },
+                {
+                  "label": "Abgeltungsteuer",
+                  "wert": 25
+                },
+                {
+                  "label": "Solidaritätszuschlag",
+                  "wert": 1.375
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Sparerpauschbetrag von 1.000 € pro Person (2.000 € für Ehepaare) bleibt vorab steuerfrei; erst darüber greift diese Aufteilung. Der Zuschlag von 5,5 % wird auf Kapitalerträge ohne Freigrenze erhoben.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "inflation",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist die aktuelle Inflationsrate 2026 in Deutschland?",
+          "art": "saeulen",
+          "titel": "Inflationsrate 2026 von Monat zu Monat",
+          "untertitel": "Veränderung des Verbraucherpreisindex gegenüber dem Vorjahresmonat",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt (Destatis), Pressemitteilungen zur Inflationsrate 2026",
+            "url": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+            "stand": "August 2026 (vorläufiger Wert)"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Jan.",
+                  "wert": 2.1
+                },
+                {
+                  "label": "Feb.",
+                  "wert": 1.9
+                },
+                {
+                  "label": "März",
+                  "wert": 2.7
+                },
+                {
+                  "label": "April",
+                  "wert": 2.9
+                },
+                {
+                  "label": "Mai",
+                  "wert": 2.6
+                },
+                {
+                  "label": "Juni",
+                  "wert": 2.3
+                },
+                {
+                  "label": "Juli",
+                  "wert": 2.8
+                },
+                {
+                  "label": "Aug.",
+                  "wert": 2.9
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Werte für März und April 2026 wurden von Destatis nachträglich korrigiert; der August-Wert ist noch vorläufig.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "EZB-Geldpolitik und Zinsentwicklung 2026",
+          "art": "balken",
+          "titel": "EZB-Leitzinsen seit dem 17. Juni 2026",
+          "untertitel": "Erste Anhebung der Leitzinsen seit Juni 2023",
+          "einheit": "%",
+          "quelle": {
+            "name": "Europäische Zentralbank, Key ECB interest rates",
+            "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+            "stand": "17.06.2026"
+          },
+          "reihen": [
+            {
+              "key": "seit170626",
+              "label": "Seit 17.06.2026",
+              "werte": [
+                {
+                  "label": "Einlagesatz",
+                  "wert": 2.25
+                },
+                {
+                  "label": "Hauptrefinanzierungssatz",
+                  "wert": 2.4
+                },
+                {
+                  "label": "Spitzenrefinanzierungssatz",
+                  "wert": 2.65
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zuvor lag der Einlagesatz seit dem 11. Juni 2025 unverändert bei 2,00 %; am 17. Juni 2026 hob der EZB-Rat die drei Leitzinsen um jeweils 0,25 Prozentpunkte an.",
+          "abschnitt": "heading-9",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "anlageimmobilie",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Steuerliche Abschreibung: So sparen Sie Steuern",
+          "art": "balken",
+          "titel": "AfA-Satz für Gebäude nach Baujahr",
+          "untertitel": "Lineare Absetzung für Abnutzung nach § 7 Abs. 4 EStG",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 7 Abs. 4 EStG (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__7.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "afa",
+              "label": "AfA-Satz",
+              "werte": [
+                {
+                  "label": "Fertigstellung vor 1925",
+                  "wert": 2.5
+                },
+                {
+                  "label": "Fertigstellung 1925 bis 2022",
+                  "wert": 2
+                },
+                {
+                  "label": "Fertigstellung ab 2023",
+                  "wert": 3
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bei kürzerer tatsächlicher Nutzungsdauer sind anstelle dieser Sätze auch höhere Absetzungen möglich.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "grundschuld",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Kosten im Jahr 2026",
+          "art": "saeulen",
+          "titel": "Notargebühr (1,0-Satz) je nach Geschäftswert",
+          "untertitel": "Gebührentabelle B, Anlage 2 zu § 34 Abs. 3 GNotKG",
+          "einheit": "€",
+          "quelle": {
+            "name": "Anlage 2 (Tabelle B) zu § 34 Abs. 3 GNotKG (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/gnotkg/anlage_2.html",
+            "stand": "seit 01.06.2025"
+          },
+          "reihen": [
+            {
+              "key": "gebuehr",
+              "label": "1,0-Gebühr",
+              "werte": [
+                {
+                  "label": "50.000 €",
+                  "wert": 165
+                },
+                {
+                  "label": "200.000 €",
+                  "wert": 435
+                },
+                {
+                  "label": "500.000 €",
+                  "wert": 935
+                },
+                {
+                  "label": "1.000.000 €",
+                  "wert": 1735
+                }
+              ]
+            }
+          ],
+          "hinweis": "Notar- und Grundbuchkosten für die Grundschuldbestellung ergeben sich aus einem Vielfachen dieser Gebühr, jeweils bezogen auf den Geschäftswert.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "baufinanzierung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Bauzinsen gelten 2026 und wie entstehen sie?",
+          "art": "saeulen",
+          "titel": "Bauzinsen 2026 von Monat zu Monat",
+          "untertitel": "Effektiver Jahreszins aller Wohnungsbaukredite, Neugeschäft",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Zinssätze und Volumina für das Neugeschäft der deutschen Banken (MFIs) – Wohnungsbaukredite an private Haushalte",
+            "url": "https://www.bundesbank.de/resource/blob/615036/9f4efe4e8f601ff991ec86223910816f/472B63F073F071307366337C94F8C870/s510athyp-data.pdf",
+            "stand": "Juli 2026 (vorläufiger Wert)"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Jan.",
+                  "wert": 3.77
+                },
+                {
+                  "label": "Feb.",
+                  "wert": 3.77
+                },
+                {
+                  "label": "März",
+                  "wert": 3.72
+                },
+                {
+                  "label": "April",
+                  "wert": 3.84
+                },
+                {
+                  "label": "Mai",
+                  "wert": 3.93
+                },
+                {
+                  "label": "Juni",
+                  "wert": 3.95
+                },
+                {
+                  "label": "Juli",
+                  "wert": 3.94
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Wert mittelt über alle Zinsbindungsfristen von variabel bis über 10 Jahre; einschließlich sonstiger Kosten lag der Jahreszins im Juli 2026 bei 3,98 %.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "bausparvertrag",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche staatliche Förderung gibt es?",
+          "art": "balken",
+          "titel": "Maximale Wohnungsbauprämie pro Jahr",
+          "untertitel": "10 % der prämienbegünstigten Aufwendungen",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 3 Wohnungsbau-Prämiengesetz (WoPG 1996, Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/wopg/__3.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "praemie",
+              "label": "Höchstprämie",
+              "werte": [
+                {
+                  "label": "Alleinstehende",
+                  "wert": 70
+                },
+                {
+                  "label": "Ehepaare",
+                  "wert": 140
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Prämie beträgt 10 % der Aufwendungen bis zu einem Höchstbetrag von 700 € (Alleinstehende) bzw. 1.400 € (Ehegatten) je Kalenderjahr.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kfw-foerderung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Hauptprogramme der KfW Förderung 2026",
+          "art": "balken",
+          "titel": "Zinssatz nach Effizienzhaus-Stufe im Neubauprogramm",
+          "untertitel": "KfW 297/298 „Klimafreundlicher Neubau“, effektiver Jahreszins bei 10 Jahren",
+          "einheit": "%",
+          "quelle": {
+            "name": "KfW Bankengruppe, Pressemitteilung vom 2. März 2026 zum Klimafreundlichen Neubau",
+            "url": "https://www.kfw.de/Über-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_883456.html",
+            "stand": "02.03.2026"
+          },
+          "reihen": [
+            {
+              "key": "zins",
+              "label": "Effektiver Jahreszins",
+              "werte": [
+                {
+                  "label": "Effizienzhaus 40",
+                  "wert": 0.6
+                },
+                {
+                  "label": "Effizienzhaus 55",
+                  "wert": 1
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Effizienzhaus-55-Förderung ist eine befristet wiederaufgenommene Stufe mit einem von der KfW so bezeichneten Signalzinssatz ab 1 %.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Heizungsförderung: KfW 458 mit bis zu 70 Prozent Zuschuss",
+          "art": "balken",
+          "titel": "Grund- und Bonusförderung beim Heizungstausch",
+          "untertitel": "KfW 458, Prozentsätze der förderfähigen Gesamtkosten",
+          "einheit": "%",
+          "quelle": {
+            "name": "KfW Bankengruppe, Merkblatt Zuschuss Nr. 458 – BEG Heizungsförderung für Privatpersonen",
+            "url": "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-(Inlandsf%C3%B6rderung)/PDF-Dokumente/6000005131_M_458.pdf",
+            "stand": "21.07.2026"
+          },
+          "reihen": [
+            {
+              "key": "boni",
+              "label": "Fördersatz",
+              "werte": [
+                {
+                  "label": "Grundförderung",
+                  "wert": 30
+                },
+                {
+                  "label": "Klimageschwindigkeitsbonus",
+                  "wert": 16
+                },
+                {
+                  "label": "Einkommensbonus bis 30.000 €",
+                  "wert": 40
+                },
+                {
+                  "label": "Einkommensbonus bis 40.000 €",
+                  "wert": 30
+                },
+                {
+                  "label": "Einkommensbonus bis 50.000 €",
+                  "wert": 10
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Boni lassen sich mit der Grundförderung kombinieren; insgesamt sind maximal 70 % der förderfähigen Kosten förderfähig, mit Einkommensbonus und Familienzuschlag bis zu 80 %.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kfw-studienkredit",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist die Auszahlung und wie lange wird gefördert?",
+          "art": "balken",
+          "titel": "Maximaler Förderbetrag nach Alter bei Finanzierungsbeginn",
+          "untertitel": "KfW-Studienkredit (174), Erst- und Zweitstudium",
+          "einheit": "€",
+          "quelle": {
+            "name": "KfW Bankengruppe, KfW-Studienkredit (174) – Produktseite",
+            "url": "https://www.kfw.de/inlandsfoerderung/Privatpersonen/Studieren-Qualifizieren/F%C3%B6rderprodukte/KfW-Studienkredit-(174)/",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "betrag",
+              "label": "Höchstbetrag",
+              "werte": [
+                {
+                  "label": "Bis 24 Jahre (14 Fördersemester)",
+                  "wert": 54600
+                },
+                {
+                  "label": "25 bis 34 Jahre (10 Fördersemester)",
+                  "wert": 39000
+                },
+                {
+                  "label": "35 bis 44 Jahre (6 Fördersemester)",
+                  "wert": 23400
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Betrag ergibt sich aus höchstens 650 € monatlicher Auszahlung mal 6 Monate je Fördersemester.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Zinssätze, Konditionen und Kostenbeispiele",
+          "art": "saeulen",
+          "titel": "Effektiver Jahreszins des KfW-Studienkredits im Zeitverlauf",
+          "untertitel": "Zinsanpassung jeweils zum 1. April und 1. Oktober",
+          "einheit": "%",
+          "quelle": {
+            "name": "KfW Bankengruppe, Informationen zu den Zinsen des KfW-Studienkredits per 01.04.2026",
+            "url": "https://www.kfw.de/Über-die-KfW/Newsroom/Aktuelles/Q-As-Studienkredit.html",
+            "stand": "01.04.2026"
+          },
+          "reihen": [
+            {
+              "key": "zins",
+              "label": "Effektiver Jahreszins",
+              "werte": [
+                {
+                  "label": "04/2024",
+                  "wert": 7.51
+                },
+                {
+                  "label": "10/2024",
+                  "wert": 6.85
+                },
+                {
+                  "label": "04/2025",
+                  "wert": 6.31
+                },
+                {
+                  "label": "10/2025",
+                  "wert": 6.04
+                },
+                {
+                  "label": "04/2026",
+                  "wert": 6.53
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Zinssatz richtet sich nach dem Sechs-Monats-Euribor zuzüglich einer kostendeckenden Marge und kann daher auch wieder steigen, wie zuletzt zum 1. April 2026 geschehen.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kredite",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch sind die aktuellen Zinssätze für Kredite?",
+          "art": "balken",
+          "titel": "Effektivzins: Ratenkredit gegen Baufinanzierung",
+          "untertitel": "Neugeschäft deutscher Banken, Juli 2026",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Zinssätze für das Neugeschäft der deutschen Banken (MFIs) – Konsumentenkredite und Wohnungsbaukredite an private Haushalte",
+            "url": "https://www.bundesbank.de/resource/blob/615046/9cb1308440026d5b2100ac84714f31c8/472B63F073F071307366337C94F8C870/s510atrat-data.pdf",
+            "stand": "Juli 2026 (vorläufiger Wert)"
+          },
+          "reihen": [
+            {
+              "key": "jul2026",
+              "label": "Juli 2026",
+              "werte": [
+                {
+                  "label": "Ratenkredit (Konsumentenkredit)",
+                  "wert": 8.23
+                },
+                {
+                  "label": "Baufinanzierung (Wohnungsbaukredit)",
+                  "wert": 3.94
+                }
+              ]
+            }
+          ],
+          "hinweis": "Beide Werte sind über alle Zinsbindungsfristen gemittelt; die Immobilie als Sicherheit erklärt einen Großteil des Unterschieds.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wie funktionieren Sondertilgungen bei Krediten?",
+          "art": "balken",
+          "titel": "Maximale Vorfälligkeitsentschädigung nach § 502 BGB",
+          "untertitel": "Obergrenze in Prozent des vorzeitig zurückgezahlten Betrags",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 502 Abs. 3 BGB (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/bgb/__502.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "grenze",
+              "label": "Höchstgrenze",
+              "werte": [
+                {
+                  "label": "Restlaufzeit über 1 Jahr",
+                  "wert": 1
+                },
+                {
+                  "label": "Restlaufzeit bis 1 Jahr",
+                  "wert": 0.5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Alternativ darf die Entschädigung nicht höher sein als die Sollzinsen, die bis zur vereinbarten Rückzahlung angefallen wären.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kreditkarte",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch sind die Kosten verschiedener Kreditkartentypen?",
+          "art": "saeulen",
+          "titel": "Zins für echte Kreditkartenkredite im Jahresverlauf 2026",
+          "untertitel": "Effektivzins der Bestände privater Haushalte",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Zinsstatistik – Kreditkartenkredite an private Haushalte (Bestände)",
+            "url": "https://www.bundesbank.de/resource/blob/650658/3c0651ca01e0b73b3f1d20aee3f2d105/mL/s510atsuhde-data.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Jan.",
+                  "wert": 17.08
+                },
+                {
+                  "label": "Feb.",
+                  "wert": 17.04
+                },
+                {
+                  "label": "März",
+                  "wert": 17.08
+                },
+                {
+                  "label": "April",
+                  "wert": 17.17
+                },
+                {
+                  "label": "Mai",
+                  "wert": 17.22
+                },
+                {
+                  "label": "Juni",
+                  "wert": 17.24
+                },
+                {
+                  "label": "Juli",
+                  "wert": 17.38
+                }
+              ]
+            }
+          ],
+          "hinweis": "„Echte“ Kreditkartenkredite sind revolvierende Kredite mit tatsächlichem Zinsanfall; bei unechten Kreditkartenkrediten mit kurzem Zahlungsaufschub setzt die Bundesbank den Zinssatz definitionsgemäß mit 0 % an.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "girokonto",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Dispozinsen: Die teuerste Kreditform",
+          "art": "saeulen",
+          "titel": "Zins für Überziehungskredite im Jahresverlauf 2026",
+          "untertitel": "Bestände privater Haushalte, revolvierende Kredite und Überziehungskredite",
+          "einheit": "%",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Zinsstatistik – Kredite an private Haushalte (Bestände)",
+            "url": "https://www.bundesbank.de/resource/blob/650658/3c0651ca01e0b73b3f1d20aee3f2d105/mL/s510atsuhde-data.pdf",
+            "stand": "Juli 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Jan.",
+                  "wert": 9.44
+                },
+                {
+                  "label": "Feb.",
+                  "wert": 9.31
+                },
+                {
+                  "label": "März",
+                  "wert": 9.3
+                },
+                {
+                  "label": "April",
+                  "wert": 9.26
+                },
+                {
+                  "label": "Mai",
+                  "wert": 9.24
+                },
+                {
+                  "label": "Juni",
+                  "wert": 9.34
+                },
+                {
+                  "label": "Juli",
+                  "wert": 9.32
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zu den Überziehungskrediten zählen laut Bundesbank-Definition eingeräumte und nicht eingeräumte Dispositionskredite; echte Kreditkartenkredite weist die Bundesbank separat aus.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Sicherheit: Einlagensicherung im Detail",
+          "art": "balken",
+          "titel": "Einlagensicherung nach § 8 Einlagensicherungsgesetz",
+          "untertitel": "Gesetzliche Deckungssumme je Einleger und Bank",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 8 Einlagensicherungsgesetz (EinSiG, Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/einsig/__8.html",
+            "stand": "aktuelle Fassung"
+          },
+          "reihen": [
+            {
+              "key": "deckung",
+              "label": "Deckungssumme",
+              "werte": [
+                {
+                  "label": "Regulär",
+                  "wert": 100000
+                },
+                {
+                  "label": "Temporär erhöht (z. B. Immobilienverkauf, Scheidung, Renteneintritt)",
+                  "wert": 500000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der erhöhte Schutz gilt bis zu sechs Monate nach Gutschrift des Betrags und deckt bestimmte einmalige Lebensereignisse ab.",
+          "abschnitt": "heading-8",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]
