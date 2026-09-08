@@ -1,0 +1,779 @@
+[
+  {
+    "slug": "gesetzliche-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragssätze 2026: Das kostet die Gesetzliche Krankenversicherung",
+        "art": "balken",
+        "titel": "Der GKV-Beitrag setzt sich aus drei Sätzen zusammen",
+        "untertitel": "Allgemeiner Beitragssatz, durchschnittlicher Zusatzbeitrag und Pflegeversicherung 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt „Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht für das Jahr 2026“",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Beitragssatz 2026",
+            "werte": [
+              {
+                "label": "Allgemeiner Beitragssatz",
+                "wert": 14.6
+              },
+              {
+                "label": "Durchschnittlicher Zusatzbeitrag",
+                "wert": 2.9
+              },
+              {
+                "label": "Pflegeversicherung",
+                "wert": 3.6
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die drei Sätze werden nicht einfach addiert: Allgemeiner Beitragssatz und durchschnittlicher Zusatzbeitrag ergeben zusammen durchschnittlich 17,5 Prozent für die Krankenversicherung; die Pflegeversicherung wird separat erhoben und ist für Kinderlose ab 23 Jahren um 0,6 Punkte höher.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Beitragsgrenzen 2026: Neue Rechengrößen für höhere Einkommen",
+        "art": "saeulen",
+        "titel": "Beitragsbemessungs- und Versicherungspflichtgrenze steigen 2026",
+        "untertitel": "Jährliche Grenzwerte der Krankenversicherung 2025 im Vergleich zu 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026) und 2025 (SVBezGrV 2025), § 2",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "bbg",
+            "label": "Beitragsbemessungsgrenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 66150
+              },
+              {
+                "label": "2026",
+                "wert": 69750
+              }
+            ]
+          },
+          {
+            "key": "jaeg",
+            "label": "Versicherungspflichtgrenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 73800
+              },
+              {
+                "label": "2026",
+                "wert": 77400
+              }
+            ]
+          }
+        ],
+        "umschalter": {
+          "label": "Rechengröße"
+        },
+        "hinweis": "Die Beitragsbemessungsgrenze (§ 2 Abs. 2 SVBezGrV, wertgleich mit der Grenze für PKV-Bestandsfälle) und die allgemeine Versicherungspflichtgrenze (§ 2 Abs. 1 SVBezGrV) steigen 2026 um jeweils 3.600 Euro im Jahr beziehungsweise 300 Euro im Monat.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "private-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wer kann sich 2026 privat versichern?",
+        "art": "balken",
+        "titel": "Für Bestandsversicherte gilt eine niedrigere Einkommensgrenze",
+        "untertitel": "Jahresarbeitsentgeltgrenzen 2026 für den Wechsel in die PKV",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026), § 2",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Jahresarbeitsentgeltgrenze 2026",
+            "werte": [
+              {
+                "label": "Allgemein",
+                "wert": 77400
+              },
+              {
+                "label": "Bestandsschutz (seit Ende 2002 privat versichert)",
+                "wert": 69750
+              }
+            ]
+          }
+        ],
+        "hinweis": "§ 2 Abs. 1 SVBezGrV 2026 setzt die allgemeine Jahresarbeitsentgeltgrenze fest, Absatz 2 die niedrigere Grenze für Angestellte, die bereits Ende 2002 privat krankenversichert waren.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie entwickeln sich die PKV-Kosten 2026?",
+        "art": "balken",
+        "titel": "Die Pflegeversicherung verteuert sich 2026 stärker als die PKV",
+        "untertitel": "Durchschnittliche Beitragserhöhung zum 1. Januar 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "Verband der Privaten Krankenversicherung (PKV-Verband)",
+          "url": "https://www.pkv.de/wissen/beitraege/warum-die-beitraege-steigen/",
+          "stand": "Oktober 2025"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Erhöhung 2026",
+            "werte": [
+              {
+                "label": "PKV-Vollversicherung",
+                "wert": 13
+              },
+              {
+                "label": "Pflegepflichtversicherung mit Beihilfe",
+                "wert": 6
+              },
+              {
+                "label": "Pflegepflichtversicherung ohne Beihilfe",
+                "wert": 16
+              }
+            ]
+          }
+        ],
+        "hinweis": "Betroffen von der Erhöhung sind rund 60 Prozent der Privatversicherten; bei den übrigen bleiben die Beiträge 2026 stabil oder sinken sogar.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "krankenversicherungsbeitraege",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Beitragssätze im Überblick: Spreizung zwischen den Kassen",
+        "art": "balken",
+        "titel": "Zwischen günstigster und teuerster Kasse liegen 2,21 Punkte",
+        "untertitel": "Zusatzbeitragssatz 2026: niedrigster Wert, Durchschnitt, höchster Wert",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Krankenkassenliste",
+          "url": "https://www.gkv-spitzenverband.de/krankenkassenliste.pdf",
+          "stand": "8. September 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Zusatzbeitrag 2026",
+            "werte": [
+              {
+                "label": "BKK firmus (niedrigster Satz)",
+                "wert": 2.18
+              },
+              {
+                "label": "Durchschnitt aller Kassen",
+                "wert": 2.9
+              },
+              {
+                "label": "BKK24 (höchster Satz)",
+                "wert": 4.39
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Durchschnittswert ist der nach § 242a SGB V vom Bundesgesundheitsministerium amtlich festgelegte Satz für 2026 (Bekanntmachung vom 7.11.2025); die einzelnen Kassenwerte ändern sich tagesaktuell.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer zahlt was? Selbstständige und ihre Mindestbeiträge",
+        "art": "saeulen",
+        "titel": "Die Mindestbemessungsgrundlage steigt 2026 um 70 Euro",
+        "untertitel": "Monatliche Mindestbemessungsgrundlage der freiwilligen GKV",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2025 und 2026 (SVBezGrV), § 1 (Bezugsgröße); § 240 Abs. 4 SGB V (Mindestbemessungsgrundlage)",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Mindestbemessungsgrundlage",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 1248.33
+              },
+              {
+                "label": "2026",
+                "wert": 1318.33
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: § 240 Abs. 4 Satz 1 SGB V setzt die Mindestbemessungsgrundlage auf ein Neunzigstel der monatlichen Bezugsgröße pro Kalendertag fest, macht ein Drittel pro Monat. 2025 betrug die Bezugsgröße 3.745 Euro (÷3 = 1.248,33 Euro), 2026 sind es 3.955 Euro (÷3 = 1.318,33 Euro).",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "krankenversicherungspflicht",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Versicherungspflichtgrenze 2026: Was ändert sich?",
+        "art": "saeulen",
+        "titel": "Die Versicherungspflichtgrenze steigt 2026 um 3.600 Euro",
+        "untertitel": "Jährliche Versicherungspflichtgrenze 2025 und 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "Sozialversicherungsrechengrößen-Verordnung 2026 (SVBezGrV 2026) und 2025 (SVBezGrV 2025), § 2",
+          "url": "https://www.gesetze-im-internet.de/svbezgrv_2026/BJNR1160A0025.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Versicherungspflichtgrenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 73800
+              },
+              {
+                "label": "2026",
+                "wert": 77400
+              }
+            ]
+          }
+        ],
+        "hinweis": "Das entspricht einer monatlichen Erhöhung von 6.150 auf 6.450 Euro, also plus 300 Euro im Monat (§ 2 Abs. 1 SVBezGrV 2025 und 2026).",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "zusatzbeitrag-krankenkasse",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist der durchschnittliche Zusatzbeitrag Krankenkasse 2026?",
+        "art": "saeulen",
+        "titel": "Der Zusatzbeitrag hat sich seit 2024 fast verdoppelt",
+        "untertitel": "Amtlich festgelegter durchschnittlicher Zusatzbeitragssatz",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, „Zusatzbeitragssatz“",
+          "url": "https://www.gkv-spitzenverband.de/krankenversicherung/kv_grundprinzipien/finanzierung/zusatzbeitragssatz/zusatzbeitragssatz.jsp",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Zusatzbeitrag",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 1.7
+              },
+              {
+                "label": "2025",
+                "wert": 2.5
+              },
+              {
+                "label": "2026",
+                "wert": 2.9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Das Bundesgesundheitsministerium legt den Satz jeweils bis zum 1. November für das Folgejahr nach § 242a SGB V auf Empfehlung des GKV-Schätzerkreises fest.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Zusatzbeiträge im Vergleich: Günstigste und teuerste Kassen 2026",
+        "art": "balken",
+        "titel": "Der Gesamtbeitrag reicht 2026 von 16,78 bis 18,99 Prozent",
+        "untertitel": "Allgemeiner Beitragssatz plus individueller Zusatzbeitrag der Kasse",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Krankenkassenliste",
+          "url": "https://www.gkv-spitzenverband.de/krankenkassenliste.pdf",
+          "stand": "8. September 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Gesamtbeitrag 2026",
+            "werte": [
+              {
+                "label": "BKK firmus",
+                "wert": 16.78
+              },
+              {
+                "label": "Durchschnitt aller Kassen",
+                "wert": 17.5
+              },
+              {
+                "label": "BKK24",
+                "wert": 18.99
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Gesamtbeitrag = allgemeiner Beitragssatz (14,6 Prozent, § 241 SGB V) plus individueller Zusatzbeitrag der Kasse beziehungsweise Durchschnittswert (2,18 / 2,9 / 4,39 Prozent).",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "wechsel-private-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Kosten beim Wechsel: Was ändert sich 2026?",
+        "art": "saeulen",
+        "titel": "Der Arbeitgeberzuschuss zur PKV steigt 2026 um 37,27 Euro",
+        "untertitel": "Maximaler monatlicher Zuschuss zur privaten Krankenversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 257 Abs. 2 SGB V i. V. m. § 241 und § 242a SGB V sowie Sozialversicherungsrechengrößen-Verordnung 2025/2026",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__257.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Höchstzuschuss Krankenversicherung",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 471.32
+              },
+              {
+                "label": "2026",
+                "wert": 508.59
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Der Höchstzuschuss ist die Hälfte von allgemeinem Beitragssatz plus durchschnittlichem Zusatzbeitrag, angewendet auf die monatliche Beitragsbemessungsgrenze KV/PV (§ 257 Abs. 2 SGB V). 2025: 50 % × 17,1 % × 5.512,50 € = 471,32 €; 2026: 50 % × 17,5 % × 5.812,50 € = 508,59 €.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "familienversicherung-gesetzliche-krankenkasse",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Einkommensgrenzen 2026?",
+        "art": "balken",
+        "titel": "Die Minijob-Grenze liegt 38 Euro über der allgemeinen Grenze",
+        "untertitel": "Monatliche Einkommensgrenze für beitragsfrei mitversicherte Angehörige 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt „Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht für das Jahr 2026“",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Einkommensgrenze 2026",
+            "werte": [
+              {
+                "label": "Allgemein",
+                "wert": 565
+              },
+              {
+                "label": "Minijob",
+                "wert": 603
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die allgemeine Grenze entspricht einem Siebtel der monatlichen Bezugsgröße (3.955 Euro ÷ 7 = 565 Euro, § 10 Abs. 1 Nr. 5 SGB V).",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?",
+        "art": "saeulen",
+        "titel": "Ab 2028 kostet der mitversicherte Partner erstmals etwas",
+        "untertitel": "Beitragszuschlag für familienversicherte Ehepartner ohne Kinder unter 7 Jahren",
+        "einheit": "%",
+        "quelle": {
+          "name": "Bundesministerium für Gesundheit, Gesetzentwurf zum GKV-Beitragssatzstabilisierungsgesetz (Kabinettfassung, § 242b SGB V n. F.)",
+          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Gesetze_und_Verordnungen/GuV/G/GKV-Beitragssatzstabilisierungsgesetz_Kabinett.pdf",
+          "stand": "Kabinettbeschluss 29.4.2026, vom Bundestag am 10.7.2026 beschlossen"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Beitragszuschlag",
+            "werte": [
+              {
+                "label": "Bis 2027",
+                "wert": 0
+              },
+              {
+                "label": "Ab 2028",
+                "wert": 2.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ausgenommen bleiben Ehepartner und Lebenspartner mit Kindern bis zum vollendeten 7. Lebensjahr, mit Kindern mit Behinderung, mit zu pflegenden Angehörigen sowie nach Erreichen der Regelaltersgrenze; die Familienversicherung für Kinder bleibt vollständig beitragsfrei.",
+        "abschnitt": "heading-7",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "verdienstgrenzen-familienversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Einkommensgrenzen 2026: Die wichtigsten Zahlen",
+        "art": "saeulen",
+        "titel": "Die Minijob-Grenze steigt zusammen mit dem Mindestlohn",
+        "untertitel": "Monatliche Minijob-Verdienstgrenze 2025 bis 2027",
+        "einheit": "€",
+        "quelle": {
+          "name": "Deutsche Rentenversicherung Baden-Württemberg, Pressemitteilung „Minijob-Verdienstgrenze steigt 2026 auf 603 Euro“",
+          "url": "https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Presse/Pressemitteilungen/2025/251222_Minijob",
+          "stand": "22.12.2025"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Minijob-Grenze",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 556
+              },
+              {
+                "label": "2026",
+                "wert": 603
+              },
+              {
+                "label": "2027",
+                "wert": 633
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Minijob-Grenze ist seit Oktober 2022 an den gesetzlichen Mindestlohn gekoppelt, der 2026 auf 13,90 Euro pro Stunde steigt.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Werbungskostenpauschale: Mehr Spielraum für Angestellte",
+        "art": "balken",
+        "titel": "Die Werbungskostenpauschale hebt die Grenze auf 667,50 Euro",
+        "untertitel": "Monatliche Einkommensgrenze mit und ohne Werbungskostenpauschale",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Rechengrößen 2026 (Einkommensgrenze) und § 9a EStG (Arbeitnehmer-Pauschbetrag)",
+          "url": "https://www.gesetze-im-internet.de/estg/__9a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Einkommensgrenze 2026",
+            "werte": [
+              {
+                "label": "Ohne Werbungskosten",
+                "wert": 565
+              },
+              {
+                "label": "Mit Werbungskostenpauschale",
+                "wert": 667.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: 565 Euro allgemeine Einkommensgrenze plus Arbeitnehmer-Pauschbetrag von 1.230 Euro pro Jahr (§ 9a EStG) geteilt durch 12 Monate = 102,50 Euro, ergibt 667,50 Euro.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "freiwillige-gesetzliche-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch sind die Beitragssätze und Kosten 2026?",
+        "art": "balken",
+        "titel": "Die freiwillige GKV kennt eine feste Bemessungsspanne",
+        "untertitel": "Monatliche Mindest- und Höchstgrenze der Beitragsbemessung 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt „Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht für das Jahr 2026“",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Bemessungsgrundlage 2026",
+            "werte": [
+              {
+                "label": "Mindestbemessungsgrundlage",
+                "wert": 1318.33
+              },
+              {
+                "label": "Beitragsbemessungsgrenze",
+                "wert": 5812.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Mindestbemessungsgrundlage entspricht nach § 240 Abs. 4 Satz 1 SGB V einem Neunzigstel der monatlichen Bezugsgröße pro Kalendertag, also einem Drittel pro Monat (3.955 Euro ÷ 3 = 1.318,33 Euro).",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "krankenversicherung-rentner",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Beiträge zahlen Rentner 2026 konkret?",
+        "art": "balken",
+        "titel": "Pflichtversicherte Rentner zahlen nur die Hälfte des Beitrags",
+        "untertitel": "Eigenanteil am GKV-Beitrag auf die gesetzliche Rente 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 249a SGB V (hälftige Beitragstragung) i. V. m. § 241 und § 242a SGB V",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__249a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Eigenanteil 2026",
+            "werte": [
+              {
+                "label": "KVdR-Pflichtversicherte",
+                "wert": 8.75
+              },
+              {
+                "label": "Freiwillig versicherte Rentner",
+                "wert": 17.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Pflichtversicherte Rentner (KVdR) und ihr Rentenversicherungsträger tragen den Beitrag auf die gesetzliche Rente je zur Hälfte (§ 249a SGB V), macht 8,75 Prozent Eigenanteil von 17,5 Prozent Gesamtbeitrag (14,6 % allgemeiner Satz nach § 241 SGB V plus 2,9 % durchschnittlicher Zusatzbeitrag nach § 242a SGB V); freiwillig versicherte Rentner ohne Beteiligung des Rentenversicherungsträgers zahlen den vollen Satz selbst.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie werden verschiedene Einkommensarten behandelt?",
+        "art": "saeulen",
+        "titel": "Der Betriebsrentenfreibetrag steigt 2026 auf 197,75 Euro",
+        "untertitel": "Monatlicher Freibetrag für KV-Beiträge aus Betriebsrenten",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 226 Abs. 2 SGB V i. V. m. Sozialversicherungsrechengrößen-Verordnung 2025/2026 (Bezugsgröße)",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__226.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Freibetrag",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 187.25
+              },
+              {
+                "label": "2026",
+                "wert": 197.75
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Der Freibetrag beträgt nach § 226 Abs. 2 SGB V ein Zwanzigstel der monatlichen Bezugsgröße; 2025 waren das 3.745 Euro ÷ 20 = 187,25 Euro, 2026 sind es 3.955 Euro ÷ 20 = 197,75 Euro. Er gilt nur für die Krankenversicherung, nicht für die Pflegeversicherung.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "studenten-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Kosten der studentischen Krankenversicherung 2026",
+        "art": "balken",
+        "titel": "Ältere Studierende zahlen mehr Pflegeversicherung",
+        "untertitel": "Monatliche Beitragskomponenten der studentischen Krankenversicherung 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt „Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht für das Jahr 2026“",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Beitrag 2026",
+            "werte": [
+              {
+                "label": "Krankenversicherung (Basisbeitrag)",
+                "wert": 87.38
+              },
+              {
+                "label": "Pflegeversicherung unter 23 Jahren",
+                "wert": 30.78
+              },
+              {
+                "label": "Pflegeversicherung ab 23 Jahren",
+                "wert": 35.91
+              }
+            ]
+          }
+        ],
+        "hinweis": "Zum Krankenversicherungs-Basisbeitrag kommt der kassenindividuelle Zusatzbeitrag hinzu, der 2026 im Schnitt 2,9 Prozent beträgt.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "BAföG und Krankenversicherung",
+        "art": "balken",
+        "titel": "Freiwillig Versicherte erhalten fast doppelt so viel BAföG-Zuschlag",
+        "untertitel": "Monatlicher BAföG-Zuschlag zur Kranken- und Pflegeversicherung",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 13a Bundesausbildungsförderungsgesetz (BAföG)",
+          "url": "https://www.gesetze-im-internet.de/baf_g/__13a.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Zuschlag 2026",
+            "werte": [
+              {
+                "label": "Pflichtversichert",
+                "wert": 137
+              },
+              {
+                "label": "Freiwillig versichert",
+                "wert": 233
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Pflichtversicherte erhalten 102 Euro für die Kranken- und 35 Euro für die Pflegeversicherung (§ 13a Abs. 1 BAföG), macht 137 Euro; freiwillig Versicherte 185 Euro plus 48 Euro (§ 13a Abs. 2 BAföG), macht 233 Euro.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "krankengeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Höchstbeträge gelten 2026?",
+        "art": "balken",
+        "titel": "70 Prozent vom Höchstregelentgelt ergeben 135,63 Euro",
+        "untertitel": "Kalendertägliche Höchstbeträge beim Krankengeld 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt „Grenzbeträge im Leistungs- und Beziehungsrecht 2026“ (§ 47 SGB V)",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Grenzbetraege_Leistungsrecht.pdf",
+          "stand": "1. Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "Höchstbetrag 2026",
+            "werte": [
+              {
+                "label": "Höchstregelentgelt",
+                "wert": 193.75
+              },
+              {
+                "label": "Höchstkrankengeld",
+                "wert": 135.63
+              }
+            ]
+          }
+        ],
+        "hinweis": "Das Höchstregelentgelt ist die monatliche Beitragsbemessungsgrenze KV geteilt durch 30 Tage (5.812,50 Euro ÷ 30 = 193,75 Euro); das Höchstkrankengeld sind 70 Prozent davon.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie lange wird Krankengeld gezahlt?",
+        "art": "saeulen",
+        "titel": "Von 78 Wochen zahlt die Kasse 72 Wochen selbst",
+        "untertitel": "Aufteilung der Absicherung bei derselben Krankheit über drei Jahre",
+        "einheit": "Wochen",
+        "quelle": {
+          "name": "§ 3 Entgeltfortzahlungsgesetz (EntgFG) und § 48 SGB V",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__48.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "dauer",
+            "label": "Bezugsdauer",
+            "werte": [
+              {
+                "label": "Entgeltfortzahlung Arbeitgeber",
+                "wert": 6
+              },
+              {
+                "label": "Krankengeld Krankenkasse",
+                "wert": 72
+              }
+            ]
+          }
+        ],
+        "hinweis": "abgeleitet: Krankengeld wird für längstens 78 Wochen je Krankheit innerhalb von drei Jahren gezahlt (§ 48 Abs. 1 SGB V); davon zahlt der Arbeitgeber die ersten 6 Wochen Entgeltfortzahlung (§ 3 Abs. 1 EntgFG), die Krankenkasse die restlichen 72 Wochen.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

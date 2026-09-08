@@ -1,0 +1,735 @@
+[
+  {
+    "slug": "krankenversicherung-leistungen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Zuzahlungen entstehen 2026?",
+        "art": "balken",
+        "titel": "Bei chronischer Krankheit sinkt die Belastungsgrenze",
+        "untertitel": "Zuzahlungs-Höchstgrenze als Anteil der jährlichen Bruttoeinnahmen",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 62 Abs. 1 und 2 SGB V (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__62.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "belastungsgrenze",
+            "label": "Belastungsgrenze",
+            "werte": [
+              {
+                "label": "Regulär",
+                "wert": 2
+              },
+              {
+                "label": "Chronisch krank in Dauerbehandlung",
+                "wert": 1
+              }
+            ]
+          }
+        ],
+        "hinweis": "Wer die Belastungsgrenze im Kalenderjahr erreicht, wird von weiteren gesetzlichen Zuzahlungen befreit. Die halbierte Grenze gilt nur für Versicherte, die wegen derselben schwerwiegenden Krankheit in Dauerbehandlung sind.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Was ändert sich bei den Beitragssätzen?",
+        "art": "saeulen",
+        "titel": "Der durchschnittliche Zusatzbeitrag steigt seit Jahren",
+        "untertitel": "Vom Bundesgesundheitsministerium festgelegter Orientierungswert",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Zusatzbeitragssatz",
+          "url": "https://www.gkv-spitzenverband.de/krankenversicherung/kv_grundprinzipien/finanzierung/zusatzbeitragssatz/zusatzbeitragssatz.jsp",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Zusatzbeitrag",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 1.7
+              },
+              {
+                "label": "2025",
+                "wert": 2.5
+              },
+              {
+                "label": "2026",
+                "wert": 2.9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der tatsächlich von den Krankenkassen erhobene Durchschnittswert lag im Oktober 2025 bereits bei 2,94 Prozent – höher als der zu Jahresbeginn 2025 festgelegte Orientierungswert von 2,5 Prozent.",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kuendigung-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Sonderkündigungsrecht bei Beitragserhöhung",
+        "art": "balken",
+        "titel": "Der tatsächliche Zusatzbeitrag übertraf die Prognose 2025",
+        "untertitel": "Festgelegter Orientierungswert und tatsächlich erhobener Durchschnitt",
+        "einheit": "%",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Pressemitteilung „Ergebnis des Schätzerkreises ist keine Entwarnung für 2026“",
+          "url": "https://www.gkv-spitzenverband.de/gkv_spitzenverband/presse/pressemitteilungen_und_statements/pressemitteilung_2135104.jsp",
+          "stand": "15.10.2025"
+        },
+        "reihen": [
+          {
+            "key": "zusatzbeitrag",
+            "label": "Zusatzbeitrag",
+            "werte": [
+              {
+                "label": "Prognose 2025",
+                "wert": 2.5
+              },
+              {
+                "label": "Tatsächlich erhoben (Okt. 2025)",
+                "wert": 2.94
+              },
+              {
+                "label": "Prognose 2026",
+                "wert": 2.9
+              }
+            ]
+          }
+        ],
+        "hinweis": "Weicht der von der Kasse tatsächlich erhobene Zusatzbeitrag von der ursprünglichen Prognose ab, kann die Kasse ihn unterjährig anheben – dann greift das Sonderkündigungsrecht unabhängig von der Bindungsfrist.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Sofortiger Kassenwechsel: Wann ist er möglich?",
+        "art": "balken",
+        "titel": "Für PKV-Bestandsfälle gilt eine niedrigere Einkommensgrenze",
+        "untertitel": "Jahresarbeitsentgeltgrenze 2026 nach Versichertengruppe",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht 2026",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "grenze",
+            "label": "Jahresarbeitsentgeltgrenze",
+            "werte": [
+              {
+                "label": "Allgemein",
+                "wert": 77400
+              },
+              {
+                "label": "Bestandsfälle PKV (privat versichert seit vor 2003)",
+                "wert": 69750
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die niedrigere Grenze gilt nach § 6 Abs. 7 SGB V nur für Personen, die bereits am 31. Dezember 2002 versicherungsfrei und privat versichert waren.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "pkv-beitrag",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was treibt die PKV-Beitragserhöhungen 2026?",
+        "art": "balken",
+        "titel": "PKV-Ausgaben stiegen 2024 in jedem Versorgungsbereich",
+        "untertitel": "Anstieg der Leistungsausgaben je Bereich gegenüber 2023",
+        "einheit": "%",
+        "quelle": {
+          "name": "WIP – Wissenschaftliches Institut der PKV, Mehrumsatz und Leistungsausgaben von PKV-Versicherten – Jahresbericht 2026 (Bahnsen/Wild)",
+          "url": "https://www.wip-pkv.de/fileadmin/DATEN/Dokumente/Studien_in_Buchform/WIP-2026-Mehrumsatz_und_Leistungsausgaben_der_Privatversicherten_Jahresbericht_2026.pdf",
+          "stand": "Februar 2026"
+        },
+        "reihen": [
+          {
+            "key": "anstieg",
+            "label": "Anstieg 2023 auf 2024",
+            "werte": [
+              {
+                "label": "Heilmittel",
+                "wert": 10
+              },
+              {
+                "label": "Arznei- und Verbandmittel",
+                "wert": 9.9
+              },
+              {
+                "label": "Stationäre Versorgung",
+                "wert": 8.5
+              },
+              {
+                "label": "Ambulant-ärztliche Versorgung",
+                "wert": 8.4
+              },
+              {
+                "label": "Hilfsmittel",
+                "wert": 5.9
+              },
+              {
+                "label": "Zahnärztliche Versorgung",
+                "wert": 5.2
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die PKV-Ausgaben lagen 2024 in allen sechs betrachteten Versorgungsbereichen über dem Vorjahr – am stärksten bei Heilmitteln und bei Arznei- und Verbandmitteln.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie entwickelten sich die Beiträge langfristig?",
+        "art": "balken",
+        "titel": "Die Leistungsausgaben je Versicherten wuchsen in der PKV stärker",
+        "untertitel": "Wachstum der Leistungsausgaben je Versicherten 2014 bis 2024",
+        "einheit": "%",
+        "quelle": {
+          "name": "WIP – Wissenschaftliches Institut der PKV, Jahresbericht 2026 (Bahnsen/Wild)",
+          "url": "https://www.wip-pkv.de/fileadmin/DATEN/Dokumente/Studien_in_Buchform/WIP-2026-Mehrumsatz_und_Leistungsausgaben_der_Privatversicherten_Jahresbericht_2026.pdf",
+          "stand": "Februar 2026"
+        },
+        "reihen": [
+          {
+            "key": "wachstum",
+            "label": "2014 bis 2024",
+            "werte": [
+              {
+                "label": "GKV",
+                "wert": 50.3
+              },
+              {
+                "label": "PKV",
+                "wert": 55
+              }
+            ]
+          }
+        ],
+        "hinweis": "Gemessen werden die Leistungsausgaben je Versicherten, nicht die Beiträge selbst – beide Werte beziehen sich auf denselben Zehnjahreszeitraum und stammen aus derselben Berechnung.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "beitragsanpassung-pkv",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist eine Beitragsanpassung PKV?",
+        "art": "balken",
+        "titel": "Zwei Schwellenwerte können eine Beitragsanpassung auslösen",
+        "untertitel": "Zulässige Abweichung nach § 155 VAG, ab der eine Prüfung Pflicht wird",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 155 Abs. 3 und 4 Versicherungsaufsichtsgesetz (VAG) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/vag_2016/__155.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "schwellenwert",
+            "label": "Auslöseschwelle",
+            "werte": [
+              {
+                "label": "Versicherungsleistungen",
+                "wert": 10
+              },
+              {
+                "label": "Sterbewahrscheinlichkeiten",
+                "wert": 5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Einzelne Versicherer vereinbaren in ihren Tarifbedingungen niedrigere Schwellenwerte (5 oder 7,5 Prozent) – das ist nach § 155 Abs. 3 Satz 2 VAG ausdrücklich zulässig und führt zu kleineren, aber häufigeren Anpassungen.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "basistarif",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist der Basistarif in der PKV?",
+        "art": "balken",
+        "titel": "Nur wenige Privatversicherte nutzen die Sozialtarife",
+        "untertitel": "Versicherte in den brancheneinheitlichen Auffangtarifen",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "PKV-Verband, Sozialtarife in der Privaten Krankenversicherung",
+          "url": "https://www.pkv.de/wissen/private-krankenversicherung/brancheneinheitliche-tarife/",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "sozialtarife",
+            "label": "Versicherte",
+            "werte": [
+              {
+                "label": "Basistarif",
+                "wert": 34
+              },
+              {
+                "label": "Standardtarif",
+                "wert": 53
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei 8,79 Millionen PKV-Vollversicherten (PKV-Verband, Stand 2025) entspricht das rund 0,4 beziehungsweise 0,6 Prozent aller Privatversicherten (abgeleitet: 34.000 ÷ 8.790.000 bzw. 53.000 ÷ 8.790.000).",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Beitragshöhe im Basistarif PKV 2026",
+        "art": "saeulen",
+        "titel": "Der Basistarif-Höchstbeitrag steigt 2026 deutlich",
+        "untertitel": "Monatlicher Höchstbeitrag im PKV-Basistarif",
+        "einheit": "€",
+        "quelle": {
+          "name": "PKV-Verband, Pressemitteilung „Das ändert sich 2026 für Privatversicherte“",
+          "url": "https://www.presseportal.de/pm/58188/6175849",
+          "stand": "09.12.2025"
+        },
+        "reihen": [
+          {
+            "key": "hoechstbeitrag",
+            "label": "Höchstbeitrag",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 942.64
+              },
+              {
+                "label": "2026",
+                "wert": 1017.18
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei sozialer Hilfebedürftigkeit halbiert sich der Beitrag; der Sozialhilfeträger kann zusätzlich bezuschussen.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "standardtarif",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist der Standardtarif PKV?",
+        "art": "balken",
+        "titel": "Nur wenige Privatversicherte nutzen die Sozialtarife",
+        "untertitel": "Versicherte in den brancheneinheitlichen Auffangtarifen",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "PKV-Verband, Sozialtarife in der Privaten Krankenversicherung",
+          "url": "https://www.pkv.de/wissen/private-krankenversicherung/brancheneinheitliche-tarife/",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "sozialtarife",
+            "label": "Versicherte",
+            "werte": [
+              {
+                "label": "Basistarif",
+                "wert": 34
+              },
+              {
+                "label": "Standardtarif",
+                "wert": 53
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei 8,79 Millionen PKV-Vollversicherten (PKV-Verband, Stand 2025) entspricht das rund 0,4 beziehungsweise 0,6 Prozent aller Privatversicherten (abgeleitet: 34.000 ÷ 8.790.000 bzw. 53.000 ÷ 8.790.000).",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Kosten und Beitragsentwicklung 2026",
+        "art": "saeulen",
+        "titel": "Der Standardtarif-Höchstbeitrag steigt 2026 an",
+        "untertitel": "Monatlicher Höchstbeitrag im PKV-Standardtarif",
+        "einheit": "€",
+        "quelle": {
+          "name": "PKV-Verband, Beitragserhöhung Standardtarif 2026",
+          "url": "https://www.pkv.de/wissen/beitraege/standardtarif-beitrag/",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "hoechstbeitrag",
+            "label": "Höchstbeitrag",
+            "werte": [
+              {
+                "label": "2025",
+                "wert": 804.82
+              },
+              {
+                "label": "2026",
+                "wert": 848.62
+              }
+            ]
+          }
+        ],
+        "hinweis": "Für Ehepaare liegt die Grenze bei 150 Prozent des Höchstbeitrags, 2026 also bei 1.272,93 Euro gemeinsam.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "arbeitgeberzuschuss-private-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist der maximale Arbeitgeberzuschuss 2026?",
+        "art": "balken",
+        "titel": "Der Zuschuss zur Pflegeversicherung fällt in Sachsen niedriger aus",
+        "untertitel": "Maximaler monatlicher Arbeitgeberzuschuss 2026 nach Versicherungsart",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht 2026",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "zuschuss",
+            "label": "Höchstzuschuss",
+            "werte": [
+              {
+                "label": "Krankenversicherung",
+                "wert": 508.59
+              },
+              {
+                "label": "Pflegeversicherung (außer Sachsen)",
+                "wert": 104.63
+              },
+              {
+                "label": "Pflegeversicherung Sachsen",
+                "wert": 75.56
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Krankenversicherungs-Zuschuss ist abgeleitet: die Hälfte von 14,6 Prozent allgemeinem Beitragssatz plus 2,9 Prozent durchschnittlichem Zusatzbeitrag (§ 257 Abs. 2 SGB V) ergibt 8,75 Prozent der monatlichen Beitragsbemessungsgrenze von 5.812,50 Euro = 508,59 Euro. Zusammen mit dem Pflegezuschuss ergeben sich außerhalb Sachsens 613,22 Euro.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer hat Anspruch auf den Arbeitgeberzuschuss?",
+        "art": "balken",
+        "titel": "Für den Zuschuss zählt die Versicherungspflichtgrenze",
+        "untertitel": "Jahresarbeitsentgeltgrenze und Beitragsbemessungsgrenze 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Rechengrößen und Grenzwerte im Versicherungs- und Beitragsrecht 2026",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Rechengroessen_Beitragsrecht.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "grenzen",
+            "label": "Grenzwert",
+            "werte": [
+              {
+                "label": "Versicherungspflichtgrenze",
+                "wert": 77400
+              },
+              {
+                "label": "Beitragsbemessungsgrenze KV/PV",
+                "wert": 69750
+              }
+            ]
+          }
+        ],
+        "hinweis": "Nur wer über der Versicherungspflichtgrenze verdient, kann sich privat versichern und hat damit Anspruch auf den Arbeitgeberzuschuss; berechnet wird der Zuschuss auf Basis der niedrigeren Beitragsbemessungsgrenze.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "betriebliche-krankenversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Warum wächst der bKV-Markt 2026 so stark?",
+        "art": "saeulen",
+        "titel": "Immer mehr Betriebe bieten eine bKV an",
+        "untertitel": "Unternehmen mit betrieblicher Krankenversicherung zum Jahresende",
+        "einheit": "Tsd.",
+        "quelle": {
+          "name": "PKV-Verband-Zahlen zur betrieblichen Krankenversicherung, zitiert nach Cash. (2023/2024) und PKV-Verband, Positionspapier betriebliche Krankenversicherung (2025, sekundär für 2023/2024, da die ursprüngliche PKV-Verband-Pressemitteilung nicht mehr online erreichbar ist)",
+          "url": "https://www.cash-online.de/a/plus-438-prozent-bkv-boom-setzt-sich-2024-fort-692590/",
+          "stand": "13.02.2025",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "unternehmen",
+            "label": "Unternehmen mit bKV",
+            "werte": [
+              {
+                "label": "2023",
+                "wert": 39.3
+              },
+              {
+                "label": "2024",
+                "wert": 56.5
+              },
+              {
+                "label": "2025",
+                "wert": 60.6
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Wert für 2025 (60.600 Unternehmen, plus 16 Prozent gegenüber 2024) stammt direkt von der aktuellen PKV-Verband-Seite zur betrieblichen Krankenversicherung; die Werte für 2023 und 2024 wurden aus einer inzwischen nicht mehr abrufbaren PKV-Verband-Pressemitteilung übernommen, hier zitiert nach Cash.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Steuerliche Vorteile der betrieblichen Krankenversicherung",
+        "art": "balken",
+        "titel": "Die Sachbezugsfreigrenze deckt bis zu 600 Euro im Jahr",
+        "untertitel": "Steuerfreier Sachbezug pro Arbeitnehmer, sofern die Grenze nicht überschritten wird",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 8 Abs. 2 Satz 11 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__8.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "freigrenze",
+            "label": "Sachbezugsfreigrenze",
+            "werte": [
+              {
+                "label": "Monatlich",
+                "wert": 50
+              },
+              {
+                "label": "Jährlich (12 × 50 €)",
+                "wert": 600
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Jahreswert ist abgeleitet (12 × 50 Euro). Wichtig: Es handelt sich um eine Freigrenze, nicht um einen Freibetrag – wird sie auch nur um einen Cent überschritten, ist der gesamte Sachbezug steuerpflichtig.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "buergerversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die GKV-Finanzkrise 2026",
+        "art": "balken",
+        "titel": "Krankenkassen und Gesundheitsfonds wiesen 2024 ein Defizit aus",
+        "untertitel": "Vorläufiges Finanzergebnis der gesetzlichen Krankenversicherung 2024",
+        "einheit": "Mrd. €",
+        "quelle": {
+          "name": "Bundesministerium für Gesundheit, Pressemitteilung „Vorläufige Finanzergebnisse der GKV für das Jahr 2024“",
+          "url": "https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/vorlaeufige-finanzergebnisse-der-gkv-fuer-das-jahr-2024-pm-07-03-2025",
+          "stand": "07.03.2025"
+        },
+        "reihen": [
+          {
+            "key": "defizit",
+            "label": "Defizit 2024",
+            "werte": [
+              {
+                "label": "Krankenkassen",
+                "wert": 6.2
+              },
+              {
+                "label": "Gesundheitsfonds",
+                "wert": 3.7
+              }
+            ]
+          }
+        ],
+        "hinweis": "Beide Defizite betreffen dasselbe Jahr, aber unterschiedliche Ebenen des GKV-Finanzsystems (Kassen und Gesundheitsfonds) und lassen sich nicht einfach addieren.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Auswirkungen auf die medizinische Versorgung",
+        "art": "balken",
+        "titel": "Privatversicherte finanzieren überproportional viel mit",
+        "untertitel": "Anteil der PKV-Versicherten an den Ausgaben je Versorgungsbereich 2024",
+        "einheit": "%",
+        "quelle": {
+          "name": "WIP – Wissenschaftliches Institut der PKV, Jahresbericht 2026 (Bahnsen/Wild), Tabelle 1",
+          "url": "https://www.wip-pkv.de/fileadmin/DATEN/Dokumente/Studien_in_Buchform/WIP-2026-Mehrumsatz_und_Leistungsausgaben_der_Privatversicherten_Jahresbericht_2026.pdf",
+          "stand": "Februar 2026"
+        },
+        "reihen": [
+          {
+            "key": "finanzierungsanteil",
+            "label": "PKV-Finanzierungsanteil",
+            "werte": [
+              {
+                "label": "Zahnärztliche Versorgung",
+                "wert": 22.9
+              },
+              {
+                "label": "Ambulant-ärztliche Versorgung",
+                "wert": 21.8
+              },
+              {
+                "label": "Heilmittel",
+                "wert": 17.1
+              },
+              {
+                "label": "Hilfsmittel",
+                "wert": 15
+              },
+              {
+                "label": "Arznei- und Verbandmittel",
+                "wert": 13.1
+              },
+              {
+                "label": "Stationäre Versorgung",
+                "wert": 11.6
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Bevölkerungsanteil der PKV-Versicherten liegt bei nur 10,5 Prozent – in jedem der dargestellten Bereiche tragen sie also überproportional zur Finanzierung bei.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "krankentagegeldversicherung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Die Einkommenslücke: Warum gesetzliches Krankengeld nicht ausreicht",
+        "art": "balken",
+        "titel": "Die Beitragsbemessungsgrenze deckelt das gesetzliche Krankengeld",
+        "untertitel": "Kalendertägliches Höchstregelentgelt und Höchstkrankengeld 2026",
+        "einheit": "€",
+        "quelle": {
+          "name": "GKV-Spitzenverband, Faktenblatt Grenzbeträge im Leistungs- und Beziehungsrecht 2026",
+          "url": "https://www.gkv-spitzenverband.de/media/dokumente/presse/zahlen_und_grafiken/20260101_Faktenblatt_Grenzbetraege_Leistungsrecht.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "krankengeld",
+            "label": "Kalendertäglich",
+            "werte": [
+              {
+                "label": "Höchstregelentgelt",
+                "wert": 193.75
+              },
+              {
+                "label": "Höchstkrankengeld (70 %)",
+                "wert": 135.63
+              }
+            ]
+          }
+        ],
+        "hinweis": "Das Höchstregelentgelt ergibt sich aus der monatlichen Beitragsbemessungsgrenze KV (5.812,50 Euro) geteilt durch 30 Tage; das Höchstkrankengeld sind 70 Prozent davon. Einkommen oberhalb der Bemessungsgrenze bleibt beim Krankengeld unberücksichtigt.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kinderkrankengeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie viele Kinderkrankentage stehen mir zu?",
+        "art": "balken",
+        "titel": "2026 gelten befristet mehr Kinderkrankentage",
+        "untertitel": "Arbeitstage Kinderkrankengeld je Kind und Jahr, regulär und 2026",
+        "einheit": "",
+        "quelle": {
+          "name": "§ 45 Abs. 2 und 2a SGB V (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/sgb_5/__45.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "regulaer",
+            "label": "Regulär",
+            "werte": [
+              {
+                "label": "Je Elternteil und Kind",
+                "wert": 10
+              },
+              {
+                "label": "Alleinerziehend je Kind",
+                "wert": 20
+              }
+            ]
+          },
+          {
+            "key": "2026",
+            "label": "2026 (befristet)",
+            "werte": [
+              {
+                "label": "Je Elternteil und Kind",
+                "wert": 15
+              },
+              {
+                "label": "Alleinerziehend je Kind",
+                "wert": 30
+              }
+            ]
+          }
+        ],
+        "umschalter": {
+          "label": "Regelung"
+        },
+        "hinweis": "Bei mehreren Kindern gilt zusätzlich ein Jahresmaximum: regulär 25 bzw. 50 Arbeitstage, 2026 befristet 35 bzw. 70 Arbeitstage. Die Sonderregelung nach Absatz 2a gilt ausdrücklich nur für das Kalenderjahr 2026.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "auslandskrankenversicherung",
+    "statistiken": []
+  }
+]
