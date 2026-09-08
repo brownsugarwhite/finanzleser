@@ -3,15 +3,17 @@
 /**
  * Aktionen unter dem Ratgeber: Kurzfassung von Leo (aus dem CMS, klappt auf),
  * Teilen (Ausriss-Dialog), In den Aktenkoffer (mit Flug), Wächter setzen (Stufe 2/3), Vorlesen,
+ * PDF zum Beitrag (falls im CMS hinterlegt — ersetzt die PdfPreview der alten Seite),
  * Das sieht Google (Kulissen).
  */
 import { useEffect, useRef, useState } from "react";
 import type { FadenKurzfassung } from "@/lib/types";
+import type { BeitragPdf } from "@/lib/articleToolData";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { teilenOeffnen } from "@/components/faden/TeilenDialog";
 import { kulissenOeffnen } from "@/components/faden/Kulissen";
 
-export default function Aktionen({ titel, url, kurzfassung, artikelId }: { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string }) {
+export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }) {
   const { inDenKoffer, toast } = useFaden();
   const [kurz, setKurz] = useState(false);
   const kurzRef = useRef<HTMLDivElement>(null);
@@ -42,6 +44,9 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId }: { titel
         <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
         <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
         <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
+        {pdf && (
+          <a className="textlink textlink--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag</a>
+        )}
         <button type="button" className="textlink textlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
       </div>
       {kurzfassung && (

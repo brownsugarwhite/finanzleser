@@ -5,6 +5,7 @@
  * (CLAUDE.md, Falle 2) — außer die URL fehlt ganz, dann leere Defaults.
  */
 import { CONTENT_REVALIDATE } from "@/lib/wordpress";
+import { zaehleWp } from "@/lib/faden/wpZaehler";
 
 /**
  * Bedingung im Kassensturz (Prototyp 05b-js-daten.html `bed()`): genau ein Vergleich je
@@ -166,6 +167,7 @@ export async function getFadenOptionen(): Promise<FadenOptionen> {
   const leer: FadenOptionen = { waechterRegeln: [], kassensturz: null, leoFragt: [], lebensereignisse: [], level: LEVEL_STANDARD };
   const wpUrl = process.env.WORDPRESS_API_URL;
   if (!wpUrl) return leer;
+  zaehleWp("rest:faden-options");
   const res = await fetch(`${wpUrl.replace(/\/graphql\/?$/, "")}/wp-json/finanzleser/v1/faden-options`, { next: { revalidate: CONTENT_REVALIDATE } });
   if (!res.ok) throw new Error(`faden-options: HTTP ${res.status}`);
   const d = (await res.json()) as Record<string, unknown>;

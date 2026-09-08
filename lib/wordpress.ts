@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { zaehleWp, graphqlName } from "@/lib/faden/wpZaehler";
 import { GraphQLClient, gql } from "graphql-request";
 import type { GlossarEintrag, Spiel, Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
@@ -69,6 +70,8 @@ function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const orig = client.request.bind(client);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (client as any).request = async (...args: unknown[]) => {
+    // Temporärer Zähler der M7-Abnahme; ohne FADEN_DEBUG=1 ein No-op.
+    zaehleWp(graphqlName(typeof args[0] === "string" ? args[0] : (args[0] as { toString?: () => string })?.toString?.()));
     const MAX = 6;
     let lastErr: unknown;
     for (let attempt = 0; attempt < MAX; attempt++) {
@@ -1780,6 +1783,7 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
 
   try {
     // REST API: Holt ACF Options via custom Endpoint
+    zaehleWp("rest:rechner-config");
     const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
       next: { revalidate: CONTENT_REVALIDATE },
     });
@@ -1856,6 +1860,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
+    zaehleWp("rest:site-settings");
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
       next: { revalidate: CONTENT_REVALIDATE },
     });
@@ -1902,6 +1907,7 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
   const baseUrl = wpUrl.replace("/graphql", "");
 
   try {
+    zaehleWp("rest:wp/v2/pages");
     const response = await fetch(
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
       { next: { revalidate: CONTENT_REVALIDATE } },
@@ -1947,6 +1953,7 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
   if (!wpUrl) return null;
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
+    zaehleWp("rest:yoast-head");
     const res = await fetch(
       `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
       { next: { revalidate: CONTENT_REVALIDATE } },

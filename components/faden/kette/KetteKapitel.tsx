@@ -10,6 +10,7 @@ import type { Post } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import { baueKette, werkzeugId, type Abschnitt, type Teil } from "@/lib/faden/kette";
 import { verweiseAufloesen } from "@/lib/faden/titel";
+import { medienUrl } from "@/lib/faden/medien";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
@@ -70,6 +71,9 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   }
   const begriffe = await loeseBegriffe([...ctx.gesehen].map((sl) => glossar.get(sl)).filter((e): e is NonNullable<typeof e> => !!e));
   const dazu = await verweiseAufloesen(k.faden.dazuPasst, toolTitel.alle(toolData));
+  // „PDF zum Beitrag“ (frueher PdfPreview der alten Seite): kommt aus demselben Preload,
+  // Medien-Host des Klons umschreiben wie bei allen anderen Dateien.
+  const beitragPdf = toolData?.beitragPdf ? { ...toolData.beitragPdf, pdfUrl: medienUrl(toolData.beitragPdf.pdfUrl) } : null;
   const pfad = k.krumen.map((x) => x.name);
   // Ein Eintrag je Finanztool im Inhaltsverzeichnis (Titel aus dem Preload, sonst gecachter Getter).
   const toc = await Promise.all(k.toc.map(async (t) => (t.art === "werkzeug" && t.typ && t.slug ? { ...t, titel: await werkzeugTitel(t.typ, t.slug, toolData) } : t)));
@@ -166,7 +170,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </section>
           )}
           <KassensturzTeaser />
-          <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} />
+          <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} />
           {dazu.length > 0 && (
             <div className="dazu">
               <span className="kicker">Dazu passt</span>
