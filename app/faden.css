@@ -74,6 +74,26 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
 .faden-shell .register [data-key="plus"] { color: var(--green); }
 .faden-shell .register .offen { color: var(--pink); }
+.faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
+.faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
+
+/* Nav-Pille als Lupe — Portierung aus dem Prototyp (leo-faden.html:296-306).
+   Rechteck (32 px) mit „Lupe": eine weiße Kopie der Reihe, 1,1-fach vergrößert, die
+   gegenläufig mitfährt, sodass die Pille wie ein Vergrößerungsglas über der Reihe liegt.
+   Darüber zwei Linien (2 px und 4 px), die der Pille leicht verzögert folgen.
+   Choreografie in components/faden/kopf/NavPille.tsx. */
+.faden-shell .nav-linie { position: absolute; left: 0; width: 1px; opacity: 0; background: var(--ink); pointer-events: none; z-index: 4; }
+.faden-shell .nav-linie--1 { top: calc(50% - 26px); height: 2px; }
+.faden-shell .nav-linie--3 { top: calc(50% - 22px); height: 4px; }
+.faden-shell .nav-pille { position: absolute; top: 50%; left: 0; height: 32px; width: 1px; opacity: 0; pointer-events: none; z-index: 4; transform: translate(0, -50%); }
+.faden-shell .nav-pille__koerper { position: absolute; inset: 0; overflow: hidden; background: var(--ink); }
+.faden-shell .nav-lupe { position: absolute; inset: 0; transform: scale(1.1); transform-origin: center; }
+.faden-shell .nav-lupe__reihe { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: space-between; color: #fff; pointer-events: none; transform: translate(0, -50%); }
+.faden-shell .nav-lupe__reihe span { font: 600 16px/1 var(--serif); white-space: nowrap; }
+.faden-shell .nav-lupe__reihe .punkte-zahl { color: rgba(255,255,255,.82); }
+/* Die Spark-Komponente setzt ihre Farbe als fill-Attribut; CSS schlaegt das Attribut,
+   deshalb werden die Funken in der Lupe hier auf Weiss gezogen. */
+.faden-shell .nav-lupe__reihe svg path { fill: #fff; }
 .faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: var(--green); color: #fff; height: 44px; padding: 0 18px 0 34px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%); flex: none; margin-left: auto; }
 .faden-shell .lesezeichen button { border: 0; background: none; color: #fff; padding: 4px 8px; font-weight: 700; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
 .faden-shell .lesezeichen .lz-wort { font: 700 14px/1 var(--sans); padding: 6px 10px; }
