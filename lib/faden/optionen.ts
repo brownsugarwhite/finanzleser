@@ -6,14 +6,46 @@
  */
 import { CONTENT_REVALIDATE } from "@/lib/wordpress";
 
+/**
+ * Bedingung im Kassensturz (Prototyp 05b-js-daten.html `bed()`): genau ein Vergleich je
+ * Knoten, `alle` verknüpft mit UND. `wert` ist der ältere Name für `ist`.
+ */
+export interface KassensturzBedingung {
+  feld?: string;
+  /** Antwort ist genau dieser Wert. */
+  ist?: string;
+  /** Alter Name für `ist`. */
+  wert?: string;
+  /** Antwort ist nicht dieser Wert. */
+  nicht?: string;
+  /** Antwort ist einer dieser Werte. */
+  in?: string[];
+  /** Mehrfachauswahl enthält den Wert nicht. */
+  ohne?: string;
+  /** Mehrfachauswahl enthält den Wert. */
+  mit?: string;
+  /** Feld beantwortet (true) bzw. unbeantwortet (false). */
+  gesetzt?: boolean;
+  /** Alle Teilbedingungen müssen gelten. */
+  alle?: KassensturzBedingung[];
+}
 export interface KassensturzFrage {
   id: string;
   text: string;
-  optionen: string[];
-  /** Nur zeigen, wenn Feld == wert bzw. != nicht. */
-  wenn?: { feld: string; wert?: string; nicht?: string };
+  /** Fehlt bei der Schätzfrage. */
+  optionen?: string[];
+  /** Nur zeigen, wenn die Bedingung gilt (z. B. `{ feld: "status", nicht: "In Rente" }`). */
+  wenn?: KassensturzBedingung;
   mehrfach?: boolean;
+  /** Schätzfrage mit Regler (`schaetz: true` in den Daten, `art: "schaetzen"` als Alias). */
+  schaetz?: boolean;
   art?: "schaetzen" | "auswahl";
+  /** Richtiger Wert der Schätzfrage. */
+  richtig?: number;
+  /** Quelle der Auflösung. */
+  quelle?: string;
+  /** Ikon je Option (überschreibt `KassensturzDaten.ikonen`). */
+  ikonen?: Record<string, string>;
   einheit?: string;
   min?: number;
   max?: number;
@@ -21,12 +53,38 @@ export interface KassensturzFrage {
   start?: number;
 }
 export interface KassensturzLuecke {
-  key: string;
+  /** Kurzname für die Ampel („Arbeitskraft“, „Haftpflicht“ …). */
+  kurz?: string;
+  /** Älterer Name für `kurz`. */
+  key?: string;
+  /** Ikon-Name der Ergebniskarte. */
+  ikon?: string;
   titel: string;
   text: string;
   ampel?: "rot" | "gelb" | "gruen";
-  wenn?: Record<string, string | string[]>;
+  wenn?: KassensturzBedingung;
   links?: { typ: string; slug: string; text?: string }[];
+}
+export interface KassensturzGut {
+  kurz: string;
+  wenn?: KassensturzBedingung;
+}
+export interface KassensturzScore {
+  /** Nur zur Dokumentation; gerechnet wird wie im Prototyp: 100 − 22 × Lücken + 3 × Gut. */
+  formel?: string;
+  min?: number;
+  max?: number;
+  /** Höchstens so viele Lücken im Ergebnis (Prototyp: 3). */
+  max_luecken?: number;
+}
+export interface KassensturzProfil {
+  /** Vorlage mit {status}, {haushalt}, {wohnen}, {schluss}. */
+  vorlage?: string;
+  status?: Record<string, string>;
+  haushalt?: Record<string, string>;
+  wohnen?: Record<string, string>;
+  /** Schlusssatz je Zahl der Lücken („0“ … „3“). */
+  schluss?: Record<string, string>;
 }
 export interface KassensturzDaten {
   titel: string;
@@ -34,7 +92,13 @@ export interface KassensturzDaten {
   status?: string;
   erzeugt_am?: string;
   fragen: KassensturzFrage[];
+  /** Ikon je Antworttext (fragenübergreifend). */
+  ikonen?: Record<string, string>;
   luecken?: KassensturzLuecke[];
+  /** Was gut ist (Ampel grün), mit Bedingung. */
+  gut?: KassensturzGut[];
+  score?: KassensturzScore;
+  profil?: KassensturzProfil;
   profile?: { key: string; titel: string; text?: string; wenn?: Record<string, string | string[]> }[];
   punkte?: number;
   wappen?: string;
@@ -51,7 +115,13 @@ export interface LeoFragtEintrag {
   antwort_vorlage?: string;
   ziel?: FadenZiel;
 }
-export interface FadenZiel { typ: string; slug: string; param?: Record<string, string | number> }
+export interface FadenZiel {
+  typ: string;
+  slug: string;
+  param?: Record<string, string | number>;
+  /** Adresse im Frontend, ergänzt von /api/faden/leo-fragt (lib/urls.ts); fehlt bei Zielen ohne Seite (keins, kassensturz, …). */
+  href?: string;
+}
 
 export interface WaechterRegel {
   key: string;

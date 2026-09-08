@@ -2,10 +2,11 @@
 
 import GlossarRail from "./glossar/GlossarRail";
 import Einschub from "./Einschub";
+import LeoFragt from "./leo/LeoFragt";
 
 /**
  * Rechte Randspalte: Glossar der Sitzung (jeder angetippte grüne Begriff bleibt hier),
- * darunter Platz für „Leo fragt“ (Stufe 2).
+ * darunter „Leo fragt“ (LeoFragt, mountet #leoFrage im Fuß über der Anzeige).
  */
 export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
   return (
@@ -20,7 +21,7 @@ export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: ()
               </div>
             </div>
           </div>
-          <div className="rand__fuss"><div id="leoFrage" /><Einschub format="halfpage" nr={1} /></div>
+          <div className="rand__fuss"><LeoFragt /><Einschub format="halfpage" nr={1} /></div>
         </div>
       </div>
       {mobil && <button type="button" className="rand__zu btn btn--klein btn--still" onClick={onZu}>Schließen ✕</button>}

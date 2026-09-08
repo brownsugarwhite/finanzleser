@@ -7,31 +7,60 @@
  * unten; dort übernimmt die echte Eingabe des Fadens (gleiche Gestalt). Solange der
  * Hero im Bild ist, bleiben Randspalten und Eingabe weg (body.faden-hero-sichtbar).
  * Enter fragt Leo.
+ *
+ * Dazu aus dem Prototyp-Gerüst (03c-hero.html:14–16, 42–43): unter der Pille die
+ * Werkzeugreihe (Rechner · Vergleiche · Checklisten, docken beim Laden an, Klick öffnet
+ * das Finanztools-Registerblatt), die Dokumentenzahl zählt von 0 auf 12.480 hoch, und
+ * unten der CTA „Finanzleser entdecken ↓“, der nach 2,2 s erscheint und zu „Heute“ scrollt.
  */
-import { useLayoutEffect, useRef, useState } from "react";
+import { Fragment, useLayoutEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useFaden } from "@/components/faden/FadenProvider";
 import Spark from "@/components/ui/Spark";
 import FieldOutline from "@/components/ui/FieldOutline";
+import { reduzierteBewegung } from "@/lib/faden/belohnung";
+import { Trenner, useHoverBox } from "@/components/faden/spalten/HoverBox";
 
 const seg = (p: number, a: number, b: number) => Math.max(0, Math.min(1, (p - a) / (b - a)));
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+/** ease() des Prototyps (03b-intro.html:6), für den Zähler. */
+const glatt = (t: number) => t * t * (3 - 2 * t);
+
+/** Werkzeugreihe (TOOLS, 03c-hero.html:7). Reiter-Schlüssel wie REITER in kopf/Blatt.tsx; Zahlen wie im Prototyp. */
+const WERKZEUGE = [
+  { key: "rechner", name: "Rechner", zahl: 56, text: "Unterhalt, Rente, Steuer, Kredit", ziel: "Zu den Rechnern" },
+  { key: "vergleich", name: "Vergleiche", zahl: 43, text: "Tarife nebeneinander", ziel: "Zu den Vergleichen" },
+  { key: "checkliste", name: "Checklisten", zahl: 207, text: "Schritt für Schritt, als PDF", ziel: "Zu den Checklisten" },
+] as const;
+/** Andocken wie im Prototyp-Hero „Zeitung“ (03c-hero.html:73): Startversatz und Verzögerung (s) je Kachel. */
+const ANDOCK_START = ["translate3d(0,40px,0)", "translate3d(0,54px,0)", "translate3d(0,40px,0)"];
+const ANDOCK_NACH = [1.9, 2.05, 2.2];
+const DOKUMENTE = 12480;
+const ZAEHL_DAUER = 2.6; // s (zaehler(), 03c-hero.html:43)
+const CTA_NACH = 2200; // ms (03c-hero.html:16)
 
 /** Der Hero gehört nur an den Anfang eines Fadens; kommt man später zur Startseite zurück, hängt sich nur „Heute“ an. */
-export default function HeroLanding() {
+export type HeroZahlen = Partial<Record<"rechner" | "vergleich" | "checkliste", number>>;
+
+export default function HeroLanding({ zahlen }: { zahlen?: HeroZahlen }) {
   const { verlauf } = useFaden();
   if (verlauf.length) return null;
-  return <HeroInnen />;
+  return <HeroInnen zahlen={zahlen} />;
 }
 
-function HeroInnen() {
-  const { fragen } = useFaden();
+function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
+  const { fragen, blattOeffnen } = useFaden();
   const [wert, setWert] = useState("");
   const hero = useRef<HTMLElement>(null);
   const oben = useRef<HTMLDivElement>(null);
-  const sub = useRef<HTMLParagraphElement>(null);
+  const unten = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
+  const reihe = useRef<HTMLDivElement>(null);
+  const zahl = useRef<HTMLElement>(null);
+  const cta = useRef<HTMLButtonElement>(null);
   const start = useRef<{ l: number; t: number; w: number } | null>(null);
+  useHoverBox(reihe, ".werkzeug-k", { radius: 14, oben: 16, unten: 16 });
 
   useLayoutEffect(() => {
     const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -71,7 +100,7 @@ function HeroInnen() {
       const o = 1 - seg(p, 0, 0.55);
       const y = -40 * seg(p, 0, 0.6);
       if (oben.current) { oben.current.style.opacity = String(o); oben.current.style.transform = `translateY(${y}px)`; }
-      if (sub.current) { sub.current.style.opacity = String(o); sub.current.style.transform = `translateY(${y}px)`; }
+      if (unten.current) { unten.current.style.opacity = String(o); unten.current.style.transform = `translateY(${y}px)`; }
       document.body.classList.toggle("faden-hero-sichtbar", p < 0.88);
       if (!reduziert) flug(p); else if (wrap.current) wrap.current.style.opacity = String(o);
     };
@@ -89,7 +118,50 @@ function HeroInnen() {
     };
   }, []);
 
+  // Beim Laden: Kacheln docken an (kachelnAndocken), der Zähler läuft (zaehler), der CTA blendet ein.
+  useLayoutEffect(() => {
+    const reduziert = reduzierteBewegung();
+    const timer: ReturnType<typeof setTimeout>[] = [];
+    const kacheln = Array.from(reihe.current?.querySelectorAll<HTMLElement>(".werkzeug-k") ?? []);
+    if (reduziert) {
+      kacheln.forEach((k) => { k.style.transition = "none"; k.classList.add("da"); });
+    } else {
+      kacheln.forEach((k, i) => { k.style.transform = ANDOCK_START[i] ?? ""; });
+      timer.push(setTimeout(() => { kacheln.forEach((k, i) => { timer.push(setTimeout(() => k.classList.add("da"), (ANDOCK_NACH[i] ?? 2.2) * 1000)); }); }, 40));
+    }
+    timer.push(setTimeout(() => cta.current?.classList.add("da"), reduziert ? 0 : CTA_NACH));
+
+    const z = zahl.current;
+    const fmt = (v: number) => v.toLocaleString("de-DE");
+    let raf = 0;
+    if (z) {
+      if (reduziert) z.textContent = fmt(DOKUMENTE);
+      else {
+        const t0 = performance.now();
+        z.textContent = fmt(0);
+        const zaehlen = () => {
+          const t = (performance.now() - t0) / 1000;
+          z.textContent = fmt(Math.round(DOKUMENTE * glatt(Math.min(1, t / ZAEHL_DAUER))));
+          if (t < ZAEHL_DAUER) raf = requestAnimationFrame(zaehlen);
+        };
+        raf = requestAnimationFrame(zaehlen);
+      }
+    }
+    return () => {
+      timer.forEach(clearTimeout);
+      if (raf) cancelAnimationFrame(raf);
+      if (z) z.textContent = fmt(DOKUMENTE);
+    };
+  }, []);
+
   const senden = (e: React.FormEvent) => { e.preventDefault(); const q = wert.trim(); if (!q) return; setWert(""); fragen(q); };
+  const werkzeug = (e: React.MouseEvent, key: string) => { e.preventDefault(); blattOeffnen("finanztools", key); window.scrollTo({ top: 0 }); };
+  const entdecken = () => {
+    const ziel = document.getElementById("kapitel-live");
+    if (!ziel) return;
+    const kopf = document.getElementById("kopf")?.offsetHeight || 64;
+    window.scrollTo({ top: ziel.getBoundingClientRect().top + window.scrollY - kopf, behavior: reduzierteBewegung() ? "auto" : "smooth" });
+  };
   return (
     <section ref={hero} className="hero-landing" aria-label="Einstieg">
       <div className="hero-landing__mitte">
@@ -108,8 +180,24 @@ function HeroInnen() {
             </form>
           </div>
         </div>
-        <p className="landing-sub" ref={sub}>Leo hat 12.480 Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.</p>
+        <div className="landing-unten" ref={unten}>
+          <p className="landing-sub">Leo hat <b ref={zahl}>12.480</b> Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.</p>
+          <div className="werkzeugreihe" ref={reihe}>
+            {WERKZEUGE.map((w, i) => (
+              <Fragment key={w.key}>
+                {i > 0 && <Trenner />}
+                <Link className="werkzeug-k" href="/finanztools" onClick={(e) => werkzeug(e, w.key)}>
+                  <span className="kicker kicker--tool"><i className={`dot dot--${w.key}`} />{w.name}</span>
+                  <b>{zahlen?.[w.key] ?? w.zahl}<small>im Faden</small></b>
+                  <span>{w.text}</span>
+                  <span className="pfeil-link">{w.ziel}<i /></span>
+                </Link>
+              </Fragment>
+            ))}
+          </div>
+        </div>
       </div>
+      <button type="button" className="hero-cta" ref={cta} onClick={entdecken}>Finanzleser entdecken<i>↓</i></button>
     </section>
   );
 }

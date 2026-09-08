@@ -23,7 +23,9 @@ import KapitelKopf from "@/components/faden/KapitelKopf";
 import Weiterlesen from "./Weiterlesen";
 import Aktionen from "./Aktionen";
 import WerkzeugKarte, { toolTitel, werkzeugTitel } from "./WerkzeugKarte";
+import AbschnittTeilen from "./AbschnittTeilen";
 import WochenbriefKasten from "./WochenbriefKasten";
+import KassensturzTeaser from "@/components/faden/kassensturz/KassensturzTeaser";
 
 const EINWURF_ZIEL: Record<string, string> = { rechner: "Zum Rechner", checkliste: "Zur Checkliste", vergleich: "Zum Vergleich", dokumente: "Zu den Dokumenten" };
 
@@ -40,9 +42,10 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
   );
 }
 
-function AbschnittBlock({ a, i, n, toolData }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData }) {
+function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData; url: string }) {
   return (
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
+      <AbschnittTeilen titel={a.titel} url={url} id={a.id} />
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel">{a.titel}</h2>
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
@@ -70,6 +73,14 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   const pfad = k.krumen.map((x) => x.name);
   // Ein Eintrag je Finanztool im Inhaltsverzeichnis (Titel aus dem Preload, sonst gecachter Getter).
   const toc = await Promise.all(k.toc.map(async (t) => (t.art === "werkzeug" && t.typ && t.slug ? { ...t, titel: await werkzeugTitel(t.typ, t.slug, toolData) } : t)));
+  // Vorschläge unter der Eingabe (Prototyp FOLGE_CHIPS): Kurzfassung · zweimal „Dazu passt“ · erstes Werkzeug · Kassensturz.
+  const erstesWerkzeug = toc.find((t) => t.art === "werkzeug");
+  const chips = [
+    ...(k.faden.kurzfassung ? [{ text: "Kurzfassung von Leo", ereignis: "faden:kurzfassung" }] : []),
+    ...dazu.slice(0, 2).map((d) => ({ text: d.titel, href: d.href })),
+    ...(erstesWerkzeug ? [{ text: erstesWerkzeug.titel, anker: erstesWerkzeug.id }] : []),
+    { text: "Kassensturz: Wie gut bin ich aufgestellt?", href: "/kassensturz" },
+  ];
 
   return (
     <section className="kapitel kapitel--live" id="kapitel-live" data-key={`post:${k.slug}`} data-titel={k.titel} data-pfad={pfad.join(" › ")}>
@@ -121,13 +132,14 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           )}
           {k.abschnitte.map((a, i) => (
             <Fragment key={a.id}>
-              <AbschnittBlock a={a} i={i} n={k.abschnitte.length} toolData={toolData} />
+              <AbschnittBlock a={a} i={i} n={k.abschnitte.length} toolData={toolData} url={k.url} />
               {i === 1 && <Einschub format="leaderboard" variante="artikel" nr={1} />}
             </Fragment>
           ))}
           {k.faq.length > 0 && (
             <section className="abschnitt abschnitt--faq" id={k.faqId} data-toc-titel="Häufige Fragen">
               <div className="faq-kopf"><i>???</i>Häufige Fragen<i>???</i></div>
+              <Einschub format="rectangle" variante="umflossen" nr={1} />
               <dl className="faq">
                 {k.faq.map((f, i) => (
                   <div key={i} className="faq__paar">
@@ -153,6 +165,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               </div>
             </section>
           )}
+          <KassensturzTeaser />
           <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} />
           {dazu.length > 0 && (
             <div className="dazu">
@@ -166,6 +179,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           <GlossarDaten daten={begriffe} />
         </article>
       </div>
+      <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
     </section>
   );
 }

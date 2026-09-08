@@ -1,6 +1,7 @@
 /**
  * Startseite im Faden wie im Prototyp: Landing-Hero, dann der Strom mit Anzeigenplatz,
- * Kapitel „Heute“ (Leo begrüßt, die Spalten mit allen Rubriken, Themen und Ratgebern)
+ * Kapitel „Heute“ (Leo begrüßt, Meldung zum Finanzwort des Tages, die Spalten mit allen
+ * Rubriken, Themen und Ratgebern)
  * und die Vorschläge als Chips unter der Eingabe. Alles serverseitig aus den
  * bestehenden Gettern; JSON-LD bleibt wie auf der alten Startseite (app/page.tsx).
  */
@@ -13,12 +14,17 @@ import HeroLanding from "./hero/HeroLanding";
 import Spalten from "./spalten/Spalten";
 import Einschub from "./Einschub";
 import Vorlesen from "./Vorlesen";
+import FinanzwortHeute from "./spiele/FinanzwortHeute";
+import { spielUrl } from "./spiele/spielUrl";
+import { spielAm } from "@/lib/faden/spiele";
+import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
   { text: "Wie viel Unterhalt für zwei Kinder?", frage: true },
   { text: "Wie hoch ist das Kindergeld 2026?", frage: true },
   { text: "Wie viel Steuer zahle ich auf meine Rente?", frage: true },
+  { text: "Kassensturz: Wie gut bin ich aufgestellt?", href: "/kassensturz" },
   { text: "Alle Finanztools", href: "/finanztools" },
 ];
 
@@ -27,10 +33,18 @@ export default async function FadenLanding() {
   const nav = await getNavItems();
   await getBeitragsIndex();
   const rubriken = await baueSpalten(nav);
-  const chips = VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href }));
+  const finanzwort = await spielAm("finanzwort");
+  // Echte Bestandszahlen für die Kacheln im Hero (statt der Prototyp-Zahlen).
+  const zahlen = { rechner: 0, vergleich: 0, checkliste: 0 };
+  for (const key of (await getWerkzeugIndex()).keys()) { const typ = key.split(":")[0] as keyof typeof zahlen; if (typ in zahlen) zahlen[typ]++; }
+  // Standard-Chips wie im Prototyp (STANDARD_CHIPS): zuletzt „Finanzwort des Tages“ auf die Spielseite des Tages.
+  const chips = [
+    ...VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href })),
+    ...(finanzwort ? [{ text: "Finanzwort des Tages", href: spielUrl(finanzwort.slug) }] : []),
+  ];
   return (
     <>
-      <HeroLanding />
+      <HeroLanding zahlen={zahlen} />
       <Einschub format="leaderboard" variante="top" nr={0} />
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
@@ -43,6 +57,7 @@ export default async function FadenLanding() {
               <div className="werkzeuge"><Vorlesen zielId="leo-gruss" /></div>
             </div>
           </div>
+          <FinanzwortHeute />
           <Spalten rubriken={rubriken} />
         </div>
         <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />

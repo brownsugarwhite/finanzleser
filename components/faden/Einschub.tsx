@@ -2,7 +2,10 @@
  * Anzeigenplatz (adblocker-neutral benannt, fiktive Marken aus dem Prototyp):
  * Beschriftung „Anzeige“ und eine Fläche im IAB-Format. Platzhalter für Stufe 4;
  * die Bilder liegen unter public/assets/einschub (aus docs/prototype/werbung.py).
+ * Ein Klick auf die Fläche zeigt den Toast (EinschubKlick, Client-Hülle).
  */
+import EinschubKlick from "./EinschubKlick";
+
 export type EinschubFormat = "leaderboard" | "rectangle" | "halfpage" | "skyscraper" | "square" | "mobile";
 
 const BILDER: Record<EinschubFormat, { name: string; w: number; h: number }[]> = {
@@ -21,10 +24,10 @@ export default function Einschub({ format, variante, nr = 0 }: { format: Einschu
   return (
     <div className={"einschub" + (variante ? ` einschub--${variante}` : "")} data-format={format} aria-label="Anzeige (Beispiel)">
       <span className="einschub__label">Anzeige</span>
-      <span className="einschub__flaeche">
+      <EinschubKlick>
         <img className="breit-bild" src={`/assets/einschub/${bild.name}.svg`} width={bild.w} height={bild.h} alt="Anzeige (Beispiel, fiktive Marke)" loading="lazy" />
         {schmal && <img className="schmal" src={`/assets/einschub/${schmal.name}.svg`} width={schmal.w} height={schmal.h} alt="Anzeige (Beispiel, fiktive Marke)" loading="lazy" />}
-      </span>
+      </EinschubKlick>
     </div>
   );
 }

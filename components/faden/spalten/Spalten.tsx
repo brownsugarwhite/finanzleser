@@ -6,13 +6,19 @@
  * Zeilen wie das alte Megamenü (kleine Titelzeile mit Werkzeugpunkten, fetter
  * Untertitel) und die Werkzeuge zum Thema. Port von spaltenwahl() aus dem Prototyp.
  */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ToolDots from "@/components/ui/ToolDots";
 import { boldYears } from "@/components/ui/MegaPostContent";
 import type { SpaltenRubrik } from "@/lib/faden/spalten";
+import { useHoverBox } from "./HoverBox";
 
 export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
   const [offen, setOffen] = useState<{ rk: string; tk: string } | null>(null);
+  // Hover-Rahmen um die Spalten (Prototyp: hoverBox(reihe, ".spalte", 16, { oben: 4, unten: 4 }), 03-js-core.html:511);
+  // klappt eine Spalte auf, zieht er sich zurück wie setze() im Prototyp.
+  const reihe = useRef<HTMLDivElement>(null);
+  const hover = useHoverBox(reihe, ".spalte", { radius: 16, oben: 4, unten: 4 });
+  useEffect(() => { if (offen) hover.weg(); }, [offen, hover]);
   const n = rubriken.length || 1;
   const vorlage = offen
     ? rubriken.map((r) => (r.key === offen.rk ? `calc(100% - ${(n - 1) * 9}px - ${(n - 1) * 40}px)` : "40px")).join(" 9px ")
@@ -21,7 +27,7 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
   return (
     <article className="kasten kasten--still spalten-kasten" id="rubriken">
       <div className="spalten__kopf"><span className="kicker">Ratgeber · vier Rubriken · {gesamt} Ratgeber · ein Thema öffnet die Spalte</span></div>
-      <div className={"spalten" + (offen ? " offen" : "")} style={{ gridTemplateColumns: vorlage }}>
+      <div ref={reihe} className={"spalten" + (offen ? " offen" : "")} style={{ gridTemplateColumns: vorlage }}>
         {rubriken.map((r, i) => {
           const istOffen = offen?.rk === r.key;
           const istRuecken = !!offen && !istOffen;
