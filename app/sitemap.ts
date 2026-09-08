@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
 import {
   getAllPosts,
   getAllRechner,
@@ -6,6 +7,7 @@ import {
   getAllChecklisten,
   getAllAnbieter,
   getAllDokumente,
+  getAllGlossar,
   getNavItems,
 } from "@/lib/wordpress";
 import { SITE_URL } from "@/lib/seo";
@@ -15,7 +17,7 @@ import {
   buildVergleichUrl,
   buildChecklisteUrl,
   buildAnbieterUrl,
-  buildDokumentUrl,
+  buildDokumentUrl, buildGlossarUrl,
   buildCategoryUrl,
   buildSubcategoryUrl,
 } from "@/lib/urls";
@@ -42,6 +44,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     safe(getAllDokumente, []),
     safe(getNavItems, []),
   ]);
+  // Glossar nur mit Faden-Schalter (Stufe 1): ohne Schalter gibt es die Routen nicht.
+  const glossar = FADEN_AKTIV ? await safe(getAllGlossar, []) : [];
 
   // NIE eine Rumpf-Sitemap ausliefern: Kommt eine Kern-Abfrage trotz Retries leer
   // zurück (WP-Überlast), soll die Regeneration FEHLSCHLAGEN — Next liefert dann die
@@ -115,6 +119,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
+  const glossarEntries: MetadataRoute.Sitemap = FADEN_AKTIV
+    ? [
+        { url: `${SITE_URL}/glossar`, changeFrequency: "weekly" as const, priority: 0.6 },
+        ...glossar.map((g) => ({ url: `${SITE_URL}${buildGlossarUrl(g.slug)}`, changeFrequency: "yearly" as const, priority: 0.4 })),
+      ]
+    : [];
+
   return [
     ...staticEntries,
     ...categoryEntries,
@@ -124,6 +135,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...checklistenEntries,
     ...anbieterEntries,
     ...dokumentEntries,
+    ...glossarEntries,
   ];
 }
 

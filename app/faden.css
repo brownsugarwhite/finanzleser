@@ -348,6 +348,53 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .spalte__fuss .chip { text-decoration: none; }
 .faden-shell .spalte__alle { margin-left: auto; }
 
+/* ---------- Glossar: grüne Begriffe, Klickmenü, Sitzung, Nachschlagewerk, Begriffskarte ---------- */
+.faden-shell { position: relative; }
+.faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--green-ink); cursor: pointer; text-decoration: none; border-bottom: 1px dotted var(--green); transition: color .15s, border-color .15s; }
+.faden-shell .begriff:hover, .faden-shell .begriff.offen, .faden-shell .prose a.begriff:hover, .faden-shell .prose a.begriff.offen { color: var(--pink); border-bottom-color: var(--pink); text-decoration: none; }
+.faden-shell .bmenu { position: absolute; z-index: 45; width: min(320px, calc(100vw - 24px)); background: var(--white); border: 1px solid var(--rule); border-radius: 14px; box-shadow: 0 14px 34px rgba(51,74,39,.16); padding: 14px 18px 12px; display: grid; gap: 4px; }
+.faden-shell .bmenu::before { content: ""; position: absolute; left: var(--pfeil, 22px); top: -7px; width: 12px; height: 12px; background: var(--white); border-left: 1px solid var(--rule); border-top: 1px solid var(--rule); transform: rotate(45deg); }
+.faden-shell .bmenu.oben::before { top: auto; bottom: -7px; transform: rotate(225deg); }
+.faden-shell .bmenu__titel { font-family: var(--serif); font-weight: 700; font-size: 20px; color: var(--pink); padding-bottom: 8px; border-bottom: 1px solid var(--rule); margin-bottom: 4px; }
+.faden-shell .bmenu .zeile { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; background: none; padding: 6px 0; font: inherit; font-size: 15px; color: var(--ink); text-decoration: none; cursor: pointer; }
+.faden-shell .bmenu .zeile:hover { color: var(--green-ink); }
+.faden-shell .bmenu .zeile i { flex: none; font-style: normal; }
+.faden-shell .bmenu .erkl { font-size: 14px; line-height: 1.5; color: var(--ink); background: var(--tint, rgba(69,161,23,.08)); padding: 8px 10px; border-radius: 8px; margin: 2px 0 6px; }
+.faden-shell .bmenu .erkl small { color: var(--muted); font-size: 12px; }
+.faden-shell .bmenu .leo-zeile { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 8px; font-family: var(--serif); font-size: 16px; }
+.faden-shell .bmenu .leo-zeile img { width: 30px; height: 30px; margin-left: auto; flex: none; }
+.faden-shell .bmenu .gemerkt { font-size: 11.5px; color: var(--muted); text-decoration: none; margin-top: 4px; line-height: 1.4; }
+.faden-shell .bmenu .gemerkt:hover { color: var(--green-ink); }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; max-height: 44vh; overflow: auto; scrollbar-width: thin; }
+.faden-shell .glossar-rail .eintrag-g { border: 1px solid var(--rule); background: var(--white); border-radius: 10px; overflow: hidden; }
+.faden-shell .glossar-rail .eintrag-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; background: none; padding: 9px 12px; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--green-ink); text-align: left; cursor: pointer; }
+.faden-shell .glossar-rail .eintrag-g > button i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; font-style: normal; font-size: 16px; line-height: 1; transition: transform .25s; }
+.faden-shell .glossar-rail .eintrag-g.offen > button i { transform: rotate(45deg); }
+.faden-shell .glossar-rail .erkl { display: none; padding: 0 12px 10px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+.faden-shell .glossar-rail .eintrag-g.offen .erkl { display: block; }
+.faden-shell .glossar-rail .erkl .quelle { display: block; margin-top: 4px; }
+.faden-shell .glossar-rail .erkl .mehr { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+.faden-shell .nachschlag { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.faden-shell .nachschlag__links { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.faden-shell .nachschlag__liste { max-height: 46vh; overflow: auto; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); scrollbar-width: thin; }
+.faden-shell .nachschlag__liste button { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule-soft); background: none; padding: 7px 4px; font-family: var(--serif); font-weight: 700; font-size: 14.5px; color: var(--ink); display: flex; justify-content: space-between; gap: 8px; cursor: pointer; }
+.faden-shell .nachschlag__liste button small { font: 600 11px/1.3 var(--sans); color: var(--muted); text-align: right; }
+.faden-shell .nachschlag__liste button:hover, .faden-shell .nachschlag__liste button.aktiv { color: var(--green-ink); }
+.faden-shell .nachschlag__liste .buchstabe { position: sticky; top: 0; background: var(--white); font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; color: var(--muted); padding: 6px 4px 2px; border-bottom: 1px solid var(--rule); }
+.faden-shell .nachschlag__detail { align-self: start; display: grid; gap: 8px; padding: 14px 16px; background: var(--paper); border-radius: 10px; min-height: 200px; }
+.faden-shell .nachschlag__detail h4 { font-family: var(--serif); font-size: 20px; color: var(--pink); margin: 0; }
+.faden-shell .nachschlag__detail p { font-size: 14px; line-height: 1.5; margin: 0; }
+.faden-shell .nachschlag__detail .reihe { display: flex; flex-wrap: wrap; gap: 10px; }
+.faden-shell .nachschlag__zahl { font-size: 12px; color: var(--muted); }
+.faden-shell .kasten--begriff { gap: 12px; }
+.faden-shell .begriff-k__text { font-size: 17px; }
+.faden-shell .begriff-k__auch { font-size: 13.5px; color: var(--muted); margin: 0; }
+.faden-shell .begriff-k__reihe { display: flex; flex-wrap: wrap; gap: 8px; }
+.faden-shell .begriff-k__reihe .chip { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.faden-shell .begriff-k__leo { display: grid; gap: 10px; margin-top: 6px; }
+.faden-shell .inhalt__zeile.aktiv .inhalt__nr { background: var(--pink); border-color: var(--pink); color: #fff; }
+.faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--pink); }
+
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
@@ -388,21 +435,23 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 
 /* ---------- Umbrüche ---------- */
 @media (max-width: 1439px) {
+  .faden-shell .glossar-rail { max-height: none; }
   .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
   .faden-shell #mitte { padding: 0; }
   .faden-shell .rand { display: none; }
-  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 40; background: var(--paper); padding: 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
   .faden-shell .rand--links.mobil { left: 0; } .faden-shell .rand--rechts.mobil { right: 0; }
   .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
   .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
-  .faden-shell .rand.mobil .rand__zu { display: inline-flex; justify-self: start; }
-  .faden-shell .schublade { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 39; }
+  .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
+  .faden-shell .schublade { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 69; }
   .faden-shell .mobil-leiste { display: flex; justify-content: space-between; gap: 10px; padding: 0 0 12px; }
   .faden-shell .mobil-leiste button { border: 1px solid var(--rule); background: var(--white); border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; }
   .faden-shell .mobil-leiste button i { font-style: normal; color: var(--green); }
   .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
 }
 @media (max-width: 900px) {
+  .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
   .faden-shell .kopf__innen { padding-left: 16px; }
   .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
   .faden-shell .register { display: none; }

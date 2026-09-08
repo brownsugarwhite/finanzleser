@@ -10,6 +10,7 @@
  * echte Navigation (Schnappschuss fällt weg, weil das Ziel wieder lebt).
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import type { BegriffDaten } from "@/lib/faden/glossar";
 import { usePathname, useRouter } from "next/navigation";
 
 export interface Schnappschuss {
@@ -36,6 +37,14 @@ interface FadenContextWert {
   koffer: string[];
   inDenKoffer: (titel: string) => void;
   toast: (text: string) => void;
+  /** Glossar der Sitzung: angetippte Begriffe, neueste zuerst; einer aufgeklappt. */
+  glossarSitzung: string[];
+  glossarOffen: string | null;
+  begriffMerken: (slug: string, aufklappen?: boolean) => void;
+  begriffAufklappen: (slug: string | null) => void;
+  begriffEntfernen: (slug: string) => void;
+  /** Begriffsdaten aus dem Kapitel-JSON, sonst /api/faden/glossar/<slug>; null = unbekannt. */
+  begriffHolen: (slug: string) => Promise<BegriffDaten | null>;
 }
 
 const FadenContext = createContext<FadenContextWert | null>(null);
@@ -49,6 +58,7 @@ export function useFaden(): FadenContextWert {
 const MAX_VERLAUF = 8;
 const META_KEY = "faden-verlauf";
 const KOFFER_KEY = "faden-koffer";
+const GLOSSAR_KEY = "faden-glossar";
 
 function uhr(d = new Date()): string {
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
@@ -151,6 +161,7 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
       if (!istEinfacherLinksklick(ev) || ev.defaultPrevented) return;
       const a = (ev.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!a || a.target === "_blank" || a.hasAttribute("download") || a.dataset.fadenAus !== undefined) return;
+      if (a.classList.contains("begriff")) return; // Klickmenü (BegriffMenue) übernimmt
       let url: URL;
       try { url = new URL(a.href, location.href); } catch { return; }
       if (url.origin !== location.origin) return;
@@ -182,6 +193,51 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
       }
     });
   }, [pathname]);
+
+  // Glossar der Sitzung (sessionStorage) + Begriffs-Cache (Kapitel-JSON, dann Route).
+  const [glossarSitzung, setGlossarSitzung] = useState<string[]>([]);
+  const [glossarOffen, setGlossarOffen] = useState<string | null>(null);
+  const glossarCache = useRef(new Map<string, BegriffDaten | null>());
+  useEffect(() => {
+    try {
+      const roh = sessionStorage.getItem(GLOSSAR_KEY);
+      if (!roh) return;
+      const g = JSON.parse(roh) as { slugs?: string[]; daten?: BegriffDaten[] };
+      (g.daten || []).forEach((d) => glossarCache.current.set(d.slug, d));
+      if (Array.isArray(g.slugs)) setGlossarSitzung(g.slugs.filter((x) => typeof x === "string"));
+    } catch { /* Sitzung beginnt leer */ }
+  }, []);
+  useEffect(() => {
+    try {
+      const daten = glossarSitzung.map((sl) => glossarCache.current.get(sl)).filter((d): d is BegriffDaten => !!d);
+      sessionStorage.setItem(GLOSSAR_KEY, JSON.stringify({ slugs: glossarSitzung, daten }));
+    } catch { /* egal */ }
+  }, [glossarSitzung]);
+  const begriffHolen = useCallback(async (slug: string): Promise<BegriffDaten | null> => {
+    const c = glossarCache.current;
+    if (!c.has(slug)) {
+      document.querySelectorAll<HTMLScriptElement>("script[data-glossar-daten]").forEach((sc) => {
+        try { (JSON.parse(sc.textContent || "[]") as BegriffDaten[]).forEach((d) => { if (d && d.slug && !c.has(d.slug)) c.set(d.slug, d); }); } catch { /* egal */ }
+      });
+    }
+    if (c.has(slug)) return c.get(slug) || null;
+    try {
+      const r = await fetch(`/api/faden/glossar/${encodeURIComponent(slug)}`);
+      if (!r.ok) { if (r.status === 404) c.set(slug, null); return null; }
+      const d = (await r.json()) as BegriffDaten;
+      c.set(slug, d);
+      return d;
+    } catch { return null; }
+  }, []);
+  const begriffMerken = useCallback((slug: string, aufklappen?: boolean) => {
+    setGlossarSitzung((alt) => (alt[0] === slug ? alt : [slug, ...alt.filter((x) => x !== slug)]));
+    if (aufklappen) setGlossarOffen(slug);
+  }, []);
+  const begriffAufklappen = useCallback((slug: string | null) => setGlossarOffen(slug), []);
+  const begriffEntfernen = useCallback((slug: string) => {
+    setGlossarSitzung((alt) => alt.filter((x) => x !== slug));
+    setGlossarOffen((o) => (o === slug ? null : o));
+  }, []);
 
   // Registerblatt: öffnen/schließen; der Klick, der es öffnet, darf es nicht im selben Moment
   // wieder schließen (Dokument-Klick-Schließer) — Lehre aus dem Prototyp.
@@ -220,7 +276,8 @@ export default function FadenProvider({ children }: { children: ReactNode }) {
 
   const wert = useMemo<FadenContextWert>(() => ({
     blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
-  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast]);
+    glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
+  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen]);
 
   return (
     <FadenContext.Provider value={wert}>

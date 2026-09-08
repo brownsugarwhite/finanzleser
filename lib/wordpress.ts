@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
+import type { GlossarEintrag, Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
@@ -2087,3 +2087,61 @@ export async function getAllAnbieter(): Promise<AnbieterPost[]> {
     throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
+
+// ─────────────────────────────────────────────
+// Glossar (Faden, Stufe 1): CPT `glossar` aus wordpress/mu-plugins/finanzleser-faden.php.
+// Nur mit NEXT_PUBLIC_FADEN=1 aufrufen — das Produktions-CMS kennt den Typ noch nicht (Regel 12).
+// Ein paginierter Listen-Getter, keine Einzelabfragen: die Begriffsseite findet ihren
+// Eintrag in der Liste (587 Seiten × 0 zusätzliche WP-Anfragen beim Build).
+// ─────────────────────────────────────────────
+
+export async function getAllGlossar(): Promise<GlossarEintrag[]> {
+  return buildMemo("allGlossar", _fetchAllGlossar);
+}
+async function _fetchAllGlossar(): Promise<GlossarEintrag[]> {
+  const client = getClient();
+  const query = gql`
+    query GetGlossar($after: String) {
+      glossarEintraege(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id title slug content varianten quelle ratgeber tool frage antwort wappen status
+          glossarRubriken { nodes { name slug } }
+        }
+      }
+    }
+  `;
+  type Roh = { id: string; title: string; slug: string; content?: string | null; varianten?: string | null; quelle?: string | null; ratgeber?: string | null; tool?: string | null; frage?: string | null; antwort?: string | null; wappen?: string | null; status?: string | null; glossarRubriken?: { nodes: { name: string; slug: string }[] } | null };
+  type Antwort = { glossarEintraege: { nodes: Roh[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+  try {
+    const alle: Roh[] = [];
+    let after: string | null = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const data: Antwort = await client.request<Antwort>(query, { after });
+      alle.push(...data.glossarEintraege.nodes);
+      hasNextPage = data.glossarEintraege.pageInfo.hasNextPage;
+      after = data.glossarEintraege.pageInfo.endCursor;
+    }
+    const eintraege: GlossarEintrag[] = alle
+      .filter((r) => !r.status || r.status === "freigegeben")
+      .map((r) => {
+        let varianten: string[] = [];
+        try { const v = JSON.parse(r.varianten || "[]"); if (Array.isArray(v)) varianten = v.filter((x): x is string => typeof x === "string" && !!x.trim()); } catch { /* Varianten bleiben leer */ }
+        return {
+          id: r.id, title: r.title, slug: r.slug, content: r.content || "", varianten,
+          quelle: r.quelle || "", ratgeber: r.ratgeber || "", tool: r.tool || "", frage: r.frage || "", antwort: r.antwort || "",
+          wappen: r.wappen || "", status: r.status || "", rubrik: r.glossarRubriken?.nodes?.[0]?.name || "",
+        };
+      });
+    return requireNonEmpty("allGlossar", eintraege).sort((a, b) => a.title.localeCompare(b.title, "de"));
+  } catch (error) {
+    console.error("Error fetching Glossar:", error);
+    throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand
+  }
+}
+
+// cache() — dedupliziert Metadata- und Page-Abfrage; findet in der (gecachten) Liste.
+export const getGlossarBySlug = cache(async (slug: string): Promise<GlossarEintrag | null> => {
+  return (await getAllGlossar()).find((e) => e.slug === slug) || null;
+});

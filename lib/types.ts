@@ -342,3 +342,23 @@ export interface FadenFelder {
   waechterRegeln: string[];
   statistiken: FadenStatistik[];
 }
+
+/** Glossarbegriff (CPT `glossar` aus wordpress/mu-plugins/finanzleser-faden.php; nur mit Faden-Schalter abgefragt). */
+export interface GlossarEintrag {
+  id: string;
+  title: string;
+  slug: string;
+  /** Erklärung = post_content (im Schema `content`, nicht `erklaerung`). */
+  content: string;
+  varianten: string[];
+  quelle: string;
+  /** Slug des verknüpften Ratgebers. */
+  ratgeber: string;
+  /** "rechner/unterhalt", "checkliste/elternunterhalt", "vergleich/…", "dokument/…". */
+  tool: string;
+  frage: string;
+  antwort: string;
+  wappen: string;
+  status: string;
+  rubrik: string;
+}

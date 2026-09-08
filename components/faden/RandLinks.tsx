@@ -7,12 +7,10 @@
  * Das Inhaltsverzeichnis liest die Abschnitte des lebenden Kapitels aus dem DOM
  * (`.abschnitt[data-toc-titel]`), der aktive Abschnitt kommt per IntersectionObserver.
  */
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
-
-interface TocZeile { id: string; titel: string }
 
 function kopfHoehe(): number {
   const k = document.getElementById("kopf");
@@ -29,22 +27,8 @@ export function zuAbschnitt(id: string) {
 export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
   const { verlauf, kapitelNr, kapitelUmschalten } = useFaden();
   const pathname = usePathname();
-  const [live, setLive] = useState<{ titel: string; toc: TocZeile[] } | null>(null);
-  const [aktiv, setAktiv] = useState<string>("");
-
-  useEffect(() => {
-    const el = document.getElementById("kapitel-live");
-    if (!el) { setLive(null); return; }
-    const toc = Array.from(el.querySelectorAll<HTMLElement>(".abschnitt[data-toc-titel]")).map((a) => ({ id: a.id, titel: a.dataset.tocTitel || "" }));
-    setLive({ titel: el.dataset.titel || document.title, toc });
-    setAktiv(toc[0]?.id || "");
-    if (!("IntersectionObserver" in window) || !toc.length) return;
-    const io = new IntersectionObserver((es) => {
-      es.forEach((x) => { if (x.isIntersecting && x.target.id) setAktiv(x.target.id); });
-    }, { rootMargin: "-30% 0px -55% 0px" });
-    toc.forEach((t) => { const n = document.getElementById(t.id); if (n) io.observe(n); });
-    return () => io.disconnect();
-  }, [pathname]);
+  const { titel, toc, aktiv, vorhanden } = useAbschnittAktiv(pathname);
+  const live = vorhanden ? { titel, toc } : null;
 
   return (
     <aside className={"rand rand--links" + (mobil ? " mobil" : "")} id="randLinks" aria-label="Verlauf und Inhalt">

@@ -1,8 +1,10 @@
 "use client";
 
+import GlossarRail from "./glossar/GlossarRail";
+
 /**
- * Rechte Randspalte: Glossar der Sitzung (füllt sich mit Meilenstein 4, wenn die
- * grünen Begriffe im Text verlinkt sind), darunter Platz für „Leo fragt“ (Stufe 2).
+ * Rechte Randspalte: Glossar der Sitzung (jeder angetippte grüne Begriff bleibt hier),
+ * darunter Platz für „Leo fragt“ (Stufe 2).
  */
 export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
   return (
@@ -13,7 +15,7 @@ export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: ()
             <div>
               <h2>Glossar · Aktuelle Sitzung</h2>
               <div className="glossar-rail" id="glossarRail">
-                <span className="rand__leer">Tippen Sie im Text auf einen <span className="begriff" style={{ cursor: "default" }}>grünen Begriff</span>. Die Erklärung landet hier und bleibt für diese Sitzung.</span>
+                <GlossarRail />
               </div>
             </div>
           </div>

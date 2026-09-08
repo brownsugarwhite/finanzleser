@@ -10,6 +10,10 @@ import type { Post } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import { baueKette, type Abschnitt, type Teil } from "@/lib/faden/kette";
 import { verweiseAufloesen } from "@/lib/faden/titel";
+import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
+import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
+import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
+import InhaltAktiv from "./InhaltAktiv";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import KapitelKopf from "@/components/faden/KapitelKopf";
@@ -43,6 +47,18 @@ function AbschnittBlock({ a, i, n, toolData }: { a: Abschnitt; i: number; n: num
 
 export default async function KetteKapitel({ post, toolData }: { post: Post; toolData?: ArticleToolData }) {
   const k = baueKette(post);
+
+  // Glossar: redaktionell vorbelegte Begriffe zuerst (glossar_begriffe), dann auffüllen —
+  // erste Fundstelle je Begriff, kettenweit begrenzt, Sperrkontexte in lib/faden/verlinken.
+  const glossar = await getGlossarIndex();
+  const ctx = neuerKontext(glossar, { bevorzugt: k.faden.glossarBegriffe });
+  for (const nurBevorzugt of [true, false]) {
+    if (k.einleitung) k.einleitung.html = verlinke(k.einleitung.html, ctx, { nurBevorzugt });
+    for (const a of k.abschnitte) for (const t of a.teile) if (t.art === "html") t.html = verlinke(t.html, ctx, { nurBevorzugt });
+    k.faq = k.faq.map((f) => ({ q: f.q, a: verlinke(f.a, ctx, { nurBevorzugt }) }));
+    if (k.fazitHtml) k.fazitHtml = verlinke(k.fazitHtml, ctx, { nurBevorzugt });
+  }
+  const begriffe = await loeseBegriffe([...ctx.gesehen].map((sl) => glossar.get(sl)).filter((e): e is NonNullable<typeof e> => !!e));
   const dazu = await verweiseAufloesen(k.faden.dazuPasst, toolTitel.alle(toolData));
   const pfad = k.krumen.map((x) => x.name);
 
@@ -91,6 +107,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
                   </li>
                 ))}
               </ol>
+              <InhaltAktiv />
             </nav>
           )}
           {k.abschnitte.map((a, i) => (
@@ -125,6 +142,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </div>
           )}
           <WochenbriefKasten />
+          <GlossarDaten daten={begriffe} />
         </article>
       </div>
     </section>

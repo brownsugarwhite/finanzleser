@@ -16,6 +16,7 @@ import RandRechts from "./RandRechts";
 import Eingabe from "./Eingabe";
 import Fussnote from "./Fussnote";
 import Menue from "./kopf/Menue";
+import BegriffMenue from "./glossar/BegriffMenue";
 
 export default function FadenShell({ children, nav, preload }: { children: ReactNode; nav: NavItem[]; preload: MegamenuPreload }) {
   const [schublade, setSchublade] = useState<"links" | "rechts" | null>(null);
@@ -40,6 +41,7 @@ export default function FadenShell({ children, nav, preload }: { children: React
           <RandRechts mobil={schublade === "rechts"} onZu={zu} />
         </main>
         <Fussnote />
+        <BegriffMenue />
       </div>
     </FadenProvider>
   );

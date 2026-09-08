@@ -20,6 +20,7 @@ import MegaPostContent from "@/components/ui/MegaPostContent";
 import { buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl, buildAnbieterUrl, buildPostUrl } from "@/lib/urls";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import { useFaden, type BlattZustand } from "@/components/faden/FadenProvider";
+import Nachschlag from "@/components/faden/glossar/Nachschlag";
 import type { Post } from "@/lib/types";
 
 type Eintrag = { title: string; slug: string };
@@ -219,12 +220,7 @@ function BlattService({ z, oeffnen }: { z: BlattZustand; oeffnen: (k: BlattZusta
           <a className="textlink textlink--still" href={teil === "anbieter" ? "/anbieter" : "/dokumente"}>Übersicht als Seite öffnen</a>
         </div>
       )}
-      {teil === "glossar" && (
-        <div className="blatt__spalte blatt__spalte--breit">
-          <span className="kicker">Glossar · 587 Begriffe</span>
-          <span className="hinweis">Grüne Begriffe im Text öffnen die Erklärung an Ort und Stelle; das Nachschlagewerk mit Suche kommt mit dem nächsten Schritt.</span>
-        </div>
-      )}
+      {teil === "glossar" && <Nachschlag buchstabe={z.b || "Alle"} oeffnen={(l) => oeffnen("service", "glossar", l)} />}
       {teil === "finconext" && (
         <div className="blatt__spalte blatt__spalte--breit">
           <img src="/icons/finconext_logo.svg" alt="Finconext" style={{ height: 34, width: "auto", justifySelf: "start" }} />
