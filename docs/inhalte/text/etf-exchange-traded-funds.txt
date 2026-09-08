@@ -1,0 +1,147 @@
+# ETF – Exchange Traded Funds (etf-exchange-traded-funds)
+## 0 ETF Ratgeber: Passiv investieren und Vermögen aufbauen
+
+ETF bilden ganze Märkte kostengünstig ab und eignen sich ideal für den Vermögensaufbau. Wie ETF funktionieren, welche es gibt und wie Sie 2026 starten.
+
+## 1 ETF-Ratgeber: Börsengehandelte Fonds verständlich erklärt
+
+Börsengehandelte Fonds – kurz ETF – ermöglichen Anlegern kosteneffizient diversifizierten Zugang zu ganzen Märkten. Erfahren Sie, wie diese ETF funktionieren und welche ETF-Strategie zu Ihnen passt.
+
+Die Erfolgsgeschichte der ETF erreicht 2026 neue Höchststände. Das verwaltete Vermögen in ETF kletterte Ende Januar auf USD 20,64 Billionen, was einem Plus von über 4 Prozent in nur einem Monat entspricht. PwC prognostiziert bis 2030 ein Wachstum auf USD 35 Billionen. Deutschland partizipiert stark: 2025 hielten 14,1 Millionen Menschen Aktien, Aktienfonds oder ETF – zwei Millionen mehr als im Vorjahr. Die gestiegene Volatilität macht genaue Kenntnisse über ETF wichtiger denn je.
+
+## 2 Wie funktionieren ETF?
+
+Ein ETF bildet die Wertentwicklung eines bestimmten Index wie dem DAX oder MSCI World nach. Der ETF-Anbieter kauft entweder die im Index enthaltenen Wertpapiere direkt (physische Replikation) oder nutzt Finanzderivate wie Swaps (synthetische Replikation).
+
+Physische Replikation: Der ETF erwirbt tatsächlich die Aktien in entsprechender Gewichtung. Diese ETF-Methode ist transparent und nachvollziehbar. Viele Angebote nutzen das Sampling-Verfahren und kaufen nur die wichtigsten Titel des Index.
+
+Synthetische Replikation: Der ETF hält einen Korb verschiedener Wertpapiere und tauscht deren Rendite über einen Swap-Vertrag gegen die Indexperformance. Dies ermöglicht einen effizienteren Umgang mit Quellensteuern auf Dividenden. Das Kontrahentenrisiko ist durch UCITS-Regularien auf maximal 10 Prozent des Fondsvermögens beschränkt.
+
+[SPIEL quiz: Was unterscheidet physische und synthetische Replikation bei ETF?]
+
+Der Handel erfolgt kontinuierlich während der Börsenöffnungszeiten. Market Maker sorgen für Liquidität und halten die Spreads eng. Der ETF-Kurs orientiert sich am Net Asset Value (NAV), der mindestens einmal pro Minute berechnet wird. Anleger kennen jederzeit den fairen Wert ihrer Anteile und können sie über ihr Wertpapierdepot verwalten.
+
+## 3 Gebühren und Kosten verstehen
+
+Die Total Expense Ratio (TER) ist die wichtigste Gebührenkennzahl für ETF. 2026 zeigt sich ein intensiver Preiskampf: Invesco senkte die TER seines ETF auf den MSCI World drastisch von 0,19 auf 0,05 Prozent pro Jahr. Die DWS senkte zum 1. Juni 2026 die TER ihres ETF auf den FTSE All-World von 0,12 auf 0,07 Prozent.
+
+Die Unterschiede summieren sich erheblich. Bei 10.000 Euro über 30 Jahre (7% Rendite p.a.) macht der Unterschied zwischen 0,20% und 0,05% TER mehrere tausend Euro aus.
+
+| ETF-Anbieter | TER 2026 | Kostenersparnis
+
+| Invesco | 0,05% | 75% günstiger
+
+| DWS | 0,07% | 65% günstiger
+
+| Amundi | 0,12% | 40% günstiger
+
+| iShares Core | 0,20% | Referenz
+
+Neben der TER entstehen weitere Kosten: Transaktionsgebühren beim Kauf, Depotführungsgebühren und der Spread zwischen An- und Verkaufskurs (etwa 0,1%). Bei 100.000 Euro sind das 100 Euro pro Kauf. Kaufen und verkaufen Sie einen ETF dreimal im Jahr, entstehen bereits 600 Euro Gebühren.
+
+[SPIEL karte: Total Expense Ratio (TER)]
+
+## 4 Vorteile von ETF
+
+Diversifikation steht an erster Stelle. Mit einem ETF investieren Sie in Hunderte oder Tausende von Unternehmen. Ein MSCI World ETF hält etwa 1.300 Positionen aus 23 Industrieländern.
+
+Kosteneffizienz überzeugt im Vergleich zu aktiven Fonds. Während traditionelle Fonds Gebühren von 1,5 bis 2,5 Prozent pro Jahr verlangen, liegen die Kosten für ETF meist zwischen 0,05 und 0,5 Prozent. Ausgabeaufschläge und Rücknahmegebühren entfallen bei ETF.
+
+Flexibilität beim Handel entspricht der von Aktien. ETF können während der gesamten Börsenöffnungszeit gekauft und verkauft werden.
+
+Transparenz kennzeichnet diese ETF-Produkte grundlegend. Sie wissen jederzeit, welche Wertpapiere in Ihrem ETF enthalten sind und wie diese gewichtet werden.
+
+Rechtlicher Schutz bietet zusätzliche Sicherheit. ETF gehören zum Sondervermögen und sind bei einer Insolvenz des Anbieters geschützt.
+
+Steuerliche Vorteile entstehen durch die passive Anlagestrategie. In Deutschland profitieren Aktien-ETF von der 30-prozentigen Teilfreistellung.
+
+[SPIEL mythos: ETF sind immer günstiger als aktive Fonds → ja]
+
+## 5 ETF oder aktiver Fonds – was passt?
+
+Aktive Fonds versuchen, durch Marktanalysen eine Überrendite zu erzielen. Fondsmanager treffen laufend Investitionsentscheidungen. Diese Flexibilität ermöglicht theoretisch bessere Ergebnisse, führt aber zu höheren Kosten und dem Risiko menschlicher Fehlentscheidungen.
+
+ETF verfolgen eine passive Strategie und bilden regelbasiert einen Index nach. Sie versuchen nicht, den Markt zu schlagen, sondern die Marktrendite zu erzielen. Diese Einfachheit reduziert Kosten drastisch.
+
+Langfristige Studien zeigen: Die meisten aktiven Fonds übertreffen ihre Benchmark nach Kosten nicht. Dies liegt hauptsächlich an den höheren Gebühren, die ETF nicht haben.
+
+| Kriterium | ETF | Aktiver Fonds
+
+| Jährliche Kosten | 0,05–0,50% | 1,5–2,5%
+
+| Ausgabeaufschlag | 0% | 3–5%
+
+| Transparenz | Vollständig | Begrenzt
+
+| Performance vs. Index | Knapp unter Index | Meist unter Index
+
+Aktive ETF gewinnen an Bedeutung: Ende Januar 2026 erreichten sie ein Rekordvermögen von USD 2,04 Billionen (+5,8% seit Jahresbeginn).
+
+## 6 Risiken bei ETF
+
+Marktrisiko bleibt das grundlegende Risiko. ETF können dieses systematische Risiko nicht eliminieren. Wenn die Märkte fallen, fallen auch diese ETF.
+
+Klumpenrisiken entstehen bei populären Indizes. Der MSCI World hat einen US-Anteil von etwa 73 Prozent und 29 Prozent Informationstechnologie. Wer in diesen ETF investiert, trägt diese Konzentration, was sich besonders bei Rückgängen in Tech-Aktien auswirkt.
+
+Kontrahentenrisiko entsteht bei synthetischen ETF, da der Anbieter Tauschgeschäfte mit Banken eingeht. Regulatorische Maßnahmen begrenzen dieses Risiko bei ETF.
+
+Produktschließungen sind selten, aber möglich. Das investierte Kapital bleibt durch den Sondervermögensstatus geschützt.
+
+Tracking-Differenzen entstehen, wenn ein ETF nicht exakt die Indexperformance erreicht. Eine geringe negative Tracking-Differenz ist bei ETF normal.
+
+## 7 Welche ETF-Produkttypen es gibt
+
+Aktien-ETF bilden das Herzstück. Sie investieren in Indizes verschiedener Regionen oder Sektoren und eignen sich für langfristigen Vermögensaufbau.
+
+Anleihen-ETF bieten stabilere Erträge, aber geringere langfristige Renditeerwartungen.
+
+Rohstoff-ETF ermöglichen Investitionen in Gold, Öl oder Rohstoffindizes. Diese ETF können bei Inflation nützlich sein.
+
+Sektor-ETF konzentrieren sich auf Wirtschaftszweige wie Technologie oder Gesundheitswesen.
+
+Faktor-ETF setzen auf Strategien wie Value oder Dividendenfokus:
+
+- Dividenden-ETF: Fokus auf dividendenstarke Unternehmen
+
+- ESG-ETF: Nachhaltige Geldanlage
+
+- Low-Volatility-ETF: Reduzieren Schwankungen
+
+- Multi-Asset-ETF: Kombinieren verschiedene Anlageklassen
+
+## 8 ETF-Strategien für 2026
+
+Die Core-Satellite-Methode bewährt sich in volatilen Marktphasen. Der „Core" besteht aus kostengünstigen, breit diversifizierten ETF wie MSCI World oder FTSE All-World und sollte 60 bis 80 Prozent ausmachen.
+
+Die „Satellites" ergänzen um gezielte Chancen. Eine typische Aufteilung: 60% Welt-ETF, 20% Schwellenländer-ETF, 10% Europa-ETF, 10% thematische ETF.
+
+Internationale Diversifikation wird 2026 wichtiger. Die extreme US-Dominanz macht eine bewusste geografische Streuung bei ETF sinnvoller denn je.
+
+Defensive Strategien gewinnen an Bedeutung. Low-Vol-ETF mit Beta von nur 0,55 eignen sich für risikobewusste Anleger.
+
+Regionale Umschichtungen stehen im Fokus. Value- und Dividenden-ETF untergewichten Tech zugunsten von Energie, Industrie und Finanzwerten.
+
+Thematische Investitionen sollten nie mehr als 10 bis 20 Prozent des Portfolios ausmachen.
+
+## 9 Fazit
+
+ETF haben sich als unverzichtbare Instrumente der modernen Geldanlage etabliert. Die Stärken von ETF liegen in niedrigen Kosten, breiter Diversifikation, hoher Transparenz und einfacher Handelbarkeit. Der intensive Preiswettbewerb führt zu immer günstigeren ETF.
+
+Die extreme Konzentration beliebter Indizes auf US-Tech-Giganten macht bewusste Diversifikation jedoch wichtiger denn je. Eine Core-Satellite-Strategie mit breiten ETF als Basis und gezielten Ergänzungen bietet einen ausgewogenen Ansatz. Wichtiger als die Jagd nach perfekter Performance ist eine langfristige, kosteneffiziente und verständliche ETF-Strategie, die Sie über verschiedene Marktzyklen hinweg durchhalten können.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste etf-exchange-traded-funds]
+
+[BLOCK vergleich depot-vergleich]
+
+
+## FAQ
+F: Was ist ein ETF und wie funktioniert er?
+A: Ein ETF ist ein börsengehandelter Indexfonds, der die Wertentwicklung eines Index wie DAX, MSCI World oder Su0026P 500 nachbildet. Anleger erwerben mit einem einzigen Wertpapier Anteile an einem breit gestreuten Portfolio und profitieren von niedrigen Kosten und hoher Transparenz.
+F: Was ist der Unterschied zwischen physischer und synthetischer Replikation?
+A: Bei der physischen Replikation kauft der ETF die im Index enthaltenen Wertpapiere direkt. Bei der synthetischen Replikation wird ein Korb anderer Wertpapiere gehalten und über einen Total Return Swap die Indexperformance abgebildet.
+F: Warum sind ETFs meist günstiger als aktive Fonds?
+A: ETFs verfolgen eine passive Anlagestrategie und bilden lediglich einen bestehenden Index ab. Dadurch entfallen Kosten für Research und aktives Fondsmanagement, was zu deutlich niedrigeren laufenden Gebühren führt als bei klassischen Investmentfonds.
+F: Welches Anlagevolumen verwalten ETFs im Jahr 2026 weltweit?
+A: Im Jahr 2026 verwalten ETFs weltweit über 13 Billionen US-Dollar und haben sich damit endgültig als zentrales Instrument der modernen Geldanlage etabliert. Aktive ETFs gewinnen dabei weiter an Bedeutung, während die Marktvolatilität deutlich zugenommen hat.

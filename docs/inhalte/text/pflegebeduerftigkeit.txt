@@ -1,0 +1,149 @@
+# Pflegebedürftigkeit (pflegebeduerftigkeit)
+## 0 Alles über Pflegebedarf, Versicherung und Hilfe im Alter
+
+Pflegebedürftigkeit liegt vor, wenn die Selbstständigkeit dauerhaft eingeschränkt ist. Wie sie 2026 festgestellt wird und welche Leistungen es dann gibt.
+
+## 1 Pflegebedürftigkeit: Definition, Pflegegrade und Leistungen 2026
+
+Pflegebedürftigkeit bezeichnet gesundheitlich bedingte Beeinträchtigungen der Selbständigkeit oder der Fähigkeiten, die Hilfe durch andere erforderlich machen. Ende 2023 waren rund 5,69 Millionen Menschen in Deutschland pflegebedürftig – ein Anstieg von 15 Prozent gegenüber 2021. Die gesetzliche Definition im Sozialgesetzbuch XI erfasst dabei körperliche, kognitive und psychische Einschränkungen gleichermaßen und schafft Ansprüche auf umfassende Unterstützungsleistungen.
+
+Die moderne Pflegelandschaft orientiert sich an der individuellen Selbstständigkeit von Menschen. Dabei spielt das Alter keine entscheidende Rolle: Pflegebedürftigkeit kann in allen Lebensabschnitten auftreten. Von Kindern mit besonderen Bedürfnissen bis zu Senioren mit altersbedingten Einschränkungen können alle Menschen betroffen sein. Das Neue Begutachtungsassessment (NBA) ersetzt seit 2017 die zeitaufwändige Minutenpflege durch eine ganzheitliche Bewertung der Lebenssituation.
+
+## 2 Was bedeutet Pflegebedürftigkeit nach dem Gesetz?
+
+Die Pflegebedürftigkeit muss auf Dauer, voraussichtlich für mindestens sechs Monate bestehen. Diese Zeitgrenze unterscheidet dauerhaft pflegebedürftige Menschen von solchen mit vorübergehenden Einschränkungen. Wer nach einem Beinbruch sechs Wochen Hilfe benötigt, erfüllt diese Voraussetzung nicht. Eine klare Heilungsprognose schließt den Pflegegrad aus.
+
+Es muss sich um Personen handeln, die körperliche, kognitive oder psychische Beeinträchtigungen nicht selbständig kompensieren oder bewältigen können. Der Gesetzgeber erkennt dabei drei gleichberechtigte Arten von Beeinträchtigungen an:
+
+- Körperliche Einschränkungen (Mobilität, Kraft, Koordination)
+
+- Kognitive Beeinträchtigungen (Gedächtnis, Orientierung, Entscheidungsfähigkeit)
+
+- Psychische Problemlagen (Depressionen, Angststörungen, Verhaltensstörungen)
+
+Diese umfassende Definition berücksichtigt ausdrücklich Menschen mit Demenz, schweren psychischen Erkrankungen oder geistigen Behinderungen. Sie können genauso Pflegegrade erhalten wie Menschen mit rein körperlichen Erkrankungen. Die Ursache der Einschränkung ist dabei unerheblich – entscheidend ist ihre Auswirkung auf die Selbstständigkeit.
+
+[SPIEL schaetzen: Wie viele Menschen waren Ende 2023 in Deutschland pflegebedürftig? → 5.69]
+
+## 3 Wie funktioniert das Begutachtungsverfahren?
+
+Das Neue Begutachtungsassessment (NBA) umfasst 64 Kriterien, die in sechs Module gegliedert sind. Gutachter des Medizinischen Dienstes bewerten dabei nicht die Diagnose, sondern die tatsächliche Selbstständigkeit im Alltag. Bei der Feststellung der Pflegebedürftigkeit geht es darum, die Selbstständigkeit der Person nach festgelegten Kategorien in sechs Modulen zu erfassen.
+
+Die sechs Begutachtungsmodule gliedern sich wie folgt:
+
+| Modul | Bereich | Gewichtung | Schwerpunkt
+
+| 1 | Mobilität | 10% | Positionswechsel, Fortbewegen, Treppensteigen
+
+| 2 | Kognitive/kommunikative Fähigkeiten | 15%* | Orientierung, Gedächtnis, Entscheidungen
+
+| 3 | Verhaltensweisen/psychische Problemlagen | 15%* | Unruhe, Ängste, Aggressionen
+
+| 4 | Selbstversorgung | 40% | Körperpflege, Anziehen, Essen
+
+| 5 | Krankheitsbewältigung | 20% | Medikamente, Arztbesuche, Therapien
+
+| 6 | Alltagsleben/soziale Kontakte | 15% | Tagesablauf, Hobbys, Beziehungen
+
+*Hier zählt nur der höhere Wert aus Modul 2 oder 3.
+
+Aus diesen Modulergebnissen wird ein Gesamtpunktwert von 0 bis 100 Punkten gebildet. Ab einem Punktewert von 12,5 liegt eine Pflegebedürftigkeit vor. Der Schweregrad wird durch die gewichteten Punkte festgelegt und ist in fünf Pflegegrade aufgeteilt.
+
+[SPIEL gewusst: Das Modul "Selbstversorgung" hat mit 40 Prozent den größten Einfluss auf den Pflegegrad – mehr als alle anderen Module zusammen (Stand 2026)]
+
+## 4 Welche Pflegegrade gibt es und welche Leistungen stehen zu?
+
+Deutschland kennt fünf Pflegegrade, die verschiedene Schweregrade der Beeinträchtigung widerspiegeln. Die Leistungen aus der Pflegeversicherung bleiben exakt auf dem Stand von 2025 und gelten unverändert für 2026. Eine Erhöhung ist erst wieder frühestens zum 01.01.2028 vorgesehen.
+
+Pflegegrad 1 (12,5-27 Punkte): Geringe Beeinträchtigungen der Selbstständigkeit
+
+- Kein Pflegegeld
+
+- 131 Euro Entlastungsbetrag monatlich
+
+- 42 Euro für Pflegehilfsmittel
+
+Pflegegrad 2 (27-47,5 Punkte): Erhebliche Beeinträchtigungen
+
+- 347 Euro Pflegegeld oder 796 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 3 (47,5-70 Punkte): Schwere Beeinträchtigungen
+
+- 599 Euro Pflegegeld oder 1.497 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 4 (70-90 Punkte): Schwerste Beeinträchtigungen
+
+- 800 Euro Pflegegeld oder 1.859 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 5 (90-100 Punkte): Schwerste Beeinträchtigungen mit besonderen Anforderungen
+
+- 990 Euro Pflegegeld oder 2.299 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 2 ist mit gut 40 Prozent der häufigste Pflegegrad. Nach Destatis-Daten für 2023 entfielen rund 40,4 Prozent auf Pflegegrad 2, etwa 29,6 Prozent auf Pflegegrad 3.
+
+[SPIEL mythos: Menschen mit Pflegegrad 1 erhalten kein Pflegegeld, aber dafür andere wichtige Leistungen → ja]
+
+## 5 Wie beantragt man einen Pflegegrad erfolgreich?
+
+Der Antrag ist formlos bei der Pflegekasse möglich. Ein einfacher Anruf, eine E-Mail oder ein kurzes Schreiben genügt: "Ich beantrage die Feststellung der Pflegebedürftigkeit." Spezielle Formulare sind nicht erforderlich. Die Pflegekasse befindet sich bei der jeweiligen Krankenkasse.
+
+Entscheidend ist der richtige Zeitpunkt: Leistungen werden ab dem Antragsmonat gewährt, nicht rückwirkend. Jeder Monat ohne Antrag bedeutet verlorene Ansprüche in Höhe von mehreren hundert Euro.
+
+Das Verfahren läuft strukturiert ab:
+
+- Schritt 1: Die Pflegekasse beauftragt den Medizinischen Dienst oder unabhängige Gutachter
+
+- Schritt 2: Über den Antrag muss die Pflegekasse innerhalb von höchstens 25 Arbeitstagen entscheiden
+
+- Schritt 3: Der Bescheid über den Pflegegrad wird zugestellt
+
+Zur optimalen Vorbereitung führen Sie zwei Wochen vor der Begutachtung ein detailliertes Pflegetagebuch, um beim Pflegegrad beantragen optimal vorbereitet zu sein. Dokumentieren Sie täglich, wobei Unterstützung nötig ist, wie lange Tätigkeiten dauern und welche Schwierigkeiten auftreten. Dieses Tagebuch wird zu Ihrem stärksten Argument gegenüber den Gutachtern.
+
+[SPIEL karte: Medizinischer Dienst (MD)]
+
+## 6 Was ändert sich 2026 in der Pflegeversicherung?
+
+Die Beträge gelten unverändert auch im Jahr 2026. Leistungen wie Pflegegeld oder Pflegesachleistungen bleiben auf dem Niveau von 2025 und steigen nicht weiter an. Dennoch gibt es wichtige Neuerungen bei der Flexibilität und Organisation:
+
+Gemeinsames Entlastungsbudget: Das Entlastungsbudget in Höhe von 3.539 Euro ab 01.07.2025 für Kurzzeitpflege und Verhinderungspflege gilt erstmals über das gesamte Jahr verteilt. Diese Flexibilität erleichtert die Versorgungsplanung erheblich.
+
+Vereinfachte Beratungseinsätze: Für Pflegegrade 2 bis 5 ist nur noch ein Beratungstermin pro Halbjahr verpflichtend. Damit entfällt die bislang höhere Termindichte bei schweren Pflegegraden. Zusätzliche Beratungsgespräche sind weiterhin möglich und kostenfrei.
+
+Verhinderungspflege-Rückerstattung: Die Kostenerstattung für Verhinderungspflege ist ab 2026 nur noch für das aktuelle und für das vorige Kalenderjahr möglich. Die frühere vierjährige Rückerstattung entfällt.
+
+Landespflegegeld Bayern: Bislang lag das bayerische Landespflegegeld bei 1.000 Euro pro Jahr. Ab 2026 wird es um die Hälfte gekürzt und beträgt dann nur noch 500 Euro pro Jahr.
+
+Die Pflegehilfsmittel bleiben bei 42 Euro monatlich, der Entlastungsbetrag bei 131 Euro. Diese Beträge gelten zusätzlich zu Pflegegeld oder Pflegesachleistungen.
+
+## 7 Fazit
+
+Pflegebedürftigkeit kann Menschen jeden Alters treffen und erfordert fundierte Kenntnisse über verfügbare Leistungen. Ende 2023 waren rund 5,69 Millionen Menschen in Deutschland pflegebedürftig – Tendenz steigend aufgrund des demografischen Wandels. Das deutsche Pflegesystem wirkt komplex mit fünf Pflegegraden, sechs Begutachtungsmodulen und zahlreichen Leistungsarten, bietet aber umfassende Unterstützung.
+
+Die Leistungen der Pflegeversicherung bleiben 2026 stabil, während neue Flexibilität beim gemeinsamen Entlastungsbudget die Versorgungsorganisation vereinfacht. Der Schlüssel zum Erfolg liegt in der rechtzeitigen Antragstellung und gründlichen Vorbereitung auf die Begutachtung. Wer seine tatsächlichen Einschränkungen dokumentiert und ehrlich schildert, erhöht die Chancen auf eine angemessene Einstufung deutlich.
+
+Das deutsche Pflegesystem bietet umfangreiche Unterstützung – von monatlichem Pflegegeld bis zu Sachleistungen, Entlastungsangeboten und Hilfsmitteln. Rund 86 Prozent werden zu Hause versorgt, davon ein großer Teil durch Angehörige. Wer über diese Leistungen hinaus absichern möchte, sollte sich auch mit einer Pflegezusatzversicherung auseinandersetzen. Entscheidend ist, die eigenen Rechte zu kennen und konsequent zu nutzen. Eine vorausschauende Auseinandersetzung mit dem Thema schützt vor finanziellen Engpässen und sichert die bestmögliche Versorgung im Bedarfsfall.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegebeduerftigkeit]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wann gilt man als pflegebedürftig?
+A: Pflegebedürftig ist, wer aufgrund gesundheitlicher Beeinträchtigungen dauerhaft Unterstützung im Alltag benötigt. Die Einschränkung muss voraussichtlich mindestens sechs Monate andauern und im Sozialgesetzbuch XI festgelegte Schweregrade erreichen. Vorübergehende Einschränkungen, etwa nach einer Operation, zählen nicht.
+F: Welche Leistungen gibt es bei Pflegegrad 3 im Jahr 2026?
+A: Bei Pflegegrad 3 erhalten Pflegebedürftige 2026 ein monatliches Pflegegeld von 599 Euro oder Pflegesachleistungen in Höhe von 1.497 Euro. Zusätzlich steht ein Entlastungsbetrag von 131 Euro pro Monat zur Verfügung. Die Leistungen bleiben gegenüber 2025 unverändert.
+F: Werden kognitive und psychische Einschränkungen als Pflegebedürftigkeit anerkannt?
+A: Ja, das deutsche Pflegerecht erkennt körperliche, kognitive und psychische Beeinträchtigungen gleichberechtigt als Grundlage für Pflegebedürftigkeit an. Demenzkranke oder Menschen mit psychischen Erkrankungen können daher einen Pflegegrad erhalten. Die Einstufung erfolgt unabhängig von der Ursache der Einschränkung.
+F: Wie wird ein Pflegegrad beantragt?
+A: Der Antrag auf einen Pflegegrad ist formlos bei der Pflegekasse möglich. Ein Anruf, eine E-Mail oder ein kurzes Schreiben mit der Bitte um Feststellung der Pflegebedürftigkeit genügt. Der Antrag sollte möglichst früh gestellt werden, da Leistungen rückwirkend ab dem Antragsdatum gewährt werden.

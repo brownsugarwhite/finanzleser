@@ -1,0 +1,109 @@
+# Körperschaftsteuer (koerperschaftsteuer)
+## 0 Körperschaftsteuer erklärt: Steuern für GmbH, AG und Kapitalgesellschaften
+
+Die Körperschaftsteuer ist die Gewinnsteuer für GmbH, AG und andere Kapitalgesellschaften. Wie hoch der Satz 2026 ist, wie sie berechnet wird und wer sie zahlt.
+
+## 1 Körperschaftsteuer 2026: Sätze, Berechnung und Pflichten
+
+Körperschaftsteuer regelt die steuerliche Behandlung von Kapitalgesellschaften und deren Gewinnen. Die Körperschaftsteuer ist die Gewinnsteuer für juristische Personen — also für GmbHs, UGs (haftungsbeschränkt) und Aktiengesellschaften. Sie stellt das Pendant zur Einkommensteuer bei natürlichen Personen dar und wird für alle Kapitalgesellschaften mit Geschäftsleitung oder Sitz in Deutschland erhoben.
+
+Der Körperschaftsteuersatz beträgt 2026 unverändert 15 Prozent des zu versteuernden Einkommens. Der Körperschaftsteuersatz liegt aktuell bei 15 % plus Solidaritätszuschlag. Somit ergibt sich eine Steuerbelastung von 15,83 % im Rahmen der Körperschaftsteuer. Hinzu kommt der Solidaritätszuschlag weiterhin ohne jede Freibeträge oder Abschwächungsregelungen auf ihre Körperschaftsteuer in Höhe von 5,5 Prozent der Körperschaftsteuer, was einer Gesamtbelastung von 15,825 Prozent entspricht (Stand 2026).
+
+## 2 Wer zahlt Körperschaftsteuer?
+
+Körperschaftsteuer zahlen Kapitalgesellschaften wie GmbH, UG und AG als juristische Personen. Unbeschränkt steuerpflichtig sind Körperschaften mit Geschäftsleitung oder Sitz in Deutschland – sie versteuern ihr gesamtes Welteinkommen. Beschränkt steuerpflichtige Körperschaften zahlen dagegen nur auf inländische Einkünfte Körperschaftsteuer.
+
+Zu den steuerpflichtigen Rechtsformen gehören:
+
+- Kapitalgesellschaften (GmbH, UG, AG)
+
+- Genossenschaften
+
+- Vereine mit wirtschaftlichem Geschäftsbetrieb
+
+- Stiftungen des privaten Rechts
+
+- Betriebe gewerblicher Art von juristischen Personen des öffentlichen Rechts
+
+Betreiben Sie Ihr Unternehmen als Einzelfirma oder in einer GbR, zahlen Sie stattdessen Einkommensteuer. Personengesellschaften wie GbR, OHG oder KG unterliegen nicht der Körperschaftsteuer. Ihre Einkünfte werden einheitlich und gesondert festgestellt und anteilig den Gesellschaftern zugerechnet, die dann persönlich Einkommensteuer zahlen müssen.
+
+[SPIEL mythos: Alle Unternehmen in Deutschland müssen Körperschaftsteuer zahlen → nein]
+
+## 3 Wie hoch ist die Gesamtsteuerbelastung für Kapitalgesellschaften?
+
+Neben der Körperschaftsteuer zahlen Kapitalgesellschaften auch Gewerbesteuer. Durchschnittlich liegt der Gewerbesteuerhebesatz in Deutschland bei rund 400 %. Dies führt bei einem Steuermessbetrag von 3,5 Prozent zu einer Gewerbesteuerbelastung von etwa 14 Prozent. Die Körperschaftsteuer sinkt stufenweise von 15 % auf 10 %, wodurch sich die Gesamtbelastung von rund 29,8 % auf 24,6 % reduziert. Der Solidaritätszuschlag beträgt konstant 5,5 % auf die Körperschaftsteuer, während die Gewerbesteuer mit einem Hebesatz von 400 % bei etwa 14 % bleibt.
+
+| Steuerart | Steuersatz 2026 | Bemessungsgrundlage
+
+| Körperschaftsteuer | 15,0% | Zu versteuerndes Einkommen
+
+| Solidaritätszuschlag | 5,5% | Körperschaftsteuer
+
+| Gewerbesteuer | ca. 14,0% | Gewerbeertrag
+
+| Gesamtbelastung | ca. 29,8% |
+
+Ein praktisches Beispiel: Bei einem Gewinn von 100.000 Euro fallen 15.000 Euro Körperschaftsteuer an, zuzüglich 825 Euro Solidaritätszuschlag und etwa 14.000 Euro Gewerbesteuer – insgesamt rund 29.825 Euro Steuerlast.
+
+[SPIEL schaetzen: Wie viele verschiedene Steuersätze müssen Unternehmen bei der Berechnung latenter Steuern ab 2028 berücksichtigen? → 6]
+
+## 4 Welche Reformen kommen ab 2028?
+
+Mit dem Gesetz für ein steuerliches Investitionssofortprogramm zur Stärkung des Wirtschaftsstandorts Deutschland wurde eine zeitlich gestreckte Senkung des Körperschaftsteuersatzes von derzeit 15 % umgesetzt. Danach verringert sich der Körperschaftsteuersatz ab dem VZ 2028 im Verlauf von fünf Jahre um je einen Prozentpunkt pro Jahr. Ab dem VZ 2032 beträgt er dann 10 %.
+
+Die stufenweise Entwicklung gestaltet sich folgendermaßen:
+
+- 2026–2027: 15 Prozent (15,825 Prozent mit Solidaritätszuschlag)
+
+- 2028: 14 Prozent (14,77 Prozent mit Soli)
+
+- 2029: 13 Prozent (13,715 Prozent mit Soli)
+
+- 2030: 12 Prozent (12,66 Prozent mit Soli)
+
+- 2031: 11 Prozent (11,605 Prozent mit Soli)
+
+- ab 2032: 10 Prozent (10,55 Prozent mit Soli)
+
+Dass die Körperschaftsteuer in fünf einzelnen Jahresschritten geändert wird, ist auch international eine bislang beispiellose Steuerinnovation. Dies reduziert die Gesamtbelastung aus Körperschaftsteuer, Solidaritätszuschlag und Gewerbesteuer von etwa 29,8 Prozent auf rund 25 Prozent ab 2032.
+
+## 5 Was bedeutet die degressive Abschreibung für 2026?
+
+Parallel zur Körperschaftsteuerreform können Unternehmen von der wiedereingeführten degressiven Abschreibung profitieren. Gemäß § 7 Abs. 2 Satz 1 EStG können alle Unternehmen die degressive AfA für bewegliche Wirtschaftsgüter des Anlagevermögens nutzen, die nach dem 30. Juni 2025 und vor dem 1. Januar 2028 angeschafft oder hergestellt wurden.
+
+Der Abschreibungssatz beträgt maximal das Dreifache der linearen AfA, höchstens jedoch 30 Prozent der Anschaffungskosten im ersten Jahr. Danach wird der Prozentsatz auf den jeweiligen Restbuchwert angewendet. Bei einer Maschine für 300.000 Euro mit zehn Jahren Nutzungsdauer können Unternehmen im ersten Jahr 90.000 Euro absetzen statt 30.000 Euro bei linearer Abschreibung. Bei einem Steuersatz von rund 30 Prozent ergibt das einen Liquiditätsvorteil von 19.500 Euro allein im ersten Jahr.
+
+[SPIEL karte: Degressive Abschreibung]
+
+## 6 Wie wirkt sich der Solidaritätszuschlag aus?
+
+Kapitalgesellschaften wie GmbHs oder AGs sind nicht von der Soli-Abschaffung betroffen und zahlen weiterhin den vollen Solidaritätszuschlag auf ihre Körperschaftsteuer. Sie müssen den Solidaritätszuschlag weiterhin ohne jede Freibeträge oder Abschwächungsregelungen auf ihre Körperschaftsteuer entrichten.
+
+Im Gegensatz zu natürlichen Personen, die seit 2021 von erheblichen Entlastungen beim Solidaritätszuschlag profitieren, zahlen Kapitalgesellschaften den vollen Zuschlagssatz von 5,5 Prozent ohne Freigrenze oder Minderungen. Du musst nur Soli zahlen, wenn Du 2026 mehr als 20.350 Euro Einkommensteuer zu zahlen hast. Bei Ehepaaren ist es der doppelte Betrag, also 40.700 Euro. Diese Freigrenzen gelten jedoch nicht für Kapitalgesellschaften.
+
+## 7 Welche Herausforderungen entstehen für die Finanzplanung?
+
+Die stufenweise Körperschaftsteuersenkung ab 2028 führt bereits jetzt zu komplexen Anpassungen in Handels- und Steuerbilanz. Unternehmen müssen latente Steuern neu bewerten und dabei künftig bis zu sechs verschiedene Steuersätze berücksichtigen – je nachdem, in welchem Jahr die temporären Differenzen aufgelöst werden.
+
+Um diese spätere Entlastung heute aber korrekt abbilden zu können, muss der Bilanzierende den Steuersatz des Jahres verwenden, in dem sie die temporäre Differenz umkehrt oder Verlust- bzw. Zinsvorträge genutzt werden können. Ab sofort muss er mithin für jede einzelne Steuerlatenz mit bis zu sechs verschiedenen Steuersätzen hantieren.
+
+Viele Rechnungswesen-Systeme sind mit dieser Komplexität überfordert. Ein Beispiel verdeutlicht die Herausforderung: Die passiven latenten Steuern wurden unter der Annahme errechnet, dass im Jahr der Auflösung der temporären Differenzen– in diesem Fall 2029 – eine Steuerbelastung aus Körperschaftsteuer, Solidaritätszuschlag und Gewerbesteuer von 30 Prozent greift. Mit dem neuen Steuersatz von nur noch rund 28 Prozent ergibt sich eine zu erwartende Steuerbelastung von 112.000 Euro. Die notwendige Umbewertung führt im laufenden Jahr zu einem Steuerertrag von 8.000 Euro.
+
+## 8 Fazit
+
+Die Körperschaftsteuer steht vor der größten Reform seit fast zwei Jahrzehnten. Die schrittweise Senkung des Steuersatzes von 15 auf 10 Prozent ab 2032 verbessert die internationale Wettbewerbsfähigkeit des Standorts Deutschland erheblich. Die Gesamtsteuerbelastung sinkt von derzeit etwa 30 Prozent auf rund 25 Prozent. Gleichzeitig bietet die degressive Abschreibung mit bis zu 30 Prozent für bewegliche Wirtschaftsgüter erhebliche Liquiditätsvorteile bis Ende 2027. Unternehmen sollten bereits heute ihre Systeme und Prozesse an die kommenden Änderungen anpassen, um die geplanten Entlastungen optimal nutzen zu können. Eine enge Abstimmung mit dem Steuerberater ist dabei unerlässlich, insbesondere für die komplexe Berechnung latenter Steuern mit bis zu sechs verschiedenen Steuersätzen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste koerperschaftsteuer]
+
+
+## FAQ
+F: Wie hoch ist die Körperschaftsteuer aktuell?
+A: Der Körperschaftsteuersatz beträgt 15 Prozent des zu versteuernden Einkommens. Mit dem Solidaritätszuschlag von 5,5 Prozent ergibt sich eine Gesamtbelastung von etwa 15,825 Prozent; zusammen mit der Gewerbesteuer liegt die Gesamtbelastung bei rund 29,8 Prozent.
+F: Welche Unternehmen zahlen Körperschaftsteuer?
+A: Körperschaftsteuer zahlen Kapitalgesellschaften wie GmbH, UG und AG als juristische Personen. Personengesellschaften wie GbR, OHG oder KG unterliegen nicht der Körperschaftsteuer – ihre Einkünfte werden anteilig den Gesellschaftern zugerechnet und einkommensbesteuert.
+F: Wie senkt sich die Körperschaftsteuer ab 2028?
+A: Ab dem 1. Januar 2028 sinkt der Körperschaftsteuersatz um jeweils einen Prozentpunkt pro Jahr bis auf 10 Prozent ab 2032. Die Gesamtbelastung aus Körperschaftsteuer, Soli und Gewerbesteuer reduziert sich damit von 29,8 Prozent auf rund 25 Prozent.
+F: Welche Freibeträge gelten bei der Körperschaftsteuer?
+A: Für bestimmte Körperschaften existiert ein allgemeiner Freibetrag von 5.000 Euro, der vom zu versteuernden Einkommen abgezogen werden kann. Unbeschränkt steuerpflichtig sind Körperschaften mit Sitz oder Geschäftsleitung im Inland – sie versteuern ihr gesamtes Welteinkommen.

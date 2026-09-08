@@ -1,0 +1,169 @@
+# Bafög (bafoeg)
+## 0 Staatliche Ausbildungsförderung: BAföG-Anspruch & Antrag erklärt
+
+BAföG fördert Studierende und Schüler unabhängig vom Einkommen der Eltern. Wie hoch der Höchstsatz 2026 ist, wer Anspruch hat und wie Sie es beantragen.
+
+## 1 BAföG 2026: Höchstsatz, Anspruch und Antrag
+
+BAföG regelt die staatliche Förderung von Studierenden und Schülern in Deutschland.
+
+Das Bundesausbildungsförderungsgesetz ermöglicht seit über 50 Jahren chancengleichen Zugang zu Bildung unabhängig von der finanziellen Situation der Familie. Mit der Reform von 2024 und den aktuellen Regelungen für 2026 bietet BAföG verbesserte Bedarfssätze, flexiblere Studiengestaltung und erweiterte Unterstützung für den Studienstart.
+
+## 2 Wie hoch ist der BAföG-Höchstsatz 2026?
+
+Der BAföG-Höchstsatz beträgt im Sommersemester 2026 unverändert 992 Euro monatlich, wenn Sie eine eigene Wohnung haben und kranken- sowie pflegeversichert sind. Wer über die Eltern krankenversichert ist, bekommt monatlich höchstens 855 Euro (Stand 2026).
+
+Der Höchstsatz setzt sich aus mehreren Komponenten zusammen:
+
+| Bestandteil | Betrag (Euro) | Voraussetzung
+
+| Grundbedarf | 475 | Studierende
+
+| Wohnpauschale | 380 | Eigene Wohnung
+
+| Kranken-/Pflegeversicherung | 137 | Selbst versichert
+
+| Höchstsatz gesamt | 992 | Nicht bei Eltern
+
+Bei Studierenden ab dem 31. Lebensjahr steigt der Zuschlag für Kranken- und Pflegeversicherung auf 205 Euro, wodurch sich der Höchstsatz auf 1.040 Euro erhöht (Stand 2026).
+
+[SPIEL karte: Bedarfssatz]
+
+## 3 Wer hat Anspruch auf BAföG?
+
+BAföG erhalten deutsche Staatsangehörige sowie bestimmte ausländische Studierende, die eine förderfähige Ausbildung absolvieren. Grundsätzlich sind dies Studiengänge an Hochschulen, Akademien, höheren Fachschulen sowie bestimmte Schularten ab der 10. Klasse.
+
+Das Alter spielt ebenfalls eine Rolle: Bei Studierenden, die nicht mehr gesetzlich familienversichert sind, in der Regel ab dem 25. Lebensjahr, wird ein Zuschuss zur Kranken- und Pflegeversicherung gezahlt. Ab dem 31. Lebensjahr steigt der Zuschlag auf 205 Euro (Stand April 2026).
+
+Die wichtigsten Voraussetzungen im Überblick:
+
+- Deutsche Staatsangehörigkeit oder gleichgestellter Status
+
+- Erstmalige Ausbildung (mit wenigen Ausnahmen)
+
+- Ausbildung an einer förderfähigen Bildungsstätte
+
+- Eignung und Leistung für die gewählte Ausbildung
+
+- Bedürftigkeit (abhängig von Einkommen und Vermögen)
+
+[SPIEL mythos: BAföG gibt es nur für Deutsche → nein]
+
+## 4 BAföG berechnen: Einkommens- und Vermögensgrenzen
+
+Die Höhe der BAföG-Förderung hängt maßgeblich vom Einkommen der Eltern, des Ehepartners und vom eigenen Einkommen sowie Vermögen ab. Bei Ehegatten und Eltern ist das Einkommen im vorletzten Kalenderjahr vor der Antragstellung relevant. Stellst du deinen Antrag also z.B. im Jahr 2026, kommt es auf das Einkommen im Jahr 2024 an.
+
+### Eltern-Freibeträge 2026
+
+Die wichtigsten Freibeträge (monatlich): Freibetrag für verheiratete Eltern (zusammen): 2.415 € netto, Freibetrag für alleinerziehenden Elternteil: 1.605 € netto. Pro berücksichtigungsfähigem Geschwisterkind steigt der Eltern-Freibetrag um: 730 € monatlich für jedes weitere Kind, das selbst kein BAföG erhält.
+
+### Eigenes Einkommen
+
+Während für die Monate in 2025 noch ein monatlicher Freibetrag von 556 € galt, werden für alle Monate ab Januar 2026 die neuen 603 € angesetzt. Verdienst du im Durchschnitt mehr als die aktuelle Einkommensgrenze von 603 € pro Monat, wird der übersteigende Betrag auf deinen BAföG-Anspruch angerechnet.
+
+[SPIEL quiz: Wie viel dürfen Sie 2026 monatlich hinzuverdienen, ohne dass Ihr BAföG gekürzt wird?]
+
+### Vermögensgrenzen
+
+Beim Vermögen gilt im Jahr 2026 ein Freibetrag von 15.000 Euro für Antragstellende unter 30 Jahren und 45.000 Euro für Antragstellende ab 30 Jahren. Eine wichtige Abgrenzung: Das Vermögen deiner Eltern spielt für dein BAföG keine Rolle. Sie können eine abbezahlte Immobilie haben und sechsstellig im Depot sitzen – solange ihr Einkommen passt, ändert das an deiner Förderung nichts.
+
+## 5 Wie funktioniert die BAföG-Antragstellung?
+
+Die Beantragung ist ausschließlich digital über bafoeg-digital.de möglich. Der Antrag sollte 6 bis 8 Wochen vor Semesterbeginn gestellt werden, da BAföG nicht rückwirkend gezahlt wird! Die Förderung beginnt erst ab dem Monat der Antragstellung.
+
+Die wichtigsten Unterlagen:
+
+- Formblatt 1 (Grundantrag)
+
+- Formblatt 2 (Studienbescheinigung)
+
+- Formblatt 3 (Einkommenserklärung der Eltern)
+
+- Steuerbescheid der Eltern vom vorletzten Kalenderjahr
+
+- Immatrikulationsbescheinigung
+
+- Mietvertrag oder Meldebescheinigung
+
+Sollte sich die Einkommenssituation einer Person zwischenzeitlich deutlich verschlechtert haben, kannst du einen sog. Aktualisierungsantrag stellen. Wenn diese aktuell deutlich weniger verdienen – z.B. durch Renteneintritt, Arbeitslosigkeit oder Jobwechsel – kannst du einen Aktualisierungsantrag (§ 24 Abs. 3 BAföG) stellen.
+
+## 6 Was ist die Studienstarthilfe?
+
+Die „Studienstarthilfe" von 1.000 Euro soll hier helfen. Allerdings nur denen, die noch unter 25 Jahre alt sind und vor dem Studium selbst (oder über die Eltern) Bürgergeld, Kinderzuschlag, Wohngeld oder einige wenige andere Sozialleistungen bezogen haben.
+
+Eine Anrechnung von Einkommen oder die Anrechnung der Studienstarthilfe auf andere Sozialleistungen findet nicht statt, so dass die Starthilfe von 1.000 Euro in jedem Fall zusätzlich zur Verfügung steht. Die Studienstarthilfe ist ein Zuschuss und muss grundsätzlich nicht zurückgezahlt werden.
+
+Anspruchsvoraussetzungen:
+
+- Unter 25 Jahre alt
+
+- Erstmalige Immatrikulation im Vollzeitstudium
+
+- Bezug bestimmter Sozialleistungen im Monat vor Studienbeginn
+
+- Antragstellung bis Ende des zweiten Studienmonats
+
+Spätestens im zweiten Monat des ersten Studiums muss der Antrag gestellt werden. Bei Vorlesungsstart im Oktober also spätestens Ende November, bei Vorlesungsstart im September spätestens Ende Oktober.
+
+[SPIEL gewusst: Die Studienstarthilfe ist kein Gerücht und kein versteckter Bonus, sondern eine reale Einmalzahlung von 1.000 Euro für Studienanfängerinnen und Studienanfänger, die die Voraussetzungen erfüllen (Stand 2026).]
+
+## 7 Wie funktioniert die BAföG-Rückzahlung?
+
+Studierende an Höheren Fachschulen, Akademien und Hochschulen erhalten BAföG zur Hälfte als Zuschuss, zur Hälfte als Darlehen. Das Darlehen muss natürlich zurückgezahlt werden.
+
+### Rückzahlungsbedingungen
+
+Das BAföG-Darlehen ist grundsätzlich zinslos und die Rückzahlungsbedingungen sind sehr sozial. Und: Niemand muss mehr als 77 Raten, aktuell 10.010 Euro zurückzahlen (Stand 2026).
+
+Die monatliche Rate für die Darlehensrückzahlung beträgt 130 Euro. Die Rate wird im Dreimonatsrhythmus fällig, also 390 Euro alle drei Monate.
+
+Wichtige Regelungen zur Rückzahlung:
+
+- Start: 5 Jahre nach Ende der Förderungshöchstdauer
+
+- Eine Schuldenobergrenze von 10.010 Euro gilt, wenn Du die erste Förderung ab 1. September 2019 oder später erhalten hast
+
+- Maximale Rückzahlungsdauer: 20 Jahre
+
+- Zinslos während der gesamten Laufzeit
+
+### Freistellung bei geringem Einkommen
+
+Der aktuelle Freibetrag (Stand 2026) liegt bei 1.690 Euro. Wenn dein Einkommen darunterliegt, kannst du dich wahrscheinlich von der Rückzahlung freistellen lassen. Während der Freistellung musst du keine Raten zahlen.
+
+## 8 Was ändert sich beim BAföG 2026?
+
+Die großen Änderungen sind bereits seit dem Wintersemester 2024/25 in Kraft. Für 2026 gelten folgende Neuerungen:
+
+Am 1. Januar 2026 wurde die Hinzuverdienstgrenze auf 603 Euro pro Monat angepasst, passend zur neuen Minijobgrenze.
+
+Geplante Änderungen für das Wintersemester 2026/27 sind noch nicht beschlossen: Am 29. April 2026 hat sich die schwarz-rote Koalition (CDU/CSU + SPD) auf die Finanzierung der BAföG-Reform geeinigt – die Mittel sind im Bundeshaushalt eingeplant. Damit kann das Gesetzgebungsverfahren formal beginnen. Ein Referentenentwurf liegt aber noch nicht vor. Der Zeitplan ist sehr eng, eine Verschiebung der Wohnpauschalen-Erhöhung auf WS 2027/28 wird von Beobachtern als zunehmend wahrscheinlich eingeschätzt.
+
+Die geplanten Verbesserungen umfassen:
+
+- Erhöhung der Wohnpauschale auf 440 Euro (das wäre eine Erhöhung um 60 Euro monatlich)
+
+- Anhebung der BAföG-Grundpauschale von aktuell 475 Euro auf das Grundsicherungsniveau – das entspricht dem Regelbedarf beim Bürgergeld. Der Regelbedarf beläuft sich derzeit auf 563 Euro
+
+## 9 Fazit
+
+BAföG bleibt 2026 das zentrale Instrument der Studienfinanzierung in Deutschland. Mit dem aktuellen Höchstsatz von 992 Euro monatlich und der neuen Hinzuverdienstgrenze von 603 Euro bietet es finanzielle Sicherheit für das Studium. Die Studienstarthilfe von 1.000 Euro unterstützt gezielt bedürftige Studienanfänger bei den ersten Schritten. Durch die sozialverträgliche Rückzahlung mit der Schuldenobergrenze von maximal 10.010 Euro bleibt BAföG eine attraktive Finanzierungsquelle.
+
+Wer über BAföG hinaus weitere Mittel braucht, kann sich auch den KfW Studienkredit ansehen – dieser bietet eine zusätzliche Finanzierungsmöglichkeit. Auch wenn weitere Erhöhungen für das Wintersemester 2026/27 noch nicht beschlossen sind, empfiehlt sich die frühzeitige Antragstellung – BAföG wird nicht rückwirkend gezahlt und die Förderung beginnt erst ab dem Monat der Antragstellung.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste bafoeg]
+
+[BLOCK rechner bafoeg]
+
+
+## FAQ
+F: Wie hoch ist der BAföG-Höchstsatz 2025?
+A: Der BAföG-Höchstsatz für Studierende mit eigener Wohnung beträgt seit dem Wintersemester 2024/25 monatlich 992 Euro. Er setzt sich zusammen aus 475 Euro Grundbedarf, 380 Euro Wohnpauschale und 137 Euro Zuschuss für Kranken- und Pflegeversicherung. Die letzte Erhöhung lag bei 58 Euro gegenüber dem Vorjahr.
+F: Wie viel darf man beim BAföG dazuverdienen?
+A: Seit Herbst 2024 liegt die anrechnungsfreie Verdienstgrenze bei 556 Euro monatlich, was der Minijob-Grenze ab Januar 2025 entspricht. Im Bewilligungszeitraum von zwölf Monaten dürfen Sie insgesamt 6.672 Euro verdienen, ohne dass BAföG-Leistungen gekürzt werden.
+F: Was ist die Studienstarthilfe?
+A: Die Studienstarthilfe ist eine einmalige Unterstützung von 1.000 Euro für Studierende unter 25 Jahren aus Bürgergeld-Haushalten oder Familien mit Kinderzuschlag. Sie soll den Einstieg ins erste Studium erleichtern und hilft bei Umzugskosten, Kaution oder der Erstausstattung. Ein BAföG-Anspruch ist für die Studienstarthilfe nicht zwingend erforderlich.
+F: Wie lange wird BAföG gezahlt?
+A: Die BAföG-Förderungshöchstdauer entspricht grundsätzlich der Regelstudienzeit. Seit der Reform 2024 erhalten Studierende zusätzlich ein einmaliges Flexibilitätssemester, das im Bachelor- oder Masterstudium genutzt werden kann. Ein Fachrichtungswechsel ist bis zum Beginn des fünften Fachsemesters möglich, sofern ein wichtiger Grund vorliegt.

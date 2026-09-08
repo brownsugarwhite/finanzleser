@@ -1,0 +1,199 @@
+# Robo Advisor (roboadvisor)
+## 0 Automatische Vermögensverwaltung: Algorithmen statt Finanzberater
+
+Ein Robo-Advisor legt Ihr Geld vollautomatisch und kostengünstig an. Wie die digitale Vermögensverwaltung funktioniert, was sie kostet und für wen sie 2026 passt.
+
+## 1 Robo Advisor: Automatisierte Geldanlage für Privatanleger
+
+Ein Robo Advisor ist eine digitale Vermögensmanagement-Plattform, die Anlageentscheidungen vollautomatisch trifft. Statt menschlicher Berater verwaltet ein Algorithmus Ihr Portfolio – basierend auf Ihren Zielen und Ihrer Risikobereitschaft. Im Jahr 2026 verwalten deutsche Robo-Advisor-Plattformen etwa 32 Milliarden Euro und haben sich von einer Nische zur tragfähigen Alternative für professionelle Geldanlage entwickelt.
+
+Die Automatisierung bietet klare Vorteile: niedrige Kosten, emotionsfreie Entscheidungen und wissenschaftlich fundierte Strategien. Besonders Privatanleger profitieren davon, dass Robo-Advisors den Zugang zu professioneller Vermögensverwaltung demokratisieren – ohne hohe Einstiegsbarrieren.
+
+## 2 Wie ein Robo Advisor funktioniert
+
+Ein Robo Advisor arbeitet nach einem standardisierten Prozess: Sie beantworten einen Fragebogen zu Ihrer finanziellen Situation, Ihren Anlagezielen und Ihrer Risikobereitschaft. Der Algorithmus verarbeitet diese Daten und erstellt ein Portfolio aus ETFs und Anleihen, das zu Ihrem Profil passt.
+
+Nach der initialen Erstellung kümmert sich der Robo Advisor automatisch um diese Aufgaben:
+
+- Kontinuierliche Marktbeobachtung: Echtzeit-Überwachung der Kursentwicklung
+
+- Automatisches Rebalancing: Anpassung bei Abweichung von der Zielallokation
+
+- Steueroptimierung: Gewinnmitnahmen und Verlustausgleich zur Renditeoptimierung
+
+- Regelmäßige Neuausrichtung: Anpassung an veränderte Marktbedingungen
+
+Die meisten deutschen Robo-Advisor-Anbieter nutzen ETFs mit einer Kostenquote (TER) von 0,12 bis 0,25 Prozent pro Jahr. Dadurch entsteht ein breit diversifiziertes Portfolio mit geringen Verwaltungskosten.
+
+[SPIEL gewusst: Privatanleger erzielen im Schnitt 3–4 Prozentpunkte weniger Rendite als der Markt – nicht wegen schlechter Märkte, sondern durch emotionale Fehlentscheidungen. Ein Robo Advisor reduziert diesen Fehler.]
+
+## 3 Emotionale Fehler vermeiden – der größte Vorteil
+
+Menschen treffen bei Geldanlage oft irrationale Entscheidungen. In Marktcrashs verkaufen sie in Panik, bei steigenden Kursen kaufen sie zu viel Neues. Ein Robo Advisor handelt völlig emotionslos nach seinen Regeln.
+
+Diese typischen Anlagefehler verhindert ein Robo Advisor automatisch:
+
+- Panikverkäufe: Während Privatanleger bei fallenden Kursen flüchten, hält der Algorithmus Kurs
+
+- Giergetriebene Käufe: Keine übertriebenen Investitionen in bereits teure Anlagetrends
+
+- Herdenverhalten: Der Robo Advisor folgt wissenschaftlichen Modellen, nicht Marktmoden
+
+- Timing-Versuche: Fokus auf langfristige Strategien statt auf Kursprognosen
+
+Durch konsequentes Rebalancing und Anleihenmischung sind Robo-Advisor-Depots deutlich schwankungsärmer. Echtgeld-Tests zeigen, dass diese automatisierten Systeme vor allem in Seitwärtsmärkten und moderaten Kurskorrektionen ihre Stärke ausspielen.
+
+## 4 Die Kostenstruktur eines Robo Advisor 2026
+
+Die Gesamtkosten liegen zwischen 0,10 und 2,94 Prozent pro Jahr. Der Durchschnitt (Median) liegt bei 0,96 Prozent – das sind etwa 480 Euro jährlich bei 50.000 Euro Anlagesumme.
+
+Die Kosten setzen sich aus mehreren Komponenten zusammen:
+
+| Kostentyp | Spanne | Details
+
+| Servicegebühr | 0,40–1,20% p.a. | Verwaltung und Rebalancing
+
+| ETF-Kosten (TER) | 0,12–0,25% p.a. | Kosten der verwendeten Fonds
+
+| Transaktionskosten | Inbegriffen | Meist kostenlos
+
+| Depotgebühren | Kostenlos | Verwahrung der Wertpapiere
+
+Bei 10.000 Euro Anlagesumme reicht die Servicegebühr von 0,46 Prozent bis 1,19 Prozent. Viele Anbieter staffeln ihre Gebühren: Mit höheren Summen sinkt der prozentuale Satz.
+
+[SPIEL schaetzen: Wie hoch sind die durchschnittlichen Gesamtkosten eines Robo Advisor pro Jahr? → 0,96]
+
+Der Kostenunterschied zwischen dem billigsten und teuersten Anbieter ist erheblich. Über 20 Jahre kann dieser Unterschied bei 7 Prozent Rendite mehr als 50.000 Euro ausmachen – allein durch die Gebühren.
+
+## 5 Auswahlkriterien für den passenden Robo Advisor
+
+Bei der Wahl kommt es auf mehrere Faktoren an, nicht nur auf die Gebühren:
+
+Anlagestrategie und Philosophie
+
+Verschiedene Anbieter verfolgen unterschiedliche Ansätze:
+
+- Passive Strategien: Breit diversifizierte ETF-Portfolios mit Buy-and-Hold-Struktur
+
+- Aktive Strategien: Dynamische Anpassungen basierend auf Marktbewertungen
+
+- Nachhaltige Strategien: ESG-konforme Investments mit Fokus auf Umwelt und Soziales
+
+- Themeninvestments: Spezialisierte Portfolios (KI, Klimawandel, Gesundheit)
+
+Einstiegshürden und Sparfähigkeit
+
+Viele Robo-Advisor-Plattformen ermöglichen Sparpläne ab 25 Euro monatlich. Einige verzichten ganz auf Mindestanlagesummen. Premium-Anbieter verlangen oft 100.000 Euro Mindestanlage.
+
+Service-Level und persönliche Betreuung
+
+- Digital: Reine Online-Verwaltung ohne Beratung
+
+- Hybrid: Automatisierung plus telefonischer Support bei Fragen
+
+- Premium: Persönliche Ansprache und individuelle Finanzplanung
+
+## 6 Performance im Echtgeld-Test – Was liefert ein Robo Advisor wirklich?
+
+Die tatsächliche Performance eines Robo Advisor ist wichtiger als Gebührenunterschiede, wenn diese ähnlich liegen. Ein guter Robo Advisor muss seine Strategie mit realen Ergebnissen belegen.
+
+Aktuelle Ergebnisse 2025/2026
+
+Quirion erzielte 2025 in seinem globalen Aktienportfolio eine Performance von +11,56 Prozent. Das zeigt die Stärke eines wissenschaftlich fundierten Ansatzes. Im aktuellen Echtgeld-Ranking (Mai 2026) liefert cominvest die beste Netto-Performance über 3, 4 und 5 Jahre – gemessen nach allen Kosten.
+
+[SPIEL quiz: Welcher deutscher Robo Advisor erzielte 2025 die beste Performance?]
+
+## 7 Sicherheit: Sondervermögen und BaFin-Regulierung
+
+Ihr Geld liegt nicht beim Robo-Advisor-Anbieter selbst, sondern bei einer regulierten Partnerbank – auf Ihren Namen und als Sondervermögen. Das ist die wichtigste Sicherheitsgarantie.
+
+Was bedeutet Sondervermögen?
+
+Ihr investiertes Kapital ist unbegrenzt geschützt und unabhängig vom Anbieter. Sollte der Robo Advisor insolvent werden, bleibt Ihr Depot unangetastet. Das wurde 2017 praktisch bewiesen: CASHBOARD ging pleite, doch alle Kundenportfolios waren sicher und jederzeit verfügbar.
+
+Regulatorische Standards
+
+Alle Robo-Advisor-Anbieter in Deutschland benötigen:
+
+- BaFin-Lizenz oder Finanzanlagenvermittler-Genehmigung
+
+- Aufsicht durch die Bundesanstalt für Finanzdienstleistungsaufsicht
+
+- Seit 2026 auch Cyber-Resilienz-Standards nach DORA (Digital Operational Resilience Act)
+
+Für nicht investiertes Guthaben gilt zusätzlich die Einlagensicherung bis 100.000 Euro.
+
+## 8 Robo Advisor vs. Selbstanlage – Wann lohnt sich die Automatisierung?
+
+Ein Robo Advisor bietet klare Vorteile zur Selbstverwaltung:
+
+Vorteile der Automatisierung
+
+- Automatisches Rebalancing ohne Ihr Zutun
+
+- Emotionsfreie Entscheidungen in volatilen Phasen
+
+- Wissenschaftlich fundierte Strategien
+
+- Steueroptimierung durch Loss-Harvesting
+
+- Zeitersparnis: keine Recherche und Überwachung nötig
+
+Nachteile gegenüber Eigenanlage
+
+- Servicegebühren von 0,4–1,2 % pro Jahr zusätzlich
+
+- Begrenzte Flexibilität für Einzelaktien-Investments
+
+- Standardisierte Strategien mit wenig Spielraum
+
+Für wen ein Robo Advisor passt
+
+Ideal geeignet sind Berufseinsteiger, junge Familien und Anleger ohne tiefes Börsenwissen. Wer wenig Zeit für Portfolioverwaltung hat und langfristig denkt, profitiert besonders.
+
+## 9 Top-Anbieter 2026 im Überblick
+
+Quirion – Kostenspartipp
+
+Quirion als Tochter der Quirin Privatbank bietet ein Digital-Paket mit nur 0,48 Prozent Servicegebühr. Mit bis zu 13 Fonds pro Portfolio ist Quirion der Preisführer für kostenbewusste Anleger mit guter Performance.
+
+Scalable Capital – Technologieführer
+
+Scalable Capital verwaltet über 2 Milliarden Euro und ist der Marktführer. Das Unternehmen bietet dynamisches Risikomanagement und 23 verschiedene Risikoklassen zur Auswahl.
+
+LIQID – Premium und Alternative
+
+LIQID richtet sich an vermögende Anleger und bietet Zugang zu Private Equity und alternativen Anlagen.
+
+Weitere Optionen
+
+- OSKAR: Beste Wahl für Kinderportfolios
+
+- Growney: Einfach und kostengünstig
+
+- cominvest: Aktuelle Top-Performance bei Echtgeld-Tests
+
+## 10 Fazit
+
+Robo-Advisor-Plattformen haben sich 2026 als vollwertige Alternative zur klassischen Vermögensverwaltung etabliert. Der Markt mit 32 Milliarden Euro verwalteten Vermögen zeigt reife Strukturen ohne Kinderkrankheiten.
+
+Die Vorteile liegen auf der Hand: geringe Kosten, emotionsfreie Entscheidungen und automatische Verwaltung. Sondervermögen und BaFin-Regulierung bieten sichere Rahmenbedingungen.
+
+Die Wahl des richtigen Anbieters hängt von Ihren individuellen Anforderungen ab: Anfangssumme, Risikobereitschaft, Service-Niveau und Anlagehorizont. Kein Anbieter ist objektiv "der beste" – aber für Ihre Situation gibt es eine optimale Lösung.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste robo-advisor]
+
+[BLOCK vergleich depot-vergleich]
+
+
+## FAQ
+F: Wie funktioniert ein Robo-Advisor?
+A: Ein Robo-Advisor ist eine Webanwendung, die über einen Fragebogen zu Anlagezielen, Horizont und Risikoneigung ein passendes Portfolio vorschlägt. Ein Algorithmus wählt dann überwiegend ETFs und Anleihen aus, überwacht das Depot und führt automatisches Rebalancing ohne manuelle Eingriffe durch.
+F: Was kostet ein Robo-Advisor in Deutschland?
+A: Die Servicegebühren liegen typischerweise zwischen 0,46 und 1,19 Prozent der Anlagesumme pro Jahr, je nach Anbieter. Hinzu kommen ETF-Kosten von durchschnittlich 0,25 Prozent jährlich. Insgesamt bewegen sich die laufenden Kosten vieler Robo-Advisor zwischen 0,3 und 1,0 Prozent.
+F: Wie viel Vermögen verwalten Robo-Advisor in Deutschland?
+A: Aktuell werden in Deutschland rund 25 Milliarden Euro von Robo-Advisors verwaltet, Tendenz steigend. Sie stellen eine praktische Alternative zur klassischen Vermögensverwaltung dar und machen professionelles Investieren auch für Privatanleger mit kleineren Beträgen zugänglich.
+F: Für wen eignet sich ein Robo-Advisor?
+A: Robo-Advisor eignen sich für Anleger, die automatisiert und regelbasiert investieren möchten, ohne sich selbst um Portfoliozusammenstellung und Rebalancing zu kümmern. Besonders attraktiv sind sie für Einsteiger sowie Sparer mit kleineren bis mittleren Anlagebeträgen und langfristigem Anlagehorizont.

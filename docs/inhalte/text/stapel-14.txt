@@ -1,0 +1,2041 @@
+STAPEL 14 · 12 Beiträge: buergergeld sozialhilfe uebergangsgeld kurzarbeitergeld arbeitslosengeld kuenstlersozialkasse kuendigung wohnungskuendigung pfaendung geringfuegige-beschaeftigung bafoeg vermoegenswirksame-leistungen
+
+
+==================== BEITRAG buergergeld ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Finanzielle Absicherung für Menschen ohne ausreichendes Einkommen
+  heading-1: Bürgergeld 2026: Regelsätze, Anspruch und Reform zum Grundsicherungsgeld
+  heading-2: Was ist Bürgergeld und was ändert sich 2026?
+  heading-3: Wie hoch sind die Regelsätze?
+  heading-4: Wer hat Anspruch auf Bürgergeld?
+  heading-5: Einkommen und Vermögen bis 30. Juni 2026
+  heading-6: Die große Reform ab 1. Juli 2026
+  heading-7: Antrag stellen: So funktioniert es
+  heading-8: Bürgergeld oder Wohngeld mit Kinderzuschlag?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Bürgergeld (buergergeld)
+## 0 Finanzielle Absicherung für Menschen ohne ausreichendes Einkommen
+
+Alles über Bürgergeld: Anspruch, Höhe, Antragstellung und Sanktionen. Aktualisiert mit neuen Regelungen 2026.
+
+## 1 Bürgergeld 2026: Regelsätze, Anspruch und Reform zum Grundsicherungsgeld
+
+Bürgergeld ist die staatliche Grundsicherung für erwerbsfähige Menschen ohne ausreichendes Einkommen. Ab 1. Juli 2026 wird das Bürgergeld schrittweise durch das Grundsicherungsgeld ersetzt. Für Millionen Betroffene ändern sich damit nicht nur Namen, sondern auch Regeln für Vermögen, Miete und Pflichten. Dieser Ratgeber zeigt, was 2026 gilt und wie Sie richtig vorgehen.
+
+## 2 Was ist Bürgergeld und was ändert sich 2026?
+
+Seit Januar 2023 löst Bürgergeld das frühere Arbeitslosengeld II ab. Die Leistung richtet sich an erwerbsfähige Menschen zwischen 15 Jahren und der Regelaltersgrenze, deren Einkommen nicht reicht.
+
+Das ändert sich nun grundlegend. Das Gesetz zur Umgestaltung der Grundsicherung tritt zum 1. Juli 2026 in Kraft. Der Bundestag verabschiedete es am 5. März 2026, der Bundesrat am 27. März 2026.
+
+Die Geldleistung heißt künftig Grundsicherungsgeld. Arbeitsuchende sollen schneller vermittelt werden, und wer nicht mitwirkt, muss mit deutlicheren Konsequenzen rechnen. Bestandskunden müssen keinen neuen Antrag stellen. Wichtig ist nur: Endet der Bewilligungszeitraum, muss ein Weiterbewilligungsantrag folgen.
+
+&#x1f4a1; Schon gewusst?
+
+Jobcenter dürfen noch bis Ende 2026 alte Formulare mit dem Begriff „Bürgergeld" verwenden, ohne dass Bescheide ungültig werden (Stand 2026).
+
+## 3 Wie hoch sind die Regelsätze?
+
+Die Regelsätze bleiben 2026 unverändert – es ist die zweite Nullrunde in Folge. Alleinstehende erhalten 563 Euro monatlich. Das gilt auch für das neue Grundsicherungsgeld ab Juli.
+
+Der errechnete Betrag für Alleinstehende liegt 2026 mit 557 Euro unter dem geltenden Satz. Eine Absenkung ist aber gesetzlich ausgeschlossen (Besitzschutzregelung).
+
+| Personengruppe | Monatlich
+
+| Alleinstehende, Alleinerziehende | 563 €
+
+| Partner in Bedarfsgemeinschaft | 506 €
+
+| Volljährige 18–24 Jahre im Elternhaus | 451 €
+
+| Kinder 14–17 Jahre | 471 €
+
+| Kinder 6–13 Jahre | 390 €
+
+| Kinder 0–5 Jahre | 357 €
+
+Zusätzlich gibt es Mehrbedarfe für besondere Lebenslagen: Schwangere, Alleinerziehende und Menschen mit Behinderung erhalten Zuschläge (höchstens 100 % des Regelsatzes).
+
+&#x1f4ca; Schätzfrage
+
+Wie viele Menschen bezogen im März 2026 Bürgergeld in Deutschland?
+
+3000000
+
+7000000
+
+5176000
+
+Personen
+
+Im März 2026 waren es 5,176 Millionen Empfänger, davon rund 3,9 Millionen erwerbsfähig.
+
+## 4 Wer hat Anspruch auf Bürgergeld?
+
+Mehrere Bedingungen müssen gleichzeitig erfüllt sein:
+
+- Alter: mindestens 15 Jahre, aber noch keine Regelaltersgrenze erreicht
+
+- Erwerbsfähigkeit: mindestens drei Stunden täglich arbeiten können
+
+- Hilfebedürftigkeit: Einkommen und Vermögen reichen nicht aus
+
+- Wohnsitz: gewöhnlicher Aufenthalt in Deutschland
+
+Arbeitslosigkeit ist nicht zwingend erforderlich. Viele Bezieher arbeiten, verdienen aber zu wenig (Aufstocker). Im Bürgergeldbezug gibt es rund 1,8 Millionen Kinder und etwa 800.000 Aufstocker.
+
+&#x1f50d; Mythos oder Fakt?
+
+Wer Bürgergeld bezieht, hat noch nie gearbeitet.
+
+nein
+
+Nach der Bundesagentur für Arbeit haben nur rund drei Prozent der erwerbsfähigen Empfänger keine bisherige Erwerbstätigkeit (Stand 2026).
+
+## 5 Einkommen und Vermögen bis 30. Juni 2026
+
+Noch bis Ende Juni 2026 gelten die bekannten Regeln: Im ersten Jahr nach Erstantrag bleibt Vermögen bis 40.000 Euro pro Person geschützt (15.000 Euro je weitere Person).
+
+Bei Erwerbseinkommen bleiben die ersten 100 Euro netto frei. Darüber gelten Freibeträge von 20–30 Prozent bis zur Obergrenze (1.200 Euro, mit Kindern bis 1.500 Euro).
+
+Geschütztes Vermögen umfasst:
+
+- angemessener Hausrat und Kraftfahrzeug
+
+- selbst genutztes Wohneigentum
+
+- staatlich geförderte Altersvorsorge (Riester)
+
+- Altersvorsorgevermögen nach Lebensjahren gestaffelt
+
+&#x1f504; Karteikarte
+
+Schonvermögen
+
+Schonvermögen ist der Teil des Vermögens, den Leistungsbezieher behalten dürfen, ohne dass er auf Grundsicherung angerechnet wird.
+
+## 6 Die große Reform ab 1. Juli 2026
+
+Vermögen: Die Vermögenskarenz entfällt komplett. Ab Juli 2026 gelten altersabhängige Freibeträge vom ersten Tag an:
+
+- bis 30 Jahre: 5.000 Euro
+
+- bis 40 Jahre: 10.000 Euro
+
+- bis 50 Jahre: 12.500 Euro
+
+- über 50 Jahre: 20.000 Euro
+
+Darüber hinaus muss Vermögen zunächst aufgebraucht werden, bevor Ansprüche entstehen.
+
+Wohnkosten: Die Karenzzeit für Mieten entfällt. Ein Deckel in Höhe der anderthalbfachen Angemessenheitsgrenze gilt bereits ab Monat eins.
+
+Sanktionen: Statt Stufenmodell gibt es eine einheitliche Kürzung von 30 Prozent des Regelbedarfs für drei Monate. Wiederholte Verweigerung führt zum Regelbedarksentzug. Seit 23. April 2026 kann der gesamte Regelbedarf entfallen, wenn zumutbare Arbeit willentlich nicht angenommen wird.
+
+Meldeversäumnisse: Drei versäumte Meldetermine ohne wichtigen Grund führen zum Leistungsentzug ab dem Folge-Kalendermonat.
+
+Vermittlungsvorrang: Vermittlung in Arbeit hat Vorrang vor Qualifizierung – besonders für unter 30-Jährige.
+
+Junge Eltern: Nach dem 14. Lebensmonat des Kindes können betreuende Elternteile zur Erwerbsarbeit verpflichtet werden.
+
+&#x1f4ca; Schätzfrage
+
+Um wie viel Prozent sinkt der Regelbedarf bei den meisten Pflichtverletzungen ab Juli 2026?
+
+5
+
+100
+
+30
+
+%
+
+Statt des bisherigen Stufenmodells gilt künftig eine einheitliche Kürzung von 30 Prozent für drei Monate.
+
+## 7 Antrag stellen: So funktioniert es
+
+Den Antrag stellen Sie online über das Jobcenter-Portal oder persönlich vor Ort. Der Online-Antrag führt durch das Verfahren und ermöglicht direktes Hochladen von Dokumenten.
+
+Erforderliche Unterlagen:
+
+- gültiger Personalausweis oder Reisepass
+
+- Meldebescheinigung
+
+- Einkommensnachweise und Arbeitsvertrag
+
+- Unterlagen zu weiteren Einkünften (Kindergeld, Rente, Unterhalt)
+
+- Mietvertrag und Nebenkostenabrechnungen
+
+- Krankenversicherungsnachweis
+
+- Kontoauszüge der letzten drei Monate
+
+Reichen Sie nur Kopien ein – niemals Originale. Bei vollständigen Unterlagen wird eine Bearbeitung in maximal 14 Arbeitstagen angestrebt.
+
+Bestandskunden: Alte Bescheide bleiben gültig und werden inhaltlich weiter anerkannt.
+
+## 8 Bürgergeld oder Wohngeld mit Kinderzuschlag?
+
+Vor einem Antrag lohnt sich der Vergleich mit Wohngeld und Kinderzuschlag:
+
+Vorteile dieser Kombination:
+
+- keine Mitwirkungspflichten
+
+- Vermögen wird nicht geprüft
+
+- keine Sanktionen möglich
+
+- oft höhere Gesamtleistung
+
+- Erwerbseinkommen günstiger angerechnet
+
+Nachteile:
+
+- zwei unterschiedliche Behörden zuständig
+
+- Krankenversicherung muss selbst organisiert werden
+
+- nicht alle Mehrbedarfe abgedeckt
+
+Beispiel: Eine Familie mit zwei Kindern und 1.500 Euro Bruttoeinkommen erhält oft 200–300 Euro mehr mit Wohngeld und Kinderzuschlag als aufstockendem Bürgergeld. Lassen Sie sich bei der örtlichen Beratungsstelle beraten.
+
+## 9 Fazit
+
+Das Bürgergeld sichert 2026 für über 5 Millionen Menschen das Existenzminimum. Der Regelsatz bleibt 563 Euro für Alleinstehende. Die Reform zum Grundsicherungsgeld ab 1. Juli 2026 verschärft jedoch die Bedingungen erheblich: Die Vermögenskarenz entfällt, Mieten werden strenger kontrolliert, Sanktionen greifen schneller, und der Vermittlungsvorrang kehrt zurück. Wer aktuell Leistungen bezieht oder einen Antrag plant, sollte sich frühzeitig informieren. Prüfen Sie auch, ob Wohngeld mit Kinderzuschlag günstiger ist. Die Grundsicherung bedeutet in ihrer reformierten Form ein klares Umdenken hin zu mehr Pflichten bei gleichbleibender finanzieller Unterstützung.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste buergergeld]
+
+[BLOCK rechner buergergeld]
+
+
+## FAQ
+F: Wer hat Anspruch auf Bürgergeld?
+A: Anspruch hat, wer älter als 15 Jahre ist, das Renteneintrittsalter noch nicht erreicht hat sowie erwerbsfähig, hilfebedürftig und in Deutschland wohnhaft ist. Erwerbsfähigkeit bedeutet, mindestens drei Stunden täglich arbeiten zu können. Arbeitslosigkeit ist keine zwingende Voraussetzung.
+F: Wie hoch ist der Bürgergeld-Regelsatz 2025?
+A: Der Regelsatz für Alleinstehende und Alleinerziehende liegt 2025 bei 563 Euro monatlich und bleibt damit gegenüber 2024 unverändert. Partner in einer Bedarfsgemeinschaft erhalten 506 Euro, Kinder je nach Alter zwischen 357 und 471 Euro pro Monat.
+F: Welches Vermögen darf ich beim Bürgergeld-Bezug behalten?
+A: Im ersten Jahr Bürgergeld-Bezug gilt eine Karenzzeit mit einem Vermögensfreibetrag von 40.000 Euro für die antragstellende Person und 15.000 Euro für jede weitere Person in der Bedarfsgemeinschaft. Nach Ablauf der Karenzzeit gelten niedrigere Freibeträge.
+F: Werden Miete und Heizkosten vom Bürgergeld gezahlt?
+A: Ja, das Jobcenter übernimmt die angemessenen Kosten für Unterkunft und Heizung zusätzlich zum Regelsatz. Auch Beiträge zur Kranken- und Pflegeversicherung werden übernommen. Die Angemessenheit der Wohnkosten richtet sich nach Haushaltsgröße und örtlichem Mietspiegel.
+
+
+==================== BEITRAG sozialhilfe ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Ansprüche, Voraussetzungen und Leistungen der Sozialhilfe
+  heading-1: Sozialhilfe 2026: Regelsätze, Anspruch und Leistungen
+  heading-2: Wer hat Anspruch auf Sozialhilfe?
+  heading-3: Regelsätze und Leistungsumfang 2026
+  heading-4: Mehrbedarfe und Sonderleistungen
+  heading-5: Bildung und Teilhabe für Kinder
+  heading-6: Wie beantragt man Sozialhilfe?
+  heading-7: Unterschiede zwischen Sozialhilfe-Leistungen
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Sozialhilfe (sozialhilfe)
+## 0 Ansprüche, Voraussetzungen und Leistungen der Sozialhilfe
+
+Sozialhilfe ist das letzte Auffangnetz für Menschen ohne ausreichende Mittel. Regelsätze 2026, wer Anspruch hat und welche Leistungen dazugehören.
+
+## 1 Sozialhilfe 2026: Regelsätze, Anspruch und Leistungen
+
+Sozialhilfe ist die letzte Sicherung für Menschen, die ihren Lebensunterhalt nicht aus eigenen Mitteln bestreiten können.
+
+Die Sozialhilfe bildet das grundlegende Auffangnetz des deutschen Sozialstaats für Menschen in existenziellen Notlagen. Sie umfasst die Hilfe zum Lebensunterhalt und die Grundsicherung im Alter und bei Erwerbsminderung (SGB XII – „Sozialhilfe") sowie verschiedene andere Unterstützungsleistungen. Das System gewährleistet ein menschenwürdiges Existenzminimum, wenn andere Sicherungssysteme nicht ausreichen oder nicht greifen.
+
+2026 bleiben die Regelsätze bei Sozialhilfe unverändert. Alleinstehende erhalten weiterhin 563 Euro im Monat. Die geltende Besitzschutzregelung verhinderte eine rechnerische Senkung der Leistungen.
+
+## 2 Wer hat Anspruch auf Sozialhilfe?
+
+Der Zugang zur Sozialhilfe ist an strenge Voraussetzungen geknüpft. Die Sozialhilfe nach dem SGB XII richtet sich grundsätzlich an Menschen, die nicht erwerbsfähig sind. Wer mindestens drei Stunden täglich arbeiten kann, gilt als erwerbsfähig und fällt damit in den Zuständigkeitsbereich des Bürgergeldes nach dem SGB II.
+
+Konkrete Anspruchsvoraussetzungen sind:
+
+- Nicht-Erwerbsfähigkeit: Sie können weniger als drei Stunden täglich arbeiten oder haben die Altersgrenze erreicht
+
+- Bedürftigkeit: Ihr Lebensunterhalt kann nicht aus eigenem Einkommen und Vermögen bestritten werden
+
+- Nachrangigkeit: Andere Sozialleistungen reichen nicht zur Existenzsicherung aus
+
+- Wohnsitz: Sie haben Ihren gewöhnlichen Aufenthalt in Deutschland
+
+Bei Eltern mit einem Jahreseinkommen über 100.000 Euro brutto müssen diese monatlich 34,31 Euro (2026) für die Grundsicherung oder Hilfe zum Lebensunterhalt ihres erwachsenen Kindes zahlen. Entscheidend ist das Einkommen eines Elternteils, nicht das gemeinsame Familieneinkommen.
+
+[SPIEL gewusst: Sozialhilfe kann auch ohne formellen Antrag beginnen – bereits ein Anruf beim Sozialamt reicht aus, wenn die Voraussetzungen erfüllt sind (Stand 2026).]
+
+## 3 Regelsätze und Leistungsumfang 2026
+
+Die Regelsätze bleiben 2026 unverändert. Diese Nullrunde entstand durch die gesetzliche Besitzschutzregelung, die verhindert, dass Regelsätze trotz rechnerisch niedrigerer Werte sinken können. Die Regelbedarfsstufen für 2026 gliedern sich wie folgt:
+
+| Regelbedarfsstufe | Personenkreis | Monatsbetrag (2026)
+
+| RBS 1 | Alleinstehende/Alleinerziehende | 563 Euro
+
+| RBS 2 | Paare/Erwachsene in Haushaltsgemeinschaft | 506 Euro
+
+| RBS 3 | Erwachsene in stationären Einrichtungen | 451 Euro
+
+| RBS 4 | Jugendliche 14–17 Jahre | 471 Euro
+
+| RBS 5 | Kinder 6–13 Jahre | 390 Euro
+
+| RBS 6 | Kinder 0–5 Jahre | 357 Euro
+
+Die laufenden Leistungen nach den Regelsätzen sollen den Regelbedarf abdecken. Betroffene müssen aus ihrem Regelsatz unter anderem Ernährung, Kleidung, Körperpflege, Haushaltsenergie und Mobilität finanzieren.
+
+Zusätzlich zu den Regelsätzen übernimmt das Sozialamt die angemessenen Kosten für Unterkunft und Heizung. Neben der Sozialhilfe gibt es auch das Wohngeld als ergänzende Unterstützung für angemessene Wohnkosten. Die Angemessenheitsgrenze wird regional unterschiedlich festgelegt und kann erhebliche Unterschiede zwischen verschiedenen Kommunen bedeuten.
+
+## 4 Mehrbedarfe und Sonderleistungen
+
+Neben dem Grundbedarf können besondere Lebenslagen zusätzliche finanzielle Unterstützung rechtfertigen. Mehrbedarfe werden für besondere Lebenslagen wie Alleinerziehung, Schwangerschaft oder bei aus medizinischen Gründen erforderlicher kostenaufwändiger Ernährung berücksichtigt.
+
+Mehrbedarf für Alleinerziehende: 36 Prozent des Regelbedarfs bei einem Kind unter 7 Jahren oder bei zwei bzw. drei Kindern unter 16 Jahren. 12 Prozent pro Kind, wenn sich hierdurch ein höherer Prozentsatz ergibt, maximal 60 Prozent des Regelbedarfs insgesamt. Bei einem Regelsatz von 563 Euro entspricht das bis zu 337,80 Euro zusätzlich pro Monat.
+
+Mehrbedarf bei Schwangerschaft: Schwangere erhalten ab der 13. Schwangerschaftswoche bis zum Ende des Entbindungsmonats einen Mehrbedarfszuschlag von 17 Prozent des maßgebenden Regelsatzes. Das sind bei 563 Euro Regelsatz rund 95,71 Euro monatlich zusätzlich.
+
+Mehrbedarf bei Behinderung: Für voll erwerbsgeminderte Sozialhilfe-Empfänger wird ab dem 15. Lebensjahr ein Mehrbedarf von 17 Prozent des maßgebenden Regelbedarfs anerkannt, wenn sie Inhaber eines Schwerbehindertenausweises mit dem Merkzeichen G sind.
+
+Mehrbedarf für kostenaufwändige Ernährung: Wer aus medizinischen Gründen eine kostenaufwändigere Ernährung benötigt, erhält Krankenkostzulage in angemessener Höhe nach den Richtlinien der Sozialämter und in der Regel unter Vorlage eines ärztlichen Attestes.
+
+[SPIEL quiz: Wie hoch ist der maximale Mehrbedarf bei gleichzeitig vorliegenden Tatbeständen?]
+
+## 5 Bildung und Teilhabe für Kinder
+
+Für Kinder und Jugendliche gibt es zusätzliche Unterstützung durch das Bildungs- und Teilhabepaket. Für den Schulbedarf erhalten Familien insgesamt 195 Euro pro Schuljahr: 65 Euro zu Beginn des zweiten Schulhalbjahres im Frühjahr und 130 Euro zu Beginn des neuen Schuljahres im Sommer.
+
+Weitere Leistungen aus dem Bildungspaket umfassen:
+
+- Vollständige Kostenübernahme für Klassenfahrten und Schulausflüge
+
+- Kostenloses Mittagessen in Schule, Kita oder Hort
+
+- Übernahme von Schülerbeförderungskosten bei erforderlicher Nutzung öffentlicher Verkehrsmittel
+
+- Lernförderung (Nachhilfe) bei Nachweis der Notwendigkeit
+
+- Monatlich 15 Euro für soziale und kulturelle Teilhabe (Vereinsbeiträge, Musikunterricht)
+
+Alle Leistungen gelten aus dem Bildungs- und Teilhabepaket automatisch als mitbeantragt, sobald der allgemeine Antrag auf Sozialhilfe gestellt wurde.
+
+## 6 Wie beantragt man Sozialhilfe?
+
+Der Antrag auf Grundsicherung bei Erwerbsminderung oder im Alter muss beim zuständigen Sozialamt eingereicht werden. Für andere Sozialhilfe-Leistungen ist kein Antrag nötig – die Sozialhilfe setzt ein, sobald dem Träger die Hilfebedürftigkeit bekannt wird.
+
+Erforderliche Unterlagen für den Antrag:
+
+- Personalausweis oder Reisepass
+
+- Meldebescheinigung und Nachweise über den Familienstand
+
+- Einkommensunterlagen wie letzte Lohnbescheinigung, aktueller Renten-, Arbeitslosengeld-, Bürgergeld-, Wohngeldbescheid
+
+- Vermögensnachweise (Kontoauszüge der letzten drei Monate, Sparbücher, Versicherungspolicen)
+
+- Mietvertrag und aktuelle Nebenkostenabrechnungen
+
+- Nachweise über Kranken- und Pflegeversicherung
+
+Die Bearbeitungszeit variiert je nach Komplexität des Falls und Arbeitsbelastung der Behörde. In dringenden Notlagen kann ein Eilantrag gestellt werden.
+
+[SPIEL schaetzen: Wie viele Tage beträgt die Widerspruchsfrist gegen einen Sozialhilfe-Bescheid? → 30]
+
+Praktische Tipps für die Antragstellung:
+
+- Am einfachsten ist es, den Antrag vor Ort im Sozialamt zu stellen
+
+- Es ist empfehlenswert, den Antrag persönlich beim Sozialamt einzureichen, dabei kann sich der Antragsteller die Antragstellung quittieren lassen
+
+- Wenden Sie sich so schnell wie möglich an das Amt, denn die Sozialhilfe wird nur rückwirkend ab Antragstellung ausgezahlt
+
+- Sie können eine Vertrauensperson zu Terminen im Sozialamt mitnehmen, einen sogenannten „Beistand"
+
+## 7 Unterschiede zwischen Sozialhilfe-Leistungen
+
+Die Sozialhilfe nach SGB XII gliedert sich in verschiedene Leistungsarten. In der Sozialhilfe (SGB XII) heißt diese Leistung je nach Lebenslage „Hilfe zum Lebensunterhalt" oder „Grundsicherung im Alter und bei Erwerbsminderung" – der Regelbedarf ist dabei in beiden Fällen der gleiche Baustein.
+
+Hilfe zum Lebensunterhalt richtet sich an Menschen, die vorübergehend nicht erwerbsfähig sind, aber noch nicht die Altersgrenze erreicht haben. Diese Leistung ist zeitlich befristet und wird bei Änderung der Umstände (Gesundung, Erreichen der Altersgrenze) angepasst.
+
+Grundsicherung im Alter und bei Erwerbsminderung erhalten:
+
+- Personen ab der Regelaltersgrenze (derzeit 67 Jahre)
+
+- Dauerhaft voll erwerbsgeminderte Menschen ab dem 18. Lebensjahr
+
+Ein wichtiger Unterschied: Bei erwachsenen Kindern mit Behinderung spielt das Einkommen und Vermögen der Eltern seit 2020 keine Rolle mehr. Das erwachsene Kind mit Behinderung bekommt Grundsicherung unabhängig vom Vermögen und Einkommen der Eltern. Ausnahme: Ein Elternteil verdient mehr als 100.000 Euro im Jahr. Dann muss dieser Elternteil monatlich 34,31 Euro (Stand 2026) an das Sozialamt überweisen.
+
+## 8 Fazit
+
+Die Sozialhilfe 2026 stellt trotz der Nullrunde bei den Regelsätzen ein stabiles Sicherungsnetz dar. Alleinstehende erhalten weiterhin 563 Euro monatlich, ergänzt durch Unterkunftskosten und verschiedene Mehrbedarfe. Das System bietet durch seine differenzierten Leistungen – von der Grundsicherung im Alter bis zur Hilfe zum Lebensunterhalt – bedarfsgerechte Unterstützung für unterschiedliche Lebenslagen.
+
+Besonders wichtig ist die rechtzeitige und vollständige Antragstellung beim örtlichen Sozialamt. Die komplexen Nachweispflichten erfordern sorgfältige Vorbereitung aller relevanten Unterlagen. Betroffene sollten aktiv ihre Ansprüche auf Mehrbedarfe prüfen lassen, da diese oft nicht automatisch gewährt, sondern explizit beantragt werden müssen. Bei drei Schulkindern können allein durch das Bildungspaket zusätzlich 585 Euro pro Schuljahr (Stand 2026) zur Verfügung stehen.
+
+Die Sozialhilfe gewährleistet damit auch 2026 das verfassungsrechtlich garantierte menschenwürdige Existenzminimum und ermöglicht gesellschaftliche Teilhabe – vorausgesetzt, die Berechtigten kennen ihre Ansprüche und setzen diese durch professionelle Beratung oder eigene Initiative durch.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste sozialhilfe]
+
+
+## FAQ
+F: Wer hat Anspruch auf Sozialhilfe?
+A: Anspruch haben Menschen, die ihren Lebensunterhalt nicht aus eigenen Mitteln bestreiten können, nicht erwerbsfähig sind (unter drei Stunden täglich arbeitsfähig) oder die Altersgrenze erreicht haben. Zusätzlich darf nur geringes Vermögen vorhanden sein und andere Sozialleistungen müssen unzureichend sein.
+F: Wie hoch sind die Regelsätze der Sozialhilfe 2026?
+A: Alleinstehende erhalten 2026 unverändert 563 Euro monatlich. Paare bekommen je 506 Euro, Jugendliche von 14 bis 17 Jahren 471 Euro, Kinder von 6 bis 13 Jahren 390 Euro und Kinder von 0 bis 5 Jahren 357 Euro. Unterkunft und Heizung werden zusätzlich übernommen.
+F: Was ist der Unterschied zwischen Sozialhilfe und Bürgergeld?
+A: Sozialhilfe richtet sich an nicht erwerbsfähige Menschen, die weniger als drei Stunden täglich arbeiten können, sowie an Personen im Rentenalter. Bürgergeld hingegen erhalten erwerbsfähige Personen, die trotz intensiver Bemühungen keinen Arbeitsplatz finden. Die Systeme schließen sich gegenseitig aus.
+F: Welche Mehrbedarfe gibt es in der Sozialhilfe?
+A: Mehrbedarfe sind Zuschläge für besondere Lebenslagen, in denen der typische Bedarf höher ausfällt. Dazu gehören unter anderem Zuschläge für Alleinerziehende, Schwangere, werdende Mütter sowie Menschen mit Behinderung oder aus medizinischen Gründen erforderlicher kostenaufwändiger Ernährung.
+
+
+==================== BEITRAG uebergangsgeld ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Übergangsgeld beantragen: Finanzielle Hilfe in der Rehabilitation
+  heading-1: Übergangsgeld: Höhe, Anspruch und Antrag
+  heading-2: Was ist Übergangsgeld?
+  heading-3: Wer hat Anspruch auf Übergangsgeld?
+  heading-4: Wie wird das Übergangsgeld berechnet?
+  heading-5: Besonderheiten beim Mindestübergangsgeld
+  heading-6: Dauer und besondere Arten des Übergangsgeldes
+  heading-7: Steuerliche Behandlung und Progressionsvorbehalt
+  heading-8: Antragstellung und wichtige Hinweise
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Übergangsgeld (uebergangsgeld)
+## 0 Übergangsgeld beantragen: Finanzielle Hilfe in der Rehabilitation
+
+Übergangsgeld sichert Ihr Einkommen während einer medizinischen oder beruflichen Reha. Wer es bekommt, wie hoch es ausfällt und wie Sie es 2026 beantragen.
+
+## 1 Übergangsgeld: Höhe, Anspruch und Antrag
+
+Übergangsgeld sichert den Lebensunterhalt während einer medizinischen oder beruflichen Rehabilitation finanziell ab.
+
+Diese Entgeltersatzleistung erhalten Sie, wenn aufgrund gesundheitlicher Beeinträchtigungen eine vorübergehende Arbeitsunfähigkeit besteht und Sie an entsprechenden Maßnahmen zur Wiederherstellung Ihrer Erwerbsfähigkeit teilnehmen. Je nach Träger und familiärer Situation beträgt das Übergangsgeld zwischen 68 und 75 Prozent Ihres vorherigen Nettoverdienstes.
+
+Das Jahr 2026 bringt wichtige Änderungen bei den Berechnungsgrundlagen mit sich: Die Beitragsbemessungsgrenzen steigen auf 69.750 Euro jährlich (5.812,50 Euro monatlich) für Kranken- und Pflegeversicherung sowie 101.400 Euro für Renten- und Arbeitslosenversicherung. Diese Anpassungen wirken sich direkt auf die Höchsthöhe Ihres Übergangsgeldes aus.
+
+## 2 Was ist Übergangsgeld?
+
+Übergangsgeld ist eine Lohnersatzleistung der gesetzlichen Sozialversicherung. Sie überbrückt finanzielle Einbußen während Ihrer Teilnahme an Rehabilitationsmaßnahmen oder beruflichen Eingliederungsleistungen. Das Übergangsgeld dient der wirtschaftlichen Absicherung während der Leistung und wird nur gezahlt, wenn kein Anspruch auf Entgeltfortzahlung durch den Arbeitgeber besteht.
+
+Die Leistung umfasst verschiedene Maßnahmen der medizinischen und beruflichen Rehabilitation. Dazu gehören stationäre Kuren, ambulante Therapien, Umschulungen und andere Maßnahmen zur Teilhabe am Arbeitsleben. Während dieser Zeit können Sie nicht oder nur eingeschränkt arbeiten, wodurch Ihr reguläres Einkommen wegfällt.
+
+Je nach Art der Maßnahme und Ihrer individuellen Situation sind unterschiedliche Träger zuständig. Bei medizinischer Reha meist die Rentenversicherung (Prinzip „Reha vor Rente") oder die gesetzliche Krankenkasse (Prinzip „Reha vor Pflege"); bei beruflicher Reha je nach Fall die Bundesagentur für Arbeit, die Rentenversicherung oder die Unfallversicherung.
+
+[SPIEL gewusst: Die Beitragsbemessungsgrenze für die Krankenversicherung ist 2026 um 5,5 Prozent auf 69.750 Euro gestiegen und beeinflusst die Höchsthöhe Ihres Übergangsgeldes (Stand 2026).]
+
+## 3 Wer hat Anspruch auf Übergangsgeld?
+
+Der Anspruch auf Übergangsgeld hängt von mehreren Faktoren ab. Voraussetzung ist, dass Sie im maßgeblichen Bemessungszeitraum Beiträge zur gesetzlichen Rentenversicherung gezahlt haben. Dies ist automatisch erfüllt, wenn Sie vorher sozialversicherungspflichtig beschäftigt waren.
+
+Bei der Deutschen Rentenversicherung müssen Sie vor Beginn der Rehabilitation in die Rentenversicherung eingezahlt haben. Sie müssen unmittelbar vor der Maßnahme Arbeitsentgelt, Arbeitseinkommen oder eine entsprechende Entgeltersatzleistung bezogen haben. Dies gilt auch für den vorherigen Bezug von Krankengeld oder Arbeitslosengeld, da auch dabei Rentenbeiträge gezahlt werden.
+
+Die Teilhabeleistung muss mindestens 15 Wochenstunden umfassen und darf nicht berufsbegleitend absolviert werden. Für Selbstständige gelten besondere Regelungen: Sie müssen unmittelbar vor der Maßnahme Arbeitseinkommen erzielt und im Kalenderjahr davor Rentenbeiträge entrichtet haben.
+
+[SPIEL karte: Bemessungszeitraum]
+
+Keinen Anspruch haben Sie, wenn der Arbeitgeber während der Rehabilitationsmaßnahme weiterhin das volle Gehalt zahlt. Gleiches gilt beim Bezug von Mutterschaftsgeld. Es besteht immer ein Anspruch auf Übergangsgeld, auch wenn Sie im maßgeblichen Bemessungszeitraum keine Beiträge zur Rentenversicherung gezahlt haben. In diesem Fall erfolgt eine Einstufung nach Qualifikationsgruppen.
+
+## 4 Wie wird das Übergangsgeld berechnet?
+
+Die Berechnung des Übergangsgeldes erfolgt nach einem festen Schema. Grundlage sind 80 Prozent des Bruttoeinkommens, maximal in Höhe des Nettogehalts. Diese Berechnungsgrundlage darf die jeweilige Beitragsbemessungsgrenze nicht übersteigen.
+
+Für 2026 liegt die Beitragsbemessungsgrenze bei 69.750 Euro jährlich oder 5.812,50 Euro monatlich in der Kranken- und Pflegeversicherung. Bei der Rentenversicherung beträgt sie 101.400 Euro pro Jahr (8.450 Euro pro Monat). Diese Obergrenzen bestimmen die maximale Höhe Ihres Übergangsgeldes.
+
+Der tatsächliche Zahlbetrag richtet sich nach Ihrer persönlichen Situation:
+
+- Ohne Unterhaltspflicht: 68 Prozent der Berechnungsgrundlage
+
+- Mit Kind oder Pflegepflicht: 75 Prozent der Berechnungsgrundlage
+
+[SPIEL quiz: Wie hoch ist die Beitragsbemessungsgrenze 2026 für die Krankenversicherung?]
+
+| Situation | Prozentsatz | Beispiel bei 3.000€ Berechnungsgrundlage
+
+| Ohne Kind | 68% | 2.040 €
+
+| Mit Kind | 75% | 2.250 €
+
+| Berufliche Reha ohne Kind | 68% | 2.040 €
+
+| Berufliche Reha mit Kind | 75% | 2.250 €
+
+## 5 Besonderheiten beim Mindestübergangsgeld
+
+Damit das Übergangsgeld bei Leistungen zur Teilhabe am Arbeitsleben nicht zu niedrig ausfällt, hat es eine von der Qualifikation und der Bezugsgröße abhängige Mindesthöhe. Das Mindestübergangsgeld wird nicht aus dem tatsächlichen Einkommen berechnet, sondern aus einem fiktiven Arbeitseinkommen.
+
+Die Bezugsgröße in der Sozialversicherung 2026 steigt auf 3.955 Euro monatlich. Das fiktive Arbeitseinkommen ist abhängig von der Qualifikation und der relevanten Bezugsgröße. Je nach Qualifikationsgruppe gilt ein anderer Anteil der Bezugsgröße als fiktives Arbeitseinkommen.
+
+Versicherte sind in eine der vier Qualifikationsgruppen einzustufen, wenn sie deren Qualifikationsmerkmale erfüllen und eine entsprechende Tätigkeit ausgeübt haben. Die Einstufung erfolgt nach der höchsten beruflichen Qualifikation, die Sie in Ihrem Berufsleben erworben haben.
+
+[SPIEL schaetzen: Wie hoch ist die Bezugsgröße 2026 in der Sozialversicherung? → 3955]
+
+Falls Sie Beiträge im maßgeblichen Bemessungszeitraum gezahlt haben, findet bei Umschulungen eine Vergleichsberechnung mit der Qualifikationsgruppe statt. Das höhere Übergangsgeld kommt zur Auszahlung.
+
+## 6 Dauer und besondere Arten des Übergangsgeldes
+
+Das Übergangsgeld wird grundsätzlich für die gesamte Dauer der bewilligten Maßnahme gezahlt. Es beginnt mit dem ersten Tag der Rehabilitation und endet mit dem letzten Tag der Maßnahme. Bei krankheitsbedingten Unterbrechungen von Leistungen zur Teilhabe am Arbeitsleben wird es für bis zu 42 Tage weitergezahlt, sofern die Maßnahme voraussichtlich fortgesetzt werden kann.
+
+Zwischen zwei aufeinanderfolgenden Maßnahmen können Sie sogenanntes Zwischenübergangsgeld erhalten. Voraussetzung ist Arbeitsunfähigkeit und kein Anspruch auf Krankengeld. Nach Abschluss einer beruflichen Rehabilitation kann für maximal drei Monate Anschluss-Übergangsgeld gezahlt werden.
+
+Die Höhe des Anschluss-Übergangsgeldes ist reduziert: Personen mit unterhaltsberechtigten Kindern oder entsprechenden Pflegekonstellationen erhalten 67 Prozent der Berechnungsgrundlage, alle anderen 60 Prozent. Diese Staffelung soll den Übergang in das Erwerbsleben erleichtern und gleichzeitig Anreize für eine schnelle Arbeitsaufnahme schaffen.
+
+Bei medizinischer Rehabilitation nach vorherigem Arbeitslosengeld besteht eine Besonderheit: Die Deutsche Rentenversicherung zahlt dann Übergangsgeld für die Dauer der Rehabilitationsleistung in Höhe des zuvor bezogenen Arbeitslosengeldes, wenn der Berechnung des Arbeitslosengeldes ein rentenversicherungspflichtiges Arbeitsentgelt oder Arbeitseinkommen zugrunde gelegen hat.
+
+## 7 Steuerliche Behandlung und Progressionsvorbehalt
+
+Übergangsgeld ist steuerfrei, unterliegt aber dem Progressionsvorbehalt. Das bedeutet: Die Leistung selbst wird nicht versteuert, aber sie erhöht den Steuersatz auf Ihr übriges Einkommen. Die Lohnersatzleistungen selbst sind zwar steuerfrei, erhöhen aber durch den Progressionsvorbehalt die Steuerlast.
+
+Der Mechanismus funktioniert folgendermaßen: Zunächst wird die Steuer auf das zu versteuernde Einkommen zuzüglich der Progressionseinkünfte ermittelt. Anschließend wird der durchschnittliche Steuersatz auf dieses Einkommen ermittelt. Der durchschnittliche Steuersatz wird danach mit dem zu versteuernden Einkommen multipliziert.
+
+Wenn Sie in dem Jahr mehr als 410 Euro Leistungen bezogen haben, die dem Progressionsvorbehalt unterliegen, fallen Sie unter die sogenannte Pflichtveranlagung. Das bedeutet: Sie müssen eine Steuererklärung abgeben. Die Beträge von Lohnersatzleistungen werden grundsätzlich elektronisch durch die auszahlenden Stellen an die Finanzämter übermittelt und sind in der Steuererklärung (Zeile 91 Hauptvordruck oder Zeile 28 Anlage N) einzutragen.
+
+Die Sozialversicherungsbeiträge werden während des Bezugs vom jeweiligen Träger übernommen. Eine Ausnahme bildet der Kinderlosenzuschlag in der Pflegeversicherung: Den Zuschlag von 0,60 Prozent tragen Kinderlose selbst.
+
+## 8 Antragstellung und wichtige Hinweise
+
+Die Antragstellung sollten Sie rechtzeitig vor Beginn der Rehabilitation einreichen. Die Deutsche Rentenversicherung benötigt von Ihnen in jedem Fall kurz vor Beginn der Rehabilitationsleistung das ausgefüllte Formular G0512 – Erklärung der Versicherten/des Versicherten.
+
+Für die Berechnung benötigen die Träger verschiedene Unterlagen. Bei mehreren Arbeitgebern müssen Sie zusätzliche Entgeltbescheinigungen anfordern. Die Daten, die die Deutsche Rentenversicherung von Ihrer Krankenkasse benötigt, wie zum Beispiel Vorerkrankungszeiten oder Ende der Entgeltfortzahlung, fordert sie elektronisch bei Ihrer Krankenkasse an.
+
+Damit die Qualifikationsgruppe Ihrer höchsten beruflichen Qualifikation ermittelt werden kann, übersenden Sie entsprechende Nachweise (zum Beispiel Meisterbrief oder Gesellenbrief). Bis diese Nachweise vorliegen, wird die niedrigste Qualifikationsgruppe bei der Berechnung des Übergangsgeldes zugrunde gelegt. Das Übergangsgeld ist eng mit dem Konzept der Erwerbsminderungsrente verbunden, da beide Leistungen Menschen mit gesundheitlichen Einschränkungen unterstützen – allerdings mit unterschiedlichen Voraussetzungen und Zielsetzungen.
+
+Wichtige Fristen beachten:
+
+- Antrag vor Maßnahmenbeginn stellen
+
+- Bei Arbeitslosengeld: Ende der Leistung dem Arbeitsamt mitteilen
+
+- Steuererklärung bei mehr als 410 Euro Übergangsgeld abgeben
+
+- Erste Zahlung erfolgt meist zum 25. des Folgemonats
+
+Die rechtzeitige und vollständige Antragstellung verhindert Verzögerungen oder Leistungsausfälle. Das Übergangsgeld wird grundsätzlich nicht rückwirkend vor Antragstellung gezahlt.
+
+## 9 Fazit
+
+Das Übergangsgeld bietet eine wichtige finanzielle Absicherung während Rehabilitationsphasen. Je nach familiärer Situation erhalten Sie zwischen 68 und 75 Prozent Ihres bisherigen Nettoeinkommens. Die Anpassungen für 2026 führen durch die gestiegenen Beitragsbemessungsgrenzen zu höheren Maximalleistungen für Gutverdiener. Eine rechtzeitige Antragstellung vor Maßnahmenbeginn ist unerlässlich, um finanzielle Engpässe zu vermeiden. Obwohl das Übergangsgeld steuerfrei ist, müssen Sie es aufgrund des Progressionsvorbehalts in der Steuererklärung angeben, wenn Sie mehr als 410 Euro erhalten haben. Die Sozialversicherungsbeiträge übernimmt der Träger – mit Ausnahme des Kinderlosenzuschlags in der Pflegeversicherung. Bei Fragen zur Antragstellung wenden Sie sich an Ihren zuständigen Rehabilitationsträger oder Ihre Krankenkasse.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste uebergangsgeld]
+
+[BLOCK rechner uebergangsgeld]
+
+
+## FAQ
+F: Was ist Übergangsgeld und wer zahlt es?
+A: Übergangsgeld ist eine Entgeltersatzleistung, die den Lebensunterhalt während einer Rehabilitation oder beruflichen Maßnahme sichert. Je nach Situation zahlen die Deutsche Rentenversicherung, die Unfallversicherungsträger oder die Agentur für Arbeit. Voraussetzung ist, dass kein Anspruch auf Entgeltfortzahlung durch den Arbeitgeber besteht.
+F: Wie hoch ist das Übergangsgeld?
+A: Die Berechnungsgrundlage beträgt 80 Prozent des letzten Bruttoverdienstes, maximal aber den Nettoverdienst. Versicherte ohne Unterhaltsverpflichtungen erhalten 68 Prozent ihres letzten Nettoverdienstes. Bei mindestens einem Kind oder der Pflege des Ehepartners ohne Leistungen aus der Pflegeversicherung steigt die Leistung auf 75 Prozent.
+F: Welche Voraussetzungen gelten bei der Rentenversicherung?
+A: Bei der Deutschen Rentenversicherung müssen Sie vor Beginn der Reha Beiträge gezahlt und unmittelbar davor Arbeitsentgelt oder eine Entgeltersatzleistung erzielt haben. Die Teilhabeleistung muss mindestens 15 Wochenstunden umfassen und darf nicht berufsbegleitend absolviert werden. Für Selbstständige gelten besondere Regeln.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: Bei der Rentenversicherung liegt die kalendertägliche Beitragsbemessungsgrenze 2026 bei 281,67 Euro (2025: 268,33 Euro). Darüber hinausgehende Verdienste werden bei der Berechnung des Übergangsgeldes nicht berücksichtigt. Für Spitzenverdiener bedeutet dies eine gedeckelte Leistungshöhe trotz höherer tatsächlicher Einkommen.
+
+
+==================== BEITRAG kurzarbeitergeld ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Anspruch, Antrag und Bezugsdauer von Kurzarbeitergeld
+  heading-1: Kurzarbeitergeld 2026: Anspruch, Berechnung und Bezugsdauer
+  heading-2: Wann haben Sie Anspruch auf Kurzarbeitergeld?
+  heading-3: Höhe des Kurzarbeitergeldes – So wird&#8217;s berechnet
+  heading-4: Bezugsdauer 2026: Wer profitiert von der Verlängerung?
+  heading-5: Anmeldeverfahren: Schritt für Schritt
+  heading-6: Sozialversicherung während Kurzarbeit
+  heading-7: Besondere Regelungen und Nebenjobs
+  heading-8: Steuern und Progressionsvorbehalt
+  heading-9: Häufige Fehler, die Sie vermeiden sollten
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Kurzarbeitergeld (kurzarbeitergeld)
+## 0 Anspruch, Antrag und Bezugsdauer von Kurzarbeitergeld
+
+Kurzarbeitergeld gleicht Lohnausfälle bei reduzierter Arbeitszeit aus. Wer 2026 Anspruch hat, wie es berechnet wird und wie lange es gezahlt wird.
+
+## 1 Kurzarbeitergeld 2026: Anspruch, Berechnung und Bezugsdauer
+
+Kurzarbeitergeld regelt die vorübergehende Reduzierung der Arbeitszeit bei staatlichem Lohnausgleich. Die maximale Bezugsdauer bleibt 2026 bei 24 Monaten – eine Verordnung, die bis Ende 2026 befristet ist. Ab Januar 2027 gilt wieder die gesetzliche Dauer von 12 Monaten, sofern keine neue Verordnung beschlossen wird.
+
+## 2 Wann haben Sie Anspruch auf Kurzarbeitergeld?
+
+Die Bedingungen sind klar definiert. Mindestens ein Drittel der Beschäftigten im Betrieb muss einen monatlichen Entgeltausfall von über 10 Prozent haben. Diese Erheblichkeitsschwelle sichert, dass nur bei bedeutsamen Ausfällen staatliche Unterstützung greift.
+
+Der Arbeitsausfall muss auf bestimmte Ursachen zurückgehen:
+
+- Wirtschaftliche Gründe (Auftragsmangel, Stornierungen, fehlende Materialien)
+
+- Unabwendbare Ereignisse, die Arbeit ruhen oder ausfallen lassen
+
+Arbeitgeber müssen alle zumutbaren Maßnahmen zur Vermeidung ausgeschöpft haben.
+
+[SPIEL karte: Erheblichkeitsschwelle]
+
+Für Arbeitnehmer gelten persönliche Voraussetzungen:
+
+- Versicherungspflichtige Beschäftigung erforderlich
+
+- Keine Eigenbeendigung des Arbeitsverhältnisses
+
+- Auszubildende: zunächst 6 Wochen Ausbildungsvergütung, dann Kurzarbeitergeld
+
+## 3 Höhe des Kurzarbeitergeldes – So wird's berechnet
+
+Das Kurzarbeitergeld beträgt 60 Prozent des ausgefallenen Nettoentgelts. Mit mindestens einem Kind sind es 67 Prozent. Die Berechnung basiert auf einem pauschalierten Nettoentgelt der Bundesagentur für Arbeit, nicht auf dem tatsächlichen Nettolohn.
+
+Das Schema:
+
+1. Differenz zwischen Soll- und Ist-Entgelt ermitteln
+
+2. 60 oder 67 Prozent auf diese Nettoentgeltdifferenz anwenden
+
+| Situation | Leistungssatz | Beispiel bei 1.000 € Ausfall
+
+| Ohne Kind | 60% | 600 € KUG
+
+| Mit Kind | 67% | 670 € KUG
+
+Praktisches Beispiel: Ein Arbeitnehmer (4.000 € Brutto, Steuerklasse I, kein Kind) arbeitet 50 Prozent weniger. Normales Netto: etwa 2.400 €. Netto bei halber Zeit: etwa 1.200 €. KUG (60%): 660 €. Gesamteinkommen: rund 1.860 € – etwa 78 Prozent des normalen Nettos.
+
+[SPIEL schaetzen: Wie hoch ist die Ersatzquote bei Kurzarbeit mit Kind? → 67]
+
+Bei sehr hohen Einkommen greifen Kappungsgrenzen. Im Westen liegt die Beitragsbemessungsgrenze 2026 bei maximal 7.550 €, im Osten bei 7.450 €.
+
+## 4 Bezugsdauer 2026: Wer profitiert von der Verlängerung?
+
+Die Regelung unterscheidet zwei Gruppen:
+
+Betriebe in fortgesetzter Kurzarbeit: Wer bereits 2025 Kurzarbeitergeld erhielt, kann die Verlängerung nutzen und insgesamt bis zu 24 Monate erreichen.
+
+Neu beginnende Kurzarbeit ab 2026: Hier gilt wieder die reguläre 12-Monate-Frist. Unternehmen, die erst 2026 anzeigen, erhalten maximal 12 Monate Unterstützung. Im Vergleich dazu ist das Arbeitslosengeld eine andere Leistung mit eigenen Bezugsfristen und Voraussetzungen.
+
+Die Bezugsdauer beginnt mit dem ersten Kalendermonat der Zahlung. Wird für mindestens einen Monat kein KUG gezahlt, verlängert sich die Frist um diesen Monat. Eine Unterbrechung von drei oder mehr Monaten startet eine neue Bezugsdauer.
+
+## 5 Anmeldeverfahren: Schritt für Schritt
+
+Das Verfahren läuft in zwei Phasen ab.
+
+Phase 1: Anzeige des Arbeitsausfalls
+
+Melden Sie dies rechtzeitig der zuständigen Agentur für Arbeit am Betriebssitz. Die Anzeige muss im Monat eingehen, in dem die Kurzarbeit beginnt. Wer später anzeigt, erhält rückwirkend kein KUG – ein häufiger, teurer Fehler.
+
+Phase 2: Monatliche Beantragung
+
+Der Antrag muss innerhalb von 3 Monaten nach Ende des abzurechnenden Monats erfolgen. Der Arbeitgeber zahlt zunächst an die Mitarbeiter aus und erhält die Erstattung von der Agentur.
+
+Dokumentation ist Pflicht: Präzise Aufzeichnungen zu Arbeits-, Ausfall- und Fehlzeiten pro Mitarbeiter sind erforderlich. Ohne diese kann kein KUG beantragt werden.
+
+## 6 Sozialversicherung während Kurzarbeit
+
+Die Sozialversicherung während Kurzarbeit ist besonders zu beachten. Beiträge zur Kranken-, Pflege- und Rentenversicherung für die Ausfallstunden werden nach einem fiktiven Arbeitsentgelt bemessen. Dieses entspricht 80 Prozent der Differenz zwischen Soll- und Ist-Entgelt.
+
+[SPIEL quiz: Wer trägt die Sozialversicherungsbeiträge aus dem fiktiven Entgelt?]
+
+Beispiel: Soll-Entgelt 4.000 €, Ist-Entgelt 2.000 €. Das fiktive Entgelt beträgt 1.600 € (80% von 2.000 €). Der Arbeitgeber zahlt für diesen Betrag die Sozialversicherungsbeiträge allein. Der Beitrag zur Arbeitslosenversicherung entfällt für das fiktive Entgelt.
+
+## 7 Besondere Regelungen und Nebenjobs
+
+Neben dem regulären Kurzarbeitergeld gibt es Saison-Kurzarbeitergeld für Baugewerbe (Dezember–März) und Transferkurzarbeitergeld bei Betriebsänderungen.
+
+Nebentätigkeiten: Einkünfte aus vor der Kurzarbeit ausgeübten Nebenjobs werden nicht angerechnet. Neue oder ausgeweitete Nebentätigkeiten mindern das KUG.
+
+Arbeitgeber-Aufstockung: Unternehmen können das KUG freiwillig aufstocken (etwa auf 80–90%), bleiben aber steuerpflichtig. Das reguläre KUG selbst ist steuerfrei.
+
+## 8 Steuern und Progressionsvorbehalt
+
+Kurzarbeitergeld ist steuerfrei, unterliegt aber dem Progressionsvorbehalt. Das bedeutet: Die Leistung wird zur Berechnung Ihres Steuersatzes herangezogen, obwohl sie nicht besteuert wird. Dies kann zu erheblichen Steuernachzahlungen führen – insbesondere bei der Lohnsteuer.
+
+Beispiel: 40.000 € Jahreseinkommen + 8.000 € KUG = höherer Steuersatz auf das restliche Einkommen. Nachzahlungen im dreistelligen Bereich sind realistisch.
+
+Wichtig: Bei KUG über 410 € jährlich ist eine Steuererklärung Pflicht. Die Frist für 2026 läuft bis 31. Juli 2027. Bilden Sie rechtzeitig Rücklagen für Nachzahlungen.
+
+## 9 Häufige Fehler, die Sie vermeiden sollten
+
+Zu späte Anzeige: Warten Sie nicht, bis die Lage eindeutig ist. Verspätete Anmeldung führt zu Leistungsausfällen für die Anfangswochen.
+
+Falsche Sozialversicherungsabrechnung: Das fiktive Entgelt (80% der Differenz) wird oft falsch ermittelt. Rechnen Sie nur auf das Ist-Entgelt ab, zahlen Sie später drauf – inklusive Säumniszuschläge.
+
+Unzureichende Dokumentation: Fehlende oder unpräzise Zeitaufzeichnungen führen zu vollständiger Rückforderung des gezahlten KUG durch die Bundesagentur für Arbeit.
+
+Eigenmächtige Anordnung: Ein Arbeitgeber kann Kurzarbeit nicht einseitig anordnen. Mitarbeiter und Betriebsrat müssen zustimmen – entweder vertraglich oder individuell.
+
+## 10 Fazit
+
+Kurzarbeitergeld bleibt 2026 ein zentrales Stabilisierungsinstrument. Die verlängerte 24-Monate-Frist für fortgesetzte Kurzarbeit bietet Planungssicherheit. Entscheidend sind rechtzeitige Anzeige, sorgfältige Dokumentation und korrekte Sozialversicherungsabrechnung. Für Arbeitnehmer gilt: Kalkulieren Sie Steuernachzahlungen ein und bilden Sie Reserven. Mit korrekter Vorbereitung erfüllt Kurzarbeitergeld seinen Zweck – Arbeitsplätze erhalten und wirtschaftliche Krisen überbrücken.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste kurzarbeitergeld]
+
+[BLOCK rechner kurzarbeitsgeld]
+
+
+## FAQ
+F: Wie lange kann Kurzarbeitergeld 2026 bezogen werden?
+A: Die Bezugsdauer für Kurzarbeitergeld wurde für die Jahre 2025 und 2026 auf 24 Monate verlängert. Diese befristete Regelung endet am 31. Dezember 2026. Danach kehrt die reguläre Bezugsdauer zurück, sofern keine weitere Verlängerung beschlossen wird.
+F: Wie hoch ist das Kurzarbeitergeld?
+A: Das Kurzarbeitergeld beträgt 60 Prozent der Nettoentgeltdifferenz, für Beschäftigte mit mindestens einem Kind 67 Prozent. Grundlage ist nicht der tatsächliche Nettolohn, sondern ein pauschaliertes Nettoentgelt nach Tabelle der Agentur für Arbeit.
+F: Welche Voraussetzungen gelten für Kurzarbeitergeld?
+A: Bei mindestens einem Drittel der Beschäftigten muss ein monatlicher Entgeltausfall von mehr als 10 Prozent vorliegen. Der Arbeitsausfall muss wirtschaftlich bedingt oder durch ein unabwendbares Ereignis verursacht sein. Betroffene Arbeitnehmer müssen versicherungspflichtig beschäftigt und ungekündigt sein.
+F: Wer muss den Antrag auf Kurzarbeitergeld stellen?
+A: Der Arbeitgeber muss den Arbeitsausfall zunächst bei der zuständigen Agentur für Arbeit anzeigen, bevor Kurzarbeitergeld ausgezahlt werden kann. Erst nach dieser Anzeige erfolgt die Abrechnung. Auszubildende erhalten zunächst bis zu sechs Wochen ihre Ausbildungsvergütung weiter.
+
+
+==================== BEITRAG arbeitslosengeld ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Anspruch, Antrag und Dauer: Alles zum Arbeitslosengeld
+  heading-1: Arbeitslosengeld 2026: Anspruch, Höhe, Bezugsdauer und Beantragung
+  heading-2: Was ist Arbeitslosengeld I?
+  heading-3: Wer hat Anspruch auf Arbeitslosengeld?
+  heading-4: Wie hoch ist das Arbeitslosengeld 2026?
+  heading-5: Wie lange erhalten Sie Arbeitslosengeld?
+  heading-6: Wie beantragen Sie Arbeitslosengeld?
+  heading-7: Wann droht eine Sperrzeit?
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Arbeitslosengeld (arbeitslosengeld)
+## 0 Anspruch, Antrag und Dauer: Alles zum Arbeitslosengeld
+
+Arbeitslosengeld I sichert nach Jobverlust einen Teil des bisherigen Einkommens. Wer 2026 Anspruch hat, wie hoch es ausfällt und wie lange es gezahlt wird.
+
+## 1 Arbeitslosengeld 2026: Anspruch, Höhe, Bezugsdauer und Beantragung
+
+Arbeitslosengeld ist eine Versicherungsleistung der Arbeitslosenversicherung nach dem Dritten Buch Sozialgesetzbuch (SGB III). Sie sichert bei Arbeitslosigkeit den Lebensunterhalt ab. Die finanzielle Absicherung funktioniert aber nur, wenn Sie rechtzeitig handeln und die gesetzlichen Voraussetzungen erfüllen. Für 2026 liegt die Beitragsbemessungsgrenze bei 8.450 Euro monatlich. Wer die Regularien kennt, überbrückt schwierige Phasen zuverlässig.
+
+## 2 Was ist Arbeitslosengeld I?
+
+Arbeitslosengeld I ist eine echte Versicherungsleistung. Sie wird aus Beiträgen von Arbeitnehmern und Arbeitgebern finanziert. Anders als Bürgergeld richtet sich die Höhe nach dem früheren Gehalt – Vermögen spielt keine Rolle.
+
+Das SGB III regelt das Arbeitslosengeld rechtlich. § 142 beschreibt die Anwartschaftszeit, § 147 die Anspruchsdauer und § 149 die Leistungshöhe. Bürgergeld ist hingegen eine Grundsicherungsleistung. Sie wird unabhängig von früheren Beiträgen gezahlt, unterliegt aber einer Bedürftigkeitsprüfung.
+
+Zahlung mit Verzögerung: Arbeitslosengeld wird nachträglich gezahlt. Es wird für den abgelaufenen Monat ausgezahlt. Wer im Januar 2026 arbeitslos ist und die Voraussetzungen erfüllt, erhält die Zahlung in der Regel erst Anfang Februar.
+
+## 3 Wer hat Anspruch auf Arbeitslosengeld?
+
+Der Anspruch auf Arbeitslosengeld I hängt an drei zentralen Voraussetzungen:
+
+1. Anwartschaftszeit: Sie müssen in den 30 Monaten vor Ihrer Arbeitslosmeldung mindestens 12 Monate pflicht- oder freiwillig in der Arbeitslosenversicherung versichert gewesen sein. Diese Monate müssen nicht zusammenhängend sein. Sie können auf verschiedene Beschäftigungsverhältnisse verteilt werden.
+
+&#x1f504; Karteikarte
+
+Anwartschaftszeit
+
+Mindestens 12 Monate versicherungspflichtige Beschäftigung in den letzten 30 Monaten vor der Arbeitslosmeldung – die Grundvoraussetzung für Arbeitslosengeld.
+
+2. Arbeitslosigkeit: Sie sind ohne Beschäftigung. Oder Sie arbeiten weniger als 15 Stunden pro Woche. Zugleich können Sie dem Arbeitsmarkt zur Verfügung stehen.
+
+3. Meldung: Sie haben sich rechtzeitig arbeitslos gemeldet. Sie suchen aktiv eine versicherungspflichtige Beschäftigung.
+
+Verkürzte Anwartschaftszeit: Unter bestimmten Voraussetzungen genügen 6 Monate versicherungspflichtige Zeiten in den 30 Monaten. Das gilt vor allem für Personen mit überwiegend befristeten Beschäftigungen von höchstens 14 Wochen.
+
+Zur Anwartschaftszeit zählen auch andere Zeiten: freiwillige Arbeitslosenversicherung während Selbstständigkeit, Kindererziehung bis zum 3. Lebensjahr, Bezug von Krankengeld sowie Wehrdienst oder Freiwilligendienste.
+
+## 4 Wie hoch ist das Arbeitslosengeld 2026?
+
+Die Höhe richtet sich nach dem vorherigen Einkommen und Ihrem Familienstatus. Sie erhalten 60 Prozent des Nettogehalts ohne Kinder. Mit mindestens einem Kind sind es 67 Prozent.
+
+Grundlage ist das beitragspflichtige Brutto-Arbeitsentgelt der letzten 12 Monate. Die Bundesagentur für Arbeit arbeitet mit einem pauschalisierten Nettoentgelt. Individuelle Besonderheiten wie Kirchensteuer werden nicht eins zu eins übernommen.
+
+Die Beitragsbemessungsgrenze beträgt 2026 monatlich 8.450 Euro. Nur bis zu dieser Grenze wird Einkommen berücksichtigt. Der realistische Höchstsatz beim Arbeitslosengeld liegt zwischen etwa 2.240 Euro und knapp 2.950 Euro pro Monat.
+
+| Bruttoeinkommen | Arbeitslosengeld ohne Kinder | Arbeitslosengeld mit Kindern
+
+| 2.000 € | ca. 1.200 € | ca. 1.340 €
+
+| 3.000 € | ca. 1.800 € | ca. 2.010 €
+
+| 4.000 € | ca. 2.200 € | ca. 2.460 €
+
+| 8.450 € | ca. 2.950 € | ca. 3.200 €
+
+## 5 Wie lange erhalten Sie Arbeitslosengeld?
+
+Die Bezugsdauer hängt von Ihrem Alter und der Dauer Ihrer versicherungspflichtigen Beschäftigung ab. Maßgeblich sind die letzten 5 Jahre. Die Spannweite liegt zwischen 6 und 24 Monaten.
+
+Unter 50 Jahren: Maximal 12 Monate Arbeitslosengeld sind möglich. Voraussetzung ist mindestens 24 Monate Versicherungszeit in den letzten 30 Monaten.
+
+&#x1f9e0; Quiz
+
+Wie lange kann eine 45-jährige Person maximal Arbeitslosengeld beziehen?
+
+18 Monate
+
+12 Monate
+
+24 Monate
+
+B
+
+Personen unter 50 Jahren erhalten maximal 12 Monate Arbeitslosengeld.
+
+Ab 50 Jahren: Die Bezugsdauer steigt deutlich:
+
+| Alter | Versicherungszeit | Bezugsdauer
+
+| 50–54 Jahre | 30+ Monate | 15 Monate
+
+| 55–57 Jahre | 36+ Monate | 18 Monate
+
+| Ab 58 Jahren | 48+ Monate | 24 Monate
+
+## 6 Wie beantragen Sie Arbeitslosengeld?
+
+Die rechtzeitige Meldung ist unverzichtbar. Melden Sie sich spätestens drei Monate vor dem Ende Ihres Beschäftigungsverhältnisses arbeitsuchend an. Die Arbeitslosmeldung erfolgt dann am ersten Tag der Arbeitslosigkeit. Sie melden sich online oder persönlich bei der Agentur für Arbeit an.
+
+Wichtige Unterlagen:
+
+- Personalausweis oder Reisepass
+
+- Arbeitsbescheinigung des letzten Arbeitgebers
+
+- Lebenslauf und Arbeitszeugnisse
+
+- Bankverbindung (IBAN)
+
+Neu 2026: Die Auszahlung erfolgt grundsätzlich per Überweisung. Scheckauszahlungen sind nicht mehr möglich. Sie benötigen ein eigenes Girokonto für die Auszahlung.
+
+Verspätete Meldung hat Konsequenzen. Wer die arbeitssuchende Meldung versäumt, riskiert eine einwöchige Sperrzeit ohne Leistung.
+
+## 7 Wann droht eine Sperrzeit?
+
+Eine Sperrzeit ist eine Zeitspanne, in der die Bundesagentur für Arbeit kein Arbeitslosengeld zahlt. Sie tritt ein, wenn Sie selbst zur Arbeitslosigkeit beigetragen haben. Das kann etwa bei Eigenkündigung oder vertragswidrigem Verhalten der Fall sein. Die Sperrzeit dauert bis zu zwölf Wochen und wird auf Ihre Gesamtbezugsdauer angerechnet.
+
+Häufige Gründe:
+
+- Eigenkündigung ohne wichtigen Grund
+
+- Aufhebungsvertrag ohne wichtigen Grund
+
+- Verspätete Arbeitsuchendmeldung
+
+- Ablehnung zumutbarer Beschäftigungsangebote
+
+Anerkannte wichtige Gründe:
+
+- Gesundheitliche Gründe mit ärztlichem Attest
+
+- Neuer Job war bereits zugesagt, kam dann aber nicht zustande
+
+- Mobbing oder psychische Belastung am Arbeitsplatz
+
+- Umzug zum Lebenspartner in eine andere Stadt
+
+- Ausbleibende Lohnzahlungen durch den Arbeitgeber
+
+Eine Sperrzeit ist ein Ruhen der Leistung. Der Anspruch auf Arbeitslosengeld selbst bleibt bestehen und läuft danach weiter.
+
+## 8 Fazit
+
+Arbeitslosengeld bleibt 2026 eine verlässliche soziale Absicherung. Rechtzeitige Meldung, Erfüllung der Voraussetzungen und Kenntnis der Regelungen sichern Sie finanziell ab. Nutzen Sie die verfügbaren Informationen der Arbeitsagentur, um keine Fristen zu versäumen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste arbeitslosengeld]
+
+[BLOCK rechner alg1]
+
+[BLOCK dokumente arbeitsfoerderung,arbeitslos-und-rente]
+
+
+## FAQ
+F: Wie lange muss ich gearbeitet haben, um Arbeitslosengeld zu bekommen?
+A: Für den Anspruch auf Arbeitslosengeld I müssen Sie in den letzten zwei Jahren vor der Arbeitslosigkeit mindestens 12 Monate sozialversicherungspflichtig beschäftigt gewesen sein. Diese Monate können am Stück oder verteilt erworben worden sein. Unter bestimmten Bedingungen kann die Anwartschaftszeit auf sechs Monate innerhalb von 30 Monaten verkürzt werden.
+F: Wie hoch ist das Arbeitslosengeld 2026?
+A: Das Arbeitslosengeld beträgt 60 Prozent des letzten Netto-Entgelts beziehungsweise 67 Prozent für Personen mit kindergeldberechtigten Kindern. Für 2026 liegt der Höchstsatz je nach Situation zwischen rund 2.240 Euro und knapp 2.950 Euro monatlich. Die Beitragsbemessungsgrenze beträgt 2026 monatlich 8.450 Euro beziehungsweise 101.400 Euro jährlich.
+F: Wie berechnet sich das Arbeitslosengeld?
+A: Grundlage ist Ihr beitragspflichtiges Brutto-Arbeitsentgelt der letzten 12 Monate. Davon werden rechnerisch Lohnsteuer, gegebenenfalls Solidaritätszuschlag und ein Pauschalbetrag von 20 Prozent für Sozialversicherung abgezogen. Das Ergebnis ist das Leistungsentgelt pro Tag, von dem Sie 60 oder 67 Prozent erhalten.
+F: Wie melde ich mich arbeitslos?
+A: Sie können sich online über den Digitalen Service der Bundesagentur für Arbeit oder persönlich in Ihrer Agentur für Arbeit arbeitslos melden. Die Meldung sollte möglichst frühzeitig erfolgen, idealerweise bereits drei Monate vor Ende des Arbeitsverhältnisses als arbeitsuchend. Sie müssen mindestens 15 Wochenstunden für eine versicherungspflichtige Beschäftigung verfügbar sein.
+
+
+==================== BEITRAG kuenstlersozialkasse ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Alles zur Künstlersozialkasse: Sozialversicherung für Kreative
+  heading-1: Die Künstlersozialkasse – Sozialschutz für Kreative
+  heading-2: Was ist die Künstlersozialkasse und wie funktioniert sie?
+  heading-3: Wer kann Mitglied werden – Voraussetzungen für Künstler und Publizisten?
+  heading-4: Wie hoch sind die Beiträge zur KSK 2026?
+  heading-5: Künstlersozialabgabe für Unternehmen: Wer muss zahlen?
+  heading-6: Anmeldung und Meldepflichten – So werden Sie Mitglied
+  heading-7: Leistungen und Vorteile der Künstlersozialversicherung
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Künstlersozialkasse (kuenstlersozialkasse)
+## 0 Alles zur Künstlersozialkasse: Sozialversicherung für Kreative
+
+Die Künstlersozialkasse sichert selbstständige Künstler und Publizisten sozial ab. Wer aufgenommen wird, was 2026 die Abgabe kostet und welche Vorteile es gibt.
+
+## 1 Die Künstlersozialkasse – Sozialschutz für Kreative
+
+Die Künstlersozialkasse ist ein einzigartiges System zur sozialen Absicherung von Künstlern und Publizisten. Sie ermöglicht selbstständigen Kreativen den Zugang zur gesetzlichen Sozialversicherung zu vergünstigten Konditionen.
+
+Ab 2026 sinkt die Künstlersozialabgabe auf 4,9 Prozent und die Bagatellgrenze steigt auf 1.000 Euro pro Jahr. Diese Neuerungen entlasten sowohl Auftraggeber als auch die über 190.000 versicherten Kreativen in Deutschland.
+
+## 2 Was ist die Künstlersozialkasse und wie funktioniert sie?
+
+Die KSK ist eine öffentlich-rechtliche Körperschaft mit Sitz in Wilhelmshaven. Die andere Beitragshälfte wird durch einen Bundeszuschuss (20 Prozent) und durch die Künstlersozialabgabe der Unternehmen (30 Prozent), die künstlerische und publizistische Leistungen verwerten, finanziert. Dieses Finanzierungssystem macht die KSK zu einem weltweit einmaligen Modell.
+
+Als selbstständiger Künstler oder Publizist zahlen Sie nur etwa die Hälfte der regulären Sozialversicherungsbeiträge. Die selbstständigen Künstler und Publizisten tragen, wie abhängig beschäftigte Arbeitnehmende, die Hälfte ihrer Sozialversicherungsbeiträge. Die KSK übernimmt quasi die Arbeitgeberrolle und trägt den anderen Teil Ihrer Beiträge zur Kranken-, Pflege- und Rentenversicherung.
+
+[SPIEL schaetzen: Wie hoch ist die Künstlersozialabgabe 2026? → 4.9]
+
+## 3 Wer kann Mitglied werden – Voraussetzungen für Künstler und Publizisten?
+
+Die Mitgliedschaft steht selbstständigen Künstlern und Publizisten offen, die ihre Tätigkeit erwerbsmäßig ausüben. Künstler ist, wer Musik, darstellende oder bildende Kunst schafft, ausübt oder lehrt. Publizist ist, wer als Schriftsteller, Journalist oder in ähnlicher Weise wie ein Schriftsteller oder Journalist tätig ist.
+
+Diese Gruppen sind antragsberechtigt:
+
+- Musiker, Komponisten und Sänger
+
+- Bildende Künstler wie Maler, Grafiker und Fotografen
+
+- Schauspieler, Regisseure und Tänzer
+
+- Schriftsteller, Journalisten und Übersetzer
+
+- Lehrende in künstlerischen oder publizistischen Bereichen
+
+Die Grenze liegt bei 3.900,00 Euro jährlich bzw. 325,00 Euro monatlich. Liegt das Jahreseinkommen unter dieser Grenze, wird Versicherungspflicht nicht festgestellt. Eine wichtige Ausnahme gilt für Berufsanfänger: Berufsanfänger werden auch dann versicherungspflichtig in der gesetzlichen Renten-, Kranken- und Pflegeversicherung, wenn sie das erforderliche Mindestarbeitseinkommen voraussichtlich nicht überschreiten. Als Berufsanfängerzeit gelten die ersten drei Jahre seit erstmaliger Aufnahme einer selbständigen künstlerischen oder publizistischen Tätigkeit.
+
+| Voraussetzung | Details
+
+| Tätigkeit | Künstlerisch oder publizistisch
+
+| Selbstständigkeit | Erwerbsmäßig, nicht nur vorübergehend
+
+| Mindesteinkommen | 3.900 Euro jährlich (Stand 2026)
+
+| Beschäftigte | Maximal ein sozialversicherungspflichtiger Mitarbeiter
+
+| Berufsanfänger | Sonderregeln in ersten 3 Jahren
+
+## 4 Wie hoch sind die Beiträge zur KSK 2026?
+
+Die Beitragshöhe richtet sich nach Ihrem geschätzten Jahresarbeitseinkommen. Der Beitragssatz zur gesetzlichen Rentenversicherung im Jahr 2026 beträgt 18,6 %. Der einheitliche Beitragssatz zur gesetzlichen Krankenversicherung 2026 liegt bei 14,6 %. Für die Beitragsberechnung der versicherten Künstler und Publizisten sind diese Beitragssätze etwa zur Hälfte zugrunde zu legen.
+
+Ihre konkreten Beitragsanteile 2026:
+
+- Rentenversicherung: 9,3 Prozent (von 18,6 Prozent)
+
+- Krankenversicherung: 7,3 Prozent (von 14,6 Prozent) plus kassenindividueller Zusatzbeitrag
+
+- Pflegeversicherung: Der Beitragssatz zur sozialen Pflegeversicherung im Jahr 2026 liegt bei 3,6 % bei nachgewiesener Elterneigenschaft mit einem Kind; für jedes weitere Kind unter 25 Jahren verringert sich der Beitragssatz um 0,25 %. Der Beitragssatz für Kinderlose liegt bei 4,2 %
+
+[SPIEL gewusst: Die Künstlersozialkasse versichert über 190.000 Kreative mit einem Beitragsvorteil von bis zu 50 Prozent gegenüber der regulären Selbstständigenversicherung (Stand 2026).]
+
+Bei einem Jahreseinkommen von 10.000 Euro zahlen Sie etwa 77,50 Euro monatlich für die Rentenversicherung. Die Gesamtbelastung variiert je nach gewählter Krankenkasse und deren Zusatzbeitrag.
+
+## 5 Künstlersozialabgabe für Unternehmen: Wer muss zahlen?
+
+Die finanzielle Entwicklung war nun sogar noch besser als erwartet, weshalb für das Jahr 2026 der Abgabesatz an die Künstlersozialkasse auf 4,9 Prozent gesenkt wurde. Diese Abgabe zahlen Unternehmen, die künstlerische oder publizistische Leistungen beauftragen.
+
+Abgabepflichtig sind alle Unternehmen, die regelmäßig selbstständige Künstler oder Publizisten beauftragen – unabhängig von der Branche. Auch Betriebe ohne direkten Kreativschwerpunkt können abgabepflichtig sein – etwa, wenn sie regelmäßig externe Profis für Grafik, Fotografie, Websites, Social-Media-Inhalte oder Texterstellung beauftragen.
+
+Gleichzeitig wird zum 01.01.2026 die Bagatellgrenze auf 1.000 € pro Jahr angehoben. Konkret bedeutet das: Unternehmen, die im gesamten Jahr insgesamt weniger als 1.000 € für selbstständige künstlerische oder pubizistische Leistungen zahlen, sind vollständig von der Künstlersozialabgabe befreit. Schätzungen zufolge werden dadurch knapp 15.000 Unternehmen entlastet.
+
+[SPIEL quiz: Welche Bagatellgrenze gilt 2026 für die Künstlersozialabgabe?]
+
+Wichtige Ausnahme: Die Künstlersozialkasse informiert darüber, dass sogenannte typische Verwerter von der Bagatellgrenze ausgenommen sind. Für sie gilt die Künstlersozialabgabe immer. Dazu gehören Verlage, Theater, Rundfunkanstalten und andere Unternehmen, die regelmäßig künstlerische Werke verwerten.
+
+## 6 Anmeldung und Meldepflichten – So werden Sie Mitglied
+
+Die Anmeldung bei der KSK erfolgt nicht automatisch. Die KSK überprüft die Voraussetzungen einer Versicherungspflicht anhand eines Fragebogens und einzureichender Nachweise. Den Fragebogen können Sie im Mediencenter unter Anmeldeunterlagen herunterladen.
+
+Der Anmeldeprozess umfasst folgende Schritte:
+
+1. Fragebogen zur Prüfung der Versicherungspflicht ausfüllen
+
+2. Nachweise über Ihre künstlerische/publizistische Tätigkeit sammeln
+
+3. Unterlagen per Post einreichen
+
+4. Bescheid der KSK abwarten (Bearbeitung dauert 3-6 Monate)
+
+Wichtig für den Versicherungsbeginn: Sind Sie bereits selbstständig tätig, beginnt die Versicherungspflicht grundsätzlich mit dem Tag der Anmeldung bei der KSK. Reichen Sie die Unterlagen vor Aufnahme Ihrer Tätigkeit ein, gilt der Tag des Tätigkeitsbeginns als Versicherungsbeginn.
+
+[SPIEL mythos: Die KSK übernimmt automatisch die Krankenversicherung, sobald man als Künstler selbstständig wird → nein]
+
+Für Unternehmen gelten strenge Meldepflichten: Bis zum 31. März 2026 müssen alle abgabepflichtigen Firmen ihre Aufwendungen für kreative Dienstleistungen aus 2025 der KSK melden. Eine Fristverlängerung schließt die Kasse aus.
+
+## 7 Leistungen und Vorteile der Künstlersozialversicherung
+
+Die KSK-Mitgliedschaft bietet Ihnen den vollen Schutz der gesetzlichen Sozialversicherung. Sie sind pflichtversichert in der Kranken-, Pflege- und Rentenversicherung mit allen Leistungen wie ein Arbeitnehmer. Sie sorgt dafür, dass selbstständige Künstlerinnen und Publizisten in Deutschland Zugang zur gesetzlichen Kranken-, Pflege- und Rentenversicherung haben – zu ähnlichen Bedingungen wie Angestellte.
+
+Ihre konkreten Vorteile:
+
+- Etwa 50 Prozent Beitragersparnis gegenüber freiwilliger Versicherung
+
+- Familienversicherung für Ehepartner und Kinder möglich
+
+- Anspruch auf Krankengeld ab der 7. Woche
+
+- Voller Rentenversicherungsschutz mit Erwerbsminderungsrente
+
+- Pflegeversicherungsschutz inklusive
+
+Der Vorteil: Kreative zahlen nur etwa die Hälfte des Beitrags; die andere Hälfte wird ergänzt, damit auch bei schwankenden Einnahmen eine verlässliche Absicherung möglich bleibt. Bei der Krankenversicherung können Sie damit jährlich über 4.000 Euro einsparen.
+
+## 8 Fazit
+
+Die Künstlersozialkasse stellt eine unverzichtbare Säule der sozialen Absicherung für Kreative dar. Die Künstlersozialabgabe sinkt 2026 auf 4,9 Prozent, während die Bagatellgrenze auf 1.000 Euro steigt und entlastet damit sowohl Auftraggeber als auch das Gesamtsystem. Die Anmeldung erfordert sorgfältige Vorbereitung, doch der Versicherungsschutz rechtfertigt den Aufwand vollständig. Sie zahlen nur die Hälfte der normalen Sozialversicherungsbeiträge und erhalten dennoch den vollen Leistungsumfang wie Arbeitnehmer. Melden Sie sich frühzeitig an – die Versicherung beginnt bereits mit der Registrierung bei der KSK und sichert Sie von Beginn Ihrer selbstständigen Tätigkeit an umfassend ab.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste kuenstlersozialkasse]
+
+
+## FAQ
+F: Wer kann Mitglied der Künstlersozialkasse werden?
+A: Mitglied der KSK können selbstständige Künstler und Publizisten werden, die ihre Tätigkeit erwerbsmäßig und nachhaltig ausüben. Dazu zählen Musiker, darstellende und bildende Künstler, Schriftsteller und Journalisten. Ein Mindestjahreseinkommen von 3.900 Euro ist nachzuweisen.
+F: Welche finanziellen Vorteile bietet die KSK?
+A: Versicherte zahlen nur etwa die Hälfte der regulären Beitragssätze zur Sozialversicherung. Die andere Hälfte wird über einen Bundeszuschuss und die Künstlersozialabgabe von Unternehmen finanziert. So erhalten Sie denselben Leistungsumfang wie Arbeitnehmer ohne die volle Beitragslast.
+F: Welche Regelung gilt für Berufsanfänger in der KSK?
+A: In den ersten drei Jahren nach Aufnahme der selbstständigen Tätigkeit gilt eine Aufbauphase. In dieser Zeit werden Künstler auch dann versicherungspflichtig, wenn das Mindesteinkommen von 3.900 Euro jährlich voraussichtlich nicht erreicht wird. So ist die soziale Absicherung von Beginn an gesichert.
+F: Wie hoch ist der eigene Beitragsanteil zur KSK 2026?
+A: Versicherte zahlen 2026 jeweils die Hälfte der Beitragssätze: 9,3 Prozent zur Rentenversicherung, 7,3 Prozent zur Krankenversicherung und für Kinderlose 2,1 Prozent zur Pflegeversicherung. Grundlage ist das geschätzte Jahresarbeitseinkommen.
+
+
+==================== BEITRAG kuendigung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Kündigung im Arbeitsrecht: Fristen, Formvorschriften und Rechte
+  heading-1: Kündigung: Fristen, Schutzvorschriften und rechtliche Anforderungen 2026
+  heading-2: Kündigungsfristen 2026: Tabelle und Berechnung
+  heading-3: Schriftform und Zugangsnachweis bei Kündigungen
+  heading-4: Kündigungsschutzgesetz: Wer ist geschützt?
+  heading-5: Wann ist eine außerordentliche Kündigung möglich?
+  heading-6: Betriebsratsanhörung: Rechte und Fristen
+  heading-7: Häufige Kündigungsfehler und rechtliche Risiken
+  heading-8: Finanzielle Folgen einer Kündigung
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Kündigung (kuendigung)
+## 0 Kündigung im Arbeitsrecht: Fristen, Formvorschriften und Rechte
+
+Bei einer Kündigung im Arbeitsverhältnis zählen Fristen, Form und Kündigungsschutz. Welche Regeln 2026 gelten und welche Rechte Arbeitnehmer haben.
+
+## 1 Kündigung: Fristen, Schutzvorschriften und rechtliche Anforderungen 2026
+
+Eine Kündigung ist die einseitige Beendigung eines Arbeitsverhältnisses durch Arbeitgeber oder Arbeitnehmer. Diese rechtliche Willenserklärung unterliegt strengen formalen und inhaltlichen Anforderungen. Das deutsche Arbeitsrecht schützt beide Parteien durch ein ausgeklügeltes System aus Kündigungsfristen, Schutzvorschriften und Verfahrensregeln. Die Grundlage bilden § 622 BGB für Kündigungsfristen mit vier Wochen zum 15. oder Monatsende und das Kündigungsschutzgesetz für Betriebe ab zehn Mitarbeitern.
+
+## 2 Kündigungsfristen 2026: Tabelle und Berechnung
+
+Die gesetzliche Grundfrist beträgt vier Wochen zum 15. oder zum Ende eines Kalendermonats. Für Arbeitnehmer bleibt diese Frist unverändert – unabhängig davon, wie lange sie im Betrieb tätig sind. Arbeitgeber hingegen müssen längere Fristen beachten, die sich nach der Betriebszugehörigkeit staffeln.
+
+[SPIEL mythos: Kündigungsfristen verlängern sich automatisch für beide Parteien mit der Betriebszugehörigkeit. → nein]
+
+Für Arbeitgeberkündigungen gelten gestaffelte Fristen nach Betriebszugehörigkeit:
+
+| Betriebszugehörigkeit | Kündigungsfrist | Gültig zum
+
+| Unter 2 Jahren | 4 Wochen | 15. oder Monatsende
+
+| 2 Jahre | 1 Monat | Monatsende
+
+| 5 Jahre | 2 Monate | Monatsende
+
+| 8 Jahre | 3 Monate | Monatsende
+
+| 10 Jahre | 4 Monate | Monatsende
+
+| 12 Jahre | 5 Monate | Monatsende
+
+| 20 Jahre | 7 Monate | Monatsende
+
+In der Probezeit, die maximal sechs Monate dauern darf, beträgt die Kündigungsfrist für beide Seiten zwei Wochen. Diese kann zu jedem beliebigen Tag ausgesprochen werden, nicht nur zum 15. oder Monatsende.
+
+## 3 Schriftform und Zugangsnachweis bei Kündigungen
+
+Kündigungen müssen zwingend schriftlich mit eigenhändiger Unterschrift erfolgen (§ 623 BGB). E-Mails, WhatsApp oder mündliche Kündigungen sind unwirksam. Diese strenge Formvorschrift schützt beide Parteien vor übereilten Entscheidungen und schafft Rechtsklarheit.
+
+Der Zugang der Kündigung ist für den Fristbeginn ausschlaggebend. Das Bundesarbeitsgericht hat mit Urteil vom 30. Januar 2025 (Az. 2 AZR 68/24) klargestellt, dass ein Einlieferungsbeleg für Einwurf-Einschreiben nicht als Zugangsnachweis genügt. Nur der tatsächliche Auslieferungsbeleg beweist, wann die Kündigung angekommen ist.
+
+Sichere Zustellwege für die Kündigung sind:
+
+- Persönliche Übergabe mit Empfangsbestätigung
+
+- Zustellung durch Boten mit Zeugen
+
+- Einschreiben mit Rückschein als Beweis
+
+[SPIEL quiz: Welche Kündigungsfrist gilt für einen Arbeitnehmer nach 15 Jahren Betriebszugehörigkeit?]
+
+## 4 Kündigungsschutzgesetz: Wer ist geschützt?
+
+Das Kündigungsschutzgesetz gilt in Betrieben mit mehr als zehn Arbeitnehmern nach einer Wartezeit von sechs Monaten. Für die Berechnung der Mitarbeiterzahl werden Teilzeitkräfte bis 20 Stunden mit Faktor 0,5, bis 30 Stunden mit Faktor 0,75 berücksichtigt. Damit wird mehr Transparenz für Arbeitnehmer geschaffen.
+
+Die drei Arten von Kündigungen werden unterschieden nach ihren Gründen:
+
+- Personenbedingte Kündigung (etwa wegen Krankheit oder fehlender Qualifikation)
+
+- Verhaltensbedingte Kündigung (etwa wegen Pflichtverletzung oder Regelverstöße)
+
+- Betriebsbedingte Kündigung (etwa wegen Stellenabbau oder wirtschaftlicher Gründe)
+
+Besonderen Kündigungsschutz genießen Schwangere, Schwerbehinderte, Betriebsratsmitglieder und Elternzeitberechtigte. Diese Gruppen können nur in schwerwiegenden Ausnahmefällen gekündigt werden. Der Schutz dieser Gruppen ist ein wichtiger Bestandteil des sozialen Arbeitsrechts.
+
+## 5 Wann ist eine außerordentliche Kündigung möglich?
+
+Eine fristlose Kündigung erfordert einen wichtigen Grund, der die Fortsetzung des Arbeitsverhältnisses unzumutbar macht (§ 626 BGB). Solche Gründe sind:
+
+- Diebstahl, Betrug oder Spionage
+
+- Beharrliche Arbeitsverweigerung
+
+- Mobbing, sexuelle Belästigung oder Gewalt am Arbeitsplatz
+
+- Wiederholtes Ausbleiben der Gehaltszahlung (bei Arbeitnehmer­kündigungen)
+
+[SPIEL gewusst: Bei fristloser Kündigung muss eine strenge Zwei-Wochen-Frist ab Kenntniserlangung eingehalten werden – sonst wird sie unwirksam (§ 626 Abs. 2 BGB, Stand 2026).]
+
+Vor einer fristlosen Kündigung ist in der Regel eine Abmahnung erforderlich. Diese zeigt dem Arbeitnehmer sein Fehlverhalten und gibt ihm Gelegenheit zur Besserung. Bei strafbarem Verhalten kann die Abmahnung entfallen.
+
+## 6 Betriebsratsanhörung: Rechte und Fristen
+
+§ 102 BetrVG schreibt vor: Der Betriebsrat ist vor jeder Kündigung anzuhören. Der Arbeitgeber muss ihm die Gründe mitteilen. Eine ohne Anhörung ausgesprochene Kündigung ist unwirksam, was zu erheblichen Konsequenzen führt.
+
+Die Anhörungsfristen sind je nach Kündigungsart unterschiedlich:
+
+- Bei ordentlichen Kündigungen: eine Woche
+
+- Bei außerordentlichen Kündigungen: drei Tage
+
+Der Betriebsrat muss umfassend über die beabsichtigte Kündigung unterrichtet werden. Fehlerhafte Anhörung führt zur Unwirksamkeit. Der Arbeitgeber muss mitteilen:
+
+- Person des betroffenen Arbeiters
+
+- Art der Kündigung (ordentlich oder außerordentlich)
+
+- Kündigungsgründe und Kündigungstermin
+
+- Bei betriebsbedingten Kündigungen: Sozialauswahl­kriterien
+
+[SPIEL schaetzen: Wie viele Tage hat der Betriebsrat bei fristloser Kündigung Zeit für seine Stellungnahme? → 3]
+
+## 7 Häufige Kündigungsfehler und rechtliche Risiken
+
+Die meisten Kündigungen scheitern an formalen Mängeln. Typische Fehler sind:
+
+- Fehlende Betriebsratsanhörung führt zur Unwirksamkeit
+
+- Mangelhafte Sozialauswahl bei betriebsbedingten Kündigungen
+
+- Verstoß gegen Sonderkündigungsschutz für besondere Personengruppen
+
+- Nichteinhaltung der Schriftform mit eigenhändiger Unterschrift
+
+- Unzureichender Zugangsnachweis bei Einwurf-Einschreiben
+
+- Verspätete fristlose Kündigung nach der Zwei-Wochen-Frist
+
+Arbeitnehmer haben drei Wochen nach Kündigungszugang Zeit, um eine Kündigungsschutzklage einzureichen. Nach Fristablauf gilt die Kündigung als wirksam. Bei Kündigungsstreitigkeiten ist eine Rechtsschutzversicherung sinnvoll, um die Kosten für Anwaltshonorare und Gerichtsverfahren zu decken.
+
+2026 gelten verschärfte Anforderungen: Bei Kündigungen nach Beschwerden oder Gehaltsauskünften muss der Arbeitgeber aktiv beweisen, dass kein Kausalzusammenhang besteht. Dies stärkt den Schutz vor Maßregelungen erheblich.
+
+## 8 Finanzielle Folgen einer Kündigung
+
+Nach einer Kündigung kann ein Anspruch auf Arbeitslosengeld entstehen, wenn bestimmte Voraussetzungen erfüllt sind. Wer aufgrund von gesundheitlichen Einschränkungen nicht arbeiten kann, sollte sich über eine Berufsunfähigkeitsversicherung informieren, um sich gegen Einkommensverluste abzusichern.
+
+## 9 Fazit
+
+Das Kündigungsrecht 2026 zeigt eine klare Struktur aus Schutz und Flexibilität. Die gesetzlichen Fristen von vier Wochen zum 15. oder Monatsende für Arbeitnehmer und bis zu sieben Monaten für Arbeitgeber nach 20 Jahren Betriebszugehörigkeit schaffen Planungssicherheit für beide Seiten. Das Kündigungsschutzgesetz gilt ab zehn Mitarbeitern nach sechs Monaten Wartezeit und erfordert sachlich gerechtfertigte Kündigungsgründe. Besonders wichtig sind die zwingend erforderliche Schriftform mit eigenhändiger Unterschrift und die obligatorische Betriebsratsanhörung vor jeder Kündigung. Fristlose Kündigungen setzen einen wichtigen Grund und strikte Zwei-Wochen-Frist voraus. Die aktuelle Rechtsprechung hat die Anforderungen an den Zugangsnachweis verschärft: Nur tatsächliche Auslieferungsbelege, nicht Online-Sendungsstatus, beweisen den Zugang. Aufgrund der Komplexität und hohen Fehleranfälligkeit ist rechtliche Beratung bei konkreten Kündigungsfällen dringend empfehlenswert.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste kuendigung]
+
+
+## FAQ
+F: Welche Kündigungsfristen gelten nach dem BGB?
+A: Nach § 622 BGB beträgt die Grundkündigungsfrist für Arbeitnehmer vier Wochen zum 15. oder Monatsende. Ab zwei Jahren Betriebszugehörigkeit verlängert sie sich auf einen Monat zum Monatsende. Für Arbeitgeber steigt die Frist gestaffelt bis auf sechs Monate ab 15 Jahren Betriebszugehörigkeit.
+F: Wie lange ist die Kündigungsfrist in der Probezeit?
+A: Während der Probezeit, die maximal sechs Monate dauern darf, beträgt die Kündigungsfrist für beide Parteien zwei Wochen. Diese verkürzte Frist gilt unabhängig vom Kündigungsgrund und soll beiden Seiten eine schnelle Trennung ermöglichen.
+F: Wann ist eine fristlose Kündigung zulässig?
+A: Nach § 626 BGB ist eine fristlose Kündigung nur bei Vorliegen eines wichtigen Grundes möglich, wenn die Fortsetzung des Arbeitsverhältnisses unzumutbar ist. Beispiele sind Diebstahl, schwere Pflichtverletzungen oder grundlose Arbeitsverweigerung. Sie muss innerhalb von zwei Wochen nach Bekanntwerden des Grundes ausgesprochen werden.
+F: Ist eine Abmahnung vor der Kündigung immer erforderlich?
+A: Bei verhaltensbedingten Kündigungen ist eine Abmahnung in der Regel erforderlich, um die Warnfunktion zu erfüllen. Sie muss das Fehlverhalten konkret mit Datum und Ort beschreiben. Ausnahmen bestehen bei besonders schweren Verstößen wie Diebstahl oder Gewalt.
+
+
+==================== BEITRAG wohnungskuendigung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rechte, Fristen &amp; Muster für sichere Wohnungskündigung
+  heading-1: Wohnungskündigung: Fristen, Rechte und Muster
+  heading-2: Ordentliche Kündigung durch Mieter: Die 3-Monate-Regel verstehen
+  heading-3: Schriftform und Zugang: Warum E-Mail nicht ausreicht
+  heading-4: Wie funktioniert die korrekte Fristberechnung?
+  heading-5: Fristlose Kündigung: Schwerwiegende Ausnahmefälle
+  heading-6: Eigenbedarfskündigung: Verschärfte Anforderungen 2026
+  heading-7: Sonderkündigungsrechte und besondere Situationen
+  heading-8: Kaution, Übergabe und was nach der Kündigung passiert
+  heading-9: Reaktion auf Vermieterkündigungen und Härteeinwände
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Wohnungskündigung (wohnungskuendigung)
+## 0 Rechte, Fristen & Muster für sichere Wohnungskündigung
+
+Bei der Wohnungskündigung zählen die richtigen Fristen und die Form. Welche Kündigungsfristen 2026 gelten und wie Sie als Mieter teure Fehler vermeiden.
+
+## 1 Wohnungskündigung: Fristen, Rechte und Muster
+
+Wohnungskündigung regelt die rechtzeitige Beendigung von Mietverhältnissen zwischen Mieter und Vermieter nach gesetzlichen Vorgaben.
+
+Die Kündigung einer Wohnung gehört zu den häufigsten und fehleranfälligsten Vorgängen im deutschen Mietrecht. Für Mieter beträgt die gesetzliche Kündigungsfrist einheitlich drei Monate, unabhängig von der bisherigen Mietdauer (§ 573c BGB). Trotz der scheinbar klaren Regelung scheitern viele Kündigungen an formalen Fehlern, falschen Fristen oder unvollständigen Angaben. Ein kleiner Fehler bei der Berechnung oder beim Zugang kann schnell dazu führen, dass der Auszug um einen ganzen Monat verschoben wird und unnötige Kosten entstehen.
+
+## 2 Ordentliche Kündigung durch Mieter: Die 3-Monate-Regel verstehen
+
+Die Kündigung ist spätestens am dritten Werktag eines Kalendermonats zum Ablauf des übernächsten Monats zulässig (§ 573c BGB). Diese Regel ist entscheidend: Geht die Kündigung nach dem 3. Werktag ein, verschiebt sich alles um einen Monat. Beispiel: Kündigung am 5. Januar (nach dem 3. WT) → zählt erst ab Februar → Vertrag endet erst Ende April statt Ende März.
+
+Ein häufiger Fehler liegt in der Definition der Werktage. Der BGH hat entschieden, dass Samstag als Werktag im Sinne von §573c BGB zählt (BGH VIII ZR 206/04). Nur Sonntage und gesetzliche Feiertage sind keine Werktage. Wenn der 1. eines Monats auf einen Donnerstag fällt, sind der 1. (Donnerstag), 2. (Freitag) und 3. (Samstag) die ersten drei Werktage.
+
+Die Kündigungsfrist für den Mieter ist unveränderlich. Klauseln, die die 3-Monats-Frist des Mieters verlängern, sind unwirksam (§573c Abs. 4 BGB). Kürzere Fristen sind nur bei möblierten Zimmern oder besonderen Vereinbarungen möglich.
+
+[SPIEL schaetzen: Bis zu welchem Tag im Monat muss eine Mieterkündigung spätestens beim Vermieter eingehen? → 3]
+
+## 3 Schriftform und Zugang: Warum E-Mail nicht ausreicht
+
+Die Schriftform erfordert eine eigenhändige Unterschrift (§568 BGB). E-Mail oder Fax sind unwirksam. Diese strenge Formvorschrift dient dem Schutz beider Parteien und verhindert vorschnelle oder unüberlegte Kündigungen.
+
+Bei mehreren Hauptmietern müssen grundsätzlich alle kündigen. Bei mehreren Hauptmietern sollten alle unterschreiben. Fehlt eine Unterschrift, ist das Schreiben angreifbar. Ausnahmen gelten nur, wenn eine Person bevollmächtigt ist oder besondere Umstände vorliegen.
+
+Der Zugang beim Vermieter ist entscheidend. Sie wird mit Zugang beim Vermieter wirksam, nicht schon beim Schreiben oder Abschicken. Genau deshalb ist der Nachweis der Zustellung so wichtig. Ein Einschreiben mit Rückschein oder persönliche Übergabe gegen Empfangsbestätigung sind die sichersten Wege.
+
+[SPIEL karte: Zugang der Willenserklärung]
+
+## 4 Wie funktioniert die korrekte Fristberechnung?
+
+Die Fristberechnung verwirrt viele Mieter. Beispiel: Kündigung geht am 3. Januar 2026 beim Vermieter ein → Mietvertrag endet am 30. April 2026. Die Rechnung: Januar (laufender Monat) + Februar und März (zwei weitere Monate) = Ende April.
+
+Wenn die Kündigung dem Vermieter am 3. Juni zugeht und dieser Tag noch innerhalb der relevanten Frist liegt, kann das Mietverhältnis zum 31. August enden. Wichtig ist die korrekte Ermittlung des dritten Werktags: Bei Feiertagen verschiebt sich die Deadline entsprechend nach hinten.
+
+Praktisches Beispiel für 2026: Fällt der 1. Mai auf einen Donnerstag (Feiertag), sind die ersten drei Werktage der 2. (Freitag), 3. (Samstag) und 5. (Montag), da der 4. (Sonntag) kein Werktag ist.
+
+## 5 Fristlose Kündigung: Schwerwiegende Ausnahmefälle
+
+Eine fristlose Kündigung ist nur zulässig, wenn ein wichtiger Grund vorliegt, der die Fortsetzung des Mietverhältnisses für den Kündigenden unzumutbar macht. Die Gründe müssen so schwerwiegend sein, dass eine Einhaltung der regulären Kündigungsfristen nicht zumutbar ist (§ 543 BGB).
+
+Häufige Gründe für fristlose Vermieterkündigung:
+
+- Erheblicher Mietrückstand: Wenn der Mieter für zwei aufeinanderfolgende Monate die Miete nicht oder nur teilweise zahlt und der ausstehende Betrag mehr als eine Monatsmiete beträgt
+
+- Schwerwiegende Störung des Hausfriedens: Auch wiederholte Lärmbelästigungen, Bedrohungen oder tätliche Angriffe auf andere Hausbewohner oder den Vermieter
+
+- Vertragswidrige Nutzung der Wohnung oder illegale Aktivitäten wie Drogenhandel in der Mietwohnung
+
+Gründe für fristlose Mieterkündigung:
+
+- Gesundheitsgefährdender Zustand der Wohnung durch Schimmelbefall oder Verwendung von giftigen Baustoffen
+
+- Erhebliche Mängel, die die Nutzung der Wohnung stark einschränken und vom Vermieter trotz Aufforderung nicht beseitigt werden
+
+Auch wenn in Einzelfällen eine fristlose Kündigung ohne vorherige Abmahnung möglich ist, muss in den meisten Fällen vor einer Kündigung abgemahnt werden. Der Mieter erhält so die Möglichkeit, den Pflichtverstoß zu korrigieren oder sein Verhalten zu ändern. Ausnahmen gelten bei Mietrückständen und anderen unabmahmbaren Verstößen.
+
+[SPIEL mythos: Drei Abmahnungen sind vor einer fristlosen Kündigung zwingend erforderlich → nein]
+
+## 6 Eigenbedarfskündigung: Verschärfte Anforderungen 2026
+
+In den letzten Jahren hat der Bundesgerichtshof (BGH) die Anforderungen an Eigenbedarfskündigungen weiter präzisiert. Gleichzeitig wurden die Schutzmechanismen für Mieter – etwa über Härteeinwände und Schadensersatzansprüche bei missbräuchlichem Eigenbedarf – geschärft. In solchen Streitigkeiten kann eine Rechtsschutzversicherung für Mieter eine wichtige Absicherung darstellen.
+
+Für Vermieter haben sich 2026 strengere Anforderungen etabliert:
+
+| Mietdauer | Kündigungsfrist Vermieter | Beispiel
+
+| Bis 5 Jahre | 3 Monate | Vermieter A vermietet seit 8 Jahren. Seine Tochter zieht zum Studium in die Stadt → 9 Monate Frist
+
+| 5 bis 8 Jahre | 6 Monate | Vermieterin B kauft eine seit 6 Jahren vermietete Wohnung. Nach Grundbucheintrag möchte sie selbst einziehen → 6 Monate Frist
+
+| Über 8 Jahre | 9 Monate | Bei langjährigen Mietverhältnissen maximaler Schutz
+
+Sperrfristen nach Immobilienkauf 2026:
+
+- Bei normalem Immobilienkauf gilt eine dreijährige Sperrfrist. Bei Umwandlung in Eigentumswohnungen verlängert sie sich auf zehn Jahre (§ 577a BGB)
+
+- In Gebieten mit angespanntem Wohnungsmarkt gilt eine Frist von zehn Jahren
+
+Der BGH hat 2026 klargestellt: Wer transparent agiert, seinen Nutzungswunsch ernsthaft verfolgt und die gesetzlichen Vorgaben genau einhält, hat als Vermieter gute Chancen, eine Eigenbedarfskündigung rechtssicher durchzusetzen.
+
+[SPIEL gewusst: Rund 60% aller Eigenbedarfskündigungen werden von Mietern angefochten, und ein erheblicher Teil der Mieter bekommt Recht wegen formaler oder inhaltlicher Fehler der Vermieter (Stand 2026).]
+
+## 7 Sonderkündigungsrechte und besondere Situationen
+
+Neben der ordentlichen Kündigung gibt es verschiedene Sonderkündigungsrechte:
+
+Bei Modernisierung und Mieterhöhung:
+
+- Bei Mieterhöhung nach §558 BGB kann der Mieter bis zum Ende des 2. Monats nach Zugang Sonderkündigen (§561 BGB)
+
+- Nach Erhalt einer Modernisierungsankündigung kann der Mieter bis zum Monatsende Sonderkündigen. Der Vertrag endet dann am Ende des übernächsten Monats
+
+Bei Eigentümerwechsel:
+
+- Stirbt der Mieter, können sowohl Erben als auch der Vermieter innerhalb eines Monats außerordentlich mit gesetzlicher Frist kündigen
+
+- Bei Umwandlung in Eigentumswohnung besteht ein Sonderkündigungsrecht
+
+Besondere Umstände:
+
+- Nach § 573a BGB kann in einem Zweifamilienhaus, in dem der Vermieter selbst eine Wohnung bewohnt, die Kündigung auch ohne klassischen Kündigungsgrund erfolgen. Allerdings verlängert sich die Kündigungsfrist für die Mietwohnung dann um drei Monate
+
+## 8 Kaution, Übergabe und was nach der Kündigung passiert
+
+Nach erfolgreicher Kündigung regelt die Wohnungsübergabe die Details des Auszugs. Die Rückgabe der Mietkaution ist dabei ein häufiger Streitpunkt.
+
+Kautionsrückgabe 2026:
+
+- Gesetzlich gibt es keine fixe Rückgabefrist, üblich sind drei bis sechs Monate nach Auszug
+
+- Gemäß § 548 BGB hat der Vermieter nach Beendigung des Mietverhältnisses sechs Monate Zeit, um eventuelle Schadensersatzansprüche geltend zu machen. Diese Frist dient als Orientierung dafür, wie lange ein Vermieter die Kaution einbehalten darf
+
+- Ansprüche aus dem Mietverhältnis, einschließlich Schäden an der Wohnung, verjähren generell nach sechs Monaten
+
+Berechtigte Abzüge von der Kaution:
+
+- Mietrückstände und unbezahlte Nebenkosten
+
+- Schäden über normale Abnutzung hinaus
+
+- Nachforderungen aus der Betriebskostenabrechnung dürfen bis zu einem Jahr lang einbehalten werden, allerdings nur in Höhe des zu erwartenden Nachzahlungsbetrages
+
+Verjährung der Kautionsansprüche:
+
+Der Anspruch auf Kautionsrückgabe verjährt nach drei Jahren. Diese Frist beginnt am 31. Dezember des Jahres, in dem der Mieter ausgezogen ist und die Kaution fällig wurde.
+
+## 9 Reaktion auf Vermieterkündigungen und Härteeinwände
+
+Mieter haben umfangreiche Schutzmöglichkeiten gegen Vermieterkündigungen:
+
+Widerspruch bei Eigenbedarfskündigung:
+
+- Der Mieter hat das Recht, der Eigenbedarfskündigung schriftlich zu widersprechen, wenn die Beendigung des Mietverhältnisses eine unzumutbare Härte darstellen würde. Der Widerspruch muss spätestens zwei Monate vor Ablauf der Kündigungsfrist beim Vermieter eingehen
+
+Häufige Härtegründe (§ 574 BGB):
+
+- Hohes Alter und Krankheit
+
+- Schwangerschaft und Kleinkinder
+
+- Bevorstehende wichtige Prüfungen
+
+- Extreme Wohnungsknappheit am Ort
+
+Formale Angriffspunkte:
+
+- Fehlerhafte Begründung des Eigenbedarfs
+
+- Nichteinhaltung von Sperrfristen
+
+- Fehlende Widerspruchsbelehrung
+
+- Unvollständige oder falsche Angaben zur Bedarfsperson
+
+## 10 Fazit
+
+Die Wohnungskündigung erfordert präzise Beachtung rechtlicher Vorgaben. Mieter müssen vier zentrale Punkte beachten: korrekte 3-Monats-Frist, schriftliche Form mit Originalunterschrift, nachweisbaren Zugang bis zum dritten Werktag eines Monats und saubere Dokumentation. Besonders kritisch ist die Stichtagsregel – ein Tag zu spät kann den Auszug um einen ganzen Monat verschieben. Vermieter haben je nach Mietdauer gestaffelte Fristen (3, 6 oder 9 Monate) und müssen bei Eigenbedarfskündigungen 2026 strengere Anforderungen erfüllen. Die verschärften BGH-Vorgaben schützen Mieter besser vor konstruierten Eigenbedarfsgründen. Bei fristlosen Kündigungen sind Abmahnungen meist erforderlich, außer bei qualifizierten Mietrückständen von zwei Monatsmieten (§ 543 BGB). Mieter haben umfangreiche Widerspruchsrechte bei Vermieterkündigungen und können Härteeinwände geltend machen. Nach dem Auszug dauert die Kautionsrückgabe üblich drei bis sechs Monate, wobei Vermieter sechs Monate Zeit haben, Schadensersatzansprüche zu prüfen (§ 548 BGB). Der Anspruch verjährt nach drei Jahren, weshalb Mieter bei Verzögerungen aktiv werden sollten. Bei einem geplanten Umzug sollten Mieter auch die Umzugskosten von der Steuer absetzen, um finanzielle Belastungen auszugleichen. Zuletzt ist zu beachten, dass auch bei Änderungen der versicherungspflichtigen Beschäftigung – etwa durch einen bedingten Jobwechsel – eine Kündigung der Krankenversicherung erforderlich werden kann, wenn ein Wechsel zu einer günstigeren Krankenkasse geplant ist.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste wohnungskuendigung]
+
+[BLOCK vergleich mietkaution-rechner]
+
+
+## FAQ
+F: Welche Kündigungsfrist gilt für Mieter bei der Wohnungskündigung?
+A: Für Mieter beträgt die gesetzliche Kündigungsfrist einheitlich drei Monate, unabhängig von der bisherigen Mietdauer. Das Kündigungsschreiben muss spätestens am dritten Werktag eines Monats beim Vermieter eingehen, damit dieser Monat noch mitzählt.
+F: Welche Formvorschriften gelten für eine Wohnungskündigung?
+A: Nach § 568 BGB ist die Schriftform mit eigenhändiger Unterschrift zwingend erforderlich; E-Mail oder Fax sind unwirksam. Haben zwei Personen den Mietvertrag unterschrieben, müssen beide auch die Kündigung unterzeichnen, sonst ist sie angreifbar.
+F: Welche Kündigungsfristen hat der Vermieter?
+A: Der Vermieter muss gestaffelte Fristen einhalten: drei Monate bei Mietverhältnissen bis fünf Jahre, sechs Monate bei fünf bis acht Jahren und neun Monate bei mehr als acht Jahren Mietdauer. Kürzere Fristen zulasten des Mieters sind unzulässig.
+F: Wann ist eine Abmahnung vor der Kündigung erforderlich?
+A: Vor einer ordentlichen oder fristlosen Kündigung wegen Vertragsverletzungen muss der Vermieter den Mieter grundsätzlich abmahnen. Die Abmahnung fordert zur Unterlassung vertragswidrigen Verhaltens auf und gibt dem Mieter die Chance, Missstände zu beheben.
+
+
+==================== BEITRAG pfaendung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Ihre Rechte bei Pfändung: Schutz und Strategien erklärt
+  heading-1: Pfändung 2026: Schutzmaßnahmen und Ihre Rechte
+  heading-2: Wie funktioniert eine Pfändung rechtlich?
+  heading-3: Neue Pfändungsfreibeträge ab Juli 2026
+  heading-4: So berechnet sich Ihr persönlicher Freibetrag
+  heading-5: Welche Pfändungsarten gibt es?
+  heading-6: Das Pfändungsschutzkonto: Ihr wichtigster Schutz
+  heading-7: Besonderheiten für Selbstständige und Freiberufler
+  heading-8: Wie Sie sich gegen unrechtmäßige Pfändungen wehren
+  heading-9: Häufige Fehler vermeiden
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Pfändung (pfaendung)
+## 0 Ihre Rechte bei Pfändung: Schutz und Strategien erklärt
+
+Bei einer Pfändung wird Vermögen zur Schuldentilgung verwertet. Welche Pfändungsschutzgrenzen 2026 gelten und mit welchen Rechten Sie sich wehren können.
+
+## 1 Pfändung 2026: Schutzmaßnahmen und Ihre Rechte
+
+Pfändung regelt die zwangsweise Verwertung von Schuldnervermögen zur Gläubigerbefriedigung nach rechtskräftigem Urteil. Eine Pfändung kann Ihr Leben dramatisch verändern und finanzielle Existenzängste verstärken. Deshalb müssen Sie Ihre Rechte kennen und welche Schutzmaßnahmen das Gesetz für Sie bereithält. Die Freigrenzen werden jährlich angepasst und schützen ab dem 1. Juli 2026 einen Grundfreibetrag von 1.587,40 Euro monatlich – dieses Existenzminimum steigt bei Unterhaltspflichten deutlich höher.
+
+## 2 Wie funktioniert eine Pfändung rechtlich?
+
+Eine Pfändung ermöglicht es Gläubigern, zur Durchsetzung ihrer Forderungen auf Ihr Vermögen zuzugreifen. Der Gesetzgeber hat Pfändungsfreigrenzen eingeführt, um ein Gleichgewicht zwischen den Interessen von Gläubigern und der Würde von Schuldnern herzustellen.
+
+Bevor eine Pfändung erfolgt, müssen bestimmte Voraussetzungen erfüllt sein. Der Gläubiger benötigt zunächst einen vollstreckbaren Titel – das kann ein Gerichtsbeschluss, ein Mahnbescheid oder ein notarieller Schuldschein sein. Mit diesem Titel kann er beim Amtsgericht die Pfändung beantragen.
+
+Der Prozess läuft dann über einen Gerichtsvollzieher oder bei Lohnpfändungen direkt über Ihren Arbeitgeber ab. Bei einer Lohnpfändung dürfen Gläubiger nur Beträge pfänden, die über dem Freibetrag liegen. Die Höhe richtet sich nach Ihrem Nettoeinkommen und Ihren Unterhaltspflichten.
+
+## 3 Neue Pfändungsfreibeträge ab Juli 2026
+
+Das Bundesministerium der Justiz hat die neuen Freigrenzen veröffentlicht. Die Werte gelten in zwei Phasen:
+
+Bis 30. Juni 2026: Grundfreibetrag 1.555,00 Euro
+
+Ab 1. Juli 2026: Grundfreibetrag 1.587,40 Euro
+
+Die Erhöhung um 32,40 Euro fällt moderater aus als in den Vorjahren, in denen die Steigerung meist zwischen 60 und 90 Euro lag.
+
+| Unterhaltspflichten | Freibetrag bis 30.06.2026 | Freibetrag ab 01.07.2026
+
+| 0 Personen | 1.555,00 € | 1.587,40 €
+
+| 1 Person | 2.140,23 € | 2.184,82 €
+
+| 2 Personen | 2.466,27 € | 2.517,65 €
+
+| 3 Personen | 2.792,31 € | 2.850,48 €
+
+| 4 Personen | 3.118,35 € | 3.183,31 €
+
+| 5 Personen | 3.444,39 € | 3.516,14 €
+
+[SPIEL schaetzen: Wie hoch ist der monatliche Pfändungsfreibetrag für eine Person mit 5 Unterhaltspflichten ab Juli 2026? → 3516]
+
+## 4 So berechnet sich Ihr persönlicher Freibetrag
+
+Ihr Freibetrag folgt einem gestuften System basierend auf Ihrem Nettoeinkommen und den Unterhaltspflichten. Grundlage ist das bereinigte Nettoeinkommen – Ihr Lohn nach Abzug aller gesetzlichen Beiträge.
+
+Ab 1. Juli 2026 gelten diese Werte:
+
+- Erste unterhaltsberechtigte Person: +597,42 Euro
+
+- Jede weitere Person: +332,83 Euro
+
+Liegt Ihr Einkommen unter dem Freibetrag, ist keine Pfändung möglich. Bei einem monatlichen Nettoeinkommen von 2.000 Euro und einer Unterhaltspflicht beträgt Ihr Freibetrag 2.184,82 Euro (ab Juli 2026). Da Ihr Einkommen unter diesem Betrag liegt, erfolgt keine Pfändung. Verdienen Sie mehr, wird nur der Teil oberhalb der Grenze anteilig gepfändet.
+
+## 5 Welche Pfändungsarten gibt es?
+
+Lohnpfändung: Ihr Arbeitgeber behält den pfändbaren Anteil direkt vom Gehalt ein und überweist ihn an den Gläubiger. Er zahlt Ihnen nur den unpfändbaren Teil aus.
+
+Kontopfändung: Ohne Schutz wird Ihr gesamtes Bankguthaben gesperrt. Der gesetzliche Freibetrag ist nur dann geschützt, wenn das Konto als Pfändungsschutzkonto geführt wird.
+
+Sachpfändung: Der Gerichtsvollzieher kann bewegliche Gegenstände pfänden. Allerdings sind persönliche Gegenstände wie Kleidung und notwendiger Hausrat grundsätzlich geschützt.
+
+[SPIEL gewusst: Selbstständige und Freiberufler verwenden dieselben Tabellen – Grundlage ist das pfändbare Einkommen nach Abzug notwendiger Betriebsausgaben (Stand 2026).]
+
+## 6 Das Pfändungsschutzkonto: Ihr wichtigster Schutz
+
+Seit 2012 bietet das P-Konto wirksamen Schutz vor Kontopfändungen. Es ist keine neue Kontoart, sondern ein bestehendes Zahlungskonto mit besonderem Pfändungsschutz.
+
+Jede Person kann von ihrer Bank verlangen, dass ein Zahlungskonto als Pfändungsschutzkonto geführt wird – auch bei negativem Kontostand. Die Umwandlung muss gebührenfrei erfolgen.
+
+Das P-Konto schützt automatisch den monatlichen Grundfreibetrag von derzeit 1.560 Euro (bis Juni 2026). Ab 1. Juli 2026 gilt automatisch 1.590 Euro. Alles darüber hinaus benötigt eine spezielle Bescheinigung.
+
+### Erhöhung des P-Konto-Schutzes
+
+Haben Sie Unterhaltspflichten oder erhalten Sozialleistungen für andere Personen, können Sie Ihren Schutz ausweiten. Dafür ist eine P-Konto-Bescheinigung erforderlich, die folgende Stellen ausstellen:
+
+- Schuldner- und Verbraucherinsolvenzberatungsstellen
+
+- Sozialleistungsträger (Jobcenter, Familienkassen)
+
+- Arbeitgeber, Rechtsanwälte und Steuerberater
+
+Die Erhöhung des Grundfreibetrags von 1.560 auf 1.590 Euro übernimmt die Bank automatisch. Kreditinstitute sind verpflichtet, die neuen Werte ab 1. Juli 2026 ohne Antrag anzuwenden.
+
+### P-Konto-Regelungen 2026
+
+Das P-Konto hat spezielle Regeln:
+
+- Drei-Monats-Regel: Nicht verbrauchtes pfändungsfreies Guthaben überträgt sich in die nächsten drei Monate
+
+- Einzelkonto: Ein P-Konto kann nur als Einzelkonto geführt werden
+
+- Umwandlungsfrist: Die Bank muss innerhalb von vier Geschäftstagen umwandeln
+
+## 7 Besonderheiten für Selbstständige und Freiberufler
+
+Selbstständige und Freiberufler unterliegen denselben Pfändungsregeln, doch die Berechnung unterscheidet sich. Bei ihnen wird das pfändbare Einkommen nach Abzug notwendiger Betriebsausgaben angesetzt.
+
+Betriebliche Ausgaben umfassen:
+
+- Bürokosten und Geschäftsraummiete
+
+- Berufliche Versicherungen
+
+- Fahrtkosten zu Kundenterminen
+
+- Fachliteratur und Weiterbildung
+
+- Steuerberatungskosten
+
+[SPIEL karte: Bereinigtes Nettoeinkommen]
+
+Die Pfändungstabelle gilt auch für Selbstständige vollumfänglich. Freiberufler üben eine selbstständige Arbeit aus, zahlen keine Gewerbesteuer und sind nicht Pflichtmitglied in der IHK. Das kann sich bei der Pfändungsberechnung vorteilhaft auswirken.
+
+## 8 Wie Sie sich gegen unrechtmäßige Pfändungen wehren
+
+Sie haben verschiedene Möglichkeiten, sich zu wehren:
+
+Vollstreckungsabwehrklage: Wenn der Grund für die Forderung nicht mehr besteht oder die Pfändung formal fehlerhaft ist, können Sie Widerspruch einlegen. Eine Rechtsschutzversicherung kann bei den entstehenden Rechtsanwaltskosten hilfreich sein.
+
+Erhöhung des Freibetrags: In besonderen Fällen kann das Vollstreckungsgericht den Freibetrag zeitlich befristet erhöhen – etwa bei außergewöhnlichen Mehrbedarfen.
+
+Aussetzung der Vollstreckung: Bei existenzieller Bedrohung können Sie beim Gericht eine vorläufige Aussetzung beantragen.
+
+Erinnerung: Formfehler des Gerichtsvollziehers können Sie beim Amtsgericht rügen.
+
+## 9 Häufige Fehler vermeiden
+
+Fehler 1: P-Konto zu spät beantragen
+
+Betroffene sollten spätestens im Juni 2026 eine aktualisierte Bescheinigung beantragen.
+
+Fehler 2: Unvollständige Unterhaltsnachweise
+
+Überprüfen Sie, ob alle geschützten Leistungsempfänger erfasst sind. Dies ist insbesondere bei Kindesunterhalt und Ehegattenunterhalt wichtig, da diese direkt die Höhe Ihrer Freibeträge beeinflussen.
+
+Fehler 3: Alte Freibetragswerte
+
+Die Differenz bei einer Person mit Kind beträgt 12,19 Euro monatlich – das summiert sich.
+
+Fehler 4: Falsches Einkommen bei Selbstständigen
+
+Verwenden Sie das bereinigte Nettoeinkommen, nicht das Bruttoeinkommen.
+
+## 10 Fazit
+
+Die Pfändungstabelle 2026 bietet wirksamen Schutz durch gesetzlich garantierte Freigrenzen. Der monatliche Grundfreibetrag erhöht sich ab 1. Juli 2026 auf 1.587,40 Euro, mit Unterhaltspflichten steigt dieser Schutz erheblich – bei einer Person auf 2.184,82 Euro, bei zwei auf 2.517,65 Euro.
+
+Das Pfändungsschutzkonto bildet Ihre wichtigste Verteidigungslinie gegen Kontopfändungen. Nutzen Sie die vierwöchige Umwandlungsfrist und lassen Sie bei Unterhaltspflichten eine entsprechende Bescheinigung ausstellen. Selbstständige und Freiberufler profitieren von denselben Schutzbestimmungen.
+
+Bleiben Sie proaktiv: Informieren Sie sich über Ihre Rechte, beantragen Sie frühzeitig ein P-Konto und aktualisieren Sie Ihre Bescheinigungen vor jeder Anpassung. Bei komplexen Situationen sollten Sie professionelle Beratung nutzen, um Ihre finanzielle Existenz optimal zu schützen.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste pfaendung]
+
+[BLOCK rechner pfaendung]
+
+[BLOCK dokumente pfaendungstabelle-2023-2024]
+
+
+## FAQ
+F: Wie hoch ist der Pfändungsfreibetrag 2026?
+A: Seit dem 1. Juli 2025 liegt die Pfändungsfreigrenze für Alleinstehende ohne Unterhaltspflicht bei 1.559,99 Euro monatlich. Einkommen bis zu dieser Grenze ist vollständig geschützt und kann von Gläubigern nicht gepfändet werden. Die aktuelle Pfändungstabelle gilt bis zum 30. Juni 2026.
+F: Wie funktioniert ein Pfändungsschutzkonto (P-Konto)?
+A: Jeder Kontoinhaber kann sein Girokonto in ein P-Konto umwandeln lassen. Dieses bietet automatisch einen Basisschutz in Höhe von 1.560,00 Euro pro Monat gegen Kontopfändungen. Der Anspruch auf Umwandlung besteht seit dem 1. Juli 2010 gesetzlich.
+F: Wie erhöht sich die Pfändungsfreigrenze bei Unterhaltspflichten?
+A: Für die erste unterhaltsberechtigte Person erhöht sich der Freibetrag um 585,23 Euro, für jede weitere um 326,04 Euro. Bei einer Unterhaltspflicht liegt die Grenze damit bei 2.145,22 Euro, bei zwei Personen bei 2.471,26 Euro. Die Erhöhungen gelten auch für Ehegatten und andere gesetzlich Unterhaltsberechtigte.
+F: Ab welchem Einkommen beginnt die Lohnpfändung?
+A: Liegt Ihr Nettoeinkommen unter 1.559,99 Euro, ist eine Pfändung ausgeschlossen. Ab 1.560,00 Euro werden 5,78 Euro je angefangene zehn Euro oberhalb der Grenze gepfändet. Die Staffelung schützt stets einen erheblichen Teil des Einkommens vor dem Zugriff der Gläubiger.
+
+
+==================== BEITRAG geringfuegige-beschaeftigung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Steuern sparen: Alles über Regeln, Grenzen und Vorteile
+  heading-1: Geringfügige Beschäftigung 2026: Minijob-Grenzen und Regelungen
+  heading-2: Was ist geringfügige Beschäftigung?
+  heading-3: Die Verdienstgrenze 2026
+  heading-4: Minijob oder kurzfristige Beschäftigung?
+  heading-5: Besteuerung von Minijobs
+  heading-6: Sozialversicherungsbeiträge
+  heading-7: Mehrere Minijobs kombinieren
+  heading-8: Der Übergangsbereich: Midijobs
+  heading-9: Compliance und Rechtliches
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Geringfügige Beschäftigung (geringfuegige-beschaeftigung)
+## 0 Steuern sparen: Alles über Regeln, Grenzen und Vorteile
+
+Geringfügige Beschäftigung umfasst Minijob und kurzfristige Beschäftigung. Welche Verdienst- und Zeitgrenzen 2026 gelten und welche Regeln bei Steuer und Abgaben.
+
+## 1 Geringfügige Beschäftigung 2026: Minijob-Grenzen und Regelungen
+
+Geringfügige Beschäftigung ist eine flexible Beschäftigungsform mit besonderen Regelungen bei Steuern und Sozialversicherung. Sie umfasst zwei Varianten: Minijobs mit Verdienstgrenze und kurzfristige Tätigkeiten. 2026 brachte wichtige Neuerungen – von gestiegenen Grenzen bis zu Erleichterungen für Arbeitgeber.
+
+## 2 Was ist geringfügige Beschäftigung?
+
+Geringfügige Beschäftigung unterteilt sich in zwei Formen:
+
+Entgeltgeringfügigkeit: Der monatliche Verdienst darf 603 Euro nicht übersteigen (2026). Dies ist ein Minijob mit regelmäßiger Beschäftigung.
+
+Zeitgeringfügigkeit: Die Arbeit ist auf maximal 70 Tage oder drei Monate pro Kalenderjahr begrenzt. Die Höhe des Verdienstes spielt keine Rolle.
+
+[SPIEL karte: Minijob]
+
+Minijobber haben vollständige arbeitsrechtliche Ansprüche: Mindestlohn (13,90 Euro/Stunde 2026), Urlaubstage, Entgeltfortzahlung im Krankheitsfall und Kündigungsschutz. Sie sind automatisch unfallversichert.
+
+Solche Jobs finden sich überall – von Gastronomie und Einzelhandel bis zu Bürotätigkeiten und Haushaltshilfen. Beliebt sind sie als Nebenverdienst neben Studium, Rente oder Hauptbeschäftigung.
+
+## 3 Die Verdienstgrenze 2026
+
+Die monatliche Grenze für geringfügige Beschäftigung liegt 2026 bei 603 Euro (Jahresgrenze: 7.236 Euro). Diese Grenze ist an den gesetzlichen Mindestlohn gekoppelt und passt sich automatisch an.
+
+Die Berechnung: Mindestlohn × 10 Stunden × 52 Wochen ÷ 12 Monate = 13,90 € × 10 × 52 ÷ 12 = 603 Euro.
+
+| Jahr | Mindestlohn | Monatliche Grenze | Jahresgrenze
+
+| 2025 | 12,82 Euro | 556 Euro | 6.672 Euro
+
+| 2026 | 13,90 Euro | 603 Euro | 7.236 Euro
+
+| 2027 | 14,60 Euro | 633 Euro | 7.596 Euro
+
+[SPIEL gewusst: Unvorhergesehene Überschreitungen sind in maximal zwei Monaten pro Jahr zulässig – bis zur Jahresgrenze von 8.442 Euro. Dies gilt nur bei unvorhersehbaren Ereignissen wie Krankheitsvertretungen.]
+
+Die maximal zulässige Arbeitszeit beträgt bei Mindestlohn etwa 43 Stunden monatlich (rund 10 Stunden wöchentlich). Bei höheren Stundenlöhnen reduziert sich die Arbeitszeit entsprechend.
+
+## 4 Minijob oder kurzfristige Beschäftigung?
+
+Bei Minijobs gilt die Verdienstgrenze von 603 Euro monatlich. Die Arbeit kann regelmäßig ausgeübt werden.
+
+Bei kurzfristiger Beschäftigung spielt der Verdienst keine Rolle, aber die Dauer ist begrenzt: maximal 70 Arbeitstage oder drei Monate pro Jahr. Die Tätigkeit darf nicht berufsmäßig sein – also nicht der Haupterwerb.
+
+[SPIEL mythos: Landwirtschaftliche Betriebe nutzen seit 2026 dieselben Zeitgrenzen wie andere Branchen → nein]
+
+Seit Januar 2026 wurden die Zeitzgrenzen für kurzfristige Beschäftigungen in landwirtschaftlichen Betrieben erweitert – auf 15 Wochen oder 90 Arbeitstage pro Jahr. Diese Regelung soll die Personalsituation in der Erntezeit entlasten. Sie gilt für pflanzliche und tierische Erzeugung, Forstwirtschaft, Fischerei und Aquakultur.
+
+## 5 Besteuerung von Minijobs
+
+Geringfügige Beschäftigung ist nicht automatisch steuerfrei. Der Arbeitgeber wählt zwischen zwei Optionen:
+
+Pauschalbesteuerung (2 %): Der Arbeitgeber zahlt eine Pauschallohnsteuer von 2 Prozent. Der Minijobber bleibt vollständig steuerfrei. Keine Angabepflicht in der Steuererklärung.
+
+Individuelle Besteuerung: Nach den Lohnsteuerabzugsmerkmalen (ELStAM) mit regulärer Steuerklasse. Hier greift die Lohnsteuer nach dem persönlichen Steuersatz. Vorteil für Ferienjobber: Liegt das Jahreseinkommen unter 12.348 Euro (Grundfreibetrag 2026), bleibt alles steuerfrei. Mit Steuererklärung können abgeführte Steuern zurückgeholt werden.
+
+## 6 Sozialversicherungsbeiträge
+
+Für gewerbliche Arbeitgeber liegen die Pauschalbeiträge 2026 bei rund 31 Prozent des Verdienstes:
+
+- Krankenversicherung: 13,00 %
+
+- Rentenversicherung: 15,00 %
+
+- Pauschsteuer: 2,00 %
+
+- Umlage U1: 0,80 % (neu gesenkt von 1,10 %)
+
+- Umlage U2: 0,24 %
+
+- Insolvenzgeldumlage: 0,12 %
+
+Bei 603 Euro Verdienst zahlt der Arbeitgeber monatlich etwa 187 Euro an Abgaben. Die Sozialversicherung funktioniert bei Minijobs nach vereinfachten Regeln mit Pauschalabgaben.
+
+Für Minijobber: Sie zahlen einen reduzierten Eigenanteil zur Rentenversicherung von 3,6 Prozent (gewerblich) oder 13,6 Prozent (Privathaushalte). Das entspricht bei 603 Euro etwa 22 Euro monatlich. Minijobber können sich schriftlich von der Rentenversicherungspflicht befreien.
+
+[SPIEL schaetzen: Welcher Eigenanteil zur Rentenversicherung fällt bei 603 Euro Verdienst an? → 22]
+
+Neuerung ab Juli 2026: Minijobber können ihre Rentenversicherungsbefreiung rückgängig machen. Die Rückkehr zur Befreiung ist danach nicht mehr möglich – ein wichtiger Punkt für die Altersvorsorge.
+
+## 7 Mehrere Minijobs kombinieren
+
+Mehrere Minijobs sind erlaubt, aber die Verdienste werden zusammengerechnet. Die Gesamtsumme darf 603 Euro monatlich nicht überschreiten. Ansonsten werden alle Jobs sozialversicherungspflichtig.
+
+Wichtige Ausnahmen:
+
+Ein Minijob neben einer sozialversicherungspflichtigen Hauptbeschäftigung bleibt abgabenfrei – auch wenn Nebenjob die 603-Euro-Grenze überschreitet.
+
+Ein regulärer Minijob und eine kurzfristige Beschäftigung (bis 70 Tage) lassen sich kombinieren. Die kurzfristige Arbeit wird nicht auf die Verdienstgrenze angerechnet.
+
+Praktisches Beispiel: Ein Student arbeitet im Café für 350 Euro und im Büro für 180 Euro – zusammen 530 Euro unter der Grenze. Zusätzlich kann er in den Semesterferien kurzfristig arbeiten, ohne dass dies die Minijob-Grenze belastet.
+
+Kontrageispiel: Verdienste von 350 Euro bei Firma A und 300 Euro bei Firma B summieren sich auf 650 Euro – über der 603-Euro-Grenze. Beide Jobs werden dann sozialversicherungspflichtig mit möglichen Nachzahlungen.
+
+## 8 Der Übergangsbereich: Midijobs
+
+Der Übergangsbereich (Midijob) liegt 2026 zwischen 603,01 Euro und 2.000 Euro monatlich. Beschäftigte zahlen reduzierte Sozialversicherungsbeiträge, genießen aber vollen Schutz. Anders als beim Minijob ist die Rentenversicherung verpflichtend.
+
+## 9 Compliance und Rechtliches
+
+Minijobber (außer Haushaltshilfen) müssen täglich ihre Arbeitszeiten erfassen. Die Aufzeichnungen müssen zwei Jahre aufbewahrt werden. Arbeitsverträge sind schriftlich erforderlich.
+
+Wichtige Punkte:
+
+- Mindestlohn einhalten (13,90 Euro/Stunde)
+
+- Bei Grenzüberschreitung drohen Nachzahlungen und hohe Bußgelder
+
+- Anmeldung bei der Minijob-Zentrale (Deutsche Rentenversicherung Knappschaft-Bahn-See)
+
+Seit Januar 2026: Ein gemeinsamer Beitragsnachweis für alle Beschäftigten genügt. Die alte Trennung nach Rechtskreisen West und Ost entfällt. Bestehende Dauer-Beitragsweisungen müssen angepasst werden.
+
+## 10 Fazit
+
+Geringfügige Beschäftigung bleibt 2026 für beide Seiten attraktiv. Die Verdienstgrenze stieg auf 603 Euro, die Umlage U1 sank von 1,1 auf 0,8 Prozent – eine Entlastung für Arbeitgeber. Ab Juli 2026 können Minijobber ihre Rentenversicherungsbefreiung einzeln rückgängig machen. In der Landwirtschaft sind 90 Arbeitstage statt 70 pro Jahr möglich.
+
+Da die Minijob-Grenze automatisch an den Mindestlohn gekoppelt ist, steigt sie 2027 bereits auf 633 Euro. Arbeitgeber sollten ihre Minijob-Verhältnisse regelmäßig überprüfen und die günstigste Besteuerungsart wählen. Die Pauschalbesteuerung von 2 Prozent spart beiden Seiten Verwaltungsaufwand.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste geringfuegige-beschaeftigung]
+
+[BLOCK rechner minijob]
+
+[BLOCK dokumente geringfuegige-beschaeftigung]
+
+
+## FAQ
+F: Wie hoch ist die Minijob-Grenze 2026?
+A: Die Minijob-Grenze steigt zum 1. Januar 2026 auf 603 Euro monatlich beziehungsweise 7.236 Euro jährlich. Diese Anhebung erfolgt automatisch durch die dynamische Kopplung an den Mindestlohn, der 2026 auf 13,90 Euro pro Stunde steigt.
+F: Welche Sozialabgaben zahlen Arbeitgeber für Minijobber?
+A: Gewerbliche Arbeitgeber zahlen 13 Prozent Krankenversicherung, 15 Prozent Rentenversicherung, 0,8 Prozent Umlage U1, 0,24 Prozent Umlage U2 und 0,12 Prozent Insolvenzgeldumlage. Die Umlage U1 sinkt zum 1. Januar 2026 von 1,1 auf 0,8 Prozent.
+F: Darf die Verdienstgrenze überschritten werden?
+A: Ein unvorhergesehenes Überschreiten der Geringfügigkeitsgrenze ist in maximal zwei Monaten pro Kalenderjahr zulässig. Dabei darf ein Minijobber innerhalb von zwölf Monaten höchstens das 14-fache der Geringfügigkeitsgrenze verdienen, ab 2026 also maximal 8.442 Euro.
+F: Müssen Minijobber Beiträge zur Rentenversicherung zahlen?
+A: Minijobber zahlen grundsätzlich einen Eigenanteil zur Rentenversicherung. 2026 beträgt dieser 3,6 Prozent des Verdienstes bei gewerblichen Minijobs und 13,6 Prozent bei Minijobs in Privathaushalten. Eine Befreiung ist auf Antrag möglich.
+
+
+==================== BEITRAG bafoeg ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Staatliche Ausbildungsförderung: BAföG-Anspruch &amp; Antrag erklärt
+  heading-1: BAföG 2026: Höchstsatz, Anspruch und Antrag
+  heading-2: Wie hoch ist der BAföG-Höchstsatz 2026?
+  heading-3: Wer hat Anspruch auf BAföG?
+  heading-4: BAföG berechnen: Einkommens- und Vermögensgrenzen
+  heading-5: Wie funktioniert die BAföG-Antragstellung?
+  heading-6: Was ist die Studienstarthilfe?
+  heading-7: Wie funktioniert die BAföG-Rückzahlung?
+  heading-8: Was ändert sich beim BAföG 2026?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Bafög (bafoeg)
+## 0 Staatliche Ausbildungsförderung: BAföG-Anspruch & Antrag erklärt
+
+BAföG fördert Studierende und Schüler unabhängig vom Einkommen der Eltern. Wie hoch der Höchstsatz 2026 ist, wer Anspruch hat und wie Sie es beantragen.
+
+## 1 BAföG 2026: Höchstsatz, Anspruch und Antrag
+
+BAföG regelt die staatliche Förderung von Studierenden und Schülern in Deutschland.
+
+Das Bundesausbildungsförderungsgesetz ermöglicht seit über 50 Jahren chancengleichen Zugang zu Bildung unabhängig von der finanziellen Situation der Familie. Mit der Reform von 2024 und den aktuellen Regelungen für 2026 bietet BAföG verbesserte Bedarfssätze, flexiblere Studiengestaltung und erweiterte Unterstützung für den Studienstart.
+
+## 2 Wie hoch ist der BAföG-Höchstsatz 2026?
+
+Der BAföG-Höchstsatz beträgt im Sommersemester 2026 unverändert 992 Euro monatlich, wenn Sie eine eigene Wohnung haben und kranken- sowie pflegeversichert sind. Wer über die Eltern krankenversichert ist, bekommt monatlich höchstens 855 Euro (Stand 2026).
+
+Der Höchstsatz setzt sich aus mehreren Komponenten zusammen:
+
+| Bestandteil | Betrag (Euro) | Voraussetzung
+
+| Grundbedarf | 475 | Studierende
+
+| Wohnpauschale | 380 | Eigene Wohnung
+
+| Kranken-/Pflegeversicherung | 137 | Selbst versichert
+
+| Höchstsatz gesamt | 992 | Nicht bei Eltern
+
+Bei Studierenden ab dem 31. Lebensjahr steigt der Zuschlag für Kranken- und Pflegeversicherung auf 205 Euro, wodurch sich der Höchstsatz auf 1.040 Euro erhöht (Stand 2026).
+
+[SPIEL karte: Bedarfssatz]
+
+## 3 Wer hat Anspruch auf BAföG?
+
+BAföG erhalten deutsche Staatsangehörige sowie bestimmte ausländische Studierende, die eine förderfähige Ausbildung absolvieren. Grundsätzlich sind dies Studiengänge an Hochschulen, Akademien, höheren Fachschulen sowie bestimmte Schularten ab der 10. Klasse.
+
+Das Alter spielt ebenfalls eine Rolle: Bei Studierenden, die nicht mehr gesetzlich familienversichert sind, in der Regel ab dem 25. Lebensjahr, wird ein Zuschuss zur Kranken- und Pflegeversicherung gezahlt. Ab dem 31. Lebensjahr steigt der Zuschlag auf 205 Euro (Stand April 2026).
+
+Die wichtigsten Voraussetzungen im Überblick:
+
+- Deutsche Staatsangehörigkeit oder gleichgestellter Status
+
+- Erstmalige Ausbildung (mit wenigen Ausnahmen)
+
+- Ausbildung an einer förderfähigen Bildungsstätte
+
+- Eignung und Leistung für die gewählte Ausbildung
+
+- Bedürftigkeit (abhängig von Einkommen und Vermögen)
+
+[SPIEL mythos: BAföG gibt es nur für Deutsche → nein]
+
+## 4 BAföG berechnen: Einkommens- und Vermögensgrenzen
+
+Die Höhe der BAföG-Förderung hängt maßgeblich vom Einkommen der Eltern, des Ehepartners und vom eigenen Einkommen sowie Vermögen ab. Bei Ehegatten und Eltern ist das Einkommen im vorletzten Kalenderjahr vor der Antragstellung relevant. Stellst du deinen Antrag also z.B. im Jahr 2026, kommt es auf das Einkommen im Jahr 2024 an.
+
+### Eltern-Freibeträge 2026
+
+Die wichtigsten Freibeträge (monatlich): Freibetrag für verheiratete Eltern (zusammen): 2.415 € netto, Freibetrag für alleinerziehenden Elternteil: 1.605 € netto. Pro berücksichtigungsfähigem Geschwisterkind steigt der Eltern-Freibetrag um: 730 € monatlich für jedes weitere Kind, das selbst kein BAföG erhält.
+
+### Eigenes Einkommen
+
+Während für die Monate in 2025 noch ein monatlicher Freibetrag von 556 € galt, werden für alle Monate ab Januar 2026 die neuen 603 € angesetzt. Verdienst du im Durchschnitt mehr als die aktuelle Einkommensgrenze von 603 € pro Monat, wird der übersteigende Betrag auf deinen BAföG-Anspruch angerechnet.
+
+[SPIEL quiz: Wie viel dürfen Sie 2026 monatlich hinzuverdienen, ohne dass Ihr BAföG gekürzt wird?]
+
+### Vermögensgrenzen
+
+Beim Vermögen gilt im Jahr 2026 ein Freibetrag von 15.000 Euro für Antragstellende unter 30 Jahren und 45.000 Euro für Antragstellende ab 30 Jahren. Eine wichtige Abgrenzung: Das Vermögen deiner Eltern spielt für dein BAföG keine Rolle. Sie können eine abbezahlte Immobilie haben und sechsstellig im Depot sitzen – solange ihr Einkommen passt, ändert das an deiner Förderung nichts.
+
+## 5 Wie funktioniert die BAföG-Antragstellung?
+
+Die Beantragung ist ausschließlich digital über bafoeg-digital.de möglich. Der Antrag sollte 6 bis 8 Wochen vor Semesterbeginn gestellt werden, da BAföG nicht rückwirkend gezahlt wird! Die Förderung beginnt erst ab dem Monat der Antragstellung.
+
+Die wichtigsten Unterlagen:
+
+- Formblatt 1 (Grundantrag)
+
+- Formblatt 2 (Studienbescheinigung)
+
+- Formblatt 3 (Einkommenserklärung der Eltern)
+
+- Steuerbescheid der Eltern vom vorletzten Kalenderjahr
+
+- Immatrikulationsbescheinigung
+
+- Mietvertrag oder Meldebescheinigung
+
+Sollte sich die Einkommenssituation einer Person zwischenzeitlich deutlich verschlechtert haben, kannst du einen sog. Aktualisierungsantrag stellen. Wenn diese aktuell deutlich weniger verdienen – z.B. durch Renteneintritt, Arbeitslosigkeit oder Jobwechsel – kannst du einen Aktualisierungsantrag (§ 24 Abs. 3 BAföG) stellen.
+
+## 6 Was ist die Studienstarthilfe?
+
+Die „Studienstarthilfe" von 1.000 Euro soll hier helfen. Allerdings nur denen, die noch unter 25 Jahre alt sind und vor dem Studium selbst (oder über die Eltern) Bürgergeld, Kinderzuschlag, Wohngeld oder einige wenige andere Sozialleistungen bezogen haben.
+
+Eine Anrechnung von Einkommen oder die Anrechnung der Studienstarthilfe auf andere Sozialleistungen findet nicht statt, so dass die Starthilfe von 1.000 Euro in jedem Fall zusätzlich zur Verfügung steht. Die Studienstarthilfe ist ein Zuschuss und muss grundsätzlich nicht zurückgezahlt werden.
+
+Anspruchsvoraussetzungen:
+
+- Unter 25 Jahre alt
+
+- Erstmalige Immatrikulation im Vollzeitstudium
+
+- Bezug bestimmter Sozialleistungen im Monat vor Studienbeginn
+
+- Antragstellung bis Ende des zweiten Studienmonats
+
+Spätestens im zweiten Monat des ersten Studiums muss der Antrag gestellt werden. Bei Vorlesungsstart im Oktober also spätestens Ende November, bei Vorlesungsstart im September spätestens Ende Oktober.
+
+[SPIEL gewusst: Die Studienstarthilfe ist kein Gerücht und kein versteckter Bonus, sondern eine reale Einmalzahlung von 1.000 Euro für Studienanfängerinnen und Studienanfänger, die die Voraussetzungen erfüllen (Stand 2026).]
+
+## 7 Wie funktioniert die BAföG-Rückzahlung?
+
+Studierende an Höheren Fachschulen, Akademien und Hochschulen erhalten BAföG zur Hälfte als Zuschuss, zur Hälfte als Darlehen. Das Darlehen muss natürlich zurückgezahlt werden.
+
+### Rückzahlungsbedingungen
+
+Das BAföG-Darlehen ist grundsätzlich zinslos und die Rückzahlungsbedingungen sind sehr sozial. Und: Niemand muss mehr als 77 Raten, aktuell 10.010 Euro zurückzahlen (Stand 2026).
+
+Die monatliche Rate für die Darlehensrückzahlung beträgt 130 Euro. Die Rate wird im Dreimonatsrhythmus fällig, also 390 Euro alle drei Monate.
+
+Wichtige Regelungen zur Rückzahlung:
+
+- Start: 5 Jahre nach Ende der Förderungshöchstdauer
+
+- Eine Schuldenobergrenze von 10.010 Euro gilt, wenn Du die erste Förderung ab 1. September 2019 oder später erhalten hast
+
+- Maximale Rückzahlungsdauer: 20 Jahre
+
+- Zinslos während der gesamten Laufzeit
+
+### Freistellung bei geringem Einkommen
+
+Der aktuelle Freibetrag (Stand 2026) liegt bei 1.690 Euro. Wenn dein Einkommen darunterliegt, kannst du dich wahrscheinlich von der Rückzahlung freistellen lassen. Während der Freistellung musst du keine Raten zahlen.
+
+## 8 Was ändert sich beim BAföG 2026?
+
+Die großen Änderungen sind bereits seit dem Wintersemester 2024/25 in Kraft. Für 2026 gelten folgende Neuerungen:
+
+Am 1. Januar 2026 wurde die Hinzuverdienstgrenze auf 603 Euro pro Monat angepasst, passend zur neuen Minijobgrenze.
+
+Geplante Änderungen für das Wintersemester 2026/27 sind noch nicht beschlossen: Am 29. April 2026 hat sich die schwarz-rote Koalition (CDU/CSU + SPD) auf die Finanzierung der BAföG-Reform geeinigt – die Mittel sind im Bundeshaushalt eingeplant. Damit kann das Gesetzgebungsverfahren formal beginnen. Ein Referentenentwurf liegt aber noch nicht vor. Der Zeitplan ist sehr eng, eine Verschiebung der Wohnpauschalen-Erhöhung auf WS 2027/28 wird von Beobachtern als zunehmend wahrscheinlich eingeschätzt.
+
+Die geplanten Verbesserungen umfassen:
+
+- Erhöhung der Wohnpauschale auf 440 Euro (das wäre eine Erhöhung um 60 Euro monatlich)
+
+- Anhebung der BAföG-Grundpauschale von aktuell 475 Euro auf das Grundsicherungsniveau – das entspricht dem Regelbedarf beim Bürgergeld. Der Regelbedarf beläuft sich derzeit auf 563 Euro
+
+## 9 Fazit
+
+BAföG bleibt 2026 das zentrale Instrument der Studienfinanzierung in Deutschland. Mit dem aktuellen Höchstsatz von 992 Euro monatlich und der neuen Hinzuverdienstgrenze von 603 Euro bietet es finanzielle Sicherheit für das Studium. Die Studienstarthilfe von 1.000 Euro unterstützt gezielt bedürftige Studienanfänger bei den ersten Schritten. Durch die sozialverträgliche Rückzahlung mit der Schuldenobergrenze von maximal 10.010 Euro bleibt BAföG eine attraktive Finanzierungsquelle.
+
+Wer über BAföG hinaus weitere Mittel braucht, kann sich auch den KfW Studienkredit ansehen – dieser bietet eine zusätzliche Finanzierungsmöglichkeit. Auch wenn weitere Erhöhungen für das Wintersemester 2026/27 noch nicht beschlossen sind, empfiehlt sich die frühzeitige Antragstellung – BAföG wird nicht rückwirkend gezahlt und die Förderung beginnt erst ab dem Monat der Antragstellung.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste bafoeg]
+
+[BLOCK rechner bafoeg]
+
+
+## FAQ
+F: Wie hoch ist der BAföG-Höchstsatz 2025?
+A: Der BAföG-Höchstsatz für Studierende mit eigener Wohnung beträgt seit dem Wintersemester 2024/25 monatlich 992 Euro. Er setzt sich zusammen aus 475 Euro Grundbedarf, 380 Euro Wohnpauschale und 137 Euro Zuschuss für Kranken- und Pflegeversicherung. Die letzte Erhöhung lag bei 58 Euro gegenüber dem Vorjahr.
+F: Wie viel darf man beim BAföG dazuverdienen?
+A: Seit Herbst 2024 liegt die anrechnungsfreie Verdienstgrenze bei 556 Euro monatlich, was der Minijob-Grenze ab Januar 2025 entspricht. Im Bewilligungszeitraum von zwölf Monaten dürfen Sie insgesamt 6.672 Euro verdienen, ohne dass BAföG-Leistungen gekürzt werden.
+F: Was ist die Studienstarthilfe?
+A: Die Studienstarthilfe ist eine einmalige Unterstützung von 1.000 Euro für Studierende unter 25 Jahren aus Bürgergeld-Haushalten oder Familien mit Kinderzuschlag. Sie soll den Einstieg ins erste Studium erleichtern und hilft bei Umzugskosten, Kaution oder der Erstausstattung. Ein BAföG-Anspruch ist für die Studienstarthilfe nicht zwingend erforderlich.
+F: Wie lange wird BAföG gezahlt?
+A: Die BAföG-Förderungshöchstdauer entspricht grundsätzlich der Regelstudienzeit. Seit der Reform 2024 erhalten Studierende zusätzlich ein einmaliges Flexibilitätssemester, das im Bachelor- oder Masterstudium genutzt werden kann. Ein Fachrichtungswechsel ist bis zum Beginn des fünften Fachsemesters möglich, sofern ein wichtiger Grund vorliegt.
+
+
+==================== BEITRAG vermoegenswirksame-leistungen ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Vermögenswirksame Leistungen: Vermögensaufbau mit Arbeitgeber
+  heading-1: Vermögenswirksame Leistungen: Der praktische Leitfaden 2026
+  heading-2: Was sind vermögenswirksame Leistungen?
+  heading-3: Wer hat Anspruch?
+  heading-4: Die staatliche Förderung 2026
+  heading-5: Welche Anlageformen gibt es?
+  heading-6: Wohnungsbauprämie nutzen
+  heading-7: Laufzeit und Sperrfristen
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Vermögenswirksame Leistungen (vermoegenswirksame-leistungen)
+## 0 Vermögenswirksame Leistungen: Vermögensaufbau mit Arbeitgeber
+
+Vermögenswirksame Leistungen sind ein Zuschuss vom Arbeitgeber zum Sparen. Wer Anspruch hat, wie viel drin ist und wie Sie die Förderung 2026 nutzen.
+
+## 1 Vermögenswirksame Leistungen: Der praktische Leitfaden 2026
+
+Vermögenswirksame Leistungen sind Geldbeträge vom Arbeitgeber zusätzlich zum Gehalt für den Vermögensaufbau. Das Fünfte Vermögensbildungsgesetz (5. VermBG) regelt diese Mitarbeiterförderung. Mit geschickter Nutzung sparen Sie nach sieben Jahren mehrere tausend Euro an – oft ohne einen eigenen Cent. Seit 2024 profitieren durch angehobene Einkommensgrenzen deutlich mehr Menschen von staatlicher Förderung.
+
+Diese Leistungen gehören zu den unterschätzten Vorteilen im deutschen Arbeitsleben. Viele Arbeitnehmer wissen nicht von ihrem Anspruch oder lassen das Geld verfallen.
+
+## 2 Was sind vermögenswirksame Leistungen?
+
+Vermögenswirksame Leistungen fließen nicht auf Ihr Gehaltskonto, sondern direkt in eine Sparanlage. Die rechtliche Grundlage ist das Fünfte Vermögensbildungsgesetz.
+
+Ein gesetzlicher Anspruch besteht nicht. Berechtigt sind Arbeitnehmer, Auszubildende und Beamte, sofern der Arbeits- oder Tarifvertrag entsprechende Regelungen enthält. Der Arbeitgeber zahlt nur dann, wenn ein Tarifvertrag dies vorsieht – ansonsten freiwillig.
+
+Die Höhe variiert stark nach Branche. Im öffentlichen Dienst sind es 6,65 Euro monatlich, andere Arbeitgeber zahlen bis zu 40 Euro. Es gibt keine gesetzliche Obergrenze – die 40 Euro sind lediglich ein verbreiteter Standardwert.
+
+## 3 Wer hat Anspruch?
+
+### Berechtigte Personengruppen:
+
+- Alle Angestellten mit entsprechenden Tarifvertragsregelungen
+
+- Auszubildende in Betrieben mit VL-Vereinbarungen
+
+- Beamte, Richter und Soldaten nach dem Vermögensbildungsgesetz
+
+- Beschäftigte im öffentlichen Dienst nach TVöD oder TV-L
+
+Selbstständige und Freiberufler können keine vermögenswirksamen Leistungen erhalten.
+
+[SPIEL schaetzen: Wie viel erhalten Beschäftigte im öffentlichen Dienst monatlich als vermögenswirksame Leistung? → 6.65]
+
+Besondere Regelungen gelten für verschiedene Gruppen. Beamte im Vorbereitungsdienst erhalten 13,29 Euro pro Monat, sofern ihre Anwärterbezüge bestimmte Grenzen nicht erreichen. Teilzeitbeschäftigte erhalten anteilige vermögenswirksame Leistungen entsprechend ihrer Arbeitszeit.
+
+## 4 Die staatliche Förderung 2026
+
+Die Arbeitnehmer-Sparzulage ist ein Zuschuss von bis zu 123 Euro pro Jahr. Die Höhe hängt von der Anlageform und Ihrem zu versteuernden Einkommen ab.
+
+### Fördersätze nach Anlageform:
+
+| Anlageform | Fördersatz | Max. Sparbetrag | Max. Zulage
+
+| Fondssparpläne/ETFs | 20% | 400 € | 80 €
+
+| Bausparverträge | 9% | 470 € | 43 €
+
+| Banksparpläne | 0% | - | 0 €
+
+Verheiratete können die Beträge verdoppeln, wenn beide Partner vermögenswirksame Leistungen anlegen – maximal 246 Euro jährlich.
+
+Die kombinierte Förderung ist attraktiv: Mit zwei VL-Verträgen in verschiedenen Anlageformen erhalten Sie die maximale Arbeitnehmersparzulage von 123 Euro. Sie können beispielsweise einen VL-Bausparvertrag und einen VL-Fondssparplan kombinieren.
+
+[SPIEL gewusst: Seit 2024 sind rund 14 Millionen mehr Arbeitnehmer förderberechtigt durch neue Einkommensgrenzen von 40.000 Euro (Alleinstehende) / 80.000 Euro (Verheiratete).]
+
+### Einkommensgrenzen seit 2024:
+
+Für Ledige liegt die Grenze bei 40.000 Euro, für Ehepaare bei 80.000 Euro jährlich (zu versteuerndes Einkommen). Arbeitnehmer mit höherem Einkommen erhalten keine Sparzulagen.
+
+Durch Werbungskosten, Sonderausgaben und Kinderfreibeträge können auch Besserverdiener oft noch gefördert werden.
+
+## 5 Welche Anlageformen gibt es?
+
+### ETF- und Fondssparpläne
+
+Die beste Option ist der Fondssparplan mit ETF-Sparplänen. Sie bieten die höchste Rendite und höchste Förderung. Ein weltweit gestreuter Aktien-ETF erzielt historisch etwa 6 Prozent pro Jahr bei gleichzeitig 20-prozentiger staatlicher Förderung. Diese Anlage eignet sich für alle, die langfristig Vermögen aufbauen und moderate Kursschwankungen akzeptieren.
+
+### Bausparverträge
+
+Ein Bausparvertrag für vermögenswirksame Leistungen lohnt sich nur, wenn Sie in absehbarer Zeit eine Immobilie kaufen, bauen oder renovieren möchten. Die staatliche Förderung beträgt 9 Prozent.
+
+Die Nachteile überwiegen für reine Sparer: Niedrige Guthabenzinsen, oft unter der Inflationsrate, Abschlusskosten und die Bindung an wohnwirtschaftliche Verwendung.
+
+### Banksparpläne
+
+Banksparpläne bieten maximale Sicherheit bei minimaler Rendite – etwa 1 Prozent pro Jahr. Sie werden nicht staatlich gefördert und eignen sich nur für sehr risikoaverse Sparer. Die Zinsen können oft nicht die Inflation ausgleichen.
+
+### Baukredittilgung
+
+Immobilienbesitzer mit laufendem Baukredit können vermögenswirksame Leistungen zur Tilgung verwenden. Die monatliche Rate bleibt gleich, aber Ihre Belastung sinkt. Oder Sie erhöhen die Tilgung und zahlen den Kredit schneller ab, wodurch Zinsen gespart werden.
+
+[SPIEL mythos: Bei vermögenswirksamen Leistungen gibt es eine gesetzliche Obergrenze von 40 Euro monatlich. → nein]
+
+## 6 Wohnungsbauprämie nutzen
+
+Bausparer können neben der Arbeitnehmersparzulage auch die Wohnungsbauprämie nutzen – allerdings nur für eigene Einzahlungen, nicht für VL vom Arbeitgeber.
+
+Die Prämie beträgt 10 Prozent der Jahreseinzahlungen: maximal 70 Euro für Singles, 140 Euro für Paare.
+
+### Einkommensgrenzen:
+
+Alleinstehende: 35.000 Euro zu versteuerndes Einkommen
+
+Verheiratete: 70.000 Euro zu versteuerndes Einkommen
+
+Seit 2024 werden vermögenswirksame Leistungen nicht mehr mit der Wohnungsbauprämie gefördert. Wer die maximale Prämie erhält, muss den festgelegten Höchstbetrag durch eigene Einzahlungen oder Zinsgutschriften erreichen.
+
+VL-Zahlungen zählen nicht als Zahlungen aus eigenen Mitteln. Wer jedoch sowohl eigene Einzahlungen als auch VL leistet, kann für beide Anteile getrennt Förderung beantragen.
+
+## 7 Laufzeit und Sperrfristen
+
+VwL-Fondssparpläne haben eine gesetzliche Sperrfrist von 7 Jahren. Bausparverträge benötigen 7 Jahre Ansparzeit und 1 Jahr Ruhezeit.
+
+Die Laufzeit teilt sich in zwei Phasen:
+
+- Ansparphase: 6 Jahre mit monatlichen Einzahlungen
+
+- Ruhezeit: 1 Jahr ohne Einzahlungen, aber mit Verzinsung
+
+Vorzeitige Kündigung führt zum Verlust der Sparzulage. Nur bei Härtefällen wie Arbeitslosigkeit sind Ausnahmen möglich.
+
+### Beantragung der Arbeitnehmersparzulage:
+
+Die Zulage wird nicht automatisch gewährt – Sie müssen sie aktiv beantragen. Das geht ausschließlich über die Einkommensteuererklärung. Ihre Bausparkasse stellt jährlich eine Bescheinigung aus. In der Anlage VL tragen Sie die eingezahlten Beträge ein. Die Zulage wird mit der Steuerfestsetzung gutgeschrieben.
+
+## 8 Fazit
+
+Vermögenswirksame Leistungen sind ein wertvolles Geschenk für Ihren Vermögensaufbau. Ein Rechenbeispiel zeigt das Potenzial: Bei 40 Euro VL monatlich in einem ETF-Sparplan fließen über 6 Jahre 2.880 Euro in Ihr Depot. Bei 6 Prozent Rendite plus einjähriger Ruhezeit beträgt Ihr Guthaben etwa 3.663 Euro. Zusätzlich erhalten Sie sechs Jahre lang 80 Euro Arbeitnehmersparzulage – weitere 480 Euro. Insgesamt haben Sie etwa 4.143 Euro angespart, ohne einen eigenen Cent eingezahlt zu haben.
+
+Seit 2024 profitieren mehr Menschen von der erhöhten Förderung. Für die meisten Arbeitnehmer empfiehlt sich ein ETF-Sparplan als beste Kombination. Fragen Sie Ihren Arbeitgeber nach vermögenswirksamen Leistungen und lassen Sie diese nicht verfallen – über sieben Jahre bauen Sie systematisch Vermögen auf.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste vermoegenswirksame-leistungen]
+
+
+## FAQ
+F: Was sind vermögenswirksame Leistungen?
+A: Vermögenswirksame Leistungen (VL) sind Geldbeträge, die Ihr Arbeitgeber zusätzlich zum Gehalt für Ihren Vermögensaufbau zahlt. Das Geld fließt direkt in eine Sparanlage Ihrer Wahl, nicht auf Ihr Gehaltskonto. Anspruch haben Arbeitnehmer, Auszubildende und Beamte, sofern ihr Arbeits- oder Tarifvertrag entsprechende Regelungen enthält.
+F: Wie hoch ist die staatliche Förderung bei VL?
+A: Bei VL-Fondssparplänen gewährt der Staat 20 Prozent der Einzahlungen bis maximal 400 Euro jährlich (Verheiratete: 800 Euro), also bis zu 80 Euro Arbeitnehmersparzulage. Bei VL-Bausparverträgen sind es 9 Prozent auf bis zu 470 Euro, maximal rund 43 Euro pro Jahr. Beide Förderungen können kombiniert werden.
+F: Welche Einkommensgrenzen gelten für die Arbeitnehmersparzulage?
+A: Um die Arbeitnehmersparzulage zu erhalten, darf Ihr zu versteuerndes Einkommen 40.000 Euro bei Alleinstehenden und 80.000 Euro bei Verheirateten nicht überschreiten. Bei Überschreiten der Grenze bleibt der Arbeitgeberzuschuss trotzdem bestehen, Sie verlieren jedoch die staatliche Förderung und erhalten nur die Kapitalerträge Ihrer Anlage.
+F: Welche Anlageformen gibt es für VL?
+A: Für VL stehen vier klassische Anlageformen zur Verfügung: ETF- oder Fondssparpläne, Bausparverträge, Banksparpläne und die Tilgung eines Baukredits. ETF-Sparpläne bieten die beste Kombination aus Rendite und Förderung, da weltweit gestreute Aktien-ETFs historisch etwa sechs Prozent durchschnittliche Rendite pro Jahr erzielen.

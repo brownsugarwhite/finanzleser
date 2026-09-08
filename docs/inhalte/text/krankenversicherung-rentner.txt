@@ -1,0 +1,105 @@
+# Krankenversicherung Rentner (krankenversicherung-rentner)
+## 0 Krankenversicherung Rentner: Alles zu Beiträgen und Versicherungsschutz im Alter
+
+Auch Rentner zahlen Beiträge zur Krankenversicherung. Wie sich die Beiträge 2026 berechnen, welche Leistungen gelten und wo Senioren sparen können.
+
+## 1 Krankenversicherung Rentner: Beiträge, Leistungen und Sparpotenziale 2026
+
+Die Krankenversicherung für Rentner regelt, wie Senioren ihre Gesundheitsversorgung im Alter finanzieren. Für viele Menschen bringt der Renteneintritt wichtige Veränderungen bei der Krankenversicherung mit sich – sowohl bei den Beitragssätzen als auch bei den Leistungen. Der allgemeine Beitragssatz beträgt aktuell 14,6 Prozent. Rentner zahlen davon 7,3 Prozent, während der Rentenversicherungsträger die gleiche Summe beisteuert. Hinzu kommt der durchschnittliche Zusatzbeitrag von 2,9 Prozent (2026), von dem Rentner wieder nur die Hälfte tragen. Diese Grundstruktur unterscheidet sich deutlich von der Berufstätigkeit, wo Arbeitgeber und Arbeitnehmer die Kosten teilen.
+
+## 2 Was ist die Krankenversicherung der Rentner?
+
+Die meisten Rentner sind in der Krankenversicherung der Rentner (KVdR) pflichtversichert. Diese greift automatisch, wenn zwei Voraussetzungen erfüllt sind: erstens der Anspruch auf eine gesetzliche Rente und zweitens die sogenannte Vorversicherungszeit.
+
+Die Vorversicherungszeit ist ein zentrales Kriterium. Sie ist erfüllt, wenn seit Aufnahme der Erwerbstätigkeit bis zum Rentenantrag mindestens 90 Prozent der zweiten Hälfte dieses Zeitraums eine Mitgliedschaft in der gesetzlichen Krankenversicherung oder Familienversicherung bestanden hat. Ein praktisches Beispiel: Wer 40 Jahre erwerbstätig war und in den letzten 20 Jahren mindestens 18 Jahre Mitglied war, erfüllt diese Voraussetzung.
+
+[SPIEL karte: Krankenversicherung der Rentner (KVdR)]
+
+Bei der Berechnung werden für jedes Kind – leiblich, adoptiert, Stief- oder Pflegekind – pauschal drei Jahre angerechnet. Diese Kinderzeiten können ausschlaggebend sein, um die 90-Prozent-Hürde zu schaffen. Wer die Vorversicherungszeit nicht erfüllt, kann sich freiwillig gesetzlich krankenversichern, zahlt dann aber deutlich höhere Beiträge auf alle Einkommensarten.
+
+Die Beitragsbemessungsgrenze liegt 2026 bei einem jährlichen Bruttoeinkommen von 69.750 Euro – monatlich entspricht das 5.812,50 Euro.
+
+## 3 Welche Beiträge zahlen Rentner 2026 konkret?
+
+Pflichtversicherte in der KVdR tragen 7,3 Prozent des allgemeinen Beitragssatzes plus die Hälfte des kassenindividuellen Zusatzbeitrags. Der durchschnittliche Zusatzbeitragssatz aller Krankenkassen beträgt 2,9 Prozent. Rentner zahlen selbst 1,45 Prozentpunkte davon.
+
+Die Pflegeversicherung müssen Rentner vollständig selbst tragen. Für 2026 gelten folgende Beitragssätze:
+
+- Allgemeiner Beitragssatz: 3,6 Prozent der Bruttorente
+
+- Beitragssatz für Kinderlose: 4,2 Prozent der Bruttorente (3,6 % + 0,6 % Kinderlosenzuschlag)
+
+Eine wichtige Ausnahme: Rentner, die vor dem 1. Januar 1940 geboren wurden, zahlen keinen Kinderlosenzuschlag – unabhängig von ihrem Familienstand. Sie zahlen 3,6 Prozent.
+
+[SPIEL mythos: Beitragserhöhungen in der Krankenversicherung werden für Rentner sofort im Januar wirksam. → nein]
+
+## 4 Wie werden verschiedene Einkommensarten behandelt?
+
+Rentner in der KVdR zahlen auf Miet- oder Kapitalerträge keine Krankenversicherungsbeiträge. Diese Privilegierung ist ein großer Vorteil gegenüber freiwillig Versicherten. Ausnahmen sind Versorgungsbezüge wie Betriebsrenten und Einkommen aus selbstständiger Tätigkeit – hier werden die vollen 14,6 Prozent plus Zusatzbeitrag fällig.
+
+Seit 2020 gibt es Entlastung für Betriebsrentner. Der Freibetrag ist zum 1. Januar 2026 um 10,50 Euro auf 197,75 Euro monatlich gestiegen. Das bedeutet: Die ersten 197,75 Euro Ihrer Betriebsrente bleiben in der Krankenversicherung beitragsfrei. Erst bei höheren Beträgen werden Beiträge fällig.
+
+[SPIEL schaetzen: Wie hoch ist der monatliche Freibetrag für Betriebsrenten 2026? → 197,75]
+
+Wichtig: Der Freibetrag gilt nur für die Krankenversicherung, nicht für die Pflegeversicherung. In der Pflegeversicherung wird der volle Beitragssatz auf die gesamte Betriebsrente fällig.
+
+| Einkommensart | KVdR-Beitrag | Freiwillige Versicherung
+
+| Gesetzliche Rente | 7,3% + 1,45% (Zusatz) | 14,6% + 2,9%
+
+| Betriebsrente | 14,6% + 2,9% (ab 197,75€) | 14,6% + 2,9%
+
+| Mieteinnahmen | 0% | 14,0% + 2,9%
+
+| Kapitalerträge | 0% | 14,0% + 2,9%
+
+## 5 Private Krankenversicherung: Zuschüsse und Grenzen
+
+Privatversicherte Rentner zahlen erheblich mehr. Eine private Krankenversicherung kostet 2026 im Durchschnitt 617 Euro monatlich – 13 Prozent mehr als im Vorjahr.
+
+Zum Ausgleich gibt es einen erhöhten Rentenzuschuss. Dieser beträgt 2026 8,75 Prozent der gesetzlichen Rente. Der theoretische Höchstzuschuss liegt bei 508,59 Euro monatlich. Die Berechnung lautet: 50 % des allgemeinen Beitragssatzes (14,6 %) plus 50 % des durchschnittlichen Zusatzbeitrags (2,9 %) = 8,75 %.
+
+Praktisch bekommen Privatversicherte maximal 50 Prozent ihres tatsächlichen PKV-Beitrags als Zuschuss. Wichtig: Der Antrag muss selbst bei der Deutschen Rentenversicherung gestellt werden – ohne Antrag erfolgt keine Zahlung.
+
+[SPIEL quiz: Wie hoch ist der maximale Rentenzuschuss zur privaten Krankenversicherung 2026?]
+
+Ein Nachteil: Die Pflegeversicherung wird nicht bezuschusst. Privatversicherte tragen diese Kosten komplett selbst.
+
+## 6 Wechselmöglichkeiten und Sparen
+
+Erhöht eine Krankenkasse ihren Zusatzbeitrag, entsteht ein Sonderkündigungsrecht. Sie können wechseln, auch wenn Sie noch nicht zwölf Monate Mitglied sind. Die Kündigungsfrist liegt typischerweise bis zum Ende des Monats, in dem der neue Zusatzbeitrag gilt.
+
+Ein Wechsel von privat zurück in die gesetzliche Krankenversicherung ist im Rentenalter praktisch unmöglich. Privatversicherte haben aber Zugang zu Sozialtarifen: Der PKV-Basistarif sieht 2026 einen Höchstbeitrag von 1.017,18 Euro vor.
+
+Handlungsoptionen bei steigenden Beiträgen:
+
+- Sonderkündigung bei Zusatzbeitragserhöhung nutzen
+
+- Krankenkassenvergleich durchführen
+
+- Bei PKV: Tarifwechsel prüfen
+
+- Sozialtarife bei Schwierigkeiten beantragen
+
+- Rentenzuschuss aktiv beantragen
+
+## 7 Fazit
+
+Die Krankenversicherung für Rentner bleibt komplex mit großen finanziellen Auswirkungen. Für die meisten ist die KVdR 2026 die beste Option, da die Rentenversicherung die Hälfte der Beiträge zahlt. Der gestiegene Freibetrag für Betriebsrenten auf 197,75 Euro bringt vielen Entlastung. Privatversicherte profitieren vom erhöhten Rentenzuschuss von 8,75 Prozent, müssen aber deutlich höhere Beiträge tragen. Die Pflegeversicherung wird für alle teurer. Bei Beitragserhöhungen lohnt sich ein Krankenkassenwechsel.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste krankenversicherung-rentner]
+
+[BLOCK dokumente rentner-krankenversicherung,auslandsreisekrankenversicherung,tipps-fuer-rentnerinnen-und-rentner,rentner-steuerrecht]
+
+
+## FAQ
+F: Welche Beiträge zahlen Rentner 2026 zur Krankenversicherung?
+A: Pflichtversicherte in der KVdR zahlen 2026 einen Eigenanteil von 7,3 Prozent an der Krankenversicherung plus die Hälfte des Zusatzbeitrags (durchschnittlich 2,9 Prozent). Die Rentenversicherung trägt die übrigen 7,3 Prozent des allgemeinen Beitragssatzes.
+F: Was ist die Krankenversicherung der Rentner (KVdR)?
+A: Die KVdR ist die Pflichtversicherung für Rentner, die eine gesetzliche Alters-, Erwerbsminderungs- oder Hinterbliebenenrente erhalten und die Vorversicherungszeit erfüllen. Sie müssen in den letzten 20 Jahren vor Rentenantragstellung zu mindestens 90 Prozent gesetzlich versichert gewesen sein.
+F: Wie hoch ist der Pflegeversicherungsbeitrag für Rentner?
+A: Rentner tragen den Pflegeversicherungsbeitrag vollständig selbst. Er beträgt 3,6 Prozent, für Kinderlose 4,2 Prozent. Eine Ausnahme bilden Kinderlose, die vor 1940 geboren wurden – sie zahlen den regulären Satz von 3,6 Prozent.
+F: Zahlen Rentner auf Mieteinnahmen oder Kapitalerträge Beiträge?
+A: Rentner in der KVdR zahlen auf Miet- oder Kapitalerträge keine Krankenversicherungsbeiträge. Ausnahmen gelten für Versorgungsbezüge und Einkünfte aus selbstständiger Tätigkeit über 197,75 Euro monatlich – hierauf fallen 14,6 Prozent plus Zusatzbeitrag an.

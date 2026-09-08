@@ -1,0 +1,119 @@
+# Ehegattensplitting (ehegattensplitting)
+## 0 Steuervorteil für Ehepaare: Ehegattensplitting erklärt
+
+Das Ehegattensplitting besteuert das Einkommen von Ehepaaren gemeinsam und senkt oft die Steuer. Wie es 2026 funktioniert und für wen es sich besonders lohnt.
+
+## 1 Ehegattensplitting 2026
+
+Das Ehegattensplitting ist ein steuerliches Verfahren, bei dem die Einkommen von Ehepaaren gemeinsam besteuert werden.
+
+Das Ehegattensplitting bleibt auch 2026 eine der wichtigsten Steuervorteile für verheiratete Paare in Deutschland. Der Grundfreibetrag für Verheiratete beträgt 2026 24.696 Euro und bietet erhebliche Einsparpotenziale. Der maximale Splittingvorteil beträgt 2026 19.471 Euro und wird ab einem zu versteuernden Jahreseinkommen von 556.000 Euro erzielt.
+
+Beim Splittingverfahren nutzt das Finanzamt die progressive Struktur des deutschen Steuersystems optimal aus. Das gemeinsame Einkommen wird halbiert, darauf die Steuer berechnet und anschließend verdoppelt. Diese Methode führt zu erheblichen Vorteilen, insbesondere wenn die Einkommensdifferenz zwischen den Partnern groß ist.
+
+## 2 So funktioniert das Ehegattensplitting 2026
+
+Beim Ehegattensplitting werden die zu versteuernden Einkommen beider Eheleute addiert und halbiert. Auf den halbierten Betrag wird der reguläre Einkommensteuertarif angewendet, die errechnete Steuer anschließend verdoppelt. Das Ergebnis ist die gemeinsame Steuerschuld.
+
+Dieser Mechanismus wirkt durch die Progression: Wer ein höheres Einkommen rechnerisch auf zwei Personen aufteilt, rutscht in einen niedrigeren Steuersatz. Die mathematische Logik ist nachvollziehbar: Bei gleichen Einkommen beider Partner entsteht kein Splittingvorteil. Der Effekt wächst mit dem Einkommensunterschied.
+
+[SPIEL karte: Zu versteuerndes Einkommen (zvE)]
+
+| Einkommensverteilung | Splittingvorteil 2026
+
+| 60.000€ / 0€ | Bis zu 5.800€
+
+| 100.000€ / 0€ | Ca. 9.768€
+
+| 50.000€ / 25.000€ | Deutlich geringer
+
+| 30.000€ / 30.000€ | Praktisch null
+
+Die Formel lautet: Splittingvorteil = ESt(A) + ESt(B) − 2 × ESt((A+B) / 2). Für 2026 beträgt der Grundfreibetrag 12.348 Euro pro Person.
+
+## 3 Wer profitiert am meisten vom Ehegattensplitting?
+
+Am stärksten profitieren Paare mit großem Einkommensunterschied: Alleinverdiener-Ehen, Paare wo einer Teilzeit arbeitet, oder Konstellationen wo einer in Elternzeit ist. Die Verteilungswirkung zeigt deutliche Schwerpunkte: Rund 91 Prozent des Splittingeffekts entfallen auf Ehepaare mit Kindern, 9 Prozent auf kinderlose Paare. Besonders stark profitieren Familien, in denen nur ein Partner als Alleinverdiener auftritt. Auf diese Gruppe entfällt mehr als ein Drittel des gesamten Splittingvorteils, obwohl es deutlich mehr Doppelverdienerhaushalte als Alleinverdienerhaushalte gibt.
+
+[SPIEL schaetzen: Wie hoch ist der maximale Splittingvorteil 2026 in Euro? → 19471]
+
+Der Grundfreibetrag spielt dabei eine zentrale Rolle. Der Grundfreibetrag ist der Betrag des Einkommens, der steuerfrei bleibt; er wird jährlich festgelegt und schützt ein bestimmtes Einkommen vor der Besteuerung. Der Grundfreibetrag für Verheiratete beträgt 2026 24.696 Euro. Verheiratete profitieren vom doppelten Freibetrag – auch wenn einer von beiden keine oder kaum eigene Einkünfte hat.
+
+Ein praktisches Beispiel: Bei einem Ehepaar mit 60.000 Euro zu versteuerndem Einkommen und einem Alleinverdiener sind bei 60.000 Euro zu versteuerndem Einkommen bis zu 5.800 Euro Ersparnis möglich. Bei einem Alleinverdiener mit 100.000 Euro Jahreseinkommen liegt der Splittingeffekt bei 9.768 Euro.
+
+## 4 Wie verändert sich die Steuerbelastung konkret?
+
+Die Wirkung des Ehegattensplittings zeigt sich besonders deutlich in der Steuerberechnung. Das Paar hat bei einem gemeinsamen zu versteuerndem Einkommen von 60.000 Euro in der Zusammenveranlagung 8.434 Euro Steuern zu zahlen. Verdienen sie beide gleich, sparen sie nichts.
+
+Je größer der Einkommensunterschied zwischen den Eheleuten ist, desto mehr bringt eine Zusammenveranlagung - und damit das Ehegattensplitting - in der Steuererklärung im Vergleich zur Einzelveranlagung. Besonders lukrativ ist das, wenn zum Beispiel die Frau ein sehr hohes Einkommen hat und der Mann gar keins.
+
+[SPIEL gewusst: Bei einem zu versteuerndem Einkommen von 556.000 Euro erreicht der Splittingvorteil 2026 sein Maximum von 19.471 Euro, da ab dieser Schwelle beide Partner in den gleichen Spitzensteuersatz rutschen.]
+
+Am höchsten fällt der Splittingvorteil aus, wenn zu der Einkommensdifferenz noch ein hoher Steuersatz kommt. Bei sehr hohem Einkommen kann der Steuervorteil deshalb mehr als 10.000 Euro pro Jahr betragen. Allerdings gibt es auch Grenzen: Verdienen beide so gut, dass ihre jeweiligen zu versteuernden Einkommen 2026 über der Grenze zum Spitzensteuersatz von 69.879 Euro liegen, läuft der Splittingvorteil nahezu komplett ins Leere. Einzig der Soli macht dann noch einen Unterschied, so dass nur ein steuerliche Ersparnis von wenigen Euro bis zu einigen hundert Euro drin ist - auch bei größeren Gehaltsunterschieden.
+
+## 5 Welche politische Debatte gibt es zur Reform 2026?
+
+Die politische Diskussion um das Ehegattensplitting ist 2026 intensiv geführt worden. Finanzminister Klingbeil will das Splitting nur noch für neu geschlossene Ehen durch ein „fiktives Realsplitting" ersetzen — ein fester, übertragbarer Freibetrag (im Gespräch sind rund 13.805 €) statt des vollen Splittingtarifs. Bestehende Ehen sollen das klassische Ehegattensplitting behalten. In der schwarz-roten Koalition gibt es darüber offenen Streit: die Union um Kanzler Merz lehnt eine Abschaffung in dieser Form bislang ab.
+
+Die politischen Positionen unterscheiden sich deutlich:
+
+- SPD: Fordert eine Reform bis Sommer 2026. Die stellvertretende SPD-Fraktionsvorsitzende Wiebke Esdar plädiert für „eine gerechte und zeitgemäße Reform"
+
+- CDU: Gespalten zwischen Befürwortern und Gegnern einer Reform
+
+- CSU: Lehnt die Abschaffung strikt ab. CSU-Fraktionschef Klaus Holetschek warnt: „Das Ehegattensplitting abzuschaffen bedeutet nichts anderes, als Familien höher zu besteuern"
+
+[SPIEL quiz: Welcher Grundfreibetrag gilt 2026 für Verheiratete insgesamt?]
+
+Für 2026 gilt das Ehegattensplitting unverändert — es gibt weder Gesetz noch Kabinettsbeschluss. Für das Steuerjahr 2026 gilt das Ehegattensplitting weiterhin unverändert. Es liegt weder ein Gesetzentwurf noch ein Kabinettsbeschluss vor.
+
+## 6 Was würde ein Realsplitting bedeuten?
+
+Als wahrscheinlichste Alternative wird das Realsplitting diskutiert. Realsplitting bedeutet in diesem Kontext, dass nicht mehr das gesamte Einkommen für die Tarifermittlung auf beide Ehegatten „aufgeteilt" wird, sondern dass der besserverdienende Partner nur einen begrenzten Betrag steuerlich auf den anderen übertragen kann. In der Debatte steht ein fixer Übertragungsbetrag in Höhe des Grundfreibetrags im Raum. Der Grundfreibetrag ist der Teil des Einkommens, der nach Einkommensteuerrecht zur Sicherung des Existenzminimums steuerfrei bleibt; für 2026 wird in dem diskutierten Modell auf den aktuell genannten Wert von 12.348 Euro Bezug genommen.
+
+Die finanziellen Auswirkungen wären beträchtlich: Bei einem Haushalt, in dem ein Partner 100.000 Euro verdient und der andere kein Einkommen erzielt, würde ein Realsplitting mit Übertrag in Höhe des Grundfreibetrags zu einer Mehrbelastung von 4.582 Euro pro Jahr führen. Diese Differenz ist nicht nur steuerlich relevant, sondern hat unmittelbare Liquiditätswirkung. Bei geringeren Einkommensunterschieden fallen die Auswirkungen moderater aus: Ein Paar mit 50.000 Euro und 25.000 Euro Jahreseinkommen würde im genannten Realsplittingmodell auf die gleiche Steuerzahlung wie bisher kommen.
+
+Ein breites Bündnis prominenter Ökonominnen und Ökonomen plädiert für ein begrenztes Realsplitting: Der Steuervorteil für Paare mit großen Einkommensunterschieden würde gedeckelt; die Mehreinnahmen sollen in eine deutliche Erhöhung von Kindergeld (259 → 316 €/Monat) und höhere Kinderfreibeträge fließen. Modellrechnung: Paare mit Kindern werden um durchschnittlich rund 585 €/Jahr entlastet, Alleinerziehende um rund 417 €/Jahr; kinderlose Paare mit ungleichen Einkommen zahlen im Schnitt rund 316 €/Jahr mehr.
+
+Als weitere Alternative steht das Familiensplitting zur Diskussion. Statt nur das Einkommen der Ehepartner aufzuteilen, würde beim Familiensplitting auch die Anzahl der Kinder berücksichtigt. Frankreich nutzt dieses Modell bereits. Vorteil: Es fördert gezielt Familien mit Kindern statt kinderlose Ehen.
+
+## 7 Wie wirkt der Solidaritätszuschlag 2026?
+
+2026 liegt die Freigrenze für Ehepaare bei 40.700 Euro. Für gemeinsam veranlagte Paare sind es die doppelten Werte. Das bedeutet: Die meisten Ehepaare sind vom Solidaritätszuschlag nicht betroffen. Der Solidaritätszuschlag ist erst ab einer bestimmten Höhe der Einkommensteuer zu zahlen. 2026 liegt die Freigrenze für Ehepaare bei 40.700 Euro. Der "Soli" beträgt 5,5 Prozent der Einkommensteuer.
+
+Praktische Beispiele zeigen die Wirkung: Bei einem zu versteuerndem Einkommen von 180.000 Euro müssen Verheiratete 53.328 Euro Einkommensteuer und 1.503 Euro Solidaritätszuschlag bezahlen. Für die allermeisten Ehepaare, die vom Ehegattensplitting profitieren, spielt der Solidaritätszuschlag daher keine Rolle.
+
+## 8 Steuerklassenwahl und praktische Umsetzung
+
+Ein häufiger Irrtum besteht in der Gleichsetzung von Steuerklassenwahl und Ehegattensplitting. Die Steuerklassen beeinflussen nur die monatlichen Lohnsteuer-Vorauszahlungen, während der tatsächliche Splittingvorteil erst bei der Jahresveranlagung wirkt.
+
+Für 2026 stehen Ehepaaren die bekannten Optionen zur Verfügung:
+
+- Steuerklasse 4/4 für ähnliche Einkommen
+
+- Steuerklasse 3/5 bei deutlichen Einkommensunterschieden
+
+- Das Faktorverfahren als flexible Alternative
+
+Für das Steuerjahr 2026 gilt das Ehegattensplitting weiterhin unverändert. Es liegt weder ein Gesetzentwurf noch ein Kabinettsbeschluss vor. Ehepaare können daher ihre Steuerplanung auf der bestehenden Rechtslage aufbauen.
+
+Gleichzeitig profitieren Familien von weiteren Verbesserungen: Ab Januar 2026 steigt das Kindergeld einheitlich für jedes Kind um vier Euro auf 259 Euro pro Monat. Das Kindergeld steigt um 4 Euro auf 259 Euro pro Kind und Monat. Der Kinderfreibetrag steigt 2026 um 156 Euro auf 9.756 Euro.
+
+## 9 Fazit
+
+Das Ehegattensplitting bleibt für 2026 ein wichtiges Instrument zur Steueroptimierung für verheiratete Paare. Trotz der politischen Diskussionen um mögliche Reformen sollten Sie die aktuellen Vorteile nutzen und gleichzeitig langfristig planen. Die größten Einsparungen erzielen Paare mit unterschiedlichen Einkommen, insbesondere Alleinverdiener-Ehen. Der maximale Splittingvorteil liegt 2026 bei 19.471 Euro, während bereits bei mittleren Einkommen erhebliche Entlastungen möglich sind. Da die Reformpläne noch nicht konkretisiert sind, lohnt sich eine zeitnahe Steuererklärung, um die geltenden Regelungen voll auszunutzen. Langfristig empfiehlt sich unabhängig von der politischen Debatte eine ausgewogene Strategie, bei der beide Partner ein eigenes Einkommen haben.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste ehegattensplitting]
+
+
+## FAQ
+F: Wie funktioniert das Ehegattensplitting 2026?
+A: Beim Ehegattensplitting werden die Einkommen beider Partner addiert, die Summe halbiert und auf diese Hälfte die Einkommensteuer berechnet. Das Ergebnis wird anschließend verdoppelt, wodurch die progressive Steuerkurve bei ungleichen Einkommen entlastend wirkt.
+F: Wie hoch ist der Grundfreibetrag für Verheiratete 2026?
+A: Der Grundfreibetrag für Verheiratete beträgt 2026 insgesamt 24.696 Euro und entspricht damit dem doppelten Einzelfreibetrag von 12.348 Euro. Bis zu diesem Einkommen fällt keine Einkommensteuer an.
+F: Wer profitiert am stärksten vom Ehegattensplitting?
+A: Am meisten profitieren Paare mit großem Einkommensunterschied, etwa Alleinverdiener-Ehen oder Konstellationen mit Teilzeit oder Elternzeit. Rund 91 Prozent des Splittingeffekts entfallen auf Ehepaare mit Kindern, bei gleichen Einkommen entsteht kein Vorteil.
+F: Wie hoch ist der maximale Splittingvorteil 2026?
+A: Der maximale Splittingvorteil liegt 2026 bei 19.471 Euro ohne Solidaritätszuschlag und wird ab einem zu versteuernden Jahreseinkommen von 555.652 Euro erreicht. Bei einem Alleinverdiener mit 100.000 Euro Einkommen sind rund 9.768 Euro Ersparnis möglich.

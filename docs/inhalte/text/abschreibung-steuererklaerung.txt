@@ -1,0 +1,201 @@
+# Abschreibungen (abschreibung-steuererklaerung)
+## 0 Abschreibungen erklärt: Steuern sparen mit AfA und Abschreibungsmethoden
+
+Mit Abschreibungen (AfA) verteilen Sie Anschaffungskosten steuerlich über die Nutzungsdauer. Welche Methoden 2026 gelten und wie Selbstständige damit sparen.
+
+## 1 Abschreibungen 2026: Der Ratgeber für Selbstständige und Unternehmer
+
+Abschreibungen regeln die steuerliche Verteilung der Anschaffungskosten von Wirtschaftsgütern über deren Nutzungsdauer und sind ein zentrales Instrument für Unternehmen und Selbstständige, um Steuern zu sparen. Besonders 2026 eröffnen neue Regelungen wie die degressive Abschreibung erhebliche Steuervorteile.
+
+## 2 Was sind Abschreibungen und warum sind sie wichtig?
+
+Abschreibungen bedeuten die planmäßige Verteilung von Anschaffungskosten auf die betriebsgewöhnliche Nutzungsdauer eines Wirtschaftsguts. Die Absetzung für Abnutzung (AfA) ermöglicht es, Anschaffungskosten nicht sofort, sondern über mehrere Jahre als Betriebsausgabe zu verbuchen. Das mindert das zu versteuernde Einkommen und senkt damit die Steuerlast.
+
+Die Rechtsgrundlagen finden Sie in § 7 EStG für allgemeine Abschreibungen und § 6 EStG für geringwertige Wirtschaftsgüter. Höhere Abschreibungen senken den steuerpflichtigen Gewinn – was bedeutet weniger Steuern zahlen.
+
+Praktisches Beispiel: Ein Handwerker kauft im Januar 2026 eine Maschine für 50.000 Euro mit 10 Jahren Nutzungsdauer. Bei linearer Abschreibung kann er jährlich 5.000 Euro steuerlich absetzen. Bei einem Steuersatz von 30 Prozent spart er 1.500 Euro pro Jahr.
+
+&#x1f9e0; Quiz
+
+Welche GWG-Grenze gilt 2026 in Deutschland?
+
+1.000 Euro netto
+
+800 Euro netto
+
+600 Euro netto
+
+B
+
+Die GWG-Grenze bleibt 2026 unverändert bei 800 Euro netto (Stand 2026).
+
+## 3 GWG: Sofortabschreibung bis 800 Euro
+
+Geringwertige Wirtschaftsgüter (GWG) ermöglichen die Sofortabschreibung. Du kannst die gesamten Anschaffungskosten im Jahr des Kaufs steuerlich geltend machen. Eine Verteilung über mehrere Jahre ist nicht erforderlich.
+
+Für die GWG-Einstufung müssen drei Kriterien erfüllt sein:
+
+- Beweglich: Das Wirtschaftsgut muss transportierbar sein
+
+- Abnutzbar: Es muss einer technischen oder wirtschaftlichen Abnutzung unterliegen
+
+- Selbstständig nutzbar: Es kann ohne andere Wirtschaftsgüter verwendet werden
+
+Geringwertige Wirtschaftsgüter liegen zwischen 250,01 Euro und 800 Euro netto. Die GWG-Grenze gilt seit 2018 und bleibt auch 2026 bestehen.
+
+| Anschaffungskosten | Abschreibung
+
+| Bis 250 Euro | Sofortabschreibung, keine Aufzeichnung
+
+| 250–800 Euro | GWG-Verzeichnis erforderlich
+
+| 250–1.000 Euro | Poolabschreibung: 5 Jahre à 20 %
+
+| Über 1.000 Euro | Normale AfA nach Tabelle
+
+Ein Bürostuhl für 750 Euro kann als GWG sofort abgeschrieben werden. Ein Firmenwagen für 25.000 Euro muss über 6 Jahre abgeschrieben werden.
+
+&#x1f504; Karteikarte
+
+Poolabschreibung
+
+Alternative für GWG zwischen 250 und 1.000 Euro, bei der alle Anschaffungen eines Jahres zusammengefasst und über 5 Jahre mit je 20 % abgeschrieben werden.
+
+## 4 Lineare vs. degressive Abschreibung: Welche passt zu dir?
+
+Die lineare Abschreibung verteilt die Anschaffungskosten gleichmäßig. Formel: Anschaffungskosten ÷ Nutzungsdauer = jährliche AfA.
+
+Die degressive Abschreibung ermöglicht höhere Beträge in den ersten Jahren. Für Anschaffungen zwischen 1. Juli 2025 und 31. Dezember 2027 gilt ein Höchstsatz von 30 Prozent.
+
+Rechenbeispiel degressive Abschreibung:
+
+- Maschine: 100.000 Euro, 10 Jahre Nutzungsdauer
+
+- Linear: 10.000 Euro jährlich (10 %)
+
+- Degressiv 2026: 30.000 Euro im ersten Jahr (30 %), dann fallend
+
+Die degressive Methode ist sinnvoll bei:
+
+- Hohen Gewinnen in den ersten Jahren nach Anschaffung
+
+- Liquiditätsengpässen nach größeren Investitionen
+
+- Erwarteten sinkenden Steuersätzen in der Zukunft
+
+## 5 Immobilien und Gebäude richtig abschreiben
+
+Immobilien werden anders behandelt als bewegliche Wirtschaftsgüter. Für Wohngebäude mit Baujahr zwischen 1925 und 2022 gilt die Standardrate von 2 Prozent pro Jahr (50 Jahre Nutzungsdauer).
+
+Für neue Wohngebäude wurde die AfA 2023 erhöht: Ab 1. Januar 2023 gilt 3 Prozent pro Jahr statt 2 Prozent. Seit 2024 gibt es die degressive Gebäude-AfA: 5 Prozent für Immobilien, deren Bau zwischen 1. Oktober 2023 und 31. September 2029 begonnen hat.
+
+Wichtig: Nur der Gebäudeanteil ist abschreibbar, nicht das Grundstück. Der Grundstücksanteil muss separat ermittelt werden – häufig durch Aufteilung des Kaufpreises im Verhältnis der Bodenrichtwerte.
+
+&#x1f4ca; Schätzfrage
+
+Wie hoch ist die AfA für neue Wohngebäude ab 2023?
+
+1
+
+5
+
+3
+
+%
+
+Für Wohngebäude ab 1. Januar 2023 gilt 3 % jährlich (Stand 2026).
+
+## 6 Wichtige Abschreibungstabellen und Nutzungsdauern
+
+Die amtlichen AfA-Tabellen des Bundesfinanzministeriums legen die Nutzungsdauern fest. Die wichtigsten Wirtschaftsgüter:
+
+| Wirtschaftsgut | Nutzungsdauer | Jahres-AfA
+
+| Computer | 1 Jahr* | 100 %
+
+| Smartphone | 5 Jahre | 20 %
+
+| Büromöbel | 13 Jahre | 7,69 %
+
+| PKW | 6 Jahre | 16,67 %
+
+| LKW | 8 Jahre | 12,5 %
+
+*Sonderregelung: Seit 2021 können Computer mit einer Nutzungsdauer von einem Jahr abgeschrieben werden – faktisch eine Sofortabschreibung. Diese "Digital-AfA" ermöglicht die vollständige Abschreibung im Anschaffungsjahr, unabhängig vom Kaufpreis.
+
+Die AfA-Tabellen sind Richtwerte, aber nicht zwingend bindend. Bei nachweisbaren betrieblichen Besonderheiten können abweichende Nutzungsdauern angesetzt werden.
+
+## 7 Abschreibungen in der Steuererklärung eintragen
+
+Für Selbstständige (EÜR):
+
+- Anlageverzeichnis ausfüllen (Anlage AVEÜR)
+
+- AfA-Beträge in der Einnahmen-Überschuss-Rechnung erfassen
+
+- Bei GWG: Verzeichnis führen (außer bis 250 Euro)
+
+Für Arbeitnehmer:
+
+- Anlage N der Steuererklärung
+
+- Werbungskosten unter "Arbeitsmittel"
+
+- AfA-Beträge bei GWG
+
+Die Entscheidung zwischen Abschreibungsmethoden muss im Jahr der Anschaffung getroffen werden. Ein nachträglicher Wechsel ist nicht möglich.
+
+Bei Anschaffung im April 2026: Gabelstapler (20.000 €, 8 Jahre) = 2.500 € jährliche AfA × 9/12 = 1.875 € im ersten Jahr.
+
+&#x1f50d; Mythos oder Fakt?
+
+Computer können 2026 unabhängig vom Preis sofort abgeschrieben werden
+
+ja
+
+Seit dem BMF-Schreiben von 2021 gilt für Computer eine Nutzungsdauer von 1 Jahr – faktisch eine Sofortabschreibung (Stand 2026).
+
+## 8 Strategische Steuerplanung mit Abschreibungen
+
+Die optimale Nutzung von Abschreibungen erfordert durchdachte Planung. Die degressive AfA kann mit der Sonderabschreibung nach § 7g EStG gekoppelt werden. Diese wurde auf 40 Prozent der Anschaffungskosten erhöht. Das Ergebnis: Im Jahr der Anschaffung sind Abschreibungen von bis zu 70 Prozent der Kosten möglich.
+
+Strategisches Timing:
+
+Die degressive Abschreibung läuft Ende 2027 aus. Unternehmen sollten größere Investitionen in diesem Zeitraum planen. Gegen Ende des Haushaltsjahres in geringwertige Wirtschaftsgüter zu investieren kann die Steuerlast senken.
+
+Gewinnglättung über mehrere Jahre:
+
+- Hohe Gewinnjahre: Degressive Abschreibung und GWG-Käufe
+
+- Niedrige Gewinnjahre: Poolabschreibung oder normale AfA
+
+Investitionsabzugsbetrag (IAB):
+
+In der Steuererklärung 2026 kannst du 20.000 Euro (50 %) als IAB abziehen. Kombination mit degressiver AfA: Der IAB lässt sich kombinieren – so erzielst du im Anschaffungsjahr einen besonders hohen Steuervorteil.
+
+## 9 Fazit
+
+Abschreibungen sind 2026 ein mächtiges Instrument der Steuergestaltung. Die GWG-Grenze bei 800 EUR bleibt unverändert und bietet weiterhin Vorteile. Die degressive Abschreibung bis Ende 2027 mit 30 Prozent Höchstsatz eröffnet erhebliche Gestaltungsspielräume.
+
+Die Kombination verschiedener Instrumente zahlt sich aus: GWG-Sofortabschreibung, degressive AfA und Sonderabschreibung können gemeinsam bis zu 70 Prozent der Anschaffungskosten im ersten Jahr steuerlich wirksam machen. Die Digital-AfA für Computer ermöglicht unabhängig vom Preis eine Sofortabschreibung (Stand 2026).
+
+Unternehmen sollten ihre Investitionsplanung jetzt beschleunigen. Die degressive Abschreibung läuft Ende 2027 aus. Wer Modernisierungen plant, hat ein klares, zweijähriges Zeitfenster für maximale Steuervorteile. Eine professionelle Steuerberatung hilft, alle Möglichkeiten optimal zu nutzen und die Regelungen auf Ihre individuelle Situation anzupassen.
+
+Die richtige Abschreibungsstrategie kann bei größeren Investitionen mehrere tausend Euro Steuern sparen und gleichzeitig die Liquidität verbessern – ein wichtiger Wettbewerbsvorteil für Ihr Unternehmen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste abschreibungen]
+
+[BLOCK dokumente steuererkla-rung-ratgeber-2024]
+
+
+## FAQ
+F: Was bedeutet Absetzung für Abnutzung (AfA) im Steuerrecht?
+A: Die Absetzung für Abnutzung, kurz AfA, beschreibt den systematischen Werteverzehr eines Wirtschaftsguts über seine Nutzungsdauer. Nach § 7 Abs. 1 EStG müssen alle Wirtschaftsgüter, die voraussichtlich länger als ein Jahr genutzt werden, abgeschrieben werden. Die Kosten werden so auf mehrere Jahre verteilt und jährlich steuermindernd geltend gemacht.
+F: Welche Abschreibungsmethoden gibt es?
+A: Die wichtigsten Methoden sind die lineare und die degressive Abschreibung. Bei der linearen AfA werden Anschaffungskosten gleichmäßig auf die Nutzungsdauer verteilt. Die degressive AfA ermöglicht in den ersten Jahren höhere Abschreibungsbeträge und darf zwischen dem 1. Juli 2025 und dem 31. Dezember 2027 bis zum Dreifachen des linearen Satzes, maximal 30 Prozent, betragen.
+F: Wo finde ich die offiziellen Nutzungsdauern für Wirtschaftsgüter?
+A: Die betriebsgewöhnlichen Nutzungsdauern sind in den AfA-Tabellen des Bundesfinanzministeriums festgelegt und unter www.bundesfinanzministerium.de abrufbar. Die Tabellen dienen als Orientierung, sind jedoch nicht zwingend bindend, wenn betriebliche Besonderheiten eine abweichende Einstufung rechtfertigen.
+F: Welche Bemessungsgrundlage gilt für die Abschreibung?
+A: Abgeschrieben wird stets von den Anschaffungs- oder Herstellungskosten. Bei Vorsteuerabzugsberechtigten sind die Nettoanschaffungskosten maßgeblich, ansonsten die Bruttokosten. Diese Unterscheidung ist besonders bei der Abgrenzung zu geringwertigen Wirtschaftsgütern (GWG) relevant.

@@ -1,0 +1,149 @@
+# Umsatzsteuer und Mehrwertsteuer (umsatzsteuer-mehrwertsteuer)
+## 0 Umsatzsteuer und Mehrwertsteuer erklärt: Definitionen, Sätze und Abzüge
+
+Umsatzsteuer und Mehrwertsteuer meinen dasselbe – die Steuer auf Lieferungen und Leistungen. Regelsteuersatz, Kleinunternehmer und Vorsteuerabzug 2026 erklärt.
+
+## 1 Umsatzsteuer 2026: Alles zu Regelsteuersatz und Kleinunternehmern
+
+Umsatzsteuer ist die rechtlich korrekte Bezeichnung für die Steuer auf Lieferungen und Dienstleistungen in Deutschland. Diese Allphasen-Nettoumsatzsteuer mit Vorsteuerabzug funktioniert nach einem durchlaufenden System, bei dem Unternehmen die Steuer zwar erheben, aber wirtschaftlich nur Endverbraucher sie tragen.
+
+## 2 Was bedeutet Umsatzsteuer für Unternehmer?
+
+Mehrwertsteuer (MwSt) und Umsatzsteuer (USt) bezeichnen dieselbe Steuer. „Umsatzsteuer" ist der offizielle Begriff im Gesetz (UStG), „Mehrwertsteuer" die im Alltag gebräuchliche Bezeichnung. Für Unternehmer funktioniert das System wie ein Durchlaufposten: Sie erheben Umsatzsteuer auf ihre Leistungen und führen sie an das Finanzamt ab, können aber gleichzeitig die gezahlte Vorsteuer aus betrieblichen Einkäufen geltend machen.
+
+[SPIEL mythos: Kleinunternehmer müssen nur keine Umsatzsteuer ausweisen, aber können trotzdem Vorsteuer abziehen → nein]
+
+Das deutsche System ist als Allphasen-Netto-Umsatzsteuer mit Vorsteuerabzug konzipiert. Das bedeutet: Auf jeder Handelsstufe wird Umsatzsteuer erhoben, aber dank des Vorsteuerabzugs trägt am Ende nur der Endverbraucher die vollständige Steuerlast. Unternehmen können die ihnen in Rechnung gestellte Umsatzsteuer (Vorsteuer) von ihrer eigenen Umsatzsteuerschuld abziehen.
+
+## 3 Wie hoch ist die Umsatzsteuer 2026?
+
+In Deutschland gelten 2026 der Regelsatz von 19 % und der ermäßigte Satz von 7 %. Der Regelsteuersatz von 19 % gilt für die meisten Waren und Dienstleistungen wie Elektronik, Kleidung, Friseurleistungen oder Handwerksarbeiten.
+
+Der ermäßigte Steuersatz von 7 % wird angewendet auf:
+
+- Lebensmittel (außer Getränke)
+
+- Bücher, Zeitungen und Zeitschriften
+
+- Fahrkarten im öffentlichen Nahverkehr
+
+- Kulturelle Veranstaltungen (Theater, Konzerte, Museen)
+
+- Speisen in der Gastronomie (seit 2026)
+
+[SPIEL gewusst: Leitungswasser wird mit 7 % besteuert, während Mineralwasser aus der Flasche mit 19 % besteuert wird (Stand 2026).]
+
+Zusätzlich gibt es Sonderregelungen: Seit 2023 gibt es zusätzlich einen Nullsteuersatz (0 %) für Photovoltaikanlagen. Für die Land- und Forstwirtschaft gilt ein Satz von 5,5 % (§ 24 UStG).
+
+| Steuersatz | Anwendungsbereich | Beispiele
+
+| 0 % | Nullsteuersatz | PV-Anlagen (bestimmte Voraussetzungen)
+
+| 5,5 % | Land-/Forstwirtschaft | Landwirtschaftliche Erzeugnisse
+
+| 7 % | Ermäßigter Satz | Lebensmittel, Bücher, Speisen
+
+| 19 % | Regelsatz | Kleidung, Elektronik, Getränke
+
+## 4 Was ändert sich bei Gastronomie-Speisen ab 2026?
+
+Der reduzierte Umsatzsteuersatz gilt für Speisen, nicht aber für Getränke. Die Senkung der Mehrwertsteuer auf sieben Prozent tritt in der Nacht vom 31. Dezember 2025 auf den 1. Januar 2026 (Neujahrsnacht) in Kraft. Diese dauerhafte Regelung bringt mehrere wichtige Änderungen:
+
+Einheitliche Besteuerung von Speisen: Ob im Restaurant, zum Mitnehmen oder geliefert – auf alle Speisen werden ab 1. Januar 2026 nur noch sieben Prozent Mehrwertsteuer berechnet. Für Getränke bleibt es beim regulären Mehrwertsteuersatz von 19 Prozent. Damit endet die frühere Unterscheidung zwischen Vor-Ort-Verzehr (19 %) und Take-away (7 %).
+
+Profiteure der Regelung: Neben klassischen gastronomischen Betrieben, wie z. B. Restaurants, profitieren von dieser Maßnahme auch Bäckereien, Metzgereien und der Lebensmitteleinzelhandel, ebenso die Anbieter von Dienstleistungen im Bereich Catering sowie Kita-, Schul- und Krankenhausverpflegung. Insgesamt werden die Gastronomiebranche und die Bürgerinnen und Bürger um 3,6 Mrd. Euro jährlich entlastet.
+
+[SPIEL karte: Allphasen-Netto-Umsatzsteuer]
+
+## 5 Wann können Sie die Kleinunternehmerregelung nutzen?
+
+Ab 2025 gelten neue Grenzen: 25.000 € Umsatz im Vorjahr und 100.000 € im laufenden Jahr. Beide Bedingungen müssen gleichzeitig erfüllt sein, um die Kleinunternehmerregelung nach § 19 UStG nutzen zu können.
+
+Die neuen Grenzen im Detail:
+
+- Vorjahresumsatz: im vorangegangenen Kalenderjahr 25.000 Euro (bis 2024: 22.000 Euro)
+
+- Laufendes Jahr: im laufenden Kalenderjahr bislang nicht mehr als 100.000 Euro (2024: voraussichtlich 50.000 Euro)
+
+Wichtige Regelungen bei Überschreitung:
+
+Sobald die 100.000-Euro-Grenze im laufenden Jahr überschritten wird, endet die Kleinunternehmerregelung mit dem Umsatz, der die Grenze übersteigt – also sofort und nicht erst zum Jahresende. Der überschreitende Umsatz ist bereits voll steuerpflichtig.
+
+Vor- und Nachteile der Kleinunternehmerregelung:
+
+Vorteile:
+
+- Keine Umsatzsteuervoranmeldungen erforderlich
+
+- Einfachere Rechnungsstellung ohne Steuerausweis
+
+- Weniger Verwaltungsaufwand
+
+- Attraktiv bei vielen Privatkunden
+
+Nachteile:
+
+- Im Gegenzug besteht kein Vorsteuerabzug
+
+- Keine Erstattung gezahlter Vorsteuer
+
+- Für B2B-Kunden oft unattraktiv
+
+- Wechsel zur Regelbesteuerung erfordert 5-jährige Bindung
+
+## 6 Vorsteuerabzug: Wie funktioniert die Verrechnung?
+
+Der Vorsteuerabzug ist das zentrale Element des deutschen Umsatzsteuersystems. Wenn du als Unternehmer oder Selbstständiger umsatzsteuerpflichtig bist, hast du das Recht, die Umsatzsteuer, die du selbst bei Einkäufen bezahlst, als Vorsteuer vom Finanzamt zurückzufordern. Dieser sogenannte Vorsteuerabzug sorgt dafür, dass nur der Endverbraucher die Umsatzsteuer tatsächlich trägt.
+
+Voraussetzungen für den Vorsteuerabzug (§ 15 UStG):
+
+- Sie sind umsatzsteuerpflichtiger Unternehmer
+
+- Die Ausgabe erfolgt für betriebliche Zwecke
+
+- Sie besitzen eine ordnungsgemäße Rechnung nach § 14 UStG
+
+- Die Leistung wurde tatsächlich ausgeführt
+
+- Der Rechnungssteller ist selbst umsatzsteuerpflichtig
+
+Praktisches Beispiel der Vorsteuerverrechnung:
+
+Sie kaufen Büromaterial für 1.190 Euro brutto (1.000 Euro netto + 190 Euro Umsatzsteuer). Diese 190 Euro Vorsteuer können Sie mit Ihrer eigenen Umsatzsteuerschuld verrechnen. Verkaufen Sie anschließend eine Dienstleistung für 2.380 Euro brutto (2.000 Euro netto + 380 Euro Umsatzsteuer), müssen Sie nur 190 Euro ans Finanzamt abführen (380 Euro minus 190 Euro Vorsteuer).
+
+Neue Regelungen ab 2026:
+
+Die Änderungen zum Zeitpunkt der Geltendmachung gelten ab dem 1. Januar 2026 für alle Vorsteuerabzüge, unabhängig davon, wann die Rechnung ausgestellt wurde. Besonders bei Ist-Versteuerern gibt es Änderungen: Zukünftig soll es auf den Zeitpunkt der Zahlung auch dann ankommen, wenn die Rechnung von einem Unternehmer ausgestellt wird, der die Ist-Versteuerung anwendet.
+
+## 7 Umsatzsteuervoranmeldung und praktische Abwicklung
+
+Die meisten Unternehmer müssen regelmäßig Umsatzsteuervoranmeldungen abgeben. Ab einer Zahllast von 7.500 € im Vorjahr ist die monatliche Umsatzsteuer-Voranmeldung (UStVA) Pflicht. Bei geringerer Zahllast erfolgt die Abgabe vierteljährlich.
+
+Befreiung von der Voranmeldepflicht:
+
+Kleinunternehmer sind grundsätzlich von der Umsatzsteuervoranmeldung befreit. Unternehmen mit einem Jahresumsatz unter 55.000 Euro im Vorjahr müssen keine Umsatzsteuervoranmeldungen abgeben – vorausgesetzt, die Steuerschuld wird fristgerecht beglichen.
+
+Jahreserklärung bleibt Pflicht:
+
+Auch Unternehmen die monatlich oder vierteljährlich VAT returns in Deutschland abgeben müssen, müssen einmal jährlich eine zusammenfassende Umsatzsteuererklärung abgeben. Die Frist für die Umsatzsteuerjahreserklärung 2025 liegt bei 31. Juli 2026.
+
+## 8 Fazit
+
+Die Umsatzsteuer bleibt auch 2026 eine zentrale Säule des deutschen Steuersystems mit unveränderten Grundsätzen von 19 % Regelsteuersatz und 7 % ermäßigtem Satz. Die dauerhafte Senkung auf 7 % für Gastronomie-Speisen und die seit 2025 geltenden höheren Kleinunternehmergrenzen von 25.000 Euro (Vorjahr) und 100.000 Euro (laufendes Jahr) bringen spürbare Vereinfachungen. Das Allphasen-Netto-System mit Vorsteuerabzug gewährleistet, dass wirtschaftlich nur Endverbraucher die Steuerlast tragen. Unternehmer sollten die neuen Regelungen beim Vorsteuerabzug ab 2026 beachten und bei komplexen Sachverhalten rechtzeitig professionelle Beratung einholen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste umsatzsteuer-und-mehrwertsteuer]
+
+[BLOCK rechner mehrwertsteuer]
+
+
+## FAQ
+F: Was ist der Unterschied zwischen Umsatz- und Mehrwertsteuer?
+A: Umsatzsteuer und Mehrwertsteuer bezeichnen rechtlich dieselbe Steuer und werden synonym verwendet. Der offizielle Begriff im Umsatzsteuergesetz ist Umsatzsteuer, während Mehrwertsteuer die umgangssprachliche Bezeichnung ist. Beide Begriffe meinen die Steuer, die auf den Endpreis von Waren und Dienstleistungen erhoben wird.
+F: Welche Mehrwertsteuersätze gelten in Deutschland 2026?
+A: In Deutschland gelten 2026 der Regelsatz von 19 Prozent und der ermäßigte Satz von 7 Prozent. Der ermäßigte Satz gilt für Lebensmittel, Bücher, Zeitungen, öffentliche Verkehrsmittel und seit 1. Januar 2026 dauerhaft für Restaurant-Speisen. Getränke im Restaurant werden weiterhin mit 19 Prozent besteuert.
+F: Was ändert sich ab 2026 in der Gastronomie?
+A: Seit dem 1. Januar 2026 gilt der ermäßigte Steuersatz von 7 Prozent dauerhaft auf Speisen in der Gastronomie. Diese Absenkung soll die Branche nach Pandemie, Kostensteigerungen und Inflation entlasten. Getränke bleiben bei 19 Prozent, unabhängig davon, ob Speisen vor Ort oder zum Mitnehmen konsumiert werden.
+F: Wer darf die Kleinunternehmerregelung nutzen?
+A: Die Kleinunternehmerregelung können Unternehmer nutzen, deren Umsatz im Vorjahr maximal 25.000 Euro betrug und im laufenden Jahr voraussichtlich 100.000 Euro nicht überschreitet. Kleinunternehmer werden von der Umsatzsteuerpflicht befreit, verlieren dafür aber den Vorsteuerabzug. Bei Überschreiten der Grenzen endet die Befreiung sofort.

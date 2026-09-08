@@ -1,0 +1,129 @@
+# Grundsteuer (grundsteuer)
+## 0 Grundsteuer 2025: Berechnung, Reform und Auswirkungen
+
+Die Grundsteuer wird seit der Reform neu berechnet: Wert × Messzahl × Hebesatz. Wie Sie Ihre Grundsteuer 2026 ermitteln und was die Reform für Sie bedeutet.
+
+## 1 Grundsteuer berechnen: So funktioniert die Reform 2026
+
+Die Grundsteuer berechnen Sie mit einer einfachen Formel: Grundsteuerwert × Steuermesszahl × Hebesatz. Seit 2025 ersetzt dieses System die verfassungswidrig erklärten Einheitswerte aus den 1930ern und 1960ern. Für rund 35 Millionen Grundstücke in Deutschland ändert sich damit die Berechnung der jährlichen Immobilienabgabe – teilweise mit spürbaren Auswirkungen auf Ihre Nebenkosten.
+
+## 2 So berechnet sich Ihre Grundsteuer
+
+Die Formel funktioniert in drei Schritten:
+
+1. Grundsteuerwert ermitteln: Das Finanzamt bewertet Ihr Grundstück neu. Relevant sind der Bodenrichtwert, die Fläche, die Gebäudeart und das Baujahr. Bei Wohnungen fließt auch die statistische Nettokaltmiete ein.
+
+2. Messbetrag festlegen: Der Grundsteuerwert wird mit der Steuermesszahl multipliziert. Diese liegt 2026 für Wohnhäuser bundesweit bei 0,31 Promille, für Gewerbe bei 0,34 Promille.
+
+3. Hebesatz anwenden: Ihre Gemeinde legt einen Hebesatz fest (oft 300–900 Prozent). Dies ist der Multiplikator für die tatsächliche Steuer.
+
+Beispiel für ein Einfamilienhaus:
+
+- Grundsteuerwert: 300.000 Euro
+
+- Messbetrag: 300.000 € × 0,31 ‰ = 93 Euro
+
+- Hebesatz: 500 %
+
+- Jährliche Grundsteuer: 93 € × 5 = 465 Euro (ca. 116 Euro vierteljährlich)
+
+[SPIEL gewusst: Thüringen senkte 2026 die Steuermesszahl für Wohngrundstücke von 0,31 auf 0,23 Promille und entlastete damit Bürger um rund 52 Millionen Euro.]
+
+## 3 Grundsteuer A, B und C erklärt
+
+Die Reform teilt die Besteuerung in drei Kategorien:
+
+Grundsteuer A betrifft nur Landwirtschafts- und Waldflächen. Für Stadtbewohner ist diese Kategorie irrelevant.
+
+Grundsteuer B gilt für fast alle anderen Grundstücke – Wohnhäuser, Mehrfamilienhäuser, Büros, Garagen und Lagerflächen. Die meisten Eigentümer zahlen nach dieser Kategorie.
+
+Grundsteuer C ist neu und ermöglicht höhere Hebesätze für unbebaute, baureife Grundstücke. Kommunen können damit Spekulation bekämpfen und Baulandmobilisierung fördern. Nicht alle Gemeinden nutzen diese Möglichkeit.
+
+Hamburg geht dabei aggressiv vor: Der Hebesatz für Grundsteuer C dort liegt bei 8.000 Prozent – ein extremer Anreiz, leere Grundstücke endlich zu bebauen.
+
+[SPIEL schaetzen: Wie hoch ist Hamburgs Hebesatz für Grundsteuer C? → 8000]
+
+## 4 Unterschiedliche Modelle in den Bundesländern
+
+Neun Bundesländer nutzen das bundesweit einheitliche Modell. Andere haben sich für Alternativen entschieden:
+
+Bayern: Reines Flächenmodell. Die Steuer hängt nur von Quadratmetern ab – Lage und Wert spielen keine Rolle. Grundstücksflächen werden mit 0,04 Euro/m², Gebäudeflächen mit 0,5 Euro/m² berechnet.
+
+Baden-Württemberg: Bodenwertmodell. Nur der Bodenrichtwert zählt, nicht das Gebäude. Das ist einfach, aber teuer in guten Lagen. Wohngebäude erhalten 30 % Rabatt auf die Steuermesszahl (0,91 ‰).
+
+Hessen: Flächen-Faktor-Modell. Größe plus Lagefaktor – ein Mittelweg zwischen reinem Flächenmodell und aufwendiger Gesamtbewertung.
+
+Sachsen: Modifiziertes Bundesmodell mit höherer Steuermesszahl (0,36 ‰).
+
+| Bundesland | Berechnungsart | Steuermesszahl | Besonderheit
+
+| Bayern | Flächenmodell | Äquivalenzzahlen | Wertunabhängig
+
+| Baden-Württemberg | Bodenwertmodell | 0,91 ‰ | 30 % Rabatt für Wohnen
+
+| Hessen | Flächen-Faktor | Variabel | Mit Lagefaktor
+
+| Berlin | Bundesmodell | 0,31 ‰ | Hebesatz 470 %
+
+[SPIEL karte: Öffnungsklausel]
+
+## 5 So unterschiedlich sind die Hebesätze
+
+Der kommunale Hebesatz ist der größte Einflussfaktor auf Ihre Grundsteuer. Die Bandbreite ist enorm: von 0 Prozent (in zwölf Gemeinden) bis über 1.050 Prozent.
+
+Aktuelle Beispiele 2026:
+
+- Berlin: 470 % (bewusst moderat)
+
+- Düsseldorf: 374 %
+
+- Köln: 550 %
+
+- Duisburg: 886 %
+
+- Essen: 655 %
+
+Das Besondere: Reichere Landkreise wie Starnberg (490 %) belasten weniger als strukturschwache Städte wie Gelsenkirchen (675 %). Die Kommunen sind finanziell auf die Einnahmen angewiesen und nutzen unterschiedlich aggressive Hebesätze.
+
+Praktische Folge: Beim gleichen Messbetrag von 122,50 Euro zahlen Sie in Duisburg etwa 1.047 Euro jährlich, in Ingelheim aber nur 98 Euro. Das ist eine Belastung von über zehnfach unterschiedlichen Sätzen.
+
+[SPIEL mythos: Wohlhabende Städte haben niedrigere Grundsteuer-Hebesätze → ja]
+
+## 6 Zahlungstermine und Umlagung
+
+Die Grundsteuer wird jährlich fällig, normalerweise in vier Raten zum 15. Februar, Mai, August und November. Sie können aber auch einmal pro Jahr zahlen, wenn Sie dies beantragen.
+
+Wichtig: Der Stichtag für Steuerpflicht ist der 1. Januar. Wer zu diesem Zeitpunkt Eigentümer ist, zahlt die volle Jahressteuer – auch wenn die Immobilie erst im Dezember gekauft wurde. Umgekehrt können Sie die Steuer nicht mehr tragen, wenn Sie vorher verkauft haben.
+
+Für Mieter relevant: Vermieter dürfen die Grundsteuer als Betriebskosten umlegen (Betriebskostenverordnung § 2). Das heißt: Bei steigenden Grundsteuern können Ihre Nebenkosten erheblich anwachsen. Ein durchschnittliches Einfamilienhaus mit 465 Euro Grundsteuer könnte die Miete eines Mieters um etwa 38 Euro monatlich erhöhen. Wer ein Immobilieneigentum plant, sollte neben der Grundsteuer auch die Grunderwerbsteuer berücksichtigen, die beim Kauf fällig wird.
+
+## 7 Was die Reform konkret ändert
+
+Die Aufkommensneutralität (bundesweit bleibt es bei ca. 14 Milliarden Euro) verdeckt massive Verschiebungen:
+
+Gewinner: Alte Häuser in schlechten Lagen, die bisher überbewertet waren, werden oft günstiger.
+
+Verlierer: Moderne Häuser in gefragten Gegenden zahlen häufig mehr – besonders in Ballungsräumen mit gestiegenen Bodenpreisen.
+
+Die neuen Bewertungen erfolgen erstmals 2025 und werden dann alle sieben Jahre angepasst – nicht mehr wie früher nach Jahrzehnten.
+
+Aktuelle Rechtslage: Der Bundesfinanzhof bestätigte im Dezember 2025 die Verfassungsmäßigkeit des Bundesmodells. Die pauschalen Werte für Mietpreise und Bodenrichtwerte sind zulässig, auch wenn sie vereinfachen. Über die Ländermodelle entscheidet der Gerichtshof 2026.
+
+## 8 Fazit
+
+Die Grundsteuer berechnet sich seit 2025 nach modernen, nachvollziehbaren Kriterien statt veralteten Einheitswerten. Die bundesweit einheitliche Formel schafft Transparenz. Allerdings: Der kommunale Hebesatz entscheidet über Ihre tatsächliche Last – und der variiert um den Faktor 10 und mehr. Eigenheimbesitzer sollten ihren lokalen Hebesatz checken. Mieter sind indirekt betroffen, da Vermieter steigende Grundsteuern umlegen können. Wer zwischen Kommunen wechselt oder plant, sollte die Hebesätze vergleichen – der Unterschied kann beträchtlich sein. Beim Immobilienerwerb sollten Sie sich zudem mit den Finanzierungsmöglichkeiten einer Baufinanzierung vertraut machen, um alle Kosten des Immobilienerwerbs vollständig im Blick zu haben.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste grundsteuer]
+
+
+## FAQ
+F: Was hat sich bei der Grundsteuer ab 2025 geändert?
+A: Seit dem 1. Januar 2025 wird die Grundsteuer nach einem reformierten System erhoben. Das Bundesverfassungsgericht hatte die alten Einheitswerte aus den 1930er- und 1960er-Jahren für unzulässig erklärt. Die neuen Werte basieren auf modernen Kriterien und werden alle sieben Jahre neu ermittelt.
+F: Wie wird die Grundsteuer nach neuem Recht berechnet?
+A: Die Formel lautet: Grundsteuerwert multipliziert mit Steuermesszahl multipliziert mit Hebesatz. Die Steuermesszahl beträgt 0,031 Prozent für Wohngrundstücke und 0,034 Prozent für Nichtwohngebäude. Der Hebesatz wird von der Gemeinde individuell festgelegt.
+F: Was ist die neue Grundsteuer C?
+A: Die Grundsteuer C erlaubt es Kommunen seit 2025, für baureife, aber noch unbebaute Grundstücke einen erhöhten Hebesatz festzulegen. Ziel ist es, Spekulationen mit Bauland zu verteuern und finanzielle Anreize zu schaffen, Wohnraum tatsächlich zu errichten.
+F: Wann muss die Grundsteuer bezahlt werden?
+A: Die Grundsteuer wird jährlich fällig, in der Regel aber in vier Raten zum 15. Februar, Mai, August und November. Bei geringen Beträgen kann auf Antrag eine Jahrzahlung vereinbart werden. Steuerpflichtig ist immer der Eigentümer am 1. Januar eines Jahres.

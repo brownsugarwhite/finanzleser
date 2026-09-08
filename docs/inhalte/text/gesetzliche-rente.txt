@@ -1,0 +1,125 @@
+# Gesetzliche Rentenversicherung (gesetzliche-rente)
+## 0 Rente richtig planen: Beitragssätze und Grenzen 2026
+
+Die gesetzliche Rentenversicherung ist das Fundament der Altersvorsorge. Beitragssätze, Altersgrenzen und Rentenwert 2026 – und was die Reform für Sie bedeutet.
+
+## 1 Gesetzliche Rentenversicherung 2026: Beitragssätze, Altersgrenzen und Rentenwert
+
+Die gesetzliche Rentenversicherung bildet das Fundament der Altersvorsorge in Deutschland. 2026 bringt wichtige Änderungen: Der Beitragssatz zur allgemeinen Rentenversicherung bleibt stabil bei 18,6 Prozent, die Beitragsbemessungsgrenze steigt auf monatlich 8.450 Euro und der Rentenwert erhöht sich um 4,24 Prozent. Für wen diese Anpassungen konkret bedeutsam sind und wie die gesetzliche Rentenversicherung funktioniert, erläutern wir hier.
+
+## 2 Funktionsweise der gesetzlichen Rentenversicherung
+
+Die gesetzliche Rentenversicherung arbeitet nach dem Umlageverfahren. Das bedeutet: Die Beiträge heutiger Arbeitnehmer und Arbeitgeber finanzieren direkt die Renten der aktuellen Rentner – ohne dass jeder für seine eigene Rente spart.
+
+Bei der gesetzlichen Rentenversicherung teilen sich Arbeitgeber und Arbeitnehmer den Beitrag nach dem Prinzip der Beitragsparität. Jede gezahlte Contribution wird in sogenannte Entgeltpunkte umgerechnet. Diese Punkte sind später entscheidend für die Berechnung Ihrer Rente.
+
+[SPIEL karte: Umlageverfahren]
+
+## 3 Beitragssätze und Grenzen 2026 im Überblick
+
+Der Gesamtbeitragssatz zur gesetzlichen Rentenversicherung bleibt 2026 unverändert bei 18,6 Prozent. Dies ist bereits das neunte Jahr in Folge – ein Zeichen für die Stabilität des Systems. Arbeitgeber und Arbeitnehmer zahlen je 9,3 Prozent.
+
+Während der Beitragssatz gleich bleibt, steigt die Beitragsbemessungsgrenze deutlich: von 8.050 Euro (2025) auf 8.450 Euro monatlich – eine Erhöhung um 400 Euro. Jahresweise ergibt das 101.400 Euro statt 96.600 Euro.
+
+Wer profitiert oder ist betroffen? Normalverdiener zahlen keinen zusätzlichen Beitrag. Nur Personen mit Einkommen über 8.450 Euro monatlich zahlen höhere Rentenbeiträge – erhalten aber auch keine entsprechend höheren Rentenansprüche aufgrund der Beitragsbemessungsgrenze.
+
+Die Minijob-Grenze steigt ebenfalls: Sie erhöht sich 2026 von 556 Euro auf 603 Euro monatlich. Diese Anpassung folgt der Entwicklung des gesetzlichen Mindestlohns, der 2026 auf 13,90 Euro steigt.
+
+| Kategorie | 2025 | 2026 | Veränderung
+
+| Beitragssatz | 18,6% | 18,6% | unverändert
+
+| Beitragsbemessungsgrenze (monatlich) | 8.050 € | 8.450 € | +400 €
+
+| Beitragsbemessungsgrenze (jährlich) | 96.600 € | 101.400 € | +4.800 €
+
+| Minijob-Grenze | 556 € | 603 € | +47 €
+
+| Arbeitnehmeranteil | 9,3% | 9,3% | unverändert
+
+[SPIEL quiz: Wie hoch ist der Beitragssatz der gesetzlichen Rentenversicherung 2026?]
+
+## 4 Renteneintrittsalter und Übergänge 2026
+
+Das Renteneintrittsalter in der gesetzlichen Rentenversicherung steigt schrittweise. 2026 können die im Jahr 1960 Geborenen mit 66 Jahren und 4 Monaten in Rente gehen. Die genaue Grenze hängt vom Geburtsmonat ab: Wer im Januar 1960 geboren wurde, startet ab 1. Juni 2026.
+
+Die Regelaltersgrenze von 67 Jahren gilt vollständig erst für alle ab Geburtsjahrgang 1964. Darunter liegende Jahrgänge profitieren von gestaffelten Grenzen:
+
+- 1960 Geborene: 66 Jahre 4 Monate
+
+- 1961 Geborene: 66 Jahre 6 Monate
+
+- 1962 Geborene: 64 Jahre 8 Monate (abschlagsfrei)
+
+- 1963 Geborene: 66 Jahre 10 Monate
+
+- 1964+ Geborene: 67 Jahre (einheitlich)
+
+Wer vor dem regulären Alter in Rente geht, muss Abschläge akzeptieren. Der Abschlag beträgt 0,3 Prozent pro Monat Vorbezug. Für 1963 Geborene, die mit 63 statt 66 Jahren 10 Monaten Rente beziehen, bedeutet das einen Abschlag von rund 13,8 Prozent – lebenslang.
+
+[SPIEL gewusst: Die abschlagsfreie „Rente ab 63" für langjährig Versicherte (45 Jahre) verschiebt sich weiter nach hinten und ist 2026 erst für 1962 Geborene erreichbar (Stand 2026).]
+
+## 5 Rentenberechnung und Rentenwert 2026
+
+Die Basis jeder Rente sind die Entgeltpunkte. Ein Punkt entsteht, wenn Sie das deutsche Durchschnittseinkommen verdienen. 2026 liegt dieses bei 51.944 Euro jährlich. Bei diesem Gehalt erhalten Sie einen Rentenpunkt.
+
+Die Rechnung ist simpel: Ihr Jahreseinkommen ÷ Durchschnittsentgelt = Entgeltpunkte. Beispiele:
+
+- 40.000 Euro Verdienst = 0,77 Punkte
+
+- 80.000 Euro Verdienst = 1,54 Punkte
+
+- Maximum bei 101.400 Euro = 1,95 Punkte (Beitragsbemessungsgrenze)
+
+Ein Rentenpunkt ist 2026 exakt 9.661,58 Euro wert – berechnet aus dem Durchschnittsentgelt und dem Beitragssatz.
+
+Der aktuelle Rentenwert steigt um 4,24 Prozent. Ab 1. Juli 2026 erhöht sich ein Entgeltpunkt von 40,79 Euro auf 42,52 Euro monatlich. Dies bedeutet für eine Durchschnittsrente (45 Jahre mit Durchschnittsverdienst) eine Erhöhung um rund 77,85 Euro monatlich auf etwa 1.488 Euro.
+
+Beispielrechnung:
+
+35 Entgeltpunkte × 42,52 Euro = 1.488,20 Euro Bruttorente monatlich
+
+Die Rentenanpassung folgt der seit 2019 geltenden Haltelinie: Das Rentenniveau bleibt bei 48 Prozent. Diese Haltelinie wurde per „Rentenpaket 2025" bis zur Anpassung 2031 verlängert und sichert damit das Leistungsversprechen der gesetzlichen Rentenversicherung.
+
+## 6 Freiwillige Beiträge und Aufstockungsmöglichkeiten
+
+Wer seine Rente aufbessern möchte, kann freiwillige Beiträge zur gesetzlichen Rentenversicherung zahlen. Diese Möglichkeit steht auch Selbstständigen und anderen Nichtversicherten offen.
+
+Die Spanne liegt 2026 zwischen 112,16 Euro (Mindestbeitrag) und 1.571,70 Euro (Höchstbeitrag) monatlich. Ein einzelner Rentenpunkt kostet 9.661,58 Euro. Diese Investition kann rentabel sein, da jeder Punkt lebenslang gezahlt wird und von allen künftigen Rentenanpassungen profitiert.
+
+Personen ab 50 Jahren können Ausgleichszahlungen leisten, um Abschläge beim früheren Renteneintritt auszugleichen. Diese Zahlungen sind steuerlich absetzbar – bis 30.826 Euro für Singles oder 61.652 Euro für Paare (2026).
+
+Eine weitere Regel seit 2023: Wer bereits Altersrente bezieht, kann unbegrenzt hinzuverdienen – Hinzuverdienstgrenzen fallen weg. Dies ermöglicht es Rentnern, bei vollem Rentenbezug weiterzuarbeiten.
+
+## 7 Ausblick und Reformperspektiven
+
+Die gesetzliche Rentenversicherung bleibt trotz demografischer Herausforderungen stabil. Die Haltelinie beim Rentenniveau (48%) gilt bis 2031 und sichert das Leistungsversprechen. Danach wird eine Alterssicherungskommission neue Reformvorschläge vorlegen.
+
+Die schrittweise Anhebung der Altersgrenzen setzt sich bis 2031 fort. Gleichzeitig werden Kindererziehungszeiten ab 2028 vollständig angerechnet (Mütterrente). Experten diskutieren mehr Flexibilität beim Übergang zwischen Erwerbs- und Rentenphase.
+
+Trotz aller Diskussionen: Die gesetzliche Rentenversicherung bleibt die tragfähigste Säule der Altersvorsorge. Mit stabilen Beitragssätzen und kräftigen Rentenerhöhungen profitieren Rentner direkt von der wirtschaftlichen Entwicklung.
+
+## 8 Fazit
+
+2026 zeigt die gesetzliche Rentenversicherung Stabilität: Der Beitragssatz bleibt neun Jahre unverändert, die Rente steigt um über 4 Prozent, der Rentenwert liegt bei 42,52 Euro. Die Beitragsbemessungsgrenze erhöht sich auf 8.450 Euro monatlich, die Altersgrenzen steigen weiter. Mit der bis 2031 verlängerten 48-Prozent-Haltelinie ist das Rentenniveau gesichert. Wer seine Altersversorgung optimieren möchte, sollte freiwillige Beiträge zur gesetzlichen Rentenversicherung prüfen und diese durch betriebliche Altersversorgung oder Riester-Rente ergänzen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste gesetzliche-rentenversicherung]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenlueckenrechner]
+
+[BLOCK dokumente hinterbliebenenrente,broschuere-basisrente,betriebliche-altersversorgung,rentenversicherung-familien]
+
+
+## FAQ
+F: Wie hoch ist der Rentenbeitragssatz 2026?
+A: Der Beitragssatz zur gesetzlichen Rentenversicherung bleibt 2026 unverändert bei 18,6 Prozent. Arbeitnehmer und Arbeitgeber tragen jeweils die Hälfte, also 9,3 Prozent. Diese Stabilität besteht seit 2018.
+F: Wann kann ich 2026 in Rente gehen?
+A: Im Jahr 1960 Geborene erreichen die Regelaltersgrenze mit 66 Jahren und 4 Monaten und können von Juni 2026 bis Mai 2027 abschlagsfrei in Rente gehen. Das Renteneintrittsalter steigt kontinuierlich weiter an, bis es bei Jahrgang 1964 bei 67 Jahren liegt.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: Die Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung steigt 2026 auf 8.450 Euro monatlich beziehungsweise 101.400 Euro jährlich. Einkommen oberhalb dieser Grenze bleibt beitragsfrei, führt aber auch nicht zu höheren Rentenansprüchen.
+F: Wie funktioniert das Umlageverfahren der Rente?
+A: Die gesetzliche Rentenversicherung arbeitet nach dem Umlageverfahren: Die aktuellen Beitragseinnahmen und Steuerzuschüsse finanzieren direkt die Rentenausgaben desselben Jahres. Arbeitgeber und Arbeitnehmer teilen sich den Beitrag paritätisch.

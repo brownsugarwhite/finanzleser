@@ -1,0 +1,171 @@
+# Abfindungen (abfindungen-von-der-steuer-absetzen)
+## 0 Abfindung berechnen: Steuern sparen und optimal verhandeln
+
+Eine Abfindung ist voll steuerpflichtig – mit der Fünftelregelung lässt sich aber sparen. Wie sie 2026 besteuert wird und wie Sie clever verhandeln.
+
+## 1 Abfindung 2026: Steuer, Fünftelregelung und Verhandlung
+
+Abfindungen sind Entschädigungszahlungen, die Arbeitgeber bei Beendigung des Arbeitsverhältnisses an Arbeitnehmer leisten. Der Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro und der Spitzensteuersatz greift ab einem zu versteuernden Einkommen von 69.879 Euro. Die wichtigste Änderung: Seit dem 1. Januar 2025 wendet der Arbeitgeber die Fünftelregelung nicht mehr beim Lohnsteuerabzug an. Die Steuerersparnis erfolgt erst über die Steuererklärung.
+
+Diese Neuerung führt zu erheblichen Liquiditätsnachteilen. Bei einer Abfindung von 75.000 Euro werden sofort rund 30 Prozent Lohnsteuer einbehalten – über 22.000 Euro. Sie erhalten diese Summe erst nach Bearbeitung der Steuererklärung zurück, was 15 bis 18 Monate dauern kann.
+
+## 2 Was sind Abfindungen und wann entstehen sie?
+
+Abfindungen sind steuerbare Einkünfte aus nichtselbstständiger Arbeit. Sie fallen typischerweise bei Kündigungen, Aufhebungsverträgen oder Betriebsänderungen an. Grundsätzlich besteht kein Rechtsanspruch auf eine Abfindung – sie ist eine freiwillige Leistung des Arbeitgebers oder vereinbarte Entschädigung.
+
+Abfindungen erhöhen das zu versteuernde Einkommen vollständig. Anders als beim normalen Arbeitslohn fallen jedoch keine Sozialversicherungsbeiträge an. Eine wichtige Ausnahme: Freiwillig Krankenversicherte zahlen auf ihre Abfindung Krankenversicherungsbeiträge.
+
+&#x1f504; Karteikarte
+
+Zu versteuerndes Einkommen (zvE)
+
+Das zvE ist die Bemessungsgrundlage für die Einkommensteuer nach Abzug aller Freibeträge, Werbungskosten und Sonderausgaben. Es liegt deutlich unter dem Bruttoeinkommen.
+
+## 3 Wie hoch sind die Steuersätze für Abfindungen 2026?
+
+Die Besteuerung richtet sich nach dem progressiven Einkommensteuersatz. Der Spitzensteuersatz von 42 Prozent greift 2026 ab einem zu versteuernden Einkommen von 69.879 Euro, während der Höchststeuersatz (Reichensteuer) bei 45 Prozent ab 277.826 Euro beginnt.
+
+&#x1f9e0; Quiz
+
+Ab welchem zu versteuernden Einkommen zahlen Sie 2026 den Spitzensteuersatz von 42 Prozent?
+
+66.760 Euro
+
+68.481 Euro
+
+69.879 Euro
+
+C
+
+Der Spitzensteuersatz von 42 Prozent greift 2026 ab einem zu versteuernden Einkommen von 69.879 Euro (Stand 2026).
+
+Die wichtigsten Steuersätze für 2026:
+
+| Steuersatz | Zu versteuerndes Einkommen | Prozentsatz
+
+| Grundfreibetrag | bis 12.348 Euro | 0% (steuerfrei)
+
+| Eingangssteuersatz | ab 12.349 Euro | 14%
+
+| Spitzensteuersatz | ab 69.879 Euro | 42%
+
+| Reichensteuer | ab 277.826 Euro | 45%
+
+Ohne Steueroptimierung würde eine hohe Abfindung den Grenzsteuersatz stark anheben. Genau hier hilft die Fünftelregelung – seit 2025 allerdings nur noch über die Steuererklärung.
+
+## 4 Fünftelregelung: So funktioniert die Steueroptimierung bei Abfindungen
+
+Die Fünftelregelung nach § 34 EStG mildert die Progressionswirkung erheblich. Seit Januar 2025 wendet der Arbeitgeber die Fünftelregelung nicht mehr beim Lohnsteuerabzug an – die Entlastung erfolgt über die Steuererklärung. Die Regelung selbst bleibt vollständig erhalten.
+
+&#x1f4ca; Schätzfrage
+
+Um wie viel Euro steigt der Grundfreibetrag von 2025 auf 2026?
+
+200
+
+300
+
+252
+
+€
+
+Der Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro gegenüber 12.096 Euro in 2025 (Stand 2026).
+
+Das Berechnungsverfahren läuft in vier Schritten:
+
+- Ermittlung der Jahreslohnsteuer für den Arbeitslohn ohne Abfindung
+
+- Addition eines Fünftels der Abfindung zum Jahresarbeitslohn
+
+- Berechnung der Differenz zwischen beiden Steuersätzen
+
+- Multiplikation des Ergebnisses mit fünf
+
+Das Finanzamt wendet automatisch die günstigere Variante an. Sie müssen lediglich die Abfindung in der Anlage N eintragen.
+
+Wichtige Voraussetzungen für die Fünftelregelung:
+
+- Entschädigung im Sinne des § 24 Nr. 1 EStG
+
+- Zusammenballung der Einkünfte in einem Veranlagungsjahr
+
+- Vollständige Auszahlung in einem Kalenderjahr
+
+- Abgabe einer Steuererklärung
+
+## 5 Wie können Sie Steuern bei Abfindungen sparen?
+
+Strategische Steueroptimierung kann mehrere tausend Euro Ersparnis bringen. Die wichtigsten Hebel für 2026:
+
+Rürup-Rente nutzen
+
+Der Höchstbetrag liegt 2026 bei 30.826 Euro für Alleinstehende und 61.652 Euro für zusammen Veranlagte. Bei einem Grenzsteuersatz von 42 Prozent finanziert der Staat rechnerisch 42 Cent jedes eingezahlten Euros.
+
+Betriebliche Altersvorsorge einzahlen
+
+Arbeitnehmer können 2026 insgesamt 8.112 Euro pro Jahr steuerfrei in ihre betriebliche Altersvorsorge einzahlen. Davon sind 4.056 Euro auch sozialabgabenfrei. Diese Einzahlungen mindern das zu versteuernde Einkommen direkt und verstärken die Wirkung der Fünftelregelung.
+
+Kirchensteuer-Teilerlass beantragen
+
+Bei vielen Landeskirchen können Sie einen formlosen Antrag stellen und bis zu 50 Prozent der auf Abfindungen entfallenden Kirchensteuer zurückerhalten. Voraussetzung: Die Abfindung fällt unter die Fünftelregelung.
+
+Auszahlungszeitpunkt strategisch planen
+
+Wer Ende 2025 ausscheidet, kann vertraglich vereinbaren, dass die Abfindung erst im Januar 2026 fließt. Dadurch sinken die übrigen Einkünfte im Abfindungsjahr und die Fünftelregelung wirkt stärker.
+
+&#x1f4a1; Schon gewusst?
+
+Die Steuerersparnis durch die Fünftelregelung kann bei hohen Abfindungen über 10.000 Euro betragen – aber nur noch nach Abgabe der Steuererklärung 2026.
+
+## 6 Was ändert sich bei Abfindungen 2026?
+
+Die neue Rechtslage bringt zunächst Nachteile für Abfindungs-Empfänger. Arbeitgeber ziehen bei Auszahlung den vollen Lohnsteuersatz ab – ohne Berücksichtigung der Fünftelregelung. Die Steuerersparnis erhalten Sie erst nach Bearbeitung der Steuererklärung.
+
+Wichtige Termine und Fristen für 2026:
+
+| Optimierungsmaßnahme | Höchster Vorteil 2026 | Frist
+
+| Rürup-Rente | 30.826 € (Ledige) | 31. Dezember 2026
+
+| Betriebliche Altersvorsorge | 8.112 € steuerfrei | 31. Dezember 2026
+
+| Steuererklärung | Rückerstattung | 31. Juli 2027
+
+| Kirchensteuer-Teilerlass | Bis 50% Erstattung | Nach Steuerbescheid
+
+Positiver Aspekt: Die Fünftelregelung bleibt vollständig erhalten. Alle bewährten Steueroptimierungsstrategien funktionieren weiterhin. Die höheren Freibeträge 2026 schaffen zusätzliche Gestaltungsspielräume.
+
+## 7 Fazit
+
+Seit 2025 erfordert die steuerliche Behandlung von Abfindungen mehr Eigenverantwortung. Sie erhalten die Steuerersparnis nicht direkt bei Auszahlung, sondern erst nach Veranlagung. Das führt zu temporären Liquiditätsnachteilen, die Sie durch strategische Planung abfedern können.
+
+Die wichtigsten Erfolgsfaktoren:
+
+- Frühzeitige Planung des Auszahlungszeitpunkts
+
+- Optimale Nutzung der erhöhten Freibeträge 2026
+
+- Rechtzeitige Abgabe der Steuererklärung
+
+- Professionelle Beratung bei höheren Beträgen
+
+Mit der Rürup-Rente können 2026 bis zu 30.826 Euro für Alleinstehende und 61.652 Euro für Verheiratete steuerlich abgesetzt werden. Die betriebliche Altersvorsorge bietet 8.112 Euro Freibetrag. Beide Instrumente verstärken die Wirkung der Fünftelregelung deutlich.
+
+Wichtig: Alle Optimierungsmaßnahmen müssen bis zum 31. Dezember 2026 umgesetzt werden. Die strategische Vorbereitung kann bei größeren Abfindungen mehrere tausend Euro Steuerersparnis bringen. Das neue Verfahren führt zwar zu kurzfristigen Liquiditätsengpässen, die steuerlichen Vorteile bleiben jedoch vollständig erhalten.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste abfindungen]
+
+[BLOCK rechner abfindung]
+
+
+## FAQ
+F: u003cstrongu003eMuss ich eine Abfindung versteuern?u003c/strongu003e
+A: Ja. Eine Abfindung zählt zu den außerordentlichen Einkünften und ist grundsätzlich einkommensteuerpflichtig. Sozialversicherungsbeiträge fallen dagegen meist nicht an. Über die Fünftelregelung nach § 34 EStG lässt sich die Steuerlast aber spürbar senken.
+F: u003cstrongu003eWie funktioniert die Fünftelregelung?u003c/strongu003e
+A: Die Fünftelregelung glättet den progressiven Steuertarif: Rechnerisch wird nur ein Fünftel der Abfindung zum übrigen Einkommen hinzugerechnet und die darauf entfallende Mehrsteuer anschließend mit fünf multipliziert. Sie ist keine echte Ratenzahlung, sondern eine reine Rechenvorschrift – und führt meist zu einer deutlichen Ersparnis.
+F: u003cstrongu003eWer wendet die Fünftelregelung an – mein Arbeitgeber oder das Finanzamt?u003c/strongu003e
+A: Seit 2025 berücksichtigt der Arbeitgeber die Fünftelregelung nicht mehr im Lohnsteuerabzug. Er behält zunächst die volle Lohnsteuer ein; die Tarifermäßigung prüft und gewährt ausschließlich das Finanzamt im Rahmen Ihrer Einkommensteuererklärung. Eine Steuererklärung ist daher Pflicht, um den Vorteil zu erhalten.
+F: u003cstrongu003eFallen auf eine Abfindung Sozialversicherungsbeiträge an?u003c/strongu003e
+A: In den meisten Fällen nicht: Auf eine echte Abfindung werden keine Beiträge zur Renten-, Kranken-, Pflege- und Arbeitslosenversicherung fällig (§ 14 SGB IV). Eine Ausnahme gilt für freiwillig gesetzlich Krankenversicherte – sie müssen auf die Abfindung Beiträge zur Kranken- und Pflegeversicherung nachzahlen.

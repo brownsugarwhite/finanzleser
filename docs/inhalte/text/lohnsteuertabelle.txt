@@ -1,0 +1,109 @@
+# Lohnsteuertabelle (lohnsteuertabelle)
+## 0 Lohnsteuertabelle 2024: Berechnung & Steuern richtig verstehen
+
+Die Lohnsteuertabelle zeigt, wie viel Lohnsteuer je Steuerklasse vom Gehalt abgeht. Wie sie 2026 aufgebaut ist und wie Sie Ihre Lohnsteuer selbst berechnen.
+
+## 1 Lohnsteuertabelle 2026: Steuerklassen, Berechnung und Werte
+
+Die Lohnsteuertabelle dient zur Ermittlung der monatlichen Lohnsteuer vom Arbeitslohn und ist für jeden deutschen Arbeitgeber unverzichtbar. Das Bundesfinanzministerium erstellt im Einvernehmen mit den obersten Finanzbehörden der Länder Programmablaufpläne für die maschinelle Berechnung der Lohnsteuer, des Solidaritätszuschlags und der Bemessungsgrundlage für die Kirchenlohnsteuer. 2026 steigt der Grundfreibetrag um 252 Euro auf 12.348 Euro pro Jahr – eine zentrale Erleichterung für alle Steuerpflichtigen.
+
+Die Lohnsteuertabelle basiert auf dem progressiven Einkommensteuertarif und unterscheidet zwischen sechs verschiedenen Steuerklassen. Die zweite Steuerstufe mit einem progressiven Steuersatz von 14 bis 24 Prozent endet bei 17.799 Euro in 2026. Die nächste Stufe mit einem Steuersatz von 24 bis 42 Prozent beträgt maximal 69.878 Euro in 2026. Der Spitzensteuersatz von 42 Prozent gilt bis 277.825 Euro, darüber greift die Reichensteuer von 45 Prozent.
+
+## 2 Was ist die Lohnsteuertabelle 2026?
+
+Die Lohnsteuertabelle entsteht aus den Programmablaufplänen des BMF für die maschinelle Berechnung der Lohnsteuer, des Solidaritätszuschlags und der Bemessungsgrundlage für die Kirchenlohnsteuer. Bis 2003 veröffentlichte die Finanzverwaltung noch amtliche Lohnsteuertabellen. Seither werden nur Programmablaufpläne herausgegeben, dennoch erscheinen weiterhin nicht-amtliche Lohnsteuertabellen als praktische Orientierungshilfe.
+
+Die Tabelle ordnet einem Bruttoarbeitslohn und einer Steuerklasse die einzubehaltende Lohnsteuer zu. Sie ist ein Nachschlagewerk für den Lohnsteuerabzug nach § 39b EStG. Die Anwendung ist einfach: Lohnzahlungszeitraum bestimmen, Steuerklasse wählen, Bruttolohn-Stufe finden und Lohnsteuerwert ablesen.
+
+[SPIEL gewusst: Etwa 90 Prozent der Steuerzahler zahlen 2026 keinen Solidaritätszuschlag mehr, da die Freigrenze auf 20.350 Euro angestiegen ist.]
+
+## 3 Wie unterscheiden sich allgemeine und besondere Lohnsteuertabelle?
+
+Es gibt wegen der Vorsorgepauschalen zwei unterschiedliche Lohnsteuertabellen: die allgemeine Tabelle für rentenversicherungspflichtige Arbeitnehmer und die besondere Tabelle für nicht Rentenversicherungspflichtige wie Beamte oder Gesellschafter-Geschäftsführer.
+
+Die allgemeine Lohnsteuertabelle kann für alle Arbeitnehmer verwendet werden, die in den gesetzlichen Sozialversicherungen pflichtversichert sind. Die besondere Lohnsteuertabelle wird hingegen für Arbeitnehmer verwendet, die in keiner gesetzlichen Sozialversicherung versicherungspflichtig sind.
+
+Entscheidend für 2026: Ab 2026 wird die Mindestvorsorgepauschale nicht mehr berücksichtigt. Stattdessen wirken sich bei Privatversicherten nun die vom Arbeitnehmer tatsächlich entrichteten Beiträge zur Basisversorgung in der Lohnsteuerberechnung aus. Dies erfordert eine individuelle Betrachtung bei nicht-rentenversicherungspflichtigen Arbeitnehmern.
+
+## 4 Welche Steuerklassen gibt es und wie wirken sie sich aus?
+
+Deutschland kennt sechs verschiedene Steuerklassen, die das monatliche Nettogehalt maßgeblich bestimmen. Steuerklasse I gilt für Ledige, Geschiedene und Verwitwete. Steuerklasse II steht Alleinerziehenden zu – sie profitieren vom Entlastungsbetrag in Höhe von 4.260 Euro pro Jahr nach § 24b EStG.
+
+[SPIEL karte: Entlastungsbetrag für Alleinerziehende]
+
+| Steuerklasse | Beschreibung | Besonderheiten | Netto bei 4.000 € Brutto
+
+| I | Ledige, Geschiedene, Verwitwete | Grundfreibetrag 12.348 € | ca. 2.566 €
+
+| II | Alleinerziehende | Entlastungsbetrag + 4.260 € | ca. 2.692 €
+
+| III | Verheiratete (Höherverdiener) | Doppelter Grundfreibetrag | ca. 2.883 €
+
+| IV | Verheiratete (ähnliches Einkommen) | Wie Klasse I | ca. 2.566 €
+
+| V | Verheiratete (Geringverdiener) | Partner hat Klasse III | ca. 2.220 €
+
+| VI | Zweit-/Nebenjob | Kein Grundfreibetrag | ca. 2.183 €
+
+Steuerklasse III nutzt das Ehegattensplitting vollständig: Der Tarif wird auf die Hälfte des zu versteuernden Einkommens angewendet und das Ergebnis verdoppelt. Der Partner erhält dann Steuerklasse V mit entsprechend höherer monatlicher Belastung.
+
+## 5 Lohnsteuertabelle 2026: Was sind die wichtigsten Eckwerte?
+
+Die Programmablaufpläne 2026 berücksichtigen bedeutende Anpassungen. Der steuerfreie Grundfreibetrag steigt für 2026 um 252 Euro. Außerdem werden die Tarifeckwerte mit Ausnahme des Eckwerts zur sogenannten "Reichensteuer" nach rechts verschoben.
+
+- Grundfreibetrag 2026: 12.348 Euro (Tarifanpassung)
+
+- Kinderfreibetrag 2026: 4.878 Euro je Elternteil (9.756 Euro zusammen)
+
+- Freigrenze Soli im Lohnsteuerabzug 2026: 20.350 Euro
+
+- Beitragsbemessungsgrenze KV/PV 2026: 69.750 Euro jährlich (5.812,50 Euro monatlich)
+
+- Beitragsbemessungsgrenze RV/ALV 2026: 101.400 Euro jährlich (8.450 Euro monatlich)
+
+Der durchschnittliche Zusatzbeitrag in der gesetzlichen Krankenversicherung beträgt 2,9 Prozent bei ansonsten unveränderten Beitragssätzen. Der allgemeine Beitragssatz zur Krankenversicherung liegt bei 14,6 Prozent, die Arbeitslosenversicherung bei 2,6 Prozent.
+
+[SPIEL mythos: Die Lohnsteuer ist eine eigenständige Steuer neben der Einkommensteuer → nein]
+
+## 6 Wie funktioniert die Steuerklassenwahl und -optimierung?
+
+Verheiratete können zwischen verschiedenen Kombinationen wählen: IV/IV, III/V oder IV mit Faktor. Ein Wechsel ist seit 2020 mehrmals im Jahr möglich. Besonders sinnvoll vor größeren Lebensereignissen: 7 Monate vor der Geburt (Elterngeld richtet sich nach dem Netto der letzten 12 Monate), bei drohender Arbeitslosigkeit (ALG I ebenfalls Netto-basiert) oder wenn ein Partner in Elternzeit geht.
+
+Die Steuerklasse beeinflusst nur den monatlichen Lohnsteuerabzug, nicht die jährliche Steuerschuld. Diese wird endgültig in der Steuererklärung ermittelt. Singles haben meist Klasse I, Alleinerziehende Klasse II, Verheiratete die Kombinationen III/V oder IV/IV. Die Steuerklasse ändert nicht deine Jahressteuer, sondern nur den monatlichen Abzug – über die Steuererklärung wird am Ende alles korrekt abgerechnet.
+
+## 7 Welche Besonderheiten gelten bei Minijobs und Midijobs?
+
+Die Verdienstgrenze im Minijob liegt 2026 bei 603 Euro. Grund hierfür ist der Anstieg des Mindestlohns auf 13,90 Euro. Die Grenze ist dynamisch an den Mindestlohn gekoppelt – bei jeder Erhöhung steigt auch die Minijobgrenze automatisch.
+
+Für Verdienste aus Beschäftigungen im sogenannten Übergangsbereich steigt die Untergrenze 2026 auf 603,01 Euro. Die Obergrenze bleibt stabil bei 2.000 Euro im Monat. Im Midijob zahlen Arbeitnehmer reduzierte Sozialversicherungsbeiträge, erhalten aber volle Rentenansprüche.
+
+[SPIEL schaetzen: Wie hoch ist die jährliche Minijob-Grenze 2026? → 7236]
+
+## 8 Praktische Anwendung und häufige Fehler
+
+Die praktische Anwendung gliedert sich in vier Schritte: Lohnzahlungszeitraum bestimmen (monatlich/jährlich), Steuerklasse auswählen (I bis VI), Bruttolohn-Stufe in der Tabelle finden ("von … bis …"), Lohnsteuerwert ablesen; Soli/Kirchensteuer ggf. zusätzlich berücksichtigen.
+
+Häufige Anwendungsfehler entstehen durch veraltete Tabellenwerte, falsche Steuerklassenangaben oder Verwechslung zwischen allgemeiner und besonderer Tabelle. Für genaue Abrechnungen ist die maschinelle Berechnung der Standard. Der PAP 2026 ist dafür die amtliche Rechengrundlage.
+
+Arbeitgeber sollten prüfen: Software-Updates mit PAP 2026, ELStAM-Abgleich für Steuerklasse und Kinderfreibeträge, korrekte Sozialversicherungsparameter und ordnungsgemäße Berechnung bei Sonderzahlungen wie Boni oder Weihnachtsgeld.
+
+## 9 Fazit
+
+Die Lohnsteuertabelle 2026 bringt durch den erhöhten Grundfreibetrag von 12.348 Euro spürbare Entlastungen für alle Arbeitnehmer. Die Anpassungen der Tarifeckwerte sollen eine lediglich progressionsbedingt höhere Einkommensbesteuerung verhindern und wirken der kalten Progression entgegen. Der Wegfall der Mindestvorsorgepauschale erfordert bei Privatversicherten eine individuelle Betrachtung ihrer Basisversorgungsbeiträge. Die gestiegenen Beitragsbemessungsgrenzen führen bei Gutverdienern zu höheren Sozialabgaben, während die erhöhte Soli-Freigrenze von 20.350 Euro etwa 90 Prozent der Steuerzahler vollständig entlastet. Verheiratete profitieren von der flexibilisierten Steuerklassenwahl mit mehrfachen Wechselmöglichkeiten pro Jahr. Die dynamische Kopplung der Minijobgrenze an den Mindestlohn sorgt für automatische Anpassungen und mehr Planungssicherheit bei geringfügigen Beschäftigungen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste lohnsteuertabelle]
+
+[BLOCK rechner einkommensteuer]
+
+
+## FAQ
+F: Gibt es 2026 noch amtliche Lohnsteuertabellen?
+A: Nein, seit 2003 werden keine amtlichen Lohnsteuertabellen mehr veröffentlicht. Stattdessen stellt das Bundesfinanzministerium Programmablaufpläne zur maschinellen Berechnung zur Verfügung. Nicht-amtliche Tabellen erscheinen jedoch weiter als übersichtliche Orientierungshilfe.
+F: Wie hoch ist das Nettogehalt bei 4.000 Euro brutto in Steuerklasse I?
+A: In Steuerklasse I bleiben bei 4.000 Euro brutto rund 2.566 Euro netto übrig. In Klasse III sind es etwa 2.883 Euro, in Klasse V hingegen nur 2.220 Euro. Die konkreten Beträge hängen zudem vom Zusatzbeitrag der Krankenkasse und weiteren Faktoren ab.
+F: Welche Steuersätze gelten 2026?
+A: Einkommen bis 12.348 Euro bleibt steuerfrei. Zwischen 12.348 und 17.799 Euro gilt ein progressiver Steuersatz von 14 bis 24 Prozent. Die nächste Stufe mit 24 bis 42 Prozent reicht bis 69.878 Euro. Der Spitzensteuersatz beträgt 45 Prozent.
+F: Welche Steuerklasse gilt für Alleinerziehende?
+A: Alleinerziehende werden in Steuerklasse II eingeordnet und erhalten einen Entlastungsbetrag von 4.260 Euro jährlich für das erste Kind. Je weiterem Kind erhöht sich dieser Betrag um 240 Euro. Voraussetzung ist, dass keine weitere erwachsene Person im Haushalt lebt.

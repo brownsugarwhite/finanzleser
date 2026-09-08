@@ -1,0 +1,145 @@
+# Kündigung (kuendigung)
+## 0 Kündigung im Arbeitsrecht: Fristen, Formvorschriften und Rechte
+
+Bei einer Kündigung im Arbeitsverhältnis zählen Fristen, Form und Kündigungsschutz. Welche Regeln 2026 gelten und welche Rechte Arbeitnehmer haben.
+
+## 1 Kündigung: Fristen, Schutzvorschriften und rechtliche Anforderungen 2026
+
+Eine Kündigung ist die einseitige Beendigung eines Arbeitsverhältnisses durch Arbeitgeber oder Arbeitnehmer. Diese rechtliche Willenserklärung unterliegt strengen formalen und inhaltlichen Anforderungen. Das deutsche Arbeitsrecht schützt beide Parteien durch ein ausgeklügeltes System aus Kündigungsfristen, Schutzvorschriften und Verfahrensregeln. Die Grundlage bilden § 622 BGB für Kündigungsfristen mit vier Wochen zum 15. oder Monatsende und das Kündigungsschutzgesetz für Betriebe ab zehn Mitarbeitern.
+
+## 2 Kündigungsfristen 2026: Tabelle und Berechnung
+
+Die gesetzliche Grundfrist beträgt vier Wochen zum 15. oder zum Ende eines Kalendermonats. Für Arbeitnehmer bleibt diese Frist unverändert – unabhängig davon, wie lange sie im Betrieb tätig sind. Arbeitgeber hingegen müssen längere Fristen beachten, die sich nach der Betriebszugehörigkeit staffeln.
+
+[SPIEL mythos: Kündigungsfristen verlängern sich automatisch für beide Parteien mit der Betriebszugehörigkeit. → nein]
+
+Für Arbeitgeberkündigungen gelten gestaffelte Fristen nach Betriebszugehörigkeit:
+
+| Betriebszugehörigkeit | Kündigungsfrist | Gültig zum
+
+| Unter 2 Jahren | 4 Wochen | 15. oder Monatsende
+
+| 2 Jahre | 1 Monat | Monatsende
+
+| 5 Jahre | 2 Monate | Monatsende
+
+| 8 Jahre | 3 Monate | Monatsende
+
+| 10 Jahre | 4 Monate | Monatsende
+
+| 12 Jahre | 5 Monate | Monatsende
+
+| 20 Jahre | 7 Monate | Monatsende
+
+In der Probezeit, die maximal sechs Monate dauern darf, beträgt die Kündigungsfrist für beide Seiten zwei Wochen. Diese kann zu jedem beliebigen Tag ausgesprochen werden, nicht nur zum 15. oder Monatsende.
+
+## 3 Schriftform und Zugangsnachweis bei Kündigungen
+
+Kündigungen müssen zwingend schriftlich mit eigenhändiger Unterschrift erfolgen (§ 623 BGB). E-Mails, WhatsApp oder mündliche Kündigungen sind unwirksam. Diese strenge Formvorschrift schützt beide Parteien vor übereilten Entscheidungen und schafft Rechtsklarheit.
+
+Der Zugang der Kündigung ist für den Fristbeginn ausschlaggebend. Das Bundesarbeitsgericht hat mit Urteil vom 30. Januar 2025 (Az. 2 AZR 68/24) klargestellt, dass ein Einlieferungsbeleg für Einwurf-Einschreiben nicht als Zugangsnachweis genügt. Nur der tatsächliche Auslieferungsbeleg beweist, wann die Kündigung angekommen ist.
+
+Sichere Zustellwege für die Kündigung sind:
+
+- Persönliche Übergabe mit Empfangsbestätigung
+
+- Zustellung durch Boten mit Zeugen
+
+- Einschreiben mit Rückschein als Beweis
+
+[SPIEL quiz: Welche Kündigungsfrist gilt für einen Arbeitnehmer nach 15 Jahren Betriebszugehörigkeit?]
+
+## 4 Kündigungsschutzgesetz: Wer ist geschützt?
+
+Das Kündigungsschutzgesetz gilt in Betrieben mit mehr als zehn Arbeitnehmern nach einer Wartezeit von sechs Monaten. Für die Berechnung der Mitarbeiterzahl werden Teilzeitkräfte bis 20 Stunden mit Faktor 0,5, bis 30 Stunden mit Faktor 0,75 berücksichtigt. Damit wird mehr Transparenz für Arbeitnehmer geschaffen.
+
+Die drei Arten von Kündigungen werden unterschieden nach ihren Gründen:
+
+- Personenbedingte Kündigung (etwa wegen Krankheit oder fehlender Qualifikation)
+
+- Verhaltensbedingte Kündigung (etwa wegen Pflichtverletzung oder Regelverstöße)
+
+- Betriebsbedingte Kündigung (etwa wegen Stellenabbau oder wirtschaftlicher Gründe)
+
+Besonderen Kündigungsschutz genießen Schwangere, Schwerbehinderte, Betriebsratsmitglieder und Elternzeitberechtigte. Diese Gruppen können nur in schwerwiegenden Ausnahmefällen gekündigt werden. Der Schutz dieser Gruppen ist ein wichtiger Bestandteil des sozialen Arbeitsrechts.
+
+## 5 Wann ist eine außerordentliche Kündigung möglich?
+
+Eine fristlose Kündigung erfordert einen wichtigen Grund, der die Fortsetzung des Arbeitsverhältnisses unzumutbar macht (§ 626 BGB). Solche Gründe sind:
+
+- Diebstahl, Betrug oder Spionage
+
+- Beharrliche Arbeitsverweigerung
+
+- Mobbing, sexuelle Belästigung oder Gewalt am Arbeitsplatz
+
+- Wiederholtes Ausbleiben der Gehaltszahlung (bei Arbeitnehmer­kündigungen)
+
+[SPIEL gewusst: Bei fristloser Kündigung muss eine strenge Zwei-Wochen-Frist ab Kenntniserlangung eingehalten werden – sonst wird sie unwirksam (§ 626 Abs. 2 BGB, Stand 2026).]
+
+Vor einer fristlosen Kündigung ist in der Regel eine Abmahnung erforderlich. Diese zeigt dem Arbeitnehmer sein Fehlverhalten und gibt ihm Gelegenheit zur Besserung. Bei strafbarem Verhalten kann die Abmahnung entfallen.
+
+## 6 Betriebsratsanhörung: Rechte und Fristen
+
+§ 102 BetrVG schreibt vor: Der Betriebsrat ist vor jeder Kündigung anzuhören. Der Arbeitgeber muss ihm die Gründe mitteilen. Eine ohne Anhörung ausgesprochene Kündigung ist unwirksam, was zu erheblichen Konsequenzen führt.
+
+Die Anhörungsfristen sind je nach Kündigungsart unterschiedlich:
+
+- Bei ordentlichen Kündigungen: eine Woche
+
+- Bei außerordentlichen Kündigungen: drei Tage
+
+Der Betriebsrat muss umfassend über die beabsichtigte Kündigung unterrichtet werden. Fehlerhafte Anhörung führt zur Unwirksamkeit. Der Arbeitgeber muss mitteilen:
+
+- Person des betroffenen Arbeiters
+
+- Art der Kündigung (ordentlich oder außerordentlich)
+
+- Kündigungsgründe und Kündigungstermin
+
+- Bei betriebsbedingten Kündigungen: Sozialauswahl­kriterien
+
+[SPIEL schaetzen: Wie viele Tage hat der Betriebsrat bei fristloser Kündigung Zeit für seine Stellungnahme? → 3]
+
+## 7 Häufige Kündigungsfehler und rechtliche Risiken
+
+Die meisten Kündigungen scheitern an formalen Mängeln. Typische Fehler sind:
+
+- Fehlende Betriebsratsanhörung führt zur Unwirksamkeit
+
+- Mangelhafte Sozialauswahl bei betriebsbedingten Kündigungen
+
+- Verstoß gegen Sonderkündigungsschutz für besondere Personengruppen
+
+- Nichteinhaltung der Schriftform mit eigenhändiger Unterschrift
+
+- Unzureichender Zugangsnachweis bei Einwurf-Einschreiben
+
+- Verspätete fristlose Kündigung nach der Zwei-Wochen-Frist
+
+Arbeitnehmer haben drei Wochen nach Kündigungszugang Zeit, um eine Kündigungsschutzklage einzureichen. Nach Fristablauf gilt die Kündigung als wirksam. Bei Kündigungsstreitigkeiten ist eine Rechtsschutzversicherung sinnvoll, um die Kosten für Anwaltshonorare und Gerichtsverfahren zu decken.
+
+2026 gelten verschärfte Anforderungen: Bei Kündigungen nach Beschwerden oder Gehaltsauskünften muss der Arbeitgeber aktiv beweisen, dass kein Kausalzusammenhang besteht. Dies stärkt den Schutz vor Maßregelungen erheblich.
+
+## 8 Finanzielle Folgen einer Kündigung
+
+Nach einer Kündigung kann ein Anspruch auf Arbeitslosengeld entstehen, wenn bestimmte Voraussetzungen erfüllt sind. Wer aufgrund von gesundheitlichen Einschränkungen nicht arbeiten kann, sollte sich über eine Berufsunfähigkeitsversicherung informieren, um sich gegen Einkommensverluste abzusichern.
+
+## 9 Fazit
+
+Das Kündigungsrecht 2026 zeigt eine klare Struktur aus Schutz und Flexibilität. Die gesetzlichen Fristen von vier Wochen zum 15. oder Monatsende für Arbeitnehmer und bis zu sieben Monaten für Arbeitgeber nach 20 Jahren Betriebszugehörigkeit schaffen Planungssicherheit für beide Seiten. Das Kündigungsschutzgesetz gilt ab zehn Mitarbeitern nach sechs Monaten Wartezeit und erfordert sachlich gerechtfertigte Kündigungsgründe. Besonders wichtig sind die zwingend erforderliche Schriftform mit eigenhändiger Unterschrift und die obligatorische Betriebsratsanhörung vor jeder Kündigung. Fristlose Kündigungen setzen einen wichtigen Grund und strikte Zwei-Wochen-Frist voraus. Die aktuelle Rechtsprechung hat die Anforderungen an den Zugangsnachweis verschärft: Nur tatsächliche Auslieferungsbelege, nicht Online-Sendungsstatus, beweisen den Zugang. Aufgrund der Komplexität und hohen Fehleranfälligkeit ist rechtliche Beratung bei konkreten Kündigungsfällen dringend empfehlenswert.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste kuendigung]
+
+
+## FAQ
+F: Welche Kündigungsfristen gelten nach dem BGB?
+A: Nach § 622 BGB beträgt die Grundkündigungsfrist für Arbeitnehmer vier Wochen zum 15. oder Monatsende. Ab zwei Jahren Betriebszugehörigkeit verlängert sie sich auf einen Monat zum Monatsende. Für Arbeitgeber steigt die Frist gestaffelt bis auf sechs Monate ab 15 Jahren Betriebszugehörigkeit.
+F: Wie lange ist die Kündigungsfrist in der Probezeit?
+A: Während der Probezeit, die maximal sechs Monate dauern darf, beträgt die Kündigungsfrist für beide Parteien zwei Wochen. Diese verkürzte Frist gilt unabhängig vom Kündigungsgrund und soll beiden Seiten eine schnelle Trennung ermöglichen.
+F: Wann ist eine fristlose Kündigung zulässig?
+A: Nach § 626 BGB ist eine fristlose Kündigung nur bei Vorliegen eines wichtigen Grundes möglich, wenn die Fortsetzung des Arbeitsverhältnisses unzumutbar ist. Beispiele sind Diebstahl, schwere Pflichtverletzungen oder grundlose Arbeitsverweigerung. Sie muss innerhalb von zwei Wochen nach Bekanntwerden des Grundes ausgesprochen werden.
+F: Ist eine Abmahnung vor der Kündigung immer erforderlich?
+A: Bei verhaltensbedingten Kündigungen ist eine Abmahnung in der Regel erforderlich, um die Warnfunktion zu erfüllen. Sie muss das Fehlverhalten konkret mit Datum und Ort beschreiben. Ausnahmen bestehen bei besonders schweren Verstößen wie Diebstahl oder Gewalt.

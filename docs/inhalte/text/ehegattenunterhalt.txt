@@ -1,0 +1,149 @@
+# Ehegattenunterhalt (ehegattenunterhalt)
+## 0 Ehegattenunterhalt Anspruch: Rechte & Pflichten bei Scheidung
+
+Ehegattenunterhalt sichert den schwächeren Partner bei Trennung und nach der Scheidung. Welche Arten es gibt, wie er berechnet wird und was 2026 gilt.
+
+## 1 Ehegattenunterhalt: Unterhalt bei Trennung und Scheidung 2026
+
+Ehegattenunterhalt regelt die finanzielle Unterstützung zwischen Ehepartnern bei Trennung oder Scheidung.
+
+Der Ehegattenunterhalt ist ein fundamentaler Baustein des deutschen Familienrechts. Er sichert den finanziell schwächeren Ehepartner bei Trennung oder Scheidung ab. Das Unterhaltsrecht unterscheidet drei Formen: Familienunterhalt während der Ehe, Trennungsunterhalt zwischen Trennung und Scheidung sowie nachehelicher Unterhalt nach der Scheidung.
+
+2026 bleiben die Berechnungsmethoden stabil. Der Unterhaltspflichtige darf 1.600 € (erwerbstätig) oder 1.475 € (nicht erwerbstätig) behalten. Der Partner erhält 45 % der Einkommensdifferenz – das entspricht der 3/7-Methode.
+
+## 2 Trennungsunterhalt vs. nachehelicher Unterhalt
+
+Trennungsunterhalt und nachehelicher Unterhalt unterscheiden sich grundlegend. Der erste sichert den Lebensstandard während der Trennung. Der zweite gilt nach der Scheidung unter strengeren Bedingungen.
+
+Trennungsunterhalt:
+
+- Beginnt nach der Trennung, endet mit der Scheidung
+
+- Setzt nur Trennung und Einkommensdifferenz voraus
+
+- Im ersten Trennungsjahr besteht keine Pflicht zur Erwerbstätigkeit
+
+Nachehelicher Unterhalt:
+
+- Beginnt mit der rechtskräftigen Scheidung
+
+- Folgt dem Grundsatz der Eigenverantwortung (§ 1569 BGB)
+
+- Erfordert spezielle gesetzliche Gründe
+
+[SPIEL quiz: Wann beginnt der Anspruch auf nachehelichen Unterhalt?]
+
+Nach der Scheidung gilt: Jeder Ehepartner ist selbst für seinen Lebensunterhalt verantwortlich. Ein nachehelicher Unterhaltsanspruch besteht nur bei besonderen gesetzlich geregelten Tatbeständen.
+
+## 3 Berechnung des Ehegattenunterhalts 2026
+
+Die Berechnung folgt der 3/7-Methode, auch Differenzmethode genannt. Der unterhaltsberechtigte Partner erhält drei Siebtel der Einkommensdifferenz. Der Unterhaltspflichtige behält vier Siebtel plus Erwerbstätigenbonus.
+
+Berechnungsschritte:
+
+1. Bereinigtes Nettoeinkommen ermitteln: 5 % des Nettoeinkommens abziehen (mindestens 50 €, maximal 150 €) für berufliche Ausgaben
+
+2. Einkommensdifferenz bilden: Nettoeinkommen beider Partner vergleichen
+
+3. 3/7-Regel anwenden: Der weniger verdienende Partner erhält drei Siebtel der Differenz
+
+4. Erwerbstätigenbonus addieren: Falls vorhanden, zusätzlich 1/7 der Differenz
+
+| Schritt | Betrag (€) | Erklärung
+
+| Partner A Netto | 4.000 | Unterhaltspflichtiger
+
+| Partner B Netto | 1.500 | Unterhaltsberechtigter
+
+| Differenz | 2.500 | 4.000 − 1.500
+
+| 3/7 davon | 1.071 | 2.500 × 3/7
+
+| Nach Selbstbehalt | 875 | Max. 4.000 − 1.600
+
+[SPIEL gewusst: In Süddeutschland (OLG Bamberg, Karlsruhe, München, Stuttgart) werden oft 45 % statt 3/7 angewendet – das Ergebnis ist praktisch identisch (Stand 2026).]
+
+Kindesunterhalt hat Vorrang: Bereits gezahlte Kindesunterhaltsbeträge reduzieren das verfügbare Einkommen für Ehegattenunterhalt erheblich.
+
+## 4 Wann besteht Anspruch auf nachehelichen Unterhalt?
+
+Der nacheheliche Unterhalt unterliegt strengeren Regeln. Das Gesetz definiert sechs konkrete Unterhaltstatbestände:
+
+Betreuungsunterhalt (§ 1570 BGB): Der betreuende Partner kann bis drei Jahre nach der Geburt Unterhalt verlangen. Die Dauer verlängert sich, wenn es der Billigkeit entspricht.
+
+Altersunterhalt (§ 1571 BGB): Wer altersbedingt nicht mehr arbeiten kann, hat Anspruch.
+
+Krankheitsunterhalt (§ 1572 BGB): Bei Erkrankungen, die Erwerbstätigkeit unmöglich machen.
+
+Erwerbslosenunterhalt (§ 1573 BGB): Bei unverschuldeter Arbeitslosigkeit trotz Bemühungen.
+
+Aufstockungsunterhalt (§ 1573 Abs. 2 BGB): Auch berufstätige Partner können Unterhalt erhalten, wenn ihre Einkünfte deutlich geringer sind und die ehelichen Lebensverhältnisse das geprägt haben.
+
+Ausbildungsunterhalt (§ 1575 BGB): Für Aus-, Fort- oder Umschulung zur angemessenen Erwerbstätigkeit.
+
+[SPIEL mythos: Nach Scheidung haben beide automatisch Anspruch auf nachehelichen Unterhalt → nein]
+
+Zwei Bedingungen müssen erfüllt sein: Der Bedürftige kann seinen Lebensunterhalt nicht selbst bestreiten. Der andere Partner ist finanziell leistungsfähig. Diese doppelte Prüfung zeigt: Nachehelicher Unterhalt ist keine Selbstverständlichkeit.
+
+## 5 Dauer des nachehelichen Unterhalts
+
+Die Dauer ist komplex. Das Gesetz gibt keine festen Fristen vor. § 1578b BGB ermöglicht Befristung und Herabsetzung für fast alle Unterhaltsgründe.
+
+Orientierungshilfen nach Ehedauer:
+
+- Unter 3 Jahren: Kein oder kurz befristeter Unterhalt
+
+- 3–10 Jahre: Befristung auf etwa 1/3 bis 1/2 der Ehedauer
+
+- 10–20 Jahre: Befristung möglich, eher Herabsetzung
+
+- Über 20 Jahre: Oft unbefristeter Unterhalt wegen ehelicher Prägung
+
+Ehebedingte Nachteile entscheidend: Eine Befristung ist nur möglich, wenn der Partner keine ehebedingten Nachteile hat. Solche entstehen, wenn jemand Berufstätigkeit für Kinderbetreuung aufgibt.
+
+Betreuungsunterhalt ist Ausnahme: Er wird mindestens bis zum dritten Lebensjahr des Kindes gewährt. Danach muss der Partner selbst Einkommen erzielen.
+
+## 6 Selbstbehalt 2026
+
+Der Selbstbehalt schützt den Zahlenden vor Armut. 2026 gelten diese Beträge:
+
+- Erwerbstätige: 1.600 € monatlich
+
+- Nicht erwerbstätige (Rentner): 1.475 € monatlich
+
+Diese Sätze waren 2025 identisch und haben sich 2026 nicht verändert. Dem Unterhaltspflichtigen muss nach Unterhaltszahlung mindestens dieser Betrag verbleiben.
+
+Praktische Durchsetzung:
+
+- Trennungs- und nachehelicher Unterhalt sind getrennte Ansprüche
+
+- Mit der Scheidung endet Trennungsunterhalt automatisch
+
+- Nachehelicher Unterhalt muss neu geltend gemacht werden
+
+- Ein Unterhaltstitel für Trennungsunterhalt ist keine Grundlage für nachehelichen Unterhalt
+
+- Bei Zahlungsrückständen kann Unterhaltsvorschuss eine wichtige Rolle spielen, wobei hier primär Kinder profitieren – für Ehegatten gelten besondere Regeln
+
+## 7 Fazit
+
+Der Ehegattenunterhalt 2026 hat klare Strukturen, aber komplexe Einzelfallentscheidungen. Trennungsunterhalt entsteht relativ einfach bei Einkommensdifferenz. Nachehelicher Unterhalt unterliegt strengen Voraussetzungen und zeitlicher Begrenzung. Die Düsseldorfer Tabelle und die 3/7-Methode bieten bei der Unterhaltsberechnung Orientierungshilfen, wobei letztere speziell für Ehegattenunterhalt gilt. Die unveränderten Selbstbehaltssätze bieten Rechtssicherheit. Frühzeitige rechtliche Beratung ist wichtig, da Berechnung und Durchsetzung hochkomplex sind und erhebliche finanzielle Folgen haben. Der Trend zur Befristung verstärkt die Eigenverantwortung nach der Scheidung.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste ehegattenunterhalt]
+
+[BLOCK rechner unterhalt]
+
+[BLOCK dokumente anlage-unterhalt-2024,duesseldorfer-tabelle-2026,der-unterhaltsvorschuss-data]
+
+
+## FAQ
+F: Welche Formen des Ehegattenunterhalts gibt es?
+A: Das deutsche Familienrecht unterscheidet drei Formen: den Familienunterhalt während der Ehe, den Trennungsunterhalt bis zur rechtskräftigen Scheidung und den nachehelichen Unterhalt danach. Jede Form hat eigene Voraussetzungen und muss gesondert geltend gemacht werden.
+F: Wie wird der Ehegattenunterhalt 2026 berechnet?
+A: Die Berechnung erfolgt nach der Differenzmethode: Dem unterhaltsberechtigten Partner stehen 45 Prozent der Differenz zwischen den bereinigten Nettoeinkommen beider Partner zu. Kindesunterhalt hat dabei Vorrang und reduziert das verfügbare Einkommen.
+F: Wie lange besteht Anspruch auf Trennungsunterhalt?
+A: Trennungsunterhalt kann ab der Trennung bis zur rechtskräftigen Scheidung verlangt werden. Spätestens nach drei Jahren Getrenntleben muss der unterhaltsberechtigte Ehegatte in der Regel eigenes Einkommen erzielen, da die Erwerbsobliegenheit mit der Zeit zunimmt.
+F: Wann besteht Anspruch auf nachehelichen Unterhalt?
+A: Nach der Scheidung gilt der Grundsatz der Eigenverantwortung. Anspruch besteht nur bei klar definierten Tatbeständen wie Betreuung gemeinsamer Kinder unter drei Jahren, Alter, Krankheit, unverschuldeter Erwerbslosigkeit oder notwendiger Ausbildung und Fortbildung.

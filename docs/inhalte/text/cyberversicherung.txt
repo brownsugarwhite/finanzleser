@@ -1,0 +1,151 @@
+# Cyberversicherung (cyberversicherung)
+## 0 Schutz vor Cyberangriffen: Versicherung für digitale Risiken
+
+Eine Cyberversicherung schützt Unternehmen vor den Folgen von Hackerangriffen und Datenpannen. Was sie 2026 abdeckt, was sie kostet und für wen sie sinnvoll ist.
+
+## 1 Cyberversicherung: Schutz vor digitalen Angriffen
+
+Eine Cyberversicherung schützt Unternehmen vor finanziellen Folgen digitaler Angriffe und IT-Sicherheitsvorfälle.
+
+Cyberrisiken stellen weltweit zum fünften Mal in Folge das größte Geschäftsrisiko dar. Künstliche Intelligenz klettert als größter Risikoaufsteiger auf Platz 2 des Allianz Risk Barometers 2026. Doch während 84 Prozent der deutschen Unternehmen bereits von einem Cyberangriff betroffen waren, verfügen nur 7 Prozent über eine entsprechende Versicherung. Diese Lücke macht deutlich, warum eine Cyberversicherung heute unverzichtbar ist.
+
+## 2 Was eine Cyberversicherung abdeckt
+
+Eine Cyberversicherung ist eine Versicherung für digitale Risiken. Sie deckt finanzielle Folgen von Cyberangriffen ab – etwa Kosten für IT-Forensik, Krisenkommunikation, Betriebsunterbrechung oder Haftpflichtansprüche Dritter.
+
+Cybervorfälle treffen kleine wie große Unternehmen. Ransomware, Datenabfluss, Betrug über kompromittierte E-Mails und Ausfälle bei IT-Dienstleistern gehören zu den häufigsten Schadenbildern. Die Dimensionen sind beeindruckend: Cyberkriminalität verursacht geschätzt 14 Billionen US-Dollar Schäden bis 2028 – nur die USA und China haben größere Volkswirtschaften.
+
+Diese Bereiche deckt eine Cyberversicherung typischerweise:
+
+- Eigenschäden: IT-Forensik, Analyse von Angriffszielen, Rekonstruktion verschlüsselter Daten, Ersatz entgangener Gewinne bei Systemstillstand
+
+- Drittschäden: Haftungsansprüche von Kunden oder Geschäftspartnern
+
+- Krisenmanagement: PR-Beratung zur Abwendung von Reputationsschäden
+
+- Rechtliche Unterstützung: Abdeckung von Schadensersatzansprüchen bei Datenverlust und DSGVO-Verstößen
+
+[SPIEL schaetzen: Wie hoch ist der durchschnittliche Cyberversicherungsschaden für KMU in Euro? → 95000]
+
+## 3 Markt und Prämien 2026
+
+Der globale Cyberversicherungsmarkt wächst rasant. Das Prämienvolumen erreichte 2025 rund 15,3 bis 16,3 Milliarden US-Dollar. Bis 2030 wird sich das Volumen auf über 30 Milliarden US-Dollar verdoppeln. Europa macht etwa 21 Prozent des Marktes aus und wächst mit 26 Prozent pro Jahr am schnellsten.
+
+Nach zwei Jahren relativer Stabilität steigen die Prämien wieder. S&P Global Ratings prognostiziert für 2026 einen Anstieg von 15 bis 20 Prozent. Der Grund: Die Schadensfrequenz steigt schneller als die Prämieneinnahmen. Ransomware-Gruppen professionalisieren sich, Remote Work vergrößert die Angriffsflächen, und Wiederherstellungskosten steigen durch komplexere IT-Landschaften.
+
+Besonders betroffen sind Hochrisikobranchen. Für Unternehmen im Gesundheitswesen und in Finanzdienstleistungen liegen die Prämien bereits 50 Prozent über dem Marktdurchschnitt. Diese Branchen sind attraktive Ziele und unterliegen strengsten Regulierungen. Produktion und Logistik sind 2026 ebenfalls zunehmend gefährdet durch steigende Angriffe auf Produktionssysteme.
+
+| Unternehmenstyp | Jahresprämie | Deckung
+
+| KMU (10–50 MA) | 500–5.000 € | 1–5 Mio. €
+
+| Mittelstand (50–200 MA) | 5.000–25.000 € | 1–5 Mio. €
+
+| Großunternehmen (500+ MA) | 25.000–100.000+ € | 5–20+ Mio. €
+
+| Hochrisikobranchen | +50% Aufschlag | Variabel
+
+## 4 Wer braucht eine Cyberversicherung?
+
+Die Antwort ist klar: Praktisch jedes Unternehmen. Wenn Ihr Unternehmen E-Mails nutzt, sensible Daten speichert oder auf IT-Systeme angewiesen ist – Sie benötigen eine Cyberversicherung.
+
+[SPIEL karte: NIS2-Umsetzungsgesetz]
+
+Besonders gefährdet sind:
+
+- IT-Dienstleister: Als Einfallstor in die Lieferkette besonders attraktiv
+
+- E-Commerce und Online-Dienste: Datenverlust führt direkt zu Drittschäden
+
+- NIS2-betroffene Unternehmen: Seit Dezember 2025 verpflichtet das NIS-2-Umsetzungsgesetz rund 30.000 deutsche Unternehmen zu strengen Sicherheitsmaßnahmen. Viele Cyberversicherer machen die Einhaltung dieser Vorgaben zur Voraussetzung für den Versicherungsschutz. Wer die Anforderungen ignoriert, riskiert nicht nur Bußgelder von bis zu 10 Millionen Euro, sondern auch den Verlust des Versicherungsschutzes
+
+- Fertigung und Produktion: Cyberangriffe auf den Sektor stiegen um 71 Prozent
+
+Die Zahlen sind eindeutig: 87 Prozent der Unternehmen waren in den vergangenen zwölf Monaten von Datendiebstahl, Industriespionage oder Sabotage betroffen. 34 Prozent wurden mit Ransomware angegriffen. Der Gesamtschaden: 289,2 Milliarden Euro – ein Plus von 30 Prozent gegenüber dem Vorjahr.
+
+Für Privatpersonen ist die Situation anders. Private Cyberversicherungen kosten durchschnittlich etwa 50 Euro pro Jahr. Klassische Versicherungen schließen Cyber-Risiken vermehrt in ihre Deckung ein – vor allem in neuen Tarifen. Daher gibt es derzeit noch wenige separate Tarife für Privatpersonen.
+
+## 5 Anforderungen der Versicherer 2026
+
+Der Cyberversicherungsmarkt hat sich seit 2022 fundamental gewandelt. Versicherer prüfen die IT-Sicherheit deutlich strenger. Aus einfachen Fragebögen sind technische Bewertungen geworden. Spezialisierte Dienstleister scannen die tatsächliche Sicherheitslage – nicht nur die behauptete.
+
+[SPIEL mythos: Eine Cyberversicherung können Sie ohne Multi-Faktor-Authentifizierung abschließen → nein]
+
+Die fünf unverzichtbaren Anforderungen:
+
+1. Multi-Faktor-Authentifizierung: 95 Prozent der Versicherer fordern MFA auf E-Mail, VPN und Admin-Konten – nicht „verfügbar", sondern „erzwungen"
+
+2. Backup-Management: Regelmäßige Backups nach 3-2-1-Regel, getestet
+
+3. Patch-Management: Kritische Patches innerhalb von 72 Stunden
+
+4. Endpoint Detection and Response: 89 Prozent der Versicherer verlangen EDR auf allen Endgeräten mit dokumentierter Reaktion
+
+5. Incident-Response-Plan: Ein schriftlicher Notfallplan mit Rollen und Kontaktlisten
+
+Diese fünf Maßnahmen sind nicht verhandelbar. Mit ihnen sinken die Prämien um bis zu 60 Prozent.
+
+## 6 Konkrete Leistungen einer Cyberversicherung
+
+Moderne Cyberversicherungen sind Bündelprodukte. Sie verbinden Risikobewertung, Prävention, operative Notfallhilfe und finanziellen Schutz zu einem integrierten Ansatz.
+
+| Leistungsbereich | Konkrete Deckung
+
+| IT-Forensik | Kosten für externe Spezialisten
+
+| Datenwiederherstellung | Wiederherstellung verschlüsselter Daten
+
+| Betriebsunterbrechung | Entgangener Gewinn bei Systemausfall
+
+| Krisenkommunikation | Benachrichtigungen und PR-Maßnahmen
+
+| Cyber-Haftpflicht | Ansprüche Dritter wegen Datenschutzverletzungen
+
+| Lösegeldzahlung | Bei Ransomware (oft mit Einschränkungen)
+
+24/7-Notfallunterstützung: Viele Tarife enthalten Soforthilfe-Services. Diese Soforthilfe ist oft entscheidender als reine Kostenerstattung, denn Unternehmen müssen Frühwarnungen innerhalb von 24 Stunden durchführen.
+
+Wichtige Ausschlüsse:
+
+- Nation-State-Angriffe: Staatlich gesponserte Angriffe sind seit März 2023 ausgeschlossen
+
+- Systemische Ereignisse: Koordinierte Angriffe auf große Cloud-Provider können unter Katastrophen-Ausschlüsse fallen
+
+- KI-spezifische Risiken: Shadow AI ohne AI-Usage-Policy kann als grobe Fahrlässigkeit eingestuft werden
+
+## 7 Prämien senken und Ablehnungen vermeiden
+
+27 Prozent der Datenschutzverletzungsansprüche werden vollständig oder teilweise abgelehnt. Die Ablehnungsrate ist in den letzten zwei Jahren gestiegen, weil Versicherer die Anforderungen parallel zu den Prämien verschärft haben.
+
+Effektive Strategien zur Prämienreduzierung:
+
+- IT-Sicherheitszertifizierungen: Typischerweise senken sich die Prämien um 15–25 Prozent. ISO 27001 wird als Nachweis für strukturiertes Sicherheitsmanagement anerkannt
+
+- Regelmäßige Penetrationstests: SOC 2 Reports wirken prämienmindernd
+
+- Mitarbeiterschulungen: Zertifizierte Unternehmen bekommen bessere Tarife
+
+- Dokumentierte IT-Sicherheit: Halten Sie alle Maßnahmen schriftlich fest
+
+Vermeidung von Leistungsablehnungen:
+
+Wer Obliegenheiten nicht einhält, riskiert im Schadenfall die komplette Leistungsverweigerung. Die häufigsten Ablehnungsgründe sind fehlende Multi-Faktor-Authentifizierung, verspätete Sicherheitsupdates und fahrlässig falsch beantwortete Risikofragen. Eine Rechtsschutzversicherung kann Sie bei Streitigkeiten mit dem Versicherer unterstützen. Im Schadenfall tragen Sie die Beweislast, dass Sie alle Pflichten erfüllt haben.
+
+Für Unternehmen, die zusätzlich ihre allgemeine Betriebshaftung schützen möchten, bietet sich eine Betriebshaftpflichtversicherung an, um Ansprüche Dritter abzudecken, die über reine Cyberschäden hinausgehen. Selbstständige und freiberufliche Dienstleister sollten darüber hinaus eine Berufshaftpflichtversicherung in Betracht ziehen, um ihre Haftungsrisiken umfassend abzusichern.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste cyberversicherung]
+
+[BLOCK vergleich cyberversicherung-vergleich]
+
+
+## FAQ
+F: Was deckt eine Cyberversicherung ab?
+A: Eine Cyberversicherung deckt Kosten für Datenwiederherstellung, Betriebsunterbrechungen, IT-Forensik, Krisenkommunikation, DSGVO-Beratung, Rechtsberatung sowie Haftpflichtansprüche Dritter ab. Je nach Police sind auch Lösegeldzahlungen bei Ransomware abgesichert.
+F: Warum brauchen Unternehmen eine Cyberversicherung?
+A: Zwei Drittel der deutschen Unternehmen sehen laut Bitkom ihre Existenz durch Cyberangriffe gefährdet. Ohne Versicherung tragen Unternehmen alle Kosten für Forensik, Wiederherstellung und Bußgelder selbst – im Schnitt etwa 60.000 Euro pro Vorfall. Besonders KMU sind zunehmend im Fokus von Angriffen.
+F: Welche Schäden deckt die Cyberversicherung nicht ab?
+A: Nicht gedeckt sind in der Regel Schäden durch staatlich gelenkte Angriffe (War Exclusion), reine Reputationsverluste ohne finanzielle Folgeschäden sowie vorher bekannte Schwachstellen, die nicht behoben wurden. Auch grob fahrlässige Sicherheitsverstöße können zum Leistungsausschluss führen.
+F: Wie groß ist der Markt für Cyberversicherungen?
+A: Der globale Cyberversicherungsmarkt erreicht 2025 ein Prämienvolumen von etwa 16,3 Milliarden US-Dollar. Bis 2030 soll sich das Volumen auf über 32 Milliarden verdoppeln. Europa macht mit 3,3 Milliarden US-Dollar rund 21 Prozent des Marktes aus und wächst mit 26 Prozent pro Jahr am schnellsten.

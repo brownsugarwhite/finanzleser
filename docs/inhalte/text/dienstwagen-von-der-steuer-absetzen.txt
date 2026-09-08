@@ -1,0 +1,139 @@
+# Dienstwagen (dienstwagen-von-der-steuer-absetzen)
+## 0 Dienstwagen Steuern: Steuerabzug & Regelungen erklärt
+
+Ein privat genutzter Dienstwagen muss versteuert werden – per Ein-Prozent-Regel oder Fahrtenbuch. Wie Sie 2026 sparen und welche Vorteile E-Autos bringen.
+
+## 1 Dienstwagen versteuern 2026: Steuersparmodelle und Elektroauto-Vorteile
+
+Einen Dienstwagen zur privaten Nutzung zu fahren, hat steuerliche Folgen. Der geldwerte Vorteil muss versteuert werden. Die gute Nachricht: 2026 bieten sich durch geänderte Regelungen bei Elektrofahrzeugen und der Entfernungspauschale neue Sparpotenziale. Welche Methode für Sie sinnvoll ist, hängt von Ihrer Fahrleistung und dem Fahrzeugtyp ab.
+
+## 2 Wie funktioniert die Ein-Prozent-Regelung?
+
+Bei der Ein-Prozent-Regelung wird monatlich ein Prozent des Bruttolistenpreises als geldwerter Vorteil versteuert. Das ist unkompliziert, da keine Dokumentation nötig ist.
+
+Der Bruttolistenpreis ist die Herstellerempfehlung inklusive Mehrwertsteuer und Sonderausstattung zum Zeitpunkt der Erstzulassung – nicht der tatsächliche Kaufpreis.
+
+Zusätzlich zur privaten Nutzung fällt eine Besteuerung des Arbeitswegs an. Die Pauschalwertmethode rechnet monatlich 0,03 Prozent des Bruttolistenpreises je Entfernungskilometer. Diese Berechnung geht davon aus, dass Sie 15 Tage im Monat zur Arbeit fahren.
+
+Alternative bei weniger Arbeitstagen: Die 0,002-Prozent-Regel lohnt sich, wenn Sie an weniger als 15 Tagen monatlich pendeln. Dann zahlen Sie 0,002 Prozent des Bruttolistenpreises pro Entfernungskilometer und Fahrtstag.
+
+| Fahrzeugtyp | Monatlicher Satz | Arbeitsweg
+
+| Verbrenner | 1% des Bruttolistenpreises | 0,03% je km
+
+| E-Auto bis 100.000 € | 0,25% des Bruttolistenpreises | 0,0075% je km
+
+| E-Auto über 100.000 € | 0,5% des Bruttolistenpreises | 0,015% je km
+
+| Plug-in-Hybrid | 0,5% des Bruttolistenpreises | 0,015% je km
+
+[SPIEL schaetzen: Wie hoch ist der monatliche geldwerte Vorteil für ein E-Auto mit 60.000 Euro Listenpreis? → 150]
+
+## 3 Massive Steuervorteile für Elektrofahrzeuge 2026
+
+Elektrofahrzeuge profitieren von deutlich besseren Sätzen. Seit dem 20. Juli 2025 gilt eine neue Preisgrenze: E-Autos bis 100.000 Euro Bruttolistenpreis werden mit nur 0,25 Prozent monatlich besteuert. Vorher lag die Grenze bei 70.000 Euro.
+
+Bei teureren Elektrofahrzeugen (über 100.000 Euro), die nach dem 30. Juni 2025 und vor dem 1. Januar 2031 gekauft wurden, gilt die 0,5-Prozent-Regelung.
+
+Plug-in-Hybride: Sie erhalten ebenfalls 0,5 Prozent Versteuerung, müssen aber seit Anfang 2025 eine elektrische Mindestreichweite von 80 Kilometern oder maximal 50 Gramm CO₂-Emission pro Kilometer (WLTP) nachweisen.
+
+Beim Arbeitsweg profitieren E-Autos vom gleichen Vorteil: Statt 0,03 Prozent zahlen Sie nur 0,0075 Prozent je Entfernungskilometer.
+
+[SPIEL karte: Bruttolistenpreis (BLP)]
+
+## 4 Fahrtenbuch-Methode: Wann sich der Aufwand lohnt
+
+Das Führen eines Fahrtenbuchs ist aufwendiger, kann aber erheblich Steuern sparen. Sie dokumentieren, welcher Anteil der Fahrten beruflich und welcher privat erfolgt.
+
+Die Methode lohnt sich in diesen Fällen:
+
+- Privater Nutzungsanteil unter 20–30 Prozent
+
+- Hoher Bruttolistenpreis des Fahrzeugs
+
+- Gebrauchtwagen oder bereits abgeschriebene Fahrzeuge
+
+- Lange Arbeitswege, die die 0,03-Prozent-Regelung belasten
+
+Anforderungen an ein anerkanntes Fahrtenbuch:
+
+Einträge müssen zeitnah erfolgen – idealerweise direkt nach der Fahrt, spätestens am selben Tag. Das Finanzamt erkennt wöchentliche Nachtragungen nicht an. Jede Fahrt muss folgende Daten enthalten:
+
+- Datum
+
+- Kilometerstand (Anfang und Ende)
+
+- Ziel und Geschäftspartner
+
+- Fahrtzweck (konkret angeben)
+
+- Bei privaten Fahrten genügt die Notation „privat" mit Kilometerstand
+
+Nachträgliche Korrektionen müssen kenntlich gemacht oder ausgeschlossen sein. Die Form muss geschlossen sein.
+
+[SPIEL quiz: Ab wie vielen Bürotagen monatlich ist die 0,03-Prozent-Pauschale günstiger?]
+
+## 5 Arbeitsweg und Entfernungspauschale kombinieren
+
+Der Arbeitsweg wird zusätzlich zur privaten Nutzung versteuert. Parallel können Sie aber die Entfernungspauschale geltend machen – beide Regelungen gelten gleichzeitig.
+
+Ab dem 1. Januar 2026 beträgt die Entfernungspauschale 0,38 Euro je Kilometer ab dem ersten Kilometer. Das ist eine Erhöhung gegenüber den 0,30 Euro in 2025.
+
+Warum das funktioniert: Die Versteuerung des Dienstwagens misst Ihren Vorteil. Die Entfernungspauschale berücksichtigt Ihre Belastung durch das Pendeln. Beide Positionen betreffen den gleichen Weg aus unterschiedlichen Perspektiven.
+
+Praktisches Beispiel: Ein Arbeitnehmer fährt täglich 40 Kilometer mit dem Dienstwagen zur Arbeit. Die 0,03-Prozent-Regelung versteuert einen Anteil dieses Wegs. Gleichzeitig kann er die Entfernungspauschale von 40 km × 0,38 Euro = 15,20 Euro täglich (etwa 304 Euro monatlich bei 20 Arbeitstagen) als Werbungskosten geltend machen.
+
+## 6 Ladekosten bei Elektrofahrzeugen: Neue Regeln ab 2026
+
+Die bisherigen Pauschalen von 30 oder 70 Euro monatlich entfallen ab dem 1. Januar 2026 ersatzlos. Stattdessen gelten neue Regelungen:
+
+Steuerfrei laden auf dem Firmengelände: Wenn Sie Ihren E-Dienstwagen in der Betriebsstätte aufladen, entsteht kein geldwerter Vorteil.
+
+Häusliches Laden: Erstattungen für Ladekosten zu Hause müssen jetzt an den tatsächlichen Verbrauch gekoppelt sein. Sie benötigen einen separaten Stromzähler (etwa in der Wallbox integriert).
+
+Die Strompreispauschale für 2026 liegt bei 0,34 Euro pro Kilowattstunde.
+
+Beispiel: Ein Arbeitnehmer dokumentiert 3.500 kWh Lademenge per Zähler und wählt die Strompreispauschale. Der steuerfreie Auslagenersatz beträgt dann 3.500 kWh × 0,34 Euro = maximal 1.190 Euro jährlich.
+
+## 7 Abschreibungsvorteile für Unternehmen
+
+Unternehmen können Elektrofahrzeuge, die zwischen dem 30. Juni 2025 und dem 1. Januar 2028 gekauft werden, degressiv abschreiben.
+
+Die Sonderabschreibung umfasst:
+
+- Bis zu 75 Prozent der Anschaffungskosten im ersten Jahr
+
+- Gilt nur für gekaufte Fahrzeuge, nicht für Leasingmodelle
+
+- Befristet bis Ende 2027 für Neuanschaffungen
+
+Praktische Hinweise:
+
+- Achten Sie auf die 100.000-Euro-Preisgrenze bei E-Autos
+
+- Die Versteuerungsmethode kann im laufenden Jahr nicht gewechselt werden
+
+- Ein Wechsel ist nur zum Jahresbeginn oder bei neuem Fahrzeug möglich
+
+- Bei Plug-in-Hybriden müssen die Mindestreichweite- oder CO₂-Werte eingehalten werden
+
+## 8 Fazit
+
+Die Besteuerung von Dienstwagen 2026 bietet erhebliche Gestaltungsspielräume. Elektrofahrzeuge bis 100.000 Euro profitieren von der 0,25-Prozent-Regelung, die Steuerbelastung senkt sich damit um 75 Prozent gegenüber Verbrennern. Die Fahrtenbuch-Methode spart Steuern, wenn der private Nutzungsanteil unter 20–30 Prozent liegt.
+
+Die neue Entfernungspauschale von 38 Cent ab dem ersten Kilometer (2026) verbessert die Situation für alle Pendler zusätzlich. Bei E-Fahrzeugen müssen Sie ab 2026 Ladekosten zu Hause dokumentieren, profitieren aber weiterhin von steuerfreiem Laden auf dem Firmengelände. Eine genaue Prüfung Ihrer persönlichen Situation – Fahrdistanzen, Privatanteil, Fahrzeugpreis – zahlt sich aus.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste dienstwagen]
+
+
+## FAQ
+F: Wie funktioniert die Ein-Prozent-Regelung beim Dienstwagen?
+A: Bei der Ein-Prozent-Regelung wird pauschal ein Prozent des Bruttolistenpreises des Dienstwagens monatlich als geldwerter Vorteil versteuert. Zusätzlich kommen für Fahrten zur Arbeitsstätte 0,03 Prozent des Listenpreises je Entfernungskilometer hinzu.
+F: Welche Steuervorteile gelten 2026 für Elektro-Dienstwagen?
+A: Für Elektrofahrzeuge bis 100.000 Euro Bruttolistenpreis gilt nur 0,25 Prozent statt 1 Prozent als monatlicher Steuersatz, bei Listenpreisen über 100.000 Euro sind es 0,5 Prozent. Diese Vergünstigung gilt bis zum 31. Dezember 2030 für Anschaffungen nach dem 30. Juni 2025 und vor dem 1. Januar 2031.
+F: Wann lohnt sich ein Fahrtenbuch statt der Ein-Prozent-Regel?
+A: Ein Fahrtenbuch lohnt sich besonders, wenn die Gesamtkosten des Firmenwagens niedrig sind – etwa bei abgeschriebenen Fahrzeugen, Gebrauchtwagen oder wenn Sie die Benzinkosten selbst tragen. Auch bei geringem privaten Nutzungsanteil ist die Fahrtenbuchmethode meist günstiger.
+F: Welche Anforderungen stellt das Finanzamt an ein Fahrtenbuch?
+A: Das Fahrtenbuch muss zeitnah, lückenlos und unveränderbar geführt werden. Als zeitnah gilt eine Erfassung bis zu sieben Tage nach der Fahrt. Jede Fahrt muss Datum, Kilometerstand, Ziel, Zweck und Geschäftspartner enthalten. Privatfahrten reichen mit der Kilometerzahl aus.

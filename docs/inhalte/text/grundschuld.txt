@@ -1,0 +1,117 @@
+# Grundschuld (grundschuld)
+## 0 Pfandrecht sichern: Grundschuld erklärt & optimiert nutzen
+
+Die Grundschuld dient der Bank als Sicherheit für einen Immobilienkredit. Wie sie funktioniert, was sie von der Hypothek unterscheidet und worauf Sie 2026 achten.
+
+## 1 Grundschuld: Das wichtigste Sicherungsinstrument bei Immobilienfinanzierungen
+
+Die Grundschuld regelt das Pfandrecht an einer Immobilie zur Kreditsicherung. Sie ist heute das bevorzugte Sicherungsinstrument bei Immobilienfinanzierungen und hat die Hypothek weitgehend ersetzt. Banken nutzen sie in etwa 80% aller Fälle, um sich bei der Vergabe von Baufinanzierungen abzusichern und erhalten bei Zahlungsausfall das Recht zur Zwangsversteigerung.
+
+## 2 Was ist eine Grundschuld?
+
+Eine Grundschuld ist ein Grundpfandrecht, das in Abteilung III des Grundbuchs eingetragen wird. Sie belastet ein Grundstück derart, dass eine bestimmte Geldsumme aus diesem zu zahlen ist – unabhängig von einer konkreten Forderung.
+
+Bei einer Immobilienfinanzierung verlangt die Bank standardmäßig diese Eintragung als Sicherheit. Tritt der Kreditnehmer in Zahlungsausfall, kann die Bank die Immobilie zwangsversteigern und aus dem Erlös das Darlehen begleichen.
+
+Die Grundschuld bietet mehrere Vorteile: Sie lässt sich für mehrere Kredite gleichzeitig verwenden, bleibt nach der Tilgung bestehen und kann problemlos auf andere Gläubiger übertragen werden. Im Gegensatz zur Hypothek ist sie nicht an ein bestimmtes Darlehen gebunden.
+
+## 3 Unterschiede zur Hypothek
+
+Der wichtigste Unterschied liegt in der Abhängigkeit vom Darlehen. Die Hypothek sinkt parallel zur Restschuld: Zahlen Sie Ihr Darlehen ab, reduziert sich auch das Pfandrecht proportional. Bei vollständiger Rückzahlung erlischt die Hypothek automatisch.
+
+Die Grundschuld funktioniert anders. Sie bleibt in ihrer ursprünglichen Höhe bestehen, auch wenn Sie den Kredit teilweise getilgt haben. Dies macht sie deutlich flexibler: Banken können sie daher leichter für verschiedene Finanzierungen verwenden, ohne sie zu löschen und neu einzutragen.
+
+[SPIEL mythos: Wenn ich die Hälfte meines Immobilienkredits abbezahlt habe, reduziert sich auch die Grundschuld im Grundbuch um 50 Prozent. → nein]
+
+## 4 Arten der Grundschuld
+
+Buchgrundschuld ist der Standard. Die Eintragung erfolgt rein elektronisch im Grundbuch. Sie ist kostengünstiger und transparenter, da alle Änderungen digital vermerkt werden.
+
+Briefgrundschuld wird zusätzlich durch einen physischen Grundschuldbrief dokumentiert. Der Vorteil: Die Grundschuld lässt sich ohne Notar durch bloße Übergabe des Briefes übertragen. Mit Kosten etwa 25 Prozent höher als die Buchgrundschuld.
+
+Eigentümergrundschuld entsteht nach vollständiger Tilgung. Sie gehört dann dem Eigentümer selbst und bleibt im Grundbuch eingetragen. Diese Form erlaubt spätere Nutzung für neue Kredite ohne erneute Bestellung.
+
+[SPIEL karte: Globalgrundschuld]
+
+## 5 Ablauf der Grundschuldbestellung
+
+Nach Kreditgenehmigung läuft der Prozess über einen Notar, der die Bestellung beurkundet. Sie unterzeichnen dabei auch eine „persönliche Haftungsunterwerfung", die der Bank ermöglicht, ohne vorherige Klage in Ihr gesamtes Vermögen zu vollstrecken.
+
+Erforderliche Dokumente sind der Darlehensvertrag, die Einigung über die Bestellung und die Eintragungsbewilligung. Die Eintragung dauert üblicherweise 4–12 Wochen, abhängig von Bank, Notar und Grundbuchamt.
+
+## 6 Kosten im Jahr 2026
+
+Seit Juni 2025 sind die Gebühren um 6–9 Prozent gestiegen. Immobilienkäufer sollten insgesamt 1,5–2 Prozent des Kaufpreises einplanen. Hinzu kommt die Grunderwerbsteuer, die je nach Bundesland zwischen 3,5 und 6,5 Prozent beträgt:
+
+- Notargebühren: etwa 1,0–1,5 Prozent
+
+- Grundbuchkosten: etwa 0,5 Prozent
+
+- Auslagen (Porto, Kopien): 50–150 Euro
+
+Bei einer Grundschuld von 300.000 Euro fallen damit Kosten von etwa 4.500–6.000 Euro an.
+
+| Kaufpreis | Notarkosten | Grundbuchkosten | Gesamtkosten
+
+| 200.000 € | 2.000–3.000 € | 1.000 € | 3.000–4.000 €
+
+| 400.000 € | 4.000–6.000 € | 2.000 € | 6.000–8.000 €
+
+| 600.000 € | 6.000–9.000 € | 3.000 € | 9.000–12.000 €
+
+## 7 Zweckerklärung: Ein kritischer Punkt
+
+Die Zweckerklärung bestimmt, wofür die Grundschuld haftet. Banken nutzen oft eine „weite Zweckerklärung" (Globalzweckerklärung), die alle bestehenden und künftigen Forderungen gegen Sie absichert. Das ist riskant:
+
+Szenario: Sie haben Ihr Haus abbezahlt, aber noch einen Autokredit oder einen überzogenen Dispo bei derselben Bank. Theoretisch könnte die Bank dann Ihr Haus zwangsversteigern, um andere Schulden zu begleichen.
+
+Verbraucherschützer empfehlen eine „enge Zweckerklärung", die die Grundschuld ausschließlich an den Immobilienkredit bindet. Nach Tilgung verliert die Bank dann alle Rechte daran.
+
+[SPIEL gewusst: In Deutschland werden jährlich rund 600.000 neue Grundschulden eingetragen – etwa 80 Prozent davon als Buchgrundschuld ohne Brief (Stand 2026).]
+
+## 8 Löschung oder Beibehaltung nach Tilgung?
+
+Nach vollständiger Abzahlung müssen Sie die Grundschuld nicht zwangsläufig löschen. Sie wandelt sich in eine Eigentümergrundschuld um, die zu Ihnen übergeht. Besonders interessant ist die Beibehaltung, wenn Sie staatliche Förderungen wie die KfW Förderung für Modernisierungen nutzen möchten.
+
+Für die Löschung sprechen:
+
+- Geplanter Verkauf der Immobilie
+
+- Übersichtlicheres Grundbuch
+
+Gegen die Löschung sprechen:
+
+- Kosten von 0,2–0,4 Prozent der Grundschuldsumme
+
+- Mögliche zukünftige Nutzung für neue Kredite
+
+- Kostenersparnis bei späteren Finanzierungen
+
+Bei einer Modernisierung oder einem neuen Kredit können Sie die bestehende Grundschuld nutzen und sparen damit teure Neueintragungen.
+
+## 9 Grundschuldabtretung bei Bankwechsel
+
+Bei Anschlussfinanzierungen ist die Abtretung oft günstiger als Löschung und Neueintragung. Sie kostet nur etwa 0,1–0,2 Prozent der Grundschuldsumme – deutlich weniger als eine komplette Neueintragung.
+
+Bei 300.000 Euro Grundschuld sparen Sie durch Abtretung etwa 3.000–4.000 Euro. Voraussetzung: Die neue Bank akzeptiert die bestehende Grundschuld.
+
+## 10 Fazit
+
+Die Grundschuld bleibt das zentrale Sicherungsinstrument bei Immobilienfinanzierungen. Ihre Flexibilität und die stabilen Kosten von etwa 1,5–2 Prozent des Kaufpreises sprechen für ihre Nutzung. Achten Sie bei der Zweckerklärung auf enge Formulierungen. Nach der Tilgung lohnt sich oft die Beibehaltung als Eigentümergrundschuld. Beim Bankwechsel kann die Abtretung erhebliche Kosten sparen. Lassen Sie sich von einem Notar oder Finanzberater alle Optionen erklären, bevor Sie eine Entscheidung treffen.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste grundschuld]
+
+[BLOCK vergleich baufinanzierung-vergleich]
+
+
+## FAQ
+F: Was ist eine Grundschuld?
+A: Die Grundschuld ist ein Grundpfandrecht, das in Abteilung III des Grundbuchs eingetragen wird. Sie dient der Absicherung von Immobilienkrediten: Kann der Eigentümer das Darlehen nicht zurückzahlen, darf die Bank als Inhaberin der Grundschuld eine Zwangsversteigerung veranlassen.
+F: Was unterscheidet Grundschuld und Hypothek?
+A: Die Grundschuld ist im Gegensatz zur Hypothek abstrakt und nicht fest an einen bestimmten Kreditvertrag gebunden. Selbst wenn das Darlehen zur Hälfte abgezahlt ist, bleibt die Grundschuld in voller Höhe im Grundbuch bestehen. Das bietet Flexibilität für künftige Finanzierungen.
+F: Was kostet die Grundschuldbestellung?
+A: Die Kosten für eine Grundschuldbestellung betragen in der Regel 0,8 bis 1,0 Prozent des Kaufpreises. Enthalten sind Notargebühren und Grundbuchkosten. Die gesamte Dauer von der Kreditgenehmigung bis zur Eintragung liegt üblicherweise zwischen vier und sechs Wochen.
+F: Welche Arten der Grundschuld gibt es?
+A: Es gibt zwei Arten: die Buchgrundschuld wird elektronisch im Grundbuch eingetragen und ist der Standardfall. Die Briefgrundschuld wird zusätzlich durch einen physischen Grundschuldbrief dokumentiert, kann aber ohne Notar durch Übergabe des Briefes übertragen werden.

@@ -1,0 +1,173 @@
+# Sozialversicherung (sozialversicherung)
+## 0 Alle Leistungen der Sozialversicherung erklärt und optimiert
+
+Die Sozialversicherung schützt mit fünf gesetzlichen Zweigen vor zentralen Lebensrisiken. Welche Leistungen sie 2026 bietet und wie sich die Beiträge verteilen.
+
+## 1 Sozialversicherung in Deutschland: Die 5 Säulen der sozialen Sicherung
+
+Die Sozialversicherung in Deutschland schützt über 85 Millionen Menschen durch fünf gesetzliche Zweige, die 2026 insgesamt 8,8 Milliarden Euro an Beiträgen einnehmen (Bundesministerium für Arbeit und Soziales).
+
+Das deutsche Sozialversicherungssystem bildet seit dem 1. Januar 2026 ein stabiles Fundament mit erweiterten Grenzen und gestiegenen Beitragssätzen. Die Geringfügigkeitsgrenze steigt auf 603 Euro monatlich, während die allgemeine Beitragsbemessungsgrenze in der Rentenversicherung auf 8.450 Euro anwächst.
+
+## 2 Was ist Sozialversicherung und wie funktioniert das Solidaritätsprinzip?
+
+Die Sozialversicherung ist ein System der sozialen Sicherung, das Versicherte gegen große Lebensrisiken absichert. Sie basiert auf dem Versicherungsprinzip mit gegenseitiger Risikoabsicherung einer Solidargemeinschaft und wird durch Beiträge der Versicherten und ihrer Arbeitgeber finanziert (§ SGB IV).
+
+Das Solidaritätsprinzip beschreibt die gegenseitige Hilfe als Grundlage der Sozialversicherung. Dies bedeutet: Jedes Mitglied zahlt je nach individueller Einkommenshöhe unterschiedliche Beiträge. Die Leistungen aber werden ohne Rücksicht auf die Beitragshöhe für alle Mitglieder erbracht. Die Gesunden zahlen für die Kranken, die Jungen für die Alten.
+
+[SPIEL karte: Solidaritätsprinzip]
+
+## 3 Die fünf Säulen der Sozialversicherung: Welche Risiken deckt jeder Zweig ab?
+
+In Deutschland gibt es fünf Sozialversicherungen, auch Zweige genannt:
+
+### Krankenversicherung
+
+Die gesetzliche Krankenversicherung sichert die medizinische Versorgung ab. Der allgemeine Beitragssatz beträgt 14,6 Prozent, der ermäßigte Satz 14,0 Prozent (Kassenart-abhängig). Der durchschnittliche Zusatzbeitragssatz steigt 2026 auf 2,9 Prozent. Die Beitragsbemessungsgrenze liegt bei 5.812,50 Euro monatlich (Stand: Januar 2026).
+
+### Pflegeversicherung
+
+Die Pflegeversicherung unterstützt bei Pflegebedürftigkeit. Der Beitragssatz beträgt 3,6 Prozent für alle Versicherten. Kinderlose über 23 Jahren zahlen einen Zuschlag von 0,6 Prozent, also insgesamt 4,2 Prozent. Ab zwei Kindern unter 25 Jahren wird der Beitragssatz je Kind um 0,25 Punkte abgesenkt.
+
+### Rentenversicherung
+
+Die Rentenversicherung sorgt für finanzielle Absicherung im Alter und bei Erwerbsminderung. Der Beitragssatz beträgt 18,6 Prozent. Die allgemeine Beitragsbemessungsgrenze beträgt 8.450 Euro monatlich, in der knappschaftlichen Rentenversicherung 10.400 Euro monatlich (Stand 2026).
+
+### Arbeitslosenversicherung
+
+Die Arbeitslosenversicherung bietet finanziellen Schutz bei Arbeitslosigkeit und unterstützt bei der Aufnahme einer neuen Arbeit. Der Beitragssatz bleibt 2,6 Prozent. Sie wird von der Bundesagentur für Arbeit verwaltet.
+
+### Unfallversicherung
+
+Die Unfallversicherung deckt die Folgen von Arbeitsunfällen und Berufskrankheiten ab. Die Beiträge trägt zu 100 Prozent der Arbeitgeber (Ausnahmeregelung im deutschen Sozialversicherungssystem). Die Beitragshöhe variiert nach Branche und Risikoklasse.
+
+## 4 Beitragssätze 2026: Wer zahlt wie viel?
+
+Die allgemeinen Beitragssätze bleiben weitgehend stabil. Arbeitnehmer und Arbeitgeber tragen jeweils 50 Prozent der Sozialversicherungsbeiträge – mit einer zentralen Ausnahme: die Unfallversicherung.
+
+| Versicherungszweig | Beitragssatz | Arbeitnehmer | Arbeitgeber
+
+| Krankenversicherung | 14,6% | 7,3% | 7,3%
+
+| Zusatzbeitrag | 2,9% | 1,45% | 1,45%
+
+| Pflegeversicherung | 3,6%/4,2% | 1,8%/2,1% | 1,8%
+
+| Rentenversicherung | 18,6% | 9,3% | 9,3%
+
+| Arbeitslosenversicherung | 2,6% | 1,3% | 1,3%
+
+Die Unfallversicherung wird vollständig vom Arbeitgeber finanziert – ohne Arbeitnehmerbeitrag (Stand 2026, Bundesverband der Unfallkassen).
+
+[SPIEL quiz: Welche Versicherung wird zu 100 Prozent vom Arbeitgeber finanziert?]
+
+## 5 Von Bismarck bis heute: Die historische Entwicklung der Sozialversicherung
+
+Die Geschichte der gesetzlichen Sozialversicherung beginnt im 19. Jahrhundert. Unter Reichskanzler Otto von Bismarck wurden ab 1883 die ersten Sozialgesetze eingeführt, um der sozialen Not der Arbeiterschaft in der Industrialisierung entgegenzuwirken.
+
+Die chronologische Entwicklung der fünf Säulen:
+
+- Krankenversicherung (seit 1883): Deckt medizinische Versorgung ab, finanziert zu gleichen Teilen von Arbeitgebern und Arbeitnehmern.
+
+- Unfallversicherung (seit 1884): Schützt vor Folgen von Arbeitsunfällen, vollständig arbeitgeberfinanziert.
+
+- Rentenversicherung (seit 1889): Sichert Einkommen im Alter, paritätisch von Arbeitgebern und Arbeitnehmern getragen.
+
+- Arbeitslosenversicherung (seit 1927): Bietet finanzielle Unterstützung bei Arbeitslosigkeit, zu gleichen Teilen finanziert.
+
+- Pflegeversicherung (seit 1995): Die jüngste Säule; sichert Pflegeleistungen ab.
+
+Mit der Rentenreform von 1957 wurde das Umlageverfahren eingeführt. Seitdem finanziert die erwerbstätige Generation die Renten der älteren Generation und erwirbt gleichzeitig Anspruch auf eigene zukünftige Renten (Generationenvertrag).
+
+## 6 Wie wird die Sozialversicherung finanziert?
+
+Das System basiert auf drei Finanzierungssäulen:
+
+### Umlageverfahren: Der Generationenvertrag unter Druck
+
+Die jeweils erwerbstätige Generation finanziert mit ihren Beiträgen direkt die Renten der Ruheständler. Dieses System funktioniert nur bei ausgewogenem Verhältnis zwischen Beitragszahlern und Rentnern.
+
+Das Verhältnis hat sich dramatisch verschlechtert:
+
+- 1962 (Westdeutschland): 6 Beitragszahler pro Rentner
+
+- 1973: 4 Beitragszahler pro Rentner
+
+- 1988: 3 Beitragszahler pro Rentner
+
+- 2026: Weniger als 2 Beitragszahler pro Rentner (Statistisches Bundesamt, Rentenversicherungsbericht 2025)
+
+[SPIEL gewusst: 2026 finanzieren weniger als zwei Beitragszahler bereits die Rente eines Altersrentners – eine Entwicklung, die den Generationenvertrag vor fundamentale Herausforderungen stellt.]
+
+### Paritätische Finanzierung
+
+Arbeitnehmer und Arbeitgeber zahlen gemeinsam Beiträge in die Sozialversicherung, berechnet nach dem Bruttogehalt. Diese Gleichverteilung sichert breite gesellschaftliche Beteiligung.
+
+### Staatszuschüsse
+
+Bei finanziellen Engpässen greifen Bundesmittel. Sollten bestimmte Belastungswerte drohen, werden Mittel aus dem Bundeshaushalt zugeschossen (Bundeshaushaltsgesetz).
+
+## 7 Beitragsbemessungsgrenzen und Versicherungspflicht: Wer zahlt wieviel?
+
+Die Beitragsbemessungsgrenzen legen fest, bis zu welchem Bruttoeinkommen Sozialversicherungsbeiträge erhoben werden. Verdienst darüber bleibt beitragsfrei.
+
+Für 2026 gelten diese Grenzen:
+
+| Versicherungsbereich | Monatlich | Jährlich
+
+| Kranken-/Pflegeversicherung | 5.812,50 € | 69.750 €
+
+| Renten-/Arbeitslosenversicherung | 8.450 € | 101.400 €
+
+| Knappschaftliche Rentenversicherung | 10.400 € | 124.800 €
+
+Die Versicherungspflichtgrenze für die gesetzliche Krankenversicherung steigt 2026 auf 77.400 Euro jährlich (6.450 Euro monatlich). Arbeitnehmer bis zu dieser Grenze sind pflichtversichert. Wer darüber liegt, kann zwischen gesetzlicher und privater Krankenversicherung wählen.
+
+### Minijobs und Midi-Jobs 2026
+
+Bei einem Mindestlohn von 13,90 Euro ergibt sich eine Geringfügigkeitsgrenze von 603 Euro monatlich. Geringverdiener mit Minijobs zahlen bis 603 Euro keine Sozialversicherungsbeiträge. Zwischen 603,01 und 2.000 Euro monatlich liegt der Übergangsbereich (Midi-Job): Der Arbeitgeber zahlt volle Sozialbeiträge, der Arbeitnehmer reduzierte Anteile.
+
+Für Selbstständige in der freiwilligen Krankenversicherung gilt ein Mindestbeitrag, berechnet aus der Bezugsgröße. Im Jahr 2026 beträgt das fiktive Einkommen 1.316,67 Euro monatlich.
+
+## 8 Demografischer Wandel: Kann das System bestehen?
+
+Der Generationenvertrag steht unter Druck. Die Zahl der Erwerbstätigen sinkt, die der Rentner steigt. Ursachen: geringe Geburtenhäufigkeit (unter zwei Kindern pro Frau) und längere Lebensdauer.
+
+Immer weniger junge Menschen müssen immer mehr ältere Menschen versorgen. Konsequenz: Entweder Beitragssätze erhöhen, Renten kürzen oder das Renteneintrittsalter anheben.
+
+Reformmaßnahmen zur Bewältigung:
+
+- Erhöhung des Renteneintrittsalters auf 67 Jahre
+
+- Förderung privater Altersvorsorge (Riester-Rente, Betriebsrente)
+
+- Flexibilisierung von Arbeitszeiten für ältere Arbeitnehmer
+
+- Stärkung der Erwerbsquote von Frauen
+
+- Integration von Migranten in den Arbeitsmarkt
+
+## 9 Fazit
+
+Die Sozialversicherung bleibt das Fundament sozialer Sicherheit in Deutschland und schützt über 85 Millionen Menschen. Das auf dem Solidaritätsprinzip basierende System mit seinen fünf Säulen hat sich seit der Bismarck'schen Sozialgesetzgebung bewährt.
+
+2026 bleiben die Beitragssätze stabil, aber gestiegene Beitragsbemessungsgrenzen führen zu höheren Beiträgen bei hohen Einkommen. Der Anstieg des Zusatzbeitrags auf 2,9 Prozent belastet alle gesetzlich Krankenversicherten zusätzlich.
+
+Der demografische Wandel stellt das Umlageverfahren vor erhebliche Herausforderungen. Das Verhältnis von Beitragszahlern zu Rentnern hat sich von sechs auf weniger als zwei verschlechtert – eine Entwicklung, die strukturelle Reformen erfordert. Die Zukunftsfähigkeit hängt von der Balance zwischen bezahlbaren Beiträgen, angemessenen Leistungen und demografischer Nachhaltigkeit ab.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste sozialversicherung]
+
+[BLOCK dokumente studenten-sozialversicherung,sozialversicherungswerte-2026,infoblatt-wichtige-daten-der-sozialversicherung-pst2000-2,infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-pst1400]
+
+
+## FAQ
+F: Wie hoch sind die Sozialversicherungsbeiträge 2026?
+A: Die Beitragssätze bleiben 2026 stabil: Krankenversicherung 14,6 Prozent, Rentenversicherung 18,6 Prozent, Pflegeversicherung 3,6 Prozent und Arbeitslosenversicherung 2,6 Prozent. Neu ist der auf 2,9 Prozent gestiegene durchschnittliche Zusatzbeitrag zur gesetzlichen Krankenversicherung.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: In der Krankenversicherung steigt die Grenze auf 5.812,50 Euro monatlich (69.750 Euro jährlich). In der Rentenversicherung beträgt sie 8.450 Euro monatlich, in der knappschaftlichen Rentenversicherung 10.400 Euro. Die Anhebungen resultieren aus der Lohnentwicklung 2024 von 5,16 Prozent.
+F: Was ändert sich 2026 bei Minijobs?
+A: Durch die Anhebung des Mindestlohns auf 13,90 Euro pro Stunde steigt die Minijob-Grenze von 556 Euro auf 603 Euro monatlich. Bis zu diesem Betrag zahlen Beschäftigte keine Sozialversicherungsbeiträge. Oberhalb beginnt der Übergangsbereich mit gestaffelten Abgaben.
+F: Wie hoch ist der Höchstbeitrag zur Krankenversicherung 2026?
+A: Der Höchstbeitrag zur gesetzlichen Krankenversicherung steigt 2026 auf 1.261,31 Euro monatlich inklusive Zusatzbeitrag. Für Spitzenverdiener bedeuten die erhöhten Beitragsbemessungsgrenzen erhebliche Mehrkosten gegenüber 2025, da auch der Zusatzbeitrag von 2,5 auf 2,9 Prozent gestiegen ist.

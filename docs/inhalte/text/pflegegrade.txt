@@ -1,0 +1,159 @@
+# Pflegegrade (pflegegrade)
+## 0 Pflegegrade in Deutschland - Leistungen und Einstufung
+
+Pflegegrade entscheiden über Höhe und Art der Pflegeleistungen. Wie die fünf Pflegegrade 2026 eingestuft werden und welche Leistungen Ihnen zustehen.
+
+## 1 Pflegegrade 2026: Einstufung, Leistungen und Antrag
+
+Pflegegrade regeln die Höhe der Pflegeleistungen in Deutschland und bestimmen, welche Unterstützung pflegebedürftige Menschen erhalten.
+
+Die fünf Pflegegrade bilden das Fundament der deutschen Pflegeversicherung und entscheiden über die Höhe der monatlichen Pflegeleistungen. Die Leistungsbeträge bleiben 2026 unverändert auf dem Niveau von 2025. Eine weitere Erhöhung ist erst wieder frühestens zum 01.01.2028 vorgesehen. Seit der Pflegereform 2017 bewerten die Pflegegrade nicht mehr den Zeitaufwand der Pflege, sondern die Selbständigkeit im Alltag durch ein neues Begutachtungsverfahren.
+
+## 2 Was sind Pflegegrade – Definition und Überblick
+
+Das deutsche Pflegeversicherungssystem unterscheidet seit 2017 fünf Pflegegrade, die die Schwere der Beeinträchtigungen stufen. Je höher der Pflegegrad, desto umfangreicher fallen die Leistungen der Pflegeversicherung aus. Das Begutachtungsverfahren erfolgt durch den Medizinischen Dienst oder die Medicproof GmbH und basiert auf einem Punktesystem.
+
+Die Einstufung erfolgt anhand dieser Punktebereiche:
+
+| Pflegegrad | Punkte | Beeinträchtigung der Selbständigkeit
+
+| Pflegegrad 1 | 12,5 bis unter 27 | Geringe Beeinträchtigung
+
+| Pflegegrad 2 | 27 bis unter 47,5 | Erhebliche Beeinträchtigung
+
+| Pflegegrad 3 | 47,5 bis unter 70 | Schwere Beeinträchtigung
+
+| Pflegegrad 4 | 70 bis unter 90 | Schwerste Beeinträchtigung
+
+| Pflegegrad 5 | 90 bis 100 | Schwerste Beeinträchtigung mit besonderen Anforderungen
+
+Pflegebedürftigkeit liegt vor, wenn mindestens 12,5 Punkte erreicht werden. Die Begutachtung findet standardmäßig im häuslichen Umfeld statt und umfasst sechs verschiedene Lebensbereiche, die unterschiedlich gewichtet in die Berechnung einfließen.
+
+[SPIEL mythos: Pflegegrad 5 erhalten nur Menschen mit Demenz oder schweren geistigen Beeinträchtigungen → nein]
+
+## 3 Wie werden Pflegegrade ermittelt – Das Begutachtungsverfahren
+
+Die Pflegekasse beauftragt den Medizinischen Dienst mit einem Gutachten nach § 18 SGB XI. Ein Gutachter besucht die pflegebedürftige Person zu Hause und beurteilt systematisch sechs Lebensbereiche:
+
+Modul 1: Mobilität (10 Prozent Gewichtung)
+
+Bewertet werden Fähigkeiten wie selbständiges Positionswechseln, Fortbewegen innerhalb des Wohnbereichs, Treppensteigen und das Verlassen und Wiederaufsuchen der Wohnung.
+
+Module 2 und 3: Kognitive und kommunikative Fähigkeiten sowie Verhaltensweisen (gemeinsam 15 Prozent)
+
+Modul 2 erfasst die örtliche und zeitliche Orientierung sowie das Kurz- und Langzeitgedächtnis. Modul 3 bewertet psychische Problemlagen wie Angst, Aggressivität oder Wahnvorstellungen. Es fließt nur das Modul mit der höheren Punktzahl in die Bewertung ein.
+
+Modul 4: Selbstversorgung (40 Prozent Gewichtung)
+
+Mit dem höchsten Gewicht bewertet dieses Modul die Körperpflege, das An- und Auskleiden sowie die selbständige Nahrungsaufnahme und das Trinken.
+
+Modul 5: Bewältigung von Krankheit und Therapie (20 Prozent)
+
+Hier geht es um den selbständigen Umgang mit Medikamenten, Injektionen, Verbandwechseln, Blutzuckermessungen und anderen therapiebedingten Anforderungen.
+
+Modul 6: Gestaltung des Alltagslebens und sozialer Kontakte (15 Prozent)
+
+Bewertet wird die Fähigkeit zur Tagesplanung, zur Anpassung an Veränderungen und zur Aufrechterhaltung sozialer Beziehungen.
+
+[SPIEL schaetzen: Mit welchem Prozentsatz wird das Modul "Selbstversorgung" bei der Pflegegrad-Ermittlung gewichtet? → 40]
+
+## 4 Pflegegeld und Pflegesachleistungen 2026 – Aktuelle Leistungsbeträge
+
+Die Pflegeleistungen bleiben 2026 exakt auf dem Stand von 2025. Die Leistungen wurden zum 01.01.2025 um 4,5 Prozent erhöht und gelten unverändert auch 2026. Die monatlichen Beträge staffeln sich nach Pflegegraden:
+
+| Pflegegrad | Pflegegeld monatlich | Pflegesachleistungen monatlich | Entlastungsbetrag monatlich
+
+| Pflegegrad 1 | — | — | 131 €
+
+| Pflegegrad 2 | 347 € | 796 € | 131 €
+
+| Pflegegrad 3 | 599 € | 1.497 € | 131 €
+
+| Pflegegrad 4 | 800 € | 1.859 € | 131 €
+
+| Pflegegrad 5 | 990 € | 2.299 € | 131 €
+
+Das Pflegegeld erhalten Pflegebedürftige ab Pflegegrad 2, wenn sie hauptsächlich von Angehörigen oder anderen privaten Pflegepersonen versorgt werden. Das Pflegegeld darf frei verwendet werden, es ist kein „Pflegelohn", sondern eine zweckgebundene Sozialleistung zur Sicherung der häuslichen Pflege.
+
+Pflegesachleistungen können ab Pflegegrad 2 beansprucht werden, wenn ein zugelassener ambulanter Pflegedienst die Versorgung übernimmt. Wer sowohl auf Angehörigenpflege als auch auf einen Pflegedienst setzt, kann eine Kombinationsleistung wählen. Neben diesen Leistungen der Pflegekasse können Betroffene auch eine Pflegezusatzversicherung abschließen, um finanzielle Lücken zu schließen.
+
+[SPIEL gewusst: Pflegegrad 1 umfasst deutschlandweit etwa 750.000 Menschen, die zwar keinen Anspruch auf Pflegegeld haben, aber 131 Euro Entlastungsbetrag plus 42 Euro für Pflegehilfsmittel erhalten (Stand 2026).]
+
+## 5 Wichtige Neuerungen und Verbesserungen ab 2026
+
+### Reduzierte Beratungsbesuche für alle Pflegegrade
+
+Pflegebedürftige mit Pflegegrad 4 und 5, die ausschließlich Pflegegeld beziehen, müssen den verpflichtenden Beratungsbesuch künftig nur noch zweimal im Jahr nachweisen. Damit gelten für sie die gleichen Regeln wie bisher schon für Pflegegrad 2 und 3. Ab sofort gilt für alle Pflegegrade von 2 bis 5 ein einheitlicher Rhythmus: Der Beratungseinsatz muss nur noch einmal pro Kalenderhalbjahr zwingend nachgewiesen werden.
+
+Diese Vereinheitlichung reduziert den bürokratischen Aufwand erheblich. Bei Pflegegrad 4 und 5 kann die Beratung auf Wunsch aber auch weiterhin 1x im Quartal stattfinden. Die zusätzlichen Termine bleiben freiwillig und kostenlos.
+
+### Verlängerter Pflegegeldbezug bei Klinikaufenthalten
+
+Mit einer gesetzlichen Anpassung ab 2026 wurde die Frist, in der Pflegegeld während eines durchgehenden Krankenhausaufenthalts weitergezahlt wird, auf bis zu acht Wochen verlängert. Ziel ist, pflegende Angehörige besser abzusichern und unnötige Bürokratie bei kurzen und mittellangen Klinikaufenthalten zu vermeiden.
+
+Seit dem 1. Januar 2026 gilt eine neue Regelung: Das Pflegegeld wird bei vollstationärer Krankenhausbehandlung für bis zu 8 Wochen (56 Kalendertage) in voller Höhe weitergezahlt. Bis Ende 2025 lag die Frist für die Weiterzahlung des Pflegegeldes bei stationärem Krankenhausaufenthalt bei nur 4 Wochen.
+
+Diese Regel gilt auch für stationäre Rehabilitationsmaßnahmen. Gleichzeitig laufen auch die Leistungen zur sozialen Sicherung der Pflegeperson, also etwa die Rentenbeiträge, in diesen Fällen länger weiter.
+
+### Gemeinsames Entlastungsbudget für mehr Flexibilität
+
+Die Pflegeversicherung hat zwei bislang getrennte Budgets zusammengelegt. Seit dem 1. Juli 2025 bilden die Leistungen der Verhinderungspflege und der Kurzzeitpflege gemeinsam ein neues Budget. Für das Jahr 2026 beträgt das Entlastungsbudget für eine pflegebedürftige Person maximal 3539 Euro.
+
+Bis zu 3.539 Euro sollen helfen, wenn die private Pflegeperson ausfällt und Ersatz organisiert werden muss. Die Regeln wurden vereinfacht, damit Familien schneller entlastet werden und Leistungen nicht an Formalien scheitern. Der gemeinsame Jahresbetrag vereinheitlicht die Budgets und macht dieses flexibel nutzbar.
+
+### Verkürzte Abrechnungsfristen für Verhinderungspflege
+
+Die Kostenerstattung für Verhinderungspflege ist ab 2026 nur noch für das aktuelle und für das vorige Kalenderjahr möglich. Wer 2026 Verhinderungspflege in Anspruch nimmt, kann die Erstattung also bis spätestens 31. Dezember 2027 einreichen. Bisher war dies bis zu vier Jahre rückwirkend möglich.
+
+### Beschleunigte Strafzahlungen bei verzögerten Bescheiden
+
+Bearbeitet die Pflegekasse einen Antrag auf einen Pflegegrad oder höheren Pflegegrad nicht innerhalb von 25 Arbeitstagen und ist sie selbst dafür verantwortlich, muss sie bisher 70 Euro pro angefangene Woche zahlen. Ab 01.01.2026 gibt es nun eine klare gesetzliche Regelung: Die Pflegekasse muss innerhalb von 15 Arbeitstagen nach Ablauf der Bearbeitungsfrist die Strafzahlung leisten.
+
+## 6 Antrag und Begutachtung – Der Weg zum Pflegegrad
+
+Um Pflegeleistungen zu erhalten, stellen Sie bei Ihrer Kranken- oder Pflegekasse einen formlosen Antrag auf "Leistungen der Pflegeversicherung". Die Pflegekasse ist an Ihre Krankenkasse angegliedert – gesetzlich Versicherte wenden sich an ihre Krankenkasse, privat Versicherte an ihr Versicherungsunternehmen.
+
+Nach Antragsstellung beauftragt die Pflegekasse automatisch den Medizinischen Dienst (bei gesetzlich Versicherten) oder die Medicproof GmbH (bei privat Versicherten) mit der Begutachtung. Ein Gutachter oder eine Gutachterin beurteilt die Selbstständigkeit in sechs Lebensbereichen (Mobilität, kognitive Fähigkeiten, Selbstversorgung usw.), woraus sich der Pflegegrad ergibt.
+
+[SPIEL quiz: Innerhalb welcher Frist muss die Pflegekasse normalerweise über einen Pflegegrad-Antrag entscheiden?]
+
+Der Bescheid liegt üblicherweise innerhalb von 25 Arbeitstagen vor. Bei Ablehnung oder einer als zu niedrig empfundenen Einstufung können Betroffene innerhalb von einem Monat schriftlich Widerspruch einlegen. Etwa ein Drittel aller Widersprüche führt zu einer Höherstufung des Pflegegrads.
+
+## 7 Häufige Fragen zu Pflegegraden
+
+Wie lange gilt ein einmal festgestellter Pflegegrad?
+
+Ein Pflegegrad wird grundsätzlich unbefristet erteilt. Die Pflegekasse kann jedoch in regelmäßigen Abständen Wiederholungsbegutachtungen anordnen, um zu prüfen, ob sich der Pflegebedarf verändert hat.
+
+Kann sich der Pflegegrad verschlechtern?
+
+Ja, wenn sich der Gesundheitszustand verbessert, kann der Pflegegrad bei einer Wiederholungsbegutachtung auch herabgestuft oder ganz entzogen werden. Daher ist es wichtig, Verschlechterungen des Zustands zeitnah der Pflegekasse zu melden und eine Höherstufung zu beantragen.
+
+Was passiert bei einem Umzug in ein anderes Bundesland?
+
+Pflegegrade gelten bundesweit einheitlich. Bei einem Umzug müssen Sie lediglich Ihre neue Adresse der Pflegekasse mitteilen. Die Leistungen ändern sich dadurch nicht.
+
+Können auch Kinder und Jugendliche einen Pflegegrad erhalten?
+
+Ja, auch Minderjährige können einen Pflegegrad erhalten, wenn sie aufgrund von Krankheit oder Behinderung pflegebedürftig sind. Die Begutachtung erfolgt altersangemessen und berücksichtigt die normale Entwicklung des Kindes.
+
+## 8 Fazit
+
+Die Pflegegrade schaffen eine transparente und nachvollziehbare Grundlage für Pflegeleistungen in Deutschland. Mit den Neuerungen 2026 wird das System durch reduzierte Beratungspflichten, längere Pflegegeld-Weiterzahlung bei Klinikaufenthalten und das flexible Entlastungsbudget von 3.539 Euro deutlich praxisnäher gestaltet. Obwohl die Leistungsbeträge selbst unverändert bleiben, profitieren Pflegebedürftige und Angehörige von spürbaren Vereinfachungen im Alltag. Die nächste Dynamisierung der Pflegeleistungen ist für 2028 geplant und soll dann automatisch an die Inflationsentwicklung gekoppelt werden.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegegrade]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wie viele Pflegegrade gibt es in Deutschland?
+A: In Deutschland gibt es seit 2017 fünf Pflegegrade, die die früheren Pflegestufen abgelöst haben. Die Einstufung basiert nicht mehr auf dem Pflegeaufwand, sondern auf dem Grad der Selbstständigkeit im Alltag. Pflegegrad 1 bedeutet eine geringe, Pflegegrad 5 eine schwerste Beeinträchtigung.
+F: Wie wird der Pflegegrad ermittelt?
+A: Ein Gutachter des Medizinischen Dienstes oder von Medicproof bewertet die Selbstständigkeit in sechs Modulen: Mobilität, kognitive Fähigkeiten, Verhaltensweisen, Selbstversorgung, Umgang mit Krankheit sowie Alltagsgestaltung. Die Module werden unterschiedlich gewichtet, wobei Selbstversorgung mit 40 Prozent am stärksten einfließt. Ab 12,5 Gesamtpunkten liegt Pflegebedürftigkeit vor.
+F: Welches Modul hat den größten Einfluss auf die Einstufung?
+A: Das Modul Selbstversorgung hat mit 40 Prozent die höchste Gewichtung bei der Ermittlung des Pflegegrads. Es bewertet Körperpflege, Anziehen und Nahrungsaufnahme. Diese Alltagsfähigkeiten gelten als zentral für die Pflegebedürftigkeit.
+F: Werden die Pflegeleistungen 2026 erhöht?
+A: Nein, die Leistungsbeträge bleiben 2026 unverändert gegenüber 2025. Die nächste Dynamisierung ist frühestens zum 1. Januar 2028 vorgesehen. Pflegegeld und Pflegesachleistungen wurden zuletzt 2025 angepasst.

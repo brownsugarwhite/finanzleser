@@ -1,0 +1,197 @@
+# KfZ Steuer (kfz-steuer)
+## 0 Berechnung, Tarife und Sparpotenziale der Kfz-Steuer erklärt
+
+Die Kfz-Steuer zahlt jeder Fahrzeughalter jährlich. Wie sie sich 2026 nach Hubraum und CO₂ berechnet, welche Tarife gelten und wer von ihr befreit ist.
+
+## 1 Kfz-Steuer 2026: Berechnung, Tarife und Befreiungen
+
+Die Kfz-Steuer ist eine jährliche Abgabe, die jeder Fahrzeughalter in Deutschland zahlen muss.
+
+Die Kraftfahrzeugsteuer stellt einen festen Kostenfaktor dar und trägt zur Finanzierung der Verkehrsinfrastruktur bei. Seit 2021 gelten für neu zugelassene Pkw veränderte Tarife mit einer CO₂-abhängigen Komponente. Eine bedeutsame Neuerung zeigt sich für das Jahr 2026: Reine Elektrofahrzeuge sind bis längstens 2035 von der Kfz-Steuer befreit, mit Erstzulassung bis 31.12.2030.
+
+## 2 Was ist die Kfz-Steuer und wer muss sie zahlen?
+
+Die Kraftfahrzeugsteuer (Kfz-Steuer) ist eine jährliche Abgabe, die jeder Fahrzeughalter in Deutschland zahlen muss. Sie wird vom Hauptzollamt erhoben und stellt eine wichtige Einnahmequelle für den Staat dar. Mit drei Werten aus dem Fahrzeugschein (Hubraum aus Feld P.1, CO2 aus Feld V.7, Erstzulassungsdatum) und der Formel aus § 9 KraftStG berechnest du deine Jahressteuer auf den Euro genau.
+
+Steuerpflichtig ist grundsätzlich der Fahrzeughalter, also die Person, die in der Zulassungsbescheinigung Teil I eingetragen ist. Bei einem Halterwechsel geht die Steuerpflicht automatisch auf den neuen Besitzer über. Die Steuer wird per SEPA-Lastschrift eingezogen, das entsprechende Mandat wird bei der Fahrzeugzulassung erteilt. Neben der Kfz-Steuer fallen auch Kosten für eine Kfz-Versicherung an, die ebenfalls zu den regelmäßigen Ausgaben eines Fahrzeughalters gehört.
+
+[SPIEL karte: WLTP-Verfahren]
+
+## 3 Wie wird die Kfz-Steuer 2026 berechnet?
+
+Benziner zahlen 2,00 €, Diesel 9,50 € je 100 ccm (EZ ab 01.07.2009, unverändert 2026). Die Berechnung erfolgt nach einem zweigliedrigen System: dem Hubraum-Anteil und der CO₂-Komponente.
+
+### Hubraum-Komponente 2026
+
+Der Hubraum-Anteil bildet die Grundlage der Steuerberechnung:
+
+- Benzinmotoren: 2,00 Euro je angefangene 100 cm³
+
+- Dieselmotoren: 9,50 Euro je angefangene 100 cm³
+
+Der höhere Hubraum-Steuersatz für Diesel (€9,50 vs. €2,00) gleicht die niedrigere Mineralölsteuer auf Dieselkraftstoff aus. In der Gesamtbetrachtung sollten Benzin- und Dieselfahrer ähnlich belastet werden.
+
+### CO₂-Komponente mit progressiver Staffelung
+
+Seit dem 1. Januar 2021 gilt ein progressiver CO2-Steuersatz. Je höher der CO2-Ausstoß, desto teurer wird es pro Gramm. Die Staffelung 2026:
+
+| CO₂-Bereich | Steuersatz pro g/km | Beispielrechnung
+
+| Bis 95 g/km | 0,00 € | Freibetrag
+
+| 96-115 g/km | 2,00 € | (CO₂ - 95) × 2,00 €
+
+| 116-135 g/km | 2,20 € | 40 € + (CO₂ - 115) × 2,20 €
+
+| 136-155 g/km | 2,50 € | 84 € + (CO₂ - 135) × 2,50 €
+
+| 156-175 g/km | 2,90 € | 134 € + (CO₂ - 155) × 2,90 €
+
+| 176-195 g/km | 3,40 € | 192 € + (CO₂ - 175) × 3,40 €
+
+| Über 195 g/km | 4,00 € | 260 € + (CO₂ - 195) × 4,00 €
+
+Ein Fahrzeug mit genau 195 g/km zahlt allein dafür 260 € CO2-Zuschlag pro Jahr, zusätzlich zum Hubraum-Anteil.
+
+[SPIEL mythos: Die CO₂-Staffelung gilt für alle Fahrzeuge unabhängig vom Erstzulassungsdatum → nein]
+
+## 4 Kfz-Steuer für Elektrofahrzeuge 2026
+
+Reine Elektrofahrzeuge sind bis Ende 2035 vollständig von der Kfz-Steuer befreit, wenn sie bis 31.12.2030 erstmals zugelassen werden. Diese Regelung wurde vom Bundestag am 4. Dezember 2025 beschlossen und verlängert die ursprünglich bis 2030 geltende Befreiung um fünf Jahre.
+
+Die Befreiung läuft ab der Erstzulassung, nicht ab dem Kaufdatum. Ein 2020 erstmals zugelassenes Tesla ist bis 2030 steuerfrei – auch wenn Sie es 2026 gebraucht kaufen. Beim Gebrauchtkauf übernehmen Sie die verbleibende Befreiungszeit des Vorbesitzers.
+
+Nach Ablauf der Steuerbefreiung wird für Elektrofahrzeuge eine reduzierte Steuer basierend auf dem zulässigen Gesamtgewicht erhoben:
+
+- Bis 2.000 kg: 5,625 Euro je angefangene 200 kg
+
+- 2.000-3.000 kg: 6,01 Euro je angefangene 200 kg
+
+- Ab 3.000 kg: 6,39 Euro je angefangene 200 kg
+
+Dabei wird nur die Hälfte der regulären Nutzfahrzeugsteuer berechnet.
+
+## 5 Steuerermäßigungen für Menschen mit Schwerbehinderung
+
+Menschen mit Schwerbehinderung können eine Steuerbefreiung (bei Merkzeichen H, Bl oder aG) oder eine Steuerermäßigung um 50 % (bei Merkzeichen G oder Gl) erhalten. Die Vergünstigung muss beim zuständigen Hauptzollamt beantragt werden.
+
+### Vollständige Steuerbefreiung
+
+Schwerbehinderte mit diesen Merkzeichen sind komplett von der Kfz-Steuer befreit:
+
+- H (Hilflosigkeit bei den Verrichtungen des täglichen Lebens)
+
+- Bl (Blindheit oder hochgradige Sehbehinderung)
+
+- aG (außergewöhnliche Gehbehinderung)
+
+### 50-Prozent-Ermäßigung
+
+Eine halbierte Steuer erhalten Personen mit:
+
+- G (Gehbehinderung)
+
+- Gl (Gehörlosigkeit)
+
+- Schwerbehindertenausweis mit orangefarbenem Flächenaufdruck
+
+Die 50-Prozent-Ermäßigung ist daran gebunden, dass auf das Recht zur unentgeltlichen Beförderung im öffentlichen Personennahverkehr verzichtet wird. Man muss sich also zwischen Nahverkehrsvorteil und Steuerermäßigung entscheiden.
+
+### Antragstellung
+
+Der Antrag auf Steuervergünstigung (Formular 3809) muss beim Hauptzollamt zusammen mit dem Schwerbehindertenausweis in Kopie eingereicht werden. Bei einer Ermäßigung ist zusätzlich das Beiblatt zum Schwerbehindertenausweis ohne Wertmarke erforderlich.
+
+## 6 Oldtimer-Steuer mit H-Kennzeichen
+
+Besitzt Ihr Fahrzeug ein H-Kennzeichen, muss jährlich pauschal eine Kfz-Steuer von 191,73 Euro gezahlt werden. Für historische Krafträder beträgt die Pauschale 46,02 Euro jährlich.
+
+Diese Pauschalsätze gelten unabhängig von:
+
+- Hubraum
+
+- CO₂-Ausstoß
+
+- Schadstoffklasse
+
+- Fahrzeuggewicht
+
+### Voraussetzungen für das H-Kennzeichen
+
+Für die Zulassung als Oldtimer müssen folgende Bedingungen erfüllt sein:
+
+- Mindestens 30 Jahre alt (Erstzulassungsdatum entscheidend)
+
+- Weitgehend originalgetreuer Zustand
+
+- Erhaltung des kraftfahrzeugtechnischen Kulturguts
+
+- Bestandene Hauptuntersuchung
+
+- Gutachten nach § 23 StVZO
+
+Bei Benzinern mit schlechter Schadstoffklasse (unter Euro 1) zahlt man regulär 25,36 Euro je angefangene 100 ccm Hubraum. Ein Golf II mit 1,6-Liter-Motor kostet normal also rund 406 Euro Steuer im Jahr. Das H-Kennzeichen spart hier über 200 Euro.
+
+### Saisonkennzeichen-Kombination
+
+Die Kombination aus Oldtimerkennzeichen und Saisonkennzeichen ist seit dem 01. Oktober 2017 erlaubt. Auf dem Kfz-Kennzeichen ist das "H" angebracht und dahinter die beiden Zahlen für den Gültigkeitszeitraum. Bei halbjähriger Nutzung reduziert sich die Steuer entsprechend anteilig.
+
+[SPIEL gewusst: Oldtimer mit H-Kennzeichen dürfen ohne Umweltplakette in alle deutschen Umweltzonen fahren – ein unbezahlbarer Vorteil in Städten wie München oder Stuttgart (Stand 2026).]
+
+## 7 Steuerliche Absetzbarkeit und Betriebsausgaben
+
+Die Möglichkeiten zur steuerlichen Absetzung der Kfz-Steuer sind begrenzt. Wird das Fahrzeug lediglich für private Zwecke genutzt und trägt es nicht in einem bedeutenden Maße zur Erwirtschaftung des Einkommens bei, ist die Kfz-Steuer nicht absetzbar.
+
+### Privatpersonen
+
+Privatpersonen, die ihr Fahrzeug für den Arbeitsweg nutzen, entlastet der Staat mit der Pendlerpauschale: Sie beträgt 38 Cent pro Kilometer ab dem ersten Kilometer (Stand Januar 2026). Die Pauschale mindert die steuerliche Bemessungsgrundlage; die Kfz-Steuer selbst beeinflusst sie nicht. Darüber hinaus können Fahrtkosten als Werbungskosten geltend gemacht werden, sofern die notwendigen Voraussetzungen erfüllt sind.
+
+### Selbstständige und Unternehmer
+
+Selbstständige und Unternehmer können die Kfz-Steuer in vollem Umfang von Dienstfahrzeugen als Betriebsausgabe absetzen, wenn das Fahrzeug allein für Dienstfahrten genutzt wird. Bei gemischter Nutzung ist nur der betriebliche Anteil absetzbar. Eine ordnungsgemäße Dokumentation durch ein Fahrtenbuch ist in der Regel erforderlich. Besonders bei Dienstwagen spielen die Kfz-Steuer und weitere damit verbundene Kosten eine wichtige Rolle für die Gesamtkalkulation.
+
+## 8 Neue Zahlungsregelung und Fälligkeit
+
+Ab 2026 soll die Kfz-Steuer grundsätzlich nur noch als Einmalzahlung für das gesamte Jahr erhoben werden. Eine unterjährige Ratenzahlung ist nach aktuellem Stand nicht mehr vorgesehen. Diese Änderung bringt eine wichtige Neuerung für alle Fahrzeughalter mit sich.
+
+### Bisherige Ratenzahlung entfällt
+
+Bisher konnten Halter bei einer Jahressteuer über 500 Euro halbjährlich (mit 3 Prozent Aufschlag) und über 1.000 Euro vierteljährlich (mit 6 Prozent Aufschlag) zahlen. Diese Möglichkeit entfällt komplett.
+
+### Automatische Umstellung
+
+Die praktische Umsetzung erfolgt ohne Zutun der Fahrzeughalter. Die Hauptzollämter stellen bestehende Ratenpläne automatisch auf jährliche Lastschriften um. Betroffene erhalten Anfang 2026 entsprechende Informationsschreiben mit dem neuen Zahlungsplan.
+
+### Zahlungsmodalitäten
+
+- Fälligkeit: Jährlich im Voraus per SEPA-Lastschrift
+
+- Zeitpunkt: Entsprechend dem Anmeldungsdatum des Fahrzeugs
+
+- SEPA-Mandat: Wird bei der Zulassung automatisch erteilt
+
+- Zuständigkeit: Das jeweilige Hauptzollamt nach Wohnort
+
+Fahrzeughalter sollten sich auf diese Änderung einstellen und bei hohen Steuerbeträgen entsprechende Rücklagen bilden. Die einmalige Jahressteuer kann je nach Fahrzeug mehrere hundert Euro betragen.
+
+## 9 Fazit
+
+Die Kfz-Steuer 2026 bringt eine bedeutsame strukturelle Änderung: Die Abschaffung der Ratenzahlung verpflichtet alle Fahrzeughalter zur jährlichen Einmalzahlung, während die Berechnungsgrundlagen stabil bleiben. Elektrofahrzeuge profitieren von der verlängerten Steuerbefreiung bis 2035, was die Elektromobilität weiter fördert. Die progressive CO₂-Staffelung seit 2021 setzt weiterhin Anreize für umweltfreundlichere Fahrzeuge. Menschen mit Schwerbehinderung können nach Antragstellung erhebliche Ermäßigungen oder komplette Befreiung erhalten. Oldtimer-Besitzer profitieren von pauschalen Steuersätzen, die bei großvolumigen Fahrzeugen deutliche Einsparungen ermöglichen. Selbstständige sollten die Möglichkeit der Absetzung als Betriebsausgabe prüfen. Die neue Zahlungsweise erfordert eine angepasste Finanzplanung, bietet jedoch den Vorteil wegfallender Ratenzuschläge. Fahrzeughalter sollten sich frühzeitig über ihre individuellen Steuerlasten informieren und bei Anspruch auf Vergünstigungen die erforderlichen Anträge rechtzeitig stellen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste kfz-steuer]
+
+[BLOCK rechner kfz-steuer]
+
+[BLOCK dokumente gdv-autoversicherung]
+
+
+## FAQ
+F: Wie berechnet sich die Kfz-Steuer in Deutschland?
+A: Die Kfz-Steuer setzt sich aus einem Hubraum-Sockelbetrag und einer CO₂-abhängigen Komponente zusammen. Benziner zahlen 2 Euro je angefangene 100 cm³ Hubraum, Diesel 9,50 Euro; hinzu kommen zwei bis vier Euro je Gramm CO₂ über 95 g/km.
+F: Wie lange sind Elektroautos von der Kfz-Steuer befreit?
+A: Elektrofahrzeuge sind bis zum 31. Dezember 2035 vollständig von der Kfz-Steuer befreit. Maßgeblich ist das Datum der Erstzulassung, nicht des Kaufs – beim Gebrauchtkauf profitieren Sie von der verbleibenden Steuerbefreiung des Vorbesitzers.
+F: Welche Änderung bei der Kfz-Steuer gilt ab 2026?
+A: Zum 1. Januar 2026 wird die Ratenzahlung der Kfz-Steuer abgeschafft. Auch Halter mit einer Jahressteuer über 500 Euro müssen den Betrag künftig in einer Summe zahlen, der bisherige halbjährliche Aufschlag von 3 Prozent entfällt damit.
+F: Welche Steuererleichterungen gelten für Menschen mit Behinderung?
+A: Schwerbehinderte mit den Merkzeichen H, Bl oder aG sind vollständig von der Kfz-Steuer befreit. Mit dem Merkzeichen G oder als Gehörloser können Sie zwischen kostenloser Nutzung des ÖPNV und einer 50-prozentigen Steuerermäßigung wählen.

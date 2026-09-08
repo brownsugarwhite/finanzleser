@@ -1,0 +1,143 @@
+# Wohngeld (wohngeld)
+## 0 Wohngeld Anspruch prüfen: Zuschuss zu Miete und Nebenkosten
+
+Wohngeld entlastet Haushalte mit geringem Einkommen bei Miete und Wohnkosten. Wer 2026 Anspruch hat, wie hoch der Zuschuss ist und wie Sie ihn beantragen.
+
+## 1 Wohngeld 2026: Antrag, Höhe und Anspruchsvoraussetzungen
+
+Wohngeld regelt den staatlichen Zuschuss zu den Wohnkosten und unterstützt Haushalte mit geringem bis mittlerem Einkommen bei der Finanzierung ihres Wohnraums. Nach der Reformierung liegt das durchschnittliche Wohngeld bei etwa 370 Euro monatlich – vor der Wohngeld-Plus Reform waren es durchschnittlich nur 180 Euro monatlich. Durch die Reform hat sich der Kreis der Wohngeldberechtigten von vormals ca. 600.000 auf zwei Millionen Haushalte erweitert.
+
+## 2 Wer hat Anspruch auf Wohngeld 2026?
+
+Mieterinnen und Mieter haben Anspruch auf Wohngeld, wenn sie ein eigenes Einkommen haben, davon ihre Miet- und Lebenshaltungskosten aber allein nicht bezahlen können. Das Wohngeld können sowohl Mieter als Mietzuschuss als auch Eigentümer selbst genutzten Wohnraums als Lastenzuschuss beantragen.
+
+Ein zentraler Ausschlussgrund ist der Bezug anderer Sozialleistungen. Anspruch haben Mieter und Eigentümer mit geringem Einkommen, die keine anderen Transferleistungen wie Bürgergeld, Grundsicherung oder Leistungen nach dem Asylbewerberleistungsgesetz beziehen.
+
+Haushalte, die Einkommen auf Mindestlohn-Niveau – in 2026 13,90 Euro je Arbeitsstunde – erzielen, haben häufig einen Wohngeldanspruch. Der gesetzliche Mindestlohn ist zum 1. Januar 2026 auf 13,90 brutto in der Stunde gestiegen.
+
+### Vermögensrenzen und Einkommensgrenzen
+
+Die Vermögensobergrenze beträgt 60.000 € für das erste Haushaltsmitglied und 30.000 € für jedes weitere. Selbstgenutztes Wohneigentum zählt nicht dazu. Eine Familie mit 4 Personen darf also bis zu 150.000 € Vermögen besitzen und trotzdem Wohngeld erhalten.
+
+[SPIEL gewusst: Über 2,4 Milliarden Euro wurden im Bundeshaushalt 2026 für Wohngeld eingeplant – 160 Millionen Euro mehr als ursprünglich vorgesehen.]
+
+## 3 Wie hoch ist das Wohngeld 2026?
+
+Das Wohngeld-Plus-System besteht aus mehreren Bausteinen für eine bedarfsgerechte Unterstützung. Die Höhe richtet sich nach Haushaltsgröße, anrechenbarem Einkommen und der Mietstufe des Wohnortes.
+
+### Mietstufen und Höchstbeträge
+
+Deutschland ist in sieben Mietstufen eingeteilt, die das regionale Mietpreisniveau widerspiegeln. Je teurer eine Stadt oder Gemeinde ist, desto höher ist ihre Mietstufe. Dieser Mechanismus sorgt für einen regionalen Ausgleich beim Wohngeld.
+
+Konkrete Beispiele der Höchstbeträge für einen Ein-Personen-Haushalt 2026:
+
+- Mietstufe I: 476,60 Euro
+
+- Mietstufe VII: 780,60 Euro
+
+[SPIEL karte: Mietstufe]
+
+### Einkommensgrenzen nach Haushaltsgröße
+
+Für einen 1-Personen-Haushalt in Mietstufe 1 liegt die Einkommensgrenze 2026 bei 1.443 Euro, bei einem 2-Personen-Haushalt sind es 1.953 Euro und für einen 3-Personen-Haushalt gelten 2.453 Euro.
+
+In teureren Städten fallen die Grenzen deutlich großzügiger aus: In München kann eine vierköpfige Familie bereits Wohngeld bekommen, wenn sie weniger als 5.250 Euro brutto verdient.
+
+| Haushaltsgröße | Mietstufe I (€) | Mietstufe IV (€) | Mietstufe VII (€)
+
+| 1 Person | 1.443 | ca. 1.850 | ca. 2.300
+
+| 2 Personen | 1.953 | ca. 2.500 | ca. 3.100
+
+| 3 Personen | 2.453 | ca. 3.150 | ca. 3.900
+
+| 4 Personen | ca. 2.900 | ca. 3.750 | ca. 5.250
+
+## 4 Welche Freibeträge senken das anrechenbare Einkommen?
+
+Bestimmte Personengruppen erhalten spezielle Freibeträge beim Wohngeld, die das maßgebliche Einkommen reduzieren und häufig über den Anspruch entscheiden.
+
+### Freibeträge für Schwerbehinderte und Alleinerziehende
+
+Menschen mit Schwerbehinderung (GdB 100) erhalten einen jährlichen Freibetrag von 1.800 Euro. Auch bei GdB mindestens 50 mit Pflegebedürftigkeit und häuslicher oder teilstationärer Pflege greift dieser Freibetrag.
+
+Alleinerziehende mit mindestens einem Kind unter 18 Jahren erhalten einen Freibetrag in Höhe von 1.320 Euro im Jahr. Zusätzlich zum Wohngeld können sie gegebenenfalls den Kinderzuschlag beantragen.
+
+### Weitere relevante Freibeträge
+
+- Erwerbstätige Kinder unter 25 Jahren: maximal 1.200 Euro jährlich
+
+- Opfer nationalsozialistischer Verfolgung: 750 Euro jährlich
+
+- Erwerbstätige: 10 % Freibetrag (maximal 100 €/Monat)
+
+[SPIEL mythos: Wer Mindestlohn verdient, kann grundsätzlich kein Wohngeld erhalten → nein]
+
+## 5 Wohngeldberechnung: So funktioniert es
+
+Die Wohngeldberechnung erfolgt nach einer Formel, die mehrere Faktoren berücksichtigt. Das verfügbare Einkommen wird durch verschiedene Abzüge ermittelt.
+
+### Einkommensermittlung beim Wohngeld
+
+Bei der Ermittlung des monatlichen Gesamteinkommens gelten die Maßstäbe des Einkommensteuergesetzes. Neben allen steuerpflichtigen Einkünften werden auch bestimmte steuerfreie Einnahmen eingerechnet. Das monatliche Gesamteinkommen ergibt sich aus dem Jahreseinkommen, indem der Betrag durch zwölf geteilt wird.
+
+Vom Bruttoeinkommen werden pauschal abgezogen:
+
+- 10 Prozent für Steuern
+
+- 10 Prozent für Krankenversicherungsbeiträge
+
+- 10 Prozent für Rentenversicherungsabgaben
+
+Das ergibt insgesamt bis zu 30 Prozent Abzug vom Bruttoeinkommen.
+
+### Berücksichtigung der Wohnkosten
+
+Die Höchstbeträge legen fest, bis zu welcher Höhe Wohnkosten bei der Wohngeldberechnung berücksichtigt werden. Liegt Ihre Miete unterhalb des Höchstbetrags, wird sie vollständig berücksichtigt. Liegt die tatsächliche Miete darüber, wird sie auf den Höchstbetrag begrenzt. Der darüber liegende Teil muss selbst getragen werden.
+
+## 6 Wohngeld beantragen: Schritt für Schritt
+
+Der Wohngeldantrag muss bei der örtlichen Wohngeldstelle gestellt werden. Wichtig: Wohngeld wird erst ab dem Monat der Antragstellung gezahlt – eine rückwirkende Zahlung ist nicht möglich. Bei einem Umzug muss ein neuer Antrag am neuen Wohnort gestellt werden.
+
+### Erforderliche Unterlagen für den Antrag
+
+- Einkommensnachweise aller Haushaltsmitglieder der letzten 12 Monate
+
+- Mietvertrag oder Eigentumsnachweis
+
+- Nachweis über die Betriebskosten
+
+- Bei Schwerbehinderung: Schwerbehindertenausweis
+
+- Bei Alleinerziehenden: Nachweis über die Kinder
+
+[SPIEL schaetzen: Wie viele Haushalte erhalten in Deutschland Wohngeld? → 2000000]
+
+### Bewilligungsdauer
+
+Wohngeld wird in der Regel für 12 Monate bewilligt und monatlich im Voraus gezahlt. Für die Weiterbewilligung muss rechtzeitig ein neuer Antrag gestellt werden. Die letzte Erhöhung beim Wohngeld erfolgte zum 1. Januar 2025. Nach dem Gesetz erfolgt eine Anpassung alle zwei Jahre – die nächste planmäßige Erhöhung ist zum 1. Januar 2027 vorgesehen.
+
+Allerdings sind für 2027 bereits Sparmaßnahmen in der Diskussion. Rund eine Milliarde Euro soll im Bundeshaushalt eingespart werden. Von den geplanten Kürzungen wären etwa 1,2 Millionen Haushalte betroffen, die derzeit Wohngeld beziehen.
+
+## 7 Fazit
+
+Das Wohngeld bleibt 2026 ein wichtiges sozialpolitisches Instrument zur Unterstützung von Haushalten mit geringem bis mittlerem Einkommen. Die durchschnittliche Höhe von etwa 370 Euro monatlich bietet eine spürbare Entlastung bei den Wohnkosten. Besonders profitieren Menschen mit Schwerbehinderung, Alleinerziehende und Familien durch spezielle Freibeträge, die das anrechenbare Einkommen reduzieren.
+
+Die großzügigen Vermögensgrenzen ermöglichen auch Haushalten mit Ersparnissen den Zugang zur Förderung. Für den Anspruch ist nicht allein das Einkommen ausschlaggebend, sondern das Zusammenspiel aus Haushaltsgröße, regionaler Mietstufe und berücksichtigungsfähigen Wohnkosten. Eine frühzeitige Antragstellung ist essentiell, da eine rückwirkende Zahlung ausgeschlossen ist.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste wohngeld]
+
+[BLOCK rechner wohngeld]
+
+
+## FAQ
+F: Wer hat Anspruch auf Wohngeld?
+A: Anspruchsberechtigt sind Mieter und Eigentümer mit geringem Einkommen, die keine anderen Sozialleistungen wie Bürgergeld, Grundsicherung oder BAföG beziehen. Auch das Vermögen darf bestimmte Freibeträge nicht überschreiten – bei Alleinstehenden etwa 60.000 Euro.
+F: Wie hoch ist das durchschnittliche Wohngeld 2026?
+A: Nach der Wohngeld-Plus-Reform liegt das durchschnittliche Wohngeld bei rund 370 Euro monatlich, vor der Reform waren es nur etwa 180 Euro. 2026 erfolgt keine Anpassung, da eine Erhöhung laut Gesetz nur alle zwei Jahre vorgesehen ist – die nächste kommt zum 1. Januar 2027.
+F: Welche Rolle spielen die Mietstufen beim Wohngeld?
+A: Mietstufen 1 bis 7 spiegeln das regionale Mietpreisniveau wider und beeinflussen die Höhe des Wohngeldes direkt. In Mietstufe 1 liegt die Einkommensgrenze für einen 1-Personen-Haushalt 2026 bei 1.443 Euro, für einen 2-Personen-Haushalt bei 1.953 Euro.
+F: Welche Zuschläge enthält das Wohngeld-Plus-System?
+A: Zusätzlich zum regulären Wohngeld gibt es einen Heizkostenzuschuss von 1,20 Euro pro Quadratmeter und einen pauschalen Aufschlag von 40 Cent je Quadratmeter auf die Miethöchstbeträge. Diese Komponenten fangen höhere Kosten durch energetische Sanierungen ab.

@@ -1,0 +1,173 @@
+# Gewerbesteuer (gewerbesteuer)
+## 0 Gewerbesteuer-Leitfaden: Steuern sparen für Unternehmer
+
+Die Gewerbesteuer ist eine kommunale Steuer auf Gewerbebetriebe. Wie sie sich 2026 aus Messbetrag und Hebesatz berechnet, wer sie zahlt und welche Freibeträge gelten.
+
+## 1 Gewerbesteuer 2026: Berechnung, Hebesätze und Fristen
+
+Die Gewerbesteuer ist eine kommunale Ertragssteuer auf gewerbliche Tätigkeiten in Deutschland. Sie zählt zu den wichtigsten Einnahmequellen für Gemeinden und Städte. Für 2026 bleiben die grundlegenden Strukturen weitgehend unverändert – doch es gibt wichtige Neuerungen bei Hebesätzen und digitalen Verfahren.
+
+## 2 Wer zahlt Gewerbesteuer?
+
+Die Steuerpflicht trifft alle Gewerbetreibenden – unabhängig von Größe oder Branche. Sie entsteht mit der Aufnahme der gewerblichen Tätigkeit.
+
+Steuerpflichtige Rechtsformen:
+
+- Einzelunternehmen mit Gewerbeschein
+
+- Personengesellschaften (GbR, OHG, KG)
+
+- Kapitalgesellschaften (GmbH, UG, AG)
+
+- Juristische Personen mit wirtschaftlichem Geschäftsbetrieb
+
+Ausnahmen: Freiberufler (Ärzte, Architekten, Steuerberater) zahlen keine Gewerbesteuer. Gleiches gilt für Land- und Forstwirtschaftsbetriebe.
+
+[SPIEL quiz: Welche Rechtsform zahlt bereits ab dem ersten Euro Gewerbesteuer?]
+
+Ein entscheidender Unterschied: Bei Kapitalgesellschaften (GmbH, AG) beginnt die Steuerpflicht mit der Handelsregistereintragung – unabhängig davon, ob bereits Gewinne entstanden sind. Für GmbHs fällt zusätzlich zur Gewerbesteuer auch die Körperschaftsteuer an, die den Gesamtsteuerdruck erheblich erhöht.
+
+## 3 Die Berechnung: Schritt für Schritt
+
+Die Berechnung folgt einer fest definierten Formel:
+
+Gewerbesteuer = (Gewerbeertrag − Freibetrag) × 3,5 % × Hebesatz
+
+Die fünf Rechenschritte:
+
+1. Gewerbeertrag ermitteln: Der Gewinn aus dem Gewerbebetrieb bildet die Basis. Hinzu kommen Hinzurechnungen (z. B. bestimmte Zinsen), abgezogen werden Kürzungen (z. B. Grundbesitzanteile).
+
+2. Abrunden: Der Betrag wird auf volle 100 Euro abgerundet.
+
+3. Freibetrag abziehen: Einzelunternehmen und Personengesellschaften erhalten einen Freibetrag von 24.500 €. Kapitalgesellschaften: kein Freibetrag.
+
+4. Steuermessbetrag berechnen: Die Steuermesszahl von 3,5 % wird angewendet.
+
+5. Mit Hebesatz multiplizieren: Der letzte Schritt bestimmt die tatsächliche Steuerbelastung.
+
+| Rechenschritt | Beispiel
+
+| Gewinn | 80.000 €
+
+| Gewerbeertrag | 80.000 €
+
+| Abzgl. Freibetrag | −24.500 €
+
+| Steuerbasis | 55.500 €
+
+| × 3,5 % | 1.942,50 €
+
+| × Hebesatz 410 % | 7.964,25 €
+
+## 4 Hebesätze: Der Standort ist entscheidend
+
+Jede Gemeinde legt ihren Hebesatz selbst fest. Das führt zu erheblichen Unterschieden – und damit zu unterschiedlicher Steuerbelastung beim gleichen Gewinn.
+
+Aktuelle Hebesätze in Großstädten (2026):
+
+- München: 490 %
+
+- Hamburg: 470 %
+
+- Berlin: 410 %
+
+- Bundesweiter Durchschnitt: ca. 400 %
+
+- Gesetzliches Minimum: 200 %
+
+Ein Beispiel verdeutlicht die Auswirkung: Bei 100.000 € Gewerbeertrag zahlt ein Unternehmen in München etwa 2.800 € mehr als in Berlin – obwohl der Gewinn identisch ist.
+
+[SPIEL schaetzen: Ab welchem Jahr erhöht sich der Mindesthebesatz? → 2027]
+
+Wichtige Reform ab 2027: Der Mindesthebesatz steigt von 200 % auf 280 %. Ziel ist es, sogenannte Steueroasen-Gemeinden zu verhindern. Für 2026 gelten noch die bisherigen Regeln.
+
+## 5 Hinzurechnungen und Kürzungen
+
+Die Berechnung ist nicht immer einfach. Der tatsächlich zu versteuernde Gewinn weicht vom Handelsergebnis ab.
+
+Häufige Hinzurechnungen (§ 8 GewStG):
+
+- 25 % der Zinsen, Mieten und Leasingraten (sofern über 200.000 € pro Jahr)
+
+- Gewinnanteile stiller Gesellschafter
+
+- Zinsen für bestimmte Finanzierungen
+
+Häufige Kürzungen (§ 9 GewStG):
+
+- Anteile von mindestens 15 % an Personengesellschaften
+
+- 1,2 % des Grundbesitzeinheitswerts
+
+- Unter Bedingungen: Gewinne aus ausländischen Kapitalgesellschaften
+
+Diese Regeln sind komplex, doch der Freibetrag von 200.000 € nimmt kleinere Unternehmen von vielen Korrektionen aus.
+
+## 6 Entlastung durch Anrechnung auf die Einkommensteuer
+
+Einzelunternehmer und Mitunternehmer von Personengesellschaften haben einen großen Vorteil: Sie können die Gewerbesteuer auf ihre Einkommensteuer anrechnen (§ 35 EStG).
+
+Das Prinzip: Das 4-fache des Steuermessbetrags wird angerechnet. Konkret bedeutet dies – bei einem Hebesatz von maximal 400 % – dass faktisch keine zusätzliche Belastung entsteht. Bei höheren Hebesätzen trägt der Unternehmer nur den Überschuss selbst.
+
+Wichtig: Diese Anrechnung ist auf Kapitalgesellschaften (GmbH, UG) nicht anwendbar. Sie zahlen ihre Gewerbesteuer ohne Entlastung.
+
+## 7 Fristen und Vorauszahlungen 2026
+
+Vorauszahlungstermine (quartalsweise):
+
+- 15. Februar
+
+- 15. Mai
+
+- 15. August
+
+- 15. November
+
+Abgabefrist für die Steuererklärung 2025:
+
+- Ohne Steuerberater: 31. Juli 2026
+
+- Mit Steuerberater: 28. Februar 2027
+
+- Einreichung: nur elektronisch via ELSTER
+
+Strafen bei Verspätung:
+
+- Verspätungszuschlag: mindestens 25 € pro Monat
+
+- Säumniszuschlag bei Vorauszahlungen: 1 % pro Monat
+
+[SPIEL gewusst: 2026 gleichen Finanzbehörden automatisiert Daten aus der E-Bilanz mit Gewerbesteuererklärungen ab. Fehler bei Hinzurechnungen werden dadurch schneller erkannt.]
+
+## 8 Digitalisierung und neue Regelungen
+
+Die Finanzverwaltung wird 2026 zunehmend digital. E-Rechnungen sind für die meisten Unternehmen Pflicht. Automatisierte Verfahren prüfen Ihre Angaben schneller auf Plausibilität.
+
+Zudem werden Betriebsstätten-Regelungen geklärt – besonders relevant für Unternehmen mit Homeoffice oder dezentralen Strukturen. Die Zuordnung zur richtigen Gemeinde beeinflusst, welcher Hebesatz gilt. Wer als Selbstständiger arbeitet, sollte sich umfassend über alle Steuern für Selbstständige informieren, um keine Zahlungsfrist zu verpassen.
+
+## 9 Fazit
+
+Die Gewerbesteuer bleibt 2026 eine wichtige Kostengröße für Gewerbetreibende. Die Höhe hängt ab von:
+
+- Rechtsform: Kapitalgesellschaften zahlen ab dem ersten Euro, Personengesellschaften haben einen Freibetrag.
+
+- Standort: Die Hebesätze variieren zwischen 200 % (Minimum, bald 280 %) und über 490 % – eine massive Kostenspanne.
+
+- Anrechnung: Einzelunternehmer profitieren von der Entlastung auf die Einkommensteuer, GmbH-Inhaber nicht.
+
+Mit sorgfältiger Planung, korrekten Hinzurechnungen und Kürzungen sowie rechtzeitiger Abgabe lässt sich die Steuer als kalkulierbarer Faktor in Ihre Unternehmensplanung integrieren. Die geplante Erhöhung des Mindesthebesatzes ab 2027 sollten Sie bereits jetzt im Blick haben.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste gewerbesteuer]
+
+
+## FAQ
+F: Wer muss Gewerbesteuer zahlen?
+A: Gewerbesteuerpflichtig sind alle Gewerbetreibenden, also Einzelunternehmen, Personengesellschaften und Kapitalgesellschaften. Befreit sind Freiberufler wie Ärzte, Rechtsanwälte und Architekten, da sie per gesetzlicher Definition kein Gewerbe betreiben.
+F: Wie hoch ist der Gewerbesteuer-Freibetrag?
+A: Einzelunternehmen und Personengesellschaften haben einen jährlichen Freibetrag von 24.500 Euro. Kapitalgesellschaften wie GmbHs zahlen dagegen ab dem ersten Euro Gewinn Gewerbesteuer. Vereine mit wirtschaftlichem Geschäftsbetrieb erhalten einen reduzierten Freibetrag von 5.000 Euro.
+F: Wie berechnet sich die Gewerbesteuer?
+A: Die Formel lautet: Gewerbeertrag multipliziert mit der Messzahl von 3,5 Prozent, multipliziert mit dem Hebesatz der Gemeinde. Der Hebesatz variiert bundesweit und beträgt mindestens 200 Prozent, ab 2027 plant die Bundesregierung eine Anhebung auf 280 Prozent.
+F: Kann die Gewerbesteuer auf die Einkommensteuer angerechnet werden?
+A: Einzelunternehmer und Mitunternehmer von Personengesellschaften können die gezahlte Gewerbesteuer pauschal auf ihre Einkommensteuer anrechnen. Dies stellt eine wichtige Entlastung dar, die eine Doppelbesteuerung weitgehend vermeidet.

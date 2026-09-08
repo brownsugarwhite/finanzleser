@@ -1,0 +1,117 @@
+# Steuertabelle (steuertabelle)
+## 0 Steuertabelle 2026: Einkommensteuer Grundfreibetrag & Steuersätze
+
+Die Steuertabelle zeigt, wie viel Einkommensteuer auf welches Einkommen entfällt. Grundfreibetrag, Steuersätze und Berechnung 2026 verständlich erklärt.
+
+## 1 Steuertabelle 2026: Grundfreibetrag, Steuersätze und Berechnung
+
+Die Steuertabelle regelt in Deutschland, wie viel Einkommensteuer Sie auf unterschiedliche Einkommen zahlen müssen. 2026 beträgt der Grundfreibetrag 12.348 Euro für Ledige und 24.696 Euro für Verheiratete, sodass das Existenzminimum steuerfrei bleibt. Der Spitzensteuersatz von 42 Prozent gilt ab 69.878 Euro zu versteuerndem Einkommen, während der Höchststeuersatz von 45 Prozent ab 277.826 Euro greift.
+
+Die deutsche Steuertabelle macht das progressive System der Einkommensteuer transparent und ermöglicht es Bürgern, ihre Steuerlast präzise zu berechnen. Sie zeigt deutlich, dass höhere Einkommen prozentual stärker belastet werden, während niedrige Einkommen geschützt sind.
+
+## 2 Was ist eine Steuertabelle und wie funktioniert sie?
+
+Die Steuertabelle ist eine tabellarische Darstellung der Steuersätze und Steuerbeträge, die für den jeweiligen Tarif gelten. Sie basiert auf dem progressiven Steuersystem der Einkommensteuer, bei dem höhere Einkommen mit höheren Steuersätzen belastet werden.
+
+In Deutschland existieren zwei Hauptvarianten der Steuertabelle: Die Grundtabelle für Alleinstehende und die Splittingtabelle für Verheiratete. Bei Zusammenveranlagung wird das gemeinsame Einkommen halbiert, die Steuer berechnet und dann verdoppelt. Diese Systematik ermöglicht es, die Steuerlast für verschiedene Familienkonstellationen fair zu berechnen.
+
+Das zu versteuernde Einkommen ist die Grundlage für die Berechnung. Es errechnet sich anhand des Bruttoeinkommens abzüglich der Sozialversicherungsbeiträge. Von diesem Betrag werden weitere Abzüge wie Werbungskosten oder Sonderausgaben vorgenommen, bevor die finale Steuer ermittelt wird.
+
+## 3 Wie hoch sind die Grenzwerte und Steuersätze 2026?
+
+Der steuerliche Grundfreibetrag sorgt dafür, dass das Existenzminimum für alle steuerfrei bleibt. 2026 steigt er um 252 Euro auf 12.348 Euro. Für Verheiratete ist der Grundfreibetrag doppelt so hoch: 24.696 Euro.
+
+Die progressive Besteuerung gliedert sich 2026 in fünf Zonen:
+
+- Nullzone: Bis 12.348 Euro bleibt das Einkommen komplett steuerfrei
+
+- Erste Progressionszone: Zwischen 12.348 und 17.799 Euro gilt ein progressiver Steuersatz von 14 bis 24 Prozent für den Betrag über dem Grundfreibetrag
+
+- Zweite Progressionszone: Von 17.800 bis 69.878 Euro mit einem Steuersatz von 24 bis 42 Prozent
+
+- Proportionalzone: Zwischen 69.878 und 277.825 Euro fällt der Spitzensteuersatz von 42 Prozent auf den Betrag über 69.878 Euro an
+
+- Reichensteuer: Auf zu versteuernde Einkommen über 277.826 Euro gilt der Höchststeuersatz von 45 Prozent
+
+[SPIEL gewusst: Der Spitzensteuersatz von 42 Prozent ist seit 2005 unverändert und ist tatsächlich der niedrigste in Deutschland seit dem 2. Weltkrieg (Stand 2026).]
+
+## 4 Welche Steuerbelastung entsteht bei verschiedenen Einkommen?
+
+Die praktische Anwendung der Steuertabelle zeigt deutliche Unterschiede je nach Einkommenshöhe. Ledige mit einem zu versteuernden Einkommen von 60.000 Euro zahlen 2026 insgesamt 14.233 Euro Einkommensteuer. Der Durchschnittssteuersatz liegt bei 23,7 Prozent, der Grenzsteuersatz bei 39,4 Prozent.
+
+Bei höheren Einkommen steigt die Belastung überproportional: Bei einem Einkommen von 80.000 Euro beträgt die Einkommensteuer 22.464 Euro. Zusätzlich werden 252 Euro Solidaritätszuschlag fällig. Der Durchschnittssteuersatz liegt bei 28,1 Prozent, der Grenzsteuersatz bei 42 Prozent.
+
+| Zu versteuerndes Einkommen | Einkommensteuer | Solidaritätszuschlag | Durchschnittssteuersatz
+
+| 40.000 € | 5.965 € | 0 € | 14,9 %
+
+| 60.000 € | 14.233 € | 0 € | 23,7 %
+
+| 80.000 € | 22.464 € | 252 € | 28,1 %
+
+| 100.000 € | 30.864 € | 1.251 € | 30,9 %
+
+[SPIEL quiz: Ab welchem zu versteuernden Einkommen greift 2026 der Spitzensteuersatz von 42 Prozent?]
+
+## 5 Wie unterscheiden sich Grund- und Splittingtabelle?
+
+Verheiratete Paare profitieren erheblich vom Ehegattensplitting, das in der Splittingtabelle abgebildet wird. Beim Splittingverfahren wird das gemeinsame zu versteuernde Einkommen der Partner halbiert, für diesen Betrag die Einkommensteuer nach dem Grundtarif ermittelt und der sich daraus ergebende Steuerbetrag verdoppelt.
+
+Diese Methode führt zu erheblichen Steuervorteilen, insbesondere wenn die Partner unterschiedlich viel verdienen. Bei einem gemeinsamen zu versteuernden Einkommen von 80.000 Euro zahlen Verheiratete etwa 14.418 Euro Einkommensteuer – rund 8.000 Euro weniger als ein alleinstehender Steuerpflichtiger mit gleichem Einkommen.
+
+Das Splitting wirkt sich besonders vorteilhaft aus, solange die Partner nicht beide in den höchsten Steuersätzen landen. Bei sehr hohen Einkommen gleichen sich die Vorteile wieder an, da beide Partner dann ohnehin den Spitzen- oder Höchststeuersatz zahlen würden.
+
+[SPIEL karte: Grenzsteuersatz]
+
+## 6 Wer muss Solidaritätszuschlag zahlen?
+
+Seit 2021 ist der Solidaritätszuschlag für rund 90 Prozent der Lohn- und Einkommenssteuerzahler weggefallen. Stattdessen gilt eine gestaffelte Freigrenze. 2026 liegt die Freigrenze bei 20.350 Euro Einkommensteuer für Singles und 40.700 Euro für Ehepaare.
+
+Der Solidaritätszuschlag beträgt 5,5 Prozent der Einkommensteuer, wird jedoch nur oberhalb der Freigrenzen erhoben. In der Milderungszone müssen nur 11,9 Prozent der Differenz aus Einkommensteuer und Freibetrag gezahlt werden. Diese Zone gilt bis zu einem Bruttoeinkommen von 131.000 Euro im Jahr.
+
+Wichtig: Bei Kapitalanlegern, deren Kapitalerträge über dem Sparer-Pauschbetrag von 1.000 Euro/2.000 Euro liegen, muss die Bank neben der 25-prozentigen Abgeltungsteuer nach wie vor 5,5 Prozent Solidaritätszuschlag einbehalten. Hier greifen die Freigrenzen nicht.
+
+## 7 Wie berechne ich mein zu versteuerndes Einkommen?
+
+Das zu versteuernde Einkommen ist der entscheidende Wert für die Steuertabelle. Es beginnt mit dem Bruttoeinkommen, von dem zunächst die Sozialversicherungsbeiträge abgezogen werden. Überschlägig können Sie 18 bis 20 Prozent vom Bruttogehalt abziehen und kommen so in den Bereich Ihres realen zu versteuernden Einkommens.
+
+Weitere Abzüge reduzieren die Steuerlast:
+
+- Werbungskosten (mindestens 1.230 Euro Pauschbetrag 2026)
+
+- Sonderausgaben (Vorsorgeaufwendungen, Spenden)
+
+- Außergewöhnliche Belastungen (Krankheitskosten, Behinderung)
+
+- Kinderfreibeträge (3.414 Euro pro Kind und Elternteil)
+
+Für 2026 steigt der Kinderfreibetrag auf 3.414 Euro beziehungsweise 6.828 Euro für Verheiratete. Hinzu kommt ein Freibetrag von 2.928 Euro pro Kind für den Betreuungs- und Erziehungs- oder Ausbildungsbedarf.
+
+[SPIEL mythos: Wer 70.000 Euro brutto verdient, muss 42 Prozent Steuern zahlen. → nein]
+
+## 8 Wie nutze ich die Steuertabelle praktisch?
+
+Die Steuertabelle dient verschiedenen Zwecken: Sie hilft bei der Gehaltsverhandlung, der Finanzplanung und der Überprüfung von Steuerbescheiden. Die Lohnsteuer, die Arbeitnehmer im Jahr zahlen, ist eine Art Vorauszahlung auf die eigentliche Steuerschuld. Diese kann aber von der tatsächlichen Steuerschuld abweichen, abhängig von der Steuerklasse und möglichen Abzügen. Daher ist es oft eine gute Idee, freiwillig eine Steuererklärung abzugeben.
+
+Online-Rechner des Bundesfinanzministeriums ermöglichen eine präzise Berechnung unter Berücksichtigung aller individuellen Faktoren. Die offiziellen Steuertabellen werden jährlich als PDF veröffentlicht und können kostenfrei heruntergeladen werden.
+
+Für die Praxis bedeutet das: Selbst wenn Sie in den Spitzensteuersatz rutschen, zahlen Sie nicht auf ihr gesamtes Einkommen 42 Prozent. Wenn Ihr zu versteuerndes Einkommen 2026 genau an der Grenze des Spitzensteuersatzes von 69.879 Euro liegt, beträgt Ihr persönlicher Steuersatz nur 26,06 Prozent. Sie zahlen erst 42 Prozent Steuern, wenn Ihr zu versteuerndes Einkommen bei rund 375.000 Euro liegt.
+
+## 9 Fazit
+
+Die Steuertabelle 2026 bringt durch die Erhöhung des Grundfreibetrags auf 12.348 Euro und die Anpassung der Progressionszonen spürbare Entlastungen für alle Steuerpflichtigen. Besonders profitieren Personen mit niedrigen und mittleren Einkommen, da die Freigrenzen beim Solidaritätszuschlag auf 20.350 Euro gestiegen sind. Verheiratete können durch das Ehegattensplitting erhebliche Steuervorteile erzielen, während der progressive Aufbau des Systems sicherstellt, dass höhere Einkommen stärker belastet werden. Die Steuertabelle macht das komplexe deutsche Steuersystem transparent und ermöglicht eine verlässliche Finanzplanung. Durch die jährlichen Anpassungen wird die kalte Progression ausgeglichen und die Kaufkraft der Steuerpflichtigen bei steigenden Preisen geschützt.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste steuertabelle]
+
+
+## FAQ
+F: Wie viel Einkommensteuer zahle ich 2026 bei 60.000 Euro?
+A: Bei einem zu versteuernden Einkommen von 60.000 Euro zahlen Ledige 2026 insgesamt 14.233 Euro Einkommensteuer. Der Durchschnittssteuersatz liegt bei 23,7 Prozent, der Grenzsteuersatz bei etwa 39 Prozent. Die Steuerlast steigt mit zunehmendem Einkommen progressiv an.
+F: Was ist der Unterschied zwischen Grund- und Splittingtabelle?
+A: Die Grundtabelle gilt für Alleinstehende, die Splittingtabelle für verheiratete Paare und eingetragene Lebenspartnerschaften bei Zusammenveranlagung. Bei der Splittingtabelle wird das gemeinsame Einkommen halbiert, die Steuer für diese Hälfte berechnet und anschließend verdoppelt. Das bringt vor allem bei ungleichen Einkommen Vorteile.
+F: Ab welchem Einkommen gilt der Spitzensteuersatz 2026?
+A: Der Spitzensteuersatz von 42 Prozent gilt 2026 für zu versteuernde Einkommen zwischen 69.878 und 277.825 Euro. Darüber greift die sogenannte Reichensteuer mit einem Höchststeuersatz von 45 Prozent. Diese Grenzwerte werden regelmäßig an die Einkommensentwicklung angepasst.
+F: Was bedeutet der Grenzsteuersatz konkret für mich?
+A: Der Grenzsteuersatz gibt an, mit welchem Prozentsatz jeder zusätzlich verdiente Euro besteuert wird. Bei einem Einkommen von 80.000 Euro liegt er beispielsweise bei 42 Prozent. Der Durchschnittssteuersatz, also die tatsächliche Steuerbelastung, liegt dagegen meist deutlich niedriger, etwa bei 28,1 Prozent.

@@ -1,0 +1,131 @@
+# Schenkungssteuer (schenkungssteuer)
+## 0 Freibeträge, Steuersätze und Gestaltungstipps zur Schenkungssteuer
+
+Die Schenkungssteuer fällt bei Vermögensübertragungen zu Lebzeiten an. Freibeträge, Steuersätze und legale Gestaltungstipps 2026, um Steuern zu sparen.
+
+## 1 Schenkungssteuer 2026: Freibeträge und Steuersätze erklärt
+
+Die Schenkungssteuer regelt die Besteuerung von Vermögensübertragungen zu Lebzeiten. Für 2026 gelten unverändert die Freibeträge, Steuerklassen und Sätze nach dem Erbschaftsteuer- und Schenkungsteuergesetz (ErbStG). Diese Stabilität ermöglicht es Ihnen, größere Vermögenswerte strategisch und steueroptimiert zu übertragen.
+
+Die Schenkungssteuer besteuert unentgeltliche Vermögensübertragungen zwischen lebenden Personen. Eine Schenkung bedeutet: Eine Person überträgt Vermögenswerte – Geld, Immobilien oder andere Wertgegenstände – an eine andere Person ohne angemessene Gegenleistung. Geschuldet wird die Steuer vom Beschenkten, nicht vom Schenker.
+
+## 2 Freibeträge 2026: Höhe nach Verwandtschaftsgrad
+
+Die Freibeträge bei der Schenkungssteuer legen fest, bis zu welchem Betrag eine Schenkung steuerfrei bleibt. Sie hängen vom Verwandtschaftsgrad ab (§ 16 ErbStG) und liegen zwischen 20.000 und 500.000 Euro. Diese Beträge gelten seit 2009 unverändert.
+
+[SPIEL gewusst: Ein Ehepaar mit zwei Kindern überträgt durch geschickte Planung alle zehn Jahre bis zu 1,6 Millionen Euro steuerfrei (Stand 2026).]
+
+Steuerklasse I umfasst die engsten Familienbeziehungen: Ehepartner, eingetragene Lebenspartner, Kinder, Stiefkinder, Adoptivkinder sowie Enkel und Urenkel. Hier gelten die höchsten Freibeträge:
+
+- Ehepartner/Lebenspartner: 500.000 Euro
+
+- Kinder/Stiefkinder: 400.000 Euro pro Elternteil (insgesamt 800.000 Euro pro Zehnjahresperiode)
+
+- Enkel: 200.000 Euro
+
+- Urenkel: 100.000 Euro
+
+Steuerklasse II betrifft Geschwister, Neffen, Nichten, Stiefeltern, Schwiegereltern und Großeltern: 20.000 Euro Freibetrag.
+
+Steuerklasse III gilt für alle übrigen Personen, insbesondere Freunde: 20.000 Euro Freibetrag.
+
+## 3 Steuersätze bei Schenkung
+
+Der Betrag über dem Freibetrag wird nach progressiven Sätzen besteuert – zwischen 7 % und 50 % je nach Steuerklasse:
+
+| Steuerpflichtiger Betrag | Klasse I | Klasse II | Klasse III
+
+| bis 75.000 € | 7% | 15% | 30%
+
+| bis 300.000 € | 11% | 20% | 30%
+
+| bis 600.000 € | 15% | 25% | 30%
+
+| bis 6.000.000 € | 19% | 30% | 30%
+
+| bis 13.000.000 € | 23% | 35% | 50%
+
+| über 13.000.000 € | 30% | 43% | 50%
+
+[SPIEL karte: Stufentarif]
+
+Beispiel: Ein Vater schenkt seinem Kind 600.000 Euro. Nach Abzug des Freibetrags (400.000 Euro) bleiben 200.000 Euro. Diese werden mit 11 % besteuert – Steuerlast: 22.000 Euro.
+
+## 4 10-Jahres-Regel nutzen
+
+Ein großer Vorteil liegt in der strategischen Nutzung der Freibeträge. Diese erneuern sich alle zehn Jahre (§ 14 ErbStG) und gelten pro Zehnjahresperiode und pro Personenpaar. Das Finanzamt addiert sämtliche Zuwendungen der letzten zehn Jahre. Liegt die Summe über dem Freibetrag, wird Steuer auf den übersteigenden Betrag fällig.
+
+[SPIEL schaetzen: Wie oft kann ein Elternteil seinem Kind in 30 Jahren jeweils 400.000 Euro steuerfrei schenken? → 3]
+
+Beispiel: Vater schenkt seiner Tochter 2016 eine Wohnung (380.000 Euro). Der Freibetrag ist nahezu ausgeschöpft. Ab 2026 steht der volle Freibetrag erneut zur Verfügung – der Vater kann weitere 400.000 Euro steuerfrei übertragen.
+
+## 5 Meldepflichten beim Finanzamt
+
+Jede Schenkung muss vom Beschenkten und vom Schenker innerhalb von drei Monaten nach Erhalt beim zuständigen Finanzamt angezeigt werden (§ 30 ErbStG) – auch wenn keine Steuern anfallen.
+
+Ausnahmen:
+
+- Notariell oder gerichtlich beurkundete Schenkungen (das Finanzamt wird direkt benachrichtigt)
+
+- Übliche Gelegenheitsgeschenke (Hochzeit, Geburtstag, Weihnachten)
+
+- Schenkungen zum Unterhaltsbestreiten
+
+Folgen bei Versäumnis:
+
+Eine fehlende Anzeige führt nicht automatisch zu Steuerhinterziehung. Wirkt sich die Schenkung aber auf eine spätere Erbschaft oder Schenkung aus und wird die Summe relevante Freibeträge überschritten, entsteht rückwirkend eine Steuerschuld. Daher sollten Sie auch kleine Geldgeschenke anzeigen.
+
+## 6 Immobilienschenkungen richtig gestalten
+
+Bei Immobilienschenkungen empfiehlt sich eine notarielle Beurkundung. Die Schenkungssteuer bemisst sich nach dem Verkehrswert der Immobilie zum Zeitpunkt der Schenkung. Dieser wird durch ein professionelles Gutachten oder anhand von Bodenrichtwerten ermittelt. Das Finanzamt prüft diese Wertangaben genau.
+
+[SPIEL quiz: Was ist bei selbstgenutztem Wohneigentum zwischen Ehepartnern möglich?]
+
+Der Schenker kann sich Rechte sichern – etwa ein Wohnrecht oder einen Nießbrauch. Ein Nießbrauchvorbehalt reduziert erheblich den steuerpflichtigen Wert, da der Schenker das Nutzungsrecht behält. Dies senkt die Schenkungssteuer deutlich.
+
+## 7 Gestaltungsstrategien
+
+Mehrere legale Strategien helfen bei der Steuerreduzierung:
+
+- 10-Jahres-Strategie: Verteilen Sie größere Vermögen auf mehrere Schenkungen im Zehnjahres-Abstand
+
+- Kettenschenkung: Schenken Sie an Kinder, die wiederum an Enkel weiterschenken – mehrere Freibeträge greifen
+
+- Nießbrauchvorbehalt: Behalten Sie das Nutzungsrecht vor; der Kapitalwert mindert den steuerpflichtigen Betrag erheblich
+
+Beispiel Eheleistung: Ein unverheirateter Partner erhält nur 20.000 Euro Freibetrag (Steuerklasse III) mit Sätzen bis 50 %. Ein Ehepartner hat 500.000 Euro Freibetrag mit deutlich niedrigeren Sätzen – eine Eheschließung bringt hier erhebliche steuerliche Vorteile.
+
+## 8 Schenkungssteuer vs. Erbschaftssteuer
+
+Beide nutzen dieselben Steuerklassen und Sätze, unterscheiden sich aber grundlegend:
+
+- Zeitpunkt: Schenkung zu Lebzeiten, Erbschaft nach dem Tod
+
+- Freibetrag-Erneuerung: Schenkungssteuer erneuert sich alle zehn Jahre; Erbschaftssteuer steht nur einmal zur Verfügung
+
+- Steuerklasse bei Eltern/Großeltern: Bei Schenkung Klasse II (20.000 €), bei Erbschaft Klasse I (100.000 €)
+
+- Strategischer Vorteil: Die Schenkungssteuer ermöglicht es, durch regelmäßige Übertragungen im Zehnjahres-Rhythmus hohe Beträge nahezu steuerfrei weiterzugeben.
+
+## 9 Fazit
+
+Die Schenkungssteuer 2026 bleibt stabil und bietet durch die Zehnjahres-Regel enorme Möglichkeiten zur steueroptimalen Vermögensübertragung. Freibeträge reichen von 20.000 Euro für entfernte Verwandte bis 500.000 Euro für Ehepartner. Ein Ehepaar mit zwei Kindern überträgt pro Zehnjahresperiode 1,6 Millionen Euro steuerfrei.
+
+Nutzen Sie die aktuell stabilen Regelungen für eine frühzeitige und strategische Vermögensplanung. Eine professionelle Beratung durch einen Steuerberater oder Rechtsanwalt hilft, alle Möglichkeiten auszuschöpfen und rechtliche Fallstricke zu vermeiden. Bei größeren Vermögensübertragungen empfiehlt sich zudem die Prüfung Ihres Testaments und eine fundierte Beratung zu Erbrecht-Fragen, um eine umfassende Vermögensregelung zu schaffen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste schenkungssteuer]
+
+[BLOCK rechner erbschaftsteuer]
+
+
+## FAQ
+F: Wie hoch sind die Freibeträge bei der Schenkungssteuer 2026?
+A: Ehepartner haben einen Freibetrag von 500.000 Euro, Kinder je Elternteil 400.000 Euro und Enkel 200.000 Euro. Für Geschwister, Nichten, Neffen und sonstige Personen gelten nur 20.000 Euro. Die Freibeträge hängen vom Verwandtschaftsgrad und der Steuerklasse ab.
+F: Wie oft kann ich den Schenkungssteuer-Freibetrag nutzen?
+A: Die Freibeträge stehen alle zehn Jahre erneut zur Verfügung. Dadurch können Sie durch gestaffelte Schenkungen erhebliche Vermögenswerte steuerfrei übertragen. Ein Vater könnte seinem Kind zum Beispiel alle zehn Jahre 400.000 Euro schenken, ohne dass Schenkungssteuer anfällt.
+F: Wie hoch sind die Steuersätze bei der Schenkungssteuer?
+A: Die Steuersätze liegen je nach Steuerklasse zwischen 7 und 50 Prozent und steigen progressiv mit der Schenkungshöhe. In Steuerklasse I starten sie bei 7 Prozent bis 75.000 Euro, in Steuerklasse III bereits bei 30 Prozent. Der Höchstsatz erreicht 50 Prozent bei Fremden.
+F: Wer muss die Schenkungssteuer zahlen?
+A: Steuerpflichtig ist der Beschenkte, nicht der Schenker. Eine Schenkung liegt vor, wenn Vermögenswerte wie Geld oder Immobilien ohne angemessene Gegenleistung übertragen werden. Nach Abzug des persönlichen Freibetrags wird der Überschuss nach den geltenden Steuersätzen versteuert.

@@ -1,0 +1,135 @@
+# Photovoltaik Förderung (photovoltaik-foerderung)
+## 0 Staatliche Zuschüsse und Kredite für Ihre Solaranlage
+
+Entdecken Sie alle Fördermöglichkeiten für Photovoltaikanlagen: KfW-Kredite, Einspeisevergütung, Steuererleichterungen und regionale Zuschüsse im Überblick.
+
+## 1 Photovoltaik-Förderung 2026: Einspeisevergütung, KfW-Kredit und Steuern im Überblick
+
+Die Photovoltaik-Förderung in Deutschland 2026 funktioniert wie ein Baukastensystem. Einspeisevergütung, KfW-Kredit, Steuerbefreiungen und regionale Zuschüsse arbeiten zusammen. Wer eine Solaranlage plant, profitiert von garantierten Einnahmen über 20 Jahre, günstigen Kreditkonditionen und erheblichen Steuererleichterungen. Allerdings bereitet die anstehende EEG-Reform vielen Interessenten Sorgen. Dieser Beitrag zeigt, welche Photovoltaik-Förderung zur Verfügung steht, wie hoch sie ausfällt und was Sie bei der Antragstellung beachten müssen.
+
+## 2 Welche Säulen der Photovoltaik-Förderung gibt es?
+
+Die Photovoltaik-Förderung ruht auf vier Säulen: die Einspeisevergütung nach EEG, der KfW-Kredit 270, steuerliche Erleichterungen und regionale Zuschüsse. Diese Bausteine lassen sich kombinieren. Die Reihenfolge der Anträge ist wichtig. Wer die Angebote optimal nutzen will, informiert sich vor dem ersten Vertrag.
+
+[SPIEL gewusst: Der Strompreis für Haushalte lag Anfang 2026 bei durchschnittlich 37,0 Cent pro kWh, die Einspeisevergütung brachte hingegen nur rund 7,78 Cent (Stand BDEW, April 2026).]
+
+## 3 Einspeisevergütung 2026: Wie viel verdienen Sie mit Solarstrom?
+
+Für Dachanlagen bis 10 kWp gilt seit Februar 2026 eine Einspeisevergütung von 7,78 Cent/kWh (Teileinspeisung) oder 12,34 Cent/kWh (Volleinspeisung). Ab August 2026 sinken diese Sätze um etwa 1 Prozent auf 7,71 beziehungsweise 12,23 Cent. Diese halbjährliche Absenkung ist gesetzlich verankert.
+
+Bei größeren Anlagen wird die Vergütung gestaffelt. Eine 15-kWp-Anlage mit Eigenverbrauch erhält für die ersten zehn kWp 7,78 Cent. Für die weiteren fünf kWp liegt die Quote bei nur 6,73 Cent pro kWh.
+
+Fördersätze nach Anlagengröße (Februar–Juli 2026):
+
+- Bis 10 kWp: 7,78 Cent (Teileinspeisung)
+
+- 10–40 kWp: 6,73 Cent
+
+- 40–100 kWp: 5,50 Cent
+
+- Freiflächenanlagen: 6,26 Cent
+
+Neu ist eine Regel für Negativpreise: Falls Strompreise an der Börse kontinuierlich negativ sind, kann die Vergütung ausgesetzt werden. Ein Kompensationsmechanismus gleicht das aus. Der 20-jährige Förderzeitraum verlängert sich dadurch.
+
+Die größte Unsicherheit betrifft 2027 und danach. Nach aktuellem Referentenentwurf des Wirtschaftsministeriums soll die Einspeisevergütung für neue Anlagen ab 2027 abgeschafft werden. Wer die heutige Form nutzen möchte, sollte die Anlage zeitnah in Betrieb nehmen.
+
+[SPIEL quiz: Wie lange bleibt die Einspeisevergütung für eine Solaranlage garantiert?]
+
+## 4 Eigenverbrauch rentiert sich deutlich mehr
+
+Der Vergleich fällt eindeutig aus: Eine selbst genutzte Kilowattstunde spart 37 Cent. Die Einspeisung bringt nur 7,78 Cent. Eigenverbrauch ist also fast fünfmal lukrativer. Ein Batteriespeicher verschärft diesen Vorteil. Er macht tagsüber erzeugten Strom für den Abend verfügbar. Energieberater empfehlen daher die Teileinspeisung statt der Volleinspeisung. Ausnahme: kaum bewohnte Gebäude.
+
+## 5 KfW 270: Zinsgünstige Finanzierung ohne Eigenkapital
+
+Der KfW-Kredit 270 "Erneuerbare Energien – Standard" ist der Hauptförderkredit für Solaranlagen. Er finanziert bis zu 100 % der Investitionskosten ohne Eigenkapital. Der aktuelle Zinssatz liegt ab 3,87 % effektiv (März 2026). Der genaue Satz hängt von Ihrer Bonität ab. Marktübliche Ratenkredite kosten dagegen 6–9 Prozent.
+
+Wichtig: Der KfW 270 ist ein Kredit, kein Zuschuss. Die volle Summe wird zurückgezahlt. Der Vorteil liegt einzig im besseren Zins.
+
+Beispiel: Bei 28.000 Euro über 15 Jahre sparen Sie rund 8.460 Euro Zinskosten. Das erspart Ihnen die Kosten eines marktüblichen Darlehens.
+
+Diese Kosten sind förderfähig:
+
+- Solarmodule, Wechselrichter
+
+- Batteriespeicher (auch Nachrüstung)
+
+- Planung, Installation, Netzanschluss
+
+- Wallbox in Kombination
+
+Nicht gefördert werden:
+
+- Balkonkraftwerke
+
+- Anlagen älter als 12 Monate
+
+- Eigenleistung des Eigentümers
+
+Die Reihenfolge ist wichtig: Unterzeichnen Sie keinen Kaufvertrag vor der KfW-Zusage. Wer den Vertrag vor der Genehmigung unterschreibt, verliert die Förderung vollständig. Beantragen Sie den Kredit immer über Ihre Hausbank, bevor Sie unterschreiben.
+
+## 6 Steuerersparnis seit 2023: 0 % Umsatzsteuer
+
+Seit Januar 2023 gilt für Kauf, Lieferung und Installation ein Nullsteuersatz nach § 12 Absatz 3 UStG. Diese Regelung bleibt 2026 unbefristet bestehen. Zusätzlich entfällt die Einkommensteuer für PV-Anlagen bis 30 kWp nach § 3 Nr. 72 EStG.
+
+Bei einer typischen 20-kWp-Anlage mit Speicher (18.000–25.000 Euro) sparen Sie mehrere Tausend Euro. Das Ersparte liegt deutlich über dem regulären Steuersatz von 19 Prozent. Praktisch bedeutet das: keine Umsatzsteuervoranmeldung, keine Gewinnermittlung und keine Anlage G in der Steuererklärung. Die einzige Pflicht bleibt die Registrierung im Marktstammdatenregister der Bundesnetzagentur. Für weitere Informationen zu Ihren steuerpflichtigen Einkünften empfehlen wir Ihnen, auch die Steuererklärung gründlich zu prüfen.
+
+## 7 Regionale und kommunale Zuschüsse nutzen
+
+Über die Bundesförderung hinaus unterstützen Länder und Städte Solaranlagen zusätzlich. Die Fördersummen liegen oft zwischen 50 und mehreren Tausend Euro. Wichtig: Der Antrag muss vor Vertragsabschluss gestellt werden.
+
+| Bundesland | Förderung | Zielgruppe
+
+| Baden-Württemberg | L-Bank Darlehen | Privatpersonen
+
+| Sachsen | SAB-Zuschuss | Dachanlagen ab 30 kWp
+
+| Mecklenburg-Vorpommern | Balkonkraftwerk-Zuschuss | Mieter
+
+| Berlin | SolarPLUS | Einkommensschwache Haushalte
+
+Manche Kommunen zahlen einen festen Betrag je Kilowattpeak. Andere fördern gezielt Speicher oder Balkonkraftwerke. Da viele Programme budgetbegrenzt sind, können Fördertöpfe im Laufe des Jahres 2026 vorzeitig erschöpft sein.
+
+Praktische Schritte:
+
+- Prüfen Sie die Website Ihrer Kommune auf aktuelle Programme
+
+- Stellen Sie regionale Anträge parallel zum KfW-Antrag, aber vor Vertragsabschluss
+
+- Fragen Sie beim Netzbetreiber nach zusätzlichen Boni für Smart Meter
+
+- Achten Sie darauf, dass dieselben Kosten nicht doppelt gefördert werden
+
+## 8 Lohnt sich eine Photovoltaikanlage 2026 noch?
+
+Ja. Die Modulkosten sind gesunken. Gleichzeitig ist der Eigenverbrauch durch hohe Strompreise wertvoller geworden. Amortisationszeiten liegen meist zwischen zehn und zwölf Jahren. Mit kommunalen Zuschüssen amortisieren sich Anlagen noch schneller. Über 20 Jahre erreichen viele Anlagen Renditen zwischen fünf und sieben Prozent jährlich. Dies gilt ohne zusätzliche Steuerersparnis.
+
+Der Zeitdruck ist real: Nach dem geplanten EEG-Reform ab 1. Januar 2027 sollen marktorientierte Modelle die feste Vergütung ersetzen. Wer die 20-jährige Garantie noch sichern möchte, sollte bis Ende 2026 in Betrieb nehmen. Auch die Baufinanzierung einer Immobilie mit Solaranlage sollte zeitlich optimal geplant werden.
+
+## 9 Fazit
+
+Die Photovoltaik-Förderung 2026 bietet vier wirksame Instrumente: die 20-Jahres-Garantie der Einspeisevergütung, den KfW-Kredit 270 zur Vollfinanzierung, den Nullsteuersatz sowie regionale Zuschüsse. Zusammen machen sie den Solareinstieg 2026 finanziell so attraktiv wie selten zuvor.
+
+Der wichtigste Erfolgsfaktor bleibt der hohe Eigenverbrauch. Bei 37 Cent pro kWh ist jede selbst genutzte Kilowattstunde deutlich wertvoller als jede eingespeiste. Mit Batteriespeicher steigt dieser Vorteil weiter.
+
+Handeln Sie zügig: Informieren Sie sich über kommunale Programme. Viele Programme sind budgetbegrenzt. Beantragen Sie die Photovoltaik-Förderung immer vor Vertragsabschluss. Wer die Anlage noch 2026 in Betrieb nimmt, sichert sich die bewährte Förderstruktur. Ab 2027 ändert sich das System grundlegend.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste photovoltaik-foerderung]
+
+[BLOCK rechner pv-foerderung]
+
+[BLOCK vergleich photovoltaik-versicherung-vergleich]
+
+[BLOCK dokumente arbeitsfoerderung]
+
+
+## FAQ
+F: Wie hoch ist die Einspeisevergütung 2026?
+A: Seit dem 1. Februar 2026 erhalten Anlagenbesitzer bei Teileinspeisung 7,78 Cent pro Kilowattstunde und bei Volleinspeisung 12,34 Cent pro kWh für Anlagen bis 10 kWp. Die Vergütung ist für 20 Jahre garantiert. Alle sechs Monate sinkt der Satz um etwa ein Prozent.
+F: Welche Konditionen bietet der KfW-Kredit 270?
+A: Der KfW-Kredit 270 finanziert bis zu 100 Prozent der Investitionskosten einer Photovoltaikanlage inklusive Speicher und Installation. Der effektive Jahreszins liegt zwischen 3,48 und 10,78 Prozent, abhängig von Bonität und Besicherung. Laufzeiten sind flexibel zwischen 5 und 30 Jahren möglich.
+F: Wie hoch ist die Mehrwertsteuer auf Photovoltaikanlagen?
+A: Photovoltaikanlagen bis 30 kWp werden seit 2023 mit null Prozent Mehrwertsteuer besteuert, gemäß § 12 Absatz 3 Umsatzsteuergesetz. Der Installateur rechnet ohne Mehrwertsteuer ab, wodurch Käufer automatisch 19 Prozent sparen. Diese Regelung gilt unbefristet.
+F: Wann sollte der KfW-Antrag gestellt werden?
+A: Der KfW-Antrag muss zwingend vor Unterzeichnung des Kauf- oder Installationsvertrags gestellt werden. Wer vor der KfW-Zusage einen Vertrag abschließt, verliert die gesamte Förderungsberechtigung. Planung und Projektierung können ebenfalls über den Kredit finanziert werden.

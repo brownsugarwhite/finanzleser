@@ -1,0 +1,193 @@
+# Patientenverfügung (patientenverfuegung)
+## 0 Rechtssichere Patientenverfügung: Vorsorge & Selbstbestimmung
+
+Mit einer Patientenverfügung legen Sie medizinische Behandlungen für den Ernstfall fest. Wie Sie sie 2026 rechtssicher erstellen und digital hinterlegen.
+
+## 1 Patientenverfügung: Rechtssicher erstellen und digital hinterlegen
+
+Eine Patientenverfügung regelt medizinische Behandlungen für den Fall der eigenen Entscheidungsunfähigkeit schriftlich und rechtlich verbindlich. Nach § 1827 Abs. 1 BGB muss das Dokument konkret formuliert und medizinisch verständlich sein. Mit der Digitalisierung des Gesundheitswesens wird die sichere Erstellung und Registrierung immer wichtiger.
+
+In diesem Ratgeber erfahren Sie, welche Anforderungen eine gültige Patientenverfügung erfüllen muss, wie Sie sie kostengünstig erstellen und warum die Registrierung im Zentralen Vorsorgeregister sinnvoll ist.
+
+## 2 Was ist eine Patientenverfügung?
+
+Eine Patientenverfügung ist die schriftliche Festlegung, ob Sie bestimmte Behandlungen akzeptieren oder ablehnen möchten. Die Schriftform mit eigenhändiger Unterschrift ist zwingend. Eine notarielle Beurkundung ist nicht erforderlich.
+
+Die Anforderungen im Überblick:
+
+- Schriftform: Eigenhändige Unterschrift nach § 126 BGB
+
+- Einwilligungsfähigkeit: Bei kognitiven Einschränkungen kann ein ärztliches Attest helfen
+
+- Hinreichende Bestimmtheit: Konkrete Situationen und medizinische Maßnahmen benennen, nicht nur allgemein formulieren
+
+Der Bundesgerichtshof verlangt seit 2016 und 2018 präzise Beschreibungen. Allgemeine Formulierungen wie "keine lebensverlängernden Maßnahmen" reichen nicht aus.
+
+[SPIEL quiz: Was verlangt § 1827 BGB für eine wirksame Patientenverfügung?]
+
+## 3 Unterschiede zu Vorsorgevollmacht und Betreuungsverfügung
+
+Die Patientenverfügung wird oft mit anderen Vorsorgedokumenten verwechselt. Die Unterschiede sind aber wichtig:
+
+| Dokument | Funktion | Wirkung
+
+| Patientenverfügung | Behandlungswünsche festlegen | Bindung für Ärzte
+
+| Vorsorgevollmacht | Vertreter benennen | Person handelt für Sie
+
+| Betreuungsverfügung | Wunschbetreuer bestimmen | Empfehlung ans Gericht
+
+Die Patientenverfügung enthält Ihren antizipierten Willen zu konkreten Behandlungen. Sie wirkt direkt, ohne dass ein Dritter eingreifen muss. In der Praxis ist die Kombination aller drei Dokumente empfohlen.
+
+Wichtig: Ohne explizite Vollmacht darf niemand – auch nicht der Ehepartner – für Sie entscheiden.
+
+## 4 Konkrete Formulierung: So wird Ihre Patientenverfügung rechtssicher
+
+Die größte Herausforderung ist präzise Formulierung. Eine Patientenverfügung ist rechtlich nur verbindlich, wenn sie klare Vorgaben zu konkreten Situationen und Maßnahmen enthält.
+
+Das Bundesministerium der Justiz bietet kostenlose Textbausteine an. Die Verbraucherzentralen haben ein Online-Tool erstellt, mit dem Sie Schritt für Schritt individuelle Textbausteine kombinieren können.
+
+Situationen, die Sie beschreiben sollten:
+
+- Endstadium einer tödlichen Krankheit
+
+- Schwere Hirnschädigung mit Bewusstlosigkeit
+
+- Fortgeschrittene Demenz im Endstadium
+
+- Akute lebensbedrohliche Situationen
+
+Medizinische Maßnahmen, zu denen Sie Stellung nehmen:
+
+- Künstliche Beatmung
+
+- Künstliche Ernährung via Sonde
+
+- Reanimation
+
+- Intensivmedizin
+
+- Schmerzlinderung und Palliativversorgung
+
+[SPIEL gewusst: 70 Prozent aller Patientenverfügungen sind zu unspezifisch und können im Ernstfall nicht angewendet werden (Bundesärztekammer 2026).]
+
+## 5 Digitale Patientenverfügung: ePA und Zentrales Vorsorgeregister 2026
+
+Die Digitalisierung macht Patientenverfügungen zugänglicher. Die elektronische Patientenakte (ePA) ist der Ort, an dem Ärzte den genauen Wortlaut nachlesen können.
+
+Die ePA wurde 2025 für alle gesetzlich Versicherten im Widerspruchsverfahren eingeführt. Seit Ende 2025 müssen alle Praxen, Krankenhäuser und Apotheken sie nutzen.
+
+So funktioniert die digitale Integration:
+
+1. Zentrales Vorsorgeregister (ZVR): Speichert, wo Ihre Patientenverfügung liegt
+
+2. ePA-App: Sie können dort einen Scan Ihrer unterschriebenen Patientenverfügung hochladen
+
+3. Notfall: Ärzte finden das Dokument schnell über digitale Abfrage
+
+Im Ernstfall dauert dieser Prozess nur noch Minuten und ist Bestandteil der klinischen Routine.
+
+## 6 Kosten: Von kostenlos bis 250 Euro
+
+Eine Patientenverfügung ist nicht zwingend kostenpflichtig. § 1827 BGB verlangt nur Schriftform und Unterschrift. Alle anderen Leistungen sind optional.
+
+Kostliche Optionen 2026:
+
+| Option | Kosten | Leistung
+
+| Eigenanfertigung | 0 Euro | BMJ-Textbausteine + Unterschrift
+
+| Hausarzt-Beratung | 20–100 Euro | IGeL-Leistung mit medizinischer Fundierung
+
+| Anwaltliche Beratung | 50–250 Euro | Individuelle Prüfung und Anpassung
+
+| Notarielle Beurkundung | 60–200 Euro | Beglaubigung, optional
+
+| ZVR-Registrierung | 20,50 Euro | Einmalig, Änderungen kostenlos
+
+Praktische Empfehlung: Eine kurze Anwaltsberatung (ca. 100 Euro), BMJ-Textbausteine und ZVR-Registrierung (20,50 Euro) ergeben ein rechtssicheres Dokument für etwa 120 Euro Gesamtkosten.
+
+## 7 Das Zentrale Vorsorgeregister: Registrierung und Ablauf
+
+Das ZVR ist die einzige nationale Datenbank für Vorsorgedokumente in Deutschland. Betreuungsgerichte müssen vor Betreuungsbeschlüssen dort nachschlagen.
+
+Registrierungskosten 2026:
+
+- Online-Registrierung: 20,50 Euro einmalig (mit Lastschrift)
+
+- Zusätzliche Person: 5 Euro
+
+- Registrierung per Post: 23,50 Euro
+
+Was wird gespeichert:
+
+Im ZVR sind nur die Existenz und der Aufbewahrungsort vermerkt – der Inhalt bleibt privat. Das Gericht weiß: Diese Person hat vorgesorgt, das Dokument liegt dort.
+
+Wer hat Zugriff:
+
+- Betreuungsgerichte bei Betreuungsverfahren
+
+- Ärzte können im Notfall Einsicht erhalten
+
+- Nicht öffentlich einsehbar
+
+Die Online-Registrierung dauert 15–20 Minuten unter www.vorsorgeregister.de.
+
+## 8 Häufige Fehler vermeiden
+
+Allzu allgemeine Formulierungen:
+
+Pauschale Aussagen zu Würde oder Lebensqualität ersetzen keine konkreten Entscheidungen über einzelne Maßnahmen.
+
+Zu medizinisch ungenau:
+
+Ärzte können Wünsche nicht umsetzen, wenn die Patientenverfügung medizinisch unpräzise ist.
+
+Keine Hinterlegung:
+
+Ein gutes Dokument nützt nichts, wenn es nicht gefunden wird.
+
+Veraltete Angaben:
+
+Medizinische Standards und persönliche Situation ändern sich. Überprüfung alle 2–3 Jahre ist empfohlen.
+
+Sicheres Vorgehen:
+
+- Aktuelle BMJ-Textbausteine oder professionelle Beratung nutzen
+
+- Konkrete medizinische Situationen benennen
+
+- Im ZVR registrieren (20,50 Euro)
+
+- In der ePA oder sicher hinterlegen
+
+- Kopien an Hausarzt und Vertrauenspersonen
+
+- Alle 2–3 Jahre überprüfen
+
+## 9 Fazit
+
+Eine Patientenverfügung sichert Ihre Selbstbestimmung am Lebensende. Die rechtlichen Anforderungen sind seit den BGH-Urteilen von 2016 und 2018 klar: Konkrete Situationen und Maßnahmen statt pauschaler Formulierungen.
+
+Die Kosten sind überschaubar. Für die meisten Menschen reicht eine kurze Anwaltsberatung mit BMJ-Textbausteinen und ZVR-Registrierung – insgesamt etwa 120 Euro für ein rechtssicheres Dokument.
+
+Die Digitalisierung vereinfacht die Nutzung erheblich. Die ePA und das Zentrales Vorsorgeregister sorgen dafür, dass Ihre Patientenverfügung im Notfall in Minuten auffindbar ist. Die Registrierung für 20,50 Euro ist eine sinnvolle Investition für diese Sicherheit.
+
+Eine gut formulierte, registrierte und regelmäßig überprüfte Patientenverfügung schützt Sie vor ungewollten Maßnahmen und entlastet Angehörige in schweren Entscheidungssituationen. Sie bildet zusammen mit einem Testament und der Vorsorgevollmacht ein vollständiges Vorsorgepaket für Ihre Vermögensangelegenheiten und persönliche Belange.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste patientenverfuegung]
+
+[BLOCK dokumente patientenverfuegung]
+
+
+## FAQ
+F: Welche Voraussetzungen gelten für eine gültige Patientenverfügung?
+A: Nach § 1827 BGB kann jede einwilligungsfähige volljährige Person eine Patientenverfügung verfassen. Sie muss schriftlich festgehalten und vom Verfasser unterschrieben sein. Eine notarielle Beglaubigung ist nicht erforderlich. Mündliche Äußerungen haben seit der Reform 2009 keine Verbindlichkeit mehr.
+F: Was kostet die Erstellung einer Patientenverfügung?
+A: Die Kosten variieren je nach Weg: Hausarzt 20 bis 100 Euro, Rechtsanwalt maximal 190 Euro zuzüglich MwSt. für die Erstberatung, Notar mindestens 60 Euro für Beurkundung oder 10 Euro pro Dokument für Beglaubigung. Ideal ist eine Kombination aus medizinischer und juristischer Beratung.
+F: Warum sind konkrete Formulierungen so wichtig?
+A: Pauschale Vordrucke oder unspezifische Formulierungen reichen laut aktueller Rechtsprechung nicht aus. Sie müssen konkret beschreiben, in welchen medizinischen Situationen die Verfügung gelten soll und welche Behandlungen Sie wünschen oder ablehnen. Vage Angaben können im Ernstfall unwirksam sein.
+F: Kann ich die Patientenverfügung jederzeit widerrufen?
+A: Ja, eine Patientenverfügung kann jederzeit formlos widerrufen werden – schriftlich oder mündlich. Empfehlenswert ist ein schriftlicher Widerruf, um Klarheit zu schaffen. Auch Änderungen einzelner Regelungen sind jederzeit möglich, solange Sie einwilligungsfähig sind.

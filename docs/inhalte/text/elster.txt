@@ -1,0 +1,159 @@
+# Elster (elster)
+## 0 Digitale Steuererklärung leicht gemacht mit ELSTER
+
+Mit ELSTER geben Sie die Steuererklärung kostenlos online ab. Wie das Portal 2026 funktioniert, wie Sie sich registrieren und welche Vorteile es bietet.
+
+## 1 ELSTER: Steuererklärung digital abgeben – So funktioniert es 2026
+
+ELSTER ist das Online-Portal der deutschen Finanzverwaltung für die elektronische Übermittlung von Steuerdaten. Über 22 Millionen Nutzer vertrauen bereits auf das System. Ab 1. Juli 2026 können Sie Ihre Steuererklärung in der App „MeinELSTER+" mit nur einem Klick abgeben – eine Revolution für die Steuererklärung in Deutschland.
+
+## 2 Was ist ELSTER genau?
+
+ELSTER steht für „Elektronische Steuererklärung". Das Portal ermöglicht es Privatpersonen, Selbstständigen und Unternehmen, Steuerdaten sicher online zu übermitteln. Die Nutzung ist kostenfrei für alle.
+
+Das System arbeitet mit verschiedenen Sicherheitsstufen. Nach einmaliger Registrierung erhalten Sie ein digitales Zertifikat. Damit können Sie Steuerdaten online authentifiziert abschicken – ohne Ausdruck und Unterschrift.
+
+ELSTER unterstützt praktisch alle relevanten Steuerarten: Einkommensteuer, Gewerbesteuer, Umsatzsteuer und mehr. Die Finanzämter aller Bundesländer verarbeiten elektronische Erklärungen bevorzugt. Seit 2017 müssen Sie Belege nicht mehr miteinreichen – ein großer Vorteil.
+
+[SPIEL schaetzen: Wie viele ELSTER-Nutzer gibt es in Deutschland? → 22]
+
+## 3 ELSTER-Registrierung: Schritt für Schritt erklärt
+
+Die Registrierung dauert etwa 5–10 Tage. Planen Sie daher rechtzeitig ein, besonders vor wichtigen Fristen.
+
+Schritt 1: Konto erstellen
+
+Rufen Sie www.elster.de auf. Wählen Sie „Benutzerkonto erstellen". Entscheiden Sie, ob Sie ein Konto für eine Privatperson oder Organisation benötigen. Geben Sie ein: Steuer-Identifikationsnummer (auf jedem Finanzamtsschreiben zu finden), Geburtsdatum, E-Mail-Adresse und Benutzernamen.
+
+Schritt 2: E-Mail bestätigen
+
+Sie erhalten eine E-Mail mit einem sechsstelligen Code. Geben Sie diesen auf der Mein-ELSTER-Seite ein. Prüfen Sie auch den Spam-Ordner.
+
+Schritt 3: Identität prüfen
+
+Wählen Sie zwischen Brief- oder Online-Identitätsprüfung. Die Aktivierungsdaten werden separat per E-Mail und Brief versendet.
+
+Schritt 4: Login-Methode wählen
+
+Nutzen Sie die ElsterSecure-App (empfohlen) oder eine Zertifikatsdatei. Die App funktioniert auf allen modernen Smartphones.
+
+Schritt 5: Aktivierung abschließen
+
+Ihre Zertifikatsdatei wird erstellt. Speichern Sie diese sicher und merken Sie sich das Passwort. Danach können Sie ELSTER vollständig nutzen.
+
+## 4 Die wichtigsten Fristen 2026
+
+| Steuererklärung für | Frist ohne Berater | Frist mit Berater
+
+| Jahr 2025 | 31. Juli 2026 | 1. März 2027
+
+| Jahr 2024 | 31. Juli 2025 | 30. April 2026
+
+| Freiwillige Abgabe | bis Ende 2029 | bis Ende 2029
+
+Bei freiwilliger Abgabe können Sie die Steuererklärung bis zu vier Jahre rückwirkend einreichen.
+
+Wichtige Neuerungen 2026:
+
+- Arbeitnehmer-Pauschbetrag: 1.230 Euro
+
+- Pendlerpauschale: einheitlich 0,38 Euro pro Kilometer (bisher: gestaffelt)
+
+- Gewerkschaftsbeiträge: können Sie generell in voller Höhe absetzen
+
+[SPIEL mythos: Die neue Ein-Klick-Funktion ist ab 2026 für alle Steuerpflichtigen verfügbar → nein]
+
+## 5 MeinELSTER+ App: Die Ein-Klick-Funktion erklärt
+
+Ab Juli 2026 macht das Finanzamt über „okELSTER" einen Vorschlag für Ihre Steuererklärung. Alle notwendigen Daten sind bereits vorhanden.
+
+Wer kann das nutzen?
+
+Zunächst ledige, kinderlose Arbeitnehmer und Rentner (etwa 11,5 Millionen Menschen).
+
+So funktioniert es:
+
+Ab 31. März 2026 können sich berechtigte Nutzer freischalten lassen. Im Juli erhalten Sie eine vorausgefüllte Erklärung mit einer Vorschau auf Ihren Steuerbescheid. Die Daten sind basierend auf den Informationen, die der Finanzbehörde bereits vorliegen.
+
+Stimmt alles? Bestätigen Sie den Vorschlag mit einem Klick. Fehlen oder stimmen Angaben nicht? Ändern und ergänzen Sie diese direkt in der App.
+
+Wichtig: Prüfen Sie die vorausgefüllten Daten genau. Ergänzen Sie zusätzliche Werbungskosten, Sonderausgaben oder außergewöhnliche Belastungen.
+
+## 6 Steuerbescheide 2026: Digital statt Papier
+
+Ab 2026 landen Steuerbescheide standardmäßig im persönlichen ELSTER-Postfach statt im Briefkasten. Das gilt bereits für Bescheide zur Steuererklärung 2025.
+
+Was ändert sich?
+
+Sie erhalten eine E-Mail-Benachrichtigung, sobald Ihr Bescheid bereitsteht. Vier Tage später beginnt die einmonatige Einspruchsfrist automatisch.
+
+Wichtig: Kontrollieren Sie Ihr ELSTER-Postfach regelmäßig. Aktivieren Sie E-Mail-Benachrichtigungen. So verpassen Sie keine Fristen.
+
+Papierbescheide noch möglich?
+
+Ja. Ab März 2026 können Sie die elektronische Bekanntgabe im Portal deaktivieren. Dann erhalten Sie Ihre Bescheide wieder per Post. Personen ohne Internetzugang oder mit Härtefällen können beim Finanzamt eine Ausnahme beantragen.
+
+## 7 Werbungskosten 2026: Was Sie absetzen können
+
+Als Arbeitnehmer erhalten Sie automatisch 1.230 Euro Pauschbetrag. Nur wer darüber liegt, braucht Belege.
+
+Häufige Werbungskosten:
+
+- Fahrtkosten: 0,38 Euro pro Kilometer (2026). Bei 20 km Arbeitsweg und 200 Arbeitstagen: 20 × 0,38 € × 200 = 1.520 Euro
+
+- Homeoffice: 6 Euro pro Homeoffice-Tag (statt Pendlerpauschale für diese Tage)
+
+- Arbeitsmittel: Bis 800 Euro netto sofort abzugsfähig; darüber Abschreibung
+
+- Gewerkschaftsbeiträge: NEU 2026! Können Sie vollständig absetzen – zusätzlich zur Pauschale
+
+Praktisches Beispiel:
+
+Arbeitsweg 20 km, 200 Arbeitstage, 300 Euro Gewerkschaftsbeiträge, 800 Euro Laptop = 1.520 + 300 + 800 = 2.620 Euro Werbungskosten. Das bringt einen echten Steuervorteil.
+
+[SPIEL quiz: Welcher Werbungskosten-Pauschbetrag gilt 2026 für Arbeitnehmer?]
+
+## 8 Häufige ELSTER-Probleme und Lösungen
+
+Registrierungsprobleme?
+
+- Prüfen Sie Spam-Ordner für Aktivierungs-E-Mails
+
+- Pro Steuer-ID: nur ein Benutzerkonto möglich
+
+- Verlorene Zertifikatsdateien: Sie können neue Aktivierungsdaten anfordern
+
+Login funktioniert nicht?
+
+Die ElsterSecure-App ist meist die stabilste Methode. Nach Registrierung können Sie zusätzlich eine Zertifikatsdatei hinzufügen.
+
+Sicherheit erhöhen:
+
+- Starke Passwörter für die Zertifikatsdatei nutzen
+
+- Regelmäßig anmelden, besonders nach Bescheidstellung
+
+- E-Mail-Benachrichtigungen aktivieren
+
+Belege verwalten:
+
+Sie müssen Belege nur vorlegen, wenn das Finanzamt diese anfordert. Bewahren Sie alles mindestens ein Jahr nach Bescheidstellung auf. Die MeinELSTER+ App hilft beim Sammeln von Belegfotos.
+
+## 9 Fazit
+
+ELSTER entwickelt sich 2026 spürbar weiter. Die Ein-Klick-Steuererklärung für bestimmte Nutzergruppen, digitale Bescheidzustellung und die volle Absetzbarkeit von Gewerkschaftsbeiträgen sind praktische Neuerungen. Mit über 22 Millionen Nutzern bleibt ELSTER Deutschlands erfolgreichste E-Government-Anwendung. Registrieren Sie sich frühzeitig – der Prozess dauert 5–10 Tage. Nutzen Sie die digitale Steuerverwaltung: bevorzugte Bearbeitung, keine Belegeinreichung und mobile Apps. Aktivieren Sie E-Mail-Benachrichtigungen und prüfen Sie Ihr ELSTER-Postfach regelmäßig – so verpassen Sie keine wichtigen Fristen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste elster]
+
+
+## FAQ
+F: Was ist ELSTER und wer kann es nutzen?
+A: ELSTER steht für Elektronische Steuererklärung und ist das offizielle Online-Portal der deutschen Finanzverwaltung. Bundesweit nutzen rund 24 Millionen Menschen das System, das Privatpersonen, Selbstständigen und Unternehmen die sichere digitale Übermittlung von Steuerdaten ermöglicht.
+F: Was bietet die neue MeinELSTER+ App ab 2026?
+A: Ab 1. Juli 2026 können ledige, kinderlose Arbeitnehmer sowie Bezieher von Alterseinkünften ihre Steuererklärung per App mit nur einem Klick abgeben. Die Finanzverwaltung stellt eine vorausgefüllte Erklärung samt Steuerbescheid-Vorschau bereit.
+F: Werden Steuerbescheide ab 2026 nur noch digital versendet?
+A: Ab dem 1. Januar 2026 stellen die Finanzämter Steuerbescheide standardmäßig digital in das ELSTER-Postfach. Papierbescheide gibt es nur noch auf Antrag. Alle Personen mit einem ELSTER-Konto erhalten ihre Bescheide somit automatisch elektronisch.
+F: Müssen Belege bei ELSTER mit eingereicht werden?
+A: Seit 2017 müssen Belege nicht mehr mit der Steuererklärung eingereicht werden. Das Finanzamt verzichtet zunächst auf die Vorlage und fordert Unterlagen nur bei konkreten Rückfragen nach. Elektronische Steuererklärungen werden bundesweit bevorzugt bearbeitet.

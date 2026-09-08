@@ -1,0 +1,119 @@
+# Bürgerversicherung (buergerversicherung)
+## 0 Bürgerversicherung: Das deutsche Gesundheitssystem im Umbruch
+
+Die Bürgerversicherung soll gesetzliche und private Krankenversicherung zu einem System vereinen. Was hinter dem Konzept steckt und welche Vor- und Nachteile es bringt.
+
+## 1 Bürgerversicherung 2026: Konzept, Vor- und Nachteile
+
+Bürgerversicherung ist ein Konzept für ein einheitliches Krankenversicherungssystem, das die duale Struktur aus gesetzlicher und privater Krankenversicherung ablösen würde.
+
+Die Diskussion um die Bürgerversicherung prägt seit über zwei Jahrzehnten die deutsche Gesundheitspolitik. Während die einen darin den Schlüssel zu mehr Gerechtigkeit sehen, warnen andere vor drastischen finanziellen Belastungen. SPD, Grüne und Linke unterstützen die Bürgerversicherung. FDP und CDU/CSU lehnen sie ab. Angesichts der aktuellen Finanzprobleme der gesetzlichen Krankenversicherung gewinnt die Debatte 2026 neue Brisanz.
+
+## 2 Was genau ist eine Bürgerversicherung?
+
+Eine Bürgerversicherung wäre ein einheitliches Krankenversicherungssystem für alle Bürger – unabhängig von Beruf, Einkommen oder sozialem Status. Die SPD plant, dass Privatversicherte in die neue Bürgerversicherung wechseln können. Bestehende private Verträge sollen Bestandsschutz haben.
+
+Das System würde die bisherige Trennung zwischen gesetzlicher Krankenversicherung (GKV) und privater Krankenversicherung (PKV) aufheben. Alle Einkunftsarten – nicht nur Löhne, sondern auch Kapitalerträge und Mieteinnahmen – würden bei der Beitragsberechnung berücksichtigt.
+
+Deutschland ist nach der Krankenversicherungsreform in den Niederlanden 2006 eines der wenigen EU-Länder mit einer privaten Vollkrankenversicherung neben der sozialen Krankenversicherung. In allen anderen EU-Ländern beschränkt sich das private Versicherungsgeschäft auf Zusatz- und Komplementärversicherungen.
+
+[SPIEL karte: Äquivalenzprinzip]
+
+## 3 Bürgerversicherung und die Beitragsgrenzen
+
+Die finanziellen Auswirkungen einer Bürgerversicherung wären erheblich. In der gesetzlichen Krankenversicherung beträgt die Beitragsbemessungsgrenze 2026 jährlich 69.750 Euro. Die Versicherungspflichtgrenze liegt bei 77.400 Euro jährlich.
+
+Verschiedene Parteien verfolgen unterschiedliche Ansätze:
+
+| Partei | Beitragsbemessungsgrenze | Einkommensarten | Besonderheiten
+
+| SPD | Vorerst unverändert | Zwei-Säulen-Modell (Arbeit + Kapital) | Mögliche Steuerzuschüsse
+
+| Grüne | Anhebung auf Versicherungspflichtgrenze | Alle Einkommensarten | Erweiterte Beitragsgrundlage
+
+| Die Linke | Weitere Anhebungen möglich | Alle Einkommensarten | Umfassende Reform
+
+Die geplante Anhebung der Versicherungspflichtgrenze ist faktisch die Bürgerversicherung für Angestellte, kritisiert der PKV-Verband. Die Bundesregierung plant eine außerordentliche Erhöhung ab 2027, was zu einem Anstieg auf insgesamt 84.483 Euro führen könnte.
+
+## 4 Welche Parteien unterstützen die Bürgerversicherung?
+
+Die politischen Fronten sind klar gezogen. SPD, Bündnis 90/Die Grünen und Die Linke befürworten eine Bürgerversicherung. Auch der Deutsche Gewerkschaftsbund und zahlreiche Sozialverbände unterstützen das Konzept. Das Bündnis Sahra Wagenknecht (BSW) macht sich ebenfalls dafür stark.
+
+Im Falle eines Wahlsieges wollen SPD und Grüne einen neuen Anlauf zur Einführung wagen. Die SPD sieht Bestandsschutz für bestehende Verträge vor. Neue Privatversicherte nach bisherigem Recht soll es nicht mehr geben.
+
+Auf der anderen Seite stehen Union und FDP. Die FDP lehnt eine „Einheitskasse (sog. Bürgerversicherung)" ab. Die CSU will am bewährten System festhalten.
+
+[SPIEL schaetzen: Wie hoch ist der Mehrumsatz durch Privatversicherte im deutschen Gesundheitswesen? → 15,52]
+
+## 5 Die GKV-Finanzkrise 2026
+
+Die gesetzliche Krankenversicherung befindet sich in ihrer schwersten Finanzkrise seit Jahrzehnten. 2024 schlossen die Krankenkassen mit einem Defizit von 6,2 Milliarden Euro ab. Die Leistungsausgaben stiegen mit über 8 Prozent so stark wie seit drei Jahrzehnten nicht mehr.
+
+Die Situation verschärft sich 2026 weiter. Seit 2024 steigen die Ausgaben stärker als die Einnahmen. Ab 2027 werden jedes Jahr Finanzierungslücken in zweistelliger Milliardenhöhe erwartet.
+
+Die Finanzreserven sind dramatisch geschrumpft. Ende 2025 betrugen sie rund 5,1 Milliarden Euro – unterhalb der gesetzlich vorgesehenen Mindestreserve:
+
+- Der Zusatzbeitrag steigt 2026 das vierte Jahr in Folge: auf 2,9 Prozent (von 1,6 Prozent 2024)
+
+- Die Ausgaben verzeichneten einen Zuwachs von 7,8 Prozent
+
+- Für 2026 droht ein Defizit von bis zu 15 Milliarden Euro
+
+## 6 Auswirkungen auf die medizinische Versorgung
+
+Die Befürworter der Bürgerversicherung argumentieren mit mehr Gerechtigkeit. Alle Versicherten hätten gleichen Zugang zu Leistungen. Versorgungsunterschiede würden wegfallen.
+
+Die Kritiker warnen vor erheblichen finanziellen Verlusten. Privatversicherte generieren einen Mehrumsatz von 15,52 Milliarden Euro, der Leistungserbringern zusätzlich zur Verfügung steht. Der größte Anteil entfällt auf die ambulant-ärztliche Versorgung mit 8,76 Milliarden Euro.
+
+Privatversicherte haben einen überproportionalen Anteil an den Ärzteinnahmen: 21,8 Prozent, obwohl ihr Bevölkerungsanteil nur 10,5 Prozent beträgt. Pro Praxis ergibt sich ein durchschnittlicher Mehrumsatz von über 82.000 Euro pro Jahr.
+
+[SPIEL mythos: In der privaten Krankenversicherung steigen die Beiträge deutlich stärker als in der gesetzlichen Krankenversicherung → nein]
+
+Würden die Mehrumsätze wegbrechen, würde das Versorgungsniveau massiv leiden. Das erfordert eine Kompensation, die zu Beitragserhöhungen in der GKV um mindestens 0,9 Prozentpunkte führt.
+
+## 7 Kritikpunkte an der Bürgerversicherung
+
+Die Gegner führen mehrere gewichtige Argumente an:
+
+Finanzielle Belastungen: Versicherte über der Beitragsbemessungsgrenze müssten 2027 monatlich etwa 133 Euro mehr zahlen. Gesetzlich Versicherte aus der Mittelschicht und Rentner wären besonders betroffen.
+
+Arbeitsmarkteffekte: Die Lohnzusatzkosten für Arbeitgeber würden steigen, besonders für qualifizierte Arbeitsplätze. Das gefährdet die Wettbewerbsfähigkeit Deutschlands.
+
+Verfassungsrechtliche Bedenken: Umstritten ist, ob eine Beitragsbemessungsgrenze bei Pflichtversicherung verfassungskonform ist, da der Beitrag in angemessenem Verhältnis zur Leistung stehen sollte.
+
+Systemische Risiken: Gäbe es die Alternative nicht mehr, wären zukünftige Beitragsanhebungen sehr viel wahrscheinlicher.
+
+## 8 Alternativen zur Bürgerversicherung
+
+Verschiedene Reformansätze erhalten das duale System, aber lösen Probleme:
+
+Finanzierungsreformen: Eine stärkere Steuerfinanzierung der GKV könnte die Beitragslast senken. Der Bundeszuschuss betrug 2025 regulär 14,5 Milliarden Euro.
+
+Strukturreformen: Der Bund plant eine Expertenkommission, die bis Frühjahr 2027 Maßnahmen zur langfristigen Stabilisierung vorlegen soll.
+
+Flexibilisierung der Systemgrenzen: Das "Hamburger Modell" zeigt, wie schrittweise Annäherungen möglich sind. Berlin bezuschusst seit 2020 Beamte mit pauschalaler Beihilfe zur gesetzlichen Krankenversicherung.
+
+## 9 Internationale Perspektiven
+
+Ein Blick auf andere Länder zeigt verschiedene Ansätze. Einheitssysteme entstehen häufig Rationierungen, was zu Parallel-Märkten für bessere Leistungen führt. Die Versorgungsqualität hängt dann vom Geldbeutel ab.
+
+Deutschland vermeidet mit seinem dualen System Rationierung erfolgreicher. Der Wettbewerb zwischen GKV und PKV fördert Innovation und Qualität in beiden Systemen.
+
+## 10 Fazit
+
+Die Bürgerversicherung bleibt eines der umstrittensten Themen der deutschen Gesundheitspolitik. Während SPD, Grüne und Linke das Konzept als Lösung für mehr Gerechtigkeit sehen, lehnen CDU/CSU und FDP es als Bedrohung für Qualität ab. Die GKV-Finanzkrise verschärft die Diskussion zusätzlich. Ohne politischen Konsens und angesichts der verfassungsrechtlichen Herausforderungen ist eine zeitnahe Umsetzung unwahrscheinlich. Die Debatte wird weitergehen – beide Systeme stehen vor enormen Herausforderungen.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste buergerversicherung]
+
+
+## FAQ
+F: Was versteht man unter einer Bürgerversicherung?
+A: Die Bürgerversicherung ist ein Konzept für ein einheitliches Krankenversicherungssystem, das das duale System aus gesetzlicher (GKV) und privater Krankenversicherung (PKV) ablösen würde. Alle Bürger würden unabhängig vom Status Beiträge einzahlen und gleichermaßen Zugang zu Leistungen erhalten.
+F: Welche Vorteile hätte eine Bürgerversicherung?
+A: Befürworter sehen Vorteile in einer gerechteren Finanzierung durch Einbeziehung aller Einkunftsarten (Lohn, Kapital, Mieten) und allen Berufsgruppen. Zudem soll das Risiko der Altersarmut bei PKV-Versicherten vermindert und die Zwei-Klassen-Medizin beseitigt werden.
+F: Was sind die Kritikpunkte an der Bürgerversicherung?
+A: Kritiker befürchten verfassungsrechtliche Probleme, Eingriffe in bestehende PKV-Verträge und einen Abbau der Vielfalt im Gesundheitswesen. Zudem sehen sie die Gefahr längerer Wartezeiten sowie wirtschaftlicher Nachteile für die PKV-Branche und deren Beschäftigte.
+F: Wird die Bürgerversicherung in Deutschland eingeführt?
+A: Eine zeitnahe Umsetzung ist nicht zu erwarten. Das Konzept wird seit über 20 Jahren diskutiert, hat es aber nicht in den Koalitionsvertrag der 2021 gewählten Ampel-Koalition geschafft. SPD und Grüne forderten die Bürgerversicherung, die FDP lehnte sie ab.

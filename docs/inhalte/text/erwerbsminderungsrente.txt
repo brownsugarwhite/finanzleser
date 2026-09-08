@@ -1,0 +1,137 @@
+# Erwerbsminderungsrente (erwerbsminderungsrente)
+## 0 Anspruch, Antrag und Hinzuverdienst erklärt
+
+Die Erwerbsminderungsrente sichert ab, wer gesundheitlich kaum arbeiten kann. Wer 2026 Anspruch hat, wie sie berechnet wird und was beim Hinzuverdienst gilt.
+
+## 1 Erwerbsminderungsrente 2026: Anspruch, Berechnung und Hinzuverdienst
+
+Erwerbsminderungsrente ist eine Rente für Menschen, die aus gesundheitlichen Gründen weniger als sechs Stunden täglich arbeiten können. Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent. Die Hinzuverdienstgrenzen wurden angehoben, und Zuschläge für ältere Renten sind nun fest integriert.
+
+Die Erwerbsminderungsrente unterscheidet zwei Fälle: Bei teilweiser Erwerbsminderung können Sie noch drei bis unter sechs Stunden täglich arbeiten. Bei voller Erwerbsminderung weniger als drei Stunden. Diese Einschätzung erfolgt nach Ihrer Arbeitsfähigkeit auf dem allgemeinen Arbeitsmarkt – nicht nach Ihrem erlernten Beruf.
+
+## 2 Was ist die Erwerbsminderungsrente und wer hat Anspruch?
+
+Eine Erwerbsminderungsrente erhalten Sie, wenn Ihre Leistungsfähigkeit aus gesundheitlichen Gründen auf unter sechs Stunden täglich gesunken ist. Psychische Störungen, vor allem Depressionen, sind seit Jahren die häufigste Ursache. Im Jahr 2023 entfielen rund zwei Fünftel aller neu bewilligten Erwerbsminderungsrenten auf psychische Erkrankungen.
+
+Die medizinische Bewertung betrachtet Ihre gesamte Arbeitsfähigkeit. Auch als Akademikerin können Sie auf einfache Tätigkeiten verwiesen werden, wenn Sie diese noch ausüben können. Volle Erwerbsminderung liegt vor, wenn Sie weniger als drei Stunden täglich arbeiten können.
+
+Neben medizinischen Voraussetzungen müssen Sie versicherungsrechtliche Bedingungen erfüllen:
+
+- Mindestens fünf Jahre Versicherungszeit in der Deutschen Rentenversicherung
+
+- In den letzten fünf Jahren vor Eintritt der Erwerbsminderung mindestens drei Jahre Pflichtbeiträge
+
+- Anrechnung von Krankengeld, Arbeitslosengeld I oder Elternzeit möglich
+
+[SPIEL quiz: Ab wie vielen Stunden täglicher Arbeitsfähigkeit besteht Anspruch auf teilweise Erwerbsminderungsrente?]
+
+## 3 Wie wird die Erwerbsminderungsrente 2026 berechnet?
+
+Die Höhe bestimmt sich aus Ihren Entgeltpunkten und der Zurechnungszeit. Die Grenze für die Zurechnungszeiten liegt 2026 bei 66 Jahren und drei Monaten. Diese Zeit sorgt dafür, dass bei frühem Rentenbeginn so gerechnet wird, als hätten Sie bis zu diesem Alter weitergearbeitet.
+
+Der aktuelle Rentenwert steigt von 40,79 Euro auf 42,52 Euro. Jeder Entgeltpunkt ist ab Juli 2026 genau 42,52 Euro wert. Bei einer monatlichen Bruttorente von 1.000 Euro bedeutet das ein Plus von 42,40 Euro.
+
+Die Zurechnungszeit ist vor allem für jüngere Betroffene wichtig. Werden Sie mit 45 Jahren erwerbsgemindert, rechnet die Rentenversicherung, als hätten Sie noch bis 66 Jahren und 3 Monaten gearbeitet. Das sind zusätzliche 21 Jahre und 3 Monate mit fiktiven Entgeltpunkten basierend auf Ihrem bisherigen Durchschnittseinkommen.
+
+Rentenformel:
+
+Entgeltpunkte × Zugangsfaktor × Rentenartfaktor × aktueller Rentenwert
+
+- Entgeltpunkte: Bisherige plus Zurechnungszeit
+
+- Zugangsfaktor: 1,0 bei abschlagsfreier Rente (ab 65 Jahren)
+
+- Rentenartfaktor: 1,0 bei voller, 0,5 bei teilweiser Erwerbsminderung
+
+- Aktueller Rentenwert: 42,52 Euro (ab Juli 2026)
+
+## 4 Wie hoch sind die Hinzuverdienstgrenzen 2026?
+
+Mit Jahresbeginn 2026 sind die Hinzuverdienstgrenzen deutlich gestiegen. Bei voller Erwerbsminderung liegt die Grenze bei maximal 20.763,75 Euro jährlich. Das entspricht monatlich etwa 1.730 Euro – über 1.100 Euro mehr Spielraum als noch vor wenigen Jahren.
+
+Bei teilweiser Erwerbsminderungsrente darf der Hinzuverdienst im Jahr 2026 mindestens 41.527,50 Euro betragen. Diese Grenze kann individuell noch höher liegen, abhängig vom höchsten Arbeitseinkommen in den letzten 15 Jahren vor Eintritt der Erwerbsminderung.
+
+| Rentenart | Hinzuverdienstgrenze 2026 (jährlich) | Monatlich (ungefähr)
+
+| Volle Erwerbsminderungsrente | 20.763,75 Euro | 1.730 Euro
+
+| Teilweise Erwerbsminderungsrente | mind. 41.527,50 Euro | mind. 3.460 Euro
+
+Die individuelle Grenze bei teilweiser Erwerbsminderung berechnet sich so: 9,72 × monatliche Bezugsgröße × höchste Entgeltpunkte der letzten 15 Jahre. Im Jahr 2026 beträgt die monatliche Bezugsgröße 3.955 Euro.
+
+[SPIEL karte: Hinzuverdienstgrenze]
+
+## 5 Was ändert sich bei Zuschlägen?
+
+Eine wichtige Neuerung betrifft Bestandsrentner mit älteren Bewilligungen. Ab Dezember 2025 wird der Zuschlag zusammen mit der Rente ausgezahlt. Der bisher separat überwiesene Zuschlag für Erwerbsminderungsrenten mit Rentenbeginn zwischen 2001 und 2018 ist nun dauerhaft in die monatliche Zahlung integriert.
+
+Bei Rentenbeginn von Januar 2001 bis Juni 2014 beträgt der Zuschlag 7,5 Prozent der persönlichen Entgeltpunkte, die der Rente am 30. November 2025 zugrunde liegen. Bei Rentenbeginn von Juli 2014 bis Dezember 2018 gibt es einen Zuschlag von 4,5 Prozent der persönlichen Entgeltpunkte.
+
+Diese Verbesserung gleicht die Nachteile älterer Erwerbsminderungsrenten gegenüber neueren Rechtsständen teilweise aus. 2019 waren günstigere Regelungen für Neurentner in Kraft getreten. Der Gesetzgeber wollte mit dem Zuschlag einen fairen Ausgleich für Bestandsrentner schaffen.
+
+Für Personen, die vor dem 2. Januar 1961 geboren sind, gelten besondere Vertrauensschutzregelungen. Sie können bei Berufsunfähigkeit eine Rente wegen teilweiser Erwerbsminderung erhalten, auch wenn sie in einem anderen Beruf noch arbeiten könnten. Eine Berufsunfähigkeitsversicherung kann in solchen Fällen als zusätzliche Absicherung sinnvoll sein.
+
+Seit 2024 besteht für Erwerbsminderungsrentner die Möglichkeit einer Arbeitserprobung. Sie können bis zu sechs Monate testen, ob eine Rückkehr zur oder Ausweitung der Erwerbstätigkeit möglich ist, ohne ihren Rentenanspruch zu gefährden.
+
+## 6 Welche Voraussetzungen müssen erfüllt sein?
+
+Das Prinzip „Reha vor Rente" gilt weiterhin. Die Deutsche Rentenversicherung prüft vor einer Rentengewährung, ob medizinische oder berufliche Rehabilitationsmöglichkeiten die Erwerbsfähigkeit verbessern können. Antragsteller müssen zunächst alle Rehabilitationsmöglichkeiten ausschöpfen.
+
+In Verlängerungsverfahren wird regelmäßig neu geprüft, ob die medizinischen Voraussetzungen weiterhin erfüllt sind. Wer wieder mindestens sechs Stunden täglich arbeiten kann, verliert den Anspruch auf volle Erwerbsminderungsrente – auch bei Diagnosen wie Depressionen oder Angststörungen.
+
+Häufigste Ursachen für Erwerbsminderung:
+
+- Psychische Erkrankungen (rund 40 Prozent)
+
+- Krebserkrankungen und bösartige Geschwüre
+
+- Erkrankungen des Skelett- und Bewegungsapparates
+
+- Herz- oder Gefäßerkrankungen
+
+- Stoffwechsel- und Verdauungsstörungen
+
+[SPIEL mythos: Eine Erwerbsminderungsrente wird grundsätzlich unbefristet gewährt → nein]
+
+## 7 So stellen Sie den Antrag richtig
+
+Eine Erwerbsminderungsrente kann ab dem siebten Monat nach Eintritt der Erwerbsminderung beginnen. Davor greift in der Regel Krankengeld oder Arbeitslosengeld I. Sie sollten jedoch frühzeitig einen Antrag stellen, da die Bearbeitung mehrere Monate dauert.
+
+Erforderliche medizinische Unterlagen:
+
+- Aktuelle Befundberichte der behandelnden Ärzte
+
+- Therapienachweise und Medikamentenpläne
+
+- Reha- oder Entlassungsberichte
+
+- Bei psychischen Erkrankungen: Klinikberichte, fachärztliche Stellungnahmen
+
+Bei psychischen Erkrankungen sind aussagekräftige Berichte aus der Psychotherapie wichtig. Sie sollen belegen, dass die Einschränkungen nicht vorübergehend, sondern voraussichtlich dauerhaft sind.
+
+## 8 Fazit
+
+Die Erwerbsminderungsrente bietet 2026 mehrere Verbesserungen. Die Hinzuverdienstgrenze bei voller Erwerbsminderung steigt auf 20.763,75 Euro jährlich. Der aktuelle Rentenwert steigt von 40,79 Euro auf 42,52 Euro. Bei einer monatlichen Bruttorente von 1.000 Euro bedeutet das ein Plus von 42,40 Euro. Zuschläge für Bestandsrentner sind nun dauerhaft in die Zahlung integriert. Die Zurechnungszeit endet 2026 bei 66 Jahren und 3 Monaten und sorgt für eine angemessene Rente auch bei frühem Rentenbeginn.
+
+Trotz aller Verbesserungen reicht eine Erwerbsminderungsrente oft nicht zur vollständigen Existenzsicherung aus. Wer erste Anzeichen einer möglichen Erwerbsminderung bemerkt, sollte sich rechtzeitig bei der Deutschen Rentenversicherung informieren und alle erforderlichen Unterlagen sorgfältig zusammenstellen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste erwerbsminderungsrente]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich berufsunfaehigkeitsversicherung-vergleich]
+
+[BLOCK dokumente erwerbsminderungsrente]
+
+
+## FAQ
+F: Wann besteht Anspruch auf volle Erwerbsminderungsrente?
+A: Volle Erwerbsminderung liegt vor, wenn Sie aus gesundheitlichen Gründen unter drei Stunden täglich auf dem allgemeinen Arbeitsmarkt tätig sein können. Bei einer Leistungsfähigkeit zwischen drei und unter sechs Stunden besteht Anspruch auf eine teilweise Erwerbsminderungsrente.
+F: Welche versicherungsrechtlichen Voraussetzungen gelten?
+A: Erforderlich sind mindestens fünf Jahre Versicherungszeit in der Deutschen Rentenversicherung vor Eintritt der Erwerbsminderung (allgemeine Wartezeit). Davon müssen mindestens drei Jahre Pflichtbeiträge in den letzten fünf Jahren vor dem Leistungsfall entrichtet worden sein.
+F: Was ist die häufigste Ursache für eine Erwerbsminderungsrente?
+A: Psychische Erkrankungen, insbesondere Depressionen, stellen seit Jahren die häufigste Ursache dar. Im Jahr 2023 entfielen rund zwei Fünftel aller neu bewilligten Erwerbsminderungsrenten auf psychische Störungen, gefolgt von Krebserkrankungen und Erkrankungen des Bewegungsapparats.
+F: Was ändert sich bei der Erwerbsminderungsrente 2026?
+A: 2026 steigen die Hinzuverdienstgrenzen erneut, zur Jahresmitte erfolgt eine Rentenanpassung und der bisher separat gezahlte Zuschlag für ältere EM-Renten wird technisch in die reguläre Überweisung integriert. Eine große Reform ist nicht geplant.

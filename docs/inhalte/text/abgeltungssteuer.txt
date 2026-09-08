@@ -1,0 +1,209 @@
+# Abgeltungssteuer (abgeltungssteuer)
+## 0 Alles über die Abgeltungssteuer - Erklärung und Berechnung der Kapitalertragssteuer
+
+Die Abgeltungssteuer besteuert Kapitalerträge pauschal mit 25 % plus Soli. Wie sie 2026 funktioniert, welcher Sparerpauschbetrag gilt und wie Sie Steuern sparen.
+
+## 1 Abgeltungssteuer 2026: Berechnung, Freibetrag und Sparen
+
+Abgeltungssteuer bedeutet die pauschale Besteuerung von Kapitalerträgen mit 25 Prozent plus Solidaritätszuschlag und gegebenenfalls Kirchensteuer.
+
+## 2 Wie funktioniert die Abgeltungssteuer 2026?
+
+Die Abgeltungssteuer ist seit dem Jahr 2009 die zentrale Besteuerungsform für private Kapitalerträge in Deutschland. Das System vereinfacht die Steuererhebung erheblich. Ihre Bank oder Ihr Broker führt die Steuer automatisch an das Finanzamt ab – Sie müssen in der Regel nichts weiter tun.
+
+Es handelt sich bei der Abgeltungssteuer um eine sogenannte Quellensteuer. Das bedeutet: Die Steuer wird direkt dort einbehalten, wo die Erträge entstehen. Jedes Jahr erhalten Sie von Ihrer Bank eine Steuerbescheinigung über alle Kapitalerträge und einbehaltenen Steuern.
+
+Die Abgeltungssteuer ersetzt für die meisten Kapitalerträge die Angabe in der Steuererklärung. In vielen Fällen entfällt die Pflicht, Kapitalerträge gesondert in der Steuererklärung anzugeben. Ausnahmen gelten hauptsächlich bei Auslandsdepots oder wenn Sie von der Günstigerprüfung profitieren möchten.
+
+&#x1f504; Karteikarte
+
+Quellensteuer
+
+Die Steuer wird automatisch vom Zahlenden einbehalten und direkt an das Finanzamt überwiesen, ohne dass Sie als Empfänger aktiv werden müssen.
+
+## 3 Wie hoch ist die Abgeltungssteuer wirklich?
+
+Der nominelle Steuersatz der Abgeltungssteuer beträgt 25 Prozent, aber die tatsächliche Belastung liegt deutlich höher. Zusätzlich kommen der Solidaritätszuschlag und eventuell Kirchensteuer hinzu.
+
+Die Steuerbelastung setzt sich so zusammen:
+
+- Abgeltungssteuer: 25,00 % der erzielten Kapitalerträge
+
+- Solidaritätszuschlag: 5,50 % auf die Abgeltungssteuer
+
+- Kirchensteuer: 8,00 – 9,00 % je nach Bundesland
+
+| Situation | Gesamtbelastung | Beispiel bei 1.000 €
+
+| Ohne Kirchensteuer | 26,375 % | 736,25 € verbleiben
+
+| Mit Kirchensteuer Bayern/BW | etwa 27,8 % | 722,00 € verbleiben
+
+| Mit Kirchensteuer andere Länder | knapp 28 % | 720,00 € verbleiben
+
+Die effektive Steuerbelastung auf Kapitalerträge steigt dadurch auf rund 26,4 Prozent. Der Solidaritätszuschlag auf Kapitalerträge ist von der allgemeinen Soli-Reform nicht betroffen. Er fällt bereits ab dem ersten Euro Abgeltungssteuer an.
+
+&#x1f50d; Mythos oder Fakt?
+
+Der Solidaritätszuschlag wurde 2021 komplett abgeschafft
+
+nein
+
+Für Kapitalerträge gilt der Soli weiterhin ohne Freibetrag – er fällt ab dem ersten Euro an (Stand 2026).
+
+## 4 Sparerpauschbetrag: Wie nutzen Sie den Freibetrag optimal?
+
+Durch den Freistellungsauftrag ist jährlich ein Freibetrag von bis zu 1.000 € pro Person und 2.000 € für Ehegatten und eingetragene Lebenspartner steuerfrei (Stand: 2026). Als Single darf man seit 2023 1000 Euro von seinen Kapitalerträgen steuerfrei behalten. Wenn man verheiratet ist, sind es gemeinsam 2000 Euro. Der Freibetrag von 1000 Euro beziehungsweise 2000 Euro gilt auch im Jahr 2026 in gleicher Form.
+
+So nutzen Sie den Sparerpauschbetrag richtig:
+
+Freistellungsauftrag stellen: Steuerpflichtige Personen haben die Möglichkeit, bei ihrer Bank oder ihrem Anbieter einen Freistellungsauftrag einzurichten. Bei Einrichtung eines Freistellungsauftrags führt das Kreditinstitut bis zur angegebenen Höhe keine Abgeltungssteuer an das Finanzamt ab.
+
+Aufteilung bei mehreren Banken: Dabei kann der Betrag zwischen verschiedenen Banken und Anbietern, bei denen Gewinne erzielt werden, aufgeteilt werden. Die Gesamtsumme darf jedoch nie die Höchstgrenzen überschreiten.
+
+Für Familien: Jedes Kind hat Anspruch auf den vollen Sparerpauschbetrag von 1.000 Euro (Stand 2026). Bei einer vierköpfigen Familie stehen damit 4.000 Euro steuerfrei zur Verfügung.
+
+| Personenstand | Sparerpauschbetrag 2026
+
+| Einzelpersonen | 1.000 €
+
+| Verheiratete (gemeinsam veranlagt) | 2.000 €
+
+| Kinder (je Kind) | 1.000 €
+
+&#x1f4ca; Schätzfrage
+
+Wie viele Euro stehen einer Familie mit zwei Kindern als Sparerpauschbetrag zur Verfügung?
+
+3000
+
+5000
+
+4000
+
+€
+
+2.000 € für Eltern (gemeinsam veranlagt) plus je 1.000 € pro Kind = 4.000 € insgesamt (Stand 2026).
+
+## 5 Auf welche Kapitalerträge fällt Abgeltungssteuer an?
+
+Die Abgeltungssteuer betrifft alle Privatpersonen, die in Deutschland unbeschränkt steuerpflichtig sind und Kapitalerträge erzielen. Kapitalerträge, die im Privatvermögen anfallen, unterliegen der Abgeltungssteuer.
+
+Die wichtigsten steuerpflichtigen Kapitalerträge sind:
+
+- Zinsen, Dividenden oder Gewinne aus Wertpapierverkäufen
+
+- Zinsen auf Girokonten, Sparbüchern, Termingelder und Tagesgelder
+
+- Zinsen aus festverzinslichen Wertpapieren und Anleihen
+
+- Dividenden aus Aktien oder Genossenschaftsanteilen, Erträge aus Zertifikaten (Fonds, Rohstoffe, Währungen) sowie Wertzuwächse beim Aktienverkauf
+
+- Erträge aus ETFs und Investmentfonds
+
+- Kapitalerträge aus Lebensversicherungen, wenn der Vertrag noch keine zwölf Jahre alt ist und Sie sich die Kapitalerträge schon vor dem 60. Lebensjahr auszahlen lassen
+
+Wichtige Ausnahmen: Kapitalerträge im Betriebsvermögen (zum Beispiel bei Unternehmen oder Selbstständigen) werden dagegen nicht pauschal versteuert. Auch Riester- und Rürup-Verträge sind von der Abgeltungssteuer befreit.
+
+Gewinne aus dem Verkauf von Bitcoin (BTC) oder Kryptowährungen gelten allerdings nicht als Kapitalerträge. Sie unterliegen anderen steuerlichen Regelungen.
+
+## 6 Wann lohnt sich die Günstigerprüfung?
+
+Im Rahmen dieser Prüfung vergleicht das Finanzamt die Belastung durch die pauschale Abgeltungssteuer mit derjenigen, die sich ergäbe, wenn die Kapitalerträge nach dem persönlichen Einkommensteuersatz besteuert würden. Liegt dieser individuelle Steuersatz unter 25 Prozent, kann die Besteuerung auf Antrag des Steuerpflichtigen nach dem niedrigeren Satz erfolgen.
+
+Die Günstigerprüfung beantragen Sie über die Anlage KAP in der Steuererklärung. Die bereits einbehaltene Abgeltungssteuer wird dann angerechnet, was zu einer Steuererstattung führen kann.
+
+Wer profitiert von der Günstigerprüfung:
+
+- Personen mit unterdurchschnittlichem Einkommen, etwa bei Teilzeitphasen, Elternzeiten, längeren Krankheitstagen, während eines Studiums oder beim Einstieg in den Beruf
+
+- Geringverdiener, Studenten und Rentner mit geringem Einkommen
+
+- Ehegatten mit stark differierenden Einkünften oder bei hohen Sonderausgaben und außergewöhnlichen Belastungen
+
+Derzeit liegt der Grundfreibetrag bei 12.348 € pro Einzelperson (Stand: 2026). Wenn ihr zwar hohe Kapitalerträge habt (über 1.000 €), aber euer gesamtes Jahreseinkommen (Lohn + Kapitalerträge) unter dem Grundfreibetrag liegt, müsst ihr gar keine Steuern zahlen.
+
+&#x1f4a1; Schon gewusst?
+
+Wer mit seinem Gesamteinkommen unter dem Grundfreibetrag von 12.348 Euro bleibt, kann eine NV-Bescheinigung beantragen und zahlt gar keine Steuern auf Kapitalerträge (Stand 2026).
+
+## 7 Freistellungsauftrag und NV-Bescheinigung optimal nutzen
+
+Der Freistellungsauftrag ist für die meisten Sparer das wichtigste Instrument. Um diesen Freibetrag zu nutzen, müsst ihr lediglich einen Freistellungsauftrag in eurem Depot einrichten. Ohne Freistellungsauftrag behält die Bank die volle Abgeltungssteuer ein – auch wenn Ihre Erträge den Sparerpauschbetrag nicht erreichen.
+
+Nichtveranlagungs-Bescheinigung (NV-Bescheinigung): Bei einer NV-Bescheinigung handelt es sich um ein Dokument des Finanzamtes, mit dem bestätigt wird, dass eine Person keine Einkommensteuer abzuführen braucht, da deren Erträge unterhalb des Grundfreibetrags liegen.
+
+In diesem Fall reicht der normale Freistellungsauftrag aber nicht aus. Ihr könnt jedoch beim Finanzamt eine sogenannte NV-Bescheinigung (Nichtveranlagungs-Bescheinigung) beantragen. Reicht ihr dieses Dokument bei der Bank ein, werden auch Gewinne weit oberhalb der 1.000-Euro-Grenze ohne Abzug ausgezahlt.
+
+Die NV-Bescheinigung lohnt sich besonders für:
+
+- Rentner mit sehr niedrigen Gesamteinkünften
+
+- Studenten ohne nennenswertes Arbeitseinkommen
+
+- Menschen in längerer Arbeitslosigkeit
+
+- Personen mit Einkommen unter dem Grundfreibetrag
+
+## 8 Was bringt das Jahressteuergesetz 2024 bei der Verlustverrechnung?
+
+Das Jahressteuergesetz 2024 brachte erhebliche Verbesserungen für Anleger. Die Verlustverrechnungsbeschränkungen sollen entfallen, sodass Verluste aus Termingeschäften und Forderungsausfällen im Privatvermögen wieder unbeschränkt mit Kapitalerträgen verrechnet werden können.
+
+Die wichtigsten Änderungen:
+
+- Die bisherige 20.000-Euro-Grenze ist komplett entfallen. Es gibt keine Obergrenze mehr für die Verlustverrechnung. Du kannst jetzt Verluste in unbegrenzter Höhe mit entsprechenden Gewinnen verrechnen.
+
+- Aufgrund der vorgesehenen Rückwirkung soll dies nicht erst für zukünftige Verluste, sondern auch für alle noch offenen Steuerfälle gelten.
+
+- Für den Kapitalertragsteuerabzug wird es nicht beanstandet, wenn eine IT-technische Umsetzung auf Ebene der Kreditinstitute erst ab dem 1.1.2026 erfolgt.
+
+Wichtige Einschränkungen bei der Verlustverrechnung bleiben:
+
+Verluste aus Aktienverkäufen können nur mit Aktiengewinnen verrechnet werden. Kapitalverluste können nur mit Gewinnen aus anderen Kapitalerträgen verrechnet werden, nicht aber mit anderen Einkunftsarten wie Einkünften aus Gewerbebetrieb oder aus nichtselbstständiger Arbeit.
+
+## 9 Besonderheiten bei Auslandsdepots und steuerfreien Anlagen
+
+Auch auf Kapitalerträge, die Du im Ausland erzielst, musst Du Abgeltungssteuer zahlen. Hast Du ein Depot oder Konto bei einer deutschen Bank, dann wird sie die entsprechende Abgeltungssteuer automatisch an das Finanzamt abführen, sobald der Freibetrag überschritten ist.
+
+Wenn sich hingegen das Depot oder Konto im Ausland befindet oder es sich um die ausländische Tochterbank einer deutschen Bank handelt, so wird keine Abgeltungssteuer einbehalten und an das Finanzamt abgeführt. In diesem Fall müssen Sie die Kapitalerträge über die Anlage KAP in der Steuererklärung angeben.
+
+Vollständig steuerfreie Anlagen:
+
+- Riester-Rente und Rürup-Rente (andere Besteuerung im Alter)
+
+- Kapitalerträge aus Lebensversicherungen, wenn der Vertragsbeginn vor dem 1. Januar 2005 war
+
+- Einkommen unter dem Grundfreibetrag von 12.348 Euro (Stand 2026)
+
+- Alt-Anteile vor 2009: Unternehmensanteile, die vor 2009 gekauft wurden, können steuerfrei verkauft werden
+
+ETFs und Investmentfonds: Das ist einer der Vorteile von ETFs (aber auch von „normalen" Aktienfonds, also aktiv gemanagten Fonds): Hier zahlt ihr oft deutlich weniger als die pauschalen 25 %. Grund ist die Teilfreistellung bei Aktienfonds.
+
+## 10 Fazit
+
+Die Abgeltungssteuer vereinfacht die Besteuerung von Kapitalerträgen erheblich. Der Steuersatz beträgt einheitlich 25 Prozent, hinzu kommen der Solidaritätszuschlag und gegebenenfalls Kirchensteuer. Mit dem Sparerpauschbetrag von 1.000 Euro pro Person bleiben kleinere Erträge steuerfrei.
+
+Die wichtigsten Maßnahmen für 2026:
+
+Sofort umsetzen: Stellen Sie Freistellungsaufträge bei allen Banken und verteilen Sie diese optimal. Das deutsche System wirkt auf den ersten Blick starr und komplex, ist aber für Privatanleger:innen und ETF-Sparer:innen eigentlich recht komfortabel und vorteilhaft gebaut. Dank des Automatismus bei deutschen Brokern müsst ihr euch um den Papierkram meist gar nicht kümmern.
+
+Prüfen Sie die Günstigerprüfung: Bei niedrigem Einkommen können Sie oft Steuern zurückholen. Über die sogenannte Günstigerprüfung prüft das Finanzamt automatisch, ob der persönliche Einkommensteuersatz unter dem pauschalen Steuersatz von 25 % liegt.
+
+Verlustverrechnung nutzen: Das Jahressteuergesetz 2024 hebt die Verlustverrechnungsbeschränkung bei Termingeschäften auf – rückwirkend ab 2020. Prüfen Sie Ihre Steuerbescheide der letzten Jahre auf mögliche Korrekturen.
+
+Auslandsdepots beachten: Bei ausländischen Depots müssen Sie selbst aktiv werden und Kapitalerträge in der Steuererklärung angeben. Die Abgeltungssteuer wird nicht automatisch abgeführt.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste abgeltungssteuer]
+
+
+## FAQ
+F: Wie hoch ist die Abgeltungssteuer auf Kapitalerträge?
+A: Die Abgeltungssteuer beträgt pauschal 25 Prozent auf Zinsen, Dividenden und realisierte Kursgewinne. Hinzu kommt der Solidaritätszuschlag von 5,5 Prozent, sodass die Gesamtbelastung bei 26,375 Prozent liegt. Kirchenmitglieder zahlen zusätzlich 8 oder 9 Prozent Kirchensteuer, wodurch die Belastung bis zu 27,995 Prozent erreicht.
+F: Wie hoch ist der Sparerpauschbetrag 2026?
+A: Der Sparerpauschbetrag beträgt seit 2023 unverändert 1.000 Euro für Ledige und 2.000 Euro für gemeinsam veranlagte Ehepaare. Um den Freibetrag automatisch zu nutzen, sollten Sie bei Ihren Banken einen Freistellungsauftrag einreichen, andernfalls behält die Bank die Abgeltungssteuer direkt ein.
+F: Was ist die Günstigerprüfung bei Kapitalerträgen?
+A: Die Günstigerprüfung lohnt sich, wenn Ihr persönlicher Steuersatz unter 25 Prozent liegt. Sie beantragen die Prüfung über die Anlage KAP Ihrer Steuererklärung, woraufhin das Finanzamt automatisch die günstigere Variante ermittelt. Besonders Rentner, Studenten und Teilzeitbeschäftigte profitieren von einer möglichen Rückerstattung.
+F: Wer muss Abgeltungssteuer zahlen?
+A: Die Abgeltungssteuer betrifft alle privaten Anleger, die Kapitalerträge aus Zinsen, Dividenden oder Kursgewinnen erzielen. Banken führen die Steuer automatisch an das Finanzamt ab, sodass Ihre Steuerpflicht für diese Erträge in der Regel als erfüllt gilt. Eine Veranlagung in der Steuererklärung ist nur in bestimmten Fällen erforderlich.

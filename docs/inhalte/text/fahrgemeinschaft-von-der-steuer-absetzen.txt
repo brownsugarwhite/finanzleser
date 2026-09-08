@@ -1,0 +1,121 @@
+# Fahrgemeinschaft (fahrgemeinschaft-von-der-steuer-absetzen)
+## 0 Benzinkosten sparen und Steuern sparen mit Fahrgemeinschaften
+
+Auch Mitfahrer in einer Fahrgemeinschaft können die Entfernungspauschale absetzen. Wie das 2026 funktioniert und wie alle Beteiligten Steuern sparen.
+
+## 1 Fahrgemeinschaft & Entfernungspauschale 2026: Steuern sparen
+
+Die Entfernungspauschale erleichtert Berufstätigen die steuerliche Absetzung ihrer Fahrtkosten zur Arbeit und kann bei Fahrgemeinschaften für alle Teilnehmer genutzt werden.
+
+Fahrgemeinschaften sind eine beliebte Möglichkeit, nicht nur Benzinkosten zu sparen, sondern auch steuerliche Vorteile zu nutzen. Seit dem 1. Januar 2026 gelten neue Regelungen für die Pendlerpauschale: Der einheitliche Satz von 0,38 Euro pro Kilometer gilt nun bereits ab dem ersten Kilometer. Dies bedeutet eine deutliche Vereinfachung gegenüber der früheren Staffelung, bei der nur für die ersten 20 Kilometer 0,30 Euro und erst ab dem 21. Kilometer 0,38 Euro angesetzt werden konnten.
+
+## 2 Wie funktioniert die Entfernungspauschale bei Fahrgemeinschaften?
+
+Nach dem Einkommensteuergesetz ist es für den Kostenabzug unerheblich, ob der Arbeitnehmer selbst fährt oder sich im Auto eines anderen mitnehmen lässt. Jeder Teilnehmer einer Fahrgemeinschaft kann seine Entfernungsstrecke zur Arbeit mit 0,38 Euro pro Kilometer und Tag in der Einkommensteuererklärung abrechnen (Stand 2026).
+
+Umwegfahrten zum Einsammeln oder Absetzen von Mitfahrern dürfen dabei allerdings nicht zusätzlich angesetzt werden. Für das Finanzamt zählt lediglich der kürzeste Weg von der jeweiligen Wohnung zur ersten Tätigkeitsstätte des Arbeitnehmers. Diese Regelung gilt sowohl für Fahrer als auch für Mitfahrer gleichermaßen.
+
+[SPIEL schaetzen: Ab welcher Entfernung überschreitet die jährliche Entfernungspauschale bei 220 Arbeitstagen den Arbeitnehmerpauschbetrag? → 15]
+
+## 3 Welche Unterschiede gelten zwischen Fahrer und Mitfahrer?
+
+Der entscheidende Unterschied bei Fahrgemeinschaften liegt in den Höchstgrenzen. Derjenige, der nicht selbst fährt, muss die Obergrenze von 4.500 Euro pro Jahr beachten. Die Entfernungspauschale ist in diesem Fall auf maximal 4.500 Euro begrenzt. Fahrer mit eigenem Pkw können hingegen die Pauschale unbegrenzt ansetzen.
+
+Diese Regelung führt zu folgenden praktischen Auswirkungen:
+
+- Fahrer: Keine Obergrenze bei Nutzung des eigenen Fahrzeugs
+
+- Mitfahrer: Höchstens 4.500 Euro pro Jahr absetzbar
+
+- Wechselnde Fahrer: Kombinierte Berechnung möglich
+
+Der Arbeitnehmerpauschbetrag beträgt 1.230 Euro jährlich (Stand 2026). Die Entfernungspauschale wirkt sich nur dann steuermindernd aus, wenn die gesamten Werbungskosten diesen Betrag übersteigen.
+
+## 4 Wie optimieren wechselseitige Fahrgemeinschaften die Steuerersparnis?
+
+Bei wechselnden Fahrern können in der Summe 5.040 Euro als Werbungskosten abgerechnet werden. Die Beispielsfälle zeigen, dass es sich steuerlich lohnen kann, sich mit dem Fahren abzuwechseln. Diese Strategie ist besonders vorteilhaft bei längeren Arbeitswegen.
+
+Die Berechnung erfolgt in zwei Schritten:
+
+1. Mitfahrertage berechnen: Für alle Tage als Mitfahrer gilt die 4.500-Euro-Grenze
+
+2. Fahrertage berechnen: Für selbst gefahrene Tage gibt es keine Obergrenze
+
+3. Addition beider Beträge: Gesamtsumme als Werbungskosten ansetzbar
+
+[SPIEL gewusst: Bei vier Kollegen in wechselseitiger Fahrgemeinschaft kann jeder theoretisch mehr als 6.000 Euro jährlich an Fahrtkosten absetzen (Stand 2026).]
+
+Praktisches Rechenbeispiel für drei Kollegen mit 80 km Arbeitsweg:
+
+- 210 Arbeitstage gesamt, jeder fährt 70 Tage selbst
+
+- Mitfahrertage: 140 × 80 km × 0,38 Euro = 4.256 Euro
+
+- Fahrertage: 70 × 80 km × 0,38 Euro = 2.128 Euro
+
+- Gesamtsumme: 6.384 Euro pro Person
+
+| Fahrertyp | Mitfahrertage | Fahrertage | Gesamtbetrag
+
+| Kollege A | 4.256 Euro | 2.128 Euro | 6.384 Euro
+
+| Kollege B | 4.256 Euro | 2.128 Euro | 6.384 Euro
+
+| Kollege C | 4.256 Euro | 2.128 Euro | 6.384 Euro
+
+## 5 Was gilt bei Mitnahme-Vergütungen?
+
+Wenn immer dieselbe Person fährt und dafür eine Mitnahme-Vergütung erhält, entstehen steuerliche Konsequenzen für beide Seiten. Erhalten Sie als Fahrer eine Mitnahme-Vergütung von Ihren Mitfahrern, müssen Sie diese versteuern. Dies betrifft Vergütungen ab 256 Euro als sonstige Einkünfte.
+
+Jedoch können Fahrer auch Kosten abziehen:
+
+- Erhöhter Benzinverbrauch
+
+- Verstärkte Abnutzung der Reifen
+
+- Zusätzlicher Verschleiß
+
+Erhöhten Benzinverbrauch und die Abnutzung der Autoreifen können Sie allerdings wieder absetzen. Dies sorgt für einen fairen finanziellen Ausgleich.
+
+Die Mitfahrer behalten ihre Berechtigung zur Entfernungspauschale – allerdings mit der 4.500-Euro-Grenze. Sie zahlen also die vereinbarte Vergütung und können gleichzeitig die Pauschale steuerlich nutzen.
+
+[SPIEL quiz: Welche Aussage zur 4.500-Euro-Grenze bei Fahrgemeinschaften ist korrekt?]
+
+## 6 Praktische Umsetzung in der Steuererklärung 2026
+
+In der Steuererklärung wird die Entfernungspauschale als Teil der Werbungskosten in der Anlage N eingetragen. Sie tragen die Pendlerpauschale in Ihrer Einkommensteuererklärung, Anlage N, Zeile „Entfernungspauschale" ein. Bei Fahrgemeinschaften sind folgende Angaben erforderlich:
+
+Erforderliche Angaben:
+
+- Entfernung zwischen Wohnung und erster Tätigkeitsstätte (einfache Strecke)
+
+- Anzahl der tatsächlichen Arbeitstage vor Ort
+
+- Bei wechselnden Fahrern: Aufschlüsselung nach Fahrer- und Mitfahrertagen
+
+- Nachweis der Fahrgemeinschaft (bei Rückfragen des Finanzamts)
+
+Wer mehr als 230 (bei einer Fünf-Tage-Woche) beziehungsweise 280 (bei einer Sechs-Tage-Woche) Fahrten pro Jahr angibt, muss diese nachweisen. Das ist durch ein Fahrtenbuch oder eine Bescheinigung des Arbeitgebers möglich.
+
+Besonderheiten bei hybrider Arbeit:
+
+Homeoffice-Tage und Fahrten zur ersten Tätigkeitsstätte müssen klar getrennt werden. Seit dem Jahr 2023 können Beschäftigte für bis zu 210 Tage je sechs Euro in der Steuererklärung ansetzen – also insgesamt bis zu 1260 Euro als Homeoffice-Pauschale. Beide Pauschalen können nicht am selben Tag geltend gemacht werden.
+
+## 7 Fazit
+
+Fahrgemeinschaften bieten erhebliches Steuersparpotenzial, wenn die Regelungen richtig angewandt werden. Die Entfernungspauschale von 0,38 Euro pro Kilometer ab dem ersten Kilometer vereinfacht seit 2026 die Berechnung erheblich. Die 4.500-Euro-Grenze für Mitfahrer lässt sich durch wechselseitige Fahrgemeinschaften geschickt umgehen – bei längeren Arbeitswegen rechnet sich diese Strategie deutlich. Jeder Teilnehmer kann unabhängig von seiner Rolle die Pauschale nutzen, wobei Fahrer mit eigenem Fahrzeug unbegrenzt absetzen können. Führen Sie genaue Aufzeichnungen über Ihre Fahrten und dokumentieren Sie wechselnde Fahrerrollen. Bei komplexeren Situationen oder hohen Beträgen sollten Sie professionelle Steuerberatung in Anspruch nehmen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste fahrgemeinschaft]
+
+
+## FAQ
+F: Kann man Fahrgemeinschaften von der Steuer absetzen?
+A: Ja, alle Teilnehmer einer Fahrgemeinschaft können die Entfernungspauschale in ihrer Steuererklärung geltend machen – unabhängig davon, ob sie selbst fahren oder mitfahren. Jeder berechnet die Pauschale individuell anhand seiner eigenen Entfernung zur Arbeitsstätte.
+F: Wie hoch ist die Entfernungspauschale 2026?
+A: Seit dem 1. Januar 2026 gilt dauerhaft ein einheitlicher Satz von 0,38 Euro pro Entfernungskilometer ab dem ersten Kilometer. Die frühere Staffelung mit niedrigeren Sätzen für die ersten 20 Kilometer entfällt damit, was die Berechnung deutlich vereinfacht.
+F: Gibt es eine Obergrenze für Mitfahrer bei der Entfernungspauschale?
+A: Ja, für reine Mitfahrer gilt eine Obergrenze von 4.500 Euro pro Jahr. Fahrer mit eigenem Pkw können die Pauschale dagegen unbegrenzt absetzen. Bei wechselnder Fahrerrolle lassen sich beide Grenzen separat nutzen und kombinieren.
+F: Wie werden Umwegfahrten zur Abholung von Kollegen berücksichtigt?
+A: Umwegfahrten zur Abholung von Mitfahrern bleiben bei der Berechnung der Pauschale unberücksichtigt. Der Fahrer rechnet nur mit der tatsächlichen Entfernung zwischen seinem Wohnort und der ersten Tätigkeitsstätte, nicht mit der verlängerten Strecke.

@@ -1,0 +1,1877 @@
+STAPEL 08 · 12 Beiträge: erwerbsminderungsrente witwenrente hinzuverdienst-rente altersteilzeit freiwillige-gesetzliche-rente pflichtversicherung-rente rentenarten grundsicherung sozialversicherung sozialversicherungsbeitraege beitragsbemessungsgrenzen minijob
+
+
+==================== BEITRAG erwerbsminderungsrente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Anspruch, Antrag und Hinzuverdienst erklärt
+  heading-1: Erwerbsminderungsrente 2026: Anspruch, Berechnung und Hinzuverdienst
+  heading-2: Was ist die Erwerbsminderungsrente und wer hat Anspruch?
+  heading-3: Wie wird die Erwerbsminderungsrente 2026 berechnet?
+  heading-4: Wie hoch sind die Hinzuverdienstgrenzen 2026?
+  heading-5: Was ändert sich bei Zuschlägen?
+  heading-6: Welche Voraussetzungen müssen erfüllt sein?
+  heading-7: So stellen Sie den Antrag richtig
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Erwerbsminderungsrente (erwerbsminderungsrente)
+## 0 Anspruch, Antrag und Hinzuverdienst erklärt
+
+Die Erwerbsminderungsrente sichert ab, wer gesundheitlich kaum arbeiten kann. Wer 2026 Anspruch hat, wie sie berechnet wird und was beim Hinzuverdienst gilt.
+
+## 1 Erwerbsminderungsrente 2026: Anspruch, Berechnung und Hinzuverdienst
+
+Erwerbsminderungsrente ist eine Rente für Menschen, die aus gesundheitlichen Gründen weniger als sechs Stunden täglich arbeiten können. Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent. Die Hinzuverdienstgrenzen wurden angehoben, und Zuschläge für ältere Renten sind nun fest integriert.
+
+Die Erwerbsminderungsrente unterscheidet zwei Fälle: Bei teilweiser Erwerbsminderung können Sie noch drei bis unter sechs Stunden täglich arbeiten. Bei voller Erwerbsminderung weniger als drei Stunden. Diese Einschätzung erfolgt nach Ihrer Arbeitsfähigkeit auf dem allgemeinen Arbeitsmarkt – nicht nach Ihrem erlernten Beruf.
+
+## 2 Was ist die Erwerbsminderungsrente und wer hat Anspruch?
+
+Eine Erwerbsminderungsrente erhalten Sie, wenn Ihre Leistungsfähigkeit aus gesundheitlichen Gründen auf unter sechs Stunden täglich gesunken ist. Psychische Störungen, vor allem Depressionen, sind seit Jahren die häufigste Ursache. Im Jahr 2023 entfielen rund zwei Fünftel aller neu bewilligten Erwerbsminderungsrenten auf psychische Erkrankungen.
+
+Die medizinische Bewertung betrachtet Ihre gesamte Arbeitsfähigkeit. Auch als Akademikerin können Sie auf einfache Tätigkeiten verwiesen werden, wenn Sie diese noch ausüben können. Volle Erwerbsminderung liegt vor, wenn Sie weniger als drei Stunden täglich arbeiten können.
+
+Neben medizinischen Voraussetzungen müssen Sie versicherungsrechtliche Bedingungen erfüllen:
+
+- Mindestens fünf Jahre Versicherungszeit in der Deutschen Rentenversicherung
+
+- In den letzten fünf Jahren vor Eintritt der Erwerbsminderung mindestens drei Jahre Pflichtbeiträge
+
+- Anrechnung von Krankengeld, Arbeitslosengeld I oder Elternzeit möglich
+
+[SPIEL quiz: Ab wie vielen Stunden täglicher Arbeitsfähigkeit besteht Anspruch auf teilweise Erwerbsminderungsrente?]
+
+## 3 Wie wird die Erwerbsminderungsrente 2026 berechnet?
+
+Die Höhe bestimmt sich aus Ihren Entgeltpunkten und der Zurechnungszeit. Die Grenze für die Zurechnungszeiten liegt 2026 bei 66 Jahren und drei Monaten. Diese Zeit sorgt dafür, dass bei frühem Rentenbeginn so gerechnet wird, als hätten Sie bis zu diesem Alter weitergearbeitet.
+
+Der aktuelle Rentenwert steigt von 40,79 Euro auf 42,52 Euro. Jeder Entgeltpunkt ist ab Juli 2026 genau 42,52 Euro wert. Bei einer monatlichen Bruttorente von 1.000 Euro bedeutet das ein Plus von 42,40 Euro.
+
+Die Zurechnungszeit ist vor allem für jüngere Betroffene wichtig. Werden Sie mit 45 Jahren erwerbsgemindert, rechnet die Rentenversicherung, als hätten Sie noch bis 66 Jahren und 3 Monaten gearbeitet. Das sind zusätzliche 21 Jahre und 3 Monate mit fiktiven Entgeltpunkten basierend auf Ihrem bisherigen Durchschnittseinkommen.
+
+Rentenformel:
+
+Entgeltpunkte × Zugangsfaktor × Rentenartfaktor × aktueller Rentenwert
+
+- Entgeltpunkte: Bisherige plus Zurechnungszeit
+
+- Zugangsfaktor: 1,0 bei abschlagsfreier Rente (ab 65 Jahren)
+
+- Rentenartfaktor: 1,0 bei voller, 0,5 bei teilweiser Erwerbsminderung
+
+- Aktueller Rentenwert: 42,52 Euro (ab Juli 2026)
+
+## 4 Wie hoch sind die Hinzuverdienstgrenzen 2026?
+
+Mit Jahresbeginn 2026 sind die Hinzuverdienstgrenzen deutlich gestiegen. Bei voller Erwerbsminderung liegt die Grenze bei maximal 20.763,75 Euro jährlich. Das entspricht monatlich etwa 1.730 Euro – über 1.100 Euro mehr Spielraum als noch vor wenigen Jahren.
+
+Bei teilweiser Erwerbsminderungsrente darf der Hinzuverdienst im Jahr 2026 mindestens 41.527,50 Euro betragen. Diese Grenze kann individuell noch höher liegen, abhängig vom höchsten Arbeitseinkommen in den letzten 15 Jahren vor Eintritt der Erwerbsminderung.
+
+| Rentenart | Hinzuverdienstgrenze 2026 (jährlich) | Monatlich (ungefähr)
+
+| Volle Erwerbsminderungsrente | 20.763,75 Euro | 1.730 Euro
+
+| Teilweise Erwerbsminderungsrente | mind. 41.527,50 Euro | mind. 3.460 Euro
+
+Die individuelle Grenze bei teilweiser Erwerbsminderung berechnet sich so: 9,72 × monatliche Bezugsgröße × höchste Entgeltpunkte der letzten 15 Jahre. Im Jahr 2026 beträgt die monatliche Bezugsgröße 3.955 Euro.
+
+[SPIEL karte: Hinzuverdienstgrenze]
+
+## 5 Was ändert sich bei Zuschlägen?
+
+Eine wichtige Neuerung betrifft Bestandsrentner mit älteren Bewilligungen. Ab Dezember 2025 wird der Zuschlag zusammen mit der Rente ausgezahlt. Der bisher separat überwiesene Zuschlag für Erwerbsminderungsrenten mit Rentenbeginn zwischen 2001 und 2018 ist nun dauerhaft in die monatliche Zahlung integriert.
+
+Bei Rentenbeginn von Januar 2001 bis Juni 2014 beträgt der Zuschlag 7,5 Prozent der persönlichen Entgeltpunkte, die der Rente am 30. November 2025 zugrunde liegen. Bei Rentenbeginn von Juli 2014 bis Dezember 2018 gibt es einen Zuschlag von 4,5 Prozent der persönlichen Entgeltpunkte.
+
+Diese Verbesserung gleicht die Nachteile älterer Erwerbsminderungsrenten gegenüber neueren Rechtsständen teilweise aus. 2019 waren günstigere Regelungen für Neurentner in Kraft getreten. Der Gesetzgeber wollte mit dem Zuschlag einen fairen Ausgleich für Bestandsrentner schaffen.
+
+Für Personen, die vor dem 2. Januar 1961 geboren sind, gelten besondere Vertrauensschutzregelungen. Sie können bei Berufsunfähigkeit eine Rente wegen teilweiser Erwerbsminderung erhalten, auch wenn sie in einem anderen Beruf noch arbeiten könnten. Eine Berufsunfähigkeitsversicherung kann in solchen Fällen als zusätzliche Absicherung sinnvoll sein.
+
+Seit 2024 besteht für Erwerbsminderungsrentner die Möglichkeit einer Arbeitserprobung. Sie können bis zu sechs Monate testen, ob eine Rückkehr zur oder Ausweitung der Erwerbstätigkeit möglich ist, ohne ihren Rentenanspruch zu gefährden.
+
+## 6 Welche Voraussetzungen müssen erfüllt sein?
+
+Das Prinzip „Reha vor Rente" gilt weiterhin. Die Deutsche Rentenversicherung prüft vor einer Rentengewährung, ob medizinische oder berufliche Rehabilitationsmöglichkeiten die Erwerbsfähigkeit verbessern können. Antragsteller müssen zunächst alle Rehabilitationsmöglichkeiten ausschöpfen.
+
+In Verlängerungsverfahren wird regelmäßig neu geprüft, ob die medizinischen Voraussetzungen weiterhin erfüllt sind. Wer wieder mindestens sechs Stunden täglich arbeiten kann, verliert den Anspruch auf volle Erwerbsminderungsrente – auch bei Diagnosen wie Depressionen oder Angststörungen.
+
+Häufigste Ursachen für Erwerbsminderung:
+
+- Psychische Erkrankungen (rund 40 Prozent)
+
+- Krebserkrankungen und bösartige Geschwüre
+
+- Erkrankungen des Skelett- und Bewegungsapparates
+
+- Herz- oder Gefäßerkrankungen
+
+- Stoffwechsel- und Verdauungsstörungen
+
+[SPIEL mythos: Eine Erwerbsminderungsrente wird grundsätzlich unbefristet gewährt → nein]
+
+## 7 So stellen Sie den Antrag richtig
+
+Eine Erwerbsminderungsrente kann ab dem siebten Monat nach Eintritt der Erwerbsminderung beginnen. Davor greift in der Regel Krankengeld oder Arbeitslosengeld I. Sie sollten jedoch frühzeitig einen Antrag stellen, da die Bearbeitung mehrere Monate dauert.
+
+Erforderliche medizinische Unterlagen:
+
+- Aktuelle Befundberichte der behandelnden Ärzte
+
+- Therapienachweise und Medikamentenpläne
+
+- Reha- oder Entlassungsberichte
+
+- Bei psychischen Erkrankungen: Klinikberichte, fachärztliche Stellungnahmen
+
+Bei psychischen Erkrankungen sind aussagekräftige Berichte aus der Psychotherapie wichtig. Sie sollen belegen, dass die Einschränkungen nicht vorübergehend, sondern voraussichtlich dauerhaft sind.
+
+## 8 Fazit
+
+Die Erwerbsminderungsrente bietet 2026 mehrere Verbesserungen. Die Hinzuverdienstgrenze bei voller Erwerbsminderung steigt auf 20.763,75 Euro jährlich. Der aktuelle Rentenwert steigt von 40,79 Euro auf 42,52 Euro. Bei einer monatlichen Bruttorente von 1.000 Euro bedeutet das ein Plus von 42,40 Euro. Zuschläge für Bestandsrentner sind nun dauerhaft in die Zahlung integriert. Die Zurechnungszeit endet 2026 bei 66 Jahren und 3 Monaten und sorgt für eine angemessene Rente auch bei frühem Rentenbeginn.
+
+Trotz aller Verbesserungen reicht eine Erwerbsminderungsrente oft nicht zur vollständigen Existenzsicherung aus. Wer erste Anzeichen einer möglichen Erwerbsminderung bemerkt, sollte sich rechtzeitig bei der Deutschen Rentenversicherung informieren und alle erforderlichen Unterlagen sorgfältig zusammenstellen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste erwerbsminderungsrente]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich berufsunfaehigkeitsversicherung-vergleich]
+
+[BLOCK dokumente erwerbsminderungsrente]
+
+
+## FAQ
+F: Wann besteht Anspruch auf volle Erwerbsminderungsrente?
+A: Volle Erwerbsminderung liegt vor, wenn Sie aus gesundheitlichen Gründen unter drei Stunden täglich auf dem allgemeinen Arbeitsmarkt tätig sein können. Bei einer Leistungsfähigkeit zwischen drei und unter sechs Stunden besteht Anspruch auf eine teilweise Erwerbsminderungsrente.
+F: Welche versicherungsrechtlichen Voraussetzungen gelten?
+A: Erforderlich sind mindestens fünf Jahre Versicherungszeit in der Deutschen Rentenversicherung vor Eintritt der Erwerbsminderung (allgemeine Wartezeit). Davon müssen mindestens drei Jahre Pflichtbeiträge in den letzten fünf Jahren vor dem Leistungsfall entrichtet worden sein.
+F: Was ist die häufigste Ursache für eine Erwerbsminderungsrente?
+A: Psychische Erkrankungen, insbesondere Depressionen, stellen seit Jahren die häufigste Ursache dar. Im Jahr 2023 entfielen rund zwei Fünftel aller neu bewilligten Erwerbsminderungsrenten auf psychische Störungen, gefolgt von Krebserkrankungen und Erkrankungen des Bewegungsapparats.
+F: Was ändert sich bei der Erwerbsminderungsrente 2026?
+A: 2026 steigen die Hinzuverdienstgrenzen erneut, zur Jahresmitte erfolgt eine Rentenanpassung und der bisher separat gezahlte Zuschlag für ältere EM-Renten wird technisch in die reguläre Überweisung integriert. Eine große Reform ist nicht geplant.
+
+
+==================== BEITRAG witwenrente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Witwenrente beantragen: Voraussetzungen, Höhe &amp; Anspruch
+  heading-1: Witwenrente 2026: Höhe, Anspruch und Änderungen
+  heading-2: Wie hoch ist die Witwenrente 2026?
+  heading-3: Wer hat Anspruch auf die große Witwenrente?
+  heading-4: Was ändert sich 2026 bei der Einkommensanrechnung?
+  heading-5: Wie funktioniert das Sterbevierteljahr?
+  heading-6: Welche Verbesserungen bringt 2026?
+  heading-7: Wie beantrage ich die Witwenrente?
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Witwenrente (witwenrente)
+## 0 Witwenrente beantragen: Voraussetzungen, Höhe & Anspruch
+
+Die Witwenrente sichert Hinterbliebene nach dem Tod des Partners finanziell ab. Wer 2026 Anspruch hat, wie hoch sie ausfällt und welche Freibeträge gelten.
+
+## 1 Witwenrente 2026: Höhe, Anspruch und Änderungen
+
+Die Witwenrente ist eine monatliche Rente zur finanziellen Absicherung des überlebenden Ehegatten oder Lebenspartners. Nach dem Tod des Partners haben Hinterbliebene Anspruch auf 55 Prozent (neues Recht) oder 60 Prozent (altes Recht) der Rente des Verstorbenen, sofern sie die gesetzlichen Voraussetzungen erfüllen.
+
+Diese staatliche Leistung aus der gesetzlichen Rentenversicherung erreicht 2026 über fünf Millionen Menschen in Deutschland. Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent – davon profitieren auch alle Witwen- und Witwerrenten. Gleichzeitig ändern sich wichtige Regelungen bei Altersgrenzen, Freibeträgen und der Berechnung.
+
+## 2 Wie hoch ist die Witwenrente 2026?
+
+Die Höhe Ihrer Witwenrente hängt von mehreren Faktoren ab. Die große Witwenrente beträgt 55 Prozent der Rente des Verstorbenen, die kleine Witwenrente dagegen nur 25 Prozent. Für Paare mit altem Recht (Heirat vor 2002 und mindestens ein Partner vor dem 2. Januar 1962 geboren) liegt die große Witwenrente bei 60 Prozent.
+
+Die Rentenerhöhung 2026 bringt spürbare Verbesserungen. Die durchschnittliche Witwenrente im Westen steigt von 780 auf 813 Euro (+33 Euro). Wer bislang 1.000 Euro Witwenrente erhält, würde ab Juli 2026 auf 1.042,40 Euro kommen.
+
+| Bisherige Witwenrente | Erhöhung (4,24%) | Neue Witwenrente ab Juli 2026
+
+| 600 Euro | 25,44 Euro | 625,44 Euro
+
+| 800 Euro | 33,92 Euro | 833,92 Euro
+
+| 1.000 Euro | 42,40 Euro | 1.042,40 Euro
+
+| 1.200 Euro | 50,88 Euro | 1.250,88 Euro
+
+| 1.500 Euro | 63,60 Euro | 1.563,60 Euro
+
+[SPIEL schaetzen: Wie viele Menschen erhalten 2026 eine Witwen- oder Witwerrente in Deutschland? → 5150000]
+
+## 3 Wer hat Anspruch auf die große Witwenrente?
+
+Für Todesfälle im Jahr 2026 besteht Anspruch auf die große Witwenrente erst ab einem Alter von 46 Jahren und 6 Monaten. Die Altersgrenze steigt jedes Jahr um zwei Monate, bis sie 2029 bei 47 Jahren liegt.
+
+Es gibt wichtige Ausnahmen zu dieser Altersgrenze:
+
+- Hinterbliebene, die ein eigenes Kind oder ein Kind des verstorbenen Partners erziehen, können die große Witwenrente ebenfalls ohne Altersgrenze erhalten
+
+- Auch wer ein behindertes Kind betreut, das sich nicht selbst versorgen kann, hat unabhängig vom Alter Anspruch
+
+- Bei Erwerbsminderung besteht ebenfalls Anspruch auf die große Witwenrente
+
+[SPIEL gewusst: Wer jünger ist und keine der Ausnahmen erfüllt, erhält nur die kleine Witwenrente mit 25 Prozent der Versichertenrente für maximal 24 Monate.]
+
+Zusätzlich müssen diese Grundvoraussetzungen erfüllt sein: Wer ab dem 1. Januar 2002 geheiratet hat, muss mindestens ein Jahr verheiratet gewesen sein – außer im Fall eines Unfalltods. Der verstorbene Partner muss die allgemeine Wartezeit von fünf Jahren erfüllt haben oder bereits eine Rente erhalten haben.
+
+## 4 Was ändert sich 2026 bei der Einkommensanrechnung?
+
+Ein wichtiger Punkt für alle Hinterbliebenen mit eigenem Einkommen: Der neue Freibetrag für zusätzliches Einkommen beträgt ab 1. Juli 2026 monatlich 1.122,53 Euro. Pro waisenrentenberechtigtem Kind erhöht sich der Freibetrag um 238,11 Euro.
+
+Nur der Teil der anzurechnenden Nettoeinkünfte, der über dem Freibetrag liegt, wird zu 40 Prozent mit der Hinterbliebenenrente verrechnet. Das bedeutet konkret: Wer eigenes Einkommen hat, das den Freibetrag übersteigt, verliert nicht die komplette Witwenrente, sondern nur 40 Cent pro Euro oberhalb der Grenze.
+
+[SPIEL quiz: Um wie viel Prozent werden Einkünfte oberhalb des Freibetrags auf die Witwenrente angerechnet?]
+
+Die Deutsche Rentenversicherung rechnet dabei nicht mit Ihrem tatsächlichen Netto-Gehalt. Gesetzlich geregelt ist, dass feste pauschale Prozentsätze vom Bruttoeinkommen abgezogen werden: bei Arbeitseinkommen etwa 40 Prozent, bei selbstständiger Tätigkeit 30-40 Prozent.
+
+## 5 Wie funktioniert das Sterbevierteljahr?
+
+In den ersten drei Monaten nach dem Tod erhalten Sie besondere finanzielle Sicherheit. In den ersten drei Monaten nach dem Sterbemonat – dem sogenannten Sterbevierteljahr – erhalten Hinterbliebene die Rente des Verstorbenen in voller Höhe ausgezahlt, und es erfolgt keinerlei Einkommensanrechnung.
+
+Das Sterbevierteljahr beginnt am ersten Tag des Monats, der auf den Sterbemonat folgt. Verstirbt Ihr Partner beispielsweise am 15. März, läuft das Sterbevierteljahr von April bis Juni. In diesem Zeitraum erhalten Sie monatlich 100 Prozent der Rente des Verstorbenen.
+
+Diese Regelung gibt Ihnen Zeit, Ihre finanzielle Situation zu ordnen und wichtige Entscheidungen zu treffen. Danach erfolgt die Umstellung auf die reguläre Witwen- oder Witwerrente mit den üblichen Anrechnungsregeln.
+
+## 6 Welche Verbesserungen bringt 2026?
+
+Neben der Rentenerhöhung profitieren Hinterbliebene von mehreren Verbesserungen. Bei Todesfällen ab 2026 endet die Zurechnungszeit erst mit 66 Jahren und 3 Monaten. Diese Regelung führt zu einer finanziellen Aufwertung der Hinterbliebenenrente.
+
+Die Zurechnungszeit bedeutet vereinfacht: Es wird so gerechnet, als hätte der Verstorbene bis zu diesem Alter weiter Beiträge gezahlt. Das verbessert die Berechnungsgrundlage und kann die Witwenrente deutlich erhöhen.
+
+[SPIEL karte: Zurechnungszeit]
+
+Zusätzlich wirken sich höhere Freibeträge positiv aus. Hinterbliebene können doppelt profitieren durch höhere Renten und eine günstigere Einkommensanrechnung. Wer bisher knapp über dem alten Freibetrag lag, kann jetzt möglicherweise ohne Kürzungen auskommen.
+
+## 7 Wie beantrage ich die Witwenrente?
+
+Die Hinterbliebenenrente erfordert einen formellen Antrag bei der Deutschen Rentenversicherung. Die Rente wird rückwirkend für bis zu zwölf Monate vor dem Antragsmonat gezahlt. Stellen Sie den Antrag daher möglichst zeitnah.
+
+Für den Antrag benötigen Sie diese Unterlagen:
+
+- Sterbeurkunde des Partners
+
+- Heiratsurkunde oder Bescheinigung über die Lebenspartnerschaft
+
+- Geburtsurkunden Ihrer Kinder (falls vorhanden)
+
+- Rentenunterlagen des Verstorbenen
+
+- Nachweise über Ihr eigenes Einkommen
+
+- Ihren Personalausweis
+
+Falls der Verstorbene bereits Rente bezog, können Sie beim Renten Service der Deutschen Post innerhalb von 30 Tagen einen Vorschuss beantragen, der drei Monatsrenten beläuft.
+
+Die Witwenrente ist steuerpflichtig. Der Grundfreibetrag 2026 beträgt 12.348 Euro für Ledige. Liegt Ihr gesamtes Einkommen darunter, fallen keine Steuern an. Bei einem Rentenbeginn in 2026 sind 84 Prozent der Witwenrente steuerpflichtig. Daneben sollten Sie auch Ihre Rechte im Erbrecht kennen, um sicherzustellen, dass Sie alle Ansprüche geltend machen können.
+
+## 8 Fazit
+
+Die Witwenrente bleibt 2026 eine wichtige finanzielle Stütze für Hinterbliebene. Die Rentenerhöhung um 4,24 Prozent gilt auch für Witwen- und Witwerrenten, da sie über denselben aktuellen Rentenwert angepasst werden. Der neue Freibetrag von 1.122,53 Euro monatlich verschafft vielen Betroffenen mehr finanziellen Spielraum. Für Todesfälle 2026 gilt die Altersgrenze von 46 Jahren und 6 Monaten für die große Witwenrente – wer Kinder erzieht oder erwerbsgemindert ist, kann diese jedoch umgehen. Die verlängerte Zurechnungszeit und höhere Freibeträge schaffen teilweise Verbesserungen, während die steigende Altersgrenze den Zugang zur großen Witwenrente erschwert. Wichtig bleibt, den Antrag rechtzeitig zu stellen und sich bei Fragen an die kostenlose Beratung der Deutschen Rentenversicherung zu wenden.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste witwenrente]
+
+[BLOCK rechner witwenrente]
+
+[BLOCK dokumente hinterbliebenenrente]
+
+
+## FAQ
+F: Welche Voraussetzungen gelten für den Anspruch auf Witwenrente?
+A: Anspruch besteht, wenn die Ehe bis zum Tod des Partners bestand und mindestens ein Jahr gedauert hat, sofern die Heirat nach dem 1. Januar 2002 erfolgte. Der Verstorbene muss die allgemeine Wartezeit von fünf Jahren erfüllt haben, und eine erneute Heirat schließt den Anspruch aus.
+F: Wie hoch ist die kleine und die große Witwenrente?
+A: Die kleine Witwenrente beträgt 25 Prozent der Rente des Verstorbenen und wird nach neuem Recht 24 Monate lang gezahlt. Die große Witwenrente liegt bei 55 Prozent, nach altem Recht sogar bei 60 Prozent der Versichertenrente.
+F: Ab welchem Alter erhalten Sie 2026 die große Witwenrente?
+A: 2026 müssen Hinterbliebene mindestens 46 Jahre und 6 Monate alt sein, um die große Witwenrente zu bekommen. Die Altersgrenze steigt jährlich um zwei Monate und erreicht 2029 das Endalter von 47 Jahren.
+F: Gilt für Sie altes oder neues Rentenrecht bei der Witwenrente?
+A: Unter das alte Recht fallen Sie, wenn die Heirat vor dem 1. Januar 2002 stattfand und mindestens ein Partner vor dem 2. Januar 1962 geboren wurde. Andernfalls greift das neue Recht mit niedrigeren Rentensätzen und kürzerer Bezugsdauer bei der kleinen Witwenrente.
+
+
+==================== BEITRAG hinzuverdienst-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Hinzuverdienst in der Rente: Regeln, Grenzen und Möglichkeiten 2026
+  heading-1: Hinzuverdienst in der Rente 2026: Neue Grenzen und Chancen
+  heading-2: Altersrentner: Unbegrenzt hinzuverdienen
+  heading-3: Erwerbsminderungsrenten: Höhere Grenzen
+  heading-4: Hinterbliebenenrenten: Erhöhte Freibeträge
+  heading-5: Minijob-Grenze steigt auf 603 Euro
+  heading-6: Praktische Umsetzung
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Hinzuverdienst in der Rente (hinzuverdienst-rente)
+## 0 Hinzuverdienst in der Rente: Regeln, Grenzen und Möglichkeiten 2026
+
+Wer eine Rente bezieht, darf hinzuverdienen – seit der Reform meist ohne Kürzung. Welche Grenzen 2026 gelten und wie viel Sie dazuverdienen dürfen.
+
+## 1 Hinzuverdienst in der Rente 2026: Neue Grenzen und Chancen
+
+Hinzuverdienst in der Rente bedeutet, neben Rentenbezügen zusätzliches Einkommen zu erzielen – ohne dass die Rente gekürzt wird. 2026 gibt es entscheidende Verbesserungen für alle Rentnergruppen. Die Minijob-Grenze steigt auf 603 Euro, die neue Aktivrente erlaubt bis zu 2.000 Euro steuerfrei hinzuzuverdienen, und Freibeträge bei Hinterbliebenenrenten wurden angehoben. Auch Erwerbsminderungsrentner profitieren von höheren Grenzen.
+
+[SPIEL gewusst: Mit der Aktivrente können Rentner seit 2026 bis zu 2.000 Euro monatlich steuerfrei hinzuverdienen – bei sozialversicherungspflichtiger Beschäftigung nach Erreichen der Regelaltersgrenze.]
+
+## 2 Altersrentner: Unbegrenzt hinzuverdienen
+
+Seit 2023 gelten für Altersrentner keine Hinzuverdienstgrenzen mehr. Wer die Regelaltersgrenze von 67 Jahren erreicht hat, kann 2026 rentenrechtlich unbegrenzt hinzuverdienen. Die Rente wird nicht gekürzt – egal wie viel Sie verdienen.
+
+Die wichtigste Neuerung für 2026 ist die Aktivrente. Sie trat zum 1. Januar in Kraft und ermöglicht bis zu 2.000 Euro monatlichen Hinzuverdienst komplett steuerfrei. Das gilt für sozialversicherungspflichtige Arbeitnehmer, unabhängig davon, ob Sie bereits eine Rente beziehen oder den Renteneintritt bewusst aufgeschoben haben.
+
+Wichtig: Die Aktivrente gilt nicht für Beamte, Selbstständige, Freiberufler oder Minijobber. Voraussetzung ist eine sozialversicherungspflichtige Erwerbstätigkeit.
+
+### Wie die Aktivrente funktioniert
+
+Der Steuerfreibetrag wird automatisch bei der Lohnsteuerberechnung berücksichtigt – kein Antrag nötig. Ein praktisches Beispiel: Verdienen Sie 2.000 Euro monatlich, bleibt dieser Betrag vollständig steuerfrei. Sie zahlen nur Beiträge zur Kranken- und Pflegeversicherung (etwa 205 Euro bei 2.000 Euro Verdienst), keine Einkommensteuer.
+
+Ein großer Vorteil: Der steuerfreie Hinzuverdienst in der Rente erhöht nicht Ihren Steuersatz für übrige Einkünfte. Die Steuerbefreiung wird automatisch berücksichtigt.
+
+Sie können die Aktivrente mit dem Grundfreibetrag kombinieren. So können insgesamt bis zu 36.348 Euro Jahreseinkommen 2026 steuerfrei bleiben – je nach Ihrer individuellen Situation.
+
+[SPIEL karte: Aktivrente]
+
+## 3 Erwerbsminderungsrenten: Höhere Grenzen
+
+Bei Erwerbsminderungsrenten gelten weiterhin strikte Grenzen für den Hinzuverdienst in der Rente – diese wurden 2026 aber erhöht.
+
+Volle Erwerbsminderung: Maximal 20.763,75 Euro pro Jahr (ca. 1.730 Euro monatlich)
+
+Teilweise Erwerbsminderung: Bis zu 41.527,50 Euro pro Jahr (ca. 3.460 Euro monatlich)
+
+Diese Grenzen werden aus den höchsten Entgeltpunkten der letzten 15 Jahre vor Eintritt der Erwerbsminderung berechnet. Bei niedrigeren früheren Einkommen greift die Mindest-Hinzuverdienstgrenze von 41.527,50 Euro.
+
+### Anrechnung bei Überschreitung
+
+Wird die Grenze überschritten, werden 40 Prozent des Mehrbetrags angerechnet. Beispiel: Überschreiten Sie um 1.200 Euro, werden 480 Euro angerechnet und monatlich um etwa 40 Euro gekürzt.
+
+Die Rentenversicherung geht regelmäßig davon aus, dass die zeitliche Grenze von unter drei Stunden täglich eingehalten wird. Ein Minijob bis 603 Euro gilt standardmäßig als unproblematisch.
+
+Wichtig: Melden Sie Ihre geplante Erwerbstätigkeit vorab der Deutschen Rentenversicherung an – mit Informationen zur zeitlichen Dauer, Art der Tätigkeit und verdientem Hinzuverdienst in der Rente.
+
+## 4 Hinterbliebenenrenten: Erhöhte Freibeträge
+
+Der Freibetrag für Hinzuverdienst in der Rente bei Hinterbliebenenrenten steigt zum 1. Juli 2026 auf 1.122,53 Euro monatlich (bisher 1.076,86 Euro).
+
+Für jedes Kind gibt es zusätzlich einen Kinderfreibetrag von 238,11 Euro. Eine Witwe mit einem waisenberechtigten Kind kann somit 1.360,64 Euro anrechnungsfrei verdienen.
+
+Übersteigt das Einkommen den Freibetrag, werden 40 Prozent des Mehrbetrags angerechnet. Verdient die Witwe 1.350 Euro, liegt sie unter der Grenze – kein Abzug. Verdient sie 1.500 Euro, werden von den zusätzlichen 150 Euro genau 60 Euro auf die Rente angerechnet.
+
+Bei eigenen Renten neben Hinterbliebenenrenten gelten Pauschalquoten von 14 Prozent (ab 2011 in Rente gegangen) oder 13 Prozent (frühere Jahrgänge). Diese werden vom Bruttobetrag der Rente abgezogen.
+
+## 5 Minijob-Grenze steigt auf 603 Euro
+
+Die Minijob-Grenze erhöht sich 2026 von 556 auf 603 Euro monatlich – Folge der Mindestlohnerhöhung auf 13,90 Euro. Jahresgrenze: 7.236 Euro.
+
+Für Rentner bietet dies mehr Flexibilität beim Hinzuverdienst in der Rente. Minijobs sind pauschal versteuert und meist faktisch steuerfrei, wenn keine weiteren hohen Einkünfte hinzukommen.
+
+Vorteil der Jahresbetrachtung: Sie können Ihre Arbeitszeit flexibel gestalten. Verdienen Sie einen Monat 350 Euro und den nächsten 806 Euro, zählt nur der Durchschnitt – Sie gelten weiterhin als Minijobber.
+
+Ein zusätzlicher Tipp: Verzichten Sie auf die Befreiung von der Rentenversicherungspflicht, sammeln Sie durch Minijob-Beiträge Rentenpunkte und erhöhen Ihre Rente jährlich leicht. Sie erhalten dann allerdings weniger Versicherungsschutz.
+
+[SPIEL quiz: Wie hoch ist die neue Minijob-Grenze für den Hinzuverdienst in der Rente ab 2026?]
+
+## 6 Praktische Umsetzung
+
+Meldepflichten: Bei Erwerbsminderungsrenten müssen Sie den Hinzuverdienst anmelden. Informieren Sie die Rentenversicherung vorher über Umfang und Art der Tätigkeit.
+
+Sozialversicherung: Steuerfreie Einkünfte aus der Aktivrente bleiben sozialversicherungspflichtig. Sie zahlen Kranken- und Pflegeversicherungsbeiträge.
+
+Steuererklärung: Geben Sie den Hinzuverdienst in der Rente in Ihrer Steuererklärung an. Die Steuerbefreiung wird automatisch berücksichtigt.
+
+| Rentenart | Hinzuverdienst-Grenze 2026 | Besonderheiten
+
+| Altersrente | Unbegrenzt | Aktivrente bis 2.000 € steuerfrei
+
+| Volle Erwerbsminderung | 20.763,75 € / Jahr | 40% Anrechnung bei Überschreitung
+
+| Teilweise Erwerbsminderung | 41.527,50 € / Jahr | Individuell höher möglich
+
+| Hinterbliebenenrente | 1.122,53 € + Kinderfreibetrag | 40% Anrechnung über Grenze
+
+| Minijob | 603 € / Monat | Pauschalsteuer, Jahresbetrachtung
+
+## 7 Fazit
+
+2026 bringt deutlich bessere Möglichkeiten für zusätzliches Einkommen im Ruhestand. Altersrentner können mit der Aktivrente bis zu 2.000 Euro steuerfrei hinzuverdienen, die Minijob-Grenze steigt auf 603 Euro, und Freibeträge bei Hinterbliebenenrenten erhöhen sich. Auch Erwerbsminderungsrentner profitieren von angehobenen Grenzen.
+
+Der Hinzuverdienst in der Rente wird damit flexibler. Beachten Sie aber: Während Altersrentner praktisch unbegrenzt verdienen können, müssen Erwerbsminderungs- und Hinterbliebenenrentner die spezifischen Grenzen einhalten. Eine Beratung bei der Deutschen Rentenversicherung hilft, die optimalen Möglichkeiten auszuschöpfen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste hinzuverdienst-in-der-rente]
+
+[BLOCK rechner hinzuverdienst]
+
+[BLOCK dokumente hinterbliebenenrente,broschuere-basisrente,betriebliche-altersversorgung,altersrentner-hinzuverdienst]
+
+
+## FAQ
+F: Wie viel darf ich als Altersrentner hinzuverdienen?
+A: Altersrentner können seit 2023 unbegrenzt hinzuverdienen – unabhängig davon, ob die Regelaltersgrenze bereits erreicht wurde. Dies gilt auch für vorgezogene Altersrenten wie die Rente für langjährig Versicherte oder schwerbehinderte Menschen. Die Rentenleistungen werden nicht gekürzt.
+F: Was ist die Aktivrente 2026?
+A: Die Aktivrente ist ein Steuerbonus ab 2026, der den Arbeitslohn von Rentnern bis zu 2.000 Euro monatlich steuerfrei stellt. Voraussetzung ist das Erreichen der Regelaltersgrenze und eine sozialversicherungspflichtige Beschäftigung. Selbstständige, Freiberufler und Minijobber profitieren nicht.
+F: Welche Hinzuverdienstgrenzen gelten bei Erwerbsminderungsrenten?
+A: Bei voller Erwerbsminderungsrente liegt die Grenze 2026 bei rund 20.764 Euro jährlich, also etwa 1.730 Euro monatlich. Bei teilweiser Erwerbsminderungsrente beträgt die Grenze mindestens 41.528 Euro pro Jahr, also rund 3.460 Euro monatlich.
+F: Muss der Hinzuverdienst versteuert werden?
+A: Ja, reguläre Erwerbseinkommen sind steuerpflichtig und müssen in der Einkommensteuererklärung angegeben werden. Eine Ausnahme bildet ab 2026 die Aktivrente, die Arbeitslohn bis 2.000 Euro monatlich steuerfrei stellt. Der Freibetrag wird automatisch durch den Arbeitgeber berücksichtigt.
+
+
+==================== BEITRAG altersteilzeit ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Altersteilzeit: Flexibler Übergang in Rente mit reduzierter Arbeitszeit
+  heading-1: Altersteilzeit 2026: Modelle, Aufstockung und Voraussetzungen
+  heading-2: Was ist Altersteilzeit genau?
+  heading-3: Wer hat Anspruch auf Altersteilzeit?
+  heading-4: Wie hoch ist die finanzielle Aufstockung bei Altersteilzeit?
+  heading-5: Welche Modelle der Altersteilzeit gibt es?
+  heading-6: Wie wirkt sich der Progressionsvorbehalt bei der Steuer aus?
+  heading-7: Altersteilzeit oder Aktivrente – welche Alternative passt zu Ihnen?
+  heading-8: Chancen und Risiken der Altersteilzeit
+  heading-9: Absicherung und rechtliche Aspekte
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Altersteilzeit (altersteilzeit)
+## 0 Altersteilzeit: Flexibler Übergang in Rente mit reduzierter Arbeitszeit
+
+Altersteilzeit ermöglicht den gleitenden Übergang in die Rente bei halber Arbeitszeit. Welche Modelle es 2026 gibt und wie die Aufstockung funktioniert.
+
+## 1 Altersteilzeit 2026: Modelle, Aufstockung und Voraussetzungen
+
+Altersteilzeit regelt den schrittweisen Übergang in den Ruhestand ab 55 Jahren mit halbierter Arbeitszeit und finanzieller Aufstockung.
+
+Die Altersteilzeit ermöglicht Arbeitnehmern seit 1996 einen gleitenden Übergang vom Berufsleben in die Rente, ohne abrupt aus dem Arbeitsalltag auszusteigen. Sie können mit 55 Jahren beginnen, müssen in den letzten fünf Jahren mindestens 1.080 Tage sozialversicherungspflichtig beschäftigt gewesen sein und ihre Arbeitszeit um 50 Prozent reduzieren. Diese Regelung bietet besonders für Menschen in körperlich anspruchsvollen Berufen oder mit gesundheitlichen Einschränkungen eine wertvolle Alternative zur vollständigen Weiterarbeit bis zur Rente.
+
+## 2 Was ist Altersteilzeit genau?
+
+Bei der Altersteilzeit handelt es sich um eine Teilzeitbeschäftigung, die durch das Altersteilzeitgesetz (AltTZG) geregelt ist. Das Kernprinzip: Die bis zur Rente verbleibende Arbeitszeit wird halbiert, aber Sie erhalten trotzdem deutlich mehr als nur die Hälfte Ihres bisherigen Gehalts. Der Arbeitgeber muss das Regelarbeitsentgelt um mindestens 20 Prozent aufstocken und zusätzlich mindestens 80 Prozent der bisherigen Rentenversicherungsbeiträge zahlen.
+
+Der große Vorteil: Sie bleiben während der gesamten Zeit – auch in der Freistellungsphase – sozialversicherungspflichtig beschäftigt und durchgängig krankenversichert. Da kein rechtlicher Anspruch auf Altersteilzeit besteht, ist sie nur aufgrund einer freiwilligen Vereinbarung zwischen Arbeitgeber und Arbeitnehmer möglich. In der Praxis bieten jedoch viele Unternehmen entsprechende Programme an – besonders große Konzerne und öffentliche Arbeitgeber nutzen Altersteilzeit auch strategisch für den Wissenstransfer.
+
+&#x1f50d; Mythos oder Fakt?
+
+Altersteilzeit ist nur für Beamte und Angestellte im öffentlichen Dienst möglich
+
+nein
+
+Altersteilzeit steht allen Arbeitnehmern offen, auch in der Privatwirtschaft. Viele Branchen wie die Metall- und Elektroindustrie haben entsprechende Tarifverträge. Sogar bei fehlenden tariflichen Regelungen können individuelle Vereinbarungen mit dem Arbeitgeber getroffen werden.
+
+## 3 Wer hat Anspruch auf Altersteilzeit?
+
+Die Voraussetzungen sind klar definiert. Sie müssen folgende Bedingungen erfüllen:
+
+- Mindestens 55 Jahre alt sein (in einigen Branchen wie der Metall- und Elektroindustrie gelten tarifvertragliche Mindestalter von 57 Jahren)
+
+- In den letzten fünf Jahren vor Beginn mindestens 1.080 Kalendertage sozialversicherungspflichtig beschäftigt gewesen sein
+
+- Eine schriftliche Vereinbarung mit Ihrem Arbeitgeber treffen
+
+- Ihre Arbeitszeit um 50 Prozent reduzieren
+
+- Nach der Halbierung oberhalb der Geringfügigkeitsgrenze von 603 Euro monatlich verdienen (Stand 2026)
+
+Zu den anrechenbaren 1.080 Tagen zählen auch Zeiten, in denen Sie Lohnersatzleistungen wie Arbeitslosengeld I, Bürger- oder Krankengeld bezogen haben. Falls Sie vor der Altersteilzeit arbeitslos werden, können Sie diese Phase ebenfalls anrechnen lassen – solange die Gesamtbedingung erfüllt ist.
+
+## 4 Wie hoch ist die finanzielle Aufstockung bei Altersteilzeit?
+
+Die Berechnung Ihres Einkommens in der Altersteilzeit folgt einer klaren Struktur. Bei der Altersteilzeit erhalten Sie die Hälfte Ihres bisherigen Bruttogehalts plus einen Aufstockungsbetrag, der mindestens 20 Prozent des halbierten Gehaltes beträgt. Der Aufstockungsbetrag ist steuer- und beitragsfrei.
+
+| Schritt | Beispiel (4.000 € Vollzeit) | Betrag
+
+| Halbiertes Gehalt | 50 % von 4.000 € | 2.000 €
+
+| Mindestaufstockung | 20 % von 2.000 € | 400 €
+
+| Ihr Brutto-Einkommen | 2.000 € + 400 € | 2.400 €
+
+Bei Arbeitnehmern, die nach dem Altersteilzeitgesetz Aufstockungsbeträge erhalten, gilt in der Rentenversicherung auch mindestens ein Betrag in Höhe von 80 Prozent des Regelarbeitsentgelts als zusätzliche beitragspflichtige Einnahme. Das bedeutet: Während Sie weniger arbeiten, zahlen Sie fast normale Rentenbeiträge – Ihre spätere Rente sinkt nicht um 50 Prozent.
+
+&#x1f4ca; Schätzfrage
+
+Wie hoch ist der Mindest-Nettoanteil vom ursprünglichen Vollzeitgehalt in der Altersteilzeit?
+
+60
+
+90
+
+83
+
+%
+
+Das Mindestnetto beträgt 83 Prozent des vorherigen Vollzeit-Nettogehalts durch die steuerfreie Aufstockung von mindestens 20 Prozent (Stand 2026).
+
+## 5 Welche Modelle der Altersteilzeit gibt es?
+
+Sie haben die Wahl zwischen verschiedenen Gestaltungsformen:
+
+Blockmodell (häufigste Variante):
+
+Sie arbeiten in der ersten Hälfte der vereinbarten Zeit in Vollzeit und bauen ein Wertguthaben auf. In der zweiten Hälfte sind Sie komplett freigestellt, erhalten aber weiterhin Ihr Gehalt. Der Vorteil: intensive Auszeit am Ende ohne finanzielle Sorgen. Das Risiko: In der Arbeitsphase haben Sie ein „Guthaben" aufgebaut – wird der Arbeitgeber insolvent, könnte dieses Guthaben verloren gehen.
+
+Gleichverteilungsmodell:
+
+Sie reduzieren Ihre Arbeitszeit um 50 Prozent – also 20 Stunden bei einer regulären 40-Stunden-Woche oder 17,5 Stunden bei vorher regulär 35 Stunden. Das bietet bessere Planbarkeit und weniger Risiko, da kein großes Guthaben aufgebaut wird. Sie können Ihr Leben sofort entspannter gestalten.
+
+Stufenmodell:
+
+Eine schrittweise Reduktion ist ebenfalls möglich – etwa von 40 auf 35 Stunden im ersten Jahr, dann auf 30 Stunden, schließlich auf 20 Stunden. Dies ermöglicht eine besonders sanfte Anpassung an die geringere Arbeitsbelastung.
+
+## 6 Wie wirkt sich der Progressionsvorbehalt bei der Steuer aus?
+
+Die Aufstockungsbeträge sind steuer- und sozialabgabenfrei, unterliegen allerdings bei der Einkommensteuerveranlagung dem Progressionsvorbehalt. Das funktioniert folgendermaßen:
+
+- Der Aufstockungsbetrag bei Altersteilzeit bleibt bei der Ermittlung des zu versteuernden Einkommens außer Ansatz, beeinflusst jedoch durch den Progressionsvorbehalt den Steuersatz und damit die Einkommensteuer
+
+- Der Aufstockungsbetrag wird bei der Berechnung des Steuersatzes berücksichtigt und erhöht den Steuersatz für das zu versteuernde Einkommen
+
+- Dies führt oft zu einem höheren Steuersatz auf Ihre sonstigen Einkünfte wie Kapitalerträge oder Mieteinnahmen
+
+In den meisten Fällen müssen Sie eine Steuererklärung machen, wenn Sie steuerfreie Lohnersatzleistungen von mehr als 410 Euro erhalten haben (Stand 2026). Aufgrund des Progressionsvorbehalts kann es zu einer Steuernachzahlung kommen, da der tatsächliche Steuersatz höher ausfallen kann als der während des Jahres angewendete.
+
+Sie sollten daher eine Steuernachzahlung von 200 bis 800 Euro pro Jahr einplanen – abhängig von Ihren anderen Einkünften und Ihrem Bundesland.
+
+## 7 Altersteilzeit oder Aktivrente – welche Alternative passt zu Ihnen?
+
+Seit dem 1. Januar 2026 ist das Aktivrentengesetz in Kraft getreten. Die „Aktivrente" ist keine zusätzliche Rentenart, sondern ein Steuerbonus. Sie bietet einen monatlichen Steuerfreibetrag in Höhe von 2.000 Euro für Arbeitnehmerinnen und Arbeitnehmer, die die Regelaltersgrenze erreicht haben und einer sozialversicherungspflichtigen Beschäftigung nachgehen.
+
+Die entscheidenden Unterschiede:
+
+Altersteilzeit ab 55:
+
+- Reduzierte Arbeitszeit (50 Prozent)
+
+- Aufstockung auf etwa 60-70 Prozent des ursprünglichen Nettos
+
+- Mindestens bis zur Regelaltersgrenze
+
+- Der Aufstockungsbetrag unterliegt dem Progressionsvorbehalt und führt oft zur Steuererklärungspflicht
+
+Aktivrente ab Regelaltersgrenze:
+
+- Vollzeit- oder Teilzeitarbeit möglich
+
+- Hinzuverdienst bis zu 2.000 Euro im Monat ist steuerfrei
+
+- Kein Progressionsvorbehalt – andere steuerfreie Einkünfte wie Arbeitslosengeld oder Elterngeld unterfallen dem Progressionsvorbehalt, die Aktivrente jedoch nicht
+
+&#x1f9e0; Quiz
+
+Welches Mindestalter gilt für die Altersteilzeit in Deutschland?
+
+60 Jahre
+
+55 Jahre
+
+63 Jahre
+
+B
+
+Das gesetzliche Mindestalter für Altersteilzeit beträgt 55 Jahre, auch wenn einige Tarifverträge (wie in der Metall- und Elektroindustrie) abweichende Regelungen mit 57 Jahren vorsehen (Stand 2026).
+
+## 8 Chancen und Risiken der Altersteilzeit
+
+Das spricht für Altersteilzeit:
+
+- Das Mindestnetto in der Altersteilzeit beträgt 83 Prozent des vorherigen Vollzeit-Nettogehalts
+
+- Die auf die zusätzliche beitragspflichtige Einnahme entfallenden Beiträge zur Rentenversicherung trägt der Arbeitgeber. Die Beiträge für das Arbeitsentgelt aus der Altersteilzeitarbeit tragen Arbeitgeber und Arbeitnehmer grundsätzlich je zur Hälfte
+
+- Durchgehender Sozialversicherungsschutz und strukturierte Vorbereitung auf den Ruhestand
+
+- Besonders für Beschäftigte in körperlich anstrengenden Berufen bietet die Altersteilzeit die Möglichkeit, die Arbeitsbelastung im Alter zu reduzieren
+
+Das sollten Sie bedenken:
+
+- Insolvenzrisiko beim Blockmodell: Wird der Arbeitgeber insolvent, könnte das Guthaben verloren gehen, auch wenn eine Insolvenzsicherung durch Bankbürgschaft, Sicherheit oder Treuhandvertrag besteht
+
+- Durch das herabgesetzte Gehalt müssen Sie mit Renteneinbußen rechnen, obwohl der Arbeitgeber gesetzlich verpflichtet ist, zusätzliche Rentenversicherungsbeiträge zu zahlen
+
+- Der Progressionsvorbehalt kann zu Steuernachzahlungen führen – Beschäftigte sollten sich auf eine mögliche Nachzahlung einstellen und gegebenenfalls Rücklagen bilden
+
+## 9 Absicherung und rechtliche Aspekte
+
+Beim Blockmodell muss der Arbeitgeber Ihre Ansprüche durch Bankbürgschaft, Sicherheit oder Insolvenzsicherung absichern. Lassen Sie sich diese Absicherung schriftlich nachweisen. Während der gesamten Altersteilzeit – auch in der Freistellungsphase – sind Sie arbeitslosenversichert und haben bei einer Insolvenz des Arbeitgebers Anspruch auf Arbeitslosengeld I.
+
+Ihr Hinzuverdienst durch Beschäftigung oder selbstständige Tätigkeit darf die Geringfügigkeitsgrenze von 603 Euro im Monat (Stand 2026) nicht übersteigen. Ausnahmen gelten, wenn Sie diese Tätigkeiten schon in den fünf Jahren vor Beginn der Altersteilzeit ständig ausgeübt haben.
+
+## 10 Fazit
+
+Die Altersteilzeit bleibt auch 2026 ein attraktives Instrument für den gleitenden Übergang in den Ruhestand. Mit der neuen Aktivrente gibt es seit diesem Jahr eine weitere Alternative für ältere Arbeitnehmer – jedoch erst ab Erreichen der Regelaltersgrenze. Die Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung steigt 2026 bundeseinheitlich auf 8.450 Euro pro Monat.
+
+Die wichtigsten Eckdaten für 2026: Mindestalter 55 Jahre, Geringfügigkeitsgrenze von 603 Euro monatlich, mindestens 20 Prozent Aufstockung und 80 Prozent Rentenversicherungsbeiträge durch den Arbeitgeber. Bei sorgfältiger Planung und dem richtigen Modell können Sie Ihre letzten Berufsjahre entspannter gestalten und trotzdem finanziell abgesichert bleiben.
+
+Ob Altersteilzeit für Sie sinnvoll ist, hängt von Ihrer individuellen Situation ab – sowohl finanziell als auch gesundheitlich. Eine Beratung durch Ihren Arbeitgeber, die Gewerkschaft oder einen Rentenberater kann dabei helfen, die beste Lösung für Ihren Übergang in den Ruhestand zu finden.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste altersteilzeit]
+
+[BLOCK rechner altersteilzeit]
+
+
+## FAQ
+F: Ab welchem Alter ist Altersteilzeit möglich?
+A: Altersteilzeit ist nach dem Altersteilzeitgesetz (AltTZG) ab dem 55. Lebensjahr möglich. Voraussetzung ist, dass Sie in den letzten fünf Jahren vor Beginn mindestens 1.080 Kalendertage sozialversicherungspflichtig beschäftigt waren. Einen rechtlichen Anspruch auf Altersteilzeit gibt es jedoch nicht – sie ist stets eine freiwillige Vereinbarung.
+F: Wie hoch ist die Aufstockung bei Altersteilzeit?
+A: Bei Altersteilzeit wird Ihre Arbeitszeit halbiert und das Gehalt entsprechend reduziert. Der Arbeitgeber stockt das halbierte Gehalt um mindestens 20 Prozent auf und zahlt zusätzlich mindestens 80 Prozent der bisherigen Rentenversicherungsbeiträge. Die Aufstockung ist steuer- und sozialabgabenfrei, unterliegt aber dem Progressionsvorbehalt.
+F: Welche Modelle der Altersteilzeit gibt es?
+A: Es gibt im Wesentlichen zwei Modelle: das Gleichverteilungsmodell und das Blockmodell. Beim Gleichverteilungsmodell arbeiten Sie durchgängig mit halbierter Stundenzahl. Im Blockmodell arbeiten Sie in der ersten Hälfte voll weiter und sind in der zweiten Hälfte vollständig freigestellt, beziehen aber in beiden Phasen dasselbe reduzierte Gehalt.
+F: Welche Auswirkungen hat Altersteilzeit auf die Rente?
+A: Durch das reduzierte Gehalt fallen die Rentenbeiträge niedriger aus, was den späteren Rentenanspruch mindert. Die gesetzliche Pflicht des Arbeitgebers, mindestens 80 Prozent der bisherigen Rentenversicherungsbeiträge zu zahlen, federt diesen Effekt deutlich ab. Dennoch sollten Sie vor Vertragsabschluss prüfen, wann Sie frühestens eine Altersrente beanspruchen können.
+
+
+==================== BEITRAG freiwillige-gesetzliche-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Freiwillige Rentenversicherung: Altersvorsorge für Selbstständige
+  heading-1: Freiwillige gesetzliche Rentenversicherung: Ihre flexible Altersvorsorge 2026
+  heading-2: Wer kann freiwillig in die Rentenversicherung einzahlen?
+  heading-3: Beitragsgrenzen 2026 für die freiwillige Rentenversicherung
+  heading-4: Wie viel zusätzliche Rente bringt die freiwillige gesetzliche Rentenversicherung?
+  heading-5: Steuerliche Vorteile der freiwilligen Rentenversicherung
+  heading-6: Für wen lohnt sich die freiwillige gesetzliche Rentenversicherung?
+  heading-7: Antragstellung und praktische Umsetzung
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Freiwillige gesetzliche Rentenversicherung (freiwillige-gesetzliche-rente)
+## 0 Freiwillige Rentenversicherung: Altersvorsorge für Selbstständige
+
+Die freiwillige gesetzliche Rentenversicherung steht auch Nicht-Pflichtversicherten offen. Wer 2026 freiwillig einzahlen kann, was es bringt und wie es funktioniert.
+
+## 1 Freiwillige gesetzliche Rentenversicherung: Ihre flexible Altersvorsorge 2026
+
+Die freiwillige gesetzliche Rentenversicherung ermöglicht Menschen, die nicht versicherungspflichtig sind, selbstbestimmt in die staatliche Altersvorsorge einzuzahlen. Diese flexible Vorsorgeoption richtet sich besonders an Selbstständige, Beamte, Ärzte und andere Freiberufler, die ihre Altersvorsorge stärken möchten.
+
+Die freiwillige gesetzliche Rentenversicherung unterscheidet sich von Pflichtbeiträgen: Sie zahlen nur, wenn und wie viel Sie möchten. 2026 können Sie jeden Betrag zwischen dem Mindestbeitrag von 112,16 Euro und dem Höchstbeitrag von 1.571,70 Euro monatlich wählen. Die Beiträge sind vollständig steuerlich absetzbar und schaffen sofortige Rentenansprüche.
+
+Immer mehr Menschen nutzen die freiwillige gesetzliche Rentenversicherung, um Versorgungslücken zu schließen oder ihre spätere Rente gezielt zu erhöhen. Laut Deutscher Rentenversicherung ist die Zahl der Beitragszahlungen zum Ausgleich von Rentenabschlägen von 933 im Jahr 2012 auf 68.046 im Jahr 2022 gestiegen.
+
+## 2 Wer kann freiwillig in die Rentenversicherung einzahlen?
+
+Die Berechtigung zur freiwilligen Versicherung ist klar definiert. Sie können freiwillige Beiträge zahlen, wenn Sie:
+
+- Ihren Wohnsitz in Deutschland haben
+
+- Mindestens 16 Jahre alt sind
+
+- Nicht rentenversicherungspflichtig sind
+
+Dies gilt auch für Deutsche mit Wohnsitz im Ausland.
+
+Ausgeschlossen sind Personen, die bereits Pflichtbeiträge leisten. Arbeitnehmer, Krankengeldbezieher und Empfänger von Arbeitslosengeld I können keine freiwilligen Rentenbeiträge zahlen. Auch viele Handwerker sind zur Pflichtversicherung verpflichtet.
+
+Berechtigt sind insbesondere:
+
+- Selbstständige und Freiberufler ohne Versicherungspflicht
+
+- Beamte, Richter und Soldaten
+
+- Ärzte, Rechtsanwälte und Architekten
+
+- Hausfrauen und Hausmänner
+
+- Studierende ab 16 Jahren
+
+- Privatiers und Rentner
+
+- Deutsche im Ausland
+
+[SPIEL quiz: Welche Personen können die freiwillige gesetzliche Rentenversicherung nutzen?]
+
+Bezieher vorgezogener Altersrenten können bis zum regulären Rentenalter ebenfalls freiwillige Beiträge zahlen und damit ihre Rente erhöhen.
+
+## 3 Beitragsgrenzen 2026 für die freiwillige Rentenversicherung
+
+Die Beitragshöhe wählen Sie flexibel selbst. Der monatliche Mindestbeitrag der freiwilligen gesetzlichen Rentenversicherung steigt 2026 auf 112,16 Euro. Der Höchstbetrag liegt bei 1.571,70 Euro monatlich.
+
+Diese Werte orientieren sich an der aktuellen Lohnentwicklung. Sie können Ihre monatliche Beitragshöhe jederzeit ändern.
+
+| Beitragsgröße | 2025 | 2026 | Differenz
+
+| Mindestbeitrag | 103,42 Euro | 112,16 Euro | +8,74 Euro
+
+| Höchstbeitrag | 1.497,30 Euro | 1.571,70 Euro | +74,40 Euro
+
+Der Mindestbeitrag berechnet sich aus der Minijobgrenze (603 Euro monatlich). Bei einem Beitragssatz von 18,6 Prozent ergibt sich der Mindestbeitrag von 112,16 Euro.
+
+Der Höchstbeitrag orientiert sich an der Beitragsbemessungsgrenze (8.450 Euro monatlich). Weil es keinen Arbeitgeberanteil gibt, werden die vollen 18,6 Prozent berechnet: 8.450 Euro × 0,186 = 1.571,70 Euro monatlich.
+
+[SPIEL schaetzen: Was kostet ein kompletter Rentenpunkt durch die freiwillige gesetzliche Rentenversicherung 2026? → 9662]
+
+## 4 Wie viel zusätzliche Rente bringt die freiwillige gesetzliche Rentenversicherung?
+
+Der aktuelle Rentenwert steigt am 1. Juli 2026 auf 42,52 Euro. Das ist die monatliche Bruttorente pro Rentenpunkt.
+
+Rechenbeispiele 2026:
+
+- Ein Jahr Mindestbeiträge (12 × 112,16 Euro): etwa 5,68 Euro mehr Rente monatlich
+
+- Ein Jahr Höchstbeiträge (12 × 1.571,70 Euro): etwa 79,63 Euro mehr Rente monatlich
+
+- Ein kompletter Rentenpunkt kostet 9.662 Euro und bringt ab Juli 2026 monatlich 42,52 Euro brutto Rente
+
+[SPIEL gewusst: Ein Rentenpunkt kostet 2026 etwa 9.662 Euro einmalig. Die monatliche Rente beträgt 42,52 Euro – das entspricht einer Amortisationszeit von etwa 19 Jahren.]
+
+Diese Berechnung basiert auf dem Durchschnittsentgelt von 51.944 Euro für 2026 und dem Beitragssatz von 18,6 Prozent. Sie müssen diese Zeit als Rentner erleben, um finanziell zu profitieren.
+
+## 5 Steuerliche Vorteile der freiwilligen Rentenversicherung
+
+Freiwillige Beiträge gehören zu den Altersvorsorgeaufwendungen und sind seit 2023 vollständig steuerlich absetzbar. Die Höchstbeträge steigen 2026 auf:
+
+- 30.826 Euro für Ledige
+
+- 61.652 Euro für Verheiratete
+
+Diese Grenzen gelten für alle Altersvorsorgeaufwendungen zusammen (einschließlich Basisrente und Versorgungswerke).
+
+Wichtige Steuertipps:
+
+- Zahlungen im Februar 2026 werden dem Jahr 2026 zugeordnet
+
+- Beiträge für 2025 können noch bis 31. März 2026 gezahlt werden
+
+- Die Beiträge werden später durch nachgelagerte Besteuerung der Renten ausgeglichen
+
+Für die meisten Arbeitnehmer bleibt erheblicher Spielraum für zusätzliche steueroptimierte Einzahlungen. Ihre laufenden Rentenversicherungsbeiträge liegen deutlich unter der steuerlichen Obergrenze und bewirken eine spürbare Entlastung bei der Einkommensteuer.
+
+## 6 Für wen lohnt sich die freiwillige gesetzliche Rentenversicherung?
+
+Die freiwillige gesetzliche Rentenversicherung passt nicht zu jeder Situation.
+
+Besonders attraktiv ist sie für:
+
+- Selbstständige ohne Versorgungswerk
+
+- Personen mit hohen Einkommen
+
+- Menschen mit überdurchschnittlicher Lebenserwartung
+
+- Beamte und Freiberufler mit Versorgungslücken
+
+- Personen, die staatliche Garantien bevorzugen
+
+Weniger geeignet bei:
+
+- Sehr niedrigen Einkommen
+
+- Kurzer verbleibender Lebenserwartung
+
+- Hoher Risikobereitschaft
+
+- Bereits ausreichender Altersvorsorge
+
+Ein Rentenpunkt kostet 2026 etwa 9.662 Euro und bringt monatlich 42,52 Euro Bruttorente. Bei einer Amortisationszeit von etwa 19 Jahren müssen Sie diese Zeit als Rentner leben, um zu profitieren. Berücksichtigen Sie Ihre individuelle Lebenserwartung und alternative Anlagemöglichkeiten wie die Riester-Rente.
+
+## 7 Antragstellung und praktische Umsetzung
+
+Der Einstieg in die freiwillige gesetzliche Rentenversicherung ist unkompliziert. Sie brauchen das Formular V0060 »Antrag auf Beitragszahlung für eine freiwillige Versicherung« der Deutschen Rentenversicherung.
+
+Wichtige Punkte:
+
+- Wählen Sie die Beitragshöhe flexibel und passen Sie diese monatlich an
+
+- Zahlung erfolgt monatlich oder als Einmalbetrag
+
+- Geben Sie Versicherungsnummer und »freiwillige Beiträge« als Verwendungszweck an
+
+- Beiträge für das Vorjahr können noch bis 31. März nachgezahlt werden
+
+Diese Flexibilität ermöglicht eine an Ihre finanzielle Situation angepasste Vorsorgestrategie. Mit Beiträgen für 2025 bleibt die freiwillige gesetzliche Rentenversicherung bis zum 31. März 2026 zwischen 112,16 Euro und 1.497,30 Euro monatlich möglich.
+
+## 8 Fazit
+
+Die freiwillige gesetzliche Rentenversicherung bietet 2026 eine attraktive Vorsorgemöglichkeit. Mit flexiblen Einzahlungen zwischen 112,16 Euro und 1.571,70 Euro monatlich und vollständiger steuerlicher Absetzbarkeit passt sie für viele Situationen. Der Höchstbetrag für Altersvorsorgeaufwendungen steigt auf 30.826 Euro für Alleinstehende und 61.652 Euro für Ehepaare.
+
+Besonders Selbstständige ohne Pflichtversicherung, Beamte oder Personen in Erwerbspausen können erhebliche Versorgungslücken schließen. Die Nachzahlungsfrist bis 31. März ermöglicht strategische Jahresplanung.
+
+Berücksichtigen Sie jedoch die Amortisationszeit von etwa 19 Jahren und Ihre persönliche Lebenserwartung. Die Deutsche Rentenversicherung hilft Ihnen gerne, die optimale Beitragshöhe für Ihre Situation zu ermitteln.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste freiwillige-gesetzliche-rentenversicherung]
+
+[BLOCK rechner rente]
+
+[BLOCK dokumente hinterbliebenenrente,freiwillige-rentenversicherung,broschuere-basisrente,betriebliche-altersversorgung]
+
+
+## FAQ
+F: Wer darf freiwillig in die gesetzliche Rentenversicherung einzahlen?
+A: Freiwillig einzahlen können alle Menschen ab 16 Jahren mit Wohnsitz in Deutschland, die nicht rentenversicherungspflichtig sind. Dazu zählen Beamte, Ärzte, Rechtsanwälte, Architekten, nicht pflichtversicherte Selbstständige, Hausfrauen, Hausmänner, Privatiers und Studierende.
+F: Wie hoch sind die freiwilligen Rentenbeiträge 2026?
+A: Der Mindestbeitrag liegt ab 1. Januar 2026 bei 112,16 Euro monatlich, der Höchstbeitrag bei 1.571,70 Euro. Gegenüber 2025 sind die Beiträge deutlich gestiegen, da die Beitragsbemessungsgrenze auf 8.450 Euro monatlich angehoben wurde.
+F: Können freiwillige Rentenbeiträge nachgezahlt werden?
+A: Bis zum 31. März 2026 können freiwillige Beiträge für das Jahr 2025 nachgezahlt werden. Die Beträge liegen zwischen 112,16 Euro und 1.497,30 Euro pro Monat. Die Rentenversicherung bietet insgesamt flexible Zahlungsmöglichkeiten mit individueller Beitragshöhe.
+F: Für wen lohnt sich die freiwillige Rentenversicherung?
+A: Besonders für Selbstständige, Beamte und Personen in beruflichen Übergangsphasen kann sich die freiwillige Versicherung lohnen. Sie hilft, Versorgungslücken zu schließen, die spätere Rente zu erhöhen oder überhaupt erst einen Rentenanspruch zu begründen.
+
+
+==================== BEITRAG pflichtversicherung-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Gesetzliche Rentenversicherung: Pflicht, Beitrag &amp; Altersabsicherung erklärt
+  heading-1: Pflichtversicherung Rente: Das Wichtigste für 2026
+  heading-2: Wer ist automatisch rentenversichert – und wer nicht?
+  heading-3: Welche Selbstständigen zahlen in die Rentenversicherung?
+  heading-4: Beitragssätze und Grenzen 2026: Wie viel Sie zahlen
+  heading-5: Minijobs ab 2026: Die neue Chance für bessere Renten
+  heading-6: Befreiung von der Versicherungspflicht: Wann es sinnvoll ist
+  heading-7: Freiwillig versichert: Für wen es passt
+  heading-8: Was die Rente leistet
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Pflichtversicherung Rente (pflichtversicherung-rente)
+## 0 Gesetzliche Rentenversicherung: Pflicht, Beitrag & Altersabsicherung erklärt
+
+Die meisten Erwerbstätigen sind automatisch rentenpflichtversichert. Wer 2026 einzahlen muss, wer nicht und was das für Ihre Altersvorsorge bedeutet.
+
+## 1 Pflichtversicherung Rente: Das Wichtigste für 2026
+
+Die Pflichtversicherung Rente in Deutschland sichert über 85 Prozent aller Erwerbstätigen gegen Altersarmut ab – automatisch, ohne dass Sie sich anmelden müssen. Der Beitragssatz bleibt 2026 stabil bei 18,6 Prozent, während die Beitragsbemessungsgrenze auf 8.450 Euro monatlich steigt (§ 163 SGB VI). Besonders Minijobber erhalten ab Juli 2026 eine einmalige Chance, ihre Versicherungspflicht rückgängig zu machen.
+
+## 2 Wer ist automatisch rentenversichert – und wer nicht?
+
+Alle gegen Entgelt beschäftigten Arbeitnehmer zahlen automatisch in die Pflichtversicherung Rente ein. Das gilt auch für Auszubildende, Kindererziehende während der ersten drei Lebensjahre und Pflegepersonen, die mindestens 10 Stunden wöchentlich arbeiten. Die Arbeitgeber zahlen ihren Anteil direkt mit – je 9,3 Prozent des Bruttolohns im Jahr 2026.
+
+Zur pflichtversicherten Gruppe gehören (§ 1 SGB VI):
+
+- Alle gegen Entgelt beschäftigten Arbeitnehmer
+
+- Auszubildende und Praktikanten
+
+- Kindererziehende während der ersten drei Lebensjahre
+
+- Pflegepersonen (mindestens 10 Stunden wöchentlich)
+
+- Bezieher von Arbeitslosengeld oder Krankengeld
+
+- Wehrdienstleistende und Zivildienstleistende
+
+[SPIEL gewusst: Über 85 Prozent aller Erwerbstätigen in Deutschland sind gesetzlich rentenversichert (Statistik der Deutschen Rentenversicherung, 2025). Der Beitragssatz bleibt 2026 stabil bei 18,6 Prozent (§ 158 SGB VI).]
+
+## 3 Welche Selbstständigen zahlen in die Rentenversicherung?
+
+Nicht alle Selbstständigen sind versicherungsfrei. Handwerker, Künstler, Hebammen und freiberufliche Lehrer unterliegen der Versicherungspflicht – und das ist oft ein Vorteil, da die Versicherung günstiger und breiter ist als private Altersvorsorgung.
+
+Handwerker: Sie benötigen eine Eintragung in die Handwerksrolle (§ 1 HwO). Danach erfolgt die automatische Meldung zur Rentenversicherung. Der monatliche Mindestbeitrag beträgt 2026 etwa 735,63 Euro.
+
+Künstler und Publizisten: Hier greift die Versicherungspflicht erst ab 3.900 Euro Jahreseinkommen (§ 2 KunstSozVG). Die Künstlersozialkasse zahlt jeweils die Hälfte des Beitrags – ein enormer Vorteil gegenüber anderen Selbstständigen. Bei einem Monatseinkommen von 600 Euro zahlen Sie selbst nur etwa 15 Euro, die Kasse 15 Euro.
+
+Hebammen, Lehrer und Pflegetätige: Diese Berufsgruppen zahlen in die Pflichtversicherung ein, solange sie selbstständig arbeiten und keine berufsständische Versorgung haben.
+
+| Berufsgruppe | Versicherungspflicht | Besonderheit 2026
+
+| Handwerker | Ja (mit Handwerksrolle) | 735,63 € Mindestbeitrag
+
+| Künstler/Publizisten | Ja (ab 3.900 € Jahreseinkommen) | Künstlersozialkasse zahlt 50 %
+
+| Hebammen | Ja | 735,63 € Mindestbeitrag
+
+| Freiberufliche Lehrer | Ja (ohne berufsständische Versorgung) | 735,63 € Mindestbeitrag
+
+## 4 Beitragssätze und Grenzen 2026: Wie viel Sie zahlen
+
+Der Rentenbeitrag bleibt stabil: Arbeitgeber und Arbeitnehmer zahlen je 9,3 Prozent (§ 158 SGB VI). Zusammen ergibt das 18,6 Prozent.
+
+Die Beitragsbemessungsgrenze beträgt 8.450 Euro monatlich (Stand Januar 2026, § 163 SGB VI). Wer mehr verdient, zahlt auf den Mehrbetrag keinen Rentenbeitrag – aber die spätere Rente wird nur bis zu dieser Grenze berechnet.
+
+Wichtigste Werte 2026:
+
+- Beitragssatz: 18,6 Prozent insgesamt
+
+- Beitragsbemessungsgrenze: 8.450 Euro monatlich (deutschlandweit einheitlich seit 2025)
+
+- Durchschnittsentgelt: 51.944 Euro jährlich
+
+- Bezugsgröße: 3.955 Euro monatlich
+
+Praktisches Beispiel: Wer 8.450 Euro verdient, zahlt monatlich 8.450 × 0,093 = 785,85 Euro selbst (plus 785,85 Euro vom Arbeitgeber).
+
+## 5 Minijobs ab 2026: Die neue Chance für bessere Renten
+
+Die Minijob-Grenze steigt von 556 Euro auf 603 Euro im Monat – gekoppelt an den neuen Mindestlohn von 13,90 Euro (§ 8 Abs. 1 SGB IV). Zwischen 603 und 2.000 Euro monatlich werden Beschäftigte als Midijobber behandelt mit reduzierten Beitragssätzen.
+
+Die große Neuerung startet am 1. Juli 2026 (§ 231 Abs. 3 SGB VI): Minijobber können ihre Befreiung von der Rentenversicherungspflicht einmalig rückgängig machen – und danach ist eine erneute Befreiung nicht mehr möglich. Das ist eine echte zweite Chance auf bessere Rentenansprüche.
+
+Bei einem befreiten Minijob zahlen Beschäftigte aktuell nur 3,6 Prozent selbst (bei Privathaushalt: 13,6 Prozent). Der Arbeitgeber zahlt pauschal 15 Prozent.
+
+Rentensteigerung durch Minijob: 603 Euro monatlich über ein Jahr bedeutet später etwa 5,68 Euro zusätzliche Rente monatlich. Nach zehn Jahren Minijob sind es rund 56,80 Euro pro Monat – ein Leben lang.
+
+[SPIEL quiz: Ab wann können Minijobber ihre Befreiungsentscheidung einmalig rückgängig machen?]
+
+## 6 Befreiung von der Versicherungspflicht: Wann es sinnvoll ist
+
+Bestimmte Berufe können sich von der Pflichtversicherung befreien lassen (§ 6 SGB VI). Das sind vor allem Kammerberufe wie Ärzte, Anwälte, Steuerberater und Architekten – sie haben oft eigene Versorgungswerke mit besseren Leistungen.
+
+Befreiungsberechtigt sind:
+
+- Mitglieder berufsständischer Versorgungseinrichtungen (Ärztekammer, Anwaltskammer etc.)
+
+- Handwerker mit mindestens 18 Jahren Pflichtbeiträgen
+
+- Geringfügig Beschäftigte (Minijobber) – ab Juli 2026 nur einmalig
+
+- Selbstständige ab 58 Jahren bei erstmaliger Versicherungspflicht
+
+- Existenzgründer in den ersten drei Jahren
+
+Wichtig: Vor der Befreiung sollten Sie sich beraten lassen. Die gesetzliche Rente bietet meist umfassendere Absicherung – Erwerbsminderungsschutz, Rehabilitation, Hinterbliebenenschutz – als private Alternativen. Auch eine betriebliche Altersversorgung kann eine sinnvolle Ergänzung sein, ersetzt aber nicht die Grundabsicherung der Pflichtversicherung.
+
+## 7 Freiwillig versichert: Für wen es passt
+
+Wer nicht pflichtversichert ist, kann freiwillig Rentenbeiträge zahlen (§ 7 SGB VI). Das geht für Nichtberufstätige, ausländische Residenten und Beamte (zusätzlich zur Pension).
+
+Die monatlichen Grenzen 2026:
+
+- Mindestbeitrag: 112,16 Euro
+
+- Höchstbeitrag: 1.571,70 Euro
+
+Bei Zahlung des Mindestbeitrags über ein Jahr steigt die Rente später um rund 5,68 Euro monatlich. Beim Höchstbeitrag sind es etwa 79,63 Euro.
+
+Deadline für rückwirkende Zahlungen: Bis 31. März können freiwillige Beiträge rückwirkend für das Vorjahr gezahlt werden – ein wichtiger Punkt für Steuerplanung.
+
+Freiwillig versichern können sich:
+
+- Nicht versicherungspflichtige Selbstständige
+
+- Hausfrauen und Hausmänner
+
+- Beamte (zusätzlich zur Pension)
+
+- Deutsche mit Auslandswohnsitz
+
+## 8 Was die Rente leistet
+
+Die Rente zahlt nicht nur Altersrenten. Sie finanziert auch Erwerbsminderungsrenten, Rehabilitations-Leistungen und Hinterbliebenenrenten – ein echtes Sicherungssystem, nicht nur Altersvorsorge.
+
+Das Leistungsspektrum (§ 33 ff. SGB VI):
+
+- Altersrenten und vorgezogene Varianten (ab 63, 65, 67)
+
+- Renten bei Erwerbsminderung
+
+- Witwen-, Witwer- und Waisenrenten
+
+- Medizinische und berufliche Rehabilitation
+
+- Erziehungsrenten für Kinder verstorbener Versicherter
+
+Die Finanzierung funktioniert nach dem Umlageverfahren: Heutige Beitragszahler finanzieren aktuelle Rentner. Der Bund unterstützt mit über 100 Milliarden Euro jährlich aus Steuermitteln (Bundeshaushalt 2025).
+
+## 9 Fazit
+
+Die Pflichtversicherung Rente bleibt 2026 Deutschlands Grundsäule der Alterssicherung. Mit stabilem Beitragssatz von 18,6 Prozent und einheitlicher Beitragsbemessungsgrenze von 8.450 Euro schützt sie über 85 Prozent der Erwerbstätigen. Die wichtigste Neuerung ist die ab 1. Juli 2026 mögliche einmalige Rücknahme von Befreiungsentscheidungen bei Minijobs – eine zweite Chance auf volle Rentenansprüche. Die gestiegene Minijobgrenze auf 603 Euro und flexible freiwillige Versicherung mit Beiträgen zwischen 112,16 und 1.571,70 Euro bieten zusätzliche Spielräume. Ob pflichtversichert oder freiwillig versichert: Die Rente bietet Schutz bei Erwerbsminderung und Rehabilitation, den private Anbieter oft nicht leisten.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste pflichtversicherung-rente]
+
+[BLOCK rechner rente]
+
+[BLOCK dokumente hinterbliebenenrente,gdv-haftpflichtversicherung,broschuere-basisrente,betriebliche-altersversorgung]
+
+
+## FAQ
+F: Wer ist in der gesetzlichen Rentenversicherung pflichtversichert?
+A: Grundsätzlich unterliegen alle gegen Entgelt beschäftigten Arbeitnehmer der Rentenversicherungspflicht. Auch bestimmte Selbstständige wie Handwerker, Künstler und Publizisten sowie Kindererziehende, Pflegepersonen und Auszubildende sind erfasst. Beamte, selbstständige Landwirte und viele Freiberufler sind hingegen über alternative Systeme abgesichert.
+F: Wie hoch ist der Rentenbeitragssatz 2026?
+A: Der Beitragssatz zur allgemeinen Rentenversicherung bleibt 2026 stabil bei 18,6 Prozent. Arbeitgeber und Arbeitnehmer tragen die Beiträge paritätisch, jeder zahlt 9,3 Prozent. Die Beitragsbemessungsgrenze steigt auf 8.450 Euro monatlich.
+F: Wie ist die neue Minijobgrenze 2026 geregelt?
+A: Zum 1. Januar 2026 steigt die Minijobgrenze von 556 auf 603 Euro monatlich. Ein Midijob beginnt ab 603,01 Euro und endet bei 2.000 Euro. Minijobber sind grundsätzlich rentenversicherungspflichtig und zahlen im gewerblichen Bereich 3,6 Prozent Eigenanteil.
+F: Können sich Minijobber von der Rentenversicherung befreien lassen?
+A: Ja, Minijobber können sich von der Rentenversicherungspflicht befreien lassen, verzichten damit aber auf vollwertige Leistungen. Ab 1. Juli 2026 können sie diese Befreiungsentscheidung erstmals rückgängig machen und wieder einzahlen. Die Rückgängigmachung gilt dann dauerhaft für die restliche Beschäftigungsdauer.
+
+
+==================== BEITRAG rentenarten ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rentenarten erklärt: Übersicht aller Rententypen &amp; Leistungen
+  heading-1: Rentenarten 2026: Altersrente, Erwerbsminderungsrente und Hinterbliebenenrenten
+  heading-2: Die wichtigsten Rentenarten im Überblick
+  heading-3: Wie funktioniert die Altersrente?
+  heading-4: Wann greift die Erwerbsminderungsrente?
+  heading-5: Wie funktionieren Hinterbliebenenrenten?
+  heading-6: Welche Rentenarten gibt es für Schwerbehinderte?
+  heading-7: Was kostet eine höhere Rente?
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Rentenarten (rentenarten)
+## 0 Rentenarten erklärt: Übersicht aller Rententypen & Leistungen
+
+Von Altersrente bis Hinterbliebenenrente kennt die Rentenversicherung viele Rentenarten. Welche es 2026 gibt, wer Anspruch hat und wie hoch sie ausfallen.
+
+## 1 Rentenarten 2026: Altersrente, Erwerbsminderungsrente und Hinterbliebenenrenten
+
+Die Rentenversicherung regelt verschiedene Lebenssituationen durch unterschiedliche Rentenarten. Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent, der aktuelle Rentenwert erhöht sich damit von 40,79 Euro auf 42,52 Euro. Diese Entwicklung stärkt die Kaufkraft der etwa 21 Millionen Rentnerinnen und Rentner in Deutschland. Die verschiedenen Rentenarten decken unterschiedliche Bedürfnisse ab: von der klassischen Altersrente über die Erwerbsminderungsrente bis zu den Hinterbliebenenrenten.
+
+## 2 Die wichtigsten Rentenarten im Überblick
+
+Das deutsche Rentensystem kennt mehrere Hauptkategorien von Renten. Die Altersrenten ermöglichen den Übergang in den Ruhestand - sei es mit der Regelaltersrente nach Vollendung der entsprechenden Altersgrenze oder mit vorzeitigen Renten für langjährig oder besonders langjährig Versicherte. Die Erwerbsminderungsrenten sichern Menschen ab, die aus gesundheitlichen Gründen nicht mehr vollständig arbeiten können. Hinterbliebenenrenten unterstützen Familien nach dem Tod des Versicherten, während Renten für schwerbehinderte Menschen spezielle Zugangsmöglichkeiten bieten.
+
+[SPIEL karte: Entgeltpunkt]
+
+Der aktuelle Rentenwert erhöht sich von 40,79 € auf 42,52 € pro Entgeltpunkt. Eine Standardrente (45 Beitragsjahre, Durchschnittsverdienst) steigt damit um 77,85 € auf monatlich 1.913,40 € brutto. Diese Standardrente gilt für jemanden, der 45 Jahre lang das deutsche Durchschnittsgehalt verdient hat.
+
+## 3 Wie funktioniert die Altersrente?
+
+Die Altersrente ist die häufigste Rentenart mit verschiedenen Zugangsoptionen. Wer mindestens 35 Versicherungsjahre in der gesetzlichen Rentenversicherung erreicht, kann mit 63 Jahren die Altersrente für langjährig Versicherte in Anspruch nehmen, jedoch nur mit Abschlägen. Der Abschlag beträgt 0,3 Prozent je Monat, den die Rente vorzeitig in Anspruch genommen wird. Da sich das reguläre Rentenalter bis 2031 schrittweise auf 67 Jahre erhöht, steigt auch der Abschlag bei frühestmöglicher Inanspruchnahme dieser Rente.
+
+Die Altersrente für besonders langjährig Versicherte erfordert 45 Versicherungsjahre und ermöglicht einen abschlagsfreien Renteneintritt zwei Jahre vor der Regelaltersgrenze. Die abschlagsfreie Altersrente für besonders langjährig Versicherte (Rente ab 63, nach 45 Jahren) können 1962 geborene Versicherte mit 64 Jahren und 8 Monaten erhalten. Diese Regelung belohnt besonders lange Versicherungszeiten.
+
+Die Regelaltersrente ist die Standard-Altersrente mit einer Wartezeit von fünf Jahren. Der aktuelle Jahrgang 1960 erreicht seine reguläre Altersgrenze mit 66 Jahren und 4 Monate. Sie wird ohne Abschläge gezahlt und bildet die Grundlage für alle anderen Rentenarten.
+
+[SPIEL quiz: Wie hoch ist der Abschlag pro Monat bei vorzeitiger Inanspruchnahme der Altersrente?]
+
+| Rentenart | Mindestalter 2026 | Wartezeit | Abschläge
+
+| Regelaltersrente | 66 Jahre 4 Monate | 5 Jahre | Keine
+
+| Besonders langjährig Versicherte | 64 Jahre 8 Monate (Jg. 1962) | 45 Jahre | Keine
+
+| Langjährig Versicherte | 63 Jahre | 35 Jahre | 0,3% pro Monat
+
+## 4 Wann greift die Erwerbsminderungsrente?
+
+Die Erwerbsminderungsrente schützt Menschen, die aus gesundheitlichen Gründen nicht mehr arbeiten können. Die Rente wegen voller Erwerbsminderung setzt voraus, dass eine Tätigkeit von unter drei Stunden täglich auf dem allgemeinen Arbeitsmarkt dauerhaft nicht möglich ist. Bei teilweiser Erwerbsminderung kann die Person noch drei bis sechs Stunden täglich arbeiten.
+
+Die Hinzuverdienstgrenzen wurden 2026 deutlich erhöht. Bei einer vollen Erwerbsminderung liegt die Hinzuverdienstgrenze bei maximal 20.763,75 Euro. Wer eine Rente wegen teilweiser Erwerbsminderung erhält, darf im Jahr 2026 bis zu 41.527,50 Euro verdienen. Bei Überschreitung dieser Grenzen wird 40 Prozent des übersteigenden Betrags von der Rente abgezogen. Detaillierte Informationen zum Hinzuverdienst in der Rente helfen bei der Planung des Einkommens.
+
+Die erhalten in der Regel Personen, die eine Erwerbsminderungsrente mit wenigstens 65 Jahren beziehen. Bis Ende 2023 lag die Grenze noch bei 64 Jahren und 10 Monaten, seitdem ist sie auf 65 Jahre gestiegen. Dieser Wert galt 2025 und gilt 2026 zunächst weiter. Wer früher eine Erwerbsminderungsrente beantragt, muss mit Abschlägen rechnen.
+
+[SPIEL gewusst: 2026 steigt die Zurechnungszeit bei Erwerbsminderungsrenten auf 66 Jahre und 3 Monate - diese Zeit wird so behandelt, als wären bis zu diesem Alter Beiträge gezahlt worden.]
+
+## 5 Wie funktionieren Hinterbliebenenrenten?
+
+Hinterbliebenenrenten umfassen Witwen-, Witwer- und Waisenrenten. Die große Witwenrente beträgt 55 Prozent der Rente des Verstorbenen, die kleine Witwenrente 25 Prozent. Der Freibetrag für Einkünfte zusätzlich zur Hinterbliebenenrente steigt zum 1. Juli 2026 auf 1.122,53 Euro auf monatlich. Zusatzfreibetrag pro Kind ab 1.7.2026: 238,11 Euro; gesamter Freibetrag für eine Witwe mit einem Kind: 1.122,53 + 238,11 = 1.360,64 Euro.
+
+Der Teil der anzurechnenden Nettoeinkünfte, der darüber liegt, wird zu 40% mit der Hinterbliebenenrente verrechnet. Diese Einkommensanrechnung erfolgt erst nach dem Sterbevierteljahr - den ersten drei Monaten nach dem Tod des Ehepartners.
+
+Die Altersgrenze für die große Witwenrente liegt 2026 bei 46 Jahren und 6 Monaten. Im Juli 2026 werden alle gesetzlichen Renten um 4,24% angehoben. Entsprechend steigt auch die Witwenrente bzw. Witwerrente. Aus brutto 1.000 Euro Hinterbliebenenrente werden so zum Beispiel ab Juli 2026 1.042,40 Euro.
+
+## 6 Welche Rentenarten gibt es für Schwerbehinderte?
+
+Die Altersrente für schwerbehinderte Menschen ermöglicht einen früheren Renteneintritt bei einem Grad der Behinderung von mindestens 50. Für die Altersrente für schwerbehinderte Menschen gilt die gleiche Altersgrenze wie für besonders langjährig Versicherte. Diese Rente kann bereits ab 62 Jahren mit Abschlägen oder ab der individuellen Altersgrenze abschlagsfrei bezogen werden.
+
+[SPIEL mythos: Schwerbehinderte Menschen können automatisch früher in Rente gehen. → nein]
+
+Die Wartezeit beträgt 35 Jahre. Zu den anrechenbaren Zeiten gehören neben Beitragszeiten auch Ersatzzeiten wie Arbeitslosigkeit oder Krankheit. Die Abschläge betragen auch hier 0,3 Prozent pro Monat des vorzeitigen Bezugs.
+
+## 7 Was kostet eine höhere Rente?
+
+Die Beitragsbemessungsgrenze steigt 2026 auf monatlich 8.450 Euro oder jährlich 101.400 Euro. Bis zu dieser Grenze werden Rentenversicherungsbeiträge erhoben. Die Kosten für Rentenpunkte hängen vom aktuellen Rentenwert ab: 2026 kostet ein Rentenpunkt 9.661,58 Euro. Wer zusätzliche Rentenpunkte kaufen möchte, muss mindestens 50 Jahre alt sein.
+
+Der Beitragssatz zur Rentenversicherung beträgt 2026 weiterhin 18,6 Prozent. Der Beitragssatz zur allgemeinen Rentenversicherung bleibt auch 2026 stabil bei 18,6 Prozent. Arbeitgeber und Arbeitnehmer zahlen je die Hälfte. Diese Stabilität hilft bei der Finanzplanung sowohl für Arbeitgeber als auch Arbeitnehmer.
+
+- Volle Erwerbsminderungsrente: Hinzuverdienst bis 20.763,75 Euro jährlich
+
+- Teilweise Erwerbsminderungsrente: Hinzuverdienst bis 41.527,50 Euro jährlich
+
+- Witwenrente-Freibetrag: 1.122,53 Euro monatlich plus 238,11 Euro pro Kind
+
+- Beitragsbemessungsgrenze: 8.450 Euro monatlich (101.400 Euro jährlich)
+
+- Standardrente 2026: 1.913,40 Euro brutto bei 45 Beitragsjahren
+
+- Rentenpunkt-Wert: 42,52 Euro ab Juli 2026
+
+## 8 Fazit
+
+Das deutsche Rentensystem bietet 2026 umfassenden Schutz für verschiedene Lebenssituationen. Zum 1. Juli 2026 steigen die Renten um 4,24 Prozent, was die Kaufkraft der Rentner stärkt. Die Altersrenten ermöglichen flexible Übergänge in den Ruhestand mit unterschiedlichen Altersgrenzen und Abschlagsmöglichkeiten. Bei einer vollen Erwerbsminderung liegt die Hinzuverdienstgrenze bei maximal 20.763,75 Euro. Wer eine Rente wegen teilweiser Erwerbsminderung erhält, darf im Jahr 2026 bis zu 41.527,50 Euro verdienen. Hinterbliebenenrenten schützen Familien mit einem erhöhten Freibetrag von 1.122,53 Euro monatlich. Die Beitragsbemessungsgrenze steigt 2026 auf monatlich 8.450 Euro oder jährlich 101.400 Euro, was die Finanzierungsbasis der Rentenversicherung stärkt. Dennoch zeigen die Durchschnittswerte, dass private Vorsorge wichtig bleibt, um Versorgungslücken zu schließen und den gewohnten Lebensstandard im Alter zu sichern.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste rentenarten]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenlueckenrechner]
+
+[BLOCK dokumente das-renten-abc]
+
+
+## FAQ
+F: Welche Rentenarten gibt es in Deutschland?
+A: Das deutsche Rentensystem kennt mehrere Rentenarten: Regelaltersrente, Altersrente für langjährig und besonders langjährig Versicherte, Erwerbsminderungsrente sowie Hinterbliebenenrente. Jede Rentenart hat eigene Zugangsvoraussetzungen wie Mindestalter und Wartezeit. 2026 werden alle Rentenarten zum 1. Juli um 4,24 Prozent erhöht.
+F: Wann kann man ohne Abschläge in Rente gehen?
+A: Die Altersrente für besonders langjährig Versicherte setzt 45 Versicherungsjahre voraus und ermöglicht den abschlagsfreien Renteneintritt zwei Jahre vor der Regelaltersgrenze. Für den Jahrgang 1961 liegt dieses Alter bei 64 Jahren und sechs Monaten. Die Regelaltersrente wird ebenfalls ohne Abschläge ausgezahlt.
+F: Wie hoch sind die Abschläge bei vorzeitiger Rente?
+A: Bei vorzeitigem Rentenbezug wird die Rente lebenslang um 0,3 Prozent pro vorbezogenem Monat gekürzt. Wer drei Jahre früher in Rente geht, erhält dauerhaft etwa 10,8 Prozent weniger. Die Altersrente für langjährig Versicherte ist frühestens ab 63 Jahren möglich.
+F: Was ist die Erwerbsminderungsrente?
+A: Die Erwerbsminderungsrente sichert Personen ab, die aus gesundheitlichen Gründen nicht voll arbeiten können. Die volle Erwerbsminderungsrente gibt es bei weniger als drei Stunden täglicher Arbeitsfähigkeit, die teilweise Rente bei drei bis sechs Stunden. 2026 steigen die Hinzuverdienstgrenzen auf 20.763,75 Euro (volle) bzw. 41.527,50 Euro (teilweise) jährlich.
+
+
+==================== BEITRAG grundsicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Anspruch, Antrag und Leistungen im Überblick
+  heading-1: Grundsicherung 2026: Anspruch, Höhe und Antrag
+  heading-2: Bürgergeld zur Grundsicherung – Die wichtigsten Unterschiede
+  heading-3: Regelsätze und Leistungshöhe 2026
+  heading-4: Vermögensfreigrenzen und altersabhängiges Schonvermögen
+  heading-5: Wohnkostenübernahme und das 1,5-Fache-Deckel-System
+  heading-6: Sanktionen in der neuen Grundsicherung – Kürzungen und Folgen
+  heading-7: Grundsicherung im Alter – Separate Regelungen bleiben bestehen
+  heading-8: Antragstellung und Übergangsregelungen
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Grundsicherung (grundsicherung)
+## 0 Anspruch, Antrag und Leistungen im Überblick
+
+Die Grundsicherung sichert den Lebensunterhalt für Menschen ohne ausreichende Mittel. Wer 2026 Anspruch hat, wie hoch sie ist und was die Reform ändert.
+
+## 1 Grundsicherung 2026: Anspruch, Höhe und Antrag
+
+Grundsicherung regelt das soziale Auffangnetz für Menschen, die ihren Lebensunterhalt nicht aus eigenen Mitteln bestreiten können.
+
+Ab dem 1. Juli 2026 wird das Bürgergeld zur neuen Grundsicherung umgestellt. Diese Reform bringt tiefgreifende Veränderungen für Millionen von Deutschen mit sich. Für rund 5,5 Millionen Menschen stellt sich damit die Frage, ob sie künftig weiter anspruchsberechtigt sind – und ob sich an der Höhe des Geldes etwas ändert. Die neuen Regelungen verschärfen dabei das System erheblich: Die Grundsicherung für Arbeitsuchende wird ab Juli 2026 stärker auf Vermittlung, Mitwirkung, Kontrolle und Sanktionen ausgerichtet.
+
+Die Grundsicherung unterteilt sich in zwei Hauptbereiche: Am Grundprinzip ändert sich nichts: Es bleibt eine steuerfinanzierte Leistung für erwerbsfähige Hilfebedürftige nach dem Zweiten Buch Sozialgesetzbuch (SGB II). Zusätzlich gibt es die Grundsicherung im Alter und bei Erwerbsminderung nach dem SGB XII für Rentner und dauerhaft erwerbsgeminderte Menschen.
+
+## 2 Bürgergeld zur Grundsicherung – Die wichtigsten Unterschiede
+
+[SPIEL quiz: Ab welchem Datum wird das Bürgergeld offiziell zur neuen Grundsicherung?]
+
+Die Geldleistung „Bürgergeld" soll in „Grundsicherungsgeld" umbenannt werden. Die Reform bringt jedoch weit mehr als nur eine Namensänderung. Die Reform verschiebt den Schwerpunkt damit sichtbar zurück zu Vermittlung, Mitwirkung und Kontrolle. Grundsätzlich soll wieder der Vermittlungsvorrang gelten. Demnach wird zunächst geprüft, ob eine umgehende Vermittlung in Arbeit möglich ist. Ist dies nicht der Fall, kommen Qualifizierungs- und Weiterbildungsmaßnahmen in Betracht. Das gilt insbesondere für unter 30-Jährige.
+
+Mit Vermittlungsvorrang, strengeren Mitwirkungspflichten, härteren Sanktionen und neuen Vermögensregeln wird der Druck steigen, schnell wieder aus dem Leistungsbezug herauszukommen. Der Übergang erfolgt gestaffelt: Bereits ab dem 23. April 2026 gelten einzelne Sanktionsverschärfungen, insbesondere bei Meldeversäumnissen und Pflichtverletzungen. Der eigentliche Systemwechsel zum Grundsicherungsgeld erfolgt dann zum 1. Juli 2026, wenn die Umbenennung sowie die neuen Vermittlungsregeln in Kraft treten.
+
+[SPIEL schaetzen: Wie viele Menschen sind von der Umstellung des Bürgergelds zur neuen Grundsicherung betroffen? → 5.5]
+
+## 3 Regelsätze und Leistungshöhe 2026
+
+Die Regelsätze bleiben trotz Reform unverändert. 2026 bleiben die Regelsätze bei Bürgergeld und Sozialhilfe unverändert. Alleinstehende etwa erhalten weiterhin 563 Euro im Monat. Diese Stabilität basiert auf einer gesetzlichen Besitzschutzregelung: Dass die Regelsätze nicht sinken können, liegt an der sogenannten Besitzschutzregelung nach §28a Absatz 5 SGB XII. Das heißt: Der einmal gewährte Betrag muss in den Folgejahren mindestens beibehalten werden.
+
+| Personengruppe | Regelsatz 2026
+
+| Alleinstehende/Alleinerziehende | 563 Euro
+
+| Partner in Bedarfsgemeinschaft | 506 Euro je Person
+
+| Jugendliche 14–17 Jahre | 471 Euro
+
+| Kinder 6–13 Jahre | 390 Euro
+
+| Kinder 0–5 Jahre | 357 Euro
+
+Hinzu kommen jeweils die anerkannten Kosten der Unterkunft und Heizung (Miete, Heizkosten) sowie ggf. Mehrbedarfe, etwa: Mehrbedarf für Alleinerziehende. Mehrbedarf bei kostenaufwändiger Ernährung (z.B. bestimmte Krankheiten). Mehrbedarf für werdende Mütter ab der 13. Schwangerschaftswoche.
+
+Die Nullrunde hat praktische Auswirkungen: Die Berechnung der Regelsätze erfolgt über einen Mischindex aus Preis- und Lohnentwicklung. Für das Jahr 2026 hätte sich daraus ein Wert von rund 557 Euro für Alleinstehende ergeben – also weniger als die bisherigen 563 Euro. Eine Absenkung ist jedoch gesetzlich ausgeschlossen. Real bedeutet dies jedoch einen Kaufkraftverlust, da die Lebenshaltungskosten weiter steigen.
+
+## 4 Vermögensfreigrenzen und altersabhängiges Schonvermögen
+
+[SPIEL karte: Schonvermögen]
+
+Die Reform bringt drastische Verschärfungen beim Vermögen. Die bisherige Vermögens-Karenzzeit, in der im ersten Jahr bis zu 40.000 Euro unangetastet bleiben konnten, entfällt komplett; stattdessen gelten altersabhängige Freibeträge zwischen 5.000 und maximal 20.000 Euro. Vermögen wird damit wieder vom ersten Tag der Antragstellung an geprüft, wie Regierung und Bundesministerium für Arbeit und Soziales betonen.
+
+Die neuen Vermögensgrenzen richten sich streng nach dem Alter:
+
+- Unter 20 Jahre: 5.000 Euro
+
+- 21-40 Jahre: 10.000 Euro
+
+- 41-50 Jahre: 12.500 Euro
+
+- Ab 51 Jahre: 15.000 Euro (in einigen Quellen 20.000 Euro)
+
+Rücklagen oberhalb der neuen Freibeträge müssen grundsätzlich zur Sicherung des Lebensunterhalts eingesetzt werden, bevor Ansprüche auf Grundsicherungsgeld bestehen. Diskutiert und in Teilen vorbereitet ist ein altersabhängiges Schonvermögen, das mit zunehmendem Alter ansteigt; endgültig entschieden ist diese Ausgestaltung allerdings noch nicht. Klar ist aber: Der bisherige „Alles-ist-geschützt"-Schirm im ersten Jahr entfällt, was vor allem Menschen mit kleineren Sparguthaben oder Notfallrücklagen trifft.
+
+Ein Beispiel verdeutlicht die Verschärfung: Ein 35-jähriger Alleinstehender verliert seinen Job und beantragt ab August 2026 Grundsicherung. Er hat 8.000 Euro auf einem Tagesgeldkonto und 7.000 Euro in einem ungeförderten ETF-Depot. Sein altersabhängiger Freibetrag liegt bei 10.000 Euro. Die ersten 10.000 Euro gelten als Schonvermögen, 5.000 Euro liegen darüber. Diese 5.000 Euro muss er – unter Berücksichtigung etwaiger weiterer Besonderheiten – nach und nach für seinen Lebensunterhalt einsetzen. Erst wenn sein Vermögen auf oder unter 10.000 Euro abgesunken ist, erhält er ungekürzte Grundsicherung nach SGB II.
+
+## 5 Wohnkostenübernahme und das 1,5-Fache-Deckel-System
+
+Auch bei den Wohnkosten verschärft sich das System erheblich. Auch bei den Kosten der Unterkunft (KdU) ändert sich der Schutzmechanismus spürbar. Bisher galt: In den ersten 12 Monaten wurden die tatsächlichen Mietkosten grundsätzlich vollständig übernommen, ohne sofortige Angemessenheitsprüfung („Karenzzeit Wohnen"). Ab Juli 2026 bleibt die Karenzzeit zwar formal erhalten, wird aber gedeckelt: In der Karenzzeit werden Unterkunftskosten nur noch bis zur 1,5‑fachen Grenze der örtlich als angemessen geltenden Miete übernommen.
+
+Auch bei den Wohnkosten gelten künftig strengere Regeln. Die neue Regel sieht vor, dass die Jobcenter höchstens das 1,5-Fache der örtlichen Mietobergrenze übernehmen. Dies kann besonders in teuren Wohnlagen problematisch werden, wo bereits moderate Mietkosten über dem 1,5-fachen der lokalen Angemessenheitsgrenze liegen. Für Mieter mit kleinerem Einkommen bietet auch das Wohngeld eine zusätzliche Unterstützungsmöglichkeit.
+
+[SPIEL mythos: Die Karenzzeit für Wohnkosten bleibt in der neuen Grundsicherung komplett unverändert bestehen. → nein]
+
+## 6 Sanktionen in der neuen Grundsicherung – Kürzungen und Folgen
+
+Das neue Sanktionssystem wird deutlich härter als beim Bürgergeld. Mit der neuen Grundsicherung verschärft die Bundesregierung das Sanktionssystem. Pflichtverletzungen (z.B. keine Bewerbungen, Abbruch von Maßnahmen) können zu einer Minderung des Regelbedarfs um 30 Prozent für jeweils drei Monate führen. Das erste Versäumnis bleibt folgenlos. Ab dem zweiten Termin ist eine 30‑Prozent‑Kürzung für einen Monat möglich. Bei drei versäumten Terminen in Folge droht ein gestuftes Verfahren bis hin zum vollständigen Wegfall der Leistung, einschließlich der Kosten der Unterkunft.
+
+Die extremste Sanktion ist die "Nichterreichbarkeit": Noch härter wird es, wenn drei Meldetermine nacheinander ohne wichtigen Grund versäumt werden. Dann gelten erwerbsfähige Leistungsbezieher künftig als nicht erreichbar. Der Leistungsanspruch entfällt mit Beginn des Kalendermonats, der auf die Feststellung des dritten versäumten Meldetermins folgt.
+
+Für Alleinstehende kann dies existenzbedrohend werden: Für Alleinstehende bedeutet das im Jahr 2026 rund 169 Euro weniger im Monat bei einer 30-prozentigen Kürzung des Regelsatzes von 563 Euro.
+
+## 7 Grundsicherung im Alter – Separate Regelungen bleiben bestehen
+
+Die Grundsicherung im Alter nach SGB XII bleibt von den meisten Verschärfungen verschont. Rentnerinnen und Rentner mit Grundsicherung im Alter sind von der altersabhängigen Staffelung des Schonvermögens der neuen Grundsicherung ausdrücklich nicht betroffen. Damit entstehen zwei deutlich unterschiedliche Schutzsysteme – eines für erwerbsfähige Menschen im SGB II und eines für Ältere oder dauerhaft Erwerbsgeminderte im SGB XII.
+
+Für Rentnerinnen und Rentner mit Grundsicherung im Alter ändert sich 2026 nur wenig. Die Reform zur neuen Grundsicherung betrifft hauptsächlich erwerbsfähige Arbeitsuchende und nicht die Grundsicherung im Alter. Die monatlichen Beträge bleiben gleich, auch neue Sanktionen oder Mitwirkungspflichten kommen für Rentner:innen nicht hinzu. Ebenso bleibt das Schonvermögen für Rentner:innen weiterhin geschützt (bis 10.000 Euro für Alleinstehende, 20.000 Euro für Paare).
+
+Ein wichtiger Vorteil bleibt der Grundrenten-Freibetrag: Die Berechnung folgt einer festen Logik: Zunächst bleiben 100 Euro aus der gesetzlichen Rente anrechnungsfrei. Liegt die Rente darüber, bleiben zusätzlich 30 Prozent des übersteigenden Betrags anrechnungsfrei. Diese Begünstigung endet allerdings nicht nach oben offen, sondern ist gedeckelt. Der Deckel liegt bei 50 Prozent der Regelbedarfsstufe 1. Auch hier greift als Obergrenze die Hälfte der Regelbedarfsstufe 1, also 281,50 Euro pro Monat im Jahr 2026.
+
+## 8 Antragstellung und Übergangsregelungen
+
+Die Zuständigkeiten bleiben unverändert: Auch die Zuständigkeit der Jobcenter und der grundsätzliche Anspruchsrahmen (Erwerbsfähigkeit, Hilfebedürftigkeit, gewöhnlicher Aufenthalt in Deutschland) bleiben bestehen. Arbeitsuchende wenden sich weiterhin an die Jobcenter, während Rentner und Erwerbsgeminderte beim Sozialamt Grundsicherung beantragen.
+
+Bestandsleistungsbezieher können aufatmen: Die wichtigste Botschaft für alle, die zum 1. Juli 2026 bereits Bürgergeld beziehen: Sie müssen keinen neuen Antrag stellen. Laufende Bewilligungszeiträume nach § 41 SGB II bleiben grundsätzlich bestehen, lediglich die Bezeichnung der Leistung ändert sich automatisch von „Bürgergeld" in „Grundsicherungsgeld". Das Bundesministerium für Arbeit und Soziales hat klargestellt, dass bestehende Ansprüche nicht durch die Gesetzesänderung berührt werden, solange die Voraussetzungen – Hilfebedürftigkeit, Erwerbsfähigkeit und Leben in einer Bedarfsgemeinschaft – unverändert vorliegen.
+
+Wichtig ist das richtige Timing bei neuen Anträgen. Das Grundsicherungsgeld wird rückwirkend ab dem Antragsmonat ausgezahlt. Benötigte Unterlagen umfassen:
+
+- Nachweise über Identität und Wohnsitz
+
+- Miet- und Nebenkostenabrechnungen
+
+- Einkommensnachweise der letzten drei Monate
+
+- Kontoauszüge und Vermögensnachweise
+
+- Bei Bedarf: Schwangerschaftsnachweis, Schwerbehindertenausweis, Unterhaltsnachweise
+
+## 9 Fazit
+
+Die neue Grundsicherung markiert einen grundlegenden Paradigmenwechsel im deutschen Sozialleistungssystem. Während die Regelsätze bei 563 Euro für Alleinstehende stabil bleiben, verschärfen sich die Bedingungen dramatisch. Die bisherige Vermögens-Karenzzeit, in der im ersten Jahr bis zu 40.000 Euro unangetastet bleiben konnten, entfällt komplett; stattdessen gelten altersabhängige Freibeträge zwischen 5.000 und maximal 20.000 Euro. Die Deckelung der Wohnkosten auf das 1,5-Fache der örtlichen Angemessenheitsgrenze und verschärfte Sanktionen bis hin zur kompletten Leistungseinstellung bei Nichterreichbarkeit erhöhen den Druck erheblich. Gleichzeitig bleibt die Grundsicherung im Alter von den meisten Verschärfungen verschont und bietet weiterhin Schutz mit Vermögensfreibeträgen von 10.000 Euro für Alleinstehende. Für Betroffene wird eine frühzeitige Vorbereitung auf die neuen Regelungen sowie professionelle Beratung bei Sozialverbänden oder Rechtsanwälten noch wichtiger, um alle Ansprüche vollständig zu nutzen und Sanktionen zu vermeiden.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste grundsicherung]
+
+[BLOCK rechner grundsicherung]
+
+[BLOCK dokumente grundsicherung-fuer-rentner]
+
+
+## FAQ
+F: Wer hat Anspruch auf Grundsicherung?
+A: Anspruch auf Grundsicherung haben Personen, die ihren Lebensunterhalt nicht aus eigenen Mitteln bestreiten können. Die Grundsicherung für Arbeitsuchende (SGB II) gilt für Erwerbsfähige zwischen 15 Jahren und Regelaltersgrenze. Die Grundsicherung im Alter (SGB XII) richtet sich an Rentner und dauerhaft voll Erwerbsgeminderte.
+F: Wie hoch ist der Regelsatz der Grundsicherung 2026?
+A: Die Regelsätze bleiben 2026 unverändert. Alleinstehende und Alleinerziehende erhalten 563 Euro monatlich, Partner in Bedarfsgemeinschaft 506 Euro je Person. Jugendliche zwischen 14 und 17 Jahren bekommen 471 Euro, Kinder 6 bis 13 Jahre 390 Euro und Kinder bis 5 Jahre 357 Euro.
+F: Welche Leistungen umfasst die Grundsicherung?
+A: Die Grundsicherung deckt Geldleistungen für Ernährung, Kleidung, Körperpflege, Hausrat und Haushaltsenergie ab. Zusätzlich werden angemessene Kosten für Unterkunft und Heizung übernommen. Schwangere, Alleinerziehende und Menschen mit Behinderungen können Mehrbedarfe erhalten.
+F: Was ändert sich bei der Grundsicherung ab Juli 2026?
+A: Ab dem 1. Juli 2026 wird die Grundsicherung für Arbeitsuchende vom Bürgergeld in die neue Grundsicherung umgestellt. Die Leistungen werden dann nach neuen Regelungen gewährt. Die Grundsicherung im Alter und bei Erwerbsminderung nach SGB XII bleibt davon unberührt.
+
+
+==================== BEITRAG sozialversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Alle Leistungen der Sozialversicherung erklärt und optimiert
+  heading-1: Sozialversicherung in Deutschland: Die 5 Säulen der sozialen Sicherung
+  heading-2: Was ist Sozialversicherung und wie funktioniert das Solidaritätsprinzip?
+  heading-3: Die fünf Säulen der Sozialversicherung: Welche Risiken deckt jeder Zweig ab?
+  heading-4: Beitragssätze 2026: Wer zahlt wie viel?
+  heading-5: Von Bismarck bis heute: Die historische Entwicklung der Sozialversicherung
+  heading-6: Wie wird die Sozialversicherung finanziert?
+  heading-7: Beitragsbemessungsgrenzen und Versicherungspflicht: Wer zahlt wieviel?
+  heading-8: Demografischer Wandel: Kann das System bestehen?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Sozialversicherung (sozialversicherung)
+## 0 Alle Leistungen der Sozialversicherung erklärt und optimiert
+
+Die Sozialversicherung schützt mit fünf gesetzlichen Zweigen vor zentralen Lebensrisiken. Welche Leistungen sie 2026 bietet und wie sich die Beiträge verteilen.
+
+## 1 Sozialversicherung in Deutschland: Die 5 Säulen der sozialen Sicherung
+
+Die Sozialversicherung in Deutschland schützt über 85 Millionen Menschen durch fünf gesetzliche Zweige, die 2026 insgesamt 8,8 Milliarden Euro an Beiträgen einnehmen (Bundesministerium für Arbeit und Soziales).
+
+Das deutsche Sozialversicherungssystem bildet seit dem 1. Januar 2026 ein stabiles Fundament mit erweiterten Grenzen und gestiegenen Beitragssätzen. Die Geringfügigkeitsgrenze steigt auf 603 Euro monatlich, während die allgemeine Beitragsbemessungsgrenze in der Rentenversicherung auf 8.450 Euro anwächst.
+
+## 2 Was ist Sozialversicherung und wie funktioniert das Solidaritätsprinzip?
+
+Die Sozialversicherung ist ein System der sozialen Sicherung, das Versicherte gegen große Lebensrisiken absichert. Sie basiert auf dem Versicherungsprinzip mit gegenseitiger Risikoabsicherung einer Solidargemeinschaft und wird durch Beiträge der Versicherten und ihrer Arbeitgeber finanziert (§ SGB IV).
+
+Das Solidaritätsprinzip beschreibt die gegenseitige Hilfe als Grundlage der Sozialversicherung. Dies bedeutet: Jedes Mitglied zahlt je nach individueller Einkommenshöhe unterschiedliche Beiträge. Die Leistungen aber werden ohne Rücksicht auf die Beitragshöhe für alle Mitglieder erbracht. Die Gesunden zahlen für die Kranken, die Jungen für die Alten.
+
+[SPIEL karte: Solidaritätsprinzip]
+
+## 3 Die fünf Säulen der Sozialversicherung: Welche Risiken deckt jeder Zweig ab?
+
+In Deutschland gibt es fünf Sozialversicherungen, auch Zweige genannt:
+
+### Krankenversicherung
+
+Die gesetzliche Krankenversicherung sichert die medizinische Versorgung ab. Der allgemeine Beitragssatz beträgt 14,6 Prozent, der ermäßigte Satz 14,0 Prozent (Kassenart-abhängig). Der durchschnittliche Zusatzbeitragssatz steigt 2026 auf 2,9 Prozent. Die Beitragsbemessungsgrenze liegt bei 5.812,50 Euro monatlich (Stand: Januar 2026).
+
+### Pflegeversicherung
+
+Die Pflegeversicherung unterstützt bei Pflegebedürftigkeit. Der Beitragssatz beträgt 3,6 Prozent für alle Versicherten. Kinderlose über 23 Jahren zahlen einen Zuschlag von 0,6 Prozent, also insgesamt 4,2 Prozent. Ab zwei Kindern unter 25 Jahren wird der Beitragssatz je Kind um 0,25 Punkte abgesenkt.
+
+### Rentenversicherung
+
+Die Rentenversicherung sorgt für finanzielle Absicherung im Alter und bei Erwerbsminderung. Der Beitragssatz beträgt 18,6 Prozent. Die allgemeine Beitragsbemessungsgrenze beträgt 8.450 Euro monatlich, in der knappschaftlichen Rentenversicherung 10.400 Euro monatlich (Stand 2026).
+
+### Arbeitslosenversicherung
+
+Die Arbeitslosenversicherung bietet finanziellen Schutz bei Arbeitslosigkeit und unterstützt bei der Aufnahme einer neuen Arbeit. Der Beitragssatz bleibt 2,6 Prozent. Sie wird von der Bundesagentur für Arbeit verwaltet.
+
+### Unfallversicherung
+
+Die Unfallversicherung deckt die Folgen von Arbeitsunfällen und Berufskrankheiten ab. Die Beiträge trägt zu 100 Prozent der Arbeitgeber (Ausnahmeregelung im deutschen Sozialversicherungssystem). Die Beitragshöhe variiert nach Branche und Risikoklasse.
+
+## 4 Beitragssätze 2026: Wer zahlt wie viel?
+
+Die allgemeinen Beitragssätze bleiben weitgehend stabil. Arbeitnehmer und Arbeitgeber tragen jeweils 50 Prozent der Sozialversicherungsbeiträge – mit einer zentralen Ausnahme: die Unfallversicherung.
+
+| Versicherungszweig | Beitragssatz | Arbeitnehmer | Arbeitgeber
+
+| Krankenversicherung | 14,6% | 7,3% | 7,3%
+
+| Zusatzbeitrag | 2,9% | 1,45% | 1,45%
+
+| Pflegeversicherung | 3,6%/4,2% | 1,8%/2,1% | 1,8%
+
+| Rentenversicherung | 18,6% | 9,3% | 9,3%
+
+| Arbeitslosenversicherung | 2,6% | 1,3% | 1,3%
+
+Die Unfallversicherung wird vollständig vom Arbeitgeber finanziert – ohne Arbeitnehmerbeitrag (Stand 2026, Bundesverband der Unfallkassen).
+
+[SPIEL quiz: Welche Versicherung wird zu 100 Prozent vom Arbeitgeber finanziert?]
+
+## 5 Von Bismarck bis heute: Die historische Entwicklung der Sozialversicherung
+
+Die Geschichte der gesetzlichen Sozialversicherung beginnt im 19. Jahrhundert. Unter Reichskanzler Otto von Bismarck wurden ab 1883 die ersten Sozialgesetze eingeführt, um der sozialen Not der Arbeiterschaft in der Industrialisierung entgegenzuwirken.
+
+Die chronologische Entwicklung der fünf Säulen:
+
+- Krankenversicherung (seit 1883): Deckt medizinische Versorgung ab, finanziert zu gleichen Teilen von Arbeitgebern und Arbeitnehmern.
+
+- Unfallversicherung (seit 1884): Schützt vor Folgen von Arbeitsunfällen, vollständig arbeitgeberfinanziert.
+
+- Rentenversicherung (seit 1889): Sichert Einkommen im Alter, paritätisch von Arbeitgebern und Arbeitnehmern getragen.
+
+- Arbeitslosenversicherung (seit 1927): Bietet finanzielle Unterstützung bei Arbeitslosigkeit, zu gleichen Teilen finanziert.
+
+- Pflegeversicherung (seit 1995): Die jüngste Säule; sichert Pflegeleistungen ab.
+
+Mit der Rentenreform von 1957 wurde das Umlageverfahren eingeführt. Seitdem finanziert die erwerbstätige Generation die Renten der älteren Generation und erwirbt gleichzeitig Anspruch auf eigene zukünftige Renten (Generationenvertrag).
+
+## 6 Wie wird die Sozialversicherung finanziert?
+
+Das System basiert auf drei Finanzierungssäulen:
+
+### Umlageverfahren: Der Generationenvertrag unter Druck
+
+Die jeweils erwerbstätige Generation finanziert mit ihren Beiträgen direkt die Renten der Ruheständler. Dieses System funktioniert nur bei ausgewogenem Verhältnis zwischen Beitragszahlern und Rentnern.
+
+Das Verhältnis hat sich dramatisch verschlechtert:
+
+- 1962 (Westdeutschland): 6 Beitragszahler pro Rentner
+
+- 1973: 4 Beitragszahler pro Rentner
+
+- 1988: 3 Beitragszahler pro Rentner
+
+- 2026: Weniger als 2 Beitragszahler pro Rentner (Statistisches Bundesamt, Rentenversicherungsbericht 2025)
+
+[SPIEL gewusst: 2026 finanzieren weniger als zwei Beitragszahler bereits die Rente eines Altersrentners – eine Entwicklung, die den Generationenvertrag vor fundamentale Herausforderungen stellt.]
+
+### Paritätische Finanzierung
+
+Arbeitnehmer und Arbeitgeber zahlen gemeinsam Beiträge in die Sozialversicherung, berechnet nach dem Bruttogehalt. Diese Gleichverteilung sichert breite gesellschaftliche Beteiligung.
+
+### Staatszuschüsse
+
+Bei finanziellen Engpässen greifen Bundesmittel. Sollten bestimmte Belastungswerte drohen, werden Mittel aus dem Bundeshaushalt zugeschossen (Bundeshaushaltsgesetz).
+
+## 7 Beitragsbemessungsgrenzen und Versicherungspflicht: Wer zahlt wieviel?
+
+Die Beitragsbemessungsgrenzen legen fest, bis zu welchem Bruttoeinkommen Sozialversicherungsbeiträge erhoben werden. Verdienst darüber bleibt beitragsfrei.
+
+Für 2026 gelten diese Grenzen:
+
+| Versicherungsbereich | Monatlich | Jährlich
+
+| Kranken-/Pflegeversicherung | 5.812,50 € | 69.750 €
+
+| Renten-/Arbeitslosenversicherung | 8.450 € | 101.400 €
+
+| Knappschaftliche Rentenversicherung | 10.400 € | 124.800 €
+
+Die Versicherungspflichtgrenze für die gesetzliche Krankenversicherung steigt 2026 auf 77.400 Euro jährlich (6.450 Euro monatlich). Arbeitnehmer bis zu dieser Grenze sind pflichtversichert. Wer darüber liegt, kann zwischen gesetzlicher und privater Krankenversicherung wählen.
+
+### Minijobs und Midi-Jobs 2026
+
+Bei einem Mindestlohn von 13,90 Euro ergibt sich eine Geringfügigkeitsgrenze von 603 Euro monatlich. Geringverdiener mit Minijobs zahlen bis 603 Euro keine Sozialversicherungsbeiträge. Zwischen 603,01 und 2.000 Euro monatlich liegt der Übergangsbereich (Midi-Job): Der Arbeitgeber zahlt volle Sozialbeiträge, der Arbeitnehmer reduzierte Anteile.
+
+Für Selbstständige in der freiwilligen Krankenversicherung gilt ein Mindestbeitrag, berechnet aus der Bezugsgröße. Im Jahr 2026 beträgt das fiktive Einkommen 1.316,67 Euro monatlich.
+
+## 8 Demografischer Wandel: Kann das System bestehen?
+
+Der Generationenvertrag steht unter Druck. Die Zahl der Erwerbstätigen sinkt, die der Rentner steigt. Ursachen: geringe Geburtenhäufigkeit (unter zwei Kindern pro Frau) und längere Lebensdauer.
+
+Immer weniger junge Menschen müssen immer mehr ältere Menschen versorgen. Konsequenz: Entweder Beitragssätze erhöhen, Renten kürzen oder das Renteneintrittsalter anheben.
+
+Reformmaßnahmen zur Bewältigung:
+
+- Erhöhung des Renteneintrittsalters auf 67 Jahre
+
+- Förderung privater Altersvorsorge (Riester-Rente, Betriebsrente)
+
+- Flexibilisierung von Arbeitszeiten für ältere Arbeitnehmer
+
+- Stärkung der Erwerbsquote von Frauen
+
+- Integration von Migranten in den Arbeitsmarkt
+
+## 9 Fazit
+
+Die Sozialversicherung bleibt das Fundament sozialer Sicherheit in Deutschland und schützt über 85 Millionen Menschen. Das auf dem Solidaritätsprinzip basierende System mit seinen fünf Säulen hat sich seit der Bismarck'schen Sozialgesetzgebung bewährt.
+
+2026 bleiben die Beitragssätze stabil, aber gestiegene Beitragsbemessungsgrenzen führen zu höheren Beiträgen bei hohen Einkommen. Der Anstieg des Zusatzbeitrags auf 2,9 Prozent belastet alle gesetzlich Krankenversicherten zusätzlich.
+
+Der demografische Wandel stellt das Umlageverfahren vor erhebliche Herausforderungen. Das Verhältnis von Beitragszahlern zu Rentnern hat sich von sechs auf weniger als zwei verschlechtert – eine Entwicklung, die strukturelle Reformen erfordert. Die Zukunftsfähigkeit hängt von der Balance zwischen bezahlbaren Beiträgen, angemessenen Leistungen und demografischer Nachhaltigkeit ab.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste sozialversicherung]
+
+[BLOCK dokumente studenten-sozialversicherung,sozialversicherungswerte-2026,infoblatt-wichtige-daten-der-sozialversicherung-pst2000-2,infoblatt-steuer-und-sozialversicherungsrechtliche-landkarte-pst1400]
+
+
+## FAQ
+F: Wie hoch sind die Sozialversicherungsbeiträge 2026?
+A: Die Beitragssätze bleiben 2026 stabil: Krankenversicherung 14,6 Prozent, Rentenversicherung 18,6 Prozent, Pflegeversicherung 3,6 Prozent und Arbeitslosenversicherung 2,6 Prozent. Neu ist der auf 2,9 Prozent gestiegene durchschnittliche Zusatzbeitrag zur gesetzlichen Krankenversicherung.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: In der Krankenversicherung steigt die Grenze auf 5.812,50 Euro monatlich (69.750 Euro jährlich). In der Rentenversicherung beträgt sie 8.450 Euro monatlich, in der knappschaftlichen Rentenversicherung 10.400 Euro. Die Anhebungen resultieren aus der Lohnentwicklung 2024 von 5,16 Prozent.
+F: Was ändert sich 2026 bei Minijobs?
+A: Durch die Anhebung des Mindestlohns auf 13,90 Euro pro Stunde steigt die Minijob-Grenze von 556 Euro auf 603 Euro monatlich. Bis zu diesem Betrag zahlen Beschäftigte keine Sozialversicherungsbeiträge. Oberhalb beginnt der Übergangsbereich mit gestaffelten Abgaben.
+F: Wie hoch ist der Höchstbeitrag zur Krankenversicherung 2026?
+A: Der Höchstbeitrag zur gesetzlichen Krankenversicherung steigt 2026 auf 1.261,31 Euro monatlich inklusive Zusatzbeitrag. Für Spitzenverdiener bedeuten die erhöhten Beitragsbemessungsgrenzen erhebliche Mehrkosten gegenüber 2025, da auch der Zusatzbeitrag von 2,5 auf 2,9 Prozent gestiegen ist.
+
+
+==================== BEITRAG sozialversicherungsbeitraege ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Sozialversicherungsbeiträge 2026: Sätze und Berechnung
+  heading-1: Sozialversicherungsbeiträge 2026: Beitragssätze, Grenzen und Änderungen
+  heading-2: Welche Beitragssätze gelten 2026?
+  heading-3: Wie hoch sind die Beitragsbemessungsgrenzen 2026?
+  heading-4: Krankenversicherung: Beiträge und Zusatzbeiträge
+  heading-5: Rentenversicherung: Das Ende der Ost-West-Spaltung
+  heading-6: Arbeitslosenversicherung und Minijobs
+  heading-7: Sachbezugswerte und Entlastungsmaßnahmen 2026
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Sozialversicherungsbeiträge (sozialversicherungsbeitraege)
+## 0 Sozialversicherungsbeiträge 2026: Sätze und Berechnung
+
+Sozialversicherungsbeiträge finanzieren Kranken-, Pflege-, Renten- und Arbeitslosenversicherung. Beitragssätze, Bemessungsgrenzen und Änderungen 2026 im Überblick.
+
+## 1 Sozialversicherungsbeiträge 2026: Beitragssätze, Grenzen und Änderungen
+
+2026 bleiben die Beitragssätze der Sozialversicherung stabil, während die Beitragsbemessungsgrenzen um bis zu 900 Euro monatlich steigen. Dieser Ratgeber zeigt, welche Sozialversicherungsbeiträge Sie 2026 zahlen, wie sich die Grenzen verändern und welche Entlastungen für Sie gelten.
+
+## 2 Welche Beitragssätze gelten 2026?
+
+Die Sozialversicherungsbeiträge werden in der Regel je zur Hälfte von Arbeitnehmer und Arbeitgeber getragen. Eine Ausnahme ist die Pflegeversicherung.
+
+Krankenversicherung: Der allgemeine Krankenversicherungsbeitrag beträgt 14,6 Prozent. Für Mitglieder ohne Krankengeldanspruch gilt der ermäßigte Satz von 14,0 Prozent. Zusätzlich erhebt jede Krankenkasse einen Zusatzbeitrag – im Durchschnitt 2,9 Prozent (Stand 2026). Auch dieser wird paritätisch geteilt.
+
+Rentenversicherung: Der Rentenversicherungsbeitrag bleibt zum neunten Jahr in Folge bei 18,6 Prozent stabil.
+
+Pflegeversicherung: Der Grundbeitrag liegt bei 3,6 Prozent. Kinderlose zahlen ab 23 Jahren einen Zuschlag von 0,6 Prozent (4,2 Prozent insgesamt). Eltern mit mehreren Kindern erhalten gestaffelte Abschläge.
+
+Arbeitslosenversicherung: Der Beitragssatz bleibt unverändert bei 2,6 Prozent.
+
+| Sozialversicherung | Beitragssatz | Arbeitgeber | Arbeitnehmer
+
+| Krankenversicherung | 14,6 % | 7,3 % | 7,3 %
+
+| Zusatzbeitrag (Ø) | 2,9 % | 1,45 % | 1,45 %
+
+| Rentenversicherung | 18,6 % | 9,3 % | 9,3 %
+
+| Pflegeversicherung | 3,6 % | 1,8 % | 1,8 %
+
+| Arbeitslosenversicherung | 2,6 % | 1,3 % | 1,3 %
+
+## 3 Wie hoch sind die Beitragsbemessungsgrenzen 2026?
+
+Die Beitragsbemessungsgrenzen bestimmen, bis zu welcher Einkommenshöhe Sozialversicherungsbeiträge erhoben werden. 2026 steigen sie an.
+
+Kranken- und Pflegeversicherung: Die Beitragsbemessungsgrenze erhöht sich auf 69.750 Euro jährlich (5.812,50 Euro monatlich) – ein Plus von 3.600 Euro zum Vorjahr (2025: 66.150 Euro).
+
+Rentenversicherung und Arbeitslosenversicherung: Die bundeseinheitliche Grenze steigt auf 8.450 Euro monatlich (101.400 Euro jährlich). Das ist ein historisches Ereignis: Erstmals seit der Wiedervereinigung 1990 gilt eine identische Grenze für ganz Deutschland.
+
+Für Versicherte in den neuen Bundesländern bedeutet das eine Erhöhung um 900 Euro monatlich (2025: 7.550 Euro), für die alten Bundesländer um 400 Euro (2025: 8.050 Euro).
+
+Knappschaftliche Rentenversicherung: Die Grenze liegt bei 10.400 Euro monatlich. Der Beitragssatz beträgt 24,7 Prozent (Arbeitgeber 15,4 Prozent, Arbeitnehmer 9,3 Prozent).
+
+Versicherungspflichtgrenze: Ab diesem Einkommen können Arbeitnehmer in die private Krankenversicherung wechseln. Sie steigt auf 77.400 Euro jährlich (6.450 Euro monatlich).
+
+[SPIEL schaetzen: Wie hoch ist die monatliche Beitragsbemessungsgrenze in der Rentenversicherung 2026? → 8450]
+
+## 4 Krankenversicherung: Beiträge und Zusatzbeiträge
+
+Bei einem Bruttogehalt bis zur Beitragsbemessungsgrenze entstehen maximale monatliche Sozialversicherungsbeiträge von etwa 1.015 Euro (inkl. Zusatzbeitrag). Diese teilen sich Arbeitgeber und Arbeitnehmer hälftig.
+
+Der individuelle Zusatzbeitrag variiert je nach Krankenkasse. Versicherte haben bei einer Erhöhung ein Sonderkündigungsrecht.
+
+Besonderheiten der Pflegeversicherung:
+
+- Eltern mit Kindern: Erhalten Beitragsabschläge
+
+- Kinderlose ab 23: Zahlen 4,2 Prozent statt 3,6 Prozent
+
+- Staffelung nach Kinderzahl:
+
+- 1 Kind: 3,6 Prozent
+
+- 2 Kinder: 3,35 Prozent
+
+- 3 Kinder: 3,1 Prozent
+
+- 4 Kinder: 2,85 Prozent
+
+- 5+ Kinder: 2,6 Prozent
+
+[SPIEL karte: Sachsen-Sonderregelung bei Sozialversicherungsbeiträgen]
+
+## 5 Rentenversicherung: Das Ende der Ost-West-Spaltung
+
+Die Rentenversicherung bleibt 2026 stabil: Der Beitragssatz beträgt 18,6 Prozent – je 9,3 Prozent für Arbeitgeber und Arbeitnehmer.
+
+Ein Meilenstein ist die bundesweite Angleichung der Beitragsbemessungsgrenzen. Erstmals seit 1990 gilt eine einheitliche Grenze: 8.450 Euro monatlich für ganz Deutschland. Das bedeutet:
+
+- Ostdeutsche Arbeitnehmer: +900 Euro monatliche Beitragslast
+
+- Westdeutsche Arbeitnehmer: +400 Euro monatliche Beitragslast
+
+Das vorläufige Durchschnittsentgelt 2026 beträgt 51.944 Euro. Wer diesen Betrag verdient, sammelt einen Entgeltpunkt für die Rente.
+
+## 6 Arbeitslosenversicherung und Minijobs
+
+Die Arbeitslosenversicherung bleibt unverändert bei 2,6 Prozent (je 1,3 Prozent Arbeitgeber und Arbeitnehmer). Die Beitragsbemessungsgrenze entspricht der Rentenversicherung: 8.450 Euro monatlich.
+
+Geringfügigkeitsgrenze bei Minijobs: Bei einem Mindestlohn von 13,90 Euro beträgt die Grenze 603 Euro monatlich.
+
+Besonderheiten:
+
+- Minijobber zahlen keine Sozialversicherungsbeiträge
+
+- Arbeitgeber zahlen pauschale Abgaben (ca. 30 Prozent)
+
+- Im „Midi-Job" (603–2.000 Euro) gelten reduzierte Beitragssätze
+
+- Freiwillige Rentenversicherung: fiktives Mindesteinkommen 1.316,67 Euro
+
+## 7 Sachbezugswerte und Entlastungsmaßnahmen 2026
+
+Die Sachbezugswerte wurden an die Preisentwicklung angepasst:
+
+- Verpflegung insgesamt: 345 Euro monatlich (11,51 Euro täglich)
+
+- Frühstück: 71,00 Euro monatlich
+
+- Mittag-/Abendessen: je 137,00 Euro monatlich
+
+- Unterkunft: 285 Euro monatlich
+
+- Essenszuschuss: maximal 7,67 Euro pro Arbeitstag steuerfrei
+
+Weitere Entlastungen:
+
+- Entfernungspauschale: 38 Cent ab dem ersten Kilometer
+
+- Übungsleiterpauschale: 3.300 Euro
+
+- Ehrenamtspauschale: 960 Euro
+
+- E-Dienstwagen: 0,25 Prozent Lohnsteuer (bis 100.000 Euro Listenpreis)
+
+- Ausgleichsabgaben für schwerbehinderte Menschen: 155–815 Euro monatlich je Pflichtplatz
+
+## 8 Fazit
+
+Die Sozialversicherungsbeiträge 2026 bleiben stabil bei den Sätzen, passen sich aber über die Beitragsbemessungsgrenzen an Lohnsteigerungen an. Die historische Angleichung der Ost-West-Grenzen in der Rentenversicherung schafft Gerechtigkeit nach 35 Jahren Differenzierung. Die gestaffelte Pflegeversicherung unterstützt Familien gezielt. Nutzen Sie die neuen Sachbezugswerte und Entlastungsmaßnahmen bei Ihrer Finanzplanung.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste sozialversicherungsbeitraege]
+
+[BLOCK dokumente studenten-sozialversicherung,infoblatt-wichtige-daten-der-sozialversicherung-pst2000-2,die-sozialversicherung,berufsstarter-und-sozialversicherung]
+
+
+## FAQ
+F: Welche Beitragssätze gelten 2026 in der Sozialversicherung?
+A: Die Sätze betragen 14,6 Prozent in der Krankenversicherung, 18,6 Prozent in der Rentenversicherung, 3,6 Prozent in der Pflegeversicherung und 2,6 Prozent in der Arbeitslosenversicherung. Hinzu kommt ein durchschnittlicher Krankenkassen-Zusatzbeitrag von 2,9 Prozent.
+F: Werden die Sozialversicherungsbeiträge paritätisch aufgeteilt?
+A: Kranken-, Renten- und Arbeitslosenversicherung werden je zur Hälfte von Arbeitgeber und Arbeitnehmer getragen. In der Pflegeversicherung liegt der Arbeitgeberanteil bei 1,7 Prozent, während Kinderlose und Eltern unterschiedliche Anteile zahlen. Auch der Zusatzbeitrag wird paritätisch aufgeteilt.
+F: Welche Pflegebeiträge gelten für Familien mit Kindern?
+A: Der Grundsatz beträgt 3,6 Prozent, Kinderlose über 23 zahlen 4,2 Prozent. Für jedes Kind unter 25 Jahren sinkt der Beitrag um 0,25 Prozentpunkte, bei fünf oder mehr Kindern auf den Mindestsatz von 2,4 Prozent. Diese Staffelung entlastet Familien gezielt.
+F: Wie wirkt sich die Beitragsbemessungsgrenze auf mein Gehalt aus?
+A: Nur Einkommen bis zur jeweiligen Grenze ist beitragspflichtig. 2026 gilt in der Krankenversicherung 69.750 Euro jährlich, in der Rentenversicherung 101.400 Euro. Einkünfte oberhalb bleiben beitragsfrei, sodass Spitzenverdiener relativ gesehen weniger Sozialabgaben auf ihr Gesamteinkommen zahlen.
+
+
+==================== BEITRAG beitragsbemessungsgrenzen ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Maximales Einkommen für Sozialversicherungsbeiträge erklärt
+  heading-1: Beitragsbemessungsgrenzen 2026: Das müssen Sie wissen
+  heading-2: Was sind Beitragsbemessungsgrenzen genau?
+  heading-3: Die aktuellen Grenzen 2026
+  heading-4: Unterschied: Beitragsbemessungsgrenze vs. Versicherungspflichtgrenze
+  heading-5: Wie wirken sich die neuen Grenzen auf Sie aus?
+  heading-6: Besonderheiten einzelner Versicherungen
+  heading-7: Warum werden Beitragsbemessungsgrenzen jährlich angepasst?
+  heading-8: Strategische Tipps für Betroffene
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Beitragsbemessungsgrenzen (beitragsbemessungsgrenzen)
+## 0 Maximales Einkommen für Sozialversicherungsbeiträge erklärt
+
+Die Beitragsbemessungsgrenzen legen fest, bis zu welchem Einkommen Sozialbeiträge fällig werden. Welche Grenzen 2026 in Kranken-, Pflege- und Rentenversicherung gelten.
+
+## 1 Beitragsbemessungsgrenzen 2026: Das müssen Sie wissen
+
+Die Beitragsbemessungsgrenzen sind Obergrenzen für Sozialversicherungsbeiträge. Sie legen fest, bis zu welchem Bruttoeinkommen Beiträge zur Kranken-, Pflege-, Renten- und Arbeitslosenversicherung erhoben werden. Einkommen darüber bleibt beitragsfrei. Die Bundesregierung passt diese Grenzen jährlich an die Lohnentwicklung an – 2026 steigen sie erneut deutlich.
+
+## 2 Was sind Beitragsbemessungsgrenzen genau?
+
+Beitragsbemessungsgrenzen funktionieren wie eine Obergrenze. Sie deckeln die maximale Beitragslast für Gutverdiener. Wer über der Grenze verdient, zahlt keine zusätzlichen Beiträge mehr – und erwirbt auch keine weiteren Rentenansprüche.
+
+Diese Regelung hat mehrere Effekte:
+
+- Sie begrenzt die Beitragslast für hohe Einkommen
+
+- Sie bestimmt gleichzeitig, wie viele Rentenansprüche Sie erwerben
+
+- Sie unterscheidet sich je nach Versicherungszweig erheblich
+
+Für die Rentenversicherung und Arbeitslosenversicherung gelten identische Beitragsbemessungsgrenzen. Die Krankenversicherung hat niedrigere Werte. Die knappschaftliche Rentenversicherung für Bergbau-Beschäftigte liegt noch höher.
+
+## 3 Die aktuellen Grenzen 2026
+
+Kranken- und Pflegeversicherung: 5.812,50 Euro monatlich (69.750 Euro jährlich)
+
+Rentenversicherung und Arbeitslosenversicherung: 8.450 Euro monatlich (101.400 Euro jährlich)
+
+Knappschaftliche Rentenversicherung: 10.400 Euro monatlich (124.800 Euro jährlich)
+
+[SPIEL gewusst: Die Rentenversicherungsgrenze durchbricht 2026 erstmals die 100.000-Euro-Marke. Das liegt an der Lohnsteigerung 2024 von 5,16 Prozent.]
+
+| Versicherungszweig | Monatlich | Jährlich | Steigerung
+
+| Kranken-/Pflegeversicherung | 5.812,50 € | 69.750 € | +5,4 %
+
+| Rentenversicherung | 8.450 € | 101.400 € | +5,0 %
+
+| Knappschaftliche Rentenversicherung | 10.400 € | 124.800 € | +5,1 %
+
+Der Beitragssatz zur Krankenversicherung bleibt bei 14,6 %. Der durchschnittliche Zusatzbeitrag steigt 2026 auf 2,9 Prozent. Zusammen ergibt das einen Gesamtbeitragssatz von 17,5 Prozent.
+
+## 4 Unterschied: Beitragsbemessungsgrenze vs. Versicherungspflichtgrenze
+
+Viele verwechseln diese beiden Begriffe – dabei haben sie völlig unterschiedliche Funktionen:
+
+Die Beitragsbemessungsgrenze (5.812,50 € monatlich) bestimmt, bis zu welchem Betrag Beiträge erhoben werden.
+
+Die Versicherungspflichtgrenze (6.450 € monatlich 2026) legt fest, ab wann Sie die Krankenversicherung frei wählen können und sich privat versichern dürfen.
+
+Zwischen diesen Werten liegt ein Bereich von etwa 638 Euro monatlich. Dort zahlen Sie noch gesetzlich Krankenversicherungsbeiträge – allerdings nur auf die ersten 5.812,50 Euro. Das ist ein oft übersehener Vorteil für Gutverdiener knapp unter der PKV-Schwelle.
+
+## 5 Wie wirken sich die neuen Grenzen auf Sie aus?
+
+Für Normalverdiener ändert sich nichts. Die Erhöhungen treffen nur Beschäftigte mit hohem Einkommen.
+
+Beispiel Krankenversicherung:
+
+Ein Beschäftigter verdient 7.000 Euro brutto monatlich. 2025 zahlte er Beiträge auf 5.512,50 Euro (alte Grenze). 2026 werden Beiträge auf 5.812,50 Euro erhoben – das sind 300 Euro mehr beitragspflichtiges Einkommen.
+
+Bei 17,5 Prozent Gesamtbeitragssatz entstehen zusätzliche Beiträge von 52,50 Euro monatlich. Diese teilen sich Arbeitgeber und Arbeitnehmer.
+
+Beispiel Rentenversicherung:
+
+Die Beitragsbemessungsgrenze steigt auf 8.450 Euro monatlich (2025: 8.050 Euro). Ein Beschäftigter mit 9.000 Euro Bruttoeinkommen zahlt auf 400 Euro mehr Rentenversicherungsbeiträge.
+
+Der Beitragssatz liegt bei 18,6 Prozent. Die Mehrbelastung beträgt 74,40 Euro monatlich (geteilt zwischen Arbeitgeber und Arbeitnehmer).
+
+[SPIEL quiz: Bis zu welcher Summe zahlen Sie 2026 Krankenversicherungsbeiträge?]
+
+## 6 Besonderheiten einzelner Versicherungen
+
+Kranken- und Pflegeversicherung:
+
+Beide haben 2026 identische Grenzen von 5.812,50 Euro monatlich. Der Pflegebeitrag beträgt 3,6 %, für Kinderlose über 23 Jahren 4,2 %. Mit Kindern sinkt der Beitrag um 0,25 Prozentpunkte pro Kind unter 25 Jahren.
+
+Rentenversicherung:
+
+Die allgemeine Rentenversicherung hat eine Grenze von 8.450 Euro monatlich. Die knappschaftliche Versicherung für Bergleute liegt bei 10.400 Euro monatlich – der Beitragssatz ist mit 24,7 Prozent deutlich höher.
+
+Arbeitslosenversicherung:
+
+Sie folgt der Rentenversicherungsgrenze. Der Beitragssatz beträgt 2026 2,6 Prozent. Arbeitgeber und Arbeitnehmer teilen sich die Kosten zu gleichen Teilen.
+
+Minijobs:
+
+Die Minijobgrenze steigt 2026 auf 603 Euro monatlich. Sie richtet sich nach dem gesetzlichen Mindestlohn, der 2026 auf 13,90 Euro pro Stunde erhöht wird.
+
+## 7 Warum werden Beitragsbemessungsgrenzen jährlich angepasst?
+
+Die Anpassung folgt der Lohnentwicklung. Für 2026 betrug die Steigerung 5,16 Prozent (im Jahr 2024). Der Gesetzgeber zieht immer die Lohnentwicklung des Vorjahres heran.
+
+Ohne diese Anpassung würde die Finanzierung der Sozialversicherung aus dem Gleichgewicht geraten. Die Beitragslast würde sich stärker auf niedrigere Einkommen verlagern. Gleichzeitig würden Gutverdiener trotz höherer Löhne geringere Rentenansprüche erwerben – weil keine Beiträge auf Einkommen über der Grenze gezahlt werden.
+
+## 8 Strategische Tipps für Betroffene
+
+Wer knapp an einer Grenze verdient, sollte verschiedene Optionen prüfen:
+
+Entgeltumwandlung:
+
+Bis zu 338 Euro monatlich können Sie steuer- und sozialabgabenfrei in betriebliche Altersversorgung einbringen. Das reduziert Ihr sozialversicherungspflichtiges Einkommen und schont die Geldbörse.
+
+Wechsel in private Krankenversicherung:
+
+Der durchschnittliche Beitrag zur GKV steigt 2026 auf über 1.000 Euro monatlich. Für Gutverdiener kann ein Wechsel in die Private Krankenversicherung langfristig günstiger sein.
+
+Flexible Arbeitszeit:
+
+Wer knapp über der Versicherungspflichtgrenze (6.450 €) liegt, könnte durch Arbeitszeitreduzierung unter diese Schwelle rutschen und gewinnt damit Wahlfreiheit.
+
+## 9 Fazit
+
+Die Beitragsbemessungsgrenzen 2026 steigen deutlich: In der Krankenversicherung auf 5.812,50 Euro monatlich, in der Rentenversicherung auf 8.450 Euro. Diese Anpassungen sichern die Finanzierung der Sozialversicherungen. Normalverdiener spüren keine direkten Auswirkungen. Gutverdiener müssen mit höheren Beiträgen rechnen – erwerben aber auch höhere Rentenansprüche. Entscheidend ist die Unterscheidung zwischen Beitragsbemessungsgrenze und Versicherungspflichtgrenze. Wer betroffen ist, sollte prüfen, ob Entgeltumwandlung oder ein PKV-Wechsel sinnvoll sind.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste beitragsbemessungsgrenzen]
+
+
+## FAQ
+F: Was ist die Beitragsbemessungsgrenze und wozu dient sie?
+A: Die Beitragsbemessungsgrenze (BBG) markiert das maximale Bruttoeinkommen, bis zu dem Beiträge in der gesetzlichen Sozialversicherung erhoben werden. Einkommen oberhalb dieser Grenze bleibt beitragsfrei. Damit wird die Beitragslast bei hohen Einkommen gedeckelt.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026 in der Krankenversicherung?
+A: In der gesetzlichen Krankenversicherung steigt die BBG 2026 auf 5.812,50 Euro monatlich bzw. 69.750 Euro jährlich. Das entspricht einer Steigerung um 4,7 Prozent gegenüber 2025 (66.600 Euro jährlich). Die Pflegeversicherung folgt denselben Grenzen.
+F: Welche Beitragsbemessungsgrenze gilt 2026 für die Rentenversicherung?
+A: Die Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung liegt 2026 bundeseinheitlich bei 8.450 Euro monatlich, 2025 waren es 8.050 Euro. Das entspricht einer Erhöhung um 5,0 Prozent oder 400 Euro monatlich.
+F: Wie werden die Beitragsbemessungsgrenzen jährlich angepasst?
+A: Die Bundesregierung orientiert sich bei der jährlichen Anpassung an der Lohnentwicklung des Vorjahres. 2024 stieg die durchschnittliche Lohnentwicklung um 5,16 Prozent, was sich auf die BBG-Erhöhungen 2026 auswirkt. Die Werte unterscheiden sich je nach Versicherungszweig.
+
+
+==================== BEITRAG minijob ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Minijob ab 2024: Grenzen, Regeln und Verdienst erklärt
+  heading-1: Minijob 2026: Verdienstgrenzen, Rechte und Neuerungen
+  heading-2: Zwei Arten von Minijobs
+  heading-3: Verdienstgrenzen 2026 und 2027
+  heading-4: Arbeitszeiten richtig berechnen
+  heading-5: Rentenversicherung im Minijob
+  heading-6: Arbeitsrechtliche Ansprüche
+  heading-7: Krankenversicherung klären
+  heading-8: Abgaben und Steuern
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Minijob (minijob)
+## 0 Minijob ab 2024: Grenzen, Regeln und Verdienst erklärt
+
+Im Minijob gelten feste Verdienstgrenzen und besondere Regeln. Welche Grenze 2026 gilt, welche Rechte Sie haben und was sich für Minijobber ändert.
+
+## 1 Minijob 2026: Verdienstgrenzen, Rechte und Neuerungen
+
+Ein Minijob regelt die Bedingungen für geringfügige Beschäftigung mit definierten Verdienst- und Zeitgrenzen. Die monatliche Verdienstgrenze steigt ab 2026 auf 603 Euro und ab 2027 auf 633 Euro. Diese automatische Anpassung erfolgt, weil die Grenze seit Oktober 2022 an den Mindestlohn gekoppelt ist. Etwa 6,9 Millionen Menschen in Deutschland arbeiten in dieser Beschäftigungsform – sowohl Studierende, Rentner als auch Eltern in Elternzeit nutzen diese Option.
+
+## 2 Zwei Arten von Minijobs
+
+Es gibt zwei grundverschiedene Formen. Die geringfügig entlohnte Beschäftigung orientiert sich am Verdienst. Hier darfst du monatlich maximal 603 Euro (2026) verdienen – im Jahr bis zu 7.236 Euro. Das ist die häufigste Variante.
+
+Die kurzfristige Beschäftigung funktioniert anders. Sie richtet sich nach der Dauer, nicht nach dem Lohn. Du darfst maximal drei Monate oder 70 Arbeitstage pro Kalenderjahr arbeiten. Für landwirtschaftliche Betriebe gelten ab 2026 erweiterte Grenzen: 15 Wochen oder 90 Arbeitstage. Wie viel du verdienst, spielt keine Rolle.
+
+[SPIEL quiz: Bis zu welchem Betrag kannst du 2026 im Minijob verdienen?]
+
+## 3 Verdienstgrenzen 2026 und 2027
+
+Der Mindestlohn steigt zum 1. Januar 2026 von 12,82 Euro auf 13,90 Euro. Ab 2027 sind es 14,60 Euro. Diese Erhöhung wirkt sich direkt auf deine Minijob-Grenze aus.
+
+| Jahr | Mindestlohn | Monatliche Grenze | Jahresgrenze
+
+| 2026 | 13,90 Euro | 603 Euro | 7.236 Euro
+
+| 2027 | 14,60 Euro | 633 Euro | 7.596 Euro
+
+Die Berechnung folgt einer festen Formel: Mindestlohn × 130 ÷ 3, aufgerundet auf volle Euro. Basis sind zehn Stunden pro Woche. Diese dynamische Kopplung bedeutet: Jede Mindestlohn-Erhöhung führt automatisch zur neuen Minijob-Grenze. Du brauchst dich um Updates nicht selbst zu kümmern.
+
+## 4 Arbeitszeiten richtig berechnen
+
+Der höhere Mindestlohn ändert deine maximale Arbeitszeit. Mit dem aktuellen Mindestlohn von 13,90 Euro kannst du etwa 43 Stunden monatlich arbeiten, ohne die 603-Euro-Grenze zu überschreiten. Bei höherem Stundenlohn werden es automatisch weniger Stunden.
+
+[SPIEL mythos: Mit höherem Stundenlohn kannst du mehr Stunden im Minijob arbeiten. → nein]
+
+Gelegentliche Überschreitungen erlaubt: Es gibt eine wichtige Ausnahme. Du darfst die Grenze gelegentlich und unvorhergesehen in maximal zwei Monaten innerhalb eines Jahres überschreiten. Die jährliche Höchstgrenze liegt dann bei 8.442 Euro.
+
+Beispiel: Du verdienst normalerweise 603 Euro monatlich. Im März 2026 übernimmst du eine Krankheitsvertretung und erhältst 1.000 Euro. Im November 2025 hattest du bereits einen Monat mit 800 Euro. Innerhalb des Zeitjahres wurde die Grenze nur zweimal unvorhergesehen überschritten – dein Status bleibt erhalten.
+
+## 5 Rentenversicherung im Minijob
+
+Ein Minijob unterliegt grundsätzlich der Rentenversicherung als Pflichtversicherung. Dein Arbeitgeber zahlt 15 Prozent pauschal. Bei gewerblichen Minijobs zahlst du einen Eigenanteil von 3,6 Prozent.
+
+Wichtige Änderung ab Juli 2026: Du kannst deine Befreiung von der Rentenversicherung nun einmalig rückgängig machen. Das bedeutet: Du zahlst ab dann zusätzliche Rentenbeiträge, erhältst dafür aber volle Rentenpunkte und Ansprüche.
+
+Die Vorteile der Rentenversicherungspflicht sind erheblich. Du erwerbst Pflichtbeitragszeiten für die gesetzliche Rente. Die Beschäftigungszeit zählt vollständig für Wartezeiten. Außerdem brauchst du diese Zeiten für Leistungen zur Rehabilitation, Erwerbsminderungsrente und Entgeltumwandlung.
+
+[SPIEL karte: Rentenversicherungsbefreiung]
+
+So funktioniert der Antrag: Du stellst einen schriftlichen oder elektronischen Antrag bei deinem Arbeitgeber. Er dokumentiert den Eingang und meldet die Änderung an die Minijob-Zentrale.
+
+## 6 Arbeitsrechtliche Ansprüche
+
+Minijobber haben dieselben arbeitsrechtlichen Rechte wie Vollzeitbeschäftigte. Das ist nicht verhandelbar. Du erhältst:
+
+- Urlaub: mindestens 24 Werktage bei 6-Tage-Woche
+
+- Lohnfortzahlung bei Krankheit: bis zu 6 Wochen
+
+- Mutterschutz und Elternzeit: ohne Einschränkungen
+
+- Kündigungsschutz: mindestens 4 Wochen Frist zum 15. oder Monatsende
+
+[SPIEL schaetzen: Wie viele Wochen Lohnfortzahlung bei Krankheit? → 6]
+
+Besonderer Kündigungsschutz: Schwangere Minijobberinnen genießen besonderen Schutz. In Betrieben mit mehr als 10 Mitarbeitern gilt zudem das allgemeine Kündigungsschutzgesetz.
+
+## 7 Krankenversicherung klären
+
+Minijobs sind krankenversicherungsfrei. Das bedeutet: Du bist nicht automatisch über deinen Arbeitgeber versichert. Du musst dich selbst absichern durch:
+
+- Familienversicherung über Ehepartner oder Eltern
+
+- Freiwillige gesetzliche Krankenversicherung
+
+- Private Krankenversicherung
+
+- Fortsetzung einer bestehenden Versicherung
+
+Wichtig für 2026: Wer bisher zwischen 556 und 603 Euro verdient hat, war im Midijob mit Krankenversicherungspflicht. Ab 2026 fällt dieser Verdienst unter den Minijob – ohne automatische Versicherung. Wenn du in der Krankenkasse bleiben möchtest, musst du dein Einkommen über 603 Euro erhöhen.
+
+## 8 Abgaben und Steuern
+
+Der Arbeitgeber zahlt für gewerbliche Minijobs:
+
+- 13 % Pauschale zur Krankenversicherung
+
+- 15 % zur Rentenversicherung
+
+- 0,80 % Umlage U1 (Krankheit)
+
+- 0,22 % Umlage U2 (Mutterschutz)
+
+- 2 % Pauschalsteuer
+
+Du selbst zahlst einen Eigenanteil von 3,6 % zur Rentenversicherung (falls keine Befreiung beantragt).
+
+Bei kurzfristiger Beschäftigung fallen deutlich weniger Abgaben an: nur 0,80 % U1 und 0,22 % U2. Dafür ist die Beschäftigung sozialversicherungsfrei.
+
+## 9 Fazit
+
+Die Minijob-Regelungen 2026 bieten attraktive Chancen. Die Verdienstgrenze steigt auf 603 Euro – das bedeutet mehr Einkommen ohne Statusverlust. Die größte Neuerung ist die Möglichkeit ab Juli 2026, die Rentenversicherungsbefreiung rückgängig zu machen. Das gibt dir Flexibilität bei der Altersvorsorge. Du profitierst von vollständigen arbeitsrechtlichen Ansprüchen. Arbeitgeber sollten diese Änderungen ihren Mitarbeitern klar erklären, um rechtliche Sicherheit zu schaffen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste minijob]
+
+[BLOCK rechner minijob]
+
+[BLOCK dokumente geringfuegige-beschaeftigung,minijobs-und-rente]
+
+
+## FAQ
+F: Wie hoch ist die Minijob-Verdienstgrenze 2026?
+A: Die Verdienstgrenze für Minijobs liegt 2026 bei 603 Euro monatlich beziehungsweise 7.236 Euro jährlich. Diese Anpassung folgt der Erhöhung des gesetzlichen Mindestlohns auf 13,90 Euro pro Stunde zum 1. Januar 2026. Ab 2027 steigt die Grenze voraussichtlich auf 633 Euro.
+F: Wie viele Stunden darf ein Minijobber 2026 arbeiten?
+A: Bei Bezahlung nach Mindestlohn von 13,90 Euro beträgt die maximale Arbeitszeit 43,38 Stunden pro Monat. Bei höherem Stundenlohn reduziert sich die maximal zulässige Arbeitszeit entsprechend. Gelegentliche, nicht vorhersehbare Überschreitungen sind unter bestimmten Bedingungen zulässig.
+F: Welche Sozialabgaben fallen bei einem Minijob an?
+A: Minijobber zahlen einen Rentenversicherungsbeitrag von 3,6 Prozent, bei Privathaushalten 13,6 Prozent. Von Einkommensteuer und den meisten Sozialabgaben sind sie befreit. Der Arbeitgeber trägt pauschal 13 Prozent zur Krankenversicherung, sofern der Minijobber gesetzlich versichert ist.
+F: Wie wird die Minijob-Grenze berechnet?
+A: Die Verdienstgrenze ist dynamisch an den Mindestlohn gekoppelt. Die Formel lautet: Mindestlohn mal 130 geteilt durch 3, das Ergebnis wird auf volle Euro gerundet. Bei jeder Mindestlohnerhöhung steigt somit automatisch auch die Minijob-Grenze.

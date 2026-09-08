@@ -1,0 +1,139 @@
+# Familienversicherung (familienversicherung-gesetzliche-krankenkasse)
+## 0 Kostenlose Mitversicherung von Familie und Angehörigen
+
+Über die Familienversicherung sind Angehörige beitragsfrei mitversichert. Welche Einkommens- und Altersgrenzen 2026 gelten und was sich ab 2028 ändert.
+
+## 1 Familienversicherung 2026: Einkommensgrenzen, Altersgrenzen und Änderungen ab 2028
+
+Die Familienversicherung regelt die beitragsfreie Mitversicherung von Angehörigen in der gesetzlichen Krankenversicherung. Die Einkommensgrenze liegt 2026 bei 565 Euro monatlich, für Minijobs bei 603 Euro. Diese attraktive Regelung ermöglicht erhebliche Kosteneinsparungen gegenüber der privaten Krankenversicherung, wo jedes Familienmitglied separat versichert werden muss.
+
+## 2 Wer kann mitversichert werden und welche Bedingungen gelten?
+
+Familienangehörige können beitragsfrei in der gesetzlichen Krankenversicherung mitversichert werden, wenn sie ihren Wohnsitz oder gewöhnlichen Aufenthalt im Inland haben. Zu den versicherbaren Personen zählen Ehe- und Lebenspartner sowie Kinder des Mitglieds. Gleichzeitig können Stief-, Enkel- und Pflegekinder mitversichert werden, sofern sie in häuslicher Gemeinschaft leben oder überwiegend unterhalten werden.
+
+Grundsätzliche Voraussetzungen für die Familienversicherung:
+
+- Wohnsitz oder gewöhnlicher Aufenthalt in Deutschland
+
+- Keine eigene Krankenversicherungspflicht
+
+- Einkommen unter den festgelegten Grenzen
+
+- Keine hauptberufliche Selbstständigkeit
+
+- Keine Versicherungsfreiheit nach anderen Bestimmungen
+
+Die wichtigsten Voraussetzungen für die Familienversicherung sind ein Einkommen unter 565 Euro monatlich, ein Wohnsitz in Deutschland und das Fehlen einer eigenen Krankenversicherung. Bei Erfüllung aller Bedingungen erhalten familienversicherte Angehörige eine eigene Gesundheitskarte und haben dieselben Leistungsansprüche wie das zahlende Mitglied.
+
+## 3 Wie hoch sind die Einkommensgrenzen 2026?
+
+Die allgemeine Einkommensgrenze steigt 2026 auf 565 Euro monatlich. Mitversicherte Ehepartner oder Kinder können dann pro Jahr bis zu 6.780 Euro verdienen, ohne ihren Status als beitragsfrei mitversicherte Familienangehörige einzubüßen.
+
+Die Verdienstgrenzen Familienversicherung haben sich 2026 erhöht. Für geringfügig Beschäftigte gelten höhere Grenzwerte: Die Minijob-Grenze wird 2026 voraussichtlich auf 603 Euro pro Monat angepasst. Die Minijobgrenze wird parallel zum geltenden gesetzlichen Mindestlohn angepasst, der 2026 ebenfalls steigt.
+
+Besonderheit für Angestellte: Angestellte können von ihren Bruttoeinnahmen noch ihre Werbungskosten oder den entsprechenden Pauschbetrag abziehen. Die Werbungskostenpauschale liegt für Angestellte bei 1.230 Euro im Jahr, also 102,50 Euro im Monat. Das bedeutet, dass familienversicherte Angestellte ein Gesamteinkommen von 667,50 Euro brutto im Monat haben können.
+
+[SPIEL schaetzen: Wie viel dürfen familienversicherte Angestellte 2026 maximal verdienen (inklusive Werbungskostenpauschale)? → 667]
+
+| Beschäftigungsart | Einkommensgrenze 2026 | Jährliches Limit
+
+| Allgemein | 565 Euro | 6.780 Euro
+
+| Minijob | 603 Euro | 7.236 Euro
+
+| Angestellt (mit Werbungskosten) | 667,50 Euro | 8.010 Euro
+
+| Selbstständig | 565 Euro (Gewinn) | 6.780 Euro
+
+## 4 Welche Altersgrenzen gelten für Kinder?
+
+Kinder sind bis zur Vollendung ihres 18. Lebensjahres familienversichert, bis zum 23. Lebensjahr, wenn sie nicht erwerbstätig sind und bis zum 25. Lebensjahr, wenn sie sich in Ausbildung befinden oder ein Studium absolvieren.
+
+Die Altersgrenze von 25 Jahren verlängert sich unter bestimmten Umständen: Absolviert ein Kind einen freiwilligen Wehrdienst, Freiwilligendienst oder eine Tätigkeit als Entwicklungshelfer, wird die Altersgrenze um bis zu zwölf Monate ausgedehnt. Für Kinder mit Behinderung, die außerstande sind, sich selbst zu unterhalten, gilt keine Altersgrenze.
+
+Besonderheiten bei verheirateten Kindern: Verheiratete Studierende können sich ohne Altersgrenze über ihren Ehepartner familienversichern, sofern dieser gesetzlich krankenversichert ist und die weiteren Voraussetzungen erfüllt sind. Darüber hinaus besteht oft Anspruch auf Kindergeld, das Eltern während der Ausbildung ihrer Kinder unterstützt.
+
+[SPIEL gewusst: Verheiratete Studierende haben auch über das 25. Lebensjahr hinaus Anspruch auf Familienversicherung über den gesetzlich versicherten Ehepartner (Stand 2026).]
+
+## 5 Wann ist eine Familienversicherung ausgeschlossen?
+
+Die Familienversicherung ist nicht möglich, wenn bestimmte Ausschlussgründe vorliegen. Hauptberufliche Selbstständigkeit verhindert grundsätzlich die Mitversicherung. Gleiches gilt bei eigener Versicherungspflicht, etwa durch ein Anstellungsverhältnis oberhalb der Minijob-Grenze.
+
+Komplizierte Regel bei gemischten Versicherungsverhältnissen: Kinder sind allerdings nicht über einen gesetzlich versicherten Elternteil familienversichert, wenn der andere Elternteil privat krankenversichert ist und sein monatliches Einkommen 6.450 Euro (1/12 von 77.400 Euro) übersteigt. Diese Prüfung erfolgt in drei Schritten:
+
+1. Einkommen des privat versicherten Elternteils liegt über 77.400 Euro jährlich (6.450 Euro monatlich)
+
+2. Das Einkommen ist regelmäßig höher als das des gesetzlich versicherten Elternteils
+
+3. Der besserverdienende Elternteil ist nicht gesetzlich krankenversichert
+
+Neue Regel für Rentner ab 2026: Der Gesetzgeber hat die Vorschrift über die Familienversicherung ab dem 1. Januar 2026 neu gefasst und zum „Schutz der Solidargemeinschaft" Rentnern den Zugang zur Familienversicherung der gesetzlichen Krankenversicherung über die Wahl einer Teilrente nunmehr gänzlich verschlossen, unabhängig von der Dauer des Teilrentenbezugs.
+
+[SPIEL mythos: Rentner können durch eine Teilrente die Einkommensgrenzen der Familienversicherung unterschreiten und sich kostenlos mitversichern lassen → nein]
+
+## 6 Wie erfolgt die Antragstellung?
+
+Den Antrag stellen Sie direkt bei Ihrer gesetzlichen Krankenkasse. Je nach Situation verwenden die Krankenkassen unterschiedliche Formulare für Erstanträge oder Überprüfungen der Voraussetzungen. Die Bearbeitung dauert normalerweise ein bis vier Werktage.
+
+Erforderliche Unterlagen:
+
+- Geburtsurkunden der Kinder
+
+- Ehe- oder Lebenspartnerschaftsurkunde
+
+- Schulbescheinigungen oder Immatrikulationsbescheinigungen für Kinder ab 18 Jahren
+
+- Aktuelle Entgeltbescheinigung bei nicht-gesetzlich versicherten Partnern
+
+- Gültige Schul- oder Studienbescheinigung für Kinder ab 23 Jahren
+
+Einmal im Jahr verschickt die Kasse einen Fragebogen zu den Einkommensverhältnissen. Mithilfe dieser Informationen prüft die Kasse dann, ob noch alle Voraussetzungen für die Familienversicherung erfüllt sind. Änderungen in der Einkommenssituation müssen unverzüglich gemeldet werden.
+
+## 7 Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?
+
+Die beitragsfreie Familienversicherung bleibt im Kern erhalten. Weiterhin beitragsfrei versichert bleiben Kinder und Partner mit besonderen Betreuungsaufgaben. Für alle anderen mitversicherten Partner wird ein zusätzlicher Beitrag erhoben in Höhe von 2,5 Prozent des Einkommens des erwerbstätigen Ehepartners.
+
+Ab dem 1. Januar 2028 soll für bisher beitragsfrei mitversicherte Ehepartner ohne bestimmte Betreuungsaufgaben ein Krankenkassenbeitrag von 2,5 Prozent der beitragspflichtigen Einnahmen des erwerbstätigen Mitglieds erhoben werden. Ausnahmen gelten bei Kindern unter sieben Jahren im Haushalt, bei Kindern mit Behinderung, bei der Pflege eines Angehörigen ab Pflegegrad 2 im Umfang von mindestens zehn Stunden pro Woche sowie bei Erreichen der Regelaltersgrenze oder voller Erwerbsminderung.
+
+Beispielrechnung: Verdient ein GKV-Mitglied 3.500 Euro monatlich, zahlt er ab 2028 monatlich 87,50 Euro mehr an seine Krankenkasse für den mitversicherten Partner.
+
+Weiterhin vollständig beitragsfrei bleiben:
+
+- Kinder (ohne Altersgrenze)
+
+- Partner mit Kindern unter 7 Jahren
+
+- Partner mit Kindern mit Behinderung
+
+- Pflegende Angehörige (ab Pflegegrad 2, mindestens 10 Stunden/Woche)
+
+- Partner über der Regelaltersgrenze
+
+- Partner mit voller Erwerbsminderung
+
+Die Familienversicherung für Kinder bleibt vollständig beitragsfrei. Diese fundamentale Säule der Familienversicherung wird durch die Reform nicht angetastet.
+
+## 8 Fazit
+
+Die Familienversicherung stellt einen erheblichen finanziellen Vorteil der gesetzlichen Krankenversicherung dar. 2026 können Familienangehörige bis zu 565 Euro monatlich verdienen, bei Minijobs sogar 603 Euro, ohne den beitragsfreien Versicherungsschutz zu verlieren. Angestellte profitieren zusätzlich von der Werbungskostenpauschale und dürfen effektiv 667,50 Euro verdienen.
+
+Die Altersgrenzen für Kinder bleiben stabil: 18 Jahre grundsätzlich, 23 Jahre ohne Beschäftigung, 25 Jahre in Ausbildung oder Studium. Besondere Aufmerksamkeit erfordern gemischte Versicherungsverhältnisse mit einem privat versicherten Partner, dessen Einkommen 6.450 Euro monatlich übersteigt.
+
+Ab 2026 ist der "Teilrenten-Trick" für Rentner komplett ausgeschlossen. Ab 2028 führt das GKV-Beitragsstabilisierungsgesetz einen Zusatzbeitrag von 2,5 Prozent für mitversicherte Partner ohne besondere Betreuungsaufgaben ein. Die Familienversicherung für Kinder bleibt jedoch vollumfänglich erhalten. Wichtig ist die unverzügliche Meldung von Einkommensänderungen an die Krankenkasse, um Nachforderungen zu vermeiden.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste familienversicherung]
+
+[BLOCK dokumente krankenkassenliste,rentenversicherung-familien]
+
+
+## FAQ
+F: Wer kann in der gesetzlichen Familienversicherung mitversichert werden?
+A: Beitragsfrei mitversichert werden können Ehe- und Lebenspartner sowie Kinder des Mitglieds. Auch Stief-, Enkel- und Pflegekinder sind eingeschlossen, wenn sie in häuslicher Gemeinschaft leben oder überwiegend unterhalten werden. Voraussetzung ist der Wohnsitz in Deutschland.
+F: Wie hoch ist die Einkommensgrenze in der Familienversicherung 2026?
+A: Die Einkommensgrenze liegt 2026 bei 565 Euro monatlich, für geringfügig Beschäftigte bei 603 Euro. Mitversicherte Angehörige dürfen somit bis zu 6.780 Euro im Jahr verdienen, ohne den beitragsfreien Versicherungsstatus zu verlieren.
+F: Bis zu welchem Alter sind Kinder mitversichert?
+A: Kinder sind grundsätzlich bis zum vollendeten 18. Lebensjahr mitversichert, ohne Erwerbstätigkeit bis zum 23. Geburtstag. Für Schüler, Studierende und Auszubildende gilt die Altersgrenze von 25 Jahren, die sich durch Freiwilligen- oder Wehrdienst um bis zu zwölf Monate verlängert.
+F: Welche finanziellen Vorteile bietet die Familienversicherung?
+A: Die beitragsfreie Mitversicherung spart insbesondere kinderreichen Familien mehrere hundert Euro pro Monat, da in der privaten Krankenversicherung jedes Familienmitglied separat versichert werden müsste. Der Leistungsanspruch entspricht dem des zahlenden Hauptmitglieds.

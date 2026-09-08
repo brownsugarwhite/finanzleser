@@ -1,0 +1,135 @@
+# Steuerklassen (steuerklassen)
+## 0 Steuerklassen in Deutschland: Alles zur korrekten Einteilung
+
+Die Steuerklasse bestimmt, wie viel Lohnsteuer monatlich vom Gehalt abgeht. Welche Klassen es 2026 gibt, für wen sie gelten und wann sich ein Wechsel lohnt.
+
+## 1 Steuerklassen in Deutschland 2026: Übersicht und Wechsel
+
+Steuerklassen regeln in Deutschland, wie viel Lohnsteuer monatlich von Ihrem Gehalt einbehalten wird. Der Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro, was allen Arbeitnehmenden zugute kommt. Zusätzlich erhöht sich das Kindergeld um 4 Euro auf 259 Euro pro Kind und Monat, und der Kinderfreibetrag steigt 2026 um 156 Euro auf 9.756 Euro.
+
+Die Wahl der richtigen Steuerklasse kann Ihr monatliches Nettoeinkommen erheblich beeinflussen, auch wenn sie Ihre jährliche Gesamtsteuerlast nicht verändert. Entscheidend ist zu verstehen, dass die Lohnsteuer nur eine Vorauszahlung darstellt – die tatsächliche Steuerschuld wird erst mit der Einkommensteuererklärung endgültig berechnet. Die aktuellen Änderungen für 2026 bringen dabei spürbare Verbesserungen für alle Steuerpflichtigen.
+
+## 2 Was sind Steuerklassen und warum gibt es sie?
+
+Deutschland kennt sechs Lohnsteuerklassen, die je nach Familienstand, Anzahl der Arbeitsverhältnisse oder besonderen Lebenssituationen zugewiesen werden. Diese Klassifizierung vereinfacht den Lohnsteuerabzug für Arbeitgeber und sorgt dafür, dass die monatlichen Vorauszahlungen möglichst nahe an der späteren Jahressteuerschuld liegen.
+
+Das System wurde entwickelt, um unterschiedliche Lebenssituationen steuerlich zu berücksichtigen. Der Grundfreibetrag (2025 rund 12.100 Euro, 2026 jährlich angepasst) gilt für alle Steuerklassen. Zusätzlich werden je nach Steuerklasse weitere Freibeträge oder Vergünstigungen gewährt – etwa der Entlastungsbetrag für Alleinerziehende oder der doppelte Grundfreibetrag bei Steuerklasse 3.
+
+Die elektronischen Lohnsteuerabzugsmerkmale (ELStAM) haben die frühere Lohnsteuerkarte ersetzt. Alle steuerrelevanten Informationen werden digital zwischen Finanzamt und Arbeitgeber ausgetauscht. Diese Modernisierung ermöglicht auch flexiblere Steuerklassenwechsel und die Berücksichtigung von Freibeträgen.
+
+## 3 Wer erhält welche Steuerklasse?
+
+Die Zuordnung zu einer bestimmten Steuerklasse erfolgt automatisch auf Basis Ihres Familienstandes und Ihrer Beschäftigungssituation. Hier die Übersicht aller sechs Klassen:
+
+| Steuerklasse | Zielgruppe | Besonderheiten | Grundfreibetrag 2026
+
+| 1 | Ledige, Geschiedene, Verwitwete | Standard-Steuerklasse | 12.348 €
+
+| 2 | Alleinerziehende | Entlastungsbetrag 4.260 € + 240 € pro weiterem Kind | 12.348 €
+
+| 3 | Verheiratete (Hauptverdiener) | Doppelter Grundfreibetrag | 24.696 €
+
+| 4 | Verheiratete (beide Partner) | Wie Steuerklasse 1 | 12.348 €
+
+| 5 | Verheiratete (Geringverdiener) | Kein Grundfreibetrag | 0 €
+
+| 6 | Zweitjob/Nebentätigkeit | Keine Freibeträge | 0 €
+
+Steuerklasse 1 gilt für ledige und geschiedene Arbeitnehmer sowie für verheiratete Arbeitnehmer, deren Ehegatte im Ausland wohnt oder die von ihrem Ehegatten dauernd getrennt leben. Verwitwete Arbeitnehmer gehören ab dem Kalenderjahr 2026 ebenfalls in die Steuerklasse 1, wenn der andere Ehegatte vor dem 1. Januar 2025 verstorben ist.
+
+[SPIEL gewusst: Alleinerziehende mit einem Kind zahlen in Steuerklasse 2 im Jahr 2026 erst ab rund 1850 Euro Monatsbrutto Steuern, während Singles in Steuerklasse 1 bereits ab etwa 1.425 Euro monatlich Lohnsteuer entrichten müssen.]
+
+## 4 Steuerklasse 2: Wie profitieren Alleinerziehende?
+
+Steuerklasse 2 gilt für die unter Steuerklasse 1 genannten Arbeitnehmer, wenn ihnen der Entlastungsbetrag Alleinerziehende zusteht. Diese Steuerklasse wird nicht automatisch zugewiesen – Sie müssen sie beantragen.
+
+Der Entlastungsbetrag funktioniert als zusätzlicher Freibetrag und reduziert Ihre monatliche Lohnsteuer erheblich. Der Entlastungsbetrag für Alleinerziehende beträgt 2025 und 2026 4.260 Euro pro Jahr für das erste Kind, 240 Euro für jedes weitere. Bei zwei Kindern stehen Ihnen also 4.500 Euro zusätzlich steuerfrei zur Verfügung.
+
+Die Voraussetzungen sind klar geregelt:
+
+- Sie sind alleinstehend (ledig, geschieden, verwitwet oder dauernd getrennt lebend)
+
+- Mindestens ein Kind gehört zu Ihrem Haushalt
+
+- Für das Kind erhalten Sie Kindergeld oder einen Kinderfreibetrag
+
+- Das Kind ist bei Ihnen mit Haupt- oder Nebenwohnung gemeldet
+
+Lebt der Arbeitnehmer in einer eheähnlichen Lebensgemeinschaft oder in einer eingetragenen Lebenspartnerschaft, kann der Entlastungsbetrag nicht gewährt werden. Das Gleiche gilt, wenn der Alleinerziehende mit einer anderen volljährigen Person, für die ihm kein Freibetrag für Kinder oder Kindergeld zusteht, einen gemeinsamen Haushalt führt.
+
+## 5 Wie funktioniert die Steuerklassenwahl für Ehepaare?
+
+Verheiratete und eingetragene Lebenspartner erhalten nach der Heirat automatisch die Steuerklasse 4. Diese Kombination 4/4 eignet sich besonders gut bei ähnlichen Gehältern beider Partner. Sie können jedoch zwischen verschiedenen Varianten wählen:
+
+Steuerklasse 4/4: Beide Partner werden wie Alleinstehende behandelt. Keine Steuererklärungspflicht, aber auch kein monatlicher Splittingvorteil. Diese Kombination führt selten zu Nachzahlungen oder hohen Erstattungen.
+
+Steuerklasse 3/5: Der Hauptverdiener erhält Steuerklasse 3, der Nebenverdiener Steuerklasse 5. Das führt zu weniger Lohnsteuer beim Hauptverdiener und mehr beim Nebenverdiener – die gemeinsame Steuerlast bleibt gleich, wird aber ungleich verteilt. Diese Kombination ist vorteilhaft, wenn ein Partner deutlich mehr verdient als der andere.
+
+Steuerklasse 4 mit Faktor: Das modernste Verfahren berücksichtigt die individuellen Gehälter beider Partner bereits monatlich. Beim Faktorverfahren (IV mit Faktor) wird der Splittingvorteil monatlich berücksichtigt; beide haben Steuerklasse 4 mit einem Faktor, der die Steuerlast fair verteilt. Der Faktor liegt immer unter 1,0 und wird vom Finanzamt auf Basis der erwarteten Jahresgehälter berechnet.
+
+[SPIEL mythos: Mit der Steuerklassenkombination 3/5 sparen Ehepaare insgesamt Steuern gegenüber anderen Kombinationen. → nein]
+
+## 6 Wann und wie können Sie die Steuerklasse wechseln?
+
+Ein Steuerklassenwechsel ist in Deutschland grundsätzlich einmal pro Kalenderjahr möglich – spätestens bis zum 30. November des laufenden Jahres. Bei besonderen Lebensereignissen wie Heirat, Scheidung, Geburt eines Kindes oder Tod des Partners ist ein Wechsel auch außerhalb dieser Frist möglich.
+
+Der Antrag erfolgt seit 2024 ausschließlich digital über das ELSTER-Portal. Seit 2024 erfolgt der Steuerklassenwechsel ausschließlich digital über das ELSTER-Portal. Ein Papierantrag beim Finanzamt ist nicht mehr möglich. Die Bearbeitung dauert meist 3-7 Werktage, und die Änderung wird automatisch in die elektronischen Lohnsteuerabzugsmerkmale (ELStAM) eingetragen.
+
+Wichtige Fristen und Besonderheiten:
+
+- Wechsel für das Folgejahr: Antrag bis 30. November
+
+- Wechsel im laufenden Jahr: Gilt ab dem Folgemonat nach Bearbeitung
+
+- Du kannst weiterhin frei zwischen 3/5, 4/4 und 4/4 mit Faktor wählen — und mehrfach pro Jahr wechseln (seit 2020)
+
+Bei Alleinerziehenden erfolgt der Wechsel in Steuerklasse 2 über die Anlage "Kind" im ELSTER-Formular. Wenn Du hingegen als Alleinerziehende in Steuerklasse 2 wechseln möchtest, musst Du ein Häkchen bei Anlage Kind setzen - auch wenn Du eigentlich ja nur die Steuerklasse ändern willst.
+
+[SPIEL quiz: Bis zu welchem Datum können Sie 2026 einen Steuerklassenwechsel für das laufende Jahr beantragen?]
+
+## 7 Welche Auswirkungen haben Steuerklassen auf Ihr Nettoeinkommen?
+
+Die Steuerklasse bestimmt maßgeblich, wie viel Netto Ihnen monatlich vom Bruttolohn bleibt. Im Jahr 2026 hast Du den Grundfreibetrag von 12.348 Euro, den Arbeitnehmerpauschbetrag von 1.230 Euro und den Sonderausgabenpauschbetrag von 36 Euro. Das sind schon mal in Summe 13.614 Euro steuerfrei.
+
+Die Unterschiede zwischen den Steuerklassen sind erheblich. In Steuerklasse 3 zahlen Sie deutlich weniger Lohnsteuer als in Steuerklasse 5 oder 6. In SK 6 gibt es keine Freibeträge — sehr hohe Abzüge. Bei 1.000 Euro brutto bleiben oft nur 550–650 Euro netto.
+
+Wichtig ist dabei zu verstehen, dass sich Steuerklassen auch auf andere Leistungen auswirken. Das Elterngeld basiert auf dem durchschnittlichen Nettolohn der letzten 12 Monate vor der Geburt. Wer in SK 5 ist, hat ein niedrigeres Netto — und damit weniger Elterngeld. Empfehlung: Mindestens 7 Monate vor der Geburt in SK 3 (wenn Hauptverdiener) oder SK 4 (wenn Geringverdiener) wechseln. Gleiches gilt für das Arbeitslosengeld I, das ebenfalls auf dem Nettoeinkommen basiert.
+
+Die Steuerklasse hat aber keinen Einfluss auf die Höhe Ihrer Rente, da diese ausschließlich auf Basis der Bruttoeinkünfte berechnet wird. Auch bei Kurzarbeitergeld und Krankengeld wird das Nettoeinkommen der letzten zwölf Monate zugrunde gelegt.
+
+## 8 Was ändert sich 2026 bei den Steuerklassen?
+
+Die geplante Abschaffung der Steuerklassen 3 und 5 wurde verschoben. Die geplante Abschaffung der Klassen 3 und 5 (vorgesehen für 2030) wurde vom Bundestag nicht verabschiedet. Die Faktorverfahren-Überführung wurde aus dem Steuerfortentwicklungsgesetz 2024 gestrichen. Die neue CDU/CSU-SPD-Koalition will die Reform ebenfalls nicht umsetzen.
+
+Stattdessen profitieren Sie 2026 von verschiedenen Verbesserungen:
+
+- Der Grundfreibetrag steigt um 252 Euro auf 12.348 Euro
+
+- Das Kindergeld steigt um 4 Euro auf 259 Euro pro Kind und Monat
+
+- Der Kinderfreibetrag steigt 2026 um 156 Euro auf 9.756 Euro
+
+- Der Entlastungsbetrag für Alleinerziehende bleibt unverändert bei 4.260 Euro für das erste Kind
+
+Eine wichtige technische Änderung betrifft die Mindestvorsorgepauschale: Diese findet ab 2026 im Lohnsteuerabzugsverfahren keine Anwendung mehr. Stattdessen werden Kranken- und Pflegeversicherungsbeiträge ausschließlich nach den tatsächlichen Versicherungsbeiträgen berücksichtigt. Dies führt zu genaueren Steuerabzügen und weniger Abweichungen bei der Steuererklärung.
+
+## 9 Fazit
+
+Die richtige Steuerklassenwahl optimiert Ihr monatliches Nettoeinkommen, ohne die jährliche Steuerlast zu beeinflussen. Die Verbesserungen für 2026 – höherer Grundfreibetrag, gestiegenes Kindergeld und erhöhter Kinderfreibetrag – bringen allen Steuerpflichtigen spürbare Entlastungen. Ehepaare sollten ihre Steuerklassenkombination regelmäßig überprüfen, besonders bei Gehaltsänderungen oder vor wichtigen Lebensereignissen wie Elternzeit. Alleinerziehende profitieren erheblich von Steuerklasse 2, müssen diese aber aktiv beantragen. Die Abschaffung der Kombination 3/5 wurde verschoben – sie steht Ihnen weiterhin zur Verfügung. Der digitale Steuerklassenwechsel über ELSTER ist kostenfrei und unkompliziert möglich. Bei komplexeren Situationen empfiehlt sich die Beratung durch einen Steuerberater, um die optimale Strategie für Ihre individuelle Situation zu entwickeln.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste steuerklassen]
+
+[BLOCK rechner steuerklassen]
+
+
+## FAQ
+F: Welche Steuerklasse ist für mich die richtige?
+A: Die Steuerklasse hängt von Ihrem Familienstand und Einkommen ab. Singles werden Steuerklasse 1 zugeordnet, Alleinerziehende der Klasse 2. Ehepaare können zwischen den Kombinationen 4/4 (ähnliche Einkommen) und 3/5 (stark unterschiedliche Einkommen) wählen, um ihr Nettoeinkommen zu optimieren.
+F: Wann lohnt sich die Steuerklassenkombination 3 und 5?
+A: Die Kombination 3/5 lohnt sich vor allem für Ehepaare mit stark unterschiedlichen Einkommen. Steuerklasse 3 ist für den Besserverdienenden gedacht, Steuerklasse 5 für den Geringverdienenden. Diese Kombination maximiert das monatliche Nettoeinkommen, die Gesamtsteuerlast ändert sich dadurch jedoch nicht.
+F: Welchen Entlastungsbetrag erhalten Alleinerziehende 2026?
+A: Alleinerziehende in Steuerklasse 2 erhalten 2026 einen Entlastungsbetrag von 4.260 Euro pro Jahr für das erste Kind. Für jedes weitere Kind erhöht sich dieser Betrag um 240 Euro. Voraussetzung ist, dass die Kinder dauerhaft im eigenen Haushalt leben.
+F: Warum gibt es bei Steuerklasse 6 keine Freibeträge?
+A: Steuerklasse 6 wird bei Nebentätigkeiten oder Zweitjobs angewendet, bei denen bereits eine andere Hauptbeschäftigung besteht. Da die Freibeträge bereits beim Hauptarbeitgeber berücksichtigt werden, werden in Steuerklasse 6 alle Einnahmen ohne Freibeträge besteuert. Das führt zu einem höheren Lohnsteuerabzug beim Nebenjob.

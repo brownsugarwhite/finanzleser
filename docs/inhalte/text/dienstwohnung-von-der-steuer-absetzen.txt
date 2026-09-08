@@ -1,0 +1,127 @@
+# Dienstwohnung (dienstwohnung-von-der-steuer-absetzen)
+## 0 Besteuerung und Bewertung von Dienstwohnungen erklärt
+
+Stellt der Arbeitgeber eine Dienstwohnung, ist das ein zu versteuernder geldwerter Vorteil. Wie er 2026 bewertet wird und wie Sie dabei Steuern optimieren.
+
+## 1 Dienstwohnung als geldwerter Vorteil – Steueroptimierung
+
+Eine Dienstwohnung stellt einen geldwerten Vorteil dar, der grundsätzlich versteuert werden muss. Überlässt der Arbeitgeber dem Arbeitnehmer eine Dienstwohnung unentgeltlich oder verbilligt, stellt dies als Sachbezug steuerpflichtigen Arbeitslohn dar. Die Differenz zwischen der ortsüblichen Miete und der tatsächlichen Zahlung gilt als geldwerter Vorteil und wird dem steuerpflichtigen Arbeitslohn hinzugerechnet. Gleichzeitig eröffnen sich durch geschickte Nutzung der Werbungskostenmöglichkeiten – insbesondere bei doppelter Haushaltsführung – erhebliche Steuervorteile.
+
+Die steuerliche Behandlung einer Dienstwohnung hängt maßgeblich davon ab, ob es sich um eine vollwertige Wohnung oder nur eine Unterkunft handelt. Diese Unterscheidung bestimmt, welche Bewertungsmaßstäbe angewendet werden und welche steuerlichen Vorteile möglich sind.
+
+## 2 Was ist eine Dienstwohnung?
+
+Eine Wohnung ist eine in sich geschlossene Einheit von Räumen, in denen ein selbstständiger Haushalt geführt werden kann. Für die Anerkennung als Wohnung sind ein Bad oder eine Toilette sowie eine Küche oder Kochgelegenheit erforderlich. Eine Einzelzimmerwohnung wird anerkannt. Ein Zimmer mit auswärtiger Mitbenutzung von Küche und Bad – wie in einer Wohngemeinschaft – gilt jedoch nicht als Wohnung, sondern als Unterkunft.
+
+Eine Dienstwohnung, auch Werkwohnung genannt, ist eine Wohnung, die nur an Mitarbeiter eines Arbeitgebers vermietet wird. Sie wird entweder unentgeltlich oder verbilligt zur Verfügung gestellt und kann verschiedene Formen annehmen:
+
+- Werkswohnung: Vollständige Übernahme der Wohnkosten durch den Arbeitgeber
+
+- Vergünstigte Dienstwohnung: Miete unter der ortsüblichen Vergleichsmiete
+
+- Steuerfreie Dienstwohnung: Bei Zahlung von mindestens zwei Dritteln der ortsüblichen Miete
+
+[SPIEL quiz: Ab welcher Miethöhe ist eine Dienstwohnung seit 2020 steuerfrei?]
+
+## 3 Wie wird der geldwerte Vorteil berechnet?
+
+Die Höhe des zu versteuernden Vorteils hängt davon ab, ob Sie eine vollwertige Wohnung oder nur eine Unterkunft erhalten. Bei einer echten Dienstwohnung erfolgt die Bewertung über die ortsübliche Vergleichsmiete. Der Sachbezug für eine Wohnung ist in Höhe der ortsüblichen Miete (seit 2020 nach Abzug eines Betrags von 1/3 der ortsüblichen Miete) als geldwerter Vorteil zu erfassen.
+
+Für eine Unterkunft, die keine vollwertige Wohnung darstellt, gelten die amtlichen Sachbezugswerte. Der Sachbezugswert für freie Unterkunft steigt bundeseinheitlich von 282 Euro auf 285 Euro monatlich. Der Sachbezugswert beträgt 2026 für eine Unterkunft 285 EUR.
+
+Ein praktisches Beispiel: Beträgt die ortsübliche Miete laut Mietspiegel 900 Euro und der Arbeitgeber überlässt die Dienstwohnung für 500 Euro, haben Sie einen geldwerten Vorteil von 400 Euro, den Sie versteuern müssen.
+
+## 4 Wann ist eine Dienstwohnung steuerfrei?
+
+Diese Steuerpflicht entfällt jedoch seit 2020, wenn die Miete mindestens zwei Drittel der ortsüblichen Vergleichsmiete beträgt und 25 Euro/m² nicht übersteigt. Wenn der Mitarbeitende mindestens zwei Drittel der ortsüblichen Miete bezahlt, entfällt der geldwerte Vorteil und die Dienstwohnung ist steuerfrei.
+
+Eine weitere Ausnahme besteht bei betrieblichem Interesse. Keine Steuerpflicht besteht, wenn dein Arbeitgeber die Dienstwohnung aus überwiegend betrieblichem Interesse bereitstellt. Dies gilt etwa:
+
+- Bei Rufbereitschaft und Notfalldiensten (z.B. im Krankenhaus)
+
+- Bei Hausmeistertätigkeiten mit Anwesenheitspflicht
+
+- Bei Schichtdiensten mit unregelmäßigen Arbeitszeiten
+
+- Wenn die Anwesenheit zur Erfüllung der Aufgaben notwendig ist
+
+| Konstellation | Bewertung | Steuerfolge
+
+| Kostenlose Dienstwohnung | Ortsübliche Miete | Vollständig steuerpflichtig
+
+| Vergünstigte Dienstwohnung | Differenz zur ortsüblichen Miete | Differenzbetrag steuerpflichtig
+
+| Mindestens 2/3 der ortsüblichen Miete (max. 25 €/qm) | Keine Bewertung | Steuerfrei
+
+| Betriebliches Interesse | Keine Bewertung | Steuerfrei
+
+| Unterkunft (kein abgeschlossener Wohnraum) | 285 Euro monatlich (2026) | Sachbezugswert steuerpflichtig
+
+[SPIEL karte: Ortsübliche Vergleichsmiete]
+
+## 5 Wie setzen Sie Ihre Dienstwohnung bei doppelter Haushaltsführung ab?
+
+Wenn Sie neben Ihrem Hauptwohnsitz aus beruflichen Gründen eine Dienstwohnung nutzen, können Sie unter bestimmten Voraussetzungen die Kosten einer doppelten Haushaltsführung geltend machen. Wer aus beruflichen Gründen einen zweiten Haushalt am Beschäftigungsort führt, kann mit dieser doppelten Haushaltsführung viele Steuern sparen.
+
+Die grundlegenden Voraussetzungen sind klar definiert: Sie müssen einen eigenen Hausstand außerhalb des Beschäftigungsortes unterhalten und sich finanziell an den Kosten der Lebensführung beteiligen. Als Mieter müssen Sie einen Anteil von mehr als zehn Prozent der Kosten am Hauptwohnsitz bezahlen.
+
+Bei doppelter Haushaltsführung in Deutschland sind für die Unterkunft die tatsächlichen Aufwendungen gegen Nachweis nur bis zum Höchstbetrag von 1.000 EUR pro Monat absetzbar. Sie können Ihre tatsächlichen Kosten für die Nutzung Ihrer Dienstwohnung mit bis zu 1.000 Euro pro Monat als Werbungskosten angeben. Liegen Ihre Unterkunftskosten in einem Kalendermonat unter diesem Höchstbetrag, können Sie den nicht ausgeschöpften Betrag auf andere Monate im selben Kalenderjahr übertragen.
+
+Zusätzlich können Sie weitere Kosten absetzen: Für Familienheimfahrten gilt die Entfernungspauschale: Pro Entfernungskilometer werden ab dem 1. Januar 2026 0,38 Euro für die einfache Fahrt anerkannt, wenn Sie mit Ihrem eigenen Auto gefahren sind. Diese sogenannten „Familienheimfahrten" können Sie mit der Entfernungspauschale von 0,38 Euro je vollen Entfernungskilometer ansetzen (Stand 2026).
+
+## 6 Welche Möbel und Einrichtungskosten können Sie vollständig absetzen?
+
+Eine besonders vorteilhafte Regelung betrifft die Einrichtung Ihrer Dienstwohnung bei doppelter Haushaltsführung. Der Bundesfinanzhof hat im Jahre 2019 eine interessante Entscheidung gefällt: Danach gilt, dass die Kosten für die notwendige Einrichtung der Zweitwohnung nicht zu den Unterkunftskosten gehören, deren Abzug auf 1.000 EUR im Monat begrenzt ist.
+
+Diese Entscheidung ist besonders günstig, da sie eine klare Trennung zwischen Unterkunfts- und Einrichtungskosten schafft. Die Kosten der Einrichtung sind keine Kosten der Unterkunft und fallen daher nicht unter die 1.000-Euro-Grenze. Die Kosten für die notwendige Einrichtung der Zweitwohnung gehören nicht zu den begrenzten Unterkunftskosten.
+
+[SPIEL gewusst: Bei Einrichtungskosten unter 5.000 Euro (Stand 2026) gelten diese aus Vereinfachungsgründen automatisch als „notwendig" und werden ohne weitere Prüfung als Werbungskosten anerkannt.]
+
+Für die praktische Umsetzung gibt es eine hilfreiche Vereinfachungsregelung: Übersteigen die Anschaffungskosten für Einrichtung und Ausstattung der Zweitwohnung (ohne Arbeitsmittel) insgesamt nicht den Betrag von 5.000 Euro (einschließlich Umsatzsteuer), ist davon auszugehen, dass es sich um notwendige Mehraufwendungen der doppelten Haushaltsführung handelt.
+
+Absetzbare Kosten bei doppelter Haushaltsführung:
+
+- Miete und Nebenkosten: Bis zu 1.000 Euro monatlich
+
+- Möbel und Hausrat: Vollständig zusätzlich absetzbar (keine Begrenzung)
+
+- Umzugskosten: Bei nachgewiesenen Kosten vollständig absetzbar
+
+- Familienheimfahrten: Eine Fahrt wöchentlich mit 0,38 Euro je Kilometer (2026)
+
+- Verpflegungsmehraufwand: Nur erste drei Monate, 28 Euro pro Tag bei 24-Stunden-Abwesenheit (2026)
+
+## 7 Korrekte Angaben in der Steuererklärung machen
+
+Die allgemeinen Angaben zur doppelten Haushaltsführung können Sie bei Nutzung von ELSTER auf der Anlage N-Doppelte Haushaltsführung vornehmen. Grundsätzlich müssen geldwerte Vorteile nicht separat in der Steuererklärung angegeben werden. Die relevanten Informationen sind bereits in der jährlichen Lohnsteuerbescheinigung des Arbeitgebers enthalten – in Nummer 20 der Lohnsteuerbescheinigung.
+
+Bei der Erfassung Ihrer Aufwendungen als Werbungskosten sollten Sie alle relevanten Belege sammeln und systematisch dokumentieren. Sie können folgende Aufwendungen angeben:
+
+- Aufwendungen für die Wohnung selbst (Miete, Maklerkosten, Zweitwohnungssteuer, Möbelkosten)
+
+- Aufwendungen für Wege (Fahrtkosten zur Dienstwohnung und zum Arbeitsplatz, vergleichbar mit Dienstreisen)
+
+- Verpflegungsmehraufwendungen (erste drei Monate)
+
+- Umzugskosten im Zusammenhang mit der beruflichen Veranlassung
+
+Sie können nur die Kosten der doppelten Haushaltsführung in der Steuererklärung als Werbungskosten absetzen, die Ihr Arbeitgeber nicht steuerfrei erstattet hat. In der Steuererklärung geben Sie sowohl Ihre Ausgaben als auch mögliche Zuschüsse Ihres Arbeitgebers an.
+
+## 8 Fazit
+
+Die steuerliche Behandlung einer Dienstwohnung bietet Ihnen sowohl Herausforderungen als auch erhebliche Chancen. Während der geldwerte Vorteil zunächst Ihre Steuerlast erhöht, können Sie durch geschickte Nutzung der Werbungskostenmöglichkeiten oft deutlich mehr zurückholen. Die Steuerbefreiung bei Zahlung von mindestens zwei Dritteln der ortsüblichen Miete macht Dienstwohnungen seit 2020 deutlich attraktiver. Besonders die vollständige Absetzbarkeit von Einrichtungsgegenständen bei doppelter Haushaltsführung stellt einen großen Vorteil dar. Dokumentieren Sie alle Aufwendungen sorgfältig und nutzen Sie die speziellen Anlagen in der Steuererklärung. Bei komplexeren Sachverhalten oder hohen Beträgen empfiehlt sich die Beratung durch einen Steuerexperten, um alle Möglichkeiten optimal auszuschöpfen. Die erhöhte Entfernungspauschale von 0,38 Euro ab 2026 für jeden Kilometer verstärkt die Vorteile bei doppelter Haushaltsführung zusätzlich.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste dienstwohnung]
+
+
+## FAQ
+F: Muss ich eine Dienstwohnung als geldwerten Vorteil versteuern?
+A: Ja, wenn Sie eine Dienstwohnung unentgeltlich oder verbilligt vom Arbeitgeber erhalten, gilt dies als steuerpflichtiger Sachbezug. Der geldwerte Vorteil ergibt sich aus der Differenz zwischen der ortsüblichen Vergleichsmiete und der tatsächlich gezahlten Miete.
+F: Wann entfällt der geldwerte Vorteil bei einer Dienstwohnung?
+A: Seit 2020 gilt: Zahlen Sie mindestens zwei Drittel der ortsüblichen Miete, entfällt der geldwerte Vorteil und die Dienstwohnung ist steuerfrei. Voraussetzung ist, dass der Mietpreis pro Quadratmeter 25 Euro nicht überschreitet.
+F: Wie hoch ist der Sachbezugswert für eine Unterkunft 2024?
+A: Für einen volljährigen Arbeitnehmer beträgt der Sachbezugswert 2024 monatlich 278 Euro für eine geschlossene Wohneinheit. Dieser Wert wird angesetzt, wenn keine Vergleichsmiete ermittelt werden kann und es sich nicht um eine vollwertige Wohnung handelt.
+F: Kann ich eine Dienstwohnung als doppelte Haushaltsführung absetzen?
+A: Ja, wenn Sie neben Ihrem Hauptwohnsitz aus beruflichen Gründen eine Dienstwohnung nutzen, können Sie bis zu 1.000 Euro monatlich als Werbungskosten ansetzen. Voraussetzung ist ein eigener Hausstand am Hauptwohnsitz mit finanzieller Beteiligung von mehr als 10 Prozent an den Kosten.

@@ -1,0 +1,129 @@
+# Einkommensteuer (einkommensteuer)
+## 0 Steuererklärung leicht erklärt: Sparen mit Grundfreibetrag
+
+Die Einkommensteuer belastet alle Einkünfte natürlicher Personen. Wie der Tarif 2026 funktioniert, welche Freibeträge gelten und wie Sie Ihre Steuer senken.
+
+## 1 Einkommensteuer 2026: Tarif, Freibeträge und Berechnung
+
+Die Einkommensteuer regelt die Besteuerung aller Einkünfte in Deutschland.
+
+Die Einkommensteuer ist das wichtigste Instrument der deutschen Steuerpolitik zur Besteuerung von Privatpersonen. Das steuerfreie Existenzminimum wird durch den Grundfreibetrag gesichert, der 2026 bei 12.348 Euro liegt. Jeder mit Wohnsitz oder gewöhnlichem Aufenthalt in Deutschland unterliegt grundsätzlich der Steuerpflicht – unabhängig davon, ob Sie als Angestellter, Selbstständiger, Rentner oder Vermieter Einkünfte erzielen.
+
+## 2 Was ist die Einkommensteuer und wer muss sie zahlen?
+
+Der Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro. Das bedeutet: Auf Einkommen bis zu dieser Grenze zahlen Sie keine Steuern. Für verheiratete Paare oder eingetragene Lebenspartner gilt der doppelte Betrag von 24.696 Euro.
+
+Steuerpflichtig sind alle Personen mit Wohnsitz oder gewöhnlichem Aufenthalt in Deutschland. Die Einkommensteuer erfasst alle sieben Einkunftsarten des deutschen Steuerrechts:
+
+- Einkünfte aus nichtselbstständiger Arbeit (Lohn und Gehalt)
+
+- Selbstständige Arbeit
+
+- Gewerbebetrieb
+
+- Kapitalvermögen
+
+- Vermietung und Verpachtung
+
+- Land- und Forstwirtschaft
+
+- Sonstige Einkünfte
+
+Das zu versteuernde Einkommen bildet die Berechnungsbasis. Es ergibt sich aus dem Bruttoeinkommen abzüglich der Sozialversicherungsbeiträge, Werbungskosten, Sonderausgaben und weiterer Abzüge.
+
+[SPIEL karte: Zu versteuerndes Einkommen (zvE)]
+
+## 3 Wie hoch sind die Steuersätze 2026?
+
+Das deutsche Steuersystem funktioniert nach dem Progressionsprinzip: Je höher das Einkommen, desto höher der Steuersatz. Der Spitzensteuersatz von 42 Prozent greift 2026 ab einem zu versteuernden Einkommen von 69.879 Euro. Der Höchststeuersatz beträgt 45 Prozent und beginnt ab 277.826 Euro.
+
+| Zu versteuerndes Einkommen | Steuersatz | Status
+
+| 0 bis 12.348 Euro | 0% | Grundfreibetrag
+
+| 12.349 bis 17.799 Euro | 14-24% | Eingangsteuersatz
+
+| 17.800 bis 69.878 Euro | 24-42% | Progressive Zone
+
+| 69.879 bis 277.825 Euro | 42% | Spitzensteuersatz
+
+| Ab 277.826 Euro | 45% | Höchststeuersatz ("Reichensteuer")
+
+[SPIEL schaetzen: Wie viele Euro beträgt der Grundfreibetrag für verheiratete Paare 2026? → 24696]
+
+Etwa 90 Prozent der Lohn- oder Einkommensteuerzahler zahlen keinen Solidaritätszuschlag mehr, da dieser 2021 weitgehend abgeschafft wurde. Die Jahresfreigrenze für den Solidaritätszuschlag steigt 2026 für Einzelveranlagte auf 20.350 Euro gezahlte Gesamtjahressteuer.
+
+## 4 Lohnsteuer versus Einkommensteuer – Was ist der Unterschied?
+
+Bei Arbeitnehmern spricht man von Lohnsteuer, bei Selbstständigen von Einkommensteuer. Die Lohnsteuer ist dabei eine besondere Erhebungsform der Einkommensteuer und wird direkt vom Arbeitgeber einbehalten.
+
+Die Lohnsteuer wird monatlich vom Bruttogehalt abgezogen und bis zum 15. des Folgemonats an das Finanzamt abgeführt. Sie stellt eine Vorauszahlung auf die tatsächliche Steuerschuld dar. Selbstständige zahlen dagegen vierteljährliche Vorauszahlungen direkt an das Finanzamt.
+
+Am Jahresende erfolgt bei allen Steuerpflichtigen im Rahmen der Steuererklärung die endgültige Abrechnung. Dabei wird ermittelt, ob zu viel oder zu wenig Steuern gezahlt wurden.
+
+## 5 Wie berechnet sich die Einkommensteuer genau?
+
+Die Berechnung erfolgt schrittweise nach dem progressiven Tarif. Der Eingangssteuersatz beginnt bei 14 Prozent für den ersten Euro nach dem Grundfreibetrag von 12.348 Euro. Ein Beispiel: Bei einem zu versteuernden Einkommen von 30.000 Euro führen Sie 2026 nur noch 14,1 Prozent ab statt 14,3 Prozent im Vorjahr, was 86 Euro Ersparnis bedeutet.
+
+Der progressive Tarif funktioniert stufenweise: Nur der Einkommensteil, der über einer bestimmten Grenze liegt, wird mit dem höheren Steuersatz belastet. Das bedeutet: Wer den Spitzensteuersatz zahlt, verliert nicht 42 Prozent des gesamten Einkommens, sondern nur 42 Prozent von jedem Euro über 69.879 Euro.
+
+Die Grenze für den Spitzensteuersatz erhöht sich von 68.481 Euro auf 69.879 Euro, was 5.823,25 Euro pro Monat entspricht. Diese Anpassung gleicht die kalte Progression aus.
+
+## 6 Wann müssen Sie eine Steuererklärung abgeben?
+
+Nicht jeder muss eine Steuererklärung machen. Als Arbeitnehmer sind Sie jedoch in folgenden Fällen zur Abgabe verpflichtet:
+
+- Sie waren gleichzeitig bei mehreren Arbeitgebern beschäftigt
+
+- Sie hatten unversteuerte Einkünfte über 410 Euro (Honorare, Renten, Mieten)
+
+- Sie haben einen Freibetrag auf der Lohnsteuerkarte eintragen lassen
+
+- Bei Ehepaaren: Steuerklassen V/VI oder IV/IV mit Faktorverfahren
+
+- Sie bezogen Lohnersatzleistungen wie Elterngeld, Kurzarbeitergeld oder Arbeitslosengeld
+
+Die Steuererklärung für 2025 muss bis zum 31. Juli 2026 eingereicht werden. Bei steuerlicher Beratung verlängert sich die Frist auf den 1. März 2027. Für freiwillige Steuererklärungen haben Sie vier Jahre Zeit.
+
+[SPIEL quiz: Bis wann müssen verpflichtete Steuerzahler ihre Steuererklärung 2025 abgeben?]
+
+## 7 Was ändert sich 2026 bei der Einkommensteuer?
+
+Das Jahr 2026 bringt mehrere wichtige Änderungen mit sich. Die Entfernungspauschale wird einheitlich auf 38 Cent ab dem ersten gefahrenen Kilometer erhöht. Bisher galt dieser Satz erst ab dem 21. Kilometer. Bei einem Arbeitsweg von 10 Kilometern und einer Fünf-Tage-Woche ergeben sich jährlich 176 Euro zusätzliche Werbungskosten.
+
+Familien profitieren von steuerlichen Verbesserungen: Das Kindergeld steigt um 4 Euro auf 259 Euro pro Monat. Der Kinderfreibetrag erhöht sich um 156 Euro auf 6.828 Euro, das sind 3.414 Euro pro Elternteil.
+
+Rentner profitieren von der neuen Aktivrente: Wer im Alter freiwillig weiterarbeitet, kann bis zu 2.000 Euro monatlich steuerfrei hinzuverdienen. Diese Regelung gilt zusätzlich zum Grundfreibetrag.
+
+Die Anpassung der Steuertarife wirkt der kalten Progression entgegen. Wer eine Gehaltserhöhung entsprechend der Inflationsrate erhält, soll nicht in einen höheren Steuersatz rutschen.
+
+## 8 Steuern sparen – Praktische Tipps für 2026
+
+Die wichtigsten Stellschrauben zur Steueroptimierung bleiben auch 2026 bestehen. Mit der höheren Entfernungspauschale lohnt sich das Pendeln steuerlich mehr: Mit 38 Cent ab dem ersten Kilometer reichen schon 15 Kilometer einfache Wegstrecke aus, um die Werbungskostenpauschale von 1.230 Euro zu überschreiten.
+
+Weitere Abzugsmöglichkeiten umfassen Fortbildungskosten, Arbeitsmittel, häusliches Arbeitszimmer und Bewerbungskosten. Bei den Sonderausgaben wirken sich Spenden, Versicherungsbeiträge und Altersvorsorgeaufwendungen steuermindernd aus.
+
+Gewerkschaftsmitglieder können ihre Beiträge künftig zusätzlich zu bestehenden Pauschbeträgen und Werbungskosten abziehen. Dies stellt eine Verbesserung für alle Gewerkschaftsmitglieder dar.
+
+Außergewöhnliche Belastungen wie Krankheitskosten, Behinderungsbedingte Aufwendungen oder Pflegekosten können ebenfalls die Steuerlast reduzieren, allerdings erst oberhalb der zumutbaren Eigenbelastung.
+
+## 9 Fazit
+
+Die Einkommensteuer 2026 bringt für die meisten Steuerpflichtigen spürbare Entlastungen. Der um 252 Euro höhere Grundfreibetrag von 12.348 Euro und die angepassten Steuersätze dämpfen die Belastung. Pendler profitieren besonders von der einheitlichen Entfernungspauschale von 38 Cent ab dem ersten Kilometer, während Familien durch höheres Kindergeld und gestiegene Kinderfreibeträge unterstützt werden. Wer zur Abgabe verpflichtet ist, sollte die Frist bis zum 31. Juli 2026 beachten, während freiwillige Erklärer vier Jahre Zeit haben. Im Durchschnitt erhalten Steuerpflichtige 1.172 Euro zurück – eine sorgfältige Auseinandersetzung mit den steuerlichen Möglichkeiten lohnt sich also.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste einkommensteuer]
+
+[BLOCK rechner einkommensteuer]
+
+
+## FAQ
+F: Wer ist in Deutschland einkommensteuerpflichtig?
+A: Einkommensteuerpflichtig sind alle Personen mit Wohnsitz oder gewöhnlichem Aufenthalt in Deutschland, unabhängig davon, ob sie angestellt, selbstständig, Rentner oder Vermieter sind. Die Steuer erfasst alle sieben Einkunftsarten des deutschen Steuerrechts.
+F: Wie hoch ist der Grundfreibetrag 2026?
+A: Der Grundfreibetrag wurde zum 1. Januar 2026 auf 12.348 Euro angehoben, für Verheiratete gilt der doppelte Betrag von 24.696 Euro. Bis zu dieser Grenze fällt keine Lohn- oder Einkommensteuer an, höhere Einkommen werden progressiv besteuert.
+F: Was ist der Unterschied zwischen Lohn- und Einkommensteuer?
+A: Die Lohnsteuer ist eine besondere Erhebungsform der Einkommensteuer und wird vom Arbeitgeber direkt vom Bruttogehalt einbehalten. Selbstständige zahlen die Einkommensteuer dagegen über vierteljährliche Vorauszahlungen direkt ans Finanzamt.
+F: Welche Steuersätze gelten 2026?
+A: Bis 12.348 Euro gilt der Grundfreibetrag mit 0 Prozent. Danach steigt der Tarif progressiv von 14 auf 42 Prozent an, der Spitzensteuersatz greift ab 69.879 Euro und der Höchststeuersatz von 45 Prozent ab 277.826 Euro zu versteuerndem Einkommen.

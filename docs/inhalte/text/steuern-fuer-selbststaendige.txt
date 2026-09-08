@@ -1,0 +1,117 @@
+# Steuern für Selbstständige (steuern-fuer-selbststaendige)
+## 0 Steuern für Selbstständige: Leitfaden zu Einkommensteuer und Gewerbesteuer
+
+Selbstständige zahlen Einkommen-, Gewerbe- und Umsatzsteuer. Welche Abgaben 2026 anfallen, welche Fristen gelten und wie Sie als Selbstständiger Steuern sparen.
+
+## 1 Steuern für Selbständige 2026: Abgaben richtig planen und sparen
+
+Steuern für Selbständige regeln die Abgabenpflicht von Einkommensteuer, Gewerbesteuer und Umsatzsteuer für gewerbliche und freiberufliche Tätigkeiten. Wer sich selbstständig macht, muss sich mit drei verschiedenen Steuerarten auseinandersetzen – eine komplexe Aufgabe, die richtige Planung erfordert. 2026 bringt konkrete Verbesserungen: Der Grundfreibetrag steigt auf 12.348 Euro, die Kleinunternehmerregelung bekommt höhere Grenzen, und die Pendlerpauschale wird vereinfacht. Diese Änderungen bieten Chancen für bessere Steueroptimierung und niedrigere Abgasten, erfordern aber auch angepasste Planungsstrategien.
+
+## 2 Welche Steuern zahlen Selbständige 2026?
+
+Als Selbständiger tragen Sie drei Steuerlasten: Einkommensteuer, Gewerbesteuer und Umsatzsteuer.
+
+Die Einkommensteuer fällt auf Ihren erzielten Gewinn an und folgt einem progressiven Tarif. Der steuerliche Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro – Ihre Einkünfte bis zu diesem Betrag bleiben vollständig steuerfrei. Das entlastet besonders Gründer und Kleinunternehmer.
+
+Die Umsatzsteuer beträgt regulär 19 Prozent auf die meisten Leistungen, mit einem reduzierten Satz von 7 Prozent für bestimmte Bereiche. Ab 2025 gelten neue Grenzen für die Kleinunternehmerregelung: 25.000 € Umsatz im Vorjahr und 100.000 € im laufenden Jahr. Diese Regelung befreit Sie von der Umsatzsteuerpflicht, wenn Sie beide Grenzen einhalten.
+
+Die Gewerbesteuer müssen Sie nur zahlen, wenn Sie eine gewerbliche Tätigkeit ausüben. Einzelunternehmen und Personengesellschaften profitieren von einem Freibetrag in Höhe von 24.500 Euro. Freiberufler nach § 18 EStG sind von der Gewerbesteuer befreit und zahlen nur Einkommensteuer.
+
+[SPIEL schaetzen: Wie hoch ist der Grundfreibetrag für Singles 2026? → 12348]
+
+## 3 Wie berechnet sich die Einkommensteuer für Selbständige?
+
+Die Einkommensteuer folgt einem gestaffelten System. Bis 12.348 Euro zahlen Sie nichts. Danach beginnt die untere Zone mit ansteigendem Steuersatz von 14 % bis 23,97 % für Einkommen von 12.349 bis 17.799 Euro. Die Progressionszone folgt mit 23,97 % bis 42 % für Einkommen von 17.800 bis 69.878 Euro.
+
+Der Spitzensteuersatz von 42 Prozent gilt für Einkommen zwischen 69.878 und 277.825 Euro, darüber greift der Höchststeuersatz von 45 Prozent. Das Prinzip ist einfach: Je höher Ihr Gewinn, desto höher wird auch der Steuersatz auf die zusätzlichen Euro. Dies ist gerade bei schnell wachsenden Unternehmen relevant.
+
+Selbständige müssen quartalsweise Einkommensteuervorauszahlungen leisten. Die Termine sind der 10. März, 10. Juni, 10. September und 10. Dezember. Die Höhe basiert auf der Steuerlast des Vorjahres – deshalb ist vorausschauende Liquiditätsplanung so wichtig.
+
+Als Selbständiger können Sie alle beruflich veranlassten Ausgaben als Betriebsausgaben absetzen. Die Homeoffice-Pauschale beträgt 6 Euro pro Tag, maximal für 210 Tage im Jahr. Das ergibt eine Steuerersparnis von bis zu 1.260 Euro pro Jahr.
+
+## 4 Wer muss Gewerbesteuer zahlen und wie wird sie berechnet?
+
+Die Gewerbesteuer betrifft alle gewerblichen Unternehmen, unabhängig von ihrer Größe. Nicht gewerbesteuerpflichtig sind Freiberufler wie Ärzte, Rechtsanwälte oder Ingenieure, sofern sie ausschließlich freiberuflich tätig sind.
+
+Auf die Bemessungsgrundlage wird die bundesweit einheitliche Steuermesszahl von 3,5 Prozent angewendet. Das Ergebnis ist der Steuermessbetrag. Dieser wird dann mit dem Hebesatz der Gemeinde multipliziert – und hier unterscheiden sich die Gewerbesteuer-Belastungen zwischen Standorten erheblich.
+
+[SPIEL karte: Gewerbesteuer-Hebesatz]
+
+Der Hebesatz muss aktuell noch mindestens 200 % betragen. Ab dem Erhebungszeitraum 2027 hebt der Bundestag diese Untergrenze jedoch auf 280 % an – eine wichtige Änderung für Ihre Kostenplanung.
+
+Die Berechnung folgt dieser Formel: (Gewerbeertrag minus Freibetrag) × 3,5 % × Hebesatz. Während die Steuermesszahl bundesweit einheitlich bleibt, variiert der kommunale Hebesatz erheblich. Eine 50.000-Euro-Gewinnung kostet in einer Stadt mit 500 % Hebesatz deutlich mehr als in einer mit 300 %.
+
+## 5 Kleinunternehmerregelung: Grenzen und Vorteile 2026
+
+Die maßgeblichen Umsatzgrenzen für die Kleinunternehmerregelung 2026 sind 25.000 Euro im Vorjahr und 100.000 Euro im laufenden Jahr. Beide Bedingungen müssen erfüllt sein.
+
+Wichtig: Wenn Sie im laufenden Jahr die 100.000-Euro-Grenze überschreiten – beispielsweise im August 2025 – gilt die Regelbesteuerung ab diesem Monat. Sie müssen dann auf alle weiteren Umsätze Umsatzsteuer berechnen. Keine rückwirkende Besteuerung für den Jahresanfang erfolgt.
+
+Als Kleinunternehmer führen Sie keine Umsatzsteuer ans Finanzamt ab und müssen keine Voranmeldungen erstellen. Allerdings können Sie auch keine Vorsteuer aus Ausgaben zurückfordern. Diese Vereinfachung ist besonders vorteilhaft beim Verkauf an Privatpersonen:
+
+- Keine Umsatzsteuer auf Rechnungen ausweisen
+
+- Keine Umsatzsteuervoranmeldungen erforderlich
+
+- Kein Vorsteuerabzug möglich
+
+- Vereinfachte Buchhaltung
+
+- Niedrigere Preise für Endverbraucher attraktiv
+
+## 6 Steuervorauszahlungen richtig planen
+
+Steuervorauszahlungen sind zentral für Ihre Liquiditätsplanung. Das Finanzamt fordert quartalsweise Beträge basierend auf Ihrem letztjährigen Steuerbescheid. Der erste Schritt: Prüfen Sie Ihre aktuellen Einkommensteuervorauszahlungen. Viele Unternehmer zahlen zu hohe Beträge, weil das Finanzamt die neuen Freibeträge nicht automatisch anpasst. Eine Anpassung kann sofort Liquidität freisetzen.
+
+[SPIEL mythos: Selbständige können ihre Einkommensteuervorauszahlungen jederzeit anpassen lassen → ja]
+
+Planen Sie grundsätzlich 25 bis 40 Prozent Ihrer Einnahmen als Steuerrücklagen ein. Bei höheren Gewinnen sollten Sie eher zum oberen Bereich greifen, da der progressive Tarif stärker greift. Vergessen Sie auch nicht die Gewerbesteuer, die quartalsweise fällig wird.
+
+Eine bewährte Strategie ist ein separates Steuerkonto. Überweisen Sie dort regelmäßig einen festen Prozentsatz Ihrer Einnahmen. So vermeiden Sie böse Überraschungen und haben Mittel für Nachzahlungen verfügbar.
+
+| Steuerart | Vorauszahlungstermine | Bemessungsgrundlage
+
+| Einkommensteuer | 10.3., 10.6., 10.9., 10.12. | Vorjahressteuerschuld
+
+| Gewerbesteuer | 15.2., 15.5., 15.8., 15.11. | Vorjahressteuerschuld
+
+| Umsatzsteuer | 10. des Folgemonats | Monatlich/quartalsweise
+
+## 7 Betriebsausgaben und Pauschalen optimal nutzen
+
+Betriebsausgaben sind Ihr wichtigstes Steueroptimierungsinstrument. Sie können alle beruflich veranlassten Ausgaben absetzen – von Büromaterial über Fahrtkosten bis hin zu Versicherungen. Der entscheidende Punkt: Es muss einen eindeutigen beruflichen Bezug geben.
+
+Die Homeoffice-Pauschale tragen Sie in der Einnahmen-Überschuss-Rechnung (EÜR) ein: 6 Euro pro Tag, maximal 210 Tage, Höchstbetrag 1.260 Euro jährlich. Sie können diese mit der Internetpauschale (20 %, max. 240 €/Jahr) und dem Abzug für Arbeitsmittel kombinieren.
+
+Die Pendlerpauschale ändert sich 2026 grundlegend: Ab dem 1. Januar 2026 gilt ein einheitlicher Satz von 38 Cent pro Kilometer – ab dem ersten Kilometer, nicht erst ab dem 21. wie bisher. Das vereinfacht Ihre Berechnungen erheblich.
+
+Bei der Fahrzeugnutzung wählen Sie zwischen der 1-Prozent-Regelung oder einem Fahrtenbuch. Das Fahrtenbuch ist bei geringer privater Nutzung meist günstiger, erfordert aber lückenlose Dokumentation aller Fahrten.
+
+## 8 Abgabefristen und Steuererklärung 2026
+
+Ohne Steuerberater: 31. Juli des Folgejahres (für 2025: 31.07.2026). Mit Steuerberater: 30. April des übernächsten Jahres (für 2025: 30.04.2027). Diese Fristverlängerung gibt Ihnen deutlich mehr Zeit für sorgfältige Dokumentation.
+
+Belege müssen 10 Jahre aufbewahrt werden – Rechnungen, Verträge, Kontoauszüge. Eine digitale Archivierung ist zulässig und oft praktischer.
+
+Verspätete Abgabe kostet: Zuschläge ab 25 Euro pro Monat plus Zinsen. Bei wiederholten Verspätungen kann der Zuschlag bis zu 10 Prozent der Steuerschuld betragen.
+
+## 9 Fazit
+
+2026 bringt für Steuern für Selbständige deutliche Verbesserungen. Der Grundfreibetrag steigt um 252 Euro auf 12.348 Euro – spürbare Entlastung bei niedrigen Einkommen. Die Kleinunternehmerregelung wird mit höheren Grenzen attraktiver. Die vereinheitlichte Pendlerpauschale von 38 Cent ab dem ersten Kilometer vereinfacht Berechnungen. Die Homeoffice-Pauschale bleibt bei 6 Euro pro Tag und 1.260 Euro jährlich ein wichtiger Optimierungsbaustein. Nutzen Sie diese Neuerungen und lassen Sie Ihre Vorauszahlungen anpassen. Eine professionelle Beratung lohnt sich bei komplexeren Sachverhalten.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste steuern-fuer-selbstaendige]
+
+[BLOCK dokumente selbstaendige-und-rente]
+
+
+## FAQ
+F: Welche Steuern müssen Selbstständige 2026 zahlen?
+A: Selbstständige zahlen Einkommensteuer auf ihren Gewinn, Umsatzsteuer auf ihre Leistungen (19 oder 7 Prozent) sowie je nach Tätigkeit Gewerbesteuer. Freiberufler sind von der Gewerbesteuer befreit. Der Grundfreibetrag von 12.348 Euro bleibt für alle steuerfrei.
+F: Wann muss ich Einkommensteuervorauszahlungen leisten?
+A: Selbstständige müssen quartalsweise Einkommensteuervorauszahlungen leisten, jeweils zum 10. März, 10. Juni, 10. September und 10. Dezember. Die Höhe basiert auf der Steuerlast des Vorjahres. Eine vorausschauende Liquiditätsplanung ist daher wichtig, um Zahlungsengpässe zu vermeiden.
+F: Welche Umsatzgrenzen gelten für die Kleinunternehmerregelung?
+A: Mit der Kleinunternehmerregelung können Sie sich von der Umsatzsteuer befreien lassen, wenn Ihr Umsatz im Vorjahr maximal 25.000 Euro betrug und im laufenden Jahr voraussichtlich 100.000 Euro nicht übersteigt. Beide Bedingungen müssen erfüllt sein. Bei Überschreiten endet die Befreiung sofort.
+F: Wie hoch ist der Gewerbesteuerfreibetrag für Selbstständige?
+A: Der Gewerbesteuerfreibetrag für Einzelunternehmer und Personengesellschaften beträgt 24.500 Euro. Kapitalgesellschaften erhalten keinen Freibetrag. Die Gewerbesteuer wird nach der Formel Gewerbeertrag mal 3,5 Prozent mal Hebesatz der Gemeinde berechnet, wobei der Hebesatz mindestens 200 Prozent beträgt.

@@ -1,0 +1,123 @@
+# Solidaritätszuschlag (solidaritaetszuschlag)
+## 0 Solidaritätszuschlag 2024: Berechnung, Höhe und Sparen
+
+Den Solidaritätszuschlag zahlen nur noch Gut- und Spitzenverdiener. Wer 2026 noch betroffen ist, wie hoch er ausfällt und ab welcher Grenze er greift.
+
+## 1 Solidaritätszuschlag 2026: Wer noch zahlen muss
+
+Der Solidaritätszuschlag ist eine Ergänzungsabgabe zur Einkommensteuer und Körperschaftsteuer. Seit 1995 wird sie kontinuierlich erhoben – allerdings nur noch von etwa 10 Prozent der Bevölkerung. 2026 zahlen vor allem Spitzenverdiener, Kapitalanleger und Unternehmen den 5,5-prozentigen Zuschlag.
+
+## 2 Ursprung und Geschichte des Solidaritätszuschlags
+
+Am 14. Mai 1991 führte der Bundestag erstmals einen Solidaritätszuschlag ein. Grund waren zwei massive finanzielle Belastungen: die deutsche Wiedervereinigung und Deutschlands Zahlungen für den Zweiten Golfkrieg. Das Land finanzierte rund 15–20 Prozent der Kriegskosten (16,9 Milliarden D-Mark), ohne dass die Bundeswehr aktiv beteiligt war.
+
+Die ursprüngliche Abgabe galt nur vom 1. Juli 1991 bis 30. Juni 1992 und betrug 7,5 Prozent der Einkommen- oder Körperschaftsteuer. Nach einer zweijährigen Pause führte der Gesetzgeber den Soli 1995 wieder ein – diesmal dauerhaft. Von 1995 bis 1997 betrug der Satz 7,5 Prozent, seit 1998 liegt er bei 5,5 Prozent.
+
+[SPIEL mythos: Der Solidaritätszuschlag fließt vollständig in den Aufbau der neuen Bundesländer. → nein]
+
+## 3 Wer zahlt 2026 Solidaritätszuschlag?
+
+Seit der Reform 2021 zahlen nur noch rund 10 Prozent der Einkommensteuerzahler den Solidaritätszuschlag. Diese verteilen sich auf drei Gruppen:
+
+Spitzenverdiener mit hohem Einkommen
+
+2026 sind Alleinstehende mit maximal 20.350 Euro Einkommensteuer pro Jahr komplett befreit. Bei zusammenveranlagten Paaren liegt die Freigrenze bei 40.700 Euro. Alleinstehende zahlen erst ab einem zu versteuernden Jahreseinkommen von etwa 74.569 Euro, Ehepaare ab rund 149.000 Euro Bruttoeinkommen.
+
+Kapitalanleger ohne Obergrenze
+
+Hier gelten keine Einkommensgrenzen. Wer Kapitalerträge über dem Sparerpauschbetrag versteuern muss, zahlt automatisch 5,5 Prozent Soli zusätzlich zur Abgeltungssteuer. Der Sparerpauschbetrag liegt 2026 bei 1.000 Euro für Einzelpersonen und 2.000 Euro für Paare. Bereits ab dem ersten Euro darüber greift die Abgabe zu.
+
+Unternehmen (Kapitalgesellschaften)
+
+GmbHs, AGs und andere Kapitalgesellschaften zahlen den Solidaritätszuschlag auf ihre Körperschaftsteuer – unabhängig von der Gewinnhöhe. Diese Regelung blieb von der Reform 2021 vollständig unberührt.
+
+## 4 Freigrenzen 2026 und ihre Entwicklung
+
+Die Freigrenzen beim Solidaritätszuschlag werden jährlich erhöht. Diese Anhebung entlastet weitere Tausende Steuerzahler automatisch:
+
+| Jahr | Alleinstehende | Zusammenveranlagte
+
+| 2023 | 17.543 € | 35.086 €
+
+| 2024 | 18.130 € | 36.260 €
+
+| 2025 | 19.950 € | 39.900 €
+
+| 2026 | 20.350 € | 40.700 €
+
+Wichtig: Maßgebend ist nicht das Bruttogehalt, sondern die festgesetzte Einkommensteuer. Ein Arbeitnehmer mit 60.000 Euro Bruttoeinkommen kann je nach Steuerklasse, Kindern und Abzügen unterhalb der Soli-Grenze liegen.
+
+[SPIEL quiz: Ab welcher jährlichen Einkommensteuer zahlen Singles 2026 Solidaritätszuschlag?]
+
+## 5 Die Milderungszone erklärt
+
+Der Solidaritätszuschlag funktioniert nicht nach dem Alles-oder-Nichts-Prinzip. Für Einkommen knapp über der Freigrenze gibt es eine Milderungszone. Dort darf der Zuschlag maximal 11,9 Prozent der Differenz zur Freigrenze betragen.
+
+Diese staffelweise Belastung schützt vor harten Sprüngen:
+
+- Nullzone: Unterhalb der Freigrenze (20.350 € / 40.700 €) entfällt der Soli komplett
+
+- Milderungszone: Sanfte Übergangsregelung mit maximal 11,9 % der Differenz
+
+- Vollbelastung: Ab etwa 131.000 Euro Bruttoeinkommen werden die vollen 5,5 % fällig
+
+Beispiel: Ein Arbeitnehmer mit 21.000 Euro Einkommensteuer (650 Euro über Freigrenze) zahlt nicht 1.155 Euro Soli, sondern nur 77,35 Euro (11,9 % von 650 €).
+
+## 6 Solidaritätszuschlag auf Kapitalerträge
+
+Bei Geldanlage ist die Belastung für viele härter. Es gibt keine Einkommensgrenzen – der Solidaritätszuschlag wird auf alle steuerpflichtigen Kapitalerträge fällig.
+
+Banken führen automatisch ab Überschreitung des Sparerpauschbetrags von 1.000 Euro (2.000 Euro für Paare) folgende Abgaben direkt ab:
+
+- 25 % Abgeltungssteuer
+
+- 5,5 % Solidaritätszuschlag (auf die Abgeltungssteuer)
+
+- Gegebenenfalls Kirchensteuer
+
+Rechenbeispiel für 2026:
+
+Ein Investor erhält 3.000 Euro Dividenden im Jahr. Nach Abzug des Sparerpauschbetrags (1.000 €) bleiben 2.000 Euro steuerpflichtig:
+
+- Abgeltungssteuer: 2.000 € × 25 % = 500 €
+
+- Solidaritätszuschlag: 500 € × 5,5 % = 27,50 €
+
+- Gesamtbelastung: 527,50 €
+
+[SPIEL karte: Sparerpauschbetrag]
+
+## 7 Bundesverfassungsgericht bestätigt Verfassungsmäßigkeit
+
+Das Bundesverfassungsgericht wies am 26. März 2025 eine Beschwerde gegen den Solidaritätszuschlag zurück (Az. 2 BvR 1505/20). Die Erhebung der Abgabe ist mit dem Grundgesetz vereinbar.
+
+Das Gericht bestätigte: Ein Mehrbedarfs des Bundes rechtfertigt die Ergänzungsabgabe. Im Fall des Soli ist dies der wiedervereinigungsbedingte finanzielle Mehrbedarfs. Ein Gutachten belegt, dass es noch bis 2030 entsprechende Lasten für den Bundeshaushalt gibt.
+
+Allerdings mahnte das Gericht an: Sobald dieser Mehrbedarf offensichtlich entfällt, muss der Bundestag die Abgabe aufheben oder ihre Voraussetzungen anpassen. Eine regelmäßige Überprüfung ist erforderlich.
+
+Die Bundesregierung plant für 2025 mit 12,75 Milliarden Euro Solidaritätszuschlags-Einnahmen. Forderungen nach vollständiger Abschaffung bleiben bislang politisch erfolglos.
+
+[SPIEL gewusst: Das Bundesverfassungsgericht urteilte 2025, dass der Solidaritätszuschlag noch bis mindestens 2030 verfassungsgemäß erhoben werden kann, da wiedervereinigungsbedingte Mehrbedarfe bestehen.]
+
+## 8 Fazit
+
+Der Solidaritätszuschlag prägt 2026 nur noch die Steuerlast einer kleinen Minderheit. Mit Freigrenzen von 20.350 Euro (Singles) beziehungsweise 40.700 Euro (Paare) zahlen rund 90 Prozent der Arbeitnehmer nicht mehr. Hauptzahler sind Spitzenverdiener, alle Kapitalanleger mit Erträgen über dem Sparerpauschbetrag und Unternehmen.
+
+Das Bundesverfassungsgericht hat 2025 der Abgabe grünes Licht bis 2030 gegeben. Eine vollständige Abschaffung ist daher in absehbarer Zeit nicht zu erwarten. Für Kapitalanleger bleibt die Situation unverändert: bereits ab dem ersten Euro über 1.000 Euro (2.000 Euro für Paare) greifen 5,5 Prozent Solidaritätszuschlag zu.
+
+Die jährliche Erhöhung der Freigrenzen zeigt den Willen des Gesetzgebers, mittlere Einkommen zu entlasten. Für die meisten Arbeitnehmer ist der Solidaritätszuschlag damit praktisch Geschichte.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste solidaritaetszuschlag]
+
+
+## FAQ
+F: Wer muss 2026 noch Solidaritätszuschlag zahlen?
+A: Seit 2021 zahlen nur noch rund 10 Prozent der Bevölkerung den Soli. Betroffen sind Spitzenverdiener, Kapitalanleger mit Erträgen über dem Sparerpauschbetrag sowie Kapitalgesellschaften. Singles zahlen ab einer Einkommensteuer von 20.350 Euro, Ehepaare ab 40.700 Euro.
+F: Wie hoch ist der Solidaritätszuschlag 2026?
+A: Der Solidaritätszuschlag beträgt unverändert 5,5 Prozent der festgesetzten Einkommen- oder Körperschaftsteuer. Auf Kapitalerträge wird er zusätzlich zur 25-prozentigen Abgeltungsteuer erhoben, sobald der Sparerpauschbetrag von 1.000 Euro (Singles) beziehungsweise 2.000 Euro (Paare) überschritten wird.
+F: Ab welchem Einkommen fällt der Soli 2026 an?
+A: Singles zahlen den Soli erst ab einer Einkommensteuer von 20.350 Euro, was etwa 74.500 Euro zu versteuerndem Jahreseinkommen entspricht. Bei zusammenveranlagten Paaren beginnt die Belastung ab 40.700 Euro Einkommensteuer oder etwa 149.000 Euro gemeinsamem Bruttoeinkommen.
+F: Was bedeutet die Milderungszone beim Solidaritätszuschlag?
+A: Die Milderungszone schützt Steuerzahler knapp oberhalb der Freigrenze vor einem abrupten Belastungssprung. Der Soli steigt in diesem Bereich schrittweise an, bis der volle Satz von 5,5 Prozent erreicht ist. Unterhalb der Freigrenze entfällt der Zuschlag vollständig.

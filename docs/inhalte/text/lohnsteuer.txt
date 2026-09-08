@@ -1,0 +1,141 @@
+# Lohnsteuer (lohnsteuer)
+## 0 Lohnsteuer Ratgeber: Steuererklärung & Rückerstattung 2024
+
+Die Lohnsteuer wird direkt vom Arbeitslohn einbehalten. Wie sie 2026 berechnet wird, welche Freibeträge gelten und wie Sie zu viel Gezahltes zurückholen.
+
+## 1 Lohnsteuer 2026: Ratgeber für Arbeitnehmer
+
+Die Lohnsteuer regelt den direkten Steuerabzug vom Arbeitslohn für unselbstständig Beschäftigte.
+
+Mit dem Jahr 2026 bringt das deutsche Steuerrecht spürbare Veränderungen für Millionen von Arbeitnehmern. Der Grundfreibetrag steigt um 252 Euro auf 12.348 Euro und entlastet damit besonders niedrigere Einkommen. Gleichzeitig profitieren Pendler von vereinfachten und höheren Pauschalen. Diese Reformen sind Teil einer umfassenden Modernisierung des Lohnsteuersystems.
+
+## 2 Was ist Lohnsteuer?
+
+Die Lohnsteuer ist die Vorauszahlung auf die Einkommensteuer für Einkünfte aus nichtselbstständiger Arbeit. Ihr Arbeitgeber behält sie bei jeder Lohnzahlung direkt vom Bruttolohn ein und führt sie ans Finanzamt ab. Das Bundesministerium der Finanzen erstellt im Einvernehmen mit den obersten Finanzbehörden der Länder einen Programmablaufplan für die maschinelle Berechnung der Lohnsteuer, des Solidaritätszuschlags und der Bemessungsgrundlage für die Kirchenlohnsteuer.
+
+Die Lohnsteuer unterscheidet sich grundlegend von anderen Steuerarten. Sie ist eine monatliche Vorauszahlung, abgeführt vom Arbeitgeber. Die Einkommensteuer ist die tatsächliche Jahressteuer, berechnet in der Steuererklärung. Die Lohnsteuerbescheinigung ist das Jahresdokument, das Arbeitgeber bis 28. Februar des Folgejahres ausstellen müssen – sie fasst alle Lohnsteuerbeträge des Jahres zusammen. Der Lohnsteuerabzug bezeichnet den Vorgang: den Einbehalt der Lohnsteuer durch den Arbeitgeber bei der Lohnzahlung.
+
+[SPIEL karte: ElStAM]
+
+## 3 Wie wird die Lohnsteuer 2026 berechnet?
+
+Die Lohnsteuer ist eine progressive Steuer – je höher das Einkommen, desto höher der Prozentsatz auf jeden weiteren Euro. Ausgangspunkt: Bruttogehalt minus Grundfreibetrag (12.348 Euro), Werbungskostenpauschbetrag (1.230 Euro), Sonderausgaben (36 Euro). Auf das Ergebnis wird der progressive Tarif 14–45% angewendet.
+
+Bei zu versteuerndem Einkommen zwischen 12.348 und 17.799 Euro (2026) gilt ein progressiver Steuersatz von 14 bis 24 Prozent für den Betrag über des Grundfreibetrages. Bei Einkommen zwischen 17.799 und 69.878 Euro (2026) gilt ein progressiver Satz von 24 bis 42 Prozent. Der Spitzensteuersatz von 42 Prozent greift zwischen 69.878 und 277.825 Euro. Auf zu versteuernde Einkommen über 277.826 Euro gilt der Höchststeuersatz von 45 Prozent.
+
+| Zu versteuerndes Einkommen | Steuersatz | Beschreibung
+
+| bis 12.348 Euro | 0% | Grundfreibetrag
+
+| 12.348 bis 17.799 Euro | 14-24% | Erste Progressionszone
+
+| 17.799 bis 69.878 Euro | 24-42% | Zweite Progressionszone
+
+| 69.878 bis 277.825 Euro | 42% | Spitzensteuersatz
+
+| ab 277.826 Euro | 45% | Reichensteuer
+
+Die Lohnsteuer basiert auf dem offiziellen Programmablaufplan (PAP) des Bundesfinanzministeriums, nach dem alle Lohnabrechnungsprogramme arbeiten.
+
+## 4 Bei welchem Gehalt zahlt man 2026 keine Lohnsteuer?
+
+Unter dem Grundfreibetrag von 12.348 Euro (2026) fällt keine Lohnsteuer an. Das entspricht etwa 1.029 Euro Brutto pro Monat. Minijobber (bis 603 Euro/Monat 2026) zahlen in der Regel keine Lohnsteuer, da sie unter dem Grundfreibetrag liegen.
+
+Für Familien gelten zusätzliche Entlastungen. Der Kinderfreibetrag steigt 2026 um 156 Euro auf 9.756 Euro. Der Entlastungsbetrag für Alleinerziehende beträgt 4.260 Euro plus 240 Euro je weiteres Kind.
+
+[SPIEL gewusst: Bei einem Arbeitsweg von 10 Kilometern sparen Pendler 2026 durch die neue Entfernungspauschale jährlich 176 Euro zusätzliche Werbungskosten ein.]
+
+## 5 Welche Steuerklassen gibt es und wie wirken sie sich aus?
+
+Es gibt sechs Steuerklassen: Klasse I für Unverheiratete, Verwitwete, Geschiedene ohne Kinder. Klasse II für Alleinerziehende mit Kind, zusätzlich Entlastungsbetrag für Alleinerziehende. Klasse III für Verheiratete mit deutlich höherem Einkommen als der Partner, Partner in Steuerklasse V. Klasse IV für Verheiratete mit ähnlichem Einkommen. Klasse V als Gegenstück zu Klasse III. Klasse VI für Steuerpflichtige mit mehreren Beschäftigungen.
+
+Das Faktorverfahren ist eine Variante der Steuerklassen-Kombination 4/4 für Ehe- und Lebenspartner mit unterschiedlich hohem Einkommen. Dabei wird ein individueller Faktor berechnet, der die steuerliche Belastung gerechter verteilt als die Kombination 3/5. Beide Partner profitieren monatlich von den ihnen zustehenden Entlastungen und vermeiden hohe Nachzahlungen.
+
+- Steuerklasse I: Ledige, Geschiedene, Verwitwete – Standard für Alleinstehende
+
+- Steuerklasse II: Alleinerziehende mit Kindern – mit Entlastungsbetrag (4.260 Euro + 240 Euro je weiteres Kind)
+
+- Steuerklasse III: Verheiratete (Besserverdiener) – niedrigste monatliche Lohnsteuer
+
+- Steuerklasse IV: Verheiratete mit ähnlichem Einkommen – automatische Standardeinteilung
+
+- Steuerklasse V: Partner von Steuerklasse III – höhere Lohnsteuer
+
+- Steuerklasse VI: Nebenjobs – keine Freibeträge, höchste Besteuerung
+
+Für werdende Eltern lohnt sich ein rechtzeitiger Steuerklassenwechsel: Das Elterngeld berechnet sich nach dem Nettolohn der letzten 12 Monate. Wechselt der betreuende Elternteil 7+ Monate vor der Geburt in Klasse III, kann das Elterngeld um mehrere hundert Euro pro Monat steigen.
+
+## 6 Was sind die wichtigsten Neuerungen 2026?
+
+### Grundfreibetrag und Steuertarif
+
+Der Grundfreibetrag steigt um 252 Euro auf 12.348 Euro. Darüber hinaus wird auch der übrige Einkommensteuertarif angepasst, damit eine Gehaltserhöhung zum Ausgleich der Inflation nicht zu einer schleichenden Steuererhöhung führt.
+
+### Entfernungspauschale
+
+Die Pendlerpauschale wird zum 1. Januar 2026 einheitlich auf 38 Cent ab dem ersten gefahrenen Kilometer erhöht. Bisher galt dieser Satz erst ab dem 21. Kilometer. Bei einem Arbeitsweg von 10 Kilometern und einer Fünf-Tage-Woche ergeben sich jährlich 176 Euro zusätzliche Werbungskosten. Bei einem Arbeitsweg von 20 Kilometern werden Arbeitnehmer um 352 Euro zusätzliche Werbungskosten jährlich entlastet.
+
+### Minijob-Grenze
+
+Die Verdienstgrenze im Minijob liegt 2026 bei 603 Euro. Dadurch erhöht sich auch die Verdienstgrenze im Minijob auf 603 Euro monatlich beziehungsweise 7.236 Euro jährlich. Damit verändert sich künftig auch die untere Midijob-Grenze, sie liegt dann bei 603,01 Euro. Die obere Grenze bleibt aber unverändert bei 2.000 Euro.
+
+### Aktivrente
+
+Neu ab 2026: Rentner, die über das Rentenalter hinaus arbeiten, können zusätzlich zum Grundfreibetrag bis zu 2.000 Euro monatlich steuerfrei hinzuverdienen. Die Lohnsteuer wird auf den Lohn berechnet, aber der steuerfreie Aktivrenten-Betrag reduziert die Steuerlast erheblich.
+
+## 7 Wie funktioniert der Solidaritätszuschlag 2026?
+
+Die Freigrenze, bis zu der kein Soli anfällt, beträgt im Jahr 2026 für Singles 20.350 Euro. Du musst nur Soli zahlen, wenn Du 2026 mehr als 20.350 Euro Einkommensteuer zu zahlen hast. Bei Ehepaaren ist es der doppelte Betrag, also 40.700 Euro.
+
+Der Soli beträgt maximal 11,9 % der Differenz zwischen Ihrer Einkommensteuer und der Freigrenze in der Milderungszone. Bei hohen Einkommen oberhalb der Milderungszone wird der volle Soli von 5,5 % der Einkommensteuer fällig.
+
+Seit 2021 zahlen ca. 90 % der Steuerzahler keinen Soli mehr – dank der deutlich angehobenen Freigrenzen. Als Single beginnt der Soli 2026 ab einer Einkommensteuer von 20.350 Euro, was einem Bruttoeinkommen von ca. 73.000 Euro entspricht. Für Ehepaare mit Zusammenveranlagung liegt die Grenze bei 40.700 Euro Einkommensteuer bzw. ca. 146.000 Euro gemeinsames Bruttoeinkommen.
+
+[SPIEL quiz: Ab welchem zu versteuernden Einkommen greift 2026 der Spitzensteuersatz von 42%?]
+
+## 8 Besonderheiten bei Minijobs und Midijobs
+
+Die Verdienstgrenze im Minijob liegt bei 603 Euro monatlich. Die jährliche Verdienstgrenze liegt damit bei 7.236 Euro. Die Berechnung folgt der Formel Mindestlohn × 130 / 3. Diese Formel modelliert eine fiktive Beschäftigung von rund 43,33 Wochenstunden pro Monat (10 Stunden pro Woche × 4,33 Wochen). Das Ergebnis von 602,33 Euro wird auf den nächsten vollen Euro aufgerundet.
+
+Bis 603 Euro bleibst du im Minijob praktisch abgabenfrei. Zwischen 603,01 Euro und 2.000 Euro landest du im sogenannten Übergangsbereich und zahlst gestaffelt reduzierte Sozialbeiträge.
+
+Wichtige Ausnahmen: Bei einem unvorhersehbaren und gelegentlichen Überschreiten gibt es eine Ausnahme. Minijobber dürfen dann auch mal mehr als 603 Euro im Monat verdienen. Der Verdienst in diesen Monaten darf jedoch das Doppelte der monatlichen Verdienstgrenze – also 1.206 Euro – nicht überschreiten.
+
+## 9 Lohnsteuerrechner und praktische Anwendung
+
+Alle Lohnsteuerrechner verwenden die Berechnung nach dem BMF-Programmablaufplan. Der Rechner implementiert den BMF-Programmablaufplan 2026 vollständig. Der Lohnsteuerrechner ist kein "Brutto-Netto"-Rechner, er berechnet nicht das individuelle Netto-Einkommen unter Berücksichtigung abzuführender Sozialabgaben. Die Bereitstellung eines entsprechenden Rechners gehört nicht zu den Aufgaben des BMF.
+
+Die Lohnsteuer, die man als Arbeitnehmer im Jahr zahlt, ist eine Art Vorauszahlung auf die eigentliche Steuerschuld. Diese kann aber von der tatsächlichen Steuerschuld abweichen, abhängig von der Steuerklasse und möglichen Abzügen wie Werbungskosten oder Vorsorgeaufwendungen. Daher ist es oft eine gute Idee, freiwillig eine Steuererklärung abzugeben, um eventuell zu viel gezahlte Steuern zurückzubekommen.
+
+Für eine präzise Kalkulation sollten Sie folgende Werte kennen:
+
+- Ihr Bruttogehalt
+
+- Ihre aktuelle Steuerklasse
+
+- Zusätzliche Freibeträge
+
+- Kirchensteuerpflicht
+
+- Sozialversicherungsbeiträge
+
+## 10 Fazit
+
+Die Lohnsteuer 2026 bringt für die meisten Beschäftigten spürbare Entlastungen. Der höhere Grundfreibetrag von 12.348 Euro reduziert die Steuerlast besonders bei niedrigeren Einkommen. Die einheitliche Entfernungspauschale von 38 Cent ab dem ersten Kilometer hilft allen Pendlern gleichermaßen. Die gestiegene Minijob-Grenze auf 603 Euro schafft mehr Flexibilität für geringfügig Beschäftigte. Der angehobene Solidaritätszuschlag-Freibetrag von 20.350 Euro entlastet mittlere Einkommen weiter. Eine regelmäßige Überprüfung der Steuerklasse und eine sorgfältige Steuererklärung ermöglichen es, das Maximum aus den neuen Regelungen herauszuholen.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste lohnsteuer]
+
+[BLOCK rechner einkommensteuer]
+
+
+## FAQ
+F: Wie hoch ist der Grundfreibetrag 2026?
+A: Der Grundfreibetrag steigt 2026 um 252 Euro auf 12.348 Euro jährlich. Bis zu dieser Einkommenshöhe fällt keine Einkommensteuer an. Für gemeinsam veranlagte Ehepaare gilt der doppelte Betrag von 24.696 Euro.
+F: Was ändert sich bei der Entfernungspauschale 2026?
+A: Ab 2026 gilt einheitlich 38 Cent pro Kilometer für den Arbeitsweg – und zwar ab dem ersten Kilometer. Die bisherige Staffelung mit 30 Cent für die ersten 20 Kilometer entfällt. Besonders Kurzstreckenpendler profitieren von dieser Vereinfachung.
+F: Welche Lohnsteuerklassen gibt es in Deutschland?
+A: Es gibt sechs Lohnsteuerklassen: Klasse I für Alleinstehende, Klasse II für Alleinerziehende, Klasse III für den besserverdienenden Ehepartner, Klasse IV für Paare mit ähnlichem Einkommen, Klasse V für den geringerverdienenden Ehepartner und Klasse VI für Nebenbeschäftigungen.
+F: Was ändert sich 2026 bei der Vorsorgepauschale?
+A: Die bisherige Mindestentlastung von 12 Prozent des Lohns entfällt ab 2026 vollständig. Stattdessen richtet sich die Vorsorgepauschale nach den tatsächlich gezahlten Versicherungsbeiträgen. Privatversicherte werden oft entlastet, während Nutzer der Mindestpauschale teilweise höhere Lohnsteuer zahlen.

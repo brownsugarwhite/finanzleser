@@ -1,0 +1,129 @@
+# Gesetzliche Unfallversicherung (gesetzliche-unfallversicherung)
+## 0 Schutz bei Berufsunfällen: Leistungen und Versicherungsschutz erklärt
+
+Die gesetzliche Unfallversicherung schützt Beschäftigte bei Arbeits- und Wegeunfällen sowie Berufskrankheiten. Welche Leistungen sie 2026 bietet und wer versichert ist.
+
+## 1 Gesetzliche Unfallversicherung: Schutz bei Arbeitsunfällen und Berufskrankheiten
+
+Die gesetzliche Unfallversicherung schützt alle Beschäftigten automatisch bei berufsbedingten Unfällen und Erkrankungen.
+
+Die gesetzliche Unfallversicherung bildet einen wichtigen Pfeiler der sozialen Sicherung in Deutschland. Sie gewährleistet umfassenden Schutz für Millionen von Arbeitnehmern, ohne dass Sie als Beschäftigte eigene Beiträge zahlen müssen. Das System funktioniert nach dem bewährten Solidaritätsprinzip und wird vollständig vom Arbeitgeber finanziert.
+
+Im Jahr 2024 ereigneten sich 754.660 meldepflichtige Arbeitsunfälle, was einen Rückgang von 3,7 Prozent gegenüber dem Vorjahr bedeutet. Das Arbeitsunfallrisiko je 1.000 Vollzeitäquivalente sank auf 17,27 (DGUV 2024). Diese positive Entwicklung zeigt die Wirksamkeit der präventiven Maßnahmen und modernen Arbeitsschutzstandards.
+
+## 2 Wer ist in der gesetzlichen Unfallversicherung versichert?
+
+Kraft Gesetzes sind alle Beschäftigten versichert unabhängig von der Höhe ihres Arbeitsentgelts, das heißt auch Auszubildende. Der Versicherungsschutz erstreckt sich automatisch auf verschiedene Personengruppen.
+
+Zur Pflichtversicherung gehören:
+
+- Alle Arbeitnehmer in einem Arbeits-, Ausbildungs- oder Dienstverhältnis
+
+- Kinder in Kindertageseinrichtungen und Tagespflege
+
+- Schüler, Studierende und Personen in beruflicher Aus- und Fortbildung
+
+- Landwirte, mitarbeitende Familienangehörige und landwirtschaftliche Arbeitnehmer
+
+- Bestimmte ehrenamtlich tätige Personen wie Mitglieder der Freiwilligen Feuerwehr
+
+- Helfer in Hilfsorganisationen, Blutspender, Zeugen und Schöffen
+
+[SPIEL schaetzen: Wie viele Arbeitsunfälle ereigneten sich 2024 in Deutschland? → 754660]
+
+Nicht automatisch versichert sind Beamte, selbstständige Ärzte, Zahnärzte, Tierärzte und Apotheker. Allerdings können Freiberufler und Selbstständige sich freiwillig bei der zuständigen Berufsgenossenschaft versichern. Dasselbe gilt für Ehepartner, die im Unternehmen mitarbeiten.
+
+## 3 Was sind die verschiedenen Arten von Versicherungsfällen?
+
+Die gesetzliche Unfallversicherung deckt drei Hauptarten von Versicherungsfällen ab: Arbeitsunfälle, Wegeunfälle und Berufskrankheiten.
+
+Arbeitsunfälle sind Unfälle während der versicherten Tätigkeit. Dazu zählen nicht nur Unfälle am Arbeitsplatz selbst, sondern auch bei Dienstreisen, Betriebsfeiern oder betrieblichem Sport. Arbeitsunfälle sind gesetzlich definiert als "Unfälle von Versicherten infolge einer den Versicherungsschutz begründenden Tätigkeit". Unfälle sind zeitlich begrenzte, von außen auf den Körper einwirkende Ereignisse, die zu einem Gesundheitsschaden oder zum Tod führen (§ 8 SGB VII).
+
+Wegeunfälle ereignen sich auf dem direkten Weg zur Arbeit oder zurück nach Hause. Seit 2021 gilt: Wenn Sie im Homeoffice arbeiten, genießen Sie denselben Versicherungsschutz wie im Büro – allerdings nur für dienstliche Aktivitäten.
+
+Berufskrankheiten sind Erkrankungen, die durch bestimmte berufliche Tätigkeiten verursacht werden und in der Berufskrankheiten-Liste aufgeführt sind.
+
+[SPIEL karte: Durchgangsarzt (D-Arzt)]
+
+Nicht versichert sind private Tätigkeiten während der Arbeitszeit, Unfälle in der Freizeit und größere Umwege vom direkten Arbeitsweg.
+
+## 4 Welche Leistungen bietet die gesetzliche Unfallversicherung?
+
+Das Leistungsspektrum der gesetzlichen Unfallversicherung ist umfassend und geht weit über eine einfache Kostenerstattung hinaus. Die Unfallversicherung folgt dem Grundsatz "Rehabilitation vor Rente".
+
+Heilbehandlung und Rehabilitation: Die Unfallversicherung übernimmt alle Kosten für ärztliche Behandlung, Arzneimittel, Verbandsmaterial, Heilmittel, Krankenhausaufenthalte, Rehabilitationskurse, Physiotherapie und psychologische Betreuung. Dabei gilt das Prinzip der optimalen Versorgung ohne Kostenbegrenzung.
+
+Verletztengeld: Das Verletztengeld beträgt 80 Prozent des entgangenen Bruttoentgelts, maximal jedoch die Höhe des Nettolohns. Es wird längstens für 78 Wochen gezahlt. In den ersten sechs Wochen zahlt der Arbeitgeber weiter, ab der siebten Woche übernimmt die Unfallversicherung.
+
+Pflegeleistungen: Bei Pflegebedürftigkeit infolge eines Unfalls oder einer Berufskrankheit zahlt die Unfallversicherung Pflegegeld. Das Pflegegeld beträgt 2026 maximal 1.838 Euro monatlich, mindestens 462 Euro und wird je nach Art und Schwere der Beeinträchtigung festgesetzt.
+
+| Leistungsart | Höhe | Dauer
+
+| Verletztengeld | 80% des Bruttolohns | max. 78 Wochen
+
+| Pflegegeld | 462-1.838 € monatlich | unbegrenzt
+
+| Versichertenrente | bis 2/3 des Jahresarbeitsverdienstes | unbegrenzt
+
+Versichertenrente: Bei dauerhafter Erwerbsminderung zahlt die Unfallversicherung eine Rente. Die Versichertenrente beträgt zwei Drittel des Jahresarbeitsverdienstes, wenn Versicherte ihre Erwerbsfähigkeit vollständig verloren haben. Der Mindest-Jahresarbeitsverdienst beträgt für volljährige Versicherte 60 Prozent der Bezugsgröße (2026: 28.476 Euro). Diese Leistung ähnelt der staatlichen Erwerbsminderungsrente, ist aber speziell auf Arbeitsunfälle ausgerichtet.
+
+[SPIEL gewusst: Die gesetzliche Unfallversicherung zahlt 2026 ein Sterbegeld von 6.780 Euro an die Hinterbliebenen, wenn ein Versicherter infolge eines Arbeitsunfalls oder einer Berufskrankheit stirbt.]
+
+Hinterbliebenenversorgung: Stirbt ein Versicherter durch einen Arbeitsunfall oder eine Berufskrankheit, wird an die Hinterbliebenen ein pauschales Sterbegeld von 6.780 Euro gezahlt (Stand 2026). Zusätzlich erhalten Witwen, Witwer, Kinder und andere Angehörige Hinterbliebenenrenten.
+
+## 5 Wie funktioniert die Finanzierung und welche Beiträge gelten 2026?
+
+Die Beiträge werden allein von den Arbeitgebern getragen. Als Arbeitnehmer zahlen Sie keinen Cent zur gesetzlichen Unfallversicherung. Dieses Finanzierungsmodell unterscheidet sich grundlegend von anderen Sozialversicherungszweigen.
+
+Der Mindestbeitrag für 2026 wird auf 277,55 Euro festgesetzt. Die Beitragssätze variieren je nach Träger, Branche und Unfallgefahr. Der Beitragssatz 2026 zur gesetzlichen Unfallversicherung bleibt entsprechend dem Beitragsjahr 2025 für die meisten Beitragsgruppen konstant.
+
+Die Beitragshöhe richtet sich nach zwei Faktoren:
+
+- Dem Gesamtentgelt der Versicherten im Unternehmen
+
+- Dem Grad der Unfallgefahr in der jeweiligen Branche
+
+Die Mittel werden einmal jährlich im nachträglichen Umlageverfahren aufgebracht. Die Höhe bestimmt sich nach den Entgelten der Versicherten und nach dem Grad der Unfallgefahr. Die Unfallversicherungsträger erstellen Gefahrtarife, in denen Tätigkeiten nach ihrem Gefährdungsrisiko gruppiert werden.
+
+[SPIEL mythos: Private Unfallversicherung ist überflüssig, da die gesetzliche Unfallversicherung alle Unfälle abdeckt → nein]
+
+## 6 Wie melden Sie einen Arbeitsunfall richtig?
+
+Bei einem Arbeitsunfall ist schnelles und korrektes Handeln entscheidend. Die Vorstellung bei einem Durchgangsarzt ist erforderlich, wenn die Unfallverletzung über den Unfalltag hinaus zur Arbeitsunfähigkeit führt oder die notwendige ärztliche Behandlung voraussichtlich über eine Woche andauert.
+
+Sofortmaßnahmen nach einem Arbeitsunfall:
+
+1. Durchgangsarzt aufsuchen: Sobald Sie aufgrund eines Arbeitsunfalls über den Unfalltag hinaus arbeitsunfähig sind oder die Verletzung voraussichtlich einer Behandlung von mindestens einer Woche bedarf, müssen Sie sich beim Durchgangsarzt vorstellen.
+
+2. Arbeitgeber informieren: Benachrichtigen Sie umgehend Ihren Arbeitgeber über den Unfall. Dieser muss bei schweren Unfällen eine Sofortmeldung durchführen.
+
+3. Dokumentation: Jeder Unfall sollte immer im Verbandbuch dokumentiert werden. Die Dokumentation ist Beweisgrundlage, falls später Ansprüche geltend gemacht werden sollen. Ohne entsprechende Dokumentation kann es zu Problemen bei der Anerkennung kommen.
+
+Meldepflichten des Arbeitgebers: Das Unternehmen muss einen Arbeitsunfall, der zu einer Arbeitsunfähigkeit von mehr als drei Kalendertagen führt, der zuständigen Berufsgenossenschaft oder Unfallkasse melden und die gesetzlich vorgeschriebene Unfallanzeige erstatten. Bei voraussichtlicher Arbeitsunfähigkeit von mehr als drei Tagen muss die Meldung binnen drei Kalendertagen erfolgen. Bei schweren Verletzungen oder Todesfällen ist eine umgehende Meldung erforderlich.
+
+Was tun bei Notfällen: Sollte sich unmittelbar nach dem Unfall kein Durchgangsarzt in der Nähe befinden, kann selbstverständlich jeder Arzt oder jedes Krankenhaus für die Erstversorgung aufgesucht werden. Es ist aber wichtig, im Anschluss so schnell wie möglich einen Durchgangsarzt zu konsultieren.
+
+## 7 Fazit
+
+Die gesetzliche Unfallversicherung bietet Ihnen als Beschäftigte umfassenden Schutz bei berufsbedingten Unfällen und Erkrankungen ohne eigene Beiträge. Sie profitieren von vollständiger medizinischer Versorgung, Verletztengeld von 80 Prozent des Bruttolohns sowie weiteren Leistungen wie Pflegegeld zwischen 462 und 1.838 Euro monatlich (Stand 2026) und Versichertenrenten. Die ausschließlich arbeitgeberfinanzierte Versicherung bleibt 2026 bei stabilen Beitragssätzen, wobei der Mindestbeitrag bei 277,55 Euro liegt. Wichtig ist das korrekte Vorgehen im Schadensfall: Bei Arbeitsunfällen mit Arbeitsunfähigkeit über den Unfalltag hinaus oder erwarteter Behandlungsdauer über eine Woche müssen Sie einen Durchgangsarzt aufsuchen und Ihren Arbeitgeber informieren. Beachten Sie jedoch die Grenzen: Freizeitunfälle sind ausgeschlossen, was eine private Unfallversicherung als sinnvolle Ergänzung erscheinen lässt. Das bewährte System schützt Sie optimal ab – vorausgesetzt, Sie kennen Ihre Rechte und die korrekten Meldewege.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste gesetzliche-unfallversicherung]
+
+[BLOCK vergleich unfallversicherung-vergleich]
+
+[BLOCK vergleich unfallversicherung-leistungen]
+
+[BLOCK dokumente gdv-unfallversicherung]
+
+
+## FAQ
+F: Wer ist in der gesetzlichen Unfallversicherung versichert?
+A: Kraft Gesetzes sind alle Beschäftigten in einem Arbeits-, Ausbildungs- oder Dienstverhältnis automatisch versichert. Ebenfalls geschützt sind Schüler, Studierende, Kinder in Kindertageseinrichtungen, ehrenamtlich Tätige wie Feuerwehrleute sowie Landwirte und mitarbeitende Familienangehörige.
+F: Muss ich als Arbeitnehmer Beiträge zahlen?
+A: Nein, Arbeitnehmer zahlen keine Beiträge zur gesetzlichen Unfallversicherung. Die Kosten trägt ausschließlich der Arbeitgeber. Der Mindestbeitrag für 2026 liegt bei 277,55 Euro, die Beitragshöhe variiert je nach Branche und Unfallgefahr.
+F: Welche Leistungen deckt die gesetzliche Unfallversicherung ab?
+A: Die gesetzliche Unfallversicherung übernimmt nach einem Arbeits- oder Wegeunfall die Kosten für ärztliche Behandlung, Arzneimittel, Rehabilitation und berufliche Wiedereingliederung. Bei dauerhafter Erwerbsminderung zahlt sie eine Unfallrente, auch Berufskrankheiten sind abgedeckt.
+F: Können sich Selbstständige freiwillig versichern?
+A: Ja, Freiberufler und Selbstständige können sich freiwillig bei der zuständigen Berufsgenossenschaft versichern. Das Gleiche gilt für Ehepartner, die im Unternehmen mitarbeiten. Automatisch pflichtversichert sind hingegen nur Landwirte und bestimmte Berufsgruppen.

@@ -1,0 +1,167 @@
+# Inflation (inflation)
+## 0 Ursachen, Auswirkungen und Schutzmaßnahmen gegen Inflation
+
+Inflation bedeutet steigende Preise und sinkende Kaufkraft. Welche Ursachen sie 2026 hat, wie sie gemessen wird und wie Sie Ihr Vermögen davor schützen.
+
+## 1 Inflation 2026: Ursachen, Folgen und Schutz fürs Vermögen
+
+Inflation bezeichnet den anhaltenden Anstieg des allgemeinen Preisniveaus für Waren und Dienstleistungen.
+
+Die Inflation ist 2026 in Deutschland mit voller Macht zurückgekehrt. Nach der relativen Preisstabilität in den ersten Monaten des Jahres hat der Iran-Krieg zu sprunghaften Verteuerungen bei Kraftstoffen und Heizöl geführt. Die Inflationsrate erreichte im Mai 2026 etwa 2,6 Prozent, nachdem sie im März bei +2,7 % und im April bei +2,9 % gelegen hatte. Diese Entwicklung zeigt erneut, wie schnell sich die wirtschaftliche Lage ändern kann und welche enormen Auswirkungen geopolitische Konflikte auf die Preisstabilität haben.
+
+## 2 Was ist Inflation und wie wird sie gemessen?
+
+Mit dem Begriff Inflation wird die Geldentwertung, also das Absinken des Geldwertes, bezeichnet. Verbraucher und Unternehmen bemerken diese Entwertung durch ein Ansteigen des Preisniveaus für Endprodukte wie Konsumgüter (z.B. Nahrungsmittel) oder Investitionsgüter (wie z.B. Maschinen).
+
+Die Inflation wird in Deutschland hauptsächlich über den Verbraucherpreisindex (VPI) gemessen. Der Verbraucherpreisindex bildet die Preisentwicklung für die privaten Verbrauchsausgaben ab und zeigt bei einer Steigerung des Indexes die aktuelle Höhe der Inflation an. Die Inflationsrate errechnet sich aus dem Preisanstieg eines durch das Statistische Bundesamt definierten Produktwarenkorbs.
+
+[SPIEL quiz: Wie berechnet sich die monatliche Inflationsrate?]
+
+## 3 Wie funktioniert der Verbraucherpreisindex und der Warenkorb?
+
+Dieser Warenkorb enthält eine möglichst repräsentative Auswahl verschiedener Waren und Dienstleistungen des täglichen Bedarfs, für die ein durchschnittlicher Endverbraucher bzw. Haushalt in Deutschland im Jahresverlauf Geld ausgibt. Zur Berechnung des Verbraucherpreisindex für Deutschland werden die Güter des Warenkorbs zunächst in rund 700 Güterarten eingeteilt (obere Warenkorbebene).
+
+Die Zusammensetzung des Warenkorbs orientiert sich an den realen Ausgabenmustern der deutschen Haushalte. Die durchschnittliche Preisentwicklung gegenüber dem Basisjahr für eine Güterart wird dann jeweils mit dem Ausgabenanteil gewichtet, welchen die privaten Haushalte in Deutschland für diese Güterart ausgeben. Die Ausgabenanteile beziehungsweise die Gewichtungsinformationen sind im sogenannten Wägungsschema enthalten. Dieses wird in der Regel nur alle fünf Jahre aktualisiert, um innerhalb des Fünfjahreszeitraums die reine Preisentwicklung darstellen zu können.
+
+Für die Preiserhebung werden monatlich mehrere Hunderttausend Einzelpreise in Handels- und Dienstleistungsunternehmen manuell erhoben. Diese bisher übliche Preiserhebung umfasst einerseits die dezentrale Preiserhebung durch Preiserheberinnen und Preiserheber in Geschäften in ganz Deutschland und andererseits die zentrale Preiserhebung, welche hauptsächlich als Erhebung im Internet erfolgt.
+
+| Basisjahr | Gültigkeit | Aktueller VPI-Stand
+
+| 2020 = 100 | Seit 2023 | 125,2 Punkte (April 2026)
+
+| 2025 = 100 | HVPI ab 2026 | Neue Indexbasis
+
+| 2025 = 100 | VPI ab 2028 | Umstellung geplant
+
+## 4 Unterschied zwischen VPI und HVPI: Was ist der Harmonisierte Verbraucherpreisindex?
+
+Neben dem nationalen Verbraucherpreisindex berechnet das Statistische Bundesamt auch den Harmonisierten Verbraucherpreisindex (HVPI). Der HVPI wurde in der Europäischen Union (EU) entwickelt, um Preisänderungen international vergleichen und zu einer Gesamtinflationsrate für Europa und der europäischen Währungsunion zusammenfassen zu können.
+
+Der harmonisierte Verbraucherpreisindex für die Länder der europäischen Währungsunion dient vor allem der Europäischen Zentralbank (EZB) als zentraler Indikator zur Beurteilung der gesamtwirtschaftlichen Preisstabilität innerhalb der Eurozone. Aus Sicht der EZB kann Preisstabilität am besten gewährleistet werden, wenn mittelfristig ein Inflationsziel – gemessen an der HVPI-Teuerungsrate – von 2 % angestrebt wird.
+
+[SPIEL mythos: Der HVPI und der nationale VPI messen in Deutschland identische Werte → nein]
+
+Der wichtigste Unterschied liegt in der methodischen Behandlung von Wohnkosten. In Deutschland unterscheidet sich der HVPI vom nationalen VPI vor allem, weil im HVPI den europäischen Methodenrichtlinien zufolge die Kosten für selbstgenutztes Wohneigentum nicht enthalten sind. Dadurch haben Dienstleistungen im HVPI ein kleineres Gewicht als im VPI. Entsprechend können sich abweichende Preistrends von Waren und Dienstleistungen unterschiedlich auf den HVPI und den VPI auswirken.
+
+## 5 Wie hoch ist die aktuelle Inflationsrate 2026 in Deutschland?
+
+Die Inflationsrate in Deutschland hat im Mai 2026 etwas nachgelassen und lag voraussichtlich bei 2,6 Prozent. Diese Entwicklung zeigt nach dem starken Anstieg in den Vormonaten eine leichte Entspannung. Nach Angaben des Statistischen Bundesamts (Destatis) lagen die Verbraucherpreise damit um 2,6 % höher als im Mai 2025, während sie sich gegenüber April 2026 um 0,2 % verringerten.
+
+Die Entwicklung der Inflationsrate 2026 zeigt deutliche Schwankungen:
+
+- Februar 2026: 1,9 % (Tiefstwert)
+
+- März 2026: 2,7 % (erster Anstieg)
+
+- April 2026: 2,9 % (Höchstwert)
+
+- Mai 2026: 2,6 % (leichte Entspannung)
+
+[SPIEL gewusst: Im April 2026 lag der deutsche Verbraucherpreisindex bei 125,2 Punkten – das bedeutet, die Preise sind seit dem Basisjahr 2020 um 25,2 % gestiegen.]
+
+Preistreiber waren insbesondere die Preise für Energie, diese stiegen gegenüber dem Vorjahresmonat um 6,6 Prozent. Die Kerninflation, also die Inflation ohne Berücksichtigung der Preisentwicklung von Nahrungsmitteln und Energie, lag mit 2,5 Prozent niedriger.
+
+## 6 Was treibt die Inflation 2026: Energie als Hauptfaktor
+
+Der entscheidende Faktor für den Inflationsanstieg 2026 sind die Energiepreise. Die deutlichen Preissteigerungen bei den Energieprodukten treiben die Inflation. Insbesondere Kraftstoffe und Heizöl haben sich für die Verbraucherinnen und Verbraucher seit Beginn des Iran-Kriegs sprunghaft verteuert.
+
+Die Preise für Energie steigen gegenüber dem Vorjahresmonat voraussichtlich um 7,2 %, dies ist der erste Preisanstieg bei Energie seit Dezember 2023. Bei den Kraftstoffen fallen die Steigerungen besonders dramatisch aus:
+
+- Benzin und Diesel: +15,6 % (März 2026)
+
+- Diesel allein: +22,6 % (März 2026)
+
+- Heizöl: +43,2 % (März 2026)
+
+Diese Preisentwicklung bei Energie steht in direktem Zusammenhang mit geopolitischen Spannungen. Über allem schwebt die Schließung der Straße von Hormus. Diese geografische Engstelle, durch die etwa 20 % des weltweiten Ölhandels fließt, erhöht die Transportrisiken und damit die Energiepreise weltweit. Die steigenden Gaspreise und Strompreise belasten besonders Haushalte, die Energie für Heizung und Haushalt benötigen.
+
+Bei den Nahrungsmitteln zeigt sich ein differenzierteres Bild. Preiserhöhungen zeigten sich weiterhin vor allem bei Zucker, Marmelade, Honig und anderen Süßwaren (+6,1 %, darunter Schokolade: +9,6 %). Auch für Obst (+4,7 %), frisches Gemüse (+3,8 %) sowie Fleisch und Fleischwaren (+3,6 %) mussten die Verbraucherinnen und Verbraucher spürbar mehr bezahlen als ein Jahr zuvor.
+
+Entlastung brachten hingegen bestimmte Lebensmittelbereiche. Günstiger wurden hingegen insbesondere Speisefette und Speiseöle (-17,6 %, darunter Butter: -29,1 %; Olivenöl: -11,8 %). Zudem verbilligten sich Molkereiprodukte (-5,4 %), während Eier (+14,8 %) merklich teurer wurden.
+
+## 7 Kerninflation: Inflation ohne Energie und Nahrungsmittel
+
+Die Inflationsrate ohne Berücksichtigung von Nahrungsmitteln und Energie, häufig auch als Kerninflation bezeichnet, lag im März 2026 wie bereits seit Jahresbeginn bei +2,5 %. Die Inflationsrate ohne Nahrungsmittel und Energie, die sogenannte Kerninflation, beträgt im Mai 2026 voraussichtlich +2,5 %.
+
+Diese stabile Kerninflation ist ein wichtiges Signal für die Geldpolitik. Sie zeigt, dass der aktuelle Inflationsanstieg primär durch externe Schocks bei Energiepreisen getrieben wird, nicht durch eine breitere Preisdynamik in der Wirtschaft. Die Kerninflation gilt als besserer Indikator für längerfristige Inflationstrends, da sie weniger von kurzfristigen Preisschocks beeinflusst wird.
+
+[SPIEL schaetzen: Wie hoch ist die Kerninflation in Deutschland im Jahr 2026? → 2,5]
+
+## 8 Dienstleistungen und Wohnkosten: Preisdruck jenseits der Energie
+
+Die Preise für Dienstleistungen insgesamt lagen im März 2026 um 3,2 % über dem Niveau des Vorjahresmonats. Bereits seit Januar 2024 lag die Teuerung für Dienstleistungen im Vergleich zu den Waren oberhalb der Gesamtteuerung.
+
+Besonders stark verteuerten sich spezielle Dienstleistungsbereiche:
+
+- Dienstleistungen sozialer Einrichtungen: +7,0 %
+
+- Kombinierte Personenbeförderung: +6,2 %
+
+- Wartung und Reparatur von Fahrzeugen: +4,8 %
+
+- Gaststättendienstleistungen: +3,3 %
+
+- Versicherungsdienstleistungen: +3,2 %
+
+Letzteres ist insbesondere auf die Erhöhung des Preises für das Deutschlandticket zum Jahresbeginn zurückzuführen. Das Deutschlandticket wurde von 58 auf 63 Euro angehoben, was sich direkt auf die Verbraucherpreise durchschlug.
+
+Bedeutsam für die Preisentwicklung insgesamt blieben im März 2026 die Nettokaltmieten mit +1,9 % gegenüber dem Vorjahresmonat. Diese kontinuierliche Belastung ist für Haushalte mit niedrigen Einkommen besonders kritisch, da Wohnungsausgaben einen großen Anteil ihres Budgets ausmachen.
+
+## 9 EZB-Geldpolitik und Zinsentwicklung 2026
+
+Die Europäische Zentralbank steht 2026 vor schwierigen Entscheidungen. Die EZB erwartet für 2026 aktuell eine Inflation von rund 2,6 %, die damit über dem Zielwert von 2 % liegt. Gleichzeitig haben geopolitische Risiken, insbesondere der Krieg im Nahen Osten, die Unsicherheit erhöht und könnten kurzfristig zu weiterem Inflationsdruck führen.
+
+Der Einlagenzins liegt bei 2,00 %. Er gilt als wichtigster kurzfristiger Leitzins, weil er steuert, zu welchen Konditionen Banken überschüssiges Geld bei der EZB parken. Dieser Zinssatz wirkt sich direkt auf Tagesgeld, Geldmarktzinsen und sehr kurzfristige Kredite aus.
+
+Die aktuelle Geldpolitik der EZB ist von Stabilität geprägt. Seit Juli 2025 lässt die EZB die Zinsen unverändert. Am 30. April 2026 hat der EZB-Rat die Leitzinsen ein siebtes Mal unverändert gelassen.
+
+Aktuelle EZB-Leitzinsen (Stand Juni 2026):
+
+- Einlagesatz: 2,00 %
+
+- Hauptrefinanzierungssatz: 2,15 %
+
+- Spitzenrefinanzierungssatz: 2,40 %
+
+Die Projektionen für BIP und Inflation zeigen für das laufende Jahr deutlich mehr Inflation (2,6%), aber für die Folgejahre bleibt die 2% in Reichweite. Das BIP-Wachstum schwächt sich im laufenden Jahr deutlicher ab, in den Folgejahren ist der Unterschied minimal. Noch glaubt die EZB offiziell daran, dass der Ölpreis-Schock nur temporär ist.
+
+## 10 Inflationsprognose: Wie entwickelt sich die Teuerung mittelfristig?
+
+Die Inflationsprognosen für die kommenden Jahre zeigen eine allmähliche Rückkehr zur Preisstabilität. Im Basisszenario wird eine Gesamtinflation von durchschnittlich 2,6 % für 2026, 2,0 % für 2027 und 2,1 % für 2028 erwartet. Bei der Inflation ohne Energie und Nahrungsmittel gehen die Fachleute von durchschnittlich 2,3 % für 2026, 2,2 % für 2027 und 2,1 % für 2028 aus.
+
+Der Deutschland-Prognose zufolge sinkt die Inflationsrate gemessen am Harmonisierten Verbraucherpreisindex (HVPI) von voraussichtlich 2,3 Prozent in diesem Jahr auf 2,2 Prozent im Jahr 2026. In den Jahren 2027 und 2028 erreicht sie etwa 2 Prozent.
+
+Die mittelfristige Entwicklung hängt von mehreren Faktoren ab:
+
+- Energiepreisentwicklung und Dauer des Nahost-Konflikts
+
+- Lohnabschlüsse und Gefahr einer Lohn-Preis-Spirale
+
+- Geldpolitik der EZB und Zinsentwicklung
+
+- Konjunkturentwicklung und Wachstumsdynamik
+
+Die Inflationsprognose 2027 für Deutschland liegt laut aktuellen Einschätzungen zwischen 2,0 % und 2,6 %. Den höchsten Wert nennt das ifo Institut mit 2,6 %, was auf eine vergleichsweise pessimistische Bewertung hindeutet. Die Commerzbank erwartet mit 2,3 % ebenfalls ein leicht erhöhtes Preisniveau. Dagegen sehen sowohl die ING-DiBa als auch der Internationale Währungsfonds eine moderate Inflationsrate von 2,0 %.
+
+## 11 Auswirkungen auf Verbraucher und Haushaltseinkommen
+
+Die aktuelle Inflation belastet die deutschen Haushalte spürbar. Besonders betroffen sind Haushalte mit niedrigen Einkommen, da sie einen höheren Anteil ihres Budgets für Energie und Grundbedürfnisse ausgeben müssen. Wer im Jahr 2026 eine Summe von 20.000 Euro auf einem gut verzinsten Tagesgeldkonto parkt, verfügt am Ende des Jahres über einen nominalen Kontostand von 20.660 Euro. Das entspricht einem nominellen Gewinn von satten 660 Euro auf dem Papier. Bereinigt man diesen Betrag nun um die Inflationsrate von 1,9 %, so hat sich die reale Kaufkraft dieses Vermögens um rund 280 Euro gesteigert. Der Sparer hat also am Ende des Jahres einen echten, materiellen Mehrwert erwirtschaftet.
+
+Die Inflationsentwicklung zeigt auch regionale Unterschiede. Die Verbraucherpreise stiegen im Mai 2026 im Vergleich zum Vorjahresmonat in Berlin um 2,8 %. Damit b
+
+## 12 Häufig gestellte Fragen
+
+[BLOCK checkliste inflation]
+
+[BLOCK rechner inflation]
+
+
+## FAQ
+F: Wie hoch ist die Inflationsrate in Deutschland im März 2026?
+A: Die Inflationsrate lag im März 2026 bei 2,7 Prozent gegenüber dem Vorjahresmonat – der höchste Wert seit Januar 2024. Der harmonisierte europäische Verbraucherpreisindex (HVPI) erreichte 2,8 Prozent und zeigt damit einen spürbaren Anstieg gegenüber Februar.
+F: Was sind die Ursachen der aktuellen Inflation?
+A: Haupttreiber sind gestiegene Energiepreise aufgrund des Konflikts im Iran und Störungen der globalen Energieversorgung. Die Energiepreise kletterten im März 2026 um 7,2 Prozent, während die Kerninflation mit 2,5 Prozent stabil blieb.
+F: Wie stark verteuern sich Kraftstoffe und Heizöl?
+A: Benzin und Diesel verteuerten sich im März 2026 um 15,6 Prozent, Diesel allein sogar um 22,6 Prozent. Heizöl wurde um 43,2 Prozent teurer – eine massive Belastung für Haushalte, die auf diese Energieträger angewiesen sind.
+F: Was bedeutet Kerninflation und wie hoch ist sie?
+A: Die Kerninflation ist die Inflationsrate ohne volatile Komponenten wie Nahrungsmittel und Energie. Sie betrug im März 2026 stabil 2,5 Prozent und zeigt, dass der aktuelle Preisauftrieb primär durch externe Energieschocks getrieben ist.

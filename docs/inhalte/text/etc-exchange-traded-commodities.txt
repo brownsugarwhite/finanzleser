@@ -1,0 +1,135 @@
+# ETC – Exchange Traded Commodities (etc-exchange-traded-commodities)
+## 0 ETC Ratgeber: Rohstoffinvestitionen einfach erklärt
+
+Mit ETC investieren Anleger einfach in Rohstoffe wie Gold – ohne physischen Kauf. Wie ETC funktionieren, welche Risiken sie bergen und für wen sie 2026 passen.
+
+## 1 Exchange Traded Commodities: Der Leitfaden für Privatanleger
+
+Exchange Traded Commodities (ETCs) ermöglichen Privatanlegern einen direkten Zugang zu Rohstoffen ohne physischen Erwerb. ETCs sind unbefristete, besicherte Schuldverschreibungen, die an der Wertentwicklung eines oder mehrerer Rohstoffe gekoppelt sind. Sie haben sich in Deutschland zu einer beliebten Alternative für Rohstoffanlagen entwickelt.
+
+Seit 2006 werden Exchange Traded Commodities in Deutschland auf Edelmetalle an der Börse Frankfurt (Xetra) und auf der Zertifikatehandelsplattform Scoach gehandelt. Exchange Traded Commodities bieten eine flexible Möglichkeit, von Rohstoffpreisbewegungen zu profitieren. Sie ermöglichen zugleich eine sinnvolle Portfolio-Diversifikation.
+
+Die rechtliche Struktur von Exchange Traded Commodities unterscheidet sich grundlegend von ETFs. ETCs sind rechtlich Schuldverschreibungen und kein Sondervermögen. Diese Unterscheidung hat wichtige Auswirkungen auf das Anlegerrisiko und sollte bei der Anlageentscheidung berücksichtigt werden.
+
+## 2 Welche Rohstoffe können Sie mit ETCs handeln?
+
+Exchange Traded Commodities ermöglichen Investitionen in ein breites Spektrum von Rohstoffen. Sie können in folgende Rohstoffklassen investieren:
+
+- Edelmetalle: Gold, Silber, Platin und Palladium
+
+- Agrargüter: Mais, Weizen, Kaffee und Zucker
+
+- Energieträger: Erdöl, Erdgas und Kohle
+
+- Industriemetalle: Kupfer, Zink, Nickel und Aluminium
+
+Diese Vielfalt ermöglicht gezielte Diversifikation in verschiedene Rohstoffsektoren und Marktphasen.
+
+[SPIEL schaetzen: Wie viele ETC-Produkte bietet der größte Anbieter in Deutschland an? → 110]
+
+Die Funktionsweise unterscheidet sich je nach Rohstoff. Das Xetra-Gold-ETC ist physisch hinterlegt – zu 100 Prozent durch Gold gedeckt. Bei anderen Rohstoffen kommen komplexere Mechanismen zum Einsatz. ETCs auf Öl oder Agrarrohstoffe bilden meist Terminkontrakte ab, die regelmäßig neu erworben werden müssen.
+
+[SPIEL karte: Rollover]
+
+Die Designated Sponsors gewährleisten Liquidität. Sie verpflichten sich, Anteile auszugeben oder zurückzunehmen. Ihre fortlaufende Quotierung mit Mindestvolumina bietet Preistransparenz und Handelssicherheit für Anleger.
+
+## 3 Wie unterscheiden sich ETCs von ETFs?
+
+Der wichtigste Unterschied zwischen ETCs und ETFs liegt in ihrer rechtlichen Struktur. ETCs haben die Rechtsform einer Inhaberschuldverschreibung. ETFs sind dagegen Sondervermögen. Diese Unterscheidung hat erhebliche Konsequenzen für die Anlegersicherheit.
+
+Das Sondervermögen von ETFs unterliegt juristischen Schutzvorschriften. Im Falle einer Insolvenz des ETF-Emittenten sind die Wertpapiere vor dem Zugriff der Gläubiger geschützt. Die Sicherheit ist also hoch. Bei ETCs besteht hingegen ein Emittentenrisiko, da sie im Falle einer Insolvenz nicht vor Gläubigerzugriffen geschützt sind.
+
+[SPIEL mythos: ETCs können in einzelne Rohstoffe investieren, während ETFs in Deutschland gesetzlich dazu verpflichtet sind, diversifiziert zu sein → ja]
+
+ETFs müssen laut EU-Richtlinie ein Mindestmaß an Diversifikation aufweisen. Sie können daher nicht in einen einzelnen Rohstoff investieren. Exchange Traded Commodities füllen diese regulatorische Lücke und ermöglichen Investitionen in spezifische Einzelrohstoffe – ein Vorteil für gezielt fokussierte Anleger.
+
+Die Kostenstrukturen sind ähnlich, aber unterschiedlich zusammengesetzt. Die ETC-Kosten liegen zwischen 0,00 und 0,59 Prozent pro Jahr. Diese Gesamtkostenquote umfasst Lagerhaltungs-, Management- und Versicherungskosten.
+
+## 4 Wie funktioniert die Besicherung bei ETCs?
+
+Die Sicherheit von Exchange Traded Commodities hängt maßgeblich von ihrer Besicherung ab. Es gibt zwei grundlegende Besicherungsmodelle: die physische und die synthetische Besicherung.
+
+Physische Besicherung: Der Emittent hält die tatsächlichen Rohstoffe. Physisch hinterlegte ETCs bilden ohne Kreditrisiko den täglichen Preis ab. Diese bergen kein Kreditrisiko, da die Anleger ein Wertpapier mit physischem, nicht verleihbarem Metall halten. Xetra Gold ist zu 100 Prozent mit physischem Gold besichert (95 Prozent physisches Gold und 5 Prozent Lieferansprüche). Der Deckungsbestand wird unter hohen Sicherheitsauflagen vom Zentralverwahrer für Wertpapiere gelagert. Viele Anleger nutzen physisch besicherte ETCs auch als ergänzende Strategie zur direkten Investition in Gold.
+
+Synthetische Besicherung: Der Emittent nutzt Derivate wie Swaps zur Nachbildung der Rohstoffwertentwicklung. Alle ETCs sind zu 100 Prozent mit Kreditsicherheiten gedeckt, die von Clearing-Stellen in eigenständigen Depots verwaltet und täglich angepasst werden. Diese Methode erfordert weniger physische Lagerhaltung, bringt aber zusätzliche Kontrahentenrisiken mit sich.
+
+[SPIEL gewusst: Das größte Gold-ETC in Europa verwaltet über 230 Tonnen physisches Gold in Hochsicherheitstresoren (Stand 2026).]
+
+Unabhängig vom Besicherungsmodell sollten Sie die Bonität des Emittenten überprüfen. Rating-Agenturen bewerten die Kreditwürdigkeit von ETC-Emittenten regelmäßig. Diese Informationen sind wichtig für die Risikoeinschätzung, da ETCs nicht durch die Entschädigungsrichtlinie geschützt sind.
+
+## 5 Welche Kosten entstehen bei ETCs?
+
+Die Gesamtkostenquote (Total Expense Ratio, TER) ist bei Exchange Traded Commodities ein wichtiger Faktor für die Renditeberechnung. Die TER von Gold-ETCs liegt zwischen 0,00 und 0,99 Prozent pro Jahr. Diese Kosten enthalten Versicherungsprämien, Lagerkosten und Managementgebühren.
+
+Die TER umfasst typischerweise folgende Komponenten:
+
+- Verwaltungsgebühren für das Portfolio-Management
+
+- Lagerhaltungskosten für physische Rohstoffe
+
+- Versicherungsprämien zum Schutz der gelagerten Güter
+
+- Lizenzgebühren für Rohstoffindizes
+
+Zusätzlich zur TER entstehen Spread-Kosten – die Differenz zwischen Kauf- und Verkaufspreis beim Handel. Die Designated Sponsors legen diese fest. Sie hängen von der Liquidität des Produkts ab. Bei hochliquiden ETCs wie Xetra-Gold liegt der Spread bei etwa 0,1 Prozent.
+
+Ein weiterer Kostenfaktor ist der Rollover-Effekt bei Terminkontrakten. Wenn ein ETC einen auslaufenden Kontrakt verkauft und einen neuen kauft, können Kursdifferenzen entstehen. Dies beeinflusst die Rendite. Das ist besonders bei Öl-, Gas- und Agrarrohstoff-ETCs relevant.
+
+| Kostenfaktor | Höhe | Beschreibung
+
+| TER | 0,00–0,99% p.a. | Jährliche Gesamtkostenquote
+
+| Spread | 0,1–0,5% | Differenz zwischen Kauf-/Verkaufspreis
+
+| Rollover-Kosten | variabel | Bei Terminkontrakten
+
+| Depotgebühren | broker-abhängig | Externe Verwahrungskosten
+
+## 6 Welche Risiken sollten Sie beachten?
+
+Das Emittentenrisiko ist das zentrale Risiko bei ETCs. Exchange Traded Commodities sind nicht geschütztes Sondervermögen. Sie sind rechtlich Schuldverschreibungen und unterliegen daher dem Emittentenrisiko. Wird der Herausgeber insolvent, können Anleger ihr Kapital ganz oder teilweise verlieren.
+
+Dieses Risiko wird in der Regel durch zusätzliche Besicherung reduziert. Die Art der Besicherung prägt das Risikoprofil:
+
+- Physisch besicherte ETCs: Geringeres Risiko durch echte Rohstofflagerung
+
+- Synthetisch besicherte ETCs: Höheres Kontrahentenrisiko durch Swap-Partner
+
+- Vollständig besicherte ETCs: Schutz durch Sicherheitenpool
+
+Weitere Risiken für Exchange Traded Commodities:
+
+- Marktpreisrisiken durch Rohstoffvolatilität
+
+- Währungsrisiken bei fremdwährungsnotierten ETCs
+
+- Liquiditätsrisiken in volatilen Marktphasen
+
+- Rollover-Verluste bei Terminkontrakten
+
+Die zugrunde liegenden Rohstoffpreise reagieren auf ökonomische Faktoren wie Angebot, Nachfrage, Anlageklima, Inflation, Wetterbedingungen und Regierungspolitik. ETC-Anleger sind den Marktpreisschwankungen vollständig ausgesetzt. Für einen ganzheitlichen Anlageansatz können nachhaltige Geldanlagen eine sinnvolle Ergänzung darstellen.
+
+## 7 Fazit
+
+Exchange Traded Commodities bieten Privatanlegern einen unkomplizierten Zugang zu Rohstoffmärkten. Sie ermöglichen Investitionen in einzelne Rohstoffe – eine Möglichkeit, die ETFs durch regulatorische Vorgaben nicht bieten. Die Besicherung, rechtliche Struktur und Kostendetails unterscheiden sich erheblich zwischen Produkten und Emittenten.
+
+Das Emittentenrisiko von ETCs ist relevant für Ihre Risikoabwägung. Vor einer Anlage sollten Sie die Bonität des Emittenten überprüfen. Verstehen Sie das Besicherungsmodell und vergleichen Sie die Gesamtkostenquoten mit Alternativen. Physisch besicherte ETCs wie Xetra-Gold bieten durch ihre 100-prozentige Golddeckung zusätzliche Sicherheit. Sie bleiben aber rechtlich Schuldverschreibungen.
+
+Mit diesen Überlegungen können Exchange Traded Commodities eine sinnvolle Portfolioergänzung sein. Sie unterstützen gezielte Anlagestrategien bei der Rohstoffallokation. Die niedrigen Kosten von 0,00 bis 0,99 Prozent jährlich (Stand 2026) machen Exchange Traded Commodities zu einer kosteneffizienten Alternative für Rohstoffinvestitionen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste etc-exchange-traded-commodities]
+
+[BLOCK vergleich depot-vergleich]
+
+
+## FAQ
+F: Was ist ein ETC und wie funktioniert er?
+A: Ein ETC (Exchange Traded Commodity) ist eine börsengehandelte Schuldverschreibung, die an die Wertentwicklung eines oder mehrerer Rohstoffe gekoppelt ist. Anleger partizipieren dadurch an Rohstoffpreisen wie Gold, Öl oder Kupfer, ohne die Ware physisch erwerben zu müssen.
+F: Worin unterscheiden sich ETCs und ETFs?
+A: ETCs sind rechtlich Inhaberschuldverschreibungen und tragen damit ein Emittentenrisiko, während ETFs als Sondervermögen bei einer Insolvenz des Anbieters geschützt sind. ETFs bilden Indizes aus Aktien oder Anleihen ab, ETCs dagegen einzelne oder mehrere Rohstoffe.
+F: In welche Rohstoffe kann man über ETCs investieren?
+A: Über ETCs lassen sich Edelmetalle wie Gold und Silber, Industriemetalle wie Kupfer oder Zink, Energieträger wie Erdöl und Erdgas sowie Agrarrohstoffe wie Weizen, Mais oder Kakao abbilden. Diese Auswahl ermöglicht eine gezielte Diversifikation im Portfolio.
+F: Was bedeutet der Rollover-Effekt bei ETCs?
+A: Bei ETCs auf Öl, Erdgas oder Agrarrohstoffe bildet der Emittent Terminkontrakte mit begrenzter Laufzeit ab. Vor Ablauf muss der Kontrakt verkauft und ein neuer erworben werden – dieser Rollover kann zusätzliche Kosten verursachen und die Rendite beeinflussen.

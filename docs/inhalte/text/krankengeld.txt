@@ -1,0 +1,135 @@
+# Krankengeld (krankengeld)
+## 0 Finanzielle Sicherung bei langer Arbeitsunfähigkeit - Anspruch und Höhe 2026
+
+Krankengeld sichert das Einkommen bei längerer Arbeitsunfähigkeit. Wer es bekommt, wie hoch es 2026 ausfällt und wie lange die Krankenkasse zahlt.
+
+## 1 Krankengeld 2026: Anspruch, Höhe und Dauer
+
+Krankengeld regelt die finanzielle Absicherung bei längerer Arbeitsunfähigkeit und unterscheidet sich stark zwischen Arbeitnehmern und Selbstständigen.
+
+Wenn die Gesundheit länger streikt, stehen viele vor der Frage: Wie lange reicht das Geld? Das Krankengeld liegt 2026 bei maximal 135,63 Euro täglich, was bei längerer Krankheit eine erhebliche Einkommenslücke bedeuten kann. Besonders Selbstständige müssen aktiv vorsorgen, während Arbeitnehmer automatisch abgesichert sind.
+
+## 2 Was ist Krankengeld und wie unterscheidet es sich von der Entgeltfortzahlung?
+
+Krankengeld ist eine Entgeltersatzleistung, die nach dem Ende der Entgeltfortzahlung des Arbeitgebers greift, um Einkommenseinbußen bei andauernder Erkrankung abzumildern. Die ersten sechs Wochen zahlt der Arbeitgeber das volle Gehalt weiter. Anspruch auf Krankengeld haben Arbeitnehmer ab dem Zeitpunkt, an dem die Entgeltfortzahlung endet – im Regelfall ab der siebten Woche.
+
+[SPIEL schaetzen: Wie hoch ist der maximale tägliche Krankengeld-Betrag 2026? → 135.63]
+
+Der wesentliche Unterschied liegt in der Finanzierung und Höhe. In den ersten sechs Wochen zahlt der Arbeitgeber Entgeltfortzahlung (100 Prozent Gehalt), während das Krankengeld deutlich niedriger ausfällt. Besteht kein Anspruch auf Lohnfortzahlung, beispielsweise in den ersten vier Wochen eines neuen Arbeitsverhältnisses, kann der Krankengeldanspruch bereits ab dem ersten Tag bestehen.
+
+Die rechtliche Grundlage bildet das Sozialgesetzbuch V (SGB V), insbesondere die Paragraphen 44 bis 51. Seit 2023 erfolgt die Arbeitsunfähigkeitsbescheinigung elektronisch (eAU) direkt vom Arzt an die Krankenkasse. Das Krankengeld ist eine der zentralen Krankenversicherung Leistungen, die Arbeitnehmer während längerer Erkrankungen schützen.
+
+## 3 Wie wird Krankengeld berechnet?
+
+Das Krankengeld beträgt 70 Prozent des Bruttogehalts, höchstens jedoch 90 Prozent des Nettogehalts. Maßgeblich ist das Arbeitsentgelt des letzten vor Beginn der Arbeitsunfähigkeit abgerechneten Entgeltabrechnungszeitraums von mindestens vier Wochen. Einmalzahlungen wie Weihnachtsgeld oder Urlaubsgeld werden anteilig berücksichtigt; in diesem Fall gilt eine Obergrenze von 100 Prozent des Nettoentgelts.
+
+Die Berechnung erfolgt in mehreren Schritten:
+
+- Ermittlung des täglichen Bruttogehalts
+
+- Berechnung von 70 Prozent dieses Betrags
+
+- Prüfung der 90-Prozent-Netto-Grenze
+
+- Anwendung der Beitragsbemessungsgrenze als Obergrenze
+
+Ein praktisches Rechenbeispiel: Bei einem monatlichen Bruttogehalt von 3.000 Euro plus 1.200 Euro Weihnachtsgeld ergibt sich ein berechnetes Monatsbrutto von 3.100 Euro. 70 Prozent davon sind 2.170 Euro, aber diese Summe wird durch die 90-Prozent-Netto-Grenze und die Beitragsbemessungsgrenze begrenzt.
+
+| Bruttogehalt | Krankengeld (70%) | Netto-Grenze (90%) | Tatsächliches Krankengeld
+
+| 3.000 Euro | 2.100 Euro | 1.980 Euro | ca. 1.742 Euro (nach Abzügen)
+
+| 4.000 Euro | 2.800 Euro | 2.430 Euro | ca. 2.138 Euro (nach Abzügen)
+
+| 6.000 Euro | 4.200 Euro | 3.600 Euro | ca. 3.564 Euro (BBG-gedeckelt)
+
+Vom Brutto-Krankengeld werden die Arbeitnehmerbeiträge zur Renten-, Arbeitslosen- und Pflegeversicherung abgezogen, wodurch sich das ausgezahlte Krankengeld um etwa 12,4 Prozent reduziert. Den Arbeitgeberanteil übernimmt die Krankenkasse.
+
+## 4 Wer hat Anspruch auf Krankengeld?
+
+Grundsätzlich haben alle gesetzlich krankenversicherten Arbeitnehmer Anspruch auf Krankengeld. Selbstständige, die freiwillig gesetzlich versichert sind, erhalten nur dann Krankengeld, wenn sie den allgemeinen Beitragssatz zahlen und eine entsprechende Wahlerklärung abgegeben haben.
+
+[SPIEL quiz: Ab welchem Tag erhalten Selbstständige mit Wahlerklärung Krankengeld?]
+
+Selbstständige zahlen für Krankengeld statt des ermäßigten Beitragssatzes von 14,0 Prozent den normalen Beitragssatz von 14,6 Prozent plus Zusatzbeitrag, also 0,6 Prozentpunkte mehr. Da der Beitragsaufschlag nur auf das Einkommen bis zur Beitragsbemessungsgrenze fällig wird, zahlen sie höchstens rund 35 Euro im Monat für das Krankengeld.
+
+Die Wahlerklärung muss bei der Krankenkasse schriftlich eingereicht werden. An diese Wahl sind Selbstständige für drei Jahre gebunden. Die Bindungswirkung bleibt auch bei Kassenwechsel erhalten. Nach Ablauf der Bindungswirkung gilt die Wahlerklärung unbefristet weiter.
+
+Keinen Anspruch haben:
+
+- Familienversicherte ohne eigenes Einkommen
+
+- Hauptberuflich Selbstständige ohne Wahlerklärung
+
+- Selbstständige, die nichts verdienen oder Verlust machen
+
+## 5 Wie lange wird Krankengeld gezahlt?
+
+Für dieselbe Krankheit wird Krankengeld innerhalb von drei Jahren für höchstens 78 Wochen gezahlt. Die sechs Wochen Entgeltfortzahlung durch den Arbeitgeber sind darin enthalten. Die Krankenkasse zahlt somit maximal 72 Wochen lang Krankengeld.
+
+Diese 78-Wochen-Regel ist an wichtige Bedingungen geknüpft:
+
+- Sie gilt pro Krankheit, nicht pro Jahr
+
+- Bei einer neuen, anderen Erkrankung beginnt ein eigenständiger Anspruch
+
+- Tritt nach mindestens sechs Monaten Arbeitsfähigkeit dieselbe Krankheit erneut auf, beginnt eine neue 78-Wochen-Frist
+
+- Die Blockfrist von drei Jahren läuft ab Beginn der ersten Arbeitsunfähigkeit
+
+Während der stufenweisen Wiedereingliederung (Hamburger Modell) erhalten Sie weiterhin Krankengeld – nicht den vollen Lohn. Der Arbeitgeber kann freiwillig Zuschüsse zahlen.
+
+## 6 Welche Höchstbeträge gelten 2026?
+
+Die Beitragsbemessungsgrenze der gesetzlichen Krankenversicherung liegt 2026 bei 69.750 Euro jährlich, das entspricht 5.812,50 Euro monatlich oder 193,75 Euro täglich. Das maximale Bruttokrankengeld beträgt damit 135,63 Euro pro Tag.
+
+[SPIEL gewusst: Nach Abzug der Sozialversicherung verbleiben vom Höchstbetrag nur etwa 118,81 Euro netto pro Tag – das entspricht rund 3.564 Euro monatlich (Stand 2026).]
+
+Gutverdiener müssen mit einer erheblichen Einkommenslücke rechnen, da Einkommen oberhalb der Beitragsbemessungsgrenze nicht berücksichtigt wird. Bei einem monatlichen Bruttogehalt von 8.000 Euro ergibt sich beispielsweise eine Lücke von über 4.000 Euro monatlich.
+
+Die jährliche Anpassung der Beitragsbemessungsgrenze führt dazu, dass auch das maximale Krankengeld steigt. Die Obergrenze steigt 2026 vor allem deshalb, weil die Beitragsbemessungsgrenze in der gesetzlichen Krankenversicherung steigt. Die entscheidende Veränderung: Die kalendertägliche Deckelung liegt 2026 höher.
+
+## 7 Wie wirkt sich Krankengeld steuerlich aus?
+
+Krankengeld selbst ist steuerfrei, unterliegt aber dem Progressionsvorbehalt. Das bedeutet, es erhöht den Steuersatz für Ihr übriges Einkommen. Wer mehr als 410 Euro Krankengeld im Jahr erhalten hat, ist zur Abgabe einer Steuererklärung verpflichtet. Diese Pflicht gilt auch 2026 unverändert.
+
+Der Progressionsvorbehalt funktioniert folgendermaßen: Das Finanzamt addiert das reguläre zu versteuernde Einkommen und die erhaltene Lohnersatzleistung. Aus dieser Gesamtsumme wird ein fiktiver, höherer Steuersatz ermittelt. Dieser Prozentsatz wird anschließend ausschließlich auf das tatsächlich zu versteuernde Einkommen angewendet.
+
+Ein praktisches Beispiel verdeutlicht die Auswirkungen: Bei einem zu versteuernden Einkommen von 30.000 Euro und 3.500 Euro Krankengeld steigt der Steuersatz von 12,77 Prozent auf 15,55 Prozent. Obwohl das Krankengeld steuerfrei bleibt, können je nach Höhe 1–3 Prozentpunkte Steuersatz-Erhöhung entstehen.
+
+Das Krankengeld gehört in die elektronische Steuererklärung (ELSTER) in den Bereich "Weitere Angaben und Anträge" unter "Leistungen nach § 32b EStG (Progressionsvorbehalt)". Die Krankenkasse übermittelt den Betrag ab 2026 automatisch digital an das Finanzamt.
+
+Wichtiger Unterschied: Privates Krankentagegeld unterliegt nicht dem Progressionsvorbehalt und wirkt sich im Gegensatz zum Krankengeld nicht auf den persönlichen Steuersatz aus.
+
+## 8 Was passiert nach der Aussteuerung?
+
+Nach Ende des 78-Wochen-Zeitraums tritt die sogenannte Aussteuerung ein. Spätestens drei Monate vor Ende des Krankengelds müssen sich Betroffene bei der Agentur für Arbeit arbeitslos melden (Nahtlosigkeitsregelung). Über die Nahtlosigkeitsregelung kann anschließend Arbeitslosengeld beantragt werden. Gleichzeitig sollte ein Reha- oder Rentenantrag bei der Deutschen Rentenversicherung gestellt werden. Optionen sind: Arbeitslosengeld I (Nahtlosigkeitsregelung), Erwerbsminderungsrente (bei dauerhafter Erkrankung) oder Rehabilitation (Reha vor Rente).
+
+Der Bezug von Krankengeld begründet keinen besonderen Kündigungsschutz. Der Arbeitgeber kann auch während der Arbeitsunfähigkeit eine Kündigung aussprechen. Langzeiterkrankte Arbeitnehmer sind häufig besonders gefährdet.
+
+Die rechtzeitige Planung ist entscheidend, da zwischen Krankengeld-Ende und dem Beginn von Folge-leistungen keine Lücken entstehen sollten. Eine professionelle Beratung durch Sozialverbände oder spezialisierte Anwälte kann in dieser Phase hilfreich sein.
+
+## 9 Fazit
+
+Krankengeld stellt eine wichtige, aber begrenzte finanzielle Absicherung bei längerer Arbeitsunfähigkeit dar. Der Tageshöchstbetrag liegt 2026 bei 135,63 Euro brutto, nach Abzug der Sozialversicherung verbleiben zwischen 112 und 114 Euro pro Tag. Während Arbeitnehmer automatisch nach sechs Wochen Anspruch haben, müssen Selbstständige aktiv eine Wahlerklärung abgeben und höhere Beiträge zahlen.
+
+Die 78-Wochen-Regel begrenzt den Anspruch pro Krankheit über drei Jahre hinweg, was eine langfristige Planung erfordert. Besonders wichtig ist das Verständnis der steuerlichen Auswirkungen: Durch den Progressionsvorbehalt kann das eigentlich steuerfreie Krankengeld den Steuersatz um 1–3 Prozentpunkte erhöhen. Bei mehr als 410 Euro Krankengeld im Jahr wird eine Steuererklärung verpflichtend.
+
+Für Gutverdiener entstehen erhebliche Einkommenslücken, da die Beitragsbemessungsgrenze das maximale Krankengeld deckelt. Eine rechtzeitige Vorsorge durch private Krankentagegeldversicherung oder Berufsunfähigkeitsversicherung kann diese Lücken schließen. Die frühzeitige Auseinandersetzung mit den Anschlussleistungen nach der Aussteuerung verhindert finanzielle Engpässe im ohnehin belastenden Krankheitsfall.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste krankengeld]
+
+[BLOCK rechner krankengeld]
+
+
+## FAQ
+F: Wie hoch ist das Krankengeld 2026?
+A: Das Krankengeld beträgt 70 Prozent des Bruttogehalts, maximal jedoch 90 Prozent des Nettogehalts. Der tägliche Höchstbetrag liegt 2026 bei 135,63 Euro und orientiert sich an der Beitragsbemessungsgrenze der gesetzlichen Krankenversicherung.
+F: Ab wann zahlt die Krankenkasse Krankengeld?
+A: Arbeitnehmer erhalten Krankengeld ab dem Zeitpunkt, an dem die Entgeltfortzahlung des Arbeitgebers endet – im Regelfall ab der siebten Woche. Für die ersten sechs Wochen zahlt der Arbeitgeber das volle Gehalt weiter, sodass eine nahtlose Absicherung besteht.
+F: Bekommen Selbstständige auch Krankengeld?
+A: Hauptberuflich Selbstständige sind grundsätzlich vom Krankengeldanspruch ausgeschlossen. Gesetzlich Versicherte können durch eine Wahlerklärung den Anspruch erwerben, zahlen dann aber 14,6 statt 14,0 Prozent Beitragssatz. Die Zahlung erfolgt ab dem 43. Tag.
+F: Ist Krankengeld steuerpflichtig?
+A: Das Krankengeld selbst ist steuerfrei, unterliegt aber dem Progressionsvorbehalt und muss in der Steuererklärung angegeben werden. Zudem werden von Brutto-Krankengeld Beiträge zur Renten-, Arbeitslosen- und Pflegeversicherung abgezogen.

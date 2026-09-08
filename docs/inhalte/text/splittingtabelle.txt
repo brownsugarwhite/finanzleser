@@ -1,0 +1,145 @@
+# Splittingtabelle (splittingtabelle)
+## 0 Splittingtabelle 2024: Steuern sparen mit Zusammenveranlagung
+
+Die Splittingtabelle ermittelt die Einkommensteuer für gemeinsam veranlagte Ehepaare. Wie das Ehegattensplitting 2026 funktioniert und wie viel es spart.
+
+## 1 Splittingtabelle 2026: So sparen Ehepaare Steuern
+
+Die Splittingtabelle ist ein steuerliches Berechnungsinstrument für verheiratete Paare und eingetragene Lebenspartner zur Ermittlung der Einkommensteuer bei Zusammenveranlagung. Sie basiert auf dem Splittingverfahren und bietet oft erhebliche Steuervorteile gegenüber der Einzelveranlagung.
+
+Die Splittingtabelle zeigt für 2026 mit einem Grundfreibetrag von 24.696 Euro alle wichtigen Steuerwerte für Ehepaare. Das Verfahren funktioniert nach einem einfachen Prinzip: Das zu versteuernde gemeinsame Einkommen wird zu gleichen Teilen auf beide Partner verteilt, die Einkommensteuer nach dem Tarif berechnet und das Ergebnis verdoppelt.
+
+## 2 Was ist eine Splittingtabelle?
+
+Die Splittingtabelle dient als übersichtliches Nachschlagewerk für die Steuerbelastung verheirateter Paare bei der Zusammenveranlagung. Sie zeigt für verschiedene Einkommensstufen die zu zahlende Einkommensteuer, den Solidaritätszuschlag und gegebenenfalls die Kirchensteuer.
+
+Bei zusammen veranlagten Ehepaaren und eingetragenen Lebenspartnerschaften wird der Splittingtarif angewendet. Das Besondere: Im Gegensatz zur Grundtabelle für ledige Personen berücksichtigt die Splittingtabelle das gemeinsame Einkommen beider Partner.
+
+[SPIEL gewusst: Bei einem zu versteuernden Familieneinkommen von 60.000 Euro zahlen verheiratete Paare nur 8.434 Euro Einkommensteuer - unverheiratete Paare dagegen 10.548 Euro (Stand 2026).]
+
+Das Ehegattensplitting nutzt den progressiven Charakter der Einkommensteuer optimal aus. Durch die rechnerische Halbierung des gemeinsamen Einkommens fallen beide Partner in niedrigere Steuersätze. Dieser Mechanismus wirkt besonders bei unterschiedlichen Verdiensten steuermindernd.
+
+## 3 Für wen gilt der Splittingtarif 2026?
+
+Der Splittingtarif steht verschiedenen Personengruppen zur Verfügung. Berechtigt sind verheiratete Paare, die nicht dauernd getrennt leben und beide unbeschränkt steuerpflichtig in Deutschland sind. Seit der Entscheidung des Bundesverfassungsgerichts vom 6. Juni 2013 gilt der Splittingtarif rückwirkend zum 1. August 2001 auch für eingetragene Lebenspartnerschaften.
+
+Auch in besonderen Lebenssituationen bleibt das Ehegattensplitting verfügbar. Bei einer Trennung kann der Splittingtarif für das Jahr der Trennung gelten. Das sogenannte Gnadensplitting ermöglicht Witwen und Witwern die Anwendung der Splittingtabelle noch im Jahr nach dem Tod des Partners.
+
+Die Zusammenveranlagung ist eine Wahlmöglichkeit. Ehepaare können jährlich neu entscheiden, ob sie gemeinsam oder einzeln veranlagt werden möchten. In den meisten Fällen erweist sich die Zusammenveranlagung als deutlich günstiger.
+
+## 4 Splittingtabelle 2026: Die aktuellen Steuersätze
+
+Der Grundfreibetrag für Verheiratete beträgt 2026 24.696 Euro - das entspricht dem doppelten Betrag des Grundfreibetrags für ledige Personen. Bis zu diesem Betrag fällt keine Einkommensteuer an.
+
+Die folgende Tabelle zeigt die wichtigsten Werte der Splittingtabelle 2026:
+
+| Zu versteuerndes Einkommen | Einkommensteuer | Solidaritätszuschlag | Durchschnittssteuersatz
+
+| 30.000 € | 0 € | 0 € | 0,0 %
+
+| 50.000 € | 5.700 € | 0 € | 11,4 %
+
+| 80.000 € | 14.418 € | 0 € | 18,0 %
+
+| 100.000 € | 20.596 € | 0 € | 20,6 %
+
+| 120.000 € | 28.466 € | 0 € | 23,7 %
+
+| 150.000 € | 40.156 € | 0 € | 26,8 %
+
+| 180.000 € | 53.328 € | 1.503 € | 29,6 %
+
+Der Solidaritätszuschlag ist erst ab einer bestimmten Höhe der Einkommensteuer zu zahlen. 2026 liegt die Freigrenze für Ehepaare bei 40.700 Euro. Der "Soli" beträgt 5,5 Prozent der Einkommensteuer.
+
+## 5 Wie funktioniert das Splittingverfahren?
+
+Das Splittingverfahren folgt einem mathematisch einfachen Prinzip. Zunächst werden alle Einkünfte beider Partner addiert. Von dieser Summe werden gemeinsame Werbungskosten, Sonderausgaben und außergewöhnliche Belastungen abgezogen. Das Ergebnis ist das zu versteuernde Einkommen.
+
+[SPIEL karte: Zu versteuerndes Einkommen (zvE)]
+
+Dieses zu versteuernde Einkommen wird halbiert und auf diese Hälfte der normale Einkommensteuertarif angewendet. Das errechnete Steuerergebnis wird anschließend verdoppelt. Durch diese Berechnung profitieren Paare mit unterschiedlichen Einkommen vom progressiven Steuersystem.
+
+Ein praktisches Beispiel: Bei einem gemeinsamen zu versteuernden Einkommen von 80.000 Euro wird zunächst die Steuer auf 40.000 Euro berechnet. Diese beträgt 7.209 Euro, verdoppelt ergibt sich eine Gesamtsteuer von 14.418 Euro.
+
+[SPIEL quiz: Ab welchem gemeinsamen zu versteuernden Einkommen zahlen Ehepaare 2026 erstmals Einkommensteuer?]
+
+## 6 Die fünf Tarifzonen des Splittingtarifs
+
+Der Einkommensteuertarif für 2026 kann in 5 Tarifzonen unterteilt werden. Jede Zone hat charakteristische Eigenschaften, die auch für den Splittingtarif gelten - allerdings mit verdoppelten Grenzen.
+
+Tarifzone 1: Nullzone
+
+Die erste Einkommenszone bis zum Grundfreibetrag wird als Nullzone bezeichnet, da hier keine Einkommensteuer anfällt. Bei verheirateten Paaren reicht diese Zone bis 24.696 Euro.
+
+Tarifzone 2: Erste Progressionszone
+
+Dieser Bereich mit einem Eingangssteuersatz von 14% wird 1. Progressionszone genannt und reicht bis zu einem zu versteuerndem Einkommen von 17.800 Euro. Für Ehepaare bedeutet das eine Obergrenze von 35.600 Euro.
+
+Tarifzone 3: Zweite Progressionszone
+
+Die Progressionszone mit einem ansteigenden Steuersatz von 23,97% bis 42% beginnt ab einem zu versteuernden Einkommen von 17.800 Euro und endet bei 69.878 Euro. Bei Ehepaaren liegt diese Zone zwischen 35.600 und 139.756 Euro.
+
+Tarifzone 4: Proportionalzone (Spitzensteuersatz)
+
+Der Spitzensteuersatz von 42% in der Proportionalzone wird ab einem zu versteuernden Einkommen von 69.879 Euro fällig. Für verheiratete Paare beginnt diese Zone bei 139.758 Euro.
+
+Tarifzone 5: Reichensteuer
+
+Im Jahr 2026 beginnt der Reichensteuersatz bei einem zu versteuernden Einkommen von 277.826 Euro. Für das gemeinsame Einkommen von zusammenveranlagten Ehegatten verdoppelt sich diese Steuergrenze auf 555.652 Euro.
+
+## 7 Wann lohnt sich das Ehegattensplitting besonders?
+
+Der Splittingvorteil entsteht ausschließlich bei unterschiedlichen Einkommen der Partner. Haben beide Eheleute das selbe Einkommen, ergeben sich keine Steuervorteile. Je größer der Einkommensunterschied, desto höher fällt die Steuerersparnis aus.
+
+Besonders profitieren folgende Konstellationen:
+
+- Alleinverdiener-Ehen
+
+- Paare mit einem Hauptverdiener und einem Teilzeit arbeitenden Partner
+
+- Familien, in denen ein Partner längere Zeit in Elternzeit ist
+
+- Ehen mit einem selbstständigen und einem angestellten Partner
+
+- Paare mit stark schwankenden Jahreseinkommen
+
+[SPIEL mythos: Das Ehegattensplitting lohnt sich nur für Topverdiener. → nein]
+
+Ein Single mit einem zu versteuernden Einkommen von 50.000 Euro zahlt 10.548 Euro Einkommensteuer. Ehepaare zahlen bei Zusammenveranlagung nur 5.700 Euro - eine Ersparnis von 4.848 Euro.
+
+Die Steuerersparnis kann erhebliche Beträge erreichen. Der maximale absolute Splittingvorteil beträgt 19.471 Euro im Jahr 2026 und wird ab einem zu versteuernden Jahreseinkommen von 556.000 Euro erzielt.
+
+## 8 Zusammenveranlagung vs. Einzelveranlagung: Die Günstigerprüfung
+
+Ehepaare haben grundsätzlich die Wahl zwischen Zusammenveranlagung und Einzelveranlagung. In seltenen Fällen kann die Einzelveranlagung vorteilhafter sein. Das passiert hauptsächlich bei:
+
+- Sehr hohen außergewöhnlichen Belastungen eines Partners
+
+- Unterschiedlichen Steuerklassen mit besonderen Freibeträgen
+
+- Verlusten aus Kapitalanlagen bei nur einem Partner
+
+- Progressionseinkünften wie Abfindungen
+
+Die Günstigerprüfung sollte jährlich durchgeführt werden. Moderne Steuersoftware erkennt automatisch, welche Veranlagungsart günstiger ist. Da die Einzelveranlagung für Ehegatten in manchen Fällen günstiger sein kann, sollte vorher eine Günstigerprüfung durchgeführt werden.
+
+Die meisten Steuerberatungskanzleien und professionelle Steuerprogramme führen diese Prüfung automatisch durch und empfehlen die jeweils günstigere Variante.
+
+## 9 Fazit
+
+Die Splittingtabelle 2026 bietet verheirateten Paaren und eingetragenen Lebenspartnern weiterhin attraktive Steuervorteile. Mit dem erhöhten Grundfreibetrag von 24.696 Euro und der angepassten Solidaritätszuschlag-Freigrenze von 40.700 Euro sinkt die Steuerbelastung für viele Familien. Besonders Paare mit unterschiedlichen Einkommen profitieren erheblich - Ersparnisse von mehreren tausend Euro jährlich sind keine Seltenheit. Die Splittingtabelle macht die Steuerberechnung transparent und planbar. Bei der Steuererklärung sollten verheiratete Personen stets prüfen, ob die Zusammenveranlagung oder die Einzelveranlagung günstiger ist. In den allermeisten Fällen führt das Ehegattensplitting zu deutlich niedrigeren Steuern und bleibt damit ein wichtiges Instrument der Familienförderung im deutschen Steuersystem.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste splittingtabelle]
+
+
+## FAQ
+F: Wie funktioniert das Ehegattensplitting?
+A: Beim Splittingverfahren wird das gemeinsame zu versteuernde Einkommen halbiert, die Steuer auf die Hälfte berechnet und das Ergebnis verdoppelt. Dadurch profitieren Paare mit unterschiedlichen Einkommen von der Steuerprogression. Bei gleichen Verdiensten gibt es keinen Vorteil gegenüber der Einzelveranlagung.
+F: Wie hoch ist der Grundfreibetrag für Ehepaare 2026?
+A: Der Grundfreibetrag für zusammenveranlagte Ehepartner beträgt 2026 insgesamt 24.696 Euro. Erst ab einem gemeinsamen zu versteuernden Einkommen oberhalb dieser Grenze fällt Einkommensteuer an. Die Anpassung gleicht die Inflation aus und schützt das steuerfreie Existenzminimum.
+F: Wann lohnt sich das Ehegattensplitting besonders?
+A: Der Splittingvorteil ist am größten, wenn ein Partner deutlich mehr verdient als der andere. Alleinverdiener-Ehen, Konstellationen mit Teilzeit oder Elternzeit profitieren am stärksten. Bei 60.000 Euro gemeinsamem Einkommen kann die Ersparnis bis zu 5.800 Euro jährlich betragen.
+F: Wer darf die Splittingtabelle nutzen?
+A: Die Splittingtabelle gilt für verheiratete Paare und eingetragene Lebenspartner, die sich für die Zusammenveranlagung entscheiden. Voraussetzung ist, dass beide in Deutschland unbeschränkt steuerpflichtig sind und nicht dauernd getrennt leben. Auch im Trennungsjahr ist das Splitting noch möglich.

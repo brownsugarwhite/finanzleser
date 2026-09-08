@@ -1,0 +1,2163 @@
+STAPEL 11 · 12 Beiträge: pflegeversicherung pflegegrade pflegegrad-beantragen pflegebeduerftigkeit pflegedienste kurzzeitpflege pflegezusatzversicherung private-pflege-pflichtversicherung unfallversicherung gesetzliche-unfallversicherung risikolebensversicherung lebensversicherung
+
+
+==================== BEITRAG pflegeversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Leistungen, Beiträge und Ansprüche erklärt
+  heading-1: Pflegeversicherung 2026: Beitragssätze, Leistungen und Eigenanteile
+  heading-2: Was ist Pflegeversicherung und wer braucht sie?
+  heading-3: Pflegeversicherungsbeitrag 2026: Sätze und Staffelungen
+  heading-4: Die fünf Pflegegrade: Leistungen und Ansprüche
+  heading-5: Finanzielle Lücke: Warum private Pflegezusatzversicherung sinnvoll ist
+  heading-6: Leistungsarten: Pflegegeld, Sachleistungen und Kombinationsleistungen
+  heading-7: Pflegereform 2026: Aktuelle Probleme und geplante Lösungen
+  heading-8: Private Pflegeversicherung: Struktur und Beitragsanpassungen
+  heading-9: Häufig gestellte Fragen
+
+# Pflegeversicherung (pflegeversicherung)
+## 0 Leistungen, Beiträge und Ansprüche erklärt
+
+Die Pflegeversicherung sichert als fünfte Säule der Sozialversicherung das Pflegerisiko. Beitragssätze, Leistungen und Eigenanteile 2026 im Überblick.
+
+## 1 Pflegeversicherung 2026: Beitragssätze, Leistungen und Eigenanteile
+
+Die Pflegeversicherung regelt seit 1995 die Absicherung des Pflegerisikos als fünfte Säule der Sozialversicherung. Der allgemeine PV-Beitragssatz beträgt 2026: 3,6 %. Bundesfinanzminister Lars Klingbeil (SPD) stabilisiert den Beitragssatz von 3,6 Prozent für 2026, indem er das bereits geplante Darlehen um 1,7 Milliarden Euro auf insgesamt 3,2 Milliarden Euro erhöht. Die Aufstockung des Darlehens aus dem Bundeshaushalt ist eine pragmatische Lösung, die keine neuen Löcher reißt – und die Schuldenbremse nicht berührt. Während die Beitragssätze stabil bleiben, befindet sich die Pflegeversicherung aufgrund steigender Pflegebedürftigenzahlen und höherer Kosten in einer ernsten Finanzlage.
+
+## 2 Was ist Pflegeversicherung und wer braucht sie?
+
+Die Pflegeversicherung ist eine Pflichtversicherung für alle gesetzlich und privat Krankenversicherten in Deutschland. Sie sichert das Risiko der Pflegebedürftigkeit ab und gewährleistet, dass Menschen bei Hilfe- oder Pflegebedürftigkeit Leistungen erhalten. Die gesetzliche Pflegeversicherung ist in Deutschland eine Pflichtversicherung. Sie bezahlt Pflegegeld oder Pflegesachleistungen entsprechend des Pflegegrades.
+
+Die Versicherung funktioniert als Teilleistungssystem – sie übernimmt nur einen Teil der Pflegekosten. Die gesetzliche Pflegeversicherung deckt in den allermeisten Fällen nicht alle Kosten, die für die Pflege anfallen. Versicherte müssen daher eine finanzielle Eigenverantwortung übernehmen. Demnach beträgt die monatliche Eigenbeteiligung im ersten Jahr 3.245 Euro im Bundesdurchschnitt. Demnach beträgt die monatliche Eigenbeteiligung im ersten Jahr 3.245 Euro im Bundesdurchschnitt.
+
+Das System basiert auf fünf Pflegegraden, die je nach Schwere der Beeinträchtigung gestaffelt sind. Während es früher drei Pflegestufen gab, haben wir seit 2017 fünf Pflegegrade. Die Einstufung erfolgt durch den Medizinischen Dienst (MD) nach einem umfassenden Begutachtungsverfahren.
+
+[SPIEL quiz: Ab welchem Jahr gibt es die fünf Pflegegrade in der deutschen Pflegeversicherung?]
+
+## 3 Pflegeversicherungsbeitrag 2026: Sätze und Staffelungen
+
+Der allgemeine PV-Beitragssatz beträgt 2026: 3,6 %. Der allgemeine PV-Beitragssatz beträgt 2026: 3,6 %. Diese Stabilität wurde durch ein zusätzliches Darlehen der Bundesregierung erreicht. Die soziale Pflegeversicherung wird grundsätzlich paritätisch von Arbeitgebern sowie Arbeitnehmerinnen und Arbeitnehmern finanziert. Arbeitnehmerinnen beziehungsweise Arbeitnehmer und Arbeitgeber tragen den Beitrag – ohne den Kinderlosenzuschlag; diesen tragen die Arbeitnehmerinnen und Arbeitnehmer alleine – grundsätzlich zur Hälfte, also jeweils 1,8 Prozent.
+
+### Zuschlag für Kinderlose
+
+Alle Beschäftigten ab 23 Jahren, die keine Kinder haben, zahlen einen Zuschlag - Ihr Beitrag zur Pflegeversicherung erhöht sich also. Für kinderlose Beschäftigte ab 23 Jahren kommt ein Zuschlag von 0,6 Prozentpunkten dazu. Der Gesamtbeitragssatz für Kinderlose beträgt damit 4,2 Prozent (Stand 2026).
+
+### Abschläge für Familien
+
+Familien mit mehreren Kindern profitieren von reduzierten Beiträgen. Für Beschäftigte mit einem Kind gilt im Jahr 2026 der allgemeine PV-Beitragssatz von 3,6 Prozent. Ab 2 Kindern unter 25 Jahren reduziert sich der Beitrag. Die Entlastung gilt für Kinder unter 25 Jahren und wird über ein digitales Austauschverfahren (DaBPV) nachgewiesen.
+
+### Besonderheit Sachsen
+
+Eine abweichende Regelung gilt im Bundesland Sachsen, das bei der Einführung der Pflegeversicherung keinen Feiertag gestrichen hatte. Dort entfallen von den 3,6 Prozent Pflegeversicherungsbeitrag 2,3 Prozent auf die Beschäftigten und 1,3 Prozent auf die Arbeitgeber.
+
+| Situation | Beitragssatz 2026 | Aufteilung AG/AN
+
+| Mit Kindern | 3,6% | 1,8% / 1,8%
+
+| Kinderlos ab 23 | 4,2% | 1,8% / 2,4%
+
+| Sachsen mit Kindern | 3,6% | 1,3% / 2,3%
+
+Die Beitragsbemessungsgrenze liegt 2026 bei 69.750,00 Euro im Jahr (5.812,50 Euro monatlich). Einkommen oberhalb dieser Grenze sind beitragsfrei.
+
+## 4 Die fünf Pflegegrade: Leistungen und Ansprüche
+
+Die Pflegeleistungen 2026 bleiben auf dem Niveau von 2025. Hinweis: 2026 ist ein Fortschreibungsjahr ohne Erhöhung. Keine Erhöhung 2026; Werte bleiben wie 2025. Zudem wurde gesetzlich festgelegt, dass die Leistungsbeträge der Pflegeversicherung zum 1. Januar 2025 sowie erneut zum 1. Januar 2028 automatisch dynamisiert werden. Zum 1. Januar 2025 wurden dann die Geld- und Sachleistungen der Pflegeversicherung um 4,5 Prozent erhöht.
+
+### Pflegegeld (häusliche Pflege durch Angehörige)
+
+Das Pflegegeld wird direkt an den Pflegebedürftigen gezahlt und kann frei verwendet werden.
+
+- Pflegegrad 1: Kein Pflegegeld, nur Entlastungsbetrag
+
+- Pflegegrad 2: 347 Euro monatlich
+
+- Pflegegrad 3: 599 Euro monatlich
+
+- Pflegegrad 4: 800 Euro monatlich
+
+- Pflegegrad 5: 990 Euro monatlich
+
+### Pflegesachleistungen (ambulante Dienste)
+
+Pflegesachleistungen erhöht (PG 2–5: 796/1.497/1.859/2.299 €).
+
+| Pflegegrad | Pflegegeld | Sachleistungen | Stationäre Pflege
+
+| 1 | 0 Euro | 0 Euro | 131 Euro
+
+| 2 | 347 Euro | 796 Euro | 770 Euro
+
+| 3 | 599 Euro | 1.497 Euro | 1.262 Euro
+
+| 4 | 800 Euro | 1.859 Euro | 1.775 Euro
+
+| 5 | 990 Euro | 2.299 Euro | 2.005 Euro
+
+### Zusätzliche Leistungen
+
+Pflegehilfsmittel 42 €; Entlastungsbetrag 131 €; keine Anrechnung auf Pflegegeld. Der monatliche Entlastungsbetrag von 131 Euro steht allen Pflegegraden zur Verfügung und wird nicht auf andere Leistungen angerechnet.
+
+[SPIEL karte: Kombinationsleistung]
+
+## 5 Finanzielle Lücke: Warum private Pflegezusatzversicherung sinnvoll ist
+
+Die gesetzliche Pflegeversicherung deckt nur einen Bruchteil der tatsächlichen Pflegekosten ab. Demnach beträgt die monatliche Eigenbeteiligung im ersten Jahr 3.245 Euro im Bundesdurchschnitt. Diese Finanzierungslücke macht eine private Pflegezusatzversicherung für viele Menschen notwendig.
+
+### Eigenanteile in der stationären Pflege
+
+Die Eigenanteile steigen mit jedem Aufenthaltsjahr weniger stark an, da die Pflegeversicherung gestaffelte Zuschläge gewährt:
+
+- Jahre 1-12: 15% Zuschlag zum pflegebedingten Eigenanteil
+
+- Jahre 13-24: 30% Zuschlag
+
+- Jahre 25-36: 50% Zuschlag
+
+- Ab Jahr 37: 75% Zuschlag
+
+Zuschläge nach § 43c SGB XI auf den pflegebedingten Eigenanteil: 15 % (Monate 1–12), 30 % (13–24), 50 % (25–36), 75 % (ab Monat 37). Zuschlag nur auf den EEE, direkte Verrechnung mit dem Heim.
+
+### Kostensituation 2026
+
+Da die Zahl der Pflegebedürftigen in den letzten zehn Jahren stark gestiegen ist, haben sich auch die Gesundheitsausgaben in der Pflege fast verdoppelt. Laut einer aktuellen Auswertung des Verbands der Ersatzkassen (vdek) sind die Eigenanteile für Pflegeheimbewohner 2026 weiter gestiegen.
+
+Die hohen Eigenanteile verdeutlichen, warum eine frühzeitige private Pflegevorsorge sinnvoll ist. Wer nicht über ausreichende Rente und Vermögen verfügt, ist auf Hilfe zur Pflege durch das Sozialamt angewiesen.
+
+## 6 Leistungsarten: Pflegegeld, Sachleistungen und Kombinationsleistungen
+
+Die Pflegeversicherung bietet verschiedene Leistungsformen, die je nach Pflegesituation gewählt werden können. Menschen, die pflegebedürftig sind und einen Pflegegrad haben, bekommen Pflegegeld oder Pflegesachleistungen. Pflegegeld gibt es für die Betreuung und Pflege durch Angehörige, Nachbarn oder Freunde zu Hause.
+
+### Kurzzeitpflege und Verhinderungspflege
+
+Eine wichtige Neuerung bringt das gemeinsame Jahresbudget: Entlastungsbudget 3.539 € ab 01.07.2025 für KZP/VHP (Vorpflegezeit entfällt). Gemeinsames Jahresbudget: Die Verhinderungs- und Kurzzeitpflege ist im gemeinsamen Budget von 3 539 Euro pro Jahr nutzbar, das 2026 erstmals über das gesamte Jahr gilt.
+
+### Digitale Pflegeanwendungen (DiPA)
+
+2026 bringt eine wesentliche Neuerung bei digitalen Pflegeanwendungen. Die Pflegeversicherung übernimmt seit 1.1.2026 für DiPA bis zu 40 € pro Monat. Zusätzlich erhalten Pflegebedürftige bis zu 30 € monatlich für begleitende Unterstützungsleistungen durch einen ambulanten Pflegedienst.
+
+Die Leistung gliedert sich in zwei Bereiche:
+
+- Bis zu 40 Euro monatlich für die digitale Anwendung selbst
+
+- Bis zu 30 Euro monatlich für Unterstützungsleistungen wie Einrichtung und Anleitung
+
+Derzeit stehen noch keine DiPA zur Verfügung. Durch ein vereinfachtes Zulassungsverfahren sollen ab 2026 die ersten DiPA verfügbar sein. Die Apps müssen im offiziellen Verzeichnis des Bundesinstituts für Arzneimittel und Medizinprodukte (BfArM) gelistet sein.
+
+### Beratungseinsätze vereinfacht
+
+Ab 2026 werden digitale Pflegeanwendungen (DiPAs) einfacher zugänglich, die Rückwirkungsfrist für die Verhinderungspflege wird verkürzt und es sind weniger Beratungseinsätze vorgesehen. Pflegebedürftige mit höheren Pflegegraden benötigen weniger verpflichtende Beratungstermine.
+
+[SPIEL gewusst: Im Jahr 2026 können Pflegebedürftige erstmals bis zu 70 Euro monatlich für digitale Pflegeanwendungen erhalten – zusätzlich zu allen anderen Pflegeleistungen.]
+
+## 7 Pflegereform 2026: Aktuelle Probleme und geplante Lösungen
+
+Die Pflegeversicherung steht vor enormen finanziellen Herausforderungen. Die Finanzlage der gesetzlichen Pflegeversicherung hat sich seit Jahresanfang nach neuen Zahlen weiter verschlechtert. Eingerechnet ist den Angaben zufolge bereits das Darlehen des Bundes in Höhe von insgesamt 3,2 Milliarden Euro in 2026. Das echte Ergebnis für dieses Jahr sei also ein erwartetes Defizit in Höhe von 4,2 Milliarden Euro, erläuterte der Verband.
+
+### Reformzeitplan und politische Diskussion
+
+Die fachlichen Vorschläge liegen seit Dezember 2025 vor, werden aktuell politisch beraten und sollen – vorbehaltlich der Finanzierung – in ein Reformgesetz überführt werden, das möglichst Ende 2026 in Kraft tritt. Erst im Anschluss ist geplant, einen Gesetzentwurf für eine nachhaltige Struktur- und Finanzierungsreform in der Pflegeversicherung auszuarbeiten. Ziel ist es, ein entsprechendes Reformgesetz möglichst Ende 2026 in Kraft treten zu lassen.
+
+### Finanzierungslücke
+
+Die von Bundesministerin Warken genannten Finanzierungslücken in Höhe von 7,6 Milliarden Euro für 2027 und 15,4 Milliarden Euro für 2028 verdeutlichen den dringenden Handlungsbedarf. Die von Bundesministerin Warken genannten Finanzierungslücken in Höhe von 7,6 Milliarden Euro für 2027 und 15,4 Milliarden Euro für 2028 verdeutlichen den dringenden Handlungsbedarf.
+
+### Reformvorschläge im Überblick
+
+Die diskutierten Maßnahmen umfassen verschiedene Bereiche:
+
+- Präventionsausbau: Kranken- und Pflegeversicherung werden künftig konsequent auf Vermeidung, Reduzierung und Stabilisierung von Pflegebedürftigkeit ausgerichtet. Versicherte im Alter über 60 Jahren erhalten einen regelmäßig abrufbaren ergänzenden Anspruch auf medizinische Leistungen zur Früherkennung und Prävention altersbedingter gesundheitlicher Risiken, Belastungen und Erkrankungen.
+
+- Eigenanteilsbegrenzung: Ein zentrales Anliegen der Reform Pflegeversicherung 2026 ist die Begrenzung der Eigenanteile in Pflegeheimen. Im Durchschnitt liegen die Zuzahlungen aktuell bei über 3.100 Euro pro Monat.
+
+- Familienpflegegeld: Ein sogenanntes Familienpflegegeld ist Teil der Diskussion um die Pflegereform 2026. Gemeint ist eine mögliche finanzielle Unterstützung für Beschäftigte, die ihre Arbeitszeit für die Pflege eines Angehörigen reduzieren und dadurch Einkommenseinbußen haben.
+
+## 8 Private Pflegeversicherung: Struktur und Beitragsanpassungen
+
+Die private Pflegeversicherung unterscheidet sich grundlegend vom gesetzlichen System. Zwar unterscheidet sich die Beitragskalkulation bei der Privaten Pflegeversicherung (PPV) und der Sozialen Pflegeversicherung (SPV). Im Ergebnis hat sich die Zahl der Pflegebedürftigen in den acht Jahren bis 2024 verdoppelt: 2016 waren fast 190.000 Privatversicherte pflegebedürftig, 2024 waren es schon 379.000.
+
+### Beitragserhöhungen 2026
+
+Im Vergleich dazu sind die Beiträge in der Pflegeversicherung für Privatversicherte in aller Regel niedriger: Zum 1. Januar steigen die Pflegebeiträge für Personen mit Beihilfeanspruch um durchschnittlich 6 Prozent, für alle anderen um 16 Prozent. Der Beitrag wird damit im nächsten Jahr bei durchschnittlich 56,50 Euro für Beihilfeberechtigte bzw. 122,64 Euro für Angestellte und Selbstständige liegen.
+
+### Höchstbeitragsgarantie
+
+Grundsätzlich gilt immer die Garantie, dass der Beitrag in der PPV nach einer Versicherungszeit von fünf Jahren nicht höher ist als der Höchstbeitrag in der Sozialen Pflegeversicherung (SPV). Ab 2026 liegt dieser bei 209,26 Euro monatlich. Für Beihilfeberechtigte in der PPV leitet sich daraus ein Höchstbeitrag von 83,70 Euro pro Monat ab.
+
+### Kostenvergleich
+
+Trotz der Erhöhungen bleibt
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegeversicherung]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wie hoch ist der Pflegeversicherungsbeitrag 2026?
+A: Der allgemeine Beitragssatz zur gesetzlichen Pflegeversicherung beträgt 2026 unverändert 3,6 Prozent und wird von Arbeitgebern und Beschäftigten je zur Hälfte getragen. Kinderlose Versicherte ab 23 Jahren zahlen einen Zuschlag von 0,6 Prozentpunkten, sodass sich ihr Gesamtbeitrag auf 4,2 Prozent erhöht. Dieser Zuschlag wird ausschließlich vom Arbeitnehmer getragen.
+F: Warum steigen die Beiträge in der privaten Pflegeversicherung 2026?
+A: In der privaten Pflegeversicherung erhöhen sich die Beiträge 2026 durchschnittlich um 6 Prozent für Beihilfeberechtigte und um 16 Prozent für andere Versicherte. Grund sind gestiegene Kosten und die demografische Entwicklung. Der durchschnittliche Monatsbeitrag liegt bei etwa 56,50 Euro für Beihilfeberechtigte und 122,64 Euro für Angestellte.
+F: Müssen Kinderlose höhere Pflegeversicherungsbeiträge zahlen?
+A: Ja, kinderlose Versicherte ab 23 Jahren zahlen in der gesetzlichen Pflegeversicherung einen Zuschlag von 0,6 Prozentpunkten. Dadurch erhöht sich ihr Gesamtbeitrag auf 4,2 Prozent. Versicherte mit Kindern unter 25 Jahren profitieren dagegen von reduzierten Beiträgen.
+F: Welche Sonderregel gilt für Sachsen bei der Pflegeversicherung?
+A: In Sachsen tragen Arbeitnehmer einen höheren Anteil an den Pflegeversicherungsbeiträgen: Der Arbeitnehmeranteil liegt bei 2,3 Prozent, der Arbeitgeberanteil bei 1,3 Prozent. Diese asymmetrische Aufteilung berücksichtigt eine regionale Besonderheit. Die Gesamtbelastung bleibt mit 3,6 Prozent identisch zum Rest Deutschlands.
+
+
+==================== BEITRAG pflegegrade ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Pflegegrade in Deutschland &#8211; Leistungen und Einstufung
+  heading-1: Pflegegrade 2026: Einstufung, Leistungen und Antrag
+  heading-2: Was sind Pflegegrade – Definition und Überblick
+  heading-3: Wie werden Pflegegrade ermittelt – Das Begutachtungsverfahren
+  heading-4: Pflegegeld und Pflegesachleistungen 2026 – Aktuelle Leistungsbeträge
+  heading-5: Wichtige Neuerungen und Verbesserungen ab 2026
+  heading-6: Antrag und Begutachtung – Der Weg zum Pflegegrad
+  heading-7: Häufige Fragen zu Pflegegraden
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Pflegegrade (pflegegrade)
+## 0 Pflegegrade in Deutschland - Leistungen und Einstufung
+
+Pflegegrade entscheiden über Höhe und Art der Pflegeleistungen. Wie die fünf Pflegegrade 2026 eingestuft werden und welche Leistungen Ihnen zustehen.
+
+## 1 Pflegegrade 2026: Einstufung, Leistungen und Antrag
+
+Pflegegrade regeln die Höhe der Pflegeleistungen in Deutschland und bestimmen, welche Unterstützung pflegebedürftige Menschen erhalten.
+
+Die fünf Pflegegrade bilden das Fundament der deutschen Pflegeversicherung und entscheiden über die Höhe der monatlichen Pflegeleistungen. Die Leistungsbeträge bleiben 2026 unverändert auf dem Niveau von 2025. Eine weitere Erhöhung ist erst wieder frühestens zum 01.01.2028 vorgesehen. Seit der Pflegereform 2017 bewerten die Pflegegrade nicht mehr den Zeitaufwand der Pflege, sondern die Selbständigkeit im Alltag durch ein neues Begutachtungsverfahren.
+
+## 2 Was sind Pflegegrade – Definition und Überblick
+
+Das deutsche Pflegeversicherungssystem unterscheidet seit 2017 fünf Pflegegrade, die die Schwere der Beeinträchtigungen stufen. Je höher der Pflegegrad, desto umfangreicher fallen die Leistungen der Pflegeversicherung aus. Das Begutachtungsverfahren erfolgt durch den Medizinischen Dienst oder die Medicproof GmbH und basiert auf einem Punktesystem.
+
+Die Einstufung erfolgt anhand dieser Punktebereiche:
+
+| Pflegegrad | Punkte | Beeinträchtigung der Selbständigkeit
+
+| Pflegegrad 1 | 12,5 bis unter 27 | Geringe Beeinträchtigung
+
+| Pflegegrad 2 | 27 bis unter 47,5 | Erhebliche Beeinträchtigung
+
+| Pflegegrad 3 | 47,5 bis unter 70 | Schwere Beeinträchtigung
+
+| Pflegegrad 4 | 70 bis unter 90 | Schwerste Beeinträchtigung
+
+| Pflegegrad 5 | 90 bis 100 | Schwerste Beeinträchtigung mit besonderen Anforderungen
+
+Pflegebedürftigkeit liegt vor, wenn mindestens 12,5 Punkte erreicht werden. Die Begutachtung findet standardmäßig im häuslichen Umfeld statt und umfasst sechs verschiedene Lebensbereiche, die unterschiedlich gewichtet in die Berechnung einfließen.
+
+[SPIEL mythos: Pflegegrad 5 erhalten nur Menschen mit Demenz oder schweren geistigen Beeinträchtigungen → nein]
+
+## 3 Wie werden Pflegegrade ermittelt – Das Begutachtungsverfahren
+
+Die Pflegekasse beauftragt den Medizinischen Dienst mit einem Gutachten nach § 18 SGB XI. Ein Gutachter besucht die pflegebedürftige Person zu Hause und beurteilt systematisch sechs Lebensbereiche:
+
+Modul 1: Mobilität (10 Prozent Gewichtung)
+
+Bewertet werden Fähigkeiten wie selbständiges Positionswechseln, Fortbewegen innerhalb des Wohnbereichs, Treppensteigen und das Verlassen und Wiederaufsuchen der Wohnung.
+
+Module 2 und 3: Kognitive und kommunikative Fähigkeiten sowie Verhaltensweisen (gemeinsam 15 Prozent)
+
+Modul 2 erfasst die örtliche und zeitliche Orientierung sowie das Kurz- und Langzeitgedächtnis. Modul 3 bewertet psychische Problemlagen wie Angst, Aggressivität oder Wahnvorstellungen. Es fließt nur das Modul mit der höheren Punktzahl in die Bewertung ein.
+
+Modul 4: Selbstversorgung (40 Prozent Gewichtung)
+
+Mit dem höchsten Gewicht bewertet dieses Modul die Körperpflege, das An- und Auskleiden sowie die selbständige Nahrungsaufnahme und das Trinken.
+
+Modul 5: Bewältigung von Krankheit und Therapie (20 Prozent)
+
+Hier geht es um den selbständigen Umgang mit Medikamenten, Injektionen, Verbandwechseln, Blutzuckermessungen und anderen therapiebedingten Anforderungen.
+
+Modul 6: Gestaltung des Alltagslebens und sozialer Kontakte (15 Prozent)
+
+Bewertet wird die Fähigkeit zur Tagesplanung, zur Anpassung an Veränderungen und zur Aufrechterhaltung sozialer Beziehungen.
+
+[SPIEL schaetzen: Mit welchem Prozentsatz wird das Modul "Selbstversorgung" bei der Pflegegrad-Ermittlung gewichtet? → 40]
+
+## 4 Pflegegeld und Pflegesachleistungen 2026 – Aktuelle Leistungsbeträge
+
+Die Pflegeleistungen bleiben 2026 exakt auf dem Stand von 2025. Die Leistungen wurden zum 01.01.2025 um 4,5 Prozent erhöht und gelten unverändert auch 2026. Die monatlichen Beträge staffeln sich nach Pflegegraden:
+
+| Pflegegrad | Pflegegeld monatlich | Pflegesachleistungen monatlich | Entlastungsbetrag monatlich
+
+| Pflegegrad 1 | — | — | 131 €
+
+| Pflegegrad 2 | 347 € | 796 € | 131 €
+
+| Pflegegrad 3 | 599 € | 1.497 € | 131 €
+
+| Pflegegrad 4 | 800 € | 1.859 € | 131 €
+
+| Pflegegrad 5 | 990 € | 2.299 € | 131 €
+
+Das Pflegegeld erhalten Pflegebedürftige ab Pflegegrad 2, wenn sie hauptsächlich von Angehörigen oder anderen privaten Pflegepersonen versorgt werden. Das Pflegegeld darf frei verwendet werden, es ist kein „Pflegelohn", sondern eine zweckgebundene Sozialleistung zur Sicherung der häuslichen Pflege.
+
+Pflegesachleistungen können ab Pflegegrad 2 beansprucht werden, wenn ein zugelassener ambulanter Pflegedienst die Versorgung übernimmt. Wer sowohl auf Angehörigenpflege als auch auf einen Pflegedienst setzt, kann eine Kombinationsleistung wählen. Neben diesen Leistungen der Pflegekasse können Betroffene auch eine Pflegezusatzversicherung abschließen, um finanzielle Lücken zu schließen.
+
+[SPIEL gewusst: Pflegegrad 1 umfasst deutschlandweit etwa 750.000 Menschen, die zwar keinen Anspruch auf Pflegegeld haben, aber 131 Euro Entlastungsbetrag plus 42 Euro für Pflegehilfsmittel erhalten (Stand 2026).]
+
+## 5 Wichtige Neuerungen und Verbesserungen ab 2026
+
+### Reduzierte Beratungsbesuche für alle Pflegegrade
+
+Pflegebedürftige mit Pflegegrad 4 und 5, die ausschließlich Pflegegeld beziehen, müssen den verpflichtenden Beratungsbesuch künftig nur noch zweimal im Jahr nachweisen. Damit gelten für sie die gleichen Regeln wie bisher schon für Pflegegrad 2 und 3. Ab sofort gilt für alle Pflegegrade von 2 bis 5 ein einheitlicher Rhythmus: Der Beratungseinsatz muss nur noch einmal pro Kalenderhalbjahr zwingend nachgewiesen werden.
+
+Diese Vereinheitlichung reduziert den bürokratischen Aufwand erheblich. Bei Pflegegrad 4 und 5 kann die Beratung auf Wunsch aber auch weiterhin 1x im Quartal stattfinden. Die zusätzlichen Termine bleiben freiwillig und kostenlos.
+
+### Verlängerter Pflegegeldbezug bei Klinikaufenthalten
+
+Mit einer gesetzlichen Anpassung ab 2026 wurde die Frist, in der Pflegegeld während eines durchgehenden Krankenhausaufenthalts weitergezahlt wird, auf bis zu acht Wochen verlängert. Ziel ist, pflegende Angehörige besser abzusichern und unnötige Bürokratie bei kurzen und mittellangen Klinikaufenthalten zu vermeiden.
+
+Seit dem 1. Januar 2026 gilt eine neue Regelung: Das Pflegegeld wird bei vollstationärer Krankenhausbehandlung für bis zu 8 Wochen (56 Kalendertage) in voller Höhe weitergezahlt. Bis Ende 2025 lag die Frist für die Weiterzahlung des Pflegegeldes bei stationärem Krankenhausaufenthalt bei nur 4 Wochen.
+
+Diese Regel gilt auch für stationäre Rehabilitationsmaßnahmen. Gleichzeitig laufen auch die Leistungen zur sozialen Sicherung der Pflegeperson, also etwa die Rentenbeiträge, in diesen Fällen länger weiter.
+
+### Gemeinsames Entlastungsbudget für mehr Flexibilität
+
+Die Pflegeversicherung hat zwei bislang getrennte Budgets zusammengelegt. Seit dem 1. Juli 2025 bilden die Leistungen der Verhinderungspflege und der Kurzzeitpflege gemeinsam ein neues Budget. Für das Jahr 2026 beträgt das Entlastungsbudget für eine pflegebedürftige Person maximal 3539 Euro.
+
+Bis zu 3.539 Euro sollen helfen, wenn die private Pflegeperson ausfällt und Ersatz organisiert werden muss. Die Regeln wurden vereinfacht, damit Familien schneller entlastet werden und Leistungen nicht an Formalien scheitern. Der gemeinsame Jahresbetrag vereinheitlicht die Budgets und macht dieses flexibel nutzbar.
+
+### Verkürzte Abrechnungsfristen für Verhinderungspflege
+
+Die Kostenerstattung für Verhinderungspflege ist ab 2026 nur noch für das aktuelle und für das vorige Kalenderjahr möglich. Wer 2026 Verhinderungspflege in Anspruch nimmt, kann die Erstattung also bis spätestens 31. Dezember 2027 einreichen. Bisher war dies bis zu vier Jahre rückwirkend möglich.
+
+### Beschleunigte Strafzahlungen bei verzögerten Bescheiden
+
+Bearbeitet die Pflegekasse einen Antrag auf einen Pflegegrad oder höheren Pflegegrad nicht innerhalb von 25 Arbeitstagen und ist sie selbst dafür verantwortlich, muss sie bisher 70 Euro pro angefangene Woche zahlen. Ab 01.01.2026 gibt es nun eine klare gesetzliche Regelung: Die Pflegekasse muss innerhalb von 15 Arbeitstagen nach Ablauf der Bearbeitungsfrist die Strafzahlung leisten.
+
+## 6 Antrag und Begutachtung – Der Weg zum Pflegegrad
+
+Um Pflegeleistungen zu erhalten, stellen Sie bei Ihrer Kranken- oder Pflegekasse einen formlosen Antrag auf "Leistungen der Pflegeversicherung". Die Pflegekasse ist an Ihre Krankenkasse angegliedert – gesetzlich Versicherte wenden sich an ihre Krankenkasse, privat Versicherte an ihr Versicherungsunternehmen.
+
+Nach Antragsstellung beauftragt die Pflegekasse automatisch den Medizinischen Dienst (bei gesetzlich Versicherten) oder die Medicproof GmbH (bei privat Versicherten) mit der Begutachtung. Ein Gutachter oder eine Gutachterin beurteilt die Selbstständigkeit in sechs Lebensbereichen (Mobilität, kognitive Fähigkeiten, Selbstversorgung usw.), woraus sich der Pflegegrad ergibt.
+
+[SPIEL quiz: Innerhalb welcher Frist muss die Pflegekasse normalerweise über einen Pflegegrad-Antrag entscheiden?]
+
+Der Bescheid liegt üblicherweise innerhalb von 25 Arbeitstagen vor. Bei Ablehnung oder einer als zu niedrig empfundenen Einstufung können Betroffene innerhalb von einem Monat schriftlich Widerspruch einlegen. Etwa ein Drittel aller Widersprüche führt zu einer Höherstufung des Pflegegrads.
+
+## 7 Häufige Fragen zu Pflegegraden
+
+Wie lange gilt ein einmal festgestellter Pflegegrad?
+
+Ein Pflegegrad wird grundsätzlich unbefristet erteilt. Die Pflegekasse kann jedoch in regelmäßigen Abständen Wiederholungsbegutachtungen anordnen, um zu prüfen, ob sich der Pflegebedarf verändert hat.
+
+Kann sich der Pflegegrad verschlechtern?
+
+Ja, wenn sich der Gesundheitszustand verbessert, kann der Pflegegrad bei einer Wiederholungsbegutachtung auch herabgestuft oder ganz entzogen werden. Daher ist es wichtig, Verschlechterungen des Zustands zeitnah der Pflegekasse zu melden und eine Höherstufung zu beantragen.
+
+Was passiert bei einem Umzug in ein anderes Bundesland?
+
+Pflegegrade gelten bundesweit einheitlich. Bei einem Umzug müssen Sie lediglich Ihre neue Adresse der Pflegekasse mitteilen. Die Leistungen ändern sich dadurch nicht.
+
+Können auch Kinder und Jugendliche einen Pflegegrad erhalten?
+
+Ja, auch Minderjährige können einen Pflegegrad erhalten, wenn sie aufgrund von Krankheit oder Behinderung pflegebedürftig sind. Die Begutachtung erfolgt altersangemessen und berücksichtigt die normale Entwicklung des Kindes.
+
+## 8 Fazit
+
+Die Pflegegrade schaffen eine transparente und nachvollziehbare Grundlage für Pflegeleistungen in Deutschland. Mit den Neuerungen 2026 wird das System durch reduzierte Beratungspflichten, längere Pflegegeld-Weiterzahlung bei Klinikaufenthalten und das flexible Entlastungsbudget von 3.539 Euro deutlich praxisnäher gestaltet. Obwohl die Leistungsbeträge selbst unverändert bleiben, profitieren Pflegebedürftige und Angehörige von spürbaren Vereinfachungen im Alltag. Die nächste Dynamisierung der Pflegeleistungen ist für 2028 geplant und soll dann automatisch an die Inflationsentwicklung gekoppelt werden.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegegrade]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wie viele Pflegegrade gibt es in Deutschland?
+A: In Deutschland gibt es seit 2017 fünf Pflegegrade, die die früheren Pflegestufen abgelöst haben. Die Einstufung basiert nicht mehr auf dem Pflegeaufwand, sondern auf dem Grad der Selbstständigkeit im Alltag. Pflegegrad 1 bedeutet eine geringe, Pflegegrad 5 eine schwerste Beeinträchtigung.
+F: Wie wird der Pflegegrad ermittelt?
+A: Ein Gutachter des Medizinischen Dienstes oder von Medicproof bewertet die Selbstständigkeit in sechs Modulen: Mobilität, kognitive Fähigkeiten, Verhaltensweisen, Selbstversorgung, Umgang mit Krankheit sowie Alltagsgestaltung. Die Module werden unterschiedlich gewichtet, wobei Selbstversorgung mit 40 Prozent am stärksten einfließt. Ab 12,5 Gesamtpunkten liegt Pflegebedürftigkeit vor.
+F: Welches Modul hat den größten Einfluss auf die Einstufung?
+A: Das Modul Selbstversorgung hat mit 40 Prozent die höchste Gewichtung bei der Ermittlung des Pflegegrads. Es bewertet Körperpflege, Anziehen und Nahrungsaufnahme. Diese Alltagsfähigkeiten gelten als zentral für die Pflegebedürftigkeit.
+F: Werden die Pflegeleistungen 2026 erhöht?
+A: Nein, die Leistungsbeträge bleiben 2026 unverändert gegenüber 2025. Die nächste Dynamisierung ist frühestens zum 1. Januar 2028 vorgesehen. Pflegegeld und Pflegesachleistungen wurden zuletzt 2025 angepasst.
+
+
+==================== BEITRAG pflegegrad-beantragen ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Antrag, Einstufung und Leistungen: Der komplette Leitfaden
+  heading-1: Pflegegrad beantragen – Schritt-für-Schritt-Anleitung zur Antragstellung
+  heading-2: Wer kann einen Pflegegrad beantragen?
+  heading-3: Wie stelle ich einen Pflegegrad-Antrag?
+  heading-4: Wie bereite ich mich auf die Begutachtung vor?
+  heading-5: Die sechs Bewertungsmodule erklärt
+  heading-6: Fristen und Entschädigungen
+  heading-7: Leistungen nach erfolgreicher Anerkennung (2026)
+  heading-8: Was tun bei Ablehnung oder falscher Einstufung?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Pflegegrad beantragen (pflegegrad-beantragen)
+## 0 Antrag, Einstufung und Leistungen: Der komplette Leitfaden
+
+Ein Pflegegrad ist Voraussetzung für Leistungen der Pflegeversicherung. Schritt für Schritt zum Antrag 2026 – und wie Sie die Begutachtung meistern.
+
+## 1 Pflegegrad beantragen – Schritt-für-Schritt-Anleitung zur Antragstellung
+
+Pflegegrad beantragen ist der erste Schritt, um Leistungen aus der Pflegeversicherung zu erhalten. Mit einem rechtzeitigen Antrag sichern Sie rückwirkende Zahlungen und Zugang zu allen Pflegeleistungen – von Pflegegeld bis zur Verhinderungspflege. Diese Anleitung zeigt Ihnen, wie Sie einen Pflegegrad beantragen, welche Unterlagen Sie brauchen und wie Sie Ihre Chancen auf die richtige Einstufung maximieren.
+
+## 2 Wer kann einen Pflegegrad beantragen?
+
+Pflegegrad beantragen können Personen, die aufgrund körperlicher, geistiger oder psychischer Beeinträchtigungen dauerhaft auf alltägliche Hilfe angewiesen sind. Voraussetzung ist eine voraussichtliche Dauer von mindestens sechs Monaten. Das Alter spielt keine Rolle – Kinder mit Behinderungen ebenso wie Senioren haben Anspruch.
+
+[SPIEL gewusst: 2026 wurden etwa 2,9 Millionen Anträge auf Pflegeleistungen gestellt – ein deutlicher Anstieg zum Vorjahr.]
+
+Typische Anlässe, um Pflegegrad zu beantragen:
+
+- Nach Krankenhausaufenthalt oder Unfall
+
+- Bei neu diagnostizierten chronischen Erkrankungen
+
+- Bei fortschreitender Demenz oder kognitiven Einschränkungen
+
+- Wenn pflegende Angehörige an ihre Grenzen stoßen
+
+[SPIEL mythos: Pflegegrad beantragen ist erst ab 65 Jahren möglich → nein]
+
+## 3 Wie stelle ich einen Pflegegrad-Antrag?
+
+Pflegegrad beantragen ist bewusst einfach gestaltet. Ein formloser Antrag genügt – per Telefon, E-Mail, Fax oder Brief an die Pflegekasse Ihrer Krankenkasse.
+
+Die Antragstellung funktioniert so:
+
+Ein einfacher Satz genügt: „Ich beantrage die Feststellung der Pflegebedürftigkeit" oder „Ich beantrage einen Pflegegrad für [Name]."
+
+- Telefonisch: Kurzer Anruf bei der Pflegekasse
+
+- Schriftlich: E-Mail oder Brief
+
+- Online: Falls Ihre Pflegekasse ein Formular anbietet
+
+Das Datum des ersten Kontakts ist entscheidend – ab diesem Moment laufen alle Fristen und rückwirkenden Leistungen.
+
+Wichtig: Richten Sie den Antrag an die Pflegekasse Ihrer Krankenkasse, nicht an die Krankenkasse selbst. Die Pflegekasse ist eine eigenständige Abteilung. Privat Versicherte kontaktieren ihre private Pflegepflichtversicherung.
+
+Für den Antrag benötigen Sie:
+
+- Name und Adresse der pflegebedürftigen Person
+
+- Versicherungsnummer
+
+- Kurze Beschreibung des Unterstützungsbedarfs
+
+- Medizinische Unterlagen sind nicht erforderlich
+
+[SPIEL karte: Pflegekasse]
+
+## 4 Wie bereite ich mich auf die Begutachtung vor?
+
+Nach der Antragstellung beauftragt die Pflegekasse den Medizinischen Dienst (MD) oder bei privater Versicherung Medicproof mit der Begutachtung. Der Hausbesuch dauert meist 45 bis 60 Minuten und entscheidet über die Höhe des Pflegegrads.
+
+Das Pflegetagebuch – Ihr wichtigstes Dokument:
+
+Dokumentieren Sie 7–14 Tage lang alle pflegerischen Tätigkeiten mit genauen Uhrzeiten. Notieren Sie nächtliche Hilfestellungen, deren Dauer und den genauen Unterstützungsbedarf. Dieses Tagebuch ist Ihr stärkstes Argument bei der Begutachtung.
+
+[SPIEL schaetzen: Wie viele Bereiche bewertet der Medizinische Dienst? → 6]
+
+Checkliste für den Gutachtertermin:
+
+| Dokument | Zweck
+
+| Pflegetagebuch | Dokumentation täglicher Hilfestellungen
+
+| Arztberichte | Medizinische Diagnosen
+
+| Medikamentenliste | Aktuelle Therapie
+
+| Entlassungsberichte | Zustand nach Krankenhausaufenthalten
+
+| Therapieberichte | Ergo-, Physio-, Logopädie
+
+So verhalten Sie sich beim Termin richtig:
+
+- Schildern Sie einen durchschnittlichen Tag ohne zusätzliche Hilfe
+
+- Sprechen Sie offen über alle Schwierigkeiten – auch peinliche Themen wie Inkontinenz
+
+- Zeigen Sie Ihren schlechtesten Tag, nicht die beste Verfassung
+
+- Lassen Sie eine vertraute Person zum Termin mitkommen
+
+- Geben Sie konkrete Alltagsbeispiele
+
+## 5 Die sechs Bewertungsmodule erklärt
+
+Das Neue Begutachtungsassessment (NBA) bewertet bundesweit einheitlich nach folgendem Schema. Die Pflegegrade unterscheiden sich je nach Summe der bewerteten Punkte in diesen Modulen:
+
+1. Mobilität (10% Gewichtung)
+
+Fortbewegen in der Wohnung, Treppensteigen, Positionswechsel im Bett, Sitzen
+
+2. Kognitive und kommunikative Fähigkeiten (15% Gewichtung)
+
+Erkennen von Personen, zeitliche Orientierung, Verstehen von Sachverhalten, Gespräche führen
+
+3. Verhaltensweisen und psychische Problemlagen (15% Gewichtung)
+
+Nächtliche Unruhe, aggressives Verhalten, Weglauftendenz, Wahnvorstellungen
+
+4. Selbstversorgung (40% Gewichtung)
+
+Körperpflege, An- und Auskleiden, Toilettenbenutzung, Essen und Trinken
+
+5. Umgang mit krankheits-/therapiebedingten Anforderungen (20% Gewichtung)
+
+Medikamenteneinnahme, Arztbesuche organisieren, Blutzucker messen, Verbandswechsel
+
+6. Gestaltung des Alltagslebens und sozialer Kontakte (15% Gewichtung)
+
+Tagesablauf planen, soziale Kontakte pflegen, Freizeitaktivitäten, Ruhephasen
+
+Aus der Gesamtpunktzahl (0–100) ergibt sich der Pflegegrad:
+
+- Pflegegrad 1: 12,5–27 Punkte
+
+- Pflegegrad 2: 27–47,5 Punkte
+
+- Pflegegrad 3: 47,5–70 Punkte
+
+- Pflegegrad 4: 70–90 Punkte
+
+- Pflegegrad 5: 90–100 Punkte
+
+## 6 Fristen und Entschädigungen
+
+Die Pflegekasse muss innerhalb von 25 Arbeitstagen entscheiden, welcher Pflegegrad vorliegt. Bei Eilfällen (Krankenhausaufenthalt, Hospiz, Pflegezeitgesetz) gelten verkürzte Fristen von 5–10 Arbeitstagen.
+
+Entschädigung bei Fristüberschreitung:
+
+Überschreitet die Pflegekasse die 25-Arbeitstage-Frist, erhalten Sie automatisch 70 Euro pro begonnene Woche als Entschädigung – ohne dass Sie etwas unternehmen müssen.
+
+## 7 Leistungen nach erfolgreicher Anerkennung (2026)
+
+Pflegegeld bei häuslicher Pflege:
+
+| Pflegegrad | Monatlich
+
+| 1 | 0 €
+
+| 2 | 347 €
+
+| 3 | 599 €
+
+| 4 | 800 €
+
+| 5 | 990 €
+
+Pflegesachleistungen (Pflegedienste):
+
+| Pflegegrad | Monatlich
+
+| 2 | 796 €
+
+| 3 | 1.497 €
+
+| 4 | 1.859 €
+
+| 5 | 2.299 €
+
+Zusätzliche Leistungen für alle Grade:
+
+- Entlastungsbetrag: 131 € monatlich
+
+- Pflegehilfsmittel: 42 € monatlich
+
+- Wohnraumanpassung: bis 4.000 € pro Maßnahme
+
+- Gemeinsames Jahresbudget Verhinderungs-/Kurzzeitpflege: 3.539 €
+
+## 8 Was tun bei Ablehnung oder falscher Einstufung?
+
+Sie können innerhalb von einem Monat nach Erhalt des Bescheids Widerspruch einlegen. Ein kurzes Schreiben genügt: „Ich lege Widerspruch gegen den Bescheid vom [Datum] ein."
+
+So erfolgreicher Widerspruch gelingt:
+
+- Detailliertes Pflegetagebuch als Nachweis
+
+- Ärztliche Stellungnahmen zur Verschlechterung
+
+- Konkrete Alltagsbeispiele aufzählen
+
+- Beratung durch Pflegestützpunkte oder Verbraucherzentralen nutzen
+
+Die Erfolgsquote von Widersprüchen liegt bei etwa einem Drittel. Es lohnt sich, für Ihre richtige Einstufung zu kämpfen.
+
+## 9 Fazit
+
+Wer Pflegegrad beantragen möchte, sollte es so früh wie möglich tun. Mit einem formlos gestellten Antrag bei der Pflegekasse starten Sie den Prozess. Das Pflegetagebuch ist Ihr wichtigstes Werkzeug für eine faire Einstufung. Innerhalb von 25 Arbeitstagen muss die Pflegekasse entscheiden – bei Verzögerung erhalten Sie 70 Euro pro Woche. Ihre Leistungen reichen von 131 Euro Entlastungsbetrag (PG 1) bis 990 Euro Pflegegeld (PG 5). Diese Leistungen sind keine Almosen, sondern Versicherungsansprüche aus Ihren Beitragszahlungen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegegrad-beantragen]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wie stelle ich einen Antrag auf Pflegegrad?
+A: Der Antrag kann formlos telefonisch, per E-Mail, schriftlich oder über ein Online-Formular bei der Pflegekasse gestellt werden. Ein kurzes Schreiben mit der Bitte um Feststellung der Pflegebedürftigkeit und Einstufung in einen Pflegegrad reicht aus. Bei Telefonanträgen sollten Sie immer eine schriftliche Bestätigung anfordern.
+F: Bei welcher Stelle wird der Pflegegrad beantragt?
+A: Der Antrag wird bei der Pflegekasse gestellt, nicht bei der Krankenkasse. Meist sind Pflege- und Krankenkasse bei derselben Versicherungsgesellschaft angesiedelt. Privat Krankenversicherte wenden sich an ihre private Pflegepflichtversicherung.
+F: Wie lange dauert die Begutachtung durch den Medizinischen Dienst?
+A: Nach Antragstellung muss die Pflegekasse die Begutachtung innerhalb von 25 Werktagen veranlassen. Der Termin beim Medizinischen Dienst findet meist zu Hause statt und dauert 45 bis 60 Minuten. Bewertet wird die Selbstständigkeit in sechs Lebensbereichen wie Mobilität und kognitive Fähigkeiten.
+F: Wann sollte man den Pflegegrad beantragen?
+A: Der Antrag sollte so früh wie möglich gestellt werden, da Leistungen rückwirkend ab dem Antragsdatum gewährt werden. Sobald körperliche, kognitive oder psychische Einschränkungen den Alltag erschweren, ist der Antrag sinnvoll. Es gibt keine Wartefristen oder Nachteile bei frühzeitiger Antragstellung.
+
+
+==================== BEITRAG pflegebeduerftigkeit ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Alles über Pflegebedarf, Versicherung und Hilfe im Alter
+  heading-1: Pflegebedürftigkeit: Definition, Pflegegrade und Leistungen 2026
+  heading-2: Was bedeutet Pflegebedürftigkeit nach dem Gesetz?
+  heading-3: Wie funktioniert das Begutachtungsverfahren?
+  heading-4: Welche Pflegegrade gibt es und welche Leistungen stehen zu?
+  heading-5: Wie beantragt man einen Pflegegrad erfolgreich?
+  heading-6: Was ändert sich 2026 in der Pflegeversicherung?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Pflegebedürftigkeit (pflegebeduerftigkeit)
+## 0 Alles über Pflegebedarf, Versicherung und Hilfe im Alter
+
+Pflegebedürftigkeit liegt vor, wenn die Selbstständigkeit dauerhaft eingeschränkt ist. Wie sie 2026 festgestellt wird und welche Leistungen es dann gibt.
+
+## 1 Pflegebedürftigkeit: Definition, Pflegegrade und Leistungen 2026
+
+Pflegebedürftigkeit bezeichnet gesundheitlich bedingte Beeinträchtigungen der Selbständigkeit oder der Fähigkeiten, die Hilfe durch andere erforderlich machen. Ende 2023 waren rund 5,69 Millionen Menschen in Deutschland pflegebedürftig – ein Anstieg von 15 Prozent gegenüber 2021. Die gesetzliche Definition im Sozialgesetzbuch XI erfasst dabei körperliche, kognitive und psychische Einschränkungen gleichermaßen und schafft Ansprüche auf umfassende Unterstützungsleistungen.
+
+Die moderne Pflegelandschaft orientiert sich an der individuellen Selbstständigkeit von Menschen. Dabei spielt das Alter keine entscheidende Rolle: Pflegebedürftigkeit kann in allen Lebensabschnitten auftreten. Von Kindern mit besonderen Bedürfnissen bis zu Senioren mit altersbedingten Einschränkungen können alle Menschen betroffen sein. Das Neue Begutachtungsassessment (NBA) ersetzt seit 2017 die zeitaufwändige Minutenpflege durch eine ganzheitliche Bewertung der Lebenssituation.
+
+## 2 Was bedeutet Pflegebedürftigkeit nach dem Gesetz?
+
+Die Pflegebedürftigkeit muss auf Dauer, voraussichtlich für mindestens sechs Monate bestehen. Diese Zeitgrenze unterscheidet dauerhaft pflegebedürftige Menschen von solchen mit vorübergehenden Einschränkungen. Wer nach einem Beinbruch sechs Wochen Hilfe benötigt, erfüllt diese Voraussetzung nicht. Eine klare Heilungsprognose schließt den Pflegegrad aus.
+
+Es muss sich um Personen handeln, die körperliche, kognitive oder psychische Beeinträchtigungen nicht selbständig kompensieren oder bewältigen können. Der Gesetzgeber erkennt dabei drei gleichberechtigte Arten von Beeinträchtigungen an:
+
+- Körperliche Einschränkungen (Mobilität, Kraft, Koordination)
+
+- Kognitive Beeinträchtigungen (Gedächtnis, Orientierung, Entscheidungsfähigkeit)
+
+- Psychische Problemlagen (Depressionen, Angststörungen, Verhaltensstörungen)
+
+Diese umfassende Definition berücksichtigt ausdrücklich Menschen mit Demenz, schweren psychischen Erkrankungen oder geistigen Behinderungen. Sie können genauso Pflegegrade erhalten wie Menschen mit rein körperlichen Erkrankungen. Die Ursache der Einschränkung ist dabei unerheblich – entscheidend ist ihre Auswirkung auf die Selbstständigkeit.
+
+[SPIEL schaetzen: Wie viele Menschen waren Ende 2023 in Deutschland pflegebedürftig? → 5.69]
+
+## 3 Wie funktioniert das Begutachtungsverfahren?
+
+Das Neue Begutachtungsassessment (NBA) umfasst 64 Kriterien, die in sechs Module gegliedert sind. Gutachter des Medizinischen Dienstes bewerten dabei nicht die Diagnose, sondern die tatsächliche Selbstständigkeit im Alltag. Bei der Feststellung der Pflegebedürftigkeit geht es darum, die Selbstständigkeit der Person nach festgelegten Kategorien in sechs Modulen zu erfassen.
+
+Die sechs Begutachtungsmodule gliedern sich wie folgt:
+
+| Modul | Bereich | Gewichtung | Schwerpunkt
+
+| 1 | Mobilität | 10% | Positionswechsel, Fortbewegen, Treppensteigen
+
+| 2 | Kognitive/kommunikative Fähigkeiten | 15%* | Orientierung, Gedächtnis, Entscheidungen
+
+| 3 | Verhaltensweisen/psychische Problemlagen | 15%* | Unruhe, Ängste, Aggressionen
+
+| 4 | Selbstversorgung | 40% | Körperpflege, Anziehen, Essen
+
+| 5 | Krankheitsbewältigung | 20% | Medikamente, Arztbesuche, Therapien
+
+| 6 | Alltagsleben/soziale Kontakte | 15% | Tagesablauf, Hobbys, Beziehungen
+
+*Hier zählt nur der höhere Wert aus Modul 2 oder 3.
+
+Aus diesen Modulergebnissen wird ein Gesamtpunktwert von 0 bis 100 Punkten gebildet. Ab einem Punktewert von 12,5 liegt eine Pflegebedürftigkeit vor. Der Schweregrad wird durch die gewichteten Punkte festgelegt und ist in fünf Pflegegrade aufgeteilt.
+
+[SPIEL gewusst: Das Modul "Selbstversorgung" hat mit 40 Prozent den größten Einfluss auf den Pflegegrad – mehr als alle anderen Module zusammen (Stand 2026)]
+
+## 4 Welche Pflegegrade gibt es und welche Leistungen stehen zu?
+
+Deutschland kennt fünf Pflegegrade, die verschiedene Schweregrade der Beeinträchtigung widerspiegeln. Die Leistungen aus der Pflegeversicherung bleiben exakt auf dem Stand von 2025 und gelten unverändert für 2026. Eine Erhöhung ist erst wieder frühestens zum 01.01.2028 vorgesehen.
+
+Pflegegrad 1 (12,5-27 Punkte): Geringe Beeinträchtigungen der Selbstständigkeit
+
+- Kein Pflegegeld
+
+- 131 Euro Entlastungsbetrag monatlich
+
+- 42 Euro für Pflegehilfsmittel
+
+Pflegegrad 2 (27-47,5 Punkte): Erhebliche Beeinträchtigungen
+
+- 347 Euro Pflegegeld oder 796 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 3 (47,5-70 Punkte): Schwere Beeinträchtigungen
+
+- 599 Euro Pflegegeld oder 1.497 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 4 (70-90 Punkte): Schwerste Beeinträchtigungen
+
+- 800 Euro Pflegegeld oder 1.859 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 5 (90-100 Punkte): Schwerste Beeinträchtigungen mit besonderen Anforderungen
+
+- 990 Euro Pflegegeld oder 2.299 Euro Pflegesachleistungen
+
+- Zusätzlich 131 Euro Entlastungsbetrag
+
+Pflegegrad 2 ist mit gut 40 Prozent der häufigste Pflegegrad. Nach Destatis-Daten für 2023 entfielen rund 40,4 Prozent auf Pflegegrad 2, etwa 29,6 Prozent auf Pflegegrad 3.
+
+[SPIEL mythos: Menschen mit Pflegegrad 1 erhalten kein Pflegegeld, aber dafür andere wichtige Leistungen → ja]
+
+## 5 Wie beantragt man einen Pflegegrad erfolgreich?
+
+Der Antrag ist formlos bei der Pflegekasse möglich. Ein einfacher Anruf, eine E-Mail oder ein kurzes Schreiben genügt: "Ich beantrage die Feststellung der Pflegebedürftigkeit." Spezielle Formulare sind nicht erforderlich. Die Pflegekasse befindet sich bei der jeweiligen Krankenkasse.
+
+Entscheidend ist der richtige Zeitpunkt: Leistungen werden ab dem Antragsmonat gewährt, nicht rückwirkend. Jeder Monat ohne Antrag bedeutet verlorene Ansprüche in Höhe von mehreren hundert Euro.
+
+Das Verfahren läuft strukturiert ab:
+
+- Schritt 1: Die Pflegekasse beauftragt den Medizinischen Dienst oder unabhängige Gutachter
+
+- Schritt 2: Über den Antrag muss die Pflegekasse innerhalb von höchstens 25 Arbeitstagen entscheiden
+
+- Schritt 3: Der Bescheid über den Pflegegrad wird zugestellt
+
+Zur optimalen Vorbereitung führen Sie zwei Wochen vor der Begutachtung ein detailliertes Pflegetagebuch, um beim Pflegegrad beantragen optimal vorbereitet zu sein. Dokumentieren Sie täglich, wobei Unterstützung nötig ist, wie lange Tätigkeiten dauern und welche Schwierigkeiten auftreten. Dieses Tagebuch wird zu Ihrem stärksten Argument gegenüber den Gutachtern.
+
+[SPIEL karte: Medizinischer Dienst (MD)]
+
+## 6 Was ändert sich 2026 in der Pflegeversicherung?
+
+Die Beträge gelten unverändert auch im Jahr 2026. Leistungen wie Pflegegeld oder Pflegesachleistungen bleiben auf dem Niveau von 2025 und steigen nicht weiter an. Dennoch gibt es wichtige Neuerungen bei der Flexibilität und Organisation:
+
+Gemeinsames Entlastungsbudget: Das Entlastungsbudget in Höhe von 3.539 Euro ab 01.07.2025 für Kurzzeitpflege und Verhinderungspflege gilt erstmals über das gesamte Jahr verteilt. Diese Flexibilität erleichtert die Versorgungsplanung erheblich.
+
+Vereinfachte Beratungseinsätze: Für Pflegegrade 2 bis 5 ist nur noch ein Beratungstermin pro Halbjahr verpflichtend. Damit entfällt die bislang höhere Termindichte bei schweren Pflegegraden. Zusätzliche Beratungsgespräche sind weiterhin möglich und kostenfrei.
+
+Verhinderungspflege-Rückerstattung: Die Kostenerstattung für Verhinderungspflege ist ab 2026 nur noch für das aktuelle und für das vorige Kalenderjahr möglich. Die frühere vierjährige Rückerstattung entfällt.
+
+Landespflegegeld Bayern: Bislang lag das bayerische Landespflegegeld bei 1.000 Euro pro Jahr. Ab 2026 wird es um die Hälfte gekürzt und beträgt dann nur noch 500 Euro pro Jahr.
+
+Die Pflegehilfsmittel bleiben bei 42 Euro monatlich, der Entlastungsbetrag bei 131 Euro. Diese Beträge gelten zusätzlich zu Pflegegeld oder Pflegesachleistungen.
+
+## 7 Fazit
+
+Pflegebedürftigkeit kann Menschen jeden Alters treffen und erfordert fundierte Kenntnisse über verfügbare Leistungen. Ende 2023 waren rund 5,69 Millionen Menschen in Deutschland pflegebedürftig – Tendenz steigend aufgrund des demografischen Wandels. Das deutsche Pflegesystem wirkt komplex mit fünf Pflegegraden, sechs Begutachtungsmodulen und zahlreichen Leistungsarten, bietet aber umfassende Unterstützung.
+
+Die Leistungen der Pflegeversicherung bleiben 2026 stabil, während neue Flexibilität beim gemeinsamen Entlastungsbudget die Versorgungsorganisation vereinfacht. Der Schlüssel zum Erfolg liegt in der rechtzeitigen Antragstellung und gründlichen Vorbereitung auf die Begutachtung. Wer seine tatsächlichen Einschränkungen dokumentiert und ehrlich schildert, erhöht die Chancen auf eine angemessene Einstufung deutlich.
+
+Das deutsche Pflegesystem bietet umfangreiche Unterstützung – von monatlichem Pflegegeld bis zu Sachleistungen, Entlastungsangeboten und Hilfsmitteln. Rund 86 Prozent werden zu Hause versorgt, davon ein großer Teil durch Angehörige. Wer über diese Leistungen hinaus absichern möchte, sollte sich auch mit einer Pflegezusatzversicherung auseinandersetzen. Entscheidend ist, die eigenen Rechte zu kennen und konsequent zu nutzen. Eine vorausschauende Auseinandersetzung mit dem Thema schützt vor finanziellen Engpässen und sichert die bestmögliche Versorgung im Bedarfsfall.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegebeduerftigkeit]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Wann gilt man als pflegebedürftig?
+A: Pflegebedürftig ist, wer aufgrund gesundheitlicher Beeinträchtigungen dauerhaft Unterstützung im Alltag benötigt. Die Einschränkung muss voraussichtlich mindestens sechs Monate andauern und im Sozialgesetzbuch XI festgelegte Schweregrade erreichen. Vorübergehende Einschränkungen, etwa nach einer Operation, zählen nicht.
+F: Welche Leistungen gibt es bei Pflegegrad 3 im Jahr 2026?
+A: Bei Pflegegrad 3 erhalten Pflegebedürftige 2026 ein monatliches Pflegegeld von 599 Euro oder Pflegesachleistungen in Höhe von 1.497 Euro. Zusätzlich steht ein Entlastungsbetrag von 131 Euro pro Monat zur Verfügung. Die Leistungen bleiben gegenüber 2025 unverändert.
+F: Werden kognitive und psychische Einschränkungen als Pflegebedürftigkeit anerkannt?
+A: Ja, das deutsche Pflegerecht erkennt körperliche, kognitive und psychische Beeinträchtigungen gleichberechtigt als Grundlage für Pflegebedürftigkeit an. Demenzkranke oder Menschen mit psychischen Erkrankungen können daher einen Pflegegrad erhalten. Die Einstufung erfolgt unabhängig von der Ursache der Einschränkung.
+F: Wie wird ein Pflegegrad beantragt?
+A: Der Antrag auf einen Pflegegrad ist formlos bei der Pflegekasse möglich. Ein Anruf, eine E-Mail oder ein kurzes Schreiben mit der Bitte um Feststellung der Pflegebedürftigkeit genügt. Der Antrag sollte möglichst früh gestellt werden, da Leistungen rückwirkend ab dem Antragsdatum gewährt werden.
+
+
+==================== BEITRAG pflegedienste ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Ambulante Pflegedienste: Professionelle Pflege zu Hause
+  heading-1: Ambulante Pflegedienste 2026: Kosten, Leistungen und neue Befugnisse
+  heading-2: Wie hoch sind die Pflegeleistungen 2026?
+  heading-3: Was kosten ambulante Pflegedienste konkret?
+  heading-4: Welche neuen Befugnisse haben Pflegefachkräfte ab 2026?
+  heading-5: Kombinationsleistung: Mehr aus dem Budget herausholen
+  heading-6: Neue Qualitätsstandards für Pflegedienste ab Juli 2026
+  heading-7: Was vereinfacht sich für Angehörige?
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Pflegedienste (pflegedienste)
+## 0 Ambulante Pflegedienste: Professionelle Pflege zu Hause
+
+Ambulante Pflegedienste pflegen und betreuen zu Hause. Welche Leistungen sie 2026 bieten, was sie kosten und welche neuen Befugnisse Pflegekräfte erhalten.
+
+## 1 Ambulante Pflegedienste 2026: Kosten, Leistungen und neue Befugnisse
+
+Ambulante Pflegedienste sind professionelle Dienstleister, die pflegerische und betreuende Leistungen direkt im häuslichen Umfeld erbringen und dabei die Eigenständigkeit pflegebedürftiger Menschen bestmöglich erhalten. 2026 erleben Pflegedienste in Deutschland bedeutsame Veränderungen, die Betroffene konkret betreffen.
+
+Das BEEP-Gesetz erweitert die Befugnisse von Pflegefachkräften. Neue Qualitätsstandards verbessern die Bewertung ambulanter Pflegedienste. Flexible Leistungskombinationen bieten Familien mehr Spielraum. Gleichzeitig stagnieren die Pflegeleistungen: 2026 gelten unverändert die Beträge aus 2025, während ambulante Pflegedienste ihre Kosten erhöhen.
+
+Für Pflegebedürftige und Angehörige wird es wichtig, die neuen Möglichkeiten früh zu nutzen und professionelle Beratung bei der Auswahl von Pflegediensten zu suchen.
+
+## 2 Wie hoch sind die Pflegeleistungen 2026?
+
+Die monatlichen Leistungen der Pflegeversicherung staffeln sich nach Pflegegrad:
+
+| Pflegegrad | Pflegegeld | Pflegesachleistungen | Entlastungsbetrag
+
+| 1 | 0 Euro | 0 Euro | 131 Euro
+
+| 2 | 347 Euro | 796 Euro | 131 Euro
+
+| 3 | 599 Euro | 1.497 Euro | 131 Euro
+
+| 4 | 800 Euro | 1.859 Euro | 131 Euro
+
+| 5 | 990 Euro | 2.299 Euro | 131 Euro
+
+Neu ab 2026: Ein flexibles gemeinsames Budget von 3.539 Euro pro Jahr für Verhinderungs- und Kurzzeitpflege. Sie teilen diese Summe frei zwischen beiden Leistungsarten auf – je nach aktuellem Bedarf.
+
+[SPIEL quiz: Wie hoch ist das Pflegegeld bei Pflegegrad 3 im Jahr 2026?]
+
+## 3 Was kosten ambulante Pflegedienste konkret?
+
+Die Kosten für ambulante Pflegedienste variieren je nach Region und Anbieter. Pflegekassen zahlen Pflegediensten durchschnittlich 35 Euro pro Stunde für Grundpflege. Als Selbstzahler ohne Pflegegrad müssen Sie deutlich mehr einplanen:
+
+- Grundpflege: 45–65 Euro/Stunde
+
+- Behandlungspflege: 40–55 Euro/Stunde
+
+- Hauswirtschaftliche Versorgung: 25–40 Euro/Stunde
+
+- Investitionskosten: ca. 2,15 Euro/Stunde
+
+- Wegepauschale: ca. 6 Euro/Besuch
+
+Praktisches Rechenbeispiel: Tägliche Grundpflege zwei Stunden = monatlich etwa 3.300 Euro (bei 55 Euro/Stunde). Das Sachleistungsbudget bei Pflegegrad 3 deckt maximal 1.497 Euro. Sie zahlen die Differenz selbst oder reduzieren die Pflegeeinsätze.
+
+Dieser Kostensprung zwischen verfügbaren Mitteln und realen Rechnungen von Pflegediensten zeigt, warum intelligente Planung entscheidend ist. Wer frühzeitig einen Pflegegrad beantragt, kann schneller von den verfügbaren Leistungen profitieren.
+
+## 4 Welche neuen Befugnisse haben Pflegefachkräfte ab 2026?
+
+Das BEEP-Gesetz (Befugniserweiterung und Entbürokratisierung in der Pflege) gilt seit 1. Januar 2026. Pflegefachkräfte erhalten Kompetenzen, die bisher Ärzte vorbehalten waren. Das stärkt Pflegedienste als eigenverantwortliche Partner.
+
+Drei Kernbereiche:
+
+- Wundversorgung: Chronische Wunden eigenständig versorgen und steuern
+
+- Diabetes-Versorgung: Eigenverantwortliche Betreuung von Menschen mit Diabetes
+
+- Demenz-Betreuung: Spezialisierte Versorgung Demenzerkrankter
+
+Nicht alle Pflegefachkräfte dürfen sofort tätig werden. Das Gesetz kennt zwei Wege: Absolventen eines Pflegestudiengangs (Bachelor/Master) haben automatisch die Kompetenz. Fachpersonen mit dreijähriger Ausbildung erwerben sie durch staatlich zugelassene Weiterbildungen in den drei Bereichen.
+
+[SPIEL karte: BEEP-Gesetz]
+
+## 5 Kombinationsleistung: Mehr aus dem Budget herausholen
+
+Die Kombinationsleistung wird oft übersehen, bietet aber großes Sparpotenzial. Nutzen Sie nur einen Teil der Sachleistungen über einen Pflegedienst? Der Rest wird als anteiliges Pflegegeld ausgezahlt.
+
+Beispiel Pflegegrad 3: Sie nutzen 50 Prozent der maximalen Sachleistungen eines Pflegedienstes (748,50 Euro von 1.497 Euro). Gleichzeitig erhalten Sie 50 Prozent des vollen Pflegegeldes (299,50 Euro von 599 Euro). Summe: 1.048 Euro monatlich – deutlich mehr als das reine Pflegegeld.
+
+Zusätzlich können Sie bis zu 40 Prozent nicht ausgeschöpfter Sachleistungen in Unterstützungsleistungen umwandeln. Die Aufteilung lässt sich alle sechs Monate neu justieren – ideal bei sich ändernden Bedarf.
+
+[SPIEL schaetzen: Wie hoch ist das kombinierte Budget bei Pflegegrad 3 mit 50% Sachleistungsnutzung? → 1048]
+
+## 6 Neue Qualitätsstandards für Pflegedienste ab Juli 2026
+
+Ab 1. Juli 2026 gelten die „Qualitätsprüfungs-Richtlinien ambulante Pflege Teil 1a" (QPR). Sie ersetzen die bisherigen Bewertungen und orientieren sich stärker an tatsächlichen Ergebnissen.
+
+Das ändert sich:
+
+Neue Bewertungssystematik: Statt Schulnoten (1–5) gibt es vier Kategorien: A (keine Auffälligkeiten), B (Auffälligkeiten ohne negative Folgen), C (Defizite mit potenziellen Risiken), D (tatsächliche Schäden). Das macht Qualitätsmängel transparenter.
+
+Fokus auf Ergebnisqualität: Weniger Prüfung von Strukturen wie Papieren und Prozessen. Mehr Prüfung, ob die Pflege tatsächlich hilft. Der Medizinische Dienst schaut genauer hin, ob Pflegefachkräfte gut arbeiten.
+
+Angehörigenberatung zählt: Pflegedienste sollen prüfen, ob pflegende Angehörige überfordert sind, und eingreifen. Das stabilisiert Pflegesituationen und ermöglicht längeres Bleiben zu Hause.
+
+Gesprächsorientierung: Das Fachgespräch zwischen Prüfern und Mitarbeitern wird wichtiger. Austausch über Verbesserungen gehört zur Bewertung.
+
+## 7 Was vereinfacht sich für Angehörige?
+
+Das BEEP-Gesetz bringt konkrete Entlastungen:
+
+Weniger Beratungsbesuche: Ab 2026 sind Beratungsbesuche nach § 37 Abs. 3 SGB XI für Pflegegrade 2–5 nur noch alle sechs Monate Pflicht. Bei Pflegegrad 4 und 5 reichen zwei Termine pro Jahr für den Erhalt des Pflegegeldes.
+
+Längere Pflegegeldzahlung: Während eines Krankenhausaufenthalts zahlt die Kasse Pflegegeld nun bis zu acht Wochen weiter (vorher: vier Wochen). Das hilft chronisch kranken Menschen bei häufigeren stationären Aufenthalten.
+
+Verkürzte Abrechnungsfrist: Kostenerstattung für Verhinderungspflege erfolgt nur noch für das aktuelle und vorige Kalenderjahr. Ansprüche aus 2022–2024 sind seit 1. Januar 2026 erloschen.
+
+Neue Bescheinigungsbefugnis: Nicht nur Ärzte dürfen Bescheinigungen für Pflegeunterstützungsgeld ausstellen, sondern auch qualifizierte Pflegefachpersonen.
+
+## 8 Fazit
+
+2026 bringt Pflegebedürftigen und ihren Angehörigen sowohl neue Chancen als auch neue Herausforderungen. Das BEEP-Gesetz stärkt Pflegedienste als eigenverantwortliche Fachkräfte. Neue Qualitätsstandards machen Bewertungen transparenter und fokussieren auf reale Versorgungsqualität. Flexible Kombinationsleistungen und das neue Budget für Verhinderungs- und Kurzzeitpflege bieten mehr Gestaltungsspielraum.
+
+Finanziell bleibt 2026 angespannt: Pflegeleistungen stagnieren, während Pflegedienste ihre Preise erhöhen. Deshalb ist es wichtig, Kombinationsmöglichkeiten intelligent zu nutzen und Pflegedienste sorgfältig auszuwählen. Eine Pflegezusatzversicherung kann zusätzliche Sicherheit bieten.
+
+Informieren Sie sich frühzeitig über die Neuerungen und lassen Sie sich bei der Auswahl qualitativ guter Pflegedienste beraten. Mit kluger Planung können Sie trotz steigender Kosten hochwertige Pflege zu Hause umsetzen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegedienste]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Was kostet ein ambulanter Pflegedienst 2026?
+A: Der durchschnittliche Stundensatz ambulanter Pflegedienste liegt 2026 bei rund 35 Euro. Eine tägliche Grundpflege von zwei Stunden summiert sich damit auf etwa 2.100 Euro monatlich. Diese Kosten übersteigen das Sachleistungsbudget der meisten Pflegegrade deutlich.
+F: Ab welchem Pflegegrad gibt es Pflegesachleistungen?
+A: Pflegesachleistungen stehen Pflegebedürftigen ab Pflegegrad 2 zu und werden von der Pflegeversicherung übernommen. Bei Pflegegrad 2 liegt das monatliche Budget bei 796 Euro, bei Pflegegrad 5 bei 2.299 Euro. Pflegegrad 1 erhält stattdessen nur den Entlastungsbetrag von 131 Euro.
+F: Was ist die Kombinationsleistung in der Pflege?
+A: Die Kombinationsleistung ermöglicht es, Pflegesachleistungen und Pflegegeld zu kombinieren. Wer das Sachleistungsbudget nicht vollständig durch einen Pflegedienst ausschöpft, erhält den verbleibenden Anteil anteilig als Pflegegeld. Dieses Instrument ist vielen Betroffenen noch nicht ausreichend bekannt.
+F: Was ändert das BEEP-Gesetz für Pflegedienste?
+A: Das BEEP-Gesetz erweitert die Befugnisse von Pflegefachkräften in Bereichen wie Wundversorgung, Dekubitus-Behandlung und Versorgung von Diabetes-Patienten. Tätigkeiten, die bisher Ärzten vorbehalten waren, können nun zum Teil von Pflegefachkräften übernommen werden. Erst-Diagnosen bleiben jedoch weiterhin Ärzten vorbehalten.
+
+
+==================== BEITRAG kurzzeitpflege ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Vorübergehende Pflege in Einrichtungen – Kosten, Leistungen, Antrag
+  heading-1: Kurzzeitpflege 2026: Kosten, Leistungen und Antrag
+  heading-2: Wer hat Anspruch auf Kurzzeitpflege?
+  heading-3: Wie hoch ist das gemeinsame Entlastungsbudget für 2026?
+  heading-4: Welche Kosten entstehen bei der Kurzzeitpflege?
+  heading-5: Wie wird das Pflegegeld während der Kurzzeitpflege fortgezahlt?
+  heading-6: Wie können Eigenanteile reduziert werden?
+  heading-7: Neue Fristen und wichtige Termine für 2026
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Kurzzeitpflege (kurzzeitpflege)
+## 0 Vorübergehende Pflege in Einrichtungen – Kosten, Leistungen, Antrag
+
+Kurzzeitpflege bietet bis zu acht Wochen vollstationäre Pflege pro Jahr. Wer 2026 Anspruch hat, was sie kostet und wie Sie die Leistung beantragen.
+
+## 1 Kurzzeitpflege 2026: Kosten, Leistungen und Antrag
+
+Kurzzeitpflege regelt die vorübergehende vollstationäre Pflege in einer zugelassenen Pflegeeinrichtung für bis zu acht Wochen pro Jahr.
+
+Kurzzeitpflege bietet pflegebedürftigen Menschen und ihren Angehörigen eine wichtige Entlastung, wenn die häusliche Versorgung zeitweise nicht möglich ist. In der Kurzzeitpflege ist die pflegebedürftige Person in einem Pflegeheim untergebracht. Das nennt man vollstationäre Pflege. Diese Form der Pflege ist besonders nach Krankenhausaufenthalten wertvoll oder wenn pflegende Angehörige selbst erkranken oder Urlaub benötigen. Seit 2026 sorgen wichtige Neuerungen für mehr Flexibilität und bessere finanzielle Planungssicherheit.
+
+## 2 Wer hat Anspruch auf Kurzzeitpflege?
+
+Wer hat Anspruch auf Kurzeitpflege? Die Antwort ist klar geregelt: Maximal jedoch 3.539 Euro für Versicherte mit den Pflegegraden 2 bis 5. Pflegebedürftige ab Pflegegrad 2 können die Leistung sofort nach Anerkennung ihres Pflegegrads nutzen. Seit dem 1 Juli 2025 gibt es einen gemeinsamen Jahresbetrag für Verhinderungspflege und Kurzzeitpflege. Der Betrag für beide Leistungen zusammen ist maximal 3.539 Euro (Stand: 2026).
+
+Eine bedeutende Erleichterung ist der Wegfall der Vorpflegezeit. Die früher übliche Umwidmung von einem Topf in den anderen entfällt komplett. Früher musste eine pflegebedürftige Person oft sechs Monate häuslich gepflegt worden sein, bevor sie Kurzzeitpflege beanspruchen konnte. Diese bürokratische Hürde ist vollständig beseitigt.
+
+Menschen mit Pflegegrad 1 haben keinen direkten Anspruch auf das gemeinsame Entlastungsbudget, können aber dennoch profitieren. Pflegebedürftige mit Pflegegrad 1 bis 5, die zu Hause gepflegt werden, haben Anspruch auf einen Entlastungsbetrag von 131 € monatlich. Das entspricht insgesamt bis zu 1.572 Euro im Jahr.
+
+[SPIEL mythos: Kurzzeitpflege steht nur Personen ab Pflegegrad 2 zu → nein]
+
+## 3 Wie hoch ist das gemeinsame Entlastungsbudget für 2026?
+
+Das wichtigste Element der Kurzzeitpflege-Finanzierung ist das gemeinsame Entlastungsbudget. Der Gemeinsame Jahresbetrag in Höhe von bis zu 3.539,00 Euro steht insgesamt für beide Leistungsarten zu Verfügung. Diese Flexibilität revolutioniert die Pflege: Familien können das Budget nach individuellem Bedarf für Kurzzeitpflege, Verhinderungspflege oder eine Kombination beider einsetzen.
+
+Das 2026 erstmals über das gesamte Jahr gilt, macht die Planung erheblich einfacher. Pflegebedürftige und ihre Angehörigen können von Jahresbeginn an mit dem vollen Budget kalkulieren. Pflegebedürftige ab Pflegegrad 2 können diesen Betrag nach Wunsch flexibel einsetzen – entweder vollständig für Verhinderungspflege (Urlaub oder Krankheit der Pflegeperson), vollständig für Kurzzeitpflege (vorübergehender Heimaufenthalt) oder in beliebiger Aufteilung.
+
+| Leistung | Budget 2026 | Maximale Dauer
+
+| Gemeinsames Entlastungsbudget (Pflegegrad 2-5) | 3.539 Euro jährlich | Bis zu 8 Wochen
+
+| Entlastungsbetrag (alle Pflegegrade) | 131 Euro monatlich (1.572 Euro jährlich) | Kontinuierlich verfügbar
+
+Die zeitliche Flexibilität ist bemerkenswert: Die Verhinderungspflege ist nun auf bis zu 8 Wochen pro Kalenderjahr möglich, statt wie zuvor 6 Wochen. Damit ist sie zeitlich der Kurzzeitpflege gleichgestellt. Das ermöglicht eine bedarfsgerechte Verteilung über das Jahr.
+
+## 4 Welche Kosten entstehen bei der Kurzzeitpflege?
+
+Die Kostenstruktur der Kurzzeitpflege gliedert sich in zwei Hauptbereiche: die von der Pflegeversicherung übernommenen Leistungen und den privaten Eigenanteil. Die Pflegekasse übernimmt davon einen Teil aus dem gemeinsamen Jahresbudget von 3.539 € — den Rest tragen Sie als Eigenanteil selbst.
+
+Die Pflegekasse trägt folgende Kosten:
+
+- Pflegebedingte Aufwendungen aus dem gemeinsamen Budget
+
+- Medizinisch notwendige Behandlungspflege
+
+- Soziale Betreuung und aktivierende Maßnahmen
+
+Der Eigenanteil umfasst dagegen:
+
+- Unterkunft und Verpflegung (sogenannte "Hotelkosten")
+
+- Investitionskosten der Einrichtung
+
+- Zusatzleistungen nach Wunsch
+
+Kurzzeitpflege kostet im Bundesdurchschnitt ca. 70–130 € pro Tag (Pflege + Unterkunft + Verpflegung + Investitionskosten). Der private Eigenanteil bewegt sich in konkreten Größenordnungen: Unterkunft & Verpflegung: ca. 25-50 € pro Tag · Investitionskosten: ca. 10-25 € pro Tag · Je nach Einrichtung und Region liegt der tägliche Eigenanteil zwischen 35 und 75 Euro.
+
+[SPIEL schaetzen: Wie hoch ist der durchschnittliche tägliche Eigenanteil bei Kurzzeitpflege 2026? → 55]
+
+## 5 Wie wird das Pflegegeld während der Kurzzeitpflege fortgezahlt?
+
+Eine wichtige finanzielle Entlastung bietet die hälftige Fortzahlung des Pflegegelds. Das Pflegegeld wird während der Kurzzeitpflege zur Hälfte (50 Prozent) weitergezahlt. Diese Regelung gilt für die gesamte Dauer der Kurzzeitpflege, maximal jedoch für acht Wochen (56 Tage) pro Kalenderjahr.
+
+Die aktuellen Pflegegeld-Beträge für 2026 sind:
+
+- Pflegegrad 2: 347 Euro monatlich (173,50 Euro halbes Pflegegeld)
+
+- Pflegegrad 3: 599 Euro monatlich (299,50 Euro halbes Pflegegeld)
+
+- Pflegegrad 4: 800 Euro monatlich (400 Euro halbes Pflegegeld)
+
+- Pflegegrad 5: 990 Euro monatlich (495 Euro halbes Pflegegeld)
+
+Januar 2025 ein um 4,5 Prozent erhöhtes Pflegegeld. Die Höhe richtet sich weiterhin nach dem jeweiligen Pflegegrad. So verändert sich die Höhe des monatlichen Pflegegelds ab 2025: Diese Beträge gelten weiterhin im Jahr 2026.
+
+Eine Besonderheit betrifft den ersten und letzten Tag: Der Aufnahme- und der Entlassungstag werden von der Pflegekasse als Tage der häuslichen Pflege gewertet. Für diese beiden Tage wird das Pflegegeld zu 100 Prozent ausgezahlt.
+
+[SPIEL gewusst: Am ersten und letzten Tag der Kurzzeitpflege wird das Pflegegeld zu 100 Prozent ausgezahlt, da diese als Tage der häuslichen Pflege gelten (Stand 2026)]
+
+## 6 Wie können Eigenanteile reduziert werden?
+
+Zur Senkung der Eigenanteile stehen mehrere Strategien zur Verfügung. Der wichtigste Baustein ist der Entlastungsbetrag: seit dem 1. Januar 2017 steht jedem Pflegebedürftigen ein monatlicher Entlastungsbetrag in Höhe von 131 Euro zur Verfügung. Dieser Betrag kann in das folgende Kalenderhalbjahr übertragen werden, zum Beispiel um einen Teil der Kosten für Unterkunft und Verpflegung oder Investitionskosten bei der Kurzzeitpflege zu decken.
+
+Das Ansparen des Entlastungsbetrags ist besonders wirkungsvoll: Ungenutzte Beträge verfallen nicht sofort, sondern können bis zum 30. Juni des Folgejahres nachgenutzt werden. Bei vollständigem Ansparen stehen 1.572 Euro zur Verfügung.
+
+Weitere Finanzierungsmöglichkeiten sind:
+
+- Hälftige Weiterzahlung des Pflegegelds während des Aufenthalts
+
+- Steuerliche Geltendmachung als außergewöhnliche Belastung
+
+- Bei Bedürftigkeit: Unterstützung durch das Sozialamt ("Hilfe zur Pflege")
+
+- Kombination mit anderen ungenutzten Pflegeleistungen
+
+[SPIEL karte: Entlastungsbetrag]
+
+## 7 Neue Fristen und wichtige Termine für 2026
+
+Ab 2026 gilt eine neue Regelung: Zahlungen können nur noch für das laufende und das unmittelbar vorhergehende Kalenderjahr beantragt werden. Eine rückwirkende Erstattung über diesen Zeitraum hinaus ist dann nicht mehr möglich. Diese Änderung macht eine zeitnahe Planung noch wichtiger.
+
+Die Antragstellung selbst bleibt unkompliziert: Informieren Sie Ihre Pflegekasse über die geplante Kurzzeitpflege. Ein formloses Schreiben oder ein Anruf genügt meist. Eine formelle Genehmigung ist nicht erforderlich. Wichtig ist lediglich, dass die gewählte Einrichtung von der Pflegekasse zugelassen ist. Sollten Sie noch keinen Pflegegrad beantragen haben, ist dies der erste notwendige Schritt.
+
+Die Abrechnung erfolgt überwiegend direkt: Die Einrichtung regelt die Abrechnung mit der Pflegekasse. Den Eigenanteil für Unterkunft, Verpflegung und Investitionskosten zahlen Sie direkt an die Einrichtung – es sei denn, Sie setzen den Entlastungsbetrag ein (dann rechnet die Einrichtung direkt ab).
+
+| Zeitraum | Regelung
+
+| Antragstellung | Keine Frist, aber rechtzeitige Information der Pflegekasse empfehlenswert
+
+| Kostenerstattung | Nur für laufendes und vorhergehendes Kalenderjahr möglich
+
+| Entlastungsbetrag-Übertragung | Bis 30. Juni des Folgejahres
+
+| Maximale Aufenthaltsdauer | 8 Wochen (56 Tage) pro Kalenderjahr
+
+## 8 Fazit
+
+Kurzzeitpflege ist 2026 eine zentrale und flexible Säule der Pflegeversorgung. Das gemeinsame Entlastungsbudget von 3.539 Euro und der Wegfall der Vorpflegezeit bieten pflegenden Angehörigen deutlich mehr Planungssicherheit und Flexibilität. Die hälftige Fortzahlung des Pflegegelds und die Nutzung des Entlastungsbetrags von 131 Euro monatlich können die privaten Eigenanteile erheblich reduzieren. Wichtig ist die realistische Kalkulation der Kosten zwischen 35 und 75 Euro täglich sowie die Beachtung der neuen Abrechnungsfristen. Wer frühzeitig plant und alle verfügbaren Finanzierungsquellen nutzt, kann Kurzzeitpflege als strategisches Instrument zur Entlastung optimal einsetzen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste kurzzeitpflege]
+
+[BLOCK dokumente private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Ab welchem Pflegegrad besteht Anspruch auf Kurzzeitpflege?
+A: Ab Pflegegrad 2 besteht Anspruch auf Kurzzeitpflege, wenn die häusliche Pflege vorübergehend nicht möglich ist. Die bisher geforderte sechsmonatige Vorpflegezeit ist mit dem neuen Entlastungsbudget vollständig entfallen. Bei Pflegegrad 1 steht stattdessen der Entlastungsbetrag zur Verfügung.
+F: Wie hoch ist das gemeinsame Entlastungsbudget 2026?
+A: Verhinderungs- und Kurzzeitpflege stehen 2026 im gemeinsamen Entlastungsbudget von 3.539 Euro pro Jahr zur Verfügung. 2026 ist das erste Kalenderjahr, in dem dieser Betrag durchgehend vom 1. Januar bis 31. Dezember genutzt werden kann.
+F: Wann übernimmt die Krankenkasse die Kurzzeitpflege?
+A: Die Krankenkasse übernimmt die Kosten für Kurzzeitpflege insbesondere nach einem Krankenhausaufenthalt oder einer ambulanten Operation. Diese Leistung steht auch Personen ohne Pflegegrad oder mit Pflegegrad 1 zu, wenn die häusliche Pflege nicht sichergestellt werden kann.
+F: Wie hoch ist der Entlastungsbetrag bei Pflegegrad 1?
+A: Personen mit Pflegegrad 1 erhalten 2026 einen Entlastungsbetrag von 131 Euro monatlich beziehungsweise 1.572 Euro jährlich. Dieser Betrag steht auch zusätzlich zum gemeinsamen Entlastungsbudget bei den Pflegegraden 2 bis 5 zur Verfügung.
+
+
+==================== BEITRAG pflegezusatzversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Pflegezusatzversicherung: Versorgungslücke schließen &amp; Kosten sparen
+  heading-1: Pflegezusatzversicherung 2026: Versorgungslücke schließen
+  heading-2: Warum reicht die gesetzliche Pflegeversicherung nicht aus?
+  heading-3: Arten von Pflegezusatzversicherungen: Welche passt zu Ihnen?
+  heading-4: Wie hoch sind die Beiträge zur Pflegezusatzversicherung?
+  heading-5: Leistungszuschläge: So sinkt Ihr Eigenanteil im Heim mit der Zeit
+  heading-6: Finanzielle Hilfen bei fehlendem Geld
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Pflegezusatzversicherung (pflegezusatzversicherung)
+## 0 Pflegezusatzversicherung: Versorgungslücke schließen & Kosten sparen
+
+Die gesetzliche Pflege deckt nur einen Teil der Kosten. Wie die Pflegezusatzversicherung die Lücke schließt, was sie kostet und für wen sie 2026 lohnt.
+
+## 1 Pflegezusatzversicherung 2026: Versorgungslücke schließen
+
+Die Pflegezusatzversicherung deckt die wachsende Versorgungslücke in der deutschen Pflege ab.
+
+Die gesetzliche Pflegeversicherung funktioniert nach dem Teilkostenprinzip und übernimmt nur einen Bruchteil der anfallenden Pflegekosten. Im bundesweiten Durchschnitt liegt der Eigenanteil für Neuaufnahmen im ersten Jahr 2026 bei rund 3.245 Euro pro Monat (vdek). Diese finanzielle Lücke wird angesichts steigender Kosten und der alternden Gesellschaft immer größer.
+
+## 2 Warum reicht die gesetzliche Pflegeversicherung nicht aus?
+
+Die Versorgungslücke in der Pflege wächst Jahr für Jahr dramatisch. 2026 beträgt der allgemeine Beitragssatz 3,6 Prozent zur Pflegeversicherung, für kinderlose Beschäftigte ab 23 Jahren kommt ein Zuschlag von 0,6 Prozentpunkten dazu. Die Beitragssätze blieben nur stabil, weil Bundesfinanzminister Lars Klingbeil das bereits geplante Darlehen um 1,7 Milliarden Euro auf insgesamt 3,2 Milliarden Euro erhöht hat.
+
+Die konkreten Zahlen zeigen das Problem deutlich: Der durchschnittliche Eigenanteil im ersten Aufenthaltsjahr bei 3.245 Euro monatlich – ein Anstieg von 261 Euro (neun Prozent) gegenüber dem Vorjahr. Je nach Pflegegrad entstehen unterschiedliche Kosten, aber selbst bei den niedrigen Pflegegraden bleiben erhebliche Lücken. Die Pflegegrad Tabelle 2026 ist identisch zu 2025. Es gibt 2026 keine Erhöhungen bei Pflegegeld oder Sachleistungen.
+
+Die Pflegeleistungen 2026 nach Pflegegrad:
+
+| Pflegegrad | Pflegegeld | Pflegesachleistungen | Vollstationäre Pflege
+
+| 1 | kein Pflegegeld | 131 € Entlastungsbetrag | 131 € Zuschuss
+
+| 2 | 347 Euro | 796 Euro | 805 €
+
+| 3 | 599 Euro | 1.497 € | 1.319 €
+
+| 4 | 800 Euro | 1.859 € | 1.855 €
+
+| 5 | 990 Euro | 2.299 € | 2.096 €
+
+Die finanzielle Belastung für Familien wird dramatisch sichtbar, wenn man die Gesamtkosten betrachtet. Für viele Familien bedeutet das eine finanzielle Lücke von über 1.500 Euro monatlich, die aus Rente, Ersparnissen oder Sozialhilfe gedeckt werden muss. Mit steigenden Personalkosten wird das Pflegeheim zur „Armutsfalle", wie Sozialverbände es nennen – Prognosen zufolge werden 2026 rund 36 Prozent der Heimbewohner auf Sozialhilfe angewiesen sein.
+
+[SPIEL karte: Einrichtungseinheitlicher Eigenanteil (EEE)]
+
+## 3 Arten von Pflegezusatzversicherungen: Welche passt zu Ihnen?
+
+Die private Pflegezusatzversicherung bietet verschiedene Varianten, um die Versorgungslücke zu schließen. Die wichtigsten Unterschiede liegen in der Art der Leistungserbringung und den Voraussetzungen für den Abschluss.
+
+### Pflegetagegeldversicherung: Die flexibelste Lösung
+
+Die Pflegetagegeldversicherung ist die am häufigsten gewählte Form der privaten Zusatzabsicherung. Sie zahlt je nach Pflegegrad einen festen Betrag pro Tag oder Monat aus, den Sie völlig frei verwenden können. Ob für ambulante Hilfen, zur Entlastung von Angehörigen, für notwendige Umbauten oder zur Abdeckung von Eigenanteilen im Heim – Sie entscheiden selbst über die Verwendung.
+
+Die Auszahlung erfolgt unkompliziert, sobald ein anerkannter Pflegegrad vorliegt. Dabei ist es unerheblich, welche Kosten tatsächlich entstehen. Diese Flexibilität macht die Pflegetagegeldversicherung zur beliebtesten Variante.
+
+### Pflegekostenversicherung: Erstattung nach Rechnungen
+
+Bei der Pflegekostenversicherung werden nur die tatsächlich entstandenen und nachgewiesenen Pflegekosten erstattet. Sie müssen alle Belege einreichen und erhalten dann den erstattungsfähigen Betrag zurück. Diese Variante bietet weniger Flexibilität, kann aber bei hohen Kosten vollständige Deckung bieten.
+
+### Pflegerentenversicherung: Kapitalaufbau mit Pflegeleistung
+
+Die Pflegerentenversicherung kombiniert Kapitalaufbau mit Pflegeschutz. Wird kein Pflegefall eintreten, erhalten Sie oder Ihre Erben das angesparte Kapital. Im Pflegefall wird eine Rente gezahlt. Diese Variante ist teurer, bietet aber auch bei Nichtinanspruchnahme der Pflegeleistungen einen Wert.
+
+### Pflege-Bahr: Staatlich geförderte Vorsorge für alle
+
+Beim Pflege-Bahr handelt es sich um einen staatlichen Zuschuss von fünf Euro pro Monat zu einer zusätzlichen und somit freiwilligen Pflege-Tagegeldversicherung. Sie erhalten eine staatliche Förderung in Höhe von fünf Euro monatlich beziehungsweise 60 Euro im Jahr, wenn Sie monatlich mindestens zehn Euro in den Vertrag einzahlen.
+
+Die wichtigsten Merkmale des Pflege-Bahr:
+
+- Staatliche Zulage von 60 Euro jährlich ab zehn Euro monatlichem Eigenbeitrag
+
+- Kontrahierungszwang: Der Gesundheitszustand des Versicherungsnehmers darf keine Rolle spielen
+
+- Keine Gesundheitsprüfung, keine Risikozuschläge oder Leistungsausschlüsse
+
+- Die monatlichen Auszahlungen variieren dabei zwischen 60 Euro bei Pflegegrad 1 und 600 Euro bei Pflegegrad 5
+
+- Die Wartezeit darf maximal 5 Jahre betragen
+
+Eingeführt wurde der Zuschuss zur privaten Pflegevorsorge im Rahmen des Pflegeneuausrichtungsgesetzes am 01.01.2013. Der Pflege-Bahr ist besonders für Menschen mit Vorerkrankungen oder fortgeschrittenem Alter interessant, die bei anderen Versicherungen Schwierigkeiten hätten.
+
+[SPIEL quiz: Wie hoch ist die staatliche Förderung beim Pflege-Bahr pro Jahr?]
+
+## 4 Wie hoch sind die Beiträge zur Pflegezusatzversicherung?
+
+Die Beitragshöhe für eine Pflegezusatzversicherung hängt von verschiedenen Faktoren ab: Ihrem Eintrittsalter, dem gewünschten Leistungsumfang, Ihrem Gesundheitszustand und dem gewählten Versicherungstyp.
+
+### Beitragsbeispiele nach Alter
+
+Das Eintrittsalter ist der wichtigste Kostenfaktor. Je früher Sie einsteigen, desto günstiger bleiben die Beiträge ein Leben lang:
+
+- 25 Jahre: ca. 32 Euro monatlich für Vollabsicherung
+
+- 35 Jahre: ca. 56 Euro monatlich
+
+- 50 Jahre: deutlich höhere Beiträge, oft über 100 Euro
+
+Je älter Sie beim Vertragsabschluss sind, desto höher sind die Beiträge für eine Pflege-Bahr-Versicherung. Deshalb nimmt der Nutzen der staatlichen Förderung ab, je älter Sie beim Vertragsabschluss sind.
+
+### Anbietervergleich für Pflegetagegeld (Beispiele für 35-Jährige)
+
+| Anbieter | Monatsbeitrag | Max. Tagessatz | Besonderheiten
+
+| HanseMerkur | 31 € | 133 €/Tag | Günstiger Einstieg
+
+| Allianz | 56 € | 150 €/Tag | Gutes Preis-Leistungs-Verhältnis
+
+| Continentale | 84 € | 150 €/Tag | Hohe Leistung ab Pflegegrad 1
+
+### Faktoren für die Beitragshöhe
+
+Bei der Beitragsberechnung fließen mehrere Aspekte ein:
+
+Gesundheitsprüfung: Bei den meisten Tarifen müssen Sie Gesundheitsfragen beantworten. Vorerkrankungen können zu Zuschlägen oder Ablehnungen führen – außer beim Pflege-Bahr.
+
+Leistungsstaffelung: Manche Tarife zahlen in höheren Pflegegraden deutlich mehr, andere verteilen gleichmäßiger auf alle Grade.
+
+Dynamik: Tarife mit automatischer Anpassung an die Inflation sind teurer, schützen aber vor Kaufkraftverlust.
+
+Beitragsbefreiung: Die meisten Tarife befreien Sie im Pflegefall von weiteren Beitragszahlungen.
+
+[SPIEL schaetzen: Wie viel kostet eine Vollabsicherung mit der Pflegetagegeldversicherung pro Monat für eine 35-jährige Person? → 56]
+
+## 5 Leistungszuschläge: So sinkt Ihr Eigenanteil im Heim mit der Zeit
+
+Ein wichtiger Baustein der Pflegefinanzierung sind die Leistungszuschläge der Pflegekasse, die den Eigenanteil im Pflegeheim mit zunehmender Aufenthaltsdauer senken. Seit Januar 2022 erhalten Pflegeheimbewohner einen sogenannten Leistungszuschlag auf den einrichtungseinheitlichen Eigenanteil. Dieser Zuschlag wird von der Pflegekasse gezahlt und steigt mit der Dauer des Aufenthalts.
+
+Die Staffelung der Leistungszuschläge (§ 43c SGB XI):
+
+- 1. Jahr: 15 % des EEE
+
+- 2. Jahr: 30 % des EEE
+
+- 3. Jahr: 50 % des EEE
+
+- Ab 4. Jahr: 75 % des EEE
+
+Ab dem 4. Aufenthaltsjahr zahlt die Kasse 75 % des Pflege-Eigenanteils. Ein Beispiel: Bei einem EEE von 1.400 Euro erhalten Sie im ersten Jahr 210 Euro Zuschlag, im vierten Jahr bereits 1.050 Euro.
+
+Wichtig für die Planung: Die Aufenthaltsdauer zählt auch bei Einrichtungswechsel kumulativ. Wenn Sie nach zwei Jahren in einem Heim in ein anderes wechseln, beginnen Sie nicht wieder bei 15 Prozent, sondern setzen die Zählung fort.
+
+## 6 Finanzielle Hilfen bei fehlendem Geld
+
+Wenn Rente und Vermögen für die Pflegekosten nicht ausreichen, gibt es verschiedene Unterstützungsmöglichkeiten. Wenn Rente und Vermögen nicht reichen, übernimmt das Sozialamt die Differenz. Antrag sofort stellen — gilt ab dem Monat der Antragstellung.
+
+### Hilfe zur Pflege (Sozialhilfe)
+
+Die wichtigste Hilfe ist die „Hilfe zur Pflege" nach SGB XII. Das Sozialamt übernimmt die Differenz zwischen dem Eigenanteil und Ihrer finanziellen Leistungsfähigkeit. Wichtig: Die Sozialhilfe gilt erst ab dem Monat der Antragstellung — nicht rückwirkend.
+
+Schonvermögen: Das Schonvermögen beträgt je 10.000 Euro für den Pflegebedürftigen und den Ehepartner (Stand 2026).
+
+### Unterhaltspflicht der Kinder
+
+Eine große Erleichterung brachte das Angehörigen-Entlastungsgesetz von 2020: Seit dem Angehörigen-Entlastungsgesetz werden Kinder beim Elternunterhalt erst herangezogen, wenn ihr Jahresbruttoeinkommen 100.000 Euro übersteigt. Das betrifft die wenigsten Familien.
+
+### Steuerliche Entlastung
+
+Der Eigenanteil als außergewöhnliche Belastung in der Steuererklärung (§ 33 EStG) kann ebenfalls zur finanziellen Entlastung beitragen.
+
+## 7 Fazit
+
+Die Pflegezusatzversicherung ist 2026 zu einem unverzichtbaren Baustein der Altersvorsorge geworden. Demnach zahlen die zu Pflegenden 2026 im Durchschnitt einen Eigenanteil von bis zu 3.245 Euro pro Monat im ersten Aufenthaltsjahr. Das sind 261 Euro mehr als noch Anfang 2025. Diese Versorgungslücke wird ohne private Vorsorge für die meisten Familien unbezahlbar.
+
+Der beste Zeitpunkt für den Abschluss ist jetzt – mit Ihrem heutigen Alter und Gesundheitszustand. Je länger Sie warten, desto teurer wird es und desto schwieriger kann die Annahme werden. Die Pflegetagegeldversicherung bietet dabei die größte Flexibilität, während der staatlich geförderte Pflege-Bahr auch für Menschen mit Vorerkrankungen eine Möglichkeit der Absicherung darstellt.
+
+Eine durchdachte Pflegezusatzversicherung verhindert nicht nur Ihre eigene finanzielle Notlage im Alter, sondern entlastet auch Ihre Kinder von möglichen Unterhaltspflichten. Wer sich frühzeitig mit seiner Pflegebedürftigkeit auseinandersetzt und einen Pflegegrad beantragen möchte, sollte wissen, dass eine gute Vorsorge die Grundlage für eine würdevoll gestaltete Versorgung im Alter schafft. Diese Investition zahlt sich langfristig mehrfach aus – für Ihre Sicherheit und die Ihrer Familie.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste pflegezusatzversicherung]
+
+[BLOCK dokumente private-pflegezusatzversicherung,private-pflegepflichtversicherung,feststellung-pflegebeduerftigkeit]
+
+
+## FAQ
+F: Warum ist eine Pflegezusatzversicherung sinnvoll?
+A: Die gesetzliche Pflegeversicherung arbeitet nach dem Teilkostenprinzip und deckt nur einen Teil der tatsächlichen Pflegekosten ab. Im Pflegeheim müssen Pflegebedürftige bundesweit durchschnittlich bis zu 3.245 Euro pro Monat aus eigener Tasche zahlen. Eine private Pflegezusatzversicherung schließt diese Versorgungslücke.
+F: Was ist eine Pflegetagegeldversicherung?
+A: Die Pflegetagegeldversicherung zahlt je nach Pflegegrad einen festen Betrag pro Tag oder Monat, der frei verwendet werden kann. Sie gilt als flexibelste Form der privaten Pflegezusatzversicherung und kann für ambulante Hilfen, Umbauten oder Heimkosten eingesetzt werden. Die Auszahlung erfolgt, sobald ein anerkannter Pflegegrad vorliegt.
+F: Wie hoch ist die Versorgungslücke bei Pflegegrad 4?
+A: Wer bei Pflegegrad 4 stationär gepflegt wird, zahlt monatlich durchschnittlich 3.400 Euro. Die gesetzliche Pflegeversicherung übernimmt davon etwa 1.775 Euro, sodass eine Lücke von rund 1.625 Euro pro Monat verbleibt. Diese muss aus eigenen Mitteln oder durch Angehörige gedeckt werden.
+F: Was kostet eine Pflegetagegeldversicherung?
+A: Die Beiträge variieren je nach Anbieter, Alter und Leistungsumfang. HanseMerkur bietet bereits ab 31 Euro monatlich (Einstiegsalter 35) einen Tarif mit bis zu 133 Euro Tagessatz. Continentale verlangt 84 Euro monatlich, leistet dafür aber bereits ab Pflegegrad 1 umfassender.
+
+
+==================== BEITRAG private-pflege-pflichtversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Pflegepflichtversicherung für Privatversicherte: Kosten, Leistungen und Tipps
+  heading-1: Private Pflegepflichtversicherung: Leistungen, Kosten und wichtige Regelungen
+  heading-2: Was ist die private Pflegepflichtversicherung?
+  heading-3: Wer muss sich privat pflegeversichern?
+  heading-4: Wie funktioniert die Finanzierung?
+  heading-5: Leistungen der privaten Pflegepflichtversicherung
+  heading-6: Wie läuft die Pflegebegutachtung ab?
+  heading-7: Beitragssteigerungen und Beitragsobergrenzen
+  heading-8: Arbeitgeberzuschuss und Steuerbehandlung
+  heading-9: Die Pflegelücke: Warum eine Zusatzversicherung nötig ist
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Private Pflege-Pflichtversicherung (private-pflege-pflichtversicherung)
+## 0 Pflegepflichtversicherung für Privatversicherte: Kosten, Leistungen und Tipps
+
+Die private Pflegepflichtversicherung ist Pflicht für privat Krankenversicherte. Welche Leistungen sie bietet, was sie 2026 kostet und welche Regeln gelten.
+
+## 1 Private Pflegepflichtversicherung: Leistungen, Kosten und wichtige Regelungen
+
+Die private Pflegepflichtversicherung bildet den gesetzlich vorgeschriebenen Mindestschutz für alle privat Krankenversicherten in Deutschland. Sie funktioniert nach dem Grundsatz „Pflege folgt Kranken" und ist ein kapitalgedecktes Versicherungssystem. Der Leistungsumfang ist gesetzlich geregelt und brancheneinheitlich.
+
+Ab 2026 beträgt der durchschnittliche Beitrag zur privaten Pflegepflichtversicherung 56,50 Euro für Beihilfeberechtigte und 122,64 Euro für Angestellte und Selbstständige. Die Beitragssteigerung von 16 Prozent spiegelt die demografische Entwicklung wider. Die Zahl der pflegebedürftigen Privatversicherten hat sich von 2016 bis 2024 verdoppelt: 2024 waren es bereits 379.000 Menschen statt 190.000 acht Jahre zuvor.
+
+## 2 Was ist die private Pflegepflichtversicherung?
+
+Die MEDICPROOF GmbH, ein Tochterunternehmen des Verbands der Privaten Krankenversicherung, führt die Pflegebegutachtung durch. Sie sorgt bundesweit für einheitliche Standards.
+
+Die private Pflegepflichtversicherung ist für jeden privat Krankenversicherten obligatorisch. Befreiungen sind nicht möglich. Sie bildet mit der privaten Krankenversicherung eine Einheit und startet automatisch bei Versicherungsbeginn.
+
+Die Leistungen entsprechen denen der sozialen Pflegeversicherung und sind im SGB XI festgelegt. Der wichtigste Unterschied liegt im Abrechnungsverfahren: Während gesetzlich Versicherte Sachleistungen erhalten, funktioniert die private Pflegepflichtversicherung nach dem Kostenerstattungsprinzip.
+
+[SPIEL gewusst: Von 2016 bis 2024 verdoppelte sich die Zahl pflegebedürftiger Privatversicherter auf 379.000 Menschen. Die Kosten stiegen um 180 Prozent auf fast 2,8 Milliarden Euro.]
+
+## 3 Wer muss sich privat pflegeversichern?
+
+Zur privaten Pflegepflichtversicherung sind verpflichtet:
+
+- Selbstständige und Freiberufler – automatisch mit der PKV versichert
+
+- Beamte – parallel zur Beihilfeberechtigung
+
+- Angestellte – bei Jahresarbeitsentgelt über 77.400 Euro (2026)
+
+- Langjährig Versicherte – bei über 69.750 Euro Jahreseinkommen
+
+- Familienmitglieder – jede Person einzeln versicherungspflichtig
+
+Der Versicherungsschutz besteht unabhängig vom Alter, Geschlecht oder Gesundheitszustand. Niemand kann aufgrund erhöhter Pflegegefahr abgelehnt oder höher eingestuft werden. Die Versicherung beginnt vom ersten Tag an ohne Wartezeit.
+
+## 4 Wie funktioniert die Finanzierung?
+
+Die private Pflegepflichtversicherung nutzt das Anwartschaftsdeckungsverfahren. Das ist anders als die umlagefinanzierte Soziale Pflegeversicherung: Jeder Versicherte sorgt mit Alterungsrückstellungen selbst für künftige Pflegekosten vor. Nachfolgende Generationen werden nicht belastet.
+
+Der Beitrag berechnet sich nach versicherungsmathematischen Regeln. Ausschlaggebend sind:
+
+- Alter bei Vertragsabschluss
+
+- Geschlecht
+
+- Versicherungsdauer
+
+- Nicht das Einkommen
+
+Die Alterungsrückstellungen werden bei jeder Beitragsanpassung überprüft und an das aktuelle Zinsniveau angepasst. Dadurch ist das System langfristig stabiler als die gesetzliche Variante.
+
+[SPIEL karte: Anwartschaftsdeckungsverfahren]
+
+## 5 Leistungen der privaten Pflegepflichtversicherung
+
+Die Leistungen sind in fünf Pflegegrade eingeteilt. 2026 gelten folgende monatliche Beträge für Pflegegeld:
+
+| Pflegegrad | Pflegegeld | Pflegesachleistungen | Entlastungsbetrag
+
+| 1 | 0 € | 0 € | 131 €
+
+| 2 | 347 € | 796 € | 131 €
+
+| 3 | 599 € | 1.497 € | 131 €
+
+| 4 | 800 € | 1.859 € | 131 €
+
+| 5 | 990 € | 2.299 € | 131 €
+
+Zusätzlich erhalten alle Versicherten Pflegehilfsmittel bis 42 Euro monatlich. Wohnumfeldverbessernde Maßnahmen sind bis 4.180 Euro pro Maßnahme möglich und kumulierbar.
+
+Pflegebedürftige ab Pflegegrad 2 können bis zu 40 Prozent nicht ausgeschöpfter Pflegesachleistungen in Unterstützungsleistungen umwandeln.
+
+## 6 Wie läuft die Pflegebegutachtung ab?
+
+Medicproof beschäftigt über 1.400 Gutachter aus Pflegefachkräften und ärztlichem Personal. Die Begutachtung ist kostenfrei.
+
+Das Verfahren umfasst sechs Module:
+
+- Mobilität (10 % Gewichtung)
+
+- Kognitive und kommunikative Fähigkeiten (bis 15 %)
+
+- Verhaltensweisen und psychische Problemlagen (bis 15 %)
+
+- Selbstversorgung (40 % – höchste Gewichtung)
+
+- Umgang mit krankheitsbedingten Anforderungen (20 %)
+
+- Gestaltung des Alltagslebens (15 %)
+
+Der Gesamtpunktwert liegt zwischen 0 und 100 Punkten. Null bedeutet maximale Selbstständigkeit, 100 maximale Beeinträchtigung. Medicproof führt Begutachtungen vor Ort, per Telefon oder per Video durch.
+
+## 7 Beitragssteigerungen und Beitragsobergrenzen
+
+Zum 1. Januar 2026 steigt der Beitrag zur privaten Pflegepflichtversicherung durchschnittlich um 16 Prozent. Zwischen 2016 und 2024 stiegen die Ausgaben von etwa 1,0 Milliarde auf fast 2,8 Milliarden Euro.
+
+Ein wichtiger Schutzmechanismus sind gesetzliche Beitragsobergrenzen: Nach fünf Jahren Versicherung kann der Beitrag zur privaten Pflegepflichtversicherung nicht höher sein als der Höchstbeitrag der Sozialen Pflegeversicherung. Ab 2026 liegt dieser bei 209,26 Euro monatlich. Für Beihilfeberechtigte ergibt sich daraus ein Höchstbeitrag von 83,70 Euro pro Monat.
+
+[SPIEL mythos: Die Beitragssteigerungen in der privaten Pflegepflichtversicherung sind höher als in der sozialen Pflegeversicherung. → nein]
+
+## 8 Arbeitgeberzuschuss und Steuerbehandlung
+
+Angestellte erhalten einen Arbeitgeberzuschuss zur privaten Pflegepflichtversicherung von maximal 104,63 Euro (2026). Das entspricht 1,8 Prozent von 5.812,50 Euro. Kinderlose erhalten denselben Zuschuss, müssen aber den Kinderlosenzuschlag von 0,6 Prozent alleine zahlen.
+
+Die Beiträge zur Pflegepflichtversicherung sind zu 100 Prozent steuerlich absetzbar. Das bietet eine erhebliche steuerliche Entlastung zusätzlich zu allgemeinen Vorsorgeaufwendungen. Ab 2026 werden Beitragsdaten digital übermittelt, ohne dass Versicherte aktiv werden müssen.
+
+## 9 Die Pflegelücke: Warum eine Zusatzversicherung nötig ist
+
+Die private Pflegepflichtversicherung deckt nur einen Teil der tatsächlichen Pflegekosten ab. Pflegebedürftige zahlen im Durchschnitt etwa 3.245 Euro pro Monat aus eigener Tasche im ersten Aufenthaltsjahr. Diese Versorgungslücke ist erheblich.
+
+Private Pflegezusatzversicherungen schließen diese Lücke und schützen das Vermögen. Verfügbar sind Pflegetagegeld-, Pflegekostenversicherungen und Pflegerentenversicherungen. Bei der Auswahl sollten Sie auf Leistungsbereich, Beitragsstabilität und Anbieterqualität achten.
+
+Eine frühe Absicherung lohnt sich besonders: Die Beiträge hängen vom Eintrittsalter ab. Je älter Sie bei Abschluss sind, desto höher werden die Prämien.
+
+## 10 Fazit
+
+Die private Pflegepflichtversicherung bietet als gesetzlich vorgeschriebene Grundabsicherung solide Basisleistungen für privat Krankenversicherte. Das kapitalgedeckte System mit Alterungsrückstellungen garantiert Generationengerechtigkeit und langfristige Stabilität. Der durchschnittliche Beitrag liegt bei etwa 123 Euro monatlich – deutlich unter den Höchstbeitragsgrenzen von 209,26 Euro.
+
+Trotz identischer Leistungen zur sozialen Pflegeversicherung reicht die Absicherung nicht für die vollständigen Pflegekosten aus. Eine zusätzliche private Pflegezusatzversicherung ist daher finanzielle Notwendigkeit. Das System bietet jedoch durch seine versicherungsmathematische Kalkulation und strenge Regulierung eine nachhaltige Grundlage für die wachsenden Anforderungen des demografischen Wandels.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste private-pflege-pflichtversicherung]
+
+[BLOCK dokumente private-pflegepflichtversicherung,private-pflegezusatzversicherung,feststellung-pflegebeduerftigkeit,gdv-haftpflichtversicherung]
+
+
+## FAQ
+F: Wer muss eine private Pflege-Pflichtversicherung abschließen?
+A: Jeder privat Krankenversicherte in Deutschland schließt automatisch auch eine private Pflegepflichtversicherung mit ab. Eine Befreiung von dieser Pflicht ist nicht möglich, da sie den gesetzlich vorgeschriebenen Mindestschutz darstellt. Sie funktioniert nach dem Grundsatz Pflege folgt Kranken.
+F: Welche Leistungen bietet die private Pflegepflichtversicherung?
+A: Die Leistungen sind mit denen der sozialen Pflegeversicherung nach Art und Umfang gleichwertig und im Elften Sozialgesetzbuch festgelegt. Versicherte erhalten Pflegegeld und Kostenerstattung für Pflegesachleistungen nach Pflegegrad 1 bis 5. Zusätzlich werden Pflegehilfsmittel bis 42 Euro monatlich und ein Entlastungsbetrag von bis zu 131 Euro gewährt.
+F: Wie werden die Beiträge in der privaten Pflegepflichtversicherung berechnet?
+A: Die Beiträge richten sich nicht nach dem Einkommen, sondern nach versicherungsmathematischen Grundsätzen und dem Anwartschaftsdeckungsverfahren. Berücksichtigt werden Alter bei Vertragsabschluss, Geschlecht und Versicherungsdauer. Versicherte bilden Alterungsrückstellungen und sorgen selbst für ihre Pflegekosten vor.
+F: Wer führt die Pflegebegutachtung bei Privatversicherten durch?
+A: Bei privat Pflegepflichtversicherten übernimmt die Medicproof GmbH die Begutachtung. Sie entspricht dem Medizinischen Dienst der gesetzlichen Pflegeversicherung. Die Einstufung in die Pflegegrade erfolgt nach denselben Kriterien wie im gesetzlichen System.
+
+
+==================== BEITRAG unfallversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Schutz bei Unfällen: Leistungen, Tarife &amp; Versicherungslücken
+  heading-1: Unfallversicherung 2026: Leistungen, Tarife und Schutz
+  heading-2: Was ist eine Unfallversicherung?
+  heading-3: Welche Unfälle sind versichert?
+  heading-4: Leistungen der Unfallversicherung im Detail
+  heading-5: Versicherungssumme und Gliedertaxe richtig wählen
+  heading-6: Progression: Warum sie wichtig ist und wie sie funktioniert
+  heading-7: Unfallversicherung vs. Berufsunfähigkeitsversicherung – Unterschiede und Abgrenzung
+  heading-8: Kosten und Beitragsfaktoren
+  heading-9: Top-Versicherer und Testsieger 2026 im Überblick
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Unfallversicherung (unfallversicherung)
+## 0 Schutz bei Unfällen: Leistungen, Tarife & Versicherungslücken
+
+Die private Unfallversicherung zahlt bei bleibenden Schäden rund um die Uhr. Welche Leistungen sinnvoll sind und worauf Sie 2026 beim Tarif achten sollten.
+
+## 1 Unfallversicherung 2026: Leistungen, Tarife und Schutz
+
+Eine Unfallversicherung stellt einen wichtigen Schutz bei bleibenden körperlichen Schäden nach einem Unfall dar. In Deutschland passieren täglich tausende Unfälle, wobei etwa 80 Prozent aller Unfälle in der Freizeit auftreten – beim Sport, bei der Hausarbeit oder unterwegs.
+
+Während die gesetzliche Unfallversicherung nur Arbeits- und Wegeunfälle abdeckt, schützt eine private Unfallversicherung rund um die Uhr und weltweit. Sie zahlt eine Kapitalleistung, wenn Sie nach einem Unfall dauerhafte gesundheitliche Beeinträchtigungen zurückbehalten.
+
+## 2 Was ist eine Unfallversicherung?
+
+Eine Unfallversicherung zahlt bei dauerhaften körperlichen Beeinträchtigungen nach einem Unfall eine vereinbarte Geldsumme aus. Ein Unfall liegt vor, wenn die versicherte Person durch ein plötzlich von außen auf ihren Körper wirkendes Ereignis unfreiwillig eine Gesundheitsschädigung erleidet (§ 178 Abs. 2 S. 1 VVG).
+
+Die private Unfallversicherung unterscheidet sich grundlegend von der gesetzlichen Variante. Die gesetzliche Unfallversicherung deckt Arbeits- und Wegeunfälle sowie Berufskrankheiten ab und wird vom Arbeitgeber finanziert. Die private Versicherung hingegen gilt weltweit und rund um die Uhr – auch in Freizeit, Haushalt und Sport – und zahlt eine einmalige Kapitalleistung.
+
+[SPIEL schaetzen: Wie viele Millionen Unfallversicherungspolicen sind in Deutschland im Umlauf? → 28]
+
+## 3 Welche Unfälle sind versichert?
+
+Die private Unfallversicherung zahlt bei allen Unfällen, unabhängig von Ort und Zeit des Geschehens. Sie sind weltweit zu jeder Tages- und Nachtzeit abgesichert. Versichert sind Unfälle im Haushalt, beim Sport, in der Freizeit oder auch bei der Arbeit.
+
+Die wichtigsten Merkmale eines versicherten Unfalls:
+
+- Plötzliches Ereignis von außen
+
+- Unfreiwillige Gesundheitsschädigung
+
+- Zeitlich und räumlich unbegrenzt gültig
+
+- Inklusive Eigenbewegungen bei besseren Tarifen
+
+Ausgeschlossen sind hingegen Krankheiten, Herzinfarkte oder altersbedingte Beschwerden. Die Versicherung zahlt nur dann, wenn Sie der Unfall dauerhaft schädigt. Dies bedeutet, dass die Beeinträchtigung voraussichtlich mindestens drei Jahre anhalten muss.
+
+## 4 Leistungen der Unfallversicherung im Detail
+
+Die wichtigste Leistung ist die Invaliditätsleistung. Diese wird als Einmalzahlung ausgeschüttet, wenn ein Unfall zu einer dauerhaften körperlichen oder geistigen Beeinträchtigung führt. Die Einmalzahlung, die sogenannte Invaliditätssumme, die nach einem schweren Unfall gezahlt wird, kann eine große Hilfe sein, wenn zum Beispiel ein Haus umgebaut oder ein behindertengerechtes Auto angeschafft werden muss.
+
+Weitere wichtige Leistungen sind:
+
+- Such-, Bergungs- und Rettungskosten bis zu mindestens 10.000 Euro
+
+- Todesfallleistung bei unfallbedingtem Versterben
+
+- Kosmetische Operationen nach Unfällen
+
+- Optional: Krankenhaustagegeld und Genesungsgeld
+
+- Sofortleistung bei schweren Verletzungen
+
+[SPIEL mythos: Die Unfallversicherung zahlt auch bei vorübergehenden Verletzungen wie einem einfachen Knochenbruch → nein]
+
+## 5 Versicherungssumme und Gliedertaxe richtig wählen
+
+Die Höhe der Versicherungsleistung hängt von drei Faktoren ab: der vereinbarten Grundsumme, der Gliedertaxe und einer eventuell vereinbarten Progression.
+
+Guten Schutz für Erwachsene gibt es für etwa 100 Euro im Jahr. Unfallversicherungen für Kinder mit sehr gutem Schutz gibt es ab 127 Euro jährlich. Experten empfehlen eine Grundsumme von mindestens 100.000 Euro, besser noch das Drei- bis Fünffache des Bruttojahreseinkommens.
+
+Die Gliedertaxe legt fest, welcher Prozentsatz der Versicherungssumme bei Verlust oder Beeinträchtigung bestimmter Körperteile gezahlt wird. Verliert man eine Hand, rät der GDV zu 55 Prozent Invalidität. Ein starker Tarif leistet aber im Schnitt 72 Prozent (Stand: Januar 2026).
+
+| Körperteil | GDV-Mindest­werte | Gute Tarife (Durchschnitt)
+
+| Arm | 65% | 70%
+
+| Hand | 55% | 72%
+
+| Daumen | 20% | 25%
+
+| Bein | 60% | 70%
+
+| Fuß | 35% | 40%
+
+| Auge | 50% | 60%
+
+## 6 Progression: Warum sie wichtig ist und wie sie funktioniert
+
+Eine Progression sorgt dafür, dass die Auszahlung bei schweren Verletzungen überproportional steigt. Bei der privaten Unfallversicherung kann die Progression zwischen 225%, 300%, 350% und 500% gewählt werden.
+
+Die Progression wirkt sich erst ab einer bestimmten Invaliditätsgrenze aus, meist ab 25 Prozent. So werden aus einer Versicherungssumme von 150.000 Euro bei einer Progression von 500 Prozent bis zu 750.000 Euro.
+
+Beispielrechnung bei 100.000 Euro Grundsumme und 50% Invalidität:
+
+- Ohne Progression: 50.000 Euro
+
+- Mit 350% Progression: etwa 120.000 Euro
+
+- Mit 500% Progression: etwa 200.000 Euro
+
+[SPIEL quiz: Ab welchem Alter ist bei den meisten Versicherern keine Progression mehr wählbar?]
+
+## 7 Unfallversicherung vs. Berufsunfähigkeitsversicherung – Unterschiede und Abgrenzung
+
+Die Berufsunfähigkeitsversicherung (BU) bietet den besseren Schutz, da sie auch bei Krankheiten leistet. Laut Statistiken sind nur 1% aller Schwerbehinderungen aus den Folgen eines Unfalls zurückzuführen. Hingegen sind 89% aus den Folgen einer Krankheit schwerstbehindert.
+
+Experten empfehlen zunächst zu prüfen, ob man eine Berufsunfähigkeitsversicherung (BU) bekommt. Sie ist für jeden Arbeitnehmer sinnvoll und lohnt sich, weil die BU besser schützt als eine Unfallversicherung.
+
+Die Unfallversicherung ist dennoch sinnvoll für:
+
+- Personen, die keine BU erhalten (z.B. bei Vorerkrankungen)
+
+- Selbstständige, Hausfrauen/-männer, Rentner, Kinder und Hobbysportler – also alle ohne gesetzlichen Schutz oder mit erhöhtem Freizeit-Unfallrisiko
+
+- Als Ergänzung zur BU bei hohem Unfallrisiko
+
+## 8 Kosten und Beitragsfaktoren
+
+Die Beitragsberechnung erfolgt individuell und hängt von mehreren Faktoren ab:
+
+Wichtige Beitragsfaktoren:
+
+- Alter der versicherten Person
+
+- Beruf und Gefahrengruppe
+
+- Gewählte Versicherungssumme
+
+- Progression und Zusatzleistungen
+
+- Zahlweise (jährliche Zahlung ist günstiger)
+
+Bei CosmosDirekt zahlt ein 30-jähriger Bürokaufmann bei einer Laufzeit von 1 Jahr mit einer Progression von 225% und einer Grundsumme von 100.000 Euro für den umfassenden Basis-Schutz 4,19 Euro monatlich. Der Zuschlag für eine monatliche Zahlung kann bis zu 10% betragen.
+
+Günstige Tarife gibt es bereits ab 3,40 Euro monatlich, während umfassendere Tarife entsprechend mehr kosten.
+
+## 9 Top-Versicherer und Testsieger 2026 im Überblick
+
+Von 120 Tarifen im Test der Stiftung Warentest zu privaten Unfallversicherungen schnitten acht mit der Bestnote Sehr gut ab. Verbraucher finden sowohl Top-Versicherungsleistungen zu einem meist hohen Preis wie auch soliden Schutz zu weitaus günstigeren Jahresbeiträgen.
+
+Aktuelle Testsieger 2026:
+
+- Die Haftpflichtkasse mit dem Tarif „Einfach komplett – Gliedertaxe komfort" kann durch günstige Beiträge und extrem gute Leistungen überzeugen
+
+- Besonders stechen die Tarife der Allianz, Ergo oder Generali hervor, die in mehreren Testberichten besonders gute Noten erhalten
+
+- Die Allianz wird mit ihren Tarifen UnfallSchutz und UnfallSchutz Plus mit der Bestnote „hervorragend" bewertet. Der Tarif UnfallSchutz Basis erhält die Note „sehr gut"
+
+Weitere empfohlene Anbieter:
+
+- Deutsche Familienversicherung (Note 1,8 bei Stiftung Warentest)
+
+- Stuttgarter, Ideal und Alte Leipziger
+
+- InterRisk, Janitos und R+V
+
+Bei der Auswahl sollten Sie nicht nur auf den Preis achten. Im Ernstfall zahlen eine Vielzahl der Versicherungen allerdings entweder zu wenig oder gar nicht. Je nach Invaliditätsgrad erbringen die Unfallversicherungen bestimmte Leistungen. Bei einer Vollinvalidität sollte diese Leistung mindestens eine halbe Million Euro betragen.
+
+## 10 Fazit
+
+Die private Unfallversicherung bleibt auch 2026 ein wichtiger Baustein der persönlichen Absicherung. Sie schließt die Lücke der gesetzlichen Unfallversicherung und bietet weltweiten Schutz rund um die Uhr. Besonders sinnvoll ist sie für Selbstständige, Rentner, Kinder und alle Personen ohne private Haftpflichtversicherung.
+
+Die Kosten sind moderat – guter Schutz ist bereits ab etwa 100 Euro jährlich erhältlich. Bei der Tarifwahl sollten Sie auf eine ausreichende Grundsumme, eine verbesserte Gliedertaxe und eine Progression ab 225 Prozent achten. Verzichten Sie auf unnötige Extras wie Beitragsrückgewähr, die den Schutz verteuern ohne echten Mehrwert zu bieten.
+
+Die Stiftung Warentest bewertet 2026 acht von 120 getesteten Tarifen mit „sehr gut". Ein Vergleich lohnt sich, da die Leistungsunterschiede zwischen den Anbietern erheblich sind. Wählen Sie einen Testsieger-Tarif mit starker Gliedertaxe und angemessener Progression, um im Ernstfall optimal abgesichert zu sein.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste unfallversicherung]
+
+[BLOCK vergleich unfallversicherung-vergleich]
+
+[BLOCK vergleich unfallversicherung-leistungen]
+
+[BLOCK dokumente gdv-unfallversicherung]
+
+
+## FAQ
+F: Was ist der Unterschied zwischen gesetzlicher und privater Unfallversicherung?
+A: Die gesetzliche Unfallversicherung wird vom Arbeitgeber finanziert und deckt nur Arbeits- und Wegeunfälle ab. Die private Unfallversicherung schützt Sie dagegen weltweit und rund um die Uhr, auch in der Freizeit. Da 80 Prozent aller Unfälle in der Freizeit passieren, schließt die private Versicherung eine wichtige Schutzlücke.
+F: Für wen lohnt sich eine private Unfallversicherung?
+A: Eine private Unfallversicherung lohnt sich besonders für Personen ohne gesetzlichen Schutz wie Selbstständige, Hausmänner und -frauen sowie Rentner. Auch für Menschen mit Vorerkrankungen, die keine Berufsunfähigkeitsversicherung abschließen können, ist sie sinnvoll. Experten empfehlen jedoch grundsätzlich die Berufsunfähigkeitsversicherung zu bevorzugen.
+F: Was ist die Invaliditätsleistung bei einer Unfallversicherung?
+A: Die Invaliditätsleistung ist die Kernleistung einer privaten Unfallversicherung und wird nur bei dauerhafter körperlicher Schädigung ausgezahlt. Die Höhe der Auszahlung richtet sich nach der sogenannten Gliedertaxe, die den Invaliditätsgrad einzelner Körperteile prozentual festlegt. Die Regelungen unterscheiden sich je nach Versicherer erheblich.
+F: Was kostet eine private Unfallversicherung?
+A: Die Beiträge für eine private Unfallversicherung liegen für Kinder meist zwischen 50 und 100 Euro pro Jahr. Für Erwachsene hängen die Kosten von Alter, Beruf und gewünschter Versicherungssumme ab. Wichtig ist die Wahl einer ausreichenden Invaliditätssumme und einer progressiven Gliedertaxe für schwere Unfallfolgen.
+
+
+==================== BEITRAG gesetzliche-unfallversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Schutz bei Berufsunfällen: Leistungen und Versicherungsschutz erklärt
+  heading-1: Gesetzliche Unfallversicherung: Schutz bei Arbeitsunfällen und Berufskrankheiten
+  heading-2: Wer ist in der gesetzlichen Unfallversicherung versichert?
+  heading-3: Was sind die verschiedenen Arten von Versicherungsfällen?
+  heading-4: Welche Leistungen bietet die gesetzliche Unfallversicherung?
+  heading-5: Wie funktioniert die Finanzierung und welche Beiträge gelten 2026?
+  heading-6: Wie melden Sie einen Arbeitsunfall richtig?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Gesetzliche Unfallversicherung (gesetzliche-unfallversicherung)
+## 0 Schutz bei Berufsunfällen: Leistungen und Versicherungsschutz erklärt
+
+Die gesetzliche Unfallversicherung schützt Beschäftigte bei Arbeits- und Wegeunfällen sowie Berufskrankheiten. Welche Leistungen sie 2026 bietet und wer versichert ist.
+
+## 1 Gesetzliche Unfallversicherung: Schutz bei Arbeitsunfällen und Berufskrankheiten
+
+Die gesetzliche Unfallversicherung schützt alle Beschäftigten automatisch bei berufsbedingten Unfällen und Erkrankungen.
+
+Die gesetzliche Unfallversicherung bildet einen wichtigen Pfeiler der sozialen Sicherung in Deutschland. Sie gewährleistet umfassenden Schutz für Millionen von Arbeitnehmern, ohne dass Sie als Beschäftigte eigene Beiträge zahlen müssen. Das System funktioniert nach dem bewährten Solidaritätsprinzip und wird vollständig vom Arbeitgeber finanziert.
+
+Im Jahr 2024 ereigneten sich 754.660 meldepflichtige Arbeitsunfälle, was einen Rückgang von 3,7 Prozent gegenüber dem Vorjahr bedeutet. Das Arbeitsunfallrisiko je 1.000 Vollzeitäquivalente sank auf 17,27 (DGUV 2024). Diese positive Entwicklung zeigt die Wirksamkeit der präventiven Maßnahmen und modernen Arbeitsschutzstandards.
+
+## 2 Wer ist in der gesetzlichen Unfallversicherung versichert?
+
+Kraft Gesetzes sind alle Beschäftigten versichert unabhängig von der Höhe ihres Arbeitsentgelts, das heißt auch Auszubildende. Der Versicherungsschutz erstreckt sich automatisch auf verschiedene Personengruppen.
+
+Zur Pflichtversicherung gehören:
+
+- Alle Arbeitnehmer in einem Arbeits-, Ausbildungs- oder Dienstverhältnis
+
+- Kinder in Kindertageseinrichtungen und Tagespflege
+
+- Schüler, Studierende und Personen in beruflicher Aus- und Fortbildung
+
+- Landwirte, mitarbeitende Familienangehörige und landwirtschaftliche Arbeitnehmer
+
+- Bestimmte ehrenamtlich tätige Personen wie Mitglieder der Freiwilligen Feuerwehr
+
+- Helfer in Hilfsorganisationen, Blutspender, Zeugen und Schöffen
+
+[SPIEL schaetzen: Wie viele Arbeitsunfälle ereigneten sich 2024 in Deutschland? → 754660]
+
+Nicht automatisch versichert sind Beamte, selbstständige Ärzte, Zahnärzte, Tierärzte und Apotheker. Allerdings können Freiberufler und Selbstständige sich freiwillig bei der zuständigen Berufsgenossenschaft versichern. Dasselbe gilt für Ehepartner, die im Unternehmen mitarbeiten.
+
+## 3 Was sind die verschiedenen Arten von Versicherungsfällen?
+
+Die gesetzliche Unfallversicherung deckt drei Hauptarten von Versicherungsfällen ab: Arbeitsunfälle, Wegeunfälle und Berufskrankheiten.
+
+Arbeitsunfälle sind Unfälle während der versicherten Tätigkeit. Dazu zählen nicht nur Unfälle am Arbeitsplatz selbst, sondern auch bei Dienstreisen, Betriebsfeiern oder betrieblichem Sport. Arbeitsunfälle sind gesetzlich definiert als "Unfälle von Versicherten infolge einer den Versicherungsschutz begründenden Tätigkeit". Unfälle sind zeitlich begrenzte, von außen auf den Körper einwirkende Ereignisse, die zu einem Gesundheitsschaden oder zum Tod führen (§ 8 SGB VII).
+
+Wegeunfälle ereignen sich auf dem direkten Weg zur Arbeit oder zurück nach Hause. Seit 2021 gilt: Wenn Sie im Homeoffice arbeiten, genießen Sie denselben Versicherungsschutz wie im Büro – allerdings nur für dienstliche Aktivitäten.
+
+Berufskrankheiten sind Erkrankungen, die durch bestimmte berufliche Tätigkeiten verursacht werden und in der Berufskrankheiten-Liste aufgeführt sind.
+
+[SPIEL karte: Durchgangsarzt (D-Arzt)]
+
+Nicht versichert sind private Tätigkeiten während der Arbeitszeit, Unfälle in der Freizeit und größere Umwege vom direkten Arbeitsweg.
+
+## 4 Welche Leistungen bietet die gesetzliche Unfallversicherung?
+
+Das Leistungsspektrum der gesetzlichen Unfallversicherung ist umfassend und geht weit über eine einfache Kostenerstattung hinaus. Die Unfallversicherung folgt dem Grundsatz "Rehabilitation vor Rente".
+
+Heilbehandlung und Rehabilitation: Die Unfallversicherung übernimmt alle Kosten für ärztliche Behandlung, Arzneimittel, Verbandsmaterial, Heilmittel, Krankenhausaufenthalte, Rehabilitationskurse, Physiotherapie und psychologische Betreuung. Dabei gilt das Prinzip der optimalen Versorgung ohne Kostenbegrenzung.
+
+Verletztengeld: Das Verletztengeld beträgt 80 Prozent des entgangenen Bruttoentgelts, maximal jedoch die Höhe des Nettolohns. Es wird längstens für 78 Wochen gezahlt. In den ersten sechs Wochen zahlt der Arbeitgeber weiter, ab der siebten Woche übernimmt die Unfallversicherung.
+
+Pflegeleistungen: Bei Pflegebedürftigkeit infolge eines Unfalls oder einer Berufskrankheit zahlt die Unfallversicherung Pflegegeld. Das Pflegegeld beträgt 2026 maximal 1.838 Euro monatlich, mindestens 462 Euro und wird je nach Art und Schwere der Beeinträchtigung festgesetzt.
+
+| Leistungsart | Höhe | Dauer
+
+| Verletztengeld | 80% des Bruttolohns | max. 78 Wochen
+
+| Pflegegeld | 462-1.838 € monatlich | unbegrenzt
+
+| Versichertenrente | bis 2/3 des Jahresarbeitsverdienstes | unbegrenzt
+
+Versichertenrente: Bei dauerhafter Erwerbsminderung zahlt die Unfallversicherung eine Rente. Die Versichertenrente beträgt zwei Drittel des Jahresarbeitsverdienstes, wenn Versicherte ihre Erwerbsfähigkeit vollständig verloren haben. Der Mindest-Jahresarbeitsverdienst beträgt für volljährige Versicherte 60 Prozent der Bezugsgröße (2026: 28.476 Euro). Diese Leistung ähnelt der staatlichen Erwerbsminderungsrente, ist aber speziell auf Arbeitsunfälle ausgerichtet.
+
+[SPIEL gewusst: Die gesetzliche Unfallversicherung zahlt 2026 ein Sterbegeld von 6.780 Euro an die Hinterbliebenen, wenn ein Versicherter infolge eines Arbeitsunfalls oder einer Berufskrankheit stirbt.]
+
+Hinterbliebenenversorgung: Stirbt ein Versicherter durch einen Arbeitsunfall oder eine Berufskrankheit, wird an die Hinterbliebenen ein pauschales Sterbegeld von 6.780 Euro gezahlt (Stand 2026). Zusätzlich erhalten Witwen, Witwer, Kinder und andere Angehörige Hinterbliebenenrenten.
+
+## 5 Wie funktioniert die Finanzierung und welche Beiträge gelten 2026?
+
+Die Beiträge werden allein von den Arbeitgebern getragen. Als Arbeitnehmer zahlen Sie keinen Cent zur gesetzlichen Unfallversicherung. Dieses Finanzierungsmodell unterscheidet sich grundlegend von anderen Sozialversicherungszweigen.
+
+Der Mindestbeitrag für 2026 wird auf 277,55 Euro festgesetzt. Die Beitragssätze variieren je nach Träger, Branche und Unfallgefahr. Der Beitragssatz 2026 zur gesetzlichen Unfallversicherung bleibt entsprechend dem Beitragsjahr 2025 für die meisten Beitragsgruppen konstant.
+
+Die Beitragshöhe richtet sich nach zwei Faktoren:
+
+- Dem Gesamtentgelt der Versicherten im Unternehmen
+
+- Dem Grad der Unfallgefahr in der jeweiligen Branche
+
+Die Mittel werden einmal jährlich im nachträglichen Umlageverfahren aufgebracht. Die Höhe bestimmt sich nach den Entgelten der Versicherten und nach dem Grad der Unfallgefahr. Die Unfallversicherungsträger erstellen Gefahrtarife, in denen Tätigkeiten nach ihrem Gefährdungsrisiko gruppiert werden.
+
+[SPIEL mythos: Private Unfallversicherung ist überflüssig, da die gesetzliche Unfallversicherung alle Unfälle abdeckt → nein]
+
+## 6 Wie melden Sie einen Arbeitsunfall richtig?
+
+Bei einem Arbeitsunfall ist schnelles und korrektes Handeln entscheidend. Die Vorstellung bei einem Durchgangsarzt ist erforderlich, wenn die Unfallverletzung über den Unfalltag hinaus zur Arbeitsunfähigkeit führt oder die notwendige ärztliche Behandlung voraussichtlich über eine Woche andauert.
+
+Sofortmaßnahmen nach einem Arbeitsunfall:
+
+1. Durchgangsarzt aufsuchen: Sobald Sie aufgrund eines Arbeitsunfalls über den Unfalltag hinaus arbeitsunfähig sind oder die Verletzung voraussichtlich einer Behandlung von mindestens einer Woche bedarf, müssen Sie sich beim Durchgangsarzt vorstellen.
+
+2. Arbeitgeber informieren: Benachrichtigen Sie umgehend Ihren Arbeitgeber über den Unfall. Dieser muss bei schweren Unfällen eine Sofortmeldung durchführen.
+
+3. Dokumentation: Jeder Unfall sollte immer im Verbandbuch dokumentiert werden. Die Dokumentation ist Beweisgrundlage, falls später Ansprüche geltend gemacht werden sollen. Ohne entsprechende Dokumentation kann es zu Problemen bei der Anerkennung kommen.
+
+Meldepflichten des Arbeitgebers: Das Unternehmen muss einen Arbeitsunfall, der zu einer Arbeitsunfähigkeit von mehr als drei Kalendertagen führt, der zuständigen Berufsgenossenschaft oder Unfallkasse melden und die gesetzlich vorgeschriebene Unfallanzeige erstatten. Bei voraussichtlicher Arbeitsunfähigkeit von mehr als drei Tagen muss die Meldung binnen drei Kalendertagen erfolgen. Bei schweren Verletzungen oder Todesfällen ist eine umgehende Meldung erforderlich.
+
+Was tun bei Notfällen: Sollte sich unmittelbar nach dem Unfall kein Durchgangsarzt in der Nähe befinden, kann selbstverständlich jeder Arzt oder jedes Krankenhaus für die Erstversorgung aufgesucht werden. Es ist aber wichtig, im Anschluss so schnell wie möglich einen Durchgangsarzt zu konsultieren.
+
+## 7 Fazit
+
+Die gesetzliche Unfallversicherung bietet Ihnen als Beschäftigte umfassenden Schutz bei berufsbedingten Unfällen und Erkrankungen ohne eigene Beiträge. Sie profitieren von vollständiger medizinischer Versorgung, Verletztengeld von 80 Prozent des Bruttolohns sowie weiteren Leistungen wie Pflegegeld zwischen 462 und 1.838 Euro monatlich (Stand 2026) und Versichertenrenten. Die ausschließlich arbeitgeberfinanzierte Versicherung bleibt 2026 bei stabilen Beitragssätzen, wobei der Mindestbeitrag bei 277,55 Euro liegt. Wichtig ist das korrekte Vorgehen im Schadensfall: Bei Arbeitsunfällen mit Arbeitsunfähigkeit über den Unfalltag hinaus oder erwarteter Behandlungsdauer über eine Woche müssen Sie einen Durchgangsarzt aufsuchen und Ihren Arbeitgeber informieren. Beachten Sie jedoch die Grenzen: Freizeitunfälle sind ausgeschlossen, was eine private Unfallversicherung als sinnvolle Ergänzung erscheinen lässt. Das bewährte System schützt Sie optimal ab – vorausgesetzt, Sie kennen Ihre Rechte und die korrekten Meldewege.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste gesetzliche-unfallversicherung]
+
+[BLOCK vergleich unfallversicherung-vergleich]
+
+[BLOCK vergleich unfallversicherung-leistungen]
+
+[BLOCK dokumente gdv-unfallversicherung]
+
+
+## FAQ
+F: Wer ist in der gesetzlichen Unfallversicherung versichert?
+A: Kraft Gesetzes sind alle Beschäftigten in einem Arbeits-, Ausbildungs- oder Dienstverhältnis automatisch versichert. Ebenfalls geschützt sind Schüler, Studierende, Kinder in Kindertageseinrichtungen, ehrenamtlich Tätige wie Feuerwehrleute sowie Landwirte und mitarbeitende Familienangehörige.
+F: Muss ich als Arbeitnehmer Beiträge zahlen?
+A: Nein, Arbeitnehmer zahlen keine Beiträge zur gesetzlichen Unfallversicherung. Die Kosten trägt ausschließlich der Arbeitgeber. Der Mindestbeitrag für 2026 liegt bei 277,55 Euro, die Beitragshöhe variiert je nach Branche und Unfallgefahr.
+F: Welche Leistungen deckt die gesetzliche Unfallversicherung ab?
+A: Die gesetzliche Unfallversicherung übernimmt nach einem Arbeits- oder Wegeunfall die Kosten für ärztliche Behandlung, Arzneimittel, Rehabilitation und berufliche Wiedereingliederung. Bei dauerhafter Erwerbsminderung zahlt sie eine Unfallrente, auch Berufskrankheiten sind abgedeckt.
+F: Können sich Selbstständige freiwillig versichern?
+A: Ja, Freiberufler und Selbstständige können sich freiwillig bei der zuständigen Berufsgenossenschaft versichern. Das Gleiche gilt für Ehepartner, die im Unternehmen mitarbeiten. Automatisch pflichtversichert sind hingegen nur Landwirte und bestimmte Berufsgruppen.
+
+
+==================== BEITRAG risikolebensversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Risikolebensversicherung: Schutz für Hinterbliebene ab 2,16€
+  heading-1: Risikolebensversicherung 2026: Schutz, Kosten und Tarife
+  heading-2: Was ist eine Risikolebensversicherung?
+  heading-3: Für wen ist eine Risikolebensversicherung sinnvoll?
+  heading-4: Wie hoch sollte die Versicherungssumme sein?
+  heading-5: Welche Kosten entstehen 2026?
+  heading-6: Gesundheitsprüfung und Antragsablauf
+  heading-7: Aktuelle Testsieger 2026
+  heading-8: Besondere Leistungen und Varianten
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Risikolebensversicherung (risikolebensversicherung)
+## 0 Risikolebensversicherung: Schutz für Hinterbliebene ab 2,16€
+
+Die Risikolebensversicherung sichert Hinterbliebene im Todesfall ab – schon ab wenigen Euro im Monat. Welche Summe sinnvoll ist und worauf Sie 2026 achten.
+
+## 1 Risikolebensversicherung 2026: Schutz, Kosten und Tarife
+
+Eine Risikolebensversicherung schützt Hinterbliebene vor finanziellen Problemen im Todesfall des Versicherten.
+
+2026 profitieren Verbraucher bei der Risikolebensversicherung von attraktiven Beiträgen und verbesserten Leistungen. Bereits ab 2,16 Euro monatlich ist Schutz möglich (Allianz, Stand 2026), während junge Familien schon ab 8,26 Euro im Monat umfassend abgesichert sind. Diese günstigen Beiträge machen die Risikolebensversicherung zu einer der wichtigsten und gleichzeitig preiswertesten Absicherungen für Menschen mit Verantwortung.
+
+## 2 Was ist eine Risikolebensversicherung?
+
+Die Risikolebensversicherung ist eine finanzielle Absicherung der Hinterbliebenen im eigenen Todesfall. Sie zahlt nur bei Tod der versicherten Person eine vorab vereinbarte Summe aus und enthält keine Sparkomponente. Tritt das versicherte Risiko (der Todesfall) nicht ein, behält die Versicherung die Beiträge ein.
+
+Im Gegensatz zur Lebensversicherung handelt es sich um eine reine Risikoabsicherung. Das macht sie deutlich günstiger als kapitalbildende Alternativen. Versicherungssummen im sechsstelligen Bereich sind bereits möglich, wenn die Beiträge bei oder unter 100 Euro jährlich liegen.
+
+Die Funktionsweise ist denkbar einfach: Sie zahlen monatliche oder jährliche Beiträge für eine festgelegte Laufzeit. Verstirbt die Person während der Vertragslaufzeit, erhalten die Bezugsberechtigten die Versicherungssumme ausgezahlt. Läuft der Vertrag ab, ohne dass der Todesfall eingetreten ist, endet der Schutz ohne Auszahlung.
+
+[SPIEL schaetzen: Wie viele Euro kosten 100.000 Euro Versicherungsschutz bei einem 25-jährigen Nichtraucher pro Monat? → 2.16]
+
+## 3 Für wen ist eine Risikolebensversicherung sinnvoll?
+
+Eine Risikolebensversicherung ist besonders wichtig für Menschen, die finanzielle Verantwortung für andere tragen. Grundsätzlich ist die Risikolebensversicherung besonders für Familien attraktiv. Wir sind uns sicher, dass Ihnen viel daran liegt, dass Ihre Familie im Fall der Fälle finanziell abgesichert ist.
+
+Konkret profitieren folgende Personengruppen:
+
+- Familien mit Kindern: Besonders wenn ein Partner Hauptverdiener ist
+
+- Unverheiratete Paare: Sie erhalten keine gesetzliche Witwenrente
+
+- Immobilienbesitzer: Zur Absicherung laufender Darlehen
+
+- Selbstständige: Ohne gesetzliche Hinterbliebenenversorgung
+
+- Geschäftspartner: Bei gegenseitiger Abhängigkeit im Unternehmen
+
+Die Risikolebensversicherung dient dazu Familien (auch alleinerziehend oder kinderlos), Partner und/oder Geschäftspartner, Hausbauer oder Immobilienkäufer im Todesfall finanziell abzusichern.
+
+Alleinstehende ohne finanzielle Verpflichtungen gegenüber anderen benötigen dagegen meist keine Risikolebensversicherung. Hier ist höchstens eine kleinere Sterbegeldversicherung für die Bestattungskosten sinnvoll.
+
+## 4 Wie hoch sollte die Versicherungssumme sein?
+
+Nach Stiftung Warentest ist Richtwert für die Bestimmung der Versicherungssumme ungefähr das Drei- bis Fünffache des Bruttojahresgehalts. Die exakte Berechnung hängt von der individuellen Familiensituation ab.
+
+Faustregel für die Versicherungssumme:
+
+| Familiensituation | Empfohlene Versicherungssumme
+
+| Kinderlose Paare ohne Kredite | 3-faches Bruttojahreseinkommen
+
+| Familien mit kleinen Kindern | 5-faches Bruttojahreseinkommen
+
+| Alleinerziehende | 5-faches Bruttojahreseinkommen
+
+| Familie mit größeren Kindern | 3-faches Bruttojahreseinkommen
+
+Die Versicherungssumme sollte so gewählt sein, dass im Todesfall des Hauptverdieners die Hinterbliebenen mindestens bis zu ihrer finanziellen Unabhängigkeit versorgt sind. Versicherungsnehmer ohne Kinder sollten mindestens das Dreifache, bei Kindern mindestens das Fünffache ihres Brutto-Jahreseinkommens als Versicherungssumme festlegen.
+
+Zusätzlich zum Einkommen müssen bestehende Schulden berücksichtigt werden. Laufenden Kredite oder andere Schulden solltest Du zusätzlich addieren. Eventuell fällige Restschulden aus Immobiliendarlehen oder anderen Krediten sollten zusätzlich in der Versicherungssumme berücksichtigt werden.
+
+[SPIEL karte: Nachversicherungsgarantie]
+
+## 5 Welche Kosten entstehen 2026?
+
+Die Beitragssituation hat sich 2026 für Verbraucher verbessert. Allerdings hat CosmosDirekt seit über 30 Jahren keine Beiträge für laufende Verträge angepasst. Verschiedene Versicherer haben ihre Tarife neu kalkuliert und bieten attraktive Konditionen.
+
+Aktuelle Beitragsbeispiele (Stand 2026):
+
+- Bei der Allianz beginnen die Beiträge pro Monat bereits bei 2,16 Euro, können aber bei sehr hoher Auszahlungssumme, langer Laufzeit, Gesundheitsrisiken und weiteren Faktoren deutlich mehr betragen
+
+- Als Single ohne Kind zahlt eine beispielhaft versicherte Person 10,07 Euro im Monat, als verheiratete/verpartnerte Person mit Kind beträgt der Beitrag nur 8,26 Euro im Monat
+
+- Die günstigsten Tarife gibt es für einen 30-jährigen Büroangestellten bereits ab rund 3 Euro, für eine 37-jährige Ärztin ab rund 20 Euro und für einen 30-jährigen Arbeiter ab zirka 4 Euro monatlich
+
+Die Beitragsberechnung berücksichtigt verschiedene Faktoren:
+
+- Alter: Je jünger, desto günstiger
+
+- Gesundheitszustand: Vorerkrankungen führen zu Zuschlägen
+
+- Raucherstatus: Raucherstatus (Raucher zahlen deutlich höhere Beiträge als Nichtraucher)
+
+- Beruf: Risikoreiche Tätigkeiten verteuern den Schutz
+
+- Hobbys: Extremsport kann teurer werden
+
+- Versicherungssumme und Laufzeit
+
+[SPIEL mythos: Risikolebensversicherungen sind für Raucher unbezahlbar teuer → nein]
+
+## 6 Gesundheitsprüfung und Antragsablauf
+
+Eine Risikolebensversicherung ohne Gesundheitsprüfung gibt es nicht – und das hat gute Gründe: Gesundheitsfragen und eine Risikoprüfung sind nötig, um das Risiko für jede:n Einzelne:n individuell zu ermitteln und faire Beiträge zu kalkulieren.
+
+Was wird bei der Gesundheitsprüfung gefragt?
+
+Weiterhin werden Sie nach Arztbesuchen der letzten fünf Jahre gefragt. Auch Klinikaufenthalte sind von Interesse. So müssen sie alle Aufenthalte in den letzten zehn Jahren und gegebenenfalls auch für das kommende Jahr bereits geplante Klinikaufenthalte angeben.
+
+Die Gesundheitsprüfung umfasst typischerweise:
+
+- Vorerkrankungen der letzten 5-10 Jahre
+
+- Arztbesuche und Behandlungen
+
+- Krankenhausaufenthalte
+
+- Medikamenteneinnahme
+
+- Größe und Gewicht (BMI)
+
+- Rauchverhalten
+
+- Riskante Hobbys und Berufe
+
+Meist reicht es, wenn Sie ein paar Gesundheitsfragen beantworten. Erst wenn die Gesundheitsprüfung ergibt, dass bestimmte Vorerkrankungen bestehen, fragt der Versicherer genauer nach.
+
+Vereinfachte Gesundheitsprüfungen 2026:
+
+Hast du vor Kurzem eine Immobilienfinanzierung abgeschlossen, ein Kind bekommen oder in der Vergangenheit erhebliche Vorerkrankungen gehabt? In solchen Situationen sollte ein Blick auf Versicherungen geworfen werden, die den Abschluss einer Risikolebensversicherung mit verkürzten Gesundheitsfragen anbieten.
+
+Viele Versicherer bieten 2026 vereinfachte Gesundheitsprüfungen bei:
+
+- Immobilienfinanzierungen
+
+- Geburt eines Kindes
+
+- Niedrigen Versicherungssummen (bis 150.000 Euro)
+
+[SPIEL quiz: Welche Erkrankungen sind für die Risikolebensversicherung meist unbedeutend?]
+
+## 7 Aktuelle Testsieger 2026
+
+Die Risikolebensversicherung von CosmosDirekt konnte im Test von Focus Money erneut überzeugen und geht als Testsieger vom Platz – und das gleich auf 2 Gebieten. Der Comfort-Tarif der CosmosDirekt-Risikolebensversicherung ist Testsieger im Test von Focus Money und erhielt die Bestnote „hervorragend" für alle untersuchten Laufzeiten.
+
+Weitere ausgezeichnete Anbieter 2026:
+
+- EUROPA Risikolebensversicherung „sehr gut" (Franke & Bornberg, N-TV, Ausgabe 12/2025). Laut Focus Money (Test 16/2026) bietet die EUROPA Risikolebensversicherung „besten Risikoschutz"
+
+- Die ERGO wurde in der Ausgabe 43/2025 als „Beste Risiko-Lebensversicherung" mit der Note „Hervorragend" ausgezeichnet
+
+- In unserer Auswertung überzeugen vor allem die Anbieter Dialog, Europa und Allianz. Im Test von Franke und Bornberg liegen die Baloise, Dialog und Europa vorne
+
+Sie finden bei uns auch Angebote, die von Institutionen wie der Stiftung Warentest (Finanztest) oder der Ratingagentur Assekurata ausgezeichnet wurden.
+
+Wichtig für die Auswahl:
+
+Ein Tarif-Vergleich lohnt sich bei der Risikolebensversicherung, da sich die Kosten stark unterscheiden können. Daher lohnt sich ein Vergleich der verschiedenen Angebote immer. Bei gleichen Leistungen können Sie Ihre Risikolebensversicherung nach dem Preis auswählen, da die getesteten Tarife ausreichend Schutz bieten.
+
+## 8 Besondere Leistungen und Varianten
+
+Moderne Risikolebensversicherungen bieten 2026 erweiterte Leistungen und flexible Gestaltungsmöglichkeiten.
+
+Konstante vs. fallende Versicherungssumme:
+
+- Konstante Summe: Bleibt über die gesamte Laufzeit gleich
+
+- Fallende Summe: Zusätzlich gibt es die Möglichkeit, Beiträge durch eine linear oder individuell fallende Versicherungssumme zu sparen
+
+Über-Kreuz-Versicherung für Paare:
+
+Was ist eine Über-Kreuz-Versicherung und wie funktioniert sie? Wenn Sie und Ihre Partnerin/Ihr Partner sich gegenseitig absichern möchten, ist die Über-Kreuz-Versicherung sinnvoll. Beide Partner schließen eine Risikolebensversicherung ab und versichern sich gegenseitig.
+
+Zusatzleistungen 2026:
+
+- Kinder-Bonus: Erhöhte Versicherungssumme bei Kindern um etwa 5 Prozent
+
+- Pflege-Bonus: Zusatzzahlung bei schwerer Pflegebedürftigkeit
+
+- Bei Diagnose einer unheilbaren, fortschreitenden Krankheit mit einer ärztlich prognostizierten Lebenserwartung von unter 12 Monaten kann die Versicherungssumme bereits zu Lebzeiten ausgezahlt werden
+
+Flexibilität und Anpassungen:
+
+Ja, auch nachdem Du Deine Risikolebensversicherung abgeschlossen hast, kannst Du die Versicherungssumme noch ändern. Mit unserer Nachversicherungs-Garantie kannst Du Deine Versicherungssumme einfach und flexibel erhöhen, wenn sich in Deinem Leben etwas Wichtiges verändert. Ergänzend zur Risikolebensversicherung können Sie auch eine Berufsunfähigkeitsversicherung in Betracht ziehen, um Ihren Einkommensverlust bei Erwerbsunfähigkeit abzusichern.
+
+## 9 Fazit
+
+Die Risikolebensversicherung ist eine der wichtigsten und gleichzeitig günstigsten Versicherungen für Menschen mit Verantwortung gegenüber anderen. 2026 profitieren Verbraucher von teilweise gesunkenen Beiträgen und einer großen Auswahl an Anbietern. Die Versicherungssumme sollte mindestens das Drei- bis Fünffache des Jahreseinkommens betragen, zuzüglich bestehender Kredite. Ein gründlicher Vergleich lohnt sich, da die Preisunterschiede zwischen den Anbietern erheblich sind, während die Leistungen weitgehend standardisiert bleiben. Bei der Auswahl sollten Sie neben dem Preis auch auf Flexibilität bei Anpassungen und die Finanzstärke des Versicherers achten. Für junge, gesunde Nichtraucher sind bereits sehr günstige Tarife verfügbar, die umfassenden Schutz für die Familie bieten.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste risikolebensversicherung]
+
+[BLOCK vergleich risikolebensversicherung-vergleich]
+
+
+## FAQ
+F: Wer braucht eine Risikolebensversicherung?
+A: Sinnvoll ist sie vor allem für Familien mit Kindern, unverheiratete Paare, Immobilienbesitzer mit Darlehen, Selbstständige ohne Hinterbliebenenversorgung und Geschäftspartner. Alleinstehende ohne finanzielle Verpflichtungen gegenüber anderen Personen benötigen meist keinen solchen Todesfallschutz.
+F: Wie hoch sollte die Versicherungssumme sein?
+A: Als Faustregel gilt das Drei- bis Fünffache des aktuellen Bruttojahreseinkommens. Familien mit kleinen Kindern und Alleinerziehende sollten das Fünffache wählen, kinderlose Paare ohne Kredite reichen drei Jahreseinkommen. Offene Darlehen wie Immobilienkredite sollten zusätzlich eingerechnet werden.
+F: Was kostet eine Risikolebensversicherung 2026?
+A: Die Beiträge variieren stark nach Alter, Gesundheit, Versicherungssumme und Laufzeit. 2026 haben mehrere Versicherer ihre Tarife neu kalkuliert und teilweise Beiträge gesenkt. Ein individueller Vergleich zeigt, wie sich Ihre persönlichen Faktoren auf den Monatsbeitrag auswirken.
+F: Was ist der Unterschied zur Kapitallebensversicherung?
+A: Die Risikolebensversicherung ist ein reiner Todesfallschutz ohne Sparkomponente. Sie leistet nur im Todesfall des Versicherten und zahlt am Laufzeitende keine Summe aus. Dadurch ist sie deutlich günstiger als kapitalbildende Alternativen wie die klassische Kapitallebensversicherung.
+
+
+==================== BEITRAG lebensversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Lebensversicherung Ratgeber: Altersvorsorge &amp; Absicherung erklärt
+  heading-1: Lebensversicherung 2026: Der umfassende Ratgeber
+  heading-2: Welche Arten von Lebensversicherungen gibt es und was sind die Unterschiede?
+  heading-3: Welche Lebensversicherer führen 2026 die Tests an?
+  heading-4: Wie haben sich Verzinsung und Überschussbeteiligung 2026 entwickelt?
+  heading-5: Wie viel Versicherungssumme braucht Ihre Familie wirklich?
+  heading-6: Wie wirken sich Lebensversicherungen steuerlich aus?
+  heading-7: Was tun, wenn Sie Ihre Versicherung nicht mehr zahlen können?
+  heading-8: Welche Rolle spielt die betriebliche Altersvorsorge?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Lebensversicherung (lebensversicherung)
+## 0 Lebensversicherung Ratgeber: Altersvorsorge & Absicherung erklärt
+
+Die Lebensversicherung dient der Absicherung von Hinterbliebenen oder der Altersvorsorge. Welche Formen es gibt, was sich 2026 ändert und worauf Sie achten.
+
+## 1 Lebensversicherung 2026: Der umfassende Ratgeber
+
+Die Lebensversicherung ist eine Versicherung zur finanziellen Absicherung von Hinterbliebenen oder zur privaten Altersvorsorge. Der Höchstrechnungszins für Lebensversicherungen bleibt 2026 bei 1,0 Prozent – nach der ersten Erhöhung seit 30 Jahren. Die laufende Verzinsung liegt im Marktdurchschnitt bei 2,87 Prozent, während einzelne Anbieter deutlich höhere Werte erreichen.
+
+Der deutsche Lebensversicherungsmarkt steht vor einem Wendepunkt. Nach Jahren sinkender Zinsen stabilisiert sich das Niveau erstmals wieder. Während die Zinswende langsam bei den Kunden ankommt, unterscheiden sich die verschiedenen Versicherungsarten stark in ihrer Attraktivität. Dieser umfassende Überblick zeigt Ihnen, welche Lebensversicherung 2026 wirklich zu empfehlen ist.
+
+## 2 Welche Arten von Lebensversicherungen gibt es und was sind die Unterschiede?
+
+Die drei Hauptvarianten unterscheiden sich fundamental in Kosten, Leistungen und Flexibilität.
+
+Risikolebensversicherung ist die schlankeste Form: Sie bietet reinen Todesfallschutz ohne jede Ansparphase. Die Beiträge bleiben niedrig, da kein Kapital gebildet wird. Sie eignet sich optimal zur Absicherung von Angehörigen und zum Schutz vor Kreditrisiken – etwa bei einer Immobilienfinanzierung. Bei Tests überzeugen u.a. Allianz, Bayern-Versicherung, Dialog und Deutsche Lebensversicherung sowie Europa, Ergo und Zurich.
+
+Kapitallebensversicherung kombiniert Todesfallschutz mit einem Sparbeitrag. Von einer Gesamtverzinsung von beispielsweise 3,5 Prozent bleiben nach Kosten oft nur etwa 2,5 Prozent übrig. Das zeigt, wie wichtig eine genaue Kostenanalyse ist. Diese Variante lohnt sich hauptsächlich für Altverträge (vor 2005) mit höheren Garantiezinsen. Verträge zwischen Juli 1994 und Juni 2000 garantieren bis zu 4,0 Prozent – Werte, die heute unerreichbar sind.
+
+Fondsgebundene Lebensversicherung bietet deutlich höhere Renditechancen durch Investmentfonds. Sie erfordert aber größere Risikobereitschaft und Durchhaltevermögen über Marktzyklen hinweg. Sie ist optimal für Anleger mit langem Zeithorizont, die Schwankungen akzeptieren können. Tests zeigen: Allianz und Ergo können in mehreren Tests überzeugen.
+
+[SPIEL schaetzen: Wie hoch ist der Höchstrechnungszins für neue Lebensversicherungen 2026? → 1]
+
+## 3 Welche Lebensversicherer führen 2026 die Tests an?
+
+Im Test der Lebensversicherung 2025/2026 des DFSI wurde die Unternehmensqualität der WWK mit „exzellent" bewertet. Das Deutsche Finanz-Service Institut (DFSI) untersucht 34 marktrelevante Versicherer nach Substanzkraft (40%), Produktqualität (40%) und Service (20%).
+
+Testsieger nach Kategorien:
+
+- DFSI Unternehmensqualität: WWK Lebensversicherung erreicht die Höchstwertung „exzellent"
+
+- IVFP 2025: u.a. Allianz, Axa, Ergo und R+V erhielten „exzellent"
+
+- Produktqualität: InterRisk, LV 1871 und WWK überzeugen besonders
+
+- Zukunftsfähigkeit: Die Bayerische und WWK wurden mit „exzellent" bewertet
+
+Die Unterschiede sind erheblich: Große Player wie Allianz punkten mit Kundenorientierung und umfassenden Services. Spezialisierte Anbieter wie WWK und Dialog überzeugen durch günstigere Risikoversicherungen und effizientere Abläufe.
+
+| Anbieter | DFSI-Rating | IVFP-Rating | Besonderheiten
+
+| WWK | Exzellent | Sehr gut | Beste Gesamtwertung DFSI
+
+| Allianz | Sehr gut | Exzellent | Marktführer, breites Portfolio
+
+| LV 1871 | Sehr gut | Sehr gut | Starke Produktqualität
+
+| InterRisk | Sehr gut | Gut | Günstige Risikoversicherung
+
+## 4 Wie haben sich Verzinsung und Überschussbeteiligung 2026 entwickelt?
+
+Der Höchstrechnungszins für Lebensversicherungen liegt 2026 bei 1,0 Prozent und bleibt damit stabil. Die Überschussbeteiligung wird jährlich neu berechnet und ist das entscheidende Einkommenselement in der heutigen Marktlage.
+
+Versicherer müssen mindestens 90 Prozent ihrer Überschüsse an Kunden weitergeben – das ist gesetzlich vorgeschrieben. Die tatsächliche Gesamtverzinsung setzt sich zusammen aus:
+
+- Garantiezins (fest bei 1,0 Prozent)
+
+- Überschussbeteiligung (variabel)
+
+[SPIEL mythos: Die laufende Verzinsung bei Lebensversicherungen ist 2026 gegenüber dem Vorjahr deutlich gesunken. → nein]
+
+Top-Anbieter bei der laufenden Verzinsung 2026:
+
+| Anbieter | Laufende Verzinsung | Gesamtverzinsung
+
+| Viridium (Entis) | 3,4% | —
+
+| Provinzial | 3,25% | 4,05%
+
+| Ideal | 3,0% | 3,7%
+
+| Allianz Perspektive | 2,8% | 3,8%
+
+| Swiss Life | 2,5% | —
+
+Der Durchschnittswert über alle Anbieter stieg von 2,5 auf 2,6 Prozent, allerdings profitieren Kunden von der Zinswende erst langsam. Versicherer können nur einen Teil ihrer Kapitalanlagen jährlich neu anlegen – der Rest läuft noch zu niedrigeren Zinsen aus der Vergangenheit.
+
+## 5 Wie viel Versicherungssumme braucht Ihre Familie wirklich?
+
+Die benötigte Deckungssumme hängt von drei Hauptfaktoren ab:
+
+- Einkommensverlust der Familie
+
+- Laufende Schulden
+
+- Zukunftsausgaben für Kinder
+
+Praktische Berechnungsformel:
+
+- Grundabsicherung: 3–5 Jahresnettogehälter
+
+- Plus: Restschulden von Immobilienkrediten (oft 200.000–400.000 Euro)
+
+- Plus: Ausbildungskosten pro Kind (etwa 25.000–50.000 Euro)
+
+- Minus: Vorhandene Ersparnisse und Hinterbliebenenrenten
+
+Praxisbeispiel: Ein Hauptverdiener mit 50.000 Euro Jahresnettogehalt hat eine Hypothekenschuld von 300.000 Euro und zwei Kinder. Das ergibt:
+
+- Basisschutz: 150.000–250.000 Euro
+
+- Kreditabsicherung: 300.000 Euro
+
+- Kinderausbildung: 50.000–100.000 Euro
+
+- Gesamtsumme: etwa 500.000–650.000 Euro
+
+Bei Hypotheken verlangen Banken oft eine Lebensversicherung in Höhe der Kreditsumme als Sicherheit. Die Laufzeit sollte sich an der Kreditlaufzeit orientieren – bei einer 30-jährigen Baufinanzierung entsprechend lange. Bei Kindern reichen meist 25 Jahre bis zur Selbstständigkeit.
+
+[SPIEL quiz: Welcher Faktor ist bei der Berechnung der nötigen Versicherungssumme am wichtigsten?]
+
+## 6 Wie wirken sich Lebensversicherungen steuerlich aus?
+
+Höchstbeträge für sonstige Vorsorgeaufwendungen 2026:
+
+- Arbeitnehmer: 1.900 Euro pro Jahr
+
+- Selbstständige: 2.800 Euro pro Jahr
+
+Diese Grenzen werden meist bereits durch Kranken- und Pflegeversicherungsbeiträge ausgeschöpft, sodass Lebensversicherungsbeiträge steuerlich oft nicht mehr ins Gewicht fallen.
+
+Steuerbehandlung nach Vertragstyp:
+
+| Versicherungsart | Beiträge absetzbar | Auszahlung
+
+| Risikolebensversicherung | Bis Höchstgrenze | Steuerfrei (Hinterbliebene)
+
+| Kapital-LV (vor 2005) | Bis Höchstgrenze | Bei 12 Jahren + ab 60 steuerfrei
+
+| Kapital-LV (nach 2005) | Nicht absetzbar | Halbeinkünfteregelung bei Kündigung
+
+Bei der Auszahlung sind Kapitallebensversicherungen steuerfrei, wenn sie mindestens 12 Jahre gelaufen sind und die Auszahlung ab dem 60. Lebensjahr erfolgt. Bei vorzeitiger Kündigung greift die Halbeinkünfteregelung – ein erheblicher steuerlicher Nachteil.
+
+## 7 Was tun, wenn Sie Ihre Versicherung nicht mehr zahlen können?
+
+Kündigung ist meist die schlechteste Option. Sie erhalten oft nur 50–70 Prozent des eingezahlten Kapitals zurück. Deutlich bessere Alternativen existieren:
+
+Beitragsfreistellung bedeutet: Der Vertrag läuft weiter, die Leistungen sinken entsprechend, Sie zahlen nichts mehr. Der Zeitraum ist flexibel wählbar. Manche Versicherer ermöglichen sogar die Weiterzahlung aus bereits angesammelten Überschüssen.
+
+Verkauf am Zweitmarkt bringt traditionell mehr als der Rückkaufswert. Käufer übernehmen den Vertrag und zahlen die volle Versicherungssumme bei Eintritt des Versicherungsfalls. Daraus ergibt sich für Sie typisch ein Aufschlag von 3–5 Prozent über den Rückkaufswert. Voraussetzung: mindestens 10.000 Euro Rückkaufswert. Allerdings ist dies 2026 kaum noch möglich: Alle von Finanztip empfohlenen Ankäufer haben ihre Aktivitäten eingestellt.
+
+Widerruf funktioniert bei Verträgen aus 1994–2007. Bei Erfolg bekommen Sie sämtliche Beiträge plus Zinsen zurück – oft deutlich besser als eine Kündigung. Dies erfordert jedoch juristisches Fachwissen zur Prüfung der damaligen Vertragsdokumente.
+
+## 8 Welche Rolle spielt die betriebliche Altersvorsorge?
+
+In aktuellen Tests zur betrieblichen Altersvorsorge überzeugen vor allem Allianz und Württembergische als Testsieger. Im Kompetenz-Rating des IVFP erhielten unter anderem Allianz, Swiss Life und HDI die Bewertung „exzellent".
+
+Die betriebliche Altersvorsorge (bAV) über Direktversicherungen nutzt oft dieselben Anbieter wie private Lebensversicherungen. Der Beitragssatz zur gesetzlichen Rentenversicherung beträgt 18,6 Prozent (Stand 2026), was die Attraktivität privater Zusatzvorsorge unterstreicht.
+
+Vorteile der bAV:
+
+- Steuerliche Förderung in der Ansparphase
+
+- Arbeitgeberzuschuss (oft verpflichtend)
+
+- Günstige Gruppentarife
+
+- Automatische Fortsetzung auch bei Arbeitgeberwechsel
+
+Testsieger bAV 2026:
+
+- Gesamtwertung: Allianz, Württembergische, Ergo führen
+
+- Direktversicherung: Allianz, Alte Leipziger, LV 1871 überzeugen
+
+Die betriebliche Altersvorsorge ergänzt private Lebensversicherungen optimal, da sie andere Steuervorteile bietet und meist günstigere Konditionen durch Gruppentarife ermöglicht.
+
+## 9 Fazit
+
+Der Höchstrechnungszins von 1,0 Prozent wird nach DAV-Einschätzung mittelfristig stabil gehalten. Neue Kapitallebensversicherungen sind unter heutigen Bedingungen oft unrentabel, da die Kosten zu viel vom Ertrag aufzehren. Wer jedoch einen Altvertrag von 1994–2000 besitzt, profitiert noch von Garantiezinsen bis 4,0 Prozent und sollte diesen keinesfalls kündigen.
+
+Für neue Absicherung ist die Kombination aus günstiger Risikolebensversicherung und ETF-Sparplan meist cleverer und flexibler. Testsieger wie InterRisk, LV 1871 und WWK bieten attraktive Risikoversicherungen. Wer bereits versichert ist, sollte vor einer Kündigung alle Alternativen durchspielen – Beitragsfreistellung und Verkauf sind meist besser.
+
+Die gestiegenen Überschussbeteiligungen auf durchschnittlich 2,87 Prozent zeigen: Die Zinswende kommt an – nur langsamer als erhofft. Die steuerlichen Höchstbeträge von 1.900 Euro (Arbeitnehmer) bzw. 2.800 Euro (Selbstständige) bleiben seit 2008 unverändert und werden meist durch andere Versicherungen ausgeschöpft.
+
+Die Lebensversicherung bleibt ein wichtiger Baustein der Altersvorsorge und Hinterbliebenenabsicherung – aber nur mit der richtigen Strategie und dem passenden Anbieter.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste lebensversicherung]
+
+[BLOCK vergleich lebensversicherung-vergleich]
+
+
+## FAQ
+F: Was unterscheidet Risiko- und Kapitallebensversicherung?
+A: Die Risikolebensversicherung sichert ausschließlich den Todesfall ab, ohne Sparanteil. Die Kapitallebensversicherung kombiniert Todesfallschutz mit Kapitalbildung. Dadurch sind die Beiträge der Risikoversicherung deutlich niedriger, während die Kapitalversicherung eine Auszahlsumme am Laufzeitende vorsieht.
+F: Welche steuerlichen Vorteile bietet eine Lebensversicherung?
+A: Bei kapitalbildenden Lebensversicherungen ist die Auszahlung unter bestimmten Voraussetzungen steuerfrei: Mindestlaufzeit zwölf Jahre und Auszahlung ab dem 60. Lebensjahr. Bei vorzeitiger Kündigung greift die Halbeinkünfteregelung, wodurch die Hälfte des Gewinns versteuert wird.
+F: Wie hoch ist der steuerliche Höchstbetrag 2026?
+A: Für 2026 beträgt der anrechenbare jährliche Höchstbetrag für Arbeitnehmer 1.900 Euro, für Selbstständige 2.800 Euro. Dieser Betrag wird jedoch meist bereits durch Kranken- und Pflegeversicherungsbeiträge ausgeschöpft, sodass Lebensversicherungsbeiträge steuerlich kaum mehr wirken.
+F: Für wen eignet sich eine fondsgebundene Lebensversicherung?
+A: Die fondsgebundene Lebensversicherung legt Ihr Kapital in Investmentfonds an und bietet höhere Renditechancen bei gleichzeitigem Kursrisiko. Sie eignet sich für Anleger, die Schwankungen akzeptieren und einen langen Anlagehorizont haben. Wer Sicherheit bevorzugt, ist mit klassischen Varianten besser beraten.

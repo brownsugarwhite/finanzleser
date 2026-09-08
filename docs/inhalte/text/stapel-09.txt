@@ -1,0 +1,1696 @@
+STAPEL 09 · 12 Beiträge: gesetzliche-krankenversicherung private-krankenversicherung krankenversicherungsbeitraege krankenversicherungspflicht zusatzbeitrag-krankenkasse wechsel-private-krankenversicherung familienversicherung-gesetzliche-krankenkasse verdienstgrenzen-familienversicherung freiwillige-gesetzliche-krankenversicherung krankenversicherung-rentner studenten-krankenversicherung krankengeld
+
+
+==================== BEITRAG gesetzliche-krankenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Alles über GKV: Leistungen, Beitrag und Versicherungsschutz
+  heading-1: Gesetzliche Krankenversicherung 2026: Beiträge, Leistungen und Spartipps
+  heading-2: Grundlagen: So funktioniert die gesetzliche Krankenversicherung
+  heading-3: Beitragssätze 2026: Das kostet die Gesetzliche Krankenversicherung
+  heading-4: Beitragsgrenzen 2026: Neue Rechengrößen für höhere Einkommen
+  heading-5: Neue Leistungen in der gesetzlichen Krankenversicherung ab 2026
+  heading-6: Kassenwechsel: So sparen Sie bares Geld
+  heading-7: Die richtige Krankenkasse finden: Worauf Sie achten sollten
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Gesetzliche Krankenversicherung (gesetzliche-krankenversicherung)
+## 0 Alles über GKV: Leistungen, Beitrag und Versicherungsschutz
+
+Die gesetzliche Krankenversicherung schützt rund 74 Millionen Menschen. Welche Leistungen die GKV 2026 bietet, wie hoch die Beiträge sind und wo Sie sparen.
+
+## 1 Gesetzliche Krankenversicherung 2026: Beiträge, Leistungen und Spartipps
+
+Die gesetzliche Krankenversicherung bildet das Fundament der deutschen Gesundheitsversorgung und schützt rund 74 Millionen Menschen finanziell vor Krankheitskosten. 2026 wird für Millionen Versicherte teurer: Der Zusatzbeitrag steigt deutlich, während die Leistungen ausgebaut werden.
+
+Das Jahr 2026 bringt für gesetzlich Krankenversicherte erhebliche Veränderungen. Der allgemeine Beitragssatz bleibt bei 14,6 Prozent, doch der Zusatzbeitrag wird bei vielen Krankenkassen ansteigen. Ein Krankenkassenvergleich zahlt sich aus – Versicherte können jährlich hunderte Euro sparen.
+
+## 2 Grundlagen: So funktioniert die gesetzliche Krankenversicherung
+
+Die gesetzliche Krankenversicherung folgt dem Solidarprinzip. Die Beiträge orientieren sich am Einkommen, nicht am Alter oder Gesundheitszustand. Das System schützt Versicherte vor existenzbedrohenden Krankheitskosten.
+
+Die Versicherungspflichtgrenze steigt 2026 auf 77.400 Euro jährlich. Wer mehr verdient, kann zwischen der GKV und privater Krankenversicherung wählen. Darunter besteht für Arbeitnehmer Versicherungspflicht.
+
+Die Finanzierung funktioniert paritätisch: Bei Arbeitnehmern trägt der Arbeitgeber 50 Prozent des Zusatzbeitrags. Familienangehörige sind oft kostenfrei mitversichert.
+
+## 3 Beitragssätze 2026: Das kostet die Gesetzliche Krankenversicherung
+
+Der durchschnittliche Zusatzbeitrag steigt 2026 auf 2,9 Prozent – von 2,5 Prozent im Jahr 2025. Der Gesamtbeitrag beträgt dann durchschnittlich 17,5 Prozent des Bruttoeinkommens. Die Kosten unterscheiden sich aber erheblich zwischen den Krankenkassen.
+
+| Komponente | Satz 2026 | Details
+
+| Allgemeiner Beitragssatz | 14,6% | Gesetzlich vorgegeben, hälftig geteilt
+
+| Zusatzbeitrag Spanne | 2,18% – 4,39% | Unterscheidet sich je Kasse
+
+| Durchschnitt Zusatzbeitrag | 2,9% | Nur Richtwert
+
+| Pflegeversicherung | 3,6% | 4,2% für Kinderlose ab 23
+
+Die kassenindividuellen Zusatzbeiträge variieren zwischen 2,18 und 4,39 Prozent. Das führt zu Unterschieden von über 200 Euro jährlich zwischen günstiger und teurer Krankenkasse.
+
+[SPIEL schaetzen: Wie viel Euro Ersparnis bringt der Wechsel von der teuersten zur günstigsten Krankenkasse pro Jahr? → 400]
+
+## 4 Beitragsgrenzen 2026: Neue Rechengrößen für höhere Einkommen
+
+Für 2026 gelten neue Beitragsgrenzen. Die Beitragsbemessungsgrenze steigt auf 69.750 Euro jährlich. Einkommen oberhalb dieser Grenze werden für Beitragszahlungen nicht herangezogen.
+
+Die wichtigsten Werte im Überblick:
+
+- Beitragsbemessungsgrenze: 69.750 Euro jährlich (5.812,50 Euro monatlich)
+
+- Versicherungspflichtgrenze: 77.400 Euro jährlich (6.450 Euro monatlich)
+
+- Mindestbemessungsgrundlage: 15.820 Euro jährlich (1.318,33 Euro monatlich)
+
+- Freibetrag Betriebsrenten: 197,75 Euro monatlich
+
+Das Höchstkrankengeld beträgt 2026 135,63 Euro pro Calendertag. Diese Regelung zeigt, wie die Versicherung höhere Einkommen begrenzt.
+
+## 5 Neue Leistungen in der gesetzlichen Krankenversicherung ab 2026
+
+Die gesetzliche Krankenversicherung erweitert ihre Leistungen 2026. Die elektronische Patientenakte (ePA) wird systematisch ausgebaut. Seit Oktober 2025 müssen Leistungserbringer medizinische Informationen digital übermitteln.
+
+Ab Oktober 2026 wird die Medikationsliste modernisiert. Ein neuer digital gestützter Prozess dokumentiert Medikamenteneinnahme und Zeitpunkte. Das verbessert die Arzneimittelsicherheit deutlich.
+
+Die Liposuktion bei Lipödem wird ab Januar 2026 zur regulären Kassenleistung für alle Stadien (I, II, III). Voraussetzung: sechsmonatige konservative Therapie davor.
+
+Ab Januar 2026 gilt für Herztransplantationen eine Mindestmenge von zehn Eingriffe pro Jahr pro Klinik. Das soll Behandlungsqualität sichern.
+
+[SPIEL mythos: Ab Oktober 2026 können alle Raucher eine kostenlose Lungenkrebs-Früherkennung nutzen. → nein]
+
+## 6 Kassenwechsel: So sparen Sie bares Geld
+
+Bei Beitragserhöhungen haben Versicherte ein Sonderkündigungsrecht. Das gilt unabhängig von normalen Bindungsfristen und ist sehr unkompliziert geworden.
+
+Der Wechsel funktioniert so:
+
+- Neue gesetzliche Krankenversicherung auswählen
+
+- Antrag stellen – die neue Kasse erledigt Kündigung der alten
+
+- Keine Kasse darf einen Antrag ablehnen
+
+- Elektronische Gesundheitskarte der neuen Kasse erhalten
+
+Die bisherige Krankenkasse muss spätestens einen Monat vor Erhöhung über das Sonderkündigungsrecht informieren. Überschreitet der neue Zusatzbeitrag 2,9 Prozent, muss die Kasse auch auf Wechselmöglichkeiten hinweisen.
+
+[SPIEL gewusst: 39 Prozent aller GKV-Versicherten haben noch nie gewechselt, obwohl der Wechsel 15 Minuten dauert und hunderte Euro Ersparnis bringen kann]
+
+## 7 Die richtige Krankenkasse finden: Worauf Sie achten sollten
+
+Beim Vergleich der gesetzlichen Krankenversicherung lohnt sich ein breiter Blick. Der Zusatzbeitrag ist wichtig, aber nicht alles. Etwa 95 Prozent der Leistungen sind gesetzlich gleich – das Wechselrisiko ist minimal.
+
+Diese Kriterien helfen beim Entscheiden:
+
+- Höhe des Zusatzbeitrags (größter Kostenunterschied)
+
+- Verfügbarkeit in der Region
+
+- Zusatzleistungen wie Zahnreinigung-Zuschüsse
+
+- Bonusprogramme für Bewegung und Prävention
+
+- Service-Qualität und App-Angebot
+
+- Behandlungsmanagement bei chronischen Krankheiten
+
+Bei den großen Spannbreiten zwischen den Zusatzbeiträgen lohnt sich ein Wechsel oft. Mehrere hundert Euro jährlich zu sparen ist realistisch – bei gleichen Grundleistungen.
+
+## 8 Fazit
+
+Die gesetzliche Krankenversicherung 2026 wird teurer. Der Zusatzbeitrag steigt auf durchschnittlich 2,9 Prozent. Die Spanne von 2,18 bis 4,39 Prozent zwischen Kassen erreicht neue Dimensionen.
+
+Ein Krankenkassenvergleich ist 2026 wichtiger als je. Versicherte sparen mit dem Wechsel zu günstigeren Kassen mehrere hundert Euro pro Jahr. Gleichzeitig verbessert sich das Leistungsangebot: Erweiterte elektronische Patientenakte, Lungenkrebs-Früherkennung und Lipödem-Behandlung zeigen positive Entwicklungen.
+
+Der Kassenwechsel ist seit Jahren einfach und bindungsfrei möglich. Versicherte sollten ihre Wahl regelmäßig überprüfen – für Kostenoptimierung und bessere Zusatzleistungen. Die beste gesetzliche Krankenversicherung verbindet Beitragshöhe, Service und passende Zusatzleistungen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste gesetzliche-krankenversicherung]
+
+[BLOCK dokumente auslandsreisekrankenversicherung,rentner-krankenversicherung]
+
+
+## FAQ
+F: Wie hoch sind die GKV-Beitragssätze 2026?
+A: Der allgemeine Beitragssatz liegt 2026 bei 14,6 Prozent und wird von Arbeitnehmer und Arbeitgeber je zur Hälfte getragen. Der durchschnittliche Zusatzbeitrag wurde auf 2,9 Prozent festgelegt, die konkreten Kassenbeiträge reichen von unter 2,2 bis über 4,3 Prozent.
+F: Ab welchem Einkommen kann man sich privat versichern?
+A: Die Versicherungspflichtgrenze in der GKV liegt 2026 bei 77.400 Euro jährlich beziehungsweise 6.450 Euro monatlich. Wer über diesen Betrag hinaus verdient, kann alternativ in die private Krankenversicherung wechseln.
+F: Wie viel spare ich durch einen Kassenwechsel?
+A: Bei einem Bruttoeinkommen von 3.000 Euro spart ein Wechsel von einer teuren Kasse mit 4 Prozent Zusatzbeitrag zur günstigsten bundesweiten Kasse etwa 27 Euro monatlich oder 327 Euro jährlich. Gutverdiener sparen bis zu 546 Euro jährlich.
+F: Was ist die Beitragsbemessungsgrenze 2026?
+A: Die Beitragsbemessungsgrenze in der gesetzlichen Krankenversicherung steigt 2026 auf 69.750 Euro jährlich beziehungsweise 5.812,50 Euro monatlich. Bis zu dieser Grenze werden Beiträge berechnet, darüber hinausgehende Einkünfte bleiben beitragsfrei.
+
+
+==================== BEITRAG private-krankenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Private Krankenversicherung: Kosten, Vorteile und Wechsel erklärt
+  heading-1: Private Krankenversicherung 2026: Alles zur PKV in Deutschland
+  heading-2: Wer kann sich 2026 privat versichern?
+  heading-3: Was leistet die private Krankenversicherung?
+  heading-4: Wie entwickeln sich die PKV-Kosten 2026?
+  heading-5: Private Krankenversicherung für verschiedene Lebenssituationen
+  heading-6: Digitale Neuerungen 2026 in der PKV
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Private Krankenversicherung (private-krankenversicherung)
+## 0 Private Krankenversicherung: Kosten, Vorteile und Wechsel erklärt
+
+Die private Krankenversicherung ist die Alternative zur gesetzlichen Kasse. Voraussetzungen, Vor- und Nachteile und was sich bei der PKV 2026 ändert.
+
+## 1 Private Krankenversicherung 2026: Alles zur PKV in Deutschland
+
+Die private Krankenversicherung regelt die medizinische Versorgung für über acht Millionen Deutsche als Alternative zur gesetzlichen Krankenversicherung.
+
+Private Krankenversicherungen stehen 2026 vor bedeutsamen Veränderungen: Die Versicherungspflichtgrenze steigt auf 77.400 Euro jährlich, der durchschnittliche PKV-Beitrag liegt voraussichtlich bei rund 617 Euro pro Monat, und etwa 60 Prozent der Privatversicherten müssen mit Beitragserhöhungen rechnen. Gleichzeitig bringen erhöhte Arbeitgeberzuschüsse von bis zu 508,59 Euro für die Krankenversicherung plus 104,63 Euro für die Pflegeversicherung finanzielle Entlastung.
+
+## 2 Wer kann sich 2026 privat versichern?
+
+Angestellte mit einem Jahreseinkommen ab 77.400 Euro können in die PKV wechseln. Für langjährig Privatversicherte, die bereits seit Ende 2002 versichert sind, gilt eine niedrigere Grenze von 69.750 Euro. Diese Regelung schützt Bestandsversicherte vor unfreiwilligen Rückkehrpflichten in die GKV.
+
+[SPIEL gewusst: Von 2010 bis 2026 stieg die Versicherungspflichtgrenze um 54,9 Prozent von 49.950 auf 77.400 Euro]
+
+Selbstständige, Freiberufler und Beamte können unabhängig vom Einkommen in die PKV wechseln. Die Versicherungspflichtgrenze gilt nur für Angestellte. Geringfügig Beschäftigte mit einem monatlichen Verdienst bis 603 Euro (Stand 2026) können sich ebenfalls privat versichern.
+
+Folgende Personengruppen haben Zugang zur PKV:
+
+- Angestellte mit Jahreseinkommen über 77.400 Euro (2026)
+
+- Selbstständige und Freiberufler (ohne Einkommensgrenze)
+
+- Beamte und Beamtenanwärter
+
+- Studenten (unter bestimmten Voraussetzungen)
+
+- Geringfügig Beschäftigte bis 603 Euro monatlich
+
+## 3 Was leistet die private Krankenversicherung?
+
+Die PKV bietet in der Regel umfangreichere Leistungen als die gesetzliche Krankenversicherung. Privatpatienten erhalten oft schnellere Termine, können Chefärzte wählen und haben Anspruch auf Ein- oder Zweibettzimmer im Krankenhaus. Die medizinische Versorgung ist meist besser, mit kürzeren Wartezeiten und direktem Zugang zu Fachärzten.
+
+[SPIEL mythos: Private Krankenversicherung kostet immer mehr als die gesetzliche → nein]
+
+Die Tarifvielfalt ermöglicht individuelle Gestaltung. Versicherte können zwischen verschiedenen Selbstbeteiligungen, Leistungsumfängen und Komfortstufen wählen. Der PKV-Beitrag ist unabhängig vom Einkommen und richtet sich nach Leistungen, Alter und Gesundheitszustand - wer früh abschließt, zahlt meist weniger.
+
+| Leistungsbereich | Gesetzlich | Privat
+
+| Arzttermine | Wartezeiten möglich | Schnellere Termine
+
+| Krankenhaus | Mehrbettzimmer | Ein-/Zweibettzimmer wählbar
+
+| Zahnersatz | Grundversorgung | Hochwertiger Zahnersatz
+
+| Chefarztbehandlung | Nein | Ja (im Tarif)
+
+| Heilpraktiker | Begrenzt | Oft umfassend
+
+## 4 Wie entwickeln sich die PKV-Kosten 2026?
+
+Die PKV-Beiträge sind 2026 im Durchschnitt um 13 Prozent gestiegen für rund 60 Prozent aller Privatversicherten. Die private Pflegepflichtversicherung verteuerte sich noch stärker: 16 Prozent ohne Beihilfe, 6 Prozent mit Beihilfe.
+
+Kostentreiber sind vor allem:
+
+- Steigende Fallzahlen: 11 Prozent mehr Krankenhausbehandlungen von 2022 bis 2024
+
+- Ambulante Arztbehandlungen mit Kostensteigerung über 8 Prozent
+
+- Neue Behandlungsmethoden wie die Gürtelrose-Impfung: Ausgaben stiegen von 8 Millionen Euro (2019) auf 109 Millionen Euro (2023)
+
+[SPIEL schaetzen: Wie hoch ist der maximale monatliche Arbeitgeberzuschuss zur PKV 2026? → 508]
+
+Die Beitragserhöhungen fallen je nach Versicherer unterschiedlich aus: Während die LKH mit 3,6 Prozent die niedrigste Erhöhung verzeichnet, liegen BBKK und UKV mit durchschnittlich 22,8 Prozent an der Spitze.
+
+## 5 Private Krankenversicherung für verschiedene Lebenssituationen
+
+Familien mit Kindern
+
+Jedes Kind muss einzeln versichert werden - eine kostenlose Familienversicherung wie in der GKV existiert nicht. Der durchschnittliche Beitrag liegt bei etwa 150 Euro pro Kind monatlich, wobei der Arbeitgeberzuschuss von 2025 um 37,28 Euro auf maximal 508,59 Euro gestiegen ist.
+
+Neugeborene werden unter besonderen Bedingungen aufgenommen: Keine Gesundheitsprüfung, keine Wartezeiten und keine Risikozuschläge - selbst bei schweren Erkrankungen oder Behinderungen.
+
+Beamte
+
+Beamte profitieren von der Beihilfe, die zwischen 50 und 80 Prozent der Krankheitskosten übernimmt. Typische Beihilfesätze:
+
+- Beamte: 50 Prozent
+
+- Ehepartner: 70 Prozent
+
+- Kinder: 80 Prozent
+
+Die Einkommensgrenze für beihilfeberechtigte Ehepartner liegt 2026 bei 22.648 Euro brutto. Mit der Pensionierung steigt die Beihilfe häufig auf 70 Prozent.
+
+Rentner und Arbeitslose
+
+[SPIEL karte: Rentenzuschuss zur PKV]
+
+Der Zuschuss wird unabhängig von der Rentenhöhe, des Tarifs oder des Vermögens gewährt. Gezahlt wird der niedrigere Betrag aus 8,75 Prozent der Renteneinkünfte oder maximal 50 Prozent des PKV-Beitrags. Der Antrag erfolgt idealerweise mit dem Rentenantrag oder spätestens drei Monate nach Rentenbeginn.
+
+## 6 Digitale Neuerungen 2026 in der PKV
+
+Mitte 2026 erhält die elektronische Patientenakte (ePA) erweiterte Funktionen. Der digital gestützte Medikationsprozess wird ausgebaut - Ärzte können künftig Arzneimittel ergänzen, die ohne Rezept eingenommen werden.
+
+Eine wichtige Vereinfachung: Ab 2026 benötigen Versicherte keine Papierbescheinigungen mehr - die PKV-Unternehmen übermitteln Beitragswerte automatisch digital an das Bundeszentralamt für Steuern.
+
+Die Nutzung der ePA bleibt freiwillig - Versicherungsunternehmen entscheiden selbst, ob sie eine ePA anbieten, und Versicherte können frei wählen, ob sie diese nutzen.
+
+Bei der Pflege gibt es Erleichterungen: Pflegegeldbezieher mit Pflegegrad 4 oder 5 benötigen nur noch halbjährlich statt vierteljährlich eine Beratung im eigenen Zuhause.
+
+## 7 Fazit
+
+Die private Krankenversicherung 2026 bringt höhere Zugangshürden durch gestiegene Einkommensgrenzen, aber auch verbesserte finanzielle Unterstützung durch erhöhte Arbeitgeberzuschüsse. Trotz durchschnittlicher Beitragserhöhungen von 13 Prozent zeigt der langfristige Vergleich eine moderatere Kostensteigerung als in der GKV. Die Digitalisierung schreitet mit erweiterten ePA-Funktionen und automatisierter Beitragsübermittlung voran. Für Familien bleibt die PKV teurer als die GKV-Familienversicherung, bietet aber individuellere Leistungen. Beamte profitieren weiterhin von günstigen Beiträgen durch die Beihilfe. Ein sorgfältiger Wechsel in die private Krankenversicherung bleibt essentiell, da langfristige finanzielle Konsequenzen entstehen und Gestaltungsmöglichkeiten wie interne Tarifwechsel zur Beitragssenkung bestehen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste private-krankenversicherung]
+
+[BLOCK vergleich private-krankenversicherung-vergleich]
+
+[BLOCK dokumente private-pflegezusatzversicherung,private-pflegepflichtversicherung,auslandsreisekrankenversicherung,rentner-krankenversicherung]
+
+
+## FAQ
+F: Ab welchem Einkommen ist der Wechsel in die PKV 2026 möglich?
+A: Die Versicherungspflichtgrenze steigt 2026 auf 77.400 Euro jährlich beziehungsweise 6.450 Euro monatlich. Wer als Angestellter mehr verdient, ist nicht mehr in der gesetzlichen Krankenversicherung pflichtversichert und kann in die PKV wechseln. Für langjährig Versicherte gilt eine separate Grenze von 69.750 Euro.
+F: Wie werden Kinder in der privaten Krankenversicherung versichert?
+A: In der PKV muss jedes Kind einzeln versichert werden, eine kostenlose Familienversicherung wie in der GKV gibt es nicht. Der Durchschnittsbeitrag beträgt etwa 150 Euro pro Kind monatlich. Neugeborene werden ohne Gesundheitsprüfung und Wartezeiten aufgenommen.
+F: Wie hoch sind die Beitragserhöhungen in der PKV 2026?
+A: Rund 60 Prozent der Privatversicherten müssen zum 1. Januar 2026 mit durchschnittlichen Beitragserhöhungen von etwa 13 Prozent rechnen. Der PKV-Durchschnittsbeitrag wird voraussichtlich bei rund 617 Euro pro Monat liegen. Arbeitgeber beteiligen sich 2026 mit bis zu 508,59 Euro monatlich.
+F: Welche Beihilfesätze gelten für Beamte in der PKV?
+A: Die Beihilfe übernimmt zwischen 50 und 80 Prozent der Krankheitskosten, abhängig von Status und Familienstand. Üblich sind 50 Prozent für Beamte, 70 Prozent für Ehepartner und 80 Prozent für Kinder. Mit der Pensionierung steigt die Beihilfe häufig auf 70 Prozent.
+
+
+==================== BEITRAG krankenversicherungsbeitraege ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Krankenversicherungsbeiträge 2026: Kosten senken, Sparpotenziale nutzen
+  heading-1: Krankenversicherungsbeiträge 2026: Alle Zahlen und Grenzwerte
+  heading-2: Beitragssätze im Überblick: Spreizung zwischen den Kassen
+  heading-3: Wie werden die Beiträge aufgeteilt? Arbeitnehmer und Arbeitgeber
+  heading-4: Wer zahlt was? Selbstständige und ihre Mindestbeiträge
+  heading-5: Besonderheiten für Rentner: Freibeträge und verzögerte Anpassungen
+  heading-6: Sparmöglichkeiten: Krankenkassenwechsel richtig nutzen
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Krankenversicherungsbeiträge (krankenversicherungsbeitraege)
+## 0 Krankenversicherungsbeiträge 2026: Kosten senken, Sparpotenziale nutzen
+
+Krankenversicherungsbeiträge richten sich nach Einkommen und Zusatzbeitrag. Alle Beitragssätze, Bemessungsgrenzen und Sparmöglichkeiten 2026 im Überblick.
+
+## 1 Krankenversicherungsbeiträge 2026: Alle Zahlen und Grenzwerte
+
+Der allgemeine Beitragssatz zur gesetzlichen Krankenversicherung beträgt 14,6 Prozent des beitragspflichtigen Einkommens. Daneben gilt ein ermäßigter Beitragssatz von 14,0 Prozent für Mitglieder ohne Krankengeldanspruch. Diese Grundbeiträge bleiben 2026 stabil.
+
+Die Beitragsbemessungsgrenze steigt 2026 auf 69.750 Euro jährlich oder 5.812,50 Euro monatlich. Einkommen oberhalb dieser Grenze werden nicht mit weiteren Krankenversicherungsbeiträgen belastet. Die Versicherungspflichtgrenze liegt 2026 bei 77.400 Euro im Jahr beziehungsweise 6.450 Euro monatlich. Wer diese Schwelle überschreitet, kann zwischen gesetzlicher und privater Krankenversicherung wählen.
+
+Der durchschnittliche Zusatzbeitrag steigt 2026 von 2,5 Prozent auf 2,9 Prozent – eine Erhöhung um 0,4 Prozentpunkte. Zusammen mit dem allgemeinen Beitragssatz ergibt sich ein durchschnittlicher Gesamtbeitragssatz von 17,5 Prozent.
+
+[SPIEL gewusst: 47 Krankenkassen haben zum Jahreswechsel 2025/26 ihren Zusatzbeitragssatz angepasst, während weitere 45 Kassen ihre Beiträge zunächst stabil halten.]
+
+## 2 Beitragssätze im Überblick: Spreizung zwischen den Kassen
+
+Die tatsächlichen Zusatzbeiträge variieren erheblich zwischen den einzelnen Krankenkassen. Die Spanne reicht aktuell von unter 2,2 Prozent bei den günstigsten bis über 4,3 Prozent bei den teuersten Anbietern.
+
+| Beitragskategorie | Günstigste Kasse | Durchschnitt | Teuerste Kasse
+
+| Zusatzbeitrag | 2,18% (BKK firmus) | 2,9% | 4,39% (BKK24)
+
+| Gesamtbeitrag | 16,78% | 17,5% | 18,99%
+
+Zwischen der günstigsten und der teuersten Kasse liegen 2,21 Prozentpunkte – bei einem Bruttogehalt von 4.000 Euro macht das über 1.000 Euro Unterschied pro Jahr.
+
+Bei 3.000 Euro Brutto entstehen durch den höheren durchschnittlichen Zusatzbeitrag monatliche Mehrkosten von 12,00 Euro (jährlich 144,00 Euro). Verdiener an der Beitragsbemessungsgrenze zahlen deutlich mehr.
+
+## 3 Wie werden die Beiträge aufgeteilt? Arbeitnehmer und Arbeitgeber
+
+Arbeitnehmer und Arbeitgeber sowie Rentner und Rentenversicherungsträger tragen die Beiträge inklusive Zusatzbeiträge jeweils zur Hälfte. Diese 50/50-Regelung gilt sowohl für den allgemeinen Beitragssatz als auch für die kassenindividuellen Zusatzbeiträge.
+
+Bei Minijobbern gelten besondere Regelungen. Die monatliche Verdienstgrenze für Minijobs steigt 2026 auf 603 Euro und entspricht 7.236 Euro jährlich. Für geringfügig entlohnte Beschäftigte führt der Arbeitgeber einen pauschalierten Krankenversicherungsbeitrag von 13 Prozent ab.
+
+Für Arbeitnehmer bedeuten die Beitragserhöhungen direkte Mehrbelastungen. Die Sozialversicherungsbeiträge werden automatisch vom Bruttolohn abgezogen, sodass das Nettogehalt entsprechend sinkt.
+
+[SPIEL mythos: Minijobber zahlen selbst keine Krankenversicherungsbeiträge → ja]
+
+## 4 Wer zahlt was? Selbstständige und ihre Mindestbeiträge
+
+In der gesetzlichen Krankenversicherung wird von einem Mindesteinkommen ausgegangen, das bei der Beitragsberechnung von Selbstständigen nicht unterschritten werden darf. Als fiktives Einkommen wird ein Drittel der monatlichen Bezugsgröße angenommen – 2026 sind das 1.316,67 Euro.
+
+Die Mindestbemessungsgrundlage für Selbstständige liegt 2026 bei etwa 1.318,33 Euro monatlich. Daraus ergibt sich ein Mindestbeitrag von etwa 275 bis 280 Euro monatlich für den ermäßigten Satz ohne Krankengeldanspruch. Mit Krankengeldanspruch zahlen Selbstständige etwa 287 Euro pro Monat.
+
+Die Beitragsberechnung erfolgt nach verschiedenen Regeln:
+
+- Selbstständige ohne Einkommensnachweise: Beitragsberechnung nach Höchstbetrag (bis zu 1.200 Euro monatlich)
+
+- Dokumentierte niedrigere Einkünfte: Beiträge entsprechend der tatsächlichen Einnahmen
+
+- Hinzu kommt die Pflegeversicherung mit weiteren 47 bis 55 Euro je nach Kinderzahl
+
+Selbstständige sollten ihre Einkommensnachweise vollständig bei der Krankenkasse einreichen, um unnötig hohe Beiträge zu vermeiden.
+
+## 5 Besonderheiten für Rentner: Freibeträge und verzögerte Anpassungen
+
+Rentner profitieren von verschiedenen Entlastungen, müssen aber auch spezielle Regelungen beachten. Für Leistungen der betrieblichen Altersversorgung bis zu einer Höhe von 197,75 Euro monatlich (Stand: 2026) müssen keine Krankenkassenbeiträge mehr gezahlt werden. Dieser Freibetrag stieg um 10,50 Euro gegenüber 2025.
+
+[SPIEL karte: Betriebsrentenfreibetrag]
+
+Der Freibetrag gilt nur für die Krankenversicherung, nicht für die Pflegeversicherung. In der Pflegeversicherung wird weiterhin der volle Beitragssatz auf die gesamte Betriebsrente fällig, sofern die Freigrenze von 197,75 Euro überschritten wird.
+
+Wichtige Besonderheiten für Rentner:
+
+- Zusatzbeitragsänderungen wirken erst zwei Monate später
+
+- Der Pflegeversicherungsbeitrag beträgt 3,6 Prozent, für Kinderlose über 23 Jahren 4,2 Prozent
+
+- Nur gesetzlich pflichtversicherte Rentner profitieren vom Betriebsrentenfreibetrag, nicht freiwillig Versicherte
+
+## 6 Sparmöglichkeiten: Krankenkassenwechsel richtig nutzen
+
+Bei einer Erhöhung des Zusatzbeitrags haben Versicherte ein Sonderkündigungsrecht – unabhängig von der gesetzlichen Bindungsfrist. Dieses Recht ermöglicht erhebliche Einsparungen.
+
+Bei einem Bruttoeinkommen von 3.000 Euro bringt ein Wechsel von der teuersten Kasse zur derzeit günstigsten bundesweiten Kasse eine Ersparnis von rund 28 Euro im Monat beziehungsweise 340 Euro pro Jahr. Gutverdiener sparen durch einen solchen Wechsel rund 55 Euro monatlich oder 660 Euro jährlich.
+
+| Einkommen | Monatliche Ersparnis | Jährliche Ersparnis
+
+| 3.000 Euro brutto | 28 Euro | 340 Euro
+
+| Höhere Einkommen | 55 Euro | 660 Euro
+
+| Selbstständige | bis 56 Euro | bis 680 Euro
+
+Der Wechselprozess ist unkompliziert:
+
+- Einfach bei der neuen Kasse anmelden – diese kündigt die alte Mitgliedschaft automatisch
+
+- Keine Krankenkasse darf einen Antrag ablehnen – unabhängig von Alter oder Vorerkrankungen
+
+- Die bisherige Krankenkasse muss spätestens einen Monat vor der Beitragserhöhung über das Sonderkündigungsrecht informieren
+
+Beim Kassenwechsel sollten Sie neben den Beitragssätzen auch die Zusatzleistungen vergleichen. Manche Kassen bieten erweiterte Vorsorge, Naturheilverfahren oder Bonusprogramme.
+
+## 7 Fazit
+
+Die Krankenversicherungsbeiträge 2026 bringen für alle Versichertengruppen spürbare Mehrbelastungen. Der durchschnittliche Zusatzbeitrag steigt auf 2,9 Prozent, während die Beitragsbemessungsgrenze auf 69.750 Euro jährlich ansteigt. Zwischen günstigster und teuerster Krankenkasse liegen 2,21 Prozentpunkte – ein Wechsel kann über 600 Euro pro Jahr sparen. Selbstständige müssen mit Mindestbeiträgen von etwa 275 bis 280 Euro rechnen, Rentner profitieren von einem erhöhten Betriebsrentenfreibetrag von 197,75 Euro. Das Sonderkündigungsrecht bei Beitragserhöhungen bietet allen Versicherten die Chance auf deutliche Einsparungen durch einen gezielten Krankenkassenwechsel.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste krankenversicherungsbeitraege]
+
+[BLOCK dokumente rentner-krankenversicherung,auslandsreisekrankenversicherung]
+
+
+## FAQ
+F: Wie hoch ist die Beitragsbemessungsgrenze der GKV 2026?
+A: Die Beitragsbemessungsgrenze der gesetzlichen Krankenversicherung steigt 2026 auf 69.750 Euro jährlich beziehungsweise 5.812,50 Euro monatlich. Bis zu dieser Grenze werden Krankenversicherungsbeiträge erhoben, darüber hinausgehendes Einkommen bleibt beitragsfrei.
+F: Wie hoch ist der durchschnittliche Zusatzbeitrag 2026?
+A: Der durchschnittliche Zusatzbeitrag zur gesetzlichen Krankenversicherung wurde für 2026 auf 2,9 Prozent festgelegt, gegenüber 2,5 Prozent in 2025. Die kassenindividuellen Zusatzbeiträge variieren 2026 zwischen 2,18 und 4,39 Prozent.
+F: Welche Versicherungspflichtgrenze gilt 2026?
+A: Die Versicherungspflichtgrenze beträgt 2026 jährlich 77.400 Euro beziehungsweise monatlich 6.450 Euro. Wer über dieser Einkommensschwelle verdient, kann zwischen gesetzlicher und privater Krankenversicherung frei wählen.
+F: Was zahlen Selbständige 2026 mindestens in die GKV ein?
+A: Die Mindestbemessungsgrundlage für Selbständige beträgt 2026 monatlich 1.318,33 Euro. Daraus ergibt sich ein Mindestbeitrag von 270,26 Euro monatlich beim durchschnittlichen Zusatzbeitrag – ohne Krankengeldanspruch. Im Vorjahr lag der Mindestbeitrag noch bei 258,13 Euro.
+
+
+==================== BEITRAG krankenversicherungspflicht ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Gesetzliche Krankenversicherungspflicht in Deutschland erklärt
+  heading-1: Krankenversicherungspflicht in Deutschland: Versicherungspflicht, Einkommensgrenzen und Kosten
+  heading-2: Wer muss sich krankenversichern?
+  heading-3: Versicherungspflicht für Arbeitnehmer, Studierende und Selbstständige
+  heading-4: Versicherungspflichtgrenze 2026: Was ändert sich?
+  heading-5: Einkommensgrenzen für Familienversicherung 2026
+  heading-6: Befreiung von der Krankenversicherungspflicht: Was Sie wissen müssen
+  heading-7: Finanzielle Folgen ohne Versicherung
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Krankenversicherungspflicht (krankenversicherungspflicht)
+## 0 Gesetzliche Krankenversicherungspflicht in Deutschland erklärt
+
+In Deutschland muss sich jeder krankenversichern. Wer gesetzlich oder privat versichert ist, welche Einkommensgrenzen 2026 gelten und was es kostet.
+
+## 1 Krankenversicherungspflicht in Deutschland: Versicherungspflicht, Einkommensgrenzen und Kosten
+
+Die Krankenversicherungspflicht verpflichtet jeden Menschen mit Wohnsitz in Deutschland, sich krankenversichern zu lassen. Seit 2009 bildet dieses System die rechtliche Grundlage für medizinische Versorgung aller Bürger. 2026 liegt die Versicherungspflichtgrenze bei 77.400 Euro jährlich (6.450 Euro monatlich) – 300 Euro höher als 2025.
+
+## 2 Wer muss sich krankenversichern?
+
+Die Krankenversicherungspflicht erfasst alle Personen, die in Deutschland wohnen oder gewöhnlich aufenthalten – unabhängig von ihrer Staatsangehörigkeit. Die Versicherung erfolgt entweder in der gesetzlichen Krankenversicherung (GKV) oder privaten Krankenversicherung (PKV), je nach Einkommen und beruflichem Status.
+
+Ein wichtiger Punkt: Ein Verstoß gegen die Krankenversicherungspflicht ist nicht strafbar. Allerdings entstehen bei späterem Eintritt massive finanzielle Nachteile – Nachzahlungen und Säumniszuschläge summieren sich schnell auf mehrere tausend Euro.
+
+[SPIEL mythos: Wer gegen die Krankenversicherungspflicht verstößt, macht sich strafbar → nein]
+
+## 3 Versicherungspflicht für Arbeitnehmer, Studierende und Selbstständige
+
+### Arbeitnehmer und automatisch Versicherte
+
+Alle Arbeitnehmer sind gesetzlich versichert, wenn ihr jährliches Bruttoeinkommen 77.400 Euro nicht überschreitet (monatlich 6.450 Euro). Diese Gruppen sind automatisch pflichtversichert:
+
+- Auszubildende (unabhängig vom Einkommen)
+
+- Arbeitslose mit ALG-I oder ALG-II-Bezug
+
+- Rentner mit Vorversicherungszeiten
+
+- Minijobber bis 603 Euro monatlich (2026)
+
+Bei der Berechnung zählen Bruttoeinkommen, Weihnachtsgeld und Urlaubsgeld zusammen.
+
+### Studierende und Familienversicherung
+
+Studierende unter 25 Jahren können beitragsfrei über versicherte Eltern mitversichert werden – wenn ihr Einkommen 565 Euro monatlich nicht überschreitet. Die Familienversicherung ermöglicht es Ehepartnern und Kindern, ohne eigene Beiträge im Versicherungsschutz der Familie mitversichert zu bleiben. Arbeiten sie einen Minijob bis 603 Euro (2026), bleibt die beitragsfreie Mitversicherung erhalten, sofern dies die einzige Einkommensquelle ist.
+
+Nach dem 25. Geburtstag oder bei höherem Einkommen wechseln Studierende in die studentische Krankenversicherung (2026: etwa 108–115 Euro monatlich).
+
+### Selbstständige, Freiberufler und Beamte
+
+Selbstständige und Freiberufler unterliegen nicht der Versicherungspflicht – sie wählen zwischen GKV und PKV. Beamte sind ebenfalls nicht pflichtversichert und nutzen typischerweise private Versicherungen mit staatlicher Beihilfe.
+
+## 4 Versicherungspflichtgrenze 2026: Was ändert sich?
+
+Die Versicherungspflichtgrenze beträgt 2026 77.400 Euro jährlich (6.450 Euro monatlich). Das ist eine Steigerung von 4,9 % gegenüber 2025. Ab diesem Einkommen dürfen Arbeitnehmer in die PKV wechseln oder sich freiwillig in der GKV versichern.
+
+Unterscheiden Sie zwei wichtige Grenzen:
+
+| Grenzwert | 2026 | 2025 | Bedeutung
+
+| Versicherungspflichtgrenze | 77.400 € | 77.100 € | Ab hier ist PKV-Wechsel möglich
+
+| Beitragsbemessungsgrenze | 69.750 € | 66.600 € | Maximales Einkommen für Beitragsberechnung
+
+### Altfall-Regelung für Privatversicherte
+
+Wer bereits Ende 2002 privat versichert war, unterliegt einer niedrigeren Grenze: der Beitragsbemessungsgrenze (2026: 69.750 Euro jährlich). Das erleichtert den Verbleib in der PKV.
+
+[SPIEL schaetzen: Um wie viel Euro ist die monatliche Versicherungspflichtgrenze von 2025 zu 2026 gestiegen? → 300]
+
+## 5 Einkommensgrenzen für Familienversicherung 2026
+
+Die beitragsfreie Familienversicherung ermöglicht Ehepartnern und Kindern, ohne eigene Beiträge mitversichert zu bleiben. Je nach Einkommensart gelten unterschiedliche Grenzen:
+
+Allgemeine Einkommensgrenze: 565 Euro monatlich
+
+Minijob-Sonderregelung: 603 Euro monatlich – aber nur als einzige Einkommensquelle (gekoppelt an Mindestlohn von 13,90 Euro/Stunde ab Januar 2026).
+
+Wichtige Kombination: Minijob + weitere Einkünfte (Mieteinnahmen, Zinsen, Renteneinkommen) = 565-Euro-Grenze gilt
+
+Viele Menschen rutschen unbemerkt über die 565-Euro-Grenze bei mehreren Einkommensarten und müssen dann Beiträge nachzahlen.
+
+| Situation | 2026 | 2025
+
+| Minijob allein | 603 € | 556 €
+
+| Alle anderen Einkünfte | 565 € | 535 €
+
+| Minijob + weitere Einkünfte | 565 € | 535 €
+
+[SPIEL quiz: Ein Sohn verdient 580 Euro monatlich aus einem Minijob. Kann er noch beitragsfrei über die Eltern mitversichert bleiben?]
+
+## 6 Befreiung von der Krankenversicherungspflicht: Was Sie wissen müssen
+
+Unter bestimmten Bedingungen können Personen sich befreien lassen – aber die Regelungen sind streng und folgenreich. Wer allein wegen Erhöhung der Versicherungspflichtgrenze neu pflichtversichert wird, kann einen Befreiungsantrag stellen.
+
+### Die unwiderrufliche Entscheidung
+
+Die Befreiung ist grundsätzlich unwiderruflich. Wer sich befreien lässt, kann die Entscheidung nicht später ändern – nicht beim Jobwechsel, nicht bei Krankheit, nicht im Alter. Das kann später zu erheblichen Problemen führen, wenn das Einkommen sinkt oder Versicherungsschutz dringend nötig wird.
+
+### Fristen einhalten
+
+Der Antrag muss innerhalb von drei Monaten nach Eintritt der Versicherungspflicht eingereicht werden. Danach ist eine Befreiung nicht mehr möglich. Das Formular reichen Sie bis 31. März bei einer Krankenkasse ein – die Befreiung wirkt dann rückwirkend zum 1. Januar.
+
+## 7 Finanzielle Folgen ohne Versicherung
+
+Wer die Krankenversicherungspflicht ignoriert, zahlt am Ende deutlich mehr als bei regelmäßigen Beitragszahlungen.
+
+### Nachzahlungen und Säumniszuschläge
+
+Bei später erfolgendem Eintritt in die GKV müssen alle fehlenden Beiträge nachgezahlt werden – auch wenn Sie nie zum Arzt gingen. Krankenkassen berechnen zusätzlich monatlich 1 % Säumniszuschlag (§ 24 SGB IV).
+
+Rechnung für 12 Monate ohne Versicherung (2026):
+
+- Krankenversicherung: ca. 67 Euro/Monat
+
+- Pflegeversicherung: ca. 14 Euro/Monat
+
+- Gesamtmissing: ca. 972 Euro
+
+Für Private gibt es keine Reduktion auf Ruhensbeitrag.
+
+### Leistungsausfälle bei Rückständen
+
+Sobald Beitragsschulden von mindestens zwei Monaten entstehen, ruht der Leistungsanspruch (§ 16 Abs. 3a SGB V). Die Krankenkasse zahlt dann nur noch für:
+
+- Akute Erkrankungen und Schmerzen
+
+- Notwendige Behandlungen bei Schwangerschaft und Mutterschaft
+
+- Bestimmte Früherkennungsuntersuchungen
+
+Chronische Krankheiten wie Diabetes, zahnärztliche Arbeiten oder regelmäßige Medikamente werden nicht bezahlt – obwohl Sie Beiträge schulden.
+
+[SPIEL karte: Jahresarbeitsentgeltgrenze (JAEG)]
+
+## 8 Fazit
+
+Die Krankenversicherungspflicht in Deutschland mit einer Grenze von 77.400 Euro jährlich (2026) regelt flächendeckend, wer versichert sein muss. Je nach Personengruppe gelten unterschiedliche Regeln: Studierende können bis 25 Jahren familienversichert bleiben (565 Euro monatlich, Minijobs bis 603 Euro), Arbeitnehmer bis zur Versicherungspflichtgrenze sind automatisch in der GKV, Selbstständige haben Wahlfreiheit. Während die Nichtversicherung nicht strafbar ist, entstehen bei späterem Eintritt massive Nachzahlungen und monatliche Säumniszuschläge von 1 %. Wer sich befreien lässt, muss mit unwiderruflichen Folgen rechnen. Bei Beitragsschulden ruhen Leistungsansprüche – selbst notwendige Behandlungen werden nicht bezahlt. Die Krankenversicherungspflicht ist damit nicht optional, sondern eine strukturelle Notwendigkeit.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste krankenversicherungspflicht]
+
+[BLOCK dokumente rentner-krankenversicherung,auslandsreisekrankenversicherung]
+
+
+## FAQ
+F: Seit wann gilt in Deutschland die Krankenversicherungspflicht?
+A: Seit 2009 gilt in Deutschland eine allgemeine Krankenversicherungspflicht für alle Personen mit Wohnsitz oder gewöhnlichem Aufenthalt im Land. Diese Regelung gilt unabhängig von der Staatsangehörigkeit und soll eine flächendeckende medizinische Versorgung sicherstellen.
+F: Wer darf sich 2026 privat krankenversichern?
+A: Arbeitnehmer können sich 2026 privat krankenversichern, wenn ihr Bruttoeinkommen die Versicherungspflichtgrenze von 77.400 Euro jährlich beziehungsweise 6.450 Euro monatlich überschreitet. Für Selbständige, Freiberufler und Beamte gelten eigene Zugangsvoraussetzungen.
+F: Was ist der Unterschied zwischen Versicherungspflicht und Versicherungsfreiheit?
+A: Die Versicherungspflicht verpflichtet eine Person zur Mitgliedschaft in der gesetzlichen Krankenversicherung. Versicherungsfreiheit besteht hingegen, wenn bestimmte Personengruppen unter festgelegten Voraussetzungen von dieser Pflicht ausgenommen sind, beispielsweise bei Überschreiten der Einkommensgrenze.
+F: Was passiert, wenn ich ohne Krankenversicherung bin?
+A: Strafbar macht sich niemand unmittelbar, wenn eine Krankenversicherung fehlt. Dennoch entstehen erhebliche finanzielle Nachteile: Bei späterer Anmeldung müssen Beiträge für die versicherungsfreie Zeit nachgezahlt werden. Außerdem tragen Unversicherte Behandlungskosten im Krankheitsfall selbst.
+
+
+==================== BEITRAG zusatzbeitrag-krankenkasse ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Zusatzbeitrag Krankenkasse: Kosten senken und sparen
+  heading-1: Der Zusatzbeitrag Krankenkasse 2026: Aktuelle Beitragssätze und Sparpotenziale
+  heading-2: Was ist der Zusatzbeitrag Krankenkasse genau?
+  heading-3: Wie hoch ist der durchschnittliche Zusatzbeitrag Krankenkasse 2026?
+  heading-4: Wer trägt die Kosten des Zusatzbeitrags?
+  heading-5: Zusatzbeiträge im Vergleich: Günstigste und teuerste Kassen 2026
+  heading-6: Sonderkündigungsrecht bei Zusatzbeitragserhöhung
+  heading-7: Wechsel der Krankenkasse: Sparpotenzial und Prozess
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Zusatzbeitrag Krankenkasse (zusatzbeitrag-krankenkasse)
+## 0 Zusatzbeitrag Krankenkasse: Kosten senken und sparen
+
+Den Zusatzbeitrag legt jede Krankenkasse selbst fest. Aktuelle Beitragssätze 2026, wer ihn zahlt und wie Sie mit einem Kassenwechsel bares Geld sparen.
+
+## 1 Der Zusatzbeitrag Krankenkasse 2026: Aktuelle Beitragssätze und Sparpotenziale
+
+Der Zusatzbeitrag Krankenkasse ist eine kassenindividuelle Abgabe, die jede gesetzliche Krankenkasse selbst festlegt. Diese zusätzliche Krankenversicherungsabgabe wird auf das beitragspflichtige Einkommen erhoben – als Wettbewerbsinstrument zwischen den Kassen. Mit Zusatzbeiträgen, die 2026 zwischen 2,18 % und 4,39 % schwanken, entstehen für Versicherte Unterschiede von mehreren hundert Euro pro Jahr.
+
+Mit dem Zusatzbeitrag Krankenkasse können gesetzliche Krankenkassen ihren Finanzbedarf decken, wenn reguläre Beiträge nicht ausreichen. Die Unterschiede zeigen erhebliche Sparpotenziale für Versicherte auf – der Wechsel zu einer günstigeren Kasse lohnt sich oft deutlich.
+
+## 2 Was ist der Zusatzbeitrag Krankenkasse genau?
+
+Jede Krankenkasse legt ihren Zusatzbeitrag selbst fest. Der Verwaltungsrat beschließt den Beitrag, das Bundesamt für Soziale Sicherung genehmigt ihn anschließend. So bleibt die Beitragsfestsetzung transparent und kontrolliert.
+
+Der Zusatzbeitrag Krankenkasse wird zusätzlich zum einheitlichen Beitragssatz von 14,6 % erhoben. Im Jahr 2026 erheben alle Krankenkassen einen Zusatzbeitrag – berechnet auf das beitragspflichtige Bruttoeinkommen. Die Beitragsbemessungsgrenze 2026 liegt bei 69.750 Euro jährlich oder 5.812,50 Euro monatlich.
+
+Als Wettbewerbsinstrument ist der Zusatzbeitrag Krankenkasse für einen Kassenvergleich unerlässlich. Versicherte können durch einen Wechsel ihre Belastung senken.
+
+## 3 Wie hoch ist der durchschnittliche Zusatzbeitrag Krankenkasse 2026?
+
+Das Bundesgesundheitsministerium setzte den durchschnittlichen Zusatzbeitrag Krankenkasse für 2026 auf 2,9 Prozent fest. Das ist ein deutlicher Anstieg von 2,5 Prozent im Jahr 2025 – eine Steigerung um 0,4 Prozentpunkte mit spürbaren Mehrkosten.
+
+[SPIEL mythos: Der durchschnittliche Zusatzbeitrag gilt für alle Krankenkassen einheitlich. → nein]
+
+Zusammen mit dem allgemeinen Beitragssatz von 14,6 Prozent ergibt sich ein Gesamtbeitrag von durchschnittlich 17,5 Prozent. Arbeitnehmer und Arbeitgeber teilen sich diese Kosten hälftig. Die monatlichen Mehrkosten durch die Erhöhung betragen bei 3.000 € Bruttogehalt 12 € oder jährlich 144 € (Stand 2026).
+
+Die finanzielle Belastung varies nach Einkommensgruppe:
+
+- Bei 2.000 € Brutto: monatlich 8,00 € mehr
+
+- Bei 4.000 € Brutto: monatlich 16,00 € mehr
+
+- Bis zur Beitragsbemessungsgrenze: maximal 23,25 € mehr pro Monat
+
+## 4 Wer trägt die Kosten des Zusatzbeitrags?
+
+Für pflichtversicherte Arbeitnehmer und Rentner wird der Zusatzbeitrag zu 50 Prozent vom Arbeitgeber beziehungsweise Rentenversicherungsträger übernommen. Diese paritätische Finanzierung entlastet Versicherte, da sie nur die Hälfte des Zusatzbeitrags selbst zahlen.
+
+[SPIEL karte: Paritätische Finanzierung]
+
+Veränderungen wirken erst zwei Monate später. Der Beitrag wird mit der Rentenzahlung für März 2026 angehoben – Rentenbezieher erhalten dann eine entsprechend geringere Rente. Diese Regelung betrifft alle, deren Krankenkasse den Zusatzbeitrag zum Jahreswechsel erhöht hat.
+
+Freiwillig Versicherte und Selbstständige tragen den gesamten Zusatzbeitrag allein. Für sie verdoppelt sich das Sparpotenzial bei einem Wechsel, da sie den vollen Unterschiedsbetrag einsparen.
+
+## 5 Zusatzbeiträge im Vergleich: Günstigste und teuerste Kassen 2026
+
+Die kassenindividuellen Zusatzbeiträge bewegen sich 2026 zwischen 2,18 % und 4,39 %. Diese Spanne zeigt erhebliche Sparpotenziale beim Kassenwechsel.
+
+| Krankenkasse | Zusatzbeitrag 2026 | Gesamtbeitrag
+
+| BKK firmus | 2,18 % | 16,78 %
+
+| TK (Techniker) | 2,69 % | 17,29 %
+
+| hkk | 2,59 % | 17,19 %
+
+| BKK24 | 4,39 % | 18,99 %
+
+| BKK Herkules | 4,38 % | 18,98 %
+
+Die BKK firmus hält ihren Zusatzbeitrag 2026 stabil bei 2,18 %. Mit einem Gesamtbeitrag von 16,78 % gehört sie zu den günstigsten gesetzlichen Krankenkassen.
+
+[SPIEL gewusst: Die BKK firmus verdoppelte ihre Versichertenzahl 2025 und erreichte im Februar 2026 die Millionengrenze bei den Mitgliedern.]
+
+Am teuersten ist 2026 die BKK24 mit 4,39 % Zusatzbeitrag, dicht gefolgt von HERKULES BKK (4,38 %) und Werra-Meissner BKK (4,35 %). Diese Unterschiede führen zu erheblichen Kostendifferenzen bei identischen Leistungen.
+
+Die Ersparnisse sind konkret berechenbar: Ein Wechsel von der teuersten zur günstigsten Kasse spart Arbeitnehmer mit 4.000 € Bruttoeinkommen monatlich etwa 44 € oder jährlich 530 € Arbeitnehmeranteil.
+
+## 6 Sonderkündigungsrecht bei Zusatzbeitragserhöhung
+
+Bei jeder Anpassung haben Versicherte ein Sonderkündigungsrecht – sie können die Kasse unabhängig von der normalen 12-monatigen Bindungsfrist wechseln.
+
+Das Sonderkündigungsrecht hat klare Fristen: Wechselwillige müssen spätestens bis zum Ende des Erhöhungsmonats einen Antrag bei der neuen Krankenkasse stellen. Der Wechsel wird mit Ablauf des übernächsten Monats wirksam.
+
+[SPIEL schaetzen: Wie viele Krankenkassen passten zum Jahreswechsel 2025/26 ihren Zusatzbeitrag an? → 47]
+
+Bei einer Erhöhung zum 1. Januar 2026 haben Versicherte bis 31. Januar Zeit für den Wechsel. Die neue Mitgliedschaft beginnt zum 1. April 2026. Die alte Krankenkasse muss spätestens einen Monat vor der Erhöhung über das Sonderkündigungsrecht informieren. Übersteigt der neue Zusatzbeitrag den Durchschnittswert von 2,9 Prozent, muss die Kasse zusätzlich auf Wechselmöglichkeiten hinweisen.
+
+## 7 Wechsel der Krankenkasse: Sparpotenzial und Prozess
+
+Ein Kassenwechsel ist einfach: Bei der neuen Kasse anmelden – diese kündigt automatisch die alte Mitgliedschaft. Keine Krankenkasse darf einen Antrag ablehnen, unabhängig von Alter oder Vorerkrankungen. So funktioniert Wettbewerb fair.
+
+Das Sparpotenzial ist beträchtlich. Die Krankenversicherungsbeiträge unterscheiden sich erheblich zwischen den Kassen:
+
+- Bei 3.000 € Brutto: Unterschied zwischen günstigster und teuerster Kasse rund 33 € monatlich
+
+- Bei 4.000 € Brutto: Ersparnis von etwa 44 € monatlich
+
+- Selbstständige sparen das Doppelte, da sie den gesamten Beitrag allein tragen
+
+Für Selbstständige wirken sich Teuerungen besonders spürbar aus. Ein Wechsel kann Ersparnisse von über 1.000 € jährlich bedeuten.
+
+Die grundlegenden Leistungen sind bei allen Kassen zu etwa 95 % identisch. Der Wettbewerb findet über Zusatzleistungen und Beitragssätze statt. Versicherte sollten bei der Wahl nicht nur auf den Preis schauen, sondern auch auf persönlich wichtige Zusatzleistungen wie Bonusprogramme, Vorsorgeuntersuchungen oder alternative Heilmethoden.
+
+Eine Ausnahme bilden Wahltarife mit Bindefristen bis zu drei Jahren. Der Wahltarif Krankengeld erlaubt keine vorzeitige Kündigung der Krankenversicherung trotz Beitragserhöhung.
+
+## 8 Fazit
+
+Die gesetzliche Krankenversicherung steht 2026 vor wachsenden finanziellen Herausforderungen. Steigende Ausgaben für medizinische Leistungen, Pflege und Digitalisierung belasten die Kassen spürbar. Der durchschnittliche Zusatzbeitrag Krankenkasse stieg 2026 auf 2,9 % und wird voraussichtlich weiter ansteigen.
+
+Für Versicherte bedeutet das: Regelmäßige Überprüfung lohnt sich. Die Spanne zwischen günstigster (2,18 %) und teuerster Kasse (4,39 %) beträgt über 2 Prozentpunkte – mehrere hundert Euro jährlich. Der Wechsel ist unkompliziert, kostenlos und die neue Kasse übernimmt alle Formalitäten. Nutzen Sie angekündigte Beitragserhöhungen als Anlass für einen Kassenvergleich – mit niedrigem Aufwand und hohem Sparpotenzial eine lohnende Investition in Ihre Finanzplanung.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste zusatzbeitrag-krankenkasse]
+
+[BLOCK dokumente krankenkassenliste]
+
+
+## FAQ
+F: Wie hoch ist der Zusatzbeitrag zur Krankenkasse 2026?
+A: Der durchschnittliche Zusatzbeitrag steigt 2026 auf 2,9 Prozent, gegenüber 2,5 Prozent im Jahr 2025. Die kassenindividuellen Sätze bewegen sich zwischen 2,18 Prozent bei der BKK firmus und 4,39 Prozent bei der BKK24.
+F: Wer trägt den Zusatzbeitrag zur Krankenversicherung?
+A: Der Zusatzbeitrag wird paritätisch finanziert: Arbeitgeber und Rentenversicherungsträger übernehmen jeweils 50 Prozent, die andere Hälfte zahlen Arbeitnehmer und Rentner selbst. Berechnungsgrundlage ist das Bruttoeinkommen bis zur Beitragsbemessungsgrenze von 69.750 Euro pro Jahr.
+F: Welches Sonderkündigungsrecht gilt bei Erhöhung des Zusatzbeitrags?
+A: Erhöht eine Krankenkasse ihren Zusatzbeitrag, haben Versicherte ein Sonderkündigungsrecht. Der Antrag bei der neuen Kasse muss fristgerecht gestellt werden, die neue Kasse übernimmt die Kündigung bei der alten Krankenkasse automatisch.
+F: Wie viel kosten 0,4 Prozentpunkte mehr Zusatzbeitrag im Monat?
+A: Bei einem Bruttoeinkommen von 2.000 Euro zahlen Sie monatlich 8 Euro mehr, bei 3.000 Euro sind es 12 Euro und bei 4.000 Euro rund 16 Euro zusätzlich. Über das Jahr gerechnet ergeben sich so Mehrkosten zwischen 96 und 192 Euro.
+
+
+==================== BEITRAG wechsel-private-krankenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Private Krankenversicherung wechseln: Ratgeber &amp; Tipps
+  heading-1: Private Krankenversicherung wechseln 2026: Ratgeber mit allen Fakten
+  heading-2: Wer darf die private Krankenversicherung wechseln?
+  heading-3: Kosten beim Wechsel: Was ändert sich 2026?
+  heading-4: Wie läuft die Gesundheitsprüfung beim Wechsel ab?
+  heading-5: Tarifwechsel statt Versicherer-Wechsel: Die bessere Option
+  heading-6: Gibt es einen Weg zurück in die gesetzliche Krankenversicherung?
+  heading-7: Checkliste: Worauf Sie beim Wechsel achten sollten
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Wechsel private Krankenversicherung (wechsel-private-krankenversicherung)
+## 0 Private Krankenversicherung wechseln: Ratgeber & Tipps
+
+Der Wechsel in die private Krankenversicherung prägt das ganze Berufsleben. Voraussetzungen, Vor- und Nachteile und worauf Sie 2026 unbedingt achten sollten.
+
+## 1 Private Krankenversicherung wechseln 2026: Ratgeber mit allen Fakten
+
+Wenn Sie eine private Krankenversicherung wechseln möchten, treffen Sie eine Entscheidung, die Ihr gesamtes Berufsleben prägt. Der Wechsel in die PKV bietet Angestellten, Selbstständigen und Beamten spezielle Vorteile, ist aber an strenge Bedingungen geknüpft. 2026 gelten neue Grenzen: Die Jahresarbeitsentgeltgrenze steigt auf 77.400 Euro jährlich (6.450 Euro monatlich), während die maximalen Arbeitgeberzuschüsse auf 508,59 Euro monatlich zur Krankenversicherung und 104,63 Euro zur Pflegeversicherung angehoben werden.
+
+## 2 Wer darf die private Krankenversicherung wechseln?
+
+Die Berechtigung hängt von Ihrem Berufsstatus und Einkommen ab.
+
+Angestellte: Um die private Krankenversicherung zu wechseln, müssen Sie die Jahresarbeitsentgeltgrenze von 77.400 Euro pro Jahr überschreiten. Diese Grenze gilt nicht nur für das laufende Jahr – das regelmäßige Jahresarbeitsentgelt muss auch voraussichtlich im Folgejahr über der JAEG liegen.
+
+Selbstständige und Freiberufler: Sie unterliegen keiner Einkommensgrenze und können jederzeit eine private Krankenversicherung wechseln.
+
+Beamte: Sie sind nicht an die JAEG gebunden, da sie nicht gesetzlich krankenversicherungspflichtig sind und Beihilfe vom Dienstherrn erhalten.
+
+Studierende: Sie haben unter bestimmten Bedingungen die Möglichkeit, sich von der studentischen Krankenversicherung zu befreien und privat zu versichern. Dies gilt jedoch für das gesamte Studium.
+
+Bestandsschutz: Arbeitnehmer, die bereits Ende 2002 privat versichert waren, profitieren von einer besonderen JAEG von 69.750 Euro jährlich (5.812,50 Euro monatlich).
+
+## 3 Kosten beim Wechsel: Was ändert sich 2026?
+
+Der finanzielle Aspekt beim Wechsel in die private Krankenversicherung spielt eine zentrale Rolle. Privatversicherte Angestellte erhalten ab 2026 einen maximalen Arbeitgeberzuschuss von 508,59 Euro zur Krankenversicherung – das sind 37,28 Euro mehr als 2025.
+
+Zusätzlich steigt der maximale Zuschuss zur Pflegepflichtversicherung auf 104,63 Euro monatlich für kinderlose Arbeitnehmer. Ihr Arbeitgeber zahlt insgesamt maximal 613,22 Euro, egal ob nur für Sie oder verteilt auf Sie und privat versicherte Kinder.
+
+Die Berechnung erfolgt nach folgendem Schema: Der Arbeitgeber zahlt 50 Prozent Ihres PKV-Beitrags, aber maximal so viel wie bei GKV-Pflichtversicherung. Ihr Bruttoeinkommen bis zur Beitragsbemessungsgrenze von 5.812,50 Euro wird mit 17,5 Prozent multipliziert und halbiert.
+
+[SPIEL mythos: Der Arbeitgeberzuschuss zur PKV wird automatisch mit dem Gehalt überwiesen → ja]
+
+## 4 Wie läuft die Gesundheitsprüfung beim Wechsel ab?
+
+Anders als die GKV, die grundsätzlich jeden aufnehmen muss, kalkuliert die PKV ihre Beiträge nach dem individuellen Risiko. Um dieses Risiko einzuschätzen und einen fairen Beitrag zu berechnen, muss der Versicherer den Gesundheitszustand des Antragstellers kennen.
+
+Die Gesundheitsprüfung beim Wechsel erfolgt üblicherweise durch einen detaillierten Fragebogen:
+
+- Aktuelle Beschwerden und laufende Behandlungen
+
+- Ambulante Behandlungen der letzten 3 oder 5 Jahre (außer Routinekontrollen)
+
+- Stationäre Aufenthalte und Operationen
+
+- Regelmäßige Medikamenteneinnahme
+
+- Chronische Erkrankungen und Vorerkrankungen
+
+Diese Prüfung ist die größte Falle beim Wechsel in die private Krankenversicherung. Wer hier eine Diagnose vergisst oder eine Behandlung verschweigt, kann noch Jahre später aus dem Vertrag fliegen. Bei grob fahrlässig falschen Angaben darf die PKV innerhalb der ersten fünf Jahre vom Vertrag zurücktreten, bei Vorsatz sogar zehn Jahre lang.
+
+[SPIEL schaetzen: Mit welchem Alter ist ein Wechsel in die PKV oft nicht mehr sinnvoll möglich? → 48]
+
+## 5 Tarifwechsel statt Versicherer-Wechsel: Die bessere Option
+
+Ein Wechsel zwischen PKV-Anbietern bringt beim Wechsel in eine private Krankenversicherung erhebliche Risiken mit sich. Eine neue Gesundheitsprüfung ist erforderlich, bei der Ihr Gesundheitszustand neu bewertet wird – mit höheren Beiträgen oder Leistungsausschlüssen als mögliche Folge. Bereits gebildete Altersrückstellungen verfallen teilweise für Sie.
+
+Deutlich attraktiver ist der interne Tarifwechsel. Nach § 204 VVG haben Sie das gesetzliche Recht, jederzeit in einen anderen Tarif innerhalb Ihrer Versicherung zu wechseln – ohne neue Gesundheitsprüfung und mit voller Anrechnung Ihrer Alterungsrückstellungen.
+
+Vorteile des internen Tarifwechsels:
+
+- Wechsel in Tarife mit gleichem oder niedrigerem Leistungsniveau erfolgen ohne Risikozuschläge
+
+- Die aus dem Vertrag erworbenen Rechte und die Alterungsrückstellung werden angerechnet
+
+- Anfragen werden innerhalb von 15 Arbeitstagen beantwortet
+
+Vorsicht bei Leistungserweiterungen: Sind die Leistungen im Zieltarif höher oder umfassender, kann das Versicherungsunternehmen für die Mehrleistungen einen Leistungsausschluss oder Risikozuschlag verlangen. Wer mit laufenden Kosten nicht mehr zurecht kommt, kann auf den Basistarif wechseln, der eine solide Grundversorgung mit standardisierten Beitragen bietet.
+
+## 6 Gibt es einen Weg zurück in die gesetzliche Krankenversicherung?
+
+Die Rückkehr von der PKV in die GKV ist 2026 drastisch eingeschränkt. Für Angestellte unter 55 Jahren besteht eine Wechselmöglichkeit nur, wenn das Einkommen dauerhaft unter die Jahresarbeitsentgeltgrenze von 77.400 Euro sinkt.
+
+Besonders restriktiv sind die Regelungen für Personen ab 55 Jahren. Sie müssen erfüllen: mindestens 55 Jahre alt sein, mindestens fünf Jahre PKV-Versicherung haben, davon mindestens zweieinhalb Jahre Krankenversicherungsfreiheit aufgrund Überschreitens der JAEG.
+
+Wichtige Ausnahme: Wird die JAEG nur durch die jährliche Erhöhung unterschritten, ohne dass sich Ihr Gehalt geändert hat, können Sie sich innerhalb von 3 Monaten von der GKV-Pflicht befreien lassen und in der PKV bleiben. Diese Befreiung gilt dauerhaft für Ihr Arbeitsverhältnis.
+
+[SPIEL gewusst: Die Jahresarbeitsentgeltgrenze ist seit 2013 um über 48 Prozent gestiegen – von 52.200 Euro auf 77.400 Euro in 2026. Ein Arbeitnehmer benötigt heute 2.100 Euro mehr monatlich, um die Grenze zu überschreiten.]
+
+## 7 Checkliste: Worauf Sie beim Wechsel achten sollten
+
+Die Entscheidung zum Wechsel in die private Krankenversicherung sollte niemals überstürzt getroffen werden. Schließen Sie eine private Krankenversicherung bitte nie spontan über ein Vergleichsportal ab. Das ist eine der komplexesten und individuellsten Versicherungen überhaupt. Welcher Tarif passt, hängt stark von Beruf, Familienplanung und Gesundheitshistorie ab.
+
+Wichtige Faktoren für Ihre Entscheidung:
+
+| Aspekt | Worauf Sie achten sollten
+
+| Einkommen | Sicherheit über JAEG-Grenze für mehrere Jahre
+
+| Gesundheit | Aktuelle Verfassung und Familienhistorie
+
+| Familienplanung | Kosten für Kinder und Partner
+
+| Alter | Mit jeder Diagnose steigt das Risiko für Zuschläge. Mit Mitte 30 und ohne nennenswerte Vorerkrankungen kommen die meisten ohne Zuschläge durch
+
+Eine anonyme Risikovoranfrage über einen spezialisierten Berater ist oft sinnvoll. Statt blind zu beantragen und eine private Krankenversicherung zu wechseln, sehen Sie vorab, welcher Versicherer wie reagiert – ohne unnötige Spuren durch Ablehnungen.
+
+## 8 Fazit
+
+Der Wechsel in die private Krankenversicherung erfordert durchdachte Langzeitplanung. Die Jahresarbeitsentgeltgrenze steigt auf 77.400 Euro jährlich und erschwert den Zugang für Angestellte. Bereits Privatversicherte profitieren von höheren Arbeitgeberzuschüssen bis zu 508,59 Euro zur Krankenversicherung und 104,63 Euro zur Pflegeversicherung.
+
+Wer zum Wechsel in die private Krankenversicherung entschlossen ist, sollte sich der dauerhaften Konsequenzen bewusst sein: Eine Rückkehr in die GKV ist praktisch ausgeschlossen. Die Gesamtentwicklung von 2013 bis 2026 beträgt +48,3 Prozent. Ein Arbeitnehmer benötigt heute ein um 25.200 Euro höheres Jahreseinkommen als vor 13 Jahren, um überhaupt die Möglichkeit eines Wechsels zu haben.
+
+Eine umfassende Beratung vor dem Wechsel in die private Krankenversicherung ist unverzichtbar – sie sollte Ihre aktuellen Einkommensverhältnisse und Ihre Lebensplanung bis ins Rentenalter berücksichtigen. Ein interner Tarifwechsel bietet oft die bessere Lösung als ein kompletter Wechsel zu einem neuen Anbieter, da die Kosten meist höher ausfallen und neue Gesundheitsprüfungen entfallen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste wechsel-private-krankenversicherung]
+
+[BLOCK vergleich private-krankenversicherung-vergleich]
+
+[BLOCK dokumente private-pflegezusatzversicherung,private-pflegepflichtversicherung,auslandsreisekrankenversicherung,rentner-krankenversicherung]
+
+
+## FAQ
+F: Welche Einkommensgrenze gilt 2026 für den Wechsel in die PKV?
+A: Ab 2026 steigt die Jahresarbeitsentgeltgrenze auf 77.400 Euro brutto im Jahr, was monatlich 6.450 Euro entspricht. Angestellte dürfen erst dann in die private Krankenversicherung wechseln, wenn sie diese Grenze in zwei aufeinanderfolgenden Jahren überschreiten.
+F: Ist bei einem Wechsel des PKV-Anbieters eine Gesundheitsprüfung nötig?
+A: Ja, beim Wechsel von einer PKV zu einer anderen wird eine neue Gesundheitsprüfung fällig. Je höher das Alter und je mehr Vorerkrankungen bestehen, desto wahrscheinlicher sind Risikozuschläge oder höhere Beiträge beim neuen Versicherer.
+F: Wie hoch ist der Arbeitgeberzuschuss zur PKV im Jahr 2026?
+A: Der maximale Arbeitgeberzuschuss zur Krankenversicherung beträgt 2026 monatlich 508,59 Euro, zur Pflegeversicherung 104,63 Euro. Gegenüber 2025 (471,32 Euro bzw. 99,23 Euro) ist das ein spürbarer Anstieg, der privatversicherten Angestellten zugutekommt.
+F: Was passiert bei einem internen Tarifwechsel innerhalb der PKV?
+A: Bei einem internen Tarifwechsel innerhalb derselben PKV entfällt in der Regel die Gesundheitsprüfung, sofern keine zusätzlichen Leistungen vereinbart werden. Die angesparten Alterungsrückstellungen werden vollständig übertragen, was einen erheblichen finanziellen Vorteil bedeutet.
+
+
+==================== BEITRAG familienversicherung-gesetzliche-krankenkasse ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Kostenlose Mitversicherung von Familie und Angehörigen
+  heading-1: Familienversicherung 2026: Einkommensgrenzen, Altersgrenzen und Änderungen ab 2028
+  heading-2: Wer kann mitversichert werden und welche Bedingungen gelten?
+  heading-3: Wie hoch sind die Einkommensgrenzen 2026?
+  heading-4: Welche Altersgrenzen gelten für Kinder?
+  heading-5: Wann ist eine Familienversicherung ausgeschlossen?
+  heading-6: Wie erfolgt die Antragstellung?
+  heading-7: Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Familienversicherung (familienversicherung-gesetzliche-krankenkasse)
+## 0 Kostenlose Mitversicherung von Familie und Angehörigen
+
+Über die Familienversicherung sind Angehörige beitragsfrei mitversichert. Welche Einkommens- und Altersgrenzen 2026 gelten und was sich ab 2028 ändert.
+
+## 1 Familienversicherung 2026: Einkommensgrenzen, Altersgrenzen und Änderungen ab 2028
+
+Die Familienversicherung regelt die beitragsfreie Mitversicherung von Angehörigen in der gesetzlichen Krankenversicherung. Die Einkommensgrenze liegt 2026 bei 565 Euro monatlich, für Minijobs bei 603 Euro. Diese attraktive Regelung ermöglicht erhebliche Kosteneinsparungen gegenüber der privaten Krankenversicherung, wo jedes Familienmitglied separat versichert werden muss.
+
+## 2 Wer kann mitversichert werden und welche Bedingungen gelten?
+
+Familienangehörige können beitragsfrei in der gesetzlichen Krankenversicherung mitversichert werden, wenn sie ihren Wohnsitz oder gewöhnlichen Aufenthalt im Inland haben. Zu den versicherbaren Personen zählen Ehe- und Lebenspartner sowie Kinder des Mitglieds. Gleichzeitig können Stief-, Enkel- und Pflegekinder mitversichert werden, sofern sie in häuslicher Gemeinschaft leben oder überwiegend unterhalten werden.
+
+Grundsätzliche Voraussetzungen für die Familienversicherung:
+
+- Wohnsitz oder gewöhnlicher Aufenthalt in Deutschland
+
+- Keine eigene Krankenversicherungspflicht
+
+- Einkommen unter den festgelegten Grenzen
+
+- Keine hauptberufliche Selbstständigkeit
+
+- Keine Versicherungsfreiheit nach anderen Bestimmungen
+
+Die wichtigsten Voraussetzungen für die Familienversicherung sind ein Einkommen unter 565 Euro monatlich, ein Wohnsitz in Deutschland und das Fehlen einer eigenen Krankenversicherung. Bei Erfüllung aller Bedingungen erhalten familienversicherte Angehörige eine eigene Gesundheitskarte und haben dieselben Leistungsansprüche wie das zahlende Mitglied.
+
+## 3 Wie hoch sind die Einkommensgrenzen 2026?
+
+Die allgemeine Einkommensgrenze steigt 2026 auf 565 Euro monatlich. Mitversicherte Ehepartner oder Kinder können dann pro Jahr bis zu 6.780 Euro verdienen, ohne ihren Status als beitragsfrei mitversicherte Familienangehörige einzubüßen.
+
+Die Verdienstgrenzen Familienversicherung haben sich 2026 erhöht. Für geringfügig Beschäftigte gelten höhere Grenzwerte: Die Minijob-Grenze wird 2026 voraussichtlich auf 603 Euro pro Monat angepasst. Die Minijobgrenze wird parallel zum geltenden gesetzlichen Mindestlohn angepasst, der 2026 ebenfalls steigt.
+
+Besonderheit für Angestellte: Angestellte können von ihren Bruttoeinnahmen noch ihre Werbungskosten oder den entsprechenden Pauschbetrag abziehen. Die Werbungskostenpauschale liegt für Angestellte bei 1.230 Euro im Jahr, also 102,50 Euro im Monat. Das bedeutet, dass familienversicherte Angestellte ein Gesamteinkommen von 667,50 Euro brutto im Monat haben können.
+
+[SPIEL schaetzen: Wie viel dürfen familienversicherte Angestellte 2026 maximal verdienen (inklusive Werbungskostenpauschale)? → 667]
+
+| Beschäftigungsart | Einkommensgrenze 2026 | Jährliches Limit
+
+| Allgemein | 565 Euro | 6.780 Euro
+
+| Minijob | 603 Euro | 7.236 Euro
+
+| Angestellt (mit Werbungskosten) | 667,50 Euro | 8.010 Euro
+
+| Selbstständig | 565 Euro (Gewinn) | 6.780 Euro
+
+## 4 Welche Altersgrenzen gelten für Kinder?
+
+Kinder sind bis zur Vollendung ihres 18. Lebensjahres familienversichert, bis zum 23. Lebensjahr, wenn sie nicht erwerbstätig sind und bis zum 25. Lebensjahr, wenn sie sich in Ausbildung befinden oder ein Studium absolvieren.
+
+Die Altersgrenze von 25 Jahren verlängert sich unter bestimmten Umständen: Absolviert ein Kind einen freiwilligen Wehrdienst, Freiwilligendienst oder eine Tätigkeit als Entwicklungshelfer, wird die Altersgrenze um bis zu zwölf Monate ausgedehnt. Für Kinder mit Behinderung, die außerstande sind, sich selbst zu unterhalten, gilt keine Altersgrenze.
+
+Besonderheiten bei verheirateten Kindern: Verheiratete Studierende können sich ohne Altersgrenze über ihren Ehepartner familienversichern, sofern dieser gesetzlich krankenversichert ist und die weiteren Voraussetzungen erfüllt sind. Darüber hinaus besteht oft Anspruch auf Kindergeld, das Eltern während der Ausbildung ihrer Kinder unterstützt.
+
+[SPIEL gewusst: Verheiratete Studierende haben auch über das 25. Lebensjahr hinaus Anspruch auf Familienversicherung über den gesetzlich versicherten Ehepartner (Stand 2026).]
+
+## 5 Wann ist eine Familienversicherung ausgeschlossen?
+
+Die Familienversicherung ist nicht möglich, wenn bestimmte Ausschlussgründe vorliegen. Hauptberufliche Selbstständigkeit verhindert grundsätzlich die Mitversicherung. Gleiches gilt bei eigener Versicherungspflicht, etwa durch ein Anstellungsverhältnis oberhalb der Minijob-Grenze.
+
+Komplizierte Regel bei gemischten Versicherungsverhältnissen: Kinder sind allerdings nicht über einen gesetzlich versicherten Elternteil familienversichert, wenn der andere Elternteil privat krankenversichert ist und sein monatliches Einkommen 6.450 Euro (1/12 von 77.400 Euro) übersteigt. Diese Prüfung erfolgt in drei Schritten:
+
+1. Einkommen des privat versicherten Elternteils liegt über 77.400 Euro jährlich (6.450 Euro monatlich)
+
+2. Das Einkommen ist regelmäßig höher als das des gesetzlich versicherten Elternteils
+
+3. Der besserverdienende Elternteil ist nicht gesetzlich krankenversichert
+
+Neue Regel für Rentner ab 2026: Der Gesetzgeber hat die Vorschrift über die Familienversicherung ab dem 1. Januar 2026 neu gefasst und zum „Schutz der Solidargemeinschaft" Rentnern den Zugang zur Familienversicherung der gesetzlichen Krankenversicherung über die Wahl einer Teilrente nunmehr gänzlich verschlossen, unabhängig von der Dauer des Teilrentenbezugs.
+
+[SPIEL mythos: Rentner können durch eine Teilrente die Einkommensgrenzen der Familienversicherung unterschreiten und sich kostenlos mitversichern lassen → nein]
+
+## 6 Wie erfolgt die Antragstellung?
+
+Den Antrag stellen Sie direkt bei Ihrer gesetzlichen Krankenkasse. Je nach Situation verwenden die Krankenkassen unterschiedliche Formulare für Erstanträge oder Überprüfungen der Voraussetzungen. Die Bearbeitung dauert normalerweise ein bis vier Werktage.
+
+Erforderliche Unterlagen:
+
+- Geburtsurkunden der Kinder
+
+- Ehe- oder Lebenspartnerschaftsurkunde
+
+- Schulbescheinigungen oder Immatrikulationsbescheinigungen für Kinder ab 18 Jahren
+
+- Aktuelle Entgeltbescheinigung bei nicht-gesetzlich versicherten Partnern
+
+- Gültige Schul- oder Studienbescheinigung für Kinder ab 23 Jahren
+
+Einmal im Jahr verschickt die Kasse einen Fragebogen zu den Einkommensverhältnissen. Mithilfe dieser Informationen prüft die Kasse dann, ob noch alle Voraussetzungen für die Familienversicherung erfüllt sind. Änderungen in der Einkommenssituation müssen unverzüglich gemeldet werden.
+
+## 7 Was ändert sich ab 2028 durch das GKV-Beitragsstabilisierungsgesetz?
+
+Die beitragsfreie Familienversicherung bleibt im Kern erhalten. Weiterhin beitragsfrei versichert bleiben Kinder und Partner mit besonderen Betreuungsaufgaben. Für alle anderen mitversicherten Partner wird ein zusätzlicher Beitrag erhoben in Höhe von 2,5 Prozent des Einkommens des erwerbstätigen Ehepartners.
+
+Ab dem 1. Januar 2028 soll für bisher beitragsfrei mitversicherte Ehepartner ohne bestimmte Betreuungsaufgaben ein Krankenkassenbeitrag von 2,5 Prozent der beitragspflichtigen Einnahmen des erwerbstätigen Mitglieds erhoben werden. Ausnahmen gelten bei Kindern unter sieben Jahren im Haushalt, bei Kindern mit Behinderung, bei der Pflege eines Angehörigen ab Pflegegrad 2 im Umfang von mindestens zehn Stunden pro Woche sowie bei Erreichen der Regelaltersgrenze oder voller Erwerbsminderung.
+
+Beispielrechnung: Verdient ein GKV-Mitglied 3.500 Euro monatlich, zahlt er ab 2028 monatlich 87,50 Euro mehr an seine Krankenkasse für den mitversicherten Partner.
+
+Weiterhin vollständig beitragsfrei bleiben:
+
+- Kinder (ohne Altersgrenze)
+
+- Partner mit Kindern unter 7 Jahren
+
+- Partner mit Kindern mit Behinderung
+
+- Pflegende Angehörige (ab Pflegegrad 2, mindestens 10 Stunden/Woche)
+
+- Partner über der Regelaltersgrenze
+
+- Partner mit voller Erwerbsminderung
+
+Die Familienversicherung für Kinder bleibt vollständig beitragsfrei. Diese fundamentale Säule der Familienversicherung wird durch die Reform nicht angetastet.
+
+## 8 Fazit
+
+Die Familienversicherung stellt einen erheblichen finanziellen Vorteil der gesetzlichen Krankenversicherung dar. 2026 können Familienangehörige bis zu 565 Euro monatlich verdienen, bei Minijobs sogar 603 Euro, ohne den beitragsfreien Versicherungsschutz zu verlieren. Angestellte profitieren zusätzlich von der Werbungskostenpauschale und dürfen effektiv 667,50 Euro verdienen.
+
+Die Altersgrenzen für Kinder bleiben stabil: 18 Jahre grundsätzlich, 23 Jahre ohne Beschäftigung, 25 Jahre in Ausbildung oder Studium. Besondere Aufmerksamkeit erfordern gemischte Versicherungsverhältnisse mit einem privat versicherten Partner, dessen Einkommen 6.450 Euro monatlich übersteigt.
+
+Ab 2026 ist der "Teilrenten-Trick" für Rentner komplett ausgeschlossen. Ab 2028 führt das GKV-Beitragsstabilisierungsgesetz einen Zusatzbeitrag von 2,5 Prozent für mitversicherte Partner ohne besondere Betreuungsaufgaben ein. Die Familienversicherung für Kinder bleibt jedoch vollumfänglich erhalten. Wichtig ist die unverzügliche Meldung von Einkommensänderungen an die Krankenkasse, um Nachforderungen zu vermeiden.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste familienversicherung]
+
+[BLOCK dokumente krankenkassenliste,rentenversicherung-familien]
+
+
+## FAQ
+F: Wer kann in der gesetzlichen Familienversicherung mitversichert werden?
+A: Beitragsfrei mitversichert werden können Ehe- und Lebenspartner sowie Kinder des Mitglieds. Auch Stief-, Enkel- und Pflegekinder sind eingeschlossen, wenn sie in häuslicher Gemeinschaft leben oder überwiegend unterhalten werden. Voraussetzung ist der Wohnsitz in Deutschland.
+F: Wie hoch ist die Einkommensgrenze in der Familienversicherung 2026?
+A: Die Einkommensgrenze liegt 2026 bei 565 Euro monatlich, für geringfügig Beschäftigte bei 603 Euro. Mitversicherte Angehörige dürfen somit bis zu 6.780 Euro im Jahr verdienen, ohne den beitragsfreien Versicherungsstatus zu verlieren.
+F: Bis zu welchem Alter sind Kinder mitversichert?
+A: Kinder sind grundsätzlich bis zum vollendeten 18. Lebensjahr mitversichert, ohne Erwerbstätigkeit bis zum 23. Geburtstag. Für Schüler, Studierende und Auszubildende gilt die Altersgrenze von 25 Jahren, die sich durch Freiwilligen- oder Wehrdienst um bis zu zwölf Monate verlängert.
+F: Welche finanziellen Vorteile bietet die Familienversicherung?
+A: Die beitragsfreie Mitversicherung spart insbesondere kinderreichen Familien mehrere hundert Euro pro Monat, da in der privaten Krankenversicherung jedes Familienmitglied separat versichert werden müsste. Der Leistungsanspruch entspricht dem des zahlenden Hauptmitglieds.
+
+
+==================== BEITRAG verdienstgrenzen-familienversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Einkommensgrenzen &amp; Beitragsgrenzen Familienversicherung 2024
+  heading-1: Verdienstgrenzen Familienversicherung 2026: Grenzen und Besonderheiten
+  heading-2: Einkommensgrenzen 2026: Die wichtigsten Zahlen
+  heading-3: Minijob-Sonderregelung: So funktioniert es
+  heading-4: Gesamteinkommen nach § 16 SGB IV: Was zählt dazu?
+  heading-5: Werbungskostenpauschale: Mehr Spielraum für Angestellte
+  heading-6: Mehrere Einkommensquellen: Wie wird es berechnet?
+  heading-7: Studierende und junge Erwachsene: Besondere Regeln
+  heading-8: Meldepflicht und Kontrolle: Das müssen Sie wissen
+  heading-9: Mindestlohnerhöhung 2026: Paradoxe Folgen
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Verdienstgrenzen Familienversicherung (verdienstgrenzen-familienversicherung)
+## 0 Einkommensgrenzen & Beitragsgrenzen Familienversicherung 2024
+
+Die Verdienstgrenzen entscheiden, wer beitragsfrei familienversichert bleibt. Welche Einkommensgrenzen 2026 gelten und worauf Sie unbedingt achten müssen.
+
+## 1 Verdienstgrenzen Familienversicherung 2026: Grenzen und Besonderheiten
+
+Die Verdienstgrenzen Familienversicherung bestimmen, wer sich beitragsfrei über ein Familienmitglied in der gesetzlichen Krankenversicherung mitversichern kann. Für 2026 gelten neue Grenzen: Die reguläre Einkommensgrenze liegt bei 565 Euro monatlich, die Minijob-Grenze bei 603 Euro. Diese Grenzen der Familienversicherung beeinflussen Millionen Deutsche – Ehepartner, Kinder und andere Angehörige.
+
+## 2 Einkommensgrenzen 2026: Die wichtigsten Zahlen
+
+Die Bezugsgröße für 2026 beträgt 3.955 Euro monatlich. Daraus errechnet sich die reguläre Einkommensgrenze als ein Siebtel – also 565 Euro. Der Mindestlohn steigt ab Januar 2026 auf 13,90 Euro pro Stunde, wodurch sich die Verdienstgrenze im Minijob auf 603 Euro monatlich erhöht.
+
+| Einkommensart | Grenze 2026 | Veränderung
+
+| Reguläres Einkommen | 565 Euro | + 30 Euro
+
+| Minijob | 603 Euro | + 47 Euro
+
+| Bruttoeinkommen Arbeitnehmer* | 667,50 Euro | + 30 Euro
+
+*nach Abzug Werbungskostenpauschale
+
+Diese automatische Kopplung der Minijob-Grenze an den Mindestlohn sorgt seit Oktober 2022 dafür, dass Minijobber ihre Stundenzahl halten können – trotz steigender Löhne.
+
+[SPIEL karte: Minijob-Grenze in der Familienversicherung]
+
+## 3 Minijob-Sonderregelung: So funktioniert es
+
+Bei 603 Euro können Minijobber etwa 43 Stunden im Monat arbeiten. Die Besonderheit: Mehrere Minijobs werden zusammengerechnet. Ein Minijob mit 350 Euro plus ein zweiter mit 280 Euro ergibt 630 Euro – die 603-Euro-Grenze ist überschritten.
+
+Ein gelegentliches Überschreiten ist in maximal zwei Monaten pro Jahr unschädlich. Ein Beispiel macht das deutlich: Ein Minijobber verdient regelmäßig 603 Euro, im März aber 1.000 Euro durch Krankheitsvertretung. Im November 2025 hatte er einmal 800 Euro verdient. Die Familienversicherung bleibt bestehen.
+
+## 4 Gesamteinkommen nach § 16 SGB IV: Was zählt dazu?
+
+Das Gesamteinkommen ist die Summe der Einkünfte nach dem Einkommensteuerrecht. Die Verdienstgrenzen Familienversicherung erfassen dabei verschiedene Einkommensarten unterschiedlich:
+
+Berücksichtigte Einkünfte:
+
+- Löhne und Gehälter (inklusive Weihnachts- und Urlaubsgeld)
+
+- Gewinne aus selbstständiger Tätigkeit
+
+- Mieteinnahmen und Pachterlöse
+
+- Kapitalerträge über dem Sparerfreibetrag von 1.000 Euro jährlich
+
+- Rentenbezüge
+
+Nicht angerechnet werden:
+
+- BAföG-Leistungen
+
+- Kindergeld und Elterngeld
+
+- Ehrenamtspauschale bis 840 Euro und Übungsleiterpauschale bis 3.000 Euro jährlich
+
+[SPIEL mythos: Kapitalerträge unter 1.000 Euro jährlich zählen nicht zum Gesamteinkommen → ja]
+
+## 5 Werbungskostenpauschale: Mehr Spielraum für Angestellte
+
+Die Werbungskostenpauschale für Angestellte liegt bei 1.230 Euro jährlich – also 102,50 Euro im Monat. Das bedeutet: Familienversicherte Angestellte dürfen bis 667,50 Euro brutto verdienen und bleiben versichert.
+
+Diese Regelung schafft deutlich mehr Spielraum. Ein Beispiel: Eine Studentin arbeitet als Aushilfe und verdient 650 Euro brutto. Nach Abzug der Werbungskostenpauschale von 102,50 Euro bleiben 547,50 Euro – die Familienversicherung bleibt bestehen.
+
+Bei pauschal besteuertem Arbeitslohn wie im Minijob können Werbungskosten nicht abgesetzt werden. Hier gelten die strikten Verdienstgrenzen Familienversicherung von 603 Euro.
+
+## 6 Mehrere Einkommensquellen: Wie wird es berechnet?
+
+Die Familienversicherung wird komplex, wenn mehrere Einkommensquellen zusammenkommen. Minijob plus Mieteinnahmen oder Kapitalerträge werden zusammengerechnet – auch bei geringfügiger Beschäftigung. Schon kleine zusätzliche Einnahmen können die Grenze überschreiten.
+
+Praktische Beispiele:
+
+1. Minijob + Zinserträge: 580 Euro Minijob + 50 Euro Zinsen = 630 Euro. Die 603-Euro-Grenze ist überschritten, jetzt gilt die reguläre 565-Euro-Grenze.
+
+2. Befristete Beschäftigung: Eine Studentin arbeitet vier Monate für 872,50 Euro monatlich. Das anrechenbare Gesamteinkommen beträgt genau 565 Euro ((872,50 × 4 - 1.230) ÷ 4). Die Familienversicherung ist weiterhin möglich.
+
+3. Selbstständigkeit: Bei selbstständigen Angehörigen gilt die 565-Euro-Grenze. Maßgeblich ist der Gewinn aus der Tätigkeit.
+
+[SPIEL quiz: Welche Einkommensgrenze gilt bei einem Minijob von 580 Euro plus 40 Euro Mieteinnahmen?]
+
+## 7 Studierende und junge Erwachsene: Besondere Regeln
+
+Kinder sind bis 18 Jahren familienversichert, bis 23 Jahre wenn erwerbslos, und bis 25 Jahre bei Ausbildung oder Studium. Freiwilligendienste wie FSJ verlängern die Versicherungszeit um ein Jahr.
+
+Werkstudenten haben Vorteile: Sie dürfen bis 667,50 Euro verdienen – deutlich mehr als Minijobber mit 603 Euro. Ein Werkstudent darf maximal 20 Wochenstunden arbeiten. Ein Rechenbeispiel zeigt den Unterschied: Ein Student arbeitet 25 Stunden die Woche für 1.100 Euro. Er zahlt selbst Krankenversicherungsbeiträge. Arbeitet er nur 42 Stunden monatlich für 603 Euro als Minijobber, bleibt er familienversichert.
+
+## 8 Meldepflicht und Kontrolle: Das müssen Sie wissen
+
+Wer die Verdienstgrenzen Familienversicherung überschreitet, muss dies der Krankenkasse melden (§ 206 Abs. 1 Nr. 2 SGB V). Dann ist eine Selbstversicherung erforderlich.
+
+Die Krankenkassen prüfen regelmäßig durch Fragebögen. Eine Verjährungsfrist von 30 Jahren gilt bei Vorsatz – etwa wenn bewusst falsche Angaben gemacht oder Einkommen verschwiegen wurden.
+
+[SPIEL gewusst: Ab Mitte 2026 können Minijobber ihre Rentenversicherungsbefreiung erstmals rückgängig machen – eine Rückkehr zur Befreiung ist danach nicht mehr möglich.]
+
+Nachzahlungsrisiken: Werden Änderungen nicht gemeldet, kann die Krankenkasse Beiträge nachfordern. Im schlimmsten Fall zahlen Familien mehrere Tausend Euro nach.
+
+## 9 Mindestlohnerhöhung 2026: Paradoxe Folgen
+
+Der Mindestlohn steigt 2026 auf 13,90 Euro pro Stunde. Dies hat paradoxe Folgen: Bei der 603-Euro-Minijob-Grenze sind nur noch etwa 43 Stunden monatlich möglich.
+
+Für familienversicherte Studierende bedeutet das weniger erlaubte Arbeitsstunden bei höherem Stundenlohn. Wer 2025 zwischen 556,01 und 603 Euro verdiente, wird 2026 automatisch zum Minijobber – wenn der Verdienst bei bis zu 603 Euro bleibt.
+
+## 10 Fazit
+
+Die Verdienstgrenzen Familienversicherung wurden 2026 moderat angehoben: 565 Euro regulär, 603 Euro für Minijobs. Diese Anpassungen folgen der Lohn- und Einkommensentwicklung. Arbeitnehmer profitieren zusätzlich von der 102,50-Euro-Werbungskostenpauschale monatlich – damit sind bis zu 667,50 Euro brutto möglich.
+
+Besondere Vorsicht gilt bei kombinierten Einkommensquellen: Schon geringe Mieteinnahmen oder Kapitalerträge können zusammen mit einem Minijob die Grenze überschreiten. Der 1.000-Euro-Sparerfreibetrag bei Kapitalerträgen bietet hier einen Puffer.
+
+Für 2026 empfiehlt sich eine genaue Prüfung der eigenen Situation. Änderungen beim Einkommen müssen der Krankenkasse unverzüglich gemeldet werden – Versäumnisse können teuer werden.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste verdienstgrenzen-familienversicherung]
+
+[BLOCK dokumente rentenversicherung-familien]
+
+
+## FAQ
+F: Wie hoch ist die Einkommensgrenze in der Familienversicherung 2026?
+A: Die reguläre Einkommensgrenze für die beitragsfreie Familienversicherung liegt 2026 bei 565 Euro pro Monat (ein Siebtel der monatlichen Bezugsgröße). Bei einer geringfügig entlohnten Beschäftigung (Minijob) gilt die höhere Grenze von 603 Euro. Diese Minijob-Grenze ist an den Mindestlohn gekoppelt und steigt automatisch mit.
+F: Welche Einkünfte zählen zum Einkommen?
+A: Bei der Einkommensprüfung werden alle steuerpflichtigen Einkünfte gemäß Paragraf 16 SGB IV berücksichtigt, darunter Löhne, Mieteinnahmen, Kapitalerträge und Renten. Ausgenommen sind BAföG-Leistungen, Kindergeld und Waisenrente. Eine Werbungskostenpauschale von 102,50 Euro monatlich wird automatisch abgezogen, sofern keine höheren Kosten nachgewiesen werden.
+F: Können Studierende in der Familienversicherung bleiben?
+A: Studierende können bis zum 25. Lebensjahr in der Familienversicherung bleiben, sofern sie die Einkommensgrenze von 565 Euro (bzw. 603 Euro beim Minijob) nicht überschreiten. Freiwilligendienste wie FSJ oder BFD können die Versicherungszeit um ein Jahr verlängern. Mindestens ein Elternteil muss gesetzlich krankenversichert sein.
+F: Was passiert, wenn ich die Einkommensgrenze überschreite?
+A: Bei dauerhaftem Überschreiten der Einkommensgrenze endet die beitragsfreie Familienversicherung. Sie müssen sich dann selbst gesetzlich oder privat krankenversichern. Werden mehrere Einkommensquellen kombiniert, zählen diese zusammen: Ein Minijob von 580 Euro plus Mieteinnahmen von 50 Euro überschreitet bereits die 603-Euro-Grenze.
+
+
+==================== BEITRAG freiwillige-gesetzliche-krankenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Freiwillige GKV: Voraussetzungen, Kosten &amp; Vorteile
+  heading-1: Freiwillige gesetzliche Krankenversicherung 2026: Kosten und Voraussetzungen
+  heading-2: Wer kann sich freiwillig gesetzlich krankenversichern?
+  heading-3: Welche Vorversicherungszeit ist erforderlich?
+  heading-4: Wie hoch sind die Beitragssätze und Kosten 2026?
+  heading-5: Welche Einnahmen sind beitragspflichtig?
+  heading-6: Was sind die Unterschiede zur privaten Krankenversicherung?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Freiwillige gesetzliche Krankenversicherung (freiwillige-gesetzliche-krankenversicherung)
+## 0 Freiwillige GKV: Voraussetzungen, Kosten & Vorteile
+
+Die freiwillige gesetzliche Krankenversicherung erlaubt es, in der GKV zu bleiben. Wer 2026 Anspruch hat, was sie kostet und welche Vorteile sie bietet.
+
+## 1 Freiwillige gesetzliche Krankenversicherung 2026: Kosten und Voraussetzungen
+
+Die freiwillige gesetzliche Krankenversicherung ermöglicht es bestimmten Personengruppen, den Schutz der GKV zu behalten, obwohl sie nicht mehr versicherungspflichtig sind.
+
+Diese Versicherungsform stellt eine Alternative zur privaten Krankenversicherung dar für alle, die zwischen beiden Optionen wählen können. Die Beiträge orientieren sich am Einkommen und unterliegen der Beitragsbemessungsgrenze von 69.750 Euro jährlich oder 5.812,50 Euro monatlich für 2026. Gleichzeitig gilt eine Mindestbemessungsgrundlage von 1.318,33 Euro monatlich.
+
+## 2 Wer kann sich freiwillig gesetzlich krankenversichern?
+
+Verschiedene Personengruppen können die freiwillige gesetzliche Krankenversicherung wählen. Bei einem Gehalt bis zur Versicherungspflichtgrenze sind Arbeitnehmer in einer gesetzlichen Krankenkasse pflichtversichert. Wenn ihr Verdienst über dieser Grenze liegt, haben Arbeitnehmer die Wahl: Sie können freiwillig versicherte Mitglieder in der gesetzlich Krankenversicherung bleiben, sich aber auch privat versichern.
+
+Die wichtigsten berechtigten Personengruppen umfassen:
+
+- Arbeitnehmer mit einem regelmäßigen Jahreseinkommen über 77.400 Euro (6.450 Euro monatlich) für 2026
+
+- Selbstständige und Freiberufler im Hauptberuf
+
+- Studierende nach Vollendung des 30. Lebensjahres
+
+- Rentner, die die Vorversicherungszeit nicht erfüllen
+
+- Beamte, Richter und Zeitsoldaten
+
+- Nicht erwerbstätige Personen ohne eigenes Einkommen
+
+- Kinder, die keine Familienversicherung haben, da das Elternteil mit dem größeren Einkommen über der Jahresarbeitsentgeltgrenze liegt und Mitglied in einer privaten Krankenversicherung ist
+
+[SPIEL quiz: Bei welchem monatlichen Bruttoeinkommen endet 2026 die Versicherungspflicht für Arbeitnehmer?]
+
+## 3 Welche Vorversicherungszeit ist erforderlich?
+
+Als freiwilliges Mitglied kann demnach beitreten, wer in den letzten fünf Jahren mindestens 24 Monate oder unmittelbar vorher ununterbrochen mindestens zwölf Monate gesetzlich versichert war. Diese Vorversicherungszeit stellt eine wichtige Hürde für den Zugang zur freiwilligen GKV dar.
+
+Ausnahmen von der Vorversicherungszeit gelten für spezielle Situationen:
+
+- Arbeitnehmer, die erstmals in Deutschland eine Beschäftigung aufnehmen und sofort ein regelmäßiges monatliches Arbeitsentgelt von mehr als 6.450 Euro (2026) verdienen
+
+- Kunden, deren Mitgliedschaft aufgrund einer Auslandsbeschäftigung endete und die innerhalb von zwei Monaten nach ihrer Rückkehr eine Beschäftigung mit mehr als 6.450 Euro (2026) monatlichem regelmäßigen Arbeitsentgelt beginnen
+
+- Personen, die aus dem Ausland zurückkehren oder neu nach Deutschland kommen, wenn sie gesetzliche Vorversicherungszeiten aus dem Ausland nachweisen können
+
+Ist die VVZ nicht erfüllt, kann eine auslaufende Versicherungspflicht als freiwillige Versicherung bei derselben Kasse fortgesetzt werden (Anschlussversicherung). Dank der Verpflichtung zur Anschlussversicherung werden Personen, deren Versicherungspflicht oder Familienversicherung endet, automatisch in die freiwillige Krankenversicherung übernommen. Sie müssen dafür weder eine Vorversicherungszeit erfüllen noch einen Antrag stellen.
+
+[SPIEL karte: Vorversicherungszeit]
+
+## 4 Wie hoch sind die Beitragssätze und Kosten 2026?
+
+Die Kosten der freiwilligen GKV setzen sich aus verschiedenen Komponenten zusammen. Der gesetzlich festgeschriebene allgemeine Beitragssatz beträgt 14,6 Prozent der beitragspflichtigen Einnahmen. Der ermäßigte Beitragssatz beträgt 14,0 Prozent der beitragspflichtigen Einnahmen. Er gilt für Mitglieder, die keinen Anspruch auf Krankengeld haben.
+
+Der durchschnittliche Zusatzbeitragssatz beträgt für 2026 2,9 Prozent, wobei die kassenindividuellen Zusatzbeiträge zwischen 2,18 % und 4,39 % variieren. Hinzu kommt die Pflegeversicherung mit 3,6 % für Versicherte mit Kindern und 4,2 % für Kinderlose über 23 Jahren. Ab zwei Kindern unter 25 Jahren wird der Beitrag je Kind um weitere 0,25 Beitragssatzpunkte abgesenkt.
+
+| Beitragskomponente | Satz 2026 | Bemerkung
+
+| Allgemeiner Beitragssatz | 14,6 % | Mit Krankengeldanspruch
+
+| Ermäßigter Beitragssatz | 14,0 % | Ohne Krankengeldanspruch
+
+| Durchschnittlicher Zusatzbeitrag | 2,9 % | Kassenindividuell 2,18-4,39 %
+
+| Pflegeversicherung (mit Kind) | 3,6 % | Bei 5+ Kindern: 2,4 %
+
+| Pflegeversicherung (kinderlos) | 4,2 % | Ab 23 Jahren
+
+Die Beitragsberechnung erfolgt zwischen zwei Grenzen. Als freiwillig Versicherter zahlen Sie monatlich einen Beitragssatz auf Ihre Einnahmen, mindestens auf ein Einkommen von 1.318,33 Euro für 2026. Das ist die gesetzlich festgelegte Mindestgrenze. Die Höchstgrenze der Einnahmen ist mit 5.812,50 Euro pro Monat für 2026 ebenfalls gesetzlich festgelegt. Dieser Betrag entspricht der sogenannten Beitragsbemessungsgrenze.
+
+[SPIEL schaetzen: Wie hoch ist der monatliche Mindestbeitrag zur freiwilligen GKV 2026 bei der günstigsten Krankenkasse? → 261]
+
+## 5 Welche Einnahmen sind beitragspflichtig?
+
+Die Krankenkassenbeiträge zur freiwilligen Versicherung werden nach Ihrer gesamten wirtschaftlichen Leistungsfähigkeit bemessen. Grundsätzlich werden alle Einnahmen und Geldmittel, die Sie zum Lebensunterhalt verbrauchen könnten, bis zu einem Höchstbetrag zugrunde gelegt. Die steuerliche Behandlung der Einnahmen spielt dabei keine Rolle.
+
+Zu den beitragspflichtigen Einkünften gehören:
+
+- Einkommen aus selbstständiger Tätigkeit
+
+- Arbeitslohn und Gehalt
+
+- Einkünfte aus Vermietung und Verpachtung
+
+- Kapitalerträge und Zinsen
+
+- Renten und Pensionen
+
+- Versorgungsbezüge (z. B. Betriebsrenten) und sonstige Einnahmen (z. B. Unterhaltszahlungen)
+
+Bei angestellten freiwillig Versicherten übernimmt der Arbeitgeber die Hälfte der Beiträge inklusive Zusatzbeiträge. Selbstständige tragen dagegen die kompletten Beiträge allein. Anders als Pflichtversicherte zahlen Selbstständige Beiträge aus allen Einkünften, also auch aus Mieten und Kapitalerträgen. Freiwillig versicherte Rentner zahlen ebenfalls Beiträge auf ihr gesamtes Einkommen.
+
+Die Beitragsfestsetzung erfolgt in zwei Schritten. Zunächst wird der Beitrag vorläufig basierend auf der Einkommensschätzung erhoben. Ohne Nachweis setzt die Krankenkasse automatisch den Höchstbeitrag an, der 2026 bei über 1.200 Euro monatlich liegt. Nach Vorlage des Steuerbescheids erfolgt die endgültige Festsetzung, die zu Nachzahlungen oder Erstattungen führen kann.
+
+[SPIEL mythos: Freiwillig Versicherte zahlen nur auf ihr Arbeitseinkommen Beiträge, nicht auf Kapitalerträge oder Mieten → nein]
+
+## 6 Was sind die Unterschiede zur privaten Krankenversicherung?
+
+Die freiwillige GKV bietet mehrere strukturelle Vorteile gegenüber der privaten Krankenversicherung. Der wichtigste Unterschied liegt in der Beitragsgestaltung: Während PKV-Beiträge primär von Alter, Gesundheitszustand und gewählten Leistungen abhängen, orientieren sich GKV-Beiträge ausschließlich am Einkommen.
+
+Die freiwillige Krankenversicherung bietet Ihnen Schutz ohne Gesundheitsprüfung. Risikozuschläge oder Leistungsausschlüsse aufgrund von Vorerkrankungen sind ausgeschlossen. Die kostenlose Familienversicherung von Familienangehörigen bleibt bestehen, sofern deren Einkommen 565 Euro nicht übersteigt.
+
+Ein wichtiger Aspekt ist die unterschiedliche Flexibilität beim Wechsel. Entscheiden Sie sich gegen die freiwillige gesetzliche Versicherung, müssen Sie dies innerhalb von zwei Wochen melden und eine private Krankenversicherung nachweisen. Ihre neue Krankenversicherung muss dabei direkt an die vorherige anschließen. Der Wechsel zur PKV ist relativ einfach möglich.
+
+Die Rückkehr aus der PKV in die GKV gestaltet sich jedoch deutlich schwieriger. Wer in die private Versicherung wechselt hat begrenzte Möglichkeiten zur Rückkehr in die GKV. Hierfür gilt dann das Sinken des Einkommens unter die Einkommensgrenze, die Aufgabe der Selbstständigkeit oder Freiberuflichkeit, die Möglichkeit der Familienversicherung, Arbeitslosigkeit, jedoch jeweils lediglich für Personen unter 55 Jahren.
+
+Für Familien mit Kindern kann die freiwillige GKV besonders attraktiv sein. Die beitragsfreie Familienversicherung und die Tatsache, dass Kinderzahl bei der Pflegeversicherung zu Beitragssenkungen führt, machen sie oft zur günstigeren Option. Besonders für Familien mit Kindern oder Menschen, die Familienplanung anstreben, kann eine freiwillige Krankenversicherung GKV günstig sein.
+
+## 7 Fazit
+
+Die freiwillige gesetzliche Krankenversicherung stellt für viele Berechtigte eine attraktive Alternative zur privaten Krankenversicherung dar. Mit einer Mindestbemessungsgrundlage von 1.318,33 Euro monatlich entstehen 2026 Mindestbeiträge zwischen etwa 261 und 278 Euro, abhängig vom gewählten Zusatzbeitrag der Krankenkasse. Die Beitragsbemessungsgrenze von 69.750 Euro jährlich begrenzt die maximale Beitragshöhe und sorgt für Planungssicherheit bei höheren Einkommen. Besonders vorteilhaft sind der Verzicht auf Gesundheitsprüfungen, die kostenlose Familienversicherung und die einkommensabhängige Beitragsgestaltung ohne Risikozuschläge. Der durchschnittliche Zusatzbeitrag von 2,9 Prozent für 2026 macht die Gesamtkosten kalkulierbar. Wer sich für die freiwillige GKV entscheidet, sollte jedoch die eingeschränkten Rückkehrmöglichkeiten aus einer späteren PKV berücksichtigen. Die Entscheidung sollte daher wohlüberlegt und unter Betrachtung der langfristigen Lebensplanung getroffen werden, da ein späterer Wechsel zur PKV zwar möglich, die Rückkehr aber erheblich erschwert ist.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste freiwillige-gesetzliche-krankenversicherung]
+
+[BLOCK dokumente auslandsreisekrankenversicherung,rentner-krankenversicherung,freiwilligendienst-und-rente,freiwillige-rentenversicherung]
+
+
+## FAQ
+F: Wer kann sich freiwillig gesetzlich krankenversichern?
+A: Freiwillig gesetzlich versichern können sich Arbeitnehmer mit einem Verdienst über 6.450 Euro monatlich (2026), Selbstständige, Beamte, Rentner ohne Pflichtversicherung sowie nicht erwerbstätige Personen. Voraussetzung ist meist, dass Sie innerhalb der letzten fünf Jahre mindestens 24 Monate gesetzlich versichert waren.
+F: Was kostet die freiwillige GKV 2026?
+A: Die Beiträge richten sich nach dem Einkommen. 2026 gilt eine Mindestbemessungsgrundlage von 1.318,33 Euro monatlich, woraus Mindestbeiträge zwischen 260 und 278 Euro resultieren. Die Obergrenze liegt bei der Beitragsbemessungsgrenze von 5.812,50 Euro monatlich.
+F: Wie hoch sind die Beitragssätze 2026?
+A: Der allgemeine Beitragssatz liegt 2026 bei 14,6 Prozent, der ermäßigte Satz ohne Krankengeldanspruch bei 14,0 Prozent. Hinzu kommen ein durchschnittlicher Zusatzbeitrag von 2,9 Prozent sowie 3,6 Prozent für die Pflegeversicherung bei Versicherten mit Kind.
+F: Zahlt der Arbeitgeber Zuschuss zur freiwilligen GKV?
+A: Bei freiwillig versicherten Angestellten übernimmt der Arbeitgeber die Hälfte des Krankenversicherungsbeitrags. Selbstständige zahlen dagegen den vollen Beitrag selbst, wobei auch Einkünfte aus Mieten und Kapitalerträgen berücksichtigt werden.
+
+
+==================== BEITRAG krankenversicherung-rentner ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Krankenversicherung Rentner: Alles zu Beiträgen und Versicherungsschutz im Alter
+  heading-1: Krankenversicherung Rentner: Beiträge, Leistungen und Sparpotenziale 2026
+  heading-2: Was ist die Krankenversicherung der Rentner?
+  heading-3: Welche Beiträge zahlen Rentner 2026 konkret?
+  heading-4: Wie werden verschiedene Einkommensarten behandelt?
+  heading-5: Private Krankenversicherung: Zuschüsse und Grenzen
+  heading-6: Wechselmöglichkeiten und Sparen
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Krankenversicherung Rentner (krankenversicherung-rentner)
+## 0 Krankenversicherung Rentner: Alles zu Beiträgen und Versicherungsschutz im Alter
+
+Auch Rentner zahlen Beiträge zur Krankenversicherung. Wie sich die Beiträge 2026 berechnen, welche Leistungen gelten und wo Senioren sparen können.
+
+## 1 Krankenversicherung Rentner: Beiträge, Leistungen und Sparpotenziale 2026
+
+Die Krankenversicherung für Rentner regelt, wie Senioren ihre Gesundheitsversorgung im Alter finanzieren. Für viele Menschen bringt der Renteneintritt wichtige Veränderungen bei der Krankenversicherung mit sich – sowohl bei den Beitragssätzen als auch bei den Leistungen. Der allgemeine Beitragssatz beträgt aktuell 14,6 Prozent. Rentner zahlen davon 7,3 Prozent, während der Rentenversicherungsträger die gleiche Summe beisteuert. Hinzu kommt der durchschnittliche Zusatzbeitrag von 2,9 Prozent (2026), von dem Rentner wieder nur die Hälfte tragen. Diese Grundstruktur unterscheidet sich deutlich von der Berufstätigkeit, wo Arbeitgeber und Arbeitnehmer die Kosten teilen.
+
+## 2 Was ist die Krankenversicherung der Rentner?
+
+Die meisten Rentner sind in der Krankenversicherung der Rentner (KVdR) pflichtversichert. Diese greift automatisch, wenn zwei Voraussetzungen erfüllt sind: erstens der Anspruch auf eine gesetzliche Rente und zweitens die sogenannte Vorversicherungszeit.
+
+Die Vorversicherungszeit ist ein zentrales Kriterium. Sie ist erfüllt, wenn seit Aufnahme der Erwerbstätigkeit bis zum Rentenantrag mindestens 90 Prozent der zweiten Hälfte dieses Zeitraums eine Mitgliedschaft in der gesetzlichen Krankenversicherung oder Familienversicherung bestanden hat. Ein praktisches Beispiel: Wer 40 Jahre erwerbstätig war und in den letzten 20 Jahren mindestens 18 Jahre Mitglied war, erfüllt diese Voraussetzung.
+
+[SPIEL karte: Krankenversicherung der Rentner (KVdR)]
+
+Bei der Berechnung werden für jedes Kind – leiblich, adoptiert, Stief- oder Pflegekind – pauschal drei Jahre angerechnet. Diese Kinderzeiten können ausschlaggebend sein, um die 90-Prozent-Hürde zu schaffen. Wer die Vorversicherungszeit nicht erfüllt, kann sich freiwillig gesetzlich krankenversichern, zahlt dann aber deutlich höhere Beiträge auf alle Einkommensarten.
+
+Die Beitragsbemessungsgrenze liegt 2026 bei einem jährlichen Bruttoeinkommen von 69.750 Euro – monatlich entspricht das 5.812,50 Euro.
+
+## 3 Welche Beiträge zahlen Rentner 2026 konkret?
+
+Pflichtversicherte in der KVdR tragen 7,3 Prozent des allgemeinen Beitragssatzes plus die Hälfte des kassenindividuellen Zusatzbeitrags. Der durchschnittliche Zusatzbeitragssatz aller Krankenkassen beträgt 2,9 Prozent. Rentner zahlen selbst 1,45 Prozentpunkte davon.
+
+Die Pflegeversicherung müssen Rentner vollständig selbst tragen. Für 2026 gelten folgende Beitragssätze:
+
+- Allgemeiner Beitragssatz: 3,6 Prozent der Bruttorente
+
+- Beitragssatz für Kinderlose: 4,2 Prozent der Bruttorente (3,6 % + 0,6 % Kinderlosenzuschlag)
+
+Eine wichtige Ausnahme: Rentner, die vor dem 1. Januar 1940 geboren wurden, zahlen keinen Kinderlosenzuschlag – unabhängig von ihrem Familienstand. Sie zahlen 3,6 Prozent.
+
+[SPIEL mythos: Beitragserhöhungen in der Krankenversicherung werden für Rentner sofort im Januar wirksam. → nein]
+
+## 4 Wie werden verschiedene Einkommensarten behandelt?
+
+Rentner in der KVdR zahlen auf Miet- oder Kapitalerträge keine Krankenversicherungsbeiträge. Diese Privilegierung ist ein großer Vorteil gegenüber freiwillig Versicherten. Ausnahmen sind Versorgungsbezüge wie Betriebsrenten und Einkommen aus selbstständiger Tätigkeit – hier werden die vollen 14,6 Prozent plus Zusatzbeitrag fällig.
+
+Seit 2020 gibt es Entlastung für Betriebsrentner. Der Freibetrag ist zum 1. Januar 2026 um 10,50 Euro auf 197,75 Euro monatlich gestiegen. Das bedeutet: Die ersten 197,75 Euro Ihrer Betriebsrente bleiben in der Krankenversicherung beitragsfrei. Erst bei höheren Beträgen werden Beiträge fällig.
+
+[SPIEL schaetzen: Wie hoch ist der monatliche Freibetrag für Betriebsrenten 2026? → 197,75]
+
+Wichtig: Der Freibetrag gilt nur für die Krankenversicherung, nicht für die Pflegeversicherung. In der Pflegeversicherung wird der volle Beitragssatz auf die gesamte Betriebsrente fällig.
+
+| Einkommensart | KVdR-Beitrag | Freiwillige Versicherung
+
+| Gesetzliche Rente | 7,3% + 1,45% (Zusatz) | 14,6% + 2,9%
+
+| Betriebsrente | 14,6% + 2,9% (ab 197,75€) | 14,6% + 2,9%
+
+| Mieteinnahmen | 0% | 14,0% + 2,9%
+
+| Kapitalerträge | 0% | 14,0% + 2,9%
+
+## 5 Private Krankenversicherung: Zuschüsse und Grenzen
+
+Privatversicherte Rentner zahlen erheblich mehr. Eine private Krankenversicherung kostet 2026 im Durchschnitt 617 Euro monatlich – 13 Prozent mehr als im Vorjahr.
+
+Zum Ausgleich gibt es einen erhöhten Rentenzuschuss. Dieser beträgt 2026 8,75 Prozent der gesetzlichen Rente. Der theoretische Höchstzuschuss liegt bei 508,59 Euro monatlich. Die Berechnung lautet: 50 % des allgemeinen Beitragssatzes (14,6 %) plus 50 % des durchschnittlichen Zusatzbeitrags (2,9 %) = 8,75 %.
+
+Praktisch bekommen Privatversicherte maximal 50 Prozent ihres tatsächlichen PKV-Beitrags als Zuschuss. Wichtig: Der Antrag muss selbst bei der Deutschen Rentenversicherung gestellt werden – ohne Antrag erfolgt keine Zahlung.
+
+[SPIEL quiz: Wie hoch ist der maximale Rentenzuschuss zur privaten Krankenversicherung 2026?]
+
+Ein Nachteil: Die Pflegeversicherung wird nicht bezuschusst. Privatversicherte tragen diese Kosten komplett selbst.
+
+## 6 Wechselmöglichkeiten und Sparen
+
+Erhöht eine Krankenkasse ihren Zusatzbeitrag, entsteht ein Sonderkündigungsrecht. Sie können wechseln, auch wenn Sie noch nicht zwölf Monate Mitglied sind. Die Kündigungsfrist liegt typischerweise bis zum Ende des Monats, in dem der neue Zusatzbeitrag gilt.
+
+Ein Wechsel von privat zurück in die gesetzliche Krankenversicherung ist im Rentenalter praktisch unmöglich. Privatversicherte haben aber Zugang zu Sozialtarifen: Der PKV-Basistarif sieht 2026 einen Höchstbeitrag von 1.017,18 Euro vor.
+
+Handlungsoptionen bei steigenden Beiträgen:
+
+- Sonderkündigung bei Zusatzbeitragserhöhung nutzen
+
+- Krankenkassenvergleich durchführen
+
+- Bei PKV: Tarifwechsel prüfen
+
+- Sozialtarife bei Schwierigkeiten beantragen
+
+- Rentenzuschuss aktiv beantragen
+
+## 7 Fazit
+
+Die Krankenversicherung für Rentner bleibt komplex mit großen finanziellen Auswirkungen. Für die meisten ist die KVdR 2026 die beste Option, da die Rentenversicherung die Hälfte der Beiträge zahlt. Der gestiegene Freibetrag für Betriebsrenten auf 197,75 Euro bringt vielen Entlastung. Privatversicherte profitieren vom erhöhten Rentenzuschuss von 8,75 Prozent, müssen aber deutlich höhere Beiträge tragen. Die Pflegeversicherung wird für alle teurer. Bei Beitragserhöhungen lohnt sich ein Krankenkassenwechsel.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste krankenversicherung-rentner]
+
+[BLOCK dokumente rentner-krankenversicherung,auslandsreisekrankenversicherung,tipps-fuer-rentnerinnen-und-rentner,rentner-steuerrecht]
+
+
+## FAQ
+F: Welche Beiträge zahlen Rentner 2026 zur Krankenversicherung?
+A: Pflichtversicherte in der KVdR zahlen 2026 einen Eigenanteil von 7,3 Prozent an der Krankenversicherung plus die Hälfte des Zusatzbeitrags (durchschnittlich 2,9 Prozent). Die Rentenversicherung trägt die übrigen 7,3 Prozent des allgemeinen Beitragssatzes.
+F: Was ist die Krankenversicherung der Rentner (KVdR)?
+A: Die KVdR ist die Pflichtversicherung für Rentner, die eine gesetzliche Alters-, Erwerbsminderungs- oder Hinterbliebenenrente erhalten und die Vorversicherungszeit erfüllen. Sie müssen in den letzten 20 Jahren vor Rentenantragstellung zu mindestens 90 Prozent gesetzlich versichert gewesen sein.
+F: Wie hoch ist der Pflegeversicherungsbeitrag für Rentner?
+A: Rentner tragen den Pflegeversicherungsbeitrag vollständig selbst. Er beträgt 3,6 Prozent, für Kinderlose 4,2 Prozent. Eine Ausnahme bilden Kinderlose, die vor 1940 geboren wurden – sie zahlen den regulären Satz von 3,6 Prozent.
+F: Zahlen Rentner auf Mieteinnahmen oder Kapitalerträge Beiträge?
+A: Rentner in der KVdR zahlen auf Miet- oder Kapitalerträge keine Krankenversicherungsbeiträge. Ausnahmen gelten für Versorgungsbezüge und Einkünfte aus selbstständiger Tätigkeit über 197,75 Euro monatlich – hierauf fallen 14,6 Prozent plus Zusatzbeitrag an.
+
+
+==================== BEITRAG studenten-krankenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Krankenversicherung Studenten: Pflicht, Kosten &amp; Optionen
+  heading-1: Krankenversicherung Studenten: Alle Optionen und Kosten 2026
+  heading-2: Wer braucht eine Studentenkrankenversicherung?
+  heading-3: Kosten der studentischen Krankenversicherung 2026
+  heading-4: Familienversicherung – kostenfrei bis 25 Jahre
+  heading-5: Private Krankenversicherung für Studenten
+  heading-6: BAföG und Krankenversicherung
+  heading-7: Nach dem Studium: Der Übergang
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Krankenversicherung Studenten (studenten-krankenversicherung)
+## 0 Krankenversicherung Studenten: Pflicht, Kosten & Optionen
+
+Studierende müssen krankenversichert sein – je nach Alter und Einkommen gibt es mehrere Optionen. Welche 2026 für Sie infrage kommt und was sie kostet.
+
+## 1 Krankenversicherung Studenten: Alle Optionen und Kosten 2026
+
+Krankenversicherung Studenten ist in Deutschland Pflicht. Die gute Nachricht: Je nach Alter und Einkommen haben Sie mehrere Optionen. Bei der Immatrikulation werden Sie automatisch versicherungspflichtig. Sie können zwischen kostenloser Familienversicherung, günstiger studentischer Krankenversicherung oder privaten Tarifen wählen. Mit der richtigen Wahl sparen Sie mehrere Hundert Euro im Jahr.
+
+## 2 Wer braucht eine Studentenkrankenversicherung?
+
+Die Krankenversicherung Studenten folgt einem klaren System mit drei Hauptoptionen:
+
+Familienversicherung (kostenlos bis 25 Jahre): Sie bleiben über die Eltern mitversichert, solange Sie unter 25 Jahren sind und Ihr monatliches Einkommen 565 Euro (603 Euro bei Minijob) nicht übersteigt. Dies ist die kostengünstigste Lösung für junge Studierende.
+
+Studentische Krankenversicherung: Ab 25 Jahren oder bei höherem Einkommen müssen Sie sich selbst anmelden. Diese spezielle Versicherungsform für Studierende gilt bis zum 30. Geburtstag und kostet deutlich weniger als reguläre Arbeitnehmerversicherungen.
+
+Besonderheiten: Duale Studenten gelten rechtlich als Arbeitnehmer und zahlen reguläre Beiträge. Wer mehr als 20 Stunden pro Woche arbeitet, verliert den studentischen Status und muss in die reguläre Versicherung wechseln.
+
+Die Familienversicherung hat immer Vorrang – wer die Voraussetzungen erfüllt, muss diese zuerst nutzen.
+
+[SPIEL schaetzen: Wie hoch ist der monatliche Gesamtbeitrag für die studentische Krankenversicherung inklusive Pflegeversicherung? → 147]
+
+## 3 Kosten der studentischen Krankenversicherung 2026
+
+Der Basisbeitrag zur Krankenversicherung der Studenten (KVdS) liegt 2026 bei 87,38 Euro monatlich. Hinzu kommt ein kassenindividueller Zusatzbeitrag – hier lohnt sich ein Vergleich zwischen den Anbietern. Die Zusatzbeiträge variieren 2026 zwischen 1,8 und 4,4 Prozent. Das entspricht einer monatlichen Spanne von etwa 15 bis 38 Euro.
+
+Zur Krankenversicherung Studenten addieren sich obligatorisch die Pflegversicherungsbeiträge:
+
+- Unter 23 Jahren: 30,78 Euro
+
+- Ab 23 Jahren (kinderlos): 35,91 Euro
+
+| Komponente | Unter 23 Jahren | Ab 23 Jahren
+
+| Krankenversicherung | 87,38 € + Zusatz | 87,38 € + Zusatz
+
+| Pflegeversicherung | 30,78 € | 35,91 €
+
+| Gesamtbeitrag (bei 2,9 %) | ca. 143 € | ca. 148 €
+
+Sparpotenzial nutzen: Wechseln Sie zu einer Krankenkasse mit 1,8 Prozent Zusatzbeitrag, sparen Sie etwa 11 Euro monatlich – im Jahr immerhin 132 Euro.
+
+[SPIEL quiz: Bis zu welchem Alter gilt die studentische Krankenversicherung?]
+
+## 4 Familienversicherung – kostenfrei bis 25 Jahre
+
+Die beste Option für viele junge Studierenden: Wenn ein Elternteil gesetzlich krankenversichert ist, bleiben Sie bis zum 25. Geburtstag beitragsfrei mitversichert. Diese Lösung spart erhebliche Kosten und wird durch die Familienversicherung bei gesetzlichen Krankenkassen geregelt.
+
+Konkrete Voraussetzungen:
+
+- Alter unter 25 Jahren
+
+- Monatliches Einkommen maximal 565 Euro (603 Euro bei Minijob)
+
+- Mindestens ein Elternteil ist gesetzlich versichert
+
+- Besonderheit: Wer Wehr- oder Freiwilligendienst leistet, kann länger versichert bleiben
+
+Wichtig zu wissen: Private Versicherungen der Eltern führen zu anderen rechtlichen Regelungen. Kontaktieren Sie Ihre Krankenkasse, um Ihre individuelle Situation zu klären.
+
+[SPIEL karte: Familienversicherung]
+
+## 5 Private Krankenversicherung für Studenten
+
+Private Tarife kosten zwischen 92 und 500 Euro monatlich – abhängig vom gewählten Leistungsumfang. Bereits ab 110 Euro finden Sie private Krankenversicherung Angebote, die bessere Leistungen als die gesetzliche Variante bieten.
+
+Vorteil für Beamtenkinder: Die Beihilfe übernimmt oft 80 Prozent der Kosten, wodurch sich private Versicherung erheblich rentiert.
+
+Kritischer Punkt beim Wechsel: Der Umstieg von der gesetzlichen zur privaten Krankenversicherung ist während des Studiums bindend. Eine Rückkehr zur GKV ist erst nach Studienende unter bestimmten Bedingungen möglich – typischerweise nur, wenn Ihr späteres Einkommen unter der Jahresarbeitsentgeltgrenze von 77.400 Euro (2026) liegt.
+
+Diese Entscheidung sollte gut durchdacht sein, da sie langfristige Auswirkungen hat.
+
+## 6 BAföG und Krankenversicherung
+
+Erhalten Sie BAföG und sind nicht familienversichert, bekommen Sie finanzielle Zuschüsse:
+
+- Krankenversicherung: 102 Euro monatlich
+
+- Pflegeversicherung: 35 Euro monatlich
+
+- Gesamtzuschuss: 137 Euro
+
+Hinweis: Beantragen Sie diese Zuschüsse separat beim BAföG-Amt – sie werden nicht automatisch mit dem BAföG ausgezahlt.
+
+[SPIEL gewusst: BAföG-Empfänger erhalten einen Krankenversicherungszuschuss von 137 Euro monatlich, müssen diesen aber gesondert beantragen (Stand 2026).]
+
+## 7 Nach dem Studium: Der Übergang
+
+Mit Berufsstart ändern sich die Regeln für die Krankenversicherung Studenten. Angestellte können in der privaten Krankenversicherung bleiben, wenn Ihr Jahreseinkommen über 77.400 Euro liegt. Darunter müssen Sie zur gesetzlichen Versicherung zurückkehren.
+
+Für Rückkehrer aus der PKV: Der Wechsel ist erst möglich, wenn Sie als Angestellte unter der Einkommensgrenze verdienen. Freiberufler und Selbstständige haben freie Wahl zwischen gesetzlich und privat.
+
+## 8 Fazit
+
+Die optimale Krankenversicherung Studenten hängt von Ihrer persönlichen Situation ab:
+
+- Unter 25 Jahren mit niedrigem Einkommen: Nutzen Sie die Familienversicherung (kostenlos)
+
+- Ab 25 oder höheres Einkommen: Vergleichen Sie studentische KVdS-Angebote – achten Sie auf Zusatzbeiträge zwischen 1,8 und 4,4 Prozent
+
+- Besondere Ansprüche oder beamtete Eltern: Prüfen Sie private Tarife, beachten Sie aber die bindende Entscheidung
+
+- BAföG-Empfänger: Beantragen Sie den 137-Euro-Zuschuss separat bei Ihrem Amt
+
+Ein jährlicher Kassenvergleich lohnt sich. Die Kosten einer guten Krankenversicherung Studenten liegen 2026 zwischen 143 und 165 Euro monatlich – mit erheblichem Sparpotenzial durch die Wahl der richtigen Krankenkasse.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste krankenversicherung-studenten]
+
+[BLOCK vergleich studentenkonto-vergleich]
+
+[BLOCK vergleich studentenkreditkarte-vergleich]
+
+[BLOCK dokumente auslandsreisekrankenversicherung,studenten-sozialversicherung,rentner-krankenversicherung]
+
+
+## FAQ
+F: Wie lange können Studierende in der Familienversicherung bleiben?
+A: Die beitragsfreie Familienversicherung gilt bis zum vollendeten 25. Lebensjahr, sofern das monatliche Einkommen höchstens 565 Euro beträgt. Bei einem Minijob liegt die Grenze 2026 bei 603 Euro monatlich. Wehr- oder Freiwilligendienst kann die Versicherungsdauer entsprechend verlängern.
+F: Wie hoch ist der Beitrag zur studentischen Krankenversicherung 2026?
+A: Der Grundbeitrag zur Krankenversicherung der Studenten (KVdS) beträgt 87,38 Euro monatlich zuzüglich eines kassenindividuellen Zusatzbeitrags von durchschnittlich 2,9 Prozent. Inklusive Pflegeversicherung liegen die Gesamtkosten bei etwa 143 bis 165 Euro monatlich.
+F: Bis zu welchem Alter gilt die studentische Krankenversicherung?
+A: Die studentische Krankenversicherung (KVdS) gilt grundsätzlich bis zur Vollendung des 30. Lebensjahres. Unter bestimmten Voraussetzungen, etwa bei Pflege von Angehörigen oder eigener Erkrankung, ist eine Verlängerung möglich.
+F: Lohnt sich eine private Krankenversicherung für Studierende?
+A: Private Studententarife beginnen bei rund 110 Euro monatlich, mit Selbstbeteiligung teilweise ab 92 Euro. Besonders lohnend ist die PKV für Beamtenkinder, da die Beihilfe der Eltern in der Regel 80 Prozent der Kosten übernimmt. Die monatlichen Kosten reichen je nach Leistungspaket von 150 bis 500 Euro.
+
+
+==================== BEITRAG krankengeld ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Finanzielle Sicherung bei langer Arbeitsunfähigkeit &#8211; Anspruch und Höhe 2026
+  heading-1: Krankengeld 2026: Anspruch, Höhe und Dauer
+  heading-2: Was ist Krankengeld und wie unterscheidet es sich von der Entgeltfortzahlung?
+  heading-3: Wie wird Krankengeld berechnet?
+  heading-4: Wer hat Anspruch auf Krankengeld?
+  heading-5: Wie lange wird Krankengeld gezahlt?
+  heading-6: Welche Höchstbeträge gelten 2026?
+  heading-7: Wie wirkt sich Krankengeld steuerlich aus?
+  heading-8: Was passiert nach der Aussteuerung?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Krankengeld (krankengeld)
+## 0 Finanzielle Sicherung bei langer Arbeitsunfähigkeit - Anspruch und Höhe 2026
+
+Krankengeld sichert das Einkommen bei längerer Arbeitsunfähigkeit. Wer es bekommt, wie hoch es 2026 ausfällt und wie lange die Krankenkasse zahlt.
+
+## 1 Krankengeld 2026: Anspruch, Höhe und Dauer
+
+Krankengeld regelt die finanzielle Absicherung bei längerer Arbeitsunfähigkeit und unterscheidet sich stark zwischen Arbeitnehmern und Selbstständigen.
+
+Wenn die Gesundheit länger streikt, stehen viele vor der Frage: Wie lange reicht das Geld? Das Krankengeld liegt 2026 bei maximal 135,63 Euro täglich, was bei längerer Krankheit eine erhebliche Einkommenslücke bedeuten kann. Besonders Selbstständige müssen aktiv vorsorgen, während Arbeitnehmer automatisch abgesichert sind.
+
+## 2 Was ist Krankengeld und wie unterscheidet es sich von der Entgeltfortzahlung?
+
+Krankengeld ist eine Entgeltersatzleistung, die nach dem Ende der Entgeltfortzahlung des Arbeitgebers greift, um Einkommenseinbußen bei andauernder Erkrankung abzumildern. Die ersten sechs Wochen zahlt der Arbeitgeber das volle Gehalt weiter. Anspruch auf Krankengeld haben Arbeitnehmer ab dem Zeitpunkt, an dem die Entgeltfortzahlung endet – im Regelfall ab der siebten Woche.
+
+[SPIEL schaetzen: Wie hoch ist der maximale tägliche Krankengeld-Betrag 2026? → 135.63]
+
+Der wesentliche Unterschied liegt in der Finanzierung und Höhe. In den ersten sechs Wochen zahlt der Arbeitgeber Entgeltfortzahlung (100 Prozent Gehalt), während das Krankengeld deutlich niedriger ausfällt. Besteht kein Anspruch auf Lohnfortzahlung, beispielsweise in den ersten vier Wochen eines neuen Arbeitsverhältnisses, kann der Krankengeldanspruch bereits ab dem ersten Tag bestehen.
+
+Die rechtliche Grundlage bildet das Sozialgesetzbuch V (SGB V), insbesondere die Paragraphen 44 bis 51. Seit 2023 erfolgt die Arbeitsunfähigkeitsbescheinigung elektronisch (eAU) direkt vom Arzt an die Krankenkasse. Das Krankengeld ist eine der zentralen Krankenversicherung Leistungen, die Arbeitnehmer während längerer Erkrankungen schützen.
+
+## 3 Wie wird Krankengeld berechnet?
+
+Das Krankengeld beträgt 70 Prozent des Bruttogehalts, höchstens jedoch 90 Prozent des Nettogehalts. Maßgeblich ist das Arbeitsentgelt des letzten vor Beginn der Arbeitsunfähigkeit abgerechneten Entgeltabrechnungszeitraums von mindestens vier Wochen. Einmalzahlungen wie Weihnachtsgeld oder Urlaubsgeld werden anteilig berücksichtigt; in diesem Fall gilt eine Obergrenze von 100 Prozent des Nettoentgelts.
+
+Die Berechnung erfolgt in mehreren Schritten:
+
+- Ermittlung des täglichen Bruttogehalts
+
+- Berechnung von 70 Prozent dieses Betrags
+
+- Prüfung der 90-Prozent-Netto-Grenze
+
+- Anwendung der Beitragsbemessungsgrenze als Obergrenze
+
+Ein praktisches Rechenbeispiel: Bei einem monatlichen Bruttogehalt von 3.000 Euro plus 1.200 Euro Weihnachtsgeld ergibt sich ein berechnetes Monatsbrutto von 3.100 Euro. 70 Prozent davon sind 2.170 Euro, aber diese Summe wird durch die 90-Prozent-Netto-Grenze und die Beitragsbemessungsgrenze begrenzt.
+
+| Bruttogehalt | Krankengeld (70%) | Netto-Grenze (90%) | Tatsächliches Krankengeld
+
+| 3.000 Euro | 2.100 Euro | 1.980 Euro | ca. 1.742 Euro (nach Abzügen)
+
+| 4.000 Euro | 2.800 Euro | 2.430 Euro | ca. 2.138 Euro (nach Abzügen)
+
+| 6.000 Euro | 4.200 Euro | 3.600 Euro | ca. 3.564 Euro (BBG-gedeckelt)
+
+Vom Brutto-Krankengeld werden die Arbeitnehmerbeiträge zur Renten-, Arbeitslosen- und Pflegeversicherung abgezogen, wodurch sich das ausgezahlte Krankengeld um etwa 12,4 Prozent reduziert. Den Arbeitgeberanteil übernimmt die Krankenkasse.
+
+## 4 Wer hat Anspruch auf Krankengeld?
+
+Grundsätzlich haben alle gesetzlich krankenversicherten Arbeitnehmer Anspruch auf Krankengeld. Selbstständige, die freiwillig gesetzlich versichert sind, erhalten nur dann Krankengeld, wenn sie den allgemeinen Beitragssatz zahlen und eine entsprechende Wahlerklärung abgegeben haben.
+
+[SPIEL quiz: Ab welchem Tag erhalten Selbstständige mit Wahlerklärung Krankengeld?]
+
+Selbstständige zahlen für Krankengeld statt des ermäßigten Beitragssatzes von 14,0 Prozent den normalen Beitragssatz von 14,6 Prozent plus Zusatzbeitrag, also 0,6 Prozentpunkte mehr. Da der Beitragsaufschlag nur auf das Einkommen bis zur Beitragsbemessungsgrenze fällig wird, zahlen sie höchstens rund 35 Euro im Monat für das Krankengeld.
+
+Die Wahlerklärung muss bei der Krankenkasse schriftlich eingereicht werden. An diese Wahl sind Selbstständige für drei Jahre gebunden. Die Bindungswirkung bleibt auch bei Kassenwechsel erhalten. Nach Ablauf der Bindungswirkung gilt die Wahlerklärung unbefristet weiter.
+
+Keinen Anspruch haben:
+
+- Familienversicherte ohne eigenes Einkommen
+
+- Hauptberuflich Selbstständige ohne Wahlerklärung
+
+- Selbstständige, die nichts verdienen oder Verlust machen
+
+## 5 Wie lange wird Krankengeld gezahlt?
+
+Für dieselbe Krankheit wird Krankengeld innerhalb von drei Jahren für höchstens 78 Wochen gezahlt. Die sechs Wochen Entgeltfortzahlung durch den Arbeitgeber sind darin enthalten. Die Krankenkasse zahlt somit maximal 72 Wochen lang Krankengeld.
+
+Diese 78-Wochen-Regel ist an wichtige Bedingungen geknüpft:
+
+- Sie gilt pro Krankheit, nicht pro Jahr
+
+- Bei einer neuen, anderen Erkrankung beginnt ein eigenständiger Anspruch
+
+- Tritt nach mindestens sechs Monaten Arbeitsfähigkeit dieselbe Krankheit erneut auf, beginnt eine neue 78-Wochen-Frist
+
+- Die Blockfrist von drei Jahren läuft ab Beginn der ersten Arbeitsunfähigkeit
+
+Während der stufenweisen Wiedereingliederung (Hamburger Modell) erhalten Sie weiterhin Krankengeld – nicht den vollen Lohn. Der Arbeitgeber kann freiwillig Zuschüsse zahlen.
+
+## 6 Welche Höchstbeträge gelten 2026?
+
+Die Beitragsbemessungsgrenze der gesetzlichen Krankenversicherung liegt 2026 bei 69.750 Euro jährlich, das entspricht 5.812,50 Euro monatlich oder 193,75 Euro täglich. Das maximale Bruttokrankengeld beträgt damit 135,63 Euro pro Tag.
+
+[SPIEL gewusst: Nach Abzug der Sozialversicherung verbleiben vom Höchstbetrag nur etwa 118,81 Euro netto pro Tag – das entspricht rund 3.564 Euro monatlich (Stand 2026).]
+
+Gutverdiener müssen mit einer erheblichen Einkommenslücke rechnen, da Einkommen oberhalb der Beitragsbemessungsgrenze nicht berücksichtigt wird. Bei einem monatlichen Bruttogehalt von 8.000 Euro ergibt sich beispielsweise eine Lücke von über 4.000 Euro monatlich.
+
+Die jährliche Anpassung der Beitragsbemessungsgrenze führt dazu, dass auch das maximale Krankengeld steigt. Die Obergrenze steigt 2026 vor allem deshalb, weil die Beitragsbemessungsgrenze in der gesetzlichen Krankenversicherung steigt. Die entscheidende Veränderung: Die kalendertägliche Deckelung liegt 2026 höher.
+
+## 7 Wie wirkt sich Krankengeld steuerlich aus?
+
+Krankengeld selbst ist steuerfrei, unterliegt aber dem Progressionsvorbehalt. Das bedeutet, es erhöht den Steuersatz für Ihr übriges Einkommen. Wer mehr als 410 Euro Krankengeld im Jahr erhalten hat, ist zur Abgabe einer Steuererklärung verpflichtet. Diese Pflicht gilt auch 2026 unverändert.
+
+Der Progressionsvorbehalt funktioniert folgendermaßen: Das Finanzamt addiert das reguläre zu versteuernde Einkommen und die erhaltene Lohnersatzleistung. Aus dieser Gesamtsumme wird ein fiktiver, höherer Steuersatz ermittelt. Dieser Prozentsatz wird anschließend ausschließlich auf das tatsächlich zu versteuernde Einkommen angewendet.
+
+Ein praktisches Beispiel verdeutlicht die Auswirkungen: Bei einem zu versteuernden Einkommen von 30.000 Euro und 3.500 Euro Krankengeld steigt der Steuersatz von 12,77 Prozent auf 15,55 Prozent. Obwohl das Krankengeld steuerfrei bleibt, können je nach Höhe 1–3 Prozentpunkte Steuersatz-Erhöhung entstehen.
+
+Das Krankengeld gehört in die elektronische Steuererklärung (ELSTER) in den Bereich "Weitere Angaben und Anträge" unter "Leistungen nach § 32b EStG (Progressionsvorbehalt)". Die Krankenkasse übermittelt den Betrag ab 2026 automatisch digital an das Finanzamt.
+
+Wichtiger Unterschied: Privates Krankentagegeld unterliegt nicht dem Progressionsvorbehalt und wirkt sich im Gegensatz zum Krankengeld nicht auf den persönlichen Steuersatz aus.
+
+## 8 Was passiert nach der Aussteuerung?
+
+Nach Ende des 78-Wochen-Zeitraums tritt die sogenannte Aussteuerung ein. Spätestens drei Monate vor Ende des Krankengelds müssen sich Betroffene bei der Agentur für Arbeit arbeitslos melden (Nahtlosigkeitsregelung). Über die Nahtlosigkeitsregelung kann anschließend Arbeitslosengeld beantragt werden. Gleichzeitig sollte ein Reha- oder Rentenantrag bei der Deutschen Rentenversicherung gestellt werden. Optionen sind: Arbeitslosengeld I (Nahtlosigkeitsregelung), Erwerbsminderungsrente (bei dauerhafter Erkrankung) oder Rehabilitation (Reha vor Rente).
+
+Der Bezug von Krankengeld begründet keinen besonderen Kündigungsschutz. Der Arbeitgeber kann auch während der Arbeitsunfähigkeit eine Kündigung aussprechen. Langzeiterkrankte Arbeitnehmer sind häufig besonders gefährdet.
+
+Die rechtzeitige Planung ist entscheidend, da zwischen Krankengeld-Ende und dem Beginn von Folge-leistungen keine Lücken entstehen sollten. Eine professionelle Beratung durch Sozialverbände oder spezialisierte Anwälte kann in dieser Phase hilfreich sein.
+
+## 9 Fazit
+
+Krankengeld stellt eine wichtige, aber begrenzte finanzielle Absicherung bei längerer Arbeitsunfähigkeit dar. Der Tageshöchstbetrag liegt 2026 bei 135,63 Euro brutto, nach Abzug der Sozialversicherung verbleiben zwischen 112 und 114 Euro pro Tag. Während Arbeitnehmer automatisch nach sechs Wochen Anspruch haben, müssen Selbstständige aktiv eine Wahlerklärung abgeben und höhere Beiträge zahlen.
+
+Die 78-Wochen-Regel begrenzt den Anspruch pro Krankheit über drei Jahre hinweg, was eine langfristige Planung erfordert. Besonders wichtig ist das Verständnis der steuerlichen Auswirkungen: Durch den Progressionsvorbehalt kann das eigentlich steuerfreie Krankengeld den Steuersatz um 1–3 Prozentpunkte erhöhen. Bei mehr als 410 Euro Krankengeld im Jahr wird eine Steuererklärung verpflichtend.
+
+Für Gutverdiener entstehen erhebliche Einkommenslücken, da die Beitragsbemessungsgrenze das maximale Krankengeld deckelt. Eine rechtzeitige Vorsorge durch private Krankentagegeldversicherung oder Berufsunfähigkeitsversicherung kann diese Lücken schließen. Die frühzeitige Auseinandersetzung mit den Anschlussleistungen nach der Aussteuerung verhindert finanzielle Engpässe im ohnehin belastenden Krankheitsfall.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste krankengeld]
+
+[BLOCK rechner krankengeld]
+
+
+## FAQ
+F: Wie hoch ist das Krankengeld 2026?
+A: Das Krankengeld beträgt 70 Prozent des Bruttogehalts, maximal jedoch 90 Prozent des Nettogehalts. Der tägliche Höchstbetrag liegt 2026 bei 135,63 Euro und orientiert sich an der Beitragsbemessungsgrenze der gesetzlichen Krankenversicherung.
+F: Ab wann zahlt die Krankenkasse Krankengeld?
+A: Arbeitnehmer erhalten Krankengeld ab dem Zeitpunkt, an dem die Entgeltfortzahlung des Arbeitgebers endet – im Regelfall ab der siebten Woche. Für die ersten sechs Wochen zahlt der Arbeitgeber das volle Gehalt weiter, sodass eine nahtlose Absicherung besteht.
+F: Bekommen Selbstständige auch Krankengeld?
+A: Hauptberuflich Selbstständige sind grundsätzlich vom Krankengeldanspruch ausgeschlossen. Gesetzlich Versicherte können durch eine Wahlerklärung den Anspruch erwerben, zahlen dann aber 14,6 statt 14,0 Prozent Beitragssatz. Die Zahlung erfolgt ab dem 43. Tag.
+F: Ist Krankengeld steuerpflichtig?
+A: Das Krankengeld selbst ist steuerfrei, unterliegt aber dem Progressionsvorbehalt und muss in der Steuererklärung angegeben werden. Zudem werden von Brutto-Krankengeld Beiträge zur Renten-, Arbeitslosen- und Pflegeversicherung abgezogen.

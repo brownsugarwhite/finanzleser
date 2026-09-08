@@ -1,0 +1,131 @@
+# Kurzarbeitergeld (kurzarbeitergeld)
+## 0 Anspruch, Antrag und Bezugsdauer von Kurzarbeitergeld
+
+Kurzarbeitergeld gleicht Lohnausfälle bei reduzierter Arbeitszeit aus. Wer 2026 Anspruch hat, wie es berechnet wird und wie lange es gezahlt wird.
+
+## 1 Kurzarbeitergeld 2026: Anspruch, Berechnung und Bezugsdauer
+
+Kurzarbeitergeld regelt die vorübergehende Reduzierung der Arbeitszeit bei staatlichem Lohnausgleich. Die maximale Bezugsdauer bleibt 2026 bei 24 Monaten – eine Verordnung, die bis Ende 2026 befristet ist. Ab Januar 2027 gilt wieder die gesetzliche Dauer von 12 Monaten, sofern keine neue Verordnung beschlossen wird.
+
+## 2 Wann haben Sie Anspruch auf Kurzarbeitergeld?
+
+Die Bedingungen sind klar definiert. Mindestens ein Drittel der Beschäftigten im Betrieb muss einen monatlichen Entgeltausfall von über 10 Prozent haben. Diese Erheblichkeitsschwelle sichert, dass nur bei bedeutsamen Ausfällen staatliche Unterstützung greift.
+
+Der Arbeitsausfall muss auf bestimmte Ursachen zurückgehen:
+
+- Wirtschaftliche Gründe (Auftragsmangel, Stornierungen, fehlende Materialien)
+
+- Unabwendbare Ereignisse, die Arbeit ruhen oder ausfallen lassen
+
+Arbeitgeber müssen alle zumutbaren Maßnahmen zur Vermeidung ausgeschöpft haben.
+
+[SPIEL karte: Erheblichkeitsschwelle]
+
+Für Arbeitnehmer gelten persönliche Voraussetzungen:
+
+- Versicherungspflichtige Beschäftigung erforderlich
+
+- Keine Eigenbeendigung des Arbeitsverhältnisses
+
+- Auszubildende: zunächst 6 Wochen Ausbildungsvergütung, dann Kurzarbeitergeld
+
+## 3 Höhe des Kurzarbeitergeldes – So wird's berechnet
+
+Das Kurzarbeitergeld beträgt 60 Prozent des ausgefallenen Nettoentgelts. Mit mindestens einem Kind sind es 67 Prozent. Die Berechnung basiert auf einem pauschalierten Nettoentgelt der Bundesagentur für Arbeit, nicht auf dem tatsächlichen Nettolohn.
+
+Das Schema:
+
+1. Differenz zwischen Soll- und Ist-Entgelt ermitteln
+
+2. 60 oder 67 Prozent auf diese Nettoentgeltdifferenz anwenden
+
+| Situation | Leistungssatz | Beispiel bei 1.000 € Ausfall
+
+| Ohne Kind | 60% | 600 € KUG
+
+| Mit Kind | 67% | 670 € KUG
+
+Praktisches Beispiel: Ein Arbeitnehmer (4.000 € Brutto, Steuerklasse I, kein Kind) arbeitet 50 Prozent weniger. Normales Netto: etwa 2.400 €. Netto bei halber Zeit: etwa 1.200 €. KUG (60%): 660 €. Gesamteinkommen: rund 1.860 € – etwa 78 Prozent des normalen Nettos.
+
+[SPIEL schaetzen: Wie hoch ist die Ersatzquote bei Kurzarbeit mit Kind? → 67]
+
+Bei sehr hohen Einkommen greifen Kappungsgrenzen. Im Westen liegt die Beitragsbemessungsgrenze 2026 bei maximal 7.550 €, im Osten bei 7.450 €.
+
+## 4 Bezugsdauer 2026: Wer profitiert von der Verlängerung?
+
+Die Regelung unterscheidet zwei Gruppen:
+
+Betriebe in fortgesetzter Kurzarbeit: Wer bereits 2025 Kurzarbeitergeld erhielt, kann die Verlängerung nutzen und insgesamt bis zu 24 Monate erreichen.
+
+Neu beginnende Kurzarbeit ab 2026: Hier gilt wieder die reguläre 12-Monate-Frist. Unternehmen, die erst 2026 anzeigen, erhalten maximal 12 Monate Unterstützung. Im Vergleich dazu ist das Arbeitslosengeld eine andere Leistung mit eigenen Bezugsfristen und Voraussetzungen.
+
+Die Bezugsdauer beginnt mit dem ersten Kalendermonat der Zahlung. Wird für mindestens einen Monat kein KUG gezahlt, verlängert sich die Frist um diesen Monat. Eine Unterbrechung von drei oder mehr Monaten startet eine neue Bezugsdauer.
+
+## 5 Anmeldeverfahren: Schritt für Schritt
+
+Das Verfahren läuft in zwei Phasen ab.
+
+Phase 1: Anzeige des Arbeitsausfalls
+
+Melden Sie dies rechtzeitig der zuständigen Agentur für Arbeit am Betriebssitz. Die Anzeige muss im Monat eingehen, in dem die Kurzarbeit beginnt. Wer später anzeigt, erhält rückwirkend kein KUG – ein häufiger, teurer Fehler.
+
+Phase 2: Monatliche Beantragung
+
+Der Antrag muss innerhalb von 3 Monaten nach Ende des abzurechnenden Monats erfolgen. Der Arbeitgeber zahlt zunächst an die Mitarbeiter aus und erhält die Erstattung von der Agentur.
+
+Dokumentation ist Pflicht: Präzise Aufzeichnungen zu Arbeits-, Ausfall- und Fehlzeiten pro Mitarbeiter sind erforderlich. Ohne diese kann kein KUG beantragt werden.
+
+## 6 Sozialversicherung während Kurzarbeit
+
+Die Sozialversicherung während Kurzarbeit ist besonders zu beachten. Beiträge zur Kranken-, Pflege- und Rentenversicherung für die Ausfallstunden werden nach einem fiktiven Arbeitsentgelt bemessen. Dieses entspricht 80 Prozent der Differenz zwischen Soll- und Ist-Entgelt.
+
+[SPIEL quiz: Wer trägt die Sozialversicherungsbeiträge aus dem fiktiven Entgelt?]
+
+Beispiel: Soll-Entgelt 4.000 €, Ist-Entgelt 2.000 €. Das fiktive Entgelt beträgt 1.600 € (80% von 2.000 €). Der Arbeitgeber zahlt für diesen Betrag die Sozialversicherungsbeiträge allein. Der Beitrag zur Arbeitslosenversicherung entfällt für das fiktive Entgelt.
+
+## 7 Besondere Regelungen und Nebenjobs
+
+Neben dem regulären Kurzarbeitergeld gibt es Saison-Kurzarbeitergeld für Baugewerbe (Dezember–März) und Transferkurzarbeitergeld bei Betriebsänderungen.
+
+Nebentätigkeiten: Einkünfte aus vor der Kurzarbeit ausgeübten Nebenjobs werden nicht angerechnet. Neue oder ausgeweitete Nebentätigkeiten mindern das KUG.
+
+Arbeitgeber-Aufstockung: Unternehmen können das KUG freiwillig aufstocken (etwa auf 80–90%), bleiben aber steuerpflichtig. Das reguläre KUG selbst ist steuerfrei.
+
+## 8 Steuern und Progressionsvorbehalt
+
+Kurzarbeitergeld ist steuerfrei, unterliegt aber dem Progressionsvorbehalt. Das bedeutet: Die Leistung wird zur Berechnung Ihres Steuersatzes herangezogen, obwohl sie nicht besteuert wird. Dies kann zu erheblichen Steuernachzahlungen führen – insbesondere bei der Lohnsteuer.
+
+Beispiel: 40.000 € Jahreseinkommen + 8.000 € KUG = höherer Steuersatz auf das restliche Einkommen. Nachzahlungen im dreistelligen Bereich sind realistisch.
+
+Wichtig: Bei KUG über 410 € jährlich ist eine Steuererklärung Pflicht. Die Frist für 2026 läuft bis 31. Juli 2027. Bilden Sie rechtzeitig Rücklagen für Nachzahlungen.
+
+## 9 Häufige Fehler, die Sie vermeiden sollten
+
+Zu späte Anzeige: Warten Sie nicht, bis die Lage eindeutig ist. Verspätete Anmeldung führt zu Leistungsausfällen für die Anfangswochen.
+
+Falsche Sozialversicherungsabrechnung: Das fiktive Entgelt (80% der Differenz) wird oft falsch ermittelt. Rechnen Sie nur auf das Ist-Entgelt ab, zahlen Sie später drauf – inklusive Säumniszuschläge.
+
+Unzureichende Dokumentation: Fehlende oder unpräzise Zeitaufzeichnungen führen zu vollständiger Rückforderung des gezahlten KUG durch die Bundesagentur für Arbeit.
+
+Eigenmächtige Anordnung: Ein Arbeitgeber kann Kurzarbeit nicht einseitig anordnen. Mitarbeiter und Betriebsrat müssen zustimmen – entweder vertraglich oder individuell.
+
+## 10 Fazit
+
+Kurzarbeitergeld bleibt 2026 ein zentrales Stabilisierungsinstrument. Die verlängerte 24-Monate-Frist für fortgesetzte Kurzarbeit bietet Planungssicherheit. Entscheidend sind rechtzeitige Anzeige, sorgfältige Dokumentation und korrekte Sozialversicherungsabrechnung. Für Arbeitnehmer gilt: Kalkulieren Sie Steuernachzahlungen ein und bilden Sie Reserven. Mit korrekter Vorbereitung erfüllt Kurzarbeitergeld seinen Zweck – Arbeitsplätze erhalten und wirtschaftliche Krisen überbrücken.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste kurzarbeitergeld]
+
+[BLOCK rechner kurzarbeitsgeld]
+
+
+## FAQ
+F: Wie lange kann Kurzarbeitergeld 2026 bezogen werden?
+A: Die Bezugsdauer für Kurzarbeitergeld wurde für die Jahre 2025 und 2026 auf 24 Monate verlängert. Diese befristete Regelung endet am 31. Dezember 2026. Danach kehrt die reguläre Bezugsdauer zurück, sofern keine weitere Verlängerung beschlossen wird.
+F: Wie hoch ist das Kurzarbeitergeld?
+A: Das Kurzarbeitergeld beträgt 60 Prozent der Nettoentgeltdifferenz, für Beschäftigte mit mindestens einem Kind 67 Prozent. Grundlage ist nicht der tatsächliche Nettolohn, sondern ein pauschaliertes Nettoentgelt nach Tabelle der Agentur für Arbeit.
+F: Welche Voraussetzungen gelten für Kurzarbeitergeld?
+A: Bei mindestens einem Drittel der Beschäftigten muss ein monatlicher Entgeltausfall von mehr als 10 Prozent vorliegen. Der Arbeitsausfall muss wirtschaftlich bedingt oder durch ein unabwendbares Ereignis verursacht sein. Betroffene Arbeitnehmer müssen versicherungspflichtig beschäftigt und ungekündigt sein.
+F: Wer muss den Antrag auf Kurzarbeitergeld stellen?
+A: Der Arbeitgeber muss den Arbeitsausfall zunächst bei der zuständigen Agentur für Arbeit anzeigen, bevor Kurzarbeitergeld ausgezahlt werden kann. Erst nach dieser Anzeige erfolgt die Abrechnung. Auszubildende erhalten zunächst bis zu sechs Wochen ihre Ausbildungsvergütung weiter.

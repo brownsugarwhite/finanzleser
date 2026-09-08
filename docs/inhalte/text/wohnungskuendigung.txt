@@ -1,0 +1,177 @@
+# Wohnungskündigung (wohnungskuendigung)
+## 0 Rechte, Fristen & Muster für sichere Wohnungskündigung
+
+Bei der Wohnungskündigung zählen die richtigen Fristen und die Form. Welche Kündigungsfristen 2026 gelten und wie Sie als Mieter teure Fehler vermeiden.
+
+## 1 Wohnungskündigung: Fristen, Rechte und Muster
+
+Wohnungskündigung regelt die rechtzeitige Beendigung von Mietverhältnissen zwischen Mieter und Vermieter nach gesetzlichen Vorgaben.
+
+Die Kündigung einer Wohnung gehört zu den häufigsten und fehleranfälligsten Vorgängen im deutschen Mietrecht. Für Mieter beträgt die gesetzliche Kündigungsfrist einheitlich drei Monate, unabhängig von der bisherigen Mietdauer (§ 573c BGB). Trotz der scheinbar klaren Regelung scheitern viele Kündigungen an formalen Fehlern, falschen Fristen oder unvollständigen Angaben. Ein kleiner Fehler bei der Berechnung oder beim Zugang kann schnell dazu führen, dass der Auszug um einen ganzen Monat verschoben wird und unnötige Kosten entstehen.
+
+## 2 Ordentliche Kündigung durch Mieter: Die 3-Monate-Regel verstehen
+
+Die Kündigung ist spätestens am dritten Werktag eines Kalendermonats zum Ablauf des übernächsten Monats zulässig (§ 573c BGB). Diese Regel ist entscheidend: Geht die Kündigung nach dem 3. Werktag ein, verschiebt sich alles um einen Monat. Beispiel: Kündigung am 5. Januar (nach dem 3. WT) → zählt erst ab Februar → Vertrag endet erst Ende April statt Ende März.
+
+Ein häufiger Fehler liegt in der Definition der Werktage. Der BGH hat entschieden, dass Samstag als Werktag im Sinne von §573c BGB zählt (BGH VIII ZR 206/04). Nur Sonntage und gesetzliche Feiertage sind keine Werktage. Wenn der 1. eines Monats auf einen Donnerstag fällt, sind der 1. (Donnerstag), 2. (Freitag) und 3. (Samstag) die ersten drei Werktage.
+
+Die Kündigungsfrist für den Mieter ist unveränderlich. Klauseln, die die 3-Monats-Frist des Mieters verlängern, sind unwirksam (§573c Abs. 4 BGB). Kürzere Fristen sind nur bei möblierten Zimmern oder besonderen Vereinbarungen möglich.
+
+[SPIEL schaetzen: Bis zu welchem Tag im Monat muss eine Mieterkündigung spätestens beim Vermieter eingehen? → 3]
+
+## 3 Schriftform und Zugang: Warum E-Mail nicht ausreicht
+
+Die Schriftform erfordert eine eigenhändige Unterschrift (§568 BGB). E-Mail oder Fax sind unwirksam. Diese strenge Formvorschrift dient dem Schutz beider Parteien und verhindert vorschnelle oder unüberlegte Kündigungen.
+
+Bei mehreren Hauptmietern müssen grundsätzlich alle kündigen. Bei mehreren Hauptmietern sollten alle unterschreiben. Fehlt eine Unterschrift, ist das Schreiben angreifbar. Ausnahmen gelten nur, wenn eine Person bevollmächtigt ist oder besondere Umstände vorliegen.
+
+Der Zugang beim Vermieter ist entscheidend. Sie wird mit Zugang beim Vermieter wirksam, nicht schon beim Schreiben oder Abschicken. Genau deshalb ist der Nachweis der Zustellung so wichtig. Ein Einschreiben mit Rückschein oder persönliche Übergabe gegen Empfangsbestätigung sind die sichersten Wege.
+
+[SPIEL karte: Zugang der Willenserklärung]
+
+## 4 Wie funktioniert die korrekte Fristberechnung?
+
+Die Fristberechnung verwirrt viele Mieter. Beispiel: Kündigung geht am 3. Januar 2026 beim Vermieter ein → Mietvertrag endet am 30. April 2026. Die Rechnung: Januar (laufender Monat) + Februar und März (zwei weitere Monate) = Ende April.
+
+Wenn die Kündigung dem Vermieter am 3. Juni zugeht und dieser Tag noch innerhalb der relevanten Frist liegt, kann das Mietverhältnis zum 31. August enden. Wichtig ist die korrekte Ermittlung des dritten Werktags: Bei Feiertagen verschiebt sich die Deadline entsprechend nach hinten.
+
+Praktisches Beispiel für 2026: Fällt der 1. Mai auf einen Donnerstag (Feiertag), sind die ersten drei Werktage der 2. (Freitag), 3. (Samstag) und 5. (Montag), da der 4. (Sonntag) kein Werktag ist.
+
+## 5 Fristlose Kündigung: Schwerwiegende Ausnahmefälle
+
+Eine fristlose Kündigung ist nur zulässig, wenn ein wichtiger Grund vorliegt, der die Fortsetzung des Mietverhältnisses für den Kündigenden unzumutbar macht. Die Gründe müssen so schwerwiegend sein, dass eine Einhaltung der regulären Kündigungsfristen nicht zumutbar ist (§ 543 BGB).
+
+Häufige Gründe für fristlose Vermieterkündigung:
+
+- Erheblicher Mietrückstand: Wenn der Mieter für zwei aufeinanderfolgende Monate die Miete nicht oder nur teilweise zahlt und der ausstehende Betrag mehr als eine Monatsmiete beträgt
+
+- Schwerwiegende Störung des Hausfriedens: Auch wiederholte Lärmbelästigungen, Bedrohungen oder tätliche Angriffe auf andere Hausbewohner oder den Vermieter
+
+- Vertragswidrige Nutzung der Wohnung oder illegale Aktivitäten wie Drogenhandel in der Mietwohnung
+
+Gründe für fristlose Mieterkündigung:
+
+- Gesundheitsgefährdender Zustand der Wohnung durch Schimmelbefall oder Verwendung von giftigen Baustoffen
+
+- Erhebliche Mängel, die die Nutzung der Wohnung stark einschränken und vom Vermieter trotz Aufforderung nicht beseitigt werden
+
+Auch wenn in Einzelfällen eine fristlose Kündigung ohne vorherige Abmahnung möglich ist, muss in den meisten Fällen vor einer Kündigung abgemahnt werden. Der Mieter erhält so die Möglichkeit, den Pflichtverstoß zu korrigieren oder sein Verhalten zu ändern. Ausnahmen gelten bei Mietrückständen und anderen unabmahmbaren Verstößen.
+
+[SPIEL mythos: Drei Abmahnungen sind vor einer fristlosen Kündigung zwingend erforderlich → nein]
+
+## 6 Eigenbedarfskündigung: Verschärfte Anforderungen 2026
+
+In den letzten Jahren hat der Bundesgerichtshof (BGH) die Anforderungen an Eigenbedarfskündigungen weiter präzisiert. Gleichzeitig wurden die Schutzmechanismen für Mieter – etwa über Härteeinwände und Schadensersatzansprüche bei missbräuchlichem Eigenbedarf – geschärft. In solchen Streitigkeiten kann eine Rechtsschutzversicherung für Mieter eine wichtige Absicherung darstellen.
+
+Für Vermieter haben sich 2026 strengere Anforderungen etabliert:
+
+| Mietdauer | Kündigungsfrist Vermieter | Beispiel
+
+| Bis 5 Jahre | 3 Monate | Vermieter A vermietet seit 8 Jahren. Seine Tochter zieht zum Studium in die Stadt → 9 Monate Frist
+
+| 5 bis 8 Jahre | 6 Monate | Vermieterin B kauft eine seit 6 Jahren vermietete Wohnung. Nach Grundbucheintrag möchte sie selbst einziehen → 6 Monate Frist
+
+| Über 8 Jahre | 9 Monate | Bei langjährigen Mietverhältnissen maximaler Schutz
+
+Sperrfristen nach Immobilienkauf 2026:
+
+- Bei normalem Immobilienkauf gilt eine dreijährige Sperrfrist. Bei Umwandlung in Eigentumswohnungen verlängert sie sich auf zehn Jahre (§ 577a BGB)
+
+- In Gebieten mit angespanntem Wohnungsmarkt gilt eine Frist von zehn Jahren
+
+Der BGH hat 2026 klargestellt: Wer transparent agiert, seinen Nutzungswunsch ernsthaft verfolgt und die gesetzlichen Vorgaben genau einhält, hat als Vermieter gute Chancen, eine Eigenbedarfskündigung rechtssicher durchzusetzen.
+
+[SPIEL gewusst: Rund 60% aller Eigenbedarfskündigungen werden von Mietern angefochten, und ein erheblicher Teil der Mieter bekommt Recht wegen formaler oder inhaltlicher Fehler der Vermieter (Stand 2026).]
+
+## 7 Sonderkündigungsrechte und besondere Situationen
+
+Neben der ordentlichen Kündigung gibt es verschiedene Sonderkündigungsrechte:
+
+Bei Modernisierung und Mieterhöhung:
+
+- Bei Mieterhöhung nach §558 BGB kann der Mieter bis zum Ende des 2. Monats nach Zugang Sonderkündigen (§561 BGB)
+
+- Nach Erhalt einer Modernisierungsankündigung kann der Mieter bis zum Monatsende Sonderkündigen. Der Vertrag endet dann am Ende des übernächsten Monats
+
+Bei Eigentümerwechsel:
+
+- Stirbt der Mieter, können sowohl Erben als auch der Vermieter innerhalb eines Monats außerordentlich mit gesetzlicher Frist kündigen
+
+- Bei Umwandlung in Eigentumswohnung besteht ein Sonderkündigungsrecht
+
+Besondere Umstände:
+
+- Nach § 573a BGB kann in einem Zweifamilienhaus, in dem der Vermieter selbst eine Wohnung bewohnt, die Kündigung auch ohne klassischen Kündigungsgrund erfolgen. Allerdings verlängert sich die Kündigungsfrist für die Mietwohnung dann um drei Monate
+
+## 8 Kaution, Übergabe und was nach der Kündigung passiert
+
+Nach erfolgreicher Kündigung regelt die Wohnungsübergabe die Details des Auszugs. Die Rückgabe der Mietkaution ist dabei ein häufiger Streitpunkt.
+
+Kautionsrückgabe 2026:
+
+- Gesetzlich gibt es keine fixe Rückgabefrist, üblich sind drei bis sechs Monate nach Auszug
+
+- Gemäß § 548 BGB hat der Vermieter nach Beendigung des Mietverhältnisses sechs Monate Zeit, um eventuelle Schadensersatzansprüche geltend zu machen. Diese Frist dient als Orientierung dafür, wie lange ein Vermieter die Kaution einbehalten darf
+
+- Ansprüche aus dem Mietverhältnis, einschließlich Schäden an der Wohnung, verjähren generell nach sechs Monaten
+
+Berechtigte Abzüge von der Kaution:
+
+- Mietrückstände und unbezahlte Nebenkosten
+
+- Schäden über normale Abnutzung hinaus
+
+- Nachforderungen aus der Betriebskostenabrechnung dürfen bis zu einem Jahr lang einbehalten werden, allerdings nur in Höhe des zu erwartenden Nachzahlungsbetrages
+
+Verjährung der Kautionsansprüche:
+
+Der Anspruch auf Kautionsrückgabe verjährt nach drei Jahren. Diese Frist beginnt am 31. Dezember des Jahres, in dem der Mieter ausgezogen ist und die Kaution fällig wurde.
+
+## 9 Reaktion auf Vermieterkündigungen und Härteeinwände
+
+Mieter haben umfangreiche Schutzmöglichkeiten gegen Vermieterkündigungen:
+
+Widerspruch bei Eigenbedarfskündigung:
+
+- Der Mieter hat das Recht, der Eigenbedarfskündigung schriftlich zu widersprechen, wenn die Beendigung des Mietverhältnisses eine unzumutbare Härte darstellen würde. Der Widerspruch muss spätestens zwei Monate vor Ablauf der Kündigungsfrist beim Vermieter eingehen
+
+Häufige Härtegründe (§ 574 BGB):
+
+- Hohes Alter und Krankheit
+
+- Schwangerschaft und Kleinkinder
+
+- Bevorstehende wichtige Prüfungen
+
+- Extreme Wohnungsknappheit am Ort
+
+Formale Angriffspunkte:
+
+- Fehlerhafte Begründung des Eigenbedarfs
+
+- Nichteinhaltung von Sperrfristen
+
+- Fehlende Widerspruchsbelehrung
+
+- Unvollständige oder falsche Angaben zur Bedarfsperson
+
+## 10 Fazit
+
+Die Wohnungskündigung erfordert präzise Beachtung rechtlicher Vorgaben. Mieter müssen vier zentrale Punkte beachten: korrekte 3-Monats-Frist, schriftliche Form mit Originalunterschrift, nachweisbaren Zugang bis zum dritten Werktag eines Monats und saubere Dokumentation. Besonders kritisch ist die Stichtagsregel – ein Tag zu spät kann den Auszug um einen ganzen Monat verschieben. Vermieter haben je nach Mietdauer gestaffelte Fristen (3, 6 oder 9 Monate) und müssen bei Eigenbedarfskündigungen 2026 strengere Anforderungen erfüllen. Die verschärften BGH-Vorgaben schützen Mieter besser vor konstruierten Eigenbedarfsgründen. Bei fristlosen Kündigungen sind Abmahnungen meist erforderlich, außer bei qualifizierten Mietrückständen von zwei Monatsmieten (§ 543 BGB). Mieter haben umfangreiche Widerspruchsrechte bei Vermieterkündigungen und können Härteeinwände geltend machen. Nach dem Auszug dauert die Kautionsrückgabe üblich drei bis sechs Monate, wobei Vermieter sechs Monate Zeit haben, Schadensersatzansprüche zu prüfen (§ 548 BGB). Der Anspruch verjährt nach drei Jahren, weshalb Mieter bei Verzögerungen aktiv werden sollten. Bei einem geplanten Umzug sollten Mieter auch die Umzugskosten von der Steuer absetzen, um finanzielle Belastungen auszugleichen. Zuletzt ist zu beachten, dass auch bei Änderungen der versicherungspflichtigen Beschäftigung – etwa durch einen bedingten Jobwechsel – eine Kündigung der Krankenversicherung erforderlich werden kann, wenn ein Wechsel zu einer günstigeren Krankenkasse geplant ist.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste wohnungskuendigung]
+
+[BLOCK vergleich mietkaution-rechner]
+
+
+## FAQ
+F: Welche Kündigungsfrist gilt für Mieter bei der Wohnungskündigung?
+A: Für Mieter beträgt die gesetzliche Kündigungsfrist einheitlich drei Monate, unabhängig von der bisherigen Mietdauer. Das Kündigungsschreiben muss spätestens am dritten Werktag eines Monats beim Vermieter eingehen, damit dieser Monat noch mitzählt.
+F: Welche Formvorschriften gelten für eine Wohnungskündigung?
+A: Nach § 568 BGB ist die Schriftform mit eigenhändiger Unterschrift zwingend erforderlich; E-Mail oder Fax sind unwirksam. Haben zwei Personen den Mietvertrag unterschrieben, müssen beide auch die Kündigung unterzeichnen, sonst ist sie angreifbar.
+F: Welche Kündigungsfristen hat der Vermieter?
+A: Der Vermieter muss gestaffelte Fristen einhalten: drei Monate bei Mietverhältnissen bis fünf Jahre, sechs Monate bei fünf bis acht Jahren und neun Monate bei mehr als acht Jahren Mietdauer. Kürzere Fristen zulasten des Mieters sind unzulässig.
+F: Wann ist eine Abmahnung vor der Kündigung erforderlich?
+A: Vor einer ordentlichen oder fristlosen Kündigung wegen Vertragsverletzungen muss der Vermieter den Mieter grundsätzlich abmahnen. Die Abmahnung fordert zur Unterlassung vertragswidrigen Verhaltens auf und gibt dem Mieter die Chance, Missstände zu beheben.

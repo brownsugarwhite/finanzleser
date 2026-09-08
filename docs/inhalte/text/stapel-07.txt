@@ -1,0 +1,1693 @@
+STAPEL 07 · 12 Beiträge: basisrente ruerup-rente riester-rente betriebliche-altersversorgung direktversicherung gehaltsumwandlung gesetzliche-rente rentenversicherung rentenbeitrag rentenversicherungsbeitrag renteninformation rentenerhoehung
+
+
+==================== BEITRAG basisrente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Staatlich geförderte Altersvorsorge für Selbstständige und Freiberufler
+  heading-1: Basisrente: Staatlich geförderte Altersvorsorge für Selbstständige
+  heading-2: Wie funktioniert die steuerliche Förderung der Basisrente?
+  heading-3: Für wen lohnt sich die Basisrente besonders?
+  heading-4: Wie wird die Basisrente im Alter besteuert?
+  heading-5: Welche Vor- und Nachteile hat die Basisrente?
+  heading-6: Welche Gestaltungsmöglichkeiten gibt es?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Basisrente (basisrente)
+## 0 Staatlich geförderte Altersvorsorge für Selbstständige und Freiberufler
+
+Die Basisrente (Rürup) ist die staatlich geförderte Altersvorsorge für Selbstständige. Welche Steuervorteile sie 2026 bietet und für wen sie sich besonders lohnt.
+
+## 1 Basisrente: Staatlich geförderte Altersvorsorge für Selbstständige
+
+Die Basisrente ist eine staatlich geförderte Altersvorsorge, die als Ergänzung zur gesetzlichen Rente fungiert.
+
+Die Basisrente, auch als Rürup-Rente bekannt, bietet insbesondere Selbstständigen und Freiberuflern eine staatlich geförderte Möglichkeit zur Altersvorsorge. Mit einem steuerlichen Höchstbetrag von 30.826 Euro für Ledige und 61.652 Euro für Verheiratete im Jahr 2026 stellt sie ein attraktives Instrument zur Steueroptimierung dar. Seit 2023 sind 100 Prozent der Beiträge bis zum Höchstbetrag als Sonderausgaben absetzbar, wodurch die Förderung ihren maximalen Umfang erreicht hat.
+
+Die Funktionsweise basiert auf dem Prinzip der nachgelagerten Besteuerung: Während die Beiträge heute steuerlich absetzbar sind, werden die späteren Rentenzahlungen besteuert. Diese Konstruktion kann zu erheblichen Steuervorteilen führen, da der persönliche Steuersatz im Ruhestand häufig niedriger ausfällt als während des Erwerbslebens.
+
+## 2 Wie funktioniert die steuerliche Förderung der Basisrente?
+
+Die steuerliche Attraktivität der Basisrente liegt in der sofortigen Absetzbarkeit der Beiträge. Beiträge können als Sonderausgaben bis zu einem jährlichen Höchstbetrag von 30.826 Euro (2026, Ledige) abgesetzt werden. Bei einem Spitzensteuersatz von 42 Prozent ab einem zu versteuernden Einkommen von 69.879 Euro ergeben sich bei maximaler Ausschöpfung Steuerersparnisse von bis zu 12.947 Euro jährlich.
+
+[SPIEL karte: Nachgelagerte Besteuerung]
+
+Die praktische Wirkung zeigt sich besonders bei Gutverdienern deutlich: Investiert ein Selbstständiger mit einem Grenzsteuersatz von 42 Prozent beispielsweise 15.000 Euro in seine Basisrente, erhält er 6.300 Euro als Steuererstattung zurück. Bei einem Grenzsteuersatz von 42 Prozent finanziert der Staat rechnerisch rund 42 Cent jedes eingezahlten Euros über die Sonderausgaben.
+
+Die Höchstbeträge orientieren sich an der knappschaftlichen Rentenversicherung und werden jährlich angepasst. Der Höchstbetrag errechnet sich über die Beitragsbemessungsgrenze von 124.800 Euro und den Beitragssatz von 24,7 Prozent, wodurch sich 30.825,60 Euro ergeben.
+
+## 3 Für wen lohnt sich die Basisrente besonders?
+
+Die Basisrente entfaltet ihre Stärken bei spezifischen Zielgruppen. Primär profitieren Selbstständige und Freiberufler, die nicht in die gesetzliche Rentenversicherung einzahlen. Sie können den vollen Höchstbetrag nutzen, da keine Anrechnungen von Pflichtbeiträgen zur gesetzlichen Rentenversicherung erfolgen.
+
+[SPIEL quiz: Ab welchem zu versteuernden Einkommen zahlt man 2026 den Spitzensteuersatz von 42 Prozent?]
+
+Auch gutverdienende Angestellte können profitieren, allerdings mit Einschränkungen. Angestellte, die über der Beitragsbemessungsgrenze der Rentenversicherung verdienen, können noch weitere 11.966 Euro von den Beiträgen der Rürup-Rente von der Steuer absetzen, da ihre Rentenversicherungsbeiträge bereits einen Teil des Höchstbetrags ausschöpfen. Für Angestellte ist die Riester-Rente oft eine Alternative, ebenso wie die betriebliche Altersversorgung, falls ihr Arbeitgeber diese anbietet.
+
+Besonders interessant ist die Basisrente für:
+
+- Selbstständige ohne gesetzliche Rentenversicherung
+
+- Freiberufler in Versorgungswerken mit hohem Einkommen
+
+- Angestellte mit überdurchschnittlichem Verdienst
+
+- Personen mit einem Grenzsteuersatz ab 35 Prozent
+
+Die Faustformel besagt: Wenn Sie über ein Jahreseinkommen von 70.000 Euro oder mehr verfügen, erreichen Sie schnell einen Grenzsteuersatz von 42 Prozent oder sogar 45 Prozent.
+
+## 4 Wie wird die Basisrente im Alter besteuert?
+
+Die Rentenzahlungen unterliegen der nachgelagerten Besteuerung mit einem gestaffelten System. Der steuerpflichtige Anteil liegt 2026 bei 84 Prozent und steigt bis 2058 auf 100 Prozent. Entscheidend ist dabei das Jahr des ersten Rentenbezugs: Wenn Sie 2026 in Rente gehen, liegt die Besteuerung immer bei 84 Prozent. Sie steigt nicht mehr an.
+
+[SPIEL schaetzen: Wie viel Prozent einer Basisrente müssen Sie versteuern, wenn der Rentenbezug 2026 beginnt? → 84]
+
+Die folgende Tabelle zeigt die Entwicklung der Besteuerungsanteile:
+
+| Jahr des Rentenbeginns | Steuerpflichtiger Anteil | Steuerfreier Anteil
+
+| 2026 | 84% | 16%
+
+| 2030 | 86% | 14%
+
+| 2040 | 92% | 8%
+
+| 2050 | 97% | 3%
+
+| 2058 | 100% | 0%
+
+Die Besteuerung erfolgt mit dem persönlichen Steuersatz im Ruhestand. Da dieser in der Regel niedriger ausfällt als während des Erwerbslebens, bleibt trotz der Besteuerung ein Nettovorteil bestehen. Da das Einkommen im Ruhestand meist niedriger ist als während der Erwerbsphase, fällt die Steuerbelastung in der Auszahlungsphase häufig geringer aus.
+
+## 5 Welche Vor- und Nachteile hat die Basisrente?
+
+Die Basisrente bringt charakteristische Eigenschaften mit sich, die je nach individueller Situation unterschiedlich zu bewerten sind. Der größte Vorteil liegt in der lebenslangen Rentenzahlung: Die Basisrente wird lebenslang ausgezahlt, frühestens ab 62 Jahren, wodurch das Langlebigkeitsrisiko vollständig abgesichert wird.
+
+Ein wesentlicher Nachteil ist die mangelnde Flexibilität. Die Basisrente ist nicht beleihbar, es findet keine Kapitalauszahlung statt und der Vertrag ist nicht vererbbar. Diese Eigenschaften können jedoch auch als Schutzfunktion betrachtet werden, da sie vor unreflektiertem Zugriff auf die Altersvorsorge schützen.
+
+Die moderne Basisrente bietet verschiedene Anlagemöglichkeiten. Sie können die Rürup-Rente klassisch mit der Garantieverzinsung oder renditeorientiert abschließen. Beim ETF Rürup genießen Sie die gleichen Steuervorteile wie bei der klassischen Basisrente und können von höheren Renditechancen profitieren.
+
+[SPIEL mythos: Die Basisrente ist nicht vererbbar und das Geld ist bei Tod vor Rentenbeginn verloren. → nein]
+
+Ein besonderer Vorteil liegt in der Kombinationsmöglichkeit mit einer Berufsunfähigkeitsversicherung. Die Rürup-Rente ist der einzige Weg, BU-Beiträge steuerlich voll abzusetzen. Bei einem Grenzsteuersatz von 42 Prozent kostet eine 100-Euro-BU effektiv nur etwa 58 Euro. Allerdings wird im Leistungsfall die BU-Rente mit dem Besteuerungsanteil (2026: 84 Prozent) besteuert.
+
+## 6 Welche Gestaltungsmöglichkeiten gibt es?
+
+Die Basisrente bietet heute vielfältige Anlagemöglichkeiten. Von klassischen Garantieprodukten bis hin zu fondsgebundenen Varianten mit ETF-Investment ist alles möglich. Die fondsgebundene Variante gewinnt zunehmend an Beliebtheit, da sie höhere Renditechancen bietet als klassische verzinste Anlagen.
+
+Für optimale Ergebnisse sollten Sie auf ein automatisches Ablaufmanagement achten, damit Marktschwankungen kurz vor Rentenbeginn abgefedert werden. Ein garantierter Mindestrentenfaktor bei Vertragsabschluss bietet zusätzliche Sicherheit.
+
+Die steuerliche Optimierung durch Einmalzahlungen ist ein weiterer Gestaltungsbaustein. Einmalzahlungen in einen bestehenden Rürup-Vertrag sind ein beliebtes Steueroptimierungsinstrument. Die Zahlung muss bis zum 31.12.2026 beim Anbieter eingegangen sein.
+
+## 7 Fazit
+
+Die Basisrente stellt für bestimmte Zielgruppen ein wertvolles Instrument der Altersvorsorge dar. Selbstständige ohne Zugang zu anderen staatlich geförderten Vorsorgeprodukten und Gutverdiener mit hohen Steuersätzen können erheblich profitieren. Der steuerliche Höchstbetrag von 30.826 Euro für 2026 und die vollständige Absetzbarkeit machen sie zu einem steuerlich attraktiven Vorsorgeprodukt. Gleichzeitig erfordert die Unflexibilität und die nachgelagerte Besteuerung eine sorgfältige Abwägung der persönlichen Umstände. Die Vielfalt der Anlagemöglichkeiten, von klassisch bis fondsgebunden, ermöglicht eine individuelle Ausgestaltung. Die Vorteilhaftigkeit hängt stark von der persönlichen Einkommens- und Lebenssituation ab, weshalb eine fundierte Beratung vor Vertragsabschluss unerlässlich ist. Besonders bei einem Grenzsteuersatz ab 42 Prozent und stabilen Einkommensverhältnissen kann die Basisrente einen wichtigen Baustein einer ausgewogenen Altersvorsorgestrategie darstellen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste basisrente]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+[BLOCK dokumente broschuere-basisrente]
+
+
+## FAQ
+F: Wie hoch ist der steuerliche Höchstbetrag der Basisrente 2026?
+A: Im Jahr 2026 können Ledige bis zu 30.826 Euro und Verheiratete bis zu 61.652 Euro an Basisrenten-Beiträgen steuerlich geltend machen. Seit 2023 sind 100 Prozent der Beiträge als Sonderausgaben absetzbar. Bei einem Spitzensteuersatz von 42 Prozent ergibt sich aus 10.000 Euro Einzahlung eine Steuerersparnis von rund 4.200 Euro.
+F: Für wen lohnt sich die Basisrente?
+A: Die Basisrente eignet sich besonders für Selbstständige und Freiberufler ohne gesetzliche Rentenversicherung sowie für Gutverdiener mit hohem Steuersatz. Als Faustregel gilt: Ab einem zu versteuernden Einkommen von rund 69.879 Euro (2026) entfaltet die Rürup-Rente ihre volle Steuerwirkung. Für Geringverdiener ist der Vorteil geringer.
+F: Wie werden Rürup-Renten im Alter besteuert?
+A: Die Basisrente funktioniert nach dem Prinzip der nachgelagerten Besteuerung: Die Beiträge sind heute absetzbar, die spätere Rente wird besteuert. Bei Renteneintritt 2026 sind 84 Prozent der Rente steuerpflichtig, bis 2058 steigt der Anteil auf 100 Prozent. Da der persönliche Steuersatz im Ruhestand meist niedriger ist, bleibt ein Netto-Vorteil.
+F: Welche Nachteile hat die Basisrente?
+A: Die Basisrente ist nicht vererbbar, nicht kapitalisierbar und kann nicht vorzeitig gekündigt werden. Die Auszahlung erfolgt ausschließlich als lebenslange monatliche Rente, nicht als Einmalbetrag. Zudem ist die Rente nicht übertragbar und das angesparte Kapital bei Tod vor Rentenbeginn in der Regel verloren, sofern kein Hinterbliebenenschutz vereinbart wurde.
+
+
+==================== BEITRAG ruerup-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Steuerliche Altersvorsorge für Selbstständige und Freiberufler
+  heading-1: Rürup-Rente 2026: Höchstbetrag, Steuervorteil und Auszahlung
+  heading-2: Wie hoch ist der Rürup-Höchstbetrag 2026?
+  heading-3: Wer profitiert besonders von der Rürup-Rente?
+  heading-4: Wie wird die Rürup-Rente in der Auszahlungsphase besteuert?
+  heading-5: Welche Einschränkungen hat die Rürup-Rente?
+  heading-6: Rürup-Rente vs. Alternativen: Was passt zu wem?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Rürup-Rente (ruerup-rente)
+## 0 Steuerliche Altersvorsorge für Selbstständige und Freiberufler
+
+Die Rürup-Rente ist die steuerlich geförderte Altersvorsorge für Selbstständige. Höchstbeträge, Steuervorteil und Auszahlung 2026 verständlich erklärt.
+
+## 1 Rürup-Rente 2026: Höchstbetrag, Steuervorteil und Auszahlung
+
+Die Rürup-Rente ist eine steuerlich geförderte private Altersvorsorge für Selbstständige und Gutverdiener.
+
+Die Rürup-Rente, benannt nach dem Ökonomen Bert Rürup, wurde 2005 mit dem Alterseinkünftegesetz als staatlich geförderte Altersvorsorge eingeführt. Sie gehört zur ersten Säule der Altersvorsorge und steht damit gleichberechtigt neben der gesetzlichen Rentenversicherung und den berufsständischen Versorgungswerken. Die Basisrente richtet sich insbesondere an Selbstständige, Freiberufler und gutverdienende Angestellte, die ihre Steuerlast senken und gleichzeitig für das Alter vorsorgen möchten. Neben der Rürup-Rente gibt es weitere Möglichkeiten der Altersvorsorgeaufwendungen, die es zu beachten gilt.
+
+## 2 Wie hoch ist der Rürup-Höchstbetrag 2026?
+
+Der Höchstbetrag für steuerlich absetzbare Beiträge zur Rürup-Rente beträgt 2026 für Alleinstehende 30.826 Euro und für zusammenveranlagte Ehepaare 61.652 Euro. Diese Beträge orientieren sich an der knappschaftlichen Beitragsbemessungsgrenze von 124.800 Euro jährlich (Stand 2026) und dem Beitragssatz von 24,7 Prozent.
+
+Seit 2023 können diese Beiträge zu 100 Prozent als Sonderausgaben steuerlich geltend gemacht werden – ein wichtiger Meilenstein, der die Rürup-Rente noch attraktiver macht.
+
+### Beispielrechnung für 2026
+
+Ein Selbstständiger mit einem zu versteuernden Einkommen von 100.000 Euro hat einen Grenzsteuersatz von 42 Prozent. Zahlt er den Höchstbetrag von 30.826 Euro ein, spart er rund 12.947 Euro an Steuern (Stand 2026).
+
+[SPIEL karte: Grenzsteuersatz]
+
+## 3 Wer profitiert besonders von der Rürup-Rente?
+
+Die Rürup-Rente lohnt sich vor allem für drei Zielgruppen:
+
+- Selbstständige ohne gesetzliche Rentenversicherung: Sie können den vollen Höchstbetrag ausschöpfen
+
+- Gutverdiener mit hohem Grenzsteuersatz: Ab einem Jahreseinkommen von etwa 70.000 Euro erreicht man 42 Prozent Grenzsteuersatz
+
+- Freiberufler in Versorgungswerken: Zusätzliche Steuervorteile zur berufsständischen Versorgung
+
+- Beamte: Profitieren vom Sonderausgabenabzug trotz Pension
+
+Besonders profitieren Personen, die im Erwerbsleben einen hohen Steuersatz haben, aber im Ruhestand mit einem niedrigerem Steuersatz rechnen können.
+
+[SPIEL mythos: Auch Angestellte können den vollen Höchstbetrag von 30.826 Euro in die Rürup-Rente einzahlen → nein]
+
+## 4 Wie wird die Rürup-Rente in der Auszahlungsphase besteuert?
+
+Die Rürup-Rente unterliegt der nachgelagerten Besteuerung. Wer 2026 mit der Rentenauszahlung beginnt, muss 84 Prozent der Rente versteuern. Dieser Besteuerungsanteil steigt jährlich um 0,5 Prozentpunkte, bis ab 2058 die volle Besteuerung von 100 Prozent erreicht wird.
+
+| Jahr des Rentenbeginns | Besteuerungsanteil | Steuerfreier Anteil
+
+| 2026 | 84% | 16%
+
+| 2030 | 86% | 14%
+
+| 2040 | 91% | 9%
+
+| 2050 | 96% | 4%
+
+| 2058 und später | 100% | 0%
+
+### Praktisches Beispiel
+
+Wer 2026 mit einer jährlichen Rürup-Rente von 12.000 Euro beginnt, muss 10.080 Euro (84 Prozent) versteuern. Die verbleibenden 1.920 Euro bleiben lebenslang steuerfrei.
+
+[SPIEL quiz: Welcher Besteuerungsanteil gilt 2026 für neue Rürup-Rentner?]
+
+## 5 Welche Einschränkungen hat die Rürup-Rente?
+
+Die Rürup-Rente bringt erhebliche Nachteile mit sich, die vor Abschluss bedacht werden müssen:
+
+Inflexibilität: Der Vertrag ist unkündbar. Eine Beitragsfreistellung ist möglich, aber Verwaltungskosten laufen weiter. Das eingezahlte Kapital ist bis zum Rentenbeginn gebunden.
+
+Keine Kapitalabfindung: Das angesparte Kapital darf frühestens ab dem 62. Lebensjahr und ausschließlich als lebenslange monatliche Rente ausgezahlt werden. Eine Kapitalauszahlung ist gesetzlich ausgeschlossen.
+
+Fehlende Vererbbarkeit: Stirbt der Versicherungsnehmer vor Rentenbeginn, verfällt das Kapital an die Versichertengemeinschaft. Nur mit kostenpflichtigem Hinterbliebenenschutz kann das verhindert werden.
+
+Hohe Kosten: Insbesondere klassische Bruttotarife mit Provisionen können die Rendite erheblich schmälern.
+
+[SPIEL gewusst: Bei einer Rürup-Rente mit Berufsunfähigkeitsversicherung sind die BU-Beiträge zu 100 Prozent absetzbar – bei einem Grenzsteuersatz von 42 Prozent kostet eine BU mit 100 Euro Monatsbeitrag effektiv nur 58 Euro]
+
+## 6 Rürup-Rente vs. Alternativen: Was passt zu wem?
+
+Die Entscheidung für oder gegen die Rürup-Rente hängt von drei Faktoren ab: Steuervorteil, Flexibilität und Vererbbarkeit. Neben der Rürup-Rente stehen anderen Selbstständigen auch die Riester-Rente und für Angestellte die betriebliche Altersversorgung zur Verfügung.
+
+Rürup-Rente lohnt sich bei:
+
+- Hohem aktuellem Grenzsteuersatz (ab 42 Prozent)
+
+- Erwartetem niedrigerem Steuersatz im Ruhestand
+
+- Bedarf nach lebenslanger Rentensicherheit
+
+- Wunsch nach Pfändungsschutz
+
+Alternativen sind besser bei:
+
+- Wunsch nach Kapitalflexibilität im Alter
+
+- Wichtiger Vererbbarkeit des Kapitals
+
+- Gleichbleibendem oder steigendem Steuersatz im Ruhestand
+
+- Geplanter Auswanderung
+
+| Kriterium | Rürup-Rente | ETF-Depot | Private Rentenversicherung
+
+| Steuerabzug in Ansparphase | ✓ bis 30.826€ | ✗ | ✗
+
+| Kapitalwahlrecht | ✗ | ✓ | ✓
+
+| Vererbbarkeit | ✗ (ohne Zusatz) | ✓ | ✓
+
+| Pfändungsschutz | ✓ | ✗ | ✓
+
+| Flexibilität | ✗ | ✓ | ○
+
+## 7 Fazit
+
+Die Rürup-Rente bleibt 2026 ein mächtiges Instrument für Selbstständige und Gutverdiener. Mit dem Höchstbetrag von 30.826 Euro für Alleinstehende und 61.652 Euro für Verheiratete lassen sich erhebliche Steuervorteile realisieren. Bei einem Grenzsteuersatz von 42 Prozent "finanziert" der Staat fast die Hälfte der Einzahlungen mit.
+
+Die Entscheidung hängt von der persönlichen Situation ab: Wer auf Flexibilität angewiesen ist oder das Kapital vererben möchte, sollte Alternativen prüfen. Für Selbstständige ohne gesetzliche Rente und Gutverdiener mit langfristigem Planungshorizont bietet die Rürup-Rente jedoch eine steuerlich hochattraktive Lösung für die Altersvorsorge. Die nachgelagerte Besteuerung wirkt meist vorteilhaft, da der Steuersatz im Ruhestand typischerweise niedriger ausfällt als während der Erwerbsphase.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste ruerup-rente]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+[BLOCK dokumente hinterbliebenenrente,broschuere-basisrente,betriebliche-altersversorgung]
+
+
+## FAQ
+F: Wie viel kann ich 2026 in die Rürup-Rente steuerlich absetzen?
+A: Alleinstehende können 2026 bis zu 30.826 Euro jährlich in die Rürup-Rente einzahlen und vollständig als Sonderausgaben absetzen. Bei zusammenveranlagten Ehegatten verdoppelt sich der Höchstbetrag auf 61.652 Euro, orientiert an der knappschaftlichen Beitragsbemessungsgrenze von 124.800 Euro.
+F: Für wen lohnt sich die Rürup-Rente besonders?
+A: Die Rürup-Rente eignet sich vor allem für Selbstständige und Freiberufler ohne gesetzliche Rentenversicherung sowie für gutverdienende Angestellte und Unternehmer mit hohem Steuersatz. Auch Beamte profitieren von einem Sonderausgabenabzug. Bei 42 Prozent Grenzsteuersatz sind bis zu 13.000 Euro Steuerersparnis jährlich möglich.
+F: Wann kann ich die Rürup-Rente auszahlen lassen?
+A: Die Auszahlung beginnt frühestens nach Vollendung des 62. Lebensjahres, bei Verträgen vor dem 1. Januar 2012 bereits ab dem 60. Lebensjahr. Das angesparte Kapital wird ausschließlich als lebenslange Rente gezahlt, eine Einmalauszahlung ist nicht möglich.
+F: Wie wird die Rürup-Rente im Ruhestand besteuert?
+A: Die Rürup-Rente unterliegt der nachgelagerten Besteuerung. Wer 2026 in Rente geht, muss 84 Prozent der Auszahlung versteuern. Dieser Anteil steigt stufenweise bis 2058 auf volle 100 Prozent. Der beim Renteneintritt festgesetzte Besteuerungsanteil gilt lebenslang.
+
+
+==================== BEITRAG riester-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Riester-Rente: Staatliche Förderung und Zulagen erklärt
+  heading-1: Riester-Rente 2026: Förderung, Zulagen und Reform
+  heading-2: Warum wird die Riester-Rente reformiert?
+  heading-3: Wie hoch sind die Riester-Zulagen 2026?
+  heading-4: Das neue Altersvorsorgedepot ab 2027
+  heading-5: Wer profitiert besonders vom Riester-Abschluss 2026?
+  heading-6: Wie funktioniert die Besteuerung und Auszahlung?
+  heading-7: Was passiert mit bestehenden Riester-Verträgen?
+  heading-8: Wie unterscheidet sich das Altersvorsorgedepot von der Riester-Rente?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Riester-Rente (riester-rente)
+## 0 Riester-Rente: Staatliche Förderung und Zulagen erklärt
+
+Die Riester-Rente fördert die private Altersvorsorge mit Zulagen und Steuervorteilen. Wie sie 2026 funktioniert, für wen sie sich lohnt und was die Reform bringt.
+
+## 1 Riester-Rente 2026: Förderung, Zulagen und Reform
+
+Die Riester-Rente regelt die staatlich geförderte private Altersvorsorge bis Ende 2026. Sie umfasst eine jährliche Grundzulage von 175 Euro sowie Kinderzulagen von 185 Euro für vor 2008 geborene und 300 Euro für ab 2008 geborene Kinder. Am 27. März 2026 beschloss der Deutsche Bundestag das Ende der klassischen Riester-Rente und ihre Ersetzung durch das Altersvorsorgedepot ab 1. Januar 2027.
+
+Nach jahrzehntelanger Kritik an hohen Kosten und niedrigen Renditen der Riester-Rente steht das System vor der größten Reform seit ihrer Einführung im Jahr 2002. Das Jahr 2026 markiert die letzte Chance für Neuabschlüsse unter den bewährten Förderregeln.
+
+## 2 Warum wird die Riester-Rente reformiert?
+
+Die klassische Riester-Rente geriet zunehmend in die Kritik. Mehr als jeder vierte der rund 15 Millionen bestehenden Riester-Verträge wurde inzwischen gekündigt oder stillgelegt. Die Hauptprobleme lagen in den komplexen Förderregeln, hohen Kosten und niedrigen Renditen durch die verpflichtende Beitragsgarantie.
+
+[SPIEL schaetzen: Wie viele Millionen Deutsche haben einen Riester-Vertrag abgeschlossen? → 16]
+
+Komplizierte Förderregeln mit einkommensabhängigen Mindestbeiträgen sorgten dafür, dass viele Sparer nicht die volle Zulage erhielten, oft ohne es zu merken. Zudem führte die starre Beitragsgarantie zu einer renditeschwachen Anlage, da Anbieter sicherstellen mussten, dass mindestens die eingezahlten Beiträge erhalten bleiben.
+
+## 3 Wie hoch sind die Riester-Zulagen 2026?
+
+Die Grundzulage beträgt 175 Euro pro Jahr für jeden Förderberechtigten. Verheiratete erhalten bei zwei eigenen Verträgen zusammen 350 Euro jährlich.
+
+Die Kinderzulagen staffeln sich nach Geburtsjahr:
+
+- 185 Euro pro Jahr für Kinder, die vor dem 1. Januar 2008 geboren wurden
+
+- 300 Euro pro Jahr für Kinder ab dem 1. Januar 2008
+
+[SPIEL karte: Berufseinsteigerbonus]
+
+Der Mindesteigenbeitrag beträgt 4 Prozent des rentenversicherungspflichtigen Vorjahreseinkommens abzüglich der staatlichen Zulagen, mindestens jedoch 60 Euro jährlich. Der maximale Förderbetrag liegt bei 2.100 Euro pro Person und Jahr.
+
+## 4 Das neue Altersvorsorgedepot ab 2027
+
+Das Parlament stimmte mit den Stimmen der Koalitionsfraktionen CDU/CSU und SPD für das Altersvorsorgereformgesetz, das ein Altersvorsorgedepot mit Aktien, Fonds und ETFs schafft. Die Reform bedeutet einen fundamentalen Systemwechsel.
+
+[SPIEL gewusst: Erstmals werden auch alle Selbstständigen förderberechtigt – damit können ab 2027 auch Freelancer, Unternehmer und Freiberufler ohne Rentenversicherungspflicht das Altersvorsorgedepot nutzen.]
+
+Das neue Zulagensystem funktioniert beitragsproportional statt einkommensabhängig:
+
+- 50 Cent staatliche Zulage für jeden eingezahlten Euro bis 360 Euro (maximal 180 Euro)
+
+- 25 Cent für weitere Einzahlungen zwischen 361 und 1.800 Euro (maximal 360 Euro)
+
+- Gesamte Grundzulage steigt auf maximal 540 Euro jährlich
+
+| Einzahlungsbetrag | Fördersatz | Maximale Zulage
+
+| 0 - 360 € | 50 Cent/Euro | 180 €
+
+| 361 - 1.800 € | 25 Cent/Euro | 360 €
+
+| Gesamt | - | 540 €
+
+Die Kinderzulage beträgt künftig 300 Euro pro Kind bei nur 25 Euro monatlichem Eigenbeitrag – der Staat gibt zu jedem gesparten Euro einen weiteren Euro dazu.
+
+## 5 Wer profitiert besonders vom Riester-Abschluss 2026?
+
+Geringverdiener mit mehreren Kindern erleben den größten Unterschied zwischen altem und neuem System. Eine alleinerziehende Teilzeitkraft mit 28.000 Euro Bruttoeinkommen und zwei Kindern (geboren 2012, 2016) erhält 775 Euro staatliche Zulagen für nur 28,75 Euro monatlichen Eigenbeitrag – eine Zulagenquote von 69 Prozent.
+
+[SPIEL quiz: Wie hoch ist der Mindesteigenbeitrag ab 2027?]
+
+Im neuen System zahlen Geringverdiener doppelt so viel Mindestbeitrag, erhalten aber deutlich weniger staatliche Förderung. Eine Familie, die bisher mit 60 Euro Sockelbeitrag etwa 775 Euro Zulagen erhielt, bekommt ab 2027 nur noch rund 96 Euro bei 120 Euro Eigenbeitrag.
+
+Auch Berufseinsteiger sollten 2026 handeln. Unter 25-Jährige erhalten beim ersten Vertragsabschluss einmalig 375 Euro (175 Euro Grundzulage plus 200 Euro Bonus).
+
+## 6 Wie funktioniert die Besteuerung und Auszahlung?
+
+Bei Renteneintritt können Sie sich 30 Prozent des Riester-Kapitals als Einmalzahlung auszahlen lassen. Dieser Betrag muss vollständig mit dem individuellen Einkommenssteuersatz versteuert werden.
+
+Die monatlichen Riester-Renten müssen zu 100 Prozent versteuert werden – mit dem persönlichen Steuersatz im Rentenalter. Dieser liegt normalerweise niedriger als während der Erwerbstätigkeit, wodurch Steuern gespart werden. Bei der Berechnung der Altersvorsorgeaufwendungen können sich Sparer diese Ausgaben bei ihrer Steuererklärung berücksichtigen lassen.
+
+Die Leistungen aus privaten Riester-Verträgen sind für Pflichtversicherte in der gesetzlichen Kranken- und Pflegeversicherung beitragsfrei. Die Auszahlung kann bei Verträgen vor 2011 ab 60 Jahren, bei späteren Verträgen ab 62 Jahren beginnen.
+
+Bei Gesamteinkommen über dem Grundfreibetrag von 12.348 Euro (2026) müssen Riester-Rentner eine Steuererklärung abgeben.
+
+## 7 Was passiert mit bestehenden Riester-Verträgen?
+
+Bestehende Riester-Verträge genießen vollständigen Bestandsschutz und können mit der bisherigen steuerlichen Förderung weitergeführt werden. Kein Sparer muss seinen Vertrag kündigen oder wechseln.
+
+Ab 2027 besteht die Wahlmöglichkeit: Riester-Sparer können in das neue Fördersystem wechseln, ohne bisherige Förderung zurückzahlen zu müssen – nach fünf Vertragsjahren sogar kostenlos. Beim Wechsel können allerdings Wechsel-, Abschluss- und Vertriebskosten anfallen.
+
+Die Entscheidung hängt von der individuellen Situation ab. Wer von 2 Prozent Riester-Kosten auf 0,2 Prozent ETF-Kosten wechselt, spart bei 25.000 Euro Guthaben und 20 Jahren Restlaufzeit rund 15.000 Euro an Gebühren.
+
+## 8 Wie unterscheidet sich das Altersvorsorgedepot von der Riester-Rente?
+
+Das neue System bringt grundlegende Änderungen:
+
+- Anlageformen: Stärkere Kapitalmarktanlage in Fonds und ETFs statt Garantieprodukten
+
+- Kosten: Kostendeckel von maximal 1 Prozent für Standardprodukte
+
+- Förderberechtigte: Erstmals auch alle Selbstständigen förderberechtigt
+
+- Rentenalter: Auszahlungsalter steigt von 62 auf 65 Jahre
+
+- Flexibilität: Auszahlung als lebenslange Rente oder über Auszahlungsplan möglich
+
+Für das Standardprodukt gilt ein Kostendeckel von maximal 1 Prozent Effektivkosten pro Jahr, den jeder Anbieter zwingend im Angebot haben muss. Zusätzlich soll ein staatliches Standarddepot durch einen öffentlichen Träger angeboten werden. Das Altersvorsorgedepot ergänzt dabei andere Säulen der Altersvorsorge wie die betriebliche Altersversorgung, die Arbeitgeber ihren Mitarbeitern anbieten können.
+
+## 9 Fazit
+
+Das Jahr 2026 markiert das Ende einer Ära: Die klassische Riester-Rente mit ihrem großzügigen, aber komplexen Zulagensystem wird durch das renditestärkere Altersvorsorgedepot abgelöst. Für Familien mit Kindern und Geringverdiener ist 2026 die letzte Gelegenheit, sich dauerhaft die vorteilhaften Förderkonditionen zu sichern. Bestehende Verträge genießen vollen Bestandsschutz und laufen auch über 2026 hinaus zu den bisherigen Bedingungen weiter. Ab 2027 startet mit dem Altersvorsorgedepot ein neues Kapitel der privaten Altersvorsorge – flexibler, transparenter und renditeorientierter, aber mit anderen Förderregeln. Die Reform macht Deutschland zu einem der ersten europäischen Länder, die staatlich geförderte ETF-Altersvorsorge ermöglichen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste riester-rente]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+[BLOCK dokumente broschuere-riester-rente,riesterrente-checkliste,hinterbliebenenrente,broschuere-basisrente]
+
+
+## FAQ
+F: Wie hoch ist die Riester-Grundzulage 2026?
+A: Die Grundzulage beträgt 175 Euro pro Jahr. Für vor 2008 geborene Kinder gibt es zusätzlich 185 Euro Kinderzulage, für ab 2008 geborene Kinder 300 Euro. Berufseinsteiger unter 25 Jahren erhalten einmalig eine erhöhte Grundzulage von 375 Euro.
+F: Wie viel muss ich mindestens in einen Riester-Vertrag einzahlen?
+A: Sie müssen mindestens 4 Prozent des Vorjahreseinkommens abzüglich Zulagen einzahlen, um die volle Förderung zu erhalten. Liegt dieser Betrag unter 60 Euro, greift der Sockelbeitrag von 60 Euro jährlich. Der maximal geförderte Jahresbeitrag beträgt 2.100 Euro.
+F: Was ändert sich durch das neue Altersvorsorgedepot ab 2027?
+A: Der Bundestag hat am 27. März 2026 die Reform beschlossen, mit der ab 2027 das Altersvorsorgedepot das klassische Riester-Sparen ergänzt. Sparer können dann in Aktien, Fonds und ETF für das Alter ansparen, die Förderlogik ändert sich grundlegend.
+F: Ab wann kann die Riester-Rente ausgezahlt werden?
+A: Die Auszahlung kann frühestens mit Vollendung des 65. Lebensjahres beginnen. Ein früherer Bezug ist möglich, wenn bereits eine gesetzliche Altersrente bezogen wird. Die Leistungen sind für Pflichtversicherte in der gesetzlichen Kranken- und Pflegeversicherung beitragsfrei.
+
+
+==================== BEITRAG betriebliche-altersversorgung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Altersvorsorge durch den Arbeitgeber: Ihre Vorteile nutzen
+  heading-1: Betriebliche Altersversorgung 2026: Modelle, Förderung und Vorteile
+  heading-2: Was ist betriebliche Altersversorgung?
+  heading-3: Welche fünf Durchführungswege stehen zur Verfügung?
+  heading-4: Wie hoch sind die Steuer- und Sozialabgabenvorteile 2026?
+  heading-5: Welche Arbeitgeberzuschüsse gelten seit 2022?
+  heading-6: Wie funktioniert das neue Opting-Out-Modell ab 2026?
+  heading-7: Welche Sicherungsmechanismen schützen die Betriebsrente?
+  heading-8: Welche Neuerungen bringt die Aktivrente 2026?
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Betriebliche Altersversorgung (betriebliche-altersversorgung)
+## 0 Altersvorsorge durch den Arbeitgeber: Ihre Vorteile nutzen
+
+Die betriebliche Altersversorgung baut über den Arbeitgeber eine Zusatzrente auf. Welche Modelle es gibt, wie der Staat 2026 fördert und welche Vorteile Sie haben.
+
+## 1 Betriebliche Altersversorgung 2026: Modelle, Förderung und Vorteile
+
+Betriebliche Altersversorgung regelt die zusätzliche Absicherung für das Alter durch den Arbeitgeber neben der gesetzlichen Rente.
+
+Diese zweite Säule der Altersvorsorge hat sich zu einem bedeutenden Baustein des deutschen Rentenmodells entwickelt. Rund 18,1 Millionen Beschäftigte haben derzeit eine aktive Anwartschaft auf eine betriebliche Altersversorgung, wobei die Verbreitungsquote seit 2019 bei etwa 54 Prozent stagniert. Besonders in kleineren Unternehmen und bei Beschäftigten mit geringem Einkommen ist die bAV noch unterrepräsentiert.
+
+## 2 Was ist betriebliche Altersversorgung?
+
+Betriebliche Altersversorgung liegt vor, wenn der Arbeitgeber seinem Arbeitnehmer Leistungen mit einem der Versorgungszwecke Alter, Tod oder Invalidität zusagt. Diese Zusage erfolgt als Gegenleistung für die Arbeitsleistung und ist an das Arbeitsverhältnis gekoppelt.
+
+[SPIEL mythos: Nur Vollzeitbeschäftigte haben Anspruch auf betriebliche Altersversorgung → nein]
+
+Jeder Arbeitnehmer, der in der gesetzlichen Rentenversicherung pflichtversichert ist, hat das Recht auf eine betriebliche Altersversorgung in Form der Entgeltumwandlung. Dabei kann der Arbeitnehmer vom Arbeitgeber verlangen, dass von seinen künftigen Entgeltansprüchen bis zu 4 Prozent der Beitragsbemessungsgrenze (2026: 4.056 Euro jährlich) durch Entgeltumwandlung für seine bAV verwendet werden.
+
+## 3 Welche fünf Durchführungswege stehen zur Verfügung?
+
+Die betriebliche Altersversorgung kann über fünf verschiedene Durchführungswege realisiert werden. Jeder Weg bringt spezifische Merkmale und Vorteile mit sich:
+
+| Durchführungsweg | Rechtsform | Besonderheiten
+
+| Direktversicherung | Versicherungsvertrag | Am weitesten verbreitet (8,8 Mio. Verträge, Stand 2026)
+
+| Pensionskasse | Selbstständige Versorgungseinrichtung | Beschränkt auf bAV, hohe Sicherheit
+
+| Pensionsfonds | Investmentfonds-ähnlich | Höheres Anlagerisiko durch Aktienanteil möglich
+
+| Direktzusage | Unmittelbare Arbeitgeberzusage | Finanziert durch Pensionsrückstellungen
+
+| Unterstützungskasse | Selbstständige Einrichtung | Kein Rechtsanspruch gegenüber der Kasse
+
+Die Direktversicherung dominiert mit über 70 Prozent aller bAV-Verträge zusammen mit Pensionskassen. Für kleine und mittlere Unternehmen ist sie der Standard, da sie einfach zu administrieren ist und keine bilanziellen Auswirkungen hat.
+
+[SPIEL karte: Entgeltumwandlung]
+
+Die Pensionskasse ist eine rechtlich selbstständige Versorgungseinrichtung, die sich ausschließlich der betrieblichen Altersvorsorge widmet. Sie kann von einem Unternehmen oder überbetrieblich für mehrere Firmen geführt werden.
+
+Pensionsfonds arbeiten ähnlich wie Investmentfonds und können bei der Kapitalanlage höhere Risiken eingehen, etwa durch einen größeren Aktienanteil. Dies ermöglicht potenziell höhere, aber auch unsicherere Renditen.
+
+Die Direktzusage (Pensionszusage) verpflichtet den Arbeitgeber, die zugesagte Versorgungsleistung aus eigenem Firmenvermögen zu erbringen. Finanziert wird dies durch Pensionsrückstellungen in der Bilanz.
+
+Bei der Unterstützungskasse haben Beschäftigte keinen direkten Rechtsanspruch auf Leistungen gegenüber der Kasse, sondern nur gegenüber dem Trägerunternehmen.
+
+## 4 Wie hoch sind die Steuer- und Sozialabgabenvorteile 2026?
+
+Die steuerlichen Vorteile der betrieblichen Altersversorgung sind beträchtlich. Bis zu 8 Prozent der Beitragsbemessungsgrenze sind steuerfrei (2026: 8.112 Euro jährlich bzw. 676 Euro monatlich) für Direktversicherungen, Pensionskassen und Pensionsfonds. Bei der Berechnung von Altersvorsorgeaufwendungen spielen diese Grenzen eine wichtige Rolle.
+
+[SPIEL quiz: Wie viel können Arbeitnehmer 2026 maximal sozialversicherungsfrei in die bAV einzahlen?]
+
+Sozialversicherungsfrei bleiben 4 Prozent der Beitragsbemessungsgrenze (2026: 4.056 Euro jährlich bzw. 338 Euro monatlich). Diese Regelung gilt für alle externen Durchführungswege sowie für Entgeltumwandlungen bei Unterstützungskassen und Direktzusagen.
+
+Für rein arbeitgeberfinanzierte Beiträge zu Unterstützungskassen und Direktzusagen besteht weiterhin eine unbegrenzte Sozialversicherungsfreiheit.
+
+## 5 Welche Arbeitgeberzuschüsse gelten seit 2022?
+
+Seit dem Betriebsrentenstärkungsgesetz 2018 sind Arbeitgeber verpflichtet, mindestens 15 Prozent des umgewandelten Entgelts als Zuschuss zu gewähren, soweit sie durch die Entgeltumwandlung Sozialversicherungsbeiträge einsparen. Für bestehende Verträge gilt dies seit 2022.
+
+Beim neuen Opting-Out-Modell des zweiten Betriebsrentenstärkungsgesetzes ist sogar ein Arbeitgeberzuschuss von mindestens 20 Prozent erforderlich, der sofort gesetzlich unverfallbar wird.
+
+Zusätzlich existiert eine staatliche Förderung für Geringverdiener. Die Einkommensgrenze wird ab 2027 auf 3 Prozent der Beitragsbemessungsgrenze angehoben (2026: 3.042 Euro monatlich), der maximale Förderbetrag steigt von 288 auf 360 Euro jährlich bei einem Fördersatz von 30 Prozent.
+
+## 6 Wie funktioniert das neue Opting-Out-Modell ab 2026?
+
+Das zweite Betriebsrentenstärkungsgesetz, das am 22. Januar 2026 in Kraft getreten ist, erleichtert die automatische Entgeltumwandlung erheblich. Arbeitnehmer erhalten automatisch eine Entgeltumwandlungsvereinbarung und können dieser widersprechen (Opting-Out).
+
+Voraussetzungen für das neue Modell:
+
+- Entgeltansprüche sind nicht in einem Tarifvertrag geregelt und werden auch nicht üblicherweise in einem TV geregelt
+
+- Der Arbeitgeber muss mindestens 20 Prozent des umgewandelten Entgelts als Arbeitgeberzuschuss gewähren
+
+- Beschäftigte müssen mindestens drei Monate vor Beginn in Schriftform informiert werden
+
+- Sie haben ein Widerspruchsrecht von mindestens einem Monat
+
+[SPIEL gewusst: Etwa jeder fünfte bAV-Zuschuss wird vom Arbeitgeber falsch berechnet, was zu rechtlichen Nachforderungen führen kann (Stand 2026)]
+
+## 7 Welche Sicherungsmechanismen schützen die Betriebsrente?
+
+Die betriebliche Altersversorgung ist über den Pensions-Sicherungs-Verein (PSVaG) gegen Insolvenz des Arbeitgebers geschützt. Der PSVaG ist die gesetzlich verankerte Insolvenzsicherung und übernimmt die Verpflichtungen insolventer Arbeitgeber, um laufende Renten weiterzuzahlen und unverfallbare Anwartschaften zu sichern.
+
+Der Beitragssatz für 2025 wurde auf 1,2 Promille festgesetzt (Vorjahr 0,4 Promille). Für 2026 wird derzeit kein Vorschuss erhoben, die Entscheidung erfolgt im ersten Halbjahr 2026.
+
+Die Höhe der gesicherten Leistungen ist begrenzt: Der Höchstanspruch gegen den PSVaG beträgt 2026 höchstens 11.865 Euro Rente pro Monat (das Dreifache der monatlichen Bezugsgröße).
+
+Nicht alle Durchführungswege sind PSVaG-gesichert:
+
+- Direktversicherungen sind über die Versicherungsaufsicht geschützt
+
+- Pensionskassen sichern ihre Leistungen grundsätzlich selbst
+
+- Pensionsfonds sind teilweise PSVaG-gesichert
+
+- Direktzusagen und Unterstützungskassen sind vollständig PSVaG-gesichert
+
+## 8 Welche Neuerungen bringt die Aktivrente 2026?
+
+Zum 1. Januar 2026 ist die Aktivrente eingeführt worden. Mit der Aktivrente bleiben bis zu 2.000 Euro Hinzuverdienst monatlich steuerfrei – sie ist eine Art Steuerbonus für das Arbeiten im Rentenalter und greift für sozialversicherungspflichtige Arbeitnehmer ab Erreichen der Regelaltersgrenze.
+
+Die Aktivrente bietet folgende Vorteile:
+
+- Bis zu 2.000 Euro pro Monat (24.000 Euro pro Jahr) steuerfrei
+
+- Kein Progressionsvorbehalt – der steuerfreie Hinzuverdienst erhöht nicht den Steuersatz für das restliche Einkommen
+
+- Der Steuerfreibetrag wird bei der Lohnsteuerberechnung automatisch berücksichtigt
+
+Wichtige Einschränkungen:
+
+- Für Selbstständige, Gewerbetreibende, Landwirte, Minijobs und Beamte gilt die Aktivrente nicht
+
+- Beiträge zur Kranken- und Pflegeversicherung müssen weiter entrichtet werden
+
+Die Aktivrente unterliegt nicht dem Progressionsvorbehalt und beeinflusst die bAV nicht unmittelbar, aber auf ausgezahlte Betriebsrenten fallen weiterhin Beiträge zur Kranken- und Pflegeversicherung an.
+
+## 9 Fazit
+
+Die betriebliche Altersversorgung bleibt ein zentraler Baustein der deutschen Altersvorsorge mit erheblichen steuerlichen Vorteilen. Mit der Anhebung der Beitragsbemessungsgrenze auf 101.400 Euro (2026) steigen auch die Fördergrenzen: 8.112 Euro jährlich steuerfrei, 4.056 Euro sozialversicherungsfrei. Das zweite Betriebsrentenstärkungsgesetz erleichtert durch Opting-Out-Modelle den Zugang zur bAV, verlangt aber höhere Arbeitgeberzuschüsse von 20 Prozent. Die neue Aktivrente ermöglicht zusätzlich 2.000 Euro steuerfreien Hinzuverdienst im Rentenalter. Trotz der positiven Entwicklungen stagniert die Verbreitungsquote bei 54 Prozent – besonders kleine Unternehmen und Geringverdiener profitieren noch zu wenig von den Möglichkeiten der betrieblichen Altersversorgung.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste betriebliche-altersversorgung]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+[BLOCK dokumente betriebliche-altersversorgung]
+
+
+## FAQ
+F: Welche Durchführungswege gibt es bei der betrieblichen Altersversorgung?
+A: Zum Aufbau der bAV stehen fünf Durchführungswege zur Verfügung: Direktversicherung, Pensionskasse, Pensionsfonds, Direktzusage und Unterstützungskasse. Die Direktversicherung ist mit rund 8,8 Millionen Verträgen der am weitesten verbreitete Weg.
+F: Wie viele Arbeitnehmer haben in Deutschland eine Betriebsrente?
+A: Rund 54 Prozent aller sozialversicherungspflichtig Beschäftigten in Deutschland haben aktuell eine Betriebsrente. Die Verbreitungsquote stagniert seit 2019. Besonders in kleineren Unternehmen und bei Beschäftigten mit geringem Einkommen spielt die bAV in der Praxis kaum eine Rolle.
+F: Welche steuerlichen Vorteile bietet die betriebliche Altersversorgung?
+A: Beiträge zur bAV können aus dem Bruttogehalt umgewandelt werden und mindern damit Steuern und Sozialabgaben. Bis zu 8 Prozent der Beitragsbemessungsgrenze der Rentenversicherung sind steuerbegünstigt einzahlbar. In der Auszahlungsphase unterliegen die Leistungen der nachgelagerten Besteuerung.
+F: Muss der Arbeitgeber einen Zuschuss zur bAV zahlen?
+A: Ja, seit dem Betriebsrentenstärkungsgesetz (BRSG) ist der Arbeitgeber verpflichtet, 15 Prozent des umgewandelten Entgelts zuzuschießen, sofern er durch die Entgeltumwandlung Sozialversicherungsbeiträge spart. Diese Regelung gilt für alle Direktversicherungs-, Pensionskassen- und Pensionsfonds-Verträge.
+
+
+==================== BEITRAG direktversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Betriebliche Altersvorsorge: Direktversicherung einfach erklärt
+  heading-1: Direktversicherung 2026: Vorteile, Steuern und Regelungen
+  heading-2: Was ist eine Direktversicherung und wie funktioniert sie?
+  heading-3: Welche steuerlichen Vorteile bietet die Direktversicherung 2026?
+  heading-4: Wie funktioniert der Arbeitgeberzuschuss ab 2026?
+  heading-5: Welche Steuern und Abgaben fallen in der Rentenphase an?
+  heading-6: Grundsicherung und anrechnungsfreie Beträge 2026
+  heading-7: Mobilität und Jobwechsel bei der Direktversicherung
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Direktversicherung (direktversicherung)
+## 0 Betriebliche Altersvorsorge: Direktversicherung einfach erklärt
+
+Die Direktversicherung ist eine beliebte betriebliche Altersvorsorge per Entgeltumwandlung. Welche Steuervorteile sie 2026 bietet und welche Regeln gelten.
+
+## 1 Direktversicherung 2026: Vorteile, Steuern und Regelungen
+
+Die Direktversicherung ist eine Form der betrieblichen Altersvorsorge, bei der der Arbeitgeber eine Renten- oder Lebensversicherung für den Arbeitnehmer abschließt.
+
+Die betriebliche Altersvorsorge erlebt 2026 erhebliche Verbesserungen. Die Beitragsbemessungsgrenze in der gesetzlichen Rentenversicherung steigt auf 8.450 Euro im Monat beziehungsweise 101.400 Euro im Jahr. Diese Änderung schafft zusätzlichen Spielraum für die Direktversicherung und macht sie für Arbeitnehmer noch attraktiver. Zugleich profitieren Betriebsrentner von einem erhöhten Freibetrag bei den Krankenversicherungsbeiträgen.
+
+## 2 Was ist eine Direktversicherung und wie funktioniert sie?
+
+Die Direktversicherung gehört zu den fünf Durchführungswegen der betrieblichen Altersvorsorge. Die Direktversicherung kann vom Arbeitgeber finanziert werden oder im Rahmen der Entgeltumwandlung vom Arbeitnehmer. Bei der Entgeltumwandlung wird ein Teil des Bruttogehalts nicht bar ausgezahlt, sondern fließt in die Versicherung. Der Arbeitgeber tritt dabei als Versicherungsnehmer und Beitragszahler auf, während der Mitarbeiter die versicherte Person ist und ein unwiderrufliches Bezugsrecht auf die Leistungen erhält.
+
+Das Prinzip der Entgeltumwandlung bildet das Herzstück der Direktversicherung. Arbeitnehmer verzichten auf einen Teil ihres künftigen Bruttogehalts, der stattdessen in die Versicherung eingezahlt wird. Dies reduziert das zu versteuernde Einkommen und die Sozialabgaben erheblich. Nach § 1a Abs. 1 BetrAVG hat der Arbeitnehmer gegenüber seinem Arbeitgeber einen gesetzlichen Anspruch auf Durchführung der Entgeltumwandlung in Höhe von bis zu 4 % der Beitragsbemessungsgrenze der gesetzlichen Rentenversicherung (BBG).
+
+## 3 Welche steuerlichen Vorteile bietet die Direktversicherung 2026?
+
+Die Steuervorteile der Direktversicherung sind 2026 besonders attraktiv. Der steuerfreie Höchstbetrag für Beiträge des Arbeitgebers zur bAV (Pensionskasse, Pensionsfonds oder Direktversicherung) beträgt acht Prozent der Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung. Im Jahr 2026 liegt der steuerfreie Höchstbetrag somit bei 8.112 Euro jährlich (676 Euro monatlich).
+
+Die Förderung ist in zwei Stufen gegliedert:
+
+- 4 Prozent der BBG (4.056 Euro jährlich / 338 Euro monatlich): Vollständig steuer- und sozialversicherungsfrei
+
+- Weitere 4 Prozent der BBG (4.056 Euro jährlich / 338 Euro monatlich): Nur steuerfrei, aber sozialversicherungspflichtig
+
+[SPIEL schaetzen: Wie hoch ist der maximale steuerfreie Jahresbeitrag zur Direktversicherung 2026? → 8112]
+
+Diese Struktur ermöglicht es Arbeitnehmern, erhebliche Steuereinsparungen zu realisieren. Arbeitnehmer können dann einen höheren Teil ihres Einkommens, nämlich bis zu 338 Euro im Monat (2025: 322 Euro), steuer- und sozialversicherungsfrei in eine Direktversicherung, Pensionskasse oder einen Pensionsfonds einzahlen.
+
+## 4 Wie funktioniert der Arbeitgeberzuschuss ab 2026?
+
+Seit der Einführung des Betriebsrentenstärkungsgesetzes (BRSG) ist der Arbeitgeber verpflichtet, die durch die Entgeltumwandlung eingesparten Arbeitgeberanteile an der Sozialversicherung an den Arbeitnehmer als Zuschuss zur Entgeltumwandlung weiterzugeben. Das gilt für alle seit 2019 abgeschlossenen Entgeltumwandlungsvereinbarungen ab Beginn. Für Bestandsverträge gilt die Zuschussverpflichtung seit 2022.
+
+Die Zuschusshöhe ist gesetzlich auf 15 Prozent des umgewandelten Entgelts begrenzt. Arbeitgeber sind verpflichtet, einen Zuschuss von 15% der umgewandelten Entgeltbestandteile zu leisten. Wer den maximal sozialversicherungsfreien Betrag von 338 Euro nutzt, erhält somit 44,09 Euro monatlich vom Arbeitgeber.
+
+Rechenbeispiel für 2026:
+
+- Entgeltumwandlung: 338 Euro monatlich (maximal sozialversicherungsfrei)
+
+- Arbeitgeber-Einsparung Sozialabgaben: ca. 20 %
+
+- Mindest-Arbeitgeberzuschuss: 15 % von 338 Euro = 50,70 Euro
+
+- Gesamtbeitrag in die Direktversicherung: 388,70 Euro monatlich
+
+[SPIEL mythos: Der Arbeitgeberzuschuss zur Direktversicherung ist freiwillig und hängt von der Unternehmensgröße ab → nein]
+
+## 5 Welche Steuern und Abgaben fallen in der Rentenphase an?
+
+Bei der Auszahlung der Direktversicherung gilt das Prinzip der nachgelagerten Besteuerung. Leistungen aus der Direktversicherung werden dafür voll versteuert (nachgelagerte Besteuerung). Der anzuwendende Steuersatz entspricht dem persönlichen Steuersatz in der Rentenphase, der meist niedriger ist als während des Berufslebens.
+
+Ein besonders wichtiger Aspekt betrifft die Kranken- und Pflegeversicherungsbeiträge. Werden die Leistungen aus der betrieblichen Altersversorgung ausgezahlt, müssen Mitglieder gesetzlicher Krankenkassen Beiträge zur Krankenversicherung Rentner sowie zur Pflegeversicherung zahlen. Dabei fallen die vollen Beitragssätze an – sowohl Arbeitnehmer- als auch Arbeitgeberanteil.
+
+Die positive Nachricht: Der Freibetrag für Betriebsrenten in der gesetzlichen Krankenversicherung beträgt 2026 genau 197,75 Euro monatlich. Grundlage ist die bundeseinheitliche Bezugsgröße der Sozialversicherung von 3.955 Euro im Monat; der Freibetrag entspricht 1/20 dieser Bezugsgröße. Dies bedeutet eine Entlastung für Betriebsrentner, da nur der Betrag oberhalb von 197,75 Euro mit Krankenversicherungsbeiträgen belastet wird.
+
+| Betriebsrente | Krankenversicherung (17,7%) | Pflegeversicherung | Nettobetrag
+
+| 150 € | 0 € (unter Freibetrag) | 0 € | 150 €
+
+| 250 € | 9,25 € (52,25 × 17,7%) | 10,50 € (kinderlos, 4,2%) | 230,25 €
+
+| 450 € | 44,65 € (252,25 × 17,7%) | 16,20 € (mit Kind, 3,6%) | 389,15 €
+
+## 6 Grundsicherung und anrechnungsfreie Beträge 2026
+
+Für Rentner mit geringem Einkommen bringt 2026 weitere Verbesserungen. Der Freibetrag darf höchstens 50 Prozent des Regelbedarfs für Alleinstehende betragen, also höchstens 281,50 Euro pro Monat. Diese Regelung stärkt die betriebliche Altersvorsorge als zweite Säule der Altersversorgung erheblich.
+
+Die Freibetragsregelung nach § 82a SGB XII funktioniert folgendermaßen:
+
+- Die ersten 100 Euro der Betriebsrente bleiben anrechnungsfrei
+
+- Von dem darüber liegenden Betrag bleiben weitere 30 Prozent anrechnungsfrei
+
+- Insgesamt darf der Freibetrag nicht höher sein als 50 Prozent des Regelsatzes für Grundsicherung. Dieser beträgt im Jahr 2026 für Alleinstehende 563 Euro, das heißt, es sind maximal 281,50 Euro anrechnungsfrei
+
+[SPIEL quiz: Wie hoch ist der maximale anrechnungsfreie Betrag bei der Grundsicherung für Betriebsrenten 2026?]
+
+## 7 Mobilität und Jobwechsel bei der Direktversicherung
+
+Bei einem Arbeitgeberwechsel bleibt die erworbene Anwartschaft grundsätzlich erhalten. Arbeitnehmer haben mehrere Optionen für den Umgang mit ihrer bestehenden Direktversicherung:
+
+- Übernahme durch neuen Arbeitgeber: Der neue Arbeitgeber übernimmt den bestehenden Vertrag und führt ihn weiter
+
+- Übertragung in neuen Vertrag: Das angesparte Kapital wird in einen neuen Vertrag beim neuen Arbeitgeber überführt
+
+- Private Weiterführung: Der Vertrag wird privat fortgeführt, meist ohne Arbeitgeberzuschuss
+
+Lassen Sie Ihre Direktversicherung vom neuen Arbeitgeber weiterführen, finanzieren Sie sie privat mit eigenen Beiträgen oder lassen Sie sie beitragsfrei ruhen, wenn Sie das Unternehmen wechseln. Die Übertragung zwischen Arbeitgebern ist meist mit Kosten verbunden und kann die Rendite beeinträchtigen, weshalb eine sorgfältige Prüfung der Konditionen empfehlenswert ist.
+
+## 8 Fazit
+
+Die Direktversicherung bietet 2026 durch die erhöhte Beitragsbemessungsgrenze und verbesserte Freibeträge attraktive Möglichkeiten für die Altersvorsorge. Im Jahr 2026 liegt der steuerfreie Höchstbetrag bei 8.112 Euro jährlich (676 Euro monatlich), wobei bis zu 4.056 Euro zusätzlich sozialversicherungsfrei sind. Der gesetzliche Arbeitgeberzuschuss von 15 Prozent macht die Direktversicherung für die meisten Arbeitnehmer lohnenswert. Der Freibetrag steigt damit um 10,50 Euro (2025: 187,25 Euro). Betriebsrenten bis 197,75 Euro bleiben 2026 komplett beitragsfrei in der gesetzlichen Krankenversicherung. Bei der Grundsicherung bleiben Betriebsrenten bis zu 281,50 Euro monatlich anrechnungsfrei. Arbeitnehmer sollten jedoch die späteren Belastungen durch Kranken- und Pflegeversicherungsbeiträge sowie mögliche Auswirkungen bei Jobwechseln berücksichtigen. Insgesamt ist die Direktversicherung eine sinnvolle Ergänzung der gesetzlichen Rente, besonders bei Arbeitgebern, die den vorgeschriebenen Zuschuss gewähren oder sogar darüber hinausgehen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste direktversicherung]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+
+## FAQ
+F: Was ist eine Direktversicherung?
+A: Die Direktversicherung ist einer der fünf Durchführungswege der betrieblichen Altersvorsorge. Der Arbeitgeber schließt als Versicherungsnehmer eine Renten- oder Lebensversicherung für seine Mitarbeiter ab. Die Beiträge werden meist über Entgeltumwandlung aus dem Bruttogehalt finanziert.
+F: Wie hoch sind die steuerfreien Beiträge zur Direktversicherung 2026?
+A: 2026 können bis zu 8 Prozent der Beitragsbemessungsgrenze (8.112 Euro jährlich bzw. 676 Euro monatlich) steuerbegünstigt eingezahlt werden. Die ersten 4 Prozent (4.056 Euro jährlich) sind steuer- und sozialversicherungsfrei, weitere 4 Prozent sind nur steuerfrei.
+F: Muss der Arbeitgeber einen Zuschuss zur Direktversicherung zahlen?
+A: Ja, seit dem Betriebsrentenstärkungsgesetz (BRSG) ist der Arbeitgeber verpflichtet, die durch Entgeltumwandlung eingesparten Sozialversicherungsbeiträge in Höhe von 15 Prozent als Zuschuss an den Mitarbeiter weiterzugeben. Die Regelung gilt für alle neuen und seit 2022 auch für Bestandsverträge.
+F: Welche Vorteile haben Geringverdiener bei der Direktversicherung?
+A: Geringverdiener mit einem monatlichen Arbeitsentgelt bis 2.575 Euro gehören zum begünstigten Personenkreis und erhalten zusätzliche staatliche Förderung auf die vom Arbeitgeber geleisteten Beiträge. Arbeitgeber können 30 Prozent ihres Zuschusses direkt bei der Lohnsteuer geltend machen.
+
+
+==================== BEITRAG gehaltsumwandlung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Steuern sparen durch Gehaltsumwandlung: Vollständiger Leitfaden
+  heading-1: Gehaltsumwandlung: Lohnoptimierung und Steuersparen 2026
+  heading-2: Wie funktioniert Gehaltsumwandlung praktisch?
+  heading-3: Steuerliche Vorteile der Gehaltsumwandlung
+  heading-4: Sachleistungen als Alternative zur Gehaltsumwandlung
+  heading-5: Änderungen bei der Gehaltsumwandlung 2026
+  heading-6: Umsetzung der Gehaltsumwandlung: Wichtige Punkte
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Gehaltsumwandlung (gehaltsumwandlung)
+## 0 Steuern sparen durch Gehaltsumwandlung: Vollständiger Leitfaden
+
+Bei der Gehaltsumwandlung fließen Teile des Bruttogehalts in steuerfreie Benefits oder die Altersvorsorge. Wie das 2026 funktioniert und wie viel Sie sparen.
+
+## 1 Gehaltsumwandlung: Lohnoptimierung und Steuersparen 2026
+
+Gehaltsumwandlung beschreibt die Umwandlung von Teilen des Bruttogehalts in steuerfreie Benefits oder betriebliche Altersvorsorge. Diese strategische Optimierung des Lohnpakets entwickelt sich 2026 zu einem unverzichtbaren Instrument moderner Personalarbeit. In Zeiten hoher Abgabenlasten und steigender Lebenshaltungskosten ermöglicht Gehaltsumwandlung sowohl Arbeitgebern als auch Arbeitnehmern erhebliche Einsparungen. Der gesetzliche Anspruch nach § 1a BetrAVG besteht seit 2002 und wurde durch das Betriebsrentenstärkungsgesetz weiter gestärkt.
+
+## 2 Wie funktioniert Gehaltsumwandlung praktisch?
+
+Bei der Gehaltsumwandlung verzichtet der Arbeitnehmer auf künftige Gehaltsbestandteile. Statt einer klassischen Gehaltserhöhung fließt ein Teil des Bruttolohns direkt in Altersvorsorge oder Benefits. Das Ergebnis: deutliche finanzielle Vorteile.
+
+Das Prinzip ist einfach. Der umgewandelte Betrag mindert die Grundlage für Steuern und Sozialabgaben. Die Beitragsbemessungsgrenze der allgemeinen Rentenversicherung steigt 2026 auf 101.400 Euro jährlich oder 8.450 Euro monatlich.
+
+Bei der betrieblichen Altersvorsorge können bis zu 8.112 Euro steuerfrei und 4.056 Euro sozialversicherungsfrei (Stand 2026) eingezahlt werden. Seit 2019 muss der Arbeitgeber zusätzlich 15 Prozent der umgewandelten Beträge als Zuschuss leisten, soweit er Sozialversicherungsbeiträge spart. Diese Regelung macht Gehaltsumwandlung für Arbeitnehmer besonders attraktiv.
+
+[SPIEL schaetzen: Wie hoch ist der maximale monatliche Betrag für steuer- und sozialversicherungsfreie Gehaltsumwandlung in die betriebliche Altersvorsorge 2026? → 338]
+
+## 3 Steuerliche Vorteile der Gehaltsumwandlung
+
+Die steuerlichen Ersparnisse der Gehaltsumwandlung sind beträchtlich. Bei der betrieblichen Altersvorsorge entfallen auf den umgewandelten Betrag sowohl Lohnsteuer als auch Sozialversicherungsbeiträge. Konkret können Arbeitnehmer monatlich 338 Euro steuer- und sozialversicherungsfrei umwandeln. Der Arbeitgeber zahlt einen Zuschuss von 50,70 Euro.
+
+Praktisches Rechenbeispiel: Bei 200 Euro monatlicher Gehaltsumwandlung und 30 Euro Arbeitgeberzuschuss fließen 230 Euro in die betriebliche Altersvorsorge. Die effektive Eigenleistung beträgt nur 125 Euro netto – das entspricht einem Hebel von 84 Prozent.
+
+Besonders attraktiv wird Gehaltsumwandlung bei höheren Einkommen. Ein Beschäftigter mit 8.400 Euro Bruttogehalt kann durch 338 Euro Umwandlung das sozialversicherungspflichtige Brutto auf 8.062 Euro senken. Damit bleibt er unter der Beitragsbemessungsgrenze und spart zusätzliche Sozialabgaben.
+
+Ein weiterer Vorteil: Die Belastung durch Lohnsteuer und Solidaritätszuschlag sinkt automatisch mit dem reduzierten zu versteuernden Einkommen.
+
+## 4 Sachleistungen als Alternative zur Gehaltsumwandlung
+
+Neben der Altersvorsorge eröffnen Sachleistungen vielfältige Gestaltungsmöglichkeiten. Die Sachbezugsfreigrenze liegt 2026 unverändert bei 50 Euro pro Kalendermonat und pro Mitarbeiter. Wichtig: Die Freigrenze gilt nur, wenn der Sachbezug zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt wird. Gehaltsumwandlung ist bei klassischen Sachbezügen ausgeschlossen.
+
+Beliebte Sachleistungen umfassen:
+
+- Essenszuschüsse und Verpflegung
+
+- ÖPNV-Zuschüsse und Jobtickets
+
+- Dienstrad-Leasing nach der 0,25-Prozent-Regel
+
+- Internetzuschüsse für Homeoffice-Kosten
+
+- Gesundheitsförderungsmaßnahmen
+
+- Sachbezugskarten bis 50 Euro monatlich
+
+Diese Leistungen bieten eine steueroptimierte Ergänzung zur Gehaltsumwandlung für die Altersvorsorge.
+
+[SPIEL gewusst: Die Minijob-Grenze steigt 2026 auf 603 Euro monatlich (7.236 Euro jährlich) aufgrund der Mindestlohn-Erhöhung auf 13,90 Euro.]
+
+## 5 Änderungen bei der Gehaltsumwandlung 2026
+
+Das Jahr 2026 bringt wichtige Neuerungen. Das Bundeskabinett hat die neuen Rechengrößen der Sozialversicherung beschlossen. Grundlage ist die Lohnentwicklung 2024 mit einem Anstieg von 5,16 Prozent.
+
+Zentrale Änderungen für Gehaltsumwandlung:
+
+- Steuerfreier Höchstbetrag bAV: 8.112 Euro jährlich
+
+- Beitragsfreier Höchstbetrag: 4.056 Euro jährlich
+
+- Mindestlohn steigt auf 13,90 Euro, Minijob-Grenze auf 603 Euro
+
+- Midijob-Bereich: 603,01 bis 2.000 Euro monatlich
+
+- Einführung der Aktivrente mit steuerfreiem Zusatzbetrag bis 2.000 Euro für Rentner
+
+Besonders bedeutsam: Bei bestimmten Voraussetzungen können Arbeitnehmer rückwirkend bis zu 10 Jahre eine jährliche Nachzahlung in Höhe von 8 Prozent der aktuellen Beitragsbemessungsgrenze leisten. Dies bietet Chancen für Nachholungen bei der Gehaltsumwandlung.
+
+[SPIEL quiz: Wie hoch ist der Mindest-Arbeitgeberzuschuss bei Gehaltsumwandlung in die betriebliche Altersvorsorge?]
+
+## 6 Umsetzung der Gehaltsumwandlung: Wichtige Punkte
+
+Die praktische Umsetzung erfordert sorgfältige Planung. Bei der betrieblichen Altersvorsorge ist die Zuschusspflicht auf den Betrag der eingesparten Sozialversicherungsbeiträge begrenzt, wenn diese weniger als 15 Prozent des umgewandelten Entgelts ausmachen.
+
+Wichtige Stolperfallen:
+
+- Reduzierung der gesetzlichen Rentenansprüche durch geringeres sozialversicherungspflichtiges Entgelt
+
+- Auswirkungen auf Entgeltersatzleistungen wie Arbeitslosengeld oder Krankengeld
+
+- Nachgelagerte Besteuerung in der Auszahlungsphase bei der Altersvorsorge
+
+- Volle Kranken- und Pflegeversicherungsbeiträge auf Renten aus der betrieblichen Altersvorsorge
+
+Die Verbraucherzentrale empfiehlt: Maximieren Sie den Arbeitgeberzuschuss bei Gehaltsumwandlung. Investieren Sie zusätzliche Sparraten lieber in vermögenswirksame Leistungen oder einen kostengünstigen ETF-Sparplan. So profitieren Sie von flexibler Geldanlage ohne die genannten Nachteile.
+
+## 7 Fazit
+
+Gehaltsumwandlung erweist sich 2026 als mächtiges Instrument zur Lohnoptimierung. Mit der Erhöhung der Beitragsbemessungsgrenze auf 101.400 Euro entstehen neue Gestaltungsmöglichkeiten. Besonders die betriebliche Altersvorsorge mit dem verpflichtenden 15-Prozent-Zuschuss und vielfältige Sachleistungen bieten konkrete finanzielle Vorteile.
+
+Der Erfolg hängt von der individuellen Situation und dem Engagement des Arbeitgebers ab. Bei korrekter Umsetzung profitieren beide Seiten. Arbeitnehmer erhalten mehr Netto vom Brutto. Arbeitgeber bieten kostenneutral attraktive Benefits. Die steigenden Freibeträge und neuen Regelungen machen 2026 zum idealen Zeitpunkt, um Gehaltsumwandlung zu starten oder auszubauen.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste gehaltsumwandlung]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+
+## FAQ
+F: Was ist eine Gehaltsumwandlung?
+A: Bei der Gehaltsumwandlung, auch Entgeltumwandlung genannt, verzichten Arbeitnehmer auf einen Teil ihres künftigen Bruttogehalts. Dieser Betrag fließt stattdessen in eine betriebliche Altersvorsorge oder bestimmte Sachleistungen. Dadurch sinken Steuerlast und Sozialabgaben.
+F: Wie viel kann man 2026 steuerfrei umwandeln?
+A: 2026 können bis zu 8 Prozent der Beitragsbemessungsgrenze, also 8.112 Euro jährlich beziehungsweise 676 Euro monatlich, steuerfrei in die betriebliche Altersvorsorge eingezahlt werden. Sozialversicherungsfrei sind jedoch nur Beiträge bis zu 4 Prozent, also 4.056 Euro pro Jahr.
+F: Muss der Arbeitgeber einen Zuschuss zur Gehaltsumwandlung zahlen?
+A: Ja, der Arbeitgeber muss mindestens 15 Prozent des Umwandlungsbetrags zusätzlich beisteuern, soweit er dadurch Sozialversicherungsbeiträge spart. Diese Regelung schützt Arbeitnehmer vor Nachteilen bei der späteren Rente.
+F: Haben Arbeitnehmer einen Anspruch auf Entgeltumwandlung?
+A: Ja, § 1a des Betriebsrentengesetzes (BetrAVG) räumt seit 2002 jedem Arbeitnehmer einen Rechtsanspruch auf Entgeltumwandlung ein. Der Arbeitgeber kann die Umwandlung nicht ablehnen, sofern die gesetzlichen Rahmenbedingungen eingehalten werden.
+
+
+==================== BEITRAG gesetzliche-rente ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rente richtig planen: Beitragssätze und Grenzen 2026
+  heading-1: Gesetzliche Rentenversicherung 2026: Beitragssätze, Altersgrenzen und Rentenwert
+  heading-2: Funktionsweise der gesetzlichen Rentenversicherung
+  heading-3: Beitragssätze und Grenzen 2026 im Überblick
+  heading-4: Renteneintrittsalter und Übergänge 2026
+  heading-5: Rentenberechnung und Rentenwert 2026
+  heading-6: Freiwillige Beiträge und Aufstockungsmöglichkeiten
+  heading-7: Ausblick und Reformperspektiven
+  heading-8: Fazit
+  heading-9: Häufig gestellte Fragen
+
+# Gesetzliche Rentenversicherung (gesetzliche-rente)
+## 0 Rente richtig planen: Beitragssätze und Grenzen 2026
+
+Die gesetzliche Rentenversicherung ist das Fundament der Altersvorsorge. Beitragssätze, Altersgrenzen und Rentenwert 2026 – und was die Reform für Sie bedeutet.
+
+## 1 Gesetzliche Rentenversicherung 2026: Beitragssätze, Altersgrenzen und Rentenwert
+
+Die gesetzliche Rentenversicherung bildet das Fundament der Altersvorsorge in Deutschland. 2026 bringt wichtige Änderungen: Der Beitragssatz zur allgemeinen Rentenversicherung bleibt stabil bei 18,6 Prozent, die Beitragsbemessungsgrenze steigt auf monatlich 8.450 Euro und der Rentenwert erhöht sich um 4,24 Prozent. Für wen diese Anpassungen konkret bedeutsam sind und wie die gesetzliche Rentenversicherung funktioniert, erläutern wir hier.
+
+## 2 Funktionsweise der gesetzlichen Rentenversicherung
+
+Die gesetzliche Rentenversicherung arbeitet nach dem Umlageverfahren. Das bedeutet: Die Beiträge heutiger Arbeitnehmer und Arbeitgeber finanzieren direkt die Renten der aktuellen Rentner – ohne dass jeder für seine eigene Rente spart.
+
+Bei der gesetzlichen Rentenversicherung teilen sich Arbeitgeber und Arbeitnehmer den Beitrag nach dem Prinzip der Beitragsparität. Jede gezahlte Contribution wird in sogenannte Entgeltpunkte umgerechnet. Diese Punkte sind später entscheidend für die Berechnung Ihrer Rente.
+
+[SPIEL karte: Umlageverfahren]
+
+## 3 Beitragssätze und Grenzen 2026 im Überblick
+
+Der Gesamtbeitragssatz zur gesetzlichen Rentenversicherung bleibt 2026 unverändert bei 18,6 Prozent. Dies ist bereits das neunte Jahr in Folge – ein Zeichen für die Stabilität des Systems. Arbeitgeber und Arbeitnehmer zahlen je 9,3 Prozent.
+
+Während der Beitragssatz gleich bleibt, steigt die Beitragsbemessungsgrenze deutlich: von 8.050 Euro (2025) auf 8.450 Euro monatlich – eine Erhöhung um 400 Euro. Jahresweise ergibt das 101.400 Euro statt 96.600 Euro.
+
+Wer profitiert oder ist betroffen? Normalverdiener zahlen keinen zusätzlichen Beitrag. Nur Personen mit Einkommen über 8.450 Euro monatlich zahlen höhere Rentenbeiträge – erhalten aber auch keine entsprechend höheren Rentenansprüche aufgrund der Beitragsbemessungsgrenze.
+
+Die Minijob-Grenze steigt ebenfalls: Sie erhöht sich 2026 von 556 Euro auf 603 Euro monatlich. Diese Anpassung folgt der Entwicklung des gesetzlichen Mindestlohns, der 2026 auf 13,90 Euro steigt.
+
+| Kategorie | 2025 | 2026 | Veränderung
+
+| Beitragssatz | 18,6% | 18,6% | unverändert
+
+| Beitragsbemessungsgrenze (monatlich) | 8.050 € | 8.450 € | +400 €
+
+| Beitragsbemessungsgrenze (jährlich) | 96.600 € | 101.400 € | +4.800 €
+
+| Minijob-Grenze | 556 € | 603 € | +47 €
+
+| Arbeitnehmeranteil | 9,3% | 9,3% | unverändert
+
+[SPIEL quiz: Wie hoch ist der Beitragssatz der gesetzlichen Rentenversicherung 2026?]
+
+## 4 Renteneintrittsalter und Übergänge 2026
+
+Das Renteneintrittsalter in der gesetzlichen Rentenversicherung steigt schrittweise. 2026 können die im Jahr 1960 Geborenen mit 66 Jahren und 4 Monaten in Rente gehen. Die genaue Grenze hängt vom Geburtsmonat ab: Wer im Januar 1960 geboren wurde, startet ab 1. Juni 2026.
+
+Die Regelaltersgrenze von 67 Jahren gilt vollständig erst für alle ab Geburtsjahrgang 1964. Darunter liegende Jahrgänge profitieren von gestaffelten Grenzen:
+
+- 1960 Geborene: 66 Jahre 4 Monate
+
+- 1961 Geborene: 66 Jahre 6 Monate
+
+- 1962 Geborene: 64 Jahre 8 Monate (abschlagsfrei)
+
+- 1963 Geborene: 66 Jahre 10 Monate
+
+- 1964+ Geborene: 67 Jahre (einheitlich)
+
+Wer vor dem regulären Alter in Rente geht, muss Abschläge akzeptieren. Der Abschlag beträgt 0,3 Prozent pro Monat Vorbezug. Für 1963 Geborene, die mit 63 statt 66 Jahren 10 Monaten Rente beziehen, bedeutet das einen Abschlag von rund 13,8 Prozent – lebenslang.
+
+[SPIEL gewusst: Die abschlagsfreie „Rente ab 63" für langjährig Versicherte (45 Jahre) verschiebt sich weiter nach hinten und ist 2026 erst für 1962 Geborene erreichbar (Stand 2026).]
+
+## 5 Rentenberechnung und Rentenwert 2026
+
+Die Basis jeder Rente sind die Entgeltpunkte. Ein Punkt entsteht, wenn Sie das deutsche Durchschnittseinkommen verdienen. 2026 liegt dieses bei 51.944 Euro jährlich. Bei diesem Gehalt erhalten Sie einen Rentenpunkt.
+
+Die Rechnung ist simpel: Ihr Jahreseinkommen ÷ Durchschnittsentgelt = Entgeltpunkte. Beispiele:
+
+- 40.000 Euro Verdienst = 0,77 Punkte
+
+- 80.000 Euro Verdienst = 1,54 Punkte
+
+- Maximum bei 101.400 Euro = 1,95 Punkte (Beitragsbemessungsgrenze)
+
+Ein Rentenpunkt ist 2026 exakt 9.661,58 Euro wert – berechnet aus dem Durchschnittsentgelt und dem Beitragssatz.
+
+Der aktuelle Rentenwert steigt um 4,24 Prozent. Ab 1. Juli 2026 erhöht sich ein Entgeltpunkt von 40,79 Euro auf 42,52 Euro monatlich. Dies bedeutet für eine Durchschnittsrente (45 Jahre mit Durchschnittsverdienst) eine Erhöhung um rund 77,85 Euro monatlich auf etwa 1.488 Euro.
+
+Beispielrechnung:
+
+35 Entgeltpunkte × 42,52 Euro = 1.488,20 Euro Bruttorente monatlich
+
+Die Rentenanpassung folgt der seit 2019 geltenden Haltelinie: Das Rentenniveau bleibt bei 48 Prozent. Diese Haltelinie wurde per „Rentenpaket 2025" bis zur Anpassung 2031 verlängert und sichert damit das Leistungsversprechen der gesetzlichen Rentenversicherung.
+
+## 6 Freiwillige Beiträge und Aufstockungsmöglichkeiten
+
+Wer seine Rente aufbessern möchte, kann freiwillige Beiträge zur gesetzlichen Rentenversicherung zahlen. Diese Möglichkeit steht auch Selbstständigen und anderen Nichtversicherten offen.
+
+Die Spanne liegt 2026 zwischen 112,16 Euro (Mindestbeitrag) und 1.571,70 Euro (Höchstbeitrag) monatlich. Ein einzelner Rentenpunkt kostet 9.661,58 Euro. Diese Investition kann rentabel sein, da jeder Punkt lebenslang gezahlt wird und von allen künftigen Rentenanpassungen profitiert.
+
+Personen ab 50 Jahren können Ausgleichszahlungen leisten, um Abschläge beim früheren Renteneintritt auszugleichen. Diese Zahlungen sind steuerlich absetzbar – bis 30.826 Euro für Singles oder 61.652 Euro für Paare (2026).
+
+Eine weitere Regel seit 2023: Wer bereits Altersrente bezieht, kann unbegrenzt hinzuverdienen – Hinzuverdienstgrenzen fallen weg. Dies ermöglicht es Rentnern, bei vollem Rentenbezug weiterzuarbeiten.
+
+## 7 Ausblick und Reformperspektiven
+
+Die gesetzliche Rentenversicherung bleibt trotz demografischer Herausforderungen stabil. Die Haltelinie beim Rentenniveau (48%) gilt bis 2031 und sichert das Leistungsversprechen. Danach wird eine Alterssicherungskommission neue Reformvorschläge vorlegen.
+
+Die schrittweise Anhebung der Altersgrenzen setzt sich bis 2031 fort. Gleichzeitig werden Kindererziehungszeiten ab 2028 vollständig angerechnet (Mütterrente). Experten diskutieren mehr Flexibilität beim Übergang zwischen Erwerbs- und Rentenphase.
+
+Trotz aller Diskussionen: Die gesetzliche Rentenversicherung bleibt die tragfähigste Säule der Altersvorsorge. Mit stabilen Beitragssätzen und kräftigen Rentenerhöhungen profitieren Rentner direkt von der wirtschaftlichen Entwicklung.
+
+## 8 Fazit
+
+2026 zeigt die gesetzliche Rentenversicherung Stabilität: Der Beitragssatz bleibt neun Jahre unverändert, die Rente steigt um über 4 Prozent, der Rentenwert liegt bei 42,52 Euro. Die Beitragsbemessungsgrenze erhöht sich auf 8.450 Euro monatlich, die Altersgrenzen steigen weiter. Mit der bis 2031 verlängerten 48-Prozent-Haltelinie ist das Rentenniveau gesichert. Wer seine Altersversorgung optimieren möchte, sollte freiwillige Beiträge zur gesetzlichen Rentenversicherung prüfen und diese durch betriebliche Altersversorgung oder Riester-Rente ergänzen.
+
+## 9 Häufig gestellte Fragen
+
+[BLOCK checkliste gesetzliche-rentenversicherung]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenlueckenrechner]
+
+[BLOCK dokumente hinterbliebenenrente,broschuere-basisrente,betriebliche-altersversorgung,rentenversicherung-familien]
+
+
+## FAQ
+F: Wie hoch ist der Rentenbeitragssatz 2026?
+A: Der Beitragssatz zur gesetzlichen Rentenversicherung bleibt 2026 unverändert bei 18,6 Prozent. Arbeitnehmer und Arbeitgeber tragen jeweils die Hälfte, also 9,3 Prozent. Diese Stabilität besteht seit 2018.
+F: Wann kann ich 2026 in Rente gehen?
+A: Im Jahr 1960 Geborene erreichen die Regelaltersgrenze mit 66 Jahren und 4 Monaten und können von Juni 2026 bis Mai 2027 abschlagsfrei in Rente gehen. Das Renteneintrittsalter steigt kontinuierlich weiter an, bis es bei Jahrgang 1964 bei 67 Jahren liegt.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: Die Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung steigt 2026 auf 8.450 Euro monatlich beziehungsweise 101.400 Euro jährlich. Einkommen oberhalb dieser Grenze bleibt beitragsfrei, führt aber auch nicht zu höheren Rentenansprüchen.
+F: Wie funktioniert das Umlageverfahren der Rente?
+A: Die gesetzliche Rentenversicherung arbeitet nach dem Umlageverfahren: Die aktuellen Beitragseinnahmen und Steuerzuschüsse finanzieren direkt die Rentenausgaben desselben Jahres. Arbeitgeber und Arbeitnehmer teilen sich den Beitrag paritätisch.
+
+
+==================== BEITRAG rentenversicherung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Gesetzliche und private Altersvorsorge richtig planen
+  heading-1: Die Rentenversicherung 2026: Stabilität und Wandel
+  heading-2: Wie hoch ist die durchschnittliche Altersrente in Deutschland?
+  heading-3: Welche Änderungen bringt das Jahr 2026 bei den Altersgrenzen?
+  heading-4: Wie wird die Rente besteuert?
+  heading-5: Was ändert sich 2027 bei der privaten Altersvorsorge grundlegend?
+  heading-6: Strategie: Welche Altersvorsorge passt zu wem?
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Rentenversicherung (rentenversicherung)
+## 0 Gesetzliche und private Altersvorsorge richtig planen
+
+Die Rentenversicherung ist das Fundament der Altersvorsorge in Deutschland. Wie gesetzliche und private Vorsorge 2026 zusammenspielen und was sich ändert.
+
+## 1 Die Rentenversicherung 2026: Stabilität und Wandel
+
+Die Rentenversicherung ist das zentrale Element der deutschen Altersvorsorge und umfasst sowohl die gesetzliche als auch die private Absicherung im Ruhestand.
+
+2026 bleibt das System der gesetzlichen Rentenversicherung stabil, aber die private Altersvorsorge steht vor einem fundamentalen Wandel. Der Beitragssatz zur allgemeinen Rentenversicherung bleibt auch 2026 stabil bei 18,6 Prozent und wird seit neun Jahren unverändert auf diesem Niveau gehalten. Die Beitragsbemessungsgrenze steigt 2026 auf monatlich 8.450 Euro oder jährlich 101.400 Euro, während der monatliche Mindestbeitrag für die freiwillige Versicherung ab 1. Januar 2026 auf 112,16 Euro und der Höchstbetrag auf 1.571,70 Euro im Monat steigen.
+
+Ein Highlight des Jahres 2026 ist die kräftige Rentenerhöhung: Die Renten steigen zum 1. Juli 2026 um 4,24 Prozent. Der aktuelle Rentenwert erhöht sich damit von 40,79 Euro auf 42,52 Euro. Diese Steigerung erfolgt aufgrund der Haltelinie von 48 Prozent für das Rentenniveau, die bis zum Jahr 2031 gilt. Für künftige Jahre prognostiziert der Rentenversicherungsbericht weitere Erhöhungen: Die Rentenerhöhung 2027 könnte 4,75 Prozent betragen, 2028 soll die Rentenanpassung 2,39 Prozent, 2029 2,75 Prozent und 2030 2,83 Prozent betragen.
+
+## 2 Wie hoch ist die durchschnittliche Altersrente in Deutschland?
+
+Die Realität der Rentenzahlungen zeigt eine deutliche Kluft zwischen theoretischen Berechnungen und tatsächlichen Auszahlungen. Die durchschnittliche Altersrente in Deutschland liegt bei rund 1.180 Euro monatlich (Zahlbetrag nach Sozialabgaben, vor Steuern). Männer erhalten im Schnitt 1.374 Euro, Frauen 1.000 Euro. Diese Zahlen verdeutlichen ein grundlegendes Problem: Das Geschlechtergefälle bei den Renten bleibt erheblich.
+
+[SPIEL schaetzen: Wie hoch ist die Standardrente nach 45 Beitragsjahren mit Durchschnittseinkommen in Euro? → 1913]
+
+Die Standardrente, die oft als Messlatte dient, beträgt nach 45 Entgeltpunkten zum 1. Juli 2026 1.913,40 Euro brutto. Diese theoretische Größe erreichen jedoch nur wenige Rentner, da sie unterbrechungsfreie 45 Beitragsjahre mit durchgehend durchschnittlichem Verdienst voraussetzt. Statistiken der Deutschen Rentenversicherung weisen für Versichertenrenten typische durchschnittliche Zahlbeträge von rund 1.100 Euro aus.
+
+Besonders dramatisch zeigt sich die Situation bei Neuzugängen: Im Rentenneuzugang 2024 erhielten 28,5 Prozent der Frauen eine Altersrente unter 600 Euro, bei Männern lag der Anteil bei 20,6 Prozent. Diese Zahlen unterstreichen die Dringlichkeit privater Zusatzvorsorge.
+
+## 3 Welche Änderungen bringt das Jahr 2026 bei den Altersgrenzen?
+
+Die schrittweise Anhebung der Altersgrenzen setzt sich 2026 konsequent fort. Die Altersgrenzen steigen 2026 um weitere zwei Monate. Eine Regelaltersrente können 1960 Geborene mit 66 Jahren und 4 Monaten erhalten. Für besonders langjährig Versicherte gelten andere Regelungen: Die abschlagsfreie Altersrente für besonders langjährig Versicherte können 1962 geborene Versicherte mit 64 Jahren und 8 Monaten erhalten.
+
+Die Flexibilität beim Hinzuverdienst wurde bereits deutlich verbessert: Hinzuverdienstgrenzen bei Bezug einer Altersrente bestehen nicht. Dies ermöglicht Rentnern, unbegrenzt hinzuzuverdienen, ohne Abschläge bei ihrer Rente befürchten zu müssen.
+
+Dennoch müssen vorzeitige Rentner weiterhin mit Abschlägen rechnen. Für Versicherte des Jahrgangs 1963, die 2026 63 Jahre alt werden, liegt das reguläre Rentenalter bei 66 Jahren und zehn Monaten. Bei einem frühestmöglichen Rentenbeginn mit 63 Jahren beträgt der Abschlag somit 13,8 Prozent.
+
+[SPIEL karte: Haltelinie für das Rentenniveau]
+
+## 4 Wie wird die Rente besteuert?
+
+Ein oft übersehener Aspekt der Rentenplanung ist die steuerliche Belastung. Ab Januar 2026 steigt der steuerpflichtige Rentenanteil von 83,5 auf 84 Prozent. Somit bleiben 16 Prozent der ersten vollen Bruttojahresrente steuerfrei. Diese schrittweise Erhöhung führt dazu, dass immer mehr Rentner steuerpflichtig werden. Wer sich intensiver mit diesem Thema auseinandersetzen möchte, findet detaillierte Informationen zur Rentenbesteuerung.
+
+Der jährliche Grundfreibetrag liegt 2026 bei 12.348 Euro. Nur wer mit seinem zu versteuernden Einkommen darüber liegt, muss tatsächlich Steuern zahlen. Jede Rentenerhöhung schlägt bei der Steuerpflicht zu 100 Prozent zu Buche, was bedeutet, dass auch langjährige Rentner plötzlich steuerpflichtig werden können.
+
+Neben Steuern fallen weitere Abzüge an: 7,30 Prozent der Altersrente werden für die Krankenversicherung und 3,60 Prozent (4,20 Prozent für Kinderlose, Stand: 2026) für die Pflegeversicherung abgezogen.
+
+## 5 Was ändert sich 2027 bei der privaten Altersvorsorge grundlegend?
+
+Das Jahr 2027 markiert eine Zeitenwende in der privaten Altersvorsorge. Kernpunkt der Reform ist die Schaffung eines Altersvorsorgedepots, in dem die Bürger mit Aktien, Fonds und Exchange Traded Funds (ETF) für das Alter sparen sollen. Für Riester-Verträge, die vor dem 1. Januar 2027 abgeschlossen wurden, gilt ein Bestandsschutz. Sie können Ihren bestehenden Riester-Vertrag also wie gewohnt und mit der bisherigen steuerlichen Förderung weiterführen.
+
+[SPIEL mythos: Ab 2027 werden alle bestehenden Riester-Verträge automatisch gekündigt → nein]
+
+Die Förderstruktur wird deutlich attraktiver gestaltet: Die staatliche Förderung erfolgt beitragsproportional und beträgt bis zu 540 Euro Grundzulage jährlich. Besonders Familien profitieren: Während die bisherige Riester-Förderung komplex war, wird das neue System einfacher und transparenter.
+
+Ein „historischer Meilenstein" ist das neue öffentlich verwaltete Standarddepot. Das wird ein Benchmark sein, an dem sich alle anderen Anbieter orientieren müssen, insbesondere bei den Kosten. Bei Standardprodukt-Verträgen wird die durchschnittliche jährliche Renditeminderung durch Kosten auf 1,0 Prozent begrenzt.
+
+## 6 Strategie: Welche Altersvorsorge passt zu wem?
+
+Die neue Vielfalt der Vorsorgeoptionen erfordert eine strategische Herangehensweise. Das klassische Drei-Säulen-System bleibt bestehen, wird aber durch flexiblere Elemente ergänzt:
+
+| Vorsorgetyp | Zielgruppe | Maximale Förderung 2026 | Besonderheiten
+
+| Gesetzliche Rente | Alle Pflichtversicherten | Haltelinie 48% bis 2031 | Basis der Altersvorsorge
+
+| Riester-Rente (bis 2026) | Angestellte, Beamte | 175€ + 300€ pro Kind | Läuft aus, Bestandsschutz
+
+| Altersvorsorgedepot (ab 2027) | Alle Pflichtversicherten | 540€ Grundzulage | Kapitalmärkte ohne Garantie
+
+| Rürup-Rente | Selbstständige | 30.826€ (Ledige) | Steuerlich absetzbar
+
+| Betriebsrente | Arbeitnehmer | 4.056€ jährlich | Entgeltumwandlung
+
+Die Entscheidung hängt von verschiedenen Faktoren ab:
+
+- Junge Sparer (bis 35 Jahre): Altersvorsorgedepot ab 2027 mit höchsten Renditechancen durch langen Anlagehorizont
+
+- Mittleres Alter (35-50 Jahre): Kombination aus bestehenden Riester-Verträgen und betrieblicher Altersversorgung
+
+- Kurz vor der Rente (über 50 Jahre): Sicherheitsorientierte Produkte, möglicherweise freiwillige Rentenbeiträge
+
+- Selbstständige: Rürup-Rente als Basisabsicherung, ab 2027 zusätzlich Altersvorsorgedepot möglich
+
+Das Rentenpaket 2025 – seit 1. Januar 2026 in Kraft – sichert das Niveau gesetzlich bis 2031. Nach Ablauf der Haltelinie könnte das Niveau auf 46,1 bis 46,5 Prozent sinken. Diese Entwicklung macht zusätzliche private Vorsorge unumgänglich.
+
+## 7 Fazit
+
+Die Rentenversicherung 2026 steht an einem Wendepunkt: Während das gesetzliche System durch die Haltelinie stabilisiert wird und mit einer kräftigen Rentenerhöhung von 4,24 Prozent aufwartet, zeichnet sich bei der privaten Vorsorge ein grundlegender Paradigmenwechsel ab. Das neue Altersvorsorgedepot ab 2027 verspricht höhere Renditechancen durch Kapitalmarktinvestments, verzichtet aber auf Garantien. Wer heute klug plant, kombiniert die verschiedenen Vorsorgebausteine intelligent: Die gesetzliche Rente bildet das Fundament, die betriebliche Altersvorsorge ergänzt, und die private Vorsorge – sei es noch Riester oder künftig das Altersvorsorgedepot – schließt die Lücke. Entscheidend ist ein frühzeitiger Start, denn jedes Jahr zählt für den Zinseszinseffekt.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste rentenversicherung]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenversicherung-vergleich]
+
+[BLOCK dokumente rentenversicherung-familien,freiwillige-rentenversicherung,das-renten-abc]
+
+
+## FAQ
+F: Wie hoch ist der Beitragssatz zur Rentenversicherung 2026?
+A: Der Beitragssatz zur allgemeinen gesetzlichen Rentenversicherung liegt 2026 unverändert bei 18,6 Prozent und wird paritätisch zwischen Arbeitgeber und Arbeitnehmer aufgeteilt. Damit zahlen beide Seiten jeweils 9,3 Prozent des beitragspflichtigen Bruttoeinkommens.
+F: Um wie viel Prozent steigen die Renten im Juli 2026?
+A: Zum 1. Juli 2026 steigen die Renten um 4,24 Prozent. Der Rentenwert erhöht sich von 40,79 Euro auf 42,52 Euro. Für die Folgejahre werden moderatere Steigerungen prognostiziert, etwa 4,75 Prozent im Jahr 2027.
+F: Wie hoch ist die durchschnittliche Altersrente in Deutschland?
+A: Die durchschnittliche Altersrente liegt bei rund 1.180 Euro monatlich als Zahlbetrag nach Sozialabgaben, vor Steuern. Männer erhalten im Schnitt 1.374 Euro, Frauen 1.000 Euro. Die gesetzliche Rente ersetzt im Durchschnitt nur etwa 48 Prozent des letzten Bruttoeinkommens.
+F: Wann kann ich 2026 ohne Abschläge in Rente gehen?
+A: Versicherte des Jahrgangs 1960 erreichen die Regelaltersgrenze 2026 mit 66 Jahren und 4 Monaten. Besonders langjährig Versicherte des Jahrgangs 1962 können bereits mit 64 Jahren und 8 Monaten abschlagsfrei in Rente gehen.
+
+
+==================== BEITRAG rentenbeitrag ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rentenbeitrag berechnen: Aktuelle Sätze und Auswirkungen 2026
+  heading-1: Rentenbeitrag 2026: Höhe, Berechnung und Auswirkungen
+  heading-2: Was ist ein Rentenbeitrag?
+  heading-3: Wie hoch sind die Rentenbeitragssätze 2026?
+  heading-4: Beitragsbemessungsgrenze – Wer zahlt wie viel?
+  heading-5: Wie berechnen sich die Höchstbeiträge?
+  heading-6: Freiwillige Rentenbeiträge – Welche Optionen gibt es?
+  heading-7: Was kosten Entgeltpunkte 2026?
+  heading-8: Auswirkungen der gestiegenen Beitragsbemessungsgrenze
+  heading-9: Fazit
+  heading-10: Häufig gestellte Fragen
+
+# Rentenbeitrag (rentenbeitrag)
+## 0 Rentenbeitrag berechnen: Aktuelle Sätze und Auswirkungen 2026
+
+Der Rentenbeitrag bestimmt die Höhe Ihrer späteren Rente. Welcher Beitragssatz 2026 gilt, wie er berechnet wird und was Gutverdiener jetzt beachten sollten.
+
+## 1 Rentenbeitrag 2026: Höhe, Berechnung und Auswirkungen
+
+Der Rentenbeitrag bestimmt als zentraler Baustein des deutschen Sozialversicherungssystems die spätere Höhe Ihrer gesetzlichen Rente.
+
+Die Rentenbeiträge 2026 bleiben stabil, doch für Gutverdienende wird es teurer. Der Beitragssatz zur allgemeinen Rentenversicherung beträgt 2026 unverändert 18,6 Prozent und bleibt somit im neunten Jahr in Folge stabil. Arbeitgeber und Arbeitnehmer teilen sich den Rentenbeitrag paritätisch, sodass jeder 9,3 Prozent des Bruttolohns trägt. Die wichtigste Änderung betrifft jedoch die Beitragsbemessungsgrenzen, die deutlich ansteigen und damit höhere Belastungen für viele mit sich bringen.
+
+## 2 Was ist ein Rentenbeitrag?
+
+Der Rentenbeitrag ist eine monatliche Einzahlung in die gesetzliche Rentenversicherung und dient vor allem zur Absicherung im Alter durch den Aufbau einer Altersrente. Er ist Teil der Sozialversicherungsbeiträge und wird auf Basis des Bruttolohns berechnet. Der Beitrag fließt in das Umlageverfahren ein, bei dem die aktuellen Einzahlungen die laufenden Renten finanzieren. Der Rentenversicherungsbeitrag muss von allen, die in der gesetzlichen Rentenversicherung versichert sind, als Pflichtbeitrag auf Löhne aus nicht selbstständiger Arbeit gezahlt werden.
+
+Aus den eingezahlten Beiträgen entstehen Entgeltpunkte, die später die Höhe Ihrer Rente bestimmen. Die Höhe der Entgeltpunkte ergibt sich unter anderem aus dem Verhältnis des Einkommens des Versicherten mit dem Durchschnittseinkommen aller Versicherten. So entspricht 1,0 Rentenpunkt genau dem Bruttodurchschnittsgehalt. Sollte Ihr Verdienst nur halb so hoch sein, wird Ihnen ein halber Rentenpunkt zugeschrieben.
+
+[SPIEL schaetzen: Wie viele Jahre bleibt der Rentenbeitragssatz bereits unverändert? → 9]
+
+## 3 Wie hoch sind die Rentenbeitragssätze 2026?
+
+Im Jahr 2026 beträgt der Rentenbeitrag 18,6 Prozent des Bruttolohns. Diese Stabilität dokumentiert die solide Finanzlage der Rentenversicherung trotz demografischer Herausforderungen. Seit nunmehr acht Jahren liegt der Beitragssatz stabil bei 18,6 %. Im Unterschied zur These, dass die Rentenversicherung nicht mehr finanzierbar sei, liegt der aktuelle Beitragssatz damit sogar 1,7 Prozentpunkte niedriger als 1998.
+
+Der Arbeitnehmeranteil beträgt monatlich 9,3 Prozent des Bruttolohns, während der Arbeitgeber denselben Betrag übernimmt. Bei einem Bruttoeinkommen von 4.000 Euro zahlen Sie also 372 Euro Rentenbeitrag, Ihr Arbeitgeber ebenfalls 372 Euro. Zusammen fließen damit 744 Euro in die Rentenkasse.
+
+Für die knappschaftliche Rentenversicherung gelten andere Sätze: Der Beitragssatz zur knappschaftlichen Rentenversicherung bleibt unverändert bei 24,7 Prozent. Der Arbeitnehmeranteil beträgt 9,3 Prozent, der Arbeitgeberanteil 15,4 Prozent. Diese höheren Sätze spiegeln die besonderen Arbeitsbedingungen in Branchen wie dem Bergbau wider.
+
+## 4 Beitragsbemessungsgrenze – Wer zahlt wie viel?
+
+Die Beitragsbemessungsgrenze markiert das maximale Einkommen, bis zu dem Rentenbeiträge erhoben werden. In der allgemeinen Rentenversicherung erhöht sich die bundeseinheitliche Beitragsbemessungsgrenze auf 8.450 Euro/Monat (2025: 8.050 Euro/Monat). Das entspricht einem Jahreseinkommen von 101.400 Euro (Stand 2026).
+
+In der knappschaftlichen Rentenversicherung erhöht sich die bundeseinheitliche Beitragsbemessungsgrenze auf 10.400 Euro/Monat (2025: 9.900 Euro/Monat). Diese höheren Grenzen berücksichtigen die besonderen Anforderungen und Risiken in knappschaftlichen Berufen.
+
+Ein historischer Meilenstein: Bereits seit 2025 gelten in Ost- und Westdeutschland einheitliche Rechengrößen. Damit entfällt die bisherige Unterscheidung zwischen alten und neuen Bundesländern bei der Beitragsbemessung. Diese Angleichung beendet eine über 30-jährige Trennung im deutschen Rentensystem.
+
+[SPIEL mythos: Einkommen oberhalb der Beitragsbemessungsgrenze wird gar nicht besteuert → nein]
+
+Für Beschäftigte mit höheren Einkommen bedeutet die gestiegene Grenze konkrete Mehrbelastungen. Ein Beispiel: Verdient eine Arbeitnehmerin 9.500 Euro brutto im Monat, werden 2026 nur 8.450 Euro für die Rentenversicherung verbeitragt – der darüberliegende Betrag von 1.050 Euro bleibt beitragsfrei und erhöht ihre gesetzliche Rente nicht.
+
+## 5 Wie berechnen sich die Höchstbeiträge?
+
+Die maximale Beitragshöhe ergibt sich aus einer einfachen Formel: Beitragsbemessungsgrenze × Beitragssatz = monatlicher Höchstbeitrag. Im Jahr 2026 beträgt der maximale Rentenbeitrag:
+
+Allgemeine Rentenversicherung:
+
+8.450 Euro × 18,6 % = 1.571,70 Euro monatlich
+
+Knappschaftliche Rentenversicherung:
+
+10.400 Euro × 24,7 % = 2.568,80 Euro monatlich
+
+Diese Höchstbeiträge werden paritätisch zwischen Arbeitgeber und Arbeitnehmer aufgeteilt. In der allgemeinen Rentenversicherung zahlt jeder maximal 785,85 Euro monatlich.
+
+Die folgende Tabelle zeigt Beispiele für verschiedene Einkommensstufen 2026:
+
+| Bruttoeinkommen | AN-Beitrag | AG-Beitrag | Gesamt
+
+| 3.000 € | 279,00 € | 279,00 € | 558,00 €
+
+| 5.000 € | 465,00 € | 465,00 € | 930,00 €
+
+| 8.450 € | 785,85 € | 785,85 € | 1.571,70 €
+
+| 10.000 € | 785,85 € | 785,85 € | 1.571,70 €
+
+## 6 Freiwillige Rentenbeiträge – Welche Optionen gibt es?
+
+Der monatliche Mindestbeitrag für die freiwillige Versicherung in der gesetzlichen Rentenversicherung steigt ab 1. Januar 2026 von 103,42 Euro auf 112,16 Euro, der Höchstbeitrag von 1.497,30 Euro auf 1.571,70 Euro. Diese Flexibilität ermöglicht es Selbstständigen und anderen nicht Pflichtversicherten, ihre Beiträge individuell zu gestalten.
+
+Alle Menschen, die mindestens 16 Jahre alt sind, ihren Wohnsitz in Deutschland haben und in der gesetzlichen Rentenversicherung nicht pflichtversichert sind, können diese freiwilligen Beiträge leisten, ebenso Deutsche mit Wohnsitz im Ausland. Auch Menschen mit vorgezogener Altersrente können bis zum regulären Rentenalter freiwillig einzahlen.
+
+Eine besondere Möglichkeit: Bis spätestens 31. März 2026 können noch freiwillige Beiträge für das Jahr 2025 gezahlt werden. Möglich ist dies mit Beträgen zwischen 112,16 Euro und 1.497,30 Euro.
+
+Der Mindestbeitrag basiert auf der Minijob-Grenze: Die Minijob-Grenze, also die monatliche Verdienstgrenze im Minijob, steigt 2026 von 556 Euro auf 603 Euro. Daraus ergibt sich der neue Mindestbeitrag von 112,16 Euro (603 Euro × 18,6 %).
+
+[SPIEL karte: Durchschnittsentgelt]
+
+## 7 Was kosten Entgeltpunkte 2026?
+
+Das Durchschnittsentgelt in der Rentenversicherung, das zur Bestimmung der Entgeltpunkte im jeweiligen Kalenderjahr dient, beträgt 51.944 Euro im Jahr. 2026 kostet ein Rentenpunkt etwa 9.661,58 Euro. So hoch ist laut der Deutschen Rentenversicherung bei einem vorläufigen Durchschnittsentgelt von 51.944 Euro der zu leistende Beitrag zur Rentenversicherung.
+
+Die Entgeltpunkte bestimmen direkt Ihre spätere Rente. Bei einem für dieses Jahr geschätzten Brutto-Durchschnittsentgelt von 51.944 Euro könnte man laut der Deutschen Rentenversicherung 2026 also maximal 1,9521 Rentenpunkte erhalten. Dies entspricht der Beitragsbemessungsgrenze von 101.400 Euro geteilt durch das Durchschnittsentgelt.
+
+Beispiele für Entgeltpunkte 2026:
+
+- Bei 30.000 Euro Jahreseinkommen: 0,58 Entgeltpunkte
+
+- Bei 40.000 Euro Jahreseinkommen: 0,77 Entgeltpunkte
+
+- Bei 51.944 Euro Jahreseinkommen: 1,00 Entgeltpunkt
+
+- Bei 80.000 Euro Jahreseinkommen: 1,54 Entgeltpunkte
+
+- Bei 101.400 Euro Jahreseinkommen: 1,95 Entgeltpunkte (Maximum)
+
+## 8 Auswirkungen der gestiegenen Beitragsbemessungsgrenze
+
+Grundlage ist die Lohnentwicklung 2024 mit einem Anstieg von 5,16 Prozent. Diese positive Lohnentwicklung führt automatisch zu höheren Beitragsbemessungsgrenzen. Von der Erhöhung betroffen sind nur Personen mit Einkommen oberhalb der bisherigen Bemessungsgrenzen – für die Mehrheit der Versicherten ändert sich nichts.
+
+Konkrete Auswirkungen zeigt folgendes Beispiel: Ein Beschäftigter verdient 8.400 Euro brutto im Monat. Im Jahr 2026 liegt die Beitragsbemessungsgrenze der Rentenversicherung bei 8.450 Euro monatlich. Das bedeutet, dass das gesamte Einkommen von 8.400 Euro renten- und arbeitslosenversicherungspflichtig ist.
+
+2025 lag die Beitragsbemessungsgrenze der allgemeinen Rentenversicherung bei 8.050 Euro pro Monat. Das bedeutet, dass von den 8.400 Euro nur 8.050 Euro renten- und arbeitslosenversicherungspflichtig waren. 350 Euro lagen oberhalb der Beitragsbemessungsgrenze und waren beitragsfrei. Diese 350 Euro werden ab 2026 vollständig in die Renten- und Arbeitslosenversicherung einbezogen.
+
+Die steuerliche Behandlung bleibt vorteilhaft: Rentenbeiträge sind als Sonderausgaben absetzbar. Der Höchstbetrag orientiert sich an der knappschaftlichen Rentenversicherung und steigt entsprechend der Beitragsbemessungsgrenze. Neben der gesetzlichen Rente bieten sich auch andere Altersvorsorgeoptionen wie die betriebliche Altersversorgung als sinnvolle Ergänzung an.
+
+## 9 Fazit
+
+Der Rentenbeitragssatz bleibt 2026 mit 18,6 Prozent stabil und dokumentiert die neunte Jahr in Folge unveränderte Beiträge. Die wichtigste Änderung betrifft die gestiegene Beitragsbemessungsgrenze von 8.450 Euro monatlich (101.400 Euro jährlich), die erstmals bundesweit einheitlich gilt. Freiwillige Beiträge können zwischen 112,16 Euro und 1.571,70 Euro monatlich gewählt werden, wobei Nachzahlungen für 2025 bis 31. März 2026 möglich sind. Ein Entgeltpunkt kostet 2026 etwa 9.661,58 Euro basierend auf dem Durchschnittsentgelt von 51.944 Euro. Die Erhöhung der Beitragsbemessungsgrenze um 400 Euro monatlich führt für Gutverdienende zu spürbaren Mehrbelastungen, während die Mehrheit der Beschäftigten unveränderte Beiträge zahlt. Die kontinuierliche Stabilität des Beitragssatzes seit 2018 widerlegt Befürchtungen einer unbezahlbaren Rentenversicherung und zeigt die Anpassungsfähigkeit des Systems an demografische Veränderungen.
+
+## 10 Häufig gestellte Fragen
+
+[BLOCK checkliste rentenbeitrag]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenlueckenrechner]
+
+[BLOCK dokumente das-renten-abc]
+
+
+## FAQ
+F: Wie hoch ist der Rentenbeitragssatz 2026?
+A: Der Beitragssatz zur allgemeinen Rentenversicherung bleibt 2026 unverändert bei 18,6 Prozent. Arbeitgeber und Arbeitnehmer teilen sich den Beitrag paritätisch, jeder trägt 9,3 Prozent des Bruttolohns. In der knappschaftlichen Rentenversicherung beträgt der Satz 24,7 Prozent.
+F: Wie hoch ist die Beitragsbemessungsgrenze 2026?
+A: Die Beitragsbemessungsgrenze in der allgemeinen Rentenversicherung steigt 2026 auf 8.450 Euro monatlich (2025: 8.050 Euro). Seit dem 1. Januar 2026 entfällt die frühere Unterscheidung zwischen Ost und West komplett. Einkommen über dieser Grenze sind beitragsfrei.
+F: Welche freiwilligen Rentenbeiträge können Selbstständige zahlen?
+A: Selbstständige können 2026 jeden Betrag zwischen dem Mindestbeitrag von 112,16 Euro und dem Höchstbeitrag von 1.571,70 Euro monatlich wählen. Die Beitragshöhe kann monatlich flexibel angepasst werden. Freiwillige Beiträge für 2025 können bis zum 31. März 2026 nachgezahlt werden.
+F: Wie berechnet sich der maximale Rentenbeitrag?
+A: Der Höchstbeitrag ergibt sich aus der Beitragsbemessungsgrenze multipliziert mit dem Beitragssatz: 8.450 Euro × 18,6 Prozent = 1.571,70 Euro monatlich. Dieser wird paritätisch aufgeteilt, sodass Arbeitgeber und Arbeitnehmer jeweils maximal 785,85 Euro zahlen. Höhere Einkommen führen nicht zu höheren Beiträgen.
+
+
+==================== BEITRAG rentenversicherungsbeitrag ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rentenversicherungsbeitrag 2026: Satz, Berechnung und Auswirkungen erklärt
+  heading-1: Rentenversicherungsbeitrag 2026: Stabil bei 18,6 Prozent
+  heading-2: Wie hoch ist der Rentenversicherungsbeitrag 2026?
+  heading-3: Welche Rolle spielt die Beitragsbemessungsgrenze?
+  heading-4: Was zahlen Selbstständige und freiwillig Versicherte?
+  heading-5: Auswirkungen auf verschiedene Einkommensgruppen
+  heading-6: Steuerliche Aspekte
+  heading-7: Fazit
+  heading-8: Häufig gestellte Fragen
+
+# Rentenversicherungsbeitrag (rentenversicherungsbeitrag)
+## 0 Rentenversicherungsbeitrag 2026: Satz, Berechnung und Auswirkungen erklärt
+
+Der Rentenversicherungsbeitrag liegt 2026 stabil bei 18,6 % des Bruttolohns. Wer ihn zahlt, wie er sich berechnet und was er für Ihre spätere Rente bedeutet.
+
+## 1 Rentenversicherungsbeitrag 2026: Stabil bei 18,6 Prozent
+
+Der Rentenversicherungsbeitrag beträgt 2026 unverändert 18,6 Prozent des beitragspflichtigen Bruttoeinkommens. Arbeitgeber und Arbeitnehmer finanzieren ihn paritätisch. Diese Stabilität seit 2018 schafft Planungssicherheit. Gleichzeitig sorgen steigende Beitragsbemessungsgrenzen auf 8.450 Euro monatlich für höhere absolute Beitragszahlungen bei Gutverdienern.
+
+Der Satz zeigt sich als Konstante im Sozialversicherungssystem. Während andere Bereiche regelmäßige Anpassungen erfahren, gewährt die Beibehaltung von 18,6 Prozent bereits zum neunten Jahr Verlässlichkeit. Für Millionen Beitragszahler schafft dies Planungssicherheit in der Altersvorsorge.
+
+## 2 Wie hoch ist der Rentenversicherungsbeitrag 2026?
+
+In der gesetzlichen Rentenversicherung beträgt der Rentenversicherungsbeitrag weiterhin 18,6 Prozent. Dieser Satz bleibt seit 2018 unverändert. Die paritätische Finanzierung bedeutet: Arbeitgeber und Arbeitnehmer tragen jeweils 9,3 Prozent des beitragspflichtigen Einkommens.
+
+Praktische Beispiele zur Beitragsbelastung:
+
+- Bei 3.500 Euro Bruttogehalt: Sie zahlen monatlich 325,50 Euro. Ihr Arbeitgeber übernimmt denselben Betrag.
+
+- Bei 5.000 Euro Bruttogehalt: Ihr Arbeitnehmeranteil steigt auf 465 Euro monatlich.
+
+Die Berechnung folgt einer einfachen Formel: Bruttogehalt mal 9,3 Prozent gleich Arbeitnehmeranteil. Diese Rechnung gilt jedoch nur bis zur Beitragsbemessungsgrenze. Höhere Einkommen bleiben unberücksichtigt.
+
+[SPIEL gewusst: Die knappschaftliche Rentenversicherung für Bergleute hat einen deutlich höheren Beitrag von 24,7 Prozent (Stand 2026) aufgrund der besonderen Belastungen im Bergbau.]
+
+## 3 Welche Rolle spielt die Beitragsbemessungsgrenze?
+
+Die Beitragsbemessungsgrenze steigt 2026 auf 8.450 Euro monatlich beziehungsweise 101.400 Euro jährlich. Sie bestimmt das maximale Einkommen, auf das dieser Beitrag erhoben wird.
+
+Ein wichtiger Meilenstein wurde 2025 erreicht: Die bundeseinheitliche Beitragsbemessungsgrenze gilt erstmals für Ost- und Westdeutschland gleich. Diese Vereinheitlichung beseitigt eine jahrzehntelange Ungleichbehandlung. Sie verbessert die Vergleichbarkeit der Rentenansprüche erheblich.
+
+| Jahr | Bemessungsgrenze (monatlich) | Jahresgrenze | Maximaler Arbeitnehmeranteil
+
+| 2025 | 8.050 Euro | 96.600 Euro | 748,65 Euro
+
+| 2026 | 8.450 Euro | 101.400 Euro | 785,85 Euro
+
+Die Steigerung um 400 Euro monatlich resultiert aus der Lohnentwicklung 2024. Der Anstieg lag bei 5,16 Prozent. Diese dynamische Anpassung sorgt dafür, dass der Beitrag mit der Einkommensentwicklung Schritt hält. So wird die Finanzierungsbasis langfristig gesichert.
+
+## 4 Was zahlen Selbstständige und freiwillig Versicherte?
+
+Selbstständige haben beim Rentenversicherungsbeitrag verschiedene Optionen. Pflichtversicherte Selbstständige zahlen 2026 einen Pauschalbeitrag von 735,63 Euro monatlich. Alternativ können sie einkommensbezogene Beiträge wählen.
+
+Gründer profitieren erheblich: In den ersten drei Jahren zahlen sie nur 367,82 Euro monatlich – den halben Regelbeitrag. Diese Entlastung erleichtert den Einstieg für Existenzgründer deutlich.
+
+Für freiwillig Versicherte gelten flexible Regelungen:
+
+- Mindestbeitrag: 112,16 Euro monatlich
+
+- Höchstbeitrag: 1.571,70 Euro monatlich
+
+- Flexible Beitragshöhe zwischen diesen Grenzen wählbar
+
+- Anpassung jederzeit möglich
+
+[SPIEL quiz: Wie hoch ist der maximale Rentenversicherungsbeitrag für einen Arbeitnehmer mit 10.000 Euro Bruttogehalt?]
+
+## 5 Auswirkungen auf verschiedene Einkommensgruppen
+
+Die Sozialversicherungsbeiträge 2026 treffen verschiedene Einkommensgruppen unterschiedlich. Normalverdiener bis etwa 4.000 Euro Bruttogehalt spüren durch den unveränderten Satz keine zusätzliche Belastung.
+
+Durchschnittsverdiener (4.200 Euro brutto):
+
+- Arbeitnehmeranteil: 390,60 Euro monatlich
+
+- Arbeitgeberanteil: 390,60 Euro monatlich
+
+- Gesamtbeitrag: 781,20 Euro monatlich
+
+Gutverdiener an der Beitragsbemessungsgrenze:
+
+- Bei Einkommen über 8.450 Euro zählt nur dieser Betrag
+
+- Maximaler Arbeitnehmeranteil: 785,85 Euro monatlich
+
+- Einkommen oberhalb bleiben beitragsfrei
+
+Die jährliche Anpassung der Grenzen erhält die Finanzierungsbasis. Ohne Anhebung würde der Beitrag von Spitzenverdienern sinken und das System destabilisieren.
+
+## 6 Steuerliche Aspekte
+
+Altersvorsorgeaufwendungen einschließlich Rentenversicherungsbeiträge zählen zu den Sonderausgaben nach § 10 EStG. Im Jahr 2026 erhöht sich der Rahmen auf 30.826 Euro (Ledige) beziehungsweise 61.652 Euro (Verheiratete).
+
+Bei freiwilligen Beiträgen ist der Zahltag entscheidend: Eine Zahlung im Februar 2026 ist steuerlich dem Jahr 2026 zuzuordnen. Bis zum 31. März 2026 können freiwillige Beiträge für 2025 nachgezahlt werden.
+
+Wichtige Berechnungsgrößen für 2026:
+
+- Vorläufiges Durchschnittsentgelt: 51.944 Euro
+
+- Bezugsgröße: 3.955 Euro monatlich
+
+- Minijob-Grenze: 603 Euro monatlich (bei 13,90 Euro Mindestlohn)
+
+[SPIEL mythos: Freiwillige Rentenversicherungsbeiträge können nur bis zum 31. Dezember gezahlt werden. → Nein]
+
+## 7 Fazit
+
+Der Rentenversicherungsbeitrag 2026 zeichnet sich durch Stabilität aus. Der unveränderte Satz von 18,6 Prozent bietet seit neun Jahren Planungssicherheit für Arbeitnehmer und Arbeitgeber gleichermaßen. Die Anhebung der Beitragsbemessungsgrenze auf 8.450 Euro monatlich spiegelt die positive Lohnentwicklung wider. Sie sichert die Finanzierungsbasis nachhaltig.
+
+Für die Mehrheit der Beschäftigten ändern sich die monatlichen Belastungen nicht. Nur Gutverdiener oberhalb der vorherigen Bemessungsgrenze zahlen höhere absolute Beiträge. Die bundesweite Vereinheitlichung seit 2025 stellt einen wichtigen Schritt zur vollständigen Angleichung dar.
+
+Selbstständige profitieren von flexiblen Gestaltungsmöglichkeiten beim Rentenversicherungsbeitrag. Die steuerliche Förderung macht Beiträge zu einem wichtigen Baustein der persönlichen Finanzplanung. Angesichts der demografischen Herausforderungen bleibt offen, ob die derzeitige Stabilität langfristig aufrechterhalten wird.
+
+## 8 Häufig gestellte Fragen
+
+[BLOCK checkliste rentenversicherungsbeitrag]
+
+[BLOCK rechner rente]
+
+[BLOCK dokumente rentenversicherung-familien,freiwillige-rentenversicherung,das-renten-abc]
+
+
+## FAQ
+F: Wie wird der Rentenversicherungsbeitrag 2026 berechnet?
+A: Der Beitrag wird mit 18,6 Prozent des beitragspflichtigen Bruttoeinkommens berechnet und zwischen Arbeitgeber und Arbeitnehmer je zur Hälfte geteilt. Bei 4.000 Euro Bruttogehalt zahlen Sie als Arbeitnehmer 372 Euro monatlich, der Arbeitgeber die identische Summe.
+F: Was ist die Beitragsbemessungsgrenze in der Rentenversicherung 2026?
+A: Die Beitragsbemessungsgrenze liegt 2026 bei 8.450 Euro monatlich beziehungsweise 101.400 Euro jährlich. Einkommen oberhalb dieser Grenze bleiben beitragsfrei. Seit Januar 2025 gilt die Grenze erstmals bundeseinheitlich für Ost- und Westdeutschland.
+F: Wie viel Rentenbeitrag zahlen Spitzenverdiener maximal?
+A: Liegt Ihr Gehalt über 8.450 Euro, werden maximal 785,85 Euro Rentenversicherungsbeitrag pro Monat vom Bruttogehalt abgezogen. Diese Deckelung ergibt sich automatisch aus der Beitragsbemessungsgrenze und entlastet Einkommen oberhalb dieses Werts.
+F: Können Selbstständige freiwillig in die Rentenversicherung einzahlen?
+A: Ja, Selbstständige und nicht pflichtversicherte Personen können freiwillig Beiträge leisten. Die monatlichen Beiträge 2026 liegen zwischen einem Mindestbeitrag von 112,16 Euro und einem Höchstbeitrag von 1.571,70 Euro. Damit sichern Sie flexibel Rentenansprüche.
+
+
+==================== BEITRAG renteninformation ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rentenansprüche verstehen und Altersvorsorge richtig planen
+  heading-1: Renteninformation 2026: Wie Sie Ihre Altersvorsorge richtig planen
+  heading-2: Wer bekommt die Renteninformation und was ist darin enthalten?
+  heading-3: Wie funktioniert die Berechnung Ihrer Rentenpunkte?
+  heading-4: Was bringt Ihnen jeder Rentenpunkt ab Juli 2026?
+  heading-5: So berechnen Sie Ihre voraussichtliche Bruttorente
+  heading-6: Wie lesen Sie die erste Seite der Renteninformation richtig?
+  heading-7: Rentenanpassung 2026: Das bedeutet konkret mehr Geld
+  heading-8: Das ist der häufigste Fehler beim Lesen der Renteninformation
+  heading-9: Prüfen Sie Ihre Daten – das ist Ihr nächster Schritt
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Renteninformation (renteninformation)
+## 0 Rentenansprüche verstehen und Altersvorsorge richtig planen
+
+Die jährliche Renteninformation zeigt Ihre zu erwartende gesetzliche Rente. Wie Sie sie richtig lesen und ob zusätzliche private Vorsorge 2026 nötig ist.
+
+## 1 Renteninformation 2026: Wie Sie Ihre Altersvorsorge richtig planen
+
+Die Renteninformation zeigt Ihnen exakt auf, wie viel gesetzliche Rente Sie zu erwarten haben – und damit, ob zusätzliche private Vorsorge nötig ist. 31 Millionen Versicherte in Deutschland erhalten dieses jährliche Dokument der Deutschen Rentenversicherung, um ihre Altersplanung konkret zu gestalten.
+
+Ab Ihrem 27. Lebensjahr bekommen Sie Jahr für Jahr Ihre persönliche Renteninformation mit dem aktuellen Stand Ihrer erworbenen Rentenansprüche – sofern Sie mindestens fünf Jahre mit Beitragszeiten erreicht haben. Das Schreiben hilft bei der Planung der Altersvorsorge und zeigt auf, ob zusätzliche private oder betriebliche Vorsorge nötig ist.
+
+## 2 Wer bekommt die Renteninformation und was ist darin enthalten?
+
+Die Renteninformation ist ein kostenloses Serviceangebot der gesetzlichen Rentenversicherung. Sie wird jährlich an rund 31 Millionen Versicherte versandt (Stand 2026) und beinhaltet eine Darstellung der bisher gezahlten Beiträge sowie die Angabe der Höhe der bislang erworbenen Rentenansprüche.
+
+Anspruchsberechtigt sind alle gesetzlich Versicherten:
+
+- Ab 27 Jahren
+
+- Mit mindestens 5 Jahren an Beitragszeiten
+
+- Automatischer Versand einmal jährlich
+
+- Bei Wohnsitz im Ausland: Versand endet nach 3 Jahren ohne deutsche Beitragszeiten
+
+Das Dokument ist bewusst als Planungsinstrument konzipiert. Allerdings: Die Renteninformation enthält keine rechtsverbindlichen Informationen. Die Höhe der hierin ausgewiesenen Anwartschaften kann sich – etwa durch Gesetzesänderungen – verändern.
+
+[SPIEL gewusst: Das aktuelle Durchschnittsentgelt für Entgeltpunkte beträgt 2026 genau 51.944 Euro.]
+
+## 3 Wie funktioniert die Berechnung Ihrer Rentenpunkte?
+
+Entgeltpunkte sind das Herzstück der Rentenformel. Die Höhe ergibt sich aus dem Verhältnis des Einkommens des Versicherten mit dem Durchschnittseinkommen aller Versicherten:
+
+Jahresbruttoeinkommen ÷ Durchschnittsentgelt = Entgeltpunkte
+
+2026 beträgt das vorläufige Durchschnittsentgelt 51.944 Euro. Wer also 51.944 Euro verdient, erhält 1,0 Rentenpunkt. Bei doppeltem Verdienst wären das 2,0 Entgeltpunkte – allerdings nur bis zur Beitragsbemessungsgrenze.
+
+Die maximale Anzahl liegt 2026 bei 1,95 Entgeltpunkten, was einem Jahresgehalt von 101.400 Euro entspricht. Einkommen oberhalb dieser Grenze ist beitragsfrei und bringt keine weiteren Punkte.
+
+## 4 Was bringt Ihnen jeder Rentenpunkt ab Juli 2026?
+
+Der Rentenwert ist der Euro-Betrag, den Sie monatlich für jeden Entgeltpunkt als Rente erhalten. Zum 1. Juli 2026 steigen die Renten um 4,24 Prozent. Der aktuelle Rentenwert erhöht sich damit von 40,79 Euro auf 42,52 Euro.
+
+Diese Erhöhung folgt der gesetzlichen Haltelinie: Das Rentenniveau bleibt bei 48 Prozent. Darauf werden die neuen Rentenwerte festgelegt.
+
+| Zeitraum | Rentenwert pro Entgeltpunkt | Erhöhung
+
+| Bis 30.06.2026 | 40,79 € | -
+
+| Ab 01.07.2026 | 42,52 € | +4,24%
+
+[SPIEL mythos: Der Rentenwert steigt jedes Jahr automatisch um mindestens 4 Prozent. → Nein]
+
+## 5 So berechnen Sie Ihre voraussichtliche Bruttorente
+
+Die Rentenberechnung folgt dieser Formel:
+
+Entgeltpunkte × Rentenwert = Bruttorente
+
+Das ist die vereinfachte Variante für eine reguläre Altersrente ohne Abschläge (die Zugangsfaktoren betragen 1,0).
+
+Konkrete Beispiele für 2026:
+
+- 30 Entgeltpunkte × 42,52 Euro = 1.275,60 Euro Bruttorente
+
+- 40 Entgeltpunkte × 42,52 Euro = 1.700,80 Euro Bruttorente
+
+- 50 Entgeltpunkte × 42,52 Euro = 2.126,00 Euro Bruttorente
+
+Wichtig: Dies sind Bruttobeträge. Von der Rente gehen noch Kranken- und Pflegeversicherungsbeiträge sowie möglicherweise Steuern ab.
+
+## 6 Wie lesen Sie die erste Seite der Renteninformation richtig?
+
+Die erste Seite enthält drei zentrale Beträge in einem Kästchen:
+
+1. Erwerbsminderungsrente: Die monatliche Rente bei sofortiger Erwerbsunfähigkeit
+
+2. Reguläre Altersrente: Rente zum 67. Lebensjahr ohne weitere Beiträge
+
+3. Hochgerechnete Rente: Prognose bei gleichbleibendem Verdienst bis Rentenbeginn
+
+Die Hochrechnung basiert auf Beitragszahlungen wie im Durchschnitt der letzten fünf Kalenderjahre – das ist eine Prognose unter bestimmten Annahmen, keine Garantie.
+
+Weitere wichtige Angaben:
+
+- Persönliche Daten zur eindeutigen Zuordnung
+
+- Bisher eingezahlte Gesamtbeiträge
+
+- Gesammelte Entgeltpunkte (Grundlage der Rentenberechnung)
+
+- Reguläres Rentenalter (meist 67 Jahre)
+
+## 7 Rentenanpassung 2026: Das bedeutet konkret mehr Geld
+
+Ein „Standardrentner" mit durchschnittlichem Verdienst und 45 Beitragsjahren erhält um 77,85 Euro höhere Rente im Monat. Die Erhöhung betrifft 21,5 Millionen Rentnerinnen und Rentner in Deutschland (Stand 2026).
+
+Konkrete Auswirkungen der Rentenerhöhung:
+
+- Bei 1.000 Euro Bruttorente: +42,40 Euro monatlich
+
+- Bei 1.500 Euro Bruttorente: +63,60 Euro monatlich
+
+- Bei 2.000 Euro Bruttorente: +84,80 Euro monatlich
+
+Die Rentenanpassungsmitteilung wird voraussichtlich Mitte Juni bis Ende Juli 2026 versandt.
+
+[SPIEL karte: Haltelinie Rentenniveau]
+
+## 8 Das ist der häufigste Fehler beim Lesen der Renteninformation
+
+Verwechslung von Brutto- und Nettorente: Der Betrag in Ihrer Renteninformation ist eine Bruttorente. Davon gehen automatisch Beiträge zur gesetzlichen Kranken- und Pflegeversicherung ab.
+
+Die Abzüge für 2026:
+
+- Krankenversicherung: 7,3% + halber Zusatzbeitrag (etwa 1,45%)
+
+- Pflegeversicherung: 3,6% (mit Kindern) oder 4,2% (kinderlos)
+
+- Gesamt: etwa 11–12% der Bruttorente
+
+Bei 1.000 Euro Bruttorente führen diese Abzüge zu etwa 110–120 Euro, es bleiben rund 880–890 Euro Netto vor Steuern.
+
+Zwei weitere Fehlerquellen: Die hochgerechnete Rente basiert auf dem Durchschnittsverdienst der letzten fünf Jahre – Gehaltserhöhungen, Arbeitslosigkeit oder Teilzeitphasen verändern die tatsächliche Rente. Und: Die Beträge sind in heutiger Kaufkraft angegeben. Bei Inflation verliert das Geld bis zum Rentenbeginn an Wert.
+
+## 9 Prüfen Sie Ihre Daten – das ist Ihr nächster Schritt
+
+Die Renteninformation erhalten Sie ab dem 27. Lebensjahr nach fünf Jahren Versicherungszeit einmal jährlich. Ab dem 55. Lebensjahr bekommen Sie stattdessen alle drei Jahre eine Rentenauskunft, die detaillierter ist und näher an der tatsächlichen Rentenhöhe liegt.
+
+Prüfschritte beim Erhalt:
+
+- Sind alle Beschäftigungszeiten erfasst?
+
+- Stimmen die angegebenen Verdienste?
+
+- Fehlen Zeiten der Kindererziehung oder Arbeitslosigkeit?
+
+- Wurden Ausbildungszeiten korrekt berücksichtigt?
+
+Bei Fehlern wenden Sie sich umgehend an die Deutsche Rentenversicherung. Eine kostenlose Kontenklärung ist jederzeit möglich.
+
+[SPIEL quiz: Ab welchem Alter erhalten Sie automatisch eine detaillierte Rentenauskunft statt der jährlichen Renteninformation?]
+
+## 10 Fazit
+
+Die Renteninformation ist Ihr persönliches Planungsinstrument für die finanzielle Zukunft. Mit dem aktuellen Rentenwert von 42,52 Euro pro Entgeltpunkt (ab Juli 2026) und dem Durchschnittsentgelt von 51.944 Euro können Sie Ihre Rentenansprüche präzise berechnen. Rechnen Sie realistisch: Von der Bruttorente gehen etwa 11–12% für Versicherungsbeiträge ab, hinzu kommen möglicherweise Steuern. Nutzen Sie die jährlichen Informationen aktiv. Prüfen Sie Ihre Daten auf Vollständigkeit, berechnen Sie Ihre voraussichtliche Nettorente und treffen Sie rechtzeitig Entscheidungen für zusätzliche Altersvorsorgeaufwendungen. Nur wer seine Renteninformation versteht, kann frühzeitig erkennen, ob eine Versorgungslücke droht und entsprechend handeln.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste renteninformation]
+
+[BLOCK rechner rente]
+
+[BLOCK vergleich rentenlueckenrechner]
+
+[BLOCK dokumente die-renteninformation,das-renten-abc]
+
+
+## FAQ
+F: Wer erhält eine Renteninformation?
+A: Die Deutsche Rentenversicherung verschickt die Renteninformation jährlich an gesetzlich Versicherte ab dem 27. Lebensjahr. Voraussetzung sind mindestens fünf Jahre mit Beitragszeiten. Das Schreiben informiert über den aktuellen Stand der gesetzlichen Altersvorsorge.
+F: Welche Beträge stehen in der Renteninformation?
+A: Die Renteninformation zeigt drei zentrale Beträge: die Erwerbsminderungsrente bei sofortiger Erwerbsunfähigkeit, die reguläre Altersrente ohne weitere Beiträge und die hochgerechnete Rente bei gleichbleibendem Verdienst. Diese Werte stehen in einem Kästchen auf der ersten Seite. Zusätzlich finden sich Angaben zu eingezahlten Beiträgen und Entgeltpunkten.
+F: Sind die Beträge in der Renteninformation garantiert?
+A: Nein, die Beträge sind Prognosen und keine Garantien. Sie basieren auf weiterem Durchschnittsverdienst, stabiler Gesetzeslage und aktuellen Rentenwerten. Gehaltserhöhungen, früherer Ruhestand oder Arbeitslosigkeit können die später tatsächlich ausgezahlte Rente deutlich verändern.
+F: Was sind Entgeltpunkte und wie entstehen sie?
+A: Entgeltpunkte bilden das Herzstück der deutschen Rentenberechnung. Ein Entgeltpunkt entspricht dem jährlichen Durchschnittsverdienst aller Versicherten. Neben Beitragszeiten fließen auch weitere anerkannte Versicherungszeiten wie Kindererziehung und Pflege in die Punktesumme ein.
+
+
+==================== BEITRAG rentenerhoehung ====================
+Abschnitte laut beitraege-liste.json (abschnitt_titel exakt so verwenden; Statistiken nur für Index >= 2, nie Fazit/FAQ):
+  heading-0: Rentenerhöhung 2026: +4,24% mehr Rente erwartet
+  heading-1: Rentenerhöhung 2026: 4,24 Prozent für 21 Millionen Rentner
+  heading-2: Wie kommt die Rentenerhöhung 2026 zustande?
+  heading-3: So viel mehr Rente bekommen Sie konkret
+  heading-4: Wann kommt die erhöhte Rente auf dem Konto an?
+  heading-5: Steuerliche Auswirkungen der Rentenerhöhung
+  heading-6: Kaufkraft vs. Inflation: Reale Verbesserung der Renten
+  heading-7: Ausblick auf künftige Rentenentwicklungen
+  heading-8: Welche Rentenarten profitieren von der Erhöhung?
+  heading-9: Wie berechnen Sie Ihre individuelle Rentenerhöhung?
+  heading-10: Fazit
+  heading-11: Häufig gestellte Fragen
+
+# Rentenerhöhung (rentenerhoehung)
+## 0 Rentenerhöhung 2026: +4,24% mehr Rente erwartet
+
+Zum 1. Juli 2026 steigen die Renten um 4,24 %. Was die Rentenerhöhung für 21 Millionen Rentner bedeutet und wie sich Ihre Rente konkret verändert.
+
+## 1 Rentenerhöhung 2026: 4,24 Prozent für 21 Millionen Rentner
+
+Die Rentenerhöhung regelt die jährliche Anpassung der gesetzlichen Renten in Deutschland an die Lohn- und Preisentwicklung.
+
+Mit 4,24 Prozent steigen die gesetzlichen Renten zum 1. Juli 2026 deutlich stärker als ursprünglich erwartet. Der aktuelle Rentenwert erhöht sich damit von 40,79 Euro auf 42,52 Euro. Von dieser Anpassung profitieren rund 21 Millionen Rentnerinnen und Rentner in ganz Deutschland. Die Erhöhung übertrifft frühere Prognosen deutlich – noch im Herbst 2025 rechneten Experten mit lediglich 3,73 Prozent für die mittlere Lohnvariante.
+
+## 2 Wie kommt die Rentenerhöhung 2026 zustande?
+
+Die kräftige Rentenerhöhung basiert vor allem auf der positiven Lohnentwicklung. Grundlage der Anpassung ist die positive Lohnentwicklung in Deutschland. Das Statistische Bundesamt ermittelte eine Lohnsteigerung von 4,25 Prozent, die den Haupttreiber für die höher als erwartete Rentenanpassung darstellt.
+
+Ein entscheidender Faktor ist die Haltelinie von 48 Prozent für das Rentenniveau. Mit dem zum 1. Januar 2026 in Kraft getretenen Gesetz zur Stabilisierung des Rentenniveaus („Rentenpaket 2025") wurde die seit 2019 geltende und ursprünglich bis 2025 befristete Haltelinie für das Rentenniveau bis zur Rentenanpassung 2031 verlängert.
+
+Bei der Berechnung wirkt die Rentenanpassung nach Maßgabe der Haltelinie für das Rentenniveau, wobei die Nettorenten (nach Sozialabgaben und vor Steuern) den Nettolöhnen folgen. Die bis zur Rentenanpassung im Jahr 2023 anzuwendende Rentenanpassungsformel ist bis zum Jahr 2031 außer Kraft gesetzt.
+
+[SPIEL quiz: Wie hoch ist die Rentenerhöhung zum 1. Juli 2026?]
+
+## 3 So viel mehr Rente bekommen Sie konkret
+
+Für eine Rente in Höhe von 1.000 Euro bedeutet das einen Anstieg auf 1.042,40 Euro. Die folgende Tabelle zeigt die konkreten Auswirkungen bei verschiedenen Rentenhöhen:
+
+| Bisherige Rente | Erhöhung (+4,24 %) | Neue Rente ab Juli 2026
+
+| 800 Euro | +33,92 Euro | 833,92 Euro
+
+| 1.000 Euro | +42,40 Euro | 1.042,40 Euro
+
+| 1.200 Euro | +50,88 Euro | 1.250,88 Euro
+
+| 1.500 Euro | +63,60 Euro | 1.563,60 Euro
+
+| 2.000 Euro | +84,80 Euro | 2.084,80 Euro
+
+| 2.500 Euro | +106,00 Euro | 2.606,00 Euro
+
+Durchschnittsrentnerinnen und -rentner bekommen ab Juli 2026 zwischen 37 und 62 Euro pro Monat mehr. Die Altersrente von Rentnern im Westen steigt 2026 von 1.392 Euro um 59 Euro auf 1.451 Euro (Werte gerundet und brutto), im Osten von 1.463 Euro um 62 Euro auf 1.525 Euro.
+
+## 4 Wann kommt die erhöhte Rente auf dem Konto an?
+
+Die Auszahlung erfolgt automatisch ohne Antrag, jedoch zu unterschiedlichen Terminen. Wer vor April 2004 in Rente gegangen ist, erhält die Rentenzahlung vorschüssig. Die erhöhte Rente für Juli wird damit bereits Ende Juni 2026 ausgezahlt. Alle anderen Rentner erhalten die höhere Rente erstmals Ende Juli 2026.
+
+Die Rentenbeziehenden werden mit der Rentenanpassungsmitteilung über die Höhe der Rentenanpassung informiert. Der Versand erfolgt voraussichtlich in der Zeit vom 13. Juni bis 24. Juli 2026.
+
+- Rentner mit Antrag vor April 2004: Erhöhung bereits am 28. Juni 2026
+
+- Rentner mit Antrag nach April 2004: Erhöhung ab Ende Juli 2026
+
+- Automatische Information durch Rentenanpassungsmitteilung
+
+- Keine Antragstellung erforderlich
+
+[SPIEL gewusst: Der Beitragssatz zur gesetzlichen Rentenversicherung bleibt auch 2026 stabil bei 18,6 Prozent – bereits seit neun Jahren in Folge unverändert.]
+
+## 5 Steuerliche Auswirkungen der Rentenerhöhung
+
+Mit der Rentenerhöhung steigt auch die Steuerbelastung für viele Rentner. Mit der Rentenerhöhung 2026 werden viele Rentnerinnen und Rentner neu steuerpflichtig werden. Das ist dann der Fall, wenn ihre Einkünfte den Grundfreibetrag übersteigen. Der Grundfreibetrag 2026 beträgt 12.348 Euro für Ledige und 24.696 Euro für Verheiratete.
+
+Besonders betroffen sind Neurentner, die 2026 in Rente gehen und diese zu 84 Prozent versteuern müssen. Die übrigen 16 Prozent der ersten vollen Bruttojahresrente sind steuerfrei. Mit jedem neuen Rentnerjahrgang sinkt der steuerfreie Anteil um 0,5 Prozentpunkte.
+
+Ein wichtiger Punkt: Der Rentenfreibetrag wird aus der ersten vollen Jahresbruttorente berechnet und als fester Eurobetrag gespeichert. Spätere Rentenerhöhungen sind vollständig steuerpflichtig, sodass sich der steuerpflichtige Teil der Rente durch Anpassungen im Zeitverlauf erhöhen kann. Eine genaue Erläuterung zum Thema finden Sie in unserem Ratgeber zur Rentenbesteuerung.
+
+## 6 Kaufkraft vs. Inflation: Reale Verbesserung der Renten
+
+Die Rentenerhöhung 2026 übersteigt die erwartete Inflationsrate deutlich und stärkt damit die Kaufkraft der Rentner. Ein Blick auf die längerfristige Entwicklung zeigt: Seit 2017 stiegen die Renten insgesamt um 37 Prozent, während das Preisniveau nur um etwa 29 Prozent anwuchs. Dies bedeutet eine reale Verbesserung der Kaufkraft für Rentner.
+
+Die Rentenanpassung orientiert sich grundsätzlich an der Entwicklung der Bruttolöhne, wodurch Rentner an der wirtschaftlichen Entwicklung teilhaben. Zusätzlich gilt die sogenannte Haltelinie für das Rentenniveau von 48 Prozent. Das heißt, der Rentenwert wird zum 1. Juli 2026 so hoch festgesetzt, dass das Rentenniveau von 48 Prozent erreicht wird.
+
+[SPIEL mythos: Alle Rentner erhalten die Rentenerhöhung zum gleichen Zeitpunkt ausgezahlt. → nein]
+
+## 7 Ausblick auf künftige Rentenentwicklungen
+
+Die positive Entwicklung soll sich fortsetzen. Gemäß dem Rentenversicherungsbericht 2025 könnte die gesetzliche Rente von 2026 bis 2039 um gut 45 Prozent steigen. Die Rentenerhöhung 2027 könnte 4,75 Prozent betragen, 2028 soll die Rentenanpassung 2,39 Prozent, 2029 2,75 Prozent und 2030 2,83 Prozent betragen. Von 2031 bis 2039 betragen die geschätzten Anpassungen 1,9 bis 2,9 Prozent.
+
+Allerdings wachsen auch die Finanzierungsherausforderungen. Ab 2028 wird der Beitragssatz voraussichtlich von derzeit 18,6 Prozent auf 19,8 Prozent steigen müssen – die erste Anhebung seit 2007. Der Grund liegt in der demografischen Entwicklung und der Rentengarantie bis 2031.
+
+Die Bundesregierung plant grundlegende Reformen durch eine Rentenkommission, die verschiedene Ansätze zur fairen Lastenverteilung zwischen den Generationen diskutieren wird.
+
+## 8 Welche Rentenarten profitieren von der Erhöhung?
+
+Die 4,24-prozentige Anpassung betrifft verschiedene Rentenarten:
+
+- Altersrenten (Regelaltersrente, vorgezogene Altersrenten)
+
+- Erwerbsminderungsrenten (volle und teilweise)
+
+- Hinterbliebenenrenten (Witwen-, Witwer- und Waisenrenten)
+
+- Unfallrenten der gesetzlichen Unfallversicherung
+
+Die Angleichung der Rentenwerte in Ost und West wurde mit der Rentenanpassung 2023 zu 100 Prozent erreicht. Daher ist die Rentenanpassung ab diesem Jahr in Ost und West gleich. Regional gibt es somit keine Unterschiede mehr bei der Rentenerhöhung. Rentner sollten auch beachten, dass sich die erhöhten Einkünfte auf ihre Krankenversicherung als Rentner auswirken können.
+
+## 9 Wie berechnen Sie Ihre individuelle Rentenerhöhung?
+
+Ihre persönliche Rentenerhöhung können Sie einfach selbst berechnen. Die Formel lautet:
+
+Ihre bisherige Rente × 0,0424 = Ihre monatliche Erhöhung
+
+Beispiele:
+
+- Bei 1.200 Euro Rente: 1.200 × 0,0424 = 50,88 Euro mehr
+
+- Bei 1.800 Euro Rente: 1.800 × 0,0424 = 76,32 Euro mehr
+
+Alternativ nutzen Sie die Anzahl Ihrer Entgeltpunkte aus Ihrem Rentenbescheid:
+
+Anzahl Entgeltpunkte × 42,52 Euro = Ihre neue Monatsrente
+
+## 10 Fazit
+
+Die Rentenerhöhung um 4,24 Prozent zum 1. Juli 2026 bringt spürbare finanzielle Verbesserungen für rund 21 Millionen deutsche Rentner. Der Grundfreibetrag steigt um 252 Euro auf 12.348 Euro, während gleichzeitig Neurentner 2026 erstmals 84 Prozent ihrer Rente versteuern müssen, wobei 16 Prozent der ersten vollen Bruttojahresrente steuerfrei bleiben. Die Anpassung übersteigt die erwartete Inflationsrate deutlich und stärkt die Kaufkraft im Ruhestand. Die positive Entwicklung gründet auf günstiger Lohnentwicklung und der bis 2031 geltenden Haltelinie beim Rentenniveau von 48 Prozent. In den kommenden Jahren zeichnen sich jedoch steigende Beitragssätze ab, da die demografische Entwicklung das System erheblich belastet. Rentner sollten prüfen, ob sie durch die Erhöhung neu steuerpflichtig werden und eine Steuererklärung abgeben müssen.
+
+## 11 Häufig gestellte Fragen
+
+[BLOCK checkliste rentenerhoehung]
+
+[BLOCK rechner rente]
+
+[BLOCK dokumente das-renten-abc]
+
+
+## FAQ
+F: Um wie viel Prozent steigt die Rente 2026?
+A: Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent. Der aktuelle Rentenwert erhöht sich von 40,79 Euro auf 42,52 Euro. Rund 21 Millionen Rentnerinnen und Rentner in Deutschland profitieren von dieser Anpassung.
+F: Wann kommt die Rentenerhöhung 2026 auf dem Konto an?
+A: Die erhöhte Rente wird automatisch ohne Antrag ausgezahlt. Wer vor April 2004 Rente beantragt hat, erhält die Erhöhung bereits am 28. Juni 2026. Alle anderen Rentner bekommen die höhere Auszahlung erstmals Ende Juli 2026.
+F: Warum fällt die Rentenerhöhung 2026 höher aus als erwartet?
+A: Das Statistische Bundesamt ermittelte eine Lohnentwicklung von 4,25 Prozent, die den Hauptgrund für die höhere Anpassung darstellt. Im Herbst 2024 rechneten Rentenexperten noch mit 3,73 Prozent. Die Bruttolöhne lagen im zweiten Quartal 2025 um 4,1 Prozent über dem Vorjahr.
+F: Welche steuerlichen Folgen hat die Rentenerhöhung?
+A: Mit der Rentenerhöhung steigt auch die Steuerlast für viele Rentner, da der festgesetzte Rentenfreibetrag konstant bleibt. Zusätzliche Rentenbeträge aus Erhöhungen sind vollständig steuerpflichtig. Bisher nicht steuerpflichtige Rentner können durch die Erhöhung erstmals in die Einkommensteuerpflicht rutschen.
