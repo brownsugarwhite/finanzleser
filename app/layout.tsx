@@ -19,6 +19,8 @@ import MorphTransitionLayer from "@/components/sections/MorphTransitionLayer";
 import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import FadenShell from "@/components/faden/FadenShell";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -93,7 +95,7 @@ export default async function RootLayout({
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
       {/* suppressHydrationWarning: das Inline-Script unten setzt data-landing VOR der
           Hydration → bewusste Abweichung zur SSR-HTML, kein echter Mismatch. */}
-      <body className="antialiased" suppressHydrationWarning>
+      <body className={"antialiased" + (FADEN_AKTIV ? " faden-body" : "")} suppressHydrationWarning>
         {/* No-FOUC: data-landing synchron VOR dem Paint setzen, damit landing-spezifisches
             CSS (sticky-nav aus, Newsletter, Dotline, Logo-Claim, Mobile-Fixes) schon beim
             ersten Paint greift. LandingBodyAttr hält es danach für SPA-Navigation in Sync. */}
@@ -112,6 +114,17 @@ export default async function RootLayout({
           linkValue={siteSettings.top_banner.link_value}
           visibility={siteSettings.top_banner.visibility}
         />
+        {FADEN_AKTIV ? (
+          /* Der Faden (Stufe 1): Kopf, Randspalten, Strom mit der Seite als lebendem Kapitel, Eingabe.
+             Megamenü, Preview-Slider, Morph-Übergänge und das Leo-Dock bleiben im Else-Zweig für
+             die alte Seite (Produktion ohne Schalter). */
+          <Providers>
+          <NavProvider items={navItems}>
+            <FadenShell>{children}</FadenShell>
+          </NavProvider>
+          </Providers>
+        ) : (
+        <>
         {/* Mobile-only Leo Dock-Slot — sticky top-left, gegenüber Bookmark.
             Position direkt nach TopBanner im Flow, sticky ab top:13px.
             Leo wird zur Laufzeit per JS hier rein-/rausreparented. */}
@@ -142,6 +155,8 @@ export default async function RootLayout({
         </PageTransitionProvider>
         </NavProvider>
         </Providers>
+        </>
+        )}
       </body>
     </html>
   );

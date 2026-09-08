@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import {
   startTransition,
@@ -23,11 +23,17 @@ interface TransitionCtx {
 
 const Ctx = createContext<TransitionCtx | null>(null);
 
-/** Programmatische Transition-Navigation (Suche, Overlays …). */
+/**
+ * Programmatische Transition-Navigation (Suche, Overlays …).
+ * Ohne PageTransitionProvider (Faden-Hülle, NEXT_PUBLIC_FADEN=1) fällt der Hook auf eine
+ * schlichte Router-Navigation zurück, damit alte Komponenten (SearchPill, Overlays) weiter
+ * funktionieren, bis sie durch ihre Faden-Gegenstücke ersetzt sind.
+ */
 export function useTransitionRouter(): TransitionCtx {
   const ctx = useContext(Ctx);
-  if (!ctx) throw new Error("useTransitionRouter muss innerhalb von PageTransitionProvider liegen");
-  return ctx;
+  const router = useRouter();
+  const fallback = useMemo<TransitionCtx>(() => ({ navigate: (href: string) => router.push(href) }), [router]);
+  return ctx ?? fallback;
 }
 
 /** Aktuelle Transition-Phase abonnieren (z. B. für den Loader). */

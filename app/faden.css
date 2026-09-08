@@ -2,10 +2,276 @@
    faden.css — Gestaltung des Fadens („Der Faden mit Leo“, Stufe 1)
 
    Gilt nur, wenn NEXT_PUBLIC_FADEN=1 die Faden-Hülle rendert (app/layout.tsx).
-   Vorlage: docs/prototype/src/01-css.html. Tokens aus app/tokens.css:
-     --ink   → var(--color-text-primary)     --serif → var(--font-heading)
-     --paper → var(--color-bg-page)          --sans  → var(--font-body)
-     --green → var(--color-brand)            --pink  → var(--color-brand-secondary)
-     --tool-* → var(--color-tool-*)
-   Tabellen im Fließtext nutzen weiter .prose (components.css), Rechner rechner.css.
+   Vorlage: docs/prototype/src/01-css.html. Die Prototyp-Variablen werden hier auf
+   app/tokens.css gemappt; Tabellen im Fließtext nutzen weiter .prose (components.css),
+   Rechner rechner.css. Kein Tailwind im Faden-Code.
    ===================================================================================== */
+
+.faden-shell {
+  --paper: var(--color-bg-page); --white: #fdfdfb; --placeholder: var(--color-placeholder-bg);
+  --rule: rgba(51,74,39,.14); --rule-soft: rgba(51,74,39,.08); --rule-strong: #334A27;
+  --ink: var(--color-text-primary); --muted: var(--color-text-medium);
+  --green: var(--color-brand); --green-ink: #2E7A0B; --pink: var(--color-brand-secondary); --pink-tint: #FBEAF1; --tint: #eef3e8;
+  --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
+  --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
+  --serif: var(--font-heading); --sans: var(--font-body);
+  --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
+  background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
+}
+body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidden; }
+.faden-shell * { box-sizing: border-box; }
+.faden-shell h1, .faden-shell h2, .faden-shell h3, .faden-shell h4 { font-family: var(--serif); font-weight: 700; line-height: 1.22; margin: 0; text-wrap: balance; }
+.faden-shell button { font: inherit; cursor: pointer; color: inherit; }
+.faden-shell a { color: var(--green-ink); }
+.faden-shell p { margin: 0 0 .8em; }
+.faden-shell :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.faden-shell .sr { position: absolute; left: -9999px; }
+@media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
+
+/* ---------- Typografische Bausteine ---------- */
+.faden-shell .kicker { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .kicker--gruen { color: var(--green-ink); } .faden-shell .kicker--pink { color: var(--pink); }
+.faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: 6px; }
+.faden-shell .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.faden-shell .dot--rechner { background: var(--tool-rechner); } .faden-shell .dot--vergleich { background: var(--tool-vergleich); } .faden-shell .dot--checkliste { background: var(--tool-checkliste); } .faden-shell .dot--dokumente { background: var(--tool-dokumente); }
+.faden-shell .spark { width: 12px; height: 12px; display: inline-block; flex: none; vertical-align: middle; transition: transform .4s; color: var(--ink); }
+.faden-shell .spark:hover { animation: faden-spark-spin 4s linear infinite; }
+@keyframes faden-spark-spin { to { transform: rotate(360deg); } }
+.faden-shell .textlink { border: 0; background: none; padding: 0; color: var(--green-ink); font-weight: 700; font-size: 13px; text-decoration: none; }
+.faden-shell .textlink--still { color: var(--muted); font-weight: 600; }
+.faden-shell .textlink:hover { text-decoration: underline; }
+.faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; border: 0; background: none; padding: 0; text-decoration: none; }
+.faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1.5px; background: currentColor; position: relative; transition: width .25s; }
+.faden-shell .pfeil-link i::after { content: ""; position: absolute; right: -1px; top: -4px; width: 8px; height: 8px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); }
+.faden-shell .pfeil-link:hover i { width: 30px; }
+.faden-shell .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; white-space: nowrap; text-decoration: none; line-height: 1.3; }
+.faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
+.faden-shell .btn--klein { padding: 4px 12px; font-size: 13px; }
+.faden-shell .btn--still { border-color: var(--rule); color: var(--muted); }
+.faden-shell .chip { border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 5px 14px; font-weight: 600; font-size: 13.5px; text-align: left; line-height: 1.35; }
+.faden-shell .chip:hover { background: var(--tint); border-color: var(--green-ink); color: var(--green-ink); }
+.faden-shell .chip--still { border-color: var(--rule); color: var(--muted); } .faden-shell .chip--leo { border-color: var(--green-ink); color: var(--green-ink); }
+.faden-shell .reihe { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.faden-shell .quelle { font-size: 12px; color: var(--muted); margin: 0; }
+.faden-shell .hinweis { background: var(--note); border: 1px solid var(--note-line); color: var(--note-ink); padding: 8px 12px; font-size: 13px; }
+.faden-shell .begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green); font-weight: 600; cursor: pointer; text-decoration: none; }
+.faden-shell .begriff:hover, .faden-shell .begriff.offen { color: var(--pink); text-decoration: none; }
+
+/* ---------- Zeitungskopf über dem progressiven Blur ---------- */
+.faden-shell .blur { position: fixed; left: 0; right: 0; top: 0; height: 120px; z-index: 29; pointer-events: none; }
+.faden-shell .blur i { position: absolute; left: 0; right: 0; top: 0; display: block; -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); }
+.faden-shell .blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
+.faden-shell .blur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
+.faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
+.faden-shell .kopf__innen { padding: 0 0 0 28px; }
+.faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
+.faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
+.faden-shell .logo img { height: 28px; width: auto; display: block; }
+.faden-shell .register { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-width: 0; height: 50px; }
+.faden-shell .register__reihe { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; height: 50px; }
+.faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
+.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; font: 600 16px/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
+.faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
+.faden-shell .register [data-key="plus"] { color: var(--green); }
+.faden-shell .register .offen { color: var(--pink); }
+.faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: var(--green); color: #fff; height: 44px; padding: 0 18px 0 34px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%); flex: none; margin-left: auto; }
+.faden-shell .lesezeichen button { border: 0; background: none; color: #fff; padding: 4px 8px; font-weight: 700; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.faden-shell .lesezeichen .lz-wort { font: 700 14px/1 var(--sans); padding: 6px 10px; }
+.faden-shell .lesezeichen .lz-icon { position: relative; padding: 6px 7px; }
+.faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
+.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--paper); color: var(--green-ink); font: 700 10px/16px var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+.faden-shell .blatt { display: none; background: var(--paper); border-bottom: 1px solid var(--rule-strong); box-shadow: 0 14px 28px rgba(0,0,0,.08); }
+.faden-shell .blatt.offen { display: block; }
+
+/* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
+.faden-shell .faden { margin: 0; padding: 22px 0 160px; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
+.faden-shell #mitte { padding: 0 11px; min-width: 0; }
+.faden-shell .faden > * { min-width: 0; }
+.faden-shell .rand { align-self: stretch; font-size: 13.5px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.faden-shell .rand--links { justify-self: center; width: min(var(--rand-l), calc(100% - 46px)); }
+.faden-shell .rand--rechts { justify-self: center; width: min(var(--rand-r), calc(100% - 46px)); }
+.faden-shell .rand__lauf { flex: 1; position: relative; }
+.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
+.faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
+.faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
+.faden-shell .verlauf { max-height: 46vh; overflow: auto; scrollbar-width: thin; padding-right: 2px; }
+.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.faden-shell .rand li button { width: 100%; text-align: left; border: 0; background: none; padding: 4px 0; color: var(--muted); font-size: 13.5px; display: flex; gap: 8px; line-height: 1.35; }
+.faden-shell .rand li button.aktiv { color: var(--ink); font-weight: 700; }
+.faden-shell .rand li button::before { content: "○"; flex: none; } .faden-shell .rand li button.aktiv::before { content: "●"; }
+.faden-shell .rand__leer { color: var(--muted); font-style: italic; }
+.faden-shell .rand__hinweis { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
+.faden-shell .rand .block { border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 4px; }
+.faden-shell .wb-form { display: flex; gap: 6px; margin-top: 4px; }
+.faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: 13px; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--white); color: var(--ink); }
+.faden-shell .wb-form--klein input { font-size: 12.5px; padding: 5px 10px; }
+.faden-shell .verlauf ol { list-style: none; margin: 4px 0 6px 6px; padding: 0 0 0 12px; border-left: 1px solid var(--rule); display: grid; gap: 6px; }
+.faden-shell .verlauf ol li button { display: flex; align-items: baseline; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 0; color: var(--muted); font-size: 12.5px; line-height: 1.3; }
+.faden-shell .verlauf ol li button::before { content: none; }
+.faden-shell .verlauf ol li button i { flex: none; font: 600 11px/1 var(--serif); font-style: italic; color: var(--muted); min-width: 12px; }
+.faden-shell .verlauf ol li button.aktiv { color: var(--ink); font-weight: 700; } .faden-shell .verlauf ol li button.aktiv i { color: var(--green-ink); }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; max-height: 44vh; overflow: auto; scrollbar-width: thin; }
+.faden-shell .mobil-leiste { display: none; }
+.faden-shell .schublade { display: none; }
+.faden-shell .rand__zu { display: none; }
+
+/* ---------- Strom, Kapitel, Wörter ---------- */
+.faden-shell .strom { display: grid; gap: 0; align-content: start; }
+.faden-shell .kapitel { border-top: 1px solid var(--rule); padding: 14px 0 26px; }
+.faden-shell .kapitel:first-child { border-top: 0; padding-top: 0; }
+.faden-shell .kapitel__kopf { display: flex; align-items: baseline; gap: 14px; min-height: 22px; }
+.faden-shell .kapitel--alt .kapitel__kopf { cursor: pointer; }
+.faden-shell .kapitel__kopf h2 { font-size: 17px; flex: 1; }
+.faden-shell .kapitel__kopf .kicker { white-space: nowrap; }
+.faden-shell .kapitel__kopf .toggle-k { border: 0; background: none; color: var(--muted); font-size: 12px; white-space: nowrap; margin-left: auto; }
+.faden-shell .kapitel__inhalt { display: grid; gap: 18px; padding-top: 14px; }
+.faden-shell .kapitel.zu .kapitel__inhalt { display: none; } .faden-shell .kapitel.zu { padding-bottom: 14px; }
+.faden-shell .kapitel.zu .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
+.faden-shell .kapitel--alt:not(.zu) .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
+.faden-shell .kapitel--alt { animation: faden-wandert .5s ease; } @keyframes faden-wandert { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.faden-shell .kapitel__schnappschuss { opacity: .92; }
+.faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
+.faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }
+.faden-shell .wort { display: grid; gap: 4px; }
+.faden-shell .wort--frage { background: var(--white); border-left: 3px solid var(--rule-strong); padding: 10px 14px; }
+.faden-shell .wort--frage p { font-family: var(--serif); font-style: italic; font-size: 16px; margin: 0; }
+.faden-shell .wort--leo { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
+.faden-shell .wort--leo img { width: 30px; height: 30px; margin-top: 2px; }
+.faden-shell .wort--leo .kicker { margin-bottom: 2px; }
+.faden-shell .wort--leo p { margin: 0 0 .5em; }
+.faden-shell .quellen { font-size: 12.5px; color: var(--muted); display: grid; gap: 2px; margin-top: 4px; }
+.faden-shell .quellen b { color: var(--ink); font-weight: 600; }
+.faden-shell .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.faden-shell .einwurf { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--green-ink); font-style: italic; }
+.faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--green); flex: none; }
+
+/* ---------- Kasten (Werkzeugkarte) ---------- */
+.faden-shell .kasten { position: relative; background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--green); border-radius: 2px; padding: 14px 18px 12px; display: grid; gap: 10px; scroll-margin-top: 110px; }
+.faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
+.faden-shell .kasten h3 { font-size: 19px; }
+.faden-shell .kasten p { max-width: 64ch; }
+.faden-shell .kasten .btn { justify-self: start; }
+.faden-shell .kasten__fuss { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 8px; }
+.faden-shell .kasten--inline .kicker { margin-bottom: 2px; }
+.faden-shell .kasten ul.dokumente { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.faden-shell .kasten ul.dokumente li { display: flex; gap: 10px; align-items: center; font-size: 14.5px; }
+.faden-shell .krumen { font-size: 12px; color: var(--muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.faden-shell .krumen a { color: var(--muted); font-size: 12px; font-weight: 600; text-decoration: none; }
+.faden-shell .krumen a:hover { color: var(--green-ink); text-decoration: underline; }
+.faden-shell .krumen__trenner { margin-right: 6px; }
+
+/* ---------- Ratgeber als Kette ---------- */
+.faden-shell .artikel { display: grid; gap: 14px; }
+.faden-shell .artikel__titel { font: italic 400 21px/1.3 var(--serif); color: var(--pink); margin: 0; }
+.faden-shell .artikel__untertitel { font-size: clamp(26px, 3.2vw, 36px); font-weight: 900; line-height: 1.18; margin: -6px 0 0; }
+.faden-shell .artikel .vorspann { font-family: var(--serif); font-style: italic; font-size: 17px; max-width: 60ch; margin: 0; }
+.faden-shell .autor { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
+.faden-shell .autor-ring { width: 36px; height: 36px; border-radius: 50%; padding: 2px; background: var(--gradient-author-6, linear-gradient(45deg, #f09433, #dc2743, #bc1888)); display: block; flex: none; }
+.faden-shell .autor-ring img { width: 100%; height: 100%; border-radius: 50%; background: var(--paper); border: 2px solid var(--paper); object-fit: cover; display: block; }
+.faden-shell .autor img.uhr { width: 13px; height: 13px; opacity: .7; margin-left: 6px; }
+.faden-shell .artikel figure { margin: 0; display: grid; grid-template-columns: 1fr; gap: 8px; }
+.faden-shell .artikel figure .bild { aspect-ratio: 16 / 9; background: var(--fill-1); display: grid; place-items: center; border-radius: 2px; overflow: hidden; }
+.faden-shell .artikel figure .bild img { width: 64px; height: 64px; opacity: .6; }
+.faden-shell .artikel figure .bild--foto img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
+.faden-shell .artikel figure figcaption { font-size: 12.5px; color: var(--muted); font-style: italic; }
+.faden-shell .einleitung { display: grid; gap: 6px; }
+.faden-shell .einleitung__titel { font-size: 21px; margin: 6px 0 2px; }
+.faden-shell .inhalt { display: grid; gap: 10px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0 14px; }
+.faden-shell .inhalt__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.faden-shell .inhalt__zeile a { display: grid; grid-template-columns: 32px 36px minmax(0, 1fr); align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.faden-shell .inhalt__nr { width: 32px; height: 32px; border-radius: 13px; border: 1px solid var(--rule-strong); display: grid; place-items: center; font: italic 400 17px/1 var(--serif); color: var(--ink); transform: skewX(-6deg); }
+.faden-shell .inhalt__zeile--faq .inhalt__nr, .faden-shell .inhalt__zeile--fazit .inhalt__nr { font-style: normal; font-size: 14px; color: var(--muted); border-color: var(--rule); }
+.faden-shell .inhalt__linie { display: block; height: 1px; background: var(--rule-strong); position: relative; }
+.faden-shell .inhalt__linie::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border-top: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); transform: rotate(45deg); }
+.faden-shell .inhalt__titel { font: italic 400 16.5px/1.35 var(--serif); }
+.faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
+.faden-shell .inhalt__zeile a:hover .inhalt__linie { width: 100%; }
+.faden-shell .abschnitt { position: relative; display: grid; gap: 8px; scroll-margin-top: 110px; }
+.faden-shell .abschnitt__titel { font-size: 24px; line-height: 1.25; }
+.faden-shell .fliess { display: block; }
+.faden-shell .fliess::after { content: ""; display: block; clear: both; }
+.faden-shell .fliess__html > :first-child { margin-top: 0 !important; }
+.faden-shell .fliess > .kasten { clear: both; margin: 14px 0 18px; }
+.faden-shell .faq-kopf { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 700; font-size: 22px; }
+.faden-shell .faq-kopf i { font-style: normal; color: var(--muted); letter-spacing: 6px; font-size: 14px; opacity: .6; }
+.faden-shell dl.faq { margin: 0; display: grid; gap: 6px; }
+.faden-shell .faq__paar { border-bottom: 1px solid var(--rule); padding: 6px 0 8px; }
+.faden-shell .faq dt { font-weight: 700; font-family: var(--serif); font-size: 16.5px; margin: 6px 0 4px; }
+.faden-shell .faq dd { margin: 0; }
+.faden-shell .fazit-kopf { display: flex; align-items: center; gap: 12px; }
+.faden-shell .fazit-kopf::before, .faden-shell .fazit-kopf::after { content: ""; flex: 1; border-top: 1px solid var(--rule-strong); }
+.faden-shell .fazit-kopf span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--serif); font-weight: 700; font-size: 16px; }
+.faden-shell .fazit-kopf img { width: 28px; height: 28px; }
+.faden-shell .fazit { border-left: 3px solid var(--rule-strong); padding-left: 14px; font-family: var(--serif); font-size: 16px; }
+.faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; align-items: center; }
+.faden-shell .kurzfassung { border-left: 3px solid var(--green); background: var(--white); padding: 12px 14px 8px; }
+.faden-shell .dazu { display: grid; gap: 0; }
+.faden-shell .dazu .kicker { margin-bottom: 4px; }
+.faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
+.faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
+.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 4px; }
+.faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; gap: 6px; }
+.faden-shell .weiterlesen .fragen .chip.gewaehlt { background: var(--tint); }
+.faden-shell .weiterlesen .antwort { border-left: 3px solid var(--green); background: var(--white); padding: 10px 14px 12px; display: grid; gap: 8px; }
+.faden-shell .weiterlesen .antwort .wort--frage { border: 0; padding: 0; background: none; }
+.faden-shell .weiterlesen .antwort[hidden] { display: none; }
+
+/* Fließtext aus dem CMS: .prose liefert Tabellen (components.css), hier nur die Feinheiten */
+.faden-shell .prose p { margin-bottom: 1em !important; }
+.faden-shell .prose h3 { font-size: 18px; margin: 16px 0 6px !important; } .faden-shell .prose h4 { font-size: 16px; margin: 14px 0 4px !important; }
+.faden-shell .prose ul, .faden-shell .prose ol { margin: 0 0 12px 22px; padding: 0; } .faden-shell .prose li { margin: 0 0 4px; }
+.faden-shell .prose img { max-width: 100%; height: auto; } .faden-shell .prose figure { margin: 0 0 12px; }
+.faden-shell .prose a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* ---------- Eingabe + Suchpille ---------- */
+.faden-shell .eingabe { position: sticky; bottom: 0; display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; margin-top: -40px; }
+.faden-shell .eingabe__blur { position: absolute; left: -10px; right: -10px; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
+.faden-shell .eingabe__blur i { position: absolute; left: 0; right: 0; bottom: 0; display: block; -webkit-mask-image: linear-gradient(to top, #000 40%, transparent 100%); mask-image: linear-gradient(to top, #000 40%, transparent 100%); }
+.faden-shell .eingabe__blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .eingabe__blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .eingabe__blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .eingabe__blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .eingabe__blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .eingabe__blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .eingabe__blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .eingabe__blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
+.faden-shell .eingabe__blur b { position: absolute; inset: 0; background: linear-gradient(to top, var(--paper) 30%, transparent 100%); }
+.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: 750px; margin-left: -11px; }
+.faden-shell .suchpille-wrap { position: relative; width: 100%; z-index: 6; }
+.faden-shell .suchpille { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.55); backdrop-filter: blur(16px) brightness(1.15); border-radius: 26px; box-shadow: 0 3px 23px rgba(0,0,0,.02); padding: 6px 6px 6px 22px; min-height: 52px; transition: box-shadow .2s ease; border: 1px solid var(--rule); }
+.faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--ink); }
+.faden-shell .suchpille input { flex: 1; border: 0; background: none; font: 400 17px/40px var(--sans); color: var(--ink); min-width: 0; outline: none; padding: 0; }
+.faden-shell .suchpille input::placeholder { color: var(--muted); opacity: 1; }
+.faden-shell .suchpille .senden { border: 0; border-radius: 20px; padding: 0 18px; background: var(--green); color: #fff; font: 600 15px/40px var(--sans); white-space: nowrap; flex: none; opacity: 0; transform: translateX(10px) scale(.92); pointer-events: none; transition: opacity .2s ease, transform .3s cubic-bezier(.34,1.56,.64,1); }
+.faden-shell .suchpille-wrap:focus-within .senden, .faden-shell .suchpille.hat-text .senden { opacity: 1; transform: none; pointer-events: auto; }
+.faden-shell #eingabeChips { position: absolute; left: 0; right: 0; top: 100%; margin: 0; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+.faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
+
+/* ---------- Toast, Fußnote ---------- */
+.faden-shell .toast, .toast.faden-toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: #334A27; color: #faf9f6; padding: 8px 18px; font-size: 13.5px; opacity: 0; transition: .25s; z-index: 60; pointer-events: none; border-radius: 999px; max-width: min(560px, calc(100vw - 32px)); }
+.faden-shell .toast.zeigt { opacity: 1; transform: translate(-50%, 0); }
+.faden-shell .fussnote { max-width: 1440px; margin: 0 auto; padding: 14px 28px 30px; font-size: 12.5px; color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.faden-shell .fussnote a { color: var(--muted); text-decoration: none; } .faden-shell .fussnote a:hover { color: var(--green-ink); text-decoration: underline; }
+
+/* ---------- Umbrüche ---------- */
+@media (max-width: 1439px) {
+  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
+  .faden-shell #mitte { padding: 0; }
+  .faden-shell .rand { display: none; }
+  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 40; background: var(--paper); padding: 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  .faden-shell .rand--links.mobil { left: 0; } .faden-shell .rand--rechts.mobil { right: 0; }
+  .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
+  .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
+  .faden-shell .rand.mobil .rand__zu { display: inline-flex; justify-self: start; }
+  .faden-shell .schublade { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 39; }
+  .faden-shell .mobil-leiste { display: flex; justify-content: space-between; gap: 10px; padding: 0 0 12px; }
+  .faden-shell .mobil-leiste button { border: 1px solid var(--rule); background: var(--white); border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; }
+  .faden-shell .mobil-leiste button i { font-style: normal; color: var(--green); }
+  .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
+}
+@media (max-width: 900px) {
+  .faden-shell .kopf__innen { padding-left: 16px; }
+  .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
+  .faden-shell .register { display: none; }
+  .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
+  .faden-shell .lesezeichen .lz-wort { display: none; }
+  .faden-shell .faden { padding: 12px 14px 110px; }
+  .faden-shell .artikel__untertitel { font-size: 26px; }
+  .faden-shell .kapitel__kopf { flex-wrap: wrap; gap: 6px 12px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
+  .faden-shell .inhalt__zeile a { grid-template-columns: 28px 24px minmax(0, 1fr); }
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
+}
