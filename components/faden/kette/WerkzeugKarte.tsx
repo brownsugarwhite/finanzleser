@@ -1,76 +1,130 @@
 /**
- * Werkzeug in der Kette (Rechner, Checkliste, Vergleich, Dokumente).
+ * Werkzeug als Karte im Faden: Rechner, Checkliste, Vergleich, Dokumente.
  *
- * Meilenstein 1: Karte mit Titel, Kicker und Sprung zur eigenen Seite. In M2 kommen
- * die echten Körper (RechnerEmbed, ChecklisteEmbed, DokumenteEmbed, VergleichEmbed)
- * hier hinein — die Karten-Chrome bleibt.
+ * Die Körper sind die Komponenten der alten Seite — RechnerEmbed (56 Rechner mit
+ * rechner.css), ChecklisteEmbed (Embla-Slider, Download mit Haken), DokumenteEmbed
+ * (pdf.js-Vorschau), VergleichEmbed. Hier kommt nur die Karten-Chrome dazu: Kicker mit
+ * Farbpunkt, Titel, Leo-Einwurf. Titel und Daten kommen aus dem serverseitigen
+ * Preload (lib/articleToolData) oder, wenn das Werkzeug nicht im Beitrag eingebettet
+ * ist (Leo-Einwurf), aus den bestehenden gecachten Gettern.
  */
-import type { ArticleToolData } from "@/lib/articleToolData";
+import type { ArticleToolData, DokumentCard } from "@/lib/articleToolData";
 import type { Teil } from "@/lib/faden/kette";
 import { buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl } from "@/lib/urls";
+import { getRechnerBySlug, getChecklisteBySlug, getAllVergleiche, getDokumenteBySlugs } from "@/lib/wordpress";
+import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
+import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
+import { decodeHtmlEntities } from "@/lib/html-utils";
+import { stripHtml } from "@/lib/seo";
+import { medienUrl } from "@/lib/faden/medien";
+import RechnerEmbed from "@/components/rechner/RechnerEmbed";
+import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
+import DokumenteEmbed from "@/components/dokumente/DokumenteEmbed";
+import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
 
 type Embed = Extract<Teil, { art: "embed" }>;
 
-const LABEL: Record<Embed["typ"], { typ: string; dot: string; ton: string; text: string }> = {
-  rechner: { typ: "Rechner", dot: "rechner", ton: "pink", text: "der interaktive Rechner" },
-  checkliste: { typ: "Checkliste", dot: "checkliste", ton: "lila", text: "die interaktive Checkliste" },
-  vergleich: { typ: "Anzeige · Vergleich mit Partnerlinks", dot: "vergleich", ton: "tuerkis", text: "die Vergleichstabelle" },
-  dokumente: { typ: "Dokumente", dot: "dokumente", ton: "terra", text: "die Dokumente mit Vorschau und Download" },
+const LABEL: Record<Embed["typ"], { typ: string; dot: string; ton: string }> = {
+  rechner: { typ: "Rechner", dot: "rechner", ton: "pink" },
+  checkliste: { typ: "Checkliste", dot: "checkliste", ton: "lila" },
+  vergleich: { typ: "Anzeige · Vergleich mit Partnerlinks", dot: "vergleich", ton: "tuerkis" },
+  dokumente: { typ: "Dokumente", dot: "dokumente", ton: "terra" },
 };
 
 function titelAus(toolData: ArticleToolData | undefined, typ: Embed["typ"], slug: string): string | undefined {
-  const t = toolData?.titles as Record<string, unknown> | undefined;
-  if (!t) return undefined;
-  const kandidaten = [`${typ}:${slug}`, `${typ}/${slug}`, slug];
-  for (const key of kandidaten) {
-    const v = t[key];
-    if (!v) continue;
-    if (typeof v === "string") return v;
-    if (typeof v === "object" && v && "title" in v && typeof (v as { title: unknown }).title === "string") return (v as { title: string }).title;
-  }
-  return undefined;
+  const t = toolData?.titles?.[`${typ}:${slug}`];
+  return t?.title || undefined;
 }
 
 export const toolTitel = {
   eins: titelAus,
-  /** Alle bekannten Werkzeugtitel als `typ:slug` → Titel (für Verweise). */
+  /** Alle vorgeladenen Werkzeugtitel als `typ:slug` → Titel (für Verweise). */
   alle(toolData?: ArticleToolData): Record<string, string> {
     const out: Record<string, string> = {};
-    const t = toolData?.titles as Record<string, unknown> | undefined;
-    if (!t) return out;
-    for (const [key, v] of Object.entries(t)) {
-      const titel = typeof v === "string" ? v : (v && typeof v === "object" && "title" in v ? String((v as { title: unknown }).title) : "");
-      if (titel) out[key.replace("/", ":")] = titel;
-    }
+    for (const [key, v] of Object.entries(toolData?.titles || {})) if (v?.title) out[key] = v.title;
     return out;
   },
 };
 
-function urlFuer(typ: Embed["typ"], slug: string): string {
+export function werkzeugUrl(typ: Embed["typ"], slug: string): string {
   if (typ === "rechner") return buildRechnerUrl(slug);
   if (typ === "checkliste") return buildChecklisteUrl(slug);
   if (typ === "vergleich") return buildVergleichUrl(slug);
   return buildDokumentUrl(slug);
 }
 
-export default function WerkzeugKarte({ teil, toolData }: { teil: Embed; toolData?: ArticleToolData }) {
+/** Titel eines Werkzeugs: Preload, sonst gecachter Getter (nur für Einwürfe nötig). */
+export async function werkzeugTitel(typ: Embed["typ"], slug: string, toolData?: ArticleToolData): Promise<string> {
+  const vor = titelAus(toolData, typ, slug);
+  if (vor) return vor;
+  try {
+    if (typ === "rechner") return (await getRechnerBySlug(slug))?.title || slug;
+    if (typ === "checkliste") return (await getChecklisteBySlug(slug))?.title || slug;
+    if (typ === "vergleich") {
+      const v = (await getAllVergleiche()).find((x) => x.slug === slug);
+      return v ? decodeHtmlEntities(v.title).replace(/\s*[–-]?\s*Vergleich$/i, "").trim() : (VERGLEICH_DESCRIPTIONS[slug] ? slug : slug);
+    }
+    const d = (await getDokumenteBySlugs([slug]))[0];
+    return d?.title || slug;
+  } catch {
+    return slug.replace(/-/g, " ");
+  }
+}
+
+async function dokumentKarten(slugs: string[], toolData?: ArticleToolData): Promise<DokumentCard[]> {
+  const vor = toolData?.dokumente?.[slugs.join(",")];
+  if (vor && vor.length) return vor.map((d) => ({ ...d, pdfUrl: medienUrl(d.pdfUrl) }));
+  try {
+    const docs = await getDokumenteBySlugs(slugs);
+    return docs.map((d) => ({
+      slug: d.slug,
+      title: d.title,
+      beschreibung: stripHtml(d.excerpt),
+      pdfUrl: medienUrl(d.pdfFile?.mediaItemUrl || ""),
+      fileName: d.pdfFile?.mediaDetails?.file?.split("/").pop(),
+      fileSize: d.pdfFile?.fileSize,
+      kategorie: d.dokumentKategorien?.nodes?.[0]?.name || "",
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function WerkzeugKarte({
+  teil, toolData, ohneTitel, checklisteDaten,
+}: {
+  teil: Embed;
+  toolData?: ArticleToolData;
+  /** Auf der eigenen Seite des Werkzeugs steht der Titel schon im h1. */
+  ohneTitel?: boolean;
+  /** Bereits geparste Checkliste (Detailseite), spart einen zweiten PDF-Parse. */
+  checklisteDaten?: ChecklisteInlineData | null;
+}) {
   const lab = LABEL[teil.typ];
   const slugs = teil.slugs && teil.slugs.length ? teil.slugs : [teil.slug];
-  const titel = teil.typ === "dokumente" && slugs.length > 1 ? "Dokumente zum Ratgeber" : titelAus(toolData, teil.typ, teil.slug) || slugs[0].replace(/-/g, " ");
+  const titel = teil.typ === "dokumente" && slugs.length > 1 ? "Dokumente zum Ratgeber" : await werkzeugTitel(teil.typ, teil.slug, toolData);
+
+  let koerper: React.ReactNode = null;
+  if (teil.typ === "rechner") {
+    koerper = <RechnerEmbed slug={teil.slug} noVisual />;
+  } else if (teil.typ === "checkliste") {
+    let daten = checklisteDaten ?? toolData?.checklisten?.[teil.slug] ?? null;
+    if (!daten) { try { daten = await loadChecklisteData(teil.slug); } catch { daten = null; } }
+    koerper = <ChecklisteEmbed slug={teil.slug} noVisual initialData={daten} />;
+  } else if (teil.typ === "dokumente") {
+    const karten = await dokumentKarten(slugs, toolData);
+    koerper = <DokumenteEmbed slugs={slugs} initialDokumente={karten.length ? karten : null} />;
+  } else {
+    koerper = <VergleichEmbed slug={teil.slug} />;
+  }
+
   return (
-    <div className={`kasten kasten--${lab.ton} kasten--inline`} data-werkzeug={`${teil.typ}:${teil.slug}`}>
+    <div className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`}>
       {teil.grund && <div className="einwurf einwurf--inline">Leo wirft ein: {teil.grund}</div>}
-      <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : " · in der Kette"}</span>
-      <h3>{titel}</h3>
-      {teil.typ === "dokumente" && (
-        <ul className="dokumente">
-          {slugs.map((s) => (
-            <li key={s}><i className="dot dot--dokumente" /><a href={buildDokumentUrl(s)}>{titelAus(toolData, "dokumente", s) || s.replace(/-/g, " ")}</a></li>
-          ))}
-        </ul>
-      )}
-      <p className="quelle">Hier steht {lab.text}; die Karte wird mit dem nächsten Schritt gefüllt.</p>
-      <a className="btn btn--klein" href={urlFuer(teil.typ, slugs[0])}>Als Seite öffnen</a>
+      <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
+      {!ohneTitel && <h3>{titel}</h3>}
+      <div className="kasten__koerper article-tool-embed article-finanztool">{koerper}</div>
+      {!ohneTitel && <div className="kasten__fuss"><a className="textlink textlink--still" href={werkzeugUrl(teil.typ, slugs[0])}>Eigene Seite öffnen</a></div>}
     </div>
   );
 }

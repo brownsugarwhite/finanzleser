@@ -3,6 +3,7 @@ import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs, CONTENT_REV
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { stripHtml } from "@/lib/seo";
 import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
+import { medienUrl } from "@/lib/faden/medien";
 
 export interface ToolTitle {
   title: string;
@@ -183,7 +184,7 @@ export async function getArticleToolData(content?: string, slug?: string): Promi
           slug: d.slug,
           title: d.title,
           beschreibung: stripHtml(d.excerpt),
-          pdfUrl: d.pdfFile?.mediaItemUrl || "",
+          pdfUrl: medienUrl(d.pdfFile?.mediaItemUrl || ""),
           fileName: d.pdfFile?.mediaDetails?.file?.split("/").pop(),
           fileSize: d.pdfFile?.fileSize,
           kategorie: d.dokumentKategorien?.nodes?.[0]?.name || "",

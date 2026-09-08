@@ -3,6 +3,9 @@ import Spacer from "@/components/ui/Spacer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SparkHeading from "@/components/ui/SparkHeading";
 import { decodeHtmlEntities } from "@/lib/html-utils";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import TextKarte from "@/components/faden/karten/TextKarte";
 
 type LegalPageLayoutProps = {
   eyebrow: string;
@@ -25,6 +28,15 @@ export default function LegalPageLayout({
   imageWideAlt,
 }: LegalPageLayoutProps) {
   const decodedTitle = decodeHtmlEntities(title);
+
+  if (FADEN_AKTIV) {
+    const key = decodedTitle.toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-");
+    return (
+      <KartenKapitel schluessel={`seite:${key}`} titel={decodedTitle} kicker={eyebrow} krumen={[{ name: "Service", href: "/anbieter" }]} url={`/${key}`}>
+        <TextKarte content={content} />
+      </KartenKapitel>
+    );
+  }
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { medienUrl } from "@/lib/faden/medien";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
@@ -49,10 +53,18 @@ export default async function DokumentDetailPage({ params }: Props) {
     notFound();
   }
 
-  const pdfUrl = dokument.pdfFile?.mediaItemUrl || "";
+  const pdfUrl = medienUrl(dokument.pdfFile?.mediaItemUrl || "");
   const fileName = dokument.pdfFile?.mediaDetails?.file?.split("/").pop();
   const beschreibung = stripHtml(dokument.excerpt);
   const kategorie = dokument.dokumentKategorien?.nodes?.[0];
+
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel={`dokument:${slug}`} titel={dokument.title} kicker={kategorie ? `Dokumente · ${kategorie.name}` : "Dokumente"} beschreibung={beschreibung} krumen={[{ name: "Service", href: "/dokumente" }, { name: "Dokumente", href: "/dokumente" }]} url={`/dokumente/${slug}`}>
+        <WerkzeugKarte teil={{ art: "embed", typ: "dokumente", slug, slugs: [slug] }} ohneTitel />
+      </KartenKapitel>
+    );
+  }
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

@@ -117,7 +117,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand__zu { display: none; }
 
 /* ---------- Strom, Kapitel, Wörter ---------- */
-.faden-shell .strom { display: grid; gap: 0; align-content: start; }
+.faden-shell .strom { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-content: start; }
+/* Grid-Kinder wachsen sonst auf die Mindestbreite ihres Inhalts (breite Tabellen, Slider-Reihen) und sprengen die 750er-Spalte */
+.faden-shell .strom > *, .faden-shell .kapitel, .faden-shell .kapitel__inhalt, .faden-shell .artikel, .faden-shell .kasten, .faden-shell .kasten__koerper, .faden-shell .abschnitt, .faden-shell .fliess { min-width: 0; max-width: 100%; }
 .faden-shell .kapitel { border-top: 1px solid var(--rule); padding: 14px 0 26px; }
 .faden-shell .kapitel:first-child { border-top: 0; padding-top: 0; }
 .faden-shell .kapitel__kopf { display: flex; align-items: baseline; gap: 14px; min-height: 22px; }
@@ -223,6 +225,21 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose ul, .faden-shell .prose ol { margin: 0 0 12px 22px; padding: 0; } .faden-shell .prose li { margin: 0 0 4px; }
 .faden-shell .prose img { max-width: 100%; height: auto; } .faden-shell .prose figure { margin: 0 0 12px; }
 .faden-shell .prose a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
+.faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
+.faden-shell .kasten--rechner .rechner-title { display: none; }
+.faden-shell .kasten--rechner .rechner-layout, .faden-shell .kasten--checkliste .checkliste-layout { max-width: none; }
+.faden-shell .kasten--dokumente .dok-head { display: none; }
+.faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 26px; }
+.faden-shell .artikel--karte .kasten { margin-top: 4px; }
+.faden-shell .artikel__zusatz { font-weight: 400; font-style: italic; color: var(--muted); font-size: .7em; }
+.faden-shell .anbieter-k__spalten { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.faden-shell .anbieter-k__spalten > div { padding: 10px 14px 10px 0; display: grid; gap: 2px; align-content: start; min-width: 0; }
+.faden-shell .anbieter-k__spalten > div + div { border-left: 1px solid var(--rule); padding-left: 14px; }
+.faden-shell .anbieter-k__spalten p { margin: 0; font-size: 14.5px; line-height: 1.4; overflow-wrap: anywhere; }
+.faden-shell .kasten--anbieter .anbieter-content h2 { font-size: 22px; margin: 12px 0 4px; } .faden-shell .kasten--anbieter .anbieter-content h3 { font-size: 18px; margin: 14px 0 4px; }
+.faden-shell .kasten--text .prose h2 { font-size: 22px !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; }
 
 /* ---------- Eingabe + Suchpille ---------- */
 .faden-shell .eingabe { position: sticky; bottom: 0; display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; margin-top: -40px; }
