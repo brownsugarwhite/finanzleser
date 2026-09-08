@@ -1,0 +1,11 @@
+/* =====================================================================================
+   faden.css — Gestaltung des Fadens („Der Faden mit Leo“, Stufe 1)
+
+   Gilt nur, wenn NEXT_PUBLIC_FADEN=1 die Faden-Hülle rendert (app/layout.tsx).
+   Vorlage: docs/prototype/src/01-css.html. Tokens aus app/tokens.css:
+     --ink   → var(--color-text-primary)     --serif → var(--font-heading)
+     --paper → var(--color-bg-page)          --sans  → var(--font-body)
+     --green → var(--color-brand)            --pink  → var(--color-brand-secondary)
+     --tool-* → var(--color-tool-*)
+   Tabellen im Fließtext nutzen weiter .prose (components.css), Rechner rechner.css.
+   ===================================================================================== */

@@ -5,6 +5,8 @@ import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
 import { stripHtml } from "./seo";
+import { FADEN_AKTIV } from "./faden/flag";
+import { FADEN_GRAPHQL_FELDER, parseFadenFelder, type FadenRohfelder } from "./faden/felder";
 
 export interface LatestTool {
   type: "rechner" | "checkliste" | "vergleich";
@@ -740,11 +742,15 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
               slug
             }
           }
+          ${FADEN_AKTIV ? FADEN_GRAPHQL_FELDER : ""}
         }
       }
     }
   `;
 
+  // Faden (NEXT_PUBLIC_FADEN=1): kurzfassung, leoFragen, … kommen als JSON-Strings mit in
+  // DIESELBE Abfrage (keine zweite Anfrage je Beitrag). Ohne Schalter bleibt die Abfrage
+  // byteidentisch — Produktion kennt die Felder noch nicht (Regel 12).
   // Frueher holte eine ZWEITE Abfrage die ACF-Felder parallel dazu. Seit `untertitel`
   // ein flaches Feld auf Post ist (Roadmap-Phase E, ACF raus), steht es in der
   // Hauptabfrage — eine GraphQL-Anfrage weniger pro Artikelseite.
@@ -754,6 +760,12 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
     let post = data.posts.nodes[0] || null;
     if (post) {
       post = decodePostContent(post);
+      if (FADEN_AKTIV) {
+        const roh = post as Post & FadenRohfelder;
+        post.faden = parseFadenFelder(roh);
+        delete roh.kurzfassung; delete roh.leoFragen; delete roh.glossarBegriffe;
+        delete roh.leoEinwuerfe; delete roh.dazuPasst; delete roh.waechterRegeln; delete roh.statistiken;
+      }
     }
 
     return post; // null = Beitrag existiert genuin nicht → Caller darf notFound()
@@ -1710,7 +1722,7 @@ export async function getLatestPostsByCategoryIds(
   }
 
   const excludeArr = excludeDatabaseId ? [excludeDatabaseId] : [];
-  let posts = await fetchPosts(categoryIds, excludeArr);
+  const posts = await fetchPosts(categoryIds, excludeArr);
 
   // Fallback: wenn zu wenige → Parent-Kategorien mit einbeziehen
   if (posts.length < limit) {
