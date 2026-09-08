@@ -1,0 +1,554 @@
+[
+  {
+    "slug": "elternunterhalt",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wann müssen Kinder für ihre Eltern Unterhalt zahlen?",
+        "art": "torte",
+        "titel": "Wo 5,7 Millionen Pflegebedürftige versorgt werden",
+        "untertitel": "Pflegebedürftige im Sinne des SGB XI, Dezember 2023",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pflegestatistik 2023 (Pressemitteilung 478/2024)",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/12/PD24_478_224.html",
+          "stand": "18.12.2024"
+        },
+        "reihen": [
+          {
+            "key": "2023",
+            "label": "2023",
+            "werte": [
+              {
+                "label": "Zu Hause, nur Pflegegeld (Angehörige)",
+                "wert": 3.1
+              },
+              {
+                "label": "Zu Hause mit ambulantem Pflegedienst",
+                "wert": 1.1
+              },
+              {
+                "label": "Vollstationär im Pflegeheim",
+                "wert": 0.8
+              },
+              {
+                "label": "Pflegegrad 1 ohne Pflegeleistungen",
+                "wert": 0.68
+              }
+            ]
+          }
+        ],
+        "hinweis": "Erst wenn Rente, Vermögen und Pflegeversicherung die Heimkosten nicht decken, springt das Sozialamt ein und prüft den Elternunterhalt. 78 Prozent der Pflegebedürftigen sind 65 Jahre oder älter.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Berechnung des Elternunterhalts: Selbstbehalt und 70-Prozent-Regel",
+        "art": "balken",
+        "titel": "Selbstbehalte 2026 im Vergleich",
+        "untertitel": "Was dem Unterhaltspflichtigen monatlich mindestens bleibt",
+        "einheit": "€",
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Gegenüber den eigenen Eltern",
+                "wert": 2650
+              },
+              {
+                "label": "Gegenüber volljährigen Kindern",
+                "wert": 1750
+              },
+              {
+                "label": "Gegenüber getrennt lebendem Ehegatten, erwerbstätig",
+                "wert": 1600
+              },
+              {
+                "label": "Gegenüber minderjährigen Kindern, erwerbstätig",
+                "wert": 1450
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Selbstbehalt gegenüber den Eltern ist der höchste der Düsseldorfer Tabelle. Vom darüber liegenden Einkommen bleibt nach der 70-Prozent-Regel weniger als ein Drittel für den Elternunterhalt.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "ehegattenunterhalt",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Dauer des nachehelichen Unterhalts",
+        "art": "saeulen",
+        "titel": "Durchschnittliche Ehedauer bis zur Scheidung",
+        "untertitel": "Geschiedene Ehen in Deutschland, Dauer in Jahren",
+        "einheit": "Jahre",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Maßzahlen zu Ehescheidungen",
+          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Eheschliessungen-Ehescheidungen-Lebenspartnerschaften/Tabellen/masszahlen-ehescheidungen.html",
+          "stand": "26.06.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Ehedauer",
+            "werte": [
+              {
+                "label": "2000",
+                "wert": 12.9
+              },
+              {
+                "label": "2005",
+                "wert": 13.6
+              },
+              {
+                "label": "2010",
+                "wert": 14.2
+              },
+              {
+                "label": "2015",
+                "wert": 14.9
+              },
+              {
+                "label": "2020",
+                "wert": 14.7
+              },
+              {
+                "label": "2025",
+                "wert": 14.6
+              }
+            ]
+          }
+        ],
+        "hinweis": "2024 wurden rund 129.300 Ehen geschieden, jede sechste erst nach der Silberhochzeit. Die Ehedauer ist einer der Maßstäbe, an denen Gerichte die Dauer des nachehelichen Unterhalts bemessen.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Selbstbehalt 2026",
+        "art": "balken",
+        "titel": "Selbstbehalte gegenüber dem Ehegatten 2026",
+        "untertitel": "Eigenbedarf des Unterhaltspflichtigen laut Düsseldorfer Tabelle",
+        "einheit": "€",
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Gegenüber getrennt lebendem oder geschiedenem Ehegatten, erwerbstätig",
+                "wert": 1600
+              },
+              {
+                "label": "Gegenüber getrennt lebendem oder geschiedenem Ehegatten, nicht erwerbstätig",
+                "wert": 1475
+              },
+              {
+                "label": "Zum Vergleich: gegenüber minderjährigen Kindern, erwerbstätig",
+                "wert": 1450
+              },
+              {
+                "label": "Zum Vergleich: gegenüber minderjährigen Kindern, nicht erwerbstätig",
+                "wert": 1200
+              }
+            ]
+          }
+        ],
+        "hinweis": "Kinder gehen im Rang vor: Reicht das Einkommen nicht für alle, wird zuerst der Kindesunterhalt bedient.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "elternzeit",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Elternzeit und Elterngeld: Der Unterschied",
+        "art": "balken",
+        "titel": "Wie lange Eltern 2025 Elterngeld planten",
+        "untertitel": "Durchschnittlich geplante Bezugsdauer je Elternteil, in Monaten",
+        "einheit": "Monate",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pressemitteilung 136/2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_136_22922.html",
+          "stand": "16.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "2025",
+            "label": "2025",
+            "werte": [
+              {
+                "label": "Mütter",
+                "wert": 14.9
+              },
+              {
+                "label": "Väter",
+                "wert": 3.8
+              }
+            ]
+          }
+        ],
+        "hinweis": "Elternzeit ist der arbeitsrechtliche Anspruch auf Freistellung bis zu drei Jahre je Kind; Elterngeld ist die Lohnersatzleistung für höchstens 14 Monate Basiselterngeld. 2025 bezogen 1,19 Millionen Frauen und 417.000 Männer Elterngeld.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "mutterschaftsgeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Mutterschutzfristen gelten 2026?",
+        "art": "balken",
+        "titel": "Schutzfristen nach dem Mutterschutzgesetz",
+        "untertitel": "Wochen, in denen nicht gearbeitet werden darf (§ 3 MuSchG)",
+        "einheit": "Wochen",
+        "quelle": {
+          "name": "§ 3 Mutterschutzgesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/muschg_2018/__3.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "fristen",
+            "label": "Schutzfristen",
+            "werte": [
+              {
+                "label": "Vor der Geburt",
+                "wert": 6
+              },
+              {
+                "label": "Nach der Geburt",
+                "wert": 8
+              },
+              {
+                "label": "Nach Früh- oder Mehrlingsgeburt, bei Behinderung des Kindes",
+                "wert": 12
+              },
+              {
+                "label": "Nach Fehlgeburt ab der 13. Schwangerschaftswoche",
+                "wert": 2
+              },
+              {
+                "label": "Nach Fehlgeburt ab der 17. Schwangerschaftswoche",
+                "wert": 6
+              },
+              {
+                "label": "Nach Fehlgeburt ab der 20. Schwangerschaftswoche",
+                "wert": 8
+              }
+            ]
+          }
+        ],
+        "hinweis": "Vor der Geburt darf die Frau auf eigenen Wunsch weiterarbeiten, nach der Geburt gilt ein absolutes Beschäftigungsverbot. Die Schutzfristen nach einer Fehlgeburt gelten seit Juni 2025.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kinderzuschlag",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist der Kinderzuschlag?",
+        "art": "balken",
+        "titel": "Kindergeld und Kinderzuschlag 2025 in Zahlen",
+        "untertitel": "Kinder mit Leistungen der Familienkasse, in Millionen",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Bundesagentur für Arbeit, Familienkasse (Pressemitteilung 4/2026)",
+          "url": "https://www.arbeitsagentur.de/en/press/2026-04-focus-on-families-the-family-benefits-offices-balance-sheet-for-2025",
+          "stand": "21.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "2025",
+            "label": "2025",
+            "werte": [
+              {
+                "label": "Kinder mit Kindergeld",
+                "wert": 17.57
+              },
+              {
+                "label": "Kinder mit Kinderzuschlag",
+                "wert": 1.45
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Familienkasse zahlte 2025 rund 55,3 Milliarden Euro Kindergeld und 3,3 Milliarden Euro Kinderzuschlag aus.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Höhe des Kinderzuschlags 2026",
+        "art": "saeulen",
+        "titel": "Höchstbetrag des Kinderzuschlags je Kind und Monat",
+        "untertitel": "Der Zuschlag hängt vom Einkommen ab; das Diagramm zeigt den Höchstwert",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesagentur für Arbeit (Meldung vom 08.01.2025 und Kinderzuschlag-Seite 2026)",
+          "url": "https://www.arbeitsagentur.de/news/kindergeld-kinderzuschlag-2025",
+          "stand": "Januar 2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Höchstbetrag",
+            "werte": [
+              {
+                "label": "2024",
+                "wert": 292
+              },
+              {
+                "label": "2025",
+                "wert": 297
+              },
+              {
+                "label": "2026",
+                "wert": 297
+              }
+            ]
+          }
+        ],
+        "hinweis": "2026 bleibt der Höchstbetrag bei 297 Euro; dazu kommen 259 Euro Kindergeld je Kind.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "wohngeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wer hat Anspruch auf Wohngeld 2026?",
+        "art": "saeulen",
+        "titel": "Haushalte mit Wohngeld am Jahresende",
+        "untertitel": "Seit dem Wohngeld-Plus-Gesetz 2023 fast doppelt so viele Haushalte",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Wohngeldstatistik (Pressemitteilung 373/2024 und Meldung vom 24.04.2026)",
+          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Wohngeld/aktuell-wohngeld.html",
+          "stand": "24.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Wohngeldhaushalte",
+            "werte": [
+              {
+                "label": "Ende 2022",
+                "wert": 0.65
+              },
+              {
+                "label": "Ende 2023",
+                "wert": 1.2
+              },
+              {
+                "label": "Ende 2024",
+                "wert": 1.24
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ende 2024 bezogen rund 1,24 Millionen Haushalte Wohngeld, etwa 3 Prozent aller Hauptwohnsitzhaushalte. Bund und Länder gaben dafür 4,7 Milliarden Euro aus.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie hoch ist das Wohngeld 2026?",
+        "art": "saeulen",
+        "titel": "Durchschnittlicher Wohngeldanspruch im Monat",
+        "untertitel": "Reine Wohngeldhaushalte am Jahresende",
+        "einheit": "€",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Wohngeldstatistik",
+          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Wohngeld/aktuell-wohngeld.html",
+          "stand": "24.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Wohngeldanspruch",
+            "werte": [
+              {
+                "label": "2022",
+                "wert": 191
+              },
+              {
+                "label": "2023",
+                "wert": 297
+              },
+              {
+                "label": "2024",
+                "wert": 287
+              }
+            ]
+          }
+        ],
+        "hinweis": "Haushalte, in denen nur ein Teil der Mitglieder Wohngeld erhält, bekamen Ende 2024 im Schnitt 240 Euro.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "erbschaftsteuer",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Freibeträge 2026 – wer erhält wie viel?",
+        "art": "balken",
+        "titel": "Persönliche Freibeträge nach § 16 ErbStG",
+        "untertitel": "Bis zu diesem Wert bleibt ein Erwerb je Person steuerfrei",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 16 Erbschaftsteuer- und Schenkungsteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/erbstg_1974/__16.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "freibetraege",
+            "label": "Freibeträge",
+            "werte": [
+              {
+                "label": "Ehegatte, eingetragener Lebenspartner",
+                "wert": 500000
+              },
+              {
+                "label": "Kinder, Stiefkinder, Kinder verstorbener Kinder",
+                "wert": 400000
+              },
+              {
+                "label": "Enkel",
+                "wert": 200000
+              },
+              {
+                "label": "Eltern und Großeltern beim Erbfall (Steuerklasse I)",
+                "wert": 100000
+              },
+              {
+                "label": "Geschwister, Nichten, Neffen, Schwiegerkinder (Steuerklasse II)",
+                "wert": 20000
+              },
+              {
+                "label": "Alle übrigen, etwa Freunde (Steuerklasse III)",
+                "wert": 20000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Freibeträge gelten je Erwerber und können alle zehn Jahre neu genutzt werden.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie wird die Erbschaftsteuer berechnet?",
+        "art": "torte",
+        "titel": "Was 2025 vererbt und verschenkt wurde",
+        "untertitel": "Steuerlich berücksichtigtes Vermögen nach Art, insgesamt 150,5 Milliarden Euro",
+        "einheit": "Mrd. €",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pressemitteilung 306/2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/08/PD26_306_736.html",
+          "stand": "26.08.2026"
+        },
+        "reihen": [
+          {
+            "key": "2025",
+            "label": "2025",
+            "werte": [
+              {
+                "label": "Grundvermögen",
+                "wert": 51.6
+              },
+              {
+                "label": "Übriges Vermögen (Geld, Wertpapiere)",
+                "wert": 45.3
+              },
+              {
+                "label": "Betriebsvermögen",
+                "wert": 25.6
+              },
+              {
+                "label": "Land- und Forstwirtschaft",
+                "wert": 1.8
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Finanzämter setzten 2025 insgesamt 21,4 Milliarden Euro Erbschaft- und Schenkungsteuer fest: 13,3 Milliarden auf Erbschaften, 8,1 Milliarden auf Schenkungen. Ein Teil des Vermögens entfällt auf weitere, hier nicht ausgewiesene Positionen.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "ehegattensplitting",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Steuerklassenwahl und praktische Umsetzung",
+        "art": "torte",
+        "titel": "Welche Steuerklassen Ehepaare wählen",
+        "untertitel": "Zusammenveranlagte Paare mit ausschließlich Arbeitnehmereinkünften, Veranlagungsjahr 2020",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pressemitteilung 287/2024 (Lohn- und Einkommensteuerstatistik 2020)",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/07/PD24_287_73.html",
+          "stand": "26.07.2024"
+        },
+        "reihen": [
+          {
+            "key": "2020",
+            "label": "2020",
+            "werte": [
+              {
+                "label": "Kombination III und V",
+                "wert": 39
+              },
+              {
+                "label": "Beide in Steuerklasse IV",
+                "wert": 36
+              },
+              {
+                "label": "Nur ein Partner verdient (Steuerklasse III)",
+                "wert": 25
+              }
+            ]
+          }
+        ],
+        "hinweis": "Von 5,3 Millionen Paaren wählten 2,08 Millionen die Kombination III/V, 1,91 Millionen IV/IV, bei 1,33 Millionen verdiente nur ein Partner. In Steuerklasse V standen achtmal so viele Frauen wie Männer. Insgesamt gab es im Veranlagungsjahr 2020 rund 13,5 Millionen Zusammenveranlagungen (Antwort der Bundesregierung, Drucksache 21/848).",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]
