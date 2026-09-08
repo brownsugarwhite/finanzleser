@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { getFadenOptionen } from "@/lib/faden/optionen";
+import { heuteBerlin } from "@/lib/faden/spiele";
 import {
   getAllPosts,
   getAllRechner,
@@ -8,6 +10,7 @@ import {
   getAllAnbieter,
   getAllDokumente,
   getAllGlossar,
+  getAllSpiele,
   getNavItems,
 } from "@/lib/wordpress";
 import { SITE_URL } from "@/lib/seo";
@@ -46,6 +49,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   // Glossar nur mit Faden-Schalter (Stufe 1): ohne Schalter gibt es die Routen nicht.
   const glossar = FADEN_AKTIV ? await safe(getAllGlossar, []) : [];
+  const fadenOptionen = FADEN_AKTIV ? await safe(getFadenOptionen, null) : null;
+  const spiele = FADEN_AKTIV ? await safe(getAllSpiele, []) : [];
 
   // NIE eine Rumpf-Sitemap ausliefern: Kommt eine Kern-Abfrage trotz Retries leer
   // zurück (WP-Überlast), soll die Regeneration FEHLSCHLAGEN — Next liefert dann die
@@ -123,6 +128,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? [
         { url: `${SITE_URL}/glossar`, changeFrequency: "weekly" as const, priority: 0.6 },
         ...glossar.map((g) => ({ url: `${SITE_URL}${buildGlossarUrl(g.slug)}`, changeFrequency: "yearly" as const, priority: 0.4 })),
+        // Kassensturz, Lebenslagen, Finanzwort (nur schon erschienene Tage); /plus ist noindex und bleibt draußen.
+        ...(fadenOptionen?.kassensturz ? [{ url: `${SITE_URL}/kassensturz`, changeFrequency: "monthly" as const, priority: 0.6 }] : []),
+        ...(fadenOptionen?.lebensereignisse.length ? [{ url: `${SITE_URL}/lebenslagen`, changeFrequency: "monthly" as const, priority: 0.5 }, ...fadenOptionen.lebensereignisse.map((e) => ({ url: `${SITE_URL}/lebenslagen/${e.key}`, changeFrequency: "monthly" as const, priority: 0.5 }))] : []),
+        ...spiele.filter((s) => s.typ === "finanzwort" && s.status !== "entwurf" && s.datum && s.datum <= heuteBerlin()).map((s) => ({ url: `${SITE_URL}/spiele/${s.slug}`, changeFrequency: "yearly" as const, priority: 0.3 })),
       ]
     : [];
 

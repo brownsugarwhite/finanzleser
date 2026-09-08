@@ -21,6 +21,7 @@ import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
 import DokumenteEmbed from "@/components/dokumente/DokumenteEmbed";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
+import KastenFuss from "./KastenFuss";
 
 type Embed = Extract<Teil, { art: "embed" }>;
 
@@ -126,7 +127,7 @@ export default async function WerkzeugKarte({
       <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
       {!ohneTitel && <h3>{titel}</h3>}
       <div className="kasten__koerper article-tool-embed article-finanztool">{koerper}</div>
-      {!ohneTitel && <div className="kasten__fuss"><a className="textlink textlink--still" href={werkzeugUrl(teil.typ, slugs[0])}>Eigene Seite öffnen</a></div>}
+      {!ohneTitel && <KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite />}
     </div>
   );
 }

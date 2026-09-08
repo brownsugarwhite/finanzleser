@@ -7,6 +7,7 @@
  * Das Inhaltsverzeichnis liest die Abschnitte des lebenden Kapitels aus dem DOM
  * (`.abschnitt[data-toc-titel]`), der aktive Abschnitt kommt per IntersectionObserver.
  */
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
@@ -29,6 +30,15 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
   const { verlauf, kapitelNr, kapitelUmschalten } = useFaden();
   const pathname = usePathname();
   const { titel, toc, aktiv, vorhanden } = useAbschnittAktiv(pathname);
+  // Neuer Verlaufseintrag leuchtet kurz (Prototyp 05-js-neu.html listeAktualisieren).
+  const vorherigeZahl = useRef(verlauf.length);
+  useEffect(() => {
+    if (verlauf.length > vorherigeZahl.current) {
+      const li = document.querySelectorAll<HTMLElement>("#kapitelListe > li")[verlauf.length - 1];
+      if (li) { li.classList.add("neu"); setTimeout(() => li.classList.remove("neu"), 1600); }
+    }
+    vorherigeZahl.current = verlauf.length;
+  }, [verlauf.length]);
   const live = vorhanden ? { titel, toc } : null;
 
   return (

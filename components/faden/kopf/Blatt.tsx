@@ -6,6 +6,7 @@
  *                wie das alte Megamenü) + Werkzeuge zum Thema
  *   Finanztools: Reiter Rechner · Vergleiche · Checklisten · Liste mit Filter
  *   Service:     Anbieter (A–Z, Suche) · Dokumente · Glossar (M4) · Finconext
+ *   Plus:        Was Plus enthält · Anmelden oder sichern (Stufe 3) · Aktenkoffer in diesem Browser
  * Die ersten drei Beiträge je Thema kommen aus dem Preload des Layouts, „Alle“ und die
  * Werkzeuglisten laden lazy über die bestehenden, CDN-gecachten API-Routen.
  * Jeder Eintrag ist ein echter Link; Klicks laufen über den Faden (Kapitel anhängen).
@@ -20,6 +21,8 @@ import MegaPostContent from "@/components/ui/MegaPostContent";
 import { buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl, buildAnbieterUrl, buildPostUrl } from "@/lib/urls";
 import { splitAnbieterTitle } from "@/lib/anbieter-utils";
 import { useFaden, type BlattZustand } from "@/components/faden/FadenProvider";
+import { levelZu } from "@/lib/faden/optionen";
+import { WAPPEN } from "@/lib/faden/wappen";
 import Nachschlag from "@/components/faden/glossar/Nachschlag";
 import type { Post } from "@/lib/types";
 
@@ -55,6 +58,7 @@ export default function Blatt({ nav, preload }: { nav: NavItem[]; preload: Megam
         {blatt.key === "ratgeber" && <BlattRatgeber nav={nav} preload={preload} z={blatt} oeffnen={blattOeffnen} />}
         {blatt.key === "finanztools" && <BlattFinanztools z={blatt} oeffnen={blattOeffnen} />}
         {blatt.key === "service" && <BlattService z={blatt} oeffnen={blattOeffnen} />}
+        {blatt.key === "plus" && <BlattPlus />}
       </div>
     </div>
   );
@@ -229,6 +233,45 @@ function BlattService({ z, oeffnen }: { z: BlattZustand; oeffnen: (k: BlattZusta
           <a className="btn btn--primary btn--klein" href="https://www.finconext.de/" target="_blank" rel="noopener noreferrer" data-faden-aus="">finconext.de öffnen ↗</a>
         </div>
       )}
+    </>
+  );
+}
+
+/** Plus-Blatt ohne Anmeldung (Port aus dem Prototyp plusBlatt(), Zweig „nicht angemeldet“): Punkte, Serie, Wappen und Koffer aus diesem Browser. */
+function BlattPlus() {
+  const { koffer, punkte, serie, wappen, level, toast, navigieren } = useFaden();
+  const [mail, setMail] = useState("");
+  const { aktuell } = levelZu(punkte, level);
+  const geh = (href: string) => (e: React.MouseEvent) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) { e.preventDefault(); navigieren(href); } };
+  const spaeter = (e: React.SyntheticEvent) => { e.preventDefault(); toast("Anmelden und Sichern kommen mit Finanzleser Plus (Stufe 3). Bis dahin bleibt alles in diesem Browser."); };
+  return (
+    <>
+      <span className="gruss">Finanzleser Plus · kostenlos, ohne Passwort · Level „{aktuell.name}“ · {punkte} Punkte</span>
+      <div className="blatt__spalte">
+        <span className="kicker">Was Plus enthält</span>
+        <ul className="liste-plus"><li>· Aktenkoffer auf allen Geräten</li><li>· Wächter per E-Mail oder WhatsApp</li><li>· Wochenbrief mit Themenwahl</li><li>· Finanzwort-Serie, Punkte und Belohnungen</li></ul>
+        <Link className="textlink" href="/plus" onClick={geh("/plus")}>Mein Bereich öffnen</Link>
+      </div>
+      <div className="blatt__spalte">
+        <span className="kicker">Anmelden oder sichern</span>
+        <form className="sicherung" onSubmit={spaeter}>
+          <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail" value={mail} onChange={(e) => setMail(e.target.value)} />
+          <div className="reihe"><button className="btn btn--primary btn--klein" type="submit">Link zum Anmelden schicken</button><button type="button" className="btn btn--klein" onClick={spaeter}>Mit Passkey</button></div>
+          <p className="quelle">Eine E-Mail-Adresse genügt. Ihre Daten liegen getrennt vom Redaktionssystem, in der EU.</p>
+        </form>
+      </div>
+      <div className="blatt__spalte">
+        <span className="kicker">Ihr Aktenkoffer in diesem Browser{koffer.length ? ` · ${koffer.length}` : ""}</span>
+        {koffer.length ? koffer.slice(0, 5).map((t) => <div key={t} className="beleg"><b>{t}</b><small>ungesichert</small></div>) : <span className="hinweis">Noch leer. Jeder Kasten und jede Kette hat „In den Aktenkoffer“.</span>}
+        <Link className="textlink textlink--still" href="/plus/aktenkoffer" onClick={geh("/plus/aktenkoffer")}>Aktenkoffer öffnen</Link>
+      </div>
+      <div className="blatt__wege">
+        <span className="punkte">{punkte} Punkte</span>
+        <span className="hinweis">· Finanzwort-Serie {serie} {serie === 1 ? "Tag" : "Tage"} · {wappen.length} von {WAPPEN.length} Wappen</span>
+        <Link className="chip" href="/plus" onClick={geh("/plus")}>Mein Bereich</Link>
+        <Link className="chip chip--still" href="/plus/waechter" onClick={geh("/plus/waechter")}>Wächter</Link>
+        <Link className="chip chip--still" href="/kassensturz" onClick={geh("/kassensturz")}>Kassensturz</Link>
+      </div>
     </>
   );
 }

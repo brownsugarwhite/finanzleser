@@ -91,7 +91,9 @@ export default async function RootLayout({
     getSiteSettings(),
     getMegamenuPreload().catch(() => ({})),
     // Level-Stufen für das Punktekonto; nur im Faden (Produktion ohne Schalter fragt nichts Neues ab).
-    FADEN_AKTIV ? getFadenOptionen() : Promise.resolve(null),
+    // Fangnetz erlaubt (CLAUDE.md, Falle 2, Ausnahme): reine Verbesserung, keine Existenz-Entscheidung —
+    // ohne Antwort gelten die Standardstufen, und kein 404/Canonical hängt daran.
+    FADEN_AKTIV ? getFadenOptionen().catch(() => null) : Promise.resolve(null),
   ]);
 
   return (

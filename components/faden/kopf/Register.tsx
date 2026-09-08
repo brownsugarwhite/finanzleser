@@ -10,6 +10,7 @@ import gsap from "@/lib/gsapConfig";
 import { useNavPill } from "@/lib/hooks/useNavPill";
 import Spark from "@/components/ui/Spark";
 import { useFaden, type BlattZustand } from "@/components/faden/FadenProvider";
+import Pfad from "./Pfad";
 
 const EINTRAEGE: { key: BlattZustand["key"]; label: string; href: string }[] = [
   { key: "ratgeber", label: "Ratgeber", href: "/" },
@@ -19,7 +20,7 @@ const EINTRAEGE: { key: BlattZustand["key"]; label: string; href: string }[] = [
 ];
 
 export default function Register() {
-  const { blatt, blattOeffnen, blattZu, toast, punkte } = useFaden();
+  const { blatt, blattOeffnen, blattZu, punkte } = useFaden();
   const blattRef = useRef(blatt); blattRef.current = blatt;
   const pill = useNavPill({
     items: EINTRAEGE.map((e) => ({ label: e.label, href: e.href })),
@@ -27,7 +28,6 @@ export default function Register() {
     onActivate: (label) => {
       const e = EINTRAEGE.find((x) => x.label === label);
       if (!e) return;
-      if (e.key === "plus") { toast("Finanzleser Plus kommt mit Stufe 3: Aktenkoffer, Wächter, Wochenbrief."); return; }
       // Von außen geöffnet (Kategorie-Route): Rubrik/Thema nicht zurücksetzen.
       if (blattRef.current?.key === e.key) return;
       blattOeffnen(e.key);
@@ -73,6 +73,7 @@ export default function Register() {
         ))}
         <Spark />
       </div>
+      <Pfad />
     </nav>
   );
 }

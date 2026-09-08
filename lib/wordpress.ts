@@ -2181,7 +2181,7 @@ async function _fetchAllSpiele(): Promise<Spiel[]> {
           datum: r.datum && /^\d{4}-\d{2}-\d{2}$/.test(r.datum) ? r.datum : null,
         };
       });
-    return requireNonEmpty("allSpiele", spiele);
+    return spiele; // leer ist erlaubt (noch keine Spiele im CMS) — nur Verbindungsfehler werfen
   } catch (error) {
     console.error("Error fetching Spiele:", error);
     throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand

@@ -9,8 +9,10 @@ import { buildPostUrl, buildGlossarUrl } from "@/lib/urls";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { FADEN_AKTIV } from "./flag";
 import { getWerkzeugIndex } from "./werkzeugIndex";
+import { getFadenOptionen } from "./optionen";
+import { spielAm } from "./spiele";
 
-export type IndexTyp = "ratgeber" | "rubrik" | "thema" | "rechner" | "vergleich" | "checkliste" | "dokumente" | "begriff";
+export type IndexTyp = "ratgeber" | "rubrik" | "thema" | "rechner" | "vergleich" | "checkliste" | "dokumente" | "begriff" | "seite" | "spiel";
 export interface IndexEintrag { typ: IndexTyp; titel: string; unter?: string; href: string }
 
 export const buildFadenIndex = cache(async (): Promise<IndexEintrag[]> => {
@@ -27,6 +29,16 @@ export const buildFadenIndex = cache(async (): Promise<IndexEintrag[]> => {
   for (const [key, v] of werkzeuge) out.push({ typ: key.split(":")[0] as IndexTyp, titel: v.titel, href: v.href });
   if (FADEN_AKTIV) {
     for (const g of await getAllGlossar()) out.push({ typ: "begriff", titel: decodeHtmlEntities(g.title), unter: g.rubrik || undefined, href: buildGlossarUrl(g.slug) });
+    // Feste Ziele wie im Prototyp-Index (Kassensturz, Mein Bereich, Lebenslagen, Finanzwort des Tages).
+    const { lebensereignisse, kassensturz } = await getFadenOptionen();
+    if (kassensturz) out.push({ typ: "seite", titel: kassensturz.titel || "Finanz-Kassensturz", unter: kassensturz.untertitel || "3 Minuten, keine Anmeldung", href: "/kassensturz" });
+    out.push({ typ: "seite", titel: "Mein Bereich", unter: "Finanzleser Plus · Punkte, Wappen, Aktenkoffer, Wächter", href: "/plus" });
+    out.push({ typ: "seite", titel: "Aktenkoffer", unter: "Was Sie abgelegt haben", href: "/plus/aktenkoffer" });
+    out.push({ typ: "seite", titel: "Wächter", unter: "Wecker auf Zahlen und Fristen", href: "/plus/waechter" });
+    out.push({ typ: "seite", titel: "Lebenslagen", unter: lebensereignisse.map((e) => e.titel).join(" · "), href: "/lebenslagen" });
+    for (const e of lebensereignisse) out.push({ typ: "seite", titel: e.titel, unter: "Lebenslage · " + e.phasen.map((p) => p.titel).join(" · "), href: `/lebenslagen/${e.key}` });
+    const fw = await spielAm("finanzwort");
+    if (fw) out.push({ typ: "spiel", titel: "Finanzwort des Tages", unter: "Spiel · sechs Versuche", href: `/spiele/${fw.slug}` });
   }
   return out;
 });

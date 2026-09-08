@@ -20,7 +20,7 @@ export default function Menue({ offen, onZu, onRand }: { offen: boolean; onZu: (
       <div className="klein">
         <button type="button" onClick={() => { onZu(); onRand("links"); }}><span>☰</span> Verlauf und Inhalt</button>
         <button type="button" onClick={() => { onZu(); onRand("rechts"); }}><span>✦</span> Glossar der Sitzung</button>
-        <button type="button" onClick={() => { onZu(); toast("Finanzleser Plus kommt mit Stufe 3."); }}><span>●</span> Anmelden · Finanzleser Plus</button>
+        <button type="button" onClick={() => { onZu(); window.scrollTo({ top: 0 }); blattOeffnen("plus"); }}><span>●</span> Finanzleser Plus · Mein Bereich</button>
       </div>
     </div>
   );

@@ -8,12 +8,14 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { flugZu, reduzierteBewegung } from "@/lib/faden/belohnung";
 import { useFaden } from "./FadenProvider";
+import { zuAbschnitt } from "./RandLinks";
 import FieldOutline from "@/components/ui/FieldOutline";
 import type { IndexEintrag } from "@/lib/faden/index";
 
-const TYP_LABEL: Record<IndexEintrag["typ"], string> = { ratgeber: "Ratgeber", rubrik: "Rubrik", thema: "Thema", rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument", begriff: "Begriff" };
-const RANG: Record<IndexEintrag["typ"], number> = { ratgeber: 0, rubrik: 1, thema: 1, rechner: 2, vergleich: 2, checkliste: 2, dokumente: 2, begriff: 3 };
+const TYP_LABEL: Record<IndexEintrag["typ"], string> = { ratgeber: "Ratgeber", rubrik: "Rubrik", thema: "Thema", rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument", begriff: "Begriff", seite: "Seite", spiel: "Spiel" };
+const RANG: Record<IndexEintrag["typ"], number> = { ratgeber: 0, rubrik: 1, thema: 1, rechner: 2, vergleich: 2, checkliste: 2, dokumente: 2, begriff: 3, seite: 1, spiel: 2 };
 let indexCache: IndexEintrag[] | null = null;
 let indexLaedt: Promise<IndexEintrag[]> | null = null;
 
@@ -44,7 +46,8 @@ async function holeIndex(): Promise<IndexEintrag[]> {
   return indexLaedt;
 }
 
-interface EingabeChip { text: string; frage?: string; href?: string }
+/** Chip unter der Eingabe: Frage an Leo, Adresse, Anker im Kapitel oder ein Ereignis (etwa die Kurzfassung aufklappen). */
+interface EingabeChip { text: string; frage?: string; href?: string; anker?: string; ereignis?: string }
 
 export default function Eingabe() {
   const { navigieren, fragen, leo } = useFaden();
@@ -55,7 +58,7 @@ export default function Eingabe() {
   useEffect(() => {
     let liste: EingabeChip[] = [];
     try { const sc = document.querySelector("#kapitel-live script[data-eingabe-chips]"); if (sc) liste = JSON.parse(sc.textContent || "[]"); } catch { /* keine Chips */ }
-    setChips(Array.isArray(liste) ? liste.slice(0, 5) : []);
+    setChips(Array.isArray(liste) ? liste.slice(0, 6) : []);
     const ende = document.getElementById("strom-ende");
     if (!ende || !("IntersectionObserver" in window)) { setEndeImBild(true); return; }
     const io = new IntersectionObserver(([e]) => setEndeImBild(e.isIntersecting), { rootMargin: "0px 0px -60px 0px" });
@@ -88,7 +91,25 @@ export default function Eingabe() {
     return () => document.removeEventListener("click", klick);
   }, [zeigeLeiste]);
 
-  const leoFragen = (q: string) => { const t = q.trim(); if (!t) return; setWert(""); setOffen(false); setAktiv(-1); fragen(t); };
+  const leoFragen = (q: string) => {
+    const t = q.trim(); if (!t) return;
+    // „Frage steigt auf“ (Prototyp 05-js-neu.html): die Frage fliegt von der Zeile zur Blase im Faden.
+    const inp = document.getElementById("frage");
+    const r = inp?.getBoundingClientRect();
+    const start = inp && r && r.top > 0 && r.bottom < window.innerHeight && !reduzierteBewegung() ? inp : null;
+    setWert(""); setOffen(false); setAktiv(-1); fragen(t);
+    if (!start) return;
+    const t0 = performance.now();
+    const suche = () => {
+      const blasen = document.querySelectorAll<HTMLElement>("#leo-strom .wort--frage");
+      const b = blasen[blasen.length - 1];
+      if (b && (b.textContent || "").includes(t) && !b.dataset.geflogen) {
+        b.dataset.geflogen = "1"; b.style.opacity = "0";
+        flugZu(start, b, t, "flug-frage").then(() => { b.style.transition = "opacity .25s"; b.style.opacity = "1"; });
+      } else if (performance.now() - t0 < 900) requestAnimationFrame(suche);
+    };
+    requestAnimationFrame(suche);
+  };
   const waehlen = (e: IndexEintrag) => { setWert(""); setOffen(false); setAktiv(-1); navigieren(e.href); };
   const senden = (ev: React.FormEvent) => {
     ev.preventDefault();
@@ -129,7 +150,7 @@ export default function Eingabe() {
       </div>
       {chips.length > 0 && (
         <div className="chips" id="eingabeChips">
-          {chips.map((c) => <button key={c.text} type="button" className="chip" onClick={() => { if (c.frage) fragen(c.frage); else if (c.href) navigieren(c.href); }}>{c.text}</button>)}
+          {chips.map((c) => <button key={c.text} type="button" className="chip" onClick={() => { if (c.frage) fragen(c.frage); else if (c.anker) zuAbschnitt(c.anker); else if (c.ereignis) document.dispatchEvent(new Event(c.ereignis)); else if (c.href) navigieren(c.href); }}>{c.text}</button>)}
         </div>
       )}
     </div>

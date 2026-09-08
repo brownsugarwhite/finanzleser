@@ -14,8 +14,8 @@ import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
 import { usePathname, useRouter } from "next/navigation";
-import { LEVEL_STANDARD, type Level } from "@/lib/faden/optionen";
-import { abzeichen, konfetti, nochmal, reduzierteBewegung } from "@/lib/faden/belohnung";
+import { LEVEL_STANDARD, levelZu, type Level } from "@/lib/faden/optionen";
+import { abzeichen, flugZu, IKON_DOKUMENT, konfetti, nochmal, reduzierteBewegung } from "@/lib/faden/belohnung";
 
 export interface Schnappschuss {
   id: string;
@@ -30,16 +30,24 @@ export interface Schnappschuss {
 
 export interface BlattZustand { key: "ratgeber" | "finanztools" | "service" | "plus"; a?: string; b?: string }
 
+/** Gemerkte Lesestelle vor einem Sprung ans Ende des Fadens (Kapitel + Versatz, damit der Rücksprung auch nach dem Einfrieren stimmt). */
+export interface Lesestelle { y: number; kapitelId: string | null; offset: number; titel: string }
+
 interface FadenContextWert {
   blatt: BlattZustand | null;
   blattOeffnen: (key: BlattZustand["key"], a?: string, b?: string) => void;
   blattZu: () => void;
   verlauf: Schnappschuss[];
   kapitelNr: number;
-  navigieren: (href: string) => void;
+  /** Interne Navigation „anhängen statt ersetzen“; `wandert` lässt das neue Kapitel kurz einschweben (Kapitel ans Ende geholt). */
+  navigieren: (href: string, opts?: { wandert?: boolean }) => void;
   kapitelUmschalten: (id: string) => void;
   koffer: string[];
-  inDenKoffer: (titel: string) => void;
+  /** Eintrag ablegen; mit `von` fliegt ein Beleg vom Knopf zum Koffer im Lesezeichen. */
+  inDenKoffer: (titel: string, von?: Element | null) => void;
+  kofferEntfernen: (titel: string) => void;
+  lesestelle: Lesestelle | null;
+  lesestelleZurueck: () => void;
   toast: (text: string) => void;
   /** Glossar der Sitzung: angetippte Begriffe, neueste zuerst; einer aufgeklappt. */
   glossarSitzung: string[];
@@ -150,7 +158,12 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   const [toastText, setToastText] = useState("");
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollNachNavigation = useRef(false);
+  const wandertNachNavigation = useRef(false);
   const letzterPfad = useRef(pathname);
+  const [lesestelle, setLesestelleState] = useState<Lesestelle | null>(null);
+  const lesestelleRef = useRef<Lesestelle | null>(null);
+  const lesestelleWeit = useRef(false);
+  const setzeLesestelle = useCallback((l: Lesestelle | null) => { lesestelleRef.current = l; lesestelleWeit.current = false; setLesestelleState(l); }, []);
 
   // Verlauf-Metadaten und Koffer aus der Sitzung holen (Schnappschuss-HTML überlebt keinen Reload).
   useEffect(() => {
@@ -185,8 +198,56 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     toastTimer.current = setTimeout(() => setToastText(""), 2600);
   }, []);
 
-  const navigieren = useCallback((href: string) => {
+  // Lesestelle merken (Port aus dem Prototyp sprungVorbereiten/lesestelleMerken): das Kapitel unter
+  // der aktuellen Scrollposition und der Versatz darin; das lebende Kapitel bekommt gleich die Alt-ID.
+  const lesestelleMerken = useCallback((neueAltId?: string) => {
+    const strom = document.getElementById("strom");
+    const live = document.getElementById("kapitel-live");
+    if (!strom || !live) return;
+    const ende = document.getElementById("strom-ende");
+    if (ende && ende.getBoundingClientRect().top < window.innerHeight + 40) return; // steht schon am Ende: der Faden springt nicht
+    const y = window.scrollY;
+    const kapitel = Array.from(strom.querySelectorAll<HTMLElement>(".kapitel"));
+    let k: HTMLElement | null = null;
+    for (let i = kapitel.length - 1; i >= 0; i--) { if (kapitel[i].getBoundingClientRect().top + y <= y + 40) { k = kapitel[i]; break; } }
+    const titel = (k?.dataset.titel || k?.querySelector("h2")?.textContent || "").trim();
+    const kapitelId = k ? (k.id === "kapitel-live" && neueAltId ? `kapitel-alt-${neueAltId}` : k.id) : null;
+    setzeLesestelle({ y, kapitelId, offset: k ? y - (k.getBoundingClientRect().top + y) : 0, titel: titel === "Heute" ? "" : titel });
+    // Ist der Faden nach 900 ms gar nicht gesprungen, braucht es keinen Rückweg.
+    setTimeout(() => { if (lesestelleRef.current && Math.abs(window.scrollY - y) < 320) setzeLesestelle(null); }, 900);
+  }, [setzeLesestelle]);
+
+  const lesestelleZurueck = useCallback(() => {
+    const l = lesestelleRef.current;
+    if (!l) return;
+    const reduziert = reduzierteBewegung();
+    const k = l.kapitelId ? document.getElementById(l.kapitelId) : null;
+    const hin = () => { const n = l.kapitelId ? document.getElementById(l.kapitelId) : null; const ziel = n ? n.getBoundingClientRect().top + window.scrollY + l.offset : l.y; window.scrollTo({ top: Math.max(0, ziel), behavior: reduziert ? "auto" : "smooth" }); };
+    if (k && k.classList.contains("zu")) {
+      const id = k.id.replace(/^kapitel-alt-/, "");
+      setVerlauf((alt) => alt.map((x) => (x.id === id ? { ...x, offen: true } : x)));
+      setTimeout(hin, 60); // erst aufklappen, dann ansteuern
+    } else hin();
+    setzeLesestelle(null);
+  }, [setzeLesestelle]);
+
+  // Der Knopf verschwindet erst, wenn man einmal weit weg war (> 300 px) und wieder in die Nähe kommt.
+  useEffect(() => {
+    const h = () => {
+      const l = lesestelleRef.current;
+      if (!l) return;
+      const d = Math.abs(window.scrollY - l.y);
+      if (d > 300) lesestelleWeit.current = true;
+      else if (lesestelleWeit.current && d < 120) setzeLesestelle(null);
+    };
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
+  }, [setzeLesestelle]);
+
+  const navigieren = useCallback((href: string, opts?: { wandert?: boolean }) => {
     const s = schnappschuss();
+    lesestelleMerken(s?.id);
+    wandertNachNavigation.current = !!opts?.wandert;
     const zielPfad = href.split(/[?#]/)[0];
     setVerlauf((alt) => {
       let liste = alt.filter((k) => k.url.split(/[?#]/)[0] !== zielPfad); // Ziel lebt gleich wieder
@@ -199,7 +260,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     setLeoAb(chatRef.current.messages.length);
     scrollNachNavigation.current = true;
     router.push(href, { scroll: false });
-  }, [router]);
+  }, [router, lesestelleMerken]);
 
   // Interne Links im Faden abfangen: Kapitel einfrieren, dann echte Next-Navigation.
   useEffect(() => {
@@ -228,6 +289,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     letzterPfad.current = pathname;
     if (!scrollNachNavigation.current) return; // Zurück-Taste u. ä.: Browser-Verhalten
     scrollNachNavigation.current = false;
+    if (wandertNachNavigation.current) { wandertNachNavigation.current = false; nochmal(document.getElementById("kapitel-live"), "wandert"); }
     const hash = location.hash.slice(1);
     requestAnimationFrame(() => {
       const ziel = hash ? document.getElementById(hash) : null;
@@ -292,8 +354,19 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     } catch { return null; }
   }, []);
   const begriffMerken = useCallback((slug: string, aufklappen?: boolean) => {
+    const vorher = !!document.querySelector(`#glossarRail [data-k="${slug}"]`);
+    const menue = document.querySelector(".bmenu.offen");
     setGlossarSitzung((alt) => (alt[0] === slug ? alt : [slug, ...alt.filter((x) => x !== slug)]));
     if (aufklappen) setGlossarOffen(slug);
+    if (vorher) return;
+    // Glossar-Flug (Prototyp 05-js-neu.html): der Begriff fliegt vom Klickmenü in die Leiste und leuchtet dort kurz.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const e = document.querySelector<HTMLElement>(`#glossarRail [data-k="${slug}"]`);
+      if (!e) return;
+      const rail = document.getElementById("randRechts");
+      const leuchten = () => { e.classList.add("neu"); setTimeout(() => e.classList.remove("neu"), 1400); };
+      if (aufklappen && menue && rail && rail.offsetParent && getComputedStyle(rail).opacity !== "0") flugZu(menue, e, "✦", "flug-begriff").then(leuchten); else leuchten();
+    }));
   }, []);
   const begriffAufklappen = useCallback((slug: string | null) => setGlossarOffen(slug), []);
   const begriffEntfernen = useCallback((slug: string) => {
@@ -327,18 +400,33 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     setVerlauf((alt) => alt.map((k) => (k.id === id ? { ...k, offen: !k.offen } : k)));
   }, []);
 
-  const inDenKoffer = useCallback((titel: string) => {
+  const inDenKoffer = useCallback((titel: string, von?: Element | null) => {
     setKoffer((alt) => {
       const neu = alt.includes(titel) ? alt : [...alt, titel];
       try { localStorage.setItem(KOFFER_KEY, JSON.stringify(neu)); } catch { /* egal */ }
       return neu;
     });
+    // Koffer-Flug (Prototyp 05-js-neu.html kofferFlug): der Beleg fliegt zum Koffer, der blinkt, die Zahl springt.
+    const btn = document.getElementById("kofferBtn");
+    const puls = () => { nochmal(btn, "blinkt"); requestAnimationFrame(() => nochmal(document.getElementById("kofferZahl"), "popt")); };
+    if (von && btn && getComputedStyle(btn).display !== "none") flugZu(von, btn, IKON_DOKUMENT, "flug-koffer", true).then(puls); else puls();
     toast("Im Aktenkoffer: „" + (titel.length > 40 ? titel.slice(0, 38) + "…" : titel) + "“");
   }, [toast]);
 
+  const kofferEntfernen = useCallback((titel: string) => {
+    setKoffer((alt) => {
+      const neu = alt.filter((x) => x !== titel);
+      try { localStorage.setItem(KOFFER_KEY, JSON.stringify(neu)); } catch { /* egal */ }
+      return neu;
+    });
+  }, []);
+
   const belohne = useCallback((p: number, kasten?: HTMLElement | null, opts?: { wappen?: string; text?: string }) => {
     let neuesWappen = false;
+    let neuesLevel: Level | null = null;
     setKonto((alt) => {
+      const vor = levelZu(alt.punkte, level).aktuell, nach = levelZu(alt.punkte + p, level).aktuell;
+      neuesLevel = nach.ab > vor.ab ? nach : null;
       const heute = tag(), gestern = tag(new Date(Date.now() - 86_400_000));
       const serie = alt.letzterTag === heute ? Math.max(1, alt.serie) : alt.letzterTag === gestern ? alt.serie + 1 : 1;
       neuesWappen = !!opts?.wappen && !alt.wappen.includes(opts.wappen);
@@ -356,15 +444,17 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     }
     nochmal(document.querySelector('.register button[data-key="plus"]'), "punkte-puls");
     if (opts?.wappen) setTimeout(() => { if (neuesWappen) toast(`Wappen „${opts.wappen}“ freigeschaltet`); }, 900);
-  }, [toast]);
+    setTimeout(() => { if (neuesLevel) toast(`Neues Level: ${neuesLevel.name} · Belohnung unter Finanzleser Plus`); }, 1800);
+  }, [toast, level]);
 
   const wert = useMemo<FadenContextWert>(() => ({
-    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast,
+    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
     leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
     fragen,
     punkte: konto.punkte, serie: konto.serie, wappen: konto.wappen, level, belohne,
-  }), [blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
+    lesestelle, lesestelleZurueck,
+  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
 
   return (
     <FadenContext.Provider value={wert}>

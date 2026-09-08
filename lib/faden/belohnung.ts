@@ -57,16 +57,20 @@ export function nochmal(el: Element | null, klasse: string): void {
   el.classList.add(klasse);
 }
 
-/** Etwas fliegt von einem Element zu einem Ziel (Koffer-Flug, Glossar-Flug, Frage steigt auf). */
-export function flugZu(von: Element | null, zu: Element | null, text: string, klasse = "flug"): Promise<void> {
+/** Ikon „Dokument“ für den Koffer-Flug (Port aus dem Prototyp-Ikonensatz). */
+export const IKON_DOKUMENT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 12h6M10 16h6"/></svg>';
+
+/** Etwas fliegt von einem Element zu einem Ziel (Koffer-Flug, Glossar-Flug, Frage steigt auf); Port von flugZu() aus 05-js-neu.html. */
+export function flugZu(von: Element | null, zu: Element | null, inhalt: string, klasse = "flug", html = false): Promise<void> {
   return new Promise((fertig) => {
     if (!von || !zu || reduzierteBewegung()) { fertig(); return; }
     const a = von.getBoundingClientRect(), b = zu.getBoundingClientRect();
+    if (!a.width && !a.height) { fertig(); return; }
     const f = document.createElement("div");
     f.className = klasse;
-    f.textContent = text;
+    if (html) f.innerHTML = inhalt; else f.textContent = inhalt; // html nur für eigene, statische SVGs
     Object.assign(f.style, { position: "fixed", left: `${a.left + a.width / 2}px`, top: `${a.top + a.height / 2}px`, transform: "translate(-50%, -50%)", zIndex: "90", pointerEvents: "none" });
-    document.body.appendChild(f);
+    (document.querySelector(".faden-shell") || document.body).appendChild(f); // innerhalb der Hülle, damit die Tokens gelten
     const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
     const anim = f.animate([
       { transform: "translate(-50%, -50%) scale(1)", opacity: 1, offset: 0 },
