@@ -58,10 +58,16 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .begriff:hover, .faden-shell .begriff.offen { color: var(--pink); text-decoration: none; }
 
 /* ---------- Zeitungskopf über dem progressiven Blur ---------- */
-.faden-shell .blur { position: fixed; left: 0; right: 0; top: 0; height: 120px; z-index: 29; pointer-events: none; }
-.faden-shell .blur i { position: absolute; left: 0; right: 0; top: 0; display: block; -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); }
-.faden-shell .blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
-.faden-shell .blur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
+/* 🚨 Klasse heisst `kopfblur`, NICHT `blur` wie im Prototyp: `blur` ist eine
+   Tailwind-Utility (`.blur { filter: blur(8px) }`). Der Filter landete dadurch auf
+   dem Container — und ein Element mit `filter` erzeugt einen eigenen Backdrop-Root,
+   womit das `backdrop-filter` aller Schichten darin wirkungslos wurde. Der
+   progressive Blur war deshalb unsichtbar. Nie eine Tailwind-Utility als eigenen
+   Klassennamen wiederverwenden. */
+.faden-shell .kopfblur { position: fixed; left: 0; right: 0; top: 0; height: 120px; z-index: 29; pointer-events: none; }
+.faden-shell .kopfblur i { position: absolute; left: 0; right: 0; top: 0; display: block; -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); }
+.faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
+.faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
 .faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
 .faden-shell .kopf__innen { padding: 0 0 0 28px; }
 .faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
@@ -89,7 +95,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .nav-pille__koerper { position: absolute; inset: 0; overflow: hidden; background: var(--ink); }
 .faden-shell .nav-lupe { position: absolute; inset: 0; transform: scale(1.1); transform-origin: center; }
 .faden-shell .nav-lupe__reihe { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: space-between; color: #fff; pointer-events: none; transform: translate(0, -50%); }
-.faden-shell .nav-lupe__reihe span { font: 600 16px/1 var(--serif); white-space: nowrap; }
+/* 🚨 Farbe explizit, nicht geerbt: die globale Regel `li, p, span { color: var(--color-text-medium) }` aus dem Alt-CSS schlaegt die Vererbung von .nav-lupe__reihe — die Schrift in der Pille wurde dadurch grau statt weiss. */
+.faden-shell .nav-lupe__reihe span { font: 600 16px/1 var(--serif); white-space: nowrap; color: #fff; }
 .faden-shell .nav-lupe__reihe .punkte-zahl { color: rgba(255,255,255,.82); }
 /* Die Spark-Komponente setzt ihre Farbe als fill-Attribut; CSS schlaegt das Attribut,
    deshalb werden die Funken in der Lupe hier auf Weiss gezogen. */
@@ -601,7 +608,7 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .seo li { border-bottom: 1px solid var(--rule); padding: 6px 0; font-size: 13.5px; }
 .faden-shell .seo li small { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 @media (max-width: 900px) { .faden-shell .seite__innen { grid-template-columns: 1fr; } .faden-shell .seo { position: static; } }
-@media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .blur { display: none !important; } }
+@media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .kopfblur { display: none !important; } }
 
 /* ── Plus-Bereich: Belege, Regeln, Schalter, Koffer, Wächter, Album, Level, Profil (Prototyp 01-css.html:59–61, 178, 197–200, 204–213, 222–225, 350–372, 692–693) ── */
 .faden-shell .blatt .gruss { grid-column: 1 / -1; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }

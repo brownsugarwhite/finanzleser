@@ -20,7 +20,7 @@ export default function Kopf({ nav, preload, onMenue }: { nav: NavItem[]; preloa
   };
   return (
     <>
-      <div className="blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
+      <div className="kopfblur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
       <header className="kopf" id="kopf">
         <div className="kopf__innen">
           <div className="kopf__zeile">
