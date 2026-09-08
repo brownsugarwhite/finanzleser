@@ -429,6 +429,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .eingabe #eingabeChips { opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
 .faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
 
+/* Tabellen-Hülle der alten Seite läuft 20 px über den Rand; in der Faden-Spalte volle Breite und querscrollen. */
+.faden-shell .prose .table-scroll { width: 100%; max-width: 100%; margin-left: 0; margin-right: 0; overflow-x: auto; }
+.faden-shell .prose .table-scroll-inner { min-width: 0; }
+
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
@@ -485,6 +489,8 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
 }
 @media (max-width: 900px) {
+  .faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: 1fr; }
+  .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
   .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
   .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
   .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }

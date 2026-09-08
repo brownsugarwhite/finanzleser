@@ -15,6 +15,7 @@ import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import InhaltAktiv from "./InhaltAktiv";
 import Einschub from "@/components/faden/Einschub";
+import StatistikKarte from "@/components/statistik/StatistikKarte";
 import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
@@ -45,6 +46,7 @@ function AbschnittBlock({ a, i, n, toolData }: { a: Abschnitt; i: number; n: num
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel">{a.titel}</h2>
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
+      {a.statistiken.map((st, j) => <StatistikKarte key={j} st={st} />)}
       {a.fragen.length > 0 && <Weiterlesen fragen={a.fragen} />}
     </section>
   );

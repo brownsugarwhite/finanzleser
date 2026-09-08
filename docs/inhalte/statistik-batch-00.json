@@ -1,0 +1,676 @@
+[
+  {
+    "slug": "kindergeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie hoch ist das Kindergeld 2026?",
+        "art": "saeulen",
+        "titel": "Kindergeld je Kind und Monat",
+        "untertitel": "Entwicklung seit 2021, Betrag für das erste und zweite Kind",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesfinanzministerium (Monatsbericht Januar 2023) und Bundesagentur für Arbeit (Presseinfo 53/2025)",
+          "url": "https://www.arbeitsagentur.de/presse/2025-53-kindergeld-steigt-ab-januar-2026",
+          "stand": "Dezember 2025"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Kindergeld",
+            "werte": [
+              {
+                "label": "2021",
+                "wert": 219
+              },
+              {
+                "label": "2022",
+                "wert": 219
+              },
+              {
+                "label": "2023",
+                "wert": 250
+              },
+              {
+                "label": "2024",
+                "wert": 250
+              },
+              {
+                "label": "2025",
+                "wert": 255
+              },
+              {
+                "label": "2026",
+                "wert": 259
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Anzahl Ihrer Kinder",
+          "min": 1,
+          "max": 5,
+          "schritt": 1,
+          "start": 2,
+          "einheit": "",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "kindergeld",
+            "eingabe": "anzahlKinder",
+            "ausgabe": "kindergeldMonatlich"
+          },
+          "ergebnis": "Ihr Kindergeld im Monat (2026)",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "2021 und 2022 galten 219 € für das erste und zweite Kind, 225 € für das dritte und 250 € ab dem vierten Kind. Seit 2023 zahlt die Familienkasse für jedes Kind denselben Betrag.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer hat Anspruch?",
+        "art": "torte",
+        "titel": "Für 17,6 Millionen Kinder wurde 2024 Kindergeld gezahlt",
+        "untertitel": "Kinder mit Kindergeldbezug nach ihrer Stellung in der Familie",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Statistisches Bundesamt (Daten der Bundesagentur für Arbeit)",
+          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Elterngeld/Tabellen/anzahl-kinder-kindergeld.html",
+          "stand": "26.08.2025"
+        },
+        "reihen": [
+          {
+            "key": "2024",
+            "label": "2024",
+            "werte": [
+              {
+                "label": "Erstes Kind",
+                "wert": 10.42
+              },
+              {
+                "label": "Zweites Kind",
+                "wert": 5.28
+              },
+              {
+                "label": "Drittes Kind",
+                "wert": 1.42
+              },
+              {
+                "label": "Viertes und weitere Kinder",
+                "wert": 0.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Ohne Kinder von Bediensteten des Bundes, der Länder und Gemeinden, für die eigene Familienkassen zuständig sind.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "elterngeld",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wer hat 2026 Anspruch auf Elterngeld?",
+        "art": "saeulen",
+        "titel": "Väteranteil beim Elterngeld",
+        "untertitel": "Anteil der Männer an allen Elterngeldbeziehenden",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Zeitreihe Väteranteil",
+          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Elterngeld/Tabellen/zeitreihe-vaeteranteil.html",
+          "stand": "16.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "jahre",
+            "label": "Väteranteil",
+            "werte": [
+              {
+                "label": "2020",
+                "wert": 24.8
+              },
+              {
+                "label": "2021",
+                "wert": 25.3
+              },
+              {
+                "label": "2022",
+                "wert": 26.1
+              },
+              {
+                "label": "2023",
+                "wert": 26.2
+              },
+              {
+                "label": "2024",
+                "wert": 25.8
+              },
+              {
+                "label": "2025",
+                "wert": 25.9
+              }
+            ]
+          }
+        ],
+        "hinweis": "50 Prozent hieße: Bei jedem Kind beziehen Mutter und Vater Elterngeld. 2025 bezogen 1,19 Millionen Frauen und 417.000 Männer Elterngeld.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie hoch ist das Elterngeld 2026?",
+        "art": "balken",
+        "titel": "Geplante Bezugsdauer 2025",
+        "untertitel": "Durchschnittlich geplante Monate je Elternteil",
+        "einheit": "Monate",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pressemitteilung 136/2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_136_22922.html",
+          "stand": "16.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "2025",
+            "label": "2025",
+            "werte": [
+              {
+                "label": "Mütter",
+                "wert": 14.9
+              },
+              {
+                "label": "Väter",
+                "wert": 3.8
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Ihr Monatsbrutto vor der Geburt",
+          "min": 1000,
+          "max": 5000,
+          "schritt": 100,
+          "start": 3000,
+          "einheit": "€",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "elterngeld",
+            "eingabe": "monatsBrutto",
+            "ausgabe": "basisElterngeld"
+          },
+          "ergebnis": "Ihr Basiselterngeld im Monat (Näherung)",
+          "ergebnisEinheit": "€"
+        },
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Basiselterngeld oder ElterngeldPlus: Welche Variante passt zu Ihnen?",
+        "art": "balken",
+        "titel": "ElterngeldPlus: Wer es 2025 nutzte",
+        "untertitel": "Anteil der Beziehenden mit ElterngeldPlus",
+        "einheit": "%",
+        "quelle": {
+          "name": "Statistisches Bundesamt, Pressemitteilung 136/2026",
+          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_136_22922.html",
+          "stand": "16.04.2026"
+        },
+        "reihen": [
+          {
+            "key": "2025",
+            "label": "2025",
+            "werte": [
+              {
+                "label": "Mütter",
+                "wert": 45.2
+              },
+              {
+                "label": "Väter",
+                "wert": 26.1
+              },
+              {
+                "label": "Alle Beziehenden",
+                "wert": 40.3
+              }
+            ]
+          }
+        ],
+        "hinweis": "2024 lag der Anteil über alle Beziehenden bei 36,7 Prozent; ElterngeldPlus gewinnt seit Jahren an Bedeutung.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "rentenbesteuerung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie viel der Rente 2026 steuerpflichtig ist",
+        "art": "saeulen",
+        "titel": "Besteuerungsanteil nach dem Jahr des Rentenbeginns",
+        "untertitel": "Der Anteil gilt für die gesamte Rentenzeit",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 22 Nr. 1 Satz 3 EStG (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__22.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "beginn",
+            "label": "Rentenbeginn",
+            "werte": [
+              {
+                "label": "2005",
+                "wert": 50
+              },
+              {
+                "label": "2010",
+                "wert": 60
+              },
+              {
+                "label": "2015",
+                "wert": 70
+              },
+              {
+                "label": "2020",
+                "wert": 80
+              },
+              {
+                "label": "2026",
+                "wert": 84
+              },
+              {
+                "label": "2030",
+                "wert": 86
+              },
+              {
+                "label": "2040",
+                "wert": 91
+              },
+              {
+                "label": "2058",
+                "wert": 100
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bis 2020 stieg der Anteil um zwei Punkte je Jahr, 2021 und 2022 um einen Punkt, seit 2023 um einen halben Punkt. Wer 2026 in Rente geht, versteuert dauerhaft 84 Prozent seiner Rente.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kindesunterhalt",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Unterhaltsbeträge gelten 2026?",
+        "art": "saeulen",
+        "titel": "Bedarfssätze der Düsseldorfer Tabelle 2026",
+        "untertitel": "Monatlicher Bedarf je Kind vor Abzug des Kindergeldanteils",
+        "einheit": "€",
+        "umschalter": {
+          "label": "Nettoeinkommen"
+        },
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "g1",
+            "label": "bis 2.100 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 486
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 558
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 653
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 698
+              }
+            ]
+          },
+          {
+            "key": "g3",
+            "label": "2.501 bis 2.900 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 535
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 614
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 719
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 768
+              }
+            ]
+          },
+          {
+            "key": "g5",
+            "label": "3.301 bis 3.700 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 584
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 670
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 784
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 838
+              }
+            ]
+          },
+          {
+            "key": "g10",
+            "label": "5.301 bis 5.700 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 778
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 893
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 1045
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 1117
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Nettoeinkommen des Zahlenden",
+          "min": 1500,
+          "max": 6000,
+          "schritt": 100,
+          "start": 3000,
+          "einheit": "€",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "unterhalt",
+            "eingabe": "nettoEinkommen",
+            "ausgabe": "zahlbetrag",
+            "basis": {
+              "kindAlter": 8,
+              "unterhaltsberechtigte": 1,
+              "erwerbstaetig": true,
+              "sonstigeAbzuege": 0
+            }
+          },
+          "ergebnis": "Zahlbetrag für ein achtjähriges Kind",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "Zahlbetrag = Bedarf minus hälftiges Kindergeld (129,50 € bei Minderjährigen). Die Tabelle geht von zwei Unterhaltsberechtigten aus.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wer muss Kindesunterhalt zahlen und wie viel bleibt als Selbstbehalt?",
+        "art": "balken",
+        "titel": "Selbstbehalte 2026",
+        "untertitel": "Was dem Unterhaltspflichtigen monatlich mindestens bleibt",
+        "einheit": "€",
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Gegenüber minderjährigen Kindern, erwerbstätig",
+                "wert": 1450
+              },
+              {
+                "label": "Gegenüber minderjährigen Kindern, nicht erwerbstätig",
+                "wert": 1200
+              },
+              {
+                "label": "Gegenüber volljährigen Kindern (angemessener Selbstbehalt)",
+                "wert": 1750
+              },
+              {
+                "label": "Gegenüber getrennt lebendem Ehegatten, erwerbstätig",
+                "wert": 1600
+              },
+              {
+                "label": "Gegenüber getrennt lebendem Ehegatten, nicht erwerbstätig",
+                "wert": 1475
+              },
+              {
+                "label": "Gegenüber den eigenen Eltern",
+                "wert": 2650
+              }
+            ]
+          }
+        ],
+        "hinweis": "Im notwendigen Selbstbehalt sind bis 520 € Warmmiete enthalten, im angemessenen bis 650 €.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "duesseldorfer-tabelle",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Bedarfssätze 2026: Wer bekommt wie viel?",
+        "art": "saeulen",
+        "titel": "Bedarfssätze der Düsseldorfer Tabelle 2026",
+        "untertitel": "Monatlicher Bedarf je Kind vor Abzug des Kindergeldanteils",
+        "einheit": "€",
+        "umschalter": {
+          "label": "Nettoeinkommen"
+        },
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "g1",
+            "label": "bis 2.100 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 486
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 558
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 653
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 698
+              }
+            ]
+          },
+          {
+            "key": "g3",
+            "label": "2.501 bis 2.900 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 535
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 614
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 719
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 768
+              }
+            ]
+          },
+          {
+            "key": "g5",
+            "label": "3.301 bis 3.700 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 584
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 670
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 784
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 838
+              }
+            ]
+          },
+          {
+            "key": "g10",
+            "label": "5.301 bis 5.700 €",
+            "werte": [
+              {
+                "label": "0 bis 5 Jahre",
+                "wert": 778
+              },
+              {
+                "label": "6 bis 11 Jahre",
+                "wert": 893
+              },
+              {
+                "label": "12 bis 17 Jahre",
+                "wert": 1045
+              },
+              {
+                "label": "ab 18 Jahre",
+                "wert": 1117
+              }
+            ]
+          }
+        ],
+        "regler": {
+          "label": "Nettoeinkommen des Zahlenden",
+          "min": 1500,
+          "max": 6000,
+          "schritt": 100,
+          "start": 3000,
+          "einheit": "€",
+          "formel": {
+            "typ": "rechner",
+            "rechner": "unterhalt",
+            "eingabe": "nettoEinkommen",
+            "ausgabe": "zahlbetrag",
+            "basis": {
+              "kindAlter": 8,
+              "unterhaltsberechtigte": 1,
+              "erwerbstaetig": true,
+              "sonstigeAbzuege": 0
+            }
+          },
+          "ergebnis": "Zahlbetrag für ein achtjähriges Kind",
+          "ergebnisEinheit": "€"
+        },
+        "hinweis": "Zahlbetrag = Bedarf minus hälftiges Kindergeld (129,50 € bei Minderjährigen). Die Tabelle geht von zwei Unterhaltsberechtigten aus.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Selbstbehalte 2026: Was müssen Unterhaltspflichtige behalten?",
+        "art": "balken",
+        "titel": "Selbstbehalte 2026",
+        "untertitel": "Was dem Unterhaltspflichtigen monatlich mindestens bleibt",
+        "einheit": "€",
+        "quelle": {
+          "name": "Oberlandesgericht Düsseldorf, Düsseldorfer Tabelle 2026",
+          "url": "https://www.olg-duesseldorf.nrw.de/infos/Duesseldorfer_Tabelle/Tabelle-2026/DT_2026.pdf",
+          "stand": "01.01.2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Gegenüber minderjährigen Kindern, erwerbstätig",
+                "wert": 1450
+              },
+              {
+                "label": "Gegenüber minderjährigen Kindern, nicht erwerbstätig",
+                "wert": 1200
+              },
+              {
+                "label": "Gegenüber volljährigen Kindern (angemessener Selbstbehalt)",
+                "wert": 1750
+              },
+              {
+                "label": "Gegenüber getrennt lebendem Ehegatten, erwerbstätig",
+                "wert": 1600
+              },
+              {
+                "label": "Gegenüber getrennt lebendem Ehegatten, nicht erwerbstätig",
+                "wert": 1475
+              },
+              {
+                "label": "Gegenüber den eigenen Eltern",
+                "wert": 2650
+              }
+            ]
+          }
+        ],
+        "hinweis": "Im notwendigen Selbstbehalt sind bis 520 € Warmmiete enthalten, im angemessenen bis 650 €.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

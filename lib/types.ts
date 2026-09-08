@@ -315,6 +315,11 @@ export interface StatistikRegler {
   start: number;
   einheit?: string;
   formel: StatistikFormel;
+  /** true: „Ihr Wert“ erscheint als eigener Balken/Säule im Diagramm (nur bei gleicher Einheit sinnvoll); sonst nur als Zeile unter dem Regler. */
+  imDiagramm?: boolean;
+  /** Beschriftung der Ergebniszeile („Ihr Kindergeld im Monat“) und deren Einheit, falls anders als das Diagramm. */
+  ergebnis?: string;
+  ergebnisEinheit?: string;
 }
 
 export interface FadenStatistik {
