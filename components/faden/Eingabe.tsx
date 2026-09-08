@@ -7,6 +7,7 @@
  * gewählten Treffer fragt Leo; Pfeiltasten wählen, Escape schließt.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
 import type { IndexEintrag } from "@/lib/faden/index";
 
@@ -42,8 +43,25 @@ async function holeIndex(): Promise<IndexEintrag[]> {
   return indexLaedt;
 }
 
+interface EingabeChip { text: string; frage?: string; href?: string }
+
 export default function Eingabe() {
   const { navigieren, fragen, leo } = useFaden();
+  const pathname = usePathname();
+  const [chips, setChips] = useState<EingabeChip[]>([]);
+  const [endeImBild, setEndeImBild] = useState(false);
+  // Vorschläge kommen aus dem lebenden Kapitel (script[data-eingabe-chips]); sichtbar nur, wenn das Ende des Fadens im Bild ist.
+  useEffect(() => {
+    let liste: EingabeChip[] = [];
+    try { const sc = document.querySelector("#kapitel-live script[data-eingabe-chips]"); if (sc) liste = JSON.parse(sc.textContent || "[]"); } catch { /* keine Chips */ }
+    setChips(Array.isArray(liste) ? liste.slice(0, 5) : []);
+    const ende = document.getElementById("strom-ende");
+    if (!ende || !("IntersectionObserver" in window)) { setEndeImBild(true); return; }
+    const io = new IntersectionObserver(([e]) => setEndeImBild(e.isIntersecting), { rootMargin: "0px 0px -60px 0px" });
+    io.observe(ende);
+    return () => io.disconnect();
+  }, [pathname]);
+  const zeigeChips = chips.length > 0 && endeImBild && !leo.nachrichten.length;
   const [wert, setWert] = useState("");
   const [index, setIndex] = useState<IndexEintrag[] | null>(indexCache);
   const [offen, setOffen] = useState(false);
@@ -85,7 +103,7 @@ export default function Eingabe() {
   };
 
   return (
-    <div className="eingabe">
+    <div className={"eingabe" + (zeigeChips ? " mit-chips" : "")}>
       <div className="eingabe__blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
       <div className="suchpille-wrap" id="fadenPille" ref={wrap}>
         {zeigeLeiste && (
@@ -107,6 +125,11 @@ export default function Eingabe() {
           <button type="submit" className="senden">{beschaeftigt ? "Stopp" : "Fragen"}</button>
         </form>
       </div>
+      {chips.length > 0 && (
+        <div className="chips" id="eingabeChips">
+          {chips.map((c) => <button key={c.text} type="button" className="chip" onClick={() => { if (c.frage) fragen(c.frage); else if (c.href) navigieren(c.href); }}>{c.text}</button>)}
+        </div>
+      )}
     </div>
   );
 }

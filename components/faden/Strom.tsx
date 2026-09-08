@@ -5,16 +5,21 @@
  * Schnappschüsse sind reines HTML (inert), Kopfzeile mit Nummer, Pfad, Uhrzeit;
  * aufklappen zeigt den statischen Inhalt, „erneut öffnen“ navigiert wirklich.
  */
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
 import LeoStrom from "./leo/LeoStrom";
+import Einschub from "./Einschub";
 
 export default function Strom({ children }: { children: ReactNode }) {
   const { verlauf, kapitelUmschalten, navigieren } = useFaden();
+  const pathname = usePathname();
   return (
     <div className="strom" id="strom">
       {verlauf.map((k, i) => (
-        <section key={k.id} className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} inert={!k.offen} id={`kapitel-alt-${k.id}`}>
+        <Fragment key={k.id}>
+        <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />
+        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} inert={!k.offen} id={`kapitel-alt-${k.id}`}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
             <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
             <h2>{k.titel}</h2>
@@ -31,9 +36,12 @@ export default function Strom({ children }: { children: ReactNode }) {
             <div className="kapitel__wieder-zeile"><button type="button" className="textlink textlink--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
           </div>
         </section>
+        </Fragment>
       ))}
+      {pathname !== "/" && <Einschub format="leaderboard" variante={verlauf.length ? "feed" : "top"} nr={verlauf.length} />}
       {children}
       <LeoStrom />
+      <div id="strom-ende" aria-hidden="true" />
     </div>
   );
 }

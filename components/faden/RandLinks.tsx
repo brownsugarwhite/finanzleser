@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
+import Einschub from "./Einschub";
 
 function kopfHoehe(): number {
   const k = document.getElementById("kopf");
@@ -75,7 +76,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
               <WochenbriefForm klein />
             </div>
           </div>
-          <div className="rand__fuss" />
+          <div className="rand__fuss"><Einschub format="halfpage" nr={0} /></div>
         </div>
       </div>
       {mobil && <button type="button" className="rand__zu btn btn--klein btn--still" onClick={onZu}>Schließen ✕</button>}

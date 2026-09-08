@@ -1,52 +1,51 @@
 /**
- * Startseite im Faden: Landing-Hero + Kapitel „Heute“ (Leo begrüßt, die Spalten mit
- * allen Rubriken, Themen und Ratgebern, Vorschläge). Alles serverseitig aus den
+ * Startseite im Faden wie im Prototyp: Landing-Hero, dann der Strom mit Anzeigenplatz,
+ * Kapitel „Heute“ (Leo begrüßt, die Spalten mit allen Rubriken, Themen und Ratgebern)
+ * und die Vorschläge als Chips unter der Eingabe. Alles serverseitig aus den
  * bestehenden Gettern; JSON-LD bleibt wie auf der alten Startseite (app/page.tsx).
  */
-import Link from "next/link";
-import { getNavItems, getToolCategories } from "@/lib/wordpress";
+import { getNavItems } from "@/lib/wordpress";
 import { baueSpalten } from "@/lib/faden/spalten";
 import { getBeitragsIndex } from "@/lib/faden/titel";
+import { buildGlossarUrl } from "@/lib/urls";
 import KapitelKopf from "./KapitelKopf";
-import HeroLanding, { type HeroVorschlag, type HeroWerkzeug } from "./hero/HeroLanding";
+import HeroLanding from "./hero/HeroLanding";
 import Spalten from "./spalten/Spalten";
+import Einschub from "./Einschub";
+import Vorlesen from "./Vorlesen";
 
-const VORSCHLAEGE: { slug: string; text: string }[] = [
-  { slug: "duesseldorfer-tabelle", text: "Wie viel Unterhalt für zwei Kinder?" },
-  { slug: "kindergeld", text: "Wie hoch ist das Kindergeld 2026?" },
-  { slug: "rentenbesteuerung", text: "Wie viel Steuer zahle ich auf meine Rente?" },
+/** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
+const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
+  { text: "Wie viel Unterhalt für zwei Kinder?", frage: true },
+  { text: "Wie hoch ist das Kindergeld 2026?", frage: true },
+  { text: "Wie viel Steuer zahle ich auf meine Rente?", frage: true },
+  { text: "Alle Finanztools", href: "/finanztools" },
 ];
 
 export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
-  const [nav, toolKategorien, index] = await Promise.all([getNavItems(), getToolCategories(), getBeitragsIndex()]);
+  const nav = await getNavItems();
+  await getBeitragsIndex();
   const rubriken = await baueSpalten(nav);
-  const vorschlaege: HeroVorschlag[] = VORSCHLAEGE.map((v) => ({ text: v.text, href: index.get(v.slug)?.href || `/${v.slug}` }));
-  const zahl = (teil: string) => toolKategorien.find((k) => k.href.includes(teil))?.count || 0;
-  const werkzeuge: HeroWerkzeug[] = [
-    { typ: "rechner", label: "Rechner", zahl: zahl("rechner") || 56, beschreibung: "Unterhalt, Rente, Steuer, Kredit", href: "/finanztools/rechner" },
-    { typ: "vergleich", label: "Vergleiche", zahl: zahl("vergleiche") || 43, beschreibung: "Tarife nebeneinander", href: "/finanztools/vergleiche" },
-    { typ: "checkliste", label: "Checklisten", zahl: zahl("checklisten") || 207, beschreibung: "Schritt für Schritt, als PDF", href: "/finanztools/checklisten" },
-  ];
+  const chips = VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href }));
   return (
     <>
-      <HeroLanding vorschlaege={vorschlaege} werkzeuge={werkzeuge} />
+      <HeroLanding />
+      <Einschub format="leaderboard" variante="top" nr={0} />
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
         <div className="kapitel__inhalt">
-          <div className="wort wort--leo">
+          <div className="wort wort--leo" id="leo-gruss">
             <img src="/assets/leo.svg" alt="Leo" />
             <div>
               <span className="kicker kicker--gruen">Leo</span>
-              <p>Hallo, ich bin Leo, Ihr Finanzagent. Ich habe die Versicherungsbedingungen unserer Partner gelesen und antworte mit Quelle und Seite. Fragen Sie, blättern Sie oben im Register, oder stöbern Sie hier in den vier Rubriken.</p>
+              <p>Hallo, ich bin Leo, Ihr Finanzagent. Ich habe die <a className="begriff" href={buildGlossarUrl("avb")} data-b="avb">Versicherungsbedingungen</a> unserer Partner gelesen und antworte mit Quelle und Seite. Fragen Sie, blättern Sie oben im Register, oder stöbern Sie hier in den Rubriken. Grüne Begriffe erklären sich auf Tipp.</p>
+              <div className="werkzeuge"><Vorlesen zielId="leo-gruss" /></div>
             </div>
           </div>
           <Spalten rubriken={rubriken} />
-          <div className="chips">
-            {vorschlaege.map((v) => <a key={v.href} className="chip" href={v.href}>{v.text}</a>)}
-            <Link className="chip chip--still" href="/finanztools">Alle Finanztools</Link>
-          </div>
         </div>
+        <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
       </section>
     </>
   );

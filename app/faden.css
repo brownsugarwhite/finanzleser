@@ -277,34 +277,22 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .eintrag__einzeilig { display: flex; align-items: center; gap: 8px; }
 .faden-shell .kasten--liste .eintrag small { color: var(--muted); font-size: 12px; }
 
-/* ---------- Landing-Hero ---------- */
-.faden-shell .hero-landing { position: relative; min-height: calc(100dvh - var(--kopf-h, 64px)); display: grid; }
-.faden-shell .hero-landing__mitte { display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; padding: 0 24px calc(var(--kopf-h, 64px) + 20px); }
-.faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; }
-.faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; }
+/* ---------- Landing-Hero (Prototyp „Landing“: Zierlinie, Kicker, Titel, Pille auf der Bildschirmmitte, ein Satz) ---------- */
+.faden-shell .hero-landing { position: relative; height: calc(100dvh - var(--kopf-h, 64px)); min-height: 520px; }
+.faden-shell .hero-landing__mitte { position: absolute; inset: 0; box-sizing: border-box; padding: 0 24px var(--kopf-h, 64px); display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; }
+.faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; will-change: opacity, transform; }
+.faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; color: var(--muted); } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; } .faden-shell .landing-zier svg { width: 12px; height: 12px; }
+.faden-shell .landing-kicker { font: 400 15px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .faden-shell .hero-landing h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.22; font-weight: 700; max-width: 30ch; margin: 0; }
-.faden-shell .hero-landing__pille { width: min(750px, 100%); }
-.faden-shell .landing-unten { align-self: start; margin-top: 30px; display: grid; gap: 18px; justify-items: center; width: min(820px, 100%); }
-.faden-shell .landing-sub { font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 48ch; margin: 0; }
-.faden-shell .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-.faden-shell .hero-chips .chip { text-decoration: none; }
-.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
-.faden-shell .werkzeugreihe__paar { display: contents; }
-.faden-shell .trenner { flex: none; width: 9px; position: relative; }
-.faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: 28px; background: var(--rule-strong); }
-.faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
-.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: -6px 0 0 -6px; }
-.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: start; text-decoration: none; color: var(--ink); }
-.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
-.faden-shell .werkzeug-k b small { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 6px; font-family: var(--sans); }
-.faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { font-size: 12.5px; color: var(--muted); }
-.faden-shell .werkzeug-k .pfeil-link { margin-top: 4px; font-size: 13px; }
-.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; }
-.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: 13px; animation: faden-wippen 2.2s ease-in-out infinite; }
-@keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-.faden-shell .strom > .hero-landing + .kapitel { border-top: 0; }
-.faden-shell .eingabe { transition: opacity .25s ease, transform .25s ease; }
-body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; transform: translateY(14px); }
+.faden-shell .hero-landing__pille { width: min(750px, 92%); height: 52px; position: relative; }
+.faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
+.faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
+.faden-shell .landing-sub { align-self: start; margin: 30px auto 0; font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 44ch; will-change: opacity, transform; }
+.faden-shell .rand { transition: opacity .3s ease; }
+body.faden-hero-sichtbar .faden-shell .rand { opacity: 0; pointer-events: none; }
+.faden-shell .eingabe { transition: opacity .25s ease; }
+body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
+.faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
 
 /* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
 .faden-shell .spalten-kasten { padding: 14px 18px 16px; }
@@ -418,6 +406,26 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .sprung .unter { margin-left: auto; color: var(--muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%; }
 .faden-shell .sprung .frage { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 9px; color: var(--pink); font-weight: 600; border-radius: 0; }
 
+/* ---------- Anzeigenplätze (Platzhalter, adblocker-neutral benannt) ---------- */
+.faden-shell .einschub { display: grid; gap: 4px; justify-items: center; width: 100%; min-width: 0; }
+.faden-shell .einschub__label { font: 700 9.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); justify-self: start; }
+.faden-shell .einschub__flaeche { position: relative; width: 100%; display: block; line-height: 0; border: 1px solid var(--rule); }
+.faden-shell .einschub__flaeche img { width: 100%; height: auto; display: block; }
+.faden-shell .einschub__flaeche img.schmal { display: none; }
+.faden-shell .einschub--top { padding: 4px 0 18px; }
+.faden-shell .einschub--feed { padding: 12px 0 16px; }
+.faden-shell .einschub--artikel { padding: 6px 0 10px; }
+.faden-shell .einschub--umflossen { float: right; width: 300px; margin: 6px 0 14px 26px; }
+.faden-shell .einschub[data-format="halfpage"] .einschub__flaeche, .faden-shell .einschub[data-format="rectangle"] .einschub__flaeche { max-width: 300px; }
+.faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 728px; }
+.faden-shell .einschub[data-format="mobile"] .einschub__flaeche { max-width: 320px; }
+.faden-shell .rand__fuss .einschub { margin-top: 8px; }
+.faden-shell .abschnitt .fliess::after { content: ""; display: block; clear: both; }
+
+/* ---------- Vorschläge unter der Eingabe ---------- */
+.faden-shell .eingabe #eingabeChips { opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+.faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
+
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
@@ -474,6 +482,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
 }
 @media (max-width: 900px) {
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
+  .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
+  .faden-shell .hero-landing { min-height: 0; }
   .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .leo-chips { margin-left: 0; }
   .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
   .faden-shell .kopf__innen { padding-left: 16px; }
@@ -485,13 +497,8 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .blatt__spalte--breit { grid-column: auto; }
   .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
   .faden-shell .spalten { grid-template-columns: 1fr !important; } .faden-shell .spalten .trenner { display: none; } .faden-shell .spalte__inhalt { padding: 10px 0; } .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); } .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; } .faden-shell .spalte__offen { padding: 6px 0; }
-  .faden-shell .werkzeugreihe { flex-wrap: wrap; } .faden-shell .werkzeugreihe .trenner { display: none; } .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: 6px 12px; display: flex; align-items: baseline; gap: 10px; } .faden-shell .werkzeug-k b { font-size: 19px; } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; } .faden-shell .werkzeug-k .pfeil-link { margin: 0 0 0 auto; white-space: nowrap; }
   .faden-shell .hero-landing h1 { font-size: 24px; }
-  .faden-shell .hero-landing { min-height: 0; }
-  .faden-shell .hero-landing__mitte { grid-template-rows: auto auto auto; padding: 14px 0 64px; min-width: 0; }
-  .faden-shell .landing-oben { margin-bottom: 18px; } .faden-shell .landing-unten { margin-top: 18px; gap: 14px; }
-  .faden-shell .hero-chips .chip { white-space: normal; text-align: center; }
-  .faden-shell .hero-cta { bottom: 10px; }
+  .faden-shell .hero-landing__mitte { padding: 0 8px var(--kopf-h, 64px); }
   .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
   .faden-shell .lesezeichen .lz-wort { display: none; }
   .faden-shell .faden { padding: 12px 14px 110px; }

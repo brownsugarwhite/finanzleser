@@ -14,6 +14,8 @@ import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import InhaltAktiv from "./InhaltAktiv";
+import Einschub from "@/components/faden/Einschub";
+import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import KapitelKopf from "@/components/faden/KapitelKopf";
@@ -39,7 +41,7 @@ function AbschnittBlock({ a, i, n, toolData }: { a: Abschnitt; i: number; n: num
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel">{a.titel}</h2>
-      <div className="fliess"><Teile teile={a.teile} toolData={toolData} /></div>
+      <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
       {a.fragen.length > 0 && <Weiterlesen fragen={a.fragen} />}
     </section>
   );
@@ -111,7 +113,10 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </nav>
           )}
           {k.abschnitte.map((a, i) => (
-            <AbschnittBlock key={a.id} a={a} i={i} n={k.abschnitte.length} toolData={toolData} />
+            <Fragment key={a.id}>
+              <AbschnittBlock a={a} i={i} n={k.abschnitte.length} toolData={toolData} />
+              {i === 1 && <Einschub format="leaderboard" variante="artikel" nr={1} />}
+            </Fragment>
           ))}
           {k.faq.length > 0 && (
             <section className="abschnitt abschnitt--faq" id={k.faqId} data-toc-titel="Häufige Fragen">
