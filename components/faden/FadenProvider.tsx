@@ -10,6 +10,7 @@
  * echte Navigation (Schnappschuss fällt weg, weil das Ziel wieder lebt).
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { kopfHoehe, zeigeAnfang, merkeKnoten } from "@/lib/faden/scrollen";
 import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
@@ -134,17 +135,17 @@ function schnappschuss(): Schnappschuss | null {
   };
 }
 
-function kopfHoehe(): number {
-  const k = document.getElementById("kopf");
-  return k ? k.offsetHeight : 64;
-}
-
+/**
+ * Zum lebenden Kapitel springen. `immer`, weil der Sprung immer vom Leser ausgelöst ist
+ * (Navigation, Klick im Verlauf) — davor merkt sich `navigieren` die Lesestelle.
+ * Das Kapitel wird zugleich Bezugspunkt für `folgt()`, damit eine danach eintreffende
+ * Leo-Antwort richtig entscheidet, ob sie ins Bild rollen darf.
+ */
 export function zumKapitelScrollen(): void {
   const live = document.getElementById("kapitel-live");
   if (!live) return;
-  const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const ziel = live.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12;
-  window.scrollTo({ top: Math.max(0, ziel), behavior: reduziert ? "auto" : "smooth" });
+  merkeKnoten(live);
+  zeigeAnfang(live, true);
 }
 
 export default function FadenProvider({ children, level = LEVEL_STANDARD }: { children: ReactNode; level?: Level[] }) {
@@ -289,17 +290,25 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     letzterPfad.current = pathname;
     if (!scrollNachNavigation.current) return; // Zurück-Taste u. ä.: Browser-Verhalten
     scrollNachNavigation.current = false;
-    if (wandertNachNavigation.current) { wandertNachNavigation.current = false; nochmal(document.getElementById("kapitel-live"), "wandert"); }
+    const wandert = wandertNachNavigation.current;
+    wandertNachNavigation.current = false;
     const hash = location.hash.slice(1);
-    requestAnimationFrame(() => {
-      const ziel = hash ? document.getElementById(hash) : null;
-      if (ziel) {
-        const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        window.scrollTo({ top: ziel.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: reduziert ? "auto" : "smooth" });
-      } else {
-        zumKapitelScrollen();
-      }
-    });
+    // 🚨 `usePathname()` wechselt, BEVOR das neue Kapitel im DOM steht — die RSC-Antwort
+    // streamt noch. Ein einzelnes requestAnimationFrame greift deshalb zu früh:
+    // `#kapitel-live` ist dann null, der Sprung fällt ersatzlos aus und der Leser bleibt
+    // dort stehen, wo er geklickt hat. Also auf den neuen Knoten warten.
+    const vorher = document.getElementById("kapitel-live");
+    const frist = performance.now() + 2000;
+    const versuchen = () => {
+      const live = document.getElementById("kapitel-live");
+      const ziel = hash ? document.getElementById(hash) : live;
+      const bereit = !!ziel && (hash ? true : !!live && live !== vorher);
+      if (!bereit && performance.now() < frist) { requestAnimationFrame(versuchen); return; }
+      if (wandert) nochmal(live, "wandert");
+      if (hash && ziel) zeigeAnfang(ziel, true);
+      else zumKapitelScrollen();
+    };
+    requestAnimationFrame(versuchen);
   }, [pathname]);
 
   // Leo: eine useChat-Instanz für die Sitzung (überlebt Navigation). Sichtbar im Strom sind nur

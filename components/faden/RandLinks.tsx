@@ -8,16 +8,12 @@
  * (`.abschnitt[data-toc-titel]`), der aktive Abschnitt kommt per IntersectionObserver.
  */
 import { useEffect, useRef } from "react";
+import { kopfHoehe } from "@/lib/faden/scrollen";
 import { usePathname } from "next/navigation";
 import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
 import Einschub from "./Einschub";
-
-function kopfHoehe(): number {
-  const k = document.getElementById("kopf");
-  return k ? k.offsetHeight : 64;
-}
 
 export function zuAbschnitt(id: string) {
   const el = document.getElementById(id);

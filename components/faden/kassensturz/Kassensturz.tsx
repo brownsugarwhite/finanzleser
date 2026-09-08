@@ -9,6 +9,7 @@
  * „Neu starten“); der Teaser unter den Ratgebern liest denselben Stand.
  */
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { kopfHoehe } from "@/lib/faden/scrollen";
 import type { KassensturzDaten, KassensturzFrage } from "@/lib/faden/optionen";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
@@ -27,11 +28,6 @@ function standFuer(fragen: KassensturzFrage[], idx: number, a: Antworten): { bre
   const alle = offeneFragen(fragen, a);
   const nr = alle.indexOf(fragen[idx]) + 1;
   return { breite: Math.round((100 * (nr - 1)) / Math.max(1, alle.length)), text: `Frage ${nr} von ${alle.length}` };
-}
-
-function kopfHoehe(): number {
-  const k = document.getElementById("kopf");
-  return k ? k.offsetHeight : 64;
 }
 
 function verzug(i: number): CSSProperties {

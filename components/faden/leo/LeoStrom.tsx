@@ -12,11 +12,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
-
-function kopfHoehe(): number {
-  const k = document.getElementById("kopf");
-  return k ? k.offsetHeight : 64;
-}
+import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
 
 interface Chip { text: string; tun: () => void; art?: "leo" | "still" }
 
@@ -65,14 +61,19 @@ export default function LeoStrom() {
   const laeuft = status === "submitted" || status === "streaming";
   const [chipsWeg, setChipsWeg] = useState<string>("");
 
-  // Neue Frage → Frage unter den Kopf rollen; die Antwort läuft darunter ein.
+  // Scroll-Grammatik des Prototyps (lib/faden/scrollen.ts):
+  //  - Eigene Frage = vom Leser ausgelöster Sprung → `immer`, rollt unter den Kopf.
+  //  - Leos Antwort → nur wenn der Leser am Ende steht (`folgt()`). Wer hochgescrollt
+  //    liest, wird von einer eintreffenden Antwort nicht weggerissen.
   useEffect(() => {
-    if (!letzte || letzte.role !== "user") return;
+    if (!letzte) return;
     const el = document.getElementById(`leo-${letzte.id}`);
     if (!el) return;
-    const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 16, behavior: reduziert ? "auto" : "smooth" });
-  }, [letzte?.id, letzte?.role]);
+    merkeKnoten(el);
+    if (letzte.role === "user") { zeigeAnfang(el, true); return; }
+    if (laeuft) return;                 // erst wenn die Antwort steht, nicht bei jedem Token
+    if (folgt()) zeigeAnfang(el);
+  }, [letzte?.id, letzte?.role, laeuft]);
 
   // Folge-Chips nach einer fertigen Antwort: Kurzfassung, „Dazu passt“, Werkzeug des Kapitels.
   const chips = useMemo<Chip[]>(() => {
