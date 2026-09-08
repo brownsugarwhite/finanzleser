@@ -15,6 +15,7 @@ import Spalten from "./spalten/Spalten";
 import Einschub from "./Einschub";
 import Vorlesen from "./Vorlesen";
 import FinanzwortHeute from "./spiele/FinanzwortHeute";
+import Begruessung from "./Begruessung";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
@@ -49,6 +50,10 @@ export default async function FadenLanding() {
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
         <div className="kapitel__inhalt">
+          {/* Inszenierung wie im Prototyp: Leo schreibt erst, wenn der Leser den Faden
+              erreicht; danach die Spalten leise, zuletzt das Finanzwort. Ohne JS steht
+              alles sofort da (SSR unverändert). */}
+          <Begruessung>
           <div className="wort wort--leo" id="leo-gruss">
             <img src="/assets/leo.svg" alt="Leo" />
             <div>
@@ -57,8 +62,11 @@ export default async function FadenLanding() {
               <div className="werkzeuge"><Vorlesen zielId="leo-gruss" /></div>
             </div>
           </div>
-          <FinanzwortHeute />
+          {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
+              (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
           <Spalten rubriken={rubriken} />
+          <FinanzwortHeute />
+          </Begruessung>
         </div>
         <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
       </section>
