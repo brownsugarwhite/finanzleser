@@ -6,6 +6,10 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
 import PageAds from "@/components/layout/PageAds";
 import { getAllChecklisten, getChecklisteBySlug, getSiteSettings } from "@/lib/wordpress";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { medienUrl } from "@/lib/faden/medien";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { parsePDF } from "@/lib/checklisteParser";
 import type { ChecklisteData } from "@/components/checkliste/types";
 import type { CheckboxPosition } from "@/lib/checklisteParser";
@@ -57,7 +61,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
 
   // PDF holen und parsen
   const pdfUrl =
-    checkliste.pdfUrl || "";
+    medienUrl(checkliste.pdfUrl || "");
   let parsedData: ChecklisteData | null = null;
   let checkboxPositions: CheckboxPosition[] = [];
 
@@ -89,6 +93,14 @@ export default async function ChecklisteDetailPage({ params }: Props) {
   const initialData = parsedData && parsedData.sektionen.length > 0
     ? { data: parsedData, checkboxPositions, pdfUrl }
     : null;
+
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel={`checkliste:${slug}`} titel={checkliste.title} kicker="Checkliste" beschreibung={beschreibung} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Checklisten", href: "/finanztools/checklisten" }]} url={`/finanztools/checklisten/${slug}`}>
+        <WerkzeugKarte teil={{ art: "embed", typ: "checkliste", slug }} ohneTitel checklisteDaten={initialData} />
+      </KartenKapitel>
+    );
+  }
 
   return (
     <>

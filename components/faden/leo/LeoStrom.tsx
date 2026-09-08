@@ -1,0 +1,121 @@
+"use client";
+
+/**
+ * Leo im Faden: Fragen und Antworten zum lebenden Kapitel, direkt unter der Seite.
+ * Die Antworten kommen über /api/chat (SSE-Proxy aufs Heroku-Backend) als
+ * AI-SDK-Stream; nichts davon steht im SSR-HTML. Beim Kapitelwechsel friert der
+ * Schnappschuss den Wortwechsel mit ein (FadenProvider), das neue Kapitel beginnt leer.
+ */
+import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { useFaden } from "@/components/faden/FadenProvider";
+import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
+
+function kopfHoehe(): number {
+  const k = document.getElementById("kopf");
+  return k ? k.offsetHeight : 64;
+}
+
+interface Chip { text: string; tun: () => void; art?: "leo" | "still" }
+
+function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
+  const { toast } = useFaden();
+  const text = getMessageText(m);
+  const quellen = getSources(m);
+  const vorlesen = () => {
+    if (!("speechSynthesis" in window)) { toast("Vorlesen wird von diesem Browser nicht unterstützt."); return; }
+    if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); return; }
+    const u = new SpeechSynthesisUtterance(text.slice(0, 6000)); u.lang = "de-DE"; window.speechSynthesis.speak(u);
+  };
+  const kopieren = async () => { try { await navigator.clipboard.writeText(text); toast("Antwort kopiert"); } catch { /* egal */ } };
+  return (
+    <div className="wort wort--leo">
+      <img src="/assets/leo.svg" alt="Leo" />
+      <div>
+        <span className="kicker kicker--gruen">Leo</span>
+        {!text && laeuft ? (
+          <div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div>
+        ) : (
+          <div className="prose leo-markdown">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
+            {laeuft && <span className="cursor" aria-hidden="true" />}
+          </div>
+        )}
+        {!laeuft && quellen.length > 0 && (
+          <div className="quellen"><b>Quellen</b>{quellen.map((q, i) => <span key={i}>› {q.title}{q.pages ? ` · ${q.pages}` : ""}</span>)}</div>
+        )}
+        {!laeuft && text && (
+          <div className="werkzeuge">
+            <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
+            <button type="button" className="textlink textlink--still" onClick={kopieren}>Kopieren</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function LeoStrom() {
+  const { leo, fragen, navigieren } = useFaden();
+  const pathname = usePathname();
+  const { nachrichten, status, fehler } = leo;
+  const letzte = nachrichten[nachrichten.length - 1];
+  const laeuft = status === "submitted" || status === "streaming";
+  const [chipsWeg, setChipsWeg] = useState<string>("");
+
+  // Neue Frage → Frage unter den Kopf rollen; die Antwort läuft darunter ein.
+  useEffect(() => {
+    if (!letzte || letzte.role !== "user") return;
+    const el = document.getElementById(`leo-${letzte.id}`);
+    if (!el) return;
+    const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 16, behavior: reduziert ? "auto" : "smooth" });
+  }, [letzte?.id, letzte?.role]);
+
+  // Folge-Chips nach einer fertigen Antwort: Kurzfassung, „Dazu passt“, Werkzeug des Kapitels.
+  const chips = useMemo<Chip[]>(() => {
+    if (typeof document === "undefined" || !letzte || letzte.role !== "assistant" || laeuft || chipsWeg === letzte.id) return [];
+    const live = document.getElementById("kapitel-live");
+    if (!live) return [];
+    const out: Chip[] = [];
+    if (live.querySelector(".aktionen")) out.push({ text: "Kurzfassung von Leo", art: "leo", tun: () => document.dispatchEvent(new CustomEvent("faden:kurzfassung")) });
+    live.querySelectorAll<HTMLAnchorElement>(".dazu a.dazu__eintrag").forEach((a, i) => { if (i < 2) out.push({ text: a.textContent || "", tun: () => navigieren(a.getAttribute("href") || "/") }); });
+    const kasten = live.querySelector<HTMLElement>(".kasten[data-werkzeug]");
+    const titel = kasten?.querySelector("h3")?.textContent;
+    if (kasten && titel) out.push({ text: `Zum Werkzeug „${titel}“`, art: "still", tun: () => { const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches; window.scrollTo({ top: kasten.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: reduziert ? "auto" : "smooth" }); } });
+    return out.slice(0, 4);
+  }, [letzte, laeuft, chipsWeg, navigieren, pathname]);
+
+  if (!nachrichten.length && !fehler) return <div className="leo-strom" id="leo-strom" />;
+  return (
+    <div className="leo-strom" id="leo-strom" aria-live="polite">
+      {nachrichten.map((m, i) => (
+        m.role === "user" ? (
+          <div key={m.id} id={`leo-${m.id}`} className="wort wort--frage"><span className="kicker">Ihre Frage</span><p>{getMessageText(m)}</p></div>
+        ) : (
+          <div key={m.id} id={`leo-${m.id}`}><LeoWort m={m} laeuft={laeuft && i === nachrichten.length - 1} /></div>
+        )
+      ))}
+      {status === "submitted" && letzte?.role === "user" && (
+        <div className="wort wort--leo"><img src="/assets/leo.svg" alt="Leo" /><div><span className="kicker kicker--gruen">Leo</span><div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div></div></div>
+      )}
+      {status === "error" && fehler && (
+        <div className="wort wort--leo wort--fehler">
+          <img src="/assets/leo.svg" alt="Leo" />
+          <div>
+            <span className="kicker kicker--pink">Leo · gerade nicht erreichbar</span>
+            <p>{/429|limit|pause/i.test(fehler.message) ? "Leo macht gerade eine kurze Pause. Bitte versuchen Sie es in einer Minute erneut." : "Leo ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal."}</p>
+            {letzte?.role === "user" && <button type="button" className="textlink" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button>}
+          </div>
+        </div>
+      )}
+      {chips.length > 0 && (
+        <div className="chips leo-chips">
+          {chips.map((c) => <button key={c.text} type="button" className={"chip" + (c.art === "leo" ? " chip--leo" : c.art === "still" ? " chip--still" : "")} onClick={() => { setChipsWeg(letzte?.id || ""); c.tun(); }}>{c.text}</button>)}
+        </div>
+      )}
+    </div>
+  );
+}

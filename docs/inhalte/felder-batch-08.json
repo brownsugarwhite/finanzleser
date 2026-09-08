@@ -1,0 +1,912 @@
+[
+  {
+    "slug": "erwerbsminderungsrente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Erwerbsminderungsrente bekommt, wer aus gesundheitlichen Gründen dauerhaft weniger als sechs Stunden täglich auf dem allgemeinen Arbeitsmarkt arbeiten kann: voll bei unter drei Stunden, teilweise bei drei bis unter sechs Stunden, unabhängig vom erlernten Beruf; psychische Erkrankungen sind mit rund 40 Prozent die häufigste Ursache.",
+          "Voraussetzungen sind fünf Jahre Versicherungszeit und drei Jahre Pflichtbeiträge in den letzten fünf Jahren; vor der Rente prüft die Rentenversicherung Reha-Möglichkeiten, die Rente wird meist befristet bewilligt.",
+          "Berechnet wird sie aus den Entgeltpunkten plus Zurechnungszeit bis 66 Jahre und 3 Monate, als hätten Sie bis dahin weitergearbeitet; bei teilweiser Erwerbsminderung zählt der Rentenartfaktor 0,5, ab Juli 2026 ist ein Punkt 42,52 Euro wert.",
+          "Hinzuverdienst ist bis 20.763,75 Euro im Jahr bei voller und mindestens 41.527,50 Euro bei teilweiser Erwerbsminderung anrechnungsfrei; darüber werden 40 Prozent angerechnet.",
+          "Bestandsrenten mit Beginn 2001 bis 2018 erhalten seit Dezember 2025 den Zuschlag von 7,5 oder 4,5 Prozent direkt mit der Rente; der Antrag lohnt früh, die Rente beginnt frühestens im siebten Monat nach Eintritt der Erwerbsminderung."
+        ],
+        "quellen": [
+          "§§ 43, 59, 67, 96a SGB VI",
+          "§ 307i SGB VI (Zuschlag)",
+          "Beitrag Erwerbsminderungsrente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist die Erwerbsminderungsrente und wer hat Anspruch?",
+          "status": "freigegeben",
+          "frage": "Ich bin Krankenschwester und kann wegen meines Rückens nicht mehr im Schichtdienst arbeiten. Bekomme ich Erwerbsminderungsrente?",
+          "antwort": "Wahrscheinlich nicht, solange Sie noch sechs Stunden täglich irgendeine Tätigkeit ausüben könnten, etwa Verwaltungsarbeit; die gesetzliche Rente fragt nicht nach Ihrem Beruf, sondern nach dem allgemeinen Arbeitsmarkt. Berufsschutz gibt es nur für Jahrgänge vor 1961. Genau diese Lücke deckt eine private Berufsunfähigkeitsversicherung, die schon bei 50 Prozent Unfähigkeit im eigenen Beruf zahlt.",
+          "quellen": [
+            "§ 43 Abs. 2 SGB VI",
+            "§ 240 SGB VI (Berufsschutz vor 1961)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie wird die Erwerbsminderungsrente 2026 berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich bin 40, habe 18 Entgeltpunkte und werde voll erwerbsgemindert. Wie hoch ist meine Rente?",
+          "antwort": "Ihre 18 Punkte aus 18 Jahren entsprechen einem Punkt je Jahr; die Zurechnungszeit von 40 bis 66 Jahren und 3 Monaten bringt weitere 26,25 Punkte, zusammen 44,25. Mal 42,52 Euro sind das 1.881 Euro brutto, abzüglich 10,8 Prozent Abschlag für den Beginn vor 65 rund 1.678 Euro. Bei teilweiser Erwerbsminderung wäre es die Hälfte.",
+          "quellen": [
+            "§ 59 SGB VI",
+            "§ 77 Abs. 2 Nr. 3 SGB VI",
+            "§ 67 SGB VI (Rentenartfaktor)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die Hinzuverdienstgrenzen 2026?",
+          "status": "freigegeben",
+          "frage": "Ich beziehe volle Erwerbsminderungsrente und verdiene 1.900 Euro im Monat dazu. Was passiert?",
+          "antwort": "22.800 Euro im Jahr überschreiten die Grenze von 20.763,75 Euro um 2.036 Euro; davon werden 40 Prozent, rund 814 Euro im Jahr oder 68 Euro im Monat, von der Rente abgezogen. Wichtiger ist die Zeit: Wer regelmäßig mehr als drei Stunden täglich arbeitet, riskiert die medizinische Neubewertung und damit die Rente selbst. Melden Sie jede Tätigkeit vorab.",
+          "quellen": [
+            "§ 96a SGB VI",
+            "§ 43 Abs. 2 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "So stellen Sie den Antrag richtig",
+          "status": "freigegeben",
+          "frage": "Mein Antrag wurde abgelehnt. Was kann ich tun?",
+          "antwort": "Legen Sie innerhalb eines Monats Widerspruch ein, kostenlos und formlos, und reichen Sie aktuelle fachärztliche Berichte nach, die Dauer und Ausmaß der Einschränkung belegen; eine Stellungnahme Ihres Psychotherapeuten ist bei seelischen Leiden entscheidend. Wird auch der Widerspruch abgelehnt, bleibt die Klage vor dem Sozialgericht, ebenfalls gerichtskostenfrei. Sozialverbände wie VdK oder SoVD helfen für einen kleinen Jahresbeitrag.",
+          "quellen": [
+            "§ 84 SGG (Widerspruchsfrist)",
+            "§ 183 SGG (Gerichtskostenfreiheit)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "erwerbsminderungsrente",
+        "zurechnungszeit",
+        "hinzuverdienstgrenze",
+        "reha-vor-rente",
+        "rentenrechtliche-wartezeit"
+      ]
+    }
+  },
+  {
+    "slug": "witwenrente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die große Witwen- oder Witwerrente beträgt 55 Prozent der Rente des Verstorbenen, nach altem Recht bei Heirat vor 2002 und Geburt eines Partners vor 1962 60 Prozent; die kleine Witwenrente 25 Prozent, nach neuem Recht auf 24 Monate begrenzt.",
+          "Die große Rente gibt es 2026 ab 46 Jahren und 6 Monaten, ab 2029 ab 47, außerdem ohne Altersgrenze bei Kindererziehung oder eigener Erwerbsminderung; die Ehe muss mindestens ein Jahr bestanden haben, außer bei Unfalltod.",
+          "Eigenes Einkommen wird erst über dem Freibetrag angerechnet: ab 1. Juli 2026 1.122,53 Euro netto im Monat plus 238,11 Euro je Kind, darüber zu 40 Prozent; das Netto wird pauschal aus dem Brutto berechnet, bei Arbeitslohn mit rund 40 Prozent Abzug.",
+          "Im Sterbevierteljahr, den drei Monaten nach dem Sterbemonat, fließt die volle Rente des Verstorbenen ohne Anrechnung; die Zurechnungszeit reicht bei Todesfällen 2026 bis 66 Jahre und 3 Monate.",
+          "Beantragt wird bei der Rentenversicherung, rückwirkend bis zwölf Monate; der Renten Service der Post zahlt binnen 30 Tagen einen Vorschuss. Die Rente ist steuerpflichtig, bei Beginn 2026 zu 84 Prozent, und folgt der Rentenerhöhung von 4,24 Prozent."
+        ],
+        "quellen": [
+          "§§ 46, 67, 97, 242a SGB VI",
+          "§ 18a SGB IV (Einkommensanrechnung)",
+          "§ 22 Nr. 1 EStG",
+          "Beitrag Witwenrente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch ist die Witwenrente 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Mann bekam 1.800 Euro Rente. Wie viel Witwenrente bekomme ich?",
+          "antwort": "Nach neuem Recht 990 Euro, 55 Prozent, vor Anrechnung Ihres eigenen Einkommens; nach altem Recht, wenn Sie vor 2002 geheiratet haben und einer von Ihnen vor 1962 geboren ist, 1.080 Euro. Hatte er Abschläge in seiner Rente, bleiben sie in Ihrer erhalten. In den ersten drei Monaten nach dem Sterbemonat bekommen Sie die vollen 1.800 Euro.",
+          "quellen": [
+            "§ 67 Nr. 6 SGB VI",
+            "§ 255 SGB VI (altes Recht)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Was ändert sich 2026 bei der Einkommensanrechnung?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 2.800 Euro brutto und habe ein Kind. Wie viel Witwenrente bleibt mir?",
+          "antwort": "Von 2.800 Euro brutto zieht die Rentenversicherung pauschal 40 Prozent ab, es zählen 1.680 Euro netto. Ihr Freibetrag beträgt ab Juli 2026 1.360,64 Euro mit einem Kind; die übersteigenden 319 Euro werden zu 40 Prozent angerechnet, also 128 Euro. Von 990 Euro Witwenrente blieben 862 Euro. Waisenrente für Ihr Kind wird nicht angerechnet.",
+          "quellen": [
+            "§ 97 SGB VI",
+            "§ 18b Abs. 5 SGB IV (Pauschalabzug)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf die große Witwenrente?",
+          "status": "freigegeben",
+          "frage": "Wir waren nicht verheiratet, aber 20 Jahre zusammen. Bekomme ich Witwenrente?",
+          "antwort": "Nein, die gesetzliche Rente kennt nur Ehe und eingetragene Lebenspartnerschaft; eine nichteheliche Lebensgemeinschaft geht leer aus, auch nach Jahrzehnten. Absichern lässt sich der Partner nur privat, etwa mit einer Risikolebensversicherung oder einer Rentenversicherung mit Hinterbliebenenschutz. Gemeinsame Kinder haben dagegen Anspruch auf Waisenrente.",
+          "quellen": [
+            "§ 46 Abs. 1 SGB VI",
+            "§ 48 SGB VI (Waisenrente)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Wie beantrage ich die Witwenrente?",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meiner Witwenrente, wenn ich wieder heirate?",
+          "antwort": "Sie endet mit der neuen Heirat, dafür bekommen Sie eine Abfindung von 24 Monatsrenten der großen Witwenrente auf einmal, bei der kleinen nur den Rest bis zum 24. Monat. Wird die neue Ehe geschieden oder der neue Partner stirbt, lebt der alte Anspruch auf Antrag wieder auf, gekürzt um Ansprüche aus der zweiten Ehe.",
+          "quellen": [
+            "§ 107 SGB VI (Abfindung)",
+            "§ 46 Abs. 3 SGB VI (Wiederaufleben)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "witwenrente",
+        "sterbevierteljahr",
+        "einkommensanrechnung",
+        "zurechnungszeit",
+        "rentenrechtliche-wartezeit"
+      ]
+    }
+  },
+  {
+    "slug": "hinzuverdienst-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Altersrentner dürfen seit 2023 unbegrenzt hinzuverdienen, auch bei vorgezogener Rente; seit 2026 bleibt mit der Aktivrente Arbeitslohn bis 2.000 Euro im Monat steuerfrei, sofern die Regelaltersgrenze erreicht ist und das Arbeitsverhältnis sozialversicherungspflichtig ist. Selbstständige, Beamte und Minijobber gehen leer aus.",
+          "Die Aktivrente greift automatisch im Lohnsteuerabzug, ohne Progressionsvorbehalt; zusammen mit dem Grundfreibetrag bleiben bis 36.348 Euro im Jahr steuerfrei, Kranken- und Pflegebeiträge fallen weiter an.",
+          "Erwerbsminderungsrentner haben Grenzen: 20.763,75 Euro im Jahr bei voller, mindestens 41.527,50 Euro bei teilweiser Erwerbsminderung; darüber werden 40 Prozent angerechnet, und die Tätigkeit muss vorab gemeldet werden.",
+          "Bei Hinterbliebenenrenten liegt der Freibetrag ab Juli 2026 bei 1.122,53 Euro netto plus 238,11 Euro je Kind; übersteigendes Einkommen wird zu 40 Prozent angerechnet.",
+          "Die Minijob-Grenze steigt auf 603 Euro, 7.236 Euro im Jahr, mit Jahresbetrachtung; wer nicht auf die Rentenversicherung verzichtet, sammelt weiter Entgeltpunkte."
+        ],
+        "quellen": [
+          "§ 34 SGB VI (Hinzuverdienst Altersrente seit 2023)",
+          "§ 3 Nr. 73 EStG (Aktivrente)",
+          "§ 96a, § 97 SGB VI",
+          "Beitrag Hinzuverdienst in der Rente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Altersrentner: Unbegrenzt hinzuverdienen",
+          "status": "freigegeben",
+          "frage": "Ich bin 64 und beziehe vorgezogene Rente. Gilt die Aktivrente für mich?",
+          "antwort": "Nein, sie gilt erst ab der Regelaltersgrenze, für Sie also ab 66 Jahren und 10 Monaten als Jahrgang 1962 oder 67 ab Jahrgang 1964. Hinzuverdienen dürfen Sie trotzdem unbegrenzt, der Lohn ist aber normal steuerpflichtig, und Sie bleiben renten- und arbeitslosenversicherungspflichtig, was Ihre Rente jährlich leicht erhöht.",
+          "quellen": [
+            "§ 3 Nr. 73 EStG",
+            "§ 34 Abs. 2 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Erwerbsminderungsrenten: Höhere Grenzen",
+          "status": "freigegeben",
+          "frage": "Ich habe eine teilweise Erwerbsminderungsrente. Darf ich halbtags weiterarbeiten?",
+          "antwort": "Ja, das ist gerade der Sinn dieser Rente: Sie können drei bis unter sechs Stunden täglich arbeiten. Der Verdienst bleibt bis mindestens 41.527,50 Euro im Jahr anrechnungsfrei, bei höherem früherem Einkommen liegt Ihre persönliche Grenze höher. Halten Sie die Stundenzahl ein und melden Sie die Beschäftigung der Rentenversicherung vorab.",
+          "quellen": [
+            "§ 43 Abs. 1 SGB VI",
+            "§ 96a Abs. 1c SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Hinterbliebenenrenten: Erhöhte Freibeträge",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 700 Euro Witwenrente und 1.400 Euro eigene Altersrente. Wird angerechnet?",
+          "antwort": "Ja, die eigene Rente zählt als Einkommen: Von 1.400 Euro brutto werden pauschal 14 Prozent abgezogen, es bleiben 1.204 Euro; das übersteigt den Freibetrag von 1.122,53 Euro um 81 Euro, davon 40 Prozent, also rund 33 Euro Kürzung. Sie erhalten etwa 667 Euro Witwenrente. Mit jeder Rentenerhöhung steigen Freibetrag und Einkommen gleichzeitig.",
+          "quellen": [
+            "§ 97 SGB VI",
+            "§ 18b Abs. 5 Satz 1 Nr. 8 SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Minijob-Grenze steigt auf 603 Euro",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich als Rentnerin, im Minijob Rentenbeiträge zu zahlen?",
+          "antwort": "Wenig, aber sicher: 3,6 Prozent von 603 Euro sind 21,71 Euro im Monat, dafür bringen die 15 Prozent des Arbeitgebers plus Ihr Anteil rund 0,14 Entgeltpunkte im Jahr, also knapp 6 Euro mehr Monatsrente ab dem Folgejahr, lebenslang. Nach vier Jahren haben Sie die Eigenbeiträge wieder heraus. Vor der Regelaltersgrenze sind die Beiträge ohnehin Pflicht, danach freiwillig.",
+          "quellen": [
+            "§ 168 Abs. 1 Nr. 1b SGB VI",
+            "§ 5 Abs. 4 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "aktivrente",
+        "hinzuverdienstgrenze",
+        "einkommensanrechnung",
+        "minijob",
+        "regelaltersgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "altersteilzeit",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Altersteilzeit ist der gleitende Ausstieg ab 55 Jahren: Die Arbeitszeit wird halbiert, der Arbeitgeber stockt das halbe Gehalt um mindestens 20 Prozent steuer- und beitragsfrei auf und zahlt Rentenbeiträge auf zusätzlich 80 Prozent des Regelarbeitsentgelts; einen Rechtsanspruch gibt es nicht, nur Tarifverträge oder freiwillige Vereinbarungen.",
+          "Voraussetzung sind 1.080 Kalendertage sozialversicherungspflichtige Beschäftigung in den letzten fünf Jahren, Zeiten mit Arbeitslosen- oder Krankengeld zählen mit, und ein Verdienst über der Minijob-Grenze von 603 Euro nach der Halbierung.",
+          "Bei 4.000 Euro brutto bleiben 2.400 Euro brutto; netto sind das je nach Tarifvertrag 70 bis über 80 Prozent des bisherigen Nettos, weil der Aufstockungsbetrag abgabenfrei ist.",
+          "Modelle: Blockmodell mit Vollzeit in der ersten und Freistellung in der zweiten Hälfte, dessen Wertguthaben gegen Insolvenz gesichert sein muss; Gleichverteilung mit halber Wochenarbeitszeit; Stufenmodell.",
+          "Der Aufstockungsbetrag unterliegt dem Progressionsvorbehalt: Über 410 Euro im Jahr ist eine Steuererklärung Pflicht, Nachzahlungen von 200 bis 800 Euro sind üblich. Alternative ab der Regelaltersgrenze ist die Aktivrente mit 2.000 Euro steuerfrei bei voller Arbeitszeit."
+        ],
+        "quellen": [
+          "§§ 2, 3, 8a AltTZG",
+          "§ 3 Nr. 28, § 32b Abs. 1 Nr. 1g EStG",
+          "§ 163 Abs. 5 SGB VI",
+          "Beitrag Altersteilzeit"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf Altersteilzeit?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber lehnt Altersteilzeit ab. Kann ich sie erzwingen?",
+          "antwort": "Nein, das Altersteilzeitgesetz gibt keinen Anspruch; nur ein Tarifvertrag oder eine Betriebsvereinbarung kann einen begründen, etwa in der Metall- und Elektroindustrie mit Quoten je Betrieb. Prüfen Sie Ihren Tarifvertrag und fragen Sie den Betriebsrat. Ohne Regelung bleibt der Weg über normale Teilzeit nach dem Teilzeit- und Befristungsgesetz, allerdings ohne Aufstockung.",
+          "quellen": [
+            "§ 2 AltTZG",
+            "§ 8 TzBfG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch ist die finanzielle Aufstockung bei Altersteilzeit?",
+          "status": "freigegeben",
+          "frage": "Wie stark sinkt meine Rente durch drei Jahre Altersteilzeit?",
+          "antwort": "Kaum: Der Arbeitgeber zahlt Rentenbeiträge auf Ihr halbes Gehalt plus 80 Prozent davon, also auf 90 Prozent des früheren Bruttos. Bei 4.000 Euro Vollzeitgehalt sammeln Sie statt 0,92 rund 0,83 Entgeltpunkte im Jahr; drei Jahre kosten etwa 0,28 Punkte oder 12 Euro Monatsrente. Viele Tarifverträge stocken sogar auf 100 Prozent auf.",
+          "quellen": [
+            "§ 3 Abs. 1 Nr. 1b AltTZG",
+            "§ 163 Abs. 5 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Modelle der Altersteilzeit gibt es?",
+          "status": "freigegeben",
+          "frage": "Ist das Blockmodell riskant, wenn meine Firma wackelt?",
+          "antwort": "Das Risiko liegt im Wertguthaben: In der Arbeitsphase arbeiten Sie voll und bekommen nur das halbe Gehalt, der Rest wird für die Freistellung angespart. Der Arbeitgeber muss dieses Guthaben ab dem ersten Euro gegen Insolvenz sichern, per Bankbürgschaft, Treuhand oder Versicherung, und Ihnen das halbjährlich nachweisen. Fehlt der Nachweis, dürfen Sie eine Sicherheit verlangen; bei Zweifeln ist das Gleichverteilungsmodell die sicherere Wahl.",
+          "quellen": [
+            "§ 8a AltTZG",
+            "§ 7e SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie wirkt sich der Progressionsvorbehalt bei der Steuer aus?",
+          "status": "freigegeben",
+          "frage": "Warum muss ich trotz steuerfreier Aufstockung Steuern nachzahlen?",
+          "antwort": "Weil der Aufstockungsbetrag zwar selbst steuerfrei bleibt, aber Ihren Steuersatz für das übrige Einkommen anhebt. Bei 2.000 Euro Arbeitslohn und 400 Euro Aufstockung im Monat berechnet das Finanzamt den Satz so, als hätten Sie 2.400 Euro verdient, und wendet ihn auf die 2.000 Euro an; das kostet je nach Fall 200 bis 800 Euro im Jahr. Der Arbeitgeber berücksichtigt das im Lohnsteuerabzug nicht, daher die Nachzahlung.",
+          "quellen": [
+            "§ 32b Abs. 1 Nr. 1g EStG",
+            "§ 46 Abs. 2 Nr. 1 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "altersteilzeit",
+        "aufstockungsbetrag",
+        "wertguthaben",
+        "progressionsvorbehalt",
+        "aktivrente"
+      ]
+    }
+  },
+  {
+    "slug": "freiwillige-gesetzliche-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Freiwillig in die gesetzliche Rente einzahlen darf, wer ab 16 in Deutschland wohnt oder als Deutscher im Ausland lebt und nicht pflichtversichert ist: Selbstständige ohne Versicherungspflicht, Beamte, Kammerberufe, Hausfrauen und Hausmänner, Studierende, Privatiers und Frührentner bis zur Regelaltersgrenze; Angestellte, Krankengeld- und Arbeitslosengeldbezieher nicht.",
+          "Die Beitragshöhe ist frei wählbar zwischen 112,16 Euro, dem Beitrag auf die Minijob-Grenze, und 1.571,70 Euro, den vollen 18,6 Prozent auf die Beitragsbemessungsgrenze; Beiträge für 2025 sind bis 31. März 2026 zu den alten Sätzen möglich.",
+          "Ein Jahr Mindestbeitrag bringt ab Juli 2026 rund 5,90 Euro Monatsrente, ein Jahr Höchstbeitrag gut 83 Euro; ein voller Entgeltpunkt kostet 9.661,58 Euro und zahlt 42,52 Euro im Monat, die Amortisation dauert etwa 19 Rentenjahre.",
+          "Die Beiträge sind Altersvorsorgeaufwendungen und bis 30.826 Euro, Verheiratete 61.652 Euro, absetzbar; steuerlich zählt das Zahlungsjahr.",
+          "Der Antrag läuft über Formular V0060; sinnvoll ist die freiwillige Versicherung für Selbstständige ohne Versorgungswerk, Beamte mit Lücken und Menschen mit hoher Lebenserwartung, weniger bei sehr niedrigem Einkommen oder kurzer Lebenserwartung."
+        ],
+        "quellen": [
+          "§ 7, § 197 Abs. 2 SGB VI",
+          "§ 10 Abs. 1 Nr. 2 EStG",
+          "Beitrag Freiwillige gesetzliche Rentenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer kann freiwillig in die Rentenversicherung einzahlen?",
+          "status": "freigegeben",
+          "frage": "Ich bin Hausfrau mit drei Jahren Beitragszeit aus früherer Arbeit. Lohnt sich das Nachzahlen?",
+          "antwort": "Ja, schon wegen der Wartezeit: Erst mit fünf Beitragsjahren haben Sie überhaupt Anspruch auf eine eigene Altersrente, sonst verfallen Ihre drei Jahre. Zwei Jahre Mindestbeitrag kosten rund 2.700 Euro und sichern Ihnen die Rente plus Kindererziehungszeiten, die je Kind drei Punkte, also rund 128 Euro Monatsrente, bringen. Danach können Sie freiwillig weitersparen.",
+          "quellen": [
+            "§ 50 Abs. 1 SGB VI (Wartezeit)",
+            "§ 7 SGB VI",
+            "§ 56 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie viel zusätzliche Rente bringt die freiwillige gesetzliche Rentenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich bin 50. Wie viel Rente bringen mir 500 Euro im Monat bis 67?",
+          "antwort": "17 Jahre mal 6.000 Euro sind 102.000 Euro, das kaufen bei heutigen Werten rund 10,6 Entgeltpunkte, also etwa 450 Euro Monatsrente brutto ab 67, lebenslang und mit jeder Rentenanpassung steigend. Weil Durchschnittsentgelt und Rentenwert jährlich wachsen, bleibt das Verhältnis ähnlich. Mit 42 Prozent Grenzsteuersatz zahlt das Finanzamt über den Sonderausgabenabzug rund 2.500 Euro im Jahr mit.",
+          "quellen": [
+            "§ 70 SGB VI",
+            "Rentenwert ab 1. Juli 2026: 42,52 Euro",
+            "§ 10 Abs. 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Für wen lohnt sich die freiwillige gesetzliche Rentenversicherung?",
+          "status": "freigegeben",
+          "frage": "Gesetzliche Rente oder ETF-Sparplan, was bringt mehr?",
+          "antwort": "Der ETF meist mehr Rendite, die gesetzliche Rente mehr Sicherheit: Ein Entgeltpunkt für 9.662 Euro liefert 42,52 Euro im Monat, das entspricht bei 20 Rentenjahren einer Rendite von etwa 2 bis 3 Prozent plus Inflationsausgleich, dazu Reha, Hinterbliebenenrente und keine Kosten. Ein ETF mit 5 bis 6 Prozent schlägt das über 20 Jahre, ist aber vererbbar und schwankt. Viele mischen: Grundsicherung über Punkte, Rendite über Depot.",
+          "quellen": [
+            "Beitrag, Abschnitt Für wen lohnt sich",
+            "§ 63 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Antragstellung und praktische Umsetzung",
+          "status": "freigegeben",
+          "frage": "Kann ich die freiwilligen Beiträge als Einmalzahlung im Dezember leisten?",
+          "antwort": "Ja, Sie dürfen für jeden Monat des laufenden Jahres, in dem Sie berechtigt waren, bis zum Höchstbeitrag zahlen, auch in einer Summe bis 31. Dezember; für das Vorjahr bis 31. März. Die Rentenversicherung teilt den Betrag den Monaten zu, steuerlich zählt das Zahlungsjahr, ideal für Jahre mit hohem Gewinn. Geben Sie im Verwendungszweck Versicherungsnummer und Zeitraum an.",
+          "quellen": [
+            "§ 197 Abs. 2 SGB VI",
+            "§ 11 Abs. 2 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "freiwillige-rentenversicherung",
+        "entgeltpunkte",
+        "rentenrechtliche-wartezeit",
+        "altersvorsorgeaufwendungen"
+      ]
+    }
+  },
+  {
+    "slug": "pflichtversicherung-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Pflichtversichert in der gesetzlichen Rente sind über 85 Prozent der Erwerbstätigen automatisch: alle Beschäftigten gegen Entgelt, Auszubildende, Kindererziehende in den ersten drei Lebensjahren, Pflegepersonen ab zehn Wochenstunden, Bezieher von Arbeitslosen- und Krankengeld; Beamte, Landwirte und Kammerberufe sind anders abgesichert.",
+          "Auch bestimmte Selbstständige zahlen Pflichtbeiträge: Handwerker in der Handwerksrolle, Lehrer, Pflegekräfte, Hebammen und Künstler über die Künstlersozialkasse, die ab 3.900 Euro Jahreseinkommen die Hälfte des Beitrags übernimmt; der Regelbeitrag beträgt 735,63 Euro.",
+          "Beitragssatz 18,6 Prozent, je 9,3 für Arbeitgeber und Arbeitnehmer, bis 8.450 Euro im Monat; Minijobber bis 603 Euro sind grundsätzlich versicherungspflichtig mit 3,6 Prozent Eigenanteil, Midijobs reichen bis 2.000 Euro.",
+          "Befreien lassen können sich Mitglieder von Versorgungswerken, Handwerker nach 18 Jahren Pflichtbeiträgen, Selbstständige ab 58 und Gründer für drei Jahre sowie Minijobber; laut Beitrag können Minijobber eine Befreiung ab 1. Juli 2026 einmalig zurücknehmen.",
+          "Wer nicht pflichtversichert ist, kann freiwillig zwischen 112,16 und 1.571,70 Euro zahlen; die Rente leistet Alters-, Erwerbsminderungs- und Hinterbliebenenrenten sowie Reha, finanziert im Umlageverfahren mit über 100 Milliarden Euro Bundeszuschuss."
+        ],
+        "quellen": [
+          "§§ 1, 2, 3, 5, 6, 7 SGB VI",
+          "§ 8 SGB IV (Minijob)",
+          "§ 2 KSVG",
+          "Beitrag Pflichtversicherung Rente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Selbstständigen zahlen in die Rentenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich gebe als Selbstständige Nachhilfe und Yoga-Kurse. Bin ich rentenversicherungspflichtig?",
+          "antwort": "Ja, als selbstständige Lehrerin, sobald Sie keinen versicherungspflichtigen Angestellten beschäftigen und mehr als 603 Euro im Monat verdienen; die Rentenversicherung zählt auch Yoga- und Fitnesstrainer dazu. Sie zahlen den Regelbeitrag von 735,63 Euro, in den ersten drei Jahren die Hälfte, oder auf Nachweis 18,6 Prozent Ihres Gewinns. Melden Sie sich innerhalb von drei Monaten; Nachforderungen reichen vier Jahre zurück.",
+          "quellen": [
+            "§ 2 Satz 1 Nr. 1 SGB VI",
+            "§ 165 SGB VI",
+            "§ 25 SGB IV (Verjährung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Minijobs ab 2026: Die neue Chance für bessere Renten",
+          "status": "freigegeben",
+          "frage": "Ich habe mich im Minijob von der Rentenversicherung befreien lassen. Soll ich das rückgängig machen?",
+          "antwort": "Wenn Sie länger im Minijob bleiben, ja: Für 21,71 Euro im Monat bekommen Sie volle Pflichtbeitragszeiten, die für Erwerbsminderungsrente, Reha und die Wartezeit zählen, plus knapp 6 Euro Monatsrente je Jahr. Laut Beitrag ist die Rücknahme ab 1. Juli 2026 einmalig möglich und gilt dann für den Rest der Beschäftigung; der Antrag geht an den Arbeitgeber, der ihn an die Minijob-Zentrale meldet.",
+          "quellen": [
+            "§ 6 Abs. 1b SGB VI",
+            "Beitrag, Abschnitt Minijobs ab 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Befreiung von der Versicherungspflicht: Wann es sinnvoll ist",
+          "status": "freigegeben",
+          "frage": "Ich bin angestellte Architektin. Kann ich mich zugunsten des Versorgungswerks befreien lassen?",
+          "antwort": "Ja, wenn Sie Pflichtmitglied der Architektenkammer und ihres Versorgungswerks sind; die Befreiung beantragen Sie bei der Rentenversicherung binnen drei Monaten nach Beginn der Beschäftigung, sie gilt nur für diese Tätigkeit. Bei jedem Jobwechsel und bei berufsfremden Tätigkeiten muss sie neu beantragt werden, sonst zahlen Sie doppelt. Die Beiträge fließen dann ins Versorgungswerk, meist mit höheren Leistungen.",
+          "quellen": [
+            "§ 6 Abs. 1 Satz 1 Nr. 1, Abs. 4 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Was die Rente leistet",
+          "status": "freigegeben",
+          "frage": "Was bekomme ich von der Rentenversicherung außer der Altersrente?",
+          "antwort": "Medizinische und berufliche Reha, etwa eine Kur nach schwerer Krankheit oder eine Umschulung, Erwerbsminderungsrente bei dauerhafter Krankheit, Witwen-, Witwer- und Waisenrente für Ihre Familie, Kindererziehungszeiten und Zuschüsse zur Krankenversicherung im Alter. Private Rentenversicherungen bieten das nicht; das ist der Grund, warum eine Befreiung gut überlegt sein will.",
+          "quellen": [
+            "§§ 9 bis 32, 33 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "regelbeitrag",
+        "kuenstlersozialkasse",
+        "rentenversicherungsbefreiung",
+        "minijob",
+        "freiwillige-rentenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "rentenarten",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Rente kennt vier Familien: Altersrenten, Erwerbsminderungsrenten, Hinterbliebenenrenten und die Altersrente für schwerbehinderte Menschen; alle steigen zum 1. Juli 2026 um 4,24 Prozent auf 42,52 Euro je Entgeltpunkt.",
+          "Regelaltersrente nach fünf Jahren Wartezeit, für Jahrgang 1960 ab 66 Jahren und 4 Monaten; langjährig Versicherte mit 35 Jahren ab 63 mit 0,3 Prozent Abschlag je Monat; besonders langjährig Versicherte mit 45 Jahren zwei Jahre vor der Regelaltersgrenze abschlagsfrei, Jahrgang 1962 mit 64 Jahren und 8 Monaten.",
+          "Erwerbsminderungsrente bei unter drei Stunden täglicher Leistungsfähigkeit voll, bei drei bis unter sechs Stunden halb, mit Zurechnungszeit bis 66 Jahre und 3 Monate; Hinzuverdienst bis 20.763,75 beziehungsweise 41.527,50 Euro im Jahr frei.",
+          "Große Witwenrente 55 Prozent, kleine 25 Prozent, Freibetrag für eigenes Einkommen ab Juli 2026 1.122,53 Euro plus 238,11 Euro je Kind, im Sterbevierteljahr ohne Anrechnung.",
+          "Schwerbehinderte ab Grad 50 gehen mit 35 Versicherungsjahren zwei Jahre früher abschlagsfrei, vorzeitig ab 62 mit bis zu 10,8 Prozent Abschlag; zusätzliche Entgeltpunkte kosten 9.661,58 Euro und sind ab 50 zum Ausgleich von Abschlägen kaufbar."
+        ],
+        "quellen": [
+          "§§ 33, 35 bis 38, 43, 46, 236 bis 238 SGB VI",
+          "Beitrag Rentenarten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert die Altersrente?",
+          "status": "freigegeben",
+          "frage": "Was zählt zu den 45 Jahren für die abschlagsfreie Rente?",
+          "antwort": "Pflichtbeiträge aus Arbeit, Kindererziehung bis zum zehnten Lebensjahr, Pflege, Krankengeld, Wehrdienst, Minijob mit eigenen Beiträgen und Arbeitslosengeld I, letzteres aber nicht in den zwei Jahren vor Rentenbeginn, außer bei Insolvenz des Arbeitgebers. Nicht mitgezählt werden Bürgergeld, Arbeitslosenhilfe, Schule, Studium und freiwillige Beiträge, wenn weniger als 18 Jahre Pflichtbeiträge vorliegen.",
+          "quellen": [
+            "§ 51 Abs. 3a SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wann greift die Erwerbsminderungsrente?",
+          "status": "freigegeben",
+          "frage": "Wird meine Erwerbsminderungsrente mit 67 automatisch zur Altersrente?",
+          "antwort": "Ja, mit Erreichen der Regelaltersgrenze wird sie in die Regelaltersrente umgewandelt, in gleicher Höhe, ohne Antrag; die Abschläge bleiben bestehen, dafür entfallen Hinzuverdienstgrenzen und Nachprüfungen. Die Zurechnungszeit, mit der Ihre Rente berechnet wurde, wird nicht mehr gekürzt.",
+          "quellen": [
+            "§ 115 Abs. 3 SGB VI",
+            "§ 59 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Rentenarten gibt es für Schwerbehinderte?",
+          "status": "freigegeben",
+          "frage": "Ich bin Jahrgang 1964 mit Grad der Behinderung 50. Wann kann ich in Rente?",
+          "antwort": "Abschlagsfrei mit 65, zwei Jahre vor Ihrer Regelaltersgrenze von 67, sofern Sie 35 Versicherungsjahre haben; vorzeitig ab 62 mit 0,3 Prozent Abschlag je Monat, also höchstens 10,8 Prozent. Der Grad der Behinderung muss am Rentenbeginn bestehen, ein späterer Wegfall schadet nicht. Beantragen Sie die Rente drei Monate vorher mit dem Schwerbehindertenausweis.",
+          "quellen": [
+            "§ 37, § 236a SGB VI",
+            "§ 77 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was kostet eine höhere Rente?",
+          "status": "freigegeben",
+          "frage": "Was ist günstiger: Abschläge ausgleichen oder länger arbeiten?",
+          "antwort": "Länger arbeiten ist rechnerisch am günstigsten: Jedes Jahr über die Regelaltersgrenze hinaus bringt 6 Prozent Zuschlag plus neue Entgeltpunkte, ohne eigenes Kapital. Der Ausgleich kostet je Punkt 9.661,58 Euro und amortisiert sich nach etwa 19 Rentenjahren, ist aber steuerlich absetzbar. Wer gesundheitlich nicht länger kann, kauft Punkte; wer gern arbeitet, nutzt Zuschlag und Aktivrente.",
+          "quellen": [
+            "§ 77 Abs. 2 Nr. 2 SGB VI (Zuschlag 0,5 Prozent je Monat)",
+            "§ 187a SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "langjaehrig-versicherte",
+        "altersrente-fuer-schwerbehinderte",
+        "erwerbsminderungsrente",
+        "witwenrente",
+        "rentenabschlag"
+      ]
+    }
+  },
+  {
+    "slug": "grundsicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Zum 1. Juli 2026 wird das Bürgergeld zum Grundsicherungsgeld: gleiche Regelsätze, 563 Euro für Alleinstehende, 506 Euro je Partner, 357 bis 471 Euro je Kind, plus Miete, Heizung und Mehrbedarfe, aber Vermittlungsvorrang, strengere Mitwirkung und härtere Sanktionen; erste Verschärfungen gelten seit 23. April 2026.",
+          "Die Vermögens-Karenzzeit mit 40.000 Euro Schonvermögen im ersten Jahr entfällt; stattdessen gelten laut Beitrag altersgestaffelte Freibeträge von 5.000 Euro unter 20 Jahren bis 15.000 oder 20.000 Euro ab 51, Details waren bei Redaktionsschluss noch offen.",
+          "Wohnkosten werden in der Karenzzeit nur noch bis zum 1,5-Fachen der örtlichen Angemessenheitsgrenze übernommen; Sanktionen: 30 Prozent Kürzung ab dem zweiten versäumten Termin, nach drei Versäumnissen in Folge gilt man als nicht erreichbar und verliert die Leistung ganz.",
+          "Die Grundsicherung im Alter und bei Erwerbsminderung nach dem SGB XII bleibt unverändert: gleiche Regelsätze, Schonvermögen 10.000 Euro für Alleinstehende und 20.000 Euro für Paare, keine neuen Sanktionen, dazu der Rentenfreibetrag von 100 Euro plus 30 Prozent, höchstens 281,50 Euro.",
+          "Laufende Bürgergeld-Bewilligungen laufen ohne neuen Antrag weiter; Neuanträge gehen ans Jobcenter, Rentner und Erwerbsgeminderte ans Sozialamt, Leistungen ab Antragsmonat."
+        ],
+        "quellen": [
+          "SGB II in der Fassung der Neuen Grundsicherung (ab 01.07.2026, laut Beitrag)",
+          "§§ 28a, 41 bis 43, 82a, 90 SGB XII",
+          "Beitrag Grundsicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Regelsätze und Leistungshöhe 2026",
+          "status": "freigegeben",
+          "frage": "Ich bin alleinerziehend mit einem Kind von 8. Wie viel Grundsicherung steht uns zu?",
+          "antwort": "563 Euro für Sie, 390 Euro für das Kind und ein Mehrbedarf für Alleinerziehende von 12 Prozent Ihres Regelsatzes, rund 68 Euro, zusammen 1.021 Euro plus die angemessene Warmmiete. Kindergeld von 259 Euro und Unterhalt werden beim Kind angerechnet; das Bildungspaket zahlt Schulbedarf, Klassenfahrten und Vereinsbeiträge extra.",
+          "quellen": [
+            "§ 20, § 21 Abs. 3, § 22, § 28 SGB II"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Vermögensfreigrenzen und altersabhängiges Schonvermögen",
+          "status": "freigegeben",
+          "frage": "Ich bin 45 und habe 18.000 Euro gespart. Bekomme ich ab Juli 2026 noch Grundsicherung?",
+          "antwort": "Nach der im Beitrag beschriebenen Staffel läge Ihr Freibetrag bei 12.500 Euro; die übrigen 5.500 Euro müssten Sie erst für den Lebensunterhalt einsetzen, bevor Leistungen fließen. Geschützt bleiben daneben ein angemessenes Auto, eine selbst bewohnte Immobilie und Riester- oder Rürup-Verträge. Da die endgültigen Beträge bei Redaktionsschluss noch nicht feststanden, fragen Sie vor dem Antrag beim Jobcenter oder einer Sozialberatung nach.",
+          "quellen": [
+            "§ 12 SGB II in der Fassung ab 01.07.2026 (laut Beitrag)",
+            "§ 12 Abs. 1 Nr. 2 und 3 SGB II (Altersvorsorge, Kfz)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Sanktionen in der neuen Grundsicherung – Kürzungen und Folgen",
+          "status": "freigegeben",
+          "frage": "Ich habe einen Termin im Jobcenter verpasst, weil ich krank war. Wird gekürzt?",
+          "antwort": "Nicht, wenn Sie einen wichtigen Grund nachweisen: Reichen Sie die Krankschreibung nach und erklären Sie das Versäumnis schriftlich. Ohne Grund bleibt das erste Versäumnis folgenlos, ab dem zweiten droht eine Kürzung um 30 Prozent für einen Monat, nach drei Terminen in Folge der Wegfall der Leistung. Gegen jeden Sanktionsbescheid können Sie binnen eines Monats Widerspruch einlegen.",
+          "quellen": [
+            "§ 32 SGB II",
+            "§ 31 Abs. 1 SGB II (wichtiger Grund)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Grundsicherung im Alter – Separate Regelungen bleiben bestehen",
+          "status": "freigegeben",
+          "frage": "Meine Rente beträgt 800 Euro und die Miete 600 Euro. Bekomme ich Grundsicherung im Alter?",
+          "antwort": "Sehr wahrscheinlich: Ihr Bedarf ist 563 Euro plus 600 Euro Warmmiete, also 1.163 Euro, sofern die Miete als angemessen gilt. Von Ihrer Rente bleiben 100 Euro plus 30 Prozent von 700 Euro, also 310 Euro, anrechnungsfrei, gedeckelt auf 281,50 Euro; angerechnet werden 518,50 Euro. Die Grundsicherung zahlt die Differenz von rund 645 Euro. Ihre Kinder müssen nichts erstatten, solange sie unter 100.000 Euro verdienen.",
+          "quellen": [
+            "§ 82a SGB XII",
+            "§ 43 Abs. 5 SGB XII (Unterhaltsrückgriff)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grundsicherungsgeld",
+        "regelsatz",
+        "schonvermoegen",
+        "kosten-der-unterkunft",
+        "bedarfsgemeinschaft",
+        "grundsicherung-im-alter"
+      ]
+    }
+  },
+  {
+    "slug": "sozialversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Sozialversicherung sichert über 85 Millionen Menschen in fünf Zweigen: Kranken-, Pflege-, Renten-, Arbeitslosen- und Unfallversicherung, finanziert nach dem Solidaritätsprinzip aus einkommensabhängigen Beiträgen, die Leistungen sind für alle gleich.",
+          "Beitragssätze 2026: Krankenversicherung 14,6 Prozent plus durchschnittlich 2,9 Prozent Zusatzbeitrag, Pflege 3,6 Prozent, Kinderlose 4,2, Rente 18,6, Arbeitslosenversicherung 2,6 Prozent, jeweils hälftig zwischen Arbeitgeber und Arbeitnehmer; die Unfallversicherung zahlt der Arbeitgeber allein.",
+          "Beitragsbemessungsgrenzen: 5.812,50 Euro im Monat für Kranken- und Pflegeversicherung, 8.450 Euro für Renten- und Arbeitslosenversicherung, 10.400 Euro in der Knappschaft; Versicherungspflichtgrenze 77.400 Euro im Jahr, Minijob bis 603 Euro, Midijob bis 2.000 Euro.",
+          "Die Zweige entstanden unter Bismarck ab 1883, die Pflegeversicherung 1995; seit 1957 finanziert das Umlageverfahren die Renten aus laufenden Beiträgen, ergänzt um Bundeszuschüsse.",
+          "Kamen 1962 sechs Beitragszahler auf einen Rentner, sind es heute weniger als zwei; Antworten sind Rente mit 67, private und betriebliche Vorsorge, mehr Erwerbsbeteiligung und Zuwanderung."
+        ],
+        "quellen": [
+          "§§ 1, 4 SGB IV",
+          "§ 241, § 243 SGB V",
+          "§ 55 SGB XI",
+          "§ 158 SGB VI",
+          "§ 341 SGB III",
+          "Beitrag Sozialversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Die fünf Säulen der Sozialversicherung: Welche Risiken deckt jeder Zweig ab?",
+          "status": "freigegeben",
+          "frage": "Warum zahle ich nichts für die Unfallversicherung?",
+          "antwort": "Weil sie die Haftung des Arbeitgebers ersetzt: Statt bei jedem Arbeitsunfall verklagt zu werden, zahlt er allein Beiträge an die Berufsgenossenschaft, die Behandlung, Reha und Unfallrente übernimmt. Versichert sind Sie bei der Arbeit und auf dem direkten Weg dorthin, im Homeoffice ebenso; Freizeitunfälle deckt nur eine private Unfallversicherung.",
+          "quellen": [
+            "§ 150 SGB VII",
+            "§ 8 SGB VII (Arbeits- und Wegeunfall)",
+            "§ 104 SGB VII (Haftungsersetzung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Beitragssätze 2026: Wer zahlt wie viel?",
+          "status": "freigegeben",
+          "frage": "Wie viel Sozialabgaben gehen bei 3.000 Euro brutto ab?",
+          "antwort": "Rund 637 Euro: 219 Euro Krankenversicherung mit 7,3 Prozent, 43,50 Euro halber Zusatzbeitrag bei 2,9 Prozent, 54 Euro Pflegeversicherung mit 1,8 Prozent, kinderlos 72 Euro, 279 Euro Rente und 39 Euro Arbeitslosenversicherung. Der Arbeitgeber zahlt denselben Betrag noch einmal plus Unfallversicherung; zusammen fließen knapp 1.300 Euro im Monat in die Sozialkassen.",
+          "quellen": [
+            "Beitragssätze der Sozialversicherung 2026",
+            "§ 249 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Beitragsbemessungsgrenzen und Versicherungspflicht: Wer zahlt wieviel?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständig und freiwillig gesetzlich versichert. Was ist mein Mindestbeitrag?",
+          "antwort": "Die Kasse rechnet mindestens mit einem Einkommen von 1.318,33 Euro im Monat, einem Drittel der Bezugsgröße, auch wenn Sie weniger verdienen: Das sind rund 231 Euro Krankenversicherung mit 17,5 Prozent inklusive Zusatzbeitrag plus 47 bis 55 Euro Pflegeversicherung, zusammen etwa 280 Euro. Mit Krankengeldanspruch gilt der allgemeine Satz von 14,6 statt 14,0 Prozent. Nachweis ist der letzte Steuerbescheid.",
+          "quellen": [
+            "§ 240 Abs. 4 SGB V",
+            "§ 18 SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Demografischer Wandel: Kann das System bestehen?",
+          "status": "freigegeben",
+          "frage": "Bekomme ich als 30-Jähriger überhaupt noch eine Rente?",
+          "antwort": "Ja, aber voraussichtlich mit niedrigerem Niveau: Die Haltelinie sichert 48 Prozent bis 2031, danach rechnet der Rentenversicherungsbericht ohne Reform mit etwa 46 Prozent bis 2040, bei einem Beitragssatz um 20 Prozent. Die Rente selbst wird es geben, sie wird nur einen kleineren Teil des Einkommens ersetzen. Deshalb sind Betriebsrente, ETF-Sparplan und ab 2027 das Altersvorsorgedepot für Ihre Generation kein Extra, sondern Pflicht.",
+          "quellen": [
+            "Rentenversicherungsbericht 2025 der Bundesregierung",
+            "§ 255e SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "solidaritaetsprinzip",
+        "umlageverfahren",
+        "beitragsbemessungsgrenze",
+        "versicherungspflichtgrenze",
+        "arbeitslosenversicherung",
+        "zusatzbeitrag"
+      ]
+    }
+  },
+  {
+    "slug": "sozialversicherungsbeitraege",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Beitragssätze bleiben 2026 stabil: Krankenversicherung 14,6 Prozent, ermäßigt 14,0 ohne Krankengeld, plus Zusatzbeitrag im Schnitt 2,9 Prozent; Pflege 3,6 Prozent, Kinderlose ab 23 zahlen 4,2, je weiterem Kind unter 25 sinkt der Satz um 0,25 Punkte bis 2,6 Prozent; Rente 18,6, Arbeitslosenversicherung 2,6 Prozent, alles hälftig geteilt.",
+          "Die Beitragsbemessungsgrenzen steigen mit der Lohnentwicklung von 5,16 Prozent: Kranken- und Pflegeversicherung 69.750 Euro im Jahr, 5.812,50 Euro im Monat; Renten- und Arbeitslosenversicherung 101.400 Euro, 8.450 Euro im Monat, seit 2025 bundeseinheitlich; Knappschaft 10.400 Euro bei 24,7 Prozent.",
+          "Die Versicherungspflichtgrenze für den Wechsel in die private Krankenversicherung liegt bei 77.400 Euro; an der Bemessungsgrenze zahlen Arbeitnehmer und Arbeitgeber zusammen rund 1.015 Euro Krankenversicherung im Monat.",
+          "Minijobber bis 603 Euro zahlen keine Beiträge außer 3,6 Prozent Rente, der Arbeitgeber rund 30 Prozent pauschal; im Midijob bis 2.000 Euro trägt der Arbeitnehmer reduzierte Anteile.",
+          "Sachbezugswerte 2026: Verpflegung 345 Euro im Monat, Unterkunft 285 Euro, Essenszuschuss bis 7,67 Euro je Tag; Entfernungspauschale 38 Cent ab dem ersten Kilometer, Übungsleiterpauschale 3.300 Euro, Ehrenamtspauschale 960 Euro, E-Dienstwagen 0,25 Prozent bis 100.000 Euro Listenpreis."
+        ],
+        "quellen": [
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "§ 55 SGB XI",
+          "§ 8 SGB IV, § 20 Abs. 2 SGB IV (Midijob)",
+          "Sozialversicherungsentgeltverordnung 2026",
+          "Beitrag Sozialversicherungsbeiträge"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Beitragssätze gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin 30, kinderlos, 3.500 Euro brutto. Was kostet mich die Pflegeversicherung?",
+          "antwort": "84 Euro im Monat: 2,4 Prozent Ihres Bruttos, weil der Arbeitgeber nur 1,8 Prozent trägt und der Kinderlosenzuschlag von 0,6 Prozent ganz bei Ihnen bleibt. Mit dem ersten Kind fällt der Zuschlag weg, Sie zahlen 63 Euro; jedes weitere Kind unter 25 senkt Ihren Anteil um 0,25 Punkte. Die Elterneigenschaft weisen Sie dem Arbeitgeber mit der Geburtsurkunde nach.",
+          "quellen": [
+            "§ 55 Abs. 3 SGB XI",
+            "§ 58 Abs. 1 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Beitragsbemessungsgrenzen 2026?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 6.500 Euro brutto. Auf welchen Betrag zahle ich Krankenversicherung?",
+          "antwort": "Nur auf 5.812,50 Euro; die 687,50 Euro darüber bleiben beitragsfrei. Ihr Anteil beträgt mit 7,3 Prozent plus 1,45 Prozent Zusatzbeitrag rund 509 Euro im Monat, dazu Pflegeversicherung. Für Rente und Arbeitslosenversicherung gilt die höhere Grenze von 8.450 Euro, dort zahlen Sie auf das volle Gehalt. Mit 78.000 Euro im Jahr liegen Sie zudem über der Versicherungspflichtgrenze und dürfen in die private Krankenversicherung wechseln.",
+          "quellen": [
+            "§ 223 Abs. 3 SGB V",
+            "§ 6 Abs. 1 Nr. 1 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Arbeitslosenversicherung und Minijobs",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 1.200 Euro im Midijob. Wie viel Sozialabgaben zahle ich?",
+          "antwort": "Deutlich weniger als die normalen rund 21 Prozent: Im Übergangsbereich zwischen 603 und 2.000 Euro steigt Ihr Anteil gleitend an, bei 1.200 Euro sind es etwa 130 Euro statt 250 Euro; der Arbeitgeber zahlt dafür etwas mehr als seinen üblichen Anteil. Ihre Rentenpunkte werden trotzdem aus dem vollen Verdienst berechnet, und Sie sind kranken- und arbeitslosenversichert.",
+          "quellen": [
+            "§ 20 Abs. 2 und 2a SGB IV",
+            "§ 163 Abs. 10 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Sachbezugswerte und Entlastungsmaßnahmen 2026",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber gibt mir ein kostenloses Mittagessen in der Kantine. Ist das steuerpflichtig?",
+          "antwort": "Ja, als Sachbezug mit dem amtlichen Wert von 4,57 Euro je Mittagessen, monatlich 137 Euro, der als Lohn versteuert und verbeitragt wird; zahlen Sie selbst mindestens diesen Betrag, entsteht kein geldwerter Vorteil. Der Arbeitgeber kann die Steuer mit 25 Prozent pauschal übernehmen. Bei Essensgutscheinen sind bis 7,67 Euro je Arbeitstag begünstigt.",
+          "quellen": [
+            "§ 2 SvEV (Sachbezugswerte 2026)",
+            "§ 40 Abs. 2 Satz 1 Nr. 1 EStG",
+            "R 8.1 Abs. 7 LStR"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "beitragsbemessungsgrenze",
+        "zusatzbeitrag",
+        "midijob",
+        "sachbezugswert",
+        "versicherungspflichtgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "beitragsbemessungsgrenzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Beitragsbemessungsgrenzen deckeln das Einkommen, auf das Sozialbeiträge erhoben werden; was darüber liegt, bleibt beitragsfrei und bringt in der Rente keine weiteren Ansprüche.",
+          "2026: Kranken- und Pflegeversicherung 5.812,50 Euro im Monat, 69.750 Euro im Jahr, plus 5,4 Prozent; Renten- und Arbeitslosenversicherung 8.450 Euro, 101.400 Euro, plus 5 Prozent und erstmals über 100.000 Euro; Knappschaft 10.400 Euro, 124.800 Euro.",
+          "Nicht zu verwechseln mit der Versicherungspflichtgrenze von 6.450 Euro im Monat, 77.400 Euro im Jahr, ab der Angestellte in die private Krankenversicherung wechseln dürfen; dazwischen zahlt man gesetzlich, aber nur auf 5.812,50 Euro.",
+          "Wer 7.000 Euro verdient, zahlt 2026 in der Krankenversicherung auf 300 Euro mehr, zusammen mit dem Arbeitgeber 52,50 Euro; bei 9.000 Euro sind es 400 Euro mehr Rentenbeitragsbasis, 74,40 Euro geteilt.",
+          "Die Grenzen folgen der Lohnentwicklung des vorletzten Jahres, 2024 plus 5,16 Prozent; Betroffene prüfen Entgeltumwandlung bis 338 Euro, den Wechsel in die private Krankenversicherung oder Arbeitszeit knapp unter der Pflichtgrenze."
+        ],
+        "quellen": [
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "§ 223 Abs. 3 SGB V",
+          "§ 159 SGB VI",
+          "§ 6 Abs. 6 SGB V (Versicherungspflichtgrenze)",
+          "Beitrag Beitragsbemessungsgrenzen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Unterschied: Beitragsbemessungsgrenze vs. Versicherungspflichtgrenze",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 6.200 Euro brutto. Darf ich in die private Krankenversicherung?",
+          "antwort": "Noch nicht: 74.400 Euro im Jahr liegen unter der Versicherungspflichtgrenze von 77.400 Euro. Sie bleiben gesetzlich pflichtversichert, zahlen aber nur auf 5.812,50 Euro Beiträge, also rund 509 Euro Ihres Anteils bei 17,5 Prozent. Erst wenn Ihr regelmäßiges Jahresentgelt inklusive Sonderzahlungen die Grenze überschreitet, endet die Pflicht zum Jahreswechsel; Sie können dann wechseln oder freiwillig bleiben.",
+          "quellen": [
+            "§ 6 Abs. 1 Nr. 1, Abs. 4 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie wirken sich die neuen Grenzen auf Sie aus?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 10.000 Euro brutto. Wie viel Sozialabgaben zahle ich 2026 insgesamt?",
+          "antwort": "Rund 1.400 Euro im Monat: Kranken- und Pflegeversicherung auf 5.812,50 Euro, das sind etwa 509 Euro plus 105 Euro Pflege mit Kind, Renten- und Arbeitslosenbeitrag auf 8.450 Euro, also 786 plus 110 Euro. Die 1.550 Euro über der Rentengrenze bleiben abgabenfrei; Ihre Abgabenquote liegt damit bei 14 Prozent statt rund 21 Prozent bei einem Durchschnittsverdiener.",
+          "quellen": [
+            "Beitragssätze und Beitragsbemessungsgrenzen 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Warum werden Beitragsbemessungsgrenzen jährlich angepasst?",
+          "status": "freigegeben",
+          "frage": "Warum steigt die Krankenversicherungsgrenze stärker als die Löhne?",
+          "antwort": "Beide Grenzen folgen derselben Lohnentwicklung von 5,16 Prozent, die Krankenversicherungsgrenze wird nur auf volle 150 Euro im Jahr gerundet, die Rentengrenze auf 600 Euro, daher die kleinen Unterschiede von 5,4 zu 5,0 Prozent. Ohne Anpassung würden Gutverdiener mit steigenden Löhnen einen immer kleineren Anteil beitragen und die Kassen verlören Einnahmen.",
+          "quellen": [
+            "§ 160 SGB VI",
+            "§ 223 Abs. 3 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Strategische Tipps für Betroffene",
+          "status": "freigegeben",
+          "frage": "Lohnt sich der Wechsel in die private Krankenversicherung, wenn ich knapp über der Grenze liege?",
+          "antwort": "Nur mit langem Horizont: Der gesetzliche Höchstbeitrag liegt 2026 bei rund 1.017 Euro plus Pflege, davon zahlen Sie die Hälfte, etwa 509 Euro. Eine private Vollversicherung kostet mit 35 Jahren oft 500 bis 700 Euro, steigt aber im Alter, und Kinder müssen extra versichert werden, während sie gesetzlich beitragsfrei mitlaufen. Der Rückweg in die gesetzliche Kasse ist ab 55 praktisch verschlossen.",
+          "quellen": [
+            "§ 6 Abs. 3a SGB V (Rückkehr ab 55)",
+            "§ 257 SGB V (Arbeitgeberzuschuss)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "beitragsbemessungsgrenze",
+        "versicherungspflichtgrenze",
+        "entgeltumwandlung",
+        "zusatzbeitrag"
+      ]
+    }
+  },
+  {
+    "slug": "minijob",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein Minijob ist eine geringfügige Beschäftigung bis 603 Euro im Monat, 7.236 Euro im Jahr; die Grenze ist an den Mindestlohn gekoppelt, Formel Mindestlohn mal 130 durch 3, und steigt 2027 mit 14,60 Euro auf 633 Euro. Bei 13,90 Euro sind das rund 43 Stunden im Monat.",
+          "Daneben gibt es die kurzfristige Beschäftigung bis drei Monate oder 70 Arbeitstage im Jahr ohne Verdienstgrenze, in der Landwirtschaft ab 2026 15 Wochen oder 90 Tage; sie ist sozialversicherungsfrei.",
+          "Unvorhergesehene Überschreitungen sind in zwei Monaten je Zeitjahr bis zum doppelten Betrag erlaubt, höchstens 8.442 Euro im Jahr.",
+          "Minijobber sind rentenversicherungspflichtig mit 3,6 Prozent Eigenanteil, der Arbeitgeber zahlt 15 Prozent; eine Befreiung ist möglich, laut Beitrag ab Juli 2026 einmalig widerrufbar. Arbeitsrechtlich gelten Urlaub, Lohnfortzahlung, Mutterschutz und Kündigungsfristen wie für alle.",
+          "Krankenversichert ist man über den Minijob nicht, sondern über Familie, freiwillig oder privat; der Arbeitgeber zahlt pauschal 13 Prozent Krankenversicherung, 15 Prozent Rente, Umlagen und 2 Prozent Pauschalsteuer, im Privathaushalt 5 plus 5 Prozent."
+        ],
+        "quellen": [
+          "§ 8, § 8a SGB IV",
+          "§ 6 Abs. 1b, § 168 Abs. 1 Nr. 1b, § 172 Abs. 3 SGB VI",
+          "§ 40a Abs. 2 EStG",
+          "Beitrag Minijob"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Verdienstgrenzen 2026 und 2027",
+          "status": "freigegeben",
+          "frage": "Ich habe zwei Minijobs mit je 400 Euro. Geht das?",
+          "antwort": "Nein, mehrere Minijobs werden zusammengerechnet; mit 800 Euro sind beide sozialversicherungspflichtig, als Midijob mit reduzierten Beiträgen. Erlaubt ist ein Minijob neben einer Hauptbeschäftigung, der bleibt abgabenfrei; jeder weitere wird mit der Hauptbeschäftigung zusammengerechnet. Melden Sie beiden Arbeitgebern die andere Tätigkeit, sonst drohen Nachforderungen.",
+          "quellen": [
+            "§ 8 Abs. 2 SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Arbeitszeiten richtig berechnen",
+          "status": "freigegeben",
+          "frage": "Mein Chef zahlt 15 Euro die Stunde. Wie viele Stunden darf ich im Minijob arbeiten?",
+          "antwort": "Höchstens 40 Stunden im Monat, denn 603 geteilt durch 15 ergibt 40,2; bei 13,90 Euro Mindestlohn wären es 43 Stunden. Rechnen Sie im Jahresschnitt: 7.236 Euro geteilt durch 15 sind 482 Stunden, die Sie ungleich verteilen dürfen. Weihnachtsgeld und Urlaubsgeld zählen zum Jahresverdienst und müssen vorab eingeplant werden.",
+          "quellen": [
+            "§ 8 Abs. 1 Nr. 1 SGB IV",
+            "Geringfügigkeits-Richtlinien der Spitzenorganisationen"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Rentenversicherung im Minijob",
+          "status": "freigegeben",
+          "frage": "Soll ich mich im Minijob von der Rentenversicherung befreien lassen?",
+          "antwort": "Meist nicht: Für 21,71 Euro im Monat bekommen Sie volle Pflichtbeitragszeiten, die für die Wartezeit, Reha, Erwerbsminderungsrente und Riester-Förderung zählen, und knapp 6 Euro Monatsrente je Jahr. Befreit bringt der Arbeitgeberanteil nur ein Drittel davon. Sinnvoll ist die Befreiung allenfalls für Rentner nach der Regelaltersgrenze oder wenn jeder Euro gebraucht wird.",
+          "quellen": [
+            "§ 6 Abs. 1b SGB VI",
+            "§ 76b SGB VI (Zuschlag ohne eigene Beiträge)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Krankenversicherung klären",
+          "status": "freigegeben",
+          "frage": "Ich bin über meinen Mann familienversichert und verdiene 603 Euro. Bleibt das so?",
+          "antwort": "Ja, für Minijobber gilt die Grenze von 603 Euro statt der üblichen 565 Euro Familienversicherungsgrenze; Sie bleiben beitragsfrei mitversichert. Ein zweiter Verdienst, etwa Mieteinnahmen, wird dazugerechnet und kann die Grenze sprengen. Der Arbeitgeber zahlt seine 13 Prozent Pauschale an die Minijob-Zentrale, ohne dass Sie davon Leistungen bekommen.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 5 SGB V",
+            "§ 249b SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "minijob",
+        "midijob",
+        "kurzfristige-beschaeftigung",
+        "pauschalabgaben",
+        "rentenversicherungsbefreiung"
+      ]
+    }
+  }
+]

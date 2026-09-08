@@ -6,6 +6,9 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import PageAds from "@/components/layout/PageAds";
 import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpress";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
 import { cleanDescription } from "@/lib/content-utils";
 import type { RechnerTyp } from "@/lib/types";
@@ -133,6 +136,14 @@ export default async function RechnerDetailPage({ params }: Props) {
     rechner.rechnerTyp === "soziales" ? "Soziales & Arbeit" :
     rechner.rechnerTyp === "rente" ? "Rente & Altersvorsorge" :
     rechner.rechnerTyp === "kredit" ? "Kredit & Finanzen" : "Finanztools";
+
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel={`rechner:${rechner.slug}`} titel={rechner.title} kicker={`Rechner · ${kategorieName}`} beschreibung={cleanDescription(rechner.excerpt || rechner.beschreibung)} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Rechner", href: "/finanztools/rechner" }]} url={`/finanztools/rechner/${rechner.slug}`}>
+        <WerkzeugKarte teil={{ art: "embed", typ: "rechner", slug: rechner.slug }} ohneTitel />
+      </KartenKapitel>
+    );
+  }
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

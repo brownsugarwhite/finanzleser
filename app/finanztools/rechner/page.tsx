@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte from "@/components/faden/karten/ListenKarte";
+import BlattStart from "@/components/faden/kopf/BlattStart";
+import { buildRechnerUrl } from "@/lib/urls";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllRechner } from "@/lib/wordpress";
@@ -8,6 +13,17 @@ export const revalidate = 86400;
 
 export default async function RechnerPage() {
   const rechner = await getAllRechner();
+  if (FADEN_AKTIV) {
+    const gr: Record<string, typeof rechner> = {};
+    for (const r of rechner) { const t = (Array.isArray(r.rechnerTyp) ? r.rechnerTyp[0] : r.rechnerTyp) || "sonstige"; (gr[t] ||= []).push(r); }
+    const typen = [...TYP_ORDER.filter((t) => gr[t]), ...Object.keys(gr).filter((t) => !TYP_ORDER.includes(t))];
+    return (
+      <KartenKapitel schluessel="blatt:rechner" titel="Rechner" kicker="Finanztools" beschreibung={`${rechner.length} Rechner, alle rechnen als Karte im Faden.`} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Rechner", href: "/finanztools/rechner" }]} url="/finanztools/rechner">
+        <BlattStart schluessel="finanztools" a="rechner" />
+        <ListenKarte gruppen={typen.map((t) => ({ titel: TYP_LABELS[t] || t, zahl: gr[t].length, eintraege: gr[t].sort((a, b) => a.title.localeCompare(b.title, "de")).map((r) => ({ titel: r.title, href: buildRechnerUrl(r.slug), dot: "rechner" as const })) }))} />
+      </KartenKapitel>
+    );
+  }
 
   // Nach Typ gruppieren
   const grouped: Record<string, typeof rechner> = {};

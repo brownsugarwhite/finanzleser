@@ -19,6 +19,9 @@ import MorphTransitionLayer from "@/components/sections/MorphTransitionLayer";
 import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { getFadenOptionen } from "@/lib/faden/optionen";
+import FadenShell from "@/components/faden/FadenShell";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -83,17 +86,21 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [navItems, siteSettings, megamenuPreload] = await Promise.all([
+  const [navItems, siteSettings, megamenuPreload, fadenOptionen] = await Promise.all([
     getNavItems(),
     getSiteSettings(),
     getMegamenuPreload().catch(() => ({})),
+    // Level-Stufen für das Punktekonto; nur im Faden (Produktion ohne Schalter fragt nichts Neues ab).
+    // Fangnetz erlaubt (CLAUDE.md, Falle 2, Ausnahme): reine Verbesserung, keine Existenz-Entscheidung —
+    // ohne Antwort gelten die Standardstufen, und kein 404/Canonical hängt daran.
+    FADEN_AKTIV ? getFadenOptionen().catch(() => null) : Promise.resolve(null),
   ]);
 
   return (
     <html lang="de" className={`${openSans.variable} ${merriweather.variable}`}>
       {/* suppressHydrationWarning: das Inline-Script unten setzt data-landing VOR der
           Hydration → bewusste Abweichung zur SSR-HTML, kein echter Mismatch. */}
-      <body className="antialiased" suppressHydrationWarning>
+      <body className={"antialiased" + (FADEN_AKTIV ? " faden-body" : "")} suppressHydrationWarning>
         {/* No-FOUC: data-landing synchron VOR dem Paint setzen, damit landing-spezifisches
             CSS (sticky-nav aus, Newsletter, Dotline, Logo-Claim, Mobile-Fixes) schon beim
             ersten Paint greift. LandingBodyAttr hält es danach für SPA-Navigation in Sync. */}
@@ -106,12 +113,26 @@ export default async function RootLayout({
         <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
-        <TopBanner
-          text={siteSettings.top_banner.text}
-          linkType={siteSettings.top_banner.link_type}
-          linkValue={siteSettings.top_banner.link_value}
-          visibility={siteSettings.top_banner.visibility}
-        />
+        {!FADEN_AKTIV && (
+          /* Im Faden gibt es keinen Banner über dem Kopf (Prototyp); die alte Seite behält ihn. */
+          <TopBanner
+            text={siteSettings.top_banner.text}
+            linkType={siteSettings.top_banner.link_type}
+            linkValue={siteSettings.top_banner.link_value}
+            visibility={siteSettings.top_banner.visibility}
+          />
+        )}
+        {FADEN_AKTIV ? (
+          /* Der Faden (Stufe 1): Kopf, Randspalten, Strom mit der Seite als lebendem Kapitel, Eingabe.
+             Megamenü, Preview-Slider, Morph-Übergänge und das Leo-Dock bleiben im Else-Zweig für
+             die alte Seite (Produktion ohne Schalter). */
+          <Providers>
+          <NavProvider items={navItems}>
+            <FadenShell nav={navItems} preload={megamenuPreload} level={fadenOptionen?.level}>{children}</FadenShell>
+          </NavProvider>
+          </Providers>
+        ) : (
+        <>
         {/* Mobile-only Leo Dock-Slot — sticky top-left, gegenüber Bookmark.
             Position direkt nach TopBanner im Flow, sticky ab top:13px.
             Leo wird zur Laufzeit per JS hier rein-/rausreparented. */}
@@ -142,6 +163,8 @@ export default async function RootLayout({
         </PageTransitionProvider>
         </NavProvider>
         </Providers>
+        </>
+        )}
       </body>
     </html>
   );

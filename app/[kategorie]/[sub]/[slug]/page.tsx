@@ -12,6 +12,7 @@ import { JsonLd, articleSchema, breadcrumbSchema, faqSchema } from "@/components
 import { extractFaqPairs } from "@/lib/articleFaq";
 import { getArticleToolData, EMPTY_TOOL_DATA } from "@/lib/articleToolData";
 import { isBotPath } from "@/lib/botPaths";
+import { medienUrl } from "@/lib/faden/medien";
 
 export const revalidate = 86400;
 
@@ -68,7 +69,7 @@ export async function generateMetadata(
     // Canonical IMMER aus den echten Post-Kategorien, nie aus der angefragten URL —
     // sonst bestätigt jede Pfad-Variante sich selbst als Kanon (Duplicate Content).
     path: buildPostUrl(post),
-    image: post.featuredImage?.node?.sourceUrl,
+    image: medienUrl(post.featuredImage?.node?.sourceUrl),
     imageAlt: post.featuredImage?.node?.altText || post.title,
     type: "article",
     publishedTime: post.date,
@@ -142,7 +143,7 @@ export default async function BeitragPage(props: {
         headline: post.title,
         description: stripHtml(header?.description || post.excerpt),
         url: absoluteUrl(articlePath),
-        image: post.featuredImage?.node?.sourceUrl,
+        image: medienUrl(post.featuredImage?.node?.sourceUrl),
         datePublished: post.date,
         dateModified: post.modified || post.date,
         authorName: post.author?.node?.name,
@@ -161,6 +162,7 @@ export default async function BeitragPage(props: {
       content={post.content}
       contentTableOfContents={!!post.content}
       toolData={toolData}
+      post={post}
       slug={params.slug}
       author={(() => {
         // Redaktions-Roster (Übergang bis Backend-Auswahl): deterministisch je Slug.

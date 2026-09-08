@@ -1,0 +1,917 @@
+[
+  {
+    "slug": "pflegeversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Pflegeversicherung ist seit 1995 Pflicht für alle Kranken­versicherten und deckt als Teilleistungssystem nur einen Teil der Pflegekosten; im Heim zahlen Neuaufnahmen 2026 im Schnitt 3.245 Euro Eigenanteil im Monat.",
+          "Der Beitrag bleibt 2026 bei 3,6 Prozent, je 1,8 für Arbeitgeber und Arbeitnehmer, in Sachsen 1,3 zu 2,3; Kinderlose ab 23 zahlen allein 0,6 Punkte Zuschlag, ab dem zweiten Kind unter 25 sinkt der Satz um je 0,25 Punkte. Stabil ist der Satz nur dank eines Bundesdarlehens von 3,2 Milliarden Euro.",
+          "Leistungen 2026 unverändert: Pflegegeld 347 bis 990 Euro, Sachleistungen 796 bis 2.299 Euro, stationär 805 bis 2.096 Euro, dazu 131 Euro Entlastungsbetrag, 42 Euro Pflegehilfsmittel, ein gemeinsames Budget von 3.539 Euro für Verhinderungs- und Kurzzeitpflege und bis 70 Euro für digitale Pflegeanwendungen; nächste Dynamisierung 2028.",
+          "Im Heim mindern Zuschläge den pflegebedingten Eigenanteil um 15 Prozent im ersten Jahr bis 75 Prozent ab dem vierten; für 2027 fehlen 7,6 und für 2028 15,4 Milliarden Euro, eine Reform soll Ende 2026 kommen.",
+          "Privat Versicherte zahlen kapitalgedeckt im Schnitt 122,64 Euro, mit Beihilfe 56,50 Euro, 2026 um 16 beziehungsweise 6 Prozent gestiegen; nach fünf Jahren gilt der gesetzliche Höchstbeitrag von 209,25 Euro als Deckel."
+        ],
+        "quellen": [
+          "§§ 28a, 36, 37, 43c, 45b, 55 SGB XI",
+          "§ 23 SGB XI (private Pflegepflichtversicherung)",
+          "Beitrag Pflegeversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Pflegeversicherungsbeitrag 2026: Sätze und Staffelungen",
+          "status": "freigegeben",
+          "frage": "Ich habe drei Kinder, das älteste ist 26. Welchen Pflegebeitrag zahle ich?",
+          "antwort": "3,35 Prozent statt 3,6, weil nur Kinder unter 25 den Abschlag von 0,25 Punkten je Kind ab dem zweiten bringen; mit zwei Kindern unter 25 sind das zwei Kinder minus eins. Ist auch das zweite über 25, zahlen Sie 3,6 Prozent, nie aber den Kinderlosenzuschlag, denn die Elterneigenschaft bleibt lebenslang. Den Nachweis führen Sie beim Arbeitgeber mit Geburtsurkunden oder über das digitale Verfahren der Kassen.",
+          "quellen": [
+            "§ 55 Abs. 3 und 3a SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Finanzielle Lücke: Warum private Pflegezusatzversicherung sinnvoll ist",
+          "status": "freigegeben",
+          "frage": "Meine Mutter zieht mit Pflegegrad 4 ins Heim, Gesamtkosten 4.900 Euro. Was bleibt bei ihr hängen?",
+          "antwort": "Die Kasse zahlt 1.855 Euro, vom pflegebedingten Rest übernimmt sie im ersten Jahr 15 Prozent Zuschlag; bei 1.500 Euro Pflegeanteil sind das 225 Euro. Unterkunft, Verpflegung, Investitionskosten und Ausbildungsumlage von rund 1.500 Euro trägt sie voll. Es bleiben etwa 2.800 Euro im Monat, ab dem vierten Jahr rund 900 Euro weniger. Reichen Rente und Vermögen über 10.000 Euro nicht, springt das Sozialamt mit Hilfe zur Pflege ein; Kinder zahlen erst ab 100.000 Euro Jahreseinkommen.",
+          "quellen": [
+            "§ 43, § 43c SGB XI",
+            "§§ 61 ff., 90 SGB XII",
+            "§ 94 Abs. 1a SGB XII"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Leistungsarten: Pflegegeld, Sachleistungen und Kombinationsleistungen",
+          "status": "freigegeben",
+          "frage": "Was ist der Unterschied zwischen Entlastungsbetrag und Entlastungsbudget?",
+          "antwort": "Der Entlastungsbetrag sind 131 Euro im Monat für alle Pflegegrade, zweckgebunden für Alltagshilfen, Tagespflege oder Betreuungsdienste, ansparbar bis Mitte des Folgejahres und ohne Anrechnung auf das Pflegegeld. Das Entlastungsbudget sind 3.539 Euro im Jahr ab Pflegegrad 2 für Verhinderungs- und Kurzzeitpflege, frei aufteilbar, seit Juli 2025 ohne Vorpflegezeit. Beides lässt sich kombinieren, etwa der Entlastungsbetrag für Hotelkosten der Kurzzeitpflege.",
+          "quellen": [
+            "§ 45b SGB XI",
+            "§ 42a SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Pflegereform 2026: Aktuelle Probleme und geplante Lösungen",
+          "status": "freigegeben",
+          "frage": "Muss ich damit rechnen, dass der Pflegebeitrag 2027 steigt?",
+          "antwort": "Sehr wahrscheinlich: Das Defizit liegt 2026 trotz Bundesdarlehen bei 4,2 Milliarden Euro, für 2027 fehlen 7,6 Milliarden, und ein Darlehen muss zurückgezahlt werden. Ohne Reform entspräche die Lücke etwa 0,4 bis 0,5 Beitragspunkten. Die Bund-Länder-Vorschläge vom Dezember 2025 setzen auf Prävention, Eigenanteilsdeckel und Familienpflegegeld, die Finanzierung ist offen; ein Gesetz soll Ende 2026 in Kraft treten.",
+          "quellen": [
+            "Beitrag, Abschnitt Pflegereform 2026",
+            "Bund-Länder-Arbeitsgruppe zur Pflegereform, Dezember 2025"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegegrad",
+        "pflegegeld",
+        "pflegesachleistung",
+        "entlastungsbetrag",
+        "einrichtungseinheitlicher-eigenanteil",
+        "kinderlosenzuschlag",
+        "private-pflegepflichtversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "pflegegrade",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Seit 2017 gibt es fünf Pflegegrade nach Punkten von 0 bis 100: Grad 1 ab 12,5, Grad 2 ab 27, Grad 3 ab 47,5, Grad 4 ab 70, Grad 5 ab 90; bewertet wird die Selbstständigkeit, nicht der Zeitaufwand.",
+          "Gutachter des Medizinischen Dienstes oder von Medicproof prüfen sechs Module: Mobilität 10 Prozent, kognitive Fähigkeiten oder Verhalten 15, Selbstversorgung 40, Umgang mit Krankheit 20, Alltagsgestaltung 15 Prozent.",
+          "Leistungen 2026 wie 2025: Pflegegeld 347, 599, 800 und 990 Euro für Grad 2 bis 5, Sachleistungen 796 bis 2.299 Euro, Entlastungsbetrag 131 Euro für alle, Grad 1 mit rund 750.000 Menschen nur Entlastungsbetrag und 42 Euro Hilfsmittel.",
+          "Neu 2026: Beratungsbesuche nur noch halbjährlich für alle Grade 2 bis 5, Pflegegeld läuft bei Klinik- oder Reha-Aufenthalt acht statt vier Wochen weiter, Entlastungsbudget 3.539 Euro ganzjährig, Verhinderungspflege nur noch für das laufende und vorige Jahr abrechenbar, 70 Euro Strafe je Woche bei Bescheid nach 25 Arbeitstagen.",
+          "Der Antrag ist formlos bei der Pflegekasse, Bescheid binnen 25 Arbeitstagen, Widerspruch binnen eines Monats mit etwa einem Drittel Erfolg; ein Pflegegrad gilt unbefristet, bundesweit und auch für Kinder."
+        ],
+        "quellen": [
+          "§§ 14, 15, 18, 36, 37, 37 Abs. 3, 45b SGB XI",
+          "Begutachtungs-Richtlinien des GKV-Spitzenverbands",
+          "Beitrag Pflegegrade"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Pflegegrade – Definition und Überblick",
+          "status": "freigegeben",
+          "frage": "Mein Vater hat Demenz, ist aber körperlich fit. Bekommt er überhaupt einen Pflegegrad?",
+          "antwort": "Ja, seit 2017 zählen geistige und psychische Einschränkungen gleichwertig: Orientierung, Gedächtnis, Entscheidungen, nächtliche Unruhe und die Fähigkeit, Medikamente und den Tag zu organisieren, fließen mit 15 plus 20 plus 15 Prozent ein. Demenzkranke erreichen oft Pflegegrad 2 oder 3, obwohl sie laufen und essen können. Wichtig ist, dass beim Gutachtertermin jemand dabei ist, der die Alltagsprobleme schildert, weil Betroffene sie oft überspielen.",
+          "quellen": [
+            "§ 14 Abs. 2 SGB XI",
+            "§ 15 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie werden Pflegegrade ermittelt – Das Begutachtungsverfahren",
+          "status": "freigegeben",
+          "frage": "Warum zählt das Modul Selbstversorgung so viel mehr als Mobilität?",
+          "antwort": "Weil Körperpflege, Anziehen, Essen und Toilettengang täglich mehrfach Hilfe erfordern und den Pflegeaufwand am stärksten prägen; der Gesetzgeber hat sie deshalb mit 40 Prozent gewichtet, Mobilität mit 10. Wer sich nicht mehr allein waschen und anziehen kann, sammelt in diesem Modul schnell die Punkte für Pflegegrad 2 oder 3, auch wenn er noch gehen kann. Umgekehrt reicht Gehunfähigkeit allein selten für einen hohen Grad.",
+          "quellen": [
+            "§ 15 Abs. 2 und 3 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wichtige Neuerungen und Verbesserungen ab 2026",
+          "status": "freigegeben",
+          "frage": "Meine Mutter mit Pflegegrad 3 liegt sechs Wochen in der Klinik. Bekommt sie das Pflegegeld weiter?",
+          "antwort": "Ja, seit 2026 läuft das Pflegegeld bei Krankenhaus- und Reha-Aufenthalten bis zu acht Wochen in voller Höhe weiter, bisher waren es vier; ab der neunten Woche ruht es. Auch die Rentenbeiträge für Sie als Pflegeperson zahlt die Kasse in dieser Zeit weiter. Melden Sie den Aufenthalt der Pflegekasse, sonst kann es zu Rückforderungen kommen, wenn er länger dauert.",
+          "quellen": [
+            "§ 34 Abs. 2 SGB XI in der Fassung ab 2026",
+            "§ 44 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Antrag und Begutachtung – Der Weg zum Pflegegrad",
+          "status": "freigegeben",
+          "frage": "Die Pflegekasse hat nach sechs Wochen immer noch nicht entschieden. Was steht mir zu?",
+          "antwort": "70 Euro für jede angefangene Woche über die Frist von 25 Arbeitstagen hinaus, seit 2026 automatisch binnen 15 Arbeitstagen nach Fristablauf zu zahlen, sofern die Kasse die Verzögerung zu vertreten hat und Sie nicht im Heim leben. Fragen Sie schriftlich nach dem Stand und verweisen Sie auf die Frist; bei Krankenhausaufenthalt oder Palliativsituation gelten sogar nur fünf bis zehn Arbeitstage. Die Leistungen selbst gibt es rückwirkend ab Antragsmonat.",
+          "quellen": [
+            "§ 18 Abs. 3b SGB XI",
+            "§ 18 Abs. 3 SGB XI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegegrad",
+        "begutachtungsassessment",
+        "medizinischer-dienst",
+        "pflegegeld",
+        "entlastungsbudget"
+      ]
+    }
+  },
+  {
+    "slug": "pflegegrad-beantragen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Einen Pflegegrad kann jeder beantragen, der voraussichtlich mindestens sechs Monate auf Hilfe im Alltag angewiesen ist, unabhängig vom Alter; typische Anlässe sind Klinikaufenthalt, Demenz, chronische Krankheit oder Überlastung der Angehörigen.",
+          "Der Antrag ist formlos per Anruf, Mail oder Brief an die Pflegekasse der Krankenkasse, Privatversicherte an ihre Pflegepflichtversicherung; der Satz „Ich beantrage die Feststellung der Pflegebedürftigkeit“ genügt, das Datum des ersten Kontakts zählt für die Leistungen.",
+          "Zur Begutachtung des Medizinischen Dienstes oder von Medicproof, 45 bis 60 Minuten zu Hause, führen Sie zwei Wochen lang ein Pflegetagebuch, legen Arzt-, Entlassungs- und Therapieberichte sowie die Medikamentenliste bereit, schildern den schlechtesten Tag und nehmen eine Vertrauensperson dazu.",
+          "Bewertet werden sechs Module mit Punkten von 0 bis 100: Mobilität 10 Prozent, Kognition oder Verhalten 15, Selbstversorgung 40, Krankheitsbewältigung 20, Alltagsgestaltung 15; ab 12,5 Punkten Pflegegrad 1, ab 27 Grad 2, ab 47,5 Grad 3, ab 70 Grad 4, ab 90 Grad 5.",
+          "Die Kasse entscheidet in 25 Arbeitstagen, in Eilfällen fünf bis zehn, sonst 70 Euro je Woche Verzug; danach gibt es 347 bis 990 Euro Pflegegeld, 796 bis 2.299 Euro Sachleistungen, 131 Euro Entlastungsbetrag, 42 Euro Hilfsmittel, 4.180 Euro je Wohnumbau und 3.539 Euro Entlastungsbudget. Widerspruch binnen eines Monats hat in einem Drittel der Fälle Erfolg."
+        ],
+        "quellen": [
+          "§§ 14, 15, 18, 33 SGB XI",
+          "§ 84 SGG (Widerspruch)",
+          "Beitrag Pflegegrad beantragen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie stelle ich einen Pflegegrad-Antrag?",
+          "status": "freigegeben",
+          "frage": "Kann ich den Antrag für meine Mutter stellen, ohne Vollmacht?",
+          "antwort": "Den Antrag ja, denn die Pflegekasse akzeptiert Anträge von Angehörigen, wenn die pflegebedürftige Person einverstanden ist; sie schickt das Formular dann an Ihre Mutter zur Unterschrift. Für alles Weitere, Bescheide, Widerspruch, Gespräche mit der Kasse, brauchen Sie eine Vollmacht oder eine Vorsorgevollmacht. Kann Ihre Mutter nicht mehr unterschreiben, beantragen Sie beim Betreuungsgericht eine rechtliche Betreuung.",
+          "quellen": [
+            "§ 33 Abs. 1 SGB XI",
+            "§ 13 SGB X (Bevollmächtigte)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie bereite ich mich auf die Begutachtung vor?",
+          "status": "freigegeben",
+          "frage": "Mein Vater will beim Gutachter beweisen, wie fit er noch ist. Wie gehe ich damit um?",
+          "antwort": "Das ist der häufigste Grund für zu niedrige Einstufungen. Sprechen Sie vorher mit ihm, dass es nicht um Schwäche geht, sondern um Geld, das ihm zusteht; bitten Sie den Gutachter um ein kurzes Gespräch unter vier Augen und übergeben Sie das Pflegetagebuch schriftlich. Schildern Sie konkrete Situationen, etwa dass er das Hemd falsch zuknöpft oder Medikamente vergisst, statt allgemein von Hilfe zu sprechen. Der Gutachter darf Angaben der Pflegeperson gleichwertig berücksichtigen.",
+          "quellen": [
+            "Begutachtungs-Richtlinien des GKV-Spitzenverbands, Abschnitt Fremdanamnese",
+            "Beitrag, Abschnitt Vorbereitung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Fristen und Entschädigungen",
+          "status": "freigegeben",
+          "frage": "Mein Vater liegt im Krankenhaus und soll nächste Woche entlassen werden. Gibt es ein Eilverfahren?",
+          "antwort": "Ja, bei Krankenhausaufenthalt, Hospiz oder Palliativversorgung muss die Kasse binnen einer Woche begutachten lassen, wenn die Entlassung ansteht und häusliche oder stationäre Pflege organisiert werden muss; die Begutachtung kann nach Aktenlage erfolgen. Stellen Sie den Antrag sofort und bitten Sie den Sozialdienst der Klinik, ihn mit dem Vermerk „Eilverfahren“ weiterzuleiten; auch Kurzzeitpflege über die Krankenkasse ist ohne Pflegegrad möglich.",
+          "quellen": [
+            "§ 18 Abs. 3 Satz 3 SGB XI",
+            "§ 39c SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Was tun bei Ablehnung oder falscher Einstufung?",
+          "status": "freigegeben",
+          "frage": "Meine Mutter hat Pflegegrad 2 bekommen, ich finde das zu niedrig. Wie widerspreche ich richtig?",
+          "antwort": "Legen Sie innerhalb eines Monats schriftlich Widerspruch ein, zunächst ohne Begründung, und fordern Sie das vollständige Gutachten an. Prüfen Sie dann modulweise, welche Einschränkungen fehlen oder zu niedrig bewertet sind, und begründen Sie mit Pflegetagebuch, Arztberichten und konkreten Beispielen nach. Die Kasse lässt meist erneut begutachten, oft nach Aktenlage; ein Drittel der Widersprüche führt zur Höherstufung. Pflegestützpunkte helfen kostenlos, bei Ablehnung bleibt die gebührenfreie Klage vor dem Sozialgericht.",
+          "quellen": [
+            "§ 84 SGG",
+            "§ 18 Abs. 2 SGB XI (Gutachten einsehen)",
+            "§ 7a SGB XI (Pflegeberatung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegegrad",
+        "medizinischer-dienst",
+        "begutachtungsassessment",
+        "pflegegeld",
+        "pflegehilfsmittel"
+      ]
+    }
+  },
+  {
+    "slug": "pflegebeduerftigkeit",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Pflegebedürftig ist, wer wegen körperlicher, geistiger oder psychischer Beeinträchtigungen voraussichtlich mindestens sechs Monate Hilfe im Alltag braucht; Ende 2023 waren das 5,69 Millionen Menschen, 15 Prozent mehr als 2021, 86 Prozent werden zu Hause versorgt.",
+          "Das Begutachtungsassessment prüft 64 Kriterien in sechs Modulen und bewertet die Selbstständigkeit statt Pflegeminuten: Mobilität 10 Prozent, Kognition oder Verhalten 15, Selbstversorgung 40, Krankheitsbewältigung 20, Alltag 15; ab 12,5 Punkten liegt Pflegebedürftigkeit vor.",
+          "Fünf Pflegegrade: Grad 1 nur Entlastungsbetrag von 131 Euro und 42 Euro Hilfsmittel, Grad 2 bis 5 Pflegegeld von 347 bis 990 Euro oder Sachleistungen von 796 bis 2.299 Euro plus Entlastungsbetrag; Grad 2 ist mit 40 Prozent der häufigste.",
+          "Der Antrag ist formlos bei der Pflegekasse, Leistungen fließen ab Antragsmonat, Bescheid in 25 Arbeitstagen; ein Pflegetagebuch über zwei Wochen ist das wichtigste Argument bei der Begutachtung.",
+          "2026 bleiben die Beträge unverändert, neu sind das ganzjährige Entlastungsbudget von 3.539 Euro, Beratungsbesuche nur noch halbjährlich, Verhinderungspflege nur noch zwei Jahre rückwirkend abrechenbar und in Bayern ein auf 500 Euro halbiertes Landespflegegeld."
+        ],
+        "quellen": [
+          "§§ 14, 15, 18, 33, 36, 37, 45b SGB XI",
+          "Statistisches Bundesamt, Pflegestatistik 2023",
+          "Beitrag Pflegebedürftigkeit"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was bedeutet Pflegebedürftigkeit nach dem Gesetz?",
+          "status": "freigegeben",
+          "frage": "Meine Frau braucht nach einer Hüft-OP für zwei Monate Hilfe. Bekommt sie einen Pflegegrad?",
+          "antwort": "Nein, Pflegebedürftigkeit setzt voraus, dass die Einschränkung voraussichtlich mindestens sechs Monate dauert; bei klarer Heilungsprognose lehnt die Kasse ab. Für die Übergangszeit zahlt die Krankenkasse häusliche Krankenpflege, Haushaltshilfe bis vier Wochen und bei Bedarf Kurzzeitpflege nach dem Klinikaufenthalt, ohne Pflegegrad. Bleiben nach der Reha Einschränkungen, stellen Sie dann den Antrag.",
+          "quellen": [
+            "§ 14 Abs. 1 SGB XI",
+            "§§ 37, 38, 39c SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert das Begutachtungsverfahren?",
+          "status": "freigegeben",
+          "frage": "Der Gutachter kommt nächste Woche. Kann ich das Gutachten später einsehen?",
+          "antwort": "Ja, Sie haben Anspruch auf das vollständige Gutachten; seit 2017 muss die Kasse es mit dem Bescheid automatisch mitschicken, wenn Sie das im Antrag angekreuzt haben, sonst auf Nachfrage. Darin sehen Sie die Punkte je Modul und die Empfehlungen zu Hilfsmitteln, Reha und Wohnumfeld, die als eigener Antrag gelten. Vergleichen Sie die Einträge mit Ihrem Pflegetagebuch; jede Abweichung ist ein Argument für den Widerspruch.",
+          "quellen": [
+            "§ 18 Abs. 3 Satz 7 SGB XI",
+            "§ 18 Abs. 6a SGB XI (Hilfsmittelempfehlung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Pflegegrade gibt es und welche Leistungen stehen zu?",
+          "status": "freigegeben",
+          "frage": "Meine Mutter hat Pflegegrad 1. Was kann sie mit den 131 Euro anfangen?",
+          "antwort": "Den Entlastungsbetrag für anerkannte Angebote: Alltagsbegleiter, Haushaltshilfe eines zugelassenen Dienstes, Tagespflege, Betreuungsgruppen oder in Pflegegrad 1 ausnahmsweise auch Grundpflege durch einen Pflegedienst; die Anbieter rechnen direkt mit der Kasse ab oder Sie reichen Rechnungen ein. Dazu kommen 42 Euro monatlich für Verbrauchshilfsmittel wie Handschuhe und Betteinlagen, 4.180 Euro für den Umbau des Bads und kostenlose Pflegeberatung. Nicht genutzte Beträge sammeln sich bis 30. Juni des Folgejahres an.",
+          "quellen": [
+            "§ 45b SGB XI",
+            "§ 40 SGB XI",
+            "§ 28a SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie beantragt man einen Pflegegrad erfolgreich?",
+          "status": "freigegeben",
+          "frage": "Ich pflege meinen Mann seit einem Jahr ohne Antrag. Bekomme ich rückwirkend Pflegegeld?",
+          "antwort": "Nein, Leistungen gibt es erst ab dem Monat der Antragstellung; das vergangene Jahr ist verloren, jeder weitere Monat kostet Sie je nach Grad 347 bis 990 Euro. Rufen Sie heute die Pflegekasse an und lassen Sie sich das Datum bestätigen. Ab dem Antrag zahlt die Kasse zudem Rentenbeiträge für Sie als Pflegeperson, wenn Sie mindestens zehn Stunden an zwei Tagen pro Woche pflegen und nicht mehr als 30 Stunden arbeiten.",
+          "quellen": [
+            "§ 33 Abs. 1 Satz 5 SGB XI",
+            "§ 44 SGB XI",
+            "§ 3 Satz 1 Nr. 1a SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegegrad",
+        "begutachtungsassessment",
+        "entlastungsbetrag",
+        "pflegehilfsmittel",
+        "medizinischer-dienst"
+      ]
+    }
+  },
+  {
+    "slug": "pflegedienste",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ambulante Pflegedienste pflegen, betreuen und versorgen zu Hause; die Kasse zahlt dafür Sachleistungen von 796 Euro bei Pflegegrad 2 bis 2.299 Euro bei Grad 5, 2026 unverändert, dazu 131 Euro Entlastungsbetrag und 3.539 Euro Entlastungsbudget.",
+          "Die Kassen vergüten rund 35 Euro je Stunde Grundpflege, Selbstzahler zahlen 45 bis 65 Euro, Behandlungspflege 40 bis 55, Hauswirtschaft 25 bis 40 Euro plus Investitionskosten und rund 6 Euro Wegepauschale; zwei Stunden tägliche Grundpflege kosten etwa 3.300 Euro im Monat, weit über dem Budget.",
+          "Mit der Kombinationsleistung zahlt die Kasse den nicht genutzten Anteil der Sachleistung anteilig als Pflegegeld: Bei Grad 3 und halbem Sachleistungsbudget kommen 748,50 plus 299,50 Euro, also 1.048 Euro zusammen; bis 40 Prozent der Sachleistung lassen sich in Betreuungsangebote umwandeln, Anpassung alle sechs Monate.",
+          "Seit 2026 dürfen Pflegefachkräfte nach dem Befugniserweiterungsgesetz chronische Wunden, Diabetes und Demenz eigenverantwortlich versorgen, Bachelorabsolventen sofort, andere nach Weiterbildung; ab Juli 2026 bewertet der Medizinische Dienst Pflegedienste in den Stufen A bis D nach Ergebnisqualität statt Schulnoten.",
+          "Für Angehörige: Beratungsbesuche für Grad 2 bis 5 nur noch halbjährlich, Pflegegeld bei Klinikaufenthalt acht Wochen weiter, Verhinderungspflege nur noch für laufendes und voriges Jahr abrechenbar, Bescheinigungen für Pflegeunterstützungsgeld auch von Pflegefachpersonen."
+        ],
+        "quellen": [
+          "§§ 36, 37, 38, 45a, 45b, 114 SGB XI",
+          "Pflegekompetenzgesetz und Befugniserweiterungsgesetz 2025/2026",
+          "Beitrag Pflegedienste"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Was kosten ambulante Pflegedienste konkret?",
+          "status": "freigegeben",
+          "frage": "Warum rechnet der Pflegedienst in Leistungskomplexen statt nach Stunden ab?",
+          "antwort": "Weil die Vergütung mit den Kassen je Bundesland in Leistungskomplexen vereinbart ist, etwa „kleine Morgentoilette“ oder „Hilfe beim Essen“, mit festen Punktwerten; die Stunde ist nur ein Vergleichsmaßstab. Fragen Sie nach dem Leistungskatalog und vergleichen Sie, welche Komplexe Sie brauchen, denn manche Dienste bieten auch Zeitvergütung an, die bei mehreren kleinen Handgriffen günstiger sein kann. Der Kostenvoranschlag zeigt, was über das Sachleistungsbudget hinausgeht.",
+          "quellen": [
+            "§ 89 SGB XI",
+            "Landesrahmenverträge nach § 75 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche neuen Befugnisse haben Pflegefachkräfte ab 2026?",
+          "status": "freigegeben",
+          "frage": "Darf die Pflegekraft meinem Vater jetzt Insulin ohne Arztanordnung spritzen?",
+          "antwort": "Nicht die Erstverordnung: Die Diagnose und die Einstellung bleiben beim Arzt. Qualifizierte Pflegefachkräfte dürfen seit 2026 aber die laufende Diabetesversorgung eigenverantwortlich steuern, also Dosierungen im vereinbarten Rahmen anpassen, Blutzuckermanagement und Schulung übernehmen, ohne für jede Änderung eine neue Verordnung zu holen. Das spart Arztbesuche und Wartezeit; fragen Sie den Pflegedienst, ob seine Fachkräfte die Zusatzqualifikation haben.",
+          "quellen": [
+            "§ 15a SGB V (Befugniserweiterung)",
+            "Beitrag, Abschnitt neue Befugnisse"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kombinationsleistung: Mehr aus dem Budget herausholen",
+          "status": "freigegeben",
+          "frage": "Der Pflegedienst kommt nur morgens für 600 Euro im Monat. Bekomme ich bei Pflegegrad 4 noch Pflegegeld?",
+          "antwort": "Ja, 600 Euro sind 32,3 Prozent der Sachleistung von 1.859 Euro; die restlichen 67,7 Prozent bekommen Sie als Pflegegeld, 67,7 Prozent von 800 Euro sind 542 Euro. Zusammen fließen 1.142 Euro. Teilen Sie der Pflegekasse die gewünschte Aufteilung mit, sie gilt für sechs Monate; ändert sich der Bedarf, passen Sie neu an. Der Entlastungsbetrag von 131 Euro kommt unabhängig davon obendrauf.",
+          "quellen": [
+            "§ 38 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Neue Qualitätsstandards für Pflegedienste ab Juli 2026",
+          "status": "freigegeben",
+          "frage": "Wie finde ich einen guten Pflegedienst in meiner Nähe?",
+          "antwort": "Über die Pflegeberatung der Kasse oder den Pflegestützpunkt, die Listen zugelassener Dienste mit Prüfergebnissen führen; ab Juli 2026 zeigen die Berichte des Medizinischen Dienstes die Stufen A bis D je Prüfbereich, achten Sie auf A und B bei Ergebnisqualität und Beratung der Angehörigen. Vereinbaren Sie ein Erstgespräch, fragen Sie nach festen Bezugspflegekräften, Erreichbarkeit nachts und am Wochenende und lassen Sie sich den Kostenvoranschlag erklären; ein Probemonat ist üblich.",
+          "quellen": [
+            "§ 114, § 115 SGB XI",
+            "§ 7a SGB XI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegesachleistung",
+        "kombinationsleistung",
+        "pflegegeld",
+        "entlastungsbetrag",
+        "medizinischer-dienst"
+      ]
+    }
+  },
+  {
+    "slug": "kurzzeitpflege",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kurzzeitpflege ist vollstationäre Pflege im Heim für bis zu acht Wochen im Jahr, wenn die Versorgung zu Hause vorübergehend nicht geht, etwa nach der Klinik oder bei Urlaub und Krankheit der Pflegeperson; ab Pflegegrad 2 aus dem Entlastungsbudget, ohne Pflegegrad oder mit Grad 1 nach dem Krankenhaus über die Krankenkasse.",
+          "Seit Juli 2025 gibt es ein gemeinsames Budget von 3.539 Euro für Kurzzeit- und Verhinderungspflege, 2026 erstmals ganzjährig, frei aufteilbar und ohne die frühere Vorpflegezeit von sechs Monaten; Verhinderungspflege ist ebenfalls auf acht Wochen möglich.",
+          "Die Kasse zahlt aus dem Budget nur die pflegebedingten Kosten; Unterkunft, Verpflegung und Investitionskosten von 35 bis 75 Euro je Tag tragen Sie selbst, bei Tagessätzen von 70 bis 130 Euro.",
+          "Das Pflegegeld läuft während der Kurzzeitpflege zur Hälfte weiter, am Aufnahme- und Entlassungstag voll; der Entlastungsbetrag von 131 Euro, ansparbar bis 30. Juni des Folgejahres auf 1.572 Euro, deckt Hotelkosten, außerdem helfen Steuerabzug und im Notfall Hilfe zur Pflege.",
+          "Ein formloser Hinweis an die Pflegekasse und eine zugelassene Einrichtung genügen, das Heim rechnet direkt ab; Erstattungen sind ab 2026 nur noch für das laufende und das vorige Kalenderjahr möglich."
+        ],
+        "quellen": [
+          "§ 42, § 42a, § 45b SGB XI",
+          "§ 39c SGB V",
+          "Beitrag Kurzzeitpflege"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer hat Anspruch auf Kurzzeitpflege?",
+          "status": "freigegeben",
+          "frage": "Mein Vater ohne Pflegegrad kommt nach dem Schlaganfall aus der Klinik und kann nicht allein sein. Wer zahlt die Kurzzeitpflege?",
+          "antwort": "Die Krankenkasse: Ohne Pflegegrad oder mit Grad 1 übernimmt sie nach einem Krankenhausaufenthalt bis zu acht Wochen Kurzzeitpflege mit bis zu 1.774 Euro, wenn häusliche Krankenpflege nicht reicht. Der Sozialdienst der Klinik beantragt sie im Entlassmanagement. Stellen Sie parallel sofort den Pflegegradantrag im Eilverfahren; wird Grad 2 anerkannt, wechselt die Finanzierung ins Entlastungsbudget der Pflegekasse.",
+          "quellen": [
+            "§ 39c SGB V",
+            "§ 42 Abs. 2 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist das gemeinsame Entlastungsbudget für 2026?",
+          "status": "freigegeben",
+          "frage": "Ich möchte drei Wochen Urlaub und meine Mutter für die Zeit ins Heim geben. Reicht das Budget?",
+          "antwort": "Wahrscheinlich: 21 Tage Kurzzeitpflege kosten pflegebedingt rund 1.500 bis 2.100 Euro, das Budget von 3.539 Euro deckt das, wenn Sie in diesem Jahr noch keine Verhinderungspflege genutzt haben. Hotelkosten von 21 mal 35 bis 75 Euro zahlen Sie zusätzlich, teils aus dem angesparten Entlastungsbetrag. Alternativ organisieren Sie Verhinderungspflege zu Hause durch einen Dienst oder eine Nachbarin aus demselben Budget, oft günstiger und ohne Ortswechsel.",
+          "quellen": [
+            "§ 42a SGB XI",
+            "§ 45b SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie wird das Pflegegeld während der Kurzzeitpflege fortgezahlt?",
+          "status": "freigegeben",
+          "frage": "Wird das halbe Pflegegeld automatisch gezahlt oder muss ich es beantragen?",
+          "antwort": "Automatisch, sobald die Einrichtung der Pflegekasse Beginn und Ende meldet; die Kasse rechnet tageweise: Aufnahme- und Entlassungstag voll, dazwischen die Hälfte, höchstens acht Wochen im Jahr. Bei Pflegegrad 3 sind das 299,50 Euro je vollem Monat. Prüfen Sie die Abrechnung, weil Fehler bei den Randtagen häufig sind; dieselbe Regel gilt bei Verhinderungspflege durch Dienste, bei Pflege durch nahe Angehörige läuft das Pflegegeld sogar voll weiter.",
+          "quellen": [
+            "§ 37 Abs. 2 SGB XI",
+            "§ 42a Abs. 2 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie können Eigenanteile reduziert werden?",
+          "status": "freigegeben",
+          "frage": "Kann ich die Hotelkosten der Kurzzeitpflege von der Steuer absetzen?",
+          "antwort": "Ja, als außergewöhnliche Belastung der pflegebedürftigen Person, abzüglich der Haushaltsersparnis von rund 11 Euro je Tag, sofern sie den eigenen Haushalt beibehält, nicht; die zumutbare Belastung von 1 bis 7 Prozent des Einkommens wird abgezogen. Zahlen Sie als Kind, können Sie die Kosten nur absetzen, wenn Sie unterhaltspflichtig sind. Alternativ bringt die Steuerermäßigung für haushaltsnahe Dienstleistungen 20 Prozent auf die Pflegekosten, bis 4.000 Euro im Jahr.",
+          "quellen": [
+            "§ 33 EStG",
+            "§ 35a Abs. 2 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kurzzeitpflege",
+        "verhinderungspflege",
+        "entlastungsbudget",
+        "entlastungsbetrag",
+        "pflegegeld",
+        "hilfe-zur-pflege"
+      ]
+    }
+  },
+  {
+    "slug": "pflegezusatzversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Pflegeversicherung ist eine Teilkaskoversicherung: Im Heim bleiben 2026 im ersten Jahr im Schnitt 3.245 Euro Eigenanteil im Monat, 261 Euro mehr als 2025, bei Pflegegrad 4 rund 1.625 Euro Lücke; die Leistungen von 347 bis 990 Euro Pflegegeld und 805 bis 2.096 Euro Heimzuschuss bleiben 2026 unverändert.",
+          "Zusatzschutz gibt es als Pflegetagegeld mit festem Betrag je Pflegegrad zur freien Verwendung, als Pflegekostenversicherung gegen Rechnung, als Pflegerentenversicherung mit Kapitalaufbau und als Pflege-Bahr mit 60 Euro Zulage im Jahr ab 10 Euro Eigenbeitrag, ohne Gesundheitsprüfung, mindestens 600 Euro bei Grad 5.",
+          "Der Beitrag hängt vom Eintrittsalter ab: Vollschutz kostet mit 25 rund 32 Euro, mit 35 rund 56 Euro, mit 50 oft über 100 Euro; für 35-Jährige reichen Tarife von 31 Euro bei HanseMerkur bis 84 Euro bei Continentale, Dynamik und Beitragsbefreiung im Pflegefall sind sinnvoll.",
+          "Im Heim zahlt die Kasse Leistungszuschläge auf den pflegebedingten Eigenanteil: 15 Prozent im ersten Jahr, 30 im zweiten, 50 im dritten, 75 ab dem vierten, bei 1.400 Euro also 210 bis 1.050 Euro, auch bei Heimwechsel fortlaufend.",
+          "Reicht das Geld nicht, zahlt das Sozialamt Hilfe zur Pflege ab Antragsmonat mit 10.000 Euro Schonvermögen je Person; Kinder haften erst ab 100.000 Euro Jahresbrutto, der Eigenanteil ist als außergewöhnliche Belastung absetzbar."
+        ],
+        "quellen": [
+          "§ 43, § 43c SGB XI",
+          "§§ 126 bis 130 SGB XI (Pflege-Bahr)",
+          "§§ 61 ff., 90, 94 SGB XII",
+          "§ 33 EStG",
+          "Beitrag Pflegezusatzversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Arten von Pflegezusatzversicherungen: Welche passt zu Ihnen?",
+          "status": "freigegeben",
+          "frage": "Ich bin 58 mit Bluthochdruck und Diabetes. Bekomme ich noch eine Pflegezusatzversicherung?",
+          "antwort": "Den Pflege-Bahr auf jeden Fall, weil der Versicherer ohne Gesundheitsprüfung annehmen muss; mit 58 kostet ein Tarif mit 600 Euro bei Pflegegrad 5 etwa 60 bis 90 Euro im Monat, abzüglich 5 Euro Zulage, mit fünf Jahren Wartezeit. Normale Pflegetagegeldtarife lehnen Diabetes mit Insulin meist ab, bei Tabletten und gut eingestelltem Blutdruck gibt es teils Zuschläge; eine anonyme Voranfrage über einen Makler klärt das. Rechnen Sie ehrlich, ob Beiträge bis ins hohe Alter tragbar sind.",
+          "quellen": [
+            "§ 127 SGB XI",
+            "Beitrag, Abschnitt Pflege-Bahr"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die Beiträge zur Pflegezusatzversicherung?",
+          "status": "freigegeben",
+          "frage": "Lohnt sich die Pflegezusatzversicherung mit 30, wenn der Pflegefall erst in 50 Jahren kommt?",
+          "antwort": "Genau deshalb ist sie dann günstig: 30 Euro im Monat über 50 Jahre sind 18.000 Euro, ein Jahr im Heim kostet heute schon 39.000 Euro Eigenanteil. Wichtig ist eine Dynamik, sonst sind 100 Euro Tagegeld 2076 wenig wert; ebenso die Beitragsbefreiung im Pflegefall und die Frage, ob der Versicherer Beiträge anpassen darf, was er bei allen Tarifen kann. Wer lieber flexibel bleibt, spart den Betrag in einem ETF-Depot, trägt aber das Risiko eines frühen Pflegefalls selbst.",
+          "quellen": [
+            "Beitrag, Abschnitt Beiträge",
+            "§ 203 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Leistungszuschläge: So sinkt Ihr Eigenanteil im Heim mit der Zeit",
+          "status": "freigegeben",
+          "frage": "Zählt die Zeit in der Kurzzeitpflege für den Leistungszuschlag mit?",
+          "antwort": "Nein, nur Monate vollstationärer Dauerpflege nach § 43 SGB XI zählen; Kurzzeit- und Tagespflege bleiben außen vor, auch ein Umzug zwischen Heimen unterbricht die Zählung nicht. Der Zuschlag wird vom Heim automatisch auf der Rechnung abgezogen, Sie müssen nichts beantragen. Bei Wechsel des Heims informiert die Pflegekasse die neue Einrichtung über die bereits erreichten Monate.",
+          "quellen": [
+            "§ 43c SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Finanzielle Hilfen bei fehlendem Geld",
+          "status": "freigegeben",
+          "frage": "Meine Mutter hat mir vor fünf Jahren 40.000 Euro geschenkt. Kann das Sozialamt das zurückfordern?",
+          "antwort": "Ja, Schenkungen der letzten zehn Jahre kann das Sozialamt als Rückforderung wegen Verarmung des Schenkers geltend machen, wenn Ihre Mutter Hilfe zur Pflege braucht; Sie müssen dann den noch vorhandenen Wert herausgeben oder monatlich die Pflegelücke bis zur Höhe des Geschenks decken. Übliche Geschenke zu Geburtstagen und Pflegeleistungen, die Sie erbracht haben, werden gegengerechnet. Nach zehn Jahren ist die Schenkung sicher.",
+          "quellen": [
+            "§ 528 BGB",
+            "§ 93 SGB XII",
+            "§ 529 BGB (Zehnjahresfrist)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "pflegetagegeld",
+        "pflege-bahr",
+        "einrichtungseinheitlicher-eigenanteil",
+        "hilfe-zur-pflege",
+        "gesundheitspruefung"
+      ]
+    }
+  },
+  {
+    "slug": "private-pflege-pflichtversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wer privat krankenversichert ist, muss auch privat pflegeversichert sein, ohne Befreiung: Selbstständige, Beamte mit Beihilfe, Angestellte über 77.400 Euro und Altversicherte über 69.750 Euro, jede Person einzeln; der Versicherer muss annehmen, ohne Wartezeit und ohne Zuschlag für Pflegerisiken.",
+          "Die Leistungen sind gesetzlich dieselben wie in der sozialen Pflegeversicherung, aber als Kostenerstattung: Pflegegeld 347 bis 990 Euro, Sachleistungen 796 bis 2.299 Euro, 131 Euro Entlastungsbetrag, 42 Euro Hilfsmittel, 4.180 Euro je Wohnumbau, 40 Prozent Umwandlung; begutachtet wird kostenfrei durch Medicproof mit 1.400 Gutachtern, auch per Video.",
+          "Finanziert wird kapitalgedeckt mit Alterungsrückstellungen nach Eintrittsalter, nicht nach Einkommen; die Zahl pflegebedürftiger Privatversicherter hat sich seit 2016 auf 379.000 verdoppelt, die Ausgaben stiegen auf 2,8 Milliarden Euro.",
+          "2026 stiegen die Beiträge um 16 Prozent auf im Schnitt 122,64 Euro, mit Beihilfe um 6 Prozent auf 56,50 Euro; nach fünf Jahren gilt der gesetzliche Höchstbeitrag von 209,25 Euro als Deckel, für Beihilfeberechtigte 83,70 Euro.",
+          "Angestellte erhalten bis 104,63 Euro Arbeitgeberzuschuss, Kinderlose tragen den Zuschlag allein, die Beiträge sind voll als Vorsorgeaufwendungen absetzbar und werden seit 2026 digital gemeldet; die Pflegelücke von rund 3.245 Euro im Heim bleibt und braucht eine Zusatzversicherung."
+        ],
+        "quellen": [
+          "§ 23, § 110 SGB XI",
+          "§ 61 SGB XI (Arbeitgeberzuschuss)",
+          "§ 10 Abs. 1 Nr. 3 EStG",
+          "Beitrag Private Pflege-Pflichtversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer muss sich privat pflegeversichern?",
+          "status": "freigegeben",
+          "frage": "Ich bin Beamter, meine Frau gesetzlich versichert. Wo werden unsere Kinder pflegeversichert?",
+          "antwort": "Dort, wo sie krankenversichert sind: In der gesetzlichen Familienversicherung Ihrer Frau beitragsfrei, sofern Sie nicht mehr verdienen als sie und über 77.400 Euro liegen; sonst privat bei Ihnen, in der Pflegepflichtversicherung ebenfalls beitragsfrei bis 25, wenn sie familienversichert wären. Auch Ihr eigener Beihilfeanspruch von 80 Prozent für Kinder gilt nur bei privater Versicherung.",
+          "quellen": [
+            "§ 23 SGB XI",
+            "§ 25 SGB XI",
+            "§ 110 Abs. 1 Nr. 2 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie funktioniert die Finanzierung?",
+          "status": "freigegeben",
+          "frage": "Warum zahle ich als Privatversicherter weniger Pflegebeitrag als ein gesetzlich Versicherter?",
+          "antwort": "Weil der private Beitrag nach dem Risiko des Kollektivs kalkuliert wird, das im Schnitt jünger, gesünder und einkommensstärker ist, und weil kein Solidarausgleich für Geringverdiener, Rentner und Familien stattfindet; gesetzlich Versicherte mit 5.812,50 Euro Einkommen zahlen 209 Euro, privat kostet es 2026 im Schnitt 123 Euro. Dafür fehlt die beitragsfreie Mitversicherung des Ehepartners, und der Beitrag steigt mit dem Alter des Kollektivs, wie die 16 Prozent 2026 zeigen.",
+          "quellen": [
+            "§ 110 SGB XI",
+            "Beitrag, Abschnitt Finanzierung"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Beitragssteigerungen und Beitragsobergrenzen",
+          "status": "freigegeben",
+          "frage": "Ich bin seit sieben Jahren privat versichert und zahle 180 Euro Pflegebeitrag. Ist das erlaubt?",
+          "antwort": "Ja, solange der Beitrag unter 209,25 Euro bleibt, dem Höchstbeitrag der sozialen Pflegeversicherung, der nach fünf Jahren Versicherungszeit als Obergrenze gilt; für Ehepaare, bei denen ein Partner wenig verdient, sind es zusammen höchstens 150 Prozent, 313,88 Euro. Prüfen Sie, ob der Versicherer die Grenze korrekt anwendet und ob Ihre Kinder beitragsfrei geführt werden; bei Zweifeln hilft der PKV-Ombudsmann kostenlos.",
+          "quellen": [
+            "§ 110 Abs. 1 Nr. 2 Buchstabe e und Abs. 3 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Arbeitgeberzuschuss und Steuerbehandlung",
+          "status": "freigegeben",
+          "frage": "Kann ich die Beiträge zur privaten Pflegepflichtversicherung voll absetzen?",
+          "antwort": "Ja, als Basisvorsorge in voller Höhe, zusammen mit den Beiträgen zur privaten Krankenversicherung auf Basisniveau, ohne die Höchstgrenze von 1.900 Euro; nur der Arbeitgeberzuschuss wird abgezogen. Der Versicherer meldet die Beträge seit 2026 elektronisch ans Finanzamt, in ELSTER sind sie vorausgefüllt. Beiträge für eine Pflegezusatzversicherung fallen dagegen unter die sonstigen Vorsorgeaufwendungen, die meist schon ausgeschöpft sind.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 3 Buchstabe b EStG",
+            "§ 10 Abs. 2a EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "private-pflegepflichtversicherung",
+        "kontrahierungszwang",
+        "alterungsrueckstellung",
+        "medizinischer-dienst",
+        "kinderlosenzuschlag"
+      ]
+    }
+  },
+  {
+    "slug": "unfallversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die private Unfallversicherung zahlt eine Kapitalsumme, wenn ein plötzlich von außen wirkendes Ereignis eine dauerhafte Beeinträchtigung hinterlässt, voraussichtlich über drei Jahre; sie gilt weltweit rund um die Uhr, anders als die gesetzliche Unfallversicherung, die nur Arbeit und Arbeitsweg deckt, obwohl 80 Prozent der Unfälle in der Freizeit passieren.",
+          "Kernleistung ist die Invaliditätssumme nach Gliedertaxe: Der GDV rät zu 55 Prozent für eine Hand, gute Tarife zahlen 72; dazu Bergungskosten ab 10.000 Euro, Todesfallsumme, kosmetische Operationen, wahlweise Krankenhaustagegeld und Sofortleistung bei schweren Verletzungen. Krankheiten, Herzinfarkt und vorübergehende Verletzungen sind nicht versichert.",
+          "Empfohlen wird eine Grundsumme von mindestens 100.000 Euro, besser das Drei- bis Fünffache des Bruttojahreseinkommens, mit Progression von 225 bis 500 Prozent, die bei schweren Unfällen ab etwa 25 Prozent Invalidität überproportional zahlt: 100.000 Euro Grundsumme bringen bei 50 Prozent Invalidität mit 350 Prozent Progression rund 120.000, mit 500 Prozent 200.000 Euro.",
+          "Wer eine Berufsunfähigkeitsversicherung bekommt, sollte sie vorziehen, denn nur ein Prozent der Schwerbehinderungen stammt aus Unfällen; die Unfallversicherung passt für Kinder, Rentner, Hausfrauen und Hausmänner, Selbstständige und alle, die keine BU erhalten.",
+          "Guter Schutz kostet Erwachsene etwa 100 Euro im Jahr, Kinder ab 50 bis 127 Euro, Einstiegstarife ab 3,40 Euro im Monat; die Stiftung Warentest bewertete 2026 acht von 120 Tarifen mit sehr gut, darunter Haftpflichtkasse, Allianz, Ergo und Generali. Verzichten sollte man auf Beitragsrückgewähr."
+        ],
+        "quellen": [
+          "§ 178 VVG",
+          "Allgemeine Unfallversicherungsbedingungen AUB 2020 des GDV",
+          "Stiftung Warentest, Unfallversicherung 2026",
+          "Beitrag Unfallversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Unfälle sind versichert?",
+          "status": "freigegeben",
+          "frage": "Ich bin beim Joggen umgeknickt und habe mir das Kreuzband gerissen. Ist das ein Unfall?",
+          "antwort": "Nach den Musterbedingungen ja, weil erhöhte Kraftanstrengung und Eigenbewegungen als Unfall gelten, wenn dabei Gelenke verrenkt oder Bänder und Muskeln gerissen werden; ältere Tarife verlangen ein Ereignis von außen und lehnen ab. Gezahlt wird aber nur, wenn eine dauerhafte Funktionseinschränkung bleibt, die der Arzt binnen 15 Monaten feststellt, nicht für die Verletzung selbst. Prüfen Sie den Einschluss von Eigenbewegungen und die Fristen für Invaliditätsfeststellung und Meldung.",
+          "quellen": [
+            "Ziffer 1.4 AUB 2020",
+            "§ 178 Abs. 2 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Versicherungssumme und Gliedertaxe richtig wählen",
+          "status": "freigegeben",
+          "frage": "Was bekomme ich bei 150.000 Euro Grundsumme, wenn ich nach einem Unfall den Daumen verliere?",
+          "antwort": "Nach der GDV-Gliedertaxe 20 Prozent, also 30.000 Euro, bei einem guten Tarif mit 25 Prozent 37.500 Euro; die Progression greift nicht, weil sie meist erst ab 25 Prozent Invalidität wirkt. Bleibt der Daumen erhalten, aber steif, zahlt der Versicherer den Bruchteil, etwa die Hälfte. Verlangen Sie beim Vergleich die vollständige Gliedertaxe des Tarifs, sie entscheidet bei den häufigen mittleren Verletzungen mehr als die Progression.",
+          "quellen": [
+            "Ziffer 2.1.2.2.1 AUB 2020",
+            "Beitrag, Abschnitt Gliedertaxe"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Unfallversicherung vs. Berufsunfähigkeitsversicherung – Unterschiede und Abgrenzung",
+          "status": "freigegeben",
+          "frage": "Reicht eine Unfallversicherung, wenn ich mir keine BU leisten kann?",
+          "antwort": "Sie ist ein Notbehelf: Sie zahlt einmalig und nur nach Unfällen, während 89 Prozent der Schwerbehinderungen und die meisten Berufsunfähigkeiten durch Krankheit entstehen, Rücken, Psyche, Krebs. Prüfen Sie erst günstigere BU-Varianten wie eine Erwerbsunfähigkeits- oder Grundfähigkeitsversicherung oder eine BU mit niedriger Rente und späterer Erhöhung. Kombinieren Sie notfalls: Unfallversicherung mit hoher Progression für den Kapitalbedarf plus Krankentagegeld für das laufende Einkommen.",
+          "quellen": [
+            "Beitrag, Abschnitt Abgrenzung zur BU",
+            "Statistik der schwerbehinderten Menschen, Statistisches Bundesamt"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Kosten und Beitragsfaktoren",
+          "status": "freigegeben",
+          "frage": "Warum zahlt mein Nachbar als Dachdecker das Doppelte von mir?",
+          "antwort": "Weil Versicherer Berufe in Gefahrengruppen einteilen: Büro und Handel in Gruppe A, körperliche und handwerkliche Tätigkeiten in Gruppe B mit rund doppeltem Beitrag, weil Unfälle dort häufiger und schwerer sind; die Freizeit zählt trotzdem mit. Ändern Sie den Beruf, müssen Sie das melden, sonst kürzt der Versicherer. Rentner werden meist wie Gruppe A eingestuft, für Kinder gelten eigene Tarife mit Leistungen auch bei Krankheitsinvalidität.",
+          "quellen": [
+            "Tarifbestimmungen der Unfallversicherer",
+            "Ziffer 6 AUB 2020 (Gefahrerhöhung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "unfallversicherung",
+        "gliedertaxe",
+        "progression",
+        "invaliditaet",
+        "versicherungssumme",
+        "bu"
+      ]
+    }
+  },
+  {
+    "slug": "gesetzliche-unfallversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Unfallversicherung schützt Beschäftigte, Auszubildende, Schüler, Studierende, Kita-Kinder, Landwirte, Ehrenamtliche, Blutspender und Ersthelfer automatisch und beitragsfrei bei Arbeitsunfällen, Wegeunfällen und Berufskrankheiten; 2024 gab es 754.660 meldepflichtige Arbeitsunfälle, 3,7 Prozent weniger als im Vorjahr. Beamte, Ärzte, Apotheker sind ausgenommen, Selbstständige können sich freiwillig versichern.",
+          "Versichert ist die betriebliche Tätigkeit inklusive Dienstreise, Betriebsfeier, Betriebssport und Homeoffice sowie der direkte Arbeitsweg; nicht private Erledigungen, Umwege und Freizeit.",
+          "Sie zahlt Heilbehandlung und Reha ohne Kostendeckel, Verletztengeld von 80 Prozent des Bruttos bis zur Höhe des Nettos für bis zu 78 Wochen ab der siebten Woche, Pflegegeld von 462 bis 1.838 Euro, Unfallrente bis zwei Drittel des Jahresarbeitsverdienstes bei mindestens 20 Prozent Erwerbsminderung, Sterbegeld von 6.780 Euro und Hinterbliebenenrenten; Grundsatz ist Reha vor Rente.",
+          "Die Beiträge tragen allein die Arbeitgeber, umgelegt nach Lohnsumme und Gefahrtarif der Branche, Mindestbeitrag 2026 277,55 Euro; Träger sind Berufsgenossenschaften und Unfallkassen.",
+          "Nach einem Unfall geht es zum Durchgangsarzt, wenn die Arbeitsunfähigkeit über den Unfalltag hinausgeht oder die Behandlung länger als eine Woche dauert; der Arbeitgeber meldet Unfälle mit mehr als drei Tagen Ausfall binnen drei Tagen, jeder Vorfall gehört ins Verbandbuch. Freizeitunfälle bleiben der privaten Unfallversicherung."
+        ],
+        "quellen": [
+          "§§ 2, 6, 8, 9, 26 ff., 45, 56, 64, 150 ff., 193 SGB VII",
+          "DGUV-Statistik 2024",
+          "Beitrag Gesetzliche Unfallversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Was sind die verschiedenen Arten von Versicherungsfällen?",
+          "status": "freigegeben",
+          "frage": "Ich bin auf dem Heimweg beim Einkaufen im Supermarkt gestürzt. Ist das ein Wegeunfall?",
+          "antwort": "Nein, sobald Sie den direkten Weg für private Zwecke unterbrechen, endet der Schutz mit dem Betreten des Ladens und beginnt erst wieder auf dem Weg nach Hause. Ausnahmen gelten für Umwege, um Kinder zur Betreuung zu bringen oder Fahrgemeinschaften zu bilden, und für kurze Unterbrechungen unter zwei Stunden, nach denen der Restweg wieder versichert ist. Der Sturz im Supermarkt ist ein Fall für Ihre Krankenkasse und eine private Unfallversicherung.",
+          "quellen": [
+            "§ 8 Abs. 2 SGB VII"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Leistungen bietet die gesetzliche Unfallversicherung?",
+          "status": "freigegeben",
+          "frage": "Nach meinem Arbeitsunfall bleibt eine Hand steif. Bekomme ich eine Rente?",
+          "antwort": "Wenn Ihre Erwerbsfähigkeit um mindestens 20 Prozent gemindert bleibt, ja: Eine steife Hand wird meist mit 30 bis 40 Prozent bewertet, die Rente beträgt dann diesen Anteil von zwei Dritteln Ihres letzten Jahresarbeitsverdienstes, bei 45.000 Euro brutto und 30 Prozent rund 750 Euro im Monat, lebenslang, zusätzlich zum Lohn und ohne Anrechnung. Die Berufsgenossenschaft zahlt außerdem Umschulung oder Arbeitsplatzanpassung; die Rente wird nach 26 Wochen als vorläufige, später als Dauerrente festgesetzt.",
+          "quellen": [
+            "§ 56, § 62 SGB VII"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie funktioniert die Finanzierung und welche Beiträge gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständige Fotografin. Lohnt sich die freiwillige Versicherung bei der Berufsgenossenschaft?",
+          "antwort": "Oft ja: Für einige hundert Euro im Jahr, je nach Versicherungssumme und Gefahrklasse, bekommen Sie bei Arbeits- und Wegeunfällen sowie Berufskrankheiten Heilbehandlung ohne Zuzahlung, Verletztengeld ab der vierten Woche, Reha und eine Rente bei Dauerschäden, was keine private Unfallversicherung so bietet. Manche Branchen wie Friseure oder Bauhandwerk sind ohnehin pflichtversichert. Wer viel unterwegs ist oder körperlich arbeitet, kombiniert sie sinnvoll mit einer privaten Unfall- oder BU-Versicherung für die Freizeit und Krankheit.",
+          "quellen": [
+            "§ 6 SGB VII",
+            "§ 3 SGB VII (Satzungspflicht)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie melden Sie einen Arbeitsunfall richtig?",
+          "status": "freigegeben",
+          "frage": "Ich habe mich im Homeoffice auf dem Weg zur Kaffeemaschine verletzt. Ist das versichert?",
+          "antwort": "Seit 2021 ja, wenn der Weg in unmittelbarem Zusammenhang mit der Arbeit steht; das Bundessozialgericht hat sogar den Weg vom Bett zum Schreibtisch als Arbeitsweg anerkannt. Der Gang zur Toilette oder zur Küche für eine Pause ist dagegen wie im Büro nicht versichert, Essen und Trinken gelten als privat. Melden Sie den Unfall trotzdem dem Arbeitgeber und gehen Sie zum Durchgangsarzt, die Berufsgenossenschaft entscheidet über die Einordnung.",
+          "quellen": [
+            "§ 8 Abs. 1 Satz 3 SGB VII",
+            "BSG B 2 U 4/21 R (Weg zum Homeoffice-Arbeitsplatz)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitsunfall",
+        "berufskrankheit",
+        "berufsgenossenschaft",
+        "durchgangsarzt",
+        "verletztengeld",
+        "unfallversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "risikolebensversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Risikolebensversicherung zahlt nur beim Tod der versicherten Person während der Laufzeit eine feste Summe an die Bezugsberechtigten, ohne Sparanteil; ein 25-jähriger Nichtraucher bekommt 100.000 Euro Schutz ab 2,16 Euro im Monat, junge Familien sind ab 8,26 Euro abgesichert.",
+          "Sinnvoll ist sie für alle, von deren Einkommen andere abhängen: Familien mit Kindern, unverheiratete Paare ohne Witwenrente, Immobilienkäufer für die Restschuld, Selbstständige und Geschäftspartner; Alleinstehende ohne Verpflichtungen brauchen sie nicht.",
+          "Als Summe gelten das Drei- bis Fünffache des Bruttojahreseinkommens, mit kleinen Kindern und als Alleinerziehende das Fünffache, plus offene Kredite; die Laufzeit reicht bis zur finanziellen Selbstständigkeit der Kinder oder zum Ende des Darlehens, wahlweise mit fallender Summe.",
+          "Der Beitrag hängt von Alter, Gesundheit, Rauchen, Beruf, Hobbys, Summe und Laufzeit ab; Gesundheitsfragen zu fünf bis zehn Jahren sind Pflicht, vereinfacht bei Immobilienkauf, Geburt eines Kindes und Summen bis 150.000 Euro. Testsieger 2026 sind unter anderem CosmosDirekt, Europa, Ergo, Dialog und Allianz, bei gleichen Leistungen entscheidet der Preis.",
+          "Extras: Über-Kreuz-Versicherung für Paare gegen Erbschaftsteuer, Nachversicherungsgarantie bei Heirat, Kind oder Hauskauf, vorgezogene Auszahlung bei tödlicher Diagnose unter zwölf Monaten, Kinder- und Pflegebonus."
+        ],
+        "quellen": [
+          "§§ 150 ff., 159 VVG",
+          "§ 3 Abs. 1 Nr. 4 ErbStG",
+          "Stiftung Warentest, Risikolebensversicherung",
+          "Beitrag Risikolebensversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Für wen ist eine Risikolebensversicherung sinnvoll?",
+          "status": "freigegeben",
+          "frage": "Wir sind nicht verheiratet und haben ein Haus gekauft. Brauchen wir beide eine Versicherung?",
+          "antwort": "Ja, beide, weil weder Witwenrente noch Ehegattenfreibetrag greifen: Stirbt einer, läuft die Baufinanzierung allein weiter, und der Überlebende hätte nur 20.000 Euro Erbschaftsteuerfreibetrag. Schließen Sie zwei Verträge über Kreuz ab, bei denen jeder Versicherungsnehmer und Beitragszahler des Vertrags auf das Leben des anderen ist; die Auszahlung ist dann erbschaftsteuerfrei. Die Summe sollte mindestens die Restschuld plus zwei bis drei Jahreseinkommen decken.",
+          "quellen": [
+            "§ 3 Abs. 1 Nr. 4 ErbStG",
+            "§ 16 Abs. 1 Nr. 7 ErbStG",
+            "Beitrag, Abschnitt Über-Kreuz-Versicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sollte die Versicherungssumme sein?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 60.000 Euro, wir haben zwei kleine Kinder und 250.000 Euro Restschuld. Welche Summe?",
+          "antwort": "Rund 550.000 Euro: das Fünffache des Bruttos, 300.000 Euro, plus die Restschuld von 250.000 Euro; abziehen dürfen Sie vorhandenes Vermögen und die gesetzliche Witwenrente, die bei 1.500 Euro Rentenanspruch etwa 825 Euro im Monat brächte. Wählen Sie für den Kreditanteil eine fallende Summe, die mit der Tilgung sinkt, und für den Familienanteil eine konstante über 20 bis 25 Jahre. Ihre Partnerin sollte ebenfalls versichert sein, auch ohne Einkommen, weil Betreuung Geld kostet.",
+          "quellen": [
+            "Beitrag, Abschnitt Versicherungssumme",
+            "§ 67 Nr. 6 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Gesundheitsprüfung und Antragsablauf",
+          "status": "freigegeben",
+          "frage": "Ich habe vor drei Jahren wegen einer Depression eine Therapie gemacht. Bekomme ich einen Vertrag?",
+          "antwort": "Meist ja, oft mit Zuschlag von 25 bis 100 Prozent oder nach Rückstellung, wenn die Therapie abgeschlossen und keine Medikamente mehr nötig sind; einige Versicherer nehmen nach zwei bis drei beschwerdefreien Jahren normal an. Stellen Sie über einen Makler eine anonyme Risikovoranfrage bei mehreren Gesellschaften und beantworten Sie die Fragen vollständig, sonst kann der Versicherer im Todesfall die Leistung verweigern. Bei niedrigen Summen bis 150.000 Euro sind die Fragen oft kürzer.",
+          "quellen": [
+            "§§ 19 bis 21 VVG",
+            "Beitrag, Abschnitt Gesundheitsprüfung"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Besondere Leistungen und Varianten",
+          "status": "freigegeben",
+          "frage": "Wer bekommt das Geld, wenn ich keinen Bezugsberechtigten eingetragen habe?",
+          "antwort": "Dann fällt die Summe in den Nachlass und geht an die Erben nach Testament oder gesetzlicher Erbfolge, oft mit Verzögerung durch Erbschein und mit Zugriff der Gläubiger; tragen Sie deshalb eine Person namentlich ein, nicht nur „Ehepartner“, denn nach einer Scheidung würde sonst der Ex-Partner kassieren. Das Bezugsrecht können Sie jederzeit ändern, unwiderruflich nur mit Zustimmung des Begünstigten. Prüfen Sie es bei jeder Lebensänderung.",
+          "quellen": [
+            "§ 159, § 160 VVG",
+            "BGH IV ZR 437/06 (Bezugsrecht nach Scheidung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "risikolebensversicherung",
+        "ueber-kreuz-versicherung",
+        "bezugsrecht",
+        "nachversicherungsgarantie",
+        "versicherungssumme",
+        "gesundheitspruefung"
+      ]
+    }
+  },
+  {
+    "slug": "lebensversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Lebensversicherungen gibt es in drei Formen: die Risikolebensversicherung als reiner Todesfallschutz, die Kapitallebensversicherung mit Sparanteil, die sich nur noch bei Altverträgen mit bis zu 4 Prozent Garantiezins lohnt, und die fondsgebundene Police mit Renditechancen und Kursrisiko.",
+          "Der Höchstrechnungszins bleibt 2026 bei 1,0 Prozent, die laufende Verzinsung liegt im Schnitt bei 2,6 bis 2,9 Prozent, Spitzenanbieter wie Provinzial oder Ideal zahlen 3,0 bis 3,4 Prozent; Versicherer müssen 90 Prozent der Überschüsse weitergeben. In Ratings führen WWK, Allianz, LV 1871 und InterRisk.",
+          "Die nötige Summe ergibt sich aus drei bis fünf Nettojahresgehältern plus Restschuld plus Ausbildungskosten je Kind abzüglich Vermögen und Hinterbliebenenrenten, bei 50.000 Euro netto, 300.000 Euro Hypothek und zwei Kindern rund 500.000 bis 650.000 Euro, mit Laufzeit bis Kreditende oder Volljährigkeit der Kinder.",
+          "Steuerlich sind Beiträge nur im meist ausgeschöpften Rahmen von 1.900 oder 2.800 Euro absetzbar; bei Altverträgen vor 2005 ist die Auszahlung nach zwölf Jahren steuerfrei, bei Neuverträgen ist der Ertrag zur Hälfte steuerpflichtig, wenn der Vertrag zwölf Jahre lief und ab 62 ausgezahlt wird, sonst voll mit Abgeltungsteuer.",
+          "Kündigen bringt nur 50 bis 70 Prozent der Beiträge zurück; besser sind Beitragsfreistellung, ein Verkauf am Zweitmarkt, der 2026 kaum noch möglich ist, oder der Widerruf von Verträgen aus 1994 bis 2007 mit voller Rückzahlung plus Zinsen. Betriebliche Altersvorsorge über Direktversicherungen ergänzt mit Arbeitgeberzuschuss und Gruppentarifen."
+        ],
+        "quellen": [
+          "§ 20 Abs. 1 Nr. 6 EStG",
+          "§ 10 Abs. 4 EStG",
+          "§ 5a VVG a. F. (Policenmodell)",
+          "§ 169 VVG (Rückkaufswert)",
+          "Beitrag Lebensversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Arten von Lebensversicherungen gibt es und was sind die Unterschiede?",
+          "status": "freigegeben",
+          "frage": "Mir wird eine Kapitallebensversicherung als Altersvorsorge angeboten. Soll ich abschließen?",
+          "antwort": "Eher nicht: Bei 1,0 Prozent Garantiezins und Kosten, die von 3,5 Prozent Gesamtverzinsung oft nur 2,5 übrig lassen, schlägt die Kombination aus günstiger Risikolebensversicherung für die Familie und einem ETF-Sparplan für das Sparen fast immer, flexibler und ohne Abschlusskosten von meist 2,5 Prozent der Beitragssumme. Eine Police lohnt sich allenfalls für Menschen, die Garantien brauchen oder den Steuervorteil bei Auszahlung ab 62 nutzen wollen; dann Nettotarif über Honorarberater.",
+          "quellen": [
+            "Beitrag, Abschnitt Arten",
+            "§ 20 Abs. 1 Nr. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie haben sich Verzinsung und Überschussbeteiligung 2026 entwickelt?",
+          "status": "freigegeben",
+          "frage": "Mein Vertrag von 1998 hat 4 Prozent Garantiezins. Soll ich ihn trotzdem kündigen, weil die Überschüsse gesunken sind?",
+          "antwort": "Auf keinen Fall: 4 Prozent garantiert auf den Sparanteil bekommen Sie nirgends mehr, und die Auszahlung ist nach zwölf Jahren steuerfrei. Prüfen Sie stattdessen, ob Sie den Vertrag bis zum Ende besparen, gegebenenfalls mit Dynamik, weil auch Erhöhungen den alten Zins bekommen. Brauchen Sie Geld, ist ein Policendarlehen oder die Beitragsfreistellung besser als die Kündigung, die Rückkaufswert und Steuerfreiheit riskiert.",
+          "quellen": [
+            "§ 20 Abs. 1 Nr. 6 EStG a. F. (Verträge vor 2005)",
+            "Beitrag, Abschnitt Verzinsung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie wirken sich Lebensversicherungen steuerlich aus?",
+          "status": "freigegeben",
+          "frage": "Meine fondsgebundene Police von 2010 läuft 2026 aus, ich bin 55. Wie wird die Auszahlung besteuert?",
+          "antwort": "Der Ertrag, also Auszahlung minus eingezahlte Beiträge, ist voll steuerpflichtig mit 25 Prozent Abgeltungsteuer plus Soli, weil Sie unter 60 sind; erst bei Auszahlung ab 60, für Verträge ab 2012 ab 62, und mindestens zwölf Jahren Laufzeit wird nur die Hälfte mit Ihrem persönlichen Steuersatz besteuert. Bei Fondspolicen bleiben zudem 15 Prozent des Ertrags über die Teilfreistellung steuerfrei. Prüfen Sie, ob der Vertrag eine Verlängerung oder Rentenzahlung erlaubt, das kann Tausende Euro sparen.",
+          "quellen": [
+            "§ 20 Abs. 1 Nr. 6 Satz 2 und 9 EStG",
+            "§ 32d EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was tun, wenn Sie Ihre Versicherung nicht mehr zahlen können?",
+          "status": "freigegeben",
+          "frage": "Was bringt der Widerruf einer alten Lebensversicherung?",
+          "antwort": "Bei Verträgen von 1994 bis 2007, die nach dem Policenmodell mit fehlerhafter Widerrufsbelehrung abgeschlossen wurden, können Sie noch heute widerrufen und bekommen alle Beiträge plus gezogene Nutzungen zurück, abzüglich des Risikoanteils, oft 20 bis 50 Prozent mehr als der Rückkaufswert; der Europäische Gerichtshof hat das 2013 bestätigt. Ob Ihre Belehrung fehlerhaft war, prüft ein Fachanwalt oder Verbraucherzentrale anhand der Police; Prozessfinanzierer übernehmen das Risiko gegen Erfolgsbeteiligung.",
+          "quellen": [
+            "§ 5a VVG in der Fassung bis 2007",
+            "EuGH C-209/12 (Endress)",
+            "BGH IV ZR 76/11"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kapitallebensversicherung",
+        "hoechstrechnungszins",
+        "ueberschussbeteiligung",
+        "rueckkaufswert",
+        "beitragsfreistellung",
+        "policenmodell"
+      ]
+    }
+  }
+]

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W11 · Mein Bereich: Aktenkoffer und Wächter als Plus-Blatt</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Der Plus-Knopf klappt wie das Register ein Blatt auf: links die Mappe, in der Mitte die Wächter, rechts das Profil. Gelesen wird weiter im Faden.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="40" y="130" width="1020" height="96" rx="0" fill="#F7F6F1" stroke="#F7F6F1" stroke-width="1.5"/>
+<text x="64" y="170" font-size="26" fill="#1F2937" font-weight="900" text-anchor="start" font-family="Merriweather, Georgia, serif">finanzleser</text>
+<text x="240" y="170" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Donnerstag, 3. September 2026 · Ausgabe 143 des Fadens</text>
+<rect x="810" y="146" width="110" height="30" rx="15" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="865.0" y="165" font-size="12" fill="white" font-weight="700" text-anchor="middle">Wochenbrief</text>
+<rect x="930" y="146" width="90" height="30" rx="15" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="975.0" y="165" font-size="12" fill="#1F2937" font-weight="600" text-anchor="middle">Plus</text>
+<line x1="40" y1="188" x2="1060" y2="188" stroke="#1F2937" stroke-width="2"/>
+<line x1="40" y1="192" x2="1060" y2="192" stroke="#1F2937" stroke-width="0.8"/>
+<text x="100.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Finanzen</text>
+<text x="218.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Versicherungen</text>
+<text x="332.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Steuern</text>
+<text x="410.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Recht</text>
+<text x="504.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Finanztools</text>
+<text x="610.0" y="215" font-size="13" fill="#1F2937" font-weight="600" text-anchor="middle">Anbieter</text>
+<text x="1036" y="215" font-size="11" fill="#6B7280" font-weight="400" text-anchor="end">Sie lesen: Mein Bereich</text>
+<line x1="40" y1="226" x2="1060" y2="226" stroke="#D9D6CC" stroke-width="1"/>
+<rect x="40" y="227" width="1020" height="400" rx="0" fill="#F7F6F1" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="40" y1="627" x2="1060" y2="627" stroke="#1F2937" stroke-width="1.5"/>
+<text x="64" y="255" font-size="10" fill="#6B7280" font-weight="700" text-anchor="start">GUTEN TAG, FRAU BERGER · PLUS SEIT MÄRZ · LEVEL 2 „KENNER“</text>
+<text x="1036" y="239" font-size="10" fill="#6B7280" font-weight="400" text-anchor="end">Esc · außerhalb tippen · schließen ✕</text>
+<text x="64" y="287" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">AKTENKOFFER · 5 BELEGE</text>
+<text x="64" y="307" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">Ergebnisse · Checklisten · Vergleiche · Gespräche</text>
+<rect x="64" y="323" width="290" height="44" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="72" y1="329" x2="72" y2="361" stroke="#D9D6CC" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="82" y="341" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026</text>
+<text x="82" y="357" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">1.096 € / Monat  ·  3. Sept.</text>
+<text x="346" y="341" font-size="11" fill="#45A117" font-weight="400" text-anchor="end">↗</text>
+<rect x="64" y="375" width="290" height="44" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="72" y1="381" x2="72" y2="413" stroke="#D9D6CC" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="82" y="393" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Checkliste Schlüsselverlust</text>
+<text x="82" y="409" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">4 von 6 erledigt  ·  3. Sept.</text>
+<text x="346" y="393" font-size="11" fill="#45A117" font-weight="400" text-anchor="end">↗</text>
+<rect x="64" y="427" width="290" height="44" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="72" y1="433" x2="72" y2="465" stroke="#D9D6CC" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="82" y="445" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Vergleich Hundekranken</text>
+<text x="82" y="461" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">OP-Schutz gemerkt  ·  2. Sept.</text>
+<text x="346" y="445" font-size="11" fill="#45A117" font-weight="400" text-anchor="end">↗</text>
+<rect x="64" y="479" width="290" height="44" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="72" y1="485" x2="72" y2="517" stroke="#D9D6CC" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="82" y="497" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Gespräch: Tresorschlüssel</text>
+<text x="82" y="513" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">Leo, 3 Antworten  ·  1. Sept.</text>
+<text x="346" y="497" font-size="11" fill="#45A117" font-weight="400" text-anchor="end">↗</text>
+<rect x="64" y="531" width="290" height="44" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<line x1="72" y1="537" x2="72" y2="569" stroke="#D9D6CC" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="82" y="549" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Steuerformulare 2025</text>
+<text x="82" y="565" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">PDF, 2 Seiten  ·  28. Aug.</text>
+<text x="346" y="549" font-size="11" fill="#45A117" font-weight="400" text-anchor="end">↗</text>
+<text x="64" y="599" font-size="9.5" fill="#6B7280" font-weight="400" text-anchor="start">„Öffnen“ legt den Beleg als Kapitel ab · ✓ gesichert, alle Geräte</text>
+<line x1="380" y1="277" x2="380" y2="611" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="404" y="287" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">WÄCHTER · 3 REGELN</text>
+<rect x="404" y="311" width="300" height="62" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<rect x="658" y="319" width="36" height="18" rx="9" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="685" cy="328" r="7" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="416" y="331" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Kfz-Wechselfrist</text>
+<text x="416" y="347" font-size="9.5" fill="#1F2937" font-weight="400" text-anchor="start">Wenn der 1. November naht → 3 geprüfte Angebote per WhatsA…</text>
+<text x="416" y="363" font-size="9.5" fill="#6B7280" font-weight="400" text-anchor="start">Nächster Termin: in 58 Tagen</text>
+<rect x="404" y="385" width="300" height="62" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<rect x="658" y="393" width="36" height="18" rx="9" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="685" cy="402" r="7" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="416" y="405" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Düsseldorfer Tabelle</text>
+<text x="416" y="421" font-size="9.5" fill="#1F2937" font-weight="400" text-anchor="start">Wenn sich die Tabelle ändert → Unterhaltsergebnis neu prüf…</text>
+<text x="416" y="437" font-size="9.5" fill="#6B7280" font-weight="400" text-anchor="start">Nächster Termin: Jahreswechsel</text>
+<rect x="404" y="459" width="300" height="62" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<rect x="658" y="467" width="36" height="18" rx="9" fill="#D9D6CC" stroke="#D9D6CC" stroke-width="1.5"/>
+<circle cx="667" cy="476" r="7" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="416" y="479" font-size="12" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Grundfreibetrag</text>
+<text x="416" y="495" font-size="9.5" fill="#1F2937" font-weight="400" text-anchor="start">Wenn sich der Wert ändert → Hinweis im Faden</text>
+<text x="416" y="511" font-size="9.5" fill="#6B7280" font-weight="400" text-anchor="start">Nächster Termin: Jahreswechsel</text>
+<text x="404" y="545" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">JAHRESLEISTE</text>
+<line x1="404" y1="567" x2="704" y2="567" stroke="#1F2937" stroke-width="1"/>
+<text x="408" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">J</text>
+<text x="433" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">F</text>
+<text x="458" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">M</text>
+<text x="483" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">A</text>
+<text x="508" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">M</text>
+<text x="533" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">J</text>
+<text x="558" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">J</text>
+<text x="583" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">A</text>
+<text x="608" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">S</text>
+<text x="633" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">O</text>
+<text x="658" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">N</text>
+<text x="683" y="585" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">D</text>
+<circle cx="612" cy="567" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<circle cx="662" cy="567" r="5" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="412" cy="567" r="5" fill="#FFFFFF" stroke="#45A117" stroke-width="1.5"/>
+<text x="404" y="605" font-size="9" fill="#6B7280" font-weight="400" text-anchor="start">● heute   ● Kfz-Frist   ○ Jahreswechsel</text>
+<line x1="730" y1="277" x2="730" y2="611" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="754" y="287" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">PROFIL</text>
+<text x="754" y="311" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Frau Berger · berger@mail.de</text>
+<text x="754" y="331" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Passkey eingerichtet · kein Passwort</text>
+<text x="754" y="351" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Interessen: Familie · Steuern · Hund</text>
+<text x="754" y="371" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Wochenbrief: donnerstags · eingetragen</text>
+<text x="754" y="391" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Punkte 340 · Serie 6 Tage · Album 4/12</text>
+<text x="754" y="427" font-size="9.5" fill="#D3005E" font-weight="700" text-anchor="start">BELOHNUNGEN</text>
+<text x="754" y="447" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">✓ PDF-Guide „Trennung“ (Level 1)</text>
+<text x="754" y="465" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">○ Versicherungs-Check bei Finconext</text>
+<text x="754" y="483" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">   ab Level 2 · noch 60 Punkte</text>
+<text x="754" y="527" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">Daten herunterladen · Konto löschen</text>
+<text x="754" y="567" font-size="10" fill="#6B7280" font-weight="400" text-anchor="start">Zustellung: E-Mail ✓  WhatsApp ✓</text>
+<line x1="40" y1="657" x2="1060" y2="657" stroke="#D9D6CC" stroke-width="1.5"/>
+<text x="40" y="677" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">KAPITEL 1 · HEUTE · 14:02</text>
+<rect x="40" y="687" width="1020" height="40" rx="2" fill="#FFFFFF" stroke="#D9D6CC" stroke-width="1"/>
+<text x="52" y="703" font-size="9.5" fill="#45A117" font-weight="700" text-anchor="start">WÄCHTER MELDET</text>
+<text x="52" y="719" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Ihre Kfz-Wechselfrist endet in 58 Tagen. Am 1. November bringe ich drei geprüfte Angebote. </text>
+<text x="1048" y="719" font-size="10" fill="#6B7280" font-weight="400" text-anchor="end">Regel ändern · Stumm</text>
+<text x="40" y="753" font-size="9.5" fill="#6B7280" font-weight="700" text-anchor="start">KAPITEL 2 · AKTENKOFFER › BELEG · 14:05</text>
+<text x="40" y="775" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026 · 1.096 € / Monat</text>
+<text x="40" y="793" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Beleg vom 3. September, Nettoeinkommen 3.200 €, Kinder 6 und 9. Leo: „Soll ich mit dem Wert von Januar vergleichen?“</text>
+<rect x="1100" y="130" width="460" height="124.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="148.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Aktenkoffer als Mappe mit Belegen:</text>
+<text x="1110" y="165.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· jeder Beleg: Titel, Wert oder Stand, Datum, Öffnen-Pfeil</text>
+<text x="1110" y="182.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· kommt aus jedem Kasten und jeder Kette („In den Aktenkoffer“)</text>
+<text x="1110" y="200.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Reiter: Ergebnisse · Checklisten · Vergleiche · Gespräche</text>
+<text x="1110" y="217.6" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· ohne Konto im Browser, mit Konto gesichert (Stempel „gesichert“)</text>
+<text x="1110" y="235.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Öffnen legt den Beleg als Kapitel in den Faden, Leo vergleicht mit früher</text>
+<rect x="1100" y="300" width="460" height="124.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="318.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Wächter als Regeln „Wenn … dann …“:</text>
+<text x="1110" y="335.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Schalter je Regel, Kanal (E-Mail, WhatsApp, nur im Faden), nächster Termin</text>
+<text x="1110" y="352.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Jahresleiste zeigt alle Termine auf einen Blick</text>
+<text x="1110" y="370.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· entsteht aus jedem Kasten („Wächter setzen“) oder von Leo vorgeschlagen</text>
+<text x="1110" y="387.6" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· meldet sich im Faden als eigene Zeile „Wächter meldet“, nie als Pop-up</text>
+<text x="1110" y="405.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Zustellung nur, wenn etwas passiert; jede Meldung hat „Stumm“</text>
+<rect x="1100" y="470" width="460" height="106.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="488.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Warum ein Blatt und kein eigener Bereich:</text>
+<text x="1110" y="505.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Verwalten oben (Blatt), Lesen unten (Faden), wie beim Register</text>
+<text x="1110" y="522.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· nichts davon verlässt den Faden, kein zweites Layout</text>
+<text x="1110" y="540.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· abgemeldet zeigt das Blatt die Sicherungsfrage (E-Mail oder Passkey)</text>
+<text x="1110" y="557.6" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· mobil: Blatt als Vollbild mit drei Reitern</text>
+<rect x="1100" y="620" width="460" height="88.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="1110" y="638.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Verspielte, schlichte Details:</text>
+<text x="1110" y="655.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· gestrichelte Lochkante an jedem Beleg, Stempel „gesichert“</text>
+<text x="1110" y="672.8" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Jahresleiste mit Punkten, Serie mit Flamme</text>
+<text x="1110" y="690.2" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">· Kicker in Kapitälchen, dünne Linien, kein Schatten</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Leo / Aktion / Wächter aktiv</text>
+<rect x="286" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="306" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Belohnungen / Spiel</text>
+<rect x="469" y="958" width="14" height="14" rx="3" fill="#F7F6F1" stroke="#F7F6F1" stroke-width="1.5"/>
+<text x="489" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Plus-Blatt</text>
+</svg>

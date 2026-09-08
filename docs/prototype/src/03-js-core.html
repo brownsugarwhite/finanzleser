@@ -1,0 +1,524 @@
+
+<script>
+(function () {
+  'use strict';
+  var LEO = '__LEO__'; var LOGO = '__LOGO__';
+  var ICON = { finanzen: '__ICON_FINANZEN__', versicherungen: '__ICON_VERSICHERUNGEN__', steuern: '__ICON_STEUER__', recht: '__ICON_RECHT__', uhr: '__ICON_UHR__', starburst: '__ICON_STARBURST__', finconext: '__FINCONEXT__' };
+  var SPARK = '<svg class="spark" viewBox="0 0 12 12.0005" aria-hidden="true"><path d="M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z" fill="currentColor"/></svg>';
+  var reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]schnell=1/.test(location.search);
+  if (reduziert) document.documentElement.classList.add('schnell');
+  var strom = document.getElementById('strom');
+  var state = { koffer: [], punkte: 0, serie: 6, plus: false, wb: false, sicherungGefragt: false, tagesfrageGespielt: false, wortGespielt: false, waechter: { kfz: true, tabelle: true, grundfreibetrag: false } };
+  try { var s0 = JSON.parse(localStorage.getItem('leo-faden-demo') || 'null'); if (s0) state = Object.assign(state, s0); } catch (e) {}
+  function speichern() { try { localStorage.setItem('leo-faden-demo', JSON.stringify({ koffer: state.koffer, punkte: state.punkte, serie: state.serie, plus: state.plus, wb: state.wb, waechter: state.waechter })); } catch (e) {} }
+
+  // ---------- Hilfen ----------
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function warte(ms) { return new Promise(function (r) { setTimeout(r, reduziert ? 0 : ms); }); }
+  function kopfH() { return document.getElementById('kopf').offsetHeight; }
+  function trenner() { return el('div', 'trenner', SPARK); }
+  var toastTimer;
+  window.toast = function (text) { var t = document.getElementById('toast'); t.textContent = text; t.classList.add('zeigt'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('zeigt'); }, 2600); };
+  function eur(n) { return n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €'; }
+  function kopiere(text) { if (navigator.clipboard) { navigator.clipboard.writeText(text).then(function () { toast('Link kopiert: ' + text); }, function () { toast(text); }); } else { toast(text); } }
+  function uhr() { var d = new Date(); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function vorlesen(text) { if (!('speechSynthesis' in window)) { toast('Vorlesen wird von diesem Browser nicht unterstützt'); return; } window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text.replace(/Vorlesen/g, '')); u.lang = 'de-DE'; u.rate = 0.95; window.speechSynthesis.speak(u); }
+  function aktiveWaechter() { return Object.keys(state.waechter).filter(function (k) { return state.waechter[k]; }).length; }
+  function aktualisiereZahlen() {
+    if (window.pruefeLevel) pruefeLevel();
+    var pbtn = document.getElementById('plusBtn'); if (pbtn) { pbtn.title = state.plus ? 'Frau Berger · Mein Bereich' : 'Anmelden · Finanzleser Plus'; pbtn.setAttribute('aria-label', pbtn.title); pbtn.classList.toggle('aktiv', !!state.plus); }
+    var kz = document.getElementById('kofferZahl'); if (kz) { var n = state.koffer.length + (state.plus && typeof BELEGE_DEMO !== 'undefined' ? BELEGE_DEMO.length : 0); kz.textContent = n; kz.hidden = n === 0; }
+    document.getElementById('menuePlus').textContent = state.plus ? 'Frau Berger · ' + state.punkte + ' Punkte' : 'Anmelden · Finanzleser Plus';
+    var pb = registerNode && registerNode.querySelector('button[data-key="plus"]'); if (pb) { var html = 'Finanzleser Plus' + (state.plus ? ' <small class="punkte-zahl">· ' + state.punkte + ' P.</small>' : ''); if (pb.innerHTML !== html) { pb.innerHTML = html; var lp = registerNode.querySelector('.nav-lupe__reihe span[data-key="plus"]'); if (lp) lp.innerHTML = html; if (window.registerNeu) registerNeu(); } }
+    if (state.wb) document.getElementById('wbBox').innerHTML = '<span class="kicker kicker--gruen">Leos Wochenbrief</span><span>Eingetragen. Nächste Ausgabe: Do., 10. September, hier im Faden und per E-Mail.</span>';
+  }
+
+  // ---------- Scrollen: immer zum Anfang, nie ans Ende; Lesestelle merken ----------
+  var letzterKnoten = null; var erzwinge = false; var lesestelleY = null; var lesestelleWeit = false; var lesestelleK = null; var lesestelleOff = 0;
+  function folgt() { if (!letzterKnoten || !document.contains(letzterKnoten)) return true; var r = letzterKnoten.getBoundingClientRect(); return r.bottom <= window.innerHeight + 60 && r.bottom > 0; }
+  function zeigeAnfang(node, immer) { if (window.railBeruhigen) railBeruhigen();
+    if (!node) return;
+    setTimeout(function () {
+      var r = node.getBoundingClientRect(); var oben = kopfH() + 12; var verhalten = reduziert ? 'auto' : 'smooth';
+      if (!immer && r.top >= oben && r.bottom <= window.innerHeight) return;
+      if (immer || r.height > window.innerHeight * 0.5 || r.top < oben) window.scrollTo({ top: window.scrollY + r.top - oben, behavior: verhalten });
+      else node.scrollIntoView({ block: 'nearest', behavior: verhalten });
+    }, 0);
+  }
+  function anhaengen(node, opts) { opts = opts || {}; var f = opts.immer || erzwinge || folgt(); var immer = opts.immer || erzwinge; erzwinge = false; ziel().appendChild(node); letzterKnoten = node; if (f && !opts.leise) zeigeAnfang(node, immer); return node; }
+  function lesestelleMerken(y) { lesestelleY = y; lesestelleWeit = false; var b = document.getElementById('lesestelle'); var k = (function () { for (var i = kapitel.length - 1; i >= 0; i--) { var r = kapitel[i].node.getBoundingClientRect(); if (r.top + window.scrollY <= y + 40) return kapitel[i]; } return null; })(); lesestelleK = k; lesestelleOff = k ? y - (k.node.getBoundingClientRect().top + window.scrollY) : 0; document.getElementById('lesestelleText').textContent = k && k.titel && k.titel !== 'Heute' ? 'Zurück zu „' + (k.titel.length > 34 ? k.titel.slice(0, 32) + '…' : k.titel) + '“' : 'Zurück zur Lesestelle'; b.classList.add('zeigt'); }
+  // Zurück zur Lesestelle: Ist das Kapitel inzwischen zugeklappt (weil ein neues begann), wird es wieder geöffnet und die Stelle
+  // relativ zum Kapitelanfang angesteuert. So funktioniert der Rücksprung auch nach einem Kapitelwechsel.
+  window.lesestelleZurueck = function () { if (lesestelleY == null) return; if (window.railBeruhigen) railBeruhigen(); var ziel = lesestelleY; var k = lesestelleK; if (k && document.contains(k.node)) { if (k.node.classList.contains('zu')) { k.node.classList.remove('zu'); k.toggle.textContent = 'einklappen ▴'; } ziel = k.node.getBoundingClientRect().top + window.scrollY + lesestelleOff; } window.scrollTo({ top: ziel, behavior: reduziert ? 'auto' : 'smooth' }); lesestelleY = null; lesestelleK = null; document.getElementById('lesestelle').classList.remove('zeigt'); };
+  // Der Knopf verschwindet erst, wenn man einmal weit weg war (> 300 px) und dann wieder in die Nähe der Lesestelle kommt.
+  // Vorher blendete ihn das erste Scroll-Ereignis des Autoscrolls sofort wieder aus, weil man da noch neben der Lesestelle stand.
+  window.addEventListener('scroll', function () { if (lesestelleY == null) return; var d = Math.abs(window.scrollY - lesestelleY); if (d > 300) lesestelleWeit = true; else if (lesestelleWeit && d < 120) { lesestelleY = null; document.getElementById('lesestelle').classList.remove('zeigt'); } }, { passive: true });
+  // Vor jedem Sprung ans Ende des Fadens: Lesestelle merken, wenn der Leser gerade nicht am Ende steht (dann springt der Faden
+  // erzwungen). Zur Sicherheit wird 900 ms später nachgeprüft, ob der Faden trotzdem weit gesprungen ist, und dann nachgemerkt.
+  function sprungVorbereiten() { if (!kapitel.length) return; var vor = window.scrollY; if (!folgt()) { lesestelleMerken(vor); erzwinge = true; } setTimeout(function () { if (lesestelleY == null && Math.abs(window.scrollY - vor) > 320) lesestelleMerken(vor); }, 900); }
+
+  // ---------- Anzeigenplätze (adblocker-neutral benannt, fiktive Marken) ----------
+  var WERBUNG = { leaderboard: ['__AD_LB1__', '__AD_LB2__'], rectangle: ['__AD_MR1__', '__AD_MR2__'], halfpage: ['__AD_HP1__', '__AD_HP2__'], skyscraper: ['__AD_SK1__'], square: ['__AD_SQ1__', '__AD_SQ2__'], mobile: ['__AD_MO1__', '__AD_MO2__'] };
+  var werbeZaehler = {};
+  function werbebild(format) { var l = WERBUNG[format]; werbeZaehler[format] = (werbeZaehler[format] || 0) + 1; return l[(werbeZaehler[format] - 1) % l.length]; }
+  function einschubFuellen(e, format) { e.dataset.format = format; var schmal = format === 'leaderboard' ? werbebild('mobile') : null; e.innerHTML = '<span class="einschub__label">Anzeige</span><a class="einschub__flaeche" href="#" onclick="toast(\'Anzeige (Beispiel, fiktive Marke)\');return false"><img class="breit-bild" src="' + werbebild(format) + '" alt="Anzeige (Beispiel)">' + (schmal ? '<img class="schmal" src="' + schmal + '" alt="Anzeige (Beispiel)">' : '') + '</a>'; return e; }
+  function einschub(format, extra) { return einschubFuellen(el('div', 'einschub ' + (extra || '')), format); }
+  function stromFormat() { return strom.clientWidth >= 728 ? 'leaderboard' : 'rectangle'; }
+  einschubFuellen(document.getElementById('railRechts'), 'halfpage'); einschubFuellen(document.getElementById('railLinks'), 'halfpage');
+  // ---------- Randspalten: kleben oben; die Anzeige unten wird erst mit dem Ende des Fadens hochgeschoben ----------
+  var rails = [];
+  ['randLinks', 'randRechts'].forEach(function (id) { var r = document.getElementById(id); var innen = r.querySelector('.rand__innen'); if (innen) rails.push({ rail: r, innen: innen }); });
+  function railsAnpassen() { rails.forEach(function (s) { s.innen.style.top = (kopfH() + 16) + 'px'; }); }
+  window.railOben = function () {}; window.railBeruhigen = function () {};
+  window.addEventListener('resize', railsAnpassen); window.addEventListener('load', railsAnpassen);
+
+  // ---------- Leo fragt (rechte Leiste): nicht von Anfang an, sondern wenn es passt ----------
+  // Eine Frage kommt erst, wenn der Leser etwas getan hat, das sie nahelegt (Ratgeber Haftpflicht → Beitrag, Unterhaltsrechner →
+  // Kinder, Hundevergleich → Hund, zwei Kapitel → Kassensturz, drei Antworten → per WhatsApp weiterlesen). Jede Frage höchstens
+  // einmal je Sitzung, der Kasten poppt auf, „Später“ schließt ihn. Die Antwort kommt immer im Faden.
+  var LEO_FRAGEN = {
+    haftpflicht: { text: 'Sie lesen zur Haftpflicht: Wie viel zahlen Sie im Monat für Ihre Privathaftpflicht?', min: 2, max: 25, wert: 8, einheit: ' €', ziel: 'beitrag', antwort: function (v) { return 'Ich zahle ' + v + ' € im Monat für die Privathaftpflicht.'; } },
+    kinder: { text: 'Für wie viele Kinder rechnen Sie gerade?', chips: [['Eins', 'kinder-1'], ['Zwei', 'kinder-2'], ['Drei oder mehr', 'kinder-3']] },
+    hund: { text: 'Ist Ihr Hund schon versichert?', chips: [['Ja, OP-Schutz', 'hund-op'], ['Ja, Vollschutz', 'hund-voll'], ['Noch nicht', 'hund-nein']] },
+    kfz: { text: 'Wann haben Sie Ihre Kfz-Versicherung zuletzt verglichen?', chips: [['Dieses Jahr', 'kfz-frisch'], ['Länger her', 'kfz-alt'], ['Kein Auto', 'kfz-kein']] },
+    kassensturz: { text: 'Wann haben Sie zuletzt alle Ihre Verträge auf einen Blick gesehen?', chips: [['Dieses Jahr', 'ks-frisch'], ['Länger her', 'kassensturz'], ['Noch nie', 'kassensturz']] },
+    weiterlesen: { text: 'Soll ich Ihnen die Antworten von heute auf Ihr Handy schicken?', chips: [['Ja, per WhatsApp', 'whatsapp'], ['Lieber per E-Mail', 'wochenbrief']] }
+  };
+  var leoFrageOffen = null, frageGestellt = {}, frageTimer = null;
+  function leoFrageAnstossen(key, ms) { if (!LEO_FRAGEN[key] || frageGestellt[key] || leoFrageOffen) return; clearTimeout(frageTimer); frageTimer = setTimeout(function () { if (!leoFrageOffen && !frageGestellt[key]) leoFrageZeigen(key); }, reduziert ? Math.min(ms || 0, 600) : (ms || 15000)); }
+  function leoFrageWeg() { var box = document.getElementById('leoFrage'); if (!box) return; box.hidden = true; box.innerHTML = ''; leoFrageOffen = null; railsAnpassen(); }
+  function leoFrageDanke() { var box = document.getElementById('leoFrage'); if (!box) return; box.innerHTML = '<div class="leo-frage leo-frage--danke"><div class="kopf-f"><img src="' + LEO + '" alt=""><span class="kicker kicker--gruen">Leo</span></div><p>Danke. Meine Antwort steht unten im Faden.</p><span class="hinweis-f"><i>↓</i> Der Faden ist dorthin gesprungen. „Zurück zur Lesestelle“ oben bringt Sie zurück.</span></div>'; setTimeout(leoFrageWeg, 5000); }
+  function leoFrageZeigen(key) {
+    var box = document.getElementById('leoFrage'); var f = LEO_FRAGEN[key]; if (!box || !f) return; frageGestellt[key] = true; leoFrageOffen = key;
+    var w = el('div', 'leo-frage'); w.innerHTML = '<div class="kopf-f"><img src="' + LEO + '" alt=""><span class="kicker kicker--gruen">Leo fragt</span></div><p>' + f.text + '</p>';
+    var sp = el('button', 'spaeter', 'Später ✕'); sp.type = 'button'; sp.onclick = leoFrageWeg; w.appendChild(sp);
+    if (f.chips) { var c = el('div', 'chips'); f.chips.forEach(function (x) { var b = el('button', 'chip', x[0]); b.onclick = function () { leoFrageDanke(); starte(x[1], x[0]); }; c.appendChild(b); }); w.appendChild(c); w.appendChild(el('span', 'hinweis-f', '<i>↓</i> Leo antwortet unten im Faden, nicht hier.')); }
+    else { var wert = el('span', 'wert', f.wert + f.einheit); var r = el('input'); r.type = 'range'; r.min = f.min; r.max = f.max; r.value = f.wert; r.setAttribute('aria-label', f.text); r.oninput = function () { wert.textContent = r.value + f.einheit; }; var regler = el('div', 'regler'); regler.appendChild(r); regler.appendChild(wert); w.appendChild(regler); w.appendChild(el('div', 'werte', '<span>' + f.min + f.einheit + '</span><span>' + f.max + f.einheit + '</span>')); var b = el('button', 'btn btn--klein btn--primary', 'Antworten'); b.onclick = function () { leoFrageDanke(); starte(f.ziel, f.antwort(r.value), false, false, null, null, null, r.value); }; var aktion = el('div', 'aktion'); aktion.appendChild(b); aktion.appendChild(el('span', 'hinweis-f', '<i>↓</i> Antwort erscheint im Faden')); w.appendChild(aktion); }
+    box.innerHTML = ''; box.appendChild(w); box.hidden = false; railsAnpassen();
+  }
+  window.leoFrageZeigen = leoFrageZeigen; document.getElementById('leoFrage').hidden = true; railsAnpassen();
+
+  // ---------- Kapitel ----------
+  var kapitel = []; var aktuell = null;
+  function neuesKapitel(titel, pfad, key) {
+    kapitel.forEach(function (k) { k.node.classList.add('zu'); k.toggle.textContent = 'aufklappen ▾'; });
+    strom.appendChild(einschub(stromFormat(), 'einschub--feed' + (kapitel.length ? '' : ' einschub--top'))); if (window.railOben) railOben('randLinks');
+    var n = el('section', 'kapitel'); var nr = kapitel.length + 1; n.id = 'kapitel-' + nr;
+    var kopf = el('div', 'kapitel__kopf'); kopf.appendChild(el('span', 'kicker', 'Kapitel ' + nr + (pfad ? ' · ' + pfad.join(' › ') : '') + ' · ' + uhr()));
+    var h = el('h2', null, titel || 'Kapitel ' + nr); kopf.appendChild(h);
+    var toggle = el('button', 'toggle-k', 'einklappen ▴'); kopf.appendChild(toggle);
+    var inhalt = el('div', 'kapitel__inhalt'); n.appendChild(kopf); n.appendChild(inhalt); strom.appendChild(n);
+    var k = { node: n, inhalt: inhalt, h: h, nr: nr, titel: titel || 'Kapitel ' + nr, toggle: toggle, key: key || null, pfad: pfad || null, toc: null, tocAktiv: 0 };
+    function umschalten() { var zu = n.classList.toggle('zu'); toggle.textContent = zu ? 'aufklappen ▾' : 'einklappen ▴'; if (!zu) zeigeAnfang(n, true); listeAktualisieren(); }
+    kopf.addEventListener('click', function (ev) { if (n.classList.contains('zu') || ev.target === toggle) umschalten(); });
+    kapitel.push(k); aktuell = k; letzterKnoten = n;
+    if (pfad) setzePfad(pfad);
+    if (kapitel.length > 1) { zeigeAnfang(n, true); erzwinge = false; }
+    listeAktualisieren(); return k;
+  }
+  function kapitelHolen(key) { for (var i = 0; i < kapitel.length; i++) if (kapitel[i].key === key) return kapitel[i]; return null; }
+  function kapitelNachUnten(k) {
+    kapitel.forEach(function (x) { if (x !== k) { x.node.classList.add('zu'); x.toggle.textContent = 'aufklappen ▾'; } });
+    kapitel.splice(kapitel.indexOf(k), 1); kapitel.push(k); strom.appendChild(k.node); k.node.classList.remove('zu'); k.toggle.textContent = 'einklappen ▴';
+    k.node.classList.remove('wandert'); void k.node.offsetWidth; k.node.classList.add('wandert');
+    aktuell = k; letzterKnoten = k.node; if (k.pfad) setzePfad(k.pfad); zeigeAnfang(k.node, true); erzwinge = false; listeAktualisieren();
+  }
+  function kapitelTitel(t) { if (aktuell && aktuell.titel.indexOf('Kapitel ') === 0) { aktuell.titel = t; aktuell.h.textContent = t; listeAktualisieren(); } }
+  function ziel() { if (!aktuell) neuesKapitel(null); return aktuell.inhalt; }
+  function listeAktualisieren() {
+    var ul = document.getElementById('kapitelListe'); ul.innerHTML = '';
+    if (!kapitel.length) { ul.appendChild(el('li', 'rand__leer', 'Noch kein Kapitel. Fragen Sie Leo oder blättern Sie oben im Register.')); return; }
+    kapitel.forEach(function (k, idx) {
+      var li = el('li'); var zu = k.node.classList.contains('zu'); var b = el('button', zu ? '' : 'aktiv', (idx + 1) + ' · ' + k.titel);
+      b.onclick = function () { if (k.node.classList.contains('zu')) { k.node.classList.remove('zu'); k.toggle.textContent = 'einklappen ▴'; } zeigeAnfang(k.node, true); randZu(); listeAktualisieren(); }; li.appendChild(b);
+      if (!zu && k.toc && k.toc.length) { var ol = el('ol'); k.toc.forEach(function (e, i) { var l2 = el('li'); var bb = el('button', i === k.tocAktiv ? 'aktiv' : '', '<i>' + (i + 1) + '</i><span>' + e.titel + '</span>'); bb.onclick = function () { zeigeAnfang(e.node, true); randZu(); }; l2.appendChild(bb); ol.appendChild(l2); }); li.appendChild(ol); }
+      ul.appendChild(li);
+    });
+  }
+  window.randAuf = function (seite) { var r = document.getElementById(seite === 'rechts' ? 'randRechts' : 'randLinks'); r.classList.add('mobil'); document.getElementById('schublade').hidden = false; };
+  window.randZu = function () { document.getElementById('randLinks').classList.remove('mobil'); document.getElementById('randRechts').classList.remove('mobil'); document.getElementById('schublade').hidden = true; };
+  window.menueAuf = function () { document.getElementById('menue').classList.add('offen'); };
+  window.menueZu = function () { document.getElementById('menue').classList.remove('offen'); };
+  window.suche = function () { var i = document.getElementById('frage'); i.focus(); zeigeAnfang(i.closest('.eingabe')); };
+
+  // ---------- Inhaltsverzeichnis: hängt unter dem Verlaufspunkt des Kapitels ----------
+  var tocBeobachter = null;
+  function tocSetzen(art, eintraege) {
+    var k = aktuell; if (!k) return; k.toc = eintraege; k.tocAktiv = 0; listeAktualisieren();
+    if (tocBeobachter) tocBeobachter.disconnect();
+    if ('IntersectionObserver' in window) { tocBeobachter = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { var i = eintraege.findIndex(function (e) { return e.node === x.target; }); if (i > -1 && i !== k.tocAktiv) { k.tocAktiv = i; listeAktualisieren(); } } }); }, { rootMargin: '-30% 0px -55% 0px' }); eintraege.forEach(function (e) { tocBeobachter.observe(e.node); }); }
+  }
+
+  // ---------- Register mit Pille und Sparks, Lesezeichen, mobiles Menü ----------
+  var REGISTER = [['ratgeber', 'Ratgeber'], ['finanztools', 'Finanztools'], ['service', 'Service'], ['plus', 'Finanzleser Plus']];
+  var PFAD_KEY = { 'Ratgeber': 'ratgeber', 'Finanztools': 'finanztools', 'Service': 'service', 'FL Plus': 'plus', 'Finanzleser Plus': 'plus', 'Mein Bereich': 'plus', 'Aktenkoffer': 'plus' };
+  var registerNode = document.getElementById('register'); var blattOffen = null; var aktuellerPfad = null;
+  var reihe = el('div', 'register__reihe'); registerNode.appendChild(reihe);
+  var linie1 = el('i', 'nav-linie nav-linie--1'), linie3 = el('i', 'nav-linie nav-linie--3'); reihe.appendChild(linie1); reihe.appendChild(linie3);
+  var pille = el('div', 'nav-pille'), pilleK = el('div', 'nav-pille__koerper'), lupe = el('div', 'nav-lupe'), lupeReihe = el('div', 'nav-lupe__reihe'); pille.appendChild(pilleK); pilleK.appendChild(lupe); lupe.appendChild(lupeReihe); reihe.appendChild(pille);
+  var regKnoepfe = [];
+  REGISTER.forEach(function (r) { reihe.insertAdjacentHTML('beforeend', SPARK); lupeReihe.insertAdjacentHTML('beforeend', SPARK); var b = el('button', null, r[1]); b.dataset.key = r[0]; b.onclick = function () { blattOffen === r[0] ? blattZu() : (r[0] === 'plus' ? plusBlatt() : blatt(r[0])); }; b.addEventListener('mouseenter', function () { pilleZu(b); }); reihe.appendChild(b); regKnoepfe.push(b); var ls = el('span', null, r[1]); ls.dataset.key = r[0]; lupeReihe.appendChild(ls); });
+  reihe.insertAdjacentHTML('beforeend', SPARK); lupeReihe.insertAdjacentHTML('beforeend', SPARK);
+  function regKnopf(key) { for (var i = 0; i < regKnoepfe.length; i++) if (regKnoepfe[i].dataset.key === key) return regKnoepfe[i]; return null; }
+  // Pille nach Originalmechanik (useNavPill): Punkt aus der Mitte (0,15 s), Gleiten mit Überschwingen (0,4 s + Weg), Linien
+  // folgen 40/80 ms später, Rückzug zum Punkt (0,15 s). Lupe = weiße Reihe, die gegenläufig mitfährt.
+  var PILL_H = 32, BACK = 'cubic-bezier(.34,1.56,.64,1)', OUT2 = 'cubic-bezier(.25,.46,.45,.94)', IN3 = 'cubic-bezier(.55,.055,.675,.19)';
+  var pilleSichtbar = false, pilleAktiv = null, pilleX = 0, zuletzt = null;
+  function pos(b) { var c = reihe.getBoundingClientRect(), r = b.getBoundingClientRect(); return { x: r.left - c.left, w: r.width }; }
+  function trans(elm, d, e) { elm.style.transition = d ? ['transform', 'width', 'height', 'opacity'].map(function (p) { return p + ' ' + d + 's ' + e; }).join(', ') : 'none'; }
+  function dauer(x, basis) { return basis + Math.min(Math.abs(x - pilleX) / 300, 1) * 0.15; }
+  function lege(x, w, d, e) {
+    trans(pille, d, e); pille.style.transform = 'translate(' + x + 'px,-50%)'; pille.style.width = w + 'px'; pille.style.height = PILL_H + 'px'; pille.style.opacity = 1;
+    lupeReihe.style.transition = d ? 'transform ' + d + 's ' + e : 'none'; lupeReihe.style.transform = 'translate(' + (-x) + 'px,-50%)';
+    [linie3, linie1].forEach(function (l, i) { trans(l, d ? d + (i ? 0.08 : 0.04) : 0, e); l.style.transform = 'translate(' + x + 'px,0)'; l.style.width = w + 'px'; l.style.opacity = 1; });
+    pilleX = x;
+  }
+  function punkt(cx, d, e, op) { trans(pille, d, e); pille.style.transform = 'translate(' + (cx - 5) + 'px,-50%)'; pille.style.width = '10px'; pille.style.height = '10px'; pille.style.opacity = op; lupeReihe.style.transition = d ? 'transform ' + d + 's ' + e : 'none'; lupeReihe.style.transform = 'translate(' + (-(cx - 5)) + 'px,-50%)'; [linie3, linie1].forEach(function (l, i) { trans(l, d, e); l.style.transform = 'translate(' + (cx - 5) + 'px,' + (PILL_H / 2 + (i ? 10 : 6)) + 'px)'; l.style.width = '10px'; l.style.opacity = op; }); }
+  function pilleZu(b) { var p = pos(b); zuletzt = b; if (!pilleSichtbar) { pilleSichtbar = true; punkt(p.x + p.w / 2, 0, 'linear', 1); pille.getBoundingClientRect(); lege(p.x, p.w, 0.15, OUT2); return; } lege(p.x, p.w, dauer(p.x, 0.4), BACK); }
+  function pilleWeg() { if (!pilleSichtbar) return; if (pilleAktiv) { pilleZurueck(); return; } pilleSichtbar = false; punkt(pilleX + pille.offsetWidth / 2, 0.15, IN3, 0); }
+  function pilleZurueck() { if (!pilleAktiv || zuletzt === pilleAktiv) return; var p = pos(pilleAktiv); zuletzt = pilleAktiv; lege(p.x, p.w, dauer(p.x, 0.4) + 0.2, BACK); }
+  function pilleOeffnen(b) { if (!b) return; if (pilleAktiv && pilleAktiv !== b) pilleAktiv.classList.remove('offen'); pilleAktiv = b; b.classList.add('offen'); var p = pos(b); if (!pilleSichtbar) pilleZu(b); else lege(p.x, p.w, 0.35, OUT2); zuletzt = b; }
+  function pilleSchliessen() { if (pilleAktiv) pilleAktiv.classList.remove('offen'); pilleAktiv = null; if (!reihe.matches(':hover')) pilleWeg(); }
+  reihe.addEventListener('mousemove', function (e) { if (!pilleSichtbar || (e.target.closest && e.target.closest('button'))) return; var x = e.clientX, n = regKnoepfe.length; var erst = regKnoepfe[0].getBoundingClientRect(), letzt = regKnoepfe[n - 1].getBoundingClientRect(); if (x < erst.left || x > letzt.right) { pilleAktiv ? pilleZurueck() : pilleWeg(); return; } for (var i = 0; i < n; i++) { var r = regKnoepfe[i].getBoundingClientRect(); var ende = i < n - 1 ? (r.right + regKnoepfe[i + 1].getBoundingClientRect().left) / 2 : r.right; if (x <= ende || i === n - 1) { if (regKnoepfe[i] !== zuletzt) pilleZu(regKnoepfe[i]); return; } } });
+  reihe.addEventListener('mouseleave', pilleWeg);
+  function lupeMessen() { lupeReihe.style.width = reihe.clientWidth + 'px'; if (pilleSichtbar && zuletzt) { var p = pos(zuletzt); lege(p.x, p.w, 0, 'linear'); } }
+  window.registerNeu = lupeMessen; lupeMessen(); window.addEventListener('resize', lupeMessen); if (document.fonts && document.fonts.ready) document.fonts.ready.then(lupeMessen);
+  var pfadNode = el('span', 'pfad', ''); registerNode.appendChild(pfadNode);
+  function setzePfad(pfad) { aktuellerPfad = pfad; pfadNode.innerHTML = pfad && pfad.length ? 'Sie lesen: <b>' + pfad.join(' › ') + '</b>' : ''; }
+  (function () { var m = document.getElementById('menueListe'); REGISTER.forEach(function (r) { var b = el('button', 'zeile-m', r[1] + '<small>' + ({ ratgeber: '4 Rubriken', finanztools: 'Rechner · Vergleiche · Checklisten', service: 'Anbieter · Dokumente · Glossar', plus: 'Aktenkoffer · Wächter' })[r[0]] + '</small>'); b.onclick = function () { menueZu(); window.scrollTo({ top: 0 }); r[0] === 'plus' ? plusBlatt() : blatt(r[0]); }; m.appendChild(b); }); })();
+
+  // ---------- Blatt (Register) ----------
+  function blattRahmen(plus) { var box = document.getElementById('blatt'); box.innerHTML = ''; var innen = el('div', 'blatt__innen' + (plus ? ' blatt__innen--plus' : '')); var schliessen = el('button', 'schliessen', 'Esc · schließen ✕'); schliessen.onclick = blattZu; innen.appendChild(schliessen); box.appendChild(innen); box.classList.add('offen'); var intro = document.getElementById('intro'); if (intro && !intro.hidden) { intro.hidden = true; window.scrollTo(0, 0); begruessung(); } return innen; }
+  function eintrag(t, m, z, pfad, dot) { var e = el('button', 'eintrag', '<b>' + t + '</b><small>' + (dot ? '<i class="dot dot--' + dot + '"></i>' : '') + m + '</small>'); e.onclick = function () { blattZu(); if (z === 'demo' || !z) { toast('„' + t + '“: im Prototyp nur angedeutet'); return; } starte(z, null, false, true, null, pfad); }; return e; }
+  function werkzeug(t, z, pfad, dot) { var e = el('button', 'werkzeug', (dot ? '<i class="dot dot--' + dot + '"></i>' : '› ') + t); e.onclick = function () { blattZu(); if (z === 'demo') { toast('„' + t + '“: im Prototyp nur angedeutet'); return; } starte(z, null, false, true, null, pfad); }; return e; }
+  function themenListe(items, aktiv, klick) { var ul = el('ul', 'themen'); items.forEach(function (it) { var li = el('li'); var b = el('button', 'thema' + (it.key === aktiv ? ' aktiv' : ''), (it.icon ? '<img src="' + it.icon + '" alt="">' : '') + it.name + (it.zahl ? ' <small style="color:var(--muted)">' + it.zahl + '</small>' : '')); b.onclick = function () { klick(it.key); }; li.appendChild(b); ul.appendChild(li); }); return ul; }
+  var blattFrisch = false; // der Klick, der das Blatt öffnet (Krumen, Textlink, „Alle Ratgeber“), darf es nicht im selben Moment wieder schließen
+  window.blatt = function (key, a, b) {
+    blattOffen = key; blattFrisch = true; setTimeout(function () { blattFrisch = false; }, 0); var innen = blattRahmen();
+    pilleOeffnen(regKnopf(key));
+    var links = el('div', 'blatt__spalte'), mitte = el('div', 'blatt__spalte'), rechts = el('div', 'blatt__spalte');
+    if (key === 'ratgeber') {
+      var rk = RUBRIKEN[a] ? a : Object.keys(RUBRIKEN)[0]; var rub = RUBRIKEN[rk]; var alleThemen = b === '*'; var tk = (!alleThemen && THEMEN[b]) ? b : rub.themen[0]; var th = THEMEN[tk]; var pfad = ['Ratgeber', rub.titel, alleThemen ? 'Alle Ratgeber' : th.name];
+      links.appendChild(el('span', 'kicker', 'Rubrik')); links.appendChild(themenListe(Object.keys(RUBRIKEN).map(function (k) { return { key: k, name: RUBRIKEN[k].titel, icon: ICON[k], zahl: RUBRIKEN[k].zahl }; }), rk, function (k) { blatt('ratgeber', k); }));
+      mitte.appendChild(el('span', 'kicker', rub.titel + ' · Themen')); mitte.appendChild(themenListe(rub.themen.map(function (k) { return { key: k, name: THEMEN[k].name, zahl: THEMEN[k].liste.length }; }), alleThemen ? null : tk, function (k) { blatt('ratgeber', rk, k); }));
+      var alle = el('button', 'textlink' + (alleThemen ? '' : ' textlink--still'), 'Alle ' + rub.zahl + ' Ratgeber in ' + rub.titel); alle.onclick = function () { blatt('ratgeber', rk, '*'); }; mitte.appendChild(alle);
+      if (alleThemen) { rub.themen.forEach(function (k2) { var t2 = THEMEN[k2]; rechts.appendChild(el('span', 'kicker', t2.name + ' · ' + t2.liste.length)); var ml2 = el('ul'); t2.liste.forEach(function (x) { var li = el('li'); li.appendChild(eintrag(x[0], x[1], x[2], ['Ratgeber', rub.titel, t2.name], x[3])); ml2.appendChild(li); }); rechts.appendChild(ml2); }); }
+      else { rechts.appendChild(el('span', 'kicker', th.name + ' · Ratgeber')); var ml = el('ul'); th.liste.forEach(function (x) { var li = el('li'); li.appendChild(eintrag(x[0], x[1], x[2], pfad, x[3])); ml.appendChild(li); }); rechts.appendChild(ml);
+      if (th.werkzeuge && th.werkzeuge.length) { rechts.appendChild(el('span', 'kicker', 'Finanztools zum Thema')); th.werkzeuge.forEach(function (x) { rechts.appendChild(werkzeug(x[0], x[1], pfad, x[2])); }); } }
+      if (th.anbieter) rechts.appendChild(el('span', 'hinweis', 'Anbieter im Thema: ' + th.anbieter));
+    } else if (key === 'finanztools') {
+      var namen = Object.keys(FINANZTOOLS.reiter); var akt2 = a || namen[0]; var dot = akt2.indexOf('Rechner') === 0 ? 'rechner' : akt2.indexOf('Check') === 0 ? 'checkliste' : 'vergleich';
+      links.appendChild(el('span', 'kicker', 'Finanztools')); links.appendChild(themenListe(namen.map(function (n) { return { key: n, name: '<i class="dot dot--' + (n.indexOf('Rechner') === 0 ? 'rechner' : n.indexOf('Check') === 0 ? 'checkliste' : 'vergleich') + '"></i>' + n }; }), akt2, function (n) { blatt('finanztools', n); }));
+      links.appendChild(el('span', 'hinweis', '56 Rechner, 43 Vergleiche, 207 Checklisten. Alle rechnen und laufen im Faden.'));
+      mitte.appendChild(el('span', 'kicker', akt2)); var f3 = el('input'); f3.placeholder = 'Filtern: z. B. „Unterhalt“'; mitte.appendChild(f3); var ml3 = el('ul'); mitte.appendChild(ml3);
+      var zeige = function (filter) { ml3.innerHTML = ''; FINANZTOOLS.reiter[akt2].filter(function (x) { return !filter || x[0].toLowerCase().indexOf(filter.toLowerCase()) > -1; }).forEach(function (x) { var li = el('li'); li.appendChild(eintrag(x[0], x[1], x[2], ['Finanztools', akt2.split(' ')[0]], dot)); ml3.appendChild(li); }); };
+      f3.oninput = function () { zeige(f3.value); }; zeige('');
+      rechts.appendChild(el('span', 'kicker', 'Meistgenutzt')); FINANZTOOLS.meist.forEach(function (x) { rechts.appendChild(werkzeug(x[0], x[1], ['Finanztools'], x[2])); });
+      rechts.appendChild(el('span', 'kicker kicker--pink', 'Anzeige · Vergleiche mit Partnerlinks')); rechts.appendChild(el('span', 'hinweis', 'Vergleiche verlinken zu Partnern, Finanzleser erhält eine Provision. Redaktionell gepflegt, die Provision beeinflusst die Reihenfolge nicht.'));
+    } else if (key === 'service') {
+      var teil = a || 'anbieter'; var pf = ['Service', SERVICE.namen[teil]];
+      links.appendChild(el('span', 'kicker', 'Service')); links.appendChild(themenListe(Object.keys(SERVICE.namen).map(function (k) { return { key: k, name: SERVICE.namen[k] }; }), teil, function (k) { blatt('service', k); }));
+      if (teil === 'anbieter') {
+        var akt4 = b || 'Alle'; mitte.appendChild(el('span', 'kicker', 'Sparte')); var sp = el('div', 'abc'); SERVICE.sparten.forEach(function (t) { var x = el('button', t === akt4 ? 'aktiv' : '', t); x.onclick = function () { blatt('service', 'anbieter', t); }; sp.appendChild(x); }); mitte.appendChild(sp);
+        var f4 = el('input'); f4.placeholder = 'Name oder Sparte …'; mitte.appendChild(f4); var ml4 = el('ul'); mitte.appendChild(ml4);
+        var zeige4 = function (filter) { ml4.innerHTML = ''; SERVICE.anbieter.filter(function (x) { return (akt4 === 'Alle' || x[1].indexOf(akt4) > -1) && (!filter || (x[0] + x[1]).toLowerCase().indexOf(filter.toLowerCase()) > -1); }).forEach(function (x) { var li = el('li'); li.appendChild(eintrag(x[0], x[1], 'demo', pf)); ml4.appendChild(li); }); };
+        f4.oninput = function () { zeige4(f4.value); }; zeige4('');
+        rechts.appendChild(el('span', 'kicker', '147 Anbieterseiten')); rechts.appendChild(el('span', 'hinweis', 'Kontakt, Kündigung, Schadenmeldung je Versicherer. Jede Seite öffnet im Faden, Leo kennt die Bedingungen der Partner.'));
+        rechts.appendChild(el('span', 'kicker kicker--pink', 'Anzeige in eigener Sache · Finconext-Partner')); rechts.appendChild(el('span', 'hinweis', SERVICE.partner)); var btn = el('button', 'btn btn--primary btn--klein', 'Angebot berechnen bei Finconext'); btn.onclick = function () { blattZu(); uebergabe('Partnerangebot', [], btn); }; var _alt = function () { window.open('https://www.finconext.de/', '_blank', 'noopener'); }; rechts.appendChild(btn);
+      } else if (teil === 'dokumente') {
+        mitte.appendChild(el('span', 'kicker', 'Dokumente · Vorlagen und Formulare')); var f5 = el('input'); f5.placeholder = 'Filtern …'; mitte.appendChild(f5); var ml5 = el('ul'); mitte.appendChild(ml5);
+        var zeige5 = function (filter) { ml5.innerHTML = ''; SERVICE.dokumente.filter(function (x) { return !filter || x[0].toLowerCase().indexOf(filter.toLowerCase()) > -1; }).forEach(function (x) { var li = el('li'); li.appendChild(eintrag(x[0], x[1], x[2], pf, 'dokumente')); ml5.appendChild(li); }); };
+        f5.oninput = function () { zeige5(f5.value); }; zeige5('');
+        rechts.appendChild(el('span', 'kicker', 'So funktioniert es')); rechts.appendChild(el('span', 'hinweis', 'Jedes Dokument öffnet im Faden als Kasten: Vorschau, Download, und Leo erklärt die Felder auf Nachfrage. Ausgefüllte Vorlagen landen im Aktenkoffer.'));
+      } else if (teil === 'glossar') {
+        var bst = b || 'Alle'; mitte.appendChild(el('span', 'kicker', 'Glossar · ' + Object.keys(GLOSSAR).length + ' Begriffe (später mehrere tausend)')); var abc = el('div', 'abc'); var vorhanden = {}; Object.keys(GLOSSAR).forEach(function (k) { vorhanden[GLOSSAR[k].name.charAt(0).toUpperCase()] = 1; });
+        ['Alle'].concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')).forEach(function (l) { var x = el('button', l === bst ? 'aktiv' : '', l); if (l !== 'Alle' && !vorhanden[l]) { x.disabled = true; x.style.opacity = '.35'; } x.onclick = function () { blatt('service', 'glossar', l); }; abc.appendChild(x); }); mitte.appendChild(abc);
+        var f6 = el('input'); f6.placeholder = 'Begriff suchen …'; mitte.appendChild(f6); var ml6 = el('ul'); mitte.appendChild(ml6);
+        var zeige6 = function (filter) { ml6.innerHTML = ''; glossarSortiert().filter(function (k) { var g = GLOSSAR[k]; return (bst === 'Alle' || g.name.charAt(0).toUpperCase() === bst) && (!filter || g.name.toLowerCase().indexOf(filter.toLowerCase()) > -1); }).slice(0, 24).forEach(function (k) { var li = el('li'); var g = GLOSSAR[k]; var e = el('button', 'eintrag', '<b>' + g.name + '</b><small>' + g.erkl.slice(0, 70) + '…</small>'); e.onclick = function () { blattZu(); starte('begriff', 'Was bedeutet „' + g.name + '“?', false, false, null, null, null, k); }; li.appendChild(e); ml6.appendChild(li); }); };
+        f6.oninput = function () { zeige6(f6.value); }; zeige6('');
+        rechts.appendChild(el('span', 'kicker', 'Zwei Wege')); rechts.appendChild(el('span', 'hinweis', 'Ein Begriff hier öffnet Leos Erklärung im Faden und legt sie rechts in die Sitzung. Das ganze Glossar gibt es als Nachschlagewerk im Faden: kompakt, mit Suche, scrollt in sich.'));
+        var gb = el('button', 'btn btn--klein', 'Nachschlagewerk im Faden öffnen'); gb.onclick = function () { blattZu(); starte('glossar', null, false, true, null, ['Service', 'Glossar']); }; rechts.appendChild(gb);
+        rechts.appendChild(el('span', 'hinweis', 'Jeder Begriff hat eine eigene Adresse (/glossar/kredit/), die Suchmaschinen und KI-Suchen lesen.'));
+      } else if (teil === 'finconext') {
+        mitte.appendChild(el('img', null)); mitte.lastChild.src = ICON.finconext; mitte.lastChild.alt = 'Finconext'; mitte.lastChild.style.cssText = 'height:34px;width:auto;justify-self:start';
+        mitte.appendChild(el('span', null, 'Finconext ist der Versicherungsmakler hinter finanzleser.de: unabhängig, mit zehn Spezialversicherern für Haftpflicht, Hausrat, Unfall, Tier, Fahrrad und Wohngebäude. Das Angebot dort ist ein Gespräch, kein Formular.'));
+        mitte.appendChild(el('span', 'hinweis', 'Geschäftsführer Andreas Eikelmeier · Frankfurt am Main · Makler nach § 34d GewO'));
+        var fb = el('button', 'btn btn--klein', 'Mehr über Finconext im Faden'); fb.onclick = function () { blattZu(); starte('finconext', null, false, true, null, ['Service', 'Finconext']); }; mitte.appendChild(fb);
+        rechts.appendChild(el('span', 'kicker kicker--pink', 'Anzeige in eigener Sache')); rechts.appendChild(el('span', 'hinweis', 'Persönlicher Versicherungs-Check mit einem echten Berater. Für Plus-Leser ab Level 2 kostenlos, sonst direkt anfragen.')); var fl = el('button', 'btn btn--primary btn--klein', 'finconext.de öffnen ↗'); fl.onclick = function () { window.open('https://www.finconext.de/', '_blank', 'noopener'); }; rechts.appendChild(fl);
+      }
+    }
+    innen.appendChild(links); innen.appendChild(mitte); innen.appendChild(rechts);
+  };
+  window.blattZu = function () { var box = document.getElementById('blatt'); box.classList.remove('offen'); box.innerHTML = ''; blattOffen = null; setzePfad(aktuellerPfad); pilleSchliessen(); };
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') { blattZu(); seiteZu(); bmenuZu(); menueZu(); randZu(); } });
+  document.addEventListener('click', function (ev) { if (blattOffen && !blattFrisch && document.contains(ev.target) && !ev.target.closest('#kopf')) blattZu(); });
+
+  // ---------- Plus-Blatt: Mein Bereich ----------
+  var BELEGE_DEMO = [['Gespräch: Tresorschlüssel', 'Leo, 3 Antworten', '1. Sept.', 'gespraech'], ['Steuerformulare 2025', 'PDF, 2 Seiten', '28. Aug.', 'dokument']];
+  var REGELN = [['kfz', 'Kfz-Wechselfrist', 'Wenn der 1. November naht → 3 geprüfte Angebote per WhatsApp', 'in 55 Tagen'], ['tabelle', 'Düsseldorfer Tabelle', 'Wenn sich die Tabelle ändert → Unterhaltsergebnis neu prüfen, E-Mail', 'Jahreswechsel'], ['grundfreibetrag', 'Grundfreibetrag', 'Wenn sich der Wert ändert → Hinweis im Faden', 'Jahreswechsel']];
+  window.plusBlatt = function () {
+    blattOffen = 'plus'; var innen = blattRahmen(true); pilleOeffnen(regKnopf('plus')); pfadNode.innerHTML = 'Sie lesen: <b>Mein Bereich</b>';
+    if (!state.plus) {
+      innen.appendChild(el('span', 'gruss', 'Finanzleser Plus · kostenlos, ohne Passwort'));
+      var s1 = el('div', 'blatt__spalte'); s1.appendChild(el('span', 'kicker', 'Was Plus enthält')); s1.innerHTML += '<ul><li>· Aktenkoffer auf allen Geräten</li><li>· Wächter per E-Mail oder WhatsApp</li><li>· Wochenbrief mit Themenwahl</li><li>· Finanzwort-Serie, Punkte und Belohnungen</li></ul>';
+      var s2 = el('div', 'blatt__spalte'); s2.appendChild(el('span', 'kicker', 'Anmelden oder sichern')); var w = el('div', 'sicherung'); w.innerHTML = '<input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail"><div class="reihe"><button class="btn btn--primary" data-f="magic">Link zum Anmelden schicken</button><button class="btn" data-f="passkey">Mit Passkey</button></div><p class="quelle">Eine E-Mail-Adresse genügt. Ihre Daten liegen getrennt vom Redaktionssystem, in der EU.</p>';
+      w.querySelector('[data-f="magic"]').onclick = function () { var m = w.querySelector('input').value; if (!m || m.indexOf('@') < 0) { toast('Bitte eine E-Mail-Adresse eintragen'); return; } toast('Link geschickt an ' + m + ' (Demo)'); state.plus = true; speichern(); aktualisiereZahlen(); plusBlatt(); };
+      w.querySelector('[data-f="passkey"]').onclick = function () { toast('Passkey angelegt (Demo)'); state.plus = true; speichern(); aktualisiereZahlen(); plusBlatt(); };
+      s2.appendChild(w);
+      var s3 = el('div', 'blatt__spalte'); s3.appendChild(el('span', 'kicker', 'Ihr Aktenkoffer in diesem Browser')); if (state.koffer.length) state.koffer.forEach(function (t) { s3.appendChild(el('div', 'beleg', '<b>' + t + '</b><small>ungesichert</small>')); }); else s3.appendChild(el('span', 'hinweis', 'Noch leer. Jeder Kasten und jede Kette hat „In den Aktenkoffer“.'));
+      innen.appendChild(s1); innen.appendChild(s2); innen.appendChild(s3); return;
+    }
+    innen.appendChild(el('span', 'gruss', 'Guten Tag, Frau Berger · Plus seit März · Level 2 „Kenner“'));
+    var a = el('div', 'blatt__spalte'); a.appendChild(el('span', 'kicker kicker--gruen', 'Aktenkoffer · ' + (state.koffer.length + BELEGE_DEMO.length) + ' Belege')); a.appendChild(el('span', 'hinweis', 'Ergebnisse · Checklisten · Vergleiche · Gespräche'));
+    state.koffer.map(function (t) { return [t, 'gesichert', 'heute', 'beleg']; }).concat(BELEGE_DEMO).forEach(function (x) { var b = el('button', 'beleg', '<b>' + x[0] + '</b><small>' + x[1] + ' · ' + x[2] + '</small><span class="oeffnen">↗</span><span class="stempel">gesichert</span>'); b.onclick = function () { blattZu(); starte('beleg', null, false, true, null, ['Mein Bereich', 'Aktenkoffer'], x[0]); }; a.appendChild(b); });
+    var wsp = el('div', 'blatt__spalte'); wsp.appendChild(el('span', 'kicker kicker--gruen', 'Wächter · ' + aktiveWaechter() + ' von 3 aktiv'));
+    REGELN.forEach(function (r) { var d = el('div', 'regel', '<b>' + r[1] + '</b><span>' + r[2] + '</span><small>Nächster Termin: ' + r[3] + '</small>'); var t = el('button', 'toggle' + (state.waechter[r[0]] ? ' an' : '')); t.setAttribute('aria-label', r[1] + ' ein/aus'); t.onclick = function () { state.waechter[r[0]] = !state.waechter[r[0]]; t.classList.toggle('an'); speichern(); aktualisiereZahlen(); wsp.querySelector('.kicker').textContent = 'Wächter · ' + aktiveWaechter() + ' von 3 aktiv'; }; d.appendChild(t); wsp.appendChild(d); });
+    var j = el('div', 'jahr', '<span class="kicker">Jahresleiste</span><div class="jahr__leiste"><i class="heute" style="left:68%"></i><i class="frist" style="left:84%"></i><i style="left:2%"></i></div><div class="jahr__monate"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div><span class="hinweis">● heute · ● Kfz-Frist · ○ Jahreswechsel</span>'); wsp.appendChild(j);
+    var p = el('div', 'blatt__spalte'); p.appendChild(el('span', 'kicker kicker--gruen', 'Profil')); var pr = el('div', 'profil'); pr.innerHTML = '<span class="profil-ring"><img src="' + LEO + '" alt=""></span><span><b>Frau Berger</b> · berger@mail.de</span><span>Passkey eingerichtet · kein Passwort</span><span>Interessen: Familie · Steuern · Hund</span><span>Wochenbrief: donnerstags · ' + (state.wb ? 'eingetragen' : 'nicht eingetragen') + '</span><span>Punkte ' + state.punkte + ' · Finanzwort-Serie ' + state.serie + ' Tage</span>'; p.appendChild(pr);
+    p.appendChild(el('span', 'kicker kicker--pink', 'Belohnungen')); p.appendChild(el('span', null, '✓ PDF-Guide „Trennung“ (Level 1)<br>○ Versicherungs-Check bei Finconext · ab Level 2, noch ' + Math.max(0, 400 - state.punkte) + ' Punkte'));
+    var ab = el('button', 'textlink textlink--still', 'Daten herunterladen · Konto löschen'); ab.onclick = function () { toast('Im Prototyp nur angedeutet'); }; p.appendChild(ab);
+    innen.appendChild(a); innen.appendChild(wsp); innen.appendChild(p);
+  };
+
+  // ---------- Hover-Box: die Mechanik der Originalseite (useSliderHoverBox), mit runden Ecken ----------
+  // Die echten 70-px-Linien und der echte Spark bleiben stehen. Schritt 1 (0,18 s): linke Linie verlängert sich nach unten,
+  // rechte nach oben bis in die Ecke. Schritt 2: die Horizontalen wachsen (oben von rechts, unten von links).
+  // Schritt 3: die Lücken zur Ecke schließen sich. Rückweg in umgekehrter Reihenfolge. Nachbar-Sparks drehen.
+  // Erste/letzte Karte ohne echte Linie: volle Kante mit Lücke und eigenem, drehendem Spark.
+  var NS = 'http://www.w3.org/2000/svg'; var SPARK_D = 'M12 6.00047C10.3384 5.64978 8.28716 5.41362 7.24241 3.91374C6.47491 2.81169 6.27276 1.28871 6.00024 0.000471365C5.61861 1.71435 5.40087 3.79684 3.79407 4.83384C2.69548 5.54325 1.25351 5.72142 0 6.01226C1.28705 6.29225 2.79561 6.48692 3.89751 7.25194C5.4174 8.30686 5.61672 10.3366 6.00024 12.0005C6.17594 11.1204 6.33322 10.2272 6.62463 9.37638C7.27878 7.46453 8.37832 6.85223 10.2643 6.37379L12 6.00047Z';
+
+  // ---------- Suchfeld wie die Suchleiste der Startseite: FieldOutline (Hover zeichnet im Uhrzeigersinn ein), Fokusring ----------
+  function feldUmriss(wrap, radius, gap) {
+    var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'feld-umriss'); svg.setAttribute('aria-hidden', 'true'); var path = document.createElementNS(NS, 'path'); path.setAttribute('pathLength', '100'); path.setAttribute('vector-effect', 'non-scaling-stroke'); svg.appendChild(path); wrap.insertBefore(svg, wrap.firstChild);
+    var feld = wrap.querySelector('.suchpille'); var cur = { tail: 0, len: 0 }, gezeichnet = false, raf = null;
+    function messen() { var w = feld.offsetWidth + gap * 2, h = feld.offsetHeight + gap * 2; if (!w || !h) return; var r = Math.max(0, Math.min(radius + gap, w / 2, h / 2)); svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h); svg.setAttribute('width', w); svg.setAttribute('height', h); svg.style.top = -gap + 'px'; svg.style.left = -gap + 'px'; path.setAttribute('d', 'M 0 ' + (h - r) + ' L 0 ' + r + ' A ' + r + ' ' + r + ' 0 0 1 ' + r + ' 0 L ' + (w - r) + ' 0 A ' + r + ' ' + r + ' 0 0 1 ' + w + ' ' + r + ' L ' + w + ' ' + (h - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + (w - r) + ' ' + h + ' L ' + r + ' ' + h + ' A ' + r + ' ' + r + ' 0 0 1 0 ' + (h - r) + ' Z'); }
+    function mal() { path.style.strokeDasharray = cur.len + ' ' + (100 - cur.len); path.style.strokeDashoffset = -cur.tail; path.style.opacity = cur.len > 0.3 ? '' : '0'; }
+    // Immer im Uhrzeigersinn: Einzeichnen Tail +25, Länge → 100; Ausblenden Tail +125, Länge → 0 (1 s, power2.out)
+    function zeichne(soll) { if (soll === gezeichnet) return; gezeichnet = soll; if (raf) cancelAnimationFrame(raf); var von = { tail: cur.tail, len: cur.len }, bis = { tail: cur.tail + (soll ? 25 : 125), len: soll ? 100 : 0 }, t0 = performance.now(), D = reduziert ? 1 : 1000; (function schritt(now) { var t = Math.min(1, (now - t0) / D); var e = 1 - (1 - t) * (1 - t); cur.tail = von.tail + (bis.tail - von.tail) * e; cur.len = von.len + (bis.len - von.len) * e; mal(); if (t < 1) raf = requestAnimationFrame(schritt); })(t0); }
+    messen(); mal(); if (window.ResizeObserver) new ResizeObserver(messen).observe(feld); if (document.fonts && document.fonts.ready) document.fonts.ready.then(messen);
+    wrap.addEventListener('mouseenter', function () { zeichne(true); }); wrap.addEventListener('mouseleave', function () { if (!wrap.matches(':focus-within')) zeichne(false); });
+    wrap.addEventListener('focusin', function () { zeichne(true); }); wrap.addEventListener('focusout', function () { setTimeout(function () { if (!wrap.matches(':hover') && !wrap.matches(':focus-within')) zeichne(false); }, 0); });
+    wrap.umrissMessen = messen; wrap.umrissZeichne = zeichne;
+  }
+  window.pilleText = function (input) { input.closest('.suchpille').classList.toggle('hat-text', input.value.trim().length > 0); };
+  function suchPille(wrap) { feldUmriss(wrap, 26, 4); var input = wrap.querySelector('input'); input.addEventListener('input', function () { pilleText(input); }); return wrap; }
+  function suchPilleBauen(placeholder, absenden) { var wrap = el('div', 'suchpille-wrap'); var form = el('form', 'suchpille'); form.setAttribute('autocomplete', 'off'); var input = el('input'); input.type = 'text'; input.placeholder = placeholder; input.setAttribute('aria-label', 'Frage an Leo'); var b = el('button', 'senden', 'Fragen'); b.type = 'submit'; form.appendChild(input); form.appendChild(b); wrap.appendChild(form); form.onsubmit = function (ev) { ev.preventDefault(); absenden(input.value.trim(), ev); }; return suchPille(wrap); }
+  suchPille(document.getElementById('fadenPille'));
+  function hoverBox(reihe, sel, radius, opts) {
+    if (!window.matchMedia('(hover: hover)').matches) return; opts = opts || {};
+    var R = radius || 14, OFF = 11, GAP = 11, STEP = 180, EASE = 'cubic-bezier(.25,.46,.45,.94)'; var inhaltSel = opts.inhalt || null;
+    function linienLaenge(t) { var h = parseFloat(getComputedStyle(t, '::before').height); return isNaN(h) ? 70 : h; }
+    var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'hbox'); reihe.insertBefore(svg, reihe.firstChild);
+    var NAMEN = ['lDown', 'rUp', 'hTop', 'hBottom', 'lUp', 'rDown']; var SCHRITT = { lDown: 0, rUp: 0, hTop: 1, hBottom: 1, lUp: 2, rDown: 2 };
+    var seg = {}; NAMEN.forEach(function (n) { var p = document.createElementNS(NS, 'path'); p.setAttribute('class', 'seg'); seg[n] = p; svg.appendChild(p); });
+    var eigen = {}; ['l', 'r'].forEach(function (k) { var g = document.createElementNS(NS, 'g'); var p = document.createElementNS(NS, 'path'); p.setAttribute('d', SPARK_D); p.setAttribute('class', 'hspark'); g.appendChild(p); svg.appendChild(g); eigen[k] = { g: g, p: p }; });
+    var anims = []; var timer; var inReihe = false; var aktiv = null; var nachbarn = [];
+    function mitte(node, rr) { var r = node.getBoundingClientRect(); return { x: r.left + r.width / 2 - rr.left, y: r.top + r.height / 2 - rr.top }; }
+    function geometrie(card) {
+      var rr = reihe.getBoundingClientRect(); var inhalt = inhaltSel ? (card.querySelector(inhaltSel) || card) : card; var cr0 = inhalt.getBoundingClientRect(); var cs = getComputedStyle(inhalt);
+      var cr = { left: cr0.left + parseFloat(cs.paddingLeft), right: cr0.right - parseFloat(cs.paddingRight), top: cr0.top + parseFloat(cs.paddingTop), bottom: cr0.bottom - parseFloat(cs.paddingBottom) };
+      var prev = card.previousElementSibling, next = card.nextElementSibling; var lt = prev && prev.classList.contains('trenner') ? prev : null, rt = next && next.classList.contains('trenner') ? next : null;
+      var ls = lt ? mitte(lt.querySelector('.spark'), rr) : null, rs = rt ? mitte(rt.querySelector('.spark'), rr) : null;
+      var cl = cr.left - rr.left, cre = cr.right - rr.left, ct = cr.top - rr.top, cb = cr.bottom - rr.top;
+      var pad = ls ? (cl - ls.x) : rs ? (rs.x - cre) : 24; var L = ls ? ls.x : cl - pad, Rx = rs ? rs.x : cre + pad; var sy = ls ? ls.y : rs ? rs.y : (ct + cb) / 2;
+      var oben = opts.oben != null ? opts.oben : pad - 16, unten = opts.unten != null ? opts.unten : pad - 16;
+      var T = Math.round(ct - oben) + 0.5, B = Math.round(cb + unten) + 0.5; L = Math.round(L - 0.5) + 0.5; Rx = Math.round(Rx - 0.5) + 0.5;
+      var r = Math.max(4, Math.min(R, (B - T) / 3, (Rx - L) / 3));
+      var LL = lt ? linienLaenge(lt) : 70, LR = rt ? linienLaenge(rt) : 70;
+      var lTop = ls ? Math.max(T + r, sy - OFF - LL) : sy - GAP, lBot = ls ? Math.min(B - r, sy + OFF + LL) : sy + GAP, rTop = rs ? Math.max(T + r, sy - OFF - LR) : sy - GAP, rBot = rs ? Math.min(B - r, sy + OFF + LR) : sy + GAP;
+      return { L: L, R: Rx, T: T, B: B, r: r, sy: sy, ls: !!ls, rs: !!rs, lTop: lTop, lBot: lBot, rTop: rTop, rBot: rBot, nachbarn: [lt, rt].filter(Boolean).map(function (t) { return t.querySelector('.spark'); }) };
+    }
+    function pfade(g) {
+      var L = g.L, Rx = g.R, T = g.T, B = g.B, r = g.r;
+      return {
+        lDown: 'M' + L + ' ' + g.lBot + ' L' + L + ' ' + (B - r) + ' A' + r + ' ' + r + ' 0 0 0 ' + (L + r) + ' ' + B,
+        rUp: 'M' + Rx + ' ' + g.rTop + ' L' + Rx + ' ' + (T + r) + ' A' + r + ' ' + r + ' 0 0 0 ' + (Rx - r) + ' ' + T,
+        hTop: 'M' + (Rx - r) + ' ' + T + ' L' + (L + r) + ' ' + T,
+        hBottom: 'M' + (L + r) + ' ' + B + ' L' + (Rx - r) + ' ' + B,
+        lUp: 'M' + (L + r) + ' ' + T + ' A' + r + ' ' + r + ' 0 0 0 ' + L + ' ' + (T + r) + ' L' + L + ' ' + g.lTop,
+        rDown: 'M' + (Rx - r) + ' ' + B + ' A' + r + ' ' + r + ' 0 0 0 ' + Rx + ' ' + (B - r) + ' L' + Rx + ' ' + g.rBot
+      };
+    }
+    function stopp() { anims.forEach(function (a) { try { a.cancel(); } catch (e) {} }); anims = []; }
+    function zeichne(card) {
+      if (reihe.classList.contains('offen')) return; stopp(); var g = geometrie(card); var d = pfade(g); aktiv = card;
+      NAMEN.forEach(function (n) { var p = seg[n]; p.setAttribute('d', d[n]); var len = p.getTotalLength() || 1; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; var a = p.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: reduziert ? 0 : STEP, delay: reduziert ? 0 : SCHRITT[n] * STEP, easing: EASE, fill: 'forwards' }); anims.push(a); });
+      nachbarn = g.nachbarn; nachbarn.forEach(function (sp) { sp.classList.add('dreht'); });
+      [['l', g.L, !g.ls], ['r', g.R, !g.rs]].forEach(function (x) { var e = eigen[x[0]]; e.g.setAttribute('transform', 'translate(' + (x[1] - 6) + ',' + (g.sy - 6) + ')'); e.p.style.opacity = x[2] ? 1 : 0; e.p.classList.toggle('dreht', x[2]); });
+    }
+    function weg() {
+      if (!aktiv) return; aktiv = null; var laufend = anims; anims = [];
+      NAMEN.forEach(function (n) { var p = seg[n]; var len = parseFloat(p.style.strokeDasharray) || 0; var jetzt = parseFloat(getComputedStyle(p).strokeDashoffset) || 0; laufend.forEach(function (a) { try { if (a.effect && a.effect.target === p) a.cancel(); } catch (e) {} }); p.style.strokeDashoffset = jetzt; var a = p.animate([{ strokeDashoffset: jetzt }, { strokeDashoffset: len }], { duration: reduziert ? 0 : STEP, delay: reduziert ? 0 : (2 - SCHRITT[n]) * STEP, easing: EASE, fill: 'forwards' }); anims.push(a); });
+      nachbarn.forEach(function (sp) { sp.classList.remove('dreht'); }); nachbarn = [];
+      setTimeout(function () { if (!aktiv) ['l', 'r'].forEach(function (k) { eigen[k].p.style.opacity = 0; eigen[k].p.classList.remove('dreht'); }); }, reduziert ? 0 : STEP * 3);
+    }
+    reihe.querySelectorAll(sel).forEach(function (card) {
+      card.addEventListener('mouseenter', function () { clearTimeout(timer); var delay = inReihe ? 250 : 0; inReihe = true; if (!delay) { zeichne(card); return; } timer = setTimeout(function () { zeichne(card); }, delay); });
+      card.addEventListener('mouseleave', function () { clearTimeout(timer); weg(); });
+    });
+    reihe.addEventListener('mouseleave', function () { inReihe = false; clearTimeout(timer); });
+    reihe.hoverZeichne = zeichne; reihe.hoverWeg = weg;
+  }
+
+  // ---------- Belohnung: Konfetti, Punkte-Abzeichen, Zähler pulsiert, Leo freut sich ----------
+  function belohne(kasten, punkte) {
+    if (!kasten) return; if (reduziert) { toast('+' + punkte + ' Punkte'); return; }
+    var cv = el('canvas', 'konfetti'); kasten.appendChild(cv); var r = kasten.getBoundingClientRect(); cv.width = r.width; cv.height = r.height; var ctx = cv.getContext('2d');
+    var farben = ['#45A117', '#D3005E', '#06D496', '#9953c9', '#E07A5F', '#e3b341']; var teile = [];
+    for (var i = 0; i < 110; i++) teile.push({ x: r.width / 2 + (Math.random() - .5) * 80, y: r.height * 0.42, vx: (Math.random() - .5) * 10, vy: -Math.random() * 10 - 3, w: 5 + Math.random() * 5, h: 3 + Math.random() * 4, rot: Math.random() * 6.28, vr: (Math.random() - .5) * .3, f: farben[i % farben.length] });
+    var t0 = performance.now();
+    (function frame() { var t = (performance.now() - t0) / 1000; ctx.clearRect(0, 0, cv.width, cv.height); teile.forEach(function (q) { q.vy += 0.22; q.x += q.vx; q.y += q.vy; q.vx *= 0.99; q.rot += q.vr; ctx.save(); ctx.globalAlpha = Math.max(0, Math.min(1, 1.6 - t * 0.7)); ctx.translate(q.x, q.y); ctx.rotate(q.rot); ctx.fillStyle = q.f; ctx.fillRect(-q.w / 2, -q.h / 2, q.w, q.h); ctx.restore(); }); if (t < 2.3) requestAnimationFrame(frame); else cv.remove(); })();
+    var b = el('div', 'belohnung', '+' + punkte + ' Punkte'); kasten.appendChild(b); setTimeout(function () { b.classList.add('an'); }, 30); setTimeout(function () { b.remove(); }, 2500);
+    var pz = registerNode.querySelector('button[data-key="plus"]'); if (pz) { pz.classList.remove('punkte-puls'); void pz.offsetWidth; pz.classList.add('punkte-puls'); }
+    var leos = kasten.closest('.kapitel__inhalt') ? kasten.closest('.kapitel__inhalt').querySelectorAll('.wort--leo img') : []; if (leos.length) { var li = leos[leos.length - 1]; li.classList.remove('leo-freut'); void li.offsetWidth; li.classList.add('leo-freut'); }
+  }
+
+  // ---------- Glossar: Begriffe im Text, Klickmenü, Sitzung in der Leiste ----------
+  var BEGRIFF_RX = null, BEGRIFF_MAP = null; var AUSNAHMEN = { haftpflichtkasse: 1 };
+  function glossarSortiert() { return Object.keys(GLOSSAR).sort(function (a, b) { return GLOSSAR[a].name.localeCompare(GLOSSAR[b].name, 'de'); }); }
+  function glossarVorbereiten() {
+    var alle = []; Object.keys(GLOSSAR).forEach(function (k) { [GLOSSAR[k].name].concat(GLOSSAR[k].varianten || []).forEach(function (v) { alle.push([v, k]); }); });
+    alle.sort(function (a, b) { return b[0].length - a[0].length; }); BEGRIFF_MAP = alle;
+    BEGRIFF_RX = new RegExp('(^|[^A-Za-zÄÖÜäöüß])((?:' + alle.map(function (x) { return x[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')[A-Za-zÄÖÜäöüß]*)', 'gi');
+  }
+  // Regeln fürs Verlinken (gelten so auch für die Seite): Kurzformen bis 4 Zeichen (BU, AVB, GOT) nur als ganzes Wort;
+  // Nomen nur, wenn das Wort im Text großgeschrieben ist („unterhalten“ ist kein Unterhalt); Flexion bis 3 Buchstaben immer,
+  // Komposita („Kindergeldantrag“, „Hausratversicherung“) erst ab 7 Buchstaben Begriffslänge.
+  function begriffKey(wort) {
+    var w = wort.toLowerCase(); if (AUSNAHMEN[w]) return null;
+    for (var i = 0; i < BEGRIFF_MAP.length; i++) {
+      var v = BEGRIFF_MAP[i][0]; if (w.indexOf(v.toLowerCase()) !== 0) continue; var rest = wort.slice(v.length);
+      if (/^[A-ZÄÖÜ]/.test(v) && !/^[A-ZÄÖÜ]/.test(wort)) continue;
+      if (v.length <= 4) { if (rest.length) continue; }
+      else if (rest.length > 3 && (v.length < 7 || !/^[a-zäöüß]+$/.test(rest))) continue;
+      return BEGRIFF_MAP[i][1];
+    }
+    return null;
+  }
+  var SKIP = 'h1,h2,h3,h4,button,a,label,input,.kicker,.quelle,.krumen,.autor,.vorspann,figcaption,.begriff,.bmenu,.einschub,.wortspiel,.nachschlag,.rubriken,.werkzeugreihe,.ergebnis,.chips,.chip,.wb,.einwurf,.kasten__fuss,.aktionen,.dazu,.inhalt,.fazit-kopf,.faq-kopf,.flug';
+  function verlinke(root, max) {
+    if (!BEGRIFF_RX) glossarVorbereiten(); var gesehen = {}; var zahl = 0; var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); var knoten = []; var n;
+    while ((n = walker.nextNode())) { if (n.nodeValue.trim().length > 2 && n.parentElement && !n.parentElement.closest(SKIP)) knoten.push(n); }
+    knoten.forEach(function (t) {
+      if (max && zahl >= max) return; var text = t.nodeValue; var teile = []; var last = 0; var m; BEGRIFF_RX.lastIndex = 0;
+      while ((m = BEGRIFF_RX.exec(text))) { var key = begriffKey(m[2]); if (!key || gesehen[key] || (max && zahl >= max)) continue; gesehen[key] = 1; zahl++; var start = m.index + m[1].length; teile.push(text.slice(last, start)); var b = el('button', 'begriff', m[2]); b.type = 'button'; b.dataset.b = key; teile.push(b); last = start + m[2].length; }
+      if (!teile.length) return; teile.push(text.slice(last)); var frag = document.createDocumentFragment(); teile.forEach(function (x) { frag.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); }); t.parentNode.replaceChild(frag, t);
+    });
+    return root;
+  }
+  var bmenu = document.getElementById('bmenu'); var bmenuBtn = null;
+  window.bmenuZu = function () { bmenu.classList.remove('offen'); bmenu.innerHTML = ''; if (bmenuBtn) bmenuBtn.classList.remove('offen'); bmenuBtn = null; };
+  function begriffMenue(btn) {
+    var key = btn.dataset.b; var g = GLOSSAR[key]; if (!g) return; if (bmenuBtn === btn) { bmenuZu(); return; } bmenuZu(); bmenuBtn = btn; btn.classList.add('offen');
+    bmenu.innerHTML = '<div class="bmenu__titel">' + g.name + '</div>';
+    var e = el('button', 'zeile', '<i>📖</i>Begriffserklärung'); e.type = 'button'; var erkl = el('div', 'erkl', g.erkl); erkl.hidden = true; e.onclick = function () { erkl.hidden = !erkl.hidden; inSitzung(key, true); }; bmenu.appendChild(e); bmenu.appendChild(erkl);
+    if (g.ratgeber) { var r = el('button', 'zeile', '<i>📰</i>Ratgeber „' + g.ratgeber[0] + '“'); r.type = 'button'; r.onclick = function () { bmenuZu(); if (g.ratgeber[1] === 'demo') { toast('„' + g.ratgeber[0] + '“: im Prototyp nur angedeutet'); return; } starte(g.ratgeber[1], null, false, true, null, g.ratgeber[2]); }; bmenu.appendChild(r); }
+    if (g.tool) { var t = el('button', 'zeile', '<i class="dot dot--' + g.tool[2] + '"></i>' + g.tool[0]); t.type = 'button'; t.onclick = function () { bmenuZu(); if (g.tool[1] === 'demo') { toast('„' + g.tool[0] + '“: im Prototyp nur angedeutet'); return; } starte(g.tool[1], null, false, true, null, ['Finanztools']); }; bmenu.appendChild(t); }
+    if (g.frage) { var f = el('button', 'zeile leo-zeile', '<span>„' + g.frage[0] + '“</span><img src="' + LEO + '" alt="Leo fragen">'); f.type = 'button'; f.onclick = function () { bmenuZu(); starte(g.frage[1] || 'begriff-frage', g.frage[0], false, false, null, null, null, key); }; bmenu.appendChild(f); }
+    bmenu.appendChild(el('span', 'gemerkt', 'Erklärungen bleiben rechts unter „Glossar · Aktuelle Sitzung“ · eigene Seite: /glossar/' + key + '/'));
+    inSitzung(key, false);
+    var r0 = btn.getBoundingClientRect(); var breite = 320; var links = Math.max(8, Math.min(window.innerWidth - breite - 8, r0.left + r0.width / 2 - 34)); bmenu.style.left = (links + window.scrollX) + 'px'; bmenu.style.top = (r0.bottom + window.scrollY + 10) + 'px'; bmenu.classList.remove('oben'); bmenu.classList.add('offen'); var mh = bmenu.offsetHeight; if (r0.bottom + 10 + mh > window.innerHeight && r0.top - mh - 10 > kopfH()) { bmenu.style.top = (r0.top + window.scrollY - mh - 10) + 'px'; bmenu.classList.add('oben'); }
+    var pfeil = r0.left + r0.width / 2 - links - 6; bmenu.style.setProperty('--pfeil', Math.max(12, Math.min(breite - 24, pfeil)) + 'px');
+  }
+  document.addEventListener('click', function (ev) { var b = ev.target.closest('.begriff[data-b]'); if (b) { ev.preventDefault(); begriffMenue(b); return; } if (bmenu.classList.contains('offen') && !ev.target.closest('#bmenu')) bmenuZu(); });
+  var sitzung = [];
+  window.inSitzung = function (k, offen) { return inSitzung(k, offen); };
+  function inSitzung(key, offen) {
+    var rail = document.getElementById('glossarRail'); var g = GLOSSAR[key]; if (window.railOben) railOben('randRechts');
+    if (sitzung.indexOf(key) === -1) { sitzung.unshift(key); try { sessionStorage.setItem('leo-glossar', JSON.stringify(sitzung)); } catch (e) {} }
+    var vorhanden = rail.querySelector('[data-k="' + key + '"]');
+    if (!vorhanden) {
+      var leer = rail.querySelector('.rand__leer'); if (leer) leer.remove();
+      vorhanden = el('div', 'eintrag-g'); vorhanden.dataset.k = key; var kopf = el('button', null, '<span>' + g.name + '</span><i>+</i>'); kopf.type = 'button'; var body = el('div', 'erkl', g.erkl);
+      var mehr = el('div', 'mehr'); if (g.ratgeber) { var r = el('button', 'textlink', 'Ratgeber'); r.onclick = function () { if (g.ratgeber[1] === 'demo') { toast('Im Prototyp nur angedeutet'); return; } randZu(); starte(g.ratgeber[1], null, false, true, null, g.ratgeber[2]); }; mehr.appendChild(r); } if (g.tool) { var t = el('button', 'textlink', g.tool[0].split(':')[0]); t.onclick = function () { if (g.tool[1] === 'demo') { toast('Im Prototyp nur angedeutet'); return; } randZu(); starte(g.tool[1], null, false, true); }; mehr.appendChild(t); } var lf = el('button', 'textlink textlink--still', 'Leo fragen'); lf.onclick = function () { randZu(); starte(g.frage ? (g.frage[1] || 'begriff-frage') : 'begriff-frage', g.frage ? g.frage[0] : 'Was bedeutet „' + g.name + '“?', false, false, null, null, null, key); }; mehr.appendChild(lf); var x = el('button', 'textlink textlink--still', 'Entfernen'); x.onclick = function () { vorhanden.remove(); sitzung = sitzung.filter(function (k) { return k !== key; }); try { sessionStorage.setItem('leo-glossar', JSON.stringify(sitzung)); } catch (e) {} if (!rail.children.length) rail.innerHTML = '<span class="rand__leer">Tippen Sie im Text auf einen grünen Begriff.</span>'; }; mehr.appendChild(x); body.appendChild(mehr);
+      kopf.onclick = function () { vorhanden.classList.toggle('offen'); }; vorhanden.appendChild(kopf); vorhanden.appendChild(body); rail.insertBefore(vorhanden, rail.firstChild);
+    } else { rail.insertBefore(vorhanden, rail.firstChild); }
+    if (offen) { rail.querySelectorAll('.eintrag-g.offen').forEach(function (x) { if (x !== vorhanden) x.classList.remove('offen'); }); vorhanden.classList.add('offen'); }
+  }
+
+  // ---------- Nachrichten ----------
+  function userNachricht(text) { anhaengen(el('div', 'wort wort--frage', '<span class="kicker">Ihre Frage</span><p>' + text + '</p>')); }
+  function leoNachricht(absaetze, opts) {
+    opts = opts || {}; var n = el('div', 'wort wort--leo'); n.appendChild(Object.assign(el('img'), { src: LEO, alt: 'Leo' }));
+    var b = el('div'); b.appendChild(el('span', 'kicker kicker--gruen', 'Leo')); var tippt = el('div', 'tippt', '<i></i><i></i><i></i>'); b.appendChild(tippt); n.appendChild(b); anhaengen(n);
+    return warte(opts.pause == null ? 450 : opts.pause).then(function () { tippt.remove(); var text = absaetze.map(function (p) { return p.charAt(0) === '<' ? p : '<p>' + p + '</p>'; }).join(''); return tippen(b, text); })
+      .then(function () { verlinke(b, 4); if (opts.quellen) b.appendChild(el('div', 'quellen', '<b>Quellen</b>' + opts.quellen.map(function (s) { return '<span>› ' + s + '</span>'; }).join(''))); var w = el('div', 'werkzeuge'); var vor = el('button', 'textlink textlink--still', 'Vorlesen'); vor.onclick = function () { vorlesen(b.innerText); }; w.appendChild(vor); b.appendChild(w); if (folgt()) zeigeAnfang(n); });
+  }
+  // Leo antwortet an Ort und Stelle (Weiterlesen mit Leo): gleiche Gestalt wie im Faden, aber im übergebenen Behälter.
+  function leoInline(container, absaetze, opts) {
+    opts = opts || {}; var n = el('div', 'wort wort--leo'); n.appendChild(Object.assign(el('img'), { src: LEO, alt: 'Leo' }));
+    var b = el('div'); b.appendChild(el('span', 'kicker kicker--gruen', 'Leo')); var tippt = el('div', 'tippt', '<i></i><i></i><i></i>'); b.appendChild(tippt); n.appendChild(b); container.appendChild(n);
+    return warte(opts.pause == null ? 350 : opts.pause).then(function () { tippt.remove(); var text = absaetze.map(function (p) { return p.charAt(0) === '<' ? p : '<p>' + p + '</p>'; }).join(''); return tippen(b, text); })
+      .then(function () { verlinke(b, 3); if (opts.quellen) b.appendChild(el('div', 'quellen', '<b>Quellen</b>' + opts.quellen.map(function (q) { return '<span>› ' + q + '</span>'; }).join(''))); return b; });
+  }
+  var WA_SVG = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.2-.2-.5-.4l-1.8-.9c-.2-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></svg>';
+  // Leo auf WhatsApp: Nummer eingeben, Nachricht kommt, „JA“ ist die dokumentierte Einwilligung (Wächter-Prinzip aus dem Ideenpapier).
+  function whatsappKarte(zweck, inhalt) {
+    var w = el('div', 'wa'); var texte = { antwort: 'Ich schicke Ihnen diese Antwort auf Ihr Handy: zum Nachlesen, zum Zeigen.', kassensturz: 'Ich schicke Ihnen Ihr Ergebnis als PDF auf Ihr Handy und melde mich in sechs Monaten mit dem Vorher-nachher-Vergleich.', heute: 'Ich schicke Ihnen die Antworten von heute auf Ihr Handy und melde mich sonst nur, wenn Sie einen Wächter gestellt haben.' };
+    w.innerHTML = '<div class="wa__kopf"><i>' + WA_SVG + '</i>Leo auf WhatsApp</div><p style="margin:0">' + (texte[zweck] || texte.antwort) + ' Nummer eingeben, Sie bekommen eine Nachricht und antworten mit JA. Das ist Ihre Einwilligung, sauber dokumentiert, jederzeit mit STOP beendet.</p>';
+    var f = el('form', 'reihe'); f.innerHTML = '<input type="tel" placeholder="+49 170 …" aria-label="Handynummer"><button class="btn btn--klein btn--primary" type="submit">Senden</button>'; w.appendChild(f);
+    f.onsubmit = function (ev) { ev.preventDefault(); var nr = f.querySelector('input').value.trim(); if (!nr) return; f.remove(); var text = zweck === 'kassensturz' ? 'Ihr Finanz-Kassensturz vom 7. September: Profil und drei Lücken als PDF. Antworten Sie mit JA, dann erinnere ich Sie am 7. März an den Vergleich.' : zweck === 'heute' ? 'Ihre Antworten von heute auf finanzleser.de, mit Quellen. Antworten Sie mit JA, damit ich Ihnen weitere schicken darf.' : 'Ihre Antwort zu „' + (inhalt || '') + '“ von finanzleser.de, mit Quelle. Antworten Sie mit JA, damit ich Ihnen weitere Antworten schicken darf.'; w.appendChild(el('div', 'wa__bubble', '<b>Leo · finanzleser.de</b><br>' + text + '<small>' + uhr() + ' ✓✓</small>')); w.appendChild(el('p', 'quelle', 'Demo: Es wird nichts verschickt. Auf der echten Seite läuft das über die WhatsApp Business API; JA ist das Opt-in.')); toast('WhatsApp-Vorschau (Demo)'); };
+    return w;
+  }
+  function tippen(container, html) { if (reduziert) { container.insertAdjacentHTML('beforeend', html); return Promise.resolve(); } var z = el('div'); z.innerHTML = html; var voll = z.innerText; var p = el('p'); container.appendChild(p); var i = 0; return new Promise(function (r) { (function schritt() { i += 5; p.textContent = voll.slice(0, i); if (i < voll.length) setTimeout(schritt, 10); else { p.remove(); container.insertAdjacentHTML('beforeend', html); r(); } })(); }); }
+  function chips(liste) { var c = el('div', 'chips'); liste.forEach(function (it) { var b = el('button', 'chip' + (it.spiel ? ' chip--spiel' : it.leo ? ' chip--leo' : ''), it.text); b.onclick = function () { c.remove(); starte(it.ziel, it.text); }; c.appendChild(b); }); anhaengen(c); }
+  function eingabeChips(liste) { var c = document.getElementById('eingabeChips'); c.innerHTML = ''; liste.forEach(function (it) { var b = el('button', 'chip' + (it.spiel ? ' chip--spiel' : ''), it.text); b.onclick = function () { starte(it.ziel, it.text); }; c.appendChild(b); }); chipsPruefen(); }
+  // Vorschläge unter der Eingabe nur, wenn das Ende des Fadens im Bild ist und unter dem Strom genug Platz für sie bleibt.
+  var chipsRaf = null;
+  function chipsPruefen() { if (chipsRaf) return; chipsRaf = requestAnimationFrame(function () { chipsRaf = null; var e = document.querySelector('#mitte .eingabe'); var ch = document.getElementById('eingabeChips'); if (!e || !ch) return; if (!ch.children.length) { e.classList.remove('mit-chips'); return; } var form = e.querySelector('form'); var frei = window.innerHeight - strom.getBoundingClientRect().bottom; var noetig = form.offsetHeight + 14 + ch.scrollHeight + 16; e.classList.toggle('mit-chips', frei >= noetig); }); }
+  window.addEventListener('scroll', chipsPruefen, { passive: true }); window.addEventListener('resize', chipsPruefen); window.addEventListener('load', chipsPruefen);
+  if (window.MutationObserver) new MutationObserver(chipsPruefen).observe(strom, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
+  function meldung(kicker, text, aktionen) { var m = el('div', 'meldung'); m.appendChild(el('span', 'kicker kicker--gruen', kicker)); m.appendChild(el('p', null, text)); var a = el('div', 'aktionen'); (aktionen || []).forEach(function (x) { var b = el('button', 'textlink textlink--still', x[0]); b.onclick = x[1]; a.appendChild(b); }); m.appendChild(a); anhaengen(m); return m; }
+
+  // ---------- Kasten ----------
+  function kasten(def, opts) {
+    opts = opts || {};
+    if (def.grund) anhaengen(el('div', 'einwurf', 'Leo wirft ein: ' + def.grund), { leise: true });
+    var k = el('article', 'kasten' + (def.ton ? ' kasten--' + def.ton : '')); k.id = opts.id || ('kasten-' + def.slug + '-' + Date.now());
+    if (def.krumen) k.appendChild(krumen(def.krumen));
+    k.appendChild(el('span', 'kicker kicker--tool' + (def.ton === 'pink' ? ' kicker--pink' : ' kicker--gruen'), (def.dot ? '<i class="dot dot--' + def.dot + '"></i>' : '') + def.typ));
+    if (def.titel) k.appendChild(el('h3', null, def.titel));
+    k.appendChild(def.body(k));
+    if (def.fuss !== false) {
+      var f = el('div', 'kasten__fuss');
+      var teilen = el('button', 'textlink', 'Teilen'); teilen.onclick = function () { kopiere('https://www.finanzleser.de' + def.url); };
+      var koffer = el('button', 'textlink textlink--still', 'In den Aktenkoffer'); koffer.onclick = function () { inDenKoffer(def.titel, koffer); };
+      var wae = el('button', 'textlink textlink--still', 'Wächter setzen'); wae.onclick = function () { starte('waechter', 'Wächter setzen: ' + def.titel); };
+      var vor = el('button', 'textlink textlink--still', 'Vorlesen'); vor.onclick = function () { vorlesen(k.innerText); };
+      var goo = el('button', 'textlink textlink--still', 'Das sieht Google'); goo.onclick = function () { kulissenFuer(def, k); };
+      f.appendChild(teilen); f.appendChild(koffer); f.appendChild(wae); f.appendChild(vor); f.appendChild(goo); k.appendChild(f);
+    }
+    if (!def.ohneGlossar) verlinke(k, 6);
+    if (def.glossar) def.glossar.slice().reverse().forEach(function (g) { if (GLOSSAR[g]) inSitzung(g, false); });
+    anhaengen(k, { leise: opts.leise, immer: opts.immer }); return k;
+  }
+  function krumen(pfad) { var d = el('div', 'krumen'); pfad.forEach(function (p, i) { if (i) d.appendChild(el('span', null, '›')); var b = el('button', null, p[0]); b.onclick = function () { if (p[1] === 'plus') plusBlatt(); else blatt(p[1], p[2], p[3]); }; d.appendChild(b); }); return d; }
+  // Aktenkoffer: der Eintrag fliegt vom Knopf zum Koffer im Lesezeichen, der Koffer blinkt, die Zahl springt.
+  function inDenKoffer(titel, von) { if (state.koffer.indexOf(titel) === -1) state.koffer.push(titel); speichern(); var quelle = von || (window.event && window.event.target && window.event.target.closest && window.event.target.closest('button')); if (window.kofferFlug) kofferFlug(quelle, aktualisiereZahlen); else aktualisiereZahlen(); toast('Im Aktenkoffer: ' + titel); if (state.koffer.length >= 3 && !state.sicherungGefragt && !state.plus) { state.sicherungGefragt = true; setTimeout(function () { starte('sicherung'); }, 600); } }
+
+  // ---------- Die Spalten: vier Rubriken als Zeitungsspalten mit ihren Themen; eine Spalte klappt auf, die anderen werden zum Rücken ----------
+  function spaltenwahl() {
+    var k = el('article', 'kasten kasten--still'); k.id = 'rubriken'; var keys = Object.keys(RUBRIKEN); var gesamt = keys.reduce(function (n, x) { return n + RUBRIKEN[x].zahl; }, 0);
+    var kopf = el('div', 'spalten__kopf', '<span class="kicker">Ratgeber · vier Rubriken · ' + gesamt + ' Ratgeber · ein Thema öffnet die Spalte</span>'); k.appendChild(kopf);
+    var reihe = el('div', 'spalten'); k.appendChild(reihe); var spalten = {};
+    keys.forEach(function (key, i) {
+      if (i) reihe.appendChild(trenner()); var r = RUBRIKEN[key]; var sp = el('div', 'spalte'); sp.dataset.key = key;
+      var inhalt = el('div', 'spalte__inhalt', '<img src="' + ICON[key] + '" alt=""><b class="spalte__titel">' + r.titel + '</b><small>' + r.zahl + ' Ratgeber · ' + r.themen.length + ' Themen</small>');
+      var ul = el('ul', 'spalte__themen'); r.themen.forEach(function (tk) { var t = THEMEN[tk]; var li = el('li'); var b = el('button', null, '<span>' + t.name + '</span><small>' + t.liste.length + '</small>'); b.onclick = function () { oeffne(key, tk); }; li.appendChild(b); ul.appendChild(li); }); inhalt.appendChild(ul);
+      var ruecken = el('button', 'spalte__ruecken', '<img src="' + ICON[key] + '" alt=""><span>' + r.titel + '</span>'); ruecken.type = 'button'; ruecken.onclick = function () { oeffne(key, null); };
+      var offen = el('div', 'spalte__offen'); sp.appendChild(inhalt); sp.appendChild(ruecken); sp.appendChild(offen); reihe.appendChild(sp); spalten[key] = { node: sp, offen: offen };
+    });
+    hoverBox(reihe, '.spalte', 16, { oben: 4, unten: 4 });
+    function vorlage(offenKey) { var t = []; keys.forEach(function (key, i) { if (i) t.push('9px'); t.push(offenKey ? (key === offenKey ? 'calc(100% - 27px - 3 * 40px)' : '40px') : 'calc((100% - 27px) / 4)'); }); return t.join(' '); }
+    function setze(offenKey) { if (reihe.hoverWeg) reihe.hoverWeg(); reihe.style.gridTemplateColumns = vorlage(offenKey); reihe.classList.toggle('offen', !!offenKey); keys.forEach(function (key) { spalten[key].node.classList.toggle('ist-offen', key === offenKey); spalten[key].node.classList.toggle('ist-ruecken', !!offenKey && key !== offenKey); }); }
+    function oeffne(key, tk) {
+      var r = RUBRIKEN[key]; tk = tk || r.themen[0]; var t = THEMEN[tk]; var o = spalten[key].offen; o.innerHTML = '';
+      var kz = el('div', 'spalte__kopfzeile', '<img src="' + ICON[key] + '" alt=""><b>' + r.titel + '</b><small>' + r.zahl + ' Ratgeber · ' + r.themen.length + ' Themen</small>'); var x = el('button', 'textlink textlink--still', 'Alle Rubriken ✕'); x.onclick = function () { setze(null); }; kz.appendChild(x); o.appendChild(kz);
+      var tabs = el('div', 'spalte__tabs'); r.themen.forEach(function (t2) { var b = el('button', 'chip' + (t2 === tk ? ' chip--aktiv' : ''), THEMEN[t2].name); b.onclick = function () { oeffne(key, t2); }; tabs.appendChild(b); }); o.appendChild(tabs);
+      var liste = el('div', 'spalte__liste'); t.liste.forEach(function (x, i) { var b = el('button', 'spalte__artikel', '<span class="kicker">' + (x[3] ? '<i class="dot dot--' + x[3] + '"></i>' : '') + x[1] + '</span><b>' + x[0] + '</b><span class="pfeil-link">' + (x[1].indexOf('Ratgeber') === 0 ? 'Ratgeber lesen' : 'Im Faden öffnen') + '<i></i></span>'); b.style.animationDelay = (60 + i * 55) + 'ms'; b.onclick = function () { if (x[2] === 'demo' || !x[2]) { toast('„' + x[0] + '“: im Prototyp nur angedeutet'); return; } starte(x[2], null, false, true, null, ['Ratgeber', r.titel, t.name]); }; liste.appendChild(b); }); o.appendChild(liste);
+      var fuss = el('div', 'spalte__fuss'); if (t.werkzeuge && t.werkzeuge.length) { fuss.appendChild(el('span', 'kicker', 'Finanztools zum Thema')); t.werkzeuge.forEach(function (w) { var c = el('button', 'chip chip--still', (w[2] ? '<i class="dot dot--' + w[2] + '"></i> ' : '') + w[0]); c.onclick = function () { if (w[1] === 'demo') { toast('Im Prototyp nur angedeutet'); return; } starte(w[1], null, false, true, null, ['Ratgeber', r.titel, t.name]); }; fuss.appendChild(c); }); }
+      var mehr = el('button', 'pfeil-link', 'Alle ' + r.zahl + ' Ratgeber in ' + r.titel + '<i></i>'); mehr.style.marginLeft = 'auto'; mehr.onclick = function () { blatt('ratgeber', key, '*'); window.scrollTo({ top: 0 }); }; fuss.appendChild(mehr); o.appendChild(fuss);
+      setze(key);
+    }
+    setze(null); return k;
+  }

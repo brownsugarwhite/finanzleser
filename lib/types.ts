@@ -47,6 +47,8 @@ export interface Post {
   seo?: SEO;
   /** Aus dem post_content abgeleitete eingebettete Finanztools (für Tool-Dots/Labels). */
   tools?: ("rechner" | "vergleich" | "checkliste" | "dokumente")[];
+  /** Faden-Felder aus dem CMS (nur mit NEXT_PUBLIC_FADEN=1 abgefragt, sonst undefined). */
+  faden?: FadenFelder;
 }
 
 // ─────────────────────────────────────────────
@@ -236,4 +238,146 @@ export interface SiteSettings {
   article_ads: ArticleAdsSettings;
   // Neue, pro-Seitentyp granulare Werbe-Schalter.
   ads: SiteAdsSettings;
+}
+
+// ─────────────────────────────────────────────
+// Faden („Der Faden mit Leo“) — Beitragsfelder aus dem mu-plugin finanzleser-faden
+// (Post-Meta als JSON-Strings, in GraphQL camelCase; lib/faden/felder.ts parst sie).
+// Vertrag: docs/Konzept_Inhaltsvertrag.md
+// ─────────────────────────────────────────────
+
+export type FadenStatus = "entwurf" | "freigegeben";
+
+export interface FadenKurzfassung {
+  status?: FadenStatus;
+  erzeugt_am?: string;
+  erzeugt_von?: string;
+  saetze: string[];
+  quellen: string[];
+}
+
+export interface FadenFrage {
+  /** Abschnitts-ID `heading-<n>` (Zählung über alle h2, 0 = Kicker, 1 = Einleitung). */
+  abschnitt: string;
+  abschnitt_titel?: string;
+  status?: FadenStatus;
+  frage: string;
+  antwort: string;
+  quellen: string[];
+}
+
+export type FadenZielTyp = "post" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "glossar" | "spiel";
+
+export interface FadenEinwurf {
+  /** Abschnitts-ID, nach der das Werkzeug erscheint. */
+  nach: string;
+  typ: FadenZielTyp;
+  slug: string;
+  grund?: string;
+}
+
+export interface FadenZiel {
+  typ: FadenZielTyp;
+  slug: string;
+}
+
+export type StatistikArt = "torte" | "saeulen" | "balken";
+
+export interface StatistikWert {
+  label: string;
+  wert: number;
+  /** Optional: eigene Farbe (Token oder Hex), sonst Reihenfolge der Palette. */
+  farbe?: string;
+}
+
+export interface StatistikReihe {
+  key: string;
+  label: string;
+  werte: StatistikWert[];
+}
+
+export interface StatistikFormel {
+  typ: "rechner" | "faktor";
+  /** typ rechner: Slug in lib/calculators (Allowlist in lib/statistik/formeln.ts). */
+  rechner?: string;
+  eingabe?: string;
+  ausgabe?: string;
+  basis?: Record<string, number | string | boolean>;
+  /** typ faktor: Label des Werts, auf den der Regler linear skaliert. */
+  bezug?: string;
+}
+
+export interface StatistikRegler {
+  label: string;
+  min: number;
+  max: number;
+  schritt: number;
+  start: number;
+  einheit?: string;
+  formel: StatistikFormel;
+  /** true: „Ihr Wert“ erscheint als eigener Balken/Säule im Diagramm (nur bei gleicher Einheit sinnvoll); sonst nur als Zeile unter dem Regler. */
+  imDiagramm?: boolean;
+  /** Beschriftung der Ergebniszeile („Ihr Kindergeld im Monat“) und deren Einheit, falls anders als das Diagramm. */
+  ergebnis?: string;
+  ergebnisEinheit?: string;
+}
+
+export interface FadenStatistik {
+  abschnitt: string;
+  abschnitt_titel?: string;
+  art: StatistikArt;
+  titel: string;
+  untertitel?: string;
+  einheit: string;
+  status?: FadenStatus;
+  erzeugt_am?: string;
+  quelle: { name: string; url: string; stand: string; sekundaer?: boolean };
+  reihen: StatistikReihe[];
+  umschalter?: { label: string };
+  regler?: StatistikRegler;
+  hinweis?: string;
+}
+
+export interface FadenFelder {
+  kurzfassung?: FadenKurzfassung;
+  leoFragen: FadenFrage[];
+  glossarBegriffe: string[];
+  leoEinwuerfe: FadenEinwurf[];
+  dazuPasst: FadenZiel[];
+  waechterRegeln: string[];
+  statistiken: FadenStatistik[];
+}
+
+/** Glossarbegriff (CPT `glossar` aus wordpress/mu-plugins/finanzleser-faden.php; nur mit Faden-Schalter abgefragt). */
+/** Spiel des Fadens (Beitragstyp `spiel`, mu-plugin finanzleser-faden). */
+export interface Spiel {
+  id: string;
+  slug: string;
+  title: string;
+  typ: "mythos" | "quiz" | "schaetzen" | "karte" | "gewusst" | "finanzwort" | "rubbellos";
+  felder: Record<string, string>;
+  wappen: string;
+  status: string;
+  punkte: number;
+  /** YYYY-MM-DD oder null = zeitlos. */
+  datum: string | null;
+}
+
+export interface GlossarEintrag {
+  id: string;
+  title: string;
+  slug: string;
+  /** Erklärung = post_content (im Schema `content`, nicht `erklaerung`). */
+  content: string;
+  varianten: string[];
+  quelle: string;
+  /** Slug des verknüpften Ratgebers. */
+  ratgeber: string;
+  /** "rechner/unterhalt", "checkliste/elternunterhalt", "vergleich/…", "dokument/…". */
+  tool: string;
+  frage: string;
+  antwort: string;
+  wappen: string;
+  status: string;
+  rubrik: string;
 }

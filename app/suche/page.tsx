@@ -19,7 +19,11 @@ import {
   getAllChecklisten,
   getAllDokumente,
 } from "@/lib/wordpress";
-import { buildRechnerUrl, buildVergleichUrl, buildChecklisteUrl } from "@/lib/urls";
+import { buildRechnerUrl, buildVergleichUrl, buildChecklisteUrl, buildPostUrl, buildDokumentUrl } from "@/lib/urls";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte, { type ListenGruppe } from "@/components/faden/karten/ListenKarte";
+import SucheLeo from "@/components/faden/karten/SucheLeo";
 import { cleanDescription } from "@/lib/content-utils";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import type { Post } from "@/lib/types";
@@ -105,6 +109,25 @@ export default async function SearchPage(props: SearchPageProps) {
     ]);
   }
   const hasTools = toolGroups.rechner.length + toolGroups.vergleich.length + toolGroups.checkliste.length > 0;
+
+  if (FADEN_AKTIV) {
+    // Suche als Kartenkapitel im Faden: Treffer als Listenkarte, die Frage geht auf Wunsch an Leo.
+    const dokTitel = dokSlugs.length ? new Map((await getAllDokumente()).map((d) => [d.slug, decodeHtmlEntities(d.title)])) : new Map<string, string>();
+    const gruppen: ListenGruppe[] = [];
+    if (results.length) gruppen.push({ titel: "Ratgeber", zahl: results.length, eintraege: results.map((p) => ({ titel: decodeHtmlEntities(p.title), untertitel: p.untertitel ? decodeHtmlEntities(p.untertitel) : undefined, href: buildPostUrl(p) })) });
+    (["rechner", "vergleich", "checkliste"] as const).forEach((key) => {
+      const items = toolGroups[key];
+      if (items.length) gruppen.push({ titel: TOOL_CFG[key].badge, zahl: items.length, eintraege: items.map((t) => ({ titel: t.title, href: t.href, meta: t.desc || undefined, dot: key })) });
+    });
+    if (dokSlugs.length) gruppen.push({ titel: "Dokumente", zahl: dokSlugs.length, eintraege: dokSlugs.map((sl) => ({ titel: dokTitel.get(sl) || sl, href: buildDokumentUrl(sl), dot: "dokumente" as const })) });
+    const zahl = results.length + toolGroups.rechner.length + toolGroups.vergleich.length + toolGroups.checkliste.length + dokSlugs.length;
+    return (
+      <KartenKapitel schluessel={`suche:${query}`} titel={query ? `„${query}“` : "Suche"} kicker={query ? `Suche · ${zahl} ${zahl === 1 ? "Treffer" : "Treffer"} im Bestand` : "Suche"} beschreibung={query ? undefined : "Tippen Sie unten in die Eingabe: Die Sprungleiste findet Ratgeber, Rubriken, Werkzeuge und Begriffe, Enter fragt Leo."} krumen={[{ name: "Suche", href: "/suche" }]} url={query ? `/suche?q=${encodeURIComponent(query)}` : "/suche"}>
+        {query && <SucheLeo q={query} />}
+        {gruppen.length > 0 ? <ListenKarte gruppen={gruppen} /> : query ? <p className="hinweis">Nichts im Bestand gefunden. Fragen Sie Leo, er antwortet mit Quelle und Seite.</p> : null}
+      </KartenKapitel>
+    );
+  }
 
   const settings = await getSiteSettings();
 

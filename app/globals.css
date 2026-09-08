@@ -3,6 +3,12 @@
 @import "./components.css";
 @import "./rechner.css";
 @import "./gamification.css";
+@import "./faden.css";
+@import "./statistik.css";
+@import "./finanzwort.css";
+@import "./faden-hover.css";
+@import "./kassensturz.css";
+@import "./leo-fragt.css";
 
 /* Space for fixed logo + absolute nav bar */
 body {

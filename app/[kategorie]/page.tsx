@@ -133,7 +133,7 @@ export default async function KategoriePage(props: { params: Promise<{ kategorie
   // 1a. Ist es ein Anbieter-Slug (legacy URL, /advocard-rechtsschutzversicherung-kontakt/ etc.)?
   const anbieter = await getAnbieterBySlug(params.kategorie);
   if (anbieter) {
-    return <AnbieterLayout title={anbieter.title} content={anbieter.content} />;
+    return <AnbieterLayout title={anbieter.title} content={anbieter.content} slug={anbieter.slug} />;
   }
 
   // 2. Prüfen: ist es eine Hauptkategorie mit Child-Kategorien?

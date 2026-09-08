@@ -1,10 +1,13 @@
 import { cache } from "react";
+import { zaehleWp, graphqlName } from "@/lib/faden/wpZaehler";
 import { GraphQLClient, gql } from "graphql-request";
-import type { Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
+import type { GlossarEintrag, Spiel, Post, Rechner, Checkliste, Vergleich, Dokument, SEO, RechnerConfigOverrides, AnbieterPost, SiteSettings, SiteAdsSettings } from "./types";
 import { decodePostContent, decodeHtmlEntities } from "./html-utils";
 import { extractArticleHeader } from "./articleHeader";
 import { detectToolTypes } from "./content-utils";
 import { stripHtml } from "./seo";
+import { FADEN_AKTIV } from "./faden/flag";
+import { FADEN_GRAPHQL_FELDER, parseFadenFelder, type FadenRohfelder } from "./faden/felder";
 
 export interface LatestTool {
   type: "rechner" | "checkliste" | "vergleich";
@@ -67,6 +70,8 @@ function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const orig = client.request.bind(client);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (client as any).request = async (...args: unknown[]) => {
+    // Temporärer Zähler der M7-Abnahme; ohne FADEN_DEBUG=1 ein No-op.
+    zaehleWp(graphqlName(typeof args[0] === "string" ? args[0] : (args[0] as { toString?: () => string })?.toString?.()));
     const MAX = 6;
     let lastErr: unknown;
     for (let attempt = 0; attempt < MAX; attempt++) {
@@ -740,11 +745,15 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
               slug
             }
           }
+          ${FADEN_AKTIV ? FADEN_GRAPHQL_FELDER : ""}
         }
       }
     }
   `;
 
+  // Faden (NEXT_PUBLIC_FADEN=1): kurzfassung, leoFragen, … kommen als JSON-Strings mit in
+  // DIESELBE Abfrage (keine zweite Anfrage je Beitrag). Ohne Schalter bleibt die Abfrage
+  // byteidentisch — Produktion kennt die Felder noch nicht (Regel 12).
   // Frueher holte eine ZWEITE Abfrage die ACF-Felder parallel dazu. Seit `untertitel`
   // ein flaches Feld auf Post ist (Roadmap-Phase E, ACF raus), steht es in der
   // Hauptabfrage — eine GraphQL-Anfrage weniger pro Artikelseite.
@@ -754,6 +763,12 @@ async function getPostBySlugSingle(slug: string): Promise<Post | null> {
     let post = data.posts.nodes[0] || null;
     if (post) {
       post = decodePostContent(post);
+      if (FADEN_AKTIV) {
+        const roh = post as Post & FadenRohfelder;
+        post.faden = parseFadenFelder(roh);
+        delete roh.kurzfassung; delete roh.leoFragen; delete roh.glossarBegriffe;
+        delete roh.leoEinwuerfe; delete roh.dazuPasst; delete roh.waechterRegeln; delete roh.statistiken;
+      }
     }
 
     return post; // null = Beitrag existiert genuin nicht → Caller darf notFound()
@@ -1710,7 +1725,7 @@ export async function getLatestPostsByCategoryIds(
   }
 
   const excludeArr = excludeDatabaseId ? [excludeDatabaseId] : [];
-  let posts = await fetchPosts(categoryIds, excludeArr);
+  const posts = await fetchPosts(categoryIds, excludeArr);
 
   // Fallback: wenn zu wenige → Parent-Kategorien mit einbeziehen
   if (posts.length < limit) {
@@ -1768,6 +1783,7 @@ export async function getRechnerConfig(): Promise<RechnerConfigOverrides | null>
 
   try {
     // REST API: Holt ACF Options via custom Endpoint
+    zaehleWp("rest:rechner-config");
     const response = await fetch(`${baseUrl}/wp-json/finanzleser/v1/rechner-config`, {
       next: { revalidate: CONTENT_REVALIDATE },
     });
@@ -1844,6 +1860,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
+    zaehleWp("rest:site-settings");
     const res = await fetch(`${baseUrl}/wp-json/finanzleser/v1/site-settings`, {
       next: { revalidate: CONTENT_REVALIDATE },
     });
@@ -1890,6 +1907,7 @@ export async function getPageBySlug(slug: string): Promise<WpPage | null> {
   const baseUrl = wpUrl.replace("/graphql", "");
 
   try {
+    zaehleWp("rest:wp/v2/pages");
     const response = await fetch(
       `${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_fields=title,content,modified,yoast_head_json`,
       { next: { revalidate: CONTENT_REVALIDATE } },
@@ -1935,6 +1953,7 @@ export async function getYoastMeta(slug: string, restBase = "posts"): Promise<Yo
   if (!wpUrl) return null;
   const baseUrl = wpUrl.replace("/graphql", "");
   try {
+    zaehleWp("rest:yoast-head");
     const res = await fetch(
       `${baseUrl}/wp-json/wp/v2/${restBase}?slug=${encodeURIComponent(slug)}&_fields=yoast_head_json`,
       { next: { revalidate: CONTENT_REVALIDATE } },
@@ -2075,3 +2094,108 @@ export async function getAllAnbieter(): Promise<AnbieterPost[]> {
     throw error; // auch zur Laufzeit werfen → ISR behält letzten guten Stand statt leer zu cachen
   }
 }
+
+// ─────────────────────────────────────────────
+// Glossar (Faden, Stufe 1): CPT `glossar` aus wordpress/mu-plugins/finanzleser-faden.php.
+// Nur mit NEXT_PUBLIC_FADEN=1 aufrufen — das Produktions-CMS kennt den Typ noch nicht (Regel 12).
+// Ein paginierter Listen-Getter, keine Einzelabfragen: die Begriffsseite findet ihren
+// Eintrag in der Liste (587 Seiten × 0 zusätzliche WP-Anfragen beim Build).
+// ─────────────────────────────────────────────
+
+export async function getAllGlossar(): Promise<GlossarEintrag[]> {
+  return buildMemo("allGlossar", _fetchAllGlossar);
+}
+async function _fetchAllGlossar(): Promise<GlossarEintrag[]> {
+  const client = getClient();
+  const query = gql`
+    query GetGlossar($after: String) {
+      glossarEintraege(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id title slug content varianten quelle ratgeber tool frage antwort wappen status
+          glossarRubriken { nodes { name slug } }
+        }
+      }
+    }
+  `;
+  type Roh = { id: string; title: string; slug: string; content?: string | null; varianten?: string | null; quelle?: string | null; ratgeber?: string | null; tool?: string | null; frage?: string | null; antwort?: string | null; wappen?: string | null; status?: string | null; glossarRubriken?: { nodes: { name: string; slug: string }[] } | null };
+  type Antwort = { glossarEintraege: { nodes: Roh[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+  try {
+    const alle: Roh[] = [];
+    let after: string | null = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const data: Antwort = await client.request<Antwort>(query, { after });
+      alle.push(...data.glossarEintraege.nodes);
+      hasNextPage = data.glossarEintraege.pageInfo.hasNextPage;
+      after = data.glossarEintraege.pageInfo.endCursor;
+    }
+    const eintraege: GlossarEintrag[] = alle
+      .filter((r) => !r.status || r.status === "freigegeben")
+      .map((r) => {
+        let varianten: string[] = [];
+        try { const v = JSON.parse(r.varianten || "[]"); if (Array.isArray(v)) varianten = v.filter((x): x is string => typeof x === "string" && !!x.trim()); } catch { /* Varianten bleiben leer */ }
+        return {
+          id: r.id, title: r.title, slug: r.slug, content: r.content || "", varianten,
+          quelle: r.quelle || "", ratgeber: r.ratgeber || "", tool: r.tool || "", frage: r.frage || "", antwort: r.antwort || "",
+          wappen: r.wappen || "", status: r.status || "", rubrik: r.glossarRubriken?.nodes?.[0]?.name || "",
+        };
+      });
+    return requireNonEmpty("allGlossar", eintraege).sort((a, b) => a.title.localeCompare(b.title, "de"));
+  } catch (error) {
+    console.error("Error fetching Glossar:", error);
+    throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand
+  }
+}
+
+// ─────────────────────────────────────────────
+// Spiele (Beitragstyp `spiel`): 49 Einträge, eine Abfrage, im Build-Memo.
+// ─────────────────────────────────────────────
+
+export async function getAllSpiele(): Promise<Spiel[]> {
+  return buildMemo("allSpiele", _fetchAllSpiele);
+}
+async function _fetchAllSpiele(): Promise<Spiel[]> {
+  const client = getClient();
+  const query = gql`
+    query GetSpiele($after: String) {
+      spiele(first: 100, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes { id title slug spielTyp spielFelder wappen status punkte datum }
+      }
+    }
+  `;
+  type Roh = { id: string; title: string; slug: string; spielTyp?: string | null; spielFelder?: string | null; wappen?: string | null; status?: string | null; punkte?: string | null; datum?: string | null };
+  type Antwort = { spiele: { nodes: Roh[]; pageInfo: { hasNextPage: boolean; endCursor: string } } };
+  try {
+    const alle: Roh[] = [];
+    let after: string | null = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const data: Antwort = await client.request<Antwort>(query, { after });
+      alle.push(...data.spiele.nodes);
+      hasNextPage = data.spiele.pageInfo.hasNextPage;
+      after = data.spiele.pageInfo.endCursor;
+    }
+    const spiele: Spiel[] = alle
+      .filter((r) => !!r.spielTyp)
+      .map((r) => {
+        let felder: Record<string, string> = {};
+        try { const f = JSON.parse(r.spielFelder || "{}"); if (f && typeof f === "object" && !Array.isArray(f)) felder = Object.fromEntries(Object.entries(f).map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)])); } catch { /* Felder bleiben leer */ }
+        return {
+          id: r.id, slug: r.slug, title: r.title, typ: r.spielTyp as Spiel["typ"], felder,
+          wappen: r.wappen || "", status: r.status || "", punkte: Number(r.punkte) || 0,
+          datum: r.datum && /^\d{4}-\d{2}-\d{2}$/.test(r.datum) ? r.datum : null,
+        };
+      });
+    return spiele; // leer ist erlaubt (noch keine Spiele im CMS) — nur Verbindungsfehler werfen
+  } catch (error) {
+    console.error("Error fetching Spiele:", error);
+    throw error; // auch zur Laufzeit werfen → ISR behält den letzten guten Stand
+  }
+}
+
+// cache() — dedupliziert Metadata- und Page-Abfrage; findet in der (gecachten) Liste.
+export const getGlossarBySlug = cache(async (slug: string): Promise<GlossarEintrag | null> => {
+  return (await getAllGlossar()).find((e) => e.slug === slug) || null;
+});

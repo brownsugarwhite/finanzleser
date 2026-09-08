@@ -1,0 +1,133 @@
+
+  // ---------- Intro-Varianten: fünf scroll-gekoppelte Szenen ----------
+  var INTROS = [['paragraf', 'Der Paragraf'], ['akte', 'Die Akte'], ['flieger', 'Der Papierflieger'], ['register', 'Das Register'], ['lupe', 'Die Lupe'], ['basis', 'Basis (3 Beats)']];
+  var introRender = null; var introP = 0; var introZiel = 0; var introVariante = null;
+  function seg(p, a, b) { return Math.max(0, Math.min(1, (p - a) / (b - a))); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function kopfHoehe() { var h = document.getElementById('kopf').offsetHeight; document.documentElement.style.setProperty('--kopf-h', h + 'px'); return h; }
+  function buehneMasse() { var b = document.getElementById('buehne'); return { w: b.clientWidth, h: b.clientHeight }; }
+  function zielZeile(innen) { var z = el('div', 'ziel-zeile', 'Fragen Sie Leo … oder springen Sie: „Unterhalt“<i>➤</i>'); innen.appendChild(z); return z; }
+  function titel(innen, h, p) { var t = el('div', 'szene-titel', '<h1>' + h + '</h1>' + (p ? '<p>' + p + '</p>' : '')); innen.appendChild(t); return t; }
+  function linien(n) { var s = '<span class="blatt-linien">'; for (var i = 0; i < n; i++) s += '<i></i>'; return s + '</span>'; }
+
+  var introBauer = {
+    basis: function (innen) {
+      var m = buehneMasse();
+      var b1 = el('div', 'szene-titel', '<h1>Versicherungs­bedingungen haben 80 Seiten.</h1><p>Niemand liest sie. Deshalb weiß kaum jemand, was die eigene Police wirklich abdeckt.</p>'); b1.style.top = '18%';
+      var leo = Object.assign(el('img', 'leo-gross'), { src: LEO, alt: '' }); leo.style.cssText = 'position:absolute;left:50%;top:52%;transform:translate(-50%,0)';
+      var b2 = el('div', 'szene-titel', '<h1>Leo hat sie alle gelesen.</h1><div class="zaehler"><span>12.480</span> Dokumente<small>Bedingungswerke, Leistungsübersichten, Formulare</small></div>'); b2.style.top = '22%';
+      var b3 = el('div', 'szene-titel', '<h1>Fragen Sie ihn.</h1><p>Antworten mit Quelle, Seite und Paragraf. Dazu Rechner, Checklisten und Vergleiche, direkt im Gespräch.</p>'); b3.style.top = '22%';
+      [b1, leo, b2, b3].forEach(function (x) { innen.appendChild(x); }); var z = zielZeile(innen);
+      return function (p) { var a = 1 - seg(p, 0.25, 0.35), b = seg(p, 0.3, 0.4) * (1 - seg(p, 0.6, 0.7)), c = seg(p, 0.65, 0.75); b1.style.opacity = a; leo.style.opacity = a; leo.style.transform = 'translate(-50%,' + (40 - 40 * seg(p, 0, 0.25)) + 'px)'; b2.style.opacity = b; b3.style.opacity = c; z.style.opacity = seg(p, 0.8, 0.95); };
+    },
+    akte: function (innen) {
+      var m = buehneMasse();
+      var kam = el('div', 'ak-kamera'); var koffer = el('div', 'ak-koffer', '<div class="ak-griff"></div>'); var deckel = el('div', 'ak-deckel', 'Bedingungswerke · Policen · Formulare');
+      kam.appendChild(koffer); koffer.appendChild(deckel);
+      var blaetter = []; ['Privathaftpflicht · AVB', 'Hausrat · Bedingungen', 'Kfz · Police', 'Steuerformular 2026', 'Tierkranken · Tarif'].forEach(function (t) { var b = el('div', 'ak-blatt', '<b>' + t + '</b>' + linien(9)); blaetter.push(b); kam.appendChild(b); });
+      var zahlen = [['12.348 €', 28, 30], ['30. November', 62, 26], ['30.000 €', 50, 68]].map(function (z) { var d = el('div', 'ak-zahl', z[0]); d.style.left = z[1] + '%'; d.style.top = z[2] + '%'; kam.appendChild(d); return d; });
+      innen.appendChild(kam); var t = titel(innen, 'Alles, was in Ihren Verträgen steht.', 'Leo öffnet die Akte.'); var zz = zielZeile(innen);
+      return function (p) {
+        var auf = ease(seg(p, 0.02, 0.3)); deckel.style.transform = 'perspective(1200px) rotateX(' + (-auf * 112) + 'deg)';
+        var fahrt = ease(seg(p, 0.12, 0.55)); var zu = ease(seg(p, 0.72, 0.94));
+        var s = 1 + fahrt * 0.85 - zu * 0.85; kam.style.transform = 'scale(' + s + ') translateY(' + (fahrt * 10 - zu * 10) + '%)';
+        blaetter.forEach(function (b, i) { var f = ease(seg(p, 0.28 + i * 0.03, 0.62)); var k = i - 2; b.style.transform = 'translate(' + (k * 78 * f * (1 - zu)) + 'px,' + (-190 * f + 190 * zu) + 'px) rotate(' + (k * 14 * f * (1 - zu)) + 'deg) scaleY(' + (1 - zu * 0.985) + ')'; b.style.opacity = 1 - seg(p, 0.9, 0.97); });
+        zahlen.forEach(function (z, i) { z.style.opacity = seg(p, 0.5 + i * 0.05, 0.58 + i * 0.05) * (1 - seg(p, 0.78, 0.86)); z.style.transform = 'translateY(' + (-14 * seg(p, 0.5 + i * 0.05, 0.7)) + 'px)'; });
+        koffer.style.opacity = 1 - seg(p, 0.86, 0.96); t.style.opacity = 1 - seg(p, 0.1, 0.22); zz.style.opacity = seg(p, 0.9, 1); zz.style.transform = 'translateX(-50%) scaleX(' + (0.2 + 0.8 * ease(seg(p, 0.88, 1))) + ')';
+      };
+    },
+    flieger: function (innen) {
+      var m = buehneMasse();
+      var S = { x: m.w * 0.24, y: m.h * 0.42 }, C = { x: m.w * 0.55, y: m.h * 0.02 }, E = { x: m.w * 0.5, y: m.h * 0.86 };
+      var svg = el('div', 'fl-spur', '<svg width="100%" height="100%" viewBox="0 0 ' + m.w + ' ' + m.h + '" preserveAspectRatio="none"><path d="M' + S.x + ' ' + S.y + ' Q' + C.x + ' ' + C.y + ' ' + E.x + ' ' + E.y + '" fill="none" stroke="#686c6a" stroke-width="3" stroke-dasharray="3 7" stroke-linecap="round"/><path class="deck" d="M' + S.x + ' ' + S.y + ' Q' + C.x + ' ' + C.y + ' ' + E.x + ' ' + E.y + '" fill="none" stroke="#faf9f6" stroke-width="8"/></svg>');
+      innen.appendChild(svg); var pfad = svg.querySelector('path'); var deck = svg.querySelector('.deck'); var L = pfad.getTotalLength(); deck.style.strokeDasharray = L + ' ' + L;
+      var maske = el('div'); maske.style.cssText = 'position:absolute;inset:0;background:var(--paper);'; maske.style.clipPath = 'inset(0 0 0 100%)'; innen.appendChild(maske);
+      var doku = el('div', 'fl-doku', '<div class="fl-h fl-h--l">' + linien(11) + '</div><div class="fl-h fl-h--r">' + linien(11) + '</div>'); doku.style.left = (S.x - 110) + 'px'; doku.style.top = (S.y - 145) + 'px'; innen.appendChild(doku);
+      var fl = el('div', 'fl-flieger', '<svg viewBox="0 0 90 60" width="90" height="60"><path d="M2 32 L88 6 L54 56 L44 38 Z" fill="#fdfdfb" stroke="#334A27" stroke-width="2.5" stroke-linejoin="round"/><path d="M2 32 L44 38 L88 6" fill="none" stroke="#334A27" stroke-width="2" stroke-linejoin="round"/><path d="M44 38 L46 52" stroke="#334A27" stroke-width="2"/></svg>'); innen.appendChild(fl);
+      var leo = Object.assign(el('img', 'fl-leo'), { src: LEO, alt: '' }); leo.style.left = (E.x + Math.min(360, m.w * 0.45) - 30) + 'px'; leo.style.top = (E.y - 76) + 'px'; innen.appendChild(leo);
+      var t = titel(innen, '80 Seiten Bedingungen.', 'Gefaltet auf eine Frage.'); var zz = zielZeile(innen);
+      function bez(t) { var u = 1 - t; return { x: u * u * S.x + 2 * u * t * C.x + t * t * E.x, y: u * u * S.y + 2 * u * t * C.y + t * t * E.y }; }
+      return function (p) {
+        var f = ease(seg(p, 0.05, 0.36)); doku.querySelector('.fl-h--l').style.transform = 'rotateY(' + (f * 165) + 'deg)'; doku.querySelector('.fl-h--r').style.transform = 'rotateY(' + (-f * 165) + 'deg)'; doku.style.opacity = 1 - seg(p, 0.3, 0.38);
+        var fl_t = ease(seg(p, 0.36, 0.86)); var pt = bez(fl_t), pt2 = bez(Math.min(1, fl_t + 0.02)); var ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
+        var schrumpf = 1 - 0.85 * ease(seg(p, 0.84, 0.97)); fl.style.opacity = seg(p, 0.3, 0.4) * (1 - seg(p, 0.95, 1)); fl.style.transform = 'translate(' + (pt.x - 45) + 'px,' + (pt.y - 30) + 'px) rotate(' + ang + 'deg) scale(' + schrumpf + ')';
+        deck.style.strokeDashoffset = -L * fl_t; svg.style.opacity = seg(p, 0.34, 0.4) * (1 - seg(p, 0.9, 1));
+        leo.style.opacity = seg(p, 0.8, 0.9); t.style.opacity = 1 - seg(p, 0.15, 0.3); zz.style.opacity = seg(p, 0.86, 1); zz.style.transform = 'translateX(-50%) scaleX(' + (0.1 + 0.9 * ease(seg(p, 0.86, 1))) + ')';
+      };
+    },
+    register: function (innen) {
+      var m = buehneMasse();
+      var kam = el('div', 'rg-kamera'); var seite = el('div', 'rg-seite', '<div class="m">finanzleser</div><div class="r"><span>Finanzen</span><span>Versicherungen</span><span>Steuern</span><span>Recht</span><span>Finanztools</span></div><div class="rg-spalten"><div>' + '<i></i>'.repeat(9) + '</div><div>' + '<i></i>'.repeat(9) + '</div><div>' + '<i></i>'.repeat(9) + '</div><div class="rg-zeile"><span>Zahlt die</span><b>Haftpflicht</b><span>bei</span><b>Schlüsselverlust</b><span>bis</span><b>30.000 €?</b></div><div>' + '<i></i>'.repeat(7) + '</div><div>' + '<i></i>'.repeat(7) + '</div><div>' + '<i></i>'.repeat(7) + '</div></div>');
+      kam.appendChild(seite); innen.appendChild(kam);
+      var chips = ['Haftpflicht', 'Schlüsselverlust', 'Was ist versichert?'].map(function (t, i) { var c = el('div', 'rg-chip', t); c.style.left = (m.w * 0.5 - 250 + i * 190) + 'px'; c.style.top = (m.h * 0.64) + 'px'; innen.appendChild(c); return c; });
+      var kasten = el('div', 'rg-kasten', '<span class="kicker kicker--pink">Rechner</span><b>Selbstbeteiligung lohnt?</b>30.000 € · ab 3,90 €/Monat'); kasten.style.left = (m.w * 0.5 + 130) + 'px'; kasten.style.top = (m.h * 0.3) + 'px'; innen.appendChild(kasten);
+      var t = titel(innen, 'Die Ausgabe von heute.', 'Ein Wort wird zur Frage.'); var zz = zielZeile(innen);
+      return function (p) {
+        var flug = ease(seg(p, 0, 0.42)); var auf = ease(seg(p, 0.72, 0.96));
+        var rx = 58 - 58 * flug; var s = lerp(0.62, 1.55, flug) - auf * 0.75; var ty = lerp(8, -2, flug) + auf * -22;
+        seite.style.transform = 'translateY(' + ty + '%) rotateX(' + rx + 'deg) scale(' + s + ')'; seite.style.opacity = 1 - auf * 0.85;
+        chips.forEach(function (c, i) { var e = ease(seg(p, 0.44 + i * 0.06, 0.6 + i * 0.06)); c.style.opacity = e * (1 - seg(p, 0.9, 0.98)); c.style.transform = 'translateY(' + (30 - 30 * e) + 'px) scale(' + (0.6 + 0.4 * e) + ')'; });
+        var k = ease(seg(p, 0.56, 0.72)); kasten.style.opacity = k * (1 - seg(p, 0.9, 0.98)); kasten.style.transform = 'translateY(' + (20 - 20 * k) + 'px)';
+        t.style.opacity = 1 - seg(p, 0.1, 0.25); zz.style.opacity = seg(p, 0.86, 1); zz.style.transform = 'translateX(-50%) translateY(' + (30 - 30 * ease(seg(p, 0.86, 1))) + 'px)';
+      };
+    },
+    paragraf: function (innen) {
+      var m = buehneMasse(); var cx = m.w / 2; var D = Math.min(m.h * 0.28, 200);
+      var glyph = el('div', 'pg-glyph', '§'); innen.appendChild(glyph);
+      var fliess = el('div', 'pg-fliess', 'Versichert ist die gesetzliche Haftpflicht des Versicherungsnehmers aus den Gefahren des täglichen Lebens … Mitversichert ist der Verlust fremder privater Schlüssel … Die Höchstentschädigung beträgt 30.000 € je Versicherungsfall … Der Versicherungsnehmer hat den Verlust unverzüglich anzuzeigen … Grobe Fahrlässigkeit … Vorsatz ist ausgeschlossen … Kündigungsfrist 30. November … Grundfreibetrag 12.348 € …'.repeat(2)); fliess.style.top = '10%'; innen.appendChild(fliess);
+      var svg = el('div', 'pg-svg', '<svg width="100%" height="100%" viewBox="0 0 ' + m.w + ' ' + m.h + '" preserveAspectRatio="none"><rect id="pgO" fill="#fdfdfb" stroke="#334A27" stroke-width="3"/><rect id="pgS" fill="#334A27"/><rect id="pgU" fill="#fdfdfb" stroke="#334A27" stroke-width="3"/></svg>'); innen.appendChild(svg);
+      var O = svg.querySelector('#pgO'), S = svg.querySelector('#pgS'), U = svg.querySelector('#pgU');
+      var oben0 = { x: cx - D / 2, y: m.h * 0.5 - D * 1.05, w: D, h: D, r: D / 2 }, unten0 = { x: cx - D / 2, y: m.h * 0.5 + D * 0.05, w: D, h: D, r: D / 2 }, stiel0 = { x: cx - 4, y: m.h * 0.5 - D * 0.55, w: 8, h: D * 1.1, r: 4 };
+      var W = Math.min(720, m.w * 0.9); var oben1 = { x: cx - W / 2, y: m.h * 0.3, w: W, h: 96, r: 4 }, unten1 = { x: cx - W / 2, y: m.h * 0.88 - 48, w: W, h: 48, r: 2 }, stiel1 = { x: cx - W / 2, y: m.h * 0.16, w: W, h: 36, r: 2 };
+      var labO = el('div', 'pg-label', '<img src="' + LEO + '" alt=""><span><span class="kicker kicker--gruen">Leo</span>Hallo, ich bin Leo. Ich habe die Bedingungen gelesen und antworte mit Quelle und Seite.</span>'); labO.style.cssText += 'left:' + (oben1.x + 16) + 'px;top:' + (oben1.y + 16) + 'px;width:' + (W - 32) + 'px'; innen.appendChild(labO);
+      var labS = el('div', 'pg-label', '<span style="display:flex;gap:18px;font-weight:700;font-size:13px;color:#fdfdfb"><span>Finanzen</span><span>Versicherungen</span><span>Steuern</span><span>Recht</span><span>Finanztools</span></span>'); labS.style.cssText += 'left:' + (stiel1.x + 14) + 'px;top:' + (stiel1.y + 8) + 'px'; innen.appendChild(labS);
+      var labU = el('div', 'pg-label', '<span style="color:var(--muted)">Fragen Sie Leo … oder springen Sie: „Unterhalt“</span>'); labU.style.cssText += 'left:' + (unten1.x + 14) + 'px;top:' + (unten1.y + 13) + 'px'; innen.appendChild(labU);
+      var t = titel(innen, 'Aus dem Kleingedruckten wird ein Gespräch.', ''); t.style.top = '3%';
+      function setR(r, a, b, t) { r.setAttribute('x', lerp(a.x, b.x, t)); r.setAttribute('y', lerp(a.y, b.y, t)); r.setAttribute('width', lerp(a.w, b.w, t)); r.setAttribute('height', lerp(a.h, b.h, t)); r.setAttribute('rx', lerp(a.r, b.r, t)); }
+      return function (p) {
+        var g = 1 - seg(p, 0.04, 0.16); glyph.style.opacity = g; glyph.style.transform = 'translate(-50%,-54%) scale(' + (1 + 0.08 * seg(p, 0, 0.16)) + ')';
+        var f = ease(seg(p, 0.14, 0.6)); var fs = ease(seg(p, 0.42, 0.78)); svg.style.opacity = seg(p, 0.06, 0.16); setR(O, oben0, oben1, f); setR(U, unten0, unten1, f); setR(S, stiel0, stiel1, fs);
+        fliess.style.transform = 'translateY(' + (-p * 420) + 'px)'; fliess.style.opacity = 0.55 * (1 - seg(p, 0.6, 0.75)) * seg(p, 0.1, 0.2);
+        var l = seg(p, 0.72, 0.9); labO.style.opacity = l; labU.style.opacity = l; labS.style.opacity = l; t.style.opacity = 1 - seg(p, 0.05, 0.15);
+      };
+    },
+    lupe: function (innen) {
+      var m = buehneMasse();
+      var satz = 'Versichert ist die gesetzliche Haftpflicht des Versicherungsnehmers aus den Gefahren des täglichen Lebens als Privatperson. Mitversichert ist der Verlust <b class="kw">fremder Schlüssel</b>, die sich rechtmäßig im Gewahrsam des Versicherungsnehmers befinden. Ersetzt werden die Kosten für die Änderung der Schlösser und Schließanlagen bis zu einer Höchstsumme von <b class="kw">30.000 €</b> je Versicherungsfall. Der Verlust ist dem Versicherer <b class="kw">unverzüglich</b> anzuzeigen. Vorsätzlich herbeigeführte Schäden sind vom Versicherungsschutz ausgeschlossen; bei <b class="kw">grober Fahrlässigkeit</b> verzichtet der Versicherer auf den Einwand. Die Kündigung muss dem Versicherer bis zum <b class="kw">30. November</b> zugehen. ';
+      var text = el('div', 'lu-text', satz.repeat(6)); innen.appendChild(text);
+      var linse = el('div', 'lu-linse'); var gross = el('div', 'lu-gross', satz.repeat(6)); linse.appendChild(gross); var ph = el('div', 'lu-platzhalter', 'Fragen Sie Leo … oder springen Sie: „Unterhalt“'); linse.appendChild(ph); innen.appendChild(linse);
+      var leo = Object.assign(el('img', 'lu-leo'), { src: LEO, alt: '' }); innen.appendChild(leo);
+      var boxen = [['30.000 €', 0.34], ['30. November', 0.5], ['unverzüglich', 0.62]].map(function (b) { var d = el('div', 'lu-box', b[0]); innen.appendChild(d); return { d: d, at: b[1] }; });
+      var t = titel(innen, 'Leo liest das Kleingedruckte.', ''); t.style.top = '2%'; t.style.background = 'var(--paper)';
+      var K = 2.5, R = 110; var textLeft = text.offsetLeft, textTop = text.offsetTop; var W = Math.min(720, m.w * 0.9); var ziel = { x: m.w / 2 - W / 2, y: m.h * 0.88 - 48, w: W, h: 48 };
+      var kws = Array.prototype.slice.call(text.querySelectorAll('.kw'));
+      return function (p) {
+        var g = ease(seg(p, 0, 0.72)); var ende = ease(seg(p, 0.76, 0.96));
+        var lx = lerp(m.w * 0.16, m.w * 0.62, g) + Math.sin(g * 6.3) * 30, ly = lerp(m.h * 0.2, m.h * 0.42, g); var d = 2 * R;
+        var x = lerp(lx - R, ziel.x, ende), y = lerp(ly - R, ziel.y, ende), w = lerp(d, ziel.w, ende), h = lerp(d, ziel.h, ende);
+        linse.style.left = x + 'px'; linse.style.top = y + 'px'; linse.style.width = w + 'px'; linse.style.height = h + 'px'; linse.style.borderRadius = lerp(50, 2, ende) + (ende < 0.5 ? '%' : 'px');
+        gross.style.transform = 'translate(' + (-(x - textLeft) * K) + 'px,' + (-(y - textTop) * K) + 'px) scale(' + K + ')'; gross.style.opacity = 1 - seg(p, 0.78, 0.9); ph.style.opacity = seg(p, 0.9, 1);
+        var cxl = x + w / 2, cyl = y + h / 2; kws.forEach(function (k) { var r = k.getBoundingClientRect(), b = innen.getBoundingClientRect(); var kx = r.left - b.left + r.width / 2, ky = r.top - b.top + r.height / 2; k.classList.toggle('an', Math.hypot(kx - cxl, ky - cyl) < R * 1.2 || ende > 0); });
+        boxen.forEach(function (b, i) { var e = ease(seg(p, b.at, b.at + 0.08)) * (1 - seg(p, 0.76, 0.86)); b.d.style.opacity = e; b.d.style.left = (m.w * (0.2 + i * 0.25)) + 'px'; b.d.style.top = (m.h * 0.72) + 'px'; b.d.style.transform = 'translateY(' + (20 - 20 * e) + 'px)'; });
+        var blink = seg(p, 0.64, 0.68) * (1 - seg(p, 0.72, 0.76)); leo.style.opacity = blink; leo.style.left = (cxl - 45) + 'px'; leo.style.top = (cyl - 45) + 'px';
+        text.style.opacity = 0.75 * (1 - seg(p, 0.8, 0.95)); t.style.opacity = 1 - seg(p, 0.05, 0.15);
+      };
+    }
+  };
+
+  function introBauen(key) {
+    introVariante = key; try { localStorage.setItem('leo-intro', key); } catch (e) {}
+    document.querySelectorAll('#introChips button').forEach(function (b) { b.classList.toggle('aktiv', b.dataset.key === key); });
+    document.querySelectorAll('body > .suchpille-wrap.fliegt').forEach(function (f) { f.remove(); });
+    var buehne = document.getElementById('buehne'); buehne.innerHTML = ''; var innen = el('div', 'buehne__innen'); buehne.appendChild(innen); kopfHoehe();
+    var istHero = !!heroBauer[key]; var sz = document.getElementById('szene'); sz.classList.toggle('szene--hero', istHero && key !== 'zeitung'); sz.classList.toggle('szene--zeitung', key === 'zeitung'); sz.classList.toggle('szene--landing', key === 'landing'); var nm = document.getElementById('introName'); if (nm) { var alle = INTROS.concat(HEROS, HEROS_WEITERE); for (var q = 0; q < alle.length; q++) if (alle[q][0] === key) nm.textContent = alle[q][1]; }
+    introRender = istHero ? heroBauer[key](innen) : (introBauer[key] || introBauer.paragraf)(innen); if (!istHero) innen.appendChild(el('div', 'szene-hinweis', 'scrollen · Zurück spult zurück'));
+    document.getElementById('introWahl').classList.remove('offen');
+    introP = introZiel = 0; var fest = new URLSearchParams(location.search).get('p'); if (fest !== null) { introFest = Math.max(0, Math.min(1, parseFloat(fest) || 0)); introP = introZiel = introFest; } if (reduziert) { introRender(1); } else { introRender(introP); }
+  }
+  var introFest = null;
+  function introFortschritt() { if (introFest !== null) { introZiel = introFest; document.getElementById('introStand').textContent = Math.round(introFest * 100) + ' % (fest)'; return; } var sz = document.getElementById('szene'); var b = document.getElementById('buehne'); var r = sz.getBoundingClientRect(); var kh = kopfHoehe(); var p; if (sz.classList.contains('szene--hero')) { p = Math.max(0, Math.min(1, (kh - r.top) / Math.max(1, r.height * 0.9))); } else { var weg = sz.offsetHeight - b.offsetHeight; p = Math.max(0, Math.min(1, (kh - r.top) / Math.max(1, weg))); } introZiel = p; document.getElementById('introStand').textContent = Math.round(p * 100) + ' %'; }
+  (function schleife() { if (introRender && !document.getElementById('intro').hidden) { if (reduziert) { introP = introZiel; } else { introP += (introZiel - introP) * 0.14; if (Math.abs(introZiel - introP) < 0.0005) introP = introZiel; } introRender(introP); } requestAnimationFrame(schleife); })();
+  window.addEventListener('scroll', introFortschritt, { passive: true }); var letzteBreite = window.innerWidth; window.addEventListener('resize', function () { if (window.innerWidth === letzteBreite) return; letzteBreite = window.innerWidth; if (introVariante && !document.getElementById('intro').hidden) { introBauen(introVariante); introFortschritt(); } });
+  function introChipsBauen() { var chips = document.getElementById('introChips'); function knopf(v) { var b = el('button', null, v[1]); b.dataset.key = v[0]; b.onclick = function () { introBauen(v[0]); window.scrollTo({ top: 0, behavior: 'auto' }); introFortschritt(); }; chips.appendChild(b); } chips.appendChild(el('span', 'intro__gruppe', 'Neu:')); HEROS.forEach(knopf); chips.appendChild(el('span', 'intro__gruppe', 'Weitere:')); HEROS_WEITERE.forEach(knopf); chips.appendChild(el('span', 'intro__gruppe', 'Scroll (alt):')); INTROS.forEach(function (v) { var b = el('button', null, v[1]); b.dataset.key = v[0]; b.onclick = function () { introBauen(v[0]); window.scrollTo({ top: document.getElementById('szene').offsetTop - kopfHoehe(), behavior: 'auto' }); introFortschritt(); }; chips.appendChild(b); }); }

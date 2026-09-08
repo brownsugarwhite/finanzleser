@@ -1,0 +1,170 @@
+SLUG: rentenbesteuerung
+TITEL: Rentenbesteuerung
+UNTERTITEL: Steuern auf Rente berechnen und sparen 2026
+KATEGORIEN: Altersvorsorge, Sozialversicherung, Versicherungen
+GEÄNDERT: 2026-06-13
+
+## Rentenbesteuerung verstehen: Steuern auf Rente sparen
+
+Auch Renten werden besteuert – 2026 sind 84 % steuerpflichtig. Wann Rentner Steuern zahlen, welche Freibeträge gelten und wie Sie die Steuerlast senken.
+
+## Rentenbesteuerung 2026: Wann Rentner Steuern zahlen und wie sie sparen
+
+Die Rentenbesteuerung verschärft sich 2026: Wer erstmals eine gesetzliche Rente bezieht, muss davon 84 Prozent versteuern – der höchste Satz seit Einführung des Systems 2005.
+
+Seit 2005 müssen Rentenzahlungen aus der gesetzlichen Rentenversicherung nachgelagert versteuert werden. Grundlage bildet ein Urteil des Bundesverfassungsgerichts von 2002 und das daraus resultierende „Alterseinkünftegesetz“ (BStMK 2005). Dieses System bedeutet einen grundlegenden Wandel: Während der Erwerbszeit können Rentenbeiträge schrittweise steuerlich abgesetzt werden, im Gegenzug wird die spätere Rente teilweise besteuert.
+
+Im März 2024 beschloss der Gesetzgeber im Wachstumschancengesetz eine Bremsformel: Der Besteuerungsanteil steigt seit 2023 rückwirkend nur um 0,5 statt 1 Prozentpunkt pro Jahr. Dies verzögert die vollständige Besteuerung bis 2058. Trotzdem: 2026 ist der Steuerdruck für Neurentner so hoch wie nie.
+
+## Wie viel der Rente 2026 steuerpflichtig ist
+
+Für Rentner mit Renteneintritt 2026 gilt: 84 Prozent der Rente sind steuerpflichtig, 16 Prozent bleiben dauerhaft steuerfrei.
+
+Der steuerfreie Anteil wird nicht als Prozentquote beibehalten, sondern einmalig als fester Euro-Betrag ermittelt. Bei einer Jahresbruttorente von 24.000 Euro beträgt der Rentenfreibetrag 3.840 Euro (16 % von 24.000). Dieser Betrag bleibt lebenslang unverändert – auch wenn die Rente später steigt.
+
+Das hat eine entscheidende Konsequenz: Alle künftigen Rentenerhöhungen werden vollständig steuerpflichtig. Steigt die Rente im nächsten Jahr auf 26.000 Euro, bleibt der Freibetrag bei 3.840 Euro. Die zusätzlichen 2.000 Euro gelten als steuerpflichtiges Einkommen.
+
+[SPIEL karte] 
+🔄 Karteikarte
+
+ | Jahr des Rentenbeginns
+ | Besteuerungsanteil
+ | Rentenfreibetrag
+
+ | 2025
+ | 83,5%
+ | 16,5%
+
+ | 2026
+ | 84,0%
+ | 16,0%
+
+ | 2027
+ | 84,5%
+ | 15,5%
+
+ | 2028
+ | 85,0%
+ | 15,0%
+
+Quelle: Bundesministerium für Finanzen, Alterseinkünftegesetz § 22 Nr. 1 Satz 3 EStG
+
+## Bei welcher Rente zahlen Rentner 2026 keine Steuern?
+
+Die Steuergrenze hängt vom Grundfreibetrag ab – dem Betrag, bis zu dem keine Einkommensteuer anfällt. 2026 liegt dieser bei:
+
+- 12.348 Euro für ledige Rentner
+
+- 24.696 Euro für verheiratete Rentner
+
+Ein alleinstehender Neurentner mit Rentenbeginn 2026 bleibt steuerfrei, wenn seine Jahresbruttorente etwa 17.426 Euro nicht übersteigt – das entspricht rund 1.452 Euro monatlich.
+
+[SPIEL schaetzen] 
+📊 Schätzfrage
+
+Wie wird diese Grenze berechnet? Von der Jahresbruttorente bleiben 16 Prozent steuerfrei. Der verbleibende Betrag wird um folgende Abzüge reduziert:
+
+- Kranken- und Pflegeversicherungsbeiträge (ca. 1.100–1.500 Euro)
+
+- Werbungskostenpauschbetrag: 102 Euro
+
+Nach diesen Kürzungen muss das zu versteuernde Einkommen den Grundfreibetrag einhalten. Bei höheren Renten oder zusätzlichen Einkünften aus Vermietung, Kapitalvermögen oder Erwerbstätigkeit kann diese Grenze schnell überschritten werden.
+
+## Warum Rentenerhöhungen die Steuerlast überproportional erhöhen
+
+Die Rentenerhöhung zum 1. Juli 2026 beträgt 4,24 Prozent – eine deutliche Steigerung. Für Rentner bringt das zwar mehr Geld, verstärkt aber die Steuerpflicht überproportional.
+
+Der Grund liegt im System: Der persönliche Rentenfreibetrag bleibt als fester Euro-Betrag konstant. Jede Erhöhung wird vollständig steuerpflichtig.
+
+Beispiel:
+
+- Rentner mit 17.426 Euro Bruttorente (steuerfrei mit Freibetrag von 2.788 Euro)
+
+- Nach 4,24 % Erhöhung: 18.165 Euro Bruttorente
+
+- Der Rentenfreibetrag sinkt relativ: jetzt nur noch 15,3 % statt 16 %
+
+- Die zusätzlichen 739 Euro werden mit dem persönlichen Steuersatz besteuert
+
+Dadurch geraten jedes Jahr weitere Rentner in die Steuerpflicht, obwohl ihre reale Kaufkraft kaum steigt.
+
+## Welche Rentner bekommen den Altersentlastungsbetrag?
+
+Rentner ab 65 Jahren können einen zusätzlichen Steuerfreibetrag in Anspruch nehmen: den Altersentlastungsbetrag. Für Steuerpflichtige, die 2025 ihr 64. Lebensjahr vollendet haben (also ab 2026 Anspruch haben), liegt dieser bei:
+
+- 12,8 Prozent der Bemessungsgrundlage, maximal 608 Euro pro Jahr (§ 24a EStG, 2026)
+
+Wichtig: Dieser Betrag wirkt nicht auf alle Einkünfte gleich. Die gesetzliche Rente selbst ist von der Bemessungsgrundlage ausgeschlossen. Der Altersentlastungsbetrag begünstigt nur:
+
+- Arbeitslohn (soweit kein Versorgungsbezug)
+
+- Einkünfte aus Vermietung und Verpachtung
+
+Für reine Rentner ist die Entlastung daher oft minimal bis nonexistent. Nur wenn Sie nebenbei arbeiten oder Vermögen vermieten, profitieren Sie spürbar.
+
+## Wann müssen Rentner eine Steuererklärung abgeben?
+
+Als Rentner sind Sie zur Steuererklärung verpflichtet, wenn Ihr zu versteuerndes Einkommen den Grundfreibetrag übersteigt (§ 149 AO). Das heißt konkret:
+
+[SPIEL quiz] 
+🧠 Quiz
+
+Das Finanzamt fordert Sie normalerweise automatisch auf, wenn es Sie als steuerpflichtig identifiziert. Wichtig: Bilden Sie als Rentner Rücklagen für eventuelle Steuernachzahlungen – die Deutsche Rentenversicherung führt keine Einkommensteuer ab, sondern zahlt Renten brutto aus.
+
+## Aktivrente 2026: Steuerfrei hinzuverdienen für erwerbstätige Rentner
+
+Eine Neuerung für 2026: Seit dem 1. Januar können Rentner, die über die Regelaltersgrenze hinaus arbeiten, bis zu 2.000 Euro pro Monat steuerfrei verdienen. Dies ist die sogenannte Aktivrente – ein Steuerbonus, kein Rentenbestandteil (§ 34 Abs. 2 EStG).
+
+Wer profitiert davon?
+
+- Rentner mit Regelaltersgrenze (für 2026: 65 Jahre + Monate)
+
+- In sozialversicherungspflichtiger Beschäftigung
+
+- Als Arbeitnehmer/in (nicht als Selbstständige)
+
+Ausgeschlossen sind:
+
+- Einkünfte aus Selbstständigkeit und Gewerbebetrieb
+
+- Minijobs und Beamtenrenten
+
+Wichtig: Die Einkünfte unterliegen weiterhin der Sozialversicherungspflicht – Kranken- und Pflegeversicherungsbeiträge müssen bezahlt werden.
+
+## Konkrete Steuersparmöglichkeiten für Rentner
+
+Nutzen Sie diese Abzüge, um unter die Steuergrenze zu kommen:
+
+- Kranken- und Pflegeversicherungsbeiträge: Volle Abzugsfähigkeit als Sonderausgaben
+
+- Werbungskostenpauschbetrag: 102 Euro jährlich automatisch berücksichtigt
+
+- Außergewöhnliche Belastungen: Krankheitskosten, Pflegebedarf (ab 4 % des Einkommens)
+
+- Spenden und Mitgliedsbeiträge: Vollständig als Sonderausgaben abziehbar
+
+- Haushaltsnahe Dienstleistungen: Bis 20.000 Euro jährlich; 20 % Steuergutschrift (§ 35a EStG)
+
+Werden Sie vom Finanzamt zur Steuererklärung aufgefordert, dokumentieren Sie alle Ausgaben gründlich – selbst kleine Positionen summieren sich und können Sie unter den Grundfreibetrag drücken.
+
+## Fazit
+
+Die Rentenbesteuerung verschärft sich 2026 kontinuierlich. Mit 84 Prozent Besteuerungsanteil erreicht der Satz einen neuen Höchststand. Der Grundfreibetrag von 12.348 Euro (Ledige) bietet Schutz nur bis etwa 1.452 Euro monatliche Bruttorente. Der festgeschriebene Rentenfreibetrag führt dazu, dass Sie durch Rentenerhöhungen von 4,24 Prozent unerwartet steuerpflichtig werden können. Der Altersentlastungsbetrag von maximal 608 Euro wirkt sich bei reinen Rentnern kaum aus. Prüfen Sie regelmäßig, ob Sie steuerpflichtig sind, und bilden Sie Rücklagen für Nachzahlungen. Die neue Aktivrente bietet erwerbstätigen Rentnern eine echte Entlastung – bis zu 2.000 Euro monatlich steuerfrei.
+
+## Häufig gestellte Fragen
+
+Wie hoch ist der Besteuerungsanteil bei Rentenbeginn 2026? Wer 2026 in Rente geht, muss 84 Prozent der Rente versteuern, die übrigen 16 Prozent bleiben steuerfrei. Der Besteuerungsanteil steigt seit 2023 nur noch um 0,5 Prozentpunkte jährlich. Die 100-Prozent-Marke wird erst 2058 erreicht.
+ 
+ Was ist der Rentenfreibetrag und wie wird er berechnet? Der Rentenfreibetrag ist der steuerfreie Teil der Rente, ermittelt aus der ersten vollen Bruttojahresrente. Bei 2026er Neurentnern beträgt er 16 Prozent dieser Summe und bleibt lebenslang konstant. Zukünftige Rentenerhöhungen sind daher vollständig steuerpflichtig.
+ 
+ Wie hoch ist der Grundfreibetrag 2026? Der Grundfreibetrag liegt 2026 bei 12.348 Euro für Ledige und 24.696 Euro für Verheiratete. Einkünfte unterhalb dieser Grenze bleiben vollständig steuerfrei. Erst darüber fällt Einkommensteuer an.
+ 
+ Ab welcher Rentenhöhe müssen Neurentner Steuern zahlen? Ein alleinstehender Neurentner mit Rentenbeginn 2026 bleibt bei einer Jahresbruttorente von etwa 17.426 Euro noch steuerfrei. Die exakte Grenze hängt von abzugsfähigen Krankenversicherungs- und Pflegeversicherungsbeiträgen sowie Werbungskosten ab. Darüber fällt Einkommensteuer auf den zu versteuernden Anteil an.
+ 
+ 
+
+[BLOCK checkliste rentenbesteuerung]
+
+[BLOCK rechner rentenbesteuerung]
+
+[BLOCK dokumente das-renten-abc]

@@ -1,0 +1,813 @@
+[
+  {
+    "slug": "werbungskosten",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was sind Werbungskosten und wer kann sie nutzen?",
+          "art": "balken",
+          "titel": "Pauschalen, die das Finanzamt ohne Belege anerkennt",
+          "untertitel": "Höchstbeträge je Jahr nach §§ 4, 9 und 9a EStG",
+          "einheit": "€",
+          "quelle": {
+            "name": "§§ 4, 9 und 9a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__9a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Arbeitnehmer-Pauschbetrag",
+                  "wert": 1230
+                },
+                {
+                  "label": "Homeoffice-Pauschale (6 € je Tag, höchstens)",
+                  "wert": 1260
+                },
+                {
+                  "label": "Jahrespauschale häusliches Arbeitszimmer",
+                  "wert": 1260
+                },
+                {
+                  "label": "Entfernungspauschale ohne eigenen Pkw (höchstens)",
+                  "wert": 4500
+                }
+              ]
+            }
+          ],
+          "hinweis": "Den Arbeitnehmer-Pauschbetrag zieht das Finanzamt automatisch ab; erst darüber lohnt das Sammeln von Belegen.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Entfernungspauschale: Wie wirkt sich die neue Regelung 2026 aus?",
+          "art": "balken",
+          "titel": "Wie weit Beschäftigte 2024 zur Arbeit fuhren",
+          "untertitel": "Anteil der Berufspendler nach Entfernung zum Arbeitsplatz",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Mikrozensus 2024 (Pressemitteilung N027/2025)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/05/PD25_N027_13.html",
+            "stand": "2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "2024",
+              "werte": [
+                {
+                  "label": "Unter 5 Kilometer",
+                  "wert": 27
+                },
+                {
+                  "label": "5 bis unter 10 Kilometer",
+                  "wert": 22
+                },
+                {
+                  "label": "10 bis unter 25 Kilometer",
+                  "wert": 29
+                },
+                {
+                  "label": "25 bis unter 50 Kilometer",
+                  "wert": 15
+                },
+                {
+                  "label": "50 Kilometer und mehr",
+                  "wert": 5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Seit 2026 gilt die Pauschale von 38 Cent ab dem ersten Kilometer; 70 Prozent der Beschäftigten brauchen weniger als 30 Minuten zur Arbeit.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sonderausgaben",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Spenden und politische Unterstützung",
+          "art": "saeulen",
+          "titel": "Spenden in der Steuererklärung",
+          "untertitel": "Von Steuerpflichtigen geltend gemachte Spenden, in Milliarden Euro",
+          "einheit": "Mrd. €",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Lohn- und Einkommensteuerstatistik (Pressemitteilungen zu Spenden 2015 bis 2018)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2022/12/PD22_513_73.html",
+            "stand": "2018"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Spenden",
+              "werte": [
+                {
+                  "label": "2015",
+                  "wert": 5.6
+                },
+                {
+                  "label": "2016",
+                  "wert": 6.4
+                },
+                {
+                  "label": "2017",
+                  "wert": 6.7
+                },
+                {
+                  "label": "2018",
+                  "wert": 6.8
+                }
+              ]
+            }
+          ],
+          "hinweis": "2018 setzten 11,4 Millionen Steuerpflichtige Spenden ab, so viele wie nie. Die Statistik erscheint mit mehreren Jahren Verzögerung.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "pendlerpauschale",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist die Pendlerpauschale und wie funktioniert sie?",
+          "art": "balken",
+          "titel": "Womit Beschäftigte 2024 zur Arbeit kamen",
+          "untertitel": "Üblicherweise genutztes Verkehrsmittel",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Mikrozensus 2024 (Pressemitteilung N027/2025)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/05/PD25_N027_13.html",
+            "stand": "2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "2024",
+              "werte": [
+                {
+                  "label": "Auto",
+                  "wert": 65
+                },
+                {
+                  "label": "Bus und Bahn",
+                  "wert": 16
+                },
+                {
+                  "label": "Fahrrad",
+                  "wert": 10
+                },
+                {
+                  "label": "Zu Fuß",
+                  "wert": 7
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Pauschale gilt unabhängig vom Verkehrsmittel; 37 Prozent nehmen das Auto auch für Wege unter fünf Kilometern.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wer profitiert von der Reform?",
+          "art": "balken",
+          "titel": "Wer die Pendlerpauschale nutzt",
+          "untertitel": "13,8 Millionen Arbeitnehmer mit Pendlerpauschale 2020 nach Jahreseinkommen",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Lohn- und Einkommensteuerstatistik 2020 (Pressemitteilung N012/2025)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/03/PD25_N012_73111.html",
+            "stand": "26.03.2025"
+          },
+          "reihen": [
+            {
+              "key": "2020",
+              "label": "2020",
+              "werte": [
+                {
+                  "label": "Unter 20.000 Euro",
+                  "wert": 11
+                },
+                {
+                  "label": "20.000 bis 50.000 Euro",
+                  "wert": 54
+                },
+                {
+                  "label": "50.000 bis 100.000 Euro",
+                  "wert": 30
+                },
+                {
+                  "label": "100.000 Euro und mehr",
+                  "wert": 5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Im Schnitt lagen 28 Kilometer zwischen Wohnung und Arbeitsplatz; 84 Prozent fuhren zumindest einen Teil der Strecke mit dem eigenen Auto.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "aussergewoehnliche-belastungen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist die zumutbare Belastung für 2026?",
+          "art": "saeulen",
+          "titel": "Zumutbare Belastung nach § 33 EStG",
+          "untertitel": "Anteil des Gesamtbetrags der Einkünfte, den Sie selbst tragen",
+          "einheit": "%",
+          "umschalter": {
+            "label": "Einkünfte"
+          },
+          "quelle": {
+            "name": "§ 33 Abs. 3 Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__33.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "e1",
+              "label": "bis 15.340 €",
+              "werte": [
+                {
+                  "label": "Ohne Kinder, Grundtarif",
+                  "wert": 5
+                },
+                {
+                  "label": "Ohne Kinder, Splittingtarif",
+                  "wert": 4
+                },
+                {
+                  "label": "1 oder 2 Kinder",
+                  "wert": 2
+                },
+                {
+                  "label": "3 und mehr Kinder",
+                  "wert": 1
+                }
+              ]
+            },
+            {
+              "key": "e2",
+              "label": "15.341 bis 51.130 €",
+              "werte": [
+                {
+                  "label": "Ohne Kinder, Grundtarif",
+                  "wert": 6
+                },
+                {
+                  "label": "Ohne Kinder, Splittingtarif",
+                  "wert": 5
+                },
+                {
+                  "label": "1 oder 2 Kinder",
+                  "wert": 3
+                },
+                {
+                  "label": "3 und mehr Kinder",
+                  "wert": 1
+                }
+              ]
+            },
+            {
+              "key": "e3",
+              "label": "über 51.130 €",
+              "werte": [
+                {
+                  "label": "Ohne Kinder, Grundtarif",
+                  "wert": 7
+                },
+                {
+                  "label": "Ohne Kinder, Splittingtarif",
+                  "wert": 6
+                },
+                {
+                  "label": "1 oder 2 Kinder",
+                  "wert": 4
+                },
+                {
+                  "label": "3 und mehr Kinder",
+                  "wert": 2
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Prozentsätze werden stufenweise angewandt: Jeder Einkommensteil wird nur mit dem Satz seiner Stufe belastet (BFH 2017).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "haushaltsnahe-dienstleistungen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch ist die Steuerersparnis für 2026?",
+          "art": "balken",
+          "titel": "Höchstbeträge der Steuerermäßigung nach § 35a EStG",
+          "untertitel": "20 Prozent der Kosten, je Jahr höchstens",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 35a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__35a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Haushaltsnahe Dienstleistungen und Pflege",
+                  "wert": 4000
+                },
+                {
+                  "label": "Handwerkerleistungen (nur Arbeitskosten)",
+                  "wert": 1200
+                },
+                {
+                  "label": "Minijob im Haushalt",
+                  "wert": 510
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Beträge werden direkt von der Steuerschuld abgezogen; Barzahlung wird nicht anerkannt.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "arbeitszimmer-von-der-steuer-absetzen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Homeoffice-Pauschale vs. Arbeitszimmer: Was lohnt sich mehr?",
+          "art": "balken",
+          "titel": "Pauschalen für Arbeit zu Hause",
+          "untertitel": "Beträge je Jahr nach § 4 Abs. 5 EStG",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 4 Abs. 5 Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__4.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Jahrespauschale Arbeitszimmer (Mittelpunkt der Tätigkeit)",
+                  "wert": 1260
+                },
+                {
+                  "label": "Homeoffice-Pauschale, 6 € je Tag, höchstens",
+                  "wert": 1260
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Homeoffice-Pauschale ist nach 210 Tagen ausgeschöpft. Wer den Mittelpunkt seiner Tätigkeit im Arbeitszimmer hat, kann statt der Jahrespauschale die tatsächlichen Kosten ansetzen.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "doppelte-haushaltsfuehrung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Welche Kosten können Sie absetzen?",
+          "art": "balken",
+          "titel": "Höchstbeträge für die Zweitwohnung",
+          "untertitel": "Unterkunftskosten je Monat nach § 9 Abs. 1 Nr. 5 EStG",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 9 Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__9.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Zweitwohnung im Inland",
+                  "wert": 1000
+                },
+                {
+                  "label": "Zweitwohnung im Ausland",
+                  "wert": 2000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Dazu kommen eine Familienheimfahrt je Woche mit 38 Cent je Entfernungskilometer und in den ersten drei Monaten Verpflegungspauschalen von 28 Euro je vollem Tag.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "lohnsteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Bei welchem Gehalt zahlt man 2026 keine Lohnsteuer?",
+          "art": "saeulen",
+          "titel": "Grundfreibetrag je Person und Jahr",
+          "untertitel": "Steuerfreies Existenzminimum, Verheiratete das Doppelte",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesfinanzministerium, Monatsbericht Februar 2026 (Steuerliche Änderungen 2026) und Pressemitteilung vom 24.07.2024",
+            "url": "https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2026/02/Inhalte/Kapitel-2-Analysen/2-5-wichtigste-steuerliche-aenderungen-2026.html",
+            "stand": "Februar 2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Grundfreibetrag",
+              "werte": [
+                {
+                  "label": "2024",
+                  "wert": 11784
+                },
+                {
+                  "label": "2025",
+                  "wert": 12096
+                },
+                {
+                  "label": "2026",
+                  "wert": 12348
+                }
+              ]
+            }
+          ],
+          "hinweis": "Unterhalb des Grundfreibetrags fällt keine Lohn- oder Einkommensteuer an.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Steuerklassen gibt es und wie wirken sie sich aus?",
+          "art": "torte",
+          "titel": "Welche Steuerklassen Ehepaare wählen",
+          "untertitel": "Zusammenveranlagte Paare mit ausschließlich Arbeitnehmereinkünften, Veranlagungsjahr 2020",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 287/2024 (Lohn- und Einkommensteuerstatistik 2020)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/07/PD24_287_73.html",
+            "stand": "26.07.2024"
+          },
+          "reihen": [
+            {
+              "key": "2020",
+              "label": "2020",
+              "werte": [
+                {
+                  "label": "Kombination III und V",
+                  "wert": 39
+                },
+                {
+                  "label": "Beide in Steuerklasse IV",
+                  "wert": 36
+                },
+                {
+                  "label": "Nur ein Partner verdient (Steuerklasse III)",
+                  "wert": 25
+                }
+              ]
+            }
+          ],
+          "hinweis": "Von 5,3 Millionen Paaren wählten 2,08 Millionen die Kombination III/V; bei knapp 46 Prozent von ihnen kam es zur Nachzahlung.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kirchensteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Aktuelle Sätze nach Bundesland",
+          "art": "balken",
+          "titel": "Kirchensteuersatz nach Bundesland",
+          "untertitel": "Prozent der Lohn- und Einkommensteuer",
+          "einheit": "%",
+          "quelle": {
+            "name": "Evangelische Kirche in Deutschland, Kirchensteuerstatistik 2025",
+            "url": "https://www.ekd.de/statistik-kirchensteuer-44297.htm",
+            "stand": "2025"
+          },
+          "reihen": [
+            {
+              "key": "saetze",
+              "label": "Sätze",
+              "werte": [
+                {
+                  "label": "Baden-Württemberg und Bayern",
+                  "wert": 8
+                },
+                {
+                  "label": "Alle übrigen Bundesländer",
+                  "wert": 9
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die evangelische Kirche nahm 2025 rund 6,09 Milliarden Euro Kirchensteuer ein, im Schnitt 324 Euro je Mitglied.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Was ist Kirchensteuer?",
+          "art": "torte",
+          "titel": "Woraus sich die evangelische Kirchensteuer 2025 zusammensetzt",
+          "untertitel": "Aufkommen der EKD, insgesamt 6,09 Milliarden Euro",
+          "einheit": "Mio. €",
+          "quelle": {
+            "name": "Evangelische Kirche in Deutschland, Kirchensteuerstatistik 2025",
+            "url": "https://www.ekd.de/statistik-kirchensteuer-44297.htm",
+            "stand": "2025"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Kirchenlohn- und Kircheneinkommensteuer",
+                  "wert": 5617.4
+                },
+                {
+                  "label": "Kirchensteuer auf Kapitalerträge",
+                  "wert": 445.8
+                },
+                {
+                  "label": "Sonstige Steuern und Kirchgeld",
+                  "wert": 28.7
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Finanzämter erheben die Kirchensteuer als Zuschlag zur Einkommensteuer und behalten dafür eine Verwaltungsgebühr ein.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "solidaritaetszuschlag",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Freigrenzen 2026 und ihre Entwicklung",
+          "art": "balken",
+          "titel": "Freigrenzen des Solidaritätszuschlags 2026",
+          "untertitel": "Bis zu dieser Einkommensteuer fällt kein Soli an (§ 3 SolzG)",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 3 Solidaritätszuschlaggesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/solzg_1995/__3.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Einzelveranlagung (Grundtabelle)",
+                  "wert": 20350
+                },
+                {
+                  "label": "Zusammenveranlagung (Splittingtabelle)",
+                  "wert": 40700
+                }
+              ]
+            }
+          ],
+          "hinweis": "Oberhalb der Freigrenze steigt der Zuschlag in einer Milderungszone allmählich auf 5,5 Prozent der Einkommensteuer.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "einkommensteuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist die Einkommensteuer und wer muss sie zahlen?",
+          "art": "torte",
+          "titel": "Wer 2022 den Spitzensteuersatz zahlte",
+          "untertitel": "Rund 43 Millionen unbeschränkt Steuerpflichtige nach höchstem Steuersatz",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 194/2026 (Lohn- und Einkommensteuerstatistik 2022)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_194_73111.html",
+            "stand": "10.06.2026"
+          },
+          "reihen": [
+            {
+              "key": "2022",
+              "label": "2022",
+              "werte": [
+                {
+                  "label": "Unter dem Spitzensteuersatz",
+                  "wert": 92.3
+                },
+                {
+                  "label": "Spitzensteuersatz 42 %",
+                  "wert": 7.4
+                },
+                {
+                  "label": "Reichensteuer 45 %",
+                  "wert": 0.3
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die 3,2 Millionen Steuerpflichtigen mit Spitzensteuersatz trugen 49 Prozent des Einkommensteueraufkommens von 376 Milliarden Euro; 2012 lag ihr Anteil noch bei 5,4 Prozent.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wie hoch sind die Steuersätze 2026?",
+          "art": "balken",
+          "titel": "Wo 2026 welcher Steuersatz beginnt",
+          "untertitel": "Zu versteuerndes Einkommen je Person nach § 32a EStG",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 32a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "tarif",
+              "label": "Tarif 2026",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag: bis hierhin 0 %",
+                  "wert": 12348
+                },
+                {
+                  "label": "Spitzensteuersatz 42 % ab",
+                  "wert": 69879
+                },
+                {
+                  "label": "Reichensteuer 45 % ab",
+                  "wert": 277826
+                }
+              ]
+            }
+          ],
+          "hinweis": "Dazwischen steigt der Steuersatz von 14 auf 42 Prozent (Progressionszone).",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kfz-steuer",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist die Kfz-Steuer und wer muss sie zahlen?",
+          "art": "torte",
+          "titel": "Womit die 49,3 Millionen Pkw fahren",
+          "untertitel": "Pkw-Bestand am 1. Januar 2025 nach Antriebsart",
+          "einheit": "%",
+          "quelle": {
+            "name": "Kraftfahrt-Bundesamt, Pressemitteilung 10/2025 (Fahrzeugbestand 1. Januar 2025)",
+            "url": "https://www.kba.de/DE/Presse/Pressemitteilungen/Fahrzeugbestand/2025/pm10_fz_bestand_pm_komplett.html",
+            "stand": "04.03.2025"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Benzin",
+                  "wert": 60.6
+                },
+                {
+                  "label": "Diesel",
+                  "wert": 28
+                },
+                {
+                  "label": "Hybrid (davon Plug-in 2,0 %)",
+                  "wert": 7.2
+                },
+                {
+                  "label": "Elektro",
+                  "wert": 3.3
+                },
+                {
+                  "label": "Gas und sonstige",
+                  "wert": 0.9
+                }
+              ]
+            }
+          ],
+          "hinweis": "Reine Elektroautos sind bis Ende 2030 von der Kfz-Steuer befreit; ihr Bestand wuchs binnen eines Jahres um 17 Prozent auf 1,65 Millionen.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Wie wird die Kfz-Steuer 2026 berechnet?",
+          "art": "saeulen",
+          "titel": "CO2-Komponente der Kfz-Steuer",
+          "untertitel": "Euro je Gramm CO2/km über 95 g, Erstzulassung ab 2021 (§ 9 KraftStG)",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 9 Kraftfahrzeugsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/kraftstg/__9.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "stufen",
+              "label": "CO2-Stufen",
+              "werte": [
+                {
+                  "label": "96–115 g/km",
+                  "wert": 2
+                },
+                {
+                  "label": "116–135",
+                  "wert": 2.2
+                },
+                {
+                  "label": "136–155",
+                  "wert": 2.5
+                },
+                {
+                  "label": "156–175",
+                  "wert": 2.9
+                },
+                {
+                  "label": "176–195",
+                  "wert": 3.4
+                },
+                {
+                  "label": "über 195",
+                  "wert": 4
+                }
+              ]
+            }
+          ],
+          "hinweis": "Dazu kommt der Hubraumanteil: 2 Euro je angefangene 100 cm³ bei Benzinern, 9,50 Euro bei Dieseln.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,622 @@
+[
+  {
+    "slug": "umzugskosten-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Umzugskostenpauschale 2026: Die aktuellen Beträge",
+        "art": "balken",
+        "titel": "Die Umzugskostenpauschale ist nach Personen gestaffelt",
+        "untertitel": "Pauschbeträge für sonstige Umzugsauslagen, gültig seit 1. März 2024",
+        "einheit": "€",
+        "quelle": {
+          "name": "Bundesfinanzministerium, Schreiben vom 28.12.2023 (IV C 5 – S 2353/20/10004:003, BStBl I 2024 S. 84) – Originaltext im Lohnsteuer-Handbuch gesperrt, zitiert nach Haufe",
+          "url": "https://www.haufe.de/personal/entgelt/bmf-steuerfreier-umzugskostenpauschbetrag_78_472564.html",
+          "stand": "1. März 2024",
+          "sekundaer": true
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Umziehende Person",
+                "wert": 964
+              },
+              {
+                "label": "Weitere Person im Haushalt",
+                "wert": 643
+              },
+              {
+                "label": "Ohne eigene Wohnung",
+                "wert": 193
+              }
+            ]
+          }
+        ],
+        "hinweis": "Die Beträge gelten unverändert seit 1. März 2024; für 2025 und 2026 wurde bislang keine Erhöhung veröffentlicht.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "spenden-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Parteispenden ab 2026: Neue Limits",
+        "art": "balken",
+        "titel": "Parteispenden bringen bis zu 1.650 Euro Steuerersparnis",
+        "untertitel": "Höchstbetrag der direkten Steuerermäßigung nach § 34g EStG, je Person",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 34g Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__34g.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Einzelveranlagung",
+                "wert": 1650
+              },
+              {
+                "label": "Zusammenveranlagung von Ehegatten",
+                "wert": 3300
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bis zu diesem Betrag zieht das Finanzamt 50 Prozent der Zuwendung direkt von der Steuerschuld ab; darüber hinaus ist zusätzlich der Sonderausgabenabzug möglich.",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Stiftungsspenden: Die großzügigsten Regelungen",
+        "art": "balken",
+        "titel": "Vermögensstockspenden erlauben besonders hohe Höchstbeträge",
+        "untertitel": "Zusätzlicher Sonderausgabenabzug nach § 10b Abs. 1a EStG, verteilbar über zehn Jahre",
+        "einheit": "Mio. €",
+        "quelle": {
+          "name": "§ 10b Abs. 1a Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__10b.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "vermoegensstock",
+            "label": "Vermögensstockspenden",
+            "werte": [
+              {
+                "label": "Einzelperson",
+                "wert": 1
+              },
+              {
+                "label": "Zusammenveranlagte Ehegatten",
+                "wert": 2
+              }
+            ]
+          }
+        ],
+        "hinweis": "Begünstigt sind nur Zuwendungen in das zu erhaltende Vermögen einer Stiftung; der Betrag lässt sich über einen Zehnjahreszeitraum verteilen.",
+        "abschnitt": "heading-9",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "reisekosten-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Verpflegungsmehraufwendungen richtig berechnen",
+        "art": "balken",
+        "titel": "Verpflegungspauschale steigt mit der Abwesenheitsdauer",
+        "untertitel": "Pauschbeträge für Inlandsreisen nach § 9 Abs. 4a EStG",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 9 Abs. 4a Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__9.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "8 bis 24 Stunden Abwesenheit",
+                "wert": 14
+              },
+              {
+                "label": "Mehr als 24 Stunden Abwesenheit",
+                "wert": 28
+              }
+            ]
+          }
+        ],
+        "hinweis": "Am An- und Abreisetag einer mehrtägigen Reise gilt unabhängig von der tatsächlichen Abwesenheitsdauer die 14-Euro-Pauschale.",
+        "abschnitt": "heading-4",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "kinderbetreuung-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie viel können Sie absetzen?",
+        "art": "balken",
+        "titel": "Der Fiskus beteiligt sich mit 80 Prozent an den Kosten",
+        "untertitel": "Höchstbeträge je Kind und Jahr nach § 10 Abs. 1 Nr. 5 EStG",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 10 Abs. 1 Nr. 5 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__10.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Berücksichtigungsfähige Aufwendungen (höchstens)",
+                "wert": 6000
+              },
+              {
+                "label": "Steuerlich abzugsfähig (80 Prozent, höchstens)",
+                "wert": 4800
+              }
+            ]
+          }
+        ],
+        "hinweis": "Erst wenn die tatsächlichen Kosten 6.000 Euro im Jahr übersteigen, wird der volle Abzug von 4.800 Euro erreicht (80 Prozent von 6.000 Euro).",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "jahressteuerbescheinigung",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist die Jahressteuerbescheinigung und wofür brauchen Sie sie?",
+        "art": "balken",
+        "titel": "Der Sparer-Pauschbetrag verdoppelt sich für Ehepaare",
+        "untertitel": "Werbungskostenpauschale bei Kapitalerträgen nach § 20 Abs. 9 EStG, je Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 20 Abs. 9 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__20.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Einzelveranlagung",
+                "wert": 1000
+              },
+              {
+                "label": "Zusammenveranlagung von Ehegatten",
+                "wert": 2000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der Sparer-Pauschbetrag mindert die steuerpflichtigen Kapitalerträge automatisch, sofern ein Freistellungsauftrag erteilt wurde.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Welche Inhalte stehen in der Jahressteuerbescheinigung?",
+        "art": "balken",
+        "titel": "Ein Viertel der Kapitalerträge geht an den Fiskus",
+        "untertitel": "Abgeltungsteuer und Solidaritätszuschlag nach § 32d EStG und § 4 SolzG",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 32d Abs. 1 Einkommensteuergesetz und § 4 Solidaritätszuschlaggesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__32d.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "steuerabzug",
+            "label": "Steuerabzug",
+            "werte": [
+              {
+                "label": "Abgeltungsteuer",
+                "wert": 25
+              },
+              {
+                "label": "Solidaritätszuschlag (auf die Abgeltungsteuer)",
+                "wert": 5.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei Kirchensteuerpflicht mindert sich der Abgeltungsteuersatz von 25 Prozent entsprechend § 32d Abs. 1 Satz 3 EStG.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "ferienwohnung-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Absetzbare Werbungskosten im Detail",
+        "art": "saeulen",
+        "titel": "Neubauten lassen sich seit 2023 schneller abschreiben",
+        "untertitel": "Jährliche lineare Gebäude-AfA nach § 7 Abs. 4 Nr. 2 EStG, nach Baujahr",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 7 Abs. 4 Nr. 2 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__7.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "afa",
+            "label": "AfA-Satz",
+            "werte": [
+              {
+                "label": "Vor 1925 fertiggestellt",
+                "wert": 2.5
+              },
+              {
+                "label": "1925 bis 2022 fertiggestellt",
+                "wert": 2
+              },
+              {
+                "label": "Ab 2023 fertiggestellt",
+                "wert": 3
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der erhöhte Satz von 3 Prozent gilt nur für Gebäude, die nach dem 31. Dezember 2022 fertiggestellt wurden.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Neue Regelungen für 2026",
+        "art": "balken",
+        "titel": "Die Kleinunternehmergrenze liegt seit 2025 höher",
+        "untertitel": "Umsatzgrenzen nach § 19 Abs. 1 UStG, Vorjahr und laufendes Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 19 Abs. 1 Umsatzsteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/ustg_1980/__19.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Vorjahresumsatz (höchstens)",
+                "wert": 25000
+              },
+              {
+                "label": "Laufendes Jahr (höchstens)",
+                "wert": 100000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Beide Grenzen müssen gleichzeitig eingehalten werden: der Vorjahresumsatz von höchstens 25.000 Euro und der laufende Umsatz von höchstens 100.000 Euro.",
+        "abschnitt": "heading-8",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "fahrgemeinschaft-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Welche Unterschiede gelten zwischen Fahrer und Mitfahrer?",
+        "art": "balken",
+        "titel": "Für Mitfahrer gilt eine Grenze von 4.500 Euro im Jahr",
+        "untertitel": "Höchstbetrag der Entfernungspauschale und Arbeitnehmer-Pauschbetrag, je Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 9 Abs. 1 Satz 3 Nr. 4 und § 9a Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__9.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Höchstbetrag für Mitfahrer ohne eigenen Pkw",
+                "wert": 4500
+              },
+              {
+                "label": "Arbeitnehmer-Pauschbetrag",
+                "wert": 1230
+              }
+            ]
+          }
+        ],
+        "hinweis": "Nur wenn die gesamten Werbungskosten den Arbeitnehmer-Pauschbetrag übersteigen, wirkt sich die Entfernungspauschale steuermindernd aus.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "elster",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Was ist ELSTER genau?",
+        "art": "saeulen",
+        "titel": "ELSTER wächst kontinuierlich um Millionen neue Nutzer",
+        "untertitel": "Angemeldete Nutzerinnen und Nutzer der Steuerplattform, in Millionen",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Bayerisches Staatsministerium der Finanzen und für Heimat, Pressemitteilungen zu ELSTER-Nutzerzahlen (03.08.2023, 27.12.2024, 26.05.2026)",
+          "url": "https://www.bayern.de/fueracker-30-jahre-elster-erfolgreichstes-e-government-verfahren-mit-ueber-25-millionen-nutzern-bayerische-finanzverwaltung-erweitert-und-optimiert-elster-kontinuierlich-steue/",
+          "stand": "26.05.2026"
+        },
+        "reihen": [
+          {
+            "key": "nutzer",
+            "label": "Nutzer",
+            "werte": [
+              {
+                "label": "August 2023",
+                "wert": 20
+              },
+              {
+                "label": "Dezember 2024",
+                "wert": 22
+              },
+              {
+                "label": "Mai 2026",
+                "wert": 25
+              }
+            ]
+          }
+        ],
+        "hinweis": "Zwischen der 20- und der 22-Millionen-Marke lagen nach Angaben des bayerischen Finanzministeriums keine anderthalb Jahre.",
+        "abschnitt": "heading-2",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "MeinELSTER+ App: Die Ein-Klick-Funktion erklärt",
+        "art": "balken",
+        "titel": "Erst ein Teil der Nutzer kann die Steuer per Klick abgeben",
+        "untertitel": "Berechtigte für die Ein-Klick-Funktion 2026 im Vergleich zu allen ELSTER-Nutzern, in Millionen",
+        "einheit": "Mio.",
+        "quelle": {
+          "name": "Niedersächsisches Finanzministerium, Pressemitteilung vom 30.03.2026",
+          "url": "https://www.mf.niedersachsen.de/startseite/aktuelles/presseinformationen/anmeldestart-fur-steuerklarung-per-app-mit-einem-klick-am-31-marz-2026-rund-11-5-millionen-steuerpflichtige-bundesweit-konnen-profitieren-249907.html",
+          "stand": "30.03.2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Berechtigt für die Ein-Klick-Funktion",
+                "wert": 11.5
+              },
+              {
+                "label": "Alle ELSTER-Nutzer (Mai 2026)",
+                "wert": 25
+              }
+            ]
+          }
+        ],
+        "hinweis": "Berechtigt sind zunächst nur ledige, kinderlose Arbeitnehmerinnen und Arbeitnehmer sowie Bezieherinnen und Bezieher von Alterseinkünften ohne weitere Einkünfte.",
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "dienstwohnung-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie wird der geldwerte Vorteil berechnet?",
+        "art": "balken",
+        "titel": "Ohne Vergleichsmiete zählt der amtliche Sachbezugswert",
+        "untertitel": "Monatliche Sachbezugswerte 2026 nach § 2 SvEV",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 2 Sozialversicherungsentgeltverordnung (SvEV) (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/svev/__2.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Unterkunft",
+                "wert": 285
+              },
+              {
+                "label": "Verpflegung (voller Monat)",
+                "wert": 345
+              }
+            ]
+          }
+        ],
+        "hinweis": "Für eine vollwertige Wohnung gilt statt des Unterkunftswerts die ortsübliche Miete oder ersatzweise 5,01 Euro je Quadratmeter monatlich.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      },
+      {
+        "abschnitt_titel": "Wie setzen Sie Ihre Dienstwohnung bei doppelter Haushaltsführung ab?",
+        "art": "balken",
+        "titel": "Für die Zweitwohnung gelten feste Höchstbeträge",
+        "untertitel": "Absetzbare Unterkunftskosten je Monat nach § 9 Abs. 1 Satz 3 Nr. 5 EStG",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 9 Abs. 1 Satz 3 Nr. 5 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__9.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Zweitwohnung im Inland",
+                "wert": 1000
+              },
+              {
+                "label": "Zweitwohnung im Ausland",
+                "wert": 2000
+              }
+            ]
+          }
+        ],
+        "abschnitt": "heading-5",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "dienstwagen-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Massive Steuervorteile für Elektrofahrzeuge 2026",
+        "art": "balken",
+        "titel": "E-Autos werden monatlich deutlich niedriger besteuert",
+        "untertitel": "Anteil des Bruttolistenpreises je Monat nach § 6 Abs. 1 Nr. 4 EStG",
+        "einheit": "%",
+        "quelle": {
+          "name": "§ 6 Abs. 1 Nr. 4 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__6.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Verbrenner (Grundregel)",
+                "wert": 1
+              },
+              {
+                "label": "Elektroauto bis 100.000 € Bruttolistenpreis",
+                "wert": 0.25
+              },
+              {
+                "label": "Elektroauto über 100.000 € / Plug-in-Hybrid",
+                "wert": 0.5
+              }
+            ]
+          }
+        ],
+        "hinweis": "Bei Verbrennern ohne Vergünstigung bleibt es bei 1 Prozent des Bruttolistenpreises je Monat; die ermäßigten Sätze für E-Fahrzeuge gelten befristet bis Ende 2030.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "dienstreise-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "Wie viel können Sie pro Kilometer abrechnen?",
+        "art": "balken",
+        "titel": "Für den eigenen Wagen gilt der höhere Kilometersatz",
+        "untertitel": "Wegstreckenentschädigung je Kilometer nach § 5 Bundesreisekostengesetz",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 5 Bundesreisekostengesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/brkg_2005/__5.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Kraftwagen bei dienstlichem Interesse",
+                "wert": 0.3
+              },
+              {
+                "label": "Andere motorbetriebene Fahrzeuge",
+                "wert": 0.2
+              }
+            ]
+          }
+        ],
+        "hinweis": "Der erhöhte Satz gilt nur, wenn ein erhebliches dienstliches Interesse an der Nutzung eines Kraftwagens vor Reisebeginn schriftlich oder elektronisch festgestellt wurde.",
+        "abschnitt": "heading-3",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  },
+  {
+    "slug": "ausbildungskosten-von-der-steuer-absetzen",
+    "statistiken": [
+      {
+        "abschnitt_titel": "2026: Maximale Absetzbarkeit und erhöhte Fahrtkosten",
+        "art": "balken",
+        "titel": "Ehepaare können den Sonderausgabenabzug verdoppeln",
+        "untertitel": "Höchstbetrag für Ausbildungskosten nach § 10 Abs. 1 Nr. 7 EStG, je Person und Jahr",
+        "einheit": "€",
+        "quelle": {
+          "name": "§ 10 Abs. 1 Nr. 7 Einkommensteuergesetz (Gesetze im Internet)",
+          "url": "https://www.gesetze-im-internet.de/estg/__10.html",
+          "stand": "2026"
+        },
+        "reihen": [
+          {
+            "key": "2026",
+            "label": "2026",
+            "werte": [
+              {
+                "label": "Einzelperson",
+                "wert": 6000
+              },
+              {
+                "label": "Ehepaar (je Partner eigener Höchstbetrag)",
+                "wert": 12000
+              }
+            ]
+          }
+        ],
+        "hinweis": "Werbungskosten sind erst möglich, wenn bereits eine Erstausbildung abgeschlossen wurde; ohne einen solchen Abschluss bleibt es bei der 6.000-Euro-Grenze als Sonderausgabe.",
+        "abschnitt": "heading-6",
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-08"
+      }
+    ]
+  }
+]

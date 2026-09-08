@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
@@ -55,6 +58,14 @@ export default async function VergleichDetailPage({ params }: Props) {
   // erfundenen Slug (Soft-404). Siehe app/finanztools/rechner/[slug]/page.tsx.
   if (!meta) {
     notFound();
+  }
+
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel={`vergleich:${slug}`} titel={title} kicker="Anzeige · Vergleich mit Partnerlinks" beschreibung={cleanDescription(meta.desc)} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Vergleiche", href: "/finanztools/vergleiche" }]} url={`/finanztools/vergleiche/${slug}`}>
+        <WerkzeugKarte teil={{ art: "embed", typ: "vergleich", slug }} ohneTitel />
+      </KartenKapitel>
+    );
   }
 
   const breadcrumbItems = [

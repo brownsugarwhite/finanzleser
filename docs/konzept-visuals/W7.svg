@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+<text x="40" y="46" font-size="22" fill="#1F2937" font-weight="700" text-anchor="start">W7 · Finanzleser Plus: Erst der Nutzen, dann die Sicherungsfrage, dann das Konto</text>
+<text x="40" y="74" font-size="15" fill="#6B7280" font-weight="400" text-anchor="start">Kein Login-Zwang. Der Aktenkoffer funktioniert anonym; ab drei Einträgen fragt Leo, ob er sichern soll.</text>
+<line x1="40" y1="92" x2="1560" y2="92" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="40" y="150" width="460" height="600" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="150" width="460" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="40" y="170" width="460" height="14" fill="#E5E7EB"/>
+<circle cx="56" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="72" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="88" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="110" y="158" width="376" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="120" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">…/rechner/unterhaltsrechner/</text>
+<text x="270.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">1 · Nutzen ohne Konto</text>
+<rect x="60" y="210" width="420" height="250" rx="12" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<rect x="60" y="210" width="6" height="250" rx="3" fill="#45A117"/>
+<text x="78" y="232" font-size="10" fill="#45A117" font-weight="700" text-anchor="start">RECHNER</text>
+<text x="78" y="256" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Unterhaltsrechner 2026</text>
+<rect x="78" y="280" width="384" height="30" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="78" y="320" width="384" height="30" rx="6" fill="#F3F4F6" stroke="#C7CCD4" stroke-width="1"/>
+<rect x="78" y="364" width="384" height="50" rx="8" fill="#E8F5E1" stroke="#45A117" stroke-width="1.5"/>
+<text x="90" y="396" font-size="16" fill="#45A117" font-weight="700" text-anchor="start">1.096 € / Monat</text>
+<line x1="72" y1="422" x2="468" y2="422" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="78" y="440" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">Teilen</text>
+<text x="140" y="440" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">In den Aktenkoffer</text>
+<text x="272" y="440" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Vorlesen</text>
+<rect x="80" y="480" width="220" height="30" rx="15" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="190.0" y="499" font-size="12" fill="#1F2937" font-weight="600" text-anchor="middle">In den Aktenkoffer legen</text>
+<rect x="310" y="480" width="100" height="30" rx="15" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="360.0" y="499" font-size="12" fill="#1F2937" font-weight="600" text-anchor="middle">Teilen</text>
+<text x="80" y="540" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Aktenkoffer (anonym, in diesem Browser)</text>
+<rect x="80" y="554" width="380" height="32" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="92" y="575" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Unterhaltsrechner · 1.096 €</text>
+<rect x="80" y="594" width="380" height="32" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="92" y="615" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Checkliste Trennung · 4/12 erledigt</text>
+<rect x="80" y="634" width="380" height="32" rx="8" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="92" y="655" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Vergleich Hundekranken · gemerkt</text>
+<text x="80" y="710" font-size="11" fill="#45A117" font-weight="700" text-anchor="start">3 Einträge → Leo stellt die Sicherungsfrage</text>
+<rect x="570" y="150" width="460" height="600" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="570" y="150" width="460" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="570" y="170" width="460" height="14" fill="#E5E7EB"/>
+<circle cx="586" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="602" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="618" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="640" y="158" width="376" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="650" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">…/rechner/unterhaltsrechner/</text>
+<text x="800.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">2 · Die Sicherungsfrage</text>
+<circle cx="610" cy="250" r="18" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<circle cx="604.96" cy="246.976" r="2.88" fill="white"/>
+<circle cx="615.04" cy="246.976" r="2.88" fill="white"/>
+<path d="M602.8 254.5 Q610 260.8 617.2 254.5" stroke="white" stroke-width="1.6199999999999999" fill="none"/>
+<rect x="636" y="226" width="364" height="150" rx="14" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1.5"/>
+<text x="650" y="250.0" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Ihr Aktenkoffer hat jetzt drei Einträge. Soll ich</text>
+<text x="650" y="267.4" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">ihn sichern, damit er auch auf dem Handy und</text>
+<text x="650" y="284.8" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">nach dem Browserwechsel da ist?</text>
+<text x="650" y="302.2" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start"></text>
+<text x="650" y="319.6" font-size="12" fill="#1F2937" font-weight="400" text-anchor="start">Eine E-Mail-Adresse genügt. Kein Passwort.</text>
+<rect x="610" y="400" width="380" height="44" rx="22" fill="#FFFFFF" stroke="#45A117" stroke-width="2"/>
+<text x="626" y="427" font-size="13" fill="#6B7280" font-weight="400" text-anchor="start">ihre@adresse.de</text>
+<rect x="610" y="460" width="230" height="30" rx="15" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="725.0" y="479" font-size="12" fill="white" font-weight="700" text-anchor="middle">Link zum Anmelden schicken</text>
+<text x="610" y="520" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">oder</text>
+<rect x="610" y="535" width="290" height="30" rx="15" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.2"/>
+<text x="755.0" y="554" font-size="12" fill="#1F2937" font-weight="600" text-anchor="middle">Mit Passkey (Face ID / Fingerabdruck)</text>
+<text x="610" y="600" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Später</text>
+<rect x="610" y="630" width="380" height="65.5" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="620" y="648.0" font-size="11" fill="#7C5A00" font-weight="400" text-anchor="start">Magic-Link + Passkey statt Passwort:</text>
+<text x="620" y="663.95" font-size="11" fill="#7C5A00" font-weight="400" text-anchor="start">nichts zu merken, nichts zu vergessen.</text>
+<text x="620" y="679.9" font-size="11" fill="#7C5A00" font-weight="400" text-anchor="start">Daten liegen nicht im WordPress.</text>
+<rect x="1100" y="150" width="460" height="600" rx="10" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="1100" y="150" width="460" height="34" rx="10" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="1100" y="170" width="460" height="14" fill="#E5E7EB"/>
+<circle cx="1116" cy="167" r="5" fill="#FCA5A5" stroke="#FCA5A5" stroke-width="1.5"/>
+<circle cx="1132" cy="167" r="5" fill="#FCD34D" stroke="#FCD34D" stroke-width="1.5"/>
+<circle cx="1148" cy="167" r="5" fill="#86EFAC" stroke="#86EFAC" stroke-width="1.5"/>
+<rect x="1170" y="158" width="376" height="18" rx="9" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1180" y="171" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">finanzleser.de/plus/</text>
+<text x="1330.0" y="138" font-size="14" fill="#1F2937" font-weight="700" text-anchor="middle">3 · Mein Bereich (Plus)</text>
+<text x="1124" y="216" font-size="15" fill="#1F2937" font-weight="700" text-anchor="start" font-family="Merriweather, Georgia, serif">Guten Tag, Frau Berger</text>
+<text x="1124" y="236" font-size="11" fill="#D3005E" font-weight="400" text-anchor="start">Serie 6 Tage · 340 Punkte · Level 2 „Kenner“</text>
+<text x="1124" y="254" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Aktenkoffer (3)</text>
+<rect x="1124" y="262" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="278" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Unterhaltsrechner · 1.096 €</text>
+<rect x="1124" y="290" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="306" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Checkliste Trennung</text>
+<rect x="1124" y="318" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="334" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Vergleich Hundekranken</text>
+<text x="1124" y="368" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Wächter</text>
+<rect x="1124" y="376" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="392" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">● Kfz-Wechselfrist 30.11. · WhatsApp</text>
+<rect x="1124" y="404" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="420" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">● Kindergeld ändert sich · E-Mail</text>
+<rect x="1124" y="432" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="448" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">○ Grundfreibetrag ändert sich</text>
+<text x="1124" y="482" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Wochenbrief</text>
+<rect x="1124" y="490" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="506" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Themen: Familie, Steuern, Tiere</text>
+<rect x="1124" y="518" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="534" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Donnerstags · pausieren</text>
+<text x="1124" y="568" font-size="12" fill="#6B7280" font-weight="700" text-anchor="start">Kassensturz</text>
+<rect x="1124" y="576" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="592" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">Letzter: 3. März · Nächster: September</text>
+<rect x="1124" y="604" width="412" height="24" rx="6" fill="#FFFFFF" stroke="#C7CCD4" stroke-width="1"/>
+<text x="1134" y="620" font-size="11" fill="#1F2937" font-weight="400" text-anchor="start">→ Jetzt wiederholen (8 Fragen)</text>
+<text x="1124" y="730" font-size="11" fill="#6B7280" font-weight="400" text-anchor="start">Profil · Interessen · Daten löschen</text>
+<line x1="500" y1="450" x2="560" y2="450" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1030" y1="450" x2="1090" y2="450" stroke="#6B7280" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="40" y="790" width="1520" height="52.0" rx="6" fill="#FFF8E1" stroke="#F59E0B" stroke-width="1"/>
+<text x="50" y="808.0" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Plus ist kostenlos. Es schaltet frei: gesicherter Aktenkoffer, Wächter per E-Mail oder WhatsApp, gespeicherte Leo-Gespräche, Kassensturz-Wiederholung,</text>
+<text x="50" y="825.4" font-size="12" fill="#7C5A00" font-weight="400" text-anchor="start">Sammelalbum und Belohnungen (Versicherungs-Check bei Finconext, PDF-Guides, Akademie-Vorteile). Interessen steuern den Wochenbrief und Leos Vorschläge.</text>
+<rect x="40" y="958" width="14" height="14" rx="3" fill="#45A117" stroke="#45A117" stroke-width="1.5"/>
+<text x="60" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Leo / Aktion</text>
+<rect x="174" y="958" width="14" height="14" rx="3" fill="#D3005E" stroke="#D3005E" stroke-width="1.5"/>
+<text x="194" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Spiel / Punkte</text>
+<rect x="322" y="958" width="14" height="14" rx="3" fill="#F3F4F6" stroke="#F3F4F6" stroke-width="1.5"/>
+<text x="342" y="970" font-size="12" fill="#6B7280" font-weight="400" text-anchor="start">Eingabe</text>
+</svg>

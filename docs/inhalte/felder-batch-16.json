@@ -1,0 +1,946 @@
+[
+  {
+    "slug": "zinsbindungsfrist",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Zinsbindungsfrist legt fest, wie lange der Sollzins einer Baufinanzierung garantiert bleibt, üblich sind 5 bis 30 Jahre, meist 10 bis 15; danach braucht die Restschuld eine Anschlussfinanzierung. Der Sollzins folgt der Pfandbriefrendite plus Bankmarge, nicht dem EZB-Leitzins.",
+          "Laut Beitrag kosten 2026 zehn Jahre Bindung 3,6 bis 3,7 Prozent effektiv, 15 Jahre 3,95 bis 4,05, 20 Jahre bis 4,35, 30 Jahre bis 4,4 Prozent; die Aufschläge je Stufe liegen nur bei 0,1 bis 0,3 Prozentpunkten, was lange Bindungen günstig macht. Viel Eigenkapital und gute Bonität bringen rund 3,55 Prozent.",
+          "Kurze Bindung heißt günstigerer Einstieg und Chance auf fallende Zinsen, aber Zinsänderungsrisiko beim Anschluss; lange Bindung heißt Planungssicherheit und Schutz vor steigenden Zinsen für einen kleinen Aufpreis. Bei Zinsen um 4 Prozent raten Experten zu mindestens 10, besser 15 Jahren.",
+          "Nach § 489 BGB dürfen Sie jedes Baudarlehen zehn Jahre nach vollständiger Auszahlung mit sechs Monaten Frist ohne Vorfälligkeitsentschädigung kündigen, ganz oder teilweise, egal wie lang die Bindung ist; das Recht erlischt nicht, lange Bindungen sind also einseitig zu Ihren Gunsten.",
+          "Für den Anschluss gibt es Prolongation bei der eigenen Bank, Umschuldung zu einer günstigeren oder ein Forward-Darlehen, das bis 66 Monate im Voraus die heutigen Zinsen sichert, gegen 0,01 bis 0,02 Prozentpunkte je Monat Vorlauf. Empfohlen sind 5 bis 10 Prozent Sondertilgung im Jahr, 20 Prozent Eigenkapital, 2,5 bis 3 Prozent Tilgung und mehrere Angebote; laut Beitrag wird 2026 ein Korridor von 3,2 bis 3,9 Prozent erwartet."
+        ],
+        "quellen": [
+          "§ 489 Abs. 1 Nr. 2 BGB",
+          "§ 502 BGB (Vorfälligkeitsentschädigung)",
+          "Deutsche Bundesbank, Zinsstatistik Wohnungsbaukredite 2026",
+          "Beitrag Zinsbindungsfrist"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wähle ich die richtige Zinsbindungsfrist?",
+          "status": "freigegeben",
+          "frage": "Wir sind 35 und nehmen 350.000 Euro auf. Sollen wir 10, 15 oder 20 Jahre binden?",
+          "antwort": "Mit 15 Jahren liegen Sie bei Ihrem Alter richtig: Der Aufschlag gegenüber zehn Jahren beträgt laut Beitrag etwa 0,25 Prozentpunkte, bei 350.000 Euro rund 70 Euro im Monat, dafür ist die Rate bis zu Ihrem 50. Geburtstag fest und nach zehn Jahren dürfen Sie trotzdem kostenlos kündigen, falls die Zinsen fallen. 20 Jahre kosten nur wenig mehr und decken bei 3 Prozent Tilgung fast die gesamte Laufzeit ab, was den Anschluss überflüssig macht; das lohnt sich, wenn Sie Sicherheit über Flexibilität stellen. Zehn Jahre nehmen nur, wer schnell tilgt oder mit Erbschaft oder Verkauf rechnet. Vergleichen Sie die drei Varianten mit Effektivzins und Restschuld am Ende, nicht nur mit der Rate.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinsbindung wählen",
+            "§ 489 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Zinsbindung und Zinsaufschläge verstehen",
+          "status": "freigegeben",
+          "frage": "Warum steigen die Bauzinsen, obwohl die EZB die Leitzinsen senkt?",
+          "antwort": "Weil Baufinanzierungen langfristig refinanziert werden, über Pfandbriefe und Bundesanleihen mit zehn Jahren Laufzeit, deren Rendite die Erwartungen an Inflation, Wachstum und Staatsverschuldung spiegelt, nicht den kurzfristigen Einlagenzins; wenn der Kapitalmarkt für die nächsten zehn Jahre höhere Inflation erwartet, steigen die langen Zinsen trotz EZB-Senkung. Der Sollzins ergibt sich aus Pfandbriefrendite plus 0,8 bis 1,2 Prozentpunkten Bankmarge, mit Verzögerung von einigen Wochen. Wer auf sinkende Bauzinsen wartet, spekuliert also auf den Anleihemarkt, nicht auf die EZB; laut Beitrag rechnet der Markt 2026 mit Seitwärtsbewegung zwischen 3,2 und 3,9 Prozent.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinsaufschläge",
+            "Deutsche Bundesbank, Kapitalmarktstatistik"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Das Sonderkündigungsrecht nach 10 Jahren",
+          "status": "freigegeben",
+          "frage": "Mein Darlehen wurde in Tranchen ausgezahlt, die letzte 2017. Ab wann darf ich kündigen?",
+          "antwort": "Zehn Jahre nach dem vollständigen Empfang, also ab 2027, mit sechs Monaten Kündigungsfrist, sodass die Ablösung frühestens Mitte 2027 wirksam wird; maßgeblich ist die letzte Tranche, nicht der Vertragsabschluss. Wurde die Zinsbindung zwischendurch neu vereinbart, etwa bei einer Prolongation, beginnt die Frist ab dieser Vereinbarung neu. Kündigen Sie schriftlich mit Datum und Ablösetermin, holen Sie parallel Angebote für die Umschuldung ein und lassen Sie die Grundschuld abtreten statt löschen, das spart Notarkosten. Die Vorfälligkeitsentschädigung entfällt komplett, die Bank darf nur die Restschuld plus Zinsen bis zum Termin verlangen.",
+          "quellen": [
+            "§ 489 Abs. 1 Nr. 2 BGB",
+            "BGH XI ZR 76/12 (Fristbeginn bei Tranchen)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Anschlussfinanzierung und Forward-Darlehen",
+          "status": "freigegeben",
+          "frage": "Meine Zinsbindung endet in zwei Jahren. Lohnt sich jetzt ein Forward-Darlehen?",
+          "antwort": "Wenn Sie steigende Zinsen fürchten, ja: Bei 24 Monaten Vorlauf zahlen Sie laut Beitrag 0,24 bis 0,48 Prozentpunkte Aufschlag auf den heutigen Zins von etwa 3,6 Prozent, also 3,85 bis 4,1 Prozent, dafür ist der Satz sicher; fallen die Zinsen bis dahin unter diesen Wert, haben Sie verloren, müssen das Darlehen aber trotzdem abnehmen, sonst droht eine Nichtabnahmeentschädigung. Rechnen Sie mit Ihrer Restschuld: Bei 150.000 Euro kostet der Aufschlag rund 50 Euro im Monat. Alternativ warten Sie bis zwölf Monate vor Ablauf, dann sind die Aufschläge bei vielen Banken null, und vergleichen Sie unbedingt mehrere Anbieter, weil die Hausbank bei der Prolongation selten das beste Angebot macht.",
+          "quellen": [
+            "Beitrag, Abschnitt Anschlussfinanzierung und Forward-Darlehen",
+            "§ 502 BGB"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zinsbindung",
+        "kuendigungsrecht-489",
+        "anschlussfinanzierung",
+        "forward-darlehen",
+        "vorfaelligkeitsentschaedigung",
+        "sondertilgung",
+        "baufinanzierung",
+        "zinsen"
+      ]
+    }
+  },
+  {
+    "slug": "zinseszinseffekt",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Beim Zinseszins werden gutgeschriebene Zinsen mitverzinst, sodass Kapital exponentiell statt linear wächst: Aus 10.000 Euro zu 3 Prozent werden im ersten Jahr 300 Euro Zins, im zweiten 309, im dritten 318; die Formel lautet Endkapital gleich Anfangskapital mal (1 plus Zinssatz) hoch Jahre. 20.000 Euro zu 2,5 Prozent bringen in 20 Jahren 32.841 statt 30.000 Euro.",
+          "Die 72er-Regel schätzt die Verdopplungszeit: 72 geteilt durch den Zinssatz, bei 3,42 Prozent Festgeld rund 21 Jahre, bei 6 Prozent 12 Jahre. Häufigere Gutschrift, monatlich oder vierteljährlich, erhöht den Effektivzins leicht.",
+          "Realistisch sind 2026 bis 2,05 Prozent auf Tagesgeld und bis 3,42 Prozent auf Festgeld bei 2,6 Prozent Inflation, also kaum realer Zuwachs; ein Welt-ETF brachte langfristig rund 8 Prozent, nach Steuern, Kosten und Inflation bleiben 2,8 bis 3,8 Prozent. Die Abgeltungsteuer von 26,375 Prozent mindert den Zinseszins, der Sparerpauschbetrag von 1.000 Euro federt ab.",
+          "Am stärksten wirkt der Effekt bei thesaurierenden Anlagen, die Erträge automatisch wieder anlegen, und bei Sparplänen mit Cost-Average-Effekt: 300 Euro monatlich zu 7 Prozent ergeben in 25 Jahren rund 243.000 Euro, davon 153.000 Euro aus Zinseszins. Die Festgeldtreppe kombiniert höhere Zinsen mit verfügbarem Kapital.",
+          "Zeit schlägt Rendite: Nach 5 Jahren bringt der Zinseszins 5 bis 10 Prozent mehr, nach 20 Jahren 40 bis 60 Prozent, nach 30 Jahren oft das Doppelte. Wer mit 25 monatlich 200 Euro zu 6 Prozent spart, hat mit 65 rund 394.000 Euro, wer mit 35 beginnt, nur 201.000 Euro."
+        ],
+        "quellen": [
+          "§ 20, § 32d EStG",
+          "Deutsches Aktieninstitut, Rendite-Dreieck",
+          "Beitrag Zinseszinseffekt"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist der Zinseszinseffekt?",
+          "status": "freigegeben",
+          "frage": "Wirkt der Zinseszins auch gegen mich, etwa beim Dispo?",
+          "antwort": "Ja, und zwar schneller als beim Sparen: Beim Dispo werden die Zinsen vierteljährlich dem Konto belastet und danach mitverzinst, bei 11 Prozent verdoppeln sich Schulden nach der 72er-Regel in gut sechs Jahren, bei Kreditkarten-Teilzahlung mit 18 Prozent in vier Jahren. Deshalb wächst ein nicht zurückgeführter Dispo von 2.500 Euro in fünf Jahren auf rund 4.200 Euro. Bei Ratenkrediten mit fester Rate ist der Effekt eingebaut, weil die Zinsen auf die Restschuld berechnet werden und die Rate zuerst die Zinsen deckt. Umgekehrt gilt: Jede Sondertilgung spart Zinseszins, eine Tilgung von 1.000 Euro bei 4 Prozent Baukredit bringt über 20 Jahre rund 1.200 Euro Zinsersparnis.",
+          "quellen": [
+            "Beitrag, Abschnitt Was ist der Zinseszinseffekt",
+            "§ 248 BGB (Zinseszinsverbot und Ausnahmen)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert die Zinseszinsberechnung in der Praxis?",
+          "status": "freigegeben",
+          "frage": "Ich habe 30.000 Euro. Wie lange dauert es bei 3 Prozent bis 50.000 Euro?",
+          "antwort": "Etwa 17 Jahre: Sie brauchen den Faktor 1,667, und 1,03 hoch 17 ergibt 1,653, hoch 18 sind 1,702; nach 17 Jahren haben Sie rund 49.600 Euro, nach 18 Jahren 51.000 Euro. Bei 5 Prozent wären es 10,5 Jahre, bei 7 Prozent 7,5 Jahre. Die Steuer verlängert die Zeit: Von 3 Prozent bleiben nach Abgeltungsteuer 2,2 Prozent, sofern der Sparerpauschbetrag von 1.000 Euro ausgeschöpft ist, dann dauert es 23 Jahre; und 2,6 Prozent Inflation nehmen der Kaufkraft fast alles. Für ein solches Ziel in 15 bis 20 Jahren ist deshalb eine Mischung aus Festgeld und Welt-ETF sinnvoller als reines Sparen; der Zinseszinsrechner zeigt die Varianten.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinseszinsberechnung",
+            "Beitrag, Abschnitt Realistische Renditen"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie optimieren Sie den Zinseszinseffekt bei verschiedenen Anlageformen?",
+          "status": "freigegeben",
+          "frage": "Bekomme ich beim ETF überhaupt Zinseszins, wenn er keine Zinsen zahlt?",
+          "antwort": "Ja, nur heißt er dort Wiederanlage: Ein thesaurierender ETF legt die Dividenden der Unternehmen sofort wieder in Aktien an, und Kursgewinne wirken auf das gesamte, gewachsene Kapital, sodass 7 Prozent auf 10.000 Euro im ersten Jahr 700 Euro, im zwanzigsten Jahr aber 2.500 Euro bringen. Der Unterschied zum Sparbuch ist, dass die Rendite schwankt und in einzelnen Jahren negativ ist, sich über Jahrzehnte aber im Schnitt bei 6 bis 8 Prozent einpendelte. Bei ausschüttenden ETFs müssen Sie die Dividenden selbst wieder anlegen, was Ordergebühren kostet und oft vergessen wird; deshalb ist Thesaurierung für den Aufbau die bequemere Wahl, mit der Vorabpauschale als kleiner jährlicher Steuer.",
+          "quellen": [
+            "Beitrag, Abschnitt Optimierung bei Anlageformen",
+            "§ 18 InvStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Warum ist die Anlagedauer beim Zinseszinseffekt so entscheidend?",
+          "status": "freigegeben",
+          "frage": "Ich bin 50. Ist es für den Zinseszins nicht ohnehin zu spät?",
+          "antwort": "Nein, Sie haben bis zur Rente 17 Jahre und danach im Schnitt noch 20 Jahre, in denen das Geld weiter arbeitet, also einen Horizont von über 30 Jahren für den Teil, den Sie nicht sofort brauchen. 500 Euro monatlich zu 6 Prozent ergeben bis 67 rund 170.000 Euro, davon 68.000 Euro aus Zinseszins; im Ruhestand entnehmen Sie dann nur 4 Prozent im Jahr, und der Rest wächst weiter. Wichtig ist, mit dem Alter die Aktienquote schrittweise zu senken, etwa auf 50 Prozent mit 65, damit ein Crash kurz vor der Entnahme nicht alles kostet. Wer mit 50 beginnt, holt den 25-Jährigen nicht ein, aber die Alternative, gar nicht zu beginnen, kostet am meisten.",
+          "quellen": [
+            "Beitrag, Abschnitt Anlagedauer",
+            "Statistisches Bundesamt, Sterbetafel 2026"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zinseszins",
+        "cost-average-effekt",
+        "thesaurierend",
+        "festgeldtreppe",
+        "inflationsschutz",
+        "sparerpauschbetrag",
+        "abgeltungsteuer"
+      ]
+    }
+  },
+  {
+    "slug": "inflation",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Inflation ist der anhaltende Anstieg des Preisniveaus und damit die Entwertung des Geldes; gemessen wird sie am Verbraucherpreisindex des Statistischen Bundesamts, der die Preise eines Warenkorbs aus rund 700 Güterarten mit Gewichten nach den Ausgaben der Haushalte verfolgt, monatlich aus hunderttausenden Einzelpreisen. Der Index steht im April 2026 bei 125,2 Punkten, die Preise sind seit 2020 um gut 25 Prozent gestiegen.",
+          "Laut Beitrag lag die Inflation im Februar 2026 bei 1,9 Prozent, sprang durch einen Energiepreisschock nach dem Konflikt um den Iran und die Straße von Hormus im März auf 2,7, im April auf 2,9 und lag im Mai bei 2,6 Prozent; Energie verteuerte sich um 6,6 bis 7,2 Prozent, Diesel um 22, Heizöl um 43 Prozent, Dienstleistungen um 3,2 Prozent, Nettokaltmieten um 1,9 Prozent.",
+          "Die Kerninflation ohne Energie und Nahrungsmittel bleibt stabil bei 2,5 Prozent, ein Zeichen, dass der Anstieg von außen kommt und keine breite Preisdynamik ist; die EZB hält den Einlagenzins seit Juli 2025 bei 2,0 Prozent, den Hauptrefinanzierungssatz bei 2,15 und erwartet 2,6 Prozent Inflation für 2026, 2,0 für 2027 und 2,1 für 2028.",
+          "Der harmonisierte Index HVPI für den Euro-Vergleich lässt selbst genutztes Wohneigentum weg und weicht deshalb vom nationalen Index ab; die EZB steuert auf mittelfristig 2 Prozent. Prognosen für 2027 reichen von 2,0 Prozent bei IWF und ING bis 2,6 beim ifo-Institut, abhängig von Energiepreisen, Lohnabschlüssen und Konjunktur.",
+          "Für Sparer zählt der Realzins: 20.000 Euro zu 3,3 Prozent bringen 660 Euro, nach 1,9 Prozent Inflation bleiben 280 Euro echte Kaufkraft, bei 2,9 Prozent fast nichts. Geringverdiener trifft Inflation stärker, weil Energie und Grundbedarf ihr Budget dominieren; Schutz bieten Sachwerte, breit gestreute Aktien und inflationsindexierte Anleihen."
+        ],
+        "quellen": [
+          "Statistisches Bundesamt, Verbraucherpreisindex Mai 2026",
+          "EZB, geldpolitische Beschlüsse April 2026",
+          "Verordnung (EU) 2016/792 (HVPI)",
+          "Beitrag Inflation"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie funktioniert der Verbraucherpreisindex und der Warenkorb?",
+          "status": "freigegeben",
+          "frage": "Warum fühlt sich meine persönliche Inflation viel höher an als 2,6 Prozent?",
+          "antwort": "Weil der Warenkorb den Durchschnittshaushalt abbildet und Ihre Ausgaben anders verteilt sind: Wer viel Auto fährt, mit Öl heizt und häufig einkauft, spürt die 22 Prozent bei Diesel und 43 Prozent bei Heizöl voll, während Elektronik, Kleidung und Butter, die billiger wurden, kaum ins Gewicht fallen. Zudem merken Menschen Preissteigerungen bei häufigen Käufen wie Lebensmitteln stärker als bei seltenen wie Möbeln, und Mieten zählen im Index mit 1,9 Prozent, obwohl Neuvermietungen deutlich teurer sind. Das Statistische Bundesamt bietet einen persönlichen Inflationsrechner, in dem Sie Ihre Ausgabenanteile eintragen; für Haushalte mit hohem Energie- und Lebensmittelanteil ergibt er 2026 oft 3,5 bis 4 Prozent.",
+          "quellen": [
+            "Statistisches Bundesamt, Persönlicher Inflationsrechner",
+            "Beitrag, Abschnitt Verbraucherpreisindex"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was treibt die Inflation 2026: Energie als Hauptfaktor",
+          "status": "freigegeben",
+          "frage": "Was kann ich als Haushalt jetzt gegen die hohen Energiepreise tun?",
+          "antwort": "Kurzfristig den Verbrauch senken und Verträge prüfen: Beim Strom lohnt ein Anbieterwechsel, weil Neukundentarife oft 5 bis 8 Cent unter der Grundversorgung liegen, beim Gas ebenso; Heizöl kaufen Sie nicht in der Preisspitze, sondern beobachten den Tagespreis und bestellen im Sommer, wenn er meist niedriger ist, gern in Gemeinschaftsbestellungen. Ein Grad weniger Raumtemperatur spart 6 Prozent Heizenergie, ein hydraulischer Abgleich bis 15 Prozent. Beim Diesel helfen Tank-Apps für die Abendpreise und die Pendlerpauschale in der Steuererklärung. Mittelfristig ist der Heizungstausch mit bis zu 70 Prozent KfW-Zuschuss und eine Photovoltaikanlage der Weg, sich vom Ölpreis zu lösen.",
+          "quellen": [
+            "Beitrag, Abschnitt Energie als Hauptfaktor",
+            "Bundesförderung für effiziente Gebäude, Heizungsförderung"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "EZB-Geldpolitik und Zinsentwicklung 2026",
+          "status": "freigegeben",
+          "frage": "Warum erhöht die EZB nicht die Zinsen, wenn die Inflation über 2 Prozent liegt?",
+          "antwort": "Weil höhere Zinsen einen Ölpreisschock nicht heilen: Sie würden Kredite und Investitionen verteuern und die ohnehin schwache Konjunktur bremsen, ohne dass der Diesel billiger wird, denn der Preis entsteht am Weltmarkt. Die EZB schaut deshalb auf die Kerninflation von 2,5 Prozent und die Inflationserwartungen; solange beide nahe 2 Prozent bleiben und keine Lohn-Preis-Spirale droht, wartet sie ab, wie am 30. April 2026 zum siebten Mal in Folge. Erst wenn Unternehmen die Energiekosten breit auf alle Preise überwälzen und Gewerkschaften hohe Abschlüsse durchsetzen, würde sie straffen. Für Sparer heißt das: Tagesgeldzinsen bleiben um 2 bis 3 Prozent, Bauzinsen hängen am Anleihemarkt.",
+          "quellen": [
+            "EZB, geldpolitische Beschlüsse April 2026",
+            "Beitrag, Abschnitt EZB-Geldpolitik"
+          ]
+        },
+        {
+          "abschnitt": "heading-11",
+          "abschnitt_titel": "Auswirkungen auf Verbraucher und Haushaltseinkommen",
+          "status": "freigegeben",
+          "frage": "Meine Rente stieg im Juli um 3,7 Prozent. Habe ich bei 2,6 Prozent Inflation real gewonnen?",
+          "antwort": "Ja, um gut 1 Prozent, sofern Ihr persönlicher Warenkorb dem Durchschnitt entspricht; heizen Sie mit Öl und fahren viel Auto, kann Ihre eigene Teuerung bei 3,5 Prozent liegen, dann ist es ein Nullsummenspiel. Die Rentenanpassung folgt den Löhnen des Vorjahres, nicht der Inflation, sodass sie in Phasen steigender Preise nachhinkt und in Phasen fallender Preise überholt; 2022 und 2023 verloren Rentner real, 2024 bis 2026 holten sie auf. Beachten Sie zudem, dass ein höherer Rentenbetrag mehr Steuer kosten kann, wenn er den Grundfreibetrag von 12.348 Euro überschreitet, und dass Kranken- und Pflegebeiträge mitsteigen. Wohngeld und Grundsicherung werden ebenfalls angepasst, aber mit Verzögerung.",
+          "quellen": [
+            "§ 68 SGB VI (Rentenanpassung)",
+            "Beitrag, Abschnitt Auswirkungen auf Verbraucher"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "inflation",
+        "verbraucherpreisindex",
+        "kerninflation",
+        "einlagenzins",
+        "inflationsschutz",
+        "sachwert"
+      ]
+    }
+  },
+  {
+    "slug": "anlageimmobilie",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Eine Anlageimmobilie wird zur Vermietung gekauft und lebt von Mieteinnahmen, Wertsteigerung, dem Hebel des Kredits und Steuervorteilen; der Markt hat sich 2026 nach Preisrückgängen von 10 bis 20 Prozent seit 2022 stabilisiert, die Angebotsmieten steigen um 5 bis 7 Prozent im Jahr, Bauzinsen liegen laut Beitrag bei 3,1 bis 3,7 Prozent für zehn Jahre.",
+          "Realistisch sind 4 bis 6 Prozent Bruttomietrendite, Jahreskaltmiete durch Kaufpreis, und nach Bewirtschaftung, Instandhaltung und Finanzierung 2,5 bis 3,5 Prozent netto; die Eigenkapitalrendite kann durch den Hebel bei 6 bis 10 Prozent liegen. Ostdeutsche Kleinstädte bieten 6 bis 7 Prozent, aber Leerstands- und Wertrisiko, Metropolen 3 bis 4 Prozent.",
+          "Banken verlangen 20 bis 40 Prozent Eigenkapital plus Nebenkosten von rund 12 Prozent: Bei 400.000 Euro Kaufpreis sind das 80.000 Euro Eigenkapital und 48.000 Euro Nebenkosten, die Rate für 320.000 Euro bei 3,5 Prozent Zins und 2 Prozent Tilgung liegt bei 1.467 Euro; 10 Prozentpunkte weniger Eigenkapital kosten rund 200 Euro mehr im Monat.",
+          "Steuerlich wirkt die Gebäudeabschreibung: 2 Prozent für Baujahre 1925 bis 2022, 3 Prozent ab 2023, 2,5 Prozent vor 1925, degressiv 5 Prozent für Baubeginn Oktober 2023 bis September 2029, plus Sonderabschreibung von 5 Prozent über vier Jahre für effiziente Neubauten; dazu Zinsen, Instandhaltung, Verwaltung, Grundsteuer und Maklerkosten als Werbungskosten. 5.600 Euro AfA sparen bei 42 Prozent 2.352 Euro Steuer.",
+          "Risiken sind Klumpen, Illiquidität, Mietausfall, Instandhaltung, Mietrecht und Zinsrisiko beim Anschluss; Immobilien sollten nicht mehr als die Hälfte des Vermögens ausmachen. Attraktive Standorte sind Leipzig, Dortmund, Hannover und Bremen; wer weder Eigenkapital noch Zeit hat, fährt mit ETFs oft besser."
+        ],
+        "quellen": [
+          "§ 7 Abs. 4 und 5a, § 7b EStG",
+          "§ 21 EStG (Vermietung und Verpachtung)",
+          "Statistisches Bundesamt, Häuserpreisindex 2026",
+          "Beitrag Anlageimmobilie"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Rendite: Was Anlageimmobilien wirklicht bringen",
+          "status": "freigegeben",
+          "frage": "Eine Wohnung für 250.000 Euro bringt 900 Euro Kaltmiete. Ist das eine gute Rendite?",
+          "antwort": "Brutto 4,3 Prozent, das ist für eine Stadt mittlerer Größe ordentlich, für Ostdeutschland schwach; netto sieht es enger aus: Von 10.800 Euro Jahresmiete gehen rund 1.500 Euro nicht umlagefähige Kosten für Verwaltung, Instandhaltungsrücklage und Mietausfallrisiko ab, bleiben 9.300 Euro oder 3,7 Prozent auf den Kaufpreis, auf Kaufpreis plus 12 Prozent Nebenkosten 3,3 Prozent. Finanzieren Sie 200.000 Euro zu 3,6 Prozent, kosten die Zinsen 7.200 Euro, der Überschuss vor Steuern liegt bei 2.100 Euro, nach Abschreibung und Steuer etwas mehr. Die Rechnung geht nur mit Mietsteigerung und Wertzuwachs auf, prüfen Sie Mietspiegel, Energieausweis und Rücklagen der Eigentümergemeinschaft.",
+          "quellen": [
+            "Beitrag, Abschnitt Rendite",
+            "§ 21, § 9 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Steuerliche Abschreibung: So sparen Sie Steuern",
+          "status": "freigegeben",
+          "frage": "Wie teile ich den Kaufpreis in Grundstück und Gebäude auf, um mehr abzuschreiben?",
+          "antwort": "Nur das Gebäude ist abschreibbar, der Bodenanteil nicht; das Finanzamt nutzt für die Aufteilung die Arbeitshilfe des Bundesfinanzministeriums, die bei Eigentumswohnungen in Großstädten oft 40 bis 50 Prozent Boden ergibt, während im Kaufvertrag frei vereinbarte Anteile anerkannt werden, wenn sie nicht offensichtlich unrealistisch sind. Vereinbaren Sie im Notarvertrag einen begründeten Gebäudeanteil, etwa 75 Prozent bei älteren Häusern, und legen Sie bei Streit ein Sachverständigengutachten vor; der Bundesfinanzhof hat die Arbeitshilfe 2020 als nicht bindend eingestuft. Bei 280.000 statt 200.000 Euro Gebäudewert bringt das jährlich 1.600 Euro mehr AfA, über 50 Jahre 80.000 Euro. Die Grunderwerbsteuer fällt dagegen auf den ganzen Preis an.",
+          "quellen": [
+            "BFH IX R 26/19",
+            "§ 7 Abs. 4 EStG",
+            "BMF, Arbeitshilfe Kaufpreisaufteilung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Risiken tragen Sie?",
+          "status": "freigegeben",
+          "frage": "Mein Mieter zahlt seit zwei Monaten nicht. Was kann ich tun und wie schütze ich mich künftig?",
+          "antwort": "Nach zwei Monatsmieten Rückstand dürfen Sie fristlos kündigen, schriftlich mit Begründung; zahlt der Mieter innerhalb von zwei Monaten nach Zustellung der Räumungsklage alles nach, wird die Kündigung einmal in zwei Jahren unwirksam. Räumungsklagen dauern sechs bis zwölf Monate und kosten 3.000 bis 5.000 Euro, die Sie meist nicht wiedersehen. Vorbeugen hilft mehr: Schufa-Auskunft, Gehaltsnachweise und Mietschuldenfreiheitsbescheinigung vor Abschluss, Kaution von drei Kaltmieten, und eine Mietausfallversicherung für 3 bis 5 Prozent der Jahresmiete, die Rückstände bis zwölf Monate und Räumungskosten deckt. Kalkulieren Sie zudem einen Monatsmietausfall im Jahr als Rücklage ein.",
+          "quellen": [
+            "§ 543 Abs. 2, § 569 Abs. 3 BGB",
+            "Beitrag, Abschnitt Risiken"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Immobilie oder ETF: Der direkte Vergleich",
+          "status": "freigegeben",
+          "frage": "Wann ist der Verkauf der Anlagewohnung steuerfrei?",
+          "antwort": "Nach zehn Jahren zwischen Kauf- und Verkaufsvertrag, gerechnet nach Beurkundungsdatum, ist der Gewinn komplett einkommensteuerfrei, egal wie hoch; innerhalb der Frist wird er mit dem persönlichen Steuersatz besteuert, wobei die in Anspruch genommene Abschreibung den Buchwert senkt und den Gewinn erhöht. Selbst genutzte Wohnungen sind schon steuerfrei, wenn Sie im Verkaufsjahr und den beiden Vorjahren darin gewohnt haben. Verkaufen Sie mehr als drei Objekte in fünf Jahren, droht die Einstufung als gewerblicher Grundstückshändler mit Gewerbesteuer. Beim ETF gibt es keine Haltefrist, dort fällt Abgeltungsteuer auf 70 Prozent des Gewinns an; über 20 Jahre ist die Steuerfreiheit der Immobilie ein echter Vorteil, der die höheren Kosten teils ausgleicht.",
+          "quellen": [
+            "§ 23 Abs. 1 Nr. 1 EStG",
+            "BMF-Schreiben zum gewerblichen Grundstückshandel",
+            "§ 20 InvStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "anlageimmobilie",
+        "mietrendite",
+        "hebeleffekt",
+        "kaufnebenkosten",
+        "gebaeude-afa",
+        "klumpenrisiko",
+        "spekulationsfrist",
+        "eigenkapital"
+      ]
+    }
+  },
+  {
+    "slug": "grundschuld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Grundschuld ist das Pfandrecht, das die Bank in Abteilung III des Grundbuchs eintragen lässt, um einen Immobilienkredit abzusichern; bei Zahlungsausfall darf sie zwangsversteigern. Sie ist von der konkreten Forderung unabhängig, bleibt nach Tilgung in voller Höhe bestehen, kann für weitere Kredite genutzt und übertragen werden; deshalb hat sie die Hypothek, die mit der Restschuld sinkt und erlischt, in rund 80 Prozent der Fälle ersetzt.",
+          "Die Buchgrundschuld wird nur elektronisch eingetragen und ist Standard, die Briefgrundschuld hat zusätzlich eine Urkunde, lässt sich ohne Notar übertragen und kostet rund ein Viertel mehr; nach Tilgung wird die Grundschuld zur Eigentümergrundschuld, die Sie für spätere Kredite oder Modernisierungen mit KfW-Förderung nutzen können.",
+          "Die Bestellung läuft über den Notar mit Darlehensvertrag und Eintragungsbewilligung, die Eintragung dauert vier bis zwölf Wochen; Sie unterschreiben dabei eine Vollstreckungsunterwerfung, mit der die Bank ohne Klage in Ihr gesamtes Vermögen vollstrecken darf.",
+          "Notar und Grundbuch kosten für Kaufvertrag und Grundschuld zusammen rund 1,5 bis 2 Prozent des Kaufpreises, die Grundschuld allein etwa 0,5 Prozent ihrer Summe, dazu Grunderwerbsteuer von 3,5 bis 6,5 Prozent je Land; die Gebühren stiegen laut Beitrag Mitte 2025 um 6 bis 9 Prozent. Eine Abtretung beim Bankwechsel kostet nur 0,1 bis 0,2 Prozent, die Löschung 0,2 bis 0,4 Prozent.",
+          "Achten Sie auf die Zweckerklärung: Eine weite Erklärung sichert alle Forderungen der Bank, auch Dispo oder Autokredit, sodass das abbezahlte Haus dafür haften kann; Verbraucherschützer raten zur engen Erklärung nur für den Immobilienkredit. Nach Tilgung lohnt Beibehalten statt Löschen, außer bei geplantem Verkauf."
+        ],
+        "quellen": [
+          "§§ 1191 bis 1198 BGB",
+          "§ 794 Abs. 1 Nr. 5 ZPO (Vollstreckungsunterwerfung)",
+          "Gerichts- und Notarkostengesetz, KV 21100, 14121",
+          "Beitrag Grundschuld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Unterschiede zur Hypothek",
+          "status": "freigegeben",
+          "frage": "Kann die Bank mein Haus versteigern, obwohl ich nur eine Rate versäumt habe?",
+          "antwort": "Nein, dafür muss sie erst das Darlehen kündigen, und das darf sie bei Immobilienkrediten nur, wenn Sie mit mindestens zwei aufeinanderfolgenden Raten und 2,5 Prozent des Nennbetrags im Rückstand sind, eine zweiwöchige Frist mit Kündigungsandrohung verstrichen ist und ein Gespräch über Lösungen angeboten wurde; erst danach kann sie aus der Grundschuld die Zwangsversteigerung beantragen, die weitere sechs bis zwölf Monate dauert. Reden Sie bei Zahlungsproblemen sofort mit der Bank, Stundung, Tilgungsaussetzung oder Laufzeitverlängerung sind üblich und für die Bank billiger als eine Versteigerung. Auch nach dem Versteigerungsantrag können Sie durch Zahlung oder freihändigen Verkauf den Termin abwenden.",
+          "quellen": [
+            "§ 498 BGB",
+            "§ 30a ZVG (einstweilige Einstellung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kosten im Jahr 2026",
+          "status": "freigegeben",
+          "frage": "Warum soll ich eine Grundschuld über 300.000 Euro eintragen lassen, wenn ich nur 250.000 Euro aufnehme?",
+          "antwort": "Manche Banken verlangen Reserve für spätere Nachfinanzierungen oder tragen die Grundschuld etwas höher ein, damit Zinsen und Kosten bei einer Versteigerung gedeckt sind; das ist zulässig, kostet Sie aber Notar- und Grundbuchgebühren auf die höhere Summe, rund 250 Euro mehr, und erhöht die Haftung bei weiter Zweckerklärung. Verhandeln Sie die Grundschuld auf die Darlehenssumme, wenn Sie keine Aufstockung planen, und achten Sie darauf, dass die Grundschuldzinsen von meist 12 bis 18 Prozent nur den Rahmen für den Versteigerungsfall bilden, nicht den Kreditzins. Eine höhere Eigentümergrundschuld nach Tilgung hat den Vorteil, dass Sie später ohne neue Eintragung mehr Kredit bekommen.",
+          "quellen": [
+            "Beitrag, Abschnitt Kosten",
+            "§ 1191 Abs. 2 BGB (Grundschuldzinsen)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Zweckerklärung: Ein kritischer Punkt",
+          "status": "freigegeben",
+          "frage": "Ich habe die weite Zweckerklärung schon unterschrieben. Kann ich das noch ändern?",
+          "antwort": "Ja, durch eine Nachtragsvereinbarung mit der Bank, die die Sicherung auf das Immobiliendarlehen beschränkt; viele Banken stimmen zu, wenn Sie es schriftlich verlangen, weil formularmäßige weite Zweckerklärungen nach der Rechtsprechung des Bundesgerichtshofs ohnehin unwirksam sind, soweit sie Forderungen gegen Dritte oder künftige Kredite einbeziehen, die Sie beim Abschluss nicht kannten. Zumindest für Ihre eigenen künftigen Kredite bei derselben Bank kann die Erklärung aber wirksam sein. Ist die Bank stur, wechseln Sie beim Anschluss den Anbieter und lassen die Grundschuld abtreten, dann bestimmen Sie die Zweckerklärung neu. Wichtig ist das vor allem, wenn ein Partner mithaftet, dessen Haus dann für die Schulden des anderen stünde.",
+          "quellen": [
+            "BGH XI ZR 78/96 und XI ZR 235/96 (weite Zweckerklärung)",
+            "Beitrag, Abschnitt Zweckerklärung"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Löschung oder Beibehaltung nach Tilgung?",
+          "status": "freigegeben",
+          "frage": "Mein Kredit ist abbezahlt. Was muss ich jetzt konkret tun?",
+          "antwort": "Lassen Sie sich von der Bank die Löschungsbewilligung schicken, das ist Ihr Recht und kostenlos, und heben Sie sie sicher auf; ob Sie die Löschung beim Grundbuchamt beantragen, entscheiden Sie. Planen Sie in den nächsten Jahren keine Modernisierung, keinen Kredit für die Kinder und keinen Verkauf, können Sie die Grundschuld als Eigentümergrundschuld stehen lassen und sparen die 0,2 bis 0,4 Prozent Löschungskosten, bei 300.000 Euro rund 900 Euro. Beim späteren Verkauf verlangt der Käufer meist ein lastenfreies Grundbuch, dann löschen Sie mit der Bewilligung oder treten die Grundschuld an dessen Bank ab. Bei einer Briefgrundschuld muss die Bank zusätzlich den Brief herausgeben, ohne ihn ist die Löschung nicht möglich.",
+          "quellen": [
+            "§ 1192, § 1163 BGB (Eigentümergrundschuld)",
+            "§ 19, § 27 GBO (Löschungsbewilligung)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "grundschuld",
+        "hypothek",
+        "zweckerklaerung",
+        "vollstreckungsunterwerfung",
+        "notarkosten",
+        "grunderwerbsteuer",
+        "anschlussfinanzierung"
+      ]
+    }
+  },
+  {
+    "slug": "baufinanzierung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Baufinanzierung ist das langfristige Darlehen für Kauf, Bau oder Modernisierung, abgesichert über eine Grundschuld; laut Beitrag kosten zehn Jahre Zinsbindung 2026 3,57 bis 3,70 Prozent effektiv, 15 Jahre 3,70 bis 3,90, 20 Jahre bis 4,30, mit Seitwärtstrend zwischen 3,4 und 3,8 Prozent. Bauzinsen folgen Pfandbriefen und Staatsanleihen, nicht direkt dem EZB-Leitzins von 2,0 Prozent.",
+          "Eigenkapital ist der stärkste Hebel: mindestens 20 Prozent des Kaufpreises plus die Nebenkosten von 10 bis 15 Prozent für Grunderwerbsteuer, Notar, Grundbuch und Makler, bei 400.000 Euro also 40.000 bis 60.000 Euro extra; ein Beleihungsauslauf von 60 Prozent bringt 0,1 bis 0,2 Prozentpunkte bessere Zinsen, über 90 Prozent Risikoaufschläge. Selbstständige brauchen 25 bis 30 Prozent, Eigenleistung zählt bis 15 Prozent der Bausumme.",
+          "Familien mit Kind und bis 90.000 Euro Einkommen plus 10.000 je weiterem Kind bekommen über KfW 300 bis 270.000 Euro ab 0,29 Prozent für klimafreundliche Neubauten, alle anderen über KfW 297 und 298 bis 100.000 oder 150.000 Euro, Käufer alter Häuser der Klassen F bis H über KfW 308 mit Sanierungspflicht; Anträge laufen vor Vertragsabschluss über die Hausbank.",
+          "Zehn Jahre Bindung sparen 0,1 bis 0,2 Prozentpunkte, über 60 Prozent wählen 15 oder 20 Jahre, Volltilger schließen das Zinsrisiko ganz aus; Tilgung mindestens 2 bis 3 Prozent, die Rate höchstens 30 bis 35 Prozent des Nettoeinkommens, bei 4.000 Euro netto also 1.200 bis 1.400 Euro. Für 250.000 Euro liegt die Rate bei 3,5 Prozent Zins und 2 Prozent Tilgung um 1.150 Euro.",
+          "Die Preise steigen 2026 wieder um rund 3 Prozent, Eigentumswohnungen kosten im Schnitt 3.484 Euro je Quadratmeter, Häuser 3.038 Euro, Effizienzklasse A kostet 650 Euro je Quadratmeter mehr als D; 372.000 nötigen Wohnungen stehen 235.000 Fertigstellungen gegenüber. Vergleichen Sie drei bis fünf Angebote über Vermittler wie Interhyp, Dr. Klein, Baufi24 oder Hypofriend nach Effektivzins, Sondertilgung, bereitstellungszinsfreier Zeit und Tilgungswechsel."
+        ],
+        "quellen": [
+          "§ 491 ff. BGB (Immobiliar-Verbraucherdarlehen)",
+          "KfW-Programme 300, 297, 298, 308",
+          "Statistisches Bundesamt, Baufertigstellungen 2025",
+          "Beitrag Baufinanzierung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie viel Eigenkapital brauchen Sie für beste Konditionen?",
+          "status": "freigegeben",
+          "frage": "Wir haben 40.000 Euro gespart und wollen für 350.000 Euro kaufen. Reicht das?",
+          "antwort": "Knapp nicht für gute Konditionen: Allein die Nebenkosten liegen bei 35.000 bis 45.000 Euro, sodass Sie den vollen Kaufpreis finanzieren müssten, ein Beleihungsauslauf von 100 Prozent, den wenige Banken und nur mit Aufschlägen von 0,5 bis 1 Prozentpunkt anbieten; die Rate für 350.000 Euro läge bei 4,3 Prozent Zins und 2 Prozent Tilgung um 1.840 Euro. Optionen: den Kauf um ein bis zwei Jahre verschieben und auf 75.000 Euro sparen, ein günstigeres Objekt bis 280.000 Euro suchen, Eltern um ein zinsloses Darlehen oder eine Schenkung bitten, die bis 400.000 Euro je Elternteil steuerfrei ist, oder bei Familien mit Kind KfW 300 nutzen, dessen 0,29 Prozent die Mischrate deutlich senken. Eigenleistungen zählen Banken bis 15 Prozent der Bausumme an, aber nur beim Bauen.",
+          "quellen": [
+            "Beitrag, Abschnitt Eigenkapital",
+            "§ 16 ErbStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche KfW-Förderung passt zu Ihrer Familie 2026?",
+          "status": "freigegeben",
+          "frage": "Wir verdienen zusammen 95.000 Euro brutto und haben zwei Kinder. Bekommen wir KfW 300?",
+          "antwort": "Wahrscheinlich ja, weil die Grenze für das zu versteuernde Einkommen gilt, nicht das Brutto: Mit zwei Kindern liegt sie bei 100.000 Euro, und Ihr zu versteuerndes Einkommen liegt nach Vorsorgeaufwendungen, Werbungskosten und Kinderfreibeträgen bei 95.000 Euro brutto meist um 75.000 bis 80.000 Euro; maßgeblich ist der Durchschnitt der Steuerbescheide des zweiten und dritten Jahres vor dem Antrag. Weitere Bedingungen: erstes selbst genutztes Wohneigentum, Neubau oder Erstkauf binnen zwölf Monaten nach Fertigstellung mit Effizienzhaus 40 und ohne fossile Heizung, Energieeffizienz-Experte im Boot. Mit zwei Kindern bekommen Sie bis 220.000 Euro Kredit, der Antrag geht über Ihre Bank vor dem Kaufvertrag.",
+          "quellen": [
+            "KfW-Programm 300, Merkblatt 2026",
+            "Beitrag, Abschnitt KfW-Förderung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "10 oder 20 Jahre Zinsbindung – Welche ist 2026 richtig für Sie?",
+          "status": "freigegeben",
+          "frage": "Was bringt eine höhere Tilgung von 3 statt 2 Prozent wirklich?",
+          "antwort": "Sie verkürzt die Laufzeit von etwa 36 auf 27 Jahre und spart bei 300.000 Euro zu 3,6 Prozent rund 65.000 Euro Zinsen, kostet aber 250 Euro mehr Rate im Monat; nach zehn Jahren Zinsbindung ist die Restschuld bei 3 Prozent Tilgung etwa 191.000 Euro statt 227.000 Euro, was den Anschluss bei höheren Zinsen erheblich entschärft. Manche Banken belohnen hohe Tilgung sogar mit 0,05 bis 0,1 Prozentpunkten Zinsabschlag. Wenn die Rate mit 3 Prozent zu eng wird, wählen Sie 2 Prozent plus Sondertilgungsrecht von 5 Prozent und einen kostenlosen Tilgungssatzwechsel, dann erhöhen Sie bei Gehaltssteigerungen. Unter 2 Prozent Tilgung sollte bei den heutigen Zinsen niemand starten.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinsbindung und Tilgung",
+            "Tilgungsrechner der Verbraucherzentrale"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Baufinanzierung vergleichen – Worauf Sie achten müssen",
+          "status": "freigegeben",
+          "frage": "Der Vermittler bietet 3,55 Prozent, meine Hausbank 3,75 Prozent. Ist der Unterschied wichtig?",
+          "antwort": "Ja, 0,2 Prozentpunkte kosten bei 300.000 Euro über zehn Jahre rund 5.500 Euro Zinsen, und die Restschuld ist am Ende um etwa 1.300 Euro höher. Vergleichen Sie aber den Effektivzins mit allen Kosten, die Sondertilgungsrechte, die bereitstellungszinsfreie Zeit, die bei Neubauten zwölf Monate betragen sollte, und ob ein Tilgungssatzwechsel kostenlos ist; ein billigerer Zins mit 0,25 Prozent Bereitstellungszins ab dem dritten Monat kann beim Bau teurer werden. Fragen Sie die Hausbank, ob sie nachzieht, viele tun das bei Vorlage eines konkreten Angebots. Der Vermittler bekommt seine Provision von der Bank, für Sie ist er kostenlos, nur die Beratungsqualität schwankt.",
+          "quellen": [
+            "Beitrag, Abschnitt Vergleichskriterien",
+            "§ 6 PAngV (Effektivzins)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "baufinanzierung",
+        "eigenkapital",
+        "beleihungsauslauf",
+        "kaufnebenkosten",
+        "kfw",
+        "zinsbindung",
+        "annuitaetendarlehen",
+        "volltilgerdarlehen",
+        "sondertilgung",
+        "grundschuld"
+      ]
+    }
+  },
+  {
+    "slug": "bausparvertrag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ein Bausparvertrag verbindet Sparen und Darlehen: Sie legen eine Bausparsumme fest, sparen 30 bis 50 Prozent davon an, im Schnitt sieben bis acht Jahre, und erhalten nach Erreichen von Mindestguthaben und Bewertungszahl bei Zuteilung den Rest als Darlehen zu einem Zins, der schon bei Abschluss feststeht.",
+          "Guthaben werden 2026 mit 0,01 bis 1 Prozent, im Schnitt 0,25 Prozent verzinst, das Darlehen kostet 1,5 bis 3,5 Prozent, im Schnitt 2,0 Prozent, gegenüber 3,5 bis 4,2 Prozent für Baudarlehen; der Vorteil kann bei 100.000 Euro über zehn Jahre bis 11.000 Euro betragen. Als reines Sparprodukt taugt der Vertrag wegen der Minizinsen nicht.",
+          "Die Abschlussgebühr von 1 bis 1,6 Prozent der Bausparsumme, bei 50.000 Euro 500 bis 800 Euro, ist der größte Kostenblock und wird auch ohne Darlehensabruf fällig und bei Kündigung nicht erstattet; dazu kommen bis 24 Euro Kontogebühr im Jahr. Beim Vergleich zählen die Darlehenszinsen.",
+          "Gefördert wird mit Wohnungsbauprämie von 10 Prozent auf bis 700 Euro Einzahlung, 1.400 Euro für Paare, bei Einkommen bis 35.000 beziehungsweise 70.000 Euro, mit Arbeitnehmersparzulage von 9 Prozent auf VL bis 470 Euro und mit Wohn-Riester bis 175 Euro plus Kinderzulagen; zusammen sind bis 1.000 Euro im Jahr möglich. Das Guthaben ist bis 100.000 Euro gesichert.",
+          "Sinnvoll ist Bausparen für Menschen, die in drei bis zwölf Jahren kaufen, bauen oder modernisieren wollen und sich den Darlehenszins sichern möchten, für energetische Sanierungen und als Baustein der Anschlussfinanzierung, kombinierbar mit KfW-Förderung; die Bausparsumme reicht allein selten für einen Kauf."
+        ],
+        "quellen": [
+          "Bausparkassengesetz",
+          "Wohnungsbau-Prämiengesetz",
+          "§ 92a EStG (Wohn-Riester)",
+          "Beitrag Bausparvertrag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "So funktioniert ein Bausparvertrag",
+          "status": "freigegeben",
+          "frage": "Welche Bausparsumme soll ich wählen, wenn ich in acht Jahren eine Küche und ein Bad für 40.000 Euro sanieren will?",
+          "antwort": "Etwa 40.000 bis 50.000 Euro: Bei 40 Prozent Mindestguthaben müssen Sie 16.000 bis 20.000 Euro ansparen, das sind rund 170 bis 210 Euro im Monat über acht Jahre, und erhalten bei Zuteilung 24.000 bis 30.000 Euro Darlehen zu etwa 2 Prozent; die Abschlussgebühr liegt bei 400 bis 800 Euro. Wählen Sie die Summe nicht zu hoch, weil die Gebühr auf die ganze Summe anfällt und eine zu große Summe die Zuteilung verzögert, und nicht zu niedrig, weil eine spätere Erhöhung erneut Gebühr kostet. Fragen Sie nach einem Tarif mit schneller Zuteilung und niedrigem Darlehenszins statt hohem Guthabenzins, und beantragen Sie jährlich die Wohnungsbauprämie, wenn Ihr Einkommen unter 35.000 Euro liegt.",
+          "quellen": [
+            "Beitrag, Abschnitt Funktionsweise",
+            "Allgemeine Bausparbedingungen der Kassen"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Zinsen beim Bausparvertrag 2026?",
+          "status": "freigegeben",
+          "frage": "Ich habe einen alten Bausparvertrag mit 3 Prozent Guthabenzins. Die Kasse will ihn kündigen. Darf sie das?",
+          "antwort": "Nach der Rechtsprechung des Bundesgerichtshofs ja, wenn der Vertrag seit mehr als zehn Jahren zuteilungsreif ist und Sie das Darlehen nicht abrufen, denn dann gilt die Kasse als Darlehensnehmerin mit dem Kündigungsrecht nach zehn Jahren; solange die Bausparsumme noch nicht voll angespart und die Zuteilung noch keine zehn Jahre her ist, darf sie nicht kündigen. Prüfen Sie im Schreiben das Zuteilungsdatum. Ist die Kündigung berechtigt, bekommen Sie Guthaben plus Zinsen ausgezahlt; nutzen Sie vorher noch das Darlehen, wenn Sie eine Verwendung haben, denn 3 Prozent Guthabenzins waren früher der Vorteil, heute ist es der günstige Darlehenszins.",
+          "quellen": [
+            "BGH XI ZR 185/16 und XI ZR 272/16",
+            "§ 489 Abs. 1 Nr. 2 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche staatliche Förderung gibt es?",
+          "status": "freigegeben",
+          "frage": "Wie funktioniert Wohn-Riester über den Bausparvertrag?",
+          "antwort": "Sie schließen einen zertifizierten Riester-Bausparvertrag ab, zahlen 4 Prozent Ihres Vorjahresbruttos ein, höchstens 2.100 Euro abzüglich Zulagen, und erhalten 175 Euro Grundzulage plus 300 Euro je Kind ab 2008 im Jahr, dazu den Sonderausgabenabzug bis 2.100 Euro; Guthaben und Darlehen dürfen nur für selbst genutztes Wohneigentum verwendet werden, auch zur Sondertilgung eines bestehenden Kredits oder für den altersgerechten Umbau. Der Haken ist die nachgelagerte Besteuerung: Alle geförderten Beträge werden auf einem Wohnförderkonto mit 2 Prozent jährlich hochgerechnet und ab Rentenbeginn über 17 bis 25 Jahre versteuert, mit 30 Prozent Rabatt bei Einmalzahlung. Bei Verkauf ohne Reinvestition wird der Steuerbetrag sofort fällig. Für Familien mit Kindern und mittlerem Einkommen lohnt es sich, für Singles mit hohem Einkommen eher nicht.",
+          "quellen": [
+            "§ 92a, § 92b EStG",
+            "§ 10a, § 84, § 85 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wann lohnt sich ein Bausparvertrag 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Berater bietet eine Sofortfinanzierung mit Bausparvertrag statt Annuitätendarlehen. Was ist der Haken?",
+          "antwort": "Sie nehmen ein tilgungsfreies Vorausdarlehen über die ganze Summe auf, zahlen darauf nur Zinsen und besparen parallel den Bausparvertrag, der bei Zuteilung das Vorausdarlehen ablöst; während der Ansparphase zahlen Sie also Zinsen auf die volle Summe, ohne zu tilgen, und bekommen auf das Bausparguthaben fast keine Zinsen, was den Effektivzins der Kombination oft über den eines normalen Annuitätendarlehens hebt. Dazu kommen Abschlussgebühr und das Risiko, dass die Zuteilung später kommt als geplant. Lassen Sie sich den Gesamteffektivzins über die ganze Laufzeit ausrechnen und vergleichen Sie mit einem Annuitätendarlehen mit 15 bis 20 Jahren Bindung; nur bei sehr niedrigem Bauspardarlehenszins und langer Laufzeit gewinnt die Kombination.",
+          "quellen": [
+            "§ 6 PAngV (Gesamteffektivzins)",
+            "Beitrag, Abschnitt Wann lohnt sich Bausparen",
+            "Stiftung Warentest, Kombikredite"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "bausparvertrag",
+        "bewertungszahl",
+        "wohnungsbaupraemie",
+        "arbeitnehmer-sparzulage",
+        "riester-rente",
+        "kuendigungsrecht-489",
+        "anschlussfinanzierung"
+      ]
+    }
+  },
+  {
+    "slug": "kfw-foerderung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die staatliche Förderbank KfW unterstützt Bauen und Sanieren mit zinsverbilligten Krediten, teils mit Tilgungszuschuss, den man nicht zurückzahlt, und mit direkten Zuschüssen; die Gebäudeprogramme gehören zur Bundesförderung für effiziente Gebäude, die laut Beitrag bis 2029 durchfinanziert ist.",
+          "Familien mit Kind und bis 90.000 Euro zu versteuerndem Einkommen plus 10.000 je weiterem Kind erhalten über KfW 300 bis 270.000 Euro für klimafreundliche Neubauten zu 0,01 bis 0,95 Prozent; ohne Einkommensgrenze fördern KfW 297 für Eigenbau und 298 für Erstkauf bis 100.000 Euro, mit Nachhaltigkeitssiegel 150.000 Euro, laut Beitrag seit März 2026 zu 0,6 Prozent für Effizienzhaus 40 und 1,0 Prozent für die neue Stufe 55, fossile Heizungen ausgeschlossen.",
+          "Sanierer bekommen über KfW 261 bis 150.000 Euro Kredit je Wohneinheit mit Tilgungszuschuss von 5 Prozent für Denkmäler bis 20 Prozent für Effizienzhaus 40, mit Boni bis 45 Prozent; Einzelmaßnahmen an Dämmung, Fenstern, Lüftung und Smart Home fördert das BAFA mit 15 Prozent, mit Sanierungsfahrplan 20 Prozent, auf 30.000 bis 60.000 Euro Kosten, Fachplanung mit 50 Prozent.",
+          "Die Heizungsförderung KfW 458 zahlt 30 Prozent Grundförderung plus 20 Prozent Klimageschwindigkeitsbonus für den Tausch alter fossiler Heizungen, 30 Prozent Einkommensbonus unter 40.000 Euro und 5 Prozent Effizienzbonus für gute Wärmepumpen, gedeckelt bei 70 Prozent von 30.000 Euro, also 21.000 Euro, plus 2.500 Euro Emissionsminderungszuschlag; nur für Gebäude, deren Bauantrag mindestens fünf Jahre zurückliegt.",
+          "Kredite beantragen Sie vor Vertragsabschluss über die Hausbank, Zuschüsse im Portal Meine KfW, immer vor Auftragsvergabe und mit einem Energieeffizienz-Experten aus der Liste der dena; nach Maßnahmenbeginn gibt es nichts mehr. KfW 261 lässt sich mit 458 und Landesprogrammen kombinieren, KfW 300 nicht mit 297 oder 298 für dieselbe Wohnung, Doppelförderung derselben Maßnahme ist ausgeschlossen."
+        ],
+        "quellen": [
+          "Richtlinie Bundesförderung für effiziente Gebäude, Fassung 2026",
+          "KfW-Merkblätter 300, 297, 298, 261, 458",
+          "Beitrag KfW Förderung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Hauptprogramme der KfW Förderung 2026",
+          "status": "freigegeben",
+          "frage": "Was bringt mir der KfW-300-Kredit mit 0,29 Prozent konkret gegenüber der Bank mit 3,7 Prozent?",
+          "antwort": "Bei 220.000 Euro über zehn Jahre Zinsbindung rund 7.500 Euro Zinsersparnis im Jahr, über zehn Jahre etwa 65.000 Euro, und eine um gut 600 Euro niedrigere Monatsrate bei gleicher Tilgung; da die KfW-Zinsen nach der Bindung neu verhandelt werden, wählen Sie die längste Bindung von 20 oder 25 Jahren, die das Programm bietet. Der Rest der Finanzierung läuft über die Hausbank, die den KfW-Antrag stellt und die Grundschuld hält; manche Banken berechnen dafür Aufschläge auf ihren Teil, vergleichen Sie also das Gesamtpaket. Voraussetzungen sind Effizienzhaus 40 mit Wärmepumpe oder anderer erneuerbarer Heizung, Nachweis durch einen Energieeffizienz-Experten und Antrag vor Kauf- oder Bauvertrag.",
+          "quellen": [
+            "KfW-Merkblatt 300, Konditionen 2026",
+            "Beitrag, Abschnitt Hauptprogramme"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Heizungsförderung: KfW 458 mit bis zu 70 Prozent Zuschuss",
+          "status": "freigegeben",
+          "frage": "Unsere Ölheizung ist 22 Jahre alt, wir verdienen 38.000 Euro. Wie viel Zuschuss bekommen wir für eine Wärmepumpe?",
+          "antwort": "70 Prozent, den Höchstsatz: 30 Prozent Grundförderung, 20 Prozent Klimageschwindigkeitsbonus für den Austausch der alten Ölheizung und 30 Prozent Einkommensbonus, weil Ihr zu versteuerndes Haushaltseinkommen unter 40.000 Euro liegt, gedeckelt bei 70 Prozent; bei 30.000 Euro förderfähigen Kosten sind das 21.000 Euro, bei einer Wärmepumpe mit natürlichem Kältemittel kommen 2.500 Euro Emissionsminderungszuschlag hinzu, sodass Sie bei 32.000 Euro Gesamtkosten rund 8.500 Euro selbst tragen. Reichen Sie den Antrag im Portal Meine KfW mit dem Angebot des Fachbetriebs und der Bestätigung des Energieeffizienz-Experten ein, bevor Sie den Auftrag erteilen; ein Vertrag mit aufschiebender Bedingung auf die Förderzusage ist erlaubt. Den Rest finanziert der KfW-Ergänzungskredit 358 zinsgünstig bis 120.000 Euro.",
+          "quellen": [
+            "Richtlinie BEG EM, Abschnitt Heizungsförderung",
+            "KfW-Merkblatt 458 und 358"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Antragstellung: So funktioniert die KfW Förderung",
+          "status": "freigegeben",
+          "frage": "Der Handwerker hat schon angefangen, den Antrag habe ich vergessen. Bekomme ich noch Förderung?",
+          "antwort": "Für diese Maßnahme nein, das ist die häufigste und teuerste Panne: Maßgeblich ist das Datum des Lieferungs- oder Leistungsvertrags beziehungsweise der Auftragserteilung, das vor der Antragstellung liegen darf nur, wenn der Vertrag eine aufschiebende oder auflösende Bedingung auf die Förderzusage enthält. Hat der Handwerker ohne solche Klausel begonnen, gilt die Maßnahme als begonnen und ist von KfW und BAFA ausgeschlossen. Retten lässt sich der steuerliche Weg: Energetische Sanierungen am selbst genutzten Haus sind über § 35c EStG mit 20 Prozent der Kosten, verteilt auf drei Jahre, bis 40.000 Euro Steuerermäßigung absetzbar, wenn ein Fachunternehmen die Arbeiten bescheinigt; das ist die Alternative für alle, die keine Förderung beantragt haben.",
+          "quellen": [
+            "Richtlinie BEG, Abschnitt Vorhabenbeginn",
+            "§ 35c EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Programme kombinieren – aber richtig",
+          "status": "freigegeben",
+          "frage": "Kann ich die Heizungsförderung mit der Steuerermäßigung nach § 35c kombinieren?",
+          "antwort": "Nicht für dieselbe Maßnahme, Sie müssen sich je Maßnahme entscheiden: Für die Wärmepumpe entweder den Zuschuss von bis zu 70 Prozent oder 20 Prozent Steuerermäßigung, wobei der Zuschuss fast immer besser ist. Für andere Maßnahmen im selben Haus, etwa neue Fenster ohne BAFA-Antrag, dürfen Sie den Steuerbonus nutzen, solange die Kosten klar getrennt abgerechnet sind. Kombinierbar sind dagegen KfW-Zuschuss und Landesprogramme wie die bayerische oder hessische Heizungsförderung, sofern die Summe 100 Prozent nicht übersteigt und das Land die Kumulierung zulässt, sowie KfW 458 mit dem Ergänzungskredit 358 und mit KfW 261 für eine parallele Komplettsanierung. Dokumentieren Sie jede Rechnung nach Maßnahme, das Finanzamt und die KfW prüfen Doppelförderung.",
+          "quellen": [
+            "§ 35c Abs. 3 EStG",
+            "Richtlinie BEG, Abschnitt Kumulierung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kfw",
+        "beg",
+        "effizienzhaus",
+        "tilgungszuschuss",
+        "heizungsfoerderung",
+        "eigenkapital",
+        "baufinanzierung"
+      ]
+    }
+  },
+  {
+    "slug": "kfw-studienkredit",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der KfW-Studienkredit zahlt Studierenden zwischen 18 und 44 Jahren an deutschen Hochschulen 100 bis 650 Euro im Monat für Lebenshaltungskosten, unabhängig von Einkommen und Vermögen der Eltern, ohne Sicherheiten und ohne Bonitätsprüfung, nur bei laufender Insolvenz abgelehnt; gefördert werden Bachelor, Master, Promotion, Zweit-, Teilzeit- und Fernstudium bis zum zehnten Fachsemester, auch für EU-Bürger nach drei Jahren Aufenthalt.",
+          "Die Förderdauer hängt vom Alter ab: bis 24 Jahre 14 Semester und höchstens 54.600 Euro, 25 bis 34 zehn Semester und 39.000 Euro, 35 bis 44 sechs Semester und 23.400 Euro. Die Rate lässt sich bis zum 15. eines Monats für den Folgemonat ändern oder aussetzen.",
+          "Der Zins ist variabel aus dem Sechs-Monats-Euribor plus kostendeckender Marge und wird zum 1. April und 1. Oktober angepasst, laut Beitrag ab April 2026 6,53 Prozent effektiv; in der Auszahlungsphase werden die Zinsen von der Rate abgezogen, nach dem Leistungsnachweis meist ab dem siebten Semester können sie gestundet werden.",
+          "Nach der letzten Auszahlung folgt eine Karenzphase von 6 bis 23 Monaten nur mit Zinszahlung, dann die Tilgung ab 20 Euro monatlich über höchstens 25 Jahre und bis zum 67. Geburtstag, mit Festzinsoption für bis zu zehn Jahre, jederzeit kostenlosen Sondertilgungen und Stundung in Härtefällen.",
+          "Der Antrag läuft online über die Vertriebspartner Mein Studienkredit oder Deine Studienfinanzierung mit Immatrikulation, Ausweis, Meldeadresse und Videoident; die KfW finanziert das Programm seit 2006 aus eigenen Mitteln. Wegen des Zinses sollten BAföG, Stipendien und Nebenjob vorgehen, der Kredit ist Ergänzung und mit BAföG kombinierbar."
+        ],
+        "quellen": [
+          "KfW-Programm 174, Merkblatt 2026",
+          "§ 489 BGB",
+          "Beitrag KfW-Studienkredit"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch ist die Auszahlung und wie lange wird gefördert?",
+          "status": "freigegeben",
+          "frage": "Wenn ich vier Jahre 650 Euro nehme, wie viel muss ich am Ende zurückzahlen?",
+          "antwort": "Deutlich mehr als die 31.200 Euro Auszahlung: Bei 6,5 Prozent Zins laufen schon während des Studiums rund 4.000 Euro Zinsen auf, in einer Karenzphase von zwölf Monaten weitere 2.300 Euro, und in der Tilgung über zehn Jahre nochmals etwa 12.000 Euro, insgesamt also rund 49.000 Euro Rückzahlung bei einer Rate von etwa 400 Euro; bei 20 Jahren Laufzeit sinkt die Rate auf 260 Euro, die Gesamtsumme steigt aber auf über 60.000 Euro. Deshalb nur nehmen, was wirklich fehlt, die Rate jedes Semester prüfen, während des Studiums die Zinsen aus der Rate zahlen statt stunden, und nach dem Berufsstart mit Sondertilgungen schnell ablösen. BAföG ist mit 10.010 Euro Deckel und null Zinsen die weit bessere Quelle.",
+          "quellen": [
+            "Beitrag, Abschnitt Auszahlung und Förderdauer",
+            "KfW-Tilgungsrechner Studienkredit"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Zinssätze, Konditionen und Kostenbeispiele",
+          "status": "freigegeben",
+          "frage": "Warum ist der KfW-Studienkredit mit 6,5 Prozent teurer als ein Ratenkredit meiner Bank mit 5 Prozent?",
+          "antwort": "Weil die KfW ohne Sicherheiten, ohne Bonitätsprüfung und ohne Bundeszuschuss an Menschen ohne Einkommen verleiht und die Ausfälle über die Marge deckt, während die Bank einen Ratenkredit nur an Verdiener mit Schufa-Prüfung vergibt, was Ihnen als Studierende meist gar nicht offensteht. Der Vorteil des Studienkredits liegt in Flexibilität und Zugang, nicht im Preis: Auszahlung in Raten statt Einmalbetrag, jederzeit änderbar, Rückzahlung erst nach dem Abschluss, Sondertilgung kostenlos. Wer Eltern oder Bürgen mit gutem Einkommen hat, fährt mit einem privaten Darlehen oder einem Rahmenkredit günstiger; Bildungsfonds und die Studienabschlussdarlehen der Studierendenwerke mit 0 bis 2 Prozent sind die dritte Option.",
+          "quellen": [
+            "Beitrag, Abschnitt Zinssätze",
+            "Daka-Darlehen des Studierendenwerks"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Auszahlungsphase: Das solltest du wissen",
+          "status": "freigegeben",
+          "frage": "Zählt der Studienkredit beim BAföG oder bei der Krankenkasse als Einkommen?",
+          "antwort": "Nein, ein Darlehen ist kein Einkommen: Weder das BAföG-Amt noch die studentische Krankenversicherung rechnen die Auszahlungen an, und auch die Familienversicherung bis 25 bleibt erhalten, weil nur Einkünfte über 535 Euro im Monat schaden. Dasselbe gilt für Wohngeld und Kindergeld der Eltern. Die Zinsen des Studienkredits sind steuerlich Werbungskosten für ein Zweitstudium oder Sonderausgaben bis 6.000 Euro beim Erststudium; wer im Erststudium ohne Einkommen ist, kann sie nicht nutzen, im Master mit späterem Verlustvortrag schon. Melden Sie der KfW Studienunterbrechungen, Hochschulwechsel und Exmatrikulation, sonst endet die Auszahlung und die Rückzahlung beginnt früher.",
+          "quellen": [
+            "§ 21 BAföG",
+            "§ 10 SGB V",
+            "§ 9 Abs. 6, § 10 Abs. 1 Nr. 7 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Rückzahlungsphase: Flexibilität und Optionen",
+          "status": "freigegeben",
+          "frage": "Ich bin nach dem Abschluss arbeitslos. Muss ich trotzdem zurückzahlen?",
+          "antwort": "Zunächst nicht die Tilgung: Wählen Sie die Karenzphase von 23 Monaten, in der nur Zinsen fällig sind, bei 30.000 Euro Schulden rund 160 Euro im Monat, oder beantragen Sie bei Bedürftigkeit eine Stundung, bei der die Tilgung ausgesetzt wird und Zinsen weiterlaufen; die KfW prüft Härtefälle einzeln und verlängert die Laufzeit bis 25 Jahre oder bis 67. Als Bürgergeldempfänger können Sie die Zinsen nicht aus dem Regelsatz zahlen, teilen Sie das der KfW mit, sie stundet dann meist auch die Zinsen. Anders als beim BAföG gibt es keine gesetzliche Freistellung bei niedrigem Einkommen und keinen Erlass; die Schuld verjährt nicht. Ein Privatinsolvenzverfahren befreit nach drei Jahren auch von KfW-Schulden.",
+          "quellen": [
+            "Beitrag, Abschnitt Rückzahlung und Stundung",
+            "KfW-Programm 174, Stundungsregeln"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kfw-studienkredit",
+        "karenzphase",
+        "bafoeg",
+        "bafoeg-rueckzahlung",
+        "zinsen",
+        "sondertilgung",
+        "kfw"
+      ]
+    }
+  },
+  {
+    "slug": "kredite",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kredite unterscheiden sich nach Laufzeit, Höhe, Sicherheit, Zweck und Bereitstellung: Der Ratenkredit über 12 bis 84 Monate ist frei verwendbar mit gleichen Raten, der Rahmenkredit ein flexibler Verfügungsrahmen für kleinere Beträge, Autokredit und Baufinanzierung sind zweckgebunden und dank Sicherheit günstiger, der Dispo ist teuer und nur zum Überbrücken.",
+          "Laut Beitrag liegt der durchschnittliche Ratenkreditzins im Mai 2026 bei 6,2 Prozent, die Spanne reicht von 0,68 bis 12 Prozent; bei 10.000 Euro über fünf Jahre kosten 2,5 Prozentpunkte Unterschied rund 1.000 Euro. Maßgeblich ist der Zweidrittelzins, den zwei Drittel der Kunden bekommen, nicht der Schaufensterzins. Bauzinsen liegen bei 3,7 bis 4,2 Prozent, der EZB-Einlagenzins bei 2,0.",
+          "Online beantragen heißt Budget planen mit höchstens 40 Prozent des verfügbaren Einkommens als Rate, Angebote per schufaneutraler Konditionsanfrage vergleichen, Unterlagen einreichen, per Videoident legitimieren und binnen ein bis drei Werktagen die Auszahlung erhalten.",
+          "Das Annuitätendarlehen mit über 70 Prozent Marktanteil bei Baufinanzierungen hat eine konstante Rate aus sinkendem Zins- und steigendem Tilgungsanteil; Risiken sind das Zinsniveau beim Anschluss und lange Laufzeiten bei niedriger Tilgung.",
+          "Sondertilgungen senken Restschuld und Zinsen: Bei Ratenkrediten jederzeit möglich, die Vorfälligkeitsentschädigung ist auf 1 Prozent, im letzten Jahr 0,5 Prozent begrenzt, oft ganz erlassen; bei Baufinanzierungen meist 5 Prozent der Summe im Jahr kostenlos. Schon eine Sondertilgung spart im Beispiel über 700 Euro Zinsen."
+        ],
+        "quellen": [
+          "§§ 488 bis 505 BGB (Verbraucherdarlehen)",
+          "§ 6a PAngV (Zweidrittelzins)",
+          "Deutsche Bundesbank, Zinsstatistik Konsumentenkredite 2026",
+          "Beitrag Kredite"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Welche Kreditarten gibt es? Ein umfassender Überblick",
+          "status": "freigegeben",
+          "frage": "Ich brauche 8.000 Euro für eine neue Küche. Ratenkredit, Rahmenkredit oder Null-Prozent-Finanzierung im Möbelhaus?",
+          "antwort": "Die Null-Prozent-Finanzierung des Händlers, wenn sie wirklich ohne Gebühren, ohne Restschuldversicherung und mit demselben Kaufpreis wie bei Barzahlung angeboten wird; prüfen Sie, ob Sie mit Barzahlung 10 bis 15 Prozent Rabatt bekämen, dann ist der Ratenkredit über 36 Monate zu 5 bis 6 Prozent trotzdem günstiger, weil der Rabatt die Zinsen übersteigt. Der Rahmenkredit zu 7 bis 9 Prozent passt nur, wenn Sie schnell zurückzahlen. Vermeiden Sie in jedem Fall den Dispo mit über 11 Prozent und Restschuldversicherungen, die den Effektivzins verdoppeln können. Bei allen Varianten haben Sie 14 Tage Widerrufsrecht; die Null-Prozent-Finanzierung erscheint wie jeder Kredit in der Schufa.",
+          "quellen": [
+            "§ 491 Abs. 2 Nr. 2, § 495 BGB",
+            "Beitrag, Abschnitt Kreditarten"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die aktuellen Zinssätze für Kredite?",
+          "status": "freigegeben",
+          "frage": "Der Vergleich zeigt 0,68 Prozent, die Bank bietet mir 7,9 Prozent. Warum?",
+          "antwort": "Weil der Schaufensterzins nur für beste Bonität, kleine Summen und kurze Laufzeiten gilt und bonitätsabhängige Zinsen nach Ihrem Schufa-Score, Einkommen, Beschäftigung und bestehenden Verpflichtungen gestaffelt werden; verbindlich ist nur der Zweidrittelzins im repräsentativen Beispiel, den mindestens zwei Drittel der Kunden bekommen, meist 5 bis 7 Prozent. Mit 7,9 Prozent liegen Sie im oberen Drittel, was auf einen mittleren Score oder befristeten Vertrag deutet. Holen Sie über schufaneutrale Konditionsanfragen drei bis vier Angebote ein, bevorzugen Sie Banken mit bonitätsunabhängigem Festzins, und prüfen Sie Ihre Schufa-Auskunft auf Fehler; ein zweiter Kreditnehmer mit gutem Einkommen senkt den Zins oft um zwei Prozentpunkte.",
+          "quellen": [
+            "§ 6a PAngV",
+            "Beitrag, Abschnitt Zinssätze"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie beantrage ich einen Kredit online? Der digitale Weg",
+          "status": "freigegeben",
+          "frage": "Verschlechtern mehrere Kreditanfragen meinen Schufa-Score?",
+          "antwort": "Nur, wenn die Bank eine Kreditanfrage statt einer Konditionsanfrage meldet: Die Konditionsanfrage ist ein reines Informationsmerkmal, das andere Banken nicht sehen und das den Score nicht berührt, die Kreditanfrage bleibt zehn Tage für andere sichtbar und kann bei Häufung als Warnsignal gewertet werden. Seriöse Vergleichsportale und Direktbanken stellen Konditionsanfragen, Filialbanken stellen manchmal versehentlich Kreditanfragen; sagen Sie ausdrücklich, dass Sie nur Konditionen wünschen. Der abgeschlossene Kredit selbst wird gemeldet und senkt den Score leicht, pünktliche Raten heben ihn wieder. Ihre kostenlose Datenkopie nach Artikel 15 DSGVO zeigt, welche Anfragen gespeichert sind.",
+          "quellen": [
+            "Schufa, Merkmalsbeschreibung Konditions- und Kreditanfrage",
+            "Art. 15 DSGVO"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie funktionieren Sondertilgungen bei Krediten?",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, einen Ratenkredit mit 9 Prozent aus 2023 jetzt umzuschulden?",
+          "antwort": "Sehr wahrscheinlich ja: Bei 15.000 Euro Restschuld und 36 Monaten Restlaufzeit sparen Sie beim Wechsel auf 5,5 Prozent rund 850 Euro Zinsen, abzüglich höchstens 1 Prozent Vorfälligkeitsentschädigung, also 150 Euro; viele Banken verzichten sogar darauf. Fragen Sie den neuen Anbieter nach einer Umschuldung, er löst den alten Kredit direkt ab, das Ablösedatum nennt Ihnen die alte Bank mit dem exakten Betrag. Prüfen Sie, ob im alten Vertrag eine Restschuldversicherung steckt, deren anteilige Beiträge Sie zurückfordern können. Ein Umschuldungskredit erscheint als neuer Vertrag in der Schufa; halten Sie die Laufzeit gleich oder kürzer, sonst zahlen Sie trotz niedrigerem Zins am Ende mehr.",
+          "quellen": [
+            "§ 500 Abs. 2, § 502 BGB",
+            "Beitrag, Abschnitt Sondertilgungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kredit",
+        "zweidrittelzins",
+        "rahmenkredit",
+        "schufa-neutral",
+        "verbraucherdarlehen",
+        "annuitaetendarlehen",
+        "sondertilgung",
+        "vorfaelligkeitsentschaedigung",
+        "dispokredit"
+      ]
+    }
+  },
+  {
+    "slug": "kreditkarte",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kreditkarten gibt es in vier Bauarten: Charge-Karten sammeln Umsätze und buchen monatlich ab, ohne Zinsen bei fristgerechtem Ausgleich; Revolving-Karten erlauben Ratenzahlung zu 13 bis 25 Prozent Zinsen, im Schnitt 18,6 Prozent; Debitkarten buchen sofort vom Girokonto ab; Prepaid-Karten laufen auf Guthaben ohne Schufa-Prüfung. Nur echte Kreditkarten mit Rahmen taugen für Hotel- und Mietwagenkautionen.",
+          "Die Kostenspanne reicht bis 788 Euro im Jahr: Jahresgebühren von null bis über 700 Euro, Sollzinsen nur bei Teilzahlung, Fremdwährungsaufschläge von 1 bis 3 Prozent und Bargeldgebühren von 2 bis 5 Prozent plus Automatenentgelt. Versteckte Falle ist die bei vielen Gratiskarten voreingestellte Teilzahlung, die sofort auf 100 Prozent Rückzahlung umgestellt werden sollte.",
+          "Kostenlos und laut Beitrag Testsieger im Juni 2026 ist die Hanseatic GenialCard ohne Auslandsgebühren, aber 3,95 Euro je Abhebung in Deutschland; dauerhaft gebührenfrei sind auch Bank Norwegian Visa mit Reiseschutz für vier Personen, TF Mastercard Gold und Easybank Visa mit weltweit kostenlosem Bezahlen.",
+          "Laut Beitrag gilt seit März 2026 der neue Schufa-Score mit zwölf offengelegten Kriterien statt über 250 Merkmalen, Skala 642 akzeptabel, 709 gut, 776 hervorragend; das Alter der ältesten Kreditkarte bringt bis 81 Punkte, des ältesten Bankvertrags bis 69, lange und pünktlich bediente Karten zahlen sich also aus.",
+          "Voraussetzungen sind 18 Jahre, Wohnsitz in Deutschland und bei echten Karten eine Bonitätsprüfung, der Antrag dauert 10 bis 15 Minuten, die Karte kommt in 5 bis 10 Werktagen; Extras sind Apple Pay und Google Pay, Reiseversicherungen, Bonusprogramme wie Payback American Express und die Haftungsgrenze von höchstens 50 Euro bei Missbrauch nach Sperrung über 116 116."
+        ],
+        "quellen": [
+          "§ 675v BGB (Haftung bei Kartenmissbrauch)",
+          "§ 675d BGB, Zahlungsdiensterichtlinie PSD2",
+          "Stiftung Warentest, Kreditkarten 2026",
+          "Beitrag Kreditkarte"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind Kreditkarten und wie funktionieren sie?",
+          "status": "freigegeben",
+          "frage": "Meine Bank hat mir statt der Kreditkarte eine Visa-Debitkarte gegeben. Reicht die für den Mietwagen im Urlaub?",
+          "antwort": "Oft nicht: Viele Autovermieter, vor allem in den USA, Italien und Spanien, verlangen eine echte Kreditkarte mit Kreditrahmen für die Kaution von 500 bis 2.000 Euro, weil sie den Betrag nur blockieren, nicht abbuchen wollen; bei Debitkarten wird das Geld sofort vom Konto abgezogen oder die Karte abgelehnt, ebenso in manchen Hotels. Erkennen lässt sich die Debitkarte am Aufdruck „Debit“ auf der Vorderseite. Beantragen Sie für Reisen zusätzlich eine kostenlose echte Kreditkarte ohne Fremdwährungsgebühr, etwa GenialCard oder Bank Norwegian, mindestens zwei Wochen vor Abreise, und prüfen Sie beim Vermieter vorab die Kartenbedingungen. Im Alltag in Deutschland ist die Debitkarte dagegen völlig ausreichend und wird fast überall akzeptiert.",
+          "quellen": [
+            "Beitrag, Abschnitt Kartentypen",
+            "Mietbedingungen der Autovermieter"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Kosten verschiedener Kreditkartentypen?",
+          "status": "freigegeben",
+          "frage": "Soll ich am Geldautomaten im Ausland in Euro oder in Landeswährung abrechnen lassen?",
+          "antwort": "Immer in Landeswährung: Wählen Sie Euro, rechnet der Automatenbetreiber mit seinem eigenen Kurs um, sogenannte dynamische Währungsumrechnung, mit Aufschlägen von 3 bis 10 Prozent, während Ihre Karte in Landeswährung zum Visa- oder Mastercard-Kurs plus höchstens dem Fremdwährungsentgelt Ihrer Bank abrechnet, bei guten Karten null. Dasselbe gilt an der Ladenkasse. Dazu kommen Automatengebühren von 2 bis 5 Euro, die die Bank je nach Tarif erstattet; heben Sie deshalb seltener größere Beträge ab und zahlen Sie möglichst mit Karte. Ein Blick auf die Abrechnung nach der Reise zeigt, ob der Kurs stimmt; die Referenzkurse veröffentlichen Visa und Mastercard online.",
+          "quellen": [
+            "Verordnung (EU) 2019/518 (grenzüberschreitende Zahlungen)",
+            "Beitrag, Abschnitt Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie wirkt sich die neue SCHUFA-Bewertung auf Kreditkarten aus?",
+          "status": "freigegeben",
+          "frage": "Verbessert es meinen Schufa-Score, mehrere Kreditkarten zu haben?",
+          "antwort": "Nein, eher das Gegenteil: Der neue Score belohnt das Alter der ältesten Karte und Bankverbindung, nicht die Zahl, und viele Karten mit hohen Rahmen zählen als verfügbare Verschuldung; zwei bis drei langjährige, pünktlich bediente Karten sind ideal, ständiges Wechseln wegen Prämien senkt das Durchschnittsalter. Kündigen Sie deshalb ungenutzte alte Karten nicht vorschnell, wenn sie gebührenfrei sind. Schädlich sind Zahlungsstörungen, Mahnverfahren und viele Kreditanfragen; hilfreich sind stabile Adresse, langjähriges Girokonto und die vollständige Rückzahlung der Kartenumsätze. Ihre kostenlose Datenkopie und der Basisscore sind einmal jährlich gratis, das neue Verfahren zeigt laut Beitrag auch, welches Kriterium wie viele Punkte bringt.",
+          "quellen": [
+            "Beitrag, Abschnitt Schufa-Bewertung",
+            "Art. 15 DSGVO"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Welche Zusatzleistungen bieten moderne Kreditkarten?",
+          "status": "freigegeben",
+          "frage": "Auf meiner Abrechnung sind 400 Euro, die ich nicht ausgegeben habe. Was tun?",
+          "antwort": "Sofort die Karte über 116 116 oder die App sperren, den Umsatz bei der Bank reklamieren und Anzeige erstatten: Bei Zahlungen, die Sie nicht autorisiert haben, muss die Bank den Betrag unverzüglich, spätestens am nächsten Geschäftstag, erstatten, Ihre Haftung ist auf 50 Euro begrenzt und entfällt ganz, wenn die Karte ohne starke Kundenauthentifizierung belastet wurde oder Sie nicht grob fahrlässig waren; grob fahrlässig wäre etwa, PIN und Karte zusammen aufzubewahren oder Daten nach einer Phishing-Mail einzugeben. Die Bank muss beweisen, dass Sie autorisiert haben, nicht Sie das Gegenteil. Bei Streit mit einem Händler über gelieferte Ware hilft das Chargeback-Verfahren über die Bank binnen 120 Tagen.",
+          "quellen": [
+            "§ 675u, § 675v, § 675w BGB",
+            "Beitrag, Abschnitt Sicherheitsfeatures"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kreditkarte",
+        "fremdwaehrungsgebuehr",
+        "schufa-score",
+        "schufa",
+        "girokonto",
+        "dispokredit"
+      ]
+    }
+  },
+  {
+    "slug": "girokonto",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Das Girokonto wickelt Gehalt, Überweisungen, Lastschriften und Kartenzahlungen ab und öffnet den Zugang zu Kreditkarte, Kredit und Sparprodukten; jede Bank muss auf Antrag ein Basiskonto eröffnen, auch bei negativer Schufa oder ohne festen Wohnsitz. Direktbanken werden günstiger, Sparkassen und Volksbanken teurer.",
+          "Kostenlos sind laut Beitrag rund 20 Konten ohne und 14 mit Bedingungen: ING ab 1.000 Euro Geldeingang, unter 28 Jahren ohne, DKB ab 700 Euro, C24 Smart ohne Bedingung und mit 0,5 Prozent Zinsen bis 50.000 Euro, Norisbank ab 500 Euro; Premiumkonten kosten ab 11,90 Euro im Monat. Der Wechsel von der Regionalbank zur Direktbank spart im Schnitt 211 Euro im Jahr.",
+          "Neben der Kontoführung kosten Dispozinsen von im Schnitt 11,31 Prozent, geduldete Überziehung 13,04 Prozent, teils Debitkarten, Bargeldabhebungen, Papierauszüge und Fremdwährungen; günstigste Dispos bieten C24 mit 7,49, DKB mit 7,91 und Consorsbank mit 8,15 Prozent, bei längerer Überziehung ist ein Ratenkredit zu 8,5 Prozent günstiger.",
+          "Digitale Standards sind Apple Pay und Google Pay, Fotoüberweisung, Ausgabenanalyse, Unterkonten und Echtzeitüberweisungen in unter zehn Sekunden rund um die Uhr, die seit 2025 nicht mehr kosten dürfen als normale SEPA-Überweisungen, welche einen Werktag brauchen. SEPA-Lastschriften können acht Wochen zurückgebucht werden.",
+          "Guthaben sind bis 100.000 Euro gesichert, nach Hausverkauf, Scheidung oder Renteneintritt sechs Monate bis 500.000 Euro, bei Privatbanken freiwillig bis 3 Millionen. Wählen Sie nach Kosten, Bargeldversorgung über Cashgroup oder weltweite Abhebung, App-Qualität, Service und Extras; 8 Euro Monatsgebühr sind über 20 Jahre fast 2.000 Euro."
+        ],
+        "quellen": [
+          "Zahlungskontengesetz, §§ 31 ff. (Basiskonto)",
+          "Verordnung (EU) 2024/886 (Echtzeitüberweisungen)",
+          "§ 675x BGB (Lastschrift-Erstattung)",
+          "Beitrag Girokonto"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Kostenlose Girokonten: Bedingungen verstehen",
+          "status": "freigegeben",
+          "frage": "Ich bin Rentnerin mit 950 Euro Rente. Bekomme ich ein kostenloses Konto mit Geldeingangsbedingung?",
+          "antwort": "Bei der ING nicht, dort braucht es 1.000 Euro monatlich, aber bei der DKB mit 700 Euro Geldeingang, bei C24 ohne jede Bedingung, bei der Norisbank ab 500 Euro und bei Comdirect mit drei Kartenzahlungen im Monat; die Rente zählt als Geldeingang wie ein Gehalt. Alternativ bleiben Sie bei der Hausbank und fragen nach einem Rentner- oder Onlinekonto ohne Papierauszüge, das oft günstiger ist als das Standardmodell. Beim Wechsel hilft der gesetzliche Kontowechselservice: Die neue Bank holt binnen zwölf Geschäftstagen alle Daueraufträge und Lastschriften und informiert die Rentenversicherung, Sie müssen nur den Auftrag unterschreiben und das alte Konto ein paar Wochen parallel laufen lassen.",
+          "quellen": [
+            "§§ 20 bis 26 ZKG (Kontowechselhilfe)",
+            "Beitrag, Abschnitt Kostenlose Girokonten"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Dispozinsen: Die teuerste Kreditform",
+          "status": "freigegeben",
+          "frage": "Ich stecke seit Monaten mit 3.000 Euro im Dispo. Wie komme ich da raus?",
+          "antwort": "Schulden Sie in einen Ratenkredit um: 3.000 Euro zu 11,3 Prozent Dispo kosten 340 Euro Zinsen im Jahr, ein Ratenkredit zu 6 Prozent über 24 Monate rund 190 Euro insgesamt bei 133 Euro Rate, und der feste Tilgungsplan beendet das Dauerminus; Direktbanken bieten dafür Kleinkredite ab 1.000 Euro, manche mit Dispoablösung in einem Schritt. Bitten Sie parallel die Bank, den Dispo nach der Ablösung auf ein Monatsgehalt zu kürzen, damit er wieder zum Überbrücken taugt, und legen Sie den Notgroschen von drei Gehältern aufs Tagesgeld auf. Prüfen Sie, wo das Minus herkommt, eine Ausgabenanalyse in der App zeigt es; meist reichen zwei bis drei gestrichene Abos. Bei über 12 Prozent Dispozins lohnt zudem der Bankwechsel.",
+          "quellen": [
+            "Beitrag, Abschnitt Dispozinsen",
+            "§ 504a BGB (Beratungspflicht bei dauerhafter Überziehung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "SEPA-Überweisungen und Echtzeittransfers",
+          "status": "freigegeben",
+          "frage": "Ich habe versehentlich 500 Euro an eine falsche IBAN überwiesen. Bekomme ich das Geld zurück?",
+          "antwort": "Nicht automatisch, denn eine ausgeführte Überweisung ist unwiderruflich, bei Echtzeitüberweisungen binnen Sekunden; seit Oktober 2025 müssen Banken aber vor jeder Überweisung prüfen, ob Name und IBAN des Empfängers zusammenpassen, und Sie warnen, was Zahlendreher meist verhindert. Ist das Geld weg, beauftragen Sie Ihre Bank sofort mit einer Rückrufanfrage; die Empfängerbank fragt den Kontoinhaber, der das Geld zurückgeben muss, weil er es ohne Rechtsgrund erhalten hat, und viele tun das. Weigert er sich, gibt die Bank Ihnen Name und Adresse zur Klage heraus. Bei Betrug durch gefälschte Rechnungen ist zusätzlich Anzeige nötig; die Bank haftet nur, wenn sie trotz Warnung falsch ausgeführt hat.",
+          "quellen": [
+            "§ 675p BGB (Unwiderruflichkeit)",
+            "§ 812 BGB",
+            "Verordnung (EU) 2024/886, Empfängerüberprüfung"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Das richtige Girokonto für Sie finden",
+          "status": "freigegeben",
+          "frage": "Meine Bank hat ohne mein Zutun die Gebühren erhöht. Muss ich das akzeptieren?",
+          "antwort": "Nein, seit dem Urteil des Bundesgerichtshofs von 2021 sind Gebührenänderungen nur mit Ihrer ausdrücklichen Zustimmung wirksam, Schweigen zählt nicht mehr; ohne Zustimmung gilt der alte Preis, und zu Unrecht abgebuchte Erhöhungen können Sie zurückfordern, für die Jahre ab 2018 mit Verjährungsprüfung. Verweigern Sie die Zustimmung, darf die Bank das Konto mit zwei Monaten Frist kündigen, was viele bei Gebührenerhöhungen tun; dann bleibt der Wechsel, der mit dem Kontowechselservice unkompliziert ist. Vergleichen Sie vorher, bei rund 20 kostenlosen Konten am Markt zahlt kaum jemand 8 bis 12 Euro im Monat zu Recht. Ein Basiskonto muss Ihnen jede Bank auch nach einer Kündigung eröffnen.",
+          "quellen": [
+            "BGH XI ZR 26/20",
+            "§ 675g BGB",
+            "Beitrag, Abschnitt Das richtige Girokonto"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "girokonto",
+        "basiskonto",
+        "dispokredit",
+        "echtzeitueberweisung",
+        "lastschrift",
+        "einlagensicherung",
+        "kreditkarte"
+      ]
+    }
+  }
+]
