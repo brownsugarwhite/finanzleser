@@ -543,7 +543,14 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   return (
     <FadenContext.Provider value={wert}>
       {children}
-      <div className={"toast" + (toastText ? " zeigt" : "")} role="status" aria-live="polite">{toastText}</div>
+      {/* Hinweis-Streifen im Zeitungssatz: pulsierender Punkt, Kicker, Text — und eine
+          Zeitlinie, die abläuft, damit man sieht, wie lange die Meldung noch steht. */}
+      <div className={"toast" + (toastText ? " zeigt" : "")} role="status" aria-live="polite">
+        <i className="toast__punkt" aria-hidden="true" />
+        <span className="toast__kicker" aria-hidden="true">Eilmeldung</span>
+        <span className="toast__text">{toastText}</span>
+        <i className="toast__zeit" aria-hidden="true" key={toastText} />
+      </div>
     </FadenContext.Provider>
   );
 }

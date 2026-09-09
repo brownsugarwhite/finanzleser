@@ -138,7 +138,11 @@ export default function Eingabe() {
         <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert || beschaeftigt ? " hat-text" : "")}>
           <label className="sr" htmlFor="frage">Fragen Sie Leo oder springen Sie im Bestand</label>
           <input id="frage" type="text" placeholder={beschaeftigt ? "Leo antwortet …" : "Was kann ich für Sie tun?"} autoComplete="off" value={wert} onChange={(e) => { setWert(e.target.value); setOffen(true); setAktiv(-1); }} onFocus={() => setOffen(true)} onKeyDown={taste} aria-autocomplete="list" aria-expanded={zeigeLeiste} />
-          <button type="submit" className="senden">{beschaeftigt ? "Stopp" : "Fragen"}</button>
+          <button type="submit" className="senden" aria-label={beschaeftigt ? "Antwort stoppen" : "Leo fragen"} title={beschaeftigt ? "Stopp" : "Fragen"}>
+            {beschaeftigt
+              ? <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5" /></svg>
+              : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m0 0-5.5-5.5M18 12l-5.5 5.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+          </button>
         </form>
       </div>
       {chips.length > 0 && (
