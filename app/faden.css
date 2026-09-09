@@ -181,6 +181,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    wann das neue Kapitel im DOM steht. Verlauf, Anzeigen und das Fadenende bleiben stehen. */
 .faden-shell .strom--laedt > *:not(.kapitel--skelett):not(.kapitel--alt):not(.einschub):not(#strom-ende) { display: none; }
 .faden-shell .kapitel__schnappschuss { opacity: .92; }
+/* Die Insel-Hülle darf das Layout nicht anfassen — sie ist nur ein Marker (Insel.tsx). */
+.faden-shell .insel { display: contents; }
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
 .faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }
 .faden-shell .wort { display: grid; gap: 4px; }

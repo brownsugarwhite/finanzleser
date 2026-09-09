@@ -16,21 +16,32 @@
  *     Seite bis zur RSC-Antwort das einzige `#kapitel-live` ist, an dem der Provider
  *     erkennt, wann das neue Kapitel steht.
  */
-import { Fragment, useMemo, type ReactNode } from "react";
+import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
 import { saeubern } from "@/lib/faden/schnappschuss";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
 import SkelettKapitel from "./SkelettKapitel";
+import InselnBeleben from "./kette/InselnBeleben";
 
 function Schnappschuss({ html, id }: { html: string; id: string }) {
   const rein = useMemo(() => saeubern(html, id), [html, id]);
+  const [wurzel, setWurzel] = useState<HTMLDivElement | null>(null);
   // 🚨 KEIN `inert`. Das machte jedes aufgeklappte Kapitel tot — auch die Ratgeberkarten
   // unter „Heute". Der Prototyp kennt kein inert; Links im eingefrorenen Kapitel fängt
   // derselbe Klick-Abfänger ab wie überall (FadenProvider) und navigiert normal.
-  // Knöpfe bleiben wirkungslos, weil der Schnappschuss reines HTML ohne React ist.
-  return <div className="kapitel__schnappschuss" dangerouslySetInnerHTML={{ __html: rein }} />;
+  //
+  // Text und Links braucht es dafür nur als HTML. Alles Anfassbare — Rechner, Checkliste,
+  // Vergleich, Dokumente, Statistik-Bedienung, Leos Chips — hängt InselnBeleben als echte
+  // React-Komponenten wieder ein (components/faden/kette/Insel.tsx). Weil der
+  // Schnappschuss samt Markern in der Sitzung liegt, gilt das auch nach einem Neuladen.
+  return (
+    <>
+      <div className="kapitel__schnappschuss" ref={setWurzel} dangerouslySetInnerHTML={{ __html: rein }} />
+      <InselnBeleben wurzel={wurzel} />
+    </>
+  );
 }
 
 export default function Strom({ children }: { children: ReactNode }) {

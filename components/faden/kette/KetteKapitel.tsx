@@ -17,6 +17,7 @@ import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import InhaltAktiv from "./InhaltAktiv";
 import Einschub from "@/components/faden/Einschub";
 import StatistikKarte from "@/components/statistik/StatistikKarte";
+import Insel from "./Insel";
 import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
@@ -50,8 +51,8 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
-      {a.statistiken.map((st, j) => <StatistikKarte key={j} st={st} />)}
-      {a.fragen.length > 0 && <Weiterlesen fragen={a.fragen} />}
+      {a.statistiken.map((st, j) => <Insel key={j} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>)}
+      {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
     </section>
   );
 }

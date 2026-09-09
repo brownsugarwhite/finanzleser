@@ -29,7 +29,17 @@ export function saeubern(html: string, id: string): string {
   if (typeof document === "undefined") return html;
   const t = document.createElement("template");
   t.innerHTML = html;
-  t.content.querySelectorAll("script, iframe, video, audio, canvas").forEach((e) => e.remove());
+  // Skripte raus — außer den JSON-Beilagen der Inseln (die führen nichts aus und werden
+  // beim Aufklappen gebraucht, siehe components/faden/kette/Insel.tsx).
+  t.content.querySelectorAll("script:not([data-insel-werte]), iframe, video, audio, canvas").forEach((e) => e.remove());
+  // Inseln leeren: Was React beim Aufklappen ohnehin neu einhängt, muss nicht als totes
+  // Abbild mitgeschleppt werden — das hielte den Schnappschuss unnötig groß und zeigte
+  // vor dem Einhängen einen Rechner, den man nicht bedienen kann.
+  t.content.querySelectorAll("[data-insel]").forEach((el) => {
+    const werte = el.querySelector("script[data-insel-werte]");
+    el.innerHTML = "";
+    if (werte) el.appendChild(werte);
+  });
   t.content.querySelectorAll("[data-leo-alt] .tippt, [data-leo-alt] .cursor, [data-leo-alt] .leo-chips, [data-leo-alt] .werkzeuge").forEach((e) => e.remove());
   t.content.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));
   t.content.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
