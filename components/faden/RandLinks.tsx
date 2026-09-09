@@ -12,6 +12,7 @@ import { kopfHoehe } from "@/lib/faden/scrollen";
 import { useAbschnittAktiv, type TocZeile } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
+import Leseserie from "./Leseserie";
 import Einschub from "./Einschub";
 
 export function zuAbschnitt(id: string) {
@@ -86,6 +87,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
               <span className="kicker kicker--gruen">Leos Wochenbrief</span>
               <WochenbriefForm klein />
             </div>
+            <Leseserie />
           </div>
           <div className="rand__fuss"><Einschub format="halfpage" nr={0} /></div>
         </div>

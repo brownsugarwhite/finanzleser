@@ -19,6 +19,7 @@ import Fussnote from "./Fussnote";
 import Menue from "./kopf/Menue";
 import BegriffMenue from "./glossar/BegriffMenue";
 import Lesestelle from "./Lesestelle";
+import GlossarFaden from "./glossar/GlossarFaden";
 import TeilenDialog from "./TeilenDialog";
 import Kulissen from "./Kulissen";
 import MobilAnker from "./MobilAnker";
@@ -60,6 +61,7 @@ export default function FadenShell({ children, nav, preload, level }: { children
         </main>
         <Fussnote />
         <BegriffMenue />
+        <GlossarFaden />
         <Lesestelle />
         <TeilenDialog />
         <Kulissen />

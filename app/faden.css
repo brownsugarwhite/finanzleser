@@ -239,9 +239,17 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
 .faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
 .faden-shell .verlauf { max-height: 46vh; overflow: auto; scrollbar-width: thin; padding-right: 2px; }
-.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+/* Die Überschrift einer Randspalte steht wie ein Zeitungskopf: Versalien über einer
+   Doppellinie. */
+.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.faden-shell .rand li button { width: 100%; text-align: left; border: 0; background: none; padding: 4px 0; color: var(--muted); font-size: 13.5px; display: flex; gap: 8px; line-height: 1.35; }
+.faden-shell .rand li button { width: 100%; text-align: left; border: 0; background: none; padding: 6px 0 7px; color: var(--muted); font: 400 13.5px/1.35 var(--serif); display: flex; gap: 8px; position: relative; }
+/* Der Strich unter jedem Eintrag: gelesene Kapitel voll, das aktive halb, die übrigen leer. */
+.faden-shell #kapitelListe > li > button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: rgba(51,74,39,.12); }
+.faden-shell #kapitelListe > li > button::before { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--green); transform: scaleX(1); transform-origin: left; z-index: 1; }
+.faden-shell #kapitelListe > li > button.aktiv::before { transform: scaleX(.46); }
+.faden-shell #kapitelListe > li:last-child > button:not(.aktiv)::before { transform: scaleX(0); }
 .faden-shell .rand li button.aktiv { color: var(--ink); font-weight: 700; }
 .faden-shell .rand li button::before { content: "○"; flex: none; } .faden-shell .rand li button.aktiv::before { content: "●"; }
 .faden-shell .rand__leer { color: var(--muted); font-style: italic; }
@@ -1063,3 +1071,39 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .wb-consent a { color: var(--green-ink); text-decoration: underline; }
 .faden-shell .wb-form--klein .wb-consent { font-size: 11.5px; }
 .faden-shell .wb-eingetragen { margin: 0; }
+
+/* =====================================================================================
+   Randspalten im Zeitungssatz, Glossar als Zettelstapel, der Faden dazwischen
+   (Design A v2, Screens 4 und 6)
+   ===================================================================================== */
+
+/* ---------- Leseserie: sieben Tage, der heutige pulst ---------- */
+.faden-shell .leseserie__reihe { display: flex; gap: 6px; margin: 8px 0 4px; }
+.faden-shell .leseserie__tag { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font: 700 9px/1 var(--sans); color: var(--muted); font-style: normal; flex: none; }
+.faden-shell .leseserie__tag.an { background: var(--green); border-color: var(--green); color: #fff; }
+.faden-shell .leseserie__tag.heute { animation: fl-puls 1.8s ease-in-out infinite; }
+
+/* ---------- Glossar als Zettelstapel ----------
+   Jeder Begriff ist ein Zettel auf hellerem Papier, leicht verdreht, mit einem Knoten
+   links — der Punkt, an dem der Faden ankommt. Die Drehung wechselt die Richtung, damit
+   der Stapel nicht in eine Schräge kippt. */
+.faden-shell .glossar-rail .eintrag-g { position: relative; background: var(--white); border: 1px solid rgba(51,74,39,.22); box-shadow: 1px 2px 0 rgba(51,74,39,.08); padding: 8px 10px 8px 16px; margin-left: 5px; transform: rotate(var(--rot, 0deg)); transition: transform .3s var(--kurve); }
+.faden-shell .glossar-rail .eintrag-g:nth-child(3n+1) { --rot: .7deg; }
+.faden-shell .glossar-rail .eintrag-g:nth-child(3n+2) { --rot: -.5deg; }
+.faden-shell .glossar-rail .eintrag-g:nth-child(3n) { --rot: .2deg; }
+.faden-shell .glossar-rail .eintrag-g:hover { transform: rotate(0deg); }
+/* Der Knoten links: das Ende des Fadens. */
+.faden-shell .glossar-rail .eintrag-g::before { content: ""; position: absolute; left: -5px; top: 13px; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--paper); }
+/* Der neueste Zettel legt sich auf den Stapel. */
+.faden-shell .glossar-rail .eintrag-g.neu { animation: fl-zettel .7s var(--kurve) both; }
+
+/* ---------- Der Faden vom Wort zum Zettel ---------- */
+.faden-shell .glossar-faden { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 62; overflow: visible; animation: glossar-faden-weg .5s ease 2.1s both; }
+.faden-shell .glossar-faden path { fill: none; stroke: var(--green); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; animation: fl-zeichnen .8s var(--kurve) both; }
+.faden-shell .glossar-faden__knoten { stroke: var(--green); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; }
+.faden-shell .glossar-faden__knoten--start { fill: var(--white); animation: fl-knoten .5s var(--schwung) both; }
+.faden-shell .glossar-faden__knoten--ziel { fill: var(--green); animation: fl-knoten .5s var(--schwung) .7s both; }
+@keyframes glossar-faden-weg { from { opacity: 1; } to { opacity: 0; } }
+/* 🚨 Ohne Bewegung wird der Faden gar nicht erst gezeichnet (GlossarFaden.tsx steigt
+   vorher aus) — hier steht nur die Rücknahme für den Fall, dass er doch im DOM landet. */
+@media (prefers-reduced-motion: reduce) { .faden-shell .glossar-faden { display: none !important; } }

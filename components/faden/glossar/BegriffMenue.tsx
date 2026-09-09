@@ -45,6 +45,10 @@ export default function BegriffMenue() {
       b.classList.add("offen");
       setOffen({ slug, anker: b, daten: null, zeige: "" });
       begriffMerken(slug, false);
+      // Der Faden vom Wort zum Zettel (components/faden/glossar/GlossarFaden.tsx). Über
+      // ein Ereignis statt über den Provider: dort ist der Anker unbekannt, und
+      // `begriffMerken` wird auch aus Zusammenhängen ohne Wort im Text gerufen.
+      document.dispatchEvent(new CustomEvent("faden:begriff-faden", { detail: { slug, anker: b } }));
       begriffHolen(slug).then((d) => setOffen((o) => (o && o.slug === slug && o.anker === b ? { ...o, daten: d } : o)));
     };
     document.addEventListener("click", h, true);
