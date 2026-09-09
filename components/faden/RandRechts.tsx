@@ -1,6 +1,7 @@
 "use client";
 
 import GlossarRail from "./glossar/GlossarRail";
+import KofferRail from "./KofferRail";
 import Einschub from "./Einschub";
 import LeoFragt from "./leo/LeoFragt";
 
@@ -21,6 +22,9 @@ export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: ()
               </div>
             </div>
           </div>
+          {/* Die Aktenkoffer-Karte steht in der Vorlage zwischen Glossar und Anzeige
+              (Zeile 1454) — sie fehlte bisher ganz. */}
+          <KofferRail />
           <div className="rand__fuss"><LeoFragt /><Einschub format="halfpage" nr={1} /></div>
         </div>
       </div>

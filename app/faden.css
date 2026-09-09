@@ -1161,7 +1161,8 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .glossar-rail .eintrag-g:nth-child(3n) { --rot: .2deg; }
 .faden-shell .glossar-rail .eintrag-g:hover { transform: rotate(0deg); }
 /* Der Knoten links: das Ende des Fadens. */
-.faden-shell .glossar-rail .eintrag-g::before { content: ""; position: absolute; left: -5px; top: 13px; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px var(--paper); }
+/* Quelltext Zeile 1443: Papierfüllung mit 1,5-px-Tintenrand, nicht grün gefüllt. */
+.faden-shell .glossar-rail .eintrag-g::before { content: ""; position: absolute; left: -5px; top: 14px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); box-sizing: border-box; }
 /* Der neueste Zettel legt sich auf den Stapel. */
 .faden-shell .glossar-rail .eintrag-g.neu { animation: fl-zettel .7s var(--kurve) both; }
 
@@ -1223,3 +1224,21 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .prose blockquote { margin: 20px 0; padding: 0 0 0 18px; border-left: 3px solid var(--green); font: italic 300 clamp(17px, 1.5vw, 20px)/1.5 var(--serif); color: var(--ink); }
 .faden-shell .prose blockquote p { margin-bottom: .5em; }
 .faden-shell .prose blockquote cite { display: block; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-style: normal; margin-top: 8px; }
+
+/* ---------- Aktenkoffer in der rechten Randspalte (Vorlage Zeile 1454–1458) ---------- */
+.faden-shell .koffer-rail { display: flex; flex-direction: column; gap: 6px; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--ink); background: none; padding: 12px 0 6px; transition: padding-left .3s var(--kurve); }
+.faden-shell .koffer-rail:hover { padding-left: 4px; }
+.faden-shell .koffer-rail__zeile { display: flex; justify-content: space-between; align-items: baseline; width: 100%; }
+.faden-shell .koffer-rail__zahl { font: 900 28px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .koffer-rail__zahl.popt { animation: koffer-popt .35s var(--schwung); }
+@keyframes koffer-popt { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.faden-shell .koffer-rail__text { font: 400 12.5px/1.5 var(--sans); color: var(--muted); }
+.faden-shell .koffer-rail__weg { display: inline-flex; align-items: center; gap: 8px; font: 500 12.5px var(--sans); color: var(--green-ink); }
+.faden-shell .koffer-rail__weg i { display: block; width: 16px; height: 1px; background: currentColor; transition: width .45s var(--kurve); }
+.faden-shell .koffer-rail:hover .koffer-rail__weg i { width: 28px; }
+
+/* ---------- Glossar-Randspalte: Werte aus dem Quelltext (Zeile 1436–1450) ---------- */
+.faden-shell .rand--rechts h2 { color: var(--green-ink); }
+.faden-shell .glossar-rail .eintrag-g > button { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; border: 0; background: none; padding: 10px 12px; text-align: left; }
+.faden-shell .glossar-rail .erkl { font: 400 13px/1.55 var(--sans); color: var(--ink); }
+.faden-shell .glossar-rail .erkl .quelle { display: block; margin-top: 6px; font: italic 300 11.5px/1.4 var(--serif); color: var(--muted); }
