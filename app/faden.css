@@ -824,7 +824,12 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
   .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
   .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
+  /* Waagerechter Lauf statt Umbruch. Damit die Kante nicht hart abschneidet — und der
+     Leser sieht, dass rechts noch etwas kommt — läuft der letzte Zentimeter aus. Die
+     Maske verschwindet, sobald ganz nach rechts gescrollt ist (animation-timeline). */
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .faden-shell .eingabe .chips::-webkit-scrollbar { display: none; }
+  .faden-shell .eingabe .chips .chip { flex: none; }
   .faden-shell .hero-landing { min-height: 0; }
   .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .leo-chips { margin-left: 0; }
   .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
@@ -856,7 +861,6 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .artikel__untertitel { font-size: 26px; }
   .faden-shell .kapitel__kopf { gap: 8px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
   .faden-shell .inhalt__zahl { display: none; }
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
 }
 
 /* ── Belohnung, Serie, kleine Flüge (Port aus dem Prototyp, 01-css.html:248, 629, 697–703) ── */
