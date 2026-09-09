@@ -2,7 +2,7 @@
 
 /**
  * Der Strom: eingefrorene Kapitel (Verlauf) + das lebende Kapitel (die aktuelle Seite).
- * Schnappschüsse sind reines HTML (inert), Kopfzeile mit Nummer, Pfad, Uhrzeit;
+ * Schnappschüsse sind reines HTML, Kopfzeile mit Nummer, Pfad, Uhrzeit;
  * aufklappen zeigt den statischen Inhalt, „erneut öffnen“ navigiert wirklich.
  *
  * Zwei Dinge stehen hier bewusst so:
@@ -26,7 +26,11 @@ import SkelettKapitel from "./SkelettKapitel";
 
 function Schnappschuss({ html, id }: { html: string; id: string }) {
   const rein = useMemo(() => saeubern(html, id), [html, id]);
-  return <div className="kapitel__schnappschuss" inert dangerouslySetInnerHTML={{ __html: rein }} />;
+  // 🚨 KEIN `inert`. Das machte jedes aufgeklappte Kapitel tot — auch die Ratgeberkarten
+  // unter „Heute". Der Prototyp kennt kein inert; Links im eingefrorenen Kapitel fängt
+  // derselbe Klick-Abfänger ab wie überall (FadenProvider) und navigiert normal.
+  // Knöpfe bleiben wirkungslos, weil der Schnappschuss reines HTML ohne React ist.
+  return <div className="kapitel__schnappschuss" dangerouslySetInnerHTML={{ __html: rein }} />;
 }
 
 export default function Strom({ children }: { children: ReactNode }) {

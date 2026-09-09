@@ -163,7 +163,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Skelett beim Navigieren — 1:1 aus dem Prototyp (docs/prototype/src/01-css.html:231).
    Es hängt im Moment des Klicks im Faden, damit der Sprung sofort ein Ziel hat; die
    RSC-Antwort ersetzt es an derselben Stelle, also ohne zweiten Sprung. */
-.faden-shell .kapitel--skelett { min-height: 40vh; }
+/* Das Skelett füllt das Bild: Nur dann ist der Sprung an sein Ende überhaupt möglich,
+   und der spätere Austausch gegen den echten Beitrag wächst nach UNTEN aus dem Bild
+   heraus statt den Text unter den Augen des Lesers zu verschieben. */
+.faden-shell .kapitel--skelett { min-height: calc(100dvh - var(--kopf-h, 64px) - 24px); }
+/* Das neue Kapitel blendet ein, statt hart zu erscheinen. */
+.faden-shell .kapitel--frisch { animation: faden-frisch .45s cubic-bezier(.25,.46,.45,.94) both; }
+@keyframes faden-frisch { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .faden-shell .kapitel--frisch { animation: none; } }
 .faden-shell .skelett { display: grid; gap: 12px; padding: 4px 0 8px; }
 .faden-shell .skelett i { display: block; height: 12px; border-radius: 3px; background: linear-gradient(90deg, var(--rule) 25%, var(--rule-soft) 50%, var(--rule) 75%); background-size: 200% 100%; animation: faden-schimmer 1.3s linear infinite; }
 .faden-shell .skelett i.skelett__bild { height: 120px; width: 40%; }

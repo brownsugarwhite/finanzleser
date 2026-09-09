@@ -181,7 +181,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
         sessionStorage.removeItem(META_KEY);
       } else {
         const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
-        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: "", offen: false })));
+        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false })));
       }
     } catch { /* leer */ }
     try {
@@ -194,10 +194,22 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     } catch { /* leer */ }
   }, []);
 
+  /**
+   * Verlauf in die Sitzung schreiben — MIT dem Schnappschuss-HTML.
+   *
+   * 🚨 Vorher wurde `html` bewusst weggelassen. Nach einem Neuladen stand deshalb in
+   * jedem Kapitel nur „Dieses Kapitel lag vor dem Neuladen im Faden. Erneut öffnen" —
+   * der Faden war nach F5 nicht mehr derselbe. Jetzt kommt das HTML mit; reicht der
+   * Platz nicht (sessionStorage liegt je nach Browser bei 5–10 MB), fallen die ÄLTESTEN
+   * Kapitel zuerst auf die Kopfzeile zurück, das zuletzt gelesene bleibt am längsten
+   * vollständig.
+   */
   useEffect(() => {
-    try {
-      sessionStorage.setItem(META_KEY, JSON.stringify(verlauf.map(({ html, offen, ...m }) => { void html; void offen; return m; })));
-    } catch { /* voll oder gesperrt */ }
+    const ohneOffen = verlauf.map(({ offen, ...m }) => { void offen; return m; });
+    for (let ab = 0; ab <= ohneOffen.length; ab++) {
+      const versuch = ohneOffen.map((m, i) => (i < ab ? { ...m, html: "" } : m));
+      try { sessionStorage.setItem(META_KEY, JSON.stringify(versuch)); return; } catch { /* zu groß → nächstes Kapitel opfern */ }
+    }
   }, [verlauf]);
 
   const toast = useCallback((text: string) => {
@@ -270,10 +282,24 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     // Prototyp `ladeDann`: bei reduzierter Bewegung kein Skelett, dann bleibt die alte
     // Seite stehen, bis die neue da ist.
     if (!reduzierteBewegung()) {
+      // 🚨 Platz am Ende des Fadens SOFORT reservieren, bevor React das alte Kapitel
+      // ausblendet. Sonst schrumpft das Dokument im selben Moment um die ganze Höhe des
+      // gelesenen Beitrags: der Browser kappt die Scrollposition auf das neue Seitenende,
+      // die Randspalten verlieren ihren Klebebereich und rutschen mit hoch, und der
+      // sanfte Sprung wird zum Ruck. Mit eingefrorener Höhe läuft der Sprung als echte
+      // Bewegung von der Lesestelle zum Skelett — und nichts darüber springt.
+      const strom = document.getElementById("strom");
+      if (strom) strom.style.minHeight = Math.round(strom.getBoundingClientRect().height) + "px";
       laedtSeit.current = performance.now();
       setLaedt(true);
       // Sicherung, falls der Routenwechsel ganz ausbleibt (Fehlerseite, abgebrochener Push).
-      setTimeout(() => { if (laedtSeit.current) { laedtSeit.current = 0; setLaedt(false); } }, 8000);
+      setTimeout(() => {
+        if (!laedtSeit.current) return;
+        laedtSeit.current = 0;
+        setLaedt(false);
+        const st = document.getElementById("strom");
+        if (st) st.style.minHeight = "";
+      }, 8000);
     }
     router.push(href, { scroll: false });
   }, [router, lesestelleMerken]);
@@ -322,10 +348,15 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       // landete am Seitenanfang.
       const abschluss = () => {
         const neuLive = document.getElementById("kapitel-live");
-        if (wandert) nochmal(neuLive, "wandert");
+        // Das neue Kapitel blendet sich ein, statt hart zu erscheinen — der Faden läuft
+        // weiter, er wechselt nicht die Seite. „wandert" hat seine eigene Bewegung.
+        nochmal(neuLive, wandert ? "wandert" : "kapitel--frisch");
         const anker = hash ? document.getElementById(hash) : null;
         if (anker) zeigeAnfang(anker, true);
         else zumKapitelScrollen();
+        // Reservierten Platz erst freigeben, wenn der sanfte Sprung durch ist — sonst
+        // schrumpft das Dokument mitten in der Bewegung und der Browser bricht sie ab.
+        setTimeout(() => { const st = document.getElementById("strom"); if (st) st.style.minHeight = ""; }, 700);
       };
       if (!laedtSeit.current) { abschluss(); return; }
       // Das Skelett bleibt mindestens SKELETT_MIN stehen — sonst blitzt es bei einer
