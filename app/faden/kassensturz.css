@@ -1,4 +1,13 @@
 /* =====================================================================================
+   Kassensturz (Vorlage 817–878)
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* =====================================================================================
    kassensturz.css — Finanz-Kassensturz im Faden (Kasten, Fragen als Karten, Ergebnis mit
    Tacho, Ampel und Lückenkarten) und der Teaser unter den Ratgebern.
    Port aus docs/prototype/src/01-css.html (.kasten--ks, .ks__*, .tacho*, Zeilen 94–133,

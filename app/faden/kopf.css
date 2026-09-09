@@ -1,0 +1,107 @@
+/* =====================================================================================
+   EINGEFROREN — Kopf, Register, Nav-Pille, Lesezeichen, Lesefortschritt
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Zeitungskopf über dem progressiven Blur ---------- */
+/* 🚨 Klasse heisst `kopfblur`, NICHT `blur` wie im Prototyp: `blur` ist eine
+   Tailwind-Utility (`.blur { filter: blur(8px) }`). Der Filter landete dadurch auf
+   dem Container — und ein Element mit `filter` erzeugt einen eigenen Backdrop-Root,
+   womit das `backdrop-filter` aller Schichten darin wirkungslos wurde. Der
+   progressive Blur war deshalb unsichtbar. Nie eine Tailwind-Utility als eigenen
+   Klassennamen wiederverwenden. */
+.faden-shell .kopfblur { position: fixed; left: 0; right: 0; top: 0; height: 120px; z-index: 29; pointer-events: none; }
+.faden-shell .kopfblur i { position: absolute; left: 0; right: 0; top: 0; display: block; -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); mask-image: linear-gradient(to bottom, #000 40%, transparent 100%); }
+.faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
+.faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
+.faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
+.faden-shell .kopf__innen { padding: 0 0 0 clamp(16px, 3vw, 40px); }
+.faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
+.faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
+.faden-shell .logo img { height: 26px; width: auto; display: block; }
+.faden-shell .register { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-width: 0; height: 50px; }
+.faden-shell .register__reihe { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; height: 50px; }
+.faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
+.faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; margin: 0 -20px; font: 600 16px/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
+.faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
+.faden-shell .register [data-key="plus"] { color: var(--green); }
+.faden-shell .register .offen { color: var(--pink); }
+.faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
+.faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
+
+/* Funken zwischen den Registereinträgen (components/faden/kopf/Register.tsx).
+   Sie atmen versetzt, damit die Zeile lebt, ohne dass eine gleichgeschaltete Bewegung
+   den Blick zieht — 3,4 s Takt, je Funke 0,5 s später. */
+.faden-shell .reg-spark { display: inline-flex; align-items: center; line-height: 0; animation: fl-atmen 3.4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * .5s); }
+/* 🚨 Der aktive Funke atmet NICHT: `fl-atmen` animiert `transform`, und eine laufende
+   Animation schlägt jede statische Transformation — die Drehung käme sonst nie an. */
+.faden-shell .reg-spark--aktiv { animation: none; transform: rotate(135deg) scale(1.35); transition: transform .6s var(--schwung); }
+.faden-shell .reg-spark--aktiv svg path { fill: var(--pink); }
+
+/* Nav-Pille als Lupe — Portierung aus dem Prototyp (leo-faden.html:296-306).
+   Rechteck (32 px) mit „Lupe": eine weiße Kopie der Reihe, 1,1-fach vergrößert, die
+   gegenläufig mitfährt, sodass die Pille wie ein Vergrößerungsglas über der Reihe liegt.
+   Darüber zwei Linien (2 px und 4 px), die der Pille leicht verzögert folgen.
+   Choreografie in components/faden/kopf/NavPille.tsx. */
+.faden-shell .nav-linie { position: absolute; left: 0; width: 1px; opacity: 0; background: var(--ink); pointer-events: none; z-index: 4; }
+.faden-shell .nav-linie--1 { top: calc(50% - 26px); height: 2px; }
+.faden-shell .nav-linie--3 { top: calc(50% - 22px); height: 4px; }
+.faden-shell .nav-pille { position: absolute; top: 50%; left: 0; height: 32px; width: 1px; opacity: 0; pointer-events: none; z-index: 4; transform: translate(0, -50%); }
+.faden-shell .nav-pille__koerper { position: absolute; inset: 0; overflow: hidden; background: var(--ink); }
+.faden-shell .nav-lupe { position: absolute; inset: 0; transform: scale(1.1); transform-origin: center; }
+.faden-shell .nav-lupe__reihe { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: space-between; color: #fff; pointer-events: none; transform: translate(0, -50%); }
+/* 🚨 Farbe explizit, nicht geerbt: die globale Regel `li, p, span { color: var(--color-text-medium) }` aus dem Alt-CSS schlaegt die Vererbung von .nav-lupe__reihe — die Schrift in der Pille wurde dadurch grau statt weiss. */
+.faden-shell .nav-lupe__reihe span { font: 600 16px/1 var(--serif); white-space: nowrap; color: #fff; }
+.faden-shell .nav-lupe__reihe .punkte-zahl { color: rgba(255,255,255,.82); }
+/* Die Spark-Komponente setzt ihre Farbe als fill-Attribut; CSS schlaegt das Attribut,
+   deshalb werden die Funken in der Lupe hier auf Weiss gezogen. */
+.faden-shell .nav-lupe__reihe svg path { fill: #fff; }
+/* 🚨 Auch der aktive (magentafarbene) Funke bleibt in der Lupe weiß — die Lupe ist eine
+   Spiegelung, kein zweiter Zustand. Spezifität muss die Pink-Regel oben schlagen. */
+.faden-shell .nav-lupe__reihe .reg-spark svg path { fill: #fff; }
+@media (max-width: 900px) {
+  .faden-shell .kopf__innen { padding-left: 16px; }
+  .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; }
+  .faden-shell .logo img { height: 21px; }
+  .faden-shell .register { display: none; }
+}
+/* ---------- Lesezeichen: das Band, das rechts aus der Zeitung ragt ----------
+   Zackenkante + Verlaufsband statt der alten Kerbe per clip-path. Höhe 50 px, damit die
+   Marke unter der 64-px-Kopfzeile sitzt und der Blur darunter durchscheint. */
+/* Das Lesezeichen hängt an der Oberkante, nicht in der Mitte der 64-px-Zeile —
+   die Marke soll aus dem Blatt ragen, nicht darin schweben. */
+.faden-shell .kopf__marke { display: flex; align-items: center; gap: 0; height: 50px; align-self: flex-start; margin-left: auto; min-width: 0; }
+.faden-shell .sie-lesen { display: none; font: 400 13px/1.3 var(--sans); color: var(--muted); max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: auto; padding-right: 12px; flex: none; }
+.faden-shell .sie-lesen b { color: var(--ink); font-weight: 600; }
+@media (min-width: 1440px) { .faden-shell .sie-lesen { display: block; } }
+
+/* 🚨 Die Zacken sind ein SVG mit `preserveAspectRatio="none"`; Höhe und Bandhöhe müssen
+   auf den Pixel gleich sein, sonst reißt die Kante sichtbar ab. Der -1 px Versatz
+   schließt die Fuge, die sonst bei krummen Zoomstufen aufblitzt. */
+.faden-shell .lz-zacken { width: 40px; height: 50px; display: block; margin-right: -1px; flex: none; margin-left: auto; --fill-0: var(--green); }
+.faden-shell .sie-lesen + .lz-zacken { margin-left: 0; }
+.faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: linear-gradient(to left, rgba(22,142,3,.8), var(--green)); color: #fff; height: 50px; padding: 0 clamp(10px, 2vw, 25px) 0 1px; flex: none; }
+.faden-shell .lesezeichen button { border: 0; background: none; color: #fff; padding: 0; font-weight: 700; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; justify-content: center; cursor: pointer; border-radius: 15px; transition: background .2s; }
+.faden-shell .lesezeichen button:hover { background: rgba(109,202,28,.3); }
+.faden-shell .lesezeichen .lz-wort { display: none; font: 700 14px/1 var(--sans); padding: 0 12px; height: 36px; }
+@media (min-width: 1120px) { .faden-shell .lesezeichen .lz-wort { display: inline-flex; } }
+.faden-shell .lesezeichen .lz-icon { position: relative; width: 36px; height: 36px; }
+.faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
+/* Magenta statt Papier: die Zahl im Koffer ist die einzige Zahl im Kopf, die sich ändert. */
+.faden-shell .lesezeichen .lz-zahl { position: absolute; top: 1px; right: 1px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--pink); color: #fff; font: 700 10px/16px var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+@media (max-width: 900px) {
+  .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
+  .faden-shell .lesezeichen .lz-wort { display: none; }
+}
+
+/* ---------- Lesefortschritt: Haarlinie an der Unterkante des Kopfs ---------- */
+.faden-shell .lesefortschritt { position: absolute; left: 0; right: 0; top: calc(var(--kopf-h) - 1px); height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left center; opacity: 0; transition: opacity .3s; pointer-events: none; }
+
+/* ── Pfadzeile im Register (Prototyp 01-css.html:303–305), Abschnitt teilen (751), mobile Anker-Anzeige (227–228) ── */
+.faden-shell .register .pfad { position: absolute; right: 0; top: 50%; transform: translateY(-50%); max-width: 200px; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: none; }
+.faden-shell .register .pfad b { color: var(--ink); font-weight: 600; }
+@media (min-width: 1700px) { .faden-shell .register .pfad { display: block; } }

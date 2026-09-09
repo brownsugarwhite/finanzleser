@@ -1,3 +1,12 @@
+/* =====================================================================================
+   Statistik-Formen im Setzkasten
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
 /* Statistiken im Faden (Torte, Säulen, Balken, Legende, Umschalter, Regler). Nur im .faden-shell-Scope. */
 .faden-shell { --stat-1: var(--green); --stat-2: var(--pink); --stat-3: var(--tool-vergleich, #06D496); --stat-4: var(--tool-checkliste, #9953c9); --stat-5: var(--tool-dokumente, #E07A5F); --stat-6: #8FD36F; }
 .faden-shell .kasten--statistik { gap: 10px; }

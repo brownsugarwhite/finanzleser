@@ -1,0 +1,104 @@
+/* =====================================================================================
+   Leo: Sprechblasen, Fragen, Antworten, Sprungleiste
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Sprechblasen (Maße 1:1 aus app/components.css, Live-Chat) ---------- */
+/* 🚨 Die Hülle hält Blase und hinteren Schwanz als GESCHWISTER. Läge der hintere
+   Schwanz in der Blase, könnte ihn kein z-index hinter deren Hintergrund schieben —
+   die Konturlinie am Ansatz bliebe sichtbar. Siehe components/faden/leo/Blase.tsx. */
+.faden-shell .blase-huelle { position: relative; display: inline-block; max-width: 100%; }
+.faden-shell .blase { position: relative; padding: 23px 27px; border-radius: 27px; word-wrap: break-word; overflow-wrap: break-word; }
+.faden-shell .blase > p:last-child { margin-bottom: 0; }
+/* Innerer Kasten, Geometrie wie am RechnerButton (border 2px + outline 1px, Abstand 2px):
+   außen die dünne Kontur der Blase, innen eine dickere Linie in der Kontrastfarbe.
+   Radius = Außenradius minus Einzug, sonst laufen die Ecken nicht parallel. */
+.faden-shell .blase::after { content: ""; position: absolute; inset: 6px; border: 2px solid currentColor; border-radius: 21px; pointer-events: none; z-index: 3; }   /* über dem Schwanz (z-index 2), sonst schneidet der ihn an */
+.faden-shell .blase--frage { background: var(--ink); color: #fff; max-width: 600px; }
+.faden-shell .blase--frage a { color: #fff; text-decoration: underline; }
+.faden-shell .blase--frage::after { color: var(--paper); }   /* heller Kasten auf dunkler Füllung */
+.faden-shell .blase--leo { background: var(--paper); box-shadow: 0 0 0 1px var(--ink); max-width: 660px; z-index: 1; }
+.faden-shell .blase--leo::after { color: var(--ink); }       /* dunkler Kasten auf hellem Grund */
+/* Störung: gleiche Konstruktion, Kontur in Pink — auch am Schwanz (--stoerung). */
+.faden-shell .blase--fehler { box-shadow: 0 0 0 1px var(--pink); }
+.faden-shell .blase--fehler p { color: var(--pink); }
+.faden-shell .blase--fehler::after { color: var(--pink); }
+/* Schwanz: viewBox 22×28, Anzeigegröße 0,957 × viewBox = 21,05 × 26,80.
+   Die ausgezogene Spitze der Kontur ragt links aus dem viewBox heraus — deshalb
+   trägt das eingebettete SVG `overflow: visible` (components/ui/BubbleSpike.tsx). */
+.faden-shell .blase__spike { position: absolute; bottom: -2px; width: 21.05px; height: 26.8px; pointer-events: none; }
+.faden-shell .blase--frage .blase__spike { right: -7.9px; transform: scaleX(-1); color: var(--ink); }
+.faden-shell .blase--leo .blase__spike { left: -7.4px; color: var(--paper); z-index: 2; }
+.faden-shell .blase__spike--unten { left: -7.4px; z-index: 0; fill: var(--paper); stroke: var(--ink); }
+.faden-shell .blase__spike--stoerung { stroke: var(--pink); }
+/* Quellen sitzen wie auf der Live-Seite IN der Blase, abgesetzt durch eine Linie. */
+.faden-shell .blase--leo .quellen { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); }
+.faden-shell .blase--leo .quellen b { display: block; margin-bottom: 2px; font: 600 11px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 900px) {
+  .faden-shell .blase { padding: 15px 18px; border-radius: 20px; }
+  .faden-shell .blase::after { inset: 4px; border-radius: 16px; }
+}
+.faden-shell .quellen { font-size: 12.5px; color: var(--muted); display: grid; gap: 2px; margin-top: 4px; }
+.faden-shell .quellen b { color: var(--ink); font-weight: 600; }
+.faden-shell .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.faden-shell .einwurf { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--green-ink); font-style: italic; }
+.faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--green); flex: none; }
+.faden-shell a.einwurf--zeiger { text-decoration: none; margin: 6px 0 10px; flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: 12px; } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
+.faden-shell .abschnitt--werkzeuge .werkzeuge-liste { display: grid; gap: 18px; margin-top: 6px; }
+.faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
+
+/* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
+.faden-shell .leo-strom { display: grid; gap: 14px; padding: 4px 0 12px; }
+.faden-shell .leo-strom:empty { display: none; padding: 0; }
+.faden-shell .leo-strom--alt { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--rule); }
+.faden-shell .wort--frage .kicker { display: block; margin-bottom: 2px; }
+.faden-shell .tippt { display: inline-flex; gap: 5px; align-items: center; height: 20px; }
+.faden-shell .tippt i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: faden-blink 1.2s infinite; }
+.faden-shell .tippt i:nth-child(2) { animation-delay: .2s; } .faden-shell .tippt i:nth-child(3) { animation-delay: .4s; }
+@keyframes faden-blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+.faden-shell .leo-markdown { font-size: 16px; }
+.faden-shell .leo-markdown > :first-child { margin-top: 0; } .faden-shell .leo-markdown > :last-child { margin-bottom: 0; }
+.faden-shell .leo-markdown .cursor { display: inline-block; width: 2px; height: 1em; background: var(--green); vertical-align: -2px; margin-left: 2px; animation: faden-blink .9s infinite; }
+.faden-shell .wort--leo .werkzeuge { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.faden-shell .wort--fehler p { color: var(--pink); }
+.faden-shell .leo-chips { margin-left: 42px; }
+.faden-shell .sprung { position: absolute; left: 0; right: 0; bottom: calc(100% + 8px); background: var(--white); border: 1px solid var(--rule-strong); border-radius: 16px; padding: 8px; display: grid; gap: 1px; box-shadow: 0 10px 26px rgba(51,74,39,.14); z-index: 7; max-height: 60vh; overflow: auto; }
+.faden-shell .sprung__kopf { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 4px 10px 6px; }
+.faden-shell .sprung button { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: 7px 10px; font: inherit; font-size: 14.5px; border-radius: 8px; color: var(--ink); cursor: pointer; }
+.faden-shell .sprung button:hover, .faden-shell .sprung button.aktiv { background: var(--tint); }
+.faden-shell .sprung .typ { width: 84px; flex: none; font: 600 10.5px/1.5 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .sprung .unter { margin-left: auto; color: var(--muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%; }
+.faden-shell .sprung .frage { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 9px; color: var(--pink); font-weight: 600; border-radius: 0; }
+@media (max-width: 900px) {
+  .faden-shell .sprung .typ { width: 64px; }
+  .faden-shell .sprung .unter { display: none; }
+  .faden-shell .leo-chips { margin-left: 0; }
+}
+
+/* „Leo fragt“ in der rechten Randspalte (Port aus dem Prototyp, 01-css.html Z. 567–581): Kasten im Fuß über der Anzeige,
+   Regler oder Chips, danach der Danke-Kasten. Nur im .faden-shell-Scope; unter prefers-reduced-motion nimmt die Regel in
+   faden.css die Einblendung weg. */
+.faden-shell .leo-frage { position: relative; border: 1px solid var(--rule-strong); border-radius: 12px; background: var(--white); padding: 10px 14px 10px; display: grid; gap: 7px; font-family: var(--serif); animation: leo-rein .55s cubic-bezier(.34,1.56,.64,1) both; box-shadow: 0 10px 26px rgba(51,74,39,.12); }
+@keyframes leo-rein { from { opacity: 0; transform: translateY(22px) scale(.96); } to { opacity: 1; transform: none; } }
+.faden-shell .leo-frage .spaeter { position: absolute; top: 8px; right: 10px; border: 0; background: none; color: var(--muted); font: 600 11px/1 var(--sans); cursor: pointer; }
+.faden-shell .leo-frage .spaeter:hover { color: var(--ink); }
+.faden-shell .leo-frage .kopf-f { display: flex; align-items: center; gap: 8px; }
+.faden-shell .leo-frage .kopf-f img { width: 26px; height: 26px; }
+.faden-shell .leo-frage p { margin: 0; font-size: 14.5px; line-height: 1.35; }
+.faden-shell .leo-frage .regler { display: flex; align-items: center; gap: 10px; }
+.faden-shell .leo-frage input[type=range] { flex: 1; min-width: 0; accent-color: var(--green); }
+.faden-shell .leo-frage .wert { font-size: 18px; font-weight: 700; color: var(--green-ink); font-family: var(--sans); min-width: 44px; text-align: right; }
+.faden-shell .leo-frage .werte { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 11px; color: var(--muted); margin-top: -4px; }
+.faden-shell .leo-frage .aktion { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.faden-shell .leo-frage .btn { font-family: var(--sans); }
+.faden-shell .leo-frage .hinweis-f { font: 600 11px/1.35 var(--sans); color: var(--muted); display: flex; gap: 5px; align-items: center; }
+.faden-shell .leo-frage .hinweis-f i { font-style: normal; color: var(--green); }
+.faden-shell .leo-frage .chips { gap: 6px; }
+.faden-shell .leo-frage .chips .chip { font-family: var(--sans); font-size: 12.5px; padding: 5px 10px; }
+/* Textlink „Zum Vergleich“ im Danke-Kasten (nur in Next: das Ziel der Regler-Frage ist hier eine eigene Seite) */
+.faden-shell .leo-frage .textlink { justify-self: start; font-family: var(--sans); }
+.faden-shell .leo-frage--danke { border-color: var(--rule); background: var(--paper); }

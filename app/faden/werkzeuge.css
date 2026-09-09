@@ -1,0 +1,65 @@
+/* =====================================================================================
+   Werkzeug-Einhänger und Karten mit echten Körpern (Vorlage 386–548)
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Kasten (Werkzeugkarte) ---------- */
+/* 🚨 Der Werkzeug-EINHÄNGER, keine Karte.
+   Der Leitsatz des Designs: „Keine Kartenboxen mit Schatten im Faden." Eine Zeitung
+   rahmt nichts ein — sie setzt eine Linie darüber und schreibt weiter. Rahmen behalten
+   nur drei Dinge: Anzeigen, Glossar-Zettel und der Level-Balken; die sind FREMD auf der
+   Seite und dürfen sich absetzen.
+
+   Übrig bleibt eine 2-px-Oberkante in der Farbe des Werkzeugs, darunter der Kicker mit
+   seinem Punkt. Kein Grund, kein Rahmen, kein Radius — der Werkzeugblock steht in
+   derselben Spalte wie der Text, nicht daneben. */
+.faden-shell .kasten { position: relative; background: none; border: 0; border-top: 2px solid var(--green); border-radius: 0; padding: 12px 0 14px; display: grid; gap: 10px; scroll-margin-top: 110px; }
+.faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
+.faden-shell .kasten--gruen { border-top-color: var(--green); }
+/* Der Glossar-Zettel behält seinen Rahmen — er ist ein eigenes Blatt Papier. */
+.faden-shell .kasten--begriff { background: var(--white); border: 1px solid rgba(51,74,39,.22); box-shadow: 1px 2px 0 rgba(51,74,39,.08); padding: 14px 18px 12px; }
+.faden-shell .kasten h3 { font-size: 19px; }
+.faden-shell .kasten p { max-width: 64ch; }
+.faden-shell .kasten .btn { justify-self: start; }
+.faden-shell .kasten__fuss { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 8px; }
+.faden-shell .kasten--inline .kicker { margin-bottom: 2px; }
+.faden-shell .kasten ul.dokumente { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.faden-shell .kasten ul.dokumente li { display: flex; gap: 10px; align-items: center; font-size: 14.5px; }
+.faden-shell .krumen { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font: 500 12.5px var(--sans); color: var(--muted); }
+.faden-shell .krumen a { color: var(--muted); font: 500 12.5px var(--sans); text-decoration: none; }
+.faden-shell .krumen a:hover { color: var(--green-ink); text-decoration: underline; }
+.faden-shell .krumen__trenner { margin-right: 6px; }
+
+/* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
+/* Werkzeuge und Spiele stehen ohne Kasten im Fluss — die Werkzeug-Überschrift trägt
+   die Marke, die Spiele bringen ihren eigenen Rahmen mit. Vom .kasten bleiben nur die
+   Maße: Abstand, Sprungziel für das Inhaltsverzeichnis, Abbruch der Textumfließung. */
+.faden-shell .werkzeug-block, .faden-shell .spiel-inline { position: relative; display: grid; gap: 10px; clear: both; margin: 22px 0 24px; scroll-margin-top: 110px; min-width: 0; max-width: 100%; }
+.faden-shell .article-tool-label { display: flex; flex-wrap: wrap; align-items: center; row-gap: 4px; column-gap: 10px; margin: 0 0 6px; padding: 0; border: 0; font-size: unset; font-weight: unset; line-height: unset; }
+@media (max-width: 900px) {
+  .faden-shell .article-tool-badge { font-size: 26px; padding: 7px 10px; }
+  .faden-shell .article-tool-title { font-size: 27px; }
+}
+/* Fazit-Überschrift der Live-Seite: `.faden-shell h2` setzt margin:0 und schlägt
+   `.fazit-heading` in der Spezifität — der Abstand muss hier stehen. */
+.faden-shell .fazit-heading { margin: 34px 0 20px; }
+.faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
+.faden-shell .kasten--rechner .rechner-title { display: none; }
+.faden-shell .kasten--rechner .rechner-layout, .faden-shell .kasten--checkliste .checkliste-layout { max-width: none; }
+.faden-shell .kasten--dokumente .dok-head { display: none; }
+.faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 26px; }
+.faden-shell .artikel--karte .kasten { margin-top: 4px; }
+.faden-shell .artikel__zusatz { font-weight: 400; font-style: italic; color: var(--muted); font-size: .7em; }
+.faden-shell .anbieter-k__spalten { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.faden-shell .anbieter-k__spalten > div { padding: 10px 14px 10px 0; display: grid; gap: 2px; align-content: start; min-width: 0; }
+.faden-shell .anbieter-k__spalten > div + div { border-left: 1px solid var(--rule); padding-left: 14px; }
+.faden-shell .anbieter-k__spalten p { margin: 0; font-size: 14.5px; line-height: 1.4; overflow-wrap: anywhere; }
+.faden-shell .kasten--anbieter .anbieter-content h2 { font-size: 22px; margin: 12px 0 4px; } .faden-shell .kasten--anbieter .anbieter-content h3 { font-size: 18px; margin: 14px 0 4px; }
+.faden-shell .kasten--text .prose h2 { font-size: 22px !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; } @media (max-width: 900px) {
+  .faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: 1fr; }
+  .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
+}

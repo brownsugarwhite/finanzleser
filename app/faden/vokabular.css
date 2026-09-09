@@ -1,0 +1,94 @@
+/* =====================================================================================
+   Was in mehr als einem Abschnitt unverändert vorkommt
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Typografische Bausteine ---------- */
+.faden-shell .kicker { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .kicker--gruen { color: var(--green-ink); } .faden-shell .kicker--pink { color: var(--pink); }
+.faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: 6px; }
+.faden-shell .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.faden-shell .dot--rechner { background: var(--tool-rechner); } .faden-shell .dot--vergleich { background: var(--tool-vergleich); } .faden-shell .dot--checkliste { background: var(--tool-checkliste); } .faden-shell .dot--dokumente { background: var(--tool-dokumente); }
+.faden-shell .spark { width: 12px; height: 12px; display: inline-block; flex: none; vertical-align: middle; transition: transform .4s; color: var(--ink); }
+.faden-shell .spark:hover { animation: faden-spark-spin 4s linear infinite; }
+@keyframes faden-spark-spin { to { transform: rotate(360deg); } }
+.faden-shell .textlink { border: 0; background: none; padding: 0; color: var(--green-ink); font-weight: 700; font-size: 13px; text-decoration: none; }
+.faden-shell .textlink--still { color: var(--muted); font-weight: 600; }
+.faden-shell .textlink:hover { text-decoration: underline; }
+.faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; border: 0; background: none; padding: 0; text-decoration: none; }
+.faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1.5px; background: currentColor; position: relative; transition: width .25s; }
+.faden-shell .pfeil-link i::after { content: ""; position: absolute; right: -1px; top: -4px; width: 8px; height: 8px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); }
+.faden-shell .pfeil-link:hover i { width: 30px; }
+.faden-shell .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; white-space: nowrap; text-decoration: none; line-height: 1.3; }
+.faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
+.faden-shell .btn--klein { padding: 4px 12px; font-size: 13px; }
+.faden-shell .btn--still { border-color: var(--rule); color: var(--muted); }
+.faden-shell .chip { border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 5px 14px; font-weight: 600; font-size: 13.5px; text-align: left; line-height: 1.35; }
+.faden-shell .chip:hover { background: var(--tint); border-color: var(--green-ink); color: var(--green-ink); }
+.faden-shell .chip--still { border-color: var(--rule); color: var(--muted); } .faden-shell .chip--leo { border-color: var(--green-ink); color: var(--green-ink); }
+.faden-shell .reihe { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.faden-shell .quelle { font-size: 12px; color: var(--muted); margin: 0; }
+.faden-shell .hinweis { background: var(--note); border: 1px solid var(--note-line); color: var(--note-ink); padding: 8px 12px; font-size: 13px; }
+.faden-shell .begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green); font-weight: 600; cursor: pointer; text-decoration: none; }
+.faden-shell .begriff:hover, .faden-shell .begriff.offen { color: var(--pink); text-decoration: none; }
+
+/* =====================================================================================
+   Zeitungs-Bausteine
+   ===================================================================================== */
+
+/* Doppellinie: 2 px, 2 px Luft, 1 px — die Signatur des Zeitungskopfs.
+   Über zwei Rahmen an einem 5-px-Element: `box-sizing: border-box` gilt im Faden
+   überall (faden.css), also bleiben 5 − 2 − 1 = 2 px Luft dazwischen. */
+.faden-shell .doppellinie { height: 5px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+/* Zeichnet sich von der Mitte nach außen (Registerblatt, Kapitelkopf). */
+.faden-shell .ist-da > .doppellinie,
+.faden-shell .ist-da > * > .doppellinie { transform-origin: center; animation: fl-mitte calc(.8s * var(--tempo)) var(--kurve) .15s both; }
+
+/* Punktführung: Inhaltsverzeichnis, Kennzahlen, Bestenlisten. Der Versatz nach oben
+   setzt die Punkte auf die Grundlinie der Schrift statt unter sie. */
+.faden-shell .fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted rgba(51, 74, 39, .4); transform: translateY(-4px); }
+
+/* Zahlen in Tabellen und Ergebnissen laufen untereinander. */
+.faden-shell .ziffern { font-variant-numeric: tabular-nums; }
+
+/* =====================================================================================
+   Die Pille — die Schaltfläche des Designs
+
+   Zwei Rahmen: ein 2-px-Strich am Körper und eine 1-px-Kontur zwei Pixel davor. Das ist
+   dieselbe Geometrie wie am Eingabefeld und an den Sprechblasen, deshalb steht sie hier
+   im gemeinsamen Vokabular und nicht bei einem einzelnen Baustein.
+   ===================================================================================== */
+
+.faden-shell .pille { display: inline-flex; align-items: center; gap: 12px; height: 44px; padding: 3px 3px 3px 17px; border: 2px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 2px; border-radius: 19px; background: transparent; color: var(--ink); font: 500 15px/1 var(--sans); transition: color .2s; }
+.faden-shell .pille:hover { color: var(--green-ink); }
+.faden-shell .pille--gross { height: 48px; padding-left: 19px; border-radius: 21px; font-size: 17px; }
+/* Der runde Knopf rechts trägt die Farbe des Werkzeugs. */
+.faden-shell .pille__knopf { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 15px; background: var(--green); flex: none; }
+.faden-shell .pille--gross .pille__knopf { width: 38px; height: 38px; border-radius: 17px; }
+.faden-shell .pille__knopf svg { width: 12px; height: 12px; fill: #fff; }
+.faden-shell .pille--rechner .pille__knopf { background: var(--tool-rechner); }
+.faden-shell .pille--rechner:hover { color: var(--pink); }
+.faden-shell .pille--vergleich .pille__knopf { background: var(--tuerkis); }
+.faden-shell .pille--checkliste .pille__knopf { background: var(--tool-checkliste); }
+
+/* ── Hover-Box, Trenner, Werkzeugreihe im Hero, Hero-CTA (Port aus dem Prototyp, 01-css.html:41–42, 476–498, 806, 876–884) ── */
+
+/* Spark dreht, solange der Hover-Rahmen an seinem Trenner liegt (01-css.html:42) */
+.faden-shell .spark.dreht { animation: faden-spark-spin 4s linear infinite; }
+
+/* Trenner: 9 px breit, zwei Linien (--linie) mit Spark in der Mitte (01-css.html:483–487) */
+.faden-shell .trenner { --linie: 70px; flex: none; width: 9px; position: relative; }
+.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: -6px 0 0 -6px; }
+.faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: var(--linie); background: var(--rule-strong); }
+.faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
+
+/* Hover-Box (abgerundet), gezeichnet als SVG (01-css.html:495–498, 806) */
+.faden-shell .hbox { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+.faden-shell .hbox path.seg { fill: none; stroke: var(--rule-strong); stroke-width: 1; }
+.faden-shell .hbox .hspark { fill: var(--rule-strong); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.faden-shell .hbox .hspark.dreht { animation: faden-spark-spin 4s linear infinite; }
+.faden-shell .spalten.offen .hbox { display: none; }

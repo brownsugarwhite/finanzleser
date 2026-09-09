@@ -1,0 +1,145 @@
+/* =====================================================================================
+   Landing-Hero und die vier Spalten
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Landing-Hero (Prototyp „Landing“: Zierlinie, Kicker, Titel, Pille auf der Bildschirmmitte, ein Satz) ---------- */
+.faden-shell .hero-landing { position: relative; height: calc(100dvh - var(--kopf-h, 64px)); min-height: 520px; }
+.faden-shell .hero-landing__mitte { position: absolute; inset: 0; box-sizing: border-box; padding: 0 24px var(--kopf-h, 64px); display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; }
+.faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; will-change: opacity, transform; }
+.faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; color: var(--muted); } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; } .faden-shell .landing-zier svg { width: 12px; height: 12px; }
+.faden-shell .landing-kicker { font: 400 15px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+/* Der Aufmacher im Zeitungssatz: 900er Serife, eng gesetzt, Zeilen ausgewogen. */
+.faden-shell .hero-landing h1 { font-size: clamp(30px, 4vw, 46px); line-height: 1.1; font-weight: 900; letter-spacing: -.01em; max-width: 20ch; margin: 0; text-wrap: balance; }
+.faden-shell .landing-datum { margin-bottom: 14px; }
+/* Die Doppellinie schließt den Kopf ab und trennt ihn von der Eingabe. */
+.faden-shell .landing-linie { width: min(420px, 70%); margin-top: 22px; }
+.faden-shell .hero-landing__pille { width: min(750px, 92%); height: 52px; position: relative; }
+.faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
+.faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
+.faden-shell .landing-sub { align-self: start; margin: 30px auto 0; font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 44ch; will-change: opacity, transform; }
+/* 🚨 Hier stand ein Ein-/Ausblenden von Randspalten und Eingabe, gesteuert über
+   body.faden-hero-sichtbar (HeroLanding setzt die Klasse, solange der Hero im Bild ist).
+   Der Prototyp hat so etwas nicht: Ränder und Eingabeleiste stehen von Anfang an da, die
+   Ränder kleben (.rand__innen, position: sticky) und die Anzeige in .rand__fuss wandert
+   erst mit dem Ende des Fadens hoch. Unsichtbar ist im Prototyp allein #fadenPille,
+   solange die Kopie der Suchpille aus dem Hero dorthin fliegt — das steuert HeroLanding
+   bereits selbst (ziel.style.opacity in flug()).
+
+   Für die EINGABE bleibt das Ausblenden dagegen richtig, und zwar aus demselben
+   Strukturgrund wie unten bei den Rändern: Im Prototyp sitzt sie in #mitte, das erst
+   unter dem Hero beginnt — beim Hero ist sie schlicht nicht im Bild und schiebt sich
+   beim Scrollen von unten herein, während die Suchpille aus dem Hero dorthin fliegt.
+   Hier liegt sie im selben #mitte wie der Hero und klebt unten, wäre also über dem Hero
+   sichtbar: zwei Suchpillen gleichzeitig. */
+.faden-shell .eingabe { transition: opacity .25s ease; }
+body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
+
+/* Landing: die Randspalten beginnen UNTER dem Hero.
+
+   Im Prototyp steht der Hero als eigener Abschnitt VOR dem Grid:
+
+       <section class="intro"><div class="szene">…</div></section>
+       <main class="faden">  .rand--links | #mitte | .rand--rechts
+
+   Die Ränder fangen dort also erst nach dem Hero an — sie fahren beim Scrollen von unten
+   herein und kleben danach unter dem Kopf. Hier liegt der Hero innerhalb der mittleren
+   Spalte (HeroLanding rendert im Strom), also stünden die Ränder von Anfang an daneben.
+   Statt sie dafür auszublenden, bekommen sie exakt die Höhe des Heros als Vorlauf —
+   derselbe Ausdruck wie .hero-landing weiter oben, damit beide auf den Pixel passen.
+
+   Nur ab 1440 px: darunter sind die Ränder ohnehin Schubladen (position: fixed). */
+@media (min-width: 1440px) {
+  body[data-landing] .faden-shell .rand {
+    margin-top: max(520px, calc(100dvh - var(--kopf-h, 64px)));
+  }
+}
+.faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
+@media (max-width: 900px) {
+  .faden-shell .hero-landing { min-height: 0; }
+  .faden-shell .hero-landing h1 { font-size: 24px; }
+  .faden-shell .hero-landing__mitte { padding: 0 8px var(--kopf-h, 64px); }
+}
+
+/* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
+.faden-shell .spalten-kasten { padding: 14px 18px 16px; }
+.faden-shell .spalten__kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 22px; }
+.faden-shell .spalten { position: relative; display: grid; align-items: stretch; transition: grid-template-columns .6s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spalten .trenner { min-height: 160px; }
+.faden-shell .spalten .trenner::before, .faden-shell .spalten .trenner::after { height: 70px; }
+.faden-shell .spalte { position: relative; min-width: 0; }
+.faden-shell .spalte__inhalt { padding: 12px 16px 14px; display: grid; gap: 4px; align-content: start; transition: opacity .2s; }
+.faden-shell .spalte__inhalt > img { width: 28px; height: 28px; opacity: .85; margin-bottom: 4px; }
+.faden-shell .spalte__titel { font-family: var(--serif); font-size: clamp(14px, 1.25vw, 18px); font-weight: 700; line-height: 1.2; }
+.faden-shell .spalte__inhalt > small { color: var(--muted); font-size: 12px; }
+.faden-shell .spalte__themen { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
+.faden-shell .spalte__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: 5px 0; font-size: 13.5px; display: flex; justify-content: space-between; gap: 8px; color: var(--ink); }
+.faden-shell .spalte__themen button small { color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.faden-shell .spalte__themen button:hover, .faden-shell .spalte__themen button:hover small { color: var(--green-ink); }
+.faden-shell .spalte__ruecken { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; gap: 10px; padding: 12px 0; border: 0; background: none; cursor: pointer; }
+.faden-shell .spalte__ruecken img { width: 22px; height: 22px; opacity: .75; }
+.faden-shell .spalte__ruecken span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--muted); white-space: nowrap; }
+.faden-shell .spalte__ruecken:hover span { color: var(--green-ink); }
+.faden-shell .spalte.ist-ruecken .spalte__inhalt { opacity: 0; pointer-events: none; }
+.faden-shell .spalte.ist-ruecken .spalte__ruecken { display: flex; animation: faden-ruecken-ein .35s .3s both; }
+@keyframes faden-ruecken-ein { from { opacity: 0; } to { opacity: 1; } }
+.faden-shell .spalte.ist-offen .spalte__inhalt { display: none; }
+.faden-shell .spalte__offen { display: grid; gap: 12px; padding: 12px 18px 8px; animation: faden-stufe-ein .45s .15s both; }
+@keyframes faden-stufe-ein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.faden-shell .spalte__kopfzeile { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.faden-shell .spalte__kopfzeile img { width: 26px; height: 26px; opacity: .85; align-self: center; }
+.faden-shell .spalte__kopfzeile b { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+.faden-shell .spalte__kopfzeile small { color: var(--muted); font-size: 12.5px; }
+.faden-shell .spalte__kopfzeile .textlink { margin-left: auto; }
+.faden-shell .spalte__tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.faden-shell .spalte__tabs .chip { padding: 3px 12px; font-size: 13px; border-color: var(--rule); color: var(--muted); }
+.faden-shell .spalte__tabs .chip.chip--aktiv { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.faden-shell .spalte__liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0 26px; border-top: 1px solid var(--rule); }
+.faden-shell .spalte__artikel { text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: 10px 0 12px; display: grid; gap: 4px; text-decoration: none; color: var(--ink); animation: faden-stufe-ein .4s both; }
+.faden-shell .spalte__artikel b { font-family: var(--serif); font-size: 16px; font-weight: 700; line-height: 1.3; }
+.faden-shell .spalte__artikel:hover b { color: var(--green-ink); }
+.faden-shell .spalte__artikel .pfeil-link { font-size: 12.5px; }
+.faden-shell .spalte__fuss { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.faden-shell .spalte__fuss .chip { text-decoration: none; }
+.faden-shell .spalte__alle { margin-left: auto; }
+@media (max-width: 900px) {
+  .faden-shell .spalten { grid-template-columns: 1fr !important; }
+  .faden-shell .spalten .trenner { display: none; }
+  .faden-shell .spalte__inhalt { padding: 10px 0; }
+  .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); }
+  .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; }
+  .faden-shell .spalte__offen { padding: 6px 0; }
+}
+
+/* Werkzeugreihe im Hero: drei Kacheln, Trenner mit kurzen Linien, docken beim Laden an (01-css.html:482, 486, 488–493) */
+.faden-shell .landing-unten { align-self: start; width: min(820px, 94%); display: grid; justify-items: center; will-change: opacity, transform; }
+.faden-shell .landing-sub b { font-weight: 700; font-variant-numeric: tabular-nums; }
+.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
+.faden-shell .werkzeugreihe .trenner { --linie: 28px; }
+.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
+.faden-shell .werkzeug-k.da { opacity: 1; transform: none !important; }
+.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
+.faden-shell .werkzeug-k b small { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 6px; font-family: var(--sans); }
+.faden-shell .werkzeug-k span { font-size: 12.5px; color: var(--muted); }
+.faden-shell .werkzeug-k .pfeil-link { margin-top: 4px; font-size: 13px; }
+.faden-shell .werkzeug-k:hover > .pfeil-link i { width: 30px; }
+
+/* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
+.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; opacity: 0; cursor: pointer; font-family: inherit; }
+.faden-shell .hero-cta.da { opacity: 1; }
+.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: 13px; animation: faden-wippen 2.2s ease-in-out infinite; }
+@keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+@media (max-width: 900px) {
+  /* 01-css.html:876–877, 883 */
+  .faden-shell .werkzeugreihe { flex-wrap: wrap; justify-content: center; } .faden-shell .werkzeugreihe .trenner { display: none; }
+  .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: 6px 12px; display: flex; align-items: baseline; gap: 10px; }
+  .faden-shell .werkzeug-k b { font-size: 19px; } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
+  .faden-shell .werkzeug-k .pfeil-link { margin: 0 0 0 auto; display: inline-flex; white-space: nowrap; }
+  .faden-shell .hbox { display: none; }
+  .faden-shell .hero-cta { bottom: 10px; }
+}

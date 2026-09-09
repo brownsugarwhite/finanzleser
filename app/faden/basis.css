@@ -1,0 +1,87 @@
+/* =====================================================================================
+   Fundament: Variablen, Reset, der Vertrag für reduzierte Bewegung
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* =====================================================================================
+   faden.css — Gestaltung des Fadens („Der Faden mit Leo“, Stufe 1)
+
+   Gilt nur, wenn NEXT_PUBLIC_FADEN=1 die Faden-Hülle rendert (app/layout.tsx).
+   Vorlage: docs/prototype/src/01-css.html. Die Prototyp-Variablen werden hier auf
+   app/tokens.css gemappt; Tabellen im Fließtext nutzen weiter .prose (components.css),
+   Rechner rechner.css. Kein Tailwind im Faden-Code.
+   ===================================================================================== */
+
+.faden-shell {
+  --paper: var(--color-bg-page); --white: #fdfdfb; --placeholder: var(--color-placeholder-bg);
+  --rule: rgba(51,74,39,.14); --rule-soft: rgba(51,74,39,.08); --rule-strong: #334A27;
+  --ink: var(--color-text-primary); --muted: var(--color-text-medium);
+  --green: var(--color-brand); --green-ink: #2E7A0B; --pink: var(--color-brand-secondary); --pink-tint: #FBEAF1; --tint: #eef3e8;
+  --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
+  --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
+  --serif: var(--font-heading); --sans: var(--font-body);
+  /* 🚨 Satzspiegel EXAKT aus der Vorlage (Finanzleser Faden A v2, gemessen im laufenden
+     Prototyp): Grid `176px 720px 216px`, Abstand `clamp(28px, 4vw, 64px)`, außen 1320 px.
+     Vorher standen hier 300/750/300 mit Abstand 0 — die Randspalten waren dadurch fast
+     doppelt so breit und der Satz insgesamt viel luftiger als gezeichnet. */
+  --kopf-h: 64px; --rand-l: 176px; --rand-r: 216px; --spalte: 720px; --satz-gasse: clamp(28px, 4vw, 64px); --satz-rand: clamp(16px, 3vw, 40px);
+  background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
+}
+body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidden; }
+.faden-shell * { box-sizing: border-box; }
+.faden-shell h1, .faden-shell h2, .faden-shell h3, .faden-shell h4 { font-family: var(--serif); font-weight: 700; line-height: 1.22; margin: 0; text-wrap: balance; }
+.faden-shell button { font: inherit; cursor: pointer; color: inherit; }
+.faden-shell a { color: var(--green-ink); }
+.faden-shell p { margin: 0 0 .8em; }
+.faden-shell :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.faden-shell .sr { position: absolute; left: -9999px; }
+@media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
+
+.faden-shell {
+  /* Bewegung. `--tempo` skaliert jede Dauer: ruhig 1.35 · normal 1 · lebhaft .65. */
+  --tempo: 1;
+  --kurve: cubic-bezier(.2, .8, .2, 1);
+  --schwung: cubic-bezier(.34, 1.56, .64, 1);
+  --schwung-weit: cubic-bezier(.34, 1.5, .64, 1);
+
+  /* Zeitungsfarben, die es in tokens.css nicht gibt (Design A v2). */
+  --gruen-hell: #a9e07c;
+  --tuerkis: #0B7F66;
+  --tuerkis-hell: #06D496;
+  --papier-brett: #f4f2ec;
+}
+
+/* ---------- Ebenen ----------
+   🚨 Das z-index-Budget an EINER Stelle, sonst landet das Registerblatt unter der
+   mobilen Schublade. Bestand aus faden.css: kopfblur 29 · kopf 30 · bmenu 45 ·
+   menue/toast/flug 60 · schublade 69 · rand.mobil 70 · seite 80. */
+.faden-shell { --z-blatt-hof: 57; --z-blatt: 59; --z-lesezeichen: 63; }
+
+/* =====================================================================================
+   🚨 Rücknahmen für reduzierte Bewegung
+
+   app/faden.css:29 schaltet unter `.faden-shell` JEDE Animation und Transition per
+   `!important` ab. Das ist richtig so — aber jede Bewegung dieser Datei hat einen
+   UNSICHTBAREN Grundzustand: `opacity:0`, `scaleX(0)` an den Zierlinien,
+   `stroke-dashoffset:1` an gezeichneten Pfaden, `rotateX(-88deg)` am Registerblatt.
+   Ohne die Rücknahmen bliebe für diese Leser der halbe Faden leer und das Menü öffnete
+   unsichtbar. Wer hier eine Bewegung ergänzt, deren Anfang nicht sichtbar ist, ergänzt
+   auch die Rücknahme.
+
+   erscheinen.ts fährt in diesem Fall gar keinen Beobachter mehr, sondern setzt `ist-da`
+   und `ist-an` sofort — die Regeln hier sind der Gürtel zum Hosenträger.
+   ===================================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell [data-erscheint],
+  .faden-shell [data-erscheint] > *,
+  .faden-shell [data-linie],
+  .faden-shell [data-spark] { opacity: 1 !important; transform: none !important; }
+  .faden-shell [data-zeichnen] { stroke-dashoffset: 0 !important; }
+}
+
+@media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .kopfblur { display: none !important; } }

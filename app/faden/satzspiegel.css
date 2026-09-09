@@ -1,0 +1,91 @@
+/* =====================================================================================
+   Satzspiegel und Fortschritts-Gleis (Vorlage 274–277)
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
+/* Der Satzspiegel ist so breit wie seine Spalten plus Gassen — kein Schlupf, damit sich
+   die Lage jeder Spalte exakt ausrechnen lässt (das braucht das Fortschritts-Gleis). */
+.faden-shell .faden { margin: 0 auto; max-width: calc(var(--rand-l) + var(--spalte) + var(--rand-r) + 2 * var(--satz-gasse) + 2 * var(--satz-rand)); padding: 22px var(--satz-rand) 160px; display: grid; grid-template-columns: var(--rand-l) minmax(0, var(--spalte)) var(--rand-r); gap: var(--satz-gasse); align-items: start; position: relative; }
+.faden-shell #mitte { padding: 0; min-width: 0; }
+@media (max-width: 900px) {
+  .faden-shell .faden { padding: 12px 14px 110px; }
+}
+@media (max-width: 1439px) {
+  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
+  .faden-shell #mitte { padding: 0; }
+}
+
+/* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
+   Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
+   unberührt bleiben — ein viertes Rasterkind würde die Aufteilung verschieben.
+
+   🚨 Die Gasse ist NICHT konstant: die Seitenspalte wächst mit dem Fenster, die
+   Randspalte darin ist bei 300px gedeckelt und mittig gesetzt. Ein fester Abstand zur
+   Mittelspalte klebt deshalb bei 1440px an der Sidebar und driftet bei 1920px weit ab.
+   Darum die Gassenmitte ausrechnen — dieselbe Formel wie in `.rand--links`. */
+.faden-shell .fortschritt {
+  --gleis: 2px; --fuell: 3px; --breite: 11px;
+  /* 🚨 30 px links der Mittelspalte — exakt wie in der Vorlage (`left: -30px` am Strom).
+     Vorher wurde die Gassenmitte ausgerechnet, weil die Randspalten mitwuchsen; seit der
+     Satzspiegel feste Spalten hat, ist die Lage schlicht abzählbar. */
+  position: absolute;
+  left: calc(var(--satz-rand) + var(--rand-l) + var(--satz-gasse) - 30px - var(--breite) / 2);
+  width: var(--breite);
+  pointer-events: none; z-index: 1; display: none;
+}
+@media (min-width: 1060px) { .faden-shell .fortschritt { display: block; } }
+/* Striche als Verlauf statt `border-style: dashed` — so ist die Teilung exakt und
+   überall gleich, statt vom Browser gewürfelt. */
+.faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--muted) 0 5px, transparent 5px 11px); }
+.faden-shell .fortschritt__fuell { position: absolute; top: 0; left: calc(50% - var(--fuell) / 2); width: var(--fuell); background: var(--ink); transform-origin: 0 0; will-change: transform; }
+.faden-shell .fortschritt__punkt { position: absolute; left: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); transition: background .35s, border-color .35s; }
+.faden-shell .fortschritt__punkt.erreicht { background: var(--ink); border-color: var(--ink); }
+/* Abschnitte eines Ratgebers: kurzer Querstrich statt Kreis — zwei Ebenen auf einer
+   Linie, Kreis für das Kapitel, Strich für den Abschnitt darin. Vorlage: das TOC-Design
+   aus der Claude-Design-Sitzung. Der Strich des Abschnitts, in dem der Leser steht,
+   wird länger und dunkel; er kommt ohne Puls aus, der gehört dem Kapitelkreis. */
+.faden-shell .fortschritt__strich { position: absolute; left: 50%; width: 9px; height: 2px; margin-top: -1px; transform: translateX(-50%); background: var(--muted); border-radius: 1px; transition: width .3s, background .35s; }
+.faden-shell .fortschritt__strich.erreicht { background: var(--ink); }
+.faden-shell .fortschritt__strich.jetzt { width: 15px; background: var(--ink); }
+/* Puls nur am jüngsten erreichten Kreis: ein Ring, der aufgeht und verschwindet —
+   der Kreis selbst bleibt ruhig, sonst wackelt die Linie. */
+.faden-shell .fortschritt__punkt.jetzt::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--ink); animation: faden-puls 2.4s cubic-bezier(.22,.61,.36,1) infinite; }
+@keyframes faden-puls {
+  0%   { transform: scale(1);   opacity: .5; }
+  70%  { transform: scale(2.1); opacity: 0; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .faden-shell .fortschritt__punkt.jetzt::after { display: none; } }
+
+.faden-shell .faden > * { min-width: 0; }
+.faden-shell .rand { align-self: stretch; font-size: 13.5px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.faden-shell .rand--links { justify-self: stretch; width: 100%; }
+.faden-shell .rand--rechts { justify-self: stretch; width: 100%; }
+.faden-shell .rand__lauf { flex: 1; position: relative; }
+.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
+/* 🚨 `grid-template-columns: minmax(0, 1fr)`. Ohne das ist die implizite Spalte `auto`
+   und damit mindestens so breit wie ihr breitester Inhalt — ein langer Kapiteltitel
+   sprengte die 176-px-Randspalte auf 247 px und schob sich unter die Mittelspalte. */
+.faden-shell .rand__oben { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-content: start; }
+.faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
+.faden-shell .verlauf { max-height: 46vh; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; padding-right: 2px; min-width: 0; }
+.faden-shell .verlauf::-webkit-scrollbar { width: 0; }
+/* Die Überschrift einer Randspalte steht wie ein Zeitungskopf: Versalien über einer
+   Doppellinie. */
+.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+@media (max-width: 1439px) {
+  .faden-shell .rand { display: none; }
+  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  .faden-shell .rand--links.mobil { left: 0; }
+  .faden-shell .rand--rechts.mobil { right: 0; }
+  .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
+  .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
+  .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
+}

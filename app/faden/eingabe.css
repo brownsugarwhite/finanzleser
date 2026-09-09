@@ -1,0 +1,59 @@
+/* =====================================================================================
+   Eingabezeile, Vorschläge, Hinweis-Streifen, Fußnote (Vorlage 1501–1520)
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Vorschläge unter der Eingabe ---------- */
+.faden-shell .eingabe #eingabeChips { opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+.faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
+
+/* Tabellen-Hülle der alten Seite läuft 20 px über den Rand; in der Faden-Spalte volle Breite und querscrollen. */
+.faden-shell .prose .table-scroll { width: 100%; max-width: 100%; margin-left: 0; margin-right: 0; overflow-x: auto; }
+.faden-shell .prose .table-scroll-inner { min-width: 0; }
+
+/* ---------- Eingabe + Suchpille ---------- */
+.faden-shell .eingabe { position: sticky; bottom: 0; display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; margin-top: -40px; }
+.faden-shell .eingabe__blur { position: absolute; left: -10px; right: -10px; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
+.faden-shell .eingabe__blur i { position: absolute; left: 0; right: 0; bottom: 0; display: block; -webkit-mask-image: linear-gradient(to top, #000 40%, transparent 100%); mask-image: linear-gradient(to top, #000 40%, transparent 100%); }
+.faden-shell .eingabe__blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .eingabe__blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .eingabe__blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .eingabe__blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .eingabe__blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .eingabe__blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .eingabe__blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .eingabe__blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
+.faden-shell .eingabe__blur b { position: absolute; inset: 0; background: linear-gradient(to top, var(--paper) 30%, transparent 100%); }
+.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: 750px; margin-left: -11px; }
+.faden-shell .suchpille-wrap { position: relative; width: 100%; z-index: 6; }
+.faden-shell .suchpille { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.55); backdrop-filter: blur(16px) brightness(1.15); border-radius: 26px; box-shadow: 0 3px 23px rgba(0,0,0,.02); padding: 6px 6px 6px 22px; min-height: 52px; transition: box-shadow .2s ease; }
+.faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--green); }
+.faden-shell .suchpille input { flex: 1; border: 0; background: none; font: 400 17px/40px var(--sans); color: var(--ink); min-width: 0; outline: none; padding: 0; }
+.faden-shell .suchpille input::placeholder { color: var(--muted); opacity: 1; }
+/* Runder Knopf statt Text-Pille: Tinte, solange nichts dasteht, Grün sobald etwas kommt. */
+.faden-shell .suchpille .senden { border: 0; border-radius: 50%; width: 40px; height: 40px; padding: 0; display: grid; place-items: center; background: var(--ink); color: #fff; flex: none; opacity: 0; transform: translateX(10px) scale(.92); pointer-events: none; transition: opacity .2s ease, transform .3s var(--schwung), background .25s; }
+.faden-shell .suchpille .senden svg { width: 18px; height: 18px; fill: currentColor; }
+.faden-shell .suchpille.hat-text .senden { background: var(--green); }
+.faden-shell .suchpille .senden:hover { transform: scale(1.06); }
+.faden-shell .suchpille-wrap:focus-within .senden, .faden-shell .suchpille.hat-text .senden { opacity: 1; transform: none; pointer-events: auto; }
+.faden-shell #eingabeChips { position: absolute; left: 0; right: 0; top: 100%; margin: 0; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+.faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 900px) {
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .faden-shell .eingabe .chips::-webkit-scrollbar { display: none; }
+  .faden-shell .eingabe .chips .chip { flex: none; }
+}
+@media (max-width: 1439px) {
+  .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
+}
+
+/* ---------- Toast, Fußnote ---------- */
+/* Hinweis-Streifen: dunkle Tinte, kantig statt rund — eine Meldung, keine Blase. */
+.faden-shell .toast, .toast.faden-toast { position: fixed; left: 50%; bottom: 90px; transform: translate(-50%, 24px); background: var(--ink); color: var(--paper); padding: 10px 18px; opacity: 0; transition: opacity .25s, transform .45s var(--schwung); z-index: 60; pointer-events: none; border-radius: 4px; max-width: min(560px, calc(100vw - 32px)); display: flex; align-items: baseline; gap: 10px; overflow: hidden; }
+.faden-shell .toast.zeigt { opacity: 1; transform: translate(-50%, 0); }
+.faden-shell .toast__punkt { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; align-self: center; animation: fl-puls 1.8s ease-in-out infinite; }
+.faden-shell .toast__kicker { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gruen-hell); flex: none; }
+.faden-shell .toast__text { font: 400 14px/1.4 var(--sans); }
+/* Die Zeitlinie zeigt, wie lange die Meldung noch steht. Der `key` am Element stößt sie
+   bei jeder neuen Meldung neu an. */
+.faden-shell .toast__zeit { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--green); transform-origin: left; }
+.faden-shell .toast.zeigt .toast__zeit { animation: fl-toast 3.2s linear both; }
+.faden-shell .fussnote { max-width: 1440px; margin: 0 auto; padding: 14px 28px 30px; font-size: 12.5px; color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.faden-shell .fussnote a { color: var(--muted); text-decoration: none; } .faden-shell .fussnote a:hover { color: var(--green-ink); text-decoration: underline; }

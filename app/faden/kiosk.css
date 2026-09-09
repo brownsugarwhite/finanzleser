@@ -1,4 +1,13 @@
 /* =====================================================================================
+   Kiosk: die vier Ausgaben (Vorlage 332–385)
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* =====================================================================================
    kiosk.css — die vier Ausgaben am Zeitungsstand (Kapitel 1 der Vorlage)
 
    Alle Werte am laufenden Prototyp abgelesen (Design A v2, 09.09.2026), nicht aus der

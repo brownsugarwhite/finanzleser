@@ -79,6 +79,7 @@ for (const datei of kette("app/globals.css")) {
   });
   // At-Regeln ohne Rumpf (@charset, @layer …) mitnehmen, damit ihr Verschwinden auffällt.
   wurzel.walkAtRules((at) => {
+    if (at.name === "import") return;   // die Kette wird verfolgt, nicht gezählt
     if (!at.nodes) zeilen.push({ key: `${jeDatei ? rel + " ‖ " : ""}— ‖ @${at.name} ${norm(at.params)}`, rumpf: "" });
   });
 }

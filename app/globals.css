@@ -3,15 +3,7 @@
 @import "./components.css";
 @import "./rechner.css";
 @import "./gamification.css";
-@import "./faden.css";
-@import "./zeitung.css";
-@import "./statistik.css";
-@import "./finanzwort.css";
-@import "./snake.css";
-@import "./kiosk.css";
-@import "./faden-hover.css";
-@import "./kassensturz.css";
-@import "./leo-fragt.css";
+@import "./faden/index.css";
 
 /* Space for fixed logo + absolute nav bar */
 body {

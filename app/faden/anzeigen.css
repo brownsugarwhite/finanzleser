@@ -1,0 +1,36 @@
+/* =====================================================================================
+   Anzeigenplätze und der mobile Anker
+
+   Teil der Zeitungsgestaltung des Fadens. Maßgeblich ist der Quelltext der Vorlage:
+   docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   Zuständigkeitsregel: ein Baustein steht in der Datei des Vorlagen-Abschnitts, in dem er
+   zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
+   ===================================================================================== */
+
+/* ---------- Anzeigenplätze (Platzhalter, adblocker-neutral benannt) ---------- */
+.faden-shell .einschub { display: grid; gap: 4px; justify-items: center; width: 100%; min-width: 0; }
+.faden-shell .einschub__label { font: 700 9.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); justify-self: start; }
+.faden-shell .einschub__flaeche { position: relative; width: 100%; display: block; line-height: 0; border: 1px solid var(--rule); }
+.faden-shell .einschub__flaeche img { width: 100%; height: auto; display: block; }
+.faden-shell .einschub__flaeche img.schmal { display: none; }
+.faden-shell .einschub--top { padding: 4px 0 18px; }
+.faden-shell .einschub--feed { padding: 12px 0 16px; }
+.faden-shell .einschub--artikel { padding: 6px 0 10px; }
+.faden-shell .einschub--umflossen { float: right; width: 300px; margin: 6px 0 14px 26px; }
+.faden-shell .einschub[data-format="halfpage"] .einschub__flaeche, .faden-shell .einschub[data-format="rectangle"] .einschub__flaeche { max-width: 300px; }
+.faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 728px; }
+.faden-shell .einschub[data-format="mobile"] .einschub__flaeche { max-width: 320px; }
+.faden-shell .rand__fuss .einschub { margin-top: 8px; }
+.faden-shell .abschnitt .fliess::after { content: ""; display: block; clear: both; }
+@media (max-width: 900px) {
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; }
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; }
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
+  .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
+}
+
+.faden-shell .anker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 27; background: var(--paper); border-top: 1px solid var(--rule); display: none; justify-content: center; align-items: center; gap: 6px; padding: 4px 0 6px; }
+.faden-shell .anker img { width: 320px; max-width: calc(100% - 60px); height: auto; display: block; }
+.faden-shell .anker .einschub__label { position: absolute; left: 10px; top: 4px; }
+.faden-shell .anker__zu { position: absolute; right: 8px; top: 6px; border: 1px solid var(--rule-strong); background: var(--white); border-radius: 50%; width: 26px; height: 26px; font-size: 12px; cursor: pointer; }
+@media (max-width: 900px) { .faden-shell .anker { display: flex; } body.mit-anker .faden-shell .eingabe { bottom: 112px; } body.mit-anker .faden-shell .lesestelle { top: auto; bottom: 120px; } }

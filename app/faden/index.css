@@ -1,0 +1,37 @@
+/* =====================================================================================
+   Die Zeitungsgestaltung des Fadens — eine Datei je Abschnitt der Vorlage.
+
+   Die Reihenfolge unten IST die Kaskade. Sie folgt der Reihenfolge, in der die Abschnitte
+   in der alten app/faden.css standen; das erhält die relative Lage der Selektoren, die im
+   selben Kontext mehrfach vorkommen (31 Stück, Stand 09.09.2026).
+
+   🚨 Keine zwei Dateien dürfen denselben Selektor führen. Geprüft von
+   tools/verify-css-schnitt.mjs; der Beweis für einen Umzug ohne Umbau ist
+   tools/css-abzug.mjs.
+   ===================================================================================== */
+
+@import "./basis.css";
+@import "./bewegung.css";
+@import "./vokabular.css";
+@import "./kopf.css";
+@import "./blatt.css";
+@import "./satzspiegel.css";
+@import "./rand-links.css";
+@import "./strom.css";
+@import "./leo.css";
+@import "./werkzeuge.css";
+@import "./satz.css";
+@import "./mobilmenue.css";
+@import "./karten.css";
+@import "./landing.css";
+@import "./glossar.css";
+@import "./anzeigen.css";
+@import "./eingabe.css";
+@import "./belohnung.css";
+@import "./bausteine.css";
+@import "./mein-bereich.css";
+@import "./rand-rechts.css";
+@import "./setzkasten.css";
+@import "./spiele.css";
+@import "./kiosk.css";
+@import "./kassensturz.css";
