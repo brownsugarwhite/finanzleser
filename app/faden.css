@@ -242,33 +242,51 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand--rechts { justify-self: stretch; width: 100%; }
 .faden-shell .rand__lauf { flex: 1; position: relative; }
 .faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
-.faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
+/* 🚨 `grid-template-columns: minmax(0, 1fr)`. Ohne das ist die implizite Spalte `auto`
+   und damit mindestens so breit wie ihr breitester Inhalt — ein langer Kapiteltitel
+   sprengte die 176-px-Randspalte auf 247 px und schob sich unter die Mittelspalte. */
+.faden-shell .rand__oben { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-content: start; }
 .faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
-.faden-shell .verlauf { max-height: 46vh; overflow: auto; scrollbar-width: thin; padding-right: 2px; }
+.faden-shell .verlauf { max-height: 46vh; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; padding-right: 2px; min-width: 0; }
+.faden-shell .verlauf::-webkit-scrollbar { width: 0; }
 /* Die Überschrift einer Randspalte steht wie ein Zeitungskopf: Versalien über einer
    Doppellinie. */
 .faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.faden-shell .rand li button { width: 100%; text-align: left; border: 0; background: none; padding: 6px 0 7px; color: var(--muted); font: 400 13.5px/1.35 var(--serif); display: flex; gap: 8px; position: relative; }
-/* Der Strich unter jedem Eintrag: gelesene Kapitel voll, das aktive halb, die übrigen leer. */
-.faden-shell #kapitelListe > li > button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: rgba(51,74,39,.12); }
-.faden-shell #kapitelListe > li > button::before { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--green); transform: scaleX(1); transform-origin: left; z-index: 1; }
-.faden-shell #kapitelListe > li > button.aktiv::before { transform: scaleX(.46); }
-.faden-shell #kapitelListe > li:last-child > button:not(.aktiv)::before { transform: scaleX(0); }
-.faden-shell .rand li button.aktiv { color: var(--ink); font-weight: 700; }
-.faden-shell .rand li button::before { content: "○"; flex: none; } .faden-shell .rand li button.aktiv::before { content: "●"; }
+/* ---------- Verlauf: Maße 1:1 aus dem laufenden Prototyp (nachgemessen 09.09.2026) ----------
+   Zeile als Raster 16px/150px, Abstand 10, Innenabstand 9/0, Haarlinie unten (42 px hoch).
+   Nummer `700 10px Open Sans` grau mit 0,6 px Sperrung. Titel `400 13.5px Merriweather`
+   grau, aktiv 700 in Tinte. Darunter ein 1-px-Strich in Grün, dessen BREITE den
+   Lesefortschritt trägt — nicht seine Farbe. */
+.faden-shell .verlauf__liste { list-style: none; margin: 0; padding: 0; }
+.faden-shell .verlauf__zeile { width: 100%; display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: start; text-align: left; border: 0; border-bottom: 1px solid rgba(51,74,39,.1); background: none; padding: 9px 0; }
+.faden-shell .verlauf__nr { font: 700 10px/17px var(--sans); letter-spacing: .06em; color: var(--muted); font-style: normal; transition: color .25s; }
+.faden-shell .verlauf__zeile.aktiv .verlauf__nr { color: var(--green); }
+.faden-shell .verlauf__titel { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.faden-shell .verlauf__titel > span { font: 400 13.5px/1.35 var(--serif); color: var(--muted); transition: color .25s, font-weight .25s; }
+.faden-shell .verlauf__zeile.aktiv .verlauf__titel > span { font-weight: 700; color: var(--ink); }
+.faden-shell .verlauf__zeile:hover .verlauf__titel > span { color: var(--ink); }
+/* Der Lesestrich: volle Breite = gelesen, Teilbreite = so weit ist der Leser. */
+.faden-shell .verlauf__titel > i { display: block; height: 1px; background: var(--green); transition: width .5s var(--kurve); }
+
+/* Unterabschnitte: der Strich wächst beim Aktivwerden von 10 auf 22 px. */
+.faden-shell .verlauf__abschnitte { list-style: none; margin: 0; padding: 0 0 4px 26px; }
+.faden-shell .verlauf__abschnitt { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 5px 0; font: 400 12.5px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .verlauf__abschnitt.aktiv { font-weight: 600; color: var(--ink); }
+.faden-shell .verlauf__strich { display: block; width: 10px; height: 1px; background: currentColor; flex: none; transition: width .35s var(--kurve), background .25s; }
+.faden-shell .verlauf__abschnitt.aktiv .verlauf__strich { width: 22px; background: var(--green); }
+.faden-shell .verlauf__abschnitt:hover .verlauf__strich { width: 16px; }
+
+.faden-shell .verlauf__falten { display: block; width: 100%; text-align: center; border: 0; background: none; padding: 10px 0; margin-top: 4px; font: 500 12px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .verlauf__falten:hover { color: var(--green-ink); }
+
 .faden-shell .rand__leer { color: var(--muted); font-style: italic; }
 .faden-shell .rand__hinweis { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
 .faden-shell .rand .block { border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 4px; }
 .faden-shell .wb-form { display: flex; gap: 6px; margin-top: 4px; }
 .faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: 13px; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--white); color: var(--ink); }
 .faden-shell .wb-form--klein input { font-size: 12.5px; padding: 5px 10px; }
-.faden-shell .verlauf ol { list-style: none; margin: 4px 0 6px 6px; padding: 0 0 0 12px; border-left: 1px solid var(--rule); display: grid; gap: 6px; }
-.faden-shell .verlauf ol li button { display: flex; align-items: baseline; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 0; color: var(--muted); font-size: 12.5px; line-height: 1.3; }
-.faden-shell .verlauf ol li button::before { content: none; }
-.faden-shell .verlauf ol li button i { flex: none; font: 600 11px/1 var(--serif); font-style: italic; color: var(--muted); min-width: 12px; }
-.faden-shell .verlauf ol li button.aktiv { color: var(--ink); font-weight: 700; } .faden-shell .verlauf ol li button.aktiv i { color: var(--green-ink); }
 .faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; max-height: 44vh; overflow: auto; scrollbar-width: thin; }
 .faden-shell .mobil-leiste { display: none; }
 .faden-shell .schublade { display: none; }
