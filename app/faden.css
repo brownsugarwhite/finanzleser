@@ -15,7 +15,11 @@
   --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
   --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
   --serif: var(--font-heading); --sans: var(--font-body);
-  --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
+  /* 🚨 Satzspiegel EXAKT aus der Vorlage (Finanzleser Faden A v2, gemessen im laufenden
+     Prototyp): Grid `176px 720px 216px`, Abstand `clamp(28px, 4vw, 64px)`, außen 1320 px.
+     Vorher standen hier 300/750/300 mit Abstand 0 — die Randspalten waren dadurch fast
+     doppelt so breit und der Satz insgesamt viel luftiger als gezeichnet. */
+  --kopf-h: 64px; --rand-l: 176px; --rand-r: 216px; --spalte: 720px; --satz-gasse: clamp(28px, 4vw, 64px); --satz-rand: clamp(16px, 3vw, 40px);
   background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
 }
 body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidden; }
@@ -185,8 +189,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blatt__ohr:hover .blatt__ohr-schatten { border-width: 0 0 38px 38px; }
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
-.faden-shell .faden { margin: 0; padding: 22px 0 160px; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
-.faden-shell #mitte { padding: 0 11px; min-width: 0; }
+/* Der Satzspiegel ist so breit wie seine Spalten plus Gassen — kein Schlupf, damit sich
+   die Lage jeder Spalte exakt ausrechnen lässt (das braucht das Fortschritts-Gleis). */
+.faden-shell .faden { margin: 0 auto; max-width: calc(var(--rand-l) + var(--spalte) + var(--rand-r) + 2 * var(--satz-gasse) + 2 * var(--satz-rand)); padding: 22px var(--satz-rand) 160px; display: grid; grid-template-columns: var(--rand-l) minmax(0, var(--spalte)) var(--rand-r); gap: var(--satz-gasse); align-items: start; position: relative; }
+.faden-shell #mitte { padding: 0; min-width: 0; }
 
 /* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
    Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
@@ -198,15 +204,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    Darum die Gassenmitte ausrechnen — dieselbe Formel wie in `.rand--links`. */
 .faden-shell .fortschritt {
   --gleis: 2px; --fuell: 3px; --breite: 11px;
-  --seitenspalte: calc((100% - var(--spalte)) / 2);
-  --randbreite: min(var(--rand-l), calc(var(--seitenspalte) - 46px));
-  --gasse-links: calc(var(--seitenspalte) / 2 + var(--randbreite) / 2);   /* rechte Kante der Sidebar */
+  /* 🚨 30 px links der Mittelspalte — exakt wie in der Vorlage (`left: -30px` am Strom).
+     Vorher wurde die Gassenmitte ausgerechnet, weil die Randspalten mitwuchsen; seit der
+     Satzspiegel feste Spalten hat, ist die Lage schlicht abzählbar. */
   position: absolute;
-  left: calc((var(--gasse-links) + var(--seitenspalte)) / 2 - var(--breite) / 2);
+  left: calc(var(--satz-rand) + var(--rand-l) + var(--satz-gasse) - 30px - var(--breite) / 2);
   width: var(--breite);
   pointer-events: none; z-index: 1; display: none;
 }
-@media (min-width: 1440px) { .faden-shell .fortschritt { display: block; } }
+@media (min-width: 1060px) { .faden-shell .fortschritt { display: block; } }
 /* Striche als Verlauf statt `border-style: dashed` — so ist die Teilung exakt und
    überall gleich, statt vom Browser gewürfelt. */
 .faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--muted) 0 5px, transparent 5px 11px); }
@@ -232,8 +238,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 
 .faden-shell .faden > * { min-width: 0; }
 .faden-shell .rand { align-self: stretch; font-size: 13.5px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
-.faden-shell .rand--links { justify-self: center; width: min(var(--rand-l), calc(100% - 46px)); }
-.faden-shell .rand--rechts { justify-self: center; width: min(var(--rand-r), calc(100% - 46px)); }
+.faden-shell .rand--links { justify-self: stretch; width: 100%; }
+.faden-shell .rand--rechts { justify-self: stretch; width: 100%; }
 .faden-shell .rand__lauf { flex: 1; position: relative; }
 .faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
 .faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
