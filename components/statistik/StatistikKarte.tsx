@@ -15,6 +15,9 @@ import { rechne, formatWert } from "@/lib/statistik/formeln";
 import Torte from "./Torte";
 import Saeulen from "./Saeulen";
 import Balken from "./Balken";
+import Anteile from "./Anteile";
+import Linie from "./Linie";
+import { darstellungFuer } from "@/lib/statistik/darstellung";
 
 export const FARBEN = ["var(--stat-1)", "var(--stat-2)", "var(--stat-3)", "var(--stat-4)", "var(--stat-5)", "var(--stat-6)"];
 
@@ -39,6 +42,9 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
     return bezug.wert * (regler / r.start);
   }, [st.regler, regler, rates, aktuelle]);
 
+  // Welche Form der Datensatz bekommt — einmal entschieden, an einer Stelle.
+  const dar = useMemo(() => darstellungFuer(st), [st]);
+
   const segmente: Segment[] = useMemo(() => {
     const basis: Segment[] = aktuelle.werte.map((w, i) => ({ ...w, farbe: w.farbe || (st.art === "torte" ? FARBEN[i % FARBEN.length] : FARBEN[0]), aus: aus.has(w.label), hervor: hover === w.label }));
     if (ihrWert != null && st.art !== "torte" && st.regler?.imDiagramm) basis.push({ label: `Ihr Wert (${formatWert(regler, st.regler?.einheit)})`, wert: ihrWert, farbe: "var(--pink)", aus: false, hervor: hover === "__ihr", ihr: true });
@@ -53,7 +59,17 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
     const zahlen = el.querySelectorAll<HTMLElement>("[data-zahl]");
     if (!stuecke.length) return;
     const ctx = gsap.context(() => {
-      gsap.set(stuecke, { scale: st.art === "torte" ? 0.2 : st.art === "saeulen" ? undefined : undefined, scaleY: st.art === "saeulen" ? 0 : undefined, scaleX: st.art === "balken" ? 0 : undefined, opacity: st.art === "torte" ? 0 : 1, transformOrigin: st.art === "torte" ? "100px 100px" : st.art === "saeulen" ? "50% 100%" : "0% 50%" });
+      // 🚨 Nach der DARSTELLUNG, nicht nach `st.art`. Die Anteilsleiste hat `art: "torte"`,
+      // ist aber ein waagerechter Streifen — mit den Torten-Startwerten schrumpften ihre
+      // Stücke auf einen Punkt 100 px innerhalb des Kastens zusammen.
+      const kreis = dar === "kreis";
+      gsap.set(stuecke, {
+        scale: kreis ? 0.2 : undefined,
+        scaleY: dar === "saeulen" ? 0 : undefined,
+        scaleX: dar === "balken" || dar === "anteile" ? 0 : undefined,
+        opacity: kreis ? 0 : 1,
+        transformOrigin: kreis ? "100px 100px" : dar === "saeulen" ? "50% 100%" : "0% 50%",
+      });
       ScrollTrigger.create({
         trigger: el, start: "top 80%", once: true,
         onEnter: () => {
@@ -68,13 +84,13 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
       });
     }, el);
     return () => ctx.revert();
-  }, [st.art]);
+  }, [dar]);
 
   const umschalten = (label: string) => setAus((alt) => { const n = new Set(alt); if (n.has(label)) n.delete(label); else n.add(label); return n; });
   const sekundaer = !!st.quelle?.sekundaer;
 
   return (
-    <section ref={wurzel} className={`kasten kasten--statistik kasten--statistik-${st.art}`} aria-label={st.titel}>
+    <section ref={wurzel} className={`kasten kasten--statistik kasten--statistik-${dar}`} aria-label={st.titel}>
       <span className="kicker kicker--gruen">Statistik{st.quelle?.name ? ` · ${st.quelle.name.split(/[,(;]/)[0].trim()}` : ""}{st.quelle?.stand ? ` · Stand ${st.quelle.stand}` : ""}{sekundaer && <em className="statistik__sekundaer">Sekundärquelle</em>}</span>
       <h3 className="statistik__titel">{st.titel}</h3>
       {st.untertitel && <p className="statistik__unter">{st.untertitel}</p>}
@@ -84,9 +100,11 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
           {st.reihen.map((r, i) => <button key={r.key} type="button" role="tab" aria-selected={i === reihe} className={"chip" + (i === reihe ? " chip--aktiv" : "")} onClick={() => setReihe(i)}>{r.label}</button>)}
         </div>
       )}
-      {st.art === "torte" && <Torte segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
-      {st.art === "saeulen" && <Saeulen segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
-      {st.art === "balken" && <Balken segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
+      {dar === "kreis" && <Torte segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
+      {dar === "anteile" && <Anteile segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
+      {dar === "saeulen" && <Saeulen segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
+      {dar === "linie" && <Linie segmente={segmente} einheit={st.einheit} />}
+      {dar === "balken" && <Balken segmente={segmente} einheit={st.einheit} onHover={setHover} onToggle={umschalten} />}
       {st.regler && (
         <div className="regler">
           <label>

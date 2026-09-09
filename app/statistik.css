@@ -57,3 +57,41 @@
   .faden-shell .saeule__stab { height: 150px; } .faden-shell .saeule__label { font-size: 9.5px; letter-spacing: .03em; }
   .faden-shell .balken__zeile { grid-template-columns: 1fr auto; } .faden-shell .balken__stab { grid-column: 1 / -1; }
 }
+
+/* =====================================================================================
+   Anteilsleiste und Linienchart (Design A v2)
+
+   Zwei Lesarten derselben Daten, keine neuen Felder — welche greift, entscheidet
+   lib/statistik/darstellung.ts.
+   ===================================================================================== */
+
+/* ---------- Anteilsleiste: ein Streifen, der ein Ganzes teilt ---------- */
+.anteile { display: grid; gap: 0; }
+.anteile__leiste { display: flex; height: 18px; overflow: hidden; }
+.anteile__stueck { display: block; height: 100%; border-right: 1px solid var(--color-bg-page); transition: opacity .25s; }
+.anteile__stueck:last-child { border-right: 0; }
+.anteile__stueck.gedimmt, .anteile__marke.gedimmt { opacity: .3; }
+/* Die Marken hängen an Linien, die abwechselnd kurz und lang sind — bei schmalen
+   Stücken lägen sie sonst übereinander. */
+.anteile__marken { position: relative; height: 62px; }
+.anteile__marke { position: absolute; top: 0; display: grid; justify-items: start; gap: 1px; white-space: nowrap; transition: opacity .25s; }
+.anteile__strich { width: 1px; height: 22px; display: block; margin-bottom: 4px; }
+/* Der schmale Rest steht als Legende darunter, nicht am Streifen (Anteile.tsx). */
+.anteile__rest { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.anteile__rest li { display: flex; align-items: baseline; gap: 6px; font: 400 12.5px/1.4 var(--font-body); color: var(--color-text-medium); transition: opacity .25s; }
+.anteile__rest li.gedimmt { opacity: .3; }
+.anteile__rest i { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; }
+.anteile__rest b { font-weight: 700; color: var(--color-text-primary); font-variant-numeric: tabular-nums; }
+.anteile__marke b { font: 700 13px/1.2 var(--font-body); color: var(--color-text-primary); font-variant-numeric: tabular-nums; }
+.anteile__marke em { font: italic 300 12px/1.3 var(--font-heading); color: var(--color-text-medium); font-style: italic; }
+
+/* ---------- Linienchart: die Richtung zwischen zwei Punkten ---------- */
+.linie__svg { width: 100%; height: auto; display: block; overflow: visible; }
+.linie__pfad { fill: none; stroke: var(--color-text-primary); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.linie__gitter { stroke: rgba(51,74,39,.16); stroke-width: 1; stroke-dasharray: 2 4; }
+.linie__achse { stroke: rgba(51,74,39,.4); stroke-width: 1; }
+.linie__fall { stroke: rgba(51,74,39,.12); stroke-width: 1; }
+.linie__punkt { fill: var(--color-bg-page); stroke: var(--color-text-primary); stroke-width: 1.5; }
+.linie__punkt--letzter { stroke: var(--color-brand-secondary); }
+.linie__label, .linie__achsentext { font: 400 11px var(--font-body); fill: var(--color-text-medium); font-variant-numeric: tabular-nums; }
+.linie__wert { font: 700 13px var(--font-body); fill: var(--color-brand-secondary); font-variant-numeric: tabular-nums; }
