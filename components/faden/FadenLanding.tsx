@@ -7,7 +7,6 @@
  */
 import { getNavItems } from "@/lib/wordpress";
 import { baueSpalten } from "@/lib/faden/spalten";
-import { getBeitragsIndex } from "@/lib/faden/titel";
 import { buildGlossarUrl } from "@/lib/urls";
 import KapitelKopf from "./KapitelKopf";
 import HeroLanding from "./hero/HeroLanding";
@@ -32,7 +31,6 @@ const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string
 export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
   const nav = await getNavItems();
-  await getBeitragsIndex();
   const rubriken = await baueSpalten(nav);
   const finanzwort = await spielAm("finanzwort");
   // Echte Bestandszahlen für die Kacheln im Hero (statt der Prototyp-Zahlen).

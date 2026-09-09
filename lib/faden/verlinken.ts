@@ -29,9 +29,38 @@ const LEER_TAGS = new Set(["br", "img", "hr", "input", "wbr", "source", "col", "
 const WORT = "A-Za-zÄÖÜäöüß";
 
 interface Variante { text: string; klein: string; slug: string }
-interface Linker { rx: RegExp; varianten: Variante[] }
+interface Linker {
+  rx: RegExp;
+  varianten: Variante[];
+  /**
+   * Varianten nach ihren ersten beiden Kleinbuchstaben gebündelt, innerhalb des Bündels
+   * weiter nach Länge absteigend. `begriffSlug` sucht die längste passende Variante über
+   * `startsWith` — dafür müssen die ersten beiden Zeichen ohnehin gleich sein, also
+   * reicht das Bündel statt der Liste aller ~2.700.
+   */
+  eimer: Map<string, Variante[]>;
+}
 
-const linkerCache = new WeakMap<object, Linker>();
+/**
+ * 🚨 Modulweit, nicht an der Index-Map.
+ *
+ * Vorher hing der Cache in einer WeakMap am Ergebnis von `getGlossarIndex()` — das ist
+ * `cache()`, also pro Request eine neue Map. Der Cache griff damit nie: Bei JEDEM Render
+ * einer Ratgeberseite wurden 2.700 Varianten gesammelt, sortiert und zu einer Regex mit
+ * 2.700 Alternativen kompiliert, und das zweimal (KetteKapitel verlinkt in zwei
+ * Durchläufen). Der Schlüssel ist jetzt eine Signatur des Index, kein Objekt.
+ */
+let linkerCache: { schluessel: string; linker: Linker } | null = null;
+
+/** Billige Signatur des Glossars: Zahl der Begriffe + Streuwert über Slugs und Varianten. */
+function indexSignatur(index: Map<string, GlossarEintrag>): string {
+  let h = 0;
+  for (const [slug, e] of index) {
+    const s = slug + "\u0000" + (e.varianten?.length ?? 0) + "\u0000" + (e.title || "");
+    for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0;
+  }
+  return index.size + ":" + (h >>> 0).toString(36);
+}
 
 function escapeRx(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -39,8 +68,8 @@ function escapeRx(s: string): string {
 
 /** Regex und Variantenliste je Glossar-Index einmal bauen (587 Begriffe, ~2.700 Varianten). */
 export function erzeugeLinker(index: Map<string, GlossarEintrag>): Linker {
-  const hit = linkerCache.get(index);
-  if (hit) return hit;
+  const schluessel = indexSignatur(index);
+  if (linkerCache && linkerCache.schluessel === schluessel) return linkerCache.linker;
   const varianten: Variante[] = [];
   const gesehen = new Set<string>();
   for (const e of index.values()) {
@@ -54,15 +83,24 @@ export function erzeugeLinker(index: Map<string, GlossarEintrag>): Linker {
   }
   varianten.sort((a, b) => b.text.length - a.text.length);
   const rx = new RegExp(`(^|[^${WORT}])((?:${varianten.map((x) => escapeRx(x.text)).join("|")})[${WORT}]*)`, "gi");
-  const l = { rx, varianten };
-  linkerCache.set(index, l);
+  const eimer = new Map<string, Variante[]>();
+  for (const v of varianten) {
+    const k = v.klein.slice(0, 2);
+    const liste = eimer.get(k);
+    if (liste) liste.push(v); else eimer.set(k, [v]);
+  }
+  const l: Linker = { rx, varianten, eimer };
+  linkerCache = { schluessel, linker: l };
   return l;
 }
 
-function begriffSlug(varianten: Variante[], wort: string): string | null {
+function begriffSlug(linker: Linker, wort: string): string | null {
   const w = wort.toLowerCase();
   if (AUSNAHMEN.has(w)) return null;
-  for (const v of varianten) {
+  // Nur das Bündel mit denselben ersten beiden Zeichen — `startsWith` kann sonst nicht
+  // greifen. Reihenfolge im Bündel ist dieselbe wie in der Gesamtliste (Länge absteigend),
+  // das Ergebnis also unverändert.
+  for (const v of linker.eimer.get(w.slice(0, 2)) || []) {
     if (!w.startsWith(v.klein)) continue;
     const rest = wort.slice(v.text.length);
     if (/^[A-ZÄÖÜ]/.test(v.text) && !/^[A-ZÄÖÜ]/.test(wort)) continue; // Nomen nur großgeschrieben
@@ -97,7 +135,7 @@ function begriffLink(slug: string, wort: string): string {
 /** Ein Textknoten (ohne Tags): Begriffe verlinken, Entities unangetastet lassen. */
 function textVerlinken(text: string, ctx: LinkKontext, nurBevorzugt: boolean): string {
   if (text.trim().length < 3 || ctx.zahl >= ctx.max) return text;
-  const { rx, varianten } = ctx.linker;
+  const { rx } = ctx.linker;
   return text.split(/(&[#\w]+;)/).map((stueck, i) => {
     if (i % 2 === 1 || !stueck) return stueck; // Entity
     let out = "";
@@ -107,7 +145,7 @@ function textVerlinken(text: string, ctx: LinkKontext, nurBevorzugt: boolean): s
     while ((m = rx.exec(stueck)) !== null) {
       if (ctx.zahl >= ctx.max) break;
       const wort = m[2];
-      const slug = begriffSlug(varianten, wort);
+      const slug = begriffSlug(ctx.linker, wort);
       if (!slug || ctx.gesehen.has(slug)) continue;
       if (nurBevorzugt && !ctx.bevorzugt.has(slug)) continue;
       ctx.gesehen.add(slug);

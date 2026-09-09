@@ -8,6 +8,7 @@
 import { useState } from "react";
 import { useFaden } from "@/components/faden/FadenProvider";
 import FadenIkon from "@/components/faden/FadenIkon";
+import { holeIndex } from "@/lib/faden/indexClient";
 
 function ikonFuer(titel: string): string {
   if (/Checkliste/i.test(titel)) return "haken";
@@ -23,16 +24,14 @@ export default function AktenkofferKarte() {
   const [mail, setMail] = useState("");
 
   const oeffnen = async (titel: string) => {
-    try {
-      const r = await fetch("/api/faden/index");
-      const liste = (await r.json()) as { titel?: string; href?: string; title?: string; url?: string }[];
-      const t = titel.toLowerCase();
-      const treffer = (Array.isArray(liste) ? liste : []).find((e) => (e.titel || e.title || "").toLowerCase() === t);
-      const href = treffer?.href || treffer?.url;
-      navigieren(href || `/suche?q=${encodeURIComponent(titel)}`);
-    } catch {
-      navigieren(`/suche?q=${encodeURIComponent(titel)}`);
-    }
+    // 🚨 Vorher las diese Stelle die Antwort selbst und prüfte `Array.isArray(liste)`.
+    // Die Route liefert `{ items, total }` — die Prüfung war immer falsch, der Treffer
+    // wurde nie gefunden, jeder Klick landete auf /suche. Jetzt der gemeinsame Helfer,
+    // der den Index auch nur einmal je Sitzung holt.
+    const t = titel.toLowerCase();
+    const liste = await holeIndex();
+    const treffer = liste.find((e) => e.titel.toLowerCase() === t);
+    navigieren(treffer?.href || `/suche?q=${encodeURIComponent(titel)}`);
   };
   const entfernen = (titel: string) => {
     setWeg((w) => [...w, titel]);

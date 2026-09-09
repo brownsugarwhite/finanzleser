@@ -4,7 +4,9 @@
  * und Nachschlagewerk brauchen.
  */
 import { cache } from "react";
-import { getAllGlossar } from "@/lib/wordpress";
+import { unstable_cache } from "next/cache";
+import { getAllGlossar, CONTENT_REVALIDATE } from "@/lib/wordpress";
+import { FADEN_INDEX_TAG } from "@/lib/cacheTags";
 import { stripTags } from "@/lib/articleHtml";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { buildGlossarUrl } from "@/lib/urls";
@@ -31,8 +33,15 @@ export interface BegriffDaten {
 /** Zeile fürs Nachschlagewerk (A–Z, Suche): klein genug für alle 587 auf einmal. */
 export interface BegriffZeile { slug: string; titel: string; kurz: string; rubrik: string; ratgeber: boolean; tool: WerkzeugTyp | "" }
 
+/** Über Requests hinweg gecacht (siehe lib/faden/titel.ts): 587 Begriffe je Render auspacken ist zu teuer. */
+const glossarListe = unstable_cache(
+  async (): Promise<GlossarEintrag[]> => getAllGlossar(),
+  ["faden-glossarindex"],
+  { revalidate: CONTENT_REVALIDATE, tags: [FADEN_INDEX_TAG] },
+);
+
 export const getGlossarIndex = cache(async (): Promise<Map<string, GlossarEintrag>> => {
-  const alle = await getAllGlossar();
+  const alle = await glossarListe();
   return new Map(alle.map((e) => [e.slug, e]));
 });
 
