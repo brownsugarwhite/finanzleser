@@ -36,7 +36,7 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
     <>
       {teile.map((t, i) => {
         if (t.art === "html") return <div key={i} className="prose fliess__html" dangerouslySetInnerHTML={{ __html: t.html }} />;
-        if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><GamificationEmbed gamType={t.typ} fields={t.felder} /></div>;
+        if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         return <WerkzeugKarte key={i} teil={t} toolData={toolData} />;
       })}
@@ -47,7 +47,7 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
 function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData; url: string }) {
   return (
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
-      <AbschnittTeilen titel={a.titel} url={url} id={a.id} />
+      <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
@@ -179,7 +179,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </section>
           )}
           <KassensturzTeaser />
-          <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} />
+          <Insel typ="aktionen" werte={{ titel: k.titel, url: k.url, kurzfassung: k.faden.kurzfassung, artikelId: `artikel-${k.slug}`, pdf: beitragPdf }}><Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} /></Insel>
           {dazu.length > 0 && (
             <div className="dazu">
               <span className="kicker">Dazu passt</span>
@@ -188,7 +188,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               ))}
             </div>
           )}
-          <WochenbriefKasten />
+          <Insel typ="wochenbrief"><WochenbriefKasten /></Insel>
           <GlossarDaten daten={begriffe} />
         </article>
       </div>

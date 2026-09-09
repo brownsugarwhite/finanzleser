@@ -6,6 +6,7 @@
 import type { ReactNode } from "react";
 import KapitelKopf from "./KapitelKopf";
 import Aktionen from "./kette/Aktionen";
+import Insel from "./kette/Insel";
 
 export interface Krume { name: string; href: string }
 
@@ -41,7 +42,7 @@ export default function KartenKapitel({
           </h1>
           {beschreibung && <p className="vorspann">{beschreibung}</p>}
           {children}
-          <Aktionen titel={titel} url={url} artikelId={id} />
+          <Insel typ="aktionen" werte={{ titel, url, artikelId: id }}><Aktionen titel={titel} url={url} artikelId={id} /></Insel>
         </article>
       </div>
     </section>

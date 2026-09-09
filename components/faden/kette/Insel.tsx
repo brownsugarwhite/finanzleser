@@ -18,7 +18,10 @@
  */
 import type { ReactNode } from "react";
 
-export type InselTyp = "rechner" | "checkliste" | "vergleich" | "dokumente" | "statistik" | "weiterlesen";
+export type InselTyp =
+  | "rechner" | "checkliste" | "vergleich" | "dokumente"
+  | "statistik" | "weiterlesen" | "spiel"
+  | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief";
 
 export default function Insel({
   typ, arg, werte, children,

@@ -128,7 +128,7 @@ export default async function WerkzeugKarte({
       <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
       {!ohneTitel && <h3>{titel}</h3>}
       <div className="kasten__koerper article-tool-embed article-finanztool">{koerper}</div>
-      {!ohneTitel && <KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite />}
+      {!ohneTitel && <Insel typ="kasten-fuss" werte={{ titel, url: werkzeugUrl(teil.typ, slugs[0]), kastenId: `werkzeug-${teil.typ}-${teil.slug}`, eigeneSeite: true }}><KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite /></Insel>}
     </div>
   );
 }

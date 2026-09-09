@@ -26,7 +26,10 @@ export default function InhaltAktiv() {
   // verschwand, und das neue Kapitel bekam gar keinen.
   useEffect(() => {
     const h = (ev: Event) => {
-      const a = (ev.target as Element | null)?.closest?.("#kapitel-live a[href^='#']");
+      // #strom statt #kapitel-live: Ankerlinks in eingefrorenen Kapiteln sollen genauso
+      // sanft unter den Kopf rollen. Deren IDs sind präfixiert (saeubern), die hrefs seit
+      // demselben Schritt ebenfalls — getElementById findet also das richtige Ziel.
+      const a = (ev.target as Element | null)?.closest?.("#strom a[href^='#']");
       if (!a) return;
       ev.preventDefault();
       const id = (a.getAttribute("href") || "").slice(1);

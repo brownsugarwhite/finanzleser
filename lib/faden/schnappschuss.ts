@@ -42,6 +42,14 @@ export function saeubern(html: string, id: string): string {
   });
   t.content.querySelectorAll("[data-leo-alt] .tippt, [data-leo-alt] .cursor, [data-leo-alt] .leo-chips, [data-leo-alt] .werkzeuge").forEach((e) => e.remove());
   t.content.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));
+  // IDs präfixieren, damit ein eingefrorenes Kapitel keine Doppelten ins Dokument bringt —
+  // und die Ankerlinks GLEICH MIT. Ohne das zeigte das Inhaltsverzeichnis eines
+  // aufgeklappten Kapitels auf `#heading-2`, während der Abschnitt `alt-<id>-heading-2`
+  // hieß: elf Links, die ins Leere sprangen.
   t.content.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
+  t.content.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+    const ziel = a.getAttribute("href")!.slice(1);
+    if (ziel) a.setAttribute("href", `#alt-${id}-${ziel}`);
+  });
   return t.innerHTML;
 }

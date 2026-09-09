@@ -16,7 +16,7 @@
  *     Seite bis zur RSC-Antwort das einzige `#kapitel-live` ist, an dem der Provider
  *     erkennt, wann das neue Kapitel steht.
  */
-import { Fragment, useMemo, useState, type ReactNode } from "react";
+import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
 import { saeubern } from "@/lib/faden/schnappschuss";
@@ -27,7 +27,23 @@ import InselnBeleben from "./kette/InselnBeleben";
 
 function Schnappschuss({ html, id }: { html: string; id: string }) {
   const rein = useMemo(() => saeubern(html, id), [html, id]);
+  const behaelter = useRef<HTMLDivElement>(null);
   const [wurzel, setWurzel] = useState<HTMLDivElement | null>(null);
+
+  // 🚨 Das HTML wird EINMAL von Hand gesetzt, nicht über dangerouslySetInnerHTML.
+  //
+  // Sonst verwaltet React den Inhalt weiter: Bei irgendeiner Zustandsänderung im Provider
+  // — Registerblatt öffnen, etwas in den Aktenkoffer legen — schrieb es den Inhalt neu.
+  // Nachgemessen mit einem MutationObserver: genau eine Mutation, ein Knoten raus, einer
+  // rein. Dabei sterben die Elemente, in die InselnBeleben hineinportaliert; die Portale
+  // zeigten danach auf abgehängte Knoten, und ALLE Werkzeuge im aufgeklappten Kapitel
+  // waren wieder leer. So gehört der Inhalt uns, und React fasst ihn nicht mehr an.
+  useLayoutEffect(() => {
+    const el = behaelter.current;
+    if (!el) return;
+    el.innerHTML = rein;
+    setWurzel(el);
+  }, [rein]);
   // 🚨 KEIN `inert`. Das machte jedes aufgeklappte Kapitel tot — auch die Ratgeberkarten
   // unter „Heute". Der Prototyp kennt kein inert; Links im eingefrorenen Kapitel fängt
   // derselbe Klick-Abfänger ab wie überall (FadenProvider) und navigiert normal.
@@ -38,8 +54,8 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
   // Schnappschuss samt Markern in der Sitzung liegt, gilt das auch nach einem Neuladen.
   return (
     <>
-      <div className="kapitel__schnappschuss" ref={setWurzel} dangerouslySetInnerHTML={{ __html: rein }} />
-      <InselnBeleben wurzel={wurzel} />
+      <div className="kapitel__schnappschuss" ref={behaelter} />
+      <InselnBeleben wurzel={wurzel} stand={rein} />
     </>
   );
 }
