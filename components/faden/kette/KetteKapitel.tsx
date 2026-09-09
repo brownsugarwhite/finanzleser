@@ -10,6 +10,8 @@ import type { Post } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import { baueKette, werkzeugId, type Abschnitt, type Teil } from "@/lib/faden/kette";
 import { verweiseAufloesen } from "@/lib/faden/titel";
+import { zeitungKlassen } from "@/lib/faden/zeitung";
+import { cn } from "@/lib/cn";
 import { medienUrl } from "@/lib/faden/medien";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 import { alsText, neuerKontext, verlinke } from "@/lib/faden/verlinken";
@@ -35,7 +37,7 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
   return (
     <>
       {teile.map((t, i) => {
-        if (t.art === "html") return <div key={i} className="prose fliess__html" dangerouslySetInnerHTML={{ __html: t.html }} />;
+        if (t.art === "html") return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html))} dangerouslySetInnerHTML={{ __html: t.html }} />;
         if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         return <WerkzeugKarte key={i} teil={t} toolData={toolData} />;
@@ -123,7 +125,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           {k.einleitung && (
             <div className="einleitung" id="heading-1">
               <h2 className="einleitung__titel">{k.einleitung.titel}</h2>
-              <div className="prose fliess__html" dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
+              <div className={cn("prose fliess__html", zeitungKlassen(k.einleitung.html, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
             </div>
           )}
           {toc.length > 0 && (
@@ -166,7 +168,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           {k.fazitHtml && (
             <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
               <div className="fazit-kopf"><span><img src="/icons/fazit-starburst.svg" alt="" />Fazit</span></div>
-              <div className="fazit prose" dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
+              <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>
           )}
           {k.werkzeuge.length > 0 && (

@@ -281,6 +281,41 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .fliess::after { content: ""; display: block; clear: both; }
 .faden-shell .fliess__html > :first-child { margin-top: 0 !important; }
 .faden-shell .fliess > .kasten { clear: both; margin: 14px 0 18px; }
+
+/* ---------- Zeitungssatz: zwei Spalten + Initiale (lib/faden/zeitung.ts) ---------- */
+/* `columns: 320px 2` statt einer Medienabfrage: die Spaltenzahl richtet sich nach dem
+   Platz, den der Block TATSÄCHLICH hat. Unter ~700 px bleibt eine Spalte übrig —
+   auch dann, wenn das Fenster breit ist, der Block aber in einem schmalen Kasten sitzt. */
+.faden-shell .zeitung { columns: 320px 2; column-gap: 40px; column-rule: 1px solid var(--rule); orphans: 2; widows: 2; }
+/* Absätze dürfen über den Spaltenknick laufen — so setzt es die Zeitung.
+   Aufzählungen und Tabellen kommen hier gar nicht erst vor: Blöcke, die welche
+   enthalten, bleiben einspaltig (SPERREN in lib/faden/zeitung.ts). */
+.faden-shell .zeitung blockquote { break-inside: avoid; }
+.faden-shell .zeitung h3, .faden-shell .zeitung h4 { break-after: avoid; }
+.faden-shell .zeitung > :first-child { margin-top: 0; }
+.faden-shell .zeitung > :last-child { margin-bottom: 0 !important; }
+/* 🚨 Ab 900 px floatet die umflossene Anzeige (300 px) rechts im selben Kasten — siehe
+   .einschub--umflossen. Ein Mehrspalten-Block umfließt einen Float nicht, er weicht ihm
+   komplett aus; links neben der Anzeige bliebe ein Loch. Deshalb dort einspaltig.
+   Darunter floatet nichts mehr, da dürfen die Spalten bleiben. */
+@media (min-width: 901px) {
+  .faden-shell .einschub--umflossen + .zeitung { columns: 1; }
+}
+
+/* Initiale — zwei Zeilen hoch, in der Überschriftenfarbe und -schrift.
+   🚨 Nur an `p:first-child`: beginnt der Block mit Liste oder Überschrift, gibt es
+   keine Initiale statt einer verunglückten (::first-letter greift dort nicht sinnvoll). */
+.faden-shell .zeitung--initiale > p:first-child::first-letter {
+  float: left;
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 3.6em;
+  line-height: .84;
+  padding-right: .07em;
+  margin-top: .02em;
+}
+
 .faden-shell .faq-kopf { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 700; font-size: 22px; }
 .faden-shell .faq-kopf i { font-style: normal; color: var(--muted); letter-spacing: 6px; font-size: 14px; opacity: .6; }
 .faden-shell dl.faq { margin: 0; display: grid; gap: 6px; }
