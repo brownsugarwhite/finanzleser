@@ -203,7 +203,16 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
           <span className="kicker kicker--pink">{daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
           <span className="ks__stand">{stand.text}</span>
         </div>
-        <div className="ks__fortschritt"><i style={{ width: `${stand.breite}%` }} /></div>
+        {/* Segmente statt eines Balkens: eine Zeitung zeigt Fortschritt in Abschnitten,
+            nicht als Flüssigkeitsstand. Erledigte grün, der laufende in Tinte. */}
+        <div className="ks__fortschritt" role="progressbar" aria-valuenow={Math.round(stand.breite)} aria-valuemin={0} aria-valuemax={100}>
+          {fragen.map((f, i) => {
+            const anteil = ((i + 1) / fragen.length) * 100;
+            const erledigt = stand.breite >= anteil - 0.5;
+            const laeuft = !erledigt && stand.breite > (i / fragen.length) * 100;
+            return <i key={f.id ?? i} className={erledigt ? "fertig" : laeuft ? "laeuft" : ""} />;
+          })}
+        </div>
         <div className={"ks__buehne" + (buehne ? ` ${buehne}` : "")}>
           {frage && istSchaetzfrage(frage) && (
             <SchaetzFrage key={frage.id} f={frage} onTipp={(w, p) => tipp(frage, w, p)} onWeiter={(w) => naechste({ ...antworten, [frage.id]: w }, idx + 1)} />
