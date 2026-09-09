@@ -47,9 +47,12 @@ export default function FadenShell({ children, nav, preload, level }: { children
         <Menue offen={menue} onZu={() => setMenue(false)} onRand={(s) => setSchublade(s)} />
         <main className="faden" id="faden">
           <RandLinks mobil={schublade === "links"} onZu={zu} />
-          <Fortschritt />
           {schublade && <div className="schublade" onClick={zu} />}
           <div id="mitte">
+            {/* Das Gleis hängt am Strom, nicht am Raster — wie der Faden der Vorlage, der
+                als `left:-30px` am Strom klebt. Im Raster wäre seine Lage seit
+                `justify-content: center` nicht mehr ausrechenbar. */}
+            <Fortschritt />
             <div className="mobil-leiste">
               <button type="button" onClick={() => setSchublade("links")}><i>☰</i> Verlauf</button>
               <button type="button" onClick={() => setSchublade("rechts")}>Glossar <i>✦</i></button>

@@ -7,34 +7,70 @@
    zuerst vorkommt; kommt er unverändert wieder, gehört er ins Vokabular.
    ===================================================================================== */
 
-/* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
-/* Der Satzspiegel ist so breit wie seine Spalten plus Gassen — kein Schlupf, damit sich
-   die Lage jeder Spalte exakt ausrechnen lässt (das braucht das Fortschritts-Gleis). */
-.faden-shell .faden { margin: 0 auto; max-width: calc(var(--rand-l) + var(--spalte) + var(--rand-r) + 2 * var(--satz-gasse) + 2 * var(--satz-rand)); padding: 22px var(--satz-rand) 160px; display: grid; grid-template-columns: var(--rand-l) minmax(0, var(--spalte)) var(--rand-r); gap: var(--satz-gasse); align-items: start; position: relative; }
-.faden-shell #mitte { padding: 0; min-width: 0; }
-@media (max-width: 900px) {
-  .faden-shell .faden { padding: 12px 14px 110px; }
+/* ---------- Satzspiegel (Vorlage Zeile 274–277, Umbrüche 1519/1530/1996/2015) ----------
+
+   Die Vorlage entscheidet in JavaScript, hier entscheiden Medienabfragen — dieselben
+   Schwellen, dieselben Werte:
+
+     unter 1060   eine Spalte  minmax(0,1fr)                 Randspalten sind Schubladen
+     ab    1060   zwei Spalten 190px minmax(0,780px)         Verlauf links, Faden sichtbar
+     ab    1280   drei Spalten 176px minmax(0,720px) 216px   Glossar rechts kommt dazu
+
+   Dazu: Außenrand clamp(16,3vw,40), Gasse clamp(28,4vw,64), Satzspiegel höchstens 1320 px
+   breit, Spalten mittig darin (`justify-content: center`), oben bündig.
+
+   🚨 Vorher sprang das Produkt von einer Spalte direkt auf drei — bei 1440 px. Zwischen
+   1060 und 1439 px, also auf den häufigsten Laptopbreiten, zeigte es damit ein Layout, das
+   die Vorlage gar nicht enthält: keine Randspalte, Mittelspalte auf 800 px gedeckelt statt
+   780/720, Innenabstand oben 22 px statt 112. Und bei 1440 px stand der Satz 40 px zu weit
+   links, weil `justify-content` fehlte und der Rest der Zeile rechts liegen blieb. */
+
+.faden-shell .faden {
+  --rand-l: 0px; --rand-r: 0px; --spalte: 100%;
+  box-sizing: border-box;
+  max-width: calc(1320px + 2 * var(--satz-rand));
+  margin: 0 auto;
+  padding: 118px var(--satz-rand) 140px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--satz-gasse);
+  justify-content: center;
+  align-items: start;
+  position: relative;
 }
-@media (max-width: 1439px) {
-  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
-  .faden-shell #mitte { padding: 0; }
+/* Der Strom ist der Bezug für den Faden links davon (Vorlage: `left:-30px` am Strom). */
+.faden-shell #mitte { position: relative; padding: 0; min-width: 0; }
+
+@media (min-width: 1060px) {
+  .faden-shell .faden {
+    --rand-l: 190px; --spalte: 780px;
+    grid-template-columns: var(--rand-l) minmax(0, var(--spalte));
+    padding-top: 112px;
+  }
+}
+@media (min-width: 1280px) {
+  .faden-shell .faden {
+    --rand-l: 176px; --rand-r: 216px; --spalte: 720px;
+    grid-template-columns: var(--rand-l) minmax(0, var(--spalte)) var(--rand-r);
+  }
 }
 
-/* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
-   Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
-   unberührt bleiben — ein viertes Rasterkind würde die Aufteilung verschieben.
+/* ---------- Fortschritt: gestricheltes Gleis links der Mittelspalte ----------
+   Absolut im Strom platziert (`#mitte` ist `position: relative`) — genau wie der Faden in
+   der Vorlage, der als `left:-30px` am Strom hängt.
 
-   🚨 Die Gasse ist NICHT konstant: die Seitenspalte wächst mit dem Fenster, die
-   Randspalte darin ist bei 300px gedeckelt und mittig gesetzt. Ein fester Abstand zur
-   Mittelspalte klebt deshalb bei 1440px an der Sidebar und driftet bei 1920px weit ab.
-   Darum die Gassenmitte ausrechnen — dieselbe Formel wie in `.rand--links`. */
+   🚨 Es hängt am Strom, nicht am Raster. Solange die Lage aus Außenrand, Randspaltenbreite
+   und Gasse gerechnet wurde, verschob sie jede Änderung am Satzspiegel — und mit
+   `justify-content: center` wäre sie gar nicht mehr ausrechenbar gewesen. */
 .faden-shell .fortschritt {
   --gleis: 2px; --fuell: 3px; --breite: 11px;
   /* 🚨 30 px links der Mittelspalte — exakt wie in der Vorlage (`left: -30px` am Strom).
      Vorher wurde die Gassenmitte ausgerechnet, weil die Randspalten mitwuchsen; seit der
      Satzspiegel feste Spalten hat, ist die Lage schlicht abzählbar. */
-  position: absolute;
-  left: calc(var(--satz-rand) + var(--rand-l) + var(--satz-gasse) - 30px - var(--breite) / 2);
+  position: absolute; top: 0; bottom: 0;
+  /* 30 px links der Mittelspalte, wie in der Vorlage. Das Gleis liegt mittig im 11-px-
+     Streifen, also rückt der Streifen um seine halbe Restbreite weiter nach links. */
+  left: calc(-30px - (var(--breite) - var(--gleis)) / 2);
   width: var(--breite);
   pointer-events: none; z-index: 1; display: none;
 }
@@ -63,11 +99,22 @@
 @media (prefers-reduced-motion: reduce) { .faden-shell .fortschritt__punkt.jetzt::after { display: none; } }
 
 .faden-shell .faden > * { min-width: 0; }
-.faden-shell .rand { align-self: stretch; font-size: 13.5px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
-.faden-shell .rand--links { justify-self: stretch; width: 100%; }
-.faden-shell .rand--rechts { justify-self: stretch; width: 100%; }
-.faden-shell .rand__lauf { flex: 1; position: relative; }
-.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
+
+/* ---------- Randspalten (Vorlage Zeile 279 links, 1434 rechts) ----------
+   Die Spalte selbst klebt — nicht ein Kasten darin. Sie ist höchstens so hoch wie das
+   Fenster unter dem Kopf und scrollt in sich; die Bildlaufleiste bleibt unsichtbar.
+   Die beiden Zwischenhüllen aus dem Prototyp treten dafür zur Seite (`display: contents`),
+   damit `.rand` direkt der Flex-Kasten der Vorlage ist. */
+.faden-shell .rand {
+  display: flex; flex-direction: column; gap: 26px;
+  position: sticky; top: 84px; margin-top: 12px;
+  max-height: calc(100vh - 100px); overflow: auto; scrollbar-width: none;
+  font-size: 13.5px; min-width: 0;
+}
+.faden-shell .rand::-webkit-scrollbar { width: 0; }
+.faden-shell .rand--rechts { gap: 18px; display: none; }
+@media (min-width: 1280px) { .faden-shell .rand--rechts { display: flex; } }
+.faden-shell .rand__lauf, .faden-shell .rand__innen { display: contents; }
 /* 🚨 `grid-template-columns: minmax(0, 1fr)`. Ohne das ist die implizite Spalte `auto`
    und damit mindestens so breit wie ihr breitester Inhalt — ein langer Kapiteltitel
    sprengte die 176-px-Randspalte auf 247 px und schob sich unter die Mittelspalte. */
@@ -80,12 +127,11 @@
 .faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-@media (max-width: 1439px) {
+@media (max-width: 1059px) {
   .faden-shell .rand { display: none; }
-  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  .faden-shell .rand.mobil { display: flex; max-height: none; margin-top: 0; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
   .faden-shell .rand--links.mobil { left: 0; }
   .faden-shell .rand--rechts.mobil { right: 0; }
-  .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
   .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
   .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
 }

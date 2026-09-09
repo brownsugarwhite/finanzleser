@@ -23,6 +23,18 @@
       ],
       "port": 3100,
       "autoPort": true
+    },
+    {
+      "name": "vorlage",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8099",
+        "--directory",
+        "docs/design_handoff_finanzleser_faden"
+      ],
+      "port": 8099
     }
   ]
 }
