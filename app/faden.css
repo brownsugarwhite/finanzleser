@@ -377,8 +377,20 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
 
 /* ---------- Kasten (Werkzeugkarte) ---------- */
-.faden-shell .kasten { position: relative; background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--green); border-radius: 2px; padding: 14px 18px 12px; display: grid; gap: 10px; scroll-margin-top: 110px; }
+/* 🚨 Der Werkzeug-EINHÄNGER, keine Karte.
+   Der Leitsatz des Designs: „Keine Kartenboxen mit Schatten im Faden." Eine Zeitung
+   rahmt nichts ein — sie setzt eine Linie darüber und schreibt weiter. Rahmen behalten
+   nur drei Dinge: Anzeigen, Glossar-Zettel und der Level-Balken; die sind FREMD auf der
+   Seite und dürfen sich absetzen.
+
+   Übrig bleibt eine 2-px-Oberkante in der Farbe des Werkzeugs, darunter der Kicker mit
+   seinem Punkt. Kein Grund, kein Rahmen, kein Radius — der Werkzeugblock steht in
+   derselben Spalte wie der Text, nicht daneben. */
+.faden-shell .kasten { position: relative; background: none; border: 0; border-top: 2px solid var(--green); border-radius: 0; padding: 12px 0 14px; display: grid; gap: 10px; scroll-margin-top: 110px; }
 .faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
+.faden-shell .kasten--gruen { border-top-color: var(--green); }
+/* Der Glossar-Zettel behält seinen Rahmen — er ist ein eigenes Blatt Papier. */
+.faden-shell .kasten--begriff { background: var(--white); border: 1px solid rgba(51,74,39,.22); box-shadow: 1px 2px 0 rgba(51,74,39,.08); padding: 14px 18px 12px; }
 .faden-shell .kasten h3 { font-size: 19px; }
 .faden-shell .kasten p { max-width: 64ch; }
 .faden-shell .kasten .btn { justify-self: start; }
@@ -467,16 +479,36 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 
 .faden-shell .faq-kopf { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 700; font-size: 22px; }
 .faden-shell .faq-kopf i { font-style: normal; color: var(--muted); letter-spacing: 6px; font-size: 14px; opacity: .6; }
-.faden-shell dl.faq { margin: 0; display: grid; gap: 6px; }
-.faden-shell .faq__paar { border-bottom: 1px solid var(--rule); padding: 6px 0 8px; }
-.faden-shell .faq dt { font-weight: 700; font-family: var(--serif); font-size: 16.5px; margin: 6px 0 4px; }
-.faden-shell .faq dd { margin: 0; }
+/* ---------- Häufige Fragen als Akkordeon ----------
+   Nummer, Frage, Pfeil. Beim Aufklappen dreht der Pfeil auf 225° und die Nummer wird
+   grün — mehr Rückmeldung braucht es nicht. */
+.faden-shell .faq { display: grid; }
+.faden-shell .faq__paar { border-top: 1px solid rgba(51,74,39,.12); }
+.faden-shell .faq__paar:last-child { border-bottom: 1px solid rgba(51,74,39,.12); }
+.faden-shell .faq summary { display: flex; align-items: baseline; gap: 12px; padding: 13px 2px 13px 0; cursor: pointer; list-style: none; font: 700 16.5px/1.35 var(--serif); color: var(--ink); transition: color .2s; }
+.faden-shell .faq summary::-webkit-details-marker { display: none; }
+.faden-shell .faq summary:hover { color: var(--green-ink); }
+.faden-shell .faq__nr { font: 900 18px/1 var(--serif); color: var(--muted); font-style: normal; min-width: 26px; flex: none; transition: color .25s; }
+.faden-shell .faq__paar[open] .faq__nr { color: var(--green); }
+.faden-shell .faq summary > span { flex: 1; min-width: 0; }
+.faden-shell .faq__pfeil { width: 8px; height: 8px; flex: none; border-right: 1.4px solid var(--muted); border-bottom: 1.4px solid var(--muted); transform: rotate(45deg); transition: transform .3s var(--kurve); align-self: center; }
+.faden-shell .faq__paar[open] .faq__pfeil { transform: rotate(225deg); border-color: var(--green); }
+.faden-shell .faq__antwort { padding: 0 0 14px 38px; }
+.faden-shell .faq__paar[open] .faq__antwort { animation: fl-herz .5s var(--kurve) both; }
+@media (max-width: 640px) { .faden-shell .faq__antwort { padding-left: 0; } }
 .faden-shell .fazit-kopf { display: flex; align-items: center; gap: 12px; }
 .faden-shell .fazit-kopf::before, .faden-shell .fazit-kopf::after { content: ""; flex: 1; border-top: 1px solid var(--rule-strong); }
 .faden-shell .fazit-kopf span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--serif); font-weight: 700; font-size: 16px; }
-.faden-shell .fazit-kopf img { width: 28px; height: 28px; }
-.faden-shell .fazit { border-left: 3px solid var(--rule-strong); padding-left: 14px; font-family: var(--serif); font-size: 16px; }
-.faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; align-items: center; }
+.faden-shell .fazit-kopf img { width: 28px; height: 28px; animation: fl-drift 3.4s ease-in-out infinite; }
+.faden-shell .fazit { border-left: 3px solid var(--ink); padding-left: 16px; font-family: var(--serif); font-size: 16.5px; line-height: 1.6; }
+.faden-shell .aktionen { display: flex; gap: 10px 20px; flex-wrap: wrap; border-top: 2px solid var(--ink); padding-top: 14px; align-items: center; }
+/* Textlink mit Strich: der Strich unter dem Wort wächst beim Zeigen — der Hinweis, dass
+   hier etwas passiert, ohne dass eine zweite Schaltfläche um Aufmerksamkeit bittet. */
+.faden-shell .strichlink { border: 0; background: none; padding: 0; display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--sans); color: var(--green-ink); text-decoration: none; cursor: pointer; }
+.faden-shell .strichlink--still { color: var(--muted); }
+.faden-shell .strichlink i { display: inline-block; width: 18px; height: 1px; background: currentColor; transition: width .45s var(--kurve); }
+.faden-shell .strichlink:hover i { width: 34px; }
+.faden-shell .strichlink:hover { color: var(--green-ink); }
 .faden-shell .dazu { display: grid; gap: 0; }
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }

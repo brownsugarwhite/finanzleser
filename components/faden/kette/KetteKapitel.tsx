@@ -162,21 +162,29 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </Fragment>
           ))}
           {k.faq.length > 0 && (
-            <section className="abschnitt abschnitt--faq" id={k.faqId} data-toc-titel="Häufige Fragen">
+            <section className="abschnitt abschnitt--faq" id={k.faqId} data-toc-titel="Häufige Fragen" data-erscheint="herz">
               <div className="faq-kopf"><i>???</i>Häufige Fragen<i>???</i></div>
               <Einschub format="rectangle" variante="umflossen" nr={1} />
-              <dl className="faq">
+              {/* 🚨 `<details>` statt eines eigenen Akkordeons: Auf- und Zuklappen,
+                  Tastaturbedienung und Vorlesbarkeit bringt der Browser mit, es braucht
+                  kein Client-JavaScript — und im eingefrorenen Kapitel funktioniert es
+                  weiter, wo eine React-Komponente erst wieder eingehängt werden müsste. */}
+              <div className="faq">
                 {k.faq.map((f, i) => (
-                  <div key={i} className="faq__paar">
-                    <dt>{f.q}</dt>
-                    <dd className="prose" dangerouslySetInnerHTML={{ __html: f.a }} />
-                  </div>
+                  <details key={i} className="faq__paar" name="faq">
+                    <summary>
+                      <i className="faq__nr" aria-hidden="true">{String(i + 1).padStart(2, "0")}</i>
+                      <span>{f.q}</span>
+                      <i className="faq__pfeil" aria-hidden="true" />
+                    </summary>
+                    <div className="faq__antwort prose" dangerouslySetInnerHTML={{ __html: f.a }} />
+                  </details>
                 ))}
-              </dl>
+              </div>
             </section>
           )}
           {k.fazitHtml && (
-            <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
+            <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit" data-erscheint="herz">
               <FazitHeading />
               <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>

@@ -40,15 +40,20 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
   return (
     <>
       <div className="aktionen">
-        {kurzfassung && <button type="button" className="btn btn--klein" onClick={() => setKurz(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo</button>}
-        <button type="button" className="textlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
-        <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
-        <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
-        <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
+        {/* Die eine Handlung, die der Leser am ehesten will, ist eine Pille; alles
+            weitere ein Textlink mit Strich, der beim Zeigen wächst. */}
+        <button type="button" className="pille" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>
+          <span>In den Aktenkoffer</span>
+          <i className="pille__knopf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></i>
+        </button>
+        {kurzfassung && <button type="button" className="strichlink" onClick={() => setKurz(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo<i /></button>}
+        <button type="button" className="strichlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Als Ausriss teilen<i /></button>
+        <button type="button" className="strichlink strichlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen<i /></button>
+        <button type="button" className="strichlink strichlink--still" onClick={vorlesen}>Vorlesen<i /></button>
         {pdf && (
-          <a className="textlink textlink--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag</a>
+          <a className="strichlink strichlink--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag<i /></a>
         )}
-        <button type="button" className="textlink textlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
+        <button type="button" className="strichlink strichlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google<i /></button>
       </div>
       {kurzfassung && (
         <div className="wort wort--leo kurzfassung" hidden={!kurz} ref={kurzRef}>
