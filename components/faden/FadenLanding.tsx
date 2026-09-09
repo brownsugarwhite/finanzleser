@@ -20,6 +20,8 @@ import { spielAm } from "@/lib/faden/spiele";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 import Insel from "@/components/faden/kette/Insel";
 import { LeoBlase } from "@/components/faden/leo/Blase";
+import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
+import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
@@ -43,6 +45,13 @@ export default async function FadenLanding() {
     ...VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href })),
     ...(finanzwort ? [{ text: "Finanzwort des Tages", href: spielUrl(finanzwort.slug) }] : []),
   ];
+  // Leos Begrüßung verlinkt „Versicherungsbedingungen". Ohne Nutzlast holt das Klickmenü
+  // den Begriff beim Antippen über /api/faden/glossar/<slug> — eine CMS-Abfrage mitten in
+  // der Geste. Auf einer vorgerenderten Seite kostet das Mitschicken nichts.
+  const glossar = await getGlossarIndex();
+  const avb = glossar.get("avb");
+  const begriffe = avb ? await loeseBegriffe([avb]) : [];
+
   return (
     <>
       <HeroLanding zahlen={zahlen} />
@@ -67,6 +76,7 @@ export default async function FadenLanding() {
           <FinanzwortHeute />
           </Begruessung>
         </div>
+        <GlossarDaten daten={begriffe} />
         <script type="application/json" data-eingabe-chips="" dangerouslySetInnerHTML={{ __html: JSON.stringify(chips).replace(/</g, "\\u003c") }} />
       </section>
     </>

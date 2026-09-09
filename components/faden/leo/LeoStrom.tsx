@@ -86,7 +86,7 @@ export default function LeoStrom() {
     const out: Chip[] = [];
     if (live.querySelector(".aktionen")) out.push({ text: "Kurzfassung von Leo", art: "leo", tun: () => document.dispatchEvent(new CustomEvent("faden:kurzfassung")) });
     live.querySelectorAll<HTMLAnchorElement>(".dazu a.dazu__eintrag").forEach((a, i) => { if (i < 2) out.push({ text: a.textContent || "", tun: () => navigieren(a.getAttribute("href") || "/") }); });
-    const kasten = live.querySelector<HTMLElement>(".kasten[data-werkzeug]");
+    const kasten = live.querySelector<HTMLElement>("[data-werkzeug]");
     const titel = kasten?.querySelector("h3")?.textContent;
     if (kasten && titel) out.push({ text: `Zum Werkzeug „${titel}“`, art: "still", tun: () => { const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches; window.scrollTo({ top: kasten.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: reduziert ? "auto" : "smooth" }); } });
     return out.slice(0, 4);

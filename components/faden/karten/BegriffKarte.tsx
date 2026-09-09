@@ -4,7 +4,7 @@
  * Antwort. Alles im SSR-HTML.
  */
 import type { GlossarEintrag } from "@/lib/types";
-import { getGlossarIndex, loeseBegriff } from "@/lib/faden/glossar";
+import { getGlossarIndex, loeseBegriff, loeseBegriffe } from "@/lib/faden/glossar";
 import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import { medienHtml } from "@/lib/faden/medien";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
@@ -17,6 +17,12 @@ export default async function BegriffKarte({ eintrag }: { eintrag: GlossarEintra
   const ctx = neuerKontext(index, { max: 3 });
   ctx.gesehen.add(eintrag.slug); // sich selbst nicht verlinken
   const html = verlinke(medienHtml(eintrag.content || ""), ctx);
+  // 🚨 Die Erklärung verlinkt bis zu drei weitere Begriffe. Fehlen die in der Nutzlast,
+  // holt das Klickmenü sie beim Antippen einzeln über /api/faden/glossar/<slug> — also
+  // eine CMS-Abfrage mitten in der Geste. Sie gehören mit auf die Seite.
+  const weitere = await loeseBegriffe(
+    [...ctx.gesehen].filter((sl) => sl !== eintrag.slug).map((sl) => index.get(sl)).filter((e): e is NonNullable<typeof e> => !!e),
+  );
   const varianten = (eintrag.varianten || []).filter((v) => v.trim().toLowerCase() !== daten.titel.toLowerCase());
   return (
     <article className="kasten kasten--still kasten--begriff">
@@ -43,7 +49,7 @@ export default async function BegriffKarte({ eintrag }: { eintrag: GlossarEintra
           )}
         </div>
       )}
-      <GlossarDaten daten={[daten]} />
+      <GlossarDaten daten={[daten, ...weitere]} />
     </article>
   );
 }

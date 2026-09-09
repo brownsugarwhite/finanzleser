@@ -24,6 +24,7 @@ import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
 import KapitelKopf from "@/components/faden/KapitelKopf";
+import FazitHeading from "@/components/ui/FazitHeading";
 import Weiterlesen from "./Weiterlesen";
 import Aktionen from "./Aktionen";
 import WerkzeugKarte, { toolTitel, werkzeugTitel } from "./WerkzeugKarte";
@@ -38,7 +39,7 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
     <>
       {teile.map((t, i) => {
         if (t.art === "html") return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html))} dangerouslySetInnerHTML={{ __html: t.html }} />;
-        if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
+        if (t.art === "spiel") return <div key={i} className="spiel-inline"><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         return <WerkzeugKarte key={i} teil={t} toolData={toolData} />;
       })}
@@ -167,7 +168,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           )}
           {k.fazitHtml && (
             <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
-              <div className="fazit-kopf"><span><img src="/icons/fazit-starburst.svg" alt="" />Fazit</span></div>
+              <FazitHeading />
               <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>
           )}
