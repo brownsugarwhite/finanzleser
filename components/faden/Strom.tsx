@@ -76,13 +76,26 @@ export default function Strom({ children }: { children: ReactNode }) {
         <Fragment key={k.id}>
         {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
         <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`}>
-          <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
-            <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
-            <h2>{k.titel}</h2>
-            <button type="button" className="toggle-k" onClick={(e) => { e.stopPropagation(); kapitelUmschalten(k.id); }}>
-              {k.offen ? "einklappen ▴" : "aufklappen ▾"}
-            </button>
-          </div>
+          {/* 🚨 Der ganze Kopf ist EIN Knopf. Vorher lag ein zweiter Knopf im klickbaren
+              Bereich — verschachtelte Knöpfe sind ungültiges Markup, und die Tastatur kam
+              nur an den inneren. Jetzt faltet Antippen in beide Richtungen, wie im Design. */}
+          <button
+            type="button"
+            className="kapitel__kopf"
+            data-erscheint="kopf"
+            onClick={() => kapitelUmschalten(k.id)}
+            aria-expanded={k.offen}
+            aria-label={`Kapitel ${i + 1}: ${k.titel} ${k.offen ? "zusammenfalten" : "aufschlagen"}`}
+          >
+            <i className="kapitel__linie" data-linie="" aria-hidden="true" />
+            <span className="kapitel__marke">
+              <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
+              <img className="kapitel__spark" data-spark="" src="/icons/nav-spark-green.svg" alt="" aria-hidden="true" />
+              <span className="kapitel__titel">{k.titel}</span>
+              <em className="kapitel__hinweis">{k.offen ? "Antippen zum Zusammenfalten" : "Zusammengefaltet · antippen zum Aufschlagen"}</em>
+            </span>
+            <i className="kapitel__linie" data-linie="" aria-hidden="true" />
+          </button>
           <div className="kapitel__inhalt">
             {k.offen && k.html ? (
               <Schnappschuss html={k.html} id={k.id} />

@@ -46,6 +46,25 @@ export default function Fortschritt() {
   const massRef = useRef<Mass | null>(null);
   massRef.current = mass;
 
+  /**
+   * Abstand eines Elements zur Oberkante des Stroms — über die Kette der `offsetTop`.
+   *
+   * 🚨 Bewusst NICHT `getBoundingClientRect()`. Seit die Inhalte beim Scrollen auftreten
+   * (lib/faden/erscheinen.ts), läuft über fast jedem Abschnitt eine Bewegung mit
+   * `translateY(14px)` — und die steckt in einem Rechteck drin. Die Knoten am Gleis
+   * säßen während des Auftritts falsch und sprängen danach zurecht. `offsetTop` kennt
+   * keine Transformationen und liefert die Ruhelage.
+   *
+   * Voraussetzung: `#strom` ist positioniert (faden.css), damit es der `offsetParent`
+   * ist, an dem die Kette endet.
+   */
+  const obenImStrom = (el: HTMLElement, strom: HTMLElement): number => {
+    let y = 0;
+    let n: HTMLElement | null = el;
+    while (n && n !== strom) { y += n.offsetTop; n = n.offsetParent as HTMLElement | null; }
+    return y;
+  };
+
   /** Gleis, Kapitel und Abschnitte einmessen. */
   const messen = useCallback(() => {
     const faden = document.getElementById("faden");
@@ -55,29 +74,39 @@ export default function Fortschritt() {
     const s = strom.getBoundingClientRect();
     const liste: Marke[] = [];
     strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {
-      liste.push({ oben: k.getBoundingClientRect().top - s.top, art: "kapitel" });
+      liste.push({ oben: obenImStrom(k, strom), art: "kapitel" });
       // Abschnitte aus derselben Quelle wie die Verlaufsleiste (`[data-toc-titel]`,
       // siehe lib/faden/useAbschnittAktiv.ts) — so zeigen Gleis und Liste dasselbe.
       // Zugeklappte Kapitel haben keinen Inhalt im DOM und liefern folgerichtig nichts.
       k.querySelectorAll<HTMLElement>("[data-toc-titel]").forEach((a) => {
-        liste.push({ oben: a.getBoundingClientRect().top - s.top, art: "abschnitt" });
+        liste.push({ oben: obenImStrom(a, strom), art: "abschnitt" });
       });
     });
     liste.sort((a, b) => a.oben - b.oben);
-    setMass({ oben: s.top - f.top, hoehe: s.height, dokOben: s.top + window.scrollY, marken: liste });
+    setMass({ oben: s.top - f.top, hoehe: strom.offsetHeight, dokOben: s.top + window.scrollY, marken: liste });
   }, []);
 
   useEffect(() => {
     messen();
     const strom = document.getElementById("strom");
     if (!strom) return;
+    // 🚨 Auf einen Frame bündeln. Während eines Auftritts feuert der ResizeObserver
+    // fortlaufend, und `messen()` läuft dabei über ALLE Kapitel und Abschnitte — bei
+    // einem langen Ratgeber schnell 20 Knoten. Ungebündelt war das eine Messung je
+    // Größenänderung statt je Bild. Dasselbe Muster wie in lib/faden/useAbschnittAktiv.ts.
+    let geplant = 0;
+    const anstossen = () => { if (!geplant) geplant = requestAnimationFrame(() => { geplant = 0; messen(); }); };
     // Der Strom wächst und schrumpft: Kapitel klappen auf, Leo antwortet, Werkzeuge laden.
-    const ro = new ResizeObserver(() => messen());
+    const ro = new ResizeObserver(anstossen);
     ro.observe(strom);
-    const mo = new MutationObserver(() => messen());
+    const mo = new MutationObserver(anstossen);
     mo.observe(strom, { childList: true });
-    window.addEventListener("resize", messen);
-    return () => { ro.disconnect(); mo.disconnect(); window.removeEventListener("resize", messen); };
+    window.addEventListener("resize", anstossen);
+    return () => {
+      ro.disconnect(); mo.disconnect();
+      window.removeEventListener("resize", anstossen);
+      if (geplant) cancelAnimationFrame(geplant);
+    };
   }, [messen, pathname]);
 
   useEffect(() => {

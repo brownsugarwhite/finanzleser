@@ -261,20 +261,32 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand__zu { display: none; }
 
 /* ---------- Strom, Kapitel, Wörter ---------- */
-.faden-shell .strom { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-content: start; }
+/* `position: relative`, damit `#strom` der `offsetParent` ist, an dem die Messkette in
+   components/faden/Fortschritt.tsx endet. */
+.faden-shell .strom { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-content: start; }
 /* Grid-Kinder wachsen sonst auf die Mindestbreite ihres Inhalts (breite Tabellen, Slider-Reihen) und sprengen die 750er-Spalte */
 .faden-shell .strom > *, .faden-shell .kapitel, .faden-shell .kapitel__inhalt, .faden-shell .artikel, .faden-shell .kasten, .faden-shell .kasten__koerper, .faden-shell .abschnitt, .faden-shell .fliess { min-width: 0; max-width: 100%; }
-.faden-shell .kapitel { border-top: 1px solid var(--rule); padding: 14px 0 26px; }
+/* Kapitelabstand nach dem Design: kein Rahmen oben, sondern eine Haarlinie unten. */
+.faden-shell .kapitel { border-bottom: 1px solid rgba(51,74,39,.16); padding: 34px 0 50px; }
 .faden-shell .kapitel:first-child { border-top: 0; padding-top: 0; }
-.faden-shell .kapitel__kopf { display: flex; align-items: baseline; gap: 14px; min-height: 22px; }
+/* ---------- Kapitelkopf: Linie — Marke — Linie ----------
+   Die Zeitung setzt eine Zäsur nicht mit einer Überschrift, sondern mit einer Zeile,
+   die sich von der Mitte nach außen zieht. Die Linien tragen `data-linie` und werden
+   von lib/faden/erscheinen.ts gestartet. */
+.faden-shell .kapitel__kopf { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; width: 100%; border: 0; background: none; padding: 0; margin: 0 0 30px; text-align: center; }
 .faden-shell .kapitel--alt .kapitel__kopf { cursor: pointer; }
-.faden-shell .kapitel__kopf h2 { font-size: 17px; flex: 1; }
+.faden-shell .kapitel__linie { height: 1px; background: rgba(51,74,39,.2); }
+/* Die Linien wachsen aus der Mitte heraus, also je zum eigenen äußeren Ende hin. */
+.faden-shell .kapitel__linie:first-child { transform-origin: right center; }
+.faden-shell .kapitel__linie:last-child { transform-origin: left center; }
+.faden-shell .kapitel__marke { display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 0; }
 .faden-shell .kapitel__kopf .kicker { white-space: nowrap; }
-.faden-shell .kapitel__kopf .toggle-k { border: 0; background: none; color: var(--muted); font-size: 12px; white-space: nowrap; margin-left: auto; }
+.faden-shell .kapitel__spark { width: 12px; height: 12px; display: block; }
+.faden-shell .kapitel__titel { font: 700 15px/1.25 var(--serif); color: var(--muted); max-width: 46ch; }
+.faden-shell .kapitel__hinweis { font: italic 300 12px/1.3 var(--serif); color: var(--muted); transition: opacity .3s; opacity: 0; }
+.faden-shell .kapitel__kopf:hover .kapitel__hinweis, .faden-shell .kapitel__kopf:focus-visible .kapitel__hinweis { opacity: 1; }
 .faden-shell .kapitel__inhalt { display: grid; gap: 18px; padding-top: 14px; }
-.faden-shell .kapitel.zu .kapitel__inhalt { display: none; } .faden-shell .kapitel.zu { padding-bottom: 14px; }
-.faden-shell .kapitel.zu .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
-.faden-shell .kapitel--alt:not(.zu) .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
+.faden-shell .kapitel.zu .kapitel__inhalt { display: none; } .faden-shell .kapitel.zu { padding-bottom: 20px; }
 .faden-shell .kapitel--alt { animation: faden-wandert .5s ease; } @keyframes faden-wandert { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* Skelett beim Navigieren — 1:1 aus dem Prototyp (docs/prototype/src/01-css.html:231).
@@ -838,7 +850,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .lesezeichen .lz-wort { display: none; }
   .faden-shell .faden { padding: 12px 14px 110px; }
   .faden-shell .artikel__untertitel { font-size: 26px; }
-  .faden-shell .kapitel__kopf { flex-wrap: wrap; gap: 6px 12px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
+  .faden-shell .kapitel__kopf { gap: 8px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
   .faden-shell .inhalt__zeile a { grid-template-columns: 28px 24px minmax(0, 1fr); }
   .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
 }
