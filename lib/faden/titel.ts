@@ -6,7 +6,9 @@
  * gebraucht); Werkzeugtitel liefert lib/articleToolData je Beitrag.
  */
 import { cache } from "react";
-import { getAllPosts } from "@/lib/wordpress";
+import { unstable_cache } from "next/cache";
+import { getAllPosts, CONTENT_REVALIDATE } from "@/lib/wordpress";
+import { FADEN_INDEX_TAG } from "@/lib/cacheTags";
 import { buildPostUrl, buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl } from "@/lib/urls";
 import type { FadenZiel } from "@/lib/types";
 
@@ -16,11 +18,29 @@ export interface Verweis {
   typ: FadenZiel["typ"];
 }
 
+/**
+ * 🚨 Zwei Lagen, beide nötig.
+ *
+ * `unstable_cache` hält die fertige Tabelle über Requests hinweg im Data-Cache. Ohne sie
+ * lief bei JEDEM Render einer Ratgeberseite `getAllPosts()` — eine paginierte Schleife
+ * über rund 1.000 Beiträge, also ~11 Cache-Einträge lesen und auspacken, nur um eine
+ * Zuordnung slug → { titel, href } zu bauen. Genau solche Sekunden zahlt Netlify
+ * (Abrechnung nach GB-Sekunden, siehe CLAUDE.md).
+ *
+ * `cache()` darüber macht daraus einmal je Request eine Map — die kann `unstable_cache`
+ * nicht liefern, es serialisiert nur JSON.
+ */
+const beitragsListe = unstable_cache(
+  async (): Promise<[string, { titel: string; href: string }][]> => {
+    const posts = await getAllPosts();
+    return posts.map((p) => [p.slug, { titel: p.title, href: buildPostUrl(p) }]);
+  },
+  ["faden-beitragsindex"],
+  { revalidate: CONTENT_REVALIDATE, tags: [FADEN_INDEX_TAG] },
+);
+
 export const getBeitragsIndex = cache(async (): Promise<Map<string, { titel: string; href: string }>> => {
-  const posts = await getAllPosts();
-  const map = new Map<string, { titel: string; href: string }>();
-  for (const p of posts) map.set(p.slug, { titel: p.title, href: buildPostUrl(p) });
-  return map;
+  return new Map(await beitragsListe());
 });
 
 export async function verweiseAufloesen(ziele: FadenZiel[], toolTitel: Record<string, string> = {}): Promise<Verweis[]> {

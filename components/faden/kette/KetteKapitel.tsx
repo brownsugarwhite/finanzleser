@@ -10,13 +10,16 @@ import type { Post } from "@/lib/types";
 import type { ArticleToolData } from "@/lib/articleToolData";
 import { baueKette, werkzeugId, type Abschnitt, type Teil } from "@/lib/faden/kette";
 import { verweiseAufloesen } from "@/lib/faden/titel";
+import { zeitungKlassen } from "@/lib/faden/zeitung";
+import { cn } from "@/lib/cn";
 import { medienUrl } from "@/lib/faden/medien";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
-import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
+import { alsText, neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import InhaltAktiv from "./InhaltAktiv";
 import Einschub from "@/components/faden/Einschub";
 import StatistikKarte from "@/components/statistik/StatistikKarte";
+import Insel from "./Insel";
 import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import GamificationEmbed from "@/components/gamification/GamificationEmbed";
@@ -34,8 +37,8 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
   return (
     <>
       {teile.map((t, i) => {
-        if (t.art === "html") return <div key={i} className="prose fliess__html" dangerouslySetInnerHTML={{ __html: t.html }} />;
-        if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><GamificationEmbed gamType={t.typ} fields={t.felder} /></div>;
+        if (t.art === "html") return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html))} dangerouslySetInnerHTML={{ __html: t.html }} />;
+        if (t.art === "spiel") return <div key={i} className="kasten kasten--pink kasten--inline spiel-inline"><span className="kicker kicker--pink">Spiel · in der Kette</span><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         return <WerkzeugKarte key={i} teil={t} toolData={toolData} />;
       })}
@@ -46,12 +49,12 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
 function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData; url: string }) {
   return (
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
-      <AbschnittTeilen titel={a.titel} url={url} id={a.id} />
+      <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
-      <h2 className="abschnitt__titel">{a.titel}</h2>
+      <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
-      {a.statistiken.map((st, j) => <StatistikKarte key={j} st={st} />)}
-      {a.fragen.length > 0 && <Weiterlesen fragen={a.fragen} />}
+      {a.statistiken.map((st, j) => <Insel key={j} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>)}
+      {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
     </section>
   );
 }
@@ -63,9 +66,17 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   // erste Fundstelle je Begriff, kettenweit begrenzt, Sperrkontexte in lib/faden/verlinken.
   const glossar = await getGlossarIndex();
   const ctx = neuerKontext(glossar, { bevorzugt: k.faden.glossarBegriffe });
+  // Abschnittstitel sind Klartext (data-toc-titel liest sie weiter so). Für den Linker
+  // brauchen sie eine HTML-Fassung; `titel` selbst bleibt unangetastet, sonst stünden
+  // Auszeichnungen im Inhaltsverzeichnis und in „Abschnitt teilen“.
+  for (const a of k.abschnitte) a.titelHtml = alsText(a.titel);
   for (const nurBevorzugt of [true, false]) {
     if (k.einleitung) k.einleitung.html = verlinke(k.einleitung.html, ctx, { nurBevorzugt });
-    for (const a of k.abschnitte) for (const t of a.teile) if (t.art === "html") t.html = verlinke(t.html, ctx, { nurBevorzugt });
+    // Reihenfolge = Lesereihenfolge: erst der Titel des Abschnitts, dann sein Text.
+    for (const a of k.abschnitte) {
+      a.titelHtml = verlinke(a.titelHtml || alsText(a.titel), ctx, { nurBevorzugt });
+      for (const t of a.teile) if (t.art === "html") t.html = verlinke(t.html, ctx, { nurBevorzugt });
+    }
     k.faq = k.faq.map((f) => ({ q: f.q, a: verlinke(f.a, ctx, { nurBevorzugt }) }));
     if (k.fazitHtml) k.fazitHtml = verlinke(k.fazitHtml, ctx, { nurBevorzugt });
   }
@@ -114,7 +125,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           {k.einleitung && (
             <div className="einleitung" id="heading-1">
               <h2 className="einleitung__titel">{k.einleitung.titel}</h2>
-              <div className="prose fliess__html" dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
+              <div className={cn("prose fliess__html", zeitungKlassen(k.einleitung.html, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
             </div>
           )}
           {toc.length > 0 && (
@@ -157,7 +168,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           {k.fazitHtml && (
             <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
               <div className="fazit-kopf"><span><img src="/icons/fazit-starburst.svg" alt="" />Fazit</span></div>
-              <div className="fazit prose" dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
+              <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>
           )}
           {k.werkzeuge.length > 0 && (
@@ -170,7 +181,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </section>
           )}
           <KassensturzTeaser />
-          <Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} />
+          <Insel typ="aktionen" werte={{ titel: k.titel, url: k.url, kurzfassung: k.faden.kurzfassung, artikelId: `artikel-${k.slug}`, pdf: beitragPdf }}><Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} /></Insel>
           {dazu.length > 0 && (
             <div className="dazu">
               <span className="kicker">Dazu passt</span>
@@ -179,7 +190,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               ))}
             </div>
           )}
-          <WochenbriefKasten />
+          <Insel typ="wochenbrief"><WochenbriefKasten /></Insel>
           <GlossarDaten daten={begriffe} />
         </article>
       </div>

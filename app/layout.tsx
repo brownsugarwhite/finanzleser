@@ -1,38 +1,38 @@
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Merriweather } from "next/font/google";
-import { Providers } from "./providers";
-import { NavProvider } from "@/lib/NavContext";
 import { getNavItems, getSiteSettings, getMegamenuPreload } from "@/lib/wordpress";
-import BookmarkNav from "@/components/layout/BookmarkNav";
-import LogoBar from "@/components/layout/LogoBar";
-import TopNav from "@/components/layout/TopNav";
-import ContentScaler from "@/components/layout/ContentScaler";
-import MegaMenuWrapper from "@/components/layout/MegaMenuWrapper";
-import FinanztoolsMenu from "@/components/layout/FinanztoolsMenu";
-import PoweredByLine from "@/components/ui/PoweredByLine";
-import ProgressiveBlur from "@/components/ui/ProgressiveBlur";
-import LeoIcon from "@/components/ui/LeoIcon";
-import TopBanner from "@/components/ui/TopBanner";
 import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
-import RouteChangeRefresh from "@/components/ui/RouteChangeRefresh";
-import MorphTransitionLayer from "@/components/sections/MorphTransitionLayer";
-import { PageTransitionProvider } from "@/lib/usePageTransition";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
 import { getFadenOptionen } from "@/lib/faden/optionen";
-import FadenShell from "@/components/faden/FadenShell";
+import Huelle from "@/components/layout/Huelle";
 import "./globals.css";
 
+/**
+ * 🚨 Die Variablennamen enden bewusst auf `-src` und heißen NICHT `--font-body`.
+ *
+ * next/font schreibt sie als Klassenregel auf <html>: `.__variable_x { --font-body: … }`.
+ * app/tokens.css setzt auf demselben Element `:root { --font-body: var(--font-body, "Open
+ * Sans", sans-serif) }`. Beide Regeln haben dieselbe Spezifität — es entscheidet die
+ * Reihenfolge der Stylesheets. Gewinnt tokens.css, verweist die Eigenschaft auf sich
+ * selbst; das ist laut Spezifikation ungültig, und zwar OHNE auf den Ersatzwert
+ * zurückzufallen. Ergebnis: --font-body ist leer, alles fällt auf System-Sans und 16 px
+ * zurück, Überschriften eingeschlossen.
+ *
+ * Genau das ist beim Aufteilen der Layout-Hüllen passiert: die Chunk-Reihenfolge kippte,
+ * das Schrift-Stylesheet stand plötzlich VOR globals.css. Mit zwei verschiedenen Namen
+ * gibt es weder Kollision noch Selbstbezug, und die Reihenfolge spielt keine Rolle mehr.
+ */
 const openSans = Open_Sans({
-  variable: "--font-body",
+  variable: "--font-body-src",
   subsets: ["latin"],
   display: "swap",
   axes: ["wdth"],
 });
 
 const merriweather = Merriweather({
-  variable: "--font-heading",
+  variable: "--font-heading-src",
   subsets: ["latin"],
   display: "swap",
   weight: "variable",
@@ -88,7 +88,9 @@ export default async function RootLayout({
 }>) {
   const [navItems, siteSettings, megamenuPreload, fadenOptionen] = await Promise.all([
     getNavItems(),
-    getSiteSettings(),
+    // Nur die alte Hülle braucht sie (TopBanner). Im Faden entfällt damit ein REST-Aufruf
+    // je Render; die Werbeschalter holt sich ArticleLayout im Nicht-Faden-Zweig selbst.
+    FADEN_AKTIV ? Promise.resolve(null) : getSiteSettings(),
     getMegamenuPreload().catch(() => ({})),
     // Level-Stufen für das Punktekonto; nur im Faden (Produktion ohne Schalter fragt nichts Neues ab).
     // Fangnetz erlaubt (CLAUDE.md, Falle 2, Ausnahme): reine Verbesserung, keine Existenz-Entscheidung —
@@ -110,61 +112,13 @@ export default async function RootLayout({
           }}
         />
         <LandingBodyAttr />
-        <RouteChangeRefresh />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
-        {!FADEN_AKTIV && (
-          /* Im Faden gibt es keinen Banner über dem Kopf (Prototyp); die alte Seite behält ihn. */
-          <TopBanner
-            text={siteSettings.top_banner.text}
-            linkType={siteSettings.top_banner.link_type}
-            linkValue={siteSettings.top_banner.link_value}
-            visibility={siteSettings.top_banner.visibility}
-          />
-        )}
-        {FADEN_AKTIV ? (
-          /* Der Faden (Stufe 1): Kopf, Randspalten, Strom mit der Seite als lebendem Kapitel, Eingabe.
-             Megamenü, Preview-Slider, Morph-Übergänge und das Leo-Dock bleiben im Else-Zweig für
-             die alte Seite (Produktion ohne Schalter). */
-          <Providers>
-          <NavProvider items={navItems}>
-            <FadenShell nav={navItems} preload={megamenuPreload} level={fadenOptionen?.level}>{children}</FadenShell>
-          </NavProvider>
-          </Providers>
-        ) : (
-        <>
-        {/* Mobile-only Leo Dock-Slot — sticky top-left, gegenüber Bookmark.
-            Position direkt nach TopBanner im Flow, sticky ab top:13px.
-            Leo wird zur Laufzeit per JS hier rein-/rausreparented. */}
-        <div id="leo-dock-slot-mobile" />
-        <Providers>
-        <NavProvider items={navItems}>
-        <PageTransitionProvider>
-          <div className="bookmark-section">
-            <div className="bookmark-section__inner"><BookmarkNav /></div>
-          </div>
-          <LogoBar />
-          <TopNav />
-          {/* DotLine + „powered by" auf den Nicht-Landing-Seiten (auf der Landing ist
-              .sticky-nav ausgeblendet; dort rendert LandingIntro Dotline + Quicklinks).
-              Hier KEINE Quicklinks und KEIN Pfeil (nur Landing), max-width 90vw. */}
-          <div className="sticky-nav dotline-animated">
-            <PoweredByLine style={{ width: "100%", maxWidth: "90vw", paddingLeft: 280, paddingRight: 50 }} />
-          </div>
-          <ContentScaler />
-          <MegaMenuWrapper preloaded={megamenuPreload} />
-          <FinanztoolsMenu />
-          <div className="scalable-content">
-            {children}
-          </div>
-          <MorphTransitionLayer />
-          <ProgressiveBlur height={120} />
-          <LeoIcon />
-        </PageTransitionProvider>
-        </NavProvider>
-        </Providers>
-        </>
-        )}
+        {/* Die Weiche steckt in einer Client-Komponente — nur dort teilt next/dynamic den
+            Chunk. Siehe components/layout/Huelle.tsx. */}
+        <Huelle navItems={navItems} megamenuPreload={megamenuPreload} siteSettings={siteSettings} level={fadenOptionen?.level}>
+          {children}
+        </Huelle>
       </body>
     </html>
   );

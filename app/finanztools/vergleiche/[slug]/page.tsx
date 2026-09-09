@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
+import Insel from "@/components/faden/kette/Insel";
 import KartenKapitel from "@/components/faden/KartenKapitel";
 import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { notFound } from "next/navigation";
@@ -118,7 +119,7 @@ export default async function VergleichDetailPage({ params }: Props) {
             </>
           }
         >
-          <VergleichEmbed slug={slug} />
+          <Insel typ="vergleich" arg={slug}><VergleichEmbed slug={slug} /></Insel>
 
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600">

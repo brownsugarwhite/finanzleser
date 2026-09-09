@@ -8,11 +8,15 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import dynamic from "next/dynamic";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
 import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
+import { FrageBlase, LeoBlase } from "./Blase";
+
+// Siehe components/faden/leo/LeoMarkdown.tsx: der Markdown-Parser wird erst geladen,
+// wenn eine Antwort da ist, nicht auf jeder Faden-Seite.
+const LeoMarkdown = dynamic(() => import("./LeoMarkdown"), { ssr: false });
 
 interface Chip { text: string; tun: () => void; art?: "leo" | "still" }
 
@@ -28,27 +32,26 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
   const kopieren = async () => { try { await navigator.clipboard.writeText(text); toast("Antwort kopiert"); } catch { /* egal */ } };
   return (
     <div className="wort wort--leo">
-      <img src="/assets/leo.svg" alt="Leo" />
-      <div>
-        <span className="kicker kicker--gruen">Leo</span>
+      <span className="kicker kicker--gruen">Leo</span>
+      <LeoBlase>
         {!text && laeuft ? (
           <div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div>
         ) : (
           <div className="prose leo-markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
+            <LeoMarkdown text={text} />
             {laeuft && <span className="cursor" aria-hidden="true" />}
           </div>
         )}
         {!laeuft && quellen.length > 0 && (
           <div className="quellen"><b>Quellen</b>{quellen.map((q, i) => <span key={i}>› {q.title}{q.pages ? ` · ${q.pages}` : ""}</span>)}</div>
         )}
-        {!laeuft && text && (
-          <div className="werkzeuge">
-            <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
-            <button type="button" className="textlink textlink--still" onClick={kopieren}>Kopieren</button>
-          </div>
-        )}
-      </div>
+      </LeoBlase>
+      {!laeuft && text && (
+        <div className="werkzeuge">
+          <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
+          <button type="button" className="textlink textlink--still" onClick={kopieren}>Kopieren</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -94,22 +97,21 @@ export default function LeoStrom() {
     <div className="leo-strom" id="leo-strom" aria-live="polite">
       {nachrichten.map((m, i) => (
         m.role === "user" ? (
-          <div key={m.id} id={`leo-${m.id}`} className="wort wort--frage"><span className="kicker">Ihre Frage</span><p>{getMessageText(m)}</p></div>
+          <div key={m.id} id={`leo-${m.id}`} className="wort wort--frage"><FrageBlase><p>{getMessageText(m)}</p></FrageBlase></div>
         ) : (
           <div key={m.id} id={`leo-${m.id}`}><LeoWort m={m} laeuft={laeuft && i === nachrichten.length - 1} /></div>
         )
       ))}
       {status === "submitted" && letzte?.role === "user" && (
-        <div className="wort wort--leo"><img src="/assets/leo.svg" alt="Leo" /><div><span className="kicker kicker--gruen">Leo</span><div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div></div></div>
+        <div className="wort wort--leo"><span className="kicker kicker--gruen">Leo</span><LeoBlase><div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div></LeoBlase></div>
       )}
       {status === "error" && fehler && (
         <div className="wort wort--leo wort--fehler">
-          <img src="/assets/leo.svg" alt="Leo" />
-          <div>
-            <span className="kicker kicker--pink">Leo · gerade nicht erreichbar</span>
+          <span className="kicker kicker--pink">Leo · gerade nicht erreichbar</span>
+          <LeoBlase fehler>
             <p>{/429|limit|pause/i.test(fehler.message) ? "Leo macht gerade eine kurze Pause. Bitte versuchen Sie es in einer Minute erneut." : "Leo ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal."}</p>
-            {letzte?.role === "user" && <button type="button" className="textlink" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button>}
-          </div>
+          </LeoBlase>
+          {letzte?.role === "user" && <div className="werkzeuge"><button type="button" className="textlink" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button></div>}
         </div>
       )}
       {chips.length > 0 && (

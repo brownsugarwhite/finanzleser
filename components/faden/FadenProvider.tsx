@@ -10,7 +10,10 @@
  * echte Navigation (Schnappschuss fällt weg, weil das Ziel wieder lebt).
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { kopfHoehe, zeigeAnfang, merkeKnoten } from "@/lib/faden/scrollen";
+import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten } from "@/lib/faden/scrollen";
+import { greifen } from "@/lib/faden/schnappschuss";
+import { fadenZiel, istHier } from "@/lib/faden/ziel";
+import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
 import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
@@ -25,7 +28,8 @@ export interface Schnappschuss {
   pfad: string[];
   url: string;
   zeit: string; // HH:MM
-  html: string; // leer nach Reload (nur Kopfzeile)
+  /** Roh-HTML, ungesäubert; `saeubern()` läuft erst beim Aufklappen. Leer nach Reload (nur Kopfzeile). */
+  html: string;
   offen: boolean;
 }
 
@@ -42,6 +46,11 @@ interface FadenContextWert {
   kapitelNr: number;
   /** Interne Navigation „anhängen statt ersetzen“; `wandert` lässt das neue Kapitel kurz einschweben (Kapitel ans Ende geholt). */
   navigieren: (href: string, opts?: { wandert?: boolean }) => void;
+  /**
+   * Eine Navigation läuft: Der Strom zeigt statt der (noch alten) Seite das Skelett und
+   * springt sofort dorthin — Port von `ladeDann` aus dem Prototyp.
+   */
+  laedt: boolean;
   kapitelUmschalten: (id: string) => void;
   koffer: string[];
   /** Eintrag ablegen; mit `von` fliegt ein Beleg vom Knopf zum Koffer im Lesezeichen. */
@@ -82,6 +91,8 @@ export function useFaden(): FadenContextWert {
 }
 
 const MAX_VERLAUF = 8;
+/** Mindeststandzeit des Skeletts in ms (Prototyp: feste 560 ms; hier nur so lang, dass es nicht blitzt). */
+const SKELETT_MIN = 240;
 const META_KEY = "faden-verlauf";
 const KOFFER_KEY = "faden-koffer";
 const GLOSSAR_KEY = "faden-glossar";
@@ -103,35 +114,30 @@ function istEinfacherLinksklick(e: MouseEvent): boolean {
   return e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 }
 
-/** Live-Kapitel einfrieren: Klon ohne Skripte, IDs präfixen, nur der Inhalt. */
+/**
+ * Live-Kapitel einfrieren.
+ *
+ * Nur greifen, nicht säubern: `greifen()` ist ein nativer `innerHTML`-Lesezugriff, das
+ * Aufbereiten (Skripte raus, IDs präfixen) übernimmt `saeubern()` in Strom.tsx erst beim
+ * Aufklappen. Der Klick-Moment bleibt damit frei — der Browser malt das Skelett, ohne auf
+ * einen tiefen Klon des ganzen Artikels zu warten.
+ */
 function schnappschuss(): Schnappschuss | null {
   if (typeof document === "undefined") return null;
   const live = document.getElementById("kapitel-live");
   if (!live) return null;
-  const id = Date.now().toString(36);
-  const klon = live.cloneNode(true) as HTMLElement;
-  klon.querySelectorAll("script, iframe, video, audio, canvas").forEach((e) => e.remove());
-  klon.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
-  klon.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));
-  const inhalt = klon.querySelector(".kapitel__inhalt");
-  // Leos Wortwechsel zu diesem Kapitel gehört mit ins eingefrorene Kapitel.
-  const leo = document.getElementById("leo-strom");
-  if (leo && leo.children.length) {
-    const l = leo.cloneNode(true) as HTMLElement;
-    l.removeAttribute("id"); l.removeAttribute("aria-live"); l.classList.add("leo-strom--alt");
-    l.querySelectorAll("[id]").forEach((e) => { e.id = `alt-${id}-${e.id}`; });
-    l.querySelectorAll(".tippt, .cursor, .leo-chips, .werkzeuge").forEach((e) => e.remove());
-    (inhalt || klon).appendChild(l);
-  }
   return {
-    id,
+    id: Date.now().toString(36),
     key: live.dataset.key || `seite:${location.pathname}`,
     titel: live.dataset.titel || document.title,
     pfad: (live.dataset.pfad || "").split(" › ").filter(Boolean),
     url: location.pathname + location.search,
     zeit: uhr(),
-    html: (inhalt || klon).innerHTML,
-    offen: false,
+    html: greifen(live),
+    // Das frisch eingefrorene Kapitel bleibt OFFEN. Eingeklappt wird erst das vorletzte
+    // (siehe navigieren) — der Faden reißt dann nicht ab: über dem neuen Kapitel steht
+    // noch der ganze Beitrag, den man gerade gelesen hat.
+    offen: true,
   };
 }
 
@@ -145,7 +151,8 @@ export function zumKapitelScrollen(): void {
   const live = document.getElementById("kapitel-live");
   if (!live) return;
   merkeKnoten(live);
-  zeigeAnfang(live, true);
+  // Stabil, weil das Kapitel beim Sprung oft noch strömt (siehe zeigeAnfangStabil).
+  zeigeAnfangStabil(live, true);
 }
 
 export default function FadenProvider({ children, level = LEVEL_STANDARD }: { children: ReactNode; level?: Level[] }) {
@@ -158,6 +165,9 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   const blattFrisch = useRef(false);
   const [toastText, setToastText] = useState("");
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [laedt, setLaedt] = useState(false);
+  /** Wann das Skelett erschien — es bleibt mindestens SKELETT_MIN stehen, sonst blitzt es nur auf. */
+  const laedtSeit = useRef(0);
   const scrollNachNavigation = useRef(false);
   const wandertNachNavigation = useRef(false);
   const letzterPfad = useRef(pathname);
@@ -174,7 +184,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
         sessionStorage.removeItem(META_KEY);
       } else {
         const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
-        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: "", offen: false })));
+        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false })));
       }
     } catch { /* leer */ }
     try {
@@ -187,10 +197,22 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     } catch { /* leer */ }
   }, []);
 
+  /**
+   * Verlauf in die Sitzung schreiben — MIT dem Schnappschuss-HTML.
+   *
+   * 🚨 Vorher wurde `html` bewusst weggelassen. Nach einem Neuladen stand deshalb in
+   * jedem Kapitel nur „Dieses Kapitel lag vor dem Neuladen im Faden. Erneut öffnen" —
+   * der Faden war nach F5 nicht mehr derselbe. Jetzt kommt das HTML mit; reicht der
+   * Platz nicht (sessionStorage liegt je nach Browser bei 5–10 MB), fallen die ÄLTESTEN
+   * Kapitel zuerst auf die Kopfzeile zurück, das zuletzt gelesene bleibt am längsten
+   * vollständig.
+   */
   useEffect(() => {
-    try {
-      sessionStorage.setItem(META_KEY, JSON.stringify(verlauf.map(({ html, offen, ...m }) => { void html; void offen; return m; })));
-    } catch { /* voll oder gesperrt */ }
+    const ohneOffen = verlauf.map(({ offen, ...m }) => { void offen; return m; });
+    for (let ab = 0; ab <= ohneOffen.length; ab++) {
+      const versuch = ohneOffen.map((m, i) => (i < ab ? { ...m, html: "" } : m));
+      try { sessionStorage.setItem(META_KEY, JSON.stringify(versuch)); return; } catch { /* zu groß → nächstes Kapitel opfern */ }
+    }
   }, [verlauf]);
 
   const toast = useCallback((text: string) => {
@@ -254,12 +276,36 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       let liste = alt.filter((k) => k.url.split(/[?#]/)[0] !== zielPfad); // Ziel lebt gleich wieder
       if (s && s.url.split(/[?#]/)[0] !== zielPfad) {
         liste = liste.filter((k) => k.key !== s.key);
+        // Alles Ältere zuklappen, das gerade verlassene Kapitel bleibt offen.
+        liste = liste.map((k) => (k.offen ? { ...k, offen: false } : k));
         liste = [...liste, s];
       }
       return liste.slice(-MAX_VERLAUF);
     });
     setLeoAb(chatRef.current.messages.length);
     scrollNachNavigation.current = true;
+    // Prototyp `ladeDann`: bei reduzierter Bewegung kein Skelett, dann bleibt die alte
+    // Seite stehen, bis die neue da ist.
+    if (!reduzierteBewegung()) {
+      // 🚨 Platz am Ende des Fadens SOFORT reservieren, bevor React das alte Kapitel
+      // ausblendet. Sonst schrumpft das Dokument im selben Moment um die ganze Höhe des
+      // gelesenen Beitrags: der Browser kappt die Scrollposition auf das neue Seitenende,
+      // die Randspalten verlieren ihren Klebebereich und rutschen mit hoch, und der
+      // sanfte Sprung wird zum Ruck. Mit eingefrorener Höhe läuft der Sprung als echte
+      // Bewegung von der Lesestelle zum Skelett — und nichts darüber springt.
+      const strom = document.getElementById("strom");
+      if (strom) strom.style.minHeight = Math.round(strom.getBoundingClientRect().height) + "px";
+      laedtSeit.current = performance.now();
+      setLaedt(true);
+      // Sicherung, falls der Routenwechsel ganz ausbleibt (Fehlerseite, abgebrochener Push).
+      setTimeout(() => {
+        if (!laedtSeit.current) return;
+        laedtSeit.current = 0;
+        setLaedt(false);
+        const st = document.getElementById("strom");
+        if (st) st.style.minHeight = "";
+      }, 8000);
+    }
     router.push(href, { scroll: false });
   }, [router, lesestelleMerken]);
 
@@ -268,21 +314,19 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     const aufKlick = (ev: MouseEvent) => {
       if (!istEinfacherLinksklick(ev) || ev.defaultPrevented) return;
       const a = (ev.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
-      if (!a || a.target === "_blank" || a.hasAttribute("download") || a.dataset.fadenAus !== undefined) return;
-      if (a.classList.contains("begriff")) return; // Klickmenü (BegriffMenue) übernimmt
-      let url: URL;
-      try { url = new URL(a.href, location.href); } catch { return; }
-      if (url.origin !== location.origin) return;
-      if (url.pathname === location.pathname && url.hash) return; // Anker in der Seite
-      if (/\.(pdf|jpe?g|png|webp|svg|gif|zip|xlsx?|docx?)$/i.test(url.pathname)) return;
-      if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/wp-content/")) return;
-      if (url.pathname === location.pathname && url.search === location.search) { ev.preventDefault(); zumKapitelScrollen(); return; }
+      // Dieselbe Entscheidung wie beim Vorausladen — eine Quelle, lib/faden/ziel.ts.
+      const ziel = fadenZiel(a);
+      if (!ziel) return;
       ev.preventDefault();
-      navigieren(url.pathname + url.search + url.hash);
+      if (istHier(ziel)) { zumKapitelScrollen(); return; }
+      navigieren(ziel);
     };
     document.addEventListener("click", aufKlick);
     return () => document.removeEventListener("click", aufKlick);
   }, [navigieren]);
+
+  // Ziele vorausladen, solange der Leser noch liest (siehe lib/faden/usePrefetch.ts).
+  useFadenPrefetch(pathname);
 
   // Nach dem Routenwechsel: Kopf des neuen Kapitels unter die Kopfzeile (Scroll-Regel).
   useEffect(() => {
@@ -304,9 +348,30 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       const ziel = hash ? document.getElementById(hash) : live;
       const bereit = !!ziel && (hash ? true : !!live && live !== vorher);
       if (!bereit && performance.now() < frist) { requestAnimationFrame(versuchen); return; }
-      if (wandert) nochmal(live, "wandert");
-      if (hash && ziel) zeigeAnfang(ziel, true);
-      else zumKapitelScrollen();
+      // 🚨 Erst abräumen, dann messen: solange das Skelett steht, ist das neue Kapitel
+      // ausgeblendet (`.strom--laedt`) und sein Rechteck null — ein Sprung dorthin
+      // landete am Seitenanfang.
+      const abschluss = () => {
+        const neuLive = document.getElementById("kapitel-live");
+        // Das neue Kapitel blendet sich ein, statt hart zu erscheinen — der Faden läuft
+        // weiter, er wechselt nicht die Seite. „wandert" hat seine eigene Bewegung.
+        nochmal(neuLive, wandert ? "wandert" : "kapitel--frisch");
+        const anker = hash ? document.getElementById(hash) : null;
+        if (anker) zeigeAnfang(anker, true);
+        else zumKapitelScrollen();
+        // Reservierten Platz erst freigeben, wenn der sanfte Sprung durch ist — sonst
+        // schrumpft das Dokument mitten in der Bewegung und der Browser bricht sie ab.
+        setTimeout(() => { const st = document.getElementById("strom"); if (st) st.style.minHeight = ""; }, 700);
+      };
+      if (!laedtSeit.current) { abschluss(); return; }
+      // Das Skelett bleibt mindestens SKELETT_MIN stehen — sonst blitzt es bei einer
+      // vorgeladenen Seite nur für einen Frame auf, was unruhiger wirkt als gar nichts.
+      const rest = Math.max(0, SKELETT_MIN - (performance.now() - laedtSeit.current));
+      setTimeout(() => {
+        laedtSeit.current = 0;
+        setLaedt(false);
+        requestAnimationFrame(() => requestAnimationFrame(abschluss));
+      }, rest);
     };
     requestAnimationFrame(versuchen);
   }, [pathname]);
@@ -448,7 +513,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     else {
       konfetti(kasten);
       abzeichen(kasten, text);
-      const leos = kasten.closest(".kapitel__inhalt")?.querySelectorAll(".wort--leo img");
+      const leos = kasten.closest(".kapitel__inhalt")?.querySelectorAll(".wort--leo .wort__avatar");
       if (leos && leos.length) nochmal(leos[leos.length - 1], "leo-freut");
     }
     nochmal(document.querySelector('.register button[data-key="plus"]'), "punkte-puls");
@@ -457,13 +522,13 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   }, [toast, level]);
 
   const wert = useMemo<FadenContextWert>(() => ({
-    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
+    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, laedt, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
     leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
     fragen,
     punkte: konto.punkte, serie: konto.serie, wappen: konto.wappen, level, belohne,
     lesestelle, lesestelleZurueck,
-  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
+  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, laedt, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
 
   return (
     <FadenContext.Provider value={wert}>

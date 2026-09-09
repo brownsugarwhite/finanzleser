@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import gsap from "@/lib/gsapConfig";
 import { cn } from "@/lib/cn";
+import BubbleSpike from "@/components/ui/BubbleSpike";
 import type { LeoSource, LeoUIMessage } from "@/lib/ai/leoMessage";
 
 interface LeoChatMessagesProps {
@@ -37,27 +38,6 @@ function splitAnbieter(text: string): { main: string; anbieter: string | null } 
   const idx = text.lastIndexOf(ANBIETER_MARKER);
   if (idx === -1) return { main: text, anbieter: null };
   return { main: text.slice(0, idx), anbieter: text.slice(idx + ANBIETER_MARKER.length) };
-}
-
-/** Spike-SVG passend zum KI-Section AIAgentTeaser-Design.
- *  Fill via currentColor → wird per CSS auf Bubble-Farbe gesetzt. */
-function BubbleSpike() {
-  return (
-    <svg
-      className="chat-bubble-spike"
-      viewBox="0 0 22 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <g transform="translate(2, 2)">
-        <path
-          d="M17 17C10.2 24.2 3.83333 23.9346 0 22.268C2.04406 22.268 4.0144 20.5274 5 18.5C6.1185 16.1992 6 12.4237 6 9.5V0C12.8333 3 23.8 9.8 17 17Z"
-          fill="currentColor"
-        />
-      </g>
-    </svg>
-  );
 }
 
 export default function LeoChatMessages({ messages, status, error, mode }: LeoChatMessagesProps) {
@@ -98,14 +78,7 @@ export default function LeoChatMessages({ messages, status, error, mode }: LeoCh
             className={cn("chat-row", isUser ? "chat-row--user" : "chat-row--assistant")}
           >
             <div className="chat-bubble-wrap">
-              {!isUser && (
-                <img
-                  src="/assets/bubble_spike_outline.svg"
-                  alt=""
-                  aria-hidden
-                  className="chat-bubble-spike chat-bubble-spike--under"
-                />
-              )}
+              {!isUser && <BubbleSpike kontur className="chat-bubble-spike chat-bubble-spike--under" />}
               <div className={cn("chat-bubble", isUser ? "chat-bubble--user" : "chat-bubble--assistant")}>
                 {isUser ? (
                   (() => {
@@ -150,12 +123,7 @@ export default function LeoChatMessages({ messages, status, error, mode }: LeoCh
         <div className="chat-row chat-row--assistant">
           <div className="chat-bubble-wrap">
             {/* Under-Spike mit brand-secondary stroke für continuous-outline-Effekt */}
-            <img
-              src="/assets/bubble_spike_outline_error.svg"
-              alt=""
-              aria-hidden
-              className="chat-bubble-spike chat-bubble-spike--under"
-            />
+            <BubbleSpike kontur className="chat-bubble-spike chat-bubble-spike--under chat-bubble-spike--under-error" />
             <div className="chat-bubble chat-bubble--error">
               <p className="chat-text">
                 Leo macht gerade eine kurze Pause. Bitte in ein paar Sekunden erneut versuchen.

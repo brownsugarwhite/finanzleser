@@ -22,6 +22,7 @@ import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
 import DokumenteEmbed from "@/components/dokumente/DokumenteEmbed";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
 import KastenFuss from "./KastenFuss";
+import Insel from "./Insel";
 
 type Embed = Extract<Teil, { art: "embed" }>;
 
@@ -109,16 +110,16 @@ export default async function WerkzeugKarte({
 
   let koerper: React.ReactNode = null;
   if (teil.typ === "rechner") {
-    koerper = <RechnerEmbed slug={teil.slug} noVisual />;
+    koerper = <Insel typ="rechner" arg={teil.slug}><RechnerEmbed slug={teil.slug} noVisual /></Insel>;
   } else if (teil.typ === "checkliste") {
     let daten = checklisteDaten ?? toolData?.checklisten?.[teil.slug] ?? null;
     if (!daten) { try { daten = await loadChecklisteData(teil.slug); } catch { daten = null; } }
-    koerper = <ChecklisteEmbed slug={teil.slug} noVisual initialData={daten} />;
+    koerper = <Insel typ="checkliste" arg={teil.slug}><ChecklisteEmbed slug={teil.slug} noVisual initialData={daten} /></Insel>;
   } else if (teil.typ === "dokumente") {
     const karten = await dokumentKarten(slugs, toolData);
-    koerper = <DokumenteEmbed slugs={slugs} initialDokumente={karten.length ? karten : null} />;
+    koerper = <Insel typ="dokumente" arg={slugs.join(",")}><DokumenteEmbed slugs={slugs} initialDokumente={karten.length ? karten : null} /></Insel>;
   } else {
-    koerper = <VergleichEmbed slug={teil.slug} />;
+    koerper = <Insel typ="vergleich" arg={teil.slug}><VergleichEmbed slug={teil.slug} /></Insel>;
   }
 
   return (
@@ -127,7 +128,7 @@ export default async function WerkzeugKarte({
       <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
       {!ohneTitel && <h3>{titel}</h3>}
       <div className="kasten__koerper article-tool-embed article-finanztool">{koerper}</div>
-      {!ohneTitel && <KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite />}
+      {!ohneTitel && <Insel typ="kasten-fuss" werte={{ titel, url: werkzeugUrl(teil.typ, slugs[0]), kastenId: `werkzeug-${teil.typ}-${teil.slug}`, eigeneSeite: true }}><KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite /></Insel>}
     </div>
   );
 }

@@ -51,7 +51,10 @@ function applyContentHeaderTitle(post: Post & { content?: string }): Post {
 // Gegenprobe nach einem Build:
 //   node -e "const r=require('./.next/prerender-manifest.json').routes; \
 //     console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"
-export const CONTENT_REVALIDATE = 86400;
+// Die Zahl selbst liegt in lib/revalidate.ts (siehe dortigen Kommentar) und wird hier
+// nur weitergereicht, damit bestehende Importe unverändert weiterlaufen.
+import { CONTENT_REVALIDATE } from "./revalidate";
+export { CONTENT_REVALIDATE };
 
 function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;
@@ -582,6 +585,17 @@ export async function getPostContentBySlug(slug: string): Promise<string | null>
 function getAllPostsMap(): Promise<Map<string, Post>> {
   return buildMemo("postsMap", buildPostsMap);
 }
+/**
+ * Alle Beiträge gebündelt (25 je Anfrage) — die Quelle für `getPostBySlug` beim Build.
+ *
+ * 🚨 Die Faden-Felder MÜSSEN hier mit abgefragt werden. Fehlten sie, hatte jede
+ * vorgerenderte Seite `post.faden = undefined`; die Kette fiel auf ihre leeren Vorgaben
+ * zurück und ließ Kurzfassung, Leo-Fragen, „Dazu passt", Wächter-Regeln UND Statistiken
+ * stillschweigend weg. Beim Build läuft ausschließlich dieser Weg — die Einzelabfrage in
+ * getPostBySlugSingle, die die Felder schon immer hatte, greift nur für Slugs, die gar
+ * nicht in der Bündel-Map stehen. Nach außen sah alles gesund aus: Build grün, Seiten da,
+ * nur eben ohne die neuen Inhalte.
+ */
 async function buildPostsMap(): Promise<Map<string, Post>> {
   const client = getClient();
   const query = gql`
@@ -594,6 +608,7 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
           author { node { id name firstName lastName description avatar { url } } }
           categories { nodes { name slug } }
           untertitel
+          ${FADEN_AKTIV ? FADEN_GRAPHQL_FELDER : ""}
         }
       }
     }
@@ -610,6 +625,14 @@ async function buildPostsMap(): Promise<Map<string, Post>> {
       const data: BulkPostsResponse = await client.request<BulkPostsResponse>(query, { after });
       for (const node of data.posts.nodes) {
         const decoded = decodePostContent(node) as Post & { untertitel?: string };
+        // Wie in getPostBySlugSingle: die JSON-Strings zu Faden-Feldern auswerten und die
+        // Rohfelder entfernen, damit sie nicht mit in den Client-Payload wandern.
+        if (FADEN_AKTIV) {
+          const roh = decoded as Post & FadenRohfelder;
+          decoded.faden = parseFadenFelder(roh);
+          delete roh.kurzfassung; delete roh.leoFragen; delete roh.glossarBegriffe;
+          delete roh.leoEinwuerfe; delete roh.dazuPasst; delete roh.waechterRegeln; delete roh.statistiken;
+        }
         if (decoded.slug) map.set(decoded.slug, decoded);
       }
       hasNext = data.posts.pageInfo.hasNextPage;

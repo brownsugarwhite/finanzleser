@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { RECHNER_CONFIG_TAG } from "@/lib/cacheTags";
+import { RECHNER_CONFIG_TAG, FADEN_INDEX_TAG } from "@/lib/cacheTags";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -136,6 +136,14 @@ export async function POST(request: NextRequest) {
   // Sitemap immer mit revalidieren
   revalidatePath("/sitemap.xml");
   revalidated.push("/sitemap.xml");
+
+  // Die abgeleiteten Faden-Indizes (Beiträge, Werkzeuge, Glossar) hängen an KEINEM Pfad —
+  // sie liegen als eigene Data-Cache-Einträge und würden sonst bis zu 24 h alt bleiben,
+  // während die Seiten drumherum schon neu gebaut sind. Ein neuer Beitrag fehlte dann in
+  // „Dazu passt", ein neuer Begriff bliebe unverlinkt. Deshalb bei jedem Inhalts-Speichern
+  // den Tag busten; die Neuberechnung passiert beim nächsten Render, nicht hier.
+  revalidateTag(FADEN_INDEX_TAG);
+  revalidated.push(`tag:${FADEN_INDEX_TAG}`);
 
   // Betroffene Seiten sofort wieder warmlaufen lassen (kein Kaltstart für den ersten Besucher).
   await rewarm(base, revalidated);

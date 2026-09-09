@@ -7,6 +7,7 @@ import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import PageAds from "@/components/layout/PageAds";
 import { getAllRechner, getRechnerBySlug, getSiteSettings } from "@/lib/wordpress";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
+import Insel from "@/components/faden/kette/Insel";
 import KartenKapitel from "@/components/faden/KartenKapitel";
 import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { buildMetadata, stripHtml, SITE_NAME } from "@/lib/seo";
@@ -202,7 +203,7 @@ export default async function RechnerDetailPage({ params }: Props) {
           }
         >
           {/* Rechner ohne Visual, 850px. Disclaimer steckt im noVisual-Embed (InfoHint). */}
-          <RechnerEmbed slug={rechner.slug} noVisual />
+          <Insel typ="rechner" arg={rechner.slug}><RechnerEmbed slug={rechner.slug} noVisual /></Insel>
         </PageAds>
       </main>
       <Footer />

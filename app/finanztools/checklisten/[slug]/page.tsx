@@ -8,6 +8,7 @@ import PageAds from "@/components/layout/PageAds";
 import { getAllChecklisten, getChecklisteBySlug, getSiteSettings } from "@/lib/wordpress";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
 import { medienUrl } from "@/lib/faden/medien";
+import Insel from "@/components/faden/kette/Insel";
 import KartenKapitel from "@/components/faden/KartenKapitel";
 import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { parsePDF } from "@/lib/checklisteParser";
@@ -163,7 +164,7 @@ export default async function ChecklisteDetailPage({ params }: Props) {
           }
         >
           {/* Checkliste ohne Visual, 850px. Aktions-Portal (PDF) inline unter der Liste. */}
-          <ChecklisteEmbed slug={slug} noVisual initialData={initialData} />
+          <Insel typ="checkliste" arg={slug}><ChecklisteEmbed slug={slug} noVisual initialData={initialData} /></Insel>
         </PageAds>
       </main>
       <Footer />

@@ -7,6 +7,7 @@
  */
 import { useState } from "react";
 import type { FadenFrage } from "@/lib/types";
+import { FrageBlase, LeoBlase } from "@/components/faden/leo/Blase";
 
 export default function Weiterlesen({ fragen }: { fragen: FadenFrage[] }) {
   const [offen, setOffen] = useState<number | null>(null);
@@ -22,16 +23,15 @@ export default function Weiterlesen({ fragen }: { fragen: FadenFrage[] }) {
       </div>
       {fragen.map((f, i) => (
         <div key={i} className="antwort" hidden={offen !== i}>
-          <div className="wort wort--frage"><span className="kicker">Ihre Frage</span><p>{f.frage}</p></div>
+          <div className="wort wort--frage"><FrageBlase><p>{f.frage}</p></FrageBlase></div>
           <div className="wort wort--leo">
-            <img src="/assets/leo.svg" alt="Leo" />
-            <div>
-              <span className="kicker kicker--gruen">Leo</span>
+            <span className="kicker kicker--gruen">Leo</span>
+            <LeoBlase>
               <p>{f.antwort}</p>
               {f.quellen.length > 0 && (
                 <div className="quellen"><b>Quellen</b>{f.quellen.map((q, j) => <span key={j}>› {q}</span>)}</div>
               )}
-            </div>
+            </LeoBlase>
           </div>
         </div>
       ))}

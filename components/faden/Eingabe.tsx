@@ -13,11 +13,10 @@ import { useFaden } from "./FadenProvider";
 import { zuAbschnitt } from "./RandLinks";
 import FieldOutline from "@/components/ui/FieldOutline";
 import type { IndexEintrag } from "@/lib/faden/index";
+import { holeIndex, indexAusCache } from "@/lib/faden/indexClient";
 
 const TYP_LABEL: Record<IndexEintrag["typ"], string> = { ratgeber: "Ratgeber", rubrik: "Rubrik", thema: "Thema", rechner: "Rechner", vergleich: "Vergleich", checkliste: "Checkliste", dokumente: "Dokument", begriff: "Begriff", seite: "Seite", spiel: "Spiel" };
 const RANG: Record<IndexEintrag["typ"], number> = { ratgeber: 0, rubrik: 1, thema: 1, rechner: 2, vergleich: 2, checkliste: 2, dokumente: 2, begriff: 3, seite: 1, spiel: 2 };
-let indexCache: IndexEintrag[] | null = null;
-let indexLaedt: Promise<IndexEintrag[]> | null = null;
 
 function normal(s: string): string {
   return s.toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
@@ -38,12 +37,6 @@ export function sucheImIndex(index: IndexEintrag[], q: string, max = 8): IndexEi
     bewertet.push({ e, s: s * 10 + RANG[e.typ] });
   }
   return bewertet.sort((a, b) => a.s - b.s || a.e.titel.localeCompare(b.e.titel, "de")).slice(0, max).map((x) => x.e);
-}
-
-async function holeIndex(): Promise<IndexEintrag[]> {
-  if (indexCache) return indexCache;
-  if (!indexLaedt) indexLaedt = fetch("/api/faden/index").then((r) => r.json()).then((j: { items: IndexEintrag[] }) => { indexCache = j.items || []; return indexCache; }).catch(() => { indexLaedt = null; return []; });
-  return indexLaedt;
 }
 
 /** Chip unter der Eingabe: Frage an Leo, Adresse, Anker im Kapitel oder ein Ereignis (etwa die Kurzfassung aufklappen). */
@@ -67,7 +60,7 @@ export default function Eingabe() {
   }, [pathname]);
   const zeigeChips = chips.length > 0 && endeImBild && !leo.nachrichten.length;
   const [wert, setWert] = useState("");
-  const [index, setIndex] = useState<IndexEintrag[] | null>(indexCache);
+  const [index, setIndex] = useState<IndexEintrag[] | null>(indexAusCache());
   const [offen, setOffen] = useState(false);
   const [aktiv, setAktiv] = useState(-1);
   const wrap = useRef<HTMLDivElement>(null);
@@ -101,7 +94,7 @@ export default function Eingabe() {
     if (!start) return;
     const t0 = performance.now();
     const suche = () => {
-      const blasen = document.querySelectorAll<HTMLElement>("#leo-strom .wort--frage");
+      const blasen = document.querySelectorAll<HTMLElement>("#leo-strom .wort--frage .blase--frage");
       const b = blasen[blasen.length - 1];
       if (b && (b.textContent || "").includes(t) && !b.dataset.geflogen) {
         b.dataset.geflogen = "1"; b.style.opacity = "0";

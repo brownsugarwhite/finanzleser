@@ -9,3 +9,11 @@
 
 /** WP-Rechner-Konfiguration (Mindestlohn, Kindergeld, BBG …) → /api/rates */
 export const RECHNER_CONFIG_TAG = "rechner-config";
+
+/**
+ * Die abgeleiteten Faden-Indizes (Beiträge, Werkzeuge, Glossar) — siehe
+ * lib/faden/titel.ts, werkzeugIndex.ts, glossar.ts. Sie fassen die großen Listen-Getter
+ * zu kompakten Nachschlagetabellen zusammen und liegen im Data-Cache; der Save-Webhook
+ * bustet sie, sobald irgendein Inhalt gespeichert wird.
+ */
+export const FADEN_INDEX_TAG = "faden-index";

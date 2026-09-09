@@ -7,7 +7,6 @@
  */
 import { getNavItems } from "@/lib/wordpress";
 import { baueSpalten } from "@/lib/faden/spalten";
-import { getBeitragsIndex } from "@/lib/faden/titel";
 import { buildGlossarUrl } from "@/lib/urls";
 import KapitelKopf from "./KapitelKopf";
 import HeroLanding from "./hero/HeroLanding";
@@ -19,6 +18,8 @@ import Begruessung from "./Begruessung";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
+import Insel from "@/components/faden/kette/Insel";
+import { LeoBlase } from "@/components/faden/leo/Blase";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
@@ -32,7 +33,6 @@ const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string
 export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
   const nav = await getNavItems();
-  await getBeitragsIndex();
   const rubriken = await baueSpalten(nav);
   const finanzwort = await spielAm("finanzwort");
   // Echte Bestandszahlen für die Kacheln im Hero (statt der Prototyp-Zahlen).
@@ -55,16 +55,15 @@ export default async function FadenLanding() {
               alles sofort da (SSR unverändert). */}
           <Begruessung>
           <div className="wort wort--leo" id="leo-gruss">
-            <img src="/assets/leo.svg" alt="Leo" />
-            <div>
-              <span className="kicker kicker--gruen">Leo</span>
+            <span className="kicker kicker--gruen">Leo</span>
+            <LeoBlase>
               <p>Hallo, ich bin Leo, Ihr Finanzagent. Ich habe die <a className="begriff" href={buildGlossarUrl("avb")} data-b="avb">Versicherungsbedingungen</a> unserer Partner gelesen und antworte mit Quelle und Seite. Fragen Sie, blättern Sie oben im Register, oder stöbern Sie hier in den Rubriken. Grüne Begriffe erklären sich auf Tipp.</p>
-              <div className="werkzeuge"><Vorlesen zielId="leo-gruss" /></div>
-            </div>
+            </LeoBlase>
+            <div className="werkzeuge"><Insel typ="vorlesen" arg="leo-gruss"><Vorlesen zielId="leo-gruss" /></Insel></div>
           </div>
           {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
               (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
-          <Spalten rubriken={rubriken} />
+          <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           <FinanzwortHeute />
           </Begruessung>
         </div>
