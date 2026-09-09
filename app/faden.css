@@ -69,10 +69,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kopfblur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .kopfblur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .kopfblur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .kopfblur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .kopfblur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .kopfblur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .kopfblur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .kopfblur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
 .faden-shell .kopfblur b { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--paper) 0%, transparent 100%); }
 .faden-shell .kopf { position: sticky; top: 0; z-index: 30; background: transparent; }
-.faden-shell .kopf__innen { padding: 0 0 0 28px; }
+.faden-shell .kopf__innen { padding: 0 0 0 clamp(16px, 3vw, 40px); }
 .faden-shell .kopf__zeile { display: flex; align-items: center; gap: 22px; min-height: 64px; }
 .faden-shell .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
-.faden-shell .logo img { height: 28px; width: auto; display: block; }
+.faden-shell .logo img { height: 26px; width: auto; display: block; }
 .faden-shell .register { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-width: 0; height: 50px; }
 .faden-shell .register__reihe { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; height: 50px; }
 .faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
@@ -82,6 +82,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .register .offen { color: var(--pink); }
 .faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
 .faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
+
+/* Funken zwischen den Registereinträgen (components/faden/kopf/Register.tsx).
+   Sie atmen versetzt, damit die Zeile lebt, ohne dass eine gleichgeschaltete Bewegung
+   den Blick zieht — 3,4 s Takt, je Funke 0,5 s später. */
+.faden-shell .reg-spark { display: inline-flex; align-items: center; line-height: 0; animation: fl-atmen 3.4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * .5s); }
+/* 🚨 Der aktive Funke atmet NICHT: `fl-atmen` animiert `transform`, und eine laufende
+   Animation schlägt jede statische Transformation — die Drehung käme sonst nie an. */
+.faden-shell .reg-spark--aktiv { animation: none; transform: rotate(135deg) scale(1.35); transition: transform .6s var(--schwung); }
+.faden-shell .reg-spark--aktiv svg path { fill: var(--pink); }
 
 /* Nav-Pille als Lupe — Portierung aus dem Prototyp (leo-faden.html:296-306).
    Rechteck (32 px) mit „Lupe": eine weiße Kopie der Reihe, 1,1-fach vergrößert, die
@@ -101,12 +110,36 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Die Spark-Komponente setzt ihre Farbe als fill-Attribut; CSS schlaegt das Attribut,
    deshalb werden die Funken in der Lupe hier auf Weiss gezogen. */
 .faden-shell .nav-lupe__reihe svg path { fill: #fff; }
-.faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: var(--green); color: #fff; height: 44px; padding: 0 18px 0 34px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22px 50%); flex: none; margin-left: auto; }
-.faden-shell .lesezeichen button { border: 0; background: none; color: #fff; padding: 4px 8px; font-weight: 700; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
-.faden-shell .lesezeichen .lz-wort { font: 700 14px/1 var(--sans); padding: 6px 10px; }
-.faden-shell .lesezeichen .lz-icon { position: relative; padding: 6px 7px; }
+/* 🚨 Auch der aktive (magentafarbene) Funke bleibt in der Lupe weiß — die Lupe ist eine
+   Spiegelung, kein zweiter Zustand. Spezifität muss die Pink-Regel oben schlagen. */
+.faden-shell .nav-lupe__reihe .reg-spark svg path { fill: #fff; }
+/* ---------- Lesezeichen: das Band, das rechts aus der Zeitung ragt ----------
+   Zackenkante + Verlaufsband statt der alten Kerbe per clip-path. Höhe 50 px, damit die
+   Marke unter der 64-px-Kopfzeile sitzt und der Blur darunter durchscheint. */
+/* Das Lesezeichen hängt an der Oberkante, nicht in der Mitte der 64-px-Zeile —
+   die Marke soll aus dem Blatt ragen, nicht darin schweben. */
+.faden-shell .kopf__marke { display: flex; align-items: center; gap: 0; height: 50px; align-self: flex-start; margin-left: auto; min-width: 0; }
+.faden-shell .sie-lesen { display: none; font: 400 13px/1.3 var(--sans); color: var(--muted); max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: auto; padding-right: 12px; flex: none; }
+.faden-shell .sie-lesen b { color: var(--ink); font-weight: 600; }
+@media (min-width: 1440px) { .faden-shell .sie-lesen { display: block; } }
+
+/* 🚨 Die Zacken sind ein SVG mit `preserveAspectRatio="none"`; Höhe und Bandhöhe müssen
+   auf den Pixel gleich sein, sonst reißt die Kante sichtbar ab. Der -1 px Versatz
+   schließt die Fuge, die sonst bei krummen Zoomstufen aufblitzt. */
+.faden-shell .lz-zacken { width: 40px; height: 50px; display: block; margin-right: -1px; flex: none; margin-left: auto; --fill-0: var(--green); }
+.faden-shell .sie-lesen + .lz-zacken { margin-left: 0; }
+.faden-shell .lesezeichen { display: flex; align-items: center; gap: 4px; background: linear-gradient(to left, rgba(22,142,3,.8), var(--green)); color: #fff; height: 50px; padding: 0 clamp(10px, 2vw, 25px) 0 1px; flex: none; }
+.faden-shell .lesezeichen button { border: 0; background: none; color: #fff; padding: 0; font-weight: 700; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; justify-content: center; cursor: pointer; border-radius: 15px; transition: background .2s; }
+.faden-shell .lesezeichen button:hover { background: rgba(109,202,28,.3); }
+.faden-shell .lesezeichen .lz-wort { display: none; font: 700 14px/1 var(--sans); padding: 0 12px; height: 36px; }
+@media (min-width: 1120px) { .faden-shell .lesezeichen .lz-wort { display: inline-flex; } }
+.faden-shell .lesezeichen .lz-icon { position: relative; width: 36px; height: 36px; }
 .faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
-.faden-shell .lesezeichen .lz-zahl { position: absolute; top: -1px; right: -3px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--paper); color: var(--green-ink); font: 700 10px/16px var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+/* Magenta statt Papier: die Zahl im Koffer ist die einzige Zahl im Kopf, die sich ändert. */
+.faden-shell .lesezeichen .lz-zahl { position: absolute; top: 1px; right: 1px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--pink); color: #fff; font: 700 10px/16px var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+
+/* ---------- Lesefortschritt: Haarlinie an der Unterkante des Kopfs ---------- */
+.faden-shell .lesefortschritt { position: absolute; left: 0; right: 0; top: calc(var(--kopf-h) - 1px); height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left center; opacity: 0; transition: opacity .3s; pointer-events: none; }
 .faden-shell .blatt { display: none; background: var(--paper); border-bottom: 1px solid var(--rule-strong); box-shadow: 0 14px 28px rgba(0,0,0,.08); }
 .faden-shell .blatt.offen { display: block; }
 
