@@ -56,3 +56,11 @@ docs/prototype/daten/
 docs/prototype/src/02b-daten.html
 docs/prototype/leo-faden.html
 docs/https___www.finanzleser.de_-Coverage-Drilldown-*/
+
+# Design-Übergabe (Claude Design, 09.09.2026): README, github.md und die .dc.html sind
+# versioniert — die Asset-Kopien nicht. Alle 2,4 MB liegen bereits in public/ (geprüft),
+# und support.js ist die Laufzeit des Prototyp-Werkzeugs, kein Projektcode.
+docs/design_handoff_finanzleser_faden/public/
+docs/design_handoff_finanzleser_faden/support.js
+docs/design_handoff_finanzleser_faden/.DS_Store
+Finanzleser Chat-Design Phase 2.zip
