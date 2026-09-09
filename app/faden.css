@@ -544,14 +544,28 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .abc button:hover:not(:disabled) { border-color: var(--green-ink); color: var(--green-ink); } .faden-shell .abc button.aktiv { border-color: var(--pink); color: var(--pink); }
 .faden-shell .lesezeichen .btn--menue { display: none; }
 
-/* ---------- Mobiles Menü ---------- */
-.faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: 18px 24px; overflow: auto; }
-.faden-shell .menue__kopf { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+/* ---------- Mobiles Menü: der Zeitungskopf im Kleinen ---------- */
+/* Die Seite fällt nach vorn auf, statt einfach da zu sein. `fl-kippen` hat einen
+   unsichtbaren Anfang — bei reduzierter Bewegung greift die Rücknahme in zeitung.css. */
+.faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: 18px clamp(16px, 5vw, 28px); overflow: auto; animation: fl-kippen .55s var(--kurve) both; transform-origin: top center; }
+.faden-shell .menue__kopf { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
 .faden-shell .menue__kopf img { height: 24px; }
-.faden-shell .menue button.zeile-m { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule); background: none; padding: 16px 0; font-family: var(--serif); font-weight: 700; font-size: 24px; display: flex; align-items: center; justify-content: space-between; }
-.faden-shell .menue button.zeile-m small { font: 600 11px/1.4 var(--sans); color: var(--muted); letter-spacing: .1em; text-transform: uppercase; text-align: right; max-width: 44%; }
-.faden-shell .menue .klein { display: grid; gap: 4px; margin-top: 18px; }
-.faden-shell .menue .klein button { text-align: left; border: 0; background: none; padding: 10px 0; font-weight: 600; font-size: 16px; display: flex; gap: 10px; align-items: center; }
+.faden-shell .menue__zu { display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; color: var(--muted); font: 400 13px/1 var(--sans); }
+.faden-shell .menue__zu i { position: relative; width: 12px; height: 12px; display: inline-block; }
+.faden-shell .menue__zu i::before, .faden-shell .menue__zu i::after { content: ""; position: absolute; left: 0; top: 50%; width: 12px; height: 1px; background: currentColor; }
+.faden-shell .menue__zu i::before { transform: rotate(45deg); } .faden-shell .menue__zu i::after { transform: rotate(-45deg); }
+.faden-shell .menue .doppellinie { margin: 8px 0 4px; }
+
+.faden-shell .menue__register { list-style: none; margin: 0; padding: 0; }
+.faden-shell .menue__zeile { width: 100%; display: grid; grid-template-columns: 38px 1fr auto; align-items: center; gap: 10px; border: 0; border-bottom: 1px solid rgba(51,74,39,.12); background: none; text-align: left; padding: 14px 0; animation: fl-druck .5s var(--kurve) calc(.15s + var(--i, 0) * .06s) both; }
+.faden-shell .menue__initial { font: 900 30px/1 var(--serif); color: var(--green-ink); }
+.faden-shell .menue__text { display: grid; gap: 2px; min-width: 0; }
+.faden-shell .menue__text b { font: 700 clamp(20px, 5.5vw, 24px)/1.2 var(--serif); color: var(--ink); }
+.faden-shell .menue__text em { font: italic 300 12.5px/1.35 var(--serif); color: var(--muted); }
+
+.faden-shell .menue__wege { display: grid; gap: 2px; margin-top: 20px; border-top: 1px solid var(--rule-strong); padding-top: 12px; }
+.faden-shell .menue__wege button { text-align: left; border: 0; background: none; padding: 11px 0; font: 600 15px/1 var(--sans); color: var(--ink); display: flex; gap: 10px; align-items: center; }
+.faden-shell .menue__fuss { margin-top: auto; padding-top: 18px; font: italic 300 12px var(--serif); color: var(--muted); }
 
 /* ---------- Listenkarte (Rubrik, Thema, Übersichten) ---------- */
 .faden-shell .kasten--liste { gap: 14px; }
