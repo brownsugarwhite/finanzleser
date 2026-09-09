@@ -22,6 +22,7 @@ import Lesestelle from "./Lesestelle";
 import TeilenDialog from "./TeilenDialog";
 import Kulissen from "./Kulissen";
 import MobilAnker from "./MobilAnker";
+import Fortschritt from "./Fortschritt";
 
 export default function FadenShell({ children, nav, preload, level }: { children: ReactNode; nav: NavItem[]; preload: MegamenuPreload; level?: Level[] }) {
   const [schublade, setSchublade] = useState<"links" | "rechts" | null>(null);
@@ -40,6 +41,7 @@ export default function FadenShell({ children, nav, preload, level }: { children
         <Menue offen={menue} onZu={() => setMenue(false)} onRand={(s) => setSchublade(s)} />
         <main className="faden" id="faden">
           <RandLinks mobil={schublade === "links"} onZu={zu} />
+          <Fortschritt />
           {schublade && <div className="schublade" onClick={zu} />}
           <div id="mitte">
             <div className="mobil-leiste">

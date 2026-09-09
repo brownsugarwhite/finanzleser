@@ -113,6 +113,49 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
 .faden-shell .faden { margin: 0; padding: 22px 0 160px; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
 .faden-shell #mitte { padding: 0 11px; min-width: 0; }
+
+/* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
+   Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
+   unberührt bleiben — ein viertes Rasterkind würde die Aufteilung verschieben.
+
+   🚨 Die Gasse ist NICHT konstant: die Seitenspalte wächst mit dem Fenster, die
+   Randspalte darin ist bei 300px gedeckelt und mittig gesetzt. Ein fester Abstand zur
+   Mittelspalte klebt deshalb bei 1440px an der Sidebar und driftet bei 1920px weit ab.
+   Darum die Gassenmitte ausrechnen — dieselbe Formel wie in `.rand--links`. */
+.faden-shell .fortschritt {
+  --gleis: 2px; --fuell: 3px; --breite: 11px;
+  --seitenspalte: calc((100% - var(--spalte)) / 2);
+  --randbreite: min(var(--rand-l), calc(var(--seitenspalte) - 46px));
+  --gasse-links: calc(var(--seitenspalte) / 2 + var(--randbreite) / 2);   /* rechte Kante der Sidebar */
+  position: absolute;
+  left: calc((var(--gasse-links) + var(--seitenspalte)) / 2 - var(--breite) / 2);
+  width: var(--breite);
+  pointer-events: none; z-index: 1; display: none;
+}
+@media (min-width: 1440px) { .faden-shell .fortschritt { display: block; } }
+/* Striche als Verlauf statt `border-style: dashed` — so ist die Teilung exakt und
+   überall gleich, statt vom Browser gewürfelt. */
+.faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--muted) 0 5px, transparent 5px 11px); }
+.faden-shell .fortschritt__fuell { position: absolute; top: 0; left: calc(50% - var(--fuell) / 2); width: var(--fuell); background: var(--ink); transform-origin: 0 0; will-change: transform; }
+.faden-shell .fortschritt__punkt { position: absolute; left: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); transition: background .35s, border-color .35s; }
+.faden-shell .fortschritt__punkt.erreicht { background: var(--ink); border-color: var(--ink); }
+/* Abschnitte eines Ratgebers: kurzer Querstrich statt Kreis — zwei Ebenen auf einer
+   Linie, Kreis für das Kapitel, Strich für den Abschnitt darin. Vorlage: das TOC-Design
+   aus der Claude-Design-Sitzung. Der Strich des Abschnitts, in dem der Leser steht,
+   wird länger und dunkel; er kommt ohne Puls aus, der gehört dem Kapitelkreis. */
+.faden-shell .fortschritt__strich { position: absolute; left: 50%; width: 9px; height: 2px; margin-top: -1px; transform: translateX(-50%); background: var(--muted); border-radius: 1px; transition: width .3s, background .35s; }
+.faden-shell .fortschritt__strich.erreicht { background: var(--ink); }
+.faden-shell .fortschritt__strich.jetzt { width: 15px; background: var(--ink); }
+/* Puls nur am jüngsten erreichten Kreis: ein Ring, der aufgeht und verschwindet —
+   der Kreis selbst bleibt ruhig, sonst wackelt die Linie. */
+.faden-shell .fortschritt__punkt.jetzt::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--ink); animation: faden-puls 2.4s cubic-bezier(.22,.61,.36,1) infinite; }
+@keyframes faden-puls {
+  0%   { transform: scale(1);   opacity: .5; }
+  70%  { transform: scale(2.1); opacity: 0; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .faden-shell .fortschritt__punkt.jetzt::after { display: none; } }
+
 .faden-shell .faden > * { min-width: 0; }
 .faden-shell .rand { align-self: stretch; font-size: 13.5px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
 .faden-shell .rand--links { justify-self: center; width: min(var(--rand-l), calc(100% - 46px)); }
@@ -205,7 +248,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* Innerer Kasten, Geometrie wie am RechnerButton (border 2px + outline 1px, Abstand 2px):
    außen die dünne Kontur der Blase, innen eine dickere Linie in der Kontrastfarbe.
    Radius = Außenradius minus Einzug, sonst laufen die Ecken nicht parallel. */
-.faden-shell .blase::after { content: ""; position: absolute; inset: 6px; border: 2px solid currentColor; border-radius: 21px; pointer-events: none; }
+.faden-shell .blase::after { content: ""; position: absolute; inset: 6px; border: 2px solid currentColor; border-radius: 21px; pointer-events: none; z-index: 3; }   /* über dem Schwanz (z-index 2), sonst schneidet der ihn an */
 .faden-shell .blase--frage { background: var(--ink); color: #fff; max-width: 600px; }
 .faden-shell .blase--frage a { color: #fff; text-decoration: underline; }
 .faden-shell .blase--frage::after { color: var(--paper); }   /* heller Kasten auf dunkler Füllung */
@@ -594,6 +637,18 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .prose .table-scroll-inner { min-width: 0; }
 
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
+/* Werkzeuge und Spiele stehen ohne Kasten im Fluss — die Werkzeug-Überschrift trägt
+   die Marke, die Spiele bringen ihren eigenen Rahmen mit. Vom .kasten bleiben nur die
+   Maße: Abstand, Sprungziel für das Inhaltsverzeichnis, Abbruch der Textumfließung. */
+.faden-shell .werkzeug-block, .faden-shell .spiel-inline { position: relative; display: grid; gap: 10px; clear: both; margin: 22px 0 24px; scroll-margin-top: 110px; min-width: 0; max-width: 100%; }
+.faden-shell .article-tool-label { display: flex; flex-wrap: wrap; align-items: center; row-gap: 4px; column-gap: 10px; margin: 0 0 6px; padding: 0; border: 0; font-size: unset; font-weight: unset; line-height: unset; }
+@media (max-width: 900px) {
+  .faden-shell .article-tool-badge { font-size: 26px; padding: 7px 10px; }
+  .faden-shell .article-tool-title { font-size: 27px; }
+}
+/* Fazit-Überschrift der Live-Seite: `.faden-shell h2` setzt margin:0 und schlägt
+   `.fazit-heading` in der Spezifität — der Abstand muss hier stehen. */
+.faden-shell .fazit-heading { margin: 34px 0 20px; }
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
 .faden-shell .kasten--rechner .rechner-layout, .faden-shell .kasten--checkliste .checkliste-layout { max-width: none; }

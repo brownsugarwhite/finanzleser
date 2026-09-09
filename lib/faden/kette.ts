@@ -145,6 +145,10 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
       }
       htmlAnhaengen(aktuelle, html.slice(last));
     } else if (part.type === "gamification") {
+      // Die Drehkarte („karte") erklärt einen Begriff — das übernimmt im Faden das
+      // Glossar, jeder grüne Begriff öffnet dieselbe Erklärung an Ort und Stelle.
+      // Sie bleibt im CMS stehen, wird hier aber nicht mehr in die Kette gehängt.
+      if (part.value === "karte") continue;
       aktuelle.teile.push({ art: "spiel", typ: part.value, felder: part.gamFields || {} });
     } else {
       const typ = part.type as WerkzeugTyp;

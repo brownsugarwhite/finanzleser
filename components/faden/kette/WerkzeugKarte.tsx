@@ -26,11 +26,11 @@ import Insel from "./Insel";
 
 type Embed = Extract<Teil, { art: "embed" }>;
 
-const LABEL: Record<Embed["typ"], { typ: string; dot: string; ton: string }> = {
-  rechner: { typ: "Rechner", dot: "rechner", ton: "pink" },
-  checkliste: { typ: "Checkliste", dot: "checkliste", ton: "lila" },
-  vergleich: { typ: "Anzeige · Vergleich mit Partnerlinks", dot: "vergleich", ton: "tuerkis" },
-  dokumente: { typ: "Dokumente", dot: "dokumente", ton: "terra" },
+const LABEL: Record<Embed["typ"], { typ: string; dot: string; ton: string; marke: string; farbe: string }> = {
+  rechner: { typ: "Rechner", dot: "rechner", ton: "pink", marke: "Rechner", farbe: "var(--color-tool-rechner)" },
+  checkliste: { typ: "Checkliste", dot: "checkliste", ton: "lila", marke: "Checkliste", farbe: "var(--color-tool-checklisten)" },
+  vergleich: { typ: "Anzeige · Vergleich mit Partnerlinks", dot: "vergleich", ton: "tuerkis", marke: "Vergleich", farbe: "var(--color-tool-vergleiche)" },
+  dokumente: { typ: "Dokumente", dot: "dokumente", ton: "terra", marke: "Dokumente", farbe: "var(--color-tool-dokumente)" },
 };
 
 function titelAus(toolData: ArticleToolData | undefined, typ: Embed["typ"], slug: string): string | undefined {
@@ -123,10 +123,15 @@ export default async function WerkzeugKarte({
   }
 
   return (
-    <div id={`werkzeug-${teil.typ}-${teil.slug}`} className={`kasten kasten--${lab.ton} kasten--inline kasten--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`} data-toc-titel={imInhalt ? titel : undefined} data-toc-typ={imInhalt ? teil.typ : undefined}>
+    <div id={`werkzeug-${teil.typ}-${teil.slug}`} className={`werkzeug-block werkzeug-block--${teil.typ}`} data-werkzeug={`${teil.typ}:${teil.slug}`} data-toc-titel={imInhalt ? titel : undefined} data-toc-typ={imInhalt ? teil.typ : undefined}>
       {teil.grund && <div className="einwurf einwurf--inline">Leo wirft ein: {teil.grund}</div>}
-      <span className="kicker kicker--tool kicker--gruen"><i className={`dot dot--${lab.dot}`} />{lab.typ}{teil.nachtrag ? " · zum Ratgeber" : ohneTitel ? "" : " · in der Kette"}</span>
-      {!ohneTitel && <h3>{titel}</h3>}
+      {teil.typ === "vergleich" && <span className="kicker kicker--tool"><i className={`dot dot--${lab.dot}`} />{lab.typ}</span>}
+      {!ohneTitel && (
+        <h3 className="article-tool-label">
+          <span className="article-tool-badge" style={{ background: lab.farbe }}>{lab.marke}</span>
+          <span className="article-tool-title">{titel}</span>
+        </h3>
+      )}
       <div className="kasten__koerper article-tool-embed article-finanztool">{koerper}</div>
       {!ohneTitel && <Insel typ="kasten-fuss" werte={{ titel, url: werkzeugUrl(teil.typ, slugs[0]), kastenId: `werkzeug-${teil.typ}-${teil.slug}`, eigeneSeite: true }}><KastenFuss titel={titel} url={werkzeugUrl(teil.typ, slugs[0])} kastenId={`werkzeug-${teil.typ}-${teil.slug}`} eigeneSeite /></Insel>}
     </div>
