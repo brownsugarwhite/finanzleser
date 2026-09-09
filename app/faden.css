@@ -271,7 +271,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose h3 { font-size: 18px; margin: 16px 0 6px !important; } .faden-shell .prose h4 { font-size: 16px; margin: 14px 0 4px !important; }
 .faden-shell .prose ul, .faden-shell .prose ol { margin: 0 0 12px 22px; padding: 0; } .faden-shell .prose li { margin: 0 0 4px; }
 .faden-shell .prose img { max-width: 100%; height: auto; } .faden-shell .prose figure { margin: 0 0 12px; }
-.faden-shell .prose a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+/* Verweise im Fließtext: Primärgrün, ohne Unterstrich — Beitragslinks und Glossarbegriffe
+   sehen gleich aus (Wunsch vom 09.09.). Rückmeldung gibt allein der Farbwechsel beim
+   Zeigen; deshalb hat auch der Beitragslink jetzt einen Hover-Zustand. */
+.faden-shell .prose a { color: var(--green); text-decoration: none; }
+.faden-shell .prose a:hover { color: var(--pink); }
 
 /* ---------- Registerblatt ---------- */
 .faden-shell .blatt__innen { max-width: 1320px; margin: 0 auto; padding: 18px 28px 22px; display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: 28px; position: relative; }
@@ -417,8 +421,8 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 
 /* ---------- Glossar: grüne Begriffe, Klickmenü, Sitzung, Nachschlagewerk, Begriffskarte ---------- */
 .faden-shell { position: relative; }
-.faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--green-ink); cursor: pointer; text-decoration: none; border-bottom: 1px dotted var(--green); transition: color .15s, border-color .15s; }
-.faden-shell .begriff:hover, .faden-shell .begriff.offen, .faden-shell .prose a.begriff:hover, .faden-shell .prose a.begriff.offen { color: var(--pink); border-bottom-color: var(--pink); text-decoration: none; }
+.faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--green); cursor: pointer; text-decoration: none; transition: color .15s; }
+.faden-shell .begriff:hover, .faden-shell .begriff.offen, .faden-shell .prose a.begriff:hover, .faden-shell .prose a.begriff.offen { color: var(--pink); text-decoration: none; }
 .faden-shell .bmenu { position: absolute; z-index: 45; width: min(320px, calc(100vw - 24px)); background: var(--white); border: 1px solid var(--rule); border-radius: 14px; box-shadow: 0 14px 34px rgba(51,74,39,.16); padding: 14px 18px 12px; display: grid; gap: 4px; }
 .faden-shell .bmenu::before { content: ""; position: absolute; left: var(--pfeil, 22px); top: -7px; width: 12px; height: 12px; background: var(--white); border-left: 1px solid var(--rule); border-top: 1px solid var(--rule); transform: rotate(45deg); }
 .faden-shell .bmenu.oben::before { top: auto; bottom: -7px; transform: rotate(225deg); }

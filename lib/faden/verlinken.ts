@@ -23,7 +23,12 @@ const HOMONYME: Record<string, RegExp> = {
   "zugang-der-kuendigung": /^zugang$/i, // Zugang zu Leistungen, Online-Zugang
   beitrag: /^beitrag$/i, // „in diesem Beitrag“ = Artikel; Beiträge/Beitragssatz bleiben
 };
-const SPERR_TAGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "a", "button", "thead", "figcaption", "code", "pre", "script", "style", "label", "input", "select", "textarea", "summary", "svg"]);
+/**
+ * Überschriften stehen hier bewusst NICHT mehr drin (Wunsch vom 09.09.): Begriffe dürfen
+ * auch in Titeln vorkommen, nicht nur im Fließtext. Der Prototyp sperrte h1–h4 noch
+ * (`SKIP` in 05-js-neu.html) — das ist also eine bewusste Abweichung, keine Nachlässigkeit.
+ */
+const SPERR_TAGS = new Set(["a", "button", "thead", "figcaption", "code", "pre", "script", "style", "label", "input", "select", "textarea", "summary", "svg"]);
 const SPERR_KLASSEN = /(^|\s)(kicker|quelle|krumen|vorspann|chip|chips|begriff|einwurf|kasten__fuss|aktionen|dazu|inhalt|wp-block-table-caption)(\s|$)/;
 const LEER_TAGS = new Set(["br", "img", "hr", "input", "wbr", "source", "col", "embed", "meta", "link", "track", "area", "base"]);
 const WORT = "A-Za-zÄÖÜäöüß";
@@ -60,6 +65,11 @@ function indexSignatur(index: Map<string, GlossarEintrag>): string {
     for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0;
   }
   return index.size + ":" + (h >>> 0).toString(36);
+}
+
+/** Klartext für den Linker vorbereiten: nur was HTML sonst als Markup läse. */
+export function alsText(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function escapeRx(s: string): string {
@@ -125,7 +135,14 @@ export interface LinkKontext {
 
 export function neuerKontext(index: Map<string, GlossarEintrag>, opts: { max?: number; bevorzugt?: string[] } = {}): LinkKontext {
   const bevorzugt = new Set((opts.bevorzugt || []).filter((s) => index.has(s)));
-  return { linker: erzeugeLinker(index), index, gesehen: new Set(), zahl: 0, max: opts.max ?? Math.max(6, bevorzugt.size), bevorzugt };
+  // 🚨 Ohne `max` wird NICHT gedeckelt — wie im Prototyp, der für Artikel `verlinke(art)`
+  // ohne Obergrenze aufruft (jeder Begriff bei seiner ersten Fundstelle). Vorher stand
+  // hier `Math.max(6, bevorzugt.size)`; bei im Median 5 redaktionellen Begriffen hieß das
+  // faktisch: nur die redaktionellen, sonst nichts. Über alle 202 Beiträge gemessen kam
+  // der Deckel auf 1.212 von 4.375 möglichen Begriffen und beschnitt ausnahmslos jeden
+  // Beitrag (Median ohne Deckel: 21). Kleinere Flächen setzen ihre Grenze selbst — die
+  // Begriffskarte 3, wie der Prototyp dort `verlinke(b, 3)` nutzt.
+  return { linker: erzeugeLinker(index), index, gesehen: new Set(), zahl: 0, max: opts.max ?? Infinity, bevorzugt };
 }
 
 function begriffLink(slug: string, wort: string): string {

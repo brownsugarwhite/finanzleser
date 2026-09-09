@@ -12,7 +12,7 @@ import { baueKette, werkzeugId, type Abschnitt, type Teil } from "@/lib/faden/ke
 import { verweiseAufloesen } from "@/lib/faden/titel";
 import { medienUrl } from "@/lib/faden/medien";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
-import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
+import { alsText, neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import InhaltAktiv from "./InhaltAktiv";
 import Einschub from "@/components/faden/Einschub";
@@ -48,7 +48,7 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
       <AbschnittTeilen titel={a.titel} url={url} id={a.id} />
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
-      <h2 className="abschnitt__titel">{a.titel}</h2>
+      <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
       <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
       {a.statistiken.map((st, j) => <StatistikKarte key={j} st={st} />)}
       {a.fragen.length > 0 && <Weiterlesen fragen={a.fragen} />}
@@ -63,9 +63,17 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   // erste Fundstelle je Begriff, kettenweit begrenzt, Sperrkontexte in lib/faden/verlinken.
   const glossar = await getGlossarIndex();
   const ctx = neuerKontext(glossar, { bevorzugt: k.faden.glossarBegriffe });
+  // Abschnittstitel sind Klartext (data-toc-titel liest sie weiter so). Für den Linker
+  // brauchen sie eine HTML-Fassung; `titel` selbst bleibt unangetastet, sonst stünden
+  // Auszeichnungen im Inhaltsverzeichnis und in „Abschnitt teilen“.
+  for (const a of k.abschnitte) a.titelHtml = alsText(a.titel);
   for (const nurBevorzugt of [true, false]) {
     if (k.einleitung) k.einleitung.html = verlinke(k.einleitung.html, ctx, { nurBevorzugt });
-    for (const a of k.abschnitte) for (const t of a.teile) if (t.art === "html") t.html = verlinke(t.html, ctx, { nurBevorzugt });
+    // Reihenfolge = Lesereihenfolge: erst der Titel des Abschnitts, dann sein Text.
+    for (const a of k.abschnitte) {
+      a.titelHtml = verlinke(a.titelHtml || alsText(a.titel), ctx, { nurBevorzugt });
+      for (const t of a.teile) if (t.art === "html") t.html = verlinke(t.html, ctx, { nurBevorzugt });
+    }
     k.faq = k.faq.map((f) => ({ q: f.q, a: verlinke(f.a, ctx, { nurBevorzugt }) }));
     if (k.fazitHtml) k.fazitHtml = verlinke(k.fazitHtml, ctx, { nurBevorzugt });
   }

@@ -36,6 +36,8 @@ export interface Abschnitt {
   id: string;
   nr: number;
   titel: string;
+  /** Titel als HTML, nachdem der Glossar-Linker darüber lief (KetteKapitel). Klartext bleibt in `titel`. */
+  titelHtml?: string;
   teile: Teil[];
   fragen: FadenFrage[];
   statistiken: FadenStatistik[];
