@@ -112,6 +112,7 @@ export function angehaengt(node: HTMLElement | null, opts: { immer?: boolean; le
 export function zeigeAnfangStabil(node: HTMLElement | null, immer = false, nachMs = 500): void {
   if (!node) return;
   zeigeAnfang(node, immer);
+  const kopfVorher = kopfHoehe();
   let eingegriffen = false;
   const stop = () => { eingegriffen = true; };
   const opts: AddEventListenerOptions = { passive: true };
@@ -123,7 +124,14 @@ export function zeigeAnfangStabil(node: HTMLElement | null, immer = false, nachM
     window.removeEventListener("touchmove", stop);
     window.removeEventListener("keydown", stop);
     if (eingegriffen || !document.contains(node)) return;
-    const ab = node.getBoundingClientRect().top - (kopfHoehe() + 12);
+    // 🚨 Nicht korrigieren, wenn sich der Kopf selbst geändert hat. Beim Wechsel in eine
+    // Rubrik klappt BlattStart das Registerblatt auf — der Kopf wächst dann von 56 auf
+    // über 1200 px. Das ist eine gewollte Änderung der Oberfläche, kein Nachrutschen des
+    // Layouts; eine Korrektur darauf schöbe das Kapitel unter das aufgeklappte Blatt.
+    // Der Prototyp misst dort ebenfalls nur einmal, vor dem Aufklappen.
+    const kopfJetzt = kopfHoehe();
+    if (Math.abs(kopfJetzt - kopfVorher) > 4) return;
+    const ab = node.getBoundingClientRect().top - (kopfJetzt + 12);
     if (Math.abs(ab) <= 4) return;
     window.scrollTo({ top: Math.max(0, window.scrollY + ab), behavior: reduziert() ? "auto" : "smooth" });
   }, nachMs);

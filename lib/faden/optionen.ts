@@ -4,7 +4,7 @@
  * Lebensereignisse, Level. Ein gecachter Abruf (CONTENT_REVALIDATE), Fehler werfen
  * (CLAUDE.md, Falle 2) — außer die URL fehlt ganz, dann leere Defaults.
  */
-import { CONTENT_REVALIDATE } from "@/lib/wordpress";
+import { CONTENT_REVALIDATE } from "@/lib/revalidate";
 import { zaehleWp } from "@/lib/faden/wpZaehler";
 
 /**

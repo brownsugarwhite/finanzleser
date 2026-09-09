@@ -51,7 +51,10 @@ function applyContentHeaderTitle(post: Post & { content?: string }): Post {
 // Gegenprobe nach einem Build:
 //   node -e "const r=require('./.next/prerender-manifest.json').routes; \
 //     console.log([...new Set(Object.values(r).map(v=>v.initialRevalidateSeconds))])"
-export const CONTENT_REVALIDATE = 86400;
+// Die Zahl selbst liegt in lib/revalidate.ts (siehe dortigen Kommentar) und wird hier
+// nur weitergereicht, damit bestehende Importe unverändert weiterlaufen.
+import { CONTENT_REVALIDATE } from "./revalidate";
+export { CONTENT_REVALIDATE };
 
 function getClient(revalidate: number = CONTENT_REVALIDATE): GraphQLClient {
   const endpoint = process.env.WORDPRESS_API_URL;

@@ -8,11 +8,14 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import dynamic from "next/dynamic";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
 import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
+
+// Siehe components/faden/leo/LeoMarkdown.tsx: der Markdown-Parser wird erst geladen,
+// wenn eine Antwort da ist, nicht auf jeder Faden-Seite.
+const LeoMarkdown = dynamic(() => import("./LeoMarkdown"), { ssr: false });
 
 interface Chip { text: string; tun: () => void; art?: "leo" | "still" }
 
@@ -35,7 +38,7 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
           <div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div>
         ) : (
           <div className="prose leo-markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
+            <LeoMarkdown text={text} />
             {laeuft && <span className="cursor" aria-hidden="true" />}
           </div>
         )}
