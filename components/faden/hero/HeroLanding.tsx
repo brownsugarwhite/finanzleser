@@ -168,9 +168,12 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
     <section ref={hero} className="hero-landing" aria-label="Einstieg">
       <div className="hero-landing__mitte">
         <div className="landing-oben" ref={oben}>
+          {/* Der Kopf einer Zeitung nennt Datum und Ausgabe, bevor er irgendetwas behauptet. */}
+          <span className="landing-datum kicker">{new Date().toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" })} · Ausgabe 1</span>
           <div className="landing-zier"><i /><Spark /><i /></div>
           <span className="landing-kicker">Das digitale Finanzmagazin</span>
           <h1>Fragen Sie Ihren persönlichen Versicherungsberater Leo</h1>
+          <i className="doppellinie landing-linie" aria-hidden="true" />
         </div>
         <div className="hero-landing__pille">
           <div className="suchpille-wrap" ref={wrap}>

@@ -587,7 +587,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; will-change: opacity, transform; }
 .faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; color: var(--muted); } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; } .faden-shell .landing-zier svg { width: 12px; height: 12px; }
 .faden-shell .landing-kicker { font: 400 15px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-.faden-shell .hero-landing h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.22; font-weight: 700; max-width: 30ch; margin: 0; }
+/* Der Aufmacher im Zeitungssatz: 900er Serife, eng gesetzt, Zeilen ausgewogen. */
+.faden-shell .hero-landing h1 { font-size: clamp(30px, 4vw, 46px); line-height: 1.1; font-weight: 900; letter-spacing: -.01em; max-width: 20ch; margin: 0; text-wrap: balance; }
+.faden-shell .landing-datum { margin-bottom: 14px; }
+/* Die Doppellinie schließt den Kopf ab und trennt ihn von der Eingabe. */
+.faden-shell .landing-linie { width: min(420px, 70%); margin-top: 22px; }
 .faden-shell .hero-landing__pille { width: min(750px, 92%); height: 52px; position: relative; }
 .faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
 .faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
