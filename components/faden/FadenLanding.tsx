@@ -18,6 +18,7 @@ import Begruessung from "./Begruessung";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
+import Insel from "@/components/faden/kette/Insel";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
@@ -57,12 +58,12 @@ export default async function FadenLanding() {
             <div>
               <span className="kicker kicker--gruen">Leo</span>
               <p>Hallo, ich bin Leo, Ihr Finanzagent. Ich habe die <a className="begriff" href={buildGlossarUrl("avb")} data-b="avb">Versicherungsbedingungen</a> unserer Partner gelesen und antworte mit Quelle und Seite. Fragen Sie, blättern Sie oben im Register, oder stöbern Sie hier in den Rubriken. Grüne Begriffe erklären sich auf Tipp.</p>
-              <div className="werkzeuge"><Vorlesen zielId="leo-gruss" /></div>
+              <div className="werkzeuge"><Insel typ="vorlesen" arg="leo-gruss"><Vorlesen zielId="leo-gruss" /></Insel></div>
             </div>
           </div>
           {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
               (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
-          <Spalten rubriken={rubriken} />
+          <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           <FinanzwortHeute />
           </Begruessung>
         </div>

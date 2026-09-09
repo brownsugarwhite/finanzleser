@@ -15,6 +15,7 @@ import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
 import type { FadenFrage, FadenKurzfassung, FadenStatistik } from "@/lib/types";
 import type { BeitragPdf } from "@/lib/articleToolData";
+import type { SpaltenRubrik } from "@/lib/faden/spalten";
 
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
@@ -30,6 +31,8 @@ const AbschnittTeilen = dynamic(() => import("./AbschnittTeilen"));
 const KastenFuss = dynamic(() => import("./KastenFuss"));
 const WochenbriefForm = dynamic(() => import("@/components/faden/WochenbriefForm"));
 const GamificationEmbed = dynamic(() => import("@/components/gamification/GamificationEmbed"));
+const Spalten = dynamic(() => import("@/components/faden/spalten/Spalten"));
+const Vorlesen = dynamic(() => import("@/components/faden/Vorlesen"));
 
 interface Gefunden { el: HTMLElement; typ: InselTyp; arg: string; werte: unknown }
 
@@ -45,6 +48,8 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "abschnitt-teilen") { const w = werte as { titel: string; url: string; id: string } | undefined; return w ? <AbschnittTeilen titel={w.titel} url={w.url} id={w.id} /> : null; }
   if (typ === "kasten-fuss") { const w = werte as { titel: string; url: string; kastenId: string; eigeneSeite?: boolean } | undefined; return w ? <KastenFuss titel={w.titel} url={w.url} kastenId={w.kastenId} eigeneSeite={w.eigeneSeite} /> : null; }
   if (typ === "wochenbrief") return <WochenbriefForm />;
+  if (typ === "spalten") return werte ? <Spalten rubriken={werte as SpaltenRubrik[]} /> : null;
+  if (typ === "vorlesen") return arg ? <Vorlesen zielId={arg} /> : null;
   return null;
 }
 

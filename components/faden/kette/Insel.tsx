@@ -21,7 +21,8 @@ import type { ReactNode } from "react";
 export type InselTyp =
   | "rechner" | "checkliste" | "vergleich" | "dokumente"
   | "statistik" | "weiterlesen" | "spiel"
-  | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief";
+  | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief"
+  | "spalten" | "vorlesen";
 
 export default function Insel({
   typ, arg, werte, children,

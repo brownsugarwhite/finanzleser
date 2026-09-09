@@ -134,7 +134,10 @@ function schnappschuss(): Schnappschuss | null {
     url: location.pathname + location.search,
     zeit: uhr(),
     html: greifen(live),
-    offen: false,
+    // Das frisch eingefrorene Kapitel bleibt OFFEN. Eingeklappt wird erst das vorletzte
+    // (siehe navigieren) — der Faden reißt dann nicht ab: über dem neuen Kapitel steht
+    // noch der ganze Beitrag, den man gerade gelesen hat.
+    offen: true,
   };
 }
 
@@ -273,6 +276,8 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       let liste = alt.filter((k) => k.url.split(/[?#]/)[0] !== zielPfad); // Ziel lebt gleich wieder
       if (s && s.url.split(/[?#]/)[0] !== zielPfad) {
         liste = liste.filter((k) => k.key !== s.key);
+        // Alles Ältere zuklappen, das gerade verlassene Kapitel bleibt offen.
+        liste = liste.map((k) => (k.offen ? { ...k, offen: false } : k));
         liste = [...liste, s];
       }
       return liste.slice(-MAX_VERLAUF);

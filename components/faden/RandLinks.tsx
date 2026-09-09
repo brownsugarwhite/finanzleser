@@ -23,7 +23,7 @@ export function zuAbschnitt(id: string) {
 
 export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
   const { verlauf, kapitelNr, kapitelUmschalten } = useFaden();
-  const { titel, toc, aktiv, vorhanden } = useAbschnittAktiv();
+  const { titel, toc, aktiv, vorhanden, aktivesKapitel } = useAbschnittAktiv();
   // Neuer Verlaufseintrag leuchtet kurz (Prototyp 05-js-neu.html listeAktualisieren).
   const vorherigeZahl = useRef(verlauf.length);
   useEffect(() => {
@@ -45,17 +45,17 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
               <ul id="kapitelListe">
                 {verlauf.map((k, i) => (
                   <li key={k.id}>
-                    <button type="button" onClick={() => { const n = document.getElementById(`kapitel-alt-${k.id}`); if (!k.offen) kapitelUmschalten(k.id); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }} title={k.url}>
+                    <button type="button" className={aktivesKapitel === `kapitel-alt-${k.id}` ? "aktiv" : ""} onClick={() => { const n = document.getElementById(`kapitel-alt-${k.id}`); if (!k.offen) kapitelUmschalten(k.id); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }} title={k.url}>
                       {i + 1} · {k.titel}
                     </button>
                   </li>
                 ))}
                 {live ? (
                   <li>
-                    <button type="button" className="aktiv" onClick={() => { const n = document.getElementById("kapitel-live"); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }}>
+                    <button type="button" className={aktivesKapitel === "kapitel-live" ? "aktiv" : ""} onClick={() => { const n = document.getElementById("kapitel-live"); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }}>
                       {kapitelNr} · {live.titel}
                     </button>
-                    {live.toc.length > 0 && (
+                    {live.toc.length > 0 && aktivesKapitel === "kapitel-live" && (
                       <ol>
                         {live.toc.map((t, i) => (
                           <li key={t.id}>

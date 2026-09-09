@@ -17,11 +17,19 @@
  * seine Abschnitte nachgeströmt sind.
  */
 import { useEffect, useSyncExternalStore } from "react";
+import { kopfHoehe } from "./scrollen";
 
 export interface TocZeile { id: string; titel: string; typ?: string }
-export interface AbschnittStand { titel: string; toc: TocZeile[]; aktiv: string; vorhanden: boolean }
+export interface AbschnittStand {
+  titel: string;
+  toc: TocZeile[];
+  aktiv: string;
+  vorhanden: boolean;
+  /** Element-ID des Kapitels, in dem der Leser gerade steht (`kapitel-live` oder `kapitel-alt-<id>`). */
+  aktivesKapitel: string;
+}
 
-const LEER: AbschnittStand = { titel: "", toc: [], aktiv: "", vorhanden: false };
+const LEER: AbschnittStand = { titel: "", toc: [], aktiv: "", vorhanden: false, aktivesKapitel: "kapitel-live" };
 
 let stand: AbschnittStand = LEER;
 let signatur = "";
@@ -53,20 +61,50 @@ function pruefen() {
   signatur = neueSignatur;
   io?.disconnect();
   io = null;
-  setzen({ titel: el.dataset.titel || document.title, toc, vorhanden: true, aktiv: toc[0]?.id || "" });
+  setzen({ ...stand, titel: el.dataset.titel || document.title, toc, vorhanden: true, aktiv: toc[0]?.id || "" });
   if (!("IntersectionObserver" in window) || !toc.length) return;
+  // 🚨 Nicht „der letzte Treffer im Callback" — dessen Reihenfolge ist nicht die
+  // Dokumentreihenfolge. Liegen zwei Abschnitte gleichzeitig im Leseband, gewann so mal
+  // der eine, mal der andere, und die Markierung hing einen Abschnitt hinterher. Deshalb
+  // wird gemerkt, WAS gerade schneidet, und daraus der oberste in Dokumentreihenfolge
+  // gewählt — das ist der, den man liest.
+  const schneidet = new Set<string>();
   io = new IntersectionObserver((es) => {
-    let neu = stand.aktiv;
-    es.forEach((x) => { if (x.isIntersecting && x.target.id) neu = x.target.id; });
-    if (neu !== stand.aktiv) setzen({ ...stand, aktiv: neu });
+    es.forEach((x) => {
+      const id = x.target.id;
+      if (!id) return;
+      if (x.isIntersecting) schneidet.add(id); else schneidet.delete(id);
+    });
+    const neu = toc.find((t) => schneidet.has(t.id))?.id;
+    if (neu && neu !== stand.aktiv) setzen({ ...stand, aktiv: neu });
   }, { rootMargin: "-30% 0px -55% 0px" });
   toc.forEach((t) => { const n = document.getElementById(t.id); if (n) io!.observe(n); });
+}
+
+/**
+ * In welchem Kapitel steht der Leser gerade?
+ *
+ * 🚨 Das braucht KEINEN IntersectionObserver: Der Beobachter oben kennt nur die Abschnitte
+ * des lebenden Kapitels. Beim Hochscrollen in ein aufgeklapptes Kapitel aus dem Verlauf
+ * blieb die Markierung deshalb beim neuesten Eintrag stehen. Hier zählt die simple Frage,
+ * welches Kapitel die Lesekante gerade überschritten hat — und die gilt für eingefrorene
+ * Kapitel genauso.
+ */
+function kapitelPruefen(): void {
+  const strom = document.getElementById("strom");
+  if (!strom) return;
+  const kante = kopfHoehe() + 100;
+  let treffer = "";
+  strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {
+    if (k.id && k.getBoundingClientRect().top <= kante) treffer = k.id;
+  });
+  if (treffer && treffer !== stand.aktivesKapitel) setzen({ ...stand, aktivesKapitel: treffer });
 }
 
 /** Während die RSC-Antwort strömt, feuert der MutationObserver oft — auf einen Frame bündeln. */
 function anstossen() {
   if (geplant) return;
-  geplant = requestAnimationFrame(() => { geplant = 0; pruefen(); });
+  geplant = requestAnimationFrame(() => { geplant = 0; pruefen(); kapitelPruefen(); });
 }
 
 function anmelden(h: () => void): () => void {
@@ -85,11 +123,14 @@ export function useAbschnittAktiv(): AbschnittStand {
     if (nutzer === 1) {
       const strom = document.getElementById("strom");
       if (strom) { mo = new MutationObserver(anstossen); mo.observe(strom, { childList: true, subtree: true }); }
+      window.addEventListener("scroll", anstossen, { passive: true });
       pruefen();
+      kapitelPruefen();
     }
     return () => {
       nutzer -= 1;
       if (nutzer) return;
+      window.removeEventListener("scroll", anstossen);
       mo?.disconnect(); mo = null;
       io?.disconnect(); io = null;
       if (geplant) { cancelAnimationFrame(geplant); geplant = 0; }
