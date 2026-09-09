@@ -117,6 +117,12 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 /* 🚨 Auch der aktive (magentafarbene) Funke bleibt in der Lupe weiß — die Lupe ist eine
    Spiegelung, kein zweiter Zustand. Spezifität muss die Pink-Regel oben schlagen. */
 .faden-shell .nav-lupe__reihe .reg-spark svg path { fill: #fff; }
+@media (max-width: 900px) {
+  .faden-shell .kopf__innen { padding-left: 16px; }
+  .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; }
+  .faden-shell .logo img { height: 21px; }
+  .faden-shell .register { display: none; }
+}
 /* ---------- Lesezeichen: das Band, das rechts aus der Zeitung ragt ----------
    Zackenkante + Verlaufsband statt der alten Kerbe per clip-path. Höhe 50 px, damit die
    Marke unter der 64-px-Kopfzeile sitzt und der Blur darunter durchscheint. */
@@ -141,6 +147,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .lesezeichen .lz-icon svg { width: 20px; height: 20px; }
 /* Magenta statt Papier: die Zahl im Koffer ist die einzige Zahl im Kopf, die sich ändert. */
 .faden-shell .lesezeichen .lz-zahl { position: absolute; top: 1px; right: 1px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--pink); color: #fff; font: 700 10px/16px var(--sans); text-align: center; padding: 0 4px; font-style: normal; }
+@media (max-width: 900px) {
+  .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
+  .faden-shell .lesezeichen .lz-wort { display: none; }
+}
 
 /* ---------- Lesefortschritt: Haarlinie an der Unterkante des Kopfs ---------- */
 .faden-shell .lesefortschritt { position: absolute; left: 0; right: 0; top: calc(var(--kopf-h) - 1px); height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left center; opacity: 0; transition: opacity .3s; pointer-events: none; }
@@ -187,12 +197,25 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blatt__ohr-schatten { border-width: 0 0 30px 30px; border-color: transparent transparent rgba(51,74,39,.12) transparent; transition: border-width .3s var(--schwung); }
 .faden-shell .blatt__ohr-ecke { border-width: 30px 30px 0 0; border-color: var(--paper) transparent transparent transparent; filter: drop-shadow(-1px 1px 1px rgba(51,74,39,.25)); }
 .faden-shell .blatt__ohr:hover .blatt__ohr-schatten { border-width: 0 0 38px 38px; }
+@media (max-width: 900px) {
+  .faden-shell .blatt { width: 100%; border-left: 0; border-right: 0; transform: none; transition: opacity .35s; }
+  .faden-shell .blatt.offen { transform: none; }
+  .faden-shell .blatt__ohr, .faden-shell .blatt__fuss em { display: none; }
+  .faden-shell .blatt__fuss { padding-right: 0; }
+}
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
 /* Der Satzspiegel ist so breit wie seine Spalten plus Gassen — kein Schlupf, damit sich
    die Lage jeder Spalte exakt ausrechnen lässt (das braucht das Fortschritts-Gleis). */
 .faden-shell .faden { margin: 0 auto; max-width: calc(var(--rand-l) + var(--spalte) + var(--rand-r) + 2 * var(--satz-gasse) + 2 * var(--satz-rand)); padding: 22px var(--satz-rand) 160px; display: grid; grid-template-columns: var(--rand-l) minmax(0, var(--spalte)) var(--rand-r); gap: var(--satz-gasse); align-items: start; position: relative; }
 .faden-shell #mitte { padding: 0; min-width: 0; }
+@media (max-width: 900px) {
+  .faden-shell .faden { padding: 12px 14px 110px; }
+}
+@media (max-width: 1439px) {
+  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
+  .faden-shell #mitte { padding: 0; }
+}
 
 /* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
    Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
@@ -254,6 +277,15 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+@media (max-width: 1439px) {
+  .faden-shell .rand { display: none; }
+  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
+  .faden-shell .rand--links.mobil { left: 0; }
+  .faden-shell .rand--rechts.mobil { right: 0; }
+  .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
+  .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
+  .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
+}
 /* ---------- Verlauf: Maße 1:1 aus dem laufenden Prototyp (nachgemessen 09.09.2026) ----------
    Zeile als Raster 16px/150px, Abstand 10, Innenabstand 9/0, Haarlinie unten (42 px hoch).
    Nummer `700 10px Open Sans` grau mit 0,6 px Sperrung. Titel `400 13.5px Merriweather`
@@ -291,6 +323,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .mobil-leiste { display: none; }
 .faden-shell .schublade { display: none; }
 .faden-shell .rand__zu { display: none; }
+@media (max-width: 1439px) {
+  .faden-shell .glossar-rail { max-height: none; }
+  .faden-shell .schublade { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 69; }
+  .faden-shell .mobil-leiste { display: flex; justify-content: space-between; gap: 10px; padding: 0 0 12px; }
+  .faden-shell .mobil-leiste button { border: 1px solid var(--rule); background: var(--white); border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; }
+  .faden-shell .mobil-leiste button i { font-style: normal; color: var(--green); }
+}
 
 /* ---------- Strom, Kapitel, Wörter ---------- */
 /* `position: relative`, damit `#strom` der `offsetParent` ist, an dem die Messkette in
@@ -355,6 +394,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .wort--leo .kicker { margin-bottom: 2px; }
 .faden-shell .wort--leo p { margin: 0 0 .5em; }
 .faden-shell .wort__avatar { position: absolute; left: -42px; bottom: -2px; width: 30px; height: 30px; }
+@media (max-width: 900px) {
+  .faden-shell .kapitel__kopf { gap: 8px; }
+  .faden-shell .kapitel__kopf .kicker { white-space: normal; }
+}
 
 /* ---------- Sprechblasen (Maße 1:1 aus app/components.css, Live-Chat) ---------- */
 /* 🚨 Die Hülle hält Blase und hinteren Schwanz als GESCHWISTER. Läge der hintere
@@ -447,6 +490,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .einleitung { display: grid; gap: 6px; }
 .faden-shell .einleitung__titel { font-size: 21px; margin: 6px 0 2px; }
 .faden-shell .inhalt { display: grid; gap: 8px; border-top: 1px solid var(--ink); border-bottom: 0; padding: 10px 0 0; margin-top: 26px; }
+@media (max-width: 900px) {
+  .faden-shell .artikel__untertitel { font-size: 26px; }
+}
 /* ---------- Aus dem Inhalt ----------
    Der Zeitungsindex: Nummer, Titel, Punktführung, Lesedauer. Die Punktführung ersetzt
    die frühere Volllinie mit Pfeilspitze — sie führt das Auge zur Zahl, statt selbst
@@ -470,6 +516,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .fliess::after { content: ""; display: block; clear: both; }
 .faden-shell .fliess__html > :first-child { margin-top: 0 !important; }
 .faden-shell .fliess > .kasten { clear: both; margin: 14px 0 18px; }
+@media (max-width: 900px) {
+  .faden-shell .inhalt__zahl { display: none; }
+}
 
 /* ---------- Zeitungssatz: zwei Spalten + Initiale (lib/faden/zeitung.ts) ---------- */
 /* `columns: 320px 2` statt einer Medienabfrage: die Spaltenzahl richtet sich nach dem
@@ -565,6 +614,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blatt__spalte + .blatt__spalte { padding-left: 24px; }
 .faden-shell .blatt__spalte + .blatt__spalte::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px; background: rgba(51,74,39,.22); transform-origin: top; }
 .faden-shell .blatt.offen .blatt__spalte + .blatt__spalte::before { animation: fl-spalte .9s var(--kurve) .3s both; }
+@media (max-width: 900px) {
+  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 14px; padding: 14px 14px 18px; min-height: 0; }
+  .faden-shell .blatt__spalte + .blatt__spalte::before { display: none; }
+  .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
+}
 
 /* ---------- Rubriken als Zeitungsindex ---------- */
 .faden-shell .rubriken { position: relative; }
@@ -610,6 +664,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .abc button:disabled { opacity: .35; cursor: default; }
 .faden-shell .abc button:hover:not(:disabled) { border-color: var(--green-ink); color: var(--green-ink); } .faden-shell .abc button.aktiv { border-color: var(--pink); color: var(--pink); }
 .faden-shell .lesezeichen .btn--menue { display: none; }
+@media (max-width: 900px) {
+  .faden-shell .lesezeichen .btn--menue { display: inline-flex; }
+  .faden-shell .rubriken__band { left: -10px; }
+  .faden-shell .blatt__spalte--breit { grid-column: auto; }
+  .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; }
+  .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
+}
 
 /* ---------- Mobiles Menü: der Zeitungskopf im Kleinen ---------- */
 /* Die Seite fällt nach vorn auf, statt einfach da zu sein. `fl-kippen` hat einen
@@ -700,6 +761,11 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   }
 }
 .faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
+@media (max-width: 900px) {
+  .faden-shell .hero-landing { min-height: 0; }
+  .faden-shell .hero-landing h1 { font-size: 24px; }
+  .faden-shell .hero-landing__mitte { padding: 0 8px var(--kopf-h, 64px); }
+}
 
 /* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
 .faden-shell .spalten-kasten { padding: 14px 18px 16px; }
@@ -742,6 +808,14 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .spalte__fuss { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .faden-shell .spalte__fuss .chip { text-decoration: none; }
 .faden-shell .spalte__alle { margin-left: auto; }
+@media (max-width: 900px) {
+  .faden-shell .spalten { grid-template-columns: 1fr !important; }
+  .faden-shell .spalten .trenner { display: none; }
+  .faden-shell .spalte__inhalt { padding: 10px 0; }
+  .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); }
+  .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; }
+  .faden-shell .spalte__offen { padding: 6px 0; }
+}
 
 /* ---------- Glossar: grüne Begriffe, Klickmenü, Sitzung, Nachschlagewerk, Begriffskarte ---------- */
 .faden-shell { position: relative; }
@@ -789,6 +863,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .begriff-k__leo { display: grid; gap: 10px; margin-top: 6px; }
 .faden-shell .inhalt__zeile.aktiv .inhalt__nr { color: var(--pink); }
 .faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--pink); font-weight: 700; }
+@media (max-width: 900px) {
+  .faden-shell .nachschlag { grid-template-columns: 1fr; }
+  .faden-shell .nachschlag__liste { max-height: 40vh; }
+}
 
 /* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
 .faden-shell .leo-strom { display: grid; gap: 14px; padding: 4px 0 12px; }
@@ -812,6 +890,11 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .sprung .typ { width: 84px; flex: none; font: 600 10.5px/1.5 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .faden-shell .sprung .unter { margin-left: auto; color: var(--muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%; }
 .faden-shell .sprung .frage { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 9px; color: var(--pink); font-weight: 600; border-radius: 0; }
+@media (max-width: 900px) {
+  .faden-shell .sprung .typ { width: 64px; }
+  .faden-shell .sprung .unter { display: none; }
+  .faden-shell .leo-chips { margin-left: 0; }
+}
 
 /* ---------- Anzeigenplätze (Platzhalter, adblocker-neutral benannt) ---------- */
 .faden-shell .einschub { display: grid; gap: 4px; justify-items: center; width: 100%; min-width: 0; }
@@ -828,6 +911,12 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .einschub[data-format="mobile"] .einschub__flaeche { max-width: 320px; }
 .faden-shell .rand__fuss .einschub { margin-top: 8px; }
 .faden-shell .abschnitt .fliess::after { content: ""; display: block; clear: both; }
+@media (max-width: 900px) {
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; }
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; }
+  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
+  .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
+}
 
 /* ---------- Vorschläge unter der Eingabe ---------- */
 .faden-shell .eingabe #eingabeChips { opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
@@ -862,7 +951,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .anbieter-k__spalten > div + div { border-left: 1px solid var(--rule); padding-left: 14px; }
 .faden-shell .anbieter-k__spalten p { margin: 0; font-size: 14.5px; line-height: 1.4; overflow-wrap: anywhere; }
 .faden-shell .kasten--anbieter .anbieter-content h2 { font-size: 22px; margin: 12px 0 4px; } .faden-shell .kasten--anbieter .anbieter-content h3 { font-size: 18px; margin: 14px 0 4px; }
-.faden-shell .kasten--text .prose h2 { font-size: 22px !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; }
+.faden-shell .kasten--text .prose h2 { font-size: 22px !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; } @media (max-width: 900px) {
+  .faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: 1fr; }
+  .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
+}
 
 /* ---------- Eingabe + Suchpille ---------- */
 .faden-shell .eingabe { position: sticky; bottom: 0; display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; margin-top: -40px; }
@@ -884,6 +976,14 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .suchpille-wrap:focus-within .senden, .faden-shell .suchpille.hat-text .senden { opacity: 1; transform: none; pointer-events: auto; }
 .faden-shell #eingabeChips { position: absolute; left: 0; right: 0; top: 100%; margin: 0; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
 .faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 900px) {
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .faden-shell .eingabe .chips::-webkit-scrollbar { display: none; }
+  .faden-shell .eingabe .chips .chip { flex: none; }
+}
+@media (max-width: 1439px) {
+  .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
+}
 
 /* ---------- Toast, Fußnote ---------- */
 /* Hinweis-Streifen: dunkle Tinte, kantig statt rund — eine Meldung, keine Blase. */
@@ -898,64 +998,6 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .toast.zeigt .toast__zeit { animation: fl-toast 3.2s linear both; }
 .faden-shell .fussnote { max-width: 1440px; margin: 0 auto; padding: 14px 28px 30px; font-size: 12.5px; color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
 .faden-shell .fussnote a { color: var(--muted); text-decoration: none; } .faden-shell .fussnote a:hover { color: var(--green-ink); text-decoration: underline; }
-
-/* ---------- Umbrüche ---------- */
-@media (max-width: 1439px) {
-  .faden-shell .glossar-rail { max-height: none; }
-  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
-  .faden-shell #mitte { padding: 0; }
-  .faden-shell .rand { display: none; }
-  .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
-  .faden-shell .rand--links.mobil { left: 0; } .faden-shell .rand--rechts.mobil { right: 0; }
-  .faden-shell .rand.mobil .rand__innen { position: static; top: auto; min-height: 0; display: grid; }
-  .faden-shell .rand.mobil .rand__fuss { margin-top: 0; }
-  .faden-shell .rand.mobil .rand__zu { display: inline-flex; order: -1; align-self: flex-end; position: sticky; top: 0; z-index: 1; }
-  .faden-shell .schublade { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 69; }
-  .faden-shell .mobil-leiste { display: flex; justify-content: space-between; gap: 10px; padding: 0 0 12px; }
-  .faden-shell .mobil-leiste button { border: 1px solid var(--rule); background: var(--white); border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; color: var(--ink); display: inline-flex; gap: 8px; align-items: center; }
-  .faden-shell .mobil-leiste button i { font-style: normal; color: var(--green); }
-  .faden-shell .eingabe .suchpille-wrap { width: 100%; margin-left: 0; }
-}
-@media (max-width: 900px) {
-  .faden-shell .kasten--dokumente .dokumente-embed[data-layout="grid"] { grid-template-columns: 1fr; }
-  .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
-  .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
-  .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
-  .faden-shell .eingabe .chips::-webkit-scrollbar { display: none; }
-  .faden-shell .eingabe .chips .chip { flex: none; }
-  .faden-shell .hero-landing { min-height: 0; }
-  .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .leo-chips { margin-left: 0; }
-  .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
-  .faden-shell .kopf__innen { padding-left: 16px; }
-  .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
-  .faden-shell .register { display: none; }
-  .faden-shell .lesezeichen .btn--menue { display: inline-flex; }
-  /* Schmale Fenster: die Ausgabe füllt die Breite, ohne zu falten — eine Seite, die
-     sich auf 375 px dreidimensional aufklappt, wirkt nur unruhig. */
-  .faden-shell .blatt { width: 100%; border-left: 0; border-right: 0; transform: none; transition: opacity .35s; }
-  .faden-shell .blatt.offen { transform: none; }
-  .faden-shell .blatt__ohr, .faden-shell .blatt__fuss em { display: none; }
-  .faden-shell .blatt__fuss { padding-right: 0; }
-  .faden-shell .rubriken__band { left: -10px; }
-  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 14px; padding: 14px 14px 18px; min-height: 0; }
-  .faden-shell .blatt__spalte + .blatt__spalte::before { display: none; }
-  /* 🚨 Hier stand zusätzlich `.faden-shell .blatt__spalte + .faden-shell .blatt__spalte` —
-     unerfüllbar, denn das verlangt ein `.faden-shell`-Element als Geschwister der Spalte.
-     Nur der zweite Teil hat je gewirkt. */
-  .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
-  .faden-shell .blatt__spalte--breit { grid-column: auto; }
-  .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
-  .faden-shell .spalten { grid-template-columns: 1fr !important; } .faden-shell .spalten .trenner { display: none; } .faden-shell .spalte__inhalt { padding: 10px 0; } .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); } .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; } .faden-shell .spalte__offen { padding: 6px 0; }
-  .faden-shell .hero-landing h1 { font-size: 24px; }
-  .faden-shell .hero-landing__mitte { padding: 0 8px var(--kopf-h, 64px); }
-  .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
-  .faden-shell .lesezeichen .lz-wort { display: none; }
-  .faden-shell .faden { padding: 12px 14px 110px; }
-  .faden-shell .artikel__untertitel { font-size: 26px; }
-  .faden-shell .kapitel__kopf { gap: 8px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
-  .faden-shell .inhalt__zahl { display: none; }
-}
 
 /* ── Belohnung, Serie, kleine Flüge (Port aus dem Prototyp, 01-css.html:248, 629, 697–703) ── */
 .faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
