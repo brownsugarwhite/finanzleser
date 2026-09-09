@@ -11,6 +11,7 @@ import { buildGlossarUrl } from "@/lib/urls";
 import KapitelKopf from "./KapitelKopf";
 import HeroLanding from "./hero/HeroLanding";
 import Spalten from "./spalten/Spalten";
+import Kiosk from "./kiosk/Kiosk";
 import Einschub from "./Einschub";
 import Vorlesen from "./Vorlesen";
 import FinanzwortHeute from "./spiele/FinanzwortHeute";
@@ -72,6 +73,9 @@ export default async function FadenLanding() {
           </div>
           {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
               (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
+          {/* Der Kiosk aus Kapitel 1 der Vorlage: vier Ausgaben nebeneinander. Darunter
+              bleiben die Spalten als ausführliche Ansicht derselben Rubriken. */}
+          <Kiosk rubriken={rubriken} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           <FinanzwortHeute />
           </Begruessung>

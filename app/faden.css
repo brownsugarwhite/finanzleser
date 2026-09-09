@@ -449,16 +449,16 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    die frühere Volllinie mit Pfeilspitze — sie führt das Auge zur Zahl, statt selbst
    eine Aussage zu machen. */
 .faden-shell .inhalt__liste { list-style: none; margin: 0; padding: 0; display: grid; }
-.faden-shell .inhalt__zeile { border-top: 1px solid rgba(51,74,39,.1); }
-.faden-shell .inhalt__zeile:last-child { border-bottom: 1px solid rgba(51,74,39,.1); }
-.faden-shell .inhalt__zeile a { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); padding: 11px 2px 11px 0; transition: padding-left .3s var(--kurve); }
-.faden-shell .inhalt__zeile a:hover { padding-left: 5px; }
-.faden-shell .inhalt__nr { font: 900 13px/1 var(--serif); color: var(--green); min-width: 18px; font-style: normal; flex: none; }
+.faden-shell .inhalt__zeile { border-top: 1px solid rgba(51,74,39,.08); }
+
+.faden-shell .inhalt__zeile a { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); padding: 8px 0; transition: padding-left .3s var(--kurve); }
+.faden-shell .inhalt__zeile a:hover { padding-left: 6px; }
+.faden-shell .inhalt__nr { font: 900 15px var(--serif); color: var(--green); min-width: 18px; font-style: normal; flex: none; }
 .faden-shell .inhalt__zeile--faq .inhalt__nr, .faden-shell .inhalt__zeile--fazit .inhalt__nr { color: var(--muted); }
 .faden-shell .inhalt__nr .dot { width: 8px; height: 8px; }
 .faden-shell .inhalt__zahl { font: 600 11px/1 var(--sans); color: var(--muted); flex: none; }
 .faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
-.faden-shell .inhalt__titel { font: 400 15.5px/1.35 var(--serif); min-width: 0; }
+.faden-shell .inhalt__titel { font: 400 15px var(--serif); min-width: 0; }
 .faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
 .faden-shell .abschnitt { position: relative; display: grid; gap: 8px; scroll-margin-top: 110px; }
 .faden-shell .abschnitt__titel { font-size: 24px; line-height: 1.25; }
@@ -918,10 +918,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .dok-card-download, .faden-shell .dok-card-download .rechner-button { max-width: 100%; }
   .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.breit-bild { display: none; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 320px; } .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche img.schmal { display: block; }
   .faden-shell .einschub--umflossen { float: none; width: 100%; margin: 12px 0; }
-  /* Waagerechter Lauf statt Umbruch. Damit die Kante nicht hart abschneidet — und der
-     Leser sieht, dass rechts noch etwas kommt — läuft der letzte Zentimeter aus. Die
-     Maske verschwindet, sobald ganz nach rechts gescrollt ist (animation-timeline). */
-  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
   .faden-shell .eingabe .chips::-webkit-scrollbar { display: none; }
   .faden-shell .eingabe .chips .chip { flex: none; }
   .faden-shell .hero-landing { min-height: 0; }
