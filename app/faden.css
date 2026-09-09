@@ -342,7 +342,35 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    erst mit dem Ende des Fadens hoch. Unsichtbar ist im Prototyp allein #fadenPille,
    solange die Kopie der Suchpille aus dem Hero dorthin fliegt — das steuert HeroLanding
    bereits selbst (ziel.style.opacity in flug()).
-   Die Body-Klasse bleibt: MobilAnker wertet sie weiter aus. */
+
+   Für die EINGABE bleibt das Ausblenden dagegen richtig, und zwar aus demselben
+   Strukturgrund wie unten bei den Rändern: Im Prototyp sitzt sie in #mitte, das erst
+   unter dem Hero beginnt — beim Hero ist sie schlicht nicht im Bild und schiebt sich
+   beim Scrollen von unten herein, während die Suchpille aus dem Hero dorthin fliegt.
+   Hier liegt sie im selben #mitte wie der Hero und klebt unten, wäre also über dem Hero
+   sichtbar: zwei Suchpillen gleichzeitig. */
+.faden-shell .eingabe { transition: opacity .25s ease; }
+body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
+
+/* Landing: die Randspalten beginnen UNTER dem Hero.
+
+   Im Prototyp steht der Hero als eigener Abschnitt VOR dem Grid:
+
+       <section class="intro"><div class="szene">…</div></section>
+       <main class="faden">  .rand--links | #mitte | .rand--rechts
+
+   Die Ränder fangen dort also erst nach dem Hero an — sie fahren beim Scrollen von unten
+   herein und kleben danach unter dem Kopf. Hier liegt der Hero innerhalb der mittleren
+   Spalte (HeroLanding rendert im Strom), also stünden die Ränder von Anfang an daneben.
+   Statt sie dafür auszublenden, bekommen sie exakt die Höhe des Heros als Vorlauf —
+   derselbe Ausdruck wie .hero-landing weiter oben, damit beide auf den Pixel passen.
+
+   Nur ab 1440 px: darunter sind die Ränder ohnehin Schubladen (position: fixed). */
+@media (min-width: 1440px) {
+  body[data-landing] .faden-shell .rand {
+    margin-top: max(520px, calc(100dvh - var(--kopf-h, 64px)));
+  }
+}
 .faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
 
 /* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */

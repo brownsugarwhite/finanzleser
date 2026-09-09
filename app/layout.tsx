@@ -9,15 +9,30 @@ import { getFadenOptionen } from "@/lib/faden/optionen";
 import Huelle from "@/components/layout/Huelle";
 import "./globals.css";
 
+/**
+ * 🚨 Die Variablennamen enden bewusst auf `-src` und heißen NICHT `--font-body`.
+ *
+ * next/font schreibt sie als Klassenregel auf <html>: `.__variable_x { --font-body: … }`.
+ * app/tokens.css setzt auf demselben Element `:root { --font-body: var(--font-body, "Open
+ * Sans", sans-serif) }`. Beide Regeln haben dieselbe Spezifität — es entscheidet die
+ * Reihenfolge der Stylesheets. Gewinnt tokens.css, verweist die Eigenschaft auf sich
+ * selbst; das ist laut Spezifikation ungültig, und zwar OHNE auf den Ersatzwert
+ * zurückzufallen. Ergebnis: --font-body ist leer, alles fällt auf System-Sans und 16 px
+ * zurück, Überschriften eingeschlossen.
+ *
+ * Genau das ist beim Aufteilen der Layout-Hüllen passiert: die Chunk-Reihenfolge kippte,
+ * das Schrift-Stylesheet stand plötzlich VOR globals.css. Mit zwei verschiedenen Namen
+ * gibt es weder Kollision noch Selbstbezug, und die Reihenfolge spielt keine Rolle mehr.
+ */
 const openSans = Open_Sans({
-  variable: "--font-body",
+  variable: "--font-body-src",
   subsets: ["latin"],
   display: "swap",
   axes: ["wdth"],
 });
 
 const merriweather = Merriweather({
-  variable: "--font-heading",
+  variable: "--font-heading-src",
   subsets: ["latin"],
   display: "swap",
   weight: "variable",
