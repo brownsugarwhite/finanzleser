@@ -1,8 +1,13 @@
 "use client";
 
 /**
- * Welcher Abschnitt des lebenden Kapitels gerade im Lesefenster steht — für das
- * Inhaltsverzeichnis in der Kette und in der linken Randspalte.
+ * Welcher Abschnitt gerade im Lesefenster steht — für das Inhaltsverzeichnis in der Kette
+ * und in der linken Randspalte.
+ *
+ * 🚨 Gemeint ist der Abschnitt des AKTIVEN Kapitels, nicht des lebenden. Wer im Faden
+ * hochscrollt und ein älteres, aufgeklapptes Kapitel liest, soll dessen Abschnitte
+ * markiert bekommen. Vorher hing alles fest an `#kapitel-live`; das Unter-Verzeichnis
+ * funktionierte deshalb nur beim neuesten Ratgeber.
  *
  * 🚨 Ein Beobachter, nicht zwei. Vorher rief jede der beiden Anzeigen den Hook für sich
  * auf: zwei IntersectionObserver über dieselben `[data-toc-titel]`-Knoten und zwei
@@ -48,20 +53,23 @@ function abschnitteLesen(el: HTMLElement): TocZeile[] {
   }));
 }
 
-/** Neu aufbauen, wenn sich das lebende Kapitel oder seine Abschnitte geändert haben. */
+/** Neu aufbauen, wenn ein anderes Kapitel aktiv ist oder seine Abschnitte sich geändert haben. */
 function pruefen() {
-  const el = document.getElementById("kapitel-live");
+  const live = document.getElementById("kapitel-live");
+  const el = aktivesKapitelElement();
   if (!el) {
     if (signatur !== "") { signatur = ""; io?.disconnect(); io = null; setzen(LEER); }
     return;
   }
   const toc = abschnitteLesen(el);
-  const neueSignatur = (el.dataset.key || el.dataset.titel || "") + "|" + toc.map((t) => t.id).join(",");
+  // Der Titel im Verlauf gehört immer zum LEBENDEN Kapitel; die Abschnitte zum aktiven.
+  const liveTitel = live?.dataset.titel || (live ? document.title : "");
+  const neueSignatur = [el.id, liveTitel, toc.map((t) => t.id).join(",")].join("|");
   if (neueSignatur === signatur) return;
   signatur = neueSignatur;
   io?.disconnect();
   io = null;
-  setzen({ ...stand, titel: el.dataset.titel || document.title, toc, vorhanden: true, aktiv: toc[0]?.id || "" });
+  setzen({ titel: liveTitel, toc, vorhanden: !!live, aktiv: toc[0]?.id || "", aktivesKapitel: el.id });
   if (!("IntersectionObserver" in window) || !toc.length) return;
   // 🚨 Nicht „der letzte Treffer im Callback" — dessen Reihenfolge ist nicht die
   // Dokumentreihenfolge. Liegen zwei Abschnitte gleichzeitig im Leseband, gewann so mal
@@ -84,27 +92,26 @@ function pruefen() {
 /**
  * In welchem Kapitel steht der Leser gerade?
  *
- * 🚨 Das braucht KEINEN IntersectionObserver: Der Beobachter oben kennt nur die Abschnitte
- * des lebenden Kapitels. Beim Hochscrollen in ein aufgeklapptes Kapitel aus dem Verlauf
- * blieb die Markierung deshalb beim neuesten Eintrag stehen. Hier zählt die simple Frage,
- * welches Kapitel die Lesekante gerade überschritten hat — und die gilt für eingefrorene
- * Kapitel genauso.
+ * Die Lesekante entscheidet: das letzte Kapitel, dessen Oberkante sie überschritten hat.
+ * Das gilt für eingefrorene Kapitel genauso wie für das lebende — ein
+ * IntersectionObserver auf den Abschnitten könnte das nicht beantworten, der kennt immer
+ * nur die Abschnitte EINES Kapitels.
  */
-function kapitelPruefen(): void {
+function aktivesKapitelElement(): HTMLElement | null {
   const strom = document.getElementById("strom");
-  if (!strom) return;
+  if (!strom) return null;
   const kante = kopfHoehe() + 100;
-  let treffer = "";
+  let treffer: HTMLElement | null = null;
   strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {
-    if (k.id && k.getBoundingClientRect().top <= kante) treffer = k.id;
+    if (k.id && k.getBoundingClientRect().top <= kante) treffer = k;
   });
-  if (treffer && treffer !== stand.aktivesKapitel) setzen({ ...stand, aktivesKapitel: treffer });
+  return treffer || document.getElementById("kapitel-live");
 }
 
 /** Während die RSC-Antwort strömt, feuert der MutationObserver oft — auf einen Frame bündeln. */
 function anstossen() {
   if (geplant) return;
-  geplant = requestAnimationFrame(() => { geplant = 0; pruefen(); kapitelPruefen(); });
+  geplant = requestAnimationFrame(() => { geplant = 0; pruefen(); });
 }
 
 function anmelden(h: () => void): () => void {
@@ -125,7 +132,6 @@ export function useAbschnittAktiv(): AbschnittStand {
       if (strom) { mo = new MutationObserver(anstossen); mo.observe(strom, { childList: true, subtree: true }); }
       window.addEventListener("scroll", anstossen, { passive: true });
       pruefen();
-      kapitelPruefen();
     }
     return () => {
       nutzer -= 1;

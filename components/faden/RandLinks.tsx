@@ -9,7 +9,7 @@
  */
 import { useEffect, useRef } from "react";
 import { kopfHoehe } from "@/lib/faden/scrollen";
-import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
+import { useAbschnittAktiv, type TocZeile } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
 import Einschub from "./Einschub";
@@ -19,6 +19,22 @@ export function zuAbschnitt(id: string) {
   if (!el) return;
   const reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: reduziert ? "auto" : "smooth" });
+}
+
+/** Die Abschnitte EINES Kapitels — unter dem Eintrag, in dem der Leser gerade steht. */
+function Abschnittsliste({ toc, aktiv, onZu }: { toc: TocZeile[]; aktiv: string; onZu?: () => void }) {
+  if (!toc.length) return null;
+  return (
+    <ol>
+      {toc.map((t, i) => (
+        <li key={t.id}>
+          <button type="button" className={t.id === aktiv ? "aktiv" : ""} onClick={() => { zuAbschnitt(t.id); onZu?.(); }}>
+            <i>{t.typ ? <b className={`dot dot--${t.typ}`} /> : i + 1}</i><span>{t.titel}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+  );
 }
 
 export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
@@ -48,6 +64,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
                     <button type="button" className={aktivesKapitel === `kapitel-alt-${k.id}` ? "aktiv" : ""} onClick={() => { const n = document.getElementById(`kapitel-alt-${k.id}`); if (!k.offen) kapitelUmschalten(k.id); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }} title={k.url}>
                       {i + 1} · {k.titel}
                     </button>
+                    {aktivesKapitel === `kapitel-alt-${k.id}` && <Abschnittsliste toc={toc} aktiv={aktiv} onZu={onZu} />}
                   </li>
                 ))}
                 {live ? (
@@ -55,17 +72,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
                     <button type="button" className={aktivesKapitel === "kapitel-live" ? "aktiv" : ""} onClick={() => { const n = document.getElementById("kapitel-live"); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }}>
                       {kapitelNr} · {live.titel}
                     </button>
-                    {live.toc.length > 0 && aktivesKapitel === "kapitel-live" && (
-                      <ol>
-                        {live.toc.map((t, i) => (
-                          <li key={t.id}>
-                            <button type="button" className={t.id === aktiv ? "aktiv" : ""} onClick={() => { zuAbschnitt(t.id); onZu?.(); }}>
-                              <i>{t.typ ? <b className={`dot dot--${t.typ}`} /> : i + 1}</i><span>{t.titel}</span>
-                            </button>
-                          </li>
-                        ))}
-                      </ol>
-                    )}
+                    {aktivesKapitel === "kapitel-live" && <Abschnittsliste toc={live.toc} aktiv={aktiv} onZu={onZu} />}
                   </li>
                 ) : (
                   <li className="rand__leer">Noch kein Kapitel. Fragen Sie Leo oder blättern Sie oben im Register.</li>
