@@ -1,0 +1,76 @@
+/* =====================================================================================
+   snake.css — das Brett und die Schlange
+
+   Vorlage: docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html,
+   Kapitel 7 „Die Spielseite". Parallel zu finanzwort.css, damit die Spiele je für sich
+   stehen und nicht in zeitung.css zusammenwachsen.
+   ===================================================================================== */
+
+.faden-shell .snake { display: grid; gap: 16px; }
+.faden-shell .snake__kopfzeile { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; border-top: 2px solid var(--ink); padding-top: 12px; }
+.faden-shell .snake__kopfzeile em { font: italic 300 12.5px var(--serif); color: var(--muted); }
+.faden-shell .snake__satz { display: grid; grid-template-columns: minmax(0, 360px) 1fr; gap: 24px 40px; align-items: start; }
+.faden-shell .snake__stand { display: flex; justify-content: space-between; align-items: baseline; font: 700 13px var(--serif); color: var(--ink); margin-bottom: 8px; }
+.faden-shell .snake__stand b { font: 900 22px var(--serif); color: var(--green); margin-left: 4px; }
+
+/* ---------- Das Brett: Punktpapier mit Innenrand ----------
+   🚨 Die Kachel ist genau EINE Zelle und sitzt über `background-position` auf deren
+   Mitte (halbe Zellbreite = 100 % / 44, halbe Höhe = 100 % / 26). Verrutscht das,
+   liegen die Punkte auf den Zellgrenzen und das Raster franst aus. */
+.faden-shell .snake__brett {
+  position: relative; width: 100%; max-width: 352px; aspect-ratio: 22 / 13;
+  border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 3px;
+  background-color: var(--papier-brett);
+  background-image: radial-gradient(rgba(51,74,39,.16) .8px, transparent .9px);
+  background-size: calc(100% / 22) calc(100% / 13);
+  background-position: calc(100% / 44) calc(100% / 26);
+  box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 40px rgba(51,74,39,.06);
+  overflow: hidden; cursor: pointer; user-select: none;
+}
+.faden-shell .snake__brett:focus-visible { outline-color: var(--green); }
+
+/* Ein Glied ist eine Zelle mit Innenabstand; der Körper darin trägt Farbe und Form.
+   So verjüngt sich der Schwanz über den Abstand, ohne dass die Zelle wandert. */
+.faden-shell .snake__glied { position: absolute; width: calc(100% / 22); height: calc(100% / 13); padding: 1.5px; transition: padding .15s; }
+.faden-shell .snake__glied > i { display: block; width: 100%; height: 100%; border-radius: 2px; }
+.faden-shell .snake__glied--dunkel > i { background: linear-gradient(var(--schraeg, 45deg), transparent 38%, rgba(250,249,246,.28) 38% 62%, transparent 62%), var(--ink); }
+.faden-shell .snake__glied--hell > i { background: linear-gradient(var(--schraeg, 45deg), transparent 38%, rgba(250,249,246,.28) 38% 62%, transparent 62%), var(--green-ink); }
+.faden-shell .snake__glied--schwanz { padding: 3px; }
+.faden-shell .snake__glied--schwanz > i { background: var(--green-ink); border-radius: 50%; }
+/* Der Kopf: zwei Augen als Punktverläufe, damit kein zusätzliches Element nötig ist. */
+.faden-shell .snake__glied--kopf { padding: 0; }
+.faden-shell .snake__glied--kopf > i { background: radial-gradient(circle at 30% 34%, var(--paper) 0 1.3px, transparent 1.9px), radial-gradient(circle at 70% 34%, var(--paper) 0 1.3px, transparent 1.9px), var(--green); border-radius: 5px; box-shadow: 0 0 0 1px rgba(250,249,246,.9); }
+
+.faden-shell .snake__futter { position: absolute; width: calc(100% / 22); height: calc(100% / 13); padding: 2px; fill: var(--green); animation: fl-spin 4s linear infinite; }
+
+/* Blende über dem Brett: Titel, ein Satz, die Pille. */
+.faden-shell .snake__blende { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 12px; background: #f3f1ea; opacity: 1; transition: opacity .35s; }
+.faden-shell .snake__blende.weg { opacity: 0; pointer-events: none; }
+.faden-shell .snake__blende b { font: 900 22px/1.15 var(--serif); color: var(--ink); }
+.faden-shell .snake__blende span { font: italic 300 13px var(--serif); color: var(--muted); max-width: 26ch; }
+
+/* ---------- Steuerkreuz und Bestenliste ---------- */
+.faden-shell .snake__seite { display: flex; flex-direction: column; gap: 14px; }
+.faden-shell .snake__seite p { font: 400 14.5px/1.6 var(--sans); color: var(--ink); margin: 0; }
+/* 44 px, damit die Felder auch mit dem Daumen sicher zu treffen sind. */
+.faden-shell .snake__kreuz { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(3, 44px); gap: 4px; justify-content: start; }
+.faden-shell .snake__kreuz button { display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); background: none; color: var(--ink); padding: 0; transition: background .15s, color .15s; }
+.faden-shell .snake__kreuz button:hover { background: rgba(51,74,39,.06); }
+.faden-shell .snake__kreuz button:active { background: var(--ink); color: var(--paper); }
+.faden-shell .snake__pause { border-color: rgba(51,74,39,.3) !important; font: 700 9px var(--sans); letter-spacing: .1em; color: var(--muted); }
+.faden-shell .pfeil { width: 8px; height: 8px; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; }
+.faden-shell .pfeil--hoch { transform: rotate(45deg) translateY(2px); }
+.faden-shell .pfeil--links { transform: rotate(-45deg) translateX(2px); }
+.faden-shell .pfeil--rechts { transform: rotate(135deg) translateX(2px); }
+.faden-shell .pfeil--runter { transform: rotate(225deg) translateY(2px); }
+
+.faden-shell .snake__liste { display: flex; flex-direction: column; border-top: 1px solid var(--ink); padding-top: 6px; }
+.faden-shell .snake__platz { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(51,74,39,.08); font: 400 13.5px var(--serif); color: var(--ink); }
+.faden-shell .snake__platz--sie { color: var(--green-ink); }
+.faden-shell .snake__platz > b:first-child { font: 900 12px var(--serif); min-width: 16px; }
+.faden-shell .snake__platz > b:last-child { font: 700 13px var(--sans); }
+
+@media (max-width: 720px) {
+  .faden-shell .snake__satz { grid-template-columns: 1fr; }
+  .faden-shell .snake__brett { max-width: 100%; }
+}

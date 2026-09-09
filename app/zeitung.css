@@ -128,3 +128,23 @@
 
 /* Zahlen in Tabellen und Ergebnissen laufen untereinander. */
 .faden-shell .ziffern { font-variant-numeric: tabular-nums; }
+
+/* =====================================================================================
+   Die Pille — die Schaltfläche des Designs
+
+   Zwei Rahmen: ein 2-px-Strich am Körper und eine 1-px-Kontur zwei Pixel davor. Das ist
+   dieselbe Geometrie wie am Eingabefeld und an den Sprechblasen, deshalb steht sie hier
+   im gemeinsamen Vokabular und nicht bei einem einzelnen Baustein.
+   ===================================================================================== */
+
+.faden-shell .pille { display: inline-flex; align-items: center; gap: 12px; height: 44px; padding: 3px 3px 3px 17px; border: 2px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 2px; border-radius: 19px; background: transparent; color: var(--ink); font: 500 15px/1 var(--sans); transition: color .2s; }
+.faden-shell .pille:hover { color: var(--green-ink); }
+.faden-shell .pille--gross { height: 48px; padding-left: 19px; border-radius: 21px; font-size: 17px; }
+/* Der runde Knopf rechts trägt die Farbe des Werkzeugs. */
+.faden-shell .pille__knopf { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 15px; background: var(--green); flex: none; }
+.faden-shell .pille--gross .pille__knopf { width: 38px; height: 38px; border-radius: 17px; }
+.faden-shell .pille__knopf svg { width: 12px; height: 12px; fill: #fff; }
+.faden-shell .pille--rechner .pille__knopf { background: var(--tool-rechner); }
+.faden-shell .pille--rechner:hover { color: var(--pink); }
+.faden-shell .pille--vergleich .pille__knopf { background: var(--tuerkis); }
+.faden-shell .pille--checkliste .pille__knopf { background: var(--tool-checkliste); }
