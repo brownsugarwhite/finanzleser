@@ -513,7 +513,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     else {
       konfetti(kasten);
       abzeichen(kasten, text);
-      const leos = kasten.closest(".kapitel__inhalt")?.querySelectorAll(".wort--leo img");
+      const leos = kasten.closest(".kapitel__inhalt")?.querySelectorAll(".wort--leo .wort__avatar");
       if (leos && leos.length) nochmal(leos[leos.length - 1], "leo-freut");
     }
     nochmal(document.querySelector('.register button[data-key="plus"]'), "punkte-puls");

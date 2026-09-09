@@ -186,12 +186,42 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
 .faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }
 .faden-shell .wort { display: grid; gap: 4px; }
-.faden-shell .wort--frage { background: var(--white); border-left: 3px solid var(--rule-strong); padding: 10px 14px; }
-.faden-shell .wort--frage p { font-family: var(--serif); font-style: italic; font-size: 16px; margin: 0; }
-.faden-shell .wort--leo { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
-.faden-shell .wort--leo img { width: 30px; height: 30px; margin-top: 2px; }
+/* Frage rechts, Antwort links — wie im Leo-Chat der Live-Seite. */
+.faden-shell .wort--frage { justify-items: end; gap: 3px; padding-right: 10px; }
+.faden-shell .wort--frage p { margin: 0; }
+.faden-shell .blase--frage p { color: #fff; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.45; }
+.faden-shell .wort--leo { padding-left: 42px; }   /* Gasse für Leos Kopf, siehe .wort__avatar */
 .faden-shell .wort--leo .kicker { margin-bottom: 2px; }
 .faden-shell .wort--leo p { margin: 0 0 .5em; }
+.faden-shell .wort__avatar { position: absolute; left: -42px; bottom: -2px; width: 30px; height: 30px; }
+
+/* ---------- Sprechblasen (Maße 1:1 aus app/components.css, Live-Chat) ---------- */
+/* 🚨 Die Hülle hält Blase und hinteren Schwanz als GESCHWISTER. Läge der hintere
+   Schwanz in der Blase, könnte ihn kein z-index hinter deren Hintergrund schieben —
+   die Konturlinie am Ansatz bliebe sichtbar. Siehe components/faden/leo/Blase.tsx. */
+.faden-shell .blase-huelle { position: relative; display: inline-block; max-width: 100%; }
+.faden-shell .blase { position: relative; padding: 23px 27px; border-radius: 27px; word-wrap: break-word; overflow-wrap: break-word; }
+.faden-shell .blase > p:last-child { margin-bottom: 0; }
+.faden-shell .blase--frage { background: var(--ink); color: #fff; max-width: 600px; }
+.faden-shell .blase--frage a { color: #fff; text-decoration: underline; }
+.faden-shell .blase--leo { background: var(--paper); box-shadow: 0 0 0 1px var(--muted); max-width: 660px; z-index: 1; }
+/* Störung: gleiche Konstruktion, Kontur in Pink — auch am Schwanz (--stoerung). */
+.faden-shell .blase--fehler { box-shadow: 0 0 0 1px var(--pink); }
+.faden-shell .blase--fehler p { color: var(--pink); }
+/* Schwanz: viewBox 22×28, Anzeigegröße 0,957 × viewBox = 21,05 × 26,80.
+   Die ausgezogene Spitze der Kontur ragt links aus dem viewBox heraus — deshalb
+   trägt das eingebettete SVG `overflow: visible` (components/ui/BubbleSpike.tsx). */
+.faden-shell .blase__spike { position: absolute; bottom: -2px; width: 21.05px; height: 26.8px; pointer-events: none; }
+.faden-shell .blase--frage .blase__spike { right: -7.9px; transform: scaleX(-1); color: var(--ink); }
+.faden-shell .blase--leo .blase__spike { left: -7.4px; color: var(--paper); z-index: 2; }
+.faden-shell .blase__spike--unten { left: -7.4px; z-index: 0; fill: var(--paper); stroke: var(--muted); }
+.faden-shell .blase__spike--stoerung { stroke: var(--pink); }
+/* Quellen sitzen wie auf der Live-Seite IN der Blase, abgesetzt durch eine Linie. */
+.faden-shell .blase--leo .quellen { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); }
+.faden-shell .blase--leo .quellen b { display: block; margin-bottom: 2px; font: 600 11px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 900px) {
+  .faden-shell .blase { padding: 15px 18px; border-radius: 20px; }
+}
 .faden-shell .quellen { font-size: 12.5px; color: var(--muted); display: grid; gap: 2px; margin-top: 4px; }
 .faden-shell .quellen b { color: var(--ink); font-weight: 600; }
 .faden-shell .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -263,7 +293,6 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .fazit-kopf img { width: 28px; height: 28px; }
 .faden-shell .fazit { border-left: 3px solid var(--rule-strong); padding-left: 14px; font-family: var(--serif); font-size: 16px; }
 .faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; align-items: center; }
-.faden-shell .kurzfassung { border-left: 3px solid var(--green); background: var(--white); padding: 12px 14px 8px; }
 .faden-shell .dazu { display: grid; gap: 0; }
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
@@ -271,8 +300,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 4px; }
 .faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; gap: 6px; }
 .faden-shell .weiterlesen .fragen .chip.gewaehlt { background: var(--tint); }
-.faden-shell .weiterlesen .antwort { border-left: 3px solid var(--green); background: var(--white); padding: 10px 14px 12px; display: grid; gap: 8px; }
-.faden-shell .weiterlesen .antwort .wort--frage { border: 0; padding: 0; background: none; }
+.faden-shell .weiterlesen .antwort { display: grid; gap: 10px; margin-top: 2px; }
 .faden-shell .weiterlesen .antwort[hidden] { display: none; }
 
 /* Fließtext aus dem CMS: .prose liefert Tabellen (components.css), hier nur die Feinheiten */

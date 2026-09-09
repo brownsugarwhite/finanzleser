@@ -12,6 +12,7 @@ import type { BeitragPdf } from "@/lib/articleToolData";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { teilenOeffnen } from "@/components/faden/TeilenDialog";
 import { kulissenOeffnen } from "@/components/faden/Kulissen";
+import { LeoBlase } from "@/components/faden/leo/Blase";
 
 export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }) {
   const { inDenKoffer, toast } = useFaden();
@@ -51,14 +52,13 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
       </div>
       {kurzfassung && (
         <div className="wort wort--leo kurzfassung" hidden={!kurz} ref={kurzRef}>
-          <img src="/assets/leo.svg" alt="Leo" />
-          <div>
-            <span className="kicker kicker--gruen">Leo · Kurzfassung</span>
+          <span className="kicker kicker--gruen">Leo · Kurzfassung</span>
+          <LeoBlase>
             {kurzfassung.saetze.map((s, i) => <p key={i}>{s}</p>)}
             {kurzfassung.quellen.length > 0 && (
               <div className="quellen"><b>Quellen</b>{kurzfassung.quellen.map((q, j) => <span key={j}>› {q}</span>)}</div>
             )}
-          </div>
+          </LeoBlase>
         </div>
       )}
     </>

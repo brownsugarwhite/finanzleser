@@ -94,7 +94,7 @@ export default function Eingabe() {
     if (!start) return;
     const t0 = performance.now();
     const suche = () => {
-      const blasen = document.querySelectorAll<HTMLElement>("#leo-strom .wort--frage");
+      const blasen = document.querySelectorAll<HTMLElement>("#leo-strom .wort--frage .blase--frage");
       const b = blasen[blasen.length - 1];
       if (b && (b.textContent || "").includes(t) && !b.dataset.geflogen) {
         b.dataset.geflogen = "1"; b.style.opacity = "0";
