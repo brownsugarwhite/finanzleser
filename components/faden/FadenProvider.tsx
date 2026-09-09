@@ -12,6 +12,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { zeigeAnfang, merkeKnoten } from "@/lib/faden/scrollen";
 import { greifen } from "@/lib/faden/schnappschuss";
+import { fadenZiel, istHier } from "@/lib/faden/ziel";
+import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
 import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
@@ -280,21 +282,19 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     const aufKlick = (ev: MouseEvent) => {
       if (!istEinfacherLinksklick(ev) || ev.defaultPrevented) return;
       const a = (ev.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
-      if (!a || a.target === "_blank" || a.hasAttribute("download") || a.dataset.fadenAus !== undefined) return;
-      if (a.classList.contains("begriff")) return; // Klickmenü (BegriffMenue) übernimmt
-      let url: URL;
-      try { url = new URL(a.href, location.href); } catch { return; }
-      if (url.origin !== location.origin) return;
-      if (url.pathname === location.pathname && url.hash) return; // Anker in der Seite
-      if (/\.(pdf|jpe?g|png|webp|svg|gif|zip|xlsx?|docx?)$/i.test(url.pathname)) return;
-      if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/wp-content/")) return;
-      if (url.pathname === location.pathname && url.search === location.search) { ev.preventDefault(); zumKapitelScrollen(); return; }
+      // Dieselbe Entscheidung wie beim Vorausladen — eine Quelle, lib/faden/ziel.ts.
+      const ziel = fadenZiel(a);
+      if (!ziel) return;
       ev.preventDefault();
-      navigieren(url.pathname + url.search + url.hash);
+      if (istHier(ziel)) { zumKapitelScrollen(); return; }
+      navigieren(ziel);
     };
     document.addEventListener("click", aufKlick);
     return () => document.removeEventListener("click", aufKlick);
   }, [navigieren]);
+
+  // Ziele vorausladen, solange der Leser noch liest (siehe lib/faden/usePrefetch.ts).
+  useFadenPrefetch(pathname);
 
   // Nach dem Routenwechsel: Kopf des neuen Kapitels unter die Kopfzeile (Scroll-Regel).
   useEffect(() => {
