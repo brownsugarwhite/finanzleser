@@ -159,6 +159,20 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel.zu .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
 .faden-shell .kapitel--alt:not(.zu) .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
 .faden-shell .kapitel--alt { animation: faden-wandert .5s ease; } @keyframes faden-wandert { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Skelett beim Navigieren — 1:1 aus dem Prototyp (docs/prototype/src/01-css.html:231).
+   Es hängt im Moment des Klicks im Faden, damit der Sprung sofort ein Ziel hat; die
+   RSC-Antwort ersetzt es an derselben Stelle, also ohne zweiten Sprung. */
+.faden-shell .kapitel--skelett { min-height: 40vh; }
+.faden-shell .skelett { display: grid; gap: 12px; padding: 4px 0 8px; }
+.faden-shell .skelett i { display: block; height: 12px; border-radius: 3px; background: linear-gradient(90deg, var(--rule) 25%, var(--rule-soft) 50%, var(--rule) 75%); background-size: 200% 100%; animation: faden-schimmer 1.3s linear infinite; }
+.faden-shell .skelett i.skelett__bild { height: 120px; width: 40%; }
+@keyframes faden-schimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .faden-shell .skelett i { animation: none; } }
+/* Solange das Skelett steht, ist die noch alte Seite ausgeblendet — aber NICHT ausgehängt:
+   sie ist bis zur RSC-Antwort das einzige `#kapitel-live`, an dem der Provider erkennt,
+   wann das neue Kapitel im DOM steht. Verlauf, Anzeigen und das Fadenende bleiben stehen. */
+.faden-shell .strom--laedt > *:not(.kapitel--skelett):not(.kapitel--alt):not(.einschub):not(#strom-ende) { display: none; }
 .faden-shell .kapitel__schnappschuss { opacity: .92; }
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
 .faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }

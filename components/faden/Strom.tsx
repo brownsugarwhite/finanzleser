@@ -4,18 +4,36 @@
  * Der Strom: eingefrorene Kapitel (Verlauf) + das lebende Kapitel (die aktuelle Seite).
  * Schnappschüsse sind reines HTML (inert), Kopfzeile mit Nummer, Pfad, Uhrzeit;
  * aufklappen zeigt den statischen Inhalt, „erneut öffnen“ navigiert wirklich.
+ *
+ * Zwei Dinge stehen hier bewusst so:
+ *
+ *  1. Das Schnappschuss-HTML wird **erst beim Aufklappen** gesäubert und eingehängt.
+ *     Vorher hingen bis zu acht komplette Artikelbäume im Dokument — unsichtbar
+ *     (`.kapitel.zu .kapitel__inhalt { display: none }`), aber im DOM, und das kostet
+ *     beim Scrollen.
+ *  2. Während einer Navigation zeigt der Strom das Skelett und blendet die noch alte
+ *     Seite aus (Port von `ladeDann`). Ausgeblendet statt ausgehängt, weil die alte
+ *     Seite bis zur RSC-Antwort das einzige `#kapitel-live` ist, an dem der Provider
+ *     erkennt, wann das neue Kapitel steht.
  */
-import { Fragment, type ReactNode } from "react";
+import { Fragment, useMemo, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
+import { saeubern } from "@/lib/faden/schnappschuss";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
+import SkelettKapitel from "./SkelettKapitel";
+
+function Schnappschuss({ html, id }: { html: string; id: string }) {
+  const rein = useMemo(() => saeubern(html, id), [html, id]);
+  return <div className="kapitel__schnappschuss" inert dangerouslySetInnerHTML={{ __html: rein }} />;
+}
 
 export default function Strom({ children }: { children: ReactNode }) {
-  const { verlauf, kapitelUmschalten, navigieren } = useFaden();
+  const { verlauf, kapitelUmschalten, navigieren, laedt } = useFaden();
   const pathname = usePathname();
   return (
-    <div className="strom" id="strom">
+    <div className={"strom" + (laedt ? " strom--laedt" : "")} id="strom">
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
         {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
@@ -28,11 +46,11 @@ export default function Strom({ children }: { children: ReactNode }) {
             </button>
           </div>
           <div className="kapitel__inhalt">
-            {k.html ? (
-              <div className="kapitel__schnappschuss" inert dangerouslySetInnerHTML={{ __html: k.html }} />
-            ) : (
+            {k.offen && k.html ? (
+              <Schnappschuss html={k.html} id={k.id} />
+            ) : !k.html ? (
               <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="textlink" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
-            )}
+            ) : null}
             <div className="kapitel__wieder-zeile"><button type="button" className="textlink textlink--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
           </div>
         </section>
@@ -41,6 +59,7 @@ export default function Strom({ children }: { children: ReactNode }) {
       {pathname !== "/" && <Einschub format="leaderboard" variante={verlauf.length ? "feed" : "top"} nr={verlauf.length} />}
       {children}
       <LeoStrom />
+      {laedt && <SkelettKapitel />}
       <div id="strom-ende" aria-hidden="true" />
     </div>
   );
