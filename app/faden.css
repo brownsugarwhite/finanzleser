@@ -140,8 +140,49 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 
 /* ---------- Lesefortschritt: Haarlinie an der Unterkante des Kopfs ---------- */
 .faden-shell .lesefortschritt { position: absolute; left: 0; right: 0; top: calc(var(--kopf-h) - 1px); height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left center; opacity: 0; transition: opacity .3s; pointer-events: none; }
-.faden-shell .blatt { display: none; background: var(--paper); border-bottom: 1px solid var(--rule-strong); box-shadow: 0 14px 28px rgba(0,0,0,.08); }
-.faden-shell .blatt.offen { display: block; }
+/* ---------- Das Registerblatt: „Die aufgeschlagene Ausgabe" ----------
+   Es klappt aus dem Kopf heraus, wie eine Zeitung, die man aufschlägt. */
+
+/* Der Hof dahinter — Klick daneben klappt zu. */
+.faden-shell .blatt-hof { position: fixed; inset: 0; z-index: var(--z-blatt-hof); background: rgba(51,74,39,.10); backdrop-filter: blur(2px); opacity: 0; transition: opacity .35s; pointer-events: none; }
+.faden-shell .blatt-hof.offen { opacity: 1; pointer-events: auto; }
+
+/* 🚨 Die Bühne trägt die `perspective` — und darf NIE ein Vorfahr von `.kopfblur`
+   werden. Ein Element mit `perspective` erzeugt wie eines mit `filter` einen eigenen
+   Backdrop-Root; der progressive Blur wäre still weg (siehe Kommentar bei .kopfblur). */
+.faden-shell .blatt-buehne { position: absolute; left: 0; right: 0; top: var(--kopf-h); z-index: var(--z-blatt); perspective: 1600px; perspective-origin: 50% 0; pointer-events: none; }
+.faden-shell .blatt { position: relative; width: min(1200px, 96vw); margin: 0 auto; background: var(--paper); border: 1px solid rgba(51,74,39,.22); border-top: 0; box-shadow: 0 40px 60px -30px rgba(51,74,39,.5); max-height: calc(100vh - var(--kopf-h)); overflow: auto; scrollbar-width: thin; transform-origin: top center; transform: rotateX(-88deg); opacity: 0; transition: transform .75s cubic-bezier(.22,1.1,.36,1), opacity .35s; pointer-events: none; }
+.faden-shell .blatt.offen { transform: rotateX(0deg); opacity: 1; pointer-events: auto; }
+
+/* Der Falzschatten der noch nicht ganz aufgeschlagenen Seite. */
+.faden-shell .blatt__falz { position: absolute; inset: 0; background: linear-gradient(rgba(51,74,39,.28), rgba(51,74,39,0) 60%); opacity: 1; transition: opacity .7s; pointer-events: none; z-index: 5; }
+.faden-shell .blatt.offen .blatt__falz { opacity: 0; }
+
+/* Zeitungskopf des Blatts: Datum links, Pfad rechts, Registername, Doppellinie. */
+.faden-shell .blatt__kopf { padding: 18px clamp(16px, 3vw, 40px) 0; }
+.faden-shell .blatt__zeile { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.faden-shell .blatt__pfad { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .blatt__pfad span:last-child { color: var(--ink); font-weight: 600; }
+.faden-shell .blatt__pfad i { font-style: normal; color: var(--green); margin: 0 6px; }
+.faden-shell .blatt__titelzeile { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 4px; }
+.faden-shell .blatt__titel { font: 900 clamp(30px, 3.4vw, 46px)/1 var(--serif); letter-spacing: -.02em; color: var(--ink); }
+.faden-shell .blatt.offen .blatt__titel { animation: fl-druck .6s var(--kurve) .1s both; }
+.faden-shell .blatt .schliessen { position: static; display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; color: var(--muted); font: 400 12px/1 var(--sans); white-space: nowrap; padding-bottom: 4px; }
+/* Das ✕ als zwei gezeichnete Striche statt als Schriftzeichen — die Kante bleibt scharf. */
+.faden-shell .blatt .schliessen i { position: relative; width: 12px; height: 12px; display: inline-block; }
+.faden-shell .blatt .schliessen i::before, .faden-shell .blatt .schliessen i::after { content: ""; position: absolute; left: 0; top: 50%; width: 12px; height: 1px; background: currentColor; }
+.faden-shell .blatt .schliessen i::before { transform: rotate(45deg); } .faden-shell .blatt .schliessen i::after { transform: rotate(-45deg); }
+.faden-shell .blatt__kopf .doppellinie { display: block; margin-top: 10px; }
+.faden-shell .blatt.offen .blatt__kopf .doppellinie { transform-origin: center; animation: fl-mitte .8s var(--kurve) .15s both; }
+
+/* Fußzeile und Eselsohr. */
+.faden-shell .blatt__fuss { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-top: 1px solid var(--rule-strong); margin: 0 clamp(16px, 3vw, 40px); padding: 12px 44px 14px 0; font: 400 13px/1.4 var(--sans); color: var(--muted); }
+.faden-shell .blatt__fuss em { font: italic 300 12.5px var(--serif); }
+.faden-shell .blatt__ohr { position: absolute; right: 0; bottom: 0; width: 44px; height: 44px; border: 0; background: none; padding: 0; z-index: 6; }
+.faden-shell .blatt__ohr i { position: absolute; right: 0; bottom: 0; width: 0; height: 0; border-style: solid; animation: fl-ohr 3s ease-in-out infinite; }
+.faden-shell .blatt__ohr-schatten { border-width: 0 0 30px 30px; border-color: transparent transparent rgba(51,74,39,.12) transparent; transition: border-width .3s var(--schwung); }
+.faden-shell .blatt__ohr-ecke { border-width: 30px 30px 0 0; border-color: var(--paper) transparent transparent transparent; filter: drop-shadow(-1px 1px 1px rgba(51,74,39,.25)); }
+.faden-shell .blatt__ohr:hover .blatt__ohr-schatten { border-width: 0 0 38px 38px; }
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
 .faden-shell .faden { margin: 0; padding: 22px 0 160px; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
@@ -434,15 +475,42 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .prose a:hover { color: var(--pink); }
 
 /* ---------- Registerblatt ---------- */
-.faden-shell .blatt__innen { max-width: 1320px; margin: 0 auto; padding: 18px 28px 22px; display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: 28px; position: relative; }
+.faden-shell .blatt__innen { margin: 0 auto; padding: 20px clamp(16px, 3vw, 40px) 26px; display: grid; grid-template-columns: 220px 220px minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); position: relative; min-height: 380px; }
 .faden-shell .blatt__spalte { display: grid; gap: 8px; align-content: start; min-width: 0; }
-.faden-shell .blatt__spalte + .blatt__spalte { border-left: 1px solid var(--rule); padding-left: 24px; }
+.faden-shell .blatt__spalte { position: relative; }
+/* Der Trenner zeichnet sich von oben nach unten, wenn die Ausgabe aufschlägt. */
+.faden-shell .blatt__spalte + .blatt__spalte { padding-left: 24px; }
+.faden-shell .blatt__spalte + .blatt__spalte::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px; background: rgba(51,74,39,.22); transform-origin: top; }
+.faden-shell .blatt.offen .blatt__spalte + .blatt__spalte::before { animation: fl-spalte .9s var(--kurve) .3s both; }
+
+/* ---------- Rubriken als Zeitungsindex ---------- */
+.faden-shell .rubriken { position: relative; }
+.faden-shell .rubriken ul { display: block; }
+/* 🚨 Ein einziges Band, das seine Höhe wechselt — nicht eines je Zeile. Nur so wandert
+   es sichtbar zur gewählten Rubrik, statt umzublenden. Zeilenhöhe 64 + 1 px Trennlinie,
+   das Band ist 52 hoch, also 6 px Luft oben. */
+.faden-shell .rubriken__band { position: absolute; left: -26px; width: 4px; height: 52px; background: var(--pink); top: calc(var(--band, 0) * 65px + 7px); transition: top .5s cubic-bezier(.34,1.4,.64,1); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), 50% 100%, 0 calc(100% - 4px)); }
+.faden-shell .rubrik { width: 100%; display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 4px; height: 64px; border: 0; border-top: 1px solid rgba(51,74,39,.12); background: none; text-align: left; padding: 0; transition: padding-left .3s var(--kurve); }
+.faden-shell .rubrik:hover { padding-left: 6px; }
+.faden-shell .blatt.offen .rubrik { animation: fl-druck .55s var(--kurve) calc(.2s + var(--i, 0) * .045s) both; }
+.faden-shell .rubrik__initial { font: 900 34px/1 var(--serif); color: var(--ink); transition: transform .3s var(--kurve), color .3s; }
+.faden-shell .rubrik.aktiv .rubrik__initial { color: var(--green-ink); transform: translateX(2px) scale(1.08); }
+.faden-shell .rubrik__text { display: grid; gap: 1px; min-width: 0; }
+.faden-shell .rubrik__text b { font: 700 16px/1.2 var(--serif); color: var(--ink); }
+.faden-shell .rubrik__text em { position: relative; font: italic 300 12px/1.3 var(--serif); color: var(--muted); display: inline-block; }
+/* Die Linie unter der Unterzeile wächst beim Zeigen und steht bei der aktiven Rubrik ganz. */
+.faden-shell .rubrik__text em i { position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--kurve); }
+.faden-shell .rubrik:hover .rubrik__text em i, .faden-shell .rubrik.aktiv .rubrik__text em i { transform: scaleX(1); }
+.faden-shell .rubrik__pfeil { width: 7px; height: 7px; border-right: 1.4px solid var(--muted); border-top: 1.4px solid var(--muted); transform: rotate(45deg); transition: transform .3s var(--kurve), border-color .3s; }
+.faden-shell .rubrik:hover .rubrik__pfeil { transform: rotate(45deg) translate(3px, -3px); }
+.faden-shell .rubrik.aktiv .rubrik__pfeil { border-color: var(--green-ink); }
 .faden-shell .blatt__spalte--breit { grid-column: 2 / -1; }
 .faden-shell .blatt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .faden-shell .blatt .thema { width: 100%; text-align: left; border: 0; background: none; padding: 6px 4px; font-size: 14px; display: flex; align-items: center; gap: 8px; border-radius: 6px; }
 .faden-shell .blatt .thema img { width: 15px; height: 15px; opacity: .8; }
 .faden-shell .blatt .thema small { margin-left: auto; color: var(--muted); font-size: 11.5px; }
 .faden-shell .blatt .thema:hover, .faden-shell .blatt .thema.aktiv { color: var(--green-ink); font-weight: 700; }
+.faden-shell .blatt.offen .thema, .faden-shell .blatt.offen .eintraege li { animation: fl-druck .55s var(--kurve) calc(.3s + var(--i, 0) * .045s) both; }
 .faden-shell .blatt .thema.aktiv::after { content: "›"; margin-left: 4px; }
 .faden-shell .blatt .eintraege { display: grid; gap: 0; }
 .faden-shell .blatt .eintraege--kompakt { max-height: 44vh; overflow: auto; scrollbar-width: thin; }
@@ -452,7 +520,6 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blatt .werkzeug small { color: var(--muted); font-weight: 400; }
 .faden-shell .blatt .werkzeug:hover { color: var(--green-ink); }
 .faden-shell .blatt input { font: inherit; font-size: 13px; padding: 7px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--white); color: var(--ink); width: 100%; }
-.faden-shell .blatt .schliessen { position: absolute; right: 24px; top: 14px; border: 0; background: none; color: var(--muted); font-size: 12px; }
 .faden-shell .blatt .hinweis { font-size: 12.5px; color: var(--muted); background: none; border: 0; padding: 0; }
 .faden-shell .blatt__gruppe { display: grid; gap: 4px; }
 .faden-shell .abc { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -749,8 +816,19 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .kopf__zeile { gap: 10px; min-height: 56px; } .faden-shell .logo img { height: 21px; }
   .faden-shell .register { display: none; }
   .faden-shell .lesezeichen .btn--menue { display: inline-flex; }
-  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 14px; padding: 14px 14px 18px; }
-  .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
+  /* Schmale Fenster: die Ausgabe füllt die Breite, ohne zu falten — eine Seite, die
+     sich auf 375 px dreidimensional aufklappt, wirkt nur unruhig. */
+  .faden-shell .blatt { width: 100%; border-left: 0; border-right: 0; transform: none; transition: opacity .35s; }
+  .faden-shell .blatt.offen { transform: none; }
+  .faden-shell .blatt__ohr, .faden-shell .blatt__fuss em { display: none; }
+  .faden-shell .blatt__fuss { padding-right: 0; }
+  .faden-shell .rubriken__band { left: -10px; }
+  .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: 14px; padding: 14px 14px 18px; min-height: 0; }
+  .faden-shell .blatt__spalte + .blatt__spalte::before { display: none; }
+  /* 🚨 Hier stand zusätzlich `.faden-shell .blatt__spalte + .faden-shell .blatt__spalte` —
+     unerfüllbar, denn das verlangt ein `.faden-shell`-Element als Geschwister der Spalte.
+     Nur der zweite Teil hat je gewirkt. */
+  .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
   .faden-shell .blatt__spalte--breit { grid-column: auto; }
   .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
   .faden-shell .spalten { grid-template-columns: 1fr !important; } .faden-shell .spalten .trenner { display: none; } .faden-shell .spalte__inhalt { padding: 10px 0; } .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); } .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; } .faden-shell .spalte__offen { padding: 6px 0; }

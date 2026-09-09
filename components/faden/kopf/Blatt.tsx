@@ -15,7 +15,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { NavItem } from "@/lib/navItems";
 import type { MegamenuPreload } from "@/lib/wordpress";
-import { CATEGORY_ICONS } from "@/lib/categoryIcons";
 import { TYP_LABELS } from "@/lib/rechnerCategories";
 import MegaPostContent from "@/components/ui/MegaPostContent";
 import { buildRechnerUrl, buildChecklisteUrl, buildVergleichUrl, buildDokumentUrl, buildAnbieterUrl, buildPostUrl } from "@/lib/urls";
@@ -48,33 +47,143 @@ function toolHref(typ: Reiter | "dokumente", slug: string): string {
   return buildDokumentUrl(slug);
 }
 
+const REGISTER_TITEL: Record<BlattZustand["key"], string> = {
+  ratgeber: "Ratgeber", finanztools: "Finanztools", service: "Service", plus: "Finanzleser Plus",
+};
+
+/** „Dienstag, 9. September 2026" — der Kopf einer Zeitung nennt immer sein Datum. */
+function heute(): string {
+  return new Date().toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+}
+
 export default function Blatt({ nav, preload }: { nav: NavItem[]; preload: MegamenuPreload }) {
   const { blatt, blattOeffnen, blattZu } = useFaden();
-  if (!blatt) return <div className="blatt" id="blatt" aria-label="Registerblatt" />;
+
+  /**
+   * 🚨 Eigener Sichtzustand neben `blatt` aus dem Provider.
+   *
+   * Vorher gab diese Komponente bei `!blatt` sofort eine leere Hülle zurück — das Blatt
+   * verschwand hart. Für die Faltbewegung muss es seinen eigenen Ausgang zu Ende
+   * spielen dürfen, also bleibt `sicht` stehen, bis die Bewegung durch ist.
+   */
+  const [sicht, setSicht] = useState<BlattZustand | null>(blatt);
+  const [offen, setOffen] = useState(false);
+  /** Zähler, der die Zeilenstaffelung neu anstößt — jeder Wechsel druckt die Seite neu. */
+  const [druck, setDruck] = useState(0);
+  const stand = blatt ? `${blatt.key}|${blatt.a || ""}|${blatt.b || ""}` : "";
+
+  useEffect(() => {
+    if (blatt) {
+      setSicht(blatt);
+      setDruck((d) => d + 1);
+      // 🚨 `setTimeout`, nicht `requestAnimationFrame`: in einem verborgenen Tab feuert
+      // rAF nicht, und das Blatt bliebe für immer im Grundzustand `rotateX(-88deg)` —
+      // also unsichtbar aufgeklappt. Ein Task reicht, damit der Browser den
+      // geschlossenen Zustand einmal übernimmt und die Bewegung dann läuft.
+      const t = setTimeout(() => setOffen(true), 0);
+      return () => clearTimeout(t);
+    }
+    setOffen(false);
+    const t = setTimeout(() => setSicht(null), 420);
+    return () => clearTimeout(t);
+  }, [blatt, stand]);
+
+  if (!sicht) return null;
+  const pfad = [REGISTER_TITEL[sicht.key], sicht.a, sicht.b].filter(Boolean) as string[];
+
   return (
-    <div className="blatt offen" id="blatt" aria-label="Registerblatt">
-      <div className="blatt__innen">
-        <button type="button" className="schliessen" onClick={blattZu}>Esc · schließen ✕</button>
-        {blatt.key === "ratgeber" && <BlattRatgeber nav={nav} preload={preload} z={blatt} oeffnen={blattOeffnen} />}
-        {blatt.key === "finanztools" && <BlattFinanztools z={blatt} oeffnen={blattOeffnen} />}
-        {blatt.key === "service" && <BlattService z={blatt} oeffnen={blattOeffnen} />}
-        {blatt.key === "plus" && <BlattPlus />}
+    <>
+      {/* Der Hof: klickt man daneben, klappt die Ausgabe zu. */}
+      <div className={"blatt-hof" + (offen ? " offen" : "")} onClick={blattZu} aria-hidden="true" />
+      {/* 🚨 Die Bühne trägt die `perspective`. Sie darf NIE ein Vorfahr von `.kopfblur`
+          werden: ein Element mit `perspective` erzeugt — wie eines mit `filter` — einen
+          eigenen Backdrop-Root, und der progressive Blur wäre still weg. Genau dieser
+          Vorfall steht in app/faden.css bei `.kopfblur` dokumentiert. `.kopfblur` ist
+          ein Geschwister von `<header class="kopf">`, die Bühne liegt darin — passt. */}
+      <div className="blatt-buehne">
+        <div className={"blatt" + (offen ? " offen" : "")} id="blatt" aria-label="Registerblatt">
+          {/* Falzschatten: der Schatten der noch nicht ganz aufgeschlagenen Seite. */}
+          <i className="blatt__falz" aria-hidden="true" />
+
+          <div className="blatt__kopf">
+            <div className="blatt__zeile">
+              <span className="kicker">{heute()} · Ausgabe 1</span>
+              <span className="blatt__pfad">
+                {pfad.map((teil, i) => (
+                  <span key={teil + i}>{i > 0 && <i>›</i>}{teil}</span>
+                ))}
+              </span>
+            </div>
+            <div className="blatt__titelzeile">
+              <h2 className="blatt__titel">{REGISTER_TITEL[sicht.key]}</h2>
+              <button type="button" className="schliessen" onClick={blattZu}>Esc · zuklappen <i /></button>
+            </div>
+            <i className="doppellinie" aria-hidden="true" />
+          </div>
+
+          {/* `key={druck}`: ein Wechsel hängt die Spalten neu ein, damit die Zeilen sich
+              erneut einprägen. Die Daten liegen im Modul-Cache, es wird nichts neu geholt. */}
+          <div className="blatt__innen" key={druck}>
+            {sicht.key === "ratgeber" && <BlattRatgeber nav={nav} preload={preload} z={sicht} oeffnen={blattOeffnen} />}
+            {sicht.key === "finanztools" && <BlattFinanztools z={sicht} oeffnen={blattOeffnen} />}
+            {sicht.key === "service" && <BlattService z={sicht} oeffnen={blattOeffnen} />}
+            {sicht.key === "plus" && <BlattPlus />}
+          </div>
+
+          <div className="blatt__fuss">
+            <span>Anbieter · Dokumente · Glossar · Finconext</span>
+            <em>Zum Zuklappen die Ecke umblättern</em>
+          </div>
+          {/* Eselsohr: zwei Dreiecke — der Schatten und die umgeschlagene Papierecke. */}
+          <button type="button" className="blatt__ohr" onClick={blattZu} aria-label="Zuklappen">
+            <i className="blatt__ohr-schatten" /><i className="blatt__ohr-ecke" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
 function Themenliste({ items, aktiv, klick }: { items: { key: string; name: string; icon?: string; zahl?: number }[]; aktiv?: string; klick: (k: string) => void }) {
   return (
     <ul className="themen">
-      {items.map((it) => (
+      {items.map((it, i) => (
         <li key={it.key}>
-          <button type="button" className={"thema" + (it.key === aktiv ? " aktiv" : "")} onClick={() => klick(it.key)}>
+          <button type="button" className={"thema" + (it.key === aktiv ? " aktiv" : "")} onClick={() => klick(it.key)} style={{ "--i": i } as React.CSSProperties}>
             {it.icon && <img src={it.icon} alt="" />}{it.name}{it.zahl ? <small>{it.zahl}</small> : null}
           </button>
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * Die Rubrikenspalte als Zeitungsindex: Initiale, Titel, Unterzeile mit wachsender
+ * Linie — und links das magentafarbene Lesezeichenband, das zur gewählten Rubrik
+ * springt. Das Band ist EIN Element, das seine Höhe wechselt, keins pro Zeile; sonst
+ * gäbe es kein Wandern, nur ein Umblenden.
+ */
+function Rubriken({ items, aktiv, klick }: { items: { key: string; name: string; unter: string }[]; aktiv?: string; klick: (k: string) => void }) {
+  const idx = Math.max(0, items.findIndex((it) => it.key === aktiv));
+  return (
+    <div className="rubriken">
+      <i className="rubriken__band" style={{ "--band": idx } as React.CSSProperties} aria-hidden="true" />
+      <ul>
+        {items.map((it, i) => (
+          <li key={it.key}>
+            <button type="button" className={"rubrik" + (it.key === aktiv ? " aktiv" : "")} onClick={() => klick(it.key)} style={{ "--i": i } as React.CSSProperties}>
+              <span className="rubrik__initial" aria-hidden="true">{it.name.charAt(0)}</span>
+              <span className="rubrik__text">
+                <b>{it.name}</b>
+                <em>{it.unter}<i /></em>
+              </span>
+              <span className="rubrik__pfeil" aria-hidden="true" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -99,7 +208,11 @@ function BlattRatgeber({ nav, preload, z, oeffnen }: { nav: NavItem[]; preload: 
     <>
       <div className="blatt__spalte">
         <span className="kicker">Rubrik</span>
-        <Themenliste items={rubriken.map((r) => ({ key: r.href.replace(/^\//, ""), name: r.label, icon: CATEGORY_ICONS[r.href.replace(/^\//, "")] }))} aktiv={rk} klick={(k) => oeffnen("ratgeber", k)} />
+        <Rubriken
+          items={rubriken.map((r) => ({ key: r.href.replace(/^\//, ""), name: r.label, unter: `${(r.submenu || []).length} Themen` }))}
+          aktiv={rk}
+          klick={(k) => oeffnen("ratgeber", k)}
+        />
       </div>
       <div className="blatt__spalte">
         <span className="kicker">{rub.label} · Themen</span>
@@ -109,8 +222,8 @@ function BlattRatgeber({ nav, preload, z, oeffnen }: { nav: NavItem[]; preload: 
       <div className="blatt__spalte">
         <span className="kicker">{th.label} · Ratgeber</span>
         <ul className="eintraege">
-          {liste.map((p) => (
-            <li key={p.slug}><a className="eintrag" href={pfadHref(p)}><MegaPostContent post={p} /></a></li>
+          {liste.map((p, i) => (
+            <li key={p.slug} style={{ "--i": i } as React.CSSProperties}><a className="eintrag" href={pfadHref(p)}><MegaPostContent post={p} /></a></li>
           ))}
           {liste.length === 0 && <li className="hinweis">Noch keine Beiträge in diesem Thema.</li>}
         </ul>

@@ -114,10 +114,10 @@
    Zeitungs-Bausteine
    ===================================================================================== */
 
-/* Doppellinie: 2 px, 2 px Luft, 1 px. Zeitungskopf, Tabellenkopf, Randspaltenkopf.
-   Als Rahmen des Elements selbst, damit sie keine eigene Box im Fluss braucht. */
-.faden-shell .doppellinie { border-bottom: 1px solid var(--ink); box-shadow: 0 -3px 0 0 var(--ink) inset; height: 3px; }
-.faden-shell .doppellinie--oben { border-bottom: 0; border-top: 2px solid var(--ink); box-shadow: 0 3px 0 -2px var(--ink) inset; }
+/* Doppellinie: 2 px, 2 px Luft, 1 px — die Signatur des Zeitungskopfs.
+   Über zwei Rahmen an einem 5-px-Element: `box-sizing: border-box` gilt im Faden
+   überall (faden.css), also bleiben 5 − 2 − 1 = 2 px Luft dazwischen. */
+.faden-shell .doppellinie { height: 5px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
 /* Zeichnet sich von der Mitte nach außen (Registerblatt, Kapitelkopf). */
 .faden-shell .ist-da > .doppellinie,
 .faden-shell .ist-da > * > .doppellinie { transform-origin: center; animation: fl-mitte calc(.8s * var(--tempo)) var(--kurve) .15s both; }
