@@ -49,7 +49,7 @@ function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData 
 
 function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData; url: string }) {
   return (
-    <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
+    <section className="abschnitt" id={a.id} data-toc-titel={a.titel} data-erscheint="herz">
       <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
@@ -89,6 +89,13 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   const pfad = k.krumen.map((x) => x.name);
   // Ein Eintrag je Finanztool im Inhaltsverzeichnis (Titel aus dem Preload, sonst gecachter Getter).
   const toc = await Promise.all(k.toc.map(async (t) => (t.art === "werkzeug" && t.typ && t.slug ? { ...t, titel: await werkzeugTitel(t.typ, t.slug, toolData) } : t)));
+  // 🚨 Die Lesedauer je Abschnitt steht nur da, wenn sie etwas unterscheidet. Bei einem
+  // Beitrag mit gleichmäßigen Abschnitten liest jeder rund eine Minute — eine Spalte aus
+  // lauter „1 Min." ist keine Information, sondern Rauschen. Die Punktführung trägt den
+  // Zeitungssatz auch allein.
+  const dauern = toc.filter((t) => t.minuten).map((t) => t.minuten);
+  const zeigeDauer = new Set(dauern).size > 1;
+
   // Vorschläge unter der Eingabe (Prototyp FOLGE_CHIPS): Kurzfassung · zweimal „Dazu passt“ · erstes Werkzeug · Kassensturz.
   const erstesWerkzeug = toc.find((t) => t.art === "werkzeug");
   const chips = [
@@ -130,15 +137,17 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </div>
           )}
           {toc.length > 0 && (
-            <nav className="inhalt" aria-label="Inhalt">
+            <nav className="inhalt" aria-label="Inhalt" data-erscheint="herz">
               <span className="kicker">Inhalt</span>
               <ol className="inhalt__liste">
                 {toc.map((t, i) => (
-                  <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art}>
+                  <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art} style={{ "--i": i } as React.CSSProperties}>
                     <a href={`#${t.id}`}>
-                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : <b className={`dot dot--${t.typ}`} />}</i>
-                      <span className="inhalt__linie" aria-hidden="true" />
+                      <i className="inhalt__nr">{t.art === "abschnitt" ? String(i + 1).padStart(2, "0") : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : <b className={`dot dot--${t.typ}`} />}</i>
                       <span className="inhalt__titel">{t.titel}</span>
+                      {/* Punktführung: die Linie, die im Zeitungsinhalt Titel und Seitenzahl verbindet. */}
+                      <i className="fuehrung" aria-hidden="true" />
+                      {zeigeDauer && <span className="inhalt__zahl ziffern">{t.minuten ? `${t.minuten} Min.` : ""}</span>}
                     </a>
                   </li>
                 ))}

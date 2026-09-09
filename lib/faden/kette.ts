@@ -50,6 +50,8 @@ export interface TocEintrag {
   /** Nur bei `werkzeug`: Typ und Slug; der Titel wird beim Rendern aufgelöst. */
   typ?: WerkzeugTyp;
   slug?: string;
+  /** Lesedauer des Abschnitts in Minuten — die Zahl rechts in der Inhaltsübersicht. */
+  minuten?: number;
 }
 
 export interface Krume {
@@ -245,7 +247,13 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
   const minuten = getReadingTimeMinutes(content);
   const einleitungHtml = einleitungSektion ? fliessHtml(einleitungSektion.html.join("\n")) : "";
 
-  const toc: TocEintrag[] = fach.map((a) => ({ id: a.id, titel: a.titel, art: "abschnitt" as const }));
+  // Lesedauer je Abschnitt: die Zahl rechts in der Inhaltsübersicht, wie die Seitenzahl
+  // im Inhaltsverzeichnis einer Zeitung. Gerechnet aus dem Fließtext des Abschnitts, mit
+  // demselben Maß wie die Gesamtlesezeit (lib/content-utils.ts) — sonst summierten sich
+  // die Abschnitte auf einen anderen Wert als die Angabe im Kopf.
+  const abschnittMinuten = (a: Abschnitt): number =>
+    Math.max(1, getReadingTimeMinutes(a.teile.filter((t) => t.art === "html").map((t) => t.html).join(" ")));
+  const toc: TocEintrag[] = fach.map((a) => ({ id: a.id, titel: a.titel, art: "abschnitt" as const, minuten: abschnittMinuten(a) }));
   if (faq.length && faqId) toc.push({ id: faqId, titel: "Häufige Fragen", art: "faq" });
   if (fazitHtml && fazitId) toc.push({ id: fazitId, titel: "Fazit", art: "fazit" });
   for (const w of pool) toc.push({ id: werkzeugId(w.typ, w.slug), titel: w.slug, art: "werkzeug", typ: w.typ, slug: w.slug });
