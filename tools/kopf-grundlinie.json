@@ -1,0 +1,564 @@
+{
+  "url": "http://localhost:3000/",
+  "aufgenommen": "2026-09-09",
+  "werte": {
+    "375": {
+      ".kopf": {
+        "height": "56px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "56px",
+        "gap": "10px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "21px",
+        "width": "180.422px"
+      },
+      ".register": {
+        "display": "none",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "auto",
+        "height": "auto",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "calc(50% - 26px)",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "calc(50% - 22px)",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "none",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "none",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "40px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "12px"
+      },
+      ".lz-wort": {
+        "display": "none",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    },
+    "900": {
+      ".kopf": {
+        "height": "56px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "56px",
+        "gap": "10px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "21px",
+        "width": "180.422px"
+      },
+      ".register": {
+        "display": "none",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "auto",
+        "height": "auto",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "calc(50% - 26px)",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "calc(50% - 22px)",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "none",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "none",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "40px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "12px"
+      },
+      ".lz-wort": {
+        "display": "none",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    },
+    "1024": {
+      ".kopf": {
+        "height": "64px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "64px",
+        "gap": "22px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "26px",
+        "width": "223.375px"
+      },
+      ".register": {
+        "display": "flex",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "12px",
+        "height": "12px",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "-1px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "3px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 0)",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "none",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "50px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "20.48px"
+      },
+      ".lz-wort": {
+        "display": "none",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    },
+    "1200": {
+      ".kopf": {
+        "height": "64px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "64px",
+        "gap": "22px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "26px",
+        "width": "223.375px"
+      },
+      ".register": {
+        "display": "flex",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "12px",
+        "height": "12px",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "-1px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "3px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 0)",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "none",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "50px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "24px"
+      },
+      ".lz-wort": {
+        "display": "flex",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    },
+    "1300": {
+      ".kopf": {
+        "height": "64px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "64px",
+        "gap": "22px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "26px",
+        "width": "223.375px"
+      },
+      ".register": {
+        "display": "flex",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "12px",
+        "height": "12px",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "-1px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "3px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 0)",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "none",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "50px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "25px"
+      },
+      ".lz-wort": {
+        "display": "flex",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    },
+    "1680": {
+      ".kopf": {
+        "height": "64px",
+        "position": "sticky",
+        "zIndex": "30"
+      },
+      ".kopf__zeile": {
+        "minHeight": "64px",
+        "gap": "22px",
+        "alignItems": "center"
+      },
+      ".logo img": {
+        "height": "26px",
+        "width": "223.375px"
+      },
+      ".register": {
+        "display": "flex",
+        "gap": "normal"
+      },
+      ".register__reihe button": {
+        "fontFamily": "Merriweather, \"Merriweather Fallback\"",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "paddingTop": "12px",
+        "paddingLeft": "20px",
+        "color": "rgb(51, 74, 39)"
+      },
+      ".reg-spark": {
+        "width": "12px",
+        "height": "12px",
+        "animationName": "fl-atmen",
+        "animationDuration": "3.4s"
+      },
+      ".nav-pille": {
+        "height": "32px",
+        "position": "absolute",
+        "borderRadius": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)"
+      },
+      ".nav-linie--1": {
+        "height": "2px",
+        "top": "-1px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-linie--3": {
+        "height": "4px",
+        "top": "3px",
+        "backgroundColor": "rgb(51, 74, 39)"
+      },
+      ".nav-lupe": {
+        "transform": "matrix(1.1, 0, 0, 1.1, 0, 0)",
+        "overflow": "visible"
+      },
+      ".kopf__marke": {
+        "height": "50px",
+        "alignSelf": "flex-start",
+        "display": "flex"
+      },
+      ".sie-lesen": {
+        "display": "block",
+        "fontSize": "13px",
+        "maxWidth": "280px",
+        "color": "rgb(104, 108, 106)"
+      },
+      ".lz-zacken": {
+        "width": "40px",
+        "height": "50px",
+        "marginRight": "-1px"
+      },
+      ".lesezeichen": {
+        "height": "50px",
+        "backgroundImage": "linear-gradient(to left, rgba(22, 142, 3, 0.8), rgb(69, 161, 23))",
+        "color": "rgb(255, 255, 255)",
+        "paddingRight": "25px"
+      },
+      ".lz-wort": {
+        "display": "flex",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "height": "36px"
+      },
+      ".lz-icon": {
+        "width": "36px",
+        "height": "36px",
+        "position": "relative"
+      },
+      ".lesefortschritt": {
+        "height": "1px",
+        "top": "63px",
+        "backgroundColor": "rgb(69, 161, 23)",
+        "transformOrigin": "0px 0.5px"
+      }
+    }
+  }
+}
