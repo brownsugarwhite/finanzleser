@@ -39,6 +39,16 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell p { margin: 0 0 .8em; }
 .faden-shell :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .faden-shell .sr { position: absolute; left: -9999px; }
+
+/* 🚨 app/components.css:797 setzt ungelayert `p, li, span { color: var(--color-text-medium) }`.
+   Spezifität (0,0,1), gilt also auch hier: JEDER Textknoten im Faden ist grau, solange ihn
+   niemand ausdrücklich färbt. Genau deshalb standen in der alten faden.css 262 `color:`-
+   Deklarationen, davon 87 mal `--muted` — Notwehr, keine Gestaltung.
+
+   Diese Regel (0,1,1) schlägt sie und stellt die Vererbung wieder her: Text nimmt die Farbe
+   seines Kastens an, so wie es die Vorlage tut. Wer grau will, schreibt grau hin.
+   Beim Neubau eines Abschnitts fallen die defensiven Farben dort ersatzlos weg. */
+.faden-shell p, .faden-shell li, .faden-shell span { color: inherit; }
 @media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
 
 .faden-shell {
