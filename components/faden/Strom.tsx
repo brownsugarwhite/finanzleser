@@ -20,6 +20,7 @@ import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } 
 import { usePathname } from "next/navigation";
 import { useFaden } from "./FadenProvider";
 import { saeubern } from "@/lib/faden/schnappschuss";
+import { useErscheinen } from "@/lib/faden/erscheinen";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
 import SkelettKapitel from "./SkelettKapitel";
@@ -44,6 +45,9 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
     el.innerHTML = rein;
     setWurzel(el);
   }, [rein]);
+  // Auftritte im eingefrorenen Kapitel: Was der Leser vor dem Einfrieren schon im Bild
+  // hatte, trägt `ist-da` und bleibt stehen; der Rest tritt beim Aufklappen neu auf.
+  useErscheinen(wurzel, rein);
   // 🚨 KEIN `inert`. Das machte jedes aufgeklappte Kapitel tot — auch die Ratgeberkarten
   // unter „Heute". Der Prototyp kennt kein inert; Links im eingefrorenen Kapitel fängt
   // derselbe Klick-Abfänger ab wie überall (FadenProvider) und navigiert normal.
@@ -63,6 +67,9 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
 export default function Strom({ children }: { children: ReactNode }) {
   const { verlauf, kapitelUmschalten, navigieren, laedt } = useFaden();
   const pathname = usePathname();
+  // Ein Beobachter für den ganzen Strom — er fängt serverseitig gerenderte Kapitel,
+  // eingehängte Schnappschüsse und die per Portal nachgereichten Insel-Körper.
+  useErscheinen();
   return (
     <div className={"strom" + (laedt ? " strom--laedt" : "")} id="strom">
       {verlauf.map((k, i) => (

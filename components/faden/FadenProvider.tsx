@@ -11,7 +11,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten } from "@/lib/faden/scrollen";
-import { greifen } from "@/lib/faden/schnappschuss";
+import { greifen, MARKUP_V } from "@/lib/faden/schnappschuss";
 import { fadenZiel, istHier } from "@/lib/faden/ziel";
 import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
 import type { BegriffDaten } from "@/lib/faden/glossar";
@@ -31,6 +31,8 @@ export interface Schnappschuss {
   /** Roh-HTML, ungesäubert; `saeubern()` läuft erst beim Aufklappen. Leer nach Reload (nur Kopfzeile). */
   html: string;
   offen: boolean;
+  /** Markup-Stand beim Einfrieren. Passt er nicht mehr, wird `html` beim Laden verworfen. */
+  v?: number;
 }
 
 export interface BlattZustand { key: "ratgeber" | "finanztools" | "service" | "plus"; a?: string; b?: string }
@@ -134,6 +136,7 @@ function schnappschuss(): Schnappschuss | null {
     url: location.pathname + location.search,
     zeit: uhr(),
     html: greifen(live),
+    v: MARKUP_V,
     // Das frisch eingefrorene Kapitel bleibt OFFEN. Eingeklappt wird erst das vorletzte
     // (siehe navigieren) — der Faden reißt dann nicht ab: über dem neuen Kapitel steht
     // noch der ganze Beitrag, den man gerade gelesen hat.
@@ -184,7 +187,14 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
         sessionStorage.removeItem(META_KEY);
       } else {
         const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
-        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false })));
+        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({
+          ...m,
+          // Markup aus einer älteren Fassung wird verworfen, nicht angezeigt: es passt
+          // nicht mehr zum aktuellen CSS und käme halb gesetzt oder unsichtbar zurück.
+          // Kopfzeile und Titel bleiben, Strom.tsx bietet dann „Erneut öffnen" an.
+          html: typeof m.html === "string" && m.v === MARKUP_V ? m.html : "",
+          offen: false,
+        })));
       }
     } catch { /* leer */ }
     try {

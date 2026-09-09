@@ -36,7 +36,12 @@ export default function FadenShell({ children, nav, preload, level }: { children
   }, []);
   return (
     <FadenProvider level={level}>
-      <div className="faden-shell">
+      <div className="faden-shell" data-erscheinen="">
+        {/* 🚨 Ohne JavaScript darf nichts unsichtbar bleiben. `data-erscheinen` schaltet in
+            zeitung.css den Grundzustand `opacity:0` für alles mit `data-erscheint` scharf;
+            steht das Attribut serverseitig, gibt es kein Aufblitzen — aber ohne diese
+            Rücknahme sähe ein Leser ohne JS eine leere Seite. */}
+        <noscript><style>{`.faden-shell[data-erscheinen] [data-erscheint]{opacity:1!important}`}</style></noscript>
         <Kopf nav={nav} preload={preload} onMenue={() => setMenue(true)} />
         <Menue offen={menue} onZu={() => setMenue(false)} onRand={(s) => setSchublade(s)} />
         <main className="faden" id="faden">

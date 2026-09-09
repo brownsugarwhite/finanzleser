@@ -1,0 +1,130 @@
+/* =====================================================================================
+   zeitung.css — das Formvokabular der Zeitung
+
+   Vorlage: docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html
+   (Claude Design, 09.09.2026). Der Prototyp arbeitet mit Inline-Styles und harten
+   Hex-Werten; hier stehen dieselben Maße gegen die Tokens aus app/tokens.css.
+
+   🚨 Diese Datei ist ADDITIV. Sie bringt neues Vokabular — Auftritte, Doppellinie,
+   Punktführung, Diagrammformen, Spiele. Was an bestehenden Bausteinen anders aussehen
+   soll, wird in app/faden.css an Ort und Stelle geändert, nicht von hier überschrieben.
+   Eine Override-Schicht über 916 gewachsene Zeilen wäre ein Spezifitätskrieg mit
+   doppelter Buchführung.
+
+   Geladen nach faden.css (app/globals.css).
+   ===================================================================================== */
+
+.faden-shell {
+  /* Bewegung. `--tempo` skaliert jede Dauer: ruhig 1.35 · normal 1 · lebhaft .65. */
+  --tempo: 1;
+  --kurve: cubic-bezier(.2, .8, .2, 1);
+  --schwung: cubic-bezier(.34, 1.56, .64, 1);
+  --schwung-weit: cubic-bezier(.34, 1.5, .64, 1);
+
+  /* Zeitungsfarben, die es in tokens.css nicht gibt (Design A v2). */
+  --gruen-hell: #a9e07c;
+  --tuerkis: #0B7F66;
+  --tuerkis-hell: #06D496;
+  --papier-brett: #f4f2ec;
+}
+
+/* ---------- Ebenen ----------
+   🚨 Das z-index-Budget an EINER Stelle, sonst landet das Registerblatt unter der
+   mobilen Schublade. Bestand aus faden.css: kopfblur 29 · kopf 30 · bmenu 45 ·
+   menue/toast/flug 60 · schublade 69 · rand.mobil 70 · seite 80. */
+.faden-shell { --z-blatt-hof: 57; --z-blatt: 59; --z-lesezeichen: 63; }
+
+/* =====================================================================================
+   Auftritte (lib/faden/erscheinen.ts)
+   ===================================================================================== */
+
+/* Der Grundzustand hängt am Attribut der Hülle, das erst der Client setzt … */
+.faden-shell[data-erscheinen] [data-erscheint]:not(.ist-da) { opacity: 0; }
+
+/* … und die einzelnen Arten am fertigen Zustand. Kein Inline-Style: der würde beim
+   Einfrieren eines Kapitels mitwandern (lib/faden/schnappschuss.ts). */
+.faden-shell [data-erscheint="herz"].ist-da,
+.faden-shell [data-erscheint="kopf"].ist-da { animation: fl-herz calc(.9s * var(--tempo)) var(--kurve) both; }
+.faden-shell [data-erscheint="gleiten"].ist-da { animation: fl-gleiten calc(.9s * var(--tempo)) var(--kurve) both; }
+.faden-shell [data-erscheint="stufen"].ist-da { opacity: 1; }
+.faden-shell [data-erscheint="stufen"].ist-da > * { animation: fl-herz calc(.9s * var(--tempo)) var(--kurve) calc(var(--i, 0) * .09s * var(--tempo)) both; }
+
+/* Zierlinien und Spark im Kapitelkopf ziehen mit hoch. */
+.faden-shell [data-erscheint] [data-linie] { transform: scaleX(0); }
+.faden-shell [data-erscheint].ist-da [data-linie] { animation: fl-linie calc(1.1s * var(--tempo)) var(--kurve) .1s both; }
+.faden-shell [data-erscheint] [data-spark] { opacity: 0; }
+.faden-shell [data-erscheint].ist-da [data-spark] { animation: fl-spark calc(1s * var(--tempo)) var(--schwung) .45s both; }
+
+/* Gezeichnete Pfade: `pathLength="1"` am SVG vorausgesetzt, `--i` setzt erscheinen.ts. */
+.faden-shell [data-zeichnen] { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.faden-shell .ist-da [data-zeichnen] { animation: fl-zeichnen calc(1.6s * var(--tempo)) var(--kurve) calc(.2s + var(--i, 0) * .4s) both; }
+
+/* =====================================================================================
+   Die 22 Bewegungen (Herzschlag-Prinzip: hin, ein Stück zurück, ankommen)
+   ===================================================================================== */
+
+@keyframes fl-herz { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 55% { opacity: 1; transform: translateY(-2px) scale(1.008); } 78% { transform: translateY(1px) scale(.999); } 100% { opacity: 1; transform: none; } }
+@keyframes fl-gleiten { 0% { opacity: 0; transform: translateX(-24px); } 60% { opacity: 1; transform: translateX(3px); } 80% { transform: translateX(-1px); } 100% { opacity: 1; transform: none; } }
+@keyframes fl-linie { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-spark { 0% { transform: scale(0) rotate(-40deg); opacity: 0; } 60% { transform: scale(1.3) rotate(8deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes fl-puls { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 161, 23, .5); } 14% { transform: scale(1.2); } 28% { transform: scale(1); } 42% { transform: scale(1.12); } 64% { transform: scale(1); box-shadow: 0 0 0 10px rgba(69, 161, 23, 0); } }
+@keyframes fl-flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(-90deg); } 100% { transform: rotateX(0); } }
+@keyframes fl-stempel { 0% { transform: scale(1.7) rotate(-22deg); opacity: 0; } 60% { transform: scale(.94) rotate(-8deg); opacity: 1; } 100% { transform: scale(1) rotate(-11deg); opacity: 1; } }
+@keyframes fl-zeichnen { to { stroke-dashoffset: 0; } }
+@keyframes fl-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes fl-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes fl-kippen { 0% { opacity: 0; transform: perspective(900px) rotateX(-78deg) translateY(10px); } 60% { opacity: 1; transform: perspective(900px) rotateX(6deg); } 80% { transform: perspective(900px) rotateX(-2deg); } 100% { opacity: 1; transform: none; } }
+@keyframes fl-letter { 0% { opacity: 0; transform: translateY(-16px) scale(1.15); } 55% { opacity: 1; transform: translateY(2px) scale(.98); } 100% { opacity: 1; transform: none; } }
+@keyframes fl-zettel { 0% { opacity: 0; transform: translateX(26px) rotate(3deg); } 60% { opacity: 1; transform: translateX(-2px) rotate(-.6deg); } 100% { opacity: 1; transform: rotate(var(--rot, 0deg)); } }
+@keyframes fl-knoten { 0% { transform: scale(0); } 60% { transform: scale(1.5); } 100% { transform: scale(1); } }
+@keyframes fl-druck { 0% { opacity: 0; transform: translateY(7px); letter-spacing: .06em; filter: blur(.6px); } 60% { opacity: 1; letter-spacing: .01em; filter: blur(0); } 100% { opacity: 1; transform: none; letter-spacing: normal; } }
+@keyframes fl-spalte { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes fl-mitte { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-ohr { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-2px, -2px); } }
+@keyframes fl-toast { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes fl-atmen { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes fl-spin { to { transform: rotate(360deg); } }
+@keyframes fl-tipp { 0%, 80%, 100% { transform: scale(.6); opacity: .35; } 40% { transform: scale(1); opacity: 1; } }
+@keyframes fl-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* =====================================================================================
+   🚨 Rücknahmen für reduzierte Bewegung
+
+   app/faden.css:29 schaltet unter `.faden-shell` JEDE Animation und Transition per
+   `!important` ab. Das ist richtig so — aber jede Bewegung dieser Datei hat einen
+   UNSICHTBAREN Grundzustand: `opacity:0`, `scaleX(0)` an den Zierlinien,
+   `stroke-dashoffset:1` an gezeichneten Pfaden, `rotateX(-88deg)` am Registerblatt.
+   Ohne die Rücknahmen bliebe für diese Leser der halbe Faden leer und das Menü öffnete
+   unsichtbar. Wer hier eine Bewegung ergänzt, deren Anfang nicht sichtbar ist, ergänzt
+   auch die Rücknahme.
+
+   erscheinen.ts fährt in diesem Fall gar keinen Beobachter mehr, sondern setzt `ist-da`
+   und `ist-an` sofort — die Regeln hier sind der Gürtel zum Hosenträger.
+   ===================================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell [data-erscheint],
+  .faden-shell [data-erscheint] > *,
+  .faden-shell [data-linie],
+  .faden-shell [data-spark] { opacity: 1 !important; transform: none !important; }
+  .faden-shell [data-zeichnen] { stroke-dashoffset: 0 !important; }
+}
+
+/* =====================================================================================
+   Zeitungs-Bausteine
+   ===================================================================================== */
+
+/* Doppellinie: 2 px, 2 px Luft, 1 px. Zeitungskopf, Tabellenkopf, Randspaltenkopf.
+   Als Rahmen des Elements selbst, damit sie keine eigene Box im Fluss braucht. */
+.faden-shell .doppellinie { border-bottom: 1px solid var(--ink); box-shadow: 0 -3px 0 0 var(--ink) inset; height: 3px; }
+.faden-shell .doppellinie--oben { border-bottom: 0; border-top: 2px solid var(--ink); box-shadow: 0 3px 0 -2px var(--ink) inset; }
+/* Zeichnet sich von der Mitte nach außen (Registerblatt, Kapitelkopf). */
+.faden-shell .ist-da > .doppellinie,
+.faden-shell .ist-da > * > .doppellinie { transform-origin: center; animation: fl-mitte calc(.8s * var(--tempo)) var(--kurve) .15s both; }
+
+/* Punktführung: Inhaltsverzeichnis, Kennzahlen, Bestenlisten. Der Versatz nach oben
+   setzt die Punkte auf die Grundlinie der Schrift statt unter sie. */
+.faden-shell .fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted rgba(51, 74, 39, .4); transform: translateY(-4px); }
+
+/* Zahlen in Tabellen und Ergebnissen laufen untereinander. */
+.faden-shell .ziffern { font-variant-numeric: tabular-nums; }

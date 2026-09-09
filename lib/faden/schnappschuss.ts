@@ -11,6 +11,20 @@
  * drei `querySelectorAll`-Durchläufe darüber.
  */
 
+/**
+ * Stand des Markups, das eingefroren wird.
+ *
+ * 🚨 Ein Schnappschuss ist eine Zeichenkette in `sessionStorage` — bis zu acht Kapitel,
+ * die einen Neuladen überleben. Ändert sich das Markup eines Kapitels (neue Klassen,
+ * neue Attribute, andere Struktur), passen die alten Zeichenketten nicht mehr zum
+ * aktuellen CSS: sie kämen mit halbem Zeitungssatz oder unsichtbar zurück. Diese Zahl
+ * hochzählen, sobald das passiert — der Verlauf behält dann Kopfzeile und Titel und
+ * bietet „Erneut öffnen" an (Strom.tsx), statt kaputt aufzuklappen.
+ *
+ * 2 · 09.09.2026 — Auftritte (`data-erscheint`), Zeitungssatz Design A v2.
+ */
+export const MARKUP_V = 2;
+
 /** Roh-HTML des lebenden Kapitels (ein nativer Lesezugriff, sonst nichts). */
 export function greifen(live: HTMLElement): string {
   const inhalt = live.querySelector(".kapitel__inhalt") || live;
