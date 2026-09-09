@@ -9,7 +9,6 @@
  */
 import { useEffect, useRef } from "react";
 import { kopfHoehe } from "@/lib/faden/scrollen";
-import { usePathname } from "next/navigation";
 import { useAbschnittAktiv } from "@/lib/faden/useAbschnittAktiv";
 import { useFaden } from "./FadenProvider";
 import WochenbriefForm from "./WochenbriefForm";
@@ -24,8 +23,7 @@ export function zuAbschnitt(id: string) {
 
 export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
   const { verlauf, kapitelNr, kapitelUmschalten } = useFaden();
-  const pathname = usePathname();
-  const { titel, toc, aktiv, vorhanden } = useAbschnittAktiv(pathname);
+  const { titel, toc, aktiv, vorhanden } = useAbschnittAktiv();
   // Neuer Verlaufseintrag leuchtet kurz (Prototyp 05-js-neu.html listeAktualisieren).
   const vorherigeZahl = useRef(verlauf.length);
   useEffect(() => {

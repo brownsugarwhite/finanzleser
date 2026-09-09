@@ -97,3 +97,34 @@ export function angehaengt(node: HTMLElement | null, opts: { immer?: boolean; le
   merkeKnoten(node);
   if (darf && !opts.leise) zeigeAnfang(node, !!opts.immer);
 }
+
+/**
+ * Wie `zeigeAnfang`, aber mit einer Nachkorrektur.
+ *
+ * 🚨 Grund: Der Faden springt zu einem Kapitel, das noch strömt. Wächst der Inhalt
+ * darüber nach dem Sprung — oder war das Dokument im Moment des Sprungs noch zu kurz,
+ * sodass der Browser das Ziel auf das Seitenende gekappt hat —, steht der Kapitelanfang
+ * hinterher nicht unter dem Kopf, sondern dahinter. Gemessen: 16 bis 67 px daneben.
+ *
+ * Deshalb einmal nachmessen, sobald sich das Layout beruhigt hat. Wer in der Zwischenzeit
+ * selbst scrollt (Rad, Wischen, Tasten), behält die Kontrolle — dann wird nicht korrigiert.
+ */
+export function zeigeAnfangStabil(node: HTMLElement | null, immer = false, nachMs = 500): void {
+  if (!node) return;
+  zeigeAnfang(node, immer);
+  let eingegriffen = false;
+  const stop = () => { eingegriffen = true; };
+  const opts: AddEventListenerOptions = { passive: true };
+  window.addEventListener("wheel", stop, opts);
+  window.addEventListener("touchmove", stop, opts);
+  window.addEventListener("keydown", stop, opts);
+  setTimeout(() => {
+    window.removeEventListener("wheel", stop);
+    window.removeEventListener("touchmove", stop);
+    window.removeEventListener("keydown", stop);
+    if (eingegriffen || !document.contains(node)) return;
+    const ab = node.getBoundingClientRect().top - (kopfHoehe() + 12);
+    if (Math.abs(ab) <= 4) return;
+    window.scrollTo({ top: Math.max(0, window.scrollY + ab), behavior: reduziert() ? "auto" : "smooth" });
+  }, nachMs);
+}

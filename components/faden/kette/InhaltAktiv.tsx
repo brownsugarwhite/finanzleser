@@ -12,7 +12,7 @@ import { zuAbschnitt } from "@/components/faden/RandLinks";
 
 export default function InhaltAktiv() {
   const pathname = usePathname();
-  const { aktiv } = useAbschnittAktiv(pathname);
+  const { aktiv } = useAbschnittAktiv();
 
   useEffect(() => {
     document.querySelectorAll<HTMLElement>("#kapitel-live .inhalt__zeile").forEach((li) => {
@@ -21,20 +21,21 @@ export default function InhaltAktiv() {
     });
   }, [aktiv, pathname]);
 
+  // 🚨 Am Dokument, nicht am Kapitel: `usePathname()` wechselt, bevor das neue Kapitel im
+  // DOM steht — ein Listener auf `#kapitel-live` hing danach an einem Knoten, der gleich
+  // verschwand, und das neue Kapitel bekam gar keinen.
   useEffect(() => {
-    const nav = document.getElementById("kapitel-live");
-    if (!nav) return;
     const h = (ev: Event) => {
-      const a = (ev.target as Element | null)?.closest?.("a[href^='#']");
+      const a = (ev.target as Element | null)?.closest?.("#kapitel-live a[href^='#']");
       if (!a) return;
       ev.preventDefault();
       const id = (a.getAttribute("href") || "").slice(1);
       zuAbschnitt(id);
       try { history.replaceState(null, "", `#${id}`); } catch { /* egal */ }
     };
-    nav.addEventListener("click", h);
-    return () => nav.removeEventListener("click", h);
-  }, [pathname]);
+    document.addEventListener("click", h);
+    return () => document.removeEventListener("click", h);
+  }, []);
 
   return null;
 }

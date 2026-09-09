@@ -24,6 +24,26 @@ import { fadenZiel, istHier } from "./ziel";
 
 /** Höchstens so viele Ziele je Seite auf Verdacht (Absichts-Prefetches zählen nicht mit). */
 const VORRAT_MAX = 8;
+/** So lange gilt ein Ziel als geholt. Danach darf es wieder — Nexts Router-Cache läuft ebenfalls ab. */
+const FRISCH_MS = 60_000;
+
+/**
+ * Geholte Ziele über Kapitelwechsel hinweg. Modulweit, nicht je Hook-Lauf: sonst
+ * beginnt bei jedem Kapitelwechsel eine neue Liste und dieselben Ziele werden wieder
+ * und wieder geholt.
+ */
+const geholt = new Map<string, number>();
+
+function schonGeholt(ziel: string): boolean {
+  const t = geholt.get(ziel);
+  if (t && Date.now() - t < FRISCH_MS) return true;
+  return false;
+}
+
+function vormerken(ziel: string): void {
+  if (geholt.size > 300) geholt.clear();
+  geholt.set(ziel, Date.now());
+}
 
 interface Verbindung { saveData?: boolean; effectiveType?: string }
 
@@ -42,15 +62,14 @@ export function useFadenPrefetch(pathname: string): void {
   const router = useRouter();
 
   useEffect(() => {
-    const geholt = new Set<string>();
     const warteschlange: string[] = [];
     let vorrat = 0;
     let laeuft = false;
     let abgebaut = false;
 
     const holen = (ziel: string) => {
-      if (abgebaut || geholt.has(ziel) || istHier(ziel)) return;
-      geholt.add(ziel);
+      if (abgebaut || schonGeholt(ziel) || istHier(ziel)) return;
+      vormerken(ziel);
       try { router.prefetch(ziel.split("#")[0]); } catch { /* Prefetch ist Kür, nie Pflicht */ }
     };
 
@@ -59,7 +78,7 @@ export function useFadenPrefetch(pathname: string): void {
       if (abgebaut) return;
       const ziel = warteschlange.shift();
       if (!ziel) return;
-      if (vorrat < VORRAT_MAX && !geholt.has(ziel)) { vorrat += 1; holen(ziel); }
+      if (vorrat < VORRAT_MAX && !schonGeholt(ziel)) { vorrat += 1; holen(ziel); }
       if (warteschlange.length) anstossen();
     };
     const anstossen = () => { if (!laeuft) { laeuft = true; imLeerlauf(abarbeiten); } };
@@ -83,7 +102,7 @@ export function useFadenPrefetch(pathname: string): void {
           if (!e.isIntersecting) continue;
           io?.unobserve(e.target);
           const ziel = fadenZiel(e.target as HTMLAnchorElement);
-          if (ziel && !geholt.has(ziel)) warteschlange.push(ziel);
+          if (ziel && !schonGeholt(ziel)) warteschlange.push(ziel);
         }
         if (warteschlange.length) anstossen();
       }, { rootMargin: "200px" });

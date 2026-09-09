@@ -10,7 +10,7 @@
  * echte Navigation (Schnappschuss fällt weg, weil das Ziel wieder lebt).
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { zeigeAnfang, merkeKnoten } from "@/lib/faden/scrollen";
+import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten } from "@/lib/faden/scrollen";
 import { greifen } from "@/lib/faden/schnappschuss";
 import { fadenZiel, istHier } from "@/lib/faden/ziel";
 import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
@@ -148,7 +148,8 @@ export function zumKapitelScrollen(): void {
   const live = document.getElementById("kapitel-live");
   if (!live) return;
   merkeKnoten(live);
-  zeigeAnfang(live, true);
+  // Stabil, weil das Kapitel beim Sprung oft noch strömt (siehe zeigeAnfangStabil).
+  zeigeAnfangStabil(live, true);
 }
 
 export default function FadenProvider({ children, level = LEVEL_STANDARD }: { children: ReactNode; level?: Level[] }) {

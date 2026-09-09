@@ -110,7 +110,13 @@ export default async function RootLayout({
           }}
         />
         <LandingBodyAttr />
-        <RouteChangeRefresh />
+        {/* 🚨 Nur die alte Seite. RouteChangeRefresh baut bei jedem Routenwechsel die
+            ScrollTrigger von LogoBar, BookmarkNav und LeoIcon neu auf — Komponenten, die
+            es im Faden gar nicht gibt. Schlimmer: ScrollTrigger.refresh() merkt sich die
+            Scrollposition und stellt sie wieder her. Im Faden lief es damit genau gegen
+            den Sprung ans neue Kapitel: der Faden scrollte hin, refresh() holte zurück
+            an den Seitenanfang. */}
+        {!FADEN_AKTIV && <RouteChangeRefresh />}
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
         {!FADEN_AKTIV && (

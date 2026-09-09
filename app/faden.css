@@ -335,10 +335,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
 .faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
 .faden-shell .landing-sub { align-self: start; margin: 30px auto 0; font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 44ch; will-change: opacity, transform; }
-.faden-shell .rand { transition: opacity .3s ease; }
-body.faden-hero-sichtbar .faden-shell .rand { opacity: 0; pointer-events: none; }
-.faden-shell .eingabe { transition: opacity .25s ease; }
-body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
+/* 🚨 Hier stand ein Ein-/Ausblenden von Randspalten und Eingabe, gesteuert über
+   body.faden-hero-sichtbar (HeroLanding setzt die Klasse, solange der Hero im Bild ist).
+   Der Prototyp hat so etwas nicht: Ränder und Eingabeleiste stehen von Anfang an da, die
+   Ränder kleben (.rand__innen, position: sticky) und die Anzeige in .rand__fuss wandert
+   erst mit dem Ende des Fadens hoch. Unsichtbar ist im Prototyp allein #fadenPille,
+   solange die Kopie der Suchpille aus dem Hero dorthin fliegt — das steuert HeroLanding
+   bereits selbst (ziel.style.opacity in flug()).
+   Die Body-Klasse bleibt: MobilAnker wertet sie weiter aus. */
 .faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
 
 /* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
