@@ -422,20 +422,23 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten--inline .kicker { margin-bottom: 2px; }
 .faden-shell .kasten ul.dokumente { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .faden-shell .kasten ul.dokumente li { display: flex; gap: 10px; align-items: center; font-size: 14.5px; }
-.faden-shell .krumen { font-size: 12px; color: var(--muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.faden-shell .krumen a { color: var(--muted); font-size: 12px; font-weight: 600; text-decoration: none; }
+.faden-shell .krumen { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font: 500 12.5px var(--sans); color: var(--muted); }
+.faden-shell .krumen a { color: var(--muted); font: 500 12.5px var(--sans); text-decoration: none; }
 .faden-shell .krumen a:hover { color: var(--green-ink); text-decoration: underline; }
 .faden-shell .krumen__trenner { margin-right: 6px; }
 
 /* ---------- Ratgeber als Kette ---------- */
 .faden-shell .artikel { display: grid; gap: 14px; }
-.faden-shell .artikel__titel { font: italic 400 21px/1.3 var(--serif); color: var(--pink); margin: 0; }
-.faden-shell .artikel__untertitel { font-size: clamp(26px, 3.2vw, 36px); font-weight: 900; line-height: 1.18; margin: -6px 0 0; }
-.faden-shell .artikel .vorspann { font-family: var(--serif); font-style: italic; font-size: 17px; max-width: 60ch; margin: 0; }
-.faden-shell .autor { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
-.faden-shell .autor-ring { width: 36px; height: 36px; border-radius: 50%; padding: 2px; background: var(--gradient-author-6, linear-gradient(45deg, #f09433, #dc2743, #bc1888)); display: block; flex: none; }
+/* Werte aus dem Quelltext der Vorlage (Kapitel 3, Zeilen 559–566) — nicht gemessen, gelesen. */
+.faden-shell .artikel__titel { font: italic 500 clamp(16px, 1.4vw, 19px) var(--serif); color: var(--pink); margin: 18px 0 4px; }
+.faden-shell .artikel__untertitel { font: 900 clamp(28px, 3.4vw, 44px)/1.1 var(--serif); letter-spacing: -.01em; text-wrap: balance; margin: 0 0 14px; }
+.faden-shell .artikel .vorspann { font: italic 300 clamp(16px, 1.35vw, 19px)/1.5 var(--serif); color: var(--ink); max-width: 60ch; margin: 0 0 18px; }
+.faden-shell .autor { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; font: 400 13px var(--sans); color: var(--muted); padding: 12px 0; border-top: 1px solid rgba(51,74,39,.16); border-bottom: 1px solid rgba(51,74,39,.16); }
+.faden-shell .autor b { color: var(--ink); }
+.faden-shell .autor-ring { width: 34px; height: 34px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, var(--green), var(--tuerkis-hell)); display: inline-flex; flex: none; }
 .faden-shell .autor-ring img { width: 100%; height: 100%; border-radius: 50%; background: var(--paper); border: 2px solid var(--paper); object-fit: cover; display: block; }
-.faden-shell .autor img.uhr { width: 13px; height: 13px; opacity: .7; margin-left: 6px; }
+/* Die Lesezeit steht rechts außen, abgesetzt von Autor und Datum. */
+.faden-shell .autor img.uhr { width: 14px; height: 14px; opacity: .7; margin-left: auto; }
 .faden-shell .artikel figure { margin: 0; display: grid; grid-template-columns: 1fr; gap: 8px; }
 .faden-shell .artikel figure .bild { aspect-ratio: 16 / 9; background: var(--fill-1); display: grid; place-items: center; border-radius: 2px; overflow: hidden; }
 .faden-shell .artikel figure .bild img { width: 64px; height: 64px; opacity: .6; }
@@ -443,7 +446,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .artikel figure figcaption { font-size: 12.5px; color: var(--muted); font-style: italic; }
 .faden-shell .einleitung { display: grid; gap: 6px; }
 .faden-shell .einleitung__titel { font-size: 21px; margin: 6px 0 2px; }
-.faden-shell .inhalt { display: grid; gap: 10px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0 14px; }
+.faden-shell .inhalt { display: grid; gap: 8px; border-top: 1px solid var(--ink); border-bottom: 0; padding: 10px 0 0; margin-top: 26px; }
 /* ---------- Aus dem Inhalt ----------
    Der Zeitungsindex: Nummer, Titel, Punktführung, Lesedauer. Die Punktführung ersetzt
    die frühere Volllinie mit Pfeilspitze — sie führt das Auge zur Zahl, statt selbst
@@ -460,9 +463,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
 .faden-shell .inhalt__titel { font: 400 15px var(--serif); min-width: 0; }
 .faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
-.faden-shell .abschnitt { position: relative; display: grid; gap: 8px; scroll-margin-top: 110px; }
-.faden-shell .abschnitt__titel { font-size: 24px; line-height: 1.25; }
-.faden-shell .fliess { display: block; }
+.faden-shell .abschnitt { position: relative; display: grid; gap: 8px; scroll-margin-top: 110px; margin-top: 46px; }
+.faden-shell .abschnitt__titel { font: 700 clamp(20px, 1.9vw, 26px)/1.25 var(--serif); margin: 4px 0 14px; }
+/* Fließtext der Vorlage: 400 16px/1.75 Open Sans in Tinte. */
+.faden-shell .fliess { display: block; font: 400 16px/1.75 var(--sans); color: var(--ink); }
 .faden-shell .fliess::after { content: ""; display: block; clear: both; }
 .faden-shell .fliess__html > :first-child { margin-top: 0 !important; }
 .faden-shell .fliess > .kasten { clear: both; margin: 14px 0 18px; }
@@ -491,14 +495,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    🚨 Nur an `p:first-child`: beginnt der Block mit Liste oder Überschrift, gibt es
    keine Initiale statt einer verunglückten (::first-letter greift dort nicht sinnvoll). */
 .faden-shell .zeitung--initiale > p:first-child::first-letter {
+  /* Werte aus dem Quelltext der Vorlage: `float:left; font:900 60px/.78 Merriweather;
+     padding:6px 8px 0 0`. Vorher stand hier 700/3.6em/.84 — die Initiale war leichter,
+     kleiner und saß anders im Satz. */
   float: left;
-  font-family: var(--serif);
-  font-weight: 700;
+  font: 900 60px/.78 var(--serif);
   color: var(--ink);
-  font-size: 3.6em;
-  line-height: .84;
-  padding-right: .07em;
-  margin-top: .02em;
+  padding: 6px 8px 0 0;
 }
 
 .faden-shell .faq-kopf { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 700; font-size: 22px; }
