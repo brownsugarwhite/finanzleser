@@ -13,20 +13,22 @@ import { NavProvider } from "@/lib/NavContext";
 import type { NavItem } from "@/lib/NavContext";
 import type { MegamenuPreload } from "@/lib/wordpress";
 import type { Level } from "@/lib/faden/optionen";
+import type { HeroZahlen } from "./hero/HeroLanding";
 import FadenShell from "./FadenShell";
 
 export default function FadenHuelle({
-  children, navItems, megamenuPreload, level,
+  children, navItems, megamenuPreload, level, heroZahlen,
 }: {
   children: ReactNode;
   navItems: NavItem[];
   megamenuPreload: MegamenuPreload;
   level?: Level[];
+  heroZahlen?: HeroZahlen;
 }) {
   return (
     <Providers>
       <NavProvider items={navItems}>
-        <FadenShell nav={navItems} preload={megamenuPreload} level={level}>{children}</FadenShell>
+        <FadenShell nav={navItems} preload={megamenuPreload} level={level} heroZahlen={heroZahlen}>{children}</FadenShell>
       </NavProvider>
     </Providers>
   );

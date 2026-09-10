@@ -14,6 +14,7 @@ import type { KassensturzDaten, KassensturzFrage } from "@/lib/faden/optionen";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 import Ikon from "./Ikon";
+import { LeoRede } from "@/components/faden/leo/Blase";
 import Tacho from "./Tacho";
 import { type Antworten, KASSENSTURZ_URL, betrag, datumLang, ergebnis, heuteLokal, ikonFuer, istSchaetzfrage, naechsterIndex, offeneFragen, schaetzPunkte, standLesen, standSchreiben } from "./logik";
 
@@ -49,7 +50,7 @@ function Karten({ daten, f, gewaehlt, onKlick }: { daten: KassensturzDaten; f: K
       {(f.optionen || []).map((o, i) => (
         <button key={o} type="button" className={"ks__karte" + (gewaehlt(o) ? " gewaehlt" : "")} style={{ animationDelay: `${i * 60}ms` }} onClick={() => onKlick(o)} aria-pressed={gewaehlt(o)}>
           <Ikon name={ikonFuer(daten, f, o)} />
-          <span>{o}</span>
+          <b>{o}</b>
         </button>
       ))}
     </div>
@@ -57,6 +58,11 @@ function Karten({ daten, f, gewaehlt, onKlick }: { daten: KassensturzDaten; f: K
 }
 
 /** Schätzfrage mit Regler: Tipp abgeben, Auflösung mit Quelle, dann Weiter. */
+/** Lage eines Werts auf der Bahn in Prozent. */
+function anteil(w: number, min: number, max: number): number {
+  return max > min ? Math.max(0, Math.min(100, ((w - min) / (max - min)) * 100)) : 0;
+}
+
 function SchaetzFrage({ f, onTipp, onWeiter }: { f: KassensturzFrage; onTipp: (wert: number, punkte: number) => void; onWeiter: (wert: number) => void }) {
   const min = f.min ?? 0, max = f.max ?? 100, schritt = f.schritt ?? 10;
   const einheit = f.einheit ?? "€";
@@ -69,14 +75,27 @@ function SchaetzFrage({ f, onTipp, onWeiter }: { f: KassensturzFrage; onTipp: (w
   return (
     <>
       <div className="ks__frage">{f.text}</div>
-      <div className="ks__schaetz">{betrag(wert, einheit)}</div>
-      <input type="range" min={min} max={max} step={schritt} value={wert} disabled={aufgeloest} aria-label="Schätzung" onChange={(e) => setWert(+e.target.value)} />
+      <div className={"ks__regler" + (aufgeloest ? " ist-auf" : "")}>
+        <div className="ks__bahn">
+          <input type="range" min={min} max={max} step={schritt} value={wert} disabled={aufgeloest} aria-label="Schätzung" onChange={(e) => setWert(+e.target.value)} style={{ ["--anteil" as string]: `${anteil(wert, min, max)}%` }} />
+          <span className="ks__fahne" style={{ left: `${anteil(wert, min, max)}%` }}>{betrag(wert, einheit)}</span>
+          {aufgeloest && (
+            <>
+              <span className="ks__spanne" style={{ left: `${Math.min(anteil(wert, min, max), anteil(richtig, min, max))}%`, width: `${Math.abs(anteil(richtig, min, max) - anteil(wert, min, max))}%` }} />
+              <span className="ks__wahr" style={{ left: `${anteil(richtig, min, max)}%` }}><i />{betrag(richtig, einheit)}</span>
+            </>
+          )}
+        </div>
+        <div className="ks__spanneWerte"><span>{betrag(min, einheit)}</span><span>{betrag(max, einheit)}</span></div>
+      </div>
       {!aufgeloest ? (
         <button type="button" className="ks__weiter" onClick={() => { setAufgeloest(true); onTipp(wert, pts); }}>Das ist mein Tipp<i>→</i></button>
       ) : (
         <>
           <div className="ks__aufloesung ks__rein">
-            <b>{betrag(richtig, einheit)}</b>. {abw <= 100 ? `Fast genau getroffen, ${pts} Punkte.` : abw <= 400 ? `Nah dran, ${pts} Punkte.` : "Weiter weg, als die meisten denken."}
+            <b>{abw <= 100 ? "Fast genau getroffen." : abw <= 400 ? "Nah dran." : "Weiter weg, als die meisten denken."}</b>{" "}
+            Richtig sind {betrag(richtig, einheit)} — Sie lagen {betrag(abw, einheit)} daneben.
+            <span className="ks__genau">{pts} Punkte</span>
             {f.quelle && <small>{f.quelle}</small>}
           </div>
           <button type="button" className="ks__weiter ks__rein" onClick={() => onWeiter(wert)}>Weiter<i>→</i></button>
@@ -94,6 +113,7 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
   const [idx, setIdx] = useState(() => naechsterIndex(fragen, 0, {}));
   const [stand, setStand] = useState(() => standFuer(fragen, naechsterIndex(fragen, 0, {}), {}));
   const [buehne, setBuehne] = useState("");
+  const [mail, setMail] = useState("");
   const [datum, setDatum] = useState("");
   const gesperrt = useRef(false); // eine Einzelwahl je Frage, bis die Bühne gewechselt hat
   const timer = useRef<number[]>([]);
@@ -200,10 +220,12 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
     <div className={"kasten kasten--pink kasten--ks" + (fertig ? " fertig" : "")} id="kassensturz" ref={kastenRef}>
       <div className="ks">
         <div className="ks__kopf">
-          <span className="kicker kicker--pink">{daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
+          <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
           <span className="ks__stand">{stand.text}</span>
         </div>
-        <div className="ks__fortschritt"><i style={{ width: `${stand.breite}%` }} /></div>
+        {/* Fortschritt wie in den Checklisten: Haarlinie über die volle Breite,
+            darauf ein Balken, der von links mitwächst. */}
+        <div className="ks__fortschritt" aria-hidden="true"><i style={{ width: `${stand.breite}%` }} /></div>
         <div className={"ks__buehne" + (buehne ? ` ${buehne}` : "")}>
           {frage && istSchaetzfrage(frage) && (
             <SchaetzFrage key={frage.id} f={frage} onTipp={(w, p) => tipp(frage, w, p)} onWeiter={(w) => naechste({ ...antworten, [frage.id]: w }, idx + 1)} />
@@ -264,13 +286,18 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
                 <button type="button" className="textlink textlink--still" onClick={() => inDenKoffer(`Kassensturz vom ${datumLang(datum || heuteLokal())}`)}>In den Aktenkoffer</button>
                 <button type="button" className="textlink textlink--still" onClick={neuStarten}>Neu starten</button>
               </div>
-              <div className="ks__nachher ks__rein" style={verzug(5)}>
-                <span className="ks__erg-ikon"><Ikon name="mail" /></span>
-                <p><b>Soll ich Ihnen das als PDF schicken?</b> Dann erinnere ich Sie in sechs Monaten daran, den Kassensturz zu wiederholen, mit Vorher-nachher-Vergleich. Die Zahlen ändern sich jedes Jahr.</p>
-                <div className="ks__feld">
-                  <button type="button" className="btn btn--primary" onClick={() => toast(PLUS_HINWEIS)}>Per E-Mail</button>
-                  <button type="button" className="btn" onClick={() => toast(PLUS_HINWEIS)}><Ikon name="flieger" /> Per WhatsApp</button>
-                </div>
+              <div className="wort wort--leo ks__nachher ks__rein" style={verzug(5)}>
+                <span className="kicker kicker--gruen">Leo</span>
+                <LeoRede>
+                  <p>Soll ich Ihnen das als PDF schicken? Dann erinnere ich Sie in sechs Monaten daran, den Kassensturz zu wiederholen — mit Vorher-nachher-Vergleich. Die Zahlen ändern sich jedes Jahr.</p>
+                </LeoRede>
+                <form className="ks__zustellung" onSubmit={(e) => { e.preventDefault(); toast(PLUS_HINWEIS); }}>
+                  <div className="ks__feld">
+                    <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail für das Kassensturz-PDF" value={mail} onChange={(e) => setMail(e.target.value)} />
+                    <button type="submit" className="ks__senden">Schicken</button>
+                  </div>
+                  <button type="button" className="ks__wa" onClick={() => toast(PLUS_HINWEIS)}><Ikon name="flieger" /> Lieber per WhatsApp</button>
+                </form>
               </div>
             </>
           )}

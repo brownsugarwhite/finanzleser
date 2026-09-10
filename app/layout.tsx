@@ -5,6 +5,7 @@ import LandingBodyAttr from "@/components/ui/LandingBodyAttr";
 import { JsonLd, organizationSchema, websiteSchema } from "@/components/seo/JsonLd";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { getWerkzeugZahlen } from "@/lib/faden/werkzeugIndex";
 import { getFadenOptionen } from "@/lib/faden/optionen";
 import Huelle from "@/components/layout/Huelle";
 import "./globals.css";
@@ -86,7 +87,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [navItems, siteSettings, megamenuPreload, fadenOptionen] = await Promise.all([
+  const [navItems, siteSettings, megamenuPreload, fadenOptionen, heroZahlen] = await Promise.all([
     getNavItems(),
     // Nur die alte Hülle braucht sie (TopBanner). Im Faden entfällt damit ein REST-Aufruf
     // je Render; die Werbeschalter holt sich ArticleLayout im Nicht-Faden-Zweig selbst.
@@ -96,6 +97,9 @@ export default async function RootLayout({
     // Fangnetz erlaubt (CLAUDE.md, Falle 2, Ausnahme): reine Verbesserung, keine Existenz-Entscheidung —
     // ohne Antwort gelten die Standardstufen, und kein 404/Canonical hängt daran.
     FADEN_AKTIV ? getFadenOptionen().catch(() => null) : Promise.resolve(null),
+    // Zahlen für den Landing-Hero. Der Hero gehört der Hülle, nicht der Startseite —
+    // er bleibt oben im Faden stehen, auch wenn der Leser weiterblättert.
+    FADEN_AKTIV ? getWerkzeugZahlen() : Promise.resolve(undefined),
   ]);
 
   return (
@@ -116,7 +120,7 @@ export default async function RootLayout({
         <JsonLd data={websiteSchema()} />
         {/* Die Weiche steckt in einer Client-Komponente — nur dort teilt next/dynamic den
             Chunk. Siehe components/layout/Huelle.tsx. */}
-        <Huelle navItems={navItems} megamenuPreload={megamenuPreload} siteSettings={siteSettings} level={fadenOptionen?.level}>
+        <Huelle navItems={navItems} megamenuPreload={megamenuPreload} siteSettings={siteSettings} level={fadenOptionen?.level} heroZahlen={heroZahlen}>
           {children}
         </Huelle>
       </body>

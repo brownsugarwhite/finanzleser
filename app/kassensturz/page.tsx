@@ -7,14 +7,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
-import { getFadenOptionen, type KassensturzDaten } from "@/lib/faden/optionen";
-import { getBeitragsIndex } from "@/lib/faden/titel";
-import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
-import { buildGlossarUrl } from "@/lib/urls";
+import { getFadenOptionen } from "@/lib/faden/optionen";
 import { buildMetadata } from "@/lib/seo";
-import { decodeHtmlEntities } from "@/lib/html-utils";
 import KartenKapitel from "@/components/faden/KartenKapitel";
-import Kassensturz, { type Ziel } from "@/components/faden/kassensturz/Kassensturz";
+import Kassensturz from "@/components/faden/kassensturz/Kassensturz";
+import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 
 export const revalidate = 86400;
 
@@ -23,35 +20,6 @@ export const metadata: Metadata = buildMetadata({
   description: "Acht Fragen, keine Tastatur, keine Anmeldung: Ihr Profil, Ihre Ampel und die drei größten Lücken, sofort und vollständig, mit passendem Ratgeber und Werkzeug.",
   path: "/kassensturz",
 });
-
-/**
- * Ziele aller Lücken als `typ:slug` → { href, titel }. Beiträge aus dem gecachten
- * Beitragsindex, Werkzeuge aus dem Werkzeugindex — nacheinander, keine Einzelabfragen.
- * Unbekannte Ziele führen zur Suche, damit im Ergebnis nie ein toter Link steht.
- */
-async function zieleAufloesen(d: KassensturzDaten): Promise<Record<string, Ziel>> {
-  const links = (d.luecken || []).flatMap((l) => l.links || []);
-  const out: Record<string, Ziel> = {};
-  if (!links.length) return out;
-  const beitraege = links.some((x) => x.typ === "post") ? await getBeitragsIndex() : null;
-  const werkzeuge = links.some((x) => x.typ !== "post" && x.typ !== "glossar") ? await getWerkzeugIndex() : null;
-  for (const x of links) {
-    const key = `${x.typ}:${x.slug}`;
-    if (out[key]) continue;
-    const text = x.text || x.slug;
-    let ziel: Ziel | undefined;
-    if (x.typ === "post") {
-      const p = beitraege?.get(x.slug);
-      if (p) ziel = { href: p.href, titel: decodeHtmlEntities(p.titel) };
-    } else if (x.typ === "glossar") {
-      ziel = { href: buildGlossarUrl(x.slug), titel: text };
-    } else {
-      ziel = werkzeuge?.get(key);
-    }
-    out[key] = ziel || { href: `/suche?q=${encodeURIComponent(text)}`, titel: text };
-  }
-  return out;
-}
 
 export default async function KassensturzSeite() {
   if (!FADEN_AKTIV) notFound();

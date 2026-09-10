@@ -12,6 +12,9 @@ import { flugZu, reduzierteBewegung } from "@/lib/faden/belohnung";
 import { useFaden } from "./FadenProvider";
 import { zuAbschnitt } from "./RandLinks";
 import FieldOutline from "@/components/ui/FieldOutline";
+import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
+import VersichererSelect from "@/components/ui/VersichererSelect";
+import type { Versicherer } from "@/lib/versicherer";
 import type { IndexEintrag } from "@/lib/faden/index";
 import { holeIndex, indexAusCache } from "@/lib/faden/indexClient";
 
@@ -39,6 +42,11 @@ export function sucheImIndex(index: IndexEintrag[], q: string, max = 8): IndexEi
   return bewertet.sort((a, b) => a.s - b.s || a.e.titel.localeCompare(b.e.titel, "de")).slice(0, max).map((x) => x.e);
 }
 
+/** Maße der Pille — 1:1 aus dem Leo-Chat der Live-Seite (components/ui/LeoIcon.tsx). */
+const PILLE_RADIUS = 35;
+/** Ab hier scrollt das Feld intern, statt weiter zu wachsen (Live: 66 px). */
+const FELD_MAX = 66;
+
 /** Chip unter der Eingabe: Frage an Leo, Adresse, Anker im Kapitel oder ein Ereignis (etwa die Kurzfassung aufklappen). */
 interface EingabeChip { text: string; frage?: string; href?: string; anker?: string; ereignis?: string }
 
@@ -64,7 +72,13 @@ export default function Eingabe() {
   const [offen, setOffen] = useState(false);
   const [aktiv, setAktiv] = useState(-1);
   const wrap = useRef<HTMLDivElement>(null);
+  const pille = useRef<HTMLFormElement>(null);
+  const feld = useRef<HTMLTextAreaElement>(null);
+  const [versicherer, setVersicherer] = useState<Versicherer | null>(null);
   const beschaeftigt = leo.status === "submitted" || leo.status === "streaming";
+  // Auto-Grow wie im Leo-Chat der Live-Seite: Höhe an den Inhalt, dann interner Scroll.
+  const wachsen = (ta: HTMLTextAreaElement) => { ta.style.height = "auto"; ta.style.height = `${Math.min(ta.scrollHeight, FELD_MAX)}px`; };
+  useEffect(() => { if (feld.current) wachsen(feld.current); }, [wert]);
 
   useEffect(() => {
     if (wert.trim().length < 2 || index) return;
@@ -110,8 +124,10 @@ export default function Eingabe() {
     if (zeigeLeiste && aktiv >= 0 && aktiv < treffer.length) { waehlen(treffer[aktiv]); return; }
     leoFragen(wert);
   };
-  const taste = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+  const taste = (ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (ev.key === "Escape") { setOffen(false); setAktiv(-1); return; }
+    // Enter sendet, Umschalt+Enter macht eine neue Zeile — wie im Leo-Chat der Live-Seite.
+    if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); senden(ev); return; }
     if (!zeigeLeiste) return;
     if (ev.key === "ArrowDown") { ev.preventDefault(); setAktiv((a) => Math.min(a + 1, zeilen - 1)); }
     else if (ev.key === "ArrowUp") { ev.preventDefault(); setAktiv((a) => Math.max(a - 1, -1)); }
@@ -121,24 +137,48 @@ export default function Eingabe() {
     <div className={"eingabe" + (zeigeChips ? " mit-chips" : "")}>
       <div className="eingabe__blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
       <div className="suchpille-wrap" id="fadenPille" ref={wrap}>
-        <FieldOutline radius={26} gap={4} />
-        {zeigeLeiste && (
-          <div className="sprung" id="sprung" role="listbox" aria-label="Sprungleiste">
-            <div className="sprung__kopf">{treffer.length ? "Im Bestand" : index ? "Nichts Passendes im Bestand" : "Bestand wird geladen …"}</div>
-            {treffer.map((e, i) => (
-              <button key={e.href + e.typ} type="button" role="option" aria-selected={i === aktiv} className={i === aktiv ? "aktiv" : ""} onMouseEnter={() => setAktiv(i)} onClick={() => waehlen(e)}>
-                <span className="typ">{TYP_LABEL[e.typ]}</span><span>{e.titel}</span>{e.unter && <span className="unter">{e.unter}</span>}
-              </button>
-            ))}
-            <button type="button" role="option" aria-selected={aktiv === treffer.length} className={"frage" + (aktiv === treffer.length ? " aktiv" : "")} onMouseEnter={() => setAktiv(treffer.length)} onClick={() => leoFragen(wert)}>
-              Leo fragen: „{wert.trim()}“
+        <FieldOutline radius={PILLE_RADIUS} gap={4} mess={pille} verankert="unten" />
+        {/* 🚨 Die Pille klebt unten und macht nach OBEN auf (`column-reverse`): die
+            Sprungleiste liegt im selben Kasten, der Kasten wächst nach oben, und der
+            innere Ring fährt mit — wie in der Suche auf der Live-Seite, nur andersherum. */}
+        <form ref={pille} onSubmit={senden} autoComplete="off" className={"suchpille" + (wert || beschaeftigt ? " hat-text" : "") + (zeigeLeiste ? " ist-offen" : "")}>
+          <div className="suchpille__feld">
+            <label className="sr" htmlFor="frage">Fragen Sie Leo oder springen Sie im Bestand</label>
+            <textarea
+              id="frage"
+              ref={feld}
+              rows={1}
+              placeholder={beschaeftigt ? "Leo antwortet …" : "Sende Leo eine Nachricht ..."}
+              autoComplete="off"
+              value={wert}
+              onChange={(e) => { setWert(e.target.value); wachsen(e.currentTarget); setOffen(true); setAktiv(-1); }}
+              onFocus={() => setOffen(true)}
+              onKeyDown={taste}
+              aria-autocomplete="list"
+              aria-expanded={zeigeLeiste}
+            />
+            <div className="suchpille__fuss">
+              <VersichererSelect value={versicherer} onChange={setVersicherer} />
+            </div>
+            <button type="submit" className="suchpille__senden" aria-label={beschaeftigt ? "Antwort stoppen" : "Nachricht senden"}>
+              <LeoChatSendButton status={beschaeftigt ? "streaming" : "ready"} />
             </button>
           </div>
-        )}
-        <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert || beschaeftigt ? " hat-text" : "")}>
-          <label className="sr" htmlFor="frage">Fragen Sie Leo oder springen Sie im Bestand</label>
-          <input id="frage" type="text" placeholder={beschaeftigt ? "Leo antwortet …" : "Was kann ich für Sie tun?"} autoComplete="off" value={wert} onChange={(e) => { setWert(e.target.value); setOffen(true); setAktiv(-1); }} onFocus={() => setOffen(true)} onKeyDown={taste} aria-autocomplete="list" aria-expanded={zeigeLeiste} />
-          <button type="submit" className="senden">{beschaeftigt ? "Stopp" : "Fragen"}</button>
+          <div className="suchpille__leiste" aria-hidden={!zeigeLeiste}>
+            {zeigeLeiste && (
+              <div className="sprung" id="sprung" role="listbox" aria-label="Sprungleiste">
+                <div className="sprung__kopf">{treffer.length ? "Im Bestand" : index ? "Nichts Passendes im Bestand" : "Bestand wird geladen …"}</div>
+                {treffer.map((e, i) => (
+                  <button key={e.href + e.typ} type="button" role="option" aria-selected={i === aktiv} className={i === aktiv ? "aktiv" : ""} onMouseEnter={() => setAktiv(i)} onClick={() => waehlen(e)}>
+                    <span className="typ">{TYP_LABEL[e.typ]}</span><span>{e.titel}</span>{e.unter && <span className="unter">{e.unter}</span>}
+                  </button>
+                ))}
+                <button type="button" role="option" aria-selected={aktiv === treffer.length} className={"frage" + (aktiv === treffer.length ? " aktiv" : "")} onMouseEnter={() => setAktiv(treffer.length)} onClick={() => leoFragen(wert)}>
+                  Leo fragen: „{wert.trim()}“
+                </button>
+              </div>
+            )}
+          </div>
         </form>
       </div>
       {chips.length > 0 && (

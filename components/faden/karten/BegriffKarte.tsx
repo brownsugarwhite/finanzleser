@@ -9,7 +9,7 @@ import { neuerKontext, verlinke } from "@/lib/faden/verlinken";
 import { medienHtml } from "@/lib/faden/medien";
 import GlossarDaten from "@/components/faden/glossar/GlossarDaten";
 import BegriffMerken from "@/components/faden/glossar/BegriffMerken";
-import { FrageBlase, LeoBlase } from "@/components/faden/leo/Blase";
+import { FrageBlase, LeoRede } from "@/components/faden/leo/Blase";
 
 export default async function BegriffKarte({ eintrag }: { eintrag: GlossarEintrag }) {
   const index = await getGlossarIndex();
@@ -37,14 +37,14 @@ export default async function BegriffKarte({ eintrag }: { eintrag: GlossarEintra
       </div>
       {daten.frage && (
         <div className="begriff-k__leo">
-          <div className="wort wort--frage"><span className="kicker">Dazu wird oft gefragt</span><FrageBlase><p>{daten.frage}</p></FrageBlase></div>
+          <div className="wort wort--frage"><span className="kicker">Dazu wird oft gefragt</span><FrageBlase text={daten.frage}><p>{daten.frage}</p></FrageBlase></div>
           {daten.antwort && (
             <div className="wort wort--leo">
               <span className="kicker kicker--gruen">Leo</span>
-              <LeoBlase>
+              <LeoRede text={daten.antwort}>
                 <p>{daten.antwort}</p>
                 {daten.quelle && <div className="quellen"><b>Quelle</b><span>› {daten.quelle}</span></div>}
-              </LeoBlase>
+              </LeoRede>
             </div>
           )}
         </div>

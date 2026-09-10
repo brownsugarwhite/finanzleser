@@ -60,8 +60,8 @@ export default function WochenbriefForm({ klein }: { klein?: boolean }) {
 
   return (
     <form className={klein ? "wb-form wb-form--klein" : "wb-form reihe"} onSubmit={senden}>
-      <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail für den Wochenbrief" value={mail} onChange={(e) => setMail(e.target.value)} disabled={laedt} />
-      <button className="btn btn--klein btn--primary" type="submit" disabled={laedt}>{laedt ? "Sendet …" : "Eintragen"}</button>
+      <input type="email" placeholder={klein ? "E-Mail" : "ihre@adresse.de"} aria-label="E-Mail für den Wochenbrief" value={mail} onChange={(e) => setMail(e.target.value)} disabled={laedt} />
+      <button className={klein ? "wb-form__senden" : "btn btn--klein btn--primary"} type="submit" disabled={laedt}>{laedt ? "Sendet …" : klein ? "Abonnieren" : "Eintragen"}</button>
       <label className="wb-consent">
         <input type="checkbox" checked={einverstanden} onChange={(e) => setEinverstanden(e.target.checked)} />
         <span>Ich stimme der <a href="/datenschutz" data-faden-aus="" target="_blank" rel="noopener">Datenschutzerklärung</a> zu. Abmelden mit einem Klick in jeder Ausgabe.</span>

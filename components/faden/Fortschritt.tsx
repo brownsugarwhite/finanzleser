@@ -4,8 +4,8 @@
  * Fortschritt im Faden: eine gestrichelte Linie in der Gasse zwischen linker Randspalte
  * und Mittelspalte, ein Kreis je Kapitel und ein Querstrich je Abschnitt.
  *
- * Das Gleis ist so lang wie der Strom — es steht im Dokument still, während der Leser
- * daran vorbeiscrollt. Bewegung entsteht allein durch den Füllbalken, und der zieht
+ * Das Gleis reicht vom Kopf der linken Randspalte bis zum Ende des Stroms — es steht
+ * im Dokument still, während der Leser daran vorbeiscrollt. Bewegung entsteht allein durch den Füllbalken, und der zieht
  * bewusst nach: er läuft dem Sollwert entgegen, statt hart daran zu kleben.
  *
  * 🚨 Drei Dinge halten das Nachziehen weich — fällt eines weg, ruckelt es:
@@ -53,18 +53,36 @@ export default function Fortschritt() {
     if (!faden || !strom) return;
     const f = faden.getBoundingClientRect();
     const s = strom.getBoundingClientRect();
+    // 🚨 Das Gleis beginnt NICHT am Strom, sondern an der Randspalte daneben.
+    //
+    // Auf der Startseite steht der Hero im Strom (FadenLanding rendert ihn dort), die
+    // Randspalten fangen aber erst darunter an (`body[data-landing] .rand { margin-top }`).
+    // Am Strom gemessen ragte das Gleis deshalb über die volle Hero-Höhe in eine Gasse
+    // hinauf, die es dort gar nicht gibt — links davon stand nichts.
+    // Als Schublade (mobil, position: fixed) taugt die Randspalte nicht als Maß.
+    const rand = document.getElementById("randLinks");
+    const r = rand && getComputedStyle(rand).position !== "fixed" ? rand.getBoundingClientRect() : null;
+    const anfang = r && r.height ? Math.max(s.top, r.top) : s.top;
     const liste: Marke[] = [];
     strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {
-      liste.push({ oben: k.getBoundingClientRect().top - s.top, art: "kapitel" });
+      // Der Kreis sitzt auf der Haarlinie der Kapitelkopfzeile, nicht an der Oberkante
+      // des Kapitels: die Linie liegt auf der Mittelachse der Kopfzeile (app/faden.css,
+      // `.kapitel__kopf` mit `align-items: center`), und dorthin gehört die Marke, damit
+      // Gleis und Kopfzeile auf einer Höhe stehen.
+      const kopf = k.querySelector<HTMLElement>(".kapitel__kopf");
+      const kr = (kopf ?? k).getBoundingClientRect();
+      liste.push({ oben: (kopf ? (kr.top + kr.bottom) / 2 : kr.top) - anfang, art: "kapitel" });
       // Abschnitte aus derselben Quelle wie die Verlaufsleiste (`[data-toc-titel]`,
       // siehe lib/faden/useAbschnittAktiv.ts) — so zeigen Gleis und Liste dasselbe.
       // Zugeklappte Kapitel haben keinen Inhalt im DOM und liefern folgerichtig nichts.
       k.querySelectorAll<HTMLElement>("[data-toc-titel]").forEach((a) => {
-        liste.push({ oben: a.getBoundingClientRect().top - s.top, art: "abschnitt" });
+        liste.push({ oben: a.getBoundingClientRect().top - anfang, art: "abschnitt" });
       });
     });
     liste.sort((a, b) => a.oben - b.oben);
-    setMass({ oben: s.top - f.top, hoehe: s.height, dokOben: s.top + window.scrollY, marken: liste });
+    // Marken oberhalb des Gleisanfangs (auf der Startseite alles, was im Hero liegt)
+    // hätten eine negative Lage und haengten über dem Gleis in der Luft.
+    setMass({ oben: anfang - f.top, hoehe: s.bottom - anfang, dokOben: anfang + window.scrollY, marken: liste.filter((m) => m.oben >= 0) });
   }, []);
 
   useEffect(() => {

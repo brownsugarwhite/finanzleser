@@ -26,8 +26,10 @@ export default async function FinanzwortKarte({ spiel: vorgegeben }: { spiel?: S
   const eintrag = begriff ? await getGlossarBySlug(begriff) : null;
   return (
     <article className="kasten kasten--pink" id={`kasten-${spiel.slug}`}>
-      <span className="kicker kicker--tool kicker--pink">Spiel · Finanzwort des Tages</span>
-      <h3>Finanzwort #{nr}</h3>
+      <div className="spiel-kopf">
+        <span className="kicker">Finanzwort · Nr. {nr}</span>
+        <span className="spiel-kopf__hinweis">{wort.length} Buchstaben, sechs Versuche</span>
+      </div>
       <Finanzwort
         slug={spiel.slug}
         wort={wort}

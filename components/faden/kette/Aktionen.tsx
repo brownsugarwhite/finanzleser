@@ -12,8 +12,11 @@ import type { BeitragPdf } from "@/lib/articleToolData";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { teilenOeffnen } from "@/components/faden/TeilenDialog";
 import { kulissenOeffnen } from "@/components/faden/Kulissen";
-import { LeoBlase } from "@/components/faden/leo/Blase";
+import { LeoRede } from "@/components/faden/leo/Blase";
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars --
+   `artikelId` trug nur das Vorlesen. Der Prop bleibt im Vertrag, weil das Vorlesen nur
+   pausiert ist und die Aufrufer die Kennung weiter mitgeben. */
 export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }) {
   const { inDenKoffer, toast } = useFaden();
   const [kurz, setKurz] = useState(false);
@@ -26,16 +29,6 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
   }, [kurzfassung]);
   const voll = `https://www.finanzleser.de${url}`;
 
-  const vorlesen = () => {
-    if (!("speechSynthesis" in window)) { toast("Vorlesen wird von diesem Browser nicht unterstützt."); return; }
-    if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); return; }
-    const art = document.getElementById(artikelId);
-    const text = art ? (art as HTMLElement).innerText.slice(0, 6000) : titel;
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE";
-    window.speechSynthesis.speak(u);
-    toast("Vorlesen gestartet. Noch einmal tippen stoppt.");
-  };
 
   return (
     <>
@@ -44,7 +37,6 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
         <button type="button" className="textlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
         <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
         <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
-        <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
         {pdf && (
           <a className="textlink textlink--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag</a>
         )}
@@ -53,12 +45,12 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
       {kurzfassung && (
         <div className="wort wort--leo kurzfassung" hidden={!kurz} ref={kurzRef}>
           <span className="kicker kicker--gruen">Leo · Kurzfassung</span>
-          <LeoBlase>
+          <LeoRede>
             {kurzfassung.saetze.map((s, i) => <p key={i}>{s}</p>)}
             {kurzfassung.quellen.length > 0 && (
               <div className="quellen"><b>Quellen</b>{kurzfassung.quellen.map((q, j) => <span key={j}>› {q}</span>)}</div>
             )}
-          </LeoBlase>
+          </LeoRede>
         </div>
       )}
     </>

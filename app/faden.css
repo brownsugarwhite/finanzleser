@@ -9,7 +9,9 @@
 
 .faden-shell {
   --paper: var(--color-bg-page); --white: #fdfdfb; --placeholder: var(--color-placeholder-bg);
-  --rule: rgba(51,74,39,.14); --rule-soft: rgba(51,74,39,.08); --rule-strong: #334A27;
+  /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
+  --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
+  --rule: rgba(51,74,39,.14); --rule-soft: rgba(51,74,39,.08); --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
   --ink: var(--color-text-primary); --muted: var(--color-text-medium);
   --green: var(--color-brand); --green-ink: #2E7A0B; --pink: var(--color-brand-secondary); --pink-tint: #FBEAF1; --tint: #eef3e8;
   --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
@@ -48,14 +50,76 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
 .faden-shell .btn--klein { padding: 4px 12px; font-size: 13px; }
 .faden-shell .btn--still { border-color: var(--rule); color: var(--muted); }
-.faden-shell .chip { border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 5px 14px; font-weight: 600; font-size: 13.5px; text-align: left; line-height: 1.35; }
-.faden-shell .chip:hover { background: var(--tint); border-color: var(--green-ink); color: var(--green-ink); }
-.faden-shell .chip--still { border-color: var(--rule); color: var(--muted); } .faden-shell .chip--leo { border-color: var(--green-ink); color: var(--green-ink); }
+/* Chip — 1:1 aus „Faden A" (Zeile 64/322/431 der Übergabe): eine Haarlinie statt der
+   vollen Kontur, Text in Tinte, Schriftschnitt 500 statt 600. Beim Überfahren hebt er
+   sich einen Pixel, bekommt Papier unter sich und die Linie zieht auf Tinte an —
+   der Text bleibt, wie er ist. Genau davon lebt das Schlichte: nichts wird bunt.
+   `inline-flex`, damit auch die Chips, die als <a> stehen, sich heben können
+   (auf `display: inline` greift keine Transformation). */
+.faden-shell .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-mid); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 14px; font: 500 13px/1.35 var(--sans); text-align: left; text-decoration: none; transition: background .25s, border-color .25s, transform .25s, opacity .3s; }
+.faden-shell .chip:hover { background: var(--white); border-color: var(--ink); transform: translateY(-1px); }
+.faden-shell .chip--still { color: var(--muted); } .faden-shell .chip--leo { border-color: var(--green-ink); color: var(--green-ink); }
 .faden-shell .reihe { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .faden-shell .quelle { font-size: 12px; color: var(--muted); margin: 0; }
 .faden-shell .hinweis { background: var(--note); border: 1px solid var(--note-line); color: var(--note-ink); padding: 8px 12px; font-size: 13px; }
 .faden-shell .begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green); font-weight: 600; cursor: pointer; text-decoration: none; }
 .faden-shell .begriff:hover, .faden-shell .begriff.offen { color: var(--pink); text-decoration: none; }
+
+/* ---------- Der Wink auf das erste grüne Wort ----------
+   Kommt nach ein paar Sekunden einmal je Sitzung (components/faden/glossar/BegriffWink.tsx)
+   und deutet an, dass sich Begriffe antippen lassen: ein Ring, der zweimal aufgeht —
+   dieselbe Bewegung wie am aktiven Knoten des Fortschritts-Gleises —, dazu eine kleine
+   Fahne im Kicker-Satz. Beides verschwindet beim ersten Tipp auf irgendeinen Begriff.
+
+   🚨 Der Ring liegt auf einem eigenen `::before` mit `inset: -2px -5px` statt auf dem Wort
+   selbst: eine Transformation am Wort würde die Zeile im Fließtext ruckeln lassen. */
+.faden-shell .begriff--wink { position: relative; }
+.faden-shell .begriff--wink::before {
+  content: ""; position: absolute; inset: -2px -5px; border-radius: 6px;
+  border: 1.5px solid var(--green); pointer-events: none;
+  animation: faden-wink 2.6s cubic-bezier(.22,.61,.36,1) infinite;
+}
+.faden-shell .begriff--wink::after {
+  content: "antippen"; position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%);
+  font: 700 9.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; font-style: normal;
+  color: #fff; background: var(--green); padding: 5px 8px; border-radius: 4px; white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(51, 74, 39, .28);
+  pointer-events: none; z-index: 3;
+  animation: faden-wink-fahne 2.6s cubic-bezier(.22,.61,.36,1) infinite;
+}
+/* Spitze der Fahne, zum Wort hin — ein gedrehtes Quadrat unter dem Rand. */
+.faden-shell .begriff--wink .wink-spitze { position: absolute; left: 50%; top: calc(100% + 4px); width: 8px; height: 8px; margin-left: -4px; background: var(--green); transform: rotate(45deg); pointer-events: none; z-index: 3; animation: faden-wink-fahne 2.6s cubic-bezier(.22,.61,.36,1) infinite; }
+/* Zwei Schläge, dann Ruhe bis zur nächsten Runde — wie ein Klopfen, nicht wie ein Blinken. */
+@keyframes faden-wink {
+  0%   { opacity: 0; transform: scale(1.25); }
+  10%  { opacity: 1; transform: scale(1); }
+  22%  { opacity: 0; transform: scale(1.25); }
+  30%  { opacity: 0; transform: scale(1.25); }
+  40%  { opacity: 1; transform: scale(1); }
+  52%  { opacity: 0; transform: scale(1.25); }
+  100% { opacity: 0; transform: scale(1.25); }
+}
+@keyframes faden-wink-fahne {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+  10%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  58%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  70%  { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+}
+/* Ohne Bewegung bleibt die Fahne stehen — der Hinweis geht nicht verloren. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .begriff--wink::before { display: none; }
+  .faden-shell .begriff--wink::after { opacity: 1; transform: translateX(-50%); }
+  .faden-shell .begriff--wink .wink-spitze { opacity: 1; }
+}
+
+/* ---------- Doppellinie: 2 px Tinte · 2 px Luft · 1 px Tinte ----------
+   Steht so in der Design-Übergabe („Die Zeitung", Abschnitt Linien & Flächen) und
+   trägt den Zeitungskopf des Fadens, die beiden Randspaltenköpfe und später die
+   Tabellenköpfe. Ein Element mit Verlauf statt zweier Kästchen: so hängt die Teilung
+   nicht an box-sizing, und jede Kopfzeile bleibt ein Knoten. */
+.faden-shell { --doppellinie: linear-gradient(var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px); }
+.faden-shell .doppellinie { display: block; height: 5px; background: var(--doppellinie); }
 
 /* ---------- Zeitungskopf über dem progressiven Blur ---------- */
 /* 🚨 Klasse heisst `kopfblur`, NICHT `blur` wie im Prototyp: `blur` ist eine
@@ -123,7 +187,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    Mittelspalte klebt deshalb bei 1440px an der Sidebar und driftet bei 1920px weit ab.
    Darum die Gassenmitte ausrechnen — dieselbe Formel wie in `.rand--links`. */
 .faden-shell .fortschritt {
-  --gleis: 2px; --fuell: 3px; --breite: 11px;
+  --gleis: 1px; --fuell: 2px; --breite: 11px;
   --seitenspalte: calc((100% - var(--spalte)) / 2);
   --randbreite: min(var(--rand-l), calc(var(--seitenspalte) - 46px));
   --gasse-links: calc(var(--seitenspalte) / 2 + var(--randbreite) / 2);   /* rechte Kante der Sidebar */
@@ -134,8 +198,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 }
 @media (min-width: 1440px) { .faden-shell .fortschritt { display: block; } }
 /* Striche als Verlauf statt `border-style: dashed` — so ist die Teilung exakt und
-   überall gleich, statt vom Browser gewürfelt. */
-.faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--muted) 0 5px, transparent 5px 11px); }
+   überall gleich, statt vom Browser gewürfelt. Farbe und Stärke wie die Haarlinien
+   links und rechts der Kapitelkopfzeile: 1 px, rgba(51,74,39,.2). */
+.faden-shell .fortschritt__gleis { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--gleis); transform: translateX(-50%); background: repeating-linear-gradient(to bottom, var(--rule-mid) 0 5px, transparent 5px 11px); }
 .faden-shell .fortschritt__fuell { position: absolute; top: 0; left: calc(50% - var(--fuell) / 2); width: var(--fuell); background: var(--ink); transform-origin: 0 0; will-change: transform; }
 .faden-shell .fortschritt__punkt { position: absolute; left: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); transition: background .35s, border-color .35s; }
 .faden-shell .fortschritt__punkt.erreicht { background: var(--ink); border-color: var(--ink); }
@@ -161,27 +226,52 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand--links { justify-self: center; width: min(var(--rand-l), calc(100% - 46px)); }
 .faden-shell .rand--rechts { justify-self: center; width: min(var(--rand-r), calc(100% - 46px)); }
 .faden-shell .rand__lauf { flex: 1; position: relative; }
-.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; }
+.faden-shell .rand__innen { position: sticky; top: calc(var(--kopf-h, 64px) + 16px); max-height: calc(100vh - var(--kopf-h, 64px) - 32px); min-height: calc(100vh - var(--kopf-h, 64px) - 32px); display: flex; flex-direction: column; gap: 22px; overflow-y: auto; scrollbar-width: none; }
+.faden-shell .rand__innen::-webkit-scrollbar { width: 0; height: 0; }
 .faden-shell .rand__oben { display: grid; gap: 22px; align-content: start; }
 .faden-shell .rand__fuss { margin-top: auto; flex: none; display: grid; gap: 18px; }
-.faden-shell .verlauf { max-height: 46vh; overflow: auto; scrollbar-width: thin; padding-right: 2px; }
-.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-.faden-shell .rand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.faden-shell .rand li button { width: 100%; text-align: left; border: 0; background: none; padding: 4px 0; color: var(--muted); font-size: 13.5px; display: flex; gap: 8px; line-height: 1.35; }
-.faden-shell .rand li button.aktiv { color: var(--ink); font-weight: 700; }
-.faden-shell .rand li button::before { content: "○"; flex: none; } .faden-shell .rand li button.aktiv::before { content: "●"; }
-.faden-shell .rand__leer { color: var(--muted); font-style: italic; }
-.faden-shell .rand__hinweis { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
-.faden-shell .rand .block { border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 4px; }
+.faden-shell .verlauf { padding-right: 2px; }
+.faden-shell .rand--links .verlauf h2 { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-top: 2px; margin-bottom: 8px; }
+.faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 8px; background: var(--doppellinie); }
+.faden-shell .rand--rechts h2 { margin-bottom: 10px; }
+/* ---------- Verlauf: die schlichte Liste aus „Faden A" (nicht v2) ----------
+   Quelle: `Finanzleser Faden A - Zeitung.dc.html`, Zeile 203–216. Nummer als eigene
+   schmale Spalte, Titel in Merriweather, unter jedem Eintrag eine Haarlinie — die
+   trägt den Rhythmus, deshalb hat die Liste keinen eigenen Zeilenabstand mehr. */
+.faden-shell .rand ul { list-style: none; margin: 0; padding: 0; }
+.faden-shell .verlauf > ul > li > button { display: flex; gap: 10px; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rule-soft); background: none; padding: 8px 0; font: 400 14px/1.35 var(--serif); color: var(--muted); transition: color .2s; }
+.faden-shell .verlauf > ul > li > button:hover { color: var(--ink); }
+.faden-shell .verlauf > ul > li > button.aktiv { font-weight: 700; color: var(--ink); }
+.faden-shell .verlauf__nr { flex: none; min-width: 14px; font: 700 10px/1.6 var(--sans); letter-spacing: .06em; color: var(--muted); }
+.faden-shell .rand__leer { color: var(--muted); font-style: italic; font-size: 13px; }
+/* Blöcke der Randspalte (Wochenbrief, Aktenkoffer): kein Kasten, nur je eine
+   Trennlinie darüber und darunter — so nutzen sie die volle Spaltenbreite. */
+.faden-shell .rand .block { background: none; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); border-radius: 0; padding: 14px 0; }
+.faden-shell .wb-rail__text { margin: 6px 0 10px; font: italic 300 14px/1.45 var(--serif); color: var(--ink); }
+/* Aktenkoffer: Kicker links, die Zahl groß rechts daneben, darunter der Satz und der Weg. */
+.faden-shell .koffer-rail { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 2px 10px; }
+.faden-shell .koffer-rail__zahl { grid-column: 2; grid-row: 1; font: 900 30px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .koffer-rail__text { grid-column: 1 / -1; font: 400 12.5px/1.5 var(--sans); color: var(--muted); margin-top: 2px; }
+.faden-shell .koffer-rail .pfeil-link { grid-column: 1 / -1; justify-self: start; margin-top: 8px; font-size: 13px; }
 .faden-shell .wb-form { display: flex; gap: 6px; margin-top: 4px; }
 .faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: 13px; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--white); color: var(--ink); }
-.faden-shell .wb-form--klein input { font-size: 12.5px; padding: 5px 10px; }
-.faden-shell .verlauf ol { list-style: none; margin: 4px 0 6px 6px; padding: 0 0 0 12px; border-left: 1px solid var(--rule); display: grid; gap: 6px; }
-.faden-shell .verlauf ol li button { display: flex; align-items: baseline; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 0; color: var(--muted); font-size: 12.5px; line-height: 1.3; }
-.faden-shell .verlauf ol li button::before { content: none; }
-.faden-shell .verlauf ol li button i { flex: none; font: 600 11px/1 var(--serif); font-style: italic; color: var(--muted); min-width: 12px; }
-.faden-shell .verlauf ol li button.aktiv { color: var(--ink); font-weight: 700; } .faden-shell .verlauf ol li button.aktiv i { color: var(--green-ink); }
-.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; max-height: 44vh; overflow: auto; scrollbar-width: thin; }
+/* In der Randspalte ist das Feld kein Kasten, sondern ein Strich mit Textknopf. Die
+   Linie liegt an Feld UND Knopf statt am Formular, weil die Einwilligung darunter in
+   derselben Zeilenlage steht — sie fehlt in der Vorlage, das Double-Opt-in braucht sie. */
+.faden-shell .wb-form--klein { flex-wrap: wrap; gap: 0; margin-top: 0; }
+.faden-shell .wb-form--klein input[type="email"] { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: transparent; padding: 6px 0; font: 400 14px var(--sans); color: var(--ink); }
+.faden-shell .wb-form--klein input[type="email"]::placeholder { color: var(--muted); }
+.faden-shell .wb-form__senden { border: 0; border-bottom: 1px solid var(--ink); background: none; padding: 6px 0 6px 10px; font: 600 13px var(--sans); color: var(--green-ink); white-space: nowrap; }
+/* Abschnitte des Kapitels, in dem der Leser steht: eingerückt, jeder mit einem kurzen
+   Strich, der beim aktiven von 6 auf 14 px wächst. */
+.faden-shell .verlauf ol { list-style: none; margin: 0; padding: 4px 0 6px 24px; border-bottom: 1px solid var(--rule-soft); }
+.faden-shell .verlauf ol li button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 5px 0; font: 400 12.5px var(--sans); color: var(--muted); transition: color .2s, padding-left .2s; }
+.faden-shell .verlauf ol li button:hover { padding-left: 4px; color: var(--ink); }
+.faden-shell .verlauf ol li button.aktiv { font-weight: 600; color: var(--ink); }
+.faden-shell .verlauf__strich { flex: none; width: 6px; height: 1px; background: var(--ink); transition: width .3s; }
+.faden-shell .verlauf ol li button.aktiv .verlauf__strich { width: 14px; }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
 .faden-shell .mobil-leiste { display: none; }
 .faden-shell .schublade { display: none; }
 .faden-shell .rand__zu { display: none; }
@@ -190,14 +280,32 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .strom { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-content: start; }
 /* Grid-Kinder wachsen sonst auf die Mindestbreite ihres Inhalts (breite Tabellen, Slider-Reihen) und sprengen die 750er-Spalte */
 .faden-shell .strom > *, .faden-shell .kapitel, .faden-shell .kapitel__inhalt, .faden-shell .artikel, .faden-shell .kasten, .faden-shell .kasten__koerper, .faden-shell .abschnitt, .faden-shell .fliess { min-width: 0; max-width: 100%; }
+/* Zeitungskopf des Fadens: Kicker links, Datum rechts, darunter die Doppellinie. */
+.faden-shell .zeitungskopf { margin-bottom: 42px; }
+.faden-shell .zeitungskopf__zeile { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.faden-shell .zeitungskopf .doppellinie { margin-top: 8px; }
+
 .faden-shell .kapitel { border-top: 1px solid var(--rule); padding: 14px 0 26px; }
-.faden-shell .kapitel:first-child { border-top: 0; padding-top: 0; }
-.faden-shell .kapitel__kopf { display: flex; align-items: baseline; gap: 14px; min-height: 22px; }
+/* Das erste Kapitel kommt ohne Trennlinie aus — auch dann, wenn ihm der Zeitungskopf
+   vorangeht und `:first-child` deshalb nicht mehr greift. */
+.faden-shell .kapitel:first-child, .faden-shell .zeitungskopf + .kapitel { border-top: 0; padding-top: 0; }
+/* Kopfzeile eines Kapitels — für JEDES Kapitel gleich, ob lebend oder eingefroren:
+   eine Zeile, zentriert zwischen zwei Haarlinien (Übergabe A v2, Zeile 333–336), ohne
+   den Funken darunter. Die Linien treffen die Mitte der Zeile, weil in der Mittelspalte
+   genau EINE Zeile steht; im Prototyp hängen dort Funke und Hinweis mit drin, deshalb
+   sitzt die Zeile dort über den Linien.
+   🚨 Der Titel schrumpft mit Auslassungspunkten, statt umzubrechen. Bricht er um, wird
+   die Mittelspalte zweizeilig — dann liegen die Linien wieder zwischen den Zeilen. */
+.faden-shell .kapitel__kopf { display: grid; grid-template-columns: minmax(28px, 1fr) minmax(0, auto) minmax(28px, 1fr); align-items: center; gap: 14px; min-height: 22px; }
+.faden-shell .kapitel__kopf::before, .faden-shell .kapitel__kopf::after { content: ""; height: 1px; background: var(--rule-mid); }
+.faden-shell .kapitel__kopf-mitte { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
 .faden-shell .kapitel--alt .kapitel__kopf { cursor: pointer; }
-.faden-shell .kapitel__kopf h2 { font-size: 17px; flex: 1; }
+.faden-shell .kapitel__kopf h2 { font-size: 17px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .faden-shell .kapitel__kopf .kicker { white-space: nowrap; }
-.faden-shell .kapitel__kopf .toggle-k { border: 0; background: none; color: var(--muted); font-size: 12px; white-space: nowrap; margin-left: auto; }
-.faden-shell .kapitel__inhalt { display: grid; gap: 18px; padding-top: 14px; }
+.faden-shell .kapitel__kopf .toggle-k { border: 0; background: none; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.faden-shell .kapitel__kopf--live { margin-bottom: 18px; }
+.faden-shell .kapitel__kopf--live .kicker { white-space: normal; text-align: center; }
+.faden-shell .kapitel__inhalt { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 14px; }
 .faden-shell .kapitel.zu .kapitel__inhalt { display: none; } .faden-shell .kapitel.zu { padding-bottom: 14px; }
 .faden-shell .kapitel.zu .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
 .faden-shell .kapitel--alt:not(.zu) .kapitel__kopf h2 { font-size: 15px; color: var(--muted); }
@@ -219,63 +327,82 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .skelett i.skelett__bild { height: 120px; width: 40%; }
 @keyframes faden-schimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .faden-shell .skelett i { animation: none; } }
+/* Platzhalterzeile im Verlauf, solange das neue Kapitel lädt — dieselbe Schimmerkurve
+   wie das Kapitelskelett, damit beides als ein Vorgang gelesen wird. */
+.faden-shell .skelett-zeile { display: block; width: 62%; height: 11px; border-radius: 3px; background: linear-gradient(90deg, var(--rule) 25%, var(--rule-soft) 50%, var(--rule) 75%); background-size: 200% 100%; animation: faden-schimmer 1.3s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .faden-shell .skelett-zeile { animation: none; } }
+.faden-shell .verlauf__laedt button { cursor: default; }
 /* Solange das Skelett steht, ist die noch alte Seite ausgeblendet — aber NICHT ausgehängt:
    sie ist bis zur RSC-Antwort das einzige `#kapitel-live`, an dem der Provider erkennt,
    wann das neue Kapitel im DOM steht. Verlauf, Anzeigen und das Fadenende bleiben stehen. */
-.faden-shell .strom--laedt > *:not(.kapitel--skelett):not(.kapitel--alt):not(.einschub):not(#strom-ende) { display: none; }
+/* 🚨 Hero und Zeitungskopf gehören der Hülle, nicht der Route — sie dürfen beim
+   Blättern NICHT mit ausgeblendet werden. Sonst klappt der Faden während des Ladens
+   um eine Hero-Höhe zusammen und wieder auf (genau der Seitenwechsel-Eindruck, der
+   hier weg soll), und der Sprung zum neuen Kapitel misst in eine Seite hinein, die
+   es in dem Moment gar nicht gibt. */
+.faden-shell .strom--laedt > *:not(.kapitel--skelett):not(.kapitel--alt):not(.einschub):not(.hero-landing):not(.zeitungskopf):not(#strom-ende) { display: none; }
 .faden-shell .kapitel__schnappschuss { opacity: .92; }
 /* Die Insel-Hülle darf das Layout nicht anfassen — sie ist nur ein Marker (Insel.tsx). */
 .faden-shell .insel { display: contents; }
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
 .faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }
 .faden-shell .wort { display: grid; gap: 4px; }
+/* Frage und Antwort sind zwei Sprecher, keine zwei Absätze — sie brauchen Abstand. */
+.faden-shell .wort--frage + .wort--leo { margin-top: 26px; }
 /* Frage rechts, Antwort links — wie im Leo-Chat der Live-Seite. */
 .faden-shell .wort--frage { justify-items: end; gap: 3px; padding-right: 10px; }
 .faden-shell .wort--frage p { margin: 0; }
 .faden-shell .blase--frage p { color: #fff; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.45; }
-.faden-shell .wort--leo { padding-left: 42px; }   /* Gasse für Leos Kopf, siehe .wort__avatar */
-.faden-shell .wort--leo .kicker { margin-bottom: 2px; }
-.faden-shell .wort--leo p { margin: 0 0 .5em; }
-.faden-shell .wort__avatar { position: absolute; left: -42px; bottom: -2px; width: 30px; height: 30px; }
+/* Leo spricht ohne Blase (Übergabe A v2, Zeile 343–347): sein Kopf steht links in der
+   Gasse, daneben der Kicker, darunter der Text. Gasse = 44 px Kopf + 16 px Luft.
 
-/* ---------- Sprechblasen (Maße 1:1 aus app/components.css, Live-Chat) ---------- */
-/* 🚨 Die Hülle hält Blase und hinteren Schwanz als GESCHWISTER. Läge der hintere
-   Schwanz in der Blase, könnte ihn kein z-index hinter deren Hintergrund schieben —
-   die Konturlinie am Ansatz bliebe sichtbar. Siehe components/faden/leo/Blase.tsx. */
+   🚨 Als RASTER, nicht als Polster mit absolutem Kopf: mit `padding-left` genügte eine
+   einzige fremde Regel, die das Polster überschreibt (so geschehen bei `.ks__nachher`
+   im Kassensturz), und der Kopf lag über dem Text statt daneben. `display: contents` an
+   der Rede hebt ihre Kinder in dasselbe Raster, damit auch sie in Spalte 2 landen. */
+.faden-shell .wort--leo { position: relative; display: grid; grid-template-columns: 60px minmax(0, 1fr); align-items: start; padding-left: 0; }
+.faden-shell .wort--leo > *, .faden-shell .wort--leo > .leo-rede > * { grid-column: 2; }
+.faden-shell .leo-rede { display: contents; }
+.faden-shell .wort--leo .kicker { margin-bottom: 2px; }
+.faden-shell .wort--leo .wort__avatar { position: static; grid-column: 1; grid-row: 1 / span 2; width: 44px; height: 44px; }
+.faden-shell .leo-rede > p { margin: 6px 0 0; font: italic 400 clamp(17px, 1.4vw, 20px)/1.55 var(--serif); color: var(--ink); max-width: 62ch; }
+.faden-shell .leo-rede--fehler > p { color: var(--pink); }
+/* 🚨 Nur kurze oder vorgefertigte Antworten stehen im großen Kursivsatz. Ab
+   ANTWORT_FLIESS (leo/Blase.tsx) wird daraus normaler Lesesatz — dieselbe Größe, die
+   Leos gestreamte Antworten im Faden tragen (.leo-markdown, 16 px). */
+.faden-shell .leo-rede--fliess > p { font: 400 16px/1.65 var(--sans); color: var(--ink); max-width: 68ch; }
+.faden-shell .leo-rede .quellen { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); }
+.faden-shell .leo-rede .quellen b { display: block; margin-bottom: 2px; font: 600 11px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Die Frageblase (Maße 1:1 aus app/components.css, Live-Chat) ----------
+   Nur noch die Frage des Lesers steht in einer Blase — ohne den inneren weißen Kasten,
+   den sie bis 10.09.2026 trug. Leos Seite ist blasenlos (siehe .wort--leo oben). */
+/* 🚨 Die Hülle hält Blase und Schwanz als GESCHWISTER, siehe leo/Blase.tsx. */
 .faden-shell .blase-huelle { position: relative; display: inline-block; max-width: 100%; }
 .faden-shell .blase { position: relative; padding: 23px 27px; border-radius: 27px; word-wrap: break-word; overflow-wrap: break-word; }
 .faden-shell .blase > p:last-child { margin-bottom: 0; }
-/* Innerer Kasten, Geometrie wie am RechnerButton (border 2px + outline 1px, Abstand 2px):
-   außen die dünne Kontur der Blase, innen eine dickere Linie in der Kontrastfarbe.
-   Radius = Außenradius minus Einzug, sonst laufen die Ecken nicht parallel. */
-.faden-shell .blase::after { content: ""; position: absolute; inset: 6px; border: 2px solid currentColor; border-radius: 21px; pointer-events: none; z-index: 3; }   /* über dem Schwanz (z-index 2), sonst schneidet der ihn an */
 .faden-shell .blase--frage { background: var(--ink); color: #fff; max-width: 600px; }
+/* „Ihre Frage" steht rechts oben IN der Blase — der Leser sieht auf einen Blick, wessen
+   Wort das ist, ohne dass eine zweite Zeile über der Blase Platz kostet. */
+.faden-shell .blase__kicker { display: block; margin-bottom: 7px; text-align: left; font: 700 10px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .82); }
+/* 🚨 Der große Blasensatz ist ein Zitatsatz. Eine lange Frage trägt er nicht — sie wird
+   in zwei Stufen ruhiger gesetzt (siehe FRAGE_MITTEL/FRAGE_KLEIN in leo/Blase.tsx). */
+.faden-shell .blase--mittel p { font-size: 16px; }
+.faden-shell .blase--klein p { font-size: 15px; line-height: 1.5; }
 .faden-shell .blase--frage a { color: #fff; text-decoration: underline; }
-.faden-shell .blase--frage::after { color: var(--paper); }   /* heller Kasten auf dunkler Füllung */
-.faden-shell .blase--leo { background: var(--paper); box-shadow: 0 0 0 1px var(--ink); max-width: 660px; z-index: 1; }
-.faden-shell .blase--leo::after { color: var(--ink); }       /* dunkler Kasten auf hellem Grund */
-/* Störung: gleiche Konstruktion, Kontur in Pink — auch am Schwanz (--stoerung). */
-.faden-shell .blase--fehler { box-shadow: 0 0 0 1px var(--pink); }
-.faden-shell .blase--fehler p { color: var(--pink); }
-.faden-shell .blase--fehler::after { color: var(--pink); }
 /* Schwanz: viewBox 22×28, Anzeigegröße 0,957 × viewBox = 21,05 × 26,80.
    Die ausgezogene Spitze der Kontur ragt links aus dem viewBox heraus — deshalb
    trägt das eingebettete SVG `overflow: visible` (components/ui/BubbleSpike.tsx). */
 .faden-shell .blase__spike { position: absolute; bottom: -2px; width: 21.05px; height: 26.8px; pointer-events: none; }
-.faden-shell .blase--frage .blase__spike { right: -7.9px; transform: scaleX(-1); color: var(--ink); }
-.faden-shell .blase--leo .blase__spike { left: -7.4px; color: var(--paper); z-index: 2; }
-.faden-shell .blase__spike--unten { left: -7.4px; z-index: 0; fill: var(--paper); stroke: var(--ink); }
-.faden-shell .blase__spike--stoerung { stroke: var(--pink); }
-/* Quellen sitzen wie auf der Live-Seite IN der Blase, abgesetzt durch eine Linie. */
-.faden-shell .blase--leo .quellen { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); }
-.faden-shell .blase--leo .quellen b { display: block; margin-bottom: 2px; font: 600 11px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .blase--frage .blase__spike { right: -7.4px; transform: scaleX(-1); color: var(--ink); }
 @media (max-width: 900px) {
   .faden-shell .blase { padding: 15px 18px; border-radius: 20px; }
-  .faden-shell .blase::after { inset: 4px; border-radius: 16px; }
 }
 .faden-shell .quellen { font-size: 12.5px; color: var(--muted); display: grid; gap: 2px; margin-top: 4px; }
 .faden-shell .quellen b { color: var(--ink); font-weight: 600; }
 .faden-shell .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Vorschläge sind Worte des Lesers — sie stehen rechts, wie seine Blase. */
+.faden-shell .leo-chips { justify-content: flex-end; }
 .faden-shell .einwurf { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--green-ink); font-style: italic; }
 .faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--green); flex: none; }
 .faden-shell a.einwurf--zeiger { text-decoration: none; margin: 6px 0 10px; flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: 12px; } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
@@ -384,9 +511,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
 .faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 4px; }
-.faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; gap: 6px; }
-.faden-shell .weiterlesen .fragen .chip.gewaehlt { background: var(--tint); }
-.faden-shell .weiterlesen .antwort { display: grid; gap: 10px; margin-top: 2px; }
+.faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; }
+/* „Sie könnten Leo auch fragen" steht in derselben Zeile wie die Chips und bricht mit. */
+.faden-shell .weiterlesen .fragen__kopf { flex-basis: 100%; margin-bottom: 2px; }
+.faden-shell .weiterlesen .fragen:empty { display: none; }
+.faden-shell .weiterlesen .antwort { display: grid; gap: 12px; margin-top: 10px; }
 .faden-shell .weiterlesen .antwort[hidden] { display: none; }
 
 /* Fließtext aus dem CMS: .prose liefert Tabellen (components.css), hier nur die Feinheiten */
@@ -452,13 +581,20 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten--liste .eintrag small { color: var(--muted); font-size: 12px; }
 
 /* ---------- Landing-Hero (Prototyp „Landing“: Zierlinie, Kicker, Titel, Pille auf der Bildschirmmitte, ein Satz) ---------- */
-.faden-shell .hero-landing { position: relative; height: calc(100dvh - var(--kopf-h, 64px)); min-height: 520px; }
-.faden-shell .hero-landing__mitte { position: absolute; inset: 0; box-sizing: border-box; padding: 0 24px var(--kopf-h, 64px); display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; }
+/* 🚨 Der Hero ist eine echte Viewport-Sektion: volle Breite, volle Höhe, der klebende
+   Kopf liegt darüber. Er steht dafür VOR dem Raster (FadenShell), nicht in der Spalte —
+   drinnen begann er erst unter dem Spaltenvorlauf, war „100dvh minus Kopfhöhe" hoch, und
+   beim Laden lugte der Faden schon herein. */
+.faden-shell .hero-landing { position: relative; width: 100%; height: 100dvh; min-height: 520px; margin-top: calc(-1 * var(--kopf-h, 64px)); }
+/* Die Eingabe liegt in der mittleren Rasterzeile zwischen zwei gleich großen `1fr` —
+   ihre Mitte ist damit die Mitte der Sektion und, weil die Sektion der Viewport ist, die
+   Mitte des Viewports. Kein Ausgleich nötig. */
+.faden-shell .hero-landing__mitte { position: absolute; inset: 0; box-sizing: border-box; padding: 0 24px; display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; justify-items: center; text-align: center; }
 .faden-shell .landing-oben { align-self: end; margin-bottom: 30px; display: grid; justify-items: center; will-change: opacity, transform; }
 .faden-shell .landing-zier { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; color: var(--muted); } .faden-shell .landing-zier i { width: 48px; height: 1px; background: var(--muted); opacity: .55; } .faden-shell .landing-zier svg { width: 12px; height: 12px; }
 .faden-shell .landing-kicker { font: 400 15px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .faden-shell .hero-landing h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.22; font-weight: 700; max-width: 30ch; margin: 0; }
-.faden-shell .hero-landing__pille { width: min(750px, 92%); height: 52px; position: relative; }
+.faden-shell .hero-landing__pille { width: min(var(--pille-breite-landing), calc(100vw - 32px)); height: var(--pille-h-landing); position: relative; }
 .faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
 .faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
 .faden-shell .landing-sub { align-self: start; margin: 30px auto 0; font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 44ch; will-change: opacity, transform; }
@@ -479,40 +615,141 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .eingabe { transition: opacity .25s ease; }
 body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
 
-/* Landing: die Randspalten beginnen UNTER dem Hero.
+/* 🚨 Hier stand ein Vorlauf für die Randspalten:
 
-   Im Prototyp steht der Hero als eigener Abschnitt VOR dem Grid:
+       body[data-landing] .faden-shell .rand { margin-top: max(520px, 100dvh - Kopfhöhe) }
 
-       <section class="intro"><div class="szene">…</div></section>
-       <main class="faden">  .rand--links | #mitte | .rand--rechts
+   Er war nötig, solange der Hero INNERHALB der Mittelspalte lag — dann hätten die Ränder
+   schon neben ihm gestanden. Seit dem 10.09.2026 steht der Hero als eigene Sektion vor
+   dem Raster (FadenShell), genau wie im Prototyp: die Ränder beginnen von selbst unter
+   ihm, und zwei Höhenausdrücke müssen nicht mehr auf den Pixel zusammenpassen. */
 
-   Die Ränder fangen dort also erst nach dem Hero an — sie fahren beim Scrollen von unten
-   herein und kleben danach unter dem Kopf. Hier liegt der Hero innerhalb der mittleren
-   Spalte (HeroLanding rendert im Strom), also stünden die Ränder von Anfang an daneben.
-   Statt sie dafür auszublenden, bekommen sie exakt die Höhe des Heros als Vorlauf —
-   derselbe Ausdruck wie .hero-landing weiter oben, damit beide auf den Pixel passen.
-
-   Nur ab 1440 px: darunter sind die Ränder ohnehin Schubladen (position: fixed). */
-@media (min-width: 1440px) {
-  body[data-landing] .faden-shell .rand {
-    margin-top: max(520px, calc(100dvh - var(--kopf-h, 64px)));
-  }
-}
-.faden-shell .strom > .hero-landing + .einschub { margin-top: 0; }
 
 /* ---------- Die Spalten: vier Rubriken als Zeitungsspalten ---------- */
-.faden-shell .spalten-kasten { padding: 14px 18px 16px; }
+/* ---------- Neueste Ausgabe: Laufband + Titelseite ----------
+   Das Laufband ist der alte Kopfbanner-Satz, auf den Faden übertragen: eine Zeile
+   zwischen zwei Doppellinien, die Schrift wandert durch eine Punktreihe und die Punkte
+   weichen ihr aus (components/faden/spalten/Laufband.tsx). */
+.faden-shell .neueste { margin: 40px 0 26px; }
+.faden-shell .laufband { --lauf-hoehe: 1.5em; }
+.faden-shell .doppellinie--gedreht { transform: scaleY(-1); }
+.faden-shell .laufband__reihe { position: relative; overflow: hidden; height: var(--lauf-hoehe); display: flex; align-items: center; margin: 3px 0; opacity: 0; }
+.faden-shell .laufband__punkte { position: absolute; left: 4px; right: 4px; top: 0; bottom: 0; display: flex; align-items: center; gap: 7px; z-index: 1; }
+.faden-shell .laufband__punkte span { width: 3px; height: 3px; border-radius: 50%; background: var(--ink); flex: none; }
+.faden-shell .laufband__gleis { position: absolute; left: 0; top: 0; bottom: 0; display: flex; align-items: center; z-index: 2; }
+/* Satz wie der Kicker im Landing-Hero (.landing-kicker) — eine Stimme für beide. */
+.faden-shell .laufband__gleis span { flex: none; white-space: nowrap; font: 400 15px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .laufband__gleis > div { flex: none; }
+
+/* Die Titelseite: Bild links, Satz rechts — auf schmalen Fenstern untereinander. */
+.faden-shell .neueste__blatt { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 22px; align-items: start; padding: 18px 0 4px; text-decoration: none; color: var(--ink); }
+.faden-shell .neueste__bild { display: block; border: 1px solid var(--rule); background: var(--placeholder); line-height: 0; }
+.faden-shell .neueste__bild img { width: 100%; height: 148px; object-fit: cover; display: block; }
+.faden-shell .neueste__satz { display: grid; gap: 7px; align-content: start; min-width: 0; }
+.faden-shell .neueste__titel { font-family: var(--serif); font-weight: 900; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; }
+.faden-shell .neueste__vorspann { font: italic 300 clamp(15px, 1.3vw, 17px)/1.5 var(--serif); color: var(--muted); max-width: 56ch; }
+.faden-shell .neueste__blatt:hover .neueste__titel { color: var(--green-ink); }
+.faden-shell .neueste__blatt:hover .pfeil-link i { width: 30px; }
+@media (max-width: 700px) {
+  .faden-shell .neueste__blatt { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .faden-shell .neueste__bild img { height: 180px; }
+}
+
+.faden-shell .spalten-kasten { border: 0; background: none; box-shadow: none; border-radius: 0; padding: 4px 0 10px; grid-template-columns: minmax(0, 1fr); }
+/* 🚨 Nur die Zeitungsreihe tritt aus der Mittelspalte heraus, höchstens 30 px je Seite —
+   die Kopfzeile „Aus dem Kiosk" bleibt auf der Spaltenbreite stehen. Ab 1440 px stehen
+   die Randspalten im Bild; dann ist der Ausbruch zusätzlich auf die freie Gasse
+   gedeckelt, damit die Zeitungen nie hineinlaufen. */
+.faden-shell .spalten { --ausbruch: 30px; width: calc(100% + 2 * var(--ausbruch)); min-width: 0; margin-left: calc(-1 * var(--ausbruch)); transition: width .62s cubic-bezier(.2,.8,.2,1), margin-left .62s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spalten.offen { width: 100%; margin-left: 0; }
+@media (min-width: 1440px) {
+  .faden-shell .spalten { --ausbruch: min(30px, calc((100vw - var(--spalte) - 2 * var(--rand-l)) / 4 - 16px)); }
+}
+/* Kopfzeile des Kiosks: Kicker links, Wink rechts (Übergabe A v2, Zeile 352). */
+.faden-shell .spalten__wink { font: italic 300 12.5px var(--serif); color: var(--muted); }
+/* ---------- Die vier Ausgaben als kleine Titelseiten ----------
+   Kopfsatz mit Ausgabennummer und Bestand, darunter der Rubrikname groß, dann die Themen
+   mit Punktführung wie ein Inhaltsverzeichnis, zuletzt „Ausgabe aufschlagen".
+
+   🚨 Der Rubrikname darf NICHT umbrechen — „Versicherungen" sprengte die Spalte und
+   rutschte in zwei Zeilen. Die Schrift skaliert deshalb mit der Spaltenbreite (cqi statt
+   vw) und wird notfalls schmaler gestaucht, statt zu brechen. */
+.faden-shell .spalte__kopfsatz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; }
+.faden-shell .spalte__nr, .faden-shell .spalte__zahl { font: 700 9.5px/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.faden-shell .spalte__nr { color: var(--muted); }
+.faden-shell .spalte__zahl { color: var(--green-ink); }
+/* Doppellinie unter der Überschrift, darunter das Zeichen der Rubrik als Visual —
+   wie das Bild auf einer Titelseite. */
+.faden-shell .spalte__inhalt > .doppellinie { margin: 4px 0 0; }
+.faden-shell .spalte__visual { display: grid; place-items: center; height: 74px; margin: 10px 0 4px; background: linear-gradient(180deg, rgba(51,74,39,.05), rgba(51,74,39,.02)); border-bottom: 1px solid var(--rule-soft); }
+.faden-shell .spalte__visual img { width: 40px; height: 40px; opacity: .9; }
+.faden-shell .spalte__mehr { display: block; margin-top: 6px; font: italic 300 12px var(--serif); color: var(--muted); }
+.faden-shell .spalte__auf { grid-row: -1; align-self: end; padding-top: 12px; font-size: 12.5px; white-space: nowrap; }
+/* Alle vier Titelseiten gleich hoch, „Ausgabe aufschlagen" unten bündig. */
+.faden-shell .spalte__inhalt { height: 100%; grid-template-rows: repeat(6, auto) 1fr; }
+.faden-shell .spalte__auf i { width: 14px; }
 .faden-shell .spalten__kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 22px; }
-.faden-shell .spalten { position: relative; display: grid; align-items: stretch; transition: grid-template-columns .6s cubic-bezier(.2,.8,.2,1); }
+/* ---------- Der Kiosk: vier Ausgaben, leicht gedreht und übereinandergeschoben ----------
+   🚨 Eine Flex-Reihe trägt BEIDE Zustände. Geschlossen: feste Kartenbreite, negative
+   Ränder für die Überlappung, jede Ausgabe leicht gedreht. Aufgeschlagen: eine breite
+   Seite, daneben schmale Rücken. Der Wechsel ist eine Bewegung von `flex-basis`,
+   `margin` und `transform` — ein Wechsel des Rasters ließe sich nicht überblenden.
+
+   Die Überlappung rechnet sich selbst aus (`--ueberlapp`, in Spalten.tsx gesetzt): so
+   viel, wie die Karten breiter sind als der Platz. Ist Platz genug, liegen sie
+   nebeneinander; wird es eng, schieben sie sich weiter übereinander. */
+.faden-shell .spalten { position: relative; display: flex; align-items: stretch; justify-content: center; --karte: 290px; --ueberlapp: 26px; }  /* Startwerte; Spalten.tsx misst nach */
+.faden-shell .spalten .spalte { flex: 0 0 var(--karte); }
+
+/* Aufgeschlagen: keine Überlappung mehr, die Rücken stehen mit Luft daneben. */
+.faden-shell .spalten.offen .spalte + .spalte { margin-left: 9px; }
 .faden-shell .spalten .trenner { min-height: 160px; }
 .faden-shell .spalten .trenner::before, .faden-shell .spalten .trenner::after { height: 70px; }
-.faden-shell .spalte { position: relative; min-width: 0; }
-.faden-shell .spalte__inhalt { padding: 12px 16px 14px; display: grid; gap: 4px; align-content: start; transition: opacity .2s; }
+/* Jede Ausgabe ist ein Blatt: Papier, feine Kante, weicher Schatten — dadurch liest sich
+   der Stapel als etwas Physisches und nicht als vier Kästen nebeneinander. */
+.faden-shell .spalte {
+  position: relative; min-width: 0; overflow: hidden;
+  background: var(--paper); border: 0;
+  box-shadow: 0 2px 10px rgba(51, 74, 39, .08), 0 14px 34px rgba(51, 74, 39, .06);
+  transform: translateX(var(--weg, 0px)) rotate(var(--dreh, 0deg));
+  transform-origin: 50% 100%;
+  --weg-dauer: .45s; --weg-kurve: cubic-bezier(.2,.8,.2,1);
+  transition: flex-basis .62s cubic-bezier(.2,.8,.2,1), margin-left .62s cubic-bezier(.2,.8,.2,1),
+              transform var(--weg-dauer) var(--weg-kurve), box-shadow .45s, border-color .3s;
+}
+/* 🚨 Ein Zug in zwei Etappen — und er muss sich wie EINE Bewegung anfühlen.
+   Etappe 1: freifahren. Die anderen Ausgaben weichen zur Seite, die angehobene schiebt
+   sich seitlich unter der Nachbarin hervor — noch flach, noch schief, nur seitwärts.
+   Etappe 2: nach vorn. Jetzt erst richtet sie sich auf, wächst und hebt ab, während die
+   anderen hinter ihr zurück an ihren Platz entstauchen.
+   Damit daraus kein Ruckeln wird, ist die Übergabe in der Fahrt: Etappe 1 läuft NICHT
+   auf Tempo null aus (die Kurve endet mit Steigung), und der Wechsel kommt kurz vor
+   ihrem Ende (260 ms Dauer, Wechsel bei 240 ms in Spalten.tsx). Die zweite Kurve
+   übernimmt das Tempo und läuft weich aus — zusammen ein einziges Ease-out. */
+.faden-shell .spalten[data-phase="1"] .spalte { --weg-dauer: .26s; --weg-kurve: cubic-bezier(.33, .52, .64, .9); }
+.faden-shell .spalten[data-phase="2"] .spalte { --weg-dauer: .42s; --weg-kurve: cubic-bezier(.1, .74, .26, 1); }
+/* Der Schatten zieht sofort an — die Rückmeldung darf nicht auf Etappe 2 warten. */
+.faden-shell .spalten:not(.offen) .spalte.schwebt {
+  box-shadow: 0 8px 22px rgba(51, 74, 39, .14), 0 26px 60px rgba(51, 74, 39, .12);
+}
+/* Aufrichten, wachsen, abheben: erst in Etappe 2, wenn der Weg frei ist. */
+.faden-shell .spalten:not(.offen)[data-phase="2"] .spalte.schwebt {
+  transform: translateX(var(--weg, 0px)) translateY(-12px) rotate(0deg) scale(1.09);
+}
+/* Aufgeschlagen liegt nichts mehr schief und nichts wirft mehr Schatten. */
+.faden-shell .spalten.offen .spalte { transform: none; box-shadow: none; }
+.faden-shell .spalte__inhalt { padding: 16px 18px 18px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; align-content: start; min-width: 0; transition: opacity .2s, padding .5s cubic-bezier(.2,.8,.2,1); }
 .faden-shell .spalte__inhalt > img { width: 28px; height: 28px; opacity: .85; margin-bottom: 4px; }
-.faden-shell .spalte__titel { font-family: var(--serif); font-size: clamp(14px, 1.25vw, 18px); font-weight: 700; line-height: 1.2; }
+.faden-shell .spalte__inhalt { container-type: inline-size; }
+.faden-shell .spalte__titel { display: block; font-family: var(--serif); font-weight: 900; font-size: clamp(16px, 13cqi, 22px); line-height: 1.15; letter-spacing: normal; margin: 6px 0 2px; white-space: nowrap; overflow: hidden; text-overflow: clip; }
 .faden-shell .spalte__inhalt > small { color: var(--muted); font-size: 12px; }
-.faden-shell .spalte__themen { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
-.faden-shell .spalte__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: 5px 0; font-size: 13.5px; display: flex; justify-content: space-between; gap: 8px; color: var(--ink); }
+.faden-shell .spalte__inhalt > img { display: none; }
+.faden-shell .spalte__themen { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.faden-shell .spalte__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: 6px 0; font: 400 13px/1.35 var(--serif); display: flex; align-items: baseline; gap: 6px; color: var(--ink); }
+/* Punktführung wie im Inhaltsverzeichnis einer Zeitung. */
+.faden-shell .spalte__themen button::after { content: ""; flex: 1 100 12px; order: 1; min-width: 0; margin: 0 4px; border-bottom: 1px dotted rgba(51, 74, 39, .4); transform: translateY(-4px); }
+.faden-shell .spalte__themen button small { order: 2; flex: none; font-variant-numeric: tabular-nums; }
+.faden-shell .spalte__themen button > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .faden-shell .spalte__themen button small { color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
 .faden-shell .spalte__themen button:hover, .faden-shell .spalte__themen button:hover small { color: var(--green-ink); }
 .faden-shell .spalte__ruecken { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; gap: 10px; padding: 12px 0; border: 0; background: none; cursor: pointer; }
@@ -559,8 +796,15 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .bmenu .leo-zeile img { width: 30px; height: 30px; margin-left: auto; flex: none; }
 .faden-shell .bmenu .gemerkt { font-size: 11.5px; color: var(--muted); text-decoration: none; margin-top: 4px; line-height: 1.4; }
 .faden-shell .bmenu .gemerkt:hover { color: var(--green-ink); }
-.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; max-height: 44vh; overflow: auto; scrollbar-width: thin; }
-.faden-shell .glossar-rail .eintrag-g { border: 1px solid var(--rule); background: var(--white); border-radius: 10px; overflow: hidden; }
+.faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
+/* Neu gemerkter Begriff kommt von rechts hereingeschoben und legt sich kurz schief —
+   `fl-zettel` aus der Design-Übergabe (A v2), 1:1 übernommen. */
+.faden-shell .glossar-rail .eintrag-g { border: 1px solid var(--rule); background: var(--white); border-radius: 10px; overflow: hidden; animation: faden-zettel .7s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes faden-zettel {
+  0%   { opacity: 0; transform: translateX(26px) rotate(3deg); }
+  60%  { opacity: 1; transform: translateX(-2px) rotate(-.6deg); }
+  100% { opacity: 1; transform: none; }
+}
 .faden-shell .glossar-rail .eintrag-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; background: none; padding: 9px 12px; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--green-ink); text-align: left; cursor: pointer; }
 .faden-shell .glossar-rail .eintrag-g > button i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; font-style: normal; font-size: 16px; line-height: 1; transition: transform .25s; }
 .faden-shell .glossar-rail .eintrag-g.offen > button i { transform: rotate(45deg); }
@@ -590,7 +834,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--pink); }
 
 /* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
-.faden-shell .leo-strom { display: grid; gap: 14px; padding: 4px 0 12px; }
+.faden-shell .leo-strom { display: grid; gap: 26px; padding: 4px 0 12px; }
 .faden-shell .leo-strom:empty { display: none; padding: 0; }
 .faden-shell .leo-strom--alt { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--rule); }
 .faden-shell .wort--frage .kicker { display: block; margin-bottom: 2px; }
@@ -604,7 +848,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .wort--leo .werkzeuge { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 .faden-shell .wort--fehler p { color: var(--pink); }
 .faden-shell .leo-chips { margin-left: 42px; }
-.faden-shell .sprung { position: absolute; left: 0; right: 0; bottom: calc(100% + 8px); background: var(--white); border: 1px solid var(--rule-strong); border-radius: 16px; padding: 8px; display: grid; gap: 1px; box-shadow: 0 10px 26px rgba(51,74,39,.14); z-index: 7; max-height: 60vh; overflow: auto; }
+.faden-shell .sprung { padding: 10px 10px 6px; display: grid; gap: 1px; max-height: 60vh; overflow: auto; border-bottom: 1px solid var(--rule); }
 .faden-shell .sprung__kopf { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 4px 10px 6px; }
 .faden-shell .sprung button { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: 7px 10px; font: inherit; font-size: 14.5px; border-radius: 8px; color: var(--ink); cursor: pointer; }
 .faden-shell .sprung button:hover, .faden-shell .sprung button.aktiv { background: var(--tint); }
@@ -669,14 +913,52 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .eingabe__blur i { position: absolute; left: 0; right: 0; bottom: 0; display: block; -webkit-mask-image: linear-gradient(to top, #000 40%, transparent 100%); mask-image: linear-gradient(to top, #000 40%, transparent 100%); }
 .faden-shell .eingabe__blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .eingabe__blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .eingabe__blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .eingabe__blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .eingabe__blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .eingabe__blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .eingabe__blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .eingabe__blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
 .faden-shell .eingabe__blur b { position: absolute; inset: 0; background: linear-gradient(to top, var(--paper) 30%, transparent 100%); }
-.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: 750px; margin-left: -11px; }
-.faden-shell .suchpille-wrap { position: relative; width: 100%; z-index: 6; }
-.faden-shell .suchpille { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.55); backdrop-filter: blur(16px) brightness(1.15); border-radius: 26px; box-shadow: 0 3px 23px rgba(0,0,0,.02); padding: 6px 6px 6px 22px; min-height: 52px; transition: box-shadow .2s ease; }
+/* Unten ist die Pille schmaler als die Spalte (wie die Sprechblase auf der Live-Seite)
+   und macht nach OBEN auf: sie klebt an der Unterkante, die Reihenfolge im Kasten dreht
+   sich um, das Vorschlagsfeld liegt damit über dem Feld. */
+.faden-shell .eingabe .suchpille-wrap { width: calc(100% + 22px); max-width: var(--pille-breite, 750px); margin-left: -11px; }
+.faden-shell .eingabe .suchpille { top: auto; bottom: 0; flex-direction: column-reverse; }
+/* ---------- Die Eingabepille ----------
+   Maße 1:1 aus dem Leo-Chat der Live-Seite (components/ui/LeoIcon.tsx): Radius 35,
+   Senden-Knopf 50 × 50 mit Radius 22 in Sekundärfarbe, 8 px von den Kanten, Feld
+   17 px/1.3 und Auto-Grow bis 66 px.
+
+   🚨 Die Pille sitzt ABSOLUT in einem Wrapper fester Höhe. Nur so kann sie wachsen —
+   durch das Textfeld und durch das Vorschlagsfeld —, ohne dass das Layout darunter
+   springt: sie legt sich über die Umgebung statt sie zu schieben. */
+.faden-shell .suchpille-wrap { position: relative; width: 100%; height: var(--pille-h, 92px); z-index: 6; }
+.faden-shell .suchpille {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 1;
+  display: flex; flex-direction: column;
+  background: var(--white); border-radius: var(--pille-radius, 35px);
+  box-shadow: 0 3px 23px rgba(0, 0, 0, .04); overflow: hidden;
+  transition: box-shadow .2s ease;
+}
 .faden-shell .suchpille-wrap:focus-within > .suchpille { box-shadow: 0 0 0 2px var(--ink); }
-.faden-shell .suchpille input { flex: 1; border: 0; background: none; font: 400 17px/40px var(--sans); color: var(--ink); min-width: 0; outline: none; padding: 0; }
-.faden-shell .suchpille input::placeholder { color: var(--muted); opacity: 1; }
-.faden-shell .suchpille .senden { border: 0; border-radius: 20px; padding: 0 18px; background: var(--green); color: #fff; font: 600 15px/40px var(--sans); white-space: nowrap; flex: none; opacity: 0; transform: translateX(10px) scale(.92); pointer-events: none; transition: opacity .2s ease, transform .3s cubic-bezier(.34,1.56,.64,1); }
-.faden-shell .suchpille-wrap:focus-within .senden, .faden-shell .suchpille.hat-text .senden { opacity: 1; transform: none; pointer-events: auto; }
+/* Die Feldhöhe steht fest (Wrapper und Pille sollen sich decken); wird der Kasten höher,
+   verteilt `space-between` die Zeile nach oben und die Fußzeile nach unten. */
+.faden-shell .suchpille__feld { position: relative; display: grid; gap: 2px; padding: 22px 76px 12px 24px; min-height: var(--pille-h); align-content: space-between; }
+.faden-shell .hero-landing__pille .suchpille__feld { min-height: var(--pille-h-landing); }
+.faden-shell .suchpille textarea {
+  border: 0; background: none; resize: none; outline: none; padding: 0; margin: 0;
+  /* 🚨 Ganze Pixel als Zeilenhöhe, nicht 1.3. 17 × 1.3 = 22,1 px — der Kasten rundet auf
+     22 ab, der Inhalt bleibt 23 hoch, und das leere Feld zeigte einen Rollbalken. */
+  font: 400 17px/23px var(--sans); color: var(--ink); width: 100%;
+  max-height: 66px; overflow-y: auto; display: block; scrollbar-width: thin;
+}
+.faden-shell .suchpille textarea::placeholder { color: var(--muted); opacity: 1; }
+.faden-shell .suchpille__fuss { display: flex; justify-content: flex-end; min-height: 22px; }
+/* Der runde Senden-Knopf klebt oben rechts wie in der Live-Sprechblase. */
+.faden-shell .suchpille__senden {
+  position: absolute; top: 8px; right: 8px; width: 50px; height: 50px; border: 0; border-radius: 22px; padding: 0;
+  background: var(--green); display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: transform .32s cubic-bezier(.34, 1.56, .64, 1), filter .15s ease;
+}
+.faden-shell .suchpille-wrap:focus-within .suchpille__senden, .faden-shell .suchpille.hat-text .suchpille__senden { transform: scale(1.04); }
+.faden-shell .suchpille__senden:hover { filter: brightness(.94); }
+/* Das Vorschlagsfeld wächst IM Kasten — dieselbe Fläche, derselbe Ring drumherum. */
+.faden-shell .suchpille__leiste { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .28s cubic-bezier(.22, 1, .36, 1), opacity .18s ease; }
+.faden-shell .suchpille.ist-offen .suchpille__leiste { max-height: 60vh; opacity: 1; }
 .faden-shell #eingabeChips { position: absolute; left: 0; right: 0; top: 100%; margin: 0; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
 .faden-shell .eingabe.mit-chips #eingabeChips { opacity: 1; transform: none; pointer-events: auto; }
 
@@ -720,9 +1002,15 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 10px; }
   .faden-shell .blatt__spalte--breit { grid-column: auto; }
   .faden-shell .blatt ul.themen { display: flex; flex-wrap: wrap; gap: 4px; } .faden-shell .blatt ul.themen .thema { width: auto; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 999px; }
-  .faden-shell .spalten { grid-template-columns: 1fr !important; } .faden-shell .spalten .trenner { display: none; } .faden-shell .spalte__inhalt { padding: 10px 0; } .faden-shell .spalte + .spalte .spalte__inhalt { border-top: 1px solid var(--rule); } .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; } .faden-shell .spalte__offen { padding: 6px 0; }
+  .faden-shell .spalten { flex-direction: column; }
+  .faden-shell .spalten .spalte { flex: 0 0 auto; transform: none !important; box-shadow: none; }
+  .faden-shell .spalten .spalte + .spalte { margin-left: 0; margin-top: 10px; }
+  .faden-shell .spalten:not(.offen) .spalte + .spalte .spalte__inhalt { padding-left: 14px; }
+  .faden-shell .spalte__inhalt { padding: 14px; }
+  .faden-shell .spalten.offen .spalte.ist-ruecken { display: none; }
+  .faden-shell .spalte__offen { padding: 6px 0; }
   .faden-shell .hero-landing h1 { font-size: 24px; }
-  .faden-shell .hero-landing__mitte { padding: 0 8px var(--kopf-h, 64px); }
+  .faden-shell .hero-landing__mitte { padding-left: 8px; padding-right: 8px; }
   .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
   .faden-shell .lesezeichen .lz-wort { display: none; }
   .faden-shell .faden { padding: 12px 14px 110px; }
@@ -793,7 +1081,51 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .seo li { border-bottom: 1px solid var(--rule); padding: 6px 0; font-size: 13.5px; }
 .faden-shell .seo li small { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 @media (max-width: 900px) { .faden-shell .seite__innen { grid-template-columns: 1fr; } .faden-shell .seo { position: static; } }
-@media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .kopfblur { display: none !important; } }
+/* ---------- Kassensturz und Finanzwort im Kapitel „Heute": ohne Kasten ----------
+   Beide sind Teil der Zeitungsseite und kein Kärtchen darauf. Nur im lebenden Kapitel
+   der Startseite — als eigenes Kapitel (/kassensturz, /spiele/…) behalten sie ihren
+   Rahmen, dort tragen sie die Seite allein. */
+.faden-shell #kapitel-live[data-key="heute"] .kasten--ks,
+.faden-shell #kapitel-live[data-key="heute"] .kasten--pink {
+  border: 0; background: none; box-shadow: none; padding-left: 0; padding-right: 0;
+}
+/* Das Finanzwort nimmt dort die volle Breite und steht mittig.
+   🚨 `:not(.kasten--ks)` ist nötig: der Kassensturz trägt `kasten--pink` ebenfalls.
+   Ohne die Ausnahme zentriert diese Regel auch ihn — seine Bühne schrumpfte dadurch auf
+   548 statt 728 px und die Antwortkarten brachen zweizeilig um. */
+.faden-shell #kapitel-live[data-key="heute"] .kasten--pink:not(.kasten--ks) { display: grid; justify-items: center; text-align: center; }
+.faden-shell #kapitel-live[data-key="heute"] .kasten--pink:not(.kasten--ks) > h3 { font-size: clamp(20px, 2vw, 26px); }
+
+/* ---------- Schaukasten: Anzeigen aus, alles ausgeklappt ----------
+   Gilt nur, solange eine Schaukasten-Seite offen ist (SchaukastenModus setzt
+   `data-schaukasten` auf den Body).
+
+   1. **Anzeigen sind aus.** Sie laden nach und schieben dabei den ganzen Faden — beim
+      Durchsehen zerstört das jeden Fluss. `display: none` heißt zugleich, dass die
+      Bilder (loading="lazy") gar nicht erst geholt werden. Werbung wird gesondert
+      geprüft, ebenso die Vergleiche.
+   2. **Alles steht offen.** Was sonst hinter einem Klick liegt — Leos Antworten unter
+      „Dazu wird oft gefragt", die Kurzfassung —, ist hier aufgeklappt.
+
+   🚨 Die Ausklapp-Regel steht in `@layer base`, und das ist keine Zierde: Tailwind setzt
+   dort `[hidden] { display: none !important }`. Bei `!important` dreht die Kaskade die
+   Ebenenreihenfolge um — eine ebenenlose Regel verliert dann gegen eine in einer Ebene,
+   egal wie spezifisch sie ist. In derselben Ebene zählt wieder die Spezifität, und die
+   ist hier höher. Ohne das Konstrukt bleibt der Schaukasten zugeklappt. */
+body[data-schaukasten] .faden-shell .einschub { display: none; }
+@layer base {
+  body[data-schaukasten] .faden-shell .weiterlesen .antwort[hidden],
+  body[data-schaukasten] .faden-shell .kurzfassung[hidden] { display: block !important; }
+}
+body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid; }
+
+/* ---------- Schaukasten: der versteckte Knopf ----------
+   Ein Punkt in der Ecke, der erst beim Überfahren sichtbar wird. Er gehört nicht zur
+   Seite, sondern zur Abnahme (components/faden/SchaukastenKnopf.tsx). */
+.faden-shell .schaukasten-knopf { position: fixed; right: 12px; bottom: 12px; z-index: 90; width: 12px; height: 12px; padding: 0; border: 1px solid var(--ink); border-radius: 50%; background: transparent; opacity: .12; transition: opacity .2s, transform .2s; }
+.faden-shell .schaukasten-knopf:hover, .faden-shell .schaukasten-knopf:focus-visible { opacity: 1; transform: scale(1.25); background: var(--ink); }
+
+@media print { .faden-shell .kopf, .faden-shell .rand, .faden-shell .eingabe, .faden-shell .einschub, .faden-shell .kapitel--alt, .faden-shell #leo-strom, .faden-shell .lesestelle, .faden-shell .teilen-dialog, .faden-shell .kopfblur, .faden-shell .schaukasten-knopf { display: none !important; } }
 
 /* ── Plus-Bereich: Belege, Regeln, Schalter, Koffer, Wächter, Album, Level, Profil (Prototyp 01-css.html:59–61, 178, 197–200, 204–213, 222–225, 350–372, 692–693) ── */
 .faden-shell .blatt .gruss { grid-column: 1 / -1; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }

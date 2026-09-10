@@ -1,26 +1,32 @@
 /* Finanzwort des Tages (Wordle-Mechanik) im Faden. Port aus docs/prototype/src/01-css.html
    (.wortspiel, .meldung, .chip--spiel, .punkte, .raster). Nur im .faden-shell-Scope. */
-.faden-shell .wortspiel { position: relative; display: grid; gap: 12px; justify-items: center; }
+/* Kopfzeile nach der Übergabe A v2 (Zeile 1046): Kicker links, Kursivzeile rechts,
+   darunter eine Tintenlinie. */
+.faden-shell .spiel-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; width: 100%; border-bottom: 1px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; text-align: left; }
+.faden-shell .spiel-kopf__hinweis { font: italic 300 12.5px var(--serif); color: var(--muted); white-space: nowrap; }
+
+.faden-shell .wortspiel { position: relative; display: grid; gap: 14px; justify-items: center; width: 100%; }
+.faden-shell .wortspiel .gitter, .faden-shell .wortspiel .tasten { width: auto; }
 .faden-shell .wortspiel .gitter { display: grid; gap: 6px; }
 .faden-shell .wortspiel .reihe-w { display: flex; gap: 6px; }
-.faden-shell .wortspiel .zelle { width: 44px; height: 44px; border: 2px solid var(--rule); border-radius: 8px; display: grid; place-items: center; font: 700 20px/1 var(--serif); text-transform: uppercase; background: var(--white); transition: background .25s, border-color .25s, transform .15s; }
-.faden-shell .wortspiel .zelle.voll { border-color: var(--muted); }
+.faden-shell .wortspiel .zelle { width: 54px; height: 54px; border: 1px solid var(--rule); border-radius: 0; display: grid; place-items: center; font: 700 25px/1 var(--serif); text-transform: uppercase; background: transparent; color: var(--ink); transition: background .25s, border-color .25s, color .25s, transform .15s; }
+.faden-shell .wortspiel .zelle.voll { border-color: var(--ink); }
 .faden-shell .wortspiel .zelle.richtig { background: var(--green); border-color: var(--green); color: #fff; }
-.faden-shell .wortspiel .zelle.drin { background: #e3b341; border-color: #e3b341; color: #fff; }
-.faden-shell .wortspiel .zelle.falsch { background: var(--placeholder); border-color: var(--placeholder); color: var(--muted); }
+.faden-shell .wortspiel .zelle.drin { background: transparent; border: 2px solid var(--green-ink); color: var(--green-ink); }
+.faden-shell .wortspiel .zelle.falsch { background: rgba(51,74,39,.07); border-color: transparent; color: var(--muted); }
 .faden-shell .wortspiel .zelle.wackel { animation: fw-wackel .4s; }
 @keyframes fw-wackel { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 .faden-shell .wortspiel .zelle.huepft { animation: fw-huepft .5s cubic-bezier(.34,1.5,.64,1); }
 @keyframes fw-huepft { 30% { transform: translateY(-12px) scale(1.08); } 100% { transform: none; } }
 .faden-shell .wortspiel .tasten { display: grid; gap: 5px; justify-items: center; width: 100%; }
 .faden-shell .wortspiel .tasten div { display: flex; gap: 4px; }
-.faden-shell .wortspiel .taste { min-width: 30px; height: 40px; padding: 0 8px; border: 1px solid var(--rule); background: var(--white); font: 600 13px/1 var(--sans); text-transform: uppercase; border-radius: 6px; }
+.faden-shell .wortspiel .taste { min-width: 40px; height: 44px; padding: 0 8px; border: 1px solid var(--rule); background: transparent; color: var(--ink); font: 600 14px/1 var(--sans); text-transform: uppercase; border-radius: 0; transition: border-color .2s, background .2s, transform .1s; }
 .faden-shell .wortspiel .taste.breit { min-width: 56px; font-size: 11px; }
 .faden-shell .wortspiel .taste.richtig { background: var(--green); border-color: var(--green); color: #fff; }
-.faden-shell .wortspiel .taste.drin { background: #e3b341; border-color: #e3b341; color: #fff; }
-.faden-shell .wortspiel .taste.falsch { background: var(--placeholder); color: var(--muted); }
-.faden-shell .wortspiel .status { font-size: 13.5px; color: var(--muted); text-align: center; min-height: 20px; }
-.faden-shell .wortspiel .hinweis-w { font-size: 13.5px; background: var(--pink-tint); padding: 8px 12px; border-radius: 8px; max-width: 46ch; }
+.faden-shell .wortspiel .taste.drin { background: transparent; border-color: var(--green-ink); color: var(--green-ink); }
+.faden-shell .wortspiel .taste.falsch { background: rgba(51,74,39,.07); border-color: transparent; color: var(--muted); }
+.faden-shell .wortspiel .status { font: italic 400 15px/1.45 var(--serif); color: var(--muted); text-align: center; min-height: 22px; }
+.faden-shell .wortspiel .hinweis-w { font: italic 400 15px/1.45 var(--serif); color: var(--ink); background: none; padding: 0; max-width: 54ch; text-align: center; }
 .faden-shell .wortspiel .chip { text-decoration: none; }
 /* Ergebnis (Prototyp Zeile 689) */
 .faden-shell .punkte { font-weight: 700; color: var(--pink); }
@@ -34,8 +40,8 @@
 .faden-shell .meldung p { margin: 0; font-size: 14px; }
 .faden-shell .meldung .aktionen { display: flex; gap: 10px; border-top: 0; padding-top: 0; }
 @media (max-width: 900px) {
-  .faden-shell .wortspiel .zelle { width: 38px; height: 38px; font-size: 18px; }
-  .faden-shell .wortspiel .taste { min-width: 24px; padding: 0 3px; font-size: 12px; height: 38px; }
+  .faden-shell .wortspiel .zelle { width: 42px; height: 42px; font-size: 20px; }
+  .faden-shell .wortspiel .taste { min-width: 26px; padding: 0 3px; font-size: 12px; height: 40px; }
   .faden-shell .wortspiel .taste.breit { min-width: 44px; font-size: 10px; }
   .faden-shell .wortspiel .tasten div { gap: 3px; }
   .faden-shell .wortspiel .gitter { gap: 5px; }

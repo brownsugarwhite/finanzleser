@@ -18,22 +18,24 @@ import type { ReactNode } from "react";
 import type { NavItem } from "@/lib/NavContext";
 import type { MegamenuPreload, getSiteSettings } from "@/lib/wordpress";
 import type { Level } from "@/lib/faden/optionen";
+import type { HeroZahlen } from "@/components/faden/hero/HeroLanding";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
 
 const SeitenHuelle = dynamic(() => import("@/components/layout/SeitenHuelle"));
 const FadenHuelle = dynamic(() => import("@/components/faden/FadenHuelle"));
 
 export default function Huelle({
-  children, navItems, megamenuPreload, siteSettings, level,
+  children, navItems, megamenuPreload, siteSettings, level, heroZahlen,
 }: {
   children: ReactNode;
   navItems: NavItem[];
   megamenuPreload: MegamenuPreload;
   siteSettings: Awaited<ReturnType<typeof getSiteSettings>> | null;
   level?: Level[];
+  heroZahlen?: HeroZahlen;
 }) {
   if (FADEN_AKTIV) {
-    return <FadenHuelle navItems={navItems} megamenuPreload={megamenuPreload} level={level}>{children}</FadenHuelle>;
+    return <FadenHuelle navItems={navItems} megamenuPreload={megamenuPreload} level={level} heroZahlen={heroZahlen}>{children}</FadenHuelle>;
   }
   return <SeitenHuelle navItems={navItems} megamenuPreload={megamenuPreload} siteSettings={siteSettings!}>{children}</SeitenHuelle>;
 }

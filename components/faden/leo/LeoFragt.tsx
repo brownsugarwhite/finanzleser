@@ -95,7 +95,12 @@ function zahl(n: number): string { return n.toLocaleString("de-DE"); }
 interface Danke { text: string; hinweis?: string; link?: { href: string; text: string } }
 interface Offen { frage: LeoFragtEintrag; phase: "frage" | "danke"; danke?: Danke }
 
-export default function LeoFragt() {
+/**
+ * `vorgabe` ist der Zugang für den Schaukasten (app/schaukasten): eine feste Frage,
+ * sofort offen, ohne Abruf und ohne Auslöser. So zeigt der Schaukasten die ECHTE
+ * Komponente statt eines Nachbaus — im Betrieb bleibt der Weg über das CMS derselbe.
+ */
+export default function LeoFragt({ vorgabe }: { vorgabe?: LeoFragtEintrag } = {}) {
   const { fragen: anLeo, navigieren } = useFaden();
   const pathname = usePathname();
   const [fragen, setFragen] = useState<LeoFragtEintrag[] | null>(cache);
@@ -105,10 +110,11 @@ export default function LeoFragt() {
   const dankeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    if (vorgabe) return; // feste Frage: nichts abrufen
     let lebt = true;
     holeFragen().then((l) => { if (lebt) setFragen(l); });
     return () => { lebt = false; if (dankeTimer.current) clearTimeout(dankeTimer.current); };
-  }, []);
+  }, [vorgabe]);
 
   const weg = useCallback(() => {
     if (dankeTimer.current) { clearTimeout(dankeTimer.current); dankeTimer.current = null; }
@@ -128,6 +134,8 @@ export default function LeoFragt() {
     if (dankeTimer.current) clearTimeout(dankeTimer.current);
     dankeTimer.current = setTimeout(weg, ms);
   }, [weg]);
+
+  useEffect(() => { if (vorgabe) zeigen(vorgabe); }, [vorgabe, zeigen]);
 
   // Auslöser: nach jedem Kapitelwechsel prüfen, ob eine Frage passt; der Timer läuft nur,
   // solange die Seite sichtbar ist, und beginnt nach dem Zurückkommen von vorn.

@@ -10,3 +10,14 @@
  * byteidentisch (Regel 0).
  */
 export const FADEN_AKTIV = process.env.NEXT_PUBLIC_FADEN === "1";
+
+/**
+ * Schaukasten: eine Route, die jedes Element des Fadens einmal zeigt (app/schaukasten).
+ *
+ * 🚨 Werkzeug für die Abnahme, kein Teil der Seite. In der Entwicklung immer an, in
+ * einem Produktions-Build nur mit `NEXT_PUBLIC_SCHAUKASTEN=1` — so lässt er sich in
+ * einem Deploy-Preview einschalten, ohne dass er je auf finanzleser.de landet.
+ * Die Route trägt zusätzlich `robots: noindex, nofollow`.
+ */
+export const SCHAUKASTEN_AKTIV =
+  FADEN_AKTIV && (process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_SCHAUKASTEN === "1");

@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
 import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
-import { FrageBlase, LeoBlase } from "./Blase";
+import { FrageBlase, LeoRede } from "./Blase";
 
 // Siehe components/faden/leo/LeoMarkdown.tsx: der Markdown-Parser wird erst geladen,
 // wenn eine Antwort da ist, nicht auf jeder Faden-Seite.
@@ -33,7 +33,7 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
   return (
     <div className="wort wort--leo">
       <span className="kicker kicker--gruen">Leo</span>
-      <LeoBlase>
+      <LeoRede text={text}>
         {!text && laeuft ? (
           <div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div>
         ) : (
@@ -45,7 +45,7 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
         {!laeuft && quellen.length > 0 && (
           <div className="quellen"><b>Quellen</b>{quellen.map((q, i) => <span key={i}>› {q.title}{q.pages ? ` · ${q.pages}` : ""}</span>)}</div>
         )}
-      </LeoBlase>
+      </LeoRede>
       {!laeuft && text && (
         <div className="werkzeuge">
           <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
@@ -97,20 +97,20 @@ export default function LeoStrom() {
     <div className="leo-strom" id="leo-strom" aria-live="polite">
       {nachrichten.map((m, i) => (
         m.role === "user" ? (
-          <div key={m.id} id={`leo-${m.id}`} className="wort wort--frage"><FrageBlase><p>{getMessageText(m)}</p></FrageBlase></div>
+          <div key={m.id} id={`leo-${m.id}`} className="wort wort--frage"><FrageBlase text={getMessageText(m)}><p>{getMessageText(m)}</p></FrageBlase></div>
         ) : (
           <div key={m.id} id={`leo-${m.id}`}><LeoWort m={m} laeuft={laeuft && i === nachrichten.length - 1} /></div>
         )
       ))}
       {status === "submitted" && letzte?.role === "user" && (
-        <div className="wort wort--leo"><span className="kicker kicker--gruen">Leo</span><LeoBlase><div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div></LeoBlase></div>
+        <div className="wort wort--leo"><span className="kicker kicker--gruen">Leo</span><LeoRede><div className="tippt" aria-label="Leo schreibt"><i /><i /><i /></div></LeoRede></div>
       )}
       {status === "error" && fehler && (
         <div className="wort wort--leo wort--fehler">
           <span className="kicker kicker--pink">Leo · gerade nicht erreichbar</span>
-          <LeoBlase fehler>
+          <LeoRede fehler>
             <p>{/429|limit|pause/i.test(fehler.message) ? "Leo macht gerade eine kurze Pause. Bitte versuchen Sie es in einer Minute erneut." : "Leo ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal."}</p>
-          </LeoBlase>
+          </LeoRede>
           {letzte?.role === "user" && <div className="werkzeuge"><button type="button" className="textlink" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button></div>}
         </div>
       )}

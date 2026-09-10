@@ -15,12 +15,16 @@
  * das Finanztools-Registerblatt), die Dokumentenzahl zählt von 0 auf 12.480 hoch, und
  * unten der CTA „Finanzleser entdecken ↓“, der nach 2,2 s erscheint und zu „Heute“ scrollt.
  */
-import { Fragment, useLayoutEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useFaden } from "@/components/faden/FadenProvider";
 import Spark from "@/components/ui/Spark";
 import FieldOutline from "@/components/ui/FieldOutline";
+import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
+import VersichererSelect from "@/components/ui/VersichererSelect";
+import type { Versicherer } from "@/lib/versicherer";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
+import { DOKUMENTE } from "@/lib/faden/bestand";
 import { Trenner, useHoverBox } from "@/components/faden/spalten/HoverBox";
 
 const seg = (p: number, a: number, b: number) => Math.max(0, Math.min(1, (p - a) / (b - a)));
@@ -38,7 +42,7 @@ const WERKZEUGE = [
 /** Andocken wie im Prototyp-Hero „Zeitung“ (03c-hero.html:73): Startversatz und Verzögerung (s) je Kachel. */
 const ANDOCK_START = ["translate3d(0,40px,0)", "translate3d(0,54px,0)", "translate3d(0,40px,0)"];
 const ANDOCK_NACH = [1.9, 2.05, 2.2];
-const DOKUMENTE = 12480;
+
 const ZAEHL_DAUER = 2.6; // s (zaehler(), 03c-hero.html:43)
 const CTA_NACH = 2200; // ms (03c-hero.html:16)
 
@@ -46,8 +50,15 @@ const CTA_NACH = 2200; // ms (03c-hero.html:16)
 export type HeroZahlen = Partial<Record<"rechner" | "vergleich" | "checkliste", number>>;
 
 export default function HeroLanding({ zahlen }: { zahlen?: HeroZahlen }) {
-  const { verlauf } = useFaden();
-  if (verlauf.length) return null;
+  // Solange der Hero steht, tragen die Randspalten seinen Vorlauf (app/faden.css). Das
+  // Attribut sagt genau das — `data-landing` reicht dafür nicht mehr, denn der Hero
+  // bleibt auch dann stehen, wenn der Leser die Startseite längst verlassen hat.
+  useEffect(() => {
+    document.body.setAttribute("data-faden-hero", "");
+    return () => document.body.removeAttribute("data-faden-hero");
+  }, []);
+  // Der Zeitungskopf gehört an den Anfang des Fadens und wird deshalb IMMER vom Strom
+  // gesetzt — der Hero steht als eigene Sektion darüber, außerhalb des Rasters.
   return <HeroInnen zahlen={zahlen} />;
 }
 
@@ -58,10 +69,13 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
   const oben = useRef<HTMLDivElement>(null);
   const unten = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
+  const pille = useRef<HTMLFormElement>(null);
+  const feld = useRef<HTMLTextAreaElement>(null);
+  const [versicherer, setVersicherer] = useState<Versicherer | null>(null);
   const reihe = useRef<HTMLDivElement>(null);
   const zahl = useRef<HTMLElement>(null);
   const cta = useRef<HTMLButtonElement>(null);
-  const start = useRef<{ l: number; t: number; w: number } | null>(null);
+  const start = useRef<{ l: number; t: number; w: number; h: number } | null>(null);
   useHoverBox(reihe, ".werkzeug-k", { radius: 14, oben: 16, unten: 16 });
 
   useLayoutEffect(() => {
@@ -73,7 +87,8 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
       if (!w || !ziel) return;
       if (p > 0.02 && !start.current) {
         const r0 = w.getBoundingClientRect();
-        start.current = { l: r0.left, t: r0.top, w: r0.width };
+        const pille = w.querySelector<HTMLElement>(".suchpille");
+        start.current = { l: r0.left, t: r0.top, w: r0.width, h: pille?.getBoundingClientRect().height ?? r0.height };
         w.classList.add("fliegt");
       }
       if (!start.current) return;
@@ -87,6 +102,12 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
       w.style.left = `${lerp(start.current.l, echt.left, u)}px`;
       w.style.top = `${lerp(start.current.t, zt, u) + bogen}px`;
       w.style.width = `${lerp(start.current.w, echt.width, u)}px`;
+      // 🚨 Auch die HÖHE wandert mit. Oben ist die Pille höher als unten; ohne das hier
+      // bliebe sie auf Landing-Maß und spränge am Ende auf die Zeilenhöhe. Die Variable
+      // steuert die Mindesthöhe des Feldes (faden.css), der Kasten schrumpft also weich —
+      // zusammen mit der Breite wird die Pille auf dem Weg nach unten breiter und flacher.
+      const zh = ziel.querySelector<HTMLElement>(".suchpille")?.getBoundingClientRect().height ?? echt.height;
+      w.style.setProperty("--pille-h-landing", `${lerp(start.current.h, zh, u)}px`);
       ziel.style.opacity = an ? "" : "0";
       w.style.opacity = an ? "0" : "1";
       w.style.pointerEvents = an ? "none" : "";
@@ -174,16 +195,31 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
         </div>
         <div className="hero-landing__pille">
           <div className="suchpille-wrap" ref={wrap}>
-            <FieldOutline radius={26} gap={4} />
-            <form onSubmit={senden} autoComplete="off" className={"suchpille" + (wert ? " hat-text" : "")}>
-              <label className="sr" htmlFor="hero-frage">Fragen Sie Leo oder suchen Sie im Bestand</label>
-              <input id="hero-frage" type="text" placeholder="Was kann ich für Sie tun?" autoComplete="off" value={wert} onChange={(e) => setWert(e.target.value)} />
-              <button type="submit" className="senden">Fragen</button>
+            <FieldOutline radius={35} gap={4} mess={pille} />
+            <form ref={pille} onSubmit={senden} autoComplete="off" className={"suchpille" + (wert ? " hat-text" : "")}>
+              <div className="suchpille__feld">
+                <label className="sr" htmlFor="hero-frage">Fragen Sie Leo oder suchen Sie im Bestand</label>
+                <textarea
+                  id="hero-frage"
+                  ref={feld}
+                  rows={1}
+                  placeholder="Sende Leo eine Nachricht ..."
+                  autoComplete="off"
+                  value={wert}
+                  onChange={(e) => { setWert(e.target.value); const ta = e.currentTarget; ta.style.height = "auto"; ta.style.height = `${Math.min(ta.scrollHeight, 66)}px`; }}
+                  onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); senden(e); } }}
+                />
+                <div className="suchpille__fuss">
+                  <VersichererSelect value={versicherer} onChange={setVersicherer} />
+                </div>
+                <button type="submit" className="suchpille__senden" aria-label="Nachricht senden">
+                  <LeoChatSendButton status="ready" />
+                </button>
+              </div>
             </form>
           </div>
         </div>
         <div className="landing-unten" ref={unten}>
-          <p className="landing-sub">Leo hat <b ref={zahl}>12.480</b> Versicherungs- und Finanzdokumente gelesen und antwortet mit Quelle und Seite.</p>
           <div className="werkzeugreihe" ref={reihe}>
             {WERKZEUGE.map((w, i) => (
               <Fragment key={w.key}>

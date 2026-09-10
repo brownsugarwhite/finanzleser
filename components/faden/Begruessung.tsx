@@ -27,31 +27,12 @@
  */
 import { useEffect, useRef } from "react";
 import { angehaengt, merkeKnoten } from "@/lib/faden/scrollen";
+import { tippen } from "@/lib/faden/tippen";
 
 const PAUSE = 250;
 
 function reduziert(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-/** Schreibmaschine wie im Prototyp (`tippen`): 5 Zeichen je 10 ms, dann das echte HTML. */
-function tippen(ziel: HTMLElement, html: string): Promise<void> {
-  if (reduziert()) { ziel.innerHTML = html; return Promise.resolve(); }
-  const mess = document.createElement("div");
-  mess.innerHTML = html;
-  const voll = mess.innerText;
-  const p = document.createElement("p");
-  ziel.replaceChildren(p);
-  return new Promise((fertig) => {
-    let i = 0;
-    const schritt = () => {
-      i += 5;
-      p.textContent = voll.slice(0, i);
-      if (i < voll.length) setTimeout(schritt, 10);
-      else { ziel.innerHTML = html; fertig(); }
-    };
-    schritt();
-  });
 }
 
 export default function Begruessung({ children }: { children: React.ReactNode }) {
@@ -64,7 +45,9 @@ export default function Begruessung({ children }: { children: React.ReactNode })
 
     const gruss = wurzel.querySelector<HTMLElement>("#leo-gruss");
     const spalten = wurzel.querySelector<HTMLElement>(".spalten-kasten, .spalten");
-    const finanzwort = wurzel.querySelector<HTMLElement>(".meldung");
+    const neueste = wurzel.querySelector<HTMLElement>(".neueste");
+    const finanzwort = wurzel.querySelector<HTMLElement>(".meldung, .kasten--pink");
+    const kassensturz = wurzel.querySelector<HTMLElement>(".ks-teaser");
     const text = gruss?.querySelector<HTMLElement>("p");
     if (!gruss || !text) return;
 
@@ -74,6 +57,8 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     const werkzeuge = gruss.querySelector<HTMLElement>(".werkzeuge");
     if (werkzeuge) werkzeuge.hidden = true;
     if (spalten) spalten.hidden = true;
+    if (neueste) neueste.hidden = true;
+    if (kassensturz) kassensturz.hidden = true;
     if (finanzwort) finanzwort.hidden = true;
 
     const tippt = document.createElement("div");
@@ -96,8 +81,10 @@ export default function Begruessung({ children }: { children: React.ReactNode })
       if (werkzeuge) werkzeuge.hidden = false;
       merkeKnoten(gruss);
       // Spalten „leise": sie erscheinen, aber der Faden springt nicht (Prototyp: leise: true)
+      if (neueste) neueste.hidden = false;
       if (spalten) { spalten.hidden = false; angehaengt(spalten, { leise: true }); }
       // Finanzwort zuletzt, mit der normalen Scroll-Regel
+      if (kassensturz) kassensturz.hidden = false;
       if (finanzwort) { finanzwort.hidden = false; angehaengt(finanzwort); }
     };
 

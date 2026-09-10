@@ -30,3 +30,17 @@ const werkzeugListe = unstable_cache(
 export const getWerkzeugIndex = cache(async (): Promise<Map<string, WerkzeugVerweis>> => {
   return new Map(await werkzeugListe());
 });
+
+/**
+ * Bestandszahlen für die Kacheln im Landing-Hero. Zählt nur den bereits gecachten
+ * Index aus (`unstable_cache`, siehe oben) — der Aufruf im Layout kostet deshalb
+ * keine zusätzliche WP-Abfrage, auch nicht beim Prerendern der 800+ Routen.
+ */
+export const getWerkzeugZahlen = cache(async (): Promise<{ rechner: number; vergleich: number; checkliste: number }> => {
+  const zahlen = { rechner: 0, vergleich: 0, checkliste: 0 };
+  for (const key of (await getWerkzeugIndex()).keys()) {
+    const typ = key.split(":")[0] as keyof typeof zahlen;
+    if (typ in zahlen) zahlen[typ]++;
+  }
+  return zahlen;
+});

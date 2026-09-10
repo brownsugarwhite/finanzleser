@@ -16,13 +16,14 @@
  *     Seite bis zur RSC-Antwort das einzige `#kapitel-live` ist, an dem der Provider
  *     erkennt, wann das neue Kapitel steht.
  */
-import { Fragment, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useFaden } from "./FadenProvider";
 import { saeubern } from "@/lib/faden/schnappschuss";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
 import SkelettKapitel from "./SkelettKapitel";
+import Zeitungskopf from "./Zeitungskopf";
+import type { HeroZahlen } from "./hero/HeroLanding";
 import InselnBeleben from "./kette/InselnBeleben";
 
 function Schnappschuss({ html, id }: { html: string; id: string }) {
@@ -60,22 +61,24 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
   );
 }
 
-export default function Strom({ children }: { children: ReactNode }) {
+export default function Strom({ children }: { children: ReactNode; heroZahlen?: HeroZahlen }) {
   const { verlauf, kapitelUmschalten, navigieren, laedt } = useFaden();
-  const pathname = usePathname();
   return (
     <div className={"strom" + (laedt ? " strom--laedt" : "")} id="strom">
+      <Zeitungskopf />
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
-        {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
         <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
-            <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
-            <h2>{k.titel}</h2>
-            <button type="button" className="toggle-k" onClick={(e) => { e.stopPropagation(); kapitelUmschalten(k.id); }}>
-              {k.offen ? "einklappen ▴" : "aufklappen ▾"}
-            </button>
+            <div className="kapitel__kopf-mitte">
+              <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
+              <h2>{k.titel}</h2>
+              <button type="button" className="toggle-k" onClick={(e) => { e.stopPropagation(); kapitelUmschalten(k.id); }}>
+                {k.offen ? "einklappen ▴" : "aufklappen ▾"}
+              </button>
+            </div>
           </div>
+          {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
           <div className="kapitel__inhalt">
             {k.offen && k.html ? (
               <Schnappschuss html={k.html} id={k.id} />
@@ -87,7 +90,6 @@ export default function Strom({ children }: { children: ReactNode }) {
         </section>
         </Fragment>
       ))}
-      {pathname !== "/" && <Einschub format="leaderboard" variante={verlauf.length ? "feed" : "top"} nr={verlauf.length} />}
       {children}
       <LeoStrom />
       {laedt && <SkelettKapitel />}

@@ -12,35 +12,50 @@
 .faden-shell .ks { display: grid; gap: 0; min-width: 0; }
 .faden-shell .kasten--ks { min-width: 0; }
 .faden-shell .ks .ikon { width: 20px; height: 20px; vertical-align: -5px; flex: none; }
-.faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.faden-shell .ks__stand { font: 600 10.5px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
-.faden-shell .ks__fortschritt { height: 2px; background: var(--rule); margin: 10px 0 26px; overflow: hidden; }
-.faden-shell .ks__fortschritt i { display: block; height: 100%; background: var(--green); transition: width .55s cubic-bezier(.25,.46,.45,.94); }
-.faden-shell .ks__buehne { display: grid; gap: 18px; justify-items: center; text-align: center; transition: opacity .22s ease, transform .22s ease; }
+.faden-shell .ks { border-top: 2px solid var(--green); padding-top: 14px; }
+.faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.faden-shell .ks__marke { display: inline-flex; align-items: center; gap: 6px; }
+.faden-shell .ks__marke i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+.faden-shell .ks__stand { font: italic 300 13px var(--serif); color: var(--muted); text-transform: none; letter-spacing: normal; font-variant-numeric: tabular-nums; }
+.faden-shell .ks__fortschritt { position: relative; height: 5px; border-bottom: 1px solid var(--ink); margin: 12px 0 26px; }
+.faden-shell .ks__fortschritt i { position: absolute; top: 0; left: 0; height: 5px; background: var(--ink); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .ks__buehne { display: grid; gap: 18px; justify-items: start; text-align: left; transition: opacity .22s ease, transform .22s ease; }
 .faden-shell .ks__buehne.geht { opacity: 0; transform: translateY(-8px); }
 .faden-shell .ks__buehne.kommt { opacity: 0; transform: translateY(10px); transition: none; }
-.faden-shell .ks__frage { font: 700 23px/1.3 var(--serif); max-width: 30ch; letter-spacing: -.005em; }
-.faden-shell .ks__hinweis { font: 400 13px/1.4 var(--sans); color: var(--muted); margin: 0; }
+.faden-shell .ks__frage { font: 900 clamp(24px, 2.4vw, 34px)/1.2 var(--serif); max-width: 24ch; letter-spacing: normal; text-wrap: balance; }
+.faden-shell .ks__hinweis { font: italic 300 15px/1.45 var(--serif); color: var(--muted); margin: -8px 0 0; }
 .faden-shell .ks__weiter { border: 0; background: none; color: var(--ink); font: 600 14px/1 var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 6px 2px; border-bottom: 1px solid var(--ink); text-decoration: none; border-radius: 0; }
 .faden-shell .ks__weiter i { font-style: normal; color: var(--green); transition: transform .2s; }
 .faden-shell .ks__weiter:hover i { transform: translateX(3px); }
 .faden-shell .ks__still { border: 0; background: none; color: var(--muted); font: 400 13px/1 var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-.faden-shell .ks__schaetz { font: 700 34px/1 var(--serif); color: var(--green-ink); font-variant-numeric: tabular-nums; }
-.faden-shell .ks input[type=range] { width: min(420px, 100%); accent-color: var(--green); }
-.faden-shell .ks__aufloesung { font: 400 16px/1.5 var(--serif); max-width: 46ch; }
-.faden-shell .ks__aufloesung b { color: var(--green-ink); }
-.faden-shell .ks__aufloesung small { display: block; font: 400 12px/1.4 var(--sans); color: var(--muted); margin-top: 4px; }
+.faden-shell .ks__regler { width: 100%; display: grid; gap: 0; }
+.faden-shell .ks__bahn { position: relative; padding: 34px 0 6px; }
+.faden-shell .ks input[type=range] { position: relative; z-index: 2; width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: linear-gradient(to right, var(--ink) var(--anteil, 0%), var(--rule) var(--anteil, 0%)); border-radius: 3px; }
+.faden-shell .ks input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); cursor: pointer; }
+.faden-shell .ks input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); cursor: pointer; }
+.faden-shell .ks__fahne { position: absolute; top: 0; transform: translateX(-50%); z-index: 3; background: var(--ink); color: #fff; padding: 5px 11px; font: 600 16px/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; transition: left .28s cubic-bezier(.22,1,.36,1); }
+.faden-shell .ks__fahne::after { content: ""; position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%); border: 5px solid transparent; border-bottom: 0; border-top-color: var(--ink); }
+.faden-shell .ks__spanne { position: absolute; top: 34px; height: 6px; z-index: 1; background: repeating-linear-gradient(135deg, rgba(51,74,39,.28) 0 4px, transparent 4px 8px); }
+.faden-shell .ks__wahr { position: absolute; top: 46px; transform: translateX(-50%); z-index: 3; background: var(--green); color: #fff; padding: 4px 9px; font: 700 13px/1 var(--sans); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.faden-shell .ks__wahr i { position: absolute; left: 50%; top: -12px; width: 2px; height: 12px; background: var(--green); transform: translateX(-50%); }
+.faden-shell .ks__spanneWerte { display: flex; justify-content: space-between; font: 700 13px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; margin-top: 10px; }
+.faden-shell .ks__spanneWerte span { position: relative; padding-top: 9px; }
+.faden-shell .ks__spanneWerte span::before { content: ""; position: absolute; top: 0; width: 2px; height: 5px; background: var(--ink); }
+.faden-shell .ks__spanneWerte span:first-child::before { left: 1px; } .faden-shell .ks__spanneWerte span:last-child::before { right: 1px; }
+.faden-shell .ks__aufloesung { font: 400 16px/1.55 var(--sans); max-width: 60ch; }
+.faden-shell .ks__aufloesung b { font-family: var(--serif); font-weight: 700; }
+.faden-shell .ks__genau { display: inline-block; margin-left: 8px; padding: 3px 9px; background: var(--tint); color: var(--green-ink); font: 700 13px/1.3 var(--sans); }
+.faden-shell .ks__aufloesung small { display: block; font: 400 12px/1.4 var(--sans); color: var(--muted); margin-top: 6px; }
 
 /* Antworten als Karten mit Ikon */
-.faden-shell .ks__karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: 12px; width: 100%; max-width: 640px; min-width: 0; }
-.faden-shell .ks__karte { position: relative; border: 1px solid var(--rule-strong); background: var(--white); border-radius: 10px; padding: 16px 12px 14px; display: grid; justify-items: center; gap: 8px; font: 600 14px/1.25 var(--serif); color: var(--ink); cursor: pointer; overflow: hidden; transition: transform .18s, box-shadow .18s, border-color .2s, color .2s; animation: ks-rein .4s both; z-index: 0; }
-.faden-shell .ks__karte .ikon { width: 30px; height: 30px; vertical-align: 0; color: var(--green-ink); transition: color .2s, transform .2s; }
-.faden-shell .ks__karte:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(51,74,39,.12); border-color: var(--ink); }
+.faden-shell .ks__karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 14px; width: 100%; min-width: 0; }
+.faden-shell .ks__karte { position: relative; border: 1px solid var(--rule); background: transparent; border-radius: 0; padding: 18px 18px 16px; display: grid; justify-items: start; gap: 10px; text-align: left; color: var(--ink); cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s; animation: ks-rein .4s both; }
+.faden-shell .ks__karte b { font: 700 16px/1.3 var(--serif); }
+.faden-shell .ks__karte .ikon { width: 28px; height: 28px; vertical-align: 0; color: var(--ink); transition: color .2s, transform .2s; }
+.faden-shell .ks__karte:hover { transform: translateY(-3px); border-color: var(--ink); }
 .faden-shell .ks__karte:hover .ikon { transform: scale(1.08); }
-.faden-shell .ks__karte::before { content: ""; position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .28s cubic-bezier(.25,.46,.45,.94); z-index: -1; }
-.faden-shell .ks__karte.gewaehlt { color: var(--paper); border-color: var(--ink); }
-.faden-shell .ks__karte.gewaehlt::before { transform: scaleX(1); }
-.faden-shell .ks__karte.gewaehlt .ikon { color: #fff; }
+.faden-shell .ks__karte.gewaehlt { border: 2px solid var(--ink); padding: 17px 17px 15px; }
+.faden-shell .ks__karte.gewaehlt .ikon { color: var(--ink); }
 
 /* Ergebnis: Zierlinie, Profil als Vorspann, Ampel als Zeile, Tacho rechts, Lücken als Karten */
 .faden-shell .ks__zier { display: flex; align-items: center; gap: 14px; color: var(--muted); }
@@ -58,31 +73,35 @@
 .faden-shell .ks__profilblock .ks__ampel { justify-content: flex-start; }
 .faden-shell .ks__tacho { justify-self: end; }
 .faden-shell .ks__erg-karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; width: 100%; text-align: left; }
-.faden-shell .ks__erg { position: relative; border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--white); padding: 18px 16px 16px; display: grid; gap: 8px; align-content: start; }
+.faden-shell .ks__erg { position: relative; border: 1px solid var(--rule); border-radius: 0; background: none; padding: 18px 16px 16px; display: grid; gap: 8px; align-content: start; }
 .faden-shell .ks__erg h4 { margin: 0; font: 700 16.5px/1.3 var(--serif); }
 .faden-shell .ks__erg p { margin: 0; font-size: 14px; line-height: 1.5; }
 .faden-shell .ks__erg .links { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; }
-.faden-shell .ks__erg-ikon { width: 44px; height: 44px; border-radius: 50%; background: var(--pink-tint); color: var(--pink); display: grid; place-items: center; }
-.faden-shell .ks__erg-ikon .ikon { width: 24px; height: 24px; vertical-align: 0; }
-.faden-shell .ks__erg--gut .ks__erg-ikon { background: var(--tint); color: var(--green-ink); }
+.faden-shell .ks__erg-ikon { width: 34px; height: 34px; border-radius: 0; background: none; color: var(--ink); display: grid; place-items: start; }
+.faden-shell .ks__erg-ikon .ikon { width: 28px; height: 28px; vertical-align: 0; }
+.faden-shell .ks__erg--gut .ks__erg-ikon { color: var(--green-ink); }
 .faden-shell .ks__erg .ks__nr { position: absolute; top: 12px; right: 14px; font-size: 22px; }
 .faden-shell .ks__aktionen { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
-.faden-shell .ks__nachher { width: 100%; display: grid; gap: 10px; justify-items: center; text-align: center; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px 22px 22px; }
-.faden-shell .ks__nachher p { margin: 0; max-width: 52ch; }
-.faden-shell .ks__nachher .ks__erg-ikon { background: var(--tint); color: var(--green-ink); }
-.faden-shell .ks__feld { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: min(560px, 100%); }
-.faden-shell .ks__feld .btn { justify-self: auto; }
+.faden-shell .ks__nachher { width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; padding: 22px 0 0; margin-top: 8px; }
+.faden-shell .ks__zustellung { grid-column: 2; display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; margin-top: 14px; width: 100%; }
+.faden-shell .ks__feld { display: flex; align-items: baseline; gap: 0; flex: 1 1 260px; min-width: 0; max-width: 380px; border-bottom: 1px solid var(--ink); }
+.faden-shell .ks__feld input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; padding: 6px 0; font: 400 14px var(--sans); color: var(--ink); }
+.faden-shell .ks__feld input::placeholder { color: var(--muted); }
+.faden-shell .ks__senden { border: 0; background: none; padding: 6px 0 6px 10px; font: 600 13px var(--sans); color: var(--green-ink); white-space: nowrap; cursor: pointer; }
+.faden-shell .ks__wa { display: inline-flex; align-items: center; gap: 7px; border: 0; background: none; padding: 6px 0; font: 600 13px var(--sans); color: var(--muted); cursor: pointer; }
+.faden-shell .ks__wa:hover { color: var(--green-ink); }
+.faden-shell .ks__wa .ikon { width: 17px; height: 17px; vertical-align: 0; }
 .faden-shell .ks__feld .btn .ikon { width: 16px; height: 16px; vertical-align: -3px; margin-right: 4px; }
 .faden-shell .ks__rein { animation: ks-rein .5s cubic-bezier(.25,.46,.45,.94) both; }
 @keyframes ks-rein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* Tacho: Halbkreis, Bogen füllt sich, Zahl zählt hoch */
-.faden-shell .tacho { display: grid; justify-items: center; width: 180px; }
-.faden-shell .tacho svg { width: 180px; height: 100px; display: block; }
-.faden-shell .tacho__bogen { transition: stroke-dashoffset .1s linear; }
-.faden-shell .tacho__wert { margin-top: -38px; text-align: center; }
-.faden-shell .tacho__wert b { display: block; font: 700 30px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
-.faden-shell .tacho__wert small { display: block; font: 600 10.5px/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .tacho { position: relative; width: 230px; height: 126px; }
+.faden-shell .tacho svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.faden-shell .tacho__bogen { transition: stroke .6s; }
+.faden-shell .tacho__wert { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; }
+.faden-shell .tacho__wert b { display: block; font: 900 34px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .tacho__wert small { display: block; margin-top: 4px; font: 700 10px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 
 @media (max-width: 900px) {
   .faden-shell .ks__frage { font-size: 20px; }

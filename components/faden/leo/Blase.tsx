@@ -1,26 +1,40 @@
 /**
- * Sprechblasen für den Wortwechsel mit Leo — Form, Kontur und Schwanz exakt wie im
- * Leo-Chat der Live-Seite (components/ui/LeoChatMessages.tsx, CSS in app/components.css).
+ * Der Wortwechsel mit Leo — zwei ungleiche Hälften:
  *
- * Zwei Sorten:
- *   FrageBlase  — die Frage des Lesers: gefüllt in der dunklen Überschriftenfarbe
- *                 (--ink), Text weiß, Schwanz rechts unten in derselben Farbe.
- *   LeoBlase    — Leos Antwort: Seitenhintergrund mit 1px-Kontur, Schwanz links unten,
- *                 Leos Kopf sitzt daneben auf Höhe des Schwanzes.
+ *   FrageBlase — die Frage des Lesers bleibt eine Sprechblase: gefüllt in der dunklen
+ *                Überschriftenfarbe (--ink), Text weiß, Schwanz rechts unten, „Ihre
+ *                Frage“ rechts oben in der Blase. Form und Maße wie im Leo-Chat der
+ *                Live-Seite (app/components.css).
+ *   LeoRede    — Leo spricht OHNE Blase, so wie in der Übergabe A v2 (Zeile 343–347):
+ *                sein Kopf steht links in der Gasse, Kicker und Text stehen frei auf
+ *                dem Papier. Der Zeitungssatz kennt keine Kästen für Fließtext.
  *
- * 🚨 Der Schwanz besteht aus ZWEI deckungsgleichen SVGs: der hintere (mit Strich)
- * setzt die Kontur der Blase fort, der vordere (Füllung = Blasenfarbe) deckt die
- * Konturlinie dort ab, wo der Schwanz an der Blase ansetzt. Ein einzelner Schwanz
- * ergibt entweder eine durchgestrichene Blase oder einen Schwanz ohne Kontur.
- * Dieselbe Konstruktion trägt die Live-Seite.
+ * 🚨 Der große Satz ist ein ZITAT-Satz, kein Lesesatz. Er trägt eine kurze, gesetzte
+ * Antwort und eine kurze Frage — bei einem langen Absatz wird er zur Zumutung. Deshalb
+ * bestimmt die Textlänge die Größe: `text` mitgeben, dann stuft sich die Blase bzw.
+ * Leos Absatz selbst herunter. Ohne `text` bleibt es beim großen Satz (kurze Fälle).
+ *
+ * 🚨 Der Schwanz der Frageblase besteht aus ZWEI deckungsgleichen SVGs: der hintere
+ * (mit Strich) setzt die Kontur fort, der vordere (Füllung = Blasenfarbe) deckt die
+ * Konturlinie dort ab, wo der Schwanz ansetzt. Ein einzelner Schwanz ergibt entweder
+ * eine durchgestrichene Blase oder einen Schwanz ohne Kontur.
  */
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
 import BubbleSpike from "@/components/ui/BubbleSpike";
 
-export function FrageBlase({ children }: { children: ReactNode }) {
+/** Ab so vielen Zeichen wird die Frage kleiner gesetzt — erst eine Stufe, dann zwei. */
+const FRAGE_MITTEL = 62;
+const FRAGE_KLEIN = 118;
+/** Ab so vielen Zeichen ist Leos Antwort kein Zitat mehr, sondern Fließtext. */
+const ANTWORT_FLIESS = 200;
+
+export function FrageBlase({ children, text, blaseRef }: { children: ReactNode; text?: string; blaseRef?: Ref<HTMLDivElement> }) {
+  const n = text?.length ?? 0;
+  const mass = n > FRAGE_KLEIN ? " blase--klein" : n > FRAGE_MITTEL ? " blase--mittel" : "";
   return (
     <div className="blase-huelle">
-      <div className="blase blase--frage">
+      <div className={"blase blase--frage" + mass} ref={blaseRef}>
+        <span className="blase__kicker">Ihre Frage</span>
         {children}
         <BubbleSpike className="blase__spike" />
       </div>
@@ -28,18 +42,12 @@ export function FrageBlase({ children }: { children: ReactNode }) {
   );
 }
 
-export function LeoBlase({ children, fehler = false }: { children: ReactNode; fehler?: boolean }) {
+export function LeoRede({ children, fehler = false, text }: { children: ReactNode; fehler?: boolean; text?: string }) {
+  const fliess = (text?.length ?? 0) > ANTWORT_FLIESS;
   return (
-    <div className="blase-huelle">
-      <BubbleSpike
-        kontur
-        className={"blase__spike blase__spike--unten" + (fehler ? " blase__spike--stoerung" : "")}
-      />
+    <div className={"leo-rede" + (fehler ? " leo-rede--fehler" : "") + (fliess ? " leo-rede--fliess" : "")}>
       <img src="/assets/leo.svg" alt="Leo" className="wort__avatar" />
-      <div className={"blase blase--leo" + (fehler ? " blase--fehler" : "")}>
-        {children}
-        <BubbleSpike className="blase__spike" />
-      </div>
+      {children}
     </div>
   );
 }

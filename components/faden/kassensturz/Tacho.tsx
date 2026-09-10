@@ -9,9 +9,10 @@
 import { useEffect, useRef } from "react";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 
-const R = 70;
-const U = Math.PI * R;
-const BOGEN = "M20 90 A70 70 0 0 1 160 90";
+const R = 90;
+const U = Math.PI * R;      // Halbkreis-Umfang: 282,74
+const R_INNEN = 76;
+const U_INNEN = Math.PI * R_INNEN;
 
 export default function Tacho({ wert, max = 100, label, einheit = "", farbe, verzug = 200 }: {
   wert: number;
@@ -26,7 +27,7 @@ export default function Tacho({ wert, max = 100, label, einheit = "", farbe, ver
   const anteil = Math.max(0, Math.min(1, max > 0 ? wert / max : 0));
   const strich = farbe || (anteil < 0.4 ? "var(--pink)" : anteil < 0.7 ? "#9CCB86" : "var(--green)");
   const zahl = useRef<HTMLElement>(null);
-  const bogen = useRef<SVGPathElement>(null);
+  const bogen = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -37,7 +38,7 @@ export default function Tacho({ wert, max = 100, label, einheit = "", farbe, ver
       const t = Math.min(1, (now - t0) / dauer);
       const e = 1 - Math.pow(1 - t, 3);
       if (zahl.current) zahl.current.textContent = Math.round(wert * e) + einheit;
-      if (bogen.current) bogen.current.style.strokeDashoffset = String(U * (1 - anteil * e));
+      if (bogen.current) bogen.current.style.strokeDasharray = `${U * anteil * e} ${U * 2}`;
       if (t < 1) raf = requestAnimationFrame(lauf);
     };
     const timer = setTimeout(() => { raf = requestAnimationFrame(lauf); }, verzug);
@@ -46,9 +47,10 @@ export default function Tacho({ wert, max = 100, label, einheit = "", farbe, ver
 
   return (
     <div className="tacho">
-      <svg viewBox="0 0 180 100" role="img" aria-label={`${wert}${einheit} ${label}`}>
-        <path d={BOGEN} fill="none" stroke="var(--rule)" strokeWidth={12} strokeLinecap="round" />
-        <path ref={bogen} className="tacho__bogen" d={BOGEN} fill="none" stroke={strich} strokeWidth={12} strokeLinecap="round" strokeDasharray={U} strokeDashoffset={U} />
+      <svg viewBox="0 0 220 120" role="img" aria-label={`${wert}${einheit} ${label}`}>
+        <circle cx={110} cy={110} r={R} fill="none" stroke="rgba(51,74,39,.1)" strokeWidth={14} strokeDasharray={`${U} ${U}`} transform="rotate(180 110 110)" />
+        <circle cx={110} cy={110} r={R_INNEN} fill="none" stroke="var(--ink)" strokeWidth={1} strokeDasharray={`${U_INNEN} ${U_INNEN}`} transform="rotate(180 110 110)" />
+        <circle ref={bogen} className="tacho__bogen" cx={110} cy={110} r={R} fill="none" stroke={strich} strokeWidth={14} strokeDasharray={`0 ${U * 2}`} transform="rotate(180 110 110)" />
       </svg>
       <div className="tacho__wert"><b ref={zahl}>0</b><small>{label}</small></div>
     </div>
