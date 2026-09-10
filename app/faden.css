@@ -20,7 +20,11 @@
   --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
   background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
 }
-body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidden; }
+/* 🚨 Keine Scroll-Verankerung des Browsers: Chrome wählt selbst einen Ankerknoten und
+   verschiebt scrollY, wenn sich darüber etwas ändert — im Faden mal ja, mal nein (gemessen
+   10.09.2026: +480 px im Klick-Moment, ohne einen einzigen scrollTo). Der Faden gleicht
+   selbst aus (lib/faden/ausgleich.ts, mitAusgleich), und zwar deterministisch. */
+body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidden; overflow-anchor: none; }
 .faden-shell * { box-sizing: border-box; }
 .faden-shell h1, .faden-shell h2, .faden-shell h3, .faden-shell h4 { font-family: var(--serif); font-weight: 700; line-height: 1.22; margin: 0; text-wrap: balance; }
 .faden-shell button { font: inherit; cursor: pointer; color: inherit; }
@@ -320,11 +324,26 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel--skelett { min-height: calc(100dvh - var(--kopf-h, 64px) - 24px); }
 /* Das neue Kapitel blendet ein, statt hart zu erscheinen. */
 .faden-shell .kapitel--frisch { animation: faden-frisch .45s cubic-bezier(.25,.46,.45,.94) both; }
-@keyframes faden-frisch { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* 🚨 Nur Deckkraft, keine Verschiebung: Mit `translateY(6px)` maß der Sprung unter den
+   Kopf ein Kapitel, das gerade noch 6 px tiefer stand — und korrigierte 500 ms später
+   sichtbar nach. */
+@keyframes faden-frisch { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .faden-shell .kapitel--frisch { animation: none; } }
-.faden-shell .skelett { display: grid; gap: 12px; padding: 4px 0 8px; }
+/* Skelett mit Silhouette (components/faden/SkelettKapitel.tsx): dieselbe Kopfzeile wie das
+   Kapitel, echter Titel, darunter schimmernde Zeilen in den Maßen des Ziels. `.artikel`
+   gibt den Zeilenabstand des Ratgebers (14 px), damit Titel und Zeilen beim Austausch
+   dort stehen, wo das Kapitel sie hinsetzt. */
+.faden-shell .skelett { display: grid; gap: 14px; padding: 0 0 8px; }
 .faden-shell .skelett i { display: block; height: 12px; border-radius: 3px; background: linear-gradient(90deg, var(--rule) 25%, var(--rule-soft) 50%, var(--rule) 75%); background-size: 200% 100%; animation: faden-schimmer 1.3s linear infinite; }
-.faden-shell .skelett i.skelett__bild { height: 120px; width: 40%; }
+.faden-shell .skelett__hinweis { color: var(--muted); }
+.faden-shell .skelett__block { display: grid; gap: 8px; }
+.faden-shell .skelett__autor { display: flex; align-items: center; gap: 10px; }
+.faden-shell .skelett i.skelett__ring { width: 36px; height: 36px; border-radius: 50%; flex: none; }
+.faden-shell .skelett i.skelett__bild { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 2px; }
+.faden-shell .skelett__inhalt { display: grid; gap: 10px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0 14px; }
+.faden-shell .skelett i.skelett__karte { height: 420px; border-radius: 10px; }
+.faden-shell .skelett__eintrag { display: grid; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.faden-shell .skelett h1 { animation: faden-frisch .3s ease both; }
 @keyframes faden-schimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .faden-shell .skelett i { animation: none; } }
 /* Platzhalterzeile im Verlauf, solange das neue Kapitel lädt — dieselbe Schimmerkurve
@@ -344,6 +363,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel__schnappschuss { opacity: .92; }
 /* Die Insel-Hülle darf das Layout nicht anfassen — sie ist nur ein Marker (Insel.tsx). */
 .faden-shell .insel { display: contents; }
+/* … außer im eingefrorenen Kapitel: Dort ist die Insel ein Kasten mit der Höhe, die sie
+   lebend hatte (lib/faden/schnappschuss.ts), damit beim Leeren und beim Beleben nichts rückt. */
+.faden-shell .insel--platz { display: block; }
 .faden-shell .kapitel__wieder { color: var(--muted); font-size: 14px; }
 .faden-shell .kapitel__wieder-zeile { border-top: 1px solid var(--rule); padding-top: 8px; }
 .faden-shell .wort { display: grid; gap: 4px; }

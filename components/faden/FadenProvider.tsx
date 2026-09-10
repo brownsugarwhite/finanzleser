@@ -10,7 +10,8 @@
  * echte Navigation (Schnappschuss fällt weg, weil das Ziel wieder lebt).
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten } from "@/lib/faden/scrollen";
+import { flushSync } from "react-dom";
+import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten, mitAusgleich, unterDenKopf } from "@/lib/faden/scrollen";
 import { greifen } from "@/lib/faden/schnappschuss";
 import { fadenZiel, istHier } from "@/lib/faden/ziel";
 import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
@@ -30,8 +31,13 @@ export interface Schnappschuss {
   zeit: string; // HH:MM
   /** Roh-HTML, ungesäubert; `saeubern()` läuft erst beim Aufklappen. Leer nach Reload (nur Kopfzeile). */
   html: string;
+  /** Höhe des Kapitels samt Leos Wortwechsel im Moment des Einfrierens — der Schnappschuss darf nie kürzer sein (feste Höhen, siehe greifen). */
+  hoehe?: number;
   offen: boolean;
 }
+
+/** Ziel der laufenden Navigation — Skelett und Verlaufszeile kennen so Titel und Adresse, bevor der Inhalt da ist. */
+export interface LadeZiel { href: string; titel?: string }
 
 export interface BlattZustand { key: "ratgeber" | "finanztools" | "service" | "plus"; a?: string; b?: string }
 
@@ -44,13 +50,16 @@ interface FadenContextWert {
   blattZu: () => void;
   verlauf: Schnappschuss[];
   kapitelNr: number;
-  /** Interne Navigation „anhängen statt ersetzen“; `wandert` lässt das neue Kapitel kurz einschweben (Kapitel ans Ende geholt). */
-  navigieren: (href: string, opts?: { wandert?: boolean }) => void;
+  /** Interne Navigation „anhängen statt ersetzen“; `wandert` lässt das neue Kapitel kurz einschweben (Kapitel ans Ende geholt); `titel` steht sofort im Skelett und im Verlauf. */
+  navigieren: (href: string, opts?: { wandert?: boolean; titel?: string }) => void;
   /**
    * Eine Navigation läuft: Der Strom zeigt statt der (noch alten) Seite das Skelett und
    * springt sofort dorthin — Port von `ladeDann` aus dem Prototyp.
    */
   laedt: boolean;
+  /** Die Antwort lässt länger auf sich warten (> 8 s): das Skelett sagt es und wartet weiter. */
+  laedtLange: boolean;
+  ladeZiel: LadeZiel | null;
   kapitelUmschalten: (id: string) => void;
   koffer: string[];
   /** Eintrag ablegen; mit `von` fliegt ein Beleg vom Knopf zum Koffer im Lesezeichen. */
@@ -114,6 +123,15 @@ function istEinfacherLinksklick(e: MouseEvent): boolean {
   return e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 }
 
+/** Titel des Ziels aus dem Link — für Skelett und Verlaufszeile, bevor der Inhalt da ist. */
+function titelAusLink(a: HTMLAnchorElement): string | undefined {
+  const eigen = a.dataset.titel || a.getAttribute("aria-label") || a.title;
+  if (eigen) return eigen.trim();
+  const kopf = a.querySelector("h1, h2, h3, h4, .titel, b, strong");
+  const t = (kopf?.textContent || a.textContent || "").replace(/\s+/g, " ").trim();
+  return t.length > 2 && t.length <= 90 ? t : undefined;
+}
+
 /**
  * Live-Kapitel einfrieren.
  *
@@ -133,10 +151,11 @@ function schnappschuss(): Schnappschuss | null {
     pfad: (live.dataset.pfad || "").split(" › ").filter(Boolean),
     url: location.pathname + location.search,
     zeit: uhr(),
-    html: greifen(live),
-    // Das frisch eingefrorene Kapitel bleibt OFFEN. Eingeklappt wird erst das vorletzte
-    // (siehe navigieren) — der Faden reißt dann nicht ab: über dem neuen Kapitel steht
-    // noch der ganze Beitrag, den man gerade gelesen hat.
+    ...greifen(live),
+    // Das frisch eingefrorene Kapitel bleibt OFFEN. Eingeklappt wird erst das vorletzte —
+    // nach der Ankunft des neuen Kapitels und mit Scroll-Ausgleich (siehe `abschluss`) —
+    // der Faden reißt dann nicht ab: über dem neuen Kapitel steht noch der ganze Beitrag,
+    // den man gerade gelesen hat.
     offen: true,
   };
 }
@@ -166,8 +185,15 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   const [toastText, setToastText] = useState("");
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [laedt, setLaedt] = useState(false);
+  const [laedtLange, setLaedtLange] = useState(false);
+  const [ladeZiel, setLadeZiel] = useState<LadeZiel | null>(null);
   /** Wann das Skelett erschien — es bleibt mindestens SKELETT_MIN stehen, sonst blitzt es nur auf. */
   const laedtSeit = useRef(0);
+  const langeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** Das lebende Kapitel im Klick-Moment — daran erkennt der Pfad-Effekt die Ankunft des neuen. */
+  const vorherLive = useRef<HTMLElement | null>(null);
+  /** Nach der Ankunft: alles vor dem gerade verlassenen Kapitel zuklappen (mit Ausgleich). */
+  const zuklappenNachAnkunft = useRef(false);
   const scrollNachNavigation = useRef(false);
   const wandertNachNavigation = useRef(false);
   const letzterPfad = useRef(pathname);
@@ -267,44 +293,46 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     return () => window.removeEventListener("scroll", h);
   }, [setzeLesestelle]);
 
-  const navigieren = useCallback((href: string, opts?: { wandert?: boolean }) => {
+  const navigieren = useCallback((href: string, opts?: { wandert?: boolean; titel?: string }) => {
     const s = schnappschuss();
     lesestelleMerken(s?.id);
     wandertNachNavigation.current = !!opts?.wandert;
     const zielPfad = href.split(/[?#]/)[0];
+    const friert = !!s && s.url.split(/[?#]/)[0] !== zielPfad;
     setVerlauf((alt) => {
       let liste = alt.filter((k) => k.url.split(/[?#]/)[0] !== zielPfad); // Ziel lebt gleich wieder
-      if (s && s.url.split(/[?#]/)[0] !== zielPfad) {
+      if (s && friert) {
         liste = liste.filter((k) => k.key !== s.key);
-        // Alles Ältere zuklappen, das gerade verlassene Kapitel bleibt offen.
-        liste = liste.map((k) => (k.offen ? { ...k, offen: false } : k));
+        // 🚨 Hier wird NICHTS zugeklappt und nichts gekürzt. Beides ändert Höhen OBERHALB
+        // des Skeletts, das im selben Commit kommt — der Sprung dorthin zielte dann
+        // daneben (gemessen 10.09.2026: bis zu 11 887 px). Zuklappen und Kürzen passieren
+        // nach der Ankunft, mit Scroll-Ausgleich (siehe `abschluss`).
         liste = [...liste, s];
       }
-      return liste.slice(-MAX_VERLAUF);
+      return liste;
     });
+    zuklappenNachAnkunft.current = friert;
     setLeoAb(chatRef.current.messages.length);
     scrollNachNavigation.current = true;
+    // Der Knoten, der gleich ersetzt wird — gemerkt JETZT, nicht erst im Pfad-Effekt: Der
+    // Pfad wechselt im selben Commit wie das neue Kapitel, dort wäre es schon der neue.
+    vorherLive.current = document.getElementById("kapitel-live");
     // Prototyp `ladeDann`: bei reduzierter Bewegung kein Skelett, dann bleibt die alte
     // Seite stehen, bis die neue da ist.
+    //
+    // Der frühere `min-height`-Riegel am Strom ist nicht mehr nötig: Das eingefrorene
+    // Kapitel ist pixelgleich hoch wie das lebende (feste Höhen, greifen/saeubern), und
+    // den Platz unter dem letzten Kapitel hält `Bodenabstand` in Strom.tsx.
     if (!reduzierteBewegung()) {
-      // 🚨 Platz am Ende des Fadens SOFORT reservieren, bevor React das alte Kapitel
-      // ausblendet. Sonst schrumpft das Dokument im selben Moment um die ganze Höhe des
-      // gelesenen Beitrags: der Browser kappt die Scrollposition auf das neue Seitenende,
-      // die Randspalten verlieren ihren Klebebereich und rutschen mit hoch, und der
-      // sanfte Sprung wird zum Ruck. Mit eingefrorener Höhe läuft der Sprung als echte
-      // Bewegung von der Lesestelle zum Skelett — und nichts darüber springt.
-      const strom = document.getElementById("strom");
-      if (strom) strom.style.minHeight = Math.round(strom.getBoundingClientRect().height) + "px";
       laedtSeit.current = performance.now();
       setLaedt(true);
-      // Sicherung, falls der Routenwechsel ganz ausbleibt (Fehlerseite, abgebrochener Push).
-      setTimeout(() => {
-        if (!laedtSeit.current) return;
-        laedtSeit.current = 0;
-        setLaedt(false);
-        const st = document.getElementById("strom");
-        if (st) st.style.minHeight = "";
-      }, 8000);
+      setLaedtLange(false);
+      setLadeZiel({ href, titel: opts?.titel });
+      // Dauert es länger, sagt das Skelett es — und wartet weiter. Kein Wiederbeleben der
+      // alten Seite (das stellte das alte Kapitel doppelt in den Verlauf, gemessen
+      // 10.09.2026) und kein harter Seitenwechsel.
+      if (langeTimer.current) clearTimeout(langeTimer.current);
+      langeTimer.current = setTimeout(() => { if (laedtSeit.current) setLaedtLange(true); }, 8000);
     }
     router.push(href, { scroll: false });
   }, [router, lesestelleMerken]);
@@ -319,7 +347,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       if (!ziel) return;
       ev.preventDefault();
       if (istHier(ziel)) { zumKapitelScrollen(); return; }
-      navigieren(ziel);
+      navigieren(ziel, { titel: a ? titelAusLink(a) : undefined });
     };
     document.addEventListener("click", aufKlick);
     return () => document.removeEventListener("click", aufKlick);
@@ -337,11 +365,13 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
     const wandert = wandertNachNavigation.current;
     wandertNachNavigation.current = false;
     const hash = location.hash.slice(1);
-    // 🚨 `usePathname()` wechselt, BEVOR das neue Kapitel im DOM steht — die RSC-Antwort
-    // streamt noch. Ein einzelnes requestAnimationFrame greift deshalb zu früh:
-    // `#kapitel-live` ist dann null, der Sprung fällt ersatzlos aus und der Leser bleibt
-    // dort stehen, wo er geklickt hat. Also auf den neuen Knoten warten.
-    const vorher = document.getElementById("kapitel-live");
+    // Auf den neuen Knoten warten, falls die RSC-Antwort noch strömt. 🚨 `vorher` stammt
+    // aus dem Klick-Moment (navigieren). Hier gemessen wäre es schon der NEUE Knoten — der
+    // Pfad wechselt im selben Commit wie das Kapitel —, `live !== vorher` würde nie wahr,
+    // und die Schleife liefe bis zur Frist: 2,0 s Skelett bei jeder Navigation, obwohl der
+    // Inhalt längst da war (gemessen 10.09.2026).
+    const vorher = vorherLive.current;
+    vorherLive.current = null;
     const frist = performance.now() + 2000;
     const versuchen = () => {
       const live = document.getElementById("kapitel-live");
@@ -358,10 +388,19 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
         nochmal(neuLive, wandert ? "wandert" : "kapitel--frisch");
         const anker = hash ? document.getElementById(hash) : null;
         if (anker) zeigeAnfang(anker, true);
-        else zumKapitelScrollen();
-        // Reservierten Platz erst freigeben, wenn der sanfte Sprung durch ist — sonst
-        // schrumpft das Dokument mitten in der Bewegung und der Browser bricht sie ab.
-        setTimeout(() => { const st = document.getElementById("strom"); if (st) st.style.minHeight = ""; }, 700);
+        // Das Kapitel erscheint an der Stelle des Skeletts, also schon unter dem Kopf —
+        // gescrollt wird nur, wenn die Geometrie doch nicht stimmt (kein zweiter Sprung).
+        else if (neuLive) { merkeKnoten(neuLive); unterDenKopf(neuLive); }
+        // Jetzt erst: alles vor dem gerade verlassenen Kapitel zuklappen und den Verlauf
+        // kürzen. Die letzten zwei Kapitel — das verlassene und das neue — bleiben offen.
+        // Das Kürzen gleicht `mitAusgleich` aus (ein entfernter Knoten meldet keine Höhe
+        // mehr), das Zuklappen der Ausgleichs-Beobachter in lib/faden/ausgleich.ts — beides
+        // im selben Bild, vom Leser unbemerkt.
+        if (zuklappenNachAnkunft.current) {
+          zuklappenNachAnkunft.current = false;
+          mitAusgleich(neuLive, () => flushSync(() => setVerlauf((alt) => alt.slice(-MAX_VERLAUF))));
+          setVerlauf((alt) => alt.map((k, i) => (k.offen && i < alt.length - 1 ? { ...k, offen: false } : k)));
+        }
       };
       if (!laedtSeit.current) { abschluss(); return; }
       // Das Skelett bleibt mindestens SKELETT_MIN stehen — sonst blitzt es bei einer
@@ -369,7 +408,10 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       const rest = Math.max(0, SKELETT_MIN - (performance.now() - laedtSeit.current));
       setTimeout(() => {
         laedtSeit.current = 0;
+        if (langeTimer.current) { clearTimeout(langeTimer.current); langeTimer.current = null; }
         setLaedt(false);
+        setLaedtLange(false);
+        setLadeZiel(null);
         requestAnimationFrame(() => requestAnimationFrame(abschluss));
       }, rest);
     };
@@ -522,13 +564,13 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   }, [toast, level]);
 
   const wert = useMemo<FadenContextWert>(() => ({
-    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, laedt, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
+    blatt, blattOeffnen, blattZu, verlauf, kapitelNr: verlauf.length + 1, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast,
     glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen,
     leo: { nachrichten: chat.messages.slice(leoAb), status: chat.status, fehler: chat.error, stop: chat.stop },
     fragen,
     punkte: konto.punkte, serie: konto.serie, wappen: konto.wappen, level, belohne,
     lesestelle, lesestelleZurueck,
-  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, laedt, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
+  }), [lesestelle, lesestelleZurueck, blatt, blattOeffnen, blattZu, verlauf, navigieren, laedt, laedtLange, ladeZiel, kapitelUmschalten, koffer, inDenKoffer, kofferEntfernen, toast, glossarSitzung, glossarOffen, begriffMerken, begriffAufklappen, begriffEntfernen, begriffHolen, chat.messages, chat.status, chat.error, chat.stop, leoAb, fragen, konto, level, belohne]);
 
   return (
     <FadenContext.Provider value={wert}>

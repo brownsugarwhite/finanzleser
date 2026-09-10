@@ -67,6 +67,16 @@ const ctx = await browser.newContext({ viewport: { width: 1600, height: 1000 }, 
 await ctx.addInitScript(INIT);
 const page = await ctx.newPage();
 page.on("console", (m) => { if (m.type() === "error") console.log("  [console.error]", m.text().slice(0, 200)); });
+page.on("pageerror", (e) => console.log("  [pageerror]", e.message.slice(0, 300)));
+// Dev-Server: Routen vorwärmen (Kompilieren dauert sonst bis 5 s je Ziel und verfälscht die Zeiten).
+// Ein Client, nacheinander. WARM="/a,/b" — Standard sind die Ziele des Messpfads vom 10.09.2026.
+// Vorwärmen im BROWSER (page.goto), nicht per fetch: Erst so baut der Dev-Server auch die
+// Client-Chunks der Route; ein fetch wärmt nur die Server-Seite, und die erste echte
+// Navigation kompiliert dann noch 4–10 s im Browser.
+for (const pfad of (process.env.WARM ?? "/finanzen/energiekosten/vorlage-test,/finanzen/energiekosten/strompreise,/finanzen/energiekosten/gaspreise,/finanztools/checklisten/gaspreise-vergleichen").split(",").filter(Boolean)) {
+  const t = Date.now(); try { await page.goto(BASE + pfad, { waitUntil: "networkidle", timeout: 90000 }); } catch { /* egal */ } console.log("warm", pfad, Date.now() - t, "ms");
+}
+await page.evaluate(() => { try { sessionStorage.clear(); } catch { /* egal */ } });
 const out = (title, txt) => { console.log("\n===== " + title + " =====\n" + txt); };
 const dump = async (title) => out(title, await page.evaluate(() => window.__dump()));
 const mark = (n) => page.evaluate((n) => window.__mark(n), n);
@@ -93,7 +103,7 @@ await page.waitForTimeout(600);
 await mark("B-klick");
 t = Date.now();
 await page.click(`#kapitel-live a[href="${hrefB}"]`);
-await page.waitForTimeout(9000);
+await page.waitForTimeout(20000);
 await dump("B: Landing → Ratgeber " + hrefB);
 console.log("stat", JSON.stringify(await stat()));
 await shot("B");
@@ -104,7 +114,7 @@ console.log("C Ziel:", hrefC);
 await page.waitForTimeout(600);
 await mark("C-klick");
 await page.click(`#kapitel-live .dazu a[href="${hrefC}"]`);
-await page.waitForTimeout(9000);
+await page.waitForTimeout(20000);
 await dump("C: Ratgeber → Ratgeber (Dazu passt) " + hrefC);
 console.log("stat", JSON.stringify(await stat()));
 await shot("C");
@@ -116,7 +126,7 @@ if (hrefC2) {
   await page.waitForTimeout(600);
   await mark("C2-klick");
   await page.click(`#kapitel-live a[href="${hrefC2}"]`);
-  await page.waitForTimeout(9000);
+  await page.waitForTimeout(20000);
   await dump("C2: Ratgeber → Ratgeber aus der Mitte " + hrefC2);
   console.log("stat", JSON.stringify(await stat()));
 }
@@ -128,7 +138,7 @@ if (hrefD) {
   await page.waitForTimeout(600);
   await mark("D-klick");
   await page.click(`#kapitel-live a[href="${hrefD.href}"]`);
-  await page.waitForTimeout(9000);
+  await page.waitForTimeout(20000);
   await dump("D: Ratgeber → kurze Seite " + hrefD.href);
   console.log("stat", JSON.stringify(await stat()));
   await shot("D");

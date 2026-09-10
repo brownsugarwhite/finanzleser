@@ -11,14 +11,38 @@
  * drei `querySelectorAll`-Durchläufe darüber.
  */
 
-/** Roh-HTML des lebenden Kapitels (ein nativer Lesezugriff, sonst nichts). */
-export function greifen(live: HTMLElement): string {
+/**
+ * Roh-HTML des lebenden Kapitels — plus seine Höhe.
+ *
+ * 🚨 Feste Höhen: Der Schnappschuss ersetzt das Kapitel im Klick-Moment, und darunter
+ * hängt sofort das Skelett, zu dem der Faden rollt. Ist der Schnappschuss auch nur ein
+ * Pixel kürzer als das Kapitel, rutscht das Skelett nach oben und der Sprung zielt daneben
+ * (gemessen 10.09.2026: bis zu 11 887 px, weil die Inseln leer 0 px hoch waren; danach
+ * +3 513 px, als die Portale sie wieder füllten). Deshalb merkt sich jede Insel hier ihre
+ * gerenderte Höhe (`data-insel-h`, `saeubern` macht daraus `min-height`), und das Kapitel
+ * als Ganzes seine Höhe samt Leos Wortwechsel (`hoehe`, Strom.tsx setzt sie als
+ * `min-height` auf das eingefrorene Kapitel).
+ */
+export function greifen(live: HTMLElement): { html: string; hoehe: number } {
   const inhalt = live.querySelector(".kapitel__inhalt") || live;
+  // Die Insel-Hülle ist `display: contents` (kein eigener Kasten) — gemessen wird die
+  // Vereinigung ihrer Kinder.
+  inhalt.querySelectorAll<HTMLElement>("[data-insel]").forEach((el) => {
+    let oben = Infinity, unten = -Infinity;
+    for (const kind of Array.from(el.children)) {
+      if (kind.tagName === "SCRIPT") continue;
+      const r = kind.getBoundingClientRect();
+      if (!r.height) continue;
+      oben = Math.min(oben, r.top); unten = Math.max(unten, r.bottom);
+    }
+    el.dataset.inselH = unten > oben ? String(Math.round(unten - oben)) : "0";
+  });
   const leo = document.getElementById("leo-strom");
   const leoHtml = leo && leo.children.length
     ? `<div class="leo-strom leo-strom--alt" data-leo-alt>${leo.innerHTML}</div>`
     : "";
-  return inhalt.innerHTML + leoHtml;
+  const hoehe = Math.round(live.getBoundingClientRect().height + (leoHtml ? leo!.getBoundingClientRect().height : 0));
+  return { html: inhalt.innerHTML + leoHtml, hoehe };
 }
 
 /**
@@ -35,10 +59,16 @@ export function saeubern(html: string, id: string): string {
   // Inseln leeren: Was React beim Aufklappen ohnehin neu einhängt, muss nicht als totes
   // Abbild mitgeschleppt werden — das hielte den Schnappschuss unnötig groß und zeigte
   // vor dem Einhängen einen Rechner, den man nicht bedienen kann.
-  t.content.querySelectorAll("[data-insel]").forEach((el) => {
+  //
+  // 🚨 … aber die Höhe bleibt: Die geleerte Insel wird ein Kasten mit der Höhe, die sie
+  // im lebenden Kapitel hatte (`data-insel-h` aus greifen). Das Portal rendert später in
+  // diesen Kasten hinein — nichts darunter rückt, weder beim Einfrieren noch beim Beleben.
+  t.content.querySelectorAll<HTMLElement>("[data-insel]").forEach((el) => {
     const werte = el.querySelector("script[data-insel-werte]");
+    const h = Number(el.dataset.inselH || 0);
     el.innerHTML = "";
     if (werte) el.appendChild(werte);
+    if (h > 0) { el.classList.add("insel--platz"); el.style.minHeight = `${h}px`; }
   });
   t.content.querySelectorAll("[data-leo-alt] .tippt, [data-leo-alt] .cursor, [data-leo-alt] .leo-chips, [data-leo-alt] .werkzeuge").forEach((e) => e.remove());
   t.content.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));

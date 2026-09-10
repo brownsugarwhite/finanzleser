@@ -112,6 +112,39 @@ export function angehaengt(node: HTMLElement | null, opts: { immer?: boolean; le
 export function zeigeAnfangStabil(node: HTMLElement | null, immer = false, nachMs = 500): void {
   if (!node) return;
   zeigeAnfang(node, immer);
+  nachmessen(node, nachMs);
+}
+
+/**
+ * Unter den Kopf rollen — aber nur, wenn das Kapitel nicht ohnehin dort steht (Toleranz
+ * 4 px). Für die Ankunft eines Kapitels, das an der Stelle des Skeletts erscheint: Stimmt
+ * die Geometrie, passiert nichts, und es gibt keinen zweiten Sprung. Danach die
+ * Nachkorrektur wie bei `zeigeAnfangStabil`.
+ */
+export function unterDenKopf(node: HTMLElement | null, nachMs = 500): void {
+  if (!node) return;
+  const ab = node.getBoundingClientRect().top - (kopfHoehe() + 12);
+  if (Math.abs(ab) > 4) zeigeAnfang(node, true);
+  nachmessen(node, nachMs);
+}
+
+/**
+ * Etwas OBERHALB der Lesestelle ändern, ohne dass der Leser es merkt: Anker messen,
+ * ändern, `scrollY` im selben Bild um die Differenz nachführen. Chrome und Firefox haben
+ * dafür Scroll Anchoring — es greift nicht, wenn der Ankerknoten selbst ausgetauscht wird,
+ * und Safari kennt es gar nicht. Deshalb ausdrücklich. React-Zustand darin per
+ * `flushSync` ändern, sonst ist beim zweiten Messen noch nichts passiert.
+ */
+export function mitAusgleich(anker: HTMLElement | null, aendern: () => void): void {
+  if (!anker) { aendern(); return; }
+  const vor = anker.getBoundingClientRect().top;
+  aendern();
+  const d = anker.getBoundingClientRect().top - vor;
+  if (Math.abs(d) >= 1) window.scrollBy({ top: d, behavior: "instant" });
+}
+
+/** Nachkorrektur, sobald sich das Layout beruhigt hat (siehe zeigeAnfangStabil). */
+function nachmessen(node: HTMLElement, nachMs: number): void {
   const kopfVorher = kopfHoehe();
   let eingegriffen = false;
   const stop = () => { eingegriffen = true; };

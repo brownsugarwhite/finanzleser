@@ -19,6 +19,10 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useFaden } from "./FadenProvider";
 import { saeubern } from "@/lib/faden/schnappschuss";
+import { kopfHoehe } from "@/lib/faden/scrollen";
+import { ausgleichBeobachten, ausgleichVergessen } from "@/lib/faden/ausgleich";
+import { pfadFuer, skelettFuer } from "@/lib/faden/skelett";
+import { useNavItems } from "@/lib/NavContext";
 import LeoStrom from "./leo/LeoStrom";
 import Einschub from "./Einschub";
 import SkelettKapitel from "./SkelettKapitel";
@@ -61,14 +65,63 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
   );
 }
 
+/**
+ * Bodenabstand: Das letzte Kapitel muss sich mit der Oberkante unter den Kopf rollen
+ * lassen — auch ein kurzes (Rechner, Begriff). Vorher hielt ein eingefrorener
+ * `min-height` am Strom die Höhe während des Ladens und gab sie 700 ms später frei;
+ * schrumpfte das Dokument dabei unter den Leser, kappte der Browser den Scroll. Jetzt
+ * füllt `#strom-ende` genau die Lücke zwischen dem letzten Kapitel (oder dem Skelett) und
+ * einer Bildschirmhöhe auf — unterhalb des Lesers, also ohne dass je etwas unter ihm rückt.
+ */
+function Bodenabstand() {
+  useEffect(() => {
+    const strom = document.getElementById("strom");
+    const ende = document.getElementById("strom-ende");
+    if (!strom || !ende) return;
+    let geplant = 0;
+    const messen = () => {
+      geplant = 0;
+      const anfang = strom.querySelector<HTMLElement>(".kapitel--skelett") || document.getElementById("kapitel-live");
+      if (!anfang) { ende.style.height = ""; return; }
+      const frei = window.innerHeight - kopfHoehe() - 12;
+      const belegt = ende.getBoundingClientRect().top - anfang.getBoundingClientRect().top;
+      const h = Math.max(0, Math.round(frei - belegt));
+      if (ende.style.height !== `${h}px`) ende.style.height = `${h}px`;
+    };
+    const anstossen = () => { if (!geplant) geplant = requestAnimationFrame(messen); };
+    messen();
+    const ro = new ResizeObserver(anstossen);
+    ro.observe(strom);
+    const mo = new MutationObserver(anstossen);
+    mo.observe(strom, { childList: true, attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("resize", anstossen);
+    return () => { ro.disconnect(); mo.disconnect(); window.removeEventListener("resize", anstossen); if (geplant) cancelAnimationFrame(geplant); };
+  }, []);
+  return null;
+}
+
+/** Ref-Callback: jedes eingefrorene Kapitel meldet Höhenänderungen an den Ausgleich (lib/faden/ausgleich.ts). */
+function beobachtet(el: HTMLElement | null) {
+  if (el) ausgleichBeobachten(el);
+}
+
 export default function Strom({ children }: { children: ReactNode; heroZahlen?: HeroZahlen }) {
-  const { verlauf, kapitelUmschalten, navigieren, laedt } = useFaden();
+  const { verlauf, kapitelUmschalten, navigieren, laedt, laedtLange, ladeZiel } = useFaden();
+  const nav = useNavItems();
+  // Kapitel, die den Strom verlassen haben, nicht weiter beobachten.
+  useEffect(() => {
+    const da = new Set(verlauf.map((k) => `kapitel-alt-${k.id}`));
+    document.querySelectorAll<HTMLElement>("#strom .kapitel--alt").forEach((el) => { if (!da.has(el.id)) ausgleichVergessen(el); });
+  }, [verlauf]);
   return (
     <div className={"strom" + (laedt ? " strom--laedt" : "")} id="strom">
       <Zeitungskopf />
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
-        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`}>
+        {/* Offen trägt das eingefrorene Kapitel die Höhe, die es lebend hatte (greifen):
+            Der Schnappschuss darf nie kürzer sein als das Kapitel, das er ersetzt — sonst
+            rückt alles darunter, allen voran das Skelett, zu dem der Faden gerade rollt. */}
+        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`} style={k.offen && k.hoehe ? { minHeight: k.hoehe } : undefined} ref={beobachtet}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
             <div className="kapitel__kopf-mitte">
               <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>
@@ -92,8 +145,9 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
       ))}
       {children}
       <LeoStrom />
-      {laedt && <SkelettKapitel />}
+      {laedt && <SkelettKapitel sorte={ladeZiel ? skelettFuer(ladeZiel.href) : "seite"} titel={ladeZiel?.titel} pfad={ladeZiel ? pfadFuer(ladeZiel.href, nav) : []} lange={laedtLange} />}
       <div id="strom-ende" aria-hidden="true" />
+      <Bodenabstand />
     </div>
   );
 }
