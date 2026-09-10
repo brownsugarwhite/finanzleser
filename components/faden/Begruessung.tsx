@@ -46,7 +46,9 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     const gruss = wurzel.querySelector<HTMLElement>("#leo-gruss");
     const spalten = wurzel.querySelector<HTMLElement>(".spalten-kasten, .spalten");
     const neueste = wurzel.querySelector<HTMLElement>(".neueste");
-    const finanzwort = wurzel.querySelector<HTMLElement>(".meldung, .kasten--pink");
+    // 🚨 `kasten--ks` trägt `kasten--pink` mit — ohne den Ausschluss zielte der letzte
+    // Schritt der Begrüßung auf den Kassensturz statt auf das Finanzwort.
+    const finanzwort = wurzel.querySelector<HTMLElement>(".meldung, .kasten--pink:not(.kasten--ks)");
     const kassensturz = wurzel.querySelector<HTMLElement>(".ks-teaser");
     const text = gruss?.querySelector<HTMLElement>("p");
     if (!gruss || !text) return;

@@ -13,6 +13,7 @@ import { useFaden } from "@/components/faden/FadenProvider";
 import { teilenOeffnen } from "@/components/faden/TeilenDialog";
 import { kulissenOeffnen } from "@/components/faden/Kulissen";
 import { LeoRede } from "@/components/faden/leo/Blase";
+import { enthuellen, verbergen } from "@/lib/faden/aufklappen";
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars --
    `artikelId` trug nur das Vorlesen. Der Prop bleibt im Vertrag, weil das Vorlesen nur
@@ -21,9 +22,18 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
   const { inDenKoffer, toast } = useFaden();
   const [kurz, setKurz] = useState(false);
   const kurzRef = useRef<HTMLDivElement>(null);
+  // Aufklappen ist eine Bewegung nach unten, kein Sprung: Der Kasten wächst auf, und der
+  // Blick hält seine Unterkante im Bild (Regel 3 des Scroll-Plans). Vorher rollte ein
+  // weicher `scrollTo` die Kurzfassung unter den Kopf — ein Sprung mitten im Lesen.
+  const umschalten = (auf: boolean) => {
+    setKurz(auf);
+    const el = kurzRef.current;
+    if (!el) return;
+    if (auf) enthuellen(el); else verbergen(el);
+  };
   useEffect(() => {
     if (!kurzfassung) return;
-    const h = () => { setKurz(true); setTimeout(() => { const k = document.getElementById("kopf"); const el = kurzRef.current; if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - (k ? k.offsetHeight : 64) - 16, behavior: "smooth" }); }, 50); };
+    const h = () => umschalten(true);
     document.addEventListener("faden:kurzfassung", h);
     return () => document.removeEventListener("faden:kurzfassung", h);
   }, [kurzfassung]);
@@ -33,7 +43,7 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
   return (
     <>
       <div className="aktionen">
-        {kurzfassung && <button type="button" className="btn btn--klein" onClick={() => setKurz(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo</button>}
+        {kurzfassung && <button type="button" className="btn btn--klein" onClick={() => umschalten(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo</button>}
         <button type="button" className="textlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
         <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
         <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
@@ -42,8 +52,9 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
         )}
         <button type="button" className="textlink textlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
       </div>
+      {/* `hidden` setzen enthuellen/verbergen selbst — React soll es nicht bei jedem Render zurückschreiben. */}
       {kurzfassung && (
-        <div className="wort wort--leo kurzfassung" hidden={!kurz} ref={kurzRef}>
+        <div className="wort wort--leo kurzfassung" hidden ref={kurzRef}>
           <span className="kicker kicker--gruen">Leo · Kurzfassung</span>
           <LeoRede>
             {kurzfassung.saetze.map((s, i) => <p key={i}>{s}</p>)}

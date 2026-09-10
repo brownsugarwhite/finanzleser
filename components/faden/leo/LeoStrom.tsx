@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
 import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
+import { mitlaufen } from "@/lib/faden/tippen";
 import { FrageBlase, LeoRede } from "./Blase";
 
 // Siehe components/faden/leo/LeoMarkdown.tsx: der Markdown-Parser wird erst geladen,
@@ -66,16 +67,48 @@ export default function LeoStrom() {
 
   // Scroll-Grammatik des Prototyps (lib/faden/scrollen.ts):
   //  - Eigene Frage = vom Leser ausgelöster Sprung → `immer`, rollt unter den Kopf.
-  //  - Leos Antwort → nur wenn der Leser am Ende steht (`folgt()`). Wer hochgescrollt
-  //    liest, wird von einer eintreffenden Antwort nicht weggerissen.
+  //  - Leos Antwort läuft mit wie in einem Chat (unten), siehe nächsten Effekt. Kein
+  //    Sprung an ihren Anfang, wenn sie fertig ist — das riss den Leser vom Ende weg.
   useEffect(() => {
     if (!letzte) return;
     const el = document.getElementById(`leo-${letzte.id}`);
     if (!el) return;
     merkeKnoten(el);
-    if (letzte.role === "user") { zeigeAnfang(el, true); return; }
-    if (laeuft) return;                 // erst wenn die Antwort steht, nicht bei jedem Token
-    if (folgt()) zeigeAnfang(el);
+    if (letzte.role === "user") zeigeAnfang(el, true);
+  }, [letzte?.id, letzte?.role]);
+
+  // 🚨 Mitlaufen beim Schreiben (Regel 3 des Scroll-Plans): Solange die Antwort strömt,
+  // bleibt ihr Ende über der Eingabe — hart, um genau die Differenz (lib/faden/tippen.ts
+  // `mitlaufen`), ausgelöst vom Wachsen des Knotens, nicht von jedem Token. Vorher stand
+  // hier `if (laeuft) return` — die Antwort wuchs 400 px unter den Rand, ohne dass sich
+  // etwas bewegte. Wer während des Schreibens nach oben scrollt (Rad, Taste, Finger),
+  // will zurücklesen: dann hört das Mitlaufen für diese Antwort auf.
+  useEffect(() => {
+    if (!letzte || letzte.role !== "assistant" || !laeuft) return;
+    const el = document.getElementById(`leo-${letzte.id}`);
+    if (!el) return;
+    let folge = folgt();
+    const nach = mitlaufen(el);
+    let fingerY = 0;
+    const rad = (ev: WheelEvent) => { if (ev.deltaY < 0) folge = false; };
+    const taste = (ev: KeyboardEvent) => { if (["ArrowUp", "PageUp", "Home"].includes(ev.key)) folge = false; };
+    const fingerAn = (ev: TouchEvent) => { fingerY = ev.touches[0]?.clientY ?? 0; };
+    const finger = (ev: TouchEvent) => { const y = ev.touches[0]?.clientY ?? 0; if (y > fingerY + 8) folge = false; };
+    const opts: AddEventListenerOptions = { passive: true };
+    window.addEventListener("wheel", rad, opts);
+    window.addEventListener("keydown", taste, opts);
+    window.addEventListener("touchstart", fingerAn, opts);
+    window.addEventListener("touchmove", finger, opts);
+    const ro = new ResizeObserver(() => { if (folge) nach(); });
+    ro.observe(el);
+    if (folge) nach();
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("wheel", rad);
+      window.removeEventListener("keydown", taste);
+      window.removeEventListener("touchstart", fingerAn);
+      window.removeEventListener("touchmove", finger);
+    };
   }, [letzte?.id, letzte?.role, laeuft]);
 
   // Folge-Chips nach einer fertigen Antwort: Kurzfassung, „Dazu passt“, Werkzeug des Kapitels.

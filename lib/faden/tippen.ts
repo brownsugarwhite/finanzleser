@@ -37,12 +37,20 @@ function lauf(voll: string, schreiben: (s: string) => void, fertig: () => void, 
  * Schritten; ein hartes `scrollBy` um genau die Differenz ist deshalb die glatte
  * Variante. Nur nachziehen, wenn das Ende wirklich unter den Rand rutscht.
  */
-export function mitlaufen(ziel: HTMLElement, luft = 140): () => void {
+export function mitlaufen(ziel: HTMLElement, luft?: number): () => void {
   return () => {
     const unten = ziel.getBoundingClientRect().bottom;
-    const grenze = window.innerHeight - luft;
+    // Die Eingabe klebt fest am unteren Rand — darunter ist nichts zu lesen. Deshalb
+    // hält der Blick ihre Höhe (--eingabe-h, aus Eingabe.tsx) plus etwas Luft frei.
+    const grenze = window.innerHeight - (luft ?? luftUnten());
     if (unten > grenze) window.scrollBy(0, unten - grenze);
   };
+}
+
+/** Höhe der festen Eingabe plus Abstand — so viel bleibt unter dem Text frei. */
+export function luftUnten(): number {
+  const h = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--eingabe-h")) || 120;
+  return h + 24;
 }
 
 export function tippen(ziel: HTMLElement, html: string): Promise<void> {
