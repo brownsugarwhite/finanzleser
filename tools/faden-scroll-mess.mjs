@@ -19,7 +19,7 @@
 const { chromium } = await import("playwright-core");
 const BASE = process.env.BASE || "http://localhost:3000";
 const LEO = process.env.LEO === "1";
-const OUT = new URL(".", import.meta.url).pathname;
+const OUT = (process.env.OUT || process.cwd()).replace(/\/?$/, "/"); // Screenshots ins Arbeitsverzeichnis, nicht neben das Skript
 
 const INIT = `(() => {
   const g = window; g.__log = []; g.__t0 = performance.now();
