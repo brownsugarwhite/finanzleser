@@ -67,6 +67,33 @@ export default function Eingabe() {
     return () => io.disconnect();
   }, [pathname]);
   const zeigeChips = chips.length > 0 && endeImBild && !leo.nachrichten.length;
+  // 🚨 Die Eingabe klebt fest am unteren Bildschirmrand (`position: fixed`), nicht mehr
+  // `sticky` in #mitte — sticky stieg am Fadenende um die Höhe der Fußnote nach oben
+  // (gemessen: Unterkante 775 statt 1000). Fest heißt aber: Sie weiß nichts mehr von der
+  // Spalte, in der sie steht. Also wird die Mittelspalte gemessen und als Lage und Breite
+  // mitgegeben; die eigene Höhe geht als `--eingabe-h` ans Dokument (Bodenabstand des
+  // Stroms, Polster unter dem letzten Kapitel, Fußnote).
+  const wurzel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = wurzel.current;
+    const mitte = document.getElementById("mitte");
+    if (!el || !mitte) return;
+    const messen = () => {
+      const r = mitte.getBoundingClientRect();
+      const st = getComputedStyle(mitte);
+      const links = r.left + parseFloat(st.paddingLeft);
+      const breite = r.width - parseFloat(st.paddingLeft) - parseFloat(st.paddingRight);
+      el.style.setProperty("--eingabe-links", `${Math.round(links)}px`);
+      el.style.setProperty("--eingabe-breite", `${Math.round(breite)}px`);
+      document.documentElement.style.setProperty("--eingabe-h", `${Math.round(el.offsetHeight)}px`);
+    };
+    messen();
+    const ro = new ResizeObserver(messen);
+    ro.observe(mitte);
+    ro.observe(el);
+    window.addEventListener("resize", messen);
+    return () => { ro.disconnect(); window.removeEventListener("resize", messen); };
+  }, []);
   const [wert, setWert] = useState("");
   const [index, setIndex] = useState<IndexEintrag[] | null>(indexAusCache());
   const [offen, setOffen] = useState(false);
@@ -134,7 +161,7 @@ export default function Eingabe() {
   };
 
   return (
-    <div className={"eingabe" + (zeigeChips ? " mit-chips" : "")}>
+    <div className={"eingabe" + (zeigeChips ? " mit-chips" : "")} ref={wurzel}>
       <div className="eingabe__blur" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><b /></div>
       <div className="suchpille-wrap" id="fadenPille" ref={wrap}>
         <FieldOutline radius={PILLE_RADIUS} gap={4} mess={pille} verankert="unten" />

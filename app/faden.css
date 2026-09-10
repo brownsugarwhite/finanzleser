@@ -179,8 +179,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .blatt.offen { display: block; }
 
 /* ---------- Faden: 750er-Spalte fest in der Mitte, Randspalten teilen sich den Rest ---------- */
-.faden-shell .faden { margin: 0; padding: 22px 0 160px; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
-.faden-shell #mitte { padding: 0 11px; min-width: 0; }
+/* Zwei Zeilen: oben Randspalte · Strom · Randspalte, unten die Fußnote über alle Spalten.
+   Die Randspalten spannen BEIDE Zeilen — ihr Klebebereich reicht so bis ans Ende des
+   Dokuments, und nichts schiebt sie am Fadenende nach oben. Unten kein Polster mehr am
+   Raster: den Platz unter dem letzten Kapitel hält #mitte (Höhe der festen Eingabe). */
+.faden-shell .faden { margin: 0; padding: 22px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 0; align-items: stretch; position: relative; }
+.faden-shell #mitte { grid-column: 2; grid-row: 1; padding: 0 11px var(--eingabe-h, 140px); min-width: 0; }
+.faden-shell .faden > .rand { grid-row: 1 / 3; }
+.faden-shell .faden > .fussnote { grid-column: 1 / -1; grid-row: 2; }
 
 /* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------
    Absolut im Raster platziert (`.faden` ist `position: relative`), damit die drei Spalten
@@ -930,7 +936,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .kasten--text .prose h2 { font-size: 22px !important; margin: 1.2em 0 .5em !important; } .faden-shell .kasten--text .prose h1 { display: none; }
 
 /* ---------- Eingabe + Suchpille ---------- */
-.faden-shell .eingabe { position: sticky; bottom: 0; display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; margin-top: -40px; }
+/* Fest am unteren Bildschirmrand, genau über der Mittelspalte (Lage und Breite misst
+   Eingabe.tsx — `fixed` kennt seine Spalte nicht). Vorher `sticky` in #mitte: stieg am
+   Fadenende um die Fußnote nach oben und war bei kurzem Strom gar nicht unten. */
+.faden-shell .eingabe { position: fixed; bottom: 0; left: var(--eingabe-links, 50%); width: var(--eingabe-breite, calc(var(--spalte) - 22px)); display: grid; gap: 8px; z-index: 5; padding: 40px 0 14px; }
 .faden-shell .eingabe__blur { position: absolute; left: -10px; right: -10px; top: 0; bottom: 0; z-index: -1; pointer-events: none; }
 .faden-shell .eingabe__blur i { position: absolute; left: 0; right: 0; bottom: 0; display: block; -webkit-mask-image: linear-gradient(to top, #000 40%, transparent 100%); mask-image: linear-gradient(to top, #000 40%, transparent 100%); }
 .faden-shell .eingabe__blur i:nth-child(1) { height: 100%; backdrop-filter: blur(.5px); } .faden-shell .eingabe__blur i:nth-child(2) { height: 85%; backdrop-filter: blur(1px); } .faden-shell .eingabe__blur i:nth-child(3) { height: 70%; backdrop-filter: blur(2px); } .faden-shell .eingabe__blur i:nth-child(4) { height: 55%; backdrop-filter: blur(4px); } .faden-shell .eingabe__blur i:nth-child(5) { height: 40%; backdrop-filter: blur(6px); } .faden-shell .eingabe__blur i:nth-child(6) { height: 28%; backdrop-filter: blur(10px); } .faden-shell .eingabe__blur i:nth-child(7) { height: 16%; backdrop-filter: blur(16px); } .faden-shell .eingabe__blur i:nth-child(8) { height: 8%; backdrop-filter: blur(24px); }
@@ -987,14 +996,15 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 /* ---------- Toast, Fußnote ---------- */
 .faden-shell .toast, .toast.faden-toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: #334A27; color: #faf9f6; padding: 8px 18px; font-size: 13.5px; opacity: 0; transition: .25s; z-index: 60; pointer-events: none; border-radius: 999px; max-width: min(560px, calc(100vw - 32px)); }
 .faden-shell .toast.zeigt { opacity: 1; transform: translate(-50%, 0); }
-.faden-shell .fussnote { max-width: 1440px; margin: 0 auto; padding: 14px 28px 30px; font-size: 12.5px; color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.faden-shell .fussnote { max-width: 1440px; width: 100%; margin: 0 auto; padding: 14px 28px calc(var(--eingabe-h, 140px) + 20px); font-size: 12.5px; color: var(--muted); text-align: center; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
 .faden-shell .fussnote a { color: var(--muted); text-decoration: none; } .faden-shell .fussnote a:hover { color: var(--green-ink); text-decoration: underline; }
 
 /* ---------- Umbrüche ---------- */
 @media (max-width: 1439px) {
   .faden-shell .glossar-rail { max-height: none; }
-  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 160px; }
-  .faden-shell #mitte { padding: 0; }
+  .faden-shell .faden { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 800px; margin: 0 auto; padding: 22px 24px 0; }
+  .faden-shell #mitte { grid-column: 1; padding: 0 0 var(--eingabe-h, 140px); }
+  .faden-shell .faden > .fussnote { grid-column: 1; }
   .faden-shell .rand { display: none; }
   .faden-shell .rand.mobil { display: flex; position: fixed; top: 0; bottom: 0; width: min(360px, 86vw); z-index: 70; background: var(--paper); flex-direction: column; gap: 10px; padding: 12px 20px 20px; overflow: auto; box-shadow: 0 0 40px rgba(0,0,0,.2); }
   .faden-shell .rand--links.mobil { left: 0; } .faden-shell .rand--rechts.mobil { right: 0; }
@@ -1035,7 +1045,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .hero-landing__mitte { padding-left: 8px; padding-right: 8px; }
   .faden-shell .lesezeichen { height: 40px; padding: 0 12px 0 28px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 18px 50%); }
   .faden-shell .lesezeichen .lz-wort { display: none; }
-  .faden-shell .faden { padding: 12px 14px 110px; }
+  .faden-shell .faden { padding: 12px 14px 0; }
   .faden-shell .artikel__untertitel { font-size: 26px; }
   .faden-shell .kapitel__kopf { flex-wrap: wrap; gap: 6px 12px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
   .faden-shell .inhalt__zeile a { grid-template-columns: 28px 24px minmax(0, 1fr); }

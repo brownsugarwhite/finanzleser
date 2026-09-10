@@ -88,8 +88,13 @@ export default function FadenShell({ children, nav, preload, level, heroZahlen }
             <Eingabe />
           </div>
           <RandRechts mobil={schublade === "rechts"} onZu={zu} />
+          {/* 🚨 Die Fußnote steht IM Raster, als zweite Zeile über alle Spalten, und die
+              Randspalten spannen beide Zeilen. Nur so reicht der Klebebereich der Ränder bis
+              ans Ende des Dokuments — stand die Fußnote hinter dem Raster, schob sie am
+              Fadenende die klebende Randspalte um ihre Höhe nach oben (gemessen 10.09.2026:
+              Oberkante −129 … 80 px, während Leo schrieb). */}
+          <Fussnote />
         </main>
-        <Fussnote />
         <BegriffMenue />
         <Lesestelle />
         <TeilenDialog />
