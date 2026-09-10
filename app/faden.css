@@ -280,6 +280,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .verlauf ol li button:hover { padding-left: 4px; color: var(--ink); }
 .faden-shell .verlauf ol li button.aktiv { font-weight: 600; color: var(--ink); }
 .faden-shell .verlauf__strich { flex: none; width: 6px; height: 1px; background: var(--ink); transition: width .3s; }
+.faden-shell .verlauf__typ { display: inline; margin-left: 6px; font: 400 11px/1 var(--sans); color: var(--muted); letter-spacing: .04em; }
 .faden-shell .verlauf ol li button.aktiv .verlauf__strich { width: 14px; }
 .faden-shell .glossar-rail { display: grid; gap: 6px; padding-right: 2px; }
 .faden-shell .mobil-leiste { display: none; }

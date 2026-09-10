@@ -15,6 +15,7 @@ import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten, mitAusgleich, unterDenKopf
 import { greifen } from "@/lib/faden/schnappschuss";
 import { fadenZiel, istHier } from "@/lib/faden/ziel";
 import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
+import { kapitelPinnen } from "@/lib/faden/useAbschnittAktiv";
 import type { BegriffDaten } from "@/lib/faden/glossar";
 import { useChat } from "@ai-sdk/react";
 import type { LeoUIMessage } from "@/lib/ai/leoMessage";
@@ -312,6 +313,10 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       return liste;
     });
     zuklappenNachAnkunft.current = friert;
+    // Verlauf links: bis zur Ankunft ist kein Kapitel aktiv (die Abschnittsliste darf
+    // nicht unter den eingefrorenen Eintrag springen), danach das neue — bis der Leser
+    // selbst scrollt (lib/faden/useAbschnittAktiv.ts).
+    kapitelPinnen("skelett");
     setLeoAb(chatRef.current.messages.length);
     scrollNachNavigation.current = true;
     // Der Knoten, der gleich ersetzt wird — gemerkt JETZT, nicht erst im Pfad-Effekt: Der
@@ -383,6 +388,7 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       // landete am Seitenanfang.
       const abschluss = () => {
         const neuLive = document.getElementById("kapitel-live");
+        kapitelPinnen("kapitel-live");
         // Das neue Kapitel blendet sich ein, statt hart zu erscheinen — der Faden läuft
         // weiter, er wechselt nicht die Seite. „wandert" hat seine eigene Bewegung.
         nochmal(neuLive, wandert ? "wandert" : "kapitel--frisch");

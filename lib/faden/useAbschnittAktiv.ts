@@ -32,9 +32,43 @@ export interface AbschnittStand {
   vorhanden: boolean;
   /** Element-ID des Kapitels, in dem der Leser gerade steht (`kapitel-live` oder `kapitel-alt-<id>`). */
   aktivesKapitel: string;
+  /** `data-key` des lebenden Kapitels (`post:<slug>`, `rechner:<slug>`, `heute` …) — für den Typ-Zusatz im Verlauf. */
+  liveKey: string;
 }
 
-const LEER: AbschnittStand = { titel: "", toc: [], aktiv: "", vorhanden: false, aktivesKapitel: "kapitel-live" };
+const LEER: AbschnittStand = { titel: "", toc: [], aktiv: "", vorhanden: false, aktivesKapitel: "kapitel-live", liveKey: "" };
+
+/**
+ * 🚨 Gepinnt: Während einer Navigation und während des Sprungs zum neuen Kapitel gilt
+ * nicht die Lesekante, sondern das Ziel. Sonst wanderte die Abschnittsliste im Verlauf
+ * während des sanften Scrolls vom eingefrorenen zum neuen Eintrag und zurück (gemessen
+ * 10.09.2026: vier bis fünf Umbauten je Navigation). `"skelett"` heißt: kein Kapitel ist
+ * aktiv (das Ziel ist noch ein Skelett). Der erste eigene Scroll des Lesers löst den Pin.
+ */
+let pin: string | null = null;
+let pinHoert = false;
+
+function pinLoesen() {
+  if (pin === null) return;
+  pin = null;
+  anstossen();
+}
+
+function pinHorchen() {
+  if (pinHoert || typeof window === "undefined") return;
+  pinHoert = true;
+  const opts: AddEventListenerOptions = { passive: true };
+  window.addEventListener("wheel", pinLoesen, opts);
+  window.addEventListener("touchmove", pinLoesen, opts);
+  window.addEventListener("keydown", pinLoesen, opts);
+}
+
+/** Aktives Kapitel festhalten (`"skelett"`, eine Element-ID) oder freigeben (`null`). */
+export function kapitelPinnen(id: string | null): void {
+  pin = id;
+  if (id !== null) pinHorchen();
+  anstossen();
+}
 
 let stand: AbschnittStand = LEER;
 let signatur = "";
@@ -64,12 +98,13 @@ function pruefen() {
   const toc = abschnitteLesen(el);
   // Der Titel im Verlauf gehört immer zum LEBENDEN Kapitel; die Abschnitte zum aktiven.
   const liveTitel = live?.dataset.titel || (live ? document.title : "");
-  const neueSignatur = [el.id, liveTitel, toc.map((t) => t.id).join(",")].join("|");
+  const liveKey = live?.dataset.key || "";
+  const neueSignatur = [el.id, liveTitel, liveKey, toc.map((t) => t.id).join(",")].join("|");
   if (neueSignatur === signatur) return;
   signatur = neueSignatur;
   io?.disconnect();
   io = null;
-  setzen({ titel: liveTitel, toc, vorhanden: !!live, aktiv: toc[0]?.id || "", aktivesKapitel: el.id });
+  setzen({ titel: liveTitel, toc, vorhanden: !!live, aktiv: toc[0]?.id || "", aktivesKapitel: el.id, liveKey });
   if (!("IntersectionObserver" in window) || !toc.length) return;
   // 🚨 Nicht „der letzte Treffer im Callback" — dessen Reihenfolge ist nicht die
   // Dokumentreihenfolge. Liegen zwei Abschnitte gleichzeitig im Leseband, gewann so mal
@@ -100,6 +135,8 @@ function pruefen() {
 function aktivesKapitelElement(): HTMLElement | null {
   const strom = document.getElementById("strom");
   if (!strom) return null;
+  if (pin === "skelett") return null;
+  if (pin) { const g = document.getElementById(pin); if (g) return g; }
   const kante = kopfHoehe() + 100;
   let treffer: HTMLElement | null = null;
   strom.querySelectorAll<HTMLElement>(".kapitel").forEach((k) => {

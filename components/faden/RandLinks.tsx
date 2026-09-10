@@ -40,9 +40,20 @@ function Abschnittsliste({ toc, aktiv, onZu }: { toc: TocZeile[]; aktiv: string;
   );
 }
 
+/** Typ eines Kapitels aus seinem Schlüssel (`post:<slug>` …) — steht im Verlauf nur dann dabei, wenn zwei Einträge gleich heißen. */
+function typAusKey(key: string): string {
+  const art = key.split(":")[0];
+  return ({ post: "Ratgeber", rechner: "Rechner", checkliste: "Checkliste", vergleich: "Vergleich", dokument: "Dokument", dokumente: "Dokumente", begriff: "Begriff", anbieter: "Anbieter", seite: "Seite", spiel: "Spiel" } as Record<string, string>)[art] || "";
+}
+
 export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () => void }) {
-  const { verlauf, kapitelNr, kapitelUmschalten, laedt } = useFaden();
-  const { titel, toc, aktiv, vorhanden, aktivesKapitel } = useAbschnittAktiv();
+  const { verlauf, kapitelNr, kapitelUmschalten, laedt, ladeZiel } = useFaden();
+  const { titel, toc, aktiv, vorhanden, aktivesKapitel, liveKey } = useAbschnittAktiv();
+  // Gleiche Titel (Ratgeber „Gaspreise vergleichen“ und die Checkliste dazu) sähen wie ein
+  // Fehler aus — dann steht der Typ dabei.
+  const zaehler = new Map<string, number>();
+  for (const t of [...verlauf.map((k) => k.titel), ...(vorhanden ? [titel] : [])]) zaehler.set(t, (zaehler.get(t) || 0) + 1);
+  const typ = (t: string, key: string) => ((zaehler.get(t) || 0) > 1 ? typAusKey(key) : "");
   // Neuer Verlaufseintrag leuchtet kurz (Prototyp 05-js-neu.html listeAktualisieren).
   const vorherigeZahl = useRef(verlauf.length);
   useEffect(() => {
@@ -65,7 +76,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
                 {verlauf.map((k, i) => (
                   <li key={k.id}>
                     <button type="button" className={aktivesKapitel === `kapitel-alt-${k.id}` ? "aktiv" : ""} onClick={() => { const n = document.getElementById(`kapitel-alt-${k.id}`); if (!k.offen) kapitelUmschalten(k.id); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }} title={k.url}>
-                      <span className="verlauf__nr">{i + 1}</span><span>{k.titel}</span>
+                      <span className="verlauf__nr">{i + 1}</span><span>{k.titel}{typ(k.titel, k.key) && <small className="verlauf__typ">{typ(k.titel, k.key)}</small>}</span>
                     </button>
                     {aktivesKapitel === `kapitel-alt-${k.id}` && <Abschnittsliste toc={toc} aktiv={aktiv} onZu={onZu} />}
                   </li>
@@ -73,17 +84,19 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
                 {/* 🚨 Während einer Navigation steht das alte Kapitel schon als Verlaufseintrag
                     in der Liste, ist als lebendes aber noch im DOM (nur ausgeblendet). Ohne
                     diesen Zweig stünde es doppelt da und wechselte nach dem Laden den Namen.
-                    Stattdessen hält eine Skelettzeile den Platz — gleiche Höhe, kein Sprung. */}
+                    Stattdessen hält diese Zeile den Platz — mit dem Titel des Ziels, sobald
+                    der Link ihn hergibt, sonst als Schimmer; der Name ändert sich nach der
+                    Ankunft nicht mehr. */}
                 {laedt ? (
                   <li className="verlauf__laedt" aria-hidden="true">
                     <button type="button" tabIndex={-1}>
-                      <span className="verlauf__nr">{kapitelNr}</span><span className="skelett-zeile" />
+                      <span className="verlauf__nr">{kapitelNr}</span>{ladeZiel?.titel ? <span>{ladeZiel.titel}</span> : <span className="skelett-zeile" />}
                     </button>
                   </li>
                 ) : live ? (
                   <li>
                     <button type="button" className={aktivesKapitel === "kapitel-live" ? "aktiv" : ""} onClick={() => { const n = document.getElementById("kapitel-live"); if (n) window.scrollTo({ top: n.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12, behavior: "smooth" }); onZu?.(); }}>
-                      <span className="verlauf__nr">{kapitelNr}</span><span>{live.titel}</span>
+                      <span className="verlauf__nr">{kapitelNr}</span><span>{live.titel}{typ(live.titel, liveKey) && <small className="verlauf__typ">{typ(live.titel, liveKey)}</small>}</span>
                     </button>
                     {aktivesKapitel === "kapitel-live" && <Abschnittsliste toc={live.toc} aktiv={aktiv} onZu={onZu} />}
                   </li>
