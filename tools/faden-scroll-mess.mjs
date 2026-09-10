@@ -180,6 +180,7 @@ if (LEO) {
   await page.evaluate(() => document.getElementById("strom-ende")?.scrollIntoView({ block: "end" }));
   await page.waitForTimeout(800);
   await mark("G-leo");
+  await page.evaluate(() => { document.querySelector(".cookie-bar")?.remove(); });
   await page.click("#frage");
   await page.keyboard.type("Was ist eine Einspeisevergütung?");
   await page.keyboard.press("Enter");

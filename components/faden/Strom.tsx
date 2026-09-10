@@ -31,6 +31,7 @@ import type { HeroZahlen } from "./hero/HeroLanding";
 import InselnBeleben from "./kette/InselnBeleben";
 
 function Schnappschuss({ html, id }: { html: string; id: string }) {
+  const { laedt } = useFaden();
   const rein = useMemo(() => saeubern(html, id), [html, id]);
   const behaelter = useRef<HTMLDivElement>(null);
   const [wurzel, setWurzel] = useState<HTMLDivElement | null>(null);
@@ -60,7 +61,7 @@ function Schnappschuss({ html, id }: { html: string; id: string }) {
   return (
     <>
       <div className="kapitel__schnappschuss" ref={behaelter} />
-      <InselnBeleben wurzel={wurzel} stand={rein} />
+      <InselnBeleben wurzel={wurzel} stand={rein} pause={laedt} />
     </>
   );
 }
@@ -145,8 +146,12 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
         <Fragment key={k.id}>
         {/* Offen trägt das eingefrorene Kapitel die Höhe, die es lebend hatte (greifen):
             Der Schnappschuss darf nie kürzer sein als das Kapitel, das er ersetzt — sonst
-            rückt alles darunter, allen voran das Skelett, zu dem der Faden gerade rollt. */}
-        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`} style={k.offen && k.hoehe ? { minHeight: k.hoehe } : undefined} ref={beobachtet}>
+            rückt alles darunter, allen voran das Skelett, zu dem der Faden gerade rollt.
+            🚨 Solange geladen wird, ist es GENAU diese Höhe (height + overflow hidden):
+            Die Zeile „Kapitel ans Ende holen" und die andere Kopfzeile machen den
+            Schnappschuss 28 px höher als das Kapitel — das war der letzte kleine Ruck
+            nach der Ankunft. Danach min-height; das Wachsen gleicht ausgleich.ts aus. */}
+        <section className={"kapitel kapitel--alt" + (k.offen ? "" : " zu")} id={`kapitel-alt-${k.id}`} style={k.offen && k.hoehe ? (laedt && i === verlauf.length - 1 ? { height: k.hoehe, overflow: "hidden" } : { minHeight: k.hoehe }) : undefined} ref={beobachtet}>
           <div className="kapitel__kopf" onClick={() => { if (!k.offen) kapitelUmschalten(k.id); }}>
             <div className="kapitel__kopf-mitte">
               <span className="kicker">Kapitel {i + 1}{k.pfad.length ? " · " + k.pfad.join(" › ") : ""} · {k.zeit}</span>

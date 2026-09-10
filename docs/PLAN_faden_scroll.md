@@ -294,6 +294,44 @@ Runden in einem Zug — die Lehre vom 09.09. gilt hier genauso.
 
 ---
 
+## 4a. Stand nach der Umsetzung (10.09.2026, abends)
+
+R1–R7 sind umgesetzt, je Runde ein Commit auf `neustart/faden-zeitung`:
+`1d87f27` R1+R2 · `0186b22` R3 · `c42f9b9` R4 · `d5deeb9` R5 · `c711fab` R6 · `5826115` R7,
+dazu die Nachbesserungen nach der Messung (R8). Nicht gepusht.
+
+**Entscheidungen des Users (vor R1 gefragt):** nach einer Navigation bleiben die **letzten
+zwei** Kapitel offen (das verlassene und das neue), alles davor klappt mit Ausgleich zu ·
+Skelett mit Kopfzeile, Pfad **und echtem Titel** aus dem Link · Randspalte rollt intern ohne
+Balken · bei langem Warten nur ein Hinweis, **nie** ein harter Seitenwechsel.
+
+**Was die Sonde danach misst** (Lauf `r8`, Dev-Server, gleiche Szenarien wie § 2):
+
+| Szenario | vorher | nachher |
+|---|---|---|
+| Skelett beim Klick | bis −11 887 px, danach +3 513 px Nachrücken | +866 px unter dem Kopf, bleibt stehen |
+| Ankunft → sichtbar | 2,0 s nach dem DOM-Wechsel | 20–60 ms |
+| Kapitel bei der Ankunft | 526 px unter dem Kopf, zweiter Sprung | 76 px = Kopf + 12, kein Sprung |
+| Zuklappen älterer Kapitel | −2 139 px unter dem Leser | `scrollBy −1 932` im selben Bild, Kapitel bleibt bei 76 |
+| Portale im eingefrorenen Kapitel | +206/+246 px unausgeglichen | `scrollBy +246` im selben Bild |
+| `ScrollTrigger.refresh` | 9× in 4 Navigationen | 0 |
+| Eingabe-Unterkante | 775 … 1000 | 1000 in jedem Sample |
+| Randspalte | −129 … 80 | 80 (86 vor dem Kleben) |
+| Neuladen | +189 px Versatz | Lesestelle vor der Hydration hergestellt, Verlauf mit `scrollBy +189` |
+| Einklappen oberhalb | −2 138 px, dann Kappung | `scrollBy −2 139`, Kapitel bleibt bei 1 px |
+| Leo-Antwort | wächst 401 px unter den Rand | Ende bleibt bei 892 (Mitlaufen, `scrollBy` je Wachstum) |
+| Verlauf links | Skelettzeile ohne Namen, Liste springt 4–5× | Zieltitel sofort, gepinnt, Typ bei gleichen Titeln |
+
+**Was noch offen ist:**
+- R8-Abnahme auf `next start` und im Deploy-Preview (Vorausladen, echte Zeiten).
+- Die Öffnungs-Animation eingefrorener Kapitel ist im Dev-Server nicht messbar (Hauptthread
+  beim Aufklappen zu lange belegt, die 360 ms sind vorbei, bevor ein Bild kommt).
+- Im Dev-Server laufen Layout-Effekte doppelt (Strict Mode): das gerade eingefrorene Kapitel
+  spielt deshalb beim Klick einmal seine Aufklapp-Animation — unsichtbar, weil die Höhe fest
+  ist, in Produktion gar nicht.
+- Ein Linktext wie „Eigene Seite öffnen" ergibt jetzt den Titel des umgebenden Werkzeugs;
+  generische Texte, die ich nicht kenne, stehen so lange in der Ladezeile, bis der Inhalt da ist.
+
 ## 5. Offene Entscheidungen (vor R1 klären)
 
 1. **Sollen ältere Kapitel überhaupt automatisch zuklappen?** Mit Ausgleich ist es

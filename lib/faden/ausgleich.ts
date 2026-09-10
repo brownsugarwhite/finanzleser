@@ -30,8 +30,17 @@ function hoehe(el: Element): number {
 
 function auswerten(eintraege: ResizeObserverEntry[]): void {
   let summe = 0;
-  const kante = kopfHoehe() + 4;
-  for (const e of eintraege) {
+  // „Oberhalb" heißt: die Unterkante lag vor der Änderung nicht tiefer als der Anfang des
+  // Kapitels, in dem gelesen wird (Kopf + 12 px, mit Luft). Das gerade verlassene Kapitel
+  // endet genau dort — und wuchs nach der Ankunft noch um seine Portale (gemessen +246 px),
+  // ohne dass mit der alten Kante (Kopf + 4) ausgeglichen wurde.
+  const kante = kopfHoehe() + 40;
+  // 🚨 In Dokumentreihenfolge, und was oberhalb schon gewachsen ist, wird abgezogen: Melden
+  // zwei Kapitel im selben Bild (bei der Ankunft: das vorletzte +452, das letzte +201),
+  // liegt die Unterkante des unteren schon um das Wachstum des oberen tiefer — ohne Abzug
+  // fiel es durch die Kantenprüfung, der Leser rutschte um 201 px (gemessen 10.09.2026).
+  const sortiert = eintraege.slice().sort((a, b) => (a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+  for (const e of sortiert) {
     const el = e.target;
     const alt = bekannt.get(el);
     const neu = hoehe(el);
@@ -41,7 +50,7 @@ function auswerten(eintraege: ResizeObserverEntry[]): void {
     if (Math.abs(d) < 1) continue;
     // Lag das Kapitel VOR der Änderung ganz über der Lesekante? Dann hat es den Leser
     // verschoben, und zwar um d.
-    const untenVorher = el.getBoundingClientRect().bottom - d;
+    const untenVorher = el.getBoundingClientRect().bottom - d - summe;
     if (untenVorher <= kante) summe += d;
   }
   if (Math.abs(summe) >= 1) window.scrollBy({ top: summe, behavior: "instant" });

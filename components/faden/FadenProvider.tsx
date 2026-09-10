@@ -125,13 +125,20 @@ function istEinfacherLinksklick(e: MouseEvent): boolean {
   return e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 }
 
+/** Linktexte, die nichts über das Ziel sagen — dann lieber der Titel des Kastens drumherum oder gar nichts. */
+const GENERISCH = /^(eigene seite öffnen|erneut öffnen|zum rechner|zur checkliste|zum vergleich|zu den dokumenten|zum werkzeug|zur ausgabe|ausgabe aufschlagen|aufschlagen|öffnen|mehr|weiter|weiterlesen|alle .{0,40}|kapitel ans ende des fadens holen ↓)$/i;
+
 /** Titel des Ziels aus dem Link — für Skelett und Verlaufszeile, bevor der Inhalt da ist. */
 function titelAusLink(a: HTMLAnchorElement): string | undefined {
   const eigen = a.dataset.titel || a.getAttribute("aria-label") || a.title;
   if (eigen) return eigen.trim();
   const kopf = a.querySelector("h1, h2, h3, h4, .titel, b, strong");
   const t = (kopf?.textContent || a.textContent || "").replace(/\s+/g, " ").trim();
-  return t.length > 2 && t.length <= 90 ? t : undefined;
+  if (t.length > 2 && t.length <= 90 && !GENERISCH.test(t)) return t;
+  // „Eigene Seite öffnen" unter einem Rechner: der Rechner ist das Ziel.
+  const kasten = a.closest<HTMLElement>("[data-werkzeug]");
+  const kt = (kasten?.querySelector(".article-tool-title") || kasten?.querySelector("h3"))?.textContent?.replace(/\s+/g, " ").trim();
+  return kt && kt.length > 2 && kt.length <= 90 ? kt : undefined;
 }
 
 /**
@@ -217,15 +224,21 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
           // Leser gerade steht (die Lesestelle hat das Inline-Script in app/layout.tsx schon
           // hergestellt). Ohne Ausgleich rutschte der Text um die Höhe der Kopfzeilen weg.
           const liste = meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false }));
-          mitAusgleich(document.getElementById("kapitel-live"), () => flushSync(() => setVerlauf(liste)));
-          // Stand der Leser in einem eingefrorenen Kapitel, dorthin (zugeklappt: seine Kopfzeile).
-          try {
-            const st = JSON.parse(sessionStorage.getItem(LESESTELLE_KEY) || "null") as { url?: string; kapitelId?: string } | null;
-            if (st && st.url === location.pathname && st.kapitelId && st.kapitelId !== "kapitel-live" && !location.hash) {
-              const k = document.getElementById(st.kapitelId);
-              if (k) window.scrollTo({ top: Math.max(0, k.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12), behavior: "instant" });
-            }
-          } catch { /* egal */ }
+          // 🚨 Nicht IM Effekt: Beim Hydrieren läuft dieser Effekt noch innerhalb des
+          // React-Commits, und flushSync wird dort verweigert („cannot flush when React is
+          // already rendering") — der Verlauf käme dann ohne Ausgleich, der Text rutschte
+          // um die Kopfzeilen weg. Einen Tick später ist React fertig.
+          setTimeout(() => {
+            mitAusgleich(document.getElementById("kapitel-live"), () => flushSync(() => setVerlauf(liste)));
+            // Stand der Leser in einem eingefrorenen Kapitel, dorthin (zugeklappt: seine Kopfzeile).
+            try {
+              const st = JSON.parse(sessionStorage.getItem(LESESTELLE_KEY) || "null") as { url?: string; kapitelId?: string } | null;
+              if (st && st.url === location.pathname && st.kapitelId && st.kapitelId !== "kapitel-live" && !location.hash) {
+                const k = document.getElementById(st.kapitelId);
+                if (k) window.scrollTo({ top: Math.max(0, k.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12), behavior: "instant" });
+              }
+            } catch { /* egal */ }
+          }, 0);
         }
       }
     } catch { /* leer */ }
@@ -430,7 +443,6 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       // landete am Seitenanfang.
       const abschluss = () => {
         const neuLive = document.getElementById("kapitel-live");
-        kapitelPinnen("kapitel-live");
         // Das neue Kapitel blendet sich ein, statt hart zu erscheinen — der Faden läuft
         // weiter, er wechselt nicht die Seite. „wandert" hat seine eigene Bewegung.
         nochmal(neuLive, wandert ? "wandert" : "kapitel--frisch");
@@ -457,6 +469,9 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       setTimeout(() => {
         laedtSeit.current = 0;
         if (langeTimer.current) { clearTimeout(langeTimer.current); langeTimer.current = null; }
+        // Im selben Commit wie das Abräumen des Skeletts — sonst zeigt der Verlauf für
+        // zwei Bilder „Noch kein Kapitel", weil der Pin noch auf dem Skelett steht.
+        kapitelPinnen("kapitel-live");
         setLaedt(false);
         setLaedtLange(false);
         setLadeZiel(null);

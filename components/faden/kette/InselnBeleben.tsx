@@ -53,11 +53,17 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   return null;
 }
 
-export default function InselnBeleben({ wurzel, stand }: { wurzel: HTMLElement | null; stand?: string }) {
+export default function InselnBeleben({ wurzel, stand, pause }: { wurzel: HTMLElement | null; stand?: string; pause?: boolean }) {
   const [inseln, setInseln] = useState<Gefunden[]>([]);
 
   useEffect(() => {
     if (!wurzel) { setInseln([]); return; }
+    // 🚨 Solange eine Navigation läuft, keine NEUEN Portale: Sie rendern in Kästen, die
+    // die gemessene Höhe nur als min-height tragen — wird der Inhalt höher, wächst das
+    // eingefrorene Kapitel mitten im Sprung zum Skelett (gemessen +207 px) und das Ziel
+    // rückt weg. Nach der Ankunft liegt das Kapitel über der Lesestelle, und der Ausgleich
+    // (lib/faden/ausgleich.ts) fängt das Wachsen ab. Bestehende Portale bleiben stehen.
+    if (pause) return;
     const gefunden: Gefunden[] = [];
     wurzel.querySelectorAll<HTMLElement>("[data-insel]").forEach((el) => {
       const typ = el.dataset.insel as InselTyp | undefined;
@@ -70,7 +76,7 @@ export default function InselnBeleben({ wurzel, stand }: { wurzel: HTMLElement |
     setInseln(gefunden);
     // `stand` hängt am Inhalt: wird das HTML neu gesetzt, sind die alten Knoten weg und
     // die Inseln müssen neu gesucht werden.
-  }, [wurzel, stand]);
+  }, [wurzel, stand, pause]);
 
   return <>{inseln.map((i, n) => createPortal(<Koerper typ={i.typ} arg={i.arg} werte={i.werte} />, i.el, `insel-${n}`))}</>;
 }
