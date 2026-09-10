@@ -185,7 +185,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    Raster: den Platz unter dem letzten Kapitel hält #mitte (Höhe der festen Eingabe). */
 .faden-shell .faden { margin: 0; padding: 22px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) var(--spalte) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 0; align-items: stretch; position: relative; }
 .faden-shell #mitte { grid-column: 2; grid-row: 1; padding: 0 11px var(--eingabe-h, 140px); min-width: 0; }
+/* 🚨 Spalten AUSDRÜCKLICH setzen. Die Fußnote belegt Zeile 2 über alle Spalten; eine
+   automatisch platzierte Randspalte darf keine belegte Zelle überlappen und landete
+   deshalb in einer impliziten vierten und fünften Spalte — Faden links, beide Leisten
+   rechts (10.09.2026). Nur explizit gesetzte Bereiche dürfen sich überlappen. */
 .faden-shell .faden > .rand { grid-row: 1 / 3; }
+.faden-shell .faden > .rand--links { grid-column: 1; }
+.faden-shell .faden > .rand--rechts { grid-column: 3; }
 .faden-shell .faden > .fussnote { grid-column: 1 / -1; grid-row: 2; }
 
 /* ---------- Fortschritt: gestricheltes Gleis in der Gasse links der Mittelspalte ----------

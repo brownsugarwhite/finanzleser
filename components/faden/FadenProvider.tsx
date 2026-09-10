@@ -352,6 +352,9 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
   const navigieren = useCallback((href: string, opts?: { wandert?: boolean; titel?: string }) => {
     const s = schnappschuss();
     lesestelleMerken(s?.id);
+    // Das Registerblatt schließt mit dem Klick, nicht erst mit dem Pfadwechsel — der kommt
+    // erst mit dem neuen Kapitel, und so lange stand das Blatt offen über dem Skelett.
+    setBlatt(null);
     wandertNachNavigation.current = !!opts?.wandert;
     const zielPfad = href.split(/[?#]/)[0];
     const friert = !!s && s.url.split(/[?#]/)[0] !== zielPfad;
@@ -406,7 +409,8 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
       const ziel = fadenZiel(a);
       if (!ziel) return;
       ev.preventDefault();
-      if (istHier(ziel)) { zumKapitelScrollen(); return; }
+      // Auch ein Link auf das Kapitel, in dem man schon steht, führt „in den Faden": Blatt zu.
+      if (istHier(ziel)) { setBlatt(null); zumKapitelScrollen(); return; }
       navigieren(ziel, { titel: a ? titelAusLink(a) : undefined });
     };
     document.addEventListener("click", aufKlick);
