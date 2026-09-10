@@ -8,7 +8,7 @@
  * „Sekundärquelle“ stehen immer dabei.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import gsap, { ScrollTrigger } from "@/lib/gsapConfig";
+import gsap from "@/lib/gsapConfig";
 import type { FadenStatistik, StatistikWert } from "@/lib/types";
 import { useRates } from "@/lib/hooks/useRates";
 import { rechne, formatWert } from "@/lib/statistik/formeln";
@@ -54,20 +54,26 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
     if (!stuecke.length) return;
     const ctx = gsap.context(() => {
       gsap.set(stuecke, { scale: st.art === "torte" ? 0.2 : st.art === "saeulen" ? undefined : undefined, scaleY: st.art === "saeulen" ? 0 : undefined, scaleX: st.art === "balken" ? 0 : undefined, opacity: st.art === "torte" ? 0 : 1, transformOrigin: st.art === "torte" ? "100px 100px" : st.art === "saeulen" ? "50% 100%" : "0% 50%" });
-      ScrollTrigger.create({
-        trigger: el, start: "top 80%", once: true,
-        onEnter: () => {
-          gsap.to(stuecke, { scale: 1, scaleY: 1, scaleX: 1, opacity: 1, duration: 0.55, ease: "power2.out", stagger: 0.09 });
-          zahlen.forEach((z, i) => {
-            const ziel = Number(z.dataset.zahl); const einheit = z.dataset.einheit || "";
-            if (!Number.isFinite(ziel)) return;
-            const o = { v: 0 };
-            gsap.to(o, { v: ziel, duration: 0.8, delay: 0.1 + i * 0.09, ease: "power2.out", onUpdate: () => { z.textContent = formatWert(o.v, einheit); }, onComplete: () => { z.textContent = formatWert(ziel, einheit); } });
-          });
-        },
-      });
     }, el);
-    return () => ctx.revert();
+    // 🚨 IntersectionObserver statt ScrollTrigger. Jeder ScrollTrigger.refresh() — den
+    // jede fertig geladene Checkliste auslöst — scrollt in GSAPs _refreshAll auf 0 und
+    // zurück und bricht damit jeden laufenden weichen Scroll ab (im Faden gemessen:
+    // neunmal in vier Navigationen). Für „Eintritt ins Bild" braucht es keinen Trigger.
+    const beobachter = new IntersectionObserver((eintraege) => {
+      if (!eintraege.some((e) => e.isIntersecting)) return;
+      beobachter.disconnect();
+      ctx.add(() => {
+        gsap.to(stuecke, { scale: 1, scaleY: 1, scaleX: 1, opacity: 1, duration: 0.55, ease: "power2.out", stagger: 0.09 });
+        zahlen.forEach((z, i) => {
+          const ziel = Number(z.dataset.zahl); const einheit = z.dataset.einheit || "";
+          if (!Number.isFinite(ziel)) return;
+          const o = { v: 0 };
+          gsap.to(o, { v: ziel, duration: 0.8, delay: 0.1 + i * 0.09, ease: "power2.out", onUpdate: () => { z.textContent = formatWert(o.v, einheit); }, onComplete: () => { z.textContent = formatWert(ziel, einheit); } });
+        });
+      });
+    }, { rootMargin: "0px 0px -20% 0px" });
+    beobachter.observe(el);
+    return () => { beobachter.disconnect(); ctx.revert(); };
   }, [st.art]);
 
   const umschalten = (label: string) => setAus((alt) => { const n = new Set(alt); if (n.has(label)) n.delete(label); else n.add(label); return n; });
