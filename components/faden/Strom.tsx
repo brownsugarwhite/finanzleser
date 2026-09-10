@@ -105,6 +105,31 @@ function beobachtet(el: HTMLElement | null) {
   if (el) ausgleichBeobachten(el);
 }
 
+/**
+ * Aufklappen mit Bewegung: Der Inhalt wächst von 0 auf seine Höhe (0,36 s). Liegt das
+ * Kapitel über der Lesestelle, gleicht lib/faden/ausgleich.ts jedes Bild aus; liegt es
+ * darunter, sieht der Leser es aufgehen. Zuklappen bleibt hart — das Kapitel steht danach
+ * als Kopfzeile da, und oberhalb gleicht der Beobachter aus.
+ */
+function KapitelInhalt({ offen, children }: { offen: boolean; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const erst = useRef(true);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (erst.current) { erst.current = false; return; }
+    if (!offen || !el || typeof el.animate !== "function" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const h = el.getBoundingClientRect().height;
+    if (!h) return;
+    el.style.overflow = "hidden";
+    const anim = el.animate([{ height: "0px", opacity: 0 }, { height: `${h}px`, opacity: 1 }], { duration: 360, easing: "cubic-bezier(.22,.61,.36,1)" });
+    const ende = () => { el.style.overflow = ""; };
+    anim.addEventListener("finish", ende, { once: true });
+    const uhr = setTimeout(() => { try { anim.cancel(); } catch { /* egal */ } ende(); }, 440);
+    return () => clearTimeout(uhr);
+  }, [offen]);
+  return <div className="kapitel__inhalt" ref={ref}>{children}</div>;
+}
+
 export default function Strom({ children }: { children: ReactNode; heroZahlen?: HeroZahlen }) {
   const { verlauf, kapitelUmschalten, navigieren, laedt, laedtLange, ladeZiel } = useFaden();
   const nav = useNavItems();
@@ -132,14 +157,14 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
             </div>
           </div>
           {k.offen && <Einschub format="leaderboard" variante={i === 0 ? "top" : "feed"} nr={i} />}
-          <div className="kapitel__inhalt">
+          <KapitelInhalt offen={k.offen}>
             {k.offen && k.html ? (
               <Schnappschuss html={k.html} id={k.id} />
             ) : !k.html ? (
               <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="textlink" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
             ) : null}
             <div className="kapitel__wieder-zeile"><button type="button" className="textlink textlink--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
-          </div>
+          </KapitelInhalt>
         </section>
         </Fragment>
       ))}

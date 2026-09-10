@@ -11,7 +11,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { flushSync } from "react-dom";
-import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten, mitAusgleich, unterDenKopf } from "@/lib/faden/scrollen";
+import { zeigeAnfang, zeigeAnfangStabil, merkeKnoten, mitAusgleich, unterDenKopf, kopfHoehe } from "@/lib/faden/scrollen";
 import { greifen } from "@/lib/faden/schnappschuss";
 import { fadenZiel, istHier } from "@/lib/faden/ziel";
 import { useFadenPrefetch } from "@/lib/faden/usePrefetch";
@@ -104,6 +104,7 @@ const MAX_VERLAUF = 8;
 /** Mindeststandzeit des Skeletts in ms (Prototyp: feste 560 ms; hier nur so lang, dass es nicht blitzt). */
 const SKELETT_MIN = 240;
 const META_KEY = "faden-verlauf";
+const LESESTELLE_KEY = "faden-lesestelle";
 const KOFFER_KEY = "faden-koffer";
 const GLOSSAR_KEY = "faden-glossar";
 const PUNKTE_KEY = "faden-punkte";
@@ -211,7 +212,21 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
         sessionStorage.removeItem(META_KEY);
       } else {
         const meta = JSON.parse(sessionStorage.getItem(META_KEY) || "[]") as Schnappschuss[];
-        if (Array.isArray(meta) && meta.length) setVerlauf(meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false })));
+        if (Array.isArray(meta) && meta.length) {
+          // 🚨 Mit Ausgleich: Die eingefrorenen Kapitel kommen ÜBER das lebende, in dem der
+          // Leser gerade steht (die Lesestelle hat das Inline-Script in app/layout.tsx schon
+          // hergestellt). Ohne Ausgleich rutschte der Text um die Höhe der Kopfzeilen weg.
+          const liste = meta.map((m) => ({ ...m, html: typeof m.html === "string" ? m.html : "", offen: false }));
+          mitAusgleich(document.getElementById("kapitel-live"), () => flushSync(() => setVerlauf(liste)));
+          // Stand der Leser in einem eingefrorenen Kapitel, dorthin (zugeklappt: seine Kopfzeile).
+          try {
+            const st = JSON.parse(sessionStorage.getItem(LESESTELLE_KEY) || "null") as { url?: string; kapitelId?: string } | null;
+            if (st && st.url === location.pathname && st.kapitelId && st.kapitelId !== "kapitel-live" && !location.hash) {
+              const k = document.getElementById(st.kapitelId);
+              if (k) window.scrollTo({ top: Math.max(0, k.getBoundingClientRect().top + window.scrollY - kopfHoehe() - 12), behavior: "instant" });
+            }
+          } catch { /* egal */ }
+        }
       }
     } catch { /* leer */ }
     try {
@@ -235,12 +250,39 @@ export default function FadenProvider({ children, level = LEVEL_STANDARD }: { ch
    * vollständig.
    */
   useEffect(() => {
-    const ohneOffen = verlauf.map(({ offen, ...m }) => { void offen; return m; });
-    for (let ab = 0; ab <= ohneOffen.length; ab++) {
-      const versuch = ohneOffen.map((m, i) => (i < ab ? { ...m, html: "" } : m));
-      try { sessionStorage.setItem(META_KEY, JSON.stringify(versuch)); return; } catch { /* zu groß → nächstes Kapitel opfern */ }
-    }
+    // Im Leerlauf, nicht im Bild: Vier Kapitel sind ~430 KB JSON, das Serialisieren kostete
+    // bei jedem Auf- und Zuklappen einen spürbaren Ruck.
+    const schreiben = () => {
+      const ohneOffen = verlauf.map(({ offen, ...m }) => { void offen; return m; });
+      for (let ab = 0; ab <= ohneOffen.length; ab++) {
+        const versuch = ohneOffen.map((m, i) => (i < ab ? { ...m, html: "" } : m));
+        try { sessionStorage.setItem(META_KEY, JSON.stringify(versuch)); return; } catch { /* zu groß → nächstes Kapitel opfern */ }
+      }
+    };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    if (w.requestIdleCallback) { const id = w.requestIdleCallback(schreiben, { timeout: 2000 }); return () => w.cancelIdleCallback?.(id); }
+    const t = setTimeout(schreiben, 200);
+    return () => clearTimeout(t);
   }, [verlauf]);
+
+  // Lesestelle für das Neuladen merken: Kapitel unter der Lesekante + Versatz (gedrosselt).
+  // Wiederhergestellt wird sie vom Inline-Script in app/layout.tsx (lebendes Kapitel, vor
+  // der Hydration) bzw. oben beim Einhängen des Verlaufs (eingefrorenes Kapitel).
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const merken = () => {
+      timer = null;
+      const kante = kopfHoehe() + 100;
+      let k: HTMLElement | null = null;
+      document.querySelectorAll<HTMLElement>("#strom .kapitel[id]").forEach((el) => { if (el.getBoundingClientRect().top <= kante) k = el; });
+      const ziel = (k as HTMLElement | null) || document.getElementById("kapitel-live");
+      if (!ziel) return;
+      try { sessionStorage.setItem(LESESTELLE_KEY, JSON.stringify({ url: location.pathname, kapitelId: ziel.id, versatz: Math.round(ziel.getBoundingClientRect().top) })); } catch { /* egal */ }
+    };
+    const h = () => { if (!timer) timer = setTimeout(merken, 250); };
+    window.addEventListener("scroll", h, { passive: true });
+    return () => { window.removeEventListener("scroll", h); if (timer) clearTimeout(timer); };
+  }, []);
 
   const toast = useCallback((text: string) => {
     setToastText(text);

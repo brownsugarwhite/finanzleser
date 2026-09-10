@@ -112,7 +112,16 @@ export default async function RootLayout({
             ersten Paint greift. LandingBodyAttr hält es danach für SPA-Navigation in Sync. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(location.pathname==='/')document.body.setAttribute('data-landing','')}catch(e){}`,
+            __html: `try{if(location.pathname==='/')document.body.setAttribute('data-landing','');
+if(document.body.classList.contains('faden-body')){history.scrollRestoration='manual';
+/* Lesestelle wiederherstellen (Faden): gemerkt hat sie FadenProvider als Kapitel + Versatz.
+   Der Browser stellte die alte Zahl her, bevor der Verlauf über dem Kapitel eingehängt war —
+   der Text rutschte danach unter den Augen weg (gemessen 10.09.2026: 189 px). Deshalb selbst,
+   sobald das Dokument steht, relativ zum lebenden Kapitel; der Verlauf darüber kommt später
+   mit Ausgleich (FadenProvider). */
+var st=null;try{st=JSON.parse(sessionStorage.getItem('faden-lesestelle')||'null')}catch(e){}
+if(st&&st.url===location.pathname&&st.kapitelId==='kapitel-live'&&!location.hash){var her=function(){var k=document.getElementById('kapitel-live');if(!k)return;window.scrollTo(0,Math.max(0,k.getBoundingClientRect().top+window.scrollY-st.versatz));};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',her,{once:true});else her();}}}catch(e){}`,
           }}
         />
         <LandingBodyAttr />
