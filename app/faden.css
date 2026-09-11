@@ -825,7 +825,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
    Blättern), und beim Aufschlagen zieht er sich zusätzlich darüber, bis von diesem nur
    noch der Schriftzug „Ratgeber" herausschaut (Wunsch 11.09.2026) — wie eine Zeitung, die
    man aus dem Regal zieht. Wie weit, misst Spalten.tsx und setzt es als `--ueberdeckung`. */
-.faden-shell .kiosk { display: block; scroll-margin-top: 110px; margin-top: calc(-10px - var(--ueberdeckung, 0px)); transition: margin-top .42s cubic-bezier(.22, .61, .36, 1); }
+.faden-shell .kiosk { position: relative; display: block; scroll-margin-top: 110px; margin-top: calc(-10px - var(--ueberdeckung, 0px)); transition: margin-top .42s cubic-bezier(.22, .61, .36, 1); }
 .faden-shell .kiosk > .kiosk-blatt + .kiosk-blatt { margin-top: -10px; }
 /* Nach unten wird jedes Blatt breiter, das unterste steht auf 728 px. Von hinten gezählt,
    damit die Treppe stimmt, egal wie viele Rubriken es gibt. */
@@ -833,9 +833,19 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .kiosk > .kiosk-blatt:nth-last-child(3) { --einzug: 8px; }
 .faden-shell .kiosk > .kiosk-blatt:nth-last-child(4) { --einzug: 12px; }
 .faden-shell .kiosk > .kiosk-blatt:nth-last-child(n+5) { --einzug: 16px; }
-/* Der Abschluss unter dem Stapel: eine Haarlinie auf der Breite des untersten Blattes,
-   die links und rechts 8 px darüber hinausragt. */
-.faden-shell .kiosk::after { content: ""; display: block; height: 1px; margin: 0 -8px; background: var(--ink); }
+/* 🚨 Der Stapel hört unten nicht auf, er verliert sich: Das unterste Blatt trägt einen
+   hohen Fuß aus leerem Papier, und darüber liegt ein Verlauf in Seitenfarbe — von ganz
+   durchsichtig bis deckend. Dadurch löst sich die Kante samt Schatten auf, und „Recht"
+   sieht aus, als stiege es aus der Seite (Wunsch 11.09.2026, statt der Haarlinie).
+
+   Der Fuß ist der Grund, warum der Verlauf nie über Text liegt: er beginnt 140 px über
+   der Papierkante, und dort steht bei jedem Zustand nur noch Papier. */
+.faden-shell .kiosk > .kiosk-blatt:last-child { padding-bottom: 140px; }
+.faden-shell .kiosk::after {
+  content: ""; position: absolute; left: -8px; right: -8px; bottom: -24px; height: 164px;
+  z-index: 5; pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, var(--paper) 85%);
+}
 
 .faden-shell .kiosk__kopf {
   display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
