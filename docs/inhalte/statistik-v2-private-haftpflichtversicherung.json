@@ -1,0 +1,132 @@
+{
+  "slug": "private-haftpflichtversicherung",
+  "kopie": "vorlage-haftpflicht",
+  "bloecke": [
+    { "nach": "heading-2", "statistik": {
+      "art": "kennzahlen-vierer",
+      "titel": "Haftpflicht in Zahlen",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "kacheln": [
+        { "label": "Verbreitung", "zahl": 90, "einheit": "%", "text": "der Haushalte haben eine Privathaftpflicht", "farbe": "var(--green-ink)" },
+        { "label": "Verträge", "zahl": 50.8, "einheit": "Mio.", "text": "in der Allgemeinen Haftpflichtversicherung", "farbe": "var(--ink)" },
+        { "label": "Schäden im Jahr", "zahl": 1.97, "einheit": "Mio.", "text": "gemeldet und reguliert, 2024", "farbe": "var(--ink)" },
+        { "label": "Ø Schaden", "zahl": 2857, "einheit": "€", "text": "Leistungen geteilt durch Schäden", "farbe": "var(--pink)" }
+      ],
+      "hinweis": "Die Verbreitung stammt aus der Einkommens- und Verbrauchsstichprobe 2023; die übrigen Werte gelten für die gesamte Allgemeine Haftpflichtversicherung, also auch für gewerbliche Verträge."
+    } },
+    { "nach": "heading-2", "statistik": {
+      "art": "saeulen",
+      "titel": "Welche Versicherungen die Haushalte haben",
+      "untertitel": "Anteil der Haushalte, Einkommens- und Verbrauchsstichprobe 2023",
+      "einheit": "%",
+      "quelle": { "name": "GDV, Auswertung der Einkommens- und Verbrauchsstichprobe 2023", "url": "https://www.gdv.de/gdv/medien/medieninformationen/versicherungsschutz-in-der-fuenfjahreserhebung-mehr-alltagsschutz-weniger-vorsorge-fuers-alter--198196", "stand": "07.04.2026" },
+      "reihen": [{ "label": "Anteil der Haushalte" }],
+      "kategorien": [
+        { "label": "Privathaftpflicht", "werte": [90] },
+        { "label": "Kfz", "werte": [81.2] },
+        { "label": "Hausrat", "werte": [78] },
+        { "label": "Rechtsschutz", "werte": [50] },
+        { "label": "Berufsunfähigkeit", "werte": [26.7] },
+        { "label": "Risikoleben", "werte": [18.7] }
+      ],
+      "hinweis": "Rechtsschutz und Privathaftpflicht gibt der GDV gerundet an („fast jeder zweite Haushalt“, „rund 90 Prozent“)."
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "linien",
+      "titel": "Beiträge und Leistungen 2014 bis 2024",
+      "untertitel": "Allgemeine Haftpflichtversicherung, in Millionen Euro",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "achse": ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      "notiz": "Leistungen",
+      "reihen": [
+        { "label": "Beiträge", "werte": [7442, 7523, 7667, 7746, 7886, 8128, 8140, 8410, 8255, 8557, 8932] },
+        { "label": "Leistungen", "werte": [4814, 4905, 5046, 5136, 5244, 5181, 5277, 5370, 5044, 5265, 5640] }
+      ]
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "tabelle",
+      "titel": "Die Allgemeine Haftpflichtversicherung im Zeitvergleich",
+      "untertitel": "Inländisches Direktgeschäft",
+      "zeilenkopf": "Kennzahl",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "spalten": [{ "name": "2020" }, { "name": "2022" }, { "name": "2024", "tag": "aktuell", "hervor": true }],
+      "zeilen": [
+        { "name": "Beiträge in Mio. €", "werte": ["8.140", "8.255", "8.932"] },
+        { "name": "Leistungen in Mio. €", "werte": ["5.277", "5.044", "5.640"] },
+        { "name": "Schadenquote", "werte": ["64,9 %", "61,5 %", "64,5 %"] },
+        { "name": "Combined Ratio", "werte": ["83,9 %", "84,1 %", "89,7 %"] },
+        { "name": "Verträge in Mio.", "werte": ["47,5", "–", "50,8"] },
+        { "name": "Schäden in Mio.", "werte": ["2,171", "–", "1,974"] }
+      ],
+      "fussnote": "– für dieses Jahr weist die Statistik keine Vertrags- und Schadenzahl aus."
+    } },
+    { "nach": "heading-4", "statistik": {
+      "art": "begriffe",
+      "titel": "Aus dem Glossar",
+      "quelle": { "name": "GDV, Allgemeine Versicherungsbedingungen für die Privathaftpflichtversicherung (AVB PHV 2020)", "url": "https://www.gdv.de/resource/blob/6242/1fe6d0497c64d06bd8aab00f1cf98fac/09-avb-fuer-dieprivathaftpflichtversicherung-avb-phv-gdv-2020-data.pdf", "stand": "2020" },
+      "begriffe": [
+        { "begriff": "Deckungssumme", "text": "Der Höchstbetrag, den der Versicherer je Schadenfall zahlt. „Pauschal“ heißt: eine Summe für Personen-, Sach- und Vermögensschäden zusammen." },
+        { "begriff": "Forderungsausfall", "text": "Die eigene Police springt ein, wenn der Schädiger zahlungsunfähig ist und selbst keine Haftpflicht hat." },
+        { "begriff": "Gefälligkeitsschaden", "text": "Ein Schaden bei unbezahlter Hilfe – etwa beim Umzug. Die Musterbedingungen schließen ihn nicht ein; gute Tarife tun es." }
+      ]
+    } },
+    { "nach": "heading-6", "statistik": {
+      "art": "kennzahlen-liste",
+      "titel": "Allgemeine Haftpflichtversicherung 2024",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "zeilen": [
+        { "name": "Verträge", "wert": "50,8 Mio." },
+        { "name": "Gemeldete Schäden", "wert": "1,97 Mio." },
+        { "name": "Schäden je 100 Verträge", "wert": "3,9" },
+        { "name": "Ø Beitrag je Vertrag", "wert": "176 €" },
+        { "name": "Ø Schadenhöhe", "wert": "2.857 €" },
+        { "name": "Schadenquote", "wert": "64,5 %" }
+      ],
+      "hinweis": "Schäden je 100 Verträge, Ø Beitrag und Ø Schadenhöhe sind aus den veröffentlichten Summen berechnet."
+    } },
+    { "nach": "heading-7", "statistik": {
+      "art": "abwaegung",
+      "titel": "Selbstbehalt vereinbaren?",
+      "quelle": { "name": "Verbraucherzentrale, Privathaftpflichtversicherung", "url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/privathaftpflichtversicherung-schutz-vor-hohen-kosten-13840", "stand": "2026", "sekundaer": true },
+      "pro": [
+        "Der Beitrag sinkt spürbar.",
+        "Kleinschäden bleiben ohne Papierkrieg.",
+        "Der Versicherer kündigt seltener nach einem Schaden."
+      ],
+      "contra": [
+        "Kleine Schäden zahlen Sie selbst.",
+        "Die Ersparnis fällt bei ohnehin niedrigen Beiträgen gering aus.",
+        "Melden müssen Sie den Schaden trotzdem."
+      ]
+    } },
+    { "nach": "heading-8", "statistik": {
+      "art": "schrittfolge",
+      "titel": "So wechseln Sie den Tarif",
+      "quelle": { "name": "§ 11 VVG, Verlängerung und Kündigung des Versicherungsvertrags", "url": "https://www.gesetze-im-internet.de/vvg_2008/__11.html", "stand": "2026" },
+      "schritte": [
+        { "titel": "Bedingungen des alten Vertrags prüfen", "text": "Die Kündigungsfrist beträgt nach § 11 VVG drei Monate zum Ablauf des Versicherungsjahres." },
+        { "titel": "Neuen Tarif wählen", "text": "Auf pauschale Deckungssumme, Forderungsausfall und Gefälligkeitsschäden achten." },
+        { "titel": "Erst abschließen, dann kündigen", "text": "So entsteht keine Lücke – auch nicht für einen Tag." },
+        { "titel": "Police ablegen", "text": "Versicherungsschein und Bedingungen zusammen aufbewahren." }
+      ]
+    } },
+    { "nach": "heading-8", "statistik": {
+      "art": "zeitstrahl",
+      "titel": "Vom Schaden zur Regulierung",
+      "untertitel": "Fristen nach dem Versicherungsvertragsgesetz",
+      "quelle": { "name": "§ 14 und § 30 VVG", "url": "https://www.gesetze-im-internet.de/vvg_2008/__14.html", "stand": "2026" },
+      "stationen": [
+        { "marke": "sofort", "text": "Schaden unverzüglich melden (§ 30 VVG)", "x": 0 },
+        { "marke": "danach", "text": "Versicherer prüft Haftung und Höhe", "x": 45 },
+        { "marke": "nach 1 Monat", "text": "Abschlagszahlung verlangbar (§ 14 VVG)", "x": 100 }
+      ],
+      "hinweis": "Fällig wird die Leistung, sobald die Erhebungen abgeschlossen sind. Dauern sie länger als einen Monat, kann ein Abschlag verlangt werden."
+    } },
+    { "nach": "heading-8", "statistik": {
+      "art": "vergleichsrechner",
+      "titel": "Privathaftpflicht vergleichen",
+      "slug": "private-haftpflichtversicherung-vergleich",
+      "quelle": { "name": "Vergleichsrechner unseres Partners", "url": "https://www.finanzleser.de/finanztools/vergleiche/private-haftpflichtversicherung-vergleich/", "stand": "2026" }
+    } }
+  ]
+}

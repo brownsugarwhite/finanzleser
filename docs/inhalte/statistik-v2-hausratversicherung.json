@@ -1,0 +1,149 @@
+{
+  "slug": "hausratversicherung",
+  "kopie": "vorlage-hausrat",
+  "bloecke": [
+    { "nach": "heading-2", "statistik": {
+      "art": "kennzahlen-vierer",
+      "titel": "Hausrat in Zahlen",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "kacheln": [
+        { "label": "Verbreitung", "zahl": 78, "einheit": "%", "text": "der Haushalte haben eine Hausratversicherung", "farbe": "var(--green-ink)" },
+        { "label": "Verträge", "zahl": 27.3, "einheit": "Mio.", "text": "in Deutschland, 2024", "farbe": "var(--ink)" },
+        { "label": "Ø Beitrag", "zahl": 136, "einheit": "€", "text": "im Jahr je Vertrag", "farbe": "var(--ink)" },
+        { "label": "Ø Schaden", "zahl": 1995, "einheit": "€", "text": "je gemeldetem Schaden", "farbe": "var(--pink)" }
+      ],
+      "hinweis": "Die Verbreitung stammt aus der Einkommens- und Verbrauchsstichprobe 2023. Ø Beitrag und Ø Schaden sind aus den veröffentlichten Summen berechnet."
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "kreis",
+      "titel": "Wofür die Hausrat zahlt",
+      "untertitel": "Anteil am Schadenaufwand 2024",
+      "einheit": "%",
+      "mitteText": "Leistungen",
+      "quelle": { "name": "GDV, Hausratversicherung: Schäden je Gefahr", "url": "https://www.gdv.de/gdv/statistik/statistiken-zur-deutschen-versicherungswirtschaft-uebersicht/schaden-und-unfallversicherung/einzelgefahren-verbundenen-hausratversicherung-schadenentwicklung-151992", "stand": "17.09.2025" },
+      "stuecke": [
+        { "label": "Einbruchdiebstahl", "wert": 31.2 },
+        { "label": "Feuer", "wert": 25.0 },
+        { "label": "Leitungswasser", "wert": 23.3 },
+        { "label": "Elementar", "wert": 13.1 },
+        { "label": "Sturm und Hagel", "wert": 5.7 },
+        { "label": "Glas", "wert": 1.7 }
+      ],
+      "hinweis": "Anteile berechnet aus den veröffentlichten Leistungen je Gefahr: zusammen 1,76 Milliarden Euro."
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "saeulen",
+      "titel": "Leistungen je Gefahr, 2023 und 2024",
+      "untertitel": "Verbundene Hausratversicherung, in Millionen Euro",
+      "quelle": { "name": "GDV, Hausratversicherung: Schäden je Gefahr", "url": "https://www.gdv.de/gdv/statistik/statistiken-zur-deutschen-versicherungswirtschaft-uebersicht/schaden-und-unfallversicherung/einzelgefahren-verbundenen-hausratversicherung-schadenentwicklung-151992", "stand": "17.09.2025" },
+      "reihen": [{ "label": "2023" }, { "label": "2024" }],
+      "kategorien": [
+        { "label": "Einbruch", "werte": [530, 550] },
+        { "label": "Feuer", "werte": [430, 440] },
+        { "label": "Wasser", "werte": [390, 410] },
+        { "label": "Elementar", "werte": [100, 230] },
+        { "label": "Sturm", "werte": [110, 100] },
+        { "label": "Glas", "werte": [30, 30] }
+      ],
+      "hinweis": "Der Sprung bei Elementar von 100 auf 230 Millionen Euro geht auf die Hochwasser des Jahres 2024 zurück."
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "zeitstrahl",
+      "titel": "Nach dem Einbruch",
+      "untertitel": "Was in welcher Reihenfolge zu tun ist",
+      "quelle": { "name": "GDV, Allgemeine Hausrat Versicherungsbedingungen (VHB 2022)", "url": "https://www.gdv.de/resource/blob/6114/458ab7b03401b2bb3bd22b707a5ec6cc/allgemeine-hausrat-versicherungsbedingungen-vhb-2022-quadratmetermodell--data.pdf", "stand": "2022" },
+      "stationen": [
+        { "marke": "sofort", "text": "Polizei rufen, nichts aufräumen", "x": 0 },
+        { "marke": "am selben Tag", "text": "Versicherer benachrichtigen", "x": 38 },
+        { "marke": "binnen Tagen", "text": "Stehlgutliste bei der Polizei einreichen", "x": 72 },
+        { "marke": "danach", "text": "Regulierung", "x": 100 }
+      ],
+      "hinweis": "Ohne Stehlgutliste kann der Versicherer die Leistung kürzen."
+    } },
+    { "nach": "heading-4", "statistik": {
+      "art": "schrittfolge",
+      "titel": "So ermitteln Sie die Versicherungssumme",
+      "quelle": { "name": "Verbraucherzentrale, Hausratversicherung", "url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hausratversicherung-was-sie-wissen-muessen-11360", "stand": "2026", "sekundaer": true },
+      "schritte": [
+        { "titel": "Wohnfläche messen", "text": "Alle Wohnräume zählen, Keller und Dachboden je nach Bedingungen." },
+        { "titel": "Pauschale ansetzen", "text": "Viele Tarife rechnen mit einem festen Betrag je Quadratmeter – häufig 650 Euro." },
+        { "titel": "Wertsachen gesondert prüfen", "text": "Schmuck, Kunst und Fahrräder haben eigene Entschädigungsgrenzen." },
+        { "titel": "Unterversicherungsverzicht vereinbaren", "text": "Dann rechnet der Versicherer im Schaden nicht anteilig herunter." }
+      ]
+    } },
+    { "nach": "heading-4", "statistik": {
+      "art": "begriffe",
+      "titel": "Aus dem Glossar",
+      "quelle": { "name": "GDV, Allgemeine Hausrat Versicherungsbedingungen (VHB 2022)", "url": "https://www.gdv.de/resource/blob/6114/458ab7b03401b2bb3bd22b707a5ec6cc/allgemeine-hausrat-versicherungsbedingungen-vhb-2022-quadratmetermodell--data.pdf", "stand": "2022" },
+      "begriffe": [
+        { "begriff": "Unterversicherungsverzicht", "text": "Der Versicherer rechnet die Entschädigung nicht anteilig herunter, wenn die Versicherungssumme zu niedrig angesetzt war." },
+        { "begriff": "Neuwert", "text": "Erstattet wird, was ein gleichwertiger neuer Gegenstand heute kostet – nicht der Zeitwert." },
+        { "begriff": "Elementarschäden", "text": "Überschwemmung, Starkregen, Erdrutsch, Schneedruck. Ein eigener Baustein, im Grundschutz nicht enthalten." }
+      ]
+    } },
+    { "nach": "heading-5", "statistik": {
+      "art": "linien",
+      "titel": "Beiträge und Leistungen 2014 bis 2024",
+      "untertitel": "Verbundene Hausratversicherung, in Millionen Euro",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "achse": ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      "notiz": "Leistungen",
+      "reihen": [
+        { "label": "Beiträge", "werte": [2849, 2919, 2990, 3063, 3142, 3220, 3271, 3296, 3403, 3612, 3716] },
+        { "label": "Leistungen", "werte": [1407, 1394, 1373, 1267, 1274, 1237, 1143, 1990, 1427, 1661, 1819] }
+      ],
+      "hinweis": "Der Ausschlag 2021 geht auf die Flut im Juli zurück."
+    } },
+    { "nach": "heading-5", "statistik": {
+      "art": "kennzahlen-liste",
+      "titel": "Verbundene Hausratversicherung 2024",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "zeilen": [
+        { "name": "Verträge", "wert": "27,3 Mio." },
+        { "name": "Gemeldete Schäden", "wert": "0,91 Mio." },
+        { "name": "Schäden je 100 Verträge", "wert": "3,3" },
+        { "name": "Beitragseinnahmen", "wert": "3.716 Mio. €" },
+        { "name": "Leistungen", "wert": "1.819 Mio. €" },
+        { "name": "Schadenquote", "wert": "49,4 %" }
+      ],
+      "hinweis": "Schäden je 100 Verträge aus den veröffentlichten Summen berechnet."
+    } },
+    { "nach": "heading-6", "statistik": {
+      "art": "abwaegung",
+      "titel": "Elementarschutz dazunehmen?",
+      "quelle": { "name": "GDV, Versicherungsdichte bei Elementarschadenversicherung", "url": "https://www.gdv.de/gdv/statistik/datenservice-zum-naturgefahrenreport/sachversicherung-elementar/versicherungsdichte-bei-elementarschadenversicherung-regional-sehr-unterschiedlich-183592", "stand": "2025" },
+      "pro": [
+        "Starkregen trifft jede Lage, nicht nur Flussufer.",
+        "Die Leistungen für Elementar stiegen 2024 von 100 auf 230 Millionen Euro.",
+        "Ohne den Baustein zahlt die Hausrat bei Überschwemmung nichts."
+      ],
+      "contra": [
+        "Der Beitrag steigt spürbar.",
+        "In Hochrisikolagen verlangen Versicherer hohe Selbstbehalte.",
+        "Elementarschutz ersetzt keine baulichen Vorkehrungen."
+      ]
+    } },
+    { "nach": "heading-8", "statistik": {
+      "art": "tabelle",
+      "titel": "Die Hausratversicherung im Zeitvergleich",
+      "untertitel": "Inländisches Direktgeschäft",
+      "zeilenkopf": "Kennzahl",
+      "quelle": { "name": "GDV, Statistiken zur deutschen Versicherungswirtschaft", "url": "https://www.gdv.de/resource/blob/152652/dd6bd3e5c32eb6fbd132dc654673d16c/statistiken-zur-deutschen-versicherungswirtschaft-taschenbuch-data.pdf", "stand": "17.09.2025" },
+      "spalten": [{ "name": "2020" }, { "name": "2022" }, { "name": "2024", "tag": "aktuell", "hervor": true }],
+      "zeilen": [
+        { "name": "Beiträge in Mio. €", "werte": ["3.271", "3.403", "3.716"] },
+        { "name": "Leistungen in Mio. €", "werte": ["1.143", "1.427", "1.819"] },
+        { "name": "Schadenquote", "werte": ["35,1 %", "42,1 %", "49,4 %"] },
+        { "name": "Combined Ratio", "werte": ["68,7 %", "75,6 %", "82,8 %"] },
+        { "name": "Verträge in Mio.", "werte": ["26,7", "–", "27,3"] }
+      ],
+      "fussnote": "– für dieses Jahr weist die Statistik keine Vertragszahl aus."
+    } },
+    { "nach": "heading-8", "statistik": {
+      "art": "vergleichsrechner",
+      "titel": "Hausratversicherung vergleichen",
+      "slug": "hausratversicherung-vergleich",
+      "quelle": { "name": "Vergleichsrechner unseres Partners", "url": "https://www.finanzleser.de/finanztools/vergleiche/hausratversicherung-vergleich/", "stand": "2026" }
+    } }
+  ]
+}

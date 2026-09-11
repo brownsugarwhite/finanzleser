@@ -1,0 +1,146 @@
+{
+  "slug": "baufinanzierung",
+  "kopie": "vorlage-baufinanzierung",
+  "bloecke": [
+    { "nach": "heading-2", "statistik": {
+      "art": "kennzahlen-vierer",
+      "titel": "Der Markt 2026",
+      "quelle": { "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html", "stand": "25.06.2026" },
+      "kacheln": [
+        { "label": "Wohnimmobilien", "zahl": 1.4, "einheit": "%", "text": "teurer als im Vorjahresquartal", "farbe": "var(--ink)" },
+        { "label": "Baupreise", "zahl": 5.0, "einheit": "%", "text": "über dem Vorjahr, Mai 2026", "farbe": "var(--pink)" },
+        { "label": "Auf dem Land", "zahl": 3.6, "einheit": "%", "text": "Eigentumswohnungen, dünn besiedelte Kreise", "farbe": "var(--green-ink)" },
+        { "label": "In den TOP 7", "zahl": 0.3, "einheit": "%", "text": "Eigentumswohnungen, größte Städte", "farbe": "var(--ink)" }
+      ],
+      "hinweis": "Die Baupreise stammen aus der Meldung vom 22. Juli 2026, die übrigen Werte aus der Quartalsmeldung."
+    } },
+    { "nach": "heading-2", "statistik": {
+      "art": "spannen",
+      "titel": "Was die Monatsrate kostet",
+      "untertitel": "Annuitätendarlehen mit 2 Prozent Anfangstilgung, je nach Zinssatz",
+      "einheit": "€",
+      "quelle": { "name": "Eigene Berechnung, Annuitätendarlehen mit 2 Prozent Anfangstilgung", "url": "https://www.finanzleser.de/finanztools/rechner/tilgungsrechner/", "stand": "2026" },
+      "skala": { "von": 0, "bis": 3000 },
+      "zeilen": [
+        { "name": "200.000 €", "min": 833, "median": 1000, "max": 1167 },
+        { "name": "300.000 €", "min": 1250, "median": 1500, "max": 1750 },
+        { "name": "400.000 €", "min": 1667, "median": 2000, "max": 2333 },
+        { "name": "500.000 €", "min": 2083, "median": 2500, "max": 2917 }
+      ],
+      "hinweis": "Von links nach rechts: 3 Prozent Zins, 4 Prozent (Punkt) und 5 Prozent. Ein Prozentpunkt mehr kostet bei 300.000 Euro rund 250 Euro im Monat."
+    } },
+    { "nach": "heading-3", "statistik": {
+      "art": "anteilsleiste",
+      "titel": "Woraus die Kaufnebenkosten bestehen",
+      "untertitel": "Beispiel Nordrhein-Westfalen, mit Makler",
+      "einheit": "%",
+      "quelle": { "name": "Statistisches Bundesamt, Grunderwerbsteuer der Länder", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/Grafiken/Newsroom/2024/_Interaktiv/20240222-grunderwerbssteuer-bundeslaender.html", "stand": "2024" },
+      "stuecke": [
+        { "label": "Grunderwerbsteuer", "wert": 56.2 },
+        { "label": "Maklercourtage", "wert": 30.9 },
+        { "label": "Notar und Grundbuch", "wert": 12.9 }
+      ],
+      "hinweis": "Gerechnet mit 6,5 Prozent Grunderwerbsteuer, 3,57 Prozent Käuferanteil der Courtage und 1,5 Prozent für Notar und Grundbuch — zusammen 11,57 Prozent des Kaufpreises. In Bayern beträgt die Grunderwerbsteuer nur 3,5 Prozent."
+    } },
+    { "nach": "heading-5", "statistik": {
+      "art": "tabelle",
+      "titel": "Was ein Prozentpunkt ausmacht",
+      "untertitel": "300.000 Euro Darlehen, 2 Prozent Anfangstilgung, nach zehn Jahren",
+      "zeilenkopf": "Kennzahl",
+      "quelle": { "name": "Eigene Berechnung, Annuitätendarlehen mit 2 Prozent Anfangstilgung", "url": "https://www.finanzleser.de/finanztools/rechner/tilgungsrechner/", "stand": "2026" },
+      "spalten": [
+        { "name": "3 % Zins" },
+        { "name": "4 % Zins", "tag": "Marktnähe 2026", "hervor": true },
+        { "name": "5 % Zins" }
+      ],
+      "zeilen": [
+        { "name": "Monatsrate", "werte": ["1.250 €", "1.500 €", "1.750 €"] },
+        { "name": "Zinskosten in zehn Jahren", "werte": ["80.129 €", "106.375 €", "132.359 €"] },
+        { "name": "Restschuld nach zehn Jahren", "werte": ["230.129 €", "226.375 €", "222.359 €"] },
+        { "name": "Getilgt in zehn Jahren", "werte": ["69.871 €", "73.625 €", "77.641 €"] }
+      ],
+      "fussnote": "Die höhere Rate tilgt kaum mehr – fast der ganze Unterschied geht in die Zinsen."
+    } },
+    { "nach": "heading-5", "statistik": {
+      "art": "abwaegung",
+      "titel": "Lange Zinsbindung vereinbaren?",
+      "quelle": { "name": "§ 489 BGB, Ordentliches Kündigungsrecht des Darlehensnehmers", "url": "https://www.gesetze-im-internet.de/bgb/__489.html", "stand": "2026" },
+      "pro": [
+        "Die Rate steht für die ganze Zeit fest.",
+        "Kein Zinsänderungsrisiko beim Anschluss.",
+        "Nach zehn Jahren dürfen Sie ohnehin jederzeit kündigen (§ 489 BGB)."
+      ],
+      "contra": [
+        "Längere Bindung kostet Zinsaufschlag.",
+        "Bei fallenden Zinsen zahlen Sie zu lange zu viel.",
+        "Vor Ablauf ist ein Ausstieg nur gegen Vorfälligkeitsentschädigung möglich."
+      ]
+    } },
+    { "nach": "heading-6", "statistik": {
+      "art": "saeulen",
+      "titel": "Wo Eigentumswohnungen teurer werden",
+      "untertitel": "Veränderung zum Vorjahresquartal, 1. Quartal 2026",
+      "einheit": "%",
+      "quelle": { "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html", "stand": "25.06.2026" },
+      "reihen": [{ "label": "Veränderung zum Vorjahr" }],
+      "kategorien": [
+        { "label": "Ländliche Kreise", "werte": [3.6] },
+        { "label": "Großstädte ohne TOP 7", "werte": [2.9] },
+        { "label": "TOP 7", "werte": [0.3] }
+      ],
+      "hinweis": "TOP 7 sind Berlin, Hamburg, München, Köln, Frankfurt am Main, Stuttgart und Düsseldorf."
+    } },
+    { "nach": "heading-6", "statistik": {
+      "art": "kennzahlen-liste",
+      "titel": "Wohnimmobilien in Zahlen",
+      "quelle": { "name": "Statistisches Bundesamt, Preise für Wohnimmobilien im 1. Quartal 2026", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html", "stand": "25.06.2026" },
+      "zeilen": [
+        { "name": "Wohnimmobilien zum Vorjahresquartal", "wert": "+1,4 %" },
+        { "name": "Wohnimmobilien zum Vorquartal", "wert": "+0,3 %" },
+        { "name": "Baupreise Wohngebäude, Mai 2026", "wert": "+5,0 %" },
+        { "name": "Grunderwerbsteuer, niedrigster Satz", "wert": "3,5 %" },
+        { "name": "Grunderwerbsteuer, höchster Satz", "wert": "6,5 %" }
+      ],
+      "hinweis": "Den niedrigsten Satz hat Bayern; 6,5 Prozent verlangen Brandenburg, Nordrhein-Westfalen, das Saarland, Schleswig-Holstein und Thüringen."
+    } },
+    { "nach": "heading-7", "statistik": {
+      "art": "schrittfolge",
+      "titel": "Von der Selbstauskunft zur Auszahlung",
+      "quelle": { "name": "§ 491a BGB, Informationspflichten bei Verbraucherdarlehensverträgen", "url": "https://www.gesetze-im-internet.de/bgb/__491a.html", "stand": "2026" },
+      "schritte": [
+        { "titel": "Haushaltsrechnung aufstellen", "text": "Einnahmen, Ausgaben und Eigenkapital ehrlich gegenüberstellen." },
+        { "titel": "Unterlagen sammeln", "text": "Gehaltsnachweise, Grundbuchauszug, Grundriss, Energieausweis." },
+        { "titel": "Angebote einholen und vergleichen", "text": "Auf den effektiven Jahreszins achten, nicht auf den Sollzins." },
+        { "titel": "Notartermin und Auszahlung", "text": "Erst nach Eintragung der Grundschuld fließt das Geld." }
+      ]
+    } },
+    { "nach": "heading-7", "statistik": {
+      "art": "zeitstrahl",
+      "titel": "Vom Antrag bis zum Geld",
+      "untertitel": "Übliche Dauer, ohne Verzögerungen",
+      "quelle": { "name": "§ 491a und § 873 BGB", "url": "https://www.gesetze-im-internet.de/bgb/__873.html", "stand": "2026" },
+      "stationen": [
+        { "marke": "Woche 1", "text": "Unterlagen einreichen", "x": 0 },
+        { "marke": "Woche 2", "text": "Finanzierungszusage", "x": 35 },
+        { "marke": "Woche 4", "text": "Notartermin", "x": 70 },
+        { "marke": "Woche 8", "text": "Auszahlung nach Grundbucheintrag", "x": 100 }
+      ]
+    } },
+    { "nach": "heading-7", "statistik": {
+      "art": "begriffe",
+      "titel": "Aus dem Glossar",
+      "quelle": { "name": "§ 489 und § 873 BGB", "url": "https://www.gesetze-im-internet.de/bgb/__489.html", "stand": "2026" },
+      "begriffe": [
+        { "begriff": "Beleihungsauslauf", "text": "Das Darlehen im Verhältnis zum Beleihungswert. Unter 60 Prozent gibt es die besten Zinsen." },
+        { "begriff": "Annuität", "text": "Die gleichbleibende Rate aus Zins und Tilgung. Der Zinsanteil sinkt mit der Zeit, der Tilgungsanteil steigt." },
+        { "begriff": "Vorfälligkeitsentschädigung", "text": "Was die Bank verlangt, wenn Sie vor Ablauf der Zinsbindung aussteigen. Nach zehn Jahren entfällt sie." }
+      ]
+    } },
+    { "nach": "heading-7", "statistik": {
+      "art": "vergleichsrechner",
+      "titel": "Baufinanzierung vergleichen",
+      "slug": "baufinanzierung-vergleich",
+      "quelle": { "name": "Vergleichsrechner unseres Partners", "url": "https://www.finanzleser.de/finanztools/vergleiche/baufinanzierung-vergleich/", "stand": "2026" }
+    } }
+  ]
+}
