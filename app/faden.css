@@ -691,7 +691,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten--liste .eintrag { display: grid; gap: 3px; border-bottom: 1px solid var(--rule); padding: 9px 0 10px; text-decoration: none; color: var(--ink); }
 .faden-shell .kasten--liste .eintrag b { font-family: var(--serif); font-size: 15.5px; font-weight: 700; line-height: 1.3; }
 .faden-shell .kasten--liste .eintrag:hover b { color: var(--green-ink); }
-.faden-shell .eintrag__klein, .faden-shell .spalte__kleine { display: flex; align-items: center; gap: 6px; font: 400 12px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .eintrag__klein { display: flex; align-items: center; gap: 6px; font: 400 12px/1.3 var(--sans); color: var(--muted); }
 .faden-shell .eintrag__einzeilig { display: flex; align-items: center; gap: 8px; }
 .faden-shell .kasten--liste .eintrag small { color: var(--muted); font-size: 12px; }
 

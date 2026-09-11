@@ -20,7 +20,6 @@
 .faden-shell .hbox { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
 .faden-shell .hbox path.seg { fill: none; stroke: var(--rule-strong); stroke-width: 1; }
 /* Eigene Sparks an den Außenkanten gibt es nicht mehr — die Kanten laufen durch. */
-.faden-shell .spalten.offen .hbox { display: none; }
 
 /* Werkzeugreihe im Hero: drei Kacheln, Trenner mit kurzen Linien, docken beim Laden an (01-css.html:482, 486, 488–493) */
 .faden-shell .landing-unten { align-self: start; width: min(820px, 94%); display: grid; justify-items: center; will-change: opacity, transform; }
