@@ -105,7 +105,7 @@ function finanzleser_faden_felder() {
 		'wappen'           => array( array( 'glossar', 'spiel' ), 'text', 'Themen-Wappen (haftpflicht, hausrat, hund, steuer, rente, kinder, kfz, wohnen, vorsorge, recht, sparen, kassensturz)' ),
 		'status'           => array( array( 'glossar', 'spiel' ), 'text', 'entwurf | freigegeben' ),
 		// Spiel
-		'spiel_typ'        => array( array( 'spiel' ), 'text', 'mythos | quiz | schaetzen | karte | gewusst | finanzwort | rubbellos' ),
+		'spiel_typ'        => array( array( 'spiel' ), 'text', 'mythos | quiz | schaetzen | gewusst | finanzwort' ),
 		'spiel_felder'     => array( array( 'spiel' ), 'json', 'Die Felder der Box, wie das Studio sie heute als data-gam-field schreibt' ),
 		'punkte'           => array( array( 'spiel' ), 'text', 'Punkte bei Erfolg' ),
 		'datum'            => array( array( 'spiel' ), 'text', 'Tag oder Woche der Ausspielung (YYYY-MM-DD), leer = zeitlos' ),
@@ -259,7 +259,9 @@ add_action( 'rest_api_init', function () {
 		'callback'            => function ( WP_REST_Request $r ) {
 			$slug = sanitize_title( (string) $r['slug'] );
 			$typ  = sanitize_key( (string) $r['typ'] );
-			if ( ! in_array( $typ, array( 'mythos', 'quiz', 'schaetzen', 'karte', 'gewusst', 'finanzwort', 'rubbellos' ), true ) ) {
+			// 'karte' und 'rubbellos' sind am 11.09.2026 gestrichen. Vorhandene Beiträge dieser Typen
+			// bleiben in der Datenbank, lassen sich über diesen Weg aber nicht mehr anlegen oder ändern.
+			if ( ! in_array( $typ, array( 'mythos', 'quiz', 'schaetzen', 'gewusst', 'finanzwort' ), true ) ) {
 				return new WP_Error( 'fl_typ', 'Unbekannter Spieltyp', array( 'status' => 400 ) );
 			}
 			$vorhanden = get_posts( array( 'post_type' => 'spiel', 'name' => $slug, 'post_status' => array( 'publish', 'draft', 'pending' ), 'numberposts' => 1 ) );

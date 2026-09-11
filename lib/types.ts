@@ -354,7 +354,11 @@ export interface Spiel {
   id: string;
   slug: string;
   title: string;
-  typ: "mythos" | "quiz" | "schaetzen" | "karte" | "gewusst" | "finanzwort" | "rubbellos";
+  /* „karte" (Drehkarte, „Begriff erklärt") und „rubbellos" sind am 11.09.2026 gestrichen:
+     die Drehkarte erklärt Begriffe — das macht im Faden das Glossar an Ort und Stelle —,
+     und „rubbellos" hatte nie eine rendernde Komponente. Das Rubbeln gibt es weiterhin,
+     es heißt „gewusst". */
+  typ: "mythos" | "quiz" | "schaetzen" | "gewusst" | "finanzwort";
   felder: Record<string, string>;
   wappen: string;
   status: string;

@@ -164,9 +164,14 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
       }
       htmlAnhaengen(aktuelle, html.slice(last));
     } else if (part.type === "gamification") {
-      // Die Drehkarte („karte") erklärt einen Begriff — das übernimmt im Faden das
-      // Glossar, jeder grüne Begriff öffnet dieselbe Erklärung an Ort und Stelle.
-      // Sie bleibt im CMS stehen, wird hier aber nicht mehr in die Kette gehängt.
+      // Die Drehkarte („karte", im Studio „Begriff erklärt") ist am 11.09.2026 gestrichen:
+      // im Faden erklärt das Glossar die Begriffe an Ort und Stelle, jeder grüne Begriff
+      // öffnet dieselbe Erklärung.
+      //
+      // 🚨 Der Parser in lib/articleHtml.ts kennt sie weiter — und das muss so bleiben.
+      // Nähme man sie dort aus der Alternative, fiele der Rohblock durch und stünde als
+      // sichtbares HTML im Text. Auf der alten Beitragsseite rendert sie deshalb
+      // unverändert weiter; 142 Beiträge auf cms-dev enthalten sie (Stand 11.09.2026).
       if (part.value === "karte") continue;
       aktuelle.teile.push({ art: "spiel", typ: part.value, felder: part.gamFields || {} });
     } else if (part.type === "statistik") {

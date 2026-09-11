@@ -251,10 +251,6 @@ export default async function Schaukasten() {
         <div className="spiel-inline"><GamificationEmbed gamType="gewusst" fields={{
           text: "Der Grundpreis fällt auch dann an, wenn Sie ein Jahr lang keine einzige Kilowattstunde verbrauchen. Bei einem Zweitwohnsitz ist er oft der größere Teil der Rechnung.",
         }} /></div>
-        <div className="spiel-inline"><GamificationEmbed gamType="karte" fields={{
-          begriff: "Grundversorgung",
-          erklaerung: "Der Tarif, in dem Sie automatisch landen, wenn Sie nie einen Vertrag geschlossen haben. Er ist gesetzlich garantiert — und fast immer der teuerste im Ort.",
-        }} /></div>
         <div className="spiel-inline"><GamificationEmbed gamType="test" fields={{
           frage: "Was steht auf Ihrer Jahresrechnung ganz oben?",
           antwort: "Der Tarifname. Enthält er „Grundversorgung“, zahlen Sie fast immer zu viel.",
