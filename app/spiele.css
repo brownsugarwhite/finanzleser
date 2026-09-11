@@ -1,0 +1,75 @@
+/* =====================================================================================
+   spiele.css — die Rätselseite aus Design A v2 („Die Zeitung"), Kapitel 7
+
+   Vorlage: docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html,
+   Zeilen 1035–1146. Jede Regel trägt die Zeilennummer ihrer Vorlage.
+
+   🚨 Die Spiele im Faden haben KEINEN Kasten. Der Handoff kennt für sie nur eine Kopfzeile
+   mit Tintenlinie und den Inhalt darunter — kein Rahmen, kein Hintergrund, keine Rundung,
+   kein Schatten. Das alte Chassis (`.fl-gam-*-box`: 1 px Rahmen in Teal #248085, 38/31/36
+   Innenabstand, fieldset-artige Legende) lebt unverändert weiter, aber nur noch auf der
+   alten Beitragsseite. Im Faden kommt es nicht mehr vor.
+
+   Alles hier ist auf `.faden-shell` gescoped, damit `components/sections/ArticleContent.tsx`
+   nichts davon abbekommt.
+   ===================================================================================== */
+
+/* ── Die Kopfzeile, Baustein aller Spiele (Handoff 1046, 1072, 1090, 1100 — wortgleich) ── */
+.faden-shell .spiel-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; width: 100%; border-bottom: 1px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; text-align: left; }
+.faden-shell .spiel-kopf__hinweis { font: italic 300 12.5px var(--serif); color: var(--muted); white-space: nowrap; }
+
+/* ── Gemeinsame Bausteine der Spielkörper ─────────────────────────────────────────── */
+/* Frage bzw. Behauptung (Handoff 1073, 1091) */
+.faden-shell .spiel__frage { margin: 10px 0 8px; font: 600 16px/1.4 var(--serif); color: var(--ink); }
+/* Auflösung (Handoff 1096) */
+.faden-shell .spiel__aufloesung { margin: 10px 0 0; min-height: 20px; font: italic 400 14px/1.5 var(--serif); color: var(--muted); }
+.faden-shell .spiel__aufloesung b { font: 900 14px var(--serif); }
+.faden-shell .spiel__aufloesung--richtig b { color: var(--green-ink); }
+.faden-shell .spiel__aufloesung--falsch b { color: var(--pink); }
+
+/* Antwortzeile — das Optionsraster des Quiz (Handoff 1093–1095). Mythos benutzt dasselbe. */
+.faden-shell .spiel-antwort { position: relative; display: grid; grid-template-columns: 22px 1fr; align-items: baseline; gap: 10px; width: 100%; border: 0; border-top: 1px solid var(--rule-fein); background: transparent; padding: 10px 2px; text-align: left; color: var(--ink); cursor: pointer; transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spiel-antwort:hover:not(:disabled) { padding-left: 8px; }
+.faden-shell .spiel-antwort:disabled { cursor: default; }
+.faden-shell .spiel-antwort__zeichen { font: 900 15px/1.5 var(--serif); color: var(--muted); }
+.faden-shell .spiel-antwort__text { font: 400 14.5px/1.5 var(--sans); }
+/* Der Balken wächst unter der gewählten Zeile auf — grün, wenn sie stimmt, sonst magenta. */
+.faden-shell .spiel-antwort__balken { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--green); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .spiel-antwort--richtig .spiel-antwort__balken { width: 100%; }
+.faden-shell .spiel-antwort--falsch .spiel-antwort__balken { width: 100%; background: var(--pink); }
+.faden-shell .spiel-antwort--richtig .spiel-antwort__zeichen { color: var(--green-ink); }
+.faden-shell .spiel-antwort--falsch .spiel-antwort__zeichen { color: var(--pink); }
+.faden-shell .spiel-antwort--richtig .spiel-antwort__text { font-weight: 600; }
+
+/* ── Schätzfrage (Handoff 1072–1080) ──────────────────────────────────────────────── */
+.faden-shell .spiel-schaetz__buehne { position: relative; padding: 4px 0 34px; }
+.faden-shell .spiel-schaetz__regler { width: 100%; display: block; }
+.faden-shell .spiel-schaetz__blase { position: absolute; top: 22px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 3px; padding: 5px 11px; background: var(--ink); border-radius: 4px; color: #fff; font: 600 16px var(--sans); white-space: nowrap; transition: left .28s cubic-bezier(.22,1,.36,1); }
+.faden-shell .spiel-schaetz__blase i { position: absolute; left: 50%; top: -5px; transform: translateX(-50%); border: 5px solid transparent; border-top: 0; border-bottom-color: var(--ink); }
+.faden-shell .spiel-schaetz__blase--wahrheit { background: var(--pink); }
+.faden-shell .spiel-schaetz__blase--wahrheit i { border-bottom-color: var(--pink); }
+.faden-shell .spiel-schaetz__skala { display: flex; justify-content: space-between; font: 700 12px var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ── Schon gewusst (keine Vorlage im Handoff — im selben Idiom entworfen) ──────────── */
+.faden-shell .spiel-gewusst__flaeche { position: relative; margin-top: 12px; border: 1px solid var(--rule); background: var(--paper); overflow: hidden; }
+.faden-shell .spiel-gewusst__text { margin: 0; padding: 16px 18px; font: 400 15px/1.7 var(--sans); color: var(--ink); }
+.faden-shell .spiel-gewusst__tuch { position: absolute; inset: 0; display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.faden-shell .spiel-gewusst__tuch:active { cursor: grabbing; }
+.faden-shell .spiel-gewusst__wink { margin: 8px 0 0; font: italic 300 12.5px var(--serif); color: var(--muted); }
+
+/* ── Satz: Spiel allein, Spiel neben Anzeige, zwei Spiele nebeneinander ───────────── */
+/* Das Raster aus Handoff 1043 (`gap: 44px 60px`), auf die Satzbreite des Fadens gebracht.
+   Unter 760 px kippt alles auf eine Spalte und die Anzeige rutscht unter das Spiel. */
+.faden-shell .spiel-satz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px 44px; align-items: start; clear: both; margin: 26px 0 28px; scroll-margin-top: 110px; min-width: 0; }
+@media (min-width: 760px) {
+  .faden-shell .spiel-satz--anzeige-rechts { grid-template-columns: minmax(0, 1fr) 300px; }
+  .faden-shell .spiel-satz--anzeige-links { grid-template-columns: 300px minmax(0, 1fr); }
+  /* Die Insel steht im Markup immer zuerst — für „Anzeige links" tauscht das Raster. */
+  .faden-shell .spiel-satz--anzeige-links > .insel, .faden-shell .spiel-satz--anzeige-links > .spiel-satz__koerper { order: 2; }
+  .faden-shell .spiel-satz--paar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 44px 60px; }
+}
+
+/* ── Schlange als Belohnung am Artikelende (Handoff 1113–1115) ────────────────────── */
+.faden-shell .spiel-satz--schlange { margin-top: 40px; border-top: 2px solid var(--rule-strong); padding-top: 12px; }
+.faden-shell .spiel-satz__rand { display: grid; gap: 10px; }
+.faden-shell .spiel-satz__notiz { margin: 0; font: italic 300 12.5px var(--serif); color: var(--muted); }

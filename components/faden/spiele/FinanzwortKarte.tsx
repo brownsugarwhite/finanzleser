@@ -9,6 +9,7 @@ import { getGlossarBySlug } from "@/lib/wordpress";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { stripHtml } from "@/lib/seo";
 import type { Spiel } from "@/lib/types";
+import SpielKopf from "./SpielKopf";
 import Finanzwort from "./Finanzwort";
 
 /** Lösungswort spielbar machen: Großbuchstaben, ß → SS, nur A–Z Ä Ö Ü (die Tastatur hat kein ß). */
@@ -26,10 +27,7 @@ export default async function FinanzwortKarte({ spiel: vorgegeben }: { spiel?: S
   const eintrag = begriff ? await getGlossarBySlug(begriff) : null;
   return (
     <article className="kasten kasten--pink" id={`kasten-${spiel.slug}`}>
-      <div className="spiel-kopf">
-        <span className="kicker">Finanzwort · Nr. {nr}</span>
-        <span className="spiel-kopf__hinweis">{wort.length} Buchstaben, sechs Versuche</span>
-      </div>
+      <SpielKopf kicker={`Finanzwort · Nr. ${nr}`} hinweis={`${wort.length} Buchstaben, sechs Versuche`} />
       <Finanzwort
         slug={spiel.slug}
         wort={wort}

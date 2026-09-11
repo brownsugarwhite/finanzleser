@@ -11,7 +11,10 @@
   --paper: var(--color-bg-page); --white: #fdfdfb; --placeholder: var(--color-placeholder-bg);
   /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
   --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
-  --rule: rgba(51,74,39,.14); --rule-soft: rgba(51,74,39,.08); --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
+  /* Die Haarlinien-Stufen der Übergabe. --rule ist mit 37 Fundstellen die häufigste,
+     --rule-fein (.1) trägt FAQ-Zeilen und Quiz-Optionen, --rule-soft (.08) die feinsten
+     Trenner im Inhaltsverzeichnis. --rule-strong ist die volle Tinte. */
+  --rule: rgba(51,74,39,.16); --rule-fein: rgba(51,74,39,.1); --rule-soft: rgba(51,74,39,.08); --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
   --ink: var(--color-text-primary); --muted: var(--color-text-medium);
   --green: var(--color-brand); --green-ink: #2E7A0B; --pink: var(--color-brand-secondary); --pink-tint: #FBEAF1; --tint: #eef3e8;
   --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);

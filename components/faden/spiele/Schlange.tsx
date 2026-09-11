@@ -26,6 +26,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import SpielKopf from "./SpielKopf";
 import {
   schlangenFormen, futterFormen, FUTTER_ARTEN, TEILUNG,
   type Form, type FutterArt, type Zelle,
@@ -270,10 +271,7 @@ export default function Schlange() {
 
   return (
     <div className="schlange">
-      <div className="spiel-kopf">
-        <span className="kicker kicker--gruen">Spiel · Schlange</span>
-        <span className="spiel-kopf__hinweis">Pfeiltasten oder wischen</span>
-      </div>
+      <SpielKopf kicker="Spiel · Schlange" hinweis="Pfeiltasten oder wischen" ton="gruen" />
 
       <div
         className="schlange__feld"
