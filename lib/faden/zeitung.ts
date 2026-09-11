@@ -4,16 +4,21 @@
  * Beide Entscheidungen sind unabhängig voneinander und fallen serverseitig, damit im
  * SSR-HTML schon die richtigen Klassen stehen (kein Umbruch-Flackern nach Hydration).
  *
- * 🚨 Zwei Spalten sind im Web nur so lange eine Wohltat, wie der Block auf einen
- * Bildschirm passt. Wird er höher, liest man Spalte 1 nach unten und muss zum Anfang
- * von Spalte 2 wieder hoch — in der Zeitung gibt es das nicht, weil die Seite eine
- * feste Höhe hat. Deshalb entscheidet hier die Textlänge, nicht der Ort im Beitrag.
- * Bei rund 340 px Spaltenbreite passen etwa 45 Zeichen in eine Zeile; MAX_ZEICHEN
- * ergibt damit gut 20 Zeilen je Spalte und bleibt unter einer Bildschirmhöhe.
+ * 🚨 Bis 11.09.2026 entschied hier die TEXTLÄNGE, ob ein Block zwei Spalten bekommt —
+ * jeder Block im Beitrag konnte also mehrspaltig werden. Das hatte zwei Nachteile:
+ *
+ *   1. Design A v2 setzt genau EINEN Block zweispaltig, den Auftakt (Handoff Zeile 403).
+ *      Alles Weitere läuft dort über die volle Satzbreite.
+ *   2. `columns` eröffnet einen eigenen Block-Formatierungskontext. Ein solcher Block
+ *      umfließt einen Float nicht, er weicht ihm als Ganzes aus. Neben einer umflossenen
+ *      Anzeige blieb der Text deshalb auf 402 von 728 px stehen — auch 500 px unterhalb
+ *      der Anzeige, wo längst wieder die volle Breite frei war. Auch `columns: 1` half
+ *      nicht: der Kontext bleibt bestehen.
+ *
+ * Deshalb entscheidet jetzt der ORT, nicht die Länge: der Aufrufer sagt, ob dieser Block
+ * der Auftakt ist. Damit hat außerhalb des ersten Abschnitts kein Block mehr `columns`,
+ * und der Textumfluss um die Anzeigen funktioniert von selbst.
  */
-
-const MIN_ZEICHEN = 300;
-const MAX_ZEICHEN = 1800;
 
 /**
  * Elemente, bei denen der Block einspaltig bleibt.
@@ -26,6 +31,9 @@ const MAX_ZEICHEN = 1800;
  */
 const SPERREN = /<(ul|ol|dl|table|figure|iframe|video|pre|img)\b/i;
 
+/** Zu kurz für zwei Spalten: unter dieser Länge sähe die zweite Spalte leer aus. */
+const MIN_ZEICHEN = 300;
+
 /** Reiner Textinhalt eines HTML-Schnipsels — nur zum Zählen, nicht zum Rendern. */
 function nurText(html: string): string {
   return html
@@ -35,28 +43,20 @@ function nurText(html: string): string {
     .trim();
 }
 
-function zweiSpalten(html: string): boolean {
-  if (SPERREN.test(html)) return false;
-  const zeichen = nurText(html).length;
-  return zeichen >= MIN_ZEICHEN && zeichen <= MAX_ZEICHEN;
-}
-
 /**
  * Klassen für einen Fließtext-Block.
  *
- * `initiale` bittet nur um die große Initiale — ob der Block auch zwei Spalten
- * bekommt, entscheidet weiterhin die Länge. Eine Initiale trägt auch einspaltig,
- * ein zu langer Auftakt verliert also nicht seinen Schmuck.
- * Die Ausnahme „neben der umflossenen Anzeige einspaltig“ steht bewusst NICHT hier,
- * sondern in app/faden.css: die Anzeige floatet erst ab 900 px, und ob dieser Punkt
- * erreicht ist, weiß der Server nicht.
+ * `spalten` bittet um den Zweispaltensatz — nur der erste Abschnitt tut das. Auch dann
+ * bleibt der Block einspaltig, wenn er eine Liste oder Tabelle enthält oder so kurz ist,
+ * dass die zweite Spalte leer bliebe.
+ * `initiale` bittet um die große Initiale; sie trägt auch einspaltig.
  */
 export function zeitungKlassen(
   html: string,
-  opts: { initiale?: boolean } = {},
+  opts: { spalten?: boolean; initiale?: boolean } = {},
 ): string {
   const klassen: string[] = [];
-  if (zweiSpalten(html)) klassen.push("zeitung");
+  if (opts.spalten && !SPERREN.test(html) && nurText(html).length >= MIN_ZEICHEN) klassen.push("zeitung");
   // Die Initiale hängt an `p:first-child::first-letter` — ohne führenden Absatz
   // (Liste, Überschrift, Kasten) gäbe es nichts zu vergrößern.
   if (opts.initiale && /^\s*<p[\s>]/i.test(html)) klassen.push("zeitung--initiale");

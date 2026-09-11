@@ -48,11 +48,18 @@ const LESEZEICHEN = (
   </svg>
 );
 
-function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData }) {
+function Teile({ teile, toolData, auftakt }: { teile: Teil[]; toolData?: ArticleToolData; auftakt?: boolean }) {
+  // Zweispaltig und mit Initiale wird nur der ERSTE Fließtext-Block des ersten Abschnitts —
+  // so steht es im Handoff (Zeile 403 gegen 585). Alles danach läuft über die volle Breite.
+  let erstesHtml = true;
   return (
     <>
       {teile.map((t, i) => {
-        if (t.art === "html") return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html))} dangerouslySetInnerHTML={{ __html: t.html }} />;
+        if (t.art === "html") {
+          const zuerst = erstesHtml;
+          erstesHtml = false;
+          return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html, { spalten: auftakt && zuerst, initiale: auftakt && zuerst }))} dangerouslySetInnerHTML={{ __html: t.html }} />;
+        }
         if (t.art === "spiel") return <div key={i} className="spiel-inline"><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         // Statistik aus einem Gutenberg-Block: steht genau dort, wo die Redaktion sie gesetzt hat —
@@ -70,7 +77,7 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
       <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
-      <div className="fliess">{i === 0 && <Einschub format="rectangle" variante="umflossen" nr={0} />}<Teile teile={a.teile} toolData={toolData} /></div>
+      <div className="fliess"><Teile teile={a.teile} toolData={toolData} auftakt={i === 0} /></div>
       {a.statistiken.map((st, j) => <Insel key={j} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>)}
       {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
     </section>
