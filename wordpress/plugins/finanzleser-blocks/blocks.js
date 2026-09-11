@@ -633,8 +633,8 @@
     // Die sechs Farben des Handoffs, in genau dieser Reihenfolge (kreisRoh, Zeile 1871).
     var STAT_FARBEN = [
         { label: 'Tinte (Standard)', value: '' },
-        { label: 'Gruen', value: 'var(--green)' },
-        { label: 'Tuerkis', value: 'var(--tuerkis)' },
+        { label: 'Grün', value: 'var(--green)' },
+        { label: 'Türkis', value: 'var(--tuerkis)' },
         { label: 'Magenta', value: 'var(--pink)' },
         { label: 'Grau', value: 'rgba(51,74,39,.45)' },
         { label: 'Hellgrau', value: 'rgba(51,74,39,.22)' },
@@ -645,10 +645,10 @@
     var STAT_FORMEN = {
         'kreis': {
             titel: 'Kreisdiagramm', icon: 'chart-pie',
-            info: 'Aufteilung eines Ganzen. 3 bis 6 Stuecke, Summe 100.',
+            info: 'Aufteilung eines Ganzen. 3 bis 6 Stücke, Summe 100.',
             kopf: ['untertitel', 'einheit'],
             extra: [{ k: 'mitteText', l: 'Text in der Mitte', platz: 'Leistungen' }],
-            liste: { k: 'stuecke', l: 'Stuecke', spalten: [
+            liste: { k: 'stuecke', l: 'Stücke', spalten: [
                 { k: 'label', l: 'Beschriftung' },
                 { k: 'wert', l: 'Wert', zahl: true, breite: 90 },
                 { k: 'farbe', l: 'Farbe', wahl: STAT_FARBEN, breite: 150 },
@@ -656,17 +656,17 @@
         },
         'anteilsleiste': {
             titel: 'Anteilsleiste', icon: 'minus',
-            info: 'Ein gestapelter Balken ueber die volle Breite. 3 bis 5 Stuecke, Summe 100.',
+            info: 'Ein gestapelter Balken über die volle Breite. 3 bis 5 Stücke, Summe 100.',
             kopf: ['untertitel', 'einheit'],
-            liste: { k: 'stuecke', l: 'Stuecke', spalten: [
+            liste: { k: 'stuecke', l: 'Stücke', spalten: [
                 { k: 'label', l: 'Beschriftung' },
                 { k: 'wert', l: 'Wert', zahl: true, breite: 90 },
                 { k: 'farbe', l: 'Farbe', wahl: STAT_FARBEN, breite: 150 },
             ] },
         },
         'saeulen': {
-            titel: 'Saeulen', icon: 'chart-bar',
-            info: 'Vergleich ueber Kategorien, etwa Jahre. Bis 8 Kategorien, eine oder zwei Reihen.',
+            titel: 'Säulen', icon: 'chart-bar',
+            info: 'Vergleich über Kategorien, etwa Jahre. Bis 8 Kategorien, eine oder zwei Reihen.',
             kopf: ['untertitel', 'einheit'],
             spaltenliste: { k: 'reihen', l: 'Reihen (Legende)', max: 2, spalten: [{ k: 'label', l: 'Name der Reihe' }] },
             matrix: { k: 'kategorien', l: 'Kategorien', schluessel: 'label', schluesselL: 'Kategorie', quelle: 'reihen', quelleL: 'label' },
@@ -674,7 +674,7 @@
         },
         'linien': {
             titel: 'Liniendiagramm', icon: 'chart-line',
-            info: 'Entwicklung ueber die Zeit. Eine oder zwei Linien.',
+            info: 'Entwicklung über die Zeit. Eine oder zwei Linien.',
             kopf: ['untertitel', 'einheit'],
             achse: true,
             extra: [
@@ -705,7 +705,7 @@
             liste: { k: 'stationen', l: 'Stationen', spalten: [
                 { k: 'marke', l: 'Marke', platz: 'Tag 0', breite: 120 },
                 { k: 'text', l: 'Was passiert' },
-                { k: 'x', l: 'Position in % (leer = gleichmaessig)', zahl: true, breite: 110 },
+                { k: 'x', l: 'Position in % (leer = gleichmäßig)', zahl: true, breite: 110 },
             ] },
         },
         'tabelle': {
@@ -714,7 +714,7 @@
             kopf: ['untertitel'],
             extra: [
                 { k: 'zeilenkopf', l: 'Kopfzelle der ersten Spalte', platz: 'Leistung' },
-                { k: 'fussnote', l: 'Fussnote unter der Tabelle' },
+                { k: 'fussnote', l: 'Fußnote unter der Tabelle' },
             ],
             spaltenliste: { k: 'spalten', l: 'Spalten', max: 5, spalten: [
                 { k: 'name', l: 'Spaltenname' },
@@ -725,19 +725,19 @@
         },
         'kennzahlen-vierer': {
             titel: 'Kennzahlen-Vierer', icon: 'grid-view',
-            info: 'Drei oder vier grosse Zahlen nebeneinander. Die Zahl zaehlt beim Lesen hoch.',
+            info: 'Drei oder vier große Zahlen nebeneinander. Die Zahl zählt beim Lesen hoch.',
             kopf: [],
             liste: { k: 'kacheln', l: 'Kacheln', spalten: [
-                { k: 'label', l: 'Ueberschrift', platz: 'Standard', breite: 150 },
+                { k: 'label', l: 'Überschrift', platz: 'Standard', breite: 150 },
                 { k: 'zahl', l: 'Zahl', zahl: true, breite: 80 },
                 { k: 'einheit', l: 'Einheit', platz: 'Mio. €', breite: 100 },
-                { k: 'text', l: 'Erlaeuterung' },
+                { k: 'text', l: 'Erläuterung' },
                 { k: 'farbe', l: 'Farbe', wahl: STAT_FARBEN, breite: 150 },
             ] },
         },
         'kennzahlen-liste': {
             titel: 'Kennzahlen-Liste', icon: 'list-view',
-            info: 'Name links, Wert rechts, Punktfuehrung dazwischen. 3 bis 8 Zeilen.',
+            info: 'Name links, Wert rechts, Punktführung dazwischen. 3 bis 8 Zeilen.',
             kopf: ['untertitel'],
             liste: { k: 'zeilen', l: 'Zeilen', spalten: [
                 { k: 'name', l: 'Name' },
@@ -750,30 +750,30 @@
             kopf: ['untertitel'],
             liste: { k: 'schritte', l: 'Schritte', spalten: [
                 { k: 'titel', l: 'Titel des Schritts' },
-                { k: 'text', l: 'Erlaeuterung' },
+                { k: 'text', l: 'Erläuterung' },
             ] },
         },
         'abwaegung': {
-            titel: 'Abwaegung', icon: 'randomize',
-            info: 'Dafuer und Dagegen nebeneinander. Je 1 bis 4 Punkte.',
+            titel: 'Abwägung', icon: 'randomize',
+            info: 'Dafür und Dagegen nebeneinander. Je 1 bis 4 Punkte.',
             kopf: ['untertitel'],
             zweiListen: [
-                { k: 'pro', l: 'Dafuer', platz: 'Beitrag sinkt um 15 bis 25 Prozent.' },
+                { k: 'pro', l: 'Dafür', platz: 'Beitrag sinkt um 15 bis 25 Prozent.' },
                 { k: 'contra', l: 'Dagegen', platz: 'Ersparnis liegt oft unter 15 € im Jahr.' },
             ],
         },
         'begriffe': {
             titel: 'Begriffe', icon: 'book',
-            info: 'Begriff und Erklaerung. Aus dem gepflegten Glossar uebernehmen, nicht neu formulieren.',
+            info: 'Begriff und Erklärung. Aus dem gepflegten Glossar übernehmen, nicht neu formulieren.',
             kopf: ['untertitel'],
             liste: { k: 'begriffe', l: 'Begriffe', spalten: [
                 { k: 'begriff', l: 'Begriff', breite: 220 },
-                { k: 'text', l: 'Erklaerung' },
+                { k: 'text', l: 'Erklärung' },
             ] },
         },
         'vergleichsrechner': {
             titel: 'Vergleichsrechner', icon: 'admin-links',
-            info: 'Haengt einen externen Vergleichsrechner in den Beitrag. Freigabe per Zwei-Klick.',
+            info: 'Hängt einen externen Vergleichsrechner in den Beitrag. Freigabe per Zwei-Klick.',
             kopf: [],
             vergleich: true,
         },
@@ -816,8 +816,8 @@
         if (s.art === 'kreis' || s.art === 'anteilsleiste') {
             var st = s.stuecke || []; n = st.length;
             var g = s.art === 'kreis' ? [3, 6] : [3, 5];
-            if (n < g[0] || n > g[1]) f.push(g[0] + ' bis ' + g[1] + ' Stuecke, nicht ' + n + '.');
-            if (!st.every(function(x) { return zahlOk(x.wert) && x.label && x.label.trim(); })) f.push('Jedes Stueck braucht Beschriftung und Zahl.');
+            if (n < g[0] || n > g[1]) f.push(g[0] + ' bis ' + g[1] + ' Stücke, nicht ' + n + '.');
+            if (!st.every(function(x) { return zahlOk(x.wert) && x.label && x.label.trim(); })) f.push('Jedes Stück braucht Beschriftung und Zahl.');
             else {
                 var sum = st.reduce(function(a, x) { return a + x.wert; }, 0);
                 if (Math.abs(sum - 100) > 0.5) f.push('Anteile summieren sich auf ' + sum.toFixed(1) + ', nicht auf 100.');
@@ -831,7 +831,7 @@
             n = (s.zeilen || []).length;
             if (n < 2 || n > 6) f.push('2 bis 6 Zeilen, nicht ' + n + '.');
             (s.zeilen || []).forEach(function(z) {
-                if (!zahlOk(z.min) || !zahlOk(z.median) || !zahlOk(z.max)) f.push('„' + (z.name || '?') + '“: von, Median und bis muessen Zahlen sein.');
+                if (!zahlOk(z.min) || !zahlOk(z.median) || !zahlOk(z.max)) f.push('„' + (z.name || '?') + '“: von, Median und bis müssen Zahlen sein.');
                 else if (!(z.min <= z.median && z.median <= z.max)) f.push('„' + (z.name || '?') + '“: von ≤ Median ≤ bis ist verletzt.');
             });
         } else if (s.art === 'linien') {
@@ -839,7 +839,7 @@
             if (!(s.reihen || []).length || s.reihen.length > 2) f.push('Eine oder zwei Linien, nicht mehr.');
             (s.reihen || []).forEach(function(r) {
                 if ((r.werte || []).length !== (s.achse || []).length) f.push('Reihe „' + (r.label || '?') + '“ hat ' + (r.werte || []).length + ' Werte, die Achse ' + (s.achse || []).length + '.');
-                if (!(r.werte || []).every(zahlOk)) f.push('Reihe „' + (r.label || '?') + '“ enthaelt keine reinen Zahlen.');
+                if (!(r.werte || []).every(zahlOk)) f.push('Reihe „' + (r.label || '?') + '“ enthält keine reinen Zahlen.');
             });
         } else if (s.art === 'zeitstrahl') {
             n = (s.stationen || []).length;
@@ -861,13 +861,13 @@
             n = (s.schritte || []).length;
             if (n < 2 || n > 6) f.push('2 bis 6 Schritte, nicht ' + n + '.');
         } else if (s.art === 'abwaegung') {
-            if (!(s.pro || []).length || !(s.contra || []).length) f.push('Dafuer und Dagegen brauchen je mindestens einen Punkt.');
-            if ((s.pro || []).length > 4 || (s.contra || []).length > 4) f.push('Hoechstens vier Punkte je Seite.');
+            if (!(s.pro || []).length || !(s.contra || []).length) f.push('Dafür und Dagegen brauchen je mindestens einen Punkt.');
+            if ((s.pro || []).length > 4 || (s.contra || []).length > 4) f.push('Höchstens vier Punkte je Seite.');
         } else if (s.art === 'begriffe') {
             n = (s.begriffe || []).length;
             if (n < 2 || n > 5) f.push('2 bis 5 Begriffe, nicht ' + n + '.');
         } else if (s.art === 'vergleichsrechner') {
-            if (!s.slug || !s.slug.trim()) f.push('Vergleich ist nicht gewaehlt.');
+            if (!s.slug || !s.slug.trim()) f.push('Vergleich ist nicht gewählt.');
         }
         return f;
     }
@@ -1084,7 +1084,7 @@
                 var sl = form.spaltenliste;
                 teile.push(el('div', { key: 'sl' }, statListe(sl.l, sl.spalten, daten[sl.k], function(n) {
                     var p = {}; p[sl.k] = n.slice(0, sl.max); schreibe(p);
-                }, 'Hoechstens ' + sl.max + '.')));
+                }, 'Höchstens ' + sl.max + '.')));
             }
             if (form.matrix) {
                 teile.push(el('div', { key: 'matrix' }, statMatrix(form.matrix, daten[form.matrix.quelle], daten[form.matrix.k], function(n) {
@@ -1104,7 +1104,7 @@
                     schreibe({ reihen: n.slice(0, 2).map(function(r, j) { return Object.assign({ werte: (reihen[j] || {}).werte || [] }, r); }) });
                 }, 'Eine oder zwei.')));
                 teile.push(el('div', { key: 'linien-achse' }, statMatrix(
-                    { k: 'punkte', l: 'Stuetzstellen', schluessel: 'name', schluesselL: 'Beschriftung (z. B. Jahr)', quelle: 'reihen', quelleL: 'label' },
+                    { k: 'punkte', l: 'Stützstellen', schluessel: 'name', schluesselL: 'Beschriftung (z. B. Jahr)', quelle: 'reihen', quelleL: 'label' },
                     reihen, mZeilen,
                     function(n) {
                         schreibe({
