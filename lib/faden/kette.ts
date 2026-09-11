@@ -11,6 +11,7 @@
  */
 import type { FadenEinwurf, FadenFelder, FadenFrage, FadenStatistik, Post } from "@/lib/types";
 import { parseContent, normalizeFaq, extractFaqBlock, normalizeTableHead, wrapTables, stripTags } from "@/lib/articleHtml";
+import { parseStatistik, type Statistik } from "@/lib/statistik/schema";
 import { medienHtml, medienUrl } from "./medien";
 import { getCategoryPair, buildPostUrl } from "@/lib/urls";
 import { getReadingTimeMinutes } from "@/lib/content-utils";
@@ -22,6 +23,8 @@ export type Teil =
   | { art: "html"; html: string }
   | { art: "embed"; typ: WerkzeugTyp; slug: string; slugs?: string[]; grund?: string; vonLeo?: boolean; nachtrag?: boolean }
   | { art: "spiel"; typ: string; felder: Record<string, string> }
+  /** Statistik aus einem Gutenberg-Block — steht genau dort, wo die Redaktion sie gesetzt hat. */
+  | { art: "statistik"; werte: Statistik }
   /** Leos Einwurf im Abschnitt: verweist auf die Werkzeugkarte am Ende des Beitrags. */
   | { art: "einwurf"; typ: WerkzeugTyp; slug: string; grund: string; ziel: string };
 
@@ -150,6 +153,10 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
       // Sie bleibt im CMS stehen, wird hier aber nicht mehr in die Kette gehängt.
       if (part.value === "karte") continue;
       aktuelle.teile.push({ art: "spiel", typ: part.value, felder: part.gamFields || {} });
+    } else if (part.type === "statistik") {
+      // Kaputte Nutzlast verschwindet, statt den Beitrag mitzureißen.
+      const werte = parseStatistik(part.value);
+      if (werte) aktuelle.teile.push({ art: "statistik", werte });
     } else {
       const typ = part.type as WerkzeugTyp;
       const slugs = part.value.split(",").map((s) => s.trim()).filter(Boolean);

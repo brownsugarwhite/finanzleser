@@ -14,12 +14,12 @@
 import type { FaqPair } from "./articleFaq";
 
 export interface ContentPart {
-  type: "html" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "gamification";
-  value: string; // HTML string, slug, kommagetrennte Dokument-Slugs, or gamification type
+  type: "html" | "rechner" | "checkliste" | "vergleich" | "dokumente" | "gamification" | "statistik";
+  value: string; // HTML string, slug, kommagetrennte Dokument-Slugs, gamification type oder base64-JSON (statistik)
   gamFields?: Record<string, string>; // nur bei gamification: Feldwerte (Behauptung, Auflösung, …)
 }
 
-// Regex für Block-Divs (Rechner/Checkliste/Vergleich/Dokumente), Gutenberg-Kommentare
+// Regex für Block-Divs (Rechner/Checkliste/Vergleich/Dokumente/Statistik), Gutenberg-Kommentare
 // (Vergleich) und Gamification-Boxen. Gamification (3. Alternative) ist – anders als die
 // Slug-Tools – NICHT leer: der Block enthält die Felder inline. Voraussetzung: keine
 // verschachtelten <div> im Block (vom Studio so erzeugt), damit [\s\S]*? bis zum ersten
@@ -28,7 +28,7 @@ export interface ContentPart {
 // der Gutenberg-Editor schiebt beim erneuten Speichern class/style davor (so brachen
 // die Gamification-Felder in „buergergeld"). Daher überall [^>]*? vor dem Attribut.
 export const BLOCK_PATTERN_SRC =
-  '<div\\s+[^>]*?data-finanzleser-(rechner|checkliste|vergleich|dokumente)="([^"]+)"[^>]*>\\s*</div>|<!-- wp:finanzleser\\/(vergleich) \\{"slug":"([^"]+)"\\} \\/-->|<div\\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\\s\\S]*?)</div>';
+  '<div\\s+[^>]*?data-finanzleser-(rechner|checkliste|vergleich|dokumente|statistik)="([^"]+)"[^>]*>\\s*</div>|<!-- wp:finanzleser\\/(vergleich) \\{"slug":"([^"]+)"\\} \\/-->|<div\\s+[^>]*?data-finanzleser-gamification="(mythos|quiz|schaetzen|karte|test|gewusst)"[^>]*>([\\s\\S]*?)</div>';
 
 /** Frisch instanziiert (g-Flag hat lastIndex-State). */
 export function neuesBlockPattern(): RegExp {
@@ -154,7 +154,8 @@ export function parseContent(html: string): ContentPart[] {
       }
       parts.push({ type: "gamification", value: gamType, gamFields: fields });
     } else {
-      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich" | "dokumente";
+      // Statistik trägt statt eines Slugs ihre ganze Nutzlast als base64-JSON im Attribut.
+      const blockType = (match[1] || match[3]) as "rechner" | "checkliste" | "vergleich" | "dokumente" | "statistik";
       const blockSlug = match[2] || match[4];
       parts.push({ type: blockType, value: blockSlug });
     }

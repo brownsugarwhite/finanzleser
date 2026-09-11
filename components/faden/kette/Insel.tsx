@@ -15,12 +15,16 @@
  * ChecklisteEmbed/VergleichEmbed/DokumenteEmbed holen ihre Daten selbst nach). Nur wo das
  * nicht reicht — Statistik und Leo-Fragen — liegen die Werte als JSON daneben, im selben
  * Muster wie `script[data-glossar-daten]`.
+ *
+ * „statistik" trägt eine Bestandsstatistik aus dem Meta-Feld (FadenStatistik),
+ * „statistik-block" eine aus einem Gutenberg-Block (lib/statistik/schema). Zwei Typen,
+ * weil die Nutzlasten verschieden geschnitten sind.
  */
 import type { ReactNode } from "react";
 
 export type InselTyp =
   | "rechner" | "checkliste" | "vergleich" | "dokumente"
-  | "statistik" | "weiterlesen" | "spiel"
+  | "statistik" | "statistik-block" | "weiterlesen" | "spiel"
   | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief"
   | "spalten" | "vorlesen";
 

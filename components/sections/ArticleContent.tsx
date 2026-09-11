@@ -145,6 +145,10 @@ function ArticleContent({ content, collapsed, currentSlug, showMidAd, toolData }
       } else if (part.type === "gamification") {
         out.push({ kind: "gamification", gamType: part.value, fields: part.gamFields ?? {}, itemKey: `${i}` });
       }
+      // `statistik` fällt hier bewusst heraus: die Formen aus Design A v2 sind in
+      // app/statistik-formen.css durchgehend auf `.faden-shell` gescoped und würden auf
+      // der alten Beitragsseite ohne Gestaltung stehen. Sie verschwindet dort still,
+      // statt kaputt auszusehen. Fällt der Faden je wieder weg, muss das hier nach.
     });
     return out;
   }, [content]);

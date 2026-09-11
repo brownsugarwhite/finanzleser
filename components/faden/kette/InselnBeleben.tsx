@@ -19,12 +19,14 @@ import type { SpaltenRubrik } from "@/lib/faden/spalten";
 
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
+import type { Statistik as StatistikDaten } from "@/lib/statistik/schema";
 
 const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"));
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"));
 const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"));
 const DokumenteEmbed = dynamic(() => import("@/components/dokumente/DokumenteEmbed"));
 const StatistikKarte = dynamic(() => import("@/components/statistik/StatistikKarte"));
+const Statistik = dynamic(() => import("@/components/statistik/Statistik"));
 const Weiterlesen = dynamic(() => import("./Weiterlesen"));
 const Aktionen = dynamic(() => import("./Aktionen"));
 const AbschnittTeilen = dynamic(() => import("./AbschnittTeilen"));
@@ -42,6 +44,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "vergleich") return <VergleichEmbed slug={arg} />;
   if (typ === "dokumente") return <DokumenteEmbed slugs={arg.split(",").filter(Boolean)} />;
   if (typ === "statistik") return werte ? <StatistikKarte st={werte as FadenStatistik} /> : null;
+  if (typ === "statistik-block") return werte ? <Statistik st={werte as StatistikDaten} /> : null;
   if (typ === "weiterlesen") return werte ? <Weiterlesen fragen={werte as FadenFrage[]} /> : null;
   if (typ === "spiel") { const w = werte as { typ: string; felder: Record<string, string> } | undefined; return w ? <GamificationEmbed gamType={w.typ} fields={w.felder} /> : null; }
   if (typ === "aktionen") { const w = werte as AktionenWerte | undefined; return w ? <Aktionen titel={w.titel} url={w.url} kurzfassung={w.kurzfassung} artikelId={w.artikelId} pdf={w.pdf} /> : null; }
