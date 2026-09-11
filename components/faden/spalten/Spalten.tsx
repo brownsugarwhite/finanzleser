@@ -20,7 +20,7 @@
  * Bezugspunkt für `folgt()`. Fällt der Selektor ins Leere, entscheidet alles Nachfolgende
  * (Kassensturz, Schlange, Finanzwort) falsch, ob gescrollt werden darf.
  */
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import ToolDots from "@/components/ui/ToolDots";
 import { boldYears } from "@/components/ui/MegaPostContent";
@@ -32,14 +32,22 @@ const PEEK = 110;
 /** Muss zur Übergangsdauer von .kiosk__koerper in app/faden.css passen. */
 const FAHRT = 420;
 
-export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
-  const [aktiv, setAktiv] = useState<string>(rubriken[0]?.key || "");
+/**
+ * `start` kommt nur aus einem eingefrorenen Kapitel: `InselnBeleben` reicht dort das
+ * `data-insel-arg` herein, das dieser Kiosk beim Verlassen der Seite hinterlassen hat.
+ * Sonst stünde im Verlauf wieder der Anfangsstand, während der Schnappschuss die Höhe des
+ * aufgeschlagenen Blattes trägt — und darunter bliebe ein leerer Kasten stehen.
+ * „zu" heißt: alles war zugeklappt.
+ */
+export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]; start?: string }) {
+  const wieder = !!start;
+  const [aktiv, setAktiv] = useState<string>(wieder ? (start === "zu" ? "" : start!) : rubriken[0]?.key || "");
   // Je Rubrik das gewählte Thema; ohne Eintrag gilt das erste.
   const [themen, setThemen] = useState<Record<string, string>>({});
   // Vor der ersten Berührung steht das erste Blatt nur angeschnitten offen.
-  const [beruehrt, setBeruehrt] = useState(false);
+  const [beruehrt, setBeruehrt] = useState(wieder);
   // Höhe des offenen Körpers: eine Zahl, solange gefahren wird, danach `null` = `auto`.
-  const [hoehe, setHoehe] = useState<number | null>(PEEK);
+  const [hoehe, setHoehe] = useState<number | null>(wieder ? null : PEEK);
   const koerper = useRef<Record<string, HTMLDivElement | null>>({});
   const kopf = useRef<Record<string, HTMLButtonElement | null>>({});
   const stapel = useRef<HTMLElement>(null);
@@ -93,6 +101,17 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
     if (!zu) setTimeout(() => setHoehe((h) => (h === ziel ? null : h)), FAHRT + 40);
   };
 
+  // Wiederbelebt mit offenem Blatt: die Überdeckung lässt sich erst messen, wenn alles steht.
+  useLayoutEffect(() => { if (wieder && start !== "zu") setUeberdeckung(messeUeberdeckung()); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Den Stand in der Insel hinterlegen — erst nach der ersten Berührung, damit ein
+  // unberührter Kiosk im Verlauf wieder mit seinem Anfangsstand erscheint.
+  useEffect(() => {
+    if (!beruehrt) return;
+    const insel = stapel.current?.closest<HTMLElement>(".insel");
+    if (insel) insel.dataset.inselArg = aktiv || "zu";
+  }, [aktiv, beruehrt]);
+
   return (
     <section
       className="kiosk spalten-kasten"
@@ -124,7 +143,7 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
               <b className="kiosk__titel">{r.titel}</b>
               {/* Im Ruhestand steht das erste Blatt nur angeschnitten offen — dann heißt es
                   weiter „aufschlagen", denn genau das tut der Klick. */}
-              <span className="kicker">{offen && beruehrt ? "Kategorie zuklappen" : "Kategorie aufschlagen"}</span>
+              <span className="kicker"><span className="kiosk__wort">Kategorie </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}</span>
             </button>
             <i className="doppellinie" />
             <div

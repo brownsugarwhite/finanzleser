@@ -53,7 +53,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "abschnitt-teilen") { const w = werte as { titel: string; url: string; id: string } | undefined; return w ? <AbschnittTeilen titel={w.titel} url={w.url} id={w.id} /> : null; }
   if (typ === "kasten-fuss") { const w = werte as { titel: string; url: string; kastenId: string; eigeneSeite?: boolean } | undefined; return w ? <KastenFuss titel={w.titel} url={w.url} kastenId={w.kastenId} eigeneSeite={w.eigeneSeite} /> : null; }
   if (typ === "wochenbrief") return <WochenbriefForm />;
-  if (typ === "spalten") return werte ? <Spalten rubriken={werte as SpaltenRubrik[]} /> : null;
+  if (typ === "spalten") return werte ? <Spalten rubriken={werte as SpaltenRubrik[]} start={arg || undefined} /> : null;
   if (typ === "schlange") return <Schlange />;
   if (typ === "faq") return werte ? <FaqListe paare={werte as { q: string; a: string }[]} /> : null;
   if (typ === "vorlesen") return arg ? <Vorlesen zielId={arg} /> : null;

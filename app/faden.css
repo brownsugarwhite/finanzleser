@@ -1119,11 +1119,18 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .neueste { margin-block: 24px 16px; }
   .faden-shell .neueste__blatt { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 14px; }
   .faden-shell .neueste__satz { padding-top: 0; }
-  .faden-shell .kiosk__innen { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .faden-shell .kiosk__bild img { aspect-ratio: 16 / 9; }
-  /* Die Themen stehen nebeneinander statt in einer Spalte, die Haarlinie wird waagerecht. */
-  .faden-shell .kiosk__themen { display: flex; flex-wrap: wrap; gap: 2px 16px; }
-  .faden-shell .kiosk__ratgeber { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 12px; }
+  /* 🚨 Oben Bild und Themen NEBENeinander, die Ratgeber darunter über die volle Breite.
+     Stünde das Bild allein in der ersten Zeile, zeigte der angeschnittene Körper nur einen
+     Ausschnitt davon — und der sagt nichts darüber, was in der Ausgabe steht. */
+  .faden-shell .kiosk__innen { grid-template-columns: 40% minmax(0, 1fr); gap: 12px 14px; }
+  .faden-shell .kiosk__bild img { aspect-ratio: 4 / 3; }
+  .faden-shell .kiosk__themen { gap: 0; }
+  .faden-shell .kiosk__themen button { font-size: 14px; padding: 2px 0; }
+  .faden-shell .kiosk__ratgeber { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 12px; }
+  /* „Versicherungen" und die Zeile daneben passen bei 360 px nicht zusammen in eine Zeile. */
+  .faden-shell .kiosk__titel { font-size: clamp(18px, 6.2cqi, 26px); }
+  .faden-shell .kiosk__kopf .kicker { font-size: 9.5px; letter-spacing: .1em; }
+  .faden-shell .kiosk__wort { display: none; }
   .faden-shell .kiosk__fuss { margin-top: 10px; }
   .faden-shell .hero-landing h1 { font-size: 24px; }
   .faden-shell .hero-landing__mitte { padding-left: 8px; padding-right: 8px; }
