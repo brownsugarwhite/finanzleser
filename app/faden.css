@@ -460,6 +460,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .einwurf { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--green-ink); font-style: italic; }
 .faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--green); flex: none; }
 .faden-shell a.einwurf--zeiger { text-decoration: none; margin: 6px 0 10px; flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: 12px; } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
+/* Der Finanztool-Block ist eine eigene Marke im Beitrag — Oberlinie in voller Tinte,
+   wie die Kapitelköpfe der Vorlage (Handoff 571, 632, 1046). */
+.faden-shell .abschnitt--werkzeuge { border-top: 1px solid var(--rule-strong); padding-top: 12px; }
 .faden-shell .abschnitt--werkzeuge .werkzeuge-liste { display: grid; gap: 18px; margin-top: 6px; }
 .faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
 
@@ -602,9 +605,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .fazit-kopf { display: inline-flex; align-items: center; gap: 8px; font: 700 16px var(--serif); color: var(--ink); }
 .faden-shell .fazit-kopf img { width: 22px; height: 22px; }
 .faden-shell .fazit { margin-top: 10px; border-left: 3px solid var(--rule-strong); padding-left: 16px; font: 400 16px/1.65 var(--serif); color: var(--ink); }
-.faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; align-items: center; }
-.faden-shell .dazu { display: grid; gap: 0; }
+/* Abspann. Bis 11.09.2026 standen Kassensturz, Aktionen und „Dazu passt" ohne jeden
+   Abstand aufeinander (margin-top: 0) — drei Blöcke auf Stoß. Jetzt trennt sie dieselbe
+   Haarlinie, die auch die Abschnitte schließt. */
+.faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; margin-top: 34px; align-items: center; }
+.faden-shell .dazu { display: grid; gap: 0; margin-top: 34px; border-top: 1px solid var(--rule); padding-top: 12px; }
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
+.faden-shell .kasten--ks { margin-top: 40px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
 /* ---------- Abschnittsfuß: Haarlinie, Leos Fragen links, Teilen rechts ---------- */
