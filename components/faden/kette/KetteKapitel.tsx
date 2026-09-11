@@ -35,6 +35,19 @@ import KassensturzTeaser from "@/components/faden/kassensturz/KassensturzTeaser"
 
 const EINWURF_ZIEL: Record<string, string> = { rechner: "Zum Rechner", checkliste: "Zur Checkliste", vergleich: "Zum Vergleich", dokumente: "Zu den Dokumenten" };
 
+/** Zahlwörter für die Kopfzeile des Verzeichnisses („Inhalt · sechs Abschnitte“, Handoff 572). */
+const ZAHLWORT = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf"];
+function zahlwort(n: number): string {
+  return ZAHLWORT[n] ?? String(n);
+}
+
+/** Drei Textzeilen — das Zeichen für „Leseabschnitt“ rechts im Inhaltsverzeichnis. */
+const LESEZEICHEN = (
+  <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M1 2.5h10M1 6h10M1 9.5h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+  </svg>
+);
+
 function Teile({ teile, toolData }: { teile: Teil[]; toolData?: ArticleToolData }) {
   return (
     <>
@@ -117,8 +130,7 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           <div className="autor">
             <span className="autor-ring"><img src={k.autor.imageUrl} alt="" /></span>
             <span>Erstellt von der <b>{k.autor.name}</b>{k.stand ? ` · aktualisiert ${k.stand}` : ""}</span>
-            <img className="uhr" src="/icons/time_icon.svg" alt="" />
-            <span>{k.lesezeit}</span>
+            <span className="lesedauer"><img className="uhr" src="/icons/time_icon.svg" alt="" />{k.lesezeit}</span>
           </div>
           <figure>
             <div className={"bild" + (k.bild ? " bild--foto" : "")}>
@@ -128,14 +140,18 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           </figure>
           {toc.length > 0 && (
             <nav className="inhalt" aria-label="Inhalt">
-              <span className="kicker">Inhalt</span>
+              <span className="kicker">Inhalt · {zahlwort(k.abschnitte.length)} Abschnitte</span>
               <ol className="inhalt__liste">
-                {toc.map((t, i) => (
+                {toc.map((t) => (
                   <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art}>
                     <a href={`#${t.id}`}>
-                      <i className="inhalt__nr">{t.art === "abschnitt" ? i + 1 : t.art === "faq" ? "?" : t.art === "fazit" ? "★" : <b className={`dot dot--${t.typ}`} />}</i>
-                      <span className="inhalt__linie" aria-hidden="true" />
+                      {/* Nur Leseabschnitte tragen eine Nummer — sie ist dieselbe wie in
+                          „Abschnitt n von N“. FAQ, Fazit und Werkzeuge lassen die Spalte leer;
+                          `min-width` hält trotzdem die Flucht. */}
+                      <i className="inhalt__nr">{t.art === "abschnitt" ? k.abschnitte.findIndex((a) => a.id === t.id) + 1 : ""}</i>
                       <span className="inhalt__titel">{t.titel}</span>
+                      <i className="inhalt__linie" aria-hidden="true" />
+                      <span className="inhalt__art" title={t.art === "werkzeug" ? "Finanztool" : "Leseabschnitt"}>{t.art === "werkzeug" ? <b className={`dot dot--${t.typ}`} /> : LESEZEICHEN}<span className="nur-vorlesen">{t.art === "werkzeug" ? "Finanztool" : "Leseabschnitt"}</span></span>
                     </a>
                   </li>
                 ))}
