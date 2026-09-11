@@ -1252,16 +1252,11 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .album__stand { margin: 0; font-size: 14px; }
 @media (max-width: 900px) { .faden-shell .bereich__spalten { grid-template-columns: 1fr; } .faden-shell .album__raster { grid-template-columns: repeat(3, 1fr); } .faden-shell .waechter__regel { grid-template-columns: 34px 1fr auto; } .faden-shell .waechter__wann { display: none; } }
 
-/* ── Pfadzeile im Register (Prototyp 01-css.html:303–305), Abschnitt teilen (751), mobile Anker-Anzeige (227–228) ── */
+/* ── Pfadzeile im Register (Prototyp 01-css.html:303–305), Abschnitt teilen (751) ── */
 .faden-shell .register .pfad { position: absolute; right: 0; top: 50%; transform: translateY(-50%); max-width: 200px; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: none; }
 .faden-shell .register .pfad b { color: var(--ink); font-weight: 600; }
 @media (min-width: 1700px) { .faden-shell .register .pfad { display: block; } }
 .faden-shell .abschnitt > .teilen { position: absolute; right: 0; top: 4px; font-size: 12px; }
-.faden-shell .anker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 27; background: var(--paper); border-top: 1px solid var(--rule); display: none; justify-content: center; align-items: center; gap: 6px; padding: 4px 0 6px; }
-.faden-shell .anker img { width: 320px; max-width: calc(100% - 60px); height: auto; display: block; }
-.faden-shell .anker .einschub__label { position: absolute; left: 10px; top: 4px; }
-.faden-shell .anker__zu { position: absolute; right: 8px; top: 6px; border: 1px solid var(--rule-strong); background: var(--white); border-radius: 50%; width: 26px; height: 26px; font-size: 12px; cursor: pointer; }
-@media (max-width: 900px) { .faden-shell .anker { display: flex; } body.mit-anker .faden-shell .eingabe { bottom: 112px; } body.mit-anker .faden-shell .lesestelle { top: auto; bottom: 120px; } }
 
 /* ── Lebensereignis: Zeitleiste, Phasen, Schritte (Prototyp 01-css.html:214–217) ── */
 .faden-shell .ereignis { display: grid; gap: 16px; }

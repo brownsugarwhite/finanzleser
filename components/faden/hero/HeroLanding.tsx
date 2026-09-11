@@ -5,9 +5,8 @@
  * die Suchpille exakt auf der Bildschirmmitte, ein Satz. Ruhig, viel Papier. Beim
  * Scrollen verblassen Titel und Satz, die Pille löst sich und fliegt an ihren Platz
  * unten; dort übernimmt die echte Eingabe des Fadens (gleiche Gestalt). Solange der
- * Hero im Bild ist, liegt body.faden-hero-sichtbar an — heute nur noch für MobilAnker
- * (die mobile Anzeige soll über dem Hero nicht auftauchen). Ränder und Eingabe bleiben
- * stehen, wie im Prototyp.
+ * Hero im Bild ist, liegt body.faden-hero-sichtbar an — damit blendet faden.css die
+ * Eingabe über dem Hero aus. Ränder und Eingabe bleiben stehen, wie im Prototyp.
  * Enter fragt Leo.
  *
  * Dazu aus dem Prototyp-Gerüst (03c-hero.html:14–16, 42–43): unter der Pille die

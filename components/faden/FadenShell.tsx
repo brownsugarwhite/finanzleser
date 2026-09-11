@@ -23,7 +23,6 @@ import BegriffMenue from "./glossar/BegriffMenue";
 import Lesestelle from "./Lesestelle";
 import TeilenDialog from "./TeilenDialog";
 import Kulissen from "./Kulissen";
-import MobilAnker from "./MobilAnker";
 import Fortschritt from "./Fortschritt";
 import HeroLanding from "./hero/HeroLanding";
 import SchaukastenKnopf from "./SchaukastenKnopf";
@@ -99,7 +98,6 @@ export default function FadenShell({ children, nav, preload, level, heroZahlen }
         <Lesestelle />
         <TeilenDialog />
         <Kulissen />
-        <MobilAnker />
         {SCHAUKASTEN_AKTIV && <SchaukastenKnopf />}
       </div>
     </FadenProvider>
