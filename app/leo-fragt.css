@@ -8,7 +8,10 @@
 .faden-shell .leo-frage .kopf-f { display: flex; align-items: center; gap: 8px; }
 .faden-shell .leo-frage .kopf-f img { width: 26px; height: 26px; }
 .faden-shell .leo-frage p { margin: 0; font-size: 14.5px; line-height: 1.35; }
-.faden-shell .leo-frage .regler { display: flex; align-items: center; gap: 10px; }
+/* Padding, Fläche und Radius kamen bis zum Umbau der Statistiken unbeabsichtigt aus
+   app/statistik.css (dort galt `.faden-shell .regler` für jeden Regler im Faden). Die
+   Datei ist aufgelöst; damit Leos Regler unverändert aussieht, stehen sie jetzt hier. */
+.faden-shell .leo-frage .regler { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--paper); border-radius: 8px; }
 .faden-shell .leo-frage input[type=range] { flex: 1; min-width: 0; accent-color: var(--green); }
 .faden-shell .leo-frage .wert { font-size: 18px; font-weight: 700; color: var(--green-ink); font-family: var(--sans); min-width: 44px; text-align: right; }
 .faden-shell .leo-frage .werte { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 11px; color: var(--muted); margin-top: -4px; }

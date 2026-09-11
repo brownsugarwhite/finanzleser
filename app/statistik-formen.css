@@ -225,3 +225,46 @@
 .faden-shell .schaukasten-formen__block h2 span { font: 900 22px var(--serif); color: var(--green); }
 .faden-shell .schaukasten-formen__block h2 code { font: 500 12px var(--sans); color: var(--muted); }
 .faden-shell .schaukasten-formen__befunde { margin: 14px 0 0; padding: 8px 14px; list-style: none; border-left: 3px solid var(--pink); font: 400 13px/1.6 var(--sans); color: var(--pink); }
+
+/* =====================================================================================
+   Bestandsstatistiken aus dem Meta-Feld `statistiken`
+
+   Dieselben Formen, dazu zwei Bedienelemente, die der Handoff nicht kennt, der Bestand
+   aber braucht: der Umschalter zwischen Reihen (13 Statistiken) und der Regler (8).
+   Beide in der Sprache der Zeitung — Haarlinie statt Fläche, keine Rundung außer der
+   Chip-Pille, die der Handoff so vorgibt.
+   ===================================================================================== */
+
+/* Umschalter — Chip nach README des Handoffs, „Buttons“ */
+.faden-shell .st__umschalter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.faden-shell .st__umschalter .kicker { margin-right: 4px; }
+.faden-shell .st__chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 16px; border: 1px solid rgba(51,74,39,.25); border-radius: 999px; background: transparent; color: var(--muted); font: 500 13px var(--sans); cursor: pointer; transition: border-color .2s, color .2s, transform .2s, background .2s; }
+.faden-shell .st__chip:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
+.faden-shell .st__chip--aktiv { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+/* Regler — ohne Kasten, nur Haarlinie darüber */
+.faden-shell .st__regler { display: grid; gap: 6px; margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(51,74,39,.16); }
+.faden-shell .st__regler label { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+.faden-shell .st__regler label > b { font: 700 15px var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .st__regler input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--green); }
+.faden-shell .st__regler-ergebnis { font: 400 14px var(--serif); color: var(--muted); }
+.faden-shell .st__regler-ergebnis b { color: var(--pink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Balkenliste — Bildsprache der Spannen (Handoff 986–1004), siehe formen/Balkenliste.tsx */
+.faden-shell .st-balken { display: flex; flex-direction: column; margin-top: 12px; }
+.faden-shell .st-balken__zeile { display: grid; grid-template-columns: minmax(110px,32%) 1fr auto; gap: 14px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(51,74,39,.1); transition: opacity .2s; }
+.faden-shell .st-balken__zeile.gedimmt { opacity: .4; }
+.faden-shell .st-balken__name { font: 400 14.5px/1.35 var(--serif); color: var(--ink); overflow-wrap: anywhere; }
+.faden-shell .st-balken__bahn { position: relative; height: 26px; }
+.faden-shell .st-balken__grund { position: absolute; left: 0; right: 0; top: 13px; height: 1px; background: rgba(51,74,39,.15); }
+.faden-shell .st-balken__balken { position: absolute; left: 0; top: 12px; height: 3px; transform-origin: left; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .st-balken__wert { font: 700 14px var(--sans); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+.faden-shell .st-balken__zeile--ihr .st-balken__name,
+.faden-shell .st-balken__zeile--ihr .st-balken__wert { color: var(--pink); }
+
+@media (max-width: 720px) {
+  .faden-shell .st-balken__zeile { grid-template-columns: 1fr auto; }
+  .faden-shell .st-balken__bahn { grid-column: 1 / -1; height: 14px; }
+  .faden-shell .st-balken__grund { top: 7px; }
+  .faden-shell .st-balken__balken { top: 6px; }
+}

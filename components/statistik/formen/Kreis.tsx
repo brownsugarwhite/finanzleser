@@ -6,11 +6,17 @@
  * Ring mit zwei Hilfskreisen, Segmente zeichnen sich über stroke-dasharray, danach laufen
  * die Leader-Linien nach außen und die Beschriftung blendet auf. Überfahren verdickt das
  * Segment und dimmt die übrigen; die Mitte zeigt dann dessen Wert.
+ *
+ * Der Handoff rechnet mit Prozentwerten, die sich auf 100 summieren. Hier wird stattdessen
+ * über die Summe normiert — für Prozentdaten ist das rechnerisch dasselbe, aber es trägt
+ * auch die Bestandsstatistiken, von denen zwölf von fünfundzwanzig gerade keine
+ * Prozentaufteilung sind.
  */
 import { useState } from "react";
 import type { StatKreis } from "@/lib/statistik/schema";
 import { PALETTE } from "@/lib/statistik/schema";
 import { useZeichnen } from "@/lib/statistik/useZeichnen";
+import { formatWert } from "@/lib/statistik/formeln";
 
 const CX = 220, CY = 125, R = 78, KC = 2 * Math.PI * R;
 
@@ -18,17 +24,20 @@ export default function Kreis({ st }: { st: StatKreis }) {
   const [wurzel, an] = useZeichnen<HTMLDivElement>();
   const [aktiv, setAktiv] = useState(-1);
   const einheit = st.einheit ?? "%";
+  const summe = st.stuecke.reduce((a, s) => a + s.wert, 0) || 1;
+  /** Anteil am Ring in Prozent — bei Prozentdaten identisch mit dem Wert selbst. */
+  const anteil = (w: number) => (w / summe) * 100;
 
   let lauf = 0;
   const stuecke = st.stuecke.map((s, i) => {
     const start = lauf;
-    lauf += s.wert;
+    lauf += anteil(s.wert);
     const farbe = s.farbe || PALETTE[i % PALETTE.length];
-    const mitte = ((start + s.wert / 2) / 100) * 2 * Math.PI - Math.PI / 2;
+    const mitte = ((start + anteil(s.wert) / 2) / 100) * 2 * Math.PI - Math.PI / 2;
     const cos = Math.cos(mitte), sin = Math.sin(mitte), rechts = cos >= 0;
     const ex = CX + cos * 108, ey = CY + sin * 108;
     const tx = rechts ? 340 : 100;
-    const len = (KC * s.wert) / 100;
+    const len = (KC * anteil(s.wert)) / 100;
     const dieses = aktiv === i;
     return {
       ...s,
@@ -81,12 +90,12 @@ export default function Kreis({ st }: { st: StatKreis }) {
           style={{ left: s.lx, top: s.ly, transform: `translate(${s.schub},-50%)`, alignItems: s.ausr, opacity: an ? s.op : 0, transitionDelay: s.leaderVerzug }}
           onMouseEnter={() => setAktiv(s.i)} onMouseLeave={() => setAktiv(-1)}
         >
-          <b style={{ color: s.textFarbe }}>{s.wert} {einheit}</b>
+              <b style={{ color: s.textFarbe }}>{formatWert(s.wert, einheit)}</b>
           <span>{s.label}</span>
         </span>
       ))}
       <div className="st-kreis__mitte">
-        <b>{gewaehlt ? `${gewaehlt.wert} ${einheit}` : `100 ${einheit}`}</b>
+        <b>{formatWert(gewaehlt ? gewaehlt.wert : summe, einheit)}</b>
         <span>{gewaehlt ? gewaehlt.label.toUpperCase() : (st.mitteText || "Leistungen").toUpperCase()}</span>
       </div>
     </div>
