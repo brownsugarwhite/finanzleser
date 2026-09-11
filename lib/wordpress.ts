@@ -931,6 +931,43 @@ export const getCategoryWithChildren = cache(async (categorySlug: string): Promi
 });
 
 // ─────────────────────────────────────────────
+// Kategoriebilder (nur Bild, ohne Beiträge)
+// ─────────────────────────────────────────────
+
+/**
+ * Das Titelbild mehrerer Kategorien in EINER Abfrage.
+ *
+ * Für den Kiosk auf der Startseite: dort steht je Rubrik das Kategoriebild, aber nicht
+ * deren Beiträge — `getCategoryWithChildren` holt mit `posts(first: 6)` je Rubrik und je
+ * Subkategorie viel zu viel dafür. Eine Abfrage für alle vier Slugs, weil das WordPress
+ * auf IONOS ~2,3 s je Abfrage braucht (CLAUDE.md, Falle 1).
+ *
+ * Rückgabe: Map slug → { src, alt }. Kategorien ohne Bild fehlen in der Map.
+ */
+export const getKategorieBilder = cache(async (slugs: string[]): Promise<Map<string, { src: string; alt: string }>> => {
+  const out = new Map<string, { src: string; alt: string }>();
+  if (!slugs.length) return out;
+  const client = getClient();
+  const query = gql`
+    query GetKategorieBilder($slugs: [String!]!) {
+      categories(where: { slug: $slugs }) {
+        nodes {
+          slug
+          kategorieBildSlider { sourceUrl altText }
+        }
+      }
+    }
+  `;
+  const daten = await client.request<{
+    categories: { nodes: Array<{ slug: string; kategorieBildSlider?: { sourceUrl: string; altText?: string } }> };
+  }>(query, { slugs });
+  for (const n of daten.categories?.nodes ?? []) {
+    const src = n.kategorieBildSlider?.sourceUrl;
+    if (src) out.set(n.slug, { src, alt: n.kategorieBildSlider?.altText || "" });
+  }
+  return out;
+});
+// ─────────────────────────────────────────────
 // Navigation: Hauptkategorien + Subkategorien aus WordPress
 // ─────────────────────────────────────────────
 
