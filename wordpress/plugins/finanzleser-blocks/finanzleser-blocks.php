@@ -229,7 +229,7 @@ add_action('init', function() {
     wp_register_script(
         'finanzleser-blocks-editor',
         plugins_url('blocks.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch'),
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-plugins', 'wp-edit-post', 'wp-editor', 'wp-core-data', 'wp-data'),
         filemtime(plugin_dir_path(__FILE__) . 'blocks.js'),
         true
     );

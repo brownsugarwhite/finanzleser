@@ -4,6 +4,9 @@
     const { SelectControl, Placeholder, Spinner, TextControl, TextareaControl, Button } = wp.components;
     const { useBlockProps } = wp.blockEditor;
     const apiFetch = wp.apiFetch;
+    // Für die Leo-Seitenleiste: Post-Meta lesen und schreiben, Beitragsinhalt beobachten.
+    const useSelect = wp.data && wp.data.useSelect;
+    const useEntityProp = wp.coreData && wp.coreData.useEntityProp;
 
     // SVG Icons (aus public/icons/)
     const rechnerIcon = wp.element.createElement('svg', {
@@ -1220,5 +1223,159 @@
             scope: ['inserter', 'transform'],
         });
     });
+
+
+    /* ═══════════════════════════════════════════════════════════════════════════════════
+       Leo-Fragen — Seitenleiste im Beitrags-Editor
+
+       Die Fragen liegen im Post-Meta `leo_fragen` (mu-plugin finanzleser-faden), als
+       JSON-Zeichenkette. Registriert war das Feld von Anfang an, eine Oberfläche dafür gab
+       es aber nicht — gepflegt wurde nur per Skript. Das holt dieses Panel nach.
+
+       Im Faden erscheint jede Frage als Chip am Ende ihres Abschnitts; beim Antippen
+       schreibt Leo die Antwort darunter (components/faden/kette/Weiterlesen.tsx). Die
+       Antworten stehen außerdem in den strukturierten Daten der Seite (FAQPage).
+
+       🚨 Der Abschnitt ist die fehleranfälligste Stelle: `heading-<n>` zählt fortlaufend
+       über ALLE Zwischenüberschriften des Beitrags, beginnend bei 0. Deshalb bietet das
+       Panel keine Zahl zum Eintippen, sondern die Überschriften des Beitrags zur Auswahl —
+       aus dem gerade bearbeiteten Inhalt gelesen, nicht aus einem gespeicherten Stand.
+       ═══════════════════════════════════════════════════════════════════════════════════ */
+
+    var LEO_STATUS = [
+        { label: 'freigegeben', value: 'freigegeben' },
+        { label: 'Entwurf', value: 'entwurf' },
+    ];
+
+    /** Die Zwischenüberschriften des Beitrags als Auswahl — in derselben Zählung wie im Faden. */
+    function leoAbschnitte(inhalt) {
+        var raus = [];
+        var re = /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi;
+        var m, i = 0;
+        while ((m = re.exec(inhalt)) !== null) {
+            var txt = m[1].replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').trim();
+            raus.push({ nr: i, titel: txt, wert: 'heading-' + i });
+            i++;
+        }
+        return raus;
+    }
+
+    function leoLies(roh) {
+        if (!roh) return [];
+        try { var x = JSON.parse(roh); return Array.isArray(x) ? x : []; } catch (e) { return []; }
+    }
+
+    function LeoFragenPanel() {
+        var typ = useSelect(function (s) { return s('core/editor').getCurrentPostType(); }, []);
+        var inhalt = useSelect(function (s) { return s('core/editor').getEditedPostContent(); }, []);
+        var metaPaar = useEntityProp('postType', typ, 'meta');
+        var meta = metaPaar[0] || {}, setMeta = metaPaar[1];
+
+        if (typ !== 'post') return null;
+
+        var fragen = leoLies(meta.leo_fragen);
+        var abschnitte = leoAbschnitte(inhalt || '');
+        // Fazit und Häufige Fragen tragen im Faden keine Chips — sie werden anders gesetzt.
+        var waehlbar = abschnitte.filter(function (a) {
+            return a.nr >= 2 && !/^fazit\b/i.test(a.titel) && !/h[äa]ufig|faq/i.test(a.titel);
+        });
+
+        function schreibe(next) {
+            var m = Object.assign({}, meta);
+            m.leo_fragen = JSON.stringify(next);
+            setMeta(m);
+        }
+        function aendere(i, patch) {
+            var next = fragen.slice();
+            next[i] = Object.assign({}, next[i], patch);
+            // Der Titel wird mitgeführt, damit im CMS lesbar bleibt, wohin die Frage gehört.
+            if (patch.abschnitt) {
+                var a = abschnitte.filter(function (x) { return x.wert === patch.abschnitt; })[0];
+                next[i].abschnitt_titel = a ? a.titel : '';
+            }
+            schreibe(next);
+        }
+
+        var jeAbschnitt = {};
+        fragen.forEach(function (f) { jeAbschnitt[f.abschnitt] = (jeAbschnitt[f.abschnitt] || 0) + 1; });
+
+        var hinweise = [];
+        if (fragen.length < 8) hinweise.push('Acht bis fünfzehn Fragen je Beitrag sind das Ziel — hier sind es ' + fragen.length + '.');
+        if (fragen.length > 15) hinweise.push('Mehr als fünfzehn Fragen überfrachten den Beitrag.');
+        fragen.forEach(function (f, i) {
+            var nr = i + 1;
+            if (!f.frage || !f.frage.trim()) hinweise.push('Frage ' + nr + ': Text fehlt.');
+            if (!f.antwort || !f.antwort.trim()) hinweise.push('Frage ' + nr + ': Antwort fehlt.');
+            if (!f.abschnitt) hinweise.push('Frage ' + nr + ': Abschnitt nicht gewählt.');
+            else if (!waehlbar.some(function (a) { return a.wert === f.abschnitt; })) {
+                hinweise.push('Frage ' + nr + ': „' + f.abschnitt + '" gibt es nicht mehr oder ist Fazit/FAQ.');
+            }
+        });
+        Object.keys(jeAbschnitt).forEach(function (k) {
+            if (jeAbschnitt[k] > 3) hinweise.push(k + ' trägt ' + jeAbschnitt[k] + ' Fragen — höchstens drei je Abschnitt.');
+        });
+
+        var karten = fragen.map(function (f, i) {
+            return el('div', { key: i, style: { border: '1px solid #ddd', borderLeft: '3px solid #45A117', padding: '10px 12px', marginBottom: 10, background: '#fff' } },
+                el('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 } },
+                    el('strong', { style: { fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: '#686C6A' } }, 'Frage ' + (i + 1)),
+                    statKnopf('✕', function () { schreibe(fragen.filter(function (_, x) { return x !== i; })); }, true)
+                ),
+                el(SelectControl, {
+                    label: 'Abschnitt', value: f.abschnitt || '', __nextHasNoMarginBottom: true,
+                    options: [{ label: '— bitte wählen —', value: '' }].concat(waehlbar.map(function (a) {
+                        return { label: a.nr + ' · ' + a.titel.slice(0, 46), value: a.wert };
+                    })),
+                    onChange: function (v) { aendere(i, { abschnitt: v }); },
+                }),
+                el(TextControl, {
+                    label: 'Frage', value: f.frage || '', __nextHasNoMarginBottom: true,
+                    placeholder: 'Ich pflege meine Mutter zu Hause. Bekomme ich dafür etwas?',
+                    onChange: function (v) { aendere(i, { frage: v }); },
+                }),
+                el(TextareaControl, {
+                    label: 'Antwort', value: f.antwort || '', rows: 5, __nextHasNoMarginBottom: true,
+                    help: 'Drei bis fünf Sätze, konkret, mit Zahlen.',
+                    onChange: function (v) { aendere(i, { antwort: v }); },
+                }),
+                el(TextControl, {
+                    label: 'Quellen', value: (f.quellen || []).join(', '), __nextHasNoMarginBottom: true,
+                    placeholder: '§ 44 SGB XI, § 3 SGB VI',
+                    help: 'Mehrere mit Komma trennen.',
+                    onChange: function (v) { aendere(i, { quellen: v.split(',').map(function (x) { return x.trim(); }).filter(Boolean) }); },
+                }),
+                el(SelectControl, {
+                    label: 'Status', value: f.status || 'freigegeben', options: LEO_STATUS, __nextHasNoMarginBottom: true,
+                    help: 'Nur freigegebene Fragen erscheinen im Faden.',
+                    onChange: function (v) { aendere(i, { status: v }); },
+                })
+            );
+        });
+
+        return el(LeoPanel, { name: 'finanzleser-leo-fragen', title: 'Leo-Fragen (' + fragen.length + ')', className: 'finanzleser-leo' },
+            el('p', { style: { margin: '0 0 10px', fontSize: 12, color: '#686C6A' } },
+                'Erscheinen im Faden als Chips am Ende ihres Abschnitts — und in den strukturierten Daten der Seite.'),
+            !abschnitte.length
+                ? el('p', { style: { color: '#D3005E', fontSize: 12 } }, 'Der Beitrag hat noch keine Zwischenüberschriften.')
+                : null,
+            karten,
+            statKnopf('+ Frage', function () {
+                schreibe(fragen.concat([{ abschnitt: (waehlbar[0] || {}).wert || '', abschnitt_titel: (waehlbar[0] || {}).titel || '', frage: '', antwort: '', quellen: [], status: 'freigegeben' }]));
+            }),
+            hinweise.length
+                ? el('ul', { style: { margin: '12px 0 0', padding: '8px 12px', listStyle: 'none', borderLeft: '3px solid #D3005E', fontSize: 12, color: '#D3005E' } },
+                    hinweise.map(function (h, i) { return el('li', { key: i }, h); }))
+                : el('p', { style: { margin: '12px 0 0', fontSize: 12, color: '#2E7A0B' } }, '✓ Vollständig.')
+        );
+    }
+
+    // Das Panel heißt seit WordPress 6.6 wp.editor.PluginDocumentSettingPanel; davor lag es
+    // in wp.editPost. Beide Wege stehen hier, damit es auf älteren Ständen nicht bricht.
+    var LeoPanel = (wp.editor && wp.editor.PluginDocumentSettingPanel)
+        || (wp.editPost && wp.editPost.PluginDocumentSettingPanel);
+
+    if (LeoPanel && wp.plugins && wp.coreData && wp.data) {
+        wp.plugins.registerPlugin('finanzleser-leo-fragen', { render: LeoFragenPanel, icon: 'format-chat' });
+    }
 
 })();

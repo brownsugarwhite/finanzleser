@@ -179,16 +179,27 @@ anders gesetzt; ein Block landet dort am Beitragsende statt an seiner Stelle.
 Unter jedem Fachabschnitt stehen Chips mit Fragen. Wer einen antippt, bekommt Leos Antwort
 an Ort und Stelle — der Chip wird zur Frage und die Antwort schreibt sich darunter ein.
 
-Gepflegt werden sie im Feld **Leo-Fragen** des Beitrags. Je Frage gehören dazu:
+**Wo:** im Beitrags-Editor rechts in der Dokument-Seitenleiste, Bereich **„Leo-Fragen"**.
+Ist die Seitenleiste zugeklappt, öffnet sie das Zahnrad oben rechts; der Bereich steht unter
+den Beitragseinstellungen. Die Zahl im Titel sagt, wie viele Fragen der Beitrag hat.
+
+Je Frage gehören dazu:
 
 | Feld | Inhalt |
 |---|---|
-| Abschnitt | `heading-<n>` — dieselbe Zählung wie bei den Statistiken |
+| Abschnitt | Auswahlliste mit den Zwischenüberschriften des Beitrags. Fazit und Häufige Fragen stehen nicht zur Wahl — dort trägt der Faden keine Chips. |
 | Frage | Wie jemand sie wirklich stellen würde, gern mit Situation |
 | Antwort | Drei bis fünf Sätze, konkret, mit Zahlen |
-| Quellen | Paragraph oder Quelle, auf die sich die Antwort stützt |
+| Quellen | Paragraph oder Quelle, auf die sich die Antwort stützt. Mehrere mit Komma trennen. |
+| Status | Nur **freigegeben** erscheint im Faden. |
 
 **Acht bis fünfzehn je Beitrag**, ein bis zwei je Abschnitt. Die fünf Vorlagen haben zwölf.
+
+Unter der Liste steht entweder `✓ Vollständig.` oder was noch fehlt — zu wenige Fragen, ein
+leeres Antwortfeld, ein Abschnitt, den es nach einer Umstellung nicht mehr gibt.
+
+Die Antworten landen außerdem in den strukturierten Daten der Seite (FAQPage). Aus vier
+Frage-Antwort-Paaren je Beitrag werden damit bis zu sechzehn.
 
 Was eine gute Frage ausmacht:
 
