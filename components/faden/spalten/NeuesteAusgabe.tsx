@@ -1,6 +1,14 @@
 /**
- * „Neueste Ausgabe": das Laufband im Kopfbanner-Satz, darunter eine Titelseite —
- * Bild, Rubrik, Schlagzeile, Vorspann und die Zeile zum Aufschlagen.
+ * Das Kopfblatt des Kiosks: Ausgabe und Datum, der Schriftzug „Ratgeber" über die volle
+ * Blattbreite, das Laufband, darunter die Titelseite der neuesten Ausgabe — Bild, Rubrik,
+ * Schlagzeile, Vorspann und die Zeile zum Aufschlagen.
+ *
+ * Es liegt als erstes Blatt über dem Stapel der vier Rubriken (Spalten.tsx) und trägt
+ * deshalb dieselbe Papieroptik (`kiosk-blatt`).
+ *
+ * 🚨 Die Klasse `neueste` muss bleiben: `components/faden/Begruessung.tsx` sucht sie, um
+ * das Blatt erst nach Leos Gruß einzublenden. Und es bleibt ein GESCHWISTER des Stapels,
+ * kein Elternteil — sonst misst `angehaengt()` am falschen Knoten.
  *
  * Der Beitrag ist der jüngste aus dem CMS. Fehlt er (leeres CMS), fällt der ganze Block
  * weg statt einen leeren Rahmen zu hinterlassen.
@@ -10,6 +18,7 @@ import { buildPostUrl } from "@/lib/urls";
 import { medienUrl } from "@/lib/faden/medien";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { stripHtml } from "@/lib/seo";
+import Zeitungskopf from "../Zeitungskopf";
 import Laufband from "./Laufband";
 
 export default function NeuesteAusgabe({ post }: { post: Post | null }) {
@@ -19,7 +28,10 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
   const vorspann = post.untertitel || stripHtml(post.excerpt || "").slice(0, 180);
   const bild = post.featuredImage?.node?.sourceUrl;
   return (
-    <section className="neueste" aria-label="Neueste Ausgabe">
+    <section className="neueste kiosk-blatt" aria-label="Neueste Ausgabe">
+      {/* Ohne eigene Doppellinie: die des Laufbands trennt Titel und Zeile. */}
+      <Zeitungskopf linie={false} />
+      <b className="kiosk-mast">Ratgeber</b>
       <Laufband text="Neueste Ausgabe · frisch aus der Redaktion" />
       <a className="neueste__blatt" href={buildPostUrl(post)}>
         {bild && (

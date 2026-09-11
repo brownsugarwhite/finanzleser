@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 const DATUM = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
-export default function Zeitungskopf({ ausgabe = 1 }: { ausgabe?: number }) {
+export default function Zeitungskopf({ ausgabe = 1, linie = true }: { ausgabe?: number; linie?: boolean }) {
   const [datum, setDatum] = useState("");
   useEffect(() => { setDatum(DATUM.format(new Date())); }, []);
   return (
@@ -22,7 +22,9 @@ export default function Zeitungskopf({ ausgabe = 1 }: { ausgabe?: number }) {
         <span className="kicker">Ihr Faden · Ausgabe {ausgabe}</span>
         <span className="kicker">{datum}</span>
       </div>
-      <i className="doppellinie" />
+      {/* Im Kopfblatt des Kiosks steht die Doppellinie nicht hier, sondern unter dem
+          Schriftzug „Ratgeber" — dort trennt sie Titel und Laufband. */}
+      {linie && <i className="doppellinie" />}
     </div>
   );
 }

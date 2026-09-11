@@ -131,7 +131,7 @@ function KapitelInhalt({ offen, children }: { offen: boolean; children: ReactNod
   return <div className="kapitel__inhalt" ref={ref}>{children}</div>;
 }
 
-export default function Strom({ children }: { children: ReactNode; heroZahlen?: HeroZahlen }) {
+export default function Strom({ children, ohneKopf }: { children: ReactNode; ohneKopf?: boolean; heroZahlen?: HeroZahlen }) {
   const { verlauf, kapitelUmschalten, navigieren, laedt, laedtLange, ladeZiel } = useFaden();
   const nav = useNavItems();
   // Kapitel, die den Strom verlassen haben, nicht weiter beobachten.
@@ -141,7 +141,10 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
   }, [verlauf]);
   return (
     <div className={"strom" + (laedt ? " strom--laedt" : "")} id="strom">
-      <Zeitungskopf />
+      {/* Beginnt der Faden auf der Startseite, trägt das Kopfblatt des Kiosks Ausgabe und
+          Datum (components/faden/spalten/NeuesteAusgabe.tsx) — dann stünde die Zeile hier
+          ein zweites Mal. Sonst bleibt sie die erste Zeile des Fadens. */}
+      {!ohneKopf && <Zeitungskopf />}
       {verlauf.map((k, i) => (
         <Fragment key={k.id}>
         {/* Offen trägt das eingefrorene Kapitel die Höhe, die es lebend hatte (greifen):

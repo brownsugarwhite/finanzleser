@@ -83,7 +83,7 @@ export default function FadenShell({ children, nav, preload, level, heroZahlen }
               <button type="button" onClick={() => setSchublade("links")}><i>☰</i> Verlauf</button>
               <button type="button" onClick={() => setSchublade("rechts")}>Glossar <i>✦</i></button>
             </div>
-            <Strom>{children}</Strom>
+            <Strom ohneKopf={zeigtHero}>{children}</Strom>
             <Eingabe />
           </div>
           <RandRechts mobil={schublade === "rechts"} onZu={zu} />
