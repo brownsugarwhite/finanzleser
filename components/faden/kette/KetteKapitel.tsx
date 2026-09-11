@@ -2,7 +2,7 @@
  * Ein Ratgeber als Kette im Faden (Server-Komponente).
  *
  * Alles Lesbare steht im SSR-HTML: Krumen, Titel, Untertitel (erste h2, wie die alte
- * Seite), Vorspann, Autor, Bild, Einleitung, Inhaltsverzeichnis, Fachabschnitte mit
+ * Seite), Vorspann, Autor, Bild, Inhaltsverzeichnis, Fachabschnitte mit
  * Spielboxen und Werkzeugen, Leo-Fragen mit Antworten, FAQ, Fazit, Dazu passt.
  * Client-Inseln: Weiterlesen (Fragen aufklappen), Aktionen, Wochenbrief.
  */
@@ -76,7 +76,6 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
   // Auszeichnungen im Inhaltsverzeichnis und in „Abschnitt teilen“.
   for (const a of k.abschnitte) a.titelHtml = alsText(a.titel);
   for (const nurBevorzugt of [true, false]) {
-    if (k.einleitung) k.einleitung.html = verlinke(k.einleitung.html, ctx, { nurBevorzugt });
     // Reihenfolge = Lesereihenfolge: erst der Titel des Abschnitts, dann sein Text.
     for (const a of k.abschnitte) {
       a.titelHtml = verlinke(a.titelHtml || alsText(a.titel), ctx, { nurBevorzugt });
@@ -127,12 +126,6 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             </div>
             <figcaption>Bild: Redaktion</figcaption>
           </figure>
-          {k.einleitung && (
-            <div className="einleitung" id="heading-1">
-              <h2 className="einleitung__titel">{k.einleitung.titel}</h2>
-              <div className={cn("prose fliess__html", zeitungKlassen(k.einleitung.html, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.einleitung.html }} />
-            </div>
-          )}
           {toc.length > 0 && (
             <nav className="inhalt" aria-label="Inhalt">
               <span className="kicker">Inhalt</span>

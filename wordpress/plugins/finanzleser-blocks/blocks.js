@@ -1275,9 +1275,12 @@
 
         var fragen = leoLies(meta.leo_fragen);
         var abschnitte = leoAbschnitte(inhalt || '');
+        // h2 #0 ist der Kicker — er trägt den großen Titel des Beitrags, keinen Abschnitt.
+        // Ab h2 #1 beginnen die Abschnitte (bis 11.09.2026 erst ab #2: #1 war die gesonderte
+        // „Einleitung“ über dem Inhaltsverzeichnis, die es nicht mehr gibt).
         // Fazit und Häufige Fragen tragen im Faden keine Chips — sie werden anders gesetzt.
         var waehlbar = abschnitte.filter(function (a) {
-            return a.nr >= 2 && !/^fazit\b/i.test(a.titel) && !/h[äa]ufig|faq/i.test(a.titel);
+            return a.nr >= 1 && !/^fazit\b/i.test(a.titel) && !/h[äa]ufig|faq/i.test(a.titel);
         });
 
         function schreibe(next) {

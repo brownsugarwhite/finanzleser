@@ -2,8 +2,14 @@
  * Artikelmodell der Faden-Kette (Server).
  *
  * Zerlegt den gerenderten Beitragsinhalt (GraphQL `content`) in die Teile, die die
- * Kette braucht: Kicker (h2 #0) + Vorspann, Einleitung (h2 #1), Fachabschnitte (ab #2),
+ * Kette braucht: Kicker (h2 #0) + Vorspann, Fachabschnitte (ab h2 #1),
  * FAQ (Yoast-Block), Fazit, Werkzeuge (nach `leo_einwuerfe` platziert), Spielboxen.
+ *
+ * 🚨 h2 #1 war bis 11.09.2026 eine gesonderte „Einleitung“, die ÜBER dem
+ * Inhaltsverzeichnis stand. Design A v2 kennt das nicht: dort folgt auf den Kopf das
+ * Verzeichnis und darauf „Abschnitt 1 von N“. Seitdem ist h2 #1 ein Fachabschnitt wie
+ * jeder andere. Die IDs blieben dabei unverändert (`heading-1`) — Leo-Fragen und
+ * Statistiken, die auf `heading-1` zeigen, werden dadurch überhaupt erst sichtbar.
  *
  * Abschnitts-IDs sind `heading-<n>` über ALLE h2 in Dokumentreihenfolge — dieselbe
  * Zählung wie lib/articleHtml.addHeadingIds, docs/inhalte/beitraege-liste.json und die
@@ -73,7 +79,6 @@ export interface Kette {
   stand: string;
   autor: { name: string; role: string; imageUrl: string };
   bild?: { src: string; alt: string };
-  einleitung?: { titel: string; html: string };
   abschnitte: Abschnitt[];
   faq: { q: string; a: string }[];
   faqId?: string;
@@ -128,7 +133,12 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
 
   // 1) In Sektionen je h2 zerlegen, heading-Index über alle h2.
   const sektionen: RohSektion[] = [];
-  let aktuelle: RohSektion = { nr: -1, titel: "", teile: [], html: [] };
+  // 🚨 Alles vor der ersten h2 landet hier. Diese Sektion kommt NICHT in `sektionen` —
+  // ihr Fließtext gehört zu keinem Abschnitt und wird bewusst nicht gerendert. Was in ihr
+  // an Werkzeugen und Statistiken steckt, wurde bis 11.09.2026 lautlos verworfen; seitdem
+  // wird `vorlauf` weiter unten mit `bergen()` geleert.
+  const vorlauf: RohSektion = { nr: -1, titel: "", teile: [], html: [] };
+  let aktuelle: RohSektion = vorlauf;
   let h2Index = 0;
   const h2re = /<h2\b([^>]*)>([\s\S]*?)<\/h2>/gi;
 
@@ -171,12 +181,11 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     }
   }
 
-  // 2) Kicker (h2 #0), Einleitung (h2 #1), FAQ, Fazit, Fachabschnitte.
+  // 2) Kicker (h2 #0), FAQ, Fazit, Fachabschnitte (ab h2 #1).
   const istFaq = (s: RohSektion) => /h[äa]ufig(e|\s+gestellte)?\s+fragen|faq/i.test(s.titel) || s.html.some((h) => h.includes("schema-faq"));
   const istFazit = (s: RohSektion) => /^fazit\b/i.test(s.titel);
 
   const kickerSektion = sektionen.find((s) => s.nr === 0);
-  const einleitungSektion = sektionen.find((s) => s.nr === 1);
   const kicker = kickerSektion ? kickerSektion.titel : (post.untertitel || "");
   const vorspann = kickerSektion && kickerSektion.html.length ? ersterAbsatz(kickerSektion.html.join("")) : stripTags(post.excerpt || "");
 
@@ -187,7 +196,7 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
 
   const fach: Abschnitt[] = [];
   const verirrteEmbeds: Extract<Teil, { art: "embed" }>[] = [];
-  // Statistiken aus Kicker, Einleitung, FAQ und Fazit. Dort gibt es keine Teile-Liste zum
+  // Statistiken aus Kicker, FAQ und Fazit. Dort gibt es keine Teile-Liste zum
   // Rendern (Fazit ist eine HTML-Zeichenkette, FAQ ein Paar-Array), also werden sie
   // geborgen und ans Ende gehängt — verworfen würden sie lautlos fehlen.
   const nachzuegler: Extract<Teil, { art: "statistik" }>[] = [];
@@ -196,9 +205,12 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     else if (t.art === "statistik") nachzuegler.push(t);
   });
 
+  // Werkzeuge und Statistiken von vor der ersten Zwischenüberschrift retten.
+  bergen(vorlauf);
+
   for (const s of sektionen) {
-    if (s.nr <= 1) {
-      // Werkzeuge aus Kicker/Einleitung wandern in den Pool (kommen praktisch nicht vor).
+    if (s.nr <= 0) {
+      // Werkzeuge aus dem Kicker-Abschnitt wandern in den Pool (kommen praktisch nicht vor).
       bergen(s);
       continue;
     }
@@ -264,7 +276,6 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
   if (subKat && subKat.slug !== main) krumen.push({ name: subKat.name, href: `/${main}/${sub}` });
   const r = getRedakteurForSlug(post.slug);
   const minuten = getReadingTimeMinutes(content);
-  const einleitungHtml = einleitungSektion ? fliessHtml(einleitungSektion.html.join("\n")) : "";
 
   const toc: TocEintrag[] = fach.map((a) => ({ id: a.id, titel: a.titel, art: "abschnitt" as const }));
   if (faq.length && faqId) toc.push({ id: faqId, titel: "Häufige Fragen", art: "faq" });
@@ -284,7 +295,6 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     stand: datumDe(post.modified || post.date),
     autor: { name: r.name, role: r.role, imageUrl: r.imageUrl },
     bild: post.featuredImage?.node?.sourceUrl ? { src: medienUrl(post.featuredImage.node.sourceUrl), alt: post.featuredImage.node.altText || post.title } : undefined,
-    einleitung: einleitungSektion ? { titel: einleitungSektion.titel, html: einleitungHtml } : undefined,
     abschnitte: fach,
     faq,
     faqId,

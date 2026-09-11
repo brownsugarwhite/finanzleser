@@ -490,8 +490,6 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .artikel figure .bild img { width: 64px; height: 64px; opacity: .6; }
 .faden-shell .artikel figure .bild--foto img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
 .faden-shell .artikel figure figcaption { font-size: 12.5px; color: var(--muted); font-style: italic; }
-.faden-shell .einleitung { display: grid; gap: 6px; }
-.faden-shell .einleitung__titel { font-size: 21px; margin: 6px 0 2px; }
 .faden-shell .inhalt { display: grid; gap: 10px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 12px 0 14px; }
 .faden-shell .inhalt__liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .faden-shell .inhalt__zeile a { display: grid; grid-template-columns: 32px 36px minmax(0, 1fr); align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
