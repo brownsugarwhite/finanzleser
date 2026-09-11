@@ -10,6 +10,7 @@
 import { useState } from "react";
 import type { StatAnteilsleiste } from "@/lib/statistik/schema";
 import { PALETTE } from "@/lib/statistik/schema";
+import { formatWert } from "@/lib/statistik/formeln";
 
 export default function Anteilsleiste({ st }: { st: StatAnteilsleiste }) {
   const [aktiv, setAktiv] = useState(-1);
@@ -36,8 +37,10 @@ export default function Anteilsleiste({ st }: { st: StatAnteilsleiste }) {
   });
 
   return (
-    <div className="st-anteile" role="img" aria-label={st.stuecke.map((s) => `${s.label}: ${s.wert} ${einheit}`).join(", ")}>
-      <div className="st-anteile__leiste">
+    <div className="st-anteile">
+      {/* Die Leiste trägt keine eigene Beschriftung: Wert und Name stehen direkt darunter
+          als Text und werden ohnehin vorgelesen. */}
+      <div className="st-anteile__leiste" aria-hidden="true">
         {stuecke.map((s) => (
           <i key={s.label} style={{ width: s.breite, background: s.farbe, opacity: s.op }} onMouseEnter={() => setAktiv(s.i)} onMouseLeave={() => setAktiv(-1)} />
         ))}
@@ -45,7 +48,7 @@ export default function Anteilsleiste({ st }: { st: StatAnteilsleiste }) {
       {stuecke.map((s) => (
         <div key={s.label} className="st-anteile__marke" style={{ left: s.mitte, alignItems: s.ausr, transform: `translateX(${s.schub})`, opacity: s.op }}>
           <i style={{ height: s.linieH, margin: s.linieM }} />
-          <span><b style={{ color: s.farbe }}>{s.wert} {einheit}</b><span>{s.label}</span></span>
+          <span><b style={{ color: s.farbe }}>{formatWert(s.wert, einheit)}</b><span>{s.label}</span></span>
         </div>
       ))}
     </div>

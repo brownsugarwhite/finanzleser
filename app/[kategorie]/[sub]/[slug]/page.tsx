@@ -129,7 +129,23 @@ export default async function BeitragPage(props: {
 
   // JSON-LD/Breadcrumbs aus den kanonischen Post-Daten, nie aus params.
   const articlePath = buildPostUrl(post);
-  const faqPairs = extractFaqPairs(post.content);
+  /**
+   * FAQPage-Daten: die Frage-Antwort-Paare des Beitrags UND Leos Fragen.
+   *
+   * Leos Antworten stehen vollständig im SSR-HTML — sichtbar wird jede beim Antippen ihres
+   * Chips (Weiterlesen.tsx). Genau dieses Aufklapp-Muster lässt Google für FAQPage
+   * ausdrücklich zu. Ohne sie stünden je Beitrag vier Paare in den strukturierten Daten,
+   * mit ihnen bis zu sechzehn — und es sind die Fragen, die Leserinnen wirklich stellen.
+   */
+  const faqPairs = [...extractFaqPairs(post.content)];
+  const bekannt = new Set(faqPairs.map((f) => f.q.trim().toLowerCase()));
+  for (const f of post.faden?.leoFragen ?? []) {
+    const frage = (f.frage || "").trim();
+    const antwort = stripHtml(f.antwort || "").trim();
+    if (!frage || !antwort || bekannt.has(frage.toLowerCase())) continue;
+    bekannt.add(frage.toLowerCase());
+    faqPairs.push({ q: frage, a: antwort });
+  }
   const breadcrumbItems = [
     { name: "Startseite", path: "/" },
     ...(mainCategory ? [{ name: mainCategory.name, path: `/${main}` }] : []),

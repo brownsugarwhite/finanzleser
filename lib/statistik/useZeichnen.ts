@@ -52,8 +52,11 @@ export function useZeichnen<T extends HTMLElement = HTMLDivElement>(): [React.Re
 export function useZaehlwerk(ziel: number, stand: Zeichenstand, dauer = 1300): number {
   const [wert, setWert] = useState(ziel);
   useEffect(() => {
-    if (stand === "ruht") { setWert(0); return; }
-    if (stand === "fertig") { setWert(ziel); return; }
+    // Im Ruhezustand steht der Zielwert da, nicht die Null. Sichtbar ist das nie — der
+    // ganze Block hat dann opacity 0 —, aber Suchmaschinen und Textauszüge lesen so die
+    // echte Zahl statt „0". Beim Zeichnen springt sie auf 0 und zählt hoch; der Sprung
+    // fällt mit dem Einblenden zusammen und ist deshalb unsichtbar.
+    if (stand !== "zeigt") { setWert(ziel); return; }
     if (!Number.isFinite(ziel)) return;
     let rohr = 0;
     const start = performance.now();

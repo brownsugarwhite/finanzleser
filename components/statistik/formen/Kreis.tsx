@@ -102,7 +102,9 @@ export default function Kreis({ st }: { st: StatKreis }) {
 
   return (
     <div className="st-kreis" ref={wurzel}>
-      <svg viewBox="0 0 440 250" aria-label={st.stuecke.map((s) => `${s.label}: ${s.wert} ${einheit}`).join(", ")} role="img">
+      {/* Die Zeichnung ist Dekoration — jeder Wert steht als Text in seiner Marke daneben.
+          Mit role="img" und aria-label würde jede Zahl zweimal vorgelesen. */}
+      <svg viewBox="0 0 440 250" aria-hidden="true">
         <circle cx={CX} cy={CY} r={58} className="st-kreis__hilfe" />
         <circle cx={CX} cy={CY} r={98} className="st-kreis__hilfe" />
         {stuecke.map((s) => (

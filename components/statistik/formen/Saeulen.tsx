@@ -8,6 +8,8 @@
  */
 import type { StatSaeulen } from "@/lib/statistik/schema";
 import { useZeichnen } from "@/lib/statistik/useZeichnen";
+import { formatWert } from "@/lib/statistik/formeln";
+import Wertetabelle from "./Wertetabelle";
 
 const REIHENFARBE = ["var(--ink)", "var(--green)"];
 /** Die Zahl über der hellen Säule braucht das dunklere Grün, sonst ist sie auf Papier zu schwach. */
@@ -28,7 +30,7 @@ export default function Saeulen({ st }: { st: StatSaeulen }) {
           ))}
         </div>
       )}
-      <div className="st-saeulen__buehne" role="img" aria-label={st.kategorien.map((k) => `${k.label}: ${k.werte.join(", ")}`).join("; ")}>
+      <div className="st-saeulen__buehne" aria-hidden="true">
         <i className="st-saeulen__linie" style={{ top: "33%" }} />
         <i className="st-saeulen__linie" style={{ top: "66%" }} />
         <div className="st-saeulen__gitter" style={{ gridTemplateColumns: spalten }}>
@@ -44,16 +46,22 @@ export default function Saeulen({ st }: { st: StatSaeulen }) {
                     transitionDelay: `${(j ? 0.06 : 0) + i * 0.09}s`,
                   }}
                 >
-                  <b style={{ color: ZAHLFARBE[j], opacity: an ? 1 : 0, transitionDelay: `${0.06 + i * 0.09}s` }}>{v}</b>
+                  <b style={{ color: ZAHLFARBE[j], opacity: an ? 1 : 0, transitionDelay: `${0.06 + i * 0.09}s` }}>{formatWert(v, "")}</b>
                 </span>
               ))}
             </div>
           ))}
         </div>
       </div>
-      <div className="st-saeulen__achse" style={{ gridTemplateColumns: spalten }}>
+      <div className="st-saeulen__achse" style={{ gridTemplateColumns: spalten }} aria-hidden="true">
         {st.kategorien.map((k) => <span key={k.label}>{k.label}</span>)}
       </div>
+      <Wertetabelle
+        titel={st.titel}
+        spalte="Kategorie"
+        reihen={st.reihen.map((r) => r.label)}
+        zeilen={st.kategorien.map((k) => ({ name: k.label, werte: k.werte.map((v) => formatWert(v, st.einheit)) }))}
+      />
     </div>
   );
 }
