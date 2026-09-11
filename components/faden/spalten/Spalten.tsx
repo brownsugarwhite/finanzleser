@@ -31,6 +31,8 @@ import type { SpaltenRubrik } from "@/lib/faden/spalten";
 const PEEK = 110;
 /** Muss zur Übergangsdauer von .kiosk__koerper in app/faden.css passen. */
 const FAHRT = 420;
+/** Wie weit ein Blatt im Ruhestand auf dem vorigen liegt — muss zu `.kiosk` in faden.css passen. */
+const UEBERLAPP = 10;
 
 /**
  * `start` kommt nur aus einem eingefrorenen Kapitel: `InselnBeleben` reicht dort das
@@ -68,10 +70,10 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
     const kopfblatt = wurzel?.previousElementSibling as HTMLElement | null;
     const mast = kopfblatt?.querySelector<HTMLElement>(".kiosk-mast");
     if (!kopfblatt || !mast || !kopfblatt.classList.contains("neueste")) return 0;
-    // Bis unter die Doppellinie des Schriftzugs (die erste des Laufbands) — sonst bliebe
-    // die Laufzeile halb verdeckt stehen und läse sich wie ein Fehler.
-    const linie = kopfblatt.querySelector<HTMLElement>(".laufband .doppellinie") || mast;
-    return Math.max(0, Math.round(kopfblatt.getBoundingClientRect().bottom - linie.getBoundingClientRect().bottom - 8));
+    // Bis unter das ganze Laufband — eine halb verdeckte Laufzeile läse sich wie ein Fehler.
+    // Die 10 px sind der Überlapp, den das erste Blatt ohnehin schon hat.
+    const band = kopfblatt.querySelector<HTMLElement>(".laufband") || mast;
+    return Math.max(0, Math.round(kopfblatt.getBoundingClientRect().bottom - band.getBoundingClientRect().bottom - UEBERLAPP));
   };
 
   /**
@@ -83,26 +85,42 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
    *  3. Umschalten und den angeklickten Kopf dabei über die ganze Fahrt an seiner Stelle
    *     halten — die Bewegung findet ja oberhalb von ihm statt.
    */
-  const umschalten = (key: string) => {
-    const zu = aktiv === key && beruehrt;
+  const fahren = (zielKey: string, anker: HTMLElement | null) => {
     const altEl = koerper.current[aktiv];
     if (hoehe === null && altEl) flushSync(() => setHoehe(Math.round(altEl.getBoundingClientRect().height)));
-    const ziel = zu ? 0 : Math.round(koerper.current[key]?.scrollHeight || PEEK);
-    const deckung = zu ? 0 : messeUeberdeckung();
-    ankerHalten(kopf.current[key], FAHRT + 60);
+    const ziel = zielKey ? Math.round(koerper.current[zielKey]?.scrollHeight || PEEK) : 0;
+    const deckung = zielKey ? messeUeberdeckung() : 0;
+    ankerHalten(anker, FAHRT + 60);
     flushSync(() => {
       setBeruehrt(true);
-      setAktiv(zu ? "" : key);
+      setAktiv(zielKey);
       setHoehe(ziel);
       setUeberdeckung(deckung);
     });
     // Nach der Fahrt auf `auto`: sonst klippt der Körper, sobald jemand das Thema wechselt
     // oder das Bild spät geladen ist. Nur, wenn inzwischen nicht weitergeklickt wurde.
-    if (!zu) setTimeout(() => setHoehe((h) => (h === ziel ? null : h)), FAHRT + 40);
+    if (zielKey) setTimeout(() => setHoehe((h) => (h === ziel ? null : h)), FAHRT + 40);
   };
+
+  const umschalten = (key: string) => fahren(aktiv === key && beruehrt ? "" : key, kopf.current[key]);
 
   // Wiederbelebt mit offenem Blatt: die Überdeckung lässt sich erst messen, wenn alles steht.
   useLayoutEffect(() => { if (wieder && start !== "zu") setUeberdeckung(messeUeberdeckung()); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Ein Klick auf den Schriftzug „Ratgeber" im Kopfblatt fährt den ganzen Stapel zusammen.
+  // Der Schalter gehört zu einer Server-Komponente (NeuesteAusgabe) — der Zustand liegt hier,
+  // also hängt sich der Kiosk an den Knopf, statt ihn zu rendern.
+  useEffect(() => {
+    const wurzel = stapel.current?.closest(".insel") || stapel.current;
+    const kopfblatt = wurzel?.previousElementSibling as HTMLElement | null;
+    const schalter = kopfblatt?.querySelector<HTMLElement>("[data-kiosk-zu]");
+    if (!schalter) return;
+    const zu = () => { if (aktiv) fahren("", schalter); };
+    schalter.addEventListener("click", zu);
+    return () => schalter.removeEventListener("click", zu);
+  // Ohne Abhängigkeiten, also nach JEDEM Render neu gehängt: `fahren` liest den Stand
+  // aus dem Abschluss, und der ist nur im Render frisch, in dem er entstanden ist.
+  });
 
   // Den Stand in der Insel hinterlegen — erst nach der ersten Berührung, damit ein
   // unberührter Kiosk im Verlauf wieder mit seinem Anfangsstand erscheint.
@@ -155,36 +173,41 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
               style={{ height: offen ? (hoehe === null ? undefined : hoehe) : 0 }}
             >
               <div className="kiosk__innen">
-                {r.bild && (
-                  <span className="kiosk__bild">
-                    <img src={r.bild.src} alt={r.bild.alt} loading="lazy" />
-                  </span>
-                )}
-                <ul className="kiosk__themen">
-                  {r.themen.map((t) => (
-                    <li key={t.key} className={t.key === th?.key ? "ist-aktiv" : undefined}>
-                      <button type="button" onClick={() => setThemen((a) => ({ ...a, [r.key]: t.key }))}>{t.name}</button>
-                    </li>
-                  ))}
-                </ul>
+                <div className="kiosk__links">
+                  <div className="kiosk__oben">
+                    {r.bild && (
+                      <span className="kiosk__bild">
+                        <img src={r.bild.src} alt={r.bild.alt} loading="lazy" />
+                      </span>
+                    )}
+                    <ul className="kiosk__themen">
+                      {r.themen.map((t) => (
+                        <li key={t.key} className={t.key === th?.key ? "ist-aktiv" : undefined}>
+                          <button type="button" onClick={() => setThemen((a) => ({ ...a, [r.key]: t.key }))}>{t.name}</button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {th && th.werkzeuge.length > 0 && (
+                    <div className="kiosk__werkzeuge">
+                      <span className="kicker">Finanztools zum Thema</span>
+                      {th.werkzeuge.map((w) => (
+                        <a key={w.typ + w.slug} className="chip chip--still" href={w.href}><i className={`dot dot--${w.typ}`} /> {w.titel}</a>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <div className="kiosk__ratgeber">
                   {th?.liste.map((e) => (
                     <a key={e.slug} className="kiosk__artikel" href={e.href}>
                       <span className="kiosk__kleine"><span>{e.titel}</span><ToolDots tools={e.tools} size={8} style={{ marginLeft: 0, marginTop: 4, flex: "none" }} /></span>
                       <b>{e.untertitel ? boldYears(e.untertitel) : boldYears(e.titel)}</b>
-                      <span className="pfeil-link">Ratgeber lesen<i /></span>
                     </a>
                   ))}
+                  <a className="pfeil-link kiosk__alle" href={th && th.zahl > th.liste.length ? th.href : r.href}>
+                    {th && th.zahl > th.liste.length ? `Alle ${th.zahl} Ratgeber in ${th.name}` : `Alle ${r.zahl} Ratgeber in ${r.titel}`}<i />
+                  </a>
                 </div>
-              </div>
-              <div className="kiosk__fuss">
-                {th && th.werkzeuge.length > 0 && <span className="kicker">Finanztools zum Thema</span>}
-                {th?.werkzeuge.map((w) => (
-                  <a key={w.typ + w.slug} className="chip chip--still" href={w.href}><i className={`dot dot--${w.typ}`} /> {w.titel}</a>
-                ))}
-                <a className="pfeil-link kiosk__alle" href={th && th.zahl > th.liste.length ? th.href : r.href}>
-                  {th && th.zahl > th.liste.length ? `Alle ${th.zahl} Ratgeber in ${th.name}` : `Alle ${r.zahl} Ratgeber in ${r.titel}`}<i />
-                </a>
               </div>
             </div>
           </article>

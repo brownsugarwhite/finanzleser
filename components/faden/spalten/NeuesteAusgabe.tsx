@@ -31,7 +31,10 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
     <section className="neueste kiosk-blatt" aria-label="Neueste Ausgabe">
       {/* Ohne eigene Doppellinie: die des Laufbands trennt Titel und Zeile. */}
       <Zeitungskopf linie={false} />
-      <b className="kiosk-mast">Ratgeber</b>
+      {/* Der Schriftzug ist zugleich der Schalter, der den Stapel wieder zusammenfahren
+          lässt — Spalten.tsx hängt sich an `data-kiosk-zu`. Ein echter Knopf, damit er
+          auch mit der Tastatur erreichbar ist. */}
+      <button type="button" className="kiosk-mast" data-kiosk-zu title="Alle Ausgaben zuklappen">Ratgeber</button>
       <Laufband text="Neueste Ausgabe · frisch aus der Redaktion" />
       <a className="neueste__blatt" href={buildPostUrl(post)}>
         {bild && (
