@@ -78,8 +78,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .reihe { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .faden-shell .quelle { font-size: 12px; color: var(--muted); margin: 0; }
 .faden-shell .hinweis { background: var(--note); border: 1px solid var(--note-line); color: var(--note-ink); padding: 8px 12px; font-size: 13px; }
-.faden-shell .begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green); font-weight: 600; cursor: pointer; text-decoration: none; }
-.faden-shell .begriff:hover, .faden-shell .begriff.offen { color: var(--pink); text-decoration: none; }
+/* Die Begriffe stehen weiter unten, im Glossar-Abschnitt — dort gewinnt die spätere Regel. */
 
 /* ---------- Der Wink auf das erste grüne Wort ----------
    Kommt nach ein paar Sekunden einmal je Sitzung (components/faden/glossar/BegriffWink.tsx)
@@ -510,7 +509,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .inhalt__zeile a:hover { padding-left: 8px; }
 .faden-shell .inhalt__nr { font: 900 15px var(--serif); color: var(--green); min-width: 18px; font-style: normal; }
 .faden-shell .inhalt__zeile--faq .inhalt__nr, .faden-shell .inhalt__zeile--fazit .inhalt__nr { color: var(--muted); }
-.faden-shell .inhalt__titel { font: 400 15px var(--serif); }
+/* 🚨 Farbe explizit: eine globale Regel `p, li, span { color: --color-text-medium }` in
+   components.css greift auf das <span> durch und schlägt die Vererbung vom <a>. Ohne
+   diese Zeile steht das ganze Verzeichnis in Grau statt in Tinte. */
+.faden-shell .inhalt__titel { font: 400 15px var(--serif); color: var(--ink); }
 /* Die Punktführung. `flex: 1` frisst den freien Raum, der Versatz hebt sie auf Mittelhöhe. */
 .faden-shell .inhalt__linie { flex: 1; border-bottom: 1px dotted rgba(51,74,39,.4); transform: translateY(-4px); }
 /* Rechts, wo im Handoff die Lesedauer steht: ein Zeichen für die Art des Eintrags. */
@@ -605,7 +607,16 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
-.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 22px; }
+/* ---------- Abschnittsfuß: Haarlinie, Leos Fragen links, Teilen rechts ---------- */
+/* Zwei Spalten, beide Köpfe auf derselben Grundlinie. Steht keine Frage an, bleibt nur
+   der Teilen-Link — dann rutscht er nach rechts unter die Linie, nicht nach oben in den
+   nächsten Abschnitt. */
+.faden-shell .abschnitt__fuss { clear: both; margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px 20px; }
+.faden-shell .abschnitt__fuss > .insel:first-child { grid-column: 1; grid-row: 1; min-width: 0; }
+.faden-shell .abschnitt__fuss .teilen { grid-column: 2; grid-row: 1; justify-self: end; white-space: nowrap; }
+/* Der Teilen-Link sitzt auf der Grundlinie des Kickers daneben, nicht auf dessen Oberkante. */
+.faden-shell .abschnitt__fuss .teilen { font-size: 12.5px; line-height: 1.3; }
+.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 0; }
 .faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; }
 /* „Sie könnten Leo auch fragen" steht in derselben Zeile wie die Chips und bricht mit. */
 .faden-shell .weiterlesen .fragen__kopf { flex-basis: 100%; margin-bottom: 2px; }
@@ -880,8 +891,13 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 
 /* ---------- Glossar: grüne Begriffe, Klickmenü, Sitzung, Nachschlagewerk, Begriffskarte ---------- */
 .faden-shell { position: relative; }
-.faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--green); cursor: pointer; text-decoration: none; transition: color .15s; }
-.faden-shell .begriff:hover, .faden-shell .begriff.offen, .faden-shell .prose a.begriff:hover, .faden-shell .prose a.begriff.offen { color: var(--pink); text-decoration: none; }
+/* 1:1 nach Handoff Zeile 585: dunkles Grün, Unterstrich in hellem Grün mit 40 % Deckung,
+   3 px unter der Grundlinie. Beim Überfahren wird der Strich voll.
+   🚨 Kein `font-weight: 600` — die Vorlage erbt die Stärke des Fließtexts. Ein fetter
+   Begriff mitten im Satz sticht heraus wie ein Fehler; der Unterstrich reicht. */
+.faden-shell .begriff, .faden-shell .prose a.begriff { border: 0; background: none; padding: 0; font: inherit; color: var(--green-ink); cursor: pointer; text-decoration: underline; text-decoration-color: rgba(69,161,23,.4); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color .2s, color .2s; }
+.faden-shell .begriff:hover, .faden-shell .prose a.begriff:hover { text-decoration-color: var(--green); }
+.faden-shell .begriff.offen, .faden-shell .prose a.begriff.offen { color: var(--pink); text-decoration-color: var(--pink); }
 .faden-shell .bmenu { position: absolute; z-index: 45; width: min(320px, calc(100vw - 24px)); background: var(--white); border: 1px solid var(--rule); border-radius: 14px; box-shadow: 0 14px 34px rgba(51,74,39,.16); padding: 14px 18px 12px; display: grid; gap: 4px; }
 .faden-shell .bmenu::before { content: ""; position: absolute; left: var(--pfeil, 22px); top: -7px; width: 12px; height: 12px; background: var(--white); border-left: 1px solid var(--rule); border-top: 1px solid var(--rule); transform: rotate(45deg); }
 .faden-shell .bmenu.oben::before { top: auto; bottom: -7px; transform: rotate(225deg); }
@@ -929,8 +945,6 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .begriff-k__reihe { display: flex; flex-wrap: wrap; gap: 8px; }
 .faden-shell .begriff-k__reihe .chip { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .faden-shell .begriff-k__leo { display: grid; gap: 10px; margin-top: 6px; }
-.faden-shell .inhalt__zeile.aktiv .inhalt__nr { background: var(--pink); border-color: var(--pink); color: #fff; }
-.faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--pink); }
 
 /* ---------- Leo im Faden: Fragen, Antworten, Tipp-Punkte, Folge-Chips, Sprungleiste ---------- */
 .faden-shell .leo-strom { display: grid; gap: 26px; padding: 4px 0 12px; }

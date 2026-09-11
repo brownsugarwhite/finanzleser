@@ -121,7 +121,6 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
   const anzeige = anzeigeIm(i, n);
   return (
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
-      <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
       <div className={cn("fliess", anzeige && "fliess--umflossen")}>
@@ -129,7 +128,13 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
         <Teile teile={a.teile} toolData={toolData} auftakt={i === 0} />
       </div>
       {a.statistiken.map((st, j) => <Insel key={j} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>)}
-      {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
+      {/* Der Fuß schließt den Abschnitt ab: Haarlinie, darunter links Leos Fragen und
+          rechts auf gleicher Höhe „Abschnitt teilen". Bis 11.09.2026 stand das Teilen als
+          ERSTES Kind der Section und hing damit optisch über dem vorigen Abschnitt. */}
+      <div className="abschnitt__fuss">
+        {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
+        <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
+      </div>
     </section>
   );
 }
@@ -199,13 +204,13 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
             <nav className="inhalt" aria-label="Inhalt">
               <span className="kicker">Inhalt · {zahlwort(k.abschnitte.length)} Abschnitte</span>
               <ol className="inhalt__liste">
-                {toc.map((t) => (
+                {toc.map((t, i) => (
                   <li key={t.id} className={"inhalt__zeile inhalt__zeile--" + t.art}>
                     <a href={`#${t.id}`}>
-                      {/* Nur Leseabschnitte tragen eine Nummer — sie ist dieselbe wie in
-                          „Abschnitt n von N“. FAQ, Fazit und Werkzeuge lassen die Spalte leer;
-                          `min-width` hält trotzdem die Flucht. */}
-                      <i className="inhalt__nr">{t.art === "abschnitt" ? k.abschnitte.findIndex((a) => a.id === t.id) + 1 : ""}</i>
+                      {/* Durchgezählt bis zum letzten Eintrag — auch Häufige Fragen, Fazit
+                          und die Finanztools. Ein Verzeichnis, das mittendrin aufhört zu
+                          zählen, sieht aus wie ein Fehler. */}
+                      <i className="inhalt__nr">{i + 1}</i>
                       <span className="inhalt__titel">{t.titel}</span>
                       <i className="inhalt__linie" aria-hidden="true" />
                       <span className="inhalt__art" title={t.art === "werkzeug" ? "Finanztool" : "Leseabschnitt"}>{t.art === "werkzeug" ? <b className={`dot dot--${t.typ}`} /> : LESEZEICHEN}<span className="nur-vorlesen">{t.art === "werkzeug" ? "Finanztool" : "Leseabschnitt"}</span></span>

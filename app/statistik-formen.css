@@ -40,7 +40,11 @@
 }
 
 /* ── Gemeinsamer Rahmen ───────────────────────────────────────────────────────────── */
-.faden-shell .st { display: block; margin: 22px 0 0; }
+/* 🚨 `clear: both` ist Pflicht, nicht Kosmetik. Ohne das beginnt eine Statistik neben
+   einer umflossenen Anzeige — und ihre Oberlinie (st--rahmen-oben, st--rahmen-unterlinie)
+   läuft dann mitten durch die Anzeigenfläche. Eine Linie, die durch Werbung läuft, sieht
+   nach Fehler aus; eine volle Satzbreite darf nie neben einem Float anfangen. */
+.faden-shell .st { display: block; clear: both; margin: 22px 0 0; }
 .faden-shell .st[data-stand="ruht"] { opacity: 0; }
 .faden-shell .st[data-stand="zeigt"] { animation: fl-herz .9s cubic-bezier(.2,.8,.2,1) both; }
 
@@ -62,8 +66,14 @@
 .faden-shell .st--rahmen-unterlinie .st__unter { margin: 4px 0 0; }
 
 .faden-shell .st__unter { font: italic 300 12.5px var(--serif); color: var(--muted); }
-.faden-shell .st__hinweis,
-.faden-shell .st__quelle { margin: 8px 0 0; font: italic 300 12px var(--serif); color: var(--muted); }
+/* Hinweis und Quelle standen beide auf 8 px Abstand und 12 px ohne eigene Zeilenhöhe —
+   zusammen mit der Form darüber ergab das drei Zeilen auf Stoß. Jetzt trennt der Hinweis
+   die Form ab, und die Quelle hängt an ihm. */
+.faden-shell .st__hinweis { margin: 14px 0 0; font: italic 300 12.5px/1.55 var(--serif); color: var(--muted); }
+.faden-shell .st__quelle { margin: 6px 0 0; font: italic 300 12.5px/1.55 var(--serif); color: var(--muted); }
+/* Ohne Hinweis darüber braucht die Quelle den vollen Abstand selbst. */
+.faden-shell .st__hinweis + .st__quelle { margin-top: 4px; }
+.faden-shell .st > .st__quelle:not(.st__hinweis + .st__quelle) { margin-top: 14px; }
 .faden-shell .st__quelle a { color: inherit; }
 
 /* ── Kreisdiagramm (Handoff 948–965) ──────────────────────────────────────────────── */

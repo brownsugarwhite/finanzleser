@@ -12,7 +12,6 @@
  * „Keine Kartenboxen mit Schatten im Faden.“
  */
 import type { Statistik as StatistikDaten, StatistikArt } from "@/lib/statistik/schema";
-import { FORM_NAME } from "@/lib/statistik/schema";
 import { useZeichnen } from "@/lib/statistik/useZeichnen";
 
 import Kreis from "./formen/Kreis";
@@ -76,7 +75,10 @@ function Form({ st }: { st: StatistikDaten }) {
 export default function Statistik({ st }: { st: StatistikDaten }) {
   const [wurzel, , stand] = useZeichnen<HTMLElement>();
   const rahmen = RAHMEN[st.art];
-  const kicker = `${st.kicker || FORM_NAME[st.art]} · ${st.titel}`;
+  // 🚨 Die Form steht NICHT mehr im Kicker. „Kreisdiagramm · Wofür die Hausrat zahlt"
+  // erklärt dem Leser nichts, was er nicht sieht — die Überschrift reicht. Nur wo die
+  // Redaktion bewusst ein Präfix gesetzt hat („Statistik", „Vergleich"), bleibt es stehen.
+  const kicker = st.kicker ? `${st.kicker} · ${st.titel}` : st.titel;
   const q = st.quelle;
 
   return (

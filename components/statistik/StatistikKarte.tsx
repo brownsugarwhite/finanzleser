@@ -21,7 +21,7 @@ import { useMemo, useState } from "react";
 import type { FadenStatistik, StatistikWert } from "@/lib/types";
 import { useRates } from "@/lib/hooks/useRates";
 import { rechne, formatWert } from "@/lib/statistik/formeln";
-import { FORM_NAME, PALETTE } from "@/lib/statistik/schema";
+import { PALETTE } from "@/lib/statistik/schema";
 import Kreis from "./formen/Kreis";
 import Saeulen from "./formen/Saeulen";
 import Balkenliste from "./formen/Balkenliste";
@@ -30,9 +30,6 @@ import { useZeichnen } from "@/lib/statistik/useZeichnen";
 export const FARBEN = PALETTE;
 
 export interface Segment extends StatistikWert { farbe: string; aus: boolean; hervor: boolean; ihr?: boolean }
-
-/** Der Kicker trägt denselben Formnamen wie bei den Blöcken. */
-const KICKER: Record<FadenStatistik["art"], string> = { torte: FORM_NAME.kreis, saeulen: FORM_NAME.saeulen, balken: "Statistik" };
 
 export default function StatistikKarte({ st }: { st: FadenStatistik }) {
   const rates = useRates();
@@ -68,9 +65,12 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
   const q = st.quelle;
 
   return (
-    <section ref={wurzel} className={`st st--bestand st--${st.art} st--rahmen-oben`} data-stand={stand} aria-label={st.titel}>
+    /* Kein aria-label: die h3 darunter benennt den Block. Beides zusammen läse denselben Text zweimal. */
+    <section ref={wurzel} className={`st st--bestand st--${st.art} st--rahmen-oben`} data-stand={stand}>
       <div className="st__kopf">
-        <span className="kicker">{KICKER[st.art]} · {st.titel}</span>
+        {/* Wie bei den Block-Statistiken: nur die Überschrift, nicht die Form.
+            Als h3 gliedert sie den Beitrag mit. */}
+        <h3 className="kicker">{st.titel}</h3>
         {st.untertitel && <p className="st__unter">{st.untertitel}</p>}
       </div>
 
