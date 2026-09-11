@@ -25,6 +25,7 @@ import { flushSync } from "react-dom";
 import ToolDots from "@/components/ui/ToolDots";
 import { boldYears } from "@/components/ui/MegaPostContent";
 import { ankerHalten } from "@/lib/faden/aufklappen";
+import { kopfHoehe } from "@/lib/faden/scrollen";
 import type { SpaltenRubrik } from "@/lib/faden/spalten";
 
 /** So viel vom Körper steht im Ruhestand offen. */
@@ -52,6 +53,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
   const [hoehe, setHoehe] = useState<number | null>(wieder ? null : PEEK);
   const koerper = useRef<Record<string, HTMLDivElement | null>>({});
   const kopf = useRef<Record<string, HTMLButtonElement | null>>({});
+  const blatt = useRef<Record<string, HTMLElement | null>>({});
   const stapel = useRef<HTMLElement>(null);
   // Wie weit sich der Stapel über das Kopfblatt zieht, solange ein Blatt offen steht.
   const [ueberdeckung, setUeberdeckung] = useState(0);
@@ -85,12 +87,28 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
    *  3. Umschalten und den angeklickten Kopf dabei über die ganze Fahrt an seiner Stelle
    *     halten — die Bewegung findet ja oberhalb von ihm statt.
    */
+  /**
+   * Wohin die Oberkante des Blattes soll, damit es aufgeschlagen lesbar steht: unter den
+   * Kopf — aber nur, wenn es an seiner jetzigen Stelle nicht ganz ins Bild passt. Steht es
+   * schon gut, bleibt der Blick, wo er ist; ein Sprung ohne Grund ist schlimmer als keiner.
+   */
+  const lesestelle = (key: string, koerperZiel: number): number | undefined => {
+    const el = blatt.current[key];
+    if (!el) return undefined;
+    const oben = kopfHoehe() + 12;
+    const r = el.getBoundingClientRect();
+    const jetzt = koerper.current[key]?.getBoundingClientRect().height || 0;
+    const nachher = r.height - jetzt + koerperZiel;
+    const passt = r.top >= oben && r.top + nachher <= window.innerHeight - 16;
+    return passt ? undefined : oben;
+  };
+
   const fahren = (zielKey: string, anker: HTMLElement | null) => {
     const altEl = koerper.current[aktiv];
     if (hoehe === null && altEl) flushSync(() => setHoehe(Math.round(altEl.getBoundingClientRect().height)));
     const ziel = zielKey ? Math.round(koerper.current[zielKey]?.scrollHeight || PEEK) : 0;
     const deckung = zielKey ? messeUeberdeckung() : 0;
-    ankerHalten(anker, FAHRT + 60);
+    ankerHalten(anker, FAHRT + 60, zielKey ? lesestelle(zielKey, ziel) : undefined);
     flushSync(() => {
       setBeruehrt(true);
       setAktiv(zielKey);
@@ -102,7 +120,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
     if (zielKey) setTimeout(() => setHoehe((h) => (h === ziel ? null : h)), FAHRT + 40);
   };
 
-  const umschalten = (key: string) => fahren(aktiv === key && beruehrt ? "" : key, kopf.current[key]);
+  const umschalten = (key: string) => fahren(aktiv === key && beruehrt ? "" : key, blatt.current[key] || kopf.current[key]);
 
   // Wiederbelebt mit offenem Blatt: die Überdeckung lässt sich erst messen, wenn alles steht.
   useLayoutEffect(() => { if (wieder && start !== "zu") setUeberdeckung(messeUeberdeckung()); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -147,6 +165,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
             key={r.key}
             className={"kiosk-blatt kiosk__blatt" + (offen ? " ist-offen" : "")}
             data-key={r.key}
+            ref={(el) => { blatt.current[r.key] = el; }}
             // Das spätere Blatt liegt oben und wirft seinen Schatten auf das vorige.
             style={{ zIndex: i + 1 }}
           >

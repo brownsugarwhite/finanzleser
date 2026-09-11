@@ -64,31 +64,39 @@ export function verbergen(el: HTMLElement | null): Promise<void> {
  * Hart nachführen (Regel 3 des Scroll-Plans), und sobald der Leser selbst scrollt, ist
  * Schluss: sein Scrollen gewinnt.
  */
-export function ankerHalten(anker: HTMLElement | null, dauer = DAUER + 60): void {
+export function ankerHalten(anker: HTMLElement | null, dauer = DAUER + 60, zielTop?: number): void {
   if (!anker) return;
-  const soll = anker.getBoundingClientRect().top;
+  const start = anker.getBoundingClientRect().top;
+  // Mit Ziel wandert der Anker über dieselbe Zeit an seine neue Stelle, statt stehen zu
+  // bleiben: die Bewegung der Höhe und die des Blicks sind dann EINE Bewegung. Die Kurve
+  // ist ein Ease-out wie die des Übergangs (nicht dieselbe Formel, aber derselbe Verlauf —
+  // unterwegs ein paar Pixel Unterschied, am Ende auf den Pixel genau).
+  const wandern = typeof zielTop === "number" && Math.abs(zielTop - start) >= 1;
+  const laufDauer = reduzierteBewegung() ? 0 : dauer;
+  const soll = (t: number) => (wandern ? start + (zielTop! - start) * (1 - (1 - t) ** 3) : start);
+  const t0 = performance.now();
   let halten = true;
   const stop = () => { halten = false; };
   const opts: AddEventListenerOptions = { passive: true };
   window.addEventListener("wheel", stop, opts);
   window.addEventListener("touchmove", stop, opts);
   window.addEventListener("keydown", stop, opts);
-  const bis = performance.now() + dauer;
   let lauf = 0;
-  const nach = () => {
-    const d = anker.getBoundingClientRect().top - soll;
+  const nach = (t: number) => {
+    const d = anker.getBoundingClientRect().top - soll(t);
     if (Math.abs(d) >= 1) window.scrollBy({ top: d, behavior: "instant" });
   };
   const takt = () => {
-    if (!halten || performance.now() > bis) {
-      if (halten) nach();
+    const t = laufDauer ? Math.min(1, (performance.now() - t0) / laufDauer) : 1;
+    if (!halten || t >= 1) {
+      if (halten) nach(1);
       cancelAnimationFrame(lauf);
       window.removeEventListener("wheel", stop);
       window.removeEventListener("touchmove", stop);
       window.removeEventListener("keydown", stop);
       return;
     }
-    nach();
+    nach(t);
     lauf = requestAnimationFrame(takt);
   };
   lauf = requestAnimationFrame(takt);
