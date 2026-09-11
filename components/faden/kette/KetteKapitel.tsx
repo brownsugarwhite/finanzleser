@@ -23,7 +23,7 @@ import Statistik from "@/components/statistik/Statistik";
 import Insel from "./Insel";
 import { Fragment } from "react";
 import { CATEGORY_ICONS } from "@/lib/categoryIcons";
-import GamificationEmbed from "@/components/gamification/GamificationEmbed";
+import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
 import KapitelKopf from "@/components/faden/KapitelKopf";
 import FazitHeading from "@/components/ui/FazitHeading";
 import Weiterlesen from "./Weiterlesen";
@@ -60,7 +60,7 @@ function Teile({ teile, toolData, auftakt }: { teile: Teil[]; toolData?: Article
           erstesHtml = false;
           return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html, { spalten: auftakt && zuerst, initiale: auftakt && zuerst }))} dangerouslySetInnerHTML={{ __html: t.html }} />;
         }
-        if (t.art === "spiel") return <div key={i} className="spiel-inline"><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><GamificationEmbed gamType={t.typ} fields={t.felder} /></Insel></div>;
+        if (t.art === "spiel") return <div key={i} className="spiel-satz"><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><FadenSpiel typ={t.typ} felder={t.felder} /></Insel></div>;
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         // Statistik aus einem Gutenberg-Block: steht genau dort, wo die Redaktion sie gesetzt hat —
         // anders als die Bestandsstatistiken, die der Abschnitt ans Ende hängt.

@@ -970,10 +970,10 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .prose .table-scroll-inner { min-width: 0; }
 
 /* ---------- Karten mit echten Körpern (Rechner, Checkliste, Dokumente, Vergleich, Anbieter, Text) ---------- */
-/* Werkzeuge und Spiele stehen ohne Kasten im Fluss — die Werkzeug-Überschrift trägt
-   die Marke, die Spiele bringen ihren eigenen Rahmen mit. Vom .kasten bleiben nur die
-   Maße: Abstand, Sprungziel für das Inhaltsverzeichnis, Abbruch der Textumfließung. */
-.faden-shell .werkzeug-block, .faden-shell .spiel-inline { position: relative; display: grid; gap: 10px; clear: both; margin: 22px 0 24px; scroll-margin-top: 110px; min-width: 0; max-width: 100%; }
+/* Werkzeuge stehen ohne Kasten im Fluss — die Überschrift trägt die Marke. Vom .kasten
+   bleiben nur die Maße: Abstand, Sprungziel für das Inhaltsverzeichnis, Abbruch der
+   Textumfließung. Die Spiele haben ihr eigenes Raster in app/spiele.css (.spiel-satz). */
+.faden-shell .werkzeug-block { position: relative; display: grid; gap: 10px; clear: both; margin: 22px 0 24px; scroll-margin-top: 110px; min-width: 0; max-width: 100%; }
 .faden-shell .article-tool-label { display: flex; flex-wrap: wrap; align-items: center; row-gap: 4px; column-gap: 10px; margin: 0 0 6px; padding: 0; border: 0; font-size: unset; font-weight: unset; line-height: unset; }
 @media (max-width: 900px) {
   .faden-shell .article-tool-badge { font-size: 26px; padding: 7px 10px; }
