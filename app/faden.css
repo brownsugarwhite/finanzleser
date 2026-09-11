@@ -44,7 +44,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    (assets/smallAroowTip.svg, viewBox 7.62 × 14.37). Als Maske eingebunden,
    damit die Farbe aus `background` kommt und die vorhandenen `<i/>` bleiben.
    Ersetzt die früheren Chevrons aus border-top/-right: die saßen schief auf
-   der Schaftlinie und hatten eine andere Spitze als das Megamenü. */
+   der Schaftlinie und hatten eine andere Spitze als das Megamenü.
+   🚨 Maße 1:1 aus MegaArrowTrail: Spitze 8 px hoch (× 7.62/14.37 = 4,24 px breit),
+   Schaft 1 px stark. Nicht größer skalieren — sie fällt sonst sofort auf. */
 .faden-shell { --pfeilspitze: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%207.62%2014.37'%3E%3Cpath%20d='M.03,13.84c-.16.44.45.74.72.36,1.35-1.87,4.75-5.02,6.62-6.49.35-.27.34-.8-.02-1.06C5.15,5.05,2.12,2.08.74.17.47-.2-.12.09.03.53c.78,2.28,2.56,4.41,3.22,5.82.26.56.28,1.15,0,1.71C2.58,9.45.71,11.93.03,13.84Z'/%3E%3C/svg%3E"); }
 .faden-shell .spark { width: 12px; height: 12px; display: inline-block; flex: none; vertical-align: middle; transition: transform .4s; color: var(--ink); }
 .faden-shell .spark:hover { animation: faden-spark-spin 4s linear infinite; }
@@ -53,9 +55,9 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .textlink--still { color: var(--muted); font-weight: 600; }
 .faden-shell .textlink:hover { text-decoration: underline; }
 .faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; border: 0; background: none; padding: 0; text-decoration: none; }
-.faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1.5px; background: currentColor; position: relative; transition: width .25s; }
+.faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1px; background: currentColor; position: relative; transition: width .25s; }
 /* Spitze sitzt 3 px über dem Linienende — wie MegaArrowTrail (marginLeft: -3). */
-.faden-shell .pfeil-link i::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 5.83px; height: 11px; transform: translateY(-50%); background: currentColor; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
+.faden-shell .pfeil-link i::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 4.24px; height: 8px; transform: translateY(-50%); background: currentColor; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
 .faden-shell .pfeil-link:hover i { width: 30px; }
 .faden-shell .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; white-space: nowrap; text-decoration: none; line-height: 1.3; }
 .faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
@@ -159,7 +161,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    dunklen Pille gruen statt weiss zu werden. */
 .faden-shell .register__reihe > [data-key="plus"] { color: var(--green); }
 .faden-shell .register .offen { color: var(--pink); }
-.faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
+/* 🚨 Wie bei [data-key="plus"]: per Kindkombinator nur der Knopf. Ungescoped traf die
+   Regel auch die `.punkte-zahl` in der Lupe und färbte die Punktzahl in der dunklen
+   Pille grau statt weiss. */
+.faden-shell .register__reihe > button .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
+.faden-shell .nav-lupe__reihe .punkte-zahl { font: 600 12px/1 var(--sans); margin-left: 2px; }
 .faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
 
 /* Nav-Pille als Lupe — Portierung aus dem Prototyp (leo-faden.html:296-306).
@@ -495,7 +501,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .inhalt__nr .dot { width: 10px; height: 10px; }
 .faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
 .faden-shell .inhalt__linie { display: block; height: 1px; background: var(--rule-strong); position: relative; }
-.faden-shell .inhalt__linie::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 5.3px; height: 10px; transform: translateY(-50%); background: var(--rule-strong); -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
+.faden-shell .inhalt__linie::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 4.24px; height: 8px; transform: translateY(-50%); background: var(--rule-strong); -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
 .faden-shell .inhalt__titel { font: italic 400 16.5px/1.35 var(--serif); }
 .faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
 .faden-shell .inhalt__zeile a:hover .inhalt__linie { width: 100%; }
@@ -1080,7 +1086,6 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 }
 
 /* ── Belohnung, Serie, kleine Flüge (Port aus dem Prototyp, 01-css.html:248, 629, 697–703) ── */
-.faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
 .faden-shell .belohnung { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) scale(.4); z-index: 6; background: var(--pink); color: #fff; font-family: var(--serif); font-weight: 900; font-size: 30px; padding: 10px 26px; border-radius: 999px; box-shadow: 0 14px 34px rgba(211,0,94,.35); opacity: 0; pointer-events: none; white-space: nowrap; }
 .faden-shell .belohnung.an { animation: belohnung 2.2s cubic-bezier(.2,.9,.3,1) forwards; }
 @keyframes belohnung { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.4); } 18% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); } 30% { transform: translate(-50%, -50%) scale(1); } 75% { opacity: 1; transform: translate(-50%, -80%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -110%) scale(.9); } }
