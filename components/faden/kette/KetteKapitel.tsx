@@ -52,6 +52,9 @@ function Teile({ teile, toolData, auftakt }: { teile: Teil[]; toolData?: Article
   // Zweispaltig und mit Initiale wird nur der ERSTE Fließtext-Block des ersten Abschnitts —
   // so steht es im Handoff (Zeile 403 gegen 585). Alles danach läuft über die volle Breite.
   let erstesHtml = true;
+  // Ein Paar besteht aus zwei aufeinanderfolgenden Spielen; gerendert wird es beim
+  // ZWEITEN, damit beide in dasselbe Raster fallen.
+  let paarOffen = false;
   return (
     <>
       {teile.map((t, i) => {
@@ -60,7 +63,34 @@ function Teile({ teile, toolData, auftakt }: { teile: Teil[]; toolData?: Article
           erstesHtml = false;
           return <div key={i} className={cn("prose fliess__html", zeitungKlassen(t.html, { spalten: auftakt && zuerst, initiale: auftakt && zuerst }))} dangerouslySetInnerHTML={{ __html: t.html }} />;
         }
-        if (t.art === "spiel") return <div key={i} className="spiel-satz"><Insel typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><FadenSpiel typ={t.typ} felder={t.felder} /></Insel></div>;
+        // Spiel im Satz: allein, neben einer Anzeige, oder als Paar mit dem nächsten
+        // Spiel. Die Form steht im Modell (lib/faden/spielsatz.ts), nicht hier — sonst
+        // sähe ein wiederbelebtes Kapitel anders aus als beim ersten Mal.
+        if (t.art === "spiel") {
+          const form = t.satz?.form ?? "voll";
+          // Beim Paar trägt das ERSTE Spiel das Raster, das zweite fällt als Kind hinein.
+          if (form === "paar" && !paarOffen) {
+            paarOffen = true;
+            return null;
+          }
+          const inhalt = <Insel key={i} typ="spiel" werte={{ typ: t.typ, felder: t.felder }}><FadenSpiel typ={t.typ} felder={t.felder} /></Insel>;
+          if (form === "paar") {
+            paarOffen = false;
+            const vorher = teile[i - 1];
+            return (
+              <div key={i} className="spiel-satz spiel-satz--paar">
+                {vorher?.art === "spiel" && <Insel typ="spiel" werte={{ typ: vorher.typ, felder: vorher.felder }}><FadenSpiel typ={vorher.typ} felder={vorher.felder} /></Insel>}
+                {inhalt}
+              </div>
+            );
+          }
+          return (
+            <div key={i} className={`spiel-satz spiel-satz--${form}`}>
+              {inhalt}
+              {form !== "voll" && <Einschub format="rectangle" variante="neben" nr={t.satz?.anzeigeNr ?? 0} />}
+            </div>
+          );
+        }
         if (t.art === "einwurf") return <a key={i} className="einwurf einwurf--zeiger" href={`#${t.ziel}`}>Leo wirft ein: {t.grund} <span>{EINWURF_ZIEL[t.typ]} unten im Beitrag ↓</span></a>;
         // Statistik aus einem Gutenberg-Block: steht genau dort, wo die Redaktion sie gesetzt hat —
         // anders als die Bestandsstatistiken, die der Abschnitt ans Ende hängt.

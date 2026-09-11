@@ -18,6 +18,7 @@
 import type { FadenEinwurf, FadenFelder, FadenFrage, FadenStatistik, Post } from "@/lib/types";
 import { parseContent, normalizeFaq, extractFaqBlock, normalizeTableHead, wrapTables, stripTags } from "@/lib/articleHtml";
 import { parseStatistik, type Statistik } from "@/lib/statistik/schema";
+import { satzFolge, type SpielSatz } from "./spielsatz";
 import { medienHtml, medienUrl } from "./medien";
 import { getCategoryPair, buildPostUrl } from "@/lib/urls";
 import { getReadingTimeMinutes } from "@/lib/content-utils";
@@ -28,7 +29,7 @@ export type WerkzeugTyp = "rechner" | "checkliste" | "vergleich" | "dokumente";
 export type Teil =
   | { art: "html"; html: string }
   | { art: "embed"; typ: WerkzeugTyp; slug: string; slugs?: string[]; grund?: string; vonLeo?: boolean; nachtrag?: boolean }
-  | { art: "spiel"; typ: string; felder: Record<string, string> }
+  | { art: "spiel"; typ: string; felder: Record<string, string>; satz?: SpielSatz }
   /** Statistik aus einem Gutenberg-Block — steht genau dort, wo die Redaktion sie gesetzt hat. */
   | { art: "statistik"; werte: Statistik }
   /** Leos Einwurf im Abschnitt: verweist auf die Werkzeugkarte am Ende des Beitrags. */
@@ -271,6 +272,22 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     a.fragen = faden.leoFragen.filter((f) => f.abschnitt === a.id);
     a.statistiken = faden.statistiken.filter((st) => st.abschnitt === a.id);
   }
+
+  // 4b) Satzform je Spiel. Alle Spielteile des Beitrags in Dokumentreihenfolge einsammeln,
+  //     durchnummerieren und die Formen vergeben — allein, neben einer Anzeige, oder als
+  //     Paar. Deterministisch aus dem Slug, siehe lib/faden/spielsatz.ts.
+  const spielTeile: Extract<Teil, { art: "spiel" }>[] = [];
+  const nachbarn: boolean[] = [];
+  for (const a of fach) {
+    a.teile.forEach((t, i) => {
+      if (t.art !== "spiel") return;
+      spielTeile.push(t);
+      // Steht direkt danach noch ein Spiel, ohne Text dazwischen? Dann werden es zwei
+      // halbe Spalten nebeneinander.
+      nachbarn.push(a.teile[i + 1]?.art === "spiel");
+    });
+  }
+  satzFolge(spielTeile.length, nachbarn, post.slug).forEach((satz, i) => { spielTeile[i].satz = satz; });
 
   // 5) Kopfdaten.
   const { main, sub } = getCategoryPair(post.categories);
