@@ -569,17 +569,31 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
   margin: 0;
 }
 
-.faden-shell .faq-kopf { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 700; font-size: 22px; }
-.faden-shell .faq-kopf i { font-style: normal; color: var(--muted); letter-spacing: 6px; font-size: 14px; opacity: .6; }
-.faden-shell dl.faq { margin: 0; display: grid; gap: 6px; }
-.faden-shell .faq__paar { border-bottom: 1px solid var(--rule); padding: 6px 0 8px; }
-.faden-shell .faq dt { font-weight: 700; font-family: var(--serif); font-size: 16.5px; margin: 6px 0 4px; }
-.faden-shell .faq dd { margin: 0; }
-.faden-shell .fazit-kopf { display: flex; align-items: center; gap: 12px; }
-.faden-shell .fazit-kopf::before, .faden-shell .fazit-kopf::after { content: ""; flex: 1; border-top: 1px solid var(--rule-strong); }
-.faden-shell .fazit-kopf span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--serif); font-weight: 700; font-size: 16px; }
-.faden-shell .fazit-kopf img { width: 28px; height: 28px; }
-.faden-shell .fazit { border-left: 3px solid var(--rule-strong); padding-left: 14px; font-family: var(--serif); font-size: 16px; }
+/* ---------- Häufige Fragen (Handoff 721–731) ---------- */
+.faden-shell .abschnitt--faq, .faden-shell .abschnitt--fazit { margin-top: 50px; }
+.faden-shell .faq { margin: 0; display: block; }
+.faden-shell .faq__paar { border-bottom: 1px solid var(--rule-fein); }
+.faden-shell .faq__frage { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px; width: 100%; border: 0; background: transparent; padding: 14px 2px; text-align: left; color: var(--ink); cursor: pointer; transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .faq__frage:hover { padding-left: 8px; }
+.faden-shell .faq__nr { font: 900 18px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .faq__frage[aria-expanded="true"] .faq__nr { color: var(--green); }
+.faden-shell .faq__text { font: 600 16px/1.35 var(--serif); }
+/* Der Winkel aus zwei Kanten — zeigt zu, dreht beim Öffnen nach oben. */
+.faden-shell .faq__winkel { width: 9px; height: 9px; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(45deg) translate(-2px, -2px); transition: transform .4s cubic-bezier(.2,.8,.2,1); margin-right: 6px; }
+.faden-shell .faq__winkel--auf { transform: rotate(225deg) translate(-2px, -2px); }
+/* 🚨 0fr → 1fr statt height/display: die Antwort bleibt im HTML, auch zugeklappt.
+   Daran hängen die FAQPage-Daten und jeder Textauszug. */
+.faden-shell .faq__klappe { display: grid; transition: grid-template-rows .5s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .faq__klappe > div { overflow: hidden; }
+/* Die Antwort flieht unter den Fragetext: 28 px Nummernspalte + 12 px Abstand. */
+.faden-shell .faq__antwort { padding: 0 2px 16px 40px; font: 400 15px/1.7 var(--sans); color: var(--ink); }
+.faden-shell .faq__antwort p:last-child { margin-bottom: 0 !important; }
+
+/* ---------- Fazit (Handoff 734–742) ---------- */
+/* Schlicht wie in der Vorlage: Zeichen und Wort nebeneinander, keine Flankenlinien. */
+.faden-shell .fazit-kopf { display: inline-flex; align-items: center; gap: 8px; font: 700 16px var(--serif); color: var(--ink); }
+.faden-shell .fazit-kopf img { width: 22px; height: 22px; }
+.faden-shell .fazit { margin-top: 10px; border-left: 3px solid var(--rule-strong); padding-left: 16px; font: 400 16px/1.65 var(--serif); color: var(--ink); }
 .faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; align-items: center; }
 .faden-shell .dazu { display: grid; gap: 0; }
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
@@ -981,7 +995,21 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 }
 /* Fazit-Überschrift der Live-Seite: `.faden-shell h2` setzt margin:0 und schlägt
    `.fazit-heading` in der Spezifität — der Abstand muss hier stehen. */
-.faden-shell .fazit-heading { margin: 34px 0 20px; }
+/* Im Faden ist das Fazit schlicht wie in der Vorlage (Handoff 734–736): Zeichen und Wort
+   nebeneinander, links am Satzspiegel, 22 px Zeichen, 16 px Schrift. Die Flankenlinien und
+   der 96er-Stempel der alten Seite entfallen — dort bleiben sie unverändert. */
+.faden-shell .fazit-heading { display: inline-flex; align-items: center; gap: 8px; margin: 0; font: 700 16px var(--serif) !important; }
+.faden-shell .fazit-heading .fazit-line { display: none; }
+.faden-shell .fazit-heading .fazit-badge { width: 22px; height: 22px; }
+.faden-shell .fazit-heading .fazit-starburst { width: 22px; height: 22px; }
+.faden-shell .fazit-heading .fazit-circle { top: 1.6px; left: 1.6px; width: 18.8px; height: 18.8px; }
+/* Die beiden Striche im Kreis und das Wort im Stempel sind auf 96 px gerechnet; bei 22 px
+   verschwimmen sie zu einem Fleck. Das Wort steht daneben. */
+.faden-shell .fazit-heading .fazit-inner-line { display: none; }
+/* Das Wort steckt im Markup IM Stempel (die alte Seite setzt es dort mittig hinein).
+   Bei 22 px läge es darüber — also nach rechts heraus, neben das Zeichen. */
+.faden-shell .fazit-heading .fazit-badge { overflow: visible; }
+.faden-shell .fazit-heading .fazit-text { position: absolute; left: 100%; margin-left: 8px; white-space: nowrap; font: 700 16px/1 var(--serif); color: var(--ink); }
 .faden-shell .kasten__koerper.article-tool-embed { margin-top: 0; }
 .faden-shell .kasten--rechner .rechner-title { display: none; }
 .faden-shell .kasten--rechner .rechner-layout, .faden-shell .kasten--checkliste .checkliste-layout { max-width: none; }

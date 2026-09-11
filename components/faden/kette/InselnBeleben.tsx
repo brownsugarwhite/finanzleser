@@ -35,6 +35,7 @@ const WochenbriefForm = dynamic(() => import("@/components/faden/WochenbriefForm
 const FadenSpiel = dynamic(() => import("@/components/faden/spiele/FadenSpiel"));
 const Spalten = dynamic(() => import("@/components/faden/spalten/Spalten"));
 const Schlange = dynamic(() => import("@/components/faden/spiele/Schlange"));
+const FaqListe = dynamic(() => import("./FaqListe"));
 const Vorlesen = dynamic(() => import("@/components/faden/Vorlesen"));
 
 interface Gefunden { el: HTMLElement; typ: InselTyp; arg: string; werte: unknown }
@@ -54,6 +55,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "wochenbrief") return <WochenbriefForm />;
   if (typ === "spalten") return werte ? <Spalten rubriken={werte as SpaltenRubrik[]} /> : null;
   if (typ === "schlange") return <Schlange />;
+  if (typ === "faq") return werte ? <FaqListe paare={werte as { q: string; a: string }[]} /> : null;
   if (typ === "vorlesen") return arg ? <Vorlesen zielId={arg} /> : null;
   return null;
 }

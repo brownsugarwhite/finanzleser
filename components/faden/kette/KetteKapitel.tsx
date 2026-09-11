@@ -27,6 +27,7 @@ import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
 import KapitelKopf from "@/components/faden/KapitelKopf";
 import FazitHeading from "@/components/ui/FazitHeading";
 import Weiterlesen from "./Weiterlesen";
+import FaqListe from "./FaqListe";
 import Aktionen from "./Aktionen";
 import WerkzeugKarte, { toolTitel, werkzeugTitel } from "./WerkzeugKarte";
 import AbschnittTeilen from "./AbschnittTeilen";
@@ -224,22 +225,20 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           ))}
           {k.faq.length > 0 && (
             <section className="abschnitt abschnitt--faq" id={k.faqId} data-toc-titel="Häufige Fragen">
-              <div className="faq-kopf"><i>???</i>Häufige Fragen<i>???</i></div>
-              <Einschub format="rectangle" variante="umflossen" nr={1} />
-              <dl className="faq">
-                {k.faq.map((f, i) => (
-                  <div key={i} className="faq__paar">
-                    <dt>{f.q}</dt>
-                    <dd className="prose" dangerouslySetInnerHTML={{ __html: f.a }} />
-                  </div>
-                ))}
-              </dl>
+              <div className="spiel-kopf">
+                <h2 className="kicker">Häufige Fragen</h2>
+                <span className="spiel-kopf__hinweis">Antippen öffnet die Antwort</span>
+              </div>
+              <Insel typ="faq" werte={k.faq}><FaqListe paare={k.faq} /></Insel>
             </section>
           )}
           {k.fazitHtml && (
             <section className="abschnitt abschnitt--fazit" id={k.fazitId} data-toc-titel="Fazit">
               <FazitHeading />
-              <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
+              {/* Ohne Initiale: die Vorlage setzt sie nur im Auftakt (Handoff 404/585),
+                  das Fazit läuft dort schlicht (734–742). Zwei Initialen in einem Beitrag
+                  wären auch eine zu viel. */}
+              <div className="fazit prose" dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>
           )}
           {/* Statistiken, die außerhalb eines Fachabschnitts gesetzt wurden (FAQ, Fazit,
