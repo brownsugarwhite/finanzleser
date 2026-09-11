@@ -71,13 +71,31 @@ function Teile({ teile, toolData, auftakt }: { teile: Teil[]; toolData?: Article
   );
 }
 
+/**
+ * Wo im Beitrag eine umflossene Anzeige steht — deterministisch aus dem Abschnittsindex,
+ * damit Server und Client dasselbe rendern.
+ *
+ * 🚨 Nie im Auftakt: der ist als einziger zweispaltig, und ein Mehrspalten-Block umfließt
+ * keinen Float (siehe lib/faden/zeitung.ts). Die Seite wechselt, damit der Satz nicht
+ * einseitig wird.
+ */
+function anzeigeIm(i: number, n: number): "umflossen" | "umflossen-links" | null {
+  if (i === 2) return "umflossen";
+  if (n >= 6 && i === Math.floor(n / 2) + 1) return "umflossen-links";
+  return null;
+}
+
 function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n: number; toolData?: ArticleToolData; url: string }) {
+  const anzeige = anzeigeIm(i, n);
   return (
     <section className="abschnitt" id={a.id} data-toc-titel={a.titel}>
       <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       <span className="kicker">Abschnitt {i + 1} von {n}</span>
       <h2 className="abschnitt__titel" dangerouslySetInnerHTML={{ __html: a.titelHtml || a.titel }} />
-      <div className="fliess"><Teile teile={a.teile} toolData={toolData} auftakt={i === 0} /></div>
+      <div className={cn("fliess", anzeige && "fliess--umflossen")}>
+        {anzeige && <Einschub format="rectangle" variante={anzeige} nr={i} />}
+        <Teile teile={a.teile} toolData={toolData} auftakt={i === 0} />
+      </div>
       {a.statistiken.map((st, j) => <Insel key={j} typ="statistik" werte={st}><StatistikKarte st={st} /></Insel>)}
       {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
     </section>
@@ -169,7 +187,8 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
           {k.abschnitte.map((a, i) => (
             <Fragment key={a.id}>
               <AbschnittBlock a={a} i={i} n={k.abschnitte.length} toolData={toolData} url={k.url} />
-              {i === 1 && <Einschub format="leaderboard" variante="artikel" nr={1} />}
+              {/* Anzeigenband über die volle Breite, direkt nach dem Auftakt (Handoff 1271). */}
+              {i === 0 && <Einschub format="band" variante="artikel" nr={0} />}
             </Fragment>
           ))}
           {k.faq.length > 0 && (

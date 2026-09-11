@@ -6,9 +6,12 @@
  */
 import EinschubKlick from "./EinschubKlick";
 
-export type EinschubFormat = "leaderboard" | "rectangle" | "halfpage" | "skyscraper" | "square" | "mobile";
+export type EinschubFormat = "band" | "leaderboard" | "rectangle" | "halfpage" | "skyscraper" | "square" | "mobile";
 
 const BILDER: Record<EinschubFormat, { name: string; w: number; h: number }[]> = {
+  // „band" ist das Format aus Handoff Zeile 1271: volle Satzbreite, genau 90 px hoch,
+  // Haarlinie ringsum, das Motiv mittig darin — nicht gestreckt.
+  band: [{ name: "lb-kontora", w: 728, h: 90 }, { name: "lb-steuerfuchs", w: 728, h: 90 }],
   leaderboard: [{ name: "lb-kontora", w: 728, h: 90 }, { name: "lb-steuerfuchs", w: 728, h: 90 }],
   rectangle: [{ name: "mr-nordlicht", w: 300, h: 250 }, { name: "mr-pfotenschutz", w: 300, h: 250 }],
   halfpage: [{ name: "hp-nordlicht", w: 300, h: 600 }, { name: "hp-baufix", w: 300, h: 600 }],
@@ -17,7 +20,7 @@ const BILDER: Record<EinschubFormat, { name: string; w: number; h: number }[]> =
   mobile: [{ name: "mo-pfotenschutz", w: 320, h: 100 }, { name: "mo-steuerfuchs", w: 320, h: 100 }],
 };
 
-export default function Einschub({ format, variante, nr = 0 }: { format: EinschubFormat; variante?: "top" | "feed" | "artikel" | "umflossen"; nr?: number }) {
+export default function Einschub({ format, variante, nr = 0 }: { format: EinschubFormat; variante?: "top" | "feed" | "artikel" | "umflossen" | "umflossen-links" | "neben"; nr?: number }) {
   const liste = BILDER[format];
   const bild = liste[nr % liste.length];
   const schmal = format === "leaderboard" ? BILDER.mobile[nr % BILDER.mobile.length] : null;

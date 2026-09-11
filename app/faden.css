@@ -942,6 +942,16 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .einschub--feed { padding: 12px 0 16px; }
 .faden-shell .einschub--artikel { padding: 6px 0 10px; }
 .faden-shell .einschub--umflossen { float: right; width: 300px; margin: 6px 0 14px 26px; }
+/* Gegenstück nach links, damit die Anzeigen im Beitrag die Seite wechseln. */
+.faden-shell .einschub--umflossen-links { float: left; width: 300px; margin: 6px 26px 14px 0; }
+/* Anzeige neben einem Spiel oder der Schlange: steht in einer eigenen Rasterzelle,
+   floatet also nicht. */
+.faden-shell .einschub--neben { align-self: start; }
+/* Anzeigenband, Handoff Zeile 1271: volle Satzbreite, genau 90 px hoch, Haarlinie,
+   das Motiv mittig darin statt über die Breite gezogen. */
+.faden-shell .einschub[data-format="band"] { margin: 26px 0 4px; }
+.faden-shell .einschub[data-format="band"] .einschub__flaeche { display: flex; align-items: center; justify-content: center; height: 90px; max-width: none; overflow: hidden; }
+.faden-shell .einschub[data-format="band"] .einschub__flaeche img { width: auto; height: 90px; max-width: 100%; object-fit: contain; }
 .faden-shell .einschub[data-format="halfpage"] .einschub__flaeche, .faden-shell .einschub[data-format="rectangle"] .einschub__flaeche { max-width: 300px; }
 .faden-shell .einschub[data-format="leaderboard"] .einschub__flaeche { max-width: 728px; }
 .faden-shell .einschub[data-format="mobile"] .einschub__flaeche { max-width: 320px; }
