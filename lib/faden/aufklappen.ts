@@ -71,9 +71,18 @@ export function ankerHalten(anker: HTMLElement | null, dauer = DAUER + 60, zielT
   // bleiben: die Bewegung der Höhe und die des Blicks sind dann EINE Bewegung. Die Kurve
   // ist ein Ease-out wie die des Übergangs (nicht dieselbe Formel, aber derselbe Verlauf —
   // unterwegs ein paar Pixel Unterschied, am Ende auf den Pixel genau).
-  const wandern = typeof zielTop === "number" && Math.abs(zielTop - start) >= 1;
-  const laufDauer = reduzierteBewegung() ? 0 : dauer;
-  const soll = (t: number) => (wandern ? start + (zielTop! - start) * (1 - (1 - t) ** 3) : start);
+  const weg = typeof zielTop === "number" ? zielTop - start : 0;
+  const wandern = Math.abs(weg) >= 1;
+  // 🚨 Ein weiter Weg braucht mehr Zeit, und er beginnt sanft.
+  //
+  // Mit der Ease-out-Kurve der Höhe war der erste Schritt einer 700-px-Fahrt gemessene
+  // 175 px in EINEM Bild — die halbe Strecke lag hinter dem Auge, bevor es folgen konnte.
+  // Deshalb hier eine eigene Kurve: sanft an, sanft aus (ease-in-out), und die Dauer
+  // wächst mit der Strecke. Die Höhe fährt weiter ihre 420 ms; beide enden weich, und
+  // der Blick ist zuletzt da, wo das Blatt steht.
+  const laufDauer = reduzierteBewegung() ? 0 : dauer + (wandern ? Math.min(280, Math.abs(weg) * 0.3) : 0);
+  const kurve = (t: number) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
+  const soll = (t: number) => (wandern ? start + weg * kurve(t) : start);
   const t0 = performance.now();
   let halten = true;
   const stop = () => { halten = false; };

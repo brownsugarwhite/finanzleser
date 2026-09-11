@@ -776,7 +776,11 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 /* 🚨 margin-block statt margin: die Kurzform würde `margin-inline` aus .kiosk-blatt
    überschreiben und das Blatt auf Spaltenbreite zurückstauchen.
    Kein Abstand nach unten — der Stapel legt sich direkt auf das Kopfblatt. */
-.faden-shell .neueste { margin-block: 40px 0; --einzug: 16px; }
+/* 🚨 `z-index: 0` ist hier kein Schmuck: ohne ihn hat das Kopfblatt keinen eigenen
+   Stapelkontext, und sein Papier (`::before`, z-index -1) rutscht hinter den Hintergrund
+   der Seite — das Blatt war beim ersten Laden schlicht nicht zu sehen. Die Blätter des
+   Stapels tragen ihren z-index von Spalten.tsx und liegen darum weiterhin darüber. */
+.faden-shell .neueste { margin-block: 40px 0; --einzug: 16px; z-index: 0; }
 .faden-shell .neueste .zeitungskopf { margin-bottom: 0; padding-bottom: 7px; border-bottom: 1px solid var(--rule); }
 /* Der Schriftzug füllt die Blattbreite: Grad und Laufweite hängen beide an der
    Innenbreite (cqi bzw. em davon), das Verhältnis bleibt darum auf jeder Breite gleich.
@@ -831,7 +835,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .kiosk > .kiosk-blatt:nth-last-child(n+5) { --einzug: 16px; }
 /* Der Abschluss unter dem Stapel: eine Haarlinie auf der Breite des untersten Blattes,
    die links und rechts 8 px darüber hinausragt. */
-.faden-shell .kiosk::after { content: ""; display: block; height: 1px; margin: 0 -8px; background: var(--rule); }
+.faden-shell .kiosk::after { content: ""; display: block; height: 1px; margin: 0 -8px; background: var(--ink); }
 
 .faden-shell .kiosk__kopf {
   display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
@@ -860,11 +864,16 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 /* Alle Subkategorien der Rubrik, als Schalter für die Ratgeber daneben. */
 .faden-shell .kiosk__themen { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; gap: 2px; }
 .faden-shell .kiosk__themen button { width: 100%; text-align: left; border: 0; background: none; padding: 4px 0; font: 400 15px/1.35 var(--serif); color: var(--ink); white-space: nowrap; transition: color .2s; }
+/* 🚨 Die Spalte ist so breit wie das FETTE Wort — immer. Sonst schob sie sich bei jedem
+   Umschalten um die paar Pixel breiter, die der aktive Zustand mehr braucht, und mit ihr
+   wanderte das Bild daneben. Die zweite, fette Ausfertigung steht mit Höhe 0 darunter und
+   bestimmt allein die Breite. */
+.faden-shell .kiosk__themen button::after { content: attr(data-name); display: block; height: 0; overflow: hidden; font-weight: 700; visibility: hidden; pointer-events: none; }
 .faden-shell .kiosk__themen button:hover { color: var(--green); }
 .faden-shell .kiosk__themen .ist-aktiv button { font-weight: 700; color: var(--green-ink); }
 
 /* Unter den Themen eine Haarlinie, darunter die Werkzeuge zum Thema. */
-.faden-shell .kiosk__werkzeuge { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.faden-shell .kiosk__werkzeuge { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
 .faden-shell .kiosk__werkzeuge .chip { text-decoration: none; }
 
 /* Die drei neuesten Ratgeber des Themas, hinter der Senkrechten. */

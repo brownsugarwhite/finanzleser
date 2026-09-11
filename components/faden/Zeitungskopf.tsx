@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Die erste Zeile im Faden: „Ihr Faden · Ausgabe n" links, das Datum rechts, darunter
+ * Die erste Zeile im Faden: „Ausgabe n" links, das Datum rechts, darunter
  * die Doppellinie (Design-Übergabe „Die Zeitung", Abschnitt „Der Faden").
  *
  * Das Datum setzt erst der Client. Die Seiten liegen bis zu 24 h im ISR-Cache
@@ -19,7 +19,7 @@ export default function Zeitungskopf({ ausgabe = 1, linie = true }: { ausgabe?: 
   return (
     <div className="zeitungskopf">
       <div className="zeitungskopf__zeile">
-        <span className="kicker">Ihr Faden · Ausgabe {ausgabe}</span>
+        <span className="kicker">Ausgabe {ausgabe}</span>
         <span className="kicker">{datum}</span>
       </div>
       {/* Im Kopfblatt des Kiosks steht die Doppellinie nicht hier, sondern unter dem

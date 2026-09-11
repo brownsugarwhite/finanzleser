@@ -72,10 +72,11 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
     const kopfblatt = wurzel?.previousElementSibling as HTMLElement | null;
     const mast = kopfblatt?.querySelector<HTMLElement>(".kiosk-mast");
     if (!kopfblatt || !mast || !kopfblatt.classList.contains("neueste")) return 0;
-    // Bis unter das ganze Laufband — eine halb verdeckte Laufzeile läse sich wie ein Fehler.
+    // Bis unter die Doppellinie des Schriftzugs: stehen bleibt der Kopf der Zeitung, das
+    // Laufband verschwindet ganz darunter (halb verdeckt läse es sich wie ein Fehler).
     // Die 10 px sind der Überlapp, den das erste Blatt ohnehin schon hat.
-    const band = kopfblatt.querySelector<HTMLElement>(".laufband") || mast;
-    return Math.max(0, Math.round(kopfblatt.getBoundingClientRect().bottom - band.getBoundingClientRect().bottom - UEBERLAPP));
+    const linie = kopfblatt.querySelector<HTMLElement>(".laufband .doppellinie") || mast;
+    return Math.max(0, Math.round(kopfblatt.getBoundingClientRect().bottom - linie.getBoundingClientRect().bottom - UEBERLAPP));
   };
 
   /**
@@ -87,6 +88,22 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
    *  3. Umschalten und den angeklickten Kopf dabei über die ganze Fahrt an seiner Stelle
    *     halten — die Bewegung findet ja oberhalb von ihm statt.
    */
+  /**
+   * 🚨 Die natürliche Höhe eines Körpers messen — NICHT über `scrollHeight`.
+   *
+   * `scrollHeight` ist nie kleiner als das Element selbst. Steht der Körper auf 480 px und
+   * der neue Inhalt braucht nur 397, liefert es trotzdem 480 — der Wechsel galt dann als
+   * „keine Änderung", die Höhe fiel auf `auto` zurück und sprang. Also einen Wimpernschlag
+   * auf `auto` stellen, messen, zurückstellen; React schreibt den Wert ohnehin gleich neu.
+   */
+  const natuerlicheHoehe = (el: HTMLElement): number => {
+    const alt = el.style.height;
+    el.style.height = "auto";
+    const h = Math.round(el.getBoundingClientRect().height);
+    el.style.height = alt;
+    return h;
+  };
+
   /**
    * Wohin die Oberkante des Blattes soll, damit es aufgeschlagen lesbar steht: unter den
    * Kopf — aber nur, wenn es an seiner jetzigen Stelle nicht ganz ins Bild passt. Steht es
@@ -106,7 +123,8 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
   const fahren = (zielKey: string, anker: HTMLElement | null) => {
     const altEl = koerper.current[aktiv];
     if (hoehe === null && altEl) flushSync(() => setHoehe(Math.round(altEl.getBoundingClientRect().height)));
-    const ziel = zielKey ? Math.round(koerper.current[zielKey]?.scrollHeight || PEEK) : 0;
+    const zielEl = zielKey ? koerper.current[zielKey] : null;
+    const ziel = zielEl ? natuerlicheHoehe(zielEl) : 0;
     const deckung = zielKey ? messeUeberdeckung() : 0;
     ankerHalten(anker, FAHRT + 60, zielKey ? lesestelle(zielKey, ziel) : undefined);
     flushSync(() => {
@@ -121,6 +139,36 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
   };
 
   const umschalten = (key: string) => fahren(aktiv === key && beruehrt ? "" : key, blatt.current[key] || kopf.current[key]);
+
+  /**
+   * Ein anderes Thema: rechts stehen andere Ratgeber, und die sind selten gleich hoch.
+   *
+   * 🚨 Der Körper steht dann auf `auto` — von dort fährt CSS nicht, es spränge. Also in
+   * drei Schritten: Höhe festnageln, Inhalt tauschen, neue Höhe messen und anfahren.
+   * Zwischen Festnageln und Anfahren MUSS einmal gemessen werden (`scrollHeight`), sonst
+   * sieht der Browser nur einen Wert und überblendet nichts.
+   */
+  const themaWechseln = (rk: string, tk: string) => {
+    const el = koerper.current[rk];
+    if (!el || aktiv !== rk) { setThemen((a) => ({ ...a, [rk]: tk })); return; }
+    const von = Math.round(el.getBoundingClientRect().height);
+    flushSync(() => setHoehe(von));
+    flushSync(() => setThemen((a) => ({ ...a, [rk]: tk })));
+    const nach = natuerlicheHoehe(el);
+    if (nach === von) { setHoehe(null); return; }
+    // 🚨 ZWEI Bilder Abstand, sonst fährt nichts.
+    //
+    // Der Körper stand auf `auto`; daraus wird erst die gemessene Pixelhöhe. Ein
+    // erzwungenes Neuberechnen (`scrollHeight`) reicht Chromium nicht — und ein einzelnes
+    // rAF auch nicht, denn rAF läuft VOR dem Stilabgleich desselben Bildes: beide Werte
+    // landen dann in derselben Runde, und die Höhe springt. Erst nach zwei Bildern ist die
+    // Ausgangshöhe gezeichnet und der Übergang hat einen Anfang. Gemessen: ohne das steht
+    // die Höhe im ersten Bild schon am Ziel, mit ihm fährt sie über ein Dutzend Bilder.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      setHoehe(nach);
+      setTimeout(() => setHoehe((h) => (h === nach ? null : h)), FAHRT + 40);
+    }));
+  };
 
   // Wiederbelebt mit offenem Blatt: die Überdeckung lässt sich erst messen, wenn alles steht.
   useLayoutEffect(() => { if (wieder && start !== "zu") setUeberdeckung(messeUeberdeckung()); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -202,7 +250,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
                     <ul className="kiosk__themen">
                       {r.themen.map((t) => (
                         <li key={t.key} className={t.key === th?.key ? "ist-aktiv" : undefined}>
-                          <button type="button" onClick={() => setThemen((a) => ({ ...a, [r.key]: t.key }))}>{t.name}</button>
+                          <button type="button" data-name={t.name} onClick={() => themaWechseln(r.key, t.key)}>{t.name}</button>
                         </li>
                       ))}
                     </ul>
