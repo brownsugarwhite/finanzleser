@@ -520,8 +520,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
 .faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
 .faden-shell .inhalt__zeile.aktiv .inhalt__titel { color: var(--green-ink); font-weight: 700; }
-.faden-shell .abschnitt { position: relative; display: grid; gap: 8px; margin-top: 46px; scroll-margin-top: 110px; }
-.faden-shell .abschnitt__titel { font-size: 24px; line-height: 1.25; }
+/* Abschnitt nach Handoff 580–584: 46 px Abstand, Kicker → Titel 4 px, Titel → Text 14 px.
+   Deshalb `gap: 0` und eigene margins — ein einheitlicher Raster-Abstand träfe beides. */
+.faden-shell .abschnitt { position: relative; display: grid; gap: 0; margin-top: 46px; scroll-margin-top: 110px; }
+.faden-shell .abschnitt > .kicker { margin-bottom: 4px; }
+.faden-shell .abschnitt__titel { font: 700 clamp(20px, 1.9vw, 26px)/1.25 var(--serif); margin: 0 0 14px; }
+/* Was nach dem Fließtext folgt (Statistiken, Leos Fragen, Spiele) bringt seinen Abstand
+   selbst mit — `.st` steht auf 22 px, `.spiel-satz` auf 26 px. */
+.faden-shell .abschnitt > .insel:not(:empty) { display: block; }
 .faden-shell .fliess { display: block; }
 .faden-shell .fliess::after { content: ""; display: block; clear: both; }
 .faden-shell .fliess__html > :first-child { margin-top: 0 !important; }
@@ -599,7 +605,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
-.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 4px; }
+.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 22px; }
 .faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; }
 /* „Sie könnten Leo auch fragen" steht in derselben Zeile wie die Chips und bricht mit. */
 .faden-shell .weiterlesen .fragen__kopf { flex-basis: 100%; margin-bottom: 2px; }
