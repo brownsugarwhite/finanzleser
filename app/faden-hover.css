@@ -8,6 +8,13 @@
 .faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: -6px 0 0 -6px; }
 .faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: var(--linie); background: var(--rule-strong); }
 .faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
+/* Durchgehender Trenner (Werkzeugreihe im Hero): eine Linie statt zweier, kein Spark.
+   `--linie` ist hier die GANZE Höhe, deshalb 78 px = die alte Spannweite 2 × (11 + 28).
+   Der Hover-Rahmen dockt damit exakt dort an wie vorher. Der Spark bleibt unsichtbar
+   im DOM, weil die Geometrie in HoverBox.tsx ihn als Anker vermisst. */
+.faden-shell .trenner--voll .spark { visibility: hidden; }
+.faden-shell .trenner--voll::before { top: 50%; bottom: auto; height: var(--linie); transform: translateY(-50%); }
+.faden-shell .trenner--voll::after { content: none; }
 
 /* Hover-Box (abgerundet), gezeichnet als SVG (01-css.html:495–498, 806) */
 .faden-shell .hbox { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
@@ -21,6 +28,7 @@
 .faden-shell .landing-sub b { font-weight: 700; font-variant-numeric: tabular-nums; }
 .faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
 .faden-shell .werkzeugreihe .trenner { --linie: 28px; }
+.faden-shell .werkzeugreihe .trenner--voll { --linie: 78px; }
 .faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
 .faden-shell .werkzeug-k.da { opacity: 1; transform: none !important; }
 .faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }

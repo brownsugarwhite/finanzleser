@@ -6,14 +6,24 @@
  * die Waagerechten (1), dann die Ecken zurück zu den Trennerlinien (2). Die Sparks der
  * benachbarten Trenner drehen mit; wo kein Trenner ist, bekommt der Rahmen einen eigenen
  * Spark. Beim Verlassen läuft alles rückwärts. Innerhalb der Reihe wartet der Rahmen
- * 250 ms, bevor er die nächste Karte zeichnet. Port von hoverBox() aus dem Prototyp
- * (docs/prototype/src/03-js-core.html:307–361); Maße, Timing und Easing 1:1.
+ * 250 ms, bevor er die nächste Karte zeichnet. Geometrie portiert aus hoverBox() im
+ * Prototyp (docs/prototype/src/03-js-core.html:307–361).
  *
- * Abweichung: die Maus-Ereignisse hängen delegiert am Container (mouseover/mouseout
- * statt mouseenter/mouseleave je Karte), damit React die Karten neu rendern darf.
- * Nach dem Zurückziehen werden die Pfade geleert, damit kein unsichtbarer Rest bleibt.
+ * 🚨 Das TIMING kommt nicht aus dem Prototyp, sondern 1:1 aus den Hooks der Live-Seite
+ * (`lib/hooks/useListHoverBox.tsx`, `useSliderHoverBox.tsx`): eine pausierte
+ * GSAP-Timeline, `play(0)` beim Betreten, `reverse()` beim Verlassen, danach
+ * `onReverseComplete` → 0,15 s ausblenden → Pfade leeren.
+ *
+ * Der frühere Port lief mit der Web-Animations-API und rechnete den Rücklauf aus festen
+ * Verzögerungen: jedes Segment bekam `(2 − Schritt) × STEP` Delay und volle Dauer, und
+ * ein `setTimeout` bei 3 × STEP hat die Pfade gelöscht. Dadurch verschwand der Rahmen,
+ * während der Rücklauf noch lief, und ein früh abgebrochenes Zeichnen lief trotzdem die
+ * volle Zeit zurück. `reverse()` läuft stattdessen vom tatsächlichen Stand der Timeline
+ * rückwärts — halb gezeichnet heißt halb so langer Rücklauf, mit gespiegeltem Easing.
+ * Auch das Easing war ein anderes: easeOutQuad (.25,.46,.45,.94) statt power2.out.
  */
 import { useEffect, useRef, type RefObject } from "react";
+import gsap from "@/lib/gsapConfig";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 
 const NS = "http://www.w3.org/2000/svg";
@@ -23,8 +33,9 @@ type Segment = (typeof NAMEN)[number];
 const SCHRITT: Record<Segment, number> = { lDown: 0, rUp: 0, hTop: 1, hBottom: 1, lUp: 2, rDown: 2 };
 const OFF = 11; // Spark-Mitte → Anfang der Trennerlinie
 const GAP = 11; // Lücke um den eigenen Spark (Karte ohne Trenner)
-const STEP = 180; // ms je Zeichenschritt
-const EASE = "cubic-bezier(.25,.46,.45,.94)";
+const STEP = 0.18; // s je Zeichenschritt (Live: useListHoverBox)
+const EASE = "power2.out"; // Live: useListHoverBox
+const FADE = 0.15; // s Ausblenden nach dem Rücklauf (Live: finishClose)
 
 export interface HoverBoxOptionen {
   /** Eckenradius (Prototyp: 16 für die Spalten, 14 für die Werkzeugreihe). */
@@ -41,10 +52,16 @@ export interface HoverBoxSteuerung {
   weg: () => void;
 }
 
-/** Trenner zwischen zwei Karten: zwei Linien mit Spark in der Mitte (Prototyp trenner(), 03-js-core.html:19). */
-export function Trenner() {
+/**
+ * Trenner zwischen zwei Karten: zwei Linien mit Spark in der Mitte (Prototyp trenner(),
+ * 03-js-core.html:19). Mit `voll` eine durchgehende Linie ohne Spark und ohne Lücke —
+ * dieselbe Höhe, damit der Hover-Rahmen unverändert daran andockt. Der Spark bleibt im
+ * DOM (nur `visibility: hidden`), weil die Geometrie ihn als Anker vermisst; mit
+ * `display: none` hätte er keine Maße und der Rahmen zöge sich einen eigenen Spark.
+ */
+export function Trenner({ voll = false }: { voll?: boolean } = {}) {
   return (
-    <div className="trenner">
+    <div className={voll ? "trenner trenner--voll" : "trenner"}>
       <svg className="spark" viewBox="0 0 12 12.0005" aria-hidden="true"><path d={SPARK_D} fill="currentColor" /></svg>
     </div>
   );
@@ -59,9 +76,16 @@ export function useHoverBox(containerRef: RefObject<HTMLElement | null>, itemSel
     const st = steuerung.current;
     if (!reihe || !window.matchMedia("(hover: hover)").matches) return;
     const reduziert = reduzierteBewegung();
+    const dauer = reduziert ? 0 : STEP;
     const R = radius;
 
-    const linienLaenge = (t: Element) => { const h = parseFloat(getComputedStyle(t, "::before").height); return isNaN(h) ? 70 : h; };
+    /** Abstand Spark-Mitte → Ende der Trennerlinie. Beim vollen Trenner ist das die halbe
+     *  Linie (sie läuft durch), sonst die Lücke plus die Länge einer der beiden Linien. */
+    const reichweite = (t: Element) => {
+      const h = parseFloat(getComputedStyle(t, "::before").height);
+      const hh = isNaN(h) ? 70 : h;
+      return t.classList.contains("trenner--voll") ? hh / 2 : OFF + hh;
+    };
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("class", "hbox"); svg.setAttribute("aria-hidden", "true");
     reihe.insertBefore(svg, reihe.firstChild);
@@ -70,11 +94,11 @@ export function useHoverBox(containerRef: RefObject<HTMLElement | null>, itemSel
     const eigen = {} as Record<"l" | "r", { g: SVGGElement; p: SVGPathElement }>;
     (["l", "r"] as const).forEach((k) => { const g = document.createElementNS(NS, "g"); const p = document.createElementNS(NS, "path"); p.setAttribute("d", SPARK_D); p.setAttribute("class", "hspark"); g.appendChild(p); svg.appendChild(g); eigen[k] = { g, p }; });
 
-    let anims: Animation[] = [];
+    let tl: gsap.core.Timeline | null = null;
     let timer: ReturnType<typeof setTimeout> | undefined;
-    let aufraeumer: ReturnType<typeof setTimeout> | undefined;
     let inReihe = false;
     let aktiv: Element | null = null;
+    let gezeichnet: Element | null = null; // Karte, zu der die aktuelle Timeline gehört
     let nachbarn: Element[] = [];
     let unterMaus: Element | null = null;
 
@@ -95,9 +119,9 @@ export function useHoverBox(containerRef: RefObject<HTMLElement | null>, itemSel
       const ob = oben != null ? oben : pad - 16, un = unten != null ? unten : pad - 16;
       const T = Math.round(ct - ob) + 0.5, B = Math.round(cb + un) + 0.5; L = Math.round(L - 0.5) + 0.5; Rx = Math.round(Rx - 0.5) + 0.5;
       const r = Math.max(4, Math.min(R, (B - T) / 3, (Rx - L) / 3));
-      const LL = lt ? linienLaenge(lt) : 70, LR = rt ? linienLaenge(rt) : 70;
-      const lTop = ls ? Math.max(T + r, sy - OFF - LL) : sy - GAP, lBot = ls ? Math.min(B - r, sy + OFF + LL) : sy + GAP;
-      const rTop = rs ? Math.max(T + r, sy - OFF - LR) : sy - GAP, rBot = rs ? Math.min(B - r, sy + OFF + LR) : sy + GAP;
+      const LL = lt ? reichweite(lt) : OFF + 70, LR = rt ? reichweite(rt) : OFF + 70;
+      const lTop = ls ? Math.max(T + r, sy - LL) : sy - GAP, lBot = ls ? Math.min(B - r, sy + LL) : sy + GAP;
+      const rTop = rs ? Math.max(T + r, sy - LR) : sy - GAP, rBot = rs ? Math.min(B - r, sy + LR) : sy + GAP;
       return { L, R: Rx, T, B, r, sy, ls: !!ls, rs: !!rs, lTop, lBot, rTop, rBot, nachbarn: [lsp, rsp].filter((s): s is Element => !!s) };
     }
     function pfade(g: ReturnType<typeof geometrie>): Record<Segment, string> {
@@ -111,36 +135,55 @@ export function useHoverBox(containerRef: RefObject<HTMLElement | null>, itemSel
         rDown: `M${Rx - r} ${B} A${r} ${r} 0 0 0 ${Rx} ${B - r} L${Rx} ${g.rBot}`,
       };
     }
-    const stopp = () => { anims.forEach((a) => { try { a.cancel(); } catch { /* schon beendet */ } }); anims = []; };
+
+    /** Nach vollendetem Rücklauf: ausblenden, dann Pfade und Sparks leeren (Live: finishClose). */
+    function schliessen() {
+      gsap.to(svg, {
+        opacity: 0, duration: reduziert ? 0 : FADE, ease: "power1.out",
+        onComplete: () => {
+          if (aktiv) return; // in der Zwischenzeit wieder betreten
+          nachbarn.forEach((sp) => sp.classList.remove("dreht")); nachbarn = [];
+          (["l", "r"] as const).forEach((k) => { eigen[k].p.style.opacity = "0"; eigen[k].p.classList.remove("dreht"); });
+          NAMEN.forEach((n) => seg[n].removeAttribute("d"));
+          tl?.kill(); tl = null; gezeichnet = null;
+          gsap.set(svg, { opacity: 1 });
+        },
+      });
+    }
+
     function zeichne(card: Element) {
       if (reihe!.classList.contains("offen")) return;
-      stopp(); if (aufraeumer) clearTimeout(aufraeumer);
-      const g = geometrie(card); const d = pfade(g); aktiv = card;
+      aktiv = card;
+      gsap.killTweensOf(svg);
+      gsap.set(svg, { opacity: 1 });
+
+      // Dieselbe Karte, noch sichtbar → vorwärts weiterlaufen statt neu zeichnen (Live: startBox).
+      if (tl && gezeichnet === card) { tl.play(); return; }
+
+      tl?.kill();
+      nachbarn.forEach((sp) => sp.classList.remove("dreht"));
+      const g = geometrie(card); const d = pfade(g); gezeichnet = card;
+      tl = gsap.timeline({ paused: true, onReverseComplete: schliessen });
       NAMEN.forEach((n) => {
-        const p = seg[n]; p.setAttribute("d", d[n]); const len = p.getTotalLength() || 1;
-        p.style.strokeDasharray = String(len); p.style.strokeDashoffset = String(len);
-        anims.push(p.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: reduziert ? 0 : STEP, delay: reduziert ? 0 : SCHRITT[n] * STEP, easing: EASE, fill: "forwards" }));
+        const p = seg[n]; p.setAttribute("d", d[n]);
+        const len = p.getTotalLength() || 1;
+        p.style.strokeDasharray = String(len);
+        gsap.set(p, { strokeDashoffset: len });
+        tl!.to(p, { strokeDashoffset: 0, duration: dauer, ease: EASE }, SCHRITT[n] * dauer);
       });
       nachbarn = g.nachbarn; nachbarn.forEach((sp) => sp.classList.add("dreht"));
       ([["l", g.L, !g.ls], ["r", g.R, !g.rs]] as const).forEach(([k, x, eigener]) => {
         const e = eigen[k]; e.g.setAttribute("transform", `translate(${x - 6},${g.sy - 6})`);
         e.p.style.opacity = eigener ? "1" : "0"; e.p.classList.toggle("dreht", eigener);
       });
+      tl.play(0);
     }
+
     function weg() {
-      if (!aktiv) return; aktiv = null; const laufend = anims; anims = [];
-      NAMEN.forEach((n) => {
-        const p = seg[n]; const len = parseFloat(p.style.strokeDasharray) || 0; const jetzt = parseFloat(getComputedStyle(p).strokeDashoffset) || 0;
-        laufend.forEach((a) => { try { if ((a.effect as KeyframeEffect | null)?.target === p) a.cancel(); } catch { /* schon beendet */ } });
-        p.style.strokeDashoffset = String(jetzt);
-        anims.push(p.animate([{ strokeDashoffset: jetzt }, { strokeDashoffset: len }], { duration: reduziert ? 0 : STEP, delay: reduziert ? 0 : (2 - SCHRITT[n]) * STEP, easing: EASE, fill: "forwards" }));
-      });
-      nachbarn.forEach((sp) => sp.classList.remove("dreht")); nachbarn = [];
-      aufraeumer = setTimeout(() => {
-        if (aktiv) return;
-        (["l", "r"] as const).forEach((k) => { eigen[k].p.style.opacity = "0"; eigen[k].p.classList.remove("dreht"); });
-        NAMEN.forEach((n) => seg[n].removeAttribute("d"));
-      }, reduziert ? 0 : STEP * 3);
+      if (!aktiv) return; aktiv = null;
+      // Bei reduzierter Bewegung hat die Timeline Dauer 0 — `reverse()` stünde schon am
+      // Anfang und `onReverseComplete` käme nie. Dann direkt schließen.
+      if (tl && !reduziert) tl.reverse(); else schliessen();
     }
 
     // Ereignisse delegiert am Container: gleiche Choreografie wie mouseenter/mouseleave je Karte.
@@ -160,8 +203,9 @@ export function useHoverBox(containerRef: RefObject<HTMLElement | null>, itemSel
       reihe.removeEventListener("mouseout", onOut);
       reihe.removeEventListener("mouseleave", onLeave);
       st.weg = () => {};
-      if (timer) clearTimeout(timer); if (aufraeumer) clearTimeout(aufraeumer);
-      stopp(); nachbarn.forEach((sp) => sp.classList.remove("dreht")); nachbarn = []; aktiv = null;
+      if (timer) clearTimeout(timer);
+      gsap.killTweensOf(svg); tl?.kill(); tl = null;
+      nachbarn.forEach((sp) => sp.classList.remove("dreht")); nachbarn = []; aktiv = null; gezeichnet = null;
       svg.remove();
     };
   }, [containerRef, itemSelector, radius, oben, unten, inhalt]);

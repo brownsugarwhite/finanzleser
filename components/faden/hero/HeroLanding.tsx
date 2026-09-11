@@ -222,7 +222,7 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           <div className="werkzeugreihe" ref={reihe}>
             {WERKZEUGE.map((w, i) => (
               <Fragment key={w.key}>
-                {i > 0 && <Trenner />}
+                {i > 0 && <Trenner voll />}
                 <Link className="werkzeug-k" href="/finanztools" onClick={(e) => werkzeug(e, w.key)}>
                   <span className="kicker kicker--tool"><i className={`dot dot--${w.key}`} />{w.name}</span>
                   <b>{zahlen?.[w.key] ?? w.zahl}<small>im Faden</small></b>

@@ -40,6 +40,12 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: 6px; }
 .faden-shell .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
 .faden-shell .dot--rechner { background: var(--tool-rechner); } .faden-shell .dot--vergleich { background: var(--tool-vergleich); } .faden-shell .dot--checkliste { background: var(--tool-checkliste); } .faden-shell .dot--dokumente { background: var(--tool-dokumente); }
+/* Pfeilspitze: derselbe Pfad wie MegaArrow.tsx im Megamenü der Live-Seite
+   (assets/smallAroowTip.svg, viewBox 7.62 × 14.37). Als Maske eingebunden,
+   damit die Farbe aus `background` kommt und die vorhandenen `<i/>` bleiben.
+   Ersetzt die früheren Chevrons aus border-top/-right: die saßen schief auf
+   der Schaftlinie und hatten eine andere Spitze als das Megamenü. */
+.faden-shell { --pfeilspitze: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%207.62%2014.37'%3E%3Cpath%20d='M.03,13.84c-.16.44.45.74.72.36,1.35-1.87,4.75-5.02,6.62-6.49.35-.27.34-.8-.02-1.06C5.15,5.05,2.12,2.08.74.17.47-.2-.12.09.03.53c.78,2.28,2.56,4.41,3.22,5.82.26.56.28,1.15,0,1.71C2.58,9.45.71,11.93.03,13.84Z'/%3E%3C/svg%3E"); }
 .faden-shell .spark { width: 12px; height: 12px; display: inline-block; flex: none; vertical-align: middle; transition: transform .4s; color: var(--ink); }
 .faden-shell .spark:hover { animation: faden-spark-spin 4s linear infinite; }
 @keyframes faden-spark-spin { to { transform: rotate(360deg); } }
@@ -48,7 +54,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .textlink:hover { text-decoration: underline; }
 .faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; border: 0; background: none; padding: 0; text-decoration: none; }
 .faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1.5px; background: currentColor; position: relative; transition: width .25s; }
-.faden-shell .pfeil-link i::after { content: ""; position: absolute; right: -1px; top: -4px; width: 8px; height: 8px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); }
+/* Spitze sitzt 3 px über dem Linienende — wie MegaArrowTrail (marginLeft: -3). */
+.faden-shell .pfeil-link i::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 5.83px; height: 11px; transform: translateY(-50%); background: currentColor; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
 .faden-shell .pfeil-link:hover i { width: 30px; }
 .faden-shell .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; white-space: nowrap; text-decoration: none; line-height: 1.3; }
 .faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
@@ -146,7 +153,11 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .register__eintrag { display: inline-flex; align-items: center; gap: 0; }
 .faden-shell .register a, .faden-shell .register button { position: relative; z-index: 3; border: 0; background: none; padding: 12px 20px; margin: 0 -20px; font: 600 16px/1 var(--serif); color: var(--ink); white-space: nowrap; cursor: pointer; transition: color .2s; text-decoration: none; }
 .faden-shell .register a:hover, .faden-shell .register button:hover { color: var(--green-ink); }
-.faden-shell .register [data-key="plus"] { color: var(--green); }
+/* 🚨 Nur der Knopf selbst, per Kindkombinator. Ohne `>` traf die Regel auch die
+   `<span data-key="plus">` in der Lupe; mit (0,3,0) schlug sie dort
+   `.faden-shell .nav-lupe__reihe span` (0,2,1), und die Schrift blieb in der
+   dunklen Pille gruen statt weiss zu werden. */
+.faden-shell .register__reihe > [data-key="plus"] { color: var(--green); }
 .faden-shell .register .offen { color: var(--pink); }
 .faden-shell .register .punkte-zahl { font: 600 12px/1 var(--sans); color: var(--muted); margin-left: 2px; }
 .faden-shell .register__reihe > svg { margin: 0; opacity: 1; color: var(--ink); }
@@ -484,7 +495,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .inhalt__nr .dot { width: 10px; height: 10px; }
 .faden-shell .rand .dot { width: 8px; height: 8px; vertical-align: middle; }
 .faden-shell .inhalt__linie { display: block; height: 1px; background: var(--rule-strong); position: relative; }
-.faden-shell .inhalt__linie::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border-top: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); transform: rotate(45deg); }
+.faden-shell .inhalt__linie::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 5.3px; height: 10px; transform: translateY(-50%); background: var(--rule-strong); -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
 .faden-shell .inhalt__titel { font: italic 400 16.5px/1.35 var(--serif); }
 .faden-shell .inhalt__zeile a:hover .inhalt__titel { color: var(--green-ink); }
 .faden-shell .inhalt__zeile a:hover .inhalt__linie { width: 100%; }
@@ -1057,6 +1068,15 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
   .faden-shell .kapitel__kopf { flex-wrap: wrap; gap: 6px 12px; } .faden-shell .kapitel__kopf .kicker { white-space: normal; }
   .faden-shell .inhalt__zeile a { grid-template-columns: 28px 24px minmax(0, 1fr); }
   .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .faden-shell .eingabe .chips .chip { flex: none; }
+  /* Die Pille steht auf Mobil etwas schmaler als die Spalte — sie liegt über dem
+     Text und soll ihn nicht bis an den Rand zudecken. Der Blur darunter bleibt
+     spaltenbreit, sonst bekäme der Verlauf sichtbare Kanten.
+     🚨 Dazu gehört das knappere Innenmaß: der Platzhalter „Sende Leo eine Nachricht …"
+     braucht 220 px, und mit den Desktop-Werten (24/76) blieben in der schmaleren Pille
+     nur 219 px — er brach in die zweite Zeile um. 22/66 holt 12 der 20 schmaleren
+     Pixel zurück, damit bleibt er bis hinunter zu 360 px einzeilig. */
+  .faden-shell .eingabe .suchpille-wrap { width: calc(100% - 20px); margin-left: 10px; }
+  .faden-shell .eingabe .suchpille__feld { padding-left: 22px; padding-right: 66px; }
 }
 
 /* ── Belohnung, Serie, kleine Flüge (Port aus dem Prototyp, 01-css.html:248, 629, 697–703) ── */
