@@ -751,37 +751,31 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
    Deshalb liegt `overflow: hidden` am Körper und nicht am Blatt, sonst schnitte das Blatt
    den Ring an seiner Kante ab. */
 
-/* Ein Blatt ragt seitlich aus der Mittelspalte heraus; das Innenmaß bleibt die Spalte,
-   das Papier liegt darum. Ab 1440 px stehen die Randspalten im Bild, dann ist der
-   Ausbruch zusätzlich auf die freie Gasse gedeckelt. */
+/* 🚨 Die AUSSENKANTE des Blattes steht auf der Spaltenbreite, nicht sein Satzspiegel
+   (Korrektur 11.09.2026). Das Papier tritt also nicht aus der Spalte heraus; das Polster
+   liegt innen, und der Satz steht entsprechend schmaler als im übrigen Faden. */
 .faden-shell .kiosk-blatt {
-  --ausbruch: 36px;
   position: relative;
-  margin-inline: calc(-1 * var(--ausbruch));
   padding: 14px 36px 18px;
   container-type: inline-size;
-  background: linear-gradient(180deg, #fff 0%, var(--white) 58%, #f7f5ef 100%);
-  box-shadow: 0 -10px 24px -10px rgba(51, 74, 39, .18), 0 2px 6px rgba(51, 74, 39, .05);
-}
-/* 🚨 Polster und Ausbruch sind zwei verschiedene Dinge. Das Polster bleibt bei 36 px —
-   es ist der Abstand des Satzes zur Papierkante und darf nie schrumpfen. Der Ausbruch ist
-   nur, wie weit das Papier aus der Spalte tritt; ab 1440 px stehen die Randspalten im
-   Bild, dann reicht er höchstens bis kurz vor die Gasse. */
-@media (min-width: 1440px) {
-  .faden-shell .kiosk-blatt { --ausbruch: clamp(0px, (100vw - var(--spalte) - 2 * var(--rand-l)) / 2 - 14px, 36px); }
+  /* Das Papier hat die Farbe der Seite, nicht Weiß (Korrektur 11.09.2026): der Verlauf
+     geht nur einen Hauch heller in den Kopf und einen Hauch dunkler in den Fuß. Die Kante
+     macht allein der Schatten — Rahmen und Outline sind ausdrücklich nicht erwünscht. */
+  background: linear-gradient(180deg, #fdfcf9 0%, var(--paper) 52%, #f3f1ea 100%);
+  box-shadow: 0 -10px 26px -10px rgba(51, 74, 39, .2), 0 2px 7px rgba(51, 74, 39, .07);
 }
 
 /* ---------- Kopfblatt: Ausgabe, Schriftzug, Laufband, Titelseite ---------- */
 /* 🚨 margin-block statt margin: die Kurzform würde `margin-inline` aus .kiosk-blatt
    überschreiben und das Blatt auf Spaltenbreite zurückstauchen. */
 .faden-shell .neueste { margin-block: 40px 20px; }
-.faden-shell .neueste .zeitungskopf { margin-bottom: 0; }
+.faden-shell .neueste .zeitungskopf { margin-bottom: 0; padding-bottom: 7px; border-bottom: 1px solid var(--rule); }
 /* Der Schriftzug füllt die Blattbreite: Grad und Laufweite hängen beide an der
    Innenbreite (cqi bzw. em davon), das Verhältnis bleibt darum auf jeder Breite gleich.
    Der negative Rand rechts fängt die Laufweite HINTER dem letzten Buchstaben ab —
    ohne ihn stünde das Wort um deren halbe Breite links der Mitte. */
 .faden-shell .kiosk-mast {
-  display: block; margin: 2px 0 6px; margin-right: -.199em;
+  display: block; margin: 6px 0 1px; margin-right: -.199em;
   font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 14.8cqi, 132px);
   line-height: 1.02; letter-spacing: .199em; text-transform: uppercase; text-align: center;
   color: var(--ink); white-space: nowrap;
@@ -810,14 +804,18 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .neueste__blatt:hover .pfeil-link i { width: 30px; }
 
 /* ---------- Der Stapel ---------- */
-.faden-shell .kiosk { display: block; scroll-margin-top: 110px; }
+/* 🚨 Beim Aufschlagen zieht sich der Stapel über das Kopfblatt, bis von diesem nur noch
+   der Schriftzug „Ratgeber" herausschaut (Wunsch 11.09.2026) — wie eine Zeitung, die man
+   aus dem Regal zieht. Wie weit, misst Spalten.tsx und setzt es als `--ueberdeckung`;
+   hier steht nur die Bewegung. */
+.faden-shell .kiosk { display: block; scroll-margin-top: 110px; margin-top: calc(-1 * var(--ueberdeckung, 0px)); transition: margin-top .42s cubic-bezier(.22, .61, .36, 1); }
 /* Jedes Blatt liegt ein Stück auf dem vorigen; die Reihenfolge macht Spalten.tsx über
    z-index, damit das spätere oben liegt und seinen Schatten auf das vorige wirft. */
 .faden-shell .kiosk > .kiosk-blatt + .kiosk-blatt { margin-top: -10px; }
 
 .faden-shell .kiosk__kopf {
   display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
-  width: 100%; padding: 8px 0 7px; border: 0; background: none; cursor: pointer;
+  width: 100%; padding: 10px 0 1px; border: 0; background: none; cursor: pointer;
   text-align: left; color: var(--ink);
 }
 .faden-shell .kiosk__titel { font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 4.9cqi, 38px); line-height: 1.04; text-transform: uppercase; letter-spacing: .005em; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -826,8 +824,11 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 
 /* Der Körper: Höhe fährt Spalten.tsx (zu / angeschnitten / offen), deshalb hier nur
    der Schnitt. Ohne gesetzte Höhe steht er offen — so sieht ihn, wer ohne JavaScript liest. */
-.faden-shell .kiosk__koerper { overflow: hidden; }
-.faden-shell .kiosk__innen { display: grid; grid-template-columns: 240px minmax(130px, 180px) minmax(0, 1fr); gap: 24px; align-items: start; padding: 14px 0 0; }
+.faden-shell .kiosk__koerper { overflow: hidden; transition: height .42s cubic-bezier(.22, .61, .36, 1); }
+/* Die drei Anteile stammen aus dem Entwurf (Bild 32 %, Themen 17 %, Ratgeber der Rest),
+   deshalb Prozente statt fester Maße: das Blatt steht auf der Spaltenbreite, und darin
+   soll das Verhältnis stimmen, nicht ein Pixelmaß. */
+.faden-shell .kiosk__innen { display: grid; grid-template-columns: minmax(0, 31%) minmax(0, 17%) minmax(0, 1fr); gap: 18px; align-items: start; padding: 14px 0 0; }
 .faden-shell .kiosk__bild { display: block; line-height: 0; background: var(--placeholder); }
 .faden-shell .kiosk__bild img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
 
@@ -838,11 +839,14 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
 .faden-shell .kiosk__themen .ist-aktiv button { font-weight: 700; color: var(--green-ink); }
 
 /* Die drei neuesten Ratgeber des Themas, hinter einer Haarlinie. */
-.faden-shell .kiosk__ratgeber { border-left: 1px solid var(--rule); padding-left: 20px; display: grid; align-content: start; min-width: 0; }
+.faden-shell .kiosk__ratgeber { border-left: 1px solid var(--rule); padding-left: 18px; display: grid; align-content: start; min-width: 0; }
 .faden-shell .kiosk__artikel { text-align: left; border: 0; background: none; padding: 0 0 12px; display: grid; gap: 4px; text-decoration: none; color: var(--ink); }
 .faden-shell .kiosk__artikel + .kiosk__artikel { border-top: 1px solid var(--rule-soft); padding-top: 12px; }
-.faden-shell .kiosk__kleine { display: flex; align-items: center; gap: 7px; font: 400 13px/1.3 var(--serif); color: var(--muted); min-width: 0; }
-.faden-shell .kiosk__kleine > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 🚨 Die Titelzeile bricht um, statt zu kürzen (Wunsch 11.09.2026): aus „Vorlage-Test ·
+   Photovoltaik Förderu…" wurde sonst bei jedem längeren Titel ein Rätsel. Die Punkte
+   bleiben in der ersten Zeile stehen und rutschen nicht unter den Text. */
+.faden-shell .kiosk__kleine { display: flex; align-items: flex-start; gap: 7px; font: 400 12.5px/1.35 var(--serif); color: var(--ink); min-width: 0; }
+.faden-shell .kiosk__kleine > span { min-width: 0; }
 .faden-shell .kiosk__artikel b { font-family: var(--serif); font-size: 16px; font-weight: 700; line-height: 1.3; }
 .faden-shell .kiosk__artikel:hover b { color: var(--green-ink); }
 .faden-shell .kiosk__artikel .pfeil-link { font-size: 12.5px; }
@@ -1111,7 +1115,7 @@ body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: non
      Dieselbe Form wie auf dem Desktop — der Stapel war genau dafür gebaut. Die Blätter
      gehen bis an den Bildschirmrand (die Spalte selbst hat 14 px Polster) und BEHALTEN
      ihren Schatten; ohne ihn verlöre der Stapel auf Mobil seine ganze Form. */
-  .faden-shell .kiosk-blatt { --ausbruch: 14px; padding: 12px 14px 16px; }
+  .faden-shell .kiosk-blatt { padding: 12px 16px 16px; }
   .faden-shell .neueste { margin-block: 24px 16px; }
   .faden-shell .neueste__blatt { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 14px; }
   .faden-shell .neueste__satz { padding-top: 0; }

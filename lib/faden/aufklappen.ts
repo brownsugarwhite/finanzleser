@@ -49,3 +49,47 @@ export function verbergen(el: HTMLElement | null): Promise<void> {
     setTimeout(ende, DAUER + 80);
   });
 }
+
+/**
+ * Den Anker für die Dauer einer Bewegung an seiner Stelle im Fenster halten.
+ *
+ * 🚨 `mitAusgleich` (lib/faden/scrollen.ts) misst vor und nach einer Änderung — das reicht
+ * nur, wenn die Änderung im selben Bild passiert. Fährt eine Höhe über eine halbe Sekunde,
+ * wandert der Anker über viele Bilder, und dann muss über ebenso viele Bilder nachgeführt
+ * werden. Genau das ist der Fall im Kiosk: Klickt jemand das dritte Blatt an, während das
+ * erste offen steht, schrumpft OBERHALB des Klickziels um mehrere hundert Pixel. Die
+ * Bilanz des Kapitels ist dabei fast null, `lib/faden/ausgleich.ts` sieht also nichts —
+ * die angeklickte Zeile spränge trotzdem unter dem Finger weg.
+ *
+ * Hart nachführen (Regel 3 des Scroll-Plans), und sobald der Leser selbst scrollt, ist
+ * Schluss: sein Scrollen gewinnt.
+ */
+export function ankerHalten(anker: HTMLElement | null, dauer = DAUER + 60): void {
+  if (!anker) return;
+  const soll = anker.getBoundingClientRect().top;
+  let halten = true;
+  const stop = () => { halten = false; };
+  const opts: AddEventListenerOptions = { passive: true };
+  window.addEventListener("wheel", stop, opts);
+  window.addEventListener("touchmove", stop, opts);
+  window.addEventListener("keydown", stop, opts);
+  const bis = performance.now() + dauer;
+  let lauf = 0;
+  const nach = () => {
+    const d = anker.getBoundingClientRect().top - soll;
+    if (Math.abs(d) >= 1) window.scrollBy({ top: d, behavior: "instant" });
+  };
+  const takt = () => {
+    if (!halten || performance.now() > bis) {
+      if (halten) nach();
+      cancelAnimationFrame(lauf);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchmove", stop);
+      window.removeEventListener("keydown", stop);
+      return;
+    }
+    nach();
+    lauf = requestAnimationFrame(takt);
+  };
+  lauf = requestAnimationFrame(takt);
+}

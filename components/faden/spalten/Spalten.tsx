@@ -20,13 +20,17 @@
  * Bezugspunkt für `folgt()`. Fällt der Selektor ins Leere, entscheidet alles Nachfolgende
  * (Kassensturz, Schlange, Finanzwort) falsch, ob gescrollt werden darf.
  */
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import ToolDots from "@/components/ui/ToolDots";
 import { boldYears } from "@/components/ui/MegaPostContent";
+import { ankerHalten } from "@/lib/faden/aufklappen";
 import type { SpaltenRubrik } from "@/lib/faden/spalten";
 
 /** So viel vom Körper steht im Ruhestand offen. */
 const PEEK = 110;
+/** Muss zur Übergangsdauer von .kiosk__koerper in app/faden.css passen. */
+const FAHRT = 420;
 
 export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
   const [aktiv, setAktiv] = useState<string>(rubriken[0]?.key || "");
@@ -34,14 +38,69 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
   const [themen, setThemen] = useState<Record<string, string>>({});
   // Vor der ersten Berührung steht das erste Blatt nur angeschnitten offen.
   const [beruehrt, setBeruehrt] = useState(false);
+  // Höhe des offenen Körpers: eine Zahl, solange gefahren wird, danach `null` = `auto`.
+  const [hoehe, setHoehe] = useState<number | null>(PEEK);
+  const koerper = useRef<Record<string, HTMLDivElement | null>>({});
+  const kopf = useRef<Record<string, HTMLButtonElement | null>>({});
+  const stapel = useRef<HTMLElement>(null);
+  // Wie weit sich der Stapel über das Kopfblatt zieht, solange ein Blatt offen steht.
+  const [ueberdeckung, setUeberdeckung] = useState(0);
 
+  /**
+   * Der Stapel schiebt sich beim Aufschlagen so weit über das Kopfblatt, dass von diesem
+   * nur noch der Schriftzug „Ratgeber" herausschaut — wie eine Zeitung, die man aus dem
+   * Regal zieht. Gemessen statt geraten: die Höhe des Kopfblattes hängt am Bild und am
+   * Umbruch der Schlagzeile.
+   */
+  const messeUeberdeckung = (): number => {
+    // 🚨 Der Kiosk steckt in einer `Insel` (FadenLanding) — das Kopfblatt ist deshalb nicht
+    // das vorige Geschwister der Sektion, sondern das der Insel. Im eingefrorenen Kapitel
+    // ebenso, dort steht beides im Schnappschuss.
+    const wurzel = stapel.current?.closest(".insel") || stapel.current;
+    const kopfblatt = wurzel?.previousElementSibling as HTMLElement | null;
+    const mast = kopfblatt?.querySelector<HTMLElement>(".kiosk-mast");
+    if (!kopfblatt || !mast || !kopfblatt.classList.contains("neueste")) return 0;
+    // Bis unter die Doppellinie des Schriftzugs (die erste des Laufbands) — sonst bliebe
+    // die Laufzeile halb verdeckt stehen und läse sich wie ein Fehler.
+    const linie = kopfblatt.querySelector<HTMLElement>(".laufband .doppellinie") || mast;
+    return Math.max(0, Math.round(kopfblatt.getBoundingClientRect().bottom - linie.getBoundingClientRect().bottom - 8));
+  };
+
+  /**
+   * 🚨 Drei Dinge in dieser Reihenfolge, sonst fährt nichts weich:
+   *
+   *  1. Der offene Körper steht nach seiner Fahrt auf `auto` — von dort aus fährt CSS
+   *     nicht. Also erst seine gemessene Pixelhöhe festnageln, in einem eigenen Render.
+   *  2. Das Ziel messen, SOLANGE es noch zu ist: `scrollHeight` ignoriert die Höhe 0.
+   *  3. Umschalten und den angeklickten Kopf dabei über die ganze Fahrt an seiner Stelle
+   *     halten — die Bewegung findet ja oberhalb von ihm statt.
+   */
   const umschalten = (key: string) => {
-    setBeruehrt(true);
-    setAktiv((alt) => (alt === key && beruehrt ? "" : key));
+    const zu = aktiv === key && beruehrt;
+    const altEl = koerper.current[aktiv];
+    if (hoehe === null && altEl) flushSync(() => setHoehe(Math.round(altEl.getBoundingClientRect().height)));
+    const ziel = zu ? 0 : Math.round(koerper.current[key]?.scrollHeight || PEEK);
+    const deckung = zu ? 0 : messeUeberdeckung();
+    ankerHalten(kopf.current[key], FAHRT + 60);
+    flushSync(() => {
+      setBeruehrt(true);
+      setAktiv(zu ? "" : key);
+      setHoehe(ziel);
+      setUeberdeckung(deckung);
+    });
+    // Nach der Fahrt auf `auto`: sonst klippt der Körper, sobald jemand das Thema wechselt
+    // oder das Bild spät geladen ist. Nur, wenn inzwischen nicht weitergeklickt wurde.
+    if (!zu) setTimeout(() => setHoehe((h) => (h === ziel ? null : h)), FAHRT + 40);
   };
 
   return (
-    <section className="kiosk spalten-kasten" id="rubriken" aria-label="Aus dem Kiosk">
+    <section
+      className="kiosk spalten-kasten"
+      id="rubriken"
+      aria-label="Aus dem Kiosk"
+      ref={stapel}
+      style={ueberdeckung ? ({ ["--ueberdeckung" as string]: `${ueberdeckung}px` } as React.CSSProperties) : undefined}
+    >
       {rubriken.map((r, i) => {
         const offen = aktiv === r.key;
         const tk = themen[r.key] || r.themen[0]?.key;
@@ -57,6 +116,7 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
             <button
               type="button"
               className="kiosk__kopf"
+              ref={(el) => { kopf.current[r.key] = el; }}
               aria-expanded={offen}
               aria-controls={`kiosk-${r.key}`}
               onClick={() => umschalten(r.key)}
@@ -70,8 +130,10 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
             <div
               className="kiosk__koerper"
               id={`kiosk-${r.key}`}
-              // Ohne JavaScript bleibt die Höhe ungesetzt und alles steht offen da.
-              style={{ height: offen ? (beruehrt ? undefined : PEEK) : 0 }}
+              ref={(el) => { koerper.current[r.key] = el; }}
+              // `undefined` heißt `auto` — React nimmt die Höhe dann wieder heraus. Ohne
+              // JavaScript bleibt sie ungesetzt und alles steht offen da.
+              style={{ height: offen ? (hoehe === null ? undefined : hoehe) : 0 }}
             >
               <div className="kiosk__innen">
                 {r.bild && (
@@ -89,7 +151,7 @@ export default function Spalten({ rubriken }: { rubriken: SpaltenRubrik[] }) {
                 <div className="kiosk__ratgeber">
                   {th?.liste.map((e) => (
                     <a key={e.slug} className="kiosk__artikel" href={e.href}>
-                      <span className="kiosk__kleine"><span>{e.titel}</span><ToolDots tools={e.tools} size={8} style={{ marginLeft: 0 }} /></span>
+                      <span className="kiosk__kleine"><span>{e.titel}</span><ToolDots tools={e.tools} size={8} style={{ marginLeft: 0, marginTop: 4, flex: "none" }} /></span>
                       <b>{e.untertitel ? boldYears(e.untertitel) : boldYears(e.titel)}</b>
                       <span className="pfeil-link">Ratgeber lesen<i /></span>
                     </a>
