@@ -13,6 +13,7 @@ import KapitelKopf from "./KapitelKopf";
 import Spalten from "./spalten/Spalten";
 import NeuesteAusgabe from "./spalten/NeuesteAusgabe";
 import FinanzwortKarte from "./spiele/FinanzwortKarte";
+import SchlangeKarte from "./spiele/SchlangeKarte";
 import Kassensturz from "./kassensturz/Kassensturz";
 import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import { getFadenOptionen } from "@/lib/faden/optionen";
@@ -77,6 +78,7 @@ export default async function FadenLanding() {
           <NeuesteAusgabe post={neueste} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           {kassensturz && <Kassensturz daten={kassensturz} ziele={ksZiele} />}
+          <SchlangeKarte />
           <FinanzwortKarte />
           </Begruessung>
         </div>

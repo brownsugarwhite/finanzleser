@@ -50,6 +50,8 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     // Schritt der Begrüßung auf den Kassensturz statt auf das Finanzwort.
     const finanzwort = wurzel.querySelector<HTMLElement>(".meldung, .kasten--pink:not(.kasten--ks)");
     const kassensturz = wurzel.querySelector<HTMLElement>(".ks-teaser");
+    // Das Spiel steht zwischen Kassensturz und Finanzwort und kommt auch dort dazu.
+    const schlange = wurzel.querySelector<HTMLElement>(".kasten--schlange");
     const text = gruss?.querySelector<HTMLElement>("p");
     if (!gruss || !text) return;
 
@@ -61,6 +63,7 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     if (spalten) spalten.hidden = true;
     if (neueste) neueste.hidden = true;
     if (kassensturz) kassensturz.hidden = true;
+    if (schlange) schlange.hidden = true;
     if (finanzwort) finanzwort.hidden = true;
 
     const tippt = document.createElement("div");
@@ -87,6 +90,8 @@ export default function Begruessung({ children }: { children: React.ReactNode })
       if (spalten) { spalten.hidden = false; angehaengt(spalten, { leise: true }); }
       // Finanzwort zuletzt, mit der normalen Scroll-Regel
       if (kassensturz) kassensturz.hidden = false;
+      // Leise: das Spielfeld ist hoch, ein Sprung darauf risse den Leser aus dem Text.
+      if (schlange) { schlange.hidden = false; angehaengt(schlange, { leise: true }); }
       if (finanzwort) { finanzwort.hidden = false; angehaengt(finanzwort); }
     };
 
