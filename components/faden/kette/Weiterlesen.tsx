@@ -75,7 +75,10 @@ export default function Weiterlesen({ fragen }: { fragen: FadenFrage[] }) {
   const offeneFragen = fragen.map((_, i) => i).filter((i) => !gestellt.includes(i));
   return (
     <div className="weiterlesen">
-      {gestellt.length === 0 && <span className="kicker kicker--gruen">Dazu wird oft gefragt</span>}
+      {/* 🚨 Die Überschrift „Dazu wird oft gefragt" steht NICHT mehr hier, sondern im
+          Abschnittsfuß (KetteKapitel) — dort teilt sie sich die Zeile mit „Abschnitt
+          teilen". Stünde sie hier, müsste der Teilen-Link eine eigene Rasterspalte
+          bekommen, und die schnitte dem Gespräch mit Leo 115 der 728 px ab. */}
       {fragen.map((f, i) => {
         const platz = gestellt.indexOf(i);
         return (

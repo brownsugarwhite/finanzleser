@@ -132,8 +132,11 @@ function AbschnittBlock({ a, i, n, toolData, url }: { a: Abschnitt; i: number; n
           rechts auf gleicher Höhe „Abschnitt teilen". Bis 11.09.2026 stand das Teilen als
           ERSTES Kind der Section und hing damit optisch über dem vorigen Abschnitt. */}
       <div className="abschnitt__fuss">
+        <div className="abschnitt__fuss-kopf">
+          {a.fragen.length > 0 && <span className="kicker kicker--gruen">Dazu wird oft gefragt</span>}
+          <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
+        </div>
         {a.fragen.length > 0 && <Insel typ="weiterlesen" werte={a.fragen}><Weiterlesen fragen={a.fragen} /></Insel>}
-        <Insel typ="abschnitt-teilen" werte={{ titel: a.titel, url, id: a.id }}><AbschnittTeilen titel={a.titel} url={url} id={a.id} /></Insel>
       </div>
     </section>
   );
