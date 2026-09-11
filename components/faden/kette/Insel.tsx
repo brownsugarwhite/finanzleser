@@ -26,7 +26,7 @@ export type InselTyp =
   | "rechner" | "checkliste" | "vergleich" | "dokumente"
   | "statistik" | "statistik-block" | "weiterlesen" | "spiel"
   | "aktionen" | "abschnitt-teilen" | "kasten-fuss" | "wochenbrief"
-  | "spalten" | "vorlesen";
+  | "spalten" | "vorlesen" | "schlange";
 
 export default function Insel({
   typ, arg, werte, children,

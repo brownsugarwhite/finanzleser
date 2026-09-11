@@ -32,6 +32,7 @@ import WerkzeugKarte, { toolTitel, werkzeugTitel } from "./WerkzeugKarte";
 import AbschnittTeilen from "./AbschnittTeilen";
 import WochenbriefKasten from "./WochenbriefKasten";
 import KassensturzTeaser from "@/components/faden/kassensturz/KassensturzTeaser";
+import SchlangeAmEnde from "@/components/faden/spiele/SchlangeAmEnde";
 
 const EINWURF_ZIEL: Record<string, string> = { rechner: "Zum Rechner", checkliste: "Zur Checkliste", vergleich: "Zum Vergleich", dokumente: "Zu den Dokumenten" };
 
@@ -255,6 +256,8 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               </div>
             </section>
           )}
+          {/* Die Schlange als Belohnung: nach der Arbeit, vor dem Abspann. */}
+          <SchlangeAmEnde />
           <KassensturzTeaser />
           <Insel typ="aktionen" werte={{ titel: k.titel, url: k.url, kurzfassung: k.faden.kurzfassung, artikelId: `artikel-${k.slug}`, pdf: beitragPdf }}><Aktionen titel={k.titel} url={k.url} kurzfassung={k.faden.kurzfassung} artikelId={`artikel-${k.slug}`} pdf={beitragPdf} /></Insel>
           {dazu.length > 0 && (
