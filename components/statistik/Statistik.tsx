@@ -80,13 +80,22 @@ export default function Statistik({ st }: { st: StatistikDaten }) {
   const q = st.quelle;
 
   return (
-    <section ref={wurzel} className={`st st--${st.art} st--rahmen-${rahmen}`} data-stand={stand} aria-label={kicker}>
+    /* 🚨 Kein `aria-label` mehr: die Überschrift benennt den Block. Beides zusammen hätte
+       denselben Text zweimal vorgelesen. */
+    <section ref={wurzel} className={`st st--${st.art} st--rahmen-${rahmen}`} data-stand={stand}>
       {rahmen !== "ohne" && (
         <div className="st__kopf">
-          <span className="kicker">{kicker}</span>
+          {/* Die Kickerzeile IST die Überschrift der Statistik — als <h3> gliedert sie den
+              Beitrag für Suchmaschinen und Textauszüge (h1 Titel → h2 Abschnitt → h3),
+              ohne dass sich optisch etwas ändert: `.kicker` schlägt `.faden-shell h3`. */}
+          <h3 className="kicker">{kicker}</h3>
           {st.untertitel && <p className="st__unter">{st.untertitel}</p>}
         </div>
       )}
+      {/* Der Kennzahlen-Vierer trägt keine sichtbare Titelzeile — seine Kicker beschriften die
+          einzelnen Kacheln. Damit er in der Gliederung nicht fehlt, steht sie hier unsichtbar.
+          (Der Vergleichsrechner bringt seine eigene <h3> mit.) */}
+      {st.art === "kennzahlen-vierer" && <h3 className="nur-vorlesen">{kicker}</h3>}
       <Form st={st} />
       {st.hinweis && <p className="st__hinweis">{st.hinweis}</p>}
       {q?.name && (

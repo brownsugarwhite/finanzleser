@@ -84,7 +84,9 @@
 .faden-shell .st-kreis__mitte span { margin-top: 4px; font: 400 10px var(--sans); color: var(--muted); letter-spacing: .12em; }
 
 /* ── Anteilsleiste (Handoff 624–631) ──────────────────────────────────────────────── */
-.faden-shell .st-anteile { position: relative; margin-top: 16px; height: 112px; }
+/* Die Höhe setzt die Komponente selbst — sie hängt davon ab, wie viele Reihen die
+   Beschriftungen brauchen, damit kein Fallstrich durch fremden Text läuft. */
+.faden-shell .st-anteile { position: relative; margin-top: 16px; }
 .faden-shell .st-anteile__leiste { display: flex; height: 18px; }
 .faden-shell .st-anteile__leiste i { transition: opacity .3s; border-right: 1px solid var(--paper); box-sizing: border-box; cursor: default; }
 .faden-shell .st-anteile__marke { position: absolute; top: 18px; display: flex; flex-direction: column; transition: opacity .3s; }
@@ -207,7 +209,7 @@
 .faden-shell .st-vergleich { border-top: 2px solid var(--tuerkis); padding-top: 12px; }
 .faden-shell .st-vergleich__kicker { display: inline-flex; align-items: center; gap: 6px; color: var(--green-ink); }
 .faden-shell .st-vergleich__kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--tuerkis); }
-.faden-shell .st-vergleich h4 { margin: 6px 0 10px; font: 700 20px/1.25 var(--serif); color: var(--ink); }
+.faden-shell .st-vergleich h3 { margin: 6px 0 10px; font: 700 20px/1.25 var(--serif); color: var(--ink); }
 
 /* ── Breite Darstellung ab 1060 px (Handoff: Breakpoint „breit“) ──────────────────── */
 @media (min-width: 1060px) {
