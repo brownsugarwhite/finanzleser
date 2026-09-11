@@ -48,73 +48,98 @@
       "nach": "heading-2",
       "statistik": {
         "art": "anteilsleiste",
-        "titel": "Wo Pflegebedürftige versorgt werden",
-        "untertitel": "Anteil an allen Pflegebedürftigen, Ende 2023",
+        "titel": "So werden Pflegebedürftige versorgt",
+        "untertitel": "Leistungsbeziehende der sozialen Pflegeversicherung, 2025",
         "einheit": "%",
-        "quelle": {
-          "name": "Statistisches Bundesamt, Pflegestatistik",
-          "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Gesundheit/Pflege/Tabellen/pflegebeduerftige-pflegestufe.html",
-          "stand": "18.12.2024"
-        },
-        "stuecke": [
-          {
-            "label": "Allein durch Angehörige",
-            "wert": 54.5
-          },
-          {
-            "label": "Mit Pflegedienst",
-            "wert": 19.3
-          },
-          {
-            "label": "Vollstationär im Heim",
-            "wert": 14.1
-          },
-          {
-            "label": "Pflegegrad 1, Landesleistungen",
-            "wert": 12.0
-          }
-        ],
-        "hinweis": "Rundungsbedingt ergibt die Summe 99,9 Prozent."
-      }
-    },
-    {
-      "nach": "heading-3",
-      "statistik": {
-        "art": "kennzahlen-liste",
-        "titel": "Beitragssätze zur sozialen Pflegeversicherung",
-        "untertitel": "Anteil vom beitragspflichtigen Einkommen, 2026",
         "quelle": {
           "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
           "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
           "stand": "Juli 2026"
         },
-        "zeilen": [
+        "stuecke": [
           {
-            "name": "Kinderlos, ab 23 Jahren",
-            "wert": "4,20 %"
+            "label": "Ambulant zu Hause",
+            "wert": 86.0
           },
           {
-            "name": "Ein Kind – oder keine zwei Kinder unter 25",
-            "wert": "3,60 %"
+            "label": "Vollstationär im Heim",
+            "wert": 12.0
           },
           {
-            "name": "Zwei Kinder unter 25 Jahren",
-            "wert": "3,35 %"
-          },
-          {
-            "name": "Drei Kinder unter 25 Jahren",
-            "wert": "3,10 %"
-          },
-          {
-            "name": "Vier Kinder unter 25 Jahren",
-            "wert": "2,85 %"
-          },
-          {
-            "name": "Fünf und mehr Kinder unter 25 Jahren",
-            "wert": "2,60 %"
+            "label": "Eingliederungshilfe",
+            "wert": 2.0
           }
         ],
-        "hinweis": "Arbeitnehmer und Arbeitgeber teilen sich den Beitrag; der Zuschlag für Kinderlose trägt allein das Mitglied."
+        "hinweis": "5,16 Millionen Menschen wurden 2025 ambulant versorgt, 0,71 Millionen vollstationär und 0,14 Millionen in Einrichtungen der Eingliederungshilfe."
+      }
+    },
+    {
+      "nach": "heading-2",
+      "statistik": {
+        "art": "saeulen",
+        "titel": "Wie das Risiko mit dem Alter steigt",
+        "untertitel": "Pflegewahrscheinlichkeit nach Altersgruppe, in Prozent",
+        "einheit": "%",
+        "quelle": {
+          "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
+          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+          "stand": "Juli 2026"
+        },
+        "reihen": [
+          {
+            "label": "Pflegewahrscheinlichkeit"
+          }
+        ],
+        "kategorien": [
+          {
+            "label": "unter 20",
+            "werte": [
+              3.3
+            ]
+          },
+          {
+            "label": "20–65",
+            "werte": [
+              2.6
+            ]
+          },
+          {
+            "label": "65–70",
+            "werte": [
+              8.6
+            ]
+          },
+          {
+            "label": "70–75",
+            "werte": [
+              13.3
+            ]
+          },
+          {
+            "label": "75–80",
+            "werte": [
+              21.9
+            ]
+          },
+          {
+            "label": "80–85",
+            "werte": [
+              37.8
+            ]
+          },
+          {
+            "label": "85–90",
+            "werte": [
+              56.8
+            ]
+          },
+          {
+            "label": "90 +",
+            "werte": [
+              74.7
+            ]
+          }
+        ]
       }
     },
     {
@@ -152,82 +177,6 @@
             "wert": 2.2
           }
         ]
-      }
-    },
-    {
-      "nach": "heading-4",
-      "statistik": {
-        "art": "tabelle",
-        "titel": "Was die Pflegekasse je Pflegegrad zahlt",
-        "untertitel": "Euro im Monat, 2026",
-        "zeilenkopf": "Leistung",
-        "quelle": {
-          "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
-          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
-          "stand": "Juli 2026"
-        },
-        "spalten": [
-          {
-            "name": "Grad 1"
-          },
-          {
-            "name": "Grad 2"
-          },
-          {
-            "name": "Grad 3",
-            "tag": "häufigster",
-            "hervor": true
-          },
-          {
-            "name": "Grad 4"
-          },
-          {
-            "name": "Grad 5"
-          }
-        ],
-        "zeilen": [
-          {
-            "name": "Pflegegeld, häusliche Pflege",
-            "werte": [
-              "–",
-              "347 €",
-              "599 €",
-              "800 €",
-              "990 €"
-            ]
-          },
-          {
-            "name": "Pflegesachleistung, ambulant",
-            "werte": [
-              "–",
-              "796 €",
-              "1.497 €",
-              "1.859 €",
-              "2.299 €"
-            ]
-          },
-          {
-            "name": "Vollstationäre Pflege",
-            "werte": [
-              "131 €",
-              "805 €",
-              "1.319 €",
-              "1.855 €",
-              "2.096 €"
-            ]
-          },
-          {
-            "name": "Ambulant betreute Wohngruppe",
-            "werte": [
-              "224 €",
-              "224 €",
-              "224 €",
-              "224 €",
-              "224 €"
-            ]
-          }
-        ],
-        "fussnote": "– nicht vorgesehen · Pflegegrad 1 erhält statt Pflegegeld den Entlastungsbetrag."
       }
     },
     {
@@ -294,99 +243,37 @@
     {
       "nach": "heading-5",
       "statistik": {
-        "art": "anteilsleiste",
+        "art": "kennzahlen-liste",
         "titel": "Woraus der Eigenanteil im Heim besteht",
         "untertitel": "Erstes Aufenthaltsjahr, Stichtag 1. Juli 2026",
-        "einheit": "%",
         "quelle": {
           "name": "vdek, Auswertung der Eigenanteile in der vollstationären Pflege",
           "url": "https://www.vdek.com/presse/pressemitteilungen/2026/stationaere-pflege-eigenanteile-juli-2026.html",
           "stand": "14.07.2026"
         },
-        "stuecke": [
+        "zeilen": [
           {
-            "label": "Einrichtungseinheitlicher Eigenanteil",
-            "wert": 52.8
+            "name": "Einrichtungseinheitlicher Eigenanteil",
+            "wert": "1.775 €"
           },
           {
-            "label": "Unterkunft und Verpflegung",
-            "wert": 31.7
+            "name": "davon Ausbildungskosten",
+            "wert": "128 €"
           },
           {
-            "label": "Investitionskosten",
-            "wert": 15.5
+            "name": "Unterkunft und Verpflegung",
+            "wert": "1.068 €"
+          },
+          {
+            "name": "Investitionskosten",
+            "wert": "521 €"
+          },
+          {
+            "name": "Zusammen im Monat",
+            "wert": "3.364 €"
           }
         ],
-        "hinweis": "In Summe 3.364 Euro im Monat: 1.775 Euro Eigenanteil, 1.068 Euro Unterkunft und Verpflegung, 521 Euro Investitionskosten. Die Ausbildungskosten von 128 Euro stecken im Eigenanteil."
-      }
-    },
-    {
-      "nach": "heading-5",
-      "statistik": {
-        "art": "saeulen",
-        "titel": "Wie das Risiko mit dem Alter steigt",
-        "untertitel": "Pflegewahrscheinlichkeit nach Altersgruppe, in Prozent",
-        "einheit": "%",
-        "quelle": {
-          "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
-          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
-          "stand": "Juli 2026"
-        },
-        "reihen": [
-          {
-            "label": "Pflegewahrscheinlichkeit"
-          }
-        ],
-        "kategorien": [
-          {
-            "label": "unter 20",
-            "werte": [
-              3.3
-            ]
-          },
-          {
-            "label": "20–65",
-            "werte": [
-              2.6
-            ]
-          },
-          {
-            "label": "65–70",
-            "werte": [
-              8.6
-            ]
-          },
-          {
-            "label": "70–75",
-            "werte": [
-              13.3
-            ]
-          },
-          {
-            "label": "75–80",
-            "werte": [
-              21.9
-            ]
-          },
-          {
-            "label": "80–85",
-            "werte": [
-              37.8
-            ]
-          },
-          {
-            "label": "85–90",
-            "werte": [
-              56.8
-            ]
-          },
-          {
-            "label": "90 +",
-            "werte": [
-              74.7
-            ]
-          }
-        ]
+        "hinweis": "256 Euro mehr als ein Jahr zuvor. Am niedrigsten liegt der Eigenanteil in Sachsen-Anhalt mit 2.891 Euro, am höchsten in Bremen mit 3.761 Euro."
       }
     },
     {
@@ -496,6 +383,274 @@
           }
         ]
       }
+    },
+    {
+      "statistik": {
+        "art": "tabelle",
+        "titel": "Was die Pflegekasse je Pflegegrad zahlt",
+        "untertitel": "Euro im Monat, 2026",
+        "zeilenkopf": "Leistung",
+        "quelle": {
+          "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
+          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+          "stand": "Juli 2026"
+        },
+        "spalten": [
+          {
+            "name": "Grad 1"
+          },
+          {
+            "name": "Grad 2"
+          },
+          {
+            "name": "Grad 3",
+            "tag": "häufigster",
+            "hervor": true
+          },
+          {
+            "name": "Grad 4"
+          },
+          {
+            "name": "Grad 5"
+          }
+        ],
+        "zeilen": [
+          {
+            "name": "Pflegegeld, häusliche Pflege",
+            "werte": [
+              "–",
+              "347 €",
+              "599 €",
+              "800 €",
+              "990 €"
+            ]
+          },
+          {
+            "name": "Pflegesachleistung, ambulant",
+            "werte": [
+              "–",
+              "796 €",
+              "1.497 €",
+              "1.859 €",
+              "2.299 €"
+            ]
+          },
+          {
+            "name": "Vollstationäre Pflege",
+            "werte": [
+              "131 €",
+              "805 €",
+              "1.319 €",
+              "1.855 €",
+              "2.096 €"
+            ]
+          },
+          {
+            "name": "Ambulant betreute Wohngruppe",
+            "werte": [
+              "224 €",
+              "224 €",
+              "224 €",
+              "224 €",
+              "224 €"
+            ]
+          }
+        ],
+        "fussnote": "– nicht vorgesehen · Pflegegrad 1 erhält statt Pflegegeld den Entlastungsbetrag."
+      },
+      "statt": {
+        "typ": "tabelle",
+        "enthaelt": "Sachleistungen"
+      }
+    },
+    {
+      "statt": {
+        "typ": "tabelle",
+        "enthaelt": "Situation"
+      },
+      "statistik": {
+        "art": "balken",
+        "titel": "Je mehr Kinder, desto niedriger der Beitrag",
+        "untertitel": "Beitragssatz zur sozialen Pflegeversicherung nach Kinderzahl, 2026",
+        "einheit": "%",
+        "quelle": {
+          "name": "BMG, Zahlen, Daten und Fakten zur Pflegeversicherung",
+          "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/Pflegeversicherung/Zahlen_und_Fakten/Zahlen-Fakten_Pflegeversicherung.pdf",
+          "stand": "Juli 2026"
+        },
+        "hervor": "Kinderlos",
+        "werte": [
+          {
+            "label": "Kinderlos",
+            "wert": 4.2
+          },
+          {
+            "label": "1 Kind",
+            "wert": 3.6
+          },
+          {
+            "label": "2 Kinder",
+            "wert": 3.35
+          },
+          {
+            "label": "3 Kinder",
+            "wert": 3.1
+          },
+          {
+            "label": "4 Kinder",
+            "wert": 2.85
+          },
+          {
+            "label": "5 und mehr Kinder",
+            "wert": 2.6
+          }
+        ],
+        "hinweis": "Der Abschlag von 0,25 Prozentpunkten je Kind gilt nur für das zweite bis fünfte Kind unter 25 Jahren. Arbeitnehmer und Arbeitgeber teilen sich den Beitrag; den Zuschlag für Kinderlose trägt allein das Mitglied."
+      }
+    },
+    {
+      "statt": {
+        "typ": "liste",
+        "enthaelt": "15% Zuschlag"
+      },
+      "statistik": {
+        "art": "saeulen",
+        "titel": "Was die Pflegekasse zum Eigenanteil dazugibt",
+        "untertitel": "Zuschuss auf den einrichtungseinheitlichen Eigenanteil, nach Aufenthaltsdauer",
+        "einheit": "%",
+        "quelle": {
+          "name": "vdek, Auswertung der Eigenanteile in der vollstationären Pflege",
+          "url": "https://www.vdek.com/presse/pressemitteilungen/2026/stationaere-pflege-eigenanteile-juli-2026.html",
+          "stand": "14.07.2026"
+        },
+        "reihen": [
+          {
+            "label": "Zuschuss der Pflegekasse"
+          }
+        ],
+        "kategorien": [
+          {
+            "label": "1. Jahr",
+            "werte": [
+              15
+            ]
+          },
+          {
+            "label": "2. Jahr",
+            "werte": [
+              30
+            ]
+          },
+          {
+            "label": "3. Jahr",
+            "werte": [
+              50
+            ]
+          },
+          {
+            "label": "ab 4. Jahr",
+            "werte": [
+              75
+            ]
+          }
+        ],
+        "hinweis": "Die Staffelung zählt Aufenthaltsjahre, nicht Monate. Der Zuschuss gilt nur für den pflegebedingten Eigenanteil, nicht für Unterkunft, Verpflegung und Investitionskosten."
+      }
+    }
+  ],
+  "entfernen": [
+    {
+      "typ": "liste",
+      "enthaelt": "Kein Pflegegeld, nur Entlastungsbetrag"
+    }
+  ],
+  "ohneBestandsstatistiken": true,
+  "leoFragen": [
+    {
+      "abschnitt": "heading-2",
+      "abschnitt_titel": "Was ist Pflegeversicherung und wer braucht sie?",
+      "status": "freigegeben",
+      "frage": "Ab wann gilt man überhaupt als pflegebedürftig?",
+      "antwort": "Wenn Sie gesundheitlich bedingt in Ihrer Selbständigkeit eingeschränkt sind und deshalb Hilfe brauchen — voraussichtlich für mindestens sechs Monate. Der Medizinische Dienst prüft sechs Bereiche: Mobilität, geistige Fähigkeiten, Verhalten, Selbstversorgung, Umgang mit Krankheit und Alltagsgestaltung. Aus den Punkten ergibt sich der Pflegegrad. Nicht die Diagnose entscheidet, sondern was Sie noch selbst können.",
+      "quellen": [
+        "§ 14 SGB XI",
+        "§ 15 SGB XI"
+      ]
+    },
+    {
+      "abschnitt": "heading-2",
+      "abschnitt_titel": "Was ist Pflegeversicherung und wer braucht sie?",
+      "status": "freigegeben",
+      "frage": "Ich pflege meine Mutter zu Hause. Bekomme ich dafür etwas?",
+      "antwort": "Sie bekommen kein Gehalt, aber die Pflegekasse zahlt Rentenbeiträge für Sie, wenn Sie mindestens zehn Stunden wöchentlich an zwei Tagen pflegen, die gepflegte Person mindestens Pflegegrad 2 hat und Sie höchstens 30 Stunden erwerbstätig sind. Dazu kommen Unfallversicherungsschutz und bei Erwerbsaufgabe Beiträge zur Arbeitslosenversicherung. Das Pflegegeld selbst steht der pflegebedürftigen Person zu — sie darf es weitergeben.",
+      "quellen": [
+        "§ 44 SGB XI",
+        "§ 3 Satz 1 Nr. 1a SGB VI"
+      ]
+    },
+    {
+      "abschnitt": "heading-3",
+      "abschnitt_titel": "Pflegeversicherungsbeitrag 2026: Sätze und Staffelungen",
+      "status": "freigegeben",
+      "frage": "Ich bin Rentner. Zahle ich den Pflegebeitrag allein?",
+      "antwort": "Ja. Anders als bei der Krankenversicherung trägt die Rentenversicherung keinen Anteil am Pflegebeitrag — Rentner zahlen ihn in voller Höhe selbst, also 3,6 Prozent, kinderlos 4,2. Abgezogen wird er direkt von der Rente. Auch auf Betriebsrenten und Versorgungsbezüge fällt der volle Satz an, sofern sie die Freigrenze übersteigen.",
+      "quellen": [
+        "§ 59 Abs. 1 SGB XI",
+        "§ 229 SGB V"
+      ]
+    },
+    {
+      "abschnitt": "heading-4",
+      "abschnitt_titel": "Die fünf Pflegegrade: Leistungen und Ansprüche",
+      "status": "freigegeben",
+      "frage": "Mein Vater hat Pflegegrad 2 bekommen, ich halte 3 für richtig. Was kann ich tun?",
+      "antwort": "Legen Sie innerhalb eines Monats nach Zugang des Bescheids Widerspruch ein — formlos genügt, die Begründung können Sie nachreichen. Fordern Sie zugleich das vollständige Gutachten an; Sie haben Anspruch darauf. Prüfen Sie es Punkt für Punkt gegen ein Pflegetagebuch aus zwei Wochen. Etwa jeder dritte Widerspruch führt zu einer Höherstufung.",
+      "quellen": [
+        "§ 84 SGG",
+        "§ 18 Abs. 3 SGB XI"
+      ]
+    },
+    {
+      "abschnitt": "heading-4",
+      "abschnitt_titel": "Die fünf Pflegegrade: Leistungen und Ansprüche",
+      "status": "freigegeben",
+      "frage": "Wie läuft die Begutachtung ab, und wie bereite ich mich vor?",
+      "antwort": "Der Medizinische Dienst kündigt den Termin an und kommt nach Hause. Gutachterinnen fragen nach dem Alltag und lassen sich Handgriffe zeigen. Zwei Dinge helfen: ein Pflegetagebuch über zwei Wochen und eine Vertrauensperson, die dabei ist — Betroffene neigen dazu, sich besser darzustellen, als sie sind. Schildern Sie schlechte Tage, nicht nur gute. Die Kasse muss innerhalb von 25 Arbeitstagen entscheiden, sonst zahlt sie 70 Euro je angefangener Woche Verspätung.",
+      "quellen": [
+        "§ 18 SGB XI",
+        "§ 18 Abs. 3b SGB XI"
+      ]
+    },
+    {
+      "abschnitt": "heading-5",
+      "abschnitt_titel": "Finanzielle Lücke: Warum private Pflegezusatzversicherung sinnvoll ist",
+      "status": "freigegeben",
+      "frage": "Muss ich für das Heim meiner Mutter aufkommen?",
+      "antwort": "Erst ab 100.000 Euro eigenem Jahresbruttoeinkommen. Reichen Rente und Vermögen der Mutter nicht, zahlt das Sozialamt Hilfe zur Pflege und prüft nur dann bei Kindern nach, wenn diese Schwelle überschritten ist. Das Einkommen des Ehepartners bleibt außer Betracht. Ihr eigenes Vermögen wird nicht angetastet, nur laufendes Einkommen.",
+      "quellen": [
+        "§ 94 Abs. 1a SGB XII",
+        "§§ 61 ff. SGB XII"
+      ]
+    },
+    {
+      "abschnitt": "heading-6",
+      "abschnitt_titel": "Leistungsarten: Pflegegeld, Sachleistungen und Kombinationsleistungen",
+      "status": "freigegeben",
+      "frage": "Kann ich Pflegegeld und Pflegedienst gleichzeitig nutzen?",
+      "antwort": "Ja, das ist die Kombinationsleistung. Nutzen Sie etwa 40 Prozent der Sachleistung, bleiben 60 Prozent des Pflegegelds übrig. Bei Pflegegrad 3 wären das rund 599 Euro Pflegegeld und 1.497 Euro Sachleistung als Vollbeträge; die Kasse rechnet anteilig ab. An die gewählte Aufteilung sind Sie sechs Monate gebunden.",
+      "quellen": [
+        "§ 38 SGB XI"
+      ]
+    },
+    {
+      "abschnitt": "heading-8",
+      "abschnitt_titel": "Private Pflegeversicherung: Struktur und Beitragsanpassungen",
+      "status": "freigegeben",
+      "frage": "Lohnt sich eine private Pflegezusatzversicherung mit 55 noch?",
+      "antwort": "Sie wird teurer, aber die Lücke ist real: 3.364 Euro im Monat zahlen Heimbewohner im ersten Jahr durchschnittlich selbst. Prüfen Sie drei Formen — Pflegetagegeld zahlt unabhängig von den tatsächlichen Kosten, Pflegekostenversicherung erstattet Belege, Pflegerentenversicherung baut Kapital auf. Achten Sie darauf, dass die Leistung schon ab Pflegegrad 2 greift und dass Beiträge im Leistungsfall entfallen.",
+      "quellen": [
+        "vdek, Auswertung der Eigenanteile in der vollstationären Pflege"
+      ]
     }
   ]
 }

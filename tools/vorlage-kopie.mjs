@@ -67,20 +67,64 @@ function blockKommentar(st) {
 }
 
 /**
- * Blöcke ans Ende ihres Abschnitts setzen.
- * Von hinten nach vorn einfügen, damit die vorher ermittelten Positionen gültig bleiben.
+ * Ein <table> oder <ul> im Beitrag finden, das einen bestimmten Text enthält.
+ * Gibt Anfang und Ende zurück — oder null, wenn es das Element nicht (mehr) gibt.
  */
-function bloeckeEinsetzen(html, bloecke) {
+function elementFinden(html, typ, enthaelt) {
+  const muster = typ === 'tabelle' ? /<table[\s\S]*?<\/table>/gi : /<ul[\s\S]*?<\/ul>/gi;
+  for (const m of html.matchAll(muster)) {
+    if (m[0].includes(enthaelt)) return { von: m.index, bis: m.index + m[0].length, text: m[0] };
+  }
+  return null;
+}
+
+/**
+ * Blöcke setzen und dabei aufräumen.
+ *
+ * Drei Vorgänge, alle auf denselben Positionen der URSPRÜNGLICHEN Zeichenkette gerechnet
+ * und danach von hinten nach vorn angewandt — sonst verschöben die früheren Änderungen
+ * die späteren Positionen:
+ *
+ *   `nach: "heading-N"`   Block ans Ende des Abschnitts, vor die nächste Zwischenüberschrift
+ *   `statt: {typ,enthaelt}` Block ersetzt eine vorhandene Tabelle oder Liste an Ort und Stelle
+ *   `entfernen: [...]`    Tabelle oder Liste ersatzlos herausnehmen (doppelter Inhalt)
+ *
+ * Wird ein zu ersetzendes Element nicht gefunden, bricht der Lauf ab: der Beitrag hat sich
+ * geändert, und ein stilles Anhängen an anderer Stelle wäre schlimmer als ein Fehler.
+ */
+function bloeckeEinsetzen(html, bloecke, entfernen = []) {
   const h2 = [...html.matchAll(/<h2\b/gi)].map((m) => m.index);
-  const stelle = (nach) => {
+  const abschnittsEnde = (nach) => {
     if (nach === 'ende') return html.length;
     const n = Number(/\d+/.exec(nach)[0]);
     return n + 1 < h2.length ? h2[n + 1] : html.length;
   };
-  const geplant = bloecke.map((b, i) => ({ i, pos: stelle(b.nach), text: blockKommentar(b.statistik) }));
-  geplant.sort((a, b) => b.pos - a.pos || b.i - a.i);
+
+  const vorgaenge = [];
+  const fehlend = [];
+
+  bloecke.forEach((b, i) => {
+    if (b.statt) {
+      const treffer = elementFinden(html, b.statt.typ, b.statt.enthaelt);
+      if (!treffer) { fehlend.push(`${b.statt.typ} mit „${b.statt.enthaelt}" (für „${b.statistik.titel}")`); return; }
+      vorgaenge.push({ i, von: treffer.von, bis: treffer.bis, text: blockKommentar(b.statistik) });
+    } else {
+      const pos = abschnittsEnde(b.nach);
+      vorgaenge.push({ i, von: pos, bis: pos, text: blockKommentar(b.statistik) });
+    }
+  });
+
+  entfernen.forEach((e, i) => {
+    const treffer = elementFinden(html, e.typ, e.enthaelt);
+    if (!treffer) { fehlend.push(`${e.typ} mit „${e.enthaelt}" (zu entfernen)`); return; }
+    vorgaenge.push({ i: 1000 + i, von: treffer.von, bis: treffer.bis, text: '' });
+  });
+
+  if (fehlend.length) { const e = new Error('nicht gefunden'); e.fehlend = fehlend; throw e; }
+
+  vorgaenge.sort((a, b) => b.von - a.von || b.i - a.i);
   let out = html;
-  for (const g of geplant) out = out.slice(0, g.pos) + g.text + out.slice(g.pos);
+  for (const v of vorgaenge) out = out.slice(0, v.von) + v.text + out.slice(v.bis);
   return out;
 }
 
@@ -105,10 +149,18 @@ for (const datei of dateien) {
   } }`, { s: d.slug });
   if (!post) { console.error('  ✗ Quellbeitrag nicht gefunden'); fehler++; continue; }
 
-  const inhalt = bloeckeEinsetzen(post.content, d.bloecke);
+  let inhalt;
+  try {
+    inhalt = bloeckeEinsetzen(post.content, d.bloecke, d.entfernen || []);
+  } catch (e) {
+    (e.fehlend || [e.message]).forEach((f) => console.error('  ✗ ' + f));
+    fehler += (e.fehlend || [1]).length;
+    continue;
+  }
   const h2Zahl = (post.content.match(/<h2\b/gi) || []).length;
   console.log(`  Quelle #${post.databaseId}, ${h2Zahl} Zwischentitel, ${post.content.length} → ${inhalt.length} Zeichen`);
-  for (const b of d.bloecke) console.log(`    ${b.nach.padEnd(10)} ${b.statistik.art.padEnd(18)} ${b.statistik.titel}`);
+  for (const b of d.bloecke) console.log(`    ${(b.statt ? 'ersetzt' : b.nach).padEnd(10)} ${b.statistik.art.padEnd(18)} ${b.statistik.titel}`);
+  for (const e of (d.entfernen || [])) console.log(`    entfernt   ${e.typ.padEnd(18)} „${e.enthaelt}"`);
   if (TROCKEN) continue;
 
   const vorhanden = await gql(`query($s:ID!){ post(id:$s, idType:SLUG){ databaseId } }`, { s: d.kopie })
@@ -135,9 +187,27 @@ for (const datei of dateien) {
   for (const [gqlName, metaName] of Object.entries(FELDER)) {
     const roh = post[gqlName];
     if (roh === null || roh === undefined || roh === '') continue;
+    // Die Vorlagen zeigen den Blockweg. Wo eine Bestandsstatistik dasselbe sagt wie ein
+    // Block, würde sie doppelt stehen — dann bleibt sie hier weg.
+    // Nicht nur überspringen, sondern aktiv leeren: ein zweiter Lauf muss die
+    // Bestandsstatistiken eines früheren Laufs auch wieder loswerden.
+    if (metaName === 'statistiken' && d.ohneBestandsstatistiken) { felder.statistiken = []; console.log('  ⤫ Bestandsstatistiken geleert'); continue; }
     try { felder[metaName] = typeof roh === 'string' ? JSON.parse(roh) : roh; }
     catch { console.warn('  ⚠ unlesbar, übersprungen:', gqlName); }
   }
+  // Leo-Fragen: die des Quellbeitrags bleiben, die recherchierten kommen dazu. Doppelte
+  // Fragen (gleicher Wortlaut) fallen weg — eine Frage zweimal im selben Abschnitt wäre
+  // genau die Deko, die niemand braucht.
+  if ((d.leoFragen || []).length) {
+    const vorhanden = felder.leo_fragen || [];
+    const kennen = new Set(vorhanden.map((f) => (f.frage || '').trim().toLowerCase()));
+    const neue = d.leoFragen.filter((f) => !kennen.has((f.frage || '').trim().toLowerCase()));
+    felder.leo_fragen = vorhanden.concat(neue);
+    const je = {};
+    for (const f of felder.leo_fragen) je[f.abschnitt] = (je[f.abschnitt] || 0) + 1;
+    console.log(`  Leo-Fragen: ${felder.leo_fragen.length} (${vorhanden.length} übernommen, ${neue.length} neu) · ${JSON.stringify(je)}`);
+  }
+
   if (Object.keys(felder).length) {
     const r = await rest('/wp-json/finanzleser/v1/faden-felder', { post_id: ziel.id, felder });
     console.log(`  Faden-Felder: ${(r.geschrieben || []).join(', ') || '—'}${r.abgelehnt?.length ? ' · abgelehnt: ' + r.abgelehnt.join(', ') : ''}`);

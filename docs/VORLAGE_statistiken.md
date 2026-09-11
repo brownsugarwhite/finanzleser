@@ -28,7 +28,7 @@ eine Ratingagentur, ein Nachrichtenartikel). Im Beitrag steht dann sichtbar
 
 ---
 
-## 2 · Die dreizehn Formen: welche wofür
+## 2 · Die vierzehn Formen: welche wofür
 
 Im Inserter stehen sie einzeln unter ihren Namen. Einfach den Namen tippen — „Kreis…“,
 „Zeitstrahl…“, „Spannen…“.
@@ -37,6 +37,7 @@ Im Inserter stehen sie einzeln unter ihren Namen. Einfach den Namen tippen — �
 |---|---|---|
 | **Kreisdiagramm** | ein Ganzes in Teile zerfällt — „wofür die Hausrat zahlt“ | 3 bis 6 Stücke, Summe 100 |
 | **Anteilsleiste** | dasselbe, aber flach und im Textfluss | 3 bis 5 Stücke, Summe 100 |
+| **Balken** | gereihte Werte mit langen Beschriftungen, die sich nicht auf 100 summieren | 2 bis 8 Werte |
 | **Säulen** | Kategorien vergleichen — Jahre, Altersgruppen, Gefahren | 2 bis 8 Kategorien, 1 oder 2 Reihen |
 | **Liniendiagramm** | eine Entwicklung über die Zeit | 1 oder 2 Linien, gleich viele Werte je Linie |
 | **Spannen** | „von – bis“ mit einem typischen Wert dazwischen | 2 bis 6 Zeilen, von ≤ Median ≤ bis |
@@ -49,6 +50,16 @@ Im Inserter stehen sie einzeln unter ihren Namen. Einfach den Namen tippen — �
 | **Begriffe** | Fachwörter erklären — **aus dem Glossar übernehmen** | 2 bis 5 Begriffe |
 | **Vergleichsrechner** | einen externen Rechner einhängen | ein Vergleich aus der Liste |
 
+### Was schon im Text steht, gehört in eine Form
+
+Bevor Sie eine neue Statistik erfinden: Sehen Sie nach, was der Beitrag schon hat. Aufzählungen
+mit Zahlen, HTML-Tabellen und Prozentlisten sind fast immer eine der vierzehn Formen in
+schlechterer Gestalt. In den fünf Vorlagen wurden acht solcher Stellen umgestellt — eine
+Tabelle mit Beiträgen je Personengruppe wurde zu **Spannen**, eine Preisliste nach Stadt zu
+**Balken**, eine Aufzählung „75–80 % / 15–20 % / 3–5 %" zu einer **Anteilsleiste**.
+
+Der Gewinn ist doppelt: Die Zahl wird lesbar, und sie steht nur noch einmal da.
+
 ### Was in welche Form gehört
 
 **Kreisdiagramm / Anteilsleiste** — beide zeigen Anteile eines Ganzen. Der Kreis, wenn die
@@ -59,6 +70,10 @@ sie das nicht, ist es keine Aufteilung — dann Säulen oder Kennzahlen-Liste ne
 **Säulen statt Liniendiagramm** bei wenigen Zeitpunkten (bis etwa fünf) oder wenn die
 Kategorien keine Zeitreihe sind. Linien erst ab sechs, sieben Stützstellen — vorher wirkt
 die Linie behauptender, als die Daten hergeben.
+
+**Balken statt Säulen**, sobald die Beschriftungen länger als ein Wort sind — „Kaufmännischer
+Angestellter" passt unter keine Säule. Der Balken verträgt außerdem Werte, die sich nicht auf
+ein Ganzes summieren: Preise, Beiträge, Zahlen je Gruppe.
 
 **Spannen** ist die ehrlichste Form für Preise. Sie zeigt, dass es eben *keinen* einen Preis
 gibt. Drei Zahlen je Zeile: der günstigste Fall, der typische, der teure.
@@ -106,6 +121,7 @@ freiwillig.
 |---|---|
 | Kreisdiagramm | Einheit · Text in der Mitte · je Stück: Beschriftung, Wert, Farbe |
 | Anteilsleiste | Einheit · je Stück: Beschriftung, Wert, Farbe |
+| Balken | Einheit · je Wert: Beschriftung, Wert, Farbe · ein Wert zum Hervorheben |
 | Säulen | Einheit · Reihen (1–2 Namen) · je Kategorie: Name und je Reihe ein Wert · Obergrenze der Skala |
 | Liniendiagramm | Einheit · Linien (1–2 Namen mit Farbe) · je Stützstelle: Beschriftung und je Linie ein Wert · y-Achse von/bis · Anmerkung |
 | Spannen | Einheit · je Zeile: Name, von, Median, bis · Skala von/bis |
@@ -148,39 +164,73 @@ Eine tragfähige Reihenfolge, an der sich alle fünf orientieren:
 6. Eine **Abwägung** dort, wo Leserinnen wirklich entscheiden müssen.
 7. Am Ende **Begriffe** und der **Vergleichsrechner**.
 
+**Nie zweimal dasselbe.** Zwei Formen mit denselben Zahlen sind keine zwei Statistiken,
+sondern eine Statistik und eine Verdopplung. `node tools/statistik-v2-pruefen.mjs` meldet das.
+Dasselbe gilt für eine Form, die nur hübsch ist: Wenn sie keine Frage beantwortet, die sich
+beim Lesen stellt, gehört sie nicht in den Beitrag.
+
 Nicht in **Fazit** und nicht in **Häufige Fragen**. Diese beiden Abschnitte werden im Faden
 anders gesetzt; ein Block landet dort am Beitragsende statt an seiner Stelle.
 
 ---
 
-## 6 · Die fünf Vorlagen zum Nachschauen
+## 6 · Fragen an Leo
+
+Unter jedem Fachabschnitt stehen Chips mit Fragen. Wer einen antippt, bekommt Leos Antwort
+an Ort und Stelle — der Chip wird zur Frage und die Antwort schreibt sich darunter ein.
+
+Gepflegt werden sie im Feld **Leo-Fragen** des Beitrags. Je Frage gehören dazu:
+
+| Feld | Inhalt |
+|---|---|
+| Abschnitt | `heading-<n>` — dieselbe Zählung wie bei den Statistiken |
+| Frage | Wie jemand sie wirklich stellen würde, gern mit Situation |
+| Antwort | Drei bis fünf Sätze, konkret, mit Zahlen |
+| Quellen | Paragraph oder Quelle, auf die sich die Antwort stützt |
+
+**Acht bis fünfzehn je Beitrag**, ein bis zwei je Abschnitt. Die fünf Vorlagen haben zwölf.
+
+Was eine gute Frage ausmacht:
+
+- **Situation statt Stichwort.** Nicht „Was ist der Kinderlosenzuschlag?", sondern
+  „Ich habe drei Kinder, das älteste ist 26. Welchen Pflegebeitrag zahle ich?"
+- **Beantwortbar.** Die Antwort muss aus Gesetz, Bedingungen oder Statistik folgen —
+  nicht aus einer Einschätzung.
+- **Nicht im Text schon beantwortet.** Eine Frage, die der Absatz darüber beantwortet,
+  ist Deko.
+- **Zahlen mitliefern.** „Etwa 2.800 Euro im Monat, ab dem vierten Jahr rund 900 weniger"
+  ist eine Antwort. „Das hängt vom Einzelfall ab" ist keine.
+
+## 7 · Die fünf Vorlagen zum Nachschauen
 
 Auf cms-dev, alle mit echten Zahlen und echten Quellen:
 
 | Beitrag | Formen darin |
 |---|---|
-| `vorlage-haftpflicht` | Vierer, Säulen, Linien, Tabelle, Begriffe, Kennzahlen, Abwägung, Schrittfolge, Zeitstrahl, Vergleichsrechner |
-| `vorlage-hausrat` | dazu Kreisdiagramm |
-| `vorlage-bu` | Kreis, zwei Säulen, Tabelle, Abwägung |
-| `vorlage-baufinanzierung` | **Spannen** und **Anteilsleiste** |
-| `vorlage-pflege` | zwölf Elemente, elf verschiedene Formen |
+| `vorlage-haftpflicht` | 11 Elemente · **Spannen** aus einer vorhandenen Tabelle |
+| `vorlage-hausrat` | 12 Elemente · **Balken** aus der Preisliste nach Stadt |
+| `vorlage-bu` | 12 Elemente · **Balken** und **Anteilsleiste** aus Tabelle und Aufzählung |
+| `vorlage-baufinanzierung` | 13 Elemente · **Liniendiagramm** und Zinsbindungstabelle |
+| `vorlage-pflege` | 13 Elemente · drei umgestellte Stellen, zwölf Leo-Fragen |
 
 Belege zu allen Zahlen: `docs/inhalte/statistik-v2-quellen.md`.
 
-Alle dreizehn Formen nebeneinander, mit den Zahlen des Designs:
+Alle Formen nebeneinander, mit den Zahlen des Designs:
 `/schaukasten/statistiken`.
 
 ---
 
-## 7 · Für die Technik
+## 8 · Für die Technik
 
-- Blockfamilie: `finanzleser/statistik`, dreizehn Variationen.
+- Blockfamilie: `finanzleser/statistik`, vierzehn Variationen.
   `wordpress/plugins/finanzleser-blocks/`
 - Nutzlast: base64-JSON im Attribut `daten`, ausgegeben als
   `<div data-finanzleser-statistik="…"></div>`
 - Frontend: `components/statistik/`, Regeln in `lib/statistik/schema.ts`
 - Prüfen: `node tools/statistik-v2-pruefen.mjs`
-- Vorlagen neu setzen: `node tools/vorlage-kopie.mjs [--trocken]`
+- Vorlagen neu setzen: `node tools/vorlage-kopie.mjs [--trocken]` — setzt Blöcke, ersetzt
+  vorhandene Tabellen und Listen (`statt`), entfernt doppelte (`entfernen`) und schreibt die
+  Leo-Fragen
 - Plugin ausspielen: `tools/plugin-deploy.sh plugins/finanzleser-blocks`
 
 🚨 Die Prüfregeln stehen zweimal — in `lib/statistik/schema.ts` und in `blocks.js`. Das

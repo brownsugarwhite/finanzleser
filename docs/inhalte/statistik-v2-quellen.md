@@ -21,6 +21,7 @@ veröffentlichten Summen berechnet ist, steht das im `hinweis` des Blocks — ni
 | [Deutsche Rentenversicherung, Rentenstatistik 2025](https://jahresbericht.deutsche-rentenversicherung.de/artikel/in-zahlen-2025/) | Erwerbsminderungsrente: Zahlbeträge, Zugänge, Entwicklung seit 2013 | 2025 |
 | [Destatis, Preise für Wohnimmobilien im 1. Quartal 2026](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_219_61262.html) | Häuserpreisindex, Preisentwicklung nach Kreistyp | 25.06.2026 |
 | [Destatis, Grunderwerbsteuer der Länder](https://www.destatis.de/DE/Presse/Pressemitteilungen/Grafiken/Newsroom/2024/_Interaktiv/20240222-grunderwerbssteuer-bundeslaender.html) | Steuersätze 3,5 bis 6,5 Prozent | 2024 |
+| [Deutsche Bundesbank, Zinssätze für das Neugeschäft](https://www.bundesbank.de/resource/blob/615036/9f4efe4e8f601ff991ec86223910816f/472B63F073F071307366337C94F8C870/s510athyp-data.pdf) | Bauzinsen 2026 von Monat zu Monat | Juli 2026 |
 | Gesetze im Internet (§§ 11, 14, 19, 30, 172 VVG · §§ 15, 18, 45b SGB XI · § 43 SGB VI · §§ 489, 491a, 873 BGB) | Fristen, Definitionen, Verfahren | 2026 |
 
 ## Sekundärquellen
@@ -32,6 +33,35 @@ Im Frontend als „Sekundärquelle“ ausgewiesen (`quelle.sekundaer: true`).
 | [MORGEN & MORGEN, M&M Rating Berufsunfähigkeit 2026](https://morgenundmorgen.com/magazin/mm-marktblick/m-m-marktblick-berufsunfaehigkeit-2026/) | Ursachen der Berufsunfähigkeit | 05.05.2026 |
 | [Verbraucherzentrale, Hausratversicherung](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hausratversicherung-was-sie-wissen-muessen-11360) | Faustregel Versicherungssumme je Quadratmeter | 2026 |
 | [Verbraucherzentrale, Privathaftpflichtversicherung](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/privathaftpflichtversicherung-schutz-vor-hohen-kosten-13840) | Abwägung Selbstbehalt | 2026 |
+
+## Zahlen aus dem Beitrag selbst
+
+Acht Stellen der fünf Ratgeber standen schon als HTML-Tabelle oder Aufzählung im Text und
+wurden in eine Form überführt. Ihre Zahlen stammen aus der **redaktionellen
+Marktbeobachtung** — sie standen dort bereits als Aussage und sind mit der Umstellung weder
+neu noch verändert worden.
+
+| Beitrag | Was umgestellt wurde | Neue Form |
+|---|---|---|
+| Privathaftpflicht | Beiträge je Personengruppe | Spannen |
+| Hausrat | Jahresbeitrag nach Stadt | Balken |
+| Berufsunfähigkeit | Monatsbeitrag nach Berufsgruppe | Balken |
+| Berufsunfähigkeit | Ausgang der Anträge (75–80 / 15–20 / 3–5 %) | Anteilsleiste |
+| Baufinanzierung | Zinssatz nach Zinsbindung | Vergleichstabelle |
+| Pflege | Beitragssatz nach Kinderzahl | Balken |
+| Pflege | Leistungsbeträge je Pflegegrad | Vergleichstabelle |
+| Pflege | Staffelung des Zuschusses nach Aufenthaltsdauer | Säulen |
+
+🚨 Zwei Anmerkungen dazu:
+
+- Die **Leistungsbeträge je Pflegegrad** standen im Beitrag mit den Werten von 2025
+  (stationär 770 / 1.262 / 1.775 / 2.005 Euro). Der Block nutzt die Werte des BMG-Stands
+  Juli 2026 (805 / 1.319 / 1.855 / 2.096 Euro).
+- Die **Staffelung des Zuschusses** war im Beitrag als „Jahre 1-12: 15 %, Jahre 13-24: 30 %"
+  angegeben. Der vdek zählt Aufenthalts**jahre**: 15 Prozent im ersten, 30 im zweiten, 50 im
+  dritten und 75 ab dem vierten. Der Block folgt dem vdek.
+
+Beides sollte die Redaktion gegenlesen.
 
 ## Eigene Berechnungen
 
