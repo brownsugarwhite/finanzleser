@@ -15,6 +15,7 @@ export type StatistikArt =
   | "saeulen"
   | "spannen"
   | "anteilsleiste"
+  | "balken"
   | "linien"
   | "zeitstrahl"
   | "tabelle"
@@ -31,6 +32,7 @@ export const FORM_NAME: Record<StatistikArt, string> = {
   saeulen: "Säulen",
   spannen: "Spannen",
   anteilsleiste: "Statistik",
+  balken: "Statistik",
   linien: "Statistik",
   zeitstrahl: "Zeitstrahl",
   tabelle: "Vergleich",
@@ -86,6 +88,19 @@ export interface StatKreis extends Basis {
 export interface StatAnteilsleiste extends Basis {
   art: "anteilsleiste";
   stuecke: Stueck[];
+}
+
+/**
+ * Gereihte Balken — die eine Form, die der Setzkasten des Handoffs nicht kennt. Sie steht
+ * hier trotzdem, weil 156 der 288 Bestandsstatistiken genau das sind und die Redaktion sie
+ * braucht: Werte mit langen Beschriftungen, die sich nicht auf 100 summieren. Gebaut aus
+ * der Bildsprache der Spannen, siehe components/statistik/formen/Balkenliste.tsx.
+ */
+export interface StatBalken extends Basis {
+  art: "balken";
+  werte: Stueck[];
+  /** Ein Wert darf hervorgehoben werden — etwa der, um den es im Absatz geht. */
+  hervor?: string;
 }
 
 export interface StatSaeulen extends Basis {
@@ -162,6 +177,7 @@ export interface StatVergleichsrechner extends Basis {
 export type Statistik =
   | StatKreis
   | StatAnteilsleiste
+  | StatBalken
   | StatSaeulen
   | StatSpannen
   | StatLinien
@@ -228,6 +244,12 @@ export function pruefeStatistik(s: Statistik): string[] {
   }
 
   switch (s.art) {
+    case "balken": {
+      const n = s.werte?.length ?? 0;
+      if (n < 2 || n > 8) f.push(`2 bis 8 Werte, nicht ${n}.`);
+      if (!s.werte?.every((x) => zahl(x.wert) && x.label?.trim())) f.push("Jeder Wert braucht Beschriftung und endliche Zahl.");
+      break;
+    }
     case "kreis":
     case "anteilsleiste": {
       const n = s.stuecke?.length ?? 0;

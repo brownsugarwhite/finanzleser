@@ -61,8 +61,10 @@
 .faden-shell .st-kreis__leiter { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 1; transition: stroke-dashoffset .6s ease-out; }
 .faden-shell .st-kreis__punkt { fill: var(--ink); transition: opacity .3s; }
 .faden-shell .st-kreis__marke { position: absolute; display: flex; flex-direction: column; white-space: nowrap; transition: opacity .4s; cursor: default; }
+/* Innere Ebene: nur das Abdunkeln beim Überfahren, ohne den Verzug des Einblendens. */
+.faden-shell .st-kreis__marke__inhalt { display: flex; flex-direction: column; transition: opacity .3s; }
 .faden-shell .st-kreis__marke b { font: 700 12.5px/1.2 var(--serif); }
-.faden-shell .st-kreis__marke > span { font: 400 11px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .st-kreis__marke__inhalt > span { font: 400 11px/1.3 var(--sans); color: var(--muted); }
 .faden-shell .st-kreis__mitte { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
 .faden-shell .st-kreis__mitte b { font: 900 clamp(20px,2.6vw,26px)/1 var(--serif); color: var(--ink); }
 .faden-shell .st-kreis__mitte span { margin-top: 4px; font: 400 10px var(--sans); color: var(--muted); letter-spacing: .12em; }
@@ -252,9 +254,11 @@
 
 /* Balkenliste — Bildsprache der Spannen (Handoff 986–1004), siehe formen/Balkenliste.tsx */
 .faden-shell .st-balken { display: flex; flex-direction: column; margin-top: 12px; }
+/* Die Beschriftung steht rechtsbündig an der Bahn. Links ausgerichtet klaffte bei kurzen
+   Wörtern eine Lücke von halber Spaltenbreite zwischen Text und Balken. */
 .faden-shell .st-balken__zeile { display: grid; grid-template-columns: minmax(110px,32%) 1fr auto; gap: 14px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(51,74,39,.1); transition: opacity .2s; }
 .faden-shell .st-balken__zeile.gedimmt { opacity: .4; }
-.faden-shell .st-balken__name { font: 400 14.5px/1.35 var(--serif); color: var(--ink); overflow-wrap: anywhere; }
+.faden-shell .st-balken__name { font: 400 14.5px/1.35 var(--serif); color: var(--ink); overflow-wrap: anywhere; text-align: right; }
 .faden-shell .st-balken__bahn { position: relative; height: 26px; }
 .faden-shell .st-balken__grund { position: absolute; left: 0; right: 0; top: 13px; height: 1px; background: rgba(51,74,39,.15); }
 .faden-shell .st-balken__balken { position: absolute; left: 0; top: 12px; height: 3px; transform-origin: left; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
@@ -264,6 +268,7 @@
 
 @media (max-width: 720px) {
   .faden-shell .st-balken__zeile { grid-template-columns: 1fr auto; }
+  .faden-shell .st-balken__name { text-align: left; }
   .faden-shell .st-balken__bahn { grid-column: 1 / -1; height: 14px; }
   .faden-shell .st-balken__grund { top: 7px; }
   .faden-shell .st-balken__balken { top: 6px; }

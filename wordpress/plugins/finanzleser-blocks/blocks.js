@@ -664,6 +664,17 @@
                 { k: 'farbe', l: 'Farbe', wahl: STAT_FARBEN, breite: 150 },
             ] },
         },
+        'balken': {
+            titel: 'Balken', icon: 'menu-alt',
+            info: 'Gereihte Werte mit langen Beschriftungen. Muss sich nicht auf 100 summieren.',
+            kopf: ['untertitel', 'einheit'],
+            extra: [{ k: 'hervor', l: 'Diesen Wert hervorheben (Beschriftung eintippen)' }],
+            liste: { k: 'werte', l: 'Werte', spalten: [
+                { k: 'label', l: 'Beschriftung' },
+                { k: 'wert', l: 'Wert', zahl: true, breite: 90 },
+                { k: 'farbe', l: 'Farbe', wahl: STAT_FARBEN, breite: 150 },
+            ] },
+        },
         'saeulen': {
             titel: 'Säulen', icon: 'chart-bar',
             info: 'Vergleich über Kategorien, etwa Jahre. Bis 8 Kategorien, eine oder zwei Reihen.',
@@ -822,6 +833,10 @@
                 var sum = st.reduce(function(a, x) { return a + x.wert; }, 0);
                 if (Math.abs(sum - 100) > 0.5) f.push('Anteile summieren sich auf ' + sum.toFixed(1) + ', nicht auf 100.');
             }
+        } else if (s.art === 'balken') {
+            n = (s.werte || []).length;
+            if (n < 2 || n > 8) f.push('2 bis 8 Werte, nicht ' + n + '.');
+            if (!(s.werte || []).every(function(x) { return zahlOk(x.wert) && x.label && x.label.trim(); })) f.push('Jeder Wert braucht Beschriftung und Zahl.');
         } else if (s.art === 'saeulen') {
             if (!(s.reihen || []).length || s.reihen.length > 2) f.push('Eine oder zwei Reihen, nicht mehr.');
             n = (s.kategorien || []).length;

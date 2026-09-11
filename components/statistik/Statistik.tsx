@@ -19,6 +19,7 @@ import Kreis from "./formen/Kreis";
 import Saeulen from "./formen/Saeulen";
 import Spannen from "./formen/Spannen";
 import Anteilsleiste from "./formen/Anteilsleiste";
+import BalkenBlock from "./formen/BalkenBlock";
 import Linien from "./formen/Linien";
 import Zeitstrahl from "./formen/Zeitstrahl";
 import Tabelle from "./formen/Tabelle";
@@ -41,6 +42,7 @@ const RAHMEN: Record<StatistikArt, "blank" | "oben" | "kopfzeile" | "unterlinie"
   saeulen: "blank",
   spannen: "blank",
   anteilsleiste: "oben",
+  balken: "oben",
   linien: "oben",
   tabelle: "kopfzeile",
   zeitstrahl: "unterlinie",
@@ -58,6 +60,7 @@ function Form({ st }: { st: StatistikDaten }) {
     case "saeulen": return <Saeulen st={st} />;
     case "spannen": return <Spannen st={st} />;
     case "anteilsleiste": return <Anteilsleiste st={st} />;
+    case "balken": return <BalkenBlock st={st} />;
     case "linien": return <Linien st={st} />;
     case "zeitstrahl": return <Zeitstrahl st={st} />;
     case "tabelle": return <Tabelle st={st} />;
