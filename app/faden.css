@@ -614,18 +614,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten--ks { margin-top: 40px; }
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
-/* ---------- Abschnittsfuß: Haarlinie, Kopfzeile, darunter das Gespräch ---------- */
-/* 🚨 Die Kopfzeile ist eine eigene Zeile, kein Raster um beides. Als der Teilen-Link noch
-   eine eigene Rasterspalte hatte, blieben dem Gespräch mit Leo nur 613 der 728 px — die
-   Sprechblasen wurden schmaler, sobald jemand eine Frage anklickte. Jetzt teilen sich
-   Überschrift und Link die Kopfzeile, und das Gespräch darunter hat die volle Spalte. */
-.faden-shell .abschnitt__fuss { clear: both; margin-top: 26px; border-top: 1px solid var(--rule); padding-top: 12px; }
-.faden-shell .abschnitt__fuss-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
-/* Ohne Fragen steht nur der Link da — dann rechtsbündig unter der Linie, nicht oben im
-   nächsten Abschnitt. */
-.faden-shell .abschnitt__fuss-kopf:only-child { justify-content: flex-end; }
-.faden-shell .abschnitt__fuss .teilen { font-size: 12.5px; line-height: 1.3; white-space: nowrap; }
-.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 18px; }
+/* ---------- Abschnittsfuß: Teilen, Trennlinie, darunter Leos Fragen ---------- */
+/* 🚨 Ein einspaltiges Raster, keine Nebenspalte für den Teilen-Link. Als der noch eine
+   eigene Spalte hatte, blieben dem Gespräch mit Leo nur 613 der 728 px — die Sprechblasen
+   wurden schmaler, sobald jemand eine Frage anklickte. */
+.faden-shell .abschnitt__fuss { clear: both; margin-top: 26px; display: grid; }
+.faden-shell .abschnitt__fuss .teilen { justify-self: end; margin-bottom: 10px; font-size: 12.5px; line-height: 1.3; white-space: nowrap; }
+.faden-shell .abschnitt__linie { display: block; height: 1px; background: var(--rule); margin-bottom: 12px; }
+.faden-shell .weiterlesen { clear: both; display: grid; gap: 8px; margin-top: 8px; }
 .faden-shell .weiterlesen .fragen { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; }
 /* „Sie könnten Leo auch fragen" steht in derselben Zeile wie die Chips und bricht mit. */
 .faden-shell .weiterlesen .fragen__kopf { flex-basis: 100%; margin-bottom: 2px; }
