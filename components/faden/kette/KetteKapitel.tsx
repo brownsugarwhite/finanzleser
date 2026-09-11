@@ -176,6 +176,11 @@ export default async function KetteKapitel({ post, toolData }: { post: Post; too
               <div className={cn("fazit prose", zeitungKlassen(k.fazitHtml, { initiale: true }))} dangerouslySetInnerHTML={{ __html: k.fazitHtml }} />
             </section>
           )}
+          {/* Statistiken, die außerhalb eines Fachabschnitts gesetzt wurden (FAQ, Fazit,
+              vor der ersten Zwischenüberschrift). Sie stehen hier, statt zu verschwinden. */}
+          {k.nachzuegler.map((t, i) => (
+            <Insel key={`nachzuegler-${i}`} typ="statistik-block" werte={t.werte}><Statistik st={t.werte} /></Insel>
+          ))}
           {k.werkzeuge.length > 0 && (
             <section className="abschnitt abschnitt--werkzeuge" id="werkzeuge">
               <span className="kicker">Finanztools zum Beitrag</span>

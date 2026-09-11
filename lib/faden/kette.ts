@@ -81,6 +81,12 @@ export interface Kette {
   fazitId?: string;
   /** Alle Werkzeuge des Beitrags, in CMS-Reihenfolge, für den Block am Ende. */
   werkzeuge: WerkzeugTeil[];
+  /**
+   * Statistik-Blöcke, die außerhalb eines Fachabschnitts stehen — vor der ersten
+   * Zwischenüberschrift, im FAQ- oder im Fazit-Abschnitt. Die tragen dort kein Zuhause,
+   * sollen aber auch nicht still verschwinden; sie stehen am Ende des Beitrags.
+   */
+  nachzuegler: Extract<Teil, { art: "statistik" }>[];
   toc: TocEintrag[];
   faden: FadenFelder;
 }
@@ -181,23 +187,31 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
 
   const fach: Abschnitt[] = [];
   const verirrteEmbeds: Extract<Teil, { art: "embed" }>[] = [];
+  // Statistiken aus Kicker, Einleitung, FAQ und Fazit. Dort gibt es keine Teile-Liste zum
+  // Rendern (Fazit ist eine HTML-Zeichenkette, FAQ ein Paar-Array), also werden sie
+  // geborgen und ans Ende gehängt — verworfen würden sie lautlos fehlen.
+  const nachzuegler: Extract<Teil, { art: "statistik" }>[] = [];
+  const bergen = (s: RohSektion) => s.teile.forEach((t) => {
+    if (t.art === "embed") verirrteEmbeds.push(t);
+    else if (t.art === "statistik") nachzuegler.push(t);
+  });
 
   for (const s of sektionen) {
     if (s.nr <= 1) {
       // Werkzeuge aus Kicker/Einleitung wandern in den Pool (kommen praktisch nicht vor).
-      s.teile.forEach((t) => { if (t.art === "embed") verirrteEmbeds.push(t); });
+      bergen(s);
       continue;
     }
     if (istFaq(s)) {
       const block = extractFaqBlock(s.html.join("\n")) || extractFaqBlock(normalizeFaq(content));
       if (block) { faq = block.pairs; faqId = `heading-${s.nr}`; }
-      s.teile.forEach((t) => { if (t.art === "embed") verirrteEmbeds.push(t); });
+      bergen(s);
       continue;
     }
     if (istFazit(s)) {
       fazitHtml = fliessHtml(s.html.join("\n"));
       fazitId = `heading-${s.nr}`;
-      s.teile.forEach((t) => { if (t.art === "embed") verirrteEmbeds.push(t); });
+      bergen(s);
       continue;
     }
     // Fachabschnitt: Embeds herausziehen (werden gleich per Einwurf platziert), Rest bleibt in Reihenfolge.
@@ -277,6 +291,7 @@ export function baueKette(post: Post, opts: { toolTitel?: Record<string, string>
     fazitHtml,
     fazitId,
     werkzeuge: pool,
+    nachzuegler,
     toc,
     faden,
   };
