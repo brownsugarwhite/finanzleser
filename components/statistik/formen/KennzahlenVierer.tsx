@@ -11,7 +11,9 @@ import { useZeichnen, useZaehlwerk, type Zeichenstand } from "@/lib/statistik/us
 
 function Kachel({ k, stand }: { k: StatKennzahlenVierer["kacheln"][number]; stand: Zeichenstand }) {
   const wert = useZaehlwerk(k.zahl, stand);
-  const nachkomma = Number.isInteger(k.zahl) ? 0 : 1;
+  // Nachkommastellen aus der eingegebenen Zahl, nicht pauschal eine: sonst würde aus den
+  // getippten 1,97 Millionen beim Anzeigen „2,0" — eine Stelle, die niemand eingegeben hat.
+  const nachkomma = Math.min(2, (String(k.zahl).split(".")[1] || "").length);
   return (
     <div className="st-vierer__kachel">
       <span className="kicker">{k.label}</span>
