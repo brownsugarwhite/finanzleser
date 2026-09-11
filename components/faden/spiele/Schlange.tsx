@@ -116,12 +116,22 @@ export default function Schlange() {
   }, []);
 
   // Raster an die Breite anpassen — aber nie mitten im Spiel.
+  //
+  // 🚨 `window.resize` reicht dafür nicht. Auf der Landing schon, im Beitrag nicht: dort
+  // steht die Schlange in einer halben Spalte, und die ändert ihre Breite auch ohne
+  // Fensterwechsel — die Randspalten fahren als Schubladen ein und aus, das Raster bricht
+  // bei 760 px um. Der schwerste Fall ist der Portal-Einhang im eingefrorenen Kapitel:
+  // dort misst `messen()` beim ersten Lauf womöglich noch 0, und ein `resize` kommt nie.
   useEffect(() => {
     const el = feld.current;
     if (!el) return;
     const messen = () => {
       if (standRef.current === "laeuft") return;
-      const neu = rasterZuBreite(el.clientWidth || 728);
+      const breite = el.clientWidth;
+      // Vor dem Einhängen ist die Breite 0 — dann lieber nichts setzen und auf die
+      // nächste Meldung des Beobachters warten, statt auf den Notwert zurückzufallen.
+      if (!breite) return;
+      const neu = rasterZuBreite(breite);
       setRaster((alt) => {
         if (alt.spalten === neu.spalten && alt.reihen === neu.reihen) return alt;
         spiel.current.koerper = startKette(neu);
@@ -131,6 +141,11 @@ export default function Schlange() {
       });
     };
     messen();
+    if (typeof ResizeObserver !== "undefined") {
+      const ro = new ResizeObserver(messen);
+      ro.observe(el);
+      return () => ro.disconnect();
+    }
     window.addEventListener("resize", messen);
     return () => window.removeEventListener("resize", messen);
   }, []);
