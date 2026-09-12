@@ -7,7 +7,7 @@
  */
 import { getNavItems, getLatestPosts } from "@/lib/wordpress";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
-import { werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { GAENGIGE_VERGLEICHE, vergleicheAufloesen, werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
 import { buildPostUrl } from "@/lib/urls";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
@@ -25,6 +25,8 @@ import Begruessung from "./Begruessung";
 import AusDemNewsletter from "./landing/AusDemNewsletter";
 import WochenbriefTeaser from "./landing/WochenbriefTeaser";
 import PlusTeaser from "./landing/PlusTeaser";
+import LeoEmpfiehlt from "./landing/LeoEmpfiehlt";
+import WeiterredenChips from "./landing/WeiterredenChips";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import Insel from "@/components/faden/kette/Insel";
@@ -73,6 +75,7 @@ export default async function FadenLanding() {
     ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
     ...werkzeugeDerWoche(werkzeuge),
   ];
+  const gaengig = vergleicheAufloesen(werkzeuge, GAENGIGE_VERGLEICHE).map((v) => ({ titel: v.titel, href: v.href }));
 
   return (
     <>
@@ -99,6 +102,8 @@ export default async function FadenLanding() {
           <WochenbriefTeaser />
           <SchlangeKarte />
           <PlusTeaser />
+          <LeoEmpfiehlt gaengig={gaengig} daten={kassensturz} ziele={ksZiele} />
+          <WeiterredenChips />
 
           </Begruessung>
         </div>
