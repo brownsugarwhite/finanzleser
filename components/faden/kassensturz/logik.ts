@@ -144,9 +144,14 @@ export function standLesen(): KassensturzStand | null {
   } catch { return null; }
 }
 
+/** Ereignis nach jedem Schreiben — `storage` feuert nur zwischen Tabs, und auf der
+ *  Startseite stehen Kassensturz und Leos Empfehlung auf derselben Seite. */
+export const KS_EREIGNIS = "faden-kassensturz";
+
 export function standSchreiben(s: KassensturzStand | null): void {
   try {
     if (!s) localStorage.removeItem(KS_SPEICHER);
     else localStorage.setItem(KS_SPEICHER, JSON.stringify(s));
   } catch { /* voll oder gesperrt */ }
+  try { document.dispatchEvent(new Event(KS_EREIGNIS)); } catch { /* kein DOM */ }
 }
