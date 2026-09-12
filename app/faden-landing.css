@@ -46,12 +46,12 @@
 /* Die Pille aus v2 (Übergabe Zeile 270): doppelte Kontur, grüner Block mit dem Strichpaar. */
 .faden-shell .plus-teaser__preis { display: inline-flex; align-items: center; gap: 15px; justify-self: start; height: 44px; margin-top: 16px; padding: 3px 3px 3px 17px; border: 2px solid var(--rule-strong); outline: 1px solid var(--rule-strong); outline-offset: 2px; border-radius: 19px; background: transparent; color: var(--ink); font: 500 15px var(--sans); text-decoration: none; transition: color .2s; }
 .faden-shell .plus-teaser__preis:hover { color: var(--green-ink); }
-.faden-shell .plus-teaser__preis i { position: relative; width: 34px; height: 34px; border-radius: 15px; background: var(--green); flex: none; }
-.faden-shell .plus-teaser__preis i::before, .faden-shell .plus-teaser__preis i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 3px; border-radius: 2px; background: #fff; }
-.faden-shell .plus-teaser__preis i::before { transform: translate(-50%, calc(-50% - 4px)); }
-.faden-shell .plus-teaser__preis i::after { transform: translate(-50%, calc(-50% + 4px)); }
+.faden-shell .plus-teaser__preis i { width: 34px; height: 34px; border-radius: 15px; background: var(--green); display: grid; place-items: center; flex: none; }
 
 /* ---------- Leo empfiehlt ---------- */
+/* Leos Block ist kein `.landing-block` (er braucht die Gasse aus `.wort--leo`) — den
+   Abstand nach oben trägt er deshalb selbst. */
+.faden-shell .leo-empfiehlt { margin-top: 44px; }
 .faden-shell .leo-empfiehlt__reihe { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
 /* ---------- Weiterreden mit Leo ---------- */

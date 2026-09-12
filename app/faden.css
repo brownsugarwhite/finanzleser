@@ -731,6 +731,13 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    🚨 Kein Layoutsprung: Eingabe.tsx misst `--eingabe-h` aus `offsetHeight`, und den
    ändert eine Transformation nicht. Der Bodenabstand des Stroms bleibt konstant. */
 .faden-shell .eingabe { transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .25s ease; }
+/* 🚨 ZWEI Haken, und beide werden gebraucht. `data-landing` setzt das Inline-Script im
+   Layout VOR dem ersten Paint — ohne das steht die Eingabe eine Hydration lang unten am
+   Hero, und der Messring von FieldOutline richtet sich in ihr sichtbar neu aus (gemessen
+   12.09.2026: ein Sprung von 0,032 bei 580 ms). `data-faden-hero` kommt erst nach der
+   Hydration, hält den Hero dafür die ganze Sitzung — auch wenn der Leser die Startseite
+   längst verlassen hat und `data-landing` weg ist. */
+body[data-landing]:not(.faden-eingabe-frei) .faden-shell .eingabe,
 body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform: translateY(calc(100% + 28px)); opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .faden-shell .eingabe { transition: none; } }
 

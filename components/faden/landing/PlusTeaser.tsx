@@ -20,7 +20,16 @@ export default function PlusTeaser() {
         <li><span>Wächter für alle Verträge</span><i className="inhalt__linie" aria-hidden="true" /><a className="textlink" href="/plus/waechter">ansehen</a></li>
         <li><span>Ausgaben als PDF</span><i className="inhalt__linie" aria-hidden="true" /><span className="quelle">in Vorbereitung</span></li>
       </ul>
-      <a className="plus-teaser__preis" href="/plus"><span>4,90 € im Monat</span><i aria-hidden="true" /></a>
+      <a className="plus-teaser__preis" href="/plus">
+        <span>4,90 € im Monat</span>
+        {/* Der Doppelstrich ist die Hausmarke — derselbe Pfad wie in RechnerButton.tsx. */}
+        <i aria-hidden="true">
+          <svg width="13" height="11" viewBox="0 0 13 11" fill="none">
+            <path d="M1.5 1.5L11.5 1.5" stroke="white" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+            <path d="M1.5 9.5L11.5 9.5" stroke="white" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          </svg>
+        </i>
+      </a>
     </section>
   );
 }
