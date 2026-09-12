@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Finanzleser Blocks
- * Description: Gutenberg-Blöcke für Finanzrechner, Checklisten und Vergleiche
- * Version: 1.1.0
+ * Description: Gutenberg-Blöcke für Finanzrechner, Checklisten, Vergleiche und Statistiken
+ * Version: 1.2.0
  * Author: Finanzleser
  */
 
@@ -197,11 +197,39 @@ add_action('init', function() {
         ),
     ));
 
+    // Statistik: EINE Blockart, dreizehn Variationen (Kreisdiagramm, Saeulen, Spannen,
+    // Anteilsleiste, Liniendiagramm, Zeitstrahl, Vergleichstabelle, Kennzahlen-Vierer,
+    // Kennzahlen-Liste, Schrittfolge, Abwaegung, Begriffe, Vergleichsrechner). Im Inserter
+    // sind es dreizehn eigene Eintraege, gespeichert wird ein einziger Blocktyp.
+    //
+    // DYNAMIC. Die Nutzlast steht als base64-JSON im Attribut `daten` — base64, weil die
+    // Werte Euro-Zeichen, Umlaute, Haken und Anfuehrungszeichen enthalten und ein
+    // Klartext-Attribut daran zerbrechen wuerde. Gleiches Muster wie vergleich-quelle.
+    // Gegenstueck im Frontend: lib/statistik/schema.ts (parseStatistik) und der Parser in
+    // lib/articleHtml.ts.
+    register_block_type('finanzleser/statistik', array(
+        'api_version' => 3,
+        'title' => 'Statistik',
+        'description' => 'Zahlen, Listen und Tabellen im Zeitungssatz',
+        'category' => 'embed',
+        'icon' => 'chart-pie',
+        'attributes' => array(
+            // Gespiegelt aus `daten`, damit die Block-Variationen ueber isActive greifen.
+            'art' => array('type' => 'string', 'default' => ''),
+            'daten' => array('type' => 'string', 'default' => ''),
+        ),
+        'render_callback' => function($attributes) {
+            $daten = isset($attributes['daten']) ? $attributes['daten'] : '';
+            if (!$daten) return '';
+            return '<div data-finanzleser-statistik="' . esc_attr($daten) . '"></div>';
+        },
+    ));
+
     // Editor Script registrieren
     wp_register_script(
         'finanzleser-blocks-editor',
         plugins_url('blocks.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch'),
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-plugins', 'wp-edit-post', 'wp-editor', 'wp-core-data', 'wp-data'),
         filemtime(plugin_dir_path(__FILE__) . 'blocks.js'),
         true
     );

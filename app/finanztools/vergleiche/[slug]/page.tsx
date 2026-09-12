@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import Insel from "@/components/faden/kette/Insel";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
@@ -57,6 +61,14 @@ export default async function VergleichDetailPage({ params }: Props) {
     notFound();
   }
 
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel={`vergleich:${slug}`} titel={title} kicker="Anzeige · Vergleich mit Partnerlinks" beschreibung={cleanDescription(meta.desc)} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Vergleiche", href: "/finanztools/vergleiche" }]} url={`/finanztools/vergleiche/${slug}`}>
+        <WerkzeugKarte teil={{ art: "embed", typ: "vergleich", slug }} ohneTitel />
+      </KartenKapitel>
+    );
+  }
+
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Finanztools", href: "/finanztools" },
@@ -107,7 +119,7 @@ export default async function VergleichDetailPage({ params }: Props) {
             </>
           }
         >
-          <VergleichEmbed slug={slug} />
+          <Insel typ="vergleich" arg={slug}><VergleichEmbed slug={slug} /></Insel>
 
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600">

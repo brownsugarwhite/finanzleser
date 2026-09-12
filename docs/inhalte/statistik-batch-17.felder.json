@@ -1,0 +1,311 @@
+[
+  {
+    "slug": "direktbank-vs-filialbank",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist eine Filialbank?",
+          "art": "balken",
+          "titel": "Sparkassen und Genossenschaftsbanken haben die meisten Bankstellen",
+          "untertitel": "Bankstellen nach Bankengruppe in Deutschland, Stand 31. Dezember 2024",
+          "einheit": "",
+          "quelle": {
+            "name": "Deutsche Bundesbank, Bankstellenbericht 2024",
+            "url": "https://www.bundesbank.de/resource/blob/969984/961114346d9e80c1663d9a811fabce7b/472B63F073F071307366337C94F8C870/bankstellenbericht-2024-data.pdf",
+            "stand": "31.12.2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "Bankstellen 2024",
+              "werte": [
+                {
+                  "label": "Sparkassensektor",
+                  "wert": 7281
+                },
+                {
+                  "label": "Genossenschaftssektor",
+                  "wert": 7074
+                },
+                {
+                  "label": "Kreditbanken",
+                  "wert": 3530
+                },
+                {
+                  "label": "Bausparkassen",
+                  "wert": 1215
+                },
+                {
+                  "label": "Sonstige Bankengruppen",
+                  "wert": 138
+                }
+              ]
+            }
+          ],
+          "hinweis": "Bundesweit gab es Ende 2024 insgesamt 19.238 Bankstellen – 1.666 bzw. 8,0 Prozent weniger als Ende 2023 (20.904). Innerhalb von zehn Jahren hat sich das Bankstellennetz um rund 48 Prozent ausgedünnt.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Sicherheit: Direktbank vs. Filialbank",
+          "art": "balken",
+          "titel": "Bei besonderen Anlässen sind bis zu 500.000 Euro Einlagen geschützt",
+          "untertitel": "Gesetzliche Deckungssumme der Einlagensicherung je Einleger und Bank",
+          "einheit": "€",
+          "quelle": {
+            "name": "Einlagensicherungsgesetz (EinSiG) § 8",
+            "url": "https://www.gesetze-im-internet.de/einsig/__8.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "deckung",
+              "label": "Deckungssumme",
+              "werte": [
+                {
+                  "label": "Regulärer Schutz",
+                  "wert": 100000
+                },
+                {
+                  "label": "Vorübergehend hohes Guthaben (z. B. Hausverkauf, 6 Monate)",
+                  "wert": 500000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die erhöhte Deckungssumme gilt für Guthaben aus bestimmten Lebensereignissen wie Immobilienverkauf, Heirat, Scheidung, Renteneintritt oder Erbschaft – befristet auf sechs Monate nach Gutschrift. Direktbanken unterliegen derselben gesetzlichen Einlagensicherung wie Filialbanken.",
+          "abschnitt": "heading-8",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "photovoltaik-foerderung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Einspeisevergütung 2026: Wie viel verdienen Sie mit Solarstrom?",
+          "art": "balken",
+          "titel": "Je größer die Solaranlage, desto niedriger die Einspeisevergütung",
+          "untertitel": "Anzulegender Wert für Dachanlagen in Cent pro Kilowattstunde, gültig seit 1. August 2026",
+          "einheit": "",
+          "quelle": {
+            "name": "Bundesnetzagentur, EEG-Förderung und -Fördersätze – Einspeisevergütung für Solaranlagen bis 100 kW",
+            "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/ErneuerbareEnergien/EEG_Foerderung/start.html",
+            "stand": "gültig ab 1. August 2026"
+          },
+          "reihen": [
+            {
+              "key": "teil",
+              "label": "Teileinspeisung",
+              "werte": [
+                {
+                  "label": "Bis 10 kW",
+                  "wert": 7.7
+                },
+                {
+                  "label": "Bis 40 kW",
+                  "wert": 6.66
+                },
+                {
+                  "label": "Bis 100 kW",
+                  "wert": 5.44
+                }
+              ]
+            },
+            {
+              "key": "voll",
+              "label": "Volleinspeisung",
+              "werte": [
+                {
+                  "label": "Bis 10 kW",
+                  "wert": 12.22
+                },
+                {
+                  "label": "Bis 40 kW",
+                  "wert": 10.24
+                },
+                {
+                  "label": "Bis 100 kW",
+                  "wert": 10.24
+                }
+              ]
+            }
+          ],
+          "umschalter": {
+            "label": "Einspeiseart"
+          },
+          "hinweis": "Die Werte gelten für Anlagen auf oder an Gebäuden bzw. Lärmschutzwänden (§ 48 Abs. 2, 2a EEG 2023) bei Inbetriebnahme zwischen 1. August 2026 und 31. Januar 2027.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Steuerersparnis seit 2023: 0 % Umsatzsteuer",
+          "art": "balken",
+          "titel": "Photovoltaikanlagen sind seit 2023 von der Umsatzsteuer befreit",
+          "untertitel": "Umsatzsteuersatz im Vergleich zum Regelsteuersatz",
+          "einheit": "%",
+          "quelle": {
+            "name": "§ 12 Absatz 1 und Absatz 3 Umsatzsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/ustg_1980/__12.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "steuersatz",
+              "label": "Umsatzsteuersatz",
+              "werte": [
+                {
+                  "label": "Regelsteuersatz",
+                  "wert": 19
+                },
+                {
+                  "label": "Photovoltaikanlagen bis 30 kWp (seit 2023)",
+                  "wert": 0
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der Nullsteuersatz gilt für Lieferung und Installation von Solarmodulen und Speichern, wenn die installierte Bruttoleistung laut Marktstammdatenregister nicht mehr als 30 Kilowatt (peak) beträgt.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "strompreise",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Woraus setzt sich der Strompreis zusammen?",
+          "art": "torte",
+          "titel": "Beschaffung und Vertrieb machen 41 Prozent des Strompreises aus",
+          "untertitel": "Anteile der Preisbestandteile am Strompreis für Haushalte",
+          "einheit": "%",
+          "quelle": {
+            "name": "BDEW-Strompreisanalyse August 2026",
+            "url": "https://www.bdew.de/media/documents/BDEW_Strompreisanalyse_082026.pdf",
+            "stand": "August 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "Strompreis 2026",
+              "werte": [
+                {
+                  "label": "Strombeschaffung und Vertrieb",
+                  "wert": 41
+                },
+                {
+                  "label": "Netzentgelte",
+                  "wert": 25
+                },
+                {
+                  "label": "Steuern, Abgaben und Umlagen",
+                  "wert": 34
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der durchschnittliche Strompreis für Haushalte lag im August 2026 bei 37,0 Cent pro Kilowattstunde (Jahresverbrauch 3.500 kWh).",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gaspreise",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie setzt sich der Gaspreis 2026 zusammen?",
+          "art": "torte",
+          "titel": "Fast die Hälfte des Gaspreises entfällt auf Beschaffung und Vertrieb",
+          "untertitel": "Anteile der Preisbestandteile am Gaspreis für Einfamilienhäuser",
+          "einheit": "%",
+          "quelle": {
+            "name": "BDEW-Gaspreisanalyse August 2026",
+            "url": "https://www.bdew.de/media/documents/BDEW_Gaspreisanalyse_082026.pdf",
+            "stand": "August 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "Gaspreis 2026 (EFH)",
+              "werte": [
+                {
+                  "label": "Gasbeschaffung und Vertrieb",
+                  "wert": 48.1
+                },
+                {
+                  "label": "Regulierte Netzentgelte",
+                  "wert": 21.5
+                },
+                {
+                  "label": "Steuern und Abgaben (inkl. CO2-Preis)",
+                  "wert": 30.4
+                }
+              ]
+            }
+          ],
+          "hinweis": "Der durchschnittliche Gaspreis für Haushalte in Einfamilienhäusern betrug 2026 bisher 11,93 Cent pro Kilowattstunde. Bei Mehrfamilienhäusern liegen die Anteile bei 48,9 Prozent Beschaffung, 19,7 Prozent Netzentgelte und 31,4 Prozent Steuern und Abgaben.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Welche Faktoren beeinflussen die Gaspreise 2026?",
+          "art": "saeulen",
+          "titel": "Der CO2-Preis hat sich seit 2021 mehr als verdoppelt",
+          "untertitel": "Festpreis pro Emissionszertifikat (entspricht einer Tonne CO2) nach BEHG",
+          "einheit": "€",
+          "quelle": {
+            "name": "Brennstoffemissionshandelsgesetz (BEHG) § 10 Absatz 2",
+            "url": "https://www.gesetze-im-internet.de/behg/__10.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "CO2-Preis",
+              "werte": [
+                {
+                  "label": "2021",
+                  "wert": 25
+                },
+                {
+                  "label": "2022",
+                  "wert": 30
+                },
+                {
+                  "label": "2023",
+                  "wert": 30
+                },
+                {
+                  "label": "2024",
+                  "wert": 45
+                },
+                {
+                  "label": "2025",
+                  "wert": 55
+                }
+              ]
+            }
+          ],
+          "hinweis": "Für 2026 ist kein fester Preis mehr vorgesehen: Ein Preiskorridor mit einem Mindestpreis von 55 Euro und einem Höchstpreis von 65 Euro pro Emissionszertifikat gilt beim Übergang zur Versteigerung.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]

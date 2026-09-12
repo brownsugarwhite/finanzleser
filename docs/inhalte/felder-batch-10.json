@@ -1,0 +1,919 @@
+[
+  {
+    "slug": "krankenversicherung-leistungen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Krankenversicherung zahlt alles, was ausreichend, zweckmäßig und wirtschaftlich ist: Arzt, Zahnarzt, Psychotherapie, Arznei-, Heil- und Hilfsmittel, Krankenhaus, häusliche Pflege, Reha, Vorsorge, Krankengeld, Mutterschafts- und Kinderkrankengeld; den Katalog legt der Gemeinsame Bundesausschuss fest, 95 Prozent sind bei allen Kassen gleich.",
+          "Behandelt wird bei Vertragsärzten mit der Gesundheitskarte, ohne Überweisungspflicht zum Facharzt, im Notfall überall; im europäischen Ausland gilt die Versichertenkarte, sonst braucht es eine Auslandskrankenversicherung.",
+          "Zuzahlungen: 10 Euro je Kliniktag für höchstens 28 Tage, 10 Prozent bei Arznei- und Hilfsmitteln mit mindestens 5 und höchstens 10 Euro, bei Heilmitteln 10 Prozent plus 10 Euro je Rezept; Kinder zahlen nichts, die Belastungsgrenze liegt bei 2 Prozent des Bruttoeinkommens, für chronisch Kranke bei 1 Prozent.",
+          "Zahnbehandlung ist voll gedeckt, Zahnersatz mit 60 Prozent Festzuschuss, mit Bonusheft nach fünf Jahren 70, nach zehn Jahren 75 Prozent; Kieferorthopädie bei Kindern bei medizinischer Notwendigkeit.",
+          "Die elektronische Patientenakte ist seit Oktober 2025 Pflicht für Praxen, der Medikationsplan folgt im Sommer 2026, Widerspruch bleibt möglich; der Zusatzbeitrag stieg auf durchschnittlich 2,9 Prozent, ein Kassenwechsel spart bei 3.000 Euro brutto rund 340 Euro im Jahr."
+        ],
+        "quellen": [
+          "§§ 11, 12, 27, 28, 39, 61, 62, 92 SGB V",
+          "§ 55 SGB V (Festzuschuss Zahnersatz)",
+          "Beitrag Krankenversicherung Leistungen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Zuzahlungen entstehen 2026?",
+          "status": "freigegeben",
+          "frage": "Wir sind eine Familie mit 45.000 Euro brutto und zwei Kindern. Ab wann bekommen wir die Zuzahlungsbefreiung?",
+          "antwort": "Von 45.000 Euro werden 7.119 Euro für Ihren Partner und je 9.756 Euro für die Kinder abgezogen, es bleiben 18.369 Euro; 2 Prozent davon sind 367 Euro Belastungsgrenze für die ganze Familie, bei chronischer Krankheit eines Mitglieds 184 Euro. Sammeln Sie alle Quittungen für Zuzahlungen und beantragen Sie bei Ihrer Kasse die Befreiung für den Rest des Jahres, sobald die Grenze erreicht ist; Überzahltes wird erstattet.",
+          "quellen": [
+            "§ 62 SGB V",
+            "Chroniker-Richtlinie des Gemeinsamen Bundesausschusses"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie werden Medikamente und Heilmittel erstattet?",
+          "status": "freigegeben",
+          "frage": "Meine Ärztin will mir keine Physiotherapie mehr verschreiben, weil ihr Budget erschöpft sei. Stimmt das?",
+          "antwort": "Es gibt kein festes Budget je Praxis, sondern Richtwerte, deren Überschreitung Ärzte begründen müssen; medizinisch notwendige Heilmittel dürfen sie deshalb nicht verweigern. Bei langfristigem Bedarf hilft der langfristige Heilmittelbedarf oder der besondere Verordnungsbedarf, den die Kasse auf Antrag genehmigt und der die Praxis vom Richtwert befreit. Fragen Sie danach oder wechseln Sie die Praxis.",
+          "quellen": [
+            "§ 32 Abs. 1a SGB V",
+            "Heilmittel-Richtlinie des Gemeinsamen Bundesausschusses"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche zahnärztlichen Leistungen sind abgedeckt?",
+          "status": "freigegeben",
+          "frage": "Ich brauche eine Krone. Was zahlt die Kasse und was ich?",
+          "antwort": "Die Kasse zahlt einen Festzuschuss auf die Regelversorgung, bei einer Metallkrone im Seitenzahnbereich rund 60 Prozent von etwa 400 Euro, mit zehn Jahren Bonusheft 75 Prozent; wählen Sie eine Keramikkrone für 800 Euro, bleibt der Zuschuss gleich und Sie zahlen den Rest. Lassen Sie sich vorher einen Heil- und Kostenplan geben und von der Kasse genehmigen; liegt Ihr Einkommen unter rund 1.500 Euro, greift die Härtefallregel mit doppeltem Zuschuss.",
+          "quellen": [
+            "§ 55 Abs. 1 und 2 SGB V",
+            "§ 87 Abs. 1a SGB V (Heil- und Kostenplan)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was ändert sich bei der elektronischen Patientenakte?",
+          "status": "freigegeben",
+          "frage": "Wer kann meine elektronische Patientenakte sehen?",
+          "antwort": "Jede Praxis, Apotheke oder Klinik, in der Sie Ihre Gesundheitskarte stecken, für 90 Tage, Apotheken für drei Tage; Krankenkasse, Arbeitgeber und Versicherer haben keinen Zugriff. In der Kassen-App können Sie einzelnen Praxen den Zugriff entziehen, Dokumente verbergen, etwa psychiatrische Befunde, und die Weitergabe an die Forschung ablehnen. Ohne App geht das über die Ombudsstelle Ihrer Kasse.",
+          "quellen": [
+            "§§ 339, 342, 353 SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "zuzahlung",
+        "belastungsgrenze",
+        "heilmittel",
+        "festzuschuss",
+        "elektronische-patientenakte",
+        "gemeinsamer-bundesausschuss"
+      ]
+    }
+  },
+  {
+    "slug": "kuendigung-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Krankenkasse kündigen Sie nach zwölf Monaten Bindung mit zwei Monaten Frist zum Monatsende; praktisch stellen Sie nur den Aufnahmeantrag bei der neuen Kasse, die kündigt für Sie.",
+          "Erhöht die Kasse den Zusatzbeitrag, gilt das Sonderkündigungsrecht auch in der Bindungsfrist: Antrag bis Ende des Erhöhungsmonats, Wechsel zum übernächsten Monat; 2026 haben 47 Kassen erhöht, die Spanne reicht von 2,18 bis 4,39 Prozent.",
+          "Ohne Frist wechseln kann, wer den Arbeitgeber wechselt, selbstständig wird, die Versicherungspflichtgrenze von 77.400 Euro überschreitet, aus der Familienversicherung fällt oder aus dem Ausland zurückkehrt.",
+          "Die private Krankenversicherung kündigen Sie mit drei Monaten Frist zum Ende des Versicherungsjahres, meist bis 30. September, bei Beitragserhöhung binnen zwei Monaten; wirksam wird die Kündigung nur mit Nachweis einer Anschlussversicherung.",
+          "Beim Wechsel aus der privaten Versicherung verfallen große Teile der Alterungsrückstellungen, und zurück in die gesetzliche Kasse geht es nur unter der Pflichtgrenze und vor 55; der gesetzliche Höchstbeitrag liegt 2026 bei 1.261,31 Euro inklusive Pflege für Kinderlose."
+        ],
+        "quellen": [
+          "§ 175 Abs. 4, § 186 SGB V",
+          "§ 205 VVG",
+          "Beitrag Kündigung Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Kündigungsfristen in der gesetzlichen Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Ich habe im Februar 2026 gewechselt. Wann kann ich frühestens wieder wechseln?",
+          "antwort": "Nach zwölf Monaten Mitgliedschaft, also mit Kündigung ab Februar 2027 zum Ende April 2027, es sei denn, Ihre neue Kasse erhöht vorher den Zusatzbeitrag; dann greift das Sonderkündigungsrecht sofort. Ein Jobwechsel hebt die Bindung ebenfalls auf. Bei Wahltarifen mit Bindung, etwa Krankengeld für Selbstständige, gelten bis zu drei Jahre.",
+          "quellen": [
+            "§ 175 Abs. 4 SGB V",
+            "§ 53 Abs. 8 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Sofortiger Kassenwechsel: Wann ist er möglich?",
+          "status": "freigegeben",
+          "frage": "Ich fange am 1. Juli einen neuen Job an. Kann ich gleichzeitig die Kasse wechseln?",
+          "antwort": "Ja, mit jedem neuen Arbeitsverhältnis dürfen Sie eine neue Kasse wählen, ohne Bindungsfrist und Kündigung; Sie nennen dem neuen Arbeitgeber einfach die gewünschte Kasse, spätestens zwei Wochen nach Beginn, sonst meldet er Sie bei der bisherigen an. Die neue Kasse informiert die alte. Auch die zwölf Monate Bindung beginnen dann neu.",
+          "quellen": [
+            "§ 175 Abs. 1 und 3 SGB V",
+            "§ 186 Abs. 1 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kündigung in der privaten Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Mein privater Versicherer erhöht zum 1. Januar. Wie kündige ich richtig?",
+          "antwort": "Schriftlich innerhalb von zwei Monaten nach Zugang der Erhöhungsmitteilung, wirksam zum Zeitpunkt der Erhöhung; die Kündigung gilt aber nur, wenn Sie binnen zwei Monaten eine Anschlussversicherung nachweisen. Sinnvoller ist meist der Tarifwechsel beim eigenen Versicherer ohne Gesundheitsprüfung, weil beim Anbieterwechsel Alterungsrückstellungen und Gesundheitsstatus verloren gehen. Kündigen Sie nie, bevor die neue Police vorliegt.",
+          "quellen": [
+            "§ 205 Abs. 4 und 6 VVG",
+            "§ 204 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wechsel zwischen GKV und PKV",
+          "status": "freigegeben",
+          "frage": "Ich bin privat versichert und will als Selbstständige zurück in die gesetzliche Kasse. Geht das?",
+          "antwort": "Als Selbstständige nicht direkt, weil Sie nicht versicherungspflichtig werden; der Weg führt nur über eine Anstellung mit Gehalt unter 77.400 Euro und mehr als 20 Wochenstunden, die Sie pflichtversichert macht, danach können Sie als freiwilliges Mitglied weiter selbstständig sein. Ab 55 ist auch das verschlossen. Alternativ hilft die Familienversicherung über einen gesetzlich versicherten Ehepartner, wenn Ihr Gewinn unter 565 Euro liegt.",
+          "quellen": [
+            "§ 5 Abs. 1 Nr. 1, § 6 Abs. 3a, § 10 SGB V",
+            "§ 188 Abs. 4 SGB V"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "bindungsfrist",
+        "sonderkuendigungsrecht",
+        "krankenkassenwechsel",
+        "versicherungspflichtgrenze",
+        "alterungsrueckstellung"
+      ]
+    }
+  },
+  {
+    "slug": "pkv-beitrag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "2026 steigen die Beiträge der privaten Krankenversicherung für rund 60 Prozent der Versicherten um durchschnittlich 13 Prozent, von 3,6 Prozent bei der LKH bis 22,8 Prozent bei BBKK und UKV; der Durchschnittsbeitrag liegt bei etwa 617 Euro, die Pflegepflichtversicherung wird um 16 Prozent teurer.",
+          "Treiber sind Krankenhauskosten plus 10 Prozent, Pflege plus 18, Arznei plus 10, Psychotherapie plus 13,6 Prozent und neue Therapien wie die Gürtelrose-Impfung; langfristig stiegen die Beiträge seit 2006 um 3,4 Prozent im Jahr, in der gesetzlichen Kasse um 3,9.",
+          "Angestellte bekommen 2026 bis 508,59 Euro Arbeitgeberzuschuss zur Kranken- und 104,63 Euro zur Pflegeversicherung, in Sachsen 75,56 Euro; der Nachweis läuft neu elektronisch über das Bundeszentralamt für Steuern und ELStAM.",
+          "Sozialtarife deckeln: Basistarif höchstens 1.017,18 Euro, bei Hilfebedürftigkeit halbiert; Standardtarif für Altversicherte 848,62 Euro, Paare 1.272,93 Euro.",
+          "Gegen Erhöhungen hilft der Tarifwechsel im eigenen Haus nach § 204 VVG mit 30 bis 50 Prozent Ersparnis, ein höherer Selbstbehalt ohne Arbeitgeberzuschuss darauf, Leistungsverzicht oder ein Beitragsentlastungstarif; jede Anpassung prüft ein unabhängiger Treuhänder."
+        ],
+        "quellen": [
+          "§ 257 SGB V",
+          "§ 203, § 204 VVG",
+          "§ 155 VAG",
+          "Beitrag PKV Beitrag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie entwickelten sich die Beiträge langfristig?",
+          "status": "freigegeben",
+          "frage": "Warum wirken die Erhöhungen in der privaten Versicherung trotzdem heftiger als in der gesetzlichen?",
+          "antwort": "Weil sie in Sprüngen kommen: Versicherer dürfen erst anpassen, wenn die Ausgaben um mehr als 10 Prozent von der Kalkulation abweichen, dann aber alle aufgelaufenen Steigerungen auf einmal; die gesetzliche Kasse dreht jedes Jahr am Zusatzbeitrag. Im Schnitt der letzten 20 Jahre lagen beide bei 3,4 und 3,9 Prozent jährlich. Dazu kommt, dass der private Beitrag nicht mit dem Einkommen sinkt, etwa in Rente.",
+          "quellen": [
+            "§ 155 Abs. 3 VAG",
+            "Beitrag, Abschnitt langfristige Entwicklung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Der höhere Arbeitgeberzuschuss 2026",
+          "status": "freigegeben",
+          "frage": "Mein Beitrag beträgt 900 Euro mit 500 Euro Selbstbehalt. Wie viel Zuschuss bekomme ich?",
+          "antwort": "450 Euro, die Hälfte des Beitrags, unter dem Höchstbetrag von 508,59 Euro; dazu die Hälfte der Pflegepflichtversicherung, höchstens 104,63 Euro. Der Selbstbehalt bleibt ganz bei Ihnen, ebenso Krankentagegeld und Zusatzbausteine. Beitragsrückerstattungen bei Leistungsfreiheit mindern den Zuschuss im Folgejahr nicht, wenn der Arbeitgeber die Erstattung nicht erfährt; korrekt ist die anteilige Rückzahlung.",
+          "quellen": [
+            "§ 257 Abs. 2 SGB V",
+            "§ 61 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Effektive Strategien gegen Beitragserhöhungen",
+          "status": "freigegeben",
+          "frage": "Lohnt sich ein höherer Selbstbehalt, um den Beitrag zu senken?",
+          "antwort": "Für Selbstständige oft ja, für Angestellte selten: Der Arbeitgeber zahlt die Hälfte des Beitrags, aber nichts zum Selbstbehalt, sodass eine Ersparnis von 60 Euro im Monat Sie nur 30 Euro entlastet, während 600 Euro Selbstbehalt voll bei Ihnen liegen. Sinnvoll ist er, wenn die Beitragsersparnis im Jahr deutlich über dem Selbstbehalt liegt oder Sie kaum Rechnungen einreichen; im Alter lässt er sich nicht ohne Gesundheitsprüfung wieder senken.",
+          "quellen": [
+            "§ 257 Abs. 2 SGB V",
+            "Beitrag, Abschnitt Strategien"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Sozialtarife und Beitragsgrenzen",
+          "status": "freigegeben",
+          "frage": "Ich bin 62, seit 1995 privat versichert und kann 700 Euro Beitrag nicht mehr zahlen. Welcher Sozialtarif passt?",
+          "antwort": "Der Standardtarif: Sie sind vor 2009 eingetreten, über 55 und mit Einkommen unter 69.750 Euro berechtigt, sofern Sie nie in einen Unisex-Tarif gewechselt sind. Er kostet höchstens 848,62 Euro, nach Anrechnung Ihrer Alterungsrückstellungen aus 30 Jahren aber meist deutlich weniger, oft 300 bis 500 Euro, mit Leistungen auf Kassenniveau und 403 Euro Selbstbehalt 2026. Der Basistarif wäre mit 1.017 Euro teurer und nur bei Hilfebedürftigkeit halbiert.",
+          "quellen": [
+            "§ 152 VAG",
+            "§ 257 Abs. 2a SGB V",
+            "Beitrag, Abschnitt Sozialtarife"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "beitragsanpassung-pkv",
+        "arbeitgeberzuschuss-krankenversicherung",
+        "standardtarif",
+        "basistarif",
+        "tarifwechsel-pkv",
+        "beitragsentlastungstarif"
+      ]
+    }
+  },
+  {
+    "slug": "beitragsanpassung-pkv",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Private Versicherer dürfen Beiträge nur anpassen, wenn die tatsächlichen Leistungsausgaben dauerhaft um mehr als 10 Prozent von der Kalkulation abweichen, vertraglich oft schon ab 5 Prozent, oder die Sterblichkeit um mehr als 5 Prozent; ein unabhängiger Treuhänder muss zustimmen.",
+          "Weil unter dem Schwellenwert nichts angepasst werden darf, kommen Erhöhungen als Nachholsprünge: 2026 trifft es rund 60 Prozent der Versicherten mit im Schnitt 13 Prozent, von 3,6 Prozent bei der LKH bis 22,8 Prozent bei BBKK und UKV, die Pflegepflichtversicherung steigt um 16 Prozent.",
+          "Gründe sind Klinikkosten plus 13 Prozent, ein um 25 Prozent teurerer Heilmittelkatalog, Arznei, neue Therapien und längere Lebenserwartung; gesunde Versicherte zahlen mit, weil der Tarif als Kollektiv kalkuliert wird.",
+          "Der Versicherer muss die maßgeblichen Gründe nennen: Rechnungsgrundlage, Abweichung, Schwellenwert; pauschale Begründungen machen die Erhöhung unwirksam, Gerichte sprechen dann Rückzahlungen bis drei Jahre plus Zinsen zu.",
+          "Handlungsoptionen: Tarifwechsel im eigenen Haus ohne Gesundheitsprüfung mit durchschnittlich 43 Prozent Ersparnis, Sonderkündigung binnen zwei Monaten nur mit gesicherter Anschlussversicherung, Widerspruch bei formalen Mängeln, notfalls Basistarif."
+        ],
+        "quellen": [
+          "§ 203 Abs. 2 und 5 VVG",
+          "§ 155 VAG",
+          "§ 204 VVG",
+          "BGH IV ZR 294/19 und IV ZR 113/20",
+          "Beitrag Beitragsanpassung PKV"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist eine Beitragsanpassung PKV?",
+          "status": "freigegeben",
+          "frage": "Warum wurde mein Beitrag drei Jahre nicht angepasst und jetzt um 20 Prozent erhöht?",
+          "antwort": "Das ist der Schwellenwertmechanismus: Solange die Ausgaben Ihres Tarifs weniger als 10 Prozent, vertraglich oft 5 Prozent, über der Kalkulation lagen, durfte der Versicherer nicht anpassen; die Steigerungen sammelten sich an und wurden jetzt in einem Sprung nachgeholt, oft zusammen mit Zinsänderungen und Sterbetafeln. Der Effekt ist gesetzlich so gewollt, wird aber seit Jahren als Reformbedarf diskutiert.",
+          "quellen": [
+            "§ 155 Abs. 3 und 4 VAG",
+            "§ 203 Abs. 2 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Rechtlicher Rahmen: Wann darf die PKV erhöhen?",
+          "status": "freigegeben",
+          "frage": "Soll ich gegen die Erhöhung klagen?",
+          "antwort": "Prüfen Sie zuerst das Anschreiben: Nennt es die veränderte Rechnungsgrundlage, also Leistungsausgaben oder Sterblichkeit, und den Schwellenwert? Fehlt das, war die Erhöhung nach den Urteilen des Bundesgerichtshofs formal unwirksam, und Sie können die Differenz bis drei Jahre zurückfordern; die meisten Versicherer haben ihre Schreiben seit 2021 aber nachgebessert. Für die materielle Prüfung der Kalkulation brauchen Sie ein Gutachten, das sich nur bei hohen Beträgen lohnt. Ein Fachanwalt mit Rechtsschutz oder Prozessfinanzierer prüft das kostenlos vor.",
+          "quellen": [
+            "§ 203 Abs. 5 VVG",
+            "BGH IV ZR 294/19 (16.12.2020)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Warum steige ich bei Erhöhung mit, obwohl ich nicht krank war?",
+          "status": "freigegeben",
+          "frage": "Ich war seit Jahren nicht beim Arzt. Bekomme ich wenigstens etwas zurück?",
+          "antwort": "Ja, die meisten Tarife zahlen bei Leistungsfreiheit eine Beitragsrückerstattung von ein bis sechs Monatsbeiträgen, je nach Jahren ohne Rechnung; kleine Rechnungen unter der Erstattungssumme reichen Sie deshalb besser nicht ein. Vorsorgeuntersuchungen bleiben in vielen Tarifen unschädlich. Die Erhöhung selbst können Sie damit nicht abwenden, weil der Beitrag das Risiko des Kollektivs abbildet, nicht Ihr persönliches.",
+          "quellen": [
+            "§ 150 VAG (Rückstellung für Beitragsrückerstattung)",
+            "Tarifbedingungen des Versicherers"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Ihre Handlungsoptionen bei Erhöhung",
+          "status": "freigegeben",
+          "frage": "Wie finde ich den besten Tarif zum Wechseln bei meinem Versicherer?",
+          "antwort": "Verlangen Sie schriftlich unter Hinweis auf § 204 VVG eine Liste aller Tarife mit vergleichbaren Leistungen, offene und geschlossene, mit Beitrag nach Anrechnung Ihrer Rückstellungen; der Versicherer muss binnen 15 Arbeitstagen antworten. Achten Sie auf Erstattungssätze, Selbstbehalt und Beitragsentlastung im Alter, nicht nur auf den Preis. Honorarberater für Tarifwechsel kosten ein paar hundert Euro und holen oft 20 bis 40 Prozent heraus.",
+          "quellen": [
+            "§ 204 Abs. 1 VVG",
+            "§ 6 Abs. 2 VVG-InfoV",
+            "Tarifwechsel-Leitlinien des PKV-Verbands"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "beitragsanpassung-pkv",
+        "treuhaender-pkv",
+        "tarifwechsel-pkv",
+        "alterungsrueckstellung",
+        "basistarif"
+      ]
+    }
+  },
+  {
+    "slug": "basistarif",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Basistarif ist der gesetzliche Auffangtarif jeder privaten Krankenversicherung mit Leistungen auf Kassenniveau: brancheneinheitlich, ohne Gesundheitsprüfung, Risikozuschlag oder Wartezeit, mit Annahmepflicht; nur Kassenärzte dürfen behandeln, rund 34.000 Menschen sind dort versichert.",
+          "Zugang haben alle Privatversicherten mit Vertrag ab 2009 jederzeit, Altversicherte ab 55 mit Einkommen unter 69.750 Euro oder ab 65 nach zehn Jahren Versicherung, Rentner, Hilfebedürftige und Nichtversicherte, die der privaten Versicherung zugeordnet sind.",
+          "Der Beitrag ist auf den gesetzlichen Höchstbeitrag gedeckelt, 2026 1.017,18 Euro plus bis 209,25 Euro Pflege; bei Hilfebedürftigkeit halbiert er sich auf 508,59 Euro, und Jobcenter oder Sozialamt übernehmen den Rest, wenn die Bedürftigkeit bleibt. Arbeitgeber- und Rentenzuschuss gelten auch hier.",
+          "Zuzahlungen wie in der gesetzlichen Kasse: 6 Euro je Arzneipackung, 8 bis 10 Euro Hilfsmittel, Zahnersatz mit mindestens 25 Prozent Eigenanteil; Chefarzt und Einbettzimmer gibt es nicht.",
+          "Zurück in einen Normaltarif geht es nach Hilfebedürftigkeit binnen zwei Jahren ohne Gesundheitsprüfung, wenn der Antrag drei Monate nach deren Ende gestellt wird; vorher lohnt der Blick auf Tarifwechsel, den günstigeren Standardtarif für Altversicherte oder die Rückkehr in die gesetzliche Kasse."
+        ],
+        "quellen": [
+          "§ 152 VAG",
+          "§ 193 Abs. 5 VVG",
+          "§ 204 Abs. 1 Nr. 1 VVG",
+          "§ 257 Abs. 2a SGB V",
+          "Beitrag Basistarif in der PKV"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer kann in den Basistarif PKV wechseln?",
+          "status": "freigegeben",
+          "frage": "Kann ich als Kassenpatientin mit Vorerkrankung direkt in den Basistarif eines privaten Versicherers?",
+          "antwort": "Nein, wer gesetzlich versichert ist, bleibt es; der Basistarif steht nur Menschen offen, die der privaten Versicherung zugeordnet sind: Privatversicherte, Selbstständige oder Angestellte über der Pflichtgrenze ohne Versicherung, Beamte. Erfüllen Sie das, muss jeder Versicherer Sie binnen sechs Monaten nach Ende der gesetzlichen Versicherung ohne Gesundheitsprüfung aufnehmen, für höchstens 1.017,18 Euro.",
+          "quellen": [
+            "§ 193 Abs. 5 Satz 1 Nr. 2 und 3 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Beitragshöhe im Basistarif PKV 2026",
+          "status": "freigegeben",
+          "frage": "Werden meine Alterungsrückstellungen im Basistarif angerechnet?",
+          "antwort": "Ja, beim Wechsel innerhalb des Versicherers vollständig, beim Wechsel zu einem anderen Anbieter mit dem Übertragungswert; der Beitrag sinkt entsprechend unter den Höchstbetrag. Praktisch zahlen trotzdem die meisten Versicherten den Deckel von 1.017,18 Euro, weil der Basistarif nach Eintrittsalter kalkuliert ist und die Rückstellungen bei späten Wechslern klein sind. Lassen Sie sich vor dem Wechsel den konkreten Beitrag ausrechnen.",
+          "quellen": [
+            "§ 204 Abs. 1 VVG",
+            "§ 152 Abs. 3 VAG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Beitragshalbierung bei Hilfebedürftigkeit",
+          "status": "freigegeben",
+          "frage": "Ich bin privat versichert und beziehe jetzt Bürgergeld. Was passiert mit meinem Beitrag?",
+          "antwort": "Sie können in den Basistarif wechseln, dessen Beitrag sich bei Hilfebedürftigkeit auf 508,59 Euro halbiert; das Jobcenter übernimmt diesen Betrag und die halbierte Pflegepflichtversicherung als Zuschuss. Legen Sie dem Versicherer den Bürgergeld-Bescheid vor und dem Jobcenter die Beitragsbescheinigung. Endet der Bezug, können Sie binnen zwei Jahren ohne Gesundheitsprüfung in Ihren alten Tarif zurück, Antrag innerhalb von drei Monaten.",
+          "quellen": [
+            "§ 152 Abs. 4 VAG",
+            "§ 26 Abs. 1 SGB II",
+            "§ 204 Abs. 1 Nr. 1 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Leistungsumfang und Zuzahlungen",
+          "status": "freigegeben",
+          "frage": "Warum finde ich im Basistarif so schwer einen Arzt?",
+          "antwort": "Weil Ärzte im Basistarif nur nach niedrigeren Sätzen abrechnen dürfen, das 1,2-Fache der Gebührenordnung statt üblicher 2,3, und sie den Vertrag über die Kassenärztliche Vereinigung abrechnen müssen; viele Privatpraxen nehmen deshalb keine Basistarifpatienten. Wenden Sie sich an Kassenärzte, die zur Behandlung verpflichtet sind, oder an die Terminservicestelle 116117, die auch für Basistarifversicherte vermittelt.",
+          "quellen": [
+            "§ 75 Abs. 3a SGB V",
+            "§ 152 Abs. 1 VAG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "basistarif",
+        "kontrahierungszwang",
+        "hilfebeduerftigkeit",
+        "standardtarif",
+        "notlagentarif",
+        "gebuehrenordnung-fuer-aerzte"
+      ]
+    }
+  },
+  {
+    "slug": "standardtarif",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Standardtarif ist der Sozialtarif für langjährig Privatversicherte mit Vertrag vor 2009 und mindestens zehn Jahren Versicherung: ab 65 ohne Bedingung, ab 55 oder mit gesetzlicher Rente bei Einkommen unter 69.750 Euro; wer in einen Unisex-Tarif gewechselt hat, verliert den Zugang dauerhaft. Rund 54.800 Menschen nutzen ihn.",
+          "Der Beitrag ist auf 848,62 Euro gedeckelt, Ehepaare 1.272,93 Euro, Beihilfeberechtigte mit 70 Prozent 254,59 Euro; weil die Alterungsrückstellungen voll angerechnet werden, zahlen die meisten rund 480 Euro.",
+          "Leistungen auf Kassenniveau: Ärzte bis zum 1,8-Fachen der Gebührenordnung, Zahnärzte bis 2,0-fach, Mehrbettzimmer, 25 Psychotherapiesitzungen, 65 Prozent Zahnersatz; der Selbstbehalt steigt von 306 Euro über 403 Euro im Übergangsjahr 2026 auf 500 Euro ab 2027.",
+          "Gegenüber dem Basistarif ist der Standardtarif günstiger und rechnet Rückstellungen an, kennt aber keine Beitragshalbierung bei Hilfebedürftigkeit.",
+          "Rentner erhalten 8,75 Prozent der Rente als Zuschuss, Angestellte bis 508,59 Euro vom Arbeitgeber, seit 2026 automatisch über ELStAM; Beitragstreiber sind Klinikkosten plus 13 Prozent und der um 25 Prozent teurere Heilmittelkatalog."
+        ],
+        "quellen": [
+          "§ 257 Abs. 2a SGB V",
+          "§ 152 Abs. 1 VAG (Altversicherte)",
+          "§ 106 SGB VI",
+          "Beitrag Standardtarif in der PKV"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer kann in den Standardtarif PKV wechseln?",
+          "status": "freigegeben",
+          "frage": "Mein Versicherer hat mir 2015 einen Wechsel in einen Unisex-Tarif empfohlen. Bin ich jetzt vom Standardtarif ausgeschlossen?",
+          "antwort": "Ja, dauerhaft: Der Standardtarif gilt nur für Versicherte, die ununterbrochen in einem vor 2009 abgeschlossenen Bisex-Tarif waren; der Wechsel in einen Unisex-Tarif hat diese Kette unterbrochen. Ihnen bleibt der Basistarif mit 1.017,18 Euro Höchstbeitrag oder ein Tarifwechsel in einen günstigeren Unisex-Tarif nach § 204 VVG. Prüfen Sie, ob der Versicherer Sie 2015 auf diesen Nachteil hingewiesen hat; sonst kann ein Beratungsfehler vorliegen.",
+          "quellen": [
+            "§ 257 Abs. 2a Satz 1 SGB V",
+            "§ 204 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kosten und Beitragsentwicklung 2026",
+          "status": "freigegeben",
+          "frage": "Wie erfahre ich, was ich im Standardtarif wirklich zahlen würde?",
+          "antwort": "Nur Ihr Versicherer kann das berechnen, weil der Beitrag vom Höchstbetrag von 848,62 Euro abhängt, gemindert um Ihre individuellen Alterungsrückstellungen; fordern Sie ein schriftliches Angebot mit Beitrag, Selbstbehalt und Leistungsübersicht an, das er binnen 15 Arbeitstagen liefern muss. Ehepaare geben beide Einkommen an, weil der Paardeckel von 1.272,93 Euro gilt. Vergleichen Sie mit einem normalen Tarifwechsel, der oft ähnlich günstig ist und mehr leistet.",
+          "quellen": [
+            "§ 204 VVG",
+            "§ 6 Abs. 2 VVG-InfoV"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Leistungsumfang und Selbstbeteiligung",
+          "status": "freigegeben",
+          "frage": "Zahlt mein Arzt-Honorar im Standardtarif die Versicherung komplett?",
+          "antwort": "Nur bis zum 1,8-Fachen des Gebührensatzes, beim Zahnarzt bis 2,0-fach; Ärzte dürfen Standardtarif-Patienten aber auch nur bis zu diesen Sätzen berechnen, wenn Sie vorher auf den Tarif hinweisen. Rechnet ein Arzt trotzdem 2,3-fach ab, tragen Sie die Differenz selbst. Dazu kommt der Selbstbehalt von 403 Euro im Jahr 2026, ab 2027 500 Euro, auf alle ambulanten Leistungen.",
+          "quellen": [
+            "§ 75 Abs. 3a SGB V",
+            "§ 5a GOÄ",
+            "Beitrag, Abschnitt Leistungsumfang"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Staatliche Zuschüsse und Unterstützung",
+          "status": "freigegeben",
+          "frage": "Ich bin Rentner im Standardtarif mit 480 Euro Beitrag und 1.900 Euro Rente. Wie viel Zuschuss bekomme ich?",
+          "antwort": "166,25 Euro im Monat, 8,75 Prozent Ihrer Rente; die Obergrenze von der Hälfte des Beitrags, 240 Euro, greift nicht. Der Zuschuss muss bei der Rentenversicherung beantragt werden und wird mit der Rente überwiesen; für die Pflegepflichtversicherung gibt es nichts. Reicht das Geld trotzdem nicht, kann das Sozialamt bei Hilfebedürftigkeit den Beitrag übernehmen, im Standardtarif allerdings ohne Halbierung.",
+          "quellen": [
+            "§ 106 SGB VI",
+            "§ 32 Abs. 5 SGB XII"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "standardtarif",
+        "basistarif",
+        "unisex-tarif",
+        "alterungsrueckstellung",
+        "gebuehrenordnung-fuer-aerzte",
+        "selbstbehalt"
+      ]
+    }
+  },
+  {
+    "slug": "arbeitgeberzuschuss-private-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Privat versicherte Angestellte bekommen vom Arbeitgeber die Hälfte ihres Beitrags, höchstens so viel wie für gesetzlich Versicherte: 2026 508,59 Euro zur Kranken- und 104,63 Euro zur Pflegeversicherung, zusammen 613,22 Euro im Monat, 42,67 Euro mehr als 2025.",
+          "Anspruch haben sozialversicherungspflichtig Beschäftigte über der Versicherungspflichtgrenze von 77.400 Euro und angestellte Geschäftsführer; nicht Selbstständige, Beamte und beherrschende Gesellschafter.",
+          "Bei 400 Euro Beitrag zahlt der Arbeitgeber 200 Euro, bei 1.100 Euro den Höchstbetrag von 613,22 Euro; unter der Beitragsbemessungsgrenze von 5.812,50 Euro richtet sich der Deckel nach dem tatsächlichen Gehalt, bei Teilzeit sinkt er entsprechend.",
+          "Nicht ausgeschöpfte Zuschussreserve gilt für privat versicherte Ehepartner und Kinder, die in der gesetzlichen Kasse familienversichert wären, also mit Einkommen unter 565 Euro, im Minijob 603 Euro; in Elternzeit ohne Gehalt gibt es keinen Zuschuss, bei Teilzeit bis 32 Stunden anteilig.",
+          "Seit 2026 melden die Versicherer die Beiträge elektronisch ans Bundeszentralamt für Steuern, der Arbeitgeber ruft sie über ELStAM ab; Papierbescheinigungen gelten übergangsweise bis Ende 2027. Der Zuschuss ist bis zur Höchstgrenze steuerfrei, Ansprüche verjähren nach vier Jahren."
+        ],
+        "quellen": [
+          "§ 257 Abs. 2 und 2a SGB V",
+          "§ 61 SGB XI",
+          "§ 3 Nr. 62 EStG",
+          "Beitrag Arbeitgeberzuschuss Private Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch auf den Arbeitgeberzuschuss?",
+          "status": "freigegeben",
+          "frage": "Ich bin Gesellschafter-Geschäftsführer meiner GmbH. Bekomme ich den Zuschuss?",
+          "antwort": "Nur wenn Sie sozialversicherungsrechtlich als abhängig beschäftigt gelten, also weniger als 50 Prozent der Anteile halten und keine Sperrminorität haben; beherrschende Gesellschafter sind nicht versicherungspflichtig und haben keinen gesetzlichen Anspruch. Die GmbH darf Ihnen trotzdem freiwillig einen Zuschuss zahlen, der dann aber als Gehalt versteuert wird und bei zu hohem Betrag als verdeckte Gewinnausschüttung gilt.",
+          "quellen": [
+            "§ 257 Abs. 2 SGB V",
+            "§ 7 SGB IV",
+            "Statusfeststellung der Deutschen Rentenversicherung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wird der Arbeitgeberzuschuss berechnet?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 4.500 Euro brutto und bin als Altversicherter privat versichert. Wie hoch ist mein Zuschuss?",
+          "antwort": "Höchstens die Hälfte von 17,5 Prozent Ihres Gehalts, also 393,75 Euro, weil unter der Beitragsbemessungsgrenze Ihr tatsächliches Brutto den Deckel bestimmt; bei 700 Euro Beitrag bekommen Sie diese 393,75 Euro, nicht 350 Euro. Die Pflegeversicherung wird mit 1,8 Prozent von 4.500 Euro, 81 Euro, bezuschusst. Gehaltserhöhungen erhöhen den Zuschuss automatisch bis zum Höchstbetrag.",
+          "quellen": [
+            "§ 257 Abs. 2 Satz 2 SGB V",
+            "§ 61 Abs. 2 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kann der Zuschuss für Familienangehörige genutzt werden?",
+          "status": "freigegeben",
+          "frage": "Meine Frau ist privat versichert und verdient 700 Euro im Minijob. Bekomme ich für sie Zuschuss?",
+          "antwort": "Nein, mit 700 Euro läge sie über der Minijob-Grenze von 603 Euro und wäre in der gesetzlichen Kasse nicht familienversichert; der Zuschuss für Angehörige setzt genau diese Voraussetzung voraus. Reduziert sie auf 603 Euro als einzige Einnahme oder 565 Euro sonstiges Einkommen, zählt ihr Beitrag mit, bis Ihr gemeinsamer Zuschuss 613,22 Euro erreicht. Für Kinder gilt dasselbe bis zum Ende der fiktiven Familienversicherung.",
+          "quellen": [
+            "§ 257 Abs. 2 Satz 1 SGB V",
+            "§ 10 Abs. 1 Nr. 5 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was ändert sich 2026 bei der Antragstellung?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber sagt, er habe keine ELStAM-Daten zu meiner Versicherung. Was tun?",
+          "antwort": "Fragen Sie Ihren Versicherer, ob er die Beitragsdaten ans Bundeszentralamt gemeldet hat; die Übermittlung ist seit 2026 Pflicht, bei technischen Problemen stellt er bis Ende 2027 eine Ersatzbescheinigung auf Papier aus, die der Arbeitgeber akzeptieren muss. Haben Sie der Datenübermittlung widersprochen, nehmen Sie den Widerspruch zurück, sonst entfällt laut Beitrag die steuerfreie Behandlung. Nachzahlungen kann der Arbeitgeber rückwirkend im Lohnkonto korrigieren.",
+          "quellen": [
+            "§ 257 Abs. 2a SGB V in der Fassung ab 2026",
+            "§ 39e EStG",
+            "Beitrag, Abschnitt Antragstellung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "arbeitgeberzuschuss-krankenversicherung",
+        "versicherungspflichtgrenze",
+        "familienversicherung",
+        "beitragsbemessungsgrenze",
+        "elstam"
+      ]
+    }
+  },
+  {
+    "slug": "betriebliche-krankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die betriebliche Krankenversicherung ist eine vom Arbeitgeber bezahlte Zusatzversicherung als Sachbezug: Bis 50 Euro im Monat bleibt sie steuer- und beitragsfrei, ein Cent darüber macht den ganzen Betrag steuerpflichtig; Ende 2024 boten 56.500 Betriebe sie an, 2026 über 60.000 mit 2,8 Millionen Versicherten.",
+          "Für den Arbeitgeber ist sie günstiger als Gehalt: 600 Euro Nettovorteil kosten als Lohnerhöhung 1.414 Euro, als Sachbezug 636 Euro; die Beiträge sind Betriebsausgaben.",
+          "Budgettarife geben ein Jahresbudget von 300 bis 1.500 Euro für Zahn, Brille, Heilpraktiker und Vorsorge frei, je Euro Beitrag rund zwei bis zweieinhalb Euro Leistung, 1.200 Euro Budget kosten 27 bis 42 Euro im Monat; Bausteintarife bieten feste Pakete.",
+          "Es gibt keine Gesundheitsprüfung und keine Wartezeiten; Mindestgrößen liegen bei fünf Beschäftigten für ambulante und Zahntarife, 20 für stationäre, einzelne Anbieter ab einem Mitarbeiter. Im IVFP-Rating 2024 erhielten Hallesche, SDK, Gothaer und DKV Bestnoten, Marktführer ist die Allianz.",
+          "Die Beiträge liegen zwischen 5,85 und über 60 Euro je Mitarbeiter; 2026 erhöht die Gothaer Budgettarife um bis zu 50 Prozent, die Allianz garantiert bis 2026. Minijobber behalten ihren Status, Sachlohn liegt nur vor, wenn der Arbeitgeber Versicherungsnehmer ist und die Beiträge direkt zahlt."
+        ],
+        "quellen": [
+          "§ 8 Abs. 2 Satz 11 EStG",
+          "BFH VI R 13/16 (Sachlohn)",
+          "§ 37b EStG (Pauschalierung)",
+          "Beitrag Betriebliche Krankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Steuerliche Vorteile der betrieblichen Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber gibt mir schon einen 50-Euro-Gutschein. Passt die betriebliche Krankenversicherung noch dazu?",
+          "antwort": "Nicht innerhalb der Freigrenze: Gutschein und Versicherungsbeitrag werden zusammengerechnet, und ab 50,01 Euro ist alles steuer- und beitragspflichtig. Der Arbeitgeber kann die Versicherung stattdessen mit 30 Prozent pauschal versteuern, dann bleibt sie für Sie abgabenfrei und der Gutschein unberührt; oder er ersetzt den Gutschein durch ein höheres Gesundheitsbudget. Lassen Sie sich die Variante auf der Gehaltsabrechnung zeigen.",
+          "quellen": [
+            "§ 8 Abs. 2 Satz 11 EStG",
+            "§ 37b Abs. 2 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Tarifmodelle der betrieblichen Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Was kann ich mit einem Gesundheitsbudget von 600 Euro im Jahr bezahlen?",
+          "antwort": "Je nach Tarif Zahnreinigung, Zahnersatz, Brille oder Kontaktlinsen, Heilpraktiker, Osteopathie, Vorsorgeuntersuchungen über den Kassenkatalog hinaus, Sehhilfen, Hörgeräte oder Naturheilverfahren, meist zu 100 Prozent bis das Budget aufgebraucht ist; Rechnungen reichen Sie per App ein. Bei manchen Anbietern verdoppelt sich ungenutztes Budget im Folgejahr. Ausgeschlossen sind meist Behandlungen, die vor Beginn geplant waren.",
+          "quellen": [
+            "Tarifbedingungen der Anbieter",
+            "Beitrag, Abschnitt Budgettarife"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Praktische Umsetzung einer betrieblichen Krankenversicherung",
+          "status": "freigegeben",
+          "frage": "Ich bin chronisch krank. Werde ich in der betrieblichen Krankenversicherung aufgenommen?",
+          "antwort": "Ja, im Gruppenvertrag gibt es keine Gesundheitsfragen und keine Wartezeiten; Vorerkrankungen sind mitversichert, nur laufende oder angeratene Behandlungen sind bei manchen Tarifen in den ersten Monaten ausgeschlossen. Scheiden Sie aus dem Betrieb aus, dürfen Sie den Vertrag meist privat weiterführen, dann mit eigenem Beitrag und ohne neue Prüfung; das ist bei Vorerkrankungen oft die einzige Chance auf eine Zusatzversicherung.",
+          "quellen": [
+            "Beitrag, Abschnitt Aufnahmebedingungen",
+            "Musterbedingungen des PKV-Verbands für Gruppenversicherungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Kosten und Beitragsentwicklung 2026",
+          "status": "freigegeben",
+          "frage": "Ich habe eine kleine Firma mit drei Angestellten. Lohnt sich das für mich?",
+          "antwort": "Ja, einige Anbieter versichern ab einer Person, und 30 Euro im Monat je Mitarbeiter sind als Betriebsausgabe abziehbar, kosten also netto rund 20 Euro; für die Angestellten sind das 600 bis 1.000 Euro Gesundheitsbudget steuerfrei, was einer Gehaltserhöhung von etwa 1.400 Euro brutto entspricht. Achten Sie auf Beitragsgarantien, denn einige Anbieter haben 2026 um bis zu 50 Prozent erhöht, und regeln Sie im Arbeitsvertrag, dass die Leistung freiwillig und widerruflich ist.",
+          "quellen": [
+            "§ 4 Abs. 4 EStG",
+            "Beitrag, Abschnitt Kosten"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "betriebliche-krankenversicherung",
+        "sachbezugsfreigrenze",
+        "gesundheitspruefung",
+        "betriebsausgaben"
+      ]
+    }
+  },
+  {
+    "slug": "buergerversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Bürgerversicherung wäre eine Krankenversicherung für alle, die das Nebeneinander von gesetzlicher und privater Vollversicherung beendet; Beiträge kämen auf alle Einkunftsarten inklusive Kapital und Mieten, bestehende private Verträge hätten Bestandsschutz. Deutschland ist seit der niederländischen Reform 2006 das einzige EU-Land mit privater Vollversicherung.",
+          "SPD, Grüne, Linke, BSW, Gewerkschaften und Sozialverbände sind dafür, Union und FDP dagegen; die Modelle unterscheiden sich bei der Beitragsbemessungsgrenze, die Grünen wollen sie auf die Versicherungspflichtgrenze heben. Laut Beitrag plant die Regierung ab 2027 eine außerordentliche Anhebung der Pflichtgrenze auf 84.483 Euro.",
+          "Hintergrund ist die Finanzkrise der Kassen: 6,2 Milliarden Euro Defizit 2024, Ausgabenplus von 8 Prozent, Reserven Ende 2025 bei 5,1 Milliarden unter der Mindestreserve, Zusatzbeitrag von 1,6 Prozent 2024 auf 2,9 Prozent 2026, drohende Lücke bis 15 Milliarden.",
+          "Kritiker rechnen vor: Privatversicherte bringen Ärzten und Kliniken 15,52 Milliarden Euro Mehrumsatz, 82.000 Euro je Praxis; fällt das weg, müsste der Beitrag um 0,9 Punkte steigen, Gutverdiener zahlten 133 Euro mehr im Monat, dazu verfassungsrechtliche Zweifel und höhere Lohnnebenkosten.",
+          "Alternativen sind mehr Steuerfinanzierung, eine Expertenkommission bis Frühjahr 2027 und die pauschale Beihilfe für Beamte nach Hamburger Modell; eine Einführung gilt kurzfristig als unwahrscheinlich."
+        ],
+        "quellen": [
+          "Wahl- und Parteiprogramme von SPD, Grünen, Linke, Union, FDP",
+          "Bundesamt für Soziale Sicherung, GKV-Finanzergebnisse 2024/2025",
+          "WIP-Studie zum Mehrumsatz Privatversicherter",
+          "Beitrag Bürgerversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was genau ist eine Bürgerversicherung?",
+          "status": "freigegeben",
+          "frage": "Müsste ich als Privatversicherter bei einer Bürgerversicherung wechseln?",
+          "antwort": "Nach allen vorliegenden Konzepten nicht: Bestehende Verträge bekämen Bestandsschutz, Sie könnten freiwillig wechseln, Neuabschlüsse wären aber nicht mehr möglich. Offen ist, was mit Ihren Alterungsrückstellungen geschähe; die SPD will sie beim Wechsel übertragen lassen. Bis dahin bleibt alles beim Alten, ein Gesetz gibt es nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt Konzept",
+            "Beschlüsse des SPD-Bundesparteitags"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Bürgerversicherung und die Beitragsgrenzen",
+          "status": "freigegeben",
+          "frage": "Was würde eine Bürgerversicherung für mich als Angestellte mit 4.000 Euro brutto ändern?",
+          "antwort": "Beim Beitrag wenig: Die Modelle lassen den Beitragssatz zunächst unverändert, Sie zahlten weiter rund 350 Euro Ihres Anteils. Neu wäre, dass Mieteinnahmen und Kapitalerträge über einem Freibetrag beitragspflichtig würden, und dass Beamte, Selbstständige und Gutverdiener ins System einzahlen, was Befürworter als Entlastung um 0,5 bis 1 Punkt beziffern. Im Gegenzug fielen die Mehrumsätze der Privatpatienten weg, was Ärzte zu Leistungskürzungen bewegen könnte.",
+          "quellen": [
+            "Gutachten des DIW und der Bertelsmann Stiftung zur Bürgerversicherung",
+            "Beitrag, Abschnitt Beitragsgrenzen"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Die GKV-Finanzkrise 2026",
+          "status": "freigegeben",
+          "frage": "Warum haben die Krankenkassen so hohe Defizite?",
+          "antwort": "Die Ausgaben wachsen seit 2024 mit rund 8 Prozent schneller als die Löhne: Klinikreform, Pflegepersonalkosten, teure neue Arzneimittel, mehr Behandlungen bei alternder Bevölkerung, dazu versicherungsfremde Leistungen für Bürgergeldbezieher, für die der Bund nur einen Pauschalbetrag zahlt. Der Bundeszuschuss ist bei 14,5 Milliarden Euro eingefroren, Reserven wurden abgeschmolzen. Deshalb steigt der Zusatzbeitrag das vierte Jahr in Folge.",
+          "quellen": [
+            "GKV-Spitzenverband, Finanzentwicklung 2025",
+            "§ 221 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Alternativen zur Bürgerversicherung",
+          "status": "freigegeben",
+          "frage": "Was ist die pauschale Beihilfe für Beamte?",
+          "antwort": "Ein Zuschuss des Dienstherrn in Höhe der Hälfte des Beitrags zur gesetzlichen Kasse, den Beamte statt der klassischen Beihilfe wählen können; Hamburg hat ihn 2018 eingeführt, Berlin, Bremen, Brandenburg, Thüringen, Baden-Württemberg, Sachsen und Niedersachsen folgten, der Bund lehnt ab. Die Wahl ist unwiderruflich und lohnt sich für Beamte mit Vorerkrankungen, vielen Kindern oder niedrigem Einkommen; gesunde Beamte fahren mit privater Versicherung plus Beihilfe meist günstiger.",
+          "quellen": [
+            "§ 80 Hamburgisches Beamtengesetz",
+            "Beitrag, Abschnitt Alternativen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "buergerversicherung",
+        "solidaritaetsprinzip",
+        "versicherungspflichtgrenze",
+        "beihilfe",
+        "zusatzbeitrag"
+      ]
+    }
+  },
+  {
+    "slug": "krankentagegeldversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Krankentagegeldversicherung zahlt bei ärztlich bescheinigter Arbeitsunfähigkeit einen vereinbarten Tagessatz, steuerfrei und ohne Progressionsvorbehalt, unbegrenzt bis zur Genesung oder anerkannten Berufsunfähigkeit; sie ergänzt das Krankengeld oder ersetzt es für Privatversicherte und Selbstständige.",
+          "Nötig ist sie für Selbstständige ohne Lohnfortzahlung, für Angestellte über 5.812,50 Euro brutto, weil das Krankengeld bei 135,63 Euro brutto je Tag gedeckelt ist und bei 7.000 Euro brutto 800 bis 1.200 Euro im Monat fehlen, und für Privatversicherte ohne Tagegeldbaustein.",
+          "Angestellte wählen die Karenzzeit ab dem 43. Tag nach Ende der Lohnfortzahlung, Selbstständige ab dem 15. oder 22. Tag; empfohlen werden 100 bis 130 Euro je Tag, für Selbstständige etwa 90 Prozent des Nettos.",
+          "Kosten mit 42 Tagen Karenz: 30 Euro Tagessatz 25 bis 40 Euro, 50 Euro 40 bis 70 Euro, 100 Euro 80 bis 140 Euro im Monat, junge Versicherte ab 15 Euro; Beruf, Alter und Gesundheit bestimmen den Preis, Tarife ohne Gesundheitsprüfung sind teurer und begrenzt.",
+          "Gezahlt wird kalendertäglich nach Meldung und Bescheinigung; Alternativen sind tarifliche Krankengeldzuschüsse des Arbeitgebers, die Wahlerklärung gesetzlich versicherter Selbstständiger und Krankengeldwahltarife der Kassen, die Beiträge sind als Vorsorgeaufwendungen absetzbar."
+        ],
+        "quellen": [
+          "Musterbedingungen MB/KT 2009 des PKV-Verbands",
+          "§ 3 Nr. 1a EStG",
+          "§ 47 SGB V",
+          "Beitrag Krankentagegeldversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Die Einkommenslücke: Warum gesetzliches Krankengeld nicht ausreicht",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 8.000 Euro brutto. Wie groß ist meine Lücke im Krankheitsfall?",
+          "antwort": "Ihr Netto liegt bei rund 4.700 Euro, das Krankengeld bei höchstens 118,81 Euro je Tag, also etwa 3.564 Euro im Monat; es fehlen gut 1.100 Euro, bei Bonuszahlungen mehr. Ein Krankentagegeld von 40 Euro ab dem 43. Tag schließt die Lücke und kostet mit 40 Jahren rund 25 bis 40 Euro im Monat. Sind Sie privat versichert, brauchen Sie den vollen Tagessatz von etwa 155 Euro, weil es kein Krankengeld gibt.",
+          "quellen": [
+            "§ 47 Abs. 1 SGB V",
+            "Beitrag, Abschnitt Einkommenslücke"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Kosten und Beitragshöhe: Was kostet die Versicherung wirklich?",
+          "status": "freigegeben",
+          "frage": "Darf ich mehr Krankentagegeld versichern, als ich netto verdiene?",
+          "antwort": "Nein, das Tagegeld darf das Nettoeinkommen nicht übersteigen, sonst kürzt der Versicherer im Leistungsfall; bei Selbstständigen zählt der Gewinn nach Steuern plus Kranken- und Vorsorgebeiträge, nachgewiesen über den letzten Steuerbescheid. Sinkt Ihr Einkommen dauerhaft, müssen Sie das melden, sonst zahlen Sie für nicht versicherbare Leistung. Steigt es, können Sie ohne Gesundheitsprüfung nachversichern, meist bis 10 Prozent im Jahr.",
+          "quellen": [
+            "§ 4 Abs. 2 und 4 MB/KT 2009",
+            "§ 192 Abs. 5 VVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "So funktioniert die Leistung: Ab wann wird Krankentagegeld gezahlt?",
+          "status": "freigegeben",
+          "frage": "Ich arbeite nach der Krankheit stufenweise wieder ein. Zahlt die Versicherung weiter?",
+          "antwort": "Das hängt vom Tarif ab: Nach den Musterbedingungen endet die Zahlung, sobald Sie teilweise arbeitsfähig sind, viele moderne Tarife zahlen bei Wiedereingliederung nach dem Hamburger Modell aber anteilig weiter, etwa 50 Prozent bei halber Arbeitszeit. Klären Sie das vor der Wiedereingliederung mit dem Versicherer und lassen Sie den Arzt die weiterbestehende Arbeitsunfähigkeit bescheinigen; die gesetzliche Kasse zahlt in dieser Phase Krankengeld weiter.",
+          "quellen": [
+            "§ 1 Abs. 3 MB/KT 2009",
+            "§ 74 SGB V (stufenweise Wiedereingliederung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Krankentagegeldversicherung ohne Gesundheitsprüfung – Die beste Option?",
+          "status": "freigegeben",
+          "frage": "Ich hatte vor zwei Jahren einen Bandscheibenvorfall. Bekomme ich noch eine Krankentagegeldversicherung?",
+          "antwort": "Wahrscheinlich, aber oft mit Ausschluss für Rückenleiden oder einem Zuschlag; Versicherer fragen die letzten drei bis fünf Jahre ab. Stellen Sie über einen Makler eine anonyme Voranfrage bei mehreren Anbietern, bevor Sie einen Antrag abgeben, und legen Sie den Entlassungsbericht bei, wenn Sie beschwerdefrei sind. Tarife ohne Gesundheitsfragen nehmen zwar an, schließen Vorerkrankungen aber generell aus und zahlen erst ab längerer Karenz.",
+          "quellen": [
+            "§ 19 VVG",
+            "Beitrag, Abschnitt ohne Gesundheitsprüfung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "krankentagegeld",
+        "karenzzeit",
+        "arbeitsunfaehigkeit",
+        "krankengeld",
+        "gesundheitspruefung",
+        "progressionsvorbehalt"
+      ]
+    }
+  },
+  {
+    "slug": "kinderkrankengeld",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Kinderkrankengeld zahlt die gesetzliche Kasse, wenn Eltern ihr krankes Kind unter zwölf Jahren betreuen müssen und niemand sonst im Haushalt kann; bei Kindern mit Behinderung ohne Altersgrenze. Beide Elternteile und das Kind müssen gesetzlich versichert sein und der Elternteil selbst Anspruch auf Krankengeld haben.",
+          "2026 gibt es je Kind und Elternteil 15 Arbeitstage, höchstens 35 im Jahr, Alleinerziehende 30 und 70; ab 2027 gelten ohne neuen Beschluss wieder 10 beziehungsweise 20 Tage. Bei stationärer Mitaufnahme und bei Palliativbetreuung ist der Anspruch unbegrenzt.",
+          "Es beträgt 90 Prozent des ausgefallenen Nettos, mit Einmalzahlungen im Vorjahr 100 Prozent, höchstens 135,63 Euro je Tag, abzüglich Renten-, Pflege- und Arbeitslosenbeiträge; bei 2.800 Euro netto rund 84 Euro je Tag.",
+          "Der Weg: ärztliche Bescheinigung, Kopie an den Arbeitgeber, Original an die Kasse, der Arbeitgeber meldet die Entgeltdaten; Auszahlung nach etwa zehn Werktagen, telefonische Krankschreibung für bis zu fünf Tage bei bekannten Kindern ohne schwere Symptome.",
+          "Privatversicherte und Minijobber bekommen nichts, haben aber Anspruch auf unbezahlte Freistellung; Homeoffice schließt den Anspruch nicht aus, Tage lassen sich mit Zustimmung des Arbeitgebers auf den Partner übertragen. Steuerfrei mit Progressionsvorbehalt, ab 410 Euro Steuererklärung."
+        ],
+        "quellen": [
+          "§ 45 SGB V",
+          "§ 3 Nr. 1a, § 32b EStG",
+          "Beitrag Kinderkrankengeld"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer hat Anspruch?",
+          "status": "freigegeben",
+          "frage": "Ich bin gesetzlich versichert, mein Mann privat mit den Kindern. Bekomme ich Kinderkrankengeld?",
+          "antwort": "Nein, das Kind muss selbst gesetzlich versichert sein; privat versicherte Kinder lösen keinen Anspruch aus, auch wenn Sie Mitglied einer Kasse sind. Ihnen bleibt die unbezahlte Freistellung nach dem Bürgerlichen Gesetzbuch für wenige Tage oder ein Baustein Kinderkrankentagegeld in der privaten Police Ihres Mannes. Bei getrennt versicherten Kindern gilt der Anspruch nur für das gesetzlich versicherte Kind.",
+          "quellen": [
+            "§ 45 Abs. 1 SGB V",
+            "§ 616 BGB"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie viele Kinderkrankentage stehen mir zu?",
+          "status": "freigegeben",
+          "frage": "Mein Mann hat seine 15 Tage schon verbraucht. Kann ich ihm meine übertragen?",
+          "antwort": "Ja, mit Zustimmung Ihres Arbeitgebers; die Kasse rechnet die übertragenen Tage dann bei ihm ab, bis er sein Jahresmaximum von 35 Tagen erreicht. Umgekehrt geht es genauso. Alleinerziehende haben 30 Tage je Kind ohne Übertragung. Notieren Sie die Tage beider Eltern, die Kassen prüfen das Kontingent je Elternteil, nicht je Familie.",
+          "quellen": [
+            "§ 45 Abs. 2 Satz 1 SGB V",
+            "Gemeinsames Rundschreiben der Spitzenverbände zum Kinderkrankengeld"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Höhe und Berechnung des Kinderkrankengelds",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 5.500 Euro brutto. Bekomme ich 90 Prozent meines Nettos?",
+          "antwort": "Nicht ganz: 90 Prozent von rund 3.400 Euro netto wären 102 Euro je Tag, gedeckelt ist das Kinderkrankengeld aber auf 70 Prozent der Beitragsbemessungsgrenze, 135,63 Euro brutto, was hier nicht greift; abgezogen werden dann rund 12 Prozent Sozialbeiträge, Sie erhalten etwa 90 Euro je Tag. Bei Gehältern über 5.812,50 Euro bleibt es beim Höchstbetrag, unabhängig vom Netto.",
+          "quellen": [
+            "§ 45 Abs. 2 Satz 3 bis 5 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Sonderfälle: Homeoffice, Steuern und Übertragung",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber sagt, im Homeoffice könne ich das kranke Kind nebenbei betreuen. Stimmt das?",
+          "antwort": "Nein, Kinderkrankengeld setzt nur voraus, dass Sie wegen der Betreuung nicht arbeiten; wo Ihr Arbeitsplatz ist, spielt keine Rolle, das hat das Bundessozialgericht bestätigt. Sie melden sich mit der ärztlichen Bescheinigung ab und werden für die Tage nicht bezahlt, die Kasse zahlt Kinderkrankengeld. Arbeiten Sie freiwillig einige Stunden, entfällt der Anspruch für diesen Tag.",
+          "quellen": [
+            "§ 45 Abs. 1 SGB V",
+            "§ 45 Abs. 3 SGB V (Freistellungsanspruch)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kinderkrankengeld",
+        "krankengeld",
+        "arbeitsunfaehigkeit",
+        "progressionsvorbehalt",
+        "familienversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "auslandskrankenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Kasse zahlt im Ausland nur in Ländern mit Sozialversicherungsabkommen, mit der europäischen Versichertenkarte in EU, EWR, Schweiz und Großbritannien, nur bei Kassenärzten und nie den Rücktransport, der über 100.000 Euro kosten kann; eine Auslandskrankenversicherung ist deshalb für jede Reise nötig, für Kuba, Iran, Katar, Russland und seit 2026 Georgien sogar Einreisepflicht.",
+          "Jahrespolicen für Reisen bis 56 bis 70 Tage kosten 8 bis 20 Euro für Einzelpersonen, 20 bis 35 Euro für Familien, rund 50 Euro für Senioren; Stiftung Warentest kürte im Mai 2026 HanseMerkur, ERGO und TravelSecure mit Note 0,5 zu Testsiegern.",
+          "Langzeitreisen ab zehn Wochen brauchen eigene Tarife: drei Monate rund 200 Euro, mit USA und Kanada 300 bis 500, ein Jahr 400 bis 900 Euro, mit Nordamerika bis 2.000; Young-Travellers-Tarife für unter 31-Jährige 34 bis 63 Euro im Monat.",
+          "Versichert sind ambulante und stationäre Behandlung, Schmerzbehandlung beim Zahnarzt, medizinisch sinnvoller Rücktransport, Such- und Bergungskosten ab 5.000 Euro, meist Pandemie, Schwangerschaft und Risikosport; ausgeschlossen sind vor der Reise geplante oder bekannte Behandlungen, Kriegsgebiete und oft Kreditkartenpolicen mit Lücken.",
+          "Abschluss einige Wochen vor Abreise, nachträglich meist nicht möglich; ambulant zahlen Sie vor und reichen ein, stationär gibt der Versicherer Kostenzusage an die Klinik."
+        ],
+        "quellen": [
+          "§ 16 Abs. 1 Nr. 1, § 17 SGB V",
+          "EU-Verordnung 883/2004 (Versichertenkarte)",
+          "Stiftung Warentest 05/2026",
+          "Beitrag Auslandskrankenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer benötigt eine Auslandskrankenversicherung?",
+          "status": "freigegeben",
+          "frage": "Ich fahre nur nach Österreich zum Skifahren. Reicht meine Versichertenkarte?",
+          "antwort": "Für die Behandlung beim Kassenarzt oder im öffentlichen Krankenhaus ja, mit österreichischen Zuzahlungen; nicht aber für Privatkliniken, für den Hubschrauber vom Berg, der 3.000 bis 5.000 Euro kostet, und für den Rücktransport nach Hause. Eine Jahres-Auslandskrankenversicherung für 10 bis 20 Euro deckt genau das; Bergung zahlt sonst nur eine Unfallversicherung oder Alpenvereinsmitgliedschaft.",
+          "quellen": [
+            "Art. 19 Verordnung (EG) 883/2004",
+            "§ 60 SGB V (Fahrkosten nur im Inland)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Die richtige Tarifwahl treffen",
+          "status": "freigegeben",
+          "frage": "Ich bin 68 und reise zweimal im Jahr für je vier Wochen. Welcher Tarif passt?",
+          "antwort": "Eine Jahrespolice mit Reisen bis 56 oder 70 Tagen je Reise reicht, ab etwa 50 Euro im Jahr; achten Sie auf Tarife ohne Altersgrenze oder Alterszuschlag ab 65, auf die Mitversicherung bestehender, stabiler Erkrankungen wie Bluthochdruck und darauf, dass der Rücktransport bei medizinischer Sinnhaftigkeit statt nur Notwendigkeit gezahlt wird. Für die USA prüfen Sie, ob der Tarif weltweiten Schutz einschließt.",
+          "quellen": [
+            "Stiftung Warentest 05/2026",
+            "Beitrag, Abschnitt Tarifwahl"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Ausschlüsse und Fallstricke",
+          "status": "freigegeben",
+          "frage": "Ich habe Diabetes. Zahlt die Auslandskrankenversicherung, wenn ich im Urlaub deshalb ins Krankenhaus muss?",
+          "antwort": "Bei einer unerwarteten akuten Verschlechterung ja, wenn die Krankheit vor der Reise stabil eingestellt war; Kontrollen, geplante Behandlungen und Insulin für den Alltag sind ausgeschlossen. Wählen Sie einen Tarif, der Vorerkrankungen ausdrücklich einschließt und nicht nur unvorhersehbare Erkrankungen, und nehmen Sie Medikamente für die ganze Reise mit. Lassen Sie sich vor Langzeitreisen die Reisefähigkeit ärztlich bestätigen.",
+          "quellen": [
+            "Beitrag, Abschnitt Ausschlüsse",
+            "Allgemeine Bedingungen der Reisekrankenversicherer"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Praktische Tipps zu Abschluss und Schadensfall",
+          "status": "freigegeben",
+          "frage": "Ich bin schon in Thailand und habe vergessen abzuschließen. Gibt es noch eine Möglichkeit?",
+          "antwort": "Nur bei wenigen Anbietern, die den Abschluss nach Reisebeginn erlauben, etwa Young Travellers für unter 40-Jährige, meist mit Wartezeit von einigen Tagen und nur für Erkrankungen, die danach beginnen. Die meisten Versicherer verlangen den Abschluss vor Abreise. Prüfen Sie außerdem, ob Ihre Kreditkarte einen Schutz bietet, der aber oft nur bei Buchung über die Karte gilt.",
+          "quellen": [
+            "Beitrag, Abschnitt Abschluss",
+            "Tarifbedingungen Young Travellers"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "auslandskrankenversicherung",
+        "europaeische-krankenversicherungskarte",
+        "medizinischer-ruecktransport",
+        "langzeit-auslandskrankenversicherung"
+      ]
+    }
+  }
+]

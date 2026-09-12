@@ -1,0 +1,869 @@
+[
+  {
+    "slug": "umzugskosten-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Beruflich veranlasste Umzüge sind Werbungskosten: Spedition, Besichtigungsfahrten, doppelte Miete bis sechs Monate, Makler für die Mietwohnung, Nachhilfe fürs Kind bis 1.286 Euro, dazu die Pauschale von 964 Euro plus 643 Euro je weitere Person ohne jeden Beleg.",
+          "Beruflich ist der Umzug bei neuer Stelle, Versetzung, Ende einer doppelten Haushaltsführung oder wenn der tägliche Arbeitsweg um mindestens eine Stunde kürzer wird; ein Umzug nur fürs Homeoffice zählt nicht.",
+          "Private Umzüge bringen 20 Prozent der Arbeitskosten von Spedition, Montage und Endreinigung direkt von der Steuer, bis 4.000 Euro, nur mit Rechnung und Überweisung.",
+          "Beim zweiten Berufsumzug innerhalb von fünf Jahren steigt die Pauschale um 50 Prozent; der Arbeitgeber darf alles steuerfrei erstatten.",
+          "Eingetragen wird in der Anlage N unter sonstige Werbungskosten, privat unter haushaltsnahe Aufwendungen."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 EStG in Verbindung mit § 10 BUKG (Umzugskostenpauschale)",
+          "BMF-Schreiben zur Umzugskostenpauschale ab 1. März 2024",
+          "BFH VI R 3/23, Urteil vom 5. Februar 2025",
+          "§ 35a EStG"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Umzugskostenpauschale 2026: Die aktuellen Beträge",
+          "status": "freigegeben",
+          "frage": "Wir ziehen zu viert wegen meiner neuen Stelle um. Wie viel bekommen wir pauschal?",
+          "antwort": "2.893 Euro ohne einen einzigen Beleg: 964 Euro für Sie und je 643 Euro für Partner und zwei Kinder. Spedition, doppelte Miete und Maklerkosten kommen mit Rechnung obendrauf. Ist es Ihr zweiter Berufsumzug in fünf Jahren, steigt die Pauschale um die Hälfte.",
+          "quellen": [
+            "§ 10 BUKG; BMF-Schreiben zur Umzugskostenpauschale",
+            "Beitrag, Beispiel Familie"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wann gilt ein Umzug als beruflich bedingt?",
+          "status": "freigegeben",
+          "frage": "Ich ziehe näher an die Arbeit, spare aber nur 25 Minuten je Strecke. Reicht das?",
+          "antwort": "Ja, weil Hin- und Rückweg zusammen zählen: 50 Minuten am Tag liegen knapp unter der Grenze von einer Stunde, die Finanzämter als Richtwert nehmen; bei mindestens 30 Minuten je Strecke sind Sie sicher. Belegen Sie die Zeiten mit Routenplaner oder Fahrplan zu den üblichen Pendelzeiten.",
+          "quellen": [
+            "BFH VI R 189/97",
+            "Beitrag, Abschnitt Beruflich bedingt"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Umzugskosten sind steuerlich absetzbar?",
+          "status": "freigegeben",
+          "frage": "Die Maklerprovision für unsere gekaufte Wohnung war 15.000 Euro. Absetzbar?",
+          "antwort": "Nein, Maklerkosten beim Kauf gehören zu den Anschaffungskosten der Immobilie und sind nie Werbungskosten, auch beim Berufsumzug. Nur die Provision für eine Mietwohnung zählt. Bei Vermietung der Wohnung fließen die Kaufnebenkosten in die Abschreibung.",
+          "quellen": [
+            "BFH VI R 25/09",
+            "§ 255 HGB (Anschaffungsnebenkosten)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Private Umzüge: Haushaltsnahe Dienstleistungen nutzen",
+          "status": "freigegeben",
+          "frage": "Wir sind privat umgezogen, die Spedition hat 3.000 Euro gekostet. Was bringt das?",
+          "antwort": "20 Prozent des Arbeitskostenanteils direkt von der Steuer, bei etwa 2.000 Euro Lohnanteil also 400 Euro, wenn Sie überwiesen haben und die Rechnung Lohn und Fahrzeugmiete trennt. Bis 4.000 Euro Ermäßigung im Jahr sind möglich; Material, Kartons und Miettransporter zählen nicht.",
+          "quellen": [
+            "§ 35a Abs. 2 EStG",
+            "BMF-Schreiben vom 9. November 2016, Anlage 1 (Umzugsdienstleistungen)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "umzugskostenpauschale",
+        "werbungskosten",
+        "haushaltsnahe-dienstleistungen",
+        "doppelte-haushaltsfuehrung"
+      ]
+    }
+  },
+  {
+    "slug": "spenden-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Spenden an gemeinnützige Vereine, Kirchen, Stiftungen und Hochschulen in der EU sind bis 20 Prozent des Gesamtbetrags der Einkünfte Sonderausgaben; was darüber liegt, wandert unbegrenzt in die Folgejahre.",
+          "Bis 300 Euro je Spende reicht der Kontoauszug, darüber braucht es die Zuwendungsbestätigung, die viele Organisationen elektronisch ans Finanzamt melden; vorlegen müssen Sie sie nur auf Nachfrage bis ein Jahr nach dem Bescheid.",
+          "Sachspenden zählen mit dem Marktwert, gebrauchte Kleidung mit dem Preis, den ein Käufer heute zahlen würde; Aufwandsspenden brauchen eine vorherige Vereinbarung und den schriftlichen Verzicht.",
+          "Parteispenden bringen 2026 die Hälfte bis 1.650 Euro direkt von der Steuer und weitere 3.300 Euro als Sonderausgaben, Ehepaare das Doppelte.",
+          "Spenden ins Vermögen einer Stiftung sind bis 1 Million Euro in zehn Jahren zusätzlich abziehbar. Es zählt das Jahr der Abbuchung."
+        ],
+        "quellen": [
+          "§ 10b EStG",
+          "§ 34g EStG (Parteispenden, Fassung 2026)",
+          "§ 50 EStDV (Nachweis)",
+          "Beitrag Spenden"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wann ist eine Spende steuerlich absetzbar?",
+          "status": "freigegeben",
+          "frage": "Ich habe über eine Crowdfunding-Seite für eine kranke Familie gespendet. Absetzbar?",
+          "antwort": "Nein, Zuwendungen an Privatpersonen sind nie absetzbar, auch nicht über Plattformen. Absetzbar wird es nur, wenn der Empfänger eine anerkannte gemeinnützige Organisation ist, die eine Zuwendungsbestätigung ausstellen darf; das steht auf der Aktionsseite oder in deren Satzung.",
+          "quellen": [
+            "§ 10b Abs. 1 EStG in Verbindung mit §§ 52 bis 54 AO",
+            "Beitrag, Abschnitt Berechtigte Empfänger"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Spendenbescheinigung: Was Sie wissen müssen",
+          "status": "freigegeben",
+          "frage": "Ich spende 25 Euro im Monat per Dauerauftrag. Brauche ich eine Bescheinigung?",
+          "antwort": "Nein, jede einzelne Zahlung liegt unter 300 Euro, deshalb reicht der Kontoauszug als vereinfachter Nachweis, auch wenn es im Jahr 300 Euro werden. Bewahren Sie die Auszüge bis ein Jahr nach dem Steuerbescheid auf; viele Organisationen schicken ohnehin eine Jahresbestätigung.",
+          "quellen": [
+            "§ 50 Abs. 4 EStDV"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Die 20-Prozent-Regel: So funktioniert’s",
+          "status": "freigegeben",
+          "frage": "Ich habe in einem Jahr 15.000 Euro gespendet, verdiene aber nur 40.000. Ist der Rest verloren?",
+          "antwort": "Nein. 8.000 Euro wirken sofort, die übrigen 7.000 Euro trägt das Finanzamt als Spendenvortrag ins nächste Jahr und stellt ihn per Bescheid fest; das läuft unbefristet weiter, bis alles verrechnet ist. Sie müssen dafür nichts beantragen.",
+          "quellen": [
+            "§ 10b Abs. 1 Satz 9 und 10 EStG",
+            "§ 10d Abs. 4 EStG (Feststellung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Parteispenden ab 2026: Neue Limits",
+          "status": "freigegeben",
+          "frage": "Was bringt eine Parteispende von 2.000 Euro netto?",
+          "antwort": "1.000 Euro direkt von der Steuerschuld, denn bis 3.300 Euro wird die Hälfte abgezogen, unabhängig von Ihrem Steuersatz. Erst über 3.300 Euro greift der Sonderausgabenabzug für weitere 3.300 Euro. Für Ehepaare gelten doppelte Beträge; Spenden an Vereine wirken dagegen nur mit dem persönlichen Steuersatz.",
+          "quellen": [
+            "§ 34g EStG in der Fassung ab 2026",
+            "Beitrag, Abschnitt Parteispenden"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "spendenbescheinigung",
+        "belegvorhaltepflicht",
+        "sonderausgaben",
+        "verlustvortrag"
+      ]
+    }
+  },
+  {
+    "slug": "reisekosten-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Reisekosten entstehen bei beruflicher Arbeit außerhalb von Wohnung und erster Tätigkeitsstätte: Kundenbesuche, Schulungen, Messen, Montage; anders als beim Arbeitsweg zählt die ganze Strecke mit 30 Cent je Kilometer.",
+          "Verpflegung gibt es pauschal: 14 Euro ab acht Stunden und an An- und Abreisetagen, 28 Euro für volle Tage, gekürzt um 5,60 Euro je gestelltes Frühstück und 11,20 Euro je Mittag- oder Abendessen.",
+          "Übernachtungen setzen Arbeitnehmer nur mit Hotelrechnung an, die 20-Euro-Pauschale gilt nur für Arbeitgebererstattungen; Berufskraftfahrer bekommen 9 Euro je Nacht im Fahrzeug.",
+          "Nebenkosten wie Maut, Parken, Gepäck, Telefon oder Visum zählen mit Beleg voll; Minibar, Strafzettel und Privates nicht.",
+          "Alles kommt in die Anlage N, Arbeitgebererstattungen werden abgezogen, und nur die Summe über dem Pauschbetrag von 1.230 Euro wirkt."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Nr. 4a, Abs. 4a EStG",
+          "BMF-Schreiben zur steuerlichen Behandlung der Reisekosten (Rn. 1 ff.)",
+          "Beitrag Reisekosten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was sind absetzbare Reisekosten und wer profitiert?",
+          "status": "freigegeben",
+          "frage": "Ich bin Monteur ohne festes Büro. Sind meine Fahrten Reisekosten?",
+          "antwort": "Ja, wenn Ihnen der Arbeitgeber keine erste Tätigkeitsstätte zugeordnet hat: Dann ist jede Fahrt zum Einsatzort eine Auswärtstätigkeit mit 30 Cent je gefahrenem Kilometer und Verpflegungspauschale. Müssen Sie täglich im Betrieb Fahrzeug oder Material holen, zählt die Fahrt dorthin als Arbeitsweg mit Entfernungspauschale, der Rest als Reise.",
+          "quellen": [
+            "§ 9 Abs. 4 EStG",
+            "§ 9 Abs. 1 Nr. 4a Satz 3 EStG (Sammelpunkt)"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Kilometerpauschalen bei Dienstreisen?",
+          "status": "freigegeben",
+          "frage": "Warum bekomme ich für die Dienstreise nur 30 Cent, für den Arbeitsweg aber 38 Cent?",
+          "antwort": "Weil die Beträge Verschiedenes abgelten: Die 38 Cent Entfernungspauschale gibt es nur für die einfache Strecke zur ersten Tätigkeitsstätte, die 30 Cent Kilometerpauschale für jeden gefahrenen Kilometer der Reise, hin und zurück. Bei 40 Kilometern einfach ergibt die Reise 24 Euro, der Arbeitsweg 15,20 Euro.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 und 4a EStG",
+            "§ 5 Abs. 2 BRKG (Wegstreckenentschädigung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Verpflegungsmehraufwendungen richtig berechnen",
+          "status": "freigegeben",
+          "frage": "Das Hotel war mit Frühstück. Was bleibt von der Pauschale?",
+          "antwort": "Wurde das Frühstück vom Arbeitgeber gebucht oder erstattet, sinkt die Tagespauschale um 5,60 Euro, also von 28 auf 22,40 Euro und am Abreisetag von 14 auf 8,40 Euro. Haben Sie das Hotel selbst bezahlt, bleibt die volle Pauschale, dafür ziehen Sie den Frühstücksanteil von den Übernachtungskosten ab.",
+          "quellen": [
+            "§ 9 Abs. 4a Satz 8 EStG",
+            "Beitrag, Abschnitt Verpflegungsmehraufwendungen"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Was zählt zu den absetzbaren Reisenebenkosten?",
+          "status": "freigegeben",
+          "frage": "Ich hatte auf der Dienstreise einen Parkverstoß. Absetzbar?",
+          "antwort": "Nein, Bußgelder und Verwarnungsgelder sind nie abziehbar, auch wenn sie beruflich entstanden sind. Parkgebühren, Maut, Gepäckaufbewahrung und berufliche Telefonate dagegen schon, mit Beleg und zusätzlich zur Kilometerpauschale.",
+          "quellen": [
+            "§ 4 Abs. 5 Satz 1 Nr. 8 EStG",
+            "§ 9 Abs. 5 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kilometerpauschale",
+        "verpflegungsmehraufwand",
+        "erste-taetigkeitsstaette",
+        "reisenebenkosten"
+      ]
+    }
+  },
+  {
+    "slug": "kinderbetreuung-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Eltern setzen 80 Prozent der Betreuungskosten für Kinder unter 14 als Sonderausgaben ab, höchstens 4.800 Euro je Kind, voll erreicht ab 6.000 Euro Kosten; ob Sie arbeiten, spielt keine Rolle.",
+          "Es zählt nur Betreuung: Kita, Hort, Tagesmutter, Babysitter, Hausaufgabenaufsicht, der Betreuungsanteil eines Au-pairs. Essen, Nachhilfe, Musik, Sport und Feriencamps zählen nicht.",
+          "Das Kind muss in Ihrem Haushalt leben und Kindergeld bringen; bei getrennten Eltern darf nur der Elternteil absetzen, bei dem es wohnt, auch wenn der andere zahlt.",
+          "Bar bezahlt gibt es nichts, es braucht Rechnung und Überweisung; steuerfreie Arbeitgeberzuschüsse werden abgezogen.",
+          "Eingetragen wird je Kind in der Anlage Kind, Belege sechs Jahre aufheben."
+        ],
+        "quellen": [
+          "§ 10 Abs. 1 Nr. 5 EStG (Fassung ab 2025)",
+          "BFH III R 33/24, Urteil vom 23. Januar 2025",
+          "BFH III R 9/22, Urteil vom 11. Mai 2023",
+          "Beitrag Kinderbetreuungskosten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie viel können Sie absetzen?",
+          "status": "freigegeben",
+          "frage": "Unsere Kita kostet 350 Euro im Monat inklusive Essen. Was setze ich an?",
+          "antwort": "Nur den Betreuungsanteil: Lassen Sie sich von der Kita die Kosten trennen, meist 280 Euro Betreuung und 70 Euro Verpflegung. Von 3.360 Euro Betreuung im Jahr zählen 80 Prozent, also 2.688 Euro Sonderausgaben; bei 30 Prozent Steuersatz rund 800 Euro Erstattung.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 5 Satz 1 EStG",
+            "Beitrag, Abschnitt Absetzbare Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Kosten zählen dazu?",
+          "status": "freigegeben",
+          "frage": "Die Oma passt gegen Geld auf. Kann ich das absetzen?",
+          "antwort": "Ja, wenn es einen schriftlichen Vertrag wie unter Fremden gibt, die Oma nicht mit Ihnen im Haushalt lebt und Sie überweisen. Fahrtkostenerstattungen an die Großeltern zählen sogar bei unentgeltlicher Betreuung, wenn sie vereinbart und überwiesen sind.",
+          "quellen": [
+            "BFH III R 24/16",
+            "Beitrag, Abschnitt Welche Kosten"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Nachweise und Dokumentation",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt 200 Euro Kita-Zuschuss steuerfrei. Was bleibt für die Steuer?",
+          "antwort": "Ihre Kosten minus 2.400 Euro Zuschuss im Jahr; nur der Rest wird zu 80 Prozent angesetzt. Der Zuschuss ist trotzdem die bessere Variante, weil er komplett steuer- und beitragsfrei ankommt, während der Abzug nur Ihren Steuersatz auf 80 Prozent bringt.",
+          "quellen": [
+            "§ 3 Nr. 33 EStG",
+            "§ 10 Abs. 1 Nr. 5 Satz 4 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Getrennte Eltern und Haushaltszugehörigkeit",
+          "status": "freigegeben",
+          "frage": "Ich bin getrennt, zahle die Hälfte der Kita, das Kind wohnt bei der Mutter. Kann ich absetzen?",
+          "antwort": "Nach dem Urteil des Bundesfinanzhofs von 2023 nicht, weil das Kind nicht zu Ihrem Haushalt gehört; die Mutter darf nur ihren eigenen Anteil ansetzen. Gegen diese Regel läuft eine Verfassungsbeschwerde; legen Sie Einspruch ein und beantragen Sie das Ruhen des Verfahrens unter Verweis auf 2 BvR 1041/23.",
+          "quellen": [
+            "BFH III R 9/22",
+            "BVerfG 2 BvR 1041/23 (anhängig)",
+            "§ 363 Abs. 2 AO (Ruhen des Verfahrens)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kinderbetreuungskosten",
+        "sonderausgaben",
+        "kindergeld",
+        "kinderfreibetrag"
+      ]
+    }
+  },
+  {
+    "slug": "jahressteuerbescheinigung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Jahressteuerbescheinigung der Bank listet Zinsen, Dividenden, Kursgewinne, einbehaltene Abgeltungsteuer mit Soli und Kirchensteuer, den genutzten Freistellungsauftrag und die Verlusttöpfe eines Jahres.",
+          "Pflicht ist sie seit 2009 nicht mehr; die meisten Banken stellen sie bis März als PDF ins Postfach, ausländische Broker gar nicht, dann müssen Sie die Erträge selbst in der Anlage KAP erklären.",
+          "Sie brauchen sie für die Günstigerprüfung bei einem Steuersatz unter 25 Prozent, für nicht ausgeschöpfte 1.000 Euro Sparerpauschbetrag, für die Verrechnung von Verlusten über mehrere Depots und bei Auslandserträgen.",
+          "Wer unter dem Grundfreibetrag liegt, holt sich beim Finanzamt eine Nichtveranlagungsbescheinigung, dann behält die Bank gar nichts ein.",
+          "Einreichen müssen Sie nichts, aufbewahren vier Jahre; Freistellungsaufträge dürfen zusammen 1.000 Euro nicht übersteigen und brauchen die Steuer-ID."
+        ],
+        "quellen": [
+          "§ 45a EStG (Steuerbescheinigung)",
+          "§ 44a EStG (Freistellungsauftrag, NV-Bescheinigung)",
+          "§ 32d Abs. 6 EStG (Günstigerprüfung)",
+          "Beitrag Jahressteuerbescheinigung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was ist die Jahressteuerbescheinigung und wofür brauchen Sie sie?",
+          "status": "freigegeben",
+          "frage": "Ich habe bei zwei Banken je 700 Euro Zinsen und je 500 Euro Freistellungsauftrag. Was ist zu tun?",
+          "antwort": "Beide Banken haben auf 200 Euro Steuer einbehalten, obwohl Ihnen insgesamt 1.000 Euro frei zustehen und Sie nur 1.400 Euro Zinsen hatten: 400 Euro wurden zu viel besteuert. Tragen Sie beide Bescheinigungen in die Anlage KAP ein, das Finanzamt erstattet rund 105 Euro. Für die Zukunft die Aufträge auf 700 und 300 Euro verteilen.",
+          "quellen": [
+            "§ 44a Abs. 2 EStG",
+            "§ 32d Abs. 4 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wer erhält eine Jahressteuerbescheinigung?",
+          "status": "freigegeben",
+          "frage": "Ich bin Studentin mit 8.000 Euro Einkommen. Wie bekomme ich die Abgeltungsteuer zurück?",
+          "antwort": "Am einfachsten vorab mit einer Nichtveranlagungsbescheinigung vom Finanzamt, gültig drei Jahre; damit behält die Bank nichts ein. Für vergangene Jahre reichen Sie die Anlage KAP mit der Jahressteuerbescheinigung ein und kreuzen die Günstigerprüfung an; bei Einkommen unter dem Grundfreibetrag kommt die gesamte Steuer zurück.",
+          "quellen": [
+            "§ 44a Abs. 2 Satz 1 Nr. 2 EStG",
+            "§ 32d Abs. 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Jahressteuerbescheinigung bei der Steuererklärung nutzen",
+          "status": "freigegeben",
+          "frage": "Bei Bank A habe ich Verluste, bei Bank B Gewinne. Wie verrechne ich das?",
+          "antwort": "Nur über die Steuererklärung: Beantragen Sie bei Bank A bis 15. Dezember eine Verlustbescheinigung, dann wird der Verlust aus dem Topf gelöscht und in der Bescheinigung ausgewiesen. In der Anlage KAP verrechnet das Finanzamt ihn mit den Gewinnen von Bank B; Aktienverluste nur mit Aktiengewinnen.",
+          "quellen": [
+            "§ 43a Abs. 3 Satz 4 und 5 EStG",
+            "§ 20 Abs. 6 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "jahressteuerbescheinigung",
+        "freistellungsauftrag",
+        "nv-bescheinigung",
+        "sparerpauschbetrag"
+      ]
+    }
+  },
+  {
+    "slug": "ferienwohnung-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Was eine Ferienwohnung steuerlich bringt, hängt von der Nutzung ab: Bei reiner Vermietung sind Zinsen, Abschreibung, Reparaturen, Versicherung, Plattformgebühren und Grundsteuer voll Werbungskosten, auch in Leerstandszeiten.",
+          "Wer selbst mitnutzt, teilt die Kosten nach Tagen auf; Leerstand zählt hälftig. Bei reiner Selbstnutzung bleiben nur Handwerker und haushaltsnahe Dienste.",
+          "Das Finanzamt unterstellt Gewinnabsicht, wenn die Wohnung mindestens 75 Prozent der ortsüblichen Vermietungstage belegt ist; sonst droht eine Prognose über 30 Jahre und im schlimmsten Fall Liebhaberei ohne jeden Abzug.",
+          "Abgeschrieben wird das Gebäude mit 2 Prozent, ab Baujahr 2023 mit 3 Prozent, Neubauten bis September 2029 wahlweise degressiv mit 5 Prozent; Möbel über 13 Jahre.",
+          "Alles kommt in die Anlage V-FeWo; seit Mai 2026 brauchen Plattformangebote eine Registrierungsnummer, die Kleinunternehmergrenze liegt bei 25.000 Euro."
+        ],
+        "quellen": [
+          "§ 21 EStG",
+          "§ 7 Abs. 4 und 5a EStG (AfA)",
+          "BFH IX R 26/21 (ortsübliche Vermietungszeit)",
+          "Beitrag Ferienwohnung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Ferienwohnung ausschließlich vermietet: Vollständiger Kostenabzug",
+          "status": "freigegeben",
+          "frage": "Meine Ferienwohnung stand im Winter vier Monate leer. Sind die Kosten trotzdem absetzbar?",
+          "antwort": "Ja, wenn die Wohnung in der Zeit vermietbar war, also inseriert und nicht selbst genutzt. Leerstand gehört zum Vermietungsrisiko. Anders bei gemischter Nutzung: Dann werden Leerstandstage hälftig der Selbstnutzung zugerechnet.",
+          "quellen": [
+            "BFH IX R 57/02",
+            "Beitrag, Abschnitt Ausschließlich vermietet"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Absetzbare Werbungskosten im Detail",
+          "status": "freigegeben",
+          "frage": "Ich habe 2026 eine Ferienwohnung für 300.000 Euro gekauft. Wie viel schreibe ich ab?",
+          "antwort": "Nur den Gebäudeanteil, nicht das Grundstück; bei 240.000 Euro Gebäudewert und Baujahr 2010 sind das 2 Prozent, also 4.800 Euro im Jahr. Für einen Neubau ab Baujahr 2023 wären es 3 Prozent oder wahlweise degressiv 5 Prozent vom Restwert. Kaufnebenkosten wie Notar und Grunderwerbsteuer erhöhen die Bemessung.",
+          "quellen": [
+            "§ 7 Abs. 4 Satz 1 Nr. 2 EStG",
+            "§ 7 Abs. 5a EStG (degressive AfA)"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Die 75-Prozent-Regel: Mindestauslastung",
+          "status": "freigegeben",
+          "frage": "Wie erfahre ich die ortsübliche Vermietungszeit?",
+          "antwort": "Beim Tourismusverband oder Statistikamt Ihres Ortes, die Belegungstage für Ferienwohnungen veröffentlichen; im Zweifel akzeptiert das Finanzamt auch Zahlen des Statistischen Landesamts. Liegen Sie in einem Jahr darunter, zählt der Durchschnitt über drei bis fünf Jahre.",
+          "quellen": [
+            "BFH IX R 26/21",
+            "BMF-Schreiben vom 8. Oktober 2004, Rn. 16 ff."
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Neue Regelungen für 2026",
+          "status": "freigegeben",
+          "frage": "Muss ich für meine Airbnb-Wohnung Umsatzsteuer zahlen?",
+          "antwort": "Kurzzeitvermietung ist umsatzsteuerpflichtig mit 7 Prozent, aber bis 25.000 Euro Vorjahresumsatz greift die Kleinunternehmerregelung, dann zahlen Sie nichts und ziehen keine Vorsteuer. Seit Mai 2026 muss Ihr Inserat zusätzlich eine amtliche Registrierungsnummer tragen, sonst sperrt die Plattform es.",
+          "quellen": [
+            "§ 12 Abs. 2 Nr. 11 UStG",
+            "§ 19 UStG (Kleinunternehmer)",
+            "Kurzzeitvermietungs-Daten-Gesetz"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "liebhaberei",
+        "abschreibung",
+        "einkunftserzielungsabsicht",
+        "werbungskosten"
+      ]
+    }
+  },
+  {
+    "slug": "fahrgemeinschaft-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "In einer Fahrgemeinschaft setzt jeder die Entfernungspauschale von 38 Cent je Kilometer für seinen eigenen kürzesten Arbeitsweg an, Fahrer wie Mitfahrer; Umwege zum Einsammeln zählen nicht.",
+          "Mitfahrer sind bei 4.500 Euro im Jahr gedeckelt, Fahrer mit eigenem Auto nicht; wer sich abwechselt, rechnet beide Anteile getrennt und kommt bei 80 Kilometern auf über 6.000 Euro.",
+          "Bekommt der Fahrer Geld von den Mitfahrern, sind das ab 256 Euro im Jahr sonstige Einkünfte, gegen die er Mehrkosten für Sprit und Verschleiß setzt; die Mitfahrer behalten ihre Pauschale.",
+          "Über 230 Fahrten im Jahr verlangt das Finanzamt Nachweise; Homeoffice-Tage bekommen statt der Fahrt die Tagespauschale von 6 Euro.",
+          "Eingetragen wird in der Anlage N mit Entfernung, Arbeitstagen und bei Wechsel der Aufteilung in Fahrer- und Mitfahrertage."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Nr. 4 EStG",
+          "BMF-Schreiben zur Entfernungspauschale, Rn. 22 bis 24 (Fahrgemeinschaften)",
+          "§ 22 Nr. 3 EStG (Mitnahmevergütung)",
+          "Beitrag Fahrgemeinschaft"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert die Entfernungspauschale bei Fahrgemeinschaften?",
+          "status": "freigegeben",
+          "frage": "Ich fahre morgens 8 Kilometer Umweg, um meinen Kollegen abzuholen. Zählt das?",
+          "antwort": "Nein, für die Pauschale zählt nur Ihre kürzeste Verbindung von zu Hause zur Arbeit; der Umweg bleibt unberücksichtigt. Der Kollege setzt seinerseits seine eigene Entfernung an. Bekommen Sie von ihm Geld, gleicht das den Umweg wirtschaftlich aus, wird aber ab 256 Euro im Jahr steuerpflichtig.",
+          "quellen": [
+            "BMF-Schreiben zur Entfernungspauschale, Rn. 22",
+            "§ 22 Nr. 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Unterschiede gelten zwischen Fahrer und Mitfahrer?",
+          "status": "freigegeben",
+          "frage": "Ich fahre immer mit, 60 Kilometer, 220 Tage. Wie viel kann ich ansetzen?",
+          "antwort": "Rechnerisch 5.016 Euro, als reiner Mitfahrer aber nur 4.500 Euro, weil die Obergrenze für alle gilt, die nicht mit dem eigenen Auto fahren. Übernehmen Sie an 25 Tagen selbst das Steuer, zählen diese Tage ohne Deckel dazu: 4.500 plus 570 Euro.",
+          "quellen": [
+            "§ 9 Abs. 1 Nr. 4 Satz 2 EStG",
+            "Beitrag, Rechenbeispiel"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was gilt bei Mitnahme-Vergütungen?",
+          "status": "freigegeben",
+          "frage": "Meine Mitfahrer zahlen mir 60 Euro im Monat. Muss ich das versteuern?",
+          "antwort": "720 Euro im Jahr liegen über der Freigrenze von 256 Euro, also grundsätzlich ja, als sonstige Einkünfte. Sie dürfen aber die Mehrkosten gegenrechnen: Sprit, Reifen und Verschleiß durch die Mitfahrer, pauschal etwa 5 bis 8 Cent je Kilometer. Meist bleibt dann wenig oder nichts Steuerpflichtiges übrig.",
+          "quellen": [
+            "§ 22 Nr. 3 EStG",
+            "Beitrag, Abschnitt Mitnahme-Vergütungen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "entfernungspauschale",
+        "erste-taetigkeitsstaette",
+        "homeoffice-pauschale",
+        "werbungskosten"
+      ]
+    }
+  },
+  {
+    "slug": "elster",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "ELSTER ist das kostenlose Portal der Finanzverwaltung für Steuererklärungen, Anträge und Bescheide; über 22 Millionen Menschen nutzen es, Belege werden seit 2017 nur noch auf Nachfrage vorgelegt.",
+          "Die Registrierung dauert fünf bis zehn Tage, weil der Aktivierungscode per Brief kommt; danach loggen Sie sich mit der ElsterSecure-App oder einer Zertifikatsdatei ein.",
+          "Ab Juli 2026 bekommen ledige, kinderlose Arbeitnehmer und Rentner in der App MeinELSTER+ eine vorausgefüllte Erklärung samt Bescheidvorschau, die sie mit einem Klick bestätigen.",
+          "Steuerbescheide landen ab 2027 automatisch im ELSTER-Postfach, wenn Sie elektronisch abgeben; die Einspruchsfrist beginnt vier Tage nach Bereitstellung, auch ungelesen.",
+          "Fristen: für 2025 der 31. Juli 2026, mit Berater der 1. März 2027; freiwillig vier Jahre rückwirkend."
+        ],
+        "quellen": [
+          "elster.de, Bundesfinanzverwaltung",
+          "§ 122a AO",
+          "§ 149 AO",
+          "Beitrag ELSTER"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "ELSTER-Registrierung: Schritt für Schritt erklärt",
+          "status": "freigegeben",
+          "frage": "Die Frist ist in einer Woche und ich habe noch kein ELSTER-Konto. Geht das noch?",
+          "antwort": "Mit dem Online-Ausweis ja: Wer den Personalausweis mit aktivierter Online-Funktion und die AusweisApp nutzt, wird sofort freigeschaltet, ohne Brief. Ohne Online-Ausweis dauert der Aktivierungsbrief bis zu zehn Tage; beantragen Sie dann vorsorglich beim Finanzamt eine kurze Fristverlängerung.",
+          "quellen": [
+            "elster.de, Registrierungsarten",
+            "§ 109 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "MeinELSTER+ App: Die Ein-Klick-Funktion erklärt",
+          "status": "freigegeben",
+          "frage": "Ich bin ledig und angestellt. Kann ich die Ein-Klick-Erklärung nutzen?",
+          "antwort": "Ja, wenn Sie keine Kinder haben und nur Arbeitslohn oder Rente beziehen; das sind rund 11,5 Millionen Menschen. Ab 31. März 2026 lassen Sie sich freischalten, im Juli kommt der Vorschlag mit Bescheidvorschau. Prüfen Sie ihn trotzdem: Werbungskosten über der Pauschale, Spenden oder Handwerker kennt das Finanzamt nicht.",
+          "quellen": [
+            "Beitrag, Abschnitt MeinELSTER+",
+            "§ 150 Abs. 7 AO (vorausgefüllte Steuererklärung)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Steuerbescheide 2026: Digital statt Papier",
+          "status": "freigegeben",
+          "frage": "Wann läuft die Einspruchsfrist, wenn der Bescheid nur in ELSTER liegt?",
+          "antwort": "Vier Tage nach der Bereitstellung gilt er als bekannt gegeben, egal ob Sie ihn geöffnet haben; ab dann läuft die Monatsfrist. Aktivieren Sie die E-Mail-Benachrichtigung, sonst verpassen Sie Bescheide. Wer Papier will, beantragt in ELSTER dauerhaft die postalische Bekanntgabe.",
+          "quellen": [
+            "§ 122a Abs. 4 AO",
+            "§ 355 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Häufige ELSTER-Probleme und Lösungen",
+          "status": "freigegeben",
+          "frage": "Ich habe meine Zertifikatsdatei verloren. Was jetzt?",
+          "antwort": "Beantragen Sie in Ihrem Konto neue Aktivierungsdaten; sie kommen wieder per E-Mail und Brief, das alte Zertifikat wird ungültig. Schneller geht es, wenn Sie zusätzlich die ElsterSecure-App als Login eingerichtet haben, dann brauchen Sie die Datei nicht mehr. Ein zweites Konto je Steuer-ID ist nicht möglich.",
+          "quellen": [
+            "elster.de, Hilfe: Zertifikat verloren",
+            "Beitrag, Abschnitt Probleme"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "elster",
+        "bekanntgabefiktion",
+        "abgabefrist",
+        "belegvorhaltepflicht"
+      ]
+    }
+  },
+  {
+    "slug": "dienstwohnung-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Eine kostenlose oder verbilligte Dienstwohnung ist steuerpflichtiger Arbeitslohn in Höhe der Differenz zur ortsüblichen Miete; seit 2020 bleibt ein Drittel der Vergleichsmiete außer Ansatz.",
+          "Zahlen Sie mindestens zwei Drittel der ortsüblichen Miete bei höchstens 25 Euro je Quadratmeter, entfällt der geldwerte Vorteil ganz; ebenso bei überwiegend betrieblichem Interesse wie Rufbereitschaft oder Hausmeisterpflicht.",
+          "Ein Zimmer mit geteilter Küche und Bad ist keine Wohnung, sondern Unterkunft mit 285 Euro Sachbezugswert im Monat.",
+          "Nutzen Sie die Dienstwohnung neben Ihrem Hauptwohnsitz beruflich, gilt doppelte Haushaltsführung: Unterkunft bis 1.000 Euro im Monat, Einrichtung bis 5.000 Euro extra, Heimfahrten mit 38 Cent, Verpflegung drei Monate.",
+          "Der Vorteil steht in Nummer 20 der Lohnsteuerbescheinigung, die Werbungskosten kommen in die Anlage N-Doppelte Haushaltsführung."
+        ],
+        "quellen": [
+          "§ 8 Abs. 2 Satz 12 EStG (Bewertungsabschlag)",
+          "Sozialversicherungsentgeltverordnung 2026, § 2 (Sachbezugswerte)",
+          "§ 9 Abs. 1 Satz 3 Nr. 5 EStG",
+          "Beitrag Dienstwohnung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie wird der geldwerte Vorteil berechnet?",
+          "status": "freigegeben",
+          "frage": "Die ortsübliche Miete wäre 900 Euro, ich zahle 500. Was versteuere ich?",
+          "antwort": "Seit 2020 bleiben 300 Euro, ein Drittel der Vergleichsmiete, außer Ansatz; Bemessung sind also 600 Euro. Davon zahlen Sie 500, versteuert werden 100 Euro im Monat, nicht 400. Bei 600 Euro Miete oder mehr wäre der Vorteil null.",
+          "quellen": [
+            "§ 8 Abs. 2 Satz 12 EStG",
+            "Beitrag, Beispiel 900 Euro"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wann ist eine Dienstwohnung steuerfrei?",
+          "status": "freigegeben",
+          "frage": "Ich bin Hausmeister und muss im Haus wohnen. Ist meine Wohnung steuerfrei?",
+          "antwort": "Ja, wenn die Anwesenheit für Ihre Aufgaben nötig ist, etwa wegen Bereitschaft, und der Arbeitgeber die Wohnung deshalb stellt: Dann überwiegt das betriebliche Interesse und es gibt keinen geldwerten Vorteil. Das sollte im Arbeitsvertrag stehen.",
+          "quellen": [
+            "BFH VI R 1/17 (überwiegend eigenbetriebliches Interesse)",
+            "Beitrag, Tabelle Konstellationen"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie setzen Sie Ihre Dienstwohnung bei doppelter Haushaltsführung ab?",
+          "status": "freigegeben",
+          "frage": "Kann ich den versteuerten Vorteil für die Dienstwohnung als Werbungskosten absetzen?",
+          "antwort": "Ja, wenn die Voraussetzungen der doppelten Haushaltsführung vorliegen: Der versteuerte Sachbezug zählt wie selbst gezahlte Miete zu den Unterkunftskosten, bis 1.000 Euro im Monat. Zusammen mit Ihrer tatsächlichen Zahlung darf die Grenze nicht überschritten werden.",
+          "quellen": [
+            "R 9.11 Abs. 8 LStR",
+            "§ 9 Abs. 1 Satz 3 Nr. 5 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "geldwerter-vorteil",
+        "sachbezugswert",
+        "doppelte-haushaltsfuehrung",
+        "familienheimfahrt"
+      ]
+    }
+  },
+  {
+    "slug": "dienstwagen-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Wer den Dienstwagen privat nutzt, versteuert monatlich 1 Prozent des Bruttolistenpreises plus 0,03 Prozent je Entfernungskilometer für den Arbeitsweg, oder bei weniger als 15 Fahrten im Monat 0,002 Prozent je Tag.",
+          "E-Autos bis 100.000 Euro Listenpreis kosten nur 0,25 Prozent, teurere und Plug-in-Hybride mit 80 Kilometern Reichweite 0,5 Prozent; ein E-Auto für 60.000 Euro bedeutet 150 Euro geldwerten Vorteil im Monat.",
+          "Das Fahrtenbuch lohnt bei wenig Privatfahrten, hohem Listenpreis oder abgeschriebenem Wagen, muss aber zeitnah, lückenlos und unveränderbar sein.",
+          "Trotz Versteuerung des Arbeitswegs gibt es die Entfernungspauschale von 38 Cent als Werbungskosten obendrauf.",
+          "Seit 2026 gibt es keine Ladepauschalen mehr: Laden im Betrieb ist steuerfrei, zu Hause nur mit Zähler und 34 Cent je Kilowattstunde erstattbar."
+        ],
+        "quellen": [
+          "§ 6 Abs. 1 Nr. 4 EStG",
+          "§ 8 Abs. 2 EStG",
+          "§ 3 Nr. 46 EStG (Laden beim Arbeitgeber)",
+          "Beitrag Dienstwagen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert die Ein-Prozent-Regelung?",
+          "status": "freigegeben",
+          "frage": "Mein Dienstwagen ist ein Gebrauchter für 25.000 Euro, Listenpreis war 50.000. Was zählt?",
+          "antwort": "Der Bruttolistenpreis bei Erstzulassung samt Sonderausstattung, also 50.000 Euro, egal was der Arbeitgeber bezahlt hat: 500 Euro im Monat plus 0,03 Prozent je Kilometer Arbeitsweg. Genau deshalb lohnt bei Gebrauchten oft das Fahrtenbuch, weil dort die tatsächlichen, niedrigen Kosten zählen.",
+          "quellen": [
+            "§ 6 Abs. 1 Nr. 4 Satz 2 EStG",
+            "BFH VI R 51/11"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Massive Steuervorteile für Elektrofahrzeuge 2026",
+          "status": "freigegeben",
+          "frage": "Was spart mir ein E-Dienstwagen gegenüber einem Verbrenner konkret?",
+          "antwort": "Bei 60.000 Euro Listenpreis und 20 Kilometern Arbeitsweg versteuern Sie beim Verbrenner 960 Euro im Monat, beim E-Auto 240 Euro. Bei 40 Prozent Grenzsteuersatz sind das rund 290 Euro mehr Netto im Monat, dazu weniger Sozialabgaben, falls Sie unter der Beitragsbemessungsgrenze liegen.",
+          "quellen": [
+            "§ 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 EStG",
+            "Beitrag, Tabelle Fahrzeugtyp"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Fahrtenbuch-Methode: Wann sich der Aufwand lohnt",
+          "status": "freigegeben",
+          "frage": "Reicht eine Excel-Tabelle als Fahrtenbuch?",
+          "antwort": "Nein, Tabellen lassen sich nachträglich ändern und werden nicht anerkannt. Es braucht ein gebundenes Buch oder eine Fahrtenbuch-App, die jede Änderung protokolliert, mit Datum, Kilometerstand, Ziel, Zweck und Geschäftspartner je Fahrt, eingetragen innerhalb von sieben Tagen. Der Wechsel zur Methode geht nur zum Jahresbeginn oder beim Fahrzeugwechsel.",
+          "quellen": [
+            "BFH VI R 33/10",
+            "R 8.1 Abs. 9 Nr. 2 LStR"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Ladekosten bei Elektrofahrzeugen: Neue Regeln ab 2026",
+          "status": "freigegeben",
+          "frage": "Ich lade den E-Dienstwagen zu Hause. Was erstattet der Arbeitgeber 2026 steuerfrei?",
+          "antwort": "Nur noch den gemessenen Verbrauch: Mit einem separaten Zähler in der Wallbox multiplizieren Sie die Kilowattstunden mit Ihrem tatsächlichen Preis oder der Pauschale von 34 Cent, bei 3.500 Kilowattstunden rund 1.190 Euro im Jahr. Die alten Monatspauschalen von 30 oder 70 Euro sind seit Januar 2026 weg.",
+          "quellen": [
+            "§ 3 Nr. 50 EStG (Auslagenersatz)",
+            "BMF-Schreiben zum Aufladen von Elektrofahrzeugen, Fassung 2026"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "ein-prozent-regel",
+        "bruttolistenpreis",
+        "fahrtenbuch",
+        "geldwerter-vorteil"
+      ]
+    }
+  },
+  {
+    "slug": "dienstreise-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Dienstreisen sind alle beruflichen Wege außerhalb von Wohnung und erster Tätigkeitsstätte, vom Kundentermin bis zum Vorstellungsgespräch; absetzbar ist, was der Arbeitgeber nicht erstattet.",
+          "Fahrten zählen mit 30 Cent je gefahrenem Kilometer für Hin- und Rückweg, Motorrad und E-Bike 20 Cent, oder mit den Ticketkosten; Parken und Maut kommen dazu.",
+          "Verpflegung pauschal 14 Euro ab acht Stunden und an An- und Abreisetagen, 28 Euro für volle Tage, gekürzt um 5,60 Euro je Frühstück und 11,20 Euro je Hauptmahlzeit vom Arbeitgeber.",
+          "Übernachtungen mit Hotelrechnung ohne Frühstücksanteil; die 20-Euro-Pauschale gilt nur für Arbeitgebererstattungen.",
+          "Eingetragen wird in der Anlage N ab Zeile 68, Erstattungen des Arbeitgebers in Zeile 74; bei gemischten Reisen zählt der berufliche Anteil, ab 90 Prozent alles."
+        ],
+        "quellen": [
+          "§ 9 Abs. 1 Nr. 4a, Abs. 4a EStG",
+          "§ 5 Abs. 2 BRKG",
+          "BMF-Schreiben zur Reisekostenabrechnung",
+          "Beitrag Dienstreisen"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Was zählt als steuerlich absetzbare Dienstreise?",
+          "status": "freigegeben",
+          "frage": "Ich war zum Vorstellungsgespräch in einer anderen Stadt. Kann ich das absetzen?",
+          "antwort": "Ja, Bewerbungsreisen sind vorweggenommene Werbungskosten: 30 Cent je gefahrenem Kilometer oder das Bahnticket, dazu Verpflegungspauschale und Übernachtung, soweit die Firma nichts erstattet hat. Das gilt auch, wenn Sie die Stelle nicht bekommen haben.",
+          "quellen": [
+            "BFH VI R 179/79 (vorweggenommene Werbungskosten)",
+            "Beitrag, Abschnitt Was zählt als Dienstreise"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie viel können Sie pro Kilometer abrechnen?",
+          "status": "freigegeben",
+          "frage": "Lohnt es sich, statt der 30 Cent die tatsächlichen Autokosten anzusetzen?",
+          "antwort": "Bei teuren Autos mit hohen Kilometerleistungen ja: Sie ermitteln den Kilometersatz aus Abschreibung, Versicherung, Sprit, Wartung und Steuer geteilt durch die Jahresfahrleistung; bei einem Neuwagen für 45.000 Euro liegt er oft bei 50 bis 60 Cent. Dafür brauchen Sie alle Belege und ein Fahrtenbuch für die beruflichen Fahrten.",
+          "quellen": [
+            "R 9.5 Abs. 1 LStR",
+            "Beitrag, Abschnitt Individuelle Kostenabrechnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Verpflegungspauschalen gelten 2026?",
+          "status": "freigegeben",
+          "frage": "Ich war von Montag 8 Uhr bis Mittwoch 17 Uhr in Hamburg. Wie viel Verpflegungspauschale?",
+          "antwort": "56 Euro: je 14 Euro für Anreise- und Abreisetag und 28 Euro für den Dienstag als vollen Tag. Hat das Hotel Frühstück gestellt und der Arbeitgeber es bezahlt, werden je Frühstück 5,60 Euro abgezogen, dann bleiben 44,80 Euro.",
+          "quellen": [
+            "§ 9 Abs. 4a Satz 3 und 8 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "So tragen Sie die Kosten in die Steuererklärung ein",
+          "status": "freigegeben",
+          "frage": "Ich habe an die Dienstreise zwei Urlaubstage drangehängt. Wie teile ich auf?",
+          "antwort": "Flug oder Bahn und die Tage vor Ort nach Zeitanteil: Bei drei Arbeitstagen und zwei Urlaubstagen sind 60 Prozent der Reisekosten beruflich; Hotelnächte und Verpflegung der Arbeitstage zählen voll, die der Urlaubstage gar nicht. Liegt der berufliche Anteil bei mindestens 90 Prozent, setzen Sie alles an.",
+          "quellen": [
+            "BFH GrS 1/06, Beschluss vom 21. September 2009 (Aufteilung gemischter Reisen)",
+            "Beitrag, Abschnitt Gemischte Reisen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "kilometerpauschale",
+        "verpflegungsmehraufwand",
+        "uebernachtungspauschale",
+        "reisenebenkosten"
+      ]
+    }
+  },
+  {
+    "slug": "ausbildungskosten-von-der-steuer-absetzen",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Ob Ausbildungskosten viel oder wenig bringen, entscheidet die Einstufung: Erstausbildung und Erststudium sind Sonderausgaben bis 6.000 Euro im Jahr, die nur im selben Jahr gegen Einkommen wirken.",
+          "Zweitausbildung, Master nach Bachelor, Fortbildung und jede vergütete Ausbildung sind Werbungskosten ohne Grenze, die als Verlustvortrag ins erste Berufsjahr wandern.",
+          "Erstausbildung heißt: mindestens zwölf Monate Vollzeit mit Abschlussprüfung; Berufsjahre ohne Abschluss ändern daran nichts, so das Bundesverfassungsgericht 2019.",
+          "Absetzbar sind Studiengebühren, Semesterbeiträge, Prüfungen, Laptop und Fachliteratur, Fahrten zur Uni mit 38 Cent je Kilometer, Zimmer am Studienort bei doppelter Haushaltsführung, Zinsen des Studienkredits.",
+          "Werbungskosten kommen in die Anlage N, Sonderausgaben in die Anlage Sonderausgaben; auch Studierende ohne Einkommen sollten die Erklärung abgeben, um den Verlust feststellen zu lassen."
+        ],
+        "quellen": [
+          "§ 9 Abs. 6 EStG",
+          "§ 10 Abs. 1 Nr. 7 EStG",
+          "§ 10d EStG (Verlustvortrag)",
+          "BVerfG 2 BvL 22/14 u. a., Beschluss vom 19. November 2019",
+          "Beitrag Ausbildungskosten"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Ist Ihre Ausbildung eine Erst- oder Zweitausbildung – und was kostet Sie das?",
+          "status": "freigegeben",
+          "frage": "Ich habe nach der Schule drei Jahre gejobbt und studiere jetzt. Erst- oder Zweitausbildung?",
+          "antwort": "Erstausbildung, weil Sie keine abgeschlossene Berufsausbildung vorweisen: Die Jahre im Job zählen nicht. Ihre Studienkosten sind Sonderausgaben bis 6.000 Euro, die nur gegen Einkommen im selben Jahr wirken. Ein Master danach wäre dann Zweitausbildung mit vollem Werbungskostenabzug.",
+          "quellen": [
+            "§ 9 Abs. 6 Satz 2 bis 5 EStG",
+            "BVerfG 2 BvL 22/14"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche Ausgaben können Sie konkret in der Steuererklärung eintragen?",
+          "status": "freigegeben",
+          "frage": "Ich wohne am Studienort und am Wochenende bei den Eltern. Kann ich die Zimmermiete absetzen?",
+          "antwort": "Nur im Rahmen einer doppelten Haushaltsführung, und die scheitert meist daran, dass Sie im Elternhaus keinen eigenen Hausstand mit Kostenbeteiligung haben. Überweisen Sie den Eltern regelmäßig einen Anteil an Miete und Haushalt, kann es klappen; dann zählen bis 1.000 Euro Miete im Monat und die Heimfahrten.",
+          "quellen": [
+            "§ 9 Abs. 1 Satz 3 Nr. 5 EStG",
+            "BFH VI R 39/19"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Sonderausgaben oder Werbungskosten: Wo sparen Sie wirklich?",
+          "status": "freigegeben",
+          "frage": "Ich mache den Master und verdiene nichts. Warum soll ich eine Steuererklärung abgeben?",
+          "antwort": "Damit das Finanzamt Ihre Werbungskosten als Verlust feststellt: Studiengebühren, Fahrten, Laptop, vielleicht 5.000 Euro im Jahr. Beim Berufseinstieg zieht es diesen Verlustvortrag vom ersten Gehalt ab, bei 15.000 Euro über drei Jahre sind das rund 4.500 Euro Steuerersparnis. Die Erklärung geht bis zu sieben Jahre rückwirkend.",
+          "quellen": [
+            "§ 10d Abs. 4 EStG",
+            "§ 169 Abs. 2 AO in Verbindung mit § 181 Abs. 5 AO"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "2026: Maximale Absetzbarkeit und erhöhte Fahrtkosten",
+          "status": "freigegeben",
+          "frage": "Bekomme ich für Fahrten zur Uni 30 oder 38 Cent?",
+          "antwort": "38 Cent je Entfernungskilometer, weil die Uni bei einem Vollzeitstudium als erste Tätigkeitsstätte gilt und die Entfernungspauschale 2026 einheitlich ab dem ersten Kilometer gilt. Bei 15 Kilometern und 200 Tagen sind das 1.140 Euro. Fahrten zu Exkursionen oder einem Praktikum sind dagegen Reisekosten mit 30 Cent je gefahrenem Kilometer.",
+          "quellen": [
+            "§ 9 Abs. 4 Satz 8 EStG (Bildungseinrichtung als erste Tätigkeitsstätte)",
+            "§ 9 Abs. 1 Nr. 4 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "erstausbildung",
+        "verlustvortrag",
+        "sonderausgaben",
+        "werbungskosten"
+      ]
+    }
+  }
+]

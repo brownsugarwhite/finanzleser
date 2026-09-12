@@ -49,3 +49,8 @@ export function buildDokumentUrl(slug: string): string {
 export function buildAnbieterUrl(slug: string): string {
   return `/${slug}`;
 }
+
+/** Glossarbegriff im Faden (Stufe 1, nur mit NEXT_PUBLIC_FADEN=1 erreichbar). */
+export function buildGlossarUrl(slug: string): string {
+  return `/glossar/${slug}`;
+}

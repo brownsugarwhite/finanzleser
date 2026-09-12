@@ -185,7 +185,8 @@ export default function VersichererSelect({ value, onChange }: Props) {
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
-          Versicherer auswählen <span style={{ opacity: 0.6 }}>(optional)</span>{" "}
+          Versicherer auswählen{" "}
+          <span className="versicherer-select__opt" style={{ opacity: 0.6 }}>(optional)</span>{" "}
           <span aria-hidden style={{ marginLeft: 4 }}>⌄</span>
         </button>
       )}
@@ -274,6 +275,13 @@ export default function VersichererSelect({ value, onChange }: Props) {
           display: inline-flex;
           align-items: center;
           gap: 4px;
+          /* Einzeilig halten: auf schmalen Geräten (375 px) brach sonst
+             „Versicherer auswählen“ innerhalb des Flex-Items um. */
+          white-space: nowrap;
+        }
+        /* Sehr schmale Geräte: „(optional)“ weglassen, statt umzubrechen. */
+        @media (max-width: 400px) {
+          .versicherer-select__trigger .versicherer-select__opt { display: none; }
         }
         .versicherer-select__trigger:hover {
           color: var(--color-text-primary);

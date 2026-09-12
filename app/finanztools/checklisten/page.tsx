@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte from "@/components/faden/karten/ListenKarte";
+import BlattStart from "@/components/faden/kopf/BlattStart";
+import { buildChecklisteUrl } from "@/lib/urls";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllChecklisten } from "@/lib/wordpress";
@@ -8,6 +13,14 @@ export const revalidate = 86400;
 
 export default async function ChecklistenPage() {
   const checklisten = await getAllChecklisten();
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel="blatt:checklisten" titel="Checklisten" kicker="Finanztools" beschreibung={`${checklisten.length} Checklisten zum Abhaken und als PDF.`} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Checklisten", href: "/finanztools/checklisten" }]} url="/finanztools/checklisten">
+        <BlattStart schluessel="finanztools" a="checkliste" />
+        <ListenKarte gruppen={[{ eintraege: [...checklisten].sort((a, b) => a.title.localeCompare(b.title, "de")).map((c) => ({ titel: c.title, href: buildChecklisteUrl(c.slug), dot: "checkliste" as const })) }]} />
+      </KartenKapitel>
+    );
+  }
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

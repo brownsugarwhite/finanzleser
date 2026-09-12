@@ -1,0 +1,26 @@
+/* „Leo fragt“ in der rechten Randspalte (Port aus dem Prototyp, 01-css.html Z. 567–581): Kasten im Fuß über der Anzeige,
+   Regler oder Chips, danach der Danke-Kasten. Nur im .faden-shell-Scope; unter prefers-reduced-motion nimmt die Regel in
+   faden.css die Einblendung weg. */
+.faden-shell .leo-frage { position: relative; border: 1px solid var(--rule-strong); border-radius: 12px; background: var(--white); padding: 10px 14px 10px; display: grid; gap: 7px; font-family: var(--serif); animation: leo-rein .55s cubic-bezier(.34,1.56,.64,1) both; box-shadow: 0 10px 26px rgba(51,74,39,.12); }
+@keyframes leo-rein { from { opacity: 0; transform: translateY(22px) scale(.96); } to { opacity: 1; transform: none; } }
+.faden-shell .leo-frage .spaeter { position: absolute; top: 8px; right: 10px; border: 0; background: none; color: var(--muted); font: 600 11px/1 var(--sans); cursor: pointer; }
+.faden-shell .leo-frage .spaeter:hover { color: var(--ink); }
+.faden-shell .leo-frage .kopf-f { display: flex; align-items: center; gap: 8px; }
+.faden-shell .leo-frage .kopf-f img { width: 26px; height: 26px; }
+.faden-shell .leo-frage p { margin: 0; font-size: 14.5px; line-height: 1.35; }
+/* Padding, Fläche und Radius kamen bis zum Umbau der Statistiken unbeabsichtigt aus
+   app/statistik.css (dort galt `.faden-shell .regler` für jeden Regler im Faden). Die
+   Datei ist aufgelöst; damit Leos Regler unverändert aussieht, stehen sie jetzt hier. */
+.faden-shell .leo-frage .regler { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--paper); border-radius: 8px; }
+.faden-shell .leo-frage input[type=range] { flex: 1; min-width: 0; accent-color: var(--green); }
+.faden-shell .leo-frage .wert { font-size: 18px; font-weight: 700; color: var(--green-ink); font-family: var(--sans); min-width: 44px; text-align: right; }
+.faden-shell .leo-frage .werte { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 11px; color: var(--muted); margin-top: -4px; }
+.faden-shell .leo-frage .aktion { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.faden-shell .leo-frage .btn { font-family: var(--sans); }
+.faden-shell .leo-frage .hinweis-f { font: 600 11px/1.35 var(--sans); color: var(--muted); display: flex; gap: 5px; align-items: center; }
+.faden-shell .leo-frage .hinweis-f i { font-style: normal; color: var(--green); }
+.faden-shell .leo-frage .chips { gap: 6px; }
+.faden-shell .leo-frage .chips .chip { font-family: var(--sans); font-size: 12.5px; padding: 5px 10px; }
+/* Textlink „Zum Vergleich“ im Danke-Kasten (nur in Next: das Ziel der Regler-Frage ist hier eine eigene Seite) */
+.faden-shell .leo-frage .textlink { justify-self: start; font-family: var(--sans); }
+.faden-shell .leo-frage--danke { border-color: var(--rule); background: var(--paper); }

@@ -1,0 +1,331 @@
+[
+  {
+    "slug": "direktbank-vs-filialbank",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Filialbanken haben Geschäftsstellen mit Schalter, Beratung, Schließfach und Bargeldservice und verlangen dafür meist 3 bis 20 Euro Kontoführung im Monat; Direktbanken arbeiten nur online, per App und Telefon, sparen Miete und Personal und geben das als kostenlose Konten und bessere Zinsen weiter. Die Grenze verschwimmt, weil Filialbanken Standorte schließen und Direktbanken Videoberatung anbieten.",
+          "Kostenlos ist bei Direktbanken oft an Bedingungen geknüpft: DKB ab 700 Euro Geldeingang, ING ab 1.000 Euro oder unter 28 Jahren, Norisbank ab 500 Euro; laut Beitrag verzichten über 30 Banken auf die Grundgebühr, und der Wechsel von der Regionalbank spart im Schnitt 211 Euro im Jahr. Girocard, echte Kreditkarte und Überweisungsträger kosten bei Direktbanken oft extra.",
+          "Bargeld ist der echte Unterschied: Sparkassen betreiben über 23.000 Automaten, die Cash Group rund 7.000, Direktbanken lösen Abhebungen über Visa-Automaten und Einzelhandelskassen bis 200 Euro; Einzahlungen sind bei Direktbanken schwierig und kosten etwa bei Cash im Shop 1,5 Prozent.",
+          "Bei Zinsen liegen Direktbanken vorn, laut Beitrag mit Tagesgeld-Aktionen von 2,8 bis 4 Prozent für drei bis sechs Monate, und Depots, Kredite und Baufinanzierung gehören inzwischen zum Standard. Neobroker reichen den EZB-Einlagenzins oft direkt weiter.",
+          "Die Sicherheit ist identisch: Beide haben Banklizenz, BaFin- und EZB-Aufsicht und die gesetzliche Einlagensicherung bis 100.000 Euro je Kunde und Bank, deutsche Privatbanken zusätzlich freiwillig; Direktbanken passen zu Kostenbewussten mit regelmäßigem Geldeingang, Filialbanken zu Beratungsbedarf, Bargeldeinzahlern und ländlichen Regionen."
+        ],
+        "quellen": [
+          "Einlagensicherungsgesetz",
+          "Zahlungskontengesetz (Kontowechselhilfe)",
+          "Beitrag Direktbank vs. Filialbank"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Kostenvergleich: Direktbank vs. Filialbank",
+          "status": "freigegeben",
+          "frage": "Ich zahle bei meiner Sparkasse 9,90 Euro im Monat. Was spare ich wirklich mit einer Direktbank?",
+          "antwort": "Rund 100 bis 120 Euro im Jahr netto: Die 119 Euro Kontoführung fallen weg, dafür kommen bei vielen Direktbanken 0,99 Euro monatlich für die Girocard, 1 bis 3 Euro je beleghafter Überweisung und bei manchen Gebühren für die echte Kreditkarte hinzu; wer nur mit App, Debitkarte und Onlineüberweisung arbeitet, spart die vollen 119 Euro. Fragen Sie vorher Ihre Sparkasse nach einem Onlinekonto ohne Papierauszüge, das oft nur 3 bis 5 Euro kostet, und prüfen Sie, ob Sie die Mindestgeldeingänge der Direktbank sicher erreichen, sonst zahlen Sie dort 4 bis 5 Euro. Über 20 Jahre summiert sich der Unterschied auf über 2.000 Euro; der Kontowechselservice überträgt alle Lastschriften und Daueraufträge binnen zwölf Geschäftstagen.",
+          "quellen": [
+            "Beitrag, Abschnitt Kostenvergleich",
+            "§§ 20 bis 26 ZKG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Bargeldversorgung: Ein wichtiger Unterschied",
+          "status": "freigegeben",
+          "frage": "Ich bekomme Trinkgeld in bar und muss monatlich 300 Euro einzahlen. Geht das bei einer Direktbank?",
+          "antwort": "Ja, aber teuer oder umständlich: Bei der DKB kostet Cash im Shop 1,5 Prozent, also 4,50 Euro je 300 Euro, an Rewe-, Penny- oder dm-Kassen; die ING erlaubt Einzahlungen an Reisebank-Schaltern gegen Gebühr, Comdirect nutzt Commerzbank-Automaten mit 1,90 Euro je Einzahlung, die Consorsbank hat keinen Einzahlweg. Bei 300 Euro monatlich sind das 20 bis 55 Euro im Jahr, weniger als eine Filialbank kostet. Alternative ist ein Zweitkonto: ein kostenloses Direktbankkonto für den Alltag und ein günstiges Sparkassen-Onlinekonto oder ein Konto der Genossenschaftsbank nur für Bareinzahlungen, per Dauerauftrag weitergeleitet. Wer regelmäßig größere Beträge einzahlt, bleibt bei der Filialbank oder wählt eine Hybridbank wie Comdirect oder Postbank.",
+          "quellen": [
+            "Beitrag, Abschnitt Bargeldversorgung",
+            "Preisverzeichnisse DKB, ING, Comdirect"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Sicherheit: Direktbank vs. Filialbank",
+          "status": "freigegeben",
+          "frage": "Meine Tagesgeldbank sitzt in Schweden. Ist mein Geld dort genauso sicher wie bei der Sparkasse?",
+          "antwort": "Gesetzlich ja, praktisch mit Unterschieden: Alle EU-Banken sichern 100.000 Euro je Kunde und Bank über ihr nationales System, Schweden bis 1.050.000 Kronen, rund 95.000 Euro, und im Ernstfall bekommen Sie das Geld binnen sieben Arbeitstagen, allerdings über die ausländische Einrichtung in deren Sprache und Verfahren. Bei einer Zweigstelle einer deutschen Bank gilt die deutsche Sicherung, bei einer Bank mit eigener schwedischer Lizenz die schwedische. Die Sparkasse hat zusätzlich die Institutssicherung ihrer Gruppe, die Insolvenzen vorher abwendet, deutsche Privatbanken den freiwilligen Fonds bis 3 Millionen Euro. Bleiben Sie je Bank unter 100.000 Euro, prüfen Sie im Impressum Sitz und Lizenz, und meiden Sie Länder mit schwacher Bonität. Für Beträge über 100.000 Euro auf mehrere Banken verteilen.",
+          "quellen": [
+            "Richtlinie 2014/49/EU (Einlagensicherung)",
+            "§ 8 Einlagensicherungsgesetz",
+            "Beitrag, Abschnitt Sicherheit"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Welche Bankform passt zu Ihnen?",
+          "status": "freigegeben",
+          "frage": "Meine Eltern sind 78 und wollen ihre Filiale nicht verlieren. Sollen sie trotzdem wechseln?",
+          "antwort": "Nicht gegen ihren Willen, denn für Menschen, die den Schalter nutzen und Beratung im Gespräch schätzen, ist die Filiale der Wert, den sie bezahlen; Onlinebanking mit Phishing-Risiko und App-Updates kann in dem Alter mehr Stress als Ersparnis bringen. Prüfen Sie stattdessen drei Dinge: ob die Bank einen günstigeren Tarif für Senioren oder ein Basiskonto bietet, ob eine Bankvollmacht oder ein Vorsorgevollmacht-Kontozugriff für Sie eingerichtet ist, damit Sie im Notfall handeln können, und ob die Filiale nicht ohnehin auf der Schließliste steht, dann lohnt der Wechsel zur nächsten Sparkasse oder Volksbank mit Filiale mehr als zur Direktbank. Viele Regionalbanken bieten zudem Telefonbanking mit festen Ansprechpartnern, das ein guter Mittelweg ist.",
+          "quellen": [
+            "Beitrag, Abschnitt Welche Bankform passt",
+            "§ 31 ZKG (Basiskonto)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "direktbank",
+        "filialbank",
+        "geldautomatenverbund",
+        "bargeldeinzahlung",
+        "videoident",
+        "girokonto",
+        "einlagensicherung",
+        "tagesgeld"
+      ]
+    }
+  },
+  {
+    "slug": "photovoltaik-foerderung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Photovoltaik-Förderung ruht 2026 auf vier Säulen, die sich kombinieren lassen: der Einspeisevergütung nach dem Erneuerbare-Energien-Gesetz mit 20 Jahren Garantie, dem KfW-Kredit 270 zur Vollfinanzierung, dem Nullsteuersatz bei der Umsatzsteuer plus Einkommensteuerbefreiung und regionalen Zuschüssen von Ländern und Kommunen.",
+          "Laut Beitrag erhalten Dachanlagen bis 10 Kilowattpeak seit Februar 2026 7,78 Cent je Kilowattstunde bei Teileinspeisung und 12,34 Cent bei Volleinspeisung, Anlagenteile bis 40 Kilowattpeak 6,73 Cent, mit Absenkung um rund 1 Prozent alle sechs Monate; bei negativen Börsenpreisen kann die Vergütung ausgesetzt und der Zeitraum verlängert werden. Ein Referentenentwurf will die feste Vergütung für Neuanlagen ab 2027 abschaffen.",
+          "Eigenverbrauch lohnt fast fünfmal mehr als Einspeisung, weil die selbst genutzte Kilowattstunde 37 Cent Strompreis spart statt 7,78 Cent einzubringen; Batteriespeicher und Teileinspeisung sind deshalb die Regel, Volleinspeisung nur für kaum bewohnte Gebäude.",
+          "KfW 270 finanziert bis 100 Prozent der Kosten inklusive Speicher, Wallbox, Planung und Netzanschluss laut Beitrag ab rund 3,9 Prozent bonitätsabhängig gegenüber 6 bis 9 Prozent für Ratenkredite, bei 28.000 Euro über 15 Jahre etwa 8.500 Euro Zinsersparnis; Balkonkraftwerke und Eigenleistung sind ausgeschlossen, und der Antrag muss über die Hausbank vor Vertragsunterschrift laufen.",
+          "Seit 2023 gilt für Kauf und Installation der Nullsteuersatz nach § 12 Abs. 3 UStG und bis 30 Kilowattpeak die Einkommensteuerbefreiung nach § 3 Nr. 72 EStG ohne Gewinnermittlung; Pflicht bleibt die Registrierung im Marktstammdatenregister. Anlagen amortisieren sich meist in zehn bis zwölf Jahren mit 5 bis 7 Prozent Rendite über 20 Jahre."
+        ],
+        "quellen": [
+          "§§ 19, 21, 25, 48 EEG 2023",
+          "§ 12 Abs. 3 UStG",
+          "§ 3 Nr. 72 EStG",
+          "KfW-Merkblatt 270",
+          "Beitrag Photovoltaik Förderung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Einspeisevergütung 2026: Wie viel verdienen Sie mit Solarstrom?",
+          "status": "freigegeben",
+          "frage": "Was bringt eine 10-kWp-Anlage im Jahr, wenn ich 30 Prozent selbst verbrauche?",
+          "antwort": "Rund 1.600 bis 1.800 Euro: Eine 10-Kilowattpeak-Anlage liefert in Deutschland etwa 9.500 bis 10.000 Kilowattstunden, davon 3.000 selbst verbraucht zu 37 Cent, also rund 1.100 Euro gesparte Stromkosten, plus 7.000 eingespeiste Kilowattstunden zu 7,78 Cent, rund 545 Euro Vergütung. Mit einem Speicher von 8 bis 10 Kilowattstunden steigt der Eigenverbrauch auf 60 bis 70 Prozent, der Jahresnutzen auf etwa 2.400 Euro, bei Mehrkosten von 5.000 bis 7.000 Euro. Bei Anlagenkosten von 15.000 bis 18.000 Euro ohne Umsatzsteuer liegt die Amortisation bei zehn bis zwölf Jahren, danach sind 8 bis 13 weitere Jahre garantierter Vergütung reiner Gewinn. Die Vergütung gilt 20 Jahre plus Inbetriebnahmejahr zum Satz, der bei Inbetriebnahme galt; sie wird nicht rückwirkend gesenkt.",
+          "quellen": [
+            "§ 25 EEG (Vergütungsdauer)",
+            "Beitrag, Abschnitte Einspeisevergütung und Eigenverbrauch"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "KfW 270: Zinsgünstige Finanzierung ohne Eigenkapital",
+          "status": "freigegeben",
+          "frage": "Ist der KfW 270 besser als ein Modernisierungskredit meiner Bank mit 4,5 Prozent?",
+          "antwort": "Meist ja, aber nicht automatisch: Der KfW 270 beginnt laut Beitrag bei rund 3,9 Prozent effektiv, der Zins hängt aber von Bonität und Besicherung ab und kann bei schwächerer Einstufung über 6 Prozent liegen, dann gewinnt der Bankkredit. Lassen Sie sich von der Hausbank beide Angebote nebeneinander legen, die Bank stellt den KfW-Antrag ohnehin. Vorteile des KfW 270 sind Laufzeiten bis 30 Jahre mit bis zu fünf tilgungsfreien Anlaufjahren und Zinsbindung bis 20 Jahre; Nachteile sind die Bereitstellungsprovision nach Ablauf der Frist und die Vorfälligkeitsentschädigung bei vorzeitiger Rückzahlung, die beim Ratenkredit auf 1 Prozent gedeckelt ist. Wer eine laufende Baufinanzierung hat, prüft zuerst eine Aufstockung über die Grundschuld, die oft noch günstiger ist. In jedem Fall gilt: erst Zusage, dann unterschreiben.",
+          "quellen": [
+            "KfW-Merkblatt 270, Konditionen",
+            "Beitrag, Abschnitt KfW 270"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Steuerersparnis seit 2023: 0 % Umsatzsteuer",
+          "status": "freigegeben",
+          "frage": "Muss ich für die Solaranlage ein Gewerbe anmelden und eine Steuererklärung abgeben?",
+          "antwort": "Nein, bei Anlagen bis 30 Kilowattpeak auf dem Einfamilienhaus fällt beides weg: Die Einnahmen sind seit 2022 einkommensteuerfrei, es gibt keine Gewinnermittlung und keine Anlage G, und wegen des Nullsteuersatzes müssen Sie sich nicht als Unternehmer für die Umsatzsteuer registrieren; die frühere Wahl zwischen Kleinunternehmer und Regelbesteuerung entfällt. Eine Gewerbeanmeldung war für Dachanlagen noch nie nötig, das Finanzamt kann aber einen Fragebogen schicken, den Sie mit Hinweis auf die Steuerbefreiung beantworten. Pflicht bleiben die Anmeldung beim Netzbetreiber und die Registrierung im Marktstammdatenregister binnen eines Monats nach Inbetriebnahme, sonst wird die Vergütung gekürzt. Anders bei Altanlagen mit Umsatzsteueroption: Dort läuft die fünfjährige Bindung weiter, danach lohnt der Wechsel zur Kleinunternehmerregelung.",
+          "quellen": [
+            "§ 3 Nr. 72 EStG",
+            "§ 12 Abs. 3 UStG",
+            "§ 5 Marktstammdatenregisterverordnung"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Regionale und kommunale Zuschüsse nutzen",
+          "status": "freigegeben",
+          "frage": "Ich wohne zur Miete in Mecklenburg-Vorpommern. Bekomme ich Förderung für ein Balkonkraftwerk?",
+          "antwort": "Laut Beitrag ja, das Land fördert Balkonkraftwerke für Mieter, der Zuschuss lag in früheren Runden bei bis zu 500 Euro je Haushalt; prüfen Sie beim Landesförderinstitut, ob das Budget für 2026 noch offen ist, und stellen Sie den Antrag vor dem Kauf. Bundesweit gilt: Balkonkraftwerke bis 800 Watt Wechselrichterleistung sind seit 2024 ohne Elektriker anmeldbar, nur die Registrierung im Marktstammdatenregister ist Pflicht, der Vermieter muss die Installation seit dem Wohnungseigentums- und Mietrechtsreform 2024 grundsätzlich dulden, und der Kauf ist ebenfalls umsatzsteuerfrei. Der KfW 270 fördert sie nicht. Bei 500 bis 800 Euro Anschaffung und 300 bis 400 Kilowattstunden Ersparnis im Jahr, rund 130 Euro, rechnet sich das Gerät auch ohne Zuschuss in fünf bis sechs Jahren.",
+          "quellen": [
+            "§ 554 BGB (Duldungspflicht)",
+            "Solarpaket I 2024",
+            "Beitrag, Abschnitt Regionale Zuschüsse"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "photovoltaik",
+        "einspeiseverguetung",
+        "eeg",
+        "eigenverbrauch",
+        "kfw-270",
+        "nullsteuersatz-pv",
+        "balkonkraftwerk",
+        "kfw",
+        "strompreis"
+      ]
+    }
+  },
+  {
+    "slug": "strompreise",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Laut Beitrag zahlen Bestandskunden im Juli 2026 im Schnitt 31,2 Cent je Kilowattstunde, 12 Prozent weniger als im Vorjahr, Neukunden 24,2 Cent, mit zwölf Monaten Preisgarantie 31,6 Cent, die Grundversorgung dagegen 42,8 Cent; eine Familie mit 4.000 Kilowattstunden zahlt so 1.248 Euro statt 1.420 Euro. Die günstigsten Tarife lagen im Juni bei 23,7 Cent.",
+          "Seit der Energiekrise mit Spitzen von 70 Cent 2022 und 47 Cent 2023 sinken die Preise, unterbrochen im Frühjahr 2026 durch die Blockade der Straße von Hormus, die Neukundenpreise von 23,2 auf 27,2 Cent trieb und den Gaspreis auf 59 Euro je Megawattstunde.",
+          "Der Preis besteht aus Beschaffung und Vertrieb, Netzentgelten mit rund 29 Prozent Anteil, Steuern und Abgaben sowie Grund- und Arbeitspreis; 2026 senkte ein Bundeszuschuss von 6,5 Milliarden Euro die Netzentgelte um 1,95 Cent, regional zwischen 8,5 Cent in Sachsen-Anhalt und 9,8 Cent in Baden-Württemberg. Der Börsenstrompreis lag 2025 bei 8,65 Cent.",
+          "Nach dem Merit-Order-Prinzip bestimmt das teuerste noch benötigte Kraftwerk, meist Gas, den Preis für alle, weshalb Gaspreise den Strompreis mitziehen; 2025 gab es 575 Stunden mit negativen Preisen, und der CO2-Preis von 55 Euro je Tonne verteuert Kohle- und Gasstrom.",
+          "Der Anbieterwechsel spart 200 bis 856 Euro im Jahr, der neue Anbieter kündigt den alten Vertrag, aus der Grundversorgung geht es mit zwei Wochen Frist; Vorkasse-Tarife und Boni erst im zweiten Jahr meiden. Dynamische Tarife, die Versorger seit 2025 anbieten müssen, lohnen mit Wärmepumpe, E-Auto und verschiebbarem Verbrauch mit 10 bis 15 Prozent Ersparnis."
+        ],
+        "quellen": [
+          "§ 20 StromGVV (Kündigung Grundversorgung)",
+          "§ 41a EnWG (dynamische Tarife)",
+          "Brennstoffemissionshandelsgesetz",
+          "Beitrag Strompreise"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch sind die Strompreise 2026?",
+          "status": "freigegeben",
+          "frage": "Wie finde ich heraus, ob ich in der Grundversorgung bin?",
+          "antwort": "Schauen Sie auf Ihre letzte Jahresabrechnung oder den Vertrag: Steht dort der örtliche Grundversorger, meist die Stadtwerke oder ein Regionalversorger, mit einem Tarifnamen wie Grundversorgung, Basis, Klassik oder Allgemeiner Tarif, und haben Sie nie aktiv einen Vertrag abgeschlossen, sind Sie in der Grundversorgung; das trifft laut Beitrag auf rund ein Viertel der Haushalte zu, vor allem nach Umzug, Anbieterpleite oder Erbschaft eines Vertrags. Der Arbeitspreis verrät es auch: Über 40 Cent je Kilowattstunde im Jahr 2026 ist fast sicher Grundversorgung. Auf der Rechnung muss der Versorger seit 2022 zudem ausweisen, ob es sich um Grund- oder Ersatzversorgung handelt. Sie können jederzeit mit zwei Wochen Frist kündigen, der neue Anbieter erledigt das; bei 4.000 Kilowattstunden sind bis zu 850 Euro im Jahr drin.",
+          "quellen": [
+            "§ 20 Abs. 1 StromGVV",
+            "§ 40 EnWG (Rechnungsangaben)",
+            "Beitrag, Abschnitt Strompreise 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Woraus setzt sich der Strompreis zusammen?",
+          "status": "freigegeben",
+          "frage": "Mein Anbieter erhöht die Preise wegen gestiegener Netzentgelte. Muss ich das hinnehmen?",
+          "antwort": "Nein, jede Preiserhöhung löst ein Sonderkündigungsrecht aus, auch wenn der Anbieter nur staatliche Umlagen oder Netzentgelte weitergibt; er muss Sie mindestens einen Monat vorher schriftlich informieren, die Änderung transparent begründen und auf das Kündigungsrecht hinweisen, sonst ist die Erhöhung unwirksam. Sie können bis zum Wirksamwerden der Erhöhung kündigen, ohne Frist und ohne Preisgarantie-Bindung. Prüfen Sie aber, ob die Erhöhung sachlich stimmt: 2026 sind die Stromnetzentgelte durch den Bundeszuschuss im Schnitt gesunken, eine Erhöhung mit dieser Begründung wäre auffällig. Wer eine eingeschränkte Preisgarantie hat, muss Umlagen- und Steueränderungen hinnehmen, aber nicht höhere Beschaffungskosten; bei voller Preisgarantie ist jede Erhöhung im Garantiezeitraum ausgeschlossen. Vergleichen Sie vor der Kündigung, ob ein neuer Tarif wirklich günstiger ist als der erhöhte alte.",
+          "quellen": [
+            "§ 41 Abs. 5 EnWG",
+            "§ 5 Abs. 2 StromGVV",
+            "Beitrag, Abschnitt Zusammensetzung"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie wechseln Sie richtig den Stromanbieter?",
+          "status": "freigegeben",
+          "frage": "Der Vergleich zeigt einen Tarif mit 250 Euro Bonus ganz oben. Ist der wirklich günstiger?",
+          "antwort": "Oft nur im ersten Jahr: Rechnen Sie den Preis ohne Bonus, also Arbeitspreis mal Verbrauch plus zwölf Grundpreise, und vergleichen Sie diesen Wert; liegt er über dem Tarif ohne Bonus, zahlen Sie ab dem zweiten Jahr drauf, wenn Sie das Kündigen vergessen. Sofortboni werden nach wenigen Wochen ausgezahlt, Neukundenboni meist erst mit der ersten Jahresabrechnung und nur bei zwölf Monaten Belieferung. Stellen Sie im Portal den Filter auf Tarife ohne Bonus und mit Preisgarantie, Laufzeit höchstens zwölf Monate und Kündigungsfrist höchstens vier Wochen, dann sehen Sie die ehrlichen Preise. Wer Bonus-Hopping betreibt, sollte sich den Kündigungstermin im Kalender eintragen; seit 2022 verlängern sich Verträge nur noch unbefristet mit einem Monat Kündigungsfrist, das Risiko einer zweiten Zwangsjahresbindung ist damit weg.",
+          "quellen": [
+            "§ 309 Nr. 9 BGB (Laufzeit und Verlängerung)",
+            "Beitrag, Abschnitt Anbieterwechsel"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Lohnt sich ein dynamischer Stromtarif?",
+          "status": "freigegeben",
+          "frage": "Ich habe ein E-Auto und lade nachts. Was brauche ich für einen dynamischen Tarif und was spare ich?",
+          "antwort": "Ein intelligentes Messsystem, den Smart Meter, den der Messstellenbetreiber auf Wunsch binnen vier Monaten einbauen muss, für höchstens 30 Euro im Jahr plus einmalig bis 30 Euro, und einen Anbieter wie Tibber, Octopus, Rabot oder die Stadtwerke, die den Börsenpreis je Stunde plus feste Marge weitergeben. Nachts und mittags bei Sonnenüberschuss liegt der Börsenanteil oft bei 2 bis 6 Cent statt 8 bis 10, an windigen Tagen bei null; da Netzentgelte, Steuern und Abgaben von rund 18 Cent fix bleiben, sinkt Ihr Ladepreis von 31 auf etwa 20 bis 24 Cent. Bei 3.000 Kilowattstunden Fahrstrom im Jahr sind das 200 bis 300 Euro Ersparnis, mit Wärmepumpe mehr. Voraussetzung ist, dass Wallbox oder Auto nach Preissignal laden, was die Anbieter-Apps steuern. Zusätzlich gibt es seit 2025 über die Netzentgeltreduzierung nach § 14a EnWG 110 bis 190 Euro Rabatt im Jahr für steuerbare Wallboxen.",
+          "quellen": [
+            "§ 41a EnWG",
+            "§ 14a EnWG und BNetzA-Festlegung",
+            "Messstellenbetriebsgesetz § 30",
+            "Beitrag, Abschnitt dynamischer Tarif"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "strompreis",
+        "grundversorgung",
+        "netzentgelt",
+        "merit-order",
+        "dynamischer-stromtarif",
+        "anbieterwechsel-energie",
+        "preisgarantie",
+        "co2-preis",
+        "gaspreis"
+      ]
+    }
+  },
+  {
+    "slug": "gaspreise",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Laut Beitrag zahlen Gaskunden 2026 je nach Vertragsstatus sehr unterschiedlich: Neukunden im Schnitt 9,6 Cent je Kilowattstunde, Bestandskunden 11,6 Cent, die Grundversorgung 13,6 Cent, der BDEW-Durchschnitt liegt bei 11,1 Cent; ein Haushalt mit 20.000 Kilowattstunden zahlt so zwischen 1.920 und 2.720 Euro im Jahr. Tarife mit zwölf Monaten Preisgarantie kosten 10,8 Cent.",
+          "Der Gaspreis setzt sich zu rund 50 Prozent aus Beschaffung und Vertrieb, 19 bis 23 Prozent Netzentgelten und 31 Prozent Steuern, Abgaben und Umlagen zusammen: Erdgassteuer, 19 Prozent Mehrwertsteuer, CO2-Preis und Konzessionsabgabe machen etwa 3,5 Cent je Kilowattstunde aus.",
+          "Preistreiber 2026 sind der CO2-Preis im Korridor von 55 bis 65 Euro je Tonne, bis 1,55 Cent je Kilowattstunde und 263 bis 311 Euro im Jahr bei 20.000 Kilowattstunden, sowie Gasnetzentgelte, die um 10 bis 12 Prozent steigen, weil der Gasausstieg die Netzkosten auf weniger Kunden verteilt; entlastend wirkt laut Beitrag der Wegfall der Gasspeicherumlage von 0,289 Cent zum 1. Januar 2026, rund 58 Euro je Haushalt. Die Straße von Hormus verteuert Flüssiggas.",
+          "Der Anbieterwechsel spart bis 37 Prozent, aus der Grundversorgung bei 20.000 Kilowattstunden rund 800 Euro; achten Sie auf höchstens zwölf Monate Erstlaufzeit, höchstens vier Wochen Kündigungsfrist, mindestens zwölf Monate Preisgarantie und Boni, die oft nur im ersten Jahr gelten.",
+          "Langfristig steigen Netzentgelte und CO2-Preis weiter, ab 2028 über den europäischen Emissionshandel, im Extremszenario der Agora Energiewende auf 47 Cent je Kilowattstunde; Finanztip rechnet für ein Einfamilienhaus mit 20.000 Euro CO2-Kosten in 20 Jahren. Dämmung, Wärmepumpe und Fernwärme werden dadurch attraktiver."
+        ],
+        "quellen": [
+          "Brennstoffemissionshandelsgesetz § 10",
+          "§ 41 Abs. 5 EnWG",
+          "§ 20 GasGVV",
+          "BDEW-Gaspreisanalyse 2026",
+          "Beitrag Gaspreise"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Aktuelle Gaspreise: Große Unterschiede je nach Vertragsstatus",
+          "status": "freigegeben",
+          "frage": "Ich bin seit acht Jahren beim selben Versorger und zahle 12,4 Cent. Bin ich Bestandskunde oder in der Grundversorgung?",
+          "antwort": "Vermutlich Bestandskunde in einem alten Sondervertrag, dessen Preis der Versorger über die Jahre angepasst hat; die Grundversorgung liegt laut Beitrag bei 13,6 Cent, Ihr Preis knapp darunter. Der Unterschied ist für Sie zweitrangig: In beiden Fällen zahlen Sie rund 3 Cent mehr als Neukunden, bei 20.000 Kilowattstunden 560 Euro im Jahr. Ein Sondervertrag läuft nach der Erstlaufzeit unbefristet mit einem Monat Kündigungsfrist weiter, die Grundversorgung ist mit zwei Wochen kündbar; beides steht auf der letzten Jahresabrechnung. Fragen Sie zuerst Ihren Versorger nach seinem aktuellen Neukundentarif, viele geben Bestandskunden auf Nachfrage denselben Preis, und wechseln Sie sonst über ein Vergleichsportal mit Filter auf Preisgarantie und ohne Bonus.",
+          "quellen": [
+            "§ 20 GasGVV",
+            "§ 309 Nr. 9 BGB",
+            "Beitrag, Abschnitt Aktuelle Gaspreise"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Welche Faktoren beeinflussen die Gaspreise 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin Mieter mit Gasetagenheizung. Kann ich den CO2-Preis auf den Vermieter abwälzen?",
+          "antwort": "Teilweise, seit 2023 nach dem CO2-Kostenaufteilungsgesetz: Je schlechter der energetische Zustand des Gebäudes, desto größer der Anteil des Vermieters, in zehn Stufen von 0 Prozent bei sehr guten Gebäuden unter 12 Kilogramm CO2 je Quadratmeter bis 95 Prozent bei sehr schlechten über 52 Kilogramm. Bei einer Gasetagenheizung, deren Vertrag Sie selbst mit dem Versorger haben, müssen Sie den Anteil selbst berechnen und binnen zwölf Monaten nach der Gasrechnung vom Vermieter erstattet verlangen; Rechner dafür bieten die Verbraucherzentralen und das Bundeswirtschaftsministerium, die nötigen Angaben zu CO2-Kosten und Emissionen stehen seit 2023 auf jeder Gasrechnung. Bei 20.000 Kilowattstunden und 60 Prozent Vermieteranteil in einem unsanierten Altbau sind das rund 170 Euro im Jahr. Bei Zentralheizung rechnet der Vermieter den Anteil in der Heizkostenabrechnung ab.",
+          "quellen": [
+            "§§ 5 bis 8 CO2KostAufG",
+            "Beitrag, Abschnitt Faktoren"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wie hoch ist das Sparpotenzial durch einen Anbieterwechsel?",
+          "status": "freigegeben",
+          "frage": "Was passiert, wenn mein neuer Gasanbieter pleitegeht?",
+          "antwort": "Sie stehen nie ohne Gas da: Der örtliche Grundversorger übernimmt automatisch in der Ersatzversorgung, die höchstens drei Monate dauert und deren Preis seit 2022 vom Grundversorgungstarif abweichen und deutlich höher sein darf; danach rutschen Sie in die normale Grundversorgung, wenn Sie nicht wechseln. Deshalb sofort nach der Pleitemeldung einen neuen Anbieter suchen, das geht binnen Tagen. Bereits gezahlte Abschläge oder Vorkasse für nicht geliefertes Gas sind Insolvenzforderungen, die meist verloren sind, ebenso Boni; genau darum raten alle Verbraucherzentralen von Vorkasse- und Pakettarifen ab und empfehlen monatliche Abschläge per Lastschrift, die Sie bei Insolvenz sofort stoppen. Die Pleitewelle 2021 und 2022 hat gezeigt, dass Billiganbieter mit kurzfristiger Beschaffung am schnellsten scheitern; ein Blick auf Alter und Bewertungen des Anbieters gehört zum Vergleich.",
+          "quellen": [
+            "§ 38 EnWG (Ersatzversorgung)",
+            "Beitrag, Abschnitt Sparpotenzial"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie entwickeln sich Gaspreise langfristig?",
+          "status": "freigegeben",
+          "frage": "Meine Gasheizung ist 18 Jahre alt. Noch einmal Gas oder Wärmepumpe?",
+          "antwort": "Rechnen Sie mit 15 bis 20 Jahren Nutzung: Eine neue Gasbrennwertheizung kostet 8.000 bis 12.000 Euro, muss nach dem Gebäudeenergiegesetz ab 2029 mit steigenden Anteilen Biogas oder Wasserstoff laufen, was die Kosten treibt, und trägt CO2-Preis und steigende Netzentgelte; laut Beitrag summieren sich allein die CO2-Kosten auf rund 20.000 Euro in 20 Jahren. Eine Wärmepumpe kostet 25.000 bis 35.000 Euro, mit 30 bis 70 Prozent KfW-Zuschuss netto 10.000 bis 20.000 Euro, und braucht bei 20.000 Kilowattstunden Wärme etwa 5.000 bis 7.000 Kilowattstunden Strom, mit Wärmepumpentarif rund 1.300 bis 1.700 Euro statt 2.200 bis 2.700 Euro für Gas. Über 20 Jahre liegt die Wärmepumpe im Regelfall 10.000 bis 20.000 Euro vorn, sofern das Haus mit Vorlauftemperaturen unter 55 Grad heizbar ist, was ein Heizungsbauer mit einem Heizlastcheck prüft. Bei unsaniertem Altbau erst dämmen oder eine Hybridlösung wählen; die kommunale Wärmeplanung bis 2028 zeigt, ob Fernwärme kommt.",
+          "quellen": [
+            "§ 71 GEG (65-Prozent-Regel)",
+            "Richtlinie BEG EM, Heizungsförderung",
+            "Beitrag, Abschnitt langfristige Entwicklung"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "gaspreis",
+        "co2-preis",
+        "gasspeicherumlage",
+        "netzentgelt",
+        "grundversorgung",
+        "anbieterwechsel-energie",
+        "preisgarantie",
+        "energetische-sanierung",
+        "heizungsfoerderung"
+      ]
+    }
+  }
+]

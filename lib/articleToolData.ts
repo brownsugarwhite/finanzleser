@@ -1,8 +1,10 @@
 import "server-only";
+import { zaehleWp } from "@/lib/faden/wpZaehler";
 import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs, CONTENT_REVALIDATE } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { stripHtml } from "@/lib/seo";
 import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
+import { medienUrl } from "@/lib/faden/medien";
 
 export interface ToolTitle {
   title: string;
@@ -82,6 +84,7 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
     // und macht JEDEN Artikel mit Vergleich dynamisch (kein SSG → on-demand-Cold-Render).
     // Freshness via ISR + On-Demand-Revalidate. CONTENT_REVALIDATE, damit dieser Fetch
     // nicht das Segment-Intervall der Artikelroute nach unten zieht (Next nimmt das Minimum).
+    zaehleWp("rest:wp/v2/vergleich");
     const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: CONTENT_REVALIDATE } });
     const posts = await res.json();
     const wpExcerpt = (posts[0]?.excerpt?.rendered || "").trim();
@@ -113,6 +116,7 @@ async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
 async function loadBeitragPdf(slug: string): Promise<BeitragPdf | null> {
   const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
   try {
+    zaehleWp("rest:wp/v2/posts(beitrag-pdf)");
     const res = await fetch(
       `${wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=id,meta`,
       { next: { revalidate: CONTENT_REVALIDATE } },
@@ -124,6 +128,7 @@ async function loadBeitragPdf(slug: string): Promise<BeitragPdf | null> {
     const attachmentId = posts?.[0]?.meta?.beitrag_pdf;
     if (!attachmentId) return null;
 
+    zaehleWp("rest:wp/v2/media(beitrag-pdf)");
     const attachRes = await fetch(
       `${wpUrl}/wp-json/wp/v2/media/${attachmentId}?_fields=source_url,title`,
       { next: { revalidate: CONTENT_REVALIDATE } },
@@ -183,7 +188,7 @@ export async function getArticleToolData(content?: string, slug?: string): Promi
           slug: d.slug,
           title: d.title,
           beschreibung: stripHtml(d.excerpt),
-          pdfUrl: d.pdfFile?.mediaItemUrl || "",
+          pdfUrl: medienUrl(d.pdfFile?.mediaItemUrl || ""),
           fileName: d.pdfFile?.mediaDetails?.file?.split("/").pop(),
           fileSize: d.pdfFile?.fileSize,
           kategorie: d.dokumentKategorien?.nodes?.[0]?.name || "",

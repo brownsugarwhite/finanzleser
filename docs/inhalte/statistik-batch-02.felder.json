@@ -1,0 +1,943 @@
+[
+  {
+    "slug": "vorsorgevollmacht",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie unterscheidet sich die Vorsorgevollmacht von der gerichtlichen Betreuung?",
+          "art": "torte",
+          "titel": "Wer die 1,05 Millionen rechtlichen Betreuungen führt",
+          "untertitel": "Bestellte Betreuerinnen und Betreuer in fortdauernden Betreuungen, 2022, in Tausend",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "Bundesamt für Justiz, Verfahren der Betreuungsgerichte 2022",
+            "url": "https://www.bundesjustizamt.de/SharedDocs/Downloads/DE/Justizstatistiken/Betreuungsverfahren_2022_PDF.pdf?__blob=publicationFile&v=3",
+            "stand": "2022"
+          },
+          "reihen": [
+            {
+              "key": "2022",
+              "label": "2022",
+              "werte": [
+                {
+                  "label": "Berufsbetreuer (auch Rechtsanwälte)",
+                  "wert": 558.2
+                },
+                {
+                  "label": "Familienangehörige",
+                  "wert": 399.2
+                },
+                {
+                  "label": "Sonstige Ehrenamtliche",
+                  "wert": 110.1
+                },
+                {
+                  "label": "Vereinsbetreuer",
+                  "wert": 98.5
+                },
+                {
+                  "label": "Behörden und Vereine",
+                  "wert": 2.1
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ende 2022 liefen rund 1.046.755 Betreuungen mit 1.168.004 bestellten Betreuern. Wer eine Vorsorgevollmacht hat, braucht in der Regel keinen gerichtlich bestellten Betreuer. Die Daten einzelner Länder sind laut Bundesamt nur bedingt belastbar.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Zentrale Registrierung: Das Vorsorgeregister als Sicherheitsnetz",
+          "art": "balken",
+          "titel": "Was die Registrierung im Vorsorgeregister kostet",
+          "untertitel": "Einmalige Gebühr der Bundesnotarkammer, keine Jahresgebühr",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesnotarkammer, Zentrales Vorsorgeregister (Gebührensatzung)",
+            "url": "https://www.vorsorgeregister.de/privatpersonen/kosten",
+            "stand": "01.01.2023"
+          },
+          "reihen": [
+            {
+              "key": "gebuehren",
+              "label": "Gebühren",
+              "werte": [
+                {
+                  "label": "Online, Zahlung per Lastschrift",
+                  "wert": 20.5
+                },
+                {
+                  "label": "Online, Zahlung per Überweisung",
+                  "wert": 23
+                },
+                {
+                  "label": "Schriftlich, per Lastschrift",
+                  "wert": 23.5
+                },
+                {
+                  "label": "Schriftlich, per Überweisung",
+                  "wert": 26
+                },
+                {
+                  "label": "Je weitere Vertrauensperson (online)",
+                  "wert": 3.5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Mehr als sieben Millionen Vorsorgeverfügungen sind im Zentralen Vorsorgeregister eingetragen (Bundesnotarkammer, Mai 2026). Änderungen, Löschung und Widerruf sind kostenlos.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "testament",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Erbschaftsteuer und Freibeträge 2026",
+          "art": "balken",
+          "titel": "Persönliche Freibeträge nach § 16 ErbStG",
+          "untertitel": "Bis zu diesem Wert bleibt ein Erwerb je Person steuerfrei",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 16 Erbschaftsteuer- und Schenkungsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/erbstg_1974/__16.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "freibetraege",
+              "label": "Freibeträge",
+              "werte": [
+                {
+                  "label": "Ehegatte, eingetragener Lebenspartner",
+                  "wert": 500000
+                },
+                {
+                  "label": "Kinder, Stiefkinder, Kinder verstorbener Kinder",
+                  "wert": 400000
+                },
+                {
+                  "label": "Enkel",
+                  "wert": 200000
+                },
+                {
+                  "label": "Eltern und Großeltern beim Erbfall",
+                  "wert": 100000
+                },
+                {
+                  "label": "Geschwister, Nichten, Neffen, Schwiegerkinder",
+                  "wert": 20000
+                },
+                {
+                  "label": "Alle übrigen, etwa Freunde",
+                  "wert": 20000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Freibeträge gelten je Erwerber und können alle zehn Jahre neu genutzt werden.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "patientenverfuegung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Kosten: Von kostenlos bis 250 Euro",
+          "art": "balken",
+          "titel": "Was die Registrierung im Vorsorgeregister kostet",
+          "untertitel": "Einmalige Gebühr der Bundesnotarkammer, keine Jahresgebühr",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesnotarkammer, Zentrales Vorsorgeregister (Gebührensatzung)",
+            "url": "https://www.vorsorgeregister.de/privatpersonen/kosten",
+            "stand": "01.01.2023"
+          },
+          "reihen": [
+            {
+              "key": "gebuehren",
+              "label": "Gebühren",
+              "werte": [
+                {
+                  "label": "Online, Zahlung per Lastschrift",
+                  "wert": 20.5
+                },
+                {
+                  "label": "Online, Zahlung per Überweisung",
+                  "wert": 23
+                },
+                {
+                  "label": "Schriftlich, per Lastschrift",
+                  "wert": 23.5
+                },
+                {
+                  "label": "Schriftlich, per Überweisung",
+                  "wert": 26
+                },
+                {
+                  "label": "Je weitere Vertrauensperson (online)",
+                  "wert": 3.5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Mehr als sieben Millionen Vorsorgeverfügungen sind im Zentralen Vorsorgeregister eingetragen (Bundesnotarkammer, Mai 2026). Änderungen, Löschung und Widerruf sind kostenlos.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "erbrecht",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Erbschaftsteuer – Freibeträge und Steuerlast",
+          "art": "balken",
+          "titel": "Persönliche Freibeträge nach § 16 ErbStG",
+          "untertitel": "Bis zu diesem Wert bleibt ein Erwerb je Person steuerfrei",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 16 Erbschaftsteuer- und Schenkungsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/erbstg_1974/__16.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "freibetraege",
+              "label": "Freibeträge",
+              "werte": [
+                {
+                  "label": "Ehegatte, eingetragener Lebenspartner",
+                  "wert": 500000
+                },
+                {
+                  "label": "Kinder, Stiefkinder, Kinder verstorbener Kinder",
+                  "wert": 400000
+                },
+                {
+                  "label": "Enkel",
+                  "wert": 200000
+                },
+                {
+                  "label": "Eltern und Großeltern beim Erbfall",
+                  "wert": 100000
+                },
+                {
+                  "label": "Geschwister, Nichten, Neffen, Schwiegerkinder",
+                  "wert": 20000
+                },
+                {
+                  "label": "Alle übrigen, etwa Freunde",
+                  "wert": 20000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Freibeträge gelten je Erwerber und können alle zehn Jahre neu genutzt werden.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Erbschaftsteuer – Freibeträge und Steuerlast",
+          "art": "torte",
+          "titel": "Was 2025 vererbt und verschenkt wurde",
+          "untertitel": "Steuerlich berücksichtigtes Vermögen nach Art, insgesamt 150,5 Milliarden Euro",
+          "einheit": "Mrd. €",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 306/2026",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/08/PD26_306_736.html",
+            "stand": "26.08.2026"
+          },
+          "reihen": [
+            {
+              "key": "2025",
+              "label": "2025",
+              "werte": [
+                {
+                  "label": "Grundvermögen",
+                  "wert": 51.6
+                },
+                {
+                  "label": "Übriges Vermögen (Geld, Wertpapiere)",
+                  "wert": 45.3
+                },
+                {
+                  "label": "Betriebsvermögen",
+                  "wert": 25.6
+                },
+                {
+                  "label": "Land- und Forstwirtschaft",
+                  "wert": 1.8
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Finanzämter setzten 2025 insgesamt 21,4 Milliarden Euro Erbschaft- und Schenkungsteuer fest: 13,3 Milliarden auf Erbschaften, 8,1 Milliarden auf Schenkungen.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "berliner-testament",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie hoch sind die steuerlichen Nachteile?",
+          "art": "balken",
+          "titel": "Persönliche Freibeträge nach § 16 ErbStG",
+          "untertitel": "Bis zu diesem Wert bleibt ein Erwerb je Person steuerfrei",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 16 Erbschaftsteuer- und Schenkungsteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/erbstg_1974/__16.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "freibetraege",
+              "label": "Freibeträge",
+              "werte": [
+                {
+                  "label": "Ehegatte, eingetragener Lebenspartner",
+                  "wert": 500000
+                },
+                {
+                  "label": "Kinder, Stiefkinder, Kinder verstorbener Kinder",
+                  "wert": 400000
+                },
+                {
+                  "label": "Enkel",
+                  "wert": 200000
+                },
+                {
+                  "label": "Eltern und Großeltern beim Erbfall",
+                  "wert": 100000
+                },
+                {
+                  "label": "Geschwister, Nichten, Neffen, Schwiegerkinder",
+                  "wert": 20000
+                },
+                {
+                  "label": "Alle übrigen, etwa Freunde",
+                  "wert": 20000
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Freibeträge gelten je Erwerber und können alle zehn Jahre neu genutzt werden.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "betreuungsverfuegung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist eine Betreuungsverfügung und wann wird sie benötigt?",
+          "art": "torte",
+          "titel": "Wer die 1,05 Millionen rechtlichen Betreuungen führt",
+          "untertitel": "Bestellte Betreuerinnen und Betreuer in fortdauernden Betreuungen, 2022, in Tausend",
+          "einheit": "Tsd.",
+          "quelle": {
+            "name": "Bundesamt für Justiz, Verfahren der Betreuungsgerichte 2022",
+            "url": "https://www.bundesjustizamt.de/SharedDocs/Downloads/DE/Justizstatistiken/Betreuungsverfahren_2022_PDF.pdf?__blob=publicationFile&v=3",
+            "stand": "2022"
+          },
+          "reihen": [
+            {
+              "key": "2022",
+              "label": "2022",
+              "werte": [
+                {
+                  "label": "Berufsbetreuer (auch Rechtsanwälte)",
+                  "wert": 558.2
+                },
+                {
+                  "label": "Familienangehörige",
+                  "wert": 399.2
+                },
+                {
+                  "label": "Sonstige Ehrenamtliche",
+                  "wert": 110.1
+                },
+                {
+                  "label": "Vereinsbetreuer",
+                  "wert": 98.5
+                },
+                {
+                  "label": "Behörden und Vereine",
+                  "wert": 2.1
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ende 2022 liefen rund 1.046.755 Betreuungen mit 1.168.004 bestellten Betreuern. Wer eine Vorsorgevollmacht hat, braucht in der Regel keinen gerichtlich bestellten Betreuer. Die Daten einzelner Länder sind laut Bundesamt nur bedingt belastbar.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Kosten und praktische Überlegungen",
+          "art": "balken",
+          "titel": "Was die Registrierung im Vorsorgeregister kostet",
+          "untertitel": "Einmalige Gebühr der Bundesnotarkammer, keine Jahresgebühr",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesnotarkammer, Zentrales Vorsorgeregister (Gebührensatzung)",
+            "url": "https://www.vorsorgeregister.de/privatpersonen/kosten",
+            "stand": "01.01.2023"
+          },
+          "reihen": [
+            {
+              "key": "gebuehren",
+              "label": "Gebühren",
+              "werte": [
+                {
+                  "label": "Online, Zahlung per Lastschrift",
+                  "wert": 20.5
+                },
+                {
+                  "label": "Online, Zahlung per Überweisung",
+                  "wert": 23
+                },
+                {
+                  "label": "Schriftlich, per Lastschrift",
+                  "wert": 23.5
+                },
+                {
+                  "label": "Schriftlich, per Überweisung",
+                  "wert": 26
+                },
+                {
+                  "label": "Je weitere Vertrauensperson (online)",
+                  "wert": 3.5
+                }
+              ]
+            }
+          ],
+          "hinweis": "Mehr als sieben Millionen Vorsorgeverfügungen sind im Zentralen Vorsorgeregister eingetragen (Bundesnotarkammer, Mai 2026). Änderungen, Löschung und Widerruf sind kostenlos.",
+          "abschnitt": "heading-8",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "bussgeldkatalog-pdf",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie funktioniert das Punktesystem in Deutschland?",
+          "art": "balken",
+          "titel": "Die Stufen des Punktesystems",
+          "untertitel": "Ab wie vielen Punkten in Flensburg welche Maßnahme folgt (§ 4 StVG)",
+          "einheit": "Punkte",
+          "quelle": {
+            "name": "§ 4 Straßenverkehrsgesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/stvg/__4.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "stufen",
+              "label": "Maßnahmenstufen",
+              "werte": [
+                {
+                  "label": "Schriftliche Ermahnung ab",
+                  "wert": 4
+                },
+                {
+                  "label": "Schriftliche Verwarnung ab",
+                  "wert": 6
+                },
+                {
+                  "label": "Entziehung der Fahrerlaubnis ab",
+                  "wert": 8
+                }
+              ]
+            }
+          ],
+          "hinweis": "Je Verstoß gibt es einen Punkt (Ordnungswidrigkeit mit Sicherheitsbezug), zwei Punkte (besonders schwere Ordnungswidrigkeit oder Straftat ohne Entzug) oder drei Punkte (Straftat mit Entzug der Fahrerlaubnis). Ein Fahreignungsseminar baut bei 1 bis 5 Punkten einen Punkt ab, einmal in fünf Jahren.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Was sind die aktuellen Bußgelder für Geschwindigkeitsverstöße?",
+          "art": "saeulen",
+          "titel": "Bußgelder für zu schnelles Fahren mit dem Pkw",
+          "untertitel": "Regelsätze nach Höhe der Überschreitung (Tabelle 1 des Bußgeldkatalogs)",
+          "einheit": "€",
+          "umschalter": {
+            "label": "Wo"
+          },
+          "quelle": {
+            "name": "Bußgeldkatalog-Verordnung, Anhang Tabelle 1 (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/bkatv_2013/anhang.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "innerorts",
+              "label": "Innerorts",
+              "werte": [
+                {
+                  "label": "bis 10 km/h",
+                  "wert": 30
+                },
+                {
+                  "label": "11–15",
+                  "wert": 50
+                },
+                {
+                  "label": "16–20",
+                  "wert": 70
+                },
+                {
+                  "label": "21–25",
+                  "wert": 115
+                },
+                {
+                  "label": "26–30",
+                  "wert": 180
+                },
+                {
+                  "label": "31–40",
+                  "wert": 260
+                },
+                {
+                  "label": "41–50",
+                  "wert": 400
+                },
+                {
+                  "label": "51–60",
+                  "wert": 560
+                }
+              ]
+            },
+            {
+              "key": "ausserorts",
+              "label": "Außerorts",
+              "werte": [
+                {
+                  "label": "bis 10 km/h",
+                  "wert": 20
+                },
+                {
+                  "label": "11–15",
+                  "wert": 40
+                },
+                {
+                  "label": "16–20",
+                  "wert": 60
+                },
+                {
+                  "label": "21–25",
+                  "wert": 100
+                },
+                {
+                  "label": "26–30",
+                  "wert": 150
+                },
+                {
+                  "label": "31–40",
+                  "wert": 200
+                },
+                {
+                  "label": "41–50",
+                  "wert": 320
+                },
+                {
+                  "label": "51–60",
+                  "wert": 480
+                }
+              ]
+            }
+          ],
+          "hinweis": "Ab 31 km/h zu viel kommt ein Monat Fahrverbot dazu, ab 51 km/h zwei Monate, ab 61 km/h drei Monate (700 € innerorts, 600 € außerorts; über 70 km/h: 800 bzw. 700 €). Dazu Gebühren und Auslagen.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "rundfunkbeitrag-pdf",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Befreiungsanträge richtig stellen – wie lange wirkt die Rückwirkung?",
+          "art": "balken",
+          "titel": "Der Beitragsservice 2024 in Zahlen",
+          "untertitel": "Beitragskonten, Anträge und Befreiungen, in Millionen",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "ARD ZDF Deutschlandradio Beitragsservice, Jahresbericht 2024",
+            "url": "https://presse.rundfunkbeitrag.de/pressreleases/beitragsservice-stellt-jahresbericht-2024-vor-beitragsertraege-nach-sondereffekten-des-bundesweiten-meldedatenabgleichs-ruecklaeufig-3390162",
+            "stand": "2024"
+          },
+          "reihen": [
+            {
+              "key": "2024",
+              "label": "2024",
+              "werte": [
+                {
+                  "label": "Beitragskonten",
+                  "wert": 46
+                },
+                {
+                  "label": "Anträge auf Befreiung oder Ermäßigung",
+                  "wert": 3.4
+                },
+                {
+                  "label": "Aus sozialen Gründen befreite Personen",
+                  "wert": 2.4
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Erträge aus dem Rundfunkbeitrag lagen 2024 bei 8,74 Milliarden Euro (2023: 9,02 Milliarden). Häufigste Befreiungsgründe sind Bürgergeld und Grundsicherung im Alter.",
+          "abschnitt": "heading-4",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Zahlungsverfahren 2026 – neue Formulare und Änderungen",
+          "art": "saeulen",
+          "titel": "Höhe des Rundfunkbeitrags je Wohnung und Monat",
+          "untertitel": "Seit August 2021 unverändert",
+          "einheit": "€",
+          "quelle": {
+            "name": "ARD ZDF Deutschlandradio Beitragsservice (Beitragsanpassung)",
+            "url": "https://www.rundfunkbeitrag.de/presse_und_aktuelles/hinweise/beitragsanpassung/index_ger.html",
+            "stand": "01.01.2025"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Beitrag",
+              "werte": [
+                {
+                  "label": "2013",
+                  "wert": 17.98
+                },
+                {
+                  "label": "ab April 2015",
+                  "wert": 17.5
+                },
+                {
+                  "label": "ab August 2021",
+                  "wert": 18.36
+                },
+                {
+                  "label": "2026",
+                  "wert": 18.36
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die KEF hatte für 2025 eine Anhebung auf 18,94 Euro empfohlen; die Länder haben die Rechtsgrundlage nicht geschaffen, das Bundesverfassungsgericht ist mit der Sache befasst.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuererklaerung",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Fristen für die Steuererklärung 2026: Wann müssen Sie abgeben?",
+          "art": "balken",
+          "titel": "Abgabefristen für das Steuerjahr 2025",
+          "untertitel": "Monate nach Jahresende, die § 149 AO einräumt",
+          "einheit": "Monate",
+          "quelle": {
+            "name": "§ 149 Abgabenordnung (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/ao_1977/__149.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "fristen",
+              "label": "Fristen",
+              "werte": [
+                {
+                  "label": "Ohne Steuerberater: bis 31. Juli 2026",
+                  "wert": 7
+                },
+                {
+                  "label": "Mit Steuerberater oder Lohnsteuerhilfeverein: bis 28. Februar 2027",
+                  "wert": 14
+                }
+              ]
+            }
+          ],
+          "hinweis": "Wer nicht abgeben muss, kann die freiwillige Erklärung bis zu vier Jahre rückwirkend einreichen.",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Freiwillige Steuererklärung: Geld zurück ohne Zwang",
+          "art": "balken",
+          "titel": "Was am Ende der Steuererklärung 2022 stand",
+          "untertitel": "Durchschnittliche Erstattung und Nachzahlung je Steuerpflichtigem",
+          "einheit": "€",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Lohn- und Einkommensteuerstatistik 2022 (Im Fokus: Steuererklärung)",
+            "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Lohnsteuer-Einkommensteuer/im-fokus-steuererklaerung.html",
+            "stand": "2022"
+          },
+          "reihen": [
+            {
+              "key": "2022",
+              "label": "2022",
+              "werte": [
+                {
+                  "label": "Erstattung (13,2 Millionen Steuerpflichtige)",
+                  "wert": 1240
+                },
+                {
+                  "label": "Nachzahlung (1,8 Millionen Steuerpflichtige)",
+                  "wert": 1263
+                }
+              ]
+            }
+          ],
+          "hinweis": "87 Prozent derer, die eine Erklärung abgaben, bekamen Geld zurück; gut die Hälfte der Erstattungen lag zwischen 100 und 1.000 Euro.",
+          "abschnitt": "heading-7",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuerbescheid",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Steuerbescheid systematisch prüfen: Ihr Fahrplan",
+          "art": "balken",
+          "titel": "Wie die Steuerbescheide 2022 ausgingen",
+          "untertitel": "Steuerpflichtige mit Erstattung oder Nachzahlung, in Millionen",
+          "einheit": "Mio.",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Lohn- und Einkommensteuerstatistik 2022 (Im Fokus: Steuererklärung)",
+            "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Lohnsteuer-Einkommensteuer/im-fokus-steuererklaerung.html",
+            "stand": "2022"
+          },
+          "reihen": [
+            {
+              "key": "2022",
+              "label": "2022",
+              "werte": [
+                {
+                  "label": "Erstattung (im Schnitt 1.240 €)",
+                  "wert": 13.2
+                },
+                {
+                  "label": "Nachzahlung (im Schnitt 1.263 €)",
+                  "wert": 1.8
+                }
+              ]
+            }
+          ],
+          "hinweis": "8 Prozent der Erstattungen lagen unter 100 Euro, 53 Prozent zwischen 100 und 1.000 Euro, 3 Prozent über 5.000 Euro.",
+          "abschnitt": "heading-6",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuerklassen",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Wie funktioniert die Steuerklassenwahl für Ehepaare?",
+          "art": "torte",
+          "titel": "Welche Steuerklassen Ehepaare wählen",
+          "untertitel": "Zusammenveranlagte Paare mit ausschließlich Arbeitnehmereinkünften, Veranlagungsjahr 2020",
+          "einheit": "%",
+          "quelle": {
+            "name": "Statistisches Bundesamt, Pressemitteilung 287/2024 (Lohn- und Einkommensteuerstatistik 2020)",
+            "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/07/PD24_287_73.html",
+            "stand": "26.07.2024"
+          },
+          "reihen": [
+            {
+              "key": "2020",
+              "label": "2020",
+              "werte": [
+                {
+                  "label": "Kombination III und V",
+                  "wert": 39
+                },
+                {
+                  "label": "Beide in Steuerklasse IV",
+                  "wert": 36
+                },
+                {
+                  "label": "Nur ein Partner verdient (Steuerklasse III)",
+                  "wert": 25
+                }
+              ]
+            }
+          ],
+          "hinweis": "Von 5,3 Millionen Paaren wählten 2,08 Millionen die Kombination III/V. In Steuerklasse V standen achtmal so viele Frauen wie Männer; bei knapp 46 Prozent der III/V-Paare kam es zur Nachzahlung.",
+          "abschnitt": "heading-5",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "steuerfreibetrag",
+    "felder": {
+      "statistiken": [
+        {
+          "abschnitt_titel": "Was ist ein Steuerfreibetrag und wie funktioniert er?",
+          "art": "balken",
+          "titel": "Wo 2026 welcher Steuersatz beginnt",
+          "untertitel": "Zu versteuerndes Einkommen je Person nach § 32a EStG",
+          "einheit": "€",
+          "quelle": {
+            "name": "§ 32a Einkommensteuergesetz (Gesetze im Internet)",
+            "url": "https://www.gesetze-im-internet.de/estg/__32a.html",
+            "stand": "2026"
+          },
+          "reihen": [
+            {
+              "key": "tarif",
+              "label": "Tarif 2026",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag: bis hierhin 0 %",
+                  "wert": 12348
+                },
+                {
+                  "label": "Spitzensteuersatz 42 % ab",
+                  "wert": 69879
+                },
+                {
+                  "label": "Reichensteuer 45 % ab",
+                  "wert": 277826
+                }
+              ]
+            }
+          ],
+          "hinweis": "Zwischen Grundfreibetrag und Spitzensteuersatz steigt der Steuersatz von 14 auf 42 Prozent (Progressionszone).",
+          "abschnitt": "heading-2",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Grundfreibetrag 2026: Höhere Steuerfreiheit für alle",
+          "art": "saeulen",
+          "titel": "Grundfreibetrag je Person und Jahr",
+          "untertitel": "Steuerfreies Existenzminimum, Verheiratete das Doppelte",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesfinanzministerium, Monatsbericht Februar 2026 (Steuerliche Änderungen 2026) und Pressemitteilung vom 24.07.2024",
+            "url": "https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2026/02/Inhalte/Kapitel-2-Analysen/2-5-wichtigste-steuerliche-aenderungen-2026.html",
+            "stand": "Februar 2026"
+          },
+          "reihen": [
+            {
+              "key": "jahre",
+              "label": "Grundfreibetrag",
+              "werte": [
+                {
+                  "label": "2024",
+                  "wert": 11784
+                },
+                {
+                  "label": "2025",
+                  "wert": 12096
+                },
+                {
+                  "label": "2026",
+                  "wert": 12348
+                }
+              ]
+            }
+          ],
+          "hinweis": "2026 stieg der Grundfreibetrag um 252 Euro; der Kinderfreibetrag je Elternteil um 78 auf 3.414 Euro.",
+          "abschnitt": "heading-3",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        },
+        {
+          "abschnitt_titel": "Weitere wichtige Freibeträge und ihre Höhen 2026",
+          "art": "balken",
+          "titel": "Freibeträge und Pauschalen 2026",
+          "untertitel": "Beträge je Person und Jahr",
+          "einheit": "€",
+          "quelle": {
+            "name": "Bundesfinanzministerium, Monatsbericht Februar 2026 (Steuerliche Änderungen 2026)",
+            "url": "https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2026/02/Inhalte/Kapitel-2-Analysen/2-5-wichtigste-steuerliche-aenderungen-2026.html",
+            "stand": "Februar 2026"
+          },
+          "reihen": [
+            {
+              "key": "2026",
+              "label": "2026",
+              "werte": [
+                {
+                  "label": "Grundfreibetrag",
+                  "wert": 12348
+                },
+                {
+                  "label": "Kinderfreibetrag je Kind (beide Eltern)",
+                  "wert": 9756
+                },
+                {
+                  "label": "Übungsleiterpauschale",
+                  "wert": 3300
+                },
+                {
+                  "label": "Ehrenamtspauschale",
+                  "wert": 960
+                }
+              ]
+            }
+          ],
+          "hinweis": "Die Aktivrente lässt ab der Regelaltersgrenze bis zu 2.000 Euro Arbeitslohn im Monat steuerfrei.",
+          "abschnitt": "heading-7",
+          "status": "freigegeben",
+          "erzeugt_am": "2026-09-08"
+        }
+      ]
+    }
+  }
+]

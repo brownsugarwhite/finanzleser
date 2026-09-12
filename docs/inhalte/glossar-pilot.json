@@ -1,0 +1,393 @@
+[
+  {
+    "slug": "mangelfall",
+    "titel": "Mangelfall",
+    "rubrik": "Recht",
+    "varianten": [
+      "Mangelfall",
+      "Mangelfälle",
+      "Mangelfallberechnung"
+    ],
+    "erklaerung": "<p>Ein Mangelfall liegt vor, wenn das Einkommen des Unterhaltspflichtigen nicht für alle Unterhaltsansprüche reicht, ohne den Selbstbehalt zu unterschreiten. Dann wird nur die Verteilungsmasse, also das Einkommen abzüglich Selbstbehalt, anteilig auf die gleichrangig Berechtigten verteilt. Minderjährige Kinder gehen dabei vor.</p>",
+    "quelle": "§ 1609 BGB (Rangfolge), Düsseldorfer Tabelle 2026, Abschnitt C",
+    "ratgeber": "kindesunterhalt",
+    "tool": "rechner/unterhalt",
+    "frage": "Wie viel bleibt für jedes Kind, wenn das Geld nicht reicht?",
+    "antwort": "Die Verteilungsmasse wird durch die Summe der Einsatzbeträge geteilt; mit dieser Quote wird jeder Anspruch gekürzt. Bei 640 Euro Verteilungsmasse und 952 Euro Gesamtanspruch bekommt jedes Kind rund 67 Prozent seines Betrags.",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "rentenfreibetrag",
+    "titel": "Rentenfreibetrag",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Rentenfreibetrag",
+      "Rentenfreibeträge",
+      "steuerfreier Teil der Rente"
+    ],
+    "erklaerung": "<p>Der Teil der gesetzlichen Rente, der dauerhaft steuerfrei bleibt. Er wird einmal aus der ersten vollen Jahresrente berechnet, 2026 sind das 16 Prozent, und dann als fester Euro-Betrag festgeschrieben. Spätere Rentenerhöhungen sind deshalb voll steuerpflichtig.</p>",
+    "quelle": "§ 22 Nr. 1 Satz 3 Buchst. a EStG",
+    "ratgeber": "rentenbesteuerung",
+    "tool": "rechner/rentenbesteuerung",
+    "frage": "Wächst mein Rentenfreibetrag mit der Rente mit?",
+    "antwort": "Nein. Er bleibt in Euro so hoch wie im zweiten Rentenjahr berechnet, auch wenn die Rente steigt. Nur eine Neuberechnung nach Rentenänderungen aus anderen Gründen, etwa Hinterbliebenenrente, ändert ihn.",
+    "wappen": "rente",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "besteuerungsanteil",
+    "titel": "Besteuerungsanteil",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Besteuerungsanteil",
+      "Besteuerungsanteile",
+      "steuerpflichtiger Rentenanteil"
+    ],
+    "erklaerung": "<p>Der Prozentsatz der gesetzlichen Rente, der bei Rentenbeginn steuerpflichtig wird. Er steigt seit 2023 um 0,5 Punkte je Jahrgang, 2026 liegt er bei 84 Prozent, 100 Prozent erreicht er 2058. Das Jahr des Rentenbeginns legt ihn lebenslang fest.</p>",
+    "quelle": "§ 22 Nr. 1 Satz 3 EStG, Wachstumschancengesetz 2024",
+    "ratgeber": "rentenbesteuerung",
+    "tool": "rechner/rentenbesteuerung",
+    "frage": "Was ist der Besteuerungsanteil für Rentenbeginn 2030?",
+    "antwort": "86 Prozent: 84 Prozent für 2026 plus 0,5 Punkte je Jahr. Der steuerfreie Rest von 14 Prozent wird dann als Freibetrag festgeschrieben.",
+    "wappen": "rente",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "altersentlastungsbetrag",
+    "titel": "Altersentlastungsbetrag",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Altersentlastungsbetrag",
+      "Altersentlastungsbeträge"
+    ],
+    "erklaerung": "<p>Ein Freibetrag für Steuerpflichtige ab 65 Jahren auf Einkünfte außer Renten und Pensionen, etwa Arbeitslohn oder Mieten. Für den Jahrgang, der 2025 das 64. Lebensjahr vollendet hat, sind es 12,8 Prozent der Bemessungsgrundlage, höchstens 608 Euro im Jahr. Reine Rentner haben davon wenig.</p>",
+    "quelle": "§ 24a EStG",
+    "ratgeber": "rentenbesteuerung",
+    "tool": "",
+    "frage": "Bekomme ich den Altersentlastungsbetrag auf meine Rente?",
+    "antwort": "Nein, die gesetzliche Rente ist ausgenommen. Er wirkt nur auf Arbeitslohn ohne Versorgungsbezug, auf Vermietung, Kapitalerträge außerhalb der Abgeltungsteuer und ähnliche Einkünfte.",
+    "wappen": "rente",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "aktivrente",
+    "titel": "Aktivrente",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Aktivrente",
+      "Aktivrentengesetz"
+    ],
+    "erklaerung": "<p>Seit 2026 dürfen Beschäftigte, die über die Regelaltersgrenze hinaus als Arbeitnehmer sozialversicherungspflichtig arbeiten, bis zu 2.000 Euro im Monat steuerfrei verdienen. Es ist ein Steuerbonus, kein Rentenbestandteil; Sozialbeiträge fallen weiter an, Minijobs und Selbstständige sind ausgenommen.</p>",
+    "quelle": "§ 34 Abs. 2 EStG (Aktivrentengesetz)",
+    "ratgeber": "rentenbesteuerung",
+    "tool": "",
+    "frage": "Zählt die Aktivrente beim Progressionsvorbehalt mit?",
+    "antwort": "Nein. Der steuerfreie Betrag bis 2.000 Euro bleibt außen vor; was darüber liegt, wird normal versteuert. Die Rente selbst bleibt davon unberührt.",
+    "wappen": "rente",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "partnerschaftsbonus",
+    "titel": "Partnerschaftsbonus",
+    "rubrik": "Recht",
+    "varianten": [
+      "Partnerschaftsbonus",
+      "Partnerschaftsbonusmonate"
+    ],
+    "erklaerung": "<p>Bis zu vier zusätzliche ElterngeldPlus-Monate je Elternteil, wenn beide gleichzeitig für zwei bis vier aufeinanderfolgende Monate zwischen 24 und 32 Stunden pro Woche arbeiten. Gezählt wird der Monatsdurchschnitt, nicht jede Woche.</p>",
+    "quelle": "§ 4b BEEG",
+    "ratgeber": "elterngeld",
+    "tool": "rechner/elterngeld",
+    "frage": "Was passiert, wenn einer von uns in einem Monat 34 Stunden arbeitet?",
+    "antwort": "Zählt der Monatsdurchschnitt über 32 Stunden, entfällt der Bonus für diesen Monat für beide, und bereits gezahlte Beträge können zurückgefordert werden. Einzelne lange Wochen sind unschädlich, solange der Monatsschnitt stimmt.",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "elterngeldplus",
+    "titel": "ElterngeldPlus",
+    "rubrik": "Recht",
+    "varianten": [
+      "ElterngeldPlus",
+      "Elterngeld Plus",
+      "Plus-Monate"
+    ],
+    "erklaerung": "<p>Die Variante für Teilzeit: ein Basismonat wird zu zwei Plus-Monaten, jeder höchstens halb so hoch wie das Basiselterngeld. Wer nach der Geburt in Teilzeit arbeitet, bekommt so über längere Zeit oft mehr Geld als mit Basiselterngeld.</p>",
+    "quelle": "§ 4a BEEG",
+    "ratgeber": "elterngeld",
+    "tool": "rechner/elterngeld",
+    "frage": "Lohnt sich ElterngeldPlus ohne Teilzeitarbeit?",
+    "antwort": "Selten. Ohne Einkommen ist ein Plus-Monat genau die Hälfte eines Basismonats, in der Summe kommt dasselbe heraus, nur über doppelt so lange Zeit. Vorteil ist nur die längere Absicherung, etwa wegen der Krankenversicherung.",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "kinderfreibetrag",
+    "titel": "Kinderfreibetrag",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Kinderfreibetrag",
+      "Kinderfreibeträge",
+      "Freibetrag für Kinder"
+    ],
+    "erklaerung": "<p>Der Betrag, der das Existenzminimum eines Kindes steuerfrei stellt: 2026 insgesamt 9.756 Euro je Kind, zusammengesetzt aus 6.828 Euro für das Existenzminimum und 2.928 Euro für Betreuung, Erziehung und Ausbildung. Das Finanzamt prüft von selbst, ob er günstiger ist als das Kindergeld.</p>",
+    "quelle": "§ 32 Abs. 6 EStG",
+    "ratgeber": "kindergeld",
+    "tool": "rechner/kindergeld",
+    "frage": "Ab welchem Einkommen ist der Freibetrag besser als das Kindergeld?",
+    "antwort": "Bei Verheirateten ab etwa 85.000 Euro zu versteuerndem Einkommen, bei Alleinstehenden ab etwa 42.000 Euro. Darunter bleibt es beim Kindergeld; das gezahlte Kindergeld wird bei der Günstigerprüfung gegengerechnet.",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "guenstigerpruefung",
+    "titel": "Günstigerprüfung",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Günstigerprüfung",
+      "Günstigerprüfungen"
+    ],
+    "erklaerung": "<p>Eine Vergleichsrechnung des Finanzamts, bei der von zwei Möglichkeiten die für Sie bessere angewendet wird: Kindergeld oder Kinderfreibetrag, Abgeltungsteuer oder persönlicher Steuersatz bei Kapitalerträgen. Bei Kindern läuft sie automatisch, bei Kapitalerträgen nur auf Antrag in der Anlage KAP.</p>",
+    "quelle": "§ 31 EStG, § 32d Abs. 6 EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "",
+    "frage": "Muss ich die Günstigerprüfung für das Kindergeld beantragen?",
+    "antwort": "Nein, sie läuft bei jeder Veranlagung automatisch. Nur die Günstigerprüfung für Kapitalerträge müssen Sie in der Anlage KAP ankreuzen.",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "fels-risiken",
+    "titel": "FELS-Risiken",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "FELS-Risiken",
+      "FELS",
+      "Grundgefahren der Hausratversicherung"
+    ],
+    "erklaerung": "<p>Die vier Grundgefahren jeder Hausratversicherung: Feuer, Einbruchdiebstahl, Leitungswasser und Sturm ab Windstärke 8 samt Hagel. Alles andere, etwa Überschwemmung, Fahrraddiebstahl auf der Straße oder Glasbruch, braucht einen Baustein.</p>",
+    "quelle": "VHB 2022, Abschnitt A § 1 bis 4",
+    "ratgeber": "hausratversicherung",
+    "tool": "vergleich/hausratversicherung-vergleich",
+    "frage": "Ist ein Blitzschlag ein Feuerschaden?",
+    "antwort": "Ja, Blitzschlag, Explosion und Implosion gehören zur Gefahr Feuer, ebenso Rauch- und Löschschäden. Überspannungsschäden an Elektrogeräten sind dagegen meist nur mit Baustein versichert.",
+    "wappen": "hausrat",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "versicherungssumme",
+    "titel": "Versicherungssumme",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Versicherungssumme",
+      "Versicherungssummen"
+    ],
+    "erklaerung": "<p>Der Höchstbetrag, den der Versicherer im Schadenfall zahlt. In der Hausratversicherung sollte sie dem Neuwert des gesamten Hausrats entsprechen, als Faustregel 650 bis 800 Euro je Quadratmeter Wohnfläche. Ist sie zu niedrig, droht ohne Unterversicherungsverzicht eine anteilige Kürzung.</p>",
+    "quelle": "Verbraucherzentrale, Juli 2025; § 75 VVG",
+    "ratgeber": "hausratversicherung",
+    "tool": "vergleich/hausratversicherung-vergleich",
+    "frage": "Wie hoch ist die richtige Versicherungssumme für 100 Quadratmeter?",
+    "antwort": "Nach der Faustregel 65.000 bis 80.000 Euro. Wer hochwertig eingerichtet ist oder teure Elektronik hat, rechnet besser einmal den Neuwert Zimmer für Zimmer zusammen.",
+    "wappen": "hausrat",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "best-leistungs-garantie",
+    "titel": "Best-Leistungs-Garantie",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Best-Leistungs-Garantie",
+      "Bestleistungsgarantie",
+      "Best-Leistungsgarantie"
+    ],
+    "erklaerung": "<p>Eine Klausel in der Privathaftpflicht: Wäre ein Schaden nach den eigenen Bedingungen nicht gedeckt, ein anderer in Deutschland angebotener Tarif würde aber leisten, dann leistet auch dieser Versicherer. Sie schließt Lücken bei ungewöhnlichen Fällen und ist ein Qualitätsmerkmal.</p>",
+    "quelle": "AVB Privathaftpflicht, Klausel Best-Leistungs-Garantie",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Muss ich den besseren Tarif selbst nachweisen?",
+    "antwort": "Ja, in der Regel liegt die Nachweispflicht beim Versicherten: Sie benennen den Tarif eines anderen Anbieters, der den Fall deckt. Makler übernehmen diese Recherche meist.",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "forderungsausfall",
+    "titel": "Forderungsausfalldeckung",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Forderungsausfalldeckung",
+      "Forderungsausfall",
+      "Ausfalldeckung"
+    ],
+    "erklaerung": "<p>Die umgekehrte Haftpflicht: Fügt Ihnen jemand einen Schaden zu, der keine Haftpflichtversicherung hat und nicht zahlen kann, springt Ihre eigene Versicherung ein, meist ab einer Mindestschadenhöhe und nach erfolglosem Vollstreckungsversuch. Gute Tarife nehmen den Rechtsschutz dafür gleich mit.</p>",
+    "quelle": "AVB Privathaftpflicht, Abschnitt Forderungsausfall",
+    "ratgeber": "private-haftpflichtversicherung",
+    "tool": "vergleich/private-haftpflichtversicherung-vergleich",
+    "frage": "Gilt die Forderungsausfalldeckung auch für einen Fahrradunfall mit Personenschaden?",
+    "antwort": "Ja, wenn der Verursacher haftet, aber nicht zahlen kann und Sie einen vollstreckbaren Titel haben. Viele Tarife setzen eine Mindestschadenhöhe von 2.500 Euro voraus.",
+    "wappen": "haftpflicht",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "erwerbsminderungsrente",
+    "titel": "Erwerbsminderungsrente",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Erwerbsminderungsrente",
+      "Erwerbsminderungsrenten",
+      "EM-Rente",
+      "Rente wegen Erwerbsminderung"
+    ],
+    "erklaerung": "<p>Die gesetzliche Rente, wenn Sie aus gesundheitlichen Gründen keine Tätigkeit mehr ausüben können: die volle Rente unter drei Stunden täglich, die halbe bei drei bis sechs Stunden, unabhängig vom erlernten Beruf. Im Schnitt liegt sie deutlich unter dem letzten Netto, 2026 nach Anpassung um 4,24 Prozent.</p>",
+    "quelle": "§ 43 SGB VI, Deutsche Rentenversicherung, Rentenanpassung 2026",
+    "ratgeber": "berufsunfaehigkeitsversicherung",
+    "tool": "vergleich/berufsunfaehigkeitsversicherung-vergleich",
+    "frage": "Bekomme ich Erwerbsminderungsrente, wenn ich meinen Beruf nicht mehr ausüben kann?",
+    "antwort": "Nicht automatisch. Entscheidend ist, ob Sie irgendeine Tätigkeit auf dem allgemeinen Arbeitsmarkt noch drei Stunden täglich schaffen. Wer das kann, bekommt trotz Berufsunfähigkeit nichts; das ist die Lücke, die die private BU schließt.",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "nachversicherungsgarantie",
+    "titel": "Nachversicherungsgarantie",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Nachversicherungsgarantie",
+      "Nachversicherung",
+      "Erhöhungsoption"
+    ],
+    "erklaerung": "<p>Das Recht, die vereinbarte BU-Rente später ohne neue Gesundheitsprüfung zu erhöhen, etwa bei Berufseinstieg, Gehaltserhöhung, Heirat, Geburt eines Kindes oder Immobilienkauf. Meist innerhalb einer Frist nach dem Ereignis und bis zu einer Höchstrente.</p>",
+    "quelle": "Bedingungen der BU-Versicherer, Abschnitt Nachversicherung",
+    "ratgeber": "berufsunfaehigkeitsversicherung",
+    "tool": "vergleich/berufsunfaehigkeitsversicherung-vergleich",
+    "frage": "Wie lange nach der Geburt kann ich die BU-Rente erhöhen?",
+    "antwort": "Je nach Tarif drei bis zwölf Monate nach dem Ereignis. Die Erhöhung ist meist auf 50 Prozent der bisherigen Rente und eine Gesamtrente von 2.500 bis 3.000 Euro begrenzt.",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "risikovoranfrage",
+    "titel": "Anonyme Risikovoranfrage",
+    "rubrik": "Versicherungen",
+    "varianten": [
+      "Risikovoranfrage",
+      "Risikovoranfragen",
+      "anonyme Voranfrage"
+    ],
+    "erklaerung": "<p>Ein Makler fragt bei mehreren Versicherern ohne Ihren Namen an, ob und zu welchen Bedingungen sie Sie mit Ihren Vorerkrankungen versichern würden. So gibt es keine Ablehnung in der Wagnisdatei der Versicherer, und Sie sehen vor dem Antrag, wer Sie nimmt.</p>",
+    "quelle": "GDV, Hinweis- und Informationssystem (HIS)",
+    "ratgeber": "berufsunfaehigkeitsversicherung",
+    "tool": "",
+    "frage": "Was steht in der Wagnisdatei?",
+    "antwort": "Ablehnungen, Zuschläge und Ausschlüsse aus früheren Anträgen, für alle angeschlossenen Versicherer sichtbar. Eine anonyme Voranfrage erzeugt keinen Eintrag, ein regulärer abgelehnter Antrag schon.",
+    "wappen": "vorsorge",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "anlage-n",
+    "titel": "Anlage N",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Anlage N",
+      "Anlage N-AUS",
+      "Anlage N-DHH"
+    ],
+    "erklaerung": "<p>Das Formular für Einkünfte aus nichtselbständiger Arbeit: Lohndaten aus der Lohnsteuerbescheinigung und alle Werbungskosten wie Fahrtkosten, Arbeitsmittel, Fortbildung und Homeoffice-Pauschale. Ohne Nachweise gilt der Pauschbetrag von 1.230 Euro.</p>",
+    "quelle": "§ 9 EStG, § 9a EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "checkliste/steuerformulare",
+    "frage": "Ab wann lohnt es sich, Werbungskosten einzeln aufzuführen?",
+    "antwort": "Sobald sie 1.230 Euro übersteigen. Bei 20 Kilometern Arbeitsweg an 220 Tagen sind allein die Fahrtkosten 1.672 Euro, dann lohnt jede weitere Position.",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "elster",
+    "titel": "ELSTER",
+    "rubrik": "Steuern",
+    "varianten": [
+      "ELSTER",
+      "Elster",
+      "Mein ELSTER",
+      "ELSTER-Zertifikat"
+    ],
+    "erklaerung": "<p>Das Online-Portal der Finanzverwaltung für die elektronische Steuererklärung. Nach der Registrierung mit Zertifikat oder Online-Ausweis prüft es Eingaben auf Plausibilität, holt eDaten wie Lohnsteuerbescheinigungen ab und übermittelt die Erklärung ohne Unterschrift.</p>",
+    "quelle": "elster.de, Bundesfinanzverwaltung",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "",
+    "frage": "Ist die Abgabe über ELSTER Pflicht?",
+    "antwort": "Für Selbstständige, Gewerbetreibende und Vermieter mit Gewinneinkünften ja. Arbeitnehmer dürfen noch auf Papier abgeben, seit 2026 gibt es die Vordrucke aber nur elektronisch, und die Bearbeitung ist online schneller.",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "entfernungspauschale",
+    "titel": "Entfernungspauschale",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Entfernungspauschale",
+      "Pendlerpauschale"
+    ],
+    "erklaerung": "<p>Für den Weg zur Arbeit dürfen Sie je Arbeitstag und Entfernungskilometer einen Pauschalbetrag als Werbungskosten ansetzen, unabhängig vom Verkehrsmittel. Ab 2026 einheitlich 38 Cent ab dem ersten Kilometer, vorher 30 Cent bis Kilometer 20.</p>",
+    "quelle": "§ 9 Abs. 1 Nr. 4 EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "checkliste/steuerformulare",
+    "frage": "Zählt die einfache Strecke oder Hin- und Rückweg?",
+    "antwort": "Nur die einfache Entfernung, dafür an jedem Arbeitstag. Bei 25 Kilometern und 220 Tagen sind das 2.090 Euro im Jahr.",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "homeoffice-pauschale",
+    "titel": "Homeoffice-Pauschale",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Homeoffice-Pauschale",
+      "Tagespauschale",
+      "Homeofficepauschale"
+    ],
+    "erklaerung": "<p>Für jeden Tag, den Sie überwiegend zu Hause arbeiten, dürfen Sie 6 Euro ansetzen, höchstens 1.230 Euro im Jahr, ohne Arbeitszimmer. Sie zählt zu den Werbungskosten und geht im Arbeitnehmer-Pauschbetrag auf, solange die Summe darunter bleibt.</p>",
+    "quelle": "§ 4 Abs. 5 Satz 1 Nr. 6c EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "checkliste/steuerformulare",
+    "frage": "Kann ich die Pauschale zusätzlich zum Arbeitszimmer absetzen?",
+    "antwort": "Nein, entweder das häusliche Arbeitszimmer mit seinen tatsächlichen Kosten oder die Tagespauschale. Wer kein abgeschlossenes Arbeitszimmer hat, nimmt die Pauschale.",
+    "wappen": "steuer",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "sparerpauschbetrag",
+    "titel": "Sparerpauschbetrag",
+    "rubrik": "Steuern",
+    "varianten": [
+      "Sparerpauschbetrag",
+      "Sparer-Pauschbetrag"
+    ],
+    "erklaerung": "<p>Kapitalerträge bis 1.000 Euro im Jahr, bei Zusammenveranlagung 2.000 Euro, bleiben steuerfrei. Damit die Bank keine Abgeltungsteuer einbehält, erteilen Sie ihr einen Freistellungsauftrag; verteilt auf mehrere Banken darf die Summe den Pauschbetrag nicht übersteigen.</p>",
+    "quelle": "§ 20 Abs. 9 EStG",
+    "ratgeber": "steuerformulare-2024",
+    "tool": "",
+    "frage": "Was passiert, wenn ich keinen Freistellungsauftrag gestellt habe?",
+    "antwort": "Die Bank behält 25 Prozent Abgeltungsteuer plus Soli ein. Sie holen sich das Geld über die Anlage KAP zurück, das Finanzamt rechnet den Pauschbetrag dann nachträglich an.",
+    "wappen": "sparen",
+    "status": "freigegeben"
+  },
+  {
+    "slug": "betreuungsquote",
+    "titel": "Betreuungsquote",
+    "rubrik": "Recht",
+    "varianten": [
+      "Betreuungsquote",
+      "Betreuungsanteil",
+      "60-Prozent-Regel"
+    ],
+    "erklaerung": "<p>Der Anteil der Betreuungszeit, den ein Elternteil nach der Trennung trägt. Beim Unterhaltsvorschuss gilt seit dem Urteil des Bundesverwaltungsgerichts vom Dezember 2023 nur als alleinerziehend, wer mehr als 60 Prozent übernimmt; beim echten Wechselmodell entfällt der Anspruch.</p>",
+    "quelle": "BVerwG 5 C 9.22, Urteil vom 12. Dezember 2023; § 1 UVG",
+    "ratgeber": "unterhaltsvorschuss",
+    "tool": "checkliste/unterhaltsvorschuss",
+    "frage": "Wie weise ich die Betreuungsquote nach?",
+    "antwort": "Mit einem Betreuungsplan, Kalendereinträgen und Angaben zu Übernachtungen; das Jugendamt fragt beide Eltern. Bei 9 von 14 Nächten liegen Sie über 60 Prozent.",
+    "wappen": "kinder",
+    "status": "freigegeben"
+  }
+]

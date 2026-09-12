@@ -1,0 +1,913 @@
+[
+  {
+    "slug": "basisrente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Basisrente, auch Rürup-Rente, ist die staatlich geförderte Altersvorsorge für Selbstständige, Freiberufler und Gutverdiener: Beiträge sind 2026 bis 30.826 Euro, bei Paaren 61.652 Euro, zu 100 Prozent als Sonderausgaben absetzbar.",
+          "Bei 42 Prozent Grenzsteuersatz zahlt das Finanzamt rechnerisch 42 Cent jedes Euros mit; 15.000 Euro Einzahlung bringen 6.300 Euro Steuererstattung, der volle Höchstbetrag bis zu 12.947 Euro.",
+          "Angestellte haben weniger Spielraum, weil ihre Rentenbeiträge mitzählen; über der Beitragsbemessungsgrenze bleiben noch 11.966 Euro.",
+          "Im Alter wird die Rente nachgelagert besteuert: Bei Beginn 2026 sind 84 Prozent steuerpflichtig, dieser Anteil bleibt lebenslang; für spätere Jahrgänge steigt er bis 2058 auf 100 Prozent.",
+          "Nachteile: kein Kapitalwahlrecht, nicht kündbar, nicht beleihbar, ohne Hinterbliebenenschutz nicht vererbbar; dafür lebenslange Rente ab 62, Pfändungsschutz und eine steuerlich voll absetzbare Berufsunfähigkeitsversicherung als Zusatz."
+        ],
+        "quellen": [
+          "§ 10 Abs. 1 Nr. 2b, Abs. 3 EStG",
+          "§ 22 Nr. 1 Satz 3 EStG",
+          "Altersvorsorgeverträge-Zertifizierungsgesetz",
+          "Beitrag Basisrente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert die steuerliche Förderung der Basisrente?",
+          "status": "freigegeben",
+          "frage": "Ich bin Angestellte mit 90.000 Euro brutto. Wie viel Basisrente kann ich noch absetzen?",
+          "antwort": "Ihre Rentenbeiträge betragen 2026 mit Arbeitgeberanteil 16.740 Euro; vom Höchstbetrag von 30.826 Euro bleiben 14.086 Euro für eine Basisrente. Die sparen bei Ihrem Grenzsteuersatz von 42 Prozent rund 5.900 Euro Steuer. Erst über der Beitragsbemessungsgrenze von 101.400 Euro bleiben dauerhaft die 11.966 Euro Rest.",
+          "quellen": [
+            "§ 10 Abs. 3 EStG",
+            "Beitragssatz Rentenversicherung 2026: 18,6 Prozent"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wird die Basisrente im Alter besteuert?",
+          "status": "freigegeben",
+          "frage": "Ich gehe 2035 in Rente. Wie viel meiner Basisrente ist dann steuerpflichtig?",
+          "antwort": "88,5 Prozent, weil der Anteil seit 2023 nur noch um einen halben Punkt je Jahrgang steigt; 11,5 Prozent Ihrer ersten vollen Jahresrente bleiben als fester Eurobetrag lebenslang steuerfrei, spätere Erhöhungen sind voll steuerpflichtig. Versteuert wird mit Ihrem persönlichen Satz; unter dem Grundfreibetrag fällt keine Steuer an.",
+          "quellen": [
+            "§ 22 Nr. 1 Satz 3 EStG (Tabelle in der Fassung des Wachstumschancengesetzes)"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Vor- und Nachteile hat die Basisrente?",
+          "status": "freigegeben",
+          "frage": "Was passiert mit meinem Rürup-Guthaben, wenn ich vor Rentenbeginn sterbe?",
+          "antwort": "Ohne Zusatzvereinbarung fällt es an die Versichertengemeinschaft. Mit Hinterbliebenenschutz bekommt Ihr Ehepartner oder bekommen Ihre kindergeldberechtigten Kinder eine Rente aus dem Guthaben; Partner ohne Trauschein gehen leer aus. Der Schutz kostet einen kleinen Teil der Rendite und wird bei Vertragsabschluss vereinbart.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 2b EStG",
+            "§ 2 Abs. 1 AltZertG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Welche Gestaltungsmöglichkeiten gibt es?",
+          "status": "freigegeben",
+          "frage": "Lohnt sich eine Einmalzahlung im Dezember?",
+          "antwort": "Ja, wenn Sie in diesem Jahr einen hohen Gewinn oder eine Abfindung hatten: Die Zahlung mindert das Einkommen des Jahres, in dem sie beim Anbieter eingeht, also bis 31. Dezember. Achten Sie darauf, dass die Einmalzahlung nicht mit vollen Abschlusskosten belastet wird; Nettotarife oder ETF-Basisrenten sind hier günstiger.",
+          "quellen": [
+            "§ 11 Abs. 2 EStG (Abflussprinzip)",
+            "Beitrag, Abschnitt Gestaltungsmöglichkeiten"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "basisrente",
+        "nachgelagerte-besteuerung",
+        "besteuerungsanteil",
+        "altersvorsorgeaufwendungen",
+        "grenzsteuersatz"
+      ]
+    }
+  },
+  {
+    "slug": "ruerup-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Rürup-Rente, benannt nach Bert Rürup und seit 2005 die erste Säule für Selbstständige, erlaubt 2026 Sonderausgaben bis 30.826 Euro, Verheiratete 61.652 Euro, abgeleitet aus der knappschaftlichen Beitragsbemessungsgrenze von 124.800 Euro mal 24,7 Prozent.",
+          "Ein Selbstständiger mit 100.000 Euro Einkommen spart beim Höchstbetrag rund 12.947 Euro Steuer; Angestellte, Beamte und Versorgungswerksmitglieder können nur den Rest über ihren Pflichtbeiträgen nutzen.",
+          "Die Auszahlung beginnt frühestens mit 62, bei Verträgen vor 2012 mit 60, ausschließlich als lebenslange Rente; bei Beginn 2026 sind 84 Prozent steuerpflichtig, für jeden späteren Jahrgang 0,5 Punkte mehr bis 100 Prozent ab 2058.",
+          "Der Vertrag ist unkündbar, nur beitragsfrei stellbar, nicht beleihbar und ohne Hinterbliebenenschutz nicht vererbbar; klassische Bruttotarife mit Provision drücken die Rendite.",
+          "Sinnvoll bei Grenzsteuersatz ab 42 Prozent, niedrigerem Steuersatz im Alter und Wunsch nach Pfändungsschutz; wer Flexibilität, Vererbbarkeit oder eine Auswanderung plant, fährt mit ETF-Depot oder privater Rentenversicherung besser."
+        ],
+        "quellen": [
+          "§ 10 Abs. 1 Nr. 2b, Abs. 3 EStG",
+          "§ 22 Nr. 1 Satz 3 EStG",
+          "Beitrag Rürup-Rente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch ist der Rürup-Höchstbetrag 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin Beamter mit 60.000 Euro. Wie viel Rürup kann ich absetzen?",
+          "antwort": "Nicht den vollen Höchstbetrag: Bei Beamten kürzt das Finanzamt ihn um einen fiktiven Rentenbeitrag von 18,6 Prozent des Gehalts, hier 11.160 Euro, sodass 19.666 Euro bleiben. Bei rund 39 Prozent Grenzsteuersatz sparen 10.000 Euro Beitrag etwa 3.800 Euro Steuer.",
+          "quellen": [
+            "§ 10 Abs. 3 Satz 3 Nr. 1 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wer profitiert besonders von der Rürup-Rente?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 45.000 Euro als Selbstständige. Lohnt sich Rürup für mich?",
+          "antwort": "Nur bedingt: Ihr Grenzsteuersatz liegt bei rund 33 Prozent, Sie sparen 33 Cent je Euro, geben aber jede Flexibilität auf. Im Alter kann der Steuersatz bei kleiner Rente ähnlich hoch liegen, dann schrumpft der Vorteil. Prüfen Sie zuerst freiwillige Beiträge zur gesetzlichen Rente, die Reha und Hinterbliebenenrente mitbringen, oder ab 2027 das geförderte Altersvorsorgedepot.",
+          "quellen": [
+            "§ 32a EStG (Tarif 2026)",
+            "§ 7 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Einschränkungen hat die Rürup-Rente?",
+          "status": "freigegeben",
+          "frage": "Kann ich meinen Rürup-Vertrag kündigen, wenn ich das Geld brauche?",
+          "antwort": "Nein, eine Kündigung mit Auszahlung ist gesetzlich ausgeschlossen; Sie können nur beitragsfrei stellen, dann laufen die Verwaltungskosten weiter. Beleihen oder Verpfänden geht ebenfalls nicht. Deshalb eignet sich die Rürup-Rente nur für Geld, das Sie bis zum Ruhestand sicher entbehren können; die Notreserve gehört aufs Tagesgeld.",
+          "quellen": [
+            "§ 10 Abs. 1 Nr. 2b EStG",
+            "§ 2 Abs. 1 AltZertG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Rürup-Rente vs. Alternativen: Was passt zu wem?",
+          "status": "freigegeben",
+          "frage": "Ich will vielleicht später auswandern. Ist Rürup dann ein Problem?",
+          "antwort": "Es kann eines werden: Deutschland besteuert die Rente weiter, ab Wohnsitz im Ausland als beschränkt Steuerpflichtiger ohne Grundfreibetrag, sofern das Doppelbesteuerungsabkommen das Recht nicht dem neuen Wohnsitzland zuweist; im Ergebnis zahlen Auswanderer oft mehr als in Deutschland. Ein ETF-Depot nehmen Sie dagegen einfach mit. Wer Auswanderungspläne hat, hält den Rürup-Anteil klein.",
+          "quellen": [
+            "§ 49 Abs. 1 Nr. 7 EStG",
+            "§ 50 Abs. 1 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "basisrente",
+        "knappschaftliche-rentenversicherung",
+        "besteuerungsanteil",
+        "nachgelagerte-besteuerung"
+      ]
+    }
+  },
+  {
+    "slug": "riester-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Riester-Rente fördert 2026 letztmals nach den alten Regeln: 175 Euro Grundzulage, 185 Euro je vor 2008 geborenem und 300 Euro je jüngerem Kind, 200 Euro Bonus für Einsteiger unter 25, Sonderausgabenabzug bis 2.100 Euro; Bedingung sind 4 Prozent des Vorjahresbruttos abzüglich Zulagen, mindestens 60 Euro.",
+          "Am 27. März 2026 hat der Bundestag laut Beitrag das Altersvorsorgereformgesetz beschlossen: Ab 2027 ersetzt das Altersvorsorgedepot mit Aktien, Fonds und ETFs ohne Beitragsgarantie die Riester-Rente, mit 50 Cent Zulage je Euro bis 360 Euro und 25 Cent bis 1.800 Euro, maximal 540 Euro, 300 Euro je Kind bei 25 Euro Monatsbeitrag, erstmals auch für Selbstständige.",
+          "Geringverdiener mit Kindern verlieren im neuen System Förderung: Eine Teilzeitkraft mit zwei Kindern erhält heute 775 Euro Zulage für 28,75 Euro im Monat, ab 2027 deutlich weniger; für sie lohnt der Abschluss noch 2026.",
+          "Bestehende Verträge behalten die alte Förderung; ein Wechsel ins neue System ist ab 2027 ohne Rückzahlung möglich, nach fünf Jahren kostenfrei, und spart bei 2 statt 0,2 Prozent Kosten über 20 Jahre Tausende Euro.",
+          "Ausgezahlt wird ab 62, bis 30 Prozent als Kapital, der Rest als lebenslange Rente, voll steuerpflichtig, aber beitragsfrei in der gesetzlichen Krankenversicherung; das Depot zahlt ab 65, auch per Auszahlungsplan."
+        ],
+        "quellen": [
+          "§§ 10a, 79 bis 99 EStG",
+          "Altersvorsorgereformgesetz (Bundestagsbeschluss vom 27.03.2026, laut Beitrag)",
+          "§ 229 SGB V",
+          "Beitrag Riester-Rente"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Wie hoch sind die Riester-Zulagen 2026?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 40.000 Euro brutto und habe ein Kind von 2015. Wie viel muss ich einzahlen?",
+          "antwort": "1.125 Euro im Jahr: 4 Prozent von 40.000 Euro sind 1.600 Euro, abzüglich 175 Euro Grundzulage und 300 Euro Kinderzulage. Dafür bekommen Sie 475 Euro Zulagen, eine Förderquote von 30 Prozent. Zahlen Sie weniger, wird die Zulage anteilig gekürzt; bis 2.100 Euro prüft das Finanzamt zusätzlich den Sonderausgabenabzug.",
+          "quellen": [
+            "§ 86 Abs. 1 EStG",
+            "§ 10a Abs. 1 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Wer profitiert besonders vom Riester-Abschluss 2026?",
+          "status": "freigegeben",
+          "frage": "Ich bin 24 und Berufseinsteigerin. Soll ich 2026 noch einen Riester-Vertrag abschließen?",
+          "antwort": "Wenn Sie einen günstigen Vertrag finden, ja: Sie bekommen im ersten Jahr einmalig 375 Euro Zulage und können den Vertrag ab 2027 ohne Rückzahlung ins Altersvorsorgedepot überführen. Wählen Sie einen Fondssparplan oder Nettotarif; ein teurer Versicherungsvertrag frisst die Zulage auf. Ohne Kinder ist der Vorteil gegenüber dem Depot ab 2027 klein.",
+          "quellen": [
+            "§ 84 Satz 2 EStG (Berufseinsteiger-Bonus)",
+            "Beitrag, Abschnitt Riester-Abschluss 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie funktioniert die Besteuerung und Auszahlung?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 300 Euro Riester-Rente im Monat neben 1.500 Euro gesetzlicher Rente. Was bleibt netto?",
+          "antwort": "Als Pflichtversicherter der gesetzlichen Krankenversicherung zahlen Sie auf die Riester-Rente keine Beiträge; sie ist nur zu 100 Prozent einkommensteuerpflichtig. Mit 84 Prozent der gesetzlichen Rente kommen Sie auf rund 16.500 Euro zu versteuerndes Einkommen und zahlen etwa 60 Euro Steuer im Monat. Freiwillig Versicherte zahlen dagegen Kranken- und Pflegebeiträge auf die Riester-Rente.",
+          "quellen": [
+            "§ 22 Nr. 5 EStG",
+            "§ 229 Abs. 1 Satz 1 Nr. 5 SGB V"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was passiert mit bestehenden Riester-Verträgen?",
+          "status": "freigegeben",
+          "frage": "Soll ich meinen alten Riester-Vertrag ab 2027 ins neue Depot wechseln?",
+          "antwort": "Rechnen Sie die Kosten gegeneinander: Ein klassischer Riester-Vertrag kostet oft 1,5 bis 2 Prozent im Jahr, das Standarddepot ist auf 1 Prozent gedeckelt, ein ETF-Depot kostet 0,2 Prozent. Bei 25.000 Euro Guthaben und 20 Jahren Restlaufzeit sind das rund 15.000 Euro Unterschied. Dagegen stehen die Beitragsgarantie des alten Vertrags und mögliche Wechselkosten; ab fünf Jahren Laufzeit ist der Wechsel kostenfrei.",
+          "quellen": [
+            "Beitrag, Abschnitt bestehende Verträge",
+            "Altersvorsorgereformgesetz (Beschluss März 2026)"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "riester-rente",
+        "altersvorsorgedepot",
+        "guenstigerpruefung",
+        "nachgelagerte-besteuerung"
+      ]
+    }
+  },
+  {
+    "slug": "betriebliche-altersversorgung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Betriebliche Altersversorgung ist die Zusage des Arbeitgebers für Alter, Tod oder Invalidität; 18,1 Millionen Beschäftigte haben eine Anwartschaft, die Quote stagniert seit 2019 bei 54 Prozent. Jeder Pflichtversicherte hat Anspruch auf Entgeltumwandlung bis 4 Prozent der Beitragsbemessungsgrenze, 2026 4.056 Euro.",
+          "Fünf Durchführungswege: Direktversicherung mit 8,8 Millionen Verträgen, Pensionskasse, Pensionsfonds, Direktzusage aus Pensionsrückstellungen und Unterstützungskasse ohne eigenen Rechtsanspruch.",
+          "Steuerfrei sind 2026 bis 8.112 Euro, 676 Euro im Monat, sozialabgabenfrei die Hälfte; der Arbeitgeber muss 15 Prozent zuschießen, im Opting-out-Modell des zweiten Betriebsrentenstärkungsgesetzes seit Januar 2026 sogar 20 Prozent.",
+          "Beim Opting-out bekommen Beschäftigte automatisch eine Entgeltumwandlung, mit drei Monaten Vorlauf und mindestens einem Monat Widerspruchsrecht; Geringverdiener bis 2.575 Euro werden mit 30 Prozent gefördert, ab 2027 bis 3.042 Euro und 360 Euro.",
+          "Der Pensions-Sicherungs-Verein schützt Direktzusagen, Unterstützungskassen und Pensionsfonds bis 11.865 Euro Monatsrente vor Insolvenz, Direktversicherungen sichert die Versicherungsaufsicht. Betriebsrenten werden nachgelagert besteuert und verbeitragt, mit 197,75 Euro Freibetrag in der Krankenversicherung."
+        ],
+        "quellen": [
+          "§§ 1, 1a, 1b, 7, 20 BetrAVG",
+          "§ 3 Nr. 63, § 100 EStG",
+          "§ 226 Abs. 2 SGB V",
+          "Beitrag Betriebliche Altersversorgung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche fünf Durchführungswege stehen zur Verfügung?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber bietet nur eine Pensionskasse an. Kann ich stattdessen eine Direktversicherung verlangen?",
+          "antwort": "Nein, der Arbeitgeber bestimmt Durchführungsweg und Anbieter; Ihr Anspruch gilt nur auf die Entgeltumwandlung selbst. Erst wenn er weder Pensionsfonds noch Pensionskasse anbietet, können Sie eine Direktversicherung verlangen. Prüfen Sie stattdessen Kosten und Garantien des Angebots und ob der 15-Prozent-Zuschuss korrekt fließt.",
+          "quellen": [
+            "§ 1a Abs. 1 Satz 3 BetrAVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie hoch sind die Steuer- und Sozialabgabenvorteile 2026?",
+          "status": "freigegeben",
+          "frage": "Ich wandle 500 Euro im Monat um. Was davon ist steuer- und abgabenfrei?",
+          "antwort": "Steuerfrei sind alle 500 Euro, weil die Grenze bei 676 Euro liegt; sozialabgabenfrei nur 338 Euro. Auf die restlichen 162 Euro zahlen Sie und Ihr Arbeitgeber Sozialbeiträge, dafür schuldet er darauf keinen Pflichtzuschuss, weil er nichts spart. Netto kosten Sie die 500 Euro bei 35 Prozent Steuersatz etwa 260 Euro.",
+          "quellen": [
+            "§ 3 Nr. 63 EStG",
+            "§ 1 Abs. 1 Satz 1 Nr. 9 SvEV"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie funktioniert das neue Opting-Out-Modell ab 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber führt das Opting-out ein. Muss ich mitmachen?",
+          "antwort": "Nein, Sie können innerhalb der Frist von mindestens einem Monat nach der schriftlichen Information widersprechen und die Umwandlung auch später jederzeit beenden. Mitmachen lohnt sich aber meist: Der Arbeitgeber muss mindestens 20 Prozent zuschießen, und die Zusage ist sofort unverfallbar. Prüfen Sie nur die Kosten des Vertrags.",
+          "quellen": [
+            "§ 20 Abs. 2 BetrAVG in der Fassung des Zweiten Betriebsrentenstärkungsgesetzes"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Welche Sicherungsmechanismen schützen die Betriebsrente?",
+          "status": "freigegeben",
+          "frage": "Meine Firma ist insolvent. Was wird aus meiner Betriebsrente?",
+          "antwort": "Das hängt vom Durchführungsweg ab: Direktzusagen, Unterstützungskassen und Pensionsfonds übernimmt der Pensions-Sicherungs-Verein bis 11.865 Euro Monatsrente, auch für unverfallbare Anwartschaften. Bei Direktversicherung und Pensionskasse bleibt der Vertrag beim Versicherer; das unwiderrufliche Bezugsrecht schützt ihn vor dem Insolvenzverwalter, Sie führen ihn privat oder beim neuen Arbeitgeber weiter.",
+          "quellen": [
+            "§§ 7, 7a BetrAVG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "betriebliche-altersvorsorge",
+        "entgeltumwandlung",
+        "durchfuehrungsweg",
+        "pensions-sicherungs-verein",
+        "opting-out",
+        "aktivrente"
+      ]
+    }
+  },
+  {
+    "slug": "direktversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Direktversicherung ist der häufigste Weg der betrieblichen Altersvorsorge: Der Arbeitgeber schließt eine Renten- oder Lebensversicherung auf den Mitarbeiter ab, meist finanziert per Entgeltumwandlung aus dem Bruttogehalt, mit unwiderruflichem Bezugsrecht des Arbeitnehmers.",
+          "2026 sind 8.112 Euro im Jahr, 676 Euro im Monat, steuerfrei; die Hälfte, 338 Euro, zusätzlich sozialabgabenfrei. Der Arbeitgeber muss 15 Prozent zuschießen, bei 338 Euro also 50,70 Euro, sodass 388,70 Euro in den Vertrag fließen.",
+          "Im Alter ist die Leistung voll steuerpflichtig, und gesetzlich Versicherte zahlen darauf den vollen Kranken- und Pflegebeitrag; frei bleiben 197,75 Euro im Monat, ein Zwanzigstel der Bezugsgröße.",
+          "Bei Grundsicherung im Alter bleiben 100 Euro plus 30 Prozent des Rests anrechnungsfrei, höchstens 281,50 Euro.",
+          "Beim Jobwechsel übernimmt der neue Arbeitgeber den Vertrag, das Kapital wird übertragen oder Sie führen ihn privat weiter; Übertragungen kosten oft Gebühren."
+        ],
+        "quellen": [
+          "§ 1b Abs. 2, § 1a Abs. 1a, § 4 BetrAVG",
+          "§ 3 Nr. 63 EStG",
+          "§ 226 Abs. 2 SGB V",
+          "§ 82a SGB XII",
+          "Beitrag Direktversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Welche steuerlichen Vorteile bietet die Direktversicherung 2026?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 3.200 Euro brutto. Was bringen mir 100 Euro Entgeltumwandlung netto?",
+          "antwort": "Sie verzichten auf 100 Euro brutto, das kostet netto nur etwa 55 Euro, weil rund 20 Prozent Sozialabgaben und 25 Prozent Lohnsteuer entfallen; mit 15 Euro Arbeitgeberzuschuss landen 115 Euro im Vertrag, gut das Doppelte. Im Gegenzug sinkt Ihre gesetzliche Rente um rund einen Euro Monatsrente je Jahr der Umwandlung, und die Betriebsrente wird später besteuert und verbeitragt.",
+          "quellen": [
+            "§ 3 Nr. 63 EStG",
+            "§ 1a Abs. 1a BetrAVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie funktioniert der Arbeitgeberzuschuss ab 2026?",
+          "status": "freigegeben",
+          "frage": "Mein Arbeitgeber zahlt nur 12 Prozent Zuschuss. Ist das erlaubt?",
+          "antwort": "Nur wenn er tatsächlich weniger als 15 Prozent Sozialabgaben spart, etwa weil Ihr Gehalt über der Beitragsbemessungsgrenze der Krankenversicherung liegt; dann darf er sich auf die Ersparnis beschränken. Bei normalem Gehalt sind 15 Prozent Pflicht, seit 2022 auch für Altverträge; Tarifverträge dürfen abweichen. Fordern Sie die Differenz schriftlich nach.",
+          "quellen": [
+            "§ 1a Abs. 1a BetrAVG",
+            "§ 19 Abs. 1 BetrAVG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Welche Steuern und Abgaben fallen in der Rentenphase an?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 400 Euro Betriebsrente. Was ziehen Kranken- und Pflegekasse ab?",
+          "antwort": "Für die Krankenversicherung zählen nur 202,25 Euro über dem Freibetrag von 197,75 Euro, das sind rund 36 Euro bei 17,7 Prozent mit Zusatzbeitrag. Die Pflegeversicherung kennt nur eine Freigrenze: Weil 400 Euro darüber liegen, werden kinderlos 4,2 Prozent auf den vollen Betrag fällig, 16,80 Euro. Sie behalten etwa 347 Euro vor Steuern.",
+          "quellen": [
+            "§ 226 Abs. 2 SGB V",
+            "§ 57 Abs. 1 SGB XI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Mobilität und Jobwechsel bei der Direktversicherung",
+          "status": "freigegeben",
+          "frage": "Ich wechsle den Job. Was mache ich mit meiner Direktversicherung?",
+          "antwort": "Am günstigsten ist, dass der neue Arbeitgeber den bestehenden Vertrag übernimmt und weiterbespart; das kostet nichts, er muss es aber nicht. Alternativ übertragen Sie den Wert in dessen Versorgung, mit Rechtsanspruch bis zur Beitragsbemessungsgrenze, oft mit neuen Abschlusskosten. Sonst führen Sie den Vertrag privat fort oder stellen ihn beitragsfrei. Klären Sie das gleich im neuen Arbeitsvertrag.",
+          "quellen": [
+            "§ 4 Abs. 2 und 3 BetrAVG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "direktversicherung",
+        "entgeltumwandlung",
+        "arbeitgeberzuschuss",
+        "betriebsrentenfreibetrag",
+        "bezugsgroesse"
+      ]
+    }
+  },
+  {
+    "slug": "gehaltsumwandlung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Bei der Gehaltsumwandlung verzichten Sie auf Bruttogehalt, das stattdessen in die betriebliche Altersvorsorge oder in Sachleistungen fließt; der Anspruch auf Entgeltumwandlung besteht seit 2002 nach dem Betriebsrentengesetz.",
+          "2026 sind 8.112 Euro steuerfrei und 4.056 Euro sozialabgabenfrei, also 338 Euro im Monat; der Arbeitgeber muss 15 Prozent zuschießen, 50,70 Euro beim vollen Betrag.",
+          "200 Euro Umwandlung plus 30 Euro Zuschuss kosten netto nur rund 125 Euro; Gutverdiener knapp über der Beitragsbemessungsgrenze von 8.450 Euro sparen zusätzlich Sozialabgaben.",
+          "Sachbezüge bis 50 Euro, Jobticket, Dienstrad mit 0,25-Prozent-Regel oder Internetzuschuss müssen zusätzlich zum Lohn gewährt werden; klassische Gehaltsumwandlung ist dafür ausgeschlossen.",
+          "Kehrseite: weniger gesetzliche Rente, Kranken- und Arbeitslosengeld, nachgelagerte Besteuerung und volle Kranken- und Pflegebeiträge auf die Betriebsrente; die Verbraucherzentrale rät, nur bis zum Arbeitgeberzuschuss umzuwandeln und den Rest in einen ETF-Sparplan zu stecken."
+        ],
+        "quellen": [
+          "§ 1a BetrAVG",
+          "§ 3 Nr. 63, § 8 Abs. 4 EStG",
+          "Beitrag Gehaltsumwandlung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie funktioniert Gehaltsumwandlung praktisch?",
+          "status": "freigegeben",
+          "frage": "Kann mein Arbeitgeber die Entgeltumwandlung ablehnen?",
+          "antwort": "Nein, jeder in der gesetzlichen Rente Pflichtversicherte hat Anspruch auf Umwandlung bis 4.056 Euro im Jahr; der Arbeitgeber darf nur Durchführungsweg und Anbieter bestimmen, bei Tarifbindung gilt der Tarifvertrag. Einen Mindestbetrag von einem Hundertsechzigstel der Bezugsgröße, 2026 rund 297 Euro im Jahr, darf er verlangen.",
+          "quellen": [
+            "§ 1a Abs. 1 BetrAVG",
+            "§ 18 SGB IV"
+          ]
+        },
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Steuerliche Vorteile der Gehaltsumwandlung",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 8.600 Euro brutto. Was bringt mir die Umwandlung von 338 Euro?",
+          "antwort": "Doppelt: Die 338 Euro sind steuerfrei, und weil Ihr beitragspflichtiges Brutto damit unter die Beitragsbemessungsgrenze von 8.450 Euro fällt, sparen Sie zusätzlich Renten- und Arbeitslosenbeiträge auf 188 Euro. Ihr Arbeitgeber spart dort ebenfalls und muss 15 Prozent zuschießen. Netto kostet Sie der Beitrag bei 42 Prozent Steuersatz etwa 175 Euro.",
+          "quellen": [
+            "§ 3 Nr. 63 EStG",
+            "§ 1a Abs. 1a BetrAVG",
+            "Sozialversicherungs-Rechengrößenverordnung 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Sachleistungen als Alternative zur Gehaltsumwandlung",
+          "status": "freigegeben",
+          "frage": "Kann ich 50 Euro Gehalt in einen Tankgutschein umwandeln?",
+          "antwort": "Nein, die 50-Euro-Freigrenze gilt nur für Sachbezüge zusätzlich zum ohnehin geschuldeten Lohn; ein umgewandelter Gutschein wäre voll steuer- und beitragspflichtig. Anders beim Dienstrad: Das darf per Gehaltsumwandlung geleast werden und wird mit 0,25 Prozent des Listenpreises versteuert. Den Gutschein verhandeln Sie bei der nächsten Gehaltsrunde als Zusatz.",
+          "quellen": [
+            "§ 8 Abs. 4 EStG",
+            "§ 6 Abs. 1 Nr. 4 Satz 6 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Umsetzung der Gehaltsumwandlung: Wichtige Punkte",
+          "status": "freigegeben",
+          "frage": "Wie stark sinkt meine gesetzliche Rente durch 338 Euro Umwandlung?",
+          "antwort": "Um rund 3,30 Euro Monatsrente je Jahr der Umwandlung: 4.056 Euro weniger Brutto sind 0,078 Entgeltpunkte mal 42,52 Euro. Über 30 Jahre fehlen etwa 100 Euro im Monat, dafür kommt die Betriebsrente aus 30 mal 4.665 Euro plus Erträgen. Der Tausch lohnt sich nur mit Arbeitgeberzuschuss und günstigem Vertrag; auch Krankengeld und Arbeitslosengeld richten sich nach dem reduzierten Brutto.",
+          "quellen": [
+            "§ 63, § 70 SGB VI",
+            "Beitrag, Abschnitt Stolperfallen"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "entgeltumwandlung",
+        "betriebliche-altersvorsorge",
+        "sachbezugsfreigrenze",
+        "arbeitgeberzuschuss",
+        "beitragsbemessungsgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "gesetzliche-rente",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Rentenversicherung läuft im Umlageverfahren: Die Beiträge von heute zahlen die Renten von heute. 2026 bleibt der Satz das neunte Jahr bei 18,6 Prozent, je 9,3 für Arbeitnehmer und Arbeitgeber, die Beitragsbemessungsgrenze steigt auf 8.450 Euro im Monat, 101.400 Euro im Jahr.",
+          "Jedes Jahr mit Durchschnittsverdienst, 2026 51.944 Euro, bringt einen Entgeltpunkt, höchstens 1,95; ab Juli 2026 ist ein Punkt 42,52 Euro Monatsrente wert, 4,24 Prozent mehr als bisher, die Standardrente nach 45 Punkten 1.913 Euro.",
+          "Jahrgang 1960 geht 2026 mit 66 Jahren und 4 Monaten regulär in Rente, ab Jahrgang 1964 gilt 67; jeder Monat früher kostet 0,3 Prozent lebenslang, für Jahrgang 1963 mit 63 sind das 13,8 Prozent. Nach 45 Beitragsjahren geht Jahrgang 1962 mit 64 Jahren und 8 Monaten abschlagsfrei.",
+          "Freiwillige Beiträge zwischen 112,16 und 1.571,70 Euro im Monat stehen Selbstständigen und Nichtversicherten offen, ein Entgeltpunkt kostet 9.661,58 Euro; ab 50 lassen sich Abschläge durch Ausgleichszahlungen kaufen, absetzbar bis 30.826 Euro.",
+          "Das Rentenpaket 2025 hält das Rentenniveau bis 2031 bei 48 Prozent, Hinzuverdienst ist seit 2023 unbegrenzt, die Mütterrente wird ab 2028 vollständig; danach entscheidet eine Kommission über Reformen."
+        ],
+        "quellen": [
+          "§§ 35, 36, 63, 64, 68, 77, 187a SGB VI",
+          "§ 255e SGB VI (Rentenpaket 2025)",
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "Beitrag Gesetzliche Rentenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-3",
+          "abschnitt_titel": "Beitragssätze und Grenzen 2026 im Überblick",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 9.000 Euro brutto. Was ändert sich 2026 für mich beim Rentenbeitrag?",
+          "antwort": "Sie zahlen auf 8.450 statt 8.050 Euro, also 37,20 Euro mehr im Monat, Ihr Arbeitgeber ebenso; die 550 Euro darüber bleiben beitragsfrei. Im Gegenzug sammeln Sie 2026 bis zu 1,95 statt 1,91 Entgeltpunkte, das sind später knapp 2 Euro mehr Monatsrente für dieses Jahr.",
+          "quellen": [
+            "§ 159 SGB VI",
+            "Sozialversicherungs-Rechengrößenverordnung 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Renteneintrittsalter und Übergänge 2026",
+          "status": "freigegeben",
+          "frage": "Ich bin Jahrgang 1963 und will mit 64 gehen. Wie hoch ist mein Abschlag?",
+          "antwort": "Ihre Regelaltersgrenze liegt bei 66 Jahren und 10 Monaten; 34 Monate früher kosten 10,2 Prozent, lebenslang und auch auf eine spätere Hinterbliebenenrente. Voraussetzung sind 35 Versicherungsjahre für die Rente für langjährig Versicherte. Mit 45 Beitragsjahren könnten Sie als Jahrgang 1963 mit 64 Jahren und 10 Monaten sogar abschlagsfrei gehen.",
+          "quellen": [
+            "§§ 36, 38, 77, 236, 236b SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Rentenberechnung und Rentenwert 2026",
+          "status": "freigegeben",
+          "frage": "Ich habe 32 Entgeltpunkte. Wie viel Rente bekomme ich ab Juli 2026?",
+          "antwort": "32 mal 42,52 Euro sind 1.360,64 Euro brutto im Monat, wenn Sie zur Regelaltersgrenze gehen. Davon gehen rund 11 Prozent Kranken- und Pflegebeiträge ab, netto etwa 1.210 Euro vor Steuern. Jedes weitere Jahr mit Durchschnittsverdienst bringt einen Punkt mehr, jedes Jahr früherer Rentenbeginn kostet 3,6 Prozent.",
+          "quellen": [
+            "§ 64 SGB VI",
+            "Rentenwert ab 1. Juli 2026: 42,52 Euro"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Freiwillige Beiträge und Aufstockungsmöglichkeiten",
+          "status": "freigegeben",
+          "frage": "Ich bin 55 und möchte mit 63 ohne Abschläge in Rente. Was kostet das?",
+          "antwort": "Als Jahrgang 1971 liegt Ihre Regelaltersgrenze bei 67; 48 Monate Abschlag sind 14,4 Prozent. Bei erwarteten 1.600 Euro Rente sind das 230 Euro im Monat, deren Ausgleich derzeit rund 60.000 Euro kostet, zahlbar in Raten bis zum Rentenbeginn. Die Zahlungen sind bis 30.826 Euro je Jahr als Sonderausgaben absetzbar; die Auskunft dazu erteilt die Rentenversicherung auf Antrag ab 50.",
+          "quellen": [
+            "§ 187a SGB VI",
+            "§ 10 Abs. 1 Nr. 2 EStG"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "umlageverfahren",
+        "entgeltpunkte",
+        "rentenwert",
+        "regelaltersgrenze",
+        "rentenabschlag",
+        "ausgleichszahlung",
+        "freiwillige-rentenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "rentenversicherung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die gesetzliche Rentenversicherung bleibt 2026 stabil: 18,6 Prozent Beitrag, Beitragsbemessungsgrenze 8.450 Euro, Rentenerhöhung von 4,24 Prozent zum 1. Juli auf 42,52 Euro je Entgeltpunkt, gesichert durch die Haltelinie von 48 Prozent bis 2031.",
+          "Die Realität ist bescheidener als die Standardrente von 1.913 Euro: Im Schnitt werden rund 1.180 Euro ausgezahlt, Männer 1.374, Frauen 1.000 Euro; 28,5 Prozent der neuen Rentnerinnen bekommen unter 600 Euro.",
+          "Jahrgang 1960 geht mit 66 Jahren und 4 Monaten, besonders langjährig Versicherte des Jahrgangs 1962 mit 64 Jahren und 8 Monaten; Hinzuverdienst ist unbegrenzt, früher gehen kostet 0,3 Prozent je Monat.",
+          "Neurentner versteuern 84 Prozent, dazu gehen 7,3 Prozent plus halber Zusatzbeitrag für die Kranken- und 3,6 oder 4,2 Prozent für die Pflegeversicherung ab; der Grundfreibetrag liegt bei 12.348 Euro.",
+          "Ab 2027 löst das Altersvorsorgedepot mit bis zu 540 Euro Zulage und einem öffentlich verwalteten Standarddepot die Riester-Rente ab, Bestandsverträge laufen weiter. Faustregel: unter 35 Depot, 35 bis 50 Riester plus Betriebsrente, über 50 sicherheitsorientiert plus freiwillige Beiträge, Selbstständige Rürup."
+        ],
+        "quellen": [
+          "§§ 64, 68, 154 Abs. 3 SGB VI",
+          "§ 22 Nr. 1 EStG",
+          "Deutsche Rentenversicherung, Rentenversicherung in Zahlen",
+          "Beitrag Rentenversicherung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch ist die durchschnittliche Altersrente in Deutschland?",
+          "status": "freigegeben",
+          "frage": "Warum liegt die Durchschnittsrente so weit unter der Standardrente?",
+          "antwort": "Weil die Standardrente 45 volle Jahre mit exakt Durchschnittsverdienst voraussetzt; die meisten Erwerbsbiografien haben Teilzeit, Ausbildung, Arbeitslosigkeit, Kindererziehung oder Selbstständigkeit ohne Beiträge. Frauen kommen im Schnitt auf deutlich weniger Entgeltpunkte. Für Ihre Planung zählt nur die eigene Renteninformation, nicht der Durchschnitt.",
+          "quellen": [
+            "Deutsche Rentenversicherung, Rentenversicherung in Zahlen 2025",
+            "Beitrag, Abschnitt Durchschnittsrente"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wie wird die Rente besteuert?",
+          "status": "freigegeben",
+          "frage": "Ich bekomme 1.400 Euro Rente und gehe 2026 in Rente. Muss ich Steuern zahlen?",
+          "antwort": "Wahrscheinlich noch nicht: 84 Prozent von 16.800 Euro sind 14.112 Euro, abzüglich 102 Euro Werbungskostenpauschale und rund 2.000 Euro Kranken- und Pflegebeiträgen bleiben etwa 12.000 Euro, knapp unter dem Grundfreibetrag von 12.348 Euro. Mit Zusatzeinkünften oder der nächsten Rentenerhöhung rutschen Sie darüber; die Steuer bleibt dann zunächst bei wenigen Euro im Monat. Eine Erklärung ist fällig, sobald das Finanzamt Sie auffordert.",
+          "quellen": [
+            "§ 22 Nr. 1 EStG",
+            "§ 10 Abs. 1 Nr. 3 EStG",
+            "§ 32a EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Was ändert sich 2027 bei der privaten Altersvorsorge grundlegend?",
+          "status": "freigegeben",
+          "frage": "Ich habe einen Riester-Vertrag seit 2010. Muss ich 2027 etwas tun?",
+          "antwort": "Nein, Ihr Vertrag läuft mit Bestandsschutz und alter Förderung weiter. Sie können ab 2027 freiwillig ins Altersvorsorgedepot wechseln, ohne Zulagen zurückzuzahlen, nach fünf Vertragsjahren kostenfrei. Ob das lohnt, hängt von den Kosten Ihres Vertrags und Ihrem Sicherheitsbedürfnis ab, denn das Depot verzichtet auf die Beitragsgarantie.",
+          "quellen": [
+            "Beitrag, Abschnitt private Altersvorsorge 2027",
+            "Altersvorsorgereformgesetz (Beschluss März 2026)"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Strategie: Welche Altersvorsorge passt zu wem?",
+          "status": "freigegeben",
+          "frage": "Ich bin 30, angestellt, 3.500 Euro brutto. Wie sollte ich vorsorgen?",
+          "antwort": "Erst den Arbeitgeberzuschuss zur Betriebsrente mitnehmen, dann einen breit gestreuten ETF-Sparplan, den Sie ab 2027 ins geförderte Altersvorsorgedepot mit bis zu 540 Euro Zulage legen können; mit Kindern kann 2026 noch ein günstiger Riester-Vertrag sinnvoll sein. Bei 48 Prozent Rentenniveau fehlen später grob 20 bis 25 Prozent des Nettoeinkommens; der Rentenlückenrechner zeigt, welche Sparrate das bei 37 Jahren Laufzeit bedeutet.",
+          "quellen": [
+            "Beitrag, Abschnitt Strategie",
+            "Rentenlückenrechner auf finanzleser.de"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "standardrente",
+        "rentenniveau",
+        "haltelinie",
+        "altersvorsorgedepot",
+        "besteuerungsanteil",
+        "regelaltersgrenze"
+      ]
+    }
+  },
+  {
+    "slug": "rentenbeitrag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Rentenbeitrag beträgt 2026 unverändert 18,6 Prozent des Bruttolohns, je 9,3 Prozent für Arbeitnehmer und Arbeitgeber; bei 4.000 Euro brutto sind das zweimal 372 Euro. In der Knappschaft gelten 24,7 Prozent, davon 15,4 für den Arbeitgeber.",
+          "Die Beitragsbemessungsgrenze steigt auf 8.450 Euro im Monat, 101.400 Euro im Jahr, bundeseinheitlich; der Höchstbeitrag liegt bei 1.571,70 Euro, je 785,85 Euro, in der Knappschaft bei 2.568,80 Euro.",
+          "Aus Beiträgen werden Entgeltpunkte: Das Durchschnittsentgelt 2026 beträgt 51.944 Euro und bringt einen Punkt, 101.400 Euro das Maximum von 1,95; ein Punkt kostet 9.661,58 Euro.",
+          "Freiwillig Versicherte wählen zwischen 112,16 Euro, dem Beitrag auf die Minijob-Grenze von 603 Euro, und 1.571,70 Euro im Monat; Beiträge für 2025 können bis 31. März 2026 nachgezahlt werden.",
+          "Wer 8.400 Euro verdient, zahlt 2026 auf 350 Euro mehr Beitrag als 2025; alle Beiträge sind als Altersvorsorgeaufwendungen bis 30.826 Euro absetzbar."
+        ],
+        "quellen": [
+          "§§ 157 bis 160, 168, 197 SGB VI",
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "§ 10 Abs. 1 Nr. 2 EStG",
+          "Beitrag Rentenbeitrag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Beitragsbemessungsgrenze – Wer zahlt wie viel?",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 9.500 Euro. Wie viel Rentenbeitrag zahle ich 2026?",
+          "antwort": "785,85 Euro im Monat, den Höchstbetrag, weil nur 8.450 Euro verbeitragt werden; die 1.050 Euro darüber bleiben beitragsfrei, bringen aber auch keine Rentenpunkte. Gegenüber 2025 zahlen Sie 37,20 Euro mehr. Für die Krankenversicherung gilt eine niedrigere Grenze von 5.812,50 Euro.",
+          "quellen": [
+            "§ 159 SGB VI",
+            "Sozialversicherungs-Rechengrößenverordnung 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Freiwillige Rentenbeiträge – Welche Optionen gibt es?",
+          "status": "freigegeben",
+          "frage": "Ich bin Freiberuflerin ohne Versorgungswerk. Soll ich freiwillig in die Rente einzahlen?",
+          "antwort": "Es ist eine der günstigsten Möglichkeiten: 9.661,58 Euro kaufen 2026 einen Entgeltpunkt, also 42,52 Euro Monatsrente lebenslang, dynamisiert mit jeder Rentenanpassung; nach rund 19 Jahren Rentenbezug ist das Geld zurück, dazu kommen Reha-Anspruch und Hinterbliebenenrente. Der Beitrag ist als Sonderausgabe absetzbar. Schutz bei Erwerbsminderung gibt es allerdings nur mit drei Pflichtbeitragsjahren in den letzten fünf Jahren.",
+          "quellen": [
+            "§ 7 SGB VI",
+            "§ 43 Abs. 1 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-7",
+          "abschnitt_titel": "Was kosten Entgeltpunkte 2026?",
+          "status": "freigegeben",
+          "frage": "Wie viele Entgeltpunkte bekomme ich bei 60.000 Euro?",
+          "antwort": "1,155 Punkte: 60.000 geteilt durch das Durchschnittsentgelt von 51.944 Euro. Das entspricht ab Juli 2026 49,12 Euro Monatsrente für dieses eine Jahr. Über ein Berufsleben mit 40 solchen Jahren kämen 46 Punkte und rund 1.960 Euro brutto zusammen.",
+          "quellen": [
+            "§ 70 SGB VI",
+            "Anlage 1 SGB VI (Durchschnittsentgelt 2026)"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Auswirkungen der gestiegenen Beitragsbemessungsgrenze",
+          "status": "freigegeben",
+          "frage": "Warum steigt die Beitragsbemessungsgrenze jedes Jahr?",
+          "antwort": "Sie folgt der Lohnentwicklung des vorletzten Jahres, 2024 plus 5,16 Prozent, damit der Beitragsanteil der Gutverdiener nicht mit den Löhnen schrumpft. Betroffen sind nur Einkommen über der alten Grenze von 8.050 Euro; für die große Mehrheit ändert sich nichts. Mit der Grenze steigen auch die Höchstrente und der absetzbare Vorsorgehöchstbetrag.",
+          "quellen": [
+            "§§ 159, 160 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "beitragsbemessungsgrenze",
+        "entgeltpunkte",
+        "durchschnittsentgelt",
+        "freiwillige-rentenversicherung",
+        "knappschaftliche-rentenversicherung"
+      ]
+    }
+  },
+  {
+    "slug": "rentenversicherungsbeitrag",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Der Rentenversicherungsbeitrag beträgt 2026 zum neunten Mal in Folge 18,6 Prozent, paritätisch je 9,3 Prozent; bei 3.500 Euro brutto zahlen Sie 325,50 Euro, bei 5.000 Euro 465 Euro im Monat.",
+          "Die Beitragsbemessungsgrenze steigt von 8.050 auf 8.450 Euro, der maximale Arbeitnehmeranteil von 748,65 auf 785,85 Euro; seit 2025 gilt sie bundesweit einheitlich.",
+          "Pflichtversicherte Selbstständige wie Handwerker oder Lehrer zahlen den Regelbeitrag von 735,63 Euro, in den ersten drei Jahren die Hälfte, 367,82 Euro, oder einkommensbezogen; freiwillig Versicherte wählen zwischen 112,16 und 1.571,70 Euro.",
+          "Ein Durchschnittsverdiener mit 4.200 Euro zahlt 390,60 Euro, Gutverdiener über 8.450 Euro bleiben beim Höchstbeitrag; Einkommen darüber ist beitragsfrei.",
+          "Beiträge sind Sonderausgaben bis 30.826 Euro; freiwillige Beiträge für 2025 lassen sich bis 31. März 2026 nachzahlen, steuerlich zählt das Zahlungsjahr. Rechengrößen 2026: Durchschnittsentgelt 51.944 Euro, Bezugsgröße 3.955 Euro, Minijob-Grenze 603 Euro."
+        ],
+        "quellen": [
+          "§§ 2, 157, 165, 168 SGB VI",
+          "Sozialversicherungs-Rechengrößenverordnung 2026",
+          "§ 10 Abs. 1 Nr. 2 EStG",
+          "Beitrag Rentenversicherungsbeitrag"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie hoch ist der Rentenversicherungsbeitrag 2026?",
+          "status": "freigegeben",
+          "frage": "Warum zahlt mein Arbeitgeber den gleichen Beitrag wie ich?",
+          "antwort": "Das ist die Beitragsparität: Arbeitgeber und Arbeitnehmer tragen je 9,3 Prozent, zusammen 18,6 Prozent, die auf Ihrem Rentenkonto landen. Nur der Arbeitnehmeranteil steht auf der Gehaltsabrechnung, für Ihre Entgeltpunkte zählt aber das volle Bruttoentgelt. Bei Minijobs zahlt der Arbeitgeber 15 Prozent allein, Sie stocken 3,6 Prozent auf, wenn Sie sich nicht befreien lassen.",
+          "quellen": [
+            "§ 168 Abs. 1 SGB VI",
+            "§ 172 Abs. 3 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Was zahlen Selbstständige und freiwillig Versicherte?",
+          "status": "freigegeben",
+          "frage": "Ich bin selbstständige Physiotherapeutin. Bin ich rentenversicherungspflichtig?",
+          "antwort": "Ohne versicherungspflichtige Angestellte ja, wie Hebammen, Lehrer, Handwerker und Künstler: Sie zahlen den Regelbeitrag von 735,63 Euro, in den ersten drei Jahren 367,82 Euro, oder auf Antrag einkommensbezogen 18,6 Prozent Ihres Gewinns. Wer einen Angestellten über Minijob-Niveau beschäftigt, fällt aus der Pflicht. Melden Sie sich binnen drei Monaten nach dem Start, sonst drohen Nachforderungen.",
+          "quellen": [
+            "§ 2 Satz 1 Nr. 2 SGB VI",
+            "§ 165 SGB VI",
+            "§ 190a SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Auswirkungen auf verschiedene Einkommensgruppen",
+          "status": "freigegeben",
+          "frage": "Ich verdiene 4.200 Euro und bekomme 200 Euro Gehaltserhöhung. Was bleibt vom Rentenbeitrag?",
+          "antwort": "Von den 200 Euro gehen 18,60 Euro Rentenbeitrag ab, dazu Kranken-, Pflege- und Arbeitslosenbeiträge von rund 23 Euro und etwa 60 Euro Lohnsteuer; netto bleiben etwa 100 Euro. Dafür bringen die 2.400 Euro im Jahr 0,046 Entgeltpunkte, also knapp 2 Euro Monatsrente mehr, in jedem Jahr mit dem höheren Gehalt aufs Neue.",
+          "quellen": [
+            "§ 157 SGB VI",
+            "Beitragssätze der Sozialversicherung 2026"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Steuerliche Aspekte",
+          "status": "freigegeben",
+          "frage": "Ich zahle im März 2026 freiwillige Beiträge für 2025 nach. In welchem Jahr setze ich sie ab?",
+          "antwort": "Im Jahr 2026, weil für Sonderausgaben das Abflussprinzip gilt: Es zählt, wann das Geld die Rentenkasse erreicht, nicht für welches Jahr es gilt. Für die Rentenberechnung werden die Monate dagegen 2025 gutgeschrieben. Legen Sie die Nachzahlung deshalb in ein Jahr mit hohem Einkommen.",
+          "quellen": [
+            "§ 11 Abs. 2 EStG",
+            "§ 197 Abs. 2 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "regelbeitrag",
+        "beitragsbemessungsgrenze",
+        "bezugsgroesse",
+        "freiwillige-rentenversicherung",
+        "minijob"
+      ]
+    }
+  },
+  {
+    "slug": "renteninformation",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Die Renteninformation kommt jährlich an rund 31 Millionen Versicherte ab 27 Jahren mit mindestens fünf Beitragsjahren; sie zeigt Beiträge, Entgeltpunkte, die Rente bei Erwerbsminderung, die bisher erreichte Altersrente und eine Hochrechnung, ab 55 alle drei Jahre als ausführliche Rentenauskunft.",
+          "Ein Entgeltpunkt entsteht für ein Jahr mit Durchschnittsverdienst, 2026 51.944 Euro, maximal 1,95 Punkte; ab 1. Juli 2026 ist jeder Punkt 42,52 Euro Monatsrente wert, 4,24 Prozent mehr.",
+          "Rente rechnen: Entgeltpunkte mal Rentenwert; 30 Punkte ergeben 1.275,60 Euro, 40 Punkte 1.700,80 Euro brutto.",
+          "Häufigster Fehler: Der ausgewiesene Betrag ist brutto; 7,3 Prozent plus halber Zusatzbeitrag Kranken- und 3,6 oder 4,2 Prozent Pflegeversicherung, zusammen 11 bis 12 Prozent, und gegebenenfalls Steuern gehen ab. Die Hochrechnung unterstellt den Verdienst der letzten fünf Jahre in heutiger Kaufkraft.",
+          "Prüfen Sie Beschäftigungszeiten, Verdienste, Kindererziehung, Arbeitslosigkeit und Ausbildung; Lücken klärt die kostenlose Kontenklärung bei der Rentenversicherung."
+        ],
+        "quellen": [
+          "§ 109 SGB VI",
+          "§ 149 SGB VI (Kontenklärung)",
+          "§§ 64, 68, 70 SGB VI",
+          "Beitrag Renteninformation"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wer bekommt die Renteninformation und was ist darin enthalten?",
+          "status": "freigegeben",
+          "frage": "Ich bin 26 und habe noch keine Renteninformation bekommen. Ist etwas falsch?",
+          "antwort": "Nein, sie kommt erst ab dem 27. Geburtstag und nach fünf Jahren mit Beitragszeiten; Studienzeiten zählen dabei nicht. Wollen Sie früher wissen, was gespeichert ist, fordern Sie online einen Versicherungsverlauf an oder nutzen die Digitale Rentenübersicht, die auch private und betriebliche Verträge bündelt.",
+          "quellen": [
+            "§ 109 SGB VI",
+            "Rentenübersichtsgesetz"
+          ]
+        },
+        {
+          "abschnitt": "heading-6",
+          "abschnitt_titel": "Wie lesen Sie die erste Seite der Renteninformation richtig?",
+          "status": "freigegeben",
+          "frage": "In meiner Renteninformation stehen 900 Euro Erwerbsminderungsrente. Reicht das?",
+          "antwort": "Meist nicht: Das ist die volle Erwerbsminderungsrente, falls Sie heute gar nicht mehr arbeiten könnten, brutto, inklusive Zurechnungszeit bis zur Regelaltersgrenze, aber vor Abschlägen von bis zu 10,8 Prozent; bei teilweiser Erwerbsminderung gibt es die Hälfte, und viele Anträge werden abgelehnt. Die Lücke zum Nettoeinkommen schließt eine Berufsunfähigkeitsversicherung, die schon ab 50 Prozent Berufsunfähigkeit zahlt.",
+          "quellen": [
+            "§ 43 SGB VI",
+            "§ 59 SGB VI",
+            "§ 77 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-8",
+          "abschnitt_titel": "Das ist der häufigste Fehler beim Lesen der Renteninformation",
+          "status": "freigegeben",
+          "frage": "In meiner Renteninformation stehen 1.800 Euro. Womit kann ich 2045 wirklich rechnen?",
+          "antwort": "Netto vor Steuern mit rund 1.600 Euro nach Kranken- und Pflegebeiträgen, in heutiger Kaufkraft; bei 2 Prozent Inflation entsprechen 1.800 Euro im Jahr 2045 nur noch etwa 1.230 Euro von heute, wobei Rentenanpassungen einen Teil ausgleichen. Dazu kommt die Steuer mit einem Besteuerungsanteil von 93,5 Prozent für Rentenbeginn 2045. Der Rentenlückenrechner zeigt die fehlende Summe.",
+          "quellen": [
+            "Beitrag, Abschnitt häufigster Fehler",
+            "§ 22 Nr. 1 Satz 3 EStG"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Prüfen Sie Ihre Daten – das ist Ihr nächster Schritt",
+          "status": "freigegeben",
+          "frage": "In meinem Versicherungsverlauf fehlen zwei Jahre Kindererziehung. Was tun?",
+          "antwort": "Beantragen Sie die Kindererziehungszeiten mit dem Formular V0800 bei der Rentenversicherung, mit Geburtsurkunde; sie bringen je Kind bis zu drei Entgeltpunkte, ab 2028 auch für vor 1992 geborene Kinder vollständig, also rund 128 Euro Monatsrente je Kind. Die Zeiten werden nur einem Elternteil zugeordnet, standardmäßig der Mutter; die Kontenklärung ist jederzeit kostenlos.",
+          "quellen": [
+            "§ 56 SGB VI",
+            "§ 249 SGB VI (Mütterrente ab 2028)",
+            "§ 149 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "renteninformation",
+        "entgeltpunkte",
+        "rentenwert",
+        "rentenluecke",
+        "erwerbsminderungsrente"
+      ]
+    }
+  },
+  {
+    "slug": "rentenerhoehung",
+    "felder": {
+      "kurzfassung": {
+        "status": "freigegeben",
+        "erzeugt_am": "2026-09-07",
+        "erzeugt_von": "Leo-Entwurf aus dem Beitrag",
+        "saetze": [
+          "Zum 1. Juli 2026 steigen die gesetzlichen Renten um 4,24 Prozent, der Rentenwert von 40,79 auf 42,52 Euro; 21 Millionen Rentner profitieren, Ost und West gleich, die Prognosen lagen bei 3,73 Prozent.",
+          "Grund sind die Lohnsteigerung von 4,25 Prozent und die Haltelinie: Das Rentenpaket 2025 garantiert bis 2031 ein Rentenniveau von 48 Prozent, die alte Anpassungsformel ist so lange ausgesetzt.",
+          "1.000 Euro Rente werden 1.042,40 Euro, 1.500 Euro 1.563,60 Euro, 2.000 Euro 2.084,80 Euro; die Standardrente steigt um 77,85 Euro auf 1.913,40 Euro.",
+          "Wer vor April 2004 in Rente ging, bekommt die Erhöhung schon Ende Juni, alle anderen Ende Juli; die Rentenanpassungsmitteilung kommt zwischen 13. Juni und 24. Juli, ohne Antrag.",
+          "Jede Erhöhung ist voll steuerpflichtig, weil der Rentenfreibetrag als fester Eurobetrag eingefroren ist; viele rutschen so über den Grundfreibetrag von 12.348 Euro. Für 2027 werden 4,75 Prozent erwartet, ab 2028 ein Beitragssatz von 19,8 Prozent."
+        ],
+        "quellen": [
+          "§ 68 SGB VI",
+          "§ 255e SGB VI (Rentenpaket 2025)",
+          "Rentenwertbestimmungsverordnung 2026",
+          "§ 22 Nr. 1 Satz 3 EStG",
+          "Beitrag Rentenerhöhung"
+        ]
+      },
+      "leo_fragen": [
+        {
+          "abschnitt": "heading-2",
+          "abschnitt_titel": "Wie kommt die Rentenerhöhung 2026 zustande?",
+          "status": "freigegeben",
+          "frage": "Warum steigen die Renten stärker als die Löhne netto?",
+          "antwort": "Weil die Haltelinie das Rentenniveau bei 48 Prozent festhält: Sinkt das Verhältnis der Standardrente zum Durchschnittslohn darunter, wird der Rentenwert so hoch gesetzt, dass 48 Prozent erreicht werden, unabhängig von der alten Formel mit Nachhaltigkeitsfaktor. Bezahlt wird das aus Bundesmitteln und ab 2028 über einen höheren Beitragssatz.",
+          "quellen": [
+            "§ 255e SGB VI",
+            "§ 154 Abs. 3 SGB VI"
+          ]
+        },
+        {
+          "abschnitt": "heading-4",
+          "abschnitt_titel": "Wann kommt die erhöhte Rente auf dem Konto an?",
+          "status": "freigegeben",
+          "frage": "Meine Rente kam immer am Monatsende. Wann sehe ich die Erhöhung zum ersten Mal?",
+          "antwort": "Wenn Ihre Rente nach März 2004 begonnen hat, wird sie nachschüssig gezahlt: Die Juli-Rente kommt am letzten Bankarbeitstag im Juli, am 31. Juli 2026, erstmals mit den 4,24 Prozent. Vorschüssig gezahlte Altrenten sehen die Erhöhung schon Ende Juni. Die Mitteilung mit dem neuen Betrag kommt getrennt per Post.",
+          "quellen": [
+            "§ 118 Abs. 1 SGB VI",
+            "Beitrag, Abschnitt Auszahlung"
+          ]
+        },
+        {
+          "abschnitt": "heading-5",
+          "abschnitt_titel": "Steuerliche Auswirkungen der Rentenerhöhung",
+          "status": "freigegeben",
+          "frage": "Ich bin seit 2015 Rentner und zahle bisher keine Steuer. Ändert das die Erhöhung?",
+          "antwort": "Möglicherweise: Ihr Rentenfreibetrag von 30 Prozent der ersten Jahresrente ist als Eurobetrag eingefroren, die Erhöhung von 4,24 Prozent ist voll steuerpflichtig. Bei 1.500 Euro Rente sind das 763 Euro mehr steuerpflichtige Rente im Jahr. Liegen Sie nach Abzug Ihrer Krankenkassenbeiträge und 102 Euro Pauschale über 12.348 Euro, wird eine Steuererklärung fällig; die Steuer selbst bleibt zunächst bei wenigen Euro.",
+          "quellen": [
+            "§ 22 Nr. 1 Satz 3 EStG",
+            "§ 56 EStDV"
+          ]
+        },
+        {
+          "abschnitt": "heading-9",
+          "abschnitt_titel": "Wie berechnen Sie Ihre individuelle Rentenerhöhung?",
+          "status": "freigegeben",
+          "frage": "Ich habe 38,5 Entgeltpunkte und einen Abschlag von 7,2 Prozent. Wie hoch ist meine Rente ab Juli?",
+          "antwort": "38,5 mal 42,52 Euro sind 1.637,02 Euro, mal Zugangsfaktor 0,928 ergibt 1.519,15 Euro brutto; vorher waren es 1.457,34 Euro, also 61,81 Euro mehr. Abschläge bleiben prozentual und wachsen mit jeder Anpassung mit. Netto gehen rund 11 Prozent Sozialbeiträge ab.",
+          "quellen": [
+            "§§ 64, 77 SGB VI"
+          ]
+        }
+      ],
+      "glossar_begriffe": [
+        "rentenanpassung",
+        "rentenwert",
+        "haltelinie",
+        "rentenniveau",
+        "rentenfreibetrag",
+        "standardrente"
+      ]
+    }
+  }
+]

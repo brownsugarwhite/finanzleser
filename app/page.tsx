@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import FadenLanding from "@/components/faden/FadenLanding";
 import dynamic from "next/dynamic";
 import LandingIntro from "@/components/sections/LandingIntro";
 import FinanztoolsHero from "@/components/sections/FinanztoolsHero";
@@ -35,6 +37,15 @@ type KategorieBlock = {
 };
 
 export default function LandingPage() {
+  if (FADEN_AKTIV) {
+    return (
+      <>
+        <JsonLd data={webPageSchema({ name: "Finanzleser – Ratgeber, Rechner & Vergleiche", description: SITE_DESCRIPTION, path: "/" })} />
+        <JsonLd data={itemListSchema(RATGEBER_KATEGORIEN.map((k) => ({ name: k.heading, path: `/${k.slug}` })))} />
+        <FadenLanding />
+      </>
+    );
+  }
   return (
     <>
       <style>{`.logo-wrapper{pointer-events:none}.logo-claim{display:none}.sticky-nav{display:none!important}body{padding-top:0!important}[data-flip-id="leo"]{visibility:hidden}`}</style>

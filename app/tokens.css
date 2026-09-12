@@ -4,9 +4,12 @@
    ───────────────────────────────────────────── */
 
 :root {
-  /* Fonts */
-  --font-heading: var(--font-heading, "Merriweather", serif);
-  --font-body: var(--font-body, "Open Sans", sans-serif);
+  /* Fonts — die Quelle liefert next/font auf <html> (siehe app/layout.tsx).
+     Getrennte Namen (`-src`), damit hier kein Selbstbezug entsteht: stünde links und
+     rechts derselbe Name, wäre die Eigenschaft je nach Stylesheet-Reihenfolge ungültig
+     und würde NICHT auf den Ersatzwert zurückfallen. */
+  --font-heading: var(--font-heading-src, "Merriweather", serif);
+  --font-body: var(--font-body-src, "Open Sans", sans-serif);
 
   /* Brand */
   --color-brand: #45A117;

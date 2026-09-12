@@ -1,0 +1,301 @@
+/* =====================================================================================
+   statistik-formen.css — die dreizehn Formen aus Design A v2 („Die Zeitung“)
+
+   Vorlage: docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html.
+   Jede Regel trägt die Zeilennummer ihrer Vorlage. Maße, Farben und Zeiten sind 1:1
+   übernommen; die Farben laufen über die Faden-Variablen, die dieselben Werte tragen
+   (--ink #334A27, --paper #faf9f6, --muted #686C6A, --green #45A117, --green-ink #2E7A0B,
+   --pink #D3005E).
+
+   🚨 Keine Kästen, keine Rundungen, keine Schatten. README des Handoffs, „Linien & Flächen“:
+   „Keine Kartenboxen mit Schatten im Faden.“ Alles steht direkt auf dem Papier.
+   ===================================================================================== */
+
+.faden-shell {
+  /* Türkis des Handoffs. --color-tool-vergleiche ist #06D496 („Türkis hell“) und damit
+     eine andere Rolle — hier braucht es das dunkle Türkis der Werkzeugfarbe. */
+  --tuerkis: #0B7F66;
+}
+
+/*
+ * Unsichtbar, aber lesbar.
+ *
+ * Säulen und Linien setzen die Werte und ihre Beschriftungen aus Layoutgründen in zwei
+ * getrennte Reihen — erst alle Zahlen, dann alle Kategorien. Ein Mensch sieht die Zuordnung
+ * sofort, ein Textauszug nicht: dort steht „3,3 2,6 8,6 … unter 20 20–65 65–70". Deshalb
+ * liegt unter beiden Formen zusätzlich eine echte Tabelle, die nur nicht angezeigt wird.
+ * Kein display:none — das würde sie auch aus der Vorlesereihenfolge nehmen.
+ */
+.faden-shell .nur-vorlesen {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* Einblendung beim Eintritt ins Bild (fl-herz, Handoff Zeile 13) */
+@keyframes fl-herz {
+  0%   { opacity: 0; transform: translateY(14px) scale(.985); }
+  55%  { opacity: 1; transform: translateY(-2px) scale(1.008); }
+  78%  { transform: translateY(1px) scale(.999); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ── Gemeinsamer Rahmen ───────────────────────────────────────────────────────────── */
+/* 🚨 `clear: both` ist Pflicht, nicht Kosmetik. Ohne das beginnt eine Statistik neben
+   einer umflossenen Anzeige — und ihre Oberlinie (st--rahmen-oben, st--rahmen-unterlinie)
+   läuft dann mitten durch die Anzeigenfläche. Eine Linie, die durch Werbung läuft, sieht
+   nach Fehler aus; eine volle Satzbreite darf nie neben einem Float anfangen. */
+.faden-shell .st { display: block; clear: both; margin: 22px 0 0; }
+.faden-shell .st[data-stand="ruht"] { opacity: 0; }
+.faden-shell .st[data-stand="zeigt"] { animation: fl-herz .9s cubic-bezier(.2,.8,.2,1) both; }
+
+/* „blank“: Kicker ohne Linie, Beizeile darunter — Setzkasten (Handoff 949–951) */
+.faden-shell .st--rahmen-blank .st__unter { margin: 4px 0 0; }
+
+/* „oben“: Oberlinie, Kicker und Beizeile in einer Zeile (Handoff 623–631) */
+.faden-shell .st--rahmen-oben { border-top: 1px solid var(--rule-strong); padding-top: 10px; }
+.faden-shell .st--rahmen-oben .st__kopf,
+.faden-shell .st--rahmen-kopfzeile .st__kopf { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.faden-shell .st--rahmen-oben .st__unter,
+.faden-shell .st--rahmen-kopfzeile .st__unter { margin: 0; }
+
+/* „kopfzeile“: die Tabelle zieht ihre Doppellinie selbst (Handoff 632–634) */
+.faden-shell .st--rahmen-kopfzeile .st__kopf { margin-bottom: 8px; }
+
+/* „unterlinie“: Leos Listen (Handoff 899, 906, 916, 928, 935) */
+.faden-shell .st--rahmen-unterlinie .st__kopf { border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; }
+.faden-shell .st--rahmen-unterlinie .st__unter { margin: 4px 0 0; }
+
+.faden-shell .st__unter { font: italic 300 12.5px var(--serif); color: var(--muted); }
+/* Hinweis und Quelle standen beide auf 8 px Abstand und 12 px ohne eigene Zeilenhöhe —
+   zusammen mit der Form darüber ergab das drei Zeilen auf Stoß. Jetzt trennt der Hinweis
+   die Form ab, und die Quelle hängt an ihm. */
+.faden-shell .st__hinweis { margin: 14px 0 0; font: italic 300 12.5px/1.55 var(--serif); color: var(--muted); }
+.faden-shell .st__quelle { margin: 6px 0 0; font: italic 300 12.5px/1.55 var(--serif); color: var(--muted); }
+/* Ohne Hinweis darüber braucht die Quelle den vollen Abstand selbst. */
+.faden-shell .st__hinweis + .st__quelle { margin-top: 4px; }
+.faden-shell .st > .st__quelle:not(.st__hinweis + .st__quelle) { margin-top: 14px; }
+.faden-shell .st__quelle a { color: inherit; }
+
+/* ── Kreisdiagramm (Handoff 948–965) ──────────────────────────────────────────────── */
+.faden-shell .st-kreis { position: relative; aspect-ratio: 440 / 250; margin-top: 6px; }
+.faden-shell .st-kreis > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.faden-shell .st-kreis__hilfe { fill: none; stroke: rgba(51,74,39,.12); stroke-width: 1; }
+.faden-shell .st-kreis g { transition: opacity .3s; cursor: default; }
+.faden-shell .st-kreis__stueck { transition: stroke-dasharray 1.1s cubic-bezier(.2,.8,.2,1), stroke-width .25s; }
+.faden-shell .st-kreis__leiter { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 1; transition: stroke-dashoffset .6s ease-out; }
+.faden-shell .st-kreis__punkt { fill: var(--ink); transition: opacity .3s; }
+.faden-shell .st-kreis__marke { position: absolute; display: flex; flex-direction: column; white-space: nowrap; transition: opacity .4s; cursor: default; }
+/* Innere Ebene: nur das Abdunkeln beim Überfahren, ohne den Verzug des Einblendens. */
+.faden-shell .st-kreis__marke__inhalt { display: flex; flex-direction: column; transition: opacity .3s; }
+.faden-shell .st-kreis__marke b { font: 700 12.5px/1.2 var(--serif); }
+.faden-shell .st-kreis__marke__inhalt > span { font: 400 11px/1.3 var(--sans); color: var(--muted); }
+.faden-shell .st-kreis__mitte { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.faden-shell .st-kreis__mitte b { font: 900 clamp(20px,2.6vw,26px)/1 var(--serif); color: var(--ink); }
+.faden-shell .st-kreis__mitte span { margin-top: 4px; font: 400 10px var(--sans); color: var(--muted); letter-spacing: .12em; }
+
+/* ── Anteilsleiste (Handoff 624–631) ──────────────────────────────────────────────── */
+/* Die Höhe setzt die Komponente selbst — sie hängt davon ab, wie viele Reihen die
+   Beschriftungen brauchen, damit kein Fallstrich durch fremden Text läuft. */
+.faden-shell .st-anteile { position: relative; margin-top: 16px; }
+.faden-shell .st-anteile__leiste { display: flex; height: 18px; }
+.faden-shell .st-anteile__leiste i { transition: opacity .3s; border-right: 1px solid var(--paper); box-sizing: border-box; cursor: default; }
+.faden-shell .st-anteile__marke { position: absolute; top: 18px; display: flex; flex-direction: column; transition: opacity .3s; }
+.faden-shell .st-anteile__marke > i { width: 1px; background: var(--ink); }
+.faden-shell .st-anteile__marke > span { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; font: 400 12.5px var(--serif); color: var(--ink); padding-top: 3px; }
+.faden-shell .st-anteile__marke > span b { font: 700 13px var(--sans); }
+
+/* ── Säulen (Handoff 966–985) ─────────────────────────────────────────────────────── */
+.faden-shell .st-saeulen__legende { display: flex; gap: 16px; margin-top: 14px; font: 500 12px var(--sans); color: var(--muted); }
+.faden-shell .st-saeulen__legende span { display: inline-flex; align-items: center; gap: 6px; }
+.faden-shell .st-saeulen__legende i { width: 10px; height: 10px; }
+.faden-shell .st-saeulen__buehne { position: relative; height: 190px; margin-top: 10px; border-bottom: 1px solid var(--rule-strong); }
+.faden-shell .st-saeulen__linie { position: absolute; left: 0; right: 0; height: 1px; background: rgba(51,74,39,.12); }
+.faden-shell .st-saeulen__gitter { position: absolute; inset: 0; display: grid; align-items: end; gap: 0 10px; }
+.faden-shell .st-saeulen__gruppe { display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 100%; position: relative; }
+.faden-shell .st-saeulen__stab { position: relative; width: 40%; transform-origin: bottom; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .st-saeulen__stab b { position: absolute; left: 50%; top: -18px; transform: translateX(-50%); font: 700 11px var(--serif); transition: opacity .4s; }
+.faden-shell .st-saeulen__achse { display: grid; gap: 0 10px; margin-top: 6px; text-align: center; font: 500 11px var(--sans); color: var(--muted); }
+
+/* ── Spannen (Handoff 986–1004) ───────────────────────────────────────────────────── */
+.faden-shell .st-spannen { display: flex; flex-direction: column; margin-top: 12px; }
+.faden-shell .st-spannen__zeile { display: grid; grid-template-columns: 88px 1fr; gap: 14px; align-items: center; padding: 10px 0; border-top: 1px solid rgba(51,74,39,.1); }
+.faden-shell .st-spannen__name { font: 600 13.5px var(--serif); color: var(--ink); }
+.faden-shell .st-spannen__bahn { position: relative; height: 26px; }
+.faden-shell .st-spannen__grund { position: absolute; left: 0; right: 0; top: 13px; height: 1px; background: rgba(51,74,39,.15); }
+.faden-shell .st-spannen__balken { position: absolute; top: 12px; height: 3px; background: var(--ink); transform-origin: left; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .st-spannen__median { position: absolute; top: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--pink); margin-left: -4.5px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.faden-shell .st-spannen__min,
+.faden-shell .st-spannen__max { position: absolute; top: 0; font: 700 11px var(--sans); color: var(--muted); transition: opacity .4s; white-space: nowrap; }
+.faden-shell .st-spannen__min { transform: translateX(-100%); padding-right: 6px; }
+.faden-shell .st-spannen__max { padding-left: 6px; }
+.faden-shell .st-spannen__medianwert { position: absolute; top: 19px; transform: translateX(-50%); font: 700 11px var(--serif); color: var(--pink); transition: opacity .4s; white-space: nowrap; }
+.faden-shell .st-spannen__skala { display: flex; justify-content: space-between; margin: 2px 0 0 102px; font: 600 10.5px var(--sans); color: var(--muted); }
+
+/* ── Liniendiagramm (Handoff 649–668) ─────────────────────────────────────────────── */
+.faden-shell .st-linien { position: relative; aspect-ratio: 640 / 220; margin-top: 10px; }
+.faden-shell .st-linien > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.faden-shell .st-linien__wert { position: absolute; transform: translate(-50%,-100%); font: 700 11px var(--serif); white-space: nowrap; }
+.faden-shell .st-linien__achse { position: absolute; top: 86%; transform: translateX(-50%); font: 500 10.5px var(--sans); color: var(--muted); }
+.faden-shell .st-linien__notiz { position: absolute; right: 3%; transform: translateY(-100%); font: italic 11px var(--serif); color: var(--green-ink); }
+.faden-shell .st-linien__grund { stroke: rgba(51,74,39,.3); stroke-width: 1; }
+.faden-shell .st-linien__raster { stroke: rgba(51,74,39,.12); stroke-width: 1; stroke-dasharray: 2 4; }
+.faden-shell .st-linien__skala { font: 600 10px var(--sans); fill: var(--muted); }
+.faden-shell .st-linien__pfad { stroke-dasharray: 1; transition: stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .st-linien__fall { stroke: rgba(51,74,39,.18); stroke-width: 1; }
+.faden-shell .st-linien__punkt { fill: var(--paper); stroke-width: 1.5; }
+
+/* ── Zeitstrahl (Handoff 934–942) ─────────────────────────────────────────────────── */
+.faden-shell .st-zeit { position: relative; height: 150px; margin-top: 22px; }
+.faden-shell .st-zeit::before { content: ""; position: absolute; left: 0; right: 0; top: 70px; height: 1px; background: var(--ink); }
+.faden-shell .st-zeit__station { position: absolute; top: 0; bottom: 0; width: 0; }
+.faden-shell .st-zeit__knoten { position: absolute; left: -4px; top: 66px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); box-sizing: border-box; }
+.faden-shell .st-zeit__strich { position: absolute; left: 0; height: 26px; width: 1px; background: var(--ink); }
+.faden-shell .st-zeit__text { position: absolute; left: 0; white-space: nowrap; display: flex; flex-direction: column; }
+.faden-shell .st-zeit__text b { font: 700 13.5px var(--serif); color: var(--ink); }
+.faden-shell .st-zeit__text > span { font: 400 12.5px var(--sans); color: var(--muted); }
+
+/* ── Vergleichstabelle (Handoff 632–648) ──────────────────────────────────────────── */
+.faden-shell .st-tabelle__doppel { height: 2px; background: var(--ink); }
+.faden-shell .st-tabelle__doppel + .st-tabelle__doppel { height: 1px; margin-top: 2px; }
+.faden-shell .st-tabelle__rolle { overflow-x: auto; }
+.faden-shell .st-tabelle table { width: 100%; border-collapse: collapse; min-width: 520px; }
+.faden-shell .st-tabelle th { text-align: right; padding: 10px 8px 8px; position: relative; font: 700 15px var(--serif); color: var(--ink); white-space: nowrap; }
+.faden-shell .st-tabelle th.hervor { color: var(--pink); }
+.faden-shell .st-tabelle th i { position: absolute; top: 0; left: 8px; right: 8px; height: 2px; }
+.faden-shell .st-tabelle th small { display: block; font: 700 9px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: inherit; min-height: 11px; }
+/* Die Kopfzelle der ersten Spalte ist ein Kicker, kein Spaltenname — die th-Regel
+   darüber ist spezifischer als .kicker und muss hier vollständig überschrieben werden. */
+.faden-shell .st-tabelle .st-tabelle__kopf { text-align: left; padding: 10px 8px 8px 0; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .st-tabelle td { padding: 11px 8px; border-top: 1px solid rgba(51,74,39,.12); text-align: right; font: 500 14px var(--sans); font-variant-numeric: tabular-nums; }
+.faden-shell .st-tabelle td:first-child { padding: 11px 8px 11px 0; text-align: left; font: 400 14.5px var(--serif); color: var(--ink); }
+.faden-shell .st-tabelle td.hervor { font-weight: 600; background: rgba(211,0,94,.035); }
+.faden-shell .st-tabelle tbody tr { transition: background .25s; }
+.faden-shell .st-tabelle tbody tr:hover { background: rgba(51,74,39,.04); }
+.faden-shell .st-tabelle__schluss { height: 1px; background: var(--ink); }
+.faden-shell .st-tabelle__fuss { margin: 8px 0 0; font: italic 300 12px var(--serif); color: var(--muted); }
+
+/* ── Kennzahlen „Auf einen Blick“ (Handoff 889–894) ───────────────────────────────── */
+.faden-shell .st-vierer { display: grid; grid-template-columns: repeat(2,1fr); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.faden-shell .st-vierer__kachel { padding: 14px 16px 14px 0; }
+.faden-shell .st-vierer__zahl { display: flex; align-items: baseline; gap: 4px; margin-top: 4px; }
+.faden-shell .st-vierer__zahl b { font: 900 clamp(26px,2.6vw,34px)/1 var(--serif); font-variant-numeric: tabular-nums; }
+.faden-shell .st-vierer__zahl span { font: 700 14px var(--serif); }
+.faden-shell .st-vierer__text { display: block; margin-top: 4px; font: italic 300 12.5px var(--serif); color: var(--muted); }
+
+/* ── Kennzahlen-Liste mit Punktführung (Handoff 927–932) ──────────────────────────── */
+.faden-shell .st-kennzahlen { display: flex; flex-direction: column; }
+.faden-shell .st-kennzahlen__zeile { display: flex; align-items: baseline; gap: 8px; padding: 8px 0; border-top: 1px solid rgba(51,74,39,.08); font: 400 14.5px var(--serif); color: var(--ink); }
+.faden-shell .st-kennzahlen__zeile i { flex: 1; border-bottom: 1px dotted rgba(51,74,39,.45); transform: translateY(-4px); }
+.faden-shell .st-kennzahlen__zeile b { font: 700 14px var(--sans); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ── Schrittfolge (Handoff 897–903) ───────────────────────────────────────────────── */
+.faden-shell .st-schritte { display: flex; flex-direction: column; }
+.faden-shell .st-schritte__schritt { display: grid; grid-template-columns: 36px 1fr; gap: 14px; position: relative; }
+.faden-shell .st-schritte__nr { display: flex; flex-direction: column; align-items: center; }
+.faden-shell .st-schritte__nr b { font: 900 26px/1 var(--serif); color: var(--green); padding-top: 14px; }
+.faden-shell .st-schritte__nr i { flex: 1; width: 1px; margin-top: 8px; }
+.faden-shell .st-schritte__text { padding: 14px 0 16px; border-bottom: 1px solid rgba(51,74,39,.1); }
+.faden-shell .st-schritte__text b { display: block; font: 700 15px/1.35 var(--serif); color: var(--ink); }
+.faden-shell .st-schritte__text span { display: block; margin-top: 3px; font: 400 14px/1.55 var(--sans); color: var(--muted); }
+
+/* ── Abwägung (Handoff 904–914) ───────────────────────────────────────────────────── */
+.faden-shell .st-abwaegung { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; margin-top: 10px; }
+.faden-shell .st-abwaegung__spalte > b { display: block; font: 700 14px var(--serif); margin-bottom: 6px; }
+.faden-shell .st-abwaegung__spalte > span { display: grid; grid-template-columns: 14px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid rgba(51,74,39,.08); font: 400 14px/1.5 var(--sans); color: var(--ink); }
+.faden-shell .st-abwaegung__spalte > span b { font: 900 16px/1.3 var(--serif); }
+.faden-shell .st-abwaegung__spalte--pro { border-right: 1px solid rgba(51,74,39,.16); padding-right: 22px; }
+.faden-shell .st-abwaegung__spalte--pro > b { color: var(--green-ink); }
+.faden-shell .st-abwaegung__spalte--pro > span b { color: var(--green); }
+.faden-shell .st-abwaegung__spalte--contra > b,
+.faden-shell .st-abwaegung__spalte--contra > span b { color: var(--pink); }
+
+/* ── Begriffe (Handoff 915–921) ───────────────────────────────────────────────────── */
+.faden-shell .st-begriffe { margin: 0; display: flex; flex-direction: column; }
+.faden-shell .st-begriffe > div { display: grid; grid-template-columns: minmax(120px,38%) 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(51,74,39,.08); }
+.faden-shell .st-begriffe dt { font: 700 14.5px/1.4 var(--serif); color: var(--green-ink); margin: 0; }
+.faden-shell .st-begriffe dd { margin: 0; font: 400 14px/1.5 var(--sans); color: var(--ink); }
+
+/* ── Vergleichsrechner-Einhänger (Handoff 1005–1012) ──────────────────────────────── */
+.faden-shell .st-vergleich { border-top: 2px solid var(--tuerkis); padding-top: 12px; }
+.faden-shell .st-vergleich__kicker { display: inline-flex; align-items: center; gap: 6px; color: var(--green-ink); }
+.faden-shell .st-vergleich__kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--tuerkis); }
+.faden-shell .st-vergleich h3 { margin: 6px 0 10px; font: 700 20px/1.25 var(--serif); color: var(--ink); }
+
+/* ── Breite Darstellung ab 1060 px (Handoff: Breakpoint „breit“) ──────────────────── */
+@media (min-width: 1060px) {
+  .faden-shell .st-vierer { grid-template-columns: repeat(4,1fr); }
+  .faden-shell .st-vierer[data-spalten="3"] { grid-template-columns: repeat(3,1fr); }
+  .faden-shell .st-vierer__kachel + .st-vierer__kachel { border-left: 1px solid rgba(51,74,39,.16); padding-left: 16px; }
+}
+
+/* ── Schmale Darstellung ──────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .faden-shell .st-abwaegung { grid-template-columns: 1fr; gap: 18px; }
+  .faden-shell .st-abwaegung__spalte--pro { border-right: 0; padding-right: 0; }
+  .faden-shell .st-spannen__zeile { grid-template-columns: 1fr; gap: 4px; }
+  .faden-shell .st-spannen__skala { margin-left: 0; }
+  .faden-shell .st-begriffe > div { grid-template-columns: 1fr; gap: 2px; }
+  .faden-shell .st-zeit { height: auto; }
+}
+
+/* Wer Bewegung abbestellt hat, sieht sofort den Endzustand. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .st,
+  .faden-shell .st * { animation: none !important; transition: none !important; }
+}
+
+/* ── Schaukasten (app/schaukasten/statistiken) ────────────────────────────────────── */
+.faden-shell .schaukasten-formen { max-width: 720px; margin: 0 auto; padding: 40px 20px 120px; }
+.faden-shell .schaukasten-formen h1 { font: 900 clamp(26px,3vw,40px)/1.15 var(--serif); color: var(--ink); letter-spacing: -.01em; margin: 6px 0 14px; }
+.faden-shell .schaukasten-formen__warnung { font: 400 14px/1.6 var(--sans); color: var(--ink); border-left: 3px solid var(--pink); padding: 6px 14px; margin: 0 0 10px; }
+.faden-shell .schaukasten-formen__block { margin-top: 56px; padding-top: 18px; border-top: 1px solid rgba(51,74,39,.16); }
+.faden-shell .schaukasten-formen__block h2 { display: flex; align-items: baseline; gap: 10px; font: 700 17px var(--serif); color: var(--muted); margin: 0; }
+.faden-shell .schaukasten-formen__block h2 span { font: 900 22px var(--serif); color: var(--green); }
+.faden-shell .schaukasten-formen__block h2 code { font: 500 12px var(--sans); color: var(--muted); }
+.faden-shell .schaukasten-formen__befunde { margin: 14px 0 0; padding: 8px 14px; list-style: none; border-left: 3px solid var(--pink); font: 400 13px/1.6 var(--sans); color: var(--pink); }
+
+/* =====================================================================================
+   Bestandsstatistiken aus dem Meta-Feld `statistiken`
+
+   Dieselben Formen, dazu zwei Bedienelemente, die der Handoff nicht kennt, der Bestand
+   aber braucht: der Umschalter zwischen Reihen (13 Statistiken) und der Regler (8).
+   Beide in der Sprache der Zeitung — Haarlinie statt Fläche, keine Rundung außer der
+   Chip-Pille, die der Handoff so vorgibt.
+   ===================================================================================== */
+
+/* Umschalter — Chip nach README des Handoffs, „Buttons“ */
+.faden-shell .st__umschalter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.faden-shell .st__umschalter .kicker { margin-right: 4px; }
+.faden-shell .st__chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 16px; border: 1px solid rgba(51,74,39,.25); border-radius: 999px; background: transparent; color: var(--muted); font: 500 13px var(--sans); cursor: pointer; transition: border-color .2s, color .2s, transform .2s, background .2s; }
+.faden-shell .st__chip:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
+.faden-shell .st__chip--aktiv { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+/* Regler — ohne Kasten, nur Haarlinie darüber */
+.faden-shell .st__regler { display: grid; gap: 6px; margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(51,74,39,.16); }
+.faden-shell .st__regler label { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+.faden-shell .st__regler label > b { font: 700 15px var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.faden-shell .st__regler input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--green); }
+.faden-shell .st__regler-ergebnis { font: 400 14px var(--serif); color: var(--muted); }
+.faden-shell .st__regler-ergebnis b { color: var(--pink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Balkenliste — Bildsprache der Spannen (Handoff 986–1004), siehe formen/Balkenliste.tsx */
+.faden-shell .st-balken { display: flex; flex-direction: column; margin-top: 12px; }
+/* Die Beschriftung steht rechtsbündig an der Bahn. Links ausgerichtet klaffte bei kurzen
+   Wörtern eine Lücke von halber Spaltenbreite zwischen Text und Balken. */
+.faden-shell .st-balken__zeile { display: grid; grid-template-columns: minmax(110px,32%) 1fr auto; gap: 14px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(51,74,39,.1); transition: opacity .2s; }
+.faden-shell .st-balken__zeile.gedimmt { opacity: .4; }
+.faden-shell .st-balken__name { font: 400 14.5px/1.35 var(--serif); color: var(--ink); overflow-wrap: anywhere; text-align: right; }
+.faden-shell .st-balken__bahn { position: relative; height: 26px; }
+.faden-shell .st-balken__grund { position: absolute; left: 0; right: 0; top: 13px; height: 1px; background: rgba(51,74,39,.15); }
+.faden-shell .st-balken__balken { position: absolute; left: 0; top: 12px; height: 3px; transform-origin: left; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .st-balken__wert { font: 700 14px var(--sans); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+.faden-shell .st-balken__zeile--ihr .st-balken__name,
+.faden-shell .st-balken__zeile--ihr .st-balken__wert { color: var(--pink); }
+
+@media (max-width: 720px) {
+  .faden-shell .st-balken__zeile { grid-template-columns: 1fr auto; }
+  .faden-shell .st-balken__name { text-align: left; }
+  .faden-shell .st-balken__bahn { grid-column: 1 / -1; height: 14px; }
+  .faden-shell .st-balken__grund { top: 7px; }
+  .faden-shell .st-balken__balken { top: 6px; }
+}

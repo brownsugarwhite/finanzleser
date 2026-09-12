@@ -1,4 +1,10 @@
 import Link from "next/link";
+import { FADEN_AKTIV } from "@/lib/faden/flag";
+import KartenKapitel from "@/components/faden/KartenKapitel";
+import ListenKarte from "@/components/faden/karten/ListenKarte";
+import BlattStart from "@/components/faden/kopf/BlattStart";
+import { buildVergleichUrl } from "@/lib/urls";
+import { decodeHtmlEntities as decodeEntitiesFaden } from "@/lib/html-utils";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getAllVergleiche } from "@/lib/wordpress";
@@ -9,6 +15,14 @@ export default async function VergleichePage() {
   // Alle veröffentlichten Vergleiche aus WordPress (CPT). Die Embed-Config liegt
   // im CPT selbst – neue Vergleiche erscheinen hier automatisch ohne Code-Änderung.
   const vergleiche = await getAllVergleiche();
+  if (FADEN_AKTIV) {
+    return (
+      <KartenKapitel schluessel="blatt:vergleiche" titel="Vergleiche" kicker="Finanztools · Anzeige · Vergleiche mit Partnerlinks" beschreibung={`${vergleiche.length} Vergleiche. Finanzleser erhält eine Provision, die Reihenfolge bleibt redaktionell.`} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Vergleiche", href: "/finanztools/vergleiche" }]} url="/finanztools/vergleiche">
+        <BlattStart schluessel="finanztools" a="vergleich" />
+        <ListenKarte gruppen={[{ eintraege: [...vergleiche].map((v) => ({ titel: decodeEntitiesFaden(v.title).replace(/\s*[–-]?\s*Vergleich$/i, "").trim(), href: buildVergleichUrl(v.slug), dot: "vergleich" as const })).sort((a, b) => a.titel.localeCompare(b.titel, "de")) }]} />
+      </KartenKapitel>
+    );
+  }
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
