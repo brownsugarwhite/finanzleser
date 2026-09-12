@@ -19,7 +19,7 @@ import { useState, useSyncExternalStore } from "react";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import Kassensturz, { type Ziel } from "./Kassensturz";
 import Fortschrittsreihe from "./Fortschrittsreihe";
-import { KS_EREIGNIS, KS_SPEICHER, datumLang } from "./logik";
+import { KS_EREIGNIS, KS_SPEICHER, datumLang, offeneFragen } from "./logik";
 
 function abonnieren(cb: () => void): () => void {
   window.addEventListener("storage", cb);
@@ -50,13 +50,17 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
   }
 
   const untertitel = daten.untertitel ? ` · ${daten.untertitel}` : "";
+  // 🚨 Die Zahl kommt aus den Daten, nicht aus dem Text. Das CMS bestimmt, wie viele
+  // Fragen offen sind; ein fest getipptes „fünf" auf dem Deckblatt widerspräche dem
+  // Fortschritt im Lauf darunter (gemessen 12.09.2026: acht Segmente).
+  const anzahl = Math.max(1, offeneFragen(daten.fragen || [], {}).length);
   return (
     <div className="ks ks-deck" id="kassensturz">
       <div className="ks__kopf">
         <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{untertitel}</span>
         <span className="ks__stand">{erg ? "Ausgewertet" : begonnen ? "Angefangen" : "Noch nicht begonnen"}</span>
       </div>
-      <Fortschrittsreihe nr={erg ? 6 : 0} gesamt={5} />
+      <Fortschrittsreihe nr={erg ? anzahl + 1 : 0} gesamt={anzahl} />
       <div className="ks__buehne">
         {erg ? (
           <>
@@ -67,7 +71,7 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
         ) : (
           <>
             <div className="ks__frage">Wie gut sind Sie eigentlich aufgestellt?</div>
-            <p className="ks__hinweis">Fünf Fragen, keine Tastatur. Am Ende sehen Sie Ihr Profil, Ihre Ampel und Ihre drei größten Lücken — sofort und vollständig.</p>
+            <p className="ks__hinweis">{anzahl} Fragen, keine Tastatur. Am Ende sehen Sie Ihr Profil, Ihre Ampel und Ihre drei größten Lücken — sofort und vollständig.</p>
             <button type="button" className="ks__weiter" onClick={() => setOffen(true)}>{begonnen ? "Weitermachen" : "Kassensturz starten"}<i>→</i></button>
           </>
         )}

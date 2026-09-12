@@ -37,8 +37,9 @@ export default function KassensturzTeaser() {
           <span className="kicker kicker--pink">Finanz-Kassensturz</span>
           <span className="ks__stand">{erg ? "Ergebnis" : "3 Minuten"}</span>
         </div>
-        {/* Fünf Segmente als Vorschau — der echte Lauf zählt die offenen Fragen. */}
-        <Fortschrittsreihe nr={erg ? 6 : 0} gesamt={5} />
+        {/* Acht Segmente, wie der Satz darunter sagt. Der Teaser kennt die Daten nicht —
+            der echte Lauf zählt die offenen Fragen und kann kürzer ausfallen. */}
+        <Fortschrittsreihe nr={erg ? 9 : 0} gesamt={8} />
         <div className="ks__buehne">
           {erg ? (
             <>
