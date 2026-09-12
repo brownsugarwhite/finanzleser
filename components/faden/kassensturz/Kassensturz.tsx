@@ -14,6 +14,7 @@ import type { KassensturzDaten, KassensturzFrage } from "@/lib/faden/optionen";
 import { useFaden } from "@/components/faden/FadenProvider";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 import Ikon from "./Ikon";
+import Fortschrittsreihe from "./Fortschrittsreihe";
 import { LeoRede } from "@/components/faden/leo/Blase";
 import Tacho from "./Tacho";
 import { type Antworten, KASSENSTURZ_URL, betrag, datumLang, ergebnis, heuteLokal, ikonFuer, istSchaetzfrage, naechsterIndex, offeneFragen, schaetzPunkte, standLesen, standSchreiben } from "./logik";
@@ -23,12 +24,22 @@ export interface Ziel { href: string; titel: string }
 const TEILEN_URL = "https://www.finanzleser.de" + KASSENSTURZ_URL;
 const PLUS_HINWEIS = "Kommt mit Finanzleser Plus";
 
-/** Stand-Zeile und Fortschritt für eine Frage (Prototyp `naechste()`). */
-function standFuer(fragen: KassensturzFrage[], idx: number, a: Antworten): { breite: number; text: string } {
-  if (idx >= fragen.length) return { breite: 100, text: "Ergebnis" };
+/**
+ * Stand-Zeile und Fortschritt für eine Frage (Prototyp `naechste()`).
+ *
+ * Der Fortschritt ist seit dem 12.09.2026 eine Reihe von Segmenten wie in Design A v2
+ * (Zeile 829–831 der Übergabe), kein durchgehender Balken mehr — deshalb `nr` und
+ * `gesamt` statt einer Prozentbreite.
+ *
+ * 🚨 `gesamt` ist KEINE feste Fünf. Die Zahl kommt aus den offenen Fragen, und die
+ * `wenn`-Bedingungen filtern je nach Antwort. Wer sie hart setzt, lässt das Raster
+ * mitten im Lauf springen.
+ */
+function standFuer(fragen: KassensturzFrage[], idx: number, a: Antworten): { nr: number; gesamt: number; text: string } {
   const alle = offeneFragen(fragen, a);
+  if (idx >= fragen.length) return { nr: alle.length + 1, gesamt: alle.length, text: "Ergebnis" };
   const nr = alle.indexOf(fragen[idx]) + 1;
-  return { breite: Math.round((100 * (nr - 1)) / Math.max(1, alle.length)), text: `Frage ${nr} von ${alle.length}` };
+  return { nr, gesamt: alle.length, text: `Frage ${nr} von ${alle.length}` };
 }
 
 function verzug(i: number): CSSProperties {
@@ -165,7 +176,7 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
       const e = ergebnis(daten, a);
       const heute = heuteLokal();
       standSchreiben({ antworten: a, idx: i, fertig: true, datum: heute, score: e.score, luecken: e.luecken.length, belohnt: true, schaetzBelohnt: !!alt?.schaetzBelohnt });
-      setStand({ breite: 100, text: "Ergebnis" });
+      setStand(standFuer(fragen, i, a));
       setDatum(heute);
       wechsel(() => {
         setIdx(i);
@@ -223,9 +234,7 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
           <span className="kicker kicker--gruen ks__marke"><i /> {daten.titel}{daten.untertitel ? ` · ${daten.untertitel}` : ""}</span>
           <span className="ks__stand">{stand.text}</span>
         </div>
-        {/* Fortschritt wie in den Checklisten: Haarlinie über die volle Breite,
-            darauf ein Balken, der von links mitwächst. */}
-        <div className="ks__fortschritt" aria-hidden="true"><i style={{ width: `${stand.breite}%` }} /></div>
+        <Fortschrittsreihe nr={stand.nr} gesamt={stand.gesamt} />
         <div className={"ks__buehne" + (buehne ? ` ${buehne}` : "")}>
           {frage && istSchaetzfrage(frage) && (
             <SchaetzFrage key={frage.id} f={frage} onTipp={(w, p) => tipp(frage, w, p)} onWeiter={(w) => naechste({ ...antworten, [frage.id]: w }, idx + 1)} />

@@ -17,8 +17,14 @@
 .faden-shell .ks__marke { display: inline-flex; align-items: center; gap: 6px; }
 .faden-shell .ks__marke i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
 .faden-shell .ks__stand { font: italic 300 13px var(--serif); color: var(--muted); text-transform: none; letter-spacing: normal; font-variant-numeric: tabular-nums; }
-.faden-shell .ks__fortschritt { position: relative; height: 5px; border-bottom: 1px solid var(--ink); margin: 12px 0 26px; }
-.faden-shell .ks__fortschritt i { position: absolute; top: 0; left: 0; height: 5px; background: var(--ink); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+/* Fortschritt als Segmentreihe, 1:1 aus Design A v2 (Übergabe Zeile 829–831): erledigt
+   grün, das laufende in Tinte und einmal von links aufgezogen, offene fast durchsichtig.
+   Der Ton der offenen Segmente steht wörtlich — er liegt zwischen --rule und --rule-fein. */
+.faden-shell .ks__fortschritt { display: flex; gap: 5px; height: 3px; margin: 12px 0 26px; }
+.faden-shell .ks__fortschritt i { flex: 1; height: 3px; background: rgba(51, 74, 39, .14); transition: background .4s; transform-origin: left; }
+.faden-shell .ks__fortschritt i.ist-erledigt { background: var(--green); }
+.faden-shell .ks__fortschritt i.ist-jetzt { background: var(--ink); animation: ks-linie .6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ks-linie { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .faden-shell .ks__buehne { display: grid; gap: 18px; justify-items: start; text-align: left; transition: opacity .22s ease, transform .22s ease; }
 .faden-shell .ks__buehne.geht { opacity: 0; transform: translateY(-8px); }
 .faden-shell .ks__buehne.kommt { opacity: 0; transform: translateY(10px); transition: none; }
