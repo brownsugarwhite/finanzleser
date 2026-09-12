@@ -145,11 +145,21 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
     const reduziert = reduzierteBewegung();
     const timer: ReturnType<typeof setTimeout>[] = [];
     const kacheln = Array.from(reihe.current?.querySelectorAll<HTMLElement>(".werkzeug-k") ?? []);
+    // Die Trennlinien gehören zu den Kacheln: Trenner i-1 steht zwischen Kachel i-1 und i
+    // und kommt mit der ANKOMMENDEN Kachel i. Sonst stünden drei Striche im leeren Raum,
+    // bevor überhaupt etwas angedockt ist.
+    const trenner = Array.from(reihe.current?.querySelectorAll<HTMLElement>(".trenner--voll") ?? []);
     if (reduziert) {
       kacheln.forEach((k) => { k.style.transition = "none"; k.classList.add("da"); });
+      // Die Bewegung sitzt am `::before`, nicht am Element — abgeschaltet wird sie per Media-Query in faden-hover.css.
+      trenner.forEach((t) => t.classList.add("da"));
     } else {
       kacheln.forEach((k, i) => { k.style.transform = ANDOCK_START[i] ?? ""; });
-      timer.push(setTimeout(() => { kacheln.forEach((k, i) => { timer.push(setTimeout(() => k.classList.add("da"), (ANDOCK_NACH[i] ?? 2.2) * 1000)); }); }, 40));
+      timer.push(setTimeout(() => {
+        kacheln.forEach((k, i) => {
+          timer.push(setTimeout(() => { k.classList.add("da"); trenner[i - 1]?.classList.add("da"); }, (ANDOCK_NACH[i] ?? 2.2) * 1000));
+        });
+      }, 40));
     }
     timer.push(setTimeout(() => cta.current?.classList.add("da"), reduziert ? 0 : CTA_NACH));
 

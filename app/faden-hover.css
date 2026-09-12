@@ -27,6 +27,14 @@
 .faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
 .faden-shell .werkzeugreihe .trenner { --linie: 28px; }
 .faden-shell .werkzeugreihe .trenner--voll { --linie: 78px; }
+/* 🚨 Die Linie kommt mit ihrer Kachel, nicht vor ihr. Bis zum 12.09.2026 stand der
+   Trenner vom ersten Frame an da, während die Kacheln erst nach 1,9–2,2 s andockten —
+   drei Striche im leeren Raum. Der Zustand hängt jetzt am selben `.da` wie die Kachel,
+   gesetzt im selben Timer-Callback (HeroLanding.tsx). Gescopet auf die Werkzeugreihe,
+   damit die Trenner in den Rubrikenspalten unberührt bleiben. */
+.faden-shell .werkzeugreihe .trenner--voll::before { transform: translateY(-50%) scaleY(0); transform-origin: center; transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .werkzeugreihe .trenner--voll.da::before { transform: translateY(-50%) scaleY(1); }
+@media (prefers-reduced-motion: reduce) { .faden-shell .werkzeugreihe .trenner--voll::before { transition: none; } }
 .faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
 .faden-shell .werkzeug-k.da { opacity: 1; transform: none !important; }
 .faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
