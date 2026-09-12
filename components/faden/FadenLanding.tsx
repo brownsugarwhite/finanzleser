@@ -6,6 +6,10 @@
  * bestehenden Gettern; JSON-LD bleibt wie auf der alten Startseite (app/page.tsx).
  */
 import { getNavItems, getLatestPosts } from "@/lib/wordpress";
+import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
+import { werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { buildPostUrl } from "@/lib/urls";
+import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
 import { buildGlossarUrl } from "@/lib/urls";
 import { DOKUMENTE } from "@/lib/faden/bestand";
@@ -18,6 +22,9 @@ import KassensturzStart from "./kassensturz/KassensturzStart";
 import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import { getFadenOptionen } from "@/lib/faden/optionen";
 import Begruessung from "./Begruessung";
+import AusDemNewsletter from "./landing/AusDemNewsletter";
+import WochenbriefTeaser from "./landing/WochenbriefTeaser";
+import PlusTeaser from "./landing/PlusTeaser";
 import { spielUrl } from "./spiele/spielUrl";
 import { spielAm } from "@/lib/faden/spiele";
 import Insel from "@/components/faden/kette/Insel";
@@ -27,10 +34,11 @@ import BegriffWink from "@/components/faden/glossar/BegriffWink";
 import { getGlossarIndex, loeseBegriffe } from "@/lib/faden/glossar";
 
 /** Vorschläge unter der Eingabe: Fragen an Leo (Chips wie im Prototyp), dazu ein Sprung in die Werkzeuge. */
+/** Vorschläge unter der Eingabe.
+ *  🚨 Nur noch SPRÜNGE. Die Gesprächsfragen stehen seit dem 12.09.2026 im eigenen Block
+ *  „Weiterreden mit Leo" am Fadenende — beides zusammen ergäbe zweimal dieselben Fragen
+ *  direkt übereinander. */
 const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string }[] = [
-  { text: "Wie viel Unterhalt für zwei Kinder?", frage: true },
-  { text: "Wie hoch ist das Kindergeld 2026?", frage: true },
-  { text: "Wie viel Steuer zahle ich auf meine Rente?", frage: true },
   { text: "Kassensturz: Wie gut bin ich aufgestellt?", href: "/kassensturz" },
   { text: "Alle Finanztools", href: "/finanztools" },
 ];
@@ -39,8 +47,10 @@ export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
   const nav = await getNavItems();
   const rubriken = await baueSpalten(nav);
-  // Jüngster Beitrag für „Neueste Ausgabe" über den vier Rubriken.
-  const neueste = (await getLatestPosts(1))[0] || null;
+  // Ein Zug für beides: [0] ist das Kopfblatt „Neueste Ausgabe", [1..3] die drei Ratgeber
+  // der Auslese. So steht kein Titel zweimal auf der Seite.
+  const juengste = await getLatestPosts(4);
+  const neueste = juengste[0] || null;
   // Kassensturz im Kapitel „Heute": dieselben Daten und Ziele wie auf /kassensturz.
   const { kassensturz } = await getFadenOptionen();
   const ksZiele = kassensturz ? await zieleAufloesen(kassensturz) : {};
@@ -56,6 +66,13 @@ export default async function FadenLanding() {
   const glossar = await getGlossarIndex();
   const avb = glossar.get("avb");
   const begriffe = avb ? await loeseBegriffe([avb]) : [];
+  // Der Werkzeugindex ist über getWerkzeugZahlen() im Layout ohnehin warm — die Auslese
+  // und Leos Empfehlungen kosten deshalb keine einzige zusätzliche WP-Abfrage.
+  const werkzeuge = await getWerkzeugIndex();
+  const auslese: AusleseEintrag[] = [
+    ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
+    ...werkzeugeDerWoche(werkzeuge),
+  ];
 
   return (
     <>
@@ -78,7 +95,11 @@ export default async function FadenLanding() {
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           {kassensturz && <KassensturzStart daten={kassensturz} ziele={ksZiele} />}
           <FinanzwortKarte />
+          <AusDemNewsletter eintraege={auslese} />
+          <WochenbriefTeaser />
           <SchlangeKarte />
+          <PlusTeaser />
+
           </Begruessung>
         </div>
         <GlossarDaten daten={begriffe} />

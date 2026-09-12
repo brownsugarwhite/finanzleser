@@ -1,0 +1,58 @@
+/* =====================================================================================
+   faden-landing.css — die Blöcke, die die Startseite zur fertigen Zeitungsseite machen:
+   die Auslese aus dem Wochenbrief, der Wochenbrief-Teaser, Finanzleser Plus, Leos
+   Empfehlungen und die Chips zum Weiterreden.
+
+   Vorlage: Design A v2 hat KEIN Landing-Artboard (README der Übergabe, Zeile 181). Die
+   Form ist deshalb aus vorhandenen v2-Bausteinen abgeleitet — Kopfzeile aus Kapitel 1
+   „Heute" (Zeile 331–340: Kicker links, kursiver Hinweis rechts), Zeilensatz mit
+   Punktführung aus den Kioskkarten (Zeile 375–379), Anzeigenzeile (Zeile 873–877),
+   Plus-Texte (Zeile 223/270).
+
+   🚨 Kein Kasten, kein weißer Grund, kein Schatten. Diese Blöcke stehen direkt auf dem
+   Papier, wie Kassensturz, Spiel und Finanzwort im Kapitel „Heute".
+   ===================================================================================== */
+
+/* ---------- Gemeinsames Gerüst ---------- */
+.faden-shell .landing-block { display: grid; gap: 10px; clear: both; margin: 40px 0 4px; min-width: 0; scroll-margin-top: 110px; }
+.faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.faden-shell .landing-block__hinweis { font: italic 300 12.5px var(--serif); color: var(--muted); }
+.faden-shell .landing-block__schlag { margin: 6px 0 0; font: 900 clamp(20px, 2.2vw, 27px)/1.15 var(--serif); color: var(--ink); text-wrap: balance; }
+.faden-shell .landing-block__vorspann { margin: 0; font: italic 300 15px/1.5 var(--serif); color: var(--muted); max-width: 56ch; }
+
+/* ---------- Aus unserem Newsletter: sechs Zeilen mit Punktführung ---------- */
+.faden-shell .auslese__liste { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }
+.faden-shell .auslese__eintrag { display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--rule-fein); padding: 10px 0; text-decoration: none; color: var(--ink); transition: padding-left .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .auslese__eintrag:hover { padding-left: 8px; }
+.faden-shell .auslese__eintrag .kicker { flex: none; width: 78px; }
+.faden-shell .auslese__titel { font: 700 15.5px/1.3 var(--serif); color: var(--ink); min-width: 0; }
+.faden-shell .auslese__eintrag:hover .auslese__titel { color: var(--green-ink); }
+.faden-shell .auslese__eintrag .dot { align-self: center; }
+.faden-shell .auslese > .pfeil-link { justify-self: start; margin-top: 12px; }
+@media (max-width: 620px) {
+  .faden-shell .auslese__eintrag { flex-wrap: wrap; gap: 4px 10px; }
+  .faden-shell .auslese__eintrag .kicker { width: auto; }
+  .faden-shell .auslese__eintrag .inhalt__linie { display: none; }
+}
+
+/* ---------- Wochenbrief-Teaser ---------- */
+.faden-shell .wb-teaser__satz { display: grid; gap: 18px 32px; align-items: start; }
+.faden-shell .wb-teaser__bild { width: 100%; max-width: 220px; height: auto; justify-self: center; }
+@media (min-width: 760px) { .faden-shell .wb-teaser__satz { grid-template-columns: minmax(0, 1fr) 220px; } }
+
+/* ---------- Finanzleser Plus ---------- */
+.faden-shell .plus-teaser__punkte { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
+.faden-shell .plus-teaser__punkte li { display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--rule-fein); padding: 9px 0; font: 400 14.5px/1.4 var(--sans); color: var(--ink); }
+/* Die Pille aus v2 (Übergabe Zeile 270): doppelte Kontur, grüner Block mit dem Strichpaar. */
+.faden-shell .plus-teaser__preis { display: inline-flex; align-items: center; gap: 15px; justify-self: start; height: 44px; margin-top: 16px; padding: 3px 3px 3px 17px; border: 2px solid var(--rule-strong); outline: 1px solid var(--rule-strong); outline-offset: 2px; border-radius: 19px; background: transparent; color: var(--ink); font: 500 15px var(--sans); text-decoration: none; transition: color .2s; }
+.faden-shell .plus-teaser__preis:hover { color: var(--green-ink); }
+.faden-shell .plus-teaser__preis i { position: relative; width: 34px; height: 34px; border-radius: 15px; background: var(--green); flex: none; }
+.faden-shell .plus-teaser__preis i::before, .faden-shell .plus-teaser__preis i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 3px; border-radius: 2px; background: #fff; }
+.faden-shell .plus-teaser__preis i::before { transform: translate(-50%, calc(-50% - 4px)); }
+.faden-shell .plus-teaser__preis i::after { transform: translate(-50%, calc(-50% + 4px)); }
+
+/* ---------- Leo empfiehlt ---------- */
+.faden-shell .leo-empfiehlt__reihe { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+/* ---------- Weiterreden mit Leo ---------- */
+.faden-shell .weiterreden .chips { margin-top: 4px; }
