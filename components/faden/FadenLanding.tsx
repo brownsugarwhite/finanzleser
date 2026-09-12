@@ -62,9 +62,8 @@ export default async function FadenLanding() {
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
         <div className="kapitel__inhalt">
-          {/* Inszenierung wie im Prototyp: Leo schreibt erst, wenn der Leser den Faden
-              erreicht; danach die Spalten leise, zuletzt das Finanzwort. Ohne JS steht
-              alles sofort da (SSR unverändert). */}
+          {/* Leo schreibt, sobald der Leser den Faden erreicht — die einzige Inszenierung,
+              die geblieben ist. Alles andere steht ab dem ersten Paint da (Begruessung.tsx). */}
           <Begruessung>
           <div className="wort wort--leo" id="leo-gruss">
             <span className="kicker kicker--gruen">Leo</span>
@@ -73,13 +72,13 @@ export default async function FadenLanding() {
             </LeoRede>
             <BegriffWink ziel="#leo-gruss" />
           </div>
-          {/* Reihenfolge wie im Prototyp: erst die Rubrikenspalten, dann das Finanzwort
-              (begruessung(): anhaengen(spaltenwahl, leise) vor meldung('Finanzwort…')). */}
+          {/* Reihenfolge der Zeitungsseite (12.09.2026): Kopfblatt, Kiosk, Kassensturz,
+              Wort des Tages — danach kommen Wochenbrief, Spiel, Plus und Leo. */}
           <NeuesteAusgabe post={neueste} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
           {kassensturz && <KassensturzStart daten={kassensturz} ziele={ksZiele} />}
-          <SchlangeKarte />
           <FinanzwortKarte />
+          <SchlangeKarte />
           </Begruessung>
         </div>
         <GlossarDaten daten={begriffe} />
