@@ -711,24 +711,28 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .hero-landing h1 { font-size: clamp(26px, 3vw, 32px); line-height: 1.22; font-weight: 700; max-width: 30ch; margin: 0; }
 .faden-shell .hero-landing__pille { width: min(var(--pille-breite-landing), calc(100vw - 32px)); height: var(--pille-h-landing); position: relative; }
 .faden-shell .hero-landing__pille .suchpille-wrap { position: absolute; inset: 0; }
-.faden-shell .suchpille-wrap.fliegt { position: fixed; z-index: 28; inset: auto; will-change: left, top, width; }
+/* Der 1-px-Wächter an der Unterkante des Heros: an ihm hängt die Einfahrt der Eingabe. */
+.faden-shell .hero-fuss { position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; pointer-events: none; }
 .faden-shell .landing-sub { align-self: start; margin: 30px auto 0; font: 400 15.5px/1.5 var(--serif); color: var(--ink); max-width: 44ch; will-change: opacity, transform; }
-/* 🚨 Hier stand ein Ein-/Ausblenden von Randspalten und Eingabe, gesteuert über
-   body.faden-hero-sichtbar (HeroLanding setzt die Klasse, solange der Hero im Bild ist).
-   Der Prototyp hat so etwas nicht: Ränder und Eingabeleiste stehen von Anfang an da, die
-   Ränder kleben (.rand__innen, position: sticky) und die Anzeige in .rand__fuss wandert
-   erst mit dem Ende des Fadens hoch. Unsichtbar ist im Prototyp allein #fadenPille,
-   solange die Kopie der Suchpille aus dem Hero dorthin fliegt — das steuert HeroLanding
-   bereits selbst (ziel.style.opacity in flug()).
-
-   Für die EINGABE bleibt das Ausblenden dagegen richtig, und zwar aus demselben
-   Strukturgrund wie unten bei den Rändern: Im Prototyp sitzt sie in #mitte, das erst
-   unter dem Hero beginnt — beim Hero ist sie schlicht nicht im Bild und schiebt sich
-   beim Scrollen von unten herein, während die Suchpille aus dem Hero dorthin fliegt.
+/* 🚨 Hier stand ein Ein-/Ausblenden von Randspalten und Eingabe. Für die RÄNDER war es
+   falsch — der Prototyp lässt sie von Anfang an stehen —, für die EINGABE bleibt es
+   richtig: Im Prototyp sitzt sie in #mitte, das erst unter dem Hero beginnt; beim Hero
+   ist sie also schlicht nicht im Bild und schiebt sich beim Scrollen von unten herein.
    Hier liegt sie im selben #mitte wie der Hero und klebt unten, wäre also über dem Hero
-   sichtbar: zwei Suchpillen gleichzeitig. */
-.faden-shell .eingabe { transition: opacity .25s ease; }
-body.faden-hero-sichtbar .faden-shell .eingabe { opacity: 0; pointer-events: none; }
+   zu sehen: zwei Suchpillen gleichzeitig.
+
+   Seit dem 12.09.2026 fliegt die Hero-Pille nicht mehr hinunter; die Eingabe FÄHRT
+   stattdessen selbst herein. Darum `transform` und nicht nur `opacity`: mit `opacity`
+   allein bliebe sie an ihrem Platz stehen und blendete auf, statt zu kommen. Der
+   Schalter ist body.faden-eingabe-frei (HeroLanding, IntersectionObserver auf
+   .hero-fuss); `data-faden-hero` sorgt dafür, dass auf allen Seiten ohne Hero gar nichts
+   geparkt wird.
+
+   🚨 Kein Layoutsprung: Eingabe.tsx misst `--eingabe-h` aus `offsetHeight`, und den
+   ändert eine Transformation nicht. Der Bodenabstand des Stroms bleibt konstant. */
+.faden-shell .eingabe { transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .25s ease; }
+body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform: translateY(calc(100% + 28px)); opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .faden-shell .eingabe { transition: none; } }
 
 /* 🚨 Hier stand ein Vorlauf für die Randspalten:
 
