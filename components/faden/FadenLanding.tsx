@@ -48,15 +48,23 @@ const VORSCHLAEGE: { text: string; slug?: string; frage?: boolean; href?: string
 export default async function FadenLanding() {
   // Kein .catch auf WP-Fetches: Fehler müssen werfen, sonst cacht Next eine halbe Startseite (CLAUDE.md, Falle 2).
   const nav = await getNavItems();
+  // 🚨 `baueSpalten` fährt INTERN schon drei Verbindungen parallel (lib/faden/spalten.ts).
+  // Es bekommt seine drei Slots allein — mehr als drei gleichzeitig verträgt das
+  // WordPress nicht (CLAUDE.md, Falle 1).
   const rubriken = await baueSpalten(nav);
-  // Ein Zug für beides: [0] ist das Kopfblatt „Neueste Ausgabe", [1..3] die drei Ratgeber
-  // der Auslese. So steht kein Titel zweimal auf der Seite.
-  const juengste = await getLatestPosts(4);
+  // Danach drei unabhängige Abrufe in einem Zug. Ein Zug für die Beiträge: [0] ist das
+  // Kopfblatt „Neueste Ausgabe", [1..3] die drei Ratgeber der Auslese — so steht kein
+  // Titel zweimal auf der Seite. Kein .catch: Fehler müssen werfen, sonst cacht Next eine
+  // halbe Startseite (CLAUDE.md, Falle 2); Promise.all wirft beim ersten davon.
+  const [juengste, optionen, finanzwort] = await Promise.all([
+    getLatestPosts(4),
+    getFadenOptionen(),
+    spielAm("finanzwort"),
+  ]);
   const neueste = juengste[0] || null;
   // Kassensturz im Kapitel „Heute": dieselben Daten und Ziele wie auf /kassensturz.
-  const { kassensturz } = await getFadenOptionen();
+  const { kassensturz } = optionen;
   const ksZiele = kassensturz ? await zieleAufloesen(kassensturz) : {};
-  const finanzwort = await spielAm("finanzwort");
   // Standard-Chips wie im Prototyp (STANDARD_CHIPS): zuletzt „Finanzwort des Tages“ auf die Spielseite des Tages.
   const chips = [
     ...VORSCHLAEGE.map((v) => (v.frage ? { text: v.text, frage: v.text } : { text: v.text, href: v.href })),
@@ -65,12 +73,12 @@ export default async function FadenLanding() {
   // Leos Begrüßung verlinkt „Versicherungsbedingungen". Ohne Nutzlast holt das Klickmenü
   // den Begriff beim Antippen über /api/faden/glossar/<slug> — eine CMS-Abfrage mitten in
   // der Geste. Auf einer vorgerenderten Seite kostet das Mitschicken nichts.
-  const glossar = await getGlossarIndex();
+  // Der Werkzeugindex ist über getWerkzeugZahlen() im Layout und über zieleAufloesen
+  // ohnehin warm — die Auslese und Leos Empfehlungen kosten deshalb keine einzige
+  // zusätzliche WP-Abfrage.
+  const [glossar, werkzeuge] = await Promise.all([getGlossarIndex(), getWerkzeugIndex()]);
   const avb = glossar.get("avb");
   const begriffe = avb ? await loeseBegriffe([avb]) : [];
-  // Der Werkzeugindex ist über getWerkzeugZahlen() im Layout ohnehin warm — die Auslese
-  // und Leos Empfehlungen kosten deshalb keine einzige zusätzliche WP-Abfrage.
-  const werkzeuge = await getWerkzeugIndex();
   const auslese: AusleseEintrag[] = [
     ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
     ...werkzeugeDerWoche(werkzeuge),
@@ -79,6 +87,8 @@ export default async function FadenLanding() {
 
   return (
     <>
+      {/* Leo steht in jedem Leo-Block und ist das erste Bild des Kapitels. */}
+      <link rel="preload" as="image" href="/assets/leo.svg" fetchPriority="high" />
       <section className="kapitel kapitel--live" id="kapitel-live" data-key="heute" data-titel="Heute" data-pfad="">
         <KapitelKopf pfad={[]} />
         <div className="kapitel__inhalt">

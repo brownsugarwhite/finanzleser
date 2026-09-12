@@ -46,7 +46,7 @@ export function LeoRede({ children, fehler = false, text }: { children: ReactNod
   const fliess = (text?.length ?? 0) > ANTWORT_FLIESS;
   return (
     <div className={"leo-rede" + (fehler ? " leo-rede--fehler" : "") + (fliess ? " leo-rede--fliess" : "")}>
-      <img src="/assets/leo.svg" alt="Leo" className="wort__avatar" />
+      <img src="/assets/leo.svg" alt="Leo" className="wort__avatar" width={44} height={44} />
       {children}
     </div>
   );

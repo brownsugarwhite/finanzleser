@@ -39,7 +39,9 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
       <a className="neueste__blatt" href={buildPostUrl(post)}>
         {bild && (
           <span className="neueste__bild">
-            <img src={medienUrl(bild)} alt={post.featuredImage?.node?.altText || ""} loading="lazy" />
+            {/* Das erste große Bild der Seite und in ~1 s im Blick — es wartet nicht auf den
+                Scroll. Die Maße kommen aus `aspect-ratio: 16/9` (faden.css), deshalb kein Sprung. */}
+            <img src={medienUrl(bild)} alt={post.featuredImage?.node?.altText || ""} loading="eager" decoding="async" />
           </span>
         )}
         <span className="neueste__satz">
