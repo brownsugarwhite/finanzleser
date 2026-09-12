@@ -1,32 +1,25 @@
 "use client";
 
 /**
- * Leos Begrüßung auf der Landing — Inszenierung nach dem Prototyp
- * (`docs/prototype/src/03-js-core.html` `begruessung`/`leoNachricht`/`tippen`,
- * Auslöser in `06-js-boot.html`).
+ * Leos Begrüßung auf der Landing — die Schreibmaschine im Gruß, sonst nichts.
  *
- * 🚨 Der Unterschied zur Vorlage war nicht das *Was*, sondern das *Wann*: In der
- * Umsetzung standen Gruß, Spalten und Finanzwort sofort vollständig im SSR-HTML.
- * Im Prototyp beginnt Leo erst zu schreiben, wenn der Leser den Faden erreicht —
- * mit Tippindikator, dann Schreibmaschine. Danach kommen die Rubrikenspalten
- * **leise** (ohne Sprung) und zuletzt das Finanzwort.
+ * 🚨 Bis zum 12.09.2026 hat diese Hülle den halben Faden zurückgehalten: Nach der
+ * Hydration setzte sie Kiosk, Kopfblatt, Kassensturz, Spiel und Finanzwort auf `hidden`
+ * und gab sie erst gestaffelt frei, ausgelöst von einem Scroll-Listener. Wer
+ * herunterscrollte, sah leere Fläche und dann Nachrücken — und `angehaengt(finanzwort)`
+ * riss ihn am Ende auch noch an eine andere Stelle. Der Wunsch vom 12.09. ist eindeutig:
+ * beim ersten Runterscrollen steht alles sofort da, außer es hat eine eigene
+ * Intro-Animation. Leos Schreiben ist die einzige.
  *
- * SEO bleibt unberührt: Der Server liefert weiter den vollständigen Text. Erst nach
- * der Hydration blendet diese Hülle ihn aus und spielt die Abfolge nach. Ohne
- * JavaScript — also für Crawler und bei abgeschaltetem JS — passiert nichts und
- * alles steht sofort da.
+ * Was bleibt: der Auslöser des Prototyps (Oberkante des lebenden Kapitels < 60 % der
+ * Fensterhöhe), 250 ms Tippindikator, dann die Schreibmaschine. `prefers-reduced-motion`
+ * überspringt beides.
  *
- * Abfolge und Werte 1:1 aus dem Prototyp:
- *   Auslöser  Faden-Oberkante < 60 % der Fensterhöhe (einmalig)
- *   Pause     250 ms Tippindikator
- *   Tippen    5 Zeichen je 10 ms, danach das volle HTML (Links bleiben erhalten)
- *   Spalten   leise angehängt (kein Scroll)
- *   Finanzwort danach, mit der normalen Scroll-Regel
- *
- * `prefers-reduced-motion` überspringt Tippindikator und Schreibmaschine.
+ * SEO bleibt unberührt: Der Server liefert den vollständigen Text; ohne JavaScript
+ * passiert hier gar nichts.
  */
 import { useEffect, useRef } from "react";
-import { angehaengt, merkeKnoten } from "@/lib/faden/scrollen";
+import { merkeKnoten } from "@/lib/faden/scrollen";
 import { tippen } from "@/lib/faden/tippen";
 
 const PAUSE = 250;
@@ -44,27 +37,18 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     if (!wurzel || gelaufen.current) return;
 
     const gruss = wurzel.querySelector<HTMLElement>("#leo-gruss");
-    const spalten = wurzel.querySelector<HTMLElement>(".spalten-kasten, .spalten");
-    const neueste = wurzel.querySelector<HTMLElement>(".neueste");
-    // 🚨 `kasten--ks` trägt `kasten--pink` mit — ohne den Ausschluss zielte der letzte
-    // Schritt der Begrüßung auf den Kassensturz statt auf das Finanzwort.
-    const finanzwort = wurzel.querySelector<HTMLElement>(".meldung, .kasten--pink:not(.kasten--ks)");
-    const kassensturz = wurzel.querySelector<HTMLElement>(".ks-teaser");
-    // Das Spiel steht zwischen Kassensturz und Finanzwort und kommt auch dort dazu.
-    const schlange = wurzel.querySelector<HTMLElement>(".kasten--schlange");
     const text = gruss?.querySelector<HTMLElement>("p");
     if (!gruss || !text) return;
+    // Ohne Bewegung wird nicht getippt — dann bleibt der Absatz einfach stehen.
+    if (reduziert()) { merkeKnoten(gruss); return; }
 
-    // Ab hier ist JavaScript da: Abfolge übernehmen. (Ohne JS bleibt alles sichtbar.)
+    // Ab hier ist JavaScript da: den Absatz leeren und neu schreiben.
     const vollHtml = text.innerHTML;
+    // 🚨 Der Absatz fällt beim Leeren auf null zusammen und wächst beim Tippen wieder auf.
+    // Früher fiel das nicht auf, weil alles darunter versteckt war; jetzt steht der Kiosk
+    // direkt darunter und ruckt. Die gemessene Höhe hält den Platz, bis der Text steht.
+    text.style.minHeight = `${text.getBoundingClientRect().height}px`;
     text.innerHTML = "";
-    const werkzeuge = gruss.querySelector<HTMLElement>(".werkzeuge");
-    if (werkzeuge) werkzeuge.hidden = true;
-    if (spalten) spalten.hidden = true;
-    if (neueste) neueste.hidden = true;
-    if (kassensturz) kassensturz.hidden = true;
-    if (schlange) schlange.hidden = true;
-    if (finanzwort) finanzwort.hidden = true;
 
     const tippt = document.createElement("div");
     tippt.className = "tippt";
@@ -78,31 +62,25 @@ export default function Begruessung({ children }: { children: React.ReactNode })
       if (gelaufen.current) return;
       gelaufen.current = true;
       window.removeEventListener("scroll", pruefen);
-      if (!reduziert()) await new Promise((r) => setTimeout(r, PAUSE));
+      await new Promise((r) => setTimeout(r, PAUSE));
       if (abgebrochen) return;
       tippt.remove();
       await tippen(text, vollHtml);
       if (abgebrochen) return;
-      if (werkzeuge) werkzeuge.hidden = false;
+      text.style.minHeight = "";
+      // 🚨 `merkeKnoten` bleibt: ohne einen bekannten „letzten Knoten" liefert `folgt()`
+      // dauerhaft true, und jede spätere Leo-Antwort risse den Leser ans Fadenende —
+      // egal, wo er gerade liest.
       merkeKnoten(gruss);
-      // Spalten „leise": sie erscheinen, aber der Faden springt nicht (Prototyp: leise: true)
-      if (neueste) neueste.hidden = false;
-      if (spalten) { spalten.hidden = false; angehaengt(spalten, { leise: true }); }
-      // Finanzwort zuletzt, mit der normalen Scroll-Regel
-      if (kassensturz) kassensturz.hidden = false;
-      // Leise: das Spielfeld ist hoch, ein Sprung darauf risse den Leser aus dem Text.
-      if (schlange) { schlange.hidden = false; angehaengt(schlange, { leise: true }); }
-      if (finanzwort) { finanzwort.hidden = false; angehaengt(finanzwort); }
     };
 
     /**
      * Auslöser wie im Prototyp (06-js-boot.html): Oberkante des Fadens < 60 % der
      * Fensterhöhe.
      *
-     * 🚨 Bezugspunkt ist das lebende Kapitel, NICHT `#faden`: im Prototyp ist `#faden`
-     * der Faden unterhalb des Intros, in der Umsetzung umschließt `main#faden` die
-     * ganze Hülle inklusive Hero — seine Oberkante liegt immer bei 0, die Begrüßung
-     * liefe sofort los.
+     * 🚨 Bezugspunkt ist das lebende Kapitel, NICHT `#faden`: in der Umsetzung umschließt
+     * `main#faden` die ganze Hülle inklusive Hero — seine Oberkante liegt immer bei 0,
+     * die Begrüßung liefe sofort los.
      */
     const pruefen = () => {
       const bezug = document.getElementById("kapitel-live") || wurzel;
