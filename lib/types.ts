@@ -62,6 +62,8 @@ export interface Rechner {
   title: string;
   slug: string;
   excerpt?: string;
+  /** Veröffentlichungsdatum (ISO). 🚨 Bei den Rechnern ist es ein Importzeitstempel — alle 56 tragen dieselbe Sekunde. */
+  date?: string;
   content?: string;
   featuredImage?: {
     node: {
@@ -109,6 +111,8 @@ export interface Vergleich {
   title: string;
   slug: string;
   excerpt?: string;
+  /** Veröffentlichungsdatum (ISO). */
+  date?: string;
   vergleichFelder?: VergleichACF;
 }
 
@@ -127,6 +131,8 @@ export interface Checkliste {
   title: string;
   slug: string;
   excerpt?: string;
+  /** Veröffentlichungsdatum (ISO). */
+  date?: string;
   /** Kurzbeschreibung. WP-Meta `checkliste_beschreibung`. */
   beschreibung?: string;
   /** URL des hinterlegten PDFs, aus dem die interaktive Checkliste gebaut wird. */
