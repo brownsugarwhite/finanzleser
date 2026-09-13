@@ -39,7 +39,8 @@ import SchaukastenModus from "@/components/faden/SchaukastenModus";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 import Zeitungskopf from "@/components/faden/Zeitungskopf";
 import SchaukastenTokens from "@/components/faden/SchaukastenTokens";
-import Knopf from "@/components/faden/ui/Knopf";
+import { schriftgrade, harteFarben, knopfformen } from "@/lib/faden/inventur";
+import Button from "@/components/ui/Button";
 import Einschub from "@/components/faden/Einschub";
 import Fortschrittsreihe from "@/components/faden/kassensturz/Fortschrittsreihe";
 import AusDemNewsletter from "@/components/faden/landing/AusDemNewsletter";
@@ -102,7 +103,11 @@ export default async function Schaukasten() {
     ...ausIndex("checkliste", 2).map((e) => ({ label: "Checkliste", titel: e.titel, href: e.href, dot: "checkliste" as const })),
     ...ausIndex("dokumente", 2).map((e) => ({ label: "Dokument", titel: e.titel, href: e.href })),
   ];
-  const VON = 14;
+  // 🚨 Aus den Stylesheets gelesen, nicht gepflegt: siehe lib/faden/inventur.ts.
+  const grade = schriftgrade();
+  const farben = harteFarben();
+  const formen = knopfformen();
+  const VON = 15;
 
   return (
     <KartenKapitel
@@ -167,7 +172,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Linien, Flächen und Bilder" nr={3} von={VON}>
+      <Abschnitt titel="Linien und Flächen" nr={3} von={VON}>
         <p>
           <strong>Die Doppellinie ist eine Auszeichnung.</strong> Sie steht an genau zwei Stellen:
           am Anfang des Fadens und im Kiosk. Überall sonst grenzt eine Haarlinie ab.
@@ -176,58 +181,43 @@ export default async function Schaukasten() {
         <p style={{ marginTop: "var(--luft-l)" }}>Der Zeitungskopf, wie er den Faden anführt:</p>
         <Zeitungskopf />
         <p style={{ marginTop: "var(--luft-l)" }}>
-          Ein Block steht <strong>auf dem Papier</strong>, nicht in einem Kasten — die Kopfzeile trägt die Linie:
+          Wie ein Block auf dem Papier steht, zeigt Abschnitt „Die Blöcke der Startseite" —
+          dort stehen die echten Bausteine, nicht nachgebaute.
         </p>
-        <div className="landing-block">
-          <div className="landing-block__kopf">
-            <span className="kicker">Kicker des Blocks</span>
-            <span className="landing-block__hinweis">Der kursive Hinweis rechts</span>
-          </div>
-          <h3 className="landing-block__schlag">Die Schlagzeile eines Blocks</h3>
-          <p className="landing-block__vorspann">Der Vorspann darunter, kursiv in Merriweather, höchstens 56 Zeichen breit.</p>
-        </div>
         <p style={{ marginTop: "var(--luft-l)" }}>Und die Ausnahme, wenn es wirklich ein Kärtchen sein soll:</p>
         <div className="kasten kasten--papier kasten--still">
           <span className="kicker">kasten--papier</span>
           <p style={{ margin: "6px 0 0" }}>Weißes Papier mit Kante. Braucht eine Begründung.</p>
         </div>
         <p className="hinweis" style={{ marginTop: "var(--luft-m)" }}>Hinweiszeile: gelber Grund, für Warnungen und Nachträge.</p>
-        <h3 style={{ marginTop: "var(--luft-l)" }}>Bilder</h3>
-        <p>Links im Original, rechts mit <code>.bild--druck</code> — Tinte auf Papier, wie eine Zeitung druckt.</p>
-        <div className="schau-bilder">
-          <img src="/assets/general/rechner_visual.png" width={1920} height={1763} alt="" />
-          <img className="bild--druck" src="/assets/general/rechner_visual.png" width={1920} height={1763} alt="" />
-        </div>
       </Abschnitt>
 
       <Abschnitt titel="Knöpfe, Chips und Links" nr={4} von={VON}>
-        <p><strong>Der Knopf des Fadens.</strong> Eine Form für jede Aufforderung — doppelte Kontur, rechts die grüne Scheibe mit der Pfeilspitze des Hauses.</p>
+        <p>
+          <strong>Der Knopf.</strong> Es ist der Knopf der Live-Seite —
+          <code>components/ui/Button.tsx</code>, unverändert übernommen. Eine Form für jede
+          Aufforderung im Faden.
+        </p>
         <div className="reihe" style={{ alignItems: "center" }}>
-          <Knopf gross href="/schaukasten">Knopf · groß</Knopf>
-          <Knopf href="/schaukasten">Knopf · Standard</Knopf>
-          <Knopf still href="/schaukasten">Knopf · still</Knopf>
+          <Button label="Knopf · Pfeil" href="/schaukasten" />
+          <Button label="Knopf · abwärts" icon="arrow-down" href="/schaukasten" />
+          <Button label="Knopf · Download" icon="download" href="/schaukasten" />
         </div>
-        <p style={{ marginTop: "var(--luft-l)" }}>Die älteren Formen, die es im Faden noch gibt:</p>
-        <div className="reihe">
-          <button type="button" className="btn">Knopf · Standard</button>
-          <button type="button" className="btn btn--primary">Knopf · primär</button>
-          <button type="button" className="btn btn--klein">Knopf · klein</button>
-          <button type="button" className="btn btn--klein btn--still">Knopf · still</button>
-        </div>
-        <div className="chips" style={{ marginTop: 14 }}>
-          <button type="button" className="chip">Chip · Standard</button>
-          <button type="button" className="chip chip--still">Chip · still</button>
-          <button type="button" className="chip chip--leo">Chip · Leo</button>
-          <button type="button" className="chip chip--aktiv">Chip · aktiv</button>
-          <button type="button" className="chip"><i className="dot dot--rechner" /> mit Punkt · Rechner</button>
-          <button type="button" className="chip"><i className="dot dot--vergleich" /> mit Punkt · Vergleich</button>
-          <button type="button" className="chip"><i className="dot dot--checkliste" /> mit Punkt · Checkliste</button>
-        </div>
-        <div className="reihe" style={{ marginTop: 14 }}>
-          <button type="button" className="textlink">Textlink</button>
-          <button type="button" className="textlink textlink--still">Textlink · still</button>
-          <a className="pfeil-link" href="/schaukasten">Pfeil-Link <i /></a>
-        </div>
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Jede Knopf- und Linkform, die es gibt</h3>
+        <p>
+          Nicht ausgesucht, sondern <strong>aus den Stylesheets gelesen</strong>: jede Klasse mit
+          einer eigenen Regel, gerendert mit genau dieser Klasse. Wer eine Regel ändert, ändert
+          diese Tafel mit. So ist zu sehen, was doppelt ist.
+        </p>
+        <ul className="inv inv__formen">
+          {formen.map((f) => (
+            <li key={f.klasse}>
+              <button type="button" className={f.klasse}>{f.klasse}</button>
+              <code>.{f.klasse}</code>
+              <span>{f.datei}</span>
+            </li>
+          ))}
+        </ul>
       </Abschnitt>
 
       <Abschnitt titel="Leo und die Frage des Lesers" nr={5} von={VON}>
@@ -400,7 +390,46 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Der Vorlage-Beitrag" nr={14} von={VON}>
+      <Abschnitt titel="Inventur: was es wirklich gibt" nr={14} von={VON}>
+        <p>
+          Alle Schriftgrade und alle hart geschriebenen Farben des Fadens, gezählt über
+          neun Stylesheets. Kein gepflegtes Verzeichnis — die Zahlen kommen beim Bauen aus
+          denselben Dateien, die die Seite lädt. Ein Wert, der nur ein- oder zweimal
+          vorkommt, ist ein Kandidat zum Zusammenlegen.
+        </p>
+
+        <h3>Schriftgrade · {grade.length} verschiedene</h3>
+        <ul className="inv inv__grade">
+          {grade.map((g) => (
+            <li key={g.wert} data-token={g.wert.startsWith("var(") || undefined}>
+              <b>{g.stellen.length}×</b>
+              <code>{g.wert}</code>
+              <span className="inv__probe" style={{ fontSize: g.wert.startsWith("var(") ? undefined : g.wert, font: g.wert.startsWith("var(") ? g.wert : undefined }}>
+                Finanzleser · 0123
+              </span>
+              <span className="inv__wo">{g.stellen.slice(0, 4).map((x) => x.sel.replace(".faden-shell ", "")).join(" · ")}{g.stellen.length > 4 ? ` · +${g.stellen.length - 4}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 style={{ marginTop: "var(--luft-xl)" }}>Farben ohne Token · {farben.length} verschiedene</h3>
+        <p className="quelle">
+          Die Tokendefinition selbst ist herausgerechnet. Was hier steht, steht als nackter Wert
+          in einer Regel.
+        </p>
+        <ul className="inv inv__farben">
+          {farben.map((f) => (
+            <li key={f.wert}>
+              <b>{f.stellen.length}×</b>
+              <i style={{ background: f.wert }} />
+              <code>{f.wert}</code>
+              <span className="inv__wo">{f.stellen.slice(0, 4).map((x) => x.sel.replace(".faden-shell ", "")).join(" · ")}{f.stellen.length > 4 ? ` · +${f.stellen.length - 4}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+      </Abschnitt>
+
+      <Abschnitt titel="Der Vorlage-Beitrag" nr={15} von={VON}>
         <p>
           Der zweite Teil des Schaukastens ist eine <strong>echte Kopie</strong> aus dem CMS:
           „Vorlage-Test · Photovoltaik Förderung“ mit sieben Abschnitten, Tabelle, Statistiken,
