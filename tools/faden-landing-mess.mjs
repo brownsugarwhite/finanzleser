@@ -124,7 +124,7 @@ for (const [breite, hoehe] of [[1440, 900], [390, 844]]) {
   });
   pruefe("Deckblatt ohne eigenen Grund", !!deck && (deck.grund === "rgba(0, 0, 0, 0)" || deck.grund === "transparent"), JSON.stringify(deck));
 
-  await page.evaluate(() => document.querySelector(".ks-deck .knopf")?.click());
+  await page.evaluate(() => document.querySelector(".ks-deck__start button")?.click());
   await page.waitForTimeout(700);
   const lauf = await page.evaluate(() => {
     const f = document.querySelector("#kassensturz .ks__fortschritt");

@@ -19,7 +19,7 @@ import { useState, useSyncExternalStore } from "react";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import Kassensturz, { type Ziel } from "./Kassensturz";
 import Fortschrittsreihe from "./Fortschrittsreihe";
-import Knopf from "@/components/faden/ui/Knopf";
+import Button from "@/components/ui/Button";
 import { KS_EREIGNIS, KS_SPEICHER, datumLang, offeneFragen } from "./logik";
 
 function abonnieren(cb: () => void): () => void {
@@ -67,13 +67,15 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
           <>
             <div className="ks__frage">Ihr Kassensturz vom {datumLang(erg.datum)} · Score {erg.score}</div>
             <p className="ks__hinweis">Profil, Ampel und Ihre Lücken liegen bereit. Die Werte ändern sich jedes Jahr; in sechs Monaten lohnt ein neuer Durchgang.</p>
-            <Knopf gross onClick={() => setOffen(true)}>Ergebnis ansehen</Knopf>
+            <span className="ks-deck__start"><Button label="Ergebnis ansehen" onClick={() => setOffen(true)} /></span>
           </>
         ) : (
           <>
             <div className="ks__frage">Wie gut sind Sie eigentlich aufgestellt?</div>
             <p className="ks__hinweis">{anzahl} Fragen, keine Tastatur. Am Ende sehen Sie Ihr Profil, Ihre Ampel und Ihre drei größten Lücken — sofort und vollständig.</p>
-            <Knopf gross onClick={() => setOffen(true)}>{begonnen ? "Weitermachen" : "Kassensturz starten"}</Knopf>
+            {/* Der Name ist der Haken für die Sonden (tools/faden-*-mess.mjs) — der Knopf
+                selbst kommt unverändert von der Live-Seite und trägt keine eigene Klasse. */}
+            <span className="ks-deck__start"><Button label={begonnen ? "Weitermachen" : "Kassensturz starten"} onClick={() => setOffen(true)} /></span>
           </>
         )}
       </div>

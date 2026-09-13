@@ -71,7 +71,7 @@ const taste = page.locator("#strom .kapitel--alt .wortspiel .taste").first();
 if (await taste.count()) { await taste.scrollIntoViewIfNeeded(); await taste.click(); await page.waitForTimeout(400); }
 pruefe("das Finanzwort nimmt Eingaben an", await page.evaluate(() => document.querySelectorAll("#strom .kapitel--alt .wortspiel .zelle.voll").length > 0));
 
-const deck = page.locator("#strom .kapitel--alt .ks-deck .knopf").first();
+const deck = page.locator("#strom .kapitel--alt .ks-deck__start button").first();
 if (await deck.count()) { await deck.scrollIntoViewIfNeeded(); await deck.click(); await page.waitForTimeout(900); }
 pruefe("der Kassensturz startet", await page.evaluate(() => document.querySelectorAll("#strom .kapitel--alt .ks__karte").length > 0));
 
