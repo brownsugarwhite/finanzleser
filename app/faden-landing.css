@@ -43,16 +43,33 @@
 .faden-shell .wb-teaser__bild { width: 100%; max-width: 220px; height: auto; justify-self: center; }
 @media (min-width: 760px) { .faden-shell .wb-teaser__satz { grid-template-columns: minmax(0, 1fr) 220px; } }
 
-/* ---------- Finanzleser Plus ---------- */
-.faden-shell .plus-teaser__punkte { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
-.faden-shell .plus-teaser__punkte li { display: flex; align-items: baseline; gap: 10px; border-top: 1px solid var(--rule-fein); padding: 9px 0; font: 400 14.5px/1.4 var(--sans); color: var(--ink); }
-/* Die Pille aus v2 (Übergabe Zeile 270): doppelte Kontur, grüner Block mit dem Strichpaar. */
-.faden-shell .plus-teaser__preis { display: inline-flex; align-items: center; gap: 15px; justify-self: start; height: 44px; margin-top: 16px; padding: 3px 3px 3px 17px; border: 2px solid var(--rule-strong); outline: 1px solid var(--rule-strong); outline-offset: 2px; border-radius: 19px; background: transparent; color: var(--ink); font: 500 15px var(--sans); text-decoration: none; transition: color .2s; }
-.faden-shell .plus-teaser__preis:hover { color: var(--green-ink); }
-.faden-shell .plus-teaser__preis i { width: 34px; height: 34px; border-radius: 15px; background: var(--green); display: grid; place-items: center; flex: none; }
+/* ---------- Finanzleser Plus: plakativ, mit Grafik ---------- */
+.faden-shell .plus-teaser__satz { display: grid; gap: var(--luft-l) var(--luft-xl); align-items: center; margin-top: var(--luft-m); }
+@media (min-width: 720px) { .faden-shell .plus-teaser__satz { grid-template-columns: minmax(0, 1fr) 240px; } }
+.faden-shell .plus-teaser__text { display: grid; justify-items: start; gap: var(--luft-m); }
+/* Die Schlagzeile des Plus-Blocks ist die größte der Seite — hier wird geworben. */
+.faden-shell .plus-teaser__schlag { margin: 0; font: 900 clamp(26px, 3.2vw, 40px)/1.1 var(--serif); color: var(--ink); letter-spacing: -.015em; }
+.faden-shell .plus-teaser__bild { width: 100%; max-width: 240px; height: auto; justify-self: center; }
+.faden-shell .plus-teaser__preis { margin: calc(-1 * var(--luft-s)) 0 0; }
+/* Die drei Leistungen als Dreispalter mit Haarlinie darüber — Zeitungssatz, kein Kärtchen. */
+.faden-shell .plus-teaser__punkte { list-style: none; margin: var(--luft-l) 0 0; padding: 0; display: grid; gap: var(--luft-l) var(--luft-xl); }
+@media (min-width: 720px) { .faden-shell .plus-teaser__punkte { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.faden-shell .plus-teaser__punkte li { display: grid; gap: var(--luft-xs); align-content: start; border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); }
+.faden-shell .plus-teaser__punkte b { font: var(--schrift-zeile); }
+.faden-shell .plus-teaser__punkte span { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .plus-teaser__punkte .textlink { justify-self: start; margin-top: var(--luft-xs); }
 
-/* ---------- Leo empfiehlt ---------- */
-.faden-shell .leo-empfiehlt__reihe { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+/* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
+/* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */
+.faden-shell .leo-empfiehlt__reihe { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--luft-l) var(--luft-l); margin-top: var(--luft-l); }
+.faden-shell .vgl-karte { display: grid; align-content: start; gap: var(--luft-xs); border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); text-decoration: none; color: var(--ink); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.faden-shell .vgl-karte:hover { transform: translateY(-3px); }
+/* Das Bild sitzt ÜBER der Linie — wie das Visual über dem Ratgeberkopf. */
+.faden-shell .vgl-karte__bild { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; margin-bottom: var(--luft-s); background: var(--placeholder); }
+.faden-shell .vgl-karte__titel { font: 700 17px/1.25 var(--serif); }
+.faden-shell .vgl-karte:hover .vgl-karte__titel { color: var(--green-ink); }
+.faden-shell .vgl-karte__text { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .vgl-karte .pfeil-link { margin-top: var(--luft-xs); font-size: 13px; }
 
 /* ---------- Weiterreden mit Leo ---------- */
 .faden-shell .weiterreden .chips { margin-top: 4px; }

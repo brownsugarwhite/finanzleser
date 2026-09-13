@@ -228,7 +228,9 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
               <b className="kiosk__titel">{r.titel}</b>
               {/* Im Ruhestand steht das erste Blatt nur angeschnitten offen — dann heißt es
                   weiter „aufschlagen", denn genau das tut der Klick. */}
-              <span className="kicker"><span className="kiosk__wort">Kategorie </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}</span>
+              {/* Wie in v2 (Übergabe Zeile 380): grün, gemischt gesetzt, mit der wachsenden Linie
+                  und der Pfeilspitze — kein Versalien-Kicker. */}
+              <span className="pfeil-link kiosk__oeffnen"><span className="kiosk__wort">Ausgabe </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}<i /></span>
             </button>
             <i className="doppellinie" />
             <div
@@ -244,13 +246,19 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
                   <div className="kiosk__oben">
                     {r.bild && (
                       <span className="kiosk__bild">
-                        <img src={r.bild.src} alt={r.bild.alt} loading="lazy" />
+                        <img className="bild--druck" src={r.bild.src} alt={r.bild.alt} loading="lazy" />
                       </span>
                     )}
                     <ul className="kiosk__themen">
                       {r.themen.map((t) => (
                         <li key={t.key} className={t.key === th?.key ? "ist-aktiv" : undefined}>
-                          <button type="button" data-name={t.name} onClick={() => themaWechseln(r.key, t.key)}>{t.name}</button>
+                          {/* Zeilensatz mit Punktführung wie die Themenlisten in Design A v2
+                              (Übergabe Zeile 375–379): Name, Führung, Anzahl. */}
+                          <button type="button" onClick={() => themaWechseln(r.key, t.key)}>
+                            <span className="kiosk__thema-name" data-name={t.name}>{t.name}</span>
+                            <i className="inhalt__linie" aria-hidden="true" />
+                            <small>{t.zahl}</small>
+                          </button>
                         </li>
                       ))}
                     </ul>

@@ -111,10 +111,33 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .textlink--still { color: var(--muted); font-weight: 600; }
 .faden-shell .textlink:hover { text-decoration: underline; }
 .faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; border: 0; background: none; padding: 0; text-decoration: none; }
+/* 🚨 `components.css` färbt global jedes `p, li, span` in --color-text-medium und schlägt
+   damit die Vererbung vom Link. Ohne diese Zeile steht ein Wort im Pfeillink grau und das
+   nächste grün. Dieselbe Falle wie im Inhaltsverzeichnis und in der Kiosk-Schlagzeile. */
+.faden-shell .pfeil-link span { color: inherit; }
 .faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1px; background: currentColor; position: relative; transition: width .25s; }
 /* Spitze sitzt 3 px über dem Linienende — wie MegaArrowTrail (marginLeft: -3). */
 .faden-shell .pfeil-link i::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 4.24px; height: 8px; transform: translateY(-50%); background: currentColor; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
 .faden-shell .pfeil-link:hover i { width: 30px; }
+/* ── Bilder: Tinte auf Papier ───────────────────────────────────────────────────────
+   Eine Zeitung druckt keine Vollfarbe. `.bild--druck` nimmt jedem Motiv die Buntheit und
+   lässt das Papier durchscheinen (`multiply` löscht das Weiß im Bild) — damit passt auch
+   eine bunte Platzhaltergrafik in den Satz, ohne ihn zu sprengen. Fotos im Ratgeberkopf
+   bleiben ausgenommen: dort ist das Motiv der Inhalt. */
+.faden-shell .bild--druck { filter: grayscale(1) contrast(1.08); mix-blend-mode: multiply; }
+
+/* ── Der Knopf des Fadens (components/faden/ui/Knopf.tsx) ───────────────────────────
+   Doppelte Kontur, rechts die grüne Scheibe mit der Pfeilspitze des Hauses. Eine Form
+   für jede Aufforderung im Faden — Kassensturz, Plus, Newsletter, Vergleich. */
+.faden-shell .knopf { display: inline-flex; align-items: center; gap: 15px; justify-self: start; height: 44px; padding: 3px 3px 3px 18px; border: 2px solid var(--rule-strong); outline: 1px solid var(--rule-strong); outline-offset: 2px; border-radius: 22px; background: transparent; color: var(--ink); font: 500 15px var(--sans); text-decoration: none; transition: color .2s; }
+.faden-shell .knopf:hover { color: var(--green-ink); }
+.faden-shell .knopf--gross { height: 52px; padding-left: 24px; border-radius: 26px; font-size: 16.5px; }
+.faden-shell .knopf__scheibe { position: relative; width: 34px; height: 34px; border-radius: 50%; background: var(--green); flex: none; }
+.faden-shell .knopf--gross .knopf__scheibe { width: 40px; height: 40px; }
+/* Die Pfeilspitze ist dieselbe Maske wie im Textlink — eine Quelle für beide Formen. */
+.faden-shell .knopf__scheibe::after { content: ""; position: absolute; left: 53%; top: 50%; width: 6px; height: 11px; transform: translate(-50%, -50%); background: #fff; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
+.faden-shell .knopf--still { height: auto; padding: 6px 2px; border: 0; outline: 0; border-radius: 0; border-bottom: 1px solid var(--ink); font: 600 14px/1 var(--sans); }
+
 .faden-shell .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: 999px; padding: 7px 16px; font-weight: 600; font-size: 14px; white-space: nowrap; text-decoration: none; line-height: 1.3; }
 .faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: #fff; }
 .faden-shell .btn--klein { padding: 4px 12px; font-size: 13px; }
@@ -960,13 +983,22 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .kiosk__bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* Alle Subkategorien der Rubrik, als Schalter für die Ratgeber daneben. */
-.faden-shell .kiosk__themen { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; gap: 2px; }
-.faden-shell .kiosk__themen button { width: 100%; text-align: left; border: 0; background: none; padding: 4px 0; font: 400 15px/1.35 var(--serif); color: var(--ink); white-space: nowrap; transition: color .2s; }
+.faden-shell .kiosk__oeffnen { font-size: 13px; white-space: nowrap; }
+.faden-shell .kiosk-blatt:hover .kiosk__oeffnen i { width: 30px; }
+.faden-shell .kiosk__themen { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
+.faden-shell .kiosk__themen button { width: 100%; text-align: left; border: 0; border-top: 1px solid var(--rule-soft); background: none; padding: 7px 0; font: 400 15px/1.35 var(--serif); color: var(--ink); white-space: nowrap; transition: color .2s, padding-left .25s; display: flex; align-items: baseline; gap: 8px; }
+.faden-shell .kiosk__themen button:hover { padding-left: 4px; }
+.faden-shell .kiosk__themen .kiosk__thema-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.faden-shell .kiosk__themen small { font: 600 11.5px var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .kiosk__themen .ist-aktiv small { color: var(--green-ink); }
 /* 🚨 Die Spalte ist so breit wie das FETTE Wort — immer. Sonst schob sie sich bei jedem
    Umschalten um die paar Pixel breiter, die der aktive Zustand mehr braucht, und mit ihr
    wanderte das Bild daneben. Die zweite, fette Ausfertigung steht mit Höhe 0 darunter und
    bestimmt allein die Breite. */
-.faden-shell .kiosk__themen button::after { content: attr(data-name); display: block; height: 0; overflow: hidden; font-weight: 700; visibility: hidden; pointer-events: none; }
+/* 🚨 … und das Maß muss am NAMEN hängen, nicht am Knopf: seit der Zeilensatz mit
+   Punktführung da ist, ist der Knopf ein Flex-Kasten, und ein `::after` an ihm würde als
+   drittes Feld in der Zeile stehen statt unsichtbar darunter. */
+.faden-shell .kiosk__themen .kiosk__thema-name::after { content: attr(data-name); display: block; height: 0; overflow: hidden; font-weight: 700; visibility: hidden; pointer-events: none; }
 .faden-shell .kiosk__themen button:hover { color: var(--green); }
 .faden-shell .kiosk__themen .ist-aktiv button { font-weight: 700; color: var(--green-ink); }
 

@@ -23,7 +23,7 @@ export default function WochenbriefTeaser() {
           <p className="landing-block__vorspann">Was Leser diese Woche gefragt haben, was sich an Werten geändert hat, ein Finanzwort. Kurz genug für eine Tasse Kaffee.</p>
           <Insel typ="wochenbrief"><WochenbriefForm /></Insel>
         </div>
-        <img className="wb-teaser__bild" src="/assets/newsletter-illustration.svg" width={600} height={500} alt="" loading="lazy" decoding="async" />
+        <img className="wb-teaser__bild bild--druck" src="/assets/newsletter-illustration.svg" width={600} height={500} alt="" loading="lazy" decoding="async" />
       </div>
     </section>
   );

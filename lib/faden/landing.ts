@@ -7,6 +7,7 @@
  * zusätzliche WordPress-Abfrage.
  */
 import type { WerkzeugVerweis } from "@/lib/faden/werkzeugIndex";
+import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 
 /** Ein Eintrag der Auslese, so knapp wie möglich — er reist im Schnappschuss mit. */
 export interface AusleseEintrag {
@@ -73,4 +74,19 @@ export const GAENGIGE_VERGLEICHE = [
 /** Verweise zu einer Slug-Liste, unbekannte übersprungen. */
 export function vergleicheAufloesen(index: Map<string, WerkzeugVerweis>, slugs: string[]): WerkzeugVerweis[] {
   return slugs.flatMap((s) => { const v = index.get(`vergleich:${s}`); return v ? [v] : []; });
+}
+
+/**
+ * Leos Empfehlungen mit Beschreibung. Der Text kommt aus `lib/vergleichDescriptions.ts`
+ * — dort steht er, weil das Vergleich-CPT kein Excerpt kennt. Auf den ersten Satz
+ * gekürzt: in der Vorschau steht ein Versprechen, kein Absatz.
+ */
+export function empfehlungen(index: Map<string, WerkzeugVerweis>, slugs: string[]): { titel: string; href: string; text: string }[] {
+  return slugs.flatMap((slug) => {
+    const v = index.get(`vergleich:${slug}`);
+    if (!v) return [];
+    const ganz = VERGLEICH_DESCRIPTIONS[slug] || "";
+    const punkt = ganz.indexOf(". ");
+    return [{ titel: v.titel, href: v.href, text: punkt > 0 ? ganz.slice(0, punkt + 1) : ganz }];
+  });
 }

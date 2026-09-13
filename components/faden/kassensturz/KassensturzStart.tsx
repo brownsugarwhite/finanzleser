@@ -19,6 +19,7 @@ import { useState, useSyncExternalStore } from "react";
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import Kassensturz, { type Ziel } from "./Kassensturz";
 import Fortschrittsreihe from "./Fortschrittsreihe";
+import Knopf from "@/components/faden/ui/Knopf";
 import { KS_EREIGNIS, KS_SPEICHER, datumLang, offeneFragen } from "./logik";
 
 function abonnieren(cb: () => void): () => void {
@@ -66,13 +67,13 @@ export default function KassensturzStart({ daten, ziele }: { daten: KassensturzD
           <>
             <div className="ks__frage">Ihr Kassensturz vom {datumLang(erg.datum)} · Score {erg.score}</div>
             <p className="ks__hinweis">Profil, Ampel und Ihre Lücken liegen bereit. Die Werte ändern sich jedes Jahr; in sechs Monaten lohnt ein neuer Durchgang.</p>
-            <button type="button" className="ks__weiter" onClick={() => setOffen(true)}>Ergebnis ansehen<i>→</i></button>
+            <Knopf gross onClick={() => setOffen(true)}>Ergebnis ansehen</Knopf>
           </>
         ) : (
           <>
             <div className="ks__frage">Wie gut sind Sie eigentlich aufgestellt?</div>
             <p className="ks__hinweis">{anzahl} Fragen, keine Tastatur. Am Ende sehen Sie Ihr Profil, Ihre Ampel und Ihre drei größten Lücken — sofort und vollständig.</p>
-            <button type="button" className="ks__weiter" onClick={() => setOffen(true)}>{begonnen ? "Weitermachen" : "Kassensturz starten"}<i>→</i></button>
+            <Knopf gross onClick={() => setOffen(true)}>{begonnen ? "Weitermachen" : "Kassensturz starten"}</Knopf>
           </>
         )}
       </div>

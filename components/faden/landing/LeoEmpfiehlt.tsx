@@ -26,7 +26,7 @@ import { KS_EREIGNIS, KS_SPEICHER, ergebnis, type Antworten } from "@/components
 import type { KassensturzDaten } from "@/lib/faden/optionen";
 import type { Ziel } from "@/components/faden/kassensturz/Kassensturz";
 
-export interface Empfehlung { titel: string; href: string }
+export interface Empfehlung { titel: string; href: string; text?: string }
 
 function abonnieren(cb: () => void): () => void {
   window.addEventListener("storage", cb);
@@ -39,6 +39,9 @@ function lesen(): string | null {
 function serverLesen(): string | null {
   return null;
 }
+
+/** Platzhaltergrafiken, bis die Vergleiche eigene Bilder aus dem CMS mitbringen. */
+const BILDER = ["/assets/visuals/rechner_placeholder.svg", "/assets/general/rechner_visual.png", "/assets/visuals/animalVisual.svg", "/assets/general/checklisten_visual.png"];
 
 /** Vergleiche aus den Lücken des Kassensturzes, in der Reihenfolge des Ergebnisses. */
 function ausKassensturz(roh: string | null, daten: KassensturzDaten | null, ziele: Record<string, Ziel>, anzahl: number): Empfehlung[] {
@@ -80,10 +83,14 @@ export default function LeoEmpfiehlt({ gaengig, daten, ziele }: { gaengig: Empfe
       <span className="kicker kicker--gruen">Leo · Ihr Finanzagent</span>
       <LeoRede text={satz}><p>{satz}</p></LeoRede>
       <div className="leo-empfiehlt__reihe">
-        {liste.map((v) => (
-          <button key={v.href} type="button" className="chip chip--leo" onClick={() => navigieren(v.href)}>
-            <i className="dot dot--vergleich" aria-hidden="true" />{v.titel}
-          </button>
+        {liste.map((v, i) => (
+          <a key={v.href} className="vgl-karte" href={v.href} onClick={(e) => { e.preventDefault(); navigieren(v.href); }}>
+            <img className="vgl-karte__bild bild--druck" src={BILDER[i % BILDER.length]} width={496} height={419} alt="" loading="lazy" decoding="async" />
+            <span className="kicker kicker--tool"><i className="dot dot--vergleich" aria-hidden="true" />Vergleich</span>
+            <b className="vgl-karte__titel">{v.titel}</b>
+            {v.text && <span className="vgl-karte__text">{v.text}</span>}
+            <span className="pfeil-link">Tarife nebeneinander<i /></span>
+          </a>
         ))}
       </div>
     </div>

@@ -7,7 +7,7 @@
  */
 import { getNavItems, getLatestPosts } from "@/lib/wordpress";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
-import { GAENGIGE_VERGLEICHE, vergleicheAufloesen, werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
+import { GAENGIGE_VERGLEICHE, empfehlungen, werkzeugeDerWoche, type AusleseEintrag } from "@/lib/faden/landing";
 import { buildPostUrl } from "@/lib/urls";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { baueSpalten } from "@/lib/faden/spalten";
@@ -83,7 +83,7 @@ export default async function FadenLanding() {
     ...juengste.slice(1, 4).map((p) => ({ label: "Ratgeber", titel: decodeHtmlEntities(p.title), href: buildPostUrl(p) })),
     ...werkzeugeDerWoche(werkzeuge),
   ];
-  const gaengig = vergleicheAufloesen(werkzeuge, GAENGIGE_VERGLEICHE).map((v) => ({ titel: v.titel, href: v.href }));
+  const gaengig = empfehlungen(werkzeuge, GAENGIGE_VERGLEICHE);
 
   return (
     <>
