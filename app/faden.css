@@ -1403,6 +1403,34 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
    egal wie spezifisch sie ist. In derselben Ebene zählt wieder die Spezifität, und die
    ist hier höher. Ohne das Konstrukt bleibt der Schaukasten zugeklappt. */
 body[data-schaukasten] .faden-shell .einschub { display: none; }
+/* … außer dort, wo die Anzeigenformate selbst der Gegenstand sind. */
+body[data-schaukasten] .faden-shell .schau-anzeigen .einschub { display: grid; }
+
+/* ---------- Schaukasten: Bildvergleich und Anzeigentafel ---------- */
+.faden-shell .schau-bilder { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--luft-m); margin-top: var(--luft-s); }
+.faden-shell .schau-bilder img { width: 100%; height: auto; display: block; }
+.faden-shell .schau-anzeigen { display: grid; gap: var(--luft-s); justify-items: start; margin-top: var(--luft-m); }
+.faden-shell .schau-anzeigen .kicker { margin-top: var(--luft-m); }
+
+/* ---------- Schaukasten: die Tokentafel ---------- */
+.faden-shell .token { display: grid; gap: var(--luft-m); }
+.faden-shell .token__titel { font-size: 17px; border-bottom: 1px solid var(--rule-strong); padding-bottom: var(--luft-xs); margin-top: var(--luft-l); }
+.faden-shell .token ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.faden-shell .token li { display: grid; align-items: center; gap: var(--luft-s) var(--luft-m); border-top: 1px solid var(--rule-fein); padding: var(--luft-s) 0; }
+.faden-shell .token code { font: 600 12px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ink); }
+.faden-shell .token b { font: 600 12px/1.3 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.faden-shell .token span { font: var(--schrift-klein); color: var(--muted); }
+.faden-shell .token__felder li { grid-template-columns: 40px 190px 118px minmax(0, 1fr); }
+.faden-shell .token__probe { width: 40px; height: 28px; border: 1px solid var(--rule); }
+.faden-shell .token__linien li { grid-template-columns: 190px minmax(60px, 1fr) 220px 118px; }
+.faden-shell .token__linien i { height: 2px; }
+.faden-shell .token__luft li { grid-template-columns: 130px 58px 60px minmax(0, 1fr); }
+.faden-shell .token__luft i { height: 14px; background: var(--green); display: block; }
+.faden-shell .token__schrift li { grid-template-columns: minmax(0, 1fr) 190px 200px; }
+.faden-shell .token__satz { color: var(--ink); }
+@media (max-width: 760px) {
+  .faden-shell .token__felder li, .faden-shell .token__linien li, .faden-shell .token__luft li, .faden-shell .token__schrift li { grid-template-columns: minmax(0, 1fr); }
+}
 @layer base {
   body[data-schaukasten] .faden-shell .weiterlesen .antwort[hidden],
   body[data-schaukasten] .faden-shell .kurzfassung[hidden] { display: block !important; }
