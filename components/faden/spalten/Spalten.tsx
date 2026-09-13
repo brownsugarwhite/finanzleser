@@ -246,7 +246,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
                   <div className="kiosk__oben">
                     {r.bild && (
                       <span className="kiosk__bild">
-                        <img className="bild--druck" src={r.bild.src} alt={r.bild.alt} loading="lazy" />
+                        <img src={r.bild.src} alt={r.bild.alt} loading="lazy" />
                       </span>
                     )}
                     <ul className="kiosk__themen">

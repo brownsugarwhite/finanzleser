@@ -85,7 +85,7 @@ export default function LeoEmpfiehlt({ gaengig, daten, ziele }: { gaengig: Empfe
       <div className="leo-empfiehlt__reihe">
         {liste.map((v, i) => (
           <a key={v.href} className="vgl-karte" href={v.href} onClick={(e) => { e.preventDefault(); navigieren(v.href); }}>
-            <img className="vgl-karte__bild bild--druck" src={BILDER[i % BILDER.length]} width={496} height={419} alt="" loading="lazy" decoding="async" />
+            <img className="vgl-karte__bild" src={BILDER[i % BILDER.length]} width={496} height={419} alt="" loading="lazy" decoding="async" />
             <span className="kicker kicker--tool"><i className="dot dot--vergleich" aria-hidden="true" />Vergleich</span>
             <b className="vgl-karte__titel">{v.titel}</b>
             {v.text && <span className="vgl-karte__text">{v.text}</span>}
