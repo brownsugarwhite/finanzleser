@@ -35,12 +35,12 @@ const stand = () => page.evaluate(() => {
     return bg === "rgb(253, 253, 251)" && !e.closest(".kiosk-blatt, .einschub, .neueste") && e.tagName !== "INPUT";
   }).map((e) => (e.className || e.tagName).toString().slice(0, 30));
   return {
-    wortspiel: q(".wortspiel"), ksDeck: q(".ks-deck"), leoChips: q(".leo-empfiehlt__reihe .chip"),
+    wortspiel: q(".wortspiel"), ksDeck: q(".ks-deck"), leoKarten: q(".leo-empfiehlt__reihe .vgl-karte"),
     chips: q(".weiterreden .chip"), schlange: q(".schlange__feld"), kioskBlatt: q(".kiosk-blatt"),
     wbFeld: q(".wb-teaser input"), weiss: [...new Set(weiss)],
   };
 });
-const vollstaendig = (s) => !!s && s.wortspiel > 0 && s.ksDeck > 0 && s.leoChips > 0 && s.chips > 0 && s.schlange > 0 && s.kioskBlatt > 0 && s.wbFeld > 0;
+const vollstaendig = (s) => !!s && s.wortspiel > 0 && s.ksDeck > 0 && s.leoKarten > 0 && s.chips > 0 && s.schlange > 0 && s.kioskBlatt > 0 && s.wbFeld > 0;
 const klappen = () => page.evaluate(() => document.querySelector("#strom .kapitel--alt .kapitel__kopf button")?.click());
 
 await page.goto(BASE, { waitUntil: "load" });
@@ -71,7 +71,7 @@ const taste = page.locator("#strom .kapitel--alt .wortspiel .taste").first();
 if (await taste.count()) { await taste.scrollIntoViewIfNeeded(); await taste.click(); await page.waitForTimeout(400); }
 pruefe("das Finanzwort nimmt Eingaben an", await page.evaluate(() => document.querySelectorAll("#strom .kapitel--alt .wortspiel .zelle.voll").length > 0));
 
-const deck = page.locator("#strom .kapitel--alt .ks-deck .ks__weiter").first();
+const deck = page.locator("#strom .kapitel--alt .ks-deck .knopf").first();
 if (await deck.count()) { await deck.scrollIntoViewIfNeeded(); await deck.click(); await page.waitForTimeout(900); }
 pruefe("der Kassensturz startet", await page.evaluate(() => document.querySelectorAll("#strom .kapitel--alt .ks__karte").length > 0));
 
