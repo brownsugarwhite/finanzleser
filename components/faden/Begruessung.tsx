@@ -92,5 +92,7 @@ export default function Begruessung({ children }: { children: React.ReactNode })
     return () => { abgebrochen = true; window.removeEventListener("scroll", pruefen); };
   }, []);
 
-  return <div ref={huelle}>{children}</div>;
+  // `kapitel__satz` trägt den Rhythmus der Seite: zwischen zwei Blöcken liegt immer
+  // dieselbe Luft, definiert an EINER Stelle in faden.css.
+  return <div className="kapitel__satz" ref={huelle}>{children}</div>;
 }

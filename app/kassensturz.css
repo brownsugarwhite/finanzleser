@@ -13,9 +13,6 @@
 .faden-shell .kasten--ks { min-width: 0; }
 .faden-shell .ks .ikon { width: 20px; height: 20px; vertical-align: -5px; flex: none; }
 .faden-shell .ks { border-top: 2px solid var(--green); padding-top: 14px; }
-/* Das Deckblatt steht ohne `.kasten` direkt auf der Seite — es braucht dessen
-   Abstand nach oben (faden.css: .kasten--ks) also selbst. */
-.faden-shell .ks-deck { margin-top: 40px; }
 .faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .faden-shell .ks__marke { display: inline-flex; align-items: center; gap: 6px; }
 .faden-shell .ks__marke i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }

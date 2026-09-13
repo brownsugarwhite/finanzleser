@@ -14,8 +14,11 @@
    ===================================================================================== */
 
 /* ---------- Gemeinsames Gerüst ---------- */
-.faden-shell .landing-block { display: grid; gap: 10px; clear: both; margin: 40px 0 4px; min-width: 0; scroll-margin-top: 110px; }
-.faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.faden-shell .landing-block { display: grid; gap: var(--luft-s); clear: both; min-width: 0; scroll-margin-top: 110px; }
+/* Kopfzeile eines Blocks: Kicker links, kursiver Hinweis rechts, darunter eine Haarlinie
+   in voller Tinte — genau wie die Abschnittsköpfe in v2 (Übergabe Zeile 1158). Die Linie
+   gehört zur Kopfzeile, nicht als eigenes Element daneben. */
+.faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; }
 .faden-shell .landing-block__hinweis { font: italic 300 12.5px var(--serif); color: var(--muted); }
 .faden-shell .landing-block__schlag { margin: 6px 0 0; font: 900 clamp(20px, 2.2vw, 27px)/1.15 var(--serif); color: var(--ink); text-wrap: balance; }
 .faden-shell .landing-block__vorspann { margin: 0; font: italic 300 15px/1.5 var(--serif); color: var(--muted); max-width: 56ch; }
@@ -49,9 +52,6 @@
 .faden-shell .plus-teaser__preis i { width: 34px; height: 34px; border-radius: 15px; background: var(--green); display: grid; place-items: center; flex: none; }
 
 /* ---------- Leo empfiehlt ---------- */
-/* Leos Block ist kein `.landing-block` (er braucht die Gasse aus `.wort--leo`) — den
-   Abstand nach oben trägt er deshalb selbst. */
-.faden-shell .leo-empfiehlt { margin-top: 44px; }
 .faden-shell .leo-empfiehlt__reihe { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
 /* ---------- Weiterreden mit Leo ---------- */

@@ -12,7 +12,6 @@ export default function PlusTeaser() {
         <span className="kicker kicker--gruen">Finanzleser Plus</span>
         <span className="landing-block__hinweis">Werbefrei lesen</span>
       </div>
-      <span className="doppellinie" aria-hidden="true" />
       <h3 id="plus-titel" className="landing-block__schlag">Leo merkt sich Ihre Zahlen. Der Faden reißt nie ab.</h3>
       <p className="landing-block__vorspann">Aktenkoffer ohne Limit, Wächter für alle Verträge, Ausgaben als PDF – werbefrei.</p>
       <ul className="plus-teaser__punkte">

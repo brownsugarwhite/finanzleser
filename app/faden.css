@@ -7,20 +7,73 @@
    Rechner rechner.css. Kein Tailwind im Faden-Code.
    ===================================================================================== */
 
+/* ═══════════════════════════════════════════════════════════════════════════════════
+   DAS TOKENSYSTEM DES FADENS
+
+   Alle Werte, die mehr als einmal vorkommen, stehen HIER — Farbe, Linie, Abstand,
+   Schriftgrad. Wer im Faden eine Zahl direkt in eine Regel schreibt, muss sie begründen
+   können; sonst gehört sie in dieses Verzeichnis. Der Schaukasten zeigt jedes Token.
+
+   Vier Regeln, die den Zeitungsstil tragen:
+
+   1. **Papierfarbe, nicht Weiß.** Die Seite ist `--paper`. Nichts bekommt einen eigenen
+      Grund, solange es nicht ausdrücklich ein Kasten sein soll (`.kasten--papier`).
+   2. **Linien statt Rahmen.** Ein Block grenzt sich durch eine Linie über sich ab, nicht
+      durch eine Umrandung. Die **Doppellinie** ist dem Kopf des Fadens und dem Kiosk
+      vorbehalten — überall sonst gilt eine Haarlinie.
+   3. **Schrift trennt Rang, nicht Größe allein.** Serif trägt Titel und Zitat, Sans den
+      Fließtext und alles Technische. Kursiv ist der Hinweis, Versalien der Kicker.
+   4. **Abstände kommen aus der Leiter.** Kein `margin: 37px`. Die Leiter ist
+      4 · 8 · 14 · 22 · 34 · 52 px und deckt alles ab, was im Faden vorkommt.
+   ═══════════════════════════════════════════════════════════════════════════════════ */
 .faden-shell {
-  --paper: var(--color-bg-page); --white: #fdfdfb; --placeholder: var(--color-placeholder-bg);
+  /* ── Flächen ───────────────────────────────────────────────────────────────────── */
+  --paper: var(--color-bg-page);        /* die Seite. Standardgrund für ALLES */
+  --white: #fdfdfb;                     /* nur für ausdrückliche Kästen und Kiosk-Blätter */
+  --placeholder: var(--color-placeholder-bg);
+
+  /* ── Tinte ─────────────────────────────────────────────────────────────────────── */
+  --ink: var(--color-text-primary);     /* Titel, Fließtext */
+  --muted: var(--color-text-medium);    /* Kicker, Hinweis, Bildunterschrift */
+  --green: var(--color-brand);          /* Marke: Pfeile, Punkte, Knopfscheibe */
+  --green-ink: #2E7A0B;                 /* Marke als SCHRIFT (kontraststark genug) */
+  --pink: var(--color-brand-secondary); /* Zweitmarke: Spiel, Finanzwort */
+  --pink-tint: #FBEAF1; --tint: #eef3e8;
+  --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche);
+  --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
+  --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
+
+  /* ── Linien ────────────────────────────────────────────────────────────────────── */
+  /* Vier Stufen derselben Tinte. --rule ist die häufigste (Blocktrenner), --rule-fein
+     trägt Zeilen in Listen, --rule-soft die feinsten Trenner im Verzeichnis,
+     --rule-mid Kapitelkopf, Fortschrittsgleis und Chipkontur, --rule-strong volle Tinte. */
+  --rule: rgba(51,74,39,.16); --rule-fein: rgba(51,74,39,.1); --rule-soft: rgba(51,74,39,.08);
+  --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
+
+  /* ── Abstandsleiter ───────────────────────────────────────────────────────────── */
+  /* Sechs Stufen, mehr braucht der Faden nicht:
+     xs Zeilenabstand in einer Liste · s zwischen Kicker und Titel · m innerhalb eines
+     Blocks · l zwischen zwei Teilen eines Blocks · xl zwischen zwei Blöcken ·
+     xxl zwischen zwei Kapitelteilen. */
+  --luft-xs: 4px; --luft-s: 8px; --luft-m: 14px; --luft-l: 22px; --luft-xl: 34px; --luft-xxl: 52px;
+
+  /* ── Schriftleiter ────────────────────────────────────────────────────────────── */
+  --serif: var(--font-heading); --sans: var(--font-body);
+  --schrift-kicker: 700 10.5px/1.3 var(--sans);          /* Versalien, .14em Laufweite */
+  --schrift-klein: 400 12.5px/1.45 var(--sans);          /* Fußnote, Quelle */
+  --schrift-hinweis: italic 300 12.5px/1.45 var(--serif);/* der kursive Halbsatz rechts */
+  --schrift-text: 400 15px/1.65 var(--sans);             /* Fließtext */
+  --schrift-zeile: 700 15.5px/1.3 var(--serif);          /* Titelzeile in einer Liste */
+  --schrift-vorspann: italic 300 15px/1.5 var(--serif);  /* Vorspann unter der Schlagzeile */
+  --schrift-schlag: 900 clamp(20px, 2.2vw, 27px)/1.15 var(--serif);  /* Blockschlagzeile */
+  --schrift-gross: 900 clamp(24px, 2.4vw, 34px)/1.2 var(--serif);    /* Kassensturzfrage */
+  --laufweite-kicker: .14em;
+
+  /* ── Maße ─────────────────────────────────────────────────────────────────────── */
+  --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
   /* Die Eingabepille — Maße wie im Leo-Chat der Live-Seite; --pille-breite gilt nur unten. */
   --pille-h: 92px; --pille-h-landing: 108px; --pille-radius: 35px; --pille-breite: 750px; --pille-breite-landing: 680px;
-  /* Die Haarlinien-Stufen der Übergabe. --rule ist mit 37 Fundstellen die häufigste,
-     --rule-fein (.1) trägt FAQ-Zeilen und Quiz-Optionen, --rule-soft (.08) die feinsten
-     Trenner im Inhaltsverzeichnis. --rule-strong ist die volle Tinte. */
-  --rule: rgba(51,74,39,.16); --rule-fein: rgba(51,74,39,.1); --rule-soft: rgba(51,74,39,.08); --rule-mid: rgba(51,74,39,.2); --rule-strong: #334A27;
-  --ink: var(--color-text-primary); --muted: var(--color-text-medium);
-  --green: var(--color-brand); --green-ink: #2E7A0B; --pink: var(--color-brand-secondary); --pink-tint: #FBEAF1; --tint: #eef3e8;
-  --tool-rechner: var(--color-tool-rechner); --tool-vergleich: var(--color-tool-vergleiche); --tool-checkliste: var(--color-tool-checklisten); --tool-dokumente: var(--color-tool-dokumente);
-  --fill-1: var(--visual-fill-1); --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;
-  --serif: var(--font-heading); --sans: var(--font-body);
-  --kopf-h: 64px; --rand-l: 300px; --rand-r: 300px; --spalte: 750px;
+
   background: var(--paper); color: var(--ink); font: 16px/1.65 var(--sans); min-height: 100vh;
 }
 /* 🚨 Keine Scroll-Verankerung des Browsers: Chrome wählt selbst einen Ankerknoten und
@@ -38,7 +91,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 @media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
 
 /* ---------- Typografische Bausteine ---------- */
-.faden-shell .kicker { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.faden-shell .kicker { font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker); text-transform: uppercase; color: var(--muted); }
 .faden-shell .kicker--gruen { color: var(--green-ink); } .faden-shell .kicker--pink { color: var(--pink); }
 .faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: 6px; }
 .faden-shell .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
@@ -268,7 +321,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .verlauf { padding-right: 2px; }
 .faden-shell .rand--links .verlauf h2 { position: sticky; top: 0; z-index: 2; background: var(--paper); padding-top: 2px; margin-bottom: 8px; }
 .faden-shell .rand h2 { font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-.faden-shell .rand h2::after { content: ""; display: block; height: 5px; margin-top: 8px; background: var(--doppellinie); }
+/* 🚨 Eine Haarlinie, keine Doppellinie. Die Doppellinie ist dem Kopf des Fadens und dem
+   Kiosk vorbehalten (Regel 2 des Tokensystems, Wunsch vom 13.09.2026) — sonst verliert
+   sie ihre Bedeutung als Auszeichnung. */
+.faden-shell .rand h2::after { content: ""; display: block; height: 1px; margin-top: var(--luft-s); background: var(--rule-strong); }
 .faden-shell .rand--rechts h2 { margin-bottom: 10px; }
 /* ---------- Verlauf: die schlichte Liste aus „Faden A" (nicht v2) ----------
    Quelle: `Finanzleser Faden A - Zeitung.dc.html`, Zeile 203–216. Nummer als eigene
@@ -395,6 +451,14 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kapitel__schnappschuss { opacity: .92; }
 /* Die Insel-Hülle darf das Layout nicht anfassen — sie ist nur ein Marker (Insel.tsx). */
 .faden-shell .insel { display: contents; }
+
+/* ── Der Rhythmus der Zeitungsseite ──────────────────────────────────────────────────
+   EINE Regel für den Abstand zwischen zwei Blöcken eines Kapitels. Wer einem Block eine
+   eigene `margin-top` gibt, bricht ihn.
+   🚨 Die zweite Zeile ist nötig, weil `.insel` `display: contents` trägt: Margins am
+   Inselknoten selbst wirken nicht, also muss sein Kind sie bekommen. */
+.faden-shell .kapitel__satz > *, .faden-shell .kapitel__satz > .insel > *:not(script) { margin-top: var(--luft-xxl); }
+.faden-shell .kapitel__satz > *:first-child, .faden-shell .kapitel__satz > .insel:first-child > *:not(script) { margin-top: 0; }
 /* … außer im eingefrorenen Kapitel: Dort ist die Insel ein Kasten mit der Höhe, die sie
    lebend hatte (lib/faden/schnappschuss.ts), damit beim Leeren und beim Beleben nichts rückt. */
 .faden-shell .insel--platz { display: block; }
@@ -467,7 +531,20 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .suchpille-wrap > .field-outline { z-index: 0; }
 
 /* ---------- Kasten (Werkzeugkarte) ---------- */
-.faden-shell .kasten { position: relative; background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--green); border-radius: 2px; padding: 14px 18px 12px; display: grid; gap: 10px; scroll-margin-top: 110px; }
+/* 🚨 Der „Kasten" ist seit dem 13.09.2026 KEIN Kasten mehr — er steht auf dem Papier der
+   Seite und grenzt sich allein durch die Linie über sich ab. Regel des Users: „Wenn ich
+   es nicht explizit sage, ist alles auf Zeitungshintergrund."
+
+   Das ist zugleich ein Fehlerfix. Der weiße Grund wurde bisher fallweise per
+   `#kapitel-live[data-key="heute"] .kasten--ks { background: none }` weggenommen. In
+   einem EINGEFRORENEN Kapitel trifft dieser Selektor nicht mehr — dort kam der weiße
+   Kasten zurück, und zwar nur dort. Wer eine Ausnahme nur für einen Zustand schreibt,
+   baut genau solche Geister.
+
+   Wer wirklich ein Kärtchen will, sagt es: `.kasten--papier`. */
+.faden-shell .kasten { position: relative; background: none; border: 0; border-top: 3px solid var(--green); border-radius: 0; padding: var(--luft-m) 0 var(--luft-s); display: grid; gap: var(--luft-s); scroll-margin-top: 110px; }
+/* Die Ausnahme, ausdrücklich: echtes Papier mit Kante. */
+.faden-shell .kasten--papier { background: var(--white); border: 1px solid var(--rule); border-top: 3px solid var(--green); border-radius: 2px; padding: var(--luft-m) 18px var(--luft-s); }
 .faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
 .faden-shell .kasten h3 { font-size: 19px; }
 .faden-shell .kasten p { max-width: 64ch; }
@@ -611,7 +688,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .aktionen { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--rule-strong); padding-top: 10px; margin-top: 34px; align-items: center; }
 .faden-shell .dazu { display: grid; gap: 0; margin-top: 34px; border-top: 1px solid var(--rule); padding-top: 12px; }
 .faden-shell .dazu .kicker { margin-bottom: 4px; }
-.faden-shell .kasten--ks { margin-top: 40px; }
+/* Abstand kommt aus dem Rhythmus des Kapitels (.kapitel__satz), nicht vom Block selbst. */
 .faden-shell .dazu__eintrag { text-align: left; border-bottom: 1px solid var(--rule); padding: 8px 0; font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
 .faden-shell .dazu__eintrag:hover { color: var(--green-ink); }
 /* ---------- Abschnittsfuß: Teilen, Trennlinie, darunter Leos Fragen ---------- */
@@ -1267,20 +1344,15 @@ body.faden-body .flug { font: 600 13px/1.2 var(--sans); background: var(--ink); 
 .faden-shell .seo li { border-bottom: 1px solid var(--rule); padding: 6px 0; font-size: 13.5px; }
 .faden-shell .seo li small { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 @media (max-width: 900px) { .faden-shell .seite__innen { grid-template-columns: 1fr; } .faden-shell .seo { position: static; } }
-/* ---------- Kassensturz und Finanzwort im Kapitel „Heute": ohne Kasten ----------
-   Beide sind Teil der Zeitungsseite und kein Kärtchen darauf. Nur im lebenden Kapitel
-   der Startseite — als eigenes Kapitel (/kassensturz, /spiele/…) behalten sie ihren
-   Rahmen, dort tragen sie die Seite allein. */
-.faden-shell #kapitel-live[data-key="heute"] .kasten--ks,
-.faden-shell #kapitel-live[data-key="heute"] .kasten--pink {
-  border: 0; background: none; box-shadow: none; padding-left: 0; padding-right: 0;
-}
-/* Das Finanzwort nimmt dort die volle Breite und steht mittig.
-   🚨 `:not(.kasten--ks)` ist nötig: der Kassensturz trägt `kasten--pink` ebenfalls.
-   Ohne die Ausnahme zentriert diese Regel auch ihn — seine Bühne schrumpfte dadurch auf
-   548 statt 728 px und die Antwortkarten brachen zweizeilig um. */
-.faden-shell #kapitel-live[data-key="heute"] .kasten--pink:not(.kasten--ks) { display: grid; justify-items: center; text-align: center; }
-.faden-shell #kapitel-live[data-key="heute"] .kasten--pink:not(.kasten--ks) > h3 { font-size: clamp(20px, 2vw, 26px); }
+/* 🚨 Hier standen drei Regeln, die Kassensturz und Finanzwort NUR im lebenden Kapitel
+   der Startseite entkasteten (`#kapitel-live[data-key="heute"] …`). Der Grund ist mit
+   dem 13.09.2026 entfallen: `.kasten` hat gar keinen weißen Grund mehr. Und der
+   Zustands-Selektor war ein Fehler — in einem eingefrorenen Kapitel trifft
+   `#kapitel-live` nicht mehr, dort kam der Kasten zurück.
+
+   Geblieben ist die Mitte für das Finanzwort, jetzt an der Sache statt am Zustand. */
+.faden-shell .kasten--pink:not(.kasten--ks) { justify-items: center; text-align: center; }
+.faden-shell .kasten--pink:not(.kasten--ks) > h3 { font-size: clamp(20px, 2vw, 26px); }
 
 /* ---------- Schaukasten: Anzeigen aus, alles ausgeklappt ----------
    Gilt nur, solange eine Schaukasten-Seite offen ist (SchaukastenModus setzt

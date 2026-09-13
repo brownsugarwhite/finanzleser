@@ -20,7 +20,6 @@ export default function AusDemNewsletter({ eintraege }: { eintraege: AusleseEint
         <span className="kicker">Aus unserem Newsletter</span>
         <span className="landing-block__hinweis">Donnerstags, ein Feld, kein Formular</span>
       </div>
-      <span className="doppellinie" aria-hidden="true" />
       <h3 id="auslese-titel" className="landing-block__schlag">Was diese Woche im Wochenbrief steht</h3>
       <ul className="auslese__liste">
         {eintraege.map((e) => (
