@@ -12,12 +12,12 @@
  * body.faden-eingabe-frei die Eingabe des Fadens unter dem Fensterrand geparkt — sonst
  * stünden zwei Suchpillen gleichzeitig da. Die Einfahrt selbst macht faden.css.
  *
- * Dazu aus dem Prototyp-Gerüst (03c-hero.html:14–16, 42–43): unter der Pille die
- * Werkzeugreihe (Rechner · Vergleiche · Checklisten, docken beim Laden an, Klick öffnet
- * das Finanztools-Registerblatt), die Dokumentenzahl zählt von 0 auf 12.480 hoch, und
- * unten der CTA „Finanzleser entdecken ↓“, der nach 2,2 s erscheint und zu „Heute“ scrollt.
+ * Dazu unter der Pille die Werkzeugreihe (Rechner · Vergleiche · Checklisten, Klick
+ * öffnet das Finanztools-Registerblatt), die Dokumentenzahl und der CTA „Finanzleser
+ * entdecken ↓", der zu „Heute" scrollt. Alles steht sofort — seit dem 13.09.2026 hat der
+ * Hero keine Auftrittsanimation mehr.
  */
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useFaden } from "@/components/faden/FadenProvider";
 import Spark from "@/components/ui/Spark";
@@ -26,11 +26,7 @@ import LeoChatSendButton from "@/components/ui/LeoChatSendButton";
 import VersichererSelect from "@/components/ui/VersichererSelect";
 import type { Versicherer } from "@/lib/versicherer";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
-import { DOKUMENTE } from "@/lib/faden/bestand";
 import { Trenner, useHoverBox } from "@/components/faden/spalten/HoverBox";
-
-/** ease() des Prototyps (03b-intro.html:6), für den Zähler. */
-const glatt = (t: number) => t * t * (3 - 2 * t);
 
 /** Werkzeugreihe (TOOLS, 03c-hero.html:7). Reiter-Schlüssel wie REITER in kopf/Blatt.tsx; Zahlen wie im Prototyp. */
 const WERKZEUGE = [
@@ -38,13 +34,6 @@ const WERKZEUGE = [
   { key: "vergleich", name: "Vergleiche", zahl: 43, text: "Tarife nebeneinander", ziel: "Zu den Vergleichen" },
   { key: "checkliste", name: "Checklisten", zahl: 207, text: "Schritt für Schritt, als PDF", ziel: "Zu den Checklisten" },
 ] as const;
-/** Andocken wie im Prototyp-Hero „Zeitung“ (03c-hero.html:73): Startversatz und Verzögerung (s) je Kachel. */
-const ANDOCK_START = ["translate3d(0,40px,0)", "translate3d(0,54px,0)", "translate3d(0,40px,0)"];
-const ANDOCK_NACH = [1.9, 2.05, 2.2];
-
-const ZAEHL_DAUER = 2.6; // s (zaehler(), 03c-hero.html:43)
-const CTA_NACH = 2200; // ms (03c-hero.html:16)
-
 /** Der Hero gehört nur an den Anfang eines Fadens; kommt man später zur Startseite zurück, hängt sich nur „Heute“ an. */
 export type HeroZahlen = Partial<Record<"rechner" | "vergleich" | "checkliste", number>>;
 
@@ -65,16 +54,15 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
   const { fragen, blattOeffnen } = useFaden();
   const [wert, setWert] = useState("");
   const hero = useRef<HTMLElement>(null);
-  const fuss = useRef<HTMLElement>(null);
+  const pilleFeld = useRef<HTMLDivElement>(null);
   const pille = useRef<HTMLFormElement>(null);
   const feld = useRef<HTMLTextAreaElement>(null);
   const [versicherer, setVersicherer] = useState<Versicherer | null>(null);
   const reihe = useRef<HTMLDivElement>(null);
-  const zahl = useRef<HTMLElement>(null);
-  const cta = useRef<HTMLButtonElement>(null);
   useHoverBox(reihe, ".werkzeug-k", { radius: 14, oben: 16, unten: 16 });
 
-  // Die Eingabe des Fadens fährt von unten herein, sobald der Hero ganz durch ist.
+  // Die Eingabe des Fadens fährt von unten herein, sobald die OBERE Pille aus dem Bild
+  // gescrollt ist (Wunsch vom 13.09.2026) — nicht erst, wenn der ganze Hero durch ist.
   //
   // 🚨 Hier stand bis zum 12.09.2026 ein scrollgebundener rAF-Loop: Die Suchpille des
   // Heros flog per `position: fixed` in die untere Eingabezeile, Titel und Werkzeugreihe
@@ -83,7 +71,7 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
   // ist. Das kostet nichts pro Frame und kann nie zwei Pillen gleichzeitig zeigen: die
   // Bedingung hängt an der Unterkante des Heros, nicht an einem Prozentwert.
   useEffect(() => {
-    const el = fuss.current;
+    const el = pilleFeld.current;
     if (!el) return;
     const frei = (ja: boolean) => document.body.classList.toggle("faden-eingabe-frei", ja);
     if (!("IntersectionObserver" in window)) { frei(true); return () => frei(false); }
@@ -92,52 +80,11 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
     return () => { beobachter.disconnect(); frei(false); };
   }, []);
 
-  // Beim Laden: Kacheln docken an (kachelnAndocken), der Zähler läuft (zaehler), der CTA blendet ein.
-  useLayoutEffect(() => {
-    const reduziert = reduzierteBewegung();
-    const timer: ReturnType<typeof setTimeout>[] = [];
-    const kacheln = Array.from(reihe.current?.querySelectorAll<HTMLElement>(".werkzeug-k") ?? []);
-    // Die Trennlinien gehören zu den Kacheln: Trenner i-1 steht zwischen Kachel i-1 und i
-    // und kommt mit der ANKOMMENDEN Kachel i. Sonst stünden drei Striche im leeren Raum,
-    // bevor überhaupt etwas angedockt ist.
-    const trenner = Array.from(reihe.current?.querySelectorAll<HTMLElement>(".trenner--voll") ?? []);
-    if (reduziert) {
-      kacheln.forEach((k) => { k.style.transition = "none"; k.classList.add("da"); });
-      // Die Bewegung sitzt am `::before`, nicht am Element — abgeschaltet wird sie per Media-Query in faden-hover.css.
-      trenner.forEach((t) => t.classList.add("da"));
-    } else {
-      kacheln.forEach((k, i) => { k.style.transform = ANDOCK_START[i] ?? ""; });
-      timer.push(setTimeout(() => {
-        kacheln.forEach((k, i) => {
-          timer.push(setTimeout(() => { k.classList.add("da"); trenner[i - 1]?.classList.add("da"); }, (ANDOCK_NACH[i] ?? 2.2) * 1000));
-        });
-      }, 40));
-    }
-    timer.push(setTimeout(() => cta.current?.classList.add("da"), reduziert ? 0 : CTA_NACH));
-
-    const z = zahl.current;
-    const fmt = (v: number) => v.toLocaleString("de-DE");
-    let raf = 0;
-    if (z) {
-      if (reduziert) z.textContent = fmt(DOKUMENTE);
-      else {
-        const t0 = performance.now();
-        z.textContent = fmt(0);
-        const zaehlen = () => {
-          const t = (performance.now() - t0) / 1000;
-          z.textContent = fmt(Math.round(DOKUMENTE * glatt(Math.min(1, t / ZAEHL_DAUER))));
-          if (t < ZAEHL_DAUER) raf = requestAnimationFrame(zaehlen);
-        };
-        raf = requestAnimationFrame(zaehlen);
-      }
-    }
-    return () => {
-      timer.forEach(clearTimeout);
-      if (raf) cancelAnimationFrame(raf);
-      if (z) z.textContent = fmt(DOKUMENTE);
-    };
-  }, []);
-
+  // 🚨 Kein Einfaden mehr (Wunsch vom 13.09.2026): „Alles soll sofort da sein."
+  // Hier standen Andock-Verzögerungen von 1,9 bis 2,2 s je Kachel, ein Zähler, der die
+  // Dokumentenzahl über 2,6 s hochzählte, und ein CTA, der nach 2,2 s erschien. Der
+  // Landing-Hero ist das Erste, was der Leser sieht — er soll ihn lesen können, nicht
+  // beim Aufbauen zusehen. Geblieben ist nur Leos Schreibmaschine weiter unten im Faden.
   const senden = (e: React.FormEvent) => { e.preventDefault(); const q = wert.trim(); if (!q) return; setWert(""); fragen(q); };
   const werkzeug = (e: React.MouseEvent, key: string) => { e.preventDefault(); blattOeffnen("finanztools", key); window.scrollTo({ top: 0 }); };
   const entdecken = () => {
@@ -154,7 +101,8 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           <span className="landing-kicker">Das digitale Finanzmagazin</span>
           <h1>Fragen Sie Ihren persönlichen Versicherungsberater Leo</h1>
         </div>
-        <div className="hero-landing__pille">
+        {/* Der Wächter: solange die Pille im Bild ist, bleibt die Eingabe unten geparkt. */}
+        <div className="hero-landing__pille" ref={pilleFeld}>
           <div className="suchpille-wrap">
             <FieldOutline radius={35} gap={4} mess={pille} />
             <form ref={pille} onSubmit={senden} autoComplete="off" className={"suchpille" + (wert ? " hat-text" : "")}>
@@ -196,9 +144,7 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
           </div>
         </div>
       </div>
-      <button type="button" className="hero-cta" ref={cta} onClick={entdecken}>Finanzleser entdecken<i>↓</i></button>
-      {/* 1-px-Wächter an der Unterkante: solange er im Bild ist, bleibt die Eingabe unten geparkt. */}
-      <i ref={fuss} className="hero-fuss" aria-hidden="true" />
+      <button type="button" className="hero-cta" onClick={entdecken}>Finanzleser entdecken<i>↓</i></button>
     </section>
   );
 }
