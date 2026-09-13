@@ -480,8 +480,12 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    eigene `margin-top` gibt, bricht ihn.
    🚨 Die zweite Zeile ist nötig, weil `.insel` `display: contents` trägt: Margins am
    Inselknoten selbst wirken nicht, also muss sein Kind sie bekommen. */
-.faden-shell .kapitel__satz > *, .faden-shell .kapitel__satz > .insel > *:not(script) { margin-top: var(--luft-xxl); }
+.faden-shell .kapitel__satz > *:not(.haengt-an), .faden-shell .kapitel__satz > .insel > *:not(script):not(.haengt-an) { margin-top: var(--luft-xxl); }
 .faden-shell .kapitel__satz > *:first-child, .faden-shell .kapitel__satz > .insel:first-child > *:not(script) { margin-top: 0; }
+/* 🚨 `.haengt-an` ist die Ausnahme für alles, was am Vorgänger KLEBT statt neben ihm zu
+   stehen. Der Kiosk ist der Fall: Kopfblatt und Stapel sind EIN Stück, der Stapel liegt
+   mit negativem Rand auf dem Blatt darüber. Ohne die Ausnahme schiebt der Rhythmus
+   52 px dazwischen — genau die Lücke, die der User am 13.09.2026 gesehen hat. */
 /* … außer im eingefrorenen Kapitel: Dort ist die Insel ein Kasten mit der Höhe, die sie
    lebend hatte (lib/faden/schnappschuss.ts), damit beim Leeren und beim Beleben nichts rückt. */
 .faden-shell .insel--platz { display: block; }

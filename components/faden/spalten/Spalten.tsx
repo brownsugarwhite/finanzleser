@@ -197,8 +197,10 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
   }, [aktiv, beruehrt]);
 
   return (
+    // `haengt-an`: der Stapel klebt auf seinem Kopfblatt, der Rhythmus des Kapitels darf
+    // keine Luft dazwischen schieben (app/faden.css, .kapitel__satz).
     <section
-      className="kiosk spalten-kasten"
+      className="kiosk spalten-kasten haengt-an"
       id="rubriken"
       aria-label="Aus dem Kiosk"
       ref={stapel}
