@@ -19,9 +19,9 @@
    in voller Tinte — genau wie die Abschnittsköpfe in v2 (Übergabe Zeile 1158). Die Linie
    gehört zur Kopfzeile, nicht als eigenes Element daneben. */
 .faden-shell .landing-block__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; }
-.faden-shell .landing-block__hinweis { font: italic 300 12.5px var(--serif); color: var(--muted); }
-.faden-shell .landing-block__schlag { margin: 6px 0 0; font: 900 clamp(20px, 2.2vw, 27px)/1.15 var(--serif); color: var(--ink); text-wrap: balance; }
-.faden-shell .landing-block__vorspann { margin: 0; font: italic 300 15px/1.5 var(--serif); color: var(--muted); max-width: 56ch; }
+.faden-shell .landing-block__hinweis { font: var(--schrift-hinweis); color: var(--muted); }
+.faden-shell .landing-block__schlag { margin: 6px 0 0; font: var(--schrift-schlag); color: var(--ink); text-wrap: pretty; }
+.faden-shell .landing-block__vorspann { margin: 0; font: var(--schrift-vorspann); color: var(--muted); }
 
 /* ---------- Aus unserem Newsletter: sechs Zeilen mit Punktführung ---------- */
 .faden-shell .auslese__liste { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }

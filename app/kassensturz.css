@@ -28,7 +28,12 @@
 .faden-shell .ks__buehne { display: grid; gap: 18px; justify-items: start; text-align: left; transition: opacity .22s ease, transform .22s ease; }
 .faden-shell .ks__buehne.geht { opacity: 0; transform: translateY(-8px); }
 .faden-shell .ks__buehne.kommt { opacity: 0; transform: translateY(10px); transition: none; }
-.faden-shell .ks__frage { font: 900 clamp(24px, 2.4vw, 34px)/1.2 var(--serif); max-width: 24ch; letter-spacing: normal; text-wrap: balance; }
+/* 🚨 Kein `max-width`, und kein `text-wrap: balance`. Beide brachen die Frage früh um
+   („Wie gut sind Sie / eigentlich aufgestellt?" auf halber Spalte). Eine Schlagzeile
+   nimmt die Satzbreite — Regel des Users vom 13.09.2026: Überschriften nutzen die ganze
+   Breite, wo es geht. `balance` verteilt die Zeilen gleichmäßig und kostet dabei genau
+   die Breite, die man haben will; `pretty` verhindert nur den Schusterjungen. */
+.faden-shell .ks__frage { font: var(--schrift-gross); letter-spacing: normal; text-wrap: pretty; }
 .faden-shell .ks__hinweis { font: italic 300 15px/1.45 var(--serif); color: var(--muted); margin: -8px 0 0; }
 .faden-shell .ks__weiter { border: 0; background: none; color: var(--ink); font: 600 14px/1 var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 6px 2px; border-bottom: 1px solid var(--ink); text-decoration: none; border-radius: 0; }
 .faden-shell .ks__weiter i { font-style: normal; color: var(--green); transition: transform .2s; }
