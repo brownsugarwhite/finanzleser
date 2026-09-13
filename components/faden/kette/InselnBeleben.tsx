@@ -16,6 +16,10 @@ import dynamic from "next/dynamic";
 import type { FadenFrage, FadenKurzfassung, FadenStatistik } from "@/lib/types";
 import type { BeitragPdf } from "@/lib/articleToolData";
 import type { SpaltenRubrik } from "@/lib/faden/spalten";
+import type { FinanzwortProps } from "@/components/faden/spiele/Finanzwort";
+import type { KassensturzDaten } from "@/lib/faden/optionen";
+import type { Ziel } from "@/components/faden/kassensturz/Kassensturz";
+import type { Empfehlung } from "@/components/faden/landing/LeoEmpfiehlt";
 
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
@@ -37,6 +41,10 @@ const Spalten = dynamic(() => import("@/components/faden/spalten/Spalten"));
 const Schlange = dynamic(() => import("@/components/faden/spiele/Schlange"));
 const FaqListe = dynamic(() => import("./FaqListe"));
 const Vorlesen = dynamic(() => import("@/components/faden/Vorlesen"));
+const Finanzwort = dynamic(() => import("@/components/faden/spiele/Finanzwort"));
+const KassensturzStart = dynamic(() => import("@/components/faden/kassensturz/KassensturzStart"));
+const LeoEmpfiehlt = dynamic(() => import("@/components/faden/landing/LeoEmpfiehlt"));
+const WeiterredenChips = dynamic(() => import("@/components/faden/landing/WeiterredenChips"));
 
 interface Gefunden { el: HTMLElement; typ: InselTyp; arg: string; werte: unknown }
 
@@ -57,6 +65,10 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "schlange") return <Schlange />;
   if (typ === "faq") return werte ? <FaqListe paare={werte as { q: string; a: string }[]} /> : null;
   if (typ === "vorlesen") return arg ? <Vorlesen zielId={arg} /> : null;
+  if (typ === "finanzwort") return werte ? <Finanzwort {...(werte as FinanzwortProps)} /> : null;
+  if (typ === "kassensturz") { const w = werte as { daten: KassensturzDaten; ziele: Record<string, Ziel> } | undefined; return w ? <KassensturzStart daten={w.daten} ziele={w.ziele} /> : null; }
+  if (typ === "leo-empfiehlt") { const w = werte as { gaengig: Empfehlung[]; daten: KassensturzDaten | null; ziele: Record<string, Ziel> } | undefined; return w ? <LeoEmpfiehlt gaengig={w.gaengig} daten={w.daten} ziele={w.ziele} /> : null; }
+  if (typ === "weiterreden") return <WeiterredenChips />;
   return null;
 }
 

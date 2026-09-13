@@ -106,14 +106,14 @@ export default async function FadenLanding() {
               Wort des Tages — danach kommen Wochenbrief, Spiel, Plus und Leo. */}
           <NeuesteAusgabe post={neueste} />
           <Insel typ="spalten" werte={rubriken}><Spalten rubriken={rubriken} /></Insel>
-          {kassensturz && <KassensturzStart daten={kassensturz} ziele={ksZiele} />}
+          {kassensturz && <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>}
           <FinanzwortKarte />
           <AusDemNewsletter eintraege={auslese} />
           <WochenbriefTeaser />
           <SchlangeKarte />
           <PlusTeaser />
-          <LeoEmpfiehlt gaengig={gaengig} daten={kassensturz} ziele={ksZiele} />
-          <WeiterredenChips />
+          <Insel typ="leo-empfiehlt" werte={{ gaengig, daten: kassensturz, ziele: ksZiele }}><LeoEmpfiehlt gaengig={gaengig} daten={kassensturz} ziele={ksZiele} /></Insel>
+          <Insel typ="weiterreden"><WeiterredenChips /></Insel>
 
           </Begruessung>
         </div>
