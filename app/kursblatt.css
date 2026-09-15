@@ -991,3 +991,101 @@
   .kb .kb-podest__raster { grid-template-columns: 1fr; }
   .kb .kb-plaetze { grid-template-columns: 1fr; }
 }
+
+/* ── Alle Angebote (K:167-212) ────────────────────────────────────────────────────── */
+/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
+   „ab 0,68 %". Das „ab" ist bei Krediten keine Zierde, sondern die Aussage (bonitäts-
+   abhängig), also bekommt die Spalte die Breite, die sie braucht. */
+/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
+   „ab 0,68 %" (gemessen 104 px) und erst recht nicht für „ab 12.345 €" (116 px). Das
+   „ab" ist bei Krediten keine Zierde, sondern die Aussage. Deshalb ein Mindestmaß mit
+   Luft nach oben: die Namensspalte gibt den Platz her, die Ausrichtung bleibt. */
+.kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(100px, auto) auto; --kb-liste-gap: 20px; }
+.kb .kb-liste__titel { display: block; font: 700 clamp(22px, 3.4vw, 26px) var(--kb-serif); }
+.kb .kb-liste__filter { display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-liste__filter-label { font: 400 13px var(--kb-sans); color: var(--kb-grau); margin-right: 4px; }
+.kb .kb-liste__zeile { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-liste__zahl { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-liste__sortieren { display: flex; align-items: center; gap: 16px; }
+.kb .kb-liste__sortieren > span { font: 400 13px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-liste__tab {
+  position: relative; border: 0; background: transparent; padding: 10px 0;
+  font: 400 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+.kb .kb-liste__tab[data-aktiv="an"] { font-weight: 700; }
+.kb .kb-liste__tab i {
+  position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: var(--kb-ink);
+  transform: scaleX(0); transform-origin: left; transition: transform .35s var(--kb-kurve);
+}
+.kb .kb-liste__tab[data-aktiv="an"] i { transform: scaleX(1); }
+
+/* K:182-184 — Tabellenkopf unter der Doppellinie, Zahlen rechtsbündig. */
+.kb .kb-liste__kopf {
+  display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
+  align-items: end; padding: 10px 0 8px; margin-top: 12px;
+  border-top: 2px solid var(--kb-ink); box-shadow: 0 3px 0 -2px var(--kb-ink);
+  font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb-liste__kopf-namen { grid-column: span 2; }
+.kb .kb-liste__kopf-rechts { text-align: right; white-space: nowrap; }
+
+/* K:186-199 — die Zeile. Bestwert auf türkisem Grund, Überfahren auf 3,5 % Tinte. */
+.kb .kb__zeile { position: relative; border-bottom: 1px solid var(--kb-t12); transition: background .35s; }
+.kb .kb__zeile[data-hell="an"] { background: var(--kb-t035); }
+.kb .kb__zeile[data-ist="an"] { background: var(--kb-bestwert); }
+.kb .kb__zeile-linie { position: absolute; left: 0; right: 0; height: 1px; background: var(--kb-ink); transform: scaleX(0); transition: transform .4s var(--kb-kurve); }
+.kb .kb__zeile-linie--oben { top: -1px; transform-origin: left; }
+.kb .kb__zeile-linie--unten { bottom: -1px; transform-origin: right; }
+.kb .kb__zeile[data-hell="an"] .kb__zeile-linie { transform: scaleX(1); }
+
+.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: 16px 0 4px; }
+.kb .kb__zeile-namen { min-width: 0; }
+.kb .kb__zeile-namen b { display: flex; align-items: center; gap: 8px; font: 700 15.5px/1.2 var(--kb-serif); text-wrap: balance; }
+/* 🚨 Direktes Kind: `.kb__zeile-namen span` traf auch den Mini-Stempel, der im Namen
+   steht — und überschrieb dessen `display: none` im schmalen Satz, weil beide Regeln
+   dieselbe Spezifität haben und diese hier später kommt. */
+.kb .kb__zeile-namen > span { display: block; margin-top: 2px; font: 400 12.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.kb .kb__zeile-haupt { text-align: right; }
+.kb .kb__zeile-haupt b { display: block; font: 900 21px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb__zeile[data-ist="an"] .kb__zeile-haupt b { color: var(--kb-tuerkis); }
+.kb .kb__zeile-balken { display: block; height: 3px; max-width: 80px; margin: 6px 0 0 auto; background: rgba(51, 74, 39, .5); transition: width .7s var(--kb-kurve), background .3s; }
+.kb .kb__zeile[data-ist="an"] .kb__zeile-balken { background: var(--kb-tuerkis); }
+.kb .kb__zeile-total { text-align: right; font: 700 17px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Im schmalen Satz rückt die Gesamtzahl unter die Hauptzahl (K:519). */
+.kb .kb__zeile-total-eng { display: none; margin-top: 6px; font: 600 13px var(--kb-sans); font-variant-numeric: tabular-nums; }
+
+.kb .kb__zeile-aktionen { display: flex; align-items: center; gap: 20px; padding: 0 0 10px 116px; }
+.kb .kb__details-knopf {
+  display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent;
+  padding: 8px 0; min-height: 40px; font: 500 13.5px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+/* Chevron dreht sich beim Aufklappen mit Überschwung um 180° (K:201). */
+.kb .kb__details-knopf i {
+  width: 7px; height: 7px; margin-top: -3px;
+  border-right: 1.4px solid currentColor; border-bottom: 1.4px solid currentColor;
+  transform: rotate(45deg); transition: transform .4s var(--kb-ueber);
+}
+.kb .kb__details-knopf i[data-offen="an"] { transform: rotate(225deg) translateY(-2px); }
+
+/* K:204 — das Fach klappt über die Zeilenhöhe auf; der Inhalt steht im HTML. */
+.kb .kb__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--kb-kurve); }
+.kb .kb__details[data-offen="an"] { grid-template-rows: 1fr; }
+.kb .kb__details > div { overflow: hidden; }
+.kb .kb__details-raster { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 36px; padding: 0 0 20px 116px; }
+.kb .kb__details-raster .kb__punktzeile-k { font-size: 13.5px; color: var(--kb-grau); }
+.kb .kb__details-raster .kb__punktzeile-v { font: 600 13.5px var(--kb-sans); }
+.kb .kb__pflicht { grid-column: 1 / -1; margin-top: 8px; }
+.kb .kb__pflicht summary { font: 400 12.5px var(--kb-sans); color: var(--kb-grau); cursor: pointer; }
+.kb .kb__pflicht p { margin: 6px 0 0; font: 400 12px/1.5 var(--kb-sans); color: var(--kb-grau); white-space: pre-wrap; }
+
+.kb .kb-liste__mehr { margin: 14px 0 0; border: 0; background: none; padding: 0; font: 600 14px var(--kb-sans); color: var(--kb-gruen-dunkel); cursor: pointer; }
+.kb .kb-liste__mehr:hover { text-decoration: underline; }
+
+@container kb (max-width: 559px) {
+  .kb .kb-liste { --kb-liste-spalten: 64px minmax(0, 1fr) auto auto; --kb-liste-gap: 12px; }
+  .kb .kb-liste__kopf-total, .kb .kb__zeile-total { display: none; }
+  .kb .kb__zeile-total-eng { display: block; }
+  .kb .kb__zeile-aktionen, .kb .kb__details-raster { padding-left: 0; }
+  .kb .kb__details-raster { grid-template-columns: 1fr; }
+}

@@ -135,3 +135,14 @@ export function nebenspalten(def: DefLite, haupt: SpalteDef | undefined): Spalte
   const i = rest.findIndex((s) => s.kurz === def.totalLabel || s.label === def.totalLabel);
   return i > 0 ? [rest[i], ...rest.filter((_, j) => j !== i)] : rest;
 }
+
+/**
+ * Mehrzahl im Dativ: „12 von 12 Angeboten“ (K:177), nicht „von 12 Angebote“.
+ *
+ * Die deutsche Regel ist hier eindeutig genug für eine Zeile Code: der Dativ Plural
+ * endet auf -n, außer die Mehrzahl endet schon auf -n oder -s.
+ * Angebote → Angeboten · Tarife → Tarifen · Konten → Konten · Depots → Depots.
+ */
+export function dativ(mehrzahl: string): string {
+  return /[ns]$/i.test(mehrzahl) ? mehrzahl : mehrzahl + "n";
+}

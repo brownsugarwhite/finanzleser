@@ -26,6 +26,7 @@ import { useLauf } from "@/lib/kursblatt/useLauf";
 import Streuband from "@/components/kursblatt/teile/Streuband";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Podest from "@/components/kursblatt/teile/Podest";
+import AlleAngebote from "./AlleAngebote";
 import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import IhreAngaben from "./IhreAngaben";
 
@@ -42,6 +43,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   const z = useVergleichZustand({ slug, def, quelle, daten });
   const haupt = hauptspalte(def);
   const [hover, setHover] = useState<number | null>(null);
+  const [offen, setOffen] = useState<number | null>(null);
   // K:139 — der Merkzettel fasst drei; der vierte verdrängt den ältesten.
   const [gemerkt, setGemerkt] = useState<number[]>([]);
   const merken = (id: number) =>
@@ -108,9 +110,8 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
             best={best}
             hover={hover}
             onHover={setHover}
-            /* Bis die Liste steht, hebt ein Tipp auf den Punkt das Angebot nur hervor;
-               das Öffnen der Zeile kommt mit der Liste dazu. */
-            onOeffnen={setHover}
+            /* K:476 — ein Tipp auf den Punkt öffnet die Zeile unten in der Liste. */
+            onOeffnen={(id) => { setHover(id); setOffen(id); }}
             spalte={lauf.spalte}
             druck={lauf.druck}
           />
@@ -132,6 +133,16 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           spalte={lauf.spalte}
           stempel={lauf.stempel}
           herz={lauf.herz}
+        />
+      )}
+
+      {haupt && (
+        <AlleAngebote
+          def={def} z={z} haupt={haupt} total={neben[0]} best={best}
+          hover={hover} onHover={setHover}
+          offen={offen} onOeffnen={setOffen}
+          gemerkt={gemerkt} onMerken={merken}
+          stempel={lauf.stempel} herz={lauf.herz} tempo={1}
         />
       )}
 
