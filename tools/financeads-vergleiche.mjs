@@ -140,7 +140,18 @@ async function schreiben() {
       angelegt++;
     }
   }
-  console.log(`\n${geaendert} umgestellt, ${angelegt} angelegt${trocken ? " (Trockenlauf)" : ""}.`);
+  // Weiterleitungen (lib/redirects.manual.ts): der Quell-Slug darf nicht mehr veröffentlicht
+  // sein — sonst stünde eine 301-URL in Sitemap, Übersicht und Werkzeugindex.
+  let entwurf = 0;
+  for (const r of daten.redirects || []) {
+    const slug = r.von.split("/").filter(Boolean).pop();
+    const p = bySlug.get(slug);
+    if (!p || p.status === "draft") continue;
+    console.log(`  ${trocken ? "würde auf Entwurf setzen" : "auf Entwurf"}: ${slug} (#${p.id}) — ${r.grund}`);
+    if (!trocken) await rest(`wp/v2/vergleich/${p.id}`, { method: "POST", body: JSON.stringify({ status: "draft" }) });
+    entwurf++;
+  }
+  console.log(`\n${geaendert} umgestellt, ${angelegt} angelegt, ${entwurf} auf Entwurf${trocken ? " (Trockenlauf)" : ""}.`);
   if (!trocken) console.log("Jetzt: Refresh laufen lassen (tools/financeads-refresh.mjs) und den Dev-Server per POST /api/revalidate auffrischen.");
 }
 

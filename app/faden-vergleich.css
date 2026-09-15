@@ -60,7 +60,11 @@
 .faden-shell .vgl__saeulen .st-saeulen__stab { transition: transform .9s cubic-bezier(.2,.8,.2,1), height .6s cubic-bezier(.2,.8,.2,1); }
 
 /* ── Leos Vergleichskarte im Strom ─────────────────────────────────────────────────── */
-.faden-shell .leo-karte { display: grid; gap: 6px; margin: 14px 0 6px 60px; padding: 12px 0 10px; border-top: 2px solid var(--tuerkis); border-bottom: 1px solid var(--rule); }
+/* Die Insel ist ein Kind von .wort--leo (Grid 60px | 1fr) und landet über `.wort--leo > *` in
+   der Textspalte — die Karte selbst braucht deshalb keinen Einzug. */
+.faden-shell .leo-karte { display: grid; gap: 6px; width: 100%; min-width: 0; margin: 14px 0 6px; padding: 12px 0 10px; border-top: 2px solid var(--tuerkis); border-bottom: 1px solid var(--rule); }
+.faden-shell .wort--leo > .insel { display: contents; }
+.faden-shell .wort--leo .leo-karte { grid-column: 2; }
 .faden-shell .leo-karte .kicker--tool { color: var(--green-ink); }
 .faden-shell .leo-karte__titel { font: 700 clamp(18px, 1.6vw, 22px)/1.25 var(--serif); color: var(--ink); text-decoration: none; }
 .faden-shell .leo-karte__titel:hover { color: var(--green-ink); }
@@ -71,4 +75,8 @@
 .faden-shell .leo-karte__name b { font: 700 14px var(--serif); } .faden-shell .leo-karte__name span { color: var(--muted); margin-left: 6px; }
 .faden-shell .leo-karte__wert { font: 900 15px var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .faden-shell .leo-karte__laedt, .faden-shell .leo-karte__stand { font: 400 12px var(--sans); color: var(--muted); }
-@media (max-width: 720px) { .faden-shell .leo-karte { margin-left: 0; } }
+
+/* Achsenbeschriftung der Säulen: acht Anbieternamen auf 375 px — abschneiden statt überlaufen */
+.faden-shell .vgl__saeulen .st-saeulen__achse { min-width: 0; }
+.faden-shell .vgl__saeulen .st-saeulen__achse span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 640px) { .faden-shell .vgl__saeulen .st-saeulen__achse span { font-size: 9.5px; } }

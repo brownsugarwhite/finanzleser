@@ -11,8 +11,10 @@
  */
 import { useEffect, useRef, type RefObject } from "react";
 
-const gemeldet = new Map<string, number>();
+/** Je Liste die Produkt-IDs, die in dieser Sitzung schon gemeldet wurden. */
+const gemeldet = new Map<string, Set<number>>();
 const MAX_JE_LISTE = 5;
+const zaehler = new Map<string, number>();
 
 export function useSichtbeacon(ref: RefObject<HTMLElement | null>, slug: string, kennung: string, ids: number[], standard: boolean) {
   const schluessel = `${slug}|${ids.slice(0, 40).join(",")}|${standard ? 1 : 0}`;
@@ -23,11 +25,17 @@ export function useSichtbeacon(ref: RefObject<HTMLElement | null>, slug: string,
     const io = new IntersectionObserver((entries) => {
       if (!entries.some((e) => e.isIntersecting)) return;
       io.disconnect();
-      const n = gemeldet.get(slug) || 0;
-      if (n >= MAX_JE_LISTE || letzter.current === schluessel) return;
-      gemeldet.set(slug, n + 1);
+      if (letzter.current === schluessel) return;
       letzter.current = schluessel;
-      const body = JSON.stringify({ kennung, ids: ids.slice(0, 40), standard });
+      // Nur, was noch nie gemeldet wurde: Sortieren oder Filtern zeigt dieselben Produkte
+      // erneut — das ist kein neuer Sichtkontakt. Ein Preset mit neuen Angeboten schon.
+      const schon = gemeldet.get(slug) || new Set<number>();
+      const neu = ids.slice(0, 40).filter((id) => !schon.has(id));
+      const n = zaehler.get(slug) || 0;
+      if (!neu.length || n >= MAX_JE_LISTE) return;
+      zaehler.set(slug, n + 1);
+      neu.forEach((id) => schon.add(id)); gemeldet.set(slug, schon);
+      const body = JSON.stringify({ kennung, ids: neu, standard });
       try {
         if (!navigator.sendBeacon?.("/api/vergleich-sicht", new Blob([body], { type: "application/json" }))) {
           fetch("/api/vergleich-sicht", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
