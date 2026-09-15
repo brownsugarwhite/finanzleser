@@ -54,6 +54,7 @@ function fl_vgl_schreiben( $slug, array $daten ) {
 		'anzahl'    => isset( $daten['anzahl'] ) ? (int) $daten['anzahl'] : 0,
 		'stand'     => isset( $daten['stand'] ) ? sanitize_text_field( $daten['stand'] ) : '',
 		'geladen'   => isset( $daten['geladen'] ) ? sanitize_text_field( $daten['geladen'] ) : gmdate( 'c' ),
+		'defekt'    => false,
 	);
 	ksort( $index );
 	if ( get_option( FL_VGL_INDEX, null ) === null ) { add_option( FL_VGL_INDEX, $index, '', 'no' ); } else { update_option( FL_VGL_INDEX, $index, 'no' ); }
@@ -104,6 +105,16 @@ add_action( 'rest_api_init', function () {
 			'callback'            => function ( WP_REST_Request $r ) {
 				$slug  = $r->get_param( 'slug' );
 				$daten = $r->get_param( 'daten' );
+				// Nur Index-Eintrag „defekt" (Endpunkt bei financeads kaputt): kein Snapshot, aber die
+				// Sitemap und die Übersicht wissen Bescheid. Ein früherer Snapshot bleibt liegen.
+				if ( $r->get_param( 'defekt' ) && fl_vgl_slug_ok( $slug ) ) {
+					$index = fl_vgl_index();
+					$alt   = isset( $index[ $slug ] ) ? $index[ $slug ] : array( 'slug' => $slug, 'anzahl' => 0, 'stand' => '', 'geladen' => '' );
+					$index[ $slug ] = array_merge( $alt, array( 'kategorie' => sanitize_key( (string) $r->get_param( 'kategorie' ) ), 'klasse' => '', 'defekt' => true, 'geladen' => gmdate( 'c' ) ) );
+					ksort( $index );
+					if ( get_option( FL_VGL_INDEX, null ) === null ) { add_option( FL_VGL_INDEX, $index, '', 'no' ); } else { update_option( FL_VGL_INDEX, $index, 'no' ); }
+					return rest_ensure_response( array( 'ok' => true, 'slug' => $slug, 'defekt' => true ) );
+				}
 				if ( ! is_array( $daten ) ) { return new WP_Error( 'daten', 'daten fehlen', array( 'status' => 400 ) ); }
 				$ok = fl_vgl_schreiben( $slug, $daten );
 				if ( is_wp_error( $ok ) ) { $ok->add_data( array( 'status' => 400 ) ); return $ok; }

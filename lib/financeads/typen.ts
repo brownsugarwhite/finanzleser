@@ -63,10 +63,14 @@ export interface SpalteDef {
 
 export type KennWert = number | string | boolean | null;
 
+export type Gruppe = "anlegen" | "konto" | "kredit" | "versicherung";
+
 export interface KategorieDef {
   kategorie: Kategorie;
   version: ApiVersion;
   klasse: Klasse;
+  /** Rubrik der Vergleichsübersicht. */
+  gruppe: Gruppe;
   /** Endpunkt bei financeads kaputt (Reisekranken, 15.09.2026): Seite zeigt Hinweis, noindex. */
   defekt?: boolean;
   /** „Tagesgeld", „Girokonto" — für Titel, Kicker, Sätze. */
@@ -205,4 +209,4 @@ export interface ApiAntwort {
 }
 
 /** Serialisierbare Sicht auf eine KategorieDef — ohne Funktionen, reist in die Insel-Werte und zum Client. */
-export type DefLite = Pick<KategorieDef, "kategorie" | "klasse" | "defekt" | "titel" | "einzahl" | "mehrzahl" | "params" | "spalten" | "bestwert" | "filter" | "sortierung" | "totalLabel" | "hinweis">;
+export type DefLite = Pick<KategorieDef, "kategorie" | "klasse" | "gruppe" | "defekt" | "titel" | "einzahl" | "mehrzahl" | "params" | "spalten" | "bestwert" | "filter" | "sortierung" | "totalLabel" | "hinweis">;

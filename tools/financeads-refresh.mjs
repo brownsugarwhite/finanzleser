@@ -92,7 +92,10 @@ function configAus(html) {
 }
 
 async function einer({ slug, quelle, def }) {
-  if (def.defekt) return { slug, uebersprungen: "Endpunkt bei financeads defekt" };
+  if (def.defekt) {
+    if (!trocken) await rest("finanzleser/v1/vergleich-daten", { method: "POST", body: JSON.stringify({ slug, defekt: true, kategorie: def.kategorie }) });
+    return { slug, uebersprungen: "Endpunkt bei financeads defekt (im Index vermerkt)" };
+  }
   const kombis = presetKombinationen(def, quelle);
   const varianten = [];
   let stand = null; let hinweise = [];

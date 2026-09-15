@@ -13,7 +13,7 @@
  * Plugin hat keinen Build-Schritt; `tools/financeads-registry-export.mjs` schreibt den
  * Zwilling `financeads-registry.js`. Wer hier Parameter ändert, lässt den Export laufen.
  */
-import type { ApiProdukt, DefLite, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
+import type { ApiProdukt, DefLite, Gruppe, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
 import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte } from "./lesehilfen.ts";
 
 // ─── wiederkehrende Bausteine ─────────────────────────────────────────────────────────
@@ -77,7 +77,7 @@ function leer(): Record<string, KennWert> { return {}; }
 
 function versicherung(kategorie: Kategorie, titel: string, suchwoerter: string[], extra: Partial<KategorieDef> = {}): KategorieDef {
   return {
-    kategorie, version: "v1", klasse: "B", titel, einzahl: "Tarif", mehrzahl: "Tarife",
+    kategorie, version: "v1", klasse: "B", gruppe: "versicherung", titel, einzahl: "Tarif", mehrzahl: "Tarife",
     params: [], spalten: [], sortierung: [], suchwoerter, lesen: leer, ...extra,
   };
 }
@@ -87,6 +87,7 @@ function versicherung(kategorie: Kategorie, titel: string, suchwoerter: string[]
 const KATEGORIEN: KategorieDef[] = [
   {
     kategorie: "savingsaccounts", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Tagesgeld", einzahl: "Tagesgeldkonto", mehrzahl: "Konten",
     params: [P.anlage(10000, [5000, 10000, 25000, 50000]), P.monate(12, [3, 6, 12, 24])],
     spalten: [
@@ -104,6 +105,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "fixedsavingsaccounts", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Festgeld", einzahl: "Festgeldkonto", mehrzahl: "Konten",
     params: [P.anlage(20000, [5000, 10000, 20000, 50000]), P.monate(12, [6, 12, 24, 36, 60])],
     spalten: [
@@ -121,6 +123,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "currentaccounts", version: "v1.02", klasse: "A",
+    gruppe: "konto",
     titel: "Girokonto", einzahl: "Girokonto", mehrzahl: "Konten",
     params: [
       { key: "incoming_monthly", label: "Geldeingang / Monat", typ: "zahl", standard: 1200, einheit: "€", min: 0, max: 20000, schritt: 100, presets: [0, 1200, 2500] },
@@ -144,6 +147,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "businessaccounts", version: "v1", klasse: "A",
+    gruppe: "konto",
     titel: "Geschäftskonto", einzahl: "Geschäftskonto", mehrzahl: "Konten",
     params: [
       { key: "transaction", label: "Buchungen / Monat", typ: "zahl", standard: 10, min: 0, max: 1000, schritt: 5, presets: [10, 50, 100] },
@@ -165,6 +169,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "creditcards", version: "v1.02", klasse: "A",
+    gruppe: "konto",
     titel: "Kreditkarte", einzahl: "Kreditkarte", mehrzahl: "Karten",
     params: [
       { key: "transaction_eu", label: "Umsatz / Jahr in Europa", typ: "zahl", standard: 2500, einheit: "€", min: 0, max: 100000, schritt: 500 },
@@ -199,6 +204,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "brokerageaccounts", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Depot", einzahl: "Depot", mehrzahl: "Depots",
     params: [
       { key: "depot_volume", label: "Depotvolumen", typ: "zahl", standard: 20000, einheit: "€", min: 1000, max: 1000000, schritt: 1000, presets: [5000, 20000, 50000] },
@@ -231,6 +237,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "loans", version: "v1", klasse: "A",
+    gruppe: "kredit",
     titel: "Ratenkredit", einzahl: "Kredit", mehrzahl: "Angebote",
     params: [
       { key: "loan", label: "Kreditsumme", typ: "zahl", standard: 10000, einheit: "€", min: 500, max: 100000, schritt: 500, presets: [5000, 10000, 20000, 50000] },
@@ -264,6 +271,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "mortgages", version: "v1.02", klasse: "A",
+    gruppe: "kredit",
     titel: "Baufinanzierung", einzahl: "Angebot", mehrzahl: "Angebote",
     params: [
       { key: "loan", label: "Darlehenssumme", typ: "zahl", standard: 300000, einheit: "€", min: 50000, max: 2000000, schritt: 10000, presets: [200000, 300000, 400000, 500000] },
@@ -296,6 +304,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "buildingsavings", version: "v1", klasse: "A",
+    gruppe: "kredit",
     titel: "Bausparen", einzahl: "Bausparvertrag", mehrzahl: "Tarife",
     params: [{ key: "usage", label: "Ziel", typ: "wahl", standard: "LOAN", fest: true, optionen: [{ wert: "LOAN", label: "Darlehen" }, { wert: "SAVING", label: "Sparen" }] }],
     spalten: [
@@ -324,6 +333,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "roboadvisor", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Robo-Advisor", einzahl: "Robo-Advisor", mehrzahl: "Anbieter",
     params: [
       // financeads verlangt beide Werte > 0 („must be greater than 0", gemessen 15.09.2026).
@@ -350,6 +360,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "cryptos", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Krypto-Börse", einzahl: "Anbieter", mehrzahl: "Anbieter",
     params: [
       { key: "coin_symbol", label: "Kryptowährung", typ: "wahl", standard: "BTC", optionen: [{ wert: "BTC", label: "Bitcoin" }, { wert: "ETH", label: "Ethereum" }, { wert: "XRP", label: "XRP" }, { wert: "SOL", label: "Solana" }, { wert: "BNB", label: "BNB" }, { wert: "USDT", label: "Tether" }], presets: ["BTC", "ETH", "SOL"] },
@@ -378,6 +389,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "crowdinvesting", version: "v1", klasse: "A",
+    gruppe: "anlegen",
     titel: "Crowdinvesting", einzahl: "Projekt", mehrzahl: "Projekte",
     params: [],
     spalten: [
@@ -401,6 +413,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "taxsoftware", version: "v1", klasse: "A",
+    gruppe: "konto",
     titel: "Steuersoftware", einzahl: "Programm", mehrzahl: "Programme",
     params: [],
     spalten: [
@@ -431,6 +444,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "rentaldepositinsurances", version: "v1", klasse: "A",
+    gruppe: "versicherung",
     titel: "Mietkaution", einzahl: "Bürgschaft", mehrzahl: "Angebote",
     params: [
       { key: "rental_deposit", label: "Kautionshöhe", typ: "zahl", standard: 900, einheit: "€", min: 100, max: 20000, schritt: 50, presets: [500, 900, 1500, 3000] },
@@ -458,6 +472,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "pethealthinsurances", version: "v1", klasse: "A",
+    gruppe: "versicherung",
     titel: "Tierkrankenversicherung", einzahl: "Tarif", mehrzahl: "Tarife",
     params: [
       { key: "animal_type", label: "Tier", typ: "wahl", standard: "DOG", fest: true, optionen: [{ wert: "DOG", label: "Hund" }, { wert: "CAT", label: "Katze" }] },
@@ -493,6 +508,7 @@ const KATEGORIEN: KategorieDef[] = [
   },
   {
     kategorie: "supplementarydentalinsurances", version: "v1", klasse: "A",
+    gruppe: "versicherung",
     titel: "Zahnzusatzversicherung", einzahl: "Tarif", mehrzahl: "Tarife",
     params: [{ key: "age", label: "Alter", typ: "wahl", standard: 40, einheit: "Jahre", optionen: [20, 30, 40, 50, 60, 70].map((a) => ({ wert: String(a), label: `${a} Jahre` })), presets: [25, 40, 55] }],
     spalten: [
@@ -549,6 +565,8 @@ export function erlaubteParams(def: KategorieDef): Set<string> {
 
 /** Die serialisierbare Sicht für Client und Insel — ohne `lesen`/`begruendung`. */
 export function defLite(def: KategorieDef): DefLite {
-  const { kategorie, klasse, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis } = def;
-  return { kategorie, klasse, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis };
+  const { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis } = def;
+  return { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis };
 }
+
+export const GRUPPEN_LABEL: Record<Gruppe, string> = { anlegen: "Geld anlegen", konto: "Konto & Karte", kredit: "Kredit & Finanzierung", versicherung: "Versicherungen" };

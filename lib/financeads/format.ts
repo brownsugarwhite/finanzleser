@@ -3,7 +3,7 @@
  * Zahlen deutsch (Komma, Punkt als Tausender), Euro ohne Nachkommastellen ab 100,
  * Prozent mit bis zu zwei Stellen. Muster: lib/statistik/formeln.ts `formatWert`.
  */
-import type { KennWert, SpalteDef, VergleichProdukt } from "./typen.ts";
+import type { DefLite, KennWert, SpalteDef, VergleichDaten, VergleichProdukt } from "./typen.ts";
 
 export function formatZahl(wert: number, stellen: number): string {
   return wert.toLocaleString("de-DE", { minimumFractionDigits: stellen, maximumFractionDigits: stellen });
@@ -51,4 +51,24 @@ export function formatStand(iso: string | undefined | null): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
   return d.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+
+/**
+ * Der eine Satz mit Kennzahl — für Metadata, „Kurz gesagt" und Leos Karten:
+ *   „38 Konten im Vergleich, Bestwert 304 € Ertrag im Zeitraum, Stand 15.09.2026."
+ *   „40 Tarife von 13 Versicherern im Überblick, Stand 15.09.2026."
+ */
+export function kurzSatz(def: Pick<DefLite, "klasse" | "mehrzahl" | "spalten" | "bestwert" | "totalLabel">, daten: Pick<VergleichDaten, "varianten" | "anzahl" | "stand"> | null): string {
+  if (!daten || !daten.varianten.length) return "";
+  const v = daten.varianten[0];
+  const stand = formatStand(daten.stand);
+  if (def.klasse === "B") {
+    const versicherer = new Set(v.produkte.map((p) => p.anbieter)).size;
+    return `${v.produkte.length} ${def.mehrzahl} von ${versicherer} Versicherern im Überblick, Stand ${stand}.`;
+  }
+  const haupt = def.spalten.find((s) => s.key === def.bestwert?.key) || def.spalten[def.spalten.length - 1];
+  const best = v.produkte.find((p) => p.id === v.bestwert);
+  const wert = haupt && best ? formatKennwert(haupt, best.kennzahlen[haupt.key]) : "";
+  const label = def.totalLabel || haupt?.label || "";
+  return `${v.produkte.length} ${def.mehrzahl} im Vergleich${wert && wert !== "–" ? `, Bestwert ${wert} ${label}` : ""}, Stand ${stand}.`;
 }

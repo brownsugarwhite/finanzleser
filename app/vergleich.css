@@ -115,3 +115,10 @@
 .vgl--alt .vgl__zahl { color: var(--color-brand-secondary); }
 .vgl--alt .vgl__zeile--best .vgl__zahl { color: var(--color-text-primary); }
 .vgl--alt .vgl__liste, .vgl--alt .vgl__anbieter-liste { margin-top: 4px; }
+
+/* Redaktionstext und Leo-Fragen auf der Vergleichsseite */
+.vgl-redaktion { margin: 0 0 22px; }
+.vgl-fragen { margin-top: 34px; }
+.vgl-fragen--alt .vgl-frage { border-top: 1px solid rgba(51,74,39,.16); padding: 12px 0; }
+.vgl-fragen--alt .vgl-frage summary { cursor: pointer; font: 600 16px var(--font-heading); color: var(--color-text-primary); }
+.vgl-fragen--alt .vgl-frage .prose { margin-top: 8px; }
