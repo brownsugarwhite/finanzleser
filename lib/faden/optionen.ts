@@ -64,7 +64,8 @@ export interface KassensturzLuecke {
   text: string;
   ampel?: "rot" | "gelb" | "gruen";
   wenn?: KassensturzBedingung;
-  links?: { typ: string; slug: string; text?: string }[];
+  /** `params`: Voreinstellung für einen Vergleich (Hash `#vgl:…`, z. B. Anlagebetrag aus der Schätzfrage). */
+  links?: { typ: string; slug: string; text?: string; params?: Record<string, string | number> }[];
 }
 export interface KassensturzGut {
   kurz: string;

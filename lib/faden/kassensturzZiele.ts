@@ -33,6 +33,11 @@ export async function zieleAufloesen(d: KassensturzDaten): Promise<Record<string
       ziel = { href: buildGlossarUrl(x.slug), titel: text };
     } else {
       ziel = werkzeuge?.get(key);
+      // „Ihre Angaben reisen mit": ein Vergleich startet mit den Werten aus dem Kassensturz.
+      if (ziel && x.typ === "vergleich" && x.params && Object.keys(x.params).length) {
+        const hash = Object.entries(x.params).map(([k, w]) => `${k}=${encodeURIComponent(String(w))}`).join("&");
+        ziel = { ...ziel, href: `${ziel.href}#vgl:${hash}` };
+      }
     }
     out[key] = ziel || { href: `/suche?q=${encodeURIComponent(text)}`, titel: text };
   }
