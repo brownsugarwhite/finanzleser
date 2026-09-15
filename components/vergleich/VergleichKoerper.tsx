@@ -16,9 +16,8 @@ import Insel from "@/components/faden/kette/Insel";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
 import VergleichRechner from "@/components/vergleich/VergleichRechner";
 import KursblattVergleich from "@/components/kursblatt/vergleich/KursblattVergleich";
-import { KURSBLATT_AKTIV } from "@/lib/faden/flag";
 
-export default async function VergleichKoerper({ slug, skin, mitSaeulen, beschreibung }: { slug: string; skin: "faden" | "alt"; mitSaeulen?: boolean; beschreibung?: string }) {
+export default async function VergleichKoerper({ slug, skin, beschreibung }: { slug: string; skin: "faden" | "alt"; beschreibung?: string }) {
   const v = await holeVergleich(slug);
   if (!v) return null;
   if (v.art === "embed") {
@@ -39,8 +38,8 @@ export default async function VergleichKoerper({ slug, skin, mitSaeulen, beschre
       </div>
     );
   }
-  // Der Kursblatt-Satz ersetzt den Faden-Skin; die alte Seite behält ihre Liste.
-  const kursblatt = KURSBLATT_AKTIV && skin === "faden";
+  // Der Kursblatt-Satz IST der Faden-Skin; die alte Seite behält ihre Liste.
+  const kursblatt = skin === "faden";
   // Die Zinskurve muss HIER entstehen: sie braucht alle Laufzeit-Varianten, und genau die
   // fallen in der nächsten Zeile weg. Rund 400 Byte statt sieben Produktlisten.
   const kennwert = kursblatt && def.kursblatt?.band === "kurve" ? kennwertSpalte(def) : undefined;
@@ -49,12 +48,12 @@ export default async function VergleichKoerper({ slug, skin, mitSaeulen, beschre
   // sessionStorage). Ein Snapshot mit allen Preset-Varianten wiegt bis 160 KB; die
   // anderen Kombinationen holt der Client von /api/vergleich-daten (aus dem Snapshot).
   const daten = { ...v.daten, varianten: v.daten.varianten.slice(0, 1), ...(kurve ? { kurve } : {}) };
-  const werte = { def, quelle: v.quelle, daten, skin, mitSaeulen: !!mitSaeulen, kursblatt, beschreibung };
+  const werte = { def, quelle: v.quelle, daten, skin, kursblatt, beschreibung };
   return (
     <Insel typ="vergleich" arg={slug} werte={werte}>
       {kursblatt
         ? <KursblattVergleich slug={slug} def={def} quelle={v.quelle} daten={daten} beschreibung={beschreibung} />
-        : <VergleichRechner slug={slug} def={def} quelle={v.quelle} daten={daten} skin={skin} mitSaeulen={mitSaeulen} />}
+        : <VergleichRechner slug={slug} def={def} quelle={v.quelle} daten={daten} skin={skin} />}
     </Insel>
   );
 }

@@ -12,7 +12,8 @@
  * dem Kursblatt in `lib/financeads/useVergleichZustand.ts` — dieselbe Mechanik trägt dort
  * auch den Zeitungssatz. Hier bleibt nur die Darstellung.
  *
- * `skin`: "faden" (Zeitungssatz nach Handoff Z. 759–788, app/faden-vergleich.css) oder
+ * `skin`: nur noch "alt" — der Zeitungssatz des Fadens ist seit dem Kursblatt ein
+ * eigener Komponentenbaum (components/kursblatt/). Diese Liste trägt
  * "alt" (Live-Seite, app/vergleich.css). Gleiches Markup, zwei Stylesheets.
  */
 import { useMemo } from "react";
@@ -23,7 +24,6 @@ import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import Parameterzeile from "./Parameterzeile";
 import Tarifliste from "./Tarifliste";
 import Anbieterliste from "./Anbieterliste";
-import VergleichSaeulen from "./VergleichSaeulen";
 
 export interface VergleichRechnerProps {
   slug: string;
@@ -32,10 +32,9 @@ export interface VergleichRechnerProps {
   daten: VergleichDaten;
   skin: "faden" | "alt";
   /** Säulen-Statistik über der Liste (nur Faden, nur Klasse A). */
-  mitSaeulen?: boolean;
 }
 
-export default function VergleichRechner({ slug, def, quelle, daten, skin, mitSaeulen }: VergleichRechnerProps) {
+export default function VergleichRechner({ slug, def, quelle, daten, skin }: VergleichRechnerProps) {
   const z = useVergleichZustand({ slug, def, quelle, daten });
 
   // Die alte Liste kennt genau einen Umschalter. Seit das Kursblatt mehrere Chips zeigt,
@@ -61,14 +60,6 @@ export default function VergleichRechner({ slug, def, quelle, daten, skin, mitSa
       <Parameterzeile def={def} quelle={quelle} params={z.params} onChange={z.setParam} laedt={z.laedt} />
       {z.fehler && <p className="vgl__fehler" role="alert">{z.fehler} Gezeigt wird die Voreinstellung.</p>}
 
-      {mitSaeulen && skin === "faden" && def.klasse === "A" && z.haupt && (
-        <VergleichSaeulen
-          zeilen={z.zeilen}
-          spalte={z.sortSpalte || z.haupt}
-          maximum={z.maximum}
-          titel={`${z.sortSpalte?.label || z.haupt.label} · die ersten ${Math.min(8, z.zeilen.length)} ${def.mehrzahl}`}
-        />
-      )}
 
       {(schalter || (def.klasse === "A" && def.sortierung.length > 1)) && (
         <div className="vgl__filterzeile">

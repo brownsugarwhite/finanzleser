@@ -119,7 +119,7 @@ export default async function WerkzeugKarte({
     koerper = <Insel typ="dokumente" arg={slugs.join(",")}><DokumenteEmbed slugs={slugs} initialDokumente={karten.length ? karten : null} /></Insel>;
   } else {
     // Eigener financeads-Rechner (mit Säulen) oder Fremd-Embed — der Dispatcher setzt die Insel selbst.
-    koerper = <VergleichKoerper slug={teil.slug} skin="faden" mitSaeulen />;
+    koerper = <VergleichKoerper slug={teil.slug} skin="faden" />;
   }
 
   return (

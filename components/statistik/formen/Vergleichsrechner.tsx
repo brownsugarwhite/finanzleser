@@ -17,7 +17,7 @@ export default function Vergleichsrechner({ st }: { st: StatVergleichsrechner })
     <div className="st-vergleich">
       <span className="st-vergleich__kicker kicker"><i />Vergleich · in der Kette</span>
       <h3>{st.titel}</h3>
-      <VergleichKoerper slug={st.slug} skin="faden" mitSaeulen />
+      <VergleichKoerper slug={st.slug} skin="faden" />
     </div>
   );
 }

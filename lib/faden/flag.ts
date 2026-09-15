@@ -33,11 +33,3 @@ export const SCHAUKASTEN_AKTIV =
  */
 export const ENTWURF_AKTIV =
   process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ENTWURF === "1";
-
-/**
- * Kursblatt-Satz für die Vergleiche (Übergabe design_handoff_finanzleser_kursblatt).
- *
- * Zwischenschalter, solange der neue Satz neben dem alten wächst. Er fällt mit dem
- * Schritt, der das Kursblatt zum Faden-Skin macht — dann steht `"kursblatt"` fest.
- */
-export const KURSBLATT_AKTIV = process.env.NEXT_PUBLIC_KURSBLATT === "1";

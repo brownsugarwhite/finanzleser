@@ -233,7 +233,7 @@ export default async function Schaukasten() {
 
       <Abschnitt titel="Vergleichsrechner" nr={9} von={VON}>
         <p className="vorspann">Der eigene Vergleich aus der financeads-API (Design A v2, Handoff Zeile 759–788): Parameterzeile mit Chips, die Säulen der ersten acht, Umschalter und Sortierer, Tarifliste mit Bestwert-Stempel und Balken, Fußzeile mit Stand. Klasse-B-Kategorien (Versicherungen ohne Beiträge) zeigen stattdessen die Anbieterliste.</p>
-        <VergleichKoerper slug="tagesgeldvergleich" skin="faden" mitSaeulen />
+        <VergleichKoerper slug="tagesgeldvergleich" skin="faden" />
         <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
       </Abschnitt>
       <Abschnitt titel="Spiele" nr={10} von={VON}>
