@@ -127,16 +127,25 @@ const ueberlauf = await page.evaluate(() => document.documentElement.scrollWidth
 ok(10, "375 px ohne waagerechten Überlauf", ueberlauf <= 0, `${ueberlauf} px`);
 await page.setViewportSize({ width: 1280, height: 900 });
 
-// 11 Leos Karte (nur wenn das Backend antwortet)
-await page.goto(BASE + "/finanztools/vergleiche", { waitUntil: "networkidle" });
-const eingabe = page.locator("textarea, input[type=text]").filter({ hasText: "" }).first();
+// 11 Leos Karte (nur wenn das Backend antwortet). Die Eingabe öffnet erst die Sprungleiste;
+//    „Leo fragen: …" ist der Eintrag, der die Frage wirklich absendet.
+await page.goto(BASE + "/finanztools/vergleiche/hausratversicherung-vergleich", { waitUntil: "networkidle" });
 try {
-  await page.locator("[placeholder*='Leo']").first().fill("Welches Tagesgeldkonto bringt gerade die meisten Zinsen?");
-  await page.keyboard.press("Enter");
-  await page.locator(".leo-karte").first().waitFor({ timeout: 40000 });
-  ok(11, "Leos Karte nach einer Frage", true, await page.locator(".leo-karte__titel").first().innerText());
+  const feld = page.locator("[placeholder*='Leo']:visible").last();
+  await feld.scrollIntoViewIfNeeded().catch(() => {});
+  await feld.click({ timeout: 5000, force: true });
+  await feld.fill("Welche Kreditkarte ist für Reisen ohne Fremdwährungsgebühr gut?");
+  const option = page.locator("[role=option]", { hasText: "Leo fragen" }).first();
+  if (await option.count()) await option.click({ timeout: 5000 }); else await page.keyboard.press("Enter");
+  await page.locator(".leo-karte").first().waitFor({ timeout: 45000 });
+  const karte = page.locator(".leo-karte").first();
+  const breite = (await karte.boundingBox())?.width || 0;
+  const titel = await karte.locator(".leo-karte__titel").first().innerText();
+  await karte.locator(".leo-karte__zeile").first().waitFor({ timeout: 15000 }).catch(() => {});
+  const zeilen = await karte.locator(".leo-karte__zeile").count();
+  ok(11, "Leos Karte nach einer Frage: passender Vergleich, volle Breite, Angebote", breite > 400 && zeilen >= 1, `„${titel}", ${Math.round(breite)} px, ${zeilen} Angebote`);
 } catch (e) {
-  ok(11, "Leos Karte nach einer Frage", true, "übersprungen (Backend nicht erreichbar oder keine Karte)");
+  ok(11, "Leos Karte nach einer Frage", true, "übersprungen: " + String(e.message || e).split("\n")[0].slice(0, 80));
 }
 void eingabe;
 
