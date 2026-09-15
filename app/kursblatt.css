@@ -528,7 +528,13 @@
 /* Schrift und Farbe kommen vom Elternteil — dieselbe Walze trägt den Zinssatz (44 px)
    und Leos laufende Rate (36 px). Rechtsbündig, damit bei 999 → 1.000 nur die neue
    Stelle hinzukommt, statt dass die ganze Zahl wirbelt. */
-.kb .kb-odo { display: inline-flex; align-items: baseline; justify-content: flex-end; gap: 1px; font-variant-numeric: tabular-nums; }
+.kb .kb-odo { position: relative; display: inline-flex; align-items: baseline; justify-content: flex-end; gap: 1px; font-variant-numeric: tabular-nums; }
+/* Die echte Zahl als unsichtbarer Text — für Vorlesesoftware, Textauszüge und alles,
+   was den Satz liest statt ihn zu sehen. Kein display:none (siehe Kopf der Komponente). */
+.kb .kb-odo__klartext {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
 .kb .kb-odo__walze { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
 .kb .kb-odo__spalte { display: block; text-align: center; line-height: 1; transition: transform .5s var(--kb-kurve); }
 .kb .kb-odo__zeichen { display: block; height: 1em; line-height: 1; }
@@ -728,3 +734,115 @@
 .kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--kb-weiss); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); transition: left .35s var(--kb-ueber); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf { background: var(--kb-gruen); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf i { left: 20px; }
+
+/* ═════ Seite 2 · Rechner (K:234-354) ═══════════════════════════════════════════════ */
+
+.kb .kb-rechner { padding-top: 32px; }
+/* K:238 — die H2 des Rechners ist eine Spur kleiner als die H1 des Vergleichs. */
+.kb .kb__titel--rechner { margin: 8px 0 12px; font-size: clamp(32px, 6.5vw, 50px); line-height: 1.05; }
+.kb .kb__vorspann--rechner { font-size: clamp(16px, 2.3vw, 18px); }
+.kb .kb-rechner__presets { margin-top: 28px; }
+.kb .kb-rechner__felder { margin-top: 30px; display: grid; gap: 22px; }
+.kb .kb-rechner__paar { gap: 28px 40px; align-items: start; }
+
+/* K:291-300 — „Leo rechnet mit“ zwischen zwei Punktlinien, rechts der Knopf. */
+.kb .kb-rechner__leo {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap;
+  margin-top: 30px; padding: 18px 0;
+  border-top: 1px dotted rgba(51, 74, 39, .45); border-bottom: 1px dotted rgba(51, 74, 39, .45);
+}
+.kb .kb-rechner__vorschau { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
+.kb .kb-rechner__leo-vor { font: italic 400 15px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-rechner__leo-zahl {
+  display: inline-flex; align-items: baseline;
+  font: 900 clamp(28px, 4.4vw, 36px)/1 var(--kb-serif); color: var(--kb-ink);
+}
+.kb .kb-rechner__leo-nach { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+
+/* ── Ergebnis: öffnet über die Zeilenhöhe, nicht über eine Höhe in Pixeln (K:303) ── */
+.kb .kb-ergebnis { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .75s var(--kb-kurve); }
+.kb .kb-ergebnis[data-offen="an"] { grid-template-rows: 1fr; }
+.kb .kb-ergebnis__innen { overflow: hidden; opacity: 1; transition: opacity .4s; }
+/* K:525 — nach einer Eingabe steht das Ergebnis noch da, aber blass: es ist veraltet. */
+.kb .kb-ergebnis__innen[data-veraltet="an"] { opacity: .45; }
+.kb .kb-ergebnis__inhalt { padding-top: 40px; display: grid; gap: 32px; }
+.kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: 18px; }
+.kb .kb-ergebnis__kopf i { flex: 1; border-top: 1px dotted rgba(51, 74, 39, .5); }
+.kb .kb-ergebnis__kopf i:first-child { transform-origin: right; }
+.kb .kb-ergebnis__kopf i:last-child { transform-origin: left; }
+.kb .kb-ergebnis__kopf span { font: 300 14px var(--kb-sans); letter-spacing: 2px; }
+
+/* K:306-310 — drei Kacheln; die erste ist die Antwort und steht auf Weiß mit Outline. */
+.kb .kb-kacheln { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
+.kb .kb-kachel { padding: 20px 18px; background: rgba(0, 0, 0, .03); }
+.kb .kb-kachel--haupt {
+  background: var(--kb-weiss); border: 1px solid var(--kb-t30);
+  outline: 2px solid var(--kb-rahmen-grau); outline-offset: 3px;
+}
+.kb .kb-kachel__wert {
+  display: block; margin-top: 8px;
+  font: 700 clamp(22px, 3.4vw, 28px)/1 var(--kb-serif); font-variant-numeric: tabular-nums;
+}
+.kb .kb-kachel--haupt .kb-kachel__wert { font-size: clamp(28px, 4.6vw, 36px); color: var(--kb-magenta); }
+@container kb (max-width: 559px) { .kb .kb-kacheln { grid-template-columns: 1fr; } }
+
+/* K:312-316 — Anteilsband. */
+.kb .kb-anteil__band { display: flex; height: 18px; margin-top: 10px; gap: 2px; }
+.kb .kb-anteil__band i { transition: width .9s var(--kb-kurve); }
+.kb .kb-anteil__band i[data-ton="ink"] { background: var(--kb-ink); }
+.kb .kb-anteil__band i[data-ton="magenta"] { background: var(--kb-magenta); }
+.kb .kb-anteil__legende { display: flex; justify-content: space-between; margin-top: 8px; font: 400 12.5px var(--kb-sans); }
+.kb .kb-anteil__legende span { display: inline-flex; align-items: center; gap: 6px; }
+.kb .kb-anteil__legende i { width: 8px; height: 8px; }
+.kb .kb-anteil__legende i[data-ton="ink"] { background: var(--kb-ink); }
+.kb .kb-anteil__legende i[data-ton="magenta"] { background: var(--kb-magenta); }
+
+/* K:318-335 — Verlaufskurve mit Scrubber. */
+.kb .kb-kurve__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.kb .kb-kurve__buehne { position: relative; margin-top: 10px; }
+.kb .kb-kurve__bild { display: block; overflow: visible; touch-action: pan-y; }
+.kb .kb-kurve__achse { font: 500 10px var(--kb-sans); fill: var(--kb-grau); }
+.kb .kb-kurve__fahne {
+  position: absolute; top: 0; padding: 6px 10px; background: var(--kb-ink); color: var(--kb-weiss);
+  font: 500 12px var(--kb-sans); white-space: nowrap; pointer-events: none;
+}
+/* Der Hinweis nennt die Maus; auf Geräten ohne Zeigegerät die Berührung. */
+.kb .kb-kurve__bedienhinweis--touch { display: none; }
+@media (hover: none) {
+  .kb .kb-kurve__bedienhinweis { display: none; }
+  .kb .kb-kurve__bedienhinweis--touch { display: inline; }
+}
+
+/* K:337-341 — Jahresübersicht mit grauem Doppelkopf. */
+.kb .kb-tabelle { --kb-tab-spalte: 1fr; }
+.kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; gap: 10px; }
+.kb .kb-tabelle__kopf {
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 8px 0; margin-top: 10px;
+  font: 700 10.5px/1.3 var(--kb-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb-tabelle__zeile {
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 10px 0;
+  border-top: 1px solid var(--kb-t12);
+  font: 400 clamp(12.5px, 1.9vw, 14px) var(--kb-sans); font-variant-numeric: tabular-nums;
+}
+.kb .kb-tabelle__zeile[data-betont="an"] { border-top: 2px solid var(--kb-magenta); }
+.kb .kb-tabelle__kopf span[data-rechts="an"], .kb .kb-tabelle__zeile span[data-rechts="an"] { text-align: right; }
+.kb .kb-tabelle__zeile span[data-ton="magenta"] { color: var(--kb-magenta); }
+.kb .kb-tabelle__zeile span:first-child { font: 700 14px var(--kb-serif); }
+.kb .kb-tabelle__zeile span:last-child { font-weight: 600; }
+
+.kb .kb-punktblock { display: grid; }
+
+/* K:343 — Pflichthinweis unter dem Ergebnis. */
+.kb .kb-ergebnis__hinweis {
+  padding-top: 14px; border-top: 2px solid var(--kb-magenta);
+  font: 400 13px/1.6 var(--kb-sans); color: var(--kb-grau); text-wrap: pretty;
+}
+.kb .kb-ergebnis__hinweis b { color: var(--kb-magenta); }
+
+/* K:345-352 — die Brücke zurück in den Vergleich, türkis eingehängt. */
+.kb .kb-bruecke { margin-top: 28px; padding-top: 20px; border-top: 2px solid var(--kb-tuerkis); }
+.kb .kb__kicker--vergleich { --kb-werkzeug: var(--kb-tuerkis); }
+.kb .kb-bruecke__satz { margin: 6px 0 0; font: italic 400 16px/1.5 var(--kb-serif); text-wrap: pretty; }
+.kb .kb-bruecke__satz b { font-style: normal; color: var(--kb-tuerkis); }
+.kb .kb-bruecke__aktionen { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; margin-top: 18px; }

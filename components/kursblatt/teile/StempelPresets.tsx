@@ -19,7 +19,7 @@ export interface Preset<P> {
   neigung: string;
 }
 
-export default function StempelPresets<P extends Record<string, number | string>>({
+export default function StempelPresets<P extends Record<string, number | string | boolean>>({
   presets, aktiv, onWaehlen, label = "Schnell einstellen:",
 }: {
   presets: Preset<P>[];

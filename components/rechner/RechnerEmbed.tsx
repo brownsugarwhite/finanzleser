@@ -7,6 +7,8 @@ import VerticalSpacer from "@/components/ui/VerticalSpacer";
 import InfoHint from "@/components/ui/InfoHint";
 import { RECHNER_DISCLAIMER } from "@/lib/rechnerDisclaimer";
 import { RechnerLayoutContext } from "./RechnerLayoutContext";
+import { schemaFuer } from "@/lib/rechner/schemata";
+import KursblattRechner from "@/components/kursblatt/rechner/KursblattRechner";
 
 // Old 17 calculators
 const BruttoNettoRechner = dynamic(() => import("./BruttoNettoRechner"), {
@@ -195,6 +197,12 @@ export default function RechnerEmbed({ slug, formHeader, noVisual = false }: Rec
   const containerRefCallback = useCallback((node: HTMLDivElement | null) => {
     setResultsContainer(node);
   }, []);
+
+  // Die Schleuse ins Kursblatt: wer ein Schema hat, wird im Zeitungssatz gesetzt und
+  // braucht weder rechner-layout noch RechnerResults. Alle anderen laufen unverändert
+  // weiter — ein Rechner zieht um, ohne dass ein zweiter angefasst wird.
+  const schema = schemaFuer(slug);
+  if (schema) return <KursblattRechner schema={schema} ohneKopf={noVisual} />;
 
   const rechner = getRechnerComponent(slug);
   if (!rechner) return null;
