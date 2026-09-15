@@ -25,13 +25,8 @@ export interface CardRef {
 /** Wörter, die eine Variante kennzeichnen — trifft eins davon, gewinnt die Variante vor der Basis. */
 const VARIANTEN_WOERTER: Record<string, string[]> = {
   "studentenkonto-vergleich": ["student", "studierende", "studium", "uni"],
-  "schuelerkonto-vergleich": ["schüler", "kind", "kinder", "jugendlich", "taschengeld"],
-  "reisekreditkarte-vergleich": ["reise", "urlaub", "ausland", "fremdwährung"],
-  "kostenlose-kreditkarte-vergleich": ["kostenlos", "gebührenfrei", "ohne jahresgebühr"],
   "autokredit-vergleich": ["auto", "kfz", "fahrzeug", "wagen"],
   "minikredit-vergleich": ["minikredit", "kleinkredit", "kurzfristig", "bis zum monatsende"],
-  "katzenkrankenversicherung-vergleich": ["katze", "kater", "katzen"],
-  "hundekrankenversicherung-vergleich": ["hund", "hunde", "welpe"],
 };
 
 function normal(s: string): string {

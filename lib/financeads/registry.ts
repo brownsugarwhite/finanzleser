@@ -128,8 +128,9 @@ const KATEGORIEN: KategorieDef[] = [
     params: [
       { key: "incoming_monthly", label: "Geldeingang / Monat", typ: "zahl", standard: 1200, einheit: "€", min: 0, max: 20000, schritt: 100, presets: [0, 1200, 2500] },
       { key: "average_balance", label: "Durchschnittlicher Kontostand", typ: "zahl", standard: 1000, einheit: "€", min: 0, max: 100000, schritt: 100 },
-      { key: "target_group", label: "Zielgruppe", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "student", label: "Studierende" }, { wert: "pupil", label: "Schüler" }, { wert: "apprentice", label: "Azubis" }, { wert: "employee", label: "Angestellte" }] },
-      { key: "free_accounts", label: "Nur kostenlose Konten", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "1", label: "nur kostenlose" }] },
+      // Zielgruppe als Umschalter im Rechner (wie im financeads-Rechner), keine eigenen Seiten je Gruppe.
+      // Nur das Studentenkonto hat eine eigene URL — die gab es schon vorher, und financeads führt sie selbst.
+      { key: "target_group", label: "Zielgruppe", typ: "wahl", standard: "", presets: ["", "student", "pupil", "apprentice"], optionen: [{ wert: "", label: "alle" }, { wert: "student", label: "Studierende" }, { wert: "pupil", label: "Schüler" }, { wert: "apprentice", label: "Azubis" }, { wert: "employee", label: "Angestellte" }] },
     ],
     spalten: [
       { key: "kontofuehrung", label: "Kontoführung / Jahr", kurz: "Kontoführung", art: "geld", richtung: "runter" },
@@ -173,8 +174,9 @@ const KATEGORIEN: KategorieDef[] = [
     titel: "Kreditkarte", einzahl: "Kreditkarte", mehrzahl: "Karten",
     params: [
       { key: "transaction_eu", label: "Umsatz / Jahr in Europa", typ: "zahl", standard: 2500, einheit: "€", min: 0, max: 100000, schritt: 500 },
-      { key: "travel_creditcard", label: "Reisekreditkarte", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "1", label: "nur Reisekarten" }] },
-      { key: "free_products", label: "Nur kostenlose Karten", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "1", label: "nur kostenlose" }] },
+      // Beide Filter als Umschalter im Rechner (Chips), keine eigenen Seiten „Reisekreditkarte"/„kostenlose Kreditkarte".
+      { key: "travel_creditcard", label: "Reisekreditkarte", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur Reisekarten" }] },
+      { key: "free_products", label: "Jahresgebühr", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur ohne Jahresgebühr" }] },
     ],
     spalten: [
       { key: "jahresgebuehr", label: "Jahresgebühr", art: "geld", richtung: "runter" },
@@ -183,7 +185,6 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "zahlungsart", label: "Kartenart", art: "text" },
     ],
     bestwert: { key: "jahresgebuehr", richtung: "runter" },
-    filter: { key: "jahresgebuehr", label: "nur ohne Jahresgebühr", wert: 0 },
     sortierung: [{ key: "jahresgebuehr", label: "Jahresgebühr" }, { key: "auslandsgebuehr", label: "Fremdwährung" }],
     totalLabel: "Jahresgebühr",
     suchwoerter: ["kreditkarte", "visa", "mastercard", "amex", "kostenlose kreditkarte", "reisekreditkarte", "fremdwährung", "bargeld abheben"],
@@ -475,7 +476,8 @@ const KATEGORIEN: KategorieDef[] = [
     gruppe: "versicherung",
     titel: "Tierkrankenversicherung", einzahl: "Tarif", mehrzahl: "Tarife",
     params: [
-      { key: "animal_type", label: "Tier", typ: "wahl", standard: "DOG", fest: true, optionen: [{ wert: "DOG", label: "Hund" }, { wert: "CAT", label: "Katze" }] },
+      // Hund/Katze ist ein Umschalter im Rechner — wie bei financeads ein Tierkranken-Vergleich, keine zwei Seiten.
+      { key: "animal_type", label: "Tier", typ: "wahl", standard: "DOG", presets: ["DOG", "CAT"], optionen: [{ wert: "DOG", label: "Hund" }, { wert: "CAT", label: "Katze" }] },
       { key: "age", label: "Alter des Tieres", typ: "wahl", standard: 2, einheit: "Jahre", optionen: [0, 1, 2, 3, 5, 7, 9].map((a) => ({ wert: String(a), label: a === 0 ? "unter 1 Jahr" : `${a} Jahre` })), presets: [0, 2, 5, 8] },
       { key: "excess", label: "Selbstbeteiligung", typ: "wahl", standard: 0, einheit: "€", optionen: [0, 150, 250, 350, 500].map((e) => ({ wert: String(e), label: e === 0 ? "keine" : `${e} €` })) },
       { key: "coverage", label: "Schutz", typ: "wahl", standard: "OP", optionen: [{ wert: "OP", label: "OP-Schutz" }, { wert: "FULL", label: "Vollschutz" }] },

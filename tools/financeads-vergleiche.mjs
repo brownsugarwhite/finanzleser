@@ -129,7 +129,8 @@ async function schreiben() {
         ? raw.replace(/<!-- wp:finanzleser\/vergleich-quelle [\s\S]*?\/-->/, kommentar)
         : `${kommentar}\n${raw}`.trim();
       const body = { content: neu };
-      if (!(vorhanden.excerpt?.raw || "").trim() && v.excerpt) body.excerpt = v.excerpt;
+      if ((!(vorhanden.excerpt?.raw || "").trim() || v.excerpt_setzen) && v.excerpt) body.excerpt = v.excerpt;
+      if (v.titel_setzen && v.titel) body.title = v.titel;
       console.log(`  ${trocken ? "würde umstellen" : "umstellen"}: ${v.slug} (#${vorhanden.id})`);
       if (!trocken) await rest(`wp/v2/vergleich/${vorhanden.id}`, { method: "POST", body: JSON.stringify(body) });
       geaendert++;
@@ -150,6 +151,17 @@ async function schreiben() {
     console.log(`  ${trocken ? "würde auf Entwurf setzen" : "auf Entwurf"}: ${slug} (#${p.id}) — ${r.grund}`);
     if (!trocken) await rest(`wp/v2/vergleich/${p.id}`, { method: "POST", body: JSON.stringify({ status: "draft" }) });
     entwurf++;
+  }
+  // Zurückgenommene Seiten (`entwurf`): auf Entwurf setzen und ihren Snapshot löschen, damit
+  // weder Sitemap, Übersicht, Werkzeugindex noch Leos Karte sie noch kennen.
+  for (const e of daten.entwurf || []) {
+    const p = bySlug.get(e.slug);
+    if (p && p.status !== "draft") {
+      console.log(`  ${trocken ? "würde auf Entwurf setzen" : "auf Entwurf"}: ${e.slug} (#${p.id}) — ${e.grund}`);
+      if (!trocken) await rest(`wp/v2/vergleich/${p.id}`, { method: "POST", body: JSON.stringify({ status: "draft" }) });
+      entwurf++;
+    }
+    if (!trocken) await rest(`finanzleser/v1/vergleich-daten/${e.slug}`, { method: "DELETE" }).catch(() => {});
   }
   console.log(`\n${geaendert} umgestellt, ${angelegt} angelegt, ${entwurf} auf Entwurf${trocken ? " (Trockenlauf)" : ""}.`);
   if (!trocken) console.log("Jetzt: Refresh laufen lassen (tools/financeads-refresh.mjs) und den Dev-Server per POST /api/revalidate auffrischen.");

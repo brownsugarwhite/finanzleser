@@ -1,5 +1,5 @@
 {
-  "_hinweis": "Quelle der Migration (tools/financeads-vergleiche.mjs) und des Refresh (tools/financeads-refresh.mjs). Ein Eintrag je Vergleich-CPT, der auf die financeads-API umgestellt wird oder neu entsteht. `fest` = Variante (nicht änderbar), `vor` = Voreinstellung der Parameterzeile. Gemessen am 15.09.2026, siehe Plan §4.",
+  "_hinweis": "Quelle der Migration (tools/financeads-vergleiche.mjs) und des Refresh (tools/financeads-refresh.mjs). Ein Eintrag je Vergleich-CPT, der auf die financeads-API umgestellt wird oder neu entsteht. `fest` = Variante (nicht änderbar), `vor` = Voreinstellung der Parameterzeile. Gemessen am 15.09.2026, siehe Plan §4. Entscheidung 15.09.: keine Varianten-Seiten aus Filterwerten — Zielgruppe, Kartenart und Tierart sind Umschalter im Rechner (`entwurf` setzt die vier angelegten Seiten zurück).",
   "vergleiche": [
     {
       "slug": "tagesgeldvergleich",
@@ -47,20 +47,6 @@
       "basis": "girokonto-vergleich"
     },
     {
-      "slug": "schuelerkonto-vergleich",
-      "titel": "Schülerkonto Vergleich",
-      "kategorie": "currentaccounts",
-      "fest": {
-        "target_group": "pupil"
-      },
-      "vor": {
-        "incoming_monthly": 0
-      },
-      "bestand": false,
-      "basis": "girokonto-vergleich",
-      "excerpt": "Konten für Schüler und Jugendliche im Vergleich: kostenlose Kontoführung, Karte, Taschengeld per Dauerauftrag. Wir zeigen die Angebote unserer Partner nebeneinander."
-    },
-    {
       "slug": "geschaeftskonto-vergleich",
       "titel": "Geschäftskonto Vergleich",
       "kategorie": "businessaccounts",
@@ -77,30 +63,6 @@
       "fest": {},
       "vor": {},
       "bestand": true
-    },
-    {
-      "slug": "reisekreditkarte-vergleich",
-      "titel": "Reisekreditkarte Vergleich",
-      "kategorie": "creditcards",
-      "fest": {
-        "travel_creditcard": "1"
-      },
-      "vor": {},
-      "bestand": false,
-      "basis": "kreditkarten-vergleich",
-      "excerpt": "Kreditkarten für die Reise: ohne Fremdwährungsgebühr, mit kostenlosem Bargeld im Ausland und Reiseversicherungen. Die Karten unserer Partner nebeneinander."
-    },
-    {
-      "slug": "kostenlose-kreditkarte-vergleich",
-      "titel": "Kostenlose Kreditkarte Vergleich",
-      "kategorie": "creditcards",
-      "fest": {
-        "free_products": "1"
-      },
-      "vor": {},
-      "bestand": false,
-      "basis": "kreditkarten-vergleich",
-      "excerpt": "Kreditkarten ohne Jahresgebühr im Vergleich: was sie trotzdem kosten können (Fremdwährung, Bargeld, Zinsen) und welche Karte zu Ihnen passt."
     },
     {
       "slug": "depot-vergleich",
@@ -215,36 +177,21 @@
     },
     {
       "slug": "hundekrankenversicherung-vergleich",
-      "titel": "Hundekrankenversicherung Vergleich",
+      "titel": "Tierkrankenversicherung Vergleich",
       "kategorie": "pethealthinsurances",
-      "fest": {
-        "animal_type": "DOG"
-      },
+      "fest": {},
       "vor": {
+        "animal_type": "DOG",
         "age": 2,
         "excess": 0,
         "coverage": "OP",
         "risky_group": "RG1"
       },
       "bestand": true,
-      "vorher": "covomo"
-    },
-    {
-      "slug": "katzenkrankenversicherung-vergleich",
-      "titel": "Katzenkrankenversicherung Vergleich",
-      "kategorie": "pethealthinsurances",
-      "fest": {
-        "animal_type": "CAT"
-      },
-      "vor": {
-        "age": 2,
-        "excess": 0,
-        "coverage": "OP",
-        "risky_group": "RG1"
-      },
-      "bestand": false,
-      "basis": "hundekrankenversicherung-vergleich",
-      "excerpt": "Krankenversicherung für Katzen im Vergleich: OP-Schutz oder Vollschutz, Erstattung nach Gebührenordnung, Wartezeiten und Selbstbeteiligung. Die Tarife unserer Partner nebeneinander."
+      "vorher": "covomo",
+      "titel_setzen": true,
+      "excerpt": "Krankenversicherung für Hund oder Katze im Vergleich: OP-Schutz oder Vollschutz, Erstattung nach Gebührenordnung, Wartezeiten und Selbstbeteiligung. Die Tarife unserer Partner nebeneinander — Hund und Katze umschaltbar.",
+      "excerpt_setzen": true
     },
     {
       "slug": "roboadvisor-vergleich",
@@ -490,6 +437,24 @@
       "variante": {
         "usage": "FIRMA"
       }
+    }
+  ],
+  "entwurf": [
+    {
+      "slug": "schuelerkonto-vergleich",
+      "grund": "Zielgruppe ist ein Umschalter im Girokonto-Vergleich"
+    },
+    {
+      "slug": "reisekreditkarte-vergleich",
+      "grund": "Reisekarte ist ein Umschalter im Kreditkarten-Vergleich"
+    },
+    {
+      "slug": "kostenlose-kreditkarte-vergleich",
+      "grund": "Jahresgebühr ist ein Umschalter im Kreditkarten-Vergleich"
+    },
+    {
+      "slug": "katzenkrankenversicherung-vergleich",
+      "grund": "Hund/Katze ist ein Umschalter im Tierkranken-Vergleich"
     }
   ]
 }

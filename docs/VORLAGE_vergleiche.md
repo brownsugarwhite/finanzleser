@@ -26,11 +26,12 @@ Ein Eintrag im Menü **Vergleiche** (Custom Post Type `vergleich`). Er hat:
      Leistungsmerkmale bitte als **Statistik-Block „Vergleichstabelle"** über der Liste setzen.
    - „Endpunkt zurzeit defekt": financeads liefert nichts; die Seite zeigt einen Hinweis und
      bleibt aus dem Google-Index, bis der Endpunkt repariert ist.
-3. **Variante · …** (nur bei manchen Kategorien): fester Filter, der die Seite zu einer
-   eigenen Variante macht — Schülerkonto (Zielgruppe Schüler), Autokredit (Verwendung Auto),
-   Katzenkranken (Tier Katze). 🚨 Eine Variante braucht eine **nachweislich andere
-   Produktmenge** und einen eigenen Text, sonst wertet Google sie als Doorway-Seite.
-   Prüfung: `node --experimental-strip-types tools/financeads-vergleiche.mjs pruefen`.
+3. **Variante · …** (nur bei Krediten und Bausparen): fester Filter für die wenigen Seiten,
+   die es schon vor dem Umbau als eigene URLs gab und die financeads selbst als eigene Rechner
+   führt — Autokredit, Minikredit. 🚨 Grundsatz seit 15.09.2026: **je financeads-Kategorie
+   ein Vergleich**, alles andere (Zielgruppe, Kartenart, Hund/Katze) ist ein Umschalter im
+   Rechner, keine eigene Seite. Wer doch eine Variante anlegen will, prüft vorher die
+   Produktmenge: `node --experimental-strip-types tools/financeads-vergleiche.mjs pruefen`.
 4. **Voreinstellung · …**: die Werte, mit denen die Seite startet (Anlagebetrag, Laufzeit,
    Geldeingang …). Leer = Standard. Die Chips darunter zeigt der Rechner automatisch.
 5. **Eigene Chips (JSON)**: nur, wenn die Standard-Chips nicht passen — Beispiel Minikredit:

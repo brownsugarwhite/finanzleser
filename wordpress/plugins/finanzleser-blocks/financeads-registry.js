@@ -226,30 +226,13 @@ window.FL_FINANCEADS = {
               "label": "Angestellte"
             }
           ],
-          "presets": [],
-          "fest": true
-        },
-        {
-          "key": "free_accounts",
-          "label": "Nur kostenlose Konten",
-          "typ": "wahl",
-          "standard": "",
-          "einheit": "",
-          "min": null,
-          "max": null,
-          "schritt": null,
-          "optionen": [
-            {
-              "wert": "",
-              "label": "alle"
-            },
-            {
-              "wert": "1",
-              "label": "nur kostenlose"
-            }
+          "presets": [
+            "",
+            "student",
+            "pupil",
+            "apprentice"
           ],
-          "presets": [],
-          "fest": true
+          "fest": false
         }
       ],
       "spalten": [
@@ -360,19 +343,22 @@ window.FL_FINANCEADS = {
           "optionen": [
             {
               "wert": "",
-              "label": "alle"
+              "label": "alle Karten"
             },
             {
               "wert": "1",
               "label": "nur Reisekarten"
             }
           ],
-          "presets": [],
-          "fest": true
+          "presets": [
+            "",
+            "1"
+          ],
+          "fest": false
         },
         {
           "key": "free_products",
-          "label": "Nur kostenlose Karten",
+          "label": "Jahresgebühr",
           "typ": "wahl",
           "standard": "",
           "einheit": "",
@@ -382,15 +368,18 @@ window.FL_FINANCEADS = {
           "optionen": [
             {
               "wert": "",
-              "label": "alle"
+              "label": "alle Karten"
             },
             {
               "wert": "1",
-              "label": "nur kostenlose"
+              "label": "nur ohne Jahresgebühr"
             }
           ],
-          "presets": [],
-          "fest": true
+          "presets": [
+            "",
+            "1"
+          ],
+          "fest": false
         }
       ],
       "spalten": [
@@ -1130,8 +1119,11 @@ window.FL_FINANCEADS = {
               "label": "Katze"
             }
           ],
-          "presets": [],
-          "fest": true
+          "presets": [
+            "DOG",
+            "CAT"
+          ],
+          "fest": false
         },
         {
           "key": "age",

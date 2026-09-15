@@ -44,7 +44,8 @@ export default function Parameterzeile({ def, quelle, params, onChange, laedt }:
 function Parameter({ p, presets, wert, onChange }: { p: ParamDef; presets: (number | string)[]; wert: string | number | undefined; onChange: (w: string | number) => void }) {
   const aktuell = wert === undefined ? p.standard : wert;
   const imPreset = presets.some((x) => String(x) === String(aktuell));
-  const [frei, setFrei] = useState(!imPreset && presets.length > 0);
+  // Ohne Presets gibt es nichts zu wählen: dann steht das Eingabefeld direkt da, kein einsamer Chip „eigener Wert".
+  const [frei, setFrei] = useState(presets.length === 0 || !imPreset);
   const [entwurf, setEntwurf] = useState(String(aktuell));
   useEffect(() => { setEntwurf(String(aktuell)); }, [aktuell]);
 
