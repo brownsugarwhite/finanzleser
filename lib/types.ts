@@ -109,6 +109,11 @@ export interface Vergleich {
   title: string;
   slug: string;
   excerpt?: string;
+  /** Veröffentlichung / letzte Änderung (ISO), für Sitemap und Datenstand. */
+  date?: string;
+  modified?: string;
+  /** Gerenderter Inhalt — nur bei `getVergleichBySlug` (trägt den Block `vergleich-quelle`). */
+  content?: string;
   vergleichFelder?: VergleichACF;
 }
 

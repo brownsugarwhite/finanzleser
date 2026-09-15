@@ -1523,6 +1523,36 @@ export async function getDokumenteBySlugs(slugs: string[]): Promise<Dokument[]> 
 // Alle Vergleiche
 // ─────────────────────────────────────────────
 
+// Ein Vergleich mit Inhalt (Block `vergleich-quelle` + Redaktionstext).
+//
+// `content` ist der GERENDERTE Inhalt: der dynamische Block `finanzleser/vergleich-quelle`
+// wird erst beim Rendern zum `<div class="fl-vergleich-src" data-config="…">`, den
+// lib/financeads/quelle.ts liest. Der rohe Block-Kommentar taugt dafür nicht.
+// 🚨 Die Liste (`getAllVergleiche`) trägt bewusst KEIN content — 50 Inhalte in jeder
+// Index-Abfrage wären zu schwer; hier gibt es sie nur für den einen Slug.
+export const getVergleichBySlug = cache(async (slug: string): Promise<Vergleich | null> => {
+  const client = getClient();
+
+  const query = gql`
+    query GetVergleichBySlug($slug: String!) {
+      vergleichBy(slug: $slug) {
+        id
+        title
+        slug
+        date
+        modified
+        excerpt
+        content
+      }
+    }
+  `;
+
+  // Fehler werfen statt schlucken — `vergleichBy: null` = existiert nicht; eine Exception =
+  // WP nicht erreichbar, und die darf nie als 404 in den ISR-Cache.
+  const data = await client.request<{ vergleichBy: Vergleich | null }>(query, { slug });
+  return data.vergleichBy;
+});
+
 export async function getAllVergleiche(): Promise<Vergleich[]> {
   return buildMemo("allVergleiche", _fetchAllVergleiche);
 }
@@ -1536,6 +1566,8 @@ async function _fetchAllVergleiche(): Promise<Vergleich[]> {
           id
           title
           slug
+          date
+          modified
           excerpt
         }
       }

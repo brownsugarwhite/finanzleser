@@ -1,0 +1,495 @@
+{
+  "_hinweis": "Quelle der Migration (tools/financeads-vergleiche.mjs) und des Refresh (tools/financeads-refresh.mjs). Ein Eintrag je Vergleich-CPT, der auf die financeads-API umgestellt wird oder neu entsteht. `fest` = Variante (nicht änderbar), `vor` = Voreinstellung der Parameterzeile. Gemessen am 15.09.2026, siehe Plan §4.",
+  "vergleiche": [
+    {
+      "slug": "tagesgeldvergleich",
+      "titel": "Tagesgeld Vergleich",
+      "kategorie": "savingsaccounts",
+      "fest": {},
+      "vor": {
+        "average_balance": 10000,
+        "months": 12
+      },
+      "bestand": true
+    },
+    {
+      "slug": "festgeldvergleich",
+      "titel": "Festgeld Vergleich",
+      "kategorie": "fixedsavingsaccounts",
+      "fest": {},
+      "vor": {
+        "average_balance": 20000,
+        "months": 12
+      },
+      "bestand": true
+    },
+    {
+      "slug": "girokonto-vergleich",
+      "titel": "Girokonto Vergleich",
+      "kategorie": "currentaccounts",
+      "fest": {},
+      "vor": {
+        "incoming_monthly": 1200
+      },
+      "bestand": true
+    },
+    {
+      "slug": "studentenkonto-vergleich",
+      "titel": "Studentenkonto Vergleich",
+      "kategorie": "currentaccounts",
+      "fest": {
+        "target_group": "student"
+      },
+      "vor": {
+        "incoming_monthly": 500
+      },
+      "bestand": true,
+      "basis": "girokonto-vergleich"
+    },
+    {
+      "slug": "schuelerkonto-vergleich",
+      "titel": "Schülerkonto Vergleich",
+      "kategorie": "currentaccounts",
+      "fest": {
+        "target_group": "pupil"
+      },
+      "vor": {
+        "incoming_monthly": 0
+      },
+      "bestand": false,
+      "basis": "girokonto-vergleich",
+      "excerpt": "Konten für Schüler und Jugendliche im Vergleich: kostenlose Kontoführung, Karte, Taschengeld per Dauerauftrag. Wir zeigen die Angebote unserer Partner nebeneinander."
+    },
+    {
+      "slug": "geschaeftskonto-vergleich",
+      "titel": "Geschäftskonto Vergleich",
+      "kategorie": "businessaccounts",
+      "fest": {},
+      "vor": {
+        "transaction": 10
+      },
+      "bestand": true
+    },
+    {
+      "slug": "kreditkarten-vergleich",
+      "titel": "Kreditkarten Vergleich",
+      "kategorie": "creditcards",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "reisekreditkarte-vergleich",
+      "titel": "Reisekreditkarte Vergleich",
+      "kategorie": "creditcards",
+      "fest": {
+        "travel_creditcard": "1"
+      },
+      "vor": {},
+      "bestand": false,
+      "basis": "kreditkarten-vergleich",
+      "excerpt": "Kreditkarten für die Reise: ohne Fremdwährungsgebühr, mit kostenlosem Bargeld im Ausland und Reiseversicherungen. Die Karten unserer Partner nebeneinander."
+    },
+    {
+      "slug": "kostenlose-kreditkarte-vergleich",
+      "titel": "Kostenlose Kreditkarte Vergleich",
+      "kategorie": "creditcards",
+      "fest": {
+        "free_products": "1"
+      },
+      "vor": {},
+      "bestand": false,
+      "basis": "kreditkarten-vergleich",
+      "excerpt": "Kreditkarten ohne Jahresgebühr im Vergleich: was sie trotzdem kosten können (Fremdwährung, Bargeld, Zinsen) und welche Karte zu Ihnen passt."
+    },
+    {
+      "slug": "depot-vergleich",
+      "titel": "Depot Vergleich",
+      "kategorie": "brokerageaccounts",
+      "fest": {},
+      "vor": {
+        "depot_volume": 20000,
+        "order_count_pa": 12,
+        "order_volume": 1000
+      },
+      "bestand": true
+    },
+    {
+      "slug": "ratenkredit-vergleich",
+      "titel": "Ratenkredit Vergleich",
+      "kategorie": "loans",
+      "fest": {},
+      "vor": {
+        "loan": 10000,
+        "duration_months": 60
+      },
+      "bestand": true
+    },
+    {
+      "slug": "autokredit-vergleich",
+      "titel": "Autokredit Vergleich",
+      "kategorie": "loans",
+      "fest": {
+        "usage": "CAR"
+      },
+      "vor": {
+        "loan": 15000,
+        "duration_months": 60
+      },
+      "bestand": true,
+      "basis": "ratenkredit-vergleich"
+    },
+    {
+      "slug": "minikredit-vergleich",
+      "titel": "Minikredit Vergleich",
+      "kategorie": "loans",
+      "fest": {
+        "type": "MINI_LOAN"
+      },
+      "vor": {
+        "loan": 500,
+        "duration_months": 1
+      },
+      "bestand": true,
+      "basis": "ratenkredit-vergleich",
+      "presets": {
+        "loan": [
+          300,
+          500,
+          1000,
+          1500
+        ],
+        "duration_months": [
+          1,
+          2,
+          3,
+          6
+        ]
+      }
+    },
+    {
+      "slug": "baufinanzierung-vergleich",
+      "titel": "Baufinanzierung Vergleich",
+      "kategorie": "mortgages",
+      "fest": {},
+      "vor": {
+        "loan": 300000,
+        "duration": 10,
+        "redemption": "0.02",
+        "loan_to_value_limit": 80,
+        "postal_code": 60311
+      },
+      "bestand": true
+    },
+    {
+      "slug": "bausparen-vergleich",
+      "titel": "Bausparen Vergleich",
+      "kategorie": "buildingsavings",
+      "fest": {
+        "usage": "LOAN"
+      },
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "mietkaution-rechner",
+      "titel": "Mietkaution Rechner",
+      "kategorie": "rentaldepositinsurances",
+      "fest": {},
+      "vor": {
+        "rental_deposit": 900,
+        "duration": 3,
+        "usage": "PRIVATE"
+      },
+      "bestand": true
+    },
+    {
+      "slug": "zahnzusatzversicherung-vergleich",
+      "titel": "Zahnzusatzversicherung Vergleich",
+      "kategorie": "supplementarydentalinsurances",
+      "fest": {},
+      "vor": {
+        "age": 40
+      },
+      "bestand": true
+    },
+    {
+      "slug": "hundekrankenversicherung-vergleich",
+      "titel": "Hundekrankenversicherung Vergleich",
+      "kategorie": "pethealthinsurances",
+      "fest": {
+        "animal_type": "DOG"
+      },
+      "vor": {
+        "age": 2,
+        "excess": 0,
+        "coverage": "OP",
+        "risky_group": "RG1"
+      },
+      "bestand": true,
+      "vorher": "covomo"
+    },
+    {
+      "slug": "katzenkrankenversicherung-vergleich",
+      "titel": "Katzenkrankenversicherung Vergleich",
+      "kategorie": "pethealthinsurances",
+      "fest": {
+        "animal_type": "CAT"
+      },
+      "vor": {
+        "age": 2,
+        "excess": 0,
+        "coverage": "OP",
+        "risky_group": "RG1"
+      },
+      "bestand": false,
+      "basis": "hundekrankenversicherung-vergleich",
+      "excerpt": "Krankenversicherung für Katzen im Vergleich: OP-Schutz oder Vollschutz, Erstattung nach Gebührenordnung, Wartezeiten und Selbstbeteiligung. Die Tarife unserer Partner nebeneinander."
+    },
+    {
+      "slug": "roboadvisor-vergleich",
+      "titel": "Robo-Advisor Vergleich",
+      "kategorie": "roboadvisor",
+      "fest": {},
+      "vor": {
+        "one_time_investment": 10000,
+        "monthly_savings_contribution": 100
+      },
+      "bestand": false,
+      "excerpt": "Digitale Vermögensverwaltung im Vergleich: Servicegebühr, Fondskosten, Mindestanlage und Sparplan. Wir stellen die Robo-Advisor unserer Partner nebeneinander."
+    },
+    {
+      "slug": "krypto-boerse-vergleich",
+      "titel": "Krypto-Börse Vergleich",
+      "kategorie": "cryptos",
+      "fest": {},
+      "vor": {
+        "coin_symbol": "BTC",
+        "order_volume": 500
+      },
+      "bestand": false,
+      "excerpt": "Krypto-Börsen und Broker im Vergleich: Gebühren je Order, handelbare Coins, Sparplan und Staking. Mit Risikohinweis — Kryptowährungen können bis zum Totalverlust schwanken."
+    },
+    {
+      "slug": "crowdinvesting-vergleich",
+      "titel": "Crowdinvesting Vergleich",
+      "kategorie": "crowdinvesting",
+      "fest": {},
+      "vor": {},
+      "bestand": false,
+      "excerpt": "Crowdinvesting-Plattformen und Projekte in der Auswahl: Zielzins, Laufzeit, Mindestanlage und Anlageklasse. Nachrangdarlehen sind Risikoanlagen bis zum Totalverlust."
+    },
+    {
+      "slug": "steuersoftware-vergleich",
+      "titel": "Steuersoftware Vergleich",
+      "kategorie": "taxsoftware",
+      "fest": {},
+      "vor": {},
+      "bestand": false,
+      "excerpt": "Steuersoftware und Steuer-Apps in der Auswahl: Kaufpreis, Gebühr je Steuererklärung, Plattformen und Zielgruppe. Die Programme unserer Partner nebeneinander."
+    },
+    {
+      "slug": "private-haftpflichtversicherung-vergleich",
+      "titel": "Private Haftpflichtversicherung Vergleich",
+      "kategorie": "liabilityinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "hausratversicherung-vergleich",
+      "titel": "Hausratversicherung Vergleich",
+      "kategorie": "homeinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "rechtsschutzversicherung-vergleich",
+      "titel": "Rechtsschutzversicherung Vergleich",
+      "kategorie": "legalprotectioninsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "risikolebensversicherung-vergleich",
+      "titel": "Risikolebensversicherung Vergleich",
+      "kategorie": "termlifeinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "sterbegeldversicherung-vergleich",
+      "titel": "Sterbegeldversicherung Vergleich",
+      "kategorie": "funeralexpenseinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "hundehaftpflicht-vergleich",
+      "titel": "Hundehaftpflicht Vergleich",
+      "kategorie": "dogliabilityinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true
+    },
+    {
+      "slug": "pferdehaftpflicht-vergleich",
+      "titel": "Pferdehaftpflicht Vergleich",
+      "kategorie": "horseliabilityinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": false,
+      "excerpt": "Pferdehaftpflicht im Überblick: Welche Versicherer unsere Partner sind und worauf es bei Deckungssumme, Fremdreiter und Mietsachschäden ankommt."
+    },
+    {
+      "slug": "elektronikversicherung-vergleich",
+      "titel": "Elektronikversicherung Vergleich",
+      "kategorie": "deviceinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true,
+      "vorher": "covomo"
+    },
+    {
+      "slug": "reisekrankenversicherung-vergleich",
+      "titel": "Reisekrankenversicherung Vergleich",
+      "kategorie": "travelhealthinsurances",
+      "fest": {},
+      "vor": {},
+      "bestand": true,
+      "defekt": true
+    }
+  ],
+  "redirects": [
+    {
+      "von": "/finanztools/vergleiche/studentenkreditkarte-vergleich",
+      "nach": "/finanztools/vergleiche/kreditkarten-vergleich",
+      "grund": "Filter target_group=student liefert dieselbe Produktmenge wie der Kreditkarten-Vergleich (gemessen 15.09.2026) — Doorway-Seite"
+    }
+  ],
+  "varianten_pruefung": [
+    {
+      "name": "Schülerkonto",
+      "kategorie": "currentaccounts",
+      "basis": {},
+      "variante": {
+        "target_group": "pupil"
+      }
+    },
+    {
+      "name": "Studentenkonto",
+      "kategorie": "currentaccounts",
+      "basis": {},
+      "variante": {
+        "target_group": "student"
+      }
+    },
+    {
+      "name": "Azubi-Konto",
+      "kategorie": "currentaccounts",
+      "basis": {},
+      "variante": {
+        "target_group": "apprentice"
+      }
+    },
+    {
+      "name": "Reisekreditkarte",
+      "kategorie": "creditcards",
+      "basis": {},
+      "variante": {
+        "travel_creditcard": "1"
+      }
+    },
+    {
+      "name": "Kostenlose Kreditkarte",
+      "kategorie": "creditcards",
+      "basis": {},
+      "variante": {
+        "free_products": "1"
+      }
+    },
+    {
+      "name": "Studentenkreditkarte",
+      "kategorie": "creditcards",
+      "basis": {},
+      "variante": {
+        "target_group": "student"
+      }
+    },
+    {
+      "name": "Autokredit",
+      "kategorie": "loans",
+      "basis": {
+        "loan": 10000,
+        "duration_months": 60
+      },
+      "variante": {
+        "loan": 10000,
+        "duration_months": 60,
+        "usage": "CAR"
+      }
+    },
+    {
+      "name": "Minikredit",
+      "kategorie": "loans",
+      "basis": {
+        "loan": 500,
+        "duration_months": 1
+      },
+      "variante": {
+        "loan": 500,
+        "duration_months": 1,
+        "type": "MINI_LOAN"
+      }
+    },
+    {
+      "name": "Modernisierungskredit",
+      "kategorie": "loans",
+      "basis": {
+        "loan": 10000,
+        "duration_months": 60
+      },
+      "variante": {
+        "loan": 10000,
+        "duration_months": 60,
+        "usage": "MODERNIZATION"
+      }
+    },
+    {
+      "name": "Katzenkranken",
+      "kategorie": "pethealthinsurances",
+      "basis": {
+        "animal_type": "DOG",
+        "risky_group": "RG1",
+        "age": 2,
+        "excess": 0
+      },
+      "variante": {
+        "animal_type": "CAT",
+        "risky_group": "RG1",
+        "age": 2,
+        "excess": 0
+      }
+    },
+    {
+      "name": "Junior-Depot",
+      "kategorie": "brokerageaccounts",
+      "basis": {},
+      "variante": {
+        "target_group": "children"
+      }
+    },
+    {
+      "name": "Mietkaution Firma",
+      "kategorie": "rentaldepositinsurances",
+      "basis": {},
+      "variante": {
+        "usage": "FIRMA"
+      }
+    }
+  ]
+}
