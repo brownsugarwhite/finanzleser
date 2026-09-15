@@ -846,3 +846,24 @@
 .kb .kb-bruecke__satz { margin: 6px 0 0; font: italic 400 16px/1.5 var(--kb-serif); text-wrap: pretty; }
 .kb .kb-bruecke__satz b { font-style: normal; color: var(--kb-tuerkis); }
 .kb .kb-bruecke__aktionen { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; margin-top: 18px; }
+
+/* ═════ Seite 1 · Vergleich (K:56-213) ══════════════════════════════════════════════ */
+
+.kb--vergleich { --kb-werkzeug: var(--kb-tuerkis); }
+.kb .kb__fehler { margin: 14px 0 0; font: 400 13px var(--kb-sans); color: var(--kb-magenta); }
+
+/* K:62-67 — „Ihre Angaben“ hängt am türkisen Einhänger; rechts der Hinweis mit dem
+   pulsenden grünen Punkt: hier wird nichts bestätigt, hier rechnet es sofort. */
+.kb .kb-angaben { margin-top: 36px; padding-top: 16px; border-top: 2px solid var(--kb-werkzeug); }
+.kb .kb-angaben__kopf { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+.kb .kb-angaben__sofort {
+  display: inline-flex; align-items: center; gap: 7px;
+  font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau);
+}
+.kb .kb-angaben__sofort i { width: 7px; height: 7px; border-radius: 50%; background: var(--kb-gruen); animation: fl-punkt 1.8s infinite; flex: none; }
+.kb .kb-angaben__breit { margin-top: 22px; }
+.kb .kb-angaben__breit + .kb-angaben__breit { margin-top: 18px; }
+.kb .kb-angaben__paar { margin-top: 22px; gap: 22px 40px; }
+/* K:76-77 — die Bezeichnung steht neben dem Umschalter, nicht darüber. */
+.kb .kb-angaben__segment { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; }
+.kb .kb-angaben__segment > b { font: 600 15px var(--kb-serif); }

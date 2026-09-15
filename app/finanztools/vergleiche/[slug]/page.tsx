@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { FADEN_AKTIV } from "@/lib/faden/flag";
+import { FADEN_AKTIV, KURSBLATT_AKTIV } from "@/lib/faden/flag";
 import KartenKapitel from "@/components/faden/KartenKapitel";
 import Insel from "@/components/faden/kette/Insel";
 import Weiterlesen from "@/components/faden/kette/Weiterlesen";
@@ -137,9 +137,13 @@ export default async function VergleichDetailPage({ params }: Props) {
     return (
       <>
         {jsonLd}
-        <KartenKapitel schluessel={`vergleich:${slug}`} titel={title} kicker="Anzeige · Vergleich mit Partnerlinks" beschreibung={beschreibung} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Vergleiche", href: "/finanztools/vergleiche" }]} url={pfad}>
+        <KartenKapitel schluessel={`vergleich:${slug}`} titel={title} kicker="Anzeige · Vergleich mit Partnerlinks" beschreibung={beschreibung} krumen={[{ name: "Finanztools", href: "/finanztools" }, { name: "Vergleiche", href: "/finanztools/vergleiche" }]} url={pfad} eigenerKopf={KURSBLATT_AKTIV}>
           <Teile teile={davor} faden />
-          <VergleichKoerper slug={slug} skin="faden" mitSaeulen />
+          {/* Der Kursblatt-Satz bringt Kicker, Überschrift und Vorspann selbst mit — mit
+              lebenden Zahlen, die sich mit den Eingaben ändern. Deshalb bekommt er NUR
+              den redaktionellen Textauszug; den Satz mit Anzahl und Bestwert baut er
+              selbst, sonst stünde er zweimal da. */}
+          <VergleichKoerper slug={slug} skin="faden" mitSaeulen beschreibung={KURSBLATT_AKTIV ? cleanDescription(excerpt || "") : undefined} />
           <Teile teile={danach} faden />
           {fragen.length > 0 && (
             <section className="vgl-fragen">

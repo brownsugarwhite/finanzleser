@@ -13,7 +13,7 @@
  * keine Klassennamen.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { DefLite, SpalteDef, VergleichDaten, VergleichProdukt, VergleichQuelle, VergleichVariante } from "./typen.ts";
+import type { DefLite, FilterDef, SpalteDef, VergleichDaten, VergleichProdukt, VergleichQuelle, VergleichVariante } from "./typen.ts";
 import { paramSchluessel, sortiere, varianteErgaenzen } from "./normalisieren.ts";
 import { useSichtbeacon } from "@/components/vergleich/sichtbeacon";
 
@@ -51,7 +51,13 @@ export interface VergleichZustand {
   fehler: string | null;
   sortKey: string;
   setSortKey: (k: string) => void;
-  /** Aktive Filter je Schlüssel aus `def.filter`. */
+  /**
+   * Filter, die in DIESEN Daten überhaupt etwas unterscheiden. Ein Schnappschuss, der vor
+   * einer Registry-Erweiterung gebaut wurde, kennt die neuen Kennzahlen noch nicht — ein
+   * Chip darauf würde die Liste auf null klemmen, ohne dass jemand versteht, warum.
+   */
+  chips: FilterDef[];
+  /** Aktive Filter je Schlüssel. */
   filter: Record<string, boolean>;
   schalte: (key: string) => void;
   /** Wie viele Angebote jeder Filter übrig ließe — für die Zahl am Chip. */
@@ -152,10 +158,16 @@ export function useVergleichZustand({
   const sortSpalte = spalten.find((s) => s.key === sortKey) || haupt;
   const richtung = sortSpalte?.richtung || "hoch";
 
+  // Nur Chips, deren Kennzahl in den Daten vorkommt (siehe Kommentar oben).
+  const chips = useMemo(
+    () => (def.filter ?? []).filter((f) => aktuelle.produkte.some((p) => f.key in p.kennzahlen)),
+    [def.filter, aktuelle.produkte],
+  );
+
   const trifft = useCallback(
     (p: VergleichProdukt, aktiv: Record<string, boolean>) =>
-      (def.filter ?? []).every((f) => !aktiv[f.key] || p.kennzahlen[f.key] === f.wert),
-    [def.filter],
+      chips.every((f) => !aktiv[f.key] || p.kennzahlen[f.key] === f.wert),
+    [chips],
   );
 
   const zeilen = useMemo(() => {
@@ -167,11 +179,11 @@ export function useVergleichZustand({
   // sagen, worauf man sich einlässt, nicht wie viele es insgesamt gibt.
   const treffer = useMemo(() => {
     const out: Record<string, number> = {};
-    for (const f of def.filter ?? []) {
+    for (const f of chips) {
       out[f.key] = aktuelle.produkte.filter((p) => trifft(p, { ...filter, [f.key]: true })).length;
     }
     return out;
-  }, [aktuelle.produkte, def.filter, filter, trifft]);
+  }, [aktuelle.produkte, chips, filter, trifft]);
 
   const maximum = useMemo(() => {
     if (!haupt) return 0;
@@ -187,7 +199,7 @@ export function useVergleichZustand({
 
   return {
     wurzel, params, setParam, standard, aktuelle, laedt, fehler,
-    sortKey, setSortKey, filter, schalte, treffer,
+    sortKey, setSortKey, chips, filter, schalte, treffer,
     alle, zeigeAlle: () => setAlle(true),
     zeilen, gezeigt, haupt, mittel, sortSpalte, maximum,
   };

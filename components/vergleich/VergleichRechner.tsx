@@ -39,8 +39,10 @@ export default function VergleichRechner({ slug, def, quelle, daten, skin, mitSa
   const z = useVergleichZustand({ slug, def, quelle, daten });
 
   // Die alte Liste kennt genau einen Umschalter. Seit das Kursblatt mehrere Chips zeigt,
-  // ist `def.filter` eine Liste — hier gilt der erste, damit sich an dieser Seite nichts ändert.
-  const schalter = def.filter?.[0];
+  // ist `def.filter` eine Liste — hier gilt der erste, damit sich an dieser Seite nichts
+  // ändert. `chips` statt `def.filter`, damit auch hier kein Schalter erscheint, dessen
+  // Kennzahl der Schnappschuss noch gar nicht kennt.
+  const schalter = z.chips[0];
   const filterAn = schalter ? Boolean(z.filter[schalter.key]) : false;
 
   const wertetabelle = useMemo(() => ({

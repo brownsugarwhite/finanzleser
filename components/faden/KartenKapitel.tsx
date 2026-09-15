@@ -11,7 +11,7 @@ import Insel from "./kette/Insel";
 export interface Krume { name: string; href: string }
 
 export default function KartenKapitel({
-  schluessel, titel, titelZusatz, kicker, beschreibung, krumen, url, children,
+  schluessel, titel, titelZusatz, kicker, beschreibung, krumen, url, eigenerKopf = false, children,
 }: {
   schluessel: string;
   titel: string;
@@ -21,6 +21,12 @@ export default function KartenKapitel({
   beschreibung?: string;
   krumen: Krume[];
   url: string;
+  /**
+   * Der Inhalt bringt Kicker, Überschrift und Vorspann selbst mit — so setzt der
+   * Kursblatt-Satz seinen eigenen Kopf, statt ihn hier ein zweites Mal zu bekommen.
+   * Krumen, Kapitelmechanik und Aktionen bleiben.
+   */
+  eigenerKopf?: boolean;
   children: ReactNode;
 }) {
   const pfad = krumen.map((k) => k.name);
@@ -35,12 +41,16 @@ export default function KartenKapitel({
               <span key={x.href + i}>{i > 0 && <span className="krumen__trenner">›</span>}<a href={x.href}>{x.name}</a></span>
             ))}
           </nav>
-          {kicker && <p className="artikel__titel">{kicker}</p>}
-          <h1 className="artikel__untertitel">
-            {titel}
-            {titelZusatz && <span className="artikel__zusatz"> {titelZusatz}</span>}
-          </h1>
-          {beschreibung && <p className="vorspann">{beschreibung}</p>}
+          {!eigenerKopf && (
+            <>
+              {kicker && <p className="artikel__titel">{kicker}</p>}
+              <h1 className="artikel__untertitel">
+                {titel}
+                {titelZusatz && <span className="artikel__zusatz"> {titelZusatz}</span>}
+              </h1>
+              {beschreibung && <p className="vorspann">{beschreibung}</p>}
+            </>
+          )}
           {children}
           <Insel typ="aktionen" werte={{ titel, url, artikelId: id }}><Aktionen titel={titel} url={url} artikelId={id} /></Insel>
         </article>
