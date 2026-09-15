@@ -44,6 +44,8 @@ export default function Tarifliste({ def, zeilen, haupt, mittel, best, maximum, 
           return (
             <li key={p.id} className={"vgl__zeile" + (istBest ? " vgl__zeile--best" : "")} style={{ animationDelay: `${Math.min(i, 12) * 0.05}s` }}>
               <div className="vgl__tarif">
+                {/* eslint-disable-next-line @next/next/no-img-element -- 200×50-Logo vom Partner-CDN, lazy */}
+                {p.logo && <img className="vgl__tarif-logo" src={p.logo} alt="" width={200} height={50} loading="lazy" decoding="async" />}
                 <b className="vgl__anbieter">{p.anbieter}</b>
                 <span className="vgl__tarifname">
                   <span>{p.tarif}</span>

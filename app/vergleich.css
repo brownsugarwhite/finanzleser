@@ -45,6 +45,9 @@
 .vgl__zeile:hover { padding-left: 14px; }
 .vgl__zeile--best { background: rgba(6,212,150,.07); }
 .vgl__tarif { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+/* Logo des Anbieters über dem Namen (200×50 vom Partner-CDN, auf 20 px Höhe); der Name bleibt
+   als Text stehen — für Leser ohne Bild, für den Textauszug und für den Adblocker-Fall. */
+.vgl__tarif-logo { display: block; height: 20px; width: auto; max-width: 96px; margin: 0 0 4px; object-fit: contain; object-position: left center; }
 .vgl__anbieter { font: 700 16px var(--font-heading); color: var(--color-text-primary); }
 .vgl__tarifname { display: flex; align-items: center; gap: 8px; font: 400 12.5px var(--font-body); color: var(--color-text-medium); flex-wrap: wrap; }
 .vgl__stempel { display: inline-block; margin-left: 6px; padding: 3px 8px; background: #06D496; color: #fff; font: 700 9.5px/1.3 var(--font-body); letter-spacing: .1em; text-transform: uppercase; font-style: normal; transform: rotate(-11deg); animation: vgl-stempel .6s cubic-bezier(.34,1.56,.64,1) .4s both; }
