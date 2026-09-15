@@ -54,8 +54,9 @@ async function _holeAlle(): Promise<Record<string, Pick<VergleichDaten, "slug" |
   zaehleWp("rest:vergleich-daten-alle");
   const res = await fetch(`${wpBasis()}/wp-json/finanzleser/v1/vergleich-daten`, { cache: "no-store", headers: { Accept: "application/json" } });
   if (!res.ok) throw new Error(`vergleich-daten (alle): HTTP ${res.status}`);
-  const json = (await res.json()) as { uebersicht?: Record<string, Pick<VergleichDaten, "slug" | "kategorie" | "klasse" | "anzahl" | "stand" | "geladen">> };
-  return json.uebersicht || {};
+  const json = (await res.json()) as { uebersicht?: Record<string, Pick<VergleichDaten, "slug" | "kategorie" | "klasse" | "anzahl" | "stand" | "geladen">> | unknown[] };
+  // PHP kodiert ein leeres Array als `[]`, nicht als `{}`.
+  return json.uebersicht && !Array.isArray(json.uebersicht) ? json.uebersicht : {};
 }
 
 const uebersichtGecacht = unstable_cache(_holeAlle, ["vergleich-daten-uebersicht-v1"], { revalidate: CONTENT_REVALIDATE, tags: [VERGLEICH_DATEN_TAG] });

@@ -1,0 +1,50 @@
+# Holt die financeads-Vergleichsdaten zweimal täglich und legt sie als Snapshot in
+# WordPress ab (tools/financeads-refresh.mjs). Danach bustet das Skript den Cache-Tag
+# „vergleich-daten" im Frontend; die Vergleichsseiten holen die Daten beim nächsten
+# Render aus WordPress — nie von financeads (1–12 s je Abruf, kein Netlify-Limit hier).
+#
+# Secrets (Repository → Settings → Secrets → Actions):
+#   FINANCEADS_API_KEY, FINANCEADS_ADSPACE, CMS_URL, CMS_APP_USER, CMS_APP_PASS,
+#   FRONTEND_URL, WP_REVALIDATE_SECRET
+#
+# Manuell: Actions → „financeads-Refresh" → Run workflow (optional nur ein Slug).
+name: financeads-Refresh
+
+on:
+  schedule:
+    - cron: "0 4,16 * * *"   # 06:00 und 18:00 MESZ
+  workflow_dispatch:
+    inputs:
+      nur:
+        description: "Nur diesen Slug auffrischen (leer = alle)"
+        required: false
+        default: ""
+
+concurrency:
+  group: financeads-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Refresh
+        env:
+          FINANCEADS_API_KEY: ${{ secrets.FINANCEADS_API_KEY }}
+          FINANCEADS_ADSPACE: ${{ secrets.FINANCEADS_ADSPACE }}
+          CMS_URL: ${{ secrets.CMS_URL }}
+          CMS_APP_USER: ${{ secrets.CMS_APP_USER }}
+          CMS_APP_PASS: ${{ secrets.CMS_APP_PASS }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+          WP_REVALIDATE_SECRET: ${{ secrets.WP_REVALIDATE_SECRET }}
+        run: |
+          if [ -n "${{ github.event.inputs.nur }}" ]; then
+            node --experimental-strip-types tools/financeads-refresh.mjs --nur "${{ github.event.inputs.nur }}"
+          else
+            node --experimental-strip-types tools/financeads-refresh.mjs
+          fi
