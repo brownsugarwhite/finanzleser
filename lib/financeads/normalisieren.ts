@@ -90,7 +90,9 @@ export function normalisiereVariante(def: KategorieDef, params: Record<string, s
   produkte = produkte.slice(0, limit);
   const p: Record<string, string> = {};
   for (const [k, v] of Object.entries(params)) if (v !== "" && v !== undefined && v !== null) p[k] = String(v);
-  return { schluessel: paramSchluessel(p), params: p, produkte, bestwert: bestwertId(produkte, def.bestwert) };
+  const bestwert = bestwertId(produkte, def.bestwert);
+  const best = produkte.find((x) => x.id === bestwert);
+  return { schluessel: paramSchluessel(p), params: p, produkte, bestwert, bestwertGrund: best && def.begruendung ? def.begruendung(best) : undefined };
 }
 
 /** Jüngster Konditionsstand aller Produkte, sonst null. */
@@ -109,4 +111,19 @@ export function hinweiseAus(antwort: ApiAntwort): string[] {
 
 export function kennwertAls<T extends KennWert>(v: KennWert | undefined, typ: "number" | "string" | "boolean"): T | null {
   return typeof v === typ ? (v as T) : null;
+}
+
+/**
+ * Nebenvarianten abspecken: Logo, Siegel, Vorteile und Pflichttext sind je Produkt gleich,
+ * egal welcher Betrag gerechnet wurde — sie stehen nur in der Voreinstellung. Ohne das
+ * wog ein Snapshot mit neun Varianten 160 KB (Autokredit, gemessen 15.09.2026).
+ */
+export function varianteAbspecken(v: VergleichVariante): VergleichVariante {
+  return { ...v, produkte: v.produkte.map((p) => ({ id: p.id, typ: p.typ, anbieter: p.anbieter, tarif: p.tarif, kennzahlen: p.kennzahlen, total: p.total, link: p.link, vorteile: [], bezahlt: p.bezahlt })) };
+}
+
+/** Gegenstück: eine abgespeckte Variante mit den Details der Voreinstellung auffüllen. */
+export function varianteErgaenzen(v: VergleichVariante, standard: VergleichVariante): VergleichVariante {
+  const nach = new Map(standard.produkte.map((p) => [p.id, p]));
+  return { ...v, produkte: v.produkte.map((p) => { const s = nach.get(p.id); return s ? { ...s, ...p, vorteile: p.vorteile.length ? p.vorteile : s.vorteile, hinweis: p.hinweis ?? s.hinweis, logo: p.logo ?? s.logo, siegel: p.siegel ?? s.siegel } : p; }) };
 }

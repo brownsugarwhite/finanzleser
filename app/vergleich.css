@@ -1,0 +1,117 @@
+/* =====================================================================================
+   vergleich.css — der eigene Vergleichsrechner (financeads-API), Grundgerüst + Skin der
+   alten Live-Seite (.vgl--alt). Der Faden-Skin liegt in faden-vergleich.css.
+
+   Gleiches Markup für beide Skins (components/vergleich/*). Klassennamen tragen bewusst
+   kein „ad", „banner", „sponsor", „financeads" — Adblocker-Listen matchen darauf.
+   ===================================================================================== */
+
+/* ── Gerüst, skin-unabhängig ──────────────────────────────────────────────────────── */
+.vgl { width: 100%; min-width: 0; font-family: var(--font-body); color: var(--color-text-primary); }
+.vgl * { box-sizing: border-box; }
+.vgl__parameter { display: grid; gap: 14px; margin: 0 0 18px; }
+.vgl__param { display: grid; gap: 6px; }
+.vgl__param-label { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-medium); }
+.vgl__chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.vgl__chip { cursor: pointer; }
+.vgl__chip--aktiv { background: var(--color-text-primary); color: var(--color-bg-page); border-color: var(--color-text-primary); }
+.vgl__chip--frei { color: var(--color-text-medium); }
+.vgl__frei { display: inline-flex; align-items: center; gap: 6px; }
+.vgl__eingabe { width: 120px; min-height: 36px; padding: 6px 10px; border: 1px solid var(--color-border-default); border-radius: 18px; font: 500 14px var(--font-body); background: transparent; color: inherit; }
+.vgl__eingabe:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+.vgl__einheit { font-size: 13px; color: var(--color-text-medium); }
+.vgl__select { min-height: 36px; padding: 6px 30px 6px 12px; border: 1px solid var(--color-border-default); border-radius: 18px; font: 500 14px var(--font-body); background: transparent; color: inherit; }
+.vgl__laedt { font-size: 13px; color: var(--color-text-medium); font-style: italic; }
+.vgl__fehler { margin: 0 0 12px; font-size: 13px; color: var(--color-brand-secondary); }
+
+.vgl__filterzeile { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; padding-bottom: 12px; border-bottom: 1px solid var(--color-text-primary); }
+.vgl__schalter { display: flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 0; cursor: pointer; font: 500 14px var(--font-body); color: var(--color-text-primary); min-height: 44px; }
+.vgl__schalter-knopf { position: relative; width: 42px; height: 24px; border-radius: 12px; background: rgba(51,74,39,.2); transition: background .3s; flex: none; }
+.vgl__schalter-knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: left .35s cubic-bezier(.34,1.56,.64,1); }
+.vgl__schalter[aria-checked="true"] .vgl__schalter-knopf { background: var(--color-brand); }
+.vgl__schalter[aria-checked="true"] .vgl__schalter-knopf i { left: 20px; }
+.vgl__sortieren { display: flex; align-items: center; gap: 14px; margin-left: auto; font: 500 13px var(--font-body); color: var(--color-text-medium); flex-wrap: wrap; }
+.vgl__tab { border: 0; border-bottom: 2px solid transparent; background: transparent; padding: 10px 0; font: 500 13.5px var(--font-body); color: var(--color-text-medium); cursor: pointer; transition: color .2s, border-color .3s; }
+.vgl__tab:hover { color: var(--color-text-primary); }
+.vgl__tab--aktiv { border-bottom-color: var(--color-text-primary); font-weight: 700; color: var(--color-text-primary); }
+
+/* Kopf und Zeilen als Grid; Spaltenmaße kommen aus --vgl-spalten (Registry: Zahl der Mittelspalten) */
+.vgl__liste { display: grid; }
+.vgl__kopf { display: grid; grid-template-columns: var(--vgl-spalten); gap: 0 14px; padding: 10px 0 6px; font: 700 10px/1.3 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-medium); }
+.vgl__kopfzelle--mitte { text-align: center; }
+.vgl__kopfzelle--rechts { text-align: right; }
+.vgl__zeilen { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.vgl__zeile { display: grid; grid-template-columns: var(--vgl-spalten); gap: 0 14px; align-items: center; padding: 13px 8px; margin: 0 -8px; border-top: 1px solid rgba(51,74,39,.1); transition: background .3s, padding-left .3s cubic-bezier(.2,.8,.2,1); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
+.vgl__zeile:hover { padding-left: 14px; }
+.vgl__zeile--best { background: rgba(6,212,150,.07); }
+.vgl__tarif { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.vgl__anbieter { font: 700 16px var(--font-heading); color: var(--color-text-primary); }
+.vgl__tarifname { display: flex; align-items: center; gap: 8px; font: 400 12.5px var(--font-body); color: var(--color-text-medium); flex-wrap: wrap; }
+.vgl__stempel { display: inline-block; margin-left: 6px; padding: 3px 8px; background: #06D496; color: #fff; font: 700 9.5px/1.3 var(--font-body); letter-spacing: .1em; text-transform: uppercase; font-style: normal; transform: rotate(-11deg); animation: vgl-stempel .6s cubic-bezier(.34,1.56,.64,1) .4s both; }
+.vgl__zelle--mitte { text-align: center; font: 600 14.5px var(--font-body); color: var(--color-text-primary); font-variant-numeric: tabular-nums; }
+.vgl__zelle--haken { font: 700 16px var(--font-body); }
+.vgl__ja { color: #2E7A0B; } .vgl__nein { color: rgba(104,108,106,.6); }
+.vgl__zelle--rechts { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.vgl__zahl { font: 900 19px var(--font-heading); color: var(--color-text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vgl__balken { display: block; width: 72px; height: 3px; background: rgba(51,74,39,.1); }
+.vgl__balken i { display: block; height: 100%; background: var(--color-text-primary); transition: width .7s cubic-bezier(.2,.8,.2,1); }
+.vgl__zeile--best .vgl__balken i { background: #06D496; }
+.vgl__aktionen { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+.vgl__anbieter-zeile .vgl__aktionen { margin: 0; }
+.vgl__details-knopf { border: 0; background: none; padding: 0; font: 600 12.5px var(--font-body); color: var(--color-text-medium); cursor: pointer; }
+.vgl__details-knopf:hover { text-decoration: underline; }
+.vgl__link { display: inline-flex; align-items: center; gap: 5px; font: 600 13px var(--font-body); color: #2E7A0B; text-decoration: none; white-space: nowrap; }
+.vgl__link:hover { text-decoration: underline; }
+.vgl__link i { font-style: normal; font-size: 12px; }
+.vgl__details { grid-column: 1 / -1; padding: 6px 0 4px; font-size: 13.5px; }
+.vgl__vorteile { margin: 0 0 6px; padding-left: 18px; color: var(--color-text-primary); }
+.vgl__pflicht summary { cursor: pointer; color: var(--color-text-medium); font-size: 12.5px; }
+.vgl__pflicht pre { white-space: pre-wrap; font: 400 12px/1.5 var(--font-body); color: var(--color-text-medium); margin: 6px 0 0; }
+
+/* Anbieterliste (Klasse B) */
+.vgl__anbieter-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.vgl__anbieter-zeile { display: grid; grid-template-columns: 110px minmax(0,1fr) auto auto; gap: 0 16px; align-items: center; padding: 13px 8px; margin: 0 -8px; border-top: 1px solid rgba(51,74,39,.1); animation: vgl-herz .6s cubic-bezier(.2,.8,.2,1) both; }
+.vgl__logo { display: flex; align-items: center; min-height: 28px; }
+.vgl__logo img { max-width: 100px; height: auto; }
+.vgl__logo b { font: 700 14px var(--font-heading); }
+.vgl__siegel { display: flex; gap: 8px; align-items: center; }
+.vgl__siegel img { height: 40px; width: auto; }
+
+.vgl__mehr { margin: 14px 0 0; border: 0; background: none; padding: 0; font: 600 14px var(--font-body); color: #2E7A0B; cursor: pointer; }
+.vgl__mehr:hover { text-decoration: underline; }
+.vgl__leer { margin: 14px 0; font-size: 14px; color: var(--color-text-medium); }
+.vgl__hinweis { margin: 16px 0 0; font: 400 12.5px/1.5 var(--font-body); color: var(--color-text-medium); }
+.vgl__fuss { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(51,74,39,.16); }
+.vgl__meta { font: italic 300 13px var(--font-heading); color: var(--color-text-medium); }
+.vgl__quelle { margin-left: auto; font: 400 12px var(--font-body); color: var(--color-text-medium); }
+.vgl__wartend { padding: 24px; border: 1px dashed var(--color-border-default); border-radius: 12px; font-size: 14px; color: var(--color-text-medium); }
+.vgl__wartend p { margin: 0; }
+.vgl__saeulen { margin: 0 0 18px; }
+
+@keyframes vgl-herz { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 55% { opacity: 1; transform: translateY(-2px) scale(1.008); } 78% { transform: translateY(1px) scale(.999); } 100% { opacity: 1; transform: none; } }
+@keyframes vgl-stempel { 0% { transform: scale(1.7) rotate(-22deg); opacity: 0; } 60% { transform: scale(.94) rotate(-8deg); opacity: 1; } 100% { transform: scale(1) rotate(-11deg); opacity: 1; } }
+
+/* Schmal (< 1060, Handoff): schmale Spalten fallen weg, Aktionen unter die Zeile */
+@media (max-width: 1059px) {
+  .vgl__zelle--schmal, .vgl__kopfzelle.vgl__zelle--schmal { display: none; }
+  .vgl__kopf, .vgl__zeile { grid-template-columns: minmax(0,1.4fr) .8fr .9fr; }
+  .vgl__anbieter-zeile { grid-template-columns: 90px minmax(0,1fr) auto; }
+  .vgl__anbieter-zeile .vgl__siegel { display: none; }
+}
+@media (max-width: 640px) {
+  .vgl__kopf { display: none; }
+  .vgl__zeile { grid-template-columns: minmax(0,1fr) auto; }
+  .vgl__zelle--mitte { display: none; }
+  .vgl__sortieren { margin-left: 0; }
+  .vgl__anbieter-zeile { grid-template-columns: minmax(0,1fr) auto; }
+  .vgl__anbieter-zeile .vgl__logo { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .vgl__zeile, .vgl__anbieter-zeile, .vgl__stempel { animation: none; } .vgl__balken i, .vgl__schalter-knopf i { transition: none; } }
+
+/* ── Skin der alten Seite: Chips wie die Pillen der Rechner, Ergebniszahl in Zweitmarke ── */
+.vgl--alt .vgl__chip { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 14px; border: 1px solid var(--color-border-default); border-radius: 18px; background: transparent; font: 500 14px var(--font-body); color: var(--color-text-primary); transition: border-color .2s, background .2s; }
+.vgl--alt .vgl__chip:hover { border-color: var(--color-text-primary); }
+.vgl--alt .vgl__chip--aktiv { background: var(--color-text-primary); color: #fff; border-color: var(--color-text-primary); }
+.vgl--alt .vgl__zahl { color: var(--color-brand-secondary); }
+.vgl--alt .vgl__zeile--best .vgl__zahl { color: var(--color-text-primary); }
+.vgl--alt .vgl__liste, .vgl--alt .vgl__anbieter-liste { margin-top: 4px; }

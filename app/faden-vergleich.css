@@ -1,0 +1,60 @@
+/* =====================================================================================
+   faden-vergleich.css — der Vergleichsrechner im Zeitungssatz des Fadens.
+
+   Vorlage: docs/design_handoff_finanzleser_faden/Finanzleser Faden A v2 - Zeitung.dc.html,
+   Zeile 759–788 („Kapitel 4 · Vergleich"). Maße und Farben 1:1; die Tokens kommen aus
+   app/faden.css (--ink #334A27, --muted #686C6A, --green #45A117, --green-ink #2E7A0B,
+   --tuerkis #0B7F66 aus statistik-formen.css, --serif, --sans).
+
+   Regeln des Fadens: Papier statt Weiß, Linien statt Rahmen, keine Kästen, keine
+   Schatten, keine Gestaltungsregel an einem Zustands-Selektor. Das Grundgerüst steht in
+   vergleich.css; hier nur, was der Zeitungssatz anders macht.
+   ===================================================================================== */
+
+.faden-shell .vgl { font-family: var(--sans); color: var(--ink); }
+.faden-shell .vgl__param-label { color: var(--muted); }
+.faden-shell .vgl__chip--aktiv { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.faden-shell .vgl__eingabe, .faden-shell .vgl__select { border-color: var(--rule-mid); border-radius: 999px; font: 500 13px/1.35 var(--sans); color: var(--ink); }
+.faden-shell .vgl__eingabe:focus-visible { outline-color: var(--green); }
+
+/* Filterzeile (Handoff 762–767): Toggle 42×24, Sortier-Tabs mit 2-px-Unterlinie */
+.faden-shell .vgl__filterzeile { border-bottom-color: var(--ink); }
+.faden-shell .vgl__schalter { font: 500 14px var(--sans); color: var(--ink); }
+.faden-shell .vgl__schalter-knopf { background: rgba(51,74,39,.2); }
+.faden-shell .vgl__schalter[aria-checked="true"] .vgl__schalter-knopf { background: var(--green); }
+.faden-shell .vgl__sortieren { font: 500 13px var(--sans); color: var(--muted); }
+.faden-shell .vgl__tab { font: 500 13.5px var(--sans); color: var(--muted); }
+.faden-shell .vgl__tab:hover, .faden-shell .vgl__tab--aktiv { color: var(--ink); }
+.faden-shell .vgl__tab--aktiv { border-bottom-color: var(--ink); font-weight: 700; }
+
+/* Kopfzeile (768) und Zeilen (771–777) */
+.faden-shell .vgl__kopf { font: 700 10px/1.3 var(--sans); letter-spacing: .14em; color: var(--muted); }
+.faden-shell .vgl__zeile, .faden-shell .vgl__anbieter-zeile { border-top-color: rgba(51,74,39,.1); }
+.faden-shell .vgl__zeile--best { background: rgba(6,212,150,.07); }
+.faden-shell .vgl__anbieter { font: 700 16px var(--serif); color: var(--ink); }
+.faden-shell .vgl__tarifname { font: 400 12.5px var(--sans); color: var(--muted); }
+.faden-shell .vgl__zelle--mitte { font: 600 14.5px var(--sans); color: var(--ink); }
+.faden-shell .vgl__zelle--haken { font: 700 16px var(--sans); }
+.faden-shell .vgl__ja { color: var(--green-ink); }
+.faden-shell .vgl__zahl { font: 900 19px var(--serif); color: var(--ink); }
+.faden-shell .vgl__balken { background: rgba(51,74,39,.1); }
+.faden-shell .vgl__balken i { background: var(--ink); }
+.faden-shell .vgl__zeile--best .vgl__balken i { background: #06D496; }
+.faden-shell .vgl__link { color: var(--green-ink); font: 600 13px var(--sans); }
+.faden-shell .vgl__details-knopf, .faden-shell .vgl__mehr { font-family: var(--sans); }
+.faden-shell .vgl__mehr { color: var(--green-ink); }
+.faden-shell .vgl__vorteile { font: 400 13.5px/1.55 var(--sans); }
+.faden-shell .vgl__pflicht pre { font: 400 12px/1.5 var(--sans); color: var(--muted); }
+.faden-shell .vgl__logo b { font-family: var(--serif); }
+
+/* Fußzeile (780–781): Meta kursiv leicht, Quelle klein */
+.faden-shell .vgl__fuss { border-top-color: var(--rule); }
+.faden-shell .vgl__meta { font: italic 300 13px var(--serif); color: var(--muted); }
+.faden-shell .vgl__quelle, .faden-shell .vgl__hinweis, .faden-shell .vgl__laedt, .faden-shell .vgl__leer { font-family: var(--sans); color: var(--muted); }
+.faden-shell .vgl__fehler { color: var(--pink); }
+.faden-shell .vgl__wartend { border: 0; border-top: 1px solid var(--rule-strong); border-radius: 0; padding: 12px 0 0; font: var(--schrift-text, 400 15px/1.65 var(--sans)); color: var(--muted); }
+
+/* Säulen über der Liste: dieselbe Form wie die Statistiken, Kicker in Versalien */
+.faden-shell .vgl__saeulen { margin: 4px 0 22px; }
+.faden-shell .vgl__saeulen .st__kopf .kicker { color: var(--muted); }
+.faden-shell .vgl__saeulen .st-saeulen__stab { transition: transform .9s cubic-bezier(.2,.8,.2,1), height .6s cubic-bezier(.2,.8,.2,1); }

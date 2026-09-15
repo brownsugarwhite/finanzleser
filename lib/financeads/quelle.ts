@@ -57,7 +57,7 @@ function presetsAus(v: unknown): Record<string, (number | string)[]> | undefined
 }
 
 /** Preset-Chips eines Parameters: Redaktion (Block) vor Registry. */
-export function presetsFuer(def: KategorieDef, quelle: VergleichQuelle, key: string): (number | string)[] {
+export function presetsFuer(def: Pick<KategorieDef, "params">, quelle: Pick<VergleichQuelle, "presets">, key: string): (number | string)[] {
   const p = def.params.find((x) => x.key === key);
   return quelle.presets?.[key] ?? p?.presets ?? [];
 }

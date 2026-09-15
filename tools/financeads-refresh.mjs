@@ -24,7 +24,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchVergleich, searchentryCreate } from "../lib/financeads/client.ts";
 import { kategorieDef } from "../lib/financeads/registry.ts";
-import { normalisiereVariante, standAus, hinweiseAus, paramSchluessel } from "../lib/financeads/normalisieren.ts";
+import { normalisiereVariante, standAus, hinweiseAus, paramSchluessel, varianteAbspecken } from "../lib/financeads/normalisieren.ts";
 import { apiParams, presetKombinationen, wirksameParams, quelleAus } from "../lib/financeads/quelle.ts";
 
 const wurzel = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -98,7 +98,9 @@ async function einer({ slug, quelle, def }) {
   let stand = null; let hinweise = [];
   for (const params of kombis) {
     const antwort = await fetchVergleich(def.version, def.kategorie, apiParams(def, params), { timeoutMs: 45000, versuche: 2 });
-    varianten.push(normalisiereVariante(def, params, antwort, quelle.limit));
+    const variante = normalisiereVariante(def, params, antwort, quelle.limit);
+    // Nur die Voreinstellung trägt Logos, Siegel, Vorteile und Pflichttexte (siehe varianteAbspecken).
+    varianten.push(varianten.length ? varianteAbspecken(variante) : variante);
     const s = standAus(antwort); if (s && (!stand || s > stand)) stand = s;
     if (!hinweise.length) hinweise = hinweiseAus(antwort);
     await pause(400);

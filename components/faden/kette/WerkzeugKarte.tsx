@@ -20,7 +20,7 @@ import { medienUrl } from "@/lib/faden/medien";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import ChecklisteEmbed from "@/components/checkliste/ChecklisteEmbed";
 import DokumenteEmbed from "@/components/dokumente/DokumenteEmbed";
-import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
+import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import KastenFuss from "./KastenFuss";
 import Insel from "./Insel";
 
@@ -119,7 +119,8 @@ export default async function WerkzeugKarte({
     const karten = await dokumentKarten(slugs, toolData);
     koerper = <Insel typ="dokumente" arg={slugs.join(",")}><DokumenteEmbed slugs={slugs} initialDokumente={karten.length ? karten : null} /></Insel>;
   } else {
-    koerper = <Insel typ="vergleich" arg={teil.slug}><VergleichEmbed slug={teil.slug} /></Insel>;
+    // Eigener financeads-Rechner (mit Säulen) oder Fremd-Embed — der Dispatcher setzt die Insel selbst.
+    koerper = <VergleichKoerper slug={teil.slug} skin="faden" mitSaeulen />;
   }
 
   return (

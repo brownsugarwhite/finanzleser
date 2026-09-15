@@ -13,7 +13,7 @@
  * Plugin hat keinen Build-Schritt; `tools/financeads-registry-export.mjs` schreibt den
  * Zwilling `financeads-registry.js`. Wer hier Parameter ändert, lässt den Export laufen.
  */
-import type { ApiProdukt, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
+import type { ApiProdukt, DefLite, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
 import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte } from "./lesehilfen.ts";
 
 // ─── wiederkehrende Bausteine ─────────────────────────────────────────────────────────
@@ -95,6 +95,7 @@ const KATEGORIEN: KategorieDef[] = [
       S.sicherung,
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
+    filter: { key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["tagesgeld", "tagesgeldkonto", "zinsen", "sparen", "sparkonto", "geld parken", "notgroschen"],
@@ -111,6 +112,7 @@ const KATEGORIEN: KategorieDef[] = [
       S.sicherung,
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
+    filter: { key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["festgeld", "festgeldkonto", "termingeld", "zinsen", "laufzeit", "sparbrief"],
@@ -133,6 +135,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "saldo", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
+    filter: { key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 },
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "kontofuehrung", label: "Kontoführung" }, { key: "dispozins", label: "Dispozins" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["girokonto", "konto", "kontoführung", "kontowechsel", "gehaltskonto", "dispo", "kostenloses konto", "studentenkonto", "schülerkonto", "kinderkonto"],
@@ -153,6 +156,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "saldo", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
+    filter: { key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 },
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "kontofuehrung", label: "Kontoführung" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["geschäftskonto", "firmenkonto", "selbstständig", "freiberufler", "gmbh", "unternehmen", "gewerbe"],
@@ -174,6 +178,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "zahlungsart", label: "Kartenart", art: "text" },
     ],
     bestwert: { key: "jahresgebuehr", richtung: "runter" },
+    filter: { key: "jahresgebuehr", label: "nur ohne Jahresgebühr", wert: 0 },
     sortierung: [{ key: "jahresgebuehr", label: "Jahresgebühr" }, { key: "auslandsgebuehr", label: "Fremdwährung" }],
     totalLabel: "Jahresgebühr",
     suchwoerter: ["kreditkarte", "visa", "mastercard", "amex", "kostenlose kreditkarte", "reisekreditkarte", "fremdwährung", "bargeld abheben"],
@@ -207,6 +212,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "geld", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
+    filter: { key: "depotgebuehr", label: "nur ohne Depotgebühr", wert: 0 },
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "depotgebuehr", label: "Depotgebühr" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["depot", "wertpapierdepot", "etf", "aktien", "broker", "ordergebühr", "sparplan", "wertpapiere"],
@@ -320,8 +326,9 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "roboadvisor", version: "v1", klasse: "A",
     titel: "Robo-Advisor", einzahl: "Robo-Advisor", mehrzahl: "Anbieter",
     params: [
-      { key: "one_time_investment", label: "Einmalanlage", typ: "zahl", standard: 10000, einheit: "€", min: 0, max: 1000000, schritt: 500, presets: [1000, 10000, 50000] },
-      { key: "monthly_savings_contribution", label: "Sparrate / Monat", typ: "zahl", standard: 100, einheit: "€", min: 0, max: 10000, schritt: 25, presets: [0, 100, 500] },
+      // financeads verlangt beide Werte > 0 („must be greater than 0", gemessen 15.09.2026).
+      { key: "one_time_investment", label: "Einmalanlage", typ: "zahl", standard: 10000, einheit: "€", min: 1, max: 1000000, schritt: 500, presets: [1000, 10000, 50000] },
+      { key: "monthly_savings_contribution", label: "Sparrate / Monat", typ: "zahl", standard: 100, einheit: "€", min: 1, max: 10000, schritt: 25, presets: [50, 100, 500] },
     ],
     spalten: [
       { key: "servicegebuehr", label: "Servicegebühr p. a.", kurz: "Service", art: "prozent", richtung: "runter" },
@@ -355,6 +362,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "gebuehren", label: "Gebühren je Order", kurz: "Gebühren", art: "geld", richtung: "runter" },
     ],
     bestwert: { key: "gebuehren", richtung: "runter" },
+    filter: { key: "sparplan", label: "nur mit Sparplan", wert: true },
     sortierung: [{ key: "gebuehren", label: "Gebühren" }, { key: "coins", label: "Auswahl" }],
     totalLabel: "Gebühren je Order",
     suchwoerter: ["krypto", "bitcoin", "ethereum", "kryptobörse", "kryptowährung", "coins", "wallet", "staking"],
@@ -436,6 +444,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "mieterschutz", label: "Mieterschutz", art: "haken", schmal: true },
     ],
     bestwert: { key: "praemie", richtung: "runter" },
+    filter: { key: "wartezeit", label: "nur ohne Wartezeit", wert: true },
     sortierung: [{ key: "praemie", label: "Beitrag" }],
     totalLabel: "Beitrag / Jahr",
     suchwoerter: ["mietkaution", "kautionsbürgschaft", "mietkautionsversicherung", "kaution", "umzug", "mietkautionsbürgschaft"],
@@ -464,6 +473,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "tierarztwahl", label: "Freie Tierarztwahl", kurz: "Tierarztwahl", art: "haken", schmal: true },
     ],
     bestwert: { key: "beitrag", richtung: "runter" },
+    filter: { key: "tierarztwahl", label: "nur mit freier Tierarztwahl", wert: true },
     sortierung: [{ key: "beitrag", label: "Beitrag" }],
     totalLabel: "Beitrag / Monat",
     suchwoerter: ["tierkrankenversicherung", "hundekrankenversicherung", "katzenkrankenversicherung", "op-versicherung hund", "tierarzt", "hund", "katze", "haustier"],
@@ -535,4 +545,10 @@ export function istKategorie(k: string): k is Kategorie {
 /** Alle Parameterschlüssel einer Kategorie, die an die API dürfen (Allowlist der Route). */
 export function erlaubteParams(def: KategorieDef): Set<string> {
   return new Set(def.params.map((p) => p.key));
+}
+
+/** Die serialisierbare Sicht für Client und Insel — ohne `lesen`/`begruendung`. */
+export function defLite(def: KategorieDef): DefLite {
+  const { kategorie, klasse, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis } = def;
+  return { kategorie, klasse, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis };
 }

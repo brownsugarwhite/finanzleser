@@ -1,0 +1,49 @@
+/**
+ * Der Server-Dispatcher für einen Vergleich: Slug → Körper.
+ *
+ *   financeads mit Snapshot   → eigener Rechner (SSR) in einer Insel mit allen Werten
+ *   financeads ohne Snapshot  → Hinweis (Refresh noch nicht gelaufen / Endpunkt defekt)
+ *   Fremd-Embed               → VergleichEmbed wie bisher (Zwei-Klick-Consent)
+ *   unbekannt                 → null (der Aufrufer entscheidet, notFound oder leer)
+ *
+ * Die Insel trägt Definition, Quelle und Daten als JSON, damit InselnBeleben ein
+ * eingefrorenes Kapitel ohne Refetch wiederbelebt.
+ */
+import { holeVergleich } from "@/lib/financeads/holeVergleich";
+import { defLite } from "@/lib/financeads/registry";
+import Insel from "@/components/faden/kette/Insel";
+import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
+import VergleichRechner from "@/components/vergleich/VergleichRechner";
+
+export default async function VergleichKoerper({ slug, skin, mitSaeulen }: { slug: string; skin: "faden" | "alt"; mitSaeulen?: boolean }) {
+  const v = await holeVergleich(slug);
+  if (!v) return null;
+  if (v.art === "embed") {
+    return <Insel typ="vergleich" arg={slug}><VergleichEmbed slug={slug} /></Insel>;
+  }
+  const def = defLite(v.def);
+  if (v.def.defekt) {
+    return (
+      <div className={`vgl vgl--${skin} vgl__wartend`}>
+        <p><strong>Dieser Vergleich wird gerade überarbeitet.</strong> Die Angebote unseres Partners für {def.titel} stehen vorübergehend nicht zur Verfügung. Sobald die Daten wieder fließen, erscheint die Liste hier automatisch.</p>
+      </div>
+    );
+  }
+  if (!v.daten || !v.daten.varianten.length) {
+    return (
+      <div className={`vgl vgl--${skin} vgl__wartend`}>
+        <p><strong>Die Angebote werden gerade geladen.</strong> Der Vergleich {def.titel} bezieht seine Daten zweimal täglich von unserem Partner; der erste Stand liegt noch nicht vor.</p>
+      </div>
+    );
+  }
+  // 🚨 Nur die Voreinstellung reist ins HTML und in die Insel (SSR, Schnappschuss,
+  // sessionStorage). Ein Snapshot mit allen Preset-Varianten wiegt bis 160 KB; die
+  // anderen Kombinationen holt der Client von /api/vergleich-daten (aus dem Snapshot).
+  const daten = { ...v.daten, varianten: v.daten.varianten.slice(0, 1) };
+  const werte = { def, quelle: v.quelle, daten, skin, mitSaeulen: !!mitSaeulen };
+  return (
+    <Insel typ="vergleich" arg={slug} werte={werte}>
+      <VergleichRechner slug={slug} def={def} quelle={v.quelle} daten={daten} skin={skin} mitSaeulen={mitSaeulen} />
+    </Insel>
+  );
+}

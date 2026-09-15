@@ -8,7 +8,7 @@
  * genau das, mitsamt echter Einwilligung. Hier kommt nur die Chrome dazu — Oberlinie in
  * Türkis, Kicker mit 8-px-Punkt, Überschrift.
  */
-import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
+import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import Insel from "@/components/faden/kette/Insel";
 import type { StatVergleichsrechner } from "@/lib/statistik/schema";
 
@@ -17,7 +17,7 @@ export default function Vergleichsrechner({ st }: { st: StatVergleichsrechner })
     <div className="st-vergleich">
       <span className="st-vergleich__kicker kicker"><i />Vergleich · in der Kette</span>
       <h3>{st.titel}</h3>
-      <Insel typ="vergleich" arg={st.slug}><VergleichEmbed slug={st.slug} /></Insel>
+      <VergleichKoerper slug={st.slug} skin="faden" mitSaeulen />
     </div>
   );
 }

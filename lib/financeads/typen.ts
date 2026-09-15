@@ -79,6 +79,8 @@ export interface KategorieDef {
   spalten: SpalteDef[];
   /** Kennzahl, nach der der Bestwert bestimmt wird; Klasse B hat keine. */
   bestwert?: { key: string; richtung: Richtung };
+  /** Der eine Umschalter der Filterzeile (Handoff: „nur mit Schlüsselverlust“): Zeilen, deren Kennzahl `wert` trifft. */
+  filter?: { key: string; label: string; wert: KennWert };
   /** Standard-Sortierung (Schlüssel aus `spalten`). */
   sortierung: { key: string; label: string }[];
   /** Beschriftung der Gesamtzahl rechts („Ertrag", „Beitrag / Jahr", „Rate / Monat"). */
@@ -141,6 +143,8 @@ export interface VergleichVariante {
   produkte: VergleichProdukt[];
   /** Produkt-ID des Bestwerts nach Registry-Regel. */
   bestwert?: number;
+  /** Leos Begründung für den Bestwert („höchster Ertrag mit deutscher Einlagensicherung“). */
+  bestwertGrund?: string;
 }
 
 /** Der Snapshot eines Vergleichs, wie er in WordPress liegt und in die Insel reist. */
@@ -199,3 +203,6 @@ export interface ApiAntwort {
     filter_settings?: Record<string, unknown>;
   };
 }
+
+/** Serialisierbare Sicht auf eine KategorieDef — ohne Funktionen, reist in die Insel-Werte und zum Client. */
+export type DefLite = Pick<KategorieDef, "kategorie" | "klasse" | "defekt" | "titel" | "einzahl" | "mehrzahl" | "params" | "spalten" | "bestwert" | "filter" | "sortierung" | "totalLabel" | "hinweis">;

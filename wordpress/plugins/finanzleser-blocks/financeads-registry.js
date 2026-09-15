@@ -821,7 +821,7 @@ window.FL_FINANCEADS = {
           "typ": "zahl",
           "standard": 10000,
           "einheit": "€",
-          "min": 0,
+          "min": 1,
           "max": 1000000,
           "schritt": 500,
           "optionen": [],
@@ -838,12 +838,12 @@ window.FL_FINANCEADS = {
           "typ": "zahl",
           "standard": 100,
           "einheit": "€",
-          "min": 0,
+          "min": 1,
           "max": 10000,
           "schritt": 25,
           "optionen": [],
           "presets": [
-            0,
+            50,
             100,
             500
           ],

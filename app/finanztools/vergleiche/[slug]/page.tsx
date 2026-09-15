@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { FADEN_AKTIV } from "@/lib/faden/flag";
-import Insel from "@/components/faden/kette/Insel";
 import KartenKapitel from "@/components/faden/KartenKapitel";
 import WerkzeugKarte from "@/components/faden/kette/WerkzeugKarte";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
+import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import PageAds from "@/components/layout/PageAds";
 import { getAllVergleiche, getSiteSettings } from "@/lib/wordpress";
 import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
@@ -119,7 +118,7 @@ export default async function VergleichDetailPage({ params }: Props) {
             </>
           }
         >
-          <Insel typ="vergleich" arg={slug}><VergleichEmbed slug={slug} /></Insel>
+          <VergleichKoerper slug={slug} skin="alt" />
 
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600">
