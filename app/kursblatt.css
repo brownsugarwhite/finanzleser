@@ -694,7 +694,10 @@
 }
 .kb .kb-strich__strich { width: 18px; height: 1px; background: currentColor; transition: width .45s var(--kb-kurve); }
 .kb .kb-strich:hover .kb-strich__strich,
-.kb .kb-podest:hover .kb-strich__strich { width: 34px; }
+.kb .kb-podest:hover .kb-strich__strich,
+/* K:484 — auf Platz 2 und 3 wächst der Strich, sobald die KARTE überfahren wird, nicht
+   erst der Link selbst. Der ganze Platz ist die Schaltfläche. */
+.kb .kb-platz:hover .kb-strich__strich { width: 34px; }
 
 /* ── Logorahmen (K:127/:154/:190) ─────────────────────────────────────────────────── */
 .kb .kb-logo {
@@ -934,4 +937,57 @@
 @container kb (max-width: 559px) {
   .kb .kb-kennzahlen { grid-template-columns: 1fr 1fr; }
   .kb .kb-kennzahl[data-gross="an"] { grid-column: 1 / -1; }
+}
+
+/* ── Podest (K:115-165) ───────────────────────────────────────────────────────────── */
+.kb .kb-podest-block { margin-top: 54px; }
+/* K:117 — der Titel steht zwischen zwei Linien, die von außen nach innen wachsen. */
+.kb .kb-podest__titel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.kb .kb-podest__titel i { height: 1px; background: var(--kb-t30); }
+.kb .kb-podest__titel i:first-child { transform-origin: right; }
+.kb .kb-podest__titel i:last-child { transform-origin: left; }
+.kb .kb-podest__titel .kb__kicker { text-align: center; }
+
+/* K:118-122 — vier Linien statt eines Rahmens: sie zeichnen sich einzeln, die
+   senkrechten .2 s später. Ein `border` könnte das nicht. */
+.kb .kb-podest { position: relative; margin-top: 28px; padding: clamp(20px, 4vw, 30px); }
+.kb .kb-podest__rahmen { position: absolute; background: var(--kb-tuerkis); transform-origin: center; }
+.kb .kb-podest__rahmen--oben { left: 0; right: 0; top: 0; height: 2px; }
+.kb .kb-podest__rahmen--unten { left: 0; right: 0; bottom: 0; height: 1px; }
+.kb .kb-podest__rahmen--links { left: 0; top: 0; bottom: 0; width: 1px; }
+.kb .kb-podest__rahmen--rechts { right: 0; top: 0; bottom: 0; width: 1px; }
+/* K:123 — der Stempel sitzt über der Oberlinie, nicht darunter. */
+.kb .kb-podest__stempel { position: absolute; right: 20px; top: -13px; }
+
+.kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px 32px; align-items: start; }
+.kb .kb-podest__kopf { display: flex; align-items: center; gap: 14px; }
+.kb .kb-podest__namen { min-width: 0; }
+.kb .kb-podest__namen b { display: block; font: 700 21px var(--kb-serif); }
+.kb .kb-podest__namen span { font: italic 300 13.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-podest__namen--klein b { font-size: 17px; }
+.kb .kb-podest__namen--klein span { font-size: 12.5px; }
+.kb .kb-podest__zahl { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-podest__zins {
+  font: 900 clamp(44px, 8vw, 60px)/1 var(--kb-serif); letter-spacing: -.02em;
+  color: var(--kb-tuerkis); font-variant-numeric: tabular-nums;
+}
+.kb .kb-podest__zins-label { font: italic 300 14px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-podest__merkmale { display: flex; gap: 6px 16px; flex-wrap: wrap; margin-top: 14px; }
+.kb .kb-podest__merkmale span { display: inline-flex; align-items: center; gap: 6px; font: 500 13px var(--kb-sans); color: var(--kb-gruen-dunkel); }
+.kb .kb-podest__aktionen { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; margin-top: 18px; }
+
+/* K:150-164 — Platz 2 und 3: keine Rahmen, nur eine Unterlinie und die große Rangziffer. */
+.kb .kb-plaetze { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-top: 8px; }
+.kb .kb-platz { position: relative; padding: 22px 0 10px; border-bottom: 1px solid var(--kb-t20, rgba(51,74,39,.2)); display: flex; flex-direction: column; }
+.kb .kb-platz__rang { position: absolute; right: 0; top: 14px; font: 900 40px/1 var(--kb-serif); color: var(--kb-t16); }
+.kb .kb-platz__zahl { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
+.kb .kb-platz__zahl span { font: 900 30px/1 var(--kb-serif); font-variant-numeric: tabular-nums; }
+.kb .kb-platz__zahl small { font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-platz__fuss { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 10px; }
+.kb .kb-platz .kb__punktzeile-k { font-size: 13.5px; }
+.kb .kb-platz .kb__punktzeile-v[data-gross="an"] { font-size: 16px; }
+
+@container kb (max-width: 559px) {
+  .kb .kb-podest__raster { grid-template-columns: 1fr; }
+  .kb .kb-plaetze { grid-template-columns: 1fr; }
 }

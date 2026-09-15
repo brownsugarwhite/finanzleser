@@ -118,3 +118,20 @@ export function eingabenSatz(def: DefLite, fest: Record<string, string>, params:
   }
   return teile.join(" ").replace(/ (über)/g, " $1");
 }
+
+/**
+ * Die Spalten neben der Hauptzahl, in der Reihenfolge, in der man sie lesen will.
+ *
+ * Die Registry führt sie in Datenreihenfolge (Zins, Sollzins, Laufzeit, Rate); im Satz
+ * steht aber die Zahl zuerst, auf die es ankommt — beim Kredit die Monatsrate, beim
+ * Festgeld der Ertrag. Welche das ist, sagt `totalLabel` (K:136: „Monatsrate" als erste
+ * Punktzeile des Gewinners, in 700 19px).
+ */
+export function nebenspalten(def: DefLite, haupt: SpalteDef | undefined): SpalteDef[] {
+  // `nurDetails` statt `schmal`: `schmal` blendet nur unter 1060 px aus und meint
+  // weiterhin eine Kennzahl für den Gewinnerblock (Sollzins, Laufzeit).
+  const rest = def.spalten.filter((s) => s !== haupt && !s.nurDetails);
+  if (!def.totalLabel) return rest;
+  const i = rest.findIndex((s) => s.kurz === def.totalLabel || s.label === def.totalLabel);
+  return i > 0 ? [rest[i], ...rest.filter((_, j) => j !== i)] : rest;
+}

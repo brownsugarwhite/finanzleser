@@ -20,11 +20,12 @@ import { useMemo, useState } from "react";
 import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
 import { useVergleichZustand } from "@/lib/financeads/useVergleichZustand";
 import { formatKennwert, formatStand } from "@/lib/financeads/format";
-import { achsenEnden, eingabenSatz, hauptspalte } from "@/lib/financeads/kursblatt";
+import { achsenEnden, eingabenSatz, hauptspalte, nebenspalten } from "@/lib/financeads/kursblatt";
 import { kennzahlenBauen } from "@/lib/financeads/kennzahlen";
 import { useLauf } from "@/lib/kursblatt/useLauf";
 import Streuband from "@/components/kursblatt/teile/Streuband";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
+import Podest from "@/components/kursblatt/teile/Podest";
 import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import IhreAngaben from "./IhreAngaben";
 
@@ -41,6 +42,10 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   const z = useVergleichZustand({ slug, def, quelle, daten });
   const haupt = hauptspalte(def);
   const [hover, setHover] = useState<number | null>(null);
+  // K:139 — der Merkzettel fasst drei; der vierte verdrängt den ältesten.
+  const [gemerkt, setGemerkt] = useState<number[]>([]);
+  const merken = (id: number) =>
+    setGemerkt((g) => (g.includes(id) ? g.filter((x) => x !== id) : [...g, id].slice(-3)));
   // K:470-472 — bei jeder Änderung an Eingaben, Filtern oder Sortierung laufen die
   // Reveals neu; dafür wechselt der Name der Keyframes.
   const lauf = useLauf(JSON.stringify([z.params, z.filter, z.sortKey]));
@@ -49,6 +54,9 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   const best = z.aktuelle.produkte.find((p) => p.id === z.aktuelle.bestwert) ?? z.aktuelle.produkte[0];
   const bestWert = haupt && best ? formatKennwert(haupt, best.kennzahlen[haupt.key]) : "";
   const achsen = achsenEnden(haupt);
+  // Nicht z.mittel: dort stehen die Spalten in Datenreihenfolge. Im Satz kommt zuerst,
+  // worauf es ankommt — und ohne die Spalten, die schon in den Details stecken.
+  const neben = useMemo(() => nebenspalten(def, haupt), [def, haupt]);
   const kennzahlen = useMemo(
     () => kennzahlenBauen(def, haupt, z.zeilen, best, z.params),
     [def, haupt, z.zeilen, best, z.params],
@@ -95,7 +103,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           </p>
           <Streuband
             haupt={haupt}
-            neben={z.mittel[0]}
+            neben={neben[0]}
             zeilen={z.zeilen}
             best={best}
             hover={hover}
@@ -108,6 +116,23 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           />
           <Kennzahlen werte={kennzahlen} />
         </section>
+      )}
+
+      {haupt && best && (
+        <Podest
+          haupt={haupt}
+          neben={neben}
+          zeilen={z.zeilen}
+          best={best}
+          kursblatt={def.kursblatt}
+          params={z.params}
+          gemerkt={gemerkt}
+          onMerken={merken}
+          mitte={lauf.mitte}
+          spalte={lauf.spalte}
+          stempel={lauf.stempel}
+          herz={lauf.herz}
+        />
       )}
 
       <Wertetabelle

@@ -59,6 +59,15 @@ export interface SpalteDef {
   schmal?: boolean;
   /** Zahl mit Präfix „ab" (Kredite: bonitätsabhängig). */
   ab?: boolean;
+  /**
+   * Nur in den aufgeklappten Details, nie in der Zusammenfassung.
+   *
+   * 🚨 Nicht dasselbe wie `schmal`: das blendet eine Spalte unter 1060 px aus, meint aber
+   * weiterhin eine Kennzahl, die in den Gewinnerblock gehört (Sollzins, Laufzeit). Hier
+   * geht es um Angaben, die erst beim Nachschlagen zählen — Zins bis, ⅔-Zins,
+   * Bearbeitungsgebühr, Gültigkeitsbereich.
+   */
+  nurDetails?: boolean;
 }
 
 export type KennWert = number | string | boolean | null;
@@ -102,12 +111,12 @@ export interface KennzahlDef {
 }
 
 export interface KursblattDef {
-  /** Streuung = ein Punkt je Angebot; Kurve = bester Wert je Laufzeit. */
-  band: "streuung" | "kurve";
+  /** Streuung = ein Punkt je Angebot (Vorgabe); Kurve = bester Wert je Laufzeit. */
+  band?: "streuung" | "kurve";
   /** Ein Gewinner (Festgeld) oder Gewinner plus Platz 2 und 3 (Kredit). */
   podest: 1 | 3;
-  /** Aufdruck des Stempels: „Bestwert“, „Höchster Ertrag“. */
-  stempel: string;
+  /** Aufdruck des Stempels; fehlt er, steht „Bestwert“ da. */
+  stempel?: string;
   /** Zeile „Mehrkosten zum Bestwert“ auf den Plätzen 2 und 3. */
   mehrkosten?: { key: string; mal?: string; label: string };
 }

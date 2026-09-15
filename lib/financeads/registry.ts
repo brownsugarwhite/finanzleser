@@ -115,6 +115,9 @@ const KATEGORIEN: KategorieDef[] = [
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
     filter: [{ key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" }],
+    // Nur ein Gewinner: beim Festgeld ist der zweitbeste Ertrag keine Auszeichnung wert
+    // („Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“:99, „Das beste Angebot").
+    kursblatt: { podest: 1, stempel: "Höchster Ertrag" },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["festgeld", "festgeldkonto", "termingeld", "zinsen", "laufzeit", "sparbrief"],
@@ -257,13 +260,13 @@ const KATEGORIEN: KategorieDef[] = [
       // Die folgenden fünf stehen nur in den Details des Kursblatts — echte Felder
       // anstelle der fünf Merkmale, die der Handoff annahm und die financeads nicht hat
       // (Sondertilgung, Sofortzusage, Ratenpause, Auszahlung, Mindestalter).
-      { key: "effzins_bis", label: "Zins bis", art: "prozent", schmal: true },
-      { key: "rate_bis", label: "Rate bis", art: "geld", schmal: true },
-      { key: "zwei_drittel", label: "⅔ der Kunden erhalten", art: "prozent", schmal: true },
-      { key: "bearbeitung", label: "Bearbeitungsgebühr", art: "prozent", schmal: true },
-      { key: "grenzen", label: "Zins gilt für", art: "text", schmal: true },
-      { key: "bonitaetsfrei", label: "Zins unabhängig von der Bonität", art: "haken", schmal: true },
-      { key: "kreditgeber", label: "Kreditgeber", art: "text", schmal: true },
+      { key: "effzins_bis", label: "Zins bis", art: "prozent", schmal: true, nurDetails: true },
+      { key: "rate_bis", label: "Rate bis", art: "geld", schmal: true, nurDetails: true },
+      { key: "zwei_drittel", label: "⅔ der Kunden erhalten", art: "prozent", schmal: true, nurDetails: true },
+      { key: "bearbeitung", label: "Bearbeitungsgebühr", art: "prozent", schmal: true, nurDetails: true },
+      { key: "grenzen", label: "Zins gilt für", art: "text", schmal: true, nurDetails: true },
+      { key: "bonitaetsfrei", label: "Zins unabhängig von der Bonität", art: "haken", schmal: true, nurDetails: true },
+      { key: "kreditgeber", label: "Kreditgeber", art: "text", schmal: true, nurDetails: true },
     ],
     bestwert: { key: "effzins", richtung: "runter" },
     // 🚨 Drei echte Umschalter statt der drei erfundenen des Handoffs. Der erste ist der
