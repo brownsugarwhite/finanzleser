@@ -89,7 +89,8 @@ function finanzleser_faden_felder() {
 	// Feldname => [ Beitragstypen, Typ (json|text), Beschreibung ]
 	return array(
 		'kurzfassung'      => array( array( 'post' ), 'json', 'Leos Kurzfassung: { saetze: [], quellen: [], status, erzeugt_am }' ),
-		'leo_fragen'       => array( array( 'post' ), 'json', 'Fragen je Abschnitt: [{ abschnitt, frage, antwort, quellen: [], status }]' ),
+		// 15.09.2026: auch Vergleiche tragen Leo-Fragen (Abschnitt „vergleich“ statt heading-n) — FAQPage der Vergleichsseite.
+		'leo_fragen'       => array( array( 'post', 'vergleich' ), 'json', 'Fragen je Abschnitt: [{ abschnitt, frage, antwort, quellen: [], status }]' ),
 		'glossar_begriffe' => array( array( 'post', 'rechner', 'checkliste', 'vergleich', 'dokument' ), 'json', 'Vorbelegte Glossar-Slugs: ["schliessanlage", ...]' ),
 		'leo_einwuerfe'    => array( array( 'post' ), 'json', 'Einwürfe: [{ nach, typ, slug, grund }]' ),
 		'dazu_passt'       => array( array( 'post', 'rechner', 'checkliste', 'vergleich' ), 'json', 'Verwandte Inhalte: [{ typ, slug }]' ),

@@ -114,6 +114,8 @@ export interface Vergleich {
   modified?: string;
   /** Gerenderter Inhalt — nur bei `getVergleichBySlug` (trägt den Block `vergleich-quelle`). */
   content?: string;
+  /** Faden-Felder (leo_fragen, dazu_passt, glossar_begriffe) — nur mit Flag und nur bei `getVergleichBySlug`. */
+  faden?: FadenFelder;
   vergleichFelder?: VergleichACF;
 }
 

@@ -50,7 +50,11 @@
     };
 
     // Typ-Labels für Vergleich-Gruppierung
+    // Seit 15.09.2026 kommt `typ` aus dem Block vergleich-quelle (financeads | extern),
+    // nicht mehr aus ACF (get_field war ohne ACF ein Fatal Error).
     var vergleichTypLabels = {
+        financeads: 'Eigene Vergleichsrechner (financeads-API)',
+        extern: 'Externe Embeds',
         versicherung: 'Versicherungen',
         bank: 'Banken & Konten',
         energie: 'Energie',
@@ -516,6 +520,7 @@
     function b64decode(b64) { return decodeURIComponent(escape(atob(b64))); }
 
     var EMBED_TYPES = [
+        { label: 'financeads-API (eigener Vergleichsrechner)', value: 'financeads' },
         { label: 'iframe (URL)', value: 'iframe' },
         { label: 'Roh-Embed (HTML/Script einfügen)', value: 'raw' },
         { label: 'Script: finanzen.de', value: 'finanzen-de' },
@@ -523,8 +528,16 @@
         { label: 'Script: Bußgeldrechner', value: 'bussgeld' },
     ];
 
+    // Der Registry-Zwilling (financeads-registry.js, generiert aus lib/financeads/registry.ts).
+    function faKategorien() {
+        return (window.FL_FINANCEADS && window.FL_FINANCEADS.kategorien) || [];
+    }
+    function faKategorie(key) {
+        return faKategorien().filter(function (k) { return k.kategorie === key; })[0] || null;
+    }
+
     function decodeQuelle(b64) {
-        var base = { embedType: 'iframe', iframeUrl: '', rawHtml: '', scriptJson: '' };
+        var base = { embedType: 'financeads', iframeUrl: '', rawHtml: '', scriptJson: '', kategorie: '', fest: {}, vor: {}, presetsJson: '', hinweis: '' };
         if (!b64) return base;
         try {
             var obj = JSON.parse(b64decode(b64));
@@ -532,13 +545,25 @@
             base.iframeUrl = obj.iframeUrl || '';
             base.rawHtml = obj.rawHtml || '';
             base.scriptJson = obj.scriptConfig ? JSON.stringify(obj.scriptConfig, null, 2) : '';
+            base.kategorie = obj.kategorie || '';
+            base.fest = obj.fest && typeof obj.fest === 'object' ? obj.fest : {};
+            base.vor = obj.vor && typeof obj.vor === 'object' ? obj.vor : {};
+            base.presetsJson = obj.presets ? JSON.stringify(obj.presets) : '';
+            base.hinweis = obj.hinweis || '';
         } catch (e) { /* ungültig → leeres Formular */ }
         return base;
     }
 
     function encodeQuelle(form) {
         var out = { embedType: form.embedType };
-        if (form.embedType === 'iframe') {
+        if (form.embedType === 'financeads') {
+            // Dieselbe Form wie tools/financeads-vergleiche.mjs sie schreibt und lib/financeads/quelle.ts sie liest.
+            out.kategorie = form.kategorie || '';
+            out.fest = form.fest || {};
+            out.vor = form.vor || {};
+            if (form.presetsJson) { try { out.presets = JSON.parse(form.presetsJson); } catch (e) { /* bleibt weg */ } }
+            if (form.hinweis) out.hinweis = form.hinweis;
+        } else if (form.embedType === 'iframe') {
             out.iframeUrl = form.iframeUrl || '';
         } else if (form.embedType === 'raw') {
             out.rawHtml = form.rawHtml || '';
@@ -578,7 +603,74 @@
                 }),
             ];
 
-            if (form.embedType === 'iframe') {
+            if (form.embedType === 'financeads') {
+                var kats = faKategorien();
+                var kat = faKategorie(form.kategorie);
+                fields.push(wp.element.createElement(SelectControl, {
+                    key: 'kategorie',
+                    label: 'Kategorie bei financeads',
+                    value: form.kategorie,
+                    options: [{ label: '— bitte wählen —', value: '' }].concat(kats.map(function (k) {
+                        return { label: k.titel + (k.klasse === 'B' ? ' (Anbieterliste, keine Beiträge)' : '') + (k.defekt ? ' — Endpunkt zurzeit defekt' : ''), value: k.kategorie };
+                    })),
+                    help: kats.length ? 'Klasse-B-Kategorien liefern nur Name, Versicherer, Logo und Link — die Seite zeigt dann eine Anbieterliste.' : 'Registry-Zwilling fehlt (financeads-registry.js nicht geladen).',
+                    onChange: function (val) { update({ kategorie: val, fest: {}, vor: {} }); },
+                }));
+                if (kat) {
+                    // Feste Filter: bestimmen die Variante (Schülerkonto, Katzenkranken, Autokredit), nie vom Leser änderbar.
+                    var feste = kat.params.filter(function (p) { return p.fest; });
+                    var freie = kat.params.filter(function (p) { return !p.fest; });
+                    feste.forEach(function (p) {
+                        fields.push(wp.element.createElement(SelectControl, {
+                            key: 'fest-' + p.key,
+                            label: 'Variante · ' + p.label,
+                            value: form.fest[p.key] !== undefined ? String(form.fest[p.key]) : String(p.standard),
+                            options: p.optionen.map(function (o) { return { label: o.label, value: o.wert }; }),
+                            onChange: function (val) {
+                                var fest = Object.assign({}, form.fest);
+                                if (val === '' || val === String(p.standard)) delete fest[p.key]; else fest[p.key] = val;
+                                update({ fest: fest });
+                            },
+                        }));
+                    });
+                    freie.forEach(function (p) {
+                        var wert = form.vor[p.key] !== undefined ? String(form.vor[p.key]) : '';
+                        if (p.typ === 'wahl') {
+                            fields.push(wp.element.createElement(SelectControl, {
+                                key: 'vor-' + p.key,
+                                label: 'Voreinstellung · ' + p.label,
+                                value: wert || String(p.standard),
+                                options: p.optionen.map(function (o) { return { label: o.label, value: o.wert }; }),
+                                onChange: function (val) { var vor = Object.assign({}, form.vor); if (val === String(p.standard)) delete vor[p.key]; else vor[p.key] = val; update({ vor: vor }); },
+                            }));
+                        } else {
+                            fields.push(wp.element.createElement(TextControl, {
+                                key: 'vor-' + p.key,
+                                label: 'Voreinstellung · ' + p.label + (p.einheit ? ' (' + p.einheit + ')' : ''),
+                                type: 'number', value: wert, placeholder: String(p.standard),
+                                help: (p.presets && p.presets.length ? 'Chips: ' + p.presets.join(' · ') + '. ' : '') + 'Leer = Standard ' + p.standard + (p.einheit ? ' ' + p.einheit : '') + '.',
+                                onChange: function (val) { var vor = Object.assign({}, form.vor); if (val === '') delete vor[p.key]; else vor[p.key] = Number(val); update({ vor: vor }); },
+                            }));
+                        }
+                    });
+                    if (!kat.params.length) {
+                        fields.push(wp.element.createElement('p', { key: 'keine', style: { fontSize: 12, color: '#686C6A' } }, 'Diese Kategorie hat keine Parameter.'));
+                    }
+                    fields.push(wp.element.createElement(TextareaControl, {
+                        key: 'presets',
+                        label: 'Eigene Chips (JSON, optional)',
+                        help: 'Nur wenn die Standard-Chips nicht passen, z. B. Minikredit: {"loan":[300,500,1000],"duration_months":[1,2,3]}',
+                        value: form.presetsJson, rows: 2,
+                        onChange: function (val) { update({ presetsJson: val }); },
+                    }));
+                    fields.push(wp.element.createElement(TextareaControl, {
+                        key: 'hinweis',
+                        label: 'Hinweis unter der Liste (optional)',
+                        value: form.hinweis, rows: 2,
+                        onChange: function (val) { update({ hinweis: val }); },
+                    }));
+                }
+            } else if (form.embedType === 'iframe') {
                 fields.push(wp.element.createElement(TextControl, {
                     key: 'url',
                     label: 'iframe-URL',
@@ -1271,10 +1363,12 @@
         var metaPaar = useEntityProp('postType', typ, 'meta');
         var meta = metaPaar[0] || {}, setMeta = metaPaar[1];
 
-        if (typ !== 'post') return null;
+        if (typ !== 'post' && typ !== 'vergleich') return null;
 
         var fragen = leoLies(meta.leo_fragen);
-        var abschnitte = leoAbschnitte(inhalt || '');
+        // Ein Vergleich hat keine Abschnitte: alle Fragen hängen am Pseudo-Abschnitt „vergleich"
+        // und erscheinen unter der Tarifliste sowie in der FAQPage der Vergleichsseite.
+        var abschnitte = typ === 'vergleich' ? [{ nr: 1, titel: 'Vergleich', wert: 'vergleich' }] : leoAbschnitte(inhalt || '');
         // h2 #0 ist der Kicker — er trägt den großen Titel des Beitrags, keinen Abschnitt.
         // Ab h2 #1 beginnen die Abschnitte (bis 11.09.2026 erst ab #2: #1 war die gesonderte
         // „Einleitung“ über dem Inhaltsverzeichnis, die es nicht mehr gibt).
@@ -1303,8 +1397,9 @@
         fragen.forEach(function (f) { jeAbschnitt[f.abschnitt] = (jeAbschnitt[f.abschnitt] || 0) + 1; });
 
         var hinweise = [];
-        if (fragen.length < 8) hinweise.push('Acht bis fünfzehn Fragen je Beitrag sind das Ziel — hier sind es ' + fragen.length + '.');
-        if (fragen.length > 15) hinweise.push('Mehr als fünfzehn Fragen überfrachten den Beitrag.');
+        var minFragen = typ === 'vergleich' ? 3 : 8, maxFragen = typ === 'vergleich' ? 8 : 15;
+        if (fragen.length < minFragen) hinweise.push((typ === 'vergleich' ? 'Drei bis acht Fragen je Vergleich' : 'Acht bis fünfzehn Fragen je Beitrag') + ' sind das Ziel — hier sind es ' + fragen.length + '.');
+        if (fragen.length > maxFragen) hinweise.push('Mehr als ' + maxFragen + ' Fragen überfrachten die Seite.');
         fragen.forEach(function (f, i) {
             var nr = i + 1;
             if (!f.frage || !f.frage.trim()) hinweise.push('Frage ' + nr + ': Text fehlt.');
@@ -1315,7 +1410,7 @@
             }
         });
         Object.keys(jeAbschnitt).forEach(function (k) {
-            if (jeAbschnitt[k] > 3) hinweise.push(k + ' trägt ' + jeAbschnitt[k] + ' Fragen — höchstens drei je Abschnitt.');
+            if (typ !== 'vergleich' && jeAbschnitt[k] > 3) hinweise.push(k + ' trägt ' + jeAbschnitt[k] + ' Fragen — höchstens drei je Abschnitt.');
         });
 
         var karten = fragen.map(function (f, i) {

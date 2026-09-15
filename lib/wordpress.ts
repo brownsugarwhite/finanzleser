@@ -1543,14 +1543,19 @@ export const getVergleichBySlug = cache(async (slug: string): Promise<Vergleich 
         modified
         excerpt
         content
+        ${FADEN_AKTIV ? "leoFragen dazuPasst glossarBegriffe" : ""}
       }
     }
   `;
 
   // Fehler werfen statt schlucken — `vergleichBy: null` = existiert nicht; eine Exception =
   // WP nicht erreichbar, und die darf nie als 404 in den ISR-Cache.
-  const data = await client.request<{ vergleichBy: Vergleich | null }>(query, { slug });
-  return data.vergleichBy;
+  const data = await client.request<{ vergleichBy: (Vergleich & FadenRohfelder) | null }>(query, { slug });
+  const v = data.vergleichBy;
+  if (!v) return null;
+  // Nur die drei Felder, die das mu-plugin am Vergleich registriert (leo_fragen seit 15.09.2026).
+  if (FADEN_AKTIV) v.faden = parseFadenFelder(v);
+  return v;
 });
 
 export async function getAllVergleiche(): Promise<Vergleich[]> {

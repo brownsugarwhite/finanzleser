@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Finanzleser Blocks
  * Description: Gutenberg-Blöcke für Finanzrechner, Checklisten, Vergleiche und Statistiken
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Finanzleser
  */
 
@@ -75,11 +75,18 @@ add_action('rest_api_init', function() {
             ));
             $result = array();
             foreach ($posts as $p) {
-                $typ = get_field('vergleich_typ', $p->ID);
+                // 🚨 Bis 15.09.2026 stand hier get_field('vergleich_typ') — ein ACF-Relikt, das ohne
+                // ACF einen Fatal Error wirft. Die Gruppierung kommt jetzt aus dem Block
+                // vergleich-quelle: financeads-Kategorie oder „extern".
+                $typ = '';
+                if (preg_match('/<!-- wp:finanzleser\/vergleich-quelle \{"config":"([A-Za-z0-9+\/=]+)"\}/', $p->post_content, $m)) {
+                    $cfg = json_decode(base64_decode($m[1]), true);
+                    $typ = is_array($cfg) && !empty($cfg['embedType']) && $cfg['embedType'] === 'financeads' ? 'financeads' : 'extern';
+                }
                 $result[] = array(
                     'slug' => $p->post_name,
                     'title' => $p->post_title,
-                    'typ' => is_array($typ) ? $typ[0] : $typ,
+                    'typ' => $typ,
                 );
             }
             return rest_ensure_response($result);
@@ -225,11 +232,21 @@ add_action('init', function() {
         },
     ));
 
+    // Registry-Zwilling (generiert aus lib/financeads/registry.ts, tools/financeads-registry-export.mjs):
+    // Kategorien und Parameter der financeads-Vergleiche für den Block vergleich-quelle.
+    wp_register_script(
+        'finanzleser-financeads-registry',
+        plugins_url('financeads-registry.js', __FILE__),
+        array(),
+        filemtime(plugin_dir_path(__FILE__) . 'financeads-registry.js'),
+        true
+    );
+
     // Editor Script registrieren
     wp_register_script(
         'finanzleser-blocks-editor',
         plugins_url('blocks.js', __FILE__),
-        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-plugins', 'wp-edit-post', 'wp-editor', 'wp-core-data', 'wp-data'),
+        array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-plugins', 'wp-edit-post', 'wp-editor', 'wp-core-data', 'wp-data', 'finanzleser-financeads-registry'),
         filemtime(plugin_dir_path(__FILE__) . 'blocks.js'),
         true
     );
