@@ -1,0 +1,283 @@
+/* =====================================================================================
+   kursblatt.css — „Kursblatt“: Vergleiche und Rechner im Zeitungssatz.
+
+   Vorlage: design_handoff_finanzleser_kursblatt/ —
+     „Finanzleser Vergleich & Rechner - Kursblatt.dc.html“  (Seite 1 Vergleich, Seite 2 Rechner)
+     „Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“  (Seite 3 Festgeld, Seite 4 Bausteine)
+     „FL Lineal.dc.html“ · „FL Setzzeile.dc.html“ · „FL Register.dc.html“
+   Jede Regel trägt die Zeilennummer ihrer Vorlage — Muster app/statistik-formen.css.
+   Kürzel: K = Kursblatt.dc.html · F = Festgeld.dc.html · L/S/R = Lineal/Setzzeile/Register.
+
+   🚨 Eigener Namensraum `kb`. Das Kursblatt ist kein Skin über `.vgl__*`/`.rechner-*`,
+   sondern ein anderer Komponentenbaum. vergleich.css, faden-vergleich.css und rechner.css
+   bleiben unberührt, bis der Tausch als eigener Commit kommt.
+
+   🚨 Keine Klasse enthält ad/banner/sponsor/promo/financeads — Adblocker-Listen matchen
+   darauf (siehe vergleich.css:5). „Anzeige“ steht nur als Text im Kicker, nie als Klasse.
+
+   Der Tokenkopf ist selbsttragend: `.kb` läuft auch außerhalb `.faden-shell`.
+   ===================================================================================== */
+
+/* ── Tokenkopf ────────────────────────────────────────────────────────────────────── */
+/* Farben 1:1 aus README „Design Tokens · Farben (nur diese)“. */
+.kb {
+  --kb-breite: 728px;
+  --kb-rand: clamp(14px, 3vw, 24px);            /* K:41 padding */
+
+  --kb-papier: #faf9f6;
+  --kb-weiss: #fff;
+  --kb-ink: #334A27;
+  --kb-grau: #686C6A;
+  --kb-gruen: #45A117;
+  --kb-gruen-dunkel: #2E7A0B;
+  --kb-tuerkis: #0B7F66;                        /* Vergleich */
+  --kb-tuerkis-hell: #06D496;                   /* Stempel */
+  --kb-magenta: #D3005E;                        /* Rechner */
+  --kb-rahmen-grau: #999;                       /* Outline der Ergebnis-Kachel 1 */
+
+  /* Tinte-Abstufungen. Die Prozentzahl steht im Namen, damit die Handoff-Tabelle
+     ohne Übersetzung lesbar bleibt. */
+  --kb-t40: rgba(51,74,39,.4);                  /* Punktführung */
+  --kb-t35: rgba(51,74,39,.35);
+  --kb-t30: rgba(51,74,39,.3);
+  --kb-t25: rgba(51,74,39,.25);
+  --kb-t22: rgba(51,74,39,.22);
+  --kb-t18: rgba(51,74,39,.18);                 /* Logo-Rahmen */
+  --kb-t16: rgba(51,74,39,.16);
+  --kb-t12: rgba(51,74,39,.12);                 /* Zeilentrenner */
+  --kb-t10: rgba(51,74,39,.1);
+  --kb-t08: rgba(51,74,39,.08);
+  --kb-t05: rgba(51,74,39,.05);                 /* Hover Register-Eintrag */
+  --kb-t035: rgba(51,74,39,.035);               /* Hover Listenzeile */
+  --kb-bestwert: rgba(6,212,150,.07);           /* Grund der Bestwert-Zeile */
+
+  --kb-serif: var(--font-heading, 'Merriweather', Georgia, serif);
+  --kb-sans: var(--font-body, 'Open Sans', sans-serif);
+
+  /* Bewegung — README „Herzschlag-Prinzip“. */
+  --kb-kurve: cubic-bezier(.2, .8, .2, 1);      /* Standard */
+  --kb-ueber: cubic-bezier(.34, 1.56, .64, 1);  /* Überschwung */
+  --kb-ueber-sanft: cubic-bezier(.34, 1.4, .64, 1);
+  --kb-klappe: cubic-bezier(.22, 1.1, .36, 1);  /* Register aufklappen */
+  --kb-tempo: 1;                                /* ruhig 1.35 · lebhaft .65 */
+
+  /* Werkzeugfarbe: Türkis im Vergleich, Magenta im Rechner. */
+  --kb-werkzeug: var(--kb-tuerkis);
+
+  /* 🚨 `width: 100%` ist Pflicht, nicht Kosmetik. Gemessen 15.09.2026: im Faden ist `.kb`
+     ein Grid-Kind von #strom; `margin-inline: auto` hebt dort das Strecken auf, die Breite
+     käme also aus dem Inhalt — und `container-type: inline-size` schließt den Inhalt von
+     der Breitenberechnung aus. Ergebnis war eine 3087 px hohe Seite mit clientWidth 0.
+     Eine Container-Query braucht eine Breite, die NICHT vom Inhalt kommt. */
+  width: 100%;
+  max-width: var(--kb-breite);
+  margin-inline: auto;
+  padding-inline: var(--kb-rand);
+  /* 🚨 Der Handoff misst „Containerbreite (ResizeObserver auf dem Wurzel-Element,
+     nicht Viewport)“ (README „Breakpoints“). Nativ ist das eine Container-Query —
+     ohne Beobachter und ohne den Hydrations-Sprung, den ein useState(false) auf dem
+     Server unweigerlich erzeugt. */
+  container-type: inline-size;
+  container-name: kb;
+  font-family: var(--kb-sans);
+  color: var(--kb-ink);
+  font-variant-numeric: tabular-nums;           /* README: „überall“ */
+  box-sizing: border-box;
+}
+.kb *, .kb *::before, .kb *::after { box-sizing: border-box; }
+.kb--rechner { --kb-werkzeug: var(--kb-magenta); }
+
+/* Im Faden liefert #mitte die Satzbreite und das Padding bereits (faden.css:206). */
+.faden-shell .kb { max-width: var(--satzbreite, 728px); padding-inline: 0; }
+
+/* ── Bewegung ─────────────────────────────────────────────────────────────────────── */
+/*
+ * Der Neustart-Trick der Übergabe (README „Bewegung“, K:472): jede Keyframe-Animation
+ * existiert doppelt, und ein Zähler wechselt bei jeder Änderung den Namen. Anders lässt
+ * sich eine laufende Animation nicht neu starten, ohne den Knoten aus dem DOM zu nehmen.
+ * Den Zähler führt lib/kursblatt/useLauf.ts.
+ *
+ * 🚨 @keyframes sind global, nicht scopebar. `fl-herz` steht bereits in
+ * statistik-formen.css:35 mit exakt diesen Werten und wird hier NICHT neu definiert —
+ * nur der Zwilling fehlte. Gegenprobe: grep -c "@keyframes fl-herz{" app/*.css → 1.
+ */
+@keyframes fl-herz2 { /* Zwilling zu statistik-formen.css:35 — K:19 */
+  0%   { opacity: 0; transform: translateY(14px) scale(.985); }
+  55%  { opacity: 1; transform: translateY(-2px) scale(1.008); }
+  78%  { transform: translateY(1px) scale(.999); }
+  100% { opacity: 1; transform: none; }
+}
+/* K:20-24 — Linien zeichnen sich; Origin setzt die Regel am Element (center/left/right). */
+@keyframes fl-linie   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-mitte   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-mitte2  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fl-spalte  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes fl-spalte2 { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* K:25 — Doppelschlag des Bestwert-Punkts. translate bleibt Teil der Keyframes, weil
+   der Punkt per transform zentriert wird und eine zweite transform ihn sonst versetzt. */
+@keyframes fl-puls {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(11,127,102,.45); }
+  14%      { transform: translate(-50%, -50%) scale(1.2); }
+  28%      { transform: translate(-50%, -50%) scale(1); }
+  42%      { transform: translate(-50%, -50%) scale(1.12); }
+  64%      { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 12px rgba(11,127,102,0); }
+}
+/* K:26 — derselbe Doppelschlag für den grünen Live-Punkt, ohne Zentrier-Transform. */
+@keyframes fl-punkt {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69,161,23,.5); }
+  14%      { transform: scale(1.2); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.12); }
+  64%      { transform: scale(1); box-shadow: 0 0 0 8px rgba(69,161,23,0); }
+}
+/* K:27-30 — Stempel: aufgesetzt (bleibt schief) und flach (dreht sich gerade). */
+@keyframes fl-stempel {
+  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+}
+@keyframes fl-stempel2 {
+  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+}
+@keyframes fl-stempelflach {
+  0%   { transform: scale(1.5) rotate(-8deg); }
+  60%  { transform: scale(.96) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+@keyframes fl-stempelflach2 {
+  0%   { transform: scale(1.5) rotate(-8deg); }
+  60%  { transform: scale(.96) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+/* K:31-32 — SVG zeichnet sich; das Element setzt pathLength="1" stroke-dasharray="1". */
+@keyframes fl-zeichnen  { to { stroke-dashoffset: 0; } }
+@keyframes fl-zeichnen2 { to { stroke-dashoffset: 0; } }
+
+/* K:33 — Text druckt sich ein.
+   🚨 Die Übergabe kennt drei leicht verschiedene Fassungen (K:33 7 px/.06em,
+   S:14 5 px/.06em, R:12 6 px/.05em) — drei Dateien, die im Prototyp nie zusammen
+   geladen werden. In einem Stylesheet kann nur eine gewinnen; maßgeblich ist die
+   Hauptdatei. Der Unterschied sind 1–2 px und ein Hundertstel em. */
+@keyframes fl-druck {
+  0%   { opacity: 0; transform: translateY(7px); letter-spacing: .06em; filter: blur(.6px); }
+  60%  { opacity: 1; letter-spacing: .01em; filter: blur(0); }
+  100% { opacity: 1; transform: none; letter-spacing: normal; }
+}
+@keyframes fl-druck2 {
+  0%   { opacity: 0; transform: translateY(7px); letter-spacing: .06em; filter: blur(.6px); }
+  60%  { opacity: 1; letter-spacing: .01em; filter: blur(0); }
+  100% { opacity: 1; transform: none; letter-spacing: normal; }
+}
+/* K:34 — der Merkzettel fliegt von rechts ein und bleibt leicht schief liegen. */
+@keyframes fl-zettel {
+  0%   { opacity: 0; transform: translateX(26px) rotate(3deg); }
+  60%  { opacity: 1; transform: translateX(-2px) rotate(-1.4deg); }
+  100% { opacity: 1; transform: rotate(-1deg); }
+}
+/* S:12-13 — grüner Knoten bestätigt den gesetzten Wert. */
+@keyframes fl-knoten  { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+@keyframes fl-knoten2 { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+/* L:12-13 — der Wert unter der Nadel tickt bei jeder Änderung. */
+@keyframes fl-tickA { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
+@keyframes fl-tickB { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
+/* L:14 — der pendelnde Strich am Bedienhinweis. */
+@keyframes fl-hand { 0%, 100% { transform: translateX(-6px); opacity: .55; } 50% { transform: translateX(6px); opacity: 1; } }
+
+/*
+ * 🚨 faden.css:38 bremst `.faden-shell *` — aber nur CSS, und nur im Faden. Das Kursblatt
+ * läuft auch außerhalb (Entwurfsroute, später ggf. die alte Seite) und braucht deshalb
+ * eine eigene Bremse. Die rAF-Zählwerke ignorieren CSS ohnehin; die prüfen
+ * reduzierteBewegung() aus lib/faden/belohnung.ts und springen auf den Zielwert.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .kb, .kb *, .kb *::before, .kb *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ── Typografische Bausteine ──────────────────────────────────────────────────────── */
+/*
+ * 🚨 Alle Regeln hier tragen den `.kb`-Vorsatz — nicht aus Ordnungsliebe, sondern wegen
+ * der Spezifität. faden.css:32 setzt `.faden-shell h1,h2,h3,h4 { font-weight: 700;
+ * line-height: 1.22 }` und faden.css:34/35 `.faden-shell a`/`p`. Das sind je (0,1,1) und
+ * schlagen ein einzelnes `.kb__titel` (0,1,0) — die H1 stand deshalb in 700/1.22 statt in
+ * 900/1.02 (gemessen 15.09.2026). `.kb .kb__titel` ist (0,2,0) und gewinnt, ohne sich auf
+ * die Reihenfolge der @imports verlassen zu müssen.
+ */
+/* README „Typografie“: Kicker überall identisch. */
+.kb .kb__kicker {
+  font: 700 10.5px/1.3 var(--kb-sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--kb-grau);
+}
+.kb .kb__kicker--werkzeug { display: inline-flex; align-items: center; gap: 8px; color: var(--kb-gruen-dunkel); }
+.kb .kb__kicker--werkzeug i { width: 8px; height: 8px; border-radius: 50%; background: var(--kb-werkzeug); flex: none; }
+
+/* K:44-49 — Zeitungskopf: Kickerzeile, dann die Doppellinie, die sich von der Mitte
+   zeichnet; die feine Linie folgt .12 s später. Zwei Divs statt box-shadow, weil beide
+   Linien getrennt animieren. */
+.kb .kb__kopfzeile {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px 16px; flex-wrap: wrap;
+  font: 700 10.5px/1.3 var(--kb-sans);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--kb-grau);
+}
+.kb .kb__kopflinie {
+  height: 2px; background: var(--kb-ink); margin-top: 8px;
+  transform-origin: center; animation: fl-mitte .9s var(--kb-kurve) both;
+}
+.kb .kb__kopflinie--fein {
+  height: 1px; margin-top: 2px;
+  animation: fl-mitte .9s var(--kb-kurve) .12s both;
+}
+
+/* K:50-53 — Seitenreiter. Aktiv = Tinte + grüne 2-px-Unterlinie, die von links wächst. */
+.kb .kb__reiter { display: flex; gap: 26px; margin-top: 8px; flex-wrap: wrap; }
+.kb .kb__reiter-blatt {
+  position: relative; border: 0; background: transparent; padding: 10px 0;
+  font: 600 14px var(--kb-serif); color: var(--kb-grau);
+  cursor: pointer; text-decoration: none; text-align: left;
+  transition: color .25s;
+}
+.kb .kb__reiter-blatt[aria-current="true"] { color: var(--kb-ink); }
+.kb .kb__reiter-blatt i {
+  position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+  background: var(--kb-gruen); transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--kb-kurve);
+}
+.kb .kb__reiter-blatt[aria-current="true"] i { transform: scaleX(1); }
+
+/* K:108, :182 — Doppellinie als Kopf über Kennzahlen und Tabellen.
+   Hier als box-shadow-Variante (README „Linien“), weil sie nicht animiert. */
+.kb .kb__doppellinie { border-top: 2px solid var(--kb-ink); box-shadow: 0 3px 0 -2px var(--kb-ink); }
+.kb .kb__doppellinie--grau { border-top-color: var(--kb-grau); box-shadow: 0 3px 0 -2px var(--kb-grau); }
+
+/* K:136 u. v. a. — Punktführung. Der Versatz nach oben lässt die Punkte auf der
+   Grundlinie der Schrift sitzen statt darunter. */
+.kb .kb__fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--kb-t40); transform: translateY(-4px); }
+.kb .kb__punktzeile { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; min-width: 0; }
+
+/* K:58-60 — Kopf einer Kursblatt-Seite. */
+.kb .kb__anzeige { font: italic 400 clamp(16px, 2.4vw, 19px) var(--kb-serif); color: var(--kb-magenta); animation: fl-druck .6s both; }
+.kb .kb__titel { margin: 6px 0 14px; font: 900 clamp(38px, 8vw, 60px)/1.02 var(--kb-serif); letter-spacing: -.02em; color: var(--kb-ink); animation: fl-druck .7s .1s both; }
+.kb .kb__vorspann { margin: 0; font: italic 300 clamp(16px, 2.4vw, 19px)/1.5 var(--kb-serif); color: var(--kb-ink); text-wrap: pretty; animation: fl-herz .8s .2s both; }
+.kb .kb__vorspann b { font-weight: 700; font-style: normal; color: var(--kb-werkzeug); }
+
+/* K:90-91 — Marktüberblick-Überschrift und Erklärsatz. */
+.kb .kb__h3 { margin: 6px 0 4px; font: 700 clamp(19px, 2.8vw, 23px)/1.25 var(--kb-serif); text-wrap: balance; }
+.kb .kb__erklaer { margin: 0; font: italic 300 13.5px/1.5 var(--kb-serif); color: var(--kb-grau); text-wrap: pretty; }
+.kb .kb__hinweis { font: italic 300 12px var(--kb-serif); color: var(--kb-grau); }
+
+/* K:211 — Rechtliche Hinweise. */
+.kb .kb__recht { margin: 22px 0 0; font: 400 12.5px/1.6 var(--kb-sans); color: var(--kb-grau); text-wrap: pretty; }
+.kb .kb__recht b { color: var(--kb-ink); }
+
+/* ── Schmaler Satz (README „Breakpoints“: eng = Containerbreite < 560 px) ─────────── */
+@container kb (max-width: 559px) {
+  .kb .kb__reiter { gap: 16px; }
+}
