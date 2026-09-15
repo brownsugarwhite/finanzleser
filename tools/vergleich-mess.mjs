@@ -46,6 +46,17 @@ const ok = (nr, name, gut, info = "") => { ergebnisse.push({ nr, name, gut, info
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, locale: "de-DE" });
 const page = await ctx.newPage();
+// 🚨 `request.postData()` ist bei Blob-Beacons leer — die Nutzlast bekommt man nur, indem
+//    man navigator.sendBeacon im Seitenkontext abfängt. Ohne sie ließe sich nicht prüfen,
+//    was zählt: dass kein Produkt zweimal gemeldet wird.
+await ctx.addInitScript(() => {
+  window.__sicht = [];
+  const echt = navigator.sendBeacon.bind(navigator);
+  navigator.sendBeacon = (url, daten) => {
+    if (String(url).includes("vergleich-sicht") && daten instanceof Blob) daten.text().then((t) => window.__sicht.push(t));
+    return echt(url, daten);
+  };
+});
 await page.addInitScript(() => { try { localStorage.setItem("fl_consent_v1", JSON.stringify({ necessary: true, statistics: false, marketing: false, externalMedia: false, version: 1, ts: Date.now() })); } catch {} });
 const anfragen = [];
 page.on("request", (r) => { if (/\/api\/vergleich-(daten|sicht)/.test(r.url())) anfragen.push({ url: r.url(), method: r.method() }); });
@@ -82,10 +93,20 @@ const nachher = anfragen.filter((a) => a.url.includes("vergleich-daten")).length
 ok(5, "Preset-Chip: ein Abruf, Zahl ändert sich", nachher === vorher + 1 && zahlNachher !== zahlVorher, `${zahlVorher} → ${zahlNachher}, ${nachher - vorher} Abruf(e)`);
 ok(5.1, "Hash trägt die Einstellung", (await page.evaluate(() => location.hash)).startsWith("#vgl:"), await page.evaluate(() => location.hash));
 
-// 6 Beacon
-await page.waitForTimeout(800);
-const beacons = anfragen.filter((a) => a.url.includes("vergleich-sicht")).length;
-ok(6, "Sichtbeacon: nur neue Produkte (Voreinstellung + Preset, nicht der Filter)", beacons >= 1 && beacons <= 2, `${beacons}`);
+// 6 Beacon. Erst rollen: gemeldet wird, was der Leser wirklich gesehen hat — bei einer
+//   1863 px hohen Liste in einem 900-px-Fenster ist das beim Laden noch nichts.
+//   Geprüft wird die Zusage an den Partner: jedes Produkt höchstens EINMAL, je Liste
+//   höchstens fünf Meldungen. Die schiere Zahl der Meldungen sagt nichts — sie hängt
+//   davon ab, wie viele neue Angebote Filter und Presets ins Bild holen.
+await page.locator(".vgl__zeile").last().scrollIntoViewIfNeeded();
+await page.waitForTimeout(1200);
+const sicht = (await page.evaluate(() => window.__sicht || [])).map((t) => JSON.parse(t));
+const gesehen = new Set();
+let doppelt = 0;
+for (const m of sicht) for (const id of m.ids || []) { if (gesehen.has(id)) doppelt++; gesehen.add(id); }
+ok(6, "Sichtbeacon: jedes Produkt höchstens einmal, höchstens fünf Meldungen",
+   sicht.length >= 1 && sicht.length <= 5 && doppelt === 0 && sicht.every((m) => m.kennung && (m.ids || []).length),
+   `${sicht.length} Meldungen, ${gesehen.size} Produkte, ${doppelt} doppelt`);
 
 // 7 Klasse B
 await page.goto(BASE + B, { waitUntil: "networkidle" });
@@ -147,7 +168,6 @@ try {
 } catch (e) {
   ok(11, "Leos Karte nach einer Frage", true, "übersprungen: " + String(e.message || e).split("\n")[0].slice(0, 80));
 }
-void eingabe;
 
 await browser.close();
 const schlecht = ergebnisse.filter((e) => !e.gut);

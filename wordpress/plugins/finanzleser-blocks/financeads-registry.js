@@ -592,6 +592,34 @@ window.FL_FINANCEADS = {
         {
           "key": "rate",
           "label": "Monatsrate"
+        },
+        {
+          "key": "effzins_bis",
+          "label": "Zins bis"
+        },
+        {
+          "key": "rate_bis",
+          "label": "Rate bis"
+        },
+        {
+          "key": "zwei_drittel",
+          "label": "⅔ der Kunden erhalten"
+        },
+        {
+          "key": "bearbeitung",
+          "label": "Bearbeitungsgebühr"
+        },
+        {
+          "key": "grenzen",
+          "label": "Zins gilt für"
+        },
+        {
+          "key": "bonitaetsfrei",
+          "label": "Zins unabhängig von der Bonität"
+        },
+        {
+          "key": "kreditgeber",
+          "label": "Kreditgeber"
         }
       ],
       "bestwert": "effzins"

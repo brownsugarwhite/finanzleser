@@ -23,7 +23,15 @@ export function useSichtbeacon(ref: RefObject<HTMLElement | null>, slug: string,
     const el = ref.current;
     if (!el || !ids.length || !kennung || letzter.current === schluessel) return;
     const io = new IntersectionObserver((entries) => {
-      if (!entries.some((e) => e.isIntersecting)) return;
+      // 🚨 „Gesehen" heißt NICHT „die Hälfte der Liste ist gleichzeitig im Bild".
+      // Gemessen 15.09.2026: die Tagesgeldliste ist 1863 px hoch, das Fenster 900 px —
+      // mehr als 48 % waren nie gleichzeitig sichtbar, und mit `threshold: 0.5` wurde
+      // deshalb NIE ein Sichtkontakt gemeldet. Daran hängt die Vergütung.
+      // Jetzt zählt, was tatsächlich im Bild steht: die halbe Liste oder 400 px davon.
+      const gesehen = entries.some(
+        (e) => e.isIntersecting && e.intersectionRect.height >= Math.min(400, e.boundingClientRect.height * 0.5),
+      );
+      if (!gesehen) return;
       io.disconnect();
       if (letzter.current === schluessel) return;
       letzter.current = schluessel;
@@ -41,7 +49,7 @@ export function useSichtbeacon(ref: RefObject<HTMLElement | null>, slug: string,
           fetch("/api/vergleich-sicht", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
         }
       } catch { /* Sichtmeldung ist nie ein Fehler für den Leser */ }
-    }, { threshold: 0.5 });
+    }, { threshold: [0, 0.1, 0.25, 0.5] });
     io.observe(el);
     return () => io.disconnect();
   }, [ref, slug, kennung, schluessel, ids, standard]);
