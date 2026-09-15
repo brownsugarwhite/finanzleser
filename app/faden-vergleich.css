@@ -58,3 +58,17 @@
 .faden-shell .vgl__saeulen { margin: 4px 0 22px; }
 .faden-shell .vgl__saeulen .st__kopf .kicker { color: var(--muted); }
 .faden-shell .vgl__saeulen .st-saeulen__stab { transition: transform .9s cubic-bezier(.2,.8,.2,1), height .6s cubic-bezier(.2,.8,.2,1); }
+
+/* ── Leos Vergleichskarte im Strom ─────────────────────────────────────────────────── */
+.faden-shell .leo-karte { display: grid; gap: 6px; margin: 14px 0 6px 60px; padding: 12px 0 10px; border-top: 2px solid var(--tuerkis); border-bottom: 1px solid var(--rule); }
+.faden-shell .leo-karte .kicker--tool { color: var(--green-ink); }
+.faden-shell .leo-karte__titel { font: 700 clamp(18px, 1.6vw, 22px)/1.25 var(--serif); color: var(--ink); text-decoration: none; }
+.faden-shell .leo-karte__titel:hover { color: var(--green-ink); }
+.faden-shell .leo-karte__grund { font: italic 300 13px var(--serif); color: var(--muted); }
+.faden-shell .leo-karte__liste { list-style: none; margin: 4px 0 0; padding: 0; display: grid; }
+.faden-shell .leo-karte__zeile { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--rule-fein); font: 400 13.5px var(--sans); color: var(--ink); }
+.faden-shell .leo-karte__zeile--best { background: rgba(6,212,150,.07); margin: 0 -8px; padding-left: 8px; padding-right: 8px; }
+.faden-shell .leo-karte__name b { font: 700 14px var(--serif); } .faden-shell .leo-karte__name span { color: var(--muted); margin-left: 6px; }
+.faden-shell .leo-karte__wert { font: 900 15px var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.faden-shell .leo-karte__laedt, .faden-shell .leo-karte__stand { font: 400 12px var(--sans); color: var(--muted); }
+@media (max-width: 720px) { .faden-shell .leo-karte { margin-left: 0; } }

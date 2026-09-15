@@ -5,6 +5,7 @@ import {
 } from "ai";
 import { NextResponse } from "next/server";
 import type { LeoSource, LeoUIMessage } from "@/lib/ai/leoMessage";
+import { findeVergleichKarte } from "@/lib/ai/karten";
 
 export const dynamic = "force-dynamic";
 // 45 statt 60: Netlify rechnet Compute-SEKUNDEN ab, nicht nur Invocations. Eine
@@ -159,6 +160,9 @@ export async function POST(req: Request) {
         const reader = upstream.body!.getReader();
         const decoder = new TextDecoder();
         let buffer = "";
+        // Die ganze Antwort mitschreiben — daraus (und aus der Frage) ermittelt lib/ai/karten.ts
+        // nach dem Streamende den passenden Vergleich für Leos Karte.
+        let antwortText = "";
 
         // Ein SSE-Block (durch \n\n getrennt) → AI-SDK-Chunk.
         const handleBlock = (block: string) => {
@@ -170,7 +174,7 @@ export async function POST(req: Request) {
           }
           const payload = data ? JSON.parse(data) : {};
           if (event === "token") {
-            if (payload.text) writer.write({ type: "text-delta", id: textId, delta: payload.text });
+            if (payload.text) { antwortText += payload.text; writer.write({ type: "text-delta", id: textId, delta: payload.text }); }
           } else if (event === "meta") {
             const sources = (payload.sources ?? []) as LeoSource[];
             if (sources.length) writer.write({ type: "data-sources", data: sources });
@@ -214,6 +218,16 @@ export async function POST(req: Request) {
         if (buffer.trim()) handleBlock(buffer);
 
         writer.write({ type: "text-end", id: textId });
+
+        // Leos Karte: höchstens ein Vergleich, rein lexikalisch aus Frage + Antwort. Eine
+        // Verbesserung, keine Existenzentscheidung — ein Fehler hier darf die Antwort nie
+        // beschädigen, deshalb still (Konzept_Technik_Anhang 3.3).
+        try {
+          const karte = await findeVergleichKarte(message, antwortText, slug);
+          if (karte) writer.write({ type: "data-card", data: karte });
+        } catch (e) {
+          console.warn("[/api/chat] Karte:", e instanceof Error ? e.message : e);
+        }
       },
       onError: (error) => (error instanceof Error ? error.message : String(error)),
     });

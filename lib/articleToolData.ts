@@ -1,7 +1,6 @@
 import "server-only";
 import { zaehleWp } from "@/lib/faden/wpZaehler";
 import { getRechnerBySlug, getChecklisteBySlug, getDokumenteBySlugs, CONTENT_REVALIDATE } from "@/lib/wordpress";
-import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { stripHtml } from "@/lib/seo";
 import { loadChecklisteData, type ChecklisteInlineData } from "@/lib/checklisteData";
 import { medienUrl } from "@/lib/faden/medien";
@@ -77,7 +76,8 @@ function normalizeDokSlugs(raw: string): string[] {
 }
 
 async function loadVergleichTitle(slug: string): Promise<ToolTitle> {
-  const fallback = VERGLEICH_DESCRIPTIONS[slug] || "";
+  // Beschreibung = WP-Excerpt (lib/vergleichDescriptions.ts ist am 15.09.2026 in die CPT-Excerpts gewandert).
+  const fallback = "";
   const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
   try {
     // WICHTIG: revalidate setzen — ein ungecachtes fetch() ist in Next 15 `no-store`

@@ -20,6 +20,7 @@ import type { SpaltenRubrik } from "@/lib/faden/spalten";
 interface AktionenWerte { titel: string; url: string; kurzfassung?: FadenKurzfassung; artikelId: string; pdf?: BeitragPdf | null }
 import type { InselTyp } from "./Insel";
 import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
+import type { CardRef } from "@/lib/ai/karten";
 
 interface VergleichInselWerte { def: DefLite; quelle: VergleichQuelle; daten: VergleichDaten; skin: "faden" | "alt"; mitSaeulen?: boolean }
 import type { Statistik as StatistikDaten } from "@/lib/statistik/schema";
@@ -28,6 +29,7 @@ const RechnerEmbed = dynamic(() => import("@/components/rechner/RechnerEmbed"));
 const ChecklisteEmbed = dynamic(() => import("@/components/checkliste/ChecklisteEmbed"));
 const VergleichEmbed = dynamic(() => import("@/components/vergleich/VergleichEmbed"));
 const VergleichRechner = dynamic(() => import("@/components/vergleich/VergleichRechner"));
+const LeoVergleichKarte = dynamic(() => import("@/components/faden/leo/LeoVergleichKarte"));
 const DokumenteEmbed = dynamic(() => import("@/components/dokumente/DokumenteEmbed"));
 const StatistikKarte = dynamic(() => import("@/components/statistik/StatistikKarte"));
 const Statistik = dynamic(() => import("@/components/statistik/Statistik"));
@@ -54,6 +56,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
     return w?.daten ? <VergleichRechner slug={arg} def={w.def} quelle={w.quelle} daten={w.daten} skin={w.skin} mitSaeulen={w.mitSaeulen} /> : <VergleichEmbed slug={arg} />;
   }
   if (typ === "dokumente") return <DokumenteEmbed slugs={arg.split(",").filter(Boolean)} />;
+  if (typ === "leo-karte") return werte ? <LeoVergleichKarte karte={werte as CardRef} /> : null;
   if (typ === "statistik") return werte ? <StatistikKarte st={werte as FadenStatistik} /> : null;
   if (typ === "statistik-block") return werte ? <Statistik st={werte as StatistikDaten} /> : null;
   if (typ === "weiterlesen") return werte ? <Weiterlesen fragen={werte as FadenFrage[]} /> : null;

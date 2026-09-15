@@ -271,4 +271,8 @@ export const manualRedirects = [
   { source: "/lohnsteuerrechner-2", destination: "/finanztools/rechner/brutto-netto", permanent: true },
   { source: "/steuerrechner", destination: "/finanztools/rechner", permanent: true },
   { source: "/sitemap", destination: "/sitemap.xml", permanent: true },
+  // 15.09.2026: Der financeads-Filter target_group=student liefert exakt dieselben Karten wie
+  // der Kreditkarten-Vergleich (Produkt-ID-Mengen gemessen) — eine eigene Seite wäre eine
+  // Doorway-Seite. Zusammengelegt statt gelöscht, damit die indexierte URL weiterlebt.
+  { source: "/finanztools/vergleiche/studentenkreditkarte-vergleich", destination: "/finanztools/vergleiche/kreditkarten-vergleich", permanent: true },
 ];

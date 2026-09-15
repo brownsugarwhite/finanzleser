@@ -10,7 +10,9 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useFaden } from "@/components/faden/FadenProvider";
-import { getMessageText, getSources, type LeoUIMessage } from "@/lib/ai/leoMessage";
+import { getMessageText, getSources, getCard, type LeoUIMessage } from "@/lib/ai/leoMessage";
+import Insel from "@/components/faden/kette/Insel";
+import LeoVergleichKarte from "./LeoVergleichKarte";
 import { kopfHoehe, zeigeAnfang, merkeKnoten, folgt } from "@/lib/faden/scrollen";
 import { mitlaufen } from "@/lib/faden/tippen";
 import { FrageBlase, LeoRede } from "./Blase";
@@ -25,6 +27,7 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
   const { toast } = useFaden();
   const text = getMessageText(m);
   const quellen = getSources(m);
+  const karte = getCard(m);
   const vorlesen = () => {
     if (!("speechSynthesis" in window)) { toast("Vorlesen wird von diesem Browser nicht unterstützt."); return; }
     if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); return; }
@@ -47,6 +50,11 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
           <div className="quellen"><b>Quellen</b>{quellen.map((q, i) => <span key={i}>› {q.title}{q.pages ? ` · ${q.pages}` : ""}</span>)}</div>
         )}
       </LeoRede>
+      {/* Leos Karte: der passende Vergleich, vom Proxy lexikalisch ermittelt (lib/ai/karten.ts).
+          In einer Insel, damit sie im eingefrorenen Kapitel bedienbar bleibt. */}
+      {!laeuft && karte && (
+        <Insel typ="leo-karte" werte={karte}><LeoVergleichKarte karte={karte} /></Insel>
+      )}
       {!laeuft && text && (
         <div className="werkzeuge">
           <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRechnerBySlug, getChecklisteBySlug } from "@/lib/wordpress";
-import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { cacheHeaders } from "@/lib/httpCache";
 
 // Tool-Titel/-Beschreibung ändern sich selten → 1h cachen (vorher ungecacht,
@@ -33,9 +32,9 @@ export async function GET(
   if (type === "vergleich") {
     // Fetch title from WordPress REST API
     const wpUrl = (process.env.WORDPRESS_API_URL || "http://finanzleser.local/graphql").replace("/graphql", "");
-    // Beschreibung kommt aus dem Code-Map (Vergleich-CPT unterstützt kein
-    // WP-Excerpt); ein evtl. doch vorhandenes WP-Excerpt hat Vorrang.
-    const fallback = VERGLEICH_DESCRIPTIONS[slug] || "";
+    // Beschreibung = WP-Excerpt des CPT (finanzleser-cpt-excerpt.php). Die frühere
+    // Code-Map lib/vergleichDescriptions.ts ist am 15.09.2026 in die Excerpts gewandert.
+    const fallback = "";
     try {
       // Ohne next.revalidate wäre dieser Fetch in Next 15 no-store → WP-Roundtrip pro Aufruf.
       const res = await fetch(`${wpUrl}/wp-json/wp/v2/vergleich?slug=${encodeURIComponent(slug)}&_fields=title,excerpt`, { next: { revalidate: 3600 } });

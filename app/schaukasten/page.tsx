@@ -38,6 +38,7 @@ import Finanzwort from "@/components/faden/spiele/Finanzwort";
 import SchaukastenModus from "@/components/faden/SchaukastenModus";
 import { getWerkzeugIndex } from "@/lib/faden/werkzeugIndex";
 import Zeitungskopf from "@/components/faden/Zeitungskopf";
+import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 
 export const metadata: Metadata = {
   title: "Schaukasten · Bausteine",
@@ -87,7 +88,7 @@ export default async function Schaukasten() {
     { key: "kuendigungsfrist", titel: "Kündigungsfrist", regel: "Erinnert sechs Wochen vor Ablauf Ihres Vertrags." },
     { key: "grundfreibetrag", titel: "Grundfreibetrag", regel: "Meldet sich, wenn sich der steuerliche Grundfreibetrag ändert." },
   ];
-  const VON = 11;
+  const VON = 12;
 
   return (
     <KartenKapitel
@@ -230,7 +231,12 @@ export default async function Schaukasten() {
         {embeds.map((teil, i) => <WerkzeugKarte key={i} teil={teil} toolData={toolData} imInhalt />)}
       </Abschnitt>
 
-      <Abschnitt titel="Spiele" nr={9} von={VON}>
+      <Abschnitt titel="Vergleichsrechner" nr={9} von={VON}>
+        <p className="vorspann">Der eigene Vergleich aus der financeads-API (Design A v2, Handoff Zeile 759–788): Parameterzeile mit Chips, die Säulen der ersten acht, Umschalter und Sortierer, Tarifliste mit Bestwert-Stempel und Balken, Fußzeile mit Stand. Klasse-B-Kategorien (Versicherungen ohne Beiträge) zeigen stattdessen die Anbieterliste.</p>
+        <VergleichKoerper slug="tagesgeldvergleich" skin="faden" mitSaeulen />
+        <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
+      </Abschnitt>
+      <Abschnitt titel="Spiele" nr={10} von={VON}>
         <p>Jede Spielform mit echtem Inhalt, damit sich auch die Auflösung anschauen lässt.</p>
         <div className="spiel-inline"><GamificationEmbed gamType="quiz" fields={{
           frage: "Welcher Block ist im Beispiel der zweitgrößte am Strompreis?",
@@ -272,7 +278,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Listen, Karten und Mein Bereich" nr={10} von={VON}>
+      <Abschnitt titel="Listen, Karten und Mein Bereich" nr={11} von={VON}>
         <ListenKarte kicker="Aus dem Bestand" gruppen={listen} />
         <div style={{ marginTop: 18 }}><KassensturzTeaser /></div>
         <div style={{ marginTop: 18 }}>
@@ -281,7 +287,7 @@ export default async function Schaukasten() {
         </div>
       </Abschnitt>
 
-      <Abschnitt titel="Der Vorlage-Beitrag" nr={11} von={VON}>
+      <Abschnitt titel="Der Vorlage-Beitrag" nr={12} von={VON}>
         <p>
           Der zweite Teil des Schaukastens ist eine <strong>echte Kopie</strong> aus dem CMS:
           „Vorlage-Test · Photovoltaik Förderung“ mit sieben Abschnitten, Tabelle, Statistiken,

@@ -18,7 +18,6 @@ import { kurzSatz } from "@/lib/financeads/format";
 import { parseContent } from "@/lib/articleHtml";
 import { extractFaqPairs } from "@/lib/articleFaq";
 import { parseStatistik } from "@/lib/statistik/schema";
-import { VERGLEICH_DESCRIPTIONS } from "@/lib/vergleichDescriptions";
 import { buildMetadata, SITE_NAME, stripHtml, absoluteUrl } from "@/lib/seo";
 import { decodeHtmlEntities } from "@/lib/html-utils";
 import { cleanDescription } from "@/lib/content-utils";
@@ -68,7 +67,7 @@ async function lade(slug: string) {
   const v = await holeVergleich(slug);
   if (!v) return null;
   const title = anzeigeTitel(v.cpt.title);
-  const excerpt = stripHtml(v.cpt.excerpt || "").trim() || VERGLEICH_DESCRIPTIONS[slug] || "";
+  const excerpt = stripHtml(v.cpt.excerpt || "").trim();
   const def = v.art === "financeads" ? defLite(v.def) : null;
   const daten = v.art === "financeads" ? v.daten : null;
   const satz = def ? kurzSatz(def, daten) : "";
