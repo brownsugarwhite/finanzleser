@@ -11,6 +11,8 @@ import { useState } from "react";
 import Lineal from "@/components/kursblatt/eingabe/Lineal";
 import Setzzeile from "@/components/kursblatt/eingabe/Setzzeile";
 import Register from "@/components/kursblatt/eingabe/Register";
+import Drehring from "@/components/kursblatt/eingabe/Drehring";
+import Zaehlwerk from "@/components/kursblatt/eingabe/Zaehlwerk";
 
 /** Steuerklassen mit Beizeile — „Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“:218. */
 const STEUERKLASSEN = [
@@ -39,6 +41,8 @@ export default function Bausteine() {
   const [kinder, setKinder] = useState<number | null>(0);
   const [betrag, setBetrag] = useState<number | null>(20000);
   const [dauer, setDauer] = useState(36);
+  const [laufzeit, setLaufzeit] = useState(60);
+  const [zins, setZins] = useState(5.5);
 
   return (
     <>
@@ -96,6 +100,41 @@ export default function Bausteine() {
             { wert: 100000, label: "100.000" },
           ]}
         />
+      </div>
+
+      <div style={{ marginTop: 40 }}>
+        <span className="kb__kicker kb__kicker--werkzeug">
+          <i aria-hidden="true" />
+          Drehring &amp; Zählwerk
+        </span>
+        <div className="kb__zweispalt" style={{ marginTop: 20 }}>
+          <div>
+            <div className="kb__feldkopf">
+              <b>Laufzeit</b>
+              <span>am Ring drehen</span>
+            </div>
+            <div style={{ marginTop: 4 }}>
+              <Drehring
+                ariaLabel="Laufzeit" wert={laufzeit} onWert={setLaufzeit}
+                min={6} max={120} schritt={6} gross={2}
+                beschriftet={[12, 36, 60, 84, 108]} einheit="Monate" werkzeug="magenta"
+                unter={(m) => `= ${(m / 12).toLocaleString("de-DE", { maximumFractionDigits: 1 })} Jahre`}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="kb__feldkopf">
+              <b>Zinssatz p.a.</b>
+              <span>Sollzins</span>
+            </div>
+            <Zaehlwerk
+              ariaLabel="Zinssatz" wert={zins} onWert={setZins}
+              min={0} max={19.9} schritt={0.1} dez={1} einheit="%"
+              schnellwahl={[3.9, 5.5, 7.9, 9.9]} werkzeug="magenta"
+              hinweis="gedrückt halten für schnelles Zählen"
+            />
+          </div>
+        </div>
       </div>
 
       <div style={{ marginTop: 40 }}>

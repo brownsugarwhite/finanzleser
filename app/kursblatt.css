@@ -523,3 +523,57 @@
 @container kb (max-width: 559px) {
   .kb .kb__zweispalt { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ── Ziffernwalzen (K:279, :295) ──────────────────────────────────────────────────── */
+/* Schrift und Farbe kommen vom Elternteil — dieselbe Walze trägt den Zinssatz (44 px)
+   und Leos laufende Rate (36 px). Rechtsbündig, damit bei 999 → 1.000 nur die neue
+   Stelle hinzukommt, statt dass die ganze Zahl wirbelt. */
+.kb .kb-odo { display: inline-flex; align-items: baseline; justify-content: flex-end; gap: 1px; font-variant-numeric: tabular-nums; }
+.kb .kb-odo__walze { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
+.kb .kb-odo__spalte { display: block; text-align: center; line-height: 1; transition: transform .5s var(--kb-kurve); }
+.kb .kb-odo__zeichen { display: block; height: 1em; line-height: 1; }
+
+/* ── Drehring (K:258-271) ─────────────────────────────────────────────────────────── */
+.kb .kb-drehring { position: relative; width: 190px; height: 190px; margin-inline: auto; }
+.kb .kb-drehring__scheibe { display: block; touch-action: none; cursor: grab; user-select: none; overflow: visible; }
+.kb .kb-drehring__scheibe[data-zieht="an"] { cursor: grabbing; }
+.kb .kb-drehring__scheibe:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 4px; }
+.kb .kb-drehring__strich { transition: stroke .3s; }
+/* Geometrie-Eigenschaften als CSS animieren — als Attribut allein täte sich nichts. */
+.kb .kb-drehring__griff { transition: cx .45s var(--kb-kurve), cy .45s var(--kb-kurve), r .2s; }
+.kb .kb-drehring__scheibe[data-zieht="an"] .kb-drehring__griff { transition: r .2s; }
+.kb .kb-drehring__schild { font: 500 10px var(--kb-sans); fill: var(--kb-grau); }
+.kb .kb-drehring__mitte {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; pointer-events: none; padding-top: 6px;
+}
+.kb .kb-drehring__mitte b { font: 900 36px/1 var(--kb-serif); color: var(--kb-ink); font-variant-numeric: tabular-nums; }
+.kb .kb-drehring__einheit { font: italic 300 12px var(--kb-serif); color: var(--kb-grau); margin-top: 4px; }
+.kb .kb-drehring__unter { font: 500 11px var(--kb-sans); color: var(--kb-feld-farbe); margin-top: 4px; white-space: nowrap; }
+
+/* ── Zählwerk (K:274-287) ─────────────────────────────────────────────────────────── */
+.kb .kb-zaehlwerk__zeile { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 26px; }
+.kb .kb-zaehlwerk__knopf {
+  position: relative; width: 46px; height: 46px; flex-shrink: 0;
+  border: 1.5px solid var(--kb-ink); border-radius: 50%; background: transparent; color: var(--kb-ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: none;
+  transition: transform .2s, background .2s, color .2s;
+}
+.kb .kb-zaehlwerk__knopf:hover { background: var(--kb-ink); color: var(--kb-weiss); }
+.kb .kb-zaehlwerk__knopf:active { transform: scale(.9); }
+.kb .kb-zaehlwerk__minus { width: 14px; height: 2px; background: currentColor; }
+.kb .kb-zaehlwerk__plus { position: absolute; width: 2px; height: 14px; background: currentColor; }
+.kb .kb-zaehlwerk__wert {
+  display: flex; align-items: baseline; justify-content: center;
+  font: 900 clamp(34px, 5vw, 44px)/1 var(--kb-serif); color: var(--kb-ink);
+  font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+}
+.kb .kb-zaehlwerk__schnellwahl { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-zaehlwerk__chip {
+  min-height: 34px; padding: 0 12px; border: 1px solid var(--kb-t25); border-radius: 999px;
+  background: transparent; color: var(--kb-ink); font: 500 12.5px var(--kb-sans);
+  cursor: pointer; transition: background .3s, color .3s, border-color .3s;
+}
+.kb .kb-zaehlwerk__chip:hover { border-color: var(--kb-ink); }
+.kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--kb-ink); color: var(--kb-weiss); border-color: var(--kb-ink); }
+.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: 10px; font: italic 300 11.5px var(--kb-serif); color: var(--kb-grau); }
