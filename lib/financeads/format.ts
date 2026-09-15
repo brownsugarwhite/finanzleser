@@ -15,9 +15,16 @@ export function formatGeld(wert: number): string {
   return `${formatZahl(wert, stellen)} €`;
 }
 
+/**
+ * 🚨 Immer zwei Nachkommastellen, auch bei glatten Werten.
+ *
+ * Vorher entschied der WERT über die Stellenzahl (ganze Zahl → keine Nachkommastelle).
+ * In einer Spalte heißt das „3,30 % · 3,20 % · 3 % · 3,01 %“ — gemessen am 15.09.2026 in
+ * der Festgeldliste. Eine Spalte hat eine Genauigkeit, nicht jede Zelle ihre eigene; und
+ * für Zinssätze sind zwei Stellen ohnehin die übliche Angabe (§ 6 PAngV).
+ */
 export function formatProzent(wert: number): string {
-  const stellen = Number.isInteger(wert) ? 0 : Math.abs(wert) < 1 ? 2 : 2;
-  return `${formatZahl(wert, stellen)} %`;
+  return `${formatZahl(wert, 2)} %`;
 }
 
 /** Zelle einer Spalte als Text; `–` für fehlende Werte (wie in den Statistik-Tabellen). */

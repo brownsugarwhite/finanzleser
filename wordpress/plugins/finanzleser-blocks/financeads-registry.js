@@ -28,7 +28,7 @@ window.FL_FINANCEADS = {
         },
         {
           "key": "months",
-          "label": "Laufzeit",
+          "label": "Anlagedauer",
           "typ": "wahl",
           "standard": 12,
           "einheit": "Monate",
@@ -46,11 +46,11 @@ window.FL_FINANCEADS = {
             },
             {
               "wert": "12",
-              "label": "12 Monate"
+              "label": "1 Jahr"
             },
             {
               "wert": "24",
-              "label": "24 Monate"
+              "label": "2 Jahre"
             }
           ],
           "presets": [
@@ -104,40 +104,50 @@ window.FL_FINANCEADS = {
         },
         {
           "key": "months",
-          "label": "Laufzeit",
+          "label": "Anlagedauer",
           "typ": "wahl",
-          "standard": 12,
+          "standard": 36,
           "einheit": "Monate",
           "min": null,
           "max": null,
           "schritt": null,
           "optionen": [
             {
+              "wert": "3",
+              "label": "3 Monate"
+            },
+            {
               "wert": "6",
               "label": "6 Monate"
             },
             {
               "wert": "12",
-              "label": "12 Monate"
+              "label": "1 Jahr"
             },
             {
               "wert": "24",
-              "label": "24 Monate"
+              "label": "2 Jahre"
             },
             {
               "wert": "36",
-              "label": "36 Monate"
+              "label": "3 Jahre"
+            },
+            {
+              "wert": "48",
+              "label": "4 Jahre"
             },
             {
               "wert": "60",
-              "label": "60 Monate"
+              "label": "5 Jahre"
             }
           ],
           "presets": [
+            3,
             6,
             12,
             24,
             36,
+            48,
             60
           ],
           "fest": false
@@ -145,16 +155,36 @@ window.FL_FINANCEADS = {
       ],
       "spalten": [
         {
-          "key": "zins",
-          "label": "Zins p. a."
+          "key": "ertrag",
+          "label": "Zinsertrag"
         },
         {
-          "key": "ertrag",
-          "label": "Ertrag über die Laufzeit"
+          "key": "zins",
+          "label": "Zinsen p. a."
+        },
+        {
+          "key": "endbetrag",
+          "label": "Endbetrag"
+        },
+        {
+          "key": "zahlung",
+          "label": "Zinszahlung"
+        },
+        {
+          "key": "land",
+          "label": "Land"
         },
         {
           "key": "sicherung",
           "label": "Einlagensicherung"
+        },
+        {
+          "key": "schutz_max",
+          "label": "Gesichert"
+        },
+        {
+          "key": "bonitaet",
+          "label": "Land mit Top-Bonität"
         }
       ],
       "bestwert": "ertrag"

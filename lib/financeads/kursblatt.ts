@@ -6,7 +6,9 @@
  * das Streuband trägt, welcher Baustein einen Parameter setzt, wie die Enden der Achse
  * heißen. Kein Kategoriewissen im Markup.
  */
-import type { DefLite, ParamDef, SpalteDef } from "./typen.ts";
+import type { DefLite, KennWert, ParamDef, SpalteDef, VergleichVariante } from "./typen.ts";
+import { paramSchluessel } from "./normalisieren.ts";
+import { formatKennwert } from "./format.ts";
 
 /** Welcher Eingabe-Baustein setzt diesen Parameter? */
 export type ParamBaustein = "lineal" | "setzzeile" | "register" | "segment";
@@ -137,6 +139,26 @@ export function nebenspalten(def: DefLite, haupt: SpalteDef | undefined): Spalte
 }
 
 /**
+ * Die drei Zeilen der Punktführung im Gewinnerblock (K:136-138, F:122-124).
+ *
+ * Anders als `nebenspalten` darf hier alles stehen, was die Registry führt — auch
+ * `nurDetails`-Spalten: beim Festgeld sind Endbetrag und Zinszahlung genau das, was
+ * neben dem Gewinner steht, in der Angebotsliste aber nur Rauschen wäre.
+ * Was schon groß dasteht oder eine eigene Listenspalte hat, fällt heraus. Gekappt wird
+ * erst in der Darstellung, wenn feststeht, welche Werte es überhaupt gibt.
+ */
+export function podestSpalten(def: DefLite, aussen: (SpalteDef | undefined)[]): SpalteDef[] {
+  const haupt = hauptspalte(def);
+  const rest = def.spalten.filter((s) => s !== haupt);
+  const i = def.totalLabel ? rest.findIndex((s) => s.kurz === def.totalLabel || s.label === def.totalLabel) : -1;
+  const sortiert = i > 0 ? [rest[i], ...rest.filter((_, j) => j !== i)] : rest;
+  // Ohne Kappung: welche drei es werden, entscheidet erst der Wert — eine Punktzeile mit
+  // „–“ ist keine Zeile. So rückt beim Festgeld die Einlagensicherung nach, solange der
+  // Schnappschuss Endbetrag und Zinszahlung noch nicht kennt.
+  return (haupt ? [haupt, ...sortiert] : sortiert).filter((s) => !aussen.includes(s));
+}
+
+/**
  * Mehrzahl im Dativ: „12 von 12 Angeboten“ (K:177), nicht „von 12 Angebote“.
  *
  * Die deutsche Regel ist hier eindeutig genug für eine Zeile Code: der Dativ Plural
@@ -145,4 +167,114 @@ export function nebenspalten(def: DefLite, haupt: SpalteDef | undefined): Spalte
  */
 export function dativ(mehrzahl: string): string {
   return /[ns]$/i.test(mehrzahl) ? mehrzahl : mehrzahl + "n";
+}
+
+/**
+ * Wie `formatKennwert`, aber mit dem Pluszeichen, das ein Ertrag verdient: „+ 3.995 €“
+ * (F:122, F:148). Es steht genau dort, wo Geld dazukommt statt wegzugehen — bei Kosten
+ * und Zinssätzen wäre es falsch.
+ */
+export function mitVorzeichen(spalte: SpalteDef, wert: KennWert | undefined): string {
+  const text = formatKennwert(spalte, wert);
+  return spalte.art === "geld" && spalte.richtung === "hoch" && typeof wert === "number" && wert > 0
+    ? `+ ${text}`
+    : text;
+}
+
+/**
+ * Die Zahl, die das Produkt kennzeichnet: groß im Gewinnerblock, Achse der Zinskurve.
+ * Beim Kredit ist das der Bestwert selbst, beim Festgeld der Zins (F:118).
+ */
+export function kennwertSpalte(def: DefLite): SpalteDef | undefined {
+  const eigen = def.kursblatt?.kennwert ? def.spalten.find((s) => s.key === def.kursblatt!.kennwert) : undefined;
+  return eigen ?? hauptspalte(def);
+}
+
+// ─── Zinskurve ────────────────────────────────────────────────────────────────────────
+
+/**
+ * Der Parameter, der die Laufzeit setzt — Achse der Zinskurve.
+ *
+ * Generisch statt hartverdrahtet: eine Auswahlliste mit mindestens drei Einträgen, deren
+ * Einheit oder Beschriftung nach Zeit klingt. Beim Festgeld sind das die sieben
+ * Anlagedauern, bei der Baufinanzierung wäre es die Zinsbindung.
+ */
+export function laufzeitParam(def: DefLite): ParamDef | undefined {
+  return def.params.find(
+    (p) => p.typ === "wahl" && (p.optionen?.length ?? 0) >= 3 && /monat|jahr|dauer|laufzeit|bindung/i.test(`${p.einheit ?? ""} ${p.label}`),
+  );
+}
+
+export interface KurveWert {
+  /** Der Parameterwert („36“) — ein Klick auf den Punkt setzt ihn. */
+  wert: string;
+  label: string;
+  /** Kurzform für den schmalen Satz: „3 M.“, „5 J.“ (F:239). */
+  kurz: string;
+  best: number;
+  schnitt: number;
+}
+
+export interface Zinskurve {
+  punkte: KurveWert[];
+  paramKey: string;
+  /**
+   * Die Parameter, für die die Kurve gilt. Weicht der Leser davon ab (anderer Betrag),
+   * steht das unter der Kurve — die Kurve zeigt dann den Zins, nicht seinen Ertrag.
+   */
+  basis: Record<string, string>;
+}
+
+/**
+ * Bester und durchschnittlicher Wert je Laufzeit — aus den Varianten des Schnappschusses.
+ *
+ * 🚨 Diese Funktion läuft im SERVER, in VergleichKoerper, bevor die Varianten auf die
+ * Voreinstellung gekürzt werden. Gemessen 15.09.2026: ins HTML und in die Insel reist nur
+ * `varianten[0]` (VergleichKoerper.tsx:44) — ein voller Schnappschuss wöge bis 160 KB.
+ * Im Client gäbe es also gar keine Laufzeit-Listen, aus denen sich eine Kurve rechnen
+ * ließe. Das Ergebnis wiegt rund 400 Byte und hängt an `daten.kurve`; im Schnappschuss
+ * steht es nicht, damit es nicht zu einer zweiten Wahrheit wird.
+ *
+ * 🚨 Die Kurve zeigt den ZINS, nicht den Ertrag: `presetKombinationen` variiert je
+ * Variante nur einen Parameter (quelle.ts:132), die sieben Laufzeiten liegen alle beim
+ * Basisbetrag. Der Zins ist betragsneutral, der Ertrag nicht — eine Ertragskurve am
+ * falschen Betrag wäre schlicht gelogen.
+ */
+export function zinskurve(
+  def: DefLite,
+  varianten: VergleichVariante[],
+  spalteKey: string,
+  ohne?: { key: string; ist: KennWert },
+): Zinskurve | null {
+  const p = laufzeitParam(def);
+  if (!p || !varianten.length) return null;
+  const basis = varianten[0].params;
+  const punkte: KurveWert[] = [];
+
+  for (const o of p.optionen ?? []) {
+    const gesucht = paramSchluessel({ ...basis, [p.key]: String(o.wert) });
+    const v = varianten.find((x) => x.schluessel === gesucht);
+    if (!v) continue;
+    const werte = v.produkte
+      .filter((q) => !ohne || !(ohne.key in q.kennzahlen) || q.kennzahlen[ohne.key] !== ohne.ist)
+      .map((q) => q.kennzahlen[spalteKey])
+      .filter((w): w is number => typeof w === "number");
+    if (!werte.length) continue;
+    punkte.push({
+      wert: String(o.wert),
+      label: o.label,
+      kurz: kurzDauer(Number(o.wert), o.label),
+      best: Math.max(...werte),
+      schnitt: werte.reduce((a, b) => a + b, 0) / werte.length,
+    });
+  }
+
+  // Unter drei Punkten ist es keine Kurve, sondern eine Strecke.
+  return punkte.length >= 3 ? { punkte, paramKey: p.key, basis } : null;
+}
+
+function kurzDauer(m: number, label: string): string {
+  if (!Number.isFinite(m)) return label;
+  if (m < 12) return `${m} M.`;
+  return m % 12 ? `${m} M.` : `${m / 12} J.`;
 }

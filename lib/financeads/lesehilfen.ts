@@ -169,3 +169,55 @@ export function kreditgeber(feld: unknown): string | null {
   if (t === null || t.trim() === "") return null;
   return t.split(",")[0].trim() || null;
 }
+
+/**
+ * Wie oft der Zins gutgeschrieben wird — `interest_rate[].frequency`.
+ *
+ * 🚨 Der Handoff nimmt zwei Fälle an: „jährlich aufs Konto“ und „am Ende der Laufzeit“
+ * („… Festgeld & Eingaben“:220). Die API kennt drei, und alle drei kommen vor (gemessen
+ * am 15.09.2026 über 28 Angebote: Y 25 · Q 2 · M 1). Ein Angebot mit vierteljährlicher
+ * Ausschüttung als „am Ende“ zu beschriften wäre schlicht falsch.
+ *
+ * „U“ steht in `yield.frequency` für den Gesamtertrag und ist keine Zahlungsweise.
+ */
+export function zinszahlung(liste: unknown): string | null {
+  const f = text(pfad(erstes(liste), "frequency"));
+  if (f === "Y") return "jährlich";
+  if (f === "Q") return "vierteljährlich";
+  if (f === "M") return "monatlich";
+  if (f === "E") return "am Ende der Laufzeit";
+  return null;
+}
+
+/**
+ * Länder, deren Bonität nach dem Maßstab von Finanztip (Stand April 2026) für eine
+ * Anlage im Ausland trägt: S&P und Fitch mindestens AA, Moody's mindestens Aa2.
+ *
+ * 🚨 Der Prototyp setzt hier `TOP = ['DE','SE']` — zwei Länder aus Beispieldaten
+ * („… Festgeld & Eingaben“:211). Als Kriterium einer echten Liste wäre das eine erfundene
+ * Zahl: Österreich, die Niederlande, Dänemark, Finnland und Luxemburg erfüllen denselben
+ * Maßstab, Frankreich (heute AA−/Aa3) nicht mehr.
+ *
+ * Quelle: finanztip.de/festgeld (Länderauswahl), abgerufen 15.09.2026. Ändert sich ein
+ * Rating, ändert sich genau diese Zeile.
+ */
+const TOP_BONITAET = new Set(["DE", "AT", "NL", "LU", "DK", "FI", "SE"]);
+
+export function topBonitaet(iso: string | null): boolean | null {
+  return iso ? TOP_BONITAET.has(iso) : null;
+}
+
+/**
+ * Bis zu welchem Betrag die Einlagen gesichert sind.
+ *
+ * 🚨 `999999` ist kein Betrag, sondern die Marke „ohne Obergrenze“: dahinter stehen
+ * Institutssicherungen (BVR), die nicht den Kunden bis zu einer Grenze, sondern das
+ * Institut selbst schützen. 90.000 € ist dagegen echt — Schweden sichert in Kronen
+ * (gemessen: Klarna, 15.09.2026).
+ */
+export function schutzGrenze(max: unknown): string | null {
+  const v = zahl(max);
+  if (v === null) return null;
+  if (v >= 999999) return "ohne Obergrenze (Institutssicherung)";
+  return `bis ${v.toLocaleString("de-DE")} €`;
+}

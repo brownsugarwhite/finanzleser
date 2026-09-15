@@ -37,12 +37,19 @@ export interface AlleAngeboteProps {
 export default function AlleAngebote({
   def, z, haupt, total, best, hover, onHover, offen, onOeffnen, gemerkt, onMerken, stempel, herz, tempo,
 }: AlleAngeboteProps) {
-  const details = def.spalten.filter((s) => s !== haupt && s !== total);
+  const dritteDef = def.kursblatt?.dritteSpalte
+    ? def.spalten.find((s) => s.key === def.kursblatt!.dritteSpalte!.key)
+    : undefined;
+  // Dieselbe Regel wie bei Chips und Register: kennt der Schnappschuss die Kennzahl noch
+  // nicht, stünde hier eine Spalte voller Gedankenstriche.
+  const dritte = dritteDef && z.aktuelle.produkte.some((p) => dritteDef.key in p.kennzahlen) ? dritteDef : undefined;
+  const details = def.spalten.filter((s) => s !== haupt && s !== total && s !== dritte);
   const gesamt = z.aktuelle.produkte.length;
+  const ohneText = def.kursblatt?.ohne?.text;
 
   return (
-    <section className="kb-liste">
-      <b className="kb-liste__titel">Alle {gesamt} {def.mehrzahl}</b>
+    <section className="kb-liste" data-dritte={dritte ? "an" : "aus"}>
+      <b className="kb-liste__titel">Alle {gesamt - z.ausgeschlossen} {def.mehrzahl}</b>
 
       {z.chips.length > 0 && (
         <div className="kb-liste__filter">
@@ -63,7 +70,7 @@ export default function AlleAngebote({
         <span className="kb-liste__zahl">
           {z.zeilen.length === 0
             ? "Kein Angebot erfüllt alle Filter – einen Filter lösen."
-            : `${z.zeilen.length} von ${gesamt} ${dativ(def.mehrzahl)} · Zeile antippen für Details`}
+            : `${z.zeilen.length} von ${gesamt - z.ausgeschlossen} ${dativ(def.mehrzahl)} · Zeile antippen für Details`}
         </span>
         {def.sortierung.length > 1 && (
           <div className="kb-liste__sortieren" role="tablist" aria-label="Sortieren">
@@ -83,16 +90,20 @@ export default function AlleAngebote({
       </div>
 
       <div className="kb-liste__kopf">
-        <span className="kb-liste__kopf-namen">{def.einzahl} · Produkt</span>
+        {/* K:183 „Anbieter · Produkt" — die Spalte trägt beides, den Namen der Bank und
+            den des Tarifs. `def.einzahl` wäre hier falsch: das ist das Produkt, nicht der,
+            der es anbietet („Festgeldkonto · Produkt"). */}
+        <span className="kb-liste__kopf-namen">Anbieter · Produkt</span>
         <span className="kb-liste__kopf-rechts">{haupt.kurz ?? haupt.label}</span>
         {total && <span className="kb-liste__kopf-rechts kb-liste__kopf-total">{total.kurz ?? total.label}</span>}
+        {dritte && <span className="kb-liste__kopf-dritte">{dritte.kurz ?? dritte.label}</span>}
         <span />
       </div>
 
       {z.zeilen.slice(0, z.gezeigt).map((p, i) => (
         <Zeile
           key={p.id}
-          def={def} p={p} haupt={haupt} total={total} details={details}
+          def={def} p={p} haupt={haupt} total={total} dritte={dritte} details={details}
           maximum={z.maximum}
           ist={best?.id === p.id}
           hell={hover === p.id}
@@ -110,6 +121,16 @@ export default function AlleAngebote({
         <button type="button" className="kb-liste__mehr" onClick={z.zeigeAlle}>
           Alle {z.zeilen.length} {def.mehrzahl} zeigen
         </button>
+      )}
+
+      {/* Was aussortiert wurde, wird genannt — stilles Weglassen wäre eine Auswahl,
+          die niemand nachvollziehen kann (F:224). */}
+      {z.ausgeschlossen > 0 && ohneText && (
+        <p className="kb-liste__ausgeschlossen">
+          {z.ausgeschlossen === 1
+            ? `Ein weiteres Angebot ${ohneText} steht nicht in der Liste.`
+            : `${z.ausgeschlossen} weitere ${def.mehrzahl} ${ohneText} stehen nicht in der Liste.`}
+        </p>
       )}
     </section>
   );

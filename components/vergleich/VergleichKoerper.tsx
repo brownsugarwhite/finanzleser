@@ -11,6 +11,7 @@
  */
 import { holeVergleich } from "@/lib/financeads/holeVergleich";
 import { defLite } from "@/lib/financeads/registry";
+import { kennwertSpalte, zinskurve } from "@/lib/financeads/kursblatt";
 import Insel from "@/components/faden/kette/Insel";
 import VergleichEmbed from "@/components/vergleich/VergleichEmbed";
 import VergleichRechner from "@/components/vergleich/VergleichRechner";
@@ -38,12 +39,16 @@ export default async function VergleichKoerper({ slug, skin, mitSaeulen, beschre
       </div>
     );
   }
+  // Der Kursblatt-Satz ersetzt den Faden-Skin; die alte Seite behält ihre Liste.
+  const kursblatt = KURSBLATT_AKTIV && skin === "faden";
+  // Die Zinskurve muss HIER entstehen: sie braucht alle Laufzeit-Varianten, und genau die
+  // fallen in der nächsten Zeile weg. Rund 400 Byte statt sieben Produktlisten.
+  const kennwert = kursblatt && def.kursblatt?.band === "kurve" ? kennwertSpalte(def) : undefined;
+  const kurve = kennwert ? zinskurve(def, v.daten.varianten, kennwert.key, def.kursblatt?.ohne) : null;
   // 🚨 Nur die Voreinstellung reist ins HTML und in die Insel (SSR, Schnappschuss,
   // sessionStorage). Ein Snapshot mit allen Preset-Varianten wiegt bis 160 KB; die
   // anderen Kombinationen holt der Client von /api/vergleich-daten (aus dem Snapshot).
-  const daten = { ...v.daten, varianten: v.daten.varianten.slice(0, 1) };
-  // Der Kursblatt-Satz ersetzt den Faden-Skin; die alte Seite behält ihre Liste.
-  const kursblatt = KURSBLATT_AKTIV && skin === "faden";
+  const daten = { ...v.daten, varianten: v.daten.varianten.slice(0, 1), ...(kurve ? { kurve } : {}) };
   const werte = { def, quelle: v.quelle, daten, skin, mitSaeulen: !!mitSaeulen, kursblatt, beschreibung };
   return (
     <Insel typ="vergleich" arg={slug} werte={werte}>

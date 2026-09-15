@@ -12,6 +12,7 @@
  */
 import type { DefLite, SpalteDef, VergleichProdukt } from "@/lib/financeads/typen";
 import { formatKennwert } from "@/lib/financeads/format";
+import { mitVorzeichen } from "@/lib/financeads/kursblatt";
 import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
 import Stempel from "@/components/kursblatt/teile/Stempel";
 import { Logorahmen, MerkenKnopf, Punktzeile } from "@/components/kursblatt/teile/Kleinteile";
@@ -22,6 +23,8 @@ export interface ZeileProps {
   haupt: SpalteDef;
   /** Die Zahl rechts neben der Hauptzahl (Rate, Ertrag …). */
   total?: SpalteDef;
+  /** Dritte Spalte, wo die Registry eine vorsieht (Festgeld: Land). */
+  dritte?: SpalteDef;
   /** Was im aufgeklappten Fach steht. */
   details: SpalteDef[];
   maximum: number;
@@ -37,11 +40,13 @@ export interface ZeileProps {
 }
 
 export default function Zeile({
-  def, p, haupt, total, details, maximum, ist, hell, offen, gemerkt, stempel, animation,
+  def, p, haupt, total, dritte, details, maximum, ist, hell, offen, gemerkt, stempel, animation,
   onHover, onToggle, onMerken,
 }: ZeileProps) {
   const wert = p.kennzahlen[haupt.key];
   const anteil = typeof wert === "number" && maximum ? Math.max(8, (Math.abs(wert) / maximum) * 100) : 0;
+  const punktKey = def.kursblatt?.dritteSpalte?.punkt;
+  const dritterText = dritte ? formatKennwert(dritte, p.kennzahlen[dritte.key]) : "";
 
   return (
     <div
@@ -68,12 +73,26 @@ export default function Zeile({
         </div>
 
         <div className="kb__zeile-haupt">
-          <b>{formatKennwert(haupt, wert)}</b>
+          <b>{mitVorzeichen(haupt, wert)}</b>
           <i className="kb__zeile-balken" style={{ width: `${anteil}%` }} aria-hidden="true" />
-          {total && <span className="kb__zeile-total-eng">{formatKennwert(total, p.kennzahlen[total.key])} / {def.totalLabel?.split("/").pop()?.trim() ?? ""}</span>}
+          {/* Im schmalen Satz rücken Gesamtzahl und dritte Spalte unter die Hauptzahl
+              (K:519 / F:148) — dieselbe Zeile, nur untereinander statt nebeneinander. */}
+          {total && (
+            <span className="kb__zeile-total-eng">
+              {formatKennwert(total, p.kennzahlen[total.key])}
+              {dritte ? ` · ${dritterText}` : ` / ${def.totalLabel?.split("/").pop()?.trim() ?? ""}`}
+            </span>
+          )}
         </div>
 
         {total && <b className="kb__zeile-total">{formatKennwert(total, p.kennzahlen[total.key])}</b>}
+
+        {dritte && (
+          <span className="kb__zeile-dritte">
+            <i data-gut={punktKey && p.kennzahlen[punktKey] === true ? "an" : "aus"} aria-hidden="true" />
+            {dritterText}
+          </span>
+        )}
 
         <PilleCTA
           text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein

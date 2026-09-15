@@ -15,7 +15,7 @@ import Setzzeile from "@/components/kursblatt/eingabe/Setzzeile";
 import Register from "@/components/kursblatt/eingabe/Register";
 import Segment from "@/components/kursblatt/teile/Segment";
 import { bausteinFuer, linealMasse } from "@/lib/financeads/kursblatt";
-import type { DefLite, ParamDef, VergleichQuelle } from "@/lib/financeads/typen";
+import type { AuswahlDef, DefLite, ParamDef, VergleichQuelle } from "@/lib/financeads/typen";
 
 /** „1.000 – 100.000 €“ (K:69) — was der Parameter überhaupt zulässt. */
 function bereichText(p: ParamDef): string | undefined {
@@ -29,16 +29,25 @@ export interface IhreAngabenProps {
   params: Record<string, string | number>;
   onParam: (key: string, wert: string | number) => void;
   /** Lebende Beizeile je Register-Eintrag („bis 3,45 %“, „4 Angebote“). */
-  meta?: (paramKey: string, wert: string) => string | undefined;
+  meta?: (key: string, wert: string) => string | undefined;
+  /**
+   * Register, die nur die vorhandene Liste eingrenzen (Festgeld: Einlagensicherung).
+   * Sie stehen im selben Raster wie die Parameter — für den Leser ist beides „Ihre
+   * Angaben“; dass das eine einen Abruf auslöst und das andere nicht, ist unsere Sorge.
+   */
+  register?: AuswahlDef[];
+  auswahl?: Record<string, string>;
+  onAuswahl?: (key: string, wert: string) => void;
 }
 
-export default function IhreAngaben({ def, quelle, params, onParam, meta }: IhreAngabenProps) {
+export default function IhreAngaben({ def, quelle, params, onParam, meta, register = [], auswahl = {}, onAuswahl }: IhreAngabenProps) {
   // Was die Redaktion festgelegt hat, ist keine Angabe des Lesers.
   const offen = def.params.filter((p) => !p.fest && quelle.fest[p.key] === undefined);
-  if (!offen.length) return null;
+  if (!offen.length && !(onAuswahl && register.length)) return null;
 
   const lineale = offen.filter((p) => bausteinFuer(p) === "lineal");
   const rest = offen.filter((p) => bausteinFuer(p) !== "lineal");
+  const nebenRegister = onAuswahl ? register : [];
 
   return (
     <section className="kb-angaben">
@@ -73,7 +82,7 @@ export default function IhreAngaben({ def, quelle, params, onParam, meta }: Ihre
         );
       })}
 
-      {rest.length > 0 && (
+      {(rest.length > 0 || nebenRegister.length > 0) && (
         <div className="kb__zweispalt kb-angaben__paar">
           {rest.map((p) => {
             const baustein = bausteinFuer(p);
@@ -117,6 +126,17 @@ export default function IhreAngaben({ def, quelle, params, onParam, meta }: Ihre
               />
             );
           })}
+
+          {nebenRegister.map((a) => (
+            <Register
+              key={a.key}
+              label={a.label}
+              wert={auswahl[a.key] ?? a.standard}
+              onWert={(v) => onAuswahl?.(a.key, v)}
+              optionen={a.optionen.map((o) => ({ wert: o.wert, label: o.label, meta: meta?.(a.key, o.wert) }))}
+              werkzeug="tuerkis"
+            />
+          ))}
         </div>
       )}
     </section>

@@ -135,19 +135,61 @@ const tip = await page.evaluate(() => { const t = document.querySelector(".kb-ba
 ok("Punkt zeigt Anbieter und zwei Zahlen", tip.op === "1" && tip.text.split("·").length >= 2, tip.text);
 ok("Punkt wächst beim Überfahren auf 16 px", tip.hell === "16px", String(tip.hell));
 
-// ── Festgeld: andere Bausteine, gedrehte Achse ────────────────────────────────────
+// ── Festgeld: andere Bausteine, Zinskurve statt Streuband ─────────────────────────
 await page.goto(BASE + FESTGELD, { waitUntil: "networkidle" });
 await page.waitForTimeout(800);
 const fg = await page.evaluate(() => {
   const a = document.querySelector(".kb-angaben");
+  const k = document.querySelector(".kb-kurve");
   return { lineale: a.querySelectorAll(".kb-lineal").length, setz: a.querySelectorAll(".kb-setzzeile").length,
            reg: a.querySelectorAll(".kb-register").length,
-           enden: [...document.querySelectorAll(".kb-band__ende")].map((e) => e.textContent).join("/"),
+           band: document.querySelectorAll(".kb-band").length,
+           viewBox: k?.querySelector("svg")?.getAttribute("viewBox"),
+           punkte: k ? k.querySelectorAll(".kb-kurve__punkt").length : 0,
+           aktiv: k ? k.querySelectorAll('.kb-kurve__punkt[data-ist="an"]').length : 0,
+           gross: document.querySelector(".kb-podest__zins")?.textContent,
+           grossLabel: document.querySelector(".kb-podest__zins-label")?.textContent,
+           plaetze: document.querySelectorAll(".kb-platz").length,
            satz: document.querySelector(".kb-markt h2").textContent.replace(/\s+/g, " ").trim() };
 });
-ok("Festgeld: Setzzeile und Register statt Lineal (F:63-64)", fg.lineale === 0 && fg.setz === 1 && fg.reg >= 1, JSON.stringify(fg).slice(0, 60));
-ok("Festgeld: Enden „wenig/viel“ (mehr Ertrag ist besser)", fg.enden === "wenig/viel", fg.enden);
-ok("Überschrift nennt Betrag und Laufzeit als Satz", / über /.test(fg.satz), fg.satz.slice(-40));
+ok("Festgeld: Setzzeile und Register statt Lineal (F:63-64)", fg.lineale === 0 && fg.setz === 1 && fg.reg >= 1, `${fg.lineale} Lineale, ${fg.setz} Setzzeilen, ${fg.reg} Register`);
+ok("Festgeld: Zinskurve 640×210 statt Streuband (F:75)", fg.band === 0 && fg.viewBox === "0 0 640 210", `${fg.band} Bänder, viewBox ${fg.viewBox}`);
+ok("ein Punkt je Laufzeit, genau einer gewählt", fg.punkte >= 3 && fg.aktiv === 1, `${fg.punkte} Punkte, ${fg.aktiv} gewählt`);
+ok("Überschrift fragt nach der Bindung (F:71)", /^Lohnt sich länger binden\?/.test(fg.satz), fg.satz.slice(0, 60));
+ok("Gewinner: groß der Zins, nur ein Platz (F:118, F:105)", /^\d+,\d+ %$/.test(fg.gross || "") && /p\. a\./.test(fg.grossLabel || "") && fg.plaetze === 0, `${fg.gross} ${fg.grossLabel} · ${fg.plaetze} weitere`);
+
+// Ein freier Betrag geht an die Datenroute; die Laufzeit danach ebenso. Währenddessen
+// muss der letzte Stand stehen bleiben — nicht die Voreinstellung des Schnappschusses.
+const feld = page.locator(".kb-setzzeile input").first();
+await feld.click(); await feld.fill("23.500");
+await Promise.all([page.waitForResponse((r) => r.url().includes("/api/vergleich-daten/") && r.status() === 200, { timeout: 30000 }), feld.press("Enter")]);
+await page.waitForTimeout(900);
+/**
+ * Zeuge ist der Zinsertrag des Gewinners: er hängt an `aktuelle`, springt (statt wie ein
+ * Zählwerk hochzuzählen) und unterscheidet alle drei Zustände — 23.500 € über 1 Jahr,
+ * 23.500 € über 5 Jahre und die Voreinstellung 20.000 € über 1 Jahr.
+ * Die Anzahl der Angebote taugt NICHT: sie ist bei 20.000 € und 23.500 € zufällig gleich.
+ */
+const gesamt = () => document.querySelector(".kb-podest__raster .kb__punktzeile-v").textContent.replace(/\D+/g, "");
+const vorKlick = await page.evaluate(gesamt);
+const zwischen = [];
+const sammeln = setInterval(async () => {
+  try { zwischen.push(await page.evaluate(gesamt)); } catch { /* Seite lädt */ }
+}, 100);
+await Promise.all([
+  page.waitForResponse((r) => r.url().includes("/api/vergleich-daten/") && r.status() === 200, { timeout: 30000 }),
+  page.locator('.kb-kurve__punkt[data-ist="aus"]').last().click(),
+]);
+clearInterval(sammeln);
+await page.waitForTimeout(1000);
+const nachKlick = await page.evaluate(() => ({
+  gesamt: document.querySelector(".kb-podest__raster .kb__punktzeile-v").textContent.replace(/\D+/g, ""),
+  betrag: document.querySelector(".kb-setzzeile input").value,
+}));
+ok("freier Betrag überlebt den Laufzeitwechsel", /23\.?500/.test(nachKlick.betrag), nachKlick.betrag);
+ok("beim Nachladen bleibt der letzte Stand stehen, nicht die Voreinstellung",
+  zwischen.length > 0 && zwischen.every((w) => w === vorKlick || w === nachKlick.gesamt),
+  `${vorKlick} → ${[...new Set(zwischen)].join(" / ")} → ${nachKlick.gesamt} (${zwischen.length} Messungen)`);
 
 // ── schmaler Satz ─────────────────────────────────────────────────────────────────
 await page.setViewportSize({ width: 390, height: 1200 });
@@ -156,11 +198,14 @@ const eng = await page.evaluate(() => ({
   ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth,
   kennCols: getComputedStyle(document.querySelector(".kb-kennzahlen")).gridTemplateColumns.split(" ").length,
   grossStart: getComputedStyle(document.querySelector('.kb-kennzahl[data-gross="an"]')).gridColumnStart,
-  bestRechts: Math.round(document.querySelector(".kb-band__best").getBoundingClientRect().right),
+  // Auf der Festgeldseite steht die Kurve; ihre Achsenbeschriftung ist der Kandidat, der
+  // aus dem Satz laufen könnte (die Bestwert-Beschriftung des Bands prüft die Kreditseite).
+  achseRechts: Math.round(Math.max(...[...document.querySelectorAll(".kb-kurve__achse")].map((e) => e.getBoundingClientRect().right))),
+  achseKurz: [...document.querySelectorAll(".kb-kurve__achse")].every((e) => /\d (M|J)\.$/.test(e.textContent)),
 }));
 ok("390 px ohne waagerechten Überlauf", eng.ueberlauf === 0, `${eng.ueberlauf} px`);
 ok("390 px: Kennzahlen zweispaltig, die große über beide", eng.kennCols === 2 && eng.grossStart === "1");
-ok("Bestwert-Beschriftung bleibt im Satz", eng.bestRechts <= 390, `rechte Kante ${eng.bestRechts}`);
+ok("390 px: Achsenbeschriftung kurz und im Satz (F:239)", eng.achseKurz && eng.achseRechts <= 390, `rechte Kante ${eng.achseRechts}`);
 ok("keine Konsolenfehler", fehler.length === 0, fehler.slice(0, 2).join(" | "));
 
 await browser.close();

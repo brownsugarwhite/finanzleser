@@ -13,7 +13,7 @@
  * keine Klassennamen.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { DefLite, FilterDef, SpalteDef, VergleichDaten, VergleichProdukt, VergleichQuelle, VergleichVariante } from "./typen.ts";
+import type { AuswahlDef, DefLite, FilterDef, KursblattDef, SpalteDef, VergleichDaten, VergleichProdukt, VergleichQuelle, VergleichVariante } from "./typen.ts";
 import { paramSchluessel, sortiere, varianteErgaenzen } from "./normalisieren.ts";
 import { useSichtbeacon } from "@/components/vergleich/sichtbeacon";
 
@@ -62,6 +62,14 @@ export interface VergleichZustand {
   schalte: (key: string) => void;
   /** Wie viele Angebote jeder Filter übrig ließe — für die Zahl am Chip. */
   treffer: Record<string, number>;
+  /** Register von „Ihre Angaben“, die nur eingrenzen und keinen Abruf auslösen. */
+  register: AuswahlDef[];
+  auswahl: Record<string, string>;
+  setAuswahl: (key: string, wert: string) => void;
+  /** Wie viele Angebote jede Registerstufe übrig ließe — die Beizeile des Eintrags. */
+  auswahlTreffer: Record<string, Record<string, number>>;
+  /** Zeilen, die die Kursblatt-Regel `ohne` aussortiert hat — genannt, nicht verschwiegen. */
+  ausgeschlossen: number;
   alle: boolean;
   zeigeAlle: () => void;
   /** Gefiltert und sortiert. */
@@ -77,12 +85,18 @@ export interface VergleichZustand {
 }
 
 export function useVergleichZustand({
-  slug, def, quelle, daten,
+  slug, def, quelle, daten, ohne,
 }: {
   slug: string;
   def: DefLite;
   quelle: VergleichQuelle;
   daten: VergleichDaten;
+  /**
+   * Zeilen, die kein Angebot sind (Festgeld: 0 % Zinsen). Nur der Kursblatt-Satz reicht
+   * die Regel herein — die alte Liste bleibt unverändert, auch wenn ihre Kategorie sie
+   * in der Registry stehen hat.
+   */
+  ohne?: KursblattDef["ohne"];
 }): VergleichZustand {
   const standard = daten.varianten[0];
   const [params, setParams] = useState<Record<string, string | number>>(() => ({ ...standard.params }));
@@ -91,6 +105,10 @@ export function useVergleichZustand({
   const [fehler, setFehler] = useState<string | null>(null);
   const [sortKey, setSortKey] = useState(def.sortierung[0]?.key || def.bestwert?.key || "");
   const [filter, setFilter] = useState<Record<string, boolean>>({});
+  const register = useMemo(() => def.auswahl ?? [], [def.auswahl]);
+  const [auswahl, setAuswahlZustand] = useState<Record<string, string>>(
+    () => Object.fromEntries(register.map((a) => [a.key, a.standard])),
+  );
   const [alle, setAlle] = useState(false);
   const wurzel = useRef<HTMLDivElement>(null);
   const erlaubt = useMemo(
@@ -137,6 +155,11 @@ export function useVergleichZustand({
     setAlle(false);
   }, []);
 
+  const setAuswahl = useCallback((key: string, wert: string) => {
+    setAuswahlZustand((a) => ({ ...a, [key]: wert }));
+    setAlle(false);
+  }, []);
+
   // Den Hash erst im Effekt schreiben: Next patcht history.replaceState und setzt dabei
   // Router-Zustand — aus einem setState-Updater heraus wäre das ein „update while rendering".
   const hashGesetzt = useRef(false);
@@ -151,12 +174,38 @@ export function useVergleichZustand({
     history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
   }, [params, standard.params, erlaubt]);
 
-  const aktuelle = variante ?? standard;
+  /**
+   * 🚨 Während eine neue Kombination lädt, bleibt der LETZTE Stand stehen — nicht die
+   * Voreinstellung.
+   *
+   * Gemessen 15.09.2026: wer 23.500 € eingetippt und dann eine andere Laufzeit gewählt
+   * hat, sah für die Dauer des Abrufs wieder die Zahlen zu 20.000 € über ein Jahr, weil
+   * `variante` für den neuen Schlüssel noch null ist. Die Seite sprang also auf Werte,
+   * die niemand eingestellt hatte, und danach auf die richtigen. Der letzte Stand ist
+   * zwar auch nicht der neue, aber er ist der, von dem aus man weitergeklickt hat.
+   */
+  const letzte = useRef(standard);
+  if (variante) letzte.current = variante;
+  const aktuelle = variante ?? letzte.current;
   const spalten = def.spalten;
   const haupt = spalten.find((s) => s.key === def.bestwert?.key) || spalten[spalten.length - 1];
-  const mittel = useMemo(() => spalten.filter((s) => s !== haupt), [spalten, haupt]);
+  // 🚨 `nurDetails` gilt auch hier. Ohne diesen Filter stünden in der alten Liste alle
+  // Spalten, die eigentlich ins aufgeklappte Fach des Kursblatts gehören — beim Kredit
+  // wären das seit der Registry-Erweiterung elf statt vier (gemessen 15.09.2026).
+  const mittel = useMemo(() => spalten.filter((s) => s !== haupt && !s.nurDetails), [spalten, haupt]);
   const sortSpalte = spalten.find((s) => s.key === sortKey) || haupt;
   const richtung = sortSpalte?.richtung || "hoch";
+
+  // Wie bei den Chips: eine Stufe, deren Kennzahl in DIESEN Daten nicht vorkommt, würde
+  // die Liste kommentarlos auf null klemmen. Ein Schnappschuss von vor der Registry-
+  // Erweiterung kennt `land` und `bonitaet` noch nicht; bleiben unter zwei Stufen übrig,
+  // ist es keine Wahl mehr und das Register entfällt.
+  const registerNutzbar = useMemo(
+    () => register
+      .map((a) => ({ ...a, optionen: a.optionen.filter((o) => !o.kennzahl || aktuelle.produkte.some((p) => o.kennzahl! in p.kennzahlen)) }))
+      .filter((a) => a.optionen.length > 1),
+    [register, aktuelle.produkte],
+  );
 
   // Nur Chips, deren Kennzahl in den Daten vorkommt (siehe Kommentar oben).
   const chips = useMemo(
@@ -164,26 +213,54 @@ export function useVergleichZustand({
     [def.filter, aktuelle.produkte],
   );
 
+  // Die Regel `ohne` greift VOR allem anderen: eine Bank mit 0 % ist kein Angebot, das man
+  // erst wegfiltern müsste. Sie zählt deshalb auch nicht in den Chip-Trefferzahlen mit.
+  const gueltige = useMemo(() => {
+    if (!ohne) return aktuelle.produkte;
+    // Kennt der Schnappschuss die Kennzahl noch gar nicht, wird nichts aussortiert —
+    // sonst stünde nach einer Registry-Erweiterung eine leere Liste da.
+    if (!aktuelle.produkte.some((p) => ohne.key in p.kennzahlen)) return aktuelle.produkte;
+    return aktuelle.produkte.filter((p) => p.kennzahlen[ohne.key] !== ohne.ist);
+  }, [aktuelle.produkte, ohne]);
+  const ausgeschlossen = aktuelle.produkte.length - gueltige.length;
+
   const trifft = useCallback(
-    (p: VergleichProdukt, aktiv: Record<string, boolean>) =>
-      chips.every((f) => !aktiv[f.key] || p.kennzahlen[f.key] === f.wert),
-    [chips],
+    (p: VergleichProdukt, aktiv: Record<string, boolean>, stufen: Record<string, string>) =>
+      chips.every((f) => !aktiv[f.key] || p.kennzahlen[f.key] === f.wert) &&
+      registerNutzbar.every((a) => {
+        const o = a.optionen.find((x) => x.wert === (stufen[a.key] ?? a.standard));
+        return !o?.kennzahl || p.kennzahlen[o.kennzahl] === o.ist;
+      }),
+    [chips, registerNutzbar],
   );
 
   const zeilen = useMemo(() => {
-    const liste = aktuelle.produkte.filter((p) => trifft(p, filter));
+    const liste = gueltige.filter((p) => trifft(p, filter, auswahl));
     return def.klasse === "A" && sortKey ? sortiere(liste, sortKey, richtung) : liste;
-  }, [aktuelle.produkte, filter, trifft, def.klasse, sortKey, richtung]);
+  }, [gueltige, filter, auswahl, trifft, def.klasse, sortKey, richtung]);
 
   // Was ein Chip übrig ließe, wenn man ihn ZUSÄTZLICH anlegt — die Zahl daneben soll
   // sagen, worauf man sich einlässt, nicht wie viele es insgesamt gibt.
   const treffer = useMemo(() => {
     const out: Record<string, number> = {};
     for (const f of chips) {
-      out[f.key] = aktuelle.produkte.filter((p) => trifft(p, { ...filter, [f.key]: true })).length;
+      out[f.key] = gueltige.filter((p) => trifft(p, { ...filter, [f.key]: true }, auswahl)).length;
     }
     return out;
-  }, [aktuelle.produkte, chips, filter, trifft]);
+  }, [gueltige, chips, filter, auswahl, trifft]);
+
+  // F:226 — „n Angebote" neben jeder Registerstufe, damit man vor dem Umschalten sieht,
+  // was man sich einhandelt.
+  const auswahlTreffer = useMemo(() => {
+    const out: Record<string, Record<string, number>> = {};
+    for (const a of registerNutzbar) {
+      out[a.key] = {};
+      for (const o of a.optionen) {
+        out[a.key][o.wert] = gueltige.filter((p) => trifft(p, filter, { ...auswahl, [a.key]: o.wert })).length;
+      }
+    }
+    return out;
+  }, [gueltige, registerNutzbar, filter, auswahl, trifft]);
 
   const maximum = useMemo(() => {
     if (!haupt) return 0;
@@ -200,6 +277,7 @@ export function useVergleichZustand({
   return {
     wurzel, params, setParam, standard, aktuelle, laedt, fehler,
     sortKey, setSortKey, chips, filter, schalte, treffer,
+    register: registerNutzbar, auswahl, setAuswahl, auswahlTreffer, ausgeschlossen,
     alle, zeigeAlle: () => setAlle(true),
     zeilen, gezeigt, haupt, mittel, sortSpalte, maximum,
   };

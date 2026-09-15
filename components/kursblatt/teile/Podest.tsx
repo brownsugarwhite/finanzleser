@@ -15,14 +15,21 @@
  */
 import type { KursblattDef, SpalteDef, VergleichProdukt } from "@/lib/financeads/typen";
 import { formatKennwert } from "@/lib/financeads/format";
+import { mitVorzeichen } from "@/lib/financeads/kursblatt";
 import PilleCTA from "./PilleCTA";
 import Stempel from "./Stempel";
 import { Logorahmen, MerkenKnopf, Punktzeile, StrichLink } from "./Kleinteile";
 
 export interface PodestProps {
   haupt: SpalteDef;
-  /** Die übrigen Spalten — sie füllen die Punktführung rechts. */
-  neben: SpalteDef[];
+  /**
+   * Die Zahl, die groß über dem Namen steht. Beim Kredit ist das der Bestwert selbst
+   * (der Effektivzins ordnet UND kennzeichnet), beim Festgeld nicht: sortiert wird nach
+   * dem Ertrag in Euro, groß steht der Zins (F:118). Fehlt sie, ist es `haupt`.
+   */
+  gross?: SpalteDef;
+  /** Kandidaten der Punktführung rechts (`podestSpalten`); es stehen die ersten drei mit Wert. */
+  zeilenSpalten: SpalteDef[];
   zeilen: VergleichProdukt[];
   best?: VergleichProdukt;
   kursblatt?: KursblattDef;
@@ -62,9 +69,25 @@ function Haken() {
 }
 
 export default function Podest({
-  haupt, neben, zeilen, best, kursblatt, params, gemerkt, onMerken, mitte, spalte, stempel, herz,
+  haupt, gross, zeilenSpalten, zeilen, best, kursblatt, params, gemerkt, onMerken, mitte, spalte, stempel, herz,
 }: PodestProps) {
   if (!best) return null;
+  const kopfzahl = gross ?? haupt;
+  const kopfText = formatKennwert(kopfzahl, best.kennzahlen[kopfzahl.key]);
+  /**
+   * Ein Vorteil, der nur die große Zahl wiederholt, ist keiner: „✓ 3,40% Zinsen“ direkt
+   * unter „3,40 %“. financeads liefert solche Zeilen regelmäßig als ersten `benefit`
+   * (gemessen 15.09.2026 bei Festgeld und Kredit) — sie fallen hier heraus, alle anderen
+   * bleiben unverändert stehen.
+   */
+  const zahlIm = (t: string) => (t.match(/\d+[.,]?\d*/g) || []).join("|");
+  const vorteile = best.vorteile.filter((v) => zahlIm(v) === "" || zahlIm(v) !== zahlIm(kopfText));
+  // Eine Punktführung, die auf „–“ endet, sagt nichts. Kennt ein Angebot die Zahl nicht,
+  // rückt die nächste Spalte nach.
+  const punktzeilen = zeilenSpalten
+    .map((s) => ({ s, v: mitVorzeichen(s, best.kennzahlen[s.key]) }))
+    .filter((x) => x.v !== "–")
+    .slice(0, 3);
   const plaetze = kursblatt?.podest === 1 ? [] : zeilen.filter((p) => p.id !== best.id).slice(0, 2);
   const titel = plaetze.length ? "Die drei Besten für Ihre Angaben" : "Das beste Angebot für Ihre Angaben";
   const anim = (name: string, dauer: string, verzug = "") => (name === "none" ? undefined : { animation: `${name} ${dauer} var(--kb-kurve) ${verzug}both` });
@@ -97,12 +120,12 @@ export default function Podest({
               </div>
             </div>
             <div className="kb-podest__zahl">
-              <span className="kb-podest__zins">{formatKennwert(haupt, best.kennzahlen[haupt.key])}</span>
-              <span className="kb-podest__zins-label">{haupt.label}</span>
+              <span className="kb-podest__zins">{kopfText}</span>
+              <span className="kb-podest__zins-label">{kopfzahl.label}</span>
             </div>
-            {best.vorteile.length > 0 && (
+            {vorteile.length > 0 && (
               <div className="kb-podest__merkmale">
-                {best.vorteile.map((v) => (
+                {vorteile.map((v) => (
                   <span key={v}><Haken />{v}</span>
                 ))}
               </div>
@@ -110,8 +133,10 @@ export default function Podest({
           </div>
 
           <div>
-            {neben.slice(0, 3).map((s, i) => (
-              <Punktzeile key={s.key} k={s.label} v={formatKennwert(s, best.kennzahlen[s.key])} gross={i === 0} />
+            {/* Die erste Zeile steht groß; ist sie ein Ertrag, steht sie in der
+                Werkzeugfarbe — Türkis im Vergleich (F:122). */}
+            {punktzeilen.map((x, i) => (
+              <Punktzeile key={x.s.key} k={x.s.label} v={x.v} gross={i === 0} ton={i === 0 && x.s.richtung === "hoch" && x.s.art === "geld" ? "werkzeug" : undefined} />
             ))}
             <div className="kb-podest__aktionen">
               <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung href={best.link} rel="sponsored nofollow noopener" target="_blank" />
@@ -140,10 +165,10 @@ export default function Podest({
                   </div>
                 </div>
                 <div className="kb-platz__zahl">
-                  <span>{formatKennwert(haupt, p.kennzahlen[haupt.key])}</span>
-                  <small>{haupt.kurz ?? haupt.label}</small>
+                  <span>{formatKennwert(kopfzahl, p.kennzahlen[kopfzahl.key])}</span>
+                  <small>{kopfzahl.kurz ?? kopfzahl.label}</small>
                 </div>
-                {neben[0] && <Punktzeile k={neben[0].label} v={formatKennwert(neben[0], p.kennzahlen[neben[0].key])} gross />}
+                {punktzeilen[0] && <Punktzeile k={punktzeilen[0].s.label} v={mitVorzeichen(punktzeilen[0].s, p.kennzahlen[punktzeilen[0].s.key])} gross />}
                 {mehr && kursblatt?.mehrkosten && <Punktzeile k={kursblatt.mehrkosten.label} v={mehr} ton="warnung" />}
                 <div className="kb-platz__fuss">
                   <StrichLink text="Zum Anbieter" href={p.link} rel="sponsored nofollow noopener" target="_blank" />

@@ -14,14 +14,21 @@
  * Zwilling `financeads-registry.js`. Wer hier Parameter ändert, lässt den Export laufen.
  */
 import type { ApiProdukt, DefLite, Gruppe, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
-import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte, zweiDrittelZins, giltFuer, spanneText, kreditgeber } from "./lesehilfen.ts";
+import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte, zweiDrittelZins, giltFuer, spanneText, kreditgeber, zinszahlung, topBonitaet, schutzGrenze } from "./lesehilfen.ts";
 
 // ─── wiederkehrende Bausteine ─────────────────────────────────────────────────────────
 
 const P = {
   anlage: (standard: number, presets: number[]): ParamDef => ({ key: "average_balance", label: "Anlagebetrag", typ: "zahl", standard, einheit: "€", min: 500, max: 1000000, schritt: 500, presets }),
-  monate: (standard: number, presets: number[]): ParamDef => ({ key: "months", label: "Laufzeit", typ: "wahl", standard, einheit: "Monate", optionen: presets.map((m) => ({ wert: String(m), label: m === 1 ? "1 Monat" : `${m} Monate` })), presets }),
+  monate: (standard: number, presets: number[]): ParamDef => ({ key: "months", label: "Anlagedauer", typ: "wahl", standard, einheit: "Monate", optionen: presets.map((m) => ({ wert: String(m), label: dauerLabel(m) })), presets }),
 };
+
+/** „3 Monate“, „1 Jahr“, „5 Jahre“ — ab zwölf Monaten zählt man in Jahren (F:221). */
+function dauerLabel(m: number): string {
+  if (m < 12) return m === 1 ? "1 Monat" : `${m} Monate`;
+  if (m % 12) return `${m} Monate`;
+  return m === 12 ? "1 Jahr" : `${m / 12} Jahre`;
+}
 
 const S = {
   sicherung: { key: "sicherung", label: "Einlagensicherung", kurz: "Sicherung", art: "text", schmal: true } satisfies SpalteDef,
@@ -33,7 +40,7 @@ function sicherung(p: ApiProdukt): string | null {
   if (!iso) return name;
   return iso === "DE" ? "Deutschland" : LAND[iso] || iso;
 }
-const LAND: Record<string, string> = { AT: "Österreich", NL: "Niederlande", FR: "Frankreich", ES: "Spanien", IT: "Italien", MT: "Malta", LU: "Luxemburg", SE: "Schweden", LV: "Lettland", LT: "Litauen", EE: "Estland", PT: "Portugal", BE: "Belgien", IE: "Irland", CZ: "Tschechien", PL: "Polen", HR: "Kroatien", SK: "Slowakei", BG: "Bulgarien", CY: "Zypern", GB: "Großbritannien" };
+const LAND: Record<string, string> = { AT: "Österreich", NL: "Niederlande", FR: "Frankreich", ES: "Spanien", IT: "Italien", MT: "Malta", LU: "Luxemburg", SE: "Schweden", LV: "Lettland", LT: "Litauen", EE: "Estland", PT: "Portugal", BE: "Belgien", IE: "Irland", CZ: "Tschechien", LI: "Liechtenstein", PL: "Polen", HR: "Kroatien", SK: "Slowakei", BG: "Bulgarien", CY: "Zypern", GB: "Großbritannien" };
 
 /** Zinsstaffel mit Neukunden-Aktion? (ein Satz gilt nur für die ersten n Monate) */
 function aktionMonate(liste: unknown): number | null {
@@ -107,21 +114,76 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "fixedsavingsaccounts", version: "v1", klasse: "A",
     gruppe: "anlegen",
     titel: "Festgeld", einzahl: "Festgeldkonto", mehrzahl: "Konten",
-    params: [P.anlage(20000, [5000, 10000, 20000, 50000]), P.monate(12, [6, 12, 24, 36, 60])],
+    // Sieben Laufzeiten statt fünf, Voreinstellung 36 Monate (F:199, F:224). Sie tragen
+    // zugleich die Zinskurve: jede ist eine Variante im Snapshot, aus der sich der beste
+    // und der durchschnittliche Zins je Laufzeit rechnen lässt.
+    params: [P.anlage(20000, [5000, 10000, 20000, 50000]), P.monate(36, [3, 6, 12, 24, 36, 48, 60])],
+    // Reihenfolge = Satzreihenfolge: Ertrag ordnet die Liste, der Zins kennzeichnet das
+    // Angebot, Endbetrag und Zinszahlung stehen beim Gewinner unter der Punktführung,
+    // das Land in der dritten Listenspalte.
     spalten: [
-      { key: "zins", label: "Zins p. a.", kurz: "Zins", art: "prozent", richtung: "hoch" },
-      { key: "ertrag", label: "Ertrag über die Laufzeit", kurz: "Ertrag", art: "geld", richtung: "hoch" },
+      { key: "ertrag", label: "Zinsertrag", kurz: "Ertrag", art: "geld", richtung: "hoch" },
+      { key: "zins", label: "Zinsen p. a.", kurz: "Zins p. a.", art: "prozent", richtung: "hoch" },
+      { key: "endbetrag", label: "Endbetrag", art: "geld", richtung: "hoch", schmal: true, nurDetails: true },
+      { key: "zahlung", label: "Zinszahlung", art: "text", schmal: true, nurDetails: true },
+      // `nurDetails` heißt „nicht in der Spaltenreihe" — das Land holt sich der Kursblatt-
+      // Satz gezielt als dritte Spalte, die alte Liste bleibt bei Zins und Sicherung.
+      { key: "land", label: "Land", art: "text", schmal: true, nurDetails: true },
       S.sicherung,
+      { key: "schutz_max", label: "Gesichert", art: "text", schmal: true, nurDetails: true },
+      { key: "bonitaet", label: "Land mit Top-Bonität", art: "haken", schmal: true, nurDetails: true },
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
-    filter: [{ key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" }],
+    // Die drei Sicherungsstufen sind laut Übergabe ein Register, kein Chip (F:65): eine
+    // Entscheidung mit drei Stufen, nicht drei unabhängige Haken.
+    auswahl: [{
+      key: "sicherheit", label: "Einlagensicherung", standard: "alle",
+      optionen: [
+        // Nicht „Alle EU-Länder" wie im Prototyp: gemessen ist ein Angebot aus
+        // Liechtenstein dabei — EWR, nicht EU. Die Beschriftung muss die Daten treffen.
+        { wert: "alle", label: "Alle Länder" },
+        { wert: "top", label: "Nur Top-Bonität", kennzahl: "bonitaet", ist: true },
+        { wert: "de", label: "Nur Deutschland", kennzahl: "land", ist: "DE" },
+      ],
+    }],
+    kennzahlen: [
+      { key: "best", label: "Zinsertrag mit dem Bestwert", unter: "über die gewählte Anlagedauer", art: "geld", ton: "werkzeug", formel: { art: "best", key: "ertrag" } },
+      // `{differenz}` setzt `kennzahlenBauen` ein — wie `{zins}` weiter unten.
+      { key: "schnitt", label: "Ø aller Angebote", unter: "Bestwert bringt {differenz} mehr", art: "geld", ton: "grau", formel: { art: "schnitt", key: "ertrag" } },
+      {
+        // 🚨 `{zins}` setzt `kennzahlenBauen` ein. Die Registry importiert `marktdaten.ts`
+        // bewusst NICHT: sie wird von `tools/financeads-registry-export.mjs` mit dem nackten
+        // Node-Loader gelesen, der den `@/`-Alias nicht kennt — der Export bräche.
+        key: "real", label: "Nach Inflation ({zins} p. a.) bleibt real",
+        unter: "echter Kaufkraftgewinn", art: "geld", ton: "gruen", gross: true,
+        formel: { art: "real", key: "ertrag", jahreAus: "months" },
+        negativ: { unter: "Kaufkraft sinkt trotz Zinsen" },
+      },
+    ],
     // Nur ein Gewinner: beim Festgeld ist der zweitbeste Ertrag keine Auszeichnung wert
     // („Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“:99, „Das beste Angebot").
-    kursblatt: { podest: 1, stempel: "Höchster Ertrag" },
+    kursblatt: {
+      band: "kurve", podest: 1, stempel: "Höchster Ertrag",
+      kennwert: "zins", dritteSpalte: { key: "land", punkt: "bonitaet" },
+      ohne: { key: "zins", ist: 0, text: "mit 0 % Zinsen" },
+    },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["festgeld", "festgeldkonto", "termingeld", "zinsen", "laufzeit", "sparbrief"],
-    lesen: zinsKennzahlen,
+    lesen: (p, params) => {
+      const werte = zinsKennzahlen(p);
+      const ertrag = typeof werte.ertrag === "number" ? werte.ertrag : null;
+      const betrag = Number(params.average_balance);
+      const iso = text(pfad(p.details, "deposit_protection.country_iso"));
+      return nurWerte({
+        ...werte,
+        endbetrag: ertrag !== null && Number.isFinite(betrag) ? betrag + ertrag : null,
+        zahlung: zinszahlung(pfad(p.conditions, "interest_rate")),
+        land: iso,
+        schutz_max: schutzGrenze(pfad(p.details, "deposit_protection.protected_max")),
+        bonitaet: topBonitaet(iso),
+      });
+    },
     begruendung: (p) => p.kennzahlen.sicherung === "Deutschland" ? "höchster Ertrag mit deutscher Einlagensicherung" : "höchster Ertrag über die Laufzeit",
   },
   {

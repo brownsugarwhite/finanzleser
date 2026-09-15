@@ -79,10 +79,29 @@ export interface FilterDef {
   wert: KennWert;
 }
 
+/**
+ * Ein Register in „Ihre Angaben“, das die Liste eingrenzt, ohne an die API zu gehen —
+ * anders als `params`, die einen neuen Abruf auslösen.
+ *
+ * Der Handoff verlangt die drei Sicherungsstufen des Festgelds ausdrücklich als Register,
+ * nicht als Chips („… Festgeld & Eingaben“:65): es ist eine Entscheidung mit drei Stufen,
+ * keine Sammlung unabhängiger Haken.
+ *
+ * Jede Stufe bringt ihre eigene Bedingung mit — „Nur Deutschland“ prüft das Land,
+ * „Nur Top-Bonität“ eine andere Kennzahl. Eine Stufe ohne `kennzahl` filtert nicht.
+ */
+export interface AuswahlOption {
+  wert: string;
+  label: string;
+  kennzahl?: string;
+  ist?: KennWert;
+}
+
 export interface AuswahlDef {
   key: string;
   label: string;
-  optionen: { wert: KennWert; label: string }[];
+  standard: string;
+  optionen: AuswahlOption[];
 }
 
 /**
@@ -119,6 +138,33 @@ export interface KursblattDef {
   stempel?: string;
   /** Zeile „Mehrkosten zum Bestwert“ auf den Plätzen 2 und 3. */
   mehrkosten?: { key: string; mal?: string; label: string };
+  /**
+   * Die Zahl, die das Produkt kennzeichnet: groß im Gewinnerblock und Achse der Zinskurve.
+   * Fehlt sie, ist es die Bestwert-Spalte.
+   *
+   * Beim Kredit fallen beide zusammen — der Effektivzins ordnet die Angebote UND
+   * kennzeichnet sie. Beim Festgeld nicht: sortiert wird nach dem Ertrag in Euro (der
+   * hängt am Betrag), gemeint ist aber der Zins („… Festgeld & Eingaben“:118).
+   */
+  kennwert?: string;
+  /**
+   * Dritte Spalte der Angebotsliste, zusätzlich zu Bestwert und Gesamtzahl.
+   * Beim Festgeld das Land — dort ist es die Sicherheitsaussage und gehört nicht in die
+   * aufgeklappten Details („… Festgeld & Eingaben“:140).
+   *
+   * `punkt` nennt eine Ja/Nein-Kennzahl, die den Punkt davor grün färbt (F:151).
+   */
+  dritteSpalte?: { key: string; punkt?: string };
+  /**
+   * Zeilen, die zwar in den Daten stehen, aber kein Angebot sind. Sie stehen nicht in der
+   * Liste; darunter steht, wie viele es waren und warum.
+   *
+   * Beim Festgeld führen drei von 28 Banken 0 % — ihre Konditionszeilen sind seit 2024
+   * bzw. 2025 unverändert (gemessen 15.09.2026). In einer nach Ertrag sortierten Liste
+   * sind sie kein Angebot, sondern Rauschen; sie wegzulassen, ohne es zu sagen, wäre
+   * allerdings eine stille Auswahl.
+   */
+  ohne?: { key: string; ist: KennWert; text: string };
 }
 
 export type Gruppe = "anlegen" | "konto" | "kredit" | "versicherung";
@@ -241,6 +287,12 @@ export interface VergleichDaten {
   geladen: string;
   /** Hinweise von financeads (`data.notices`, deutsch). */
   hinweise: string[];
+  /**
+   * Zinskurve je Laufzeit — im Server aus allen Varianten gerechnet, bevor sie auf die
+   * Voreinstellung gekürzt werden (siehe `zinskurve` in kursblatt.ts). Steht NICHT im
+   * Schnappschuss in WordPress.
+   */
+  kurve?: { punkte: { wert: string; label: string; kurz: string; best: number; schnitt: number }[]; paramKey: string; basis: Record<string, string> };
 }
 
 /** Tagesreihe des Bestwerts je Kategorie — Rohstoff für den Zinsverlauf. */

@@ -11,6 +11,7 @@
  */
 import type { DefLite, KennzahlDef, SpalteDef, VergleichProdukt } from "./typen.ts";
 import { INFLATION_PA } from "./marktdaten.ts";
+import { formatKennwert } from "./format.ts";
 
 export interface KennzahlWert {
   key: string;
@@ -92,7 +93,12 @@ export function kennzahlenBauen(
     // Erträge tragen ihr Pluszeichen (F:91-93), Kosten nicht.
     if (!zeichen && haupt.richtung === "hoch" && (f.art === "best" || f.art === "schnitt")) zeichen = "+";
 
-    out.push({ key: k.key, label: k.label, unter, art: k.art, ton, gross: k.gross, wert, zeichen });
+    // Zwei Platzhalter, die die Registry nicht selbst ausrechnen kann: die Inflationsrate
+    // steht in config/rates.json (F:93), der Abstand zum Bestwert ergibt sich erst aus der
+    // Liste („Bestwert bringt 142 € mehr“, F:92).
+    const label = k.label.replace("{zins}", `${INFLATION_PA.toLocaleString("de-DE", { minimumFractionDigits: 1 })} %`);
+    const unterText = unter?.replace("{differenz}", formatKennwert({ ...haupt, ab: false }, Math.abs(bester - schnitt)));
+    out.push({ key: k.key, label, unter: unterText, art: k.art, ton, gross: k.gross, wert, zeichen });
   }
   return out;
 }
