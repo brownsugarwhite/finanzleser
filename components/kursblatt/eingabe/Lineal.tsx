@@ -1,0 +1,253 @@
+"use client";
+
+/**
+ * Lineal — der ziehbare Zollstock unter der festen Nadel.
+ *
+ * Vorlage: design_handoff_finanzleser_kursblatt/„FL Lineal.dc.html“ (Maße im Markup
+ * :17-36, Mechanik in der Logikklasse :39-89). Eingesetzt für Beträge und Laufzeiten:
+ * Kreditsumme 1.000–100.000 € (9 px/Schritt), Laufzeit 12–120 Monate (30 px),
+ * Rechnersumme 500–200.000 € (7 px).
+ *
+ * 🚨 `major` und `mittel` sind Multiplikatoren von `schritt`, keine absoluten Werte
+ * (FL Lineal:74): 20 × 500 € = 10.000 €, 2 × 6 Monate = 12 Monate.
+ *
+ * Zwei bewusste Abweichungen vom Prototyp, beide zugunsten von SSR und Gewicht:
+ *
+ * 1. **Kein ResizeObserver.** Der Prototyp setzt die Spur auf `left: 0` und rechnet
+ *    `offset = Breite/2 − x(wert)` — dafür muss er messen, also erst im Browser. Dieselbe
+ *    Geometrie ohne Messung: Spur auf `left: 50%`, dann `translateX(-x(wert))`. Damit
+ *    steht der Wert schon im gelieferten HTML unter der Nadel, ohne Sprung nach der
+ *    Hydration (FL Lineal:83).
+ * 2. **Striche als Hintergrund statt als Knoten.** Der Prototyp rendert je Schritt ein
+ *    `<i>` (FL Lineal:24-26). Bei 500–200.000 € in 500er-Schritten sind das 400 Knoten
+ *    für ein einziges Feld. Drei `linear-gradient`-Kacheln — eine je Strichhöhe — zeichnen
+ *    dieselbe Geometrie pixelgenau. Die Kachel ist genau eine Periode breit, sonst gäbe
+ *    es an der Kachelgrenze eine Naht.
+ */
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { aufSchritt, fmtDe, parseDe, schritte, vielfaches } from "@/lib/kursblatt/zahl";
+
+export type Werkzeug = "tuerkis" | "magenta" | "gruen" | "ink";
+
+export interface Marke {
+  wert: number;
+  label: string;
+}
+
+export interface LinealProps {
+  wert: number;
+  onWert: (v: number) => void;
+  min: number;
+  max: number;
+  schritt: number;
+  /** Bildpunkte je Schritt — bestimmt, wie weit man für einen Euro zieht. */
+  px: number;
+  /** Großer Strich mit Beschriftung alle `major × schritt`. */
+  major: number;
+  /** Mittlerer Strich alle `mittel × schritt`. 0 = keine. */
+  mittel?: number;
+  einheit?: string;
+  dez?: number;
+  marken?: Marke[];
+  /** Eigene id für die Verknüpfung Regler ↔ Eingabefeld; sonst aus `ariaLabel` gebildet. */
+  id?: string;
+  werkzeug?: Werkzeug;
+  /** Bedienhinweis unten rechts. Verschwindet nach der ersten Berührung. */
+  hinweis?: boolean;
+  ariaLabel: string;
+}
+
+const FARBE: Record<Werkzeug, string> = {
+  tuerkis: "var(--kb-tuerkis)",
+  magenta: "var(--kb-magenta)",
+  gruen: "var(--kb-gruen)",
+  ink: "var(--kb-ink)",
+};
+
+export default function Lineal({
+  wert, onWert, min, max, schritt, px, major, mittel = 0,
+  einheit = "", dez = 0, marken = [], id, werkzeug = "tuerkis", hinweis = true, ariaLabel,
+}: LinealProps) {
+  const [ziehen, setZiehen] = useState(false);
+  const [tick, setTick] = useState(0);
+  const [hinweisAn, setHinweisAn] = useState(true);
+  const [tippen, setTippen] = useState<string | null>(null);
+  const wurzel = useRef<HTMLDivElement>(null);
+  const start = useRef({ x: 0, wert: 0 });
+  /**
+   * 🚨 Bewusst KEIN useId(). Gemessen 15.09.2026: Server und Client vergaben im Faden
+   * verschiedene Präfixe („_R_9jin…“ gegen „_R_16ea…“), und React verwarf die Hydration
+   * mit „some attributes of the server rendered HTML didn't match“. Ein aus dem Label
+   * gebildeter Name ist auf beiden Seiten derselbe — und lesbar dazu.
+   */
+  const eingabeId = id ?? "kb-lineal-" + ariaLabel.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+  const setzen = useCallback(
+    (roh: number) => {
+      const neu = aufSchritt(roh, schritt, min, max, dez);
+      if (neu !== wert) {
+        onWert(neu);
+        setTick((t) => t + 1);
+      }
+    },
+    [dez, max, min, onWert, schritt, wert]
+  );
+
+  /**
+   * 🚨 Das Mausrad braucht einen eigenen Zuhörer. React hängt `wheel` passiv an die
+   * Wurzel — ein `preventDefault()` im `onWheel` bliebe wirkungslos und die Seite
+   * scrollte beim Verstellen mit.
+   */
+  useEffect(() => {
+    const el = wurzel.current;
+    if (!el) return;
+    const rad = (e: WheelEvent) => {
+      const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (!d) return;
+      e.preventDefault();
+      setzen(wert + (d > 0 ? schritt : -schritt));
+      setHinweisAn(false);
+    };
+    el.addEventListener("wheel", rad, { passive: false });
+    return () => el.removeEventListener("wheel", rad);
+  }, [schritt, setzen, wert]);
+
+  const anzahl = schritte(min, max, schritt);
+  const spurBreite = anzahl * px;
+  const x = ((wert - min) / schritt) * px;
+
+  // Beschriftete Striche: nur an Vielfachen von major × schritt (FL Lineal:74-76).
+  const grossAlle = major * schritt;
+  const erstesGross = Math.ceil(min / grossAlle) * grossAlle;
+  const schilder: { x: number; text: string; sichtbar: boolean }[] = [];
+  for (let v = erstesGross; v <= max; v += grossAlle) {
+    const sx = ((v - min) / schritt) * px;
+    // Das Schild unter der Nadel blendet aus, damit es den Wert nicht doppelt (FL Lineal:76).
+    schilder.push({ x: sx, text: fmtDe(v, dez), sichtbar: Math.abs(sx - x) >= 22 });
+  }
+  const mittelAlle = mittel ? mittel * schritt : 0;
+  const erstesMittel = mittelAlle ? Math.ceil(min / mittelAlle) * mittelAlle : 0;
+
+  const text = tippen ?? fmtDe(wert, dez) + (einheit ? ` ${einheit}` : "");
+  const farbe = FARBE[werkzeug];
+
+  const runter = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
+    start.current = { x: e.clientX, wert };
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setZiehen(true);
+    setHinweisAn(false);
+    e.currentTarget.focus({ preventScroll: true });
+  };
+  const bewegen = (e: React.PointerEvent) => {
+    if (!ziehen) return;
+    // Nach rechts ziehen heißt: die Skala wandert mit, die Nadel zeigt auf weniger.
+    setzen(start.current.wert - ((e.clientX - start.current.x) / px) * schritt);
+  };
+  const loslassen = () => setZiehen(false);
+  const taste = (e: React.KeyboardEvent) => {
+    const gross = e.shiftKey ? major : 1;
+    if (e.key === "ArrowRight" || e.key === "ArrowUp") { e.preventDefault(); setzen(wert + schritt * gross); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") { e.preventDefault(); setzen(wert - schritt * gross); }
+  };
+  const stopp = (e: React.PointerEvent) => e.stopPropagation();
+
+  return (
+    <div
+      ref={wurzel}
+      className={"kb-lineal" + (ziehen ? " kb-lineal--zieht" : "")}
+      data-hinweis={hinweisAn ? "an" : "aus"}
+      style={{ "--kb-lineal-farbe": farbe } as React.CSSProperties}
+    >
+      <div
+        className="kb-lineal__griff"
+        role="slider"
+        tabIndex={0}
+        aria-label={ariaLabel}
+        aria-valuemin={min}
+        aria-valuemax={max}
+        aria-valuenow={wert}
+        aria-valuetext={`${fmtDe(wert, dez)}${einheit ? " " + einheit : ""}`}
+        aria-controls={eingabeId}
+        onPointerDown={runter}
+        onPointerMove={bewegen}
+        onPointerUp={loslassen}
+        onPointerCancel={loslassen}
+        onKeyDown={taste}
+      >
+        <div className="kb-lineal__fenster">
+          <div
+            className="kb-lineal__spur"
+            style={{ width: spurBreite, "--kb-x": `${x}px` } as React.CSSProperties}
+          >
+            {marken.map((m) => {
+              const aktiv = Math.abs(m.wert - wert) < schritt / 2;
+              return (
+                <button
+                  key={m.wert}
+                  type="button"
+                  className={"kb-lineal__marke" + (aktiv ? " kb-lineal__marke--aktiv" : "")}
+                  style={{ left: ((m.wert - min) / schritt) * px }}
+                  onPointerDown={stopp}
+                  onClick={() => { setzen(m.wert); setHinweisAn(false); }}
+                >
+                  <span>{m.label}</span>
+                  <i aria-hidden="true" />
+                </button>
+              );
+            })}
+            <i className="kb-lineal__grundlinie" aria-hidden="true" />
+            <i
+              className="kb-lineal__striche"
+              aria-hidden="true"
+              style={{
+                "--kb-px": `${px}px`,
+                "--kb-gross-px": `${major * px}px`,
+                "--kb-gross-x": `${((erstesGross - min) / schritt) * px}px`,
+                "--kb-mittel-px": mittelAlle ? `${mittel * px}px` : "0px",
+                "--kb-mittel-x": mittelAlle ? `${((erstesMittel - min) / schritt) * px}px` : "0px",
+              } as React.CSSProperties}
+            />
+            {schilder.map((s) => (
+              <span
+                key={s.x}
+                className="kb-lineal__schild"
+                style={{ left: s.x, opacity: s.sichtbar ? 1 : 0 }}
+                aria-hidden="true"
+              >
+                {s.text}
+              </span>
+            ))}
+          </div>
+        </div>
+        <i className="kb-lineal__nadel" aria-hidden="true" />
+        <i className="kb-lineal__spitze" aria-hidden="true" />
+      </div>
+
+      <input
+        id={eingabeId}
+        className="kb-lineal__wert"
+        value={text}
+        inputMode="decimal"
+        aria-label={`${ariaLabel} eintippen`}
+        style={{ width: `${Math.max(5, text.length) + 2}ch`, animation: tick ? `fl-tick${tick % 2 ? "A" : "B"} .3s ease-out` : undefined }}
+        onPointerDown={stopp}
+        onFocus={(e) => { setTippen(String(wert).replace(".", ",")); setHinweisAn(false); requestAnimationFrame(() => e.target.select()); }}
+        onChange={(e) => setTippen(e.target.value)}
+        onBlur={() => { if (tippen !== null && tippen !== "") setzen(parseDe(tippen)); setTippen(null); }}
+        onKeyDown={(e) => { e.stopPropagation(); if (e.key === "Enter") e.currentTarget.blur(); }}
+      />
+
+      {hinweis && (
+        <span className="kb-lineal__hinweis" aria-hidden="true">
+          <i />
+          ziehen · Marke antippen · Zahl eintippen
+        </span>
+      )}
+    </div>
+  );
+}
+
+/** Nur für Tests: sitzt ein Strich auf einem großen Teilstrich? (FL Lineal:74) */
+export const istGross = (wert: number, major: number, schritt: number) => vielfaches(wert, major * schritt);

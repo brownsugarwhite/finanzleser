@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 import { ENTWURF_AKTIV } from "@/lib/faden/flag";
 import Zeitungskopf from "@/components/kursblatt/teile/Zeitungskopf";
 import Seitenreiter from "@/components/kursblatt/teile/Seitenreiter";
+import Bausteine from "./Bausteine";
 
 export const metadata: Metadata = {
   title: "Setzkasten · Kursblatt",
@@ -57,6 +58,14 @@ export default function KursblattSetzkasten() {
         </p>
       </section>
 
+      <section style={{ marginTop: 46, paddingTop: 16, borderTop: "2px solid var(--kb-werkzeug)" }}>
+        <span className="kb__kicker kb__kicker--werkzeug">
+          <i aria-hidden="true" />
+          Lineal
+        </span>
+        <Bausteine />
+      </section>
+
       <section style={{ marginTop: 46 }}>
         <span className="kb__kicker">Noch nicht gesetzt</span>
         <h2 className="kb__h3">Was hier nach und nach einzieht</h2>
@@ -66,7 +75,6 @@ export default function KursblattSetzkasten() {
         </p>
         <div className="kb__doppellinie" style={{ marginTop: 22, paddingTop: 12 }}>
           {[
-            ["Lineal", "Beträge und Laufzeiten mit Gefühl – Summe, Monate, Jahre"],
             ["Setzzeile", "alles, was man genau kennt – Gehalt, Miete, Kilometer, Datum"],
             ["Register", "Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum"],
             ["Drehring", "kleine Skalen mit festen Schritten – Laufzeit, Alter, Stunden"],

@@ -37,6 +37,7 @@
 
   /* Tinte-Abstufungen. Die Prozentzahl steht im Namen, damit die Handoff-Tabelle
      ohne Übersetzung lesbar bleibt. */
+  --kb-t45: rgba(51,74,39,.45);                 /* kleine Teilstriche des Lineals */
   --kb-t40: rgba(51,74,39,.4);                  /* Punktführung */
   --kb-t35: rgba(51,74,39,.35);
   --kb-t30: rgba(51,74,39,.3);
@@ -281,3 +282,105 @@
 @container kb (max-width: 559px) {
   .kb .kb__reiter { gap: 16px; }
 }
+
+/* ── Lineal (FL Lineal.dc.html:17-36) ─────────────────────────────────────────────── */
+.kb .kb-lineal {
+  position: relative; width: 100%; height: 118px;
+  user-select: none;
+  /* Eigener Container, damit der Bedienhinweis an der Breite DES LINEALS hängt und nicht
+     an der des Satzspiegels (FL Lineal:87 prüft `w >= 520`). */
+  container-type: inline-size; container-name: lineal;
+}
+.kb .kb-lineal__griff { position: absolute; inset: 0; touch-action: none; cursor: grab; outline: 0; }
+.kb .kb-lineal--zieht .kb-lineal__griff { cursor: grabbing; }
+.kb .kb-lineal__griff:focus-visible { outline: 2px solid var(--kb-gruen); outline-offset: 2px; }
+
+/* L:18 — die Spur läuft links und rechts aus, statt an einer Kante abzuschneiden. */
+.kb .kb-lineal__fenster {
+  position: absolute; left: 0; right: 0; top: 0; height: 76px; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+/* L:19 + :83 — im Prototyp `left:0` plus gemessener Versatz; hier `left:50%` und der Wert
+   als Verschiebung. Gleiche Geometrie, aber schon im gelieferten HTML richtig. */
+.kb .kb-lineal__spur {
+  position: absolute; left: 50%; top: 0; height: 76px;
+  transform: translateX(calc(-1 * var(--kb-x)));
+  transition: transform .55s var(--kb-kurve);
+}
+.kb .kb-lineal--zieht .kb-lineal__spur { transition: none; }
+
+.kb .kb-lineal__grundlinie { position: absolute; left: 0; right: 0; top: 36px; height: 1px; background: var(--kb-ink); }
+
+/* L:24-26 — drei Strichhöhen. Als Kachel statt als Knoten: eine Kachel je Periode,
+   sonst entstünde an der Kachelgrenze eine Naht. Reihenfolge = Stapelung von oben:
+   groß (18 px, Tinte) über mittel (12 px) über klein (7 px). */
+.kb .kb-lineal__striche {
+  position: absolute; left: 0; right: 0; top: 36px; height: 18px;
+  background-image:
+    linear-gradient(90deg, var(--kb-ink) 0 1px, transparent 1px),
+    linear-gradient(90deg, var(--kb-t45) 0 1px, transparent 1px),
+    linear-gradient(90deg, var(--kb-t45) 0 1px, transparent 1px);
+  background-size: var(--kb-gross-px) 18px, var(--kb-mittel-px) 12px, var(--kb-px) 7px;
+  background-position: var(--kb-gross-x) 0, var(--kb-mittel-x) 0, 0 0;
+  background-repeat: repeat-x;
+}
+
+/* L:27-29 — Beschriftung unter den großen Strichen; die unter der Nadel blendet aus. */
+.kb .kb-lineal__schild {
+  position: absolute; top: 58px; transform: translateX(-50%);
+  font: 500 11px var(--kb-sans); color: var(--kb-grau);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+  transition: opacity .3s;
+}
+
+/* L:20-22 — Marken oben auf der Spur. */
+.kb .kb-lineal__marke {
+  position: absolute; top: 0; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 0; background: transparent; padding: 4px 6px; cursor: pointer;
+  font: 500 11.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
+  transition: color .25s, transform .25s;
+}
+.kb .kb-lineal__marke:hover { transform: translateX(-50%) translateY(-2px); }
+.kb .kb-lineal__marke--aktiv { font-weight: 700; color: var(--kb-lineal-farbe); }
+.kb .kb-lineal__marke i { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid currentColor; }
+
+/* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht. */
+.kb .kb-lineal__nadel {
+  position: absolute; left: 50%; top: 26px; width: 2px; height: 30px;
+  background: var(--kb-lineal-farbe); transform: translateX(-50%);
+  box-shadow: 0 0 0 3px rgba(250, 249, 246, .9);
+}
+.kb .kb-lineal__spitze {
+  position: absolute; left: 50%; top: 22px; width: 0; height: 0; transform: translateX(-50%);
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid var(--kb-lineal-farbe);
+}
+
+/* L:34 — der Wert steht als Eingabefeld unter der Nadel, gestrichelt unterstrichen. */
+.kb .kb-lineal__wert {
+  position: absolute; left: 50%; top: 78px; transform: translateX(-50%); z-index: 2;
+  text-align: center; border: 0; border-bottom: 1px dashed var(--kb-t35);
+  background: transparent; font: 700 17px var(--kb-serif); color: var(--kb-lineal-farbe);
+  padding: 2px 0 3px; outline: 0; font-variant-numeric: tabular-nums; cursor: text;
+}
+.kb .kb-lineal__wert:focus { border-bottom: 1px solid var(--kb-ink); background: rgba(255, 255, 255, .7); }
+
+/* L:35 — Bedienhinweis mit pendelndem Strich; verschwindet nach der ersten Berührung. */
+.kb .kb-lineal__hinweis {
+  position: absolute; right: 0; top: 104px;
+  display: flex; align-items: center; gap: 6px;
+  font: italic 300 11.5px var(--kb-serif); color: var(--kb-grau);
+  transition: opacity .5s; pointer-events: none;
+}
+.kb .kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
+.kb .kb-lineal[data-hinweis="aus"] .kb-lineal__hinweis { opacity: 0; }
+/* L:87 — unter 520 px Breite ist kein Platz für den Hinweis. */
+@container lineal (max-width: 519px) {
+  .kb .kb-lineal__hinweis { opacity: 0; }
+}
+
+/* ── Feldkopf: Bezeichnung links, Bereich rechts (K:69, :73, :251, :256, :275) ────── */
+.kb .kb__feldkopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.kb .kb__feldkopf b { font: 600 15px var(--kb-serif); }
+.kb .kb__feldkopf span { font: 400 12px var(--kb-sans); color: var(--kb-grau); }
