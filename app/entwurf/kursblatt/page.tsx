@@ -61,7 +61,7 @@ export default function KursblattSetzkasten() {
       <section style={{ marginTop: 46, paddingTop: 16, borderTop: "2px solid var(--kb-werkzeug)" }}>
         <span className="kb__kicker kb__kicker--werkzeug">
           <i aria-hidden="true" />
-          Lineal
+          Lineal · Setzzeile · Register
         </span>
         <Bausteine />
       </section>
@@ -75,8 +75,6 @@ export default function KursblattSetzkasten() {
         </p>
         <div className="kb__doppellinie" style={{ marginTop: 22, paddingTop: 12 }}>
           {[
-            ["Setzzeile", "alles, was man genau kennt – Gehalt, Miete, Kilometer, Datum"],
-            ["Register", "Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum"],
             ["Drehring", "kleine Skalen mit festen Schritten – Laufzeit, Alter, Stunden"],
             ["Zählwerk", "Prozentwerte mit Nachkomma – Zins, Tilgung, Rendite"],
             ["Knopfmuster", "Pille, Stempel, Segment, Chip, Strich-Link, Merken"],
