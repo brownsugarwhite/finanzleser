@@ -16,7 +16,7 @@ function absolut(u: string | null | undefined): string | undefined {
   return s.replace(/^\/\//, "https://").replace(/([^:])\/\/+/g, "$1/");
 }
 
-export function normalisiereProdukt(def: KategorieDef, p: ApiProdukt): VergleichProdukt | null {
+export function normalisiereProdukt(def: KategorieDef, p: ApiProdukt, params: Record<string, string> = {}): VergleichProdukt | null {
   const b = p.base_data;
   if (!b || !b.id || !b.tracking?.url) return null;
   const vorteile = (p.benefits || [])
@@ -31,7 +31,7 @@ export function normalisiereProdukt(def: KategorieDef, p: ApiProdukt): Vergleich
     .map((i) => absolut(i.url))
     .filter((u): u is string => !!u)
     .slice(0, 2);
-  const kennzahlen = def.lesen(p);
+  const kennzahlen = def.lesen(p, params);
   const pflicht = kennzahlen.pflicht;
   if ("pflicht" in kennzahlen) delete kennzahlen.pflicht;
   const total = p.calculated_conditions?.total;
@@ -85,11 +85,13 @@ export function paramSchluessel(params: Record<string, string | number>): string
 
 export function normalisiereVariante(def: KategorieDef, params: Record<string, string | number>, antwort: ApiAntwort, limit = MAX_PRODUKTE): VergleichVariante {
   const roh = antwort.data?.products || [];
-  let produkte = roh.map((p) => normalisiereProdukt(def, p)).filter((p): p is VergleichProdukt => !!p);
-  if (def.bestwert) produkte = sortiere(produkte, def.bestwert.key, def.bestwert.richtung);
-  produkte = produkte.slice(0, limit);
   const p: Record<string, string> = {};
   for (const [k, v] of Object.entries(params)) if (v !== "" && v !== undefined && v !== null) p[k] = String(v);
+  // Die angefragten Werte gehören in `lesen`: manche Angebote sagen selbst, für welche
+  // Summen und Laufzeiten sie überhaupt gelten (Kredit, `interest_effective.requirements`).
+  let produkte = roh.map((x) => normalisiereProdukt(def, x, p)).filter((x): x is VergleichProdukt => !!x);
+  if (def.bestwert) produkte = sortiere(produkte, def.bestwert.key, def.bestwert.richtung);
+  produkte = produkte.slice(0, limit);
   const bestwert = bestwertId(produkte, def.bestwert);
   const best = produkte.find((x) => x.id === bestwert);
   return { schluessel: paramSchluessel(p), params: p, produkte, bestwert, bestwertGrund: best && def.begruendung ? def.begruendung(best) : undefined };

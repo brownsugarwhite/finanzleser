@@ -122,11 +122,15 @@ export default function VergleichRechner({ slug, def, quelle, daten, skin, mitSa
   const sortSpalte = spalten.find((s) => s.key === sortKey) || haupt;
   const richtung = sortSpalte?.richtung || "hoch";
 
+  // Die alte Liste kennt genau einen Umschalter. Seit das Kursblatt mehrere Chips zeigt,
+  // ist `def.filter` eine Liste — hier gilt der erste, damit sich an dieser Seite nichts ändert.
+  const schalter = def.filter?.[0];
+
   const zeilen = useMemo(() => {
     let liste = aktuelle.produkte;
-    if (filterAn && def.filter) liste = liste.filter((p) => p.kennzahlen[def.filter!.key] === def.filter!.wert);
+    if (filterAn && schalter) liste = liste.filter((p) => p.kennzahlen[schalter.key] === schalter.wert);
     return def.klasse === "A" && sortKey ? sortiere(liste, sortKey, richtung) : liste;
-  }, [aktuelle.produkte, filterAn, def.filter, def.klasse, sortKey, richtung]);
+  }, [aktuelle.produkte, filterAn, schalter, def.klasse, sortKey, richtung]);
 
   const maximum = useMemo(() => {
     if (!haupt) return 0;
@@ -157,12 +161,12 @@ export default function VergleichRechner({ slug, def, quelle, daten, skin, mitSa
         <VergleichSaeulen zeilen={zeilen} spalte={sortSpalte || haupt} maximum={maximum} titel={`${sortSpalte?.label || haupt.label} · die ersten ${Math.min(8, zeilen.length)} ${def.mehrzahl}`} />
       )}
 
-      {(def.filter || (def.klasse === "A" && def.sortierung.length > 1)) && (
+      {(schalter || (def.klasse === "A" && def.sortierung.length > 1)) && (
         <div className="vgl__filterzeile">
-          {def.filter && (
+          {schalter && (
             <button type="button" className="vgl__schalter" role="switch" aria-checked={filterAn} onClick={() => { setFilterAn((f) => !f); setAlle(false); }}>
               <span className="vgl__schalter-knopf" aria-hidden="true"><i /></span>
-              <span>{def.filter.label}</span>
+              <span>{schalter.label}</span>
             </button>
           )}
           {def.klasse === "A" && def.sortierung.length > 1 && (

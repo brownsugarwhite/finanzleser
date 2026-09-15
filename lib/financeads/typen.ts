@@ -63,6 +63,55 @@ export interface SpalteDef {
 
 export type KennWert = number | string | boolean | null;
 
+/** Ein Chip der Filterzeile: zeigt nur Zeilen, deren Kennzahl `wert` trifft. */
+export interface FilterDef {
+  key: string;
+  label: string;
+  wert: KennWert;
+}
+
+export interface AuswahlDef {
+  key: string;
+  label: string;
+  optionen: { wert: KennWert; label: string }[];
+}
+
+/**
+ * Wie eine Kennzahl aus der Angebotsliste entsteht. Bewusst deklarativ statt als
+ * Funktion: `DefLite` reist als JSON in die Insel und darf keine Funktionen tragen.
+ */
+export type KennzahlFormel =
+  | { art: "best" | "schnitt"; key: string }
+  /** Unterschied zwischen Durchschnitt und Bestwert, wahlweise mal einem Parameter (Monate). */
+  | { art: "differenz"; key: string; mal?: string }
+  /** Bestwert minus Kaufkraftverlust über `jahreAus` Monate. */
+  | { art: "real"; key: string; jahreAus: string };
+
+export interface KennzahlDef {
+  key: string;
+  label: string;
+  /** Beizeile unter der Zahl. */
+  unter?: string;
+  art: SpaltenArt;
+  ton: "werkzeug" | "grau" | "gruen";
+  /** Die dritte Kennzahl steht groß und nimmt bei schmalem Satz die volle Breite. */
+  gross?: boolean;
+  formel: KennzahlFormel;
+  /** Was gilt, wenn die Zahl negativ wird (Festgeld: Kaufkraft sinkt trotz Zinsen). */
+  negativ?: { unter: string };
+}
+
+export interface KursblattDef {
+  /** Streuung = ein Punkt je Angebot; Kurve = bester Wert je Laufzeit. */
+  band: "streuung" | "kurve";
+  /** Ein Gewinner (Festgeld) oder Gewinner plus Platz 2 und 3 (Kredit). */
+  podest: 1 | 3;
+  /** Aufdruck des Stempels: „Bestwert“, „Höchster Ertrag“. */
+  stempel: string;
+  /** Zeile „Mehrkosten zum Bestwert“ auf den Plätzen 2 und 3. */
+  mehrkosten?: { key: string; mal?: string; label: string };
+}
+
 export type Gruppe = "anlegen" | "konto" | "kredit" | "versicherung";
 
 export interface KategorieDef {
@@ -83,8 +132,21 @@ export interface KategorieDef {
   spalten: SpalteDef[];
   /** Kennzahl, nach der der Bestwert bestimmt wird; Klasse B hat keine. */
   bestwert?: { key: string; richtung: Richtung };
-  /** Der eine Umschalter der Filterzeile (Handoff: „nur mit Schlüsselverlust“): Zeilen, deren Kennzahl `wert` trifft. */
-  filter?: { key: string; label: string; wert: KennWert };
+  /**
+   * Umschalter der Filterzeile. Die alte Liste zeigt den ERSTEN als Schalter, das
+   * Kursblatt alle als Chips (Handoff „Nur mit: …“, K:170-175).
+   */
+  filter?: FilterDef[];
+  /**
+   * Auswahl mit mehr als zwei Stufen — im Kursblatt ein Register, nicht ein Chip
+   * (Handoff F:65: „Einlagensicherung: Alle EU-Länder / Nur Top-Bonität / Nur Deutschland“).
+   * `wert: null` heißt „alles zeigen“.
+   */
+  auswahl?: AuswahlDef[];
+  /** Die drei Kennzahlen unter dem Marktüberblick; fehlt sie, greift eine generische Vorgabe. */
+  kennzahlen?: KennzahlDef[];
+  /** Was das Kursblatt aus dieser Kategorie macht. */
+  kursblatt?: KursblattDef;
   /** Standard-Sortierung (Schlüssel aus `spalten`). */
   sortierung: { key: string; label: string }[];
   /** Beschriftung der Gesamtzahl rechts („Ertrag", „Beitrag / Jahr", „Rate / Monat"). */
@@ -93,8 +155,12 @@ export interface KategorieDef {
   suchwoerter: string[];
   /** Pflichthinweis unter der Liste (PAngV bei Krediten, Risikohinweis bei Krypto). */
   hinweis?: string;
-  /** Rohprodukt → Kennzahlen dieser Kategorie. Nur im Server/Skript aufgerufen. */
-  lesen: (p: ApiProdukt) => Record<string, KennWert>;
+  /**
+   * Rohprodukt → Kennzahlen dieser Kategorie. Nur im Server/Skript aufgerufen.
+   * `params` sind die angefragten Werte — nötig, wo das Angebot selbst sagt, für welche
+   * Summen und Laufzeiten es überhaupt gilt (Kredit: `interest_effective.requirements`).
+   */
+  lesen: (p: ApiProdukt, params: Record<string, string>) => Record<string, KennWert>;
   /** Kurze Begründung des Bestwerts für Leo („höchster Ertrag bei deutscher Einlagensicherung"). */
   begruendung?: (p: VergleichProdukt) => string;
 }
@@ -209,4 +275,4 @@ export interface ApiAntwort {
 }
 
 /** Serialisierbare Sicht auf eine KategorieDef — ohne Funktionen, reist in die Insel-Werte und zum Client. */
-export type DefLite = Pick<KategorieDef, "kategorie" | "klasse" | "gruppe" | "defekt" | "titel" | "einzahl" | "mehrzahl" | "params" | "spalten" | "bestwert" | "filter" | "sortierung" | "totalLabel" | "hinweis">;
+export type DefLite = Pick<KategorieDef, "kategorie" | "klasse" | "gruppe" | "defekt" | "titel" | "einzahl" | "mehrzahl" | "params" | "spalten" | "bestwert" | "filter" | "auswahl" | "kennzahlen" | "kursblatt" | "sortierung" | "totalLabel" | "hinweis">;

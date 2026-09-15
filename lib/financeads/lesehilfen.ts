@@ -96,3 +96,76 @@ export function nurWerte(o: Record<string, KennWert | undefined>): Record<string
   for (const [k, v] of Object.entries(o)) out[k] = v === undefined ? null : v;
   return out;
 }
+
+/**
+ * Der ⅔-Zins aus dem repräsentativen Beispiel nach § 6a PAngV.
+ *
+ * financeads führt dafür kein Feld; der Satz steht als Prosa in
+ * `details.representative_example.de`: „Mindestens 2 von 3 Kunden erhalten einen
+ * Effektivzins von höchstens 8,38 % …“. Am 15.09.2026 war er in allen 20 Autokredit-
+ * Angeboten vorhanden.
+ *
+ * 🚨 Eine Regex auf Pflichttext ist spröde. Greift sie nicht, gibt es `null` und die
+ * Detailzeile entfällt — nie einen geschätzten Ersatzwert. Lieber eine Zeile weniger
+ * als eine erfundene Zahl neben einem Kreditangebot.
+ */
+export function zweiDrittelZins(text: string | null): number | null {
+  if (!text) return null;
+  const roh = text.replace(/<[^>]+>/g, " ");
+  const m =
+    roh.match(/(?:h(?:ö|oe)chstens|maximal|bis\s+zu)\s+([\d.,]+)\s*%/i) ??
+    roh.match(/zwei\s*[-\s]?\s*Drittel[^%]{0,80}?([\d.,]+)\s*%/i) ??
+    roh.match(/2\s+von\s+3[^%]{0,80}?([\d.,]+)\s*%/i);
+  if (!m) return null;
+  const z = Number(m[1].replace(/\./g, "").replace(",", "."));
+  return Number.isFinite(z) ? z : null;
+}
+
+/**
+ * Gilt das Angebot für die angefragte Summe und Laufzeit?
+ *
+ * `interest_effective.requirements` nennt `loan_min/max` und `duration_months_min/max`.
+ * Gemessen am 15.09.2026: bei 20.000 € über 60 Monate galten **6 von 20** Autokrediten
+ * gar nicht — der Zins daneben gehört zu einer anderen Summe oder Laufzeit.
+ */
+export function giltFuer(anforderung: unknown, params: Record<string, string>): boolean {
+  const zw = (k: string) => zahl(pfad(anforderung, k));
+  const summe = Number(params.loan);
+  const monate = Number(params.duration_months);
+  const inSpanne = (v: number, min: number | null, max: number | null) =>
+    !Number.isFinite(v) || ((min === null || v >= min) && (max === null || v <= max));
+  return (
+    inSpanne(summe, zw("loan_min"), zw("loan_max")) &&
+    inSpanne(monate, zw("duration_months_min"), zw("duration_months_max"))
+  );
+}
+
+/** „5.000–35.000 €, 48–84 Monate“ — wofür der genannte Zins gilt. */
+export function spanneText(anforderung: unknown): string | null {
+  const zw = (k: string) => zahl(pfad(anforderung, k));
+  const teile: string[] = [];
+  const sMin = zw("loan_min"), sMax = zw("loan_max");
+  const mMin = zw("duration_months_min"), mMax = zw("duration_months_max");
+  const f = (v: number) => v.toLocaleString("de-DE");
+  if (sMin !== null || sMax !== null) teile.push(`${f(sMin ?? 0)}–${sMax !== null ? f(sMax) : "…"} €`);
+  if (mMin !== null || mMax !== null) teile.push(mMin === mMax ? `${mMin} Monate` : `${mMin ?? 0}–${mMax ?? "…"} Monate`);
+  return teile.length ? teile.join(", ") : null;
+}
+
+/**
+ * Der Kreditgeber hinter dem Angebot.
+ *
+ * `details.loan_provider` nennt ihn als Anschrift („Santander Consumer Bank,
+ * Santander-Platz 1, 41061 Mönchengladbach“). Für die Detailzeile reicht der Name bis
+ * zum ersten Komma.
+ *
+ * 🚨 Das Feld sagt NICHT, ob ein Vermittler dazwischensteht — gemessen am 15.09.2026 ist
+ * es bei Verivox und teylor leer, bei Maxda (einem Vermittler) dagegen gefüllt. Leer
+ * heißt: der Kreditgeber steht erst nach der Anfrage fest. Aus dieser Anschrift „Bank
+ * oder Vermittler“ abzuleiten wäre geraten.
+ */
+export function kreditgeber(feld: unknown): string | null {
+  const t = text(feld);
+  if (t === null || t.trim() === "") return null;
+  return t.split(",")[0].trim() || null;
+}

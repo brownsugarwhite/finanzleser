@@ -14,7 +14,7 @@
  * Zwilling `financeads-registry.js`. Wer hier Parameter ändert, lässt den Export laufen.
  */
 import type { ApiProdukt, DefLite, Gruppe, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
-import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte } from "./lesehilfen.ts";
+import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte, zweiDrittelZins, giltFuer, spanneText, kreditgeber } from "./lesehilfen.ts";
 
 // ─── wiederkehrende Bausteine ─────────────────────────────────────────────────────────
 
@@ -96,7 +96,7 @@ const KATEGORIEN: KategorieDef[] = [
       S.sicherung,
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
-    filter: { key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" },
+    filter: [{ key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" }],
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["tagesgeld", "tagesgeldkonto", "zinsen", "sparen", "sparkonto", "geld parken", "notgroschen"],
@@ -114,7 +114,7 @@ const KATEGORIEN: KategorieDef[] = [
       S.sicherung,
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
-    filter: { key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" },
+    filter: [{ key: "sicherung", label: "nur deutsche Einlagensicherung", wert: "Deutschland" }],
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
     totalLabel: "Ertrag",
     suchwoerter: ["festgeld", "festgeldkonto", "termingeld", "zinsen", "laufzeit", "sparbrief"],
@@ -139,7 +139,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "saldo", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
-    filter: { key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 },
+    filter: [{ key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 }],
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "kontofuehrung", label: "Kontoführung" }, { key: "dispozins", label: "Dispozins" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["girokonto", "konto", "kontoführung", "kontowechsel", "gehaltskonto", "dispo", "kostenloses konto", "studentenkonto", "schülerkonto", "kinderkonto"],
@@ -161,7 +161,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "saldo", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
-    filter: { key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 },
+    filter: [{ key: "kontofuehrung", label: "nur ohne Kontoführungsgebühr", wert: 0 }],
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "kontofuehrung", label: "Kontoführung" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["geschäftskonto", "firmenkonto", "selbstständig", "freiberufler", "gmbh", "unternehmen", "gewerbe"],
@@ -219,7 +219,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "kosten", label: "Kosten / Jahr gesamt", kurz: "Kosten / Jahr", art: "geld", richtung: "runter" },
     ],
     bestwert: { key: "kosten", richtung: "runter" },
-    filter: { key: "depotgebuehr", label: "nur ohne Depotgebühr", wert: 0 },
+    filter: [{ key: "depotgebuehr", label: "nur ohne Depotgebühr", wert: 0 }],
     sortierung: [{ key: "kosten", label: "Kosten" }, { key: "depotgebuehr", label: "Depotgebühr" }],
     totalLabel: "Kosten / Jahr",
     suchwoerter: ["depot", "wertpapierdepot", "etf", "aktien", "broker", "ordergebühr", "sparplan", "wertpapiere"],
@@ -254,20 +254,57 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "sollzins", label: "Sollzins", art: "prozent", richtung: "runter", schmal: true, ab: true },
       { key: "laufzeit", label: "Laufzeit", art: "monate", schmal: true },
       { key: "rate", label: "Monatsrate", kurz: "Rate / Monat", art: "geld", richtung: "runter", ab: true },
+      // Die folgenden fünf stehen nur in den Details des Kursblatts — echte Felder
+      // anstelle der fünf Merkmale, die der Handoff annahm und die financeads nicht hat
+      // (Sondertilgung, Sofortzusage, Ratenpause, Auszahlung, Mindestalter).
+      { key: "effzins_bis", label: "Zins bis", art: "prozent", schmal: true },
+      { key: "rate_bis", label: "Rate bis", art: "geld", schmal: true },
+      { key: "zwei_drittel", label: "⅔ der Kunden erhalten", art: "prozent", schmal: true },
+      { key: "bearbeitung", label: "Bearbeitungsgebühr", art: "prozent", schmal: true },
+      { key: "grenzen", label: "Zins gilt für", art: "text", schmal: true },
+      { key: "bonitaetsfrei", label: "Zins unabhängig von der Bonität", art: "haken", schmal: true },
+      { key: "kreditgeber", label: "Kreditgeber", art: "text", schmal: true },
     ],
     bestwert: { key: "effzins", richtung: "runter" },
-    sortierung: [{ key: "effzins", label: "Effektivzins" }, { key: "rate", label: "Rate" }],
+    // 🚨 Drei echte Umschalter statt der drei erfundenen des Handoffs. Der erste ist der
+    // wertvollste: bei 20.000 € über 60 Monate gelten 6 von 20 Angeboten gar nicht.
+    filter: [
+      { key: "gilt", label: "Gilt für Ihre Angaben", wert: true },
+      { key: "bearbeitung", label: "ohne Bearbeitungsgebühr", wert: 0 },
+      { key: "bonitaetsfrei", label: "Zins ohne Bonitätsaufschlag", wert: true },
+    ],
+    kennzahlen: [
+      { key: "best", label: "Beste Rate im Monat", art: "geld", ton: "werkzeug", formel: { art: "best", key: "rate" } },
+      { key: "schnitt", label: "Durchschnittliche Rate", art: "geld", ton: "grau", formel: { art: "schnitt", key: "rate" } },
+      { key: "erspar", label: "Ersparnis mit dem Bestwert", unter: "gegenüber dem Durchschnitt", art: "geld", ton: "gruen", gross: true, formel: { art: "differenz", key: "rate", mal: "duration_months" } },
+    ],
+    kursblatt: { band: "streuung", podest: 3, stempel: "Bestwert", mehrkosten: { key: "rate", mal: "duration_months", label: "Mehrkosten zum Bestwert" } },
+    sortierung: [{ key: "effzins", label: "Zins" }, { key: "rate", label: "Rate" }],
     totalLabel: "Rate / Monat",
     suchwoerter: ["ratenkredit", "kredit", "darlehen", "autokredit", "minikredit", "sofortkredit", "umschuldung", "effektivzins", "kreditvergleich"],
     hinweis: "Die Konditionen sind bonitätsabhängig; „ab“ bezeichnet den günstigsten Zins des Anbieters. Die Angaben nach § 6a PAngV mit repräsentativem Beispiel stehen bei jedem Angebot unter „Pflichtangaben“.",
-    lesen: (p) => nurWerte({
-      effzins: zahl(pfad(p.conditions, "interest_effective.value")),
-      effzins_bis: zahl(pfad(p.conditions, "interest_effective.value_highest")),
-      sollzins: zahl(pfad(p.conditions, "interest_nominal.value")),
-      laufzeit: zahl(pfad(p.conditions, "duration.value")),
-      rate: zahl(pfad(p.conditions, "installments.value")),
-      pflicht: klartext(pfad(p.details, "mandatory_information")),
-    }),
+    lesen: (p, params) => {
+      const anforderung = pfad(p.conditions, "interest_effective.requirements");
+      return nurWerte({
+        effzins: zahl(pfad(p.conditions, "interest_effective.value")),
+        effzins_bis: zahl(pfad(p.conditions, "interest_effective.value_highest")),
+        sollzins: zahl(pfad(p.conditions, "interest_nominal.value")),
+        sollzins_bis: zahl(pfad(p.conditions, "interest_nominal.value_highest")),
+        laufzeit: zahl(pfad(p.conditions, "duration.value")),
+        rate: zahl(pfad(p.conditions, "installments.value")),
+        rate_bis: zahl(pfad(p.conditions, "installments.value_highest")),
+        zwei_drittel: zweiDrittelZins(klartext(pfad(p.details, "representative_example.de"))),
+        bearbeitung: zahl(pfad(p.conditions, "processing.value")),
+        // Nennt der Anbieter nur EINEN Zins, gilt er für alle — kein Aufschlag nach Bonität.
+        bonitaetsfrei:
+          zahl(pfad(p.conditions, "interest_effective.value")) !== null &&
+          zahl(pfad(p.conditions, "interest_effective.value")) === zahl(pfad(p.conditions, "interest_effective.value_highest")),
+        kreditgeber: kreditgeber(pfad(p.details, "loan_provider")),
+        gilt: giltFuer(anforderung, params),
+        grenzen: spanneText(anforderung),
+        pflicht: klartext(pfad(p.details, "mandatory_information")),
+      });
+    },
     begruendung: () => "günstigster Effektivzins bei Ihrer Kreditsumme und Laufzeit",
   },
   {
@@ -374,7 +411,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "gebuehren", label: "Gebühren je Order", kurz: "Gebühren", art: "geld", richtung: "runter" },
     ],
     bestwert: { key: "gebuehren", richtung: "runter" },
-    filter: { key: "sparplan", label: "nur mit Sparplan", wert: true },
+    filter: [{ key: "sparplan", label: "nur mit Sparplan", wert: true }],
     sortierung: [{ key: "gebuehren", label: "Gebühren" }, { key: "coins", label: "Auswahl" }],
     totalLabel: "Gebühren je Order",
     suchwoerter: ["krypto", "bitcoin", "ethereum", "kryptobörse", "kryptowährung", "coins", "wallet", "staking"],
@@ -459,7 +496,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "mieterschutz", label: "Mieterschutz", art: "haken", schmal: true },
     ],
     bestwert: { key: "praemie", richtung: "runter" },
-    filter: { key: "wartezeit", label: "nur ohne Wartezeit", wert: true },
+    filter: [{ key: "wartezeit", label: "nur ohne Wartezeit", wert: true }],
     sortierung: [{ key: "praemie", label: "Beitrag" }],
     totalLabel: "Beitrag / Jahr",
     suchwoerter: ["mietkaution", "kautionsbürgschaft", "mietkautionsversicherung", "kaution", "umzug", "mietkautionsbürgschaft"],
@@ -490,7 +527,7 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "tierarztwahl", label: "Freie Tierarztwahl", kurz: "Tierarztwahl", art: "haken", schmal: true },
     ],
     bestwert: { key: "beitrag", richtung: "runter" },
-    filter: { key: "tierarztwahl", label: "nur mit freier Tierarztwahl", wert: true },
+    filter: [{ key: "tierarztwahl", label: "nur mit freier Tierarztwahl", wert: true }],
     sortierung: [{ key: "beitrag", label: "Beitrag" }],
     totalLabel: "Beitrag / Monat",
     suchwoerter: ["tierkrankenversicherung", "hundekrankenversicherung", "katzenkrankenversicherung", "op-versicherung hund", "tierarzt", "hund", "katze", "haustier"],
