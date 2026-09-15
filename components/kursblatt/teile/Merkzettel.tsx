@@ -22,7 +22,12 @@ import { formatKennwert } from "@/lib/financeads/format";
 export interface MerkzettelProps {
   /** Die gemerkten Angebote, in der Reihenfolge, in der sie gemerkt wurden. */
   eintraege: VergleichProdukt[];
-  haupt: SpalteDef;
+  /**
+   * Die Zahl, die auf dem Zettel steht. Klasse B hat keine — dort bleibt der Zettel eine
+   * Namensliste, weil financeads für Versicherungen keine Beiträge liefert. Lieber eine
+   * Notiz ohne Zahl als eine erfundene.
+   */
+  haupt?: SpalteDef;
   total?: SpalteDef;
   bestId?: number;
   onEntfernen: (id: number) => void;
@@ -53,8 +58,8 @@ export default function Merkzettel({ eintraege, haupt, total, bestId, onEntferne
             <div key={p.id} className="kb-zettel__karte" data-ist={ist ? "an" : "aus"}>
               <button type="button" className="kb-zettel__weg" aria-label={`${p.anbieter} entfernen`} onClick={() => onEntfernen(p.id)}>×</button>
               <b>{p.anbieter}</b>
-              <span className="kb-zettel__wert">{formatKennwert(haupt, p.kennzahlen[haupt.key])}</span>
-              {total && <span className="kb-zettel__zeile">{formatKennwert(total, p.kennzahlen[total.key])}</span>}
+              {haupt && <span className="kb-zettel__wert">{formatKennwert(haupt, p.kennzahlen[haupt.key])}</span>}
+              {haupt && total && <span className="kb-zettel__zeile">{formatKennwert(total, p.kennzahlen[total.key])}</span>}
               <span className="kb-zettel__klein">{p.tarif}</span>
             </div>
           );

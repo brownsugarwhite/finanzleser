@@ -29,6 +29,7 @@ import Zinskurve from "@/components/kursblatt/teile/Zinskurve";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Podest from "@/components/kursblatt/teile/Podest";
 import AlleAngebote from "./AlleAngebote";
+import Anbieterliste from "./Anbieterliste";
 import Merkzettel from "@/components/kursblatt/teile/Merkzettel";
 import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import IhreAngaben from "./IhreAngaben";
@@ -81,6 +82,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   const best = z.aktuelle.produkte.find((p) => p.id === z.aktuelle.bestwert) ?? z.aktuelle.produkte[0];
   const bestWert = kennwert && best ? formatKennwert(kennwert, best.kennzahlen[kennwert.key]) : "";
   const achsen = achsenEnden(haupt);
+  const anbieterZahl = useMemo(() => new Set(z.aktuelle.produkte.map((p) => p.anbieter)).size, [z.aktuelle.produkte]);
   // Nicht z.mittel: dort stehen die Spalten in Datenreihenfolge. Im Satz kommt zuerst,
   // worauf es ankommt — und ohne die Spalten, die schon in den Details stecken.
   const neben = useMemo(() => nebenspalten(def, haupt), [def, haupt]);
@@ -141,7 +143,11 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
       <span className="kb__anzeige">Anzeige · Vergleich mit Partnerlinks</span>
       <h1 className="kb__titel">{def.titel}</h1>
       <p className="kb__vorspann">
-        <b>{z.aktuelle.produkte.length - z.ausgeschlossen} {def.mehrzahl}</b> im Vergleich
+        <b>{z.aktuelle.produkte.length - z.ausgeschlossen} {def.mehrzahl}</b>
+        {/* Ohne Bestwert (Klasse B) steht hier die einzige Zahl, die diese Daten hergeben:
+            von wie vielen Häusern die Tarife stammen. */}
+        {!haupt && anbieterZahl > 1 ? <> von <b>{anbieterZahl} {def.gruppe === "versicherung" ? "Versicherern" : "Anbietern"}</b></> : null}
+        {" "}im Vergleich
         {/* Die Bezeichnung kommt aus der Hauptspalte, nicht aus `totalLabel`: bei Krediten
             ist der Bestwert der Effektivzins, `totalLabel` aber „Rate / Monat“. */}
         {bestWert && bestWert !== "–" ? <>, Bestwert <b>{bestWert}</b> {kennwert?.kurz ?? kennwert?.label}</> : null}
@@ -232,7 +238,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
         />
       )}
 
-      {haupt && (
+      {haupt ? (
         <AlleAngebote
           def={def} z={z} haupt={haupt} total={neben[0]} best={best}
           hover={hover} onHover={setHover}
@@ -240,18 +246,23 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           gemerkt={gemerkt} onMerken={merken}
           stempel={lauf.stempel} herz={lauf.herz} tempo={1}
         />
-      )}
-
-      {haupt && (
-        <Merkzettel
-          eintraege={gemerkt.map((id) => z.aktuelle.produkte.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p)}
-          haupt={haupt}
-          total={neben[0]}
-          bestId={best?.id}
-          onEntfernen={merken}
-          onLeeren={leeren}
+      ) : (
+        /* Klasse B: keine Kennzahlen, also weder Band noch Podest noch Filterzeile —
+           nur die Anbieterliste. Siehe den Kopf von Anbieterliste.tsx. */
+        <Anbieterliste
+          def={def} zeilen={z.zeilen} gezeigt={z.gezeigt} alle={z.alle} onAlle={z.zeigeAlle}
+          gemerkt={gemerkt} onMerken={merken} herz={lauf.herz}
         />
       )}
+
+      <Merkzettel
+        eintraege={gemerkt.map((id) => z.aktuelle.produkte.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p)}
+        haupt={haupt}
+        total={haupt ? neben[0] : undefined}
+        bestId={best?.id}
+        onEntfernen={merken}
+        onLeeren={leeren}
+      />
 
       <Wertetabelle
         titel={`${def.titel}: alle ${z.aktuelle.produkte.length} ${def.mehrzahl}`}

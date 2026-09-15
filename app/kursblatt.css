@@ -1097,6 +1097,27 @@
 
 .kb .kb-liste__ausgeschlossen { margin: 14px 0 0; font: italic 300 13px/1.5 var(--kb-serif); color: var(--kb-grau); }
 
+/* Klasse B: keine Zahlenspalten, dafür Platz für den Namen und die Prüfsiegel.
+   Siehe den Kopf von components/kursblatt/vergleich/Anbieterliste.tsx. */
+/* 🚨 Feste Maße für Siegel- und Pillenspalte, keine `auto`.
+   Kopfzeile und jede Angebotszeile sind EIGENE Grids mit derselben Vorlage — `auto`
+   löst sich in jedem davon anders auf. Gemessen: Kopf 96/495/76/0, erste Zeile
+   96/367/49/155, und Zeilen ohne Siegel wären wieder anders. Nur feste Spalten stehen
+   untereinander. */
+.kb .kb-liste--anbieter { --kb-liste-spalten: 96px minmax(0, 1fr) 108px 156px; }
+.kb .kb-liste__ohne-zahlen { margin: 12px 0 0; max-width: 60ch; }
+.kb .kb-liste--anbieter .kb-liste__kopf-dritte { text-align: right; }
+.kb .kb-zeile__siegel { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+/* Höhe als Obergrenze, nicht als Maß: zwei Siegel in 108 px müssen schrumpfen dürfen,
+   ohne ihr Seitenverhältnis zu verlieren. */
+.kb .kb-zeile__siegel img { display: block; max-height: 34px; max-width: 100%; width: auto; height: auto; min-width: 0; }
+/* Ohne Details-Knopf trägt die Aktionszeile nur „Merken“ — sie darf dichter stehen. */
+.kb .kb-liste--anbieter .kb__zeile-aktionen { padding-bottom: 12px; }
+/* Klasse A koppelt das Hervorheben an den Punkt im Band (`data-hell`); hier gibt es kein
+   Band, also reicht der Zeiger — und das ohne eine Zeile JavaScript. */
+.kb .kb-liste--anbieter .kb__zeile:hover { background: var(--kb-t035); }
+.kb .kb-liste--anbieter .kb__zeile:hover .kb__zeile-linie { transform: scaleX(1); }
+
 /* K:186-199 — die Zeile. Bestwert auf türkisem Grund, Überfahren auf 3,5 % Tinte. */
 .kb .kb__zeile { position: relative; border-bottom: 1px solid var(--kb-t12); transition: background .35s; }
 .kb .kb__zeile[data-hell="an"] { background: var(--kb-t035); }
@@ -1152,6 +1173,12 @@
 
 @container kb (max-width: 559px) {
   .kb .kb-liste, .kb .kb-liste[data-dritte="an"] { --kb-liste-spalten: 64px minmax(0, 1fr) auto auto; --kb-liste-gap: 12px; }
+  /* Im schmalen Satz haben Siegel und Pille nebeneinander keinen Platz; die Siegel
+     stehen dann unter dem Namen statt vor der Pille. */
+  .kb .kb-liste--anbieter { --kb-liste-spalten: 64px minmax(0, 1fr) auto; --kb-liste-gap: 12px; }
+  .kb .kb-liste--anbieter .kb-liste__kopf-dritte { display: none; }
+  .kb .kb-zeile__siegel { grid-column: 2; grid-row: 2; justify-content: flex-start; margin-top: 8px; }
+  .kb .kb-liste--anbieter .kb__zeile-raster { align-items: start; }
   .kb .kb-liste__kopf-total, .kb .kb__zeile-total { display: none; }
   .kb .kb-liste__kopf-dritte, .kb .kb__zeile-dritte { display: none; }
   .kb .kb__zeile-total-eng { display: block; }

@@ -13,7 +13,8 @@
  *  10–14  Ihre Angaben: Einhänger, pulsender Punkt, Bausteine je Parameter
  *  15–18  Bedienen: Marke setzt den Wert, ein Abruf, Hash, Daten passen zum Satz
  *  19–30  Marktüberblick: Band, Bestwert, Durchschnitt, Stapelung, Kennzahlen
- *  31–34  schmaler Satz und Konsole
+ *  31–34  Klasse B: Anbieterliste ohne erfundene Zahlen
+ *  35–43  schmaler Satz und Konsole
  */
 import { chromium } from "playwright";
 
@@ -21,6 +22,7 @@ const baseArg = process.argv.indexOf("--base");
 const BASE = (baseArg > 0 ? process.argv[baseArg + 1] : "http://localhost:3000").replace(/\/$/, "");
 const KREDIT = "/finanztools/vergleiche/autokredit-vergleich";
 const FESTGELD = "/finanztools/vergleiche/festgeldvergleich";
+const KLASSE_B = "/finanztools/vergleiche/private-haftpflichtversicherung-vergleich";
 
 const ergebnisse = [];
 const ok = (n, gut, notiz = "") => { ergebnisse.push({ n, gut, notiz }); console.log(`${gut ? "✓" : "✗"} ${n}${notiz ? "  → " + notiz : ""}`); };
@@ -191,8 +193,68 @@ ok("beim Nachladen bleibt der letzte Stand stehen, nicht die Voreinstellung",
   zwischen.length > 0 && zwischen.every((w) => w === vorKlick || w === nachKlick.gesamt),
   `${vorKlick} → ${[...new Set(zwischen)].join(" / ")} → ${nachKlick.gesamt} (${zwischen.length} Messungen)`);
 
+// ── Klasse B: neun Versicherungskategorien ohne Kennzahlen ────────────────────────
+await page.goto(BASE + KLASSE_B, { waitUntil: "networkidle" });
+await page.waitForTimeout(700);
+const kb = await page.evaluate(() => {
+  const n = (s) => document.querySelectorAll(s).length;
+  const kopf = document.querySelector(".kb-liste--anbieter .kb-liste__kopf-dritte");
+  const siegel = [...document.querySelectorAll(".kb-zeile__siegel img")].map((e) => Math.round(e.getBoundingClientRect().right));
+  return {
+    band: n(".kb-band"), kurve: n(".kb-kurve"), kennzahlen: n(".kb-kennzahl"),
+    podest: n(".kb-podest"), filter: n(".kb-liste__filter"), sortieren: n(".kb-liste__sortieren"),
+    zeilen: n(".kb-liste--anbieter .kb__zeile"),
+    logos: n(".kb-liste--anbieter .kb-logo"),
+    pillen: n(".kb-liste--anbieter .kb-pille"),
+    // Zahlen dürfen in der Zeile gar nicht vorkommen — es gibt keine.
+    zahlspalten: n(".kb-liste--anbieter .kb__zeile-haupt, .kb-liste--anbieter .kb__zeile-total"),
+    kopfRechts: kopf ? Math.round(kopf.getBoundingClientRect().right) : null,
+    siegelRechts: [...new Set(siegel)],
+    vorspann: document.querySelector(".kb__vorspann").textContent.replace(/\s+/g, " ").slice(0, 70),
+    erklaer: document.querySelector(".kb-liste__ohne-zahlen")?.textContent.replace(/\s+/g, " ").slice(0, 60),
+  };
+});
+ok("Klasse B: kein Band, keine Kurve, keine Kennzahlen, kein Podest",
+  kb.band === 0 && kb.kurve === 0 && kb.kennzahlen === 0 && kb.podest === 0,
+  `Band ${kb.band} · Kurve ${kb.kurve} · Kennzahlen ${kb.kennzahlen} · Podest ${kb.podest}`);
+ok("Klasse B: keine Filterzeile, keine Sortierung", kb.filter === 0 && kb.sortieren === 0);
+ok("Klasse B: Anbieterliste mit Logo und Pille je Zeile",
+  kb.zeilen >= 5 && kb.logos === kb.zeilen && kb.pillen === kb.zeilen, `${kb.zeilen} Zeilen, ${kb.logos} Logos, ${kb.pillen} Pillen`);
+ok("Klasse B: keine Zahlenspalte (financeads liefert keine Beiträge)", kb.zahlspalten === 0, String(kb.zahlspalten));
+// 🚨 Kopfzeile und Zeilen sind eigene Grids: ohne feste Spaltenmaße stünde „Prüfsiegel"
+// über einer anderen Stelle als die Siegel. Gemessen war das einmal 788 gegen 567.
+ok("Klasse B: Siegelspalte steht unter ihrer Überschrift",
+  kb.siegelRechts.length === 1 && kb.siegelRechts[0] === kb.kopfRechts,
+  `Kopf ${kb.kopfRechts} · Siegel ${kb.siegelRechts.join("/")}`);
+ok("Klasse B: Vorspann nennt Tarife und Versicherer, keinen Bestwert",
+  /\d+ .+ von \d+ Versicherern im Vergleich/.test(kb.vorspann) && !/Bestwert/.test(kb.vorspann), kb.vorspann);
+ok("Klasse B: die Seite sagt, warum keine Beiträge dastehen", /Beiträge nennt unser Partner/.test(kb.erklaer || ""), kb.erklaer);
+
+// Merken funktioniert auch ohne Zahl — der Zettel wird dann eine Namensliste.
+await page.locator(".kb-liste--anbieter .kb-merken").first().click();
+await page.waitForTimeout(600);
+const zettelB = await page.evaluate(() => {
+  const z = document.querySelector(".kb-zettel");
+  return z ? { karten: z.querySelectorAll(".kb-zettel__karte").length, werte: z.querySelectorAll(".kb-zettel__wert").length, name: z.querySelector(".kb-zettel__karte b")?.textContent } : null;
+});
+ok("Klasse B: Merkzettel ohne erfundene Beiträge",
+  zettelB?.karten === 1 && zettelB.werte === 0 && !!zettelB.name, JSON.stringify(zettelB));
+
 // ── schmaler Satz ─────────────────────────────────────────────────────────────────
+// Erst die Versicherungsseite bei 390 px, dann zurück zum Festgeld: die eine hat keine
+// Kennzahlen, die andere keine Siegelspalte — beide müssen ohne Überlauf stehen.
 await page.setViewportSize({ width: 390, height: 1200 });
+await page.waitForTimeout(600);
+const engB = await page.evaluate(() => ({
+  ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  kopfDritte: getComputedStyle(document.querySelector(".kb-liste__kopf-dritte")).display,
+  siegelZeile: getComputedStyle(document.querySelector(".kb-zeile__siegel")).gridRowStart,
+}));
+ok("390 px Klasse B: kein Überlauf, Siegel rücken unter den Namen",
+  engB.ueberlauf === 0 && engB.kopfDritte === "none" && engB.siegelZeile === "2",
+  `${engB.ueberlauf} px · Kopf ${engB.kopfDritte} · Siegel in Zeile ${engB.siegelZeile}`);
+
+await page.goto(BASE + FESTGELD, { waitUntil: "networkidle" });
 await page.waitForTimeout(700);
 const eng = await page.evaluate(() => ({
   ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth,
