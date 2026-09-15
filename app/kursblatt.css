@@ -925,22 +925,26 @@
 }
 
 /* Zinskurve (F:74-88) — der beste Wert je Laufzeit statt eines Punkts je Angebot.
+   🚨 Eigener Name, nicht `.kb-kurve`: so heißt seit Schritt 7 die Restschuldkurve des
+   Rechners (components/kursblatt/teile/Verlaufskurve.tsx). Gemessen am 16.09.2026 hat
+   dieser Block deren `__achse` überschrieben (11 px statt 10 px) und ihrem Wurzelknoten
+   `position/margin/padding` verpasst, die sie nie hatte.
    Das SVG trägt Gitter und Linien, die Punkte liegen als Knöpfe darüber: sie brauchen
    Tastfläche, Fokusring und Beschriftung. Alle Positionen in Prozent des viewBox-Rasters
    640×210, damit die Kurve jede Satzbreite mitgeht. */
-.kb .kb-kurve { position: relative; margin-top: 16px; }
-.kb .kb-kurve > svg { display: block; overflow: visible; }
-.kb .kb-kurve__best {
+.kb .kb-zinskurve { position: relative; margin-top: 16px; }
+.kb .kb-zinskurve > svg { display: block; overflow: visible; }
+.kb .kb-zinskurve__best {
   fill: none; stroke: var(--kb-tuerkis); stroke-width: 2;
   stroke-dasharray: 1; stroke-dashoffset: 1;
 }
-.kb .kb-kurve__schnitt { fill: none; stroke: var(--kb-grau); stroke-width: 1.2; stroke-dasharray: 4 4; transition: d .6s; }
-.kb .kb-kurve__stiel { stroke: rgba(11, 127, 102, .35); stroke-width: 1; stroke-dasharray: 2 3; }
-.kb .kb-kurve__gitter-wert {
+.kb .kb-zinskurve__schnitt { fill: none; stroke: var(--kb-grau); stroke-width: 1.2; stroke-dasharray: 4 4; transition: d .6s; }
+.kb .kb-zinskurve__stiel { stroke: rgba(11, 127, 102, .35); stroke-width: 1; stroke-dasharray: 2 3; }
+.kb .kb-zinskurve__gitter-wert {
   position: absolute; left: 0; transform: translateY(-100%);
   font: 500 10px var(--kb-sans); color: var(--kb-grau); pointer-events: none;
 }
-.kb .kb-kurve__punkt {
+.kb .kb-zinskurve__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
   border-radius: 50%; background: var(--kb-papier); border: 1.5px solid var(--kb-tuerkis);
   box-sizing: border-box; padding: 0; cursor: pointer;
@@ -948,33 +952,33 @@
 }
 /* Der Punkt ist 10–16 px groß; angetippt wird ein unsichtbares 44er-Feld darum
    (README „Was jeder Baustein kann“: Tap-Ziele mindestens 44 px). */
-.kb .kb-kurve__punkt::before { content: ""; position: absolute; inset: -17px; border-radius: 50%; }
-.kb .kb-kurve__punkt[data-hell="an"] { width: 14px; height: 14px; background: var(--kb-ink); }
-.kb .kb-kurve__punkt[data-ist="an"] {
+.kb .kb-zinskurve__punkt::before { content: ""; position: absolute; inset: -17px; border-radius: 50%; }
+.kb .kb-zinskurve__punkt[data-hell="an"] { width: 14px; height: 14px; background: var(--kb-ink); }
+.kb .kb-zinskurve__punkt[data-ist="an"] {
   width: 16px; height: 16px; background: var(--kb-tuerkis); border: 0;
   animation: fl-puls 2.2s infinite;
 }
-.kb .kb-kurve__wert {
+.kb .kb-zinskurve__wert {
   position: absolute; transform: translate(-50%, -100%);
   font: 500 11px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
   pointer-events: none; font-variant-numeric: tabular-nums;
   transition: top .5s var(--kb-kurve), color .3s;
 }
-.kb .kb-kurve__wert[data-hell="an"] { color: var(--kb-ink); }
-.kb .kb-kurve__wert[data-ist="an"] { font-weight: 700; font-size: 13px; color: var(--kb-tuerkis); }
-.kb .kb-kurve__achse {
+.kb .kb-zinskurve__wert[data-hell="an"] { color: var(--kb-ink); }
+.kb .kb-zinskurve__wert[data-ist="an"] { font-weight: 700; font-size: 13px; color: var(--kb-tuerkis); }
+.kb .kb-zinskurve__achse {
   position: absolute; bottom: -2px; transform: translateX(-50%);
   font: 500 11px var(--kb-sans); color: var(--kb-grau); white-space: nowrap; pointer-events: none;
 }
-.kb .kb-kurve__achse[data-ist="an"] { font-weight: 700; color: var(--kb-tuerkis); }
+.kb .kb-zinskurve__achse[data-ist="an"] { font-weight: 700; color: var(--kb-tuerkis); }
 /* Die Beschriftung unter der Achse braucht Platz, den das SVG nicht hat. */
-.kb .kb-kurve { padding-bottom: 18px; }
+.kb .kb-zinskurve { padding-bottom: 18px; }
 @media (prefers-reduced-motion: reduce) {
-  .kb .kb-kurve__best { stroke-dasharray: none; stroke-dashoffset: 0; }
-  .kb .kb-kurve__punkt[data-ist="an"] { animation: none; }
+  .kb .kb-zinskurve__best { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .kb .kb-zinskurve__punkt[data-ist="an"] { animation: none; }
 }
 /* F:88 — der Hinweis, wenn die Kurve nicht für den eingestellten Betrag gilt. */
-.kb .kb-kurve__fuss { display: block; margin-top: 10px; font: italic 300 12.5px/1.5 var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-zinskurve__fuss { display: block; margin-top: 10px; font: italic 300 12.5px/1.5 var(--kb-serif); color: var(--kb-grau); }
 
 /* Kennzahlen (K:107-112). Die große steht im schmalen Satz über die volle Breite. */
 .kb .kb-kennzahlen {

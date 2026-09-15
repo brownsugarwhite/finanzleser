@@ -68,22 +68,22 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
   const aktiv = punkte.findIndex((p) => p.wert === wert);
 
   return (
-    <div className="kb-kurve" ref={ref}>
+    <div className="kb-zinskurve" ref={ref}>
       <svg viewBox="0 0 640 210" width="100%" aria-hidden="true">
         <line x1="30" y1="190" x2="610" y2="190" stroke="var(--kb-ink)" strokeWidth={1} />
         {linien.map((g) => (
           <line key={g} x1="30" y1={Y(g).toFixed(1)} x2="610" y2={Y(g).toFixed(1)} stroke="var(--kb-t12)" strokeWidth={1} />
         ))}
-        <path className="kb-kurve__schnitt" d={pfad((p) => p.schnitt)} />
+        <path className="kb-zinskurve__schnitt" d={pfad((p) => p.schnitt)} />
         <path
-          className="kb-kurve__best"
+          className="kb-zinskurve__best"
           d={pfad((p) => p.best)}
           pathLength={1}
           style={{ animation: zeichnen === "none" ? undefined : `${zeichnen} 1.4s ease-out .2s both` }}
         />
         {aktiv >= 0 && (
           <line
-            className="kb-kurve__stiel"
+            className="kb-zinskurve__stiel"
             x1={X(aktiv).toFixed(1)} y1={Y(punkte[aktiv].best).toFixed(1)}
             x2={X(aktiv).toFixed(1)} y2="190"
           />
@@ -91,7 +91,7 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
       </svg>
 
       {linien.map((g) => (
-        <span key={g} className="kb-kurve__gitter-wert" style={{ top: proz(Y(g), 210) }}>
+        <span key={g} className="kb-zinskurve__gitter-wert" style={{ top: proz(Y(g), 210) }}>
           {achsenText(spalte, g, 1)}
         </span>
       ))}
@@ -103,7 +103,7 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
           <Fragment key={p.wert}>
             <button
               type="button"
-              className="kb-kurve__punkt"
+              className="kb-zinskurve__punkt"
               data-ist={ist ? "an" : "aus"}
               data-hell={hell ? "an" : "aus"}
               style={{ left: proz(X(i), 640), top: proz(Y(p.best), 210) }}
@@ -116,7 +116,7 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
               onBlur={() => setZeiger(null)}
             />
             <span
-              className="kb-kurve__wert"
+              className="kb-zinskurve__wert"
               data-ist={ist ? "an" : "aus"}
               data-hell={hell ? "an" : "aus"}
               style={{ left: proz(X(i), 640), top: proz(Y(p.best) - 12, 210) }}
@@ -125,7 +125,7 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
               {achsenText(spalte, p.best, 2)}
             </span>
             <span
-              className="kb-kurve__achse"
+              className="kb-zinskurve__achse"
               data-ist={ist ? "an" : "aus"}
               style={{ left: proz(X(i), 640) }}
               aria-hidden="true"

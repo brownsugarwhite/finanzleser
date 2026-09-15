@@ -64,11 +64,34 @@ export default function KursblattRechner<W extends Werte, E>({
       setErgebnis(schema.rechne(werte, rates));
       setRechnet(false);
       setVeraltet(false);
-      setTimeout(() => {
-        const el = ergRef.current;
-        if (!el) return;
-        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: reduzierteBewegung() ? "auto" : "smooth" });
-      }, 250);
+      /**
+       * 🚨 Erst scrollen, wenn der Kasten OFFEN ist, nicht 250 ms nach dem Öffnen.
+       *
+       * Gemessen am 16.09.2026: das Ergebnis wächst über .75 s von 0 auf 1011 px, die
+       * Seite also von 2179 auf 3012 px. Ein `scrollTo` mittendrin wird auf die Seitenhöhe
+       * VON DIESEM AUGENBLICK geklemmt — und bleibt dort, auch wenn die Seite gleich
+       * darauf länger wird. Der Ergebniskopf landete so auf 130 px statt der 90 px, die
+       * der Handoff nennt; bei kleinerem Fenster wäre der Fehlbetrag größer.
+       */
+      const el = ergRef.current;
+      const kasten = el?.closest(".kb-ergebnis");
+      if (!el) return;
+      const hin = () => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: reduzierteBewegung() ? "auto" : "smooth" });
+      if (!kasten || reduzierteBewegung()) { hin(); return; }
+      let schon = false;
+      const einmal = () => {
+        if (schon) return;
+        schon = true;
+        kasten.removeEventListener("transitionend", aufgeklappt);
+        hin();
+      };
+      const aufgeklappt = (e: Event) => {
+        if ((e as TransitionEvent).propertyName === "grid-template-rows") einmal();
+      };
+      kasten.addEventListener("transitionend", aufgeklappt);
+      // Sicherheitsnetz: bleibt das Ereignis aus (unterbrochene Transition, Browser ohne
+      // grid-template-rows-Animation), wird trotzdem gesprungen.
+      setTimeout(einmal, 1100);
     }, verzug);
   };
 

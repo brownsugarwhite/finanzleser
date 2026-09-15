@@ -142,13 +142,13 @@ await page.goto(BASE + FESTGELD, { waitUntil: "networkidle" });
 await page.waitForTimeout(800);
 const fg = await page.evaluate(() => {
   const a = document.querySelector(".kb-angaben");
-  const k = document.querySelector(".kb-kurve");
+  const k = document.querySelector(".kb-zinskurve");
   return { lineale: a.querySelectorAll(".kb-lineal").length, setz: a.querySelectorAll(".kb-setzzeile").length,
            reg: a.querySelectorAll(".kb-register").length,
            band: document.querySelectorAll(".kb-band").length,
            viewBox: k?.querySelector("svg")?.getAttribute("viewBox"),
-           punkte: k ? k.querySelectorAll(".kb-kurve__punkt").length : 0,
-           aktiv: k ? k.querySelectorAll('.kb-kurve__punkt[data-ist="an"]').length : 0,
+           punkte: k ? k.querySelectorAll(".kb-zinskurve__punkt").length : 0,
+           aktiv: k ? k.querySelectorAll('.kb-zinskurve__punkt[data-ist="an"]').length : 0,
            gross: document.querySelector(".kb-podest__zins")?.textContent,
            grossLabel: document.querySelector(".kb-podest__zins-label")?.textContent,
            plaetze: document.querySelectorAll(".kb-platz").length,
@@ -180,7 +180,7 @@ const sammeln = setInterval(async () => {
 }, 100);
 await Promise.all([
   page.waitForResponse((r) => r.url().includes("/api/vergleich-daten/") && r.status() === 200, { timeout: 30000 }),
-  page.locator('.kb-kurve__punkt[data-ist="aus"]').last().click(),
+  page.locator('.kb-zinskurve__punkt[data-ist="aus"]').last().click(),
 ]);
 clearInterval(sammeln);
 await page.waitForTimeout(1000);
@@ -201,7 +201,7 @@ const kb = await page.evaluate(() => {
   const kopf = document.querySelector(".kb-liste--anbieter .kb-liste__kopf-dritte");
   const siegel = [...document.querySelectorAll(".kb-zeile__siegel img")].map((e) => Math.round(e.getBoundingClientRect().right));
   return {
-    band: n(".kb-band"), kurve: n(".kb-kurve"), kennzahlen: n(".kb-kennzahl"),
+    band: n(".kb-band"), kurve: n(".kb-zinskurve"), kennzahlen: n(".kb-kennzahl"),
     podest: n(".kb-podest"), filter: n(".kb-liste__filter"), sortieren: n(".kb-liste__sortieren"),
     zeilen: n(".kb-liste--anbieter .kb__zeile"),
     logos: n(".kb-liste--anbieter .kb-logo"),
@@ -262,8 +262,8 @@ const eng = await page.evaluate(() => ({
   grossStart: getComputedStyle(document.querySelector('.kb-kennzahl[data-gross="an"]')).gridColumnStart,
   // Auf der Festgeldseite steht die Kurve; ihre Achsenbeschriftung ist der Kandidat, der
   // aus dem Satz laufen könnte (die Bestwert-Beschriftung des Bands prüft die Kreditseite).
-  achseRechts: Math.round(Math.max(...[...document.querySelectorAll(".kb-kurve__achse")].map((e) => e.getBoundingClientRect().right))),
-  achseKurz: [...document.querySelectorAll(".kb-kurve__achse")].every((e) => /\d (M|J)\.$/.test(e.textContent)),
+  achseRechts: Math.round(Math.max(...[...document.querySelectorAll(".kb-zinskurve__achse")].map((e) => e.getBoundingClientRect().right))),
+  achseKurz: [...document.querySelectorAll(".kb-zinskurve__achse")].every((e) => /\d (M|J)\.$/.test(e.textContent)),
 }));
 ok("390 px ohne waagerechten Überlauf", eng.ueberlauf === 0, `${eng.ueberlauf} px`);
 ok("390 px: Kennzahlen zweispaltig, die große über beide", eng.kennCols === 2 && eng.grossStart === "1");

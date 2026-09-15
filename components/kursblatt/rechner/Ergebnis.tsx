@@ -42,9 +42,12 @@ export default function Ergebnis({
 }) {
   return (
     <div className="kb-ergebnis" data-offen={offen ? "an" : "aus"}>
-      <div className="kb-ergebnis__innen" data-veraltet={veraltet ? "an" : "aus"} ref={kopfRef}>
+      <div className="kb-ergebnis__innen" data-veraltet={veraltet ? "an" : "aus"}>
         <div className="kb-ergebnis__inhalt">
-          <div className="kb-ergebnis__kopf">
+          {/* 🚨 Der Sprung zielt auf die ERGEBNIS-Zeile, nicht auf den Kasten: dessen
+              Oberkante liegt 40 px höher und ist unsichtbar (Innenabstand). Gemessen
+              landete die sichtbare Zeile dadurch auf 130 px statt der 90 px des Handoffs. */}
+          <div className="kb-ergebnis__kopf" ref={kopfRef}>
             <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kb-kurve) both` }} aria-hidden="true" />
             <span>ERGEBNIS</span>
             <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kb-kurve) both` }} aria-hidden="true" />

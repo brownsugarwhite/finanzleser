@@ -182,7 +182,7 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
                 zeichnen={lauf.zeichnen}
               />
               {kurveAbweichung && (
-                <span className="kb-kurve__fuss">
+                <span className="kb-zinskurve__fuss">
                   {kennwert.kurz ?? kennwert.label} je {dauer.label} für {kurveAbweichung}. Ihr
                   Betrag ändert den Ertrag, nicht den Zinssatz.
                 </span>
