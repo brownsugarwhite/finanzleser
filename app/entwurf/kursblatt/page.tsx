@@ -66,16 +66,15 @@ export default function KursblattSetzkasten() {
         <Bausteine />
       </section>
 
-      <section style={{ marginTop: 46 }}>
-        <span className="kb__kicker">Noch nicht gesetzt</span>
-        <h2 className="kb__h3">Was hier nach und nach einzieht</h2>
-        <p className="kb__erklaer">
-          Jeder Baustein kommt als eigener Schritt und wird hier abgenommen, bevor er in
-          einem Rechner oder Vergleich auftaucht.
-        </p>
-        <div className="kb__doppellinie" style={{ marginTop: 22, paddingTop: 12 }}>
+      <section style={{ marginTop: 52 }}>
+        <span className="kb__kicker">Wann welcher Baustein</span>
+        <div className="kb__doppellinie" style={{ marginTop: 12, paddingTop: 12 }}>
           {[
-            ["Knopfmuster", "Pille, Stempel, Segment, Chip, Strich-Link, Merken"],
+            ["Lineal", "Beträge und Laufzeiten mit Gefühl – Summe, Monate, Jahre"],
+            ["Drehring", "kleine Skalen mit festen Schritten – Laufzeit, Alter, Stunden"],
+            ["Zählwerk", "Prozentwerte mit Nachkomma – Zins, Tilgung, Rendite"],
+            ["Setzzeile", "alles, was man genau kennt – Gehalt, Miete, Kilometer, Datum"],
+            ["Register", "Auswahl aus 3–20 Einträgen – Steuerklasse, Bundesland, Zeitraum"],
           ].map(([name, zweck]) => (
             <div key={name} className="kb__punktzeile">
               <span style={{ font: "600 13.5px var(--kb-serif)" }}>{name}</span>

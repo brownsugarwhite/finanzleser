@@ -13,6 +13,18 @@ import Setzzeile from "@/components/kursblatt/eingabe/Setzzeile";
 import Register from "@/components/kursblatt/eingabe/Register";
 import Drehring from "@/components/kursblatt/eingabe/Drehring";
 import Zaehlwerk from "@/components/kursblatt/eingabe/Zaehlwerk";
+import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
+import Stempel from "@/components/kursblatt/teile/Stempel";
+import StempelPresets from "@/components/kursblatt/teile/StempelPresets";
+import Segment from "@/components/kursblatt/teile/Segment";
+import { Chip, Logorahmen, MerkenKnopf, Punktzeile, Schalter, StrichLink } from "@/components/kursblatt/teile/Kleinteile";
+
+/** K:384-388 — die drei Stempel über den Rechner-Eingaben. */
+const PRESETS = [
+  { id: "auto", label: "Autokredit", sub: "20.000 € · 60 Monate · 5,5 %", werte: { rs: 20000, rm: 60, rz: 5.5 }, neigung: "-3deg" },
+  { id: "raten", label: "Ratenkredit", sub: "10.000 € · 48 Monate · 6,5 %", werte: { rs: 10000, rm: 48, rz: 6.5 }, neigung: "2deg" },
+  { id: "modern", label: "Modernisierung", sub: "50.000 € · 120 Monate · 4,5 %", werte: { rs: 50000, rm: 120, rz: 4.5 }, neigung: "-1.5deg" },
+];
 
 /** Steuerklassen mit Beizeile — „Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“:218. */
 const STEUERKLASSEN = [
@@ -43,6 +55,12 @@ export default function Bausteine() {
   const [dauer, setDauer] = useState(36);
   const [laufzeit, setLaufzeit] = useState(60);
   const [zins, setZins] = useState(5.5);
+  const [preset, setPreset] = useState<string | null>("auto");
+  const [verwendung, setVerwendung] = useState("neu");
+  const [filter, setFilter] = useState({ gilt: true, gebuehr: false, direkt: false });
+  const [gemerkt, setGemerkt] = useState(false);
+  const [rechnet, setRechnet] = useState(false);
+  const [an, setAn] = useState(true);
 
   return (
     <>
@@ -102,7 +120,68 @@ export default function Bausteine() {
         />
       </div>
 
-      <div style={{ marginTop: 40 }}>
+      <div style={{ marginTop: 44 }}>
+        <span className="kb__kicker kb__kicker--werkzeug">
+          <i aria-hidden="true" />
+          Knopfmuster
+        </span>
+
+        <div style={{ marginTop: 20 }}>
+          <StempelPresets
+            presets={PRESETS}
+            aktiv={preset}
+            onWaehlen={(p) => { setPreset(p.id); setRsumme(p.werte.rs); setLaufzeit(p.werte.rm); setZins(p.werte.rz); }}
+          />
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "12px 18px", flexWrap: "wrap", marginTop: 22 }}>
+          <b style={{ font: "600 15px var(--kb-serif)" }}>Verwendung</b>
+          <Segment
+            ariaLabel="Verwendung"
+            wert={verwendung}
+            onWert={setVerwendung}
+            optionen={[
+              { wert: "neu", label: "Neuwagen" },
+              { wert: "gebraucht", label: "Gebrauchtwagen" },
+              { wert: "umschuldung", label: "Umschuldung" },
+            ]}
+          />
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "8px 10px", flexWrap: "wrap", marginTop: 20 }}>
+          <span style={{ font: "400 13px var(--kb-sans)", color: "var(--kb-grau)", marginRight: 4 }}>Nur mit:</span>
+          <Chip label="Gilt für Ihre Angaben" aktiv={filter.gilt} treffer={14} onKlick={() => setFilter((f) => ({ ...f, gilt: !f.gilt }))} />
+          <Chip label="ohne Bearbeitungsgebühr" aktiv={filter.gebuehr} treffer={20} onKlick={() => setFilter((f) => ({ ...f, gebuehr: !f.gebuehr }))} />
+          <Chip label="nur Direktbanken" aktiv={filter.direkt} treffer={11} onKlick={() => setFilter((f) => ({ ...f, direkt: !f.direkt }))} />
+        </div>
+
+        <div className="kb-podest" style={{ display: "flex", alignItems: "center", gap: "14px 22px", flexWrap: "wrap", marginTop: 24 }}>
+          <Logorahmen name="Verivox" groesse="gewinner" />
+          <Stempel text="Bestwert" />
+          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung href="#" />
+          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein href="#" />
+          <MerkenKnopf gemerkt={gemerkt} onKlick={() => setGemerkt((g) => !g)} />
+          <StrichLink text="Zum Anbieter" href="#" />
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "14px 22px", flexWrap: "wrap", marginTop: 20 }}>
+          <PilleCTA
+            text={rechnet ? "Neu ausrechnen" : "Ausrechnen"} glyph="gleich" werkzeug="magenta"
+            schrumpft={rechnet} onClick={() => { setRechnet(true); setTimeout(() => setRechnet(false), 520); }}
+          />
+          <PilleCTA text="Angebote ansehen" glyph="hoch" werkzeug="tuerkis" href="#" />
+          <Schalter label="Nur Angebote mit Sofortzusage" an={an} onSchalten={setAn} />
+        </div>
+
+        <div style={{ marginTop: 22, maxWidth: 340 }}>
+          <Punktzeile k="Monatsrate" v="339 €" gross />
+          <Punktzeile k="Sollzins" v="0,67 %" />
+          <Punktzeile k="Sondertilgung" v="jederzeit kostenlos" ton="gut" />
+          <Punktzeile k="Mehrkosten zum Bestwert" v="+ 1.098 €" ton="warnung" />
+        </div>
+      </div>
+
+      <div style={{ marginTop: 44 }}>
         <span className="kb__kicker kb__kicker--werkzeug">
           <i aria-hidden="true" />
           Drehring &amp; Zählwerk

@@ -577,3 +577,154 @@
 .kb .kb-zaehlwerk__chip:hover { border-color: var(--kb-ink); }
 .kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--kb-ink); color: var(--kb-weiss); border-color: var(--kb-ink); }
 .kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: 10px; font: italic 300 11.5px var(--kb-serif); color: var(--kb-grau); }
+
+/* ── Pille (K:140-144 groß · :194-198 Liste · :299/:349 fester Knopf) ─────────────── */
+.kb .kb-pille {
+  position: relative; display: inline-flex; align-items: center; height: 48px;
+  padding: 3px 3px 3px 19px; border: 2px solid var(--kb-ink);
+  outline: 1px solid var(--kb-ink); outline-offset: 2px; border-radius: 21px;
+  background: transparent; text-decoration: none; color: var(--kb-ink);
+  font: 500 16px var(--kb-sans); overflow: hidden; cursor: pointer;
+  transition: color .3s; box-sizing: border-box;
+}
+.kb .kb-pille--klein { height: 42px; padding-left: 15px; border-radius: 19px; outline: 0; font-size: 14px; }
+.kb .kb-pille__fuell {
+  position: absolute; top: 3px; bottom: 3px; right: 3px; width: 38px; border-radius: 19px;
+  background: var(--kb-pille-farbe); transition: width .5s var(--kb-kurve);
+}
+.kb .kb-pille--klein .kb-pille__fuell { width: 32px; border-radius: 16px; transition-duration: .45s; }
+.kb .kb-pille__text { position: relative; padding-right: 16px; }
+.kb .kb-pille--klein .kb-pille__text { padding-right: 12px; }
+.kb .kb-pille__knopf {
+  position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--kb-pille-farbe); transition: transform .35s var(--kb-ueber);
+}
+.kb .kb-pille--klein .kb-pille__knopf { width: 32px; height: 32px; }
+/* Bei der füllenden Pille trägt die Füllung die Farbe — der Knopf ist nur ihr rundes Ende. */
+.kb .kb-pille--fuellt .kb-pille__knopf { background: transparent; }
+.kb .kb-pille__knopf[data-schrumpft="an"] { transform: scale(.8); }
+/* Die Füllung läuft auch, wenn die Maus über der ZEILE steht, nicht über der Pille. */
+.kb .kb-pille--fuellt:hover .kb-pille__fuell,
+.kb .kb__zeile:hover .kb-pille__fuell,
+.kb .kb-podest:hover .kb-pille__fuell { width: 100%; }
+.kb .kb-pille--fuellt:hover,
+.kb .kb__zeile:hover .kb-pille--fuellt,
+.kb .kb-podest:hover .kb-pille--fuellt { color: var(--kb-weiss); }
+/* Pillen ohne Füllung färben beim Überfahren nur den Text (K:299 Magenta, :349 Türkis). */
+.kb .kb-pille:not(.kb-pille--fuellt):hover { color: var(--kb-pille-farbe); }
+.kb .kb-pille--nur-knopf { padding-left: 3px; }
+.kb .kb-pille--nur-knopf .kb-pille__text { display: none; }
+/* K:519 — im schmalen Satz bleibt von der Listen-Pille nur der Knopf. */
+@container kb (max-width: 559px) {
+  .kb .kb-pille--klein { padding-left: 3px; }
+  .kb .kb-pille--klein .kb-pille__text { display: none; }
+}
+
+/* ── Stempel (K:123 groß · :191 klein) ────────────────────────────────────────────── */
+.kb .kb-stempel {
+  display: inline-block; padding: 5px 12px;
+  border: 2px solid var(--kb-tuerkis-hell); color: var(--kb-tuerkis-hell); background: var(--kb-papier);
+  font: 700 11px var(--kb-sans); letter-spacing: .14em; text-transform: uppercase;
+  transform: rotate(-11deg);
+}
+.kb .kb-stempel--klein { padding: 2px 7px; border-width: 1.5px; font-size: 9px; letter-spacing: .12em; transform: rotate(-6deg); flex-shrink: 0; }
+@container kb (max-width: 559px) { .kb .kb-stempel--klein { display: none; } }
+
+/* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
+.kb .kb-presets { display: flex; align-items: center; gap: 14px 16px; flex-wrap: wrap; }
+.kb .kb-presets__label { font: italic 300 13px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-presets__stempel {
+  position: relative; padding: 8px 14px 7px; min-height: 44px;
+  border: 1.5px solid var(--kb-grau); border-radius: 4px; background: transparent; color: var(--kb-grau);
+  text-align: left; cursor: pointer; transform: rotate(var(--kb-neigung, 0deg));
+  transition: transform .35s var(--kb-ueber), color .25s, border-color .25s;
+}
+.kb .kb-presets__stempel:hover { transform: rotate(0deg) scale(1.04); }
+.kb .kb-presets__stempel[data-aktiv="an"] { color: var(--kb-magenta); border-color: var(--kb-magenta); }
+.kb .kb-presets__stempel b { display: block; font: 700 11px var(--kb-sans); letter-spacing: .12em; text-transform: uppercase; }
+.kb .kb-presets__stempel span { display: block; font: italic 300 11px var(--kb-serif); margin-top: 2px; opacity: .85; }
+
+/* ── Segment-Umschalter (K:78-82) ─────────────────────────────────────────────────── */
+.kb .kb-segment {
+  position: relative; display: inline-grid; grid-template-columns: repeat(var(--kb-seg-spalten, 3), auto);
+  border: 1px solid var(--kb-t30); height: 44px; overflow: hidden; box-sizing: border-box;
+}
+.kb .kb-segment__block {
+  position: absolute; top: 0; bottom: 0; left: var(--kb-seg-links, 0); width: var(--kb-seg-breite, 0);
+  background: var(--kb-ink);
+  transition: left .45s var(--kb-ueber-sanft), width .45s var(--kb-ueber-sanft);
+}
+.kb .kb-segment__knopf {
+  position: relative; border: 0; background: transparent; padding: 0 18px;
+  font: 500 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer; transition: color .3s;
+  white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis;
+}
+/* Weiß erst, wenn der Block gemessen ist — sonst stünde weiße Schrift auf hellem Papier. */
+.kb .kb-segment[data-gemessen="an"] .kb-segment__knopf[data-aktiv="an"] { color: var(--kb-weiss); }
+@container kb (max-width: 559px) {
+  .kb .kb-segment { display: grid; width: 100%; grid-template-columns: repeat(var(--kb-seg-spalten, 3), 1fr); }
+  .kb .kb-segment__knopf { padding: 0 6px; font-size: 12px; }
+}
+
+/* ── Filter-Chip (K:173) ──────────────────────────────────────────────────────────── */
+.kb .kb-chip {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+  border: 1px solid var(--kb-t25); border-radius: 999px; background: transparent; color: var(--kb-ink);
+  font: 500 13.5px var(--kb-sans); cursor: pointer;
+  transition: background .3s var(--kb-kurve), color .3s, border-color .3s, transform .3s;
+}
+.kb .kb-chip:hover { transform: translateY(-1px); border-color: var(--kb-ink); }
+.kb .kb-chip__punkt { width: 7px; height: 7px; border-radius: 50%; background: var(--kb-t30); transition: background .3s; flex: none; }
+.kb .kb-chip[data-aktiv="an"] { background: var(--kb-ink); color: var(--kb-weiss); border-color: var(--kb-ink); }
+.kb .kb-chip[data-aktiv="an"] .kb-chip__punkt { background: var(--kb-gruen); }
+.kb .kb-chip__zahl { opacity: .7; font-size: 12px; }
+
+/* ── Strich-Link (K:159) ──────────────────────────────────────────────────────────── */
+.kb .kb-strich {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px;
+  border: 0; background: transparent; padding: 0;
+  font: 500 14px var(--kb-sans); color: var(--kb-tuerkis); text-decoration: none; cursor: pointer;
+}
+.kb .kb-strich__strich { width: 18px; height: 1px; background: currentColor; transition: width .45s var(--kb-kurve); }
+.kb .kb-strich:hover .kb-strich__strich,
+.kb .kb-podest:hover .kb-strich__strich { width: 34px; }
+
+/* ── Logorahmen (K:127/:154/:190) ─────────────────────────────────────────────────── */
+.kb .kb-logo {
+  position: relative; flex-shrink: 0; border: 1px solid var(--kb-t18); background: var(--kb-weiss);
+  box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.kb .kb-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.kb .kb-logo b { font: 700 16px var(--kb-serif); color: var(--kb-ink); }
+.kb .kb-logo--gewinner { width: 120px; height: 42px; padding: 4px; }
+.kb .kb-logo--platz, .kb .kb-logo--zeile { width: 96px; height: 34px; padding: 3px; }
+@container kb (max-width: 559px) { .kb .kb-logo--zeile { width: 64px; } }
+
+/* ── Merken (K:145) ───────────────────────────────────────────────────────────────── */
+.kb .kb-merken {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent;
+  padding: 6px 0; min-height: 40px; font: 500 14px var(--kb-sans); color: var(--kb-grau);
+  cursor: pointer; transition: color .2s;
+}
+.kb .kb-merken--klein { gap: 6px; font-size: 13px; }
+.kb .kb-merken[data-gemerkt="an"] { color: var(--kb-gruen-dunkel); }
+.kb .kb-merken svg { transition: fill .3s; }
+
+/* ── Punktzeile: Werte rechts (K:136-138) ─────────────────────────────────────────── */
+.kb .kb__punktzeile-k { font: 400 14px var(--kb-sans); flex-shrink: 0; }
+.kb .kb__punktzeile-v { font: 500 15px var(--kb-sans); font-variant-numeric: tabular-nums; text-align: right; }
+.kb .kb__punktzeile-v[data-gross="an"] { font: 700 19px var(--kb-serif); }
+.kb .kb__punktzeile-v[data-ton="gut"] { color: var(--kb-gruen-dunkel); }
+.kb .kb__punktzeile-v[data-ton="warnung"] { color: var(--kb-magenta); }
+.kb .kb__punktzeile-v[data-ton="werkzeug"] { color: var(--kb-werkzeug); }
+
+/* ── Schalter (nicht in der Kursblatt-Übergabe; Maße aus faden.css:1319-1330) ─────── */
+.kb .kb-schalter {
+  display: inline-flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 0;
+  min-height: 44px; font: 500 14px var(--kb-sans); color: var(--kb-ink); cursor: pointer;
+}
+.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: 12px; background: var(--kb-t18); transition: background .3s; flex: none; }
+.kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--kb-weiss); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); transition: left .35s var(--kb-ueber); }
+.kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf { background: var(--kb-gruen); }
+.kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf i { left: 20px; }
