@@ -73,6 +73,10 @@ export type ErgebnisBlock =
   | { art: "kurve"; titel: string; werte: number[]; jahresTicks?: boolean; xText: (i: number) => string; scrubText: (i: number, v: number) => string }
   | { art: "tabelle"; titel: string; spalten: { key: string; label: string; rechts?: boolean; ton?: "magenta" }[]; zeilen: Record<string, string>[]; letzteBetont?: boolean }
   | { art: "punktzeilen"; titel?: string; zeilen: { k: string; v: string; ton?: "gut" | "warnung" }[] }
+  /** Quote als Ring — ersetzt RechnerGauge (13 Rechner). */
+  | { art: "zeiger"; label: string; wert: number; max?: number; einheit?: string }
+  /** Eigener Wert neben dem Durchschnitt — ersetzt RechnerBenchmark (5 Rechner). */
+  | { art: "messlatte"; titel?: string; wert: number; schnitt: number; einheit?: string; wertLabel?: string; schnittLabel?: string }
   | { art: "hinweis"; text: ReactNode };
 
 export interface Preset<W extends Werte> {
@@ -110,7 +114,8 @@ export interface RechnerSchema<W extends Werte = Werte, E = unknown> {
   /** „Leo rechnet mit: ≈ 387 € im Monat · unverbindlich“ — rollt live mit. */
   vorschau?: (w: W) => { vor: string; zahl: string; nach: string };
   rechne: (w: W, rates: typeof RATES) => E;
-  ergebnis: (e: E, w: W) => ErgebnisBlock[];
+  /** `rates` steht dabei, weil einige Rechner Marktwerte in ihren Zeilen nennen (Mindestlohn, Mehrwertsteuersatz). */
+  ergebnis: (e: E, w: W, rates: typeof RATES) => ErgebnisBlock[];
   /** Pflichthinweis unter dem Ergebnis. */
   hinweis?: string;
   /** Brücke in den Vergleich: übernimmt die Werte in den Hash der Vergleichsseite. */

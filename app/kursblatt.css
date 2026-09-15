@@ -1232,3 +1232,32 @@
 .kb-zettel__klein { display: block; font: 400 11.5px var(--font-body, sans-serif); color: #686C6A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .kb-zettel__fuss { display: block; margin-top: 12px; font: italic 300 11.5px var(--font-heading, serif); color: #686C6A; }
 @media (prefers-reduced-motion: reduce) { .kb-zettel { animation: none; } }
+
+/* ── Zeiger (ersetzt RechnerGauge) ────────────────────────────────────────────────── */
+.kb .kb-zeiger { position: relative; width: 190px; max-width: 100%; margin: 26px auto 0; }
+.kb .kb-zeiger__bild { display: block; width: 100%; height: auto; }
+.kb .kb-zeiger__innen { fill: none; stroke: var(--kb-t25); stroke-width: 1; }
+.kb .kb-zeiger__spur { fill: none; stroke: var(--kb-t12); stroke-width: 5; }
+.kb .kb-zeiger__bogen { fill: none; stroke: var(--kb-werkzeug); stroke-width: 5; stroke-linecap: butt; }
+.kb .kb-zeiger__mitte {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px; text-align: center; pointer-events: none;
+}
+.kb .kb-zeiger__mitte b { font: 900 30px/1 var(--kb-serif); font-variant-numeric: tabular-nums; color: var(--kb-werkzeug); }
+.kb .kb-zeiger__mitte span { font: 400 12px var(--kb-sans); color: var(--kb-grau); }
+
+/* ── Messlatte (ersetzt RechnerBenchmark) ─────────────────────────────────────────── */
+.kb .kb-messlatte { margin-top: 26px; }
+.kb .kb-messlatte__zeile {
+  display: grid; grid-template-columns: minmax(96px, auto) 1fr minmax(72px, auto);
+  align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid var(--kb-t10);
+}
+.kb .kb-messlatte__name { font: 400 13.5px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-messlatte__balken { height: 8px; background: var(--kb-t30); transition: width .9s var(--kb-kurve); }
+.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__balken { background: var(--kb-werkzeug); }
+.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__name { color: var(--kb-ink); font-weight: 600; }
+.kb .kb-messlatte__wert { text-align: right; font: 700 15px var(--kb-serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  .kb .kb-messlatte__balken { transition: none; }
+  .kb .kb-zeiger__bogen { transition: none !important; }
+}

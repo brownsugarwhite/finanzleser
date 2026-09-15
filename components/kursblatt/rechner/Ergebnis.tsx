@@ -14,6 +14,8 @@
 import { useZaehlwerkKb } from "@/lib/kursblatt/useZaehlwerkKb";
 import Anteilsband from "@/components/kursblatt/teile/Anteilsband";
 import Verlaufskurve from "@/components/kursblatt/teile/Verlaufskurve";
+import Zeiger from "@/components/kursblatt/teile/Zeiger";
+import Messlatte from "@/components/kursblatt/teile/Messlatte";
 import { Punktzeile } from "@/components/kursblatt/teile/Kleinteile";
 import type { ErgebnisBlock } from "@/lib/rechner/schema";
 import type { Lauf } from "@/lib/kursblatt/useLauf";
@@ -106,6 +108,10 @@ export default function Ergebnis({
                     {b.zeilen.map((z) => <Punktzeile key={z.k} k={z.k} v={z.v} ton={z.ton} />)}
                   </div>
                 );
+              case "zeiger":
+                return <Zeiger key={i} label={b.label} wert={b.wert} max={b.max} einheit={b.einheit} zeichnen={lauf.zeichnen} aktiv={offen} />;
+              case "messlatte":
+                return <Messlatte key={i} titel={b.titel} wert={b.wert} schnitt={b.schnitt} einheit={b.einheit} wertLabel={b.wertLabel} schnittLabel={b.schnittLabel} />;
               case "hinweis":
                 return <div key={i} className="kb-ergebnis__hinweis">{b.text}</div>;
             }

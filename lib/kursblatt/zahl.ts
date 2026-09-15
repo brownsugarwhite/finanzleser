@@ -30,6 +30,18 @@ export function fmtEuro(wert: number): string {
   return `${Math.round(wert).toLocaleString("de-DE")} €`;
 }
 
+/**
+ * 21.54 → „21,54 €“ · 2921.3 → „2.921 €“.
+ *
+ * Cent nur, wo sie etwas bedeuten: bei einem Stundenlohn sind sie die halbe Aussage, bei
+ * einer Gesamtsumme über 100 € sind sie Rauschen. Dieselbe Regel wie `formatGeld` in
+ * lib/financeads/format.ts — die Vergleiche und die Rechner sollen gleich aussehen.
+ */
+export function fmtGeld(wert: number): string {
+  const dez = Math.abs(wert) >= 100 || Number.isInteger(wert) ? 0 : 2;
+  return `${fmtDe(wert, dez)} €`;
+}
+
 /** 0.68 → „0,68 %“ — immer zwei Nachkommastellen. */
 export function fmtProzent(wert: number, dez = 2): string {
   return `${fmtDe(wert, dez)} %`;

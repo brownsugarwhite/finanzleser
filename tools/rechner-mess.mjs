@@ -19,13 +19,16 @@
  * 🚨 Nur EIN Prozess zur Zeit gegen den Dev-Server (Memory `feedback_mess_disziplin_ionos`).
  */
 import { chromium } from "playwright";
+import { readdirSync } from "node:fs";
+
+/** Alle migrierten Rechner — die Dateien sind die Wahrheit, nicht eine zweite Liste. */
+const ALLE = readdirSync(new URL("../lib/rechner/schemata", import.meta.url))
+  .filter((f) => f.endsWith(".tsx")).map((f) => f.slice(0, -4)).sort();
 
 const arg = (name, standard) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : standard; };
 const BASE = arg("base", "http://localhost:3000").replace(/\/$/, "");
 const SLUG = arg("slug", "kredit");
 const URL = `${BASE}/finanztools/rechner/${SLUG}`;
-/** Ein Rechner, der noch nicht umgezogen ist — er muss unverändert weiterlaufen. */
-const ALT = "brutto-netto";
 
 const ergebnisse = [];
 const ok = (n, gut, notiz = "") => { ergebnisse.push({ n, gut, notiz }); console.log(`${gut ? "✓" : "✗"} ${n}${notiz ? "  → " + notiz : ""}`); };
@@ -261,9 +264,14 @@ await page.waitForTimeout(700);
 ok("390 px ohne waagerechten Überlauf",
   (await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) === 0);
 
-const altHtml = await (await fetch(`${BASE}/finanztools/rechner/${ALT}`)).text();
-ok(`ein nicht migrierter Rechner läuft unverändert (${ALT})`,
-  /rechner-container/.test(altHtml) && !/kb--rechner/.test(altHtml));
+// Seit der letzten Tranche sind ALLE Rechner im Kursblatt. Die Sonde prüft deshalb nicht
+// mehr, ob ein alter noch alt ist, sondern dass keiner zurückgefallen ist.
+const KEINE = [];
+for (const s of ALLE) {
+  const h = await (await fetch(`${BASE}/finanztools/rechner/${s}`)).text();
+  if (!/class="kb kb--rechner"/.test(h) || /rechner-container/.test(h)) KEINE.push(s);
+}
+ok(`alle ${ALLE.length} Rechner stehen im Kursblatt-Satz`, KEINE.length === 0, KEINE.join(", "));
 
 ok("keine Konsolenfehler, keine 500er", fehler.length === 0, fehler.slice(0, 3).join(" | "));
 

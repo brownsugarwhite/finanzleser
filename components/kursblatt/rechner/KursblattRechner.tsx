@@ -95,7 +95,7 @@ export default function KursblattRechner<W extends Werte, E>({
     }, verzug);
   };
 
-  const bloecke = useMemo(() => (ergebnis ? schema.ergebnis(ergebnis, werte) : []), [ergebnis, werte, schema]);
+  const bloecke = useMemo(() => (ergebnis ? schema.ergebnis(ergebnis, werte, rates) : []), [ergebnis, werte, schema, rates]);
 
   return (
     <div className="kb kb--rechner">
