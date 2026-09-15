@@ -43,6 +43,22 @@ const ok = (nr, name, gut, info = "") => { ergebnisse.push({ nr, name, gut, info
   ok(8, "Defekter Endpunkt: Hinweis + noindex", d.includes("wird gerade überarbeitet") && /name="robots" content="noindex/.test(d));
 }
 
+/**
+ * 🚨 Diese Sonde prüft die ALTE Liste (`.vgl__*`). Steht `NEXT_PUBLIC_KURSBLATT=1`, rendert
+ * der Faden stattdessen den Kursblatt-Satz (`.kb--vergleich`) — dann findet hier nichts
+ * mehr statt, und ein Timeout wäre eine irreführende rote Meldung. Also sagen, was Sache
+ * ist, statt zu scheitern. Den Kursblatt-Satz misst tools/kursblatt-mess.mjs.
+ */
+{
+  const probe = await (await fetch(BASE + A)).text();
+  if (/class="kb kb--vergleich"/.test(probe)) {
+    console.log("\n⏭  Übersprungen: die Seiten rendern den Kursblatt-Satz (NEXT_PUBLIC_KURSBLATT=1).");
+    console.log("   Diese Sonde misst die alte Liste. Ohne den Schalter neu starten,");
+    console.log("   oder den Kursblatt-Satz mit tools/kursblatt-mess.mjs prüfen.");
+    process.exit(0);
+  }
+}
+
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, locale: "de-DE" });
 const page = await ctx.newPage();

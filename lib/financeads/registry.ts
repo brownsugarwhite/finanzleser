@@ -604,8 +604,8 @@ export function erlaubteParams(def: KategorieDef): Set<string> {
 
 /** Die serialisierbare Sicht für Client und Insel — ohne `lesen`/`begruendung`. */
 export function defLite(def: KategorieDef): DefLite {
-  const { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis } = def;
-  return { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, sortierung, totalLabel, hinweis };
+  const { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, auswahl, kennzahlen, kursblatt, sortierung, totalLabel, hinweis } = def;
+  return { kategorie, klasse, gruppe, defekt, titel, einzahl, mehrzahl, params, spalten, bestwert, filter, auswahl, kennzahlen, kursblatt, sortierung, totalLabel, hinweis };
 }
 
 export const GRUPPEN_LABEL: Record<Gruppe, string> = { anlegen: "Geld anlegen", konto: "Konto & Karte", kredit: "Kredit & Finanzierung", versicherung: "Versicherungen" };

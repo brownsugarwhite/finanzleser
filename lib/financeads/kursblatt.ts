@@ -94,3 +94,27 @@ export function achsenEnden(haupt: SpalteDef | undefined): [string, string] {
   if (haupt.art === "geld" || haupt.art === "prozent") return ["wenig", "viel"];
   return ["niedrig", "hoch"];
 }
+
+/** „20.000 € über 60 Monate“ — wofür die Liste gerade gilt (K:90). */
+export function eingabenSatz(def: DefLite, fest: Record<string, string>, params: Record<string, string | number>): string {
+  const teile: string[] = [];
+  for (const p of def.params) {
+    if (p.fest || fest[p.key] !== undefined) continue;
+    const roh = params[p.key] ?? p.standard;
+    if (roh === "" || roh === undefined) continue;
+    const dauer = /monat|jahr|dauer|laufzeit/i.test(p.einheit ?? p.label);
+    if (p.typ === "wahl") {
+      const o = p.optionen?.find((x) => String(x.wert) === String(roh));
+      // Auch eine Laufzeit aus einer Auswahlliste hängt sich an: „20.000 € über 12 Monate".
+      if (o) teile.push(dauer && teile.length ? `über ${o.label}` : o.label);
+      continue;
+    }
+    const z = Number(roh);
+    if (!Number.isFinite(z)) continue;
+    const text = `${z.toLocaleString("de-DE")}${p.einheit ? " " + p.einheit : ""}`;
+    // Laufzeiten hängen sich an: „20.000 € über 60 Monate“ liest sich wie ein Satz,
+    // „20.000 € · 60 Monate“ wie eine Aufzählung.
+    teile.push(dauer && teile.length ? `über ${text}` : text);
+  }
+  return teile.join(" ").replace(/ (über)/g, " $1");
+}

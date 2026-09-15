@@ -867,3 +867,71 @@
 /* K:76-77 — die Bezeichnung steht neben dem Umschalter, nicht darüber. */
 .kb .kb-angaben__segment { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; }
 .kb .kb-angaben__segment > b { font: 600 15px var(--kb-serif); }
+
+/* ── Marktüberblick (K:87-113) ────────────────────────────────────────────────────── */
+.kb .kb-markt { margin-top: 46px; }
+@container kb (max-width: 559px) { .kb .kb-markt__tipp { display: none; } }
+
+/* Streuband (K:92-106). Die Höhe ist fest: Beschriftung oben, Achse bei 112, Tooltip bei 138. */
+.kb .kb-band { position: relative; height: 172px; margin-top: 10px; }
+.kb .kb-band__kicker { position: absolute; left: 0; top: 0; }
+.kb .kb-band__achse { position: absolute; left: 0; right: 0; top: 112px; height: 1px; background: var(--kb-ink); }
+.kb .kb-band__ende { position: absolute; top: 122px; font: 500 11px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-band__ende--links { left: 0; }
+.kb .kb-band__ende--rechts { right: 0; }
+.kb .kb-band__schnitt { position: absolute; top: 88px; height: 24px; border-left: 1px dashed var(--kb-grau); transition: left .7s var(--kb-kurve); }
+.kb .kb-band__schnitt-wert {
+  position: absolute; top: 70px; transform: translateX(-50%);
+  font: 500 11.5px var(--kb-sans); color: var(--kb-grau); white-space: nowrap;
+  transition: left .7s var(--kb-kurve);
+}
+/* Beschriftungen hängen sich an den Rändern um, statt aus dem Satz zu laufen. */
+.kb .kb-band__schnitt-wert[data-anker="links"] { transform: none; }
+.kb .kb-band__schnitt-wert[data-anker="rechts"] { transform: translateX(-100%); }
+/* Der Faden vom Bestwert zu seiner Beschriftung — er wächst von der Achse nach oben. */
+.kb .kb-band__faden {
+  position: absolute; top: 44px; height: 68px; width: 1px; background: var(--kb-tuerkis);
+  transform-origin: bottom; transition: left .7s var(--kb-kurve);
+}
+.kb .kb-band__best {
+  position: absolute; top: 28px; padding-left: 8px;
+  font: 700 13px var(--kb-sans); color: var(--kb-tuerkis); white-space: nowrap;
+  transition: left .7s var(--kb-kurve);
+}
+.kb .kb-band__best > span { display: inline-block; }
+.kb .kb-band__best[data-anker="rechts"] { padding: 0 8px 0 0; transform: translateX(-100%); }
+.kb .kb-band__punkt {
+  position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: var(--kb-papier); border: 1.5px solid var(--kb-ink);
+  box-sizing: border-box; padding: 0; cursor: pointer;
+  transition: left .7s var(--kb-kurve), top .5s, width .25s, height .25s, background .25s;
+}
+.kb .kb-band__punkt[data-hell="an"] { width: 16px; height: 16px; background: var(--kb-ink); }
+.kb .kb-band__punkt[data-ist="an"] {
+  width: 14px; height: 14px; background: var(--kb-tuerkis); border: 0;
+  animation: fl-puls 2.2s infinite;
+}
+.kb .kb-band__tip {
+  position: absolute; top: 138px; padding: 5px 10px;
+  background: var(--kb-ink); color: var(--kb-weiss); font: 500 12px var(--kb-sans);
+  white-space: nowrap; transition: opacity .2s, left .3s; pointer-events: none;
+}
+
+/* Kennzahlen (K:107-112). Die große steht im schmalen Satz über die volle Breite. */
+.kb .kb-kennzahlen {
+  display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 14px 28px;
+  margin-top: 22px; padding-top: 12px;
+}
+.kb .kb-kennzahl__label { display: block; font: 400 13px var(--kb-sans); color: var(--kb-grau); }
+.kb .kb-kennzahl__zeile { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.kb .kb-kennzahl__wert { font: 700 clamp(20px, 3.2vw, 24px)/1.1 var(--kb-serif); font-variant-numeric: tabular-nums; }
+.kb .kb-kennzahl__unter { font: italic 300 12.5px var(--kb-serif); color: var(--kb-grau); }
+.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(24px, 4vw, 30px); color: var(--kb-tuerkis); }
+.kb .kb-kennzahl[data-ton="grau"] .kb-kennzahl__wert { color: var(--kb-grau); }
+.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--kb-gruen); }
+.kb .kb-kennzahl[data-ton="magenta"] .kb-kennzahl__wert { color: var(--kb-magenta); }
+.kb .kb-kennzahl[data-gross="an"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(28px, 5vw, 40px); }
+@container kb (max-width: 559px) {
+  .kb .kb-kennzahlen { grid-template-columns: 1fr 1fr; }
+  .kb .kb-kennzahl[data-gross="an"] { grid-column: 1 / -1; }
+}

@@ -16,11 +16,15 @@
  * übereinander wären eine Dopplung, die der Prototyp nur deshalb nicht kennt, weil er
  * ein einzelnes Dokument ist.
  */
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
 import { useVergleichZustand } from "@/lib/financeads/useVergleichZustand";
 import { formatKennwert, formatStand } from "@/lib/financeads/format";
-import { hauptspalte } from "@/lib/financeads/kursblatt";
+import { achsenEnden, eingabenSatz, hauptspalte } from "@/lib/financeads/kursblatt";
+import { kennzahlenBauen } from "@/lib/financeads/kennzahlen";
+import { useLauf } from "@/lib/kursblatt/useLauf";
+import Streuband from "@/components/kursblatt/teile/Streuband";
+import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import IhreAngaben from "./IhreAngaben";
 
@@ -36,10 +40,19 @@ export interface KursblattVergleichProps {
 export default function KursblattVergleich({ slug, def, quelle, daten, beschreibung }: KursblattVergleichProps) {
   const z = useVergleichZustand({ slug, def, quelle, daten });
   const haupt = hauptspalte(def);
+  const [hover, setHover] = useState<number | null>(null);
+  // K:470-472 — bei jeder Änderung an Eingaben, Filtern oder Sortierung laufen die
+  // Reveals neu; dafür wechselt der Name der Keyframes.
+  const lauf = useLauf(JSON.stringify([z.params, z.filter, z.sortKey]));
 
   // K:60 — die Zahlen im Vorspann leben: sie zeigen, was gerade eingestellt ist.
   const best = z.aktuelle.produkte.find((p) => p.id === z.aktuelle.bestwert) ?? z.aktuelle.produkte[0];
   const bestWert = haupt && best ? formatKennwert(haupt, best.kennzahlen[haupt.key]) : "";
+  const achsen = achsenEnden(haupt);
+  const kennzahlen = useMemo(
+    () => kennzahlenBauen(def, haupt, z.zeilen, best, z.params),
+    [def, haupt, z.zeilen, best, z.params],
+  );
 
   const wertetabelle = useMemo(() => ({
     reihen: def.klasse === "A" ? def.spalten.map((s) => s.label) : ["Tarif"],
@@ -65,7 +78,37 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
 
       {z.fehler && <p className="kb__fehler" role="alert">{z.fehler} Gezeigt wird die Voreinstellung.</p>}
 
-      {/* Marktüberblick, Podest und Liste folgen in den nächsten Schritten. */}
+      {haupt && z.zeilen.length > 1 && (
+        <section className="kb-markt">
+          <span className="kb__kicker">Marktüberblick</span>
+          <h2 className="kb__h3">
+            {/* Bewusst „die Angebote" statt einer Kategoriewendung: „die Zinsen" (K:90)
+                liest sich beim Kredit gut, aber nicht bei Konten oder Versicherungen. Was
+                gestreut wird, sagt der Kicker über dem Band. */}
+            Wie weit liegen die Angebote auseinander? Alle {z.zeilen.length} {def.mehrzahl}
+            {eingabenSatz(def, quelle.fest, z.params) ? ` für ${eingabenSatz(def, quelle.fest, z.params)}` : ""}.
+          </h2>
+          <p className="kb__erklaer">
+            Jeder Punkt ist ein Angebot – links {achsen[0]}, rechts {achsen[1]}. Der türkise
+            Punkt ist der Bestwert, die gestrichelte Linie der Durchschnitt.
+            <span className="kb-markt__tipp"> Punkt antippen, um das Angebot unten zu öffnen.</span>
+          </p>
+          <Streuband
+            haupt={haupt}
+            neben={z.mittel[0]}
+            zeilen={z.zeilen}
+            best={best}
+            hover={hover}
+            onHover={setHover}
+            /* Bis die Liste steht, hebt ein Tipp auf den Punkt das Angebot nur hervor;
+               das Öffnen der Zeile kommt mit der Liste dazu. */
+            onOeffnen={setHover}
+            spalte={lauf.spalte}
+            druck={lauf.druck}
+          />
+          <Kennzahlen werte={kennzahlen} />
+        </section>
+      )}
 
       <Wertetabelle
         titel={`${def.titel}: alle ${z.aktuelle.produkte.length} ${def.mehrzahl}`}
