@@ -14,7 +14,7 @@
  * Zwilling `financeads-registry.js`. Wer hier Parameter ändert, lässt den Export laufen.
  */
 import type { ApiProdukt, DefLite, Gruppe, Kategorie, KategorieDef, KennWert, ParamDef, SpalteDef } from "./typen.ts";
-import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte, zweiDrittelZins, giltFuer, spanneText, kreditgeber, zinszahlung, topBonitaet, schutzGrenze } from "./lesehilfen.ts";
+import { pfad, zahl, text, haken, klartext, erstes, maxWert, eintragMit, nurWerte, zweiDrittelZins, giltFuer, spanneText, kreditgeber, zinszahlung, schutzGrenze } from "./lesehilfen.ts";
 
 // ─── wiederkehrende Bausteine ─────────────────────────────────────────────────────────
 
@@ -32,6 +32,51 @@ function dauerLabel(m: number): string {
 
 const S = {
   sicherung: { key: "sicherung", label: "Einlagensicherung", kurz: "Sicherung", art: "text", schmal: true } satisfies SpalteDef,
+};
+
+/**
+ * Sitz der Einlagensicherung — ein nativer Filter von financeads, kein selbstgebauter.
+ *
+ * 🚨 Gemessen 16.09.2026: `deposit_protection_country_iso=DE` schneidet Festgeld von 31
+ * auf 18 und Tagesgeld von 41 auf 19. Ohne diesen Parameter konnten wir nur nachträglich
+ * in einer Liste filtern, die der Partner schon vorgefiltert hatte.
+ */
+/**
+ * 🚨 Nicht übernommen, weil gemessen wirkungslos: `broker` (Tagesgeld und Festgeld
+ * liefern mit 0 und 1 exakt dieselben Produkt-IDs, 16.09.2026), `availability` bei der
+ * Steuersoftware (jeder Wert leert die Liste) und die vier Roboadvisor-Schlüssel
+ * `calculator`/`advertising_space`/`search_default`/`enabled` — das sind interne
+ * Größen des Gateways, keine Angaben eines Lesers.
+ */
+const P_LAND: ParamDef = {
+  key: "deposit_protection_country_iso", label: "Sitz der Bank", typ: "wahl", standard: "",
+  optionen: [
+    { wert: "", label: "alle Länder" },
+    { wert: "DE", label: "nur Deutschland" },
+    { wert: "AT", label: "nur Österreich" },
+    { wert: "NL", label: "nur Niederlande" },
+    { wert: "FR", label: "nur Frankreich" },
+  ],
+};
+
+/**
+ * Länderbonität, wie financeads sie führt.
+ *
+ * 🚨 Das ist der wichtigste Fund der Gegenprüfung vom 16.09.2026: Ohne diesen Parameter
+ * setzt die API von sich aus `AA` — unsere Festgeldliste zeigte 28 statt 31 Angeboten,
+ * und unter den drei stillschweigend fehlenden war mit Multitude Bank (3,40 %, Malta)
+ * eines der besten. Gemessen: AAA → 21 · AA → 28 · A/0 → 31. Andere Werte (BBB, BB, B)
+ * liefern null Produkte, sind also keine Stufen, sondern ungültig.
+ *
+ * Voreinstellung ist deshalb `0` — die vollständige Liste. Wer strenger will, wählt.
+ */
+const P_BONITAET: ParamDef = {
+  key: "country_rating", label: "Länderbonität", typ: "wahl", standard: "0",
+  optionen: [
+    { wert: "0", label: "alle Länder" },
+    { wert: "AA", label: "mindestens AA" },
+    { wert: "AAA", label: "nur AAA" },
+  ],
 };
 
 function sicherung(p: ApiProdukt): string | null {
@@ -96,7 +141,7 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "savingsaccounts", version: "v1", klasse: "A",
     gruppe: "anlegen",
     titel: "Tagesgeld", einzahl: "Tagesgeldkonto", mehrzahl: "Konten",
-    params: [P.anlage(10000, [5000, 10000, 25000, 50000]), P.monate(12, [3, 6, 12, 24])],
+    params: [P.anlage(10000, [5000, 10000, 25000, 50000]), P.monate(12, [3, 6, 12, 24]), P_LAND],
     spalten: [
       { key: "zins", label: "Zins p. a.", kurz: "Zins", art: "prozent", richtung: "hoch" },
       { key: "ertrag", label: "Ertrag im Zeitraum", kurz: "Ertrag", art: "geld", richtung: "hoch" },
@@ -117,7 +162,7 @@ const KATEGORIEN: KategorieDef[] = [
     // Sieben Laufzeiten statt fünf, Voreinstellung 36 Monate (F:199, F:224). Sie tragen
     // zugleich die Zinskurve: jede ist eine Variante im Snapshot, aus der sich der beste
     // und der durchschnittliche Zins je Laufzeit rechnen lässt.
-    params: [P.anlage(20000, [5000, 10000, 20000, 50000]), P.monate(36, [3, 6, 12, 24, 36, 48, 60])],
+    params: [P.anlage(20000, [5000, 10000, 20000, 50000]), P.monate(36, [3, 6, 12, 24, 36, 48, 60]), P_BONITAET, P_LAND],
     // Reihenfolge = Satzreihenfolge: Ertrag ordnet die Liste, der Zins kennzeichnet das
     // Angebot, Endbetrag und Zinszahlung stehen beim Gewinner unter der Punktführung,
     // das Land in der dritten Listenspalte.
@@ -131,21 +176,8 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "land", label: "Land", art: "text", schmal: true, nurDetails: true },
       S.sicherung,
       { key: "schutz_max", label: "Gesichert", art: "text", schmal: true, nurDetails: true },
-      { key: "bonitaet", label: "Land mit Top-Bonität", art: "haken", schmal: true, nurDetails: true },
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
-    // Die drei Sicherungsstufen sind laut Übergabe ein Register, kein Chip (F:65): eine
-    // Entscheidung mit drei Stufen, nicht drei unabhängige Haken.
-    auswahl: [{
-      key: "sicherheit", label: "Einlagensicherung", standard: "alle",
-      optionen: [
-        // Nicht „Alle EU-Länder" wie im Prototyp: gemessen ist ein Angebot aus
-        // Liechtenstein dabei — EWR, nicht EU. Die Beschriftung muss die Daten treffen.
-        { wert: "alle", label: "Alle Länder" },
-        { wert: "top", label: "Nur Top-Bonität", kennzahl: "bonitaet", ist: true },
-        { wert: "de", label: "Nur Deutschland", kennzahl: "land", ist: "DE" },
-      ],
-    }],
     kennzahlen: [
       { key: "best", label: "Zinsertrag mit dem Bestwert", unter: "über die gewählte Anlagedauer", art: "geld", ton: "werkzeug", formel: { art: "best", key: "ertrag" } },
       // `{differenz}` setzt `kennzahlenBauen` ein — wie `{zins}` weiter unten.
@@ -164,7 +196,7 @@ const KATEGORIEN: KategorieDef[] = [
     // („Finanzleser Festgeld & Eingaben - Kursblatt.dc.html“:99, „Das beste Angebot").
     kursblatt: {
       band: "kurve", podest: 1, stempel: "Höchster Ertrag",
-      kennwert: "zins", dritteSpalte: { key: "land", punkt: "bonitaet" },
+      kennwert: "zins", dritteSpalte: { key: "land" },
       ohne: { key: "zins", ist: 0, text: "mit 0 % Zinsen" },
     },
     sortierung: [{ key: "ertrag", label: "Ertrag" }, { key: "zins", label: "Zins" }],
@@ -181,7 +213,6 @@ const KATEGORIEN: KategorieDef[] = [
         zahlung: zinszahlung(pfad(p.conditions, "interest_rate")),
         land: iso,
         schutz_max: schutzGrenze(pfad(p.details, "deposit_protection.protected_max")),
-        bonitaet: topBonitaet(iso),
       });
     },
     begruendung: (p) => p.kennzahlen.sicherung === "Deutschland" ? "höchster Ertrag mit deutscher Einlagensicherung" : "höchster Ertrag über die Laufzeit",
@@ -193,6 +224,8 @@ const KATEGORIEN: KategorieDef[] = [
     params: [
       { key: "incoming_monthly", label: "Geldeingang / Monat", typ: "zahl", standard: 1200, einheit: "€", min: 0, max: 20000, schritt: 100, presets: [0, 1200, 2500] },
       { key: "average_balance", label: "Durchschnittlicher Kontostand", typ: "zahl", standard: 1000, einheit: "€", min: 0, max: 100000, schritt: 100 },
+      // Gemessen 16.09.2026: ab einer Buchung je Monat kommen zwei Konten dazu (37 → 39).
+      { key: "transaction", label: "Buchungen / Monat", typ: "zahl", standard: 0, min: 0, max: 200, schritt: 1 },
       // Zielgruppe als Umschalter im Rechner (wie im financeads-Rechner), keine eigenen Seiten je Gruppe.
       // Nur das Studentenkonto hat eine eigene URL — die gab es schon vorher, und financeads führt sie selbst.
       { key: "target_group", label: "Zielgruppe", typ: "wahl", standard: "", presets: ["", "student", "pupil", "apprentice"], optionen: [{ wert: "", label: "alle" }, { wert: "student", label: "Studierende" }, { wert: "pupil", label: "Schüler" }, { wert: "apprentice", label: "Azubis" }, { wert: "employee", label: "Angestellte" }] },
@@ -239,6 +272,12 @@ const KATEGORIEN: KategorieDef[] = [
     titel: "Kreditkarte", einzahl: "Kreditkarte", mehrzahl: "Karten",
     params: [
       { key: "transaction_eu", label: "Umsatz / Jahr in Europa", typ: "zahl", standard: 2500, einheit: "€", min: 0, max: 100000, schritt: 500 },
+      // 🚨 Diese drei ändern die Trefferzahl nicht, wohl aber `calculated_conditions` —
+      // financeads rechnet Guthabenzins und Gebühren daraus (gemessen 16.09.2026). Ohne
+      // sie rechnete die API still mit ihren eigenen Vorgaben (1.000 € / 1.200 € / 0).
+      { key: "average_balance", label: "Durchschnittlicher Kontostand", typ: "zahl", standard: 1000, einheit: "€", min: 0, max: 100000, schritt: 100 },
+      { key: "incoming_monthly", label: "Geldeingang / Monat", typ: "zahl", standard: 1200, einheit: "€", min: 0, max: 20000, schritt: 100 },
+      { key: "transaction", label: "Buchungen / Monat", typ: "zahl", standard: 0, min: 0, max: 200, schritt: 1 },
       // Beide Filter als Umschalter im Rechner (Chips), keine eigenen Seiten „Reisekreditkarte"/„kostenlose Kreditkarte".
       { key: "travel_creditcard", label: "Reisekreditkarte", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur Reisekarten" }] },
       { key: "free_products", label: "Jahresgebühr", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur ohne Jahresgebühr" }] },
@@ -468,6 +507,8 @@ const KATEGORIEN: KategorieDef[] = [
     params: [
       { key: "coin_symbol", label: "Kryptowährung", typ: "wahl", standard: "BTC", optionen: [{ wert: "BTC", label: "Bitcoin" }, { wert: "ETH", label: "Ethereum" }, { wert: "XRP", label: "XRP" }, { wert: "SOL", label: "Solana" }, { wert: "BNB", label: "BNB" }, { wert: "USDT", label: "Tether" }], presets: ["BTC", "ETH", "SOL"] },
       { key: "order_volume", label: "Ordervolumen", typ: "zahl", standard: 500, einheit: "€", min: 10, max: 100000, schritt: 10, presets: [100, 500, 2000] },
+      // Ändert die Trefferzahl nicht, geht aber in die Gebührenrechnung ein.
+      { key: "order_count_pa", label: "Orders / Jahr", typ: "zahl", standard: 12, min: 1, max: 500, schritt: 1 },
     ],
     spalten: [
       { key: "coins", label: "Handelbare Coins", kurz: "Coins", art: "zahl", richtung: "hoch", schmal: true },
@@ -518,7 +559,14 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "taxsoftware", version: "v1", klasse: "A",
     gruppe: "konto",
     titel: "Steuersoftware", einzahl: "Programm", mehrzahl: "Programme",
-    params: [],
+    // 🚨 `availability` kennt die API zwar, liefert aber mit JEDEM Wert null Produkte
+    // (ONLINE/OFFLINE/APP/DESKTOP, gemessen 16.09.2026) — ein Filter, der die Liste immer
+    // leert, ist keiner. Er bleibt draußen, bis der Partner dort Daten führt.
+    params: [
+      { key: "target_group", label: "Für wen", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "EMPLOYEE", label: "Angestellte" }, { wert: "SELF_EMPLOYED", label: "Selbstständige" }, { wert: "PENSIONER", label: "Rentner" }, { wert: "STUDENT", label: "Studierende" }] },
+      { key: "tax_returns_per_year", label: "Steuererklärungen / Jahr", typ: "zahl", standard: 1, min: 1, max: 20, schritt: 1 },
+      { key: "duration_of_use", label: "Nutzungsdauer", typ: "wahl", standard: 1, einheit: "Jahre", optionen: [1, 2, 3, 5].map((j) => ({ wert: String(j), label: `${j} ${j === 1 ? "Jahr" : "Jahre"}` })) },
+    ],
     spalten: [
       { key: "preis", label: "Kaufpreis", art: "geld", richtung: "runter" },
       { key: "gebuehr", label: "Gebühr je Steuererklärung", kurz: "je Erklärung", art: "geld", richtung: "runter" },
@@ -553,6 +601,9 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "rental_deposit", label: "Kautionshöhe", typ: "zahl", standard: 900, einheit: "€", min: 100, max: 20000, schritt: 50, presets: [500, 900, 1500, 3000] },
       { key: "duration", label: "Laufzeit", typ: "wahl", standard: 3, einheit: "Jahre", optionen: [1, 2, 3, 5].map((j) => ({ wert: String(j), label: `${j} ${j === 1 ? "Jahr" : "Jahre"}` })) },
       { key: "usage", label: "Nutzung", typ: "wahl", standard: "PRIVATE", optionen: [{ wert: "PRIVATE", label: "privat" }, { wert: "FIRMA", label: "Firma" }, { wert: "STARTUP", label: "Start-up" }] },
+      // Gemessen 16.09.2026: 0 → 2 Angebote · 1 → 3 · 2 → 5. Der Wert ist eine
+      // Höchstanforderung, nicht ein Haken; die Voreinstellung zeigt alles.
+      { key: "tenant_protection", label: "Mieterschutz", typ: "wahl", standard: 2, optionen: [{ wert: "2", label: "egal" }, { wert: "1", label: "mit Mieterschutz" }, { wert: "0", label: "ohne Mieterschutz" }] },
     ],
     spalten: [
       { key: "praemie", label: "Beitrag / Jahr", art: "geld", richtung: "runter" },
@@ -582,7 +633,10 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "animal_type", label: "Tier", typ: "wahl", standard: "DOG", presets: ["DOG", "CAT"], optionen: [{ wert: "DOG", label: "Hund" }, { wert: "CAT", label: "Katze" }] },
       { key: "age", label: "Alter des Tieres", typ: "wahl", standard: 2, einheit: "Jahre", optionen: [0, 1, 2, 3, 5, 7, 9].map((a) => ({ wert: String(a), label: a === 0 ? "unter 1 Jahr" : `${a} Jahre` })), presets: [0, 2, 5, 8] },
       { key: "excess", label: "Selbstbeteiligung", typ: "wahl", standard: 0, einheit: "€", optionen: [0, 150, 250, 350, 500].map((e) => ({ wert: String(e), label: e === 0 ? "keine" : `${e} €` })) },
-      { key: "coverage", label: "Schutz", typ: "wahl", standard: "OP", optionen: [{ wert: "OP", label: "OP-Schutz" }, { wert: "FULL", label: "Vollschutz" }] },
+      // 🚨 `coverage` war ein Versprechen ohne Deckung: die API kennt den Parameter nicht
+      // (kein Echo in `filter_settings`, keine Wirkung auf die Trefferzahl, gemessen
+      // 16.09.2026 mit 50/80/100 und "OP"/"FULL"). Ein Schalter, der nichts tut, ist
+      // schlimmer als keiner — er ist raus. Was ein Tarif deckt, steht in den Spalten.
       { key: "risky_group", label: "Rassegruppe", typ: "wahl", standard: "RG1", optionen: [{ wert: "RG1", label: "Gruppe 1" }, { wert: "RG2", label: "Gruppe 2" }, { wert: "RG3", label: "Gruppe 3" }] },
     ],
     spalten: [

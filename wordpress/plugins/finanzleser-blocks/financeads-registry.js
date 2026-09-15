@@ -60,6 +60,40 @@ window.FL_FINANCEADS = {
             24
           ],
           "fest": false
+        },
+        {
+          "key": "deposit_protection_country_iso",
+          "label": "Sitz der Bank",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "alle Länder"
+            },
+            {
+              "wert": "DE",
+              "label": "nur Deutschland"
+            },
+            {
+              "wert": "AT",
+              "label": "nur Österreich"
+            },
+            {
+              "wert": "NL",
+              "label": "nur Niederlande"
+            },
+            {
+              "wert": "FR",
+              "label": "nur Frankreich"
+            }
+          ],
+          "presets": [],
+          "fest": false
         }
       ],
       "spalten": [
@@ -151,6 +185,66 @@ window.FL_FINANCEADS = {
             60
           ],
           "fest": false
+        },
+        {
+          "key": "country_rating",
+          "label": "Länderbonität",
+          "typ": "wahl",
+          "standard": "0",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "0",
+              "label": "alle Länder"
+            },
+            {
+              "wert": "AA",
+              "label": "mindestens AA"
+            },
+            {
+              "wert": "AAA",
+              "label": "nur AAA"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "deposit_protection_country_iso",
+          "label": "Sitz der Bank",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "alle Länder"
+            },
+            {
+              "wert": "DE",
+              "label": "nur Deutschland"
+            },
+            {
+              "wert": "AT",
+              "label": "nur Österreich"
+            },
+            {
+              "wert": "NL",
+              "label": "nur Niederlande"
+            },
+            {
+              "wert": "FR",
+              "label": "nur Frankreich"
+            }
+          ],
+          "presets": [],
+          "fest": false
         }
       ],
       "spalten": [
@@ -181,10 +275,6 @@ window.FL_FINANCEADS = {
         {
           "key": "schutz_max",
           "label": "Gesichert"
-        },
-        {
-          "key": "bonitaet",
-          "label": "Land mit Top-Bonität"
         }
       ],
       "bestwert": "ertrag"
@@ -221,6 +311,19 @@ window.FL_FINANCEADS = {
           "min": 0,
           "max": 100000,
           "schritt": 100,
+          "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "transaction",
+          "label": "Buchungen / Monat",
+          "typ": "zahl",
+          "standard": 0,
+          "einheit": "",
+          "min": 0,
+          "max": 200,
+          "schritt": 1,
           "optionen": [],
           "presets": [],
           "fest": false
@@ -357,6 +460,45 @@ window.FL_FINANCEADS = {
           "min": 0,
           "max": 100000,
           "schritt": 500,
+          "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "average_balance",
+          "label": "Durchschnittlicher Kontostand",
+          "typ": "zahl",
+          "standard": 1000,
+          "einheit": "€",
+          "min": 0,
+          "max": 100000,
+          "schritt": 100,
+          "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "incoming_monthly",
+          "label": "Geldeingang / Monat",
+          "typ": "zahl",
+          "standard": 1200,
+          "einheit": "€",
+          "min": 0,
+          "max": 20000,
+          "schritt": 100,
+          "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "transaction",
+          "label": "Buchungen / Monat",
+          "typ": "zahl",
+          "standard": 0,
+          "einheit": "",
+          "min": 0,
+          "max": 200,
+          "schritt": 1,
           "optionen": [],
           "presets": [],
           "fest": false
@@ -981,6 +1123,19 @@ window.FL_FINANCEADS = {
             2000
           ],
           "fest": false
+        },
+        {
+          "key": "order_count_pa",
+          "label": "Orders / Jahr",
+          "typ": "zahl",
+          "standard": 12,
+          "einheit": "",
+          "min": 1,
+          "max": 500,
+          "schritt": 1,
+          "optionen": [],
+          "presets": [],
+          "fest": false
         }
       ],
       "spalten": [
@@ -1034,7 +1189,85 @@ window.FL_FINANCEADS = {
       "titel": "Steuersoftware",
       "klasse": "A",
       "defekt": false,
-      "params": [],
+      "params": [
+        {
+          "key": "target_group",
+          "label": "Für wen",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "alle"
+            },
+            {
+              "wert": "EMPLOYEE",
+              "label": "Angestellte"
+            },
+            {
+              "wert": "SELF_EMPLOYED",
+              "label": "Selbstständige"
+            },
+            {
+              "wert": "PENSIONER",
+              "label": "Rentner"
+            },
+            {
+              "wert": "STUDENT",
+              "label": "Studierende"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "tax_returns_per_year",
+          "label": "Steuererklärungen / Jahr",
+          "typ": "zahl",
+          "standard": 1,
+          "einheit": "",
+          "min": 1,
+          "max": 20,
+          "schritt": 1,
+          "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "duration_of_use",
+          "label": "Nutzungsdauer",
+          "typ": "wahl",
+          "standard": 1,
+          "einheit": "Jahre",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "1",
+              "label": "1 Jahr"
+            },
+            {
+              "wert": "2",
+              "label": "2 Jahre"
+            },
+            {
+              "wert": "3",
+              "label": "3 Jahre"
+            },
+            {
+              "wert": "5",
+              "label": "5 Jahre"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        }
+      ],
       "spalten": [
         {
           "key": "preis",
@@ -1126,6 +1359,32 @@ window.FL_FINANCEADS = {
             {
               "wert": "STARTUP",
               "label": "Start-up"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "tenant_protection",
+          "label": "Mieterschutz",
+          "typ": "wahl",
+          "standard": 2,
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "2",
+              "label": "egal"
+            },
+            {
+              "wert": "1",
+              "label": "mit Mieterschutz"
+            },
+            {
+              "wert": "0",
+              "label": "ohne Mieterschutz"
             }
           ],
           "presets": [],
@@ -1259,28 +1518,6 @@ window.FL_FINANCEADS = {
             {
               "wert": "500",
               "label": "500 €"
-            }
-          ],
-          "presets": [],
-          "fest": false
-        },
-        {
-          "key": "coverage",
-          "label": "Schutz",
-          "typ": "wahl",
-          "standard": "OP",
-          "einheit": "",
-          "min": null,
-          "max": null,
-          "schritt": null,
-          "optionen": [
-            {
-              "wert": "OP",
-              "label": "OP-Schutz"
-            },
-            {
-              "wert": "FULL",
-              "label": "Vollschutz"
             }
           ],
           "presets": [],
