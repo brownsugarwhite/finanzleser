@@ -19,9 +19,9 @@ import Seitenreiter from "@/components/kursblatt/teile/Seitenreiter";
 import StempelPresets from "@/components/kursblatt/teile/StempelPresets";
 import PilleCTA from "@/components/kursblatt/teile/PilleCTA";
 import Odometer from "@/components/kursblatt/eingabe/Odometer";
-import { StrichLink } from "@/components/kursblatt/teile/Kleinteile";
 import Felder from "./Felder";
 import Ergebnis from "./Ergebnis";
+import Bruecke from "./Bruecke";
 import type { RechnerSchema, Werte } from "@/lib/rechner/schema";
 
 /** K:236 — „15. September 2026 · Kursblatt“. Rein darstellend, kein Datenstand. */
@@ -127,20 +127,7 @@ export default function KursblattRechner<W extends Werte, E>({
         <Ergebnis bloecke={bloecke} offen={Boolean(ergebnis)} veraltet={veraltet} lauf={lauf} kopfRef={ergRef} />
 
         {ergebnis && schema.bruecke && (
-          <div className="kb-bruecke">
-            <span className="kb__kicker kb__kicker--werkzeug kb__kicker--vergleich">
-              <i aria-hidden="true" />
-              Passende Angebote
-            </span>
-            <p className="kb-bruecke__satz">{schema.bruecke.satz(werte, ergebnis)}</p>
-            <div className="kb-bruecke__aktionen">
-              <PilleCTA
-                text="Angebote ansehen" glyph="hoch" werkzeug="tuerkis"
-                href={`/finanztools/vergleiche/${schema.bruecke.slug}#vgl:${Object.entries(schema.bruecke.uebernimm(werte)).map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join("&")}`}
-              />
-              <StrichLink text="Alle Rechner" href="/finanztools/rechner" />
-            </div>
-          </div>
+          <Bruecke bruecke={schema.bruecke} rechnerTitel={schema.titel} werte={werte} ergebnis={ergebnis} />
         )}
       </section>
     </div>

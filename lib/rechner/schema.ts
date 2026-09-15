@@ -83,6 +83,18 @@ export interface Preset<W extends Werte> {
   neigung: string;
 }
 
+/**
+ * Was der Vergleich für die Eingaben des Rechners gerade hergibt — die Zahlen der Brücke
+ * („aktuell 20 Angebote ab 0,68 %, das wären ab 339 € im Monat“).
+ */
+export interface MarktKurz {
+  titel: string;
+  mehrzahl: string;
+  anzahl: number;
+  href: string;
+  bestwert: { anbieter: string; wert: string; label: string; total: string | null; totalLabel: string | null } | null;
+}
+
 export interface RechnerSchema<W extends Werte = Werte, E = unknown> {
   slug: string;
   /** „Kreditrechner“ — steht als H2 im Kursblatt. */
@@ -105,7 +117,15 @@ export interface RechnerSchema<W extends Werte = Werte, E = unknown> {
   bruecke?: {
     slug: string;
     titel: string;
-    satz: (w: W, e: E) => ReactNode;
+    /**
+     * Der Satz über der Pille. `markt` trägt die Zahlen, die der Vergleich für GENAU
+     * diese Eingaben nennt (`/api/vergleich-daten/<slug>?kurz=1&…`) — er fehlt, solange
+     * sie laden, und bleibt weg, wenn der Partner nicht antwortet. Der Satz muss deshalb
+     * auch ohne ihn stehen können.
+     */
+    satz: (w: W, e: E, markt?: MarktKurz) => ReactNode;
     uebernimm: (w: W) => Record<string, string | number>;
+    /** Beschriftung im Aktenkoffer; fehlt sie, steht der Titel des Rechners da. */
+    koffer?: (w: W, e: E) => string;
   };
 }

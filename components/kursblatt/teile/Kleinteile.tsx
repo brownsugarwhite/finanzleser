@@ -9,7 +9,7 @@
  *
  * Bis auf Chip, Merken und Schalter alles Serverkomponenten — es gibt nichts zu bedienen.
  */
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 /* ── Filter-Chip (K:173) ─────────────────────────────────────────────────────────── */
 export function Chip({
@@ -32,17 +32,20 @@ export function Chip({
 
 /* ── Strich-Link: der Strich wächst beim Überfahren (K:159) ──────────────────────── */
 export function StrichLink({
-  text, href, rel, target, onClick,
+  text, href, rel, target, onClick, erledigt = false,
 }: {
   text: string;
   href?: string;
   rel?: string;
   target?: string;
-  onClick?: () => void;
+  /** Bekommt das Ereignis, weil der Aktenkoffer-Flug vom geklickten Knopf ausgeht. */
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  /** Erledigt: der Strich bleibt stehen, der Text wird grün („Im Aktenkoffer ✓“). */
+  erledigt?: boolean;
 }) {
   const inneres = (<><span>{text}</span><i className="kb-strich__strich" aria-hidden="true" /></>);
   if (href) return <a className="kb-strich" href={href} rel={rel} target={target}>{inneres}</a>;
-  return <button type="button" className="kb-strich" onClick={onClick}>{inneres}</button>;
+  return <button type="button" className="kb-strich" data-erledigt={erledigt ? "an" : "aus"} aria-disabled={erledigt || undefined} onClick={onClick}>{inneres}</button>;
 }
 
 /* ── Logorahmen (K:127 Gewinner 120×42, :154 Platz 96×34, :190 Zeile 96/64×34) ───── */

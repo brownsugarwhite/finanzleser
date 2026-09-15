@@ -698,6 +698,10 @@
 /* K:484 — auf Platz 2 und 3 wächst der Strich, sobald die KARTE überfahren wird, nicht
    erst der Link selbst. Der ganze Platz ist die Schaltfläche. */
 .kb .kb-platz:hover .kb-strich__strich { width: 34px; }
+/* „Im Aktenkoffer ✓“: erledigt, also grün und ohne Zeiger — der Strich bleibt stehen,
+   damit die Zeile nicht springt. */
+.kb .kb-strich[data-erledigt="an"] { color: var(--kb-gruen-dunkel); cursor: default; }
+.kb .kb-strich[data-erledigt="an"] .kb-strich__strich { width: 34px; }
 
 /* ── Logorahmen (K:127/:154/:190) ─────────────────────────────────────────────────── */
 .kb .kb-logo {

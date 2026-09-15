@@ -115,13 +115,25 @@ export const kreditSchema: RechnerSchema<W, KreditResult> = {
   bruecke: {
     slug: "autokredit-vergleich",
     titel: "Autokredit-Vergleich",
-    satz: (w) => (
-      <>
-        Für {fmtEuro(w.kreditsumme)} über {w.laufzeitMonate} Monate zeigt der
-        Autokredit-Vergleich die Angebote, die zu diesen Angaben passen — mit dem
-        effektiven Jahreszins, den die Banken dafür heute nennen.
-      </>
-    ),
+    // 🚨 Zwei Sätze, nicht einer mit Lücken: solange die Marktzahlen laden (oder der
+    // Partner schweigt), steht hier ein vollständiger Satz und kein Gerüst mit „…".
+    satz: (w, e, markt) =>
+      markt?.bestwert ? (
+        <>
+          Für {fmtEuro(w.kreditsumme)} über {w.laufzeitMonate} Monate gibt es im
+          Autokredit-Vergleich aktuell <b>{markt.anzahl} {markt.mehrzahl}</b> –
+          {" "}<b>{markt.bestwert.wert}</b> effektiv
+          {markt.bestwert.total ? <>, das wären <b>{markt.bestwert.total}</b> im Monat</> : null}
+          {" "}statt Ihrer {fmtEuro(e.monatsrate)}.
+        </>
+      ) : (
+        <>
+          Für {fmtEuro(w.kreditsumme)} über {w.laufzeitMonate} Monate zeigt der
+          Autokredit-Vergleich die Angebote, die zu diesen Angaben passen — mit dem
+          effektiven Jahreszins, den die Banken dafür heute nennen.
+        </>
+      ),
+    koffer: (w, e) => `Kreditrechner: ${fmtEuro(w.kreditsumme)} über ${w.laufzeitMonate} Monate, ${fmtEuro(e.monatsrate)} im Monat`,
     // Die Schlüssel sind die Parameter der Registry-Kategorie „loans“
     // (lib/financeads/registry.ts): loan und duration_months.
     uebernimm: (w) => ({

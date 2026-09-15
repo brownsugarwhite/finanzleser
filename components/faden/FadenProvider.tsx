@@ -100,6 +100,18 @@ export function useFaden(): FadenContextWert {
   return c;
 }
 
+/**
+ * Wie `useFaden`, aber ohne Ausnahme: `null`, wenn kein Faden darüber liegt.
+ *
+ * Für Bausteine, die in BEIDEN Welten laufen — der Kursblatt-Rechner steht im Faden, auf
+ * `/finanztools/rechner/<slug>` ohne Faden und im Artikel-Einbau der alten Seite. Was nur
+ * der Faden kann (Aktenkoffer, Toast), entfällt dort stillschweigend, statt die Seite
+ * mit einer Ausnahme abzuräumen.
+ */
+export function useFadenOptional(): FadenContextWert | null {
+  return useContext(FadenContext);
+}
+
 const MAX_VERLAUF = 8;
 /** Mindeststandzeit des Skeletts in ms (Prototyp: feste 560 ms; hier nur so lang, dass es nicht blitzt). */
 const SKELETT_MIN = 240;
