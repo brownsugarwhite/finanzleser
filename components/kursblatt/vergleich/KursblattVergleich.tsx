@@ -16,7 +16,7 @@
  * übereinander wären eine Dopplung, die der Prototyp nur deshalb nicht kennt, weil er
  * ein einzelnes Dokument ist.
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { DefLite, VergleichDaten, VergleichQuelle } from "@/lib/financeads/typen";
 import { useVergleichZustand } from "@/lib/financeads/useVergleichZustand";
 import { formatKennwert, formatStand } from "@/lib/financeads/format";
@@ -27,6 +27,7 @@ import Streuband from "@/components/kursblatt/teile/Streuband";
 import Kennzahlen from "@/components/kursblatt/teile/Kennzahlen";
 import Podest from "@/components/kursblatt/teile/Podest";
 import AlleAngebote from "./AlleAngebote";
+import Merkzettel from "@/components/kursblatt/teile/Merkzettel";
 import Wertetabelle from "@/components/statistik/formen/Wertetabelle";
 import IhreAngaben from "./IhreAngaben";
 
@@ -45,9 +46,27 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
   const [hover, setHover] = useState<number | null>(null);
   const [offen, setOffen] = useState<number | null>(null);
   // K:139 — der Merkzettel fasst drei; der vierte verdrängt den ältesten.
+  // Er überlebt einen Seitenwechsel innerhalb der Sitzung, aber nicht mehr: gemerkt ist
+  // eine Notiz für jetzt, kein Konto. Erst im Effekt lesen, sonst weicht der erste
+  // Client-Render vom gelieferten HTML ab.
   const [gemerkt, setGemerkt] = useState<number[]>([]);
+  const schluessel = `kb-merk-${slug}`;
+  useEffect(() => {
+    try {
+      const roh = sessionStorage.getItem(schluessel);
+      if (roh) setGemerkt(JSON.parse(roh) as number[]);
+    } catch { /* ohne Sitzungsspeicher merkt der Zettel eben nur bis zum Seitenwechsel */ }
+  }, [schluessel]);
   const merken = (id: number) =>
-    setGemerkt((g) => (g.includes(id) ? g.filter((x) => x !== id) : [...g, id].slice(-3)));
+    setGemerkt((g) => {
+      const neu = g.includes(id) ? g.filter((x) => x !== id) : [...g, id].slice(-3);
+      try { sessionStorage.setItem(schluessel, JSON.stringify(neu)); } catch { /* egal */ }
+      return neu;
+    });
+  const leeren = () => {
+    setGemerkt([]);
+    try { sessionStorage.removeItem(schluessel); } catch { /* egal */ }
+  };
   // K:470-472 — bei jeder Änderung an Eingaben, Filtern oder Sortierung laufen die
   // Reveals neu; dafür wechselt der Name der Keyframes.
   const lauf = useLauf(JSON.stringify([z.params, z.filter, z.sortKey]));
@@ -143,6 +162,17 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
           offen={offen} onOeffnen={setOffen}
           gemerkt={gemerkt} onMerken={merken}
           stempel={lauf.stempel} herz={lauf.herz} tempo={1}
+        />
+      )}
+
+      {haupt && (
+        <Merkzettel
+          eintraege={gemerkt.map((id) => z.aktuelle.produkte.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p)}
+          haupt={haupt}
+          total={neben[0]}
+          bestId={best?.id}
+          onEntfernen={merken}
+          onLeeren={leeren}
         />
       )}
 

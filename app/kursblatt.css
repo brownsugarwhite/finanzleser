@@ -1089,3 +1089,42 @@
   .kb .kb__zeile-aktionen, .kb .kb__details-raster { padding-left: 0; }
   .kb .kb__details-raster { grid-template-columns: 1fr; }
 }
+
+/* ── Merkzettel (K:215-231) ───────────────────────────────────────────────────────── */
+/* 🚨 Liegt per Portal am <body>, außerhalb von `.kb` — deshalb hier ohne `.kb`-Vorsatz,
+   und die Tokens stehen am Element selbst. */
+.kb-zettel {
+  position: fixed; right: 16px; z-index: 50;
+  /* Über Leos fester Eingabe, nicht darauf (faden.css:206). Außerhalb des Fadens
+     greift der Rückfallwert. */
+  bottom: calc(var(--eingabe-h, 0px) + 16px);
+  /* 🚨 Beim Messen erscheint der Zettel 3 px breiter als berechnet und 2 px nach links
+     versetzt. Das ist keine Abweichung: `fl-zettel` endet auf `rotate(-1deg)` (K:34),
+     und ein gedrehter Kasten hat eine größere achsenparallele Hülle. Wer hier Breiten
+     prüft, liest den berechneten Wert, nicht das Rechteck. */
+  width: min(360px, calc(100vw - 32px));
+  background: #fff; border: 1px solid rgba(51, 74, 39, .22);
+  box-shadow: 2px 4px 0 rgba(51, 74, 39, .08), 0 24px 40px -22px rgba(51, 74, 39, .45);
+  padding: 16px 18px 14px; box-sizing: border-box;
+  font-family: var(--font-body, "Open Sans", sans-serif); color: #334A27;
+  animation: fl-zettel .7s cubic-bezier(.2, .8, .2, 1) both;
+}
+.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: #45A117; border: 2px solid #fff; box-sizing: border-box; }
+.kb-zettel__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.kb-zettel__kopf .kb__kicker { font: 700 10.5px/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: #686C6A; }
+.kb-zettel__leeren { border: 0; background: transparent; padding: 6px 0; font: 400 12px var(--font-body, sans-serif); color: #686C6A; cursor: pointer; text-decoration: underline dotted; }
+.kb-zettel__raster { display: grid; gap: 14px; margin-top: 10px; }
+.kb-zettel__karte { position: relative; padding-top: 10px; border-top: 2px solid #334A27; min-width: 0; }
+.kb-zettel__karte[data-ist="an"] { border-top-color: #0B7F66; }
+.kb-zettel__weg { position: absolute; right: -6px; top: 2px; border: 0; background: transparent; padding: 6px 8px; font: 400 16px/1 var(--font-body, sans-serif); color: #686C6A; cursor: pointer; }
+.kb-zettel__karte b { display: block; font: 700 13px var(--font-heading, serif); padding-right: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__wert { display: block; margin-top: 4px; font: 900 22px/1.2 var(--font-heading, serif); font-variant-numeric: tabular-nums; color: #334A27; }
+.kb-zettel__karte[data-ist="an"] .kb-zettel__wert { color: #0B7F66; }
+/* Bei drei Karten teilen sich 360 px auf je gut 100 px auf — „ab 0,68 %" bricht dort in
+   900 22px um. Die Zahl wird kleiner, statt über zwei Zeilen zu laufen; bei einer oder
+   zwei Karten bleibt sie so groß, wie die Übergabe sie setzt (K:224). */
+.kb-zettel[data-anzahl="3"] .kb-zettel__wert { font-size: 17px; }
+.kb-zettel__zeile { display: block; margin-top: 2px; font: 400 12px var(--font-body, sans-serif); font-variant-numeric: tabular-nums; }
+.kb-zettel__klein { display: block; font: 400 11.5px var(--font-body, sans-serif); color: #686C6A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__fuss { display: block; margin-top: 12px; font: italic 300 11.5px var(--font-heading, serif); color: #686C6A; }
+@media (prefers-reduced-motion: reduce) { .kb-zettel { animation: none; } }
