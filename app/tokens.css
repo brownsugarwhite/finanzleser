@@ -113,7 +113,10 @@
   --strich-haar: 1px;             /* trennt */
   --strich-fein: 1.5px;          /* die Kontur eines Punktes auf einer Achse — feiner als --strich-stark, aber sichtbar */
   --strich-stark: 2px;            /* schließt ab, trägt die Doppellinie */
-  --strich-einhaenger: 3px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
+  /* 🚨 1 px, nicht 3 (vom User am 16.09.2026 gesetzt). Die farbige Linie eröffnet einen
+     Block — sie soll ihn ankündigen, nicht rahmen. Mit 3 px las sie sich als Balken und
+     war auf einer Seite mit fünf Werkzeugen das Lauteste im Satz. */
+  --strich-einhaenger: 1px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
   /* Die Doppellinie: 2 px Linie, 2 px Luft, 1 px Linie. Als VERLAUF auf einem 5-px-hohen
      Element — so hängt sie an einem einzigen Knoten und lässt sich drehen.
      Der Schatten-Zwilling ist für Blöcke, die die Linie als Kante tragen (Tabellenkopf,

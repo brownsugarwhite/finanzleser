@@ -27,6 +27,25 @@
 
    Hier bleiben die Maße des Kursblatts und die Werkzeugfarbe — das Einzige, was sich
    zwischen Vergleich (Türkis) und Rechner (Magenta) wirklich unterscheidet. */
+/* ══ EINE REGEL GEGEN EINE FALLE, DIE FÜNFMAL ZUGESCHLAGEN HAT ═════════════════════
+   `app/components.css` färbt global `p, li, span` in --color-text-medium. Eine
+   Einzelelement-Regel schlägt JEDE Vererbung, egal wie spezifisch der Elternteil ist —
+   also gewinnt dieses Grau überall dort, wo ein Kind keine eigene Farbregel hat.
+
+   Gemessen am 16.09.2026 auf Vergleich und Rechner traf es unter anderem:
+     · „Zum Anbieter" in der Pille        (sollte Tinte sein, war grau)
+     · „Zum Anbieter" am Strich-Link      (sollte Türkis sein, war grau)
+     · „301 €" bei Platz 2 und 3          (sollte Tinte sein, war grau)
+     · „Details" am Aufklapp-Knopf        (sollte Tinte sein, war grau)
+   Vorher schon: das Kopfband der Liste, der Tabellenkopf, die Registereinträge — jedes
+   Mal einzeln repariert.
+
+   🚨 Deshalb hier EINMAL: im Kursblatt erbt ein p/li/span seine Farbe vom Elternteil.
+   Jede unserer eigenen Regeln ist spezifischer als dieses `.kb p` und sticht es; wer eine
+   andere Farbe will, schreibt sie hin. Wer sie nicht hinschreibt, bekommt die des
+   Elternteils — und nicht mehr ein Grau aus einer Datei, die gar nicht dazugehört. */
+.kb p, .kb li, .kb span { color: inherit; }
+
 .kb {
   --kb-breite: 728px;
   --kb-rand: clamp(14px, 3vw, 24px);            /* K:41 padding */
