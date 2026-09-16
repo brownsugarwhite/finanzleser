@@ -133,6 +133,29 @@ Commerzbank. Wir nehmen den Programmnamen, also die Marke.
   Beschreibungstext. Der alte Einbau über `tools.financeads.net` ist tot. Was hier
   entsteht, ersetzt also nicht eine funktionierende Liste, sondern eine leere Seite.
 
+### 2.6 Gegenprobe: alle 56 Rechner gegen den alten Satz
+
+Jeder Rechner wurde geöffnet, ausgerechnet und Zeile für Zeile mit dem alten Satz
+verglichen (`abgleich.mjs`, Playwright). Endstand:
+
+```
+56/56  rendern ohne Konsolenfehler, ohne NaN, ohne leere Werte
+115 Kacheln · 300 Punktzeilen · 10 Tabellen mit 106 Zeilen · 13 Zeiger · 5 Messlatten
+```
+
+Fünf gemeldete „fehlende Zeilen" bleiben stehen und sind alle erklärt:
+
+| Meldung | Erklärung |
+|---|---|
+| BAföG „Kein BAföG-Anspruch“, Elterngeld „Kein Anspruch“ | richtig fehlend — die Zeile gilt nur, wenn KEIN Anspruch besteht; mit den Voreinstellungen besteht einer |
+| Stundenlohn, Steuererstattung | der alte Satz hatte dort eine Beschriftung, die erst zur Laufzeit entsteht. Der Vergleich liest den Quelltext, die Seite zeigt den Text („Über Mindestlohn“, „Voraussichtliche Erstattung“) |
+| Kredit: Kreditsumme, Laufzeit, Jahreszins | Echos der Eingabefelder, die im Kursblatt direkt darüber stehen — die Übergabe lässt sie weg |
+| Kredit: „Effektivzins“ | heißt jetzt „Effektiver Jahreszins“ und steht wieder da (war beim ersten Durchgang tatsächlich verloren) |
+
+Zwei echte Fehler hat dieser Abgleich gefunden und beide sind behoben: der Rentenabschlag
+gab „undefined Monate“ aus (mein eigener Umlaut-Fix hatte den Feldnamen `monate_frueher`
+getroffen), und der Effektivzins des Kreditrechners fehlte.
+
 ---
 
 ## 3 · Fehler, die der Umbau nebenbei gefunden hat
