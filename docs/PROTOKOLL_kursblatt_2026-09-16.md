@@ -36,6 +36,13 @@ Der Auftrag lautete: gegen financeads prüfen, gegen den Livezustand prüfen, un
 sorgen, dass es bei uns jede Auswahl gibt, die financeads kennt. Das hat **fünf echte
 Fehler** zutage gefördert — vier davon waren schon vor diesem Umbau da.
 
+Deine beiden Stichproben haben dann zwei weitere Runden ausgelöst (§ 2.7 und § 2.8), und
+die haben mehr gefunden als die erste. **Der rote Faden durch alle drei: eine Prüfung
+findet nur, wonach sie fragt.** Drei Fragen mussten erst gestellt werden —
+„schneidet unsere Voreinstellung zu viel weg?", „trägt jede Auswahl überhaupt Produkte?"
+und „was setzt die API, ohne dass wir es verlangt haben?". Jede hat einen Fehler zutage
+gefördert, den die beiden anderen nicht sehen konnten.
+
 ### 2.1 🚨 `country_rating` — financeads hat still gefiltert
 
 Die API schickt in jeder Antwort zurück, welche Filter sie angewandt hat
@@ -358,6 +365,7 @@ Stand nach den Korrekturen: **17 Kategorien, 58 Parameter, keine Befunde.**
 | **Visuelle Abnahme durch dich** | Gemessen ist alles, angesehen hast du es noch nicht. |
 | **PR und Merge** | Branch `feature/kursblatt`, 38 Commits, Ziel `dev` — PR #14 (`feature/financeads-vergleiche`) liegt darunter und sollte zuerst. |
 | **Festgeld-Voreinstellung** | Die Registry sagt 36 Monate (wie die Übergabe), der Block `vergleich-quelle` in WordPress pinnt 12. Das ist eine redaktionelle Entscheidung — sie zu überschreiben stünde mir nicht zu. |
+| **Reisekranken-CPT** | Der Endpunkt lebt wieder, die Seite steht im Kursblatt-Satz. Der Block `vergleich-quelle` im CMS trägt noch `vor: {}` — die Registry-Standards greifen, aber wer die Voreinstellung redaktionell setzen will, tut es dort. |
 | **Hinweise des Partners** | `data.notices` (Ranking-Erklärung, Datenschutz, „Alle Angaben ohne Gewähr") liegen im Schnappschuss, werden aber nirgends angezeigt. Ob (3) eine vertragliche Pflichtangabe ist, muss jemand prüfen. → eigene Aufgabe, Chip liegt bereit |
 | **Tilgungsplan: 0,23 € Restschuld** | Ein Rundungsrest in `lib/calculators/kredit.ts`, der seit jeher in der sichtbaren Tabelle steht. Nicht angefasst, weil es die Live-Seite ändert. → eigene Aufgabe |
 | **Rentenbesteuerungs-Rechner** | Rechnet den Besteuerungsanteil falsch (Altfund, nicht Teil dieses Umbaus). |
@@ -368,11 +376,18 @@ Stand nach den Korrekturen: **17 Kategorien, 58 Parameter, keine Befunde.**
 
 ```bash
 node tools/kursblatt-mess.mjs      # Vergleichsseiten, 50 Prüfungen
-node tools/vergleich-breite.mjs    # zeigt jede Seite, was ihre Kategorie hergibt? (47)
 node tools/rechner-mess.mjs        # Rechner, 32 Prüfungen (--slug für einen anderen)
+node tools/vergleich-breite.mjs    # zeigt jede Seite, was ihre Kategorie hergibt? (47)
+node tools/registry-pruefen.mjs [--api]   # trägt jede Auswahl Produkte? was setzt die API ungefragt?
+node tools/financeads-listen.mjs [--prüfen]   # die 19 Wertelisten des Partners (Rassen, Anbieter, Börsen)
 npm run verify:redirects -- --offline   # Pflicht vor jedem Merge nach main
 node --experimental-strip-types tools/financeads-refresh.mjs   # Schnappschüsse
 ```
+
+Die Reihenfolge ist Absicht: `registry-pruefen` fragt, ob die **Auswahl** stimmt,
+`vergleich-breite`, ob die **Voreinstellung** nicht zu eng ist, und `kursblatt-mess`, ob
+der **Satz** stimmt. Drei verschiedene Fragen — jede hat einmal einen Fehler gefunden,
+den die beiden anderen nicht sehen konnten.
 
 🚨 Der Produktionsbau lief in einem eigenen Arbeitsbaum, damit das `.next` deines
 Dev-Servers unberührt blieb. Wer ihn wiederholt, macht es genauso:
