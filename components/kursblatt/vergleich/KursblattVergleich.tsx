@@ -163,7 +163,13 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
 
       {haupt && z.zeilen.length > 1 && (
         <section className="kb-markt">
-          <span className="kb__kicker">Marktüberblick</span>
+          {/* 🚨 Der KONTEXT gehört in den Kicker, nicht in die Überschrift (Handoff Runde 2,
+              Punkt 3: „Kicker trägt Kontext: ‚Marktüberblick · 20.000 € über 60 Monate';
+              H3 kurz"). Vorher stand er als zweiter Satz in der H2 — die brach damit auf
+              zwei Zeilen und wiederholte, was zwei Zeilen darüber schon steht. */}
+          <span className="kb__kicker">
+            Marktüberblick{eingabenSatz(def, quelle.fest, z.params) ? ` · ${eingabenSatz(def, quelle.fest, z.params)}` : ""}
+          </span>
           {kurve && dauer && kennwert ? (
             <>
               {/* F:71-72 — bei einer Laufzeitachse fragt die Überschrift nach der Bindung,
@@ -190,13 +196,11 @@ export default function KursblattVergleich({ slug, def, quelle, daten, beschreib
             </>
           ) : (
             <>
-              <h2 className="kb__h3">
-                {/* Bewusst „die Angebote" statt einer Kategoriewendung: „die Zinsen" (K:90)
-                    liest sich beim Kredit gut, aber nicht bei Konten oder Versicherungen. Was
-                    gestreut wird, sagt der Kicker über dem Band. */}
-                Wie weit liegen die Angebote auseinander? Alle {z.zeilen.length} {def.mehrzahl}
-                {eingabenSatz(def, quelle.fest, z.params) ? ` für ${eingabenSatz(def, quelle.fest, z.params)}` : ""}.
-              </h2>
+              {/* Bewusst „die Angebote" statt einer Kategoriewendung: „die Zinsen" (K:90)
+                  liest sich beim Kredit gut, aber nicht bei Konten oder Versicherungen. Was
+                  gestreut wird, sagt der Kicker über dem Band — und dort steht seit Runde 2
+                  auch, für welche Eingaben. */}
+              <h2 className="kb__h3">Wie weit liegen die {z.zeilen.length} {def.mehrzahl} auseinander?</h2>
               <p className="kb__erklaer">
                 Jeder Punkt ist ein Angebot – links {achsen[0]}, rechts {achsen[1]}. Der türkise
                 Punkt ist der Bestwert, die gestrichelte Linie der Durchschnitt.

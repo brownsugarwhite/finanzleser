@@ -55,7 +55,26 @@ export default function Ergebnis({
             <i style={lauf.mitte === "none" || !offen ? undefined : { animation: `${lauf.mitte} .9s var(--kurve) both` }} aria-hidden="true" />
           </div>
 
+          {/* 🚨 Ring und Säulen stehen NEBENEINANDER (Vorlage K, Ergebnis oben): der Ring
+              links in fester Breite, die Säulen daneben. Als zwei Blöcke untereinander
+              wirkt der Ring wie ein einsames Bild und die Säulen wie ein zweites Thema.
+              Steht auf einen `zeiger` unmittelbar eine `messlatte`, werden sie hier zu
+              einer Zeile gefasst — der Rest der Liste bleibt, wie er ist. */}
           {bloecke.map((b, i) => {
+            if (b.art === "messlatte" && bloecke[i - 1]?.art === "zeiger") return null;
+            if (b.art === "zeiger" && bloecke[i + 1]?.art === "messlatte") {
+              const m = bloecke[i + 1];
+              if (m.art !== "messlatte") return null;
+              return (
+                <div key={i} className="kb-ergebnis__ringzeile">
+                  <Zeiger label={b.label} wert={b.wert} max={b.max} einheit={b.einheit} zeichnen={lauf.zeichnen} aktiv={offen} />
+                  <Messlatte
+                    titel={m.titel} wert={m.wert} schnitt={m.schnitt} einheit={m.einheit}
+                    wertLabel={m.wertLabel} schnittLabel={m.schnittLabel}
+                  />
+                </div>
+              );
+            }
             switch (b.art) {
               case "kacheln":
                 return (
@@ -75,32 +94,40 @@ export default function Ergebnis({
                     zeichnen={offen ? lauf.zeichnen : "none"} aktiv={offen}
                   />
                 );
-              case "tabelle":
+              case "tabelle": {
+                /* K:337-341 — Spaltenmaß der Vorlage: die Jahresspalte schmaler, die
+                   letzte breiter, dazwischen gleich. Als Variable, damit Kopf und Zeilen
+                   sie aus DERSELBEN Quelle bekommen — zwei Grids mit eigenen Angaben
+                   stehen nicht untereinander. */
+                const raster = b.spalten
+                  .map((_, n) => (n === 0 ? ".7fr" : n === b.spalten.length - 1 ? "1.2fr" : "1fr"))
+                  .join(" ");
                 return (
-                  <div key={i} className="kb-tabelle">
+                  <div key={i} className="kb-tabelle" style={{ ["--kb-tab-raster" as string]: raster }}>
                     <span className="kb__kicker">{b.titel}</span>
-                    <div className="kb-tabelle__kopf kb__doppellinie--grau" style={{ gridTemplateColumns: `repeat(${b.spalten.length}, var(--kb-tab-spalte, 1fr))` }}>
-                      {b.spalten.map((s) => (
-                        <span key={s.key} data-rechts={s.rechts ? "an" : undefined}>{s.label}</span>
-                      ))}
-                    </div>
-                    {b.zeilen.map((z, j) => (
-                      <div
-                        key={j}
-                        className="kb-tabelle__zeile"
-                        data-betont={b.letzteBetont && j === b.zeilen.length - 1 ? "an" : undefined}
-                        style={{
-                          gridTemplateColumns: `repeat(${b.spalten.length}, var(--kb-tab-spalte, 1fr))`,
-                          ...(lauf.herz === "none" || !offen ? {} : { animation: `${lauf.herz} .6s ${(0.5 + j * 0.06).toFixed(2)}s both` }),
-                        }}
-                      >
+                    {/* Der Linienstapel trägt die Doppellinie, das Band darin die Versalien. */}
+                    <div className="kb-tabelle__stapel">
+                      <div className="kb-tabelle__kopf">
                         {b.spalten.map((s) => (
-                          <span key={s.key} data-rechts={s.rechts ? "an" : undefined} data-ton={s.ton}>{z[s.key]}</span>
+                          <span key={s.key} data-rechts={s.rechts ? "an" : undefined}>{s.label}</span>
                         ))}
                       </div>
-                    ))}
+                      {b.zeilen.map((z, j) => (
+                        <div
+                          key={j}
+                          className="kb-tabelle__zeile"
+                          data-betont={b.letzteBetont && j === b.zeilen.length - 1 ? "an" : undefined}
+                          style={lauf.herz === "none" || !offen ? undefined : { animation: `${lauf.herz} .6s ${(0.5 + j * 0.06).toFixed(2)}s both` }}
+                        >
+                          {b.spalten.map((s) => (
+                            <span key={s.key} data-rechts={s.rechts ? "an" : undefined} data-ton={s.ton}>{z[s.key]}</span>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 );
+              }
               case "punktzeilen":
                 return (
                   <div key={i} className="kb-punktblock">

@@ -46,86 +46,105 @@ export default function Streuband({ haupt, neben, zeilen, best, hover, onHover, 
   // der Bestwert ist dann das Maximum.
   const bestZahl = typeof best?.kennzahlen[haupt.key] === "number" ? (best.kennzahlen[haupt.key] as number) : haupt.richtung === "hoch" ? max : min;
 
-  // Gleiche Werte stapeln sich nach oben, statt sich zu verdecken (K:476).
+  /**
+   * Stapel (Handoff Runde 2, Punkt 3): nicht nach GLEICHEM WERT bündeln, sondern nach
+   * NÄHE auf der Achse — Klassen von 2,6 % Bandbreite. Zwei Angebote mit 2,29 % und
+   * 2,31 % stehen sonst übereinander gedruckt, obwohl ihre Werte verschieden sind.
+   * Je Klasse höchstens fünf Punkte, darüber steht „+n".
+   */
+  const KLASSE = 2.6;
+  const MAX_ETAGEN = 5;
   const belegt: Record<number, number> = {};
-  const punkte = zeilen.map((p) => {
+  const roh = zeilen.map((p) => {
     const w = p.kennzahlen[haupt.key];
     if (typeof w !== "number") return null;
-    const k = Math.round(w * 100);
+    const l = pos(w);
+    const k = Math.round(l / KLASSE);
     const etage = belegt[k] || 0;
     belegt[k] = etage + 1;
-    const ist = best && p.id === best.id;
-    const hell = hover === p.id;
-    return { p, links: pos(w), oben: 112 - etage * 13, ist, hell };
-  }).filter(Boolean) as { p: VergleichProdukt; links: number; oben: number; ist: boolean; hell: boolean }[];
+    return { p, links: l, klasse: k, etage, ist: Boolean(best && p.id === best.id), hell: hover === p.id };
+  }).filter(Boolean) as { p: VergleichProdukt; links: number; klasse: number; etage: number; ist: boolean; hell: boolean }[];
 
-  /**
-   * 🚨 Der Prototyp hängt beide Beschriftungen fest an ihre Position (K:99, :101) — das
-   * geht dort auf, weil der Bestwert beim Kredit immer links steht (weniger Zins ist
-   * besser). Bei „mehr ist besser" (Ertrag, Zins beim Festgeld) sitzt er rechts, und die
-   * Beschriftung lief bei 390 px um 180 px aus dem Satz. Deshalb hängt sie sich am
-   * rechten Rand um — dasselbe Mittel, das der Prototyp beim Tooltip schon benutzt.
-   */
-  const anker = (v: number) => (v > 70 ? "rechts" : v < 12 ? "links" : "mitte");
+  // Der Bestwert bleibt immer sichtbar — er ist der erste seiner Klasse.
+  const punkte = roh.filter((x) => x.etage < MAX_ETAGEN || x.ist);
+  const ueberzaehlig = Object.entries(belegt)
+    .filter(([, n]) => n > MAX_ETAGEN)
+    .map(([k, n]) => ({ klasse: Number(k), mehr: n - MAX_ETAGEN }));
 
   const tip = zeilen.find((p) => p.id === hover);
   const tipPos = tip && typeof tip.kennzahlen[haupt.key] === "number" ? pos(tip.kennzahlen[haupt.key] as number) : 50;
 
   return (
     <div className="kb-band">
-      <span className="kb__kicker kb-band__kicker">{haupt.label}</span>
-      <i className="kb-band__achse" aria-hidden="true" />
-      <span className="kb-band__ende kb-band__ende--links">{links}</span>
-      <span className="kb-band__ende kb-band__ende--rechts">{rechts}</span>
-
-      <i className="kb-band__schnitt" style={{ left: `${pos(schnitt)}%` }} aria-hidden="true" />
-      <span className="kb-band__schnitt-wert" data-anker={anker(pos(schnitt))} style={{ left: `${pos(schnitt)}%` }}>
+      {/* 🚨 Die LEGENDE steht fest über dem Band, nicht über ihrem Punkt.
+          Bis zum 16.09.2026 hing „Bestwert 0,68 % · Verivox" am Bestwert und „Ø 2,74 %"
+          an der gestrichelten Linie — beide wanderten bei jeder Eingabe mit, überliefen
+          einander, und am rechten Rand lief die Bestwert-Zeile aus dem Satz. Genau das
+          behebt Runde 2, Punkt 3: links der Bestwert, rechts der Durchschnitt, beide
+          bleiben stehen. */}
+      <div className="kb-band__legende">
+        {best && (
+          <span className="kb-band__legende-best" style={{ animation: druck === "none" ? undefined : `${druck} .6s .6s both` }}>
+            <i aria-hidden="true" />
+            Bestwert {formatKennwert(haupt, bestZahl)} · {best.anbieter}
+          </span>
+        )}
         {/* Ohne „ab": der Durchschnitt von lauter Untergrenzen ist keine Untergrenze. */}
-        Ø {formatKennwert({ ...haupt, ab: false }, schnitt)}
-      </span>
+        <span className="kb-band__legende-schnitt">
+          <i aria-hidden="true" />
+          Durchschnitt {formatKennwert({ ...haupt, ab: false }, schnitt)}
+        </span>
+      </div>
 
-      {best && (
-        <>
+      <div className="kb-band__feld">
+        <i className="kb-band__achse" aria-hidden="true" />
+        {/* Die Stiele laufen von der Grundlinie bis zur Oberkante des Bandes. */}
+        <i className="kb-band__schnitt" style={{ left: `${pos(schnitt)}%` }} aria-hidden="true" />
+        {best && (
           <i
             className="kb-band__faden"
             style={{ left: `${pos(bestZahl)}%`, animation: spalte === "none" ? undefined : `${spalte} .7s var(--kurve) .3s both` }}
             aria-hidden="true"
           />
-          {/* 🚨 Zwei Ebenen, weil sich sonst zwei `transform` in die Quere kommen: außen
-              hängt die Verankerung (translateX am rechten Rand), innen läuft `fl-druck`,
-              dessen Keyframes ebenfalls `transform` setzen und die Verankerung sonst
-              überschreiben — gemessen als 180 px Überlauf bei 390 px. */}
-          <span className="kb-band__best" data-anker={anker(pos(bestZahl))} style={{ left: `${pos(bestZahl)}%` }}>
-            <span style={{ animation: druck === "none" ? undefined : `${druck} .6s .6s both` }}>
-              Bestwert {formatKennwert(haupt, bestZahl)} · {best.anbieter}
-            </span>
+        )}
+
+        {punkte.map((x) => (
+          <button
+            key={x.p.id}
+            type="button"
+            className="kb-band__punkt"
+            data-ist={x.ist ? "an" : "aus"}
+            data-hell={x.hell ? "an" : "aus"}
+            style={{ left: `${x.links}%`, bottom: `${22 + Math.min(x.etage, MAX_ETAGEN - 1) * 12}px` }}
+            aria-label={`${x.p.anbieter}: ${formatKennwert(haupt, x.p.kennzahlen[haupt.key])}`}
+            onMouseEnter={() => onHover(x.p.id)}
+            onMouseLeave={() => onHover(null)}
+            onFocus={() => onHover(x.p.id)}
+            onBlur={() => onHover(null)}
+            onClick={() => onOeffnen(x.p.id)}
+          />
+        ))}
+
+        {ueberzaehlig.map((u) => (
+          <span key={u.klasse} className="kb-band__mehr" style={{ left: `${u.klasse * KLASSE}%` }} aria-hidden="true">
+            +{u.mehr}
           </span>
-        </>
-      )}
+        ))}
 
-      {punkte.map((x) => (
-        <button
-          key={x.p.id}
-          type="button"
-          className="kb-band__punkt"
-          data-ist={x.ist ? "an" : "aus"}
-          data-hell={x.hell ? "an" : "aus"}
-          style={{ left: `${x.links}%`, top: `${x.oben}px` }}
-          aria-label={`${x.p.anbieter}: ${formatKennwert(haupt, x.p.kennzahlen[haupt.key])}`}
-          onMouseEnter={() => onHover(x.p.id)}
-          onMouseLeave={() => onHover(null)}
-          onFocus={() => onHover(x.p.id)}
-          onBlur={() => onHover(null)}
-          onClick={() => onOeffnen(x.p.id)}
-        />
-      ))}
+        <div
+          className="kb-band__tip"
+          style={{ left: `${tipPos}%`, transform: `translateX(${tipPos > 70 ? "-90%" : tipPos < 30 ? "-10%" : "-50%"})`, opacity: tip ? 1 : 0 }}
+          aria-hidden="true"
+        >
+          {tip ? `${tip.anbieter} · ${formatKennwert(haupt, tip.kennzahlen[haupt.key])}${neben ? ` · ${formatKennwert(neben, tip.kennzahlen[neben.key])}` : ""}` : ""}
+        </div>
+      </div>
 
-      <div
-        className="kb-band__tip"
-        style={{ left: `${tipPos}%`, transform: `translateX(${tipPos > 70 ? "-90%" : tipPos < 30 ? "-10%" : "-50%"})`, opacity: tip ? 1 : 0 }}
-        aria-hidden="true"
-      >
-        {tip ? `${tip.anbieter} · ${formatKennwert(haupt, tip.kennzahlen[haupt.key])}${neben ? ` · ${formatKennwert(neben, tip.kennzahlen[neben.key])}` : ""}` : ""}
+      {/* Unter der Achse: links das eine Ende, mittig der Name der Achse, rechts das andere. */}
+      <div className="kb-band__fuss">
+        <span>{links}</span>
+        <span className="kb__kicker">{haupt.label}</span>
+        <span>{rechts}</span>
       </div>
     </div>
   );

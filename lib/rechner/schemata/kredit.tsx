@@ -60,21 +60,32 @@ export const kreditSchema: RechnerSchema<W, KreditResult> = {
 
   rechne: (w, rates) => berechne(w, rates),
 
+  /**
+   * 🚨 Reihenfolge und Bestand nach der Vorlage (K, Seite 2, Ergebnis):
+   *   Ring + Säulen · Kacheln · Kurve · Jahresübersicht · Hinweis
+   * Bis zum 16.09.2026 fehlten hier RING UND SÄULEN ganz, und stattdessen stand ein
+   * Anteilsband „So verteilt sich Ihre Zahlung" — den hat Runde 2 ausdrücklich gestrichen
+   * („Der Block ist entfallen, der Ring ersetzt ihn"). Das Ergebnis sah dadurch anders
+   * aus als jede Vorlage, aus der es gebaut sein sollte.
+   */
   ergebnis: (e, w) => [
+    { art: "zeiger", label: "Zinsanteil", wert: (e.gesamtzinsen / e.gesamtbetrag) * 100, max: 100, einheit: " %" },
+    /* 🚨 Hier stehen in der Vorlage die SÄULEN „Ihre Rate im Marktvergleich" — drei
+       Balken: Ihre Rate, das beste Angebot, der Durchschnitt aller Angebote. Sie fehlen
+       bewusst, denn zwei der drei Zahlen kann dieser Rechner nicht wissen: sie kommen aus
+       dem Vergleich. `ergebnis()` bekommt nur die eigenen Eingaben, und `MarktKurz`
+       (components/kursblatt/rechner/Bruecke.tsx) trägt zwar den Bestwert, aber KEINEN
+       Durchschnitt — und der steht in der Vorlage in der dritten Säule.
+       Eine Rate „× 1,04" als Marktschnitt auszugeben wäre eine erfundene Zahl in einem
+       Finanzrechner. Die Säulen kommen, wenn der Durchschnitt durch
+       `/api/vergleich-daten/<slug>?kurz=1` mitgeliefert und bis ins Schema durchgereicht
+       wird — das ist eine Datenänderung, keine Gestaltungsfrage. */
     {
       art: "kacheln",
       kacheln: [
         { label: "Monatsrate", wert: e.monatsrate, text: fmtEuro, haupt: true },
         { label: "Gesamtzinsen", wert: e.gesamtzinsen, text: fmtEuro },
         { label: "Gesamtbetrag", wert: e.gesamtbetrag, text: fmtEuro },
-      ],
-    },
-    {
-      art: "anteilsband",
-      titel: "So verteilt sich Ihre Zahlung",
-      teile: [
-        { label: "Tilgung", anteil: w.kreditsumme / e.gesamtbetrag, ton: "ink" },
-        { label: "Zinsen", anteil: e.gesamtzinsen / e.gesamtbetrag, ton: "magenta" },
       ],
     },
     {
