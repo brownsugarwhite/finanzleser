@@ -39,7 +39,7 @@ export const rentenabschlagSchema: RechnerSchema<W, RentenabschlagResult> = {
       art: "punktzeilen",
       zeilen: [
         { k: "Rente ohne Abschlag", v: fmtGeld(w.monatlicheRente) },
-        { k: "Monate vorzeitig", v: `${w.monate_früher} Monate` },
+        { k: "Monate vorzeitig", v: `${w.monate_frueher} Monate` },
         { k: "Abschlag pro Monat", v: "0,30 %" },
         { k: "Gesamtabschlag", v: fmtProzent(e.abschlagProzent) },
         { k: "Abschlag in Euro", v: fmtGeld(e.abschlagBetrag) },

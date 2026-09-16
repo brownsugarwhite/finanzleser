@@ -5,7 +5,7 @@
  * Maße der Eingaben in der Konstante `L` (:379-383), Presets :384-388.
  */
 import { berechne, type KreditParams, type KreditResult } from "@/lib/calculators/kredit";
-import { fmtEuro } from "@/lib/kursblatt/zahl";
+import { fmtEuro, fmtProzent } from "@/lib/kursblatt/zahl";
 import type { RechnerSchema } from "../schema";
 
 type W = KreditParams & Record<string, number | string | boolean>;
@@ -100,6 +100,14 @@ export const kreditSchema: RechnerSchema<W, KreditResult> = {
         tilgung: fmtEuro(j.tilgung),
         rest: fmtEuro(j.restschuld),
       })),
+    },
+    {
+      // 🚨 Der Effektivzins stand im alten Satz in der Ergebnistabelle und fehlte hier —
+      // die Übergabe zeigt ihn nicht, weil ihr Beispiel keinen ausweist. Er ist aber das
+      // Einzige aus jener Tabelle, das nicht schon in den Eingabefeldern darüber steht:
+      // Kreditsumme, Laufzeit und Sollzins tippt man selbst, den Effektivzins nicht.
+      art: "punktzeilen",
+      zeilen: [{ k: "Effektiver Jahreszins", v: fmtProzent(e.effektivzins) }],
     },
     {
       art: "hinweis",
