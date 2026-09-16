@@ -38,12 +38,17 @@ export default function GewusstSpiel({ felder }: { felder: Record<string, string
     c.style.height = `${h}px`;
     const ctx = c.getContext("2d");
     if (!ctx) return;
+    // 🚨 Die Farben aus dem Verzeichnis lesen, nicht abschreiben. Auf einer Leinwand
+    // gibt es keine Custom Properties — also einmal am Element nachschlagen. Stand vorher
+    // als #ebeae7/#f3f1ec hier drin und wäre bei jeder Palettenänderung liegengeblieben.
+    const t = getComputedStyle(box);
+    const token = (name: string, ersatz: string) => t.getPropertyValue(name).trim() || ersatz;
     ctx.scale(dpr, dpr);
     ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "#ebeae7";
+    ctx.fillStyle = token("--placeholder", "#ebeae7");
     ctx.fillRect(0, 0, w, h);
     // Schraffur 135°, 6 px hell / 6 px dunkel — wie der Anzeigenplatzhalter der Vorlage.
-    ctx.strokeStyle = "#f3f1ec";
+    ctx.strokeStyle = token("--paper", "#faf9f6");
     ctx.lineWidth = 6;
     for (let x = -h; x < w + h; x += 12) {
       ctx.beginPath();
@@ -51,6 +56,22 @@ export default function GewusstSpiel({ felder }: { felder: Record<string, string
       ctx.lineTo(x + h, h);
       ctx.stroke();
     }
+    // 🚨 Die Aufforderung gehört AUFS Los, nicht darunter: ein Los ohne Aufdruck sieht
+    // aus wie eine leere Fläche. Sie stand früher so da und ist beim Umstylen verloren
+    // gegangen. Sie wird mitgerubbelt — deshalb steht sie auf der Leinwand und nicht im
+    // HTML. Die Sterne sind dieselben wie in der Vorlage, nur in Tinte statt in Weiß:
+    // auf dem hellen Los wäre Weiß unlesbar.
+    const grad = Math.max(12, Math.min(17, Math.round(w / 34)));
+    ctx.save();
+    ctx.fillStyle = token("--ink-45", "rgba(51,74,39,.45)");
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `italic 600 ${grad}px ${token("--serif", "Georgia, serif")}`;
+    // Sperrung wie bei einer Versalienzeile im Satz; ältere Browser können sie nicht,
+    // dann steht das Wort eben enger — kein Grund, gar nichts zu schreiben.
+    try { (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = `${(grad * 0.16).toFixed(1)}px`; } catch { /* kann der Browser nicht */ }
+    ctx.fillText("✦ ✦  ZUM AUFDECKEN RUBBELN  ✦ ✦", w / 2, h / 2);
+    ctx.restore();
   }, [frei]);
 
   useEffect(() => {

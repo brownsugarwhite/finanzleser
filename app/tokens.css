@@ -73,6 +73,12 @@
   --lila: #9953c9;                /* Checklisten */
   --blau: #27548F;                /* Dokumente — Druckerblau, kalt gegen das warme Papier */
   --rot: #C0392B;                 /* Fehler und Warnung — vorher nur in gamification.css */
+  /* 🚨 Die einzige Farbe, die der Handoff nicht kennt — und die einzige Lücke im Kreis:
+     zwischen Rot und Grün stand nichts. Die Spiele hatten bis zum 16.09.2026 keine eigene
+     Farbe, sie liehen sich Pink vom Rechner und Grün von der Marke; dadurch sah die
+     Rätselseite aus wie ein Werkzeugkasten. Ocker ist warm wie Papier, hält den Kontrast
+     als Linie und liest sich als Auszeichnung, nicht als Werkzeug. */
+  --ocker: #C8791A;               /* Spiele: Finanzwort, Quiz, Mythos, Schätzfrage, Los, Schlange */
 
   /* Vier Hauchtöne als Grund für Zustände — mehr Zustände gibt es nicht. */
   --tint: #eef3e8;                /* grün: richtig, Erfolg, Marke, Fokusring */
@@ -87,6 +93,7 @@
   --tool-vergleich: var(--tuerkis-hell);
   --tool-checkliste: var(--lila);
   --tool-dokumente: var(--blau);
+  --tool-spiel: var(--ocker);
 
   /* ── Linien ──────────────────────────────────────────────────────────────────────
      Fünf Stufen derselben Tinte, benannt nach ihrer AUFGABE. Wer die Deckung meint,

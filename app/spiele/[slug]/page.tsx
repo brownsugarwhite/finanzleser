@@ -61,7 +61,7 @@ export default async function SpielSeite({ params }: Props) {
   return (
     <>
       <JsonLd data={breadcrumbSchema(krumen.map((k) => ({ name: k.name, path: k.href })))} />
-      <KartenKapitel schluessel={`spiel:${slug}`} titel={titel} kicker={`Spiel${spiel.datum ? ` · ${datumLesbar(spiel.datum)}` : ""}`} beschreibung="Ein Begriff aus dem Glossar, sechs Versuche, teilbar wie Wordle." krumen={krumen} url={pfad}>
+      <KartenKapitel schluessel={`spiel:${slug}`} titel={titel} kicker={`Spiel${spiel.datum ? ` · ${datumLesbar(spiel.datum)}` : ""}`} beschreibung="Jeden Tag ein neuer Begriff. Das Ergebnis lässt sich teilen, ohne die Lösung zu verraten." krumen={krumen} url={pfad}>
         <FinanzwortKarte spiel={spiel} />
       </KartenKapitel>
     </>

@@ -17,6 +17,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent }
 import { useFaden } from "@/components/faden/FadenProvider";
 import { reduzierteBewegung } from "@/lib/faden/belohnung";
 import { buildGlossarUrl } from "@/lib/urls";
+import SpielKopf from "./SpielKopf";
 import { spielUrl } from "./spielUrl";
 
 export interface FinanzwortProps {
@@ -90,7 +91,10 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
   const [aufgedeckt, setAufgedeckt] = useState(0);
   const [huepft, setHuepft] = useState(0);
   const [wackel, setWackel] = useState(false);
-  const [statusText, setStatusText] = useState(`Ein Begriff aus dem Glossar, ${L} Buchstaben, ${MAX} Versuche. Tippen Sie los.`);
+  // 🚨 Leer, nicht der Einstiegssatz: der steht seit dem 16.09.2026 als `erklaerung`
+  // unter der Kopfzeile (so auch im Handoff, Zeile 1047). Die Statuszeile unter dem
+  // Gitter trägt nur noch den Spielstand und am Ende die Auflösung.
+  const [statusText, setStatusText] = useState("");
 
   // Wiederaufnahme des Tages (nur derselbe Slug), ohne erneute Belohnung.
   useEffect(() => {
@@ -196,6 +200,15 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
 
   return (
     <div className="wortspiel" ref={huelle} role="group" tabIndex={0} onKeyDown={tasteGedrueckt} aria-label={`Finanzwort #${nr}: ${L} Buchstaben, ${MAX} Versuche`}>
+      {/* 🚨 Die Kopfzeile gehört ins Spiel, nicht in die Karte drumherum. Sie lag in
+          FinanzwortKarte.tsx — und fehlte damit überall, wo das Spiel ohne diese Karte
+          steht: im Schaukasten und in jeder wiederbelebten Insel (InselnBeleben.tsx).
+          Das Finanzwort war das einzige Spiel ohne Kopf. */}
+      <SpielKopf
+        kicker={`Finanzwort · Nr. ${nr}`}
+        hinweis={`${L} Buchstaben, sechs Versuche`}
+        erklaerung={eingaben.length === 0 && !fertig ? `Ein Begriff aus dem Glossar. Tippen Sie los — grün sitzt, umrandet ist enthalten.` : undefined}
+      />
       <div className="gitter" role="table" aria-label="Spielfeld">
         {Array.from({ length: MAX }, (_, r) => {
           const gesendet = r < eingaben.length;
@@ -208,7 +221,7 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
               {Array.from({ length: L }, (_, c) => {
                 const b = tipp.charAt(c);
                 const w = res && (!letzte || c < aufgedeckt) ? res[c] : null;
-                const cls = ["zelle", b && "voll", w, aktiv && wackel && "wackel", gewonnen && letzte && c < huepft && "huepft"].filter(Boolean).join("");
+                const cls = ["zelle", b && "voll", w, aktiv && wackel && "wackel", gewonnen && letzte && c < huepft && "huepft"].filter(Boolean).join(" ");
                 return (
                   <div key={c} role="cell" className={cls} aria-label={`Reihe ${r + 1}, Buchstabe ${c + 1}: ${b || "leer"}${w ? `, ${WERTUNG_TEXT[w]}` : ""}`}>{b}</div>
                 );
@@ -239,7 +252,7 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
               const farbe = tastenFarben[k];
               const label = k === "⏎" ? "Eingabe prüfen" : k === "⌫" ? "Buchstabe löschen" : `${k}${farbe ? `, ${WERTUNG_TEXT[farbe]}` : ""}`;
               return (
-                <button key={k} type="button" className={["taste", breit && "breit", farbe].filter(Boolean).join("")} aria-label={label} onMouseDown={(e) => e.preventDefault()} onClick={() => taste(k)}>
+                <button key={k} type="button" className={["taste", breit && "breit", farbe].filter(Boolean).join(" ")} aria-label={label} onMouseDown={(e) => e.preventDefault()} onClick={() => taste(k)}>
                   {k === "⏎" ? "Enter" : k}
                 </button>
               );

@@ -1,5 +1,5 @@
 /**
- * Kasten „Finanzwort des Tages“ (Prototyp kaesten.wortspiel): pinker Kasten, Kicker
+ * Kasten „Finanzwort des Tages“ (Prototyp kaesten.wortspiel): Kasten in der Spielfarbe, Kicker
  * „Spiel · Finanzwort des Tages“, Titel „Finanzwort #N“, darin das Spiel. Ohne `spiel`
  * wird das heutige geladen (spielAm), die Nummer kommt aus spielNummer. Der Anzeigename
  * des Begriffs stammt aus dem Glossar (gecachter Getter). Ohne Spiel: nichts.
@@ -10,7 +10,6 @@ import { decodeHtmlEntities } from "@/lib/html-utils";
 import { stripHtml } from "@/lib/seo";
 import type { Spiel } from "@/lib/types";
 import Insel from "@/components/faden/kette/Insel";
-import SpielKopf from "./SpielKopf";
 import Finanzwort from "./Finanzwort";
 
 /** Lösungswort spielbar machen: Großbuchstaben, ß → SS, nur A–Z Ä Ö Ü (die Tastatur hat kein ß). */
@@ -40,9 +39,11 @@ export default async function FinanzwortKarte({ spiel: vorgegeben }: { spiel?: S
     wappen: spiel.wappen,
   };
   return (
-    <article className="kasten kasten--pink" id={`kasten-${spiel.slug}`}>
-      <SpielKopf kicker={`Finanzwort · Nr. ${nr}`} hinweis={`${wort.length} Buchstaben, sechs Versuche`} />
-      {/* 🚨 In einer Insel, sonst ist das Spiel im eingefrorenen Kapitel ein Foto. */}
+    <article className="kasten kasten--spiel" id={`kasten-${spiel.slug}`}>
+      {/* 🚨 Die Kopfzeile steht IM Spiel (Finanzwort.tsx), nicht hier: sonst fehlt sie
+          überall, wo das Spiel ohne diese Karte auftritt — und im eingefrorenen Kapitel
+          stünde sie doppelt, sobald die Insel das Spiel wiederbelebt.
+          🚨 In einer Insel, sonst ist das Spiel im eingefrorenen Kapitel ein Foto. */}
       <Insel typ="finanzwort" werte={werte}><Finanzwort {...werte} /></Insel>
     </article>
   );

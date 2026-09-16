@@ -17,6 +17,9 @@
 /* ── Die Kopfzeile, Baustein aller Spiele (Handoff 1046, 1072, 1090, 1100 — wortgleich) ── */
 .faden-shell .spiel-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-s); width: 100%; border-bottom: var(--strich-haar) solid var(--ink); padding-bottom: var(--luft-s); margin-bottom: var(--luft-m); text-align: left; }
 .faden-shell .spiel-kopf__hinweis { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap; }
+/* Der Erklärtext eines Spiels steht DIREKT unter der Kopfzeile, nie dazwischen und nie
+   ans Ende gerutscht (Handoff 1047: `margin:10px 0 14px; italic 400 15px Merriweather`). */
+.faden-shell .spiel-kopf__erklaerung { margin: 0 0 var(--luft-s); font: italic 400 var(--grad-15)/1.45 var(--serif); color: var(--ink); text-align: left; max-width: 60ch; }
 
 /* ── Gemeinsame Bausteine der Spielkörper ─────────────────────────────────────────── */
 /* Frage bzw. Behauptung (Handoff 1073, 1091) */
@@ -70,6 +73,9 @@
 }
 
 /* ── Schlange als Belohnung am Artikelende (Handoff 1113–1115) ────────────────────── */
-.faden-shell .spiel-satz--schlange { border-top: var(--strich-einhaenger) solid var(--ink); padding-top: var(--luft-m); }
+/* Die Einhängerlinie über einem Spielblock trägt die Spielfarbe — wie die Werkzeugfarbe
+   über einem Rechner. Vorher Tinte hier, Pink beim Finanzwort, Grün bei der Schlange:
+   drei Farben für dieselbe Sache. */
+.faden-shell .spiel-satz--schlange { border-top: var(--strich-einhaenger) solid var(--tool-spiel); padding-top: var(--luft-m); }
 .faden-shell .spiel-satz__rand { display: grid; gap: var(--luft-s); }
 .faden-shell .spiel-satz__notiz { margin: 0; font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }

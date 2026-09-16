@@ -529,7 +529,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten { position: relative; background: none; border: 0; border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: 0; padding: var(--luft-m) 0 var(--luft-s); display: grid; gap: var(--luft-s); scroll-margin-top: 110px; }
 /* Die Ausnahme, ausdrücklich: echtes Papier mit Kante. */
 .faden-shell .kasten--rahmen { background: var(--paper); border: var(--strich-haar) solid var(--rule); border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l) var(--luft-s); }
-.faden-shell .kasten--pink { --ton: var(--tool-rechner); } .faden-shell .kasten--tuerkis { --ton: var(--tool-vergleich); } .faden-shell .kasten--lila { --ton: var(--tool-checkliste); } .faden-shell .kasten--terra { --ton: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: var(--strich-haar) solid var(--rule); }
+.faden-shell .kasten--pink { --ton: var(--tool-rechner); } .faden-shell .kasten--tuerkis { --ton: var(--tool-vergleich); } .faden-shell .kasten--lila { --ton: var(--tool-checkliste); } .faden-shell .kasten--terra { --ton: var(--tool-dokumente); } .faden-shell .kasten--spiel { --ton: var(--tool-spiel); } .faden-shell .kasten--still { border-top: var(--strich-haar) solid var(--rule); }
 .faden-shell .kasten h3 { font-size: var(--grad-20); }
 .faden-shell .kasten p { max-width: 64ch; }
 .faden-shell .kasten .knopf { justify-self: start; }

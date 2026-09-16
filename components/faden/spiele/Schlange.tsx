@@ -286,7 +286,7 @@ export default function Schlange() {
 
   return (
     <div className="schlange">
-      <SpielKopf kicker="Spiel · Schlange" hinweis="Pfeiltasten oder wischen" ton="gruen" />
+      <SpielKopf kicker="Schlange" hinweis="Pfeiltasten oder wischen" />
 
       <div
         className="schlange__feld"

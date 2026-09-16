@@ -42,6 +42,7 @@
 }
 .kicker--gruen, .faden-shell .kicker--gruen { color: var(--green-ink); }
 .kicker--pink, .faden-shell .kicker--pink { color: var(--pink); }
+.kicker--spiel, .faden-shell .kicker--spiel { color: var(--tool-spiel); }
 /* Der Kicker eines Werkzeugs trägt links seinen Punkt in der Werkzeugfarbe. */
 .kicker--tool, .faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: var(--luft-s); }
 

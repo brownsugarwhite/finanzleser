@@ -86,6 +86,7 @@ export const TOKENGRUPPEN: Tokengruppe[] = [
       ["--tuerkis-hell", "Siegel „Bestwert“, Grund der Bestwertzeile"],
       ["--lila", "Checklisten"],
       ["--blau", "Dokumente"],
+      ["--ocker", "Spiele — die einzige Farbe, die der Handoff nicht kennt"],
       ["--rot", "Fehler und Warnung"],
     ],
   },
@@ -111,6 +112,7 @@ export const TOKENGRUPPEN: Tokengruppe[] = [
       ["--tool-vergleich", "Vergleiche"],
       ["--tool-checkliste", "Checklisten"],
       ["--tool-dokumente", "Dokumente"],
+      ["--tool-spiel", "Spiele — Finanzwort, Quiz, Mythos, Schätzfrage, Los, Schlange"],
     ],
   },
   {
