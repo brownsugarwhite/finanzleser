@@ -184,7 +184,6 @@
         "animal_type": "DOG",
         "age": 2,
         "excess": 0,
-        "coverage": "OP",
         "risky_group": "RG1"
       },
       "bestand": true,
@@ -233,7 +232,7 @@
       "fest": {},
       "vor": {},
       "bestand": false,
-      "excerpt": "Steuersoftware und Steuer-Apps in der Auswahl: Kaufpreis, Gebühr je Steuererklärung, Plattformen und Zielgruppe. Die Programme unserer Partner nebeneinander."
+      "excerpt": "Steuersoftware und Steuer-Apps in der Auswahl: Kaufpreis, Gebühr je Steuererklärung, Nutzungsdauer und auf welchen Geräten das Programm läuft. Die Programme unserer Partner nebeneinander."
     },
     {
       "slug": "private-haftpflichtversicherung-vergleich",
@@ -306,9 +305,14 @@
       "titel": "Reisekrankenversicherung Vergleich",
       "kategorie": "travelhealthinsurances",
       "fest": {},
-      "vor": {},
+      "vor": {
+        "age": 40,
+        "travel_duration": 30,
+        "insured_person": "1"
+      },
       "bestand": true,
-      "defekt": true
+      "excerpt": "Auslandskrankenversicherung im Vergleich: Jahresbeitrag, höchste Reisedauer je Reise, Rücktransport und Selbstbeteiligung. Ab 65 Jahren verlangen fast alle Versicherer mehr — Alter und Reisedauer ändern die Liste sofort.",
+      "excerpt_setzen": true
     }
   ],
   "redirects": [

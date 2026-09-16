@@ -42,11 +42,11 @@ const S = {
  * in einer Liste filtern, die der Partner schon vorgefiltert hatte.
  */
 /**
- * 🚨 Nicht übernommen, weil gemessen wirkungslos: `broker` (Tagesgeld und Festgeld
- * liefern mit 0 und 1 exakt dieselben Produkt-IDs, 16.09.2026), `availability` bei der
- * Steuersoftware (jeder Wert leert die Liste) und die vier Roboadvisor-Schlüssel
- * `calculator`/`advertising_space`/`search_default`/`enabled` — das sind interne
- * Größen des Gateways, keine Angaben eines Lesers.
+ * 🚨 Nicht übernommen, weil gemessen wirkungslos: `broker` (Tagesgeld 41 und Festgeld 31
+ * liefern mit 0 UND mit 1 exakt dieselben Produkte, zweimal nachgemessen am 16.09.2026)
+ * und die vier Roboadvisor-Schlüssel `calculator`/`advertising_space`/`search_default`/
+ * `enabled` — das sind interne Größen des Gateways, keine Angaben eines Lesers.
+ * (`availability` bei der Steuersoftware stand hier auch einmal. Zu Unrecht — siehe dort.)
  */
 const P_LAND: ParamDef = {
   key: "deposit_protection_country_iso", label: "Sitz der Bank", typ: "wahl", standard: "",
@@ -229,6 +229,16 @@ const KATEGORIEN: KategorieDef[] = [
       // Zielgruppe als Umschalter im Rechner (wie im financeads-Rechner), keine eigenen Seiten je Gruppe.
       // Nur das Studentenkonto hat eine eigene URL — die gab es schon vorher, und financeads führt sie selbst.
       { key: "target_group", label: "Zielgruppe", typ: "wahl", standard: "", presets: ["", "student", "pupil", "apprentice"], optionen: [{ wert: "", label: "alle" }, { wert: "student", label: "Studierende" }, { wert: "pupil", label: "Schüler" }, { wert: "apprentice", label: "Azubis" }, { wert: "employee", label: "Angestellte" }] },
+      /**
+       * Kreditkarte zum Konto — gemessen 16.09.2026 in unserer Version v1.02: von 37
+       * Konten führen 28 eine.
+       *
+       * 🚨 Nur „ja" ist ein Filter. `credit_card=0` liefert wieder alle 37, ist also kein
+       * „nur ohne Kreditkarte", sondern gar kein Filter — in v1 trennt derselbe Parameter
+       * noch in beide Richtungen (9 ohne / 29 mit). Eine Option, die vorgibt zu filtern
+       * und alles zeigt, steht deshalb nicht in der Liste.
+       */
+      { key: "credit_card", label: "Kreditkarte", typ: "wahl", standard: "", optionen: [{ wert: "", label: "egal" }, { wert: "1", label: "nur mit Kreditkarte" }] },
     ],
     spalten: [
       { key: "kontofuehrung", label: "Kontoführung / Jahr", kurz: "Kontoführung", art: "geld", richtung: "runter" },
@@ -272,15 +282,42 @@ const KATEGORIEN: KategorieDef[] = [
     titel: "Kreditkarte", einzahl: "Kreditkarte", mehrzahl: "Karten",
     params: [
       { key: "transaction_eu", label: "Umsatz / Jahr in Europa", typ: "zahl", standard: 2500, einheit: "€", min: 0, max: 100000, schritt: 500 },
-      // 🚨 Diese drei ändern die Trefferzahl nicht, wohl aber `calculated_conditions` —
-      // financeads rechnet Guthabenzins und Gebühren daraus (gemessen 16.09.2026). Ohne
-      // sie rechnete die API still mit ihren eigenen Vorgaben (1.000 € / 1.200 € / 0).
-      { key: "average_balance", label: "Durchschnittlicher Kontostand", typ: "zahl", standard: 1000, einheit: "€", min: 0, max: 100000, schritt: 100 },
-      { key: "incoming_monthly", label: "Geldeingang / Monat", typ: "zahl", standard: 1200, einheit: "€", min: 0, max: 20000, schritt: 100 },
-      { key: "transaction", label: "Buchungen / Monat", typ: "zahl", standard: 0, min: 0, max: 200, schritt: 1 },
+      // Der Gegenpart: Umsatz außerhalb Europas. Ändert die Trefferzahl nicht, aber genau
+      // hier schlägt die Fremdwährungsgebühr zu — ohne ihn rechnete die API still mit 0.
+      { key: "transaction_not_eu", label: "Umsatz / Jahr außerhalb Europas", typ: "zahl", standard: 0, einheit: "€", min: 0, max: 100000, schritt: 500 },
+      // 🚨 Hier standen bis zum 16.09.2026 drei Angaben aus der Girokonto-Welt
+      // (`average_balance`, `incoming_monthly`, `transaction`) mit der Begründung, sie
+      // gingen zwar nicht in die Trefferzahl, wohl aber in `calculated_conditions` ein.
+      // Nachgerechnet stimmt das nicht: mit 50.000 € Kontostand, 8.000 € Geldeingang oder
+      // 150 Buchungen kommt Produkt für Produkt **dasselbe Ergebnis** heraus. Es waren
+      // drei Bedienelemente ohne Wirkung, zwei davon Lineale über die volle Satzbreite.
+      // Die API echot sie in `filter_settings`, weil sie eigene Vorgaben dafür hat — ein
+      // Echo ist kein Beweis für Wirkung.
       // Beide Filter als Umschalter im Rechner (Chips), keine eigenen Seiten „Reisekreditkarte"/„kostenlose Kreditkarte".
       { key: "travel_creditcard", label: "Reisekreditkarte", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur Reisekarten" }] },
       { key: "free_products", label: "Jahresgebühr", typ: "wahl", standard: "", presets: ["", "1"], optionen: [{ wert: "", label: "alle Karten" }, { wert: "1", label: "nur ohne Jahresgebühr" }] },
+      /**
+       * Kartengesellschaft und Abrechnungsart — zwei native Filter, die uns gefehlt haben.
+       *
+       * 🚨 Die gültigen Werte stehen nicht in einer Liste, sondern im Produkt selbst:
+       * `details.provider[]` und `details.payment_method`. Genau die Vokabeln, die unsere
+       * `lesen`-Funktion längst übersetzte (charge/credit/debit/prepaid), nimmt auch der
+       * Filter. Gemessen 16.09.2026 an 49 Karten (v1.02): Kredit 31 · Charge 10 · Prepaid 5
+       * · Debit 3 — eine saubere Aufteilung, alle 49 sind vertreten. Visa 18,
+       * Mastercard 23; American Express, Diners und JCB weist die API als ungültig
+       * zurück, obwohl `list/creditcards/providers` sie führt — bei diesem Werbeplatz
+       * gibt es sie nicht, und eine Option, die eine Fehlermeldung auslöst, gehört nicht
+       * in die Liste.
+       */
+      { key: "provider", label: "Kartengesellschaft", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "visa", label: "Visa" }, { wert: "mastercard", label: "Mastercard" }] },
+      { key: "payment_methods", label: "Abrechnung", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "credit", label: "Kredit (Teilzahlung)" }, { wert: "charge", label: "Charge (monatlich)" }, { wert: "debit", label: "Debit (sofort)" }, { wert: "prepaid", label: "Prepaid (Guthaben)" }] },
+      // 🚨 Nicht übernommen: `card_status[]` — 32 Kandidaten durchprobiert (credit, debit,
+      // prepaid, charge, classic, gold, platinum, business, 0–3, STANDARD…, main,
+      // additional, active …), jeder einzelne „The selected card status is invalid.".
+      // Es gibt keinen Listenendpunkt dafür und kein Feld im Produkt, aus dem sich die
+      // Vokabel ableiten ließe. Und `target_group[]` kennt die API zwar (employee,
+      // student, pupil, minor, apprentice, retired, freelancer, independent, unemployed),
+      // filtert damit aber nichts: alle neun liefern dieselben 49 Karten.
     ],
     spalten: [
       { key: "jahresgebuehr", label: "Jahresgebühr", art: "geld", richtung: "runter" },
@@ -315,6 +352,26 @@ const KATEGORIEN: KategorieDef[] = [
       { key: "depot_volume", label: "Depotvolumen", typ: "zahl", standard: 20000, einheit: "€", min: 1000, max: 1000000, schritt: 1000, presets: [5000, 20000, 50000] },
       { key: "order_count_pa", label: "Orders / Jahr", typ: "zahl", standard: 12, min: 1, max: 500, schritt: 1, presets: [4, 12, 50] },
       { key: "order_volume", label: "Ordervolumen", typ: "zahl", standard: 1000, einheit: "€", min: 100, max: 100000, schritt: 100 },
+      /**
+       * Handelsplatz — und zugleich der zweite Fund vom Schlage `country_rating`.
+       *
+       * 🚨 OHNE diesen Parameter liefert die API 28 Depots, MIT ihm 35 — und die sieben,
+       * die nur mit Handelsplatz auftauchen, sind ausgerechnet die günstigen Neobroker:
+       * finanzen.net zero (+ Kinderdepot), justTRADE, flatex (Depot + Neukundendepot),
+       * comdirect Pure Depot, Alchemy Markets. Gemessen 16.09.2026; die 28 sind eine
+       * echte Teilmenge der 35, es geht also nichts verloren.
+       *
+       * Offenbar rechnet der Partner die Ordergebühr erst, wenn der Handelsplatz
+       * feststeht — wer keinen nennt, sieht nur Depots mit Pauschalpreis. Voreinstellung
+       * ist deshalb „Alle großen Börsen" (`allbig`), nicht „kein Parameter".
+       *
+       * Was die einzelnen Plätze tun (gemessen): allbig/xetra/getex/otc je 35,
+       * deutsch_xetra 25, Frankfurt 22, NYSE 12, Hamburg 10.
+       */
+      { key: "stock_exchanges", label: "Handelsplatz", typ: "wahl", standard: "allbig", optionen: [{ wert: "allbig", label: "alle großen Börsen" }, { wert: "xetra", label: "XETRA" }, { wert: "getex", label: "Gettex" }, { wert: "frankfurt", label: "Frankfurt" }, { wert: "hamburg", label: "Hamburg" }, { wert: "nyse", label: "NYSE" }, { wert: "otc", label: "außerbörslich" }] },
+      // Gemessen 16.09.2026: 0 und 1 liefern dieselben 28 Depots und dieselbe
+      // Gebührenrechnung — die Ordergebühren stehen ohnehin je Weg in `orders.internet`.
+      // Draußen, bis der Partner dort unterscheidet.
     ],
     spalten: [
       { key: "depotgebuehr", label: "Depotgebühr / Jahr", kurz: "Depotgebühr", art: "geld", richtung: "runter" },
@@ -557,7 +614,15 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "crowdinvesting", version: "v1", klasse: "A",
     gruppe: "anlegen",
     titel: "Crowdinvesting", einzahl: "Projekt", mehrzahl: "Projekte",
-    params: [],
+    // Zwei native Filter, die bisher fehlten (gemessen 16.09.2026 an 5 Projekten):
+    // `location` trennt Deutschland (2) von EU ohne Deutschland (2) — eines der fünf
+    // führt gar kein Land. `duration_to` ist die Höchstlaufzeit: bis 36 Monate bleiben 2,
+    // bis 60 Monate 3 Projekte. `duration_from` kennt die API zwar, filtert aber nichts
+    // (12, 36 und 60 liefern alle fünf) — deshalb steht hier nur die Obergrenze.
+    params: [
+      { key: "location", label: "Wo investiert wird", typ: "wahl", standard: "0", optionen: [{ wert: "0", label: "alle Länder" }, { wert: "2", label: "nur Deutschland" }, { wert: "1", label: "EU ohne Deutschland" }] },
+      { key: "duration_to", label: "Laufzeit höchstens", typ: "wahl", standard: "", einheit: "Monate", optionen: [{ wert: "", label: "egal" }, { wert: "24", label: "24 Monate" }, { wert: "36", label: "36 Monate" }, { wert: "60", label: "60 Monate" }, { wert: "120", label: "120 Monate" }] },
+    ],
     spalten: [
       { key: "zins", label: "Zins p. a.", kurz: "Zins", art: "prozent", richtung: "hoch" },
       { key: "laufzeit", label: "Laufzeit", art: "monate", schmal: true },
@@ -581,11 +646,27 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "taxsoftware", version: "v1", klasse: "A",
     gruppe: "konto",
     titel: "Steuersoftware", einzahl: "Programm", mehrzahl: "Programme",
-    // 🚨 `availability` kennt die API zwar, liefert aber mit JEDEM Wert null Produkte
-    // (ONLINE/OFFLINE/APP/DESKTOP, gemessen 16.09.2026) — ein Filter, der die Liste immer
-    // leert, ist keiner. Er bleibt draußen, bis der Partner dort Daten führt.
+    /**
+     * 🚨 Zwei Korrekturen vom 16.09.2026, beide aus derselben Wurzel: ich hatte die
+     * Vokabeln geraten statt sie im Produkt nachzulesen.
+     *
+     * `availability` hielt ich für tot, weil ONLINE/OFFLINE/APP/DESKTOP jedes Mal null
+     * Programme lieferten. Die gültigen Werte stehen aber im Produkt selbst, in
+     * `details.available_platforms`: `desktop.Windows/MacOS/Linux`, `smartphone.Android/
+     * iOS`, `web.Browser`. Kleingeschrieben nimmt der Filter genau diese — `browser`,
+     * `android`, `ios` liefern beide Programme, `windows`, `macos` und `linux` null
+     * (beide Programme laufen nur im Browser und als App). Die drei Desktop-Werte stehen
+     * deshalb NICHT in der Liste: eine Auswahl, die immer leer ausgeht, ist die Falle,
+     * die uns beim Minikredit schon einmal untergekommen ist.
+     *
+     * `target_group` stand mit EMPLOYEE/SELF_EMPLOYED/PENSIONER/STUDENT hier — dieselbe
+     * Falle: nur „employee" trägt Programme, die drei anderen leeren die Liste. (Die
+     * Schreibweise ist der API egal, die Auswahl nicht: `list/taxsoftware/targetgroups`
+     * führt acht Gruppen, sieben davon ohne ein einziges Programm.) Beide Programme sind
+     * Allzweckprogramme — die Frage „für wen" hat hier keine Antwort und ist raus.
+     */
     params: [
-      { key: "target_group", label: "Für wen", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "EMPLOYEE", label: "Angestellte" }, { wert: "SELF_EMPLOYED", label: "Selbstständige" }, { wert: "PENSIONER", label: "Rentner" }, { wert: "STUDENT", label: "Studierende" }] },
+      { key: "availability", label: "Läuft auf", typ: "wahl", standard: "", optionen: [{ wert: "", label: "egal" }, { wert: "browser", label: "im Browser" }, { wert: "android", label: "Android" }, { wert: "ios", label: "iPhone / iPad" }] },
       { key: "tax_returns_per_year", label: "Steuererklärungen / Jahr", typ: "zahl", standard: 1, min: 1, max: 20, schritt: 1 },
       { key: "duration_of_use", label: "Nutzungsdauer", typ: "wahl", standard: 1, einheit: "Jahre", optionen: [1, 2, 3, 5].map((j) => ({ wert: String(j), label: `${j} ${j === 1 ? "Jahr" : "Jahre"}` })) },
     ],
@@ -653,12 +734,24 @@ const KATEGORIEN: KategorieDef[] = [
     params: [
       // Hund/Katze ist ein Umschalter im Rechner — wie bei financeads ein Tierkranken-Vergleich, keine zwei Seiten.
       { key: "animal_type", label: "Tier", typ: "wahl", standard: "DOG", presets: ["DOG", "CAT"], optionen: [{ wert: "DOG", label: "Hund" }, { wert: "CAT", label: "Katze" }] },
-      { key: "age", label: "Alter des Tieres", typ: "wahl", standard: 2, einheit: "Jahre", optionen: [0, 1, 2, 3, 5, 7, 9].map((a) => ({ wert: String(a), label: a === 0 ? "unter 1 Jahr" : `${a} Jahre` })), presets: [0, 2, 5, 8] },
-      { key: "excess", label: "Selbstbeteiligung", typ: "wahl", standard: 0, einheit: "€", optionen: [0, 150, 250, 350, 500].map((e) => ({ wert: String(e), label: e === 0 ? "keine" : `${e} €` })) },
-      // 🚨 `coverage` war ein Versprechen ohne Deckung: die API kennt den Parameter nicht
-      // (kein Echo in `filter_settings`, keine Wirkung auf die Trefferzahl, gemessen
-      // 16.09.2026 mit 50/80/100 und "OP"/"FULL"). Ein Schalter, der nichts tut, ist
-      // schlimmer als keiner — er ist raus. Was ein Tarif deckt, steht in den Spalten.
+      { key: "age", label: "Alter des Tieres", typ: "wahl", standard: 2, einheit: "Jahre", optionen: [0, 1, 2, 3, 5, 7, 9].map((a) => ({ wert: String(a), label: a === 0 ? "unter 1 Jahr" : `${a} Jahre` })), presets: [0, 2, 5, 9] },
+      // 🚨 Fünf Stufen standen hier, drei davon leerten die Liste: 150, 350 und 500 €
+      // liefern null Tarife (gefunden von `tools/registry-pruefen.mjs --api`, genau die
+      // Falle, die uns beim Minikredit schon einmal untergekommen ist). Übrig bleiben
+      // die beiden, die der Markt wirklich führt.
+      { key: "excess", label: "Selbstbeteiligung", typ: "wahl", standard: 0, einheit: "€", optionen: [0, 250].map((e) => ({ wert: String(e), label: e === 0 ? "keine" : `${e} €` })) },
+      /**
+       * Leistungsumfang — OP-Schutz oder Vollschutz.
+       *
+       * 🚨 Diesen Parameter hatte ich einmal als erfunden hinausgeworfen, und das war
+       * falsch. Der Trugschluss: `coverage=OP` liefert dieselben 12 Tarife wie gar kein
+       * `coverage`, und `filter_settings` echot ihn nicht (weil er keine Voreinstellung
+       * hat — die Antwort zeigt nur, was ANGEWANDT wurde). Beides sah nach „kennt die API
+       * nicht" aus. Es heißt aber nur: OP-Schutz ist die untere Stufe, die jeder Tarif
+       * erfüllt. `coverage=FULL` schneidet die Liste von 12 auf 7 — gemessen 16.09.2026.
+       * Die Spezifikation führt ihn ebenfalls.
+       */
+      { key: "coverage", label: "Leistungsumfang", typ: "wahl", standard: "", optionen: [{ wert: "", label: "OP-Schutz oder mehr" }, { wert: "FULL", label: "nur Vollschutz" }] },
       /**
        * Die Rasse setzt die Risikogruppe — die Zuordnung kommt vom Partner selbst.
        *
@@ -711,7 +804,14 @@ const KATEGORIEN: KategorieDef[] = [
     kategorie: "supplementarydentalinsurances", version: "v1", klasse: "A",
     gruppe: "versicherung",
     titel: "Zahnzusatzversicherung", einzahl: "Tarif", mehrzahl: "Tarife",
-    params: [{ key: "age", label: "Alter", typ: "wahl", standard: 40, einheit: "Jahre", optionen: [20, 30, 40, 50, 60, 70].map((a) => ({ wert: String(a), label: `${a} Jahre` })), presets: [25, 40, 55] }],
+    // 🚨 `coverage` führt die Spezifikation auch hier — anders als bei der Tier-
+    // versicherung ist er aber leer: 16 Werte durchprobiert (OP, FULL, 50/70/80/90/100,
+    // dentalprosthesis, dental_treatment, prophylaxis, orthodontics, BASIC, PREMIUM,
+    // COMFORT …), jeder einzelne leert die Liste von 32 auf 0. Ein Feld, aus dem sich die
+    // gültige Vokabel ableiten ließe, gibt es nicht: `details` ist bei allen 32 Tarifen
+    // leer. Ein Filter, der immer leer ausgeht, bleibt draußen — was ein Tarif erstattet,
+    // steht in den drei Prozentspalten.
+    params: [{ key: "age", label: "Alter", typ: "wahl", standard: 40, einheit: "Jahre", optionen: [20, 30, 40, 50, 60, 70].map((a) => ({ wert: String(a), label: `${a} Jahre` })), presets: [20, 40, 60] }],
     spalten: [
       { key: "beitrag", label: "Beitrag / Jahr", art: "geld", richtung: "runter" },
       { key: "zahnersatz", label: "Zahnersatz", art: "prozent", richtung: "hoch" },
@@ -733,6 +833,77 @@ const KATEGORIEN: KategorieDef[] = [
     },
     begruendung: () => "niedrigster Jahresbeitrag in Ihrem Alter",
   },
+  {
+    /**
+     * Auslandskrankenversicherung — am 15.09.2026 als `defekt` eingetragen, weil der
+     * Endpunkt parameterunabhängig HTTP 400 warf
+     * (`BaseController::getApiIdentifier(): Return value must be of type string, null
+     * returned` — ein Serverfehler beim Partner). Die Seite lief seitdem mit Hinweis und
+     * `noindex`.
+     *
+     * 🚨 Am 16.09.2026 nachgeprüft: der Endpunkt antwortet wieder, und zwar mit vollen
+     * Konditionen — das ist keine Klasse-B-Anbieterliste mehr, sondern eine Klasse-A-
+     * Kategorie mit Beitrag, Reisedauer, Altersspanne und Leistungen. Lehre: einen als
+     * kaputt vermerkten Endpunkt bei jeder Gegenprüfung erneut anfassen, sonst bleibt
+     * eine Seite für immer stillgelegt, weil sie einmal stillgelegt war.
+     *
+     * Drei Angaben, die alle drei den Preis bewegen (gemessen an 8 Tarifen):
+     *   Alter            bis 64 gleich · ab 65 teurer (Münchener Verein 8,40 → 19,80 €)
+     *                    · ab 70 noch einmal (ERGO 19,90 → 34,90 €)
+     *   Reisedauer       bis 45 Tage gleich · 56 Tage hebt American Express auf 49,59 €
+     *                    · 70 Tage lassen nur noch zwei Tarife übrig · 90 Tage keinen
+     *   Wer reist        Single · mit Kind · Paar — jeweils eigene Tarife und Preise
+     *
+     * 🚨 Und hier steckte dieselbe Falle wie bei `country_rating`: OHNE Angaben rechnet
+     * die API still mit **Alter 60 und 45 Reisetagen** (`filter_settings` verrät es).
+     * Wer 70 ist, bekam den Preis eines 60-Jährigen zu sehen. Unsere Voreinstellungen
+     * stehen deshalb ausdrücklich da.
+     */
+    kategorie: "travelhealthinsurances", version: "v1", klasse: "A",
+    gruppe: "versicherung",
+    titel: "Auslandskrankenversicherung", einzahl: "Tarif", mehrzahl: "Tarife",
+    params: [
+      { key: "age", label: "Alter", typ: "wahl", standard: 40, einheit: "Jahre", optionen: [18, 30, 40, 50, 60, 65, 70].map((a) => ({ wert: String(a), label: `${a} Jahre` })), presets: [30, 40, 65] },
+      { key: "travel_duration", label: "Reisedauer", typ: "wahl", standard: 30, einheit: "Tage", optionen: [7, 14, 30, 45, 56, 70].map((t) => ({ wert: String(t), label: `bis ${t} Tage` })) },
+      { key: "insured_person", label: "Wer reist", typ: "wahl", standard: "1", optionen: [{ wert: "1", label: "eine Person" }, { wert: "2", label: "mit Kind" }, { wert: "3", label: "Paar" }] },
+      // `excess` ist ein Schalter, keine Summe: 0 liefert alle acht Tarife, 1 die zwei
+      // mit Selbstbeteiligung (40 € und 91 €). 50/100/250 ändern nichts.
+      { key: "excess", label: "Selbstbeteiligung", typ: "wahl", standard: "0", optionen: [{ wert: "0", label: "ohne" }, { wert: "1", label: "mit Selbstbeteiligung" }] },
+    ],
+    spalten: [
+      { key: "beitrag", label: "Beitrag / Jahr", art: "geld", richtung: "runter" },
+      { key: "reisedauer", label: "Reisedauer bis", kurz: "Reisedauer", art: "zahl", einheit: "Tage", richtung: "hoch", schmal: true },
+      { key: "ruecktransport", label: "Rücktransport", art: "haken", schmal: true },
+      { key: "alter", label: "Eintrittsalter", art: "text", schmal: true, nurDetails: true },
+      { key: "notfall", label: "Notfallhilfe", art: "haken", schmal: true, nurDetails: true },
+      { key: "begleitung", label: "Mitaufnahme Begleitperson", kurz: "Begleitung", art: "haken", schmal: true, nurDetails: true },
+    ],
+    bestwert: { key: "beitrag", richtung: "runter" },
+    filter: [{ key: "ruecktransport", label: "nur mit Rücktransport", wert: true }],
+    kursblatt: {
+      band: "streuung", podest: 3, stempel: "Günstigster Tarif",
+      ohne: { key: "beitrag", ist: 0, text: "ohne ausgewiesenen Beitrag" },
+    },
+    sortierung: [{ key: "beitrag", label: "Beitrag" }, { key: "reisedauer", label: "Reisedauer" }],
+    totalLabel: "Beitrag / Jahr",
+    hinweis: "Der Beitrag gilt für ein ganzes Jahr mit beliebig vielen Reisen bis zur genannten Höchstdauer je Reise. Ab 65 Jahren verlangen fast alle Versicherer mehr — das Alter oben ändert die ganze Liste.",
+    suchwoerter: ["auslandskrankenversicherung", "reisekrankenversicherung", "reise", "urlaub", "rücktransport", "auslandsreise-krankenversicherung"],
+    lesen: (p) => {
+      const e = erstes(pfad(p.conditions, "insurance_premium"));
+      const ja = (v: unknown) => v === "yes" ? true : v === "no" ? false : null;
+      const von = zahl(pfad(e, "age_minimum")); const bis = zahl(pfad(e, "age_maximum"));
+      return nurWerte({
+        beitrag: zahl(pfad(e, "value")),
+        reisedauer: zahl(pfad(e, "travel_time")),
+        ruecktransport: ja(pfad(e, "included_services.medical_repatriation")),
+        notfall: ja(pfad(e, "included_services.emergency_care")),
+        begleitung: ja(pfad(e, "included_services.rooming_in")),
+        alter: von === null && bis === null ? null : `${von ?? 0}–${bis ?? "?"} Jahre`,
+        selbstbeteiligung: zahl(pfad(e, "deductable")),
+      });
+    },
+    begruendung: () => "günstigster Jahresbeitrag für Ihr Alter und Ihre Reisedauer",
+  },
   // ── Klasse B: nur Anbieterlisten ──
   versicherung("liabilityinsurances", "Privathaftpflicht", ["privathaftpflicht", "haftpflichtversicherung", "haftpflicht", "schadensersatz", "deckungssumme", "schlüsselverlust"]),
   versicherung("homeinsurances", "Hausratversicherung", ["hausratversicherung", "hausrat", "einbruch", "wohnungsbrand", "leitungswasser", "fahrraddiebstahl"]),
@@ -742,7 +913,6 @@ const KATEGORIEN: KategorieDef[] = [
   versicherung("dogliabilityinsurances", "Hundehaftpflicht", ["hundehaftpflicht", "hundehalterhaftpflicht", "hund", "tierhalterhaftpflicht"]),
   versicherung("horseliabilityinsurances", "Pferdehaftpflicht", ["pferdehaftpflicht", "pferd", "reiten", "tierhalterhaftpflicht pferd"]),
   versicherung("deviceinsurances", "Geräteversicherung", ["geräteversicherung", "handyversicherung", "elektronikversicherung", "smartphone", "laptop", "displayschaden"]),
-  versicherung("travelhealthinsurances", "Auslandskrankenversicherung", ["auslandskrankenversicherung", "reisekrankenversicherung", "reise", "urlaub", "rücktransport"], { defekt: true }),
 ];
 
 const INDEX = new Map<Kategorie, KategorieDef>(KATEGORIEN.map((k) => [k.kategorie, k]));

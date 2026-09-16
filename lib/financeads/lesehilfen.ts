@@ -82,7 +82,11 @@ export function juengstesDatum(p: ApiProdukt): string | null {
     if (tiefe > 6 || v === null || typeof v !== "object") return;
     if (Array.isArray(v)) { for (const e of v) lauf(e, tiefe + 1); return; }
     for (const [k, w] of Object.entries(v as Record<string, unknown>)) {
-      if (k === "update_datetime" && typeof w === "string" && /^\d{4}-\d{2}-\d{2}/.test(w) && !w.startsWith("-0001")) {
+      // 🚨 Zwei Unmöglichkeiten kommen wirklich vor: „-0001-11-30" (PHP-Nulldatum) und
+      // „0000-00-00 00:00:00" (MySQL-Nulldatum, bei allen acht Auslandskranken-Tarifen,
+      // 16.09.2026). Beide sind kein Stand, sondern „nie gepflegt" — ein Jahr ab 2000 ist
+      // die einfachste Schranke, die beide fängt.
+      if (k === "update_datetime" && typeof w === "string" && /^(?:20|21)\d{2}-\d{2}-\d{2}/.test(w)) {
         if (!best || w > best) best = w;
       } else lauf(w, tiefe + 1);
     }

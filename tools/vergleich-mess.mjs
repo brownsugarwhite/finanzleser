@@ -39,8 +39,13 @@ const ok = (nr, name, gut, info = "") => { ergebnisse.push({ nr, name, gut, info
   const text = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   const falsch = text.match(/\d+\.\d+ ?%/g) || [];
   ok(2, "Zahlen deutsch", falsch.length === 0, falsch.slice(0, 3).join(", "));
+  // 🚨 Bis zum 16.09.2026 stand hier die Gegenprobe für einen DEFEKTEN Endpunkt: die
+  // Auslandskrankenversicherung warf bei financeads einen Serverfehler, die Seite zeigte
+  // einen Hinweis und stand auf noindex. Der Endpunkt antwortet wieder — und zwar mit
+  // vollen Konditionen. Die Prüfung ist jetzt die umgekehrte: die Seite trägt Tarife.
+  // (Die `defekt`-Mechanik bleibt im Code, sie hat sich bewährt.)
   const d = await (await fetch(BASE + D)).text();
-  ok(8, "Defekter Endpunkt: Hinweis + noindex", d.includes("wird gerade überarbeitet") && /name="robots" content="noindex/.test(d));
+  ok(8, "Auslandskranken: Tarife statt Hinweis", !d.includes("wird gerade überarbeitet") && !/name="robots" content="noindex/.test(d));
 }
 
 /**

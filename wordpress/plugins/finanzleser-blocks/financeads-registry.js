@@ -366,6 +366,28 @@ window.FL_FINANCEADS = {
             "apprentice"
           ],
           "fest": false
+        },
+        {
+          "key": "credit_card",
+          "label": "Kreditkarte",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "egal"
+            },
+            {
+              "wert": "1",
+              "label": "nur mit Kreditkarte"
+            }
+          ],
+          "presets": [],
+          "fest": false
         }
       ],
       "spalten": [
@@ -465,40 +487,14 @@ window.FL_FINANCEADS = {
           "fest": false
         },
         {
-          "key": "average_balance",
-          "label": "Durchschnittlicher Kontostand",
+          "key": "transaction_not_eu",
+          "label": "Umsatz / Jahr außerhalb Europas",
           "typ": "zahl",
-          "standard": 1000,
+          "standard": 0,
           "einheit": "€",
           "min": 0,
           "max": 100000,
-          "schritt": 100,
-          "optionen": [],
-          "presets": [],
-          "fest": false
-        },
-        {
-          "key": "incoming_monthly",
-          "label": "Geldeingang / Monat",
-          "typ": "zahl",
-          "standard": 1200,
-          "einheit": "€",
-          "min": 0,
-          "max": 20000,
-          "schritt": 100,
-          "optionen": [],
-          "presets": [],
-          "fest": false
-        },
-        {
-          "key": "transaction",
-          "label": "Buchungen / Monat",
-          "typ": "zahl",
-          "standard": 0,
-          "einheit": "",
-          "min": 0,
-          "max": 200,
-          "schritt": 1,
+          "schritt": 500,
           "optionen": [],
           "presets": [],
           "fest": false
@@ -551,6 +547,66 @@ window.FL_FINANCEADS = {
             "",
             "1"
           ],
+          "fest": false
+        },
+        {
+          "key": "provider",
+          "label": "Kartengesellschaft",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "alle"
+            },
+            {
+              "wert": "visa",
+              "label": "Visa"
+            },
+            {
+              "wert": "mastercard",
+              "label": "Mastercard"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "payment_methods",
+          "label": "Abrechnung",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "alle"
+            },
+            {
+              "wert": "credit",
+              "label": "Kredit (Teilzahlung)"
+            },
+            {
+              "wert": "charge",
+              "label": "Charge (monatlich)"
+            },
+            {
+              "wert": "debit",
+              "label": "Debit (sofort)"
+            },
+            {
+              "wert": "prepaid",
+              "label": "Prepaid (Guthaben)"
+            }
+          ],
+          "presets": [],
           "fest": false
         }
       ],
@@ -624,6 +680,48 @@ window.FL_FINANCEADS = {
           "max": 100000,
           "schritt": 100,
           "optionen": [],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "stock_exchanges",
+          "label": "Handelsplatz",
+          "typ": "wahl",
+          "standard": "allbig",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "allbig",
+              "label": "alle großen Börsen"
+            },
+            {
+              "wert": "xetra",
+              "label": "XETRA"
+            },
+            {
+              "wert": "getex",
+              "label": "Gettex"
+            },
+            {
+              "wert": "frankfurt",
+              "label": "Frankfurt"
+            },
+            {
+              "wert": "hamburg",
+              "label": "Hamburg"
+            },
+            {
+              "wert": "nyse",
+              "label": "NYSE"
+            },
+            {
+              "wert": "otc",
+              "label": "außerbörslich"
+            }
+          ],
           "presets": [],
           "fest": false
         }
@@ -1163,7 +1261,68 @@ window.FL_FINANCEADS = {
       "titel": "Crowdinvesting",
       "klasse": "A",
       "defekt": false,
-      "params": [],
+      "params": [
+        {
+          "key": "location",
+          "label": "Wo investiert wird",
+          "typ": "wahl",
+          "standard": "0",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "0",
+              "label": "alle Länder"
+            },
+            {
+              "wert": "2",
+              "label": "nur Deutschland"
+            },
+            {
+              "wert": "1",
+              "label": "EU ohne Deutschland"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "duration_to",
+          "label": "Laufzeit höchstens",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "Monate",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "egal"
+            },
+            {
+              "wert": "24",
+              "label": "24 Monate"
+            },
+            {
+              "wert": "36",
+              "label": "36 Monate"
+            },
+            {
+              "wert": "60",
+              "label": "60 Monate"
+            },
+            {
+              "wert": "120",
+              "label": "120 Monate"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        }
+      ],
       "spalten": [
         {
           "key": "zins",
@@ -1191,8 +1350,8 @@ window.FL_FINANCEADS = {
       "defekt": false,
       "params": [
         {
-          "key": "target_group",
-          "label": "Für wen",
+          "key": "availability",
+          "label": "Läuft auf",
           "typ": "wahl",
           "standard": "",
           "einheit": "",
@@ -1202,23 +1361,19 @@ window.FL_FINANCEADS = {
           "optionen": [
             {
               "wert": "",
-              "label": "alle"
+              "label": "egal"
             },
             {
-              "wert": "EMPLOYEE",
-              "label": "Angestellte"
+              "wert": "browser",
+              "label": "im Browser"
             },
             {
-              "wert": "SELF_EMPLOYED",
-              "label": "Selbstständige"
+              "wert": "android",
+              "label": "Android"
             },
             {
-              "wert": "PENSIONER",
-              "label": "Rentner"
-            },
-            {
-              "wert": "STUDENT",
-              "label": "Studierende"
+              "wert": "ios",
+              "label": "iPhone / iPad"
             }
           ],
           "presets": [],
@@ -1485,7 +1640,7 @@ window.FL_FINANCEADS = {
             0,
             2,
             5,
-            8
+            9
           ],
           "fest": false
         },
@@ -1504,20 +1659,30 @@ window.FL_FINANCEADS = {
               "label": "keine"
             },
             {
-              "wert": "150",
-              "label": "150 €"
-            },
-            {
               "wert": "250",
               "label": "250 €"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "coverage",
+          "label": "Leistungsumfang",
+          "typ": "wahl",
+          "standard": "",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "",
+              "label": "OP-Schutz oder mehr"
             },
             {
-              "wert": "350",
-              "label": "350 €"
-            },
-            {
-              "wert": "500",
-              "label": "500 €"
+              "wert": "FULL",
+              "label": "nur Vollschutz"
             }
           ],
           "presets": [],
@@ -1612,9 +1777,9 @@ window.FL_FINANCEADS = {
             }
           ],
           "presets": [
-            25,
+            20,
             40,
-            55
+            60
           ],
           "fest": false
         }
@@ -1635,6 +1800,173 @@ window.FL_FINANCEADS = {
         {
           "key": "prophylaxe",
           "label": "Prophylaxe"
+        }
+      ],
+      "bestwert": "beitrag"
+    },
+    {
+      "kategorie": "travelhealthinsurances",
+      "titel": "Auslandskrankenversicherung",
+      "klasse": "A",
+      "defekt": false,
+      "params": [
+        {
+          "key": "age",
+          "label": "Alter",
+          "typ": "wahl",
+          "standard": 40,
+          "einheit": "Jahre",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "18",
+              "label": "18 Jahre"
+            },
+            {
+              "wert": "30",
+              "label": "30 Jahre"
+            },
+            {
+              "wert": "40",
+              "label": "40 Jahre"
+            },
+            {
+              "wert": "50",
+              "label": "50 Jahre"
+            },
+            {
+              "wert": "60",
+              "label": "60 Jahre"
+            },
+            {
+              "wert": "65",
+              "label": "65 Jahre"
+            },
+            {
+              "wert": "70",
+              "label": "70 Jahre"
+            }
+          ],
+          "presets": [
+            30,
+            40,
+            65
+          ],
+          "fest": false
+        },
+        {
+          "key": "travel_duration",
+          "label": "Reisedauer",
+          "typ": "wahl",
+          "standard": 30,
+          "einheit": "Tage",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "7",
+              "label": "bis 7 Tage"
+            },
+            {
+              "wert": "14",
+              "label": "bis 14 Tage"
+            },
+            {
+              "wert": "30",
+              "label": "bis 30 Tage"
+            },
+            {
+              "wert": "45",
+              "label": "bis 45 Tage"
+            },
+            {
+              "wert": "56",
+              "label": "bis 56 Tage"
+            },
+            {
+              "wert": "70",
+              "label": "bis 70 Tage"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "insured_person",
+          "label": "Wer reist",
+          "typ": "wahl",
+          "standard": "1",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "1",
+              "label": "eine Person"
+            },
+            {
+              "wert": "2",
+              "label": "mit Kind"
+            },
+            {
+              "wert": "3",
+              "label": "Paar"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        },
+        {
+          "key": "excess",
+          "label": "Selbstbeteiligung",
+          "typ": "wahl",
+          "standard": "0",
+          "einheit": "",
+          "min": null,
+          "max": null,
+          "schritt": null,
+          "optionen": [
+            {
+              "wert": "0",
+              "label": "ohne"
+            },
+            {
+              "wert": "1",
+              "label": "mit Selbstbeteiligung"
+            }
+          ],
+          "presets": [],
+          "fest": false
+        }
+      ],
+      "spalten": [
+        {
+          "key": "beitrag",
+          "label": "Beitrag / Jahr"
+        },
+        {
+          "key": "reisedauer",
+          "label": "Reisedauer bis"
+        },
+        {
+          "key": "ruecktransport",
+          "label": "Rücktransport"
+        },
+        {
+          "key": "alter",
+          "label": "Eintrittsalter"
+        },
+        {
+          "key": "notfall",
+          "label": "Notfallhilfe"
+        },
+        {
+          "key": "begleitung",
+          "label": "Mitaufnahme Begleitperson"
         }
       ],
       "bestwert": "beitrag"
@@ -1707,15 +2039,6 @@ window.FL_FINANCEADS = {
       "titel": "Geräteversicherung",
       "klasse": "B",
       "defekt": false,
-      "params": [],
-      "spalten": [],
-      "bestwert": ""
-    },
-    {
-      "kategorie": "travelhealthinsurances",
-      "titel": "Auslandskrankenversicherung",
-      "klasse": "B",
-      "defekt": true,
       "params": [],
       "spalten": [],
       "bestwert": ""

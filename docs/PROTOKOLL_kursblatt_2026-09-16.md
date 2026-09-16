@@ -195,6 +195,121 @@ Parameter, den wir nie senden und der keine Voreinstellung hat, taucht dort nie 
 Verlässlich enumerieren lässt er sich anders: ein gültiger Parameter mit ungültigem Wert
 wird namentlich gerügt, ein unbekannter stillschweigend ignoriert.
 
+### 2.8 🚨 Zweiter Nachtrag: die Spezifikation — und was danach noch fiel
+
+Dein Einwand aus § 2.7 („aber wie kann man filtern, wenn Auswahlmöglichkeiten fehlen?")
+hat mich die Frage anders stellen lassen: nicht mehr „welchen Parameternamen könnte die
+API kennen", sondern **wo steht das geschrieben**. Es steht geschrieben — in der
+OpenAPI-Spezifikation des Partners (`api.financeads.net/documentation/v1/affiliate.yaml`,
+nur mit eingeloggter Browser-Sitzung lesbar). Daraus habe ich den vollständigen
+Parameterbestand aller 25 Kategorien gezogen und Zeile für Zeile gegen unsere Registry
+gestellt. Was dabei herauskam, war mehr als eine Liste fehlender Felder.
+
+#### Die Rasse: es gab die belegte Quelle doch
+
+In § 2.7 steht, eine Zuordnung Rasse → Risikogruppe sei „mit belegter Quelle nicht
+möglich". Das war voreilig. Dieselbe Spezifikation nennt den Endpunkt
+`list/pethealthinsurance/animalbreeds` — **579 Hunderassen und 50 Katzenrassen, jede mit
+ihrer Gruppe**, abrufbar mit unserem API-Schlüssel allein. Es fehlte nie der Zugang, nur
+der Pfad; zwölf geratene Parameternamen und 21 geratene Listenpfade hatten mich zu dem
+Schluss gebracht, es gäbe ihn nicht.
+
+Der Leser tippt jetzt seine Rasse ein, gesetzt wird die Gruppe. Gemessen: „Deutsche
+Dogge" → Gruppe 3 → vier Tarife ab 25,88 € statt zwölf ab 11,22 €. Die Einteilung folgt
+übrigens der **Größe**, nicht den Listenhunden (Chihuahua Gruppe 1, Mops und Rottweiler
+Gruppe 3) — und **alle 50 Katzenrassen liegen in Gruppe 1**, dort ändert die Eingabe
+nichts. Beides steht so im Hinweis unter der Liste, statt es zu verschweigen.
+
+Die 19 Wertelisten liegen als `lib/financeads/listen.generated.json` im Repo
+(`tools/financeads-listen.mjs` baut sie neu).
+
+#### 🚨 Der zweite Fall vom Schlage `country_rating`: sieben Depots waren unsichtbar
+
+Beim Depot-Vergleich liefert die API **ohne** `stock_exchanges` 28 Depots, **mit** dem
+Parameter 35 — und die sieben, die nur mit Handelsplatz erscheinen, sind ausgerechnet die
+gebührenfreien: finanzen.net zero und sein Kinderdepot, justTRADE, flatex (Depot und
+Neukundendepot), comdirect Pure Depot, Alchemy Markets. Die 28 sind eine echte Teilmenge
+der 35. Offenbar rechnet der Partner die Ordergebühr erst, wenn der Handelsplatz
+feststeht. Voreinstellung ist jetzt „alle großen Börsen", und der Handelsplatz ist eine
+sichtbare Auswahl (Frankfurt 22, NYSE 12, Hamburg 10 Depots).
+
+#### 🚨 Eine Seite war seit einem Tag stillgelegt, obwohl sie längst wieder lief
+
+`travelhealthinsurances` (Auslandskrankenversicherung) stand seit dem 15.09. als
+`defekt`: der Endpunkt warf parameterunabhängig HTTP 400, einen Serverfehler des
+Partners. Beim Gegenprüfen habe ich ihn erneut angefasst — **er antwortet wieder**, und
+zwar nicht mit einer mageren Anbieterliste, sondern mit vollen Konditionen. Aus der
+stillgelegten Seite wird damit eine vollwertige Klasse-A-Kategorie mit Jahresbeitrag,
+Reisedauer, Altersspanne, Rücktransport und Notfallhilfe.
+
+Dazu drei Angaben, die alle drei den Preis bewegen: Alter (ab 65 teurer, ab 70 noch
+einmal), Reisedauer (ab 56 Tagen steigen Preise, ab 70 bleiben zwei Tarife, ab 90 keiner)
+und wer reist (allein / mit Kind / Paar — eigene Tarife). **Und dieselbe Falle wie beim
+Festgeld:** ohne Angaben rechnet die API still mit Alter 60 und 45 Reisetagen.
+
+*Lehre:* Einen als kaputt vermerkten Endpunkt bei jeder Gegenprüfung erneut anfassen.
+Sonst bleibt eine Seite für immer stillgelegt, weil sie einmal stillgelegt war.
+
+#### Was sonst dazugekommen ist — und was bewusst nicht
+
+| Kategorie | neu | gemessen |
+|---|---|---|
+| Depot | `stock_exchanges` | 28 → **35** Depots |
+| Girokonto | `credit_card` | 28 von 37 Konten führen eine Kreditkarte |
+| Kreditkarte | `provider`, `payment_methods`, `transaction_not_eu` | Visa 18 · Mastercard 23; Kredit 31 · Charge 10 · Prepaid 5 · Debit 3 |
+| Crowdinvesting | `location`, `duration_to` | hatte bisher **gar keine** Parameter |
+| Steuersoftware | `availability` | Browser / Android / iPhone |
+| Tierkranken | `coverage` | Vollschutz schneidet 12 → 7 |
+| Auslandskranken | `age`, `travel_duration`, `insured_person`, `excess` | ganze Kategorie neu |
+
+**Zwei Korrekturen an meiner eigenen Arbeit von gestern:**
+
+- **`coverage` bei der Tierversicherung war kein erfundenes Feld.** § 2.3 sagt das
+  Gegenteil, und die Begründung dort war ein Fehlschluss: `coverage=OP` liefert dieselben
+  zwölf Tarife wie gar kein `coverage`, und `filter_settings` echot ihn nicht — beides
+  sah nach „kennt die API nicht" aus. Es heißt aber nur, dass OP-Schutz die untere Stufe
+  ist, die jeder Tarif erfüllt. `coverage=FULL` schneidet auf sieben.
+- **`availability` bei der Steuersoftware war nicht tot, ich hatte die falschen Vokabeln
+  geraten.** ONLINE/OFFLINE/APP/DESKTOP leerten die Liste; die gültigen Werte stehen im
+  Produkt selbst (`details.available_platforms`: `web.Browser`, `smartphone.Android/iOS`,
+  `desktop.Windows/MacOS/Linux`) und heißen kleingeschrieben genauso.
+
+**Und drei Dinge sind aus der Registry geflogen, weil sie nichts taten:**
+
+- Bei der **Kreditkarte** standen `average_balance`, `incoming_monthly` und `transaction`
+  — drei Bedienelemente, zwei davon Lineale über die volle Satzbreite. Ich hatte sie
+  gestern mit der Begründung aufgenommen, sie gingen in `calculated_conditions` ein.
+  Nachgerechnet: mit 50.000 € Kontostand, 8.000 € Geldeingang oder 150 Buchungen kommt
+  Produkt für Produkt dasselbe Ergebnis. **Ein Echo in `filter_settings` ist kein Beweis
+  für Wirkung.**
+- Bei der **Steuersoftware** stand `target_group` mit vier Gruppen, von denen drei die
+  Liste leerten. Die beiden Programme sind Allzweckprogramme.
+- `card_status[]` bei der Kreditkarte bleibt draußen: 32 Kandidaten durchprobiert, jeder
+  einzelne „The selected card status is invalid." Es gibt weder einen Listenendpunkt noch
+  ein Feld im Produkt, aus dem sich die Vokabel ableiten ließe. Dasselbe bei `coverage`
+  der Zahnzusatzversicherung — 16 Werte, jeder leert die Liste von 32 auf 0.
+
+#### 🚨 Die Prüfung, die diesmal gefehlt hätte
+
+`tools/vergleich-breite.mjs` aus § 2.7 fragt: schneidet ein gesetzter Parameter die Liste
+zu eng? Es fehlte die Gegenfrage: **trägt jede angebotene Auswahl überhaupt Produkte?**
+Das ist die Minikredit-Falle aus einer anderen Richtung, und sie saß schon wieder in der
+Registry: bei der Tierkrankenversicherung standen fünf Stufen Selbstbeteiligung, von
+denen **drei (150 €, 350 €, 500 €) null Tarife liefern**. Wer sie gewählt hätte, wäre vor
+einer leeren Liste gestanden.
+
+Gefunden hat das `tools/registry-pruefen.mjs --api` — neu, und die dauerhafte Form dessen,
+was ich heute von Hand gemacht habe. Sie prüft drei Dinge über alle Kategorien:
+
+1. **Jede Option muss Produkte tragen.** (fand die drei toten Selbstbeteiligungsstufen)
+2. **Was setzt die API ungefragt?** `filter_settings` gegen unsere gesendeten Parameter.
+   (das ist der `country_rating`-Fund, als Dauerprüfung)
+3. **Jedes Preset muss eine gültige Option sein.** `klemme()` setzt ein Preset, das nicht
+   in `optionen` steht, stumm auf den Standard zurück — der Chip steht da und tut nichts.
+   (fand zwei Fälle: Tieralter „8 Jahre", Zahnzusatz „25/55 Jahre")
+
+Stand nach den Korrekturen: **17 Kategorien, 58 Parameter, keine Befunde.**
+
 ---
 
 ## 3 · Fehler, die der Umbau nebenbei gefunden hat
