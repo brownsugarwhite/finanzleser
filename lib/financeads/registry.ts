@@ -349,9 +349,31 @@ const KATEGORIEN: KategorieDef[] = [
       // Zahl statt Auswahl: Minikredite laufen 1–6 Monate, Ratenkredite 12–120 — eine feste
       // Optionsliste würde die eine oder die andere Seite auf null Angebote klemmen (gemessen 15.09.2026).
       { key: "duration_months", label: "Laufzeit", typ: "zahl", standard: 60, einheit: "Monate", min: 1, max: 120, schritt: 1, presets: [24, 36, 48, 60, 84] },
-      // Kein Standard: `usage=FREE` filtert Minikredite weg; ohne den Parameter kommen dieselben 14 Ratenkredite.
-      { key: "usage", label: "Verwendung", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "CAR", label: "Auto" }, { wert: "MODERNIZATION", label: "Modernisierung" }] },
-      { key: "type", label: "Kreditart", typ: "wahl", standard: "", fest: true, optionen: [{ wert: "", label: "alle" }, { wert: "INSTALLMENT_LOAN", label: "Ratenkredit" }, { wert: "MINI_LOAN", label: "Minikredit" }, { wert: "CAR", label: "Autokredit" }] },
+      /**
+       * Verwendung und Kreditart sind Angaben des Lesers, kein Redaktionsgeheimnis — wo
+       * die Quelle sie nicht festlegt (Ratenkredit), stehen sie als Umschalter da; wo sie
+       * es tut (Autokredit pinnt `usage=CAR`), bleiben sie verborgen. Kein Standard:
+       * `usage=FREE` filtert Minikredite weg, ohne den Parameter kommen dieselben 14.
+       *
+       * 🚨 Die drei Werte der Übergabe („Neuwagen", „Gebrauchtwagen", „Umschuldung")
+       * gibt es nicht. Gemessen 16.09.2026: `NEW_CAR`, `USED_CAR`, `RESCHEDULING`,
+       * `DEBT_RESCHEDULING`, `FURNITURE`, `TRAVEL` antworten alle mit „The selected usage
+       * is invalid". Gültig sind genau drei: CAR, MODERNIZATION, FREE.
+       */
+      { key: "usage", label: "Verwendung", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "CAR", label: "Auto" }, { wert: "MODERNIZATION", label: "Modernisierung" }, { wert: "FREE", label: "freie Verwendung" }] },
+      /**
+       * 🚨 `MINI_LOAN` ist nicht dabei, obwohl die API den Wert kennt. Gemessen über das
+       * ganze Parameterfeld: er liefert AUSSCHLIESSLICH bei 500–1.000 € über 1–2 Monate
+       * Ergebnisse (dieselben zwei, die auch ohne ihn kommen) und sonst überall null —
+       * 1.000 €/12 Monate → 0, 3.000 €/24 → 0, ohne Betrag → 0.
+       *
+       * Die Minikredit-Seite hatte ihn fest gesetzt. Wer dort die Laufzeit über sechs
+       * Monate zog, sah eine leere Liste, ohne zu erfahren warum. Ein Filter, der über
+       * neun Zehntel seines eigenen Wertebereichs alles wegschneidet, ist keiner. Ohne
+       * ihn zeigt die Seite bei ihrer Voreinstellung dieselben zwei Angebote (Cashper,
+       * Vexcash) und beim Weiterziehen das, was dann wirklich gilt.
+       */
+      { key: "type", label: "Kreditart", typ: "wahl", standard: "", optionen: [{ wert: "", label: "alle" }, { wert: "INSTALLMENT_LOAN", label: "Ratenkredit" }, { wert: "CAR", label: "Autokredit" }] },
     ],
     spalten: [
       { key: "effzins", label: "Effektiver Jahreszins", kurz: "eff. Zins", art: "prozent", richtung: "runter", ab: true },
@@ -637,6 +659,23 @@ const KATEGORIEN: KategorieDef[] = [
       // (kein Echo in `filter_settings`, keine Wirkung auf die Trefferzahl, gemessen
       // 16.09.2026 mit 50/80/100 und "OP"/"FULL"). Ein Schalter, der nichts tut, ist
       // schlimmer als keiner — er ist raus. Was ein Tarif deckt, steht in den Spalten.
+      /**
+       * 🚨 Der Vergleichsrechner von financeads lässt eine RASSE wählen, die API nicht.
+       *
+       * Gemessen am 16.09.2026: `breed`, `race`, `dog_breed`, `animal_breed`, `rasse` und
+       * sieben weitere Namen kennt sie nicht (ein gültiger Parameter wird namentlich
+       * gerügt, ein unbekannter stillschweigend ignoriert); von 21 abgefragten
+       * `/list/`-Endpunkten antwortet keiner mit einer Rasseliste. Die Fehlermeldung sagt
+       * wörtlich: „Risky group must be one of RG1, RG2, RG3". Die Zuordnung Rasse →
+       * Gruppe liegt im Widget des Partners, nicht in den Daten, die wir bekommen.
+       *
+       * Welche Gruppe welche ist, lässt sich auch nicht erschließen: RG1 bringt zwölf
+       * Tarife ab 56,97 €, RG2 drei ab 25,88 €, RG3 vier ab 25,88 € — die Reihenfolge ist
+       * weder nach Zahl noch nach Preis eindeutig. Eine geratene Zuordnung würde einen
+       * falschen Beitrag ausweisen und bei Listenhunden an rechtliche Einstufungen
+       * rühren, die je Bundesland verschieden sind. Deshalb stehen hier die Gruppen, wie
+       * der Partner sie führt, und der Hinweis sagt, wer sie festlegt.
+       */
       { key: "risky_group", label: "Rassegruppe", typ: "wahl", standard: "RG1", optionen: [{ wert: "RG1", label: "Gruppe 1" }, { wert: "RG2", label: "Gruppe 2" }, { wert: "RG3", label: "Gruppe 3" }] },
     ],
     spalten: [
@@ -647,6 +686,7 @@ const KATEGORIEN: KategorieDef[] = [
     ],
     bestwert: { key: "beitrag", richtung: "runter" },
     filter: [{ key: "tierarztwahl", label: "nur mit freier Tierarztwahl", wert: true }],
+    hinweis: "In welche der drei Rassegruppen ein Tier fällt, legt der Versicherer fest — die Einstufung hängt von der Rasse ab und wird beim Abschluss geprüft. Wir bekommen von unserem Partner nur die Gruppen, nicht die Rassenlisten dahinter.",
     sortierung: [{ key: "beitrag", label: "Beitrag" }],
     totalLabel: "Beitrag / Monat",
     suchwoerter: ["tierkrankenversicherung", "hundekrankenversicherung", "katzenkrankenversicherung", "op-versicherung hund", "tierarzt", "hund", "katze", "haustier"],

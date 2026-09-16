@@ -76,7 +76,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     : undefined;
   const best = variante.produkte.find((p) => p.id === variante.bestwert) ?? variante.produkte[0];
   return NextResponse.json({
-    slug, titel: def.titel, klasse: def.klasse, mehrzahl: def.mehrzahl,
+    // `kategorie` und `version` nennen, damit ein Prüfwerkzeug nicht aus dem Slug raten muss.
+    slug, kategorie: def.kategorie, version: v.def.version, titel: def.titel, klasse: def.klasse, mehrzahl: def.mehrzahl,
     anzahl: variante.produkte.length, stand: v.daten?.stand || null,
     href: `/finanztools/vergleiche/${slug}`,
     hauptLabel: def.totalLabel || haupt?.label || "",

@@ -712,10 +712,14 @@ window.FL_FINANCEADS = {
             {
               "wert": "MODERNIZATION",
               "label": "Modernisierung"
+            },
+            {
+              "wert": "FREE",
+              "label": "freie Verwendung"
             }
           ],
           "presets": [],
-          "fest": true
+          "fest": false
         },
         {
           "key": "type",
@@ -736,16 +740,12 @@ window.FL_FINANCEADS = {
               "label": "Ratenkredit"
             },
             {
-              "wert": "MINI_LOAN",
-              "label": "Minikredit"
-            },
-            {
               "wert": "CAR",
               "label": "Autokredit"
             }
           ],
           "presets": [],
-          "fest": true
+          "fest": false
         }
       ],
       "spalten": [
