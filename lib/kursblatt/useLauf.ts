@@ -41,7 +41,8 @@ export function useLauf(signatur: string) {
     stempel: aus ? "none" : `fl-stempel${a}`,
     flach: aus ? "none" : `fl-stempelflach${a}`,
     zeichnen: aus ? "none" : `fl-zeichnen${a}`,
-    knoten: aus ? "none" : `fl-knoten${a}`,
+    // 🚨 `knoten` ist mit der Bestätigung weggefallen (Runde 2: Linie statt Knoten).
+    //    Wer hier einen Namen zurückholt, braucht auch wieder Keyframes dazu.
   };
 }
 

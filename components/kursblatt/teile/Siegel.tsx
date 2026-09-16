@@ -52,11 +52,12 @@ export default function Siegel({
   const [lauf, setLauf] = useState(0);
   const id = useId().replace(/[^a-zA-Z0-9]/g, "");
 
-  /* Die Maße der Vorlage: 98×35 für den Gewinnerblock, 112×35 in der Liste.
-     🚨 Die Liste hatte in Runde 2 noch 112×21 — der User wollte am 16.09.2026
-     ausdrücklich MEHR Höhe, also dieselben 35 wie oben. 35 = 5 Zähne, 112 = 16 Zähne. */
-  const w = klein ? 112 : 98;
-  const h = 35;
+  /* Die Maße der Vorlage waren 98×35 (Gewinner) und 112×21 (Liste). Der User hat die
+     Marke zweimal größer bestellt — erst mehr Höhe, dann größer insgesamt. Alles bleibt
+     ein Vielfaches des Zahns (7): 126 = 18 · 7, 42 = 6 · 7, 140 = 20 · 7.
+     🚨 Die Zähnung geht nur auf, solange Breite und Höhe durch 7 teilbar sind. */
+  const w = klein ? 140 : 126;
+  const h = 42;
   const r = +(ZAHN * 0.3).toFixed(2);
   const innen = +(ZAHN * 0.55).toFixed(1);
 
@@ -82,11 +83,23 @@ export default function Siegel({
       // zurückgeschoben — modulo der Kachel, damit die Zahl klein bleibt.
       const mod = (a: number, n: number) => ((a % n) + n) % n;
       bild.setAttribute("patternTransform", `translate(${-mod(rect.left, KACHEL_B).toFixed(1)} ${-mod(rect.top, KACHEL_H).toFixed(1)})`);
-      if (ruhig) return;
+    };
+    /* 🚨 ZWEI Dinge beim Scrollen, nicht eines:
+         die FOLIE steht still (oben, `setzen`) — sie verschiebt sich gegen die Marke,
+         der SCHEIN läuft durch — ein Weißstreifen zieht einmal quer darüber.
+       Der Schein hing vorher an derselben Funktion und damit an derselben Drosselung auf
+       einen Frame; er startete dadurch fast nie. Jetzt ein eigener Zähler: höchstens alle
+       1,8 s ein Lauf, aber bei jedem Scrollen geprüft. */
+    const scheinen = () => {
+      if (ruhig || !imBild) return;
       const jetzt = performance.now();
       if (jetzt - zuletzt > 1800) { zuletzt = jetzt; setLauf((n) => n + 1); }
     };
-    const anstossen = () => { if (imBild && !geplant) geplant = requestAnimationFrame(setzen); };
+    const anstossen = () => {
+      if (!imBild) return;
+      if (!geplant) geplant = requestAnimationFrame(setzen);
+      scheinen();
+    };
 
     const io = new IntersectionObserver(([e]) => { imBild = e.isIntersecting; anstossen(); }, { rootMargin: "80px" });
     io.observe(box);

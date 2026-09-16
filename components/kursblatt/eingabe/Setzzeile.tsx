@@ -87,17 +87,17 @@ export default function Setzzeile({
         {bereich && <span>{bereich}</span>}
       </div>
 
+      {/* 🚨 Die Zeile der Vorlage („FL Setzzeile.dc.html"): Zahl · Einheit · DEHNFUGE ·
+          ‹ › als Paar rechts. Bei uns stand das ‹ LINKS vor der Zahl und das › ganz
+          rechts — die Zahl rutschte dadurch nach innen und stand nicht mehr an der
+          gleichen Kante wie in jedem anderen Baustein, und die beiden Pfeile lasen sich
+          nicht als ein Bedienelement. */}
       <div className="kb-setzzeile__zeile">
-        <button
-          type="button" tabIndex={-1} aria-label={`${label} verringern`}
-          className="kb-setzzeile__schritt"
-          data-immer={stepper ? "an" : "aus"}
-          onClick={() => setzen((wert ?? min) - schritt)}
-        >
-          <i aria-hidden="true" />
-        </button>
         <input
           className="kb-setzzeile__wert"
+          /* Breite = Zeichen + .6ch, wie in der Vorlage. Ohne sie nimmt das Feld die
+             Standardbreite und schiebt Einheit und Pfeilpaar auseinander. */
+          style={{ width: `${Math.max(2, (text || platzhalter || "").length) + 0.6}ch` }}
           value={text}
           placeholder={platzhalter}
           inputMode="decimal"
@@ -117,14 +117,23 @@ export default function Setzzeile({
           }}
         />
         {einheit && <span className="kb-setzzeile__einheit">{einheit}</span>}
-        <button
-          type="button" tabIndex={-1} aria-label={`${label} erhöhen`}
-          className="kb-setzzeile__schritt kb-setzzeile__schritt--plus"
-          data-immer={stepper ? "an" : "aus"}
-          onClick={() => setzen((wert ?? min) + schritt)}
-        >
-          <i aria-hidden="true" />
-        </button>
+        <span className="kb-setzzeile__fuge" />
+        <div className="kb-setzzeile__paar" data-immer={stepper ? "an" : "aus"}>
+          <button
+            type="button" tabIndex={-1} aria-label={`${label} verringern`}
+            className="kb-setzzeile__schritt"
+            onClick={() => setzen((wert ?? min) - schritt)}
+          >
+            <i aria-hidden="true" />
+          </button>
+          <button
+            type="button" tabIndex={-1} aria-label={`${label} erhöhen`}
+            className="kb-setzzeile__schritt kb-setzzeile__schritt--plus"
+            onClick={() => setzen((wert ?? min) + schritt)}
+          >
+            <i aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
       <div className="kb-feldlinien" aria-hidden="true">
@@ -132,9 +141,8 @@ export default function Setzzeile({
         <i className="kb-feldlinien__doppel kb-feldlinien__doppel--stark" />
         <i className="kb-feldlinien__doppel kb-feldlinien__doppel--fein" />
         <i
-          className="kb-feldlinien__knoten"
-          data-an={!fokus && gesetzt > 0 ? "an" : "aus"}
-          style={{ animation: gesetzt ? `fl-knoten${gesetzt % 2 ? "" : "2"} .5s var(--ueber) both` : undefined }}
+          className="kb-feldlinien__bestaetigt"
+          style={{ animation: gesetzt ? `fl-setz${gesetzt % 2 ? "" : "2"} .9s var(--kurve) both` : undefined }}
         />
       </div>
 

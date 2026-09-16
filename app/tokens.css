@@ -78,7 +78,12 @@
      Farbe, sie liehen sich Pink vom Rechner und Grün von der Marke; dadurch sah die
      Rätselseite aus wie ein Werkzeugkasten. Ocker ist warm wie Papier, hält den Kontrast
      als Linie und liest sich als Auszeichnung, nicht als Werkzeug. */
-  --ocker: #C8791A;               /* Spiele: Finanzwort, Quiz, Mythos, Schätzfrage, Los, Schlange */
+  /* 🚨 Vom User gesetzt (16.09.2026): #dbf000. Gemessen hat dieser Ton gegen das Papier
+     nur 1,2 : 1 Kontrast — als 3-px-Linie ein heller Streifen, als SCHRIFT auf Papier
+     unlesbar. Er gehört deshalb an Flächen und Linien, nie an Text; wo ein Spiel Schrift
+     in seiner Farbe braucht, steht `--spiel-ink`. */
+  --spiel: #dbf000;               /* Spiele: Finanzwort, Quiz, Mythos, Schätzfrage, Los, Schlange */
+  --spiel-ink: #6b7500;           /* dieselbe Farbe als SCHRIFT — abgedunkelt, bis sie auf Papier trägt */
 
   /* Vier Hauchtöne als Grund für Zustände — mehr Zustände gibt es nicht. */
   --tint: #eef3e8;                /* grün: richtig, Erfolg, Marke, Fokusring */
@@ -93,7 +98,7 @@
   --tool-vergleich: var(--tuerkis-hell);
   --tool-checkliste: var(--lila);
   --tool-dokumente: var(--blau);
-  --tool-spiel: var(--ocker);
+  --tool-spiel: var(--spiel);
 
   /* ── Linien ──────────────────────────────────────────────────────────────────────
      Fünf Stufen derselben Tinte, benannt nach ihrer AUFGABE. Wer die Deckung meint,
@@ -106,6 +111,7 @@
 
   /* Strichstärken. Drei, und jede sagt etwas anderes. */
   --strich-haar: 1px;             /* trennt */
+  --strich-fein: 1.5px;          /* die Kontur eines Punktes auf einer Achse — feiner als --strich-stark, aber sichtbar */
   --strich-stark: 2px;            /* schließt ab, trägt die Doppellinie */
   --strich-einhaenger: 3px;       /* eröffnet einen Block, trägt die Werkzeugfarbe */
   /* Die Doppellinie: 2 px Linie, 2 px Luft, 1 px Linie. Als VERLAUF auf einem 5-px-hohen

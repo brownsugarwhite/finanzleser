@@ -46,6 +46,7 @@
   --kb-luft-feld: 20px;         /* zwischen zwei Eingabe-Bausteinen */
   --kb-luft-ergebnis: 32px;     /* zwischen den Bausteinen des Ergebnisses */
   --kb-zeiger-grad: 32px;       /* die Prozentzahl in der Mitte des Rings */
+  --kb-band-hoehe: 34px;        /* das Kopfband jeder Tabelle — „etwas schmaler" */
 
   /* 🚨 `width: 100%` ist Pflicht, nicht Kosmetik. Gemessen 15.09.2026: im Faden ist `.kb`
      ein Grid-Kind von #strom; `margin-inline: auto` hebt dort das Strecken auf, die Breite
@@ -165,8 +166,10 @@
   100% { opacity: 1; transform: rotate(-1deg); }
 }
 /* S:12-13 — grüner Knoten bestätigt den gesetzten Wert. */
-@keyframes fl-knoten  { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
-@keyframes fl-knoten2 { 0% { transform: scale(0); } 60% { transform: scale(1.6); } 100% { transform: scale(1); } }
+/* Zwei gleiche Namen im Wechsel: ein zweites Mal derselbe startet nicht neu, und wer
+   die Pfeiltaste gedrückt hält, setzt schneller, als ein Lauf dauert. */
+@keyframes fl-setz  { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes fl-setz2 { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
 /* L:12-13 — der Wert unter der Nadel tickt bei jeder Änderung. */
 @keyframes fl-tickA { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
 @keyframes fl-tickB { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
@@ -452,40 +455,52 @@
 .kb [data-fokus="an"] > .kb-feldlinien .kb-feldlinien__doppel,
 .kb [data-offen="an"] > .kb-feldlinien .kb-feldlinien__doppel { transform: scaleX(1); }
 .kb [data-fehler="an"] > .kb-feldlinien .kb-feldlinien__doppel { background: var(--pink); }
-/* S:29 — der grüne Knoten bestätigt den gesetzten Wert, sobald die Zeile den Fokus abgibt. */
-.kb .kb-feldlinien__knoten {
-  position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: var(--radius-kreis);
-  background: var(--green); border: var(--strich-stark) solid var(--paper); box-sizing: content-box;
-  opacity: 0; transition: opacity .4s;
+/* 🚨 Die BESTÄTIGUNG ist eine Linie, kein Knoten (Handoff Runde 2, Punkt 2: „Grüner
+   Knoten entfernt; Bestätigung = grüne 2-px-Linie zeichnet sich von der Mitte und
+   verblasst"). Der Knoten saß rechts an der Ecke, wurde bei jedem Setzen kurz größer und
+   blieb dann liegen — man sah ihn kaum, und er sagte nichts über die Zeile aus.
+   Die Linie läuft von der MITTE nach beiden Seiten auf, hält kurz und verblasst:
+   `fl-setz` zieht scaleX 0 → 1 bis 45 %, danach fällt die Deckkraft auf 0. */
+.kb .kb-feldlinien__bestaetigt {
+  position: absolute; left: 0; right: 0; top: -1px; height: 2px;
+  background: var(--green); transform: scaleX(0); transform-origin: center; opacity: 0;
+  pointer-events: none;
 }
-.kb .kb-feldlinien__knoten[data-an="an"] { opacity: 1; }
 
 /* ── Setzzeile (FL Setzzeile.dc.html:17-37) ───────────────────────────────────────── */
 .kb .kb-setzzeile { position: relative; min-width: 0; }
 .kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__label { color: var(--kb-feld-farbe); }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__label { color: var(--pink); }
 
-.kb .kb-setzzeile__zeile { position: relative; display: flex; align-items: center; gap: var(--luft-s); height: 54px; }
-/* S:20/23 — die Chevrons sitzen mit negativem Rand halb außerhalb, damit die Zahl auf
-   der Satzkante steht und nicht eingerückt wirkt. */
+/* Die Zeile der Vorlage: Zahl · Einheit · Dehnfuge · das Pfeilpaar rechts.
+   🚨 7 px zwischen Zahl und Einheit, 2 px zwischen den beiden Pfeilen, 3 px Versatz im
+   Chevron — die Maße der Übergabe („FL Setzzeile.dc.html"), nicht der Abstandsleiter.
+   Ein Bedienelement ist eine Form: seine Teile sind aufeinander gerechnet, nicht auf den
+   Satz. Auf 8/4/2 gerastert rückt die Einheit von der Zahl ab und das Pfeilpaar
+   auseinander. Dieselbe Lehre wie bei der Pille und beim Wordle-Gitter. */
+.kb .kb-setzzeile__zeile { position: relative; display: flex; align-items: baseline; gap: 7px; height: 40px; }
+.kb .kb-setzzeile__fuge { flex: 1; }
+/* S:20/23 — ‹ › als PAAR, 32×32, Opazität .45, im Fokus 1. */
+.kb .kb-setzzeile__paar { display: flex; gap: 2px; align-self: center; opacity: .45; transition: opacity .3s; }
+.kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__paar,
+.kb .kb-setzzeile__paar[data-immer="an"] { opacity: 1; }
 .kb .kb-setzzeile__schritt {
-  width: 34px; height: 44px; margin-left: calc(-1 * var(--luft-s)); border: 0; background: transparent; padding: 0;
+  width: 32px; height: 32px; border: 0; background: transparent; padding: 0;
   display: flex; align-items: center; justify-content: center; color: var(--muted);
-  opacity: .45; transition: opacity .3s, color .2s; cursor: pointer;
+  transition: color .2s; cursor: pointer;
 }
-.kb .kb-setzzeile__schritt--plus { margin-left: 0; margin-right: calc(-1 * var(--luft-s)); }
 .kb .kb-setzzeile__schritt:hover { color: var(--ink); }
-.kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__schritt,
-.kb .kb-setzzeile__schritt[data-immer="an"] { opacity: 1; }
 .kb .kb-setzzeile__schritt i {
-  width: 8px; height: 8px;
-  border-left: var(--strich-stark) solid currentColor; border-bottom: var(--strich-stark) solid currentColor;
-  transform: rotate(45deg); margin-left: var(--luft-xs);
+  width: 7px; height: 7px;
+  border-left: var(--strich-fein) solid currentColor; border-bottom: var(--strich-fein) solid currentColor;
+  transform: rotate(45deg); margin-left: 3px;
 }
-.kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: var(--luft-xs); }
+.kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: 3px; }
 
+/* Das Feld ist so breit wie seine Zahl, nicht so breit wie die Zeile — sonst schiebt es
+   Einheit und Pfeilpaar auseinander (Vorlage: `flex:0 1 auto; width:(Zeichen+.6)ch`). */
 .kb .kb-setzzeile__wert {
-  flex: 1; min-width: 0; border: 0; background: transparent;
+  flex: 0 1 auto; min-width: 2ch; max-width: 100%; border: 0; background: transparent;
   outline: 0; padding: 0; letter-spacing: -.01em; transition: color .3s;
 }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__wert { color: var(--pink); }
@@ -663,10 +678,10 @@
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   /* 🚨 Feiner als die Vorlage (700). Der User: „die schrift muss feiner sein" — 500 auf
      einer hellen Folie liest sich als Prägung, 700 als Aufdruck. */
-  font: 500 var(--grad-11)/1 var(--sans); letter-spacing: .13em;
+  font: 500 var(--grad-13)/1 var(--sans); letter-spacing: .13em;
   text-indent: .13em; text-transform: uppercase; color: var(--ink); white-space: nowrap;
 }
-.kb .kb-siegel--klein .kb-siegel__text { font-size: var(--grad-kicker); }
+.kb .kb-siegel--klein .kb-siegel__text { font-size: var(--grad-12); }
 /* Der Schimmer zieht schräg über die Marke — zweimal derselbe Verlauf, damit ein neuer
    Lauf auch dann startet, wenn der alte noch läuft. */
 @keyframes kb-schimmer { 0% { transform: translateX(-160%) skewX(-22deg); } 100% { transform: translateX(300%) skewX(-22deg); } }
@@ -870,12 +885,12 @@
 /* Der Stapel steht oben als `.kb__kopfstapel` — hier nur noch der Abstand davor. */
 .kb .kb-tabelle__stapel { margin-top: var(--luft-s); }
 .kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; grid-template-columns: var(--kb-tab-raster); gap: var(--luft-s); }
-/* 🚨 9/12 und 11/12 stehen so in der Vorlage und NICHT auf der Abstandsleiter. Ein
-   Tabellenband ist eine Form, kein Satz: sein Innenabstand ist auf die 10,5-px-Versalien
-   gerechnet, so wie die Pille auf ihre 48 px. Auf 8/14 gerastert wird das Band zu flach
-   und die Zeilen zu luftig — dieselbe Lehre wie beim Wordle-Gitter. */
+/* Dasselbe Band wie in der Vergleichsliste und im Ratgeber — ein Tabellenkopf, drei
+   Tabellen. Die 11/12 der Zeilen stehen so in der Vorlage und nicht auf der
+   Abstandsleiter: eine Zahlenzeile ist eine Form, kein Satz. */
 .kb .kb-tabelle__kopf {
-  padding: 9px 12px; background: var(--ink); color: var(--auf-tinte);
+  padding: var(--luft-xs) var(--luft-s); min-height: var(--kb-band-hoehe);
+  align-items: center; background: var(--ink); color: var(--auf-tinte);
   font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: var(--laufweite-band); text-transform: uppercase;
 }
 /* 🚨 Farbe auf den SPANS: `components.css` färbt global jedes p/li/span, und eine
@@ -932,8 +947,15 @@
 .kb .kb-angaben__breit + .kb-angaben__breit { margin-top: var(--luft-l); }
 .kb .kb-angaben__paar { margin-top: var(--luft-l); gap: var(--luft-l) var(--luft-xl); }
 /* K:76-77 — die Bezeichnung steht neben dem Umschalter, nicht darüber. */
-.kb .kb-angaben__segment { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; }
-.kb .kb-angaben__segment > b { font: 600 var(--grad-15) var(--serif); }
+/* 🚨 Das Segment trägt seinen Namen als KICKER ÜBER der Leiste, nicht in Serif daneben
+   (Vorlage K, „Verwendung": `display:block; 700 10.5px Open Sans; .14em; uppercase;
+   #686C6A`, darunter 8 px Luft). Bei uns stand „Länderbonität" als 15-px-Serif links
+   neben der Leiste — der einzige Eingabe-Baustein im ganzen Kursblatt, dessen Label
+   anders aussah als die übrigen fünf. */
+.kb .kb-angaben__segment > b {
+  display: block; font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker);
+  text-transform: uppercase; color: var(--muted); margin-bottom: var(--luft-s);
+}
 
 /* ── Marktüberblick (K:87-113) ────────────────────────────────────────────────────── */
 .kb .kb-markt { margin-top: var(--kb-luft-markt); }
@@ -966,9 +988,13 @@
 /* Beide Stiele laufen von der Grundlinie bis zur Oberkante des Bandes. */
 .kb .kb-band__schnitt { position: absolute; bottom: 22px; height: 68px; border-left: var(--strich-haar) dashed var(--muted); transition: left .7s var(--kurve); }
 .kb .kb-band__faden { position: absolute; bottom: 22px; height: 68px; width: 1px; background: var(--tuerkis); transform-origin: bottom; transition: left .7s var(--kurve); }
+/* 🚨 1,5 px Kontur, nicht 2. Die Vorlage setzt `border: '1.5px solid #334A27'`; bei 10 px
+   Durchmesser ist der halbe Pixel ein Viertel der Kontur — der Unterschied zwischen einem
+   feinen Punkt und einem gedruckten Ring. Größen wie in der Vorlage: 10 · 14 (Bestwert) ·
+   16 (überfahren). */
 .kb .kb-band__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, 50%);
-  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--ink);
+  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--ink);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .7s var(--kurve), bottom .5s, width .25s, height .25s, background .25s;
 }
@@ -1014,9 +1040,10 @@
   position: absolute; left: 0; transform: translateY(-100%);
   font: 500 var(--grad-kicker) var(--sans); color: var(--muted); pointer-events: none;
 }
+/* Dieselbe feine Kontur wie im Streuband — beide zeigen Angebote auf einer Achse. */
 .kb .kb-zinskurve__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
-  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-stark) solid var(--tuerkis);
+  border-radius: var(--radius-kreis); background: var(--paper); border: var(--strich-fein) solid var(--tuerkis);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .5s, top .5s var(--kurve), width .25s, height .25s, background .25s;
 }
@@ -1076,7 +1103,10 @@
 .kb .kb-kennzahl__unter { display: block; margin-top: var(--luft-xxs); font: italic 300 var(--grad-12)/1.4 var(--serif); color: var(--muted); }
 .kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { color: var(--werkzeug); }
 .kb .kb-kennzahl[data-ton="grau"] .kb-kennzahl__wert { color: var(--muted); }
-.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--green-ink); }
+/* 🚨 `--green` (#45A117), nicht `--green-ink` (#2E7A0B). Die Vorlage setzt die
+   Ersparnis in die Marke — sie ist die frohe Botschaft der drei Zahlen und darf heller
+   sein als die Tinte. Gemessen aus der Übergabe: `color:#45A117`. */
+.kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--green); }
 .kb .kb-kennzahl[data-ton="magenta"] .kb-kennzahl__wert { color: var(--pink); }
 /* Im schmalen Satz zwei nebeneinander, die dritte über die volle Breite darunter. */
 @container kb (max-width: 559px) {
@@ -1113,7 +1143,11 @@
    falsch: erst oben rechts (ragte ins Kopfband der Tabelle), dann mittig unter dem Knopf
    (verdeckte ihn halb). Jetzt liegt sie unten rechts an der Ecke und steht nach rechts
    und unten über — wie eine Marke, die jemand über den Rand geklebt hat. */
-.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -22px; top: auto; bottom: -19px; z-index: 2; }
+/* 🚨 Je größer die Marke, desto weiter muss sie nach unten und außen rutschen — sonst
+   deckt sie den Knopf zu, statt an ihm zu kleben. Bei 140×42 bleiben so zwölf Pixel
+   Überlappung an der unteren rechten Ecke: genug, dass sie aufgeklebt wirkt, wenig
+   genug, dass „Zum Anbieter" und die Scheibe frei stehen. */
+.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -30px; top: auto; bottom: -30px; z-index: 2; }
 
 .kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
 .kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
@@ -1192,27 +1226,36 @@
 /* ══ DER TABELLENKOPF ═══════════════════════════════════════════════════════════════
    EIN Muster für jede Tabelle im Kursblatt — Vergleichsliste wie Jahresübersicht.
 
-   Von unten nach oben, so wie der User es beschreibt:
-     das BAND mit dem Text (dick, Tinte, weiße Versalien)
-     2 px Luft · 2 px Linie
-     2 px Luft · 1 px Linie
-   Also zwei Linien über dem Band, und sie werden nach oben hin dünner.
+   Von oben nach unten, GENAU wie in der Ratgeber-Tabelle (app/faden.css, `.prose table`),
+   auf die der User als Muster zeigt:
 
-   🚨 Hier standen bis zum 16.09.2026 DREI Linien (1 · 2 · 1): die unterste war beim
-   Nachtragen der obersten übriggeblieben. Und die Jahresübersicht hatte ihren eigenen
-   Stapel in Grau, mit der dicken Linie oben statt unten — zwei Tabellen, zwei Köpfe.
-   Wer einen Kopf ändert, ändert ab jetzt beide: die Klasse heißt `.kb__kopfstapel`. */
+     1 px Linie · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das BAND mit dem Text
+
+   Also drei Linien, und darunter das Band in Tinte mit weißen Versalien. Als EIN Verlauf,
+   weil ein Element nur zwei Pseudoelemente hat und es drei Linien sind.
+
+   🚨 Dieser Kopf hat drei Anläufe gebraucht, und jeder Anlauf hatte einen eigenen Stapel:
+   die Vergleichsliste 1·2·1, die Jahresübersicht 2·1 in GRAU mit der dicken Linie oben,
+   die Ratgeber-Tabelle 1·2·1. Zwischendurch habe ich auf zwei Linien gekürzt, weil ich
+   „zwei dünner werdende darüber" als Beschreibung statt als Hinweis auf das Muster gelesen
+   habe. Es gibt jetzt EINE Fassung, sie steht hier, und sie ist die aus dem Ratgeber.
+   Wer sie ändert, ändert JEDE Tabelle des Hauses. */
 .kb .kb__kopfstapel {
-  padding-top: 5px;
-  background-image: linear-gradient(var(--ink) 0 1px, transparent 1px 3px, var(--ink) 3px 5px);
+  padding-top: 8px;
+  background-image: linear-gradient(
+    var(--ink) 0 1px, transparent 1px 3px,
+    var(--ink) 3px 5px, transparent 5px 7px,
+    var(--ink) 7px 8px);
   background-repeat: no-repeat;
-  background-size: 100% 5px;
+  background-size: 100% 8px;
 }
 .kb .kb-liste__kopfstapel { margin-top: var(--luft-s); }
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
   align-items: center; padding: var(--luft-xs) var(--luft-s);
   background: var(--ink); color: var(--auf-tinte);
+  /* Die Bandhöhe steht im Muster, nicht je Tabelle. */
+  min-height: var(--kb-band-hoehe);
   font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: var(--laufweite-band); text-transform: uppercase;
 }
 /* 🚨 Farbe auf den SPANS, nicht nur auf dem Band. `components.css` färbt global jedes
