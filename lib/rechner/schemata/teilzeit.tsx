@@ -36,7 +36,7 @@ export const teilzeitSchema: RechnerSchema<W, TeilzeitResult> = {
       kacheln: [
         { label: "Brutto monatlich", wert: e.bruttoMonatlich, text: fmtGeld },
         { label: "Teilzeitquote", wert: e.teilzeitProzent, text: (v) => fmtProzent(v, 2) },
-        { label: "Netto-Schaetzung", wert: e.nettoSchaetzung, text: fmtGeld },
+        { label: "Netto-Schätzung", wert: e.nettoSchaetzung, text: fmtGeld },
       ],
     },
     {
@@ -48,12 +48,12 @@ export const teilzeitSchema: RechnerSchema<W, TeilzeitResult> = {
         { k: "Teilzeitquote", v: fmtProzent(e.teilzeitProzent) },
         { k: "Monatsstunden (Ø)", v: `${e.monatsStunden.toFixed(1)} Std.` },
         { k: "Brutto monatlich", v: fmtGeld(e.bruttoMonatlich) },
-        { k: "Beschaeftigungstyp", v: String(typLabels[e.typ] || e.typ) },
-        { k: "Netto-Schaetzung", v: fmtGeld(e.nettoSchaetzung) },
+        { k: "Beschäftigungstyp", v: String(typLabels[e.typ] || e.typ) },
+        { k: "Netto-Schätzung", v: fmtGeld(e.nettoSchaetzung) },
         { k: "Mindestlohn konform", v: e.mindestlohnKonform ? "Ja" : "Nein" },
       ],
     },
     { art: "zeiger", label: "Teilzeitquote", wert: Math.min(100, Math.max(0, Math.round(e.teilzeitProzent))) },
-    { art: "hinweis", text: "Die Netto-Schaetzung ist vereinfacht und beruecksichtigt pauschalierte SV-Abzuege. Die tatsaechliche Netto-Differenz haengt von Steuerklasse, Kirchensteuer und Kinderfreibetraegen ab. Bei Einkommen unter der Midijob-Grenze gelten reduzierte SV-Beiträge (SS 20 Abs. 2 SGB IV)." },
+    { art: "hinweis", text: "Die Netto-Schätzung ist vereinfacht und beruecksichtigt pauschalierte SV-Abzüge. Die tatsaechliche Netto-Differenz haengt von Steuerklasse, Kirchensteuer und Kinderfreibetraegen ab. Bei Einkommen unter der Midijob-Grenze gelten reduzierte SV-Beiträge (SS 20 Abs. 2 SGB IV)." },
   ],
 };

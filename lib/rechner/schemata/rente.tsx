@@ -34,7 +34,7 @@ export const renteSchema: RechnerSchema<W, RenteResult> = {
       art: "kacheln",
       kacheln: [
         { label: "Monatliche Rente", wert: e.renteMonatlich, text: fmtGeld },
-        { label: "Jaehrliche Rente", wert: e.renteJaehrlich, text: fmtGeld },
+        { label: "Jährliche Rente", wert: e.renteJaehrlich, text: fmtGeld },
       ],
     },
     {

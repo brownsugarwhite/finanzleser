@@ -38,8 +38,8 @@ export const kfzSteuerSchema: RechnerSchema<W, KfzSteuerResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Hubraum-Steuer", v: fmtGeld(e.hubraumSteuer) },
-        { k: "CO2-Steuer", v: fmtGeld(e.co2Steuer) },
+        ...(!e.elektroBefreit ? [{ k: "Hubraum-Steuer", v: fmtGeld(e.hubraumSteuer) }] : []),  // bedingt
+        ...(!e.elektroBefreit ? [{ k: "CO2-Steuer", v: fmtGeld(e.co2Steuer) }] : []),  // bedingt
         { k: "Jahressteuer", v: fmtGeld(e.jahressteuer) },
       ],
     },

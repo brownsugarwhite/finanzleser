@@ -37,12 +37,12 @@ export const elterngeldSchema: RechnerSchema<W, ElterngeldResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Kein Anspruch", v: "Einkommen über 175.000 EUR" },
-        { k: "Monatsbrutto", v: fmtGeld(e.monatsBrutto) },
-        { k: "BEEG-Netto", v: fmtGeld(e.beegNetto) },
-        { k: "Ersatzrate", v: fmtProzent(e.ersatzrateProzent) },
-        { k: "Basiselterngeld (12 Mon.)", v: fmtGeld(e.gesamtBasis) },
-        { k: "ElterngeldPlus (24 Mon.)", v: fmtGeld(e.gesamtPlus) },
+        ...(!e.keinAnspruch ? [] : [{ k: "Kein Anspruch", v: "Einkommen über 175.000 EUR" }]),  // bedingt
+        ...(!e.keinAnspruch ? [{ k: "Monatsbrutto", v: fmtGeld(e.monatsBrutto) }] : []),  // bedingt
+        ...(!e.keinAnspruch ? [{ k: "BEEG-Netto", v: fmtGeld(e.beegNetto) }] : []),  // bedingt
+        ...(!e.keinAnspruch ? [{ k: "Ersatzrate", v: fmtProzent(e.ersatzrateProzent) }] : []),  // bedingt
+        ...(!e.keinAnspruch ? [{ k: "Basiselterngeld (12 Mon.)", v: fmtGeld(e.gesamtBasis) }] : []),  // bedingt
+        ...(!e.keinAnspruch ? [{ k: "ElterngeldPlus (24 Mon.)", v: fmtGeld(e.gesamtPlus) }] : []),  // bedingt
       ],
     },
     { art: "zeiger", label: "Ersatzrate", wert: e.ersatzrateProzent },

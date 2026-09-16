@@ -20,8 +20,8 @@ export const heizkostenSchema: RechnerSchema<W, HeizkostenResult> = {
   start: { wohnflaeche: 80, energietraeger: "gas", verbrauchKwh: 0 } as W,
 
   felder: [
-    { baustein: "setzzeile", key: "wohnflaeche", label: "Wohnflaeche", min: 10, max: 500, schritt: 5, einheit: "m2" },
-    { baustein: "register", key: "energietraeger", label: "Energietraeger", optionen: [{ wert: "gas", label: "Erdgas" }, { wert: "oel", label: "Heizöl" }, { wert: "fernwaerme", label: "Fernwärme" }, { wert: "waermepumpe", label: "Wärmepumpe (Strom)" }] },
+    { baustein: "setzzeile", key: "wohnflaeche", label: "Wohnfläche", min: 10, max: 500, schritt: 5, einheit: "m2" },
+    { baustein: "register", key: "energietraeger", label: "Energieträger", optionen: [{ wert: "gas", label: "Erdgas" }, { wert: "oel", label: "Heizöl" }, { wert: "fernwaerme", label: "Fernwärme" }, { wert: "waermepumpe", label: "Wärmepumpe (Strom)" }] },
     { baustein: "setzzeile", key: "verbrauchKwh", label: "Verbrauch (0 = automatisch)", min: 0, max: 40000, schritt: 100, einheit: "kWh/Jahr" },
   ],
 
@@ -44,6 +44,6 @@ export const heizkostenSchema: RechnerSchema<W, HeizkostenResult> = {
         { k: "CO2-Ausstoss / Jahr", v: `${e.co2Ausstoss.toLocaleString("de-DE")} kg` },
       ],
     },
-    { art: "hinweis", text: "Bei Verbrauch = 0 wird ein Durchschnittswert basierend auf Wohnflaeche und Energietraeger berechnet. Die Kosten sind Durchschnittswerte für Deutschland 2026." },
+    { art: "hinweis", text: "Bei Verbrauch = 0 wird ein Durchschnittswert basierend auf Wohnfläche und Energieträger berechnet. Die Kosten sind Durchschnittswerte für Deutschland 2026." },
   ],
 };

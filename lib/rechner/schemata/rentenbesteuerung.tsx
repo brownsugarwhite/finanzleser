@@ -37,7 +37,7 @@ export const rentenbesteuerungSchema: RechnerSchema<W, RentenbesteuerungResult> 
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Rente jaehrlich", v: fmtGeld(w.monatlicheRente * 12) },
+        { k: "Rente jährlich", v: fmtGeld(w.monatlicheRente * 12) },
         { k: "Besteuerungsanteil", v: fmtProzent(e.besteuerungsanteilProzent) },
         { k: "Steuerpflichtiger Anteil", v: fmtGeld(e.steuerpflichtigAnteil) },
         { k: "Werbungskosten-Pauschbetrag", v: fmtGeld(e.wkPauschbetrag) },

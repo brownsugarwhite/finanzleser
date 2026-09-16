@@ -37,12 +37,11 @@ export const rentenschaetzerSchema: RechnerSchema<W, RentenschaetzerResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Entgeltpunkte (geschaetzt)", v: String(punkte(e.entgeltpunkteGeschaetzt)) },
+        { k: "Entgeltpunkte (geschätzt)", v: String(punkte(e.entgeltpunkteGeschaetzt)) },
         { k: "Monatliches Bruttoeinkommen", v: fmtGeld(w.monatlichesEinkommen) },
         { k: "Versicherungsjahre", v: `${w.versicherungsjahre} Jahre` },
-        { k: "Entgeltpunkte (geschaetzt)", v: String(punkte(e.entgeltpunkteGeschaetzt)) },
       ],
     },
-    { art: "hinweis", text: "Dies ist eine unverbindliche Schaetzung. Die tatsaechliche Rente haengt von den genauen Versicherungszeiten und Einkommen ab. Luecken oder unterdurchschnittliche Einkommen reduzieren die Rente. Nutzen Sie die offizielle Rentenauskunft der Deutschen Rentenversicherung für praezise Werte." },
+    { art: "hinweis", text: "Dies ist eine unverbindliche Schätzung. Die tatsaechliche Rente haengt von den genauen Versicherungszeiten und Einkommen ab. Luecken oder unterdurchschnittliche Einkommen reduzieren die Rente. Nutzen Sie die offizielle Rentenauskunft der Deutschen Rentenversicherung für praezise Werte." },
   ],
 };

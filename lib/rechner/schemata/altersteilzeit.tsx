@@ -42,7 +42,7 @@ export const altersteilzeitSchema: RechnerSchema<W, AltersteilzeitResult> = {
         { k: "Teilzeit-Brutto (50 %)", v: fmtGeld(e.teilzeitBrutto) },
         { k: "Aufstockung AG (20 %)", v: fmtGeld(e.aufstockung) },
         { k: "Gesamt Altersteilzeit", v: fmtGeld(e.gesamtTeilzeit) },
-        { k: "Nettovergleich (geschaetzt)", v: fmtGeld(e.nettovergleich) },
+        { k: "Nettovergleich (geschätzt)", v: fmtGeld(e.nettovergleich) },
       ],
     },
     { art: "hinweis", text: "Mindestalter für Altersteilzeit: 55 Jahre. Aktuelles Alter liegt darunter." },

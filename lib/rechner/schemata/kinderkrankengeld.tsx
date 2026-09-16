@@ -33,7 +33,7 @@ export const kinderkrankengeldSchema: RechnerSchema<W, KinderkrankengeldResult> 
     {
       art: "kacheln",
       kacheln: [
-        { label: "Kinderkrankengeld taeglich", wert: e.kgTaeglich, text: fmtGeld },
+        { label: "Kinderkrankengeld täglich", wert: e.kgTaeglich, text: fmtGeld },
         { label: "Verbleibende Tage", wert: e.verbleibendeTage, text: (v) => `${fmtDe(v)} Tage` },
         { label: "Gesamtbetrag", wert: e.gesamtbetrag, text: fmtGeld },
       ],
@@ -42,9 +42,9 @@ export const kinderkrankengeldSchema: RechnerSchema<W, KinderkrankengeldResult> 
       art: "punktzeilen",
       zeilen: [
         { k: "Brutto (begrenzt auf BBG)", v: `${fmtGeld(e.bruttoBegrenzt)}${e.istBegrenzt ? " (gedeckelt)" : ""}` },
-        { k: "70% Brutto (taeglich)", v: fmtGeld(e.kgBruttoTaeglich) },
-        { k: "90% Netto-Grenze (taeglich)", v: fmtGeld(e.kgNettoGrenze) },
-        { k: "Kinderkrankengeld (taeglich)", v: fmtGeld(e.kgTaeglich) },
+        { k: "70% Brutto (täglich)", v: fmtGeld(e.kgBruttoTaeglich) },
+        { k: "90% Netto-Grenze (täglich)", v: fmtGeld(e.kgNettoGrenze) },
+        { k: "Kinderkrankengeld (täglich)", v: fmtGeld(e.kgTaeglich) },
         { k: "Jahresanspruch", v: `${e.jahresanspruchTage} Tage` },
         { k: "Verbleibende Tage", v: `${e.verbleibendeTage} Tage` },
       ],

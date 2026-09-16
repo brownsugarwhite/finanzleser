@@ -38,8 +38,6 @@ export const rentenbeginnSchema: RechnerSchema<W, RentenbeginnResult> = {
       zeilen: [
         { k: "Regelaltersgrenze", v: String(formatAlter(e.regelaltersgrenze)) },
         { k: "Fruehester Rentenbeginn", v: String(formatAlter(e.fruehesterRentenbeginn)) },
-        { k: "Regelaltersgrenze", v: String(formatAlter(e.regelaltersgrenze)) },
-        { k: "Fruehester Rentenbeginn", v: String(formatAlter(e.fruehesterRentenbeginn)) },
         { k: "Abschlag (Monate)", v: `${e.abschlagMonate} Monate` },
         { k: "Abschlag (Prozent)", v: fmtProzent(e.abschlagProzent) },
       ],

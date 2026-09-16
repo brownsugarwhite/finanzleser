@@ -30,7 +30,7 @@ export const verletztengeldSchema: RechnerSchema<W, VerletztengeldResult> = {
     {
       art: "kacheln",
       kacheln: [
-        { label: "Verletztengeld taeglich", wert: e.vgTaeglich, text: fmtGeld },
+        { label: "Verletztengeld täglich", wert: e.vgTaeglich, text: fmtGeld },
         { label: "Verletztengeld monatlich", wert: e.vgMonatlich, text: fmtGeld },
       ],
     },
@@ -39,11 +39,11 @@ export const verletztengeldSchema: RechnerSchema<W, VerletztengeldResult> = {
       zeilen: [
         { k: "Monatsbrutto", v: `${fmtGeld(e.monatsBrutto)}${e.istBegrenzt ? " (über JAV-Höchstbetrag)" : ""}` },
         { k: "Brutto (begrenzt)", v: fmtGeld(e.bruttoBegrenzt) },
-        { k: "Regelentgelt (taeglich)", v: fmtGeld(e.regelentgeltTaeglich) },
-        { k: "80% Brutto (taeglich)", v: fmtGeld(e.vgBruttoTaeglich) },
-        { k: "Netto (taeglich)", v: fmtGeld(e.nettoTaeglich) },
-        { k: "Verletztengeld (taeglich)", v: fmtGeld(e.vgTaeglich) },
-        { k: "Verletztengeld (woechentlich)", v: fmtGeld(e.vgWoechentlich) },
+        { k: "Regelentgelt (täglich)", v: fmtGeld(e.regelentgeltTaeglich) },
+        { k: "80% Brutto (täglich)", v: fmtGeld(e.vgBruttoTaeglich) },
+        { k: "Netto (täglich)", v: fmtGeld(e.nettoTaeglich) },
+        { k: "Verletztengeld (täglich)", v: fmtGeld(e.vgTaeglich) },
+        { k: "Verletztengeld (wöchentlich)", v: fmtGeld(e.vgWoechentlich) },
       ],
     },
     { art: "hinweis", text: "Verletztengeld betraegt 80% des Regelentgelts, max. Nettoverdienst (SS 45-52 SGB VII). Es wird bei Arbeitsunfaellen und Berufskrankheiten gezahlt." },

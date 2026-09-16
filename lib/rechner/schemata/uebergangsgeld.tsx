@@ -30,7 +30,7 @@ export const uebergangsgeldSchema: RechnerSchema<W, UebergangsgeldResult> = {
     {
       art: "kacheln",
       kacheln: [
-        { label: "Übergangsgeld taeglich", wert: e.uebergangsgeldTaeglich, text: fmtGeld },
+        { label: "Übergangsgeld täglich", wert: e.uebergangsgeldTaeglich, text: fmtGeld },
         { label: "Übergangsgeld monatlich", wert: e.uebergangsgeldMonatlich, text: fmtGeld },
       ],
     },
@@ -40,9 +40,9 @@ export const uebergangsgeldSchema: RechnerSchema<W, UebergangsgeldResult> = {
         { k: "Monatsbrutto", v: `${fmtGeld(e.monatsBrutto)}${e.istBegrenzt ? " (über BBG)" : ""}` },
         { k: "Brutto (begrenzt auf BBG)", v: fmtGeld(e.bruttoBegrenzt) },
         { k: "Netto standardisiert", v: fmtGeld(e.nettoStandardisiert) },
-        { k: "Netto (taeglich)", v: fmtGeld(e.nettoTaeglich) },
+        { k: "Netto (täglich)", v: fmtGeld(e.nettoTaeglich) },
         { k: "Leistungssatz", v: fmtProzent(e.satzProzent) },
-        { k: "Übergangsgeld (taeglich)", v: fmtGeld(e.uebergangsgeldTaeglich) },
+        { k: "Übergangsgeld (täglich)", v: fmtGeld(e.uebergangsgeldTaeglich) },
       ],
     },
     { art: "zeiger", label: "Leistungssatz", wert: e.satzProzent },

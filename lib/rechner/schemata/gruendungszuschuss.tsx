@@ -29,7 +29,7 @@ export const gruendungszuschussSchema: RechnerSchema<W, GruendungszuschussResult
     {
       art: "kacheln",
       kacheln: [
-        { label: "Gesamtfoerderung", wert: e.gesamtFoerderung, text: fmtGeld },
+        { label: "Gesamtförderung", wert: e.gesamtFoerderung, text: fmtGeld },
         { label: "Phase 1 / Monat", wert: e.phase1Monatlich, text: fmtGeld },
       ],
     },

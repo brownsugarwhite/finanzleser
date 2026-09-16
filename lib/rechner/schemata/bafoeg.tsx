@@ -40,13 +40,13 @@ export const bafoegSchema: RechnerSchema<W, BafoegResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Kein BAföG-Anspruch", v: "Elterneinkommen zu hoch" },
-        { k: "Maximaler Bedarfssatz", v: fmtGeld(e.bedarfMax) },
-        { k: "Eltern-Freibetrag", v: fmtGeld(e.elternFreibetrag) },
-        { k: "Anrechenb. Elterneinkommen", v: fmtGeld(e.anrechenbaresElternEinkommen) },
+        ...(e.hatAnspruch ? [] : [{ k: "Kein BAföG-Anspruch", v: "Elterneinkommen zu hoch" }]),  // bedingt
+        ...(e.hatAnspruch ? [{ k: "Maximaler Bedarfssatz", v: fmtGeld(e.bedarfMax) }] : []),  // bedingt
+        ...(e.hatAnspruch ? [{ k: "Eltern-Freibetrag", v: fmtGeld(e.elternFreibetrag) }] : []),  // bedingt
+        ...(e.hatAnspruch ? [{ k: "Anrechenb. Elterneinkommen", v: fmtGeld(e.anrechenbaresElternEinkommen) }] : []),  // bedingt
         { k: "Elternanrechnung (50 %)", v: `- ${fmtGeld(e.elternAnrechnung)}` },
       ],
     },
-    { art: "hinweis", text: "BAföG wird zur Haelfte als Zuschuss, zur Haelfte als zinsloses Darlehen gewaehrt (max. 10.010 EUR Rueckzahlung). Grundlage: BAföG 2024/2026." },
+    { art: "hinweis", text: "BAföG wird zur Hälfte als Zuschuss, zur Hälfte als zinsloses Darlehen gewaehrt (max. 10.010 EUR Rückzahlung). Grundlage: BAföG 2024/2026." },
   ],
 };

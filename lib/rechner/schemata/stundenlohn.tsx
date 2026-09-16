@@ -34,7 +34,7 @@ export const stundenlohnSchema: RechnerSchema<W, StundenlohnResult> = {
       kacheln: [
         { label: "Stundenlohn", wert: e.stundenlohn, text: fmtGeld, haupt: true },
         { label: "Monatsgehalt", wert: e.monatsgehalt, text: fmtGeld },
-        { label: "result.überMindestlohn ? \"Über Mindestlohn\" : \"Unter Mindestlohn\"", wert: Math.abs(e.differenzZuMindestlohn), text: fmtGeld },
+        { label: e.ueberMindestlohn ? "Über Mindestlohn" : "Unter Mindestlohn", wert: Math.abs(e.differenzZuMindestlohn), text: fmtGeld },
       ],
     },
     {

@@ -41,7 +41,7 @@ export const flexrenteSchema: RechnerSchema<W, FlexrenteResult> = {
       zeilen: [
         { k: "Entgeltpunkte", v: String(punkte(w.entgeltpunkte)) },
         { k: "Abschlag (vorzeitig)", v: fmtProzent(e.abschlagProzent) },
-        { k: "Zuschlag (spaeter)", v: fmtProzent(e.zuschlagProzent) },
+        { k: "Zuschlag (später)", v: fmtProzent(e.zuschlagProzent) },
         { k: "Zugangsfaktor", v: String(e.zugangsfaktor.toFixed(4)) },
       ],
     },

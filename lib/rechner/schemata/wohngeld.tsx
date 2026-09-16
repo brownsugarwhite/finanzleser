@@ -33,7 +33,7 @@ export const wohngeldSchema: RechnerSchema<W, WohngeldResult> = {
       art: "kacheln",
       kacheln: [
         { label: "Wohngeld monatlich", wert: e.wohngeldMonatlich, text: fmtGeld, haupt: true },
-        { label: "Wohngeld jaehrlich", wert: e.wohngeldJaehrlich, text: fmtGeld },
+        { label: "Wohngeld jährlich", wert: e.wohngeldJaehrlich, text: fmtGeld },
       ],
     },
     {

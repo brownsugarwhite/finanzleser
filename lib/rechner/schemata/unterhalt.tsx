@@ -24,10 +24,10 @@ export const unterhaltSchema: RechnerSchema<W, UnterhaltResult> = {
 
   felder: [
     { baustein: "lineal", key: "nettoEinkommen", label: "Nettoeinkommen", min: 0, max: 10000, schritt: 100, einheit: "€", px: 18, major: 10, mittel: 5, breit: true },
-    { baustein: "lineal", key: "sonstigeAbzuege", label: "Sonstige Abzuege", min: 0, max: 3000, schritt: 50, einheit: "€", px: 30, major: 5, mittel: 0, breit: true },
+    { baustein: "lineal", key: "sonstigeAbzüge", label: "Sonstige Abzüge", min: 0, max: 3000, schritt: 50, einheit: "€", px: 30, major: 5, mittel: 0, breit: true },
     { baustein: "register", key: "kindAlter", label: "Alter des Kindes", optionen: [{ wert: "0", label: "0 Jahre" }, { wert: "1", label: "1 Jahre" }, { wert: "2", label: "2 Jahre" }, { wert: "3", label: "3 Jahre" }, { wert: "4", label: "4 Jahre" }, { wert: "5", label: "5 Jahre" }, { wert: "6", label: "6 Jahre" }, { wert: "7", label: "7 Jahre" }, { wert: "8", label: "8 Jahre" }, { wert: "9", label: "9 Jahre" }, { wert: "10", label: "10 Jahre" }, { wert: "11", label: "11 Jahre" }, { wert: "12", label: "12 Jahre" }, { wert: "13", label: "13 Jahre" }, { wert: "14", label: "14 Jahre" }, { wert: "15", label: "15 Jahre" }, { wert: "16", label: "16 Jahre" }, { wert: "17", label: "17 Jahre" }, { wert: "18", label: "18 Jahre" }, { wert: "19", label: "19 Jahre" }, { wert: "20", label: "20 Jahre" }, { wert: "21", label: "21 Jahre" }, { wert: "22", label: "22 Jahre" }, { wert: "23", label: "23 Jahre" }, { wert: "24", label: "24 Jahre" }, { wert: "25", label: "25 Jahre" }] },
     { baustein: "register", key: "unterhaltsberechtigte", label: "Anzahl Unterhaltsberechtigte", optionen: [{ wert: "1", label: "1" }, { wert: "2", label: "2" }, { wert: "3", label: "3" }, { wert: "4", label: "4" }, { wert: "5", label: "5" }] },
-    { baustein: "schalter", key: "erwerbstaetig", label: "Unterhaltspflichtiger ist erwerbstaetig" },
+    { baustein: "schalter", key: "erwerbstaetig", label: "Unterhaltspflichtiger ist erwerbstätig" },
   ],
 
   rechne: (w, rates) => berechne(w, rates),
@@ -51,7 +51,7 @@ export const unterhaltSchema: RechnerSchema<W, UnterhaltResult> = {
         { k: "Kindergeld-Abzug", v: `- ${fmtGeld(e.kgAbzug)}` },
         { k: "Selbstbehalt", v: fmtGeld(e.selbstbehalt) },
         { k: "Verbleibt nach Unterhalt", v: fmtGeld(e.verbleibtNachUnterhalt) },
-        { k: "Leistungsfaehig", v: e.leistungsfaehig ? "Ja" : "Nein" },
+        { k: "Leistungsfähig", v: e.leistungsfaehig ? "Ja" : "Nein" },
         { k: "Bedarfskontrollbetrag (BKB)", v: fmtGeld(e.bkb) },
         { k: "BKB eingehalten", v: e.bkbEingehalten ? "Ja" : "Nein" },
       ],

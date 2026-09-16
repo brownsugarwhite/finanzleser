@@ -34,7 +34,7 @@ export const kfwStudienkreditSchema: RechnerSchema<W, KfwStudienkreditResult> = 
       art: "kacheln",
       kacheln: [
         { label: "Monatsrate Tilgung", wert: e.monatsrate, text: fmtGeld },
-        { label: "Gesamtrueckzahlung", wert: e.gesamtRueckzahlung, text: fmtGeld },
+        { label: "Gesamtrückzahlung", wert: e.gesamtRueckzahlung, text: fmtGeld },
       ],
     },
     {
@@ -43,9 +43,9 @@ export const kfwStudienkreditSchema: RechnerSchema<W, KfwStudienkreditResult> = 
         { k: "Gesamte Auszahlung", v: fmtGeld(e.gesamtAuszahlung) },
         { k: "Gesamte Zinsen", v: fmtGeld(e.gesamtZinsen) },
         { k: "Monatsrate (Tilgung)", v: fmtGeld(e.monatsrate) },
-        { k: "Gesamtrueckzahlung", v: fmtGeld(e.gesamtRueckzahlung) },
+        { k: "Gesamtrückzahlung", v: fmtGeld(e.gesamtRueckzahlung) },
       ],
     },
-    { art: "hinweis", text: "KfW-Studienkredit (Programm 174): Zinssatz wird halbjaehrlich angepasst. Waehrend Auszahlung und Karenzphase fallen Zinsen an, die zum Kapital addiert werden." },
+    { art: "hinweis", text: "KfW-Studienkredit (Programm 174): Zinssatz wird halbjährlich angepasst. Waehrend Auszahlung und Karenzphase fallen Zinsen an, die zum Kapital addiert werden." },
   ],
 };

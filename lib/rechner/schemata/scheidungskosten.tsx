@@ -21,7 +21,7 @@ export const scheidungskostenSchema: RechnerSchema<W, ScheidungskostenResult> = 
 
   felder: [
     { baustein: "setzzeile", key: "nettoeinkommenBeide", label: "Nettoeinkommen beider Ehegatten", min: 0, max: 15000, schritt: 100, einheit: "EUR/Monat" },
-    { baustein: "setzzeile", key: "vermoegen", label: "Vermoegen (gemeinsam)", min: 0, max: 1000000, schritt: 1000, einheit: "EUR" },
+    { baustein: "setzzeile", key: "vermoegen", label: "Vermögen (gemeinsam)", min: 0, max: 1000000, schritt: 1000, einheit: "EUR" },
     { baustein: "schalter", key: "versorgungsausgleich", label: "Versorgungsausgleich" },
   ],
 
@@ -42,6 +42,6 @@ export const scheidungskostenSchema: RechnerSchema<W, ScheidungskostenResult> = 
         { k: "Anwaltskosten (2 Anwaelte)", v: fmtGeld(e.anwaltskosten) },
       ],
     },
-    { art: "hinweis", text: "Verfahrenswert = 3 x Nettoeinkommen + 5 % Vermoegen. Bei Versorgungsausgleich wird der Verfahrenswert um 10 % erhoeht. Anwaltskosten berechnet für 2 Anwaelte nach RVG (Verfahrens- und Terminsgebuehr + Post + MwSt)." },
+    { art: "hinweis", text: "Verfahrenswert = 3 x Nettoeinkommen + 5 % Vermögen. Bei Versorgungsausgleich wird der Verfahrenswert um 10 % erhoeht. Anwaltskosten berechnet für 2 Anwaelte nach RVG (Verfahrens- und Terminsgebuehr + Post + MwSt)." },
   ],
 };

@@ -39,9 +39,8 @@ export const gleitzoneSchema: RechnerSchema<W, GleitzoneResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Beschaeftigungstyp", v: String(typLabels[e.typ] || e.typ) },
+        { k: "Beschäftigungstyp", v: String(typLabels[e.typ] || e.typ) },
         { k: "Monatsbrutto", v: fmtGeld(e.monatsBrutto) },
-        { k: "Beschaeftigungstyp", v: String(typLabels[e.typ] || e.typ) },
         { k: "Beitragspflichtiges Entgelt", v: fmtGeld(e.beitragsAE) },
         { k: "SV-Beitrag AN (Gleitzone)", v: fmtGeld(e.svANGleitzone) },
         { k: "SV-Beitrag AN (normal)", v: fmtGeld(e.svANNormal) },

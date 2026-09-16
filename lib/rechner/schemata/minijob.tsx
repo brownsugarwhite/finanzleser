@@ -40,7 +40,7 @@ export const minijobSchema: RechnerSchema<W, MinijobResult> = {
     {
       art: "punktzeilen",
       zeilen: [
-        { k: "Beschaeftigungstyp", v: String(typLabels[e.typ] || e.typ) },
+        { k: "Beschäftigungstyp", v: String(typLabels[e.typ] || e.typ) },
         { k: "Monatsbrutto", v: fmtGeld(e.monatsBrutto) },
         { k: "Typ", v: String(typLabels[e.typ] || e.typ) },
         { k: "RV-Aufstockung AN", v: fmtGeld(e.anRVAufstockung) },

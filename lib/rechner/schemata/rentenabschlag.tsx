@@ -21,7 +21,7 @@ export const rentenabschlagSchema: RechnerSchema<W, RentenabschlagResult> = {
 
   felder: [
     { baustein: "drehring", key: "monatlicheRente", label: "Monatliche Rente (ohne Abschlag)", min: 0, max: 5000, schritt: 100, einheit: "€/Monat", gross: 5 },
-    { baustein: "drehring", key: "monate_frueher", label: "Monate frueher in Rente", min: 1, max: 60, schritt: 1, einheit: "Monate", gross: 6 },
+    { baustein: "drehring", key: "monate_frueher", label: "Monate früher in Rente", min: 1, max: 60, schritt: 1, einheit: "Monate", gross: 6 },
   ],
 
   rechne: (w, rates) => berechne(w, rates),
@@ -39,11 +39,11 @@ export const rentenabschlagSchema: RechnerSchema<W, RentenabschlagResult> = {
       art: "punktzeilen",
       zeilen: [
         { k: "Rente ohne Abschlag", v: fmtGeld(w.monatlicheRente) },
-        { k: "Monate vorzeitig", v: `${w.monate_frueher} Monate` },
+        { k: "Monate vorzeitig", v: `${w.monate_früher} Monate` },
         { k: "Abschlag pro Monat", v: "0,30 %" },
         { k: "Gesamtabschlag", v: fmtProzent(e.abschlagProzent) },
         { k: "Abschlag in Euro", v: fmtGeld(e.abschlagBetrag) },
-        { k: "Jaehrlicher Verlust", v: fmtGeld(e.verlustJaehrlich) },
+        { k: "Jährlicher Verlust", v: fmtGeld(e.verlustJaehrlich) },
       ],
     },
     { art: "zeiger", label: "Abschlag (max. 14,4 %)", wert: e.abschlagProzent, max: 14.4 },

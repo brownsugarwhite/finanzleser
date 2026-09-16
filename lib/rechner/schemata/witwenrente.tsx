@@ -42,7 +42,7 @@ export const witwenrenteSchema: RechnerSchema<W, WitwenrenteResult> = {
         { k: "Rente des Verstorbenen", v: fmtGeld(e.renteVerstorbener) },
         { k: "Witwenrente (${params.grosseWR ? \"55 %\" : \"25 %\"})", v: fmtGeld(e.witwenrenteVorAnrechnung) },
         { k: "Freibetrag", v: fmtGeld(e.freibetrag) },
-        { k: "Anrechenbare Einkuenfte", v: fmtGeld(e.anrechenbareEinkuenfte) },
+        { k: "Anrechenbare Einkünfte", v: fmtGeld(e.anrechenbareEinkuenfte) },
         { k: "Kuerzung (40 %)", v: fmtGeld(e.kuerzung) },
       ],
     },

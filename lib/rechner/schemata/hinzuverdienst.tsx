@@ -43,7 +43,7 @@ export const hinzuverdienstSchema: RechnerSchema<W, HinzuverdienstResult> = {
         { k: "Hinzuverdienstgrenze (monatlich)", v: String(e.hinzuverdienstGrenze > 0
                   ? fmtGeld(e.hinzuverdienstGrenze)
                   : "unbegrenzt") },
-        { k: "Kuerzungsbetrag", v: fmtGeld(e.kuerzungsBetrag) },
+        { k: "Kürzungsbetrag", v: fmtGeld(e.kuerzungsBetrag) },
       ],
     },
     { art: "hinweis", text: "monatlich. 40 % des übersteigenden Einkommens werden von der Rente abgezogen.` : \"Bei der Regelaltersrente gibt es seit 2023 keine Hinzuverdienstgrenze mehr. Sie koennen unbegrenzt hinzuverdienen.\" } Quelle: § 34 SGB VI." },

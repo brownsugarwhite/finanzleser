@@ -30,7 +30,7 @@ export const kindergeldSchema: RechnerSchema<W, KindergeldResult> = {
       art: "kacheln",
       kacheln: [
         { label: "Kindergeld monatlich", wert: e.kindergeldMonatlich, text: fmtGeld, haupt: true },
-        { label: "Kindergeld jaehrlich", wert: e.kindergeldJaehrlich, text: fmtGeld },
+        { label: "Kindergeld jährlich", wert: e.kindergeldJaehrlich, text: fmtGeld },
       ],
     },
     {

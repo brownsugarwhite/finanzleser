@@ -44,6 +44,6 @@ export const grundsicherungSchema: RechnerSchema<W, GrundsicherungResult> = {
         { k: "Sonstiges anrechenbar", v: `- ${fmtGeld(e.anrechenbaresSonstiges)}` },
       ],
     },
-    { art: "hinweis", text: "Grundsicherung im Alter (ab Regelaltersgrenze) und bei voller Erwerbsminderung. Freibetrag auf Rente: 30 %, max. Haelfte des Regelsatzes. Grundlage: SGB XII." },
+    { art: "hinweis", text: "Grundsicherung im Alter (ab Regelaltersgrenze) und bei voller Erwerbsminderung. Freibetrag auf Rente: 30 %, max. Hälfte des Regelsatzes. Grundlage: SGB XII." },
   ],
 };

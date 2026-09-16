@@ -26,7 +26,7 @@ export const elternzeitSchema: RechnerSchema<W, ElternzeitResult> = {
     { baustein: "setzzeile", key: "geburtYear", label: "Geburtsjahr des Kindes", min: 2020, max: 2030, schritt: 1 },
     { baustein: "register", key: "geburtMonth", label: "Geburtsmonat", optionen: [{ wert: "1", label: "Januar" }, { wert: "2", label: "Februar" }, { wert: "3", label: "März" }, { wert: "4", label: "April" }, { wert: "5", label: "Mai" }, { wert: "6", label: "Juni" }, { wert: "7", label: "Juli" }, { wert: "8", label: "August" }, { wert: "9", label: "September" }, { wert: "10", label: "Oktober" }, { wert: "11", label: "November" }, { wert: "12", label: "Dezember" }] },
     { baustein: "register", key: "partnerMonate", label: "Partnermonate", optionen: [{ wert: "0", label: "0 Monate" }, { wert: "1", label: "1 Monate" }, { wert: "2", label: "2 Monate" }, { wert: "3", label: "3 Monate" }, { wert: "4", label: "4 Monate" }, { wert: "5", label: "5 Monate" }, { wert: "6", label: "6 Monate" }, { wert: "7", label: "7 Monate" }, { wert: "8", label: "8 Monate" }, { wert: "9", label: "9 Monate" }, { wert: "10", label: "10 Monate" }, { wert: "11", label: "11 Monate" }, { wert: "12", label: "12 Monate" }, { wert: "13", label: "13 Monate" }, { wert: "14", label: "14 Monate" }] },
-    { baustein: "register", key: "übertragMonateSpater", label: "Monate auf spaeter übertragen", optionen: [{ wert: "0", label: "0 Monate" }, { wert: "1", label: "1 Monate" }, { wert: "2", label: "2 Monate" }, { wert: "3", label: "3 Monate" }, { wert: "4", label: "4 Monate" }, { wert: "5", label: "5 Monate" }, { wert: "6", label: "6 Monate" }, { wert: "7", label: "7 Monate" }, { wert: "8", label: "8 Monate" }, { wert: "9", label: "9 Monate" }, { wert: "10", label: "10 Monate" }, { wert: "11", label: "11 Monate" }, { wert: "12", label: "12 Monate" }] },
+    { baustein: "register", key: "übertragMonateSpater", label: "Monate auf später übertragen", optionen: [{ wert: "0", label: "0 Monate" }, { wert: "1", label: "1 Monate" }, { wert: "2", label: "2 Monate" }, { wert: "3", label: "3 Monate" }, { wert: "4", label: "4 Monate" }, { wert: "5", label: "5 Monate" }, { wert: "6", label: "6 Monate" }, { wert: "7", label: "7 Monate" }, { wert: "8", label: "8 Monate" }, { wert: "9", label: "9 Monate" }, { wert: "10", label: "10 Monate" }, { wert: "11", label: "11 Monate" }, { wert: "12", label: "12 Monate" }] },
   ],
 
   rechne: (w, rates) => berechne(w, rates),
@@ -36,7 +36,7 @@ export const elternzeitSchema: RechnerSchema<W, ElternzeitResult> = {
       art: "kacheln",
       kacheln: [
         { label: "Erster Abschnitt", wert: e.monateErsterAbschnitt, text: (v) => `${fmtDe(v)} Monate`, haupt: true },
-        { label: "Spaeter nutzbar", wert: e.monateSpater, text: (v) => `${fmtDe(v)} Monate` },
+        { label: "Später nutzbar", wert: e.monateSpater, text: (v) => `${fmtDe(v)} Monate` },
       ],
     },
     {

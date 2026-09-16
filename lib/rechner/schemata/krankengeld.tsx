@@ -30,7 +30,7 @@ export const krankengeldSchema: RechnerSchema<W, KrankengeldResult> = {
     {
       art: "kacheln",
       kacheln: [
-        { label: "Krankengeld taeglich", wert: e.kgTaeglich, text: fmtGeld },
+        { label: "Krankengeld täglich", wert: e.kgTaeglich, text: fmtGeld },
         { label: "Krankengeld monatlich", wert: e.kgMonatlich, text: fmtGeld },
       ],
     },
@@ -39,11 +39,11 @@ export const krankengeldSchema: RechnerSchema<W, KrankengeldResult> = {
       zeilen: [
         { k: "Monatsbrutto", v: `${fmtGeld(e.monatsBrutto)}${e.istBegrenzt ? " (über BBG)" : ""}` },
         { k: "Brutto (begrenzt auf BBG)", v: fmtGeld(e.bruttoBegrenzt) },
-        { k: "Regelentgelt (taeglich)", v: fmtGeld(e.regelentgeltTaeglich) },
-        { k: "70% Brutto (taeglich)", v: fmtGeld(e.kgBruttoTaeglich) },
-        { k: "90% Netto-Grenze (taeglich)", v: fmtGeld(e.kgNettoGrenze) },
-        { k: "Krankengeld (taeglich)", v: fmtGeld(e.kgTaeglich) },
-        { k: "Krankengeld (woechentlich)", v: fmtGeld(e.kgWoechentlich) },
+        { k: "Regelentgelt (täglich)", v: fmtGeld(e.regelentgeltTaeglich) },
+        { k: "70% Brutto (täglich)", v: fmtGeld(e.kgBruttoTaeglich) },
+        { k: "90% Netto-Grenze (täglich)", v: fmtGeld(e.kgNettoGrenze) },
+        { k: "Krankengeld (täglich)", v: fmtGeld(e.kgTaeglich) },
+        { k: "Krankengeld (wöchentlich)", v: fmtGeld(e.kgWoechentlich) },
         { k: "Krankengeld (monatlich)", v: fmtGeld(e.kgMonatlich) },
         { k: "Max. Bezugsdauer", v: `${e.maxBezugsdauerWochen} Wochen` },
       ],

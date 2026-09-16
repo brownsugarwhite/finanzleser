@@ -31,7 +31,7 @@ export const gerichtskostenSchema: RechnerSchema<W, GerichtskostenResult> = {
       art: "kacheln",
       kacheln: [
         { label: "Gesamtkosten", wert: e.gesamtKosten, text: fmtGeld },
-        { label: "Gerichtsgebuehr", wert: e.gerichtsgebuehr, text: fmtGeld },
+        { label: "Gerichtsgebühr", wert: e.gerichtsgebuehr, text: fmtGeld },
         { label: "Anwaltskosten", wert: e.anwaltsGesamt, text: fmtGeld },
       ],
     },
@@ -44,6 +44,6 @@ export const gerichtskostenSchema: RechnerSchema<W, GerichtskostenResult> = {
         { k: "MwSt (19 %)", v: fmtGeld(e.anwaltsMwSt) },
       ],
     },
-    { art: "hinweis", text: "Berechnung nach GKG Anlage 2 und RVG. Bei 2 Parteien mit je eigenem Anwalt verdoppeln sich die Anwaltskosten. Gerichtsgebuehr je nach Instanz (AG/LG: 3-fach, OLG: 4-fach, BGH: 5-fach)." },
+    { art: "hinweis", text: "Berechnung nach GKG Anlage 2 und RVG. Bei 2 Parteien mit je eigenem Anwalt verdoppeln sich die Anwaltskosten. Gerichtsgebühr je nach Instanz (AG/LG: 3-fach, OLG: 4-fach, BGH: 5-fach)." },
   ],
 };

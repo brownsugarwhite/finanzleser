@@ -36,7 +36,7 @@ export const steuererstattungSchema: RechnerSchema<W, SteuererstattungResult> = 
     {
       art: "kacheln",
       kacheln: [
-        { label: "result.istErstattung ? \"Voraussichtliche Erstattung\" : \"Voraussichtliche Nachzahlung\"", wert: Math.abs(e.erstattungGesamt), text: fmtGeld, haupt: true },
+        { label: e.istErstattung ? "Voraussichtliche Erstattung" : "Voraussichtliche Nachzahlung", wert: Math.abs(e.erstattungGesamt), text: fmtGeld, haupt: true },
       ],
     },
     {

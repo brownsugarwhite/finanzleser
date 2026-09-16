@@ -23,7 +23,7 @@ export const pvFoerderungSchema: RechnerSchema<W, PvFoerderungResult> = {
     { baustein: "setzzeile", key: "anlagenLeistungKwp", label: "Anlagenleistung", min: 1, max: 100, schritt: 0.5, einheit: "kWp", dez: 1 },
     { baustein: "zaehlwerk", key: "eigenverbrauchProzent", label: "Eigenverbrauch", min: 0, max: 100, schritt: 5, einheit: "%" },
     { baustein: "lineal", key: "strompreisCtKwh", label: "Strompreis", min: 0, max: 80, schritt: 0.5, einheit: "ct/kWh", dez: 1, px: 11, major: 10, mittel: 5, breit: true },
-    { baustein: "lineal", key: "einspeiseverguetungCtKwh", label: "Einspeiseverguetung", min: 0, max: 20, schritt: 0.01, einheit: "ct/kWh", dez: 2, px: 3, major: 200, mittel: 100, breit: true },
+    { baustein: "lineal", key: "einspeiseverguetungCtKwh", label: "Einspeisevergütung", min: 0, max: 20, schritt: 0.01, einheit: "ct/kWh", dez: 2, px: 3, major: 200, mittel: 100, breit: true },
   ],
 
   rechne: (w) => berechne(w),
@@ -41,10 +41,10 @@ export const pvFoerderungSchema: RechnerSchema<W, PvFoerderungResult> = {
       zeilen: [
         { k: "Jahresertrag", v: `${e.jahresertrag.toLocaleString("de-DE")} kWh` },
         { k: "Eigenverbrauch-Ersparnis", v: fmtGeld(e.eigenverbrauchErsparnis) },
-        { k: "Einspeiseverguetung", v: fmtGeld(e.einspeiseverguetung) },
+        { k: "Einspeisevergütung", v: fmtGeld(e.einspeiseverguetung) },
         { k: "Gesamtertrag / Jahr", v: fmtGeld(e.gesamtertragJahr) },
       ],
     },
-    { art: "hinweis", text: "Durchschnittlicher PV-Ertrag in Deutschland: ca. 950 kWh pro kWp und Jahr. Einspeiseverguetung nach EEG 2024, Paragraph 48 (Anlagen bis 10 kWp: 8,03 ct/kWh)." },
+    { art: "hinweis", text: "Durchschnittlicher PV-Ertrag in Deutschland: ca. 950 kWh pro kWp und Jahr. Einspeisevergütung nach EEG 2024, Paragraph 48 (Anlagen bis 10 kWp: 8,03 ct/kWh)." },
   ],
 };

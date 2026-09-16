@@ -46,6 +46,6 @@ export const buergergeldSchema: RechnerSchema<W, BuergergeldResult> = {
         { k: "Anrechenbares Einkommen", v: `- ${fmtGeld(e.anrechenbaresEinkommen)}` },
       ],
     },
-    { art: "hinweis", text: "Richtwert ohne Kosten der Unterkunft (KdU). Die tatsaechliche Bewilligung erfolgt durch das Jobcenter unter Beruecksichtigung aller Vermoegensverhaeltnisse. Grundlage: SGB II." },
+    { art: "hinweis", text: "Richtwert ohne Kosten der Unterkunft (KdU). Die tatsaechliche Bewilligung erfolgt durch das Jobcenter unter Beruecksichtigung aller Vermögensverhaeltnisse. Grundlage: SGB II." },
   ],
 };
