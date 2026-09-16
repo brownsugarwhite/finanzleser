@@ -50,6 +50,13 @@ docs/seo_export_*/
 # versehentlich wieder auftauchen, gehoeren sie dorthin — nicht hierher.
 assets/
 scripts/
+# 🚨 … aber NICHT die unter public/: dort liegen echte Projekt-Assets (59 Bilder,
+# 2 Skripte), die längst verfolgt sind. Ohne diese Ausnahme greift die Regel oben auch
+# auf `public/assets/` und `public/scripts/` — NEUE Dateien dort verschwinden dann
+# lautlos aus `git status`, der Build bleibt lokal grün und auf Netlify fehlt das Bild.
+# Genau das am 16.09.2026 beim Flugfenster passiert.
+!public/assets/
+!public/scripts/
 
 # Faden: abgeleitete/generierte Dateien (reproduzierbar per tools/faden-text.mjs,
 # tools/faden-export.mjs und python3 docs/prototype/build.py; zusammen ~20 MB)

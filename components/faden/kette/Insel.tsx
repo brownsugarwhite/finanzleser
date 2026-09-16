@@ -29,7 +29,7 @@ export type InselTyp =
   | "spalten" | "vorlesen" | "schlange" | "faq"
   /* Die Blöcke der Startseite. 🚨 Jeder bedienbare Teil des Fadens braucht eine Insel —
      sonst lebt er genau bis zum ersten Kapitelwechsel und ist danach ein Foto. */
-  | "finanzwort" | "kassensturz" | "leo-empfiehlt" | "weiterreden"
+  | "finanzwort" | "kassensturz" | "leo-empfiehlt" | "weiterreden" | "flugfenster"
   /* Leos Vergleichskarte im Strom (lib/ai/karten.ts) */
   | "leo-karte";
 

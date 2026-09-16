@@ -1,0 +1,137 @@
+/* =====================================================================================
+   flugfenster.css — das Flugfenster unter „Aus unserem Newsletter".
+
+   Zwei Linien im Textfluss, dazwischen ein Fenster in voller Satzbreite. Was man darin
+   sieht, steht NICHT im Fluss: es ist eine `position: fixed` Bühne, die am Viewport hängt
+   und nur durch das Fenster hindurch sichtbar ist. Beim Scrollen wandert das Fenster über
+   das stehende Bild — als wäre zwischen den Linien ein Fenster in die Wand geschnitten.
+
+   🚨 Das Beschneiden macht `clip-path` am Fenster, NICHT `overflow: hidden`.
+   `overflow` lässt `position: fixed` Nachfahren durch (sie hängen am Viewport, nicht am
+   Kasten) — die Bühne läge dann über der ganzen Seite. `clip-path` beschneidet den
+   gesamten Teilbaum, Positionierung hin oder her. Am 16.09.2026 in Chromium, WebKit und
+   Firefox gemessen: alle drei klippen, pixelgleich.
+
+   🚨 Und deshalb darf an keinem Vorfahren des Fensters `transform`, `filter`,
+   `perspective`, `backdrop-filter`, `contain: paint` oder `will-change` davon stehen.
+   Jedes davon macht den Vorfahren zum Bezugsrahmen für `fixed` — die Bühne klebte dann
+   am Kasten statt am Viewport, und der ganze Effekt wäre weg.
+
+   Aufbau der Bühne, von hinten nach vorn:
+     himmel   steht still, deckt die ganze Bühnenhöhe
+     wolken-1 hinterste Wolkenlage  ┐ dieselbe Schleife, um je ein Drittel versetzt:
+     wolken-2 mittlere Wolkenlage   ├ klein einblenden, größer werden, ausblenden.
+     wolken-3 vorderste Wolkenlage  ┘ Das ergibt den Flug Richtung Horizont.
+     flieger  in der Mitte, folgt Maus und Scrollstand mit echter 3D-Drehung.
+
+   Alle Lagen hängen mit ihrem FLUCHTPUNKT (im Bildmaterial die Sonne bei 63 % der Höhe)
+   an derselben Stelle der Bühne. Nur so liegen Himmel und Wolken auf einem Horizont.
+   ===================================================================================== */
+
+.faden-shell .flugfenster {
+  /* ── Maße ── */
+  --fenster-h: 450px;        /* Abstand der beiden Linien */
+  --luft: 5px;               /* Abstand des Fensters zur Linie */
+  /* ── Flug ── */
+  --dauer: 18s;              /* eine volle Wolkenschleife */
+  --s0: 0.7;                 /* Skalierung am Horizont (fern) */
+  --s1: 2.9;                 /* Skalierung beim Vorbeiziehen (nah) */
+  /* ── Komposition ── */
+  --fluchtpunkt-y: 63%;      /* wo die Sonne IM BILD sitzt */
+  --horizont: 56%;           /* wo der Fluchtpunkt IN DER BÜHNE sitzt */
+  --himmel-y: 62%;           /* Bildausschnitt des Himmels */
+  --wolken-gr: min(760px, 105vw);  /* Kantenlänge der Wolkenkomposition */
+  --flieger-b: 30%;          /* Spannweite, gemessen an der Fensterbreite */
+
+  display: block; clear: both; margin: 0;
+}
+
+.faden-shell .flugfenster__linie { display: block; height: var(--strich-haar, 1px); background: var(--rule-strong); }
+
+/* Das Fenster: der einzige Ort, an dem die Bühne zu sehen ist.
+   Der Verlauf darunter ist der Himmel in zwei Tönen — er hält die Fläche, bis die
+   Bilder da sind, und ist auch das, was ohne Bilder bleibt. */
+.faden-shell .flugfenster__ausschnitt {
+  position: relative;
+  height: calc(var(--fenster-h) - 2 * var(--luft));
+  margin: var(--luft) 0;
+  clip-path: inset(0);
+  background: linear-gradient(to bottom, #8fa0d1 0%, #c3bed3 26%, #eed7ca 46%, #f5e4d0 63%, #c4bed2 100%);
+}
+
+.faden-shell .flugfenster__buehne { position: fixed; inset: 0; pointer-events: none; }
+
+.faden-shell .flugfenster__lage {
+  position: absolute; left: 50%; top: var(--horizont);
+  width: var(--gr); height: var(--gr);
+  margin-left: calc(var(--gr) / -2);
+  margin-top: calc(var(--gr) * -0.63);   /* der Fluchtpunkt auf --horizont */
+}
+.faden-shell .flugfenster__lage img { display: block; width: 100%; height: 100%; }
+
+/* Der Himmel hängt nicht am Fluchtpunkt: er muss die ganze BÜHNENHÖHE decken, sonst
+   blitzt beim Scrollen seine Bildkante durch das Fenster. `cover` statt Strecken. */
+.faden-shell .flugfenster__lage--himmel {
+  --gr: max(var(--wolken-gr), 100vh);
+  top: 0; margin-top: 0; height: 100%;
+}
+.faden-shell .flugfenster__lage--himmel img { object-fit: cover; object-position: 50% var(--himmel-y); }
+
+/* Die drei Wolkenlagen: dieselbe Schleife, um je ein Drittel versetzt.
+   🚨 Die Deckung darf erst voll sein, wenn die Lage das Fenster überragt — sonst sieht
+   man ihre Bildkante. Bei --s0 0.7 und --s1 2.9 ist das ab 16 % der Schleife der Fall. */
+.faden-shell .flugfenster__lage--wolke {
+  --gr: var(--wolken-gr);
+  transform-origin: 50% var(--fluchtpunkt-y);
+  will-change: transform, opacity;
+  animation: flug-zug var(--dauer) linear infinite;
+}
+.faden-shell .flugfenster__lage--w1 { animation-delay: calc(var(--dauer) / -3 * 0); }
+.faden-shell .flugfenster__lage--w2 { animation-delay: calc(var(--dauer) / -3 * 1); }
+.faden-shell .flugfenster__lage--w3 { animation-delay: calc(var(--dauer) / -3 * 2); }
+
+@keyframes flug-zug {
+  0%   { transform: scale(var(--s0)); opacity: 0; }
+  16%  { opacity: 1; }
+  58%  { opacity: 1; }
+  100% { transform: scale(var(--s1)); opacity: 0; }
+}
+
+/* Der Flieger sitzt IM FENSTER, nicht auf der Bühne — er wandert also mit dem Fenster
+   durch den Viewport und bleibt immer zu sehen. `--sp`, `--mx`, `--my` kommen aus
+   Flugfenster.tsx und laufen zwischen -1 und 1. */
+.faden-shell .flugfenster__flieger {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--flieger-b); margin-left: calc(var(--flieger-b) / -2);
+  perspective: 900px;
+}
+.faden-shell .flugfenster__flieger img {
+  display: block; width: 100%; height: auto;
+  transform:
+    translate3d(calc(var(--mx, 0) * 16px), calc(-50% + var(--my, 0) * 11px + var(--sp, 0) * -20px), 0)
+    rotateX(calc(var(--sp, 0) * 7deg + var(--my, 0) * -7deg))
+    rotateY(calc(var(--mx, 0) * 14deg))
+    rotateZ(calc(var(--mx, 0) * -7deg));
+  transform-origin: 50% 40%;
+  filter: drop-shadow(0 18px 26px rgba(90, 80, 110, .28));
+  will-change: transform;
+}
+
+/* Außer Sicht wird nicht gerechnet: drei große Lagen, die niemand sieht, kosten sonst
+   dauerhaft Compositing. `data-ruht` setzt Flugfenster.tsx über einen IntersectionObserver. */
+.faden-shell .flugfenster[data-ruht] .flugfenster__lage--wolke { animation-play-state: paused; will-change: auto; }
+.faden-shell .flugfenster[data-ruht] .flugfenster__flieger img { will-change: auto; }
+
+@media (max-width: 720px) {
+  .faden-shell .flugfenster { --fenster-h: 320px; --flieger-b: 42%; }
+}
+
+/* Ohne Bewegung: ein stehendes Bild. Die Regel in faden.css schaltet `animation` global
+   ab — dann stünden die Wolken auf dem 0-%-Bild, also auf `opacity: 0`. Hier bekommen
+   sie stattdessen eine feste, aufgeräumte Staffelung. */
+@media (prefers-reduced-motion: reduce) {
+  .faden-shell .flugfenster__lage--wolke { opacity: 1; }
+  .faden-shell .flugfenster__lage--w1 { transform: scale(0.95); }
+  .faden-shell .flugfenster__lage--w2 { transform: scale(1.4); opacity: .85; }
+  .faden-shell .flugfenster__lage--w3 { transform: scale(2.1); opacity: .5; }
+}

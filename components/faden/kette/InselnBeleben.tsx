@@ -52,6 +52,7 @@ const Finanzwort = dynamic(() => import("@/components/faden/spiele/Finanzwort"))
 const KassensturzStart = dynamic(() => import("@/components/faden/kassensturz/KassensturzStart"));
 const LeoEmpfiehlt = dynamic(() => import("@/components/faden/landing/LeoEmpfiehlt"));
 const WeiterredenChips = dynamic(() => import("@/components/faden/landing/WeiterredenChips"));
+const Flugfenster = dynamic(() => import("@/components/faden/landing/Flugfenster"));
 
 interface Gefunden { el: HTMLElement; typ: InselTyp; arg: string; werte: unknown }
 
@@ -87,6 +88,7 @@ function Koerper({ typ, arg, werte }: { typ: InselTyp; arg: string; werte: unkno
   if (typ === "kassensturz") { const w = werte as { daten: KassensturzDaten; ziele: Record<string, Ziel> } | undefined; return w ? <KassensturzStart daten={w.daten} ziele={w.ziele} /> : null; }
   if (typ === "leo-empfiehlt") { const w = werte as { gaengig: Empfehlung[]; daten: KassensturzDaten | null; ziele: Record<string, Ziel> } | undefined; return w ? <LeoEmpfiehlt gaengig={w.gaengig} daten={w.daten} ziele={w.ziele} /> : null; }
   if (typ === "weiterreden") return <WeiterredenChips />;
+  if (typ === "flugfenster") return <Flugfenster />;
   return null;
 }
 

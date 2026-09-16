@@ -23,6 +23,7 @@ import { zieleAufloesen } from "@/lib/faden/kassensturzZiele";
 import { getFadenOptionen } from "@/lib/faden/optionen";
 import Begruessung from "./Begruessung";
 import AusDemNewsletter from "./landing/AusDemNewsletter";
+import Flugfenster from "./landing/Flugfenster";
 import WochenbriefTeaser from "./landing/WochenbriefTeaser";
 import PlusTeaser from "./landing/PlusTeaser";
 import LeoEmpfiehlt from "./landing/LeoEmpfiehlt";
@@ -109,6 +110,9 @@ export default async function FadenLanding() {
           {kassensturz && <Insel typ="kassensturz" werte={{ daten: kassensturz, ziele: ksZiele }}><KassensturzStart daten={kassensturz} ziele={ksZiele} /></Insel>}
           <FinanzwortKarte />
           <AusDemNewsletter eintraege={auslese} />
+          {/* Der Flug zum Newsletter: reines Bild, kein Text — er leitet vom Inhalt der
+              Auslese zum Eintragen darunter über. */}
+          <Insel typ="flugfenster"><Flugfenster /></Insel>
           <WochenbriefTeaser />
           <SchlangeKarte />
           <PlusTeaser />
