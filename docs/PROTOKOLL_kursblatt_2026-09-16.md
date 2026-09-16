@@ -1,6 +1,6 @@
 # Abschlussprotokoll — Kursblatt
 
-**Stand:** 16. September 2026 · Branch `feature/kursblatt` · 38 Commits über `origin/dev`
+**Stand:** 16. September 2026 · Branch `feature/kursblatt` · 48 Commits über `origin/dev`
 **Auftrag:** Die Design-Übergabe `design_handoff_finanzleser_kursblatt/` exakt umsetzen —
 für die Vergleiche **und** alle 56 Rechner, im Fadenlayout.
 
@@ -24,7 +24,9 @@ ein Satz neben dem alten, sondern **der** Satz: `NEXT_PUBLIC_KURSBLATT` ist gefa
 `RechnerLayoutContext`, `VergleichSaeulen`, `app/faden-vergleich.css`, 112 tote
 CSS-Regelblöcke. `RechnerEmbed` von 360 auf 29 Zeilen, `app/rechner.css` von 983 auf 171.
 
-**Abnahme:** `tools/kursblatt-mess.mjs` 50/50 · `tools/rechner-mess.mjs` 32/32 ·
+**Abnahme (Endstand nach allen drei Prüfrunden):** `tools/kursblatt-mess.mjs` 50/50 ·
+`tools/rechner-mess.mjs` 32/32 · `tools/vergleich-breite.mjs` 47/47 ·
+`tools/registry-pruefen.mjs --api` ohne Befund (17 Kategorien, 58 Parameter) ·
 `npm run verify:redirects -- --offline` bestanden · Produktionsbau grün (1466 Routen,
 `[86400, false]` — Regel 11 hält).
 
