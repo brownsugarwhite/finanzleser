@@ -80,6 +80,7 @@
   --tuerkis-hauch: #EAF4F1;       /* türkis: Vergleich, Hinweis */
   --rot-hauch: #FBEAE8;           /* rot: falsch, Fehler */
   --tuerkis-grund: rgba(6, 212, 150, .07);  /* Grund der Bestwertzeile in einer Liste */
+  --schleier: rgba(0, 0, 0, .35);  /* hinter einer Schublade — der einzige Ort für Schwarz */
   --note: #FBF6E3; --note-ink: #5F4A00; --note-line: #E3C25E;   /* die gelbe Notiz */
 
   /* Werkzeugfarben — der Punkt vor dem Kicker, die Linie über dem Einhänger. */
@@ -124,12 +125,13 @@
   --luft-xxl: 52px;
 
   /* ── Schriftgrade ────────────────────────────────────────────────────────────────
-     Die Sprossen tragen ihre Größe im Namen. Zwei Halbstufen sind ausdrücklich erlaubt,
-     weil sie die Stimme der Zeitung sind und sich nicht runden lassen, ohne dass der
-     Kicker klobig und die Fußnote laut wird. */
-  --grad-kicker: 10.5px;          /* Versalien */
+     Die Sprossen tragen ihre Größe im Namen. EINE Halbstufe ist erlaubt: der Kicker auf
+     10,5 px, so steht er im Handoff, und auf 11 gerundet wird er klobig. Die zweite
+     (12,5 px für Fußnote und Hinweis) ist am 16.09.2026 gefallen — sie stand 41-mal neben
+     47 Vorkommen von 12 px, und ein halber Pixel ist kein Rang. */
+  --grad-kicker: 10.5px;          /* Versalien — die eine erlaubte Halbstufe (Handoff) */
   --grad-11: 11px;
-  --grad-klein: 12.5px;           /* Fußnote, Quelle, kursiver Hinweis */
+  --grad-12: 12px;
   --grad-13: 13px;
   --grad-14: 14px;
   --grad-15: 15px;
@@ -149,8 +151,8 @@
      Wer eine Rolle setzt, setzt nie zusätzlich font-size oder font-weight daneben. */
   --schrift-kicker:    700 var(--grad-kicker)/1.3 var(--sans);
   --schrift-mini:      700 var(--grad-11)/1.25 var(--sans);          /* Legende, Achse, Rang */
-  --schrift-klein:     400 var(--grad-klein)/1.45 var(--sans);       /* Fußnote, Quelle */
-  --schrift-hinweis:   italic 300 var(--grad-klein)/1.45 var(--serif);/* der kursive Halbsatz */
+  --schrift-klein:     400 var(--grad-12)/1.45 var(--sans);       /* Fußnote, Quelle */
+  --schrift-hinweis:   italic 300 var(--grad-12)/1.45 var(--serif);/* der kursive Halbsatz */
   --schrift-tabelle:   600 var(--grad-13)/1.35 var(--sans);          /* Tabellenzelle */
   --schrift-text:      400 var(--grad-15)/1.65 var(--sans);          /* Fließtext im Kasten */
   --schrift-fliess:    400 var(--grad-16)/1.75 var(--sans);          /* Fließtext im Ratgeber */
@@ -179,6 +181,17 @@
   --schatten-auflage:   0 2px 6px rgba(51, 74, 39, .07);    /* liegt auf dem Papier */
   --schatten-schwebend: 0 10px 26px rgba(51, 74, 39, .14);  /* Menü, Rail */
   --schatten-dialog:    0 16px 40px rgba(51, 74, 39, .18);  /* Dialog, Overlay */
+  /* Zwei Sonderfälle, die sich nicht auf eine Höhe zurückführen lassen. */
+  --schatten-oben:      0 -10px 26px -10px rgba(51, 74, 39, .2), 0 2px 7px rgba(51, 74, 39, .07);
+  --schatten-blatt:     2px 4px 0 var(--ink-08), 0 24px 40px -22px var(--ink-45);
+
+  /* Die Doppellinie als Schatten, in Tinte und in Grau (Jahresübersicht). */
+  --doppellinie-muted:  0 3px 0 -2px var(--muted);
+
+  /* Der Doppelschlag am Bestwert- und am Live-Punkt (`fl-puls`, `fl-punkt`). Er läuft
+     von der Farbe nach `transparent` — ein durchsichtiges Farbwort braucht keinen Namen. */
+  --puls-marke: rgba(69, 161, 23, .5);
+  --puls-vergleich: rgba(11, 127, 102, .45);
 
   /* ── Bewegung — Herzschlag-Prinzip (Handoff) ────────────────────────────────────
      Zwei Kurven tragen alles: die ruhige und die mit Überschwung. */

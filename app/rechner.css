@@ -36,7 +36,7 @@
 
 /* 50px Abstand nach oben (zu Content darüber bzw. zwischen 2 Tools im Artikel). */
 .article-tool-embed {
-  margin-top: 50px;
+  margin-top: var(--luft-xxl);
 }
 
 /* ── Checkbox (exakt wie Checkliste: animierter Haken) ───────── */
@@ -44,8 +44,8 @@
 .rechner-check {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--luft-m);
+  margin-bottom: var(--luft-m);
   cursor: pointer;
   user-select: none;
 }
@@ -62,7 +62,7 @@
   height: 23px;
   min-width: 23px;
   border: 1px solid var(--color-text-primary);
-  border-radius: 9px;
+  border-radius: var(--radius-kante);
   background: transparent;
   transition: background 0.2s, border-color 0.2s;
   display: flex;
@@ -76,12 +76,12 @@
   transform: translate(-50%, -50%);
   width: 17px;
   height: 17px;
-  margin-top: 1px;
+  margin-top: var(--luft-xxs);
   opacity: 0; /* unchecked komplett unsichtbar (kein Punkt-Flash) */
 }
 .rechner-check-box--checked .rechner-check-check { opacity: 1; }
 .rechner-check-label {
-  font-size: 0.95rem;
+  font-size: var(--grad-15);
   color: var(--color-text-primary);
   cursor: pointer;
 }
@@ -116,15 +116,15 @@
   /* ≤1024: Top-Row stacked, Visual full-width 270px hoch (analog Checkliste) */
   .rechner-top-row {
     flex-direction: column;
-    gap: 24px;
+    gap: var(--luft-l);
   }
   .rechner-visual {
     display: flex;
     height: 270px;
     flex: none;
     /* break out of page/article wrapper (20px padding) for full-bleed */
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: calc(-1 * var(--luft-l));
+    margin-right: calc(-1 * var(--luft-l));
     width: calc(100% + 40px);
   }
   .rechner-divider {
@@ -144,7 +144,7 @@
   .rechner-result-box {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: var(--luft-s);
   }
 
   .rechner-result-box .result-value {
@@ -153,15 +153,15 @@
   }
 
   .rechner-result-table {
-    font-size: 16px;
+    font-size: var(--grad-16);
   }
 
   .rechner-result-table td {
-    padding: 8px 10px;
+    padding: var(--luft-s) var(--luft-s);
   }
 
   .rechner-select {
-    padding-right: 32px;
+    padding-right: var(--luft-xl);
   }
 }
 

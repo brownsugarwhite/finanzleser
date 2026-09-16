@@ -85,19 +85,19 @@
 /* K:25 — Doppelschlag des Bestwert-Punkts. translate bleibt Teil der Keyframes, weil
    der Punkt per transform zentriert wird und eine zweite transform ihn sonst versetzt. */
 @keyframes fl-puls {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(11,127,102,.45); }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 var(--puls-vergleich); }
   14%      { transform: translate(-50%, -50%) scale(1.2); }
   28%      { transform: translate(-50%, -50%) scale(1); }
   42%      { transform: translate(-50%, -50%) scale(1.12); }
-  64%      { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 12px rgba(11,127,102,0); }
+  64%      { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 12px transparent; }
 }
 /* K:26 — derselbe Doppelschlag für den grünen Live-Punkt, ohne Zentrier-Transform. */
 @keyframes fl-punkt {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69,161,23,.5); }
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 var(--puls-marke); }
   14%      { transform: scale(1.2); }
   28%      { transform: scale(1); }
   42%      { transform: scale(1.12); }
-  64%      { transform: scale(1); box-shadow: 0 0 0 8px rgba(69,161,23,0); }
+  64%      { transform: scale(1); box-shadow: 0 0 0 8px transparent; }
 }
 /* K:27-30 — Stempel: aufgesetzt (bleibt schief) und flach (dreht sich gerade). */
 @keyframes fl-stempel {
@@ -178,37 +178,37 @@
  */
 /* README „Typografie“: Kicker überall identisch. */
 .kb .kb__kicker {
-  font: 700 10.5px/1.3 var(--sans);
+  font: 700 var(--grad-kicker)/1.3 var(--sans);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--muted);
 }
-.kb .kb__kicker--werkzeug { display: inline-flex; align-items: center; gap: 8px; color: var(--green-ink); }
-.kb .kb__kicker--werkzeug i { width: 8px; height: 8px; border-radius: 50%; background: var(--werkzeug); flex: none; }
+.kb .kb__kicker--werkzeug { display: inline-flex; align-items: center; gap: var(--luft-s); color: var(--green-ink); }
+.kb .kb__kicker--werkzeug i { width: 8px; height: 8px; border-radius: var(--radius-kreis); background: var(--werkzeug); flex: none; }
 
 /* K:44-49 — Zeitungskopf: Kickerzeile, dann die Doppellinie, die sich von der Mitte
    zeichnet; die feine Linie folgt .12 s später. Zwei Divs statt box-shadow, weil beide
    Linien getrennt animieren. */
 .kb .kb__kopfzeile {
   display: flex; justify-content: space-between; align-items: baseline;
-  gap: 8px 16px; flex-wrap: wrap;
-  font: 700 10.5px/1.3 var(--sans);
+  gap: var(--luft-s) var(--luft-m); flex-wrap: wrap;
+  font: 700 var(--grad-kicker)/1.3 var(--sans);
   letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
 }
 .kb .kb__kopflinie {
-  height: 2px; background: var(--ink); margin-top: 8px;
+  height: 2px; background: var(--ink); margin-top: var(--luft-s);
   transform-origin: center; animation: fl-mitte .9s var(--kurve) both;
 }
 .kb .kb__kopflinie--fein {
-  height: 1px; margin-top: 2px;
+  height: 1px; margin-top: var(--luft-xxs);
   animation: fl-mitte .9s var(--kurve) .12s both;
 }
 
 /* K:50-53 — Seitenreiter. Aktiv = Tinte + grüne 2-px-Unterlinie, die von links wächst. */
-.kb .kb__reiter { display: flex; gap: 26px; margin-top: 8px; flex-wrap: wrap; }
+.kb .kb__reiter { display: flex; gap: var(--luft-l); margin-top: var(--luft-s); flex-wrap: wrap; }
 .kb .kb__reiter-blatt {
-  position: relative; border: 0; background: transparent; padding: 10px 0;
-  font: 600 14px var(--serif); color: var(--muted);
+  position: relative; border: 0; background: transparent; padding: var(--luft-s) 0;
+  font: 600 var(--grad-14) var(--serif); color: var(--muted);
   cursor: pointer; text-decoration: none; text-align: left;
   transition: color .25s;
 }
@@ -222,32 +222,32 @@
 
 /* K:108, :182 — Doppellinie als Kopf über Kennzahlen und Tabellen.
    Hier als box-shadow-Variante (README „Linien“), weil sie nicht animiert. */
-.kb .kb__doppellinie { border-top: 2px solid var(--ink); box-shadow: 0 3px 0 -2px var(--ink); }
-.kb .kb__doppellinie--grau { border-top-color: var(--muted); box-shadow: 0 3px 0 -2px var(--muted); }
+.kb .kb__doppellinie { border-top: 2px solid var(--ink); box-shadow: var(--doppellinie-schatten); }
+.kb .kb__doppellinie--grau { border-top-color: var(--muted); box-shadow: var(--doppellinie-muted); }
 
 /* K:136 u. v. a. — Punktführung. Der Versatz nach oben lässt die Punkte auf der
    Grundlinie der Schrift sitzen statt darunter. */
 .kb .kb__fuehrung { flex: 1; min-width: 12px; border-bottom: 1px dotted var(--ink-45); transform: translateY(-4px); }
-.kb .kb__punktzeile { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; min-width: 0; }
+.kb .kb__punktzeile { display: flex; align-items: baseline; gap: var(--luft-s); padding: var(--luft-xs) 0; min-width: 0; }
 
 /* K:58-60 — Kopf einer Kursblatt-Seite. */
-.kb .kb__anzeige { font: italic 400 clamp(16px, 2.4vw, 19px) var(--serif); color: var(--pink); animation: fl-druck .6s both; }
-.kb .kb__titel { margin: 6px 0 14px; font: 900 clamp(38px, 8vw, 60px)/1.02 var(--serif); letter-spacing: -.02em; color: var(--ink); animation: fl-druck .7s .1s both; }
-.kb .kb__vorspann { margin: 0; font: italic 300 clamp(16px, 2.4vw, 19px)/1.5 var(--serif); color: var(--ink); text-wrap: pretty; animation: fl-herz .8s .2s both; }
+.kb .kb__anzeige { font: italic 400 clamp(var(--grad-16), 2.4vw, var(--grad-20)) var(--serif); color: var(--pink); animation: fl-druck .6s both; }
+.kb .kb__titel { margin: var(--luft-s) 0 var(--luft-m); font: 900 clamp(var(--grad-34), 8vw, var(--grad-44))/1.02 var(--serif); letter-spacing: -.02em; color: var(--ink); animation: fl-druck .7s .1s both; }
+.kb .kb__vorspann { margin: 0; font: italic 300 clamp(var(--grad-16), 2.4vw, var(--grad-20))/1.5 var(--serif); color: var(--ink); text-wrap: pretty; animation: fl-herz .8s .2s both; }
 .kb .kb__vorspann b { font-weight: 700; font-style: normal; color: var(--werkzeug); }
 
 /* K:90-91 — Marktüberblick-Überschrift und Erklärsatz. */
-.kb .kb__h3 { margin: 6px 0 4px; font: 700 clamp(19px, 2.8vw, 23px)/1.25 var(--serif); text-wrap: balance; }
-.kb .kb__erklaer { margin: 0; font: italic 300 13.5px/1.5 var(--serif); color: var(--muted); text-wrap: pretty; }
-.kb .kb__hinweis { font: italic 300 12px var(--serif); color: var(--muted); }
+.kb .kb__h3 { margin: var(--luft-s) 0 var(--luft-xs); font: 700 clamp(var(--grad-20), 2.8vw, var(--grad-22))/1.25 var(--serif); text-wrap: balance; }
+.kb .kb__erklaer { margin: 0; font: italic 300 var(--grad-14)/1.5 var(--serif); color: var(--muted); text-wrap: pretty; }
+.kb .kb__hinweis { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); }
 
 /* K:211 — Rechtliche Hinweise. */
-.kb .kb__recht { margin: 22px 0 0; font: 400 12.5px/1.6 var(--sans); color: var(--muted); text-wrap: pretty; }
+.kb .kb__recht { margin: var(--luft-l) 0 0; font: 400 var(--grad-13)/1.6 var(--sans); color: var(--muted); text-wrap: pretty; }
 .kb .kb__recht b { color: var(--ink); }
 
 /* ── Schmaler Satz (README „Breakpoints“: eng = Containerbreite < 560 px) ─────────── */
 @container kb (max-width: 559px) {
-  .kb .kb__reiter { gap: 16px; }
+  .kb .kb__reiter { gap: var(--luft-m); }
 }
 
 /* ── Lineal (FL Lineal.dc.html:17-36) ─────────────────────────────────────────────── */
@@ -295,7 +295,7 @@
 /* L:27-29 — Beschriftung unter den großen Strichen; die unter der Nadel blendet aus. */
 .kb .kb-lineal__schild {
   position: absolute; top: 58px; transform: translateX(-50%);
-  font: 500 11px var(--sans); color: var(--muted);
+  font: 500 var(--grad-11) var(--sans); color: var(--muted);
   white-space: nowrap; font-variant-numeric: tabular-nums;
   transition: opacity .3s;
 }
@@ -303,9 +303,9 @@
 /* L:20-22 — Marken oben auf der Spur. */
 .kb .kb-lineal__marke {
   position: absolute; top: 0; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  border: 0; background: transparent; padding: 4px 6px; cursor: pointer;
-  font: 500 11.5px var(--sans); color: var(--muted); white-space: nowrap;
+  display: flex; flex-direction: column; align-items: center; gap: var(--luft-xxs);
+  border: 0; background: transparent; padding: var(--luft-xs) var(--luft-s); cursor: pointer;
+  font: 500 var(--grad-12) var(--sans); color: var(--muted); white-space: nowrap;
   transition: color .25s, transform .25s;
 }
 .kb .kb-lineal__marke:hover { transform: translateX(-50%) translateY(-2px); }
@@ -316,7 +316,7 @@
 .kb .kb-lineal__nadel {
   position: absolute; left: 50%; top: 26px; width: 2px; height: 30px;
   background: var(--kb-lineal-farbe); transform: translateX(-50%);
-  box-shadow: 0 0 0 3px rgba(250, 249, 246, .9);
+  box-shadow: 0 0 0 3px var(--paper);
 }
 .kb .kb-lineal__spitze {
   position: absolute; left: 50%; top: 22px; width: 0; height: 0; transform: translateX(-50%);
@@ -328,16 +328,16 @@
 .kb .kb-lineal__wert {
   position: absolute; left: 50%; top: 78px; transform: translateX(-50%); z-index: 2;
   text-align: center; border: 0; border-bottom: 1px dashed var(--ink-35);
-  background: transparent; font: 700 17px var(--serif); color: var(--kb-lineal-farbe);
-  padding: 2px 0 3px; outline: 0; font-variant-numeric: tabular-nums; cursor: text;
+  background: transparent; font: 700 var(--grad-18) var(--serif); color: var(--kb-lineal-farbe);
+  padding: var(--luft-xxs) 0 var(--luft-xs); outline: 0; font-variant-numeric: tabular-nums; cursor: text;
 }
 .kb .kb-lineal__wert:focus { border-bottom: 1px solid var(--ink); background: rgba(255, 255, 255, .7); }
 
 /* L:35 — Bedienhinweis mit pendelndem Strich; verschwindet nach der ersten Berührung. */
 .kb .kb-lineal__hinweis {
   position: absolute; right: 0; top: 104px;
-  display: flex; align-items: center; gap: 6px;
-  font: italic 300 11.5px var(--serif); color: var(--muted);
+  display: flex; align-items: center; gap: var(--luft-s);
+  font: italic 300 var(--grad-12) var(--serif); color: var(--muted);
   transition: opacity .5s; pointer-events: none;
 }
 .kb .kb-lineal__hinweis i { display: inline-block; width: 14px; height: 1px; background: currentColor; animation: fl-hand 1.8s ease-in-out infinite; }
@@ -348,9 +348,9 @@
 }
 
 /* ── Feldkopf: Bezeichnung links, Bereich rechts (K:69, :73, :251, :256, :275) ────── */
-.kb .kb__feldkopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.kb .kb__feldkopf b { font: 600 15px var(--serif); }
-.kb .kb__feldkopf span { font: 400 12px var(--sans); color: var(--muted); }
+.kb .kb__feldkopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); }
+.kb .kb__feldkopf b { font: 600 var(--grad-15) var(--serif); }
+.kb .kb__feldkopf span { font: 400 var(--grad-12) var(--sans); color: var(--muted); }
 
 /* ── Feldlinien: Grundlinie + Doppellinie, die sich im Fokus von der Mitte zeichnet ──
    Gemeinsam für Setzzeile (S:25-30) und Register (R:22-26). Die zweite Linie folgt
@@ -369,7 +369,7 @@
 .kb [data-fehler="an"] > .kb-feldlinien .kb-feldlinien__doppel { background: var(--pink); }
 /* S:29 — der grüne Knoten bestätigt den gesetzten Wert, sobald die Zeile den Fokus abgibt. */
 .kb .kb-feldlinien__knoten {
-  position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: 50%;
+  position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: var(--radius-kreis);
   background: var(--green); border: 2px solid var(--paper); box-sizing: content-box;
   opacity: 0; transition: opacity .4s;
 }
@@ -378,52 +378,52 @@
 /* ── Setzzeile (FL Setzzeile.dc.html:17-37) ───────────────────────────────────────── */
 .kb .kb-setzzeile { position: relative; min-width: 0; }
 .kb .kb-setzzeile__label {
-  display: block; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em;
+  display: block; font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em;
   text-transform: uppercase; color: var(--muted); transition: color .3s;
 }
 .kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__label { color: var(--kb-feld-farbe); }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__label { color: var(--pink); }
 
-.kb .kb-setzzeile__zeile { position: relative; display: flex; align-items: center; gap: 6px; height: 54px; }
+.kb .kb-setzzeile__zeile { position: relative; display: flex; align-items: center; gap: var(--luft-s); height: 54px; }
 /* S:20/23 — die Chevrons sitzen mit negativem Rand halb außerhalb, damit die Zahl auf
    der Satzkante steht und nicht eingerückt wirkt. */
 .kb .kb-setzzeile__schritt {
-  width: 34px; height: 44px; margin-left: -10px; border: 0; background: transparent; padding: 0;
+  width: 34px; height: 44px; margin-left: calc(-1 * var(--luft-s)); border: 0; background: transparent; padding: 0;
   display: flex; align-items: center; justify-content: center; color: var(--muted);
   opacity: .45; transition: opacity .3s, color .2s; cursor: pointer;
 }
-.kb .kb-setzzeile__schritt--plus { margin-left: 0; margin-right: -10px; }
+.kb .kb-setzzeile__schritt--plus { margin-left: 0; margin-right: calc(-1 * var(--luft-s)); }
 .kb .kb-setzzeile__schritt:hover { color: var(--ink); }
 .kb .kb-setzzeile[data-fokus="an"] .kb-setzzeile__schritt,
 .kb .kb-setzzeile__schritt[data-immer="an"] { opacity: 1; }
 .kb .kb-setzzeile__schritt i {
   width: 8px; height: 8px;
   border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg); margin-left: 4px;
+  transform: rotate(45deg); margin-left: var(--luft-xs);
 }
-.kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: 4px; }
+.kb .kb-setzzeile__schritt--plus i { transform: rotate(-135deg); margin-left: 0; margin-right: var(--luft-xs); }
 
 .kb .kb-setzzeile__wert {
   flex: 1; min-width: 0; border: 0; background: transparent;
-  font: 700 clamp(24px, 3.2vw, 30px) var(--serif); color: var(--ink);
+  font: 700 clamp(var(--grad-26), 3.2vw, var(--grad-28)) var(--serif); color: var(--ink);
   outline: 0; padding: 0; font-variant-numeric: tabular-nums; letter-spacing: -.01em;
   transition: color .3s;
 }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__wert { color: var(--pink); }
-.kb .kb-setzzeile__einheit { font: italic 300 16px var(--serif); color: var(--muted); flex-shrink: 0; }
+.kb .kb-setzzeile__einheit { font: italic 300 var(--grad-16) var(--serif); color: var(--muted); flex-shrink: 0; }
 
 .kb .kb-setzzeile__fuss {
   display: flex; justify-content: space-between; align-items: baseline;
-  gap: 6px 12px; flex-wrap: wrap; margin-top: 8px; min-height: 18px;
+  gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-s); min-height: 18px;
 }
-.kb .kb-setzzeile__hinweis { font: italic 300 12px var(--serif); color: var(--muted); min-width: 0; }
+.kb .kb-setzzeile__hinweis { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); min-width: 0; }
 .kb .kb-setzzeile[data-fehler="an"] .kb-setzzeile__hinweis { color: var(--pink); animation: fl-druck .4s both; }
 /* S:33-34 — Vorschläge erscheinen im Fokus (oder immer) und halten ihn beim Antippen. */
-.kb .kb-setzzeile__vorschlaege { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.kb .kb-setzzeile__vorschlaege { display: flex; gap: var(--luft-m); flex-wrap: wrap; opacity: 0; pointer-events: none; transition: opacity .3s; }
 .kb .kb-setzzeile__vorschlaege[data-an="an"] { opacity: 1; pointer-events: auto; }
 .kb .kb-setzzeile__vorschlaege button {
-  border: 0; background: transparent; padding: 0 0 1px; font: 500 12px var(--sans);
-  color: var(--muted); border-bottom: 1px dotted rgba(51, 74, 39, .5); cursor: pointer; transition: color .2s;
+  border: 0; background: transparent; padding: 0 0 var(--luft-xxs); font: 500 var(--grad-12) var(--sans);
+  color: var(--muted); border-bottom: 1px dotted var(--ink-45); cursor: pointer; transition: color .2s;
 }
 .kb .kb-setzzeile__vorschlaege button:hover { color: var(--ink); }
 
@@ -432,22 +432,22 @@
 .kb .kb-register { position: relative; min-width: 0; z-index: 1; }
 .kb .kb-register[data-offen="an"] { z-index: 40; }
 .kb .kb-register__label {
-  display: block; font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em;
+  display: block; font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em;
   text-transform: uppercase; color: var(--muted); transition: color .3s;
 }
 .kb .kb-register[data-offen="an"] .kb-register__label { color: var(--kb-feld-farbe); }
 .kb .kb-register__trigger {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m);
   width: 100%; min-width: 0; height: 54px; border: 0; background: transparent; padding: 0;
   text-align: left; cursor: pointer; color: var(--ink); outline: 0;
 }
 .kb .kb-register__trigger:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .kb .kb-register__gewaehlt {
-  font: 700 clamp(22px, 3vw, 28px) var(--serif); letter-spacing: -.01em;
+  font: 700 clamp(var(--grad-22), 3vw, var(--grad-28)) var(--serif); letter-spacing: -.01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
-.kb .kb-register__rechts { display: flex; align-items: center; gap: 12px; flex-shrink: 1; min-width: 0; }
-.kb .kb-register__meta { font: italic 300 13px var(--serif); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kb .kb-register__rechts { display: flex; align-items: center; gap: var(--luft-m); flex-shrink: 1; min-width: 0; }
+.kb .kb-register__meta { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* R:20 — der Spark dreht sich beim Aufklappen mit Überschwung und nimmt die Werkzeugfarbe an. */
 .kb .kb-register__spark { display: block; flex: none; color: var(--ink); transition: transform .55s var(--ueber), color .3s; }
 .kb .kb-register[data-offen="an"] .kb-register__spark { transform: rotate(135deg) scale(1.15); color: var(--kb-feld-farbe); }
@@ -463,30 +463,30 @@
   transform-origin: top center; transform: rotateX(-72deg); opacity: 0;
   transition: transform .5s var(--klappe), opacity .25s;
   background: var(--paper); border: 1px solid var(--ink-20);
-  box-shadow: 0 30px 40px -24px rgba(51, 74, 39, .45);
-  padding: 4px 0; max-height: var(--kb-register-hoehe, 340px); overflow: auto; scrollbar-width: thin;
+  box-shadow: var(--schatten-dialog);
+  padding: var(--luft-xs) 0; max-height: var(--kb-register-hoehe, 340px); overflow: auto; scrollbar-width: thin;
 }
 .kb .kb-register[data-offen="an"] .kb-register__verzeichnis { transform: rotateX(0); opacity: 1; }
 
 .kb .kb-register__eintrag {
-  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: baseline; gap: 10px;
-  width: 100%; min-height: 44px; padding: 9px 16px 9px 14px;
+  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: baseline; gap: var(--luft-s);
+  width: 100%; min-height: 44px; padding: var(--luft-s) var(--luft-m) var(--luft-s) var(--luft-m);
   border: 0; border-top: 1px solid var(--ink-08); background: transparent;
   text-align: left; cursor: pointer; color: var(--ink);
   transition: background .2s, padding-left .3s var(--kurve);
 }
-.kb .kb-register__eintrag[data-hell="an"] { background: var(--ink-05); padding-left: 20px; }
-.kb .kb-register__nr { font: 900 12px var(--serif); font-style: normal; color: var(--green); }
+.kb .kb-register__eintrag[data-hell="an"] { background: var(--ink-05); padding-left: var(--luft-l); }
+.kb .kb-register__nr { font: 900 var(--grad-12) var(--serif); font-style: normal; color: var(--green); }
 .kb .kb-register__eintrag[data-aktiv="an"] .kb-register__nr { color: var(--kb-feld-farbe); }
-.kb .kb-register__eintrag-label { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.kb .kb-register__eintrag-label > span { font: 500 15px var(--serif); white-space: nowrap; }
+.kb .kb-register__eintrag-label { display: flex; align-items: baseline; gap: var(--luft-s); min-width: 0; }
+.kb .kb-register__eintrag-label > span { font: 500 var(--grad-15) var(--serif); white-space: nowrap; }
 .kb .kb-register__eintrag[data-aktiv="an"] .kb-register__eintrag-label > span { font-weight: 700; }
 .kb .kb-register__eintrag-label .kb__fuehrung { min-width: 14px; }
-.kb .kb-register__eintrag-meta { font: 500 12.5px var(--sans); color: var(--muted); white-space: nowrap; }
+.kb .kb-register__eintrag-meta { font: 500 var(--grad-13) var(--sans); color: var(--muted); white-space: nowrap; }
 .kb .kb-register__eintrag[data-aktiv="an"] .kb-register__eintrag-meta { color: var(--kb-feld-farbe); }
 
 /* ── Zweispaltige Eingabegruppe (F:62, :172) ──────────────────────────────────────── */
-.kb .kb__zweispalt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 40px; align-items: start; }
+.kb .kb__zweispalt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--luft-l) var(--luft-xl); align-items: start; }
 @container kb (max-width: 559px) {
   .kb .kb__zweispalt { grid-template-columns: minmax(0, 1fr); }
 }
@@ -495,11 +495,11 @@
 /* Schrift und Farbe kommen vom Elternteil — dieselbe Walze trägt den Zinssatz (44 px)
    und Leos laufende Rate (36 px). Rechtsbündig, damit bei 999 → 1.000 nur die neue
    Stelle hinzukommt, statt dass die ganze Zahl wirbelt. */
-.kb .kb-odo { position: relative; display: inline-flex; align-items: baseline; justify-content: flex-end; gap: 1px; font-variant-numeric: tabular-nums; }
+.kb .kb-odo { position: relative; display: inline-flex; align-items: baseline; justify-content: flex-end; gap: var(--luft-xxs); font-variant-numeric: tabular-nums; }
 /* Die echte Zahl als unsichtbarer Text — für Vorlesesoftware, Textauszüge und alles,
    was den Satz liest statt ihn zu sehen. Kein display:none (siehe Kopf der Komponente). */
 .kb .kb-odo__klartext {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: calc(-1 * var(--luft-xxs));
   overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
 }
 .kb .kb-odo__walze { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
@@ -515,20 +515,20 @@
 /* Geometrie-Eigenschaften als CSS animieren — als Attribut allein täte sich nichts. */
 .kb .kb-drehring__griff { transition: cx .45s var(--kurve), cy .45s var(--kurve), r .2s; }
 .kb .kb-drehring__scheibe[data-zieht="an"] .kb-drehring__griff { transition: r .2s; }
-.kb .kb-drehring__schild { font: 500 10px var(--sans); fill: var(--muted); }
+.kb .kb-drehring__schild { font: 500 var(--grad-kicker) var(--sans); fill: var(--muted); }
 .kb .kb-drehring__mitte {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  display: flex; flex-direction: column; align-items: center; pointer-events: none; padding-top: 6px;
+  display: flex; flex-direction: column; align-items: center; pointer-events: none; padding-top: var(--luft-s);
 }
-.kb .kb-drehring__mitte b { font: 900 36px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
-.kb .kb-drehring__einheit { font: italic 300 12px var(--serif); color: var(--muted); margin-top: 4px; }
-.kb .kb-drehring__unter { font: 500 11px var(--sans); color: var(--kb-feld-farbe); margin-top: 4px; white-space: nowrap; }
+.kb .kb-drehring__mitte b { font: 900 var(--grad-34)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.kb .kb-drehring__einheit { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); margin-top: var(--luft-xs); }
+.kb .kb-drehring__unter { font: 500 var(--grad-11) var(--sans); color: var(--kb-feld-farbe); margin-top: var(--luft-xs); white-space: nowrap; }
 
 /* ── Zählwerk (K:274-287) ─────────────────────────────────────────────────────────── */
-.kb .kb-zaehlwerk__zeile { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 26px; }
+.kb .kb-zaehlwerk__zeile { display: flex; align-items: center; justify-content: space-between; gap: var(--luft-s); margin-top: var(--luft-l); }
 .kb .kb-zaehlwerk__knopf {
   position: relative; width: 46px; height: 46px; flex-shrink: 0;
-  border: 1.5px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink);
+  border: 1.5px solid var(--ink); border-radius: var(--radius-kreis); background: transparent; color: var(--ink);
   display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: none;
   transition: transform .2s, background .2s, color .2s;
 }
@@ -538,38 +538,38 @@
 .kb .kb-zaehlwerk__plus { position: absolute; width: 2px; height: 14px; background: currentColor; }
 .kb .kb-zaehlwerk__wert {
   display: flex; align-items: baseline; justify-content: center;
-  font: 900 clamp(34px, 5vw, 44px)/1 var(--serif); color: var(--ink);
+  font: 900 clamp(var(--grad-34), 5vw, var(--grad-44))/1 var(--serif); color: var(--ink);
   font-variant-numeric: tabular-nums; letter-spacing: -.01em;
 }
-.kb .kb-zaehlwerk__schnellwahl { display: flex; justify-content: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-zaehlwerk__schnellwahl { display: flex; justify-content: center; gap: var(--luft-s); margin-top: var(--luft-l); flex-wrap: wrap; }
 .kb .kb-zaehlwerk__chip {
-  min-height: 34px; padding: 0 12px; border: 1px solid var(--ink-25); border-radius: 999px;
-  background: transparent; color: var(--ink); font: 500 12.5px var(--sans);
+  min-height: 34px; padding: 0 var(--luft-m); border: 1px solid var(--ink-25); border-radius: var(--radius-pille);
+  background: transparent; color: var(--ink); font: 500 var(--grad-13) var(--sans);
   cursor: pointer; transition: background .3s, color .3s, border-color .3s;
 }
 .kb .kb-zaehlwerk__chip:hover { border-color: var(--ink); }
 .kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--ink); color: var(--auf-tinte); border-color: var(--ink); }
-.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: 10px; font: italic 300 11.5px var(--serif); color: var(--muted); }
+.kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: var(--luft-s); font: italic 300 var(--grad-12) var(--serif); color: var(--muted); }
 
 /* ── Pille (K:140-144 groß · :194-198 Liste · :299/:349 fester Knopf) ─────────────── */
 .kb .kb-pille {
   position: relative; display: inline-flex; align-items: center; height: 48px;
-  padding: 3px 3px 3px 19px; border: 2px solid var(--ink);
-  outline: 1px solid var(--ink); outline-offset: 2px; border-radius: 21px;
+  padding: var(--luft-xs) var(--luft-xs) var(--luft-xs) var(--luft-l); border: 2px solid var(--ink);
+  outline: 1px solid var(--ink); outline-offset: 2px; border-radius: var(--radius-pille);
   background: transparent; text-decoration: none; color: var(--ink);
-  font: 500 16px var(--sans); overflow: hidden; cursor: pointer;
+  font: 500 var(--grad-16) var(--sans); overflow: hidden; cursor: pointer;
   transition: color .3s; box-sizing: border-box;
 }
-.kb .kb-pille--klein { height: 42px; padding-left: 15px; border-radius: 19px; outline: 0; font-size: 14px; }
+.kb .kb-pille--klein { height: 42px; padding-left: var(--luft-m); border-radius: var(--radius-pille); outline: 0; font-size: var(--grad-14); }
 .kb .kb-pille__fuell {
-  position: absolute; top: 3px; bottom: 3px; right: 3px; width: 38px; border-radius: 19px;
+  position: absolute; top: 3px; bottom: 3px; right: 3px; width: 38px; border-radius: var(--radius-pille);
   background: var(--kb-pille-farbe); transition: width .5s var(--kurve);
 }
-.kb .kb-pille--klein .kb-pille__fuell { width: 32px; border-radius: 16px; transition-duration: .45s; }
-.kb .kb-pille__text { position: relative; padding-right: 16px; }
-.kb .kb-pille--klein .kb-pille__text { padding-right: 12px; }
+.kb .kb-pille--klein .kb-pille__fuell { width: 32px; border-radius: var(--radius-pille); transition-duration: .45s; }
+.kb .kb-pille__text { position: relative; padding-right: var(--luft-m); }
+.kb .kb-pille--klein .kb-pille__text { padding-right: var(--luft-m); }
 .kb .kb-pille__knopf {
-  position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+  position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius-kreis);
   display: flex; align-items: center; justify-content: center;
   background: var(--kb-pille-farbe); transition: transform .35s var(--ueber);
 }
@@ -586,37 +586,37 @@
 .kb .kb-podest:hover .kb-pille--fuellt { color: var(--auf-tinte); }
 /* Pillen ohne Füllung färben beim Überfahren nur den Text (K:299 Magenta, :349 Türkis). */
 .kb .kb-pille:not(.kb-pille--fuellt):hover { color: var(--kb-pille-farbe); }
-.kb .kb-pille--nur-knopf { padding-left: 3px; }
+.kb .kb-pille--nur-knopf { padding-left: var(--luft-xs); }
 .kb .kb-pille--nur-knopf .kb-pille__text { display: none; }
 /* K:519 — im schmalen Satz bleibt von der Listen-Pille nur der Knopf. */
 @container kb (max-width: 559px) {
-  .kb .kb-pille--klein { padding-left: 3px; }
+  .kb .kb-pille--klein { padding-left: var(--luft-xs); }
   .kb .kb-pille--klein .kb-pille__text { display: none; }
 }
 
 /* ── Stempel (K:123 groß · :191 klein) ────────────────────────────────────────────── */
 .kb .kb-stempel {
-  display: inline-block; padding: 5px 12px;
+  display: inline-block; padding: var(--luft-xs) var(--luft-m);
   border: 2px solid var(--tuerkis-hell); color: var(--tuerkis-hell); background: var(--paper);
-  font: 700 11px var(--sans); letter-spacing: .14em; text-transform: uppercase;
+  font: 700 var(--grad-11) var(--sans); letter-spacing: .14em; text-transform: uppercase;
   transform: rotate(-11deg);
 }
-.kb .kb-stempel--klein { padding: 2px 7px; border-width: 1.5px; font-size: 9px; letter-spacing: .12em; transform: rotate(-6deg); flex-shrink: 0; }
+.kb .kb-stempel--klein { padding: var(--luft-xxs) var(--luft-s); border-width: 1.5px; font-size: var(--grad-kicker); letter-spacing: .12em; transform: rotate(-6deg); flex-shrink: 0; }
 @container kb (max-width: 559px) { .kb .kb-stempel--klein { display: none; } }
 
 /* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
-.kb .kb-presets { display: flex; align-items: center; gap: 14px 16px; flex-wrap: wrap; }
-.kb .kb-presets__label { font: italic 300 13px var(--serif); color: var(--muted); }
+.kb .kb-presets { display: flex; align-items: center; gap: var(--luft-m) var(--luft-m); flex-wrap: wrap; }
+.kb .kb-presets__label { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
 .kb .kb-presets__stempel {
-  position: relative; padding: 8px 14px 7px; min-height: 44px;
-  border: 1.5px solid var(--muted); border-radius: 4px; background: transparent; color: var(--muted);
+  position: relative; padding: var(--luft-s) var(--luft-m) var(--luft-s); min-height: 44px;
+  border: 1.5px solid var(--muted); border-radius: var(--radius-kante); background: transparent; color: var(--muted);
   text-align: left; cursor: pointer; transform: rotate(var(--kb-neigung, 0deg));
   transition: transform .35s var(--ueber), color .25s, border-color .25s;
 }
 .kb .kb-presets__stempel:hover { transform: rotate(0deg) scale(1.04); }
 .kb .kb-presets__stempel[data-aktiv="an"] { color: var(--pink); border-color: var(--pink); }
-.kb .kb-presets__stempel b { display: block; font: 700 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; }
-.kb .kb-presets__stempel span { display: block; font: italic 300 11px var(--serif); margin-top: 2px; opacity: .85; }
+.kb .kb-presets__stempel b { display: block; font: 700 var(--grad-11) var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.kb .kb-presets__stempel span { display: block; font: italic 300 var(--grad-11) var(--serif); margin-top: var(--luft-xxs); opacity: .85; }
 
 /* ── Segment-Umschalter (K:78-82) ─────────────────────────────────────────────────── */
 .kb .kb-segment {
@@ -629,35 +629,35 @@
   transition: left .45s var(--ueber-sanft), width .45s var(--ueber-sanft);
 }
 .kb .kb-segment__knopf {
-  position: relative; border: 0; background: transparent; padding: 0 18px;
-  font: 500 14px var(--sans); color: var(--ink); cursor: pointer; transition: color .3s;
+  position: relative; border: 0; background: transparent; padding: 0 var(--luft-l);
+  font: 500 var(--grad-14) var(--sans); color: var(--ink); cursor: pointer; transition: color .3s;
   white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis;
 }
 /* Weiß erst, wenn der Block gemessen ist — sonst stünde weiße Schrift auf hellem Papier. */
 .kb .kb-segment[data-gemessen="an"] .kb-segment__knopf[data-aktiv="an"] { color: var(--auf-tinte); }
 @container kb (max-width: 559px) {
   .kb .kb-segment { display: grid; width: 100%; grid-template-columns: repeat(var(--kb-seg-spalten, 3), 1fr); }
-  .kb .kb-segment__knopf { padding: 0 6px; font-size: 12px; }
+  .kb .kb-segment__knopf { padding: 0 var(--luft-s); font-size: var(--grad-12); }
 }
 
 /* ── Filter-Chip (K:173) ──────────────────────────────────────────────────────────── */
 .kb .kb-chip {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
-  border: 1px solid var(--ink-25); border-radius: 999px; background: transparent; color: var(--ink);
-  font: 500 13.5px var(--sans); cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--luft-s); min-height: 40px; padding: 0 var(--luft-m);
+  border: 1px solid var(--ink-25); border-radius: var(--radius-pille); background: transparent; color: var(--ink);
+  font: 500 var(--grad-14) var(--sans); cursor: pointer;
   transition: background .3s var(--kurve), color .3s, border-color .3s, transform .3s;
 }
 .kb .kb-chip:hover { transform: translateY(-1px); border-color: var(--ink); }
-.kb .kb-chip__punkt { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-30); transition: background .3s; flex: none; }
+.kb .kb-chip__punkt { width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--ink-30); transition: background .3s; flex: none; }
 .kb .kb-chip[data-aktiv="an"] { background: var(--ink); color: var(--auf-tinte); border-color: var(--ink); }
 .kb .kb-chip[data-aktiv="an"] .kb-chip__punkt { background: var(--green); }
-.kb .kb-chip__zahl { opacity: .7; font-size: 12px; }
+.kb .kb-chip__zahl { opacity: .7; font-size: var(--grad-12); }
 
 /* ── Strich-Link (K:159) ──────────────────────────────────────────────────────────── */
 .kb .kb-strich {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 40px;
+  display: inline-flex; align-items: center; gap: var(--luft-s); min-height: 40px;
   border: 0; background: transparent; padding: 0;
-  font: 500 14px var(--sans); color: var(--tuerkis); text-decoration: none; cursor: pointer;
+  font: 500 var(--grad-14) var(--sans); color: var(--tuerkis); text-decoration: none; cursor: pointer;
 }
 .kb .kb-strich__strich { width: 18px; height: 1px; background: currentColor; transition: width .45s var(--kurve); }
 .kb .kb-strich:hover .kb-strich__strich,
@@ -676,62 +676,62 @@
   box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .kb .kb-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.kb .kb-logo b { font: 700 16px var(--serif); color: var(--ink); }
-.kb .kb-logo--gewinner { width: 120px; height: 42px; padding: 4px; }
-.kb .kb-logo--platz, .kb .kb-logo--zeile { width: 96px; height: 34px; padding: 3px; }
+.kb .kb-logo b { font: 700 var(--grad-16) var(--serif); color: var(--ink); }
+.kb .kb-logo--gewinner { width: 120px; height: 42px; padding: var(--luft-xs); }
+.kb .kb-logo--platz, .kb .kb-logo--zeile { width: 96px; height: 34px; padding: var(--luft-xs); }
 @container kb (max-width: 559px) { .kb .kb-logo--zeile { width: 64px; } }
 
 /* ── Merken (K:145) ───────────────────────────────────────────────────────────────── */
 .kb .kb-merken {
-  display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent;
-  padding: 6px 0; min-height: 40px; font: 500 14px var(--sans); color: var(--muted);
+  display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: transparent;
+  padding: var(--luft-s) 0; min-height: 40px; font: 500 var(--grad-14) var(--sans); color: var(--muted);
   cursor: pointer; transition: color .2s;
 }
-.kb .kb-merken--klein { gap: 6px; font-size: 13px; }
+.kb .kb-merken--klein { gap: var(--luft-s); font-size: var(--grad-13); }
 .kb .kb-merken[data-gemerkt="an"] { color: var(--green-ink); }
 .kb .kb-merken svg { transition: fill .3s; }
 
 /* ── Punktzeile: Werte rechts (K:136-138) ─────────────────────────────────────────── */
-.kb .kb__punktzeile-k { font: 400 14px var(--sans); flex-shrink: 0; }
-.kb .kb__punktzeile-v { font: 500 15px var(--sans); font-variant-numeric: tabular-nums; text-align: right; }
-.kb .kb__punktzeile-v[data-gross="an"] { font: 700 19px var(--serif); }
+.kb .kb__punktzeile-k { font: 400 var(--grad-14) var(--sans); flex-shrink: 0; }
+.kb .kb__punktzeile-v { font: 500 var(--grad-15) var(--sans); font-variant-numeric: tabular-nums; text-align: right; }
+.kb .kb__punktzeile-v[data-gross="an"] { font: 700 var(--grad-20) var(--serif); }
 .kb .kb__punktzeile-v[data-ton="gut"] { color: var(--green-ink); }
 .kb .kb__punktzeile-v[data-ton="warnung"] { color: var(--pink); }
 .kb .kb__punktzeile-v[data-ton="werkzeug"] { color: var(--werkzeug); }
 
 /* ── Schalter (nicht in der Kursblatt-Übergabe; Maße aus faden.css:1319-1330) ─────── */
 .kb .kb-schalter {
-  display: inline-flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 0;
-  min-height: 44px; font: 500 14px var(--sans); color: var(--ink); cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: transparent; padding: 0;
+  min-height: 44px; font: 500 var(--grad-14) var(--sans); color: var(--ink); cursor: pointer;
 }
-.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: 12px; background: var(--ink-20); transition: background .3s; flex: none; }
-.kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--auflage); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); transition: left .35s var(--ueber); }
+.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: var(--radius-kante); background: var(--ink-20); transition: background .3s; flex: none; }
+.kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--auflage); box-shadow: var(--schatten-auflage); transition: left .35s var(--ueber); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf { background: var(--green); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf i { left: 20px; }
 
 /* ═════ Seite 2 · Rechner (K:234-354) ═══════════════════════════════════════════════ */
 
-.kb .kb-rechner { padding-top: 32px; }
+.kb .kb-rechner { padding-top: var(--luft-xl); }
 /* K:238 — die H2 des Rechners ist eine Spur kleiner als die H1 des Vergleichs. */
-.kb .kb__titel--rechner { margin: 8px 0 12px; font-size: clamp(32px, 6.5vw, 50px); line-height: 1.05; }
-.kb .kb__vorspann--rechner { font-size: clamp(16px, 2.3vw, 18px); }
-.kb .kb-rechner__presets { margin-top: 28px; }
-.kb .kb-rechner__felder { margin-top: 30px; display: grid; gap: 22px; }
-.kb .kb-rechner__paar { gap: 28px 40px; align-items: start; }
+.kb .kb__titel--rechner { margin: var(--luft-s) 0 var(--luft-m); font-size: clamp(var(--grad-34), 6.5vw, var(--grad-44)); line-height: 1.05; }
+.kb .kb__vorspann--rechner { font-size: clamp(var(--grad-16), 2.3vw, var(--grad-18)); }
+.kb .kb-rechner__presets { margin-top: var(--luft-xl); }
+.kb .kb-rechner__felder { margin-top: var(--luft-xl); display: grid; gap: var(--luft-l); }
+.kb .kb-rechner__paar { gap: var(--luft-xl) var(--luft-xl); align-items: start; }
 
 /* K:291-300 — „Leo rechnet mit“ zwischen zwei Punktlinien, rechts der Knopf. */
 .kb .kb-rechner__leo {
-  display: flex; align-items: center; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap;
-  margin-top: 30px; padding: 18px 0;
-  border-top: 1px dotted rgba(51, 74, 39, .45); border-bottom: 1px dotted rgba(51, 74, 39, .45);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--luft-l) var(--luft-xl); flex-wrap: wrap;
+  margin-top: var(--luft-xl); padding: var(--luft-l) 0;
+  border-top: 1px dotted var(--ink-45); border-bottom: 1px dotted var(--ink-45);
 }
-.kb .kb-rechner__vorschau { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
-.kb .kb-rechner__leo-vor { font: italic 400 15px var(--serif); color: var(--muted); }
+.kb .kb-rechner__vorschau { display: flex; align-items: baseline; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; }
+.kb .kb-rechner__leo-vor { font: italic 400 var(--grad-15) var(--serif); color: var(--muted); }
 .kb .kb-rechner__leo-zahl {
   display: inline-flex; align-items: baseline;
-  font: 900 clamp(28px, 4.4vw, 36px)/1 var(--serif); color: var(--ink);
+  font: 900 clamp(var(--grad-28), 4.4vw, var(--grad-34))/1 var(--serif); color: var(--ink);
 }
-.kb .kb-rechner__leo-nach { font: italic 300 13px var(--serif); color: var(--muted); }
+.kb .kb-rechner__leo-nach { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
 
 /* ── Ergebnis: öffnet über die Zeilenhöhe, nicht über eine Höhe in Pixeln (K:303) ── */
 .kb .kb-ergebnis { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .75s var(--kurve); }
@@ -739,46 +739,46 @@
 .kb .kb-ergebnis__innen { overflow: hidden; opacity: 1; transition: opacity .4s; }
 /* K:525 — nach einer Eingabe steht das Ergebnis noch da, aber blass: es ist veraltet. */
 .kb .kb-ergebnis__innen[data-veraltet="an"] { opacity: .45; }
-.kb .kb-ergebnis__inhalt { padding-top: 40px; display: grid; gap: 32px; }
-.kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: 18px; }
-.kb .kb-ergebnis__kopf i { flex: 1; border-top: 1px dotted rgba(51, 74, 39, .5); }
+.kb .kb-ergebnis__inhalt { padding-top: var(--luft-xl); display: grid; gap: var(--luft-xl); }
+.kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: var(--luft-l); }
+.kb .kb-ergebnis__kopf i { flex: 1; border-top: 1px dotted var(--ink-45); }
 .kb .kb-ergebnis__kopf i:first-child { transform-origin: right; }
 .kb .kb-ergebnis__kopf i:last-child { transform-origin: left; }
-.kb .kb-ergebnis__kopf span { font: 300 14px var(--sans); letter-spacing: 2px; }
+.kb .kb-ergebnis__kopf span { font: 300 var(--grad-14) var(--sans); letter-spacing: 2px; }
 
 /* K:306-310 — drei Kacheln; die erste ist die Antwort und steht auf Weiß mit Outline. */
-.kb .kb-kacheln { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
-.kb .kb-kachel { padding: 20px 18px; background: rgba(0, 0, 0, .03); }
+.kb .kb-kacheln { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: var(--luft-l); }
+.kb .kb-kachel { padding: var(--luft-l) var(--luft-l); background: rgba(0, 0, 0, .03); }
 .kb .kb-kachel--haupt {
   background: var(--auflage); border: 1px solid var(--ink-30);
   outline: 2px solid var(--ink-25); outline-offset: 3px;
 }
 .kb .kb-kachel__wert {
-  display: block; margin-top: 8px;
-  font: 700 clamp(22px, 3.4vw, 28px)/1 var(--serif); font-variant-numeric: tabular-nums;
+  display: block; margin-top: var(--luft-s);
+  font: 700 clamp(var(--grad-22), 3.4vw, var(--grad-28))/1 var(--serif); font-variant-numeric: tabular-nums;
 }
-.kb .kb-kachel--haupt .kb-kachel__wert { font-size: clamp(28px, 4.6vw, 36px); color: var(--pink); }
+.kb .kb-kachel--haupt .kb-kachel__wert { font-size: clamp(var(--grad-28), 4.6vw, var(--grad-34)); color: var(--pink); }
 @container kb (max-width: 559px) { .kb .kb-kacheln { grid-template-columns: 1fr; } }
 
 /* K:312-316 — Anteilsband. */
-.kb .kb-anteil__band { display: flex; height: 18px; margin-top: 10px; gap: 2px; }
+.kb .kb-anteil__band { display: flex; height: 18px; margin-top: var(--luft-s); gap: var(--luft-xxs); }
 .kb .kb-anteil__band i { transition: width .9s var(--kurve); }
 .kb .kb-anteil__band i[data-ton="ink"] { background: var(--ink); }
 .kb .kb-anteil__band i[data-ton="magenta"] { background: var(--pink); }
-.kb .kb-anteil__legende { display: flex; justify-content: space-between; margin-top: 8px; font: 400 12.5px var(--sans); }
-.kb .kb-anteil__legende span { display: inline-flex; align-items: center; gap: 6px; }
+.kb .kb-anteil__legende { display: flex; justify-content: space-between; margin-top: var(--luft-s); font: 400 var(--grad-13) var(--sans); }
+.kb .kb-anteil__legende span { display: inline-flex; align-items: center; gap: var(--luft-s); }
 .kb .kb-anteil__legende i { width: 8px; height: 8px; }
 .kb .kb-anteil__legende i[data-ton="ink"] { background: var(--ink); }
 .kb .kb-anteil__legende i[data-ton="magenta"] { background: var(--pink); }
 
 /* K:318-335 — Verlaufskurve mit Scrubber. */
-.kb .kb-kurve__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
-.kb .kb-kurve__buehne { position: relative; margin-top: 10px; }
+.kb .kb-kurve__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; }
+.kb .kb-kurve__buehne { position: relative; margin-top: var(--luft-s); }
 .kb .kb-kurve__bild { display: block; overflow: visible; touch-action: pan-y; }
-.kb .kb-kurve__achse { font: 500 10px var(--sans); fill: var(--muted); }
+.kb .kb-kurve__achse { font: 500 var(--grad-kicker) var(--sans); fill: var(--muted); }
 .kb .kb-kurve__fahne {
-  position: absolute; top: 0; padding: 6px 10px; background: var(--ink); color: var(--auf-tinte);
-  font: 500 12px var(--sans); white-space: nowrap; pointer-events: none;
+  position: absolute; top: 0; padding: var(--luft-s) var(--luft-s); background: var(--ink); color: var(--auf-tinte);
+  font: 500 var(--grad-12) var(--sans); white-space: nowrap; pointer-events: none;
 }
 /* Der Hinweis nennt die Maus; auf Geräten ohne Zeigegerät die Berührung. */
 .kb .kb-kurve__bedienhinweis--touch { display: none; }
@@ -789,74 +789,74 @@
 
 /* K:337-341 — Jahresübersicht mit grauem Doppelkopf. */
 .kb .kb-tabelle { --kb-tab-spalte: 1fr; }
-.kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; gap: 10px; }
+.kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; gap: var(--luft-s); }
 .kb .kb-tabelle__kopf {
-  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 8px 0; margin-top: 10px;
-  font: 700 10.5px/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: var(--luft-s) 0; margin-top: var(--luft-s);
+  font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
 }
 .kb .kb-tabelle__zeile {
-  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: 10px 0;
+  grid-template-columns: .7fr 1fr 1fr 1.2fr; padding: var(--luft-s) 0;
   border-top: 1px solid var(--ink-12);
-  font: 400 clamp(12.5px, 1.9vw, 14px) var(--sans); font-variant-numeric: tabular-nums;
+  font: 400 clamp(var(--grad-13), 1.9vw, var(--grad-14)) var(--sans); font-variant-numeric: tabular-nums;
 }
 .kb .kb-tabelle__zeile[data-betont="an"] { border-top: 2px solid var(--pink); }
 .kb .kb-tabelle__kopf span[data-rechts="an"], .kb .kb-tabelle__zeile span[data-rechts="an"] { text-align: right; }
 .kb .kb-tabelle__zeile span[data-ton="magenta"] { color: var(--pink); }
-.kb .kb-tabelle__zeile span:first-child { font: 700 14px var(--serif); }
+.kb .kb-tabelle__zeile span:first-child { font: 700 var(--grad-14) var(--serif); }
 .kb .kb-tabelle__zeile span:last-child { font-weight: 600; }
 
 .kb .kb-punktblock { display: grid; }
 
 /* K:343 — Pflichthinweis unter dem Ergebnis. */
 .kb .kb-ergebnis__hinweis {
-  padding-top: 14px; border-top: 2px solid var(--pink);
-  font: 400 13px/1.6 var(--sans); color: var(--muted); text-wrap: pretty;
+  padding-top: var(--luft-m); border-top: 2px solid var(--pink);
+  font: 400 var(--grad-13)/1.6 var(--sans); color: var(--muted); text-wrap: pretty;
 }
 .kb .kb-ergebnis__hinweis b { color: var(--pink); }
 
 /* K:345-352 — die Brücke zurück in den Vergleich, türkis eingehängt. */
-.kb .kb-bruecke { margin-top: 28px; padding-top: 20px; border-top: 2px solid var(--tuerkis); }
+.kb .kb-bruecke { margin-top: var(--luft-xl); padding-top: var(--luft-l); border-top: 2px solid var(--tuerkis); }
 .kb .kb__kicker--vergleich { --werkzeug: var(--tuerkis); }
-.kb .kb-bruecke__satz { margin: 6px 0 0; font: italic 400 16px/1.5 var(--serif); text-wrap: pretty; }
+.kb .kb-bruecke__satz { margin: var(--luft-s) 0 0; font: italic 400 var(--grad-16)/1.5 var(--serif); text-wrap: pretty; }
 .kb .kb-bruecke__satz b { font-style: normal; color: var(--tuerkis); }
-.kb .kb-bruecke__aktionen { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; margin-top: 18px; }
+.kb .kb-bruecke__aktionen { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-l); }
 
 /* ═════ Seite 1 · Vergleich (K:56-213) ══════════════════════════════════════════════ */
 
 .kb--vergleich { --werkzeug: var(--tuerkis); }
-.kb .kb__fehler { margin: 14px 0 0; font: 400 13px var(--sans); color: var(--pink); }
+.kb .kb__fehler { margin: var(--luft-m) 0 0; font: 400 var(--grad-13) var(--sans); color: var(--pink); }
 
 /* K:62-67 — „Ihre Angaben“ hängt am türkisen Einhänger; rechts der Hinweis mit dem
    pulsenden grünen Punkt: hier wird nichts bestätigt, hier rechnet es sofort. */
-.kb .kb-angaben { margin-top: 36px; padding-top: 16px; border-top: 2px solid var(--werkzeug); }
-.kb .kb-angaben__kopf { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+.kb .kb-angaben { margin-top: var(--luft-xl); padding-top: var(--luft-m); border-top: 2px solid var(--werkzeug); }
+.kb .kb-angaben__kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; }
 .kb .kb-angaben__sofort {
-  display: inline-flex; align-items: center; gap: 7px;
-  font: italic 300 12.5px var(--serif); color: var(--muted);
+  display: inline-flex; align-items: center; gap: var(--luft-s);
+  font: italic 300 var(--grad-13) var(--serif); color: var(--muted);
 }
-.kb .kb-angaben__sofort i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: fl-punkt 1.8s infinite; flex: none; }
-.kb .kb-angaben__breit { margin-top: 22px; }
-.kb .kb-angaben__breit + .kb-angaben__breit { margin-top: 18px; }
-.kb .kb-angaben__paar { margin-top: 22px; gap: 22px 40px; }
+.kb .kb-angaben__sofort i { width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--green); animation: fl-punkt 1.8s infinite; flex: none; }
+.kb .kb-angaben__breit { margin-top: var(--luft-l); }
+.kb .kb-angaben__breit + .kb-angaben__breit { margin-top: var(--luft-l); }
+.kb .kb-angaben__paar { margin-top: var(--luft-l); gap: var(--luft-l) var(--luft-xl); }
 /* K:76-77 — die Bezeichnung steht neben dem Umschalter, nicht darüber. */
-.kb .kb-angaben__segment { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; }
-.kb .kb-angaben__segment > b { font: 600 15px var(--serif); }
+.kb .kb-angaben__segment { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; }
+.kb .kb-angaben__segment > b { font: 600 var(--grad-15) var(--serif); }
 
 /* ── Marktüberblick (K:87-113) ────────────────────────────────────────────────────── */
-.kb .kb-markt { margin-top: 46px; }
+.kb .kb-markt { margin-top: var(--luft-xxl); }
 @container kb (max-width: 559px) { .kb .kb-markt__tipp { display: none; } }
 
 /* Streuband (K:92-106). Die Höhe ist fest: Beschriftung oben, Achse bei 112, Tooltip bei 138. */
-.kb .kb-band { position: relative; height: 172px; margin-top: 10px; }
+.kb .kb-band { position: relative; height: 172px; margin-top: var(--luft-s); }
 .kb .kb-band__kicker { position: absolute; left: 0; top: 0; }
 .kb .kb-band__achse { position: absolute; left: 0; right: 0; top: 112px; height: 1px; background: var(--ink); }
-.kb .kb-band__ende { position: absolute; top: 122px; font: 500 11px var(--sans); color: var(--muted); }
+.kb .kb-band__ende { position: absolute; top: 122px; font: 500 var(--grad-11) var(--sans); color: var(--muted); }
 .kb .kb-band__ende--links { left: 0; }
 .kb .kb-band__ende--rechts { right: 0; }
 .kb .kb-band__schnitt { position: absolute; top: 88px; height: 24px; border-left: 1px dashed var(--muted); transition: left .7s var(--kurve); }
 .kb .kb-band__schnitt-wert {
   position: absolute; top: 70px; transform: translateX(-50%);
-  font: 500 11.5px var(--sans); color: var(--muted); white-space: nowrap;
+  font: 500 var(--grad-12) var(--sans); color: var(--muted); white-space: nowrap;
   transition: left .7s var(--kurve);
 }
 /* Beschriftungen hängen sich an den Rändern um, statt aus dem Satz zu laufen. */
@@ -868,15 +868,15 @@
   transform-origin: bottom; transition: left .7s var(--kurve);
 }
 .kb .kb-band__best {
-  position: absolute; top: 28px; padding-left: 8px;
-  font: 700 13px var(--sans); color: var(--tuerkis); white-space: nowrap;
+  position: absolute; top: 28px; padding-left: var(--luft-s);
+  font: 700 var(--grad-13) var(--sans); color: var(--tuerkis); white-space: nowrap;
   transition: left .7s var(--kurve);
 }
 .kb .kb-band__best > span { display: inline-block; }
-.kb .kb-band__best[data-anker="rechts"] { padding: 0 8px 0 0; transform: translateX(-100%); }
+.kb .kb-band__best[data-anker="rechts"] { padding: 0 var(--luft-s) 0 0; transform: translateX(-100%); }
 .kb .kb-band__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
-  border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink);
+  border-radius: var(--radius-kreis); background: var(--paper); border: 1.5px solid var(--ink);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .7s var(--kurve), top .5s, width .25s, height .25s, background .25s;
 }
@@ -886,8 +886,8 @@
   animation: fl-puls 2.2s infinite;
 }
 .kb .kb-band__tip {
-  position: absolute; top: 138px; padding: 5px 10px;
-  background: var(--ink); color: var(--auf-tinte); font: 500 12px var(--sans);
+  position: absolute; top: 138px; padding: var(--luft-xs) var(--luft-s);
+  background: var(--ink); color: var(--auf-tinte); font: 500 var(--grad-12) var(--sans);
   white-space: nowrap; transition: opacity .2s, left .3s; pointer-events: none;
 }
 
@@ -899,7 +899,7 @@
    Das SVG trägt Gitter und Linien, die Punkte liegen als Knöpfe darüber: sie brauchen
    Tastfläche, Fokusring und Beschriftung. Alle Positionen in Prozent des viewBox-Rasters
    640×210, damit die Kurve jede Satzbreite mitgeht. */
-.kb .kb-zinskurve { position: relative; margin-top: 16px; }
+.kb .kb-zinskurve { position: relative; margin-top: var(--luft-m); }
 .kb .kb-zinskurve > svg { display: block; overflow: visible; }
 .kb .kb-zinskurve__best {
   fill: none; stroke: var(--tuerkis); stroke-width: 2;
@@ -909,17 +909,17 @@
 .kb .kb-zinskurve__stiel { stroke: rgba(11, 127, 102, .35); stroke-width: 1; stroke-dasharray: 2 3; }
 .kb .kb-zinskurve__gitter-wert {
   position: absolute; left: 0; transform: translateY(-100%);
-  font: 500 10px var(--sans); color: var(--muted); pointer-events: none;
+  font: 500 var(--grad-kicker) var(--sans); color: var(--muted); pointer-events: none;
 }
 .kb .kb-zinskurve__punkt {
   position: absolute; width: 10px; height: 10px; transform: translate(-50%, -50%);
-  border-radius: 50%; background: var(--paper); border: 1.5px solid var(--tuerkis);
+  border-radius: var(--radius-kreis); background: var(--paper); border: 1.5px solid var(--tuerkis);
   box-sizing: border-box; padding: 0; cursor: pointer;
   transition: left .5s, top .5s var(--kurve), width .25s, height .25s, background .25s;
 }
 /* Der Punkt ist 10–16 px groß; angetippt wird ein unsichtbares 44er-Feld darum
    (README „Was jeder Baustein kann“: Tap-Ziele mindestens 44 px). */
-.kb .kb-zinskurve__punkt::before { content: ""; position: absolute; inset: -17px; border-radius: 50%; }
+.kb .kb-zinskurve__punkt::before { content: ""; position: absolute; inset: -17px; border-radius: var(--radius-kreis); }
 .kb .kb-zinskurve__punkt[data-hell="an"] { width: 14px; height: 14px; background: var(--ink); }
 .kb .kb-zinskurve__punkt[data-ist="an"] {
   width: 16px; height: 16px; background: var(--tuerkis); border: 0;
@@ -927,40 +927,40 @@
 }
 .kb .kb-zinskurve__wert {
   position: absolute; transform: translate(-50%, -100%);
-  font: 500 11px var(--sans); color: var(--muted); white-space: nowrap;
+  font: 500 var(--grad-11) var(--sans); color: var(--muted); white-space: nowrap;
   pointer-events: none; font-variant-numeric: tabular-nums;
   transition: top .5s var(--kurve), color .3s;
 }
 .kb .kb-zinskurve__wert[data-hell="an"] { color: var(--ink); }
-.kb .kb-zinskurve__wert[data-ist="an"] { font-weight: 700; font-size: 13px; color: var(--tuerkis); }
+.kb .kb-zinskurve__wert[data-ist="an"] { font-weight: 700; font-size: var(--grad-13); color: var(--tuerkis); }
 .kb .kb-zinskurve__achse {
   position: absolute; bottom: -2px; transform: translateX(-50%);
-  font: 500 11px var(--sans); color: var(--muted); white-space: nowrap; pointer-events: none;
+  font: 500 var(--grad-11) var(--sans); color: var(--muted); white-space: nowrap; pointer-events: none;
 }
 .kb .kb-zinskurve__achse[data-ist="an"] { font-weight: 700; color: var(--tuerkis); }
 /* Die Beschriftung unter der Achse braucht Platz, den das SVG nicht hat. */
-.kb .kb-zinskurve { padding-bottom: 18px; }
+.kb .kb-zinskurve { padding-bottom: var(--luft-l); }
 @media (prefers-reduced-motion: reduce) {
   .kb .kb-zinskurve__best { stroke-dasharray: none; stroke-dashoffset: 0; }
   .kb .kb-zinskurve__punkt[data-ist="an"] { animation: none; }
 }
 /* F:88 — der Hinweis, wenn die Kurve nicht für den eingestellten Betrag gilt. */
-.kb .kb-zinskurve__fuss { display: block; margin-top: 10px; font: italic 300 12.5px/1.5 var(--serif); color: var(--muted); }
+.kb .kb-zinskurve__fuss { display: block; margin-top: var(--luft-s); font: italic 300 var(--grad-13)/1.5 var(--serif); color: var(--muted); }
 
 /* Kennzahlen (K:107-112). Die große steht im schmalen Satz über die volle Breite. */
 .kb .kb-kennzahlen {
-  display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 14px 28px;
-  margin-top: 22px; padding-top: 12px;
+  display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: var(--luft-m) var(--luft-xl);
+  margin-top: var(--luft-l); padding-top: var(--luft-m);
 }
-.kb .kb-kennzahl__label { display: block; font: 400 13px var(--sans); color: var(--muted); }
-.kb .kb-kennzahl__zeile { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-.kb .kb-kennzahl__wert { font: 700 clamp(20px, 3.2vw, 24px)/1.1 var(--serif); font-variant-numeric: tabular-nums; }
-.kb .kb-kennzahl__unter { font: italic 300 12.5px var(--serif); color: var(--muted); }
-.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(24px, 4vw, 30px); color: var(--tuerkis); }
+.kb .kb-kennzahl__label { display: block; font: 400 var(--grad-13) var(--sans); color: var(--muted); }
+.kb .kb-kennzahl__zeile { display: flex; align-items: baseline; gap: var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-xs); }
+.kb .kb-kennzahl__wert { font: 700 clamp(var(--grad-20), 3.2vw, var(--grad-26))/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+.kb .kb-kennzahl__unter { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.kb .kb-kennzahl[data-ton="werkzeug"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(var(--grad-26), 4vw, var(--grad-28)); color: var(--tuerkis); }
 .kb .kb-kennzahl[data-ton="grau"] .kb-kennzahl__wert { color: var(--muted); }
 .kb .kb-kennzahl[data-ton="gruen"] .kb-kennzahl__wert { color: var(--green); }
 .kb .kb-kennzahl[data-ton="magenta"] .kb-kennzahl__wert { color: var(--pink); }
-.kb .kb-kennzahl[data-gross="an"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(28px, 5vw, 40px); }
+.kb .kb-kennzahl[data-gross="an"] .kb-kennzahl__wert { font-weight: 900; font-size: clamp(var(--grad-28), 5vw, var(--grad-44)); }
 @container kb (max-width: 559px) {
   .kb .kb-kennzahlen { grid-template-columns: 1fr 1fr; }
   .kb .kb-kennzahl[data-gross="an"] { grid-column: 1 / -1; }
@@ -969,7 +969,7 @@
 /* ── Podest (K:115-165) ───────────────────────────────────────────────────────────── */
 .kb .kb-podest-block { margin-top: 54px; }
 /* K:117 — der Titel steht zwischen zwei Linien, die von außen nach innen wachsen. */
-.kb .kb-podest__titel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.kb .kb-podest__titel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--luft-m); }
 .kb .kb-podest__titel i { height: 1px; background: var(--ink-30); }
 .kb .kb-podest__titel i:first-child { transform-origin: right; }
 .kb .kb-podest__titel i:last-child { transform-origin: left; }
@@ -977,7 +977,7 @@
 
 /* K:118-122 — vier Linien statt eines Rahmens: sie zeichnen sich einzeln, die
    senkrechten .2 s später. Ein `border` könnte das nicht. */
-.kb .kb-podest { position: relative; margin-top: 28px; padding: clamp(20px, 4vw, 30px); }
+.kb .kb-podest { position: relative; margin-top: var(--luft-xl); padding: clamp(var(--luft-l), 4vw, var(--luft-xl)); }
 .kb .kb-podest__rahmen { position: absolute; background: var(--tuerkis); transform-origin: center; }
 .kb .kb-podest__rahmen--oben { left: 0; right: 0; top: 0; height: 2px; }
 .kb .kb-podest__rahmen--unten { left: 0; right: 0; bottom: 0; height: 1px; }
@@ -986,33 +986,33 @@
 /* K:123 — der Stempel sitzt über der Oberlinie, nicht darunter. */
 .kb .kb-podest__stempel { position: absolute; right: 20px; top: -13px; }
 
-.kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px 32px; align-items: start; }
-.kb .kb-podest__kopf { display: flex; align-items: center; gap: 14px; }
+.kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
+.kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
 .kb .kb-podest__namen { min-width: 0; }
-.kb .kb-podest__namen b { display: block; font: 700 21px var(--serif); }
-.kb .kb-podest__namen span { font: italic 300 13.5px var(--serif); color: var(--muted); }
-.kb .kb-podest__namen--klein b { font-size: 17px; }
-.kb .kb-podest__namen--klein span { font-size: 12.5px; }
-.kb .kb-podest__zahl { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.kb .kb-podest__namen b { display: block; font: 700 var(--grad-22) var(--serif); }
+.kb .kb-podest__namen span { font: italic 300 var(--grad-14) var(--serif); color: var(--muted); }
+.kb .kb-podest__namen--klein b { font-size: var(--grad-18); }
+.kb .kb-podest__namen--klein span { font-size: var(--grad-13); }
+.kb .kb-podest__zahl { display: flex; align-items: baseline; gap: var(--luft-m); margin-top: var(--luft-l); flex-wrap: wrap; }
 .kb .kb-podest__zins {
-  font: 900 clamp(44px, 8vw, 60px)/1 var(--serif); letter-spacing: -.02em;
+  font: 900 clamp(var(--grad-44), 8vw, var(--grad-44))/1 var(--serif); letter-spacing: -.02em;
   color: var(--tuerkis); font-variant-numeric: tabular-nums;
 }
-.kb .kb-podest__zins-label { font: italic 300 14px var(--serif); color: var(--muted); }
-.kb .kb-podest__merkmale { display: flex; gap: 6px 16px; flex-wrap: wrap; margin-top: 14px; }
-.kb .kb-podest__merkmale span { display: inline-flex; align-items: center; gap: 6px; font: 500 13px var(--sans); color: var(--green-ink); }
-.kb .kb-podest__aktionen { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; margin-top: 18px; }
+.kb .kb-podest__zins-label { font: italic 300 var(--grad-14) var(--serif); color: var(--muted); }
+.kb .kb-podest__merkmale { display: flex; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-m); }
+.kb .kb-podest__merkmale span { display: inline-flex; align-items: center; gap: var(--luft-s); font: 500 var(--grad-13) var(--sans); color: var(--green-ink); }
+.kb .kb-podest__aktionen { display: flex; align-items: center; gap: var(--luft-m) var(--luft-l); flex-wrap: wrap; margin-top: var(--luft-l); }
 
 /* K:150-164 — Platz 2 und 3: keine Rahmen, nur eine Unterlinie und die große Rangziffer. */
-.kb .kb-plaetze { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-top: 8px; }
-.kb .kb-platz { position: relative; padding: 22px 0 10px; border-bottom: 1px solid var(--ink-20, rgba(51,74,39,.2)); display: flex; flex-direction: column; }
-.kb .kb-platz__rang { position: absolute; right: 0; top: 14px; font: 900 40px/1 var(--serif); color: var(--ink-16); }
-.kb .kb-platz__zahl { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
-.kb .kb-platz__zahl span { font: 900 30px/1 var(--serif); font-variant-numeric: tabular-nums; }
-.kb .kb-platz__zahl small { font: italic 300 12.5px var(--serif); color: var(--muted); }
-.kb .kb-platz__fuss { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 10px; }
-.kb .kb-platz .kb__punktzeile-k { font-size: 13.5px; }
-.kb .kb-platz .kb__punktzeile-v[data-gross="an"] { font-size: 16px; }
+.kb .kb-plaetze { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--luft-xl); margin-top: var(--luft-s); }
+.kb .kb-platz { position: relative; padding: var(--luft-l) 0 var(--luft-s); border-bottom: 1px solid var(--ink-20, var(--ink-20)); display: flex; flex-direction: column; }
+.kb .kb-platz__rang { position: absolute; right: 0; top: 14px; font: 900 var(--grad-44)/1 var(--serif); color: var(--ink-16); }
+.kb .kb-platz__zahl { display: flex; align-items: baseline; gap: var(--luft-s); margin-top: var(--luft-m); }
+.kb .kb-platz__zahl span { font: 900 var(--grad-28)/1 var(--serif); font-variant-numeric: tabular-nums; }
+.kb .kb-platz__zahl small { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.kb .kb-platz__fuss { display: flex; align-items: center; justify-content: space-between; gap: var(--luft-m); margin-top: auto; padding-top: var(--luft-s); }
+.kb .kb-platz .kb__punktzeile-k { font-size: var(--grad-14); }
+.kb .kb-platz .kb__punktzeile-v[data-gross="an"] { font-size: var(--grad-16); }
 
 @container kb (max-width: 559px) {
   .kb .kb-podest__raster { grid-template-columns: 1fr; }
@@ -1028,16 +1028,16 @@
    „ab" ist bei Krediten keine Zierde, sondern die Aussage. Deshalb ein Mindestmaß mit
    Luft nach oben: die Namensspalte gibt den Platz her, die Ausrichtung bleibt. */
 .kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(100px, auto) auto; --kb-liste-gap: 20px; }
-.kb .kb-liste__titel { display: block; font: 700 clamp(22px, 3.4vw, 26px) var(--serif); }
-.kb .kb-liste__filter { display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap; margin-top: 14px; }
-.kb .kb-liste__filter-label { font: 400 13px var(--sans); color: var(--muted); margin-right: 4px; }
-.kb .kb-liste__zeile { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-top: 14px; }
-.kb .kb-liste__zahl { font: italic 300 13px var(--serif); color: var(--muted); }
-.kb .kb-liste__sortieren { display: flex; align-items: center; gap: 16px; }
-.kb .kb-liste__sortieren > span { font: 400 13px var(--sans); color: var(--muted); }
+.kb .kb-liste__titel { display: block; font: 700 clamp(var(--grad-22), 3.4vw, var(--grad-26)) var(--serif); }
+.kb .kb-liste__filter { display: flex; align-items: center; gap: var(--luft-s) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
+.kb .kb-liste__filter-label { font: 400 var(--grad-13) var(--sans); color: var(--muted); margin-right: var(--luft-xs); }
+.kb .kb-liste__zeile { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-m); }
+.kb .kb-liste__zahl { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }
+.kb .kb-liste__sortieren { display: flex; align-items: center; gap: var(--luft-m); }
+.kb .kb-liste__sortieren > span { font: 400 var(--grad-13) var(--sans); color: var(--muted); }
 .kb .kb-liste__tab {
-  position: relative; border: 0; background: transparent; padding: 10px 0;
-  font: 400 14px var(--sans); color: var(--ink); cursor: pointer;
+  position: relative; border: 0; background: transparent; padding: var(--luft-s) 0;
+  font: 400 var(--grad-14) var(--sans); color: var(--ink); cursor: pointer;
 }
 .kb .kb-liste__tab[data-aktiv="an"] { font-weight: 700; }
 .kb .kb-liste__tab i {
@@ -1049,9 +1049,9 @@
 /* K:182-184 — Tabellenkopf unter der Doppellinie, Zahlen rechtsbündig. */
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
-  align-items: end; padding: 10px 0 8px; margin-top: 12px;
-  border-top: 2px solid var(--ink); box-shadow: 0 3px 0 -2px var(--ink);
-  font: 700 10.5px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  align-items: end; padding: var(--luft-s) 0 var(--luft-s); margin-top: var(--luft-m);
+  border-top: 2px solid var(--ink); box-shadow: var(--doppellinie-schatten);
+  font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
 }
 .kb .kb-liste__kopf-namen { grid-column: span 2; }
 .kb .kb-liste__kopf-rechts { text-align: right; white-space: nowrap; }
@@ -1064,13 +1064,13 @@
   --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(84px, auto) minmax(44px, auto) auto;
 }
 .kb .kb__zeile-dritte {
-  display: flex; align-items: center; gap: 7px;
-  font: 600 13px var(--sans); letter-spacing: .04em; white-space: nowrap;
+  display: flex; align-items: center; gap: var(--luft-s);
+  font: 600 var(--grad-13) var(--sans); letter-spacing: .04em; white-space: nowrap;
 }
-.kb .kb__zeile-dritte i { width: 7px; height: 7px; border-radius: 50%; background: var(--tuerkis); flex-shrink: 0; }
+.kb .kb__zeile-dritte i { width: 7px; height: 7px; border-radius: var(--radius-kreis); background: var(--tuerkis); flex-shrink: 0; }
 .kb .kb__zeile-dritte i[data-gut="an"] { background: var(--green); }
 
-.kb .kb-liste__ausgeschlossen { margin: 14px 0 0; font: italic 300 13px/1.5 var(--serif); color: var(--muted); }
+.kb .kb-liste__ausgeschlossen { margin: var(--luft-m) 0 0; font: italic 300 var(--grad-13)/1.5 var(--serif); color: var(--muted); }
 
 /* Klasse B: keine Zahlenspalten, dafür Platz für den Namen und die Prüfsiegel.
    Siehe den Kopf von components/kursblatt/vergleich/Anbieterliste.tsx. */
@@ -1080,14 +1080,14 @@
    96/367/49/155, und Zeilen ohne Siegel wären wieder anders. Nur feste Spalten stehen
    untereinander. */
 .kb .kb-liste--anbieter { --kb-liste-spalten: 96px minmax(0, 1fr) 108px 156px; }
-.kb .kb-liste__ohne-zahlen { margin: 12px 0 0; max-width: 60ch; }
+.kb .kb-liste__ohne-zahlen { margin: var(--luft-m) 0 0; max-width: 60ch; }
 .kb .kb-liste--anbieter .kb-liste__kopf-dritte { text-align: right; }
-.kb .kb-zeile__siegel { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+.kb .kb-zeile__siegel { display: flex; align-items: center; justify-content: flex-end; gap: var(--luft-s); min-width: 0; }
 /* Höhe als Obergrenze, nicht als Maß: zwei Siegel in 108 px müssen schrumpfen dürfen,
    ohne ihr Seitenverhältnis zu verlieren. */
 .kb .kb-zeile__siegel img { display: block; max-height: 34px; max-width: 100%; width: auto; height: auto; min-width: 0; }
 /* Ohne Details-Knopf trägt die Aktionszeile nur „Merken“ — sie darf dichter stehen. */
-.kb .kb-liste--anbieter .kb__zeile-aktionen { padding-bottom: 12px; }
+.kb .kb-liste--anbieter .kb__zeile-aktionen { padding-bottom: var(--luft-m); }
 /* Klasse A koppelt das Hervorheben an den Punkt im Band (`data-hell`); hier gibt es kein
    Band, also reicht der Zeiger — und das ohne eine Zeile JavaScript. */
 .kb .kb-liste--anbieter .kb__zeile:hover { background: var(--ink-05); }
@@ -1102,31 +1102,31 @@
 .kb .kb__zeile-linie--unten { bottom: -1px; transform-origin: right; }
 .kb .kb__zeile[data-hell="an"] .kb__zeile-linie { transform: scaleX(1); }
 
-.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: 16px 0 4px; }
+.kb .kb__zeile-raster { display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap); align-items: center; padding: var(--luft-m) 0 var(--luft-xs); }
 .kb .kb__zeile-namen { min-width: 0; }
-.kb .kb__zeile-namen b { display: flex; align-items: center; gap: 8px; font: 700 15.5px/1.2 var(--serif); text-wrap: balance; }
+.kb .kb__zeile-namen b { display: flex; align-items: center; gap: var(--luft-s); font: 700 var(--grad-16)/1.2 var(--serif); text-wrap: balance; }
 /* 🚨 Direktes Kind: `.kb__zeile-namen span` traf auch den Mini-Stempel, der im Namen
    steht — und überschrieb dessen `display: none` im schmalen Satz, weil beide Regeln
    dieselbe Spezifität haben und diese hier später kommt. */
-.kb .kb__zeile-namen > span { display: block; margin-top: 2px; font: 400 12.5px var(--sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kb .kb__zeile-namen > span { display: block; margin-top: var(--luft-xxs); font: 400 var(--grad-13) var(--sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .kb .kb__zeile-haupt { text-align: right; }
-.kb .kb__zeile-haupt b { display: block; font: 900 21px var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb__zeile-haupt b { display: block; font: 900 var(--grad-22) var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .kb .kb__zeile[data-ist="an"] .kb__zeile-haupt b { color: var(--tuerkis); }
-.kb .kb__zeile-balken { display: block; height: 3px; max-width: 80px; margin: 6px 0 0 auto; background: rgba(51, 74, 39, .5); transition: width .7s var(--kurve), background .3s; }
+.kb .kb__zeile-balken { display: block; height: 3px; max-width: 80px; margin: var(--luft-s) 0 0 auto; background: var(--ink-45); transition: width .7s var(--kurve), background .3s; }
 .kb .kb__zeile[data-ist="an"] .kb__zeile-balken { background: var(--tuerkis); }
-.kb .kb__zeile-total { text-align: right; font: 700 17px var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb__zeile-total { text-align: right; font: 700 var(--grad-18) var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
 /* Im schmalen Satz rückt die Gesamtzahl unter die Hauptzahl (K:519). */
-.kb .kb__zeile-total-eng { display: none; margin-top: 6px; font: 600 13px var(--sans); font-variant-numeric: tabular-nums; }
+.kb .kb__zeile-total-eng { display: none; margin-top: var(--luft-s); font: 600 var(--grad-13) var(--sans); font-variant-numeric: tabular-nums; }
 
-.kb .kb__zeile-aktionen { display: flex; align-items: center; gap: 20px; padding: 0 0 10px 116px; }
+.kb .kb__zeile-aktionen { display: flex; align-items: center; gap: var(--luft-l); padding: 0 0 var(--luft-s) 116px; }
 .kb .kb__details-knopf {
-  display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent;
-  padding: 8px 0; min-height: 40px; font: 500 13.5px var(--sans); color: var(--ink); cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: transparent;
+  padding: var(--luft-s) 0; min-height: 40px; font: 500 var(--grad-14) var(--sans); color: var(--ink); cursor: pointer;
 }
 /* Chevron dreht sich beim Aufklappen mit Überschwung um 180° (K:201). */
 .kb .kb__details-knopf i {
-  width: 7px; height: 7px; margin-top: -3px;
+  width: 7px; height: 7px; margin-top: calc(-1 * var(--luft-xs));
   border-right: 1.4px solid currentColor; border-bottom: 1.4px solid currentColor;
   transform: rotate(45deg); transition: transform .4s var(--ueber);
 }
@@ -1136,14 +1136,14 @@
 .kb .kb__details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--kurve); }
 .kb .kb__details[data-offen="an"] { grid-template-rows: 1fr; }
 .kb .kb__details > div { overflow: hidden; }
-.kb .kb__details-raster { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 36px; padding: 0 0 20px 116px; }
-.kb .kb__details-raster .kb__punktzeile-k { font-size: 13.5px; color: var(--muted); }
-.kb .kb__details-raster .kb__punktzeile-v { font: 600 13.5px var(--sans); }
-.kb .kb__pflicht { grid-column: 1 / -1; margin-top: 8px; }
-.kb .kb__pflicht summary { font: 400 12.5px var(--sans); color: var(--muted); cursor: pointer; }
-.kb .kb__pflicht p { margin: 6px 0 0; font: 400 12px/1.5 var(--sans); color: var(--muted); white-space: pre-wrap; }
+.kb .kb__details-raster { display: grid; grid-template-columns: 1fr 1fr; gap: var(--luft-xxs) var(--luft-xl); padding: 0 0 var(--luft-l) 116px; }
+.kb .kb__details-raster .kb__punktzeile-k { font-size: var(--grad-14); color: var(--muted); }
+.kb .kb__details-raster .kb__punktzeile-v { font: 600 var(--grad-14) var(--sans); }
+.kb .kb__pflicht { grid-column: 1 / -1; margin-top: var(--luft-s); }
+.kb .kb__pflicht summary { font: 400 var(--grad-13) var(--sans); color: var(--muted); cursor: pointer; }
+.kb .kb__pflicht p { margin: var(--luft-s) 0 0; font: 400 var(--grad-12)/1.5 var(--sans); color: var(--muted); white-space: pre-wrap; }
 
-.kb .kb-liste__mehr { margin: 14px 0 0; border: 0; background: none; padding: 0; font: 600 14px var(--sans); color: var(--green-ink); cursor: pointer; }
+.kb .kb-liste__mehr { margin: var(--luft-m) 0 0; border: 0; background: none; padding: 0; font: 600 var(--grad-14) var(--sans); color: var(--green-ink); cursor: pointer; }
 .kb .kb-liste__mehr:hover { text-decoration: underline; }
 
 @container kb (max-width: 559px) {
@@ -1152,7 +1152,7 @@
      stehen dann unter dem Namen statt vor der Pille. */
   .kb .kb-liste--anbieter { --kb-liste-spalten: 64px minmax(0, 1fr) auto; --kb-liste-gap: 12px; }
   .kb .kb-liste--anbieter .kb-liste__kopf-dritte { display: none; }
-  .kb .kb-zeile__siegel { grid-column: 2; grid-row: 2; justify-content: flex-start; margin-top: 8px; }
+  .kb .kb-zeile__siegel { grid-column: 2; grid-row: 2; justify-content: flex-start; margin-top: var(--luft-s); }
   .kb .kb-liste--anbieter .kb__zeile-raster { align-items: start; }
   .kb .kb-liste__kopf-total, .kb .kb__zeile-total { display: none; }
   .kb .kb-liste__kopf-dritte, .kb .kb__zeile-dritte { display: none; }
@@ -1174,71 +1174,71 @@
      und ein gedrehter Kasten hat eine größere achsenparallele Hülle. Wer hier Breiten
      prüft, liest den berechneten Wert, nicht das Rechteck. */
   width: min(360px, calc(100vw - 32px));
-  background: #fff; border: 1px solid rgba(51, 74, 39, .22);
-  box-shadow: 2px 4px 0 rgba(51, 74, 39, .08), 0 24px 40px -22px rgba(51, 74, 39, .45);
-  padding: 16px 18px 14px; box-sizing: border-box;
-  font-family: var(--font-body, "Open Sans", sans-serif); color: #334A27;
+  background: var(--auflage); border: 1px solid var(--ink-20);
+  box-shadow: var(--schatten-blatt);
+  padding: var(--luft-m) var(--luft-l) var(--luft-m); box-sizing: border-box;
+  font-family: var(--font-body, "Open Sans", sans-serif); color: var(--ink);
   animation: fl-zettel .7s cubic-bezier(.2, .8, .2, 1) both;
 }
-.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: #45A117; border: 2px solid #fff; box-sizing: border-box; }
-.kb-zettel__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.kb-zettel__kopf .kb__kicker { font: 700 10.5px/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: #686C6A; }
-.kb-zettel__leeren { border: 0; background: transparent; padding: 6px 0; font: 400 12px var(--font-body, sans-serif); color: #686C6A; cursor: pointer; text-decoration: underline dotted; }
-.kb-zettel__raster { display: grid; gap: 14px; margin-top: 10px; }
-.kb-zettel__karte { position: relative; padding-top: 10px; border-top: 2px solid #334A27; min-width: 0; }
-.kb-zettel__karte[data-ist="an"] { border-top-color: #0B7F66; }
-.kb-zettel__weg { position: absolute; right: -6px; top: 2px; border: 0; background: transparent; padding: 6px 8px; font: 400 16px/1 var(--font-body, sans-serif); color: #686C6A; cursor: pointer; }
-.kb-zettel__karte b { display: block; font: 700 13px var(--font-heading, serif); padding-right: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.kb-zettel__wert { display: block; margin-top: 4px; font: 900 22px/1.2 var(--font-heading, serif); font-variant-numeric: tabular-nums; color: #334A27; }
-.kb-zettel__karte[data-ist="an"] .kb-zettel__wert { color: #0B7F66; }
+.kb-zettel__knoten { position: absolute; left: -5px; top: 22px; width: 10px; height: 10px; border-radius: var(--radius-kreis); background: var(--green); border: 2px solid var(--auf-tinte); box-sizing: border-box; }
+.kb-zettel__kopf { display: flex; justify-content: space-between; align-items: baseline; gap: var(--luft-m); }
+.kb-zettel__kopf .kb__kicker { font: 700 var(--grad-kicker)/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.kb-zettel__leeren { border: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-12) var(--font-body, sans-serif); color: var(--muted); cursor: pointer; text-decoration: underline dotted; }
+.kb-zettel__raster { display: grid; gap: var(--luft-m); margin-top: var(--luft-s); }
+.kb-zettel__karte { position: relative; padding-top: var(--luft-s); border-top: 2px solid var(--ink); min-width: 0; }
+.kb-zettel__karte[data-ist="an"] { border-top-color: var(--tuerkis); }
+.kb-zettel__weg { position: absolute; right: -6px; top: 2px; border: 0; background: transparent; padding: var(--luft-s) var(--luft-s); font: 400 var(--grad-16)/1 var(--font-body, sans-serif); color: var(--muted); cursor: pointer; }
+.kb-zettel__karte b { display: block; font: 700 var(--grad-13) var(--font-heading, serif); padding-right: var(--luft-l); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__wert { display: block; margin-top: var(--luft-xs); font: 900 var(--grad-22)/1.2 var(--font-heading, serif); font-variant-numeric: tabular-nums; color: var(--ink); }
+.kb-zettel__karte[data-ist="an"] .kb-zettel__wert { color: var(--tuerkis); }
 /* Bei drei Karten teilen sich 360 px auf je gut 100 px auf — „ab 0,68 %" bricht dort in
    900 22px um. Die Zahl wird kleiner, statt über zwei Zeilen zu laufen; bei einer oder
    zwei Karten bleibt sie so groß, wie die Übergabe sie setzt (K:224). */
-.kb-zettel[data-anzahl="3"] .kb-zettel__wert { font-size: 17px; }
-.kb-zettel__zeile { display: block; margin-top: 2px; font: 400 12px var(--font-body, sans-serif); font-variant-numeric: tabular-nums; }
-.kb-zettel__klein { display: block; font: 400 11.5px var(--font-body, sans-serif); color: #686C6A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.kb-zettel__fuss { display: block; margin-top: 12px; font: italic 300 11.5px var(--font-heading, serif); color: #686C6A; }
+.kb-zettel[data-anzahl="3"] .kb-zettel__wert { font-size: var(--grad-18); }
+.kb-zettel__zeile { display: block; margin-top: var(--luft-xxs); font: 400 var(--grad-12) var(--font-body, sans-serif); font-variant-numeric: tabular-nums; }
+.kb-zettel__klein { display: block; font: 400 var(--grad-12) var(--font-body, sans-serif); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-zettel__fuss { display: block; margin-top: var(--luft-m); font: italic 300 var(--grad-12) var(--font-heading, serif); color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .kb-zettel { animation: none; } }
 
 /* ── Zeiger (ersetzt RechnerGauge) ────────────────────────────────────────────────── */
-.kb .kb-zeiger { position: relative; width: 190px; max-width: 100%; margin: 26px auto 0; }
+.kb .kb-zeiger { position: relative; width: 190px; max-width: 100%; margin: var(--luft-l) auto 0; }
 .kb .kb-zeiger__bild { display: block; width: 100%; height: auto; }
 .kb .kb-zeiger__innen { fill: none; stroke: var(--ink-25); stroke-width: 1; }
 .kb .kb-zeiger__spur { fill: none; stroke: var(--ink-12); stroke-width: 5; }
 .kb .kb-zeiger__bogen { fill: none; stroke: var(--werkzeug); stroke-width: 5; stroke-linecap: butt; }
 .kb .kb-zeiger__mitte {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px; text-align: center; pointer-events: none;
+  align-items: center; justify-content: center; gap: var(--luft-xxs); text-align: center; pointer-events: none;
 }
-.kb .kb-zeiger__mitte b { font: 900 30px/1 var(--serif); font-variant-numeric: tabular-nums; color: var(--werkzeug); }
-.kb .kb-zeiger__mitte span { font: 400 12px var(--sans); color: var(--muted); }
+.kb .kb-zeiger__mitte b { font: 900 var(--grad-28)/1 var(--serif); font-variant-numeric: tabular-nums; color: var(--werkzeug); }
+.kb .kb-zeiger__mitte span { font: 400 var(--grad-12) var(--sans); color: var(--muted); }
 
 /* ── Messlatte (ersetzt RechnerBenchmark) ─────────────────────────────────────────── */
-.kb .kb-messlatte { margin-top: 26px; }
+.kb .kb-messlatte { margin-top: var(--luft-l); }
 .kb .kb-messlatte__zeile {
   display: grid; grid-template-columns: minmax(96px, auto) 1fr minmax(72px, auto);
-  align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid var(--ink-12);
+  align-items: center; gap: var(--luft-m); padding: var(--luft-s) 0; border-top: 1px solid var(--ink-12);
 }
-.kb .kb-messlatte__name { font: 400 13.5px var(--sans); color: var(--muted); }
+.kb .kb-messlatte__name { font: 400 var(--grad-14) var(--sans); color: var(--muted); }
 .kb .kb-messlatte__balken { height: 8px; background: var(--ink-30); transition: width .9s var(--kurve); }
 .kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__balken { background: var(--werkzeug); }
 .kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__name { color: var(--ink); font-weight: 600; }
-.kb .kb-messlatte__wert { text-align: right; font: 700 15px var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb-messlatte__wert { text-align: right; font: 700 var(--grad-15) var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
   .kb .kb-messlatte__balken { transition: none; }
   .kb .kb-zeiger__bogen { transition: none !important; }
 }
 
 /* ── Rassenwahl (financeads-Liste statt drei Gruppennummern) ──────────────────────── */
-.kb .kb-rassenwahl__zeile { display: flex; align-items: baseline; gap: 12px; height: 54px; }
+.kb .kb-rassenwahl__zeile { display: flex; align-items: baseline; gap: var(--luft-m); height: 54px; }
 .kb .kb-rassenwahl__feld {
   flex: 1; min-width: 0; border: 0; background: transparent; padding: 0; outline: 0;
-  font: 700 clamp(20px, 2.8vw, 26px) var(--serif); color: var(--ink);
+  font: 700 clamp(var(--grad-20), 2.8vw, var(--grad-26)) var(--serif); color: var(--ink);
   letter-spacing: -.01em;
 }
-.kb .kb-rassenwahl__feld::placeholder { font: italic 300 clamp(16px, 2.2vw, 19px) var(--serif); color: var(--muted); }
+.kb .kb-rassenwahl__feld::placeholder { font: italic 300 clamp(var(--grad-16), 2.2vw, var(--grad-20)) var(--serif); color: var(--muted); }
 .kb .kb-rassenwahl__feld:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
 .kb .kb-rassenwahl__gruppe {
-  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
-  font: italic 300 13px var(--serif); color: var(--muted); white-space: nowrap;
+  display: inline-flex; align-items: center; gap: var(--luft-s); flex-shrink: 0;
+  font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap;
 }

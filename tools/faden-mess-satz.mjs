@@ -31,7 +31,12 @@ const SAMMLER = `(() => {
   const sichtbar = (el, r) => r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden";
   const textVon = (el) => [...el.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent.trim()).join(" ").trim();
 
-  for (const el of document.querySelectorAll("body *")) {
+  // 🚨 Nur der Faden selbst. Ein klassenloses DIV direkt unter body ist im Dev-Modus
+  // die Next-Overlay: die ragt immer 12 px heraus und hat mit dem Satz nichts zu tun.
+  const wurzeln = document.querySelectorAll(".faden-shell, main, .kb, .cookie-bar");
+  const knoten = new Set();
+  for (const w of wurzeln) { knoten.add(w); for (const k of w.querySelectorAll("*")) knoten.add(k); }
+  for (const el of knoten) {
     const r = el.getBoundingClientRect();
     if (!sichtbar(el, r)) continue;
     const s = getComputedStyle(el);
@@ -64,7 +69,9 @@ const SAMMLER = `(() => {
       // Nur waagerecht, nur bei Elementen im normalen Fluss, und nur wenn der Elternteil
       // wirklich abschneidet — ein absolut gesetzter Überhang ist gewollt.
       const raus = Math.round(Math.max(li - r.left, r.right - re));
-      if (r.width > 0 && raus > 1.5 && s.position === "static" && /hidden|clip/.test(ps.overflowX))
+      // Ein verschobenes Element ist die Bahn eines Sliders — die ragt mit Absicht heraus.
+      const faehrt = s.transform !== "none" || ps.transform !== "none";
+      if (r.width > 0 && raus > 1.5 && !faehrt && s.position === "static" && /hidden|clip/.test(ps.overflowX))
         quetsch.push({ art: "ragt heraus", wo, text, ist: raus, soll: 0 });
     }
     if (eigenerText && parseFloat(s.fontSize) >= 13 && s.lineHeight !== "normal" && parseFloat(s.lineHeight) / parseFloat(s.fontSize) < 1.15 && (el.textContent||"").trim().length > 60)

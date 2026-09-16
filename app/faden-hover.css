@@ -5,7 +5,7 @@
 
 /* Trenner: 9 px breit, zwei Linien (--linie) mit Spark in der Mitte (01-css.html:483–487) */
 .faden-shell .trenner { --linie: 70px; flex: none; width: 9px; position: relative; }
-.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: -6px 0 0 -6px; }
+.faden-shell .trenner .spark { position: absolute; left: 50%; top: 50%; margin: calc(-1 * var(--luft-s)) 0 0 calc(-1 * var(--luft-s)); }
 .faden-shell .trenner::before, .faden-shell .trenner::after { content: ""; position: absolute; left: 4px; width: 1px; height: var(--linie); background: var(--rule-strong); }
 .faden-shell .trenner::before { bottom: calc(50% + 11px); } .faden-shell .trenner::after { top: calc(50% + 11px); }
 /* Durchgehender Trenner (Werkzeugreihe im Hero): eine Linie statt zweier, kein Spark.
@@ -24,29 +24,29 @@
 /* Werkzeugreihe im Hero: drei Kacheln, Trenner mit kurzen Linien, docken beim Laden an (01-css.html:482, 486, 488–493) */
 .faden-shell .landing-unten { align-self: start; width: min(820px, 94%); display: grid; justify-items: center; will-change: opacity, transform; }
 .faden-shell .landing-sub b { font-weight: 700; font-variant-numeric: tabular-nums; }
-.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: 8px; }
+.faden-shell .werkzeugreihe { position: relative; display: flex; align-items: stretch; justify-content: center; width: 100%; margin-top: var(--luft-s); }
 .faden-shell .werkzeugreihe .trenner { --linie: 28px; }
 .faden-shell .werkzeugreihe .trenner--voll { --linie: 78px; }
 /* 🚨 Hier stand ein Einblendzustand für die Trennlinien. Er war nötig, solange die
    Kacheln nacheinander andockten — die Striche standen sonst im leeren Raum. Seit dem
    13.09.2026 hat der Hero gar keine Auftrittsanimation mehr: alles steht sofort. */
-.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: 12px 22px; display: grid; gap: 3px; align-content: center; cursor: pointer; position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
-.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: 26px; font-weight: 900; line-height: 1.1; }
-.faden-shell .werkzeug-k b small { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 6px; font-family: var(--sans); }
-.faden-shell .werkzeug-k span { font-size: 12.5px; color: var(--muted); }
-.faden-shell .werkzeug-k .pfeil-link { margin-top: 4px; font-size: 13px; }
+.faden-shell .werkzeug-k { flex: 1 1 0; max-width: 236px; text-align: left; border: 0; background: none; padding: var(--luft-m) var(--luft-l); display: grid; gap: var(--luft-xs); align-content: center; cursor: pointer; position: relative; z-index: 1; color: var(--ink); text-decoration: none; }
+.faden-shell .werkzeug-k b { font-family: var(--serif); font-size: var(--grad-26); font-weight: 900; line-height: 1.1; }
+.faden-shell .werkzeug-k b small { font-size: var(--grad-13); font-weight: 700; color: var(--muted); margin-left: var(--luft-s); font-family: var(--sans); }
+.faden-shell .werkzeug-k span { font-size: var(--grad-13); color: var(--muted); }
+.faden-shell .werkzeug-k .pfeil-link { margin-top: var(--luft-xs); font-size: var(--grad-13); }
 .faden-shell .werkzeug-k:hover > .pfeil-link i { width: 30px; }
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
-.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: 13.5px; display: grid; justify-items: center; gap: 5px; letter-spacing: .02em; cursor: pointer; font-family: inherit; }
-.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: 13px; animation: faden-wippen 2.2s ease-in-out infinite; }
+.faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
+.faden-shell .hero-cta i { width: 28px; height: 28px; border-radius: var(--radius-kreis); border: 1.5px solid var(--green); color: var(--green); display: grid; place-items: center; font-style: normal; font-size: var(--grad-13); animation: faden-wippen 2.2s ease-in-out infinite; }
 @keyframes faden-wippen { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
 @media (max-width: 900px) {
   /* 01-css.html:876–877, 883 */
   .faden-shell .werkzeugreihe { flex-wrap: wrap; justify-content: center; } .faden-shell .werkzeugreihe .trenner { display: none; }
-  .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: 6px 12px; display: flex; align-items: baseline; gap: 10px; }
-  .faden-shell .werkzeug-k b { font-size: 19px; } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
+  .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: var(--luft-s) var(--luft-m); display: flex; align-items: baseline; gap: var(--luft-s); }
+  .faden-shell .werkzeug-k b { font-size: var(--grad-20); } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
   .faden-shell .werkzeug-k .pfeil-link { margin: 0 0 0 auto; display: inline-flex; white-space: nowrap; }
   .faden-shell .hbox { display: none; }
   .faden-shell .hero-cta { bottom: 10px; }

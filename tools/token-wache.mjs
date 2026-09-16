@@ -84,18 +84,20 @@ export const farben = () => sammeln(({ block }) =>
     .map((m) => m[0].toLowerCase().replace(/\s+/g, ""))
     .filter((w) => w !== "rgba(0,0,0,0)" && w !== "transparent"));
 
-/** Schriftgrade — aus `font-size` UND aus dem `font:`-Kurzschreiben. */
+/** Schriftgrade — aus `font-size` UND aus dem `font:`-Kurzschreiben.
+ *  `var(--schrift-*)` ist eine Rolle, `var(--grad-*)` eine Sprosse der Leiter — beides
+ *  ist ein Token und zählt nicht als Fund. */
 export const schriftgrade = () => sammeln(({ block }) => {
   const aus = [];
   for (const w of werte(block, "font")) {
-    if (/var\(--schrift/.test(w)) continue;           // das ist ja gerade richtig
-    const c = w.match(/clamp\([^)]*\)/);
-    if (c) { aus.push(c[0].replace(/\s+/g, "")); continue; }
+    if (/var\(--(schrift|grad)/.test(w)) continue;
+    const c = w.match(/clamp\((?:[^()]|\([^()]*\))*\)/);
+    if (c) { if (/var\(--grad/.test(c[0])) continue; aus.push(c[0].replace(/\s+/g, "")); continue; }
     const g = w.match(/\d+(?:\.\d+)?(?:px|rem|em)/);
     if (g) aus.push(g[0]);
   }
   for (const w of werte(block, "font-size")) {
-    if (w === "inherit" || w === "unset" || /var\(--schrift/.test(w)) continue;
+    if (w === "inherit" || w === "unset" || /var\(--(schrift|grad)/.test(w)) continue;
     aus.push(w.replace(/\s+/g, "").replace(/!important$/, ""));
   }
   return aus;
