@@ -142,7 +142,13 @@ export default function Lineal({
     .map(([v, text]) => {
       const sx = ((v - min) / schritt) * px;
       return {
-        wert: v, x: sx, text, benannt: benannt.has(v),
+        wert: v, x: sx, text,
+        /* 🚨 „Benannt" heißt: da steht ein NAME statt einer Zahl („5 Jahre"). Eine Marke,
+           deren Beschriftung die formatierte Zahl selbst ist, ist keine — sie ist eine
+           gewöhnliche Skalenzahl und bleibt grau und leicht. Gemessen gegen die Vorlage:
+           dort stehen alle Skalenzahlen in `500 11px` grau, bei uns standen sie in
+           `600 11px` Tinte, weil jede Marke aus dem Schema als benannt galt. */
+        benannt: benannt.has(v) && benannt.get(v) !== fmtDe(v, dez),
         // Die Zahl direkt unter der Nadel blendet aus, damit sie den Wert nicht doppelt.
         sichtbar: Math.abs(sx - x) >= 24,
       };
@@ -150,7 +156,11 @@ export default function Lineal({
   const mittelAlle = mittel ? mittel * schritt : 0;
   const erstesMittel = mittelAlle ? Math.ceil(min / mittelAlle) * mittelAlle : 0;
 
-  const text = tippen ?? fmtDe(wert, dez) + (einheit ? ` ${einheit}` : "");
+  /* 🚨 Die Einheit steht NEBEN dem Feld, nicht darin (Vorlage „FL Lineal.dc.html":
+     `input … 700 26px #334A27` + `span … italic 300 15px #686C6A`). Im Feld nimmt sie
+     Größe und Farbe der Zahl an — dann liest sich „20.000 €" als ein Wort, und beim
+     Tippen muss man das Eurozeichen mit löschen. */
+  const text = tippen ?? fmtDe(wert, dez);
   const farbe = FARBE[werkzeug];
 
   const runter = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -235,6 +245,10 @@ export default function Lineal({
         <i className="kb-lineal__spitze" aria-hidden="true" />
       </div>
 
+      {/* Wert und Einheit in EINER Zeile, mittig — wie in der Vorlage
+          (`display:flex;justify-content:center;align-items:baseline;gap:7px;height:40px`).
+          Absolut positioniert wie vorher, damit die Skala darunter ihre Maße behält. */}
+      <div className="kb-lineal__wertzeile">
       <input
         id={eingabeId}
         className="kb-lineal__wert"
@@ -248,6 +262,8 @@ export default function Lineal({
         onBlur={() => { if (tippen !== null && tippen !== "") setzen(parseDe(tippen)); setTippen(null); }}
         onKeyDown={(e) => { e.stopPropagation(); if (e.key === "Enter") e.currentTarget.blur(); }}
       />
+      {einheit && <span className="kb-lineal__einheit" aria-hidden="true">{einheit}</span>}
+      </div>
 
       {hinweis && (
         <span className="kb-lineal__hinweis" aria-hidden="true">

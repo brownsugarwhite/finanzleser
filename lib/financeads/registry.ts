@@ -179,15 +179,20 @@ const KATEGORIEN: KategorieDef[] = [
     ],
     bestwert: { key: "ertrag", richtung: "hoch" },
     kennzahlen: [
-      { key: "best", label: "Zinsertrag mit dem Bestwert", unter: "über die gewählte Anlagedauer", art: "geld", ton: "werkzeug", formel: { art: "best", key: "ertrag" } },
+      /* 🚨 Kurze Labels. Die drei Kennzahlen stehen in gleich breiten Spalten (Runde 2,
+         Punkt 4) — bricht eine Überschrift auf zwei Zeilen, rutscht ihre Zahl nach unten
+         und die Zeile steht schief. Die Vorlage hält sie deshalb kurz: „Zinsertrag
+         Bestwert", „Ø aller Angebote", „Real nach Inflation"; was dazugehört, steht in
+         der Unterzeile. */
+      { key: "best", label: "Zinsertrag Bestwert", unter: "über die gewählte Anlagedauer", art: "geld", ton: "werkzeug", formel: { art: "best", key: "ertrag" } },
       // `{differenz}` setzt `kennzahlenBauen` ein — wie `{zins}` weiter unten.
       { key: "schnitt", label: "Ø aller Angebote", unter: "Bestwert bringt {differenz} mehr", art: "geld", ton: "grau", formel: { art: "schnitt", key: "ertrag" } },
       {
         // 🚨 `{zins}` setzt `kennzahlenBauen` ein. Die Registry importiert `marktdaten.ts`
         // bewusst NICHT: sie wird von `tools/financeads-registry-export.mjs` mit dem nackten
         // Node-Loader gelesen, der den `@/`-Alias nicht kennt — der Export bräche.
-        key: "real", label: "Nach Inflation ({zins} p. a.) bleibt real",
-        unter: "echter Kaufkraftgewinn", art: "geld", ton: "gruen",
+        key: "real", label: "Real nach Inflation",
+        unter: "bei {zins} p. a. — echter Kaufkraftgewinn", art: "geld", ton: "gruen",
         formel: { art: "real", key: "ertrag", jahreAus: "months" },
         negativ: { unter: "Kaufkraft sinkt trotz Zinsen" },
       },

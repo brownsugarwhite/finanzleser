@@ -69,6 +69,13 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
 
   return (
     <div className="kb-zinskurve" ref={ref}>
+      {/* 🚨 Alles, was in PROZENT auf dem viewBox-Raster sitzt, gehört in einen Kasten, der
+          GENAU so hoch ist wie das SVG. Vorher lagen Punkte, Werte und Gitterzahlen direkt
+          in `.kb-zinskurve` — und die trägt unten 22 px Polster für die Achsenbeschriftung.
+          `top: 90,48 %` bezog sich damit auf SVG + Polster statt aufs SVG: gemessen am
+          16.09.2026 saß jeder Punkt 20 px zu tief, also sichtbar UNTER seiner eigenen
+          Linie, und die unterste Gitterzahl stand unter der Achse statt auf ihr. */}
+      <div className="kb-zinskurve__feld">
       <svg viewBox="0 0 640 210" width="100%" aria-hidden="true">
         <line x1="30" y1="190" x2="610" y2="190" stroke="var(--ink)" strokeWidth={1} />
         {linien.map((g) => (
@@ -124,17 +131,24 @@ export default function Zinskurve({ punkte, spalte, wert, onWert, zeichnen }: Zi
             >
               {achsenText(spalte, p.best, 2)}
             </span>
-            <span
-              className="kb-zinskurve__achse"
-              data-ist={ist ? "an" : "aus"}
-              style={{ left: proz(X(i), 640) }}
-              aria-hidden="true"
-            >
-              {eng ? p.kurz : p.label}
-            </span>
           </Fragment>
         );
       })}
+      </div>
+
+      {/* Die Achsenbeschriftung steht UNTER dem Feld — sie braucht Platz, den das SVG
+          nicht hat, und darf die Prozentrechnung darin nicht verschieben. */}
+      {punkte.map((p, i) => (
+        <span
+          key={`a${p.wert}`}
+          className="kb-zinskurve__achse"
+          data-ist={p.wert === wert ? "an" : "aus"}
+          style={{ left: proz(X(i), 640) }}
+          aria-hidden="true"
+        >
+          {eng ? p.kurz : p.label}
+        </span>
+      ))}
     </div>
   );
 }

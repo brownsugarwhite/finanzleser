@@ -106,7 +106,7 @@ export default function Ergebnis({
                   <div key={i} className="kb-tabelle" style={{ ["--kb-tab-raster" as string]: raster }}>
                     <span className="kb__kicker">{b.titel}</span>
                     {/* Der Linienstapel trägt die Doppellinie, das Band darin die Versalien. */}
-                    <div className="kb-tabelle__stapel">
+                    <div className="kb__kopfstapel kb-tabelle__stapel">
                       <div className="kb-tabelle__kopf">
                         {b.spalten.map((s) => (
                           <span key={s.key} data-rechts={s.rechts ? "an" : undefined}>{s.label}</span>

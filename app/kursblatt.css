@@ -32,6 +32,21 @@
   --kb-rand: clamp(14px, 3vw, 24px);            /* K:41 padding */
   --werkzeug: var(--tuerkis);
 
+  /* ── Die Abstände des Kursblatts (Handoff Runde 2, Punkt 8) ──────────────────────
+     🚨 Diese fünf Werte stehen SO in der Übergabe und nicht auf der Abstandsleiter des
+     Fadens. Das Kursblatt ist eine Seite mit eigenem Satzspiegel: seine Blöcke sind auf
+     einander gerechnet, nicht auf den Fließtext. Gemessen am 16.09.2026 stand hier die
+     Leiter (52 · 34 · 60 · 34) statt der Übergabe — der Marktüberblick zu weit weg, das
+     Podest zu nah dran, die Liste zu weit.
+     Wer sie ändert, ändert sie HIER, nicht in den Regeln. */
+  --kb-luft-markt: 40px;        /* Vorspann → Marktüberblick */
+  --kb-luft-podest: 44px;       /* Marktüberblick → die drei Besten */
+  --kb-luft-liste: 48px;        /* Podest → Alle Angebote */
+  --kb-luft-eingaben: 28px;     /* Presets → Eingaben, und zwischen den Eingabereihen */
+  --kb-luft-feld: 20px;         /* zwischen zwei Eingabe-Bausteinen */
+  --kb-luft-ergebnis: 32px;     /* zwischen den Bausteinen des Ergebnisses */
+  --kb-zeiger-grad: 32px;       /* die Prozentzahl in der Mitte des Rings */
+
   /* 🚨 `width: 100%` ist Pflicht, nicht Kosmetik. Gemessen 15.09.2026: im Faden ist `.kb`
      ein Grid-Kind von #strom; `margin-inline: auto` hebt dort das Strecken auf, die Breite
      käme also aus dem Inhalt — und `container-type: inline-size` schließt den Inhalt von
@@ -320,29 +335,43 @@
   white-space: nowrap; font-variant-numeric: tabular-nums;
   transition: color .25s, transform .25s, opacity .3s;
 }
-.kb .kb-lineal__marke[data-benannt="an"] { font-weight: 700; font-size: var(--grad-12); color: var(--ink); }
+/* 🚨 Auch eine benannte Marke bleibt eine Marke: grau und 11 px. Sie stand hier in
+   700/12/Tinte und wog damit schwerer als die Zahl darüber, um die es geht. */
+.kb .kb-lineal__marke[data-benannt="an"] { font-weight: 600; color: var(--ink); }
 .kb .kb-lineal__marke:hover { color: var(--kb-lineal-farbe); transform: translateX(-50%) translateY(-1px); }
 
 /* L:32-33 — Nadel mit Papier-Aura, damit sie über den Strichen frei steht.
-   Sie steht ÜBER der Skala und zeigt nach oben auf den Wert. */
+   🚨 Sie reicht UNTER die Achse. In der Vorlage liegt die Achse bei 20 px und der Balken
+   von 4 bis 26 — er kreuzt sie und steht 6 px darunter, so wie der Zeiger einer Waage
+   über die Skala hinaussteht. Bei uns lag er bündig auf der Achse (48…70 bei Achse 70)
+   und sah dadurch aus, als stünde er davor statt darauf. Unsere Achse liegt bei 70:
+   Balken 54…76, Spitze 48…54. */
 .kb .kb-lineal__nadel {
-  position: absolute; left: 50%; top: 48px; width: 2px; height: 22px;
+  position: absolute; left: 50%; top: 54px; width: 2px; height: 22px;
   background: var(--kb-lineal-farbe); transform: translateX(-50%);
   box-shadow: 0 0 0 3px var(--paper);
 }
 .kb .kb-lineal__spitze {
-  position: absolute; left: 50%; top: 42px; width: 0; height: 0; transform: translateX(-50%);
+  position: absolute; left: 50%; top: 48px; width: 0; height: 0; transform: translateX(-50%);
   border-left: 5px solid transparent; border-right: 5px solid transparent;
   border-bottom: 6px solid var(--kb-lineal-farbe);
 }
 
 /* L:34 — der Wert steht als Eingabefeld ÜBER der Nadel, gestrichelt unterstrichen. */
+.kb .kb-lineal__wertzeile {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 2; height: 40px;
+  display: flex; justify-content: center; align-items: baseline; gap: 7px;
+}
 .kb .kb-lineal__wert {
-  position: absolute; left: 50%; top: 0; transform: translateX(-50%); z-index: 2;
   text-align: center; border: 0; border-bottom: var(--strich-haar) dashed var(--ink-35);
-  background: transparent; font: var(--schrift-wert); color: var(--kb-lineal-farbe);
+  /* 🚨 Die ZAHL bleibt Tinte (Handoff Runde 2: „Werkzeugfarbe nur für Nadel, Bogen,
+     Linie und Kicker — die Zahl bleibt Tinte #334A27"). Sie stand hier in der
+     Werkzeugfarbe und war damit das lauteste Element des Bausteins. */
+  background: transparent; font: var(--schrift-wert); color: var(--ink);
   padding: 0 0 var(--luft-xs); outline: 0; font-variant-numeric: tabular-nums; cursor: text;
 }
+/* Die Einheit steht neben dem Feld — kursiv, grau, auf der Grundlinie der Zahl. */
+.kb .kb-lineal__einheit { font: italic 300 var(--grad-15) var(--serif); color: var(--muted); pointer-events: none; }
 .kb .kb-lineal__wert:focus { border-bottom: var(--strich-haar) solid var(--ink); background: transparent; }
 
 /* L:35 — Bedienhinweis oben rechts; verschwindet nach der ersten Berührung. */
@@ -490,7 +519,9 @@
   letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
 .kb .kb-register__rechts { display: flex; align-items: center; gap: var(--luft-m); flex-shrink: 1; min-width: 0; }
-.kb .kb-register__meta { font: italic 300 var(--grad-13) var(--serif); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Vorlage: `italic 300 12px` — nicht 13. Die Meta-Angabe steht neben einer 26-px-Zahl
+   und soll ihr nicht ins Gewicht fallen. */
+.kb .kb-register__meta { font: italic 300 var(--grad-12) var(--serif); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* R:20 — der Spark dreht sich beim Aufklappen mit Überschwung und nimmt die Werkzeugfarbe an. */
 .kb .kb-register__spark { display: block; flex: none; color: var(--ink); transition: transform .55s var(--ueber), color .3s; }
 .kb .kb-register[data-offen="an"] .kb-register__spark { transform: rotate(135deg) scale(1.15); color: var(--kb-feld-farbe); }
@@ -522,7 +553,12 @@
 .kb .kb-register__nr { font: 900 var(--grad-12) var(--serif); font-style: normal; color: var(--green); }
 .kb .kb-register__eintrag[data-aktiv="an"] .kb-register__nr { color: var(--kb-feld-farbe); }
 .kb .kb-register__eintrag-label { display: flex; align-items: baseline; gap: var(--luft-s); min-width: 0; }
-.kb .kb-register__eintrag-label > span { font: 500 var(--grad-15) var(--serif); white-space: nowrap; }
+/* 🚨 Farbe AUF dem span. `components.css` färbt global jedes `p, li, span` in
+   --color-text-medium, und eine Einzelelement-Regel schlägt jede Vererbung — auch das
+   `color: var(--ink)` am Knopf darüber. Gemessen gegen die Vorlage: unsere Einträge
+   standen in Grau (104,108,106), die der Vorlage in Tinte (51,74,39). Dieselbe Falle wie
+   beim Kopfband der Liste und beim Tabellenkopf. */
+.kb .kb-register__eintrag-label > span { font: 500 var(--grad-15) var(--serif); white-space: nowrap; color: var(--ink); }
 .kb .kb-register__eintrag[data-aktiv="an"] .kb-register__eintrag-label > span { font-weight: 700; }
 .kb .kb-register__eintrag-label .kb__fuehrung { min-width: 14px; }
 .kb .kb-register__eintrag-meta { font: 500 var(--grad-13) var(--sans); color: var(--muted); white-space: nowrap; }
@@ -749,7 +785,7 @@
 .kb .kb__titel--rechner { margin: var(--luft-s) 0 var(--luft-m); font-size: clamp(var(--grad-34), 6.5vw, var(--grad-44)); line-height: 1.05; }
 .kb .kb__vorspann--rechner { font-size: clamp(var(--grad-16), 2.3vw, var(--grad-18)); }
 .kb .kb-rechner__presets { margin-top: var(--luft-xl); }
-.kb .kb-rechner__felder { margin-top: var(--luft-xl); display: grid; gap: var(--luft-l); }
+.kb .kb-rechner__felder { margin-top: var(--kb-luft-eingaben); display: grid; gap: var(--kb-luft-feld); }
 .kb .kb-rechner__paar { gap: var(--luft-xl) var(--luft-xl); align-items: start; }
 
 /* K:291-300 — „Leo rechnet mit“ zwischen zwei Punktlinien, rechts der Knopf. */
@@ -772,7 +808,7 @@
 .kb .kb-ergebnis__innen { overflow: hidden; opacity: 1; transition: opacity .4s; }
 /* K:525 — nach einer Eingabe steht das Ergebnis noch da, aber blass: es ist veraltet. */
 .kb .kb-ergebnis__innen[data-veraltet="an"] { opacity: .45; }
-.kb .kb-ergebnis__inhalt { padding-top: var(--luft-xl); display: grid; gap: var(--luft-xl); }
+.kb .kb-ergebnis__inhalt { padding-top: var(--kb-luft-ergebnis); display: grid; gap: var(--kb-luft-ergebnis); }
 .kb .kb-ergebnis__kopf { display: flex; align-items: center; gap: var(--luft-l); }
 .kb .kb-ergebnis__kopf i { flex: 1; border-top: var(--strich-haar) dotted var(--ink-45); }
 .kb .kb-ergebnis__kopf i:first-child { transform-origin: right; }
@@ -831,18 +867,15 @@
    Die zweite Linie steht in der Vorlage als `box-shadow: 0 3px 0 -2px` — hier als
    Verlauf auf EINEM Element, wie überall sonst im Kursblatt auch. */
 .kb .kb-tabelle { --kb-tab-spalte: 1fr; --kb-tab-raster: .7fr 1fr 1fr 1.2fr; margin-top: var(--luft-m); }
-.kb .kb-tabelle__stapel {
-  padding-top: 5px;
-  background-image: linear-gradient(var(--muted) 0 2px, transparent 2px 4px, var(--muted) 4px 5px);
-  background-repeat: no-repeat; background-size: 100% 5px;
-}
+/* Der Stapel steht oben als `.kb__kopfstapel` — hier nur noch der Abstand davor. */
+.kb .kb-tabelle__stapel { margin-top: var(--luft-s); }
 .kb .kb-tabelle__kopf, .kb .kb-tabelle__zeile { display: grid; grid-template-columns: var(--kb-tab-raster); gap: var(--luft-s); }
 /* 🚨 9/12 und 11/12 stehen so in der Vorlage und NICHT auf der Abstandsleiter. Ein
    Tabellenband ist eine Form, kein Satz: sein Innenabstand ist auf die 10,5-px-Versalien
    gerechnet, so wie die Pille auf ihre 48 px. Auf 8/14 gerastert wird das Band zu flach
    und die Zeilen zu luftig — dieselbe Lehre wie beim Wordle-Gitter. */
 .kb .kb-tabelle__kopf {
-  padding: 9px 12px; background: var(--muted); color: var(--auf-tinte);
+  padding: 9px 12px; background: var(--ink); color: var(--auf-tinte);
   font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: var(--laufweite-band); text-transform: uppercase;
 }
 /* 🚨 Farbe auf den SPANS: `components.css` färbt global jedes p/li/span, und eine
@@ -903,7 +936,7 @@
 .kb .kb-angaben__segment > b { font: 600 var(--grad-15) var(--serif); }
 
 /* ── Marktüberblick (K:87-113) ────────────────────────────────────────────────────── */
-.kb .kb-markt { margin-top: var(--luft-xxl); }
+.kb .kb-markt { margin-top: var(--kb-luft-markt); }
 @container kb (max-width: 559px) { .kb .kb-markt__tipp { display: none; } }
 
 /* ── Streuband (Handoff Runde 2, Punkt 3: „Überschneidungen behoben") ─────────────
@@ -967,7 +1000,10 @@
    Tastfläche, Fokusring und Beschriftung. Alle Positionen in Prozent des viewBox-Rasters
    640×210, damit die Kurve jede Satzbreite mitgeht. */
 .kb .kb-zinskurve { position: relative; margin-top: var(--luft-m); }
-.kb .kb-zinskurve > svg { display: block; overflow: visible; }
+/* Genau so hoch wie das SVG — hier hinein gehört alles, was in Prozent des viewBox
+   positioniert wird (siehe Zinskurve.tsx). */
+.kb .kb-zinskurve__feld { position: relative; }
+.kb .kb-zinskurve svg { display: block; overflow: visible; }
 .kb .kb-zinskurve__best {
   fill: none; stroke: var(--tuerkis); stroke-width: 2;
   stroke-dasharray: 1; stroke-dashoffset: 1;
@@ -1059,7 +1095,7 @@
 
 /* K:118-122 — vier Linien statt eines Rahmens: sie zeichnen sich einzeln, die
    senkrechten .2 s später. Ein `border` könnte das nicht. */
-.kb .kb-podest { position: relative; margin-top: var(--luft-xl); padding: clamp(var(--luft-l), 4vw, var(--luft-xl)); }
+.kb .kb-podest { position: relative; margin-top: var(--kb-luft-podest); padding: clamp(var(--luft-l), 4vw, var(--luft-xl)); }
 .kb .kb-podest__rahmen { position: absolute; background: var(--tuerkis); transform-origin: center; }
 .kb .kb-podest__rahmen--oben { left: 0; right: 0; top: 0; height: 2px; }
 .kb .kb-podest__rahmen--unten { left: 0; right: 0; bottom: 0; height: 1px; }
@@ -1128,7 +1164,7 @@
      Gesamtzahl 100px — „12.345 €" misst 75,7 px, „Rate/Monat" 83,2
      Land       108px — Punkt + längster Ländername
      Pille      156px — die Pille misst 153,5 px (derselbe Wert wie bei Klasse B) */
-.kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) 124px 100px 156px; --kb-liste-gap: 20px; }
+.kb .kb-liste { margin-top: var(--kb-luft-liste); --kb-liste-spalten: 96px minmax(0, 1fr) 124px 100px 156px; --kb-liste-gap: 20px; }
 .kb .kb-liste__titel { display: block; font: 700 clamp(var(--grad-22), 3.4vw, var(--grad-26)) var(--serif); }
 .kb .kb-liste__filter { display: flex; align-items: center; gap: var(--luft-s) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
 .kb .kb-liste__filter-label { margin-right: var(--luft-xs); }
@@ -1153,20 +1189,26 @@
    🚨 Bis zum 16.09.2026 stand hier graue Versalienschrift auf Papier. Ein grauer Kopf
    über einer Tabelle in Tinte liest sich wie eine zweite, schwächere Stimme — der Kopf
    ist aber die stärkste Zeile der Tabelle. */
-.kb .kb-liste__kopfstapel {
-  margin-top: var(--luft-s);
-  /* Der Linienstapel über dem Kopf, von oben nach unten:
-       1 px Linie · 2 px Luft · 2 px Linie · 2 px Luft · 1 px Linie · das Band.
-     Als EIN Verlauf, weil ein Element nur zwei Pseudoelemente hat und es drei Linien
-     sind. 🚨 Die oberste 1-px-Linie fehlte bis zum 16.09.2026. */
-  padding-top: 8px;
-  background-image: linear-gradient(
-    var(--ink) 0 1px, transparent 1px 3px,
-    var(--ink) 3px 5px, transparent 5px 7px,
-    var(--ink) 7px 8px);
+/* ══ DER TABELLENKOPF ═══════════════════════════════════════════════════════════════
+   EIN Muster für jede Tabelle im Kursblatt — Vergleichsliste wie Jahresübersicht.
+
+   Von unten nach oben, so wie der User es beschreibt:
+     das BAND mit dem Text (dick, Tinte, weiße Versalien)
+     2 px Luft · 2 px Linie
+     2 px Luft · 1 px Linie
+   Also zwei Linien über dem Band, und sie werden nach oben hin dünner.
+
+   🚨 Hier standen bis zum 16.09.2026 DREI Linien (1 · 2 · 1): die unterste war beim
+   Nachtragen der obersten übriggeblieben. Und die Jahresübersicht hatte ihren eigenen
+   Stapel in Grau, mit der dicken Linie oben statt unten — zwei Tabellen, zwei Köpfe.
+   Wer einen Kopf ändert, ändert ab jetzt beide: die Klasse heißt `.kb__kopfstapel`. */
+.kb .kb__kopfstapel {
+  padding-top: 5px;
+  background-image: linear-gradient(var(--ink) 0 1px, transparent 1px 3px, var(--ink) 3px 5px);
   background-repeat: no-repeat;
-  background-size: 100% 8px;
+  background-size: 100% 5px;
 }
+.kb .kb-liste__kopfstapel { margin-top: var(--luft-s); }
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
   align-items: center; padding: var(--luft-xs) var(--luft-s);
@@ -1335,17 +1377,23 @@
 @media (prefers-reduced-motion: reduce) { .kb-zettel { animation: none; } }
 
 /* ── Zeiger (ersetzt RechnerGauge) ────────────────────────────────────────────────── */
-.kb .kb-zeiger { position: relative; width: 190px; max-width: 100%; margin: var(--luft-l) auto 0; }
+/* 🚨 Die Maße der Vorlage: 150 px, Spur und Bogen 12 px, innen eine Haarlinie mit
+   1,5 px. Hier standen 190 px mit 5 px Strichstärke — ein dünner großer Ring statt eines
+   satten kleinen, und damit der auffälligste Unterschied zum Ergebnis der Übergabe. */
+.kb .kb-zeiger { position: relative; width: 150px; max-width: 100%; margin: 0 auto; }
 .kb .kb-zeiger__bild { display: block; width: 100%; height: auto; }
-.kb .kb-zeiger__innen { fill: none; stroke: var(--ink-25); stroke-width: 1; }
-.kb .kb-zeiger__spur { fill: none; stroke: var(--ink-12); stroke-width: 5; }
-.kb .kb-zeiger__bogen { fill: none; stroke: var(--werkzeug); stroke-width: 5; stroke-linecap: butt; }
+.kb .kb-zeiger__innen { fill: none; stroke: var(--ink-25); stroke-width: 1.5; }
+.kb .kb-zeiger__spur { fill: none; stroke: var(--ink-12); stroke-width: 12; }
+.kb .kb-zeiger__bogen { fill: none; stroke: var(--werkzeug); stroke-width: 12; stroke-linecap: butt; }
 .kb .kb-zeiger__mitte {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: var(--luft-xxs); text-align: center; pointer-events: none;
 }
-.kb .kb-zeiger__mitte b { font: 900 var(--grad-28)/1 var(--serif); font-variant-numeric: tabular-nums; color: var(--werkzeug); }
-.kb .kb-zeiger__mitte span { font: 400 var(--grad-12) var(--sans); color: var(--muted); }
+/* Vorlage: `700 32px Open Sans` in TINTE, darunter 13 px grau. Die Zahl stand hier in
+   900/Serif/Werkzeugfarbe — dreimal lauter als vorgesehen. Werkzeugfarbe trägt der
+   Bogen, nicht die Zahl (dieselbe Regel wie beim Lineal). */
+.kb .kb-zeiger__mitte b { font: 700 var(--kb-zeiger-grad)/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--ink); }
+.kb .kb-zeiger__mitte span { font: 400 var(--grad-13) var(--sans); color: var(--muted); }
 
 /* ── Messlatte: die Säulen des Ergebnisses (Handoff Runde 2, Punkt 6) ─────────────
    Vollfarbe, 36 px hoch, Grundlinie in Balkenfarbe, Label weiß IM Balken, Wert

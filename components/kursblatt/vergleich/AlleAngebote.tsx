@@ -90,7 +90,7 @@ export default function AlleAngebote({
       </div>
 
       {/* Der Kopfstapel trägt die Doppellinie, das Band darin die Versalien in Tinte. */}
-      <div className="kb-liste__kopfstapel">
+      <div className="kb__kopfstapel kb-liste__kopfstapel">
       <div className="kb-liste__kopf">
         {/* K:183 „Anbieter · Produkt" — die Spalte trägt beides, den Namen der Bank und
             den des Tarifs. `def.einzahl` wäre hier falsch: das ist das Produkt, nicht der,

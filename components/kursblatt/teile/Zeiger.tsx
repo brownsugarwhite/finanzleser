@@ -23,7 +23,11 @@ export interface ZeigerProps {
   aktiv: boolean;
 }
 
-const R = 50;
+/* Maße der Vorlage (Handoff Runde 2, Punkt 6): Ring 150 px, Spur und Bogen 12 px,
+   Radius 67, innen ein dünner Tinte-Kreis mit r 55. Der viewBox ist deshalb 150 und
+   nicht mehr 120 — dann sind die Zahlen hier dieselben wie in der Übergabe. */
+const R = 67;
+const INNEN = 55;
 const UMFANG = 2 * Math.PI * R;
 
 export default function Zeiger({ label, wert, max = 100, einheit = " %", zeichnen, aktiv }: ZeigerProps) {
@@ -32,19 +36,23 @@ export default function Zeiger({ label, wert, max = 100, einheit = " %", zeichne
 
   return (
     <div className="kb-zeiger">
-      <svg viewBox="0 0 120 120" className="kb-zeiger__bild" aria-hidden="true">
+      <svg viewBox="0 0 150 150" className="kb-zeiger__bild" aria-hidden="true">
         {/* Innenkreis als Haarlinie — der Kasten des alten Satzes wird zur Linie. */}
-        <circle cx="60" cy="60" r="44" className="kb-zeiger__innen" />
-        <circle cx="60" cy="60" r={R} className="kb-zeiger__spur" />
+        <circle cx="75" cy="75" r={INNEN} className="kb-zeiger__innen" />
+        <circle cx="75" cy="75" r={R} className="kb-zeiger__spur" />
         <circle
-          cx="60" cy="60" r={R}
+          cx="75" cy="75" r={R}
           className="kb-zeiger__bogen"
-          transform="rotate(-90 60 60)"
+          /* 🚨 Drehpunkt = Mittelpunkt. Beim Umstellen von viewBox 120 auf 150 blieb hier
+             (60 60) stehen — der Bogen drehte sich um einen Punkt neben der Mitte und
+             schob sich aus dem Ring heraus. */
+          transform="rotate(-90 75 75)"
           strokeDasharray={UMFANG}
           style={{
             strokeDashoffset: UMFANG * (1 - anteil),
             // Ohne Animation steht der Bogen sofort; sonst zeichnet er sich von 0 auf.
-            transition: zeichnen === "none" || !aktiv ? "none" : "stroke-dashoffset 1s ease-out",
+            // Vorlage: 1,3 s mit .35 s Verzug — der Ring beginnt, wenn die Kacheln stehen.
+            transition: zeichnen === "none" || !aktiv ? "none" : "stroke-dashoffset 1.3s ease-out .35s",
           }}
         />
       </svg>
