@@ -73,22 +73,12 @@
   transition: transform .35s var(--ueber);
 }
 .pille__scheibe svg { display: block; }
-/* Die Füllung, die auf Hover von der Scheibe auf die ganze Innenfläche wächst
-   (Runde 2, Punkt 7: kein sichtbarer Papierrand mehr zwischen Rahmen und Füllung). */
-.pille__fuell {
-  position: absolute; inset: var(--pille-polster); left: auto;
-  width: var(--pille-scheibe);
-  border-radius: calc(var(--pille-scheibe) * .4474); background: var(--pille-farbe);
-  transition: width .45s var(--kurve), border-radius .45s var(--kurve);
-}
-.pille--fuellt .pille__scheibe { background: transparent; }
-.pille--fuellt:hover .pille__fuell, .pille--fuellt:focus-visible .pille__fuell {
-  width: calc(100% - 2 * var(--pille-polster));
-  border-radius: calc(var(--pille-hoehe) * .3542);
-}
-.pille--fuellt:hover, .pille--fuellt:focus-visible { color: var(--auf-tinte); }
-/* Ohne Füllung färbt sich beim Überfahren nur die Schrift. */
-.pille:not(.pille--fuellt):hover { color: var(--pille-farbe); }
+/* 🚨 Hier wuchs beim Überfahren eine Füllung von der Scheibe über die ganze Innenfläche
+   (Handoff Runde 2, Punkt 7). Der User hat sie am 16.09.2026 abbestellt: der Knopf sieht
+   dabei aus, als liefe er aus. Die Pille verhält sich jetzt überall gleich — beim
+   Überfahren färbt sich die SCHRIFT, sonst nichts. Das ist dieselbe Regel wie beim
+   `.knopf`, wo der Umriss und nicht die Fläche reagiert. */
+.pille:hover, .pille:focus-visible { color: var(--pille-farbe); }
 .pille:disabled, .pille[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
 .pille__scheibe[data-schrumpft="an"] { transform: scale(.8); }
 

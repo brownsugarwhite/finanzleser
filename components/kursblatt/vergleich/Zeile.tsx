@@ -97,7 +97,7 @@ export default function Zeile({
         <span className="kb__zeile-pille">
           {ist && <Siegel text={def.kursblatt?.stempel ?? "Bestwert"} klein animation={stempel} />}
         <PilleCTA
-          text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein
+          text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" klein
           href={p.link} rel="sponsored nofollow noopener" target="_blank"
           ariaLabel={`Zum Anbieter ${p.anbieter}`}
         />

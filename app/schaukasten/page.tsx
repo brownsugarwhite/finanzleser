@@ -52,6 +52,7 @@ import PlusTeaser from "@/components/faden/landing/PlusTeaser";
 import WeiterredenChips from "@/components/faden/landing/WeiterredenChips";
 import VergleichKoerper from "@/components/vergleich/VergleichKoerper";
 import Setzkasten from "@/components/kursblatt/Setzkasten";
+import Ergebnisteile from "@/components/kursblatt/Ergebnisteile";
 import RechnerEmbed from "@/components/rechner/RechnerEmbed";
 import Statistik from "@/components/statistik/Statistik";
 import { HANDOFF_BEISPIELE } from "@/lib/statistik/handoffBeispiele";
@@ -303,9 +304,9 @@ export default async function Schaukasten() {
           <Button label="Pille · Herunterladen" icon="download" href="/schaukasten" />
         </div>
         <div className="reihe" style={{ alignItems: "center", marginTop: "var(--luft-m)" }}>
-          <Button label="Pille · füllt" href="/schaukasten" fuellt />
+          <Button label="Pille · Werkzeugfarbe" href="/schaukasten" farbe="var(--tuerkis)" />
           <Button label="Pille · klein" href="/schaukasten" klein />
-          <Button label="Pille · Werkzeugfarbe" href="/schaukasten" fuellt farbe="var(--tuerkis)" />
+          <Button label="Pille · klein" href="/schaukasten" klein />
         </div>
         <div className="chips" style={{ marginTop: "var(--luft-m)" }}>
           <button type="button" className="chip">Chip</button>
@@ -468,11 +469,26 @@ export default async function Schaukasten() {
           Die Felder kommen aus <code>lib/rechner/schemata/</code>, nicht aus dieser Seite.
         </p>
         <Insel typ="rechner" arg="brutto-netto"><RechnerEmbed slug="brutto-netto" /></Insel>
+
+        <h3 style={{ marginTop: "var(--luft-xxl)" }}>Die Bausteine des Ergebnisses</h3>
+        <p>
+          Ein Rechner setzt sein Ergebnis aus benannten Blöcken zusammen (<code>ErgebnisBlock</code>
+          {" "}in <code>lib/rechner/schema.ts</code>). Bis zum 16.09.2026 standen sie hier nicht
+          einzeln — man sah sie nur, wenn man einen Rechner fand, der sie gerade benutzt.
+          Hier ist jede Form einmal, mit erfundenen Zahlen.
+        </p>
+        <Ergebnisteile />
     </>) },
 
     { titel: "Vergleichsrechner", inhalt: (<>
         <p className="vorspann">Der eigene Vergleich aus der financeads-API, im Kursblatt-Satz: Zeitungskopf, „Ihre Angaben“ mit Lineal, Setzzeile und Register, Streuband oder Zinskurve, drei Kennzahlen, Podest und Angebotsliste mit Balken und Details. Klasse-B-Kategorien (Versicherungen, für die der Partner keine Beiträge liefert) zeigen stattdessen die Anbieterliste — ohne Band, ohne Kennzahlen, ohne Gewinner.</p>
+        {/* 🚨 Drei, nicht zwei — und zwar absichtlich je EINER pro Bandform:
+            Tagesgeld zeigt das STREUBAND, Festgeld die ZINSKURVE (die dritte Spalte „Land"
+            gibt es auch nur dort), Haftpflicht die Klasse B ganz ohne Band. Bis zum
+            16.09.2026 standen hier nur Tagesgeld und Haftpflicht — die Zinskurve kam im
+            Schaukasten also überhaupt nicht vor, obwohl sie gebaut ist. */}
         <VergleichKoerper slug="tagesgeldvergleich" skin="faden" />
+        <VergleichKoerper slug="festgeldvergleich" skin="faden" />
         <VergleichKoerper slug="private-haftpflichtversicherung-vergleich" skin="faden" />
     </>) },
     { titel: "Spiele", inhalt: (<>

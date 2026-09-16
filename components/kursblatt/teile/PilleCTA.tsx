@@ -9,11 +9,9 @@
  * für die ganze Seite — hier bleibt nur, was das Kursblatt eigenhändig mitbringt: die
  * drei Glyphen und die Werkzeugfarbe.
  *
- * 🚨 Die Hover-Füllung braucht KEIN JavaScript. Der Prototyp führt dafür `ctaFill` und
- * `hoverTop` im Zustand (K:482, :485) — nötig, weil sie auch dann läuft, wenn die MAUS
- * ÜBER DER ZEILE steht, nicht über der Pille. In CSS ist genau das ein Nachfahren-
- * Selektor: `.kb__zeile:hover .pille__fuell { width: 100% }`. Zwei Zustandsfelder
- * weniger, und die Füllung läuft auch ohne Hydration.
+ * 🚨 Die wachsende Hover-Füllung (Handoff Runde 2, Punkt 7) ist am 16.09.2026 entfallen —
+ * der User: „der Knopf füllt sich so komisch". Beim Überfahren färbt sich nur noch die
+ * Schrift, wie bei jeder anderen Pille auch.
  */
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -39,7 +37,6 @@ export interface PilleProps {
   /** 48 px mit Outline (Vorgabe) oder 42 px ohne (Listenzeile). */
   klein?: boolean;
   /** Türkis von rechts einlaufen lassen — nur dort, wo die Pille eine Zeile abschließt. */
-  fuellung?: boolean;
   /** Im schmalen Satz nur den Knopf zeigen. */
   nurKnopf?: boolean;
   /** Knopf schrumpft, solange gerechnet wird (K:299). */
@@ -50,19 +47,17 @@ export interface PilleProps {
 }
 
 export default function PilleCTA({
-  text, glyph, werkzeug, href, onClick, klein = false, fuellung = false,
+  text, glyph, werkzeug, href, onClick, klein = false,
   nurKnopf = false, schrumpft = false, rel, target, ariaLabel,
 }: PilleProps) {
   const klassen = [
     "pille",
     klein ? "pille--klein" : "",
-    fuellung ? "pille--fuellt" : "",
     nurKnopf ? "pille--nur-knopf" : "",
   ].filter(Boolean).join(" ");
 
   const inneres = (
     <>
-      {fuellung && <i className="pille__fuell" aria-hidden="true" />}
       <span className="pille__text">{text}</span>
       <span className="pille__scheibe" data-schrumpft={schrumpft ? "an" : "aus"} aria-hidden="true">
         <svg width={klein ? 14 : 16} height={klein ? 14 : 16} viewBox="0 0 16 16" fill="none" stroke="var(--auf-tinte)" strokeWidth={glyph === "gleich" ? 2.2 : 2} strokeLinecap="round" strokeLinejoin="round">

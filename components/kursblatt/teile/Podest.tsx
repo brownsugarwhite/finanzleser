@@ -139,7 +139,7 @@ export default function Podest({
               <Punktzeile key={x.s.key} k={x.s.label} v={x.v} gross={i === 0} ton={i === 0 && x.s.richtung === "hoch" && x.s.art === "geld" ? "werkzeug" : undefined} />
             ))}
             <div className="kb-podest__aktionen">
-              <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung href={best.link} rel="sponsored nofollow noopener" target="_blank" />
+              <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" href={best.link} rel="sponsored nofollow noopener" target="_blank" />
               <MerkenKnopf gemerkt={gemerkt.includes(best.id)} onKlick={() => onMerken(best.id)} />
             </div>
           </div>

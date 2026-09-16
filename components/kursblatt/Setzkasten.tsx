@@ -163,8 +163,8 @@ export default function Setzkasten() {
         <div className="kb-podest" style={{ display: "flex", alignItems: "center", gap: "14px 22px", flexWrap: "wrap", marginTop: 24 }}>
           <Logorahmen name="Verivox" groesse="gewinner" />
           <Siegel text="Bestwert" />
-          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung href="#" />
-          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" fuellung klein href="#" />
+          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" href="#" />
+          <PilleCTA text="Zum Anbieter" glyph="extern" werkzeug="tuerkis" klein href="#" />
           <MerkenKnopf gemerkt={gemerkt} onKlick={() => setGemerkt((g) => !g)} />
           <StrichLink text="Zum Anbieter" href="#" />
         </div>

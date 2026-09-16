@@ -72,7 +72,7 @@ export default function Anbieterliste({ def, zeilen, gezeigt, alle, onAlle, geme
               ))}
             </span>
             <PilleCTA
-              text="Zum Angebot" glyph="extern" werkzeug="tuerkis" fuellung klein
+              text="Zum Angebot" glyph="extern" werkzeug="tuerkis" klein
               href={p.link} rel="sponsored nofollow noopener" target="_blank"
               ariaLabel={`Zum Angebot von ${p.anbieter}`}
             />

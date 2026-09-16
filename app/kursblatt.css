@@ -99,16 +99,20 @@
   42%      { transform: scale(1.12); }
   64%      { transform: scale(1); box-shadow: 0 0 0 8px transparent; }
 }
-/* K:27-30 — Stempel: aufgesetzt (bleibt schief) und flach (dreht sich gerade). */
+/* K:27-30 — Stempel: aufgesetzt (bleibt schief) und flach (dreht sich gerade).
+   🚨 Der Endwinkel steht HIER, nicht an `.kb-siegel`: die Animation läuft mit `both` und
+   ihr Schlussbild schlägt jede Regel am Element. Wer die Marke gerader haben will, ändert
+   die 100-%-Zeile — sonst passiert sichtbar nichts. Von −11° auf −4° am 16.09.2026
+   („weniger rotiert"). */
 @keyframes fl-stempel {
-  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
-  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
-  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+  0%   { transform: scale(1.7) rotate(-14deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-4deg); opacity: 1; }
 }
 @keyframes fl-stempel2 {
-  0%   { transform: scale(1.7) rotate(-22deg); opacity: 0; }
-  60%  { transform: scale(.94) rotate(-8deg); opacity: 1; }
-  100% { transform: scale(1) rotate(-11deg); opacity: 1; }
+  0%   { transform: scale(1.7) rotate(-14deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(-2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-4deg); opacity: 1; }
 }
 @keyframes fl-stempelflach {
   0%   { transform: scale(1.5) rotate(-8deg); }
@@ -587,13 +591,8 @@
 /* ── Pille ───────────────────────────────────────────────────────────────────────── */
 /* Die Pille steht seit dem 16.09.2026 in app/knoepfe.css und gilt für die ganze Seite —
    das Kursblatt hatte sie ein zweites Mal gebaut, `Button.tsx` ein drittes Mal inline.
-   Hier bleibt nur, was der Satz des Kursblatts eigenhändig auslöst: die Füllung läuft
-   auch, wenn die Maus über der ZEILE steht statt über der Pille (K:482/:485 löst das im
-   Prototyp mit zwei Zustandsfeldern; ein Nachfahren-Selektor kann es ohne Hydration). */
-.kb .kb__zeile:hover .pille__fuell,
-.kb .kb-podest:hover .pille__fuell { width: calc(100% - 2 * var(--pille-polster)); border-radius: calc(var(--pille-hoehe) * .3542); }
-.kb .kb__zeile:hover .pille--fuellt,
-.kb .kb-podest:hover .pille--fuellt { color: var(--auf-tinte); }
+   🚨 Hier stand zusätzlich die Zeilen-Hover-Füllung: fuhr die Maus über die ZEILE, lief
+   die Füllung der Pille mit. Sie ist mit der Füllung selbst weggefallen. */
 /* K:519 — im schmalen Satz bleibt von der Listen-Pille nur die Scheibe. */
 @container kb (max-width: 559px) {
   .kb .pille--klein { padding-left: var(--pille-polster); }
@@ -606,49 +605,39 @@
    jedes Mal anders. Aufbau in zwei Ebenen, weil `background-attachment: fixed` nur
    ohne transformierten Vorfahr aufs Fenster zeigt — die Drehung sitzt außen, die Folie
    innen. Der Text liegt darüber, damit er von der Folie nicht eingefärbt wird. */
-/* 🚨 Ein aufgeklebter Holo-Streifen, kein Stempel und kein Regenbogen.
-   Bis zum 16.09.2026 lag hier ein gesättigtes Spektrum (Rosa · Blau · Grün · Gelb) mit
-   einer Prägekante aus 1 px Tinte — im Satz las sich das als buntes Abzeichen und nicht
-   als Folie. Die Vorlage des Users zeigt etwas anderes: sehr helle Pastelltöne, fast
-   Weiß, ein breiter Glanzstreifen darüber, scharfe Kanten ohne Rahmen und ein weicher
-   Schatten. Der Farbeindruck entsteht durch den WECHSEL beim Scrollen, nicht durch
-   Sättigung. */
+/* ── Das Siegel: eine Briefmarke ──────────────────────────────────────────────────
+   Vorlage: „FL Siegel.dc.html" (Runde 2, Punkt 1). Form, Zähnung, Innenrahmen und
+   Schimmer stehen im Bauteil (components/kursblatt/teile/Siegel.tsx) — hier steht nur,
+   wie es im Satz sitzt.
+
+   🚨 Zweimal daneben gelegen, bevor es stimmte:
+     · Runde 1 war es ein gedrehter Rahmen mit Verlauf — keine Marke, kein Zahn.
+     · Runde 2 ein Pastellstreifen mit weichem Schatten — hübsch, aber nicht die Vorlage.
+   Es ist eine BRIEFMARKE: gezahnter Rand, Holo-Folie, dünner Innenrahmen, harter
+   1-px-Schatten. Und die Folie steht still, während die Marke darüber wegscrollt. */
 .kb .kb-siegel {
   position: relative; display: inline-block; isolation: isolate;
-  /* Das Polster rechnet sich aus der Schriftgröße — deshalb steht sie hier und nicht
-     am Text. Die kleine Fassung braucht dadurch nur EINE Angabe weniger Grad, und die
-     Proportion bleibt in beiden Größen dieselbe (wie bei der Pille). */
-  font-size: var(--grad-13);
-  padding: .5em .95em; transform: rotate(-9deg);
-  filter: drop-shadow(0 2px 3px var(--ink-20));
+  /* 🚨 Weniger Drehung als in der Vorlage (−8°). Der User am 16.09.2026: „weniger
+     rotiert". −4° reicht, damit die Marke aufgeklebt wirkt und nicht schief hängt. */
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 1px 0 var(--ink-25));
 }
-.kb .kb-siegel__folie {
-  position: absolute; inset: 0; z-index: 0; display: block;
-  /* Vier Lagen: der Pastellbogen, ein Lichtfleck oben links, ein kühler Hauch unten
-     rechts und der Glanzstreifen quer darüber. */
-  background-image: var(--holo-bogen), var(--holo-licht), var(--holo-hauch), var(--holo-glanz);
-  /* 🚨 Nur wenig größer als das Siegel. Bei 480 % lag nur ein Zwanzigstel des Spektrums
-     im Bild, und die Folie sah aus wie eine einfarbige Tönung. Bei 190 % stehen mehrere
-     Farben gleichzeitig darin, und der Scrollweg verschiebt sie trotzdem sichtbar.
-     Die Position setzt die Komponente (Siegel.tsx). */
-  background-size: 190% 190%, 170% 170%, 150% 150%, 210% 210%;
-  background-position: 50% 50%;
-  transition: background-position .08s linear;
-}
+.kb .kb-siegel svg { display: block; overflow: visible; }
 .kb .kb-siegel__text {
-  position: relative; z-index: 1; display: block;
-  font: 600 1em/1 var(--sans); letter-spacing: .2em;
-  /* Die Laufweite spreizt nach rechts; ohne den Ausgleich sitzt das Wort links an. */
-  text-indent: .2em;
-  text-transform: uppercase; color: var(--ink); white-space: nowrap;
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  /* 🚨 Feiner als die Vorlage (700). Der User: „die schrift muss feiner sein" — 500 auf
+     einer hellen Folie liest sich als Prägung, 700 als Aufdruck. */
+  font: 500 var(--grad-11)/1 var(--sans); letter-spacing: .13em;
+  text-indent: .13em; text-transform: uppercase; color: var(--ink); white-space: nowrap;
 }
-/* Eine Angabe genügt: Polster und Text hängen beide an der Schriftgröße. */
-.kb .kb-siegel--klein { font-size: var(--grad-12); transform: rotate(-8deg); flex-shrink: 0; }
+.kb .kb-siegel--klein .kb-siegel__text { font-size: var(--grad-kicker); }
+/* Der Schimmer zieht schräg über die Marke — zweimal derselbe Verlauf, damit ein neuer
+   Lauf auch dann startet, wenn der alte noch läuft. */
+@keyframes kb-schimmer { 0% { transform: translateX(-160%) skewX(-22deg); } 100% { transform: translateX(300%) skewX(-22deg); } }
+@keyframes kb-schimmer2 { 0% { transform: translateX(-160%) skewX(-22deg); } 100% { transform: translateX(300%) skewX(-22deg); } }
+.kb .kb-siegel__schimmer { transform-box: fill-box; transform: translateX(-160%) skewX(-22deg); }
 @container kb (max-width: 559px) { .kb .kb-siegel--klein { display: none; } }
-/* Ohne Bewegungswunsch steht die Folie still — der Glanz bleibt, nur das Kippen fehlt. */
-@media (prefers-reduced-motion: reduce) {
-  .kb .kb-siegel__folie { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .kb .kb-siegel__schimmer { animation: none !important; } }
 
 /* ── Stempel-Presets (K:242-247) ──────────────────────────────────────────────────── */
 .kb .kb-presets { display: flex; align-items: center; gap: var(--luft-m) var(--luft-m); flex-wrap: wrap; }
@@ -1050,7 +1039,11 @@
    Mit `top: -19px` ragte es in das Kopfband der Tabelle hinein, sobald die Bestwertzeile
    die erste war — und in der Vorlage des Users liegt es ohnehin unten rechts, halb über
    der Pille, halb darüber hinaus. */
-.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -10px; top: auto; bottom: -15px; z-index: 2; }
+/* 🚨 Die Marke überdeckt nur die ECKE der Pille, nicht ihre Mitte. Sie saß zweimal
+   falsch: erst oben rechts (ragte ins Kopfband der Tabelle), dann mittig unter dem Knopf
+   (verdeckte ihn halb). Jetzt liegt sie unten rechts an der Ecke und steht nach rechts
+   und unten über — wie eine Marke, die jemand über den Rand geklebt hat. */
+.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -22px; top: auto; bottom: -19px; z-index: 2; }
 
 .kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
 .kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
@@ -1194,9 +1187,10 @@
 /* K:186-199 — die Zeile. Bestwert auf türkisem Grund, Überfahren auf 3,5 % Tinte. */
 .kb .kb__zeile { position: relative; border-bottom: var(--strich-haar) solid var(--ink-12); transition: background .35s; }
 .kb .kb__zeile[data-hell="an"] { background: var(--ink-05); }
-/* Zebra (Handoff Runde 2, Punkt 5): jede zweite Zeile trägt einen Hauch Tinte. */
-.kb .kb__zeile:nth-child(even) { background: var(--ink-05); }
-.kb .kb__zeile[data-ist="an"]:nth-child(even) { background: var(--tuerkis-grund); }
+/* 🚨 Hier stand ein Zebra (Handoff Runde 2, Punkt 5): jede zweite Zeile ein Hauch Tinte.
+   Am 16.09.2026 abbestellt. Die Zeilen trennt die Haarlinie, das genügt — ein Zebra
+   zusätzlich zu Linie, Hover-Linien und Bestwert-Grund sind drei Signale für eine
+   Zeilengrenze. Der Bestwert-Grund bleibt, er trägt eine Aussage. */
 .kb .kb__zeile[data-ist="an"] { background: var(--tuerkis-grund); }
 .kb .kb__zeile-linie { position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); transform: scaleX(0); transition: transform .4s var(--kurve); }
 .kb .kb__zeile-linie--oben { top: -1px; transform-origin: left; }
@@ -1319,17 +1313,35 @@
 .kb .kb-zeiger__mitte b { font: 900 var(--grad-28)/1 var(--serif); font-variant-numeric: tabular-nums; color: var(--werkzeug); }
 .kb .kb-zeiger__mitte span { font: 400 var(--grad-12) var(--sans); color: var(--muted); }
 
-/* ── Messlatte (ersetzt RechnerBenchmark) ─────────────────────────────────────────── */
-.kb .kb-messlatte { margin-top: var(--luft-l); }
-.kb .kb-messlatte__zeile {
-  display: grid; grid-template-columns: minmax(96px, auto) 1fr minmax(72px, auto);
-  align-items: center; gap: var(--luft-m); padding: var(--luft-s) 0; border-top: var(--strich-haar) solid var(--ink-12);
+/* ── Messlatte: die Säulen des Ergebnisses (Handoff Runde 2, Punkt 6) ─────────────
+   Vollfarbe, 36 px hoch, Grundlinie in Balkenfarbe, Label weiß IM Balken, Wert
+   rechtsbündig in einer FESTEN 84-px-Spalte — genau dort lag der Fehler vorher: mit
+   `minmax(72px, auto)` überlappten Wert und Balkenende, sobald die Zahl länger wurde. */
+.kb .kb-messlatte { margin-top: var(--luft-l); display: grid; gap: var(--luft-s); }
+.kb .kb-messlatte__titel { font: 700 var(--grad-20) var(--serif); margin-bottom: var(--luft-xs); }
+.kb .kb-messlatte__zeile { display: grid; grid-template-columns: minmax(0, 1fr) 84px; align-items: center; gap: var(--luft-m); }
+/* Die Grundlinie liegt an der SPUR, nicht am Balken: sie läuft über die ganze Breite
+   weiter, auch wo der Balken schon aufgehört hat — so steht in der Vorlage jede Säule
+   auf derselben Linie. (Als Schatten am Balken wäre es ein harter Wert mehr und die
+   Linie endete mit dem Balken.) */
+.kb .kb-messlatte__spur { position: relative; height: 36px; border-bottom: var(--strich-haar) solid var(--ton, var(--ink)); }
+.kb .kb-messlatte__balken {
+  position: absolute; left: 0; top: 0; height: 36px; background: var(--ton, var(--ink));
+  transition: width 1.1s var(--kurve);
 }
-.kb .kb-messlatte__name { font: 400 var(--grad-14) var(--sans); color: var(--muted); }
-.kb .kb-messlatte__balken { height: 8px; background: var(--ink-30); transition: width .9s var(--kurve); }
-.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__balken { background: var(--werkzeug); }
-.kb .kb-messlatte__zeile[data-ist="an"] .kb-messlatte__name { color: var(--ink); font-weight: 600; }
-.kb .kb-messlatte__wert { text-align: right; font: 700 var(--grad-15) var(--serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kb .kb-messlatte__name {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font: 500 var(--grad-13) var(--sans); white-space: nowrap; pointer-events: none;
+}
+.kb .kb-messlatte__name[data-innen="an"] { left: 14px; color: var(--auf-tinte); }
+.kb .kb-messlatte__name[data-innen="aus"] { color: var(--ink); }
+.kb .kb-messlatte__wert {
+  text-align: right; font: 700 var(--grad-18) var(--serif); font-variant-numeric: tabular-nums;
+  white-space: nowrap; color: var(--ton, var(--ink));
+}
+.kb .kb-messlatte__zeile[data-ton="magenta"] { --ton: var(--pink); }
+.kb .kb-messlatte__zeile[data-ton="tuerkis"] { --ton: var(--tuerkis); }
+.kb .kb-messlatte__zeile[data-ton="ink"] { --ton: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .kb .kb-messlatte__balken { transition: none; }
   .kb .kb-zeiger__bogen { transition: none !important; }

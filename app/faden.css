@@ -1674,3 +1674,7 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .wb-consent a { color: var(--green-ink); text-decoration: underline; }
 .faden-shell .wb-form--klein .wb-consent { font-size: var(--grad-12); }
 .faden-shell .wb-eingetragen { margin: 0; }
+
+/* ── Schaukasten: die Bausteine des Ergebnisses nebeneinander ─────────────────────── */
+.faden-shell .schau-teile { display: grid; gap: var(--luft-xxl); margin-top: var(--luft-l); }
+.faden-shell .schau-teil > .quelle { margin: var(--luft-xs) 0 var(--luft-m); }

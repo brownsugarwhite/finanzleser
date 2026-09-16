@@ -52,7 +52,35 @@ export default function KursblattRechner<W extends Werte, E>({
     setPreset(null);
   }, []);
 
-  const vorschau = schema.vorschau?.(werte);
+  /**
+   * „Leo rechnet mit: ≈ 411 € · Monatsrate, unverbindlich" — die Live-Vorschau über dem
+   * Ausrechnen-Knopf (Handoff Runde 2, Regel 5: im Rechner rechnet nur diese Zeile live,
+   * das volle Ergebnis öffnet der Knopf).
+   *
+   * 🚨 Sie stand bis zum 16.09.2026 nur in EINEM der 56 Schemata — `vorschau` ist
+   * optional, und ausgefüllt hatte sie allein der Kreditrechner, an dem die Vorlage
+   * gebaut wurde. In den anderen 55 fehlte die Zeile deshalb ganz.
+   * Statt 55 Vorschaufunktionen von Hand: aus dem Ergebnis ableiten. Jeder Rechner
+   * benennt in seinen Kacheln genau eine Hauptzahl (`haupt: true`) — das IST die Zahl,
+   * mit der Leo rechnet. Ein Schema, das es anders will, setzt weiterhin `vorschau`.
+   */
+  const vorschau = useMemo(() => {
+    if (schema.vorschau) return schema.vorschau(werte);
+    try {
+      const bloecke = schema.ergebnis(schema.rechne(werte, rates), werte, rates);
+      for (const b of bloecke) {
+        if (b.art !== "kacheln") continue;
+        const k = b.kacheln.find((x) => x.haupt) ?? b.kacheln[0];
+        if (!k) continue;
+        return { vor: "Leo rechnet mit:", zahl: `≈ ${k.text(k.wert)}`, nach: `${k.label} · unverbindlich` };
+      }
+      return null;
+    } catch {
+      // Eine Eingabe, mit der sich (noch) nicht rechnen lässt, ist kein Fehler —
+      // dann steht die Zeile eben nicht da.
+      return null;
+    }
+  }, [schema, werte, rates]);
 
   const ausrechnen = () => {
     if (rechnet) return;

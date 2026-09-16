@@ -67,7 +67,7 @@ function EinFeld({ f, werte, setzen }: { f: Feld; werte: Werte; setzen: (k: stri
           <Zaehlwerk
             ariaLabel={f.label} wert={zahl} onWert={(v) => setzen(f.key, v)}
             min={f.min ?? 0} max={f.max ?? 100} schritt={f.schritt ?? 0.1} dez={f.dez ?? 1}
-            einheit={f.einheit} schnellwahl={f.schnellwahl} hinweis={f.hinweis} werkzeug="magenta"
+            einheit={f.einheit} schnellwahl={schnellwahlFuer(f)} hinweis={f.hinweis} werkzeug="magenta"
           />
         </div>
       );
@@ -95,6 +95,36 @@ function EinFeld({ f, werte, setzen }: { f: Feld; werte: Werte; setzen: (k: stri
     case "schalter":
       return <Schalter label={f.label} an={Boolean(werte[f.key])} onSchalten={(an) => setzen(f.key, an)} />;
   }
+}
+
+/**
+ * Schnellwahl-Chips unter einem Zählwerk.
+ *
+ * 🚨 Ein Prozentwert ohne Chips ist eine Zumutung: −/+ in Schritten von 0,1 bedeutet von
+ * 0 auf 5,5 fünfundfünfzig Klicks. Der Handoff (Runde 2, Kombinationstabelle) sieht die
+ * Chips deshalb für JEDES Zählwerk vor — im Repo hatte sie bis zum 16.09.2026 genau
+ * eines von dreizehn, nämlich das der Vorlage.
+ *
+ * Stehen im Schema eigene Werte, gelten die. Sonst vier Marken über den Bereich, gerastert
+ * auf etwas, das man auch aussprechen würde: die Spanne wird gefünftelt und jede Marke auf
+ * einen halben Schritt der Größenordnung gerundet. Bei 0–19,9 % ergibt das 4 · 8 · 12 · 16.
+ */
+function schnellwahlFuer(f: { schnellwahl?: number[]; min?: number; max?: number; dez?: number }): number[] {
+  if (f.schnellwahl?.length) return f.schnellwahl;
+  const min = f.min ?? 0, max = f.max ?? 100;
+  const spanne = max - min;
+  if (!(spanne > 0)) return [];
+  // Die Rasterweite: eine Zehnerpotenz unter dem Fünftel der Spanne, halbiert.
+  const roh = spanne / 5;
+  const stufe = Math.pow(10, Math.floor(Math.log10(roh)));
+  const raster = roh / stufe >= 5 ? 5 * stufe : roh / stufe >= 2 ? 2 * stufe : stufe;
+  const nk = f.dez ?? 1;
+  const aus: number[] = [];
+  for (let i = 1; i <= 4; i++) {
+    const v = +(Math.round((min + i * roh) / raster) * raster).toFixed(nk);
+    if (v > min && v <= max && !aus.includes(v)) aus.push(v);
+  }
+  return aus;
 }
 
 export default function Felder({

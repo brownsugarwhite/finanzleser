@@ -28,7 +28,6 @@ interface ButtonProps {
   /** Kleinere Pille (42 px) für Listenzeilen. */
   klein?: boolean;
   /** Die Füllung wächst beim Überfahren auf die ganze Innenfläche. */
-  fuellt?: boolean;
   /** Farbe der Scheibe, wenn nicht die Werkzeugfarbe gelten soll. */
   farbe?: string;
   className?: string;
@@ -54,14 +53,13 @@ function Zeichen({ icon }: { icon: NonNullable<ButtonProps["icon"]> }) {
 
 export default function Button({
   label, onClick, disabled = false, href, download, target, rel,
-  icon = "arrow", klein = false, fuellt = false, farbe, className,
+  icon = "arrow", klein = false, farbe, className,
 }: ButtonProps) {
-  const klassen = cn("pille", klein && "pille--klein", fuellt && "pille--fuellt", className);
+  const klassen = cn("pille", klein && "pille--klein", className);
   const stil = farbe ? ({ "--pille-farbe": farbe } as React.CSSProperties) : undefined;
 
   const inhalt = (
     <>
-      {fuellt && <i className="pille__fuell" aria-hidden="true" />}
       <span className="pille__text">{label}</span>
       <span className="pille__scheibe"><Zeichen icon={icon} /></span>
     </>
