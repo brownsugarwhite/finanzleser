@@ -41,6 +41,15 @@ export interface ParamDef {
   optionen?: { wert: string; label: string }[];
   /** true = Wert kann nur die Redaktion setzen (Variante), nie der Leser. */
   fest?: boolean;
+  /**
+   * Nur zeigen, wenn ein anderer Parameter diesen Wert hat — deklarativ, weil `DefLite`
+   * als JSON in die Insel reist und keine Funktionen tragen darf.
+   *
+   * Gebraucht bei der Tierversicherung: die Rassegruppe trägt nur bei Hunden Tarife. Bei
+   * Katzen hat Gruppe 2 null und Gruppe 3 genau einen (gemessen 16.09.2026) — drei Stufen
+   * anzubieten, von denen zwei ins Leere führen, ist eine Falle.
+   */
+  wenn?: { key: string; ist: string };
 }
 
 /** „saldo": positiv = Kosten, negativ = Ertrag (Girokonto mit Guthabenzins). */

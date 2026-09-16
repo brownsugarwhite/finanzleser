@@ -42,7 +42,10 @@ export interface IhreAngabenProps {
 
 export default function IhreAngaben({ def, quelle, params, onParam, meta, register = [], auswahl = {}, onAuswahl }: IhreAngabenProps) {
   // Was die Redaktion festgelegt hat, ist keine Angabe des Lesers.
-  const offen = def.params.filter((p) => !p.fest && quelle.fest[p.key] === undefined);
+  const offen = def.params.filter((p) =>
+    !p.fest && quelle.fest[p.key] === undefined &&
+    // `wenn` hängt ein Feld an ein anderes: die Rassegruppe gibt es nur für Hunde.
+    (!p.wenn || String(params[p.wenn.key] ?? def.params.find((q) => q.key === p.wenn!.key)?.standard) === p.wenn.ist));
   if (!offen.length && !(onAuswahl && register.length)) return null;
 
   const lineale = offen.filter((p) => bausteinFuer(p) === "lineal");

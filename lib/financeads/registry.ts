@@ -669,14 +669,26 @@ const KATEGORIEN: KategorieDef[] = [
        * wörtlich: „Risky group must be one of RG1, RG2, RG3". Die Zuordnung Rasse →
        * Gruppe liegt im Widget des Partners, nicht in den Daten, die wir bekommen.
        *
-       * Welche Gruppe welche ist, lässt sich auch nicht erschließen: RG1 bringt zwölf
-       * Tarife ab 56,97 €, RG2 drei ab 25,88 €, RG3 vier ab 25,88 € — die Reihenfolge ist
-       * weder nach Zahl noch nach Preis eindeutig. Eine geratene Zuordnung würde einen
-       * falschen Beitrag ausweisen und bei Listenhunden an rechtliche Einstufungen
-       * rühren, die je Bundesland verschieden sind. Deshalb stehen hier die Gruppen, wie
-       * der Partner sie führt, und der Hinweis sagt, wer sie festlegt.
+       * WAS die Gruppen tun, ist dagegen gemessen — derselbe Tarif in allen dreien:
+       * Getsafe Vollschutz Premium kostet 75,77 € (RG1), 101,02 € (RG2), 101,02 € (RG3);
+       * OP-Schutz Comfort 19,41 / 25,88 / 25,88. RG1 ist also die günstigste Stufe und
+       * trägt zwölf Tarife, RG2 drei und RG3 vier — RG2 und RG3 sind preisgleich, nur
+       * Getsafe und DA Direkt unterscheiden überhaupt.
+       *
+       * 🚨 Eine Rasse → Gruppe abzubilden ist mit belegter Quelle NICHT möglich, und zwar
+       * grundsätzlich: es gibt keine veröffentlichte Zuordnung. CHECK24s Lexikon führt
+       * rassetypische Risiken auf, aber ausdrücklich kein Klassensystem; die Branchen-
+       * literatur sagt „Es existiert keine einheitliche Markteinstufung, jeder Versicherer
+       * nutzt eigene Statistiken"; PETPROTECT stellt in der Krankenversicherung alle
+       * Rassen gleich, Getsafe nennt die Rasse als Faktor, ohne die Tabelle zu
+       * veröffentlichen. Die Listenhund-Rasselisten der Länder sind zwar belegt, betreffen
+       * aber die Haftpflicht, nicht die Krankenversicherung.
+       *
+       * Eine geratene Zuordnung würde einen um ein Drittel falschen Beitrag ausweisen.
+       * Deshalb stehen hier die Gruppen, wie der Partner sie führt, und der Hinweis sagt,
+       * wer sie festlegt. Bei Katzen entfällt die Frage ganz (`wenn`).
        */
-      { key: "risky_group", label: "Rassegruppe", typ: "wahl", standard: "RG1", optionen: [{ wert: "RG1", label: "Gruppe 1" }, { wert: "RG2", label: "Gruppe 2" }, { wert: "RG3", label: "Gruppe 3" }] },
+      { key: "risky_group", label: "Rassegruppe", typ: "wahl", standard: "RG1", wenn: { key: "animal_type", ist: "DOG" }, optionen: [{ wert: "RG1", label: "Gruppe 1" }, { wert: "RG2", label: "Gruppe 2" }, { wert: "RG3", label: "Gruppe 3" }] },
     ],
     spalten: [
       { key: "beitrag", label: "Beitrag / Monat", art: "geld", richtung: "runter" },
@@ -686,7 +698,7 @@ const KATEGORIEN: KategorieDef[] = [
     ],
     bestwert: { key: "beitrag", richtung: "runter" },
     filter: [{ key: "tierarztwahl", label: "nur mit freier Tierarztwahl", wert: true }],
-    hinweis: "In welche der drei Rassegruppen ein Tier fällt, legt der Versicherer fest — die Einstufung hängt von der Rasse ab und wird beim Abschluss geprüft. Wir bekommen von unserem Partner nur die Gruppen, nicht die Rassenlisten dahinter.",
+    hinweis: "In welche Rassegruppe ein Hund fällt, legt der Versicherer fest; eine einheitliche Einstufung gibt es am Markt nicht. Die meisten Tarife gelten für Gruppe 1 — nur zwei Versicherer unterscheiden überhaupt, und dort kostet derselbe Tarif in Gruppe 2 und 3 rund ein Drittel mehr. Für Katzen spielt die Rasse bei unseren Partnern keine Rolle.",
     sortierung: [{ key: "beitrag", label: "Beitrag" }],
     totalLabel: "Beitrag / Monat",
     suchwoerter: ["tierkrankenversicherung", "hundekrankenversicherung", "katzenkrankenversicherung", "op-versicherung hund", "tierarzt", "hund", "katze", "haustier"],
