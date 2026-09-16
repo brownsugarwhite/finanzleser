@@ -156,6 +156,45 @@ Zwei echte Fehler hat dieser Abgleich gefunden und beide sind behoben: der Rente
 gab „undefined Monate“ aus (mein eigener Umlaut-Fix hatte den Feldnamen `monate_frueher`
 getroffen), und der Effektivzins des Kreditrechners fehlte.
 
+### 2.7 🚨 Nachtrag: was 2.4 nicht sehen konnte
+
+Deine Stichprobe am Minikredit hat eine Lücke in meiner Prüfmethode aufgedeckt, und sie
+ist grundsätzlich: **§ 2.4 verglich unsere Seite mit der API bei genau unseren
+Parametern.** Das ist ein Zirkelschluss — er prüft, ob wir die Daten treu darstellen, nie
+ob wir die richtigen anfragen. Dazu kam, dass ich 15 von 43 Vergleichen von Hand
+ausgewählt hatte; Minikredit war nicht dabei.
+
+**Der Fehler, den das verdeckt hat:** Die Minikredit-Seite hatte `type=MINI_LOAN` fest
+gesetzt. Dieser Filter liefert ausschließlich bei 500–1.000 € über 1–2 Monate Ergebnisse
+— dieselben zwei, die auch ohne ihn kommen — und sonst überall null. Die Seite hat aber
+zwei Regler. Wer die Laufzeit über sechs Monate zog, stand vor einer leeren Liste. Beide,
+Seite und API, lieferten null, also galt sie als „deckungsgleich".
+
+**Die Prüfung, die gefehlt hat,** liegt jetzt als `tools/vergleich-breite.mjs` vor und
+läuft über ALLE Vergleiche: jeden gesetzten Parameter einzeln weglassen und zählen.
+Vervielfacht sich die Liste, ist der Parameter zu eng gewählt. **47 von 47 ohne Befund.**
+
+Zwei weitere Funde aus demselben Nachfassen:
+
+- **„Verwendung" und „Kreditart" standen nirgends.** Beide waren global unsichtbar,
+  obwohl nur die Autokredit-Seite die Verwendung redaktionell festlegt. 🚨 Die drei Werte
+  der Übergabe — Neuwagen, Gebrauchtwagen, Umschuldung — **gibt es in der API nicht**:
+  `NEW_CAR`, `USED_CAR`, `RESCHEDULING` und fünf weitere antworten mit „The selected usage
+  is invalid". Gültig sind genau drei: Auto, Modernisierung, freie Verwendung.
+- **Tierversicherung: der Rechner des Partners lässt eine Rasse wählen, die API nicht.**
+  Zwölf Parameternamen durchprobiert (`breed`, `race`, `rasse` …) — keiner existiert; von
+  21 `/list/`-Endpunkten liefert keiner eine Rasseliste. Die Fehlermeldung lautet wörtlich
+  „Risky group must be one of RG1, RG2, RG3". Welche Gruppe welche ist, lässt sich auch
+  nicht erschließen (RG1 zwölf Tarife ab 56,97 €, RG2 drei ab 25,88 €). Die Zuordnung
+  Rasse → Gruppe liegt im Widget des Partners. Geraten wird sie nicht — ein Hinweis sagt
+  jetzt, wer die Gruppe festlegt. **Das bleibt offen** und braucht entweder eine Anfrage
+  bei financeads oder eine belegte Quelle.
+
+**Methodisch gelernt:** `filter_settings` zeigt nur, was die API *angewandt* hat. Ein
+Parameter, den wir nie senden und der keine Voreinstellung hat, taucht dort nie auf.
+Verlässlich enumerieren lässt er sich anders: ein gültiger Parameter mit ungültigem Wert
+wird namentlich gerügt, ein unbekannter stillschweigend ignoriert.
+
 ---
 
 ## 3 · Fehler, die der Umbau nebenbei gefunden hat
@@ -214,6 +253,7 @@ getroffen), und der Effektivzins des Kreditrechners fehlte.
 
 ```bash
 node tools/kursblatt-mess.mjs      # Vergleichsseiten, 50 Prüfungen
+node tools/vergleich-breite.mjs    # zeigt jede Seite, was ihre Kategorie hergibt? (47)
 node tools/rechner-mess.mjs        # Rechner, 32 Prüfungen (--slug für einen anderen)
 npm run verify:redirects -- --offline   # Pflicht vor jedem Merge nach main
 node --experimental-strip-types tools/financeads-refresh.mjs   # Schnappschüsse
