@@ -114,7 +114,7 @@ export default function RandLinks({ mobil, onZu }: { mobil?: boolean; onZu?: () 
           <div className="rand__fuss"><Einschub format="halfpage" nr={0} /></div>
         </div>
       </div>
-      {mobil && <button type="button" className="rand__zu btn btn--klein btn--still" onClick={onZu}>Schließen ✕</button>}
+      {mobil && <button type="button" className="rand__zu knopf knopf--klein knopf--still" onClick={onZu}>Schließen ✕</button>}
     </aside>
   );
 }

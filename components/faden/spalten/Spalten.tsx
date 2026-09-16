@@ -232,7 +232,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
                   weiter „aufschlagen", denn genau das tut der Klick. */}
               {/* Wie in v2 (Übergabe Zeile 380): grün, gemischt gesetzt, mit der wachsenden Linie
                   und der Pfeilspitze — kein Versalien-Kicker. */}
-              <span className="pfeil-link kiosk__oeffnen"><span className="kiosk__wort">Ausgabe </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}<i /></span>
+              <span className="strich-link strich-link--gross kiosk__oeffnen"><span className="kiosk__wort">Ausgabe </span>{offen && beruehrt ? "zuklappen" : "aufschlagen"}<i /></span>
             </button>
             <i className="doppellinie" />
             <div
@@ -281,7 +281,7 @@ export default function Spalten({ rubriken, start }: { rubriken: SpaltenRubrik[]
                       <b>{e.untertitel ? boldYears(e.untertitel) : boldYears(e.titel)}</b>
                     </a>
                   ))}
-                  <a className="pfeil-link kiosk__alle" href={th && th.zahl > th.liste.length ? th.href : r.href}>
+                  <a className="strich-link strich-link--gross kiosk__alle" href={th && th.zahl > th.liste.length ? th.href : r.href}>
                     {th && th.zahl > th.liste.length ? `Alle ${th.zahl} Ratgeber in ${th.name}` : `Alle ${r.zahl} Ratgeber in ${r.titel}`}<i />
                   </a>
                 </div>

@@ -16,11 +16,11 @@
 .faden-shell .leo-frage .wert { font-size: var(--grad-18); font-weight: 700; color: var(--green-ink); font-family: var(--sans); min-width: 44px; text-align: right; }
 .faden-shell .leo-frage .werte { display: flex; justify-content: space-between; font-family: var(--sans); font-size: var(--grad-11); color: var(--muted); margin-top: calc(-1 * var(--luft-xs)); }
 .faden-shell .leo-frage .aktion { display: flex; align-items: center; gap: var(--luft-s); flex-wrap: wrap; }
-.faden-shell .leo-frage .btn { font-family: var(--sans); }
+.faden-shell .leo-frage .knopf { font-family: var(--sans); }
 .faden-shell .leo-frage .hinweis-f { font: 600 var(--grad-11)/1.35 var(--sans); color: var(--muted); display: flex; gap: var(--luft-xs); align-items: center; }
 .faden-shell .leo-frage .hinweis-f i { font-style: normal; color: var(--green); }
 .faden-shell .leo-frage .chips { gap: var(--luft-s); }
 .faden-shell .leo-frage .chips .chip { font-family: var(--sans); font-size: var(--grad-13); padding: var(--luft-xs) var(--luft-s); }
 /* Textlink „Zum Vergleich“ im Danke-Kasten (nur in Next: das Ziel der Regler-Frage ist hier eine eigene Seite) */
-.faden-shell .leo-frage .textlink { justify-self: start; font-family: var(--sans); }
+.faden-shell .leo-frage .strich-link { justify-self: start; font-family: var(--sans); }
 .faden-shell .leo-frage--danke { border-color: var(--rule); background: var(--paper); }

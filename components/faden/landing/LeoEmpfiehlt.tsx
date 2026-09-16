@@ -89,7 +89,7 @@ export default function LeoEmpfiehlt({ gaengig, daten, ziele }: { gaengig: Empfe
             <span className="kicker kicker--tool"><i className="dot dot--vergleich" aria-hidden="true" />Vergleich</span>
             <b className="vgl-karte__titel">{v.titel}</b>
             {v.text && <span className="vgl-karte__text">{v.text}</span>}
-            <span className="pfeil-link">Tarife nebeneinander<i /></span>
+            <span className="strich-link strich-link--gross">Tarife nebeneinander<i /></span>
           </a>
         ))}
       </div>

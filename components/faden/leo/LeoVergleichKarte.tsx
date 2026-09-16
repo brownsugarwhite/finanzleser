@@ -53,7 +53,7 @@ export default function LeoVergleichKarte({ karte }: { karte: CardRef }) {
         </ol>
       )}
       {!kurz && !fehler && <span className="leo-karte__laedt">Angebote werden geladen …</span>}
-      <a className="pfeil-link" href={karte.href} onClick={(e) => { e.preventDefault(); navigieren(karte.href); }}>
+      <a className="strich-link strich-link--gross" href={karte.href} onClick={(e) => { e.preventDefault(); navigieren(karte.href); }}>
         {kurz ? `Alle ${kurz.anzahl} ${mehrzahl} nebeneinander` : "Zum Vergleich"}<i />
       </a>
       {kurz?.stand && <span className="leo-karte__stand">{kurz.hauptLabel ? `${kurz.hauptLabel} · ` : ""}Stand {stand(kurz.stand)}{kurz.grund ? ` · Bestwert: ${kurz.grund}` : ""}</span>}

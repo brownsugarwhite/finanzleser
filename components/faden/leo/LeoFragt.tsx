@@ -190,7 +190,7 @@ export default function LeoFragt({ vorgabe }: { vorgabe?: LeoFragtEintrag } = {}
           <div className="kopf-f"><img src={LEO} alt="" /><span className="kicker kicker--gruen">Leo</span></div>
           <p>{d?.text}</p>
           {d?.hinweis && <span className="hinweis-f"><i>↓</i> {d.hinweis}</span>}
-          {link && <a className="textlink" href={link.href} onClick={(e) => { e.preventDefault(); weg(); navigieren(link.href); }}>{link.text} →</a>}
+          {link && <a className="strich-link" href={link.href} onClick={(e) => { e.preventDefault(); weg(); navigieren(link.href); }}>{link.text} →</a>}
         </div>
       </div>
     );
@@ -219,7 +219,7 @@ export default function LeoFragt({ vorgabe }: { vorgabe?: LeoFragtEintrag } = {}
             </div>
             <div className="werte"><span>{zahl(r.min)}{einheit}</span><span>{zahl(r.max)}{einheit}</span></div>
             <div className="aktion">
-              <button type="button" className="btn btn--klein btn--primary" onClick={antworten}>Antworten</button>
+              <button type="button" className="knopf knopf--klein knopf--primaer" onClick={antworten}>Antworten</button>
               <span className="hinweis-f"><i>↓</i> Antwort erscheint im Faden</span>
             </div>
           </>

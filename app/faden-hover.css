@@ -34,8 +34,8 @@
 .faden-shell .werkzeug-k b { font-family: var(--serif); font-size: var(--grad-26); font-weight: 900; line-height: 1.1; }
 .faden-shell .werkzeug-k b small { font-size: var(--grad-13); font-weight: 700; color: var(--muted); margin-left: var(--luft-s); font-family: var(--sans); }
 .faden-shell .werkzeug-k span { font-size: var(--grad-13); color: var(--muted); }
-.faden-shell .werkzeug-k .pfeil-link { margin-top: var(--luft-xs); font-size: var(--grad-13); }
-.faden-shell .werkzeug-k:hover > .pfeil-link i { width: 30px; }
+.faden-shell .werkzeug-k .strich-link--gross { margin-top: var(--luft-xs); font-size: var(--grad-13); }
+.faden-shell .werkzeug-k:hover > .strich-link--gross i { width: 30px; }
 
 /* CTA „Finanzleser entdecken ↓“ unten im Hero, blendet nach 2,2 s ein (01-css.html:476–479) */
 .faden-shell .hero-cta { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; border: 0; background: none; color: var(--ink); font-weight: 600; font-size: var(--grad-14); display: grid; justify-items: center; gap: var(--luft-xs); letter-spacing: .02em; cursor: pointer; font-family: inherit; }
@@ -46,8 +46,8 @@
   /* 01-css.html:876–877, 883 */
   .faden-shell .werkzeugreihe { flex-wrap: wrap; justify-content: center; } .faden-shell .werkzeugreihe .trenner { display: none; }
   .faden-shell .werkzeug-k { max-width: none; flex: 1 1 100%; padding: var(--luft-s) var(--luft-m); display: flex; align-items: baseline; gap: var(--luft-s); }
-  .faden-shell .werkzeug-k b { font-size: var(--grad-20); } .faden-shell .werkzeug-k > span:not(.kicker):not(.pfeil-link) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
-  .faden-shell .werkzeug-k .pfeil-link { margin: 0 0 0 auto; display: inline-flex; white-space: nowrap; }
+  .faden-shell .werkzeug-k b { font-size: var(--grad-20); } .faden-shell .werkzeug-k > span:not(.kicker):not(.strich-link--gross) { display: none; } .faden-shell .werkzeug-k b small { display: none; }
+  .faden-shell .werkzeug-k .strich-link--gross { margin: 0 0 0 auto; display: inline-flex; white-space: nowrap; }
   .faden-shell .hbox { display: none; }
   .faden-shell .hero-cta { bottom: 10px; }
 }

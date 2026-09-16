@@ -4,5 +4,5 @@
 import { teilenOeffnen } from "@/components/faden/TeilenDialog";
 
 export default function AbschnittTeilen({ titel, url, id }: { titel: string; url: string; id: string }) {
-  return <button type="button" className="textlink textlink--still teilen" onClick={(e) => teilenOeffnen(titel, `https://www.finanzleser.de${url}#${id}`, e.currentTarget)}>Abschnitt teilen</button>;
+  return <button type="button" className="strich-link strich-link--still teilen" onClick={(e) => teilenOeffnen(titel, `https://www.finanzleser.de${url}#${id}`, e.currentTarget)}>Abschnitt teilen</button>;
 }

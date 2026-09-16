@@ -33,7 +33,7 @@ export default function AusDemNewsletter({ eintraege }: { eintraege: AusleseEint
           </li>
         ))}
       </ul>
-      <a className="pfeil-link" href="#wochenbrief-heute">Den Wochenbrief abonnieren<i /></a>
+      <a className="strich-link strich-link--gross" href="#wochenbrief-heute">Den Wochenbrief abonnieren<i /></a>
     </section>
   );
 }

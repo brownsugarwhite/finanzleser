@@ -26,7 +26,7 @@ export default function RandRechts({ mobil, onZu }: { mobil?: boolean; onZu?: ()
           <div className="rand__fuss"><LeoFragt /><Einschub format="halfpage" nr={1} /></div>
         </div>
       </div>
-      {mobil && <button type="button" className="rand__zu btn btn--klein btn--still" onClick={onZu}>Schließen ✕</button>}
+      {mobil && <button type="button" className="rand__zu knopf knopf--klein knopf--still" onClick={onZu}>Schließen ✕</button>}
     </aside>
   );
 }

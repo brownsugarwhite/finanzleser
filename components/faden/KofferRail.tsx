@@ -15,7 +15,7 @@ export default function KofferRail() {
       <span className="kicker">Aktenkoffer</span>
       <b className="koffer-rail__zahl">{koffer.length}</b>
       <span className="koffer-rail__text">Rechnungen und Ratgeber, die Sie behalten wollen.</span>
-      <button type="button" className="pfeil-link" onClick={() => navigieren("/plus/aktenkoffer")}>Zum Koffer<i /></button>
+      <button type="button" className="strich-link strich-link--gross" onClick={() => navigieren("/plus/aktenkoffer")}>Zum Koffer<i /></button>
     </div>
   );
 }

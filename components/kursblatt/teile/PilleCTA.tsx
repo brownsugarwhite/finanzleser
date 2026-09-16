@@ -5,10 +5,14 @@
  * 48 px mit Hover-Füllung), :194-198 (Listenzeile, 42 px ohne Outline), :299
  * („Ausrechnen“, fester Knopf, der beim Rechnen schrumpft), :349 („Angebote ansehen“).
  *
+ * 🚨 Die Form selbst steht seit dem 16.09.2026 in app/knoepfe.css als `.pille` und gilt
+ * für die ganze Seite — hier bleibt nur, was das Kursblatt eigenhändig mitbringt: die
+ * drei Glyphen und die Werkzeugfarbe.
+ *
  * 🚨 Die Hover-Füllung braucht KEIN JavaScript. Der Prototyp führt dafür `ctaFill` und
  * `hoverTop` im Zustand (K:482, :485) — nötig, weil sie auch dann läuft, wenn die MAUS
  * ÜBER DER ZEILE steht, nicht über der Pille. In CSS ist genau das ein Nachfahren-
- * Selektor: `.kb__zeile:hover .kb-pille__fuell { width: 100% }`. Zwei Zustandsfelder
+ * Selektor: `.kb__zeile:hover .pille__fuell { width: 100% }`. Zwei Zustandsfelder
  * weniger, und die Füllung läuft auch ohne Hydration.
  */
 import Link from "next/link";
@@ -50,25 +54,25 @@ export default function PilleCTA({
   nurKnopf = false, schrumpft = false, rel, target, ariaLabel,
 }: PilleProps) {
   const klassen = [
-    "kb-pille",
-    klein ? "kb-pille--klein" : "",
-    fuellung ? "kb-pille--fuellt" : "",
-    nurKnopf ? "kb-pille--nur-knopf" : "",
+    "pille",
+    klein ? "pille--klein" : "",
+    fuellung ? "pille--fuellt" : "",
+    nurKnopf ? "pille--nur-knopf" : "",
   ].filter(Boolean).join(" ");
 
   const inneres = (
     <>
-      {fuellung && <i className="kb-pille__fuell" aria-hidden="true" />}
-      <span className="kb-pille__text">{text}</span>
-      <span className="kb-pille__knopf" data-schrumpft={schrumpft ? "an" : "aus"} aria-hidden="true">
-        <svg width={klein ? 14 : 16} height={klein ? 14 : 16} viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth={glyph === "gleich" ? 2.2 : 2} strokeLinecap="round" strokeLinejoin="round">
+      {fuellung && <i className="pille__fuell" aria-hidden="true" />}
+      <span className="pille__text">{text}</span>
+      <span className="pille__scheibe" data-schrumpft={schrumpft ? "an" : "aus"} aria-hidden="true">
+        <svg width={klein ? 14 : 16} height={klein ? 14 : 16} viewBox="0 0 16 16" fill="none" stroke="var(--auf-tinte)" strokeWidth={glyph === "gleich" ? 2.2 : 2} strokeLinecap="round" strokeLinejoin="round">
           {PFAD[glyph]}
         </svg>
       </span>
     </>
   );
 
-  const stil = { "--kb-pille-farbe": werkzeug === "magenta" ? "var(--pink)" : "var(--tuerkis)" } as React.CSSProperties;
+  const stil = { "--pille-farbe": werkzeug === "magenta" ? "var(--pink)" : "var(--tuerkis)" } as React.CSSProperties;
 
   if (href) {
     return (

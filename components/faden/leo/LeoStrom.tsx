@@ -57,8 +57,8 @@ function LeoWort({ m, laeuft }: { m: LeoUIMessage; laeuft: boolean }) {
       )}
       {!laeuft && text && (
         <div className="werkzeuge">
-          <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>
-          <button type="button" className="textlink textlink--still" onClick={kopieren}>Kopieren</button>
+          <button type="button" className="strich-link strich-link--still" onClick={vorlesen}>Vorlesen</button>
+          <button type="button" className="strich-link strich-link--still" onClick={kopieren}>Kopieren</button>
         </div>
       )}
     </div>
@@ -152,12 +152,12 @@ export default function LeoStrom() {
           <LeoRede fehler>
             <p>{/429|limit|pause/i.test(fehler.message) ? "Leo macht gerade eine kurze Pause. Bitte versuchen Sie es in einer Minute erneut." : "Leo ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal."}</p>
           </LeoRede>
-          {letzte?.role === "user" && <div className="werkzeuge"><button type="button" className="textlink" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button></div>}
+          {letzte?.role === "user" && <div className="werkzeuge"><button type="button" className="strich-link" onClick={() => fragen(getMessageText(letzte))}>Noch einmal fragen</button></div>}
         </div>
       )}
       {chips.length > 0 && (
-        <div className="chips leo-chips">
-          {chips.map((c) => <button key={c.text} type="button" className={"chip" + (c.art === "leo" ? " chip--leo" : c.art === "still" ? " chip--still" : "")} onClick={() => { setChipsWeg(letzte?.id || ""); c.tun(); }}>{c.text}</button>)}
+        <div className="chips chips--rechts">
+          {chips.map((c) => <button key={c.text} type="button" className={"chip" + (c.art === "leo" ? "" : c.art === "still" ? "chip--still" : "")} onClick={() => { setChipsWeg(letzte?.id || ""); c.tun(); }}>{c.text}</button>)}
         </div>
       )}
     </div>

@@ -137,7 +137,7 @@ function HeroInnen({ zahlen }: { zahlen?: HeroZahlen }) {
                   <span className="kicker kicker--tool"><i className={`dot dot--${w.key}`} />{w.name}</span>
                   <b>{zahlen?.[w.key] ?? w.zahl}<small>im Faden</small></b>
                   <span>{w.text}</span>
-                  <span className="pfeil-link">{w.ziel}<i /></span>
+                  <span className="strich-link strich-link--gross">{w.ziel}<i /></span>
                 </Link>
               </Fragment>
             ))}

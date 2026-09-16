@@ -551,47 +551,20 @@
 .kb .kb-zaehlwerk__chip[data-aktiv="an"] { background: var(--ink); color: var(--auf-tinte); border-color: var(--ink); }
 .kb .kb-zaehlwerk__hinweis { display: block; text-align: center; margin-top: var(--luft-s); font: italic 300 var(--grad-12) var(--serif); color: var(--muted); }
 
-/* ── Pille (K:140-144 groß · :194-198 Liste · :299/:349 fester Knopf) ─────────────── */
-.kb .kb-pille {
-  position: relative; display: inline-flex; align-items: center; height: 48px;
-  padding: var(--luft-xs) var(--luft-xs) var(--luft-xs) var(--luft-l); border: 2px solid var(--ink);
-  outline: 1px solid var(--ink); outline-offset: 2px; border-radius: var(--radius-pille);
-  background: transparent; text-decoration: none; color: var(--ink);
-  font: 500 var(--grad-16) var(--sans); overflow: hidden; cursor: pointer;
-  transition: color .3s; box-sizing: border-box;
-}
-.kb .kb-pille--klein { height: 42px; padding-left: var(--luft-m); border-radius: var(--radius-pille); outline: 0; font-size: var(--grad-14); }
-.kb .kb-pille__fuell {
-  position: absolute; top: 3px; bottom: 3px; right: 3px; width: 38px; border-radius: var(--radius-pille);
-  background: var(--kb-pille-farbe); transition: width .5s var(--kurve);
-}
-.kb .kb-pille--klein .kb-pille__fuell { width: 32px; border-radius: var(--radius-pille); transition-duration: .45s; }
-.kb .kb-pille__text { position: relative; padding-right: var(--luft-m); }
-.kb .kb-pille--klein .kb-pille__text { padding-right: var(--luft-m); }
-.kb .kb-pille__knopf {
-  position: relative; width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius-kreis);
-  display: flex; align-items: center; justify-content: center;
-  background: var(--kb-pille-farbe); transition: transform .35s var(--ueber);
-}
-.kb .kb-pille--klein .kb-pille__knopf { width: 32px; height: 32px; }
-/* Bei der füllenden Pille trägt die Füllung die Farbe — der Knopf ist nur ihr rundes Ende. */
-.kb .kb-pille--fuellt .kb-pille__knopf { background: transparent; }
-.kb .kb-pille__knopf[data-schrumpft="an"] { transform: scale(.8); }
-/* Die Füllung läuft auch, wenn die Maus über der ZEILE steht, nicht über der Pille. */
-.kb .kb-pille--fuellt:hover .kb-pille__fuell,
-.kb .kb__zeile:hover .kb-pille__fuell,
-.kb .kb-podest:hover .kb-pille__fuell { width: 100%; }
-.kb .kb-pille--fuellt:hover,
-.kb .kb__zeile:hover .kb-pille--fuellt,
-.kb .kb-podest:hover .kb-pille--fuellt { color: var(--auf-tinte); }
-/* Pillen ohne Füllung färben beim Überfahren nur den Text (K:299 Magenta, :349 Türkis). */
-.kb .kb-pille:not(.kb-pille--fuellt):hover { color: var(--kb-pille-farbe); }
-.kb .kb-pille--nur-knopf { padding-left: var(--luft-xs); }
-.kb .kb-pille--nur-knopf .kb-pille__text { display: none; }
-/* K:519 — im schmalen Satz bleibt von der Listen-Pille nur der Knopf. */
+/* ── Pille ───────────────────────────────────────────────────────────────────────── */
+/* Die Pille steht seit dem 16.09.2026 in app/knoepfe.css und gilt für die ganze Seite —
+   das Kursblatt hatte sie ein zweites Mal gebaut, `Button.tsx` ein drittes Mal inline.
+   Hier bleibt nur, was der Satz des Kursblatts eigenhändig auslöst: die Füllung läuft
+   auch, wenn die Maus über der ZEILE steht statt über der Pille (K:482/:485 löst das im
+   Prototyp mit zwei Zustandsfeldern; ein Nachfahren-Selektor kann es ohne Hydration). */
+.kb .kb__zeile:hover .pille__fuell,
+.kb .kb-podest:hover .pille__fuell { width: 100%; }
+.kb .kb__zeile:hover .pille--fuellt,
+.kb .kb-podest:hover .pille--fuellt { color: var(--auf-tinte); }
+/* K:519 — im schmalen Satz bleibt von der Listen-Pille nur die Scheibe. */
 @container kb (max-width: 559px) {
-  .kb .kb-pille--klein { padding-left: var(--luft-xs); }
-  .kb .kb-pille--klein .kb-pille__text { display: none; }
+  .kb .pille--klein { padding-left: var(--luft-xs); }
+  .kb .pille--klein .pille__text { display: none; }
 }
 
 /* ── Stempel (K:123 groß · :191 klein) ────────────────────────────────────────────── */

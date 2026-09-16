@@ -102,7 +102,7 @@
 .faden-shell .ks__wa { display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: none; padding: var(--luft-s) 0; font: 600 var(--grad-13) var(--sans); color: var(--muted); cursor: pointer; }
 .faden-shell .ks__wa:hover { color: var(--green-ink); }
 .faden-shell .ks__wa .ikon { width: 17px; height: 17px; vertical-align: 0; }
-.faden-shell .ks__feld .btn .ikon { width: 16px; height: 16px; vertical-align: -3px; margin-right: var(--luft-xs); }
+.faden-shell .ks__feld .knopf .ikon { width: 16px; height: 16px; vertical-align: -3px; margin-right: var(--luft-xs); }
 .faden-shell .ks__rein { animation: ks-rein .5s cubic-bezier(.25,.46,.45,.94) both; }
 @keyframes ks-rein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 

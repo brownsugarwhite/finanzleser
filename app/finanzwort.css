@@ -1,5 +1,5 @@
 /* Finanzwort des Tages (Wordle-Mechanik) im Faden. Port aus docs/prototype/src/01-css.html
-   (.wortspiel, .meldung, .chip--spiel, .punkte, .raster). Nur im .faden-shell-Scope. */
+   (.wortspiel, .meldung, .punkte, .raster). Nur im .faden-shell-Scope. */
 /* Die Kopfzeile `.spiel-kopf` steht in app/spiele.css — sie gehört allen Spielen,
    nicht nur dem Finanzwort. */
 
@@ -30,8 +30,6 @@
 .faden-shell .punkte { font-weight: 700; color: var(--pink); }
 .faden-shell .raster { font-size: var(--grad-18); letter-spacing: 2px; }
 /* Spiel-Chip (Prototyp Zeile 57) */
-.faden-shell .chip--spiel { border-color: var(--pink); color: var(--pink); }
-.faden-shell .chip--spiel:hover { background: var(--pink-tint); color: var(--pink); border-color: var(--pink); }
 /* Meldung im Kapitel „Heute“ (Prototyp Zeilen 648–649); .aktionen hier ohne die Artikel-Trennlinie aus faden.css */
 .faden-shell .meldung { border: 1px solid var(--rule); background: var(--auflage); padding: var(--luft-s) var(--luft-m); display: grid; grid-template-columns: 1fr auto; gap: var(--luft-xxs) var(--luft-m); align-items: center; border-radius: var(--radius-kante); }
 .faden-shell .meldung .kicker { grid-column: 1 / -1; }

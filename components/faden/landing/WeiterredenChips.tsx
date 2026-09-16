@@ -28,7 +28,7 @@ export default function WeiterredenChips() {
       </div>
       <div className="chips">
         {FRAGEN.map((f) => (
-          <button key={f} type="button" className="chip chip--leo" onClick={() => fragen(f)}>{f}</button>
+          <button key={f} type="button" className="chip" onClick={() => fragen(f)}>{f}</button>
         ))}
       </div>
     </div>

@@ -13,7 +13,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const DATEIEN = [
-  "faden.css", "faden-landing.css", "faden-hover.css", "kassensturz.css",
+  "knoepfe.css", "faden.css", "faden-landing.css", "faden-hover.css", "kassensturz.css",
   "finanzwort.css", "spiele.css", "schlange.css", "leo-fragt.css", "statistik-formen.css",
 ];
 
@@ -92,8 +92,11 @@ export function harteFarben(): Fund[] {
  * die sind Zustände.
  */
 export function knopfformen(): Form[] {
-  const treffer = /^\.faden-shell \.([a-z0-9_-]+(?:--[a-z0-9-]+)?)$/;
-  const gesucht = /(btn|knopf|chip|textlink|pfeil-link|taste|schalter)/;
+  const treffer = /^(?:\.faden-shell )?\.([a-z0-9_-]+(?:--[a-z0-9-]+)?)$/;
+  // 🚨 Genau die Grundform oder eine ihrer Varianten — kein Teilwort. Ein lockeres
+  //    /pille/ trifft sonst `nav-pille__koerper` und `suchpille-wrap`: Bauteile, die
+  //    ihren Grund von außen bekommen und als Muster gerendert seitenfüllend dunkel sind.
+  const gesucht = /^(pille|knopf|chip|chips|strich-link|taste|schalter|segment)(--[a-z0-9-]+)?$/;
   const map = new Map<string, Form>();
   for (const { sel, datei } of regeln()) {
     const m = sel.match(treffer);

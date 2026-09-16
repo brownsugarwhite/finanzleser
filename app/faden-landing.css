@@ -31,7 +31,7 @@
 .faden-shell .auslese__titel { font: 700 var(--grad-16)/1.3 var(--serif); color: var(--ink); min-width: 0; }
 .faden-shell .auslese__eintrag:hover .auslese__titel { color: var(--green-ink); }
 .faden-shell .auslese__eintrag .dot { align-self: center; }
-.faden-shell .auslese > .pfeil-link { justify-self: start; margin-top: var(--luft-m); }
+.faden-shell .auslese > .strich-link--gross { justify-self: start; margin-top: var(--luft-m); }
 @media (max-width: 620px) {
   .faden-shell .auslese__eintrag { flex-wrap: wrap; gap: var(--luft-xs) var(--luft-s); }
   .faden-shell .auslese__eintrag .kicker { width: auto; }
@@ -57,7 +57,7 @@
 .faden-shell .plus-teaser__punkte li { display: grid; gap: var(--luft-xs); align-content: start; border-top: 1px solid var(--rule-strong); padding-top: var(--luft-s); }
 .faden-shell .plus-teaser__punkte b { font: var(--schrift-zeile); }
 .faden-shell .plus-teaser__punkte span { font: var(--schrift-klein); color: var(--muted); }
-.faden-shell .plus-teaser__punkte .textlink { justify-self: start; margin-top: var(--luft-xs); }
+.faden-shell .plus-teaser__punkte .strich-link { justify-self: start; margin-top: var(--luft-xs); }
 
 /* ---------- Leo empfiehlt: Vergleiche als Vorschau ---------- */
 /* Die Karten stehen in Leos Spalte, also rechts der 60-px-Gasse von `.wort--leo`. */
@@ -69,7 +69,7 @@
 .faden-shell .vgl-karte__titel { font: 700 var(--grad-18)/1.25 var(--serif); }
 .faden-shell .vgl-karte:hover .vgl-karte__titel { color: var(--green-ink); }
 .faden-shell .vgl-karte__text { font: var(--schrift-klein); color: var(--muted); }
-.faden-shell .vgl-karte .pfeil-link { margin-top: var(--luft-xs); font-size: var(--grad-13); }
+.faden-shell .vgl-karte .strich-link--gross { margin-top: var(--luft-xs); font-size: var(--grad-13); }
 
 /* ---------- Weiterreden mit Leo ---------- */
 .faden-shell .weiterreden .chips { margin-top: var(--luft-xs); }

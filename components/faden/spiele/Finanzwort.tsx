@@ -208,7 +208,7 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
               {Array.from({ length: L }, (_, c) => {
                 const b = tipp.charAt(c);
                 const w = res && (!letzte || c < aufgedeckt) ? res[c] : null;
-                const cls = ["zelle", b && "voll", w, aktiv && wackel && "wackel", gewonnen && letzte && c < huepft && "huepft"].filter(Boolean).join(" ");
+                const cls = ["zelle", b && "voll", w, aktiv && wackel && "wackel", gewonnen && letzte && c < huepft && "huepft"].filter(Boolean).join("");
                 return (
                   <div key={c} role="cell" className={cls} aria-label={`Reihe ${r + 1}, Buchstabe ${c + 1}: ${b || "leer"}${w ? `, ${WERTUNG_TEXT[w]}` : ""}`}>{b}</div>
                 );
@@ -239,7 +239,7 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
               const farbe = tastenFarben[k];
               const label = k === "⏎" ? "Eingabe prüfen" : k === "⌫" ? "Buchstabe löschen" : `${k}${farbe ? `, ${WERTUNG_TEXT[farbe]}` : ""}`;
               return (
-                <button key={k} type="button" className={["taste", breit && "breit", farbe].filter(Boolean).join(" ")} aria-label={label} onMouseDown={(e) => e.preventDefault()} onClick={() => taste(k)}>
+                <button key={k} type="button" className={["taste", breit && "breit", farbe].filter(Boolean).join("")} aria-label={label} onMouseDown={(e) => e.preventDefault()} onClick={() => taste(k)}>
                   {k === "⏎" ? "Enter" : k}
                 </button>
               );
@@ -250,7 +250,7 @@ export default function Finanzwort({ slug, wort, begriff, begriffName, hinweis1,
       {ende && (
         <>
           <div className="reihe">
-            <button type="button" className="chip chip--spiel" onClick={teilen}>Ergebnis teilen</button>
+            <button type="button" className="chip" onClick={teilen}>Ergebnis teilen</button>
             {begriff && <a className="chip" href={buildGlossarUrl(begriff)}>Mehr zu „{name}“</a>}
           </div>
           {gewonnen && <p className="quelle">{heute ? "Morgen gibt es ein neues Wort." : "Das Finanzwort von heute steht auf der Startseite."}</p>}

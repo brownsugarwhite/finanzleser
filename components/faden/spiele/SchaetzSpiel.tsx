@@ -66,7 +66,7 @@ export default function SchaetzSpiel({ felder }: { felder: Record<string, string
         <span>{zeige(max)}{einheit}</span>
       </div>
       {!ab && (
-        <button type="button" className="btn spiel-schaetz__knopf" onClick={() => setAb(true)}>Tipp abgeben</button>
+        <button type="button" className="knopf spiel-schaetz__knopf" onClick={() => setAb(true)}>Tipp abgeben</button>
       )}
       <p className={"spiel__aufloesung" + (!ab ? "" : genau ? " spiel__aufloesung--richtig" : " spiel__aufloesung--falsch")} aria-live="polite">
         {ab && (

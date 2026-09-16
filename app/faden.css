@@ -62,40 +62,24 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    der Schaftlinie und hatten eine andere Spitze als das Megamenü.
    🚨 Maße 1:1 aus MegaArrowTrail: Spitze 8 px hoch (× 7.62/14.37 = 4,24 px breit),
    Schaft 1 px stark. Nicht größer skalieren — sie fällt sonst sofort auf. */
-.faden-shell { --pfeilspitze: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%207.62%2014.37'%3E%3Cpath%20d='M.03,13.84c-.16.44.45.74.72.36,1.35-1.87,4.75-5.02,6.62-6.49.35-.27.34-.8-.02-1.06C5.15,5.05,2.12,2.08.74.17.47-.2-.12.09.03.53c.78,2.28,2.56,4.41,3.22,5.82.26.56.28,1.15,0,1.71C2.58,9.45.71,11.93.03,13.84Z'/%3E%3C/svg%3E"); }
 .faden-shell .spark { width: 12px; height: 12px; display: inline-block; flex: none; vertical-align: middle; transition: transform .4s; color: var(--ink); }
 .faden-shell .spark:hover { animation: faden-spark-spin 4s linear infinite; }
 @keyframes faden-spark-spin { to { transform: rotate(360deg); } }
-.faden-shell .textlink { border: 0; background: none; padding: 0; color: var(--green-ink); font-weight: 700; font-size: var(--grad-13); text-decoration: none; }
-.faden-shell .textlink--still { color: var(--muted); font-weight: 600; }
-.faden-shell .textlink:hover { text-decoration: underline; }
-.faden-shell .pfeil-link { display: inline-flex; align-items: center; gap: var(--luft-s); color: var(--green); font-weight: 600; font-size: var(--grad-14); border: 0; background: none; padding: 0; text-decoration: none; }
 /* 🚨 `components.css` färbt global jedes `p, li, span` in --color-text-medium und schlägt
    damit die Vererbung vom Link. Ohne diese Zeile steht ein Wort im Pfeillink grau und das
    nächste grün. Dieselbe Falle wie im Inhaltsverzeichnis und in der Kiosk-Schlagzeile. */
-.faden-shell .pfeil-link span { color: inherit; }
-.faden-shell .pfeil-link i { display: inline-block; width: 18px; height: 1px; background: currentColor; position: relative; transition: width .25s; }
 /* Spitze sitzt 3 px über dem Linienende — wie MegaArrowTrail (marginLeft: -3). */
-.faden-shell .pfeil-link i::after { content: ""; position: absolute; left: calc(100% - 3px); top: 50%; width: 4.24px; height: 8px; transform: translateY(-50%); background: currentColor; -webkit-mask: var(--pfeilspitze) no-repeat center / 100% 100%; mask: var(--pfeilspitze) no-repeat center / 100% 100%; }
-.faden-shell .pfeil-link:hover i { width: 30px; }
 /* 🚨 Hier stand ein eigener Faden-Knopf. Er war ein Nachbau — und saß in den
    Proportionen daneben. Der Faden nimmt jetzt den Knopf der Live-Seite unverändert:
    `components/ui/Button.tsx` (48 px hoch, Radius 21, doppelte Kontur, 38-px-Scheibe,
    Sparren als SVG). Merksatz des Users vom 13.09.2026: keine erfundenen Duplikate. */
 
-.faden-shell .btn { display: inline-flex; align-items: center; gap: var(--luft-s); border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-m); font-weight: 600; font-size: var(--grad-14); white-space: nowrap; text-decoration: none; line-height: 1.3; }
-.faden-shell .btn--primary { background: var(--green); border-color: var(--green); color: var(--auf-tinte); }
-.faden-shell .btn--klein { padding: var(--luft-xs) var(--luft-m); font-size: var(--grad-13); }
-.faden-shell .btn--still { border-color: var(--rule); color: var(--muted); }
 /* Chip — 1:1 aus „Faden A" (Zeile 64/322/431 der Übergabe): eine Haarlinie statt der
    vollen Kontur, Text in Tinte, Schriftschnitt 500 statt 600. Beim Überfahren hebt er
    sich einen Pixel, bekommt Papier unter sich und die Linie zieht auf Tinte an —
    der Text bleibt, wie er ist. Genau davon lebt das Schlichte: nichts wird bunt.
    `inline-flex`, damit auch die Chips, die als <a> stehen, sich heben können
    (auf `display: inline` greift keine Transformation). */
-.faden-shell .chip { display: inline-flex; align-items: center; gap: var(--luft-s); border: 1px solid var(--rule-mid); background: transparent; color: var(--ink); border-radius: var(--radius-pille); padding: var(--luft-s) var(--luft-m); font: 500 var(--grad-13)/1.35 var(--sans); text-align: left; text-decoration: none; transition: background .25s, border-color .25s, transform .25s, opacity .3s; }
-.faden-shell .chip:hover { background: var(--ink-05); border-color: var(--ink); transform: translateY(-1px); }
-.faden-shell .chip--still { color: var(--muted); } .faden-shell .chip--leo { border-color: var(--green-ink); color: var(--green-ink); }
 .faden-shell .reihe { display: flex; flex-wrap: wrap; gap: var(--luft-s); align-items: center; }
 .faden-shell .quelle { font-size: var(--grad-12); color: var(--muted); margin: 0; }
 /* Der Hinweis: kein gelber Klebezettel, sondern eine Randbemerkung. Regel 3 des
@@ -314,7 +298,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .koffer-rail { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--luft-xxs) var(--luft-s); }
 .faden-shell .koffer-rail__zahl { grid-column: 2; grid-row: 1; font: 900 var(--grad-28)/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
 .faden-shell .koffer-rail__text { grid-column: 1 / -1; font: 400 var(--grad-13)/1.5 var(--sans); color: var(--muted); margin-top: var(--luft-xxs); }
-.faden-shell .koffer-rail .pfeil-link { grid-column: 1 / -1; justify-self: start; margin-top: var(--luft-s); font-size: var(--grad-13); }
+.faden-shell .koffer-rail .strich-link--gross { grid-column: 1 / -1; justify-self: start; margin-top: var(--luft-s); font-size: var(--grad-13); }
 .faden-shell .wb-form { display: flex; gap: var(--luft-s); margin-top: var(--luft-xs); }
 .faden-shell .wb-form input { flex: 1; width: 0; min-width: 0; font: inherit; font-size: var(--grad-13); padding: var(--luft-s) var(--luft-m); border: 1px solid var(--rule); border-radius: var(--radius-pille); background: var(--auflage); color: var(--ink); }
 /* In der Randspalte ist das Feld kein Kasten, sondern ein Strich mit Textknopf. Die
@@ -492,9 +476,8 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 }
 .faden-shell .quellen { font-size: var(--grad-13); color: var(--muted); display: grid; gap: var(--luft-xxs); margin-top: var(--luft-xs); }
 .faden-shell .quellen b { color: var(--ink); font-weight: 600; }
-.faden-shell .chips { display: flex; flex-wrap: wrap; gap: var(--luft-s); }
 /* Vorschläge sind Worte des Lesers — sie stehen rechts, wie seine Blase. */
-.faden-shell .leo-chips { justify-content: flex-end; }
+.faden-shell .chips--rechts { justify-content: flex-end; }
 .faden-shell .einwurf { display: flex; gap: var(--luft-s); align-items: center; font-size: var(--grad-13); color: var(--green-ink); font-style: italic; }
 .faden-shell .einwurf::before { content: ""; width: 14px; height: 14px; border-radius: var(--radius-kreis); background: var(--green); flex: none; }
 .faden-shell a.einwurf--zeiger { text-decoration: none; margin: var(--luft-s) 0 var(--luft-s); flex-wrap: wrap; } .faden-shell a.einwurf--zeiger span { color: var(--muted); font-style: normal; font-size: var(--grad-12); } .faden-shell a.einwurf--zeiger:hover { color: var(--pink); }
@@ -522,7 +505,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
 .faden-shell .kasten h3 { font-size: var(--grad-20); }
 .faden-shell .kasten p { max-width: 64ch; }
-.faden-shell .kasten .btn { justify-self: start; }
+.faden-shell .kasten .knopf { justify-self: start; }
 .faden-shell .kasten__fuss { display: flex; gap: var(--luft-m); flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: var(--luft-s); }
 .faden-shell .kasten--inline .kicker { margin-bottom: var(--luft-xxs); }
 .faden-shell .kasten ul.dokumente { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--luft-s); }
@@ -721,7 +704,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 .faden-shell .abc button { border: 1px solid var(--rule); background: none; padding: var(--luft-xxs) var(--luft-s); font-size: var(--grad-12); font-weight: 700; border-radius: var(--radius-pille); min-width: 28px; }
 .faden-shell .abc button:disabled { opacity: .35; cursor: default; }
 .faden-shell .abc button:hover:not(:disabled) { border-color: var(--green-ink); color: var(--green-ink); } .faden-shell .abc button.aktiv { border-color: var(--pink); color: var(--pink); }
-.faden-shell .lesezeichen .btn--menue { display: none; }
+.faden-shell .lesezeichen .knopf--menue { display: none; }
 
 /* ---------- Mobiles Menü ---------- */
 .faden-shell .menue { position: fixed; inset: 0; z-index: 60; background: var(--paper); display: flex; flex-direction: column; padding: var(--luft-l) var(--luft-l); overflow: auto; }
@@ -880,7 +863,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
    Lange Wörter („Haftpflichtversicherung") trennen, statt über die Kante zu laufen. */
 .faden-shell .neueste__titel { font-family: var(--serif); font-weight: 900; font-size: clamp(var(--grad-20), 2.05vw, var(--grad-26)); line-height: 1.15; letter-spacing: -.01em; color: var(--ink); overflow-wrap: break-word; hyphens: auto; }
 .faden-shell .neueste__vorspann { font: italic 300 clamp(var(--grad-15), 1.3vw, var(--grad-18))/1.5 var(--serif); color: var(--muted); max-width: 56ch; }
-.faden-shell .neueste__blatt:hover .pfeil-link i { width: 30px; }
+.faden-shell .neueste__blatt:hover .strich-link--gross i { width: 30px; }
 
 /* ---------- Der Stapel ---------- */
 /* 🚨 Der Stapel liegt auf dem Kopfblatt (dieselben 10 px Überlappung wie zwischen den
@@ -1041,7 +1024,7 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
 .faden-shell .leo-markdown .cursor { display: inline-block; width: 2px; height: 1em; background: var(--green); vertical-align: -2px; margin-left: var(--luft-xxs); animation: faden-blink .9s infinite; }
 .faden-shell .wort--leo .werkzeuge { display: flex; gap: var(--luft-m); flex-wrap: wrap; margin-top: var(--luft-s); }
 .faden-shell .wort--fehler p { color: var(--pink); }
-.faden-shell .leo-chips { margin-left: var(--luft-xl); }
+.faden-shell .chips--rechts { margin-left: var(--luft-xl); }
 .faden-shell .sprung { padding: var(--luft-s) var(--luft-s) var(--luft-s); display: grid; gap: var(--luft-xxs); max-height: 60vh; overflow: auto; border-bottom: 1px solid var(--rule); }
 .faden-shell .sprung__kopf { font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: var(--luft-xs) var(--luft-s) var(--luft-s); }
 .faden-shell .sprung button { display: flex; gap: var(--luft-m); align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: var(--luft-s) var(--luft-s); font: inherit; font-size: var(--grad-15); border-radius: var(--radius-kante); color: var(--ink); cursor: pointer; }
@@ -1214,12 +1197,12 @@ body[data-faden-hero]:not(.faden-eingabe-frei) .faden-shell .eingabe { transform
   .faden-shell .einschub--umflossen { float: none; width: 100%; margin: var(--luft-m) 0; }
   .faden-shell .eingabe .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--luft-xs); } .faden-shell .eingabe .chips .chip { flex: none; }
   .faden-shell .hero-landing { min-height: 0; }
-  .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .leo-chips { margin-left: 0; }
+  .faden-shell .sprung .typ { width: 64px; } .faden-shell .sprung .unter { display: none; } .faden-shell .chips--rechts { margin-left: 0; }
   .faden-shell .nachschlag { grid-template-columns: 1fr; } .faden-shell .nachschlag__liste { max-height: 40vh; }
   .faden-shell .kopf__innen { padding-left: var(--luft-m); }
   .faden-shell .kopf__zeile { gap: var(--luft-s); min-height: 56px; } .faden-shell .logo img { height: 21px; }
   .faden-shell .register { display: none; }
-  .faden-shell .lesezeichen .btn--menue { display: inline-flex; }
+  .faden-shell .lesezeichen .knopf--menue { display: inline-flex; }
   .faden-shell .blatt__innen { grid-template-columns: 1fr; gap: var(--luft-m); padding: var(--luft-m) var(--luft-m) var(--luft-l); }
   .faden-shell .blatt__spalte + .faden-shell .blatt__spalte, .faden-shell .blatt__spalte + .blatt__spalte { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: var(--luft-s); }
   .faden-shell .blatt__spalte--breit { grid-column: auto; }

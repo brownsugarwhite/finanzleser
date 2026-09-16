@@ -170,9 +170,9 @@ export default function Strom({ children }: { children: ReactNode; heroZahlen?: 
             {k.offen && k.html ? (
               <Schnappschuss html={k.html} id={k.id} />
             ) : !k.html ? (
-              <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="textlink" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
+              <p className="kapitel__wieder">Dieses Kapitel lag vor dem Neuladen im Faden. <button type="button" className="strich-link" onClick={() => navigieren(k.url)}>Erneut öffnen</button></p>
             ) : null}
-            <div className="kapitel__wieder-zeile"><button type="button" className="textlink textlink--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
+            <div className="kapitel__wieder-zeile"><button type="button" className="strich-link strich-link--still" onClick={() => navigieren(k.url)}>Kapitel ans Ende des Fadens holen ↓</button></div>
           </KapitelInhalt>
         </section>
         </Fragment>

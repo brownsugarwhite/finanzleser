@@ -327,7 +327,7 @@ export default function Schlange() {
           )}
         </p>
         {stand !== "laeuft" && (
-          <button type="button" className="btn" onClick={starte}>
+          <button type="button" className="knopf" onClick={starte}>
             {stand === "aus" ? "Noch einmal" : "Spielen"}
           </button>
         )}

@@ -52,8 +52,8 @@ export default function AktenkofferKarte() {
               <span className="koffer__ikon"><FadenIkon name={ikonFuer(t)} /></span>
               <span className="koffer__text"><b>{t}</b><small>in diesem Browser abgelegt</small></span>
               <span className="koffer__akt">
-                <button type="button" className="textlink" onClick={() => oeffnen(t)}>Öffnen</button>
-                <button type="button" className="textlink textlink--still" onClick={() => entfernen(t)}>Entfernen</button>
+                <button type="button" className="strich-link" onClick={() => oeffnen(t)}>Öffnen</button>
+                <button type="button" className="strich-link strich-link--still" onClick={() => entfernen(t)}>Entfernen</button>
               </span>
             </div>
           ))}
@@ -63,7 +63,7 @@ export default function AktenkofferKarte() {
         <p>Wenn Sie den Browser schließen, ist der Koffer weg. <b>Soll ich ihn sichern?</b> Ein Feld genügt.</p>
         <form className="reihe" onSubmit={(e) => { e.preventDefault(); if (!mail.trim()) return; toast("Sichern und Anmelden kommen mit Finanzleser Plus (Stufe 3)."); }}>
           <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail" value={mail} onChange={(e) => setMail(e.target.value)} />
-          <button className="btn btn--klein btn--primary" type="submit">Sichern</button>
+          <button className="knopf knopf--klein knopf--primaer" type="submit">Sichern</button>
         </form>
       </div>
     </div>

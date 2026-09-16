@@ -89,7 +89,7 @@ export default function BegriffMenue() {
       {d?.ratgeber && <a className="zeile" href={d.ratgeber.href} onClick={schliessen}><i>📰</i>Ratgeber „{d.ratgeber.titel}“</a>}
       {d?.tool && <a className="zeile" href={d.tool.href} onClick={schliessen}><i className={`dot dot--${d.tool.typ}`} />{d.tool.titel}</a>}
       {d?.frage && <button type="button" className="zeile leo-zeile" onClick={() => zeige("antwort")}><span>„{d.frage}“</span><img src="/assets/leo.svg" alt="Leo fragen" /></button>}
-      {offen.zeige === "antwort" && d && <div className="erkl"><b>Leo:</b> {d.antwort || "Dazu habe ich noch keine vorbereitete Antwort."}{d.quelle && <small> · Quelle: {d.quelle}</small>}<button type="button" className="textlink" onClick={() => { const f = d.frage; schliessen(); fragen(f); }}>Im Faden nachfragen</button></div>}
+      {offen.zeige === "antwort" && d && <div className="erkl"><b>Leo:</b> {d.antwort || "Dazu habe ich noch keine vorbereitete Antwort."}{d.quelle && <small> · Quelle: {d.quelle}</small>}<button type="button" className="strich-link" onClick={() => { const f = d.frage; schliessen(); fragen(f); }}>Im Faden nachfragen</button></div>}
       <a className="gemerkt" href={seite} onClick={schliessen}>Eigene Seite: {seite} · Erklärungen bleiben rechts unter „Glossar · Aktuelle Sitzung“</a>
     </div>,
     wurzel,

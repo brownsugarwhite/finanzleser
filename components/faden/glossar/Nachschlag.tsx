@@ -72,7 +72,7 @@ export default function Nachschlag({ buchstabe, oeffnen }: { buchstabe: string; 
             <>
               <span className="kicker">Nachschlagewerk</span>
               <p>Begriff links wählen: Erklärung, Quelle, Ratgeber und Werkzeug erscheinen hier. Grüne Begriffe im Text öffnen dieselbe Erklärung an Ort und Stelle.</p>
-              <Link className="textlink textlink--still" href="/glossar">Glossar als Seite öffnen</Link>
+              <Link className="strich-link strich-link--still" href="/glossar">Glossar als Seite öffnen</Link>
             </>
           )}
           {aktiv && !detail && <span className="hinweis">Lädt …</span>}
@@ -83,11 +83,11 @@ export default function Nachschlag({ buchstabe, oeffnen }: { buchstabe: string; 
               <p>{detail.erkl}</p>
               {detail.quelle && <p className="quelle">Quelle: {detail.quelle}</p>}
               <div className="reihe">
-                {detail.ratgeber && <a className="textlink" href={detail.ratgeber.href}>Ratgeber „{detail.ratgeber.titel}“</a>}
-                {detail.tool && <a className="textlink" href={detail.tool.href}>{detail.tool.titel}</a>}
-                <a className="textlink textlink--still" href={detail.url}>Eigene Seite</a>
-                <button type="button" className="textlink textlink--still" onClick={() => { blattZu(); fragen(detail.frage || `Was bedeutet „${detail.titel}“?`); }}>Leo fragen</button>
-                <button type="button" className="textlink textlink--still" onClick={() => { begriffMerken(detail.slug, true); toast("Rechts in der Sitzung gemerkt"); }}>Merken</button>
+                {detail.ratgeber && <a className="strich-link" href={detail.ratgeber.href}>Ratgeber „{detail.ratgeber.titel}“</a>}
+                {detail.tool && <a className="strich-link" href={detail.tool.href}>{detail.tool.titel}</a>}
+                <a className="strich-link strich-link--still" href={detail.url}>Eigene Seite</a>
+                <button type="button" className="strich-link strich-link--still" onClick={() => { blattZu(); fragen(detail.frage || `Was bedeutet „${detail.titel}“?`); }}>Leo fragen</button>
+                <button type="button" className="strich-link strich-link--still" onClick={() => { begriffMerken(detail.slug, true); toast("Rechts in der Sitzung gemerkt"); }}>Merken</button>
               </div>
             </>
           )}

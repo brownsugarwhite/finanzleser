@@ -104,7 +104,7 @@ function BlattRatgeber({ nav, preload, z, oeffnen }: { nav: NavItem[]; preload: 
       <div className="blatt__spalte">
         <span className="kicker">{rub.label} · Themen</span>
         <Themenliste items={themen.map((t) => ({ key: t.href.split("/").pop() || "", name: t.label }))} aktiv={tk} klick={(k) => oeffnen("ratgeber", rk, k)} />
-        <a className="textlink textlink--still" href={rub.href}>Alle Ratgeber in {rub.label}</a>
+        <a className="strich-link strich-link--still" href={rub.href}>Alle Ratgeber in {rub.label}</a>
       </div>
       <div className="blatt__spalte">
         <span className="kicker">{th.label} · Ratgeber</span>
@@ -115,9 +115,9 @@ function BlattRatgeber({ nav, preload, z, oeffnen }: { nav: NavItem[]; preload: 
           {liste.length === 0 && <li className="hinweis">Noch keine Beiträge in diesem Thema.</li>}
         </ul>
         {!alle && (vor?.hasMore ?? true) && liste.length > 0 && (
-          <button type="button" className="textlink" onClick={mehrLaden} disabled={laden}>{laden ? "Lädt …" : "Alle Ratgeber im Thema anzeigen"}</button>
+          <button type="button" className="strich-link" onClick={mehrLaden} disabled={laden}>{laden ? "Lädt …" : "Alle Ratgeber im Thema anzeigen"}</button>
         )}
-        <a className="textlink textlink--still" href={th.href}>Thema als Seite öffnen</a>
+        <a className="strich-link strich-link--still" href={th.href}>Thema als Seite öffnen</a>
         {vor?.tools && vor.tools.length > 0 && (
           <>
             <span className="kicker">Finanztools zum Thema</span>
@@ -155,7 +155,7 @@ function BlattFinanztools({ z, oeffnen }: { z: BlattZustand; oeffnen: (k: BlattZ
         <span className="kicker">Finanztools</span>
         <Themenliste items={REITER.map((r) => ({ key: r.key, name: r.label }))} aktiv={reiter} klick={(k) => oeffnen("finanztools", k)} />
         <span className="hinweis">Rechner, Vergleiche und Checklisten öffnen als Karte im Faden und rechnen dort.</span>
-        <Link className="textlink textlink--still" href="/finanztools">Alle Finanztools</Link>
+        <Link className="strich-link strich-link--still" href="/finanztools">Alle Finanztools</Link>
       </div>
       <div className="blatt__spalte blatt__spalte--breit">
         <span className="kicker">{REITER.find((r) => r.key === reiter)?.label}{gesamt ? ` · ${gesamt}` : ""}</span>
@@ -221,7 +221,7 @@ function BlattService({ z, oeffnen }: { z: BlattZustand; oeffnen: (k: BlattZusta
             })}
             {liste && gefiltert.length > 60 && <li className="hinweis">… und {gefiltert.length - 60} weitere. Filter eingrenzen.</li>}
           </ul>
-          <a className="textlink textlink--still" href={teil === "anbieter" ? "/anbieter" : "/dokumente"}>Übersicht als Seite öffnen</a>
+          <a className="strich-link strich-link--still" href={teil === "anbieter" ? "/anbieter" : "/dokumente"}>Übersicht als Seite öffnen</a>
         </div>
       )}
       {teil === "glossar" && <Nachschlag buchstabe={z.b || "Alle"} oeffnen={(l) => oeffnen("service", "glossar", l)} />}
@@ -230,7 +230,7 @@ function BlattService({ z, oeffnen }: { z: BlattZustand; oeffnen: (k: BlattZusta
           <img src="/icons/finconext_logo.svg" alt="Finconext" style={{ height: 34, width: "auto", justifySelf: "start" }} />
           <span>Finconext ist der Versicherungsmakler hinter finanzleser.de: unabhängig, mit zehn Spezialversicherern für Haftpflicht, Hausrat, Unfall, Tier, Fahrrad und Wohngebäude.</span>
           <span className="hinweis">Finconext GmbH · Frankfurt am Main · Makler nach § 34d GewO</span>
-          <a className="btn btn--primary btn--klein" href="https://www.finconext.de/" target="_blank" rel="noopener noreferrer" data-faden-aus="">finconext.de öffnen ↗</a>
+          <a className="knopf knopf--primaer knopf--klein" href="https://www.finconext.de/" target="_blank" rel="noopener noreferrer" data-faden-aus="">finconext.de öffnen ↗</a>
         </div>
       )}
     </>
@@ -250,20 +250,20 @@ function BlattPlus() {
       <div className="blatt__spalte">
         <span className="kicker">Was Plus enthält</span>
         <ul className="liste-plus"><li>· Aktenkoffer auf allen Geräten</li><li>· Wächter per E-Mail oder WhatsApp</li><li>· Wochenbrief mit Themenwahl</li><li>· Finanzwort-Serie, Punkte und Belohnungen</li></ul>
-        <Link className="textlink" href="/plus" onClick={geh("/plus")}>Mein Bereich öffnen</Link>
+        <Link className="strich-link" href="/plus" onClick={geh("/plus")}>Mein Bereich öffnen</Link>
       </div>
       <div className="blatt__spalte">
         <span className="kicker">Anmelden oder sichern</span>
         <form className="sicherung" onSubmit={spaeter}>
           <input type="email" placeholder="ihre@adresse.de" aria-label="E-Mail" value={mail} onChange={(e) => setMail(e.target.value)} />
-          <div className="reihe"><button className="btn btn--primary btn--klein" type="submit">Link zum Anmelden schicken</button><button type="button" className="btn btn--klein" onClick={spaeter}>Mit Passkey</button></div>
+          <div className="reihe"><button className="knopf knopf--primaer knopf--klein" type="submit">Link zum Anmelden schicken</button><button type="button" className="knopf knopf--klein" onClick={spaeter}>Mit Passkey</button></div>
           <p className="quelle">Eine E-Mail-Adresse genügt. Ihre Daten liegen getrennt vom Redaktionssystem, in der EU.</p>
         </form>
       </div>
       <div className="blatt__spalte">
         <span className="kicker">Ihr Aktenkoffer in diesem Browser{koffer.length ? ` · ${koffer.length}` : ""}</span>
         {koffer.length ? koffer.slice(0, 5).map((t) => <div key={t} className="beleg"><b>{t}</b><small>ungesichert</small></div>) : <span className="hinweis">Noch leer. Jeder Kasten und jede Kette hat „In den Aktenkoffer“.</span>}
-        <Link className="textlink textlink--still" href="/plus/aktenkoffer" onClick={geh("/plus/aktenkoffer")}>Aktenkoffer öffnen</Link>
+        <Link className="strich-link strich-link--still" href="/plus/aktenkoffer" onClick={geh("/plus/aktenkoffer")}>Aktenkoffer öffnen</Link>
       </div>
       <div className="blatt__wege">
         <span className="punkte">{punkte} Punkte</span>

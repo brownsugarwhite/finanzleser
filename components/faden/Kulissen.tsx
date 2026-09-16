@@ -75,7 +75,7 @@ export default function Kulissen() {
   return (
     <div className="seite offen" role="dialog" aria-modal="true" aria-label="Was Suchmaschinen sehen">
       <div className="seite__leiste">
-        <button type="button" className="btn btn--klein" onClick={() => setStand(null)}>‹ Zurück in den Faden</button>
+        <button type="button" className="knopf knopf--klein" onClick={() => setStand(null)}>‹ Zurück in den Faden</button>
         <div className="url">www.finanzleser.de<b>{stand.url}</b></div>
         <span className="seite__hinweis">Blick hinter die Kulissen</span>
       </div>

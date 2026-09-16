@@ -277,7 +277,7 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
                     <div className="links">
                       {l.links.map((x) => {
                         const z = ziele[`${x.typ}:${x.slug}`] || { href: `/suche?q=${encodeURIComponent(x.text)}`, titel: x.text };
-                        return <a key={`${x.typ}:${x.slug}`} className="textlink" href={z.href} title={z.titel !== x.text ? z.titel : undefined}>{x.text}</a>;
+                        return <a key={`${x.typ}:${x.slug}`} className="strich-link" href={z.href} title={z.titel !== x.text ? z.titel : undefined}>{x.text}</a>;
                       })}
                     </div>
                   </div>
@@ -291,9 +291,9 @@ export default function Kassensturz({ daten, ziele }: { daten: KassensturzDaten;
                 )}
               </div>
               <div className="ks__aktionen ks__rein" style={verzug(4)}>
-                <button type="button" className="textlink" onClick={teilen}>Ergebnis teilen</button>
-                <button type="button" className="textlink textlink--still" onClick={() => inDenKoffer(`Kassensturz vom ${datumLang(datum || heuteLokal())}`)}>In den Aktenkoffer</button>
-                <button type="button" className="textlink textlink--still" onClick={neuStarten}>Neu starten</button>
+                <button type="button" className="strich-link" onClick={teilen}>Ergebnis teilen</button>
+                <button type="button" className="strich-link strich-link--still" onClick={() => inDenKoffer(`Kassensturz vom ${datumLang(datum || heuteLokal())}`)}>In den Aktenkoffer</button>
+                <button type="button" className="strich-link strich-link--still" onClick={neuStarten}>Neu starten</button>
               </div>
               <div className="wort wort--leo ks__nachher ks__rein" style={verzug(5)}>
                 <span className="kicker kicker--gruen">Leo</span>

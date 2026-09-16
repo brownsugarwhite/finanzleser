@@ -43,12 +43,12 @@ export default function MeinBereich({ regeln }: { regeln: WaechterRegel[] }) {
           <span className="kicker kicker--gruen">Aktenkoffer · {koffer.length} {koffer.length === 1 ? "Beleg" : "Belege"}</span>
           <span className="hinweis">Ergebnisse · Checklisten · Vergleiche · Gespräche</span>
           {koffer.slice(0, 3).map((t) => <div key={t} className="beleg"><b>{t}</b><small>ungesichert · in diesem Browser</small></div>)}
-          <a className="textlink" href="/plus/aktenkoffer">Aktenkoffer öffnen</a>
+          <a className="strich-link" href="/plus/aktenkoffer">Aktenkoffer öffnen</a>
         </div>
         <div>
           <span className="kicker kicker--gruen">Wächter · {aktiveWaechter} von {regeln.length} aktiv</span>
           {regeln.slice(0, 3).map((r) => <div key={r.key} className="regel"><b>{r.titel}</b><span>{r.regel}</span><i className={"toggle" + (stand[r.key] ? " an" : "")} aria-hidden="true" /></div>)}
-          <a className="textlink" href="/plus/waechter">Wächter einstellen</a>
+          <a className="strich-link" href="/plus/waechter">Wächter einstellen</a>
         </div>
         <div>
           <span className="kicker kicker--gruen">Profil</span>
@@ -62,7 +62,7 @@ export default function MeinBereich({ regeln }: { regeln: WaechterRegel[] }) {
           <ul className="belohnungen">
             {[...level].sort((a, b) => a.ab - b.ab).map((l) => <li key={l.name}>{punkte >= l.ab ? "✓" : "○"} {l.belohnung || l.name} · {l.name}{punkte < l.ab ? `, noch ${l.ab - punkte} Punkte` : ""}</li>)}
           </ul>
-          <button type="button" className="textlink textlink--still" onClick={() => toast("Anmelden, Sichern und Konto kommen mit Finanzleser Plus (Stufe 3).")}>Anmelden · Finanzleser Plus</button>
+          <button type="button" className="strich-link strich-link--still" onClick={() => toast("Anmelden, Sichern und Konto kommen mit Finanzleser Plus (Stufe 3).")}>Anmelden · Finanzleser Plus</button>
         </div>
       </div>
 

@@ -103,7 +103,7 @@ export default function GewusstSpiel({ felder }: { felder: Record<string, string
       {/* Ohne Zeigegerät geht Rubbeln nicht — deshalb derselbe Weg über die Tastatur.
           Der Text steht ohnehin im HTML und wird vorgelesen; das Tuch ist reine Optik. */}
       {!frei && (
-        <button type="button" className="spiel-gewusst__wink textlink" onClick={() => setFrei(true)}>
+        <button type="button" className="spiel-gewusst__wink strich-link" onClick={() => setFrei(true)}>
           Mit dem Finger freirubbeln — oder hier aufdecken
         </button>
       )}

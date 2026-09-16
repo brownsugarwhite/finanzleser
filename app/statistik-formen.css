@@ -11,12 +11,6 @@
    „Keine Kartenboxen mit Schatten im Faden.“ Alles steht direkt auf dem Papier.
    ===================================================================================== */
 
-.faden-shell {
-  /* Türkis des Handoffs. --color-tool-vergleiche ist var(--tuerkis-hell) („Türkis hell“) und damit
-     eine andere Rolle — hier braucht es das dunkle Türkis der Werkzeugfarbe. */
-  --tuerkis: var(--tuerkis);
-}
-
 /*
  * Unsichtbar, aber lesbar.
  *
@@ -266,9 +260,9 @@
 /* Umschalter — Chip nach README des Handoffs, „Buttons“ */
 .faden-shell .st__umschalter { display: flex; flex-wrap: wrap; align-items: center; gap: var(--luft-s); margin-top: var(--luft-m); }
 .faden-shell .st__umschalter .kicker { margin-right: var(--luft-xs); }
-.faden-shell .st__chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 var(--luft-m); border: 1px solid var(--ink-25); border-radius: var(--radius-pille); background: transparent; color: var(--muted); font: 500 var(--grad-13) var(--sans); cursor: pointer; transition: border-color .2s, color .2s, transform .2s, background .2s; }
-.faden-shell .st__chip:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
-.faden-shell .st__chip--aktiv { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+/* Der Umschalter über einer Statistik IST ein Chip (app/knoepfe.css) — er steht nur in
+   einer Kopfzeile und darf dort eine Spur niedriger sein. */
+.faden-shell .st__kopf .chip { min-height: 32px; padding: 0 var(--luft-m); }
 
 /* Regler — ohne Kasten, nur Haarlinie darüber */
 .faden-shell .st__regler { display: grid; gap: var(--luft-s); margin-top: var(--luft-m); padding-top: var(--luft-s); border-top: 1px solid var(--ink-16); }

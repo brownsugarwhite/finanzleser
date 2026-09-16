@@ -155,7 +155,20 @@ export const schatten = () => sammeln(({ block }) =>
     .map((w) => w.replace(/\s+/g, " ").toLowerCase())
     .filter((w) => w !== "none" && !/var\(--schatten/.test(w)));
 
+/**
+ * 🚨 Selbstbezug: `--x: var(--x)`. Die Eigenschaft ist damit *garantiert ungültig* und
+ * liefert LEER — sie fällt NICHT auf einen Ersatzwert zurück. Nichts bricht, nichts
+ * meldet sich, die Farbe ist einfach weg.
+ * Am 16.09.2026 passiert: der Farbdurchgang machte aus `--tuerkis: #0B7F66` ein
+ * `--tuerkis: var(--tuerkis)`, und jede türkise Pille im Faden war danach unsichtbar.
+ * Ausgenommen ist `@theme inline` in globals.css — Tailwind v4 löst das zur Bauzeit auf.
+ */
+export const selbstbezug = () => sammeln(({ block }) =>
+  [...block.matchAll(/(--[a-z0-9-]+)\s*:\s*var\(\s*\1\s*[,)]/g)].map((m) => `${m[1]}: var(${m[1]})`),
+  { mitKopf: true });
+
 const KATEGORIEN = {
+  selbstbezug: ["🚨 Selbstbezüge (--x: var(--x)) — liefern LEER", selbstbezug],
   farben: ["Farbliterale außerhalb des Tokenkopfs", farben],
   schriftgrade: ["Schriftgrade ohne --schrift-Token", schriftgrade],
   schriftfamilien: ["Schriftfamilien an den Tokens vorbei", schriftfamilien],

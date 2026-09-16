@@ -14,5 +14,5 @@ export default function Vorlesen({ zielId }: { zielId: string }) {
     u.lang = "de-DE";
     window.speechSynthesis.speak(u);
   };
-  return <button type="button" className="textlink textlink--still" onClick={vorlesen}>Vorlesen</button>;
+  return <button type="button" className="strich-link strich-link--still" onClick={vorlesen}>Vorlesen</button>;
 }

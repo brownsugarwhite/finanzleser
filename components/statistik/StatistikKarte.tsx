@@ -78,7 +78,7 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
         <div className="st__umschalter" role="tablist" aria-label={st.umschalter?.label || "Auswahl"}>
           {st.umschalter?.label && <span className="kicker">{st.umschalter.label}</span>}
           {st.reihen.map((r, i) => (
-            <button key={r.key} type="button" role="tab" aria-selected={i === reihe} className={"st__chip" + (i === reihe ? " st__chip--aktiv" : "")} onClick={() => setReihe(i)}>{r.label}</button>
+            <button key={r.key} type="button" role="tab" aria-selected={i === reihe} className={"chip" + (i === reihe ? "chip" : "")} onClick={() => setReihe(i)}>{r.label}</button>
           ))}
         </div>
       )}
@@ -120,7 +120,7 @@ export default function StatistikKarte({ st }: { st: FadenStatistik }) {
         <p className="st__quelle">
           Quelle: {q.url ? <a href={q.url} target="_blank" rel="noopener noreferrer" data-faden-aus="">{q.name}</a> : q.name}
           {q.stand ? `, Stand ${q.stand}` : ""}
-          {q.sekundaer ? " (Sekundärquelle)" : ""}
+          {q.sekundaer ? "(Sekundärquelle)" : ""}
         </p>
       )}
     </section>

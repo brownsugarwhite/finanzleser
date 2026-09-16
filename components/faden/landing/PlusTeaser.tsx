@@ -35,7 +35,7 @@ export default function PlusTeaser() {
           <li key={p.titel}>
             <b>{p.titel}</b>
             <span>{p.text}</span>
-            {p.href ? <a className="textlink" href={p.href}>ansehen</a> : <span className="quelle">in Vorbereitung</span>}
+            {p.href ? <a className="strich-link" href={p.href}>ansehen</a> : <span className="quelle">in Vorbereitung</span>}
           </li>
         ))}
       </ul>

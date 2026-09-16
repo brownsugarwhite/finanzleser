@@ -70,7 +70,7 @@ export function saeubern(html: string, id: string): string {
     if (werte) el.appendChild(werte);
     if (h > 0) { el.classList.add("insel--platz"); el.style.minHeight = `${h}px`; }
   });
-  t.content.querySelectorAll("[data-leo-alt] .tippt, [data-leo-alt] .cursor, [data-leo-alt] .leo-chips, [data-leo-alt] .werkzeuge").forEach((e) => e.remove());
+  t.content.querySelectorAll("[data-leo-alt] .tippt, [data-leo-alt] .cursor, [data-leo-alt] .chips chips--rechts, [data-leo-alt] .werkzeuge").forEach((e) => e.remove());
   t.content.querySelectorAll("[aria-live]").forEach((e) => e.removeAttribute("aria-live"));
   // IDs präfixieren, damit ein eingefrorenes Kapitel keine Doppelten ins Dokument bringt —
   // und die Ankerlinks GLEICH MIT. Ohne das zeigte das Inhaltsverzeichnis eines

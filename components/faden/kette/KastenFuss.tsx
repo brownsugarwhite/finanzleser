@@ -16,11 +16,11 @@ export default function KastenFuss({ titel, url, kastenId, eigeneSeite }: { tite
   const voll = `https://www.finanzleser.de${url}`;
   return (
     <div className="kasten__fuss">
-      <button type="button" className="textlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
-      <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
-      <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
-      <button type="button" className="textlink textlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
-      {eigeneSeite && <a className="textlink textlink--still" href={url}>Eigene Seite öffnen</a>}
+      <button type="button" className="strich-link" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
+      <button type="button" className="strich-link strich-link--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
+      <button type="button" className="strich-link strich-link--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
+      <button type="button" className="strich-link strich-link--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
+      {eigeneSeite && <a className="strich-link strich-link--still" href={url}>Eigene Seite öffnen</a>}
     </div>
   );
 }

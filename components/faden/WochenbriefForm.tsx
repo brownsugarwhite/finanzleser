@@ -32,7 +32,7 @@ export default function WochenbriefForm({ klein }: { klein?: boolean }) {
     return (
       <p className="quelle wb-eingetragen">
         Eingetragen: {eingetragen} · bitte den Link in der Bestätigungsmail anklicken. Nächste Ausgabe: {naechsterDonnerstag()}.{" "}
-        <button type="button" className="textlink textlink--still" onClick={() => { try { localStorage.removeItem(KEY); } catch { /* egal */ } setEingetragen(null); }}>Andere Adresse</button>
+        <button type="button" className="strich-link strich-link--still" onClick={() => { try { localStorage.removeItem(KEY); } catch { /* egal */ } setEingetragen(null); }}>Andere Adresse</button>
       </p>
     );
   }
@@ -61,7 +61,7 @@ export default function WochenbriefForm({ klein }: { klein?: boolean }) {
   return (
     <form className={klein ? "wb-form wb-form--klein" : "wb-form reihe"} onSubmit={senden}>
       <input type="email" placeholder={klein ? "E-Mail" : "ihre@adresse.de"} aria-label="E-Mail für den Wochenbrief" value={mail} onChange={(e) => setMail(e.target.value)} disabled={laedt} />
-      <button className={klein ? "wb-form__senden" : "btn btn--klein btn--primary"} type="submit" disabled={laedt}>{laedt ? "Sendet …" : klein ? "Abonnieren" : "Eintragen"}</button>
+      <button className={klein ? "wb-form__senden" : "knopf knopf--klein knopf--primaer"} type="submit" disabled={laedt}>{laedt ? "Sendet …" : klein ? "Abonnieren" : "Eintragen"}</button>
       <label className="wb-consent">
         <input type="checkbox" checked={einverstanden} onChange={(e) => setEinverstanden(e.target.checked)} />
         <span>Ich stimme der <a href="/datenschutz" data-faden-aus="" target="_blank" rel="noopener">Datenschutzerklärung</a> zu. Abmelden mit einem Klick in jeder Ausgabe.</span>

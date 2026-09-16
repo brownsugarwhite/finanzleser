@@ -14,7 +14,7 @@ export default function FinanzwortMeldung({ slug, nr }: { slug: string; nr: numb
       <span className="kicker kicker--gruen">Finanzwort des Tages #{nr} · Serie {serie} Tage</span>
       <p>Ein Begriff aus dem Glossar, sechs Versuche, teilbar wie Wordle.</p>
       <div className="aktionen">
-        <a className="textlink textlink--still" href={spielUrl(slug)} aria-label={`Finanzwort des Tages #${nr} spielen`}>Spielen</a>
+        <a className="strich-link strich-link--still" href={spielUrl(slug)} aria-label={`Finanzwort des Tages #${nr} spielen`}>Spielen</a>
       </div>
     </div>
   );

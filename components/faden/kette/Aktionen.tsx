@@ -43,14 +43,14 @@ export default function Aktionen({ titel, url, kurzfassung, artikelId, pdf }: { 
   return (
     <>
       <div className="aktionen">
-        {kurzfassung && <button type="button" className="btn btn--klein" onClick={() => umschalten(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo</button>}
-        <button type="button" className="textlink" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
-        <button type="button" className="textlink textlink--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
-        <button type="button" className="textlink textlink--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
+        {kurzfassung && <button type="button" className="knopf knopf--klein" onClick={() => umschalten(!kurz)} aria-expanded={kurz}>Kurzfassung von Leo</button>}
+        <button type="button" className="strich-link" onClick={(e) => teilenOeffnen(titel, voll, e.currentTarget)}>Teilen</button>
+        <button type="button" className="strich-link strich-link--still" onClick={(e) => inDenKoffer(titel, e.currentTarget)}>In den Aktenkoffer</button>
+        <button type="button" className="strich-link strich-link--still" onClick={() => toast("Wächter kommen mit Finanzleser Plus: Leo meldet sich, wenn sich ein Wert ändert.")}>Wächter setzen</button>
         {pdf && (
-          <a className="textlink textlink--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag</a>
+          <a className="strich-link strich-link--still" href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer" download>PDF zum Beitrag</a>
         )}
-        <button type="button" className="textlink textlink--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
+        <button type="button" className="strich-link strich-link--still" onClick={() => kulissenOeffnen(url, titel)}>Das sieht Google</button>
       </div>
       {/* `hidden` setzen enthuellen/verbergen selbst — React soll es nicht bei jedem Render zurückschreiben. */}
       {kurzfassung && (

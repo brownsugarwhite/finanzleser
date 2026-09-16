@@ -195,14 +195,33 @@ export default async function Schaukasten() {
 
       <Abschnitt titel="Knöpfe, Chips und Links" nr={4} von={VON}>
         <p>
-          <strong>Der Knopf.</strong> Es ist der Knopf der Live-Seite —
-          <code>components/ui/Button.tsx</code>, unverändert übernommen. Eine Form für jede
-          Aufforderung im Faden.
+          <strong>Vier Formen, mehr gibt es nicht.</strong> Die <code>.pille</code> holt den
+          Blick (eine je Block), der <code>.knopf</code> trägt die Handlung nebenbei, der{" "}
+          <code>.chip</code> die Wahl aus vielen gleichrangigen Möglichkeiten, der{" "}
+          <code>.strich-link</code> den Verweis im Text. Alle vier stehen in{" "}
+          <code>app/knoepfe.css</code> und gelten auch außerhalb des Fadens —{" "}
+          <code>components/ui/Button.tsx</code> setzt dieselbe Pille.
         </p>
         <div className="reihe" style={{ alignItems: "center" }}>
-          <Button label="Knopf · Pfeil" href="/schaukasten" />
-          <Button label="Knopf · abwärts" icon="arrow-down" href="/schaukasten" />
-          <Button label="Knopf · Download" icon="download" href="/schaukasten" />
+          <Button label="Pille · Pfeil" href="/schaukasten" />
+          <Button label="Pille · abwärts" icon="arrow-down" href="/schaukasten" />
+          <Button label="Pille · Herunterladen" icon="download" href="/schaukasten" />
+        </div>
+        <div className="reihe" style={{ alignItems: "center", marginTop: "var(--luft-m)" }}>
+          <Button label="Pille · füllt" href="/schaukasten" fuellt />
+          <Button label="Pille · klein" href="/schaukasten" klein />
+          <Button label="Pille · Werkzeugfarbe" href="/schaukasten" fuellt farbe="var(--tuerkis)" />
+        </div>
+        <div className="chips" style={{ marginTop: "var(--luft-m)" }}>
+          <button type="button" className="chip">Chip</button>
+          <button type="button" className="chip" aria-pressed>Chip · gewählt</button>
+          <button type="button" className="chip chip--still">Chip · still</button>
+          <button type="button" className="knopf">Knopf</button>
+          <button type="button" className="knopf knopf--primaer">Knopf · primär</button>
+          <button type="button" className="knopf knopf--still knopf--klein">Knopf · still, klein</button>
+          <a className="strich-link" href="/schaukasten">Strich-Link<i /></a>
+          <a className="strich-link strich-link--gross" href="/schaukasten">Strich-Link · groß<i /></a>
+          <a className="strich-link strich-link--still" href="/schaukasten">Strich-Link · still<i /></a>
         </div>
         <h3 style={{ marginTop: "var(--luft-xl)" }}>Jede Knopf- und Linkform, die es gibt</h3>
         <p>
@@ -447,7 +466,7 @@ export default async function Schaukasten() {
           anzufassen. Neu anlegen oder zurücksetzen: <code>node tools/vorlage-test.mjs</code>.
         </p>
         <p className="reihe">
-          <a className="btn btn--primary" href="/schaukasten/ratgeber">Vorlage-Beitrag als Kapitel anhängen ↓</a>
+          <a className="knopf knopf--primaer" href="/schaukasten/ratgeber">Vorlage-Beitrag als Kapitel anhängen ↓</a>
         </p>
       </Abschnitt>
 

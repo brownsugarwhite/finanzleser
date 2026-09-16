@@ -13,7 +13,7 @@ export default function Menue({ offen, onZu, onRand }: { offen: boolean; onZu: (
   ];
   return (
     <div className="menue offen" aria-label="Menü" role="dialog">
-      <div className="menue__kopf"><img src="/icons/fl_logo.svg" alt="finanzleser" /><button type="button" className="btn btn--klein btn--still" onClick={onZu}>Schließen ✕</button></div>
+      <div className="menue__kopf"><img src="/icons/fl_logo.svg" alt="finanzleser" /><button type="button" className="knopf knopf--klein knopf--still" onClick={onZu}>Schließen ✕</button></div>
       {eintraege.map((e) => (
         <button key={e.key} type="button" className="zeile-m" onClick={() => { onZu(); window.scrollTo({ top: 0 }); blattOeffnen(e.key); }}>{e.label}<small>{e.small}</small></button>
       ))}

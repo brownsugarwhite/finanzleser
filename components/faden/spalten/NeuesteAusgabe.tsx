@@ -49,7 +49,7 @@ export default function NeuesteAusgabe({ post }: { post: Post | null }) {
           <span className="kicker">{decodeHtmlEntities(rubrik)}</span>
           <b className="neueste__titel">{titel}</b>
           {vorspann && <span className="neueste__vorspann">{decodeHtmlEntities(vorspann)}</span>}
-          <span className="pfeil-link">Ausgabe aufschlagen<i /></span>
+          <span className="strich-link strich-link--gross">Ausgabe aufschlagen<i /></span>
         </span>
       </a>
     </section>

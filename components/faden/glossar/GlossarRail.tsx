@@ -36,11 +36,11 @@ export default function GlossarRail() {
               {d ? d.erkl : "…"}
               {d?.quelle && <small className="quelle"> Quelle: {d.quelle}</small>}
               <div className="mehr">
-                {d?.ratgeber && <a className="textlink" href={d.ratgeber.href}>Ratgeber</a>}
-                {d?.tool && <a className="textlink" href={d.tool.href}>{LABEL[d.tool.typ] || "Werkzeug"}</a>}
-                <button type="button" className="textlink textlink--still" onClick={() => fragen(`Was bedeutet „${d?.titel || s}“?`)}>Leo fragen</button>
-                <a className="textlink textlink--still" href={d?.url || `/glossar/${s}`}>Seite</a>
-                <button type="button" className="textlink textlink--still" onClick={() => begriffEntfernen(s)}>Entfernen</button>
+                {d?.ratgeber && <a className="strich-link" href={d.ratgeber.href}>Ratgeber</a>}
+                {d?.tool && <a className="strich-link" href={d.tool.href}>{LABEL[d.tool.typ] || "Werkzeug"}</a>}
+                <button type="button" className="strich-link strich-link--still" onClick={() => fragen(`Was bedeutet „${d?.titel || s}“?`)}>Leo fragen</button>
+                <a className="strich-link strich-link--still" href={d?.url || `/glossar/${s}`}>Seite</a>
+                <button type="button" className="strich-link strich-link--still" onClick={() => begriffEntfernen(s)}>Entfernen</button>
               </div>
             </div>
           </div>
