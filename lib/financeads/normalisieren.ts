@@ -6,7 +6,17 @@
 import type { ApiAntwort, ApiProdukt, KategorieDef, KennWert, Richtung, VergleichProdukt, VergleichVariante } from "./typen.ts";
 import { de, klartext, juengstesDatum, text, zahl, pfad } from "./lesehilfen.ts";
 
-const MAX_PRODUKTE = 40;
+/**
+ * 🚨 Der Deckel war 40 und hat drei Listen still gekürzt.
+ *
+ * Gemessen am 16.09.2026 gegen die API mit denselben Angaben: Kreditkarten 49 Angebote,
+ * Privathaftpflicht 47, Tagesgeld 41 — bei uns standen überall genau 40. Wer unsere Seite
+ * neben den Vergleichsrechner von financeads legte, sah unten andere Anbieter, und zwar
+ * ohne jeden Hinweis darauf. Die größte gemessene Kategorie liefert 49; 80 lässt Luft,
+ * ohne dass ein Schnappschuss aus dem Rahmen fällt (der größte liegt bei 132 KB, die
+ * Warnschwelle bei 200 KB).
+ */
+const MAX_PRODUKTE = 80;
 const MAX_VORTEILE = 3;
 
 function absolut(u: string | null | undefined): string | undefined {
