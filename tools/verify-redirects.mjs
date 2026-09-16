@@ -189,9 +189,46 @@ async function runLive() {
     return { path: p, prev, prod };
   });
 
+  /**
+   * Gewollte Abweichungen — und warum die Liste so eng ist.
+   *
+   * 🚨 Regel 0 sagt: jede Abweichung ist ein Blocker. Das bleibt so. Aber es gibt den Fall,
+   * dass eine Weiterleitung ABSICHTLICH neu dazukommt — dann meldet diese Sonde sie bei
+   * jedem Lauf, und wer sie oft genug wegwinkt, schaut irgendwann auch über eine echte
+   * Regression hinweg. Deshalb wird eine gewollte Änderung hier ANGEMELDET, mit Datum und
+   * Grund, und nur GENAU in der angemeldeten Form durchgelassen: stimmt Status oder Ziel
+   * nicht aufs Zeichen, blockiert sie weiter. Eine Zeile hier ist eine Entscheidung, kein
+   * Stummschalter.
+   */
+  const GEWOLLT = [
+    {
+      pfad: "/finanztools/vergleiche/studentenkreditkarte-vergleich",
+      vorher: 200,
+      nachher: 308,
+      ziel: "/finanztools/vergleiche/kreditkarten-vergleich",
+      grund: "15.09.2026: `target_group=student` liefert dieselbe Produktmenge wie der "
+           + "Kreditkarten-Vergleich (Produkt-ID-Mengen gemessen) — eine eigene Seite wäre "
+           + "eine Doorway-Seite. Zusammengelegt statt gelöscht, damit die indexierte URL "
+           + "weiterlebt (lib/redirects.manual.ts:277).",
+    },
+  ];
+
+  const passt = (r) => GEWOLLT.some((g) =>
+    g.pfad === r.path && r.prod.status === g.vorher && r.prev.status === g.nachher &&
+    (r.prev.location || "").replace(/^https?:\/\/[^/]+/, "") === g.ziel);
+
+  const angemeldet = results.filter(passt);
   const diffs = results.filter((r) =>
-    r.prev.status !== r.prod.status || r.prev.location !== r.prod.location
+    (r.prev.status !== r.prod.status || r.prev.location !== r.prod.location) && !passt(r)
   );
+
+  if (angemeldet.length) {
+    console.log(`\nAngemeldete Änderungen (${angemeldet.length}) — geprüft, nicht übersehen:`);
+    for (const r of angemeldet) {
+      const g = GEWOLLT.find((x) => x.pfad === r.path);
+      console.log(`  ${r.path}\n     ${g.vorher} -> ${g.nachher} ${g.ziel}\n     ${g.grund}`);
+    }
+  }
 
   console.log(`\nGeprueft: ${results.length}`);
   if (diffs.length) {
