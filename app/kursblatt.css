@@ -222,7 +222,7 @@
 
 /* K:108, :182 — Doppellinie als Kopf über Kennzahlen und Tabellen.
    Hier als box-shadow-Variante (README „Linien“), weil sie nicht animiert. */
-.kb .kb__doppellinie { border-top: 2px solid var(--ink); box-shadow: var(--doppellinie-schatten); }
+.kb .kb__doppellinie { border-top: var(--strich-stark) solid var(--ink); box-shadow: var(--doppellinie-schatten); }
 .kb .kb__doppellinie--grau { border-top-color: var(--muted); box-shadow: var(--doppellinie-muted); }
 
 /* K:136 u. v. a. — Punktführung. Der Versatz nach oben lässt die Punkte auf der
@@ -772,7 +772,7 @@
   border-top: 1px solid var(--ink-12);
   font: 400 clamp(var(--grad-13), 1.9vw, var(--grad-14)) var(--sans); font-variant-numeric: tabular-nums;
 }
-.kb .kb-tabelle__zeile[data-betont="an"] { border-top: 2px solid var(--pink); }
+.kb .kb-tabelle__zeile[data-betont="an"] { border-top: var(--strich-stark) solid var(--pink); }
 .kb .kb-tabelle__kopf span[data-rechts="an"], .kb .kb-tabelle__zeile span[data-rechts="an"] { text-align: right; }
 .kb .kb-tabelle__zeile span[data-ton="magenta"] { color: var(--pink); }
 .kb .kb-tabelle__zeile span:first-child { font: 700 var(--grad-14) var(--serif); }
@@ -782,13 +782,13 @@
 
 /* K:343 — Pflichthinweis unter dem Ergebnis. */
 .kb .kb-ergebnis__hinweis {
-  padding-top: var(--luft-m); border-top: 2px solid var(--pink);
+  padding-top: var(--luft-m); border-top: var(--strich-einhaenger) solid var(--pink);
   font: 400 var(--grad-13)/1.6 var(--sans); color: var(--muted); text-wrap: pretty;
 }
 .kb .kb-ergebnis__hinweis b { color: var(--pink); }
 
 /* K:345-352 — die Brücke zurück in den Vergleich, türkis eingehängt. */
-.kb .kb-bruecke { margin-top: var(--luft-xl); padding-top: var(--luft-l); border-top: 2px solid var(--tuerkis); }
+.kb .kb-bruecke { margin-top: var(--luft-xl); padding-top: var(--luft-l); border-top: var(--strich-einhaenger) solid var(--tuerkis); }
 .kb .kb__kicker--vergleich { --werkzeug: var(--tuerkis); }
 .kb .kb-bruecke__satz { margin: var(--luft-s) 0 0; font: italic 400 var(--grad-16)/1.5 var(--serif); text-wrap: pretty; }
 .kb .kb-bruecke__satz b { font-style: normal; color: var(--tuerkis); }
@@ -801,7 +801,7 @@
 
 /* K:62-67 — „Ihre Angaben“ hängt am türkisen Einhänger; rechts der Hinweis mit dem
    pulsenden grünen Punkt: hier wird nichts bestätigt, hier rechnet es sofort. */
-.kb .kb-angaben { margin-top: var(--luft-xl); padding-top: var(--luft-m); border-top: 2px solid var(--werkzeug); }
+.kb .kb-angaben { margin-top: var(--luft-xl); padding-top: var(--luft-m); border-top: var(--strich-einhaenger) solid var(--werkzeug); }
 .kb .kb-angaben__kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-s) var(--luft-m); flex-wrap: wrap; }
 .kb .kb-angaben__sofort {
   display: inline-flex; align-items: center; gap: var(--luft-s);
@@ -1023,7 +1023,7 @@
 .kb .kb-liste__kopf {
   display: grid; grid-template-columns: var(--kb-liste-spalten); gap: 0 var(--kb-liste-gap);
   align-items: end; padding: var(--luft-s) 0 var(--luft-s); margin-top: var(--luft-m);
-  border-top: 2px solid var(--ink); box-shadow: var(--doppellinie-schatten);
+  border-top: var(--strich-stark) solid var(--ink); box-shadow: var(--doppellinie-schatten);
   font: 700 var(--grad-kicker)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
 }
 .kb .kb-liste__kopf-namen { grid-column: span 2; }
@@ -1158,7 +1158,7 @@
 .kb-zettel__kopf .kb__kicker { font: 700 var(--grad-kicker)/1.3 var(--font-body, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .kb-zettel__leeren { border: 0; background: transparent; padding: var(--luft-s) 0; font: 400 var(--grad-12) var(--font-body, sans-serif); color: var(--muted); cursor: pointer; text-decoration: underline dotted; }
 .kb-zettel__raster { display: grid; gap: var(--luft-m); margin-top: var(--luft-s); }
-.kb-zettel__karte { position: relative; padding-top: var(--luft-s); border-top: 2px solid var(--ink); min-width: 0; }
+.kb-zettel__karte { position: relative; padding-top: var(--luft-s); border-top: var(--strich-stark) solid var(--ink); min-width: 0; }
 .kb-zettel__karte[data-ist="an"] { border-top-color: var(--tuerkis); }
 .kb-zettel__weg { position: absolute; right: -6px; top: 2px; border: 0; background: transparent; padding: var(--luft-s) var(--luft-s); font: 400 var(--grad-16)/1 var(--font-body, sans-serif); color: var(--muted); cursor: pointer; }
 .kb-zettel__karte b { display: block; font: 700 var(--grad-13) var(--font-heading, serif); padding-right: var(--luft-l); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

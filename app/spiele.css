@@ -70,6 +70,6 @@
 }
 
 /* ── Schlange als Belohnung am Artikelende (Handoff 1113–1115) ────────────────────── */
-.faden-shell .spiel-satz--schlange { border-top: 2px solid var(--rule-strong); padding-top: var(--luft-m); }
+.faden-shell .spiel-satz--schlange { border-top: var(--strich-einhaenger) solid var(--ink); padding-top: var(--luft-m); }
 .faden-shell .spiel-satz__rand { display: grid; gap: var(--luft-s); }
 .faden-shell .spiel-satz__notiz { margin: 0; font: italic 300 var(--grad-13) var(--serif); color: var(--muted); }

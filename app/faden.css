@@ -50,9 +50,7 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
 @media (prefers-reduced-motion: reduce) { .faden-shell *, .faden-shell *::before, .faden-shell *::after { transition: none !important; animation: none !important; } }
 
 /* ---------- Typografische Bausteine ---------- */
-.faden-shell .kicker { font: var(--schrift-kicker); letter-spacing: var(--laufweite-kicker); text-transform: uppercase; color: var(--muted); }
-.faden-shell .kicker--gruen { color: var(--green-ink); } .faden-shell .kicker--pink { color: var(--pink); }
-.faden-shell .kicker--tool { display: inline-flex; align-items: center; gap: var(--luft-s); }
+/* Kicker und die vier Kopfmuster: app/koepfe.css */
 .faden-shell .dot { width: 8px; height: 8px; border-radius: var(--radius-kreis); display: inline-block; flex: none; }
 .faden-shell .dot--rechner { background: var(--tool-rechner); } .faden-shell .dot--vergleich { background: var(--tool-vergleich); } .faden-shell .dot--checkliste { background: var(--tool-checkliste); } .faden-shell .dot--dokumente { background: var(--tool-dokumente); }
 /* Pfeilspitze: derselbe Pfad wie MegaArrow.tsx im Megamenü der Live-Seite
@@ -499,10 +497,10 @@ body.faden-body { margin: 0; background: var(--color-bg-page); overflow-x: hidde
    baut genau solche Geister.
 
    Wer wirklich ein Kärtchen will, sagt es: `.kasten--rahmen`. */
-.faden-shell .kasten { position: relative; background: none; border: 0; border-top: 3px solid var(--green); border-radius: 0; padding: var(--luft-m) 0 var(--luft-s); display: grid; gap: var(--luft-s); scroll-margin-top: 110px; }
+.faden-shell .kasten { position: relative; background: none; border: 0; border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: 0; padding: var(--luft-m) 0 var(--luft-s); display: grid; gap: var(--luft-s); scroll-margin-top: 110px; }
 /* Die Ausnahme, ausdrücklich: echtes Papier mit Kante. */
-.faden-shell .kasten--rahmen { background: var(--paper); border: var(--strich-haar) solid var(--rule); border-top: var(--strich-einhaenger) solid var(--green); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l) var(--luft-s); }
-.faden-shell .kasten--pink { border-top-color: var(--pink); } .faden-shell .kasten--tuerkis { border-top-color: var(--tool-vergleich); } .faden-shell .kasten--lila { border-top-color: var(--tool-checkliste); } .faden-shell .kasten--terra { border-top-color: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
+.faden-shell .kasten--rahmen { background: var(--paper); border: var(--strich-haar) solid var(--rule); border-top: var(--strich-einhaenger) solid var(--ton, var(--green)); border-radius: var(--radius-kante); padding: var(--luft-m) var(--luft-l) var(--luft-s); }
+.faden-shell .kasten--pink { --ton: var(--tool-rechner); } .faden-shell .kasten--tuerkis { --ton: var(--tool-vergleich); } .faden-shell .kasten--lila { --ton: var(--tool-checkliste); } .faden-shell .kasten--terra { --ton: var(--tool-dokumente); } .faden-shell .kasten--still { border-top: 1px solid var(--rule); }
 .faden-shell .kasten h3 { font-size: var(--grad-20); }
 .faden-shell .kasten p { max-width: 64ch; }
 .faden-shell .kasten .knopf { justify-self: start; }

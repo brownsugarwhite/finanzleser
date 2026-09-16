@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./tokens.css";
 @import "./knoepfe.css";
+@import "./koepfe.css";
 @import "./components.css";
 @import "./rechner.css";
 @import "./gamification.css";

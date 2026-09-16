@@ -12,7 +12,7 @@
   padding: var(--luft-l) var(--luft-l);
   background: var(--paper);
   border: 1px solid var(--color-border-default);
-  border-top: 3px solid var(--color-brand);
+  border-top: var(--strich-einhaenger) solid var(--green);
   border-radius: var(--radius-kante);
   font-family: var(--font-body);
   font-size: var(--grad-16);

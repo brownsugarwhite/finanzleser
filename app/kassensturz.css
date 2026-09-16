@@ -12,7 +12,7 @@
 .faden-shell .ks { display: grid; gap: 0; min-width: 0; }
 .faden-shell .kasten--ks { min-width: 0; }
 .faden-shell .ks .ikon { width: 20px; height: 20px; vertical-align: -5px; flex: none; }
-.faden-shell .ks { border-top: 2px solid var(--green); padding-top: var(--luft-m); }
+.faden-shell .ks { border-top: var(--strich-einhaenger) solid var(--green); padding-top: var(--luft-m); }
 .faden-shell .ks__kopf { display: flex; justify-content: space-between; align-items: center; gap: var(--luft-m); flex-wrap: wrap; }
 .faden-shell .ks__marke { display: inline-flex; align-items: center; gap: var(--luft-s); }
 .faden-shell .ks__marke i { width: 8px; height: 8px; border-radius: var(--radius-kreis); background: var(--green); flex: none; }
