@@ -1573,7 +1573,7 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .regel span { font-size: var(--grad-12); color: var(--ink); grid-column: 1; }
 .faden-shell .regel small { font-size: var(--grad-11); color: var(--muted); grid-column: 1; }
 .faden-shell .regel .toggle { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
-.faden-shell .toggle { width: 38px; height: 20px; border-radius: var(--radius-kante); border: 0; background: var(--rule); position: relative; flex: none; display: inline-block; }
+.faden-shell .toggle { width: 38px; height: 20px; border-radius: var(--radius-pille); border: 0; background: var(--rule); position: relative; flex: none; display: inline-block; }
 .faden-shell .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: var(--radius-kreis); background: var(--auflage); transition: left .2s; }
 .faden-shell .toggle.an { background: var(--green); } .faden-shell .toggle.an::after { left: 21px; }
 .faden-shell .sicherung { display: grid; gap: var(--luft-s); }
@@ -1581,7 +1581,7 @@ body[data-schaukasten] .faden-shell .kapitel.zu .kapitel__inhalt { display: grid
 .faden-shell .sicherung .reihe, .faden-shell .koffer__sichern .reihe { display: flex; gap: var(--luft-s); flex-wrap: wrap; align-items: center; }
 .faden-shell .schalter { display: inline-flex; align-items: center; gap: var(--luft-s); cursor: pointer; }
 .faden-shell .schalter input { position: absolute; opacity: 0; width: 0; height: 0; }
-.faden-shell .schalter i { width: 36px; height: 20px; border-radius: var(--radius-kante); background: var(--rule-strong); position: relative; transition: background .2s; flex: none; }
+.faden-shell .schalter i { width: 36px; height: 20px; border-radius: var(--radius-pille); background: var(--rule-strong); position: relative; transition: background .2s; flex: none; }
 .faden-shell .schalter i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: var(--radius-kreis); background: var(--auflage); box-shadow: var(--schatten-auflage); transition: transform .22s cubic-bezier(.34,1.56,.64,1); }
 .faden-shell .schalter input:checked + i { background: var(--green); }
 .faden-shell .schalter input:checked + i::after { transform: translateX(16px); }

@@ -175,8 +175,26 @@
 
   /* ── Formen ──────────────────────────────────────────────────────────────────────
      Die Zeitung hat eckige Ecken. Vier Werte, und `0` ist der Normalfall. */
-  --radius-kante: 2px;            /* die einzige erlaubte Abrundung einer Fläche */
-  --radius-pille: 999px;          /* Pille, Knopf, Chip, Eingabefeld */
+  /* ── Die Holo-Folie ──────────────────────────────────────────────────────────────
+     Der Werkstoff des Bestwert-Siegels: vier Lagen, die übereinanderliegen. Sie stehen
+     hier und nicht im Bauteil, weil eine Perlmuttfolie eine Farbe des Hauses ist wie
+     Tinte und Papier — nur eben eine, die sich beim Scrollen bewegt (Siegel.tsx).
+     🚨 Sehr helle Pastelltöne. Ein gesättigtes Spektrum liest sich im Satz als buntes
+     Abzeichen; der Eindruck von Folie entsteht aus dem WECHSEL, nicht aus Sättigung. */
+  --holo-bogen: linear-gradient(115deg,
+      #F3E4FF 0%, #DCEBFF 17%, #DCF7EC 33%, #FFF6FA 49%,
+      #E7DBFF 65%, #D6F1FF 82%, #FFE6F3 100%);
+  --holo-licht: radial-gradient(130% 100% at 14% 14%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 58%);
+  --holo-hauch: radial-gradient(110% 85% at 88% 86%, rgba(176,240,255,.7) 0%, rgba(176,240,255,0) 62%);
+  --holo-glanz: linear-gradient(26deg, rgba(255,255,255,0) 14%, rgba(255,255,255,.9) 40%, rgba(255,255,255,0) 66%);
+
+  --radius-kante: 2px;            /* die einzige erlaubte Abrundung einer FLÄCHE */
+  --radius-pille: 999px;          /* Pille, Knopf, Chip, Feld — und jedes GERÄT */
+  /* 🚨 Flächen und Geräte sind zweierlei. Eine Fläche trägt Text (Kasten, Dialog, Karte,
+     Kachel) und bekommt die Kante. Ein Gerät wird BEDIENT (Kippschalter, Schiene,
+     Regler) und behält seine Kapselform — es soll aussehen, als ließe es sich schieben.
+     Der Durchgang am 16.09.2026 hat vier Kippschalter und eine Schätzschiene auf 2 px
+     gesetzt; aus runden Schaltern wurden Kästchen. */
   --radius-kreis: 50%;            /* Punkt, Scheibe, Siegelzahn */
   /* 🚨 Die Sprechblase braucht ein eigenes Maß. Mit --radius-pille (999 px) übersteigt
      der Radius die halbe Blasenhöhe, und an der unteren Ecke entsteht ein Zipfel, der

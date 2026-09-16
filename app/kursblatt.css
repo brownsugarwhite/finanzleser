@@ -606,40 +606,44 @@
    jedes Mal anders. Aufbau in zwei Ebenen, weil `background-attachment: fixed` nur
    ohne transformierten Vorfahr aufs Fenster zeigt — die Drehung sitzt außen, die Folie
    innen. Der Text liegt darüber, damit er von der Folie nicht eingefärbt wird. */
+/* 🚨 Ein aufgeklebter Holo-Streifen, kein Stempel und kein Regenbogen.
+   Bis zum 16.09.2026 lag hier ein gesättigtes Spektrum (Rosa · Blau · Grün · Gelb) mit
+   einer Prägekante aus 1 px Tinte — im Satz las sich das als buntes Abzeichen und nicht
+   als Folie. Die Vorlage des Users zeigt etwas anderes: sehr helle Pastelltöne, fast
+   Weiß, ein breiter Glanzstreifen darüber, scharfe Kanten ohne Rahmen und ein weicher
+   Schatten. Der Farbeindruck entsteht durch den WECHSEL beim Scrollen, nicht durch
+   Sättigung. */
 .kb .kb-siegel {
   position: relative; display: inline-block; isolation: isolate;
-  padding: var(--luft-xs) var(--luft-m); transform: rotate(-11deg);
-  filter: drop-shadow(0 1px 0 var(--ink-25));
+  /* Das Polster rechnet sich aus der Schriftgröße — deshalb steht sie hier und nicht
+     am Text. Die kleine Fassung braucht dadurch nur EINE Angabe weniger Grad, und die
+     Proportion bleibt in beiden Größen dieselbe (wie bei der Pille). */
+  font-size: var(--grad-13);
+  padding: .5em .95em; transform: rotate(-9deg);
+  filter: drop-shadow(0 2px 3px var(--ink-20));
 }
 .kb .kb-siegel__folie {
   position: absolute; inset: 0; z-index: 0; display: block;
-  /* Die Folie: weiches Perlmutt aus vier übereinanderliegenden Verläufen. Fest am
-     Fenster verankert und absichtlich viel größer als das Siegel (320 %), damit auch ein
-     kurzer Scrollweg den Farbort spürbar verschiebt. */
-  background-image:
-    linear-gradient(112deg,
-      #FFC7E4 0%, #C9E7FF 18%, #BFF4DE 34%, #FFF3B8 50%,
-      #D9C8FF 66%, #A8ECFF 82%, #FFC7E4 100%),
-    radial-gradient(130% 100% at 16% 18%, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(100% 80% at 84% 82%, rgba(140,245,230,.85) 0%, rgba(140,245,230,0) 58%),
-    linear-gradient(22deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,.65) 58%, rgba(255,255,255,0) 100%);
+  /* Vier Lagen: der Pastellbogen, ein Lichtfleck oben links, ein kühler Hauch unten
+     rechts und der Glanzstreifen quer darüber. */
+  background-image: var(--holo-bogen), var(--holo-licht), var(--holo-hauch), var(--holo-glanz);
   /* 🚨 Nur wenig größer als das Siegel. Bei 480 % lag nur ein Zwanzigstel des Spektrums
      im Bild, und die Folie sah aus wie eine einfarbige Tönung. Bei 190 % stehen mehrere
-     Farben gleichzeitig darin — Rosa, Blau, Grün, Gelb — und der Scrollweg verschiebt
-     sie trotzdem sichtbar. Die Position setzt die Komponente (Siegel.tsx). */
+     Farben gleichzeitig darin, und der Scrollweg verschiebt sie trotzdem sichtbar.
+     Die Position setzt die Komponente (Siegel.tsx). */
   background-size: 190% 190%, 170% 170%, 150% 150%, 210% 210%;
   background-position: 50% 50%;
   transition: background-position .08s linear;
-  /* Ein hauchdünner Innenrahmen, wie die Prägekante einer echten Folie. */
-  box-shadow: inset 0 0 0 1px rgba(51, 74, 39, .28);
 }
 .kb .kb-siegel__text {
   position: relative; z-index: 1; display: block;
-  font: 700 var(--grad-11)/1 var(--sans); letter-spacing: .13em;
+  font: 600 1em/1 var(--sans); letter-spacing: .2em;
+  /* Die Laufweite spreizt nach rechts; ohne den Ausgleich sitzt das Wort links an. */
+  text-indent: .2em;
   text-transform: uppercase; color: var(--ink); white-space: nowrap;
 }
-.kb .kb-siegel--klein { padding: var(--luft-xxs) var(--luft-s); transform: rotate(-6deg); flex-shrink: 0; }
-.kb .kb-siegel--klein .kb-siegel__text { font-size: 9.5px; letter-spacing: .12em; }
+/* Eine Angabe genügt: Polster und Text hängen beide an der Schriftgröße. */
+.kb .kb-siegel--klein { font-size: var(--grad-12); transform: rotate(-8deg); flex-shrink: 0; }
 @container kb (max-width: 559px) { .kb .kb-siegel--klein { display: none; } }
 /* Ohne Bewegungswunsch steht die Folie still — der Glanz bleibt, nur das Kippen fehlt. */
 @media (prefers-reduced-motion: reduce) {
@@ -744,7 +748,7 @@
   display: inline-flex; align-items: center; gap: var(--luft-s); border: 0; background: transparent; padding: 0;
   min-height: 44px; font: 500 var(--grad-14) var(--sans); color: var(--ink); cursor: pointer;
 }
-.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: var(--radius-kante); background: var(--ink-20); transition: background .3s; flex: none; }
+.kb .kb-schalter__knopf { position: relative; width: 42px; height: 24px; border-radius: var(--radius-pille); background: var(--ink-20); transition: background .3s; flex: none; }
 .kb .kb-schalter__knopf i { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: var(--radius-kreis); background: var(--auflage); box-shadow: var(--schatten-auflage); transition: left .35s var(--ueber); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf { background: var(--green); }
 .kb .kb-schalter[aria-checked="true"] .kb-schalter__knopf i { left: 20px; }
@@ -1042,7 +1046,11 @@
 .kb .kb-podest__siegel { position: absolute; right: 20px; top: -13px; }
 /* Das Siegel der Listenzeile hängt über der rechten oberen Ecke der Pille. */
 .kb .kb__zeile-pille { position: relative; display: inline-flex; justify-self: end; }
-.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -6px; top: -19px; z-index: 2; }
+/* 🚨 Das Siegel klebt an der UNTEREN rechten Ecke der Pille, nicht darüber.
+   Mit `top: -19px` ragte es in das Kopfband der Tabelle hinein, sobald die Bestwertzeile
+   die erste war — und in der Vorlage des Users liegt es ohnehin unten rechts, halb über
+   der Pille, halb darüber hinaus. */
+.kb .kb__zeile-pille .kb-siegel { position: absolute; right: -10px; top: auto; bottom: -15px; z-index: 2; }
 
 .kb .kb-podest__raster { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--luft-l) var(--luft-xl); align-items: start; }
 .kb .kb-podest__kopf { display: flex; align-items: center; gap: var(--luft-m); }
@@ -1078,14 +1086,22 @@
 }
 
 /* ── Alle Angebote (K:167-212) ────────────────────────────────────────────────────── */
-/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
-   „ab 0,68 %". Das „ab" ist bei Krediten keine Zierde, sondern die Aussage (bonitäts-
-   abhängig), also bekommt die Spalte die Breite, die sie braucht. */
-/* K:519 — die Übergabe gibt der Hauptzahl 88 px; das reicht für „0,68 %", nicht für
-   „ab 0,68 %" (gemessen 104 px) und erst recht nicht für „ab 12.345 €" (116 px). Das
-   „ab" ist bei Krediten keine Zierde, sondern die Aussage. Deshalb ein Mindestmaß mit
-   Luft nach oben: die Namensspalte gibt den Platz her, die Ausrichtung bleibt. */
-.kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(100px, auto) auto; --kb-liste-gap: 20px; }
+/* 🚨 KEIN `auto` und kein `minmax(…, auto)` in dieser Vorlage — nur feste Spalten und
+   EINE flexible (der Name). Kopfzeile und jede Angebotszeile sind eigene Grids mit
+   derselben Vorlage; eine inhaltsabhängige Spalte löst sich in jedem davon anders auf.
+   Gemessen am 16.09.2026 auf 1440 px (Tagesgeld):
+     Kopf   96px · 324px   · 112px · 100px · 0px      ← letzte Spalte leer
+     Zeile  96px · 170,5px · 112px · 100px · 153,5px  ← letzte Spalte trägt die Pille
+   Die 153,5 px der Pille gingen dem `1fr` der Kopfzeile zu — und damit stand JEDE
+   Überschrift um 153,5 px rechts neben ihrer Spalte. (Für Klasse B stand dieselbe
+   Lehre schon bei `.kb-liste--anbieter`, nur eben nicht hier.)
+
+   Die Maße, jeweils am gerenderten Satz gemessen und aufgerundet:
+     Hauptzahl 124px — „+ 12.345 €" misst 112,9 px, „Monatsbeitrag" als Überschrift 106,6
+     Gesamtzahl 100px — „12.345 €" misst 75,7 px, „Rate/Monat" 83,2
+     Land       108px — Punkt + längster Ländername
+     Pille      156px — die Pille misst 153,5 px (derselbe Wert wie bei Klasse B) */
+.kb .kb-liste { margin-top: 60px; --kb-liste-spalten: 96px minmax(0, 1fr) 124px 100px 156px; --kb-liste-gap: 20px; }
 .kb .kb-liste__titel { display: block; font: 700 clamp(var(--grad-22), 3.4vw, var(--grad-26)) var(--serif); }
 .kb .kb-liste__filter { display: flex; align-items: center; gap: var(--luft-s) var(--luft-s); flex-wrap: wrap; margin-top: var(--luft-m); }
 .kb .kb-liste__filter-label { margin-right: var(--luft-xs); }
@@ -1143,7 +1159,7 @@
    zwischen Gesamtzahl und Pille und trägt links einen Punkt, dessen Farbe eine Ja/Nein-
    Kennzahl setzt. */
 .kb .kb-liste[data-dritte="an"] {
-  --kb-liste-spalten: 96px minmax(0, 1fr) minmax(112px, auto) minmax(84px, auto) minmax(44px, auto) auto;
+  --kb-liste-spalten: 96px minmax(0, 1fr) 124px 92px 108px 156px;
 }
 .kb .kb__zeile-dritte {
   display: flex; align-items: center; gap: var(--luft-s);
@@ -1235,10 +1251,12 @@
 .kb .kb-liste__mehr:hover { text-decoration: underline; }
 
 @container kb (max-width: 559px) {
-  .kb .kb-liste, .kb .kb-liste[data-dritte="an"] { --kb-liste-spalten: 64px minmax(0, 1fr) auto auto; --kb-liste-gap: 12px; }
+  /* Auch hier keine inhaltsabhängige Spalte — siehe den Kopf der Vorlage weiter oben.
+     Im schmalen Satz trägt die Pille nur noch ihre Scheibe (38,8 px gemessen). */
+  .kb .kb-liste, .kb .kb-liste[data-dritte="an"] { --kb-liste-spalten: 64px minmax(0, 1fr) 104px 44px; --kb-liste-gap: 12px; }
   /* Im schmalen Satz haben Siegel und Pille nebeneinander keinen Platz; die Siegel
      stehen dann unter dem Namen statt vor der Pille. */
-  .kb .kb-liste--anbieter { --kb-liste-spalten: 64px minmax(0, 1fr) auto; --kb-liste-gap: 12px; }
+  .kb .kb-liste--anbieter { --kb-liste-spalten: 64px minmax(0, 1fr) 44px; --kb-liste-gap: 12px; }
   .kb .kb-liste--anbieter .kb-liste__kopf-dritte { display: none; }
   .kb .kb-zeile__siegel { grid-column: 2; grid-row: 2; justify-content: flex-start; margin-top: var(--luft-s); }
   .kb .kb-liste--anbieter .kb__zeile-raster { align-items: start; }

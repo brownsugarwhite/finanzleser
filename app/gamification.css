@@ -749,7 +749,8 @@
   position: relative;
   height: 12px;
   border: var(--strich-stark) solid var(--color-text-primary);
-  border-radius: var(--radius-kante);
+  /* Eine Schiene ist ein Gerät, keine Fläche — Kapsel, nicht Kante. */
+  border-radius: var(--radius-pille);
   background: var(--tuerkis-hauch);
   cursor: pointer;
   touch-action: none;

@@ -32,6 +32,8 @@ import SucheLeo from "@/components/faden/karten/SucheLeo";
 import ListenKarte from "@/components/faden/karten/ListenKarte";
 import KassensturzTeaser from "@/components/faden/kassensturz/KassensturzTeaser";
 import MeinBereich from "@/components/faden/karten/MeinBereich";
+import WaechterKarte from "@/components/faden/karten/WaechterKarte";
+import AktenkofferKarte from "@/components/faden/karten/AktenkofferKarte";
 import LeoFragt from "@/components/faden/leo/LeoFragt";
 import FadenSpiel from "@/components/faden/spiele/FadenSpiel";
 import Schlange from "@/components/faden/spiele/Schlange";
@@ -98,10 +100,13 @@ export default async function Schaukasten() {
 
   // „Mein Bereich" zeigt Punktestand, Wappen und die aktiven Wächter — die Regeln kommen
   // im Betrieb aus den Faden-Optionen; hier drei erfundene, damit die Karte gefüllt ist.
+  // 🚨 Die drei decken die drei Fälle von `wann()` in WaechterKarte.tsx ab: ein freier
+  // Termin, ein Stichtag im Format MM-TT, und gar keine Angabe. Sonst sieht man im
+  // Schaukasten nur einen davon.
   const WAECHTER = [
     { key: "strompreis", titel: "Strompreis-Wächter", regel: "Meldet, wenn Ihr Versorger eine Preiserhöhung ankündigt." },
-    { key: "kuendigungsfrist", titel: "Kündigungsfrist", regel: "Erinnert sechs Wochen vor Ablauf Ihres Vertrags." },
-    { key: "grundfreibetrag", titel: "Grundfreibetrag", regel: "Meldet sich, wenn sich der steuerliche Grundfreibetrag ändert." },
+    { key: "kuendigungsfrist", titel: "Kündigungsfrist", regel: "Erinnert sechs Wochen vor Ablauf Ihres Vertrags.", termin: "sechs Wochen vorher" },
+    { key: "grundfreibetrag", titel: "Grundfreibetrag", regel: "Meldet sich, wenn sich der steuerliche Grundfreibetrag ändert.", stichtag: "01-01" },
   ];
   // Die Auslese des Newsletter-Blocks mit echtem Bestand, damit Umbrüche und
   // Punktführung an wirklichen Titeln geprüft werden können.
@@ -569,6 +574,39 @@ export default async function Schaukasten() {
           <span className="kicker kicker--gruen">Mein Bereich</span>
           <MeinBereich regeln={WAECHTER} />
         </div>
+    </>) },
+
+    { titel: "Der Wächter und der Aktenkoffer", inhalt: (<>
+        <p>
+          Die zwei Bauteile von Finanzleser Plus, die auch ohne Konto arbeiten: beide
+          merken sich ihren Stand in diesem Browser. Sie stehen hier als die echten
+          Komponenten der Routen <a href="/plus/waechter">/plus/waechter</a> und{" "}
+          <a href="/plus/aktenkoffer">/plus/aktenkoffer</a> — was hier zu sehen ist, ist
+          das, was dort steht.
+        </p>
+
+        <div className="kasten kasten--lila" style={{ marginTop: "var(--luft-l)" }}>
+          <span className="kicker kicker--tool kicker--gruen"><i className="dot dot--checkliste" />Der Wächter</span>
+          <h3>Wecker auf Zahlen und Fristen</h3>
+          <WaechterKarte regeln={WAECHTER} />
+        </div>
+        <p className="quelle">
+          Jede Regel eine Zeile: Glocke · Titel mit Erläuterung · Termin · Kippschalter.
+          Der Schalter ist ein Gerät, kein Kasten — er behält seine Kapselform, während
+          im Satz sonst die Kante von 2 px gilt. Die drei Zeilen zeigen die drei
+          Terminformen: freier Text, Stichtag und keine Angabe.
+        </p>
+
+        <div className="kasten kasten--lila" style={{ marginTop: "var(--luft-xl)" }}>
+          <span className="kicker kicker--tool kicker--gruen"><i className="dot dot--checkliste" />Mein Aktenkoffer</span>
+          <h3>Ergebnisse · Checklisten · Vergleiche · Gespräche</h3>
+          <AktenkofferKarte />
+        </div>
+        <p className="quelle">
+          Der Koffer zeigt, was in diesem Browser liegt. Ist nichts abgelegt, steht hier
+          der leere Zustand mit seiner Erklärung — genau der ist der Regelfall beim ersten
+          Besuch und deshalb der wichtigere der beiden.
+        </p>
     </>) },
 
     { titel: "Anzeigenplätze", inhalt: (<>
